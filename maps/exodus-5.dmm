@@ -756,7 +756,7 @@
 "oB" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/supply{tag = "icon-intact-supply (NORTHWEST)"; icon_state = "intact-supply"; dir = 9},/turf/simulated/floor/plating,/area/outpost/research/power)
 "oC" = (/obj/structure/table/standard,/obj/item/device/flashlight/lamp,/turf/simulated/floor/tiled/dark,/area/outpost/research/isolation_a)
 "oD" = (/obj/machinery/artifact_analyser,/turf/simulated/floor/tiled/dark,/area/outpost/research/isolation_a)
-"oE" = (/obj/structure/disposalpipe/segment,/obj/effect/wingrille_spawn,/turf/simulated/floor/plating,/area/outpost/research/eva)
+"oE" = (/obj/structure/disposalpipe/segment,/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/outpost/research/eva)
 "oF" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/outpost/research/isolation_a)
 "oG" = (/obj/structure/sign/securearea{desc = "A warning sign which reads 'HIGH VOLTAGE'"; icon_state = "shock"; name = "HIGH VOLTAGE"},/turf/simulated/wall/r_wall,/area/outpost/research/power)
 "oH" = (/obj/structure/table/standard,/obj/item/device/flashlight/lamp,/turf/simulated/floor/tiled/dark,/area/outpost/research/isolation_b)

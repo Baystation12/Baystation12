@@ -108,7 +108,7 @@
 		// faster access to objects already on you
 		if(A.loc != src)
 			setMoveCooldown(10) //getting something out of a backpack
-		
+
 		if(W)
 			var/resolved = W.resolve_attackby(A, src)
 			if(!resolved && A && W)
@@ -128,7 +128,7 @@
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		if(A.Adjacent(src)) // see adjacent.dm
 			setMoveCooldown(5)
-			
+
 			if(W)
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
 				var/resolved = W.resolve_attackby(A,src)
@@ -224,10 +224,8 @@
 	Only used for swapping hands
 */
 /mob/proc/MiddleClickOn(var/atom/A)
-	return
-
-/mob/living/carbon/MiddleClickOn(var/atom/A)
 	swap_hand()
+	return
 
 // In case of use break glass
 /*
@@ -278,7 +276,7 @@
 		else
 			user.listed_turf = T
 			user.client.statpanel = T.name
-	return
+	return 1
 
 /mob/proc/TurfAdjacent(var/turf/T)
 	return T.AdjacentQuick(src)

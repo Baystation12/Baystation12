@@ -528,7 +528,7 @@ var/global/datum/controller/occupations/job_master
 		if(C)
 			C.rank = rank
 			C.assignment = title ? title : rank
-			C.set_owner_info(H)
+			H.set_id_info(C)
 
 			//put the player's account number onto the ID
 			if(H.mind && H.mind.initial_account)

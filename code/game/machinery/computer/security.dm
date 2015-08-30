@@ -248,8 +248,7 @@ What a mess.*/
 					scan = null
 				else
 					var/obj/item/I = usr.get_active_hand()
-					if (istype(I, /obj/item/weapon/card/id))
-						usr.drop_item()
+					if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
 						I.loc = src
 						scan = I
 

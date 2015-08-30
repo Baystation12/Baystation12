@@ -161,7 +161,7 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 			if(A.emagged)	return
 			if(!A.requiresID() || A.check_access(null))
 				if(A.density)	A.open()
-				else		A.close()
+				else			A.close()
 		if(AIRLOCK_WIRE_SAFETY)
 			A.safe = !A.safe
 			if(!A.density)

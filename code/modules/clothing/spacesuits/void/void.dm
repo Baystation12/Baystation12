@@ -112,7 +112,7 @@
 		if(istype(H))
 			if(helmet && H.head == helmet)
 				H.drop_from_inventory(helmet)
-				helmet.loc = src
+				helmet.forceMove(src)
 
 	if(boots)
 		boots.canremove = 1
@@ -120,11 +120,11 @@
 		if(istype(H))
 			if(boots && H.shoes == boots)
 				H.drop_from_inventory(boots)
-				boots.loc = src
+				boots.forceMove(src)
 
 	if(tank)
 		tank.canremove = 1
-		tank.loc = src
+		tank.forceMove(src)
 
 /obj/item/clothing/suit/space/void/verb/toggle_helmet()
 
@@ -148,7 +148,7 @@
 		H << "<span class='notice'>You retract your suit helmet.</span>"
 		helmet.canremove = 1
 		H.drop_from_inventory(helmet)
-		helmet.loc = src
+		helmet.forceMove(src)
 	else
 		if(H.head)
 			H << "<span class='danger'>You cannot deploy your helmet while wearing \the [H.head].</span>"
@@ -197,15 +197,15 @@
 
 			if(choice == tank)	//No, a switch doesn't work here. Sorry. ~Techhead
 				user << "You pop \the [tank] out of \the [src]'s storage compartment."
-				tank.loc = get_turf(src)
+				tank.forceMove(get_turf(src))
 				src.tank = null
 			else if(choice == helmet)
 				user << "You detatch \the [helmet] from \the [src]'s helmet mount."
-				helmet.loc = get_turf(src)
+				helmet.forceMove(get_turf(src))
 				src.helmet = null
 			else if(choice == boots)
 				user << "You detatch \the [boots] from \the [src]'s boot mounts."
-				boots.loc = get_turf(src)
+				boots.forceMove(get_turf(src))
 				src.boots = null
 		else
 			user << "\The [src] does not have anything installed."
@@ -216,7 +216,7 @@
 		else
 			user << "You attach \the [W] to \the [src]'s helmet mount."
 			user.drop_item()
-			W.loc = src
+			W.forceMove(src)
 			src.helmet = W
 		return
 	else if(istype(W,/obj/item/clothing/shoes/magboots))
@@ -225,7 +225,7 @@
 		else
 			user << "You attach \the [W] to \the [src]'s boot mounts."
 			user.drop_item()
-			W.loc = src
+			W.forceMove(src)
 			boots = W
 		return
 	else if(istype(W,/obj/item/weapon/tank))
@@ -236,7 +236,7 @@
 		else
 			user << "You insert \the [W] into \the [src]'s storage compartment."
 			user.drop_item()
-			W.loc = src
+			W.forceMove(src)
 			tank = W
 		return
 

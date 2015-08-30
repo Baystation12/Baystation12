@@ -126,7 +126,7 @@
 /obj/machinery/portable_atmospherics/hydroponics/AltClick()
 	if(mechanical && !usr.stat && !usr.lying && Adjacent(usr))
 		close_lid(usr)
-		return
+		return 1
 	return ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/attack_ghost(var/mob/dead/observer/user)

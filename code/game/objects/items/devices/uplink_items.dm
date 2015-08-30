@@ -365,10 +365,10 @@ datum/uplink_item/dd_SortValue()
 	item_cost = 7
 	path = /obj/item/weapon/aiModule/syndicate
 
-/datum/uplink_item/item/tools/singularity_beacon
-	name = "Singularity Beacon (DANGER!)"
+/datum/uplink_item/item/tools/supply_beacon
+	name = "Hacked Supply Beacon (DANGER!)"
 	item_cost = 7
-	path = /obj/item/device/radio/beacon/syndicate
+	path = /obj/item/supply_beacon
 
 /datum/uplink_item/item/tools/teleporter
 	name = "Teleporter Circuit Board"
@@ -622,7 +622,7 @@ var/image/default_abstract_uplink_icon
 	if(!user)
 		return 0
 
-	var/obj/item/weapon/card/id/I = GetIdCard(user)
+	var/obj/item/weapon/card/id/I = user.GetIdCard()
 	var/datum/data/record/random_general_record
 	var/datum/data/record/random_medical_record
 	if(data_core.general.len)
