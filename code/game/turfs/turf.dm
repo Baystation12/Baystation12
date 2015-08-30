@@ -33,6 +33,11 @@
 			return
 	turfs |= src
 
+	if(dynamic_lighting)
+		luminosity = 0
+	else
+		luminosity = 1
+
 /turf/proc/update_icon()
 	return
 
