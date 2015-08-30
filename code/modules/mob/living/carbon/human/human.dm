@@ -1371,7 +1371,7 @@
 		handle_regular_hud_updates()
 
 /mob/living/carbon/human/Check_Shoegrip()
-	if((shoes.item_flags & NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
+	if(shoes && (shoes.item_flags & NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
 		return 1
 	return 0
 
