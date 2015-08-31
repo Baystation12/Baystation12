@@ -43,9 +43,9 @@ var/list/sacrificed = list()
 	for(var/mob/living/M in range(1))
 		if(iscultist(M))
 			. += M
+		. |= M //DEBUG, REMOVE BEFORE RELEASING
 
 /obj/effect/rune/proc/fizzle(var/mob/living/user)
-	//user.say(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix."))
 	visible_message("<span class='warning'>The markings pulse with a small burst of light, then fall dark.</span>", "You hear a faint fizzle.")
 
 	//obj/effect/rune/proc/check_icon()
@@ -190,13 +190,12 @@ var/list/sacrificed = list()
 /obj/effect/cultwall/examine(var/mob/user)
 	..()
 	if(iscultist(user))
-		switch(health / max_health)
-			if(0 to 0.5)
-				user << "<span class='danger'>It is about to dissipate.</span>"
-			if(0.5 to 1)
-				user << "<span class='warning'>It is damaged.</span>"
-			if(1)
-				user << "<span class='notice'>It is fully intact.</span>"
+		if(health == max_health)
+			user << "<span class='notice'>It is fully intact.</span>"
+		else if(health > max_health * 0.5)
+			user << "<span class='warning'>It is damaged.</span>"
+		else
+			user << "<span class='danger'>It is about to dissipate.</span>"
 
 /obj/effect/cultwall/attack_hand(var/mob/living/user)
 	if(iscultist(user))
@@ -253,7 +252,7 @@ var/list/sacrificed = list()
 	user.say("Ia! Ia! Zasan therium viortia.")
 	for(var/turf/T in range(1))
 		T.cultify()
-	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear a liquid flow.")
+	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
 	qdel(src)
 
 /* Tier 2 runes */
@@ -293,7 +292,7 @@ var/list/sacrificed = list()
 	var/list/mob/living/cultists = get_cultists()
 	if(cultists.len < 3)
 		user << "<span class='warning'>You need three cultists around this rune to make it work.</span>"
-		return fizzle(user)
+		//return fizzle(user)
 	var/turf/T = get_turf(src)
 	var/mob/living/victim
 	for(var/mob/living/M in T)
@@ -327,6 +326,7 @@ var/list/sacrificed = list()
 		var/obj/item/device/soulstone/full/F = new(get_turf(src))
 		for(var/mob/M in cultists | get_cultists())
 			M << "<span class='warning'>The Geometer of Blood accepts this sacrifice.</span>"
+		visible_message("<span class='notice'>\The [F] appears over \the [src].</span>")
 		//TODO: handle sac target, other rewards?
 		/*
 		var/worth = 0
@@ -379,7 +379,7 @@ var/list/sacrificed = list()
 		return fizzle(user)
 	user.say("Gal'h'rfikk harfrandid mud[pick("'","`")]gib!")
 	puppet = new /mob/living/carbon/human(get_turf(src)) // TODO: give them their own species
-	visible_message("<span class='warning'>A shape forms in the center of the rune. A shape of... a man.</span>", "You hear a liquid flow.")
+	visible_message("<span class='warning'>A shape forms in the center of the rune. A shape of... a man.</span>", "You hear liquid flow.")
 	puppet.real_name = pick("Anguished", "Blasphemous", "Corrupt", "Cruel", "Depraved", "Despicable", "Disturbed", "Exacerbated", "Foul", "Hateful", "Inexorable", "Implacable", "Impure", "Malevolent", "Malignant", "Malicious", "Pained", "Profane", "Profligate", "Relentless", "Resentful", "Restless", "Spiteful", "Tormented", "Unclean", "Unforgiving", "Vengeful", "Vindictive", "Wicked", "Wronged")
 	puppet.real_name += " "
 	puppet.real_name += pick("Apparition", "Aptrgangr", "Dis", "Draugr", "Dybbuk", "Eidolon", "Fetch", "Fylgja", "Ghast", "Ghost", "Gjenganger", "Haint", "Phantom", "Phantasm", "Poltergeist", "Revenant", "Shade", "Shadow", "Soul", "Spectre", "Spirit", "Spook", "Visitant", "Wraith")
@@ -416,8 +416,7 @@ var/list/sacrificed = list()
 	admin_attack_log(user, victim, "Used a blood drain rune.", "Was victim of a blood drain rune.", "used a blood drain rune on")
 	victim << "<span class='danger'>You feel weakened.</span>"
 	user.say("Yu[pick("'","`")]gular faras desdae. Havas mithum javara. Umathar uf'kal thenar!")
-	user.visible_message("<span class='warning'>Blood flows from \the [src] into \the [user]!</span>", "<span class='cult'>The blood starts flowing from \the [src] into your frail mortal body. You feel... empowered. [capitalize(english_list(heal_user(user)))].</span>", "You hear a liquid flow.")
-	//user.visible_message("<span class='warning'>\The [user]'s eyes give off eerie red glow!</span>", "<span class='warning'>...but it wasn't nearly enough. You crave, crave for more. The hunger consumes you from within.</span>", "<span class='warning'>You hear a heartbeat.</span>")
+	user.visible_message("<span class='warning'>Blood flows from \the [src] into \the [user]!</span>", "<span class='cult'>The blood starts flowing from \the [src] into your frail mortal body. You feel... empowered. [capitalize(english_list(heal_user(user)))].</span>", "You hear liquid flow.")
 
 /obj/effect/rune/drain/proc/heal_user(var/mob/living/carbon/human/user)
 	if(!istype(user))
@@ -481,9 +480,27 @@ var/list/sacrificed = list()
 			charges = max(charges - 1, 0)
 			if(fix.damage == 0)
 				damaged -= fix
-	if(!statuses.len)
-		statuses += "you feel no different"
+	if(charges)
+		user.ingested.add_reagent("hell_water", charges)
+		statuses += "you feel empowered"
 	return statuses
+
+/datum/reagent/hell_water
+	name = "Hell water"
+	id = "hell_water"
+	reagent_state = LIQUID
+	color = "#0050a177"
+	metabolism = REM * 0.1
+
+/datum/reagent/hell_water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	M.AdjustParalysis(-1)
+	M.AdjustStunned(-1)
+	M.AdjustWeakened(-1)
+	M.add_chemical_effect(CE_PAINKILLER, 40)
+	M.add_chemical_effect(CE_SPEEDBOOST, 1)
+	M.adjustOxyLoss(-10 * removed)
+	M.heal_organ_damage(5 * removed, 5 * removed)
+	M.adjustToxLoss(-5 * removed)
 
 /* Tier 3 runes */
 
@@ -560,7 +577,8 @@ var/list/sacrificed = list()
 	cultname = "revive"
 
 /obj/effect/rune/revive/cast(var/mob/living/user)
-	var/mob/living/carbon/human/target//TODO: demand a soulstone
+	var/mob/living/carbon/human/target
+	var/obj/item/device/soulstone/source
 	for(var/mob/living/carbon/human/M in get_turf(src))
 		if(M.stat == DEAD)
 			if(iscultist(M))
@@ -568,25 +586,90 @@ var/list/sacrificed = list()
 					target = M
 					break
 	if(!target)
-		return fizzle()
+		return fizzle(user)
+	for(var/obj/item/device/soulstone/S in get_turf(src))
+		if(S.full && !S.shade)
+			source = S
+			break
+	if(!source)
+		return fizzle(user)
 	target.rejuvenate()
+	qdel(source)
 	user.say("Pasnar val'keriam usinar. Savrae ines amutan. Yam'toth remium il'tarat!")
-	//corpse_to_raise.visible_message("<span class='warning'>\The [corpse_to_raise]'s eyes glow with a faint red as he stands up, slowly starting to breathe again.</span>", "<span class='warning'>Life... I'm alive again...</span>", "<span class='warning'>You hear a faint, slightly familiar whisper.</span>")
-	//body_to_sacrifice.visible_message("<span class='warning'>\The [body_to_sacrifice] is torn apart, a black smoke swiftly dissipating from his remains!</span>", "<span class='warning'>You feel as your blood boils, tearing you apart.</span>", "<span class='warning'>You hear a thousand voices, all crying in pain.</span>")
+	target.visible_message("<span class='warning'>\The [target]'s eyes glow with a faint red as \he stands up, slowly starting to breathe again.</span>", "<span class='warning'>Life... I'm alive again...</span>", "You hear liquid flow.")
+
+/obj/effect/rune/blood_boil
+	cultname = "blood boil"
+
+/obj/effect/rune/blood_boil/cast(var/mob/living/user)
+	var/list/mob/living/cultists = get_cultists()
+	if(cultists.len < 1)
+		return fizzle()
+
+	for(var/mob/living/M in cultists)
+		M.say("Dedo ol[pick("'","`")]btoh!")
+
+	while(cultists.len >= 1)
+		cultists = get_cultists()
+		for(var/mob/living/carbon/M in viewers(src))
+			var/obj/item/weapon/nullrod/N = locate() in M
+			if(N)
+				continue
+			M.take_overall_damage(5, 5)
+			M << "<span class='danger'>Your blood boils!</span>"
+		sleep(10)
 
 /* Tier NarNar runes */
 
 /obj/effect/rune/tearreality
 	cultname = "tear reality"
+	var/the_end_comes = 0
+	var/the_time_has_come = 120
+	var/obj/singularity/narsie/large/HECOMES = null
 
 /obj/effect/rune/tearreality/cast(var/mob/living/user)
 	var/list/mob/living/cultists = get_cultists()
-	if(cultists.len < 9)
+	if(cultists.len < 5)
 		return fizzle()
 	for(var/mob/living/M in cultists)
 		M.say("Tok-lyr rqa'nap g[pick("'","`")]lt-ulotf!")
-	log_and_message_admins_many(cultists, "summoned Nar-sie.") // Doesn't delete itself; TODO: give it a cool animation
-	new /obj/singularity/narsie/large(get_turf(src)) // THE END HAS COME
+	log_and_message_admins_many(cultists, "started summoning Nar-sie.")
+
+	var/area/A = get_area(src)
+	command_announcement.Announce("Attention, shit's fucked. [A]") // TODO: better message
+	set_security_level("delta")
+	while(cultists.len > 4 || the_end_comes)
+		cultists = get_cultists()
+		if(cultists.len > 4)
+			++the_end_comes
+		else
+			--the_end_comes
+		if(the_end_comes >= the_time_has_come)
+			break
+		for(var/mob/living/M in cultists)
+			if(prob(3))
+				M.say(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix."))
+
+		for(var/turf/T in range(min(the_end_comes, 15)))
+			if(prob(the_end_comes / 3))
+				T.cultify()
+		sleep(10)
+
+	if(the_end_comes >= the_time_has_come)
+		HECOMES = new /obj/singularity/narsie/large(get_turf(src))
+	else
+		command_announcement.Announce("Attention, shit's calmed.") // TODO: better message
+		set_security_level("blue")
+		qdel(src)
+
+/obj/effect/rune/tearreality/attack_hand(var/mob/living/user)
+	..()
+	if(HECOMES && !iscultist(user))
+		user.say("Uhrast ka'hfa heldsagen ver[pick("'","`")]lot!")
+		user.visible_message("<span class='warning'>\The [user] keels over dead, his blood glowing blue as it escapes his body and dissipates into thin air.</span>", "<span class='warning'>In the last moment of your humble life, you feel an immense pain as fabric of reality mends... with your blood.</span>", "You hear faint rustle.")
+		user.dust()
+		qdel(HECOMES)
+		return
 
 /* Imbue runes */
 
@@ -620,55 +703,3 @@ var/list/sacrificed = list()
 /obj/effect/rune/imbue/emp
 	cultname = "destroy technology imbue"
 	papertype = /obj/item/weapon/paper/talisman/emp
-
-	/* This is neat shit, give it to chaplain? If he gets to narnar's rune after he's summoned?
-		mend()
-			var/mob/living/user = usr
-			src = null
-			user.say("Uhrast ka'hfa heldsagen ver[pick("'","`")]lot!")
-			user.take_overall_damage(200, 0)
-			user.visible_message("<span class='warning'>\The [user] keels over dead, his blood glowing blue as it escapes his body and dissipates into thin air.</span>", \
-			"<span class='warning'>In the last moment of your humble life, you feel an immense pain as fabric of reality mends... with your blood.</span>", \
-			"<span class='warning'>You hear faint rustle.</span>")
-			for(,user.stat==2)
-				sleep(600)
-				if (!user)
-					return
-			return
-			*/
-
-/*
-
-		bloodboil() //cultists need at least one DANGEROUS rune. Even if they're all stealthy.
-			var/list/cultists = new //also, wording for it is old wording for obscure rune, which is now hide-see-blood.
-			var/list/victims = new
-//			var/list/cultboil = list(cultists-usr) //and for this words are destroy-see-blood.
-			for(var/mob/living/carbon/C in orange(1,src))
-				if(iscultist(C) && !C.stat)
-					cultists+=C
-			if(cultists.len>=3)
-				for(var/mob/living/carbon/M in viewers(usr))
-					if(iscultist(M))
-						continue
-					var/obj/item/weapon/nullrod/N = locate() in M
-					if(N)
-						continue
-					M.take_overall_damage(51,51)
-					M << "<span class='warning'>Your blood boils!</span>"
-					victims += M
-					if(prob(5))
-						spawn(5)
-							M.gib()
-				for(var/obj/effect/rune/R in view(src))
-					if(prob(10))
-						explosion(R.loc, -1, 0, 1, 5)
-				for(var/mob/living/carbon/human/C in orange(1,src))
-					if(iscultist(C) && !C.stat)
-						C.say("Dedo ol[pick("'","`")]btoh!")
-						C.take_overall_damage(15, 0)
-				admin_attacker_log_many_victims(usr, victims, "Used a blood boil rune.", "Was the victim of a blood boil rune.", "used a blood boil rune on")
-				log_and_message_admins_many(cultists - usr, "assisted activating a blood boil rune.")
-				qdel(src)
-			else
-				return fizzle()
-*/

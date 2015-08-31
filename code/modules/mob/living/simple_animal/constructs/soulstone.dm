@@ -44,7 +44,7 @@
 	if(!shade)
 		user << "<span class='notice'>You cut your finger and let the blood drip on \the [src].</span>"
 		user.pay_for_rune(1)
-		var/datum/ghosttrap/cult/shade/S = get_ghost_trap("shade")
+		var/datum/ghosttrap/cult/shade/S = get_ghost_trap("soul stone")
 		S.request_player(src, "The soul stone shade summon ritual has been performed. ")
 	else if(shade.loc == src)
 		shade.forceMove(get_turf(src))
