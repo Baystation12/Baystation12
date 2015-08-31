@@ -1103,18 +1103,21 @@
 		else
 			dna.species = new_species
 
+	// No more invisible screaming wheelchairs because of set_species() typos.
+	if(!all_species[new_species])
+		new_species = "Human"
+
 	if(species)
 
 		if(species.name && species.name == new_species)
 			return
 		if(species.language)
 			remove_language(species.language)
-
 		if(species.default_language)
 			remove_language(species.default_language)
-
 		// Clear out their species abilities.
 		species.remove_inherent_verbs(src)
+		holder_type = null
 
 	species = all_species[new_species]
 
@@ -1133,6 +1136,11 @@
 		r_skin = 0
 		g_skin = 0
 		b_skin = 0
+
+	if(species.holder_type)
+		holder_type = species.holder_type
+
+	icon_state = lowertext(species.name)
 
 	species.create_organs(src)
 
@@ -1373,3 +1381,10 @@
 	if(istype(shoes, /obj/item/clothing/shoes/magboots) && (shoes.flags & NOSLIP))  //magboots + dense_object = no floating
 		return 1
 	return 0
+
+/mob/living/carbon/human/MouseDrop(var/atom/over_object)
+	var/mob/living/carbon/human/H = over_object
+	if(holder_type && a_intent == "help" && H.a_intent == "help" && istype(H) && !issmall(H) && Adjacent(H))
+		get_scooped(H)
+		return
+	return ..()
