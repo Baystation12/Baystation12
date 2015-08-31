@@ -1,4 +1,5 @@
-# baystation12
+<!-- Change Title to 'NSS Phoenix' If Kaedwulf rules over Station -->
+# Aphelion Project
 
 [Website](http://baystation12.net/) - [Code](http://github.com/Baystation12/Baystation12/) - [IRC](http://baystation12.net/forums/viewtopic.php?f=12&t=5088)
 
@@ -18,11 +19,11 @@ See [here](https://www.gnu.org/licenses/why-affero-gpl.html) for more informatio
 ### GETTING THE CODE
 The simplest way to obtain the code is using the github .zip feature.
 
-Click [here](https://github.com/Baystation12/Baystation12/archive/master.zip) to get the latest code as a .zip file, then unzip it to wherever you want.
+Click [here](https://github.com/sshado/Aphelion-Code/archive/master.zip) to get the latest code as a .zip file, then unzip it to wherever you want.
 
 The more complicated and easier to update method is using git.  You'll need to download git or some client from [here](http://git-scm.com/).  When that's installed, right click in any folder and click on "Git Bash".  When that opens, type in:
 
-    git clone https://github.com/Baystation12/Baystation12.git
+    git clone https://github.com/sshado/Aphelion-Code.git
 
 (hint: hold down ctrl and press insert to paste into git bash)
 
@@ -30,7 +31,7 @@ This will take a while to download, but it provides an easier method for updatin
 
 Once the repository is in place, run this command:
 ```bash
-cd Baystation12
+cd Aphelion-Code
 git update-index --assume-unchanged baystation12.int
 ```
 Now git will ignore changes to the file baystation12.int.
@@ -42,7 +43,7 @@ First-time installation should be fairly straightforward.  First, you'll need BY
 This is a sourcecode-only release, so the next step is to compile the server files.  Open baystation12.dme by double-clicking it, open the Build menu, and click compile.  This'll take a little while, and if everything's done right you'll get a message like this:
 
     saving baystation12.dmb (DEBUG mode)
-    
+
     baystation12.dmb - 0 errors, 0 warnings
 
 If you see any errors or warnings, something has gone wrong - possibly a corrupt download or the files extracted wrong, or a code issue on the main repo.  Ask on IRC.
