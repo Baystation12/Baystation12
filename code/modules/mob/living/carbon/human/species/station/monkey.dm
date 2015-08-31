@@ -26,6 +26,7 @@
 	inherent_verbs = list(/mob/living/proc/ventcrawl)
 	hud_type = /datum/hud_data/monkey
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/monkey
+	holder_type = /obj/item/weapon/holder/monkey
 
 	rarity_value = 0.1
 	total_health = 75
@@ -69,14 +70,14 @@
 	holder_type = /obj/item/weapon/holder/monkey/farwa
 
 /datum/species/monkey/skrell
-	name = "Neara"
-	name_plural = "Neara"
+	name = "Neaera"
+	name_plural = "Neaera"
 
-	icobase = 'icons/mob/human_races/monkeys/r_neara.dmi'
-	deform = 'icons/mob/human_races/monkeys/r_neara.dmi'
+	icobase = 'icons/mob/human_races/monkeys/r_neaera.dmi'
+	deform = 'icons/mob/human_races/monkeys/r_neaera.dmi'
 
 	greater_form = "Skrell"
-	default_language = "Neara"
+	default_language = "Neaera"
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
 	reagent_tag = IS_SKRELL

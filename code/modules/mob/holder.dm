@@ -53,7 +53,6 @@
 	return H
 
 //Mob specific holders.
-
 /obj/item/weapon/holder/diona
 	name = "diona nymph"
 	desc = "It's a tiny plant critter."
@@ -113,7 +112,7 @@
 /obj/item/weapon/holder/monkey/neaera
 	name = "neaera"
 	desc = "It's a neaera."
-	icon_state = "neara"
+	icon_state = "neaera"
 
 /obj/item/weapon/holder/pai
 	name = "pAI"
