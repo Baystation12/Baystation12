@@ -74,35 +74,28 @@
  * Detective
  */
 /obj/item/clothing/under/det
-	name = "hard-worn suit"
-	desc = "Someone who wears this means business."
+	name = "detective's suit"
+	desc = "A rumpled white dress shirt paired with well-worn grey slacks, complete with a blue striped tie and a faux-gold tie clip."
 	icon_state = "detective"
 	item_state = "det"
 	worn_state = "detective"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 
-/obj/item/clothing/under/det/black
+/obj/item/clothing/under/det/grey
 	icon_state = "detective2"
 	worn_state = "detective2"
+	desc = "A serious-looking tan dress shirt paired with freshly-pressed black slacks, complete with a red striped tie."
+
+/obj/item/clothing/under/det/black
+	icon_state = "detective3"
+	worn_state = "detective3"
 	item_state = "sl_suit"
+	desc = "An immaculate white dress shirt, paired with a pair of dark grey dress pants, a red tie, and a charcoal vest."
 
-/obj/item/clothing/under/det/slob
-	icon_state = "polsuit"
-	worn_state = "polsuit"
-
-/obj/item/clothing/under/det/slob/verb/rollup()
-	set name = "Roll suit sleeves"
-	set category = "Object"
-	set src in usr
-	worn_state = worn_state == "polsuit" ? "polsuit_rolled" : "polsuit"
-	if (ishuman(loc))
-		var/mob/living/carbon/human/H = loc
-		H.update_inv_w_uniform(1)
-
-/obj/item/clothing/head/det_hat
-	name = "hat"
-	desc = "Someone who wears this will look very smart."
+/obj/item/clothing/head/det
+	name = "fedora"
+	desc = "A brown fedora - either the cornerstone of a detective's style or a poor attempt at looking cool, depending on the person wearing it."
 	icon_state = "detective"
 	item_state_slots = list(
 		slot_l_hand_str = "det_hat",
@@ -113,8 +106,9 @@
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
-/obj/item/clothing/head/det_hat/black
+/obj/item/clothing/head/det/grey
 	icon_state = "detective2"
+	desc = "A grey fedora - either the cornerstone of a detective's style or a poor attempt at looking cool, depending on the person wearing it."
 
 
 /*
