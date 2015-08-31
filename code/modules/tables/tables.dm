@@ -307,7 +307,7 @@
 		if(material)
 			for(var/i = 1 to 4)
 				I = image(icon, "[material.icon_base]_[connections[i]]", dir = 1<<(i-1))
-				I.color = material.icon_colour
+				if(material.icon_colour) I.color = material.icon_colour
 				I.alpha = 255 * material.opacity
 				overlays += I
 
@@ -415,9 +415,16 @@
 	connections = dirs_to_corner_states(connection_dirs)
 
 #define CORNER_NONE 0
-#define CORNER_CLOCKWISE 1
+#define CORNER_COUNTERCLOCKWISE 1
 #define CORNER_DIAGONAL 2
-#define CORNER_COUNTERCLOCKWISE 4
+#define CORNER_CLOCKWISE 4
+
+/*
+  turn() is weird:
+    turn(icon, angle) turns icon by angle degrees clockwise
+    turn(matrix, angle) turns matrix by angle degrees clockwise
+    turn(dir, angle) turns dir by angle degrees counter-clockwise
+*/
 
 /proc/dirs_to_corner_states(list/dirs)
 	if(!istype(dirs)) return
@@ -430,14 +437,14 @@
 		if(dir in dirs)
 			. |= CORNER_DIAGONAL
 		if(turn(dir,45) in dirs)
-			. |= CORNER_CLOCKWISE
-		if(turn(dir,-45) in dirs)
 			. |= CORNER_COUNTERCLOCKWISE
+		if(turn(dir,-45) in dirs)
+			. |= CORNER_CLOCKWISE
 		ret[i] = "[.]"
 
 	return ret
 
 #undef CORNER_NONE
-#undef CORNER_EASTWEST
+#undef CORNER_COUNTERCLOCKWISE
 #undef CORNER_DIAGONAL
-#undef CORNER_NORTHSOUTH
+#undef CORNER_CLOCKWISE

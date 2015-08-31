@@ -326,6 +326,20 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
 
+/material/diona
+	name = "biomass"
+	icon_colour = null
+	stack_type = null
+	integrity = 600
+	icon_base = "diona"
+	icon_reinf = "noreinf"
+
+/material/diona/place_dismantled_product()
+	return
+
+/material/diona/place_dismantled_girder(var/turf/target)
+	spawn_diona_nymph(target)
+
 /material/steel/holographic
 	name = "holo" + DEFAULT_WALL_MATERIAL
 	display_name = DEFAULT_WALL_MATERIAL
@@ -345,6 +359,14 @@ var/list/name_to_material
 	weight = 23
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
+
+/material/plasteel/titanium
+	name = "titanium"
+	stack_type = null
+	icon_base = "metal"
+	door_icon_base = "metal"
+	icon_colour = "#D1E6E3"
+	icon_reinf = "reinf_metal"
 
 /material/glass
 	name = "glass"
