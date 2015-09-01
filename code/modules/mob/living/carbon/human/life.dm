@@ -968,10 +968,10 @@
 			stat = UNCONSCIOUS
 			animate_tail_reset()
 			adjustHalLoss(-3)
-			
+
 		if(paralysis)
 			AdjustParalysis(-1)
-			
+
 		else if(sleeping)
 			speech_problem_flag = 1
 			handle_dreams()
@@ -1218,7 +1218,7 @@
 				seer = 0
 
 		else
-			sight = species.vision_flags
+			sight = species.get_vision_flags(src)
 			see_in_dark = species.darksight
 			see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 		var/tmp/glasses_processed = 0
@@ -1237,8 +1237,8 @@
 			see_in_dark = 8
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
-		if(!glasses_processed && (species.vision_flags > 0))
-			sight |= species.vision_flags
+		if(!glasses_processed && (species.get_vision_flags(src) > 0))
+			sight |= species.get_vision_flags(src)
 		if(!seer && !glasses_processed)
 			see_invisible = SEE_INVISIBLE_LIVING
 
@@ -1344,19 +1344,22 @@
 
 		if(config.welder_vision)
 			var/found_welder
-			if(istype(glasses, /obj/item/clothing/glasses/welding))
-				var/obj/item/clothing/glasses/welding/O = glasses
-				if(!O.up)
-					found_welder = 1
-			if(!found_welder && istype(head, /obj/item/clothing/head/welding))
-				var/obj/item/clothing/head/welding/O = head
-				if(!O.up)
-					found_welder = 1
-			if(!found_welder && istype(back, /obj/item/weapon/rig))
-				var/obj/item/weapon/rig/O = back
-				if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
-					if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))
+			if(species.short_sighted)
+				found_welder = 1
+			else
+				if(istype(glasses, /obj/item/clothing/glasses/welding))
+					var/obj/item/clothing/glasses/welding/O = glasses
+					if(!O.up)
 						found_welder = 1
+				if(!found_welder && istype(head, /obj/item/clothing/head/welding))
+					var/obj/item/clothing/head/welding/O = head
+					if(!O.up)
+						found_welder = 1
+				if(!found_welder && istype(back, /obj/item/weapon/rig))
+					var/obj/item/weapon/rig/O = back
+					if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
+						if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))
+							found_welder = 1
 			if(found_welder)
 				client.screen |= global_hud.darkMask
 
