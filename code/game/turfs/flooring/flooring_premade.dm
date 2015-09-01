@@ -55,21 +55,21 @@
 
 /turf/simulated/floor/reinforced/nitrogen
 	oxygen = 0
-	nitrogen = MOLES_O2ATMOS + MOLES_N2ATMOS
+	nitrogen = ATMOSTANK_NITROGEN
 
 /turf/simulated/floor/reinforced/oxygen
-	oxygen = MOLES_O2ATMOS + MOLES_N2ATMOS
+	oxygen = ATMOSTANK_OXYGEN
 	nitrogen = 0
 
 /turf/simulated/floor/reinforced/phoron
 	oxygen = 0
 	nitrogen = 0
-	phoron = MOLES_O2ATMOS + MOLES_N2ATMOS
+	phoron = ATMOSTANK_PHORON
 
 /turf/simulated/floor/reinforced/carbon_dioxide
 	oxygen = 0
 	nitrogen = 0
-	carbon_dioxide = MOLES_O2ATMOS + MOLES_N2ATMOS
+	carbon_dioxide = ATMOSTANK_CO2
 
 /turf/simulated/floor/reinforced/n20
 	oxygen = 0
@@ -79,7 +79,7 @@
 	..()
 	sleep(-1)
 	if(!air) make_air()
-	air.adjust_gas("sleeping_agent", MOLES_O2ATMOS + MOLES_N2ATMOS)
+	air.adjust_gas("sleeping_agent", ATMOSTANK_NITROUSOXIDE)
 
 /turf/simulated/floor/cult
 	name = "engraved floor"
@@ -132,13 +132,6 @@
 	oxygen = 0
 	nitrogen = 0
 	temperature = TCMB
-
-/turf/simulated/floor/reinforced/nitrogen
-	oxygen = 0
-
-/turf/simulated/floor/reinforced/n20/New()
-	. = ..()
-	assume_gas("sleeping_agent", 2000)
 
 /turf/simulated/floor/airless
 	name = "airless plating"
