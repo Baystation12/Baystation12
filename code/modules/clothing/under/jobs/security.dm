@@ -82,6 +82,16 @@
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 
+/obj/item/clothing/under/det/verb/rollup()
+	set name = "Roll Suit Sleeves"
+	set category = "Object"
+	set src in usr
+	var/unrolled = item_state_slots[slot_w_uniform_str] == initial(worn_state)
+	item_state_slots[slot_w_uniform_str] = unrolled ? "[worn_state]_r" : initial(worn_state)
+	var/mob/living/carbon/human/H = loc
+	H.update_inv_w_uniform(1)
+	H << "<span class='notice'>You roll the sleeves of your shirt [unrolled ? "up" : "down"]</span>"
+
 /obj/item/clothing/under/det/grey
 	icon_state = "detective2"
 	worn_state = "detective2"
