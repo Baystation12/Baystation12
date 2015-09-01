@@ -347,6 +347,33 @@
 		..()
 		reagents.add_reagent("grenadine", 100)
 
+/obj/item/weapon/reagent_containers/food/drinks/bottle/cola
+	name = "\improper Space Cola"
+	desc = "Cola. in space"
+	icon_state = "colabottle"
+	center_of_mass = list("x"=16, "y"=6)
+	New()
+		..()
+		reagents.add_reagent("cola", 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/space_up
+	name = "\improper Space-Up"
+	desc = "Tastes like a hull breach in your mouth."
+	icon_state = "space-up_bottle"
+	center_of_mass = list("x"=16, "y"=6)
+	New()
+		..()
+		reagents.add_reagent("space_up", 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/space_mountain_wind
+	name = "\improper Space Mountain Wind"
+	desc = "Blows right through you like a space wind."
+	icon_state = "space_mountain_wind_bottle"
+	center_of_mass = list("x"=16, "y"=6)
+	New()
+		..()
+		reagents.add_reagent("spacemountainwind", 100)
+
 /obj/item/weapon/reagent_containers/food/drinks/bottle/pwine
 	name = "Warlock's Velvet"
 	desc = "What a delightful packaging for a surely high quality wine! The vintage must be amazing!"
