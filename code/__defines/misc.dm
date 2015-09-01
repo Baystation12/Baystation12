@@ -12,7 +12,7 @@
 #define INVISIBILITY_EYE		          61
 
 #define SEE_INVISIBLE_LIVING              25
-#define SEE_INVISIBLE_OBSERVER_NOLIGHTING 15
+#define SEE_INVISIBLE_NOLIGHTING 15
 #define SEE_INVISIBLE_LEVEL_ONE           35
 #define SEE_INVISIBLE_LEVEL_TWO           45
 #define SEE_INVISIBLE_CULT		          60
@@ -31,22 +31,22 @@
 #define MAX_GEAR_COST 5 // Used in chargen for accessory loadout limit.
 
 // Preference toggles.
-#define SOUND_ADMINHELP 1
-#define SOUND_MIDI      2
-#define SOUND_AMBIENCE  4
-#define SOUND_LOBBY     8
-#define CHAT_OOC        16
-#define CHAT_DEAD       32
-#define CHAT_GHOSTEARS  64
-#define CHAT_GHOSTSIGHT 128
-#define CHAT_PRAYER     256
-#define CHAT_RADIO      512
-#define CHAT_ATTACKLOGS 1024
-#define CHAT_DEBUGLOGS  2048
-#define CHAT_LOOC       4096
-#define CHAT_GHOSTRADIO 8192
-#define SHOW_TYPING     16384
-#define CHAT_NOICONS    32768
+#define SOUND_ADMINHELP 0x1
+#define SOUND_MIDI      0x2
+#define SOUND_AMBIENCE  0x4
+#define SOUND_LOBBY     0x8
+#define CHAT_OOC        0x10
+#define CHAT_DEAD       0x20
+#define CHAT_GHOSTEARS  0x40
+#define CHAT_GHOSTSIGHT 0x80
+#define CHAT_PRAYER     0x100
+#define CHAT_RADIO      0x200
+#define CHAT_ATTACKLOGS 0x400
+#define CHAT_DEBUGLOGS  0x800
+#define CHAT_LOOC       0x1000
+#define CHAT_GHOSTRADIO 0x2000
+#define SHOW_TYPING     0x4000
+#define CHAT_NOICONS    0x8000
 
 #define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
 
@@ -63,15 +63,23 @@
 #define 	  LIFE_HUD 10 // STATUS_HUD that only reports dead or alive
 
 //some colors
-#define COLOR_RED    "#FF0000"
-#define COLOR_GREEN  "#00FF00"
-#define COLOR_BLUE   "#0000FF"
-#define COLOR_CYAN   "#00FFFF"
-#define COLOR_PINK   "#FF00FF"
-#define COLOR_YELLOW "#FFFF00"
-#define COLOR_ORANGE "#FF9900"
 #define COLOR_WHITE  "#FFFFFF"
+#define COLOR_SILVER "#C0C0C0"
+#define COLOR_GRAY   "#808080"
 #define COLOR_BLACK  "#000000"
+#define COLOR_RED    "#FF0000"
+#define COLOR_MAROON "#800000"
+#define COLOR_YELLOW "#FFFF00"
+#define COLOR_OLIVE  "#808000"
+#define COLOR_LIME   "#00FF00"
+#define COLOR_GREEN  "#008000"
+#define COLOR_CYAN   "#00FFFF"
+#define COLOR_TEAL   "#008080"
+#define COLOR_BLUE   "#0000FF"
+#define COLOR_NAVY   "#000080"
+#define COLOR_PINK   "#FF00FF"
+#define COLOR_PURPLE "#800080"
+#define COLOR_ORANGE "#FF9900"
 
 //	Shuttles.
 
@@ -117,8 +125,9 @@
 #define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
 #define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
 #define LIGHTING_LAYER 11
-#define OBFUSCATION_LAYER 14	//Where images covering the view for eyes are put
-#define SCREEN_LAYER 17			//Mob HUD/effects layer
+#define HUD_LAYER 20			//Above lighting, but below obfuscation. For in-game HUD effects (whereas SCREEN_LAYER is for abstract/OOC things like inventory slots)
+#define OBFUSCATION_LAYER 21	//Where images covering the view for eyes are put
+#define SCREEN_LAYER 22			//Mob HUD/effects layer
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
@@ -144,9 +153,9 @@
 #define SHARD_SPLINTER "splinters"
 #define SHARD_NONE ""
 
-#define MATERIAL_UNMELTABLE 1
-#define MATERIAL_BRITTLE 2
-#define MATERIAL_PADDING 4
+#define MATERIAL_UNMELTABLE 0x1
+#define MATERIAL_BRITTLE    0x2
+#define MATERIAL_PADDING    0x4
 
 #define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
 
@@ -154,3 +163,7 @@
 #define BOMBCAP_HEAVY_RADIUS (max_explosion_range/2)
 #define BOMBCAP_LIGHT_RADIUS max_explosion_range
 #define BOMBCAP_FLASH_RADIUS (max_explosion_range*1.5)
+
+// Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
+#define PROJECTILE_CONTINUE   -1 //if the projectile should continue flying after calling bullet_act()
+#define PROJECTILE_FORCE_MISS -2 //if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.

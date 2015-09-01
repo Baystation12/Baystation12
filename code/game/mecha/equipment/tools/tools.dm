@@ -107,8 +107,8 @@
 							for(var/obj/item/weapon/ore/ore in range(chassis,1))
 								if(get_dir(chassis,ore)&chassis.dir)
 									ore.Move(ore_box)
-				else if(istype(target, /turf/simulated/floor/plating/airless/asteroid))
-					for(var/turf/simulated/floor/plating/airless/asteroid/M in range(chassis,1))
+				else if(istype(target, /turf/simulated/floor/asteroid))
+					for(var/turf/simulated/floor/asteroid/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
 							M.gets_dug()
 					log_message("Drilled through [target]")
@@ -127,8 +127,7 @@
 	name = "diamond drill"
 	desc = "This is an upgraded version of the drill that'll pierce the heavens! (Can be attached to: Combat and Engineering Exosuits)"
 	icon_state = "mecha_diamond_drill"
-	origin_tech = list(TECH_MATERIAL = 4, TECH_ENGINERING = 3)
-	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"diamond"=6500)
+	origin_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
 	equip_cooldown = 20
 	force = 15
 
@@ -161,8 +160,8 @@
 							for(var/obj/item/weapon/ore/ore in range(chassis,1))
 								if(get_dir(chassis,ore)&chassis.dir)
 									ore.Move(ore_box)
-				else if(istype(target,/turf/simulated/floor/plating/airless/asteroid))
-					for(var/turf/simulated/floor/plating/airless/asteroid/M in range(target,1))
+				else if(istype(target,/turf/simulated/floor/asteroid))
+					for(var/turf/simulated/floor/asteroid/M in range(target,1))
 						M.gets_dug()
 					log_message("Drilled through [target]")
 					if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
@@ -255,8 +254,6 @@
 	equip_cooldown = 10
 	energy_drain = 250
 	range = MELEE|RANGED
-	construction_time = 1200
-	construction_cost = list(DEFAULT_WALL_MATERIAL=30000,"phoron"=25000,"silver"=20000,"gold"=20000)
 	var/mode = 0 //0 - deconstruct, 1 - wall or floor, 2 - airlock.
 	var/disabled = 0 //malf
 
@@ -506,7 +503,6 @@
 	equip_cooldown = 10
 	energy_drain = 50
 	range = 0
-	construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"silver"=5000)
 	var/deflect_coeff = 1.15
 	var/damage_coeff = 0.8
 
@@ -556,7 +552,6 @@
 	equip_cooldown = 10
 	energy_drain = 50
 	range = 0
-	construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"gold"=5000)
 	var/deflect_coeff = 1.15
 	var/damage_coeff = 0.8
 
@@ -627,7 +622,6 @@
 	equip_cooldown = 20
 	energy_drain = 100
 	range = 0
-	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"gold"=1000,"silver"=2000,"glass"=5000)
 	var/health_boost = 2
 	var/datum/global_iterator/pr_repair_droid
 	var/icon/droid_overlay
@@ -722,7 +716,6 @@
 	equip_cooldown = 10
 	energy_drain = 0
 	range = 0
-	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"gold"=2000,"silver"=3000,"glass"=2000)
 	var/datum/global_iterator/pr_energy_relay
 	var/coeff = 100
 	var/list/use_channels = list(EQUIP,ENVIRON,LIGHT)
@@ -835,11 +828,10 @@
 	name = "phoron generator"
 	desc = "Generates power using solid phoron as fuel. Pollutes the environment."
 	icon_state = "tesla"
-	origin_tech = list(TECH_PHORON = 2, TECH_POWER = 2, TECH_ENGINERING = 1)
+	origin_tech = list(TECH_PHORON = 2, TECH_POWER = 2, TECH_ENGINEERING = 1)
 	equip_cooldown = 10
 	energy_drain = 0
 	range = MELEE
-	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"silver"=500,"glass"=1000)
 	var/datum/global_iterator/pr_mech_generator
 	var/coeff = 100
 	var/obj/item/stack/material/fuel
@@ -973,8 +965,7 @@
 	name = "\improper ExoNuclear reactor"
 	desc = "Generates power using uranium. Pollutes the environment."
 	icon_state = "tesla"
-	origin_tech = list(TECH_POWER = 3, TECH_ENGINERING = 3)
-	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"silver"=500,"glass"=1000)
+	origin_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 3)
 	max_fuel = 50000
 	fuel_per_cycle_idle = 10
 	fuel_per_cycle_active = 30
@@ -1069,10 +1060,9 @@
 	name = "passenger compartment"
 	desc = "A mountable passenger compartment for exo-suits. Rather cramped."
 	icon_state = "mecha_abooster_ccw"
-	origin_tech = list(TECH_ENGINERING = 1, TECH_BIO = 1)
+	origin_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 1)
 	energy_drain = 10
 	range = MELEE
-	construction_cost = list(DEFAULT_WALL_MATERIAL=5000,"glass"=5000)
 	equip_cooldown = 20
 	var/mob/living/carbon/occupant = null
 	var/door_locked = 1
@@ -1158,7 +1148,6 @@
 
 #define LOCKED 1
 #define OCCUPIED 2
-#undefine
 
 /obj/mecha/proc/move_inside_passenger()
 	set category = "Object"
@@ -1211,3 +1200,6 @@
 			usr << "<span class='danger'>All of the passenger compartments are already occupied or locked!</span>"
 		if (0)
 			usr << "<span class='warning'>\The [src] doesn't have a passenger compartment.</span>"
+
+#undef LOCKED
+#undef OCCUPIED

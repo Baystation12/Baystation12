@@ -5,7 +5,8 @@ var/datum/antagonist/deathsquad/mercenary/commandos
 	landmark_id = "Syndicate-Commando"
 	role_text = "Syndicate Commando"
 	role_text_plural = "Commandos"
-	welcome_text = "You are in the employ of a criminal syndicate hostile to NanoTrasen."
+	welcome_text = "You are in the employ of a criminal syndicate hostile to corporate interests."
+	id_type = /obj/item/weapon/card/id/centcom/ERT
 
 /datum/antagonist/deathsquad/mercenary/New()
 	..(1)
@@ -24,7 +25,6 @@ var/datum/antagonist/deathsquad/mercenary/commandos
 	player.equip_to_slot_or_del(new /obj/item/weapon/rig/merc(player), slot_back)
 	player.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse_rifle(player), slot_r_hand)
 
-	var/obj/item/weapon/card/id/id = create_id("Commando", player)
-	id.access |= get_all_station_access()
-	id.icon_state = "centcom"
+	create_id("Commando", player)
 	create_radio(SYND_FREQ, player)
+	return 1

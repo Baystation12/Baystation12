@@ -179,7 +179,7 @@ var/global/const/base_law_type = /datum/ai_laws/nanotrasen
 
 /datum/ai_law/proc/delete_law(var/datum/ai_laws/laws)
 
-/datum/ai_law/zeroth/delete_law(var/datum/ai_laws/laws)
+/datum/ai_law/zero/delete_law(var/datum/ai_laws/laws)
 	laws.clear_zeroth_laws()
 
 /datum/ai_law/ion/delete_law(var/datum/ai_laws/laws)

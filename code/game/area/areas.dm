@@ -14,13 +14,17 @@
 	all_areas += src
 
 	if(!requires_power)
-		power_light = 0			//rastaf0
-		power_equip = 0			//rastaf0
-		power_environ = 0		//rastaf0
+		power_light = 0
+		power_equip = 0
+		power_environ = 0
 
 	..()
 
-//	spawn(15)
+/area/proc/initialize()
+	if(!requires_power || !apc)
+		power_light = 0
+		power_equip = 0
+		power_environ = 0
 	power_change()		// all machines set to current power level, also updates lighting icon
 
 /area/proc/get_contents()
@@ -63,7 +67,7 @@
 		for(var/obj/machinery/door/firedoor/E in all_doors)
 			if(!E.blocked)
 				if(E.operating)
-					E.nextstate = CLOSED
+					E.nextstate = FIREDOOR_CLOSED
 				else if(!E.density)
 					spawn(0)
 						E.close()
@@ -74,7 +78,7 @@
 		for(var/obj/machinery/door/firedoor/E in all_doors)
 			if(!E.blocked)
 				if(E.operating)
-					E.nextstate = OPEN
+					E.nextstate = FIREDOOR_OPEN
 				else if(E.density)
 					spawn(0)
 						E.open()
@@ -88,7 +92,7 @@
 		for(var/obj/machinery/door/firedoor/D in all_doors)
 			if(!D.blocked)
 				if(D.operating)
-					D.nextstate = CLOSED
+					D.nextstate = FIREDOOR_CLOSED
 				else if(!D.density)
 					spawn()
 						D.close()
@@ -101,7 +105,7 @@
 		for(var/obj/machinery/door/firedoor/D in all_doors)
 			if(!D.blocked)
 				if(D.operating)
-					D.nextstate = OPEN
+					D.nextstate = FIREDOOR_OPEN
 				else if(D.density)
 					spawn(0)
 					D.open()
@@ -133,7 +137,7 @@
 		for(var/obj/machinery/door/firedoor/D in src)
 			if(!D.blocked)
 				if(D.operating)
-					D.nextstate = OPEN
+					D.nextstate = FIREDOOR_OPEN
 				else if(D.density)
 					spawn(0)
 					D.open()
@@ -227,7 +231,7 @@ var/list/mob/living/forced_ambiance_list = new
 	var/area/oldarea = L.lastarea
 	if((oldarea.has_gravity == 0) && (newarea.has_gravity == 1) && (L.m_intent == "run")) // Being ready when you change areas gives you a chance to avoid falling all together.
 		thunk(L)
-		L.make_floating(0)
+		L.update_floating( L.Check_Dense_Object() )
 
 	L.lastarea = newarea
 	play_ambience(L)
@@ -260,21 +264,10 @@ var/list/mob/living/forced_ambiance_list = new
 /area/proc/gravitychange(var/gravitystate = 0, var/area/A)
 	A.has_gravity = gravitystate
 
-	if(gravitystate)
-		for(var/mob/living/carbon/human/M in A)
+	for(var/mob/M in A)
+		if(has_gravity)
 			thunk(M)
-		for(var/mob/M1 in A)
-			M1.make_floating(0)
-	else
-		for(var/mob/M in A)
-			if(M.Check_Dense_Object() && istype(src,/mob/living/carbon/human/))
-				var/mob/living/carbon/human/H = src
-				if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))  //magboots + dense_object = no floaty effect
-					H.make_floating(0)
-				else
-					H.make_floating(1)
-			else
-				M.make_floating(1)
+		M.update_floating( M.Check_Dense_Object() )
 
 /area/proc/thunk(mob)
 	if(istype(get_turf(mob), /turf/space)) // Can't fall onto nothing.
@@ -282,7 +275,7 @@ var/list/mob/living/forced_ambiance_list = new
 
 	if(istype(mob,/mob/living/carbon/human/))
 		var/mob/living/carbon/human/H = mob
-		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))
+		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & NOSLIP))
 			return
 
 		if(H.m_intent == "run")

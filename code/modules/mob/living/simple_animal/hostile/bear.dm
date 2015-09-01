@@ -12,6 +12,7 @@
 	emote_see = list("stares ferociously", "stomps")
 	speak_chance = 1
 	turns_per_move = 5
+	see_in_dark = 6
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/bearmeat
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"

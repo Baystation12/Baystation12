@@ -3,6 +3,10 @@
 	if(!slot_to_strip || !istype(user))
 		return
 
+	if(user.incapacitated()  || !user.Adjacent(src))
+		user << browse(null, text("window=mob[src.name]"))
+		return
+
 	var/obj/item/target_slot = get_equipped_item(text2num(slot_to_strip))
 
 	switch(slot_to_strip)

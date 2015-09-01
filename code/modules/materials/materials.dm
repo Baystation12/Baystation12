@@ -27,6 +27,17 @@
 // Assoc list containing all material datums indexed by name.
 var/list/name_to_material
 
+//Returns the material the object is made of, if applicable.
+//Will we ever need to return more than one value here? Or should we just return the "dominant" material.
+/obj/proc/get_material()
+	return null
+
+//mostly for convenience
+/obj/proc/get_material_name()
+	var/material/material = get_material()
+	if(material)
+		return material.name
+
 // Builds the datum list above.
 /proc/populate_material_list(force_remake=0)
 	if(name_to_material && !force_remake) return // Already set up!
@@ -43,6 +54,12 @@ var/list/name_to_material
 	if(!name_to_material)
 		populate_material_list()
 	return name_to_material[name]
+
+/proc/material_display_name(name)
+	var/material/material = get_material_by_name(name)
+	if(material)
+		return material.display_name
+	return null
 
 // Material definition and procs follow.
 /material
@@ -309,8 +326,22 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
 
+/material/diona
+	name = "biomass"
+	icon_colour = null
+	stack_type = null
+	integrity = 600
+	icon_base = "diona"
+	icon_reinf = "noreinf"
+
+/material/diona/place_dismantled_product()
+	return
+
+/material/diona/place_dismantled_girder(var/turf/target)
+	spawn_diona_nymph(target)
+
 /material/steel/holographic
-	name = "holographic " + DEFAULT_WALL_MATERIAL
+	name = "holo" + DEFAULT_WALL_MATERIAL
 	display_name = DEFAULT_WALL_MATERIAL
 	stack_type = null
 	shard_type = SHARD_NONE
@@ -329,6 +360,14 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
 
+/material/plasteel/titanium
+	name = "titanium"
+	stack_type = null
+	icon_base = "metal"
+	door_icon_base = "metal"
+	icon_colour = "#D1E6E3"
+	icon_reinf = "reinf_metal"
+
 /material/glass
 	name = "glass"
 	stack_type = /obj/item/stack/material/glass
@@ -342,9 +381,8 @@ var/list/name_to_material
 	weight = 15
 	door_icon_base = "stone"
 	destruction_desc = "shatters"
-	window_options = list("One Direction", "Full Window")
+	window_options = list("One Direction" = 1, "Full Window" = 4)
 	created_window = /obj/structure/window/basic
-	wire_product = /obj/item/stack/light_w
 	rod_product = /obj/item/stack/material/glass/reinforced
 
 /material/glass/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
@@ -400,9 +438,8 @@ var/list/name_to_material
 		return 1
 
 	var/build_path = /obj/structure/windoor_assembly
-	var/sheets_needed = 4
+	var/sheets_needed = window_options[choice]
 	if(choice == "Windoor")
-		sheets_needed = 5
 		build_dir = user.dir
 	else
 		build_path = created_window
@@ -420,7 +457,8 @@ var/list/name_to_material
 	return (hardness > 35) //todo
 
 /material/glass/reinforced
-	name = "reinforced glass"
+	name = "rglass"
+	display_name = "reinforced glass"
 	stack_type = /obj/item/stack/material/glass/reinforced
 	flags = MATERIAL_BRITTLE
 	icon_colour = "#00E1FF"
@@ -432,13 +470,14 @@ var/list/name_to_material
 	weight = 30
 	stack_origin_tech = "materials=2"
 	composite_material = list(DEFAULT_WALL_MATERIAL = 1875,"glass" = 3750)
-	window_options = list("One Direction", "Full Window", "Windoor")
+	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
 	created_window = /obj/structure/window/reinforced
 	wire_product = null
 	rod_product = null
 
 /material/glass/phoron
 	name = "borosilicate glass"
+	display_name = "borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MATERIAL_BRITTLE
 	integrity = 100
@@ -450,6 +489,7 @@ var/list/name_to_material
 
 /material/glass/phoron/reinforced
 	name = "reinforced borosilicate glass"
+	display_name = "reinforced borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronrglass
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	composite_material = list() //todo
@@ -473,7 +513,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 
 /material/plastic/holographic
-	name = "holographic plastic"
+	name = "holoplastic"
 	display_name = "plastic"
 	stack_type = null
 	shard_type = SHARD_NONE
@@ -550,7 +590,7 @@ var/list/name_to_material
 	sheet_plural_name = "planks"
 
 /material/wood/holographic
-	name = "holographic wood"
+	name = "holowood"
 	display_name = "wood"
 	stack_type = null
 	shard_type = SHARD_NONE

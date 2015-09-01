@@ -2,4 +2,4 @@
 
 -<i>This server is running <a href="http://baystation12.net/">Baystation 12's</a> modification of the <a href="http://ss13.eu/">/tg/station13</a> SS13 code.</i>
 <br><br>
-<strong>Bugtracker:</strong> <a href="http://baystation12.net/forums/viewtopic.php?f=18&t=8185">http://baystation12.net/forums/viewtopic.php?f=18&t=8185</a>
+<strong>Bugtracker:</strong> <a href="http://baystation12.net/forums/threads/issue-tracker-report-template.110/">for posting of bugs and issues.</a>

@@ -463,6 +463,7 @@
 	desc = "An egg!"
 	icon_state = "egg"
 	filling_color = "#FDFFD1"
+	volume = 10
 
 /obj/item/weapon/reagent_containers/food/snacks/egg/New()
 	..()

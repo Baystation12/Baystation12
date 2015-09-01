@@ -104,7 +104,7 @@
 
 /obj/item/toy/nanotrasenballoon
 	name = "criminal balloon"
-	desc = "Across the balloon the following is printed: \"Man, I love NT soooo much. I use only NanoTrasen products. You have NO idea.\""
+	desc = "Across the balloon the following is printed: \"Man, I love NanoTrasen soooo much. I use only NT products. You have NO idea.\""
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
@@ -344,7 +344,6 @@
 	item_state = "sword0"
 	var/active = 0.0
 	w_class = 2.0
-	flags = NOSHIELD
 	attack_verb = list("attacked", "struck", "hit")
 
 	attack_self(mob/user as mob)

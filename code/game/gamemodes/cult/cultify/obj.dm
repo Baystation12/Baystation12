@@ -127,17 +127,12 @@
 		T.ChangeTurf(/turf/simulated/wall/cult)
 	..()
 
-/obj/structure/stool/cultify()
-	var/obj/structure/bed/chair/wood/wings/I = new(loc)
-	I.dir = dir
-	..()
-
 /obj/structure/table/cultify()
 	// Make it a wood-reinforced wooden table.
 	// There are cult materials available, but it'd make the table non-deconstructable with how holotables work.
 	// Could possibly use a new material var for holographic-ness?
-	material = name_to_material["wood"]
-	reinforced = name_to_material["wood"]
+	material = get_material_by_name("wood")
+	reinforced = get_material_by_name("wood")
 	update_desc()
 	update_connections(1)
 	update_icon()

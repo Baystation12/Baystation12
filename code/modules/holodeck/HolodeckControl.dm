@@ -1,7 +1,8 @@
 /obj/machinery/computer/HolodeckControl
 	name = "holodeck control console"
 	desc = "A computer used to control a nearby holodeck."
-	icon_state = "holocontrol"
+	icon_keyboard = "tech_key"
+	icon_screen = "holocontrol"
 
 	use_power = 1
 	active_power_usage = 8000 //8kW for the scenery + 500W per holoitem
@@ -128,7 +129,7 @@
 		safety_disabled = 1
 		update_projections()
 		user << "<span class='notice'>You vastly increase projector power and override the safety and security protocols.</span>"
-		user << "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call Nanotrasen maintenance and do not use the simulator."
+		user << "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call [company_name] maintenance and do not use the simulator."
 		log_game("[key_name(usr)] emagged the Holodeck Control Computer")
 		return 1
 	src.updateUsrDialog()
@@ -281,11 +282,13 @@
 	if(HP.ambience)
 		linkedholodeck.forced_ambience = HP.ambience
 	else
-		linkedholodeck.forced_ambience = initial(linkedholodeck.ambience)
+		linkedholodeck.forced_ambience = list()
 
 	for(var/mob/living/M in mobs_in_area(linkedholodeck))
 		if(M.mind)
 			linkedholodeck.play_ambience(M)
+
+	linkedholodeck.sound_env = A.sound_env
 
 	spawn(30)
 		for(var/obj/effect/landmark/L in linkedholodeck)

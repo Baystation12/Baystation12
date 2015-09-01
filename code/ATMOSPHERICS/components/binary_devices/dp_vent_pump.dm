@@ -8,8 +8,6 @@
 #define PRESSURE_CHECK_INPUT 2
 #define PRESSURE_CHECK_OUTPUT 4
 
-#undefine
-
 /obj/machinery/atmospherics/binary/dp_vent_pump
 	icon = 'icons/atmos/vent_pump.dmi'
 	icon_state = "map_dp_vent"
@@ -69,7 +67,7 @@
 	if(!istype(T))
 		return
 
-	if(T.intact && node1 && node2 && node1.level == 1 && node2.level == 1 && istype(node1, /obj/machinery/atmospherics/pipe) && istype(node2, /obj/machinery/atmospherics/pipe))
+	if(!T.is_plating() && node1 && node2 && node1.level == 1 && node2.level == 1 && istype(node1, /obj/machinery/atmospherics/pipe) && istype(node2, /obj/machinery/atmospherics/pipe))
 		vent_icon += "h"
 
 	if(!powered())
@@ -85,7 +83,7 @@
 		var/turf/T = get_turf(src)
 		if(!istype(T))
 			return
-		if(T.intact && node1 && node2 && node1.level == 1 && node2.level == 1 && istype(node1, /obj/machinery/atmospherics/pipe) && istype(node2, /obj/machinery/atmospherics/pipe))
+		if(!T.is_plating() && node1 && node2 && node1.level == 1 && node2.level == 1 && istype(node1, /obj/machinery/atmospherics/pipe) && istype(node2, /obj/machinery/atmospherics/pipe))
 			return
 		else
 			if (node1)
@@ -259,3 +257,13 @@
 	spawn(2)
 		broadcast_status()
 	update_icon()
+
+#undef DEFAULT_PRESSURE_DELTA
+
+#undef EXTERNAL_PRESSURE_BOUND
+#undef INTERNAL_PRESSURE_BOUND
+#undef PRESSURE_CHECKS
+
+#undef PRESSURE_CHECK_EXTERNAL
+#undef PRESSURE_CHECK_INPUT
+#undef PRESSURE_CHECK_OUTPUT

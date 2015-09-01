@@ -30,6 +30,7 @@
 
 /obj/structure/grille/attack_hand(mob/user as mob)
 
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 	user.do_attack_animation(src)
 
@@ -91,7 +92,7 @@
 				passthrough = 1
 
 	if(passthrough)
-		. = -1
+		. = PROJECTILE_CONTINUE
 		damage = between(0, (damage - Proj.damage)*(Proj.damage_type == BRUTE? 0.4 : 1), 10) //if the bullet passes through then the grille avoids most of the damage
 
 	src.health -= damage*0.2
@@ -155,6 +156,7 @@
 //window placing end
 
 	else if(!(W.flags & CONDUCT) || !shock(user, 70))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 		switch(W.damtype)

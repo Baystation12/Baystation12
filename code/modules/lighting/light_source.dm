@@ -51,8 +51,8 @@
 /datum/light_source/proc/destroy()
 	destroyed = 1
 	force_update()
-	if(source_atom) source_atom.light_sources -= src
-	if(top_atom) top_atom.light_sources -= src
+	if(source_atom && source_atom.light_sources) source_atom.light_sources -= src
+	if(top_atom && top_atom.light_sources) top_atom.light_sources -= src
 
 /datum/light_source/proc/update(atom/new_top_atom)
 	if(new_top_atom && new_top_atom != top_atom)
@@ -62,7 +62,7 @@
 			if(!top_atom.light_sources) top_atom.light_sources = list()
 			top_atom.light_sources += src
 
-	if(!needs_update)
+	if(!needs_update) //Incase we're already updating either way.
 		lighting_update_lights += src
 		needs_update = 1
 
@@ -127,32 +127,35 @@
 		lum_g = 1
 		lum_b = 1
 
-/datum/light_source/proc/falloff(atom/movable/lighting_overlay/O)
-  #if LIGHTING_FALLOFF == 1 // circular
-	. = (O.x - source_turf.x)**2 + (O.y - source_turf.y)**2 + LIGHTING_HEIGHT
-
-   #if LIGHTING_LAMBERTIAN == 1
-	. = CLAMP01((1 - CLAMP01(sqrt(.) / light_range)) * (1 / (sqrt(. + 1))))
-   #else
-	. = 1 - CLAMP01(sqrt(.) / light_range)
-   #endif
-
-  #elif LIGHTING_FALLOFF == 2 // square
-	. = abs(O.x - source_turf.x) + abs(O.y - source_turf.y) + LIGHTING_HEIGHT
-
-   #if LIGHTING_LAMBERTIAN == 1
-	. = CLAMP01((1 - CLAMP01(. / light_range)) * (1 / (sqrt(.)**2 + )))
-   #else
-	. = 1 - CLAMP01(. / light_range)
-   #endif
+#if LIGHTING_FALLOFF == 1 //circular
+  #define LUM_DISTANCE(swapvar, O, T) swapvar = (O.x - T.x)**2 + (O.y - T.y)**2 + LIGHTING_HEIGHT
+  #if LIGHTING_LAMBERTIAN == 1
+    #define LUM_ATTENUATION(swapvar) swapvar = CLAMP01((1 - CLAMP01(sqrt(swapvar) / max(1,light_range))) * (1 / sqrt(swapvar + 1)))
+  #else
+    #define LUM_ATTENUATION(swapvar) swapvar = 1 - CLAMP01(sqrt(swapvar) / max(1,light_range))
   #endif
+#elif LIGHTING_FALLOFF == 2 //square
+  #define LUM_DISTANCE(swapvar, O, T) swapvar = abs(O.x - T.x) + abs(O.y - T.y) + LIGHTING_HEIGHT
+  #if LIGHTING_LAMBERTIAN == 1
+    #define LUM_ATTENUATION(swapvar) swapvar = CLAMP01((1 - CLAMP01(swapvar / max(1,light_range))) * (1 / sqrt(swapvar**2 + 1)))
+  #else
+    #define LUM_ATTENUATION(swapvar) swapvar = CLAMP01(swapvar / max(1,light_range))
+  #endif
+#endif
+
+#define LUM_FALLOFF(swapvar, O, T) \
+  LUM_DISTANCE(swapvar, O, T); \
+  LUM_ATTENUATION(swapvar);
 
 /datum/light_source/proc/apply_lum()
 	applied = 1
 	if(istype(source_turf))
-		for(var/turf/T in dview(light_range, source_turf, INVISIBILITY_LIGHTING))
+		FOR_DVIEW(var/turf/T, light_range, source_turf, INVISIBILITY_LIGHTING)
 			if(T.lighting_overlay)
-				var/strength = light_power * falloff(T.lighting_overlay)
+				var/strength
+				LUM_FALLOFF(strength, T, source_turf)
+				strength *= light_power
+
 				if(!strength) //Don't add turfs that aren't affected to the affected turfs.
 					continue
 
@@ -174,6 +177,7 @@
 
 			T.affecting_lights += src
 			effect_turf += T
+		END_FOR_DVIEW
 
 /datum/light_source/proc/remove_lum()
 	applied = 0
@@ -196,15 +200,16 @@
 //Stupid dumb copy pasta because BYOND and speed.
 /datum/light_source/proc/smart_vis_update()
 	var/list/view[0]
-	for(var/turf/T in dview(light_range, source_turf, INVISIBILITY_LIGHTING))
+	FOR_DVIEW(var/turf/T, light_range, source_turf, INVISIBILITY_LIGHTING)
 		view += T	//Filter out turfs.
-
+	END_FOR_DVIEW
 	//This is the part where we calculate new turfs (if any)
 	var/list/new_turfs = view - effect_turf //This will result with all the tiles that are added.
 	for(var/turf/T in new_turfs)
-		//Big huge copy paste from apply_lum() incoming because screw unreadable defines and screw proc call overhead.
 		if(T.lighting_overlay)
-			. = light_power * falloff(T.lighting_overlay)
+			LUM_FALLOFF(., T, source_turf)
+			. *= light_power
+
 			if(!.) //Don't add turfs that aren't affected to the affected turfs.
 				continue
 
@@ -240,3 +245,46 @@
 
 		effect_turf.Cut(idx, idx + 1)
 		effect_str.Cut(idx, idx + 1)
+
+//Whoop yet not another copy pasta because speed ~~~~BYOND.
+//Calculates and applies lighting for a single turf. This is intended for when a turf switches to 
+//using dynamic lighting when it was not doing so previously (when constructing a floor on space, for example).
+//Assumes the turf is visible and such.
+//For the love of god don't call this proc when it's not needed! Lighting artifacts WILL happen!
+/datum/light_source/proc/calc_turf(var/turf/T)
+	var/idx = effect_turf.Find(T)
+	if(!idx)
+		return	//WHY.
+
+	if(T.lighting_overlay)
+	  #if LIGHTING_FALLOFF == 1 // circular
+		. = (T.lighting_overlay.x - source_turf.x)**2 + (T.lighting_overlay.y - source_turf.y)**2 + LIGHTING_HEIGHT
+	   #if LIGHTING_LAMBERTIAN == 1
+		. = CLAMP01((1 - CLAMP01(sqrt(.) / light_range)) * (1 / (sqrt(. + 1))))
+	   #else
+		. = 1 - CLAMP01(sqrt(.) / light_range)
+	   #endif
+
+	  #elif LIGHTING_FALLOFF == 2 // square
+		. = abs(T.lighting_overlay.x - source_turf.x) + abs(T.lighting_overlay.y - source_turf.y) + LIGHTING_HEIGHT
+	   #if LIGHTING_LAMBERTIAN == 1
+		. = CLAMP01((1 - CLAMP01(. / light_range)) * (1 / (sqrt(.)**2 + )))
+	   #else
+		. = 1 - CLAMP01(. / light_range)
+	   #endif
+	  #endif
+		. *= light_power
+
+		. = round(., LIGHTING_ROUND_VALUE)
+
+		effect_str[idx] = .
+
+		T.lighting_overlay.update_lumcount(
+			lum_r * .,
+			lum_g * .,
+			lum_b * .
+		)
+
+#undef LUM_FALLOFF
+#undef LUM_DISTANCE
+#undef LUM_ATTENUATION

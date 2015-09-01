@@ -1,3 +1,23 @@
+var/list/mob_hat_cache = list()
+/proc/get_hat_icon(var/obj/item/hat, var/offset_x = 0, var/offset_y = 0)
+	var/t_state = hat.icon_state
+	if(hat.item_state_slots && hat.item_state_slots[slot_head_str])
+		t_state = hat.item_state_slots[slot_head_str]
+	else if(hat.item_state)
+		t_state = hat.item_state
+	var/key = "[t_state]_[offset_x]_[offset_y]"
+	if(!mob_hat_cache[key])            // Not ideal as there's no guarantee all hat icon_states
+		var/t_icon = INV_HEAD_DEF_ICON // are unique across multiple dmis, but whatever.
+		if(hat.icon_override)
+			t_icon = hat.icon_override
+		else if(hat.item_icons && (slot_head_str in hat.item_icons))
+			t_icon = hat.item_icons[slot_head_str]
+		var/image/I = image(icon = t_icon, icon_state = t_state)
+		I.pixel_x = offset_x
+		I.pixel_y = offset_y
+		mob_hat_cache[key] = I
+	return mob_hat_cache[key]
+
 /mob/living/silicon/robot/drone
 	name = "drone"
 	real_name = "drone"
@@ -29,8 +49,25 @@
 	var/module_type = /obj/item/weapon/robot_module/drone
 	var/can_pull_size = 2
 	var/can_pull_mobs
+	var/obj/item/hat
+	var/hat_x_offset = 0
+	var/hat_y_offset = -13
 
 	holder_type = /obj/item/weapon/holder/drone
+
+/mob/living/silicon/robot/drone/Destroy()
+	if(hat)
+		hat.loc = get_turf(src)
+	..()
+
+/mob/living/silicon/robot/drone/construction
+	icon_state = "constructiondrone"
+	law_type = /datum/ai_laws/construction_drone
+	module_type = /obj/item/weapon/robot_module/drone/construction
+	can_pull_size = 5
+	can_pull_mobs = 1
+	hat_x_offset = 1
+	hat_y_offset = -12
 
 /mob/living/silicon/robot/drone/New()
 
@@ -62,7 +99,7 @@
 	if(!laws) laws = new law_type
 	if(!module) module = new module_type(src)
 
-	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT logo and the subscript: 'NanoTrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
+	flavor_text = "It's a tiny little repair drone. The casing is stamped with an corporate logo and the subscript: '[company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 
 //Redefining some robot procs...
@@ -82,6 +119,8 @@
 		overlays += "eyes-[icon_state]"
 	else
 		overlays -= "eyes"
+	if(hat) // Let the drones wear hats.
+		overlays |= get_hat_icon(hat, hat_x_offset, hat_y_offset)
 
 /mob/living/silicon/robot/drone/choose_icon()
 	return
@@ -89,10 +128,25 @@
 /mob/living/silicon/robot/drone/pick_module()
 	return
 
-//Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
-/mob/living/silicon/robot/drone/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/mob/living/silicon/robot/drone/proc/wear_hat(var/obj/item/new_hat)
+	if(hat)
+		return
+	hat = new_hat
+	new_hat.loc = src
+	updateicon()
 
-	if(istype(W, /obj/item/borg/upgrade/))
+//Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
+/mob/living/silicon/robot/drone/attackby(var/obj/item/weapon/W, var/mob/user)
+
+	if(user.a_intent == "help" && istype(W, /obj/item/clothing/head))
+		if(hat)
+			user << "<span class='warning'>\The [src] is already wearing \the [hat].</span>"
+			return
+		user.unEquip(W)
+		wear_hat(W)
+		user.visible_message("<span class='notice'>\The [user] puts \the [W] on \the [src].</span>")
+		return
+	else if(istype(W, /obj/item/borg/upgrade/))
 		user << "<span class='danger'>\The [src] is not compatible with \the [W].</span>"
 		return
 
@@ -135,7 +189,7 @@
 		return
 
 	..()
-	
+
 /mob/living/silicon/robot/drone/emag_act(var/remaining_charges, var/mob/user)
 	if(!client || stat == 2)
 		user << "<span class='danger'>There's not much point subverting this heap of junk.</span>"
@@ -160,11 +214,11 @@
 	clear_supplied_laws()
 	clear_inherent_laws()
 	laws = new /datum/ai_laws/syndicate_override
-	set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
+	set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
 
 	src << "<b>Obey these laws:</b>"
 	laws.show_laws(src)
-	src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and his commands.</span>"
+	src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and \his commands.</span>"
 	return 1
 
 //DRONE LIFE/DEATH
@@ -213,9 +267,9 @@
 			death()
 
 /mob/living/silicon/robot/drone/proc/full_law_reset()
-	clear_supplied_laws()
-	clear_inherent_laws()
-	clear_ion_laws()
+	clear_supplied_laws(1)
+	clear_inherent_laws(1)
+	clear_ion_laws(1)
 	laws = new law_type
 
 //Reboot procs.
@@ -257,36 +311,27 @@
 	src << "<b>You are a maintenance drone, a tiny-brained robotic repair machine</b>."
 	src << "You have no individual will, no personality, and no drives or urges other than your laws."
 	src << "Remember,  you are <b>lawed against interference with the crew</b>. Also remember, <b>you DO NOT take orders from the AI.</b>"
-	src << "Use <b>:d</b> to talk to other drones and <b>say</b> to speak silently to your nearby fellows."
+	src << "Use <b>say ;Hello</b> to talk to other drones and <b>say Hello</b> to speak silently to your nearby fellows."
 
 /mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
 
-	if(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct))
-		..()
-	else if(istype(AM,/obj/item))
-		var/obj/item/O = AM
-		if(O.w_class > can_pull_size)
-			src << "<span class='warning'>You are too small to pull that.</span>"
-			return
+	if(!(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct)))
+		if(istype(AM,/obj/item))
+			var/obj/item/O = AM
+			if(O.w_class > can_pull_size)
+				src << "<span class='warning'>You are too small to pull that.</span>"
+				return
 		else
-			..()
-	else
-		if(!can_pull_mobs)
-			src << "<span class='warning'>You are too small to pull that.</span>"
-			return
+			if(!can_pull_mobs)
+				src << "<span class='warning'>You are too small to pull that.</span>"
+				return
+	..()
 
 /mob/living/silicon/robot/drone/add_robot_verbs()
 	src.verbs |= silicon_subsystems
 
 /mob/living/silicon/robot/drone/remove_robot_verbs()
 	src.verbs -= silicon_subsystems
-
-/mob/living/silicon/robot/drone/construction
-	icon_state = "constructiondrone"
-	law_type = /datum/ai_laws/construction_drone
-	module_type = /obj/item/weapon/robot_module/drone/construction
-	can_pull_size = 5
-	can_pull_mobs = 1
 
 /mob/living/silicon/robot/drone/construction/welcome_drone()
 	src << "<b>You are a construction drone, an autonomous engineering and fabrication system.</b>."

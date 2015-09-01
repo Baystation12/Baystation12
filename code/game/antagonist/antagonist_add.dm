@@ -9,6 +9,8 @@
 		return 0
 
 	current_antagonists |= player
+	
+	//do this again, just in case
 	if(flags & ANTAG_OVERRIDE_JOB)
 		player.assigned_role = role_text
 	player.special_role = role_text

@@ -34,15 +34,20 @@
 
 	var/obj/item/weapon/card/id/W = new id_type(player)
 	if(!W) return
-	W.name = "[player.real_name]'s ID Card"
 	W.access |= default_access
 	W.assignment = "[assignment]"
-	W.registered_name = player.real_name
+	player.set_id_info(W)
 	if(equip) player.equip_to_slot_or_del(W, slot_wear_id)
 	return W
 
 /datum/antagonist/proc/create_radio(var/freq, var/mob/living/carbon/human/player)
-	var/obj/item/device/radio/R = new /obj/item/device/radio/headset(player)
+	var/obj/item/device/radio/R
+
+	if(freq == SYND_FREQ)
+		R = new/obj/item/device/radio/headset/syndicate(player)
+	else
+		R = new/obj/item/device/radio/headset(player)
+
 	R.set_frequency(freq)
 	player.equip_to_slot_or_del(R, slot_l_ear)
 	return R
@@ -80,7 +85,7 @@
 			code_owner.store_memory("<B>Nuclear Bomb Code</B>: [code]", 0, 0)
 			code_owner.current << "The nuclear authorization code is: <B>[code]</B>"
 	else
-		world << "<span class='danger'>Could not spawn nuclear bomb. Contact a developer.</span>"
+		message_admins("<span class='danger'>Could not spawn nuclear bomb. Contact a developer.</span>")
 		return
 
 	spawned_nuke = code
@@ -113,6 +118,7 @@
 	if (newname)
 		player.real_name = newname
 		player.name = player.real_name
+		player.dna.real_name = newname
 	if(player.mind) player.mind.name = player.name
 	// Update any ID cards.
 	update_access(player)

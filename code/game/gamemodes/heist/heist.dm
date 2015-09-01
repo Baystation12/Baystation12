@@ -20,12 +20,3 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 		if (skipjack && skipjack.returned_home)
 			return 1
 	return 0
-
-/datum/game_mode/heist/cleanup()
-	//the skipjack and everything in it have left and aren't coming back, so get rid of them.
-	var/area/skipjack = locate(/area/shuttle/skipjack/station)
-	for (var/mob/living/M in skipjack.contents)
-		//maybe send the player a message that they've gone home/been kidnapped? Someone responsible for vox lore should write that.
-		qdel(M)
-	for (var/obj/O in skipjack.contents)
-		qdel(O)	//no hiding in lockers or anything

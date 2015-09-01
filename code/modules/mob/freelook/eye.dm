@@ -15,6 +15,7 @@
 	var/acceleration = 1
 	var/owner_follows_eye = 0
 
+	see_in_dark = 7
 	status_flags = GODMODE
 	invisibility = INVISIBILITY_EYE
 
@@ -40,11 +41,14 @@ mob/eye/Destroy()
 		updateallghostimages()
 	..()
 
-// Movement code. Returns 0 to stop air movement from moving it.
 /mob/eye/Move(n, direct)
 	if(owner == src)
-		EyeMove(n, direct)
+		return EyeMove(n, direct)
 	return 0
+
+/mob/eye/airflow_hit(atom/A)
+	airflow_speed = 0
+	airflow_dest = null
 
 /mob/eye/examinate()
 	set popup_menu = 0
@@ -109,3 +113,4 @@ mob/eye/Destroy()
 		sprint = min(sprint + 0.5, max_sprint)
 	else
 		sprint = initial
+	return 1

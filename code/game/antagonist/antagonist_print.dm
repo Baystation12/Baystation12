@@ -7,8 +7,8 @@
 	for(var/datum/mind/P in current_antagonists)
 		text += print_player_full(P)
 		text += get_special_objective_text(P)
-		var/failed
 		if(!global_objectives.len && P.objectives && P.objectives.len)
+			var/failed
 			var/num = 1
 			for(var/datum/objective/O in P.objectives)
 				text += print_objective(O, num)
@@ -20,8 +20,6 @@
 					feedback_add_details(feedback_tag,"[O.type]|FAIL")
 					failed = 1
 				num++
-
-			if(!config.objectives_disabled)
 				if(failed)
 					text += "<br><font color='red'><B>The [role_text] has failed.</B></font>"
 				else

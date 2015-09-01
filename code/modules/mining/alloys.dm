@@ -12,7 +12,7 @@
 	metaltag = "plasteel"
 	requires = list(
 		"platinum" = 1,
-		"coal" = 2,
+		"carbon" = 2,
 		"hematite" = 2
 		)
 	product_mod = 0.3
@@ -21,7 +21,7 @@
 /datum/alloy/steel
 	metaltag = DEFAULT_WALL_MATERIAL
 	requires = list(
-		"coal" = 1,
+		"carbon" = 1,
 		"hematite" = 1
 		)
 	product = /obj/item/stack/material/steel

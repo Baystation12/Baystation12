@@ -4,6 +4,9 @@
  * A large number of misc global procs.
  */
 
+//Checks if all high bits in req_mask are set in bitfield
+#define BIT_TEST_ALL(bitfield, req_mask) ((~(bitfield) & (req_mask)) == 0)
+
 //Inverts the colour of an HTML string
 /proc/invertHTML(HTMLstring)
 
@@ -562,10 +565,13 @@ proc/GaussRandRound(var/sigma,var/roundto)
 	return toReturn
 
 //Step-towards method of determining whether one atom can see another. Similar to viewers()
-/proc/can_see(var/atom/source, var/atom/target, var/length=5) // I couldnt be arsed to do actual raycasting :I This is horribly inaccurate.
+/proc/can_see(var/atom/source, var/atom/target, var/length=5) // I couldn't be arsed to do actual raycasting :I This is horribly inaccurate.
 	var/turf/current = get_turf(source)
 	var/turf/target_turf = get_turf(target)
 	var/steps = 0
+	
+	if(!current || !target_turf)
+		return 0
 
 	while(current != target_turf)
 		if(steps > length) return 0
@@ -774,11 +780,15 @@ proc/GaussRandRound(var/sigma,var/roundto)
 					var/old_dir1 = T.dir
 					var/old_icon_state1 = T.icon_state
 					var/old_icon1 = T.icon
+					var/old_overlays = T.overlays.Copy()
+					var/old_underlays = T.underlays.Copy()
 
 					var/turf/X = B.ChangeTurf(T.type)
 					X.set_dir(old_dir1)
 					X.icon_state = old_icon_state1
 					X.icon = old_icon1 //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
+					X.overlays = old_overlays
+					X.underlays = old_underlays
 
 					var/turf/simulated/ST = T
 					if(istype(ST) && ST.zone)
@@ -824,7 +834,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 						if(!istype(O,/obj)) continue
 						O.loc = X
 					for(var/mob/M in T)
-						if(!istype(M,/mob) || istype(M, /mob/aiEye)) continue // If we need to check for more mobs, I'll add a variable
+						if(!istype(M,/mob) || istype(M, /mob/eye)) continue // If we need to check for more mobs, I'll add a variable
 						M.loc = X
 
 //					var/area/AR = X.loc
@@ -870,6 +880,8 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 	//Notes: Attempts to move the contents of one area to another area.
 	//       Movement based on lower left corner. Tiles that do not fit
 	//		 into the new area will not be moved.
+
+	// Does *not* affect gases etc; copied turfs will be changed via ChangeTurf, and the dir, icon, and icon_state copied. All other vars will remain default.
 
 	if(!A || !src) return 0
 
@@ -919,16 +931,20 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 					var/old_dir1 = T.dir
 					var/old_icon_state1 = T.icon_state
 					var/old_icon1 = T.icon
+					var/old_overlays = T.overlays.Copy()
+					var/old_underlays = T.underlays.Copy()
 
 					if(platingRequired)
 						if(istype(B, get_base_turf(B.z)))
 							continue moving
 
-					var/turf/X = new T.type(B)
+					var/turf/X = B
+					X.ChangeTurf(T.type)
 					X.set_dir(old_dir1)
 					X.icon_state = old_icon_state1
 					X.icon = old_icon1 //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
-
+					X.overlays = old_overlays
+					X.underlays = old_underlays
 
 					var/list/objs = new/list()
 					var/list/newobjs = new/list()
@@ -952,7 +968,7 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 
 					for(var/mob/M in T)
 
-						if(!istype(M,/mob) || istype(M, /mob/aiEye)) continue // If we need to check for more mobs, I'll add a variable
+						if(!istype(M,/mob) || istype(M, /mob/eye)) continue // If we need to check for more mobs, I'll add a variable
 						mobs += M
 
 					for(var/mob/M in mobs)
@@ -963,12 +979,6 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 
 					copiedobjs += newobjs
 					copiedobjs += newmobs
-
-
-
-					for(var/V in T.vars)
-						if(!(V in list("type","loc","locs","vars", "parent", "parent_type","verbs","ckey","key","x","y","z","contents", "luminosity")))
-							X.vars[V] = T.vars[V]
 
 //					var/area/AR = X.loc
 
@@ -985,22 +995,9 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 
 
 
-	var/list/doors = new/list()
-
 	if(toupdate.len)
 		for(var/turf/simulated/T1 in toupdate)
-			for(var/obj/machinery/door/D2 in T1)
-				doors += D2
-			/*if(T1.parent)
-				air_master.groups_to_rebuild += T1.parent
-			else
-				air_master.tiles_to_update += T1*/
-
-	for(var/obj/O in doors)
-		O:update_nearby_tiles(1)
-
-
-
+			air_master.mark_for_update(T1)
 
 	return copiedobjs
 
@@ -1056,12 +1053,10 @@ proc/get_mob_with_client_list()
 
 //gets the turf the atom is located in (or itself, if it is a turf).
 //returns null if the atom is not in a turf.
-/proc/get_turf(atom/location)
-	while(location)
-		if(isturf(location))
-			return location
-		location = location.loc
-	return null
+/proc/get_turf(atom/A)
+	if(!istype(A)) return
+	for(A, A && !isturf(A), A=A.loc);
+	return A
 
 /proc/get(atom/loc, type)
 	while(loc)
@@ -1289,29 +1284,39 @@ var/list/WALLITEMS = list(
 			colour += temp_col
 	return colour
 
+var/mob/dview/dview_mob = new
+
 //Version of view() which ignores darkness, because BYOND doesn't have it.
 /proc/dview(var/range = world.view, var/center, var/invis_flags = 0)
 	if(!center)
 		return
 
-	var/global/mob/dview/DV
-	if(!DV)
-		DV = new
+	dview_mob.loc = center
 
-	DV.loc = center
+	dview_mob.see_invisible = invis_flags
 
-	DV.see_in_dark = range
-	DV.see_invisible = invis_flags
-
-	. = view(range, DV)
-	DV.loc = null
+	. = view(range, dview_mob)
+	dview_mob.loc = null
 
 /mob/dview
 	invisibility = 101
 	density = 0
+
+	anchored = 1
+	simulated = 0
+
+	see_in_dark = 1e6
 
 /atom/proc/get_light_and_color(var/atom/origin)
 	if(origin)
 		color = origin.color
 		set_light(origin.light_range, origin.light_power, origin.light_color)
 
+/mob/dview/New()
+	..()
+	// We don't want to be in any mob lists; we're a dummy not a mob.
+	mob_list -= src
+	if(stat == DEAD)
+		dead_mob_list -= src
+	else
+		living_mob_list -= src

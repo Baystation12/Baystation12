@@ -52,6 +52,10 @@
 	// update the current life tick, can be used to e.g. only do something every 4 ticks
 	life_tick++
 
+	// This is not an ideal place for this but it will do for now.
+	if(wearing_rig && wearing_rig.offline)
+		wearing_rig = null
+
 	in_stasis = istype(loc, /obj/structure/closet/body_bag/cryobag) && loc:opened == 0
 	if(in_stasis) loc:used++
 
@@ -108,7 +112,7 @@
 
 	var/pressure_adjustment_coefficient = 1 // Assume no protection at first.
 
-	if(wear_suit && (wear_suit.flags & STOPPRESSUREDAMAGE) && head && (head.flags & STOPPRESSUREDAMAGE)) // Complete set of pressure-proof suit worn, assume fully sealed.
+	if(wear_suit && (wear_suit.item_flags & STOPPRESSUREDAMAGE) && head && (head.item_flags & STOPPRESSUREDAMAGE)) // Complete set of pressure-proof suit worn, assume fully sealed.
 		pressure_adjustment_coefficient = 0
 
 		// Handles breaches in your space suit. 10 suit damage equals a 100% loss of pressure protection.
@@ -303,11 +307,11 @@
 	/** breathing **/
 
 /mob/living/carbon/human/handle_chemical_smoke(var/datum/gas_mixture/environment)
-	if(wear_mask && (wear_mask.flags & BLOCK_GAS_SMOKE_EFFECT))
+	if(wear_mask && (wear_mask.item_flags & BLOCK_GAS_SMOKE_EFFECT))
 		return
-	if(glasses && (glasses.flags & BLOCK_GAS_SMOKE_EFFECT))
+	if(glasses && (glasses.item_flags & BLOCK_GAS_SMOKE_EFFECT))
 		return
-	if(head && (head.flags & BLOCK_GAS_SMOKE_EFFECT))
+	if(head && (head.item_flags & BLOCK_GAS_SMOKE_EFFECT))
 		return
 	..()
 
@@ -328,7 +332,7 @@
 			if(!rig.offline && (rig.air_supply && internal == rig.air_supply))
 				rig_supply = rig.air_supply
 
-		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.flags & AIRTIGHT)) || (head && (head.flags & AIRTIGHT)))))
+		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.item_flags & AIRTIGHT)) || (head && (head.item_flags & AIRTIGHT)))))
 			internal = null
 
 		if(internal)
@@ -915,9 +919,12 @@
 	if(status_flags & GODMODE)	return 0
 
 	//SSD check, if a logged player is awake put them back to sleep!
-	if(sleeping < 2 && species.show_ssd && (!client || !key || player_logged))
+	if(species.show_ssd && !client && !aghosted)
 		sleeping = 2
 
+	//SSD check, if a logged player is awake put them back to sleep!
+	if(species.show_ssd && !client && !aghosted)
+		Sleeping(2)
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 		blinded = 1
 		silent = 0
@@ -931,12 +938,9 @@
 			return 1
 
 		//UNCONSCIOUS. NO-ONE IS HOME
-		if( (getOxyLoss() > 50) || (config.health_threshold_crit > health) )
-			Paralyse(3)
-
-		//UNCONSCIOUS. NO-ONE IS HOME
 		if((getOxyLoss() > 50) || (health <= config.health_threshold_crit))
 			Paralyse(3)
+
 		if(hallucination)
 			if(hallucination >= 20)
 				if(prob(3))
@@ -948,49 +952,33 @@
 					spawn(rand(20,50))
 						client.dir = 1
 
-			if(hallucination)
-				if(hallucination >= 20)
-					if(prob(3))
-						fake_attack(src)
-					if(!handling_hal)
-						spawn handle_hallucinations() //The not boring kind!
-					if(client && prob(5))
-						client.dir = pick(2,4,8)
-						var/client/C = client
-						spawn(rand(20,50))
-							if(C)
-								C.dir = 1
-
+			hallucination = max(0, hallucination - 2)
 		else
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-			if(halloss > 100)
-				src << "<span class='notice'>You're in too much pain to keep going...</span>"
-				src.visible_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.")
-				Paralyse(10)
-				setHalLoss(99)
+		if(halloss > 100)
+			src << "<span class='notice'>You're in too much pain to keep going...</span>"
+			src.visible_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.")
+			Paralyse(10)
+			setHalLoss(99)
 
-		if(paralysis)
-			AdjustParalysis(-1)
+		if(paralysis || sleeping)
 			blinded = 1
 			stat = UNCONSCIOUS
 			animate_tail_reset()
-			if(halloss > 0)
-				adjustHalLoss(-3)
+			adjustHalLoss(-3)
+			
+		if(paralysis)
+			AdjustParalysis(-1)
+			
 		else if(sleeping)
 			speech_problem_flag = 1
 			handle_dreams()
-			adjustHalLoss(-3)
 			if (mind)
 				//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
-				if(player_logged)
-					sleeping = max(sleeping-1, 2)
-				else
-					sleeping = max(sleeping-1, 0)
-			blinded = 1
-			stat = UNCONSCIOUS
-			animate_tail_reset()
+				if(client || sleeping > 3)
+					AdjustSleeping(-1)
 			if( prob(2) && health && !hal_crit )
 				spawn(0)
 					emote("snore")
@@ -1015,6 +1003,10 @@
 
 		// Check everything else.
 
+		//Periodically double-check embedded_flag
+		if(embedded_flag && !(life_tick % 10))
+			if(!embedded_needs_process())
+				embedded_flag = 0
 		//Vision
 		var/obj/item/organ/vision
 		if(species.vision_organ)
@@ -1197,7 +1189,7 @@
 			damageoverlay.overlays += I
 
 	if( stat == DEAD )
-		sight |= (SEE_TURFS|SEE_MOBS|SEE_OBJS)
+		sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS|SEE_SELF
 		see_in_dark = 8
 		if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 		if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
@@ -1208,23 +1200,13 @@
 						item.zoom()
 						break
 
-				/*
-				if(locate(/obj/item/weapon/gun/energy/sniperrifle, contents))
-					var/obj/item/weapon/gun/energy/sniperrifle/s = locate() in src
-					if(s.zoom)
-						s.zoom()
-				if(locate(/obj/item/device/binoculars, contents))
-					var/obj/item/device/binoculars/b = locate() in src
-					if(b.zoom)
-						b.zoom()
-				*/
-
 	else
 		sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
 		see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 
 		if(XRAY in mutations)
 			sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
+			see_in_dark = 8
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
 		if(seer==1)
@@ -1236,7 +1218,9 @@
 				seer = 0
 
 		else
-			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
+			sight = species.vision_flags
+			see_in_dark = species.darksight
+			see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 		var/tmp/glasses_processed = 0
 		var/obj/item/weapon/rig/rig = back
 		if(istype(rig) && rig.visor)
@@ -1250,6 +1234,7 @@
 			process_glasses(glasses)
 		if(XRAY in mutations)
 			sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
+			see_in_dark = 8
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
 		if(!glasses_processed && (species.vision_flags > 0))
@@ -1275,6 +1260,8 @@
 							if(0 to 20)				healths.icon_state = "health5"
 							else					healths.icon_state = "health6"
 
+			if(!seer)
+				see_invisible = SEE_INVISIBLE_LIVING
 		if(nutrition_icon)
 			switch(nutrition)
 				if(450 to INFINITY)				nutrition_icon.icon_state = "nutrition0"
@@ -1402,6 +1389,8 @@
 			sight |= G.vision_flags
 			if(!druggy && !seer)
 				see_invisible = SEE_INVISIBLE_MINIMUM
+		if(G.see_invisible >= 0)
+			see_invisible = G.see_invisible
 		if(istype(G,/obj/item/clothing/glasses/night) && !seer)
 			see_invisible = SEE_INVISIBLE_MINIMUM
 /* HUD shit goes here, as long as it doesn't modify sight flags */

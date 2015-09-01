@@ -202,11 +202,11 @@
 	if (network == 3)
 		newlap.spawn_parts += (/obj/item/part/computer/networking/cable)
 	if (power == 1)
-		qdel(newlap.battery)
-		newlap.battery = new /obj/item/weapon/cell/high(newlap)
+		newlap.battery.maxcharge = 1000
+		newlap.battery.charge = 1000
 	if (power == 2)
-		qdel(newlap.battery)
-		newlap.battery = new /obj/item/weapon/cell/super(newlap)
+		newlap.battery.maxcharge = 1750
+		newlap.battery.charge = 1750
 
 	newlap.spawn_parts()
 
@@ -227,7 +227,7 @@
 				else
 					usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
 			else
-				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
+				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call [boss_short] Support.</span>"
 		else
 			transfer_and_vend(CH, C)
 
@@ -380,7 +380,7 @@
 					usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
 					return 0
 			else
-				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
+				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call [boss_short] Support.</span>"
 				return 0
 		else
 			transfer_and_reimburse(CH)

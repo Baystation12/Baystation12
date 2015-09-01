@@ -18,7 +18,7 @@ var/list/admin_datums = list()
 		error("Admin datum created without a ckey argument. Datum has been deleted")
 		qdel(src)
 		return
-	admincaster_signature = "Nanotrasen Officer #[rand(0,9)][rand(0,9)][rand(0,9)]"
+	admincaster_signature = "[company_name] Officer #[rand(0,9)][rand(0,9)][rand(0,9)]"
 	rank = initial_rank
 	rights = initial_rights
 	admin_datums[ckey] = src
@@ -43,7 +43,7 @@ var/list/admin_datums = list()
 		owner.holder = src
 		owner.deadmin_holder = null
 		owner.add_admin_verbs()
-		
+
 
 /*
 checks if usr is an admin with at least ONE of the flags in rights_required. (Note, they don't need all the flags)

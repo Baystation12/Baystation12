@@ -1142,21 +1142,22 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(choice == 1)
 		if (id)
 			remove_id()
+			return 1
 		else
 			var/obj/item/I = user.get_active_hand()
-			if (istype(I, /obj/item/weapon/card/id))
-				user.drop_item()
+			if (istype(I, /obj/item/weapon/card/id) && user.unEquip(I))
 				I.loc = src
 				id = I
+			return 1
 	else
 		var/obj/item/weapon/card/I = user.get_active_hand()
-		if (istype(I, /obj/item/weapon/card/id) && I:registered_name)
+		if (istype(I, /obj/item/weapon/card/id) && I:registered_name && user.unEquip(I))
 			var/obj/old_id = id
-			user.drop_item()
 			I.loc = src
 			id = I
 			user.put_in_hands(old_id)
-	return
+			return 1
+	return 0
 
 // access to status display signals
 /obj/item/device/pda/attackby(obj/item/C as obj, mob/user as mob)
@@ -1184,9 +1185,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		else
 			//Basic safety check. If either both objects are held by user or PDA is on ground and card is in hand.
 			if(((src in user.contents) && (C in user.contents)) || (istype(loc, /turf) && in_range(src, user) && (C in user.contents)) )
-				id_check(user, 2)
-				user << "<span class='notice'>You put the ID into \the [src]'s slot.</span>"
-				updateSelfDialog()//Update self dialog on success.
+				if(id_check(user, 2))
+					user << "<span class='notice'>You put the ID into \the [src]'s slot.</span>"
+					updateSelfDialog()//Update self dialog on success.
 			return	//Return in case of failed check or when successful.
 		updateSelfDialog()//For the non-input related code.
 	else if(istype(C, /obj/item/device/paicard) && !src.pai)
@@ -1284,40 +1285,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				user << "<span class='notice'>No significant chemical agents found in [A].</span>"
 
 		if(5)
-			if((istype(A, /obj/item/weapon/tank)) || (istype(A, /obj/machinery/portable_atmospherics)))
-				var/obj/icon = A
-				for (var/mob/O in viewers(user, null))
-					O << "<span class='warning'>\The [user] has used [src] on \icon[icon] [A].</span>"
-				var/pressure = A:air_contents.return_pressure()
-
-				var/total_moles = A:air_contents.total_moles
-
-				user << "<span class='notice'>Results of analysis of \icon[icon]</span>"
-				if (total_moles>0)
-					user << "<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>"
-					for(var/g in A:air_contents.gas)
-						user << "<span class='notice'>[gas_data.name[g]]: [round((A:air_contents.gas[g] / total_moles) * 100)]%</span>"
-					user << "<span class='notice'>Temperature: [round(A:air_contents.temperature-T0C)]&deg;C</span>"
-				else
-					user << "<span class='notice'>Tank is empty!</span>"
-
-			if (istype(A, /obj/machinery/atmospherics/pipe/tank))
-				var/obj/icon = A
-				for (var/mob/O in viewers(user, null))
-					O << "<span class='warning'>\The [user] has used [src] on \icon[icon] [A]</span>"
-
-				var/obj/machinery/atmospherics/pipe/tank/T = A
-				var/pressure = T.parent.air.return_pressure()
-				var/total_moles = T.parent.air.total_moles
-
-				user << "<span class='notice'>Results of analysis of \icon[icon]</span>"
-				if (total_moles>0)
-					user << "<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>"
-					for(var/g in T.parent.air.gas)
-						user << "<span class='notice'>[gas_data.name[g]]: [round((T.parent.air.gas[g] / total_moles) * 100)]%</span>"
-					user << "<span class='notice'>Temperature: [round(T.parent.air.temperature-T0C)]&deg;C</span>"
-				else
-					user << "<span class='notice'>Tank is empty!</span>"
+			analyze_gases(A, user)
 
 	if (!scanmode && istype(A, /obj/item/weapon/paper) && owner)
 		// JMO 20140705: Makes scanned document show up properly in the notes. Not pretty for formatted documents,

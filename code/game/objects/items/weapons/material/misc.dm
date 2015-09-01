@@ -31,7 +31,7 @@
 
 /obj/item/weapon/material/hatchet/tacknife
 	name = "tactical knife"
-	desc = "You'd be killing loads of people if this was Medal of Valor: Heroes of Nyx."
+	desc = "You'd be killing loads of people if this was Medal of Valor: Heroes of Space."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "tacknife"
 	item_state = "knife"
@@ -61,7 +61,6 @@
 	throw_speed = 1
 	throw_range = 3
 	w_class = 4
-	flags = NOSHIELD
 	slot_flags = SLOT_BACK
 	origin_tech = "materials=2;combat=2"
 	attack_verb = list("chopped", "sliced", "cut", "reaped")

@@ -9,7 +9,7 @@
 /obj/effect/expl_particles/New()
 	..()
 	spawn (15)
-		src.loc = null
+		qdel(src)
 	return
 
 /obj/effect/expl_particles/Move()
@@ -49,7 +49,7 @@
 /obj/effect/explosion/New()
 	..()
 	spawn (10)
-		src.loc = null
+		qdel(src)
 	return
 
 /datum/effect/system/explosion

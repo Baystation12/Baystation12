@@ -268,11 +268,11 @@ var/list/global/organ_rel_size = list(
 /proc/get_zone_with_miss_chance(zone, var/mob/target, var/miss_chance_mod = 0, var/ranged_attack=0)
 	zone = check_zone(zone)
 
-	// you cannot miss if your target is prone or restrained
-	if(target.buckled || target.lying)
-		return zone
-	// if your target is being grabbed aggressively by someone you cannot miss either
 	if(!ranged_attack)
+		// you cannot miss if your target is prone or restrained
+		if(target.buckled || target.lying)
+			return zone
+		// if your target is being grabbed aggressively by someone you cannot miss either
 		for(var/obj/item/weapon/grab/G in target.grabbed_by)
 			if(G.state >= GRAB_AGGRESSIVE)
 				return zone
@@ -419,7 +419,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 		var/atom/oldeye=M.client.eye
 		var/aiEyeFlag = 0
-		if(istype(oldeye, /mob/aiEye))
+		if(istype(oldeye, /mob/eye/aiEye))
 			aiEyeFlag = 1
 
 		var/x
@@ -632,7 +632,7 @@ proc/is_blind(A)
 		return SAFE_PERP
 
 	//Agent cards lower threatlevel.
-	var/obj/item/weapon/card/id/id = GetIdCard(src)
+	var/obj/item/weapon/card/id/id = GetIdCard()
 	if(id && istype(id, /obj/item/weapon/card/id/syndicate))
 		threatcount -= 2
 	// A proper	CentCom id is hard currency.
