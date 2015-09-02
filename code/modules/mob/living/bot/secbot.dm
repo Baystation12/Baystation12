@@ -336,7 +336,7 @@
 		path = list()
 
 /mob/living/bot/secbot/proc/check_threat(var/mob/living/M)
-	if(!M || !istype(M) || M.stat)
+	if(!M || !istype(M) || M.stat || src == M)
 		return 0
 
 	if(emagged)
