@@ -15,7 +15,7 @@
 	return species.handle_autohiss(message, L, client.autohiss_mode)
 
 /client
-	var/autohiss_mode = 0
+	var/autohiss_mode = AUTOHISS_OFF
 
 /client/verb/toggle_autohiss()
 	set name = "Toggle Auto-Hiss"
@@ -88,8 +88,6 @@
 			. += pick(map[min_char])
 		message = copytext(message, min_index + 1)
 
-	for(var/x = 1 to length(.))
-		world.log << "[x]: [.[x]]"
 	return list2text(.)
 
 #undef AUTOHISS_OFF
