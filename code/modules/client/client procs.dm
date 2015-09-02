@@ -52,7 +52,7 @@
 		if(mute_irc)
 			usr << "<span class='warning'You cannot use this as your client has been muted from sending messages to the admins on IRC</span>"
 			return
-		cmd_admin_irc_pm()
+		cmd_admin_irc_pm(href_list["irc_msg"])
 		return
 
 
@@ -152,6 +152,13 @@
 	if(holder)
 		add_admin_verbs()
 		admin_memo_show()
+
+	// Forcibly enable hardware-accelerated graphics, as we need them for the lighting overlays.
+	// (but turn them off first, since sometimes BYOND doesn't turn them on properly otherwise)
+	spawn(5) // And wait a half-second, since it sounds like you can do this too fast.
+		if(src)
+			winset(src, null, "command=\".configure graphics-hwmode off\"")
+			winset(src, null, "command=\".configure graphics-hwmode on\"")
 
 	log_client_to_db()
 

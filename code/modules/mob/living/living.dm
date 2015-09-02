@@ -574,7 +574,7 @@ default behaviour is:
 	set category = "IC"
 
 	if(can_resist())
-		next_move = world.time + 20
+		setClickCooldown(20)
 		process_resist()
 
 /mob/living/proc/can_resist()
@@ -582,7 +582,7 @@ default behaviour is:
 	//so just check weakened instead.
 	if(stat || weakened)
 		return 0
-	if(next_move > world.time)
+	if(!canClick())
 		return 0
 	return 1
 
@@ -657,7 +657,27 @@ default behaviour is:
 	set category = "IC"
 
 	resting = !resting
-	src << "\blue You are now [resting ? "resting" : "getting up"]"
+	src << "<span class='notice'>You are now [resting ? "resting" : "getting up"].</span>"
+
+/mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	if(istype(carried_item, /obj/item/weapon/implant))
+		return 1
+	if(istype(carried_item, /obj/item/clothing/mask/facehugger))
+		return 1
+	return 0
+
+/mob/living/carbon/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	if(carried_item in internal_organs)
+		return 1
+	return ..()
+
+/mob/living/carbon/human/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	if(carried_item in organs)
+		return 1
+	return ..()
+
+/mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	return carried_item != held_item
 
 /mob/living/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null, var/ignore_items = 0) // -- TLE -- Merged by Carn
 	if(stat)
@@ -721,9 +741,10 @@ default behaviour is:
 
 	if(!ignore_items)
 		for(var/obj/item/carried_item in contents)//If the monkey got on objects.
-			if( !istype(carried_item, /obj/item/weapon/implant) && !istype(carried_item, /obj/item/clothing/mask/facehugger) )//If it's not an implant or a facehugger
-				src << "\red You can't be carrying items or have items equipped when vent crawling!"
-				return
+			if(is_allowed_vent_crawl_item(carried_item))
+				continue
+			src << "<span class='warning'>You can't be carrying items or have items equipped when vent crawling!</span>"
+			return
 
 	if(isslime(src))
 		var/mob/living/carbon/slime/S = src

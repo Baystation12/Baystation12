@@ -40,8 +40,13 @@
 	update_strings()
 	return 1
 
+/obj/item/stack/material/get_material()
+	return material
+
 /obj/item/stack/material/proc/update_strings()
 	// Update from material datum.
+	singular_name = material.sheet_singular_name
+
 	if(amount>1)
 		name = "[material.use_name] [material.sheet_plural_name]"
 		desc = "A stack of [material.use_name] [material.sheet_plural_name]."
@@ -188,15 +193,18 @@
 /obj/item/stack/material/glass/reinforced
 	name = "reinforced glass"
 	icon_state = "sheet-rglass"
-	default_type = "reinforced glass"
+	default_type = "rglass"
 
 /obj/item/stack/material/glass/phoronglass
-	name = "phoron glass"
-	singular_name = "phoron glass sheet"
+	name = "borosilicate glass"
+	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures"
+	singular_name = "borosilicate glass sheet"
 	icon_state = "sheet-phoronglass"
-	default_type = "phoron glass"
+	default_type = "borosilicate glass"
 
 /obj/item/stack/material/glass/phoronrglass
-	name = "reinforced phoron glass"
+	name = "reinforced borosilicate glass"
+	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures. It is reinforced with few rods."
+	singular_name = "reinforced borosilicate glass sheet"
 	icon_state = "sheet-phoronrglass"
-	default_type = "reinforced phoron glass"
+	default_type = "reinforced borosilicate glass"

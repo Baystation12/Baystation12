@@ -96,12 +96,12 @@
 		else
 			usr << "<span class='notice'>[src]'s motors resist your effort.</span>"
 		return
-	if(istype(C, /obj/item/stack/material/plasteel))
-		var/amt = repair_price()
+	if(istype(C, /obj/item/stack/material) && C.get_material_name() == "plasteel")
+		var/amt = Ceiling((maxhealth - health)/150)
 		if(!amt)
 			usr << "<span class='notice'>\The [src] is already fully repaired.</span>"
 			return
-		var/obj/item/stack/material/plasteel/P = C
+		var/obj/item/stack/P = C
 		if(P.amount < amt)
 			usr << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"
 			return
@@ -135,16 +135,6 @@
 		return
 	force_close()
 
-// Proc: repair_price()
-// Parameters: None
-// Description: Determines amount of sheets needed for full repair. (max)150HP per sheet, (max)10 emitter hits per sheet.
-/obj/machinery/door/blast/proc/repair_price()
-	var/sheets_needed = 0
-	var/dam = maxhealth - health
-	while(dam > 0)
-		dam -= 150
-		sheets_needed++
-	return sheets_needed
 
 // Proc: repair()
 // Parameters: None
@@ -154,7 +144,7 @@
 	if(stat & BROKEN)
 		stat &= ~BROKEN
 
-
+		
 /obj/machinery/door/blast/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group) return 1
 	return ..()

@@ -1,18 +1,18 @@
 /obj/item/weapon/paper/pamphlet
 	name = "pamphlet"
 	icon_state = "pamphlet"
-	info = "<b>Welcome to the Nanotrasen Gateway project...</b><br>\
+	info = "<b>Welcome to the Gateway project...</b><br>\
 			Congratulations! If you're reading this, you and your superiors have decided that you're \
 			ready to commit to a life spent colonising the rolling hills of far away worlds. You \
 			must be ready for a lifetime of adventure, a little bit of hard work, and an award \
-			winning dental plan- but that's not all the Nanotrasen Gateway project has to offer.<br>\
+			winning dental plan- but that's not all the Gateway project has to offer.<br>\
 			<br>Because we care about you, we feel it is only fair to make sure you know the risks \
-			before you commit to joining the Nanotrasen Gateway project. All away destinations have \
-			been fully scanned by a Nanotrasen expeditionary team, and are certified to be 100% safe. \
+			before you commit to joining the Gateway project. All away destinations have \
+			been fully scanned by a expeditionary team, and are certified to be 100% safe. \
 			We've even left a case of space beer along with the basic materials you'll need to expand \
-			Nanotrasen's operational area and start your new life.<br><br>\
+			the Project's operational area and start your new life.<br><br>\
 			<b>Gateway Operation Basics</b><br>\
-			All Nanotrasen approved Gateways operate on the same basic principals. They operate off \
+			All approved Gateways operate on the same basic principals. They operate off \
 			area equipment power as you would expect, but they also require a backup wire with at least \
 			128, 000 Watts of power running through it. Without this supply, it cannot safely function \
 			and will reject all attempts at operation.<br><br>\
@@ -29,7 +29,7 @@
 			number of cases, the Gateway they have established may not be immediately obvious. \
 			Do not panic if you cannot locate the return Gateway. Begin colonisation of the destination. \
 			<br><br><b>A New World</b><br>\
-			As a participant in the Nanotrasen Gateway Project, you will be on the frontiers of space. \
+			As a participant in the Gateway Project, you will be on the frontiers of space. \
 			Though complete safety is assured, participants are advised to prepare for inhospitable \
 			environs."
 

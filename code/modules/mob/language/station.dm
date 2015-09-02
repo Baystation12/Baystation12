@@ -73,7 +73,7 @@
 	whisper_verb = "whispers"
 	colour = "solcom"
 	key = "1"
-	flags = RESTRICTED
+	flags = WHITELISTED
 
 	//syllables are at the bottom of the file
 
@@ -107,11 +107,12 @@
 	space_chance = 10
 
 /datum/language/machine/get_random_name()
+	var/new_name
 	if(prob(70))
-		name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
+		new_name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
 	else
-		name = pick(ai_names)
-	return name
+		new_name = pick(ai_names)
+	return new_name
 
 //Syllable Lists
 /*

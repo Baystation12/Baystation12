@@ -63,7 +63,7 @@
 	// Off-Station APCs should not count towards CPU generation.
 	for(var/obj/machinery/power/apc/A in hacked_apcs)
 		if(A.z in config.station_levels)
-			cpu_gain += 0.002
+			cpu_gain += 0.004
 			cpu_storage += 10
 
 	research.max_cpu = cpu_storage + override_CPUStorage
@@ -124,7 +124,7 @@
 		if(src.research)
 			stat(null, "Available CPU: [src.research.stored_cpu] TFlops")
 			stat(null, "Maximal CPU: [src.research.max_cpu] TFlops")
-			stat(null, "CPU generation rate: [src.research.cpu_increase_per_tick] TFlops/s")
+			stat(null, "CPU generation rate: [src.research.cpu_increase_per_tick * 10] TFlops/s")
 			stat(null, "Current research focus: [src.research.focus ? src.research.focus.name : "None"]")
 			if(src.research.focus)
 				stat(null, "Research completed: [round(src.research.focus.invested, 0.1)]/[round(src.research.focus.price)]")
@@ -138,3 +138,4 @@
 	if(psupply)
 		del(psupply)
 	psupply = new/obj/machinery/ai_powersupply(src)
+

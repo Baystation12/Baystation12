@@ -35,7 +35,7 @@ AI MODULES
 			return
 
 		if(ticker && ticker.mode && ticker.mode.name == "blob")
-			usr << "Law uploads have been disabled by NanoTrasen!"
+			usr << "Law uploads have been disabled by [company_name]!"
 			return
 
 		if (comp.current.stat == 2 || comp.current.control_disabled == 1)
@@ -83,7 +83,7 @@ AI MODULES
 		laws.sync(target, 0)
 	addAdditionalLaws(target, sender)
 
-	target << "[sender] has uploaded a change to the laws you must follow, using \an [src]. From now on: "
+	target << "\The [sender] has uploaded a change to the laws you must follow, using \an [src]. From now on: "
 	target.show_laws()
 
 /obj/item/weapon/aiModule/proc/log_law_changes(var/mob/living/silicon/ai/target, var/mob/sender)
@@ -140,13 +140,7 @@ AI MODULES
 	if(!targetName)
 		usr << "No name detected on module, please enter one."
 		return 0
-	..()
-
-/obj/item/weapon/aiModule/oneHuman/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
-	..()
-	var/law = "Only [targetName] is a crew member."
-	target << "[sender.real_name] attempted to modify your zeroth law." // And lets them know that someone tried. --NeoFite
-	target << "It would be in your best interest to play along with [sender.real_name] that [law]"
+	return ..()
 
 /obj/item/weapon/aiModule/oneHuman/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
 	var/law = "Only [targetName] is an crew member."

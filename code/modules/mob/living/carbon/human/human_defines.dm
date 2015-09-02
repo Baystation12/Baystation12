@@ -82,5 +82,5 @@
 	var/list/flavor_texts = list()
 
 	mob_bump_flag = HUMAN
-	mob_push_flags = ALLMOBS
-	mob_swap_flags = ALLMOBS
+	mob_push_flags = ~HEAVY
+	mob_swap_flags = ~HEAVY

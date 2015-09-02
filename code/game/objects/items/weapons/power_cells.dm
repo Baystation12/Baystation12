@@ -14,8 +14,6 @@
 	var/maxcharge = 1000
 	var/rigged = 0		// true if rigged to explode
 	var/minor_fault = 0 //If not 100% reliable, it will build up faults.
-	var/construction_cost = list(DEFAULT_WALL_MATERIAL=750,"glass"=75)
-	var/construction_time=100
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 
 	suicide_act(mob/user)
@@ -40,7 +38,7 @@
 	charge = maxcharge
 
 /obj/item/weapon/cell/crap
-	name = "\improper Nanotrasen brand rechargable AA battery"
+	name = "\improper rechargable AA battery"
 	desc = "You can't top the plasma top." //TOTALLY TRADEMARK INFRINGEMENT
 	origin_tech = list(TECH_POWER = 0)
 	maxcharge = 500
@@ -83,7 +81,6 @@
 	icon_state = "scell"
 	maxcharge = 20000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
-	construction_cost = list(DEFAULT_WALL_MATERIAL=750,"glass"=100)
 
 /obj/item/weapon/cell/super/empty/New()
 	..()
@@ -95,7 +92,6 @@
 	icon_state = "hpcell"
 	maxcharge = 30000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 80)
-	construction_cost = list(DEFAULT_WALL_MATERIAL=500,"glass"=150,"gold"=200,"silver"=200)
 
 /obj/item/weapon/cell/hyper/empty/New()
 	..()
@@ -107,7 +103,7 @@
 	origin_tech =  null
 	maxcharge = 30000 //determines how badly mobs get shocked
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 80)
-	
+
 	check_charge()
 		return 1
 	use()

@@ -46,6 +46,15 @@
 
 #define GEAR_EVA 15
 
+
+/var/list/economic_species_modifier = list(
+												/datum/species/human	= 10,
+												/datum/species/skrell	= 12,
+												/datum/species/tajaran	= 7,
+												/datum/species/unathi	= 7,
+												/datum/species/vox		= 1
+											)
+
 //---- The following corporations are friendly with NanoTrasen and loosely enable trade and travel:
 //Corporation NanoTrasen - Generalised / high tech research and phoron exploitation.
 //Corporation Vessel Contracting - Ship and station construction, materials research.
@@ -77,7 +86,7 @@ var/global/economy_init = 0
 	if(economy_init)
 		return 2
 
-	news_network.CreateFeedChannel("Nyx Daily", "CentComm Minister of Information", 1, 1)
+	news_network.CreateFeedChannel("Nyx Daily", "SolGov Minister of Information", 1, 1)
 	news_network.CreateFeedChannel("The Gibson Gazette", "Editor Mike Hammers", 1, 1)
 
 	for(var/loc_type in typesof(/datum/trade_destination) - /datum/trade_destination)

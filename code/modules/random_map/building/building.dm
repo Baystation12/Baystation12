@@ -7,7 +7,7 @@
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)
 			var/current_cell = get_map_cell(x,y)
-			if(!within_bounds(current_cell))
+			if(!current_cell)
 				continue
 			if(x == 1 || y == 1 || x == limit_x || y == limit_y)
 				map[current_cell] = WALL_CHAR
@@ -19,7 +19,7 @@
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)
 			var/current_cell = get_map_cell(x,y)
-			if(!within_bounds(current_cell))
+			if(!current_cell)
 				continue
 			if(!(x == 1 || y == 1 || x == limit_x || y == limit_y))
 				continue

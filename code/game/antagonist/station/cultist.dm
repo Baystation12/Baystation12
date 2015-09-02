@@ -87,9 +87,9 @@ var/datum/antagonist/cultist/cult
 	remove_cult_magic(player.current)
 
 /datum/antagonist/cultist/add_antagonist(var/datum/mind/player)
-	if(!..())
-		return
-	player << "<span class='cult'>[conversion_blurb]</span>"
+	. = ..()
+	if(.)
+		player << "<span class='cult'>[conversion_blurb]</span>"
 
 /datum/antagonist/cultist/can_become_antag(var/datum/mind/player)
 	if(!..())

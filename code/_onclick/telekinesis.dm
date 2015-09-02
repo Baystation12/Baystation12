@@ -112,11 +112,11 @@ var/const/tk_maxrange = 15
 			;
 		if(1 to 5) // not adjacent may mean blocked by window
 			if(!proximity)
-				user.next_move += 2
+				user.setMoveCooldown(2)
 		if(5 to 7)
-			user.next_move += 5
+			user.setMoveCooldown(5)
 		if(8 to tk_maxrange)
-			user.next_move += 10
+			user.setMoveCooldown(10)
 		else
 			user << "<span class='notice'>Your mind won't reach that far.</span>"
 			return

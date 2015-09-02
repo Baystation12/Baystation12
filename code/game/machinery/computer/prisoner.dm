@@ -3,10 +3,11 @@
 /obj/machinery/computer/prisoner
 	name = "prisoner management console"
 	icon = 'icons/obj/computer.dmi'
-	icon_state = "explosive"
+	icon_keyboard = "security_key"
+	icon_screen = "explosive"
 	light_color = "#a91515"
 	req_access = list(access_armory)
-	circuit = "/obj/item/weapon/circuitboard/prisoner"
+	circuit = /obj/item/weapon/circuitboard/prisoner
 	var/id = 0.0
 	var/temp = null
 	var/status = 0

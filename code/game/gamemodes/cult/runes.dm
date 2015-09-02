@@ -309,7 +309,7 @@ var/list/sacrificed = list()
 		var/list/mob/living/casters = get_cultists()
 		if(casters.len < 3)
 			break
-		T.turf_animation('icons/effects/effects.dmi', "rune_sac")
+		//T.turf_animation('icons/effects/effects.dmi', "rune_sac")
 		victim.fire_stacks = max(2, victim.fire_stacks)
 		victim.IgniteMob()
 		victim.take_organ_damage(5, 5) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs

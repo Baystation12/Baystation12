@@ -63,13 +63,6 @@
 
 	if(!body_color)
 		body_color = pick( list("brown","gray","white") )
-		switch(body_color)
-			if("brown")
-				holder_type = /obj/item/weapon/holder/mouse/brown
-			if("gray")
-				holder_type = /obj/item/weapon/holder/mouse/gray
-			if("white")
-				holder_type = /obj/item/weapon/holder/mouse/white
 	icon_state = "mouse_[body_color]"
 	icon_living = "mouse_[body_color]"
 	icon_dead = "mouse_[body_color]_dead"
@@ -125,17 +118,14 @@
 /mob/living/simple_animal/mouse/white
 	body_color = "white"
 	icon_state = "mouse_white"
-	holder_type = /obj/item/weapon/holder/mouse/white
 
 /mob/living/simple_animal/mouse/gray
 	body_color = "gray"
 	icon_state = "mouse_gray"
-	holder_type = /obj/item/weapon/holder/mouse/gray
 
 /mob/living/simple_animal/mouse/brown
 	body_color = "brown"
 	icon_state = "mouse_brown"
-	holder_type = /obj/item/weapon/holder/mouse/brown
 
 //TOM IS ALIVE! SQUEEEEEEEE~K :)
 /mob/living/simple_animal/mouse/brown/Tom

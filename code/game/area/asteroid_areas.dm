@@ -3,7 +3,7 @@
 /area/mine
 	icon_state = "mining"
 	music = 'sound/ambience/song_game.ogg'
-	sound_env = 5 //stoneroom
+	sound_env = ASTEROID
 
 /area/mine/explored
 	name = "Mine"
