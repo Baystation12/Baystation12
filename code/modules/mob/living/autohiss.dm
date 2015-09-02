@@ -36,9 +36,9 @@
 			src << "Auto-hiss is now OFF."
 
 /datum/species
-	var/autohiss_basic_map = null
-	var/autohiss_extra_map = null
-	var/autohiss_exempt = null
+	var/list/autohiss_basic_map = null
+	var/list/autohiss_extra_map = null
+	var/list/autohiss_exempt = null
 
 /datum/species/unathi
 	autohiss_basic_map = list(
