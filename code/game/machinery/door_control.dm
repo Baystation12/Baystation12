@@ -65,7 +65,7 @@
 	use_power(5)
 	icon_state = "doorctrl1"
 	desiredstate = !desiredstate
-	trigger()
+	trigger(user)
 	spawn(15)
 		update_icon()
 

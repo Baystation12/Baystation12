@@ -5,8 +5,6 @@
 	icon_state = "blank"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
-	var/construction_time = 100
-	var/list/construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"glass"=5000)
 	var/list/part = null // Order of args is important for installing robolimbs.
 	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
 	var/model_info
@@ -32,8 +30,6 @@
 	name = "left arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_arm"
-	construction_time = 200
-	construction_cost = list(DEFAULT_WALL_MATERIAL=18000)
 	part = list("l_arm","l_hand")
 	model_info = 1
 
@@ -41,8 +37,6 @@
 	name = "right arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_arm"
-	construction_time = 200
-	construction_cost = list(DEFAULT_WALL_MATERIAL=18000)
 	part = list("r_arm","r_hand")
 	model_info = 1
 
@@ -50,8 +44,6 @@
 	name = "left leg"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_leg"
-	construction_time = 200
-	construction_cost = list(DEFAULT_WALL_MATERIAL=15000)
 	part = list("l_leg","l_foot")
 	model_info = 1
 
@@ -59,8 +51,6 @@
 	name = "right leg"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_leg"
-	construction_time = 200
-	construction_cost = list(DEFAULT_WALL_MATERIAL=15000)
 	part = list("r_leg","r_foot")
 	model_info = 1
 
@@ -69,8 +59,6 @@
 	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell."
 	icon_state = "chest"
 	part = list("groin","chest")
-	construction_time = 350
-	construction_cost = list(DEFAULT_WALL_MATERIAL=40000)
 	var/wires = 0.0
 	var/obj/item/weapon/cell/cell = null
 
@@ -79,8 +67,6 @@
 	desc = "A standard reinforced braincase, with spine-plugged neural socket and sensor gimbals."
 	icon_state = "head"
 	part = list("head")
-	construction_time = 350
-	construction_cost = list(DEFAULT_WALL_MATERIAL=25000)
 	var/obj/item/device/flash/flash1 = null
 	var/obj/item/device/flash/flash2 = null
 
@@ -88,8 +74,6 @@
 	name = "endoskeleton"
 	desc = "A complex metal backbone with standard limb sockets and pseudomuscle anchors."
 	icon_state = "robo_suit"
-	construction_time = 500
-	construction_cost = list(DEFAULT_WALL_MATERIAL=50000)
 	var/obj/item/robot_parts/l_arm/l_arm = null
 	var/obj/item/robot_parts/r_arm/r_arm = null
 	var/obj/item/robot_parts/l_leg/l_leg = null
