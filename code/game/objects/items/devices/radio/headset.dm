@@ -209,7 +209,6 @@
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/ert
-	req_access = list(access_cent_general)
 
 /obj/item/device/radio/headset/ia
 	name = "internal affair's headset"
