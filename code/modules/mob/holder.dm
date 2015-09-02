@@ -57,7 +57,7 @@
 	slot_flags = SLOT_HEAD | SLOT_OCLOTHING
 
 /obj/item/weapon/holder/drone
-	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINERING = 5)
+	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 5)
 
 /obj/item/weapon/holder/mouse
 	w_class = 1
