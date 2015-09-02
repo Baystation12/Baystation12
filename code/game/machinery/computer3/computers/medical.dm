@@ -181,7 +181,7 @@
 				scan = null
 			else
 				var/obj/item/I = usr.get_active_hand()
-				if (istype(I, /obj/item/weapon/card/id))
+				if (istype(I, /obj/item/weapon/card/id) && usr.drop_item(I))
 					computer.cardslot.insert(I, 1)
 					scan = I
 
@@ -194,7 +194,7 @@
 				scan2 = null
 			else
 				var/obj/item/I = usr.get_active_hand()
-				if (istype(I, /obj/item/weapon/card/id))
+				if (istype(I, /obj/item/weapon/card/id) && usr.drop_item(I))
 					computer.cardslot.insert(I, 2)
 					scan2 = I
 

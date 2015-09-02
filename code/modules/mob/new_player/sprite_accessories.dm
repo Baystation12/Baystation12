@@ -398,6 +398,10 @@
 		icon_state = "hair_joestar"
 		gender = MALE
 
+	volaju
+		name = "Volaju"
+		icon_state = "hair_volaju"
+
 	bald
 		name = "Bald"
 		icon_state = "bald"
@@ -556,6 +560,10 @@
 	jensen
 		name = "Adam Jensen Beard"
 		icon_state = "facial_jensen"
+
+	volaju
+		name = "Volaju"
+		icon_state = "facial_volaju"
 
 	dwarf
 		name = "Dwarf Beard"

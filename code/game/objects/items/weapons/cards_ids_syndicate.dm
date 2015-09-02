@@ -6,12 +6,11 @@ var/global/list/syndicate_ids = list()
 	origin_tech = list(TECH_ILLEGAL = 3)
 	var/electronic_warfare = 1
 	var/registered_user = null
-	var/list/initial_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
 
 /obj/item/weapon/card/id/syndicate/New(mob/user as mob)
 	syndicate_ids += src
 	..()
-	access = initial_access.Copy()
+	access = syndicate_access.Copy()
 
 /obj/item/weapon/card/id/syndicate/Destroy()
 	syndicate_ids -= src
@@ -39,8 +38,8 @@ var/global/list/syndicate_ids = list()
 /obj/item/weapon/card/id/syndicate/attack_self(mob/user as mob)
 	if(!registered_user)
 		registered_user = user
-		set_owner_info(user)
-		user << "<span class='notice'>The microscanner marks you as its owner, preventing others some accessing its internals.</span>"
+		user.set_id_info(src)
+		user << "<span class='notice'>The microscanner marks you as its owner, preventing others from accessing its internals.</span>"
 	if(registered_user == user)
 		switch(alert("Would you like edit the ID, or show it?","Show or Edit?", "Edit","Show"))
 			if("Edit")
@@ -163,7 +162,7 @@ var/global/list/syndicate_ids = list()
 			if("Factory Reset")
 				if(alert("This will factory reset the card, including access and owner. Continue?", "Factory Reset", "No", "Yes") == "Yes" && CanUseTopic(user, state))
 					age = initial(age)
-					access = initial_access.Copy()
+					access = syndicate_access.Copy()
 					assignment = initial(assignment)
 					blood_type = initial(blood_type)
 					dna_hash = initial(dna_hash)

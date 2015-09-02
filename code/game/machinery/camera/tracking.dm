@@ -223,6 +223,9 @@ mob/living/proc/near_camera()
 /mob/living/proc/tracking_status()
 	// Easy checks first.
 	// Don't detect mobs on Centcom. Since the wizard den is on Centcomm, we only need this.
+	var/obj/item/weapon/card/id/id = GetIdCard()
+	if(id && id.prevent_tracking())
+		return TRACKING_TERMINATE
 	if(InvalidPlayerTurf(get_turf(src)))
 		return TRACKING_TERMINATE
 	if(invisibility >= INVISIBILITY_LEVEL_ONE) //cloaked
@@ -240,14 +243,8 @@ mob/living/proc/near_camera()
 	if(. == TRACKING_NO_COVERAGE)
 		return camera && camera.can_use() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
 
-/mob/living/silicon/robot/syndicate/tracking_status()
-	return TRACKING_TERMINATE
-
 /mob/living/carbon/human/tracking_status()
 	//Cameras can't track people wearing an agent card or a ninja hood.
-	var/obj/item/weapon/card/id/id = GetIdCard(src)
-	if(id && id.prevent_tracking())
-		return TRACKING_TERMINATE
 	if(istype(head, /obj/item/clothing/head/helmet/space/rig))
 		var/obj/item/clothing/head/helmet/space/rig/helmet = head
 		if(helmet.prevent_track())
