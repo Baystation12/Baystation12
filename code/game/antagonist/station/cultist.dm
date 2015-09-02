@@ -31,6 +31,7 @@ var/datum/antagonist/cultist/cult
 	var/list/harvested = list()
 	var/cult_rating = 0
 	var/cult_level = 1
+	var/conversion_blurb = "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back."
 
 /datum/antagonist/cultist/New()
 	..()
@@ -88,7 +89,7 @@ var/datum/antagonist/cultist/cult
 /datum/antagonist/cultist/add_antagonist(var/datum/mind/player)
 	if(!..())
 		return
-	player << "<span class='cult'>You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back.</span>"
+	player << "<span class='cult'>[conversion_blurb]</span>"
 
 /datum/antagonist/cultist/can_become_antag(var/datum/mind/player)
 	if(!..())

@@ -78,7 +78,7 @@ var/list/sacrificed = list()
 
 	if(!cult.can_become_antag(target.mind) || jobban_isbanned(target, "cultist"))
 		target << "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>"
-		target << "<span class='danger'>And you were able to force it out of your mind. You now know the truth, there's something horrible out there, stop it and its minions at all costs.</span>"
+		target << "<span class='danger'>And you were able to force it out of your mind. You now know the truth, there's something horrible out there, stop it and its minions at all costs.</span>" //TODO: remove meta
 	else
 		target << "<span class='cult'>Do you want to join the cult of Nar'Sie? <a href='?src=\ref[src];join=1'>YES</a></span>"
 
