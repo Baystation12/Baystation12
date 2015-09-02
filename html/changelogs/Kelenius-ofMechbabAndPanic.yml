@@ -1,6 +1,0 @@
-author: Kelenius
-
-delete-after: True
-
-changes: 
-  - tweak: "Mechfab can now be upgraded using RPED, and now uses NanoUI."
