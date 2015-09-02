@@ -369,16 +369,6 @@
 	return Move(n, direct)
 
 
-///Process_Grab()
-///Called by client/Move()
-///Checks to see if you are grabbing anything and if moving will affect your grab.
-/client/proc/Process_Grab()
-	for(var/obj/item/weapon/grab/G in list(mob.l_hand, mob.r_hand))
-		if(G.state == GRAB_KILL) //no wandering across the station/asteroid while choking someone
-			mob.visible_message("<span class='warning'>[mob] lost \his tight grip on [G.affecting]'s neck!</span>")
-			G.hud.icon_state = "kill"
-			G.state = GRAB_NECK
-
 ///Process_Incorpmove
 ///Called by client/Move()
 ///Allows mobs to run though walls
