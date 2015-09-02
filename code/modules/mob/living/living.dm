@@ -575,12 +575,14 @@ default behaviour is:
 
 	if(can_resist())
 		next_move = world.time + 20
-		process_resist()
+		resist_grab()
+		if(!weakened && !restrained())
+			process_resist()
 
 /mob/living/proc/can_resist()
 	//need to allow !canmove, or otherwise neck grabs can't be resisted
-	//so just check weakened instead.
-	if(stat || weakened)
+	//similar thing with weakened and pinning
+	if(stat)
 		return 0
 	if(next_move > world.time)
 		return 0
@@ -591,10 +593,6 @@ default behaviour is:
 	if(istype(src.loc, /obj/item/weapon/holder))
 		escape_inventory(src.loc)
 		return
-
-	//resisting grabs (as if it helps anyone...)
-	if (!restrained())
-		resist_grab()
 
 	//unbuckling yourself
 	if(buckled)

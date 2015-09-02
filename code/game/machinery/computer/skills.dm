@@ -277,7 +277,11 @@ What a mess.*/
 					else
 						P.info += "<B>General Record Lost!</B><BR>"
 					P.info += "</TT>"
-					P.name = "Employment Record ([active1.fields["name"]])"
+					if(active1)
+						P.name = "Employment Record ([active1.fields["name"]])"
+					else
+						P.name = "Employment Record (Unknown/Invald Entry)"
+						log_debug("[usr] ([usr.ckey]) attempted to print a null employee record, this should be investigated.")
 					printing = null
 //RECORD DELETE
 			if ("Delete All Records")
