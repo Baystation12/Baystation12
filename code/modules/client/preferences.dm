@@ -1303,7 +1303,8 @@ datum/preferences
 						b_type = new_b_type
 
 				if("hair")
-					if(species == "Human" || species == "Unathi" || species == "Tajara" || species == "Skrell")
+					var/datum/species/S = all_species[species]
+					if(S && (S.appearance_flags & HAS_HAIR_COLOR))
 						var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference", rgb(r_hair, g_hair, b_hair)) as color|null
 						if(new_hair)
 							r_hair = hex2num(copytext(new_hair, 2, 4))
@@ -1383,7 +1384,8 @@ datum/preferences
 						s_tone = 35 - max(min( round(new_s_tone), 220),1)
 
 				if("skin")
-					if(species == "Unathi" || species == "Tajara" || species == "Skrell")
+					var/datum/species/S = all_species[species]
+					if(S && (S.appearance_flags & HAS_SKIN_COLOR))
 						var/new_skin = input(user, "Choose your character's skin colour: ", "Character Preference", rgb(r_skin, g_skin, b_skin)) as color|null
 						if(new_skin)
 							r_skin = hex2num(copytext(new_skin, 2, 4))
@@ -1465,7 +1467,16 @@ datum/preferences
 								rlimb_data[second_limb] = null
 
 						if("Prothesis")
-							var/choice = input(user, "Which manufacturer do you wish to use for this limb?") as null|anything in chargen_robolimbs
+							var/tmp_species = species ? species : "Human"
+							var/list/usable_manufacturers = list()
+							for(var/company in chargen_robolimbs)
+								var/datum/robolimb/M = chargen_robolimbs[company]
+								if(tmp_species in M.species_cannot_use)
+									continue
+								usable_manufacturers[company] = M
+							if(!usable_manufacturers.len)
+								return
+							var/choice = input(user, "Which manufacturer do you wish to use for this limb?") as null|anything in usable_manufacturers
 							if(!choice)
 								return
 							rlimb_data[limb] = choice

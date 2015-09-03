@@ -897,6 +897,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(company)
 		model = company
 		var/datum/robolimb/R = all_robolimbs[company]
+		if(species && (species.name in R.species_cannot_use))
+			R = basic_robolimb
 		if(R)
 			force_icon = R.icon
 			name = "[R.company] [initial(name)]"
