@@ -12,7 +12,7 @@
 	secondary_langs = list("Sol Common")
 
 	spawn_flags = CAN_JOIN
-	appearance_flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 /datum/species/unathi
 	name = "Unathi"
@@ -45,7 +45,7 @@
 	heat_level_3 = 1100 //Default 1000
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
-	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34AF10"
 
@@ -103,7 +103,7 @@
 	primitive_form = "Farwa"
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
-	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
@@ -137,7 +137,7 @@
 	secondary_langs = list("Skrellian")
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
-	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
