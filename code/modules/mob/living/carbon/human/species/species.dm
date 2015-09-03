@@ -30,6 +30,7 @@
 	var/is_small
 	var/show_ssd = "fast asleep"
 	var/virus_immune
+	var/short_sighted
 
 	// Language/culture vars.
 	var/default_language = "Galactic Common" // Default language is used when 'say' is used without modifiers.
@@ -306,3 +307,6 @@
 // Called in life() when the mob has no client.
 /datum/species/proc/handle_npc(var/mob/living/carbon/human/H)
 	return
+
+/datum/species/proc/get_vision_flags(var/mob/living/carbon/human/H)
+	return vision_flags
