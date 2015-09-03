@@ -522,7 +522,14 @@ var/global/list/damage_icon_parts = list()
 	if(wear_id)
 		wear_id.screen_loc = ui_id	//TODO
 		if(w_uniform && w_uniform:displays_id)
-			overlays_standing[ID_LAYER]	= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "id")
+			var/image/standing
+			if(wear_id.icon_override)
+				standing = image("icon" = wear_id.icon_override, "icon_state" = "[icon_state]")
+			else if(wear_id.sprite_sheets && wear_id.sprite_sheets[species.get_bodytype()])
+				standing = image("icon" = wear_id.sprite_sheets[species.get_bodytype()], "icon_state" = "[icon_state]")
+			else
+				standing = image("icon" = 'icons/mob/mob.dmi', "icon_state" = "id")
+			overlays_standing[ID_LAYER] = standing
 		else
 			overlays_standing[ID_LAYER]	= null
 	else
@@ -687,8 +694,9 @@ var/global/list/damage_icon_parts = list()
 
 		if(istype(head,/obj/item/clothing/head))
 			var/obj/item/clothing/head/hat = head
-			if(hat.on && light_overlay_cache["[hat.light_overlay]"])
-				standing.overlays |= light_overlay_cache["[hat.light_overlay]"]
+			var/cache_key = "[hat.light_overlay]_[species.get_bodytype()]"
+			if(hat.on && light_overlay_cache[cache_key])
+				standing.overlays |= light_overlay_cache[cache_key]
 
 		overlays_standing[HEAD_LAYER] = standing
 
@@ -839,14 +847,32 @@ var/global/list/damage_icon_parts = list()
 		drop_r_hand()
 		drop_l_hand()
 		stop_pulling()	//TODO: should be handled elsewhere
-		overlays_standing[HANDCUFF_LAYER]	= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "handcuff1")
+
+		var/image/standing
+		if(handcuffed.icon_override)
+			standing = image("icon" = handcuffed.icon_override, "icon_state" = "handcuff1")
+		else if(handcuffed.sprite_sheets && handcuffed.sprite_sheets[species.get_bodytype()])
+			standing = image("icon" = handcuffed.sprite_sheets[species.get_bodytype()], "icon_state" = "handcuff1")
+		else
+			standing = image("icon" = 'icons/mob/mob.dmi', "icon_state" = "handcuff1")
+		overlays_standing[HANDCUFF_LAYER] = standing
+
 	else
 		overlays_standing[HANDCUFF_LAYER]	= null
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_legcuffed(var/update_icons=1)
 	if(legcuffed)
-		overlays_standing[LEGCUFF_LAYER]	= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "legcuff1")
+
+		var/image/standing
+		if(legcuffed.icon_override)
+			standing = image("icon" = legcuffed.icon_override, "icon_state" = "legcuff1")
+		else if(legcuffed.sprite_sheets && legcuffed.sprite_sheets[species.get_bodytype()])
+			standing = image("icon" = legcuffed.sprite_sheets[species.get_bodytype()], "icon_state" = "legcuff1")
+		else
+			standing = image("icon" = 'icons/mob/mob.dmi', "icon_state" = "legcuff1")
+		overlays_standing[LEGCUFF_LAYER] = standing
+
 		if(src.m_intent != "walk")
 			src.m_intent = "walk"
 			if(src.hud_used && src.hud_used.move_intent)
