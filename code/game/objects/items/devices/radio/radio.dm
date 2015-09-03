@@ -597,24 +597,33 @@
 	if(..())
 		return 1
 	if (href_list["mode"])
-		if(subspace_transmission != 1)
-			subspace_transmission = 1
-			usr << "Subspace Transmission is enabled"
-		else
-			subspace_transmission = 0
-			usr << "Subspace Transmission is disabled"
-		if(subspace_transmission == 0)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
-			channels = list()
-		else
-			recalculateChannels()
-		return 1
+		var/enable_subspace_transmission = text2num(href_list["mode"])
+		if(enable_subspace_transmission != subspace_transmission)
+			subspace_transmission = !subspace_transmission
+			if(subspace_transmission)
+				usr << "<span class='notice'>Subspace Transmission is enabled</span>"
+			else
+				usr << "<span class='notice'>Subspace Transmission is disabled</span>"
+
+			if(subspace_transmission == 0)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
+				channels = list()
+			else
+				recalculateChannels()
+		. = 1
 	if (href_list["shutup"]) // Toggle loudspeaker mode, AKA everyone around you hearing your radio.
-		shut_up = !shut_up
-		if(shut_up)
-			canhear_range = 0
-		else
-			canhear_range = 3
-		return 1
+		var/do_shut_up = text2num(href_list["shutup"])
+		if(do_shut_up != shut_up)
+			shut_up = !shut_up
+			if(shut_up)
+				canhear_range = 0
+				usr << "<span class='notice'>Loadspeaker disabled.</span>"
+			else
+				canhear_range = 3
+				usr << "<span class='notice'>Loadspeaker enabled.</span>"
+		. = 1
+
+	if(.)
+		interact(usr)
 
 /obj/item/device/radio/borg/interact(mob/user as mob)
 	if(!on)
@@ -629,8 +638,8 @@
 				[format_frequency(frequency)]
 				<A href='byond://?src=\ref[src];freq=2'>+</A>
 				<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
-				<A href='byond://?src=\ref[src];mode=1'>Toggle Broadcast Mode</A><BR>
-				Loudspeaker: [shut_up ? "<A href='byond://?src=\ref[src];shutup=0'>Disengaged</A>" : "<A href='byond://?src=\ref[src];shutup=1'>Engaged</A>"]<BR>
+				Broadcasting: [subspace_transmission ? "<A href='byond://?src=\ref[src];mode=0'>Disable</A>" : "<A href='byond://?src=\ref[src];mode=1'>Enable</A>"]<BR>
+				Loudspeaker: [shut_up ? "<A href='byond://?src=\ref[src];shutup=0'>Enable</A>" : "<A href='byond://?src=\ref[src];shutup=1'>Disable</A>"]<BR>
 				"}
 
 	if(subspace_transmission)//Don't even bother if subspace isn't turned on
