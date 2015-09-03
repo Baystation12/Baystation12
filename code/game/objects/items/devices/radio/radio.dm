@@ -1,3 +1,25 @@
+// Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
+var/global/list/default_internal_channels = list(
+	num2text(PUB_FREQ) = list(),
+	num2text(AI_FREQ)  = list(access_synth),
+	num2text(ERT_FREQ) = list(access_cent_specops),
+	num2text(COMM_FREQ)= list(access_heads),
+	num2text(ENG_FREQ) = list(access_engine_equip, access_atmospherics),
+	num2text(MED_FREQ) = list(access_medical_equip),
+	num2text(MED_I_FREQ)=list(access_medical_equip),
+	num2text(SEC_FREQ) = list(access_security),
+	num2text(SEC_I_FREQ)=list(access_security),
+	num2text(SCI_FREQ) = list(access_tox,access_robotics,access_xenobiology),
+	num2text(SUP_FREQ) = list(access_cargo),
+	num2text(SRV_FREQ) = list(access_janitor, access_hydroponics)
+)
+
+var/global/list/default_medbay_channels = list(
+	num2text(PUB_FREQ) = list(),
+	num2text(MED_FREQ) = list(access_medical_equip),
+	num2text(MED_I_FREQ) = list(access_medical_equip)
+)
+
 /obj/item/device/radio
 	icon = 'icons/obj/radio.dmi'
 	name = "station bounced radio"
@@ -15,10 +37,9 @@
 	var/b_stat = 0
 	var/broadcasting = 0
 	var/listening = 1
-	var/list/channels = list() //see communications.dm for full list. First channes is a "default" for :h
+	var/list/channels = list() //see communications.dm for full list. First channel is a "default" for :h
 	var/subspace_transmission = 0
 	var/syndie = 0//Holder to see if it's a syndicate encrypted radio
-//			"Example" = FREQ_LISTENING|FREQ_BROADCASTING
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throw_speed = 2
@@ -27,7 +48,7 @@
 
 	matter = list("glass" = 25,DEFAULT_WALL_MATERIAL = 75)
 	var/const/FREQ_LISTENING = 1
-
+	var/list/internal_channels
 
 /obj/item/device/radio
 	var/datum/radio_frequency/radio_connection
@@ -41,6 +62,7 @@
 /obj/item/device/radio/New()
 	..()
 	wires = new(src)
+	internal_channels = default_internal_channels.Copy()
 
 /obj/item/device/radio/Destroy()
 	qdel(wires)
@@ -96,10 +118,33 @@
 	return
 
 /obj/item/device/radio/proc/list_channels(var/mob/user)
+	return list_internal_channels(user)
+
+/obj/item/device/radio/proc/list_secure_channels(var/mob/user)
 	var/dat = ""
 	for (var/ch_name in channels)
 		dat+=text_sec_channel(ch_name, channels[ch_name])
 	return dat
+
+/obj/item/device/radio/proc/list_internal_channels(var/mob/user)
+	var/dat = ""
+	for (var/internal_chan in internal_channels)
+		if(has_channel_access(user, internal_chan))
+			dat+="<A href='byond://?src=\ref[src];spec_freq=[internal_chan]'>[get_frequency_name(text2num(internal_chan))]</A><br>"
+
+	if(dat)
+		dat = "<br><b>Internal Channels</b><br>" + dat
+	return dat
+
+/obj/item/device/radio/proc/has_channel_access(var/mob/user, var/freq)
+	if(!user)
+		return 0
+
+	if(!(freq in internal_channels))
+		return 0
+
+	var/obj/item/weapon/card/id/I = user.GetIdCard()
+	return has_access(list(), internal_channels[freq], I ? I.GetAccess() : list())
 
 /obj/item/device/radio/proc/text_wires()
 	if (b_stat)
@@ -154,6 +199,11 @@
 				channels[chan_name] &= ~FREQ_LISTENING
 			else
 				channels[chan_name] |= FREQ_LISTENING
+		. = 1
+	else if(href_list["spec_freq"])
+		var freq = href_list["spec_freq"]
+		if(has_channel_access(usr, freq))
+			set_frequency(text2num(freq))
 		. = 1
 	if(href_list["nowindow"]) // here for pAIs, maybe others will want it, idk
 		return 1
@@ -513,6 +563,9 @@
 	myborg = null
 	return ..()
 
+/obj/item/device/radio/borg/list_channels(var/mob/user)
+	return list_secure_channels(user)
+
 /obj/item/device/radio/borg/talk_into()
 	. = ..()
 	if (isrobot(src.loc))
@@ -662,3 +715,17 @@
 
 /obj/item/device/radio/off
 	listening = 0
+
+/obj/item/device/radio/phone
+	broadcasting = 0
+	icon = 'icons/obj/items.dmi'
+	icon_state = "red_phone"
+	listening = 1
+	name = "phone"
+
+/obj/item/device/radio/phone/medbay
+	frequency = MED_I_FREQ
+
+/obj/item/device/radio/phone/medbay/New()
+	..()
+	internal_channels = default_medbay_channels.Copy()

@@ -19,6 +19,7 @@
 
 /obj/item/device/radio/headset/New()
 	..()
+	internal_channels.Cut()
 	if(ks1type)
 		keyslot1 = new ks1type(src)
 	if(ks2type)
@@ -32,11 +33,14 @@
 	keyslot2 = null
 	..()
 
+/obj/item/device/radio/headset/list_channels(var/mob/user)
+	return list_secure_channels()
+
 /obj/item/device/radio/headset/examine(mob/user)
 	if(!(..(user, 1) && radio_desc))
 		return
 
-	user << "The following channels are built-in:"
+	user << "The following channels are available:"
 	user << radio_desc
 
 /obj/item/device/radio/headset/handle_message_mode(mob/living/M as mob, message, channel)

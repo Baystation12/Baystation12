@@ -2,4 +2,4 @@ author: PsiOmegaDelta
 delete-after: True
 changes: 
   - rscdel: "Manual radio frequency changes can no longer go outside the standard frequency span."
-  - rscadd: "Users with sufficient access can instead select pre-defined channels outside this span, such as department channels."
+  - rscadd: "Users with sufficient access can instead select pre-defined channels outside this span, such as department channels, when using intercoms."
