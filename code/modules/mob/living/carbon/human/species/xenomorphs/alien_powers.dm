@@ -220,3 +220,45 @@
 		if("resin nest")
 			new /obj/structure/bed/nest(loc)
 	return
+
+mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in oview())
+	set name = "Infest (500)"
+	set desc = "Link a victim to the hivemind."
+	set category = "Abilities"
+
+	if(!M.Adjacent(src))
+		src << "<span class='warning'>They are too far away.</span>"
+		return
+
+	if(!M.mind)
+		src << "<span class='warning'>This mindless flesh adds nothing to the hive.</span>"
+		return
+
+	if(M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]))
+		src << "<span class='warning'>They are already part of the hive.</span>"
+		return
+
+	var/obj/item/organ/affecting = M.get_organ("chest")
+	if(!affecting || (affecting.status & ORGAN_ROBOT))
+		src << "<span class='warning'>This form is not compatible with our physiology.</span>"
+		return
+
+	src.visible_message("<span class='danger'>\The [src] crouches over \the [M], extending a hideous protuberance from its head!</span>")
+
+	if(!do_after(src, 150))
+		return
+
+	if(!check_alien_ability(500,1,"egg sac"))
+		return
+
+	if(!M.Adjacent(src))
+		src << "<span class='warning'>They are too far away.</span>"
+		return
+
+	if(!M || M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]) || !affecting || (affecting.status & ORGAN_ROBOT))
+		return
+
+	src.visible_message("<span class='danger'>\The [src] regurgitates something into \the [M]'s torso!</span>")
+	M << "<span class='danger'>A hideous lump of alien mass strains your ribcage as it settles within!</span>"
+	var/obj/item/organ/xenos/hivenode/node = new(affecting)
+	node.replaced(M,affecting)

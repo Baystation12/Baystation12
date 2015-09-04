@@ -38,15 +38,34 @@
 	icon_state = "xgibtorso"
 	organ_tag = "acid gland"
 
-/obj/item/organ/xenos/hivenode
-	name = "hive node"
-	parent_organ = "chest"
-	icon_state = "xgibmid2"
-	organ_tag = "hive node"
-
 /obj/item/organ/xenos/resinspinner
 	name = "resin spinner"
 	parent_organ = "head"
 	icon_state = "xgibmid2"
 	organ_tag = "resin spinner"
 
+/obj/item/organ/xenos/hivenode
+	name = "hive node"
+	parent_organ = "chest"
+	icon_state = "xgibmid2"
+	organ_tag = "hive node"
+
+/obj/item/organ/xenos/hivenode/removed(var/mob/living/user)
+	if(owner && ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		H << "<span class='alium'>You feel your connection to the hivemind fray and fade away...</span>"
+		H.remove_language("Hivemind")
+		if(H.mind && H.species.get_bodytype() != "Xenomorph")
+			xenomorphs.remove_antagonist(H.mind)
+	..(user)
+
+/obj/item/organ/xenos/hivenode/replaced(var/mob/living/carbon/human/target,var/obj/item/organ/external/affected)
+	..(target, affected)
+	if(owner && ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		H.add_language("Hivemind")
+		if(H.mind)
+			H << "<span class='alium'>You feel a sense of pressure as a vast intelligence meshes with your thoughts...</span>"
+			if(H.species.get_bodytype() != "Xenomorph" && xenomorphs.add_antagonist_mind(H.mind,1))
+				H << "Your will is ripped away as your humanity merges with the xenomorph hive. You are now a thrall to the queen and her brood. \
+				Obey their instructions without question. Serve the hive.</span>"

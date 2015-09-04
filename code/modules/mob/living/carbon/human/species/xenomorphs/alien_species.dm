@@ -15,8 +15,8 @@
 
 	eyes = "blank_eyes"
 
-	brute_mod = 0.5 // Hardened carapace.
-	burn_mod = 2    // Weak to fire.
+	brute_mod = 0.25 // Hardened carapace.
+	burn_mod = 1.1    // Weak to fire.
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
@@ -270,7 +270,8 @@
 		/mob/living/carbon/human/proc/transfer_plasma,
 		/mob/living/carbon/human/proc/corrosive_acid,
 		/mob/living/carbon/human/proc/neurotoxin,
-		/mob/living/carbon/human/proc/resin
+		/mob/living/carbon/human/proc/resin,
+		/mob/living/carbon/human/proc/xeno_infest
 		)
 
 /datum/species/xenos/queen/handle_login_special(var/mob/living/carbon/human/H)
