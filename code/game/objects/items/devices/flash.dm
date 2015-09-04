@@ -66,11 +66,12 @@
 	if(iscarbon(M))
 		var/safety = M:eyecheck()
 		if(safety <= 0)
-			M.Weaken(10)
-			flick("e_flash", M.flash)
 
+			var/flash_strength = 10
 			if(ishuman(M) && ishuman(user) && M.stat!=DEAD)
-				if(user.mind && user.mind in revs.current_antagonists)
+				var/mob/living/carbon/human/H = M
+				flash_strength *= H.species.flash_mod
+				if(user.mind && user.mind in revs.head_revolutionaries)
 					var/revsafe = 0
 					for(var/obj/item/weapon/implant/loyalty/L in M)
 						if(L && L.implanted)
@@ -86,6 +87,11 @@
 						user << "<span class='warning'>Something seems to be blocking the flash!</span>"
 					else
 						user << "<span class='warning'>This mind seems resistant to the flash!</span>"
+
+			if(flash_strength > 0)
+				M.Weaken(flash_strength)
+				flick("e_flash", M.flash)
+
 		else
 			flashfail = 1
 

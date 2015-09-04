@@ -75,17 +75,20 @@
 		if (istype(O, /mob/living/carbon/alien))//So aliens don't get flashed (they have no external eyes)/N
 			continue
 
-		O.Weaken(strength)
+		var/flash_time = strength
 		if (istype(O, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = O
+			flash_time *= H.species.flash_mod
 			var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
-			if (E && (E.damage > E.min_bruised_damage && prob(E.damage + 50)))
+			if(!E)
+				return
+			if(E.is_bruised() && prob(E.damage + 50))
 				flick("e_flash", O:flash)
 				E.damage += rand(1, 5)
 		else
 			if(!O.blinded)
 				flick("flash", O:flash)
-
+		O.Weaken(flash_time)
 
 /obj/machinery/flasher/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
