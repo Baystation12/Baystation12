@@ -8,4 +8,4 @@
 	uplink_welcome = "AntagCorp Portable Teleportation Relay:"
 	end_on_antag_death = 1
 	antag_scaling_coeff = 10
-	antag_tag = MODE_TRAITOR
+	antag_tags = list(MODE_TRAITOR)

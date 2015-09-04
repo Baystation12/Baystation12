@@ -7,7 +7,11 @@ var/datum/antagonist/xenos/borer/borers
 	mob_path = /mob/living/simple_animal/borer
 	bantype = "Borer"
 	welcome_text = "Use your Infest power to crawl into the ear of a host and fuse with their brain. You can only take control temporarily, and at risk of hurting your host, so be clever and careful; your host is encouraged to help you however they can. Talk to your fellow borers with :x."
-	var/list/hosts = list()
+	antag_indicator = "brainworm"
+
+	faction_role_text = "Borer Thrall"
+	faction_descriptor = "Unity"
+	faction_welcome = "You are now a thrall to a cortical borer. Please listen to what they have to say; they're in your head."
 
 /datum/antagonist/xenos/borer/New()
 	..(1)
@@ -36,15 +40,6 @@ var/datum/antagonist/xenos/borer/borers
 		if(H.stat != 2 && !(H.species.flags & IS_SYNTHETIC) && !H.has_brain_worms())
 			possible_hosts |= H
 	return possible_hosts
-
-/datum/antagonist/xenos/borer/place_all_mobs()
-	var/list/possible_hosts = get_hosts()
-	for(var/datum/mind/player in current_antagonists)
-		if(!possible_hosts.len)
-			return
-		var/mob/host = pick(possible_hosts)
-		possible_hosts -= host
-		place_in_host(player, host)
 
 /datum/antagonist/xenos/borer/place_mob(var/mob/living/mob)
 	var/list/possible_hosts = get_hosts()

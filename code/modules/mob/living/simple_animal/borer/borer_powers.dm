@@ -109,15 +109,9 @@
 
 		//Update their traitor status.
 		if(host.mind)
-			if(!host.mind.special_role)
-				borers.hosts |= host.mind
-				host.mind.special_role = "Borer Thrall"
-			host << "<span class='danger'>A creeping lassitude surrounds you. Your mind is being invaded by an alien intelligence and that's just fine.</span>"
-			host << "<span class = 'danger'>You are now a thrall to a cortical borer. Please listen to what they have to say; they're in your head.</span>"
-			show_generic_antag_text(host.mind)
+			borers.add_antagonist_mind(host.mind, 1, borers.faction_role_text, borers.faction_welcome)
 
 		if(istype(M,/mob/living/carbon/human))
-
 			var/mob/living/carbon/human/H = M
 			var/obj/item/organ/I = H.internal_organs_by_name["brain"]
 			if(!I) // No brain organ, so the borer moves in and replaces it permanently.

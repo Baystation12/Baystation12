@@ -5,6 +5,7 @@ var/datum/antagonist/mercenary/mercs
 	role_type = BE_OPERATIVE
 	role_text = "Mercenary"
 	bantype = "operative"
+	antag_indicator = "synd"
 	role_text_plural = "Mercenaries"
 	landmark_id = "Syndicate-Spawn"
 	leader_welcome_text = "You are the leader of the mercenary strikeforce; hail to the chief. Use :t to speak to your underlings."
@@ -43,14 +44,6 @@ var/datum/antagonist/mercenary/mercs
 	create_id("Mercenary", player)
 	create_radio(SYND_FREQ, player)
 	return 1
-
-/datum/antagonist/mercenary/place_all_mobs()
-	var/spawnpos = 1
-	for(var/datum/mind/player in current_antagonists)
-		player.current.loc = starting_locations[spawnpos]
-		spawnpos++
-		if(spawnpos > starting_locations.len)
-			spawnpos = 1
 
 /datum/antagonist/mercenary/create_nuke()
 	..()

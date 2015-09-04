@@ -11,6 +11,7 @@
 	var/loss_feedback_tag
 	var/max_antags = 3
 	var/max_antags_round = 5
+	var/min_antags_round = 1
 
 	// Random spawn values.
 	var/spawn_announcement
@@ -32,18 +33,26 @@
 	var/spawned_nuke
 	var/nuke_spawn_loc
 
-	var/list/valid_species = list("Unathi","Tajara","Skrell","Human") // Used for setting appearance.
+	var/list/valid_species =       list("Unathi","Tajara","Skrell","Human") // Used for setting appearance.
 	var/list/current_antagonists = list()
 	var/list/pending_antagonists = list()
-	var/list/starting_locations = list()
-	var/list/global_objectives = list()
-	var/list/restricted_jobs = list()
-	var/list/protected_jobs = list()
-	var/list/candidates = list()
+	var/list/starting_locations =  list()
+	var/list/global_objectives =   list()
+	var/list/restricted_jobs =     list()
+	var/list/protected_jobs =      list()
+	var/list/candidates =          list()
+	var/list/faction_members =     list()
 
 	var/default_access = list()
 	var/id_type = /obj/item/weapon/card/id
 	var/announced
+
+	var/faction_role_text  // Role for sub-antags. Mandatory for faction role.
+	var/faction_descriptor // Description of the cause. Mandatory for faction role.
+	var/faction_verb       // Verb added when becoming a member of the faction, if any.
+	var/faction_welcome    // Message shown to faction members.
+	var/faction_invisible  // Can members of the faction identify other antagonists?
+	var/faction_indicator
 
 /datum/antagonist/New()
 	..()
@@ -59,7 +68,7 @@
 
 /datum/antagonist/proc/get_candidates(var/ghosts_only)
 	candidates = list() // Clear.
-	
+
 	// Prune restricted status. Broke it up for readability.
 	// Note that this is done before jobs are handed out.
 	for(var/datum/mind/player in ticker.mode.get_players_for_role(role_type, id))
@@ -132,14 +141,14 @@
 
 	pending_antagonists |= player
 	log_debug("[player.key] has been selected for [role_text] by lottery.")
-	
+
 	//Ensure that antags with ANTAG_OVERRIDE_JOB do not occupy job slots.
 	if(flags & ANTAG_OVERRIDE_JOB)
 		player.assigned_role = role_text
-	
+
 	//Ensure that a player cannot be drafted for multiple antag roles, taking up slots for antag roles that they will not fill.
 	player.special_role = role_text
-	
+
 	return 1
 
 //Spawns all pending_antagonists. This is done separately from attempt_spawn in case the game mode setup fails.

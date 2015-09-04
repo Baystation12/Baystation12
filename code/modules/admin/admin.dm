@@ -1160,8 +1160,10 @@ proc/admin_notice(var/message, var/rights)
 
 	out += "<hr>"
 
-	if(ticker.mode.antag_tag)
-		out += "<b>Core antag id:</b>  <a href='?src=\ref[ticker.mode];debug_antag=[ticker.mode.antag_tag]'>[ticker.mode.antag_tag]</a>.</br>"
+	if(ticker.mode.antag_tags && ticker.mode.antag_tags.len)
+		out += "<b>Core antag templates:</b></br>"
+		for(var/antag_tag in ticker.mode.antag_tags)
+			out += "<a href='?src=\ref[ticker.mode];debug_antag=[antag_tag]'>[antag_tag]</a>.</br>"
 
 	if(ticker.mode.round_autoantag)
 		out += "<b>Autotraitor <a href='?src=\ref[ticker.mode];toggle=autotraitor'>enabled</a></b> ([ticker.mode.get_antag_prob()]% spawn chance)"
@@ -1176,7 +1178,7 @@ proc/admin_notice(var/message, var/rights)
 		var/playercount = ticker.mode.num_players()
 		for(var/datum/antagonist/antag in ticker.mode.antag_templates)
 			var/cur_max_antags
-			if(ticker.mode.antag_tag && antag.id == ticker.mode.antag_tag)
+			if(ticker.mode.antag_tags && (antag.id in ticker.mode.antag_tags))
 				cur_max_antags = antag.max_antags_round
 			else
 				cur_max_antags = antag.max_antags
