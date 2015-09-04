@@ -982,6 +982,12 @@
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)
 		mind.changeling.regenerate()
+		if(hud_used)
+			ling_chem_display.invisibility = 0
+			ling_chem_display.maptext = "<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font color='#dd66dd'>[round(mind.changeling.chem_charges)]</font></div>"
+	else
+		if(mind && hud_used)
+			ling_chem_display.invisibility = 101
 
 /mob/living/carbon/human/handle_shock()
 	..()
