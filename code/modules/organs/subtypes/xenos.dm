@@ -68,4 +68,4 @@
 			H << "<span class='alium'>You feel a sense of pressure as a vast intelligence meshes with your thoughts...</span>"
 			if(H.species.get_bodytype() != "Xenomorph" && xenomorphs.add_antagonist_mind(H.mind,1))
 				H << "Your will is ripped away as your humanity merges with the xenomorph hive. You are now a thrall to the queen and her brood. \
-				Obey their instructions without question. Serve the hive.</span>"
+				Obey their instructions without question. Serve the hive."
