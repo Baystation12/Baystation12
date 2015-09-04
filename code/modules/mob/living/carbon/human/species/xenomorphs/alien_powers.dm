@@ -88,13 +88,13 @@
 		verbs -= /mob/living/carbon/human/proc/lay_egg
 		return
 
-	if(locate(/obj/effect/alien/egg) in get_turf(src))
+	if(locate(/obj/structure/alien/egg) in get_turf(src))
 		src << "There's already an egg here."
 		return
 
 	if(check_alien_ability(75,1,"egg sac"))
 		visible_message("<span class='alium'><B>[src] has laid an egg!</B></span>")
-		new /obj/effect/alien/egg(loc)
+		new /obj/structure/alien/egg(loc)
 
 	return
 
@@ -121,7 +121,7 @@
 
 	if(check_alien_ability(50,1,"resin spinner"))
 		visible_message("<span class='alium'><B>[src] has planted some alien weeds!</B></span>")
-		new /obj/effect/alien/weeds/node(loc)
+		new /obj/structure/alien/node(loc)
 	return
 
 /mob/living/carbon/human/proc/corrosive_acid(O as obj|turf in oview(1)) //If they right click to corrode, an error will flash if its an invalid target./N
@@ -154,7 +154,7 @@
 		return
 
 	if(check_alien_ability(200,0,"acid gland"))
-		new /obj/effect/alien/acid(get_turf(O), O)
+		new /obj/effect/acid(get_turf(O), O)
 		visible_message("<span class='alium'><B>[src] vomits globs of vile stuff all over [O]. It begins to sizzle and melt under the bubbling mess of acid!</B></span>")
 
 	return
@@ -199,7 +199,7 @@
 
 /mob/living/carbon/human/proc/resin() // -- TLE
 	set name = "Secrete Resin (75)"
-	set desc = "Secrete tough malleable resin."
+	set desc = "Secrete tough, malleable resin."
 	set category = "Abilities"
 
 	var/choice = input("Choose what you wish to shape.","Resin building") as null|anything in list("resin door","resin wall","resin membrane","resin nest") //would do it through typesof but then the player choice would have the type path and we don't want the internal workings to be exposed ICly - Urist
@@ -214,9 +214,9 @@
 		if("resin door")
 			new /obj/structure/simple_door/resin(loc)
 		if("resin wall")
-			new /obj/effect/alien/resin/wall(loc)
+			new /obj/structure/alien/resin/wall(loc)
 		if("resin membrane")
-			new /obj/effect/alien/resin/membrane(loc)
+			new /obj/structure/alien/resin/membrane(loc)
 		if("resin nest")
 			new /obj/structure/bed/nest(loc)
 	return
