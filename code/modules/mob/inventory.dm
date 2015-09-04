@@ -221,17 +221,20 @@ var/list/slot_equipment_priority = list( \
 	if(!I) //If there's nothing to drop, the drop is automatically successful.
 		return 1
 
-	var/slot
-	for(var/s in slot_back to slot_tie) //kind of worries me
-		if(get_equipped_item(s) == I)
-			slot = s
-			break
-
+	var/slot = get_inventory_slot(I)
 	if(slot && !I.mob_can_unequip(src, slot))
 		return 0
 
 	drop_from_inventory(I)
 	return 1
+
+/mob/proc/get_inventory_slot(obj/item/I)
+	var/slot
+	for(var/s in slot_back to slot_tie) //kind of worries me
+		if(get_equipped_item(s) == I)
+			slot = s
+			break
+	return slot
 
 //Attemps to remove an object on a mob.
 /mob/proc/remove_from_mob(var/obj/O)
