@@ -139,18 +139,18 @@ var/global/list/additional_antag_types = list()
 				shuttle_delay = choice
 			if("antag_scaling")
 				choice = input("Enter a new antagonist cap scaling coefficient.") as num
-				if(!choice || choice < 0 || choice > 100)
+				if(isnull(choice) || choice < 0 || choice > 100)
 					return
 				antag_scaling_coeff = choice
 			if("event_modifier_moderate")
 				choice = input("Enter a new moderate event time modifier.") as num
-				if(!choice || choice < 0 || choice > 100)
+				if(isnull(choice) || choice < 0 || choice > 100)
 					return
 				event_delay_mod_moderate = choice
 				refresh_event_modifiers()
 			if("event_modifier_severe")
 				choice = input("Enter a new moderate event time modifier.") as num
-				if(!choice || choice < 0 || choice > 100)
+				if(isnull(choice) || choice < 0 || choice > 100)
 					return
 				event_delay_mod_major = choice
 				refresh_event_modifiers()

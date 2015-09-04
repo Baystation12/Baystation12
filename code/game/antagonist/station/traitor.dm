@@ -2,11 +2,8 @@ var/datum/antagonist/traitor/traitors
 
 /datum/antagonist/traitor
 	id = MODE_TRAITOR
-	restricted_jobs = list("Cyborg")//They are part of the AI if he is traitor so are they, they use to get double chances
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Head of Security", "Captain")//AI", Currently out of the list as malf does not work for shit
+	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Head of Security", "Captain")
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	max_antags = 200 // No upper limit.
-	max_antags_round = 200
 
 /datum/antagonist/traitor/New()
 	..()
