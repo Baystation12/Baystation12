@@ -1294,6 +1294,7 @@
 #include "code\modules\mob\living\carbon\human\species\outsider\shadow.dm"
 #include "code\modules\mob\living\carbon\human\species\outsider\vox.dm"
 #include "code\modules\mob\living\carbon\human\species\station\golem.dm"
+#include "code\modules\mob\living\carbon\human\species\station\human_subspecies.dm"
 #include "code\modules\mob\living\carbon\human\species\station\monkey.dm"
 #include "code\modules\mob\living\carbon\human\species\station\slime.dm"
 #include "code\modules\mob\living\carbon\human\species\station\station.dm"
