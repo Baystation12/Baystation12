@@ -27,20 +27,23 @@ var/datum/antagonist/xenos/borer/borers
 	player.objectives += new /datum/objective/borer_reproduce()
 	player.objectives += new /datum/objective/escape()
 
-/datum/antagonist/xenos/borer/proc/place_in_host(var/mob/living/simple_animal/borer/borer, var/mob/living/carbon/human/host)
-	borer.host = host
-	borer.host_brain.name = host.name
-	borer.host_brain.real_name = host.real_name
-	var/obj/item/organ/external/head = host.get_organ("head")
-	if(head) head.implants += borer
-
-/datum/antagonist/xenos/borer/proc/get_hosts()
-	var/list/possible_hosts = list()
-	for(var/mob/living/carbon/human/H in mob_list)
-		if(H.stat != 2 && !(H.species.flags & IS_SYNTHETIC) && !H.has_brain_worms())
-			possible_hosts |= H
-	return possible_hosts
-
 /datum/antagonist/xenos/borer/place_mob(var/mob/living/mob)
-	var/list/possible_hosts = get_hosts()
-	if(possible_hosts.len) place_in_host(mob, pick(possible_hosts))
+	var/mob/living/simple_animal/borer/borer = mob
+	if(istype(borer))
+		var/mob/living/carbon/human/host
+		for(var/mob/living/carbon/human/H in mob_list)
+			if(H.stat != 2 && !(H.species.flags & IS_SYNTHETIC) && !H.has_brain_worms())
+				host = H
+				break
+		if(istype(host))
+			var/obj/item/organ/external/head = host.get_organ("head")
+			if(head)
+				borer.host = host
+				head.implants += borer
+				borer.loc = head
+				if(!borer.host_brain)
+					borer.host_brain = new(borer)
+				borer.host_brain.name = host.name
+				borer.host_brain.real_name = host.real_name
+				return
+	..() // Place them at a vent if they can't get a host.

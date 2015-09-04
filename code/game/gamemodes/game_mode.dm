@@ -229,7 +229,7 @@ var/global/list/additional_antag_types = list()
 	var/enemy_count = 0
 	if(antag_tags && antag_tags.len)
 		for(var/antag_tag in antag_tags)
-			var/datum/antagonist/antag = all_antag_types
+			var/datum/antagonist/antag = all_antag_types[antag_tag]
 			if(!antag)
 				continue
 			var/list/potential = list()

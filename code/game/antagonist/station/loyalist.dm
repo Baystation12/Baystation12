@@ -14,8 +14,6 @@ var/datum/antagonist/loyalists/loyalists
 	victory_feedback_tag = "win - rev heads killed"
 	loss_feedback_tag = "loss - heads killed"
 	flags = 0
-	max_antags =       1
-	max_antags_round = 1
 
 	// Inround loyalists.
 	faction_role_text = "Loyalist"
@@ -24,6 +22,7 @@ var/datum/antagonist/loyalists/loyalists
 	faction_welcome = "Preserve NanoTrasen's interests against the traitorous recidivists amongst the crew. Protect the heads of staff with your life."
 	faction_indicator = "loyal"
 	faction_invisible = 1
+	restricted_jobs = list("AI", "Cyborg")
 
 /datum/antagonist/loyalists/New()
 	..()

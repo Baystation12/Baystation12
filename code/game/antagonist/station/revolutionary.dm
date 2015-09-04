@@ -14,8 +14,6 @@ var/datum/antagonist/revolutionary/revs
 	victory_feedback_tag = "win - heads killed"
 	loss_feedback_tag = "loss - rev heads killed"
 	flags = ANTAG_SUSPICIOUS | ANTAG_VOTABLE
-	max_antags =       1
-	max_antags_round = 1
 
 	//Inround revs.
 	faction_role_text = "Revolutionary"

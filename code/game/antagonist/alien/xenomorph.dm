@@ -16,7 +16,7 @@ var/datum/antagonist/xenos/xenomorphs
 	spawn_announcement = "Unidentified lifesigns detected coming aboard the station. Secure any exterior access, including ducting and ventilation."
 	spawn_announcement_title = "Lifesign Alert"
 	spawn_announcement_sound = 'sound/AI/aliens.ogg'
-	spawn_announcement_delay = 400
+	spawn_announcement_delay = 5000
 
 /datum/antagonist/xenos/New(var/no_reference)
 	..()
