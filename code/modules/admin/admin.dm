@@ -1366,7 +1366,7 @@ proc/admin_notice(var/message, var/rights)
 /datum/admins/proc/force_antag_latespawn()
 	set category = "Admin"
 	set name = "Force Template Spawn"
-	set desc = "Should fix any mob sprite update errors."
+	set desc = "Force an antagonist template to spawn."
 
 	if (!istype(src,/datum/admins))
 		src = usr.client.holder
@@ -1383,13 +1383,13 @@ proc/admin_notice(var/message, var/rights)
 		return
 
 	var/datum/antagonist/antag = all_antag_types[antag_type]
-	log_admin("[key_name(usr)] attempting to force latespawn with template [antag.id].")
+	message_admins("[key_name(usr)] attempting to force latespawn with template [antag.id].")
 	antag.attempt_late_spawn()
 
 /datum/admins/proc/force_mode_latespawn()
 	set category = "Admin"
 	set name = "Force Mode Spawn"
-	set desc = "Should fix any mob sprite update errors."
+	set desc = "Force autotraitor to proc."
 
 	if (!istype(src,/datum/admins))
 		src = usr.client.holder
@@ -1401,6 +1401,6 @@ proc/admin_notice(var/message, var/rights)
 		usr << "Mode has not started."
 		return
 
-	log_admin("[key_name(usr)] attempting to force mode latespawn.")
+	message_admins("[key_name(usr)] attempting to force mode latespawn.")
 	ticker.mode.next_spawn = 0
 	ticker.mode.try_latespawn()

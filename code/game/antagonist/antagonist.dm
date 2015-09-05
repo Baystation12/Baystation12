@@ -108,14 +108,15 @@
 
 /datum/antagonist/proc/attempt_late_spawn(var/datum/mind/player)
 	if(!can_late_spawn())
-		return
+		return 0
 	if(!istype(player)) player = get_candidates(is_latejoin_template())
 	player.current << "<span class='danger'><i>You have been selected this round as an antagonist!</i></span>"
+	message_admins("AUTO[uppertext(ticker.mode.name)]: Selected [player] as a [role_text].")
 	if(istype(player.current, /mob/dead))
 		create_default(player.current)
 	else
 		add_antagonist(player,0,0,0,1,1)
-	return
+	return 1
 
 /datum/antagonist/proc/build_candidate_list(var/ghosts_only)
 	// Get the raw list of potential players.
