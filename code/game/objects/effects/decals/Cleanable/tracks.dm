@@ -29,6 +29,13 @@ var/global/list/image/fluidtrack_cache=list()
 		src.basecolor=_color
 		src.wet=_wet
 
+/obj/effect/decal/cleanable/blood/tracks/reveal_blood()
+	if(!fluorescent)
+		if(stack && stack.len)
+			for(var/datum/fluidtrack/track in stack)
+				track.basecolor = COLOR_LUMINOL
+		..()
+
 // Footprints, tire trails...
 /obj/effect/decal/cleanable/blood/tracks
 	amount = 0
