@@ -1362,3 +1362,45 @@ proc/admin_notice(var/message, var/rights)
 	tomob.ckey = frommob.ckey
 	qdel(frommob)
 	return 1
+
+/datum/admins/proc/force_antag_latespawn()
+	set category = "Admin"
+	set name = "Force Template Spawn"
+	set desc = "Should fix any mob sprite update errors."
+
+	if (!istype(src,/datum/admins))
+		src = usr.client.holder
+	if (!istype(src,/datum/admins))
+		usr << "Error: you are not an admin!"
+		return
+
+	if(!ticker || !ticker.mode)
+		usr << "Mode has not started."
+		return
+
+	var/antag_type = input("Choose a template.","Force Latespawn") as null|anything in all_antag_types
+	if(!antag_type || !all_antag_types[antag_type])
+		return
+
+	var/datum/antagonist/antag = all_antag_types[antag_type]
+	log_admin("[key_name(usr)] attempting to force latespawn with template [antag.id].")
+	antag.attempt_late_spawn()
+
+/datum/admins/proc/force_mode_latespawn()
+	set category = "Admin"
+	set name = "Force Mode Spawn"
+	set desc = "Should fix any mob sprite update errors."
+
+	if (!istype(src,/datum/admins))
+		src = usr.client.holder
+	if (!istype(src,/datum/admins))
+		usr << "Error: you are not an admin!"
+		return
+
+	if(!ticker || !ticker.mode)
+		usr << "Mode has not started."
+		return
+
+	log_admin("[key_name(usr)] attempting to force mode latespawn.")
+	ticker.mode.next_spawn = 0
+	ticker.mode.try_latespawn()
