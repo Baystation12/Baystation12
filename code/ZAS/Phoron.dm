@@ -121,12 +121,12 @@ obj/var/contaminated = 0
 		return
 
 	var/obj/item/organ/eyes/E = internal_organs_by_name["eyes"]
-	if(E)
-		if(prob(20)) src << "\red Your eyes burn!"
+	if(E && !(E.status & ORGAN_ROBOT))
+		if(prob(20)) src << "<span class='danger'>Your eyes burn!</span>"
 		E.damage += 2.5
 		eye_blurry = min(eye_blurry+1.5,50)
 		if (prob(max(0,E.damage - 15) + 1) &&!eye_blind)
-			src << "\red You are blinded!"
+			src << "<span class='danger'>You are blinded!</span>"
 			eye_blind += 20
 
 /mob/living/carbon/human/proc/pl_head_protected()

@@ -32,7 +32,7 @@
 
 /obj/machinery/power/supermatter
 	name = "Supermatter"
-	desc = "A strangely translucent and iridescent crystal. \red You get headaches just from looking at it."
+	desc = "A strangely translucent and iridescent crystal. You get headaches just from looking at it."
 	icon = 'icons/obj/engine.dmi'
 	icon_state = "darkmatter"
 	density = 1
@@ -126,7 +126,7 @@
 	integrity = round(100 - integrity * 100)
 	integrity = integrity < 0 ? 0 : integrity
 	var/alert_msg = " Integrity at [integrity]%"
-	
+
 	if(damage > emergency_point)
 		alert_msg = emergency_alert + alert_msg
 		lastwarning = world.timeofday - WARNING_DELAY * 4
@@ -149,7 +149,7 @@
 		else if(safe_warned && public_alert)
 			radio.autosay(alert_msg, "Supermatter Monitor")
 			public_alert = 0
-		
+
 
 /obj/machinery/power/supermatter/process()
 
@@ -237,9 +237,16 @@
 
 		env.merge(removed)
 
-	for(var/mob/living/carbon/human/l in view(src, min(7, round(sqrt(power/6))))) // If they can see it without mesons on.  Bad on them.
-		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
-			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
+	for(var/mob/living/carbon/human/l in view(src, min(7, round(sqrt(power/6)))))
+		// If they can see it without mesons on.  Bad on them.
+		if(l.glasses && istype(l.glasses, /obj/item/clothing/glasses/meson))
+			continue
+		// Where we're going, we don't need eyes.
+		// Prosthetic eyes will also protect against this business.
+		var/obj/item/organ/eyes = l.internal_organs_by_name["eyes"]
+		if(!istype(eyes) || (eyes.status & ORGAN_ROBOT))
+			continue
+		l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
 
 	//adjusted range so that a power of 170 (pretty high) results in 9 tiles, roughly the distance from the core to the engine monitoring room.
 	//note that the rads given at the maximum range is a constant 0.2 - as power increases the maximum range merely increases.

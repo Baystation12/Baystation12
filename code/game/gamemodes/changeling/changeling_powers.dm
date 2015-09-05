@@ -739,7 +739,7 @@ var/list/datum/dna/hivemind_bank = list()
 
 	var/mob/living/carbon/T = changeling_sting(20,/mob/proc/changeling_blind_sting)
 	if(!T)	return 0
-	T << "<span class='danger'>Your eyes burn horrificly!</span>"
+	T << "<span class='danger'>Your eyes burn horrifically!</span>"
 	T.disabilities |= NEARSIGHTED
 	spawn(300)	T.disabilities &= ~NEARSIGHTED
 	T.eye_blind = 10
