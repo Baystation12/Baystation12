@@ -15,6 +15,11 @@ var/datum/antagonist/loyalists/loyalists
 	loss_feedback_tag = "loss - heads killed"
 	flags = 0
 
+	hard_cap = 2
+	hard_cap_round = 4
+	initial_spawn_req = 2
+	initial_spawn_target = 4
+
 	// Inround loyalists.
 	faction_role_text = "Loyalist"
 	faction_descriptor = "Company"

@@ -13,6 +13,9 @@ var/datum/antagonist/xenos/borer/borers
 	faction_descriptor = "Unity"
 	faction_welcome = "You are now a thrall to a cortical borer. Please listen to what they have to say; they're in your head."
 
+	initial_spawn_req = 3
+	initial_spawn_target = 5
+
 /datum/antagonist/xenos/borer/New()
 	..(1)
 	borers = src

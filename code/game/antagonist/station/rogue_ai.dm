@@ -11,8 +11,10 @@ var/datum/antagonist/rogue_ai/malf
 	victory_text = "The AI has taken control of all of the station's systems."
 	loss_text = "The AI has been shut down!"
 	flags = ANTAG_VOTABLE | ANTAG_OVERRIDE_MOB | ANTAG_OVERRIDE_JOB | ANTAG_CHOOSE_NAME
-	max_antags = 1
-	max_antags_round = 1
+	hard_cap = 1
+	hard_cap_round = 1
+	initial_spawn_req = 1
+	initial_spawn_target = 1
 
 
 /datum/antagonist/rogue_ai/New()

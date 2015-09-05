@@ -15,6 +15,11 @@ var/datum/antagonist/revolutionary/revs
 	loss_feedback_tag = "loss - rev heads killed"
 	flags = ANTAG_SUSPICIOUS | ANTAG_VOTABLE
 
+	hard_cap = 2
+	hard_cap_round = 4
+	initial_spawn_req = 2
+	initial_spawn_target = 4
+
 	//Inround revs.
 	faction_role_text = "Revolutionary"
 	faction_descriptor = "Revolution"

@@ -79,6 +79,6 @@
 	if(ticker && ticker.mode)
 		if(ticker.mode.antag_tags && (id in ticker.mode.antag_tags))
 			main_type = 1
-	cur_max = (main_type ? max_antags_round : max_antags)
+	cur_max = (main_type ? hard_cap_round : hard_cap)
 	if(ticker.mode.antag_scaling_coeff)
 		cur_max = Clamp((ticker.mode.num_players()/ticker.mode.antag_scaling_coeff), 1, cur_max)

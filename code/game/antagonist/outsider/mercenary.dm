@@ -11,9 +11,12 @@ var/datum/antagonist/mercenary/mercs
 	leader_welcome_text = "You are the leader of the mercenary strikeforce; hail to the chief. Use :t to speak to your underlings."
 	welcome_text = "To speak on the strike team's private channel use :t."
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_HAS_NUKE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
-	max_antags = 4
-	max_antags_round = 6
 	id_type = /obj/item/weapon/card/id/syndicate
+
+	hard_cap = 4
+	hard_cap_round = 8
+	initial_spawn_req = 4
+	initial_spawn_target = 6
 
 /datum/antagonist/mercenary/New()
 	..()

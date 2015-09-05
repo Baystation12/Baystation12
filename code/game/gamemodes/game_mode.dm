@@ -239,7 +239,7 @@ var/global/list/additional_antag_types = list()
 			else
 				potential = antag.candidates
 			if(islist(potential))
-				if(require_all_templates && potential.len < antag.min_antags_round)
+				if(require_all_templates && potential.len < antag.initial_spawn_req)
 					return 0
 				enemy_count += potential.len
 				if(enemy_count >= required_enemies)
