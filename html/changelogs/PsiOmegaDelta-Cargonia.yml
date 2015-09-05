@@ -1,4 +1,0 @@
-author: PsiOmegaDelta
-delete-after: true
-changes:
-  - tweak: "Cargo now sorts under its own department on station manifests."
