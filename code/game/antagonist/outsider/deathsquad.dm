@@ -8,9 +8,13 @@ var/datum/antagonist/deathsquad/deathsquad
 	welcome_text = "You work in the service of corporate Asset Protection, answering directly to the Board of Directors."
 	landmark_id = "Commando"
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_HAS_NUKE | ANTAG_HAS_LEADER
-	max_antags = 4
-	max_antags_round = 6
 	default_access = list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage)
+
+	hard_cap = 4
+	hard_cap_round = 8
+	initial_spawn_req = 4
+	initial_spawn_target = 6
+
 	var/deployed = 0
 
 /datum/antagonist/deathsquad/New(var/no_reference)

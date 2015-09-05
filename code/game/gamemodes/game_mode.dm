@@ -1,25 +1,5 @@
 var/global/antag_add_failed // Used in antag type voting.
 var/global/list/additional_antag_types = list()
-///////////////////////////////////
-//Keeps track of all living heads//
-///////////////////////////////////
-/proc/get_living_heads()
-	var/list/heads = list()
-	for(var/mob/living/carbon/human/player in mob_list)
-		if(player.stat!=2 && player.mind && (player.mind.assigned_role in command_positions))
-			heads += player.mind
-	return heads
-
-/*
- * GAMEMODES (by Rastaf0)
- *
- * In the new mode system all special roles are fully supported.
- * You can have proper wizards/traitors/changelings/cultists during any mode.
- * Only two things really depends on gamemode:
- * 1. Starting roles, equipment and preparations
- * 2. Conditions of finishing the round.
- *
- */
 
 /datum/game_mode
 	var/name = "invalid"
@@ -40,11 +20,12 @@ var/global/list/additional_antag_types = list()
 	var/shuttle_delay = 1                    // Shuttle transit time is multiplied by this.
 	var/auto_recall_shuttle = 0              // Will the shuttle automatically be recalled?
 
-	var/antag_tag                            // First (main) antag template to spawn.
+	var/list/antag_tags = list()             // Core antag templates to spawn.
 	var/list/antag_templates                 // Extra antagonist types to include.
 	var/list/latejoin_templates = list()
 	var/round_autoantag = 0                  // Will this round attempt to periodically spawn more antagonists?
 	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count.
+	var/require_all_templates = 0            // Will only start if all templates are checked and can spawn.
 
 	var/station_was_nuked = 0                // See nuclearbomb.dm and malfunction.dm.
 	var/explosion_in_progress = 0            // Sit back and relax
@@ -53,6 +34,13 @@ var/global/list/additional_antag_types = list()
 
 	var/event_delay_mod_moderate             // Modifies the timing of random events.
 	var/event_delay_mod_major                // As above.
+
+/datum/game_mode/New()
+	..()
+	// Enforce some formatting.
+	// This will probably break something.
+	name = capitalize(lowertext(name))
+	config_tag = lowertext(config_tag)
 
 /datum/game_mode/Topic(href, href_list[])
 	if(..())
@@ -79,18 +67,18 @@ var/global/list/additional_antag_types = list()
 				shuttle_delay = choice
 			if("antag_scaling")
 				choice = input("Enter a new antagonist cap scaling coefficient.") as num
-				if(!choice || choice < 0 || choice > 100)
+				if(isnull(choice) || choice < 0 || choice > 100)
 					return
 				antag_scaling_coeff = choice
 			if("event_modifier_moderate")
 				choice = input("Enter a new moderate event time modifier.") as num
-				if(!choice || choice < 0 || choice > 100)
+				if(isnull(choice) || choice < 0 || choice > 100)
 					return
 				event_delay_mod_moderate = choice
 				refresh_event_modifiers()
 			if("event_modifier_severe")
 				choice = input("Enter a new moderate event time modifier.") as num
-				if(!choice || choice < 0 || choice > 100)
+				if(isnull(choice) || choice < 0 || choice > 100)
 					return
 				event_delay_mod_major = choice
 				refresh_event_modifiers()
@@ -104,7 +92,7 @@ var/global/list/additional_antag_types = list()
 			usr.client.debug_variables(antag)
 			message_admins("Admin [key_name_admin(usr)] is debugging the [antag.role_text] template.")
 	else if(href_list["remove_antag_type"])
-		if(antag_tag && href_list["remove_antag_type"] == antag_tag)
+		if(antag_tags && (href_list["remove_antag_type"] in antag_tags))
 			usr << "Cannot remove core mode antag type."
 			return
 		var/datum/antagonist/antag = all_antag_types[href_list["remove_antag_type"]]
@@ -118,14 +106,15 @@ var/global/list/additional_antag_types = list()
 			return
 		var/datum/antagonist/antag = all_antag_types[choice]
 		if(antag)
-			additional_antag_types |= antag
+			ticker.mode.antag_templates |= antag
 			message_admins("Admin [key_name_admin(usr)] added [antag.role_text] template to game mode.")
 
 	// I am very sure there's a better way to do this, but I'm not sure what it might be. ~Z
-	for(var/datum/admins/admin in world)
-		if(usr.client == admin.owner)
-			admin.show_game_mode(usr)
-			return
+	spawn(1)
+		for(var/datum/admins/admin in world)
+			if(usr.client == admin.owner)
+				admin.show_game_mode(usr)
+				return
 
 /datum/game_mode/proc/announce() //to be called when round starts
 	world << "<B>The current game mode is [capitalize(name)]!</B>"
@@ -166,15 +155,23 @@ var/global/list/additional_antag_types = list()
 	if(!(antag_templates && antag_templates.len))
 		return 1
 
-	var/datum/antagonist/main_antags = antag_templates[1]
-	var/list/potential
-	if(main_antags.flags & ANTAG_OVERRIDE_JOB)
-		potential = main_antags.pending_antagonists
-	else
-		potential = main_antags.candidates
-
-	if(potential.len >= required_enemies)
-		return 1
+	var/enemy_count = 0
+	if(antag_tags && antag_tags.len)
+		for(var/antag_tag in antag_tags)
+			var/datum/antagonist/antag = all_antag_types[antag_tag]
+			if(!antag)
+				continue
+			var/list/potential = list()
+			if(antag.flags & ANTAG_OVERRIDE_JOB)
+				potential = antag.pending_antagonists
+			else
+				potential = antag.candidates
+			if(islist(potential))
+				if(require_all_templates && potential.len < antag.initial_spawn_req)
+					return 0
+				enemy_count += potential.len
+				if(enemy_count >= required_enemies)
+					return 1
 	return 0
 
 /datum/game_mode/proc/refresh_event_modifiers()
@@ -471,11 +468,13 @@ var/global/list/additional_antag_types = list()
 	if(!config.traitor_scaling)
 		antag_scaling_coeff = 0
 
-	if(antag_tag)
+	if(antag_tags && antag_tags.len)
 		antag_templates = list()
-		var/datum/antagonist/antag = all_antag_types[antag_tag]
-		if(antag)
-			antag_templates |= antag
+		for(var/antag_tag in antag_tags)
+			var/datum/antagonist/antag = all_antag_types[antag_tag]
+			if(antag)
+				antag_templates |= antag
+
 	if(additional_antag_types && additional_antag_types.len)
 		if(!antag_templates)
 			antag_templates = list()
@@ -483,15 +482,6 @@ var/global/list/additional_antag_types = list()
 			var/datum/antagonist/antag = all_antag_types[antag_type]
 			if(antag)
 				antag_templates |= antag
-
-	/*
-	if(antag_templates && antag_templates.len)
-		for(var/datum/antagonist/antag in antag_templates)
-			if(antag.flags & (ANTAG_OVERRIDE_JOB|ANTAG_RANDSPAWN))
-				continue
-			antag_templates -= antag
-			world << "<span class='danger'>[antag.role_text_plural] are invalid for additional roundtype antags!</span>"
-	*/
 
 	newscaster_announcements = pick(newscaster_standard_feeds)
 

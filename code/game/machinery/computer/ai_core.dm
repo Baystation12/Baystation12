@@ -137,8 +137,7 @@
 					return
 
 				if(M.brainmob.mind)
-					cult.remove_antagonist(M.brainmob.mind, 1)
-					revs.remove_antagonist(M.brainmob.mind, 1)
+					clear_antag_roles(M.brainmob.mind, 1)
 
 				user.drop_item()
 				P.loc = src

@@ -197,10 +197,6 @@
 				user << "<span class='warning'>Sticking a dead [W] into the frame would sort of defeat the purpose.</span>"
 				return
 
-			if(M.brainmob.mind in revs.head_revolutionaries)
-				user << "<span class='warning'>The frame's firmware lets out a shrill sound, and flashes 'Abnormal Memory Engram'. It refuses to accept the [W].</span>"
-				return
-
 			if(jobban_isbanned(M.brainmob, "Cyborg"))
 				user << "<span class='warning'>This [W] does not seem to fit.</span>"
 				return
