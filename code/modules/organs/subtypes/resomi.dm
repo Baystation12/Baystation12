@@ -6,5 +6,3 @@
 	body_hair = "feathers"
 /obj/item/organ/external/hand/right/resomi
 	body_hair = "feathers"
-/obj/item/organ/external/groin/resomi
-	body_hair = "feathers"
