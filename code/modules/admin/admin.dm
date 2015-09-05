@@ -1380,6 +1380,7 @@ proc/admin_notice(var/message, var/rights)
 
 	var/antag_type = input("Choose a template.","Force Latespawn") as null|anything in all_antag_types
 	if(!antag_type || !all_antag_types[antag_type])
+		usr << "Aborting."
 		return
 
 	var/datum/antagonist/antag = all_antag_types[antag_type]

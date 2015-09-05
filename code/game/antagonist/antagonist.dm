@@ -109,7 +109,13 @@
 /datum/antagonist/proc/attempt_late_spawn(var/datum/mind/player)
 	if(!can_late_spawn())
 		return 0
-	if(!istype(player)) player = get_candidates(is_latejoin_template())
+	if(!istype(player))
+		var/list/players = get_candidates(is_latejoin_template())
+		if(players && players.len)
+			player = pick(players)
+	if(!istype(player))
+		message_admins("AUTO[uppertext(ticker.mode.name)]: Failed to find a candidate for [role_text].")
+		return 0
 	player.current << "<span class='danger'><i>You have been selected this round as an antagonist!</i></span>"
 	message_admins("AUTO[uppertext(ticker.mode.name)]: Selected [player] as a [role_text].")
 	if(istype(player.current, /mob/dead))
