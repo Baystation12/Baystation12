@@ -83,6 +83,8 @@ var/global/list/default_medbay_channels = list(
 	for (var/ch_name in channels)
 		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
 
+/obj/item/device/radio/attack_ghost(mob/user)
+	interact(user)
 
 /obj/item/device/radio/attack_self(mob/user as mob)
 	user.set_machine(src)
@@ -143,8 +145,14 @@ var/global/list/default_medbay_channels = list(
 	if(!(freq in internal_channels))
 		return 0
 
-	var/obj/item/weapon/card/id/I = user.GetIdCard()
-	return has_access(list(), internal_channels[freq], I ? I.GetAccess() : list())
+	return user.has_internal_radio_channel_access(internal_channels[freq])
+
+/mob/proc/has_internal_radio_channel_access(var/list/req_one_accesses)
+	var/obj/item/weapon/card/id/I = GetIdCard()
+	return has_access(list(), req_one_accesses, I ? I.GetAccess() : list())
+
+/mob/dead/observer/has_internal_radio_channel_access(var/list/req_one_accesses)
+	return can_admin_interact()
 
 /obj/item/device/radio/proc/text_wires()
 	if (b_stat)
