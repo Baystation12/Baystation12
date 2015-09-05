@@ -26,6 +26,7 @@ var/datum/antagonist/cultist/cult
 	hard_cap_round = 6
 	initial_spawn_req = 4
 	initial_spawn_target = 6
+	antaghud_indicator = "hudcultist"
 
 	var/allow_narsie = 1
 	var/datum/mind/sacrifice_target
