@@ -7,6 +7,12 @@ var/datum/antagonist/deathsquad/mercenary/commandos
 	role_text_plural = "Commandos"
 	welcome_text = "You are in the employ of a criminal syndicate hostile to NanoTrasen."
 
+	hard_cap = 4
+	hard_cap_round = 8
+	initial_spawn_req = 4
+	initial_spawn_target = 6
+
+
 /datum/antagonist/deathsquad/mercenary/New()
 	..(1)
 	commandos = src
