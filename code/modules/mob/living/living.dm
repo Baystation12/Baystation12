@@ -656,27 +656,15 @@ default behaviour is:
 	set category = "IC"
 
 	resting = !resting
-	src << "\blue You are now [resting ? "resting" : "getting up"]"
+	src << "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>"
 
 /mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	if(istype(carried_item, /obj/item/weapon/implant))
-		return 1
-	if(istype(carried_item, /obj/item/clothing/mask/facehugger))
-		return 1
-	return 0
-
-/mob/living/carbon/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	if(carried_item in internal_organs)
-		return 1
-	return ..()
-
-/mob/living/carbon/human/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	if(carried_item in organs)
-		return 1
-	return ..()
+	return isnull(get_inventory_slot(carried_item))
 
 /mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	return carried_item != held_item
+	if(carried_item == held_item)
+		return 0
+	return ..()
 
 /mob/living/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null, var/ignore_items = 0) // -- TLE -- Merged by Carn
 	if(stat)
