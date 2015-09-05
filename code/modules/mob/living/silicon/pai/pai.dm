@@ -397,6 +397,9 @@
 	resting = 0
 	icon_state = "[chassis]"
 
+	//stop resting
+	resting = 0
+
 /mob/living/silicon/pai/start_pulling(var/atom/movable/AM)
 
 	if(istype(AM,/obj/item))
