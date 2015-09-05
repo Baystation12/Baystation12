@@ -12,6 +12,7 @@ var/datum/antagonist/mercenary/mercs
 	welcome_text = "To speak on the strike team's private channel use :t."
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_HAS_NUKE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
 	id_type = /obj/item/weapon/card/id/syndicate
+	antaghud_indicator = "hudoperative"
 
 	hard_cap = 4
 	hard_cap_round = 8

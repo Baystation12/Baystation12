@@ -14,6 +14,7 @@ var/datum/antagonist/revolutionary/revs
 	victory_feedback_tag = "win - heads killed"
 	loss_feedback_tag = "loss - rev heads killed"
 	flags = ANTAG_SUSPICIOUS | ANTAG_VOTABLE
+	antaghud_indicator = "hudrevolutionary"
 
 	hard_cap = 2
 	hard_cap_round = 4
