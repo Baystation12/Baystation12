@@ -6,30 +6,28 @@ var/datum/antagonist/renegade/renegades
 	welcome_text = "Your own safety matters above all else, trust no one and kill anyone who gets in your way. However, armed as you are, now would be the perfect time to settle that score or grab that pair of yellow gloves you've been eyeing..."
 	id = MODE_RENEGADE
 	flags = ANTAG_SUSPICIOUS | ANTAG_IMPLANT_IMMUNE | ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	max_antags = 5
-	max_antags_round = 7
+	hard_cap = 5
+	hard_cap_round = 7
+
+	hard_cap = 8
+	hard_cap_round = 12
+	initial_spawn_req = 3
+	initial_spawn_target = 6
 
 	var/list/spawn_guns = list(
-		/obj/item/weapon/gun/energy/taser,
 		/obj/item/weapon/gun/energy/gun,
 		/obj/item/weapon/gun/energy/laser,
 		/obj/item/weapon/gun/projectile,
 		/obj/item/weapon/gun/projectile/revolver/detective,
 		/obj/item/weapon/gun/projectile/automatic/c20r,
-		/obj/item/weapon/gun/energy/gun/nuclear,
 		/obj/item/weapon/gun/projectile/deagle/camo,
 		/obj/item/weapon/gun/projectile/pistol,
 		/obj/item/weapon/silencer,
-		/obj/item/weapon/gun/energy/lasercannon,
 		/obj/item/weapon/gun/projectile/shotgun/pump,
 		/obj/item/weapon/gun/projectile/shotgun/pump/combat,
 		/obj/item/weapon/gun/projectile/automatic,
 		/obj/item/weapon/gun/projectile/automatic/mini_uzi,
 		/obj/item/weapon/gun/energy/crossbow
-		//obj/item/weapon/gun/projectile/gyropistol,
-		//obj/item/weapon/gun/energy/pulse_rifle,
-		//obj/item/weapon/gun/projectile/revolver/mateba,
-		//obj/item/weapon/gun/projectile/automatic/l6_saw,
 		)
 
 /datum/antagonist/renegade/New()

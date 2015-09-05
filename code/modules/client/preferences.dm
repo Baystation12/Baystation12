@@ -18,7 +18,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"ninja" = "true",                                    // 10
 	"raider" = IS_MODE_COMPILED("heist"),                // 11
 	"diona" = 1,                                         // 12
-	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
+	"loyalist" = IS_MODE_COMPILED("revolution"),         // 13
 	"pAI candidate" = 1, // -- TLE                       // 14
 )
 

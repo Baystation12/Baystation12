@@ -6,11 +6,16 @@ var/datum/antagonist/raider/raiders
 	role_text = "Raider"
 	role_text_plural = "Raiders"
 	bantype = "raider"
+	antag_indicator = "mutineer"
 	landmark_id = "voxstart"
 	welcome_text = "Use :H to talk on your encrypted channel."
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
-	max_antags = 6
-	max_antags_round = 10
+
+	hard_cap = 6
+	hard_cap_round = 10
+	initial_spawn_req = 4
+	initial_spawn_target = 6
+
 	id_type = /obj/item/weapon/card/id/syndicate
 
 	// Heist overrides check_victory() and doesn't need victory or loss strings/tags.

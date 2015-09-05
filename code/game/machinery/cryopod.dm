@@ -341,20 +341,10 @@
 	for(var/datum/objective/O in all_objectives)
 		// We don't want revs to get objectives that aren't for heads of staff. Letting
 		// them win or lose based on cryo is silly so we remove the objective.
-		if(istype(O,/datum/objective/mutiny) && O.target == occupant.mind)
+		if(O.target == occupant.mind)
+			if(O.owner && O.owner.current)
+				O.owner.current << "<span class='warning'>You get the feeling your target is no longer within your reach...</span>"
 			qdel(O)
-		else if(O.target && istype(O.target,/datum/mind))
-			if(O.target == occupant.mind)
-				if(O.owner && O.owner.current)
-					O.owner.current << "<span class='warning'>You get the feeling your target is no longer within your reach. Time for Plan [pick(list("A","B","C","D","X","Y","Z"))]...</span>"
-				O.target = null
-				spawn(1) //This should ideally fire after the occupant is deleted.
-					if(!O) return
-					O.find_target()
-					if(!(O.target))
-						all_objectives -= O
-						O.owner.objectives -= O
-						qdel(O)
 
 	//Handle job slot/tater cleanup.
 	var/job = occupant.mind.assigned_role
