@@ -12,6 +12,8 @@
 	blood_color = "#D514F7"
 	flesh_color = "#5F7BB0"
 	base_color = "#001144"
+	tail = "resomitail"
+	tail_hair = "feathers"
 
 	icobase = 'icons/mob/human_races/r_resomi.dmi'
 	deform = 'icons/mob/human_races/r_resomi.dmi'
