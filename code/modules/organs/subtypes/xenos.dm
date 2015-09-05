@@ -64,8 +64,6 @@
 	if(owner && ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		H.add_language("Hivemind")
-		if(H.mind)
+		if(H.mind && H.species.get_bodytype() != "Xenomorph")
 			H << "<span class='alium'>You feel a sense of pressure as a vast intelligence meshes with your thoughts...</span>"
-			if(H.species.get_bodytype() != "Xenomorph" && xenomorphs.add_antagonist_mind(H.mind,1))
-				H << "Your will is ripped away as your humanity merges with the xenomorph hive. You are now a thrall to the queen and her brood. \
-				Obey their instructions without question. Serve the hive."
+			xenomorphs.add_antagonist_mind(H.mind,1, xenomorphs.faction_role_text, xenomorphs.faction_welcome)

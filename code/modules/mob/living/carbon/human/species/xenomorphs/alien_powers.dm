@@ -248,14 +248,14 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 	if(!do_after(src, 150))
 		return
 
-	if(!check_alien_ability(500,1,"egg sac"))
-		return
-
-	if(!M.Adjacent(src))
+	if(!M || !M.Adjacent(src))
 		src << "<span class='warning'>They are too far away.</span>"
 		return
 
-	if(!M || M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]) || !affecting || (affecting.status & ORGAN_ROBOT))
+	if(M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]) || !affecting || (affecting.status & ORGAN_ROBOT))
+		return
+
+	if(!check_alien_ability(500,1,"egg sac"))
 		return
 
 	src.visible_message("<span class='danger'>\The [src] regurgitates something into \the [M]'s torso!</span>")
