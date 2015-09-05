@@ -35,18 +35,19 @@ var/datum/antagonist/xenos/borer/borers
 	if(istype(borer))
 		var/mob/living/carbon/human/host
 		for(var/mob/living/carbon/human/H in mob_list)
-			if(H.stat != 2 && !(H.species.flags & IS_SYNTHETIC) && !H.has_brain_worms())
-				host = H
-				break
+			if(H.stat != DEAD && !H.has_brain_worms())
+				var/obj/item/organ/external/head = H.get_organ("head")
+				if(head && !(head.status & ORGAN_ROBOT))
+					host = H
+					break
 		if(istype(host))
 			var/obj/item/organ/external/head = host.get_organ("head")
-			if(head)
-				borer.host = host
-				head.implants += borer
-				borer.loc = head
-				if(!borer.host_brain)
-					borer.host_brain = new(borer)
-				borer.host_brain.name = host.name
-				borer.host_brain.real_name = host.real_name
-				return
+			borer.host = host
+			head.implants += borer
+			borer.loc = head
+			if(!borer.host_brain)
+				borer.host_brain = new(borer)
+			borer.host_brain.name = host.name
+			borer.host_brain.real_name = host.real_name
+			return
 	..() // Place them at a vent if they can't get a host.
