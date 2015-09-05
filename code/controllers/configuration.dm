@@ -831,21 +831,15 @@ var/list/gamemode_cache = list()
 	for (var/game_mode in gamemode_cache)
 		var/datum/game_mode/M = gamemode_cache[game_mode]
 		if (M.config_tag && M.config_tag == mode_name)
-			M.create_antagonists()
 			return M
 	return gamemode_cache["extended"]
 
 /datum/configuration/proc/get_runnable_modes()
-	var/list/datum/game_mode/runnable_modes = new
-	for (var/game_mode in gamemode_cache)
+	var/list/runnable_modes = list()
+	for(var/game_mode in gamemode_cache)
 		var/datum/game_mode/M = gamemode_cache[game_mode]
-		if (!(M.config_tag in modes))
-			continue
-		if (probabilities[M.config_tag]<=0)
-			continue
-		if (M.can_start())
-			runnable_modes[M] = probabilities[M.config_tag]
-			//world << "DEBUG: runnable_mode\[[runnable_modes.len]\] = [M.config_tag]"
+		if(M && M.can_start() && !isnull(config.probabilities[M.config_tag]) && config.probabilities[M.config_tag] > 0)
+			runnable_modes |= M
 	return runnable_modes
 
 /datum/configuration/proc/post_load()
