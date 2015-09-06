@@ -47,8 +47,12 @@
 		/datum/unarmed_attack/bite
 		)
 	var/list/unarmed_attacks = null          // For empty hand harm-intent attack
-	var/brute_mod = 1                        // Physical damage multiplier.
-	var/burn_mod = 1                         // Burn damage multiplier.
+	var/brute_mod =     1                    // Physical damage multiplier.
+	var/burn_mod =      1                    // Burn damage multiplier.
+	var/oxy_mod =       1                    // Oxyloss modifier
+	var/toxins_mod =    1                    // Toxloss modifier
+	var/radiation_mod = 1                    // Radiation modifier
+	var/flash_mod =     1                    // Stun from blindness modifier.
 	var/vision_flags = SEE_SELF              // Same flags as glasses.
 
 	// Death vars.

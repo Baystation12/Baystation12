@@ -14,6 +14,9 @@
 	spawn_flags = CAN_JOIN
 	appearance_flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
+/datum/species/human/get_bodytype()
+	return "Human"
+
 /datum/species/unathi
 	name = "Unathi"
 	name_plural = "Unathi"
