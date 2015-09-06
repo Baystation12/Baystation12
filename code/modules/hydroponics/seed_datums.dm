@@ -21,10 +21,6 @@
 	set_trait(TRAIT_IDEAL_HEAT, 298)
 	set_trait(TRAIT_IDEAL_LIGHT, 7) 
 
-	/*Standard
-	set_trait(TRAIT_WATER_CONSUMPTION, 3)
-	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.25) 
-	*/
 
 /datum/seed/chili/ice
 	name = "icechili"
