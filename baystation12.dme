@@ -1126,6 +1126,8 @@
 #include "code\modules\events\viral_infection.dm"
 #include "code\modules\events\wallrot.dm"
 #include "code\modules\examine\examine.dm"
+#include "code\modules\examine\stat_icons.dm"
+#include "code\modules\examine\descriptions\armor.dm"
 #include "code\modules\examine\descriptions\atmospherics.dm"
 #include "code\modules\examine\descriptions\engineering.dm"
 #include "code\modules\examine\descriptions\medical.dm"
