@@ -40,6 +40,7 @@
 	var/list/speech_sounds                   // A list of sounds to potentially play when speaking.
 	var/list/speech_chance                   // The likelihood of a speech sound playing.
 	var/num_alternate_languages = 0          // How many secondary languages are available to select at character creation
+	var/name_language = "Galactic Common"    // The language to use when determining names for this species, or null to use the first name/last name generator
 
 	// Combat vars.
 	var/total_health = 100                   // Point at which the mob will enter crit.
@@ -195,7 +196,13 @@
 				H << "<span class='danger'>[pick(heat_discomfort_strings)]</span>"
 
 /datum/species/proc/get_random_name(var/gender)
-	var/datum/language/species_language = all_languages[language]
+	if(!name_language)
+		if(gender == FEMALE)
+			return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
+		else
+			return capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
+
+	var/datum/language/species_language = all_languages[name_language]
 	if(!species_language)
 		species_language = all_languages[default_language]
 	if(!species_language)

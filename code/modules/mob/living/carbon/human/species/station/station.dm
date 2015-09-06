@@ -10,6 +10,7 @@
 	worlds tumultous at best."
 	num_alternate_languages = 2
 	secondary_langs = list("Sol Common")
+	name_language = null // Use the first-name last-name generator rather than a language scrambler
 
 	spawn_flags = CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
@@ -32,6 +33,7 @@
 	brute_mod = 0.8
 	num_alternate_languages = 2
 	secondary_langs = list("Sinta'unathi")
+	name_language = "Sinta'unathi"
 
 	blurb = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
@@ -88,6 +90,7 @@
 	gluttonous = 1
 	num_alternate_languages = 2
 	secondary_langs = list("Siik'tajr")
+	name_language = "Siik'tajr"
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
 	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
@@ -138,6 +141,7 @@
 	the secrets of their empire to their allies."
 	num_alternate_languages = 2
 	secondary_langs = list("Skrellian")
+	name_language = null
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
@@ -163,7 +167,7 @@
 	eyes = "blank_eyes"
 	show_ssd = "completely quiescent"
 	num_alternate_languages = 1
-
+	name_language = "Rootspeak"
 
 	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
 	species hailing from Epsilon Ursae Minoris. Each 'diona' is a cluster of numerous cat-sized organisms called nymphs; \
@@ -269,6 +273,7 @@
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	rarity_value = 2
 	num_alternate_languages = 1 // potentially could be 2?
+	name_language = "Encoded Audio Language"
 
 	eyes = "blank_eyes"
 	brute_mod = 1.875 // 100% * 1.875 * 0.8 (robolimbs) ~= 150%
