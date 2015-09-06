@@ -43,16 +43,15 @@ var/datum/antagonist/mercenary/mercs
 	if(player.backbag == 4) player.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(player), slot_back)
 	player.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(player.back), slot_in_backpack)
 	player.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/pill/cyanide(player), slot_in_backpack)
+
+	if (player.mind == leader)
+		var/obj/item/device/radio/uplink/U = new(player.loc)
+		U.hidden_uplink.uplink_owner = player.mind
+		U.hidden_uplink.uses = 40
+		player.put_in_hands(U)
+
 	player.update_icons()
 
 	create_id("Mercenary", player)
 	create_radio(SYND_FREQ, player)
 	return 1
-
-/datum/antagonist/mercenary/create_nuke()
-	..()
-	// Create the radio.
-	var/obj/effect/landmark/uplinkdevice = locate("landmark*Syndicate-Uplink")
-	if(uplinkdevice)
-		var/obj/item/device/radio/uplink/U = new(uplinkdevice.loc)
-		U.hidden_uplink.uses = 40
