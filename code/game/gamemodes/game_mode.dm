@@ -508,26 +508,35 @@ var/global/list/additional_antag_types = list()
 	if(!antag_template)
 		return candidates
 
-	// Assemble a list of active players without jobbans.
-	for(var/mob/new_player/player in player_list)
-		if( player.client && player.ready )
-			players += player
+	// If this is being called post-roundstart then it doesn't care about ready status.
+	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
+		for(var/mob/player in player_list)
+			if(!player.client)
+				continue
+			if(!role || (player.client.prefs.be_special & role))
+				log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
+				candidates |= player.mind
+	else
+		// Assemble a list of active players without jobbans.
+		for(var/mob/new_player/player in player_list)
+			if( player.client && player.ready )
+				players += player
 
-	// Get a list of all the people who want to be the antagonist for this round
-	for(var/mob/new_player/player in players)
-		if(!role || (player.client.prefs.be_special & role))
-			log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
-			candidates += player.mind
-			players -= player
-
-	// If we don't have enough antags, draft people who voted for the round.
-	if(candidates.len < required_enemies)
+		// Get a list of all the people who want to be the antagonist for this round
 		for(var/mob/new_player/player in players)
-			if(player.ckey in round_voters)
-				log_debug("[player.key] voted for this round, so we are drafting them.")
+			if(!role || (player.client.prefs.be_special & role))
+				log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
 				candidates += player.mind
 				players -= player
-				break
+
+		// If we don't have enough antags, draft people who voted for the round.
+		if(candidates.len < required_enemies)
+			for(var/mob/new_player/player in players)
+				if(player.ckey in round_voters)
+					log_debug("[player.key] voted for this round, so we are drafting them.")
+					candidates += player.mind
+					players -= player
+					break
 
 	return candidates		// Returns: The number of people who had the antagonist role set to yes, regardless of recomended_enemies, if that number is greater than required_enemies
 							//			required_enemies if the number of people with that role set to yes is less than recomended_enemies,
