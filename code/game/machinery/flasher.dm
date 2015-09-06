@@ -67,17 +67,11 @@
 		if (get_dist(src, O) > src.range)
 			continue
 
+		var/flash_time = strength
 		if (istype(O, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = O
 			if(!H.eyecheck() <= 0)
 				continue
-
-		if (istype(O, /mob/living/carbon/alien))//So aliens don't get flashed (they have no external eyes)/N
-			continue
-
-		var/flash_time = strength
-		if (istype(O, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = O
 			flash_time *= H.species.flash_mod
 			var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 			if(!E)

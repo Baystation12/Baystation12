@@ -64,20 +64,18 @@
 	var/flashfail = 0
 
 	if(iscarbon(M))
-		var/safety = M:eyecheck()
-		if(safety <= 0)
-
-			var/flash_strength = 10
-			if(ishuman(M) && ishuman(user) && M.stat!=DEAD)
-				var/mob/living/carbon/human/H = M
-				flash_strength *= H.species.flash_mod
-
-			if(flash_strength > 0)
-				M.Weaken(flash_strength)
-				flick("e_flash", M.flash)
-
-		else
-			flashfail = 1
+		if(M.stat!=DEAD)
+			var/safety = M:eyecheck()
+			if(safety <= 0)
+				var/flash_strength = 10
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					flash_strength *= H.species.flash_mod
+				if(flash_strength > 0)
+					M.Weaken(flash_strength)
+					flick("e_flash", M.flash)
+			else
+				flashfail = 1
 
 	else if(issilicon(M))
 		M.Weaken(rand(5,10))
