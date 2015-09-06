@@ -114,6 +114,17 @@
 		new_name = pick(ai_names)
 	return new_name
 
+/datum/language/resomi
+	name = "Resomi"
+	desc = "A trilling language spoken by the diminutive Resomi."
+	speech_verb = "chirps"
+	ask_verb = "chirrups"
+	exclaim_verb = "trills"
+	colour = "alien"
+	key = "v"
+	flags = WHITELISTED
+	syllables = list("caw","caw","caw","caw","ka")
+
 //Syllable Lists
 /*
 	This list really long, mainly because I can't make up my mind about which mandarin syllables should be removed,

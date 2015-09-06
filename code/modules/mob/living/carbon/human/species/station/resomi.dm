@@ -7,7 +7,7 @@
 	advanced post-scarcity culture on good terms with Skrellian and Human interests."
 
 	num_alternate_languages = 2
-	secondary_langs = list("Sol Common")
+	secondary_langs = list("Resomi")
 
 	blood_color = "#D514F7"
 	flesh_color = "#5F7BB0"
@@ -22,7 +22,7 @@
 	blood_mask = 'icons/mob/human_races/masks/blood_resomi.dmi'
 
 	eyes = "eyes_resomi"
-	slowdown = -2
+	slowdown = -1
 	total_health = 50
 	brute_mod = 1.35
 	burn_mod =  1.35
