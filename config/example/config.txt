@@ -362,6 +362,8 @@ STARLIGHT 0
 ## Enable asteroid tunnel/cave generation. Will behave strangely if turned off with a map that expects it on.
 # GENERATE_ASTEROID
 
+
+
 ## Uncomment to enable organ decay outside of a body or storage item.
 #ORGANS_CAN_DECAY
 
@@ -370,3 +372,6 @@ STARLIGHT 0
 
 ## Uncomment to override default brain health.
 #DEFAULT_BRAIN_HEALTH 400
+
+## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , # and - 
+# DEFAULT_LANGUAGE_PREFIXES , # -

@@ -76,6 +76,7 @@ datum/preferences
 	var/species = "Human"               //Species datum to use.
 	var/species_preview                 //Used for the species selection window.
 	var/list/alternate_languages = list() //Secondary language(s)
+	var/list/language_prefixes = list() //Kanguage prefix keys
 	var/list/gear						//Custom/fluff item loadout.
 
 		//Some faction information.
@@ -401,8 +402,11 @@ datum/preferences
 			dat += "- <a href='byond://?src=\ref[user];preference=language;add=1'>add</a> ([S.num_alternate_languages - alternate_languages.len] remaining)<br>"
 	else
 		dat += "- [species] cannot choose secondary languages.<br>"
-	dat += "<br><br>"
 
+	dat += "<b>Language Keys</b><br>"
+	dat += " [english_list(language_prefixes, and_text = " ", comma_text = " ")] <a href='byond://?src=\ref[user];preference=language_prefix'>Change</a><br>"
+
+	dat += "<br><br>"
 	var/list/undies = gender == MALE ? underwear_m : underwear_f
 
 	dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[get_key_by_value(undies,underwear)]</b></a><br>"
@@ -1175,6 +1179,26 @@ datum/preferences
 					if(new_lang)
 						alternate_languages |= new_lang
 
+	else if(href_list["preference"] == "language_prefix")
+		var/char
+		var/keys[0]
+		do
+			char = input("Enter a single special character.\nYou may re-select the same characters.\nThe following characters are already in use by radio: ; : .\nThe following characters are already in use by special say commands: ! *", "Enter Character - [3 - keys.len] remaining") as null|text
+			if(char)
+				if(length(char) > 1)
+					alert("Only single characters allowed.", "Error", "Ok")
+				else if(char in list(";", ":", "."))
+					alert("Radio character. Rejected.", "Error", "Ok")
+				else if(char in list("!","*"))
+					alert("Say character. Rejected.", "Error", "Ok")
+				else if(contains_az09(char))
+					alert("Non-special character. Rejected.", "Error", "Ok")
+				else
+					keys.Add(char)
+		while(char && keys.len < 3)
+
+		if(keys.len == 3)
+			language_prefixes = keys
 	switch(href_list["task"])
 		if("change")
 			if(href_list["preference"] == "species")

@@ -210,6 +210,8 @@ var/list/gamemode_cache = list()
 
 	var/aggressive_changelog = 0
 
+	var/list/language_prefixes = list(",","#","-")//Default language prefixes
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -678,6 +680,11 @@ var/list/gamemode_cache = list()
 
 				if("aggressive_changelog")
 					config.aggressive_changelog = 1
+
+				if("default_language_prefixes")
+					var/list/values = text2list(value, " ")
+					if(values.len > 0)
+						language_prefixes = values
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

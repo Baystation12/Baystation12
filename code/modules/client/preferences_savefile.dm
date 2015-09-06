@@ -110,8 +110,11 @@
 	S["spawnpoint"]			>> spawnpoint
 
 	S["language"]			>> alternate_languages
+	S["language_prefixes"]	>> language_prefixes
 	if(isnull(alternate_languages))
 		alternate_languages = list()
+	if(isnull(language_prefixes) || !language_prefixes.len)
+		language_prefixes = config.language_prefixes.Copy()
 	if(!islist(alternate_languages))
 		if(client)
 			// Warn them that we (probably) just broke their languages
@@ -287,6 +290,7 @@
 	S["age"]				<< age
 	S["species"]			<< species
 	S["language"]			<< alternate_languages
+	S["language_prefixes"]	<< language_prefixes
 	S["hair_red"]			<< r_hair
 	S["hair_green"]			<< g_hair
 	S["hair_blue"]			<< b_hair
