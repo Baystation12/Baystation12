@@ -12,7 +12,10 @@
 	secondary_langs = list("Sol Common")
 
 	spawn_flags = CAN_JOIN
-	appearance_flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+
+/datum/species/human/get_bodytype()
+	return "Human"
 
 /datum/species/unathi
 	name = "Unathi"
@@ -45,7 +48,7 @@
 	heat_level_3 = 1100 //Default 1000
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
-	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34AF10"
 
@@ -103,7 +106,7 @@
 	primitive_form = "Farwa"
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
-	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
@@ -126,7 +129,7 @@
 	icobase = 'icons/mob/human_races/r_skrell.dmi'
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
 	eyes = "skrell_eyes_s"
-	primitive_form = "Neara"
+	primitive_form = "Neaera"
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	blurb = "An amphibious species, Skrell come from the star system known as Qerr'Vallis, which translates to 'Star of \
 	the royals' or 'Light of the Crown'.<br/><br/>Skrell are a highly advanced and logical race who live under the rule \
@@ -137,7 +140,7 @@
 	secondary_langs = list("Skrellian")
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
-	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"

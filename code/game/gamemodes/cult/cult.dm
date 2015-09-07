@@ -7,4 +7,4 @@
 	required_players_secret = 15
 	required_enemies = 3
 	end_on_antag_death = 1
-	antag_tag = MODE_CULTIST
+	antag_tags = list(MODE_CULTIST)

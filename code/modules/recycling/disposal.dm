@@ -985,12 +985,9 @@
 		var/obj/structure/disposalpipe/P
 
 		if(nextdir == 12)
-			var/turf/controllerlocation = locate(1, 1, src.z)
-			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-				if(controller.up)
-					T = locate(src.x, src.y, controller.up_target)
+			T = GetAbove(src)
 			if(!T)
-				H.loc = src.loc
+				H.loc = loc
 				return
 			else
 				for(var/obj/structure/disposalpipe/down/F in T)
@@ -1038,10 +1035,7 @@
 		var/obj/structure/disposalpipe/P
 
 		if(nextdir == 11)
-			var/turf/controllerlocation = locate(1, 1, src.z)
-			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-				if(controller.down)
-					T = locate(src.x, src.y, controller.down_target)
+			T = GetBelow(src)
 			if(!T)
 				H.loc = src.loc
 				return

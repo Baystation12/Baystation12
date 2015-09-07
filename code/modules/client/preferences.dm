@@ -18,7 +18,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"ninja" = "true",                                    // 10
 	"raider" = IS_MODE_COMPILED("heist"),                // 11
 	"diona" = 1,                                         // 12
-	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
+	"loyalist" = IS_MODE_COMPILED("revolution"),         // 13
 	"pAI candidate" = 1, // -- TLE                       // 14
 )
 
@@ -76,6 +76,7 @@ datum/preferences
 	var/species = "Human"               //Species datum to use.
 	var/species_preview                 //Used for the species selection window.
 	var/list/alternate_languages = list() //Secondary language(s)
+	var/list/language_prefixes = list() //Kanguage prefix keys
 	var/list/gear						//Custom/fluff item loadout.
 
 		//Some faction information.
@@ -401,8 +402,11 @@ datum/preferences
 			dat += "- <a href='byond://?src=\ref[user];preference=language;add=1'>add</a> ([S.num_alternate_languages - alternate_languages.len] remaining)<br>"
 	else
 		dat += "- [species] cannot choose secondary languages.<br>"
-	dat += "<br><br>"
 
+	dat += "<b>Language Keys</b><br>"
+	dat += " [english_list(language_prefixes, and_text = " ", comma_text = " ")] <a href='byond://?src=\ref[user];preference=language_prefix'>Change</a><br>"
+
+	dat += "<br><br>"
 	var/list/undies = gender == MALE ? underwear_m : underwear_f
 
 	dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[get_key_by_value(undies,underwear)]</b></a><br>"
@@ -1175,6 +1179,26 @@ datum/preferences
 					if(new_lang)
 						alternate_languages |= new_lang
 
+	else if(href_list["preference"] == "language_prefix")
+		var/char
+		var/keys[0]
+		do
+			char = input("Enter a single special character.\nYou may re-select the same characters.\nThe following characters are already in use by radio: ; : .\nThe following characters are already in use by special say commands: ! *", "Enter Character - [3 - keys.len] remaining") as null|text
+			if(char)
+				if(length(char) > 1)
+					alert("Only single characters allowed.", "Error", "Ok")
+				else if(char in list(";", ":", "."))
+					alert("Radio character. Rejected.", "Error", "Ok")
+				else if(char in list("!","*"))
+					alert("Say character. Rejected.", "Error", "Ok")
+				else if(contains_az09(char))
+					alert("Non-special character. Rejected.", "Error", "Ok")
+				else
+					keys.Add(char)
+		while(char && keys.len < 3)
+
+		if(keys.len == 3)
+			language_prefixes = keys
 	switch(href_list["task"])
 		if("change")
 			if(href_list["preference"] == "species")
@@ -1303,7 +1327,8 @@ datum/preferences
 						b_type = new_b_type
 
 				if("hair")
-					if(species == "Human" || species == "Unathi" || species == "Tajara" || species == "Skrell")
+					var/datum/species/S = all_species[species]
+					if(S && (S.appearance_flags & HAS_HAIR_COLOR))
 						var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference", rgb(r_hair, g_hair, b_hair)) as color|null
 						if(new_hair)
 							r_hair = hex2num(copytext(new_hair, 2, 4))
@@ -1383,7 +1408,8 @@ datum/preferences
 						s_tone = 35 - max(min( round(new_s_tone), 220),1)
 
 				if("skin")
-					if(species == "Unathi" || species == "Tajara" || species == "Skrell")
+					var/datum/species/S = all_species[species]
+					if(S && (S.appearance_flags & HAS_SKIN_COLOR))
 						var/new_skin = input(user, "Choose your character's skin colour: ", "Character Preference", rgb(r_skin, g_skin, b_skin)) as color|null
 						if(new_skin)
 							r_skin = hex2num(copytext(new_skin, 2, 4))
@@ -1465,7 +1491,16 @@ datum/preferences
 								rlimb_data[second_limb] = null
 
 						if("Prothesis")
-							var/choice = input(user, "Which manufacturer do you wish to use for this limb?") as null|anything in chargen_robolimbs
+							var/tmp_species = species ? species : "Human"
+							var/list/usable_manufacturers = list()
+							for(var/company in chargen_robolimbs)
+								var/datum/robolimb/M = chargen_robolimbs[company]
+								if(tmp_species in M.species_cannot_use)
+									continue
+								usable_manufacturers[company] = M
+							if(!usable_manufacturers.len)
+								return
+							var/choice = input(user, "Which manufacturer do you wish to use for this limb?") as null|anything in usable_manufacturers
 							if(!choice)
 								return
 							rlimb_data[limb] = choice

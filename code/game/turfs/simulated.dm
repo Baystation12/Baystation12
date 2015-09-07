@@ -34,8 +34,7 @@
 	if (istype(A,/mob/living))
 		var/mob/living/M = A
 		if(M.lying)
-			..()
-			return
+			return ..()
 
 		// Ugly hack :( Should never have multiple plants in the same tile.
 		var/obj/effect/plant/plant = locate() in contents

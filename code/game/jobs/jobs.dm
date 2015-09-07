@@ -86,6 +86,12 @@ var/list/science_positions = list(
 )
 
 //BS12 EDIT
+var/list/cargo_positions = list(
+	"Quartermaster",
+	"Cargo Technician",
+	"Shaft Miner"
+)
+
 var/list/civilian_positions = list(
 	"Head of Personnel",
 	"Bartender",
@@ -93,9 +99,6 @@ var/list/civilian_positions = list(
 	"Chef",
 	"Janitor",
 	"Librarian",
-	"Quartermaster",
-	"Cargo Technician",
-	"Shaft Miner",
 	"Lawyer",
 	"Chaplain",
 	"Assistant"

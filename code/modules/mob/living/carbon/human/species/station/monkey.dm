@@ -63,14 +63,14 @@
 	tail = "farwatail"
 
 /datum/species/monkey/skrell
-	name = "Neara"
-	name_plural = "Neara"
+	name = "Neaera"
+	name_plural = "Neaera"
 
-	icobase = 'icons/mob/human_races/monkeys/r_neara.dmi'
-	deform = 'icons/mob/human_races/monkeys/r_neara.dmi'
+	icobase = 'icons/mob/human_races/monkeys/r_neaera.dmi'
+	deform = 'icons/mob/human_races/monkeys/r_neaera.dmi'
 
 	greater_form = "Skrell"
-	default_language = "Neara"
+	default_language = "Neaera"
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
 	reagent_tag = IS_SKRELL

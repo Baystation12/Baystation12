@@ -17,6 +17,9 @@
 		slot_l_hand_str = "backpack",
 		slot_r_hand_str = "backpack",
 		)
+	sprite_sheets = list(
+		"Resomi" = 'icons/mob/species/resomi/back.dmi'
+		)
 	w_class = 4
 	slot_flags = SLOT_BACK
 	max_w_class = 3

@@ -14,19 +14,11 @@
 	if (!N)
 		return
 
-///// Z-Level Stuff ///// This makes sure that turfs are not changed to space when one side is part of a zone
+	// This makes sure that turfs are not changed to space when one side is part of a zone
 	if(N == /turf/space)
-		var/turf/controller = locate(1, 1, src.z)
-		for(var/obj/effect/landmark/zcontroller/c in controller)
-			if(c.down)
-				var/turf/below = locate(src.x, src.y, c.down_target)
-				if((air_master.has_valid_zone(below) || air_master.has_valid_zone(src)) && !istype(below, /turf/space)) // dont make open space into space, its pointless and makes people drop out of the station
-					var/turf/W = src.ChangeTurf(/turf/simulated/floor/open)
-					var/list/temp = list()
-					temp += W
-					c.add(temp,3,1) // report the new open space to the zcontroller
-					return W
-///// Z-Level Stuff
+		var/turf/below = GetBelow(src)
+		if(istype(below) && (air_master.has_valid_zone(below) || air_master.has_valid_zone(src)))
+			N = /turf/simulated/open
 
 	var/obj/fire/old_fire = fire
 	var/old_opacity = opacity
@@ -46,11 +38,11 @@
 		if(S.zone) S.zone.rebuild()
 
 	if(ispath(N, /turf/simulated/floor))
-		var/turf/simulated/floor/W = new N( locate(src.x, src.y, src.z) )
+		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
 		if(old_fire)
 			fire = old_fire
 
-		if (istype(W))
+		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
 
 		if(tell_universe)

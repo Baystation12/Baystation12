@@ -197,3 +197,15 @@
 /obj/item/projectile/bullet/shotgun/practice
 	name = "practice"
 	damage = 5
+
+/obj/item/projectile/bullet/pistol/cap
+	name = "cap"
+	damage_type = HALLOSS
+	damage = 0
+	nodamage = 1
+	embed = 0
+	sharp = 0
+
+/obj/item/projectile/bullet/pistol/cap/process()
+	loc = null
+	qdel(src)

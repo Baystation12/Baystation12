@@ -15,6 +15,7 @@ var/global/list/limb_icon_cache = list()
 /obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
 	s_tone = null
 	s_col = null
+	h_col = null
 	if(status & ORGAN_ROBOT)
 		return
 	if(species && human.species && species.name != human.species.name)
@@ -23,16 +24,19 @@ var/global/list/limb_icon_cache = list()
 		s_tone = human.s_tone
 	if(human.species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(human.r_skin, human.g_skin, human.b_skin)
+	h_col = list(human.r_hair, human.g_hair, human.b_hair)
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
 	s_tone = null
 	s_col = null
+	h_col = null
 	if(status & ORGAN_ROBOT)
 		return
 	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (species.appearance_flags & HAS_SKIN_TONE))
 		s_tone = dna.GetUIValue(DNA_UI_SKIN_TONE)
 	if(species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(dna.GetUIValue(DNA_UI_SKIN_R), dna.GetUIValue(DNA_UI_SKIN_G), dna.GetUIValue(DNA_UI_SKIN_B))
+	h_col = list(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
 
 /obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
 	..()
@@ -77,8 +81,8 @@ var/global/list/limb_icon_cache = list()
 		var/datum/sprite_accessory/hair_style = hair_styles_list[owner.h_style]
 		if(hair_style && (species.get_bodytype() in hair_style.species_allowed))
 			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
-			if(hair_style.do_colouration)
-				hair_s.Blend(rgb(owner.r_hair, owner.g_hair, owner.b_hair), ICON_ADD)
+			if(hair_style.do_colouration && islist(h_col) && h_col.len >= 3)
+				hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), ICON_ADD)
 			overlays |= hair_s
 
 	return mob_icon
@@ -120,6 +124,14 @@ var/global/list/limb_icon_cache = list()
 						mob_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
 				else if(s_col && s_col.len >= 3)
 					mob_icon.Blend(rgb(s_col[1], s_col[2], s_col[3]), ICON_ADD)
+
+			if(body_hair && islist(h_col) && h_col.len >= 3)
+				var/cache_key = "[body_hair]-[icon_name]-[h_col[1]][h_col[2]][h_col[3]]"
+				if(!limb_icon_cache[cache_key])
+					var/icon/I = icon(species.icobase, "[icon_name]_[body_hair]")
+					I.Blend(rgb(h_col[1],h_col[2],h_col[3]), ICON_ADD)
+					limb_icon_cache[cache_key] = I
+				mob_icon.Blend(limb_icon_cache[cache_key], ICON_OVERLAY)
 
 	dir = EAST
 	icon = mob_icon

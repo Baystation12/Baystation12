@@ -158,3 +158,10 @@
 	icon_state = "rocketshell"
 	projectile_type = /obj/item/missile
 	caliber = "rocket"
+
+/obj/item/ammo_casing/cap
+	name = "cap"
+	desc = "A cap for children toys."
+	caliber = "caps"
+	color = "#FF0000"
+	projectile_type = /obj/item/projectile/bullet/pistol/cap

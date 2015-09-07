@@ -476,23 +476,22 @@ var/list/name_to_material
 	rod_product = null
 
 /material/glass/phoron
-	name = "phglass"
-	display_name = "phoron glass"
+	name = "borosilicate glass"
+	display_name = "borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MATERIAL_BRITTLE
-	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE+300
-	integrity = 200 // idk why but phoron windows are strong, so.
+	integrity = 100
 	icon_colour = "#FC2BC5"
-	stack_origin_tech = list(TECH_MATERIAL = 3, TECH_PHORON = 2)
+	stack_origin_tech = list(TECH_MATERIAL = 4)
 	created_window = /obj/structure/window/phoronbasic
 	wire_product = null
 	rod_product = /obj/item/stack/material/glass/phoronrglass
 
 /material/glass/phoron/reinforced
-	name = "rphglass"
-	display_name = "reinforced phoron glass"
+	name = "reinforced borosilicate glass"
+	display_name = "reinforced borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronrglass
-	stack_origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 2)
+	stack_origin_tech = list(TECH_MATERIAL = 5)
 	composite_material = list() //todo
 	created_window = /obj/structure/window/phoronreinforced
 	hardness = 40

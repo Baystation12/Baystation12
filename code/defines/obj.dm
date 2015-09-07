@@ -72,6 +72,7 @@ var/global/ManifestJSON
 	var/eng[0]
 	var/med[0]
 	var/sci[0]
+	var/car[0]
 	var/civ[0]
 	var/bot[0]
 	var/misc[0]
@@ -113,6 +114,12 @@ var/global/ManifestJSON
 			department = 1
 			if(depthead && sci.len != 1)
 				sci.Swap(1,sci.len)
+				
+		if(real_rank in cargo_positions)
+			car[++car.len] = list("name" = name, "rank" = rank, "active" = isactive)
+			department = 1
+			if(depthead && car.len != 1)
+				car.Swap(1,car.len)
 
 		if(real_rank in civilian_positions)
 			civ[++civ.len] = list("name" = name, "rank" = rank, "active" = isactive)
@@ -134,6 +141,7 @@ var/global/ManifestJSON
 		"eng" = eng,\
 		"med" = med,\
 		"sci" = sci,\
+		"car" = car,\
 		"civ" = civ,\
 		"bot" = bot,\
 		"misc" = misc\

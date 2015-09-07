@@ -8,6 +8,12 @@ var/datum/antagonist/deathsquad/mercenary/commandos
 	welcome_text = "You are in the employ of a criminal syndicate hostile to corporate interests."
 	id_type = /obj/item/weapon/card/id/centcom/ERT
 
+	hard_cap = 4
+	hard_cap_round = 8
+	initial_spawn_req = 4
+	initial_spawn_target = 6
+
+
 /datum/antagonist/deathsquad/mercenary/New()
 	..(1)
 	commandos = src
