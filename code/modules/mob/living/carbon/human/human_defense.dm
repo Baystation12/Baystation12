@@ -155,7 +155,7 @@ emp_act
 	if(user == src) // Attacking yourself can't miss
 		target_zone = user.zone_sel.selecting
 	if(!target_zone)
-		visible_message("\red <B>[user] misses [src] with \the [I]!")
+		visible_message("<span class='danger'>[user] misses [src] with \the [I]!</span>")
 		return 1
 
 	var/obj/item/organ/external/affecting = get_organ(target_zone)
