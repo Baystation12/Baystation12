@@ -48,7 +48,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/weapon/proc/Fire(atom/A, atom/target, turf/aimloc)
 	var/obj/item/projectile/P = A
-	P.shot_from = src
+	P.shot_from = src.name
 	P.original = target
 	P.starting = P.loc
 	P.current = P.loc
