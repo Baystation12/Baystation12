@@ -7,10 +7,16 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 */
 
 /obj/item/device/uplink
-	var/welcome =	"Illegal Uplink Console"	// Welcoming menu message
-	var/uses = DEFAULT_TELECRYSTAL_AMOUNT		// Numbers of crystals
-	var/list/purchase_log
-	var/datum/mind/owner = null
+	var/welcome 			// Welcoming menu message
+	var/uses 				// Numbers of crystals
+	var/list/ItemsCategory	// List of categories with lists of items
+	var/list/ItemsReference	// List of references with an associated item
+	var/list/nanoui_items	// List of items for NanoUI use
+	var/nanoui_menu = 0		// The current menu we are in
+	var/list/nanoui_data = new // Additional data for NanoUI use
+
+	var/list/purchase_log = new
+	var/datum/mind/uplink_owner = null
 	var/used_TC = 0
 
 /obj/item/device/uplink/nano_host()
@@ -18,7 +24,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 /obj/item/device/uplink/New(var/location, var/datum/mind/owner)
 	..()
-	src.owner = owner
+	src.uplink_owner = owner
 	purchase_log = list()
 	world_uplinks += src
 
@@ -42,10 +48,8 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	name = "hidden uplink"
 	desc = "There is something wrong if you're examining this."
 	var/active = 0
-	var/nanoui_menu = 0							// The current menu we are in
 	var/datum/uplink_category/category 	= 0		// The current category we are in
 	var/exploit_id								// Id of the current exploit record we are viewing
-	var/list/nanoui_data						// Data for NanoUI use
 
 
 // The hidden uplink MUST be inside an obj/item's contents.
