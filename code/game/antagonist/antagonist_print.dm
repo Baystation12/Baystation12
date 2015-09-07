@@ -69,7 +69,7 @@
 	var/uplink_true = 0
 	var/purchases = ""
 	for(var/obj/item/device/uplink/H in world_uplinks)
-		if(H && H.owner && H.owner == ply)
+		if(H && H.uplink_owner && H.uplink_owner == ply)
 			TC_uses += H.used_TC
 			uplink_true = 1
 			var/list/refined_log = new()
