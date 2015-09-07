@@ -10,6 +10,7 @@ var/datum/antagonist/ert/ert
 	leader_welcome_text = "As leader of the Emergency Response Team, you answer only to CentComm, and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
 	landmark_id = "Response Team"
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER | ANTAG_CHOOSE_NAME
+	antaghud_indicator = "hudloyalist"
 
 	hard_cap = 5
 	hard_cap_round = 7

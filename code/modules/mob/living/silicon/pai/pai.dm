@@ -380,6 +380,9 @@
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = card
 
+	//stop resting
+	resting = 0
+
 	// If we are being held, handle removing our holder from their inv.
 	var/obj/item/weapon/holder/H = loc
 	if(istype(H))

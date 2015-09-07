@@ -75,10 +75,18 @@
 							qdel(I)
 
 /datum/antagonist/proc/update_current_antag_max()
-	var/main_type
+	cur_max = hard_cap
 	if(ticker && ticker.mode)
 		if(ticker.mode.antag_tags && (id in ticker.mode.antag_tags))
-			main_type = 1
-	cur_max = (main_type ? hard_cap_round : hard_cap)
+			cur_max = hard_cap_round
+
 	if(ticker.mode.antag_scaling_coeff)
-		cur_max = Clamp((ticker.mode.num_players()/ticker.mode.antag_scaling_coeff), 1, cur_max)
+
+		var/count = 0
+		for(var/mob/living/M in player_list)
+			if(M.client)
+				count++
+
+		// Minimum: initial_spawn_target
+		// Maximum: hard_cap or hard_cap_round
+		cur_max = max(initial_spawn_target,min(round(count/ticker.mode.antag_scaling_coeff),cur_max))
