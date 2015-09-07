@@ -457,7 +457,7 @@
 		return 0
 
 	//Check to see if we slipped
-	if(prob(Process_Spaceslipping(5)))
+	if(prob(Process_Spaceslipping(5)) && !buckled)
 		src << "\blue <B>You slipped!</B>"
 		src.inertia_dir = src.last_move
 		step(src, src.inertia_dir)
