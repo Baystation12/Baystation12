@@ -1,0 +1,5 @@
+author: GinjaNinja32
+delete-after: True
+changes:
+  - rscadd: "Added an auto-hiss system for those who would prefer the game do their sss or rrr for them. Activate via Toggle Auto-Hiss in the OOC tab."
+  - rscadd: "Auto-hiss system in 'basic' mode will extend 's' for Unathi and 'r' for Tajara. 'Full' mode adds 'x' to 'ks' for Unathi, and is identical to 'basic' mode for Tajara."

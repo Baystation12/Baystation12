@@ -182,6 +182,8 @@ proc/get_radio_key_from_channel(var/channel)
 	message = trim_left(message)
 
 	if(!(speaking && (speaking.flags & NO_STUTTER)))
+		message = handle_autohiss(message, speaking)
+
 		var/list/handle_s = handle_speech_problems(message, verb)
 		message = handle_s[1]
 		verb = handle_s[2]
