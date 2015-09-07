@@ -1,0 +1,6 @@
+author: Soadreqm
+
+delete-after: True
+
+changes: 
+  - tweak: "Increased changeling starting genetic points to 25."
