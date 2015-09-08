@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - tweak: "Changed the language prefix keys to the following: , # -"
-  - rscadd: "Language prefix keys can be changed in the Character Setup. Changes are currently not global, but per character."

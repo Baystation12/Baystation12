@@ -92,7 +92,7 @@
 
 	if(src.loc == usr)
 		usr << "The maintenance panel is [open ? "open" : "closed"]."
-		usr << "Hardsuit systems are [offline ? "<font color='red'>offline</font>" : "<font color='green'>online</green>"]."
+		usr << "Hardsuit systems are [offline ? "<font color='red'>offline</font>" : "<font color='green'>online</font>"]."
 
 /obj/item/weapon/rig/New()
 	..()
@@ -629,7 +629,7 @@
 				if(check_slot)
 					H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
 			else
-				H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</b></span>"
+				H << "<span class='notice'>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</span>"
 
 	if(piece == "helmet" && helmet)
 		helmet.update_light(H)
@@ -745,7 +745,7 @@
 		if(dam_module.damage >= 2)
 			wearer << "<span class='danger'>The [source] has disabled your [dam_module.interface_name]!</span>"
 		else
-			wearer << "<span class='warning'>The [source] has damaged your [dam_module.interface_name]!"
+			wearer << "<span class='warning'>The [source] has damaged your [dam_module.interface_name]!</span>"
 	dam_module.deactivate()
 
 /obj/item/weapon/rig/proc/malfunction_check(var/mob/living/carbon/human/user)
