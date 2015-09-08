@@ -205,8 +205,7 @@
 	if(occupant)
 		return
 
-	// TODO :  Change to incapacitated() on merge.
-	if(R.stat || R.lying || R.resting || R.buckled)
+	if(R.incapacitated())
 		return
 	if(!R.cell)
 		return
@@ -232,8 +231,7 @@
 	set name = "Eject Recharger"
 	set src in oview(1)
 
-	// TODO :  Change to incapacitated() on merge.
-	if(usr.stat || usr.lying || usr.resting || usr.buckled)
+	if(usr.incapacitated())
 		return
 
 	go_out()
