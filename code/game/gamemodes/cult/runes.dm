@@ -35,6 +35,13 @@ var/list/sacrificed = list()
 		return
 	cast(user)
 
+/obj/effect/rune/attack_ai(var/mob/living/user) // Cult borgs!
+	if(Adjacent(user))
+		attack_hand(user)
+
+/obj/effect/rune/attack_generic(var/mob/living/user) // Cult constructs/slimes/whatnot!
+	attack_hand(user)
+
 /obj/effect/rune/proc/cast(var/mob/living/user)
 	fizzle(user)
 
@@ -544,9 +551,6 @@ var/list/sacrificed = list()
 	visible_message("<span class='warning'>The metal bends into \the [O], and \the [src] imbues into it.</span>", "You hear a metallic sound.")
 	qdel(src)
 
-/obj/effect/rune/bloodboil
-	cultname = "blood boil"
-
 /obj/effect/rune/confuse
 	cultname = "confuse"
 
@@ -603,13 +607,13 @@ var/list/sacrificed = list()
 
 /obj/effect/rune/blood_boil/cast(var/mob/living/user)
 	var/list/mob/living/cultists = get_cultists()
-	if(cultists.len < 1)
+	if(cultists.len < 3)
 		return fizzle()
 
 	for(var/mob/living/M in cultists)
 		M.say("Dedo ol[pick("'","`")]btoh!")
 
-	while(cultists.len >= 1)
+	while(cultists.len >= 3)
 		cultists = get_cultists()
 		for(var/mob/living/carbon/M in viewers(src))
 			var/obj/item/weapon/nullrod/N = locate() in M
@@ -624,10 +628,12 @@ var/list/sacrificed = list()
 /obj/effect/rune/tearreality
 	cultname = "tear reality"
 	var/the_end_comes = 0
-	var/the_time_has_come = 120
+	var/the_time_has_come = 120//TODO: 300
 	var/obj/singularity/narsie/large/HECOMES = null
 
 /obj/effect/rune/tearreality/cast(var/mob/living/user)
+	if(!cult.allow_narsie)
+		return
 	var/list/mob/living/cultists = get_cultists()
 	if(cultists.len < 5)
 		return fizzle()

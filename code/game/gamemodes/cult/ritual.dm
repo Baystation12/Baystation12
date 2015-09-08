@@ -184,7 +184,7 @@
 	set category = "Cult Magic"
 	set name = "Rune: Blood Boil"
 
-	make_rune(/obj/effect/rune/bloodboil, cost = 20, tome_required = 1)
+	make_rune(/obj/effect/rune/blood_boil, cost = 20, tome_required = 1)
 
 /mob/proc/confuse_rune()
 	set category = "Cult Magic"

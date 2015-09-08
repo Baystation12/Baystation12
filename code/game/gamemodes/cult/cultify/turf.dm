@@ -6,11 +6,13 @@
 	//todo: flooring datum cultify check
 	cultify_floor()
 
+	/*
 /turf/simulated/shuttle/floor/cultify()
 	cultify_floor()
 
 /turf/simulated/shuttle/floor4/cultify()
 	cultify_floor()
+	*/
 
 /turf/simulated/shuttle/wall/cultify()
 	cultify_wall()
@@ -27,18 +29,18 @@
 /turf/unsimulated/beach/cultify()
 	return
 
+	/*
 /turf/unsimulated/floor/cultify()
 	cultify_floor()
+	*/
 
 /turf/unsimulated/wall/cultify()
 	cultify_wall()
 
-/turf/proc/cultify_floor()
-	if((icon_state != "cult")&&(icon_state != "cult-narsie"))
-		name = "engraved floor"
-		icon_state = "cult"
-		cult.add_cultiness(10)//TODO: change back to 2
+/turf/simulated/floor/proc/cultify_floor()
+	set_flooring(get_flooring_data(/decl/flooring/reinforced/cult))
+	cult.add_cultiness(CULTINESS_PER_TURF)
 
 /turf/proc/cultify_wall()
 	ChangeTurf(/turf/unsimulated/wall/cult)
-	cult.add_cultiness(2)
+	cult.add_cultiness(CULTINESS_PER_TURF)

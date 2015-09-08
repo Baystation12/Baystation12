@@ -1,3 +1,7 @@
+#define CULTINESS_PER_CULTIST 20
+#define CULTINESS_PER_TURF 10
+//TODO: change to 2
+
 var/datum/antagonist/cultist/cult
 
 /proc/iscultist(var/mob/player)
@@ -16,7 +20,7 @@ var/datum/antagonist/cultist/cult
 	role_type = BE_CULTIST
 	feedback_tag = "cult_objective"
 	antag_indicator = "cult"
-	welcome_text = "You have a talisman in your possession; one that will help you start the cult on this station. Use it well and remember - there are others."
+	welcome_text = "You have a tome in your possession; one that will help you start the cult on this station. Use it well and remember - there are others."
 	victory_text = "The cult wins! It has succeeded in serving its dark masters!"
 	loss_text = "The staff managed to stop the cult!"
 	victory_feedback_tag = "win - cult win"
@@ -74,6 +78,9 @@ var/datum/antagonist/cultist/cult
 	if(S && istype(S))
 		T.loc = S
 
+	player.verbs += /mob/proc/set_cult_conversion_blurb
+	player.verbs += /mob/proc/cult_ooc
+
 /datum/antagonist/cultist/greet(var/datum/mind/player)
 	if(!..())
 		return 0
@@ -85,6 +92,7 @@ var/datum/antagonist/cultist/cult
 	if(show_message)
 		player.current.visible_message("<span class='notice'>[player.current] looks like they just reverted to their old faith!</span>")
 	remove_cult_magic(player.current)
+	remove_cultiness(CULTINESS_PER_CULTIST)
 
 /datum/antagonist/cultist/add_antagonist(var/datum/mind/player)
 	. = ..()
@@ -101,7 +109,7 @@ var/datum/antagonist/cultist/cult
 
 /datum/antagonist/cultist/update_antag_mob(var/datum/mind/player)
 	..()
-	add_cultiness(20)
+	add_cultiness(CULTINESS_PER_CULTIST)
 	add_cult_magic(player.current)
 
 /datum/antagonist/cultist/proc/add_cultiness(var/amount)
@@ -110,7 +118,7 @@ var/datum/antagonist/cultist/cult
 		cult_level = 2
 		for(var/datum/mind/H in cult.current_antagonists)
 			if(H.current)
-				H.current << "<span class='cult'>The veil between this world and beyond grows thin, and your power grows.</span>"
+				H.current << "<span class='cult'>The veil between this world and beyond grows thin, and your power grows.</span>"//TODO
 				add_cult_magic(H.current)
 		for(var/mob/dead/observer/D)
 			add_ghost_magic(D)
@@ -118,7 +126,7 @@ var/datum/antagonist/cultist/cult
 		cult_level = 3
 		for(var/datum/mind/H in cult.current_antagonists)
 			if(H.current)
-				H.current << "<span class='cult'>You feel that the fabric of reality is tearing. You can feel the Geometer of Blood's presence growing stronger.</span>"
+				H.current << "<span class='cult'>You feel that the fabric of reality is tearing. You can feel the Geometer of Blood's presence growing stronger.</span>"//TODO
 				add_cult_magic(H.current)
 		for(var/mob/dead/observer/D)
 			add_ghost_magic(D)
@@ -126,10 +134,15 @@ var/datum/antagonist/cultist/cult
 		cult_level = 4
 		for(var/datum/mind/H in cult.current_antagonists)
 			if(H.current)
-				H.current << "<span class='cult'>The world is at end. The veil is as thin as ever. The time has come.</span>"
+				H.current << "<span class='cult'>The world is at end. The veil is as thin as ever. The time has come.</span>"//TODO
 				add_cult_magic(H.current)
 		for(var/mob/dead/observer/D)
 			add_ghost_magic(D)
+
+/datum/antagonist/cultist/proc/remove_cultiness(var/amount)
+	cult_rating -= amount
+	if(cult_rating < 0) // Wat
+		cult_rating = 0
 
 /datum/antagonist/cultist/proc/add_cult_magic(var/mob/M)
 	M.verbs += /mob/proc/convert_rune
@@ -144,6 +157,9 @@ var/datum/antagonist/cultist/cult
 		M.verbs += /mob/proc/sacrifice_rune
 		M.verbs += /mob/proc/manifest_rune
 		M.verbs += /mob/proc/drain_rune
+
+		M.verbs -= /mob/proc/set_cult_conversion_blurb
+		M.verbs -= /mob/proc/cult_ooc
 
 		if(cult_level >= 3)
 			M.verbs += /mob/proc/weapon_rune
@@ -162,3 +178,37 @@ var/datum/antagonist/cultist/cult
 
 /datum/antagonist/cultist/proc/remove_cult_magic(var/mob/M)
 	M.verbs -= /mob/proc/convert_rune
+
+/mob/proc/set_cult_conversion_blurb()
+	set name = "Set conversion blurb"
+	set desc = "Sets a blurb that appears to fresh converts. This is only for providing fluff, do not put any round information here. This will be removed once you hit the second stage."
+	set category = "OOC"
+
+	if(!iscultist(src))
+		verbs -= /mob/proc/set_cult_conversion_blurb
+		return
+
+	var/newblurb = input("Choose a new conversion blurb.", "Blurb", cult.conversion_blurb)
+
+	if(newblurb)
+		cult.conversion_blurb = newblurb
+
+	log_and_message_admins("set cult's conversion blurb to '[newblurb]'")
+	for(var/datum/mind/H in cult.current_antagonists)
+		if(H.current)
+			H.current << "<span class='cult'>Conversion blurb is now: '[newblurb]'</span>"
+
+/mob/proc/cult_ooc(var/msg as text)
+	set name = "Cult OOC"
+	set desc = "Allows you to communicate with other cultists OOCly. Do not use it to reveal any round-related information. This is purely for the fluff discussion. This will be removed once you hit the second stage."
+	set category = "OOC"
+
+	msg = sanitize(msg)
+	if(!msg)
+		return
+
+	log_ooc("(CULT) [name]/[key] : [msg]")
+
+	for(var/datum/mind/H in cult.current_antagonists)
+		if(H.current)
+			H.current << "<span class='cult'>Cult OOC: [msg]</span>"
