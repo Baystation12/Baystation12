@@ -8,16 +8,23 @@
 	w_class = 2.0
 	var/obj/item/weapon/implant/imp = null
 
+/obj/item/weapon/implanter/attack_self(var/mob/user)
+	if(!imp)
+		return ..()
+	imp.loc = get_turf(src)
+	user.put_in_hands(imp)
+	user << "<span class='notice'>You remove \the [imp] from \the [src].</span>"
+	name = "implanter"
+	imp = null
+	update()
+	return
+
 /obj/item/weapon/implanter/proc/update()
-
-
-/obj/item/weapon/implanter/update()
 	if (src.imp)
 		src.icon_state = "implanter1"
 	else
 		src.icon_state = "implanter0"
 	return
-
 
 /obj/item/weapon/implanter/attack(mob/M as mob, mob/user as mob)
 	if (!istype(M, /mob/living/carbon))
@@ -51,8 +58,6 @@
 				update()
 
 	return
-
-
 
 /obj/item/weapon/implanter/loyalty
 	name = "implanter-loyalty"

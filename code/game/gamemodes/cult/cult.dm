@@ -8,4 +8,4 @@
 	required_enemies = 3
 	uplink_welcome = "Nar-Sie Uplink Console:"
 	end_on_antag_death = 1
-	antag_tag = MODE_CULTIST
+	antag_tags = list(MODE_CULTIST)

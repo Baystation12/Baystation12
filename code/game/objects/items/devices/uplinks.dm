@@ -50,7 +50,7 @@ datum/nano_item_lists
 	var/list/nanoui_data = new // Additional data for NanoUI use
 
 	var/list/purchase_log = new
-	var/uplink_owner = null//text-only
+	var/datum/mind/uplink_owner = null
 	var/used_TC = 0
 
 /obj/item/device/uplink/nano_host()
