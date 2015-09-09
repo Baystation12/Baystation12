@@ -197,8 +197,7 @@
 		build_overlays()
 
 /obj/machinery/recharge_station/Bumped(var/mob/living/silicon/robot/R)
-	if(istype(R))
-		go_in(R)
+	go_in(R)
 
 /obj/machinery/recharge_station/proc/go_in(var/mob/living/silicon/robot/R)
 	if(!istype(R))
@@ -206,10 +205,17 @@
 	if(occupant)
 		return
 
+	if(R.incapacitated())
+		return
+	if(!R.cell)
+		return
+
+	add_fingerprint(R)
 	R.reset_view(src)
 	R.forceMove(src)
 	occupant = R
 	update_icon()
+	return 1
 
 /obj/machinery/recharge_station/proc/go_out()
 	if(!occupant)
@@ -225,8 +231,7 @@
 	set name = "Eject Recharger"
 	set src in oview(1)
 
-	// TODO :  Change to incapacitated() on merge.
-	if(usr.stat || usr.lying || usr.resting || usr.buckled)
+	if(usr.incapacitated())
 		return
 
 	go_out()
@@ -238,9 +243,4 @@
 	set name = "Enter Recharger"
 	set src in oview(1)
 
-	// TODO :  Change to incapacitated() on merge.
-	if(usr.stat || usr.lying || usr.resting || usr.buckled)
-		return
-
 	go_in(usr)
-	add_fingerprint(usr)
