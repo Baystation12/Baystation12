@@ -113,6 +113,9 @@
 	if(!do_after(user,50))
 		return
 
+	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+	user.do_attack_animation(M)
+
 	M.visible_message("<span class='danger'>\The [M] has been injected with \the [src] by \the [user].</span>")
 
 	var/mob/living/carbon/human/H = M

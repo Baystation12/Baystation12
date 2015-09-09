@@ -186,7 +186,7 @@
 	update_held_icon()
 
 	//update timing
-	user.setClickCooldown(4)
+	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.setMoveCooldown(move_delay)
 	next_fire_time = world.time + fire_delay
 
