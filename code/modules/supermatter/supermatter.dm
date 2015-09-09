@@ -278,10 +278,11 @@
 				// Then bring it inside to explode instantly upon landing on a valid turf.
 
 
+	var/proj_damage = Proj.get_structure_damage()
 	if(istype(Proj, /obj/item/projectile/beam))
-		power += Proj.damage * config_bullet_energy	* CHARGING_FACTOR / POWER_FACTOR
+		power += proj_damage * config_bullet_energy	* CHARGING_FACTOR / POWER_FACTOR
 	else
-		damage += Proj.damage * config_bullet_energy
+		damage += proj_damage * config_bullet_energy
 	return 0
 
 /obj/machinery/power/supermatter/attack_robot(mob/user as mob)

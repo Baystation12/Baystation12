@@ -19,6 +19,7 @@
 	var/role_text_plural = "Traitors"       // As above but plural.
 
 	// Visual references.
+	var/antaghud_indicator = "hudsyndicate" // Used by the ghost antagHUD.
 	var/antag_indicator                     // icon_state for icons/mob/mob.dm visual indicator.
 	var/faction_indicator                   // See antag_indicator, but for factionalized people only.
 	var/faction_invisible                   // Can members of the faction identify other antagonists?
@@ -76,6 +77,11 @@
 		role_text_plural = role_text
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs |= protected_jobs
+	if(antaghud_indicator)
+		if(!hud_icon_reference)
+			hud_icon_reference = list()
+		if(role_text) hud_icon_reference[role_text] = antaghud_indicator
+		if(faction_role_text) hud_icon_reference[faction_role_text] = antaghud_indicator
 
 /datum/antagonist/proc/tick()
 	return 1

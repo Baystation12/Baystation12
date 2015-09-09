@@ -1,6 +1,7 @@
 /datum/game_mode/var/next_spawn = 0
 /datum/game_mode/var/min_autotraitor_delay = 4200  // Approx 7 minutes.
 /datum/game_mode/var/max_autotraitor_delay = 12000 // Approx 20 minutes.
+/datum/game_mode/var/process_count = 0
 
 /datum/game_mode/proc/get_usable_templates(var/list/supplied_templates)
 	var/list/usable_templates = list()
@@ -13,7 +14,11 @@
 ///process()
 ///Called by the gameticker
 /datum/game_mode/proc/process()
-	try_latespawn()
+	// Slow this down a bit so latejoiners have a chance of being antags.
+	process_count++
+	if(process_count >= 10)
+		process_count = 0
+		try_latespawn()
 
 /datum/game_mode/proc/latespawn(var/mob/living/carbon/human/character)
 	if(!character.mind)
