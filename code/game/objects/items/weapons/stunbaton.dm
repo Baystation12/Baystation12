@@ -107,8 +107,7 @@
 
 /obj/item/weapon/melee/baton/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	if(isrobot(target))
-		..()
-		return
+		return ..()
 
 	var/agony = agonyforce
 	var/stun = stunforce
@@ -118,7 +117,7 @@
 		affecting = H.get_organ(hit_zone)
 
 	if(user.a_intent == I_HURT)
-		..()
+		. = ..()
 		//whacking someone causes a much poorer electrical contact than deliberately prodding them.
 		agony *= 0.5
 		stun *= 0.5

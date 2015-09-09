@@ -117,60 +117,34 @@
 	else
 		set_light(0)
 
-/obj/item/weapon/reagent_containers/food/drinks/bottle/attack(mob/living/target as mob, mob/living/user as mob)
-	if(!target)
+/obj/item/weapon/reagent_containers/food/drinks/bottle/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+	var/blocked = ..()
+	
+	if(user.a_intent != I_HURT)
 		return
-
-	if(user.a_intent != I_HURT || !isGlass)
-		return ..()
-
-	var/obj/item/organ/external/affecting = user.zone_sel.selecting //Find what the player is aiming at
-
-	var/armor_block = 0 //Get the target's armour values for normal attack damage.
-	var/armor_duration = 0 //The more force the bottle has, the longer the duration.
-
-	//Calculating duration and calculating damage.
-	armor_block = target.run_armor_check(affecting, "melee")
-
-	//force will counteract armour, but will never increase duration
-	armor_duration = smash_duration + min(0, force - target.getarmor(affecting, "melee") + 10)
-
-	//Apply the damage!
-	target.apply_damage(force, BRUTE, affecting, armor_block, sharp=0)
-
+	if(!smash_check(1))
+		return //won't always break on the first hit
+	
 	// You are going to knock someone out for longer if they are not wearing a helmet.
-	var/do_smash = smash_check(1) //won't always break on the first hit
-	if(affecting == "head" && istype(target, /mob/living/carbon/) && do_smash)
-
-		//Display an attack message.
-		for(var/mob/O in viewers(user, null))
-			if(target != user) O.show_message(text("\red <B>[target] has been hit over the head with a bottle of [src.name], by [user]!</B>"), 1)
-			else O.show_message(text("\red <B>[target] hit \himself with a bottle of [src.name] on the head!</B>"), 1)
-		//Weaken the target for the duration that we calculated and divide it by 5.
-		if(armor_duration)
-			target.apply_effect(min(armor_duration, 5) , WEAKEN, armor_block) // Never weaken more than a flash!
+	var/weaken_duration = 0
+	if(blocked < 2)
+		weaken_duration = smash_duration + min(0, force - target.getarmor(hit_zone, "melee") + 10)
+	
+	if(hit_zone == "head" && istype(target, /mob/living/carbon/))
+		user.visible_message("<span class='danger'>\The [user] smashes [src] over [target]'s head!</span>")
+		if(weaken_duration)
+			target.apply_effect(min(weaken_duration, 5), WEAKEN, blocked) // Never weaken more than a flash!
 	else
-		//Default attack message and don't weaken the target.
-		for(var/mob/O in viewers(user, null))
-			if(target != user) O.show_message(text("\red <B>[target] has been attacked with a bottle of [src.name], by [user]!</B>"), 1)
-			else O.show_message(text("\red <B>[target] has attacked \himself with a bottle of [src.name]!</B>"), 1)
+		user.visible_message("<span class='danger'>\The [user] smashes [src] into [target]!</span>")
 
-	//Attack logs
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Has attacked [target.name] ([target.ckey]) with a bottle!</font>")
-	target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been smashed with a bottle by [user.name] ([user.ckey])</font>")
-	msg_admin_attack("[user.name] ([user.ckey]) attacked [target.name] ([target.ckey]) with a bottle. (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+	//The reagents in the bottle splash all over the target, thanks for the idea Nodrak
+	if(reagents)
+		user.visible_message("<span class='notice'>The contents of the [src] splash all over [target]!</span>")
+		reagents.splash(target, reagents.total_volume)
 
-	if(do_smash)
-		//The reagents in the bottle splash all over the target, thanks for the idea Nodrak
-		if(reagents)
-			user.visible_message("<span class='notice'>The contents of the [src] splash all over [target]!</span>")
-			reagents.splash(target, reagents.total_volume)
-
-		//Finally, smash the bottle. This kills (qdel) the bottle.
-		var/obj/item/weapon/broken_bottle/B = src.smash(target.loc, target)
-		user.put_in_active_hand(B)
-
-	return
+	//Finally, smash the bottle. This kills (qdel) the bottle.
+	var/obj/item/weapon/broken_bottle/B = smash(target.loc, target)
+	user.put_in_active_hand(B)
 
 //Keeping this here for now, I'll ask if I should keep it here.
 /obj/item/weapon/broken_bottle

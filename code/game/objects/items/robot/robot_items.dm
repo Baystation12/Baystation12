@@ -14,11 +14,11 @@
 	if(!istype(user))
 		return
 
+	user.visible_message("<span class='danger'>\The [user] has prodded \the [M] with \a [src]!</span>")
+
 	if(!user.cell || !user.cell.checked_use(1250)) //Slightly more than a baton.
-		user.visible_message("<span class='danger'>\The [user] has prodded \the [M] with its arm!</span>")
 		return
 
-	user.visible_message("<span class='danger'>\The [user] has prodded \the [M] with \a [src]!</span>")
 	playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 	
 	M.apply_effect(5, STUTTER)
