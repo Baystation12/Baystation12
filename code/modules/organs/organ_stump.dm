@@ -2,7 +2,6 @@
 	name = "limb stump"
 	icon_name = ""
 	dislocated = -1
-	cannot_amputate = 1
 
 /obj/item/organ/external/stump/New(var/mob/living/carbon/holder, var/internal, var/obj/item/organ/external/limb)
 	if(istype(limb))
