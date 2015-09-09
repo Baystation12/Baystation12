@@ -65,6 +65,7 @@
 	..()
 
 /obj/item/weapon/material/apply_hit_effect()
+	..()
 	if(!unbreakable)
 		if(material.is_brittle())
 			health = 0
