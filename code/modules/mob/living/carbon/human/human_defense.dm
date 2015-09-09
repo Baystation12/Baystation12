@@ -251,22 +251,17 @@ emp_act
 		return 1
 	return 0
 
-//*** TODO
-
-/* TODO Reimplement pending cleanup
-if(istype(I,/obj/item/weapon/card/emag))
-	if(!(affecting.status & ORGAN_ROBOT))
-		user << "\red That limb isn't robotic."
-		return
+/mob/living/carbon/human/emag_act(var/remaining_charges, mob/user, var/emag_source)
+	var/obj/item/organ/external/affecting = get_organ(user.zone_sel.selecting)
+	if(!affecting || !(affecting.status & ORGAN_ROBOT))
+		user << "<span class='warning'>That limb isn't robotic.</span>"
+		return -1
 	if(affecting.sabotaged)
-		user << "\red [src]'s [affecting.name] is already sabotaged!"
-	else
-		user << "\red You sneakily slide [I] into the dataport on [src]'s [affecting.name] and short out the safeties."
-		var/obj/item/weapon/card/emag/emag = I
-		emag.uses--
-		affecting.sabotaged = 1
+		user << "<span class='warning'>[src]'s [affecting.name] is already sabotaged!</span>"
+		return -1
+	user << "<span class='notice'>You sneakily slide [emag_source] into the dataport on [src]'s [affecting.name] and short out the safeties.</span>"
+	affecting.sabotaged = 1
 	return 1
-*/
 
 //this proc handles being hit by a thrown atom
 /mob/living/carbon/human/hitby(atom/movable/AM as mob|obj,var/speed = THROWFORCE_SPEED_DIVISOR)
