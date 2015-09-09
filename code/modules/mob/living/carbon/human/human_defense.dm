@@ -257,29 +257,32 @@ emp_act
 					H.bloody_hands(src)
 
 		if(!stat)
+			if(headcheck(hit_area))
+				//Harder to score a stun but if you do it lasts a bit longer
+				if(prob(effective_force))
+					apply_effect(20, PARALYZE, armor)
+					visible_message("<span class='danger'>[src] [species.knockout_message]</span>")
+			else
+				//Easier to score a stun but lasts less time
+				if(prob(effective_force + 10))
+					apply_effect(6, WEAKEN, armor)
+					visible_message("<span class='danger'>[src] has been knocked down!</span>")
+		
+		//Apply blood
+		if(bloody)
 			switch(hit_area)
-				if("head")//Harder to score a stun but if you do it lasts a bit longer
-					if(prob(effective_force))
-						apply_effect(20, PARALYZE, armor)
-						visible_message("\red <B>[src] has been knocked unconscious!</B>")
-					if(bloody)//Apply blood
-						if(wear_mask)
-							wear_mask.add_blood(src)
-							update_inv_wear_mask(0)
-						if(head)
-							head.add_blood(src)
-							update_inv_head(0)
-						if(glasses && prob(33))
-							glasses.add_blood(src)
-							update_inv_glasses(0)
-
-				if("chest")//Easier to score a stun but lasts less time
-					if(prob((effective_force + 10)))
-						apply_effect(6, WEAKEN, armor)
-						visible_message("\red <B>[src] has been knocked down!</B>")
-
-					if(bloody)
-						bloody_body(src)
+				if("head")
+					if(wear_mask)
+						wear_mask.add_blood(src)
+						update_inv_wear_mask(0)
+					if(head)
+						head.add_blood(src)
+						update_inv_head(0)
+					if(glasses && prob(33))
+						glasses.add_blood(src)
+						update_inv_glasses(0)
+				if("chest")
+					bloody_body(src)
 
 	if(Iforce > 10 || Iforce >= 5 && prob(33))
 		forcesay(hit_appends)	//forcesay checks stat already
