@@ -1,3 +1,23 @@
+/*
+=== Item Click Call Sequences ===
+These are the default click code call sequences used when clicking on stuff with an item.
+
+Atoms:
+
+mob/ClickOn() calls the item's resolve_attackby() proc.
+item/resolve_attackby() calls the target atom's attackby() proc.
+
+Mobs:
+
+mob/living/attackby() after checking for surgery, calls the item's attack() proc.
+item/attack() generates attack logs and calls the mob's attacked_with_item() proc.
+mob/attacked_with_item() should then do mob-type specific stuff (like determining hit/miss, handling shields, etc) and then possibly call the item's apply_hit_effect() proc to actually apply the effects of being hit.
+
+Item Hit Effects:
+
+item/apply_hit_effect() can be overriden to do whatever you want. However "standard" physical damage based weapons should make use of the target mob's hit_with_weapon() proc to 
+avoid code duplication. This includes items that may sometimes act as a standard weapon in addition to having other effects (e.g. stunbatons on harm intent).
+*/
 
 // Called when the item is in the active hand, and clicked; alternately, there is an 'activate held object' verb or you can hit pagedown.
 /obj/item/proc/attack_self(mob/user)
