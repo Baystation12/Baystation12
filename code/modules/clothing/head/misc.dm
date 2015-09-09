@@ -18,6 +18,15 @@
 	slot_flags = SLOT_HEAD | SLOT_EARS
 	body_parts_covered = 0
 
+/obj/item/clothing/head/hairflower/blue
+	icon_state = "hairflower_blue"
+
+/obj/item/clothing/head/hairflower/pink
+	icon_state = "hairflower_pink"
+
+/obj/item/clothing/head/hairflower/yellow
+	icon_state = "hairflower_yellow"
+
 /obj/item/clothing/head/powdered_wig
 	name = "powdered wig"
 	desc = "A powdered wig."
