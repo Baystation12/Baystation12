@@ -52,6 +52,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /obj/item/proc/attack(mob/living/M, mob/living/user, var/target_zone)
 	if(!force || (flags & NOBLUDGEON))
 		return 0
+	if(M == user && user.a_intent != I_HURT)
+		return 0
 
 	/////////////////////////
 	user.lastattacked = M
