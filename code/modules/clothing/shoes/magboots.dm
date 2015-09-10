@@ -18,14 +18,14 @@
 
 /obj/item/clothing/shoes/magboots/attack_self(mob/user)
 	if(magpulse)
-		flags &= ~NOSLIP
+		item_flags &= ~NOSLIP
 		magpulse = 0
 		set_slowdown()
 		force = 3
 		if(icon_base) icon_state = "[icon_base]0"
 		user << "You disable the mag-pulse traction system."
 	else
-		flags |= NOSLIP
+		item_flags |= NOSLIP
 		magpulse = 1
 		set_slowdown()
 		force = 5
@@ -44,7 +44,7 @@
 			shoes = null
 			return 0
 		H.drop_from_inventory(shoes)	//Remove the old shoes so you can put on the magboots.
-		shoes.loc = src
+		shoes.forceMove(src)
 
 	if(!..())
 		if(shoes) 	//Put the old shoes back on if the check fails.
@@ -63,13 +63,13 @@
 	var/mob/living/carbon/human/H = wearer
 	if(shoes)
 		if(!H.equip_to_slot_if_possible(shoes, slot_shoes))
-			shoes.loc = get_turf(src)
+			shoes.forceMove(get_turf(src))
 		src.shoes = null
 	wearer = null
 
 /obj/item/clothing/shoes/magboots/examine(mob/user)
 	..(user)
 	var/state = "disabled"
-	if(src.flags&NOSLIP)
+	if(item_flags & NOSLIP)
 		state = "enabled"
 	user << "Its mag-pulse traction system appears to be [state]."

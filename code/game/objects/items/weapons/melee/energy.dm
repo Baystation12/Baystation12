@@ -5,6 +5,7 @@
 	var/active_w_class
 	sharp = 0
 	edge = 0
+	armor_penetration = 50
 	flags = NOBLOODY
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
@@ -74,7 +75,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 3
-	flags = CONDUCT | NOSHIELD | NOBLOODY
+	flags = CONDUCT | NOBLOODY
 	origin_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4)
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	sharp = 1
@@ -110,7 +111,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2
-	flags = NOSHIELD | NOBLOODY
+	flags = NOBLOODY
 	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 	sharp = 1
 	edge = 1
@@ -150,8 +151,14 @@
 	attack_verb = list()
 	icon_state = initial(icon_state)
 
-/obj/item/weapon/melee/energy/sword/IsShield()
-	if(active)
+/obj/item/weapon/melee/energy/sword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+	if(active && default_parry_check(user, attacker, damage_source) && prob(50))
+		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
+		
+		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		spark_system.set_up(5, 0, user.loc)
+		spark_system.start()
+		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
 		return 1
 	return 0
 
@@ -173,7 +180,8 @@
 	name = "energy blade"
 	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
 	icon_state = "blade"
-	force = 70.0//Normal attacks deal very high damage.
+	force = 40 //Normal attacks deal very high damage - about the same as wielded fire axe
+	armor_penetration = 100
 	sharp = 1
 	edge = 1
 	anchored = 1    // Never spawned outside of inventory, should be fine.
@@ -181,7 +189,7 @@
 	throw_speed = 1
 	throw_range = 1
 	w_class = 4.0//So you can't hide it in your pocket or some such.
-	flags = NOSHIELD | NOBLOODY
+	flags = NOBLOODY
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/mob/living/creator
 	var/datum/effect/effect/system/spark_spread/spark_system

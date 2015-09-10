@@ -17,6 +17,9 @@
 		slot_l_hand_str = "backpack",
 		slot_r_hand_str = "backpack",
 		)
+	sprite_sheets = list(
+		"Resomi" = 'icons/mob/species/resomi/back.dmi'
+		)
 	w_class = 4
 	slot_flags = SLOT_BACK
 	max_w_class = 3
@@ -61,7 +64,7 @@
 			qdel(W)
 			return
 		..()
-	
+
 	//Please don't clutter the parent storage item with stupid hacks.
 	can_be_inserted(obj/item/W as obj, stop_messages = 0)
 		if(istype(W, /obj/item/weapon/storage/backpack/holding))
@@ -104,7 +107,7 @@
 
 /obj/item/weapon/storage/backpack/captain
 	name = "captain's backpack"
-	desc = "It's a special backpack made exclusively for Nanotrasen officers."
+	desc = "It's a special backpack made exclusively for officers."
 	icon_state = "captainpack"
 	item_state_slots = null
 
@@ -212,7 +215,7 @@
 
 /obj/item/weapon/storage/backpack/satchel_cap
 	name = "captain's satchel"
-	desc = "An exclusive satchel for Nanotrasen officers."
+	desc = "An exclusive satchel for officers."
 	icon_state = "satchel-cap"
 	item_state_slots = list(
 		slot_l_hand_str = "satchel-cap",
@@ -222,7 +225,7 @@
 //ERT backpacks.
 /obj/item/weapon/storage/backpack/ert
 	name = "emergency response team backpack"
-	desc = "A spacious backpack with lots of pockets, used by members of the Nanotrasen Emergency Response Team."
+	desc = "A spacious backpack with lots of pockets, used by members of the Emergency Response Team."
 	icon_state = "ert_commander"
 	item_state_slots = list(
 		slot_l_hand_str = "securitypack",
@@ -232,22 +235,22 @@
 //Commander
 /obj/item/weapon/storage/backpack/ert/commander
 	name = "emergency response team commander backpack"
-	desc = "A spacious backpack with lots of pockets, worn by the commander of a Nanotrasen Emergency Response Team."
+	desc = "A spacious backpack with lots of pockets, worn by the commander of an Emergency Response Team."
 
 //Security
 /obj/item/weapon/storage/backpack/ert/security
 	name = "emergency response team security backpack"
-	desc = "A spacious backpack with lots of pockets, worn by security members of a Nanotrasen Emergency Response Team."
+	desc = "A spacious backpack with lots of pockets, worn by security members of an Emergency Response Team."
 	icon_state = "ert_security"
 
 //Engineering
 /obj/item/weapon/storage/backpack/ert/engineer
 	name = "emergency response team engineer backpack"
-	desc = "A spacious backpack with lots of pockets, worn by engineering members of a Nanotrasen Emergency Response Team."
+	desc = "A spacious backpack with lots of pockets, worn by engineering members of an Emergency Response Team."
 	icon_state = "ert_engineering"
 
 //Medical
 /obj/item/weapon/storage/backpack/ert/medical
 	name = "emergency response team medical backpack"
-	desc = "A spacious backpack with lots of pockets, worn by medical members of a Nanotrasen Emergency Response Team."
+	desc = "A spacious backpack with lots of pockets, worn by medical members of an Emergency Response Team."
 	icon_state = "ert_medical"

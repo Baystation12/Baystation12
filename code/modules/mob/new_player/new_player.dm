@@ -67,12 +67,7 @@
 	Stat()
 		..()
 
-		statpanel("Status")
-		if (client.statpanel == "Status" && ticker)
-			if (ticker.current_state != GAME_STATE_PREGAME)
-				stat(null, "Station Time: [worldtime2text()]")
-		statpanel("Lobby")
-		if(client.statpanel=="Lobby" && ticker)
+		if(statpanel("Lobby") && ticker)
 			if(ticker.hide_mode)
 				stat("Game Mode:", "Secret")
 			else
@@ -154,7 +149,7 @@
 					return 0
 
 				var/datum/species/S = all_species[client.prefs.species]
-				if(!(S.flags & IS_WHITELISTED))
+				if(!(S.spawn_flags & IS_WHITELISTED))
 					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
 					return 0
 
@@ -178,7 +173,7 @@
 					return 0
 
 				var/datum/species/S = all_species[client.prefs.species]
-				if(!(S.flags & CAN_JOIN))
+				if(!(S.spawn_flags & CAN_JOIN))
 					src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
 					return 0
 
@@ -373,12 +368,6 @@
 
 		qdel(src)
 
-	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
-		if (ticker.current_state == GAME_STATE_PLAYING)
-			if(character.mind.role_alt_title)
-				rank = character.mind.role_alt_title
-			global_announcer.autosay("[character.real_name],[rank ? " [rank]," : " visitor," ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
-
 	proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
 		if (ticker.current_state == GAME_STATE_PLAYING)
 			if(character.mind.role_alt_title)
@@ -387,16 +376,11 @@
 			global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
 
 	proc/LateChoices()
-		var/mills = world.time // 1/10 of a second, not real milliseconds but whatever
-		//var/secs = ((mills % 36000) % 600) / 10 //Not really needed, but I'll leave it here for refrence.. or something
-		var/mins = (mills % 36000) / 600
-		var/hours = mills / 36000
-
 		var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
 
 		var/dat = "<html><body><center>"
 		dat += "<b>Welcome, [name].<br></b>"
-		dat += "Round Duration: [round(hours)]h [round(mins)]m<br>"
+		dat += "Round Duration: [round_duration()]<br>"
 
 		if(emergency_shuttle) //In case Nanotrasen decides reposess CentComm's shuttles.
 			if(emergency_shuttle.going_to_centcom()) //Shuttle is going to centcomm, not recalled
@@ -426,13 +410,16 @@
 
 		var/mob/living/carbon/human/new_character
 
+		var/use_species_name
 		var/datum/species/chosen_species
 		if(client.prefs.species)
 			chosen_species = all_species[client.prefs.species]
-		if(chosen_species)
+			use_species_name = chosen_species.get_station_variant() //Only used by pariahs atm.
+
+		if(chosen_species && use_species_name)
 			// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
 			if(is_species_whitelisted(chosen_species) || has_admin_rights())
-				new_character = new(loc, client.prefs.species)
+				new_character = new(loc, use_species_name)
 
 		if(!new_character)
 			new_character = new(loc)
@@ -503,7 +490,7 @@
 
 	proc/is_species_whitelisted(datum/species/S)
 		if(!S) return 1
-		return is_alien_whitelisted(src, S.name) || !config.usealienwhitelist || !(S.flags & IS_WHITELISTED)
+		return is_alien_whitelisted(src, S.name) || !config.usealienwhitelist || !(S.spawn_flags & IS_WHITELISTED)
 
 /mob/new_player/get_species()
 	var/datum/species/chosen_species

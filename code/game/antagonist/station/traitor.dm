@@ -1,12 +1,10 @@
 var/datum/antagonist/traitor/traitors
 
+// Inherits most of its vars from the base datum.
 /datum/antagonist/traitor
 	id = MODE_TRAITOR
-	restricted_jobs = list("Cyborg")//They are part of the AI if he is traitor so are they, they use to get double chances
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Head of Security", "Captain")//AI", Currently out of the list as malf does not work for shit
+	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Head of Security", "Captain")
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	max_antags = 200 // No upper limit.
-	max_antags_round = 200
 
 /datum/antagonist/traitor/New()
 	..()
@@ -139,9 +137,9 @@ var/datum/antagonist/traitor/traitors
 	if(istype(R,/obj/item/device/radio))
 		// generate list of radio freqs
 		var/obj/item/device/radio/target_radio = R
-		var/freq = 1441
+		var/freq = PUBLIC_LOW_FREQ
 		var/list/freqlist = list()
-		while (freq <= 1489)
+		while (freq <= PUBLIC_HIGH_FREQ)
 			if (freq < 1451 || freq > PUB_FREQ)
 				freqlist += freq
 			freq += 2

@@ -34,10 +34,9 @@
 
 	var/obj/item/weapon/card/id/W = new id_type(player)
 	if(!W) return
-	W.name = "[player.real_name]'s ID Card"
 	W.access |= default_access
 	W.assignment = "[assignment]"
-	W.registered_name = player.real_name
+	player.set_id_info(W)
 	if(equip) player.equip_to_slot_or_del(W, slot_wear_id)
 	return W
 
@@ -86,7 +85,7 @@
 			code_owner.store_memory("<B>Nuclear Bomb Code</B>: [code]", 0, 0)
 			code_owner.current << "The nuclear authorization code is: <B>[code]</B>"
 	else
-		world << "<span class='danger'>Could not spawn nuclear bomb. Contact a developer.</span>"
+		message_admins("<span class='danger'>Could not spawn nuclear bomb. Contact a developer.</span>")
 		return
 
 	spawned_nuke = code

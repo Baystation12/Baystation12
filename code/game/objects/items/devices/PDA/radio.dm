@@ -1,6 +1,6 @@
 /obj/item/radio/integrated
 	name = "\improper PDA radio module"
-	desc = "An electronic radio system of nanotrasen origin."
+	desc = "An electronic radio system."
 	icon = 'icons/obj/module.dmi'
 	icon_state = "power_mod"
 	var/obj/item/device/pda/hostpda = null
@@ -40,7 +40,7 @@
 	var/mob/living/bot/secbot/active 	// the active bot; if null, show bot list
 	var/list/botstatus			// the status signal sent by the bot
 
-	var/control_freq = AI_FREQ
+	var/control_freq = BOT_FREQ
 
 	// create a new QM cartridge, and register to receive bot control & beacon message
 	New()
@@ -112,7 +112,7 @@
 	var/list/beacons
 
 	var/beacon_freq = 1400
-	var/control_freq = AI_FREQ
+	var/control_freq = BOT_FREQ
 
 	// create a new QM cartridge, and register to receive bot control & beacon message
 	New()
@@ -221,7 +221,7 @@
 		if(!radio_controller)
 			return
 
-		if (src.frequency < 1441 || src.frequency > 1489)
+		if (src.frequency < PUBLIC_LOW_FREQ || src.frequency > PUBLIC_HIGH_FREQ)
 			src.frequency = sanitize_frequency(src.frequency)
 
 		set_frequency(frequency)

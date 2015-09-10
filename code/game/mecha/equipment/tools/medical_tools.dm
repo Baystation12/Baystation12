@@ -6,7 +6,6 @@
 	origin_tech = list(TECH_DATA = 2, TECH_BIO = 3)
 	energy_drain = 20
 	range = MELEE
-	construction_cost = list(DEFAULT_WALL_MATERIAL=5000,"glass"=10000)
 	equip_cooldown = 20
 	var/mob/living/carbon/occupant = null
 	var/datum/global_iterator/pr_mech_sleeper
@@ -333,10 +332,8 @@
 		if(istype(new_turf, /turf/simulated/floor))
 			var/turf/simulated/floor/T = new_turf
 			if(!T.is_plating())
-				if(!T.broken && !T.burnt)
-					new T.floor_type(T)
-				T.make_plating()
-		return !new_turf.intact
+				T.make_plating(!(T.broken || T.burnt))
+		return new_turf.is_plating()
 
 	proc/layCable(var/turf/new_turf)
 		if(equip_ready || !istype(new_turf) || !dismantleFloor(new_turf))
@@ -386,8 +383,6 @@
 	range = MELEE|RANGED
 	equip_cooldown = 10
 	origin_tech = list(TECH_MATERIAL = 3, TECH_BIO = 4, TECH_MAGNET = 4, TECH_DATA = 3)
-	construction_time = 200
-	construction_cost = list(DEFAULT_WALL_MATERIAL=3000,"glass"=2000)
 	required_type = /obj/mecha/medical
 
 	New()

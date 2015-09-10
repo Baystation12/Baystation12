@@ -1,5 +1,0 @@
-author: GinjaNinja32
-delete-after: True
-
-changes:
-  - rscadd: "Changed language selection to allow multiple language selections, changed humans/unathi/tajarans/skrell to not automatically gain their racial language, instead adding it to the selectable languages for that species. Old slots will warn when loaded that the languages may not be what you expect."

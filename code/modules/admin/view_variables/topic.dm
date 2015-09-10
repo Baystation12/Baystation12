@@ -1,3 +1,4 @@
+
 /client/proc/view_var_Topic(href, href_list, hsrc)
 	//This should all be moved over to datum/admins/Topic() or something ~Carn
 	if( (usr.client != src) || !src.holder )

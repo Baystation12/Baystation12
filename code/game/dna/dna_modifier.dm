@@ -161,7 +161,7 @@
 		if(!M.client && M.mind)
 			for(var/mob/dead/observer/ghost in player_list)
 				if(ghost.mind == M.mind)
-					ghost << "<b><font color = #330033><font size = 3>Your corpse has been placed into a cloning scanner. Return to your body if you want to be resurrected/cloned!</b> (Verbs -> Ghost -> Re-enter corpse)</font color>"
+					ghost << "<b><font color = #330033><font size = 3>Your corpse has been placed into a cloning scanner. Return to your body if you want to be resurrected/cloned!</b> (Verbs -> Ghost -> Re-enter corpse)</font></font>"
 					break
 	return
 
@@ -218,7 +218,8 @@
 	name = "DNA Modifier Access Console"
 	desc = "Scand DNA."
 	icon = 'icons/obj/computer.dmi'
-	icon_state = "scanner"
+	icon_keyboard = "med_key"
+	icon_screen = "dna"
 	density = 1
 	circuit = /obj/item/weapon/circuitboard/scan_consolenew
 	var/selected_ui_block = 1.0
@@ -270,20 +271,8 @@
 	return
 
 /obj/machinery/computer/scan_consolenew/blob_act()
-
 	if(prob(75))
 		qdel(src)
-
-/obj/machinery/computer/scan_consolenew/power_change()
-	..()
-	if(stat & BROKEN)
-		icon_state = "broken"
-	else
-		if (stat & NOPOWER)
-			spawn(rand(0, 15))
-				src.icon_state = "c_unpowered"
-		else
-			icon_state = initial(icon_state)
 
 /obj/machinery/computer/scan_consolenew/New()
 	..()

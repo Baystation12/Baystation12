@@ -30,6 +30,7 @@
 
 /obj/structure/grille/attack_hand(mob/user as mob)
 
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 	user.do_attack_animation(src)
 
@@ -64,13 +65,11 @@
 /obj/structure/grille/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)	return
 
-	//Tasers and the like should not damage grilles.
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		return
-
 	//Flimsy grilles aren't so great at stopping projectiles. However they can absorb some of the impact
-	var/damage = Proj.damage
+	var/damage = Proj.get_structure_damage()
 	var/passthrough = 0
+	
+	if(!damage) return
 
 	//20% chance that the grille provides a bit more cover than usual. Support structure for example might take up 20% of the grille's area.
 	//If they click on the grille itself then we assume they are aiming at the grille itself and the extra cover behaviour is always used.
@@ -155,6 +154,7 @@
 //window placing end
 
 	else if(!(W.flags & CONDUCT) || !shock(user, 70))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 		switch(W.damtype)

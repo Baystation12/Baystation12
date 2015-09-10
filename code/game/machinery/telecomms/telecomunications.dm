@@ -47,11 +47,13 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 	signal.data["slow"] += rand(0, round((100-integrity))) // apply some lag based on integrity
 
+	/*
+	// Edit by Atlantis: Commented out as emergency fix due to causing extreme delays in communications.
 	// Apply some lag based on traffic rates
 	var/netlag = round(traffic / 50)
 	if(netlag > signal.data["slow"])
 		signal.data["slow"] = netlag
-
+	*/
 // Loop through all linked machines and send the signal or copy.
 	for(var/obj/machinery/telecomms/machine in links)
 		if(filter && !istype( machine, text2path(filter) ))

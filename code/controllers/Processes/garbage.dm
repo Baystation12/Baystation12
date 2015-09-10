@@ -135,6 +135,10 @@ world/loop_checks = 0
 /datum/controller/process/garbage_collector/getStatName()
 	return ..()+"([garbage_collector.destroyed.len]/[garbage_collector.dels]/[garbage_collector.hard_dels])"
 
+// Tests if an atom has been deleted.
+/proc/deleted(atom/A)
+	return !A || !isnull(A.gcDestroyed)
+
 // Should be treated as a replacement for the 'del' keyword.
 // Datums passed to this will be given a chance to clean up references to allow the GC to collect them.
 /proc/qdel(var/datum/A)
@@ -183,6 +187,7 @@ world/loop_checks = 0
 // This should be overridden to remove all references pointing to the object being destroyed.
 // Return true if the the GC controller should allow the object to continue existing. (Useful if pooling objects.)
 /datum/proc/Destroy()
+	nanomanager.close_uis(src)
 	tag = null
 	return
 

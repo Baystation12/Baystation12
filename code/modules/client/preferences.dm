@@ -18,7 +18,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"ninja" = "true",                                    // 10
 	"raider" = IS_MODE_COMPILED("heist"),                // 11
 	"diona" = 1,                                         // 12
-	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
+	"loyalist" = IS_MODE_COMPILED("revolution"),         // 13
 	"pAI candidate" = 1, // -- TLE                       // 14
 )
 
@@ -76,6 +76,7 @@ datum/preferences
 	var/species = "Human"               //Species datum to use.
 	var/species_preview                 //Used for the species selection window.
 	var/list/alternate_languages = list() //Secondary language(s)
+	var/list/language_prefixes = list() //Kanguage prefix keys
 	var/list/gear						//Custom/fluff item loadout.
 
 		//Some faction information.
@@ -401,8 +402,11 @@ datum/preferences
 			dat += "- <a href='byond://?src=\ref[user];preference=language;add=1'>add</a> ([S.num_alternate_languages - alternate_languages.len] remaining)<br>"
 	else
 		dat += "- [species] cannot choose secondary languages.<br>"
-	dat += "<br><br>"
 
+	dat += "<b>Language Keys</b><br>"
+	dat += " [english_list(language_prefixes, and_text = " ", comma_text = " ")] <a href='byond://?src=\ref[user];preference=language_prefix'>Change</a><br>"
+
+	dat += "<br><br>"
 	var/list/undies = gender == MALE ? underwear_m : underwear_f
 
 	dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[get_key_by_value(undies,underwear)]</b></a><br>"
@@ -411,7 +415,7 @@ datum/preferences
 
 	dat += "Backpack Type:<br><a href ='?_src_=prefs;preference=bag;task=input'><b>[backbaglist[backbag]]</b></a><br>"
 
-	dat += "Nanotrasen Relation:<br><a href ='?_src_=prefs;preference=nt_relation;task=input'><b>[nanotrasen_relation]</b></a><br>"
+	dat += "[company_name] Relation:<br><a href ='?_src_=prefs;preference=nt_relation;task=input'><b>[nanotrasen_relation]</b></a><br>"
 
 	dat += "</td><td><b>Preview</b><br><img src=previewicon.png height=64 width=64><img src=previewicon2.png height=64 width=64></td></tr></table>"
 
@@ -462,7 +466,7 @@ datum/preferences
 		for (var/i in special_roles)
 			if(special_roles[i]) //if mode is available on the server
 				if(jobban_isbanned(user, i) || (i == "positronic brain" && jobban_isbanned(user, "AI") && jobban_isbanned(user, "Cyborg")) || (i == "pAI candidate" && jobban_isbanned(user, "pAI")))
-					dat += "<b>Be [i]:<b> <font color=red><b> \[BANNED]</b></font><br>"
+					dat += "<b>Be [i]:</b> <font color=red><b> \[BANNED]</b></font><br>"
 				else
 					dat += "<b>Be [i]:</b> <a href='?_src_=prefs;preference=be_special;num=[n]'><b>[src.be_special&(1<<n) ? "Yes" : "No"]</b></a><br>"
 			n++
@@ -633,9 +637,9 @@ datum/preferences
 		dat += "<img src='species_preview_[current_species.name].png' width='64px' height='64px'><br/><br/>"
 	dat += "<b>Language:</b> [current_species.language]<br/>"
 	dat += "<small>"
-	if(current_species.flags & CAN_JOIN)
+	if(current_species.spawn_flags & CAN_JOIN)
 		dat += "</br><b>Often present on human stations.</b>"
-	if(current_species.flags & IS_WHITELISTED)
+	if(current_species.spawn_flags & IS_WHITELISTED)
 		dat += "</br><b>Whitelist restricted.</b>"
 	if(current_species.flags & NO_BLOOD)
 		dat += "</br><b>Does not have blood.</b>"
@@ -649,11 +653,11 @@ datum/preferences
 		dat += "</br><b>Has excellent traction.</b>"
 	if(current_species.flags & NO_POISON)
 		dat += "</br><b>Immune to most poisons.</b>"
-	if(current_species.flags & HAS_SKIN_TONE)
+	if(current_species.appearance_flags & HAS_SKIN_TONE)
 		dat += "</br><b>Has a variety of skin tones.</b>"
-	if(current_species.flags & HAS_SKIN_COLOR)
+	if(current_species.appearance_flags & HAS_SKIN_COLOR)
 		dat += "</br><b>Has a variety of skin colours.</b>"
-	if(current_species.flags & HAS_EYE_COLOR)
+	if(current_species.appearance_flags & HAS_EYE_COLOR)
 		dat += "</br><b>Has a variety of eye colours.</b>"
 	if(current_species.flags & IS_PLANT)
 		dat += "</br><b>Has a plantlike physiology.</b>"
@@ -663,9 +667,9 @@ datum/preferences
 
 	var/restricted = 0
 	if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
-		if(!(current_species.flags & CAN_JOIN))
+		if(!(current_species.spawn_flags & CAN_JOIN))
 			restricted = 2
-		else if((current_species.flags & IS_WHITELISTED) && !is_alien_whitelisted(user,current_species))
+		else if((current_species.spawn_flags & IS_WHITELISTED) && !is_alien_whitelisted(user,current_species))
 			restricted = 1
 
 	if(restricted)
@@ -1175,6 +1179,26 @@ datum/preferences
 					if(new_lang)
 						alternate_languages |= new_lang
 
+	else if(href_list["preference"] == "language_prefix")
+		var/char
+		var/keys[0]
+		do
+			char = input("Enter a single special character.\nYou may re-select the same characters.\nThe following characters are already in use by radio: ; : .\nThe following characters are already in use by special say commands: ! *", "Enter Character - [3 - keys.len] remaining") as null|text
+			if(char)
+				if(length(char) > 1)
+					alert("Only single characters allowed.", "Error", "Ok")
+				else if(char in list(";", ":", "."))
+					alert("Radio character. Rejected.", "Error", "Ok")
+				else if(char in list("!","*"))
+					alert("Say character. Rejected.", "Error", "Ok")
+				else if(contains_az09(char))
+					alert("Non-special character. Rejected.", "Error", "Ok")
+				else
+					keys.Add(char)
+		while(char && keys.len < 3)
+
+		if(keys.len == 3)
+			language_prefixes = keys
 	switch(href_list["task"])
 		if("change")
 			if(href_list["preference"] == "species")
@@ -1303,7 +1327,8 @@ datum/preferences
 						b_type = new_b_type
 
 				if("hair")
-					if(species == "Human" || species == "Unathi" || species == "Tajara" || species == "Skrell")
+					var/datum/species/S = all_species[species]
+					if(S && (S.appearance_flags & HAS_HAIR_COLOR))
 						var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference", rgb(r_hair, g_hair, b_hair)) as color|null
 						if(new_hair)
 							r_hair = hex2num(copytext(new_hair, 2, 4))
@@ -1383,7 +1408,8 @@ datum/preferences
 						s_tone = 35 - max(min( round(new_s_tone), 220),1)
 
 				if("skin")
-					if(species == "Unathi" || species == "Tajara" || species == "Skrell")
+					var/datum/species/S = all_species[species]
+					if(S && (S.appearance_flags & HAS_SKIN_COLOR))
 						var/new_skin = input(user, "Choose your character's skin colour: ", "Character Preference", rgb(r_skin, g_skin, b_skin)) as color|null
 						if(new_skin)
 							r_skin = hex2num(copytext(new_skin, 2, 4))
@@ -1401,7 +1427,7 @@ datum/preferences
 						backbag = backbaglist.Find(new_backbag)
 
 				if("nt_relation")
-					var/new_relation = input(user, "Choose your relation to NT. Note that this represents what others can find out about your character by researching your background, not what your character actually thinks.", "Character Preference")  as null|anything in list("Loyal", "Supportive", "Neutral", "Skeptical", "Opposed")
+					var/new_relation = input(user, "Choose your relation to NT. Note that this represents what others can find out about your character by researching your background, not what your character actually thinks.", "Character Preference")  as null|anything in COMPANY_ALIGNMENTS
 					if(new_relation)
 						nanotrasen_relation = new_relation
 
@@ -1465,7 +1491,16 @@ datum/preferences
 								rlimb_data[second_limb] = null
 
 						if("Prothesis")
-							var/choice = input(user, "Which manufacturer do you wish to use for this limb?") as null|anything in chargen_robolimbs
+							var/tmp_species = species ? species : "Human"
+							var/list/usable_manufacturers = list()
+							for(var/company in chargen_robolimbs)
+								var/datum/robolimb/M = chargen_robolimbs[company]
+								if(tmp_species in M.species_cannot_use)
+									continue
+								usable_manufacturers[company] = M
+							if(!usable_manufacturers.len)
+								return
+							var/choice = input(user, "Which manufacturer do you wish to use for this limb?") as null|anything in usable_manufacturers
 							if(!choice)
 								return
 							rlimb_data[limb] = choice

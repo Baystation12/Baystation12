@@ -71,6 +71,14 @@
 			O.unwield()
 	return	unwield()
 
+//Allow a small chance of parrying melee attacks when wielded - maybe generalize this to other weapons someday
+/obj/item/weapon/material/twohanded/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+	if(wielded && default_parry_check(user, attacker, damage_source) && prob(15))
+		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
+		playsound(user.loc, 'sound/weapons/punchmiss.ogg', 50, 1)
+		return 1
+	return 0
+
 /obj/item/weapon/material/twohanded/update_icon()
 	icon_state = "[base_icon][wielded]"
 	item_state = icon_state
@@ -168,51 +176,6 @@
 			var/obj/effect/plant/P = A
 			P.die_off()
 
-/*
-/*
- * Double-Bladed Energy Swords - Cheridan
- */
- // Not sure what to do with this one, it won't work nicely with the material system,
- // but I don't want to copypaste all the twohanded procs..
-/obj/item/weapon/material/twohanded/dualsaber
-	icon_state = "dualsaber0"
-	base_icon = "dualsaber"
-	name = "double-bladed energy sword"
-	desc = "Handle with care."
-	force = 3
-	throwforce = 5.0
-	throw_speed = 1
-	throw_range = 5
-	w_class = 2.0
-	force_wielded = 30
-	wieldsound = 'sound/weapons/saberon.ogg'
-	unwieldsound = 'sound/weapons/saberoff.ogg'
-	flags = NOSHIELD
-	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	sharp = 1
-	edge = 1
-	applies_material_colour = 0
-
-/obj/item/weapon/material/twohanded/dualsaber/attack(target as mob, mob/living/user as mob)
-	..()
-	if((CLUMSY in user.mutations) && (wielded) &&prob(40))
-		user << "<span class='danger'>You twirl around a bit before losing your balance and impaling yourself on \the [src].</span>"
-		user.take_organ_damage(20,25)
-		return
-	if((wielded) && prob(50))
-		spawn(0)
-			for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2))
-				user.set_dir(i)
-				sleep(1)
-
-/obj/item/weapon/material/twohanded/dualsaber/IsShield()
-	if(wielded)
-		return 1
-	else
-		return 0
-*/
-
 //spears, bay edition
 /obj/item/weapon/material/twohanded/spear
 	icon_state = "spearglass0"
@@ -228,7 +191,6 @@
 	throw_speed = 3
 	edge = 1
 	sharp = 1
-	flags = NOSHIELD
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	default_material = "glass"

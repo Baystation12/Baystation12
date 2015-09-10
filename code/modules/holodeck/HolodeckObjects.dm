@@ -3,45 +3,111 @@
 // Holographic tables are in code/modules/tables/presets.dm
 // Holographic racks are in code/modules/tables/rack.dm
 
-/turf/simulated/floor/holofloor/
+/turf/simulated/floor/holofloor
 	thermal_conductivity = 0
 
-/turf/simulated/floor/holofloor/grass
-	name = "Lush Grass"
-	icon_state = "grass1"
-	floor_type = /obj/item/stack/tile/grass
+/turf/simulated/floor/holofloor/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	return
+	// HOLOFLOOR DOES NOT GIVE A FUCK
 
-	New()
-		icon_state = "grass[pick("1","2","3","4")]"
-		..()
-		spawn(4)
-			update_icon()
-			for(var/direction in cardinal)
-				if(istype(get_step(src,direction),/turf/simulated/floor))
-					var/turf/simulated/floor/FF = get_step(src,direction)
-					FF.update_icon() //so siding get updated properly
+/turf/simulated/floor/holofloor/set_flooring()
+	return
+
+/turf/simulated/floor/holofloor/carpet
+	name = "carpet"
+	icon = 'icons/turf/flooring/carpet.dmi'
+	icon_state = "carpet"
+	initial_flooring = /decl/flooring/carpet
+
+/turf/simulated/floor/holofloor/tiled
+	name = "floor"
+	icon = 'icons/turf/flooring/tiles.dmi'
+	icon_state = "steel"
+	initial_flooring = /decl/flooring/tiling
+
+/turf/simulated/floor/holofloor/tiled/dark
+	name = "dark floor"
+	icon_state = "dark"
+	initial_flooring = /decl/flooring/tiling/dark
+
+/turf/simulated/floor/holofloor/lino
+	name = "lino"
+	icon = 'icons/turf/flooring/linoleum.dmi'
+	icon_state = "lino"
+	initial_flooring = /decl/flooring/linoleum
+
+/turf/simulated/floor/holofloor/wood
+	name = "wooden floor"
+	icon = 'icons/turf/flooring/wood.dmi'
+	icon_state = "wood"
+	initial_flooring = /decl/flooring/wood
+
+/turf/simulated/floor/holofloor/grass
+	name = "lush grass"
+	icon = 'icons/turf/flooring/grass.dmi'
+	icon_state = "grass0"
+	initial_flooring = /decl/flooring/grass
+
+/turf/simulated/floor/holofloor/snow
+	name = "snow"
+	base_name = "snow"
+	icon = 'icons/turf/floors.dmi'
+	base_icon = 'icons/turf/floors.dmi'
+	icon_state = "snow"
+	base_icon_state = "snow"
 
 /turf/simulated/floor/holofloor/space
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"
 	icon_state = "0"
 
+/turf/simulated/floor/holofloor/reinforced
+	icon = 'icons/turf/flooring/tiles.dmi'
+	initial_flooring = /decl/flooring/reinforced
+	name = "reinforced holofloor"
+	icon_state = "reinforced"
+
 /turf/simulated/floor/holofloor/space/New()
 	icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
 
+/turf/simulated/floor/holofloor/beach
+	desc = "Uncomfortably gritty for a hologram."
+	base_desc = "Uncomfortably gritty for a hologram."
+	icon = 'icons/misc/beach.dmi'
+	base_icon = 'icons/misc/beach.dmi'
+	initial_flooring = null
+
+/turf/simulated/floor/holofloor/beach/sand
+	name = "sand"
+	icon_state = "desert"
+	base_icon_state = "desert"
+
+/turf/simulated/floor/holofloor/beach/coastline
+	name = "coastline"
+	icon = 'icons/misc/beach2.dmi'
+	icon_state = "sandwater"
+	base_icon_state = "sandwater"
+
+/turf/simulated/floor/holofloor/beach/water
+	name = "water"
+	icon_state = "seashallow"
+	base_icon_state = "seashallow"
+
 /turf/simulated/floor/holofloor/desert
 	name = "desert sand"
+	base_name = "desert sand"
 	desc = "Uncomfortably gritty for a hologram."
+	base_desc = "Uncomfortably gritty for a hologram."
 	icon_state = "asteroid"
+	base_icon_state = "asteroid"
+	icon = 'icons/turf/flooring/asteroid.dmi'
+	base_icon = 'icons/turf/flooring/asteroid.dmi'
+	initial_flooring = null
 
 /turf/simulated/floor/holofloor/desert/New()
 	..()
 	if(prob(10))
 		overlays += "asteroid[rand(0,9)]"
-
-/turf/simulated/floor/holofloor/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	return
-	// HOLOFLOOR DOES NOT GIVE A FUCK
 
 /obj/structure/holostool
 	name = "stool"
@@ -50,7 +116,6 @@
 	icon_state = "stool_padded_preview"
 	anchored = 1.0
 	pressure_resistance = 15
-
 
 /obj/item/clothing/gloves/boxing/hologlove
 	name = "boxing gloves"
@@ -175,7 +240,7 @@
 	throw_range = 5
 	throwforce = 0
 	w_class = 2.0
-	flags = NOSHIELD | NOBLOODY
+	flags = NOBLOODY
 	var/active = 0
 	var/item_color
 
@@ -187,8 +252,14 @@
 	New()
 		item_color = "red"
 
-/obj/item/weapon/holo/esword/IsShield()
-	if(active)
+/obj/item/weapon/holo/esword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+	if(active && default_parry_check(user, attacker, damage_source) && prob(50))
+		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
+		
+		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		spark_system.set_up(5, 0, user.loc)
+		spark_system.start()
+		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
 		return 1
 	return 0
 

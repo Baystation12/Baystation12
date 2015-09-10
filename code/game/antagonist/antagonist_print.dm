@@ -7,8 +7,8 @@
 	for(var/datum/mind/P in current_antagonists)
 		text += print_player_full(P)
 		text += get_special_objective_text(P)
-		var/failed
 		if(!global_objectives.len && P.objectives && P.objectives.len)
+			var/failed
 			var/num = 1
 			for(var/datum/objective/O in P.objectives)
 				text += print_objective(O, num)
@@ -20,15 +20,13 @@
 					feedback_add_details(feedback_tag,"[O.type]|FAIL")
 					failed = 1
 				num++
-
-			if(!config.objectives_disabled)
 				if(failed)
 					text += "<br><font color='red'><B>The [role_text] has failed.</B></font>"
 				else
 					text += "<br><font color='green'><B>The [role_text] was successful!</B></font>"
 
 	if(global_objectives && global_objectives.len)
-		text += "<BR><FONT size = 2>Their objectives were:<FONT>"
+		text += "<BR><FONT size = 2>Their objectives were:</FONT>"
 		var/num = 1
 		for(var/datum/objective/O in global_objectives)
 			text += print_objective(O, num, 1)
@@ -71,7 +69,7 @@
 	var/uplink_true = 0
 	var/purchases = ""
 	for(var/obj/item/device/uplink/H in world_uplinks)
-		if(H && H.owner && H.owner == ply)
+		if(H && H.uplink_owner && H.uplink_owner == ply)
 			TC_uses += H.used_TC
 			uplink_true = 1
 			var/list/refined_log = new()

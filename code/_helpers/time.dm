@@ -27,3 +27,21 @@ proc/isDay(var/month, var/day)
 		// Uncomment this out when debugging!
 		//else
 			//return 1
+
+var/next_duration_update = 0
+var/last_round_duration = 0
+proc/round_duration()
+	if(last_round_duration && world.time < next_duration_update)
+		return last_round_duration
+
+	var/mills = world.time // 1/10 of a second, not real milliseconds but whatever
+	//var/secs = ((mills % 36000) % 600) / 10 //Not really needed, but I'll leave it here for refrence.. or something
+	var/mins = round((mills % 36000) / 600)
+	var/hours = round(mills / 36000)
+
+	mins = mins < 10 ? add_zero(mins, 1) : mins
+	hours = hours < 10 ? add_zero(hours, 1) : hours
+
+	last_round_duration = "[hours]:[mins]"
+	next_duration_update = world.time + 1 MINUTES
+	return last_round_duration

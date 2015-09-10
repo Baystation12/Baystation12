@@ -13,13 +13,15 @@
 	var/translate_hive = 0
 	var/obj/item/device/encryptionkey/keyslot1 = null
 	var/obj/item/device/encryptionkey/keyslot2 = null
-	maxf = 1489
 
 	var/ks1type = /obj/item/device/encryptionkey
 	var/ks2type = null
 
+	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ears.dmi')
+
 /obj/item/device/radio/headset/New()
 	..()
+	internal_channels.Cut()
 	if(ks1type)
 		keyslot1 = new ks1type(src)
 	if(ks2type)
@@ -33,11 +35,14 @@
 	keyslot2 = null
 	..()
 
+/obj/item/device/radio/headset/list_channels(var/mob/user)
+	return list_secure_channels()
+
 /obj/item/device/radio/headset/examine(mob/user)
 	if(!(..(user, 1) && radio_desc))
 		return
 
-	user << "The following channels are built-in:"
+	user << "The following channels are available:"
 	user << radio_desc
 
 /obj/item/device/radio/headset/handle_message_mode(mob/living/M as mob, message, channel)
@@ -175,21 +180,7 @@
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/heads/hop
-/*
-/obj/item/device/radio/headset/headset_mine
-	name = "mining radio headset"
-	desc = "Headset used by miners. How useless. To access the mining channel, use :d."
-	icon_state = "mine_headset"
-	item_state = "headset"
-	keyslot2 = new /obj/item/device/encryptionkey/headset_mine
 
-/obj/item/device/radio/headset/heads/qm
-	name = "quartermaster's headset"
-	desc = "The headset of the man who control your toiletpaper supply. To access the cargo channel, use :q. For mining, use :d."
-	icon_state = "cargo_headset"
-	item_state = "headset"
-	keyslot2 = new /obj/item/device/encryptionkey/heads/qm
-*/
 /obj/item/device/radio/headset/headset_cargo
 	name = "supply radio headset"
 	desc = "A headset used by the QM and their slaves."
@@ -209,7 +200,6 @@
 	desc = "The headset of the boss's boss."
 	icon_state = "com_headset"
 	item_state = "headset"
-	freerange = 1
 	ks2type = /obj/item/device/encryptionkey/ert
 
 /obj/item/device/radio/headset/ia

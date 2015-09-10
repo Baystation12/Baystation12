@@ -36,7 +36,7 @@
 	throw_range = 20
 
 /obj/item/weapon/soap/nanotrasen
-	desc = "A Nanotrasen brand bar of soap. Smells of phoron."
+	desc = "A NanoTrasen-brand bar of soap. Smells of phoron."
 	icon_state = "soapnt"
 
 /obj/item/weapon/soap/deluxe
@@ -174,6 +174,7 @@
 	w_class = 3.0
 	origin_tech = list(TECH_MATERIAL = 1)
 	var/breakouttime = 300	//Deciseconds = 30s = 0.5 minute
+	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/handcuffs.dmi')
 
 /obj/item/weapon/caution
 	desc = "Caution! Wet Floor!"
@@ -241,7 +242,6 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
-	flags = NOSHIELD
 	attack_verb = list("bludgeoned", "whacked", "disciplined")
 
 /obj/item/weapon/staff/broom
@@ -268,7 +268,6 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
-	flags = NOSHIELD
 
 /obj/item/weapon/wire
 	desc = "This is just a simple piece of regular insulated wire."
@@ -599,4 +598,4 @@
 	desc = "Instant research tool. For testing purposes only."
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "smes_coil"
-	origin_tech = list(TECH_MATERIAL = 19, TECH_ENGINERING = 19, TECH_PHORON = 19, TECH_POWER = 19, TECH_BLUESPACE = 19, TECH_BIO = 19, TECH_COMBAT = 19, TECH_MAGNET = 19, TECH_DATA = 19, TECH_ILLEGAL = 19, TECH_ARCANE = 19)
+	origin_tech = list(TECH_MATERIAL = 19, TECH_ENGINEERING = 19, TECH_PHORON = 19, TECH_POWER = 19, TECH_BLUESPACE = 19, TECH_BIO = 19, TECH_COMBAT = 19, TECH_MAGNET = 19, TECH_DATA = 19, TECH_ILLEGAL = 19, TECH_ARCANE = 19)

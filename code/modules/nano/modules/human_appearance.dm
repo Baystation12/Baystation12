@@ -17,7 +17,7 @@
 	src.whitelist = species_whitelist
 	src.blacklist = species_blacklist
 
-/datum/nano_module/appearance_changer/Topic(ref, href_list, var/nowindow, var/datum/topic_state/state = default_state)
+/datum/nano_module/appearance_changer/Topic(ref, href_list, var/datum/topic_state/state = default_state)
 	if(..())
 		return 1
 
@@ -91,6 +91,10 @@
 	return 0
 
 /datum/nano_module/appearance_changer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+
+	if(!owner || !owner.species)
+		return
+
 	generate_data(check_whitelist, whitelist, blacklist)
 	var/data[0]
 
@@ -140,10 +144,10 @@
 	return owner && (flags & flag)
 
 /datum/nano_module/appearance_changer/proc/can_change_skin_tone()
-	return owner && (flags & APPEARANCE_SKIN) && owner.species.flags & HAS_SKIN_TONE
+	return owner && (flags & APPEARANCE_SKIN) && owner.species.appearance_flags & HAS_SKIN_TONE
 
 /datum/nano_module/appearance_changer/proc/can_change_skin_color()
-	return owner && (flags & APPEARANCE_SKIN) && owner.species.flags & HAS_SKIN_COLOR
+	return owner && (flags & APPEARANCE_SKIN) && owner.species.appearance_flags & HAS_SKIN_COLOR
 
 /datum/nano_module/appearance_changer/proc/cut_and_generate_data()
 	// Making the assumption that the available species remain constant
@@ -152,6 +156,8 @@
 	generate_data()
 
 /datum/nano_module/appearance_changer/proc/generate_data()
+	if(!owner)
+		return
 	if(!valid_species.len)
 		valid_species = owner.generate_valid_species(check_whitelist, whitelist, blacklist)
 	if(!valid_hairstyles.len || !valid_facial_hairstyles.len)

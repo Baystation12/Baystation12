@@ -1,49 +1,49 @@
 var/list/department_radio_keys = list(
-	  ":r" = "right ear",	"#r" = "right ear",		".r" = "right ear",
-	  ":l" = "left ear",	"#l" = "left ear",		".l" = "left ear",
-	  ":i" = "intercom",	"#i" = "intercom",		".i" = "intercom",
-	  ":h" = "department",	"#h" = "department",	".h" = "department",
-	  ":+" = "special",		"#+" = "special",		".+" = "special", //activate radio-specific special functions
-	  ":c" = "Command",		"#c" = "Command",		".c" = "Command",
-	  ":n" = "Science",		"#n" = "Science",		".n" = "Science",
-	  ":m" = "Medical",		"#m" = "Medical",		".m" = "Medical",
-	  ":e" = "Engineering", "#e" = "Engineering",	".e" = "Engineering",
-	  ":s" = "Security",	"#s" = "Security",		".s" = "Security",
-	  ":w" = "whisper",		"#w" = "whisper",		".w" = "whisper",
-	  ":t" = "Mercenary",	"#t" = "Mercenary",		".t" = "Mercenary",
-	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
-	  ":v" = "Service",		"#v" = "Service",		".v" = "Service",
-	  ":p" = "AI Private",	"#p" = "AI Private",	".p" = "AI Private",
+	  ":r" = "right ear",	".r" = "right ear",
+	  ":l" = "left ear",	".l" = "left ear",
+	  ":i" = "intercom",	".i" = "intercom",
+	  ":h" = "department",	".h" = "department",
+	  ":+" = "special",		".+" = "special", //activate radio-specific special functions
+	  ":c" = "Command",		".c" = "Command",
+	  ":n" = "Science",		".n" = "Science",
+	  ":m" = "Medical",		".m" = "Medical",
+	  ":e" = "Engineering", ".e" = "Engineering",
+	  ":s" = "Security",	".s" = "Security",
+	  ":w" = "whisper",		".w" = "whisper",
+	  ":t" = "Mercenary",	".t" = "Mercenary",
+	  ":u" = "Supply",		".u" = "Supply",
+	  ":v" = "Service",		".v" = "Service",
+	  ":p" = "AI Private",	".p" = "AI Private",
 
-	  ":R" = "right ear",	"#R" = "right ear",		".R" = "right ear",
-	  ":L" = "left ear",	"#L" = "left ear",		".L" = "left ear",
-	  ":I" = "intercom",	"#I" = "intercom",		".I" = "intercom",
-	  ":H" = "department",	"#H" = "department",	".H" = "department",
-	  ":C" = "Command",		"#C" = "Command",		".C" = "Command",
-	  ":N" = "Science",		"#N" = "Science",		".N" = "Science",
-	  ":M" = "Medical",		"#M" = "Medical",		".M" = "Medical",
-	  ":E" = "Engineering",	"#E" = "Engineering",	".E" = "Engineering",
-	  ":S" = "Security",	"#S" = "Security",		".S" = "Security",
-	  ":W" = "whisper",		"#W" = "whisper",		".W" = "whisper",
-	  ":T" = "Mercenary",	"#T" = "Mercenary",		".T" = "Mercenary",
-	  ":U" = "Supply",		"#U" = "Supply",		".U" = "Supply",
-	  ":V" = "Service",		"#V" = "Service",		".V" = "Service",
-	  ":P" = "AI Private",	"#P" = "AI Private",	".P" = "AI Private",
+	  ":R" = "right ear",	".R" = "right ear",
+	  ":L" = "left ear",	".L" = "left ear",
+	  ":I" = "intercom",	".I" = "intercom",
+	  ":H" = "department",	".H" = "department",
+	  ":C" = "Command",		".C" = "Command",
+	  ":N" = "Science",		".N" = "Science",
+	  ":M" = "Medical",		".M" = "Medical",
+	  ":E" = "Engineering",	".E" = "Engineering",
+	  ":S" = "Security",	".S" = "Security",
+	  ":W" = "whisper",		".W" = "whisper",
+	  ":T" = "Mercenary",	".T" = "Mercenary",
+	  ":U" = "Supply",		".U" = "Supply",
+	  ":V" = "Service",		".V" = "Service",
+	  ":P" = "AI Private",	".P" = "AI Private",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":ê" = "right ear",	"#ê" = "right ear",		".ê" = "right ear",
-	  ":ä" = "left ear",	"#ä" = "left ear",		".ä" = "left ear",
-	  ":ø" = "intercom",	"#ø" = "intercom",		".ø" = "intercom",
-	  ":ð" = "department",	"#ð" = "department",	".ð" = "department",
-	  ":ñ" = "Command",		"#ñ" = "Command",		".ñ" = "Command",
-	  ":ò" = "Science",		"#ò" = "Science",		".ò" = "Science",
-	  ":ü" = "Medical",		"#ü" = "Medical",		".ü" = "Medical",
-	  ":ó" = "Engineering",	"#ó" = "Engineering",	".ó" = "Engineering",
-	  ":û" = "Security",	"#û" = "Security",		".û" = "Security",
-	  ":ö" = "whisper",		"#ö" = "whisper",		".ö" = "whisper",
-	  ":å" = "Mercenary",	"#å" = "Mercenary",		".å" = "Mercenary",
-	  ":é" = "Supply",		"#é" = "Supply",		".é" = "Supply",
+	  ":ê" = "right ear",	".ê" = "right ear",
+	  ":ä" = "left ear",	".ä" = "left ear",
+	  ":ø" = "intercom",	".ø" = "intercom",
+	  ":ð" = "department",	".ð" = "department",
+	  ":ñ" = "Command",		".ñ" = "Command",
+	  ":ò" = "Science",		".ò" = "Science",
+	  ":ü" = "Medical",		".ü" = "Medical",
+	  ":ó" = "Engineering",	".ó" = "Engineering",
+	  ":û" = "Security",	".û" = "Security",
+	  ":ö" = "whisper",		".ö" = "whisper",
+	  ":å" = "Mercenary",	".å" = "Mercenary",
+	  ":é" = "Supply",		".é" = "Supply",
 )
 
 
@@ -128,7 +128,6 @@ proc/get_radio_key_from_channel(var/channel)
 	return verb
 
 /mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="")
-
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
 			src << "\red You cannot speak in IC (Muted)."
@@ -162,19 +161,13 @@ proc/get_radio_key_from_channel(var/channel)
 	else
 		speaking = get_default_language()
 
-	if (speaking)
-		// This is broadcast to all mobs with the language,
-		// irrespective of distance or anything else.
-		if(speaking.flags & HIVEMIND)
-			speaking.broadcast(src,trim(message))
-			return
-		//If we've gotten this far, keep going!
-		if(speaking.flags & COMMON_VERBS)
-			verb = say_quote(message)
-		else
-			verb = speaking.get_spoken_verb(copytext(message, length(message)))
-	else
-		verb = say_quote(message)
+	// This is broadcast to all mobs with the language,
+	// irrespective of distance or anything else.
+	if(speaking && (speaking.flags & HIVEMIND))
+		speaking.broadcast(src,trim(message))
+		return 1
+
+	verb = say_quote(message, speaking)
 
 	if(is_muzzled())
 		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
@@ -183,16 +176,18 @@ proc/get_radio_key_from_channel(var/channel)
 	message = trim_left(message)
 
 	if(!(speaking && (speaking.flags & NO_STUTTER)))
+		message = handle_autohiss(message, speaking)
+
 		var/list/handle_s = handle_speech_problems(message, verb)
 		message = handle_s[1]
 		verb = handle_s[2]
 
 	if(!message || message == "")
-		return
+		return 0
 
 	var/list/obj/item/used_radios = new
 	if(handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name))
-		return
+		return 1
 
 	var/list/handle_v = handle_speech_sound()
 	var/sound/speech_sound = handle_v[1]

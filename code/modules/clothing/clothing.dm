@@ -32,10 +32,10 @@
 
 		if(H.species)
 			if(exclusive)
-				if(!(H.species.name in species_restricted))
+				if(!(H.species.get_bodytype() in species_restricted))
 					wearable = 1
 			else
-				if(H.species.name in species_restricted)
+				if(H.species.get_bodytype() in species_restricted)
 					wearable = 1
 
 			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
@@ -50,7 +50,7 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Human", "Skrell")	//humanoid bodytypes
-			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+			species_restricted = list("Human", "Skrell") //skrell/humans can wear each other's suits
 		else
 			species_restricted = list(target_species)
 
@@ -72,9 +72,8 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Skrell")
-			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
-		if("Human")
-			species_restricted = list("exclude","Skrell","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+			species_restricted = list("Human", "Skrell") //skrell helmets fit humans too
+
 		else
 			species_restricted = list(target_species)
 
@@ -96,6 +95,7 @@
 	w_class = 1.0
 	throwforce = 2
 	slot_flags = SLOT_EARS
+	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ears.dmi')
 
 /obj/item/clothing/ears/attack_hand(mob/user as mob)
 	if (!user) return
@@ -172,12 +172,15 @@ BLIND     // can't see anything
 	name = "glasses"
 	icon = 'icons/obj/clothing/glasses.dmi'
 	w_class = 2.0
-	flags = GLASSESCOVERSEYES
+	body_parts_covered = EYES
 	slot_flags = SLOT_EYES
 	var/vision_flags = 0
 	var/darkness_view = 0//Base human is 2
 	var/see_invisible = -1
-	sprite_sheets = list("Vox" = 'icons/mob/species/vox/eyes.dmi')
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/eyes.dmi',
+		"Resomi" = 'icons/mob/species/resomi/eyes.dmi',
+		)
 
 /obj/item/clothing/glasses/update_clothing_icon()
 	if (ismob(src.loc))
@@ -198,8 +201,11 @@ BLIND     // can't see anything
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
-	species_restricted = list("exclude","Unathi","Tajara")
-	sprite_sheets = list("Vox" = 'icons/mob/species/vox/gloves.dmi')
+	species_restricted = list("exclude","Unathi","Tajara", "Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/gloves.dmi',
+		"Resomi" = 'icons/mob/species/resomi/gloves.dmi',
+		)
 
 /obj/item/clothing/gloves/update_clothing_icon()
 	if (ismob(src.loc))
@@ -254,6 +260,11 @@ BLIND     // can't see anything
 	var/brightness_on
 	var/on = 0
 
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/head.dmi',
+		"Resomi" = 'icons/mob/species/resomi/head.dmi'
+		)
+
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
 		if(!isturf(user.loc))
@@ -275,17 +286,64 @@ BLIND     // can't see anything
 	update_icon(user)
 	user.update_action_buttons()
 
+/obj/item/clothing/head/attack_ai(var/mob/user)
+	if(!mob_wear_hat(user))
+		return ..()
+
+/obj/item/clothing/head/attack_generic(var/mob/user)
+	if(!mob_wear_hat(user))
+		return ..()
+
+/obj/item/clothing/head/proc/mob_wear_hat(var/mob/user)
+	if(!Adjacent(user))
+		return 0
+	var/success
+	if(istype(user, /mob/living/silicon/robot/drone))
+		var/mob/living/silicon/robot/drone/D = user
+		if(D.hat)
+			success = 2
+		else
+			D.wear_hat(src)
+			success = 1
+	else if(istype(user, /mob/living/carbon/alien/diona))
+		var/mob/living/carbon/alien/diona/D = user
+		if(D.hat)
+			success = 2
+		else
+			D.wear_hat(src)
+			success = 1
+
+	if(!success)
+		return 0
+	else if(success == 2)
+		user << "<span class='warning'>You are already wearing a hat.</span>"
+	else if(success == 1)
+		user << "<span class='notice'>You crawl under \the [src].</span>"
+	return 1
+
 /obj/item/clothing/head/update_icon(var/mob/user)
 
 	overlays.Cut()
+	var/mob/living/carbon/human/H
+	if(istype(user,/mob/living/carbon/human))
+		H = user
+
 	if(on)
+
+		// Generate object icon.
 		if(!light_overlay_cache["[light_overlay]_icon"])
 			light_overlay_cache["[light_overlay]_icon"] = image("icon" = 'icons/obj/light_overlays.dmi', "icon_state" = "[light_overlay]")
-		if(!light_overlay_cache["[light_overlay]"])
-			light_overlay_cache["[light_overlay]"] = image("icon" = 'icons/mob/light_overlays.dmi', "icon_state" = "[light_overlay]")
 		overlays |= light_overlay_cache["[light_overlay]_icon"]
-	if(istype(user,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = user
+
+		// Generate and cache the on-mob icon, which is used in update_inv_head().
+		var/cache_key = "[light_overlay][H ? "_[H.species.get_bodytype()]" : ""]"
+		if(!light_overlay_cache[cache_key])
+			var/use_icon = 'icons/mob/light_overlays.dmi'
+			if(H && sprite_sheets[H.species.get_bodytype()])
+				use_icon = sprite_sheets[H.species.get_bodytype()]
+			light_overlay_cache[cache_key] = image("icon" = use_icon, "icon_state" = "[light_overlay]")
+
+	if(H)
 		H.update_inv_head()
 
 /obj/item/clothing/head/update_clothing_icon()
@@ -301,7 +359,10 @@ BLIND     // can't see anything
 	body_parts_covered = HEAD
 	slot_flags = SLOT_MASK
 	body_parts_covered = FACE|EYES
-	sprite_sheets = list("Vox" = 'icons/mob/species/vox/masks.dmi')
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/masks.dmi',
+		"Resomi" = 'icons/mob/species/resomi/masks.dmi',
+		)
 
 	var/voicechange = 0
 	var/list/say_messages
@@ -330,8 +391,11 @@ BLIND     // can't see anything
 	slowdown = SHOES_SLOWDOWN
 	force = 2
 	var/overshoes = 0
-	species_restricted = list("exclude","Unathi","Tajara")
-	sprite_sheets = list("Vox" = 'icons/mob/species/vox/shoes.dmi')
+	species_restricted = list("exclude","Unathi","Tajara","Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/shoes.dmi',
+		"Resomi" = 'icons/mob/species/resomi/shoes.dmi',
+		)
 
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
 	return
@@ -354,6 +418,11 @@ BLIND     // can't see anything
 	var/blood_overlay_type = "suit"
 	siemens_coefficient = 0.9
 	w_class = 3
+
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/suit.dmi',
+		"Resomi" = 'icons/mob/species/resomi/suit.dmi'
+		)
 
 /obj/item/clothing/suit/update_clothing_icon()
 	if (ismob(src.loc))
@@ -384,7 +453,10 @@ BLIND     // can't see anything
 	var/list/accessories = list()
 	var/displays_id = 1
 	var/rolled_down = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
-	sprite_sheets = list("Vox" = 'icons/mob/species/vox/uniform.dmi')
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi',
+		"Resomi" = 'icons/mob/species/resomi/uniform.dmi'
+		)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.
@@ -412,8 +484,8 @@ BLIND     // can't see anything
 	var/icon/under_icon
 	if(icon_override)
 		under_icon = icon_override
-	else if(H && sprite_sheets && sprite_sheets[H.species.name])
-		under_icon = sprite_sheets[H.species.name]
+	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype()])
+		under_icon = sprite_sheets[H.species.get_bodytype()]
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else

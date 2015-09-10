@@ -43,6 +43,13 @@
 		return
 	..()
 
+/datum/reagent/nutriment/honey
+	name = "Honey"
+	id = "honey"
+	description = "A golden yellow syrup, loaded with sugary sweetness."
+	nutriment_factor = 10
+	color = "#FFFF00"
+
 /datum/reagent/nutriment/flour
 	name = "flour"
 	id = "flour"
@@ -264,20 +271,20 @@
 		if(H.species && (H.species.flags & NO_PAIN))
 			return
 		if(H.head)
-			if(H.head.flags & MASKCOVERSEYES)
+			if(H.head.body_parts_covered & EYES)
 				eyes_covered = 1
 				safe_thing = H.head
-			if(H.head.flags & MASKCOVERSMOUTH)
+			if((H.head.body_parts_covered & FACE) && !(H.head.item_flags & FLEXIBLEMATERIAL))
 				mouth_covered = 1
 				safe_thing = H.head
 		if(H.wear_mask)
-			if(!eyes_covered && H.wear_mask.flags & MASKCOVERSEYES)
+			if(!eyes_covered && H.wear_mask.body_parts_covered & EYES)
 				eyes_covered = 1
 				safe_thing = H.wear_mask
-			if(!mouth_covered && H.wear_mask.flags & MASKCOVERSMOUTH)
+			if(!mouth_covered && (H.wear_mask.body_parts_covered & FACE) && !(H.wear_mask.item_flags & FLEXIBLEMATERIAL))
 				mouth_covered = 1
 				safe_thing = H.wear_mask
-		if(H.glasses)
+		if(H.glasses && H.glasses.body_parts_covered & EYES)
 			if(!eyes_covered)
 				eyes_covered = 1
 				if(!safe_thing)
@@ -572,9 +579,10 @@
 	..()
 	if(alien == IS_DIONA)
 		return
-	M.make_jittery(5)
 	if(adj_temp > 0)
 		holder.remove_reagent("frostoil", 10 * removed)
+	if(dose > 45)
+		M.make_jittery(5)
 
 /datum/reagent/drink/coffee/icecoffee
 	name = "Iced Coffee"
@@ -1158,7 +1166,7 @@
 
 	glass_icon_state = "acidspitglass"
 	glass_name = "glass of Acid Spit"
-	glass_desc = "A drink from Nanotrasen. Made from live aliens."
+	glass_desc = "A drink from the company archives. Made from live aliens."
 	glass_center_of_mass = list("x"=16, "y"=7)
 
 /datum/reagent/ethanol/alliescocktail
@@ -1188,7 +1196,7 @@
 /datum/reagent/ethanol/amasec
 	name = "Amasec"
 	id = "amasec"
-	description = "Official drink of the NanoTrasen Gun-Club!"
+	description = "Official drink of the Gun Club!"
 	reagent_state = LIQUID
 	color = "#664300"
 	strength = 25
@@ -1235,7 +1243,7 @@
 
 	glass_icon_state = "atomicbombglass"
 	glass_name = "glass of Atomic Bomb"
-	glass_desc = "Nanotrasen cannot take legal responsibility for your actions after imbibing."
+	glass_desc = "We cannot take legal responsibility for your actions after imbibing."
 	glass_center_of_mass = list("x"=15, "y"=7)
 
 /datum/reagent/ethanol/b52
@@ -1448,7 +1456,7 @@
 /datum/reagent/ethanol/grog
 	name = "Grog"
 	id = "grog"
-	description = "Watered down rum, NanoTrasen approves!"
+	description = "Watered-down rum, pirate approved!"
 	reagent_state = LIQUID
 	color = "#664300"
 	strength = 100

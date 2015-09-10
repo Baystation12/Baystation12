@@ -67,14 +67,14 @@
 	var/dat = "<TT><center><b>[vendorname]</b></center><hr /><br>" //display the name, and added a horizontal rule
 	if(vendmode == 0)
 		dat += "<center><b>Please choose your laptop customization options</b></center><br>"
-		dat += "<center>Your comptuer will automatically be loaded with any programs you can use after the transaction is complete."
+		dat += "<center>Your comptuer will automatically be loaded with any programs you can use after the transaction is complete.</center>"
 		dat += "<center><b>Some programs will require additional components to be installed!</center></b><hr /><br>"
 		dat += "<center><b>HDD (Required)</b> : Added</center><br>"
-		dat += "<center><b>Card Reader</b> : <A href='?src=\ref[src];choice=single_add'>Single (50)</a> | <A href='?src=\ref[src];choice=dual_add'>Dual (125)</a><br>"
-		dat += "<center><b>Floppy Drive</b>: <A href='?src=\ref[src];choice=floppy_add'>Add (50)</a><br>"
-		dat += "<center><b>Radio Network card</b> <A href='?src=\ref[src];choice=radio_add'>Add (50)</a><br>"
-		dat += "<center><b>Camera Card</b> <A href='?src=\ref[src];choice=camnet_add'>Add (100)</a><br>"
-		dat += "<center><b> Network card</b> <A href='?src=\ref[src];choice=area_add'>Area (75)</a> <A href='?src=\ref[src];choice=prox_add'>Adjacent (50)</a><A href='?src=\ref[src];choice=cable_add'>Powernet (25)</a><br>"
+		dat += "<center><b>Card Reader</b> : <A href='?src=\ref[src];choice=single_add'>Single (50)</a> | <A href='?src=\ref[src];choice=dual_add'>Dual (125)</a></center><br>"
+		dat += "<center><b>Floppy Drive</b>: <A href='?src=\ref[src];choice=floppy_add'>Add (50)</a></center><br>"
+		dat += "<center><b>Radio Network card</b> <A href='?src=\ref[src];choice=radio_add'>Add (50)</a></center><br>"
+		dat += "<center><b>Camera Card</b> <A href='?src=\ref[src];choice=camnet_add'>Add (100)</a></center><br>"
+		dat += "<center><b> Network card</b> <A href='?src=\ref[src];choice=area_add'>Area (75)</a> <A href='?src=\ref[src];choice=prox_add'>Adjacent (50)</a><A href='?src=\ref[src];choice=cable_add'>Powernet (25)</a></center><br>"
 		dat += "<hr /><center> Power source upgrade</center> <A href='?src=\ref[src];choice=high_add'>Extended (175)</a> <A href='?src=\ref[src];choice=super_add'>Unreal (250)</a>"
 
 	if(vendmode == 0 || vendmode == 1)
@@ -227,7 +227,7 @@
 				else
 					usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
 			else
-				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
+				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call [boss_short] Support.</span>"
 		else
 			transfer_and_vend(CH, C)
 
@@ -380,7 +380,7 @@
 					usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
 					return 0
 			else
-				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
+				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call [boss_short] Support.</span>"
 				return 0
 		else
 			transfer_and_reimburse(CH)

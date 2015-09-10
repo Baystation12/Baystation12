@@ -419,7 +419,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 		var/atom/oldeye=M.client.eye
 		var/aiEyeFlag = 0
-		if(istype(oldeye, /mob/aiEye))
+		if(istype(oldeye, /mob/eye/aiEye))
 			aiEyeFlag = 1
 
 		var/x
@@ -632,7 +632,7 @@ proc/is_blind(A)
 		return SAFE_PERP
 
 	//Agent cards lower threatlevel.
-	var/obj/item/weapon/card/id/id = GetIdCard(src)
+	var/obj/item/weapon/card/id/id = GetIdCard()
 	if(id && istype(id, /obj/item/weapon/card/id/syndicate))
 		threatcount -= 2
 	// A proper	CentCom id is hard currency.

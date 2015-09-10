@@ -122,7 +122,7 @@
 		new /obj/item/weapon/gun/energy/gun(src)
 		new /obj/item/clothing/accessory/holster/waist(src)
 		new /obj/item/weapon/melee/telebaton(src)
-		new /obj/item/clothing/head/beret/sec/hos(src)
+		new /obj/item/clothing/head/beret/sec/corporate/hos(src)
 		return
 
 
@@ -159,7 +159,7 @@
 		new /obj/item/weapon/melee/baton/loaded(src)
 		new /obj/item/weapon/gun/energy/gun(src)
 		new /obj/item/weapon/storage/box/holobadge(src)
-		new /obj/item/clothing/head/beret/sec/warden(src)
+		new /obj/item/clothing/head/beret/sec/corporate/warden(src)
 		return
 
 
@@ -246,16 +246,16 @@
 	New()
 		..()
 		new /obj/item/clothing/under/det(src)
+		new /obj/item/clothing/under/det/grey(src)
 		new /obj/item/clothing/under/det/black(src)
-		new /obj/item/clothing/under/det/slob(src)
-		new /obj/item/clothing/suit/storage/det_suit(src)
-		new /obj/item/clothing/suit/storage/det_suit/black(src)
+		new /obj/item/clothing/suit/storage/det_trench(src)
+		new /obj/item/clothing/suit/storage/det_trench/grey(src)
 		new /obj/item/clothing/suit/storage/forensics/blue(src)
 		new /obj/item/clothing/suit/storage/forensics/red(src)
 		new /obj/item/clothing/gloves/black(src)
-		new /obj/item/clothing/head/det_hat(src)
-		new /obj/item/clothing/head/det_hat/black(src)
-		new /obj/item/clothing/shoes/brown(src)
+		new /obj/item/clothing/head/det(src)
+		new /obj/item/clothing/head/det/grey(src)
+		new /obj/item/clothing/shoes/laceup(src)
 		new /obj/item/weapon/storage/box/evidence(src)
 		new /obj/item/device/radio/headset/headset_sec(src)
 		new /obj/item/device/detective_scanner(src)
@@ -308,7 +308,7 @@
 
 /obj/structure/closet/secure_closet/courtroom
 	name = "courtroom locker"
-	req_access = list(access_court)
+	req_access = list(access_lawyer)
 
 	New()
 		..()

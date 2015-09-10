@@ -17,6 +17,9 @@
 		germ_level++
 
 /mob/living/carbon/Destroy()
+	qdel(ingested)
+	qdel(touching)
+	// We don't qdel(bloodstr) because it's the same as qdel(reagents)
 	for(var/guts in internal_organs)
 		qdel(guts)
 	for(var/food in stomach_contents)
@@ -133,8 +136,10 @@
 
 	return shock_damage
 
+/mob/proc/swap_hand()
+	return
 
-/mob/living/carbon/proc/swap_hand()
+/mob/living/carbon/swap_hand()
 	var/obj/item/item_in_hand = src.get_active_hand()
 	if(item_in_hand) //this segment checks if the item in your hand is twohanded.
 		if(istype(item_in_hand,/obj/item/weapon/material/twohanded))
@@ -144,11 +149,11 @@
 	src.hand = !( src.hand )
 	if(hud_used.l_hand_hud_object && hud_used.r_hand_hud_object)
 		if(hand)	//This being 1 means the left hand is in use
-			hud_used.l_hand_hud_object.icon_state = "hand_active"
-			hud_used.r_hand_hud_object.icon_state = "hand_inactive"
+			hud_used.l_hand_hud_object.icon_state = "l_hand_active"
+			hud_used.r_hand_hud_object.icon_state = "r_hand_inactive"
 		else
-			hud_used.l_hand_hud_object.icon_state = "hand_inactive"
-			hud_used.r_hand_hud_object.icon_state = "hand_active"
+			hud_used.l_hand_hud_object.icon_state = "l_hand_inactive"
+			hud_used.r_hand_hud_object.icon_state = "r_hand_active"
 	/*if (!( src.hand ))
 		src.hands.set_dir(NORTH)
 	else
@@ -257,7 +262,7 @@
 			var/show_ssd
 			var/mob/living/carbon/human/H = src
 			if(istype(H)) show_ssd = H.species.show_ssd
-			if(show_ssd && (!client || !key || player_logged))
+			if(show_ssd && !client && !aghosted)
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 				"<span class='notice'>You shake [src], but they do not respond... Maybe they have S.S.D?</span>")
 			else if(lying || src.sleeping)

@@ -64,69 +64,6 @@ datum/objective/assassinate
 		return 1
 
 
-
-datum/objective/mutiny
-	find_target()
-		..()
-		if(target && target.current)
-			explanation_text = "Assassinate [target.current.real_name], the [target.assigned_role]."
-		else
-			explanation_text = "Free Objective"
-		return target
-
-
-	find_target_by_role(role, role_type=0)
-		..(role, role_type)
-		if(target && target.current)
-			explanation_text = "Assassinate [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
-		else
-			explanation_text = "Free Objective"
-		return target
-
-	check_completion()
-		if(target && target.current)
-			if(target.current.stat == DEAD || !ishuman(target.current) || !target.current.ckey)
-				return 1
-			var/turf/T = get_turf(target.current)
-			if(T && isNotStationLevel(T.z))			//If they leave the station they count as dead for this
-				return 2
-			return 0
-		return 1
-
-datum/objective/mutiny/rp
-	find_target()
-		..()
-		if(target && target.current)
-			explanation_text = "Assassinate, capture or convert [target.current.real_name], the [target.assigned_role]."
-		else
-			explanation_text = "Free Objective"
-		return target
-
-
-	find_target_by_role(role, role_type=0)
-		..(role, role_type)
-		if(target && target.current)
-			explanation_text = "Assassinate, capture or convert [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
-		else
-			explanation_text = "Free Objective"
-		return target
-
-	// less violent rev objectives
-	check_completion()
-		var/rval = 1
-		if(target && target.current)
-			//assume that only carbon mobs can become rev heads for now
-			if(target.current.stat == DEAD || target.current:handcuffed || !ishuman(target.current))
-				return 1
-			// Check if they're converted
-			if(target in revs.head_revolutionaries)
-				return 1
-			var/turf/T = get_turf(target.current)
-			if(T && isNotStationLevel(T.z))			//If they leave the station they count as dead for this
-				rval = 2
-			return 0
-		return rval
-
 datum/objective/anti_revolution/execute
 	find_target()
 		..()
@@ -189,7 +126,7 @@ datum/objective/anti_revolution/demote
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "[target.current.real_name], the [target.assigned_role]  has been classified as harmful to NanoTrasen's goals. Demote \him[target.current] to assistant."
+			explanation_text = "[target.current.real_name], the [target.assigned_role]  has been classified as harmful to [company_name]'s goals. Demote \him[target.current] to assistant."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -197,7 +134,7 @@ datum/objective/anti_revolution/demote
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
 		if(target && target.current)
-			explanation_text = "[target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] has been classified as harmful to NanoTrasen's goals. Demote \him[target.current] to assistant."
+			explanation_text = "[target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] has been classified as harmful to [company_name]'s goals. Demote \him[target.current] to assistant."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -728,7 +665,7 @@ datum/objective/heist/kidnap
 			//if (!target.current.restrained())
 			//	return 0 // They're loose. Close but no cigar.
 
-			var/area/shuttle/skipjack/station/A = locate()
+			var/area/skipjack_station/start/A = locate()
 			for(var/mob/living/carbon/human/M in A)
 				if(target.current == M)
 					return 1 //They're restrained on the shuttle. Success.
@@ -779,7 +716,7 @@ datum/objective/heist/loot
 
 		var/total_amount = 0
 
-		for(var/obj/O in locate(/area/shuttle/skipjack/station))
+		for(var/obj/O in locate(/area/skipjack_station/start))
 			if(istype(O,target)) total_amount++
 			for(var/obj/I in O.contents)
 				if(istype(I,target)) total_amount++
@@ -828,7 +765,7 @@ datum/objective/heist/salvage
 
 		var/total_amount = 0
 
-		for(var/obj/item/O in locate(/area/shuttle/skipjack/station))
+		for(var/obj/item/O in locate(/area/skipjack_station/start))
 
 			var/obj/item/stack/material/S
 			if(istype(O,/obj/item/stack/material))
@@ -933,3 +870,38 @@ datum/objective/heist/salvage
 
 /datum/objective/cult/sacrifice/check_completion()
 	return (target && cult && !cult.sacrificed.Find(target))
+
+/datum/objective/rev/find_target()
+	..()
+	if(target && target.current)
+		explanation_text = "Assassinate, capture or convert [target.current.real_name], the [target.assigned_role]."
+	else
+		explanation_text = "Free Objective"
+	return target
+
+
+/datum/objective/rev/find_target_by_role(role, role_type=0)
+	..(role, role_type)
+	if(target && target.current)
+		explanation_text = "Assassinate, capture or convert [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
+	else
+		explanation_text = "Free Objective"
+	return target
+
+/datum/objective/rev/check_completion()
+	var/rval = 1
+	if(target && target.current)
+		var/mob/living/carbon/human/H = target.current
+		if(!istype(H))
+			return 1
+		if(H.stat == DEAD || H.restrained())
+			return 1
+		// Check if they're converted
+		if(target in revs.current_antagonists)
+			return 1
+		var/turf/T = get_turf(H)
+		if(T && isNotStationLevel(T.z))			//If they leave the station they count as dead for this
+			rval = 2
+		return 0
+	return rval
+

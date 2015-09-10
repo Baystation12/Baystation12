@@ -18,7 +18,7 @@
 	for(var/antag_id in all_antag_types)
 		if(i > grab_antags)
 			break
-		additional_antag_types |= antag_id
+		antag_tags |= antag_id
 		i++
 	..()
 

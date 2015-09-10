@@ -492,9 +492,9 @@
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/det(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
 
-			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/det_suit(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/det_trench(M), slot_wear_suit)
 			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/plain/monocle(M), slot_glasses)
-			M.equip_to_slot_or_del(new /obj/item/clothing/head/det_hat(M), slot_head)
+			M.equip_to_slot_or_del(new /obj/item/clothing/head/det(M), slot_head)
 
 			M.equip_to_slot_or_del(new /obj/item/weapon/cloaking_device(M), slot_r_store)
 
@@ -527,13 +527,13 @@
 
 			M.equip_to_slot_or_del(new /obj/item/weapon/grenade/chem_grenade/cleaner(M), slot_r_store)
 			M.equip_to_slot_or_del(new /obj/item/weapon/grenade/chem_grenade/cleaner(M), slot_l_store)
-			M.equip_to_slot_or_del(new /obj/item/stack/tile/steel(M), slot_in_backpack)
-			M.equip_to_slot_or_del(new /obj/item/stack/tile/steel(M), slot_in_backpack)
-			M.equip_to_slot_or_del(new /obj/item/stack/tile/steel(M), slot_in_backpack)
-			M.equip_to_slot_or_del(new /obj/item/stack/tile/steel(M), slot_in_backpack)
-			M.equip_to_slot_or_del(new /obj/item/stack/tile/steel(M), slot_in_backpack)
-			M.equip_to_slot_or_del(new /obj/item/stack/tile/steel(M), slot_in_backpack)
-			M.equip_to_slot_or_del(new /obj/item/stack/tile/steel(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/stack/tile/floor(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/stack/tile/floor(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/stack/tile/floor(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/stack/tile/floor(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/stack/tile/floor(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/stack/tile/floor(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/stack/tile/floor(M), slot_in_backpack)
 
 		if ("pirate")
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/pirate(M), slot_w_uniform)

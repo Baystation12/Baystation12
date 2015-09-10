@@ -153,8 +153,8 @@
 		return
 
 	var/shoot_time = (burst - 1)* burst_delay
-	user.next_move = world.time + shoot_time  //no clicking on things while shooting
-	if(user.client) user.client.move_delay = world.time + shoot_time //no moving while shooting either
+	user.setClickCooldown(shoot_time) //no clicking on things while shooting
+	user.setMoveCooldown(shoot_time) //no moving while shooting either
 	next_fire_time = world.time + shoot_time
 
 	//actually attempt to shoot
@@ -186,8 +186,8 @@
 	update_held_icon()
 
 	//update timing
-	user.next_move = world.time + 4
-	if(user.client) user.client.move_delay = world.time + move_delay
+	user.setClickCooldown(4)
+	user.setMoveCooldown(move_delay)
 	next_fire_time = world.time + fire_delay
 
 	if(muzzle_flash)
@@ -222,7 +222,7 @@
 
 		if(reflex)
 			user.visible_message(
-				"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!<b></span>",
+				"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!</b></span>",
 				"<span class='reflex_shoot'>You fire \the [src] by reflex!</span>",
 				"You hear a [fire_sound_text]!"
 			)

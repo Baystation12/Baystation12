@@ -326,6 +326,20 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
 
+/material/diona
+	name = "biomass"
+	icon_colour = null
+	stack_type = null
+	integrity = 600
+	icon_base = "diona"
+	icon_reinf = "noreinf"
+
+/material/diona/place_dismantled_product()
+	return
+
+/material/diona/place_dismantled_girder(var/turf/target)
+	spawn_diona_nymph(target)
+
 /material/steel/holographic
 	name = "holo" + DEFAULT_WALL_MATERIAL
 	display_name = DEFAULT_WALL_MATERIAL
@@ -346,6 +360,14 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
 
+/material/plasteel/titanium
+	name = "titanium"
+	stack_type = null
+	icon_base = "metal"
+	door_icon_base = "metal"
+	icon_colour = "#D1E6E3"
+	icon_reinf = "reinf_metal"
+
 /material/glass
 	name = "glass"
 	stack_type = /obj/item/stack/material/glass
@@ -359,9 +381,8 @@ var/list/name_to_material
 	weight = 15
 	door_icon_base = "stone"
 	destruction_desc = "shatters"
-	window_options = list("One Direction", "Full Window")
+	window_options = list("One Direction" = 1, "Full Window" = 4)
 	created_window = /obj/structure/window/basic
-	wire_product = /obj/item/stack/light_w
 	rod_product = /obj/item/stack/material/glass/reinforced
 
 /material/glass/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
@@ -417,9 +438,8 @@ var/list/name_to_material
 		return 1
 
 	var/build_path = /obj/structure/windoor_assembly
-	var/sheets_needed = 4
+	var/sheets_needed = window_options[choice]
 	if(choice == "Windoor")
-		sheets_needed = 5
 		build_dir = user.dir
 	else
 		build_path = created_window
@@ -450,29 +470,28 @@ var/list/name_to_material
 	weight = 30
 	stack_origin_tech = "materials=2"
 	composite_material = list(DEFAULT_WALL_MATERIAL = 1875,"glass" = 3750)
-	window_options = list("One Direction", "Full Window", "Windoor")
+	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
 	created_window = /obj/structure/window/reinforced
 	wire_product = null
 	rod_product = null
 
 /material/glass/phoron
-	name = "phglass"
-	display_name = "phoron glass"
+	name = "borosilicate glass"
+	display_name = "borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MATERIAL_BRITTLE
-	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE+300
-	integrity = 200 // idk why but phoron windows are strong, so.
+	integrity = 100
 	icon_colour = "#FC2BC5"
-	stack_origin_tech = list(TECH_MATERIAL = 3, TECH_PHORON = 2)
+	stack_origin_tech = list(TECH_MATERIAL = 4)
 	created_window = /obj/structure/window/phoronbasic
 	wire_product = null
 	rod_product = /obj/item/stack/material/glass/phoronrglass
 
 /material/glass/phoron/reinforced
-	name = "rphglass"
-	display_name = "reinforced phoron glass"
+	name = "reinforced borosilicate glass"
+	display_name = "reinforced borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronrglass
-	stack_origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 2)
+	stack_origin_tech = list(TECH_MATERIAL = 5)
 	composite_material = list() //todo
 	created_window = /obj/structure/window/phoronreinforced
 	hardness = 40

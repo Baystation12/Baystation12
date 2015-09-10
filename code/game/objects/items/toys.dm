@@ -104,7 +104,7 @@
 
 /obj/item/toy/nanotrasenballoon
 	name = "criminal balloon"
-	desc = "Across the balloon the following is printed: \"Man, I love NT soooo much. I use only NanoTrasen products. You have NO idea.\""
+	desc = "Across the balloon the following is printed: \"Man, I love NanoTrasen soooo much. I use only NT products. You have NO idea.\""
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
@@ -132,87 +132,6 @@
 	desc = "\"Singulo\" brand spinning toy."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
-
-/*
- * Toy gun: Why isnt this an /obj/item/weapon/gun?
- */
-/obj/item/toy/gun
-	name = "cap gun"
-	desc = "There are 0 caps left. Looks almost like the real thing! Ages 8 and up. Please recycle in an autolathe when you're out of caps!"
-	icon = 'icons/obj/gun.dmi'
-	icon_state = "revolver"
-	item_state = "revolver"
-	item_icons = list(
-		icon_l_hand = 'icons/mob/items/lefthand_guns.dmi',
-		icon_r_hand = 'icons/mob/items/righthand_guns.dmi',
-		)
-	flags =  CONDUCT
-	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	w_class = 3.0
-
-	matter = list("glass" = 10,DEFAULT_WALL_MATERIAL = 10)
-
-	attack_verb = list("struck", "pistol whipped", "hit", "bashed")
-	var/bullets = 7.0
-
-	examine(mob/user)
-		if(..(user, 0))
-			src.desc = text("There are [] caps\s left. Looks almost like the real thing! Ages 8 and up.", src.bullets)
-		return
-
-	attackby(obj/item/toy/ammo/gun/A as obj, mob/user as mob)
-
-		if (istype(A, /obj/item/toy/ammo/gun))
-			if (src.bullets >= 7)
-				user << "<span class='notice'>It's already fully loaded!</span>"
-				return 1
-			if (A.amount_left <= 0)
-				user << "<span class='warning'>There is no more caps!</span>"
-				return 1
-			if (A.amount_left < (7 - src.bullets))
-				src.bullets += A.amount_left
-				user << text("<span class='warning'>You reload [] caps\s!</span>", A.amount_left)
-				A.amount_left = 0
-			else
-				user << text("<span class='warning'>You reload [] caps\s!</span>", 7 - src.bullets)
-				A.amount_left -= 7 - src.bullets
-				src.bullets = 7
-			A.update_icon()
-			return 1
-		return
-
-	afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
-		if (flag)
-			return
-		if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
-			usr << "<span class='warning'>You don't have the dexterity to do this!</span>"
-			return
-		src.add_fingerprint(user)
-		if (src.bullets < 1)
-			user.show_message("<span class='warning'>*click* *click*</span>", 2)
-			playsound(user, 'sound/weapons/empty.ogg', 100, 1)
-			return
-		playsound(user, 'sound/weapons/Gunshot.ogg', 100, 1)
-		src.bullets--
-		for(var/mob/O in viewers(user, null))
-			O.show_message(text("<span class='danger'>\The [] fires a cap gun at []!</span>", user, target), 1, "<span class='warning'>You hear a gunshot!</span>", 2)
-
-/obj/item/toy/ammo/gun
-	name = "ammo-caps"
-	desc = "There are 7 caps left! Make sure to recyle the box in an autolathe when it gets empty."
-	icon = 'icons/obj/ammo.dmi'
-	icon_state = "357-7"
-	flags = CONDUCT
-	w_class = 1.0
-
-	matter = list(DEFAULT_WALL_MATERIAL = 10,"glass" = 10)
-
-	var/amount_left = 7.0
-
-	update_icon()
-		src.icon_state = text("357-[]", src.amount_left)
-		src.desc = text("There are [] caps\s left! Make sure to recycle the box in an autolathe when it gets empty.", src.amount_left)
-		return
 
 /*
  * Toy crossbow
@@ -344,7 +263,6 @@
 	item_state = "sword0"
 	var/active = 0.0
 	w_class = 2.0
-	flags = NOSHIELD
 	attack_verb = list("attacked", "struck", "hit")
 
 	attack_self(mob/user as mob)
