@@ -72,13 +72,26 @@
 		if(H && H.uplink_owner && H.uplink_owner == ply)
 			TC_uses += H.used_TC
 			uplink_true = 1
-			var/list/refined_log = new()
-			for(var/datum/uplink_item/UI in H.purchase_log)
-				refined_log.Add("[H.purchase_log[UI]]x[UI.log_icon()][UI.name]")
-			purchases = english_list(refined_log, nothing_text = "")
+			purchases += get_uplink_purchases(H)
 	if(uplink_true)
 		text += " (used [TC_uses] TC)"
 		if(purchases)
 			text += "<br>[purchases]"
 
 	return text
+
+/proc/print_ownerless_uplinks()
+	var/has_printed = 0
+	for(var/obj/item/device/uplink/H in world_uplinks)
+		if(isnull(H.uplink_owner) && H.used_TC)
+			if(!has_printed)
+				has_printed = 1
+				world << "<b>Ownerless Uplinks</b>"
+			world << "[H.loc] (used [H.used_TC] TC)"
+			world << get_uplink_purchases(H)
+
+/proc/get_uplink_purchases(var/obj/item/device/uplink/H)
+	var/list/refined_log = new()
+	for(var/datum/uplink_item/UI in H.purchase_log)
+		refined_log.Add("[H.purchase_log[UI]]x[UI.log_icon()][UI.name]")
+	. = english_list(refined_log, nothing_text = "")
