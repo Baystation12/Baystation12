@@ -1,0 +1,18 @@
+#   bugfix
+#   wip (For works in progress)
+#   tweak
+#   soundadd
+#   sounddel
+#   rscadd (general adding of nice things)
+#   rscdel (general deleting of nice things)
+#   imageadd
+#   imagedel
+#   maptweak
+#   spellcheck (typo fixes)
+#   experiment
+
+author: HarpyEagle
+delete-after: True
+
+changes: 
+  - tweak: "Made flares brighter."
