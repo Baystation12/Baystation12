@@ -950,7 +950,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		U.visible_message("<span class='notice'>[U] taps on \his PDA's screen.</span>")
 	U.last_target_click = world.time
 	var/t = input(U, "Please enter message", P.name, null) as text
-	t = sanitize(t)
+	t = sanitize_russian(t)
 	//t = readd_quotes(t)
 	t = replace_characters(t, list("&#34;" = "\""))
 	if (!t || !istype(P))
@@ -1050,7 +1050,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/ai/new_message(var/atom/movable/sending_unit, var/sender, var/sender_job, var/message)
 	var/track = ""
 	if(ismob(sending_unit.loc) && isAI(loc))
-		track = "(<a href='byond://?src=\ref[loc];track=\ref[sending_unit.loc];trackname=[html_encode(sender)]'>Follow</a>)"
+		track = "(<a href='byond://?src=\ref[loc];track=\ref[sending_unit.loc];trackname=[rhtml_encode(sender)]'>Follow</a>)"
 
 	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;notap=1;skiprefresh=1;target=\ref[sending_unit]'>Reply</a>) [track]"
 	new_info(message_silent, newstone, reception_message)
