@@ -29,7 +29,7 @@
 		if("Cancel")
 			return
 		if("No")
-			; // BYOND apparently doesn't have 'break' in switch statements.
+			; // do nothing
 
 	callproc_targetpicked(targetselected, target)
 
@@ -120,7 +120,7 @@
 				if(!current)
 					switch(alert("\The [M] appears to not have an area; do you want to pass null instead?",, "Yes", "Cancel"))
 						if("Yes")
-							;
+							; // do nothing
 						if("Cancel")
 							return
 
@@ -129,7 +129,7 @@
 				if(!current)
 					switch(alert("You do not currently have a marked datum; do you want to pass null instead?",, "Yes", "Cancel"))
 						if("Yes")
-							;
+							; // do nothing
 						if("Cancel")
 							return
 		if(!done)
