@@ -16,6 +16,7 @@
 
 	for(var/i in 1 to codelen)
 		code += pick(digits)
+		digits -= code[code.len]
 
 	generate_loot()
 
