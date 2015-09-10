@@ -256,6 +256,8 @@
 	brute_mod = 1.875 // 100% * 1.875 * 0.8 (robolimbs) ~= 150%
 	burn_mod = 1.875  // So they take 50% extra damage from brute/burn overall.
 	show_ssd = "flashing a 'system offline' glyph on their monitor"
+	death_message = "gives one shrill beep before falling lifeless."
+	knockout_message = "encounters a hardware fault and suddenly reboots!"
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0

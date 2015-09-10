@@ -91,15 +91,15 @@
 	var/damage = 20
 	var/obj/item/clothing/hat = attacker.head
 	if(istype(hat))
-		damage += hat.force * 10
+		damage += hat.force * 3
 	
 	var/armor = target.run_armor_check("head", "melee")
-	target.apply_damage(damage*rand(90, 110)/100, BRUTE, "head", armor)
-	attacker.apply_damage(10*rand(90, 110)/100, BRUTE, "head", attacker.run_armor_check("head", "melee"))
+	target.apply_damage(damage, BRUTE, "head", armor)
+	attacker.apply_damage(10, BRUTE, "head", attacker.run_armor_check("head", "melee"))
 	
-	if(!armor && prob(damage))
+	if(!armor && target.headcheck("head") && prob(damage))
 		target.apply_effect(20, PARALYZE)
-		target.visible_message("<span class='danger'>[target] has been knocked unconscious!</span>")
+		target.visible_message("<span class='danger'>[target] [target.species.knockout_message]</span>")
 	
 	playsound(attacker.loc, "swing_hit", 25, 1, -1)
 	attacker.attack_log += text("\[[time_stamp()]\] <font color='red'>Headbutted [target.name] ([target.ckey])</font>")

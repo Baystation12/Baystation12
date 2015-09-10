@@ -695,6 +695,28 @@
 			number += 2
 	return number
 
+//Used by various things that knock people out by applying blunt trauma to the head.
+//Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
+/mob/living/carbon/human/proc/headcheck(var/target_zone, var/brain_tag = "brain")
+	if(!species.has_organ[brain_tag])
+		return 0
+	
+	var/obj/item/organ/affecting = internal_organs_by_name[brain_tag]
+	
+	target_zone = check_zone(target_zone)
+	if(!affecting || affecting.parent_organ != target_zone)
+		return 0
+	
+	//if the parent organ is significantly larger than the brain organ, then hitting it is not guaranteed
+	var/obj/item/organ/parent = get_organ(target_zone)
+	if(!parent)
+		return 0
+	
+	if(parent.w_class > affecting.w_class + 1)
+		return prob(100 / 2**(parent.w_class - affecting.w_class - 1))
+	
+	return 1
+
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
 	if(species.has_fine_manipulation)
 		return 1

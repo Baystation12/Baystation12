@@ -45,7 +45,7 @@
 
 	force = 15 //Smashing bottles over someoen's head hurts.
 
-	var/obj/item/organ/external/affecting = user.zone_sel.selecting //Find what the player is aiming at
+	var/affecting = user.zone_sel.selecting //Find what the player is aiming at
 
 	var/armor_block = 0 //Get the target's armour values for normal attack damage.
 	var/armor_duration = 0 //The more force the bottle has, the longer the duration.
@@ -58,12 +58,11 @@
 	target.apply_damage(force, BRUTE, affecting, armor_block, sharp=0)
 
 	// You are going to knock someone out for longer if they are not wearing a helmet.
-	if(affecting == "head" && istype(target, /mob/living/carbon/))
-
+	var/mob/living/carbon/human/H = target
+	if(istype(H) && H.headcheck(affecting))
 		//Display an attack message.
-		for(var/mob/O in viewers(user, null))
-			if(target != user) O.show_message(text("\red <B>[target] has been hit over the head with a bottle of [src.name], by [user]!</B>"), 1)
-			else O.show_message(text("\red <B>[target] hit \himself with a bottle of [src.name] on the head!</B>"), 1)
+		var/obj/item/organ/O = H.get_organ(affecting)
+		user.visible_message("<span class='danger'>[user] smashes [src] into [H]'s [O.name]!</span>")
 		//Weaken the target for the duration that we calculated and divide it by 5.
 		if(armor_duration)
 			target.apply_effect(min(armor_duration, 10) , WEAKEN, armor_block) // Never weaken more than a flash!
