@@ -32,16 +32,16 @@
 		return
 	..()
 
-/datum/reagent/nutriment/egg // Also bad for skrell. Not a child of protein because it might mess up, not sure.
+/datum/reagent/nutriment/protein/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien && alien == IS_SKRELL)
+		M.adjustToxLoss(2 * removed)
+		return
+	..()
+
+/datum/reagent/nutriment/protein/egg // Also bad for skrell.
 	name = "egg yolk"
 	id = "egg"
 	color = "#FFFFAA"
-
-/datum/reagent/nutriment/egg/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien && alien == IS_SKRELL)
-		M.adjustToxLoss(0.5 * removed)
-		return
-	..()
 
 /datum/reagent/nutriment/honey
 	name = "Honey"
@@ -570,19 +570,36 @@
 	adj_drowsy = -3
 	adj_sleepy = -2
 	adj_temp = 25
+	overdose = 45
 
 	glass_icon_state = "hot_coffee"
 	glass_name = "cup of coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
 
 /datum/reagent/drink/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
 	if(alien == IS_DIONA)
 		return
+	..()
+	if(alien == IS_TAJARA)
+		M.adjustToxLoss(0.5 * removed)
+		M.make_jittery(4) //extra sensitive to caffine
 	if(adj_temp > 0)
 		holder.remove_reagent("frostoil", 10 * removed)
-	if(dose > 45)
-		M.make_jittery(5)
+
+/datum/reagent/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_TAJARA)
+		M.adjustToxLoss(2 * removed)
+		M.make_jittery(4)
+		return
+
+/datum/reagent/drink/coffee/overdose(var/mob/living/carbon/M, var/alien)
+	if(alien == IS_DIONA)
+		return
+	if(alien == IS_TAJARA)
+		M.adjustToxLoss(4 * REM)
+		M.apply_effect(3, STUTTER)
+	M.make_jittery(5)
 
 /datum/reagent/drink/coffee/icecoffee
 	name = "Iced Coffee"
@@ -1010,7 +1027,39 @@
 	glass_desc = "A crystal clear glass of Griffeater gin."
 	glass_center_of_mass = list("x"=16, "y"=12)
 
-/datum/reagent/ethanol/kahlua
+//Base type for alchoholic drinks containing coffee
+/datum/reagent/ethanol/coffee
+	overdose = 45
+
+/datum/reagent/ethanol/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+	..()
+	M.dizziness = max(0, M.dizziness - 5)
+	M.drowsyness = max(0, M.drowsyness - 3)
+	M.sleeping = max(0, M.sleeping - 2)
+	if(M.bodytemperature > 310)
+		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
+	if(alien == IS_TAJARA)
+		M.adjustToxLoss(0.5 * removed)
+		M.make_jittery(4) //extra sensitive to caffine
+
+/datum/reagent/ethanol/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_TAJARA)
+		M.adjustToxLoss(2 * removed)
+		M.make_jittery(4)
+		return
+	..()
+
+/datum/reagent/ethanol/coffee/overdose(var/mob/living/carbon/M, var/alien)
+	if(alien == IS_DIONA)
+		return
+	if(alien == IS_TAJARA)
+		M.adjustToxLoss(4 * REM)
+		M.apply_effect(3, STUTTER)
+	M.make_jittery(5)
+
+/datum/reagent/ethanol/coffee/kahlua
 	name = "Kahlua"
 	id = "kahlua"
 	description = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936!"
@@ -1021,17 +1070,6 @@
 	glass_name = "glass of RR coffee liquor"
 	glass_desc = "DAMN, THIS THING LOOKS ROBUST"
 	glass_center_of_mass = list("x"=15, "y"=7)
-
-/datum/reagent/ethanol/kahlua/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	if(alien == IS_DIONA)
-		return
-	M.dizziness = max(0, M.dizziness - 5)
-	M.drowsyness = max(0, M.drowsyness - 3)
-	M.sleeping = max(0, M.sleeping - 2)
-	if(M.bodytemperature > 310)
-		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
-	M.make_jittery(5)
 
 /datum/reagent/ethanol/melonliquor
 	name = "Melon Liquor"
@@ -1246,7 +1284,7 @@
 	glass_desc = "We cannot take legal responsibility for your actions after imbibing."
 	glass_center_of_mass = list("x"=15, "y"=7)
 
-/datum/reagent/ethanol/b52
+/datum/reagent/ethanol/coffee/b52
 	name = "B-52"
 	id = "b52"
 	description = "Coffee, Irish Cream, and cognac. You will get bombed."
@@ -1357,7 +1395,7 @@
 	glass_name = "glass of Booger"
 	glass_desc = "Ewww..."
 
-/datum/reagent/ethanol/brave_bull
+/datum/reagent/ethanol/coffee/brave_bull
 	name = "Brave Bull"
 	id = "bravebull"
 	description = "It's just as effective as Dutch-Courage!"
@@ -1566,7 +1604,7 @@
 	glass_desc = "An irish car bomb."
 	glass_center_of_mass = list("x"=16, "y"=8)
 
-/datum/reagent/ethanol/irishcoffee
+/datum/reagent/ethanol/coffee/irishcoffee
 	name = "Irish Coffee"
 	id = "irishcoffee"
 	description = "Coffee, and alcohol. More fun than a Mimosa to drink in the morning."
