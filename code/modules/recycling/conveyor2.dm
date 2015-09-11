@@ -1,17 +1,8 @@
 //conveyor2 is pretty much like the original, except it supports corners, but not diverters.
 //note that corner pieces transfer stuff clockwise when running forward, and anti-clockwise backwards.
 
-//Conveyor controller
-/var/obj/global/conveyor_controller/conveyor_controller = new()
-
-obj/conveyor_controller
-	var/list/conveyor_moved = new()
-	var/list/conveyors = new()
-
-obj/conveyor_controller/process()
-	for(var/obj/machinery/conveyor/conv in conveyors)
-		conv.conv_process()
-	conveyor_moved.Cut(1,0)
+//Conveyor moved things
+/var/global/list/conveyor_moved = new()
 
 //conveyor
 /obj/machinery/conveyor
@@ -49,8 +40,6 @@ obj/conveyor_controller/process()
 	if(on)
 		operating = 1
 		setmove()
-	
-	conveyor_controller.conveyors += src
 
 /obj/machinery/conveyor/proc/setmove()
 	if(operating == 1)
@@ -84,10 +73,10 @@ obj/conveyor_controller/process()
 	var/items_moved = 0
 	for(var/atom/movable/A in affecting)
 		if(!A.anchored)
-			if(A.loc == src.loc && !conveyor_controller.conveyor_moved.Find(A)) // prevents the object from being affected if it's not currently here or alredy move.
+			if(A.loc == src.loc && !conveyor_moved.Find(A)) // prevents the object from being affected if it's not currently here or alredy move.
 				step(A,movedir)
 				items_moved++
-				conveyor_controller.conveyor_moved+=A
+				conveyor_moved+=A
 		if(items_moved >= 10)
 			break
 
