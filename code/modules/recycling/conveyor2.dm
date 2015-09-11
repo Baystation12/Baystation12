@@ -1,6 +1,19 @@
 //conveyor2 is pretty much like the original, except it supports corners, but not diverters.
 //note that corner pieces transfer stuff clockwise when running forward, and anti-clockwise backwards.
 
+//Conveyor controller
+/var/obj/global/conveyor_controller/conveyor_controller = new()
+
+obj/conveyor_controller
+	var/list/conveyor_moved = new()
+	var/list/conveyors = new()
+
+obj/conveyor_controller/process()
+	for(var/obj/machinery/conveyor/conv in conveyors)
+		conv.conv_process()
+	conveyor_moved.Cut(1,0)
+
+//conveyor
 /obj/machinery/conveyor
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "conveyor0"
@@ -36,12 +49,15 @@
 	if(on)
 		operating = 1
 		setmove()
+	
+	conveyor_controller.conveyors += src
 
 /obj/machinery/conveyor/proc/setmove()
 	if(operating == 1)
 		movedir = forwards
-	else
+	else if(operating == -1)
 		movedir = backwards
+	else operating = 0
 	update()
 
 /obj/machinery/conveyor/proc/update()
@@ -57,7 +73,7 @@
 
 	// machine process
 	// move items to the target location
-/obj/machinery/conveyor/process()
+/obj/machinery/conveyor/proc/conv_process()
 	if(stat & (BROKEN | NOPOWER))
 		return
 	if(!operating)
@@ -65,15 +81,15 @@
 	use_power(100)
 
 	affecting = loc.contents - src		// moved items will be all in loc
-	spawn(1)	// slight delay to prevent infinite propagation due to map order	//TODO: please no spawn() in process(). It's a very bad idea
-		var/items_moved = 0
-		for(var/atom/movable/A in affecting)
-			if(!A.anchored)
-				if(A.loc == src.loc) // prevents the object from being affected if it's not currently here.
-					step(A,movedir)
-					items_moved++
-			if(items_moved >= 10)
-				break
+	var/items_moved = 0
+	for(var/atom/movable/A in affecting)
+		if(!A.anchored)
+			if(A.loc == src.loc && !conveyor_controller.conveyor_moved.Find(A)) // prevents the object from being affected if it's not currently here or alredy move.
+				step(A,movedir)
+				items_moved++
+				conveyor_controller.conveyor_moved+=A
+		if(items_moved >= 10)
+			break
 
 // attack with item, place item on conveyor
 /obj/machinery/conveyor/attackby(var/obj/item/I, mob/user)
