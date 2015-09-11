@@ -2,7 +2,7 @@
 /mob/living/carbon/process_resist()
 
 	//drop && roll
-	if(on_fire)
+	if(on_fire && !buckled)
 		fire_stacks -= 1.2
 		Weaken(3)
 		spin(32,2)

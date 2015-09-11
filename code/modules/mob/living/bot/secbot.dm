@@ -183,6 +183,7 @@
 			if(!Adjacent(target))
 				awaiting_surrender = 5 // I'm done playing nice
 				mode = SECBOT_HUNT
+				return
 			var/threat = check_threat(target)
 			if(threat < 4)
 				target = null
