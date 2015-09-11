@@ -83,6 +83,12 @@ proc/sanitize_russian(var/msg, var/html = 0)
 		first = 0
 		out += html_decode(text)
 
+/proc/logRu(var/t) //cuz logs must be clean
+	t = replacetext(t, "&#x44F;", "ß")
+	t = replacetext(t, "&#255;", "ß")
+	t = replacetext(t, "ÿ;", "ß")
+	return t
+
 //Used for preprocessing entered text
 /proc/sanitize(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1)
 	if(!input)
