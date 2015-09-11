@@ -5,7 +5,7 @@ var/CELLRATE = 0.002 // Multiplier for watts per tick <> cell storage (e.g., 0.0
 var/CHARGELEVEL = 0.0005 // Cap for how fast cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
 
 // Doors!
-#define DOOR_CRUSH_DAMAGE 10
+#define DOOR_CRUSH_DAMAGE 20
 #define ALIEN_SELECT_AFK_BUFFER  1    // How many minutes that a person can be AFK before not being allowed to be an alien.
 
 // Channel numbers for power.
@@ -30,9 +30,6 @@ var/CHARGELEVEL = 0.0005 // Cap for how fast cells charge, as a percentage-per-t
 
 #define AI_CAMERA_LUMINOSITY 6
 
-// Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.
-var/list/restricted_camera_networks = list("thunder","ERT","NUKE","Secret")
-
 // Camera networks
 #define NETWORK_CRESCENT "Crescent"
 #define NETWORK_CIVILIAN_EAST "Civilian East"
@@ -41,9 +38,10 @@ var/list/restricted_camera_networks = list("thunder","ERT","NUKE","Secret")
 #define NETWORK_ENGINE "Engine"
 #define NETWORK_ENGINEERING "Engineering"
 #define NETWORK_ENGINEERING_OUTPOST "Engineering Outpost"
-#define NETWORK_ERT "ERT"
+#define NETWORK_ERT "ZeEmergencyResponseTeam"
 #define NETWORK_EXODUS "Exodus"
 #define NETWORK_MEDICAL "Medical"
+#define NETWORK_MERCENARY "MercurialNet"
 #define NETWORK_MINE "MINE"
 #define NETWORK_RESEARCH "Research"
 #define NETWORK_RESEARCH_OUTPOST "Research Outpost"
@@ -51,7 +49,10 @@ var/list/restricted_camera_networks = list("thunder","ERT","NUKE","Secret")
 #define NETWORK_ROBOTS "Robots"
 #define NETWORK_SECURITY "Security"
 #define NETWORK_TELECOM "Tcomsat"
-#define NETWORK_THUNDER "thunder"
+#define NETWORK_THUNDER "Thunderdome"
+
+// Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.
+var/list/restricted_camera_networks = list(NETWORK_ERT,NETWORK_MERCENARY,"Secret")
 
 
 //singularity defines
