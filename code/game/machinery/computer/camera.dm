@@ -254,5 +254,5 @@
 	name = "head mounted camera monitor"
 	desc = "Used to access the built-in cameras in helmets."
 	icon_state = "syndicam"
-	network = list("NUKE")
+	network = list(NETWORK_MERCENARY)
 	circuit = null

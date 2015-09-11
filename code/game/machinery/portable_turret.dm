@@ -408,7 +408,6 @@ var/list/turret_icons
 /obj/machinery/porta_turret/ex_act(severity)
 	switch (severity)
 		if (1)
-			del(src)
 			qdel(src)
 		if (2)
 			if (prob(25))
@@ -503,7 +502,7 @@ var/list/turret_icons
 
 	if(isanimal(L) || issmall(L)) // Animals are not so dangerous
 		return check_anomalies ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
-	
+
 	if(isxenomorph(L) || isalien(L)) // Xenos are dangerous
 		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
 
@@ -701,7 +700,7 @@ var/list/turret_icons
 				playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 				user << "<span class='notice'>You dismantle the turret construction.</span>"
 				new /obj/item/stack/material/steel( loc, 5)
-				qdel(src) // qdel
+				qdel(src)
 				return
 
 		if(1)

@@ -626,6 +626,12 @@ proc/is_blind(A)
 
 	return 0
 
+/mob/living/carbon/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
+	if(handcuffed)
+		return SAFE_PERP
+
+	return ..()
+
 /mob/living/carbon/human/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
 	var/threatcount = ..()
 	if(. == SAFE_PERP)

@@ -136,6 +136,5 @@
 // Cleaner proc for creating powersupply for an AI.
 /mob/living/silicon/ai/proc/create_powersupply()
 	if(psupply)
-		del(psupply)
+		qdel(psupply)
 	psupply = new/obj/machinery/ai_powersupply(src)
-
