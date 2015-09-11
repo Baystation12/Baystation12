@@ -40,6 +40,7 @@
 			machine_profiling[M.type] += (time_end - time_start)
 			#endif
 
+		conveyor_moved.Cut(1,0)
 		scheck()
 
 /datum/controller/process/machinery/proc/internal_process_power()
