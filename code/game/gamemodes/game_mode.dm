@@ -292,6 +292,8 @@ var/global/list/additional_antag_types = list()
 			sleep(10)
 			antag.check_victory()
 			antag.print_player_summary()
+		sleep(10)
+		print_ownerless_uplinks()
 
 	var/clients = 0
 	var/surviving_humans = 0

@@ -159,8 +159,8 @@ emp_act
 		return null
 
 	if(check_shields(I.force, I, user, target_zone, "the [I.name]"))
-		return
-	
+		return null
+
 	var/obj/item/organ/external/affecting = get_organ(hit_zone)
 	if (!affecting || (affecting.status & ORGAN_DESTROYED) || affecting.is_stump())
 		user << "<span class='danger'>They are missing that limb!</span>"
@@ -187,27 +187,35 @@ emp_act
 
 	// Handle striking to cripple.
 	if(user.a_intent == I_DISARM)
-		effective_force /= 2
-		if(..(I, effective_force, blocked, hit_zone))
-			attack_joint(affecting, I, blocked)
-		else
+		effective_force /= 2 //half the effective force
+		if(!..(I, effective_force, blocked, hit_zone))
 			return 0
+		
+		attack_joint(affecting, I, blocked) //but can dislocate joints
 	else if(!..())
 		return 0
 
 	if(effective_force > 10 || effective_force >= 5 && prob(33))
 		forcesay(hit_appends)	//forcesay checks stat already
 
-	if(prob(25 + (effective_force * 2)))
-		if(!((I.damtype == BRUTE) || (I.damtype == HALLOSS)))
-			return
-
+	if((I.damtype == BRUTE || I.damtype == HALLOSS) && prob(25 + (effective_force * 2)))
+		if(!stat)
+			if(headcheck(hit_zone))
+				//Harder to score a stun but if you do it lasts a bit longer
+				if(prob(effective_force))
+					visible_message("<span class='danger'>[src] [species.knockout_message]</span>")
+					apply_effect(20, PARALYZE, blocked)
+			else
+				//Easier to score a stun but lasts less time
+				if(prob(effective_force + 10))
+					visible_message("<span class='danger'>[src] has been knocked down!</span>")
+					apply_effect(6, WEAKEN, blocked)
+		
+		//Apply blood
 		if(!(I.flags & NOBLOODY))
 			I.add_blood(src)
-
-		var/bloody = 0
+		
 		if(prob(33))
-			bloody = 1
 			var/turf/location = loc
 			if(istype(location, /turf/simulated))
 				location.add_blood(src)
@@ -217,28 +225,19 @@ emp_act
 					H.bloody_body(src)
 					H.bloody_hands(src)
 
-		if(!stat)
 			switch(hit_zone)
-				if("head")//Harder to score a stun but if you do it lasts a bit longer
-					if(prob(effective_force))
-						apply_effect(20, PARALYZE, blocked)
-						visible_message("<span class='danger'>\The [src] has been knocked unconscious!</span>")
-					if(bloody)//Apply blood
-						if(wear_mask)
-							wear_mask.add_blood(src)
-							update_inv_wear_mask(0)
-						if(head)
-							head.add_blood(src)
-							update_inv_head(0)
-						if(glasses && prob(33))
-							glasses.add_blood(src)
-							update_inv_glasses(0)
-				if("chest")//Easier to score a stun but lasts less time
-					if(prob(effective_force + 10))
-						apply_effect(6, WEAKEN, blocked)
-						visible_message("<span class='danger'>\The [src] has been knocked down!</span>")
-					if(bloody)
-						bloody_body(src)
+				if("head")
+					if(wear_mask)
+						wear_mask.add_blood(src)
+						update_inv_wear_mask(0)
+					if(head)
+						head.add_blood(src)
+						update_inv_head(0)
+					if(glasses && prob(33))
+						glasses.add_blood(src)
+						update_inv_glasses(0)
+				if("chest")
+					bloody_body(src)
 
 	return 1
 
@@ -445,4 +444,3 @@ emp_act
 		perm += perm_by_part[part]
 
 	return perm
-

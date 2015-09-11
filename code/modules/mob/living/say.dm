@@ -161,19 +161,13 @@ proc/get_radio_key_from_channel(var/channel)
 	else
 		speaking = get_default_language()
 
-	if (speaking)
-		// This is broadcast to all mobs with the language,
-		// irrespective of distance or anything else.
-		if(speaking.flags & HIVEMIND)
-			speaking.broadcast(src,trim(message))
-			return 1
-		//If we've gotten this far, keep going!
-		if(speaking.flags & COMMON_VERBS)
-			verb = say_quote(message)
-		else
-			verb = speaking.get_spoken_verb(copytext(message, length(message)))
-	else
-		verb = say_quote(message)
+	// This is broadcast to all mobs with the language,
+	// irrespective of distance or anything else.
+	if(speaking && (speaking.flags & HIVEMIND))
+		speaking.broadcast(src,trim(message))
+		return 1
+
+	verb = say_quote(message, speaking)
 
 	if(is_muzzled())
 		src << "<span class='danger'>You're muzzled and cannot speak!</span>"

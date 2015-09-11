@@ -130,8 +130,10 @@
 	if(blocked < 2)
 		weaken_duration = smash_duration + min(0, force - target.getarmor(hit_zone, "melee") + 10)
 	
-	if(hit_zone == "head" && istype(target, /mob/living/carbon/))
-		user.visible_message("<span class='danger'>\The [user] smashes [src] over [target]'s head!</span>")
+	var/mob/living/carbon/human/H = target
+	if(istype(H) && H.headcheck(hit_zone))
+		var/obj/item/organ/affecting = H.get_organ(hit_zone) //headcheck should ensure that affecting is not null
+		user.visible_message("<span class='danger'>[user] smashes [src] into [H]'s [affecting.name]!</span>")
 		if(weaken_duration)
 			target.apply_effect(min(weaken_duration, 5), WEAKEN, blocked) // Never weaken more than a flash!
 	else
@@ -428,5 +430,3 @@
 	New()
 		..()
 		reagents.add_reagent("ale", 30)
-
-
