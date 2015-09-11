@@ -147,6 +147,7 @@ datum/nano_item_lists
 		uses -= UI.cost
 		used_TC += UI.cost
 		feedback_add_details("traitor_uplink_items_bought", reference)
+		log_and_message_admins("used \the [src.loc] uplink to buy \a [UI].")
 
 		var/list/L = UI.generate_item(get_turf(usr))
 		if(ishuman(usr))
