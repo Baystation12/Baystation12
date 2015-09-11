@@ -7,13 +7,13 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 */
 
 /obj/item/device/uplink
-	var/welcome 			// Welcoming menu message
-	var/uses 				// Numbers of crystals
-	var/list/ItemsCategory	// List of categories with lists of items
-	var/list/ItemsReference	// List of references with an associated item
-	var/list/nanoui_items	// List of items for NanoUI use
-	var/nanoui_menu = 0		// The current menu we are in
-	var/list/nanoui_data = new // Additional data for NanoUI use
+	var/welcome = "Welcome, Operative"	// Welcoming menu message
+	var/uses 							// Numbers of crystals
+	var/list/ItemsCategory				// List of categories with lists of items
+	var/list/ItemsReference				// List of references with an associated item
+	var/list/nanoui_items				// List of items for NanoUI use
+	var/nanoui_menu = 0					// The current menu we are in
+	var/list/nanoui_data = new 			// Additional data for NanoUI use
 
 	var/list/purchase_log = new
 	var/datum/mind/uplink_owner = null
@@ -22,11 +22,12 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 /obj/item/device/uplink/nano_host()
 	return loc
 
-/obj/item/device/uplink/New(var/location, var/datum/mind/owner)
+/obj/item/device/uplink/New(var/location, var/datum/mind/owner, var/telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
 	..()
 	src.uplink_owner = owner
 	purchase_log = list()
 	world_uplinks += src
+	uses = telecrystals
 
 /obj/item/device/uplink/Destroy()
 	world_uplinks -= src
@@ -212,4 +213,4 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 /obj/item/device/radio/headset/uplink/New()
 	..()
 	hidden_uplink = new(src)
-	hidden_uplink.uses = 10
+	hidden_uplink.uses = DEFAULT_TELECRYSTAL_AMOUNT
