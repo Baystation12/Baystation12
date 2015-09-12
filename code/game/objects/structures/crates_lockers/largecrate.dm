@@ -14,7 +14,7 @@
 		new /obj/item/stack/material/wood(src)
 		var/turf/T = get_turf(src)
 		for(var/atom/movable/M in contents)
-			M.loc = T
+			M.forceMove(T)
 		user.visible_message("<span class='notice'>[user] pries \the [src] open.</span>", \
 							 "<span class='notice'>You pry open \the [src].</span>", \
 							 "<span class='notice'>You hear splitting wood.</span>")

@@ -65,10 +65,10 @@
 		if (istype(W, /obj/item/weapon/grab))
 			src.MouseDrop_T(W:affecting, user)      //act like they were dragged onto the closet
 		user.drop_item()
-		if (W) W.loc = src.loc
+		if (W) W.forceMove(src.loc)
 	else if(istype(W, /obj/item/weapon/card/id))
 		if(src.broken)
-			user << "\red It appears to be broken."
+			user << "<span class='warning'>It appears to be broken.</span>"
 			return
 		var/obj/item/weapon/card/id/I = W
 		if(!I || !I.registered_name)	return
