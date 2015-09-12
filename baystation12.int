@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+DIR: code code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\simple_animal code\modules\mob\living\simple_animal\friendly code\modules\power code\modules\projectiles code\modules\projectiles\guns code\modules\projectiles\guns\launcher 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+WINDOW: code\modules\mob\living\simple_animal\friendly\mouse.dm;code\modules\power\cable.dm
+FILE: code\modules\power\cable.dm
 */
 // END_INTERNALS
