@@ -563,6 +563,7 @@
 	adj_drowsy = -3
 	adj_sleepy = -2
 	adj_temp = 25
+	overdose = 45
 
 	glass_icon_state = "hot_coffee"
 	glass_name = "cup of coffee"
@@ -574,8 +575,11 @@
 		return
 	if(adj_temp > 0)
 		holder.remove_reagent("frostoil", 10 * removed)
-	if(dose > 45)
-		M.make_jittery(5)
+
+/datum/reagent/drink/coffee/overdose(var/mob/living/carbon/M, var/alien)
+	if(alien == IS_DIONA)
+		return
+	M.make_jittery(5)
 
 /datum/reagent/drink/coffee/icecoffee
 	name = "Iced Coffee"
