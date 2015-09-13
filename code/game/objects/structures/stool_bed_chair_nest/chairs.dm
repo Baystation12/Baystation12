@@ -176,6 +176,7 @@
 	name = "wooden chair"
 	desc = "Old is never too old to not be in fashion."
 	icon_state = "wooden_chair"
+	color = null
 
 /obj/structure/bed/chair/wood/update_icon()
 	return
@@ -195,7 +196,9 @@
 /obj/structure/bed/chair/sofa
 	name = "old ratty sofa"
 	icon_state = "sofamiddle"
+	color = null
 	anchored = 1
+
 /obj/structure/bed/chair/sofa/left
 	icon_state = "sofaend_left"
 /obj/structure/bed/chair/sofa/right
