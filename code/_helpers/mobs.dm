@@ -1,3 +1,28 @@
+/atom/movable/proc/get_mob()
+	return
+
+/obj/machinery/bot/mulebot/get_mob()
+	if(load && istype(load,/mob/living))
+		return load
+
+/obj/mecha/get_mob()
+	return occupant
+
+/obj/vehicle/train/get_mob()
+	return buckled_mob
+
+/mob/get_mob()
+	return src
+
+/proc/mobs_in_view(var/range, var/source)
+	var/list/mobs = list()
+	for(var/atom/movable/AM in view(range, source))
+		var/M = AM.get_mob()
+		if(M)
+			mobs += M
+
+	return mobs
+
 proc/random_hair_style(gender, species = "Human")
 	var/h_style = "Bald"
 
