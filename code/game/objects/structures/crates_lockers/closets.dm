@@ -27,7 +27,7 @@
 		var/obj/item/I
 		for(I in src.loc)
 			if(I.density || I.anchored || I == src) continue
-			I.loc = src
+			I.forceMove(src)
 		// adjust locker size to hold all items with 5 units of free store room
 		var/content_size = 0
 		for(I in src.contents)
@@ -71,13 +71,13 @@
 /obj/structure/closet/proc/dump_contents()
 	//Cham Projector Exception
 	for(var/obj/effect/dummy/chameleon/AD in src)
-		AD.loc = src.loc
+		AD.forceMove(src.loc)
 
 	for(var/obj/I in src)
-		I.loc = src.loc
+		I.forceMove(src.loc)
 
 	for(var/mob/M in src)
-		M.loc = src.loc
+		M.forceMove(src.loc)
 		if(M.client)
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE
@@ -125,7 +125,7 @@
 	for(var/obj/effect/dummy/chameleon/AD in src.loc)
 		if((stored_units + added_units) > storage_capacity)
 			break
-		AD.loc = src
+		AD.forceMove(src)
 		added_units++
 	return added_units
 
@@ -136,7 +136,7 @@
 		if(stored_units + added_units + item_size > storage_capacity)
 			continue
 		if(!I.anchored)
-			I.loc = src
+			I.forceMove(src)
 			added_units += item_size
 	return added_units
 
@@ -151,7 +151,7 @@
 		if(M.client)
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
-		M.loc = src
+		M.forceMove(src)
 		added_units += current_mob_size
 	return added_units
 
@@ -166,19 +166,19 @@
 	switch(severity)
 		if(1)
 			for(var/atom/movable/A as mob|obj in src)//pulls everything out of the locker and hits it with an explosion
-				A.loc = src.loc
+				A.forceMove(src.loc)
 				A.ex_act(severity++)
 			qdel(src)
 		if(2)
 			if(prob(50))
 				for (var/atom/movable/A as mob|obj in src)
-					A.loc = src.loc
+					A.forceMove(src.loc)
 					A.ex_act(severity++)
 				qdel(src)
 		if(3)
 			if(prob(5))
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = src.loc
+					A.forceMove(src.loc)
 					A.ex_act(severity++)
 				qdel(src)
 
@@ -186,7 +186,7 @@
 	health -= damage
 	if(health <= 0)
 		for(var/atom/movable/A in src)
-			A.loc = src.loc
+			A.forceMove(src.loc)
 		qdel(src)
 
 /obj/structure/closet/bullet_act(var/obj/item/projectile/Proj)
@@ -203,7 +203,7 @@
 /obj/structure/closet/blob_act()
 	if(prob(75))
 		for(var/atom/movable/A as mob|obj in src)
-			A.loc = src.loc
+			A.forceMove(src.loc)
 		qdel(src)
 
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -233,7 +233,7 @@
 			return
 		usr.drop_item()
 		if(W)
-			W.loc = src.loc
+			W.forceMove(src.loc)
 	else if(istype(W, /obj/item/weapon/packageWrap))
 		return
 	else if(istype(W, /obj/item/weapon/weldingtool))
