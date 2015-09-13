@@ -52,7 +52,7 @@ datum/announcement/proc/Message(message as text, message_title as text)
 			M << "<h2 class='alert'>[title]</h2>"
 			M << "<span class='alert'>[message]</span>"
 			if (announcer)
-				M << "<span class='alert'> -[html_encode(announcer)]</span>"
+				M << "<span class='alert'> -[rhtml_encode(announcer)]</span>"
 
 datum/announcement/minor/Message(message as text, message_title as text)
 	world << "<b>[message]</b>"
@@ -61,7 +61,7 @@ datum/announcement/priority/Message(message as text, message_title as text)
 	world << "<h1 class='alert'>[message_title]</h1>"
 	world << "<span class='alert'>[message]</span>"
 	if(announcer)
-		world << "<span class='alert'> -[html_encode(announcer)]</span>"
+		world << "<span class='alert'> -[rhtml_encode(announcer)]</span>"
 	world << "<br>"
 
 datum/announcement/priority/command/Message(message as text, message_title as text)

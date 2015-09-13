@@ -276,18 +276,18 @@ datum/nano_item_lists
 				nanoui_data["exploit"] = list()  // Setting this to equal L.fields passes it's variables that are lists as reference instead of value.
 								 // We trade off being able to automatically add shit for more control over what gets passed to json
 								 // and if it's sanitized for html.
-				nanoui_data["exploit"]["nanoui_exploit_record"] = html_encode(L.fields["exploit_record"])                         		// Change stuff into html
+				nanoui_data["exploit"]["nanoui_exploit_record"] = rhtml_encode(L.fields["exploit_record"])                         		// Change stuff into html
 				nanoui_data["exploit"]["nanoui_exploit_record"] = replacetext(nanoui_data["exploit"]["nanoui_exploit_record"], "\n", "<br>")    // change line breaks into <br>
-				nanoui_data["exploit"]["name"] =  html_encode(L.fields["name"])
-				nanoui_data["exploit"]["sex"] =  html_encode(L.fields["sex"])
-				nanoui_data["exploit"]["age"] =  html_encode(L.fields["age"])
-				nanoui_data["exploit"]["species"] =  html_encode(L.fields["species"])
-				nanoui_data["exploit"]["rank"] =  html_encode(L.fields["rank"])
-				nanoui_data["exploit"]["home_system"] =  html_encode(L.fields["home_system"])
-				nanoui_data["exploit"]["citizenship"] =  html_encode(L.fields["citizenship"])
-				nanoui_data["exploit"]["faction"] =  html_encode(L.fields["faction"])
-				nanoui_data["exploit"]["religion"] =  html_encode(L.fields["religion"])
-				nanoui_data["exploit"]["fingerprint"] =  html_encode(L.fields["fingerprint"])
+				nanoui_data["exploit"]["name"] =  rhtml_encode(L.fields["name"])
+				nanoui_data["exploit"]["sex"] =  rhtml_encode(L.fields["sex"])
+				nanoui_data["exploit"]["age"] =  rhtml_encode(L.fields["age"])
+				nanoui_data["exploit"]["species"] =  rhtml_encode(L.fields["species"])
+				nanoui_data["exploit"]["rank"] =  rhtml_encode(L.fields["rank"])
+				nanoui_data["exploit"]["home_system"] =  rhtml_encode(L.fields["home_system"])
+				nanoui_data["exploit"]["citizenship"] =  rhtml_encode(L.fields["citizenship"])
+				nanoui_data["exploit"]["faction"] =  rhtml_encode(L.fields["faction"])
+				nanoui_data["exploit"]["religion"] =  rhtml_encode(L.fields["religion"])
+				nanoui_data["exploit"]["fingerprint"] =  rhtml_encode(L.fields["fingerprint"])
 
 				nanoui_data["exploit_exists"] = 1
 				break

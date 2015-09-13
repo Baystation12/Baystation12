@@ -1,5 +1,4 @@
-<h1>Welcome to Space Station 13!</h1>
-
--<i>This server is running <a href="http://baystation12.net/">Baystation 12's</a> modification of the <a href="http://ss13.eu/">/tg/station13</a> SS13 code.</i>
-<br><br>
-<strong>Bugtracker:</strong> <a href="http://baystation12.net/forums/threads/issue-tracker-report-template.110/">for posting of bugs and issues.</a>
+<h1>Welcome to United Kingdom of Soviet Station 13!</h1>
+Мы рады новым игрокам!
+На данный мы опять тестируем новый Baystation 12 билд. Обо всех ошибках и неисправностях пишите на форум.
+Приветствуем вас на Советской Станции 13. Правила сервера обязательны к ознакомлению, их вы можете увидет во вкладке "Rules" вверху. Так же вы можете перейти на нашу вики и форум с помощью вкладок "Wiki" и "Forum" соответственно.
