@@ -190,3 +190,20 @@
 
 /obj/structure/bed/chair/wood/wings
 	icon_state = "wooden_chair_wings"
+
+//sofa
+/obj/structure/bed/chair/sofa
+	name = "old ratty sofa"
+	icon_state = "sofamiddle"
+	anchored = 1
+/obj/structure/bed/chair/sofa/left
+	icon_state = "sofaend_left"
+/obj/structure/bed/chair/sofa/right
+	icon_state = "sofaend_right"
+/obj/structure/bed/chair/sofa/corner
+	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/New(var/newloc)
+	..(newloc, "steel")
+/obj/structure/bed/chair/sofa/update_icon()
+	return
