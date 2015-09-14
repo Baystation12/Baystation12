@@ -574,7 +574,7 @@ proc/admin_notice(var/message, var/rights)
 			r = copytext( r, 1, findtext(r,"##") )//removes the description
 		dat += text("<tr><td>[t] (<A href='?src=\ref[src];removejobban=[r]'>unban</A>)</td></tr>")
 	dat += "</table>"
-	usr << browse(dat, "window=ban;size=400x400")
+	usr << browse(sanitize_russian(dat, 1), "window=ban;size=400x400")
 
 /datum/admins/proc/Game()
 	if(!check_rights(0))	return
@@ -604,6 +604,12 @@ proc/admin_notice(var/message, var/rights)
 	if(!check_rights(0))	return
 
 	var/dat = "<B>The first rule of adminbuse is: you don't talk about the adminbuse.</B><HR>"
+
+	if(check_rights(R_SPAWN,0))
+		dat += {"
+			<A href='?src=\ref[src];secretsfun=spawnselfdummy'>Spawn yourself as a Test Dummy</A><BR>
+			<BR>
+			"}
 
 	if(check_rights(R_ADMIN,0))
 		dat += {"
@@ -748,6 +754,7 @@ proc/admin_notice(var/message, var/rights)
 
 	var/message = input("Global message to send:", "Admin Announce", null, null)  as message//todo: sanitize for all?
 	if(message)
+		message = sanitize_russian(message)
 		if(!check_rights(R_SERVER,0))
 			message = sanitize(message, 500, extra = 0)
 		message = replacetext(message, "\n", "<br>") // required since we're putting it in a <p> tag
@@ -817,6 +824,19 @@ proc/admin_notice(var/message, var/rights)
 	log_admin("[key_name(usr)] toggled Dead OOC.")
 	message_admins("[key_name_admin(usr)] toggled Dead OOC.", 1)
 	feedback_add_details("admin_verb","TDOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/datum/admins/proc/toggleexplosions()
+	set category = "Server"
+	set desc="Toggles explosions"
+	set name="Toggle Explosions"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	config.explosions_allowed = !(config.explosions_allowed)
+	log_admin("[key_name(usr)] toggled explosions to [config.explosions_allowed].")
+	message_admins("[key_name_admin(usr)] toggled explosions to [config.explosions_allowed].", 1)
+	feedback_add_details("admin_verb","TDEXP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggletraitorscaling()
 	set category = "Server"

@@ -653,6 +653,29 @@
 
 		//Banning comes first
 		if(notbannedlist.len) //at least 1 unbanned job exists in joblist so we have stuff to ban.
+			if(config.ban_legacy_system)
+				if(!check_rights(R_BAN))  return
+				var/reason = sanitize(input(usr,"Reason?","Please State Reason","") as text|null)
+				if(reason)
+					var/msg
+					for(var/job in notbannedlist)
+						ban_unban_log_save("[key_name(usr)] jobbanned [key_name(M)] from [job]. reason: [sanitize_russian(reason)]")
+						log_admin("[key_name(usr)] banned [key_name(M)] from [job]")
+						feedback_inc("ban_job",1)
+						DB_ban_record(BANTYPE_JOB_PERMA, M, -1, reason, job)
+						feedback_add_details("ban_job","- [job]")
+						jobban_fullban(M, job, "[reason]; By [usr.ckey] on [time2text(world.realtime)]")
+						if(!msg)	msg = job
+						else		msg += ", [job]"
+					notes_add(M.ckey, "Banned  from [msg] - [sanitize_russian(reason, 1)]", usr)
+					message_admins("\blue [key_name_admin(usr)] banned [key_name_admin(M)] from [msg]", 1)
+					M << "\red<BIG><B>You have been jobbanned by [usr.client.ckey] from: [msg].</B></BIG>"
+					M << "\red <B>The reason is: [sanitize_russian(reason)]</B>"
+					M << "\red Jobban can be lifted only upon request."
+					href_list["jobban2"] = 1 // lets it fall through and refresh
+					return 1
+				return
+
 			switch(alert("Temporary Ban?",,"Yes","No", "Cancel"))
 				if("Yes")
 					if(!check_rights(R_MOD,0) && !check_rights(R_BAN, 0))
@@ -801,9 +824,9 @@
 				if(!reason)
 					return
 				AddBan(M.ckey, M.computer_id, reason, usr.ckey, 1, mins)
-				ban_unban_log_save("[usr.client.ckey] has banned [M.ckey]. - Reason: [reason] - This will be removed in [mins] minutes.")
-				notes_add(M.ckey,"[usr.client.ckey] has banned [M.ckey]. - Reason: [reason] - This will be removed in [mins] minutes.",usr)
-				M << "\red<BIG><B>You have been banned by [usr.client.ckey].\nReason: [reason].</B></BIG>"
+				ban_unban_log_save("[usr.client.ckey] has banned [M.ckey]. - Reason: [sanitize_russian(reason)] - This will be removed in [mins] minutes.")
+				notes_add(M.ckey,"[usr.client.ckey] has banned [M.ckey]. - Reason: [sanitize_russian(reason, 1)] - This will be removed in [mins] minutes.",usr)
+				M << "\red<BIG><B>You have been banned by [usr.client.ckey].\nReason: [sanitize_russian(reason)].</B></BIG>"
 				M << "\red This is a temporary ban, it will be removed in [mins] minutes."
 				feedback_inc("ban_tmp",1)
 				DB_ban_record(BANTYPE_TEMP, M, mins, reason)
@@ -812,8 +835,8 @@
 					M << "\red To try to resolve this matter head to [config.banappeals]"
 				else
 					M << "\red No ban appeals URL has been set."
-				log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
-				message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
+				log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [sanitize_russian(reason)]\nThis will be removed in [mins] minutes.")
+				message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [sanitize_russian(reason)]\nThis will be removed in [mins] minutes.")
 
 				qdel(M.client)
 				//qdel(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
@@ -828,16 +851,16 @@
 						AddBan(M.ckey, M.computer_id, reason, usr.ckey, 0, 0, M.lastKnownIP)
 					if("No")
 						AddBan(M.ckey, M.computer_id, reason, usr.ckey, 0, 0)
-				M << "\red<BIG><B>You have been banned by [usr.client.ckey].\nReason: [reason].</B></BIG>"
+				M << "\red<BIG><B>You have been banned by [usr.client.ckey].\nReason: [sanitize_russian(reason)].</B></BIG>"
 				M << "\red This is a permanent ban."
 				if(config.banappeals)
 					M << "\red To try to resolve this matter head to [config.banappeals]"
 				else
 					M << "\red No ban appeals URL has been set."
-				ban_unban_log_save("[usr.client.ckey] has permabanned [M.ckey]. - Reason: [reason] - This is a permanent ban.")
-				notes_add(M.ckey,"[usr.client.ckey] has permabanned [M.ckey]. - Reason: [reason] - This is a permanent ban.",usr)
-				log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis is a permanent ban.")
-				message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis is a permanent ban.")
+				ban_unban_log_save("[usr.client.ckey] has permabanned [M.ckey]. - Reason: [sanitize_russian(reason)] - This is a permanent ban.")
+				notes_add(M.ckey,"[usr.client.ckey] has permabanned [M.ckey]. - Reason: [sanitize_russian(reason, 1)] - This is a permanent ban.",usr)
+				log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [sanitize_russian(reason)]\nThis is a permanent ban.")
+				message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [sanitize_russian(reason)]\nThis is a permanent ban.")
 				feedback_inc("ban_perma",1)
 				DB_ban_record(BANTYPE_PERMA, M, -1, reason)
 
@@ -2250,6 +2273,27 @@
 				feedback_add_details("admin_secrets_fun_used","OO")
 				only_one()
 				message_admins("[key_name_admin(usr)] has triggered a battle to the death (only one)")
+			if("spawnselfdummy")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","TD")
+				message_admins("[key_name_admin(usr)] spawned himself as a Test Dummy.")
+				var/turf/T = get_turf(usr)
+				var/mob/living/carbon/human/dummy/D = new /mob/living/carbon/human/dummy(T)
+				usr.client.cmd_assume_direct_control(D)
+				D.equip_to_slot_or_del(new /obj/item/clothing/under/color/black(D), slot_w_uniform)
+				D.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(D), slot_shoes)
+				D.equip_to_slot_or_del(new /obj/item/weapon/card/id/admin(D), slot_wear_id)
+				D.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/captain(D), slot_l_ear)
+				D.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(D), slot_back)
+				D.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(D.back), slot_in_backpack)
+				D.name = "Admin"
+				D.real_name = "Admin"
+				var/newname = ""
+				newname = copytext(sanitize(input(D, "Before you step out as an embodied god, what name do you wish for?", "Choose your name.", "Admin") as null|text),1,MAX_NAME_LEN)
+				if (!newname)
+					newname = "Admin"
+				D.name = newname
+				D.real_name = newname
 
 			if("togglenarsie")
 				feedback_inc("admin_secrets_fun_used",1)
