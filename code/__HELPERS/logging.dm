@@ -65,7 +65,7 @@
 
 /proc/log_attack(text)
 	if (config.log_attack)
-		diary << "\[[time_stamp()]]ATTACK: [text][log_end]" //Seperate attack logs? Why?  FOR THE GLORY OF SATAN!
+		diary << "\[[time_stamp()]]ATTACK: [logRu(text)][log_end]" //Seperate attack logs? Why?  FOR THE GLORY OF SATAN!
 
 /proc/log_adminsay(text)
 	if (config.log_adminchat)
