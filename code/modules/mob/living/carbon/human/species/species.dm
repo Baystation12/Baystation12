@@ -25,11 +25,13 @@
 	var/base_color                                       // Used by changelings. Should also be used for icon previes..
 	var/tail                                             // Name of tail state in species effects icon file.
 	var/tail_animation                                   // If set, the icon to obtain tail animation states from.
+	var/tail_hair
 	var/race_key = 0       	                             // Used for mob icon cache string.
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
 	var/is_small
 	var/show_ssd = "fast asleep"
 	var/virus_immune
+	var/short_sighted
 
 	// Language/culture vars.
 	var/default_language = "Galactic Common" // Default language is used when 'say' is used without modifiers.
@@ -38,6 +40,7 @@
 	var/list/speech_sounds                   // A list of sounds to potentially play when speaking.
 	var/list/speech_chance                   // The likelihood of a speech sound playing.
 	var/num_alternate_languages = 0          // How many secondary languages are available to select at character creation
+	var/name_language = "Galactic Common"    // The language to use when determining names for this species, or null to use the first name/last name generator
 
 	// Combat vars.
 	var/total_health = 100                   // Point at which the mob will enter crit.
@@ -46,8 +49,12 @@
 		/datum/unarmed_attack/bite
 		)
 	var/list/unarmed_attacks = null          // For empty hand harm-intent attack
-	var/brute_mod = 1                        // Physical damage multiplier.
-	var/burn_mod = 1                         // Burn damage multiplier.
+	var/brute_mod =     1                    // Physical damage multiplier.
+	var/burn_mod =      1                    // Burn damage multiplier.
+	var/oxy_mod =       1                    // Oxyloss modifier
+	var/toxins_mod =    1                    // Toxloss modifier
+	var/radiation_mod = 1                    // Radiation modifier
+	var/flash_mod =     1                    // Stun from blindness modifier.
 	var/vision_flags = SEE_SELF              // Same flags as glasses.
 
 	// Death vars.
@@ -108,6 +115,7 @@
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
 	var/primitive_form            // Lesser form, if any (ie. monkey for humans)
 	var/greater_form              // Greater form, if any, ie. human for monkeys.
+	var/holder_type
 	var/gluttonous                // Can eat some mobs. 1 for mice, 2 for monkeys, 3 for people.
 	var/rarity_value = 1          // Relative rarity/collector value for this species.
 	                              // Determines the organs that the species spawns with and
@@ -188,7 +196,13 @@
 				H << "<span class='danger'>[pick(heat_discomfort_strings)]</span>"
 
 /datum/species/proc/get_random_name(var/gender)
-	var/datum/language/species_language = all_languages[language]
+	if(!name_language)
+		if(gender == FEMALE)
+			return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
+		else
+			return capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
+
+	var/datum/language/species_language = all_languages[name_language]
 	if(!species_language)
 		species_language = all_languages[default_language]
 	if(!species_language)
@@ -305,3 +319,6 @@
 // Called in life() when the mob has no client.
 /datum/species/proc/handle_npc(var/mob/living/carbon/human/H)
 	return
+
+/datum/species/proc/get_vision_flags(var/mob/living/carbon/human/H)
+	return vision_flags

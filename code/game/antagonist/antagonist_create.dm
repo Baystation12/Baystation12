@@ -36,7 +36,7 @@
 	if(!W) return
 	W.access |= default_access
 	W.assignment = "[assignment]"
-	W.set_owner_info(player)
+	player.set_id_info(W)
 	if(equip) player.equip_to_slot_or_del(W, slot_wear_id)
 	return W
 

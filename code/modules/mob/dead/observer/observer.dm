@@ -123,7 +123,7 @@ Works together with spawning an observer, noted above.
 	if(antagHUD)
 		var/list/target_list = list()
 		for(var/mob/living/target in oview(src, 14))
-			if(target.mind&&(target.mind.special_role||issilicon(target)) )
+			if(target.mind && target.mind.special_role)
 				target_list += target
 		if(target_list.len)
 			assess_targets(target_list, src)
@@ -656,6 +656,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/canface()
 	return 1
+
+/mob/dead/observer/proc/can_admin_interact()
+	return check_rights(R_ADMIN, 0, src)
 
 /mob/dead/observer/verb/toggle_ghostsee()
 	set name = "Toggle Ghost Vision"

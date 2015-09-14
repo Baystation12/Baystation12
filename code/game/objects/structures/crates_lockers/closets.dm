@@ -190,11 +190,12 @@
 		qdel(src)
 
 /obj/structure/closet/bullet_act(var/obj/item/projectile/Proj)
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+	var/proj_damage = Proj.get_structure_damage()
+	if(!proj_damage)
 		return
 
 	..()
-	damage(Proj.damage)
+	damage(proj_damage)
 
 	return
 
@@ -210,6 +211,7 @@
 		if(istype(W, /obj/item/weapon/grab))
 			var/obj/item/weapon/grab/G = W
 			src.MouseDrop_T(G.affecting, user)      //act like they were dragged onto the closet
+			return 0
 		if(istype(W,/obj/item/tk_grab))
 			return 0
 		if(istype(W, /obj/item/weapon/weldingtool))
@@ -257,11 +259,9 @@
 		return
 	if(user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis)
 		return
-	if((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || user.contents.Find(src)))
+	if((!( istype(O, /atom/movable) ) || O.anchored || !Adjacent(user) || !Adjacent(O) || !user.Adjacent(O) || user.contents.Find(src)))
 		return
-	if(user.loc==null) // just in case someone manages to get a closet into the blue light dimension, as unlikely as that seems
-		return
-	if(!istype(user.loc, /turf)) // are you in a container/closet/pod/etc?
+	if(!isturf(user.loc)) // are you in a container/closet/pod/etc?
 		return
 	if(!src.opened)
 		return

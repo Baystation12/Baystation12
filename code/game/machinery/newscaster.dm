@@ -417,7 +417,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+="Channel messages listed below. If you deem them dangerous to the station, you can <A href='?src=\ref[src];toggle_d_notice=\ref[src.viewing_channel]'>Bestow a D-Notice upon the channel</A>.<HR>"
 				if(src.viewing_channel.censored)
 					dat+="<FONT COLOR='red'><B>ATTENTION: </B></FONT>This channel has been deemed as threatening to the welfare of the station, and marked with a [company_name] D-Notice.<BR>"
-					dat+="No further feed story additions are allowed while the D-Notice is in effect.</FONT><BR><BR>"
+					dat+="No further feed story additions are allowed while the D-Notice is in effect.<BR><BR>"
 				else
 					if( isemptylist(src.viewing_channel.messages) )
 						dat+="<I>No feed messages found in channel...</I><BR>"

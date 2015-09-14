@@ -8,14 +8,10 @@
 	//check if it doesn't require any access at all
 	if(src.check_access(null))
 		return 1
-	if(istype(M, /mob/living/silicon))
-		//AI can do whatever he wants
-		return 1
-	else if(istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-		//if they are holding or wearing a card that has access, that works
-		if(src.check_access(H.get_active_hand()) || src.check_access(H.wear_id))
-			return 1
+
+	var/id = M.GetIdCard()
+	if(id)
+		return check_access(id)
 	return 0
 
 /obj/item/proc/GetAccess()
@@ -32,12 +28,15 @@
 	if(!req_one_access)	req_one_access = list()
 	if(!L)	return 0
 	if(!istype(L, /list))	return 0
-	for(var/req in src.req_access)
-		if(!(req in L)) //doesn't have this access
+	return has_access(req_access, req_one_access, L)
+
+/proc/has_access(var/list/req_access, var/list/req_one_access, var/list/accesses)
+	for(var/req in req_access)
+		if(!(req in accesses)) //doesn't have this access
 			return 0
-	if(src.req_one_access.len)
-		for(var/req in src.req_one_access)
-			if(req in L) //has an access from the single access list
+	if(req_one_access.len)
+		for(var/req in req_one_access)
+			if(req in accesses) //has an access from the single access list
 				return 1
 		return 0
 	return 1
@@ -191,18 +190,27 @@
 		"Emergency Response Team",
 		"Emergency Response Team Leader")
 
-proc/GetIdCard(var/mob/living/carbon/human/H)
-	if(H.wear_id)
-		var/id = H.wear_id.GetID()
+/mob/proc/GetIdCard()
+	return null
+
+/mob/living/bot/GetIdCard()
+	return botcard
+
+/mob/living/carbon/human/GetIdCard()
+	if(wear_id)
+		var/id = wear_id.GetID()
 		if(id)
 			return id
-	if(H.get_active_hand())
-		var/obj/item/I = H.get_active_hand()
+	if(get_active_hand())
+		var/obj/item/I = get_active_hand()
 		return I.GetID()
+
+/mob/living/silicon/GetIdCard()
+	return idcard
 
 proc/FindNameFromID(var/mob/living/carbon/human/H)
 	ASSERT(istype(H))
-	var/obj/item/weapon/card/id/C = GetIdCard(H)
+	var/obj/item/weapon/card/id/C = H.GetIdCard()
 	if(C)
 		return C.registered_name
 
@@ -214,13 +222,12 @@ proc/get_all_job_icons() //For all existing HUD icons
 
 	if(I)
 		var/job_icons = get_all_job_icons()
-		var/centcom = get_all_centcom_jobs()
-
 		if(I.assignment	in job_icons) //Check if the job has a hud icon
 			return I.assignment
 		if(I.rank in job_icons)
 			return I.rank
 
+		var/centcom = get_all_centcom_jobs()
 		if(I.assignment	in centcom) //Return with the NT logo if it is a Centcom job
 			return "Centcom"
 		if(I.rank in centcom)

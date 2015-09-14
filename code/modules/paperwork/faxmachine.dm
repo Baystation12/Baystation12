@@ -1,5 +1,5 @@
 var/list/obj/machinery/photocopier/faxmachine/allfaxes = list()
-var/list/admin_departments = list("[boss_name]", "Sol Government")
+var/list/admin_departments = list("[boss_name]", "Sol Government", "Supply")
 var/list/alldepartments = list()
 
 var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
@@ -9,7 +9,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	icon = 'icons/obj/library.dmi'
 	icon_state = "fax"
 	insert_anim = "faxsend"
-	req_one_access = list(access_lawyer, access_heads, access_armory) //Warden needs to be able to Fax solgov too.
+	req_one_access = list(access_lawyer, access_heads, access_armory, access_qm)
 
 	use_power = 1
 	idle_power_usage = 30
@@ -112,8 +112,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 				scan = null
 		else
 			var/obj/item/I = usr.get_active_hand()
-			if (istype(I, /obj/item/weapon/card/id))
-				usr.drop_item()
+			if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
 				I.loc = src
 				scan = I
 		authenticated = 0
@@ -202,6 +201,8 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 		if ("Sol Government")
 			message_admins(sender, "SOL GOVERNMENT FAX", rcvdcopy, "CentcommFaxReply", "#1F66A0")
 			//message_admins(sender, "SOL GOVERNMENT FAX", rcvdcopy, "SolGovFaxReply", "#1F66A0")
+		if ("Supply")
+			message_admins(sender, "[uppertext(boss_short)] SUPPLY FAX", rcvdcopy, "CentcommFaxReply", "#5F4519")
 
 	sendcooldown = 1800
 	sleep(50)

@@ -409,7 +409,12 @@ var/list/global/slot_flags_enumeration = list(
 /obj/item/proc/ui_action_click()
 	attack_self(usr)
 
-/obj/item/proc/IsShield()
+//RETURN VALUES
+//handle_shield should return a positive value to indicate that the attack is blocked and should be prevented.
+//If a negative value is returned, it should be treated as a special return value for bullet_act() and handled appropriately.
+//For non-projectile attacks this usually means the attack is blocked.
+//Otherwise should return 0 to indicate that the attack is not affected in any way.
+/obj/item/proc/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	return 0
 
 /obj/item/proc/get_loc_turf()

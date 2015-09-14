@@ -10,9 +10,13 @@
 	worlds tumultous at best."
 	num_alternate_languages = 2
 	secondary_langs = list("Sol Common")
+	name_language = null // Use the first-name last-name generator rather than a language scrambler
 
 	spawn_flags = CAN_JOIN
-	appearance_flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+
+/datum/species/human/get_bodytype()
+	return "Human"
 
 /datum/species/unathi
 	name = "Unathi"
@@ -29,6 +33,7 @@
 	brute_mod = 0.8
 	num_alternate_languages = 2
 	secondary_langs = list("Sinta'unathi")
+	name_language = "Sinta'unathi"
 
 	blurb = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
@@ -45,7 +50,7 @@
 	heat_level_3 = 1100 //Default 1000
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
-	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34AF10"
 
@@ -85,6 +90,7 @@
 	gluttonous = 1
 	num_alternate_languages = 2
 	secondary_langs = list("Siik'tajr")
+	name_language = "Siik'tajr"
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
 	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
@@ -103,7 +109,7 @@
 	primitive_form = "Farwa"
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
-	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
@@ -126,7 +132,7 @@
 	icobase = 'icons/mob/human_races/r_skrell.dmi'
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
 	eyes = "skrell_eyes_s"
-	primitive_form = "Neara"
+	primitive_form = "Neaera"
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	blurb = "An amphibious species, Skrell come from the star system known as Qerr'Vallis, which translates to 'Star of \
 	the royals' or 'Light of the Crown'.<br/><br/>Skrell are a highly advanced and logical race who live under the rule \
@@ -135,9 +141,10 @@
 	the secrets of their empire to their allies."
 	num_alternate_languages = 2
 	secondary_langs = list("Skrellian")
+	name_language = null
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
-	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
@@ -160,7 +167,7 @@
 	eyes = "blank_eyes"
 	show_ssd = "completely quiescent"
 	num_alternate_languages = 1
-
+	name_language = "Rootspeak"
 
 	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
 	species hailing from Epsilon Ursae Minoris. Each 'diona' is a cluster of numerous cat-sized organisms called nymphs; \
@@ -266,6 +273,7 @@
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	rarity_value = 2
 	num_alternate_languages = 1 // potentially could be 2?
+	name_language = "Encoded Audio Language"
 
 	eyes = "blank_eyes"
 	brute_mod = 1.875 // 100% * 1.875 * 0.8 (robolimbs) ~= 150%

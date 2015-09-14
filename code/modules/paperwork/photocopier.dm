@@ -165,7 +165,7 @@
 	copied = replacetext(copied, "<font face=\"[c.deffont]\" color=", "<font face=\"[c.deffont]\" nocolor=")	//state of the art techniques in action
 	copied = replacetext(copied, "<font face=\"[c.crayonfont]\" color=", "<font face=\"[c.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
 	c.info += copied
-	c.info += "</font>"
+	c.info += "</font>"//</font>
 	c.name = copy.name // -- Doohl
 	c.fields = copy.fields
 	c.stamps = copy.stamps
@@ -228,7 +228,7 @@
 			W = photocopy(W)
 		W.loc = p
 		p.pages += W
-		
+
 	p.loc = src.loc
 	p.update_icon()
 	p.icon_state = "paper_words"

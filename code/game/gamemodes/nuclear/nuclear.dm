@@ -12,10 +12,9 @@ var/list/nuke_disks = list()
 	required_players_secret = 25 // 25 players - 5 players to be the nuke ops = 20 players remaining
 	required_enemies = 1
 	end_on_antag_death = 1
-	antag_tag = MODE_MERCENARY
-
 	var/nuke_off_station = 0 //Used for tracking if the syndies actually haul the nuke to the station
 	var/syndies_didnt_escape = 0 //Used for tracking if the syndies got the shuttle off of the z-level
+	antag_tags = list(MODE_MERCENARY)
 
 //delete all nuke disks not on a station zlevel
 /datum/game_mode/nuclear/proc/check_nuke_disks()

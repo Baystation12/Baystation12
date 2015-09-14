@@ -11,6 +11,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	item_state = "electronic"
 	w_class = 2.0
 	slot_flags = SLOT_ID | SLOT_BELT
+	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/id.dmi')
 
 	//Main variables
 	var/owner = null
@@ -1142,21 +1143,22 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(choice == 1)
 		if (id)
 			remove_id()
+			return 1
 		else
 			var/obj/item/I = user.get_active_hand()
-			if (istype(I, /obj/item/weapon/card/id))
-				user.drop_item()
+			if (istype(I, /obj/item/weapon/card/id) && user.unEquip(I))
 				I.loc = src
 				id = I
+			return 1
 	else
 		var/obj/item/weapon/card/I = user.get_active_hand()
-		if (istype(I, /obj/item/weapon/card/id) && I:registered_name)
+		if (istype(I, /obj/item/weapon/card/id) && I:registered_name && user.unEquip(I))
 			var/obj/old_id = id
-			user.drop_item()
 			I.loc = src
 			id = I
 			user.put_in_hands(old_id)
-	return
+			return 1
+	return 0
 
 // access to status display signals
 /obj/item/device/pda/attackby(obj/item/C as obj, mob/user as mob)
@@ -1184,9 +1186,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		else
 			//Basic safety check. If either both objects are held by user or PDA is on ground and card is in hand.
 			if(((src in user.contents) && (C in user.contents)) || (istype(loc, /turf) && in_range(src, user) && (C in user.contents)) )
-				id_check(user, 2)
-				user << "<span class='notice'>You put the ID into \the [src]'s slot.</span>"
-				updateSelfDialog()//Update self dialog on success.
+				if(id_check(user, 2))
+					user << "<span class='notice'>You put the ID into \the [src]'s slot.</span>"
+					updateSelfDialog()//Update self dialog on success.
 			return	//Return in case of failed check or when successful.
 		updateSelfDialog()//For the non-input related code.
 	else if(istype(C, /obj/item/device/paicard) && !src.pai)
@@ -1238,7 +1240,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 				for(var/datum/disease/D in C.viruses)
 					if(!D.hidden[SCANNER])
-						user.show_message("<span class='warning'>Warning: [D.form] Detected</b>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]</span>")
+						user.show_message("<span class='warning'><b>Warning: [D.form] Detected</b>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]</span>")
 
 			if(2)
 				if (!istype(C:dna, /datum/dna))

@@ -64,6 +64,8 @@ var/global/list/rune_list = new()
 var/global/list/escape_list = list()
 var/global/list/endgame_exits = list()
 var/global/list/endgame_safespawns = list()
+
+var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
@@ -118,9 +120,7 @@ var/global/list/endgame_safespawns = list()
 	for (var/language_name in all_languages)
 		var/datum/language/L = all_languages[language_name]
 		if(!(L.flags & NONGLOBAL))
-			language_keys[":[lowertext(L.key)]"] = L
-			language_keys[".[lowertext(L.key)]"] = L
-			language_keys["#[lowertext(L.key)]"] = L
+			language_keys[lowertext(L.key)] = L
 
 	var/rkey = 0
 	paths = typesof(/datum/species)-/datum/species

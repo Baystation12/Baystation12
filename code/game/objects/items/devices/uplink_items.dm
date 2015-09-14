@@ -76,12 +76,12 @@ var/datum/uplink/uplink = new()
 		return 1
 
 	// With no owner, there's no need to check antag status.
-	if(!U.owner)
+	if(!U.uplink_owner)
 		return 0
 
 	for(var/antag_role in antag_roles)
 		var/datum/antagonist/antag = all_antag_types[antag_role]
-		if(antag.is_antagonist(U.owner))
+		if(antag.is_antagonist(U.uplink_owner))
 			return 1
 	return 0
 
@@ -100,6 +100,7 @@ var/datum/uplink/uplink = new()
 
 /datum/uplink_item/proc/purchase_log(obj/item/device/uplink/U)
 	feedback_add_details("traitor_uplink_items_bought", "[src]")
+	log_and_message_admins("used \the [U.loc] to buy \a [src]")
 	U.purchase_log[src] = U.purchase_log[src] + 1
 
 datum/uplink_item/dd_SortValue()
@@ -365,10 +366,10 @@ datum/uplink_item/dd_SortValue()
 	item_cost = 7
 	path = /obj/item/weapon/aiModule/syndicate
 
-/datum/uplink_item/item/tools/singularity_beacon
-	name = "Singularity Beacon (DANGER!)"
+/datum/uplink_item/item/tools/supply_beacon
+	name = "Hacked Supply Beacon (DANGER!)"
 	item_cost = 7
-	path = /obj/item/device/radio/beacon/syndicate
+	path = /obj/item/supply_beacon
 
 /datum/uplink_item/item/tools/teleporter
 	name = "Teleporter Circuit Board"
@@ -542,6 +543,7 @@ datum/uplink_item/dd_SortValue()
 
 /datum/uplink_item/item/badassery/random_many/purchase_log(obj/item/device/uplink/U)
 	feedback_add_details("traitor_uplink_items_bought", "[src]")
+	log_and_message_admins("used \the [U.loc] to buy \a [src]")
 
 /****************
 * Surplus Crate *
@@ -622,7 +624,7 @@ var/image/default_abstract_uplink_icon
 	if(!user)
 		return 0
 
-	var/obj/item/weapon/card/id/I = GetIdCard(user)
+	var/obj/item/weapon/card/id/I = user.GetIdCard()
 	var/datum/data/record/random_general_record
 	var/datum/data/record/random_medical_record
 	if(data_core.general.len)

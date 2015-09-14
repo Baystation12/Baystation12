@@ -91,6 +91,10 @@
 	return 0
 
 /datum/nano_module/appearance_changer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+
+	if(!owner || !owner.species)
+		return
+
 	generate_data(check_whitelist, whitelist, blacklist)
 	var/data[0]
 
@@ -152,6 +156,8 @@
 	generate_data()
 
 /datum/nano_module/appearance_changer/proc/generate_data()
+	if(!owner)
+		return
 	if(!valid_species.len)
 		valid_species = owner.generate_valid_species(check_whitelist, whitelist, blacklist)
 	if(!valid_hairstyles.len || !valid_facial_hairstyles.len)

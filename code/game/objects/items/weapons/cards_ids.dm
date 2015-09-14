@@ -93,6 +93,11 @@
 	desc = "A card used to provide ID and determine access across the station."
 	icon_state = "id"
 	item_state = "card-id"
+
+	sprite_sheets = list(
+		"Resomi" = 'icons/mob/species/resomi/id.dmi'
+		)
+
 	var/access = list()
 	var/registered_name = "Unknown" // The name registered_name on the card
 	slot_flags = SLOT_ID
@@ -122,8 +127,9 @@
 	return 0
 
 /obj/item/weapon/card/id/proc/show(mob/user as mob)
-	user << browse_rsc(front, "front.png")
-	user << browse_rsc(side, "side.png")
+	if(front && side)
+		user << browse_rsc(front, "front.png")
+		user << browse_rsc(side, "side.png")
 	var/datum/browser/popup = new(user, "idcard", name, 600, 250)
 	popup.set_content(dat())
 	popup.set_title_image(usr.browse_rsc_icon(src.icon, src.icon_state))
@@ -137,17 +143,21 @@
 	front = getFlatIcon(M, SOUTH, always_use_defdir = 1)
 	side = getFlatIcon(M, WEST, always_use_defdir = 1)
 
-/obj/item/weapon/card/id/proc/set_owner_info(var/mob/living/carbon/human/H)
-	if(!H || !H.dna)
-		return
-	age 				= H.age
-	blood_type			= H.dna.b_type
-	dna_hash			= H.dna.unique_enzymes
-	fingerprint_hash	= md5(H.dna.uni_identity)
-	registered_name		= H.real_name
-	sex 				= capitalize(H.gender)
-	set_id_photo(H)
-	update_name()
+/mob/proc/set_id_info(var/obj/item/weapon/card/id/id_card)
+	id_card.age = 0
+	id_card.registered_name		= real_name
+	id_card.sex 				= capitalize(gender)
+	id_card.set_id_photo(src)
+
+	if(dna)
+		id_card.blood_type		= dna.b_type
+		id_card.dna_hash		= dna.unique_enzymes
+		id_card.fingerprint_hash= md5(dna.uni_identity)
+	id_card.update_name()
+
+/mob/living/carbon/human/set_id_info(var/obj/item/weapon/card/id/id_card)
+	..()
+	id_card.age = age
 
 /obj/item/weapon/card/id/proc/dat()
 	var/dat = ("<table><tr><td>")
@@ -213,9 +223,20 @@
 	item_state = "gold_id"
 	registered_name = "Captain"
 	assignment = "Captain"
-	New()
-		access = get_all_station_access()
-		..()
+/obj/item/weapon/card/id/captains_spare/New()
+	access = get_all_station_access()
+	..()
+
+/obj/item/weapon/card/id/synthetic
+	name = "\improper Synthetic ID"
+	desc = "Access module for NanoTrasen Synthetics"
+	icon_state = "id-robot"
+	item_state = "tdgreen"
+	assignment = "Synthetic"
+
+/obj/item/weapon/card/id/synthetic/New()
+	access = get_all_station_access() + access_synth
+	..()
 
 /obj/item/weapon/card/id/centcom
 	name = "\improper CentCom. ID"

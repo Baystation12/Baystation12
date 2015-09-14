@@ -555,6 +555,12 @@ th.sci {
     color: #ffffff;
 }
 
+th.car {
+    background: #bb9040;
+    font-weight: bold;
+    color: #ffffff;
+}
+
 th.civ {
     background: #a32800;
     font-weight: bold;

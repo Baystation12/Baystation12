@@ -16,6 +16,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
 //	/datum/admins/proc/show_traitor_panel,	/*interface which shows a mob's mind*/ -Removed due to rare practical use. Moved to debug verbs ~Errorage
 	/datum/admins/proc/show_game_mode,  /*Configuration window for the current game mode.*/
+	/datum/admins/proc/force_mode_latespawn, /*Force the mode to try a latespawn proc*/
+	/datum/admins/proc/force_antag_latespawn, /*Force a specific template to try a latespawn proc*/
 	/datum/admins/proc/toggleenter,		/*toggles whether people can join the current game*/
 	/datum/admins/proc/toggleguests,	/*toggles whether guests can join the current game*/
 	/datum/admins/proc/announce,		/*priority announce something to all clients.*/
@@ -105,7 +107,7 @@ var/list/admin_verbs_fun = list(
 	/client/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/drop_bomb,
-        /client/proc/everyone_random,
+	/client/proc/everyone_random,
 	/client/proc/cinematic,
 	/datum/admins/proc/toggle_aliens,
 	/datum/admins/proc/toggle_space_ninja,
@@ -114,8 +116,11 @@ var/list/admin_verbs_fun = list(
 	/client/proc/make_sound,
 	/client/proc/toggle_random_events,
 	/client/proc/editappear,
-	/client/proc/roll_dices
+	/client/proc/roll_dices,
+	/datum/admins/proc/call_supply_drop,
+	/datum/admins/proc/call_drop_pod
 	)
+
 var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_fruit,
 	/datum/admins/proc/spawn_custom_item,
@@ -541,8 +546,8 @@ var/list/admin_verbs_mentor = list(
 		ban_unban_log_save("[ckey] warned [warned_ckey], resulting in a [AUTOBANTIME] minute autoban.")
 		if(C)
 			message_admins("[key_name_admin(src)] has warned [key_name_admin(C)] resulting in a [AUTOBANTIME] minute ban.")
-			C << "<font color='red'><BIG><B>You have been autobanned due to a warning by [ckey].</B></BIG><br>This is a temporary ban, it will be removed in [AUTOBANTIME] minutes."
-			qdel(C)
+			C << "<font color='red'><BIG><B>You have been autobanned due to a warning by [ckey].</B></BIG><br>This is a temporary ban, it will be removed in [AUTOBANTIME] minutes.</font>"
+			del(C)
 		else
 			message_admins("[key_name_admin(src)] has warned [warned_ckey] resulting in a [AUTOBANTIME] minute ban.")
 		AddBan(warned_ckey, D.last_id, "Autobanning due to too many formal warnings", ckey, 1, AUTOBANTIME)

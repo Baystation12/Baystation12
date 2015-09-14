@@ -6,7 +6,7 @@
 	item_state = "utility"
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
-
+	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/belt.dmi')
 
 /obj/item/weapon/storage/update_icon()
 	if (ismob(src.loc))

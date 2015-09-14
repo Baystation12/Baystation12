@@ -44,20 +44,20 @@
 		if(!machine.ores_stored[ore] && !show_all_ores) continue
 		var/ore/O = ore_data[ore]
 		if(!O) continue
-		dat += "<tr><td width = 40><b>[capitalize(O.display_name)]</b></td><td width = 30>[machine.ores_stored[ore]]</td><td width = 100><font color='"
+		dat += "<tr><td width = 40><b>[capitalize(O.display_name)]</b></td><td width = 30>[machine.ores_stored[ore]]</td><td width = 100>"
 		if(machine.ores_processing[ore])
 			switch(machine.ores_processing[ore])
 				if(0)
-					dat += "red'>not processing"
+					dat += "<font color='red'>not processing</font>"
 				if(1)
-					dat += "orange'>smelting"
+					dat += "<font color='orange'>smelting</font>"
 				if(2)
-					dat += "blue'>compressing"
+					dat += "<font color='blue'>compressing</font>"
 				if(3)
-					dat += "gray'>alloying"
+					dat += "<font color='gray'>alloying</font>"
 		else
-			dat += "red'>not processing"
-		dat += "</font>.</td><td width = 30><a href='?src=\ref[src];toggle_smelting=[ore]'>\[change\]</a></td></tr>"
+			dat += "<font color='red'>not processing</font>"
+		dat += ".</td><td width = 30><a href='?src=\ref[src];toggle_smelting=[ore]'>\[change\]</a></td></tr>"
 
 	dat += "</table><hr>"
 	dat += "Currently displaying [show_all_ores ? "all ore types" : "only available ore types"]. <A href='?src=\ref[src];toggle_ores=1'>\[[show_all_ores ? "show less" : "show more"]\]</a></br>"

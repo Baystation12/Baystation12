@@ -269,7 +269,7 @@ var/list/datum/power/changeling/powerinstances = list()
 
 					body += "<font size='2'><b>"+desc+"</b></font> <BR>"
 
-					body += "<font size='2'><font color = 'red'><b>"+helptext+"</b></font> <BR>"
+					body += "<font size='2'><font color = 'red'><b>"+helptext+"</b></font></font><BR>"
 
 					if(!ownsthis)
 					{
@@ -428,7 +428,7 @@ var/list/datum/power/changeling/powerinstances = list()
 					<a id='link[i]'
 					onmouseover='expand("item[i]","[P.name]","[P.desc]","[P.helptext]","[P]",[ownsthis])'
 					>
-					<b id='search[i]'>Evolve [P] - Cost: [ownsthis ? "Purchased" : P.genomecost]</b>
+					<span id='search[i]'><b>Evolve [P] - Cost: [ownsthis ? "Purchased" : P.genomecost]</b></span>
 					</a>
 					<br><span id='item[i]'></span>
 				</td>

@@ -205,7 +205,7 @@
 	qdel(src)
 
 /obj/effect/energy_net/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.damage
+	health -= Proj.get_structure_damage()
 	healthcheck()
 	return 0
 

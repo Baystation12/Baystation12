@@ -52,6 +52,10 @@
 	// update the current life tick, can be used to e.g. only do something every 4 ticks
 	life_tick++
 
+	// This is not an ideal place for this but it will do for now.
+	if(wearing_rig && wearing_rig.offline)
+		wearing_rig = null
+
 	in_stasis = istype(loc, /obj/structure/closet/body_bag/cryobag) && loc:opened == 0
 	if(in_stasis) loc:used++
 
@@ -155,7 +159,7 @@
 			for(var/mob/O in viewers(src, null))
 				if(O == src)
 					continue
-				O.show_message(text("\red <B>[src] starts having a seizure!"), 1)
+				O.show_message(text("<span class='danger'>[src] starts having a seizure!</span>"), 1)
 			Paralyse(10)
 			make_jittery(1000)
 	if (disabilities & COUGHING)
@@ -276,7 +280,7 @@
 				Weaken(3)
 				if(!lying)
 					emote("collapse")
-			if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT) && species.name == "Human") //apes go bald
+			if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT) && species.get_bodytype() == "Human") //apes go bald
 				if((h_style != "Bald" || f_style != "Shaved" ))
 					src << "<span class='warning'>Your hair falls out.</span>"
 					h_style = "Bald"
@@ -294,6 +298,7 @@
 				emote("gasp")
 
 		if(damage)
+			damage *= species.radiation_mod
 			adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 			updatehealth()
 			if(organs.len)
@@ -964,10 +969,10 @@
 			stat = UNCONSCIOUS
 			animate_tail_reset()
 			adjustHalLoss(-3)
-			
+
 		if(paralysis)
 			AdjustParalysis(-1)
-			
+
 		else if(sleeping)
 			speech_problem_flag = 1
 			handle_dreams()
@@ -1214,7 +1219,7 @@
 				seer = 0
 
 		else
-			sight = species.vision_flags
+			sight = species.get_vision_flags(src)
 			see_in_dark = species.darksight
 			see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 		var/tmp/glasses_processed = 0
@@ -1233,8 +1238,8 @@
 			see_in_dark = 8
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
-		if(!glasses_processed && (species.vision_flags > 0))
-			sight |= species.vision_flags
+		if(!glasses_processed && (species.get_vision_flags(src) > 0))
+			sight |= species.get_vision_flags(src)
 		if(!seer && !glasses_processed)
 			see_invisible = SEE_INVISIBLE_LIVING
 
@@ -1340,19 +1345,22 @@
 
 		if(config.welder_vision)
 			var/found_welder
-			if(istype(glasses, /obj/item/clothing/glasses/welding))
-				var/obj/item/clothing/glasses/welding/O = glasses
-				if(!O.up)
-					found_welder = 1
-			if(!found_welder && istype(head, /obj/item/clothing/head/welding))
-				var/obj/item/clothing/head/welding/O = head
-				if(!O.up)
-					found_welder = 1
-			if(!found_welder && istype(back, /obj/item/weapon/rig))
-				var/obj/item/weapon/rig/O = back
-				if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
-					if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))
+			if(species.short_sighted)
+				found_welder = 1
+			else
+				if(istype(glasses, /obj/item/clothing/glasses/welding))
+					var/obj/item/clothing/glasses/welding/O = glasses
+					if(!O.up)
 						found_welder = 1
+				if(!found_welder && istype(head, /obj/item/clothing/head/welding))
+					var/obj/item/clothing/head/welding/O = head
+					if(!O.up)
+						found_welder = 1
+				if(!found_welder && istype(back, /obj/item/weapon/rig))
+					var/obj/item/weapon/rig/O = back
+					if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
+						if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))
+							found_welder = 1
 			if(found_welder)
 				client.screen |= global_hud.darkMask
 
@@ -1670,35 +1678,11 @@
 	if (BITTEST(hud_updateflag, SPECIALROLE_HUD))
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
-		if(mind)
-
-			// TODO: Update to new antagonist system.
-			switch(mind.special_role)
-				if("traitor","Mercenary")
-					holder.icon_state = "hudsyndicate"
-				if("Revolutionary")
-					holder.icon_state = "hudrevolutionary"
-				if("Head Revolutionary")
-					holder.icon_state = "hudheadrevolutionary"
-				if("Cultist")
-					holder.icon_state = "hudcultist"
-				if("Changeling")
-					holder.icon_state = "hudchangeling"
-				if("Wizard","Fake Wizard")
-					holder.icon_state = "hudwizard"
-				if("Death Commando")
-					holder.icon_state = "huddeathsquad"
-				if("Ninja")
-					holder.icon_state = "hudninja"
-				if("head_loyalist")
-					holder.icon_state = "hudloyalist"
-				if("loyalist")
-					holder.icon_state = "hudloyalist"
-				if("head_mutineer")
-					holder.icon_state = "hudmutineer"
-				if("mutineer")
-					holder.icon_state = "hudmutineer"
-
+		if(mind && mind.special_role)
+			if(hud_icon_reference[mind.special_role])
+				holder.icon_state = hud_icon_reference[mind.special_role]
+			else
+				holder.icon_state = "hudsyndicate"
 			hud_list[SPECIALROLE_HUD] = holder
 	hud_updateflag = 0
 

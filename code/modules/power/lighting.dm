@@ -166,6 +166,10 @@
 	desc = "A small lighting fixture."
 	light_type = /obj/item/weapon/light/bulb
 
+/obj/machinery/light/small/emergency
+	brightness_range = 6
+	brightness_power = 2
+	brightness_color = "#da0205"
 
 /obj/machinery/light/spot
 	name = "spotlight"
@@ -390,8 +394,8 @@
 // returns whether this light has power
 // true if area has power and lightswitch is on
 /obj/machinery/light/proc/has_power()
-	var/area/A = src.loc.loc
-	return A.lightswitch && (!A.requires_power || A.power_light)
+	var/area/A = get_area(src)
+	return A && A.lightswitch && (!A.requires_power || A.power_light)
 
 /obj/machinery/light/proc/flicker(var/amount = rand(10, 20))
 	if(flickering) return

@@ -64,69 +64,6 @@ datum/objective/assassinate
 		return 1
 
 
-
-datum/objective/mutiny
-	find_target()
-		..()
-		if(target && target.current)
-			explanation_text = "Assassinate [target.current.real_name], the [target.assigned_role]."
-		else
-			explanation_text = "Free Objective"
-		return target
-
-
-	find_target_by_role(role, role_type=0)
-		..(role, role_type)
-		if(target && target.current)
-			explanation_text = "Assassinate [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
-		else
-			explanation_text = "Free Objective"
-		return target
-
-	check_completion()
-		if(target && target.current)
-			if(target.current.stat == DEAD || !ishuman(target.current) || !target.current.ckey)
-				return 1
-			var/turf/T = get_turf(target.current)
-			if(T && isNotStationLevel(T.z))			//If they leave the station they count as dead for this
-				return 2
-			return 0
-		return 1
-
-datum/objective/mutiny/rp
-	find_target()
-		..()
-		if(target && target.current)
-			explanation_text = "Assassinate, capture or convert [target.current.real_name], the [target.assigned_role]."
-		else
-			explanation_text = "Free Objective"
-		return target
-
-
-	find_target_by_role(role, role_type=0)
-		..(role, role_type)
-		if(target && target.current)
-			explanation_text = "Assassinate, capture or convert [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
-		else
-			explanation_text = "Free Objective"
-		return target
-
-	// less violent rev objectives
-	check_completion()
-		var/rval = 1
-		if(target && target.current)
-			//assume that only carbon mobs can become rev heads for now
-			if(target.current.stat == DEAD || target.current:handcuffed || !ishuman(target.current))
-				return 1
-			// Check if they're converted
-			if(target in revs.head_revolutionaries)
-				return 1
-			var/turf/T = get_turf(target.current)
-			if(T && isNotStationLevel(T.z))			//If they leave the station they count as dead for this
-				rval = 2
-			return 0
-		return rval
-
 datum/objective/anti_revolution/execute
 	find_target()
 		..()
@@ -933,3 +870,38 @@ datum/objective/heist/salvage
 
 /datum/objective/cult/sacrifice/check_completion()
 	return (target && cult && !cult.sacrificed.Find(target))
+
+/datum/objective/rev/find_target()
+	..()
+	if(target && target.current)
+		explanation_text = "Assassinate, capture or convert [target.current.real_name], the [target.assigned_role]."
+	else
+		explanation_text = "Free Objective"
+	return target
+
+
+/datum/objective/rev/find_target_by_role(role, role_type=0)
+	..(role, role_type)
+	if(target && target.current)
+		explanation_text = "Assassinate, capture or convert [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
+	else
+		explanation_text = "Free Objective"
+	return target
+
+/datum/objective/rev/check_completion()
+	var/rval = 1
+	if(target && target.current)
+		var/mob/living/carbon/human/H = target.current
+		if(!istype(H))
+			return 1
+		if(H.stat == DEAD || H.restrained())
+			return 1
+		// Check if they're converted
+		if(target in revs.current_antagonists)
+			return 1
+		var/turf/T = get_turf(H)
+		if(T && isNotStationLevel(T.z))			//If they leave the station they count as dead for this
+			rval = 2
+		return 0
+	return rval
+

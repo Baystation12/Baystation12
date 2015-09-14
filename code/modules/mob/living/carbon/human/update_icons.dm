@@ -208,7 +208,7 @@ var/global/list/damage_icon_parts = list()
 			O.update_icon()
 			if(O.damage_state == "00") continue
 			var/icon/DI
-			var/cache_index = "[O.damage_state]/[O.icon_name]/[species.blood_color]/[species.name]"
+			var/cache_index = "[O.damage_state]/[O.icon_name]/[species.blood_color]/[species.get_bodytype()]"
 			if(damage_icon_parts[cache_index] == null)
 				DI = new /icon(species.damage_overlays, O.damage_state)			// the damage icon for whole human
 				DI.Blend(new /icon(species.damage_mask, O.icon_name), ICON_MULTIPLY)	// mask with this organ's pixels
@@ -271,8 +271,13 @@ var/global/list/damage_icon_parts = list()
 			icon_key += "[part.species.race_key]"
 			icon_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
 			icon_key += "[part.dna.GetUIValue(DNA_UI_SKIN_TONE)]"
-			if(part.s_col)
+			if(part.s_col && part.s_col.len >= 3)
 				icon_key += "[rgb(part.s_col[1],part.s_col[2],part.s_col[3])]"
+			if(part.body_hair && part.h_col && part.h_col.len >= 3)
+				icon_key += "[rgb(part.h_col[1],part.h_col[2],part.h_col[3])]"
+			else
+				icon_key += "#000000"
+
 	icon_key = "[icon_key][husk ? 1 : 0][fat ? 1 : 0][hulk ? 1 : 0][skeleton ? 1 : 0]"
 
 	var/icon/base_icon
@@ -517,7 +522,14 @@ var/global/list/damage_icon_parts = list()
 	if(wear_id)
 		wear_id.screen_loc = ui_id	//TODO
 		if(w_uniform && w_uniform:displays_id)
-			overlays_standing[ID_LAYER]	= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "id")
+			var/image/standing
+			if(wear_id.icon_override)
+				standing = image("icon" = wear_id.icon_override, "icon_state" = "[icon_state]")
+			else if(wear_id.sprite_sheets && wear_id.sprite_sheets[species.get_bodytype()])
+				standing = image("icon" = wear_id.sprite_sheets[species.get_bodytype()], "icon_state" = "[icon_state]")
+			else
+				standing = image("icon" = 'icons/mob/mob.dmi', "icon_state" = "id")
+			overlays_standing[ID_LAYER] = standing
 		else
 			overlays_standing[ID_LAYER]	= null
 	else
@@ -682,8 +694,9 @@ var/global/list/damage_icon_parts = list()
 
 		if(istype(head,/obj/item/clothing/head))
 			var/obj/item/clothing/head/hat = head
-			if(hat.on && light_overlay_cache["[hat.light_overlay]"])
-				standing.overlays |= light_overlay_cache["[hat.light_overlay]"]
+			var/cache_key = "[hat.light_overlay]_[species.get_bodytype()]"
+			if(hat.on && light_overlay_cache[cache_key])
+				standing.overlays |= light_overlay_cache[cache_key]
 
 		overlays_standing[HEAD_LAYER] = standing
 
@@ -834,14 +847,32 @@ var/global/list/damage_icon_parts = list()
 		drop_r_hand()
 		drop_l_hand()
 		stop_pulling()	//TODO: should be handled elsewhere
-		overlays_standing[HANDCUFF_LAYER]	= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "handcuff1")
+
+		var/image/standing
+		if(handcuffed.icon_override)
+			standing = image("icon" = handcuffed.icon_override, "icon_state" = "handcuff1")
+		else if(handcuffed.sprite_sheets && handcuffed.sprite_sheets[species.get_bodytype()])
+			standing = image("icon" = handcuffed.sprite_sheets[species.get_bodytype()], "icon_state" = "handcuff1")
+		else
+			standing = image("icon" = 'icons/mob/mob.dmi', "icon_state" = "handcuff1")
+		overlays_standing[HANDCUFF_LAYER] = standing
+
 	else
 		overlays_standing[HANDCUFF_LAYER]	= null
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_legcuffed(var/update_icons=1)
 	if(legcuffed)
-		overlays_standing[LEGCUFF_LAYER]	= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "legcuff1")
+
+		var/image/standing
+		if(legcuffed.icon_override)
+			standing = image("icon" = legcuffed.icon_override, "icon_state" = "legcuff1")
+		else if(legcuffed.sprite_sheets && legcuffed.sprite_sheets[species.get_bodytype()])
+			standing = image("icon" = legcuffed.sprite_sheets[species.get_bodytype()], "icon_state" = "legcuff1")
+		else
+			standing = image("icon" = 'icons/mob/mob.dmi', "icon_state" = "legcuff1")
+		overlays_standing[LEGCUFF_LAYER] = standing
+
 		if(src.m_intent != "walk")
 			src.m_intent = "walk"
 			if(src.hud_used && src.hud_used.move_intent)
@@ -927,15 +958,17 @@ var/global/list/damage_icon_parts = list()
 		update_icons()
 
 /mob/living/carbon/human/proc/get_tail_icon()
-	var/icon_key = "[species.race_key][r_skin][g_skin][b_skin]"
-
+	var/icon_key = "[species.race_key][r_skin][g_skin][b_skin][r_hair][g_hair][b_hair]"
 	var/icon/tail_icon = tail_icon_cache[icon_key]
 	if(!tail_icon)
-
 		//generate a new one
 		tail_icon = new/icon(icon = (species.tail_animation? species.tail_animation : 'icons/effects/species.dmi'))
 		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
-
+		// The following will not work with animated tails.
+		if(species.tail_hair)
+			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.tail]_[species.tail_hair]")
+			hair_icon.Blend(rgb(r_hair, g_hair, b_hair), ICON_ADD)
+			tail_icon.Blend(hair_icon, ICON_OVERLAY)
 		tail_icon_cache[icon_key] = tail_icon
 
 	return tail_icon
