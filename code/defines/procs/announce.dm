@@ -47,6 +47,8 @@
 	Log(message, message_title)
 
 datum/announcement/proc/Message(message as text, message_title as text)
+	message = rhtml_encode(message)
+	message_title = rhtml_encode(message_title)
 	for(var/mob/M in player_list)
 		if(!istype(M,/mob/new_player) && !isdeaf(M))
 			M << "<h2 class='alert'>[title]</h2>"
@@ -55,11 +57,11 @@ datum/announcement/proc/Message(message as text, message_title as text)
 				M << "<span class='alert'> -[rhtml_encode(announcer)]</span>"
 
 datum/announcement/minor/Message(message as text, message_title as text)
-	world << "<b>[message]</b>"
+	world << "<b>[rhtml_encode(message)]</b>"
 
 datum/announcement/priority/Message(message as text, message_title as text)
-	world << "<h1 class='alert'>[message_title]</h1>"
-	world << "<span class='alert'>[message]</span>"
+	world << "<h1 class='alert'>[rhtml_encode(message_title)]</h1>"
+	world << "<span class='alert'>[rhtml_encode(message)]</span>"
 	if(announcer)
 		world << "<span class='alert'> -[rhtml_encode(announcer)]</span>"
 	world << "<br>"
@@ -68,17 +70,17 @@ datum/announcement/priority/command/Message(message as text, message_title as te
 	var/command
 	command += "<h1 class='alert'>[command_name()] Update</h1>"
 	if (message_title)
-		command += "<br><h2 class='alert'>[message_title]</h2>"
+		command += "<br><h2 class='alert'>[rhtml_encode(message_title)]</h2>"
 
-	command += "<br><span class='alert'>[message]</span><br>"
+	command += "<br><span class='alert'>[rhtml_encode(message)]</span><br>"
 	command += "<br>"
 	for(var/mob/M in player_list)
 		if(!istype(M,/mob/new_player) && !isdeaf(M))
 			M << command
 
 datum/announcement/priority/security/Message(message as text, message_title as text)
-	world << "<font size=4 color='red'>[message_title]</font>"
-	world << "<font color='red'>[message]</font>"
+	world << "<font size=4 color='red'>[rhtml_encode(message_title)]</font>"
+	world << "<font color='red'>[rhtml_encode(message)]</font>"
 
 datum/announcement/proc/NewsCast(message as text, message_title as text)
 	if(!newscast)

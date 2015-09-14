@@ -113,8 +113,10 @@
 	playing = 0
 	repeat = 0
 	updateDialog(user)
+
 /datum/song/proc/interact(mob/user as mob)
 	var/dat = ""
+
 	if(lines.len > 0)
 		dat += "<H3>Playback</H3>"
 		if(!playing)
@@ -164,31 +166,39 @@
 					"}
 		else
 			dat += "<B><A href='?src=\ref[src];help=2'>Show Help</A></B><BR>"
+
 	var/datum/browser/popup = new(user, "instrument", instrumentObj.name, 700, 500)
 	popup.set_content(dat)
 	popup.set_title_image(user.browse_rsc_icon(instrumentObj.icon, instrumentObj.icon_state))
 	popup.open()
+
+
 /datum/song/Topic(href, href_list)
 	if(!in_range(instrumentObj, usr) || (issilicon(usr) && instrumentObj.loc != usr) || !isliving(usr) || !usr.canmove || usr.restrained())
 		usr << browse(null, "window=instrument")
 		usr.unset_machine()
 		return
+
 	instrumentObj.add_fingerprint(usr)
+
 	if(href_list["newsong"])
 		lines = new()
 		tempo = 5 // default 120 BPM
 		name = ""
+
 	else if(href_list["import"])
 		var/t = ""
 		do
 			t = html_encode(input(usr, "Please paste the entire song, formatted:", text("[]", name), t)  as message)
 			if(!in_range(instrumentObj, usr))
 				return
+
 			if(lentext(t) >= 3072)
 				var/cont = input(usr, "Your message is too long! Would you like to continue editing it?", "", "yes") in list("yes", "no")
 				if(cont == "no")
 					break
 		while(lentext(t) > 3072)
+
 		//split into lines
 		spawn()
 			lines = text2list(t, "\n")
@@ -197,9 +207,9 @@
 				lines.Cut(1,2)
 			else
 				tempo = 5 // default 120 BPM
-			if(lines.len > 50)
+			if(lines.len > 200)
 				usr << "Too many lines!"
-				lines.Cut(51)
+				lines.Cut(201)
 			var/linenum = 1
 			for(var/l in lines)
 				if(lentext(l) > 50)
@@ -208,10 +218,13 @@
 				else
 					linenum++
 			updateDialog(usr)		// make sure updates when complete
+
 	else if(href_list["help"])
 		help = text2num(href_list["help"]) - 1
+
 	else if(href_list["edit"])
 		edit = text2num(href_list["edit"]) - 1
+
 	if(href_list["repeat"]) //Changing this from a toggle to a number of repeats to avoid infinite loops.
 		if(playing)
 			return //So that people cant keep adding to repeat. If the do it intentionally, it could result in the server crashing.
@@ -220,16 +233,19 @@
 			repeat = 0
 		if(repeat > max_repeats)
 			repeat = max_repeats
+
 	else if(href_list["tempo"])
 		tempo += text2num(href_list["tempo"])
 		if(tempo < 1)
 			tempo = 1
 		if(tempo > 600)
 			tempo = 600
+
 	else if(href_list["play"])
 		playing = 1
 		spawn()
 			playsong(usr)
+
 	else if(href_list["newline"])
 		var/newline = html_encode(input("Enter your line: ", instrumentObj.name) as text|null)
 		if(!newline || !in_range(instrumentObj, usr))
@@ -239,11 +255,13 @@
 		if(lentext(newline) > 50)
 			newline = copytext(newline, 1, 50)
 		lines.Add(newline)
+
 	else if(href_list["deleteline"])
 		var/num = round(text2num(href_list["deleteline"]))
 		if(num > lines.len || num < 1)
 			return
 		lines.Cut(num, num+1)
+
 	else if(href_list["modifyline"])
 		var/num = round(text2num(href_list["modifyline"]),1)
 		var/content = html_encode(input("Enter your line: ", instrumentObj.name, lines[num]) as text|null)
@@ -254,20 +272,30 @@
 		if(num > lines.len || num < 1)
 			return
 		lines[num] = content
+
 	else if(href_list["stop"])
 		playing = 0
+
 	updateDialog(usr)
 	return
+
+
 // subclass for handheld instruments, like violin
 /datum/song/handheld
+
 /datum/song/handheld/updateDialog(mob/user as mob)
 	instrumentObj.interact(user)
+
 /datum/song/handheld/shouldStopPlaying()
 	if(instrumentObj)
 		return !isliving(instrumentObj.loc)
 	else
 		return 1
+
+
 //////////////////////////////////////////////////////////////////////////
+
+
 /obj/structure/piano
 	name = "space minimoog"
 	icon = 'icons/obj/musician.dmi'
@@ -275,8 +303,11 @@
 	anchored = 1
 	density = 1
 	var/datum/song/song
+
+
 /obj/structure/piano/New()
 	song = new("piano", src)
+
 	if(prob(50))
 		name = "space minimoog"
 		desc = "This is a minimoog, like a space piano, but more spacey!"
@@ -285,17 +316,22 @@
 		name = "space piano"
 		desc = "This is a space piano, like a regular piano, but always in tune! Even if the musician isn't."
 		icon_state = "piano"
+
 /obj/structure/piano/Del()
 	del(song)
 	song = null
 	return ..()
+
 /obj/structure/piano/attack_hand(mob/user as mob)
 	interact(user)
+
 /obj/structure/piano/interact(mob/user as mob)
 	if(!user || !anchored)
 		return
+
 	user.set_machine(src)
 	song.interact(user)
+
 /obj/structure/piano/attackby(obj/item/O as obj, mob/user as mob, params)
 	if (istype(O, /obj/item/weapon/wrench))
 		if (!anchored && !isinspace())
@@ -318,6 +354,7 @@
 				anchored = 0
 	else
 		..()
+
 /obj/item/device/violin
 	name = "space violin"
 	desc = "A wooden musical instrument with four strings and a bow. \"The devil went down to space, he was looking for an assistant to grief.\""
@@ -327,22 +364,30 @@
 	force = 10
 	hitsound = 'sound/weapons/smash.ogg'
 	var/datum/song/handheld/song
+
 /obj/item/device/violin/New()
 	song = new("violin", src)
-	song.instrumentExt = "ogg"
+	song.instrumentExt = "mid"
+
 /obj/item/device/violin/Del()
 	del(song)
 	song = null
 	return ..()
+
 /obj/item/device/violin/attack_self(mob/user as mob)
 	interact(user)
+
 /obj/item/device/violin/interact(mob/user as mob)
 	if(!user)
 		return
+
 	if(!isliving(user) || user.stat || user.restrained() || user.lying)
 		return
+
 	user.set_machine(src)
 	song.interact(user)
+
+
 /obj/item/device/guitar
 	name = "guitar"
 	desc = "It's made of wood and has bronze strings."
@@ -353,22 +398,30 @@
 	force = 10
 	var/datum/song/handheld/song
 	hitsound = 'sound/weapons/guitarsmash.ogg'
+
 /obj/item/device/guitar/New()
 	song = new("guitar", src)
 	song.instrumentExt = "ogg"
+
 /obj/item/device/guitar/Del()
 	del(song)
 	song = null
 	return ..()
+
 /obj/item/device/guitar/attack_self(mob/user as mob)
 	interact(user)
+
 /obj/item/device/guitar/interact(mob/user as mob)
 	if(!user)
 		return
+
 	if(!isliving(user) || user.stat || user.restrained() || user.lying)
 		return
+
 	user.set_machine(src)
 	song.interact(user)
+
+
 /*
 /datum/table_recipe/guitar
 	name = "Guitar"
