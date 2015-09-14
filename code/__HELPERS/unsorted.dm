@@ -342,7 +342,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 //Picks a string of symbols to display as the law number for hacked or ion laws
 /proc/ionnum()
-	return "[pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]"
+	return "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]"
 
 //When an AI is activated, it can choose from a list of non-slaved borgs to have as a slave.
 /proc/freeborg()
