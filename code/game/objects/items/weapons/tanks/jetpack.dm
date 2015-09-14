@@ -18,12 +18,16 @@
 	src.ion_trail = new /datum/effect/effect/system/ion_trail_follow()
 	src.ion_trail.set_up(src)
 
+/obj/item/weapon/tank/jetpack/Destroy()
+	qdel(ion_trail)
+	..()
+
 /obj/item/weapon/tank/jetpack/examine(mob/user)
 	if(!..(user, 0))
 		return
 
 	if(air_contents.gas["oxygen"] < 10)
-		user << text("\red <B>The meter on the [src.name] indicates you are almost out of air!</B>")
+		user << "<span class='danger'>The meter on \the [src] indicates you are almost out of oxygen!</span>"
 		playsound(user, 'sound/effects/alert.ogg', 50, 1)
 
 /obj/item/weapon/tank/jetpack/verb/toggle_rockets()
@@ -101,18 +105,15 @@
 
 /obj/item/weapon/tank/jetpack/carbondioxide/New()
 	..()
-	src.ion_trail = new /datum/effect/effect/system/ion_trail_follow()
-	src.ion_trail.set_up(src)
-	//src.air_contents.carbon_dioxide = (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C)
 	air_contents.adjust_gas("carbon_dioxide", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 	return
 
 /obj/item/weapon/tank/jetpack/carbondioxide/examine(mob/user)
-	if(!..(0))
+	if(!..(user, 0))
 		return
 
 	if(air_contents.gas["carbon_dioxide"] < 10)
-		user << text("\red <B>The meter on the [src.name] indicates you are almost out of carbon dioxide!</B>")
+		user << "<span class='danger'>The meter on \the [src] indicates you are almost out of carbon dioxide!</span>"
 		playsound(user, 'sound/effects/alert.ogg', 50, 1)
 	return
 
