@@ -544,7 +544,6 @@
 	desc = "Close-combat armor booster. Boosts exosuit armor against armed melee attacks. Requires energy to operate."
 	icon_state = "mecha_abooster_ccw"
 	origin_tech = list(TECH_MATERIAL = 3)
-	construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"silver"=5000)
 	deflect_coeff = 1.15
 	damage_coeff = 0.8
 	melee = 1
@@ -568,18 +567,9 @@
 	desc = "Ranged-weaponry armor booster. Boosts exosuit armor against ranged attacks. Completely blocks taser shots, but requires energy to operate."
 	icon_state = "mecha_abooster_proj"
 	origin_tech = list(TECH_MATERIAL = 4)
-<<<<<<< HEAD
-	construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"gold"=5000)
 	deflect_coeff = 1.15
 	damage_coeff = 0.8
 	melee = 0
-=======
-	equip_cooldown = 10
-	energy_drain = 50
-	range = 0
-	var/deflect_coeff = 1.15
-	var/damage_coeff = 0.8
->>>>>>> f57915ae5a5f7c21ac32772b6efe96f794aedd8d
 
 	activate_boost()
 		if(..())
