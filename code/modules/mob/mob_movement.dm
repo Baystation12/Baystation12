@@ -176,7 +176,7 @@
 			if(!mob.control_object)	return
 			mob.control_object.dir = direct
 		else
-			mob.control_object.loc = get_step(mob.control_object,direct)
+			mob.control_object.forceMove(get_step(mob.control_object,direct))
 	return
 
 
@@ -382,7 +382,7 @@
 				mob << "<span class='warning'>You cannot get past holy grounds while you are in this plane of existence!</span>"
 				return
 			else
-				mob.loc = get_step(mob, direct)
+				mob.forceMove(get_step(mob, direct))
 				mob.dir = direct
 		if(2)
 			if(prob(50))
@@ -411,7 +411,7 @@
 							return
 					else
 						return
-				mob.loc = locate(locx,locy,mobloc.z)
+				mob.forceMove(locate(locx,locy,mobloc.z))
 				spawn(0)
 					var/limit = 2//For only two trailing shadows.
 					for(var/turf/T in getline(mobloc, mob.loc))
@@ -422,7 +422,7 @@
 			else
 				spawn(0)
 					anim(mobloc,mob,'icons/mob/mob.dmi',,"shadow",,mob.dir)
-				mob.loc = get_step(mob, direct)
+				mob.forceMove(get_step(mob, direct))
 			mob.dir = direct
 	// Crossed is always a bit iffy
 	for(var/obj/S in mob.loc)
