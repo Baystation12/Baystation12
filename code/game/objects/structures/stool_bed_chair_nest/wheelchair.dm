@@ -75,7 +75,7 @@
 	set_dir(direction)
 	if(pulling) // Driver
 		if(pulling.loc == src.loc) // We moved onto the wheelchair? Revert!
-			pulling.loc = T
+			pulling.forceMove(T)
 		else
 			spawn(0)
 			if(get_dist(src, pulling) > 1) // We are too far away? Losing control.
@@ -107,7 +107,7 @@
 				pulling = null
 		else
 			if (occupant && (src.loc != occupant.loc))
-				src.loc = occupant.loc // Failsafe to make sure the wheelchair stays beneath the occupant after driving
+				src.forceMove(occupant.loc) // Failsafe to make sure the wheelchair stays beneath the occupant after driving
 
 /obj/structure/bed/chair/wheelchair/attack_hand(mob/living/user as mob)
 	if (pulling)

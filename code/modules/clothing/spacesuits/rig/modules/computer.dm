@@ -68,9 +68,9 @@
 	if(!verb_holder)
 		verb_holder = new(src)
 	if(integrated_ai)
-		verb_holder.loc = integrated_ai
+		verb_holder.forceMove(integrated_ai)
 	else
-		verb_holder.loc = src
+		verb_holder.forceMove(src)
 
 /obj/item/rig_module/ai_container/accepts_item(var/obj/item/input_device, var/mob/living/user)
 
@@ -179,7 +179,7 @@
 		else if(user)
 			user.put_in_hands(ai_card)
 		else
-			ai_card.loc = get_turf(src)
+			ai_card.forceMove(get_turf(src))
 	ai_card = null
 	integrated_ai = null
 	update_verb_holder()
@@ -209,7 +209,7 @@
 					return 0
 			else
 				user.drop_from_inventory(ai)
-				ai.loc = src
+				ai.forceMove(src)
 				ai_card = ai
 				ai_mob << "<font color='blue'>You have been transferred to \the [holder]'s [src].</font>"
 				user << "<font color='blue'>You load [ai_mob] into \the [holder]'s [src].</font>"
