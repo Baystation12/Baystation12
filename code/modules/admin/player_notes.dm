@@ -142,6 +142,6 @@ datum/admins/proc/notes_gethtml(var/ckey)
 		dat = "No information found on the given key."
 	else
 		for(var/datum/player_info/I in infos)
-			dat += "[I.content]\nby [I.author] ([I.rank]) on [I.timestamp]\n\n"
+			dat += "[sanitize_popup(I.content)]\nby [I.author] ([I.rank]) on [I.timestamp]\n\n" //sanitize_popup для старых записей
 
 	return list2params(list(dat))

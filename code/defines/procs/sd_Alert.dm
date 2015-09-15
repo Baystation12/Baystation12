@@ -125,7 +125,7 @@ sd_alert
 				[(flags & SD_ALERT_SELECT_MULTI)?" MULTIPLE":""]>"}
 			for(var/b in buttons)
 				html += "<OPTION[(b == default)?" SELECTED":""]>\
-					[rhtml_encode(b)]</OPTION>"
+					[html_encode(b)]</OPTION>"
 			html += "</SELECT><BR><INPUT TYPE=SUBMIT VALUE=Submit></FORM>"
 		else if(flags & SD_ALERT_LINKS)		// text link style
 			for(var/b in buttons)
@@ -134,7 +134,7 @@ sd_alert
 				var/html_string=list2params(L)
 				var/focus
 				if(b == default) focus = " ID=fcs"
-				html += "<A[focus] href=# onClick=\"c('[html_string]')\">[rhtml_encode(b)]</A>\
+				html += "<A[focus] href=# onClick=\"c('[html_string]')\">[html_encode(b)]</A>\
 					<BR>"
 		else	// button style choices
 			for(var/b in buttons)
@@ -143,7 +143,7 @@ sd_alert
 				var/html_string=list2params(L)
 				var/focus
 				if(b == default) focus = " ID=fcs"
-				html += "<INPUT[focus] TYPE=button VALUE='[rhtml_encode(b)]' \
+				html += "<INPUT[focus] TYPE=button VALUE='[html_encode(b)]' \
 					onClick=\"c('[html_string]')\"> "
 
 		html += "</th></tr></table></body>"

@@ -311,7 +311,7 @@ var/list/global/organ_rel_size = list(
 		p++
 	return t
 
-/proc/slur(phrase)
+proc/slur(phrase)
 	phrase = html_decode(phrase)
 	var/leng=lentext(phrase)
 	var/counter=lentext(phrase)
@@ -320,30 +320,37 @@ var/list/global/organ_rel_size = list(
 	while(counter>=1)
 		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
 		if(rand(1,3)==3)
-			if(lowertext(newletter)=="ä")	newletter="ò"
-			if(lowertext(newletter)=="ã")	newletter="ê"
-			if(lowertext(newletter)=="ï")	newletter="á"
-			if(lowertext(newletter)=="â")	newletter="ô"
-			if(lowertext(newletter)=="ñ")	newletter="ç"
+			if(lowertext(newletter)=="o")	newletter="u"
+			if(lowertext(newletter)=="s")	newletter="ch"
+			if(lowertext(newletter)=="a")	newletter="ah"
+			if(lowertext(newletter)=="c")	newletter="k"
+			if(lowertext_alt(newletter)=="÷")	newletter="ù" //246->249
+			if(lowertext_alt(newletter)=="å")	newletter="è" //229->232
 		switch(rand(1,15))
-			if(1,3,5,8)	newletter="[lowertext(newletter)]"
-			if(2,4,6,15)	newletter="[uppertext(newletter)]"
+			if(1,3,5,8)	newletter="[lowertext_alt(newletter)]"
+			if(2,4,6,15)	newletter="[uppertext_alt(newletter)]"
 			if(7)	newletter+="'"
 			//if(9,10)	newletter="<b>[newletter]</b>"
 			//if(11,12)	newletter="<big>[newletter]</big>"
 			//if(13)	newletter="<small>[newletter]</small>"
 		newphrase+="[newletter]";counter-=1
-	return sanitize_russian(newphrase)
+	return newphrase
 
 /proc/stutter(n)
 	var/te = html_decode(n)
 	var/t = ""//placed before the message. Not really sure what it's for.
 	n = length(n)//length of the entire word
+	var/alphabet[0]
+	//"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z"
+	alphabet.Add(98,99,100,102,103,104,105,106,107,108,109,110,112,113,114,115,116,118,119,120,121,122)
+	//"á","â","ã","ä","æ","ç","é","ê","ë","ì","í","ï","ð","ñ","ò","ô","õ","ö","÷","ø","ù"
+	alphabet.Add(225,226,227,228,230,231,233,234,235,236,237,239,240,241,242,244,245,246,247,248,249)
+
 	var/p = null
 	p = 1//1 is the start of any word
 	while(p <= n)//while P, which starts at 1 is less or equal to N which is the length.
 		var/n_letter = copytext(te, p, p + 1)//copies text from a certain distance. In this case, only one letter at a time.
-		if (prob(80) && (ckey(n_letter) in list("á","â","ã","ä","æ","ç","ê","ë","ì","í","ï","ð","ñ","ô","õ","ö","÷","ø","ù")))
+		if (prob(80) && (lowertext_alt(n_letter) in alphabet))
 			if (prob(10))
 				n_letter = text("[n_letter]-[n_letter]-[n_letter]-[n_letter]")//replaces the current letter with this instead.
 			else
@@ -356,7 +363,7 @@ var/list/global/organ_rel_size = list(
 						n_letter = text("[n_letter]-[n_letter]")
 		t = text("[t][n_letter]")//since the above is ran through for each letter, the text just adds up back to the original word.
 		p++//for each letter p is increased to find where the next letter will be.
-	return sanitize_russian(t)
+	return sanitize(t)
 
 
 proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 for p will cause letters to be replaced instead of added

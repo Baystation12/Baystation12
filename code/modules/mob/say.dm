@@ -58,7 +58,7 @@
 		usr << "<span class='danger'>You have deadchat muted.</span>"
 		return
 
-	say_dead_direct("[pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span>", src)
+	say_dead_direct("[pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[sanitize_chat(message)]\"</span>", src)
 
 /mob/proc/say_understands(var/mob/other,var/datum/language/speaking = null)
 
@@ -151,7 +151,7 @@
 		return all_languages["Noise"]
 
 	if(length(message) >= 2)
-		var/language_prefix = lowertext(copytext(message, 1 ,3))
+		var/language_prefix = lowertext_alt(copytext(message, 1 ,3))
 		var/datum/language/L = language_keys[language_prefix]
 		if (can_speak(L))
 			return L

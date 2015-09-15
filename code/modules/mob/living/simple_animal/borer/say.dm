@@ -1,6 +1,6 @@
 /mob/living/simple_animal/borer/say(var/message)
 
-	message = sanitize(message)
+	message = sanitize(message, ja_mode = TEMP)
 	message = capitalize(message)
 
 	if(!message)
@@ -21,6 +21,8 @@
 
 	if (copytext(message, 1, 2) == "*")
 		return emote(copytext(message, 2))
+
+	message = sanitize_chat(message)
 
 	var/datum/language/L = parse_language(message)
 	if(L && L.flags & HIVEMIND)
