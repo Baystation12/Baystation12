@@ -60,10 +60,10 @@
 		return
 
 	//clean the message if it's not sent by a high-rank admin
-	//todo: sanitize for all???
-	if(!check_rights(R_SERVER|R_DEBUG,0))
-		msg = sanitize(msg)
-		if(!msg)	return
+	//if(!check_rights(R_SERVER|R_DEBUG,0))
+	//todo: MD
+	msg = sanitize(msg)
+	if(!msg)	return
 
 	var/recieve_pm_type = "Player"
 	if(holder)
@@ -99,7 +99,6 @@
 					else
 						adminhelp(reply)													//sender has left, adminhelp instead
 				return
-	msg = sanitize(msg)
 	src << "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1)]</span>: <span class='message'>[msg]</span></span></span>"
 	C << "<span class='pm'><span class='in'>" + create_text_tag("pm_in", "", C) + " <b>\[[recieve_pm_type] PM\]</b> <span class='name'>[get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1)]</span>: <span class='message'>[msg]</span></span></span>"
 

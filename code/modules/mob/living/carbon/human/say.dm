@@ -3,7 +3,7 @@
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
 
-	message = sanitize(message)
+	message = sanitize(message, ja_mode = TEMP)
 	..(message, alt_name = alt_name)
 
 /mob/living/carbon/human/is_muzzled()
@@ -153,7 +153,7 @@
 				message = stutter(message)
 				verb = pick("stammers", "stutters")
 			if(prob(braindam))
-				message = uppertext(message)
+				message = uppertext_alt(message)
 				verb = "yells loudly"
 
 	var/list/returns[3]

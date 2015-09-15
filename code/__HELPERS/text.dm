@@ -22,89 +22,28 @@
  * Text sanitization
  */
 
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("я"="&#255;", "\n"="#","\t"="#","пїЅ"="пїЅ"))
-	for(var/char in repl_chars)
-		var/index = findtext(t, char)
-		while(index)
-			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+1)
-			index = findtext(t, char)
-	return t
-
-proc/sanitize_russian(var/msg, var/html = 0)
-	var/rep
-	if(html)
-		rep = "&#x44F;"
-	else
-		rep = "&#255;"
-	var/index = findtext(msg, "я")
-	while(index)
-		msg = copytext(msg, 1, index) + rep + copytext(msg, index + 1)
-		index = findtext(msg, "я")
-	return msg
-
-/proc/rhtml_encode(var/msg, var/html = 0)
-	var/rep
-	if(html)
-		rep = "&#x44F;"
-	else
-		rep = "&#255;"
-	var/list/c = text2list(msg, "я")
-	if(c.len == 1)
-		c = text2list(msg, rep)
-		if(c.len == 1)
-			return html_encode(msg)
-	var/out = ""
-	var/first = 1
-	for(var/text in c)
-		if(!first)
-			out += rep
-		first = 0
-		out += html_encode(text)
-	return out
-
-/proc/rhtml_decode(var/msg, var/html = 0)
-	var/rep
-	if(html)
-		rep = "&#x44F;"
-	else
-		rep = "&#255;"
-	var/list/c = text2list(msg, "я")
-	if(c.len == 1)
-		c = text2list(msg, "&#255;")
-		if(c.len == 1)
-			c = text2list(msg, "&#x4FF")
-			if(c.len == 1)
-				return html_decode(msg)
-	var/out = ""
-	var/first = 1
-	for(var/text in c)
-		if(!first)
-			out += rep
-		first = 0
-		out += html_decode(text)
-
-/proc/logRu(var/t) //cuz logs must be clean
-	t = replacetext(t, "&#x44F;", "Я")
-	t = replacetext(t, "&#255;", "Я")
-	t = replacetext(t, "я;", "Я")
-	return t
-
 //Used for preprocessing entered text
-/proc/sanitize(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1)
+/proc/sanitize(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1, var/ja_mode = CHAT)
+	#ifdef DEBUG_CYRILLIC
+	world << "\magenta DEBUG: \red <b>sanitize() entered, text:</b> <i>[input]</i>"
+	world << "\magenta DEBUG: \red <b>ja_mode:</b> [ja_mode]"
+	#endif
 	if(!input)
 		return
 
 	if(max_length)
 		input = copytext(input,1,max_length)
 
+	input = replacetext(input, JA, JA_TEMP)
+
 	if(extra)
-		input = replace_characters(input, list("\n"=" ","\t"=" ","я"="&#255;","пїЅ"="пїЅ"))
+		input = replace_characters(input, list("\n"=" ","\t"=" "))
 
 	if(encode)
 		//In addition to processing html, html_encode removes byond formatting codes like "\red", "\i" and other.
 		//It is important to avoid double-encode text, it can "break" quotes and some other characters.
 		//Also, keep in mind that escaped characters don't work in the interface (window titles, lower left corner of the main window, etc.)
-		input = rhtml_encode(input)
+		input = html_encode(input)
 	else
 		//If not need encode text, simply remove < and >
 		//note: we can also remove here byond formatting codes: 0xFF + next byte
@@ -114,13 +53,36 @@ proc/sanitize_russian(var/msg, var/html = 0)
 		//Maybe, we need trim text twice? Here and before copytext?
 		input = trim(input)
 
+	switch(ja_mode)
+		if(CHAT)
+			input = replacetext(input, JA_TEMP, JA_CHAT)
+		if(POPUP)
+			input = replacetext(input, JA_TEMP, JA_POPUP)
+		//или оставляем как есть, для дальнейшей обработки отдельно
+
+	#ifdef DEBUG_CYRILLIC
+	world << "\magenta DEBUG: \blue <b>sanitize() finished, text:</b> <i>[input]</i>"
+	#endif
+
 	return input
+
+proc/sanitize_russian(var/msg, var/html = 0)
+	var/rep
+	if(html)
+		rep = "&#x44F;"
+	else
+		rep = "&#255;"
+	var/index = findtext(msg, "y")
+	while(index)
+		msg = copytext(msg, 1, index) + rep + copytext(msg, index + 1)
+		index = findtext(msg, "y")
+	return msg
 
 //Run sanitize(), but remove <, >, " first to prevent displaying them as &gt; &lt; &34; in some places, after html_encode().
 //Best used for sanitize object names, window titles.
 //If you have a problem with sanitize() in chat, when quotes and >, < are displayed as html entites -
 //this is a problem of double-encode(when & becomes &amp;), use sanitize() with encode=0, but not the sanitizeSafe()!
-/proc/sanitizeSafe(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1)
+/proc/sanitizeSafe(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1, var/ja_mode = CHAT)
 	return sanitize(replace_characters(input, list(">"=" ","<"=" ", "\""="'")), max_length, encode, trim, extra)
 
 //Filters out undesirable characters from names
@@ -203,7 +165,7 @@ proc/sanitize_russian(var/msg, var/html = 0)
 
 //Old variant. Haven't dared to replace in some places.
 /proc/sanitize_old(var/t,var/list/repl_chars = list("\n"="#","\t"="#"))
-	return rhtml_encode(replace_characters(t,repl_chars))
+	return html_encode(replace_characters(t,repl_chars))
 
 /*
  * Text searches
@@ -291,7 +253,7 @@ proc/sanitize_russian(var/msg, var/html = 0)
 
 //Returns a string with the first element of the string capitalized.
 /proc/capitalize(var/t as text)
-	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
+	return uppertext_alt(copytext(t, 1, 2)) + copytext(t, 2)
 
 //This proc strips html properly, remove < > and all text between
 //for complete text sanitizing should be used sanitize()
@@ -370,7 +332,10 @@ proc/TextPreview(var/string,var/len=40)
 
 //alternative copytext() for encoded text, doesn't break html entities (&#34; and other)
 /proc/copytext_preserve_html(var/text, var/first, var/last)
-	return rhtml_encode(copytext(html_decode(text), first, last))
+	text = replacetext(text, JA_POPUP, JA_TEMP)//для универсальности
+	text = html_encode(copytext(html_decode(text), first, last))
+	text = replacetext(text, JA_TEMP, JA_POPUP)
+	return text
 
 //For generating neat chat tag-images
 //The icon var could be local in the proc, but it's a waste of resources
