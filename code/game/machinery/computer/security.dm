@@ -200,8 +200,7 @@
 				else
 		else
 			dat += text("<A href='?src=\ref[];choice=Log In'>{Log In}</A>", src)
-	dat = rhtml_encode(dat, 1)
-	user << browse(text("<HEAD><TITLE>Security Records</TITLE></HEAD><TT>[]</TT>", dat), "window=secure_rec;size=600x400")
+	user << browse(text("<HEAD><TITLE>Security Records</TITLE></HEAD><TT>[]</TT>", sanitize_russian(dat, 1)), "window=secure_rec;size=600x400")
 	onclose(user, "secure_rec")
 	return
 
