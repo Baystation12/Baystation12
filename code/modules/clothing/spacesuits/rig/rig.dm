@@ -629,7 +629,11 @@
 				if(check_slot)
 					H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
 			else
-				H << "<span class='notice'>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</span>"
+				use_obj.forceMove(H)
+				if(!H.equip_to_slot_if_possible(use_obj, equip_to, 0))
+					use_obj.forceMove(src)
+				else
+					H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</b></span>"
 
 	if(piece == "helmet" && helmet)
 		helmet.update_light(H)

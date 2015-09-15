@@ -123,13 +123,13 @@
 		H << "<span class='warning'>You cannot teleport to a location with solid objects.</span>"
 
 	phase_out(H,get_turf(H))
-	H.loc = T
+	H.forceMove(T)
 	phase_in(H,get_turf(H))
 
 	for(var/obj/item/weapon/grab/G in H.contents)
 		if(G.affecting)
 			phase_out(G.affecting,get_turf(G.affecting))
-			G.affecting.loc = locate(T.x+rand(-1,1),T.y+rand(-1,1),T.z)
+			G.affecting.forceMove(locate(T.x+rand(-1,1),T.y+rand(-1,1),T.z))
 			phase_in(G.affecting,get_turf(G.affecting))
 
 	return 1
