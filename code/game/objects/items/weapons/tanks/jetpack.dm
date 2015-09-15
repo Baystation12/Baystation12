@@ -23,11 +23,9 @@
 	..()
 
 /obj/item/weapon/tank/jetpack/examine(mob/user)
-	if(!..(user, 0))
-		return
-
-	if(air_contents.gas["oxygen"] < 10)
-		user << "<span class='danger'>The meter on \the [src] indicates you are almost out of oxygen!</span>"
+	. = ..()
+	if(air_contents.total_moles < 5)
+		user << "<span class='danger'>The meter on \the [src] indicates you are almost out of gas!</span>"
 		playsound(user, 'sound/effects/alert.ogg', 50, 1)
 
 /obj/item/weapon/tank/jetpack/verb/toggle_rockets()
@@ -106,15 +104,6 @@
 /obj/item/weapon/tank/jetpack/carbondioxide/New()
 	..()
 	air_contents.adjust_gas("carbon_dioxide", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
-	return
-
-/obj/item/weapon/tank/jetpack/carbondioxide/examine(mob/user)
-	if(!..(user, 0))
-		return
-
-	if(air_contents.gas["carbon_dioxide"] < 10)
-		user << "<span class='danger'>The meter on \the [src] indicates you are almost out of carbon dioxide!</span>"
-		playsound(user, 'sound/effects/alert.ogg', 50, 1)
 	return
 
 /obj/item/weapon/tank/jetpack/rig
