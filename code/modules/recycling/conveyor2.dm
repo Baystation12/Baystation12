@@ -40,8 +40,9 @@
 /obj/machinery/conveyor/proc/setmove()
 	if(operating == 1)
 		movedir = forwards
-	else
+	else if(operating == -1)
 		movedir = backwards
+	else operating = 0
 	update()
 
 /obj/machinery/conveyor/proc/update()
@@ -80,7 +81,7 @@
 	if(isrobot(user))	return //Carn: fix for borgs dropping their modules on conveyor belts
 	if(I.loc != user)	return // This should stop mounted modules ending up outside the module.
 
-	user.drop_item(src)
+	user.drop_item(get_turf(src))
 	return
 
 // attack with hand, move pulled object onto conveyor
