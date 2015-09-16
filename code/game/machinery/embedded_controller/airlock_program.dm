@@ -22,6 +22,8 @@
 
 	var/state = STATE_IDLE
 	var/target_state = TARGET_NONE
+	var/waiting_ticks = 0
+	var/waiting_ticks_target = 2 // By default, we wait for two ticks before actually signalling the pump to do it's thing. This is to ensure ZAS registers the doors have closed, and we don't leak air.
 
 /datum/computer/file/embedded_program/airlock/New(var/obj/machinery/embedded_controller/M)
 	..(M)
@@ -178,6 +180,11 @@
 	switch(state)
 		if(STATE_PREPARE)
 			if (check_doors_secured())
+				if(waiting_ticks < waiting_ticks_target)
+					waiting_ticks++
+					return
+				else
+					waiting_ticks = 0
 				var/chamber_pressure = memory["chamber_sensor_pressure"]
 				var/target_pressure = memory["target_pressure"]
 
@@ -216,7 +223,7 @@
 					memory["target_pressure"] = memory["internal_sensor_pressure"]
 					state = STATE_PREPARE
 					target_state = TARGET_NONE
-				
+
 				else if(memory["pump_status"] != "off")
 					signalPump(tag_airpump, 0)
 				else
