@@ -656,7 +656,7 @@ About the new airlock wires panel:
 	return
 
 /obj/machinery/door/airlock/CanUseTopic(var/mob/user)
-	if(!user.isSilicon())
+	if(issilicon(user))
 		return STATUS_CLOSE
 
 	if(operating < 0) //emagged
