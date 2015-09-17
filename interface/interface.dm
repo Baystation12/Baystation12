@@ -46,7 +46,7 @@
 	set hidden = 1
 	if(alert("This will open the GitHub page in your browser. Are you sure?",,"Yes","No")=="No")
 		return
-	src << link("https://github.com/SovietStation/SovietBay")
+	src << link("https://github.com/Reynevanie/SovietBay")
 	return
 
 /client/verb/bugreport()
@@ -55,7 +55,7 @@
 	set hidden = 1
 	if(alert("This will open the GitHub page in your browser. Are you sure?",,"Yes","No")=="No")
 		return
-	src << link("https://github.com/SovietStation/SovietBay/issues/new")
+	src << link("https://github.com/Reynevanie/SovietBay/issues/new")
 	return
 
 /client/verb/hotkeys_help()
