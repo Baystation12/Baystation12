@@ -64,11 +64,11 @@
 	return
 
 /obj/machinery/turretid/proc/isLocked(mob/user)
-	if(ailock && user.isSilicon())
+	if(ailock && issilicon(user))
 		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
 		return 1
 
-	if(locked && !user.isSilicon())
+	if(locked && !issilicon(user))
 		user << "<span class='notice'>Access denied.</span>"
 		return 1
 
@@ -93,7 +93,7 @@
 				user << "<span class='notice'>You [ locked ? "lock" : "unlock"] the panel.</span>"
 		return
 	return ..()
-	
+
 /obj/machinery/turretid/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		user << "<span class='danger'>You short out the turret controls' access analysis module.</span>"

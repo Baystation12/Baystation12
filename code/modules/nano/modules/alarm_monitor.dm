@@ -65,7 +65,7 @@
 			var/cameras[0]
 			var/lost_sources[0]
 
-			if(user.isMobAI())
+			if(isAI(user))
 				for(var/obj/machinery/camera/C in A.cameras())
 					cameras[++cameras.len] = C.nano_structure()
 			for(var/datum/alarm_source/AS in A.sources)

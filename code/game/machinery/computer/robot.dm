@@ -21,7 +21,7 @@
 	data["robots"] = get_cyborgs(user)
 	data["safety"] = safety
 	// Also applies for cyborgs. Hides the manual self-destruct button.
-	data["is_ai"] = user.isSilicon()
+	data["is_ai"] = issilicon(user)
 
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -44,7 +44,7 @@
 		var/mob/living/silicon/robot/target = get_cyborg_by_name(href_list["detonate"])
 		if(!target || !istype(target))
 			return
-		if(user.isMobAI() && (target.connected_ai != user))
+		if(isAI(user) && (target.connected_ai != user))
 			user << "Access Denied. This robot is not linked to you."
 			return
 		// Cyborgs may blow up themselves via the console
@@ -76,7 +76,7 @@
 		if(!target || !istype(target))
 			return
 
-		if(user.isMobAI() && (target.connected_ai != user))
+		if(isAI(user) && (target.connected_ai != user))
 			user << "Access Denied. This robot is not linked to you."
 			return
 
