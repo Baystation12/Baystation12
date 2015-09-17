@@ -330,23 +330,7 @@
 			return
 
 		//Find our spawning point.
-		var/join_message
-		var/datum/spawnpoint/S
-
-		if(spawning_at)
-			S = spawntypes[spawning_at]
-
-		if(S && istype(S))
-			if(S.check_job_spawning(rank))
-				character.loc = pick(S.turfs)
-				join_message = S.msg
-			else
-				character << "Your chosen spawnpoint ([S.display_name]) is unavailable for your chosen job. Spawning you at the Arrivals shuttle instead."
-				character.loc = pick(latejoin)
-				join_message = "has arrived on the station"
-		else
-			character.loc = pick(latejoin)
-			join_message = "has arrived on the station"
+		var/join_message = job_master.LateSpawn(character, rank)
 
 		character.lastarea = get_area(loc)
 		// Moving wheelchair if they have one
