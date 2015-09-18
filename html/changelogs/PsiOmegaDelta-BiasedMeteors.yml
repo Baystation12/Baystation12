@@ -1,0 +1,5 @@
+author: PsiOmegaDelta
+delete-after: True
+
+changes: 
+  - tweak: "Meteor events now select a map edge to arrive from, with a probability for each individual wave to come from either neighboring edge. Meteors will never arrive from opposite the starting edge."
