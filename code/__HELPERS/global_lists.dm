@@ -118,9 +118,9 @@ var/global/list/endgame_safespawns = list()
 	for (var/language_name in all_languages)
 		var/datum/language/L = all_languages[language_name]
 		if(!(L.flags & NONGLOBAL))
-			language_keys[":[lowertext(L.key)]"] = L
-			language_keys[".[lowertext(L.key)]"] = L
-			language_keys["#[lowertext(L.key)]"] = L
+			language_keys[":[lowertext_alt(L.key)]"] = L
+			language_keys[".[lowertext_alt(L.key)]"] = L
+			language_keys["#[lowertext_alt(L.key)]"] = L
 
 	var/rkey = 0
 	paths = typesof(/datum/species)-/datum/species

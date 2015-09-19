@@ -1084,6 +1084,10 @@ area/space/atmosalert()
 	name = "\improper Engine Room"
 	icon_state = "engine"
 
+/area/engineering/engine_sing_room
+	name = "\improper Singularity Room"
+	icon_state = "engine"
+
 /area/engineering/engine_airlock
 	name = "\improper Engine Room Airlock"
 	icon_state = "engine"
@@ -1355,6 +1359,10 @@ area/space/atmosalert()
 /area/security/brig
 	name = "\improper Security - Brig"
 	icon_state = "brig"
+
+/area/security/Medbay
+	name = "\improper Security - MedBay"
+	icon_state = "MedBayBrig"
 
 /area/security/prison
 	name = "\improper Security - Prison Wing"

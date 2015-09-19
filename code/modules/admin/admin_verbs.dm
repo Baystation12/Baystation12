@@ -63,6 +63,7 @@ var/list/admin_verbs_admin = list(
 	/datum/admins/proc/togglelooc,		/*toggles looc on/off for everyone*/
 	/datum/admins/proc/toggleoocdead,	/*toggles ooc on/off for everyone who is dead*/
 	/datum/admins/proc/toggledsay,		/*toggles dsay on/off for everyone*/
+	/datum/admins/proc/toggleexplosions,/*toggles all explosions*/
 	/client/proc/game_panel,			/*game panel, allows to change game-mode etc*/
 	/client/proc/cmd_admin_say,			/*admin-only ooc chat*/
 	/datum/admins/proc/PlayerNotes,
@@ -84,7 +85,6 @@ var/list/admin_verbs_admin = list(
 	/client/proc/toggle_antagHUD_restrictions,
 	/client/proc/allow_character_respawn,    /* Allows a ghost to respawn */
 	/client/proc/event_manager_panel,
-	/client/proc/empty_ai_core_toggle_latejoin,
 	/client/proc/empty_ai_core_toggle_latejoin,
 	/client/proc/aooc,
 	/client/proc/change_human_appearance_admin,	/* Allows an admin to change the basic appearance of human-based mobs */
@@ -175,7 +175,9 @@ var/list/admin_verbs_debug = list(
 	/client/proc/create_random_map,
 	/client/proc/show_plant_genes,
 	/client/proc/enable_debug_verbs,
+	#ifdef ALLOW_CALLPROC
 	/client/proc/callproc,
+	#endif
 	/client/proc/toggledebuglogs,
 	/client/proc/SDQL_query,
 	/client/proc/SDQL2_query,
@@ -186,7 +188,9 @@ var/list/admin_verbs_debug = list(
 	)
 
 var/list/admin_verbs_paranoid_debug = list(
+	#ifdef ALLOW_CALLPROC
 	/client/proc/callproc,
+	#endif
 	/client/proc/debug_controller
 	)
 
@@ -255,7 +259,9 @@ var/list/admin_verbs_hideable = list(
 	/datum/admins/proc/adjump,
 	/client/proc/restart_controller,
 	/client/proc/cmd_admin_list_open_jobs,
+	#ifdef ALLOW_CALLPROC
 	/client/proc/callproc,
+	#endif
 	/client/proc/Debug2,
 	/client/proc/reload_admins,
 	/client/proc/kill_air,

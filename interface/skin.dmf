@@ -1993,6 +1993,62 @@ window "rpane"
 		splitter = 50
 		show-splitter = true
 		lock = none
+	elem "bugreport"
+		type = BUTTON
+		pos = 467,0
+		size = 67x16
+		anchor1 = none
+		anchor2 = none
+		font-family = ""
+		font-size = 0
+		font-style = ""
+		text-color = #000000
+		background-color = none
+		is-visible = true
+		is-disabled = false
+		is-transparent = false
+		is-default = false
+		border = none
+		drop-zone = false
+		right-click = false
+		saved-params = "is-checked"
+		on-size = ""
+		text = "Bug Report"
+		image = ""
+		command = "Bug-Report"
+		is-flat = false
+		stretch = false
+		is-checked = false
+		group = "rpanemode"
+		button-type = pushbutton
+	elem "github"
+		type = BUTTON
+		pos = 404,0
+		size = 60x16
+		anchor1 = none
+		anchor2 = none
+		font-family = ""
+		font-size = 0
+		font-style = ""
+		text-color = #000000
+		background-color = none
+		is-visible = true
+		is-disabled = false
+		is-transparent = false
+		is-default = false
+		border = none
+		drop-zone = false
+		right-click = false
+		saved-params = "is-checked"
+		on-size = ""
+		text = "Github"
+		image = ""
+		command = "Github"
+		is-flat = false
+		stretch = false
+		is-checked = false
+		group = "rpanemode"
+		button-type = pushbutton
 	elem "rulesb"
 		type = BUTTON
 		pos = 278,0
@@ -2021,10 +2077,10 @@ window "rpane"
 		is-checked = false
 		group = "rpanemode"
 		button-type = pushbutton
-	elem "changelog"
+	elem "donate"
 		type = BUTTON
 		pos = 341,0
-		size = 67x16
+		size = 60x16
 		anchor1 = none
 		anchor2 = none
 		font-family = ""
@@ -2041,9 +2097,9 @@ window "rpane"
 		right-click = false
 		saved-params = "is-checked"
 		on-size = ""
-		text = "Changelog"
+		text = "Donate"
 		image = ""
-		command = "Changelog"
+		command = "Donate"
 		is-flat = false
 		stretch = false
 		is-checked = false
@@ -2135,7 +2191,7 @@ window "rpane"
 		button-type = pushbox
 	elem "browseb"
 		type = BUTTON
-		pos = 464,0
+		pos = 560,0
 		size = 60x16
 		anchor1 = none
 		anchor2 = none

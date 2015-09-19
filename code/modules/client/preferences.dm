@@ -1005,10 +1005,10 @@ datum/preferences
 				ShowChoices(user)
 				return
 			if("general")
-				var/msg = sanitize(input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(revert_ja(flavor_texts[href_list["task"]]))) as message, extra = 0, ja_mode = POPUP)
 				flavor_texts[href_list["task"]] = msg
 			else
-				var/msg = sanitize(input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(revert_ja(flavor_texts[href_list["task"]]))) as message, extra = 0, ja_mode = POPUP)
 				flavor_texts[href_list["task"]] = msg
 		SetFlavorText(user)
 		return
@@ -1023,10 +1023,10 @@ datum/preferences
 				ShowChoices(user)
 				return
 			if("Default")
-				var/msg = sanitize(input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(flavour_texts_robot["Default"])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(revert_ja(flavour_texts_robot["Default"]))) as message, extra = 0, ja_mode = POPUP)
 				flavour_texts_robot[href_list["task"]] = msg
 			else
-				var/msg = sanitize(input(usr,"Set the flavour text for your robot with [href_list["task"]] module. If you leave this empty, default flavour text will be used for this module.","Flavour Text",html_decode(flavour_texts_robot[href_list["task"]])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Set the flavour text for your robot with [href_list["task"]] module. If you leave this empty, default flavour text will be used for this module.","Flavour Text",html_decode(revert_ja(flavour_texts_robot[href_list["task"]]))) as message, extra = 0, ja_mode = POPUP)
 				flavour_texts_robot[href_list["task"]] = msg
 		SetFlavourTextRobot(user)
 		return
@@ -1042,24 +1042,24 @@ datum/preferences
 		else
 			user << browse(null, "window=records")
 		if(href_list["task"] == "med_record")
-			var/medmsg = sanitize(input(usr,"Set your medical notes here.","Medical Records",html_decode(med_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
+			var/medmsg = sanitize(input(usr,"Set your medical notes here.","Medical Records",html_decode(revert_ja(med_record))) as message, MAX_PAPER_MESSAGE_LEN, extra = 0, ja_mode = POPUP)
 			if(medmsg != null)
 				med_record = medmsg
 				SetRecords(user)
 
 		if(href_list["task"] == "sec_record")
-			var/secmsg = sanitize(input(usr,"Set your security notes here.","Security Records",html_decode(sec_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
+			var/secmsg = sanitize(input(usr,"Set your security notes here.","Security Records",html_decode(revert_ja(sec_record))) as message, MAX_PAPER_MESSAGE_LEN, extra = 0, ja_mode = POPUP)
 			if(secmsg != null)
 				sec_record = secmsg
 				SetRecords(user)
 		if(href_list["task"] == "gen_record")
-			var/genmsg = sanitize(input(usr,"Set your employment notes here.","Employment Records",html_decode(gen_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
+			var/genmsg = sanitize(input(usr,"Set your employment notes here.","Employment Records",html_decode(revert_ja(gen_record))) as message, MAX_PAPER_MESSAGE_LEN, extra = 0, ja_mode = POPUP)
 			if(genmsg != null)
 				gen_record = genmsg
 				SetRecords(user)
 
 		if(href_list["task"] == "exploitable_record")
-			var/exploitmsg = sanitize(input(usr,"Set exploitable information about you here.","Exploitable Information",html_decode(exploit_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
+			var/exploitmsg = sanitize(input(usr,"Set exploitable information about you here.","Exploitable Information",html_decode(revert_ja(exploit_record))) as message, MAX_PAPER_MESSAGE_LEN, extra = 0, ja_mode = POPUP)
 			if(exploitmsg != null)
 				exploit_record = exploitmsg
 				SetAntagoptions(user)
@@ -1273,7 +1273,7 @@ datum/preferences
 				if("metadata")
 					var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
 					if(new_metadata)
-						metadata = sanitize(new_metadata)
+						metadata = sanitize(new_metadata, ja_mode = POPUP)
 
 				if("b_type")
 					var/new_b_type = input(user, "Choose your character's blood-type:", "Character Preference") as null|anything in list( "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" )
@@ -1496,7 +1496,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a home system.")  as text|null
 						if(raw_choice)
-							home_system = sanitize(raw_choice)
+							home_system = sanitize(raw_choice, ja_mode = POPUP)
 						return
 					home_system = choice
 				if("citizenship")
@@ -1506,7 +1506,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter your current citizenship.", "Character Preference") as text|null
 						if(raw_choice)
-							citizenship = sanitize(raw_choice)
+							citizenship = sanitize(raw_choice, ja_mode = POPUP)
 						return
 					citizenship = choice
 				if("faction")
@@ -1516,7 +1516,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a faction.")  as text|null
 						if(raw_choice)
-							faction = sanitize(raw_choice)
+							faction = sanitize(raw_choice, ja_mode = POPUP)
 						return
 					faction = choice
 				if("religion")
@@ -1526,7 +1526,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a religon.")  as text|null
 						if(raw_choice)
-							religion = sanitize(raw_choice)
+							religion = sanitize(raw_choice, ja_mode = POPUP)
 						return
 					religion = choice
 		else

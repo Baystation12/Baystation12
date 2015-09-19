@@ -90,7 +90,7 @@ proc/get_radio_key_from_channel(var/channel)
 	var/speech_problem_flag = 0
 
 	if((HULK in mutations) && health >= 25 && length(message))
-		message = "[uppertext(message)]!!!"
+		message = "[uppertext_alt(message)]!!!"
 		verb = pick("yells","roars","hollers")
 		speech_problem_flag = 1
 	if(slurring)
@@ -169,7 +169,7 @@ proc/get_radio_key_from_channel(var/channel)
 		// This is broadcast to all mobs with the language,
 		// irrespective of distance or anything else.
 		if(speaking.flags & HIVEMIND)
-			speaking.broadcast(src,trim(message))
+			speaking.broadcast(src,sanitize_chat(trim(message)))
 			return 1
 		//If we've gotten this far, keep going!
 		if(speaking.flags & COMMON_VERBS)
@@ -190,7 +190,7 @@ proc/get_radio_key_from_channel(var/channel)
 		return 0
 
 	var/list/obj/item/used_radios = new
-	if(handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name))
+	if(handle_message_mode(message_mode, sanitize_chat(message), verb, speaking, used_radios, alt_name))
 		return 1
 
 	var/list/handle_v = handle_speech_sound()
@@ -224,7 +224,7 @@ proc/get_radio_key_from_channel(var/channel)
 				src.custom_emote(1, "[pick(speaking.signlang_verb)].")
 
 		if (speaking.flags & SIGNLANG)
-			return say_signlang(message, pick(speaking.signlang_verb), speaking)
+			return say_signlang(sanitize_chat(message), pick(speaking.signlang_verb), speaking)
 
 	var/list/listening = list()
 	var/list/listening_obj = list()

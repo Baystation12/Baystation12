@@ -380,7 +380,7 @@
 	if(speak_emote.len)
 		verb = pick(speak_emote)
 
-	message = sanitize(message)
+	message = sanitize(message, ja_mode = TEMP)
 
 	..(message, null, verb)
 
