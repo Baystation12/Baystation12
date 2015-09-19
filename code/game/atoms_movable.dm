@@ -242,7 +242,7 @@
 			x = world.maxx - TRANSITIONEDGE - 2
 			y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
 
-		else if (x >= (world.maxx - TRANSITIONEDGE - 1))
+		else if (x >= (world.maxx - TRANSITIONEDGE + 1))
 			x = TRANSITIONEDGE + 1
 			y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
 
@@ -250,7 +250,7 @@
 			y = world.maxy - TRANSITIONEDGE -2
 			x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
-		else if (y >= (world.maxy - TRANSITIONEDGE - 1))
+		else if (y >= (world.maxy - TRANSITIONEDGE + 1))
 			y = TRANSITIONEDGE + 1
 			x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
