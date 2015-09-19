@@ -6617,7 +6617,7 @@
 "cxm" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk{dir = 8},/obj/structure/sign/deathsposal{pixel_x = 0; pixel_y = -32},/obj/machinery/atmospherics/pipe/simple/hidden/purple{dir = 4},/turf/simulated/floor{icon_state = "whitehall"; dir = 1},/area/rnd/xenobiology)
 "cxn" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped,/obj/item/weapon/reagent_containers/spray/cleaner,/obj/item/clothing/gloves/latex,/obj/item/device/slime_scanner,/obj/item/device/slime_scanner,/obj/item/weapon/hand_labeler,/turf/simulated/floor{icon_state = "white"},/area/rnd/xenobiology)
 "cxo" = (/obj/machinery/meter,/obj/machinery/atmospherics/pipe/simple/visible,/turf/simulated/floor,/area/engineering/atmos)
-"cxp" = (/obj/machinery/atmospherics/unary/freezer{dir = 2; icon_state = "freezer"},/obj/machinery/hologram/holopad,/turf/simulated/floor{icon_state = "bot"; dir = 1},/area/engineering/atmos)
+"cxp" = (/obj/machinery/atmospherics/unary/freezer{dir = 2; icon_state = "freezer"},/turf/simulated/floor{icon_state = "bot"; dir = 1},/area/engineering/atmos)
 "cxq" = (/obj/machinery/hologram/holopad,/turf/simulated/floor,/area/engineering/atmos)
 "cxr" = (/obj/structure/disposalpipe/sortjunction/flipped{dir = 8; sortType = "Drone Fabrication"; name = "Drone Fabrication"},/turf/simulated/floor,/area/engineering/atmos)
 "cxs" = (/obj/effect/decal/cleanable/blood/oil/streak{amount = 0},/obj/machinery/atmospherics/pipe/simple/hidden/universal,/turf/simulated/floor/plating,/area/maintenance/medbay)
