@@ -322,6 +322,21 @@
 				overlays += status_overlays_lighting[lighting+1]
 				overlays += status_overlays_environ[environ+1]
 
+	if(update & 3)
+		if(update_state & UPSTATE_BLUESCREEN)
+			set_light(l_range = 2, l_power = 0.5, l_color = "#0000FF")
+		else if(!(stat & (BROKEN|MAINT)) && update_state & UPSTATE_ALLGOOD)
+			var/color
+			switch(charging)
+				if(0)
+					color = "#F86060"
+				if(1)
+					color = "#A8B0F8"
+				if(2)
+					color = "#82FF4C"
+			set_light(l_range = 2, l_power = 0.5, l_color = color)
+		else
+			set_light(0)
 
 /obj/machinery/power/apc/proc/check_updates()
 
