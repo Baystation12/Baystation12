@@ -6514,7 +6514,7 @@
 "cvn" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/machinery/door/firedoor/border_only,/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/engineering/workshop)
 "cvo" = (/obj/structure/cable/yellow{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/airless,/area/solar/starboard)
 "cvp" = (/obj/machinery/meter,/obj/machinery/atmospherics/pipe/simple/visible,/turf/simulated/floor/tiled,/area/engineering/atmos)
-"cvq" = (/obj/machinery/atmospherics/unary/freezer{dir = 2; icon_state = "freezer"},/obj/machinery/hologram/holopad,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cvq" = (/obj/machinery/atmospherics/unary/freezer{dir = 2; icon_state = "freezer"},/turf/simulated/floor/tiled,/area/engineering/atmos)
 "cvr" = (/obj/machinery/hologram/holopad,/turf/simulated/floor/tiled,/area/engineering/atmos)
 "cvs" = (/obj/machinery/constructable_frame/machine_frame,/turf/simulated/floor/tiled,/area/engineering/atmos)
 "cvt" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/table/steel_reinforced,/obj/item/stack/material/plasteel{amount = 10},/obj/item/stack/material/plasteel{amount = 10},/obj/item/stack/material/plasteel{amount = 10},/obj/item/stack/material/plastic{amount = 50},/obj/item/stack/material/plastic{amount = 50},/obj/item/stack/material/glass/phoronrglass{amount = 20},/turf/simulated/floor,/area/engineering/workshop)
