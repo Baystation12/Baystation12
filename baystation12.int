@@ -1,5 +1,6 @@
 // BEGIN_INTERNALS
 /*
+<<<<<<< HEAD
 LAST_COMPILE_TIME: 1442692508
 DIR: code code\game code\modules code\modules\admin interface 
 AUTO_FILE_DIR: OFF
@@ -7,5 +8,9 @@ MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 508.1299
 WINDOW: code\hub.dm
 FILE: code\hub.dm
+=======
+MAP_ICON_TYPE: 0
+AUTO_FILE_DIR: OFF
+>>>>>>> parent of b48c933... Minor change to hub.dm
 */
 // END_INTERNALS
