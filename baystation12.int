@@ -1,9 +1,11 @@
 // BEGIN_INTERNALS
 /*
+LAST_COMPILE_TIME: 1442692508
 DIR: code code\game code\modules code\modules\admin interface 
 AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\admin\admin.dm;interface\interface.dm
-FILE: interface\interface.dm
+LAST_COMPILE_VERSION: 508.1299
+WINDOW: code\hub.dm
+FILE: code\hub.dm
 */
 // END_INTERNALS
