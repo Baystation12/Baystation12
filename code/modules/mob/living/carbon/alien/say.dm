@@ -7,7 +7,7 @@
 			src << "\red You cannot speak in IC (Muted)."
 			return
 
-	message = sanitize(message)
+	message = sanitize(message, ja_mode = TEMP)
 
 	if(stat == 2)
 		return say_dead(message)

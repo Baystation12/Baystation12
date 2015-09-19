@@ -185,6 +185,51 @@ By design, d1 is the smallest direction and d2 is the highest
 
 	src.add_fingerprint(user)
 
+//MOUSE NIBBLE
+/obj/structure/cable/attack_generic(var/mob/living/simple_animal/mouse/MS)
+	if(prob(20))
+
+	///// Z-Level Stuff
+		if(src.d1 == 12 || src.d2 == 12)
+			MS << "<span class='warning'>You must nibble this cable from above.</span>"
+			return
+///// Z-Level Stuff
+		if(breaker_box)
+			MS << "\red This cable is connected to nearby breaker box. You cannot nibble this."
+			return
+
+
+		for(var/mob/O in viewers(src, null))
+			O.show_message("<span class='warning'>[MS] nibbles the cable.</span>", 1)
+
+///// Z-Level Stuff
+		if(src.d1 == 11 || src.d2 == 11)
+			var/turf/controllerlocation = locate(1, 1, z)
+			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+				if(controller.down)
+					var/turf/below = locate(src.x, src.y, controller.down_target)
+					for(var/obj/structure/cable/c in below)
+						if(c.d1 == 12 || c.d2 == 12)
+							c.Del()
+///// Z-Level Stuff
+		investigate_log("was nibbled by mouse [key_name(MS, MS.client)] in [MS.loc.loc]","wires")
+
+		if(prob(95))
+			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			for(var/mob/O in viewers(src, null))
+				O.show_message("<span class='warning'>[MS] trying to nibble the cable, but was shocked.</span>", 1)
+			s.set_up(5, 1, src)
+			s.start()
+			MS.splat()
+
+		del(src) // qdel
+		return
+	else
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(5, 1, src)
+		s.start()
+		MS.splat()
+
 // shock the user with probability prb
 /obj/structure/cable/proc/shock(mob/user, prb, var/siemens_coeff = 1.0)
 	if(!prob(prb))
