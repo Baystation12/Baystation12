@@ -1,6 +1,6 @@
 # baystation12
 
-3  +[![Join the chat at https://gitter.im/JakeDaBoss/Baystation12](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/JakeDaBoss/Baystation12?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  
+[![Join the chat at https://gitter.im/JakeDaBoss/Baystation12](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/JakeDaBoss/Baystation12?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  
 
 [Website](http://baystation12.net/) - [Code](http://github.com/Baystation12/Baystation12/) - [IRC](http://baystation12.net/forums/viewtopic.php?f=12&t=5088)
 
