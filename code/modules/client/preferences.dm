@@ -404,7 +404,7 @@ datum/preferences
 		dat += "- [species] cannot choose secondary languages.<br>"
 
 	dat += "<b>Language Keys</b><br>"
-	dat += " [english_list(language_prefixes, and_text = " ", comma_text = " ")] <a href='byond://?src=\ref[user];preference=language_prefix'>Change</a><br>"
+	dat += " [english_list(language_prefixes, and_text = " ", comma_text = " ")] <a href='byond://?src=\ref[user];preference=language_prefix;add=1'>Change</a> <a href='byond://?src=\ref[user];preference=language_prefix;reset=1'>Reset</a><br>"
 
 	dat += "<br><br>"
 	var/list/undies = gender == MALE ? underwear_m : underwear_f
@@ -1180,25 +1180,29 @@ datum/preferences
 						alternate_languages |= new_lang
 
 	else if(href_list["preference"] == "language_prefix")
-		var/char
-		var/keys[0]
-		do
-			char = input("Enter a single special character.\nYou may re-select the same characters.\nThe following characters are already in use by radio: ; : .\nThe following characters are already in use by special say commands: ! *", "Enter Character - [3 - keys.len] remaining") as null|text
-			if(char)
-				if(length(char) > 1)
-					alert("Only single characters allowed.", "Error", "Ok")
-				else if(char in list(";", ":", "."))
-					alert("Radio character. Rejected.", "Error", "Ok")
-				else if(char in list("!","*"))
-					alert("Say character. Rejected.", "Error", "Ok")
-				else if(contains_az09(char))
-					alert("Non-special character. Rejected.", "Error", "Ok")
-				else
-					keys.Add(char)
-		while(char && keys.len < 3)
+		if(href_list["add"])
+			var/char
+			var/keys[0]
+			do
+				char = input("Enter a single special character.\nYou may re-select the same characters.\nThe following characters are already in use by radio: ; : .\nThe following characters are already in use by special say commands: ! * ^", "Enter Character - [3 - keys.len] remaining") as null|text
+				if(char)
+					if(length(char) > 1)
+						alert("Only single characters allowed.", "Error", "Ok")
+					else if(char in list(";", ":", "."))
+						alert("Radio character. Rejected.", "Error", "Ok")
+					else if(char in list("!","*", "^"))
+						alert("Say character. Rejected.", "Error", "Ok")
+					else if(contains_az09(char))
+						alert("Non-special character. Rejected.", "Error", "Ok")
+					else
+						keys.Add(char)
+			while(char && keys.len < 3)
 
-		if(keys.len == 3)
-			language_prefixes = keys
+			if(keys.len == 3)
+				language_prefixes = keys
+		else if(href_list["reset"])
+			language_prefixes = config.language_prefixes.Copy()
+
 	switch(href_list["task"])
 		if("change")
 			if(href_list["preference"] == "species")
