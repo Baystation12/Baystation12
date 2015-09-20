@@ -249,7 +249,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			priority = -1
 
 	if(href_list["writeAnnouncement"])
-		var/new_message = sanitize(input("Write your message:", "Awaiting Input", ""))
+		var/new_message = sanitize(input("Write your message:", "Awaiting Input", ""), ja_mode = POPUP)
 		if(new_message)
 			message = new_message
 			switch(href_list["priority"])
@@ -261,7 +261,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 
 	if(href_list["sendAnnouncement"])
 		if(!announcementConsole)	return
-		announcement.Announce(message, msg_sanitized = 1)
+		announcement.Announce(sanitize_chat(message), msg_sanitized = 1)
 		reset_announce()
 		screen = 0
 

@@ -142,7 +142,7 @@ datum/controller/vote
 			if(mode == "add_antagonist")
 				antag_add_failed = 1
 		log_vote(text)
-		world << "<font color='purple'>[text]</font>"
+		world << "<font color='purple'>[sanitize_chat(text)]</font>"
 		return .
 
 	proc/result()
@@ -241,10 +241,10 @@ datum/controller/vote
 							choices.Add(antag.role_text)
 					choices.Add("None")
 				if("custom")
-					question = sanitizeSafe(input(usr,"What is the vote for?") as text|null)
+					question = sanitizeSafe(input(usr,"What is the vote for?") as text|null, ja_mode = POPUP)
 					if(!question)	return 0
 					for(var/i=1,i<=10,i++)
-						var/option = capitalize(sanitize(input(usr,"Please enter an option or hit cancel to finish") as text|null))
+						var/option = capitalize(sanitize(input(usr,"Please enter an option or hit cancel to finish") as text|null, ja_mode = POPUP))
 						if(!option || mode || !usr.client)	break
 						choices.Add(option)
 				else
@@ -257,7 +257,7 @@ datum/controller/vote
 				text += "\n[question]"
 
 			log_vote(text)
-			world << "<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=\ref[src]'>here</a> to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
+			world << "<font color='purple'><b>[sanitize_chat(text)]</b>\nType <b>vote</b> or click <a href='?src=\ref[src]'>here</a> to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
 			switch(vote_type)
 				if("crew_transfer")
 					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
