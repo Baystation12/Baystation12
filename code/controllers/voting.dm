@@ -244,7 +244,7 @@ datum/controller/vote
 					question = sanitizeSafe(input(usr,"What is the vote for?") as text|null, ja_mode = POPUP)
 					if(!question)	return 0
 					for(var/i=1,i<=10,i++)
-						var/option = capitalize(sanitize(input(usr,"Please enter an option or hit cancel to finish") as text|null), ja_mode = POPUP)
+						var/option = capitalize(sanitize(input(usr,"Please enter an option or hit cancel to finish") as text|null, ja_mode = POPUP))
 						if(!option || mode || !usr.client)	break
 						choices.Add(option)
 				else
