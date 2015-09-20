@@ -150,6 +150,8 @@
 	var/push_flags = ~HEAVY	// What can we push?
 	var/swap_flags = ~HEAVY	// What can we swap place with?
 
+	var/pass_flags = 0
+
 /datum/species/New()
 	if(hud_type)
 		hud = new hud_type()
@@ -282,6 +284,7 @@
 	H.mob_bump_flag = bump_flag
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
+	H.pass_flags = pass_flags
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	return
