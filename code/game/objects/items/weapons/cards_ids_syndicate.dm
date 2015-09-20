@@ -2,6 +2,7 @@ var/global/list/syndicate_ids = list()
 
 /obj/item/weapon/card/id/syndicate
 	name = "agent card"
+	icon_state = "syndicate"
 	assignment = "Agent"
 	origin_tech = list(TECH_ILLEGAL = 3)
 	var/electronic_warfare = 1
@@ -33,7 +34,7 @@ var/global/list/syndicate_ids = list()
 		var/obj/item/weapon/card/id/I = O
 		src.access |= I.access
 		if(player_is_antag(user))
-			user << "<span class='notice'>The microscanner activate as you pass it over the ID, copying its access.</span>"
+			user << "<span class='notice'>The microscanner activates as you pass it over the ID, copying its access.</span>"
 
 /obj/item/weapon/card/id/syndicate/attack_self(mob/user as mob)
 	if(!registered_user)
