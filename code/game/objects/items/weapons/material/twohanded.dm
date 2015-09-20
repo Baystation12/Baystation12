@@ -92,7 +92,7 @@
 
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		if(H.species.is_small)
+		if(issmall(H))
 			user << "<span class='warning'>It's too heavy for you to wield fully.</span>"
 			return
 	else

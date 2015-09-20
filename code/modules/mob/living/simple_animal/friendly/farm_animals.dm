@@ -55,9 +55,9 @@
 
 		if(!pulledby)
 			var/obj/effect/plant/food
-			food = locate(/obj/effect/plant) in oview(5,loc)	
+			food = locate(/obj/effect/plant) in oview(5,loc)
 			if(food)
-				var/step = get_step_to(src, food, 0) 	
+				var/step = get_step_to(src, food, 0)
 				Move(step)
 
 /mob/living/simple_animal/hostile/retaliate/goat/Retaliate()
@@ -167,7 +167,7 @@
 	health = 1
 	var/amount_grown = 0
 	pass_flags = PASSTABLE | PASSGRILLE
-	small = 1
+	mob_size = MOB_MINISCULE
 
 /mob/living/simple_animal/chick/New()
 	..()
@@ -209,7 +209,7 @@ var/global/chicken_count = 0
 	var/eggsleft = 0
 	var/body_color
 	pass_flags = PASSTABLE
-	small = 1
+	mob_size = MOB_SMALL
 
 /mob/living/simple_animal/chicken/New()
 	..()
