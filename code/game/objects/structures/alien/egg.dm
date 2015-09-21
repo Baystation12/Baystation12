@@ -20,7 +20,9 @@
 	if(progress < MAX_PROGRESS)
 		progress++
 		if(progress == MAX_PROGRESS)
-			src << "todo alert goasts"
+			for(var/mob/M in dead_mob_list)
+				if(istype(M,/mob/dead) && M.client && M.client.prefs && (M.client.prefs.be_special & BE_ALIEN))
+					M << "An alien egg is ready to hatch!" // Todo add a JUMP link.
 		update_icon()
 		return
 	// Max progress, cancel processing.
@@ -36,15 +38,20 @@
 
 /obj/structure/alien/egg/attack_ghost(var/mob/dead/observer/user)
 
-	// Check for bans properly.
-	if(jobban_isbanned(user, "Xenomorph"))
-		user << "<span class='danger'>You are banned from playing a Xenomorph.</span>"
-		return
 
 	if(progress == -1) //Egg has been hatched.
 		return
-	else if(progress < MAX_PROGRESS)
+
+	if(progress < MAX_PROGRESS)
 		user << "\The [src] has not yet matured."
+		return
+
+	if(!user.MayRespawn(1))
+		return
+
+	// Check for bans properly.
+	if(jobban_isbanned(user, "Xenomorph"))
+		user << "<span class='danger'>You are banned from playing a Xenomorph.</span>"
 		return
 
 	var/confirm = alert(user, "Are you sure you want to join as a Xenomorph larva?", "Become Larva", "No", "Yes")
@@ -53,6 +60,10 @@
 		return
 
 	if(!user || !user.ckey)
+		return
+
+	if(progress == -1) //Egg has been hatched.
+		user << "Too slow..."
 		return
 
 	flick("egg_opening",src)
