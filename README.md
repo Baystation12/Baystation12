@@ -7,7 +7,7 @@
 ---
 
 ### LICENSE
-Prospector Station is licensed under the GNU Affero General Public License version 3, which can be found in full in LICENSE-AGPL3.txt.
+Baystation12 is licensed under the GNU Affero General Public License version 3, which can be found in full in LICENSE-AGPL3.txt.
 
 Commits with a git authorship date prior to `1420675200 +0000` (2015/01/08 00:00) are licensed under the GNU General Public License version 3, which can be found in full in LICENSE-GPL3.txt.
 
