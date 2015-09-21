@@ -5,7 +5,13 @@ Thumbs.db
 *.rsc
 *.dmb
 *.lk
+*.bak
 *.backup
 data/
+baystation12.int
+maps/Phoenix.dmm.backup
+*.db
+*.int
+baystation12.int
 cfg/
 
