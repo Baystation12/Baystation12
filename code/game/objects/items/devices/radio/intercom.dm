@@ -125,6 +125,8 @@
 /obj/item/device/radio/intercom/locked/ai_private
 	name = "\improper AI intercom"
 	frequency = AI_FREQ
+	broadcasting = 1
+	listening = 1
 
 /obj/item/device/radio/intercom/locked/confessional
 	name = "confessional intercom"
