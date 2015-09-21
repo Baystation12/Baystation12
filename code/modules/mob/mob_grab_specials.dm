@@ -149,7 +149,7 @@
 		if(istype(H) && H.species.gluttonous)
 			if(H.species.gluttonous == 2)
 				can_eat = 2
-			else if(!ishuman(target) && !issmall(target) && (target.small || iscarbon(target)))
+			else if((H.mob_size > target.mob_size) && !ishuman(target) && iscarbon(target))
 				can_eat = 1
 
 	if(can_eat)

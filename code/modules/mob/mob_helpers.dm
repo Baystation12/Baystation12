@@ -6,10 +6,9 @@
 	return 0
 
 /proc/issmall(A)
-	if(A && istype(A, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = A
-		if(H.species && H.species.is_small)
-			return 1
+	if(A && istype(A, /mob/living))
+		var/mob/living/L = A
+		return L.mob_size <= MOB_SMALL
 	return 0
 
 /mob/living/proc/isSynthetic()
