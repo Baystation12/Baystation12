@@ -822,6 +822,8 @@
 #include "code\game\turfs\flooring\flooring.dm"
 #include "code\game\turfs\flooring\flooring_decals.dm"
 #include "code\game\turfs\flooring\flooring_premade.dm"
+#include "code\game\turfs\initialization\init.dm"
+#include "code\game\turfs\initialization\maintenance.dm"
 #include "code\game\turfs\simulated\floor.dm"
 #include "code\game\turfs\simulated\floor_acts.dm"
 #include "code\game\turfs\simulated\floor_attackby.dm"

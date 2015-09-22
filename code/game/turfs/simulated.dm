@@ -25,6 +25,14 @@
 	if(!tracks)
 		tracks = new typepath(src)
 	tracks.AddTracks(bloodDNA,comingdir,goingdir,bloodcolor)
+	
+/turf/simulated/proc/update_dirt()
+	dirt = min(dirt++, 101)
+	var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
+	if (dirt > 50)
+		if (!dirtoverlay)
+			dirtoverlay = new/obj/effect/decal/cleanable/dirt(src)
+		dirtoverlay.alpha = min((dirt - 50) * 5, 255)
 
 /turf/simulated/Entered(atom/A, atom/OL)
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
@@ -41,14 +49,7 @@
 		if(plant) plant.trodden_on(M)
 
 		// Dirt overlays.
-		dirt++
-		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
-		if (dirt >= 50)
-			if (!dirtoverlay)
-				dirtoverlay = new/obj/effect/decal/cleanable/dirt(src)
-				dirtoverlay.alpha = 15
-			else if (dirt > 50)
-				dirtoverlay.alpha = min(dirtoverlay.alpha+5, 255)
+		update_dirt()
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
