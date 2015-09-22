@@ -25,6 +25,15 @@
 	else
 		user << "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though."
 
+/obj/item/weapon/book/tome/afterattack(var/atom/A, var/mob/user, var/proximity)
+	if(!proximity || !iscultist(user))
+		return
+	if(A.reagents && A.reagents.has_reagent("holywater"))
+		user << "<span class='notice'>You unbless \the [A].</span>"
+		var/holy2water = A.reagents.get_reagent_amount("holywater")
+		A.reagents.del_reagent("holywater")
+		A.reagents.add_reagent("water", holy2water)
+
 /obj/item/weapon/book/tome/cultify()
 	return
 
@@ -34,7 +43,7 @@
 	var/cult_ground = 0
 	if(istype(get_active_hand(), /obj/item/weapon/book/tome) || istype(get_inactive_hand(), /obj/item/weapon/book/tome))
 		has_tome = 1
-	else if(tome_required)
+	else if(tome_required && mob_needs_tome())
 		src << "<span class='warning'>This rune is too complex to draw by memory, you need to have a tome in your hand to draw it.</span>"
 		return
 	if(istype(get_equipped_item(slot_head), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/cultrobes) && istype(get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
@@ -87,7 +96,7 @@
 		pay_for_rune(cost * damage)
 		if(locate(/obj/effect/rune) in T)
 			return
-		var/obj/effect/rune/R = new rune(T)
+		var/obj/effect/rune/R = new rune(T, get_rune_color(), get_blood_name())
 		var/area/A = get_area(R)
 		log_and_message_admins("created \an [R.cultname] rune at \the [A.name] - [loc.x]-[loc.y]-[loc.z].")
 		R.add_fingerprint(src)
@@ -107,6 +116,37 @@
 
 /mob/living/carbon/human/pay_for_rune(var/blood)
 	vessel.remove_reagent("blood", blood)
+
+/mob/proc/get_blood_name()
+	return "blood"
+
+/mob/living/silicon/get_blood_name()
+	return "oil"
+
+/mob/living/carbon/human/get_blood_name()
+	if(species)
+		if(istype(species, /datum/species/machine))
+			return "oil"
+		if(istype(species, /datum/species/diona))
+			return "sap"
+	return "blood"
+
+/mob/living/simple_animal/construct/get_blood_name()
+	return "ichor"
+
+/mob/proc/mob_needs_tome()
+	return 0
+
+/mob/living/carbon/human/mob_needs_tome()
+	return 1
+
+/mob/proc/get_rune_color()
+	return "#c80000"
+
+/mob/living/carbon/human/get_rune_color()
+	if(species && (species.flags & NO_BLOOD))
+		return ..()
+	return species.blood_color
 
 /mob/proc/convert_rune()
 	set category = "Cult Magic"
@@ -224,7 +264,7 @@
 		src << "<span class='warning'>Not when you are incapacitated.</span>"
 		return
 
-	visible_message("<span class='warning'>\The [src] cuts \his finger and starts drawing on the back of his hand.</span>") // TODO: move to human level
+	message_cult_communicate()
 	pay_for_rune(3)
 
 	var/input = input(src, "Please choose a message to tell to the other acolytes.", "Voice of Blood", "")
@@ -244,3 +284,9 @@
 		src << "<span class='warning'>You need at least your hands free to do this.</span>"
 		return
 	..()
+
+/mob/proc/message_cult_communicate()
+	return
+
+/mob/living/carbon/human/message_cult_communicate()
+	visible_message("<span class='warning'>\The [src] cuts \his finger and starts drawing on the back of his hand.</span>")

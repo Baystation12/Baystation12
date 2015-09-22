@@ -1,15 +1,36 @@
-var/list/sacrificed = list()
-
 /obj/effect/rune
 	name = "rune"
 	desc = "A strange collection of symbols drawn in blood."
 	anchored = 1
-	icon = 'icons/obj/rune.dmi'
-	icon_state = "1"
+	icon = 'icons/effects/uristrunes.dmi'
+	icon_state = "blank"
 	unacidable = 1
 	layer = TURF_LAYER
 
+	var/blood
+	var/strokes = 2 // IF YOU EVER SET THIS TO MORE THAN TEN, EVERYTHING WILL BREAK
 	var/cultname = ""
+
+/obj/effect/rune/New(var/loc, var/bcolor = "#c80000", var/nblood = "blood")
+	..()
+	if(cult.rune_strokes[type])
+		var/list/f = cult.rune_strokes[type]
+		for(var/i in f)
+			var/image/t = image('icons/effects/uristrunes.dmi', "rune-[i]")
+			overlays += t
+	else
+		var/list/q = list(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+		var/list/f = list()
+		for(var/i = 1 to strokes)
+			var/j = pick(q)
+			f += j
+			q -= f
+			var/image/t = image('icons/effects/uristrunes.dmi', "rune-[j]")
+			overlays += t
+		cult.rune_strokes[type] = f.Copy()
+	color = bcolor
+	blood = nblood
+	desc = "A strange collection of symbols drawn in [blood]."
 
 /obj/effect/rune/examine(var/mob/user)
 	..()
@@ -18,11 +39,11 @@ var/list/sacrificed = list()
 
 /obj/effect/rune/attackby(var/obj/item/I, var/mob/living/user)
 	if(istype(I, /obj/item/weapon/book/tome) && iscultist(user))
-		user.visible_message("<span class='notice'>[user] rubs \the [src] with \the [I], and \the [src] is absorbed by it.</span>", "You retrace your steps, carefully undoing the lines of the rune.")
+		user.visible_message("<span class='notice'>[user] rubs \the [src] with \the [I], and \the [src] is absorbed by it.</span>", "You retrace your steps, carefully undoing the lines of \the [src].")
 		qdel(src)
 		return
 	else if(istype(I, /obj/item/weapon/nullrod))
-		user.visible_message("<span class='notice'>[user] hits \the [src] with \the [I], and it disappears, fizzling.</span>", "<span class='notice'>You disrupt the vile magic with the deadening field of \the [I].</span>")
+		user.visible_message("<span class='notice'>[user] hits \the [src] with \the [I], and it disappears, fizzling.</span>", "<span class='notice'>You disrupt the vile magic with the deadening field of \the [I].</span>", "You hear a fizzle.")
 		qdel(src)
 		return
 
@@ -50,13 +71,10 @@ var/list/sacrificed = list()
 	for(var/mob/living/M in range(1))
 		if(iscultist(M))
 			. += M
-		. |= M //DEBUG, REMOVE BEFORE RELEASING
+		. |= M //DEBUG, REMOVE BEFORE RELEASING//TODO
 
 /obj/effect/rune/proc/fizzle(var/mob/living/user)
-	visible_message("<span class='warning'>The markings pulse with a small burst of light, then fall dark.</span>", "You hear a faint fizzle.")
-
-	//obj/effect/rune/proc/check_icon()
-		//icon = get_uristrune_cult(word1, word2, word3)
+	visible_message("<span class='warning'>The markings pulse with a small burst of light, then fall dark.</span>", "You hear a fizzle.")
 
 /obj/effect/rune/cultify()
 	return
@@ -85,7 +103,7 @@ var/list/sacrificed = list()
 
 	if(!cult.can_become_antag(target.mind) || jobban_isbanned(target, "cultist"))
 		target << "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>"
-		target << "<span class='danger'>And you were able to force it out of your mind. You now know the truth, there's something horrible out there, stop it and its minions at all costs.</span>" //TODO: remove meta
+		target << "<span class='danger'>Are you going insane?</span>"
 	else
 		target << "<span class='cult'>Do you want to join the cult of Nar'Sie? <a href='?src=\ref[src];join=1'>YES</a></span>"
 
@@ -123,8 +141,16 @@ var/list/sacrificed = list()
 	var/destination
 
 /obj/effect/rune/teleport/New()
+	..()
 	var/area/A = get_area(src)
 	destination = A.name
+	cult.teleport_runes += src
+
+/obj/effect/rune/teleport/Destroy()
+	cult.teleport_runes -= src
+	var/turf/T = get_turf(src)
+	for(var/atom/movable/A in contents)
+		A.forceMove(T)
 
 /obj/effect/rune/teleport/examine(var/mob/user)
 	..()
@@ -132,15 +158,61 @@ var/list/sacrificed = list()
 		user << "Its name is [destination]."
 
 /obj/effect/rune/teleport/cast(var/mob/living/user)
-	if(user.loc == get_turf(src))
+	if(user.loc == src)
+		showOptions(user)
+	else if(user.loc == get_turf(src))
 		user.say("Sas[pick("'","`")]so c'arta forbici!")
-		user.visible_message("<span class='warning'>\The [user] disappears in a flash of red light!</span>", "<span class='warning'>You feel as your body gets dragged through the dimension of Nar-Sie!</span>", "You hear a sickening crunch.")
-		// TODO: actually teleport them
+		if(do_after(user, 30))
+			user.visible_message("<span class='warning'>\The [user] disappears in a flash of red light!</span>", "<span class='warning'>You feel as your body gets dragged into the dimension of Nar-Sie!</span>", "You hear a sickening crunch.")
+			user.forceMove(src)
+			showOptions(user)
+			while(user.loc == src)
+				var/warning = 0
+				user.take_organ_damage(0, 2)
+				if(user.getFireLoss() > 50)
+					user << "<span class='danger'>Your body can't handle the heat anymore!</span>"
+					leaveRune(user)
+					return
+				if(warning == 0)
+					user << "<span class='warning'>You feel the immerse heat of the realm of Nar-Sie...</span>"
+					++warning
+				if(warning == 1 && user.getFireLoss() > 15)
+					user << "<span class='warning'>Your burns are getting worse. You should return to your realm soon...</span>"
+					++warning
+				if(warning == 2 && user.getFireLoss() > 35)
+					user << "<span class='warning'>The heat! It burns!</span>"
+					++warning
+				sleep(10)
 	else
 		var/input = input(user, "Choose a new rune name.", "Destination", "")
 		if(!input)
 			return
 		destination = sanitize(input)
+
+/obj/effect/rune/teleport/Topic(href, href_list)
+	if(usr.loc != src)
+		return
+	if(href_list["target"])
+		var/obj/effect/rune/teleport/targ = locate(href_list["target"])
+		if(istype(targ)) // Checks for null, too
+			usr.forceMove(targ)
+			targ.showOptions(usr)
+	else if(href_list["leave"])
+		leaveRune(usr)
+
+/obj/effect/rune/teleport/proc/showOptions(var/mob/living/user)
+	var/list/t = list()
+	for(var/obj/effect/rune/teleport/T in cult.teleport_runes)
+		if(T == src)
+			continue
+		t += "<a href='?src=\ref[src];target=\ref[T]'>[T.destination]</a>"
+	user << "Teleport runes: [english_list(t, nothing_text = "no other runes exist")]... or <a href='?src=\ref[src];leave=1'>return here</a>."
+
+/obj/effect/rune/teleport/proc/leaveRune(var/mob/living/user)
+	if(user.loc != src)
+		return
+	user.forceMove(get_turf(src))
+	user.visible_message("<span class='warning'>\The [user] appears in a flash of red light!</span>", "<span class='warning'>You feel as your body gets thrown out of the dimension of Nar-Sie!</span>", "You hear a pop.")
 
 /obj/effect/rune/tome
 	cultname = "summon tome"
@@ -217,7 +289,13 @@ var/list/sacrificed = list()
 		qdel(src)
 	else if(I.force)
 		user.visible_message("<span class='notice'>\The [user] hits \the [src] with \the [I].</span>", "<span class='notice'>You hit \the [src] with \the [I].</span>")
-		take_damage(I.force)//TODO: bullet_act and hitby
+		take_damage(I.force)
+
+/obj/effect/cultwall/bullet_act(var/obj/item/projectile/Proj)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		return
+	take_damage(Proj.damage)
+	..()
 
 /obj/effect/cultwall/proc/take_damage(var/amount)
 	health -= amount
@@ -257,7 +335,7 @@ var/list/sacrificed = list()
 
 /obj/effect/rune/defile/cast(var/mob/living/user)
 	user.say("Ia! Ia! Zasan therium viortia.")
-	for(var/turf/T in range(1))
+	for(var/turf/T in range(1, src))
 		T.cultify()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
 	qdel(src)
@@ -266,6 +344,7 @@ var/list/sacrificed = list()
 
 /obj/effect/rune/armor
 	cultname = "summon robes"
+	strokes = 3
 
 /obj/effect/rune/armor/cast(var/mob/living/user)
 	user.say("N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")
@@ -280,26 +359,33 @@ var/list/sacrificed = list()
 	O = user.get_equipped_item(slot_shoes)
 	if(O)
 		user.unEquip(O)
-	O = user.get_equipped_item(slot_back)
-	if(istype(O, /obj/item/weapon/storage)) // We don't want to make the vox drop their nitrogen tank, though
-		user.unEquip(O)
 
 	user.equip_to_slot_or_del(new /obj/item/clothing/head/culthood/alt(user), slot_head)
 	user.equip_to_slot_or_del(new /obj/item/clothing/suit/cultrobes/alt(user), slot_wear_suit)
 	user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes)
-	user.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/cultpack(user), slot_back)
+
+	O = user.get_equipped_item(slot_back)
+	if(istype(O, /obj/item/weapon/storage)) // We don't want to make the vox drop their nitrogen tank, though
+		user.unEquip(O)
+		var/obj/item/weapon/storage/backpack/cultpack/C = new /obj/item/weapon/storage/backpack/cultpack(user)
+		user.equip_to_slot_or_del(C, slot_back)
+		if(C)
+			for(var/obj/item/I in O)
+				I.forceMove(C)
+
 	user.update_icons()
 
 	qdel(src)
 
 /obj/effect/rune/sacrifice
 	cultname = "sacrifice"
+	strokes = 3
 
 /obj/effect/rune/sacrifice/cast(var/mob/living/user)
 	var/list/mob/living/cultists = get_cultists()
 	if(cultists.len < 3)
 		user << "<span class='warning'>You need three cultists around this rune to make it work.</span>"
-		//return fizzle(user)
+		return fizzle(user)
 	var/turf/T = get_turf(src)
 	var/mob/living/victim
 	for(var/mob/living/M in T)
@@ -319,23 +405,28 @@ var/list/sacrificed = list()
 		//T.turf_animation('icons/effects/effects.dmi', "rune_sac")
 		victim.fire_stacks = max(2, victim.fire_stacks)
 		victim.IgniteMob()
-		victim.take_organ_damage(5, 5) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
+		victim.take_organ_damage(2 + casters.len, 2 + casters.len) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
 		switch(victim.health)
 			if(50 to INFINITY)
-				world << "<span class='danger'>Your flesh burns!</span>"//TODO: DON'T FORGET TO CHANGE IT TO VICTIM
+				victim << "<span class='danger'>Your flesh burns!</span>"
 			if(0 to 50)
-				world << "<span class='danger'>You feel as if your body is rippened apart and burned!</span>"
+				victim << "<span class='danger'>You feel as if your body is rippened apart and burned!</span>"
 			if(-INFINITY to 0)
-				world << "<span class='danger'>!</span>" // TODO goddamn this is hard
+				victim << "<span class='danger'>!</span>" // TODO goddamn this is hard
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
-		cult.add_cultiness(25)
+		cult.add_cultiness(CULTINESS_PER_SACRIFICE)
 		var/obj/item/device/soulstone/full/F = new(get_turf(src))
 		for(var/mob/M in cultists | get_cultists())
 			M << "<span class='warning'>The Geometer of Blood accepts this sacrifice.</span>"
 		visible_message("<span class='notice'>\The [F] appears over \the [src].</span>")
-		//TODO: handle sac target, other rewards?
-		/*
+		cult.sacrificed += victim.mind
+		if(victim.mind == cult.sacrifice_target)
+			for(var/datum/mind/H in cult.current_antagonists)
+				if(H.current)
+					H.current << "<span class='cult'>Your objective is now complete.</span>"
+		//TODO: other rewards?
+		/* old sac code - left there in case someone wants to salvage it
 		var/worth = 0
 		if(istype(H,/mob/living/carbon/human))
 			var/mob/living/carbon/human/lamb = H
@@ -354,13 +445,14 @@ var/list/sacrificed = list()
 		usr << "<span class='warning'>The Geometer of blood accepts this sacrifice.</span>"
 		usr << "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>"
 		*/
-		world << "<span class='cult'>The Geometer of Blood claims your body.</span>" //TODO: DON'T FORGET TO CHANGE IT TO VICTIM
+		victim << "<span class='cult'>The Geometer of Blood claims your body.</span>" //TODO: DON'T FORGET TO CHANGE IT TO VICTIM
 		victim.dust()
 	victim.ExtinguishMob() // Technically allows them to put the fire out by sacrificing them and stopping immediately, but I don't think it'd have much effect
 
 /obj/effect/rune/manifest
 	cultname = "manifest"
 	var/mob/living/carbon/human/puppet = null
+	strokes = 3
 
 /obj/effect/rune/manifest/Destroy()
 	if(puppet)
@@ -383,27 +475,26 @@ var/list/sacrificed = list()
 		ghost = O
 		break
 	if(!ghost)
-		return fizzle(user)
+		//return fizzle(user)
 	user.say("Gal'h'rfikk harfrandid mud[pick("'","`")]gib!")
-	puppet = new /mob/living/carbon/human(get_turf(src)) // TODO: give them their own species
 	visible_message("<span class='warning'>A shape forms in the center of the rune. A shape of... a man.</span>", "You hear liquid flow.")
-	puppet.real_name = pick("Anguished", "Blasphemous", "Corrupt", "Cruel", "Depraved", "Despicable", "Disturbed", "Exacerbated", "Foul", "Hateful", "Inexorable", "Implacable", "Impure", "Malevolent", "Malignant", "Malicious", "Pained", "Profane", "Profligate", "Relentless", "Resentful", "Restless", "Spiteful", "Tormented", "Unclean", "Unforgiving", "Vengeful", "Vindictive", "Wicked", "Wronged")
-	puppet.real_name += " "
-	puppet.real_name += pick("Apparition", "Aptrgangr", "Dis", "Draugr", "Dybbuk", "Eidolon", "Fetch", "Fylgja", "Ghast", "Ghost", "Gjenganger", "Haint", "Phantom", "Phantasm", "Poltergeist", "Revenant", "Shade", "Shadow", "Soul", "Spectre", "Spirit", "Spook", "Visitant", "Wraith")
-	puppet.universal_speak = 1
-	puppet.s_tone = 35
-	puppet.b_eyes = 200
-	puppet.r_eyes = 200
-	puppet.g_eyes = 200
-	puppet.update_eyes()
-	puppet.underwear = 0
-	puppet.key = ghost.key
-	cult.add_antagonist(puppet.mind)
+	puppet = new(get_turf(src))
+	puppet.set_species("Cult")
+	puppet.name = puppet.species.get_random_name()
+	//puppet.key = ghost.key
+	//cult.add_antagonist(puppet.mind)
 
 	log_and_message_admins("used a manifest rune.")
 
+	var/image/I = image('icons/effects/effects.dmi', "rune_sac")
+	overlays += I
+	while(puppet)
+		sleep(10)
+	overlays.Cut()
+
 /obj/effect/rune/drain
 	cultname = "blood drain"
+	strokes = 3
 
 /obj/effect/rune/drain/cast(var/mob/living/user)
 	var/mob/living/carbon/human/victim
@@ -416,14 +507,13 @@ var/list/sacrificed = list()
 	if(!victim)
 		return fizzle(user)
 	if(!victim.vessel.has_reagent("blood", 20))
-		user << "<span class='warning'>This body has no blood left.</span>"
+		user << "<span class='warning'>This body has no blood in it.</span>"
 		return fizzle(user)
 	victim.vessel.remove_reagent("blood", 20)
-	// TODO: drain blood
 	admin_attack_log(user, victim, "Used a blood drain rune.", "Was victim of a blood drain rune.", "used a blood drain rune on")
 	victim << "<span class='danger'>You feel weakened.</span>"
 	user.say("Yu[pick("'","`")]gular faras desdae. Havas mithum javara. Umathar uf'kal thenar!")
-	user.visible_message("<span class='warning'>Blood flows from \the [src] into \the [user]!</span>", "<span class='cult'>The blood starts flowing from \the [src] into your frail mortal body. You feel... empowered. [capitalize(english_list(heal_user(user)))].</span>", "You hear liquid flow.")
+	user.visible_message("<span class='warning'>Blood flows from \the [src] into \the [user]!</span>", "<span class='cult'>The blood starts flowing from \the [src] into your frail mortal body. [capitalize(english_list(heal_user(user)))].</span>", "You hear liquid flow.")
 
 /obj/effect/rune/drain/proc/heal_user(var/mob/living/carbon/human/user)
 	if(!istype(user))
@@ -436,7 +526,7 @@ var/list/sacrificed = list()
 		if(use)
 			user.vessel.add_reagent("blood", use)
 			charges -= use
-			statuses += "you feel warmer, regaining lost blood"
+			statuses += "you regain lost blood"
 			if(!charges)
 				return statuses
 	if(user.getBruteLoss() || user.getFireLoss())
@@ -480,7 +570,7 @@ var/list/sacrificed = list()
 		if(I.damage)
 			damaged += I
 	if(damaged.len)
-		statuses += "you feel pain inside for a moment, it passes"
+		statuses += "you feel pain inside for a moment that passes quickly"
 		while(charges && damaged.len)
 			var/obj/item/organ/fix = pick(damaged)
 			fix.damage = max(0, fix.damage - min(charges, 1))
@@ -500,19 +590,24 @@ var/list/sacrificed = list()
 	metabolism = REM * 0.1
 
 /datum/reagent/hell_water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	M.AdjustParalysis(-1)
-	M.AdjustStunned(-1)
-	M.AdjustWeakened(-1)
-	M.add_chemical_effect(CE_PAINKILLER, 40)
-	M.add_chemical_effect(CE_SPEEDBOOST, 1)
-	M.adjustOxyLoss(-10 * removed)
-	M.heal_organ_damage(5 * removed, 5 * removed)
-	M.adjustToxLoss(-5 * removed)
+	if(iscultist(M))
+		M.AdjustParalysis(-1)
+		M.AdjustStunned(-1)
+		M.AdjustWeakened(-1)
+		M.add_chemical_effect(CE_PAINKILLER, 40)
+		M.add_chemical_effect(CE_SPEEDBOOST, 1)
+		M.adjustOxyLoss(-10 * removed)
+		M.heal_organ_damage(5 * removed, 5 * removed)
+		M.adjustToxLoss(-5 * removed)
+	else
+		M.fire_stacks = max(2, M.fire_stacks)
+		M.IgniteMob()
 
 /* Tier 3 runes */
 
 /obj/effect/rune/weapon
 	cultname = "summon weapon"
+	strokes = 4
 
 /obj/effect/rune/weapon/cast(var/mob/living/user)
 	if(!istype(user.get_equipped_item(slot_head), /obj/item/clothing/head/culthood) || !istype(user.get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/cultrobes) || !istype(user.get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
@@ -528,6 +623,7 @@ var/list/sacrificed = list()
 
 /obj/effect/rune/shell
 	cultname = "summon shell"
+	strokes = 4
 
 /obj/effect/rune/shell/cast(var/mob/living/user)
 	var/turf/T = get_turf(src)
@@ -553,6 +649,7 @@ var/list/sacrificed = list()
 
 /obj/effect/rune/confuse
 	cultname = "confuse"
+	strokes = 4
 
 /obj/effect/rune/confuse/cast(var/mob/living/user)
 	user.say("Fuu ma[pick("'","`")]jin!")
@@ -579,6 +676,7 @@ var/list/sacrificed = list()
 
 /obj/effect/rune/revive
 	cultname = "revive"
+	strokes = 4
 
 /obj/effect/rune/revive/cast(var/mob/living/user)
 	var/mob/living/carbon/human/target
@@ -592,18 +690,19 @@ var/list/sacrificed = list()
 	if(!target)
 		return fizzle(user)
 	for(var/obj/item/device/soulstone/S in get_turf(src))
-		if(S.full && !S.shade)
+		if(S.full && !S.shade.key)
 			source = S
 			break
 	if(!source)
 		return fizzle(user)
 	target.rejuvenate()
-	qdel(source)
+	source.set_full(0)
 	user.say("Pasnar val'keriam usinar. Savrae ines amutan. Yam'toth remium il'tarat!")
 	target.visible_message("<span class='warning'>\The [target]'s eyes glow with a faint red as \he stands up, slowly starting to breathe again.</span>", "<span class='warning'>Life... I'm alive again...</span>", "You hear liquid flow.")
 
 /obj/effect/rune/blood_boil
 	cultname = "blood boil"
+	strokes = 4
 
 /obj/effect/rune/blood_boil/cast(var/mob/living/user)
 	var/list/mob/living/cultists = get_cultists()
@@ -628,8 +727,9 @@ var/list/sacrificed = list()
 /obj/effect/rune/tearreality
 	cultname = "tear reality"
 	var/the_end_comes = 0
-	var/the_time_has_come = 120//TODO: 300
+	var/the_time_has_come = 300
 	var/obj/singularity/narsie/large/HECOMES = null
+	strokes = 9
 
 /obj/effect/rune/tearreality/cast(var/mob/living/user)
 	if(!cult.allow_narsie)
@@ -642,10 +742,13 @@ var/list/sacrificed = list()
 	log_and_message_admins_many(cultists, "started summoning Nar-sie.")
 
 	var/area/A = get_area(src)
-	command_announcement.Announce("Attention, shit's fucked. [A]") // TODO: better message
-	set_security_level("delta")
+	command_announcement.Announce("High levels of bluespace interference detected at \the [A] of [station_name]. Suspected wormhole forming. Delta alert activated.")
+	var/tmplevel = security_level
+	set_security_level(SEC_LEVEL_DELTA)
 	while(cultists.len > 4 || the_end_comes)
 		cultists = get_cultists()
+		if(cultists.len > 8)
+			++the_end_comes
 		if(cultists.len > 4)
 			++the_end_comes
 		else
@@ -653,7 +756,7 @@ var/list/sacrificed = list()
 		if(the_end_comes >= the_time_has_come)
 			break
 		for(var/mob/living/M in cultists)
-			if(prob(3))
+			if(prob(5))
 				M.say(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix."))
 
 		for(var/turf/T in range(min(the_end_comes, 15)))
@@ -664,8 +767,8 @@ var/list/sacrificed = list()
 	if(the_end_comes >= the_time_has_come)
 		HECOMES = new /obj/singularity/narsie/large(get_turf(src))
 	else
-		command_announcement.Announce("Attention, shit's calmed.") // TODO: better message
-		set_security_level("blue")
+		command_announcement.Announce("Bluespace anomaly has ceased. Resetting security level.")
+		set_security_level(tmplevel)
 		qdel(src)
 
 /obj/effect/rune/tearreality/attack_hand(var/mob/living/user)
@@ -673,9 +776,16 @@ var/list/sacrificed = list()
 	if(HECOMES && !iscultist(user))
 		user.say("Uhrast ka'hfa heldsagen ver[pick("'","`")]lot!")
 		user.visible_message("<span class='warning'>\The [user] keels over dead, his blood glowing blue as it escapes his body and dissipates into thin air.</span>", "<span class='warning'>In the last moment of your humble life, you feel an immense pain as fabric of reality mends... with your blood.</span>", "You hear faint rustle.")
+		log_and_message_admins("mended reality with the greatest sacrifice", user)
 		user.dust()
 		qdel(HECOMES)
+		qdel(src)
 		return
+
+/obj/effect/rune/tearreality/attackby()
+	if(the_end_comes)
+		return
+	..()
 
 /* Imbue runes */
 

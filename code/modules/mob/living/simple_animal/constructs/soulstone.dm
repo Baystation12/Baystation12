@@ -11,12 +11,18 @@
 	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 4)
 
-	var/full = 0
+	var/full = 0 // 0 = empty, 1 = has essence, -1 = cracked
 	var/is_evil = 1
 	var/mob/living/simple_animal/shade = null
+	var/smashing = 0
 
 /obj/item/device/soulstone/full
 	full = 1
+	icon_state = "soulstone2"
+
+/obj/item/device/soulstone/New()
+	..()
+	shade = new /mob/living/simple_animal/shade(src)
 
 /obj/item/device/soulstone/Destroy()
 	if(shade)
@@ -30,26 +36,62 @@
 		user << "<span class='notice'>You cleanse \the [src] of the taint.</span>"
 		is_evil = 0
 		return
+	if(I.force > 10)
+		if(!smashing)
+			user << "<span class='notice'>\The [src] looks fragile. Are you sure you want to smash it? If so, hit it again.</span>"
+			smashing = 1
+			spawn(20)
+				smashing = 0
+			return
+		user.visible_message("<span class='warning'>\The [user] hits \the [src] with \the [I], and it breaks.[shade.client ? " You hear a terrible scream!" : ""]", "<span class='warning'>You hit \the [src] with \the [I], and it breaks.[shade.client ? " You hear a terrible scream!" : ""]", shade.client ? "You hear a scream." : null)
+		set_full(-1)
 
-/obj/item/device/soulstone/attack(var/mob/living/simple_animal/shade/S, var/mob/user)
-	if(S == shade)
-		user << "<span class='notice'>You recapture \the [S].</span>"
-		S.forceMove(src)
+/obj/item/device/soulstone/attack(var/mob/living/M, var/mob/user)
+	if(M == shade)
+		user << "<span class='notice'>You recapture \the [M].</span>"
+		M.forceMove(src)
 		return
+	if(shade.key || full == 1)
+		user << "<span class='notice'>\The [src] is already full.</span>"
+		return
+	if(M.stat == CONSCIOUS || M.health + M.halloss > config.health_threshold_crit)
+		user << "<span class='notice'>Kill or main the victim first.</span>"
+		return
+	for(var/obj/item/W in M)
+		M.drop_from_inventory(W)
+	new /obj/effect/decal/remains/human(M.loc)
+	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their soul captured with \the [src] by [user.name] ([user.ckey])</font>")
+	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used \the [src] to capture the soul of [M.name] ([M.ckey])</font>")
+	msg_admin_attack("[user.name] ([user.ckey]) used \the [src] to capture the soul of [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+	M.dust()
 
 /obj/item/device/soulstone/attack_self(var/mob/user)
-	if(!full)
+	if(full != 1)
 		user << "<span class='notice'>This [src] has no life essence.</span>"
 		return
-	if(!shade)
+	if(!shade.key)
 		user << "<span class='notice'>You cut your finger and let the blood drip on \the [src].</span>"
 		user.pay_for_rune(1)
 		var/datum/ghosttrap/cult/shade/S = get_ghost_trap("soul stone")
-		S.request_player(src, "The soul stone shade summon ritual has been performed. ")
+		S.request_player(shade, "The soul stone shade summon ritual has been performed. ")
+	else if(!shade.client)
+		user << "<span class='notice'>\The [shade] in \the [src] is dormant.</span>"
+		return
 	else if(shade.loc == src)
 		shade.forceMove(get_turf(src))
 		user << "<span class='notice'>You summon \the [shade].</span>"
 		return
+
+/obj/item/device/soulstone/proc/set_full(var/f)
+	full = f
+	if(full == 0 || full == -1)
+		icon_state = "soulstone"
+	if(full == 1)
+		icon_state = "soulstone2"
+	if(full == -1)
+		icon_state = "soulstone"//TODO: cracked sprite
+		name = "cracked soulstone"
+		desc += " This one is cracked and useless."
 
 /obj/structure/constructshell
 	name = "empty shell"
@@ -91,8 +133,6 @@
 							S.loc = C //put shade in stone
 							S.status_flags |= GODMODE //So they won't die inside the stone somehow
 							S.canmove = 0//Can't move out of the soul stone
-							S.name = "Shade of [T.real_name]"
-							S.real_name = "Shade of [T.real_name]"
 							S.icon = T.icon
 							S.icon_state = T.icon_state
 							S.overlays = T.overlays

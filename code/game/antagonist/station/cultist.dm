@@ -1,6 +1,7 @@
 #define CULTINESS_PER_CULTIST 20
+#define CULTINESS_PER_SACRIFICE 20
 #define CULTINESS_PER_TURF 10
-//TODO: change to 2
+//TODO: ^change to 2
 
 var/datum/antagonist/cultist/cult
 
@@ -30,9 +31,11 @@ var/datum/antagonist/cultist/cult
 	max_antags_round = 200
 	var/allow_narsie = 1
 
+	var/list/obj/effect/rune/teleport/teleport_runes = list()
+	var/list/rune_strokes = list()
+
 	var/datum/mind/sacrifice_target
-	var/list/sacrificed = list()
-	var/list/harvested = list()
+	var/list/sacrificed
 	var/cult_rating = 0
 	var/cult_level = 1
 	var/conversion_blurb = "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back."
@@ -75,11 +78,12 @@ var/datum/antagonist/cultist/cult
 		if(T.loc == player)
 			break
 	var/obj/item/weapon/storage/S = locate() in player.contents
-	if(S && istype(S))
+	if(istype(S))
 		T.loc = S
 
-	player.verbs += /mob/proc/set_cult_conversion_blurb
-	player.verbs += /mob/proc/cult_ooc
+	if(cult_level < 2)
+		player.verbs += /mob/proc/set_cult_conversion_blurb
+		player.verbs += /mob/proc/cult_ooc
 
 /datum/antagonist/cultist/greet(var/datum/mind/player)
 	if(!..())
@@ -98,14 +102,6 @@ var/datum/antagonist/cultist/cult
 	. = ..()
 	if(.)
 		player << "<span class='cult'>[conversion_blurb]</span>"
-
-/datum/antagonist/cultist/can_become_antag(var/datum/mind/player)
-	if(!..())
-		return 0
-	for(var/obj/item/weapon/implant/loyalty/L in player.current)
-		if(L && (L.imp_in == player.current))
-			return 0
-	return 1
 
 /datum/antagonist/cultist/update_antag_mob(var/datum/mind/player)
 	..()
@@ -138,6 +134,16 @@ var/datum/antagonist/cultist/cult
 				add_cult_magic(H.current)
 		for(var/mob/dead/observer/D)
 			add_ghost_magic(D)
+
+/datum/antagonist/cultist/proc/offer_uncult(var/mob/M)
+	if(!iscultist(M) || !M.mind)
+		return
+
+	M << "<span class='cult'>Do you want to abandon the cult of Nar'Sie? <a href='?src=\ref[src];confirmleave=1'>YOU ARE MAKING A MISTAKE</a></span>"
+
+/datum/antagonist/cultist/Topic(href, href_list)
+	if(href_list["confirmleave"])
+		cult.remove_antagonist(usr.mind, 1)
 
 /datum/antagonist/cultist/proc/remove_cultiness(var/amount)
 	cult_rating -= amount
@@ -178,10 +184,36 @@ var/datum/antagonist/cultist/cult
 
 /datum/antagonist/cultist/proc/remove_cult_magic(var/mob/M)
 	M.verbs -= /mob/proc/convert_rune
+	M.verbs -= /mob/proc/teleport_rune
+	M.verbs -= /mob/proc/tome_rune
+	M.verbs -= /mob/proc/wall_rune
+	M.verbs -= /mob/proc/ajorney_rune
+	M.verbs -= /mob/proc/defile_rune
+
+	M.verbs -= /mob/proc/armor_rune
+	M.verbs -= /mob/proc/sacrifice_rune
+	M.verbs -= /mob/proc/manifest_rune
+	M.verbs -= /mob/proc/drain_rune
+
+	M.verbs -= /mob/proc/set_cult_conversion_blurb
+	M.verbs -= /mob/proc/cult_ooc
+
+	M.verbs -= /mob/proc/weapon_rune
+	M.verbs -= /mob/proc/shell_rune
+	M.verbs -= /mob/proc/bloodboil_rune
+	M.verbs -= /mob/proc/confuse_rune
+	M.verbs -= /mob/proc/revive_rune
+
+	M.verbs -= /mob/proc/tearreality_rune
+
+	M.verbs -= /mob/proc/stun_imbue
+	M.verbs -= /mob/proc/emp_imbue
+
+	M.verbs -= /mob/proc/cult_communicate
 
 /mob/proc/set_cult_conversion_blurb()
 	set name = "Set conversion blurb"
-	set desc = "Sets a blurb that appears to fresh converts. This is only for providing fluff, do not put any round information here. This will be removed once you hit the second stage."
+	set desc = "Sets a blurb that appears to fresh converts. This is only for providing fluff, do not put any round information here. This verb will be removed once you hit the second cult stage."
 	set category = "OOC"
 
 	if(!iscultist(src))
@@ -200,7 +232,7 @@ var/datum/antagonist/cultist/cult
 
 /mob/proc/cult_ooc(var/msg as text)
 	set name = "Cult OOC"
-	set desc = "Allows you to communicate with other cultists OOCly. Do not use it to reveal any round-related information. This is purely for the fluff discussion. This will be removed once you hit the second stage."
+	set desc = "Allows you to communicate with other cultists OOCly. Do not use it to reveal any round-related information. This is purely for the fluff discussion. This verb will be removed once you hit the second cult stage."
 	set category = "OOC"
 
 	msg = sanitize(msg)
