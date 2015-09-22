@@ -316,7 +316,7 @@
 	desc = "A box containing 5 experimental photon disruption grenades."
 	icon_state = "flashbang"
 
-/obj/item/weapon/storage/box/anti_photon/New()
+/obj/item/weapon/storage/box/anti_photons/New()
 		..()
 		new /obj/item/weapon/grenade/anti_photon(src)
 		new /obj/item/weapon/grenade/anti_photon(src)
