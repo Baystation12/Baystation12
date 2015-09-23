@@ -422,7 +422,7 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 				var/cid = select_query.item[15]
 
 				// true if this ban has expired
-				var/auto = now > expiration // oh how I love ISO 8601 (ish) date strings
+				var/auto = (bantype in list("TEMPBAN", "JOB_TEMPBAN")) && now > expiration // oh how I love ISO 8601 (ish) date strings
 
 				var/lcolor = blcolor
 				var/dcolor = bdcolor
@@ -469,7 +469,7 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 					output += "<tr bgcolor='[dcolor]'>"
 					output += "<td align='center' colspan='5' bgcolor=''><b>UNBANNED by admin [unbanckey] on [unbantime]</b></td>"
 					output += "</tr>"
-				if(auto)
+				else if(auto)
 					output += "<tr bgcolor='[dcolor]'>"
 					output += "<td align='center' colspan='5' bgcolor=''><b>EXPIRED at [expiration]</b></td>"
 					output += "</tr>"
