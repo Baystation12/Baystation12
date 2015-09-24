@@ -43,6 +43,14 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Security"
 	hidden = 1
 
+/datum/supply_packs/evarig
+	name = "EVA suit control module"
+	contains = list(/obj/item/weapon/rig/eva)
+	cost = 50
+	containertype = /obj/structure/closet/crate
+	containername = "EVA Suit Control Module Crate"
+	group = "Operations"
+
 /datum/supply_packs/food
 	name = "Kitchen supply crate"
 	contains = list(/obj/item/weapon/reagent_containers/food/condiment/flour,
