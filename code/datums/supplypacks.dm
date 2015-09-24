@@ -46,9 +46,49 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/evarig
 	name = "EVA suit control module"
 	contains = list(/obj/item/weapon/rig/eva)
-	cost = 50
+	cost = 30
 	containertype = /obj/structure/closet/crate
 	containername = "EVA Suit Control Module Crate"
+	group = "Operations"
+
+/datum/supply_packs/ai_container
+	name = "RIG AI container module"
+	contains = list(/obj/item/rig_module/ai_container)
+	cost = 20
+	containertype = /obj/structure/closet/crate
+	containername = "RIG AI Container Crate"
+	group = "Operations"
+
+/datum/supply_packs/maneuvering_jet
+	name = "RIG maneuvering jet module"
+	contains = list(/obj/item/rig_module/maneuvering_jets)
+	cost = 10
+	containertype = /obj/structure/closet/crate
+	containername = "RIG Maneuvering Jet Crate"
+	group = "Operations"
+
+/datum/supply_packs/healthscanner
+	name = "RIG health scanner module"
+	contains = list(/obj/item/rig_module/device/healthscanner)
+	cost = 10
+	containertype = /obj/structure/closet/crate
+	containername = "RIG Health Scanner Crate"
+	group = "Operations"
+
+/datum/supply_packs/anomaly_scanner
+	name = "RIG anomaly scanner module"
+	contains = list(/obj/item/rig_module/device/anomaly_scanner)
+	cost = 10
+	containertype = /obj/structure/closet/crate
+	containername = "RIG Anomaly Scanner Crate"
+	group = "Operations"
+
+/datum/supply_packs/rigrcd
+	name = "RIG RCD module"
+	contains = list(/obj/item/rig_module/device/rcd)
+	cost = 10
+	containertype = /obj/structure/closet/crate
+	containername = "RIG RCD Crate"
 	group = "Operations"
 
 /datum/supply_packs/food
