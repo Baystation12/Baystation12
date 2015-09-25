@@ -171,7 +171,7 @@ var/list/mob_hat_cache = list()
 
 			user.visible_message("<span class='danger'>\The [user] swipes \his ID card through \the [src], attempting to reboot it.</span>", "<span class='danger'>>You swipe your ID card through \the [src], attempting to reboot it.</span>")
 			var/drones = 0
-			for(var/mob/living/silicon/robot/drone/D in world)
+			for(var/mob/living/silicon/robot/drone/D in silicon_mob_list)
 				if(D.key && D.client)
 					drones++
 			if(drones < config.max_maint_drones)

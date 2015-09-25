@@ -1,6 +1,7 @@
 #define DRYING_TIME 5 * 60*10                        //for 1 unit of depth in puddle (amount var)
 
 var/global/list/image/splatter_cache=list()
+var/global/list/blood_decals = list()
 
 /obj/effect/decal/cleanable/blood
 	name = "blood"
@@ -23,6 +24,7 @@ var/global/list/image/splatter_cache=list()
 	var/drytime
 
 /obj/effect/decal/cleanable/blood/Destroy()
+	blood_decals -= src
 	for(var/datum/disease/D in viruses)
 		D.cure(0)
 	processing_objects -= src
@@ -42,6 +44,7 @@ var/global/list/image/splatter_cache=list()
 					qdel(B)
 	drytime = world.time + DRYING_TIME * (amount+1)
 	processing_objects += src
+	blood_decals += src
 
 /obj/effect/decal/cleanable/blood/process()
 	if(world.time > drytime)

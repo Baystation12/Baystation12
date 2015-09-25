@@ -1,7 +1,16 @@
+var/global/list/runes = list()
 var/list/sacrificed = list()
 
 /obj/effect/rune/cultify()
 	return
+
+/obj/effect/rune/New()
+	runes += src
+	..()
+
+/obj/effect/rune/Destroy()
+	runes -= src
+	return ..()
 
 /obj/effect/rune
 
@@ -21,7 +30,7 @@ var/list/sacrificed = list()
 			allrunesloc = new/list()
 			var/index = 0
 		//	var/tempnum = 0
-			for(var/obj/effect/rune/R in world)
+			for(var/obj/effect/rune/R in runes)
 				if(R == src)
 					continue
 				if(R.word1 == cultwords["travel"] && R.word2 == cultwords["self"] && R.word3 == key && isPlayerLevel(R.z))
@@ -59,7 +68,7 @@ var/list/sacrificed = list()
 			var/runecount = 0
 			var/obj/effect/rune/IP = null
 			var/mob/living/user = usr
-			for(var/obj/effect/rune/R in world)
+			for(var/obj/effect/rune/R in runes)
 				if(R == src)
 					continue
 				if(R.word1 == cultwords["travel"] && R.word2 == cultwords["other"] && R.word3 == key)
@@ -225,7 +234,7 @@ var/list/sacrificed = list()
 
 		drain()
 			var/drain = 0
-			for(var/obj/effect/rune/R in world)
+			for(var/obj/effect/rune/R in runes)
 				if(R.word1==cultwords["travel"] && R.word2==cultwords["blood"] && R.word3==cultwords["self"])
 					for(var/mob/living/carbon/D in R.loc)
 						if(D.stat!=2)
@@ -311,7 +320,7 @@ var/list/sacrificed = list()
 
 			is_sacrifice_target = 0
 			find_sacrifice:
-				for(var/obj/effect/rune/R in world)
+				for(var/obj/effect/rune/R in runes)
 					if(R.word1==cultwords["blood"] && R.word2==cultwords["join"] && R.word3==cultwords["hell"])
 						for(var/mob/living/carbon/human/N in R.loc)
 							if(cult && N.mind && N.mind == cult.sacrifice_target)
@@ -1008,7 +1017,7 @@ var/list/sacrificed = list()
 				if(iscultist(C) && !C.stat)
 					culcount++
 			if(culcount >= 5)
-				for(var/obj/effect/rune/R in world)
+				for(var/obj/effect/rune/R in runes)
 					if(R.blood_DNA == src.blood_DNA)
 						for(var/mob/living/M in orange(2,R))
 							M.take_overall_damage(0,15)
@@ -1018,7 +1027,7 @@ var/list/sacrificed = list()
 								M << "<span class='danger'>Rune suddenly ignites, burning you!</span>"
 							var/turf/T = get_turf(R)
 							T.hotspot_expose(700,125)
-				for(var/obj/effect/decal/cleanable/blood/B in world)
+				for(var/obj/effect/decal/cleanable/blood/B in blood_decals)
 					if(B.blood_DNA == src.blood_DNA)
 						for(var/mob/living/M in orange(1,B))
 							M.take_overall_damage(0,5)

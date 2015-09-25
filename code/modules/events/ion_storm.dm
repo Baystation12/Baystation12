@@ -12,7 +12,7 @@
 			continue
 		players += player.real_name
 
-	for (var/mob/living/silicon/ai/target in world)
+	for (var/mob/living/silicon/ai/target in silicon_mob_list)
 		var/random_player = "The Captain"
 		if(players.len)
 			random_player = pick(players)		//Random player's name, to be used in laws.
@@ -88,7 +88,7 @@
 
 /datum/event/ionstorm/tick()
 	if(botEmagChance)
-		for(var/obj/machinery/bot/bot in world)
+		for(var/obj/machinery/bot/bot in machines)
 			if(prob(botEmagChance))
 				bot.emag_act(1)
 
@@ -204,7 +204,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					M.add_ion_law("THE STATION IS [who2pref] [who2]")
 
 	if(botEmagChance)
-		for(var/obj/machinery/bot/bot in world)
+		for(var/obj/machinery/bot/bot in machines)
 			if(prob(botEmagChance))
 				bot.Emag()
 */
@@ -220,21 +220,21 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 
 	spawn(0)
 		world << "Started processing APCs"
-		for (var/obj/machinery/power/apc/APC in world)
+		for (var/obj/machinery/power/apc/APC in machines)
 			if(APC.z in station_levels)
 				APC.ion_act()
 				apcnum++
 		world << "Finished processing APCs. Processed: [apcnum]"
 	spawn(0)
 		world << "Started processing SMES"
-		for (var/obj/machinery/power/smes/SMES in world)
+		for (var/obj/machinery/power/smes/SMES in machines)
 			if(SMES.z in station_levels)
 				SMES.ion_act()
 				smesnum++
 		world << "Finished processing SMES. Processed: [smesnum]"
 	spawn(0)
 		world << "Started processing AIRLOCKS"
-		for (var/obj/machinery/door/airlock/D in world)
+		for (var/obj/machinery/door/airlock/D in machines)
 			if(D.z in station_levels)
 				//if(length(D.req_access) > 0 && !(12 in D.req_access)) //not counting general access and maintenance airlocks
 				airlocknum++
@@ -243,7 +243,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 		world << "Finished processing AIRLOCKS. Processed: [airlocknum]"
 	spawn(0)
 		world << "Started processing FIREDOORS"
-		for (var/obj/machinery/door/firedoor/D in world)
+		for (var/obj/machinery/door/firedoor/D in machines)
 			if(D.z in station_levels)
 				firedoornum++;
 				spawn(0)

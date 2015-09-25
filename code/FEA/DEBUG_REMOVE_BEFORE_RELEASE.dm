@@ -367,7 +367,7 @@ mob
 			for(var/datum/pipe_network/network in pipe_networks)
 				network.marker = rand(1,4)
 
-			for(var/obj/machinery/atmospherics/pipe/P in world)
+			for(var/obj/machinery/atmospherics/pipe/P in machines)
 				P.overlays.Cut()
 
 				var/datum/pipe_network/master = P.return_network()
@@ -377,7 +377,7 @@ mob
 					world << "error"
 					P.overlays += icon('icons/Testing/atmos_testing.dmi',"marker0")
 
-			for(var/obj/machinery/atmospherics/valve/V in world)
+			for(var/obj/machinery/atmospherics/valve/V in machines)
 				V.overlays.Cut()
 
 				if(V.network_node1)
@@ -561,7 +561,7 @@ mob
 			for(var/datum/air_group/group in air_master.air_groups)
 				group.marker = 0
 
-			for(var/turf/simulated/floor/S in world)
+			for(var/turf/simulated/floor/S in turf_list)
 				S.icon = 'icons/Testing/turf_analysis.dmi'
 				if(S.parent)
 					if(S.parent.group_processing)
@@ -607,7 +607,7 @@ mob
 			for(var/datum/air_group/group in air_master.air_groups)
 				group.marker = 0
 
-			for(var/turf/simulated/floor/S in world)
+			for(var/turf/simulated/floor/S in turf_list)
 				S.icon = 'icons/Testing/turf_analysis.dmi'
 				if(S.parent)
 					if(S.parent.group_processing)

@@ -78,7 +78,7 @@
 					if("Koran")
 						B.icon_state = "koran"
 						B.item_state = "koran"
-						for(var/area/chapel/main/A in world)
+						for(var/area/chapel/main/A in all_areas)
 							for(var/turf/T in A.contents)
 								if(T.icon_state == "carpetsymbol")
 									T.set_dir(4)
@@ -97,7 +97,7 @@
 					if("Athiest")
 						B.icon_state = "athiest"
 						B.item_state = "syringe_kit"
-						for(var/area/chapel/main/A in world)
+						for(var/area/chapel/main/A in all_areas)
 							for(var/turf/T in A.contents)
 								if(T.icon_state == "carpetsymbol")
 									T.set_dir(10)
@@ -113,7 +113,7 @@
 					if("Scientology")
 						B.icon_state = "scientology"
 						B.item_state = "scientology"
-						for(var/area/chapel/main/A in world)
+						for(var/area/chapel/main/A in all_areas)
 							for(var/turf/T in A.contents)
 								if(T.icon_state == "carpetsymbol")
 									T.set_dir(8)
@@ -127,7 +127,7 @@
 						// if christian bible, revert to default
 						B.icon_state = "bible"
 						B.item_state = "bible"
-						for(var/area/chapel/main/A in world)
+						for(var/area/chapel/main/A in all_areas)
 							for(var/turf/T in A.contents)
 								if(T.icon_state == "carpetsymbol")
 									T.set_dir(2)

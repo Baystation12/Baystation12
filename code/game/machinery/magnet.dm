@@ -224,7 +224,7 @@
 		..()
 
 		if(autolink)
-			for(var/obj/machinery/magnetic_module/M in world)
+			for(var/obj/machinery/magnetic_module/M in machines)
 				if(M.freq == frequency && M.code == code)
 					magnets.Add(M)
 
@@ -240,7 +240,7 @@
 
 	process()
 		if(magnets.len == 0 && autolink)
-			for(var/obj/machinery/magnetic_module/M in world)
+			for(var/obj/machinery/magnetic_module/M in machines)
 				if(M.freq == frequency && M.code == code)
 					magnets.Add(M)
 

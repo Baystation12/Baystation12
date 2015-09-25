@@ -17,6 +17,7 @@
 	var/auto_init = 1
 
 /atom/movable/New()
+	atom_movable_list += src
 	..()
 	if(auto_init && ticker && ticker.current_state == GAME_STATE_PLAYING)
 		initialize()
@@ -36,6 +37,7 @@
 	..()
 
 /atom/movable/Destroy()
+	atom_movable_list -= src
 	. = ..()
 	if(reagents)
 		qdel(reagents)

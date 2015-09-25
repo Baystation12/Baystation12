@@ -368,7 +368,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			runerandom()
 		if(iscultist(user))
 			var/C = 0
-			for(var/obj/effect/rune/N in world)
+			for(var/obj/effect/rune/N in runes)
 				C++
 			if (!istype(user.loc,/turf))
 				user << "<span class='warning'>You do not have enough space to write a proper rune.</span>"

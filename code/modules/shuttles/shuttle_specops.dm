@@ -88,7 +88,7 @@
 
 /datum/shuttle/ferry/multidock/specops/move(var/area/origin,var/area/destination)
 	..(origin, destination)
-	
+
 	spawn(20)
 		if (!location)	//just arrived home
 			for(var/turf/T in get_area_turfs(destination))
@@ -99,7 +99,7 @@
 			for(var/turf/T in get_area_turfs(destination))
 				var/mob/M = locate(/mob) in T
 				M << "<span class='danger'>You have arrived at [station_name]. Commence operation!</span>"
-				
+
 				var/obj/machinery/light/small/readylight/light = locate() in T
 				if(light) light.set_state(1)
 
@@ -180,10 +180,10 @@
 		sleep(10)
 
 		var/spawn_marauder[] = new()
-		for(var/obj/effect/landmark/L in world)
+		for(var/obj/effect/landmark/L in landmarks_list)
 			if(L.name == "Marauder Entry")
 				spawn_marauder.Add(L)
-		for(var/obj/effect/landmark/L in world)
+		for(var/obj/effect/landmark/L in landmarks_list)
 			if(L.name == "Marauder Exit")
 				var/obj/effect/portal/P = new(L.loc)
 				P.invisibility = 101//So it is not seen by anyone.
