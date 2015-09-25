@@ -12,7 +12,7 @@
 		attack_dir = get_dir(get_turf(user), get_turf(attacker))
 	else if(damage_source)
 		attack_dir = get_dir(get_turf(user), get_turf(damage_source))
-	
+
 	if(!(attack_dir && (attack_dir & bad_arc)))
 		return 1
 	return 0
@@ -21,12 +21,12 @@
 	//parry only melee attacks
 	if(istype(damage_source, /obj/item/projectile) || (attacker && get_dist(user, attacker) > 1) || user.incapacitated())
 		return 0
-	
+
 	//block as long as they are not directly behind us
 	var/bad_arc = reverse_direction(user.dir) //arc of directions from which we cannot block
 	if(!check_shield_arc(user, bad_arc, damage_source, attacker))
 		return 0
-	
+
 	return 1
 
 /obj/item/weapon/shield
@@ -109,13 +109,13 @@
 	if(!active)
 		return 0 //turn it on first!
 	. = ..()
-	
+
 	if(.)
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		var/datum/effect/effect/system/spark_spread/spark_system = PoolOrNew(/datum/effect/effect/system/spark_spread)
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
 		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
-	
+
 /obj/item/weapon/shield/energy/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
 	if(istype(damage_source, /obj/item/projectile))
 		var/obj/item/projectile/P = damage_source
@@ -130,14 +130,14 @@
 	active = !active
 	if (active)
 		force = 10
-		icon_state = "eshield[active]"
+		update_icon()
 		w_class = 4
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 		user << "<span class='notice'>\The [src] is now active.</span>"
 
 	else
 		force = 3
-		icon_state = "eshield[active]"
+		update_icon()
 		w_class = 1
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		user << "<span class='notice'>\The [src] can now be concealed.</span>"
@@ -150,6 +150,12 @@
 	add_fingerprint(user)
 	return
 
+/obj/item/weapon/shield/energy/update_icon()
+	icon_state = "eshield[active]"
+	if(active)
+		set_light(1.5, 1.5, "#006AFF")
+	else
+		set_light(0)
 
 /obj/item/weapon/cloaking_device
 	name = "cloaking device"
