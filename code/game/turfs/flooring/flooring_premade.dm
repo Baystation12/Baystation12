@@ -106,6 +106,11 @@
 	icon_state = "steel_dirty"
 	initial_flooring = /decl/flooring/tiling/steel
 
+
+/turf/simulated/floor/tiled/steel/airless
+	oxygen = 0
+	nitrogen = 0
+
 /turf/simulated/floor/tiled/white
 	name = "white floor"
 	icon_state = "white"
