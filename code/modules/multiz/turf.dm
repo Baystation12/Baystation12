@@ -13,8 +13,9 @@
 
 /turf/simulated/open/New()
 	. = ..()
-	ASSERT(HasBelow(z))
-	below = GetBelow(src)
+	spawn(1)
+		below = GetBelow(src)
+		ASSERT(HasBelow(z))
 
 /turf/simulated/open/Entered(var/atom/movable/mover)
 	// only fall down in defined areas (read: areas with artificial gravitiy)
