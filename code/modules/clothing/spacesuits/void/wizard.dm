@@ -8,7 +8,7 @@
 		slot_r_hand_str = "wiz_helm",
 		)
 	unacidable = 1 //No longer shall our kind be foiled by lone chemists with spray bottles!
-	armor = list(melee = 40, bullet = 20, laser = 20,energy = 20, bomb = 35, bio = 100, rad = 60)
+	armor = list(melee = 70, bullet = 25, laser = 25, energy = 25, bomb = 55, bio = 100, rad = 60)
 	siemens_coefficient = 0.7
 	sprite_sheets_refit = null
 	sprite_sheets_obj = null
@@ -22,7 +22,7 @@
 	slowdown = 1
 	w_class = 3
 	unacidable = 1
-	armor = list(melee = 40, bullet = 20, laser = 20,energy = 20, bomb = 35, bio = 100, rad = 60)
+	armor = list(melee = 70, bullet = 25, laser = 25, energy = 25, bomb = 55, bio = 100, rad = 60)
 	siemens_coefficient = 0.7
 	sprite_sheets_refit = null
 	sprite_sheets_obj = null

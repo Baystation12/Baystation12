@@ -4,7 +4,7 @@
 	desc = "An advanced helmet designed for work in special operations. Property of Gorlex Marauders."
 	icon_state = "rig0-syndie"
 	item_state = "syndie_helm"
-	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 60)
+	armor = list(melee = 150, bullet = 100, laser = 45, energy = 20, bomb = 55, bio = 100, rad = 60)
 	siemens_coefficient = 0.6
 	species_restricted = list("Human")
 	camera_networks = list(NETWORK_MERCENARY)
@@ -17,7 +17,7 @@
 	item_state = "syndie_voidsuit"
 	slowdown = 1
 	w_class = 3
-	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 60)
+	armor = list(melee = 150, bullet = 100, laser = 45, energy = 20, bomb = 55, bio = 100, rad = 60)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
 	siemens_coefficient = 0.6
 	species_restricted = list("Human", "Skrell")
