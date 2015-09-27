@@ -14,6 +14,14 @@
 	update_starlight()
 	..()
 
+/turf/space/is_space()
+	return 1
+
+// override for space turfs, since they should never hide anything
+/turf/space/levelupdate()
+	for(var/obj/O in src)
+		O.hide(0)
+
 /turf/space/proc/update_starlight()
 	if(!config.starlight)
 		return
@@ -35,16 +43,16 @@
 			ReplaceWithLattice()
 		return
 
-	if (istype(C, /obj/item/stack/tile/steel))
+	if (istype(C, /obj/item/stack/tile/floor))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
-			var/obj/item/stack/tile/steel/S = C
+			var/obj/item/stack/tile/floor/S = C
 			if (S.get_amount() < 1)
 				return
 			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			S.build(src)
 			S.use(1)
+			ChangeTurf(/turf/simulated/floor/airless)
 			return
 		else
 			user << "<span class='warning'>The plating is going to need some support.</span>"
@@ -66,7 +74,7 @@
 
 		// Okay, so let's make it so that people can travel z levels but not nuke disks!
 		// if(ticker.mode.name == "mercenary")	return
-		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE - 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE - 1))
+		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE + 1))
 			A.touch_map_edge()
 
 /turf/space/proc/Sandbox_Spacemove(atom/movable/A as mob|obj)

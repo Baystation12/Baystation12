@@ -10,6 +10,9 @@ Pipelines + Other Objects -> Pipe network
 
 */
 /obj/machinery/atmospherics
+
+	auto_init = 0
+
 	anchored = 1
 	idle_power_usage = 0
 	active_power_usage = 0
@@ -46,7 +49,7 @@ Pipelines + Other Objects -> Pipe network
 
 /obj/machinery/atmospherics/proc/add_underlay(var/turf/T, var/obj/machinery/atmospherics/node, var/direction, var/icon_connect_type)
 	if(node)
-		if(T.intact && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+		if(!T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
 			//underlays += icon_manager.get_atmos_icon("underlay_down", direction, color_cache_name(node))
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "down" + icon_connect_type)
 		else
@@ -87,7 +90,7 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 /obj/machinery/atmospherics/process()
 	last_flow_rate = 0
 	last_power_draw = 0
-	
+
 	build_network()
 
 /obj/machinery/atmospherics/proc/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)

@@ -3,13 +3,13 @@
 	name = "galoshes"
 	icon_state = "galoshes"
 	permeability_coefficient = 0.05
-	flags = NOSLIP
+	item_flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null
 
 /obj/item/clothing/shoes/jackboots
 	name = "jackboots"
-	desc = "Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time."
+	desc = "Standard-issue Security combat boots for combat scenarios or combat situations. All combat, all the time."
 	icon_state = "jackboots"
 	item_state = "jackboots"
 	force = 3

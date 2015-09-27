@@ -22,9 +22,11 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/New()
 	manifest += "<ul>"
-	for(var/atom/movable/path in contains)
-		if(!path)	continue
-		manifest += "<li>[initial(path.name)]</li>"
+	for(var/path in contains)
+		if(!path || !ispath(path, /atom))
+			continue
+		var/atom/O = path
+		manifest += "<li>[initial(O.name)]</li>"
 	manifest += "</ul>"
 
 /datum/supply_packs/specialops
@@ -124,12 +126,12 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager,
 					/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
 					/obj/item/weapon/lipstick/random,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/ale,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/ale,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/beer)
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer)
 	cost = 20
 	containertype = /obj/structure/closet/crate
 	containername = "Party equipment"
@@ -1089,9 +1091,8 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/under/kilt)
 	name = "Costumes crate"
 	cost = 10
-	containertype = /obj/structure/closet/crate/secure
+	containertype = /obj/structure/closet/crate
 	containername = "Actor Costumes"
-	access = access_theatre
 	group = "Miscellaneous"
 
 /datum/supply_packs/formal_wear
@@ -1114,42 +1115,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = /obj/structure/closet
 	containername = "Formalwear for the best occasions."
 	group = "Miscellaneous"
-
-/datum/supply_packs/rust_injector
-	contains = list(/obj/machinery/power/rust_fuel_injector)
-	name = "RUST fuel injector"
-	cost = 50
-	containertype = /obj/structure/closet/crate/secure/large
-	containername = "RUST injector crate"
-	group = "Engineering"
-	access = access_engine
-
-/datum/supply_packs/rust_compressor
-	contains = list(/obj/item/weapon/module/rust_fuel_compressor)
-	name = "RUST fuel compressor circuitry"
-	cost = 60
-	containertype = /obj/structure/closet/crate/secure
-	containername = "RUST fuel compressor circuitry"
-	group = "Engineering"
-	access = access_engine
-
-/datum/supply_packs/rust_assembly_port
-	contains = list(/obj/item/weapon/module/rust_fuel_port)
-	name = "RUST fuel assembly port circuitry"
-	cost = 40
-	containertype = /obj/structure/closet/crate/secure
-	containername = "RUST fuel assembly port circuitry"
-	group = "Engineering"
-	access = access_engine
-
-/datum/supply_packs/rust_core
-	contains = list(/obj/machinery/power/rust_core)
-	name = "RUST Tokamak Core"
-	cost = 75
-	containertype = /obj/structure/closet/crate/secure/large
-	containername = "RUST tokamak crate"
-	group = "Engineering"
-	access = access_engine
 
 /datum/supply_packs/shield_gen
 	contains = list(/obj/item/weapon/circuitboard/shield_gen)
@@ -1243,12 +1208,15 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/bee_keeper
 	name = "Beekeeping crate"
-	contains = list(/obj/item/beezeez,
-					/obj/item/weapon/bee_net,
-					/obj/item/apiary,
-					/obj/item/queen_bee)
+	contains = list(/obj/item/beehive_assembly,
+					/obj/item/bee_smoker,
+					/obj/item/honey_frame,
+					/obj/item/honey_frame,
+					/obj/item/honey_frame,
+					/obj/item/honey_frame,
+					/obj/item/honey_frame,
+					/obj/item/bee_pack)
 	cost = 40
-	contraband = 1
 	containertype = /obj/structure/closet/crate/hydroponics
 	containername = "Beekeeping crate"
 	access = access_hydroponics
@@ -1450,7 +1418,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/head/helmet/gladiator,
 					/obj/item/clothing/head/ushanka)
 	group = "Miscellaneous"
-	access = access_theatre
 
 /datum/supply_packs/randomised/webbing
 	name = "Webbing crate"

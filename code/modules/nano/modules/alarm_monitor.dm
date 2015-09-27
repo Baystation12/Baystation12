@@ -44,13 +44,12 @@
 
 	return all_alarms
 
-/datum/nano_module/alarm_monitor/ai/Topic(ref, href_list)
+/datum/nano_module/alarm_monitor/Topic(ref, href_list)
 	if(..())
 		return 1
 	if(href_list["switchTo"])
 		var/obj/machinery/camera/C = locate(href_list["switchTo"]) in cameranet.cameras
 		if(!C)
-
 			return
 
 		usr.switch_to_camera(C)
@@ -66,7 +65,7 @@
 			var/cameras[0]
 			var/lost_sources[0]
 
-			if(user.isMobAI())
+			if(isAI(user))
 				for(var/obj/machinery/camera/C in A.cameras())
 					cameras[++cameras.len] = C.nano_structure()
 			for(var/datum/alarm_source/AS in A.sources)

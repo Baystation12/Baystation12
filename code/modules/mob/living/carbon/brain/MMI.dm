@@ -25,10 +25,6 @@
 	w_class = 3
 	origin_tech = list(TECH_BIO = 3)
 
-	var/list/construction_cost = list(DEFAULT_WALL_MATERIAL=1000,"glass"=500)
-	var/construction_time = 75
-	//these vars are so the mecha fabricator doesn't shit itself anymore. --NEO
-
 	req_access = list(access_robotics)
 
 	//Revised. Brainmob is now contained directly within object of transfer. MMI in this case.
@@ -121,6 +117,13 @@
 			icon_state = "mmi_full"
 			locked = 1
 			return
+
+/obj/item/device/mmi/relaymove(var/mob/user, var/direction)
+	if(user.stat || user.stunned)
+		return
+	var/obj/item/weapon/rig/rig = src.get_rig()
+	if(rig)
+		rig.forced_move(direction, user)
 
 /obj/item/device/mmi/Destroy()
 	if(isrobot(loc))

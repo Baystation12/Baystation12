@@ -176,7 +176,7 @@
 		return
 
 	return
-	
+
 /obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
 		src.emagged = 1
@@ -235,26 +235,25 @@
 		nanomanager.update_uis(src)
 		return
 	else if(istype(W, /obj/item/weapon/wrench))
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
+		if(anchored)
+			user.visible_message("[user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
+		else
+			user.visible_message("[user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
+
 		if(do_after(user, 20))
 			if(!src) return
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-			switch (anchored)
-				if (0)
-					anchored = 1
-					user.visible_message("\The [user] tightens the bolts securing \the [src] to the floor.", "You tighten the bolts securing \the [src] to the floor.")
-				if (1)
-					user.visible_message("\The [user] unfastens the bolts securing \the [src] to the floor.", "You unfasten the bolts securing \the [src] to the floor.")
-					anchored = 0
+			user << "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>"
+			anchored = !anchored
 		return
 
-	else if(src.panel_open)
+	else
 
 		for(var/datum/data/vending_product/R in product_records)
 			if(istype(W, R.product_path))
 				stock(R, user)
 				qdel(W)
-
-	else
+				return
 		..()
 
 /**
@@ -560,7 +559,7 @@
 
 /obj/machinery/vending/proc/stock(var/datum/data/vending_product/R, var/mob/user)
 	if(src.panel_open)
-		user << "<span class='notice'>You stock \the [src] with \a [R.product_name]</span>"
+		user << "<span class='notice'>You insert \the [src] in the product receptor.</span>"
 		R.amount++
 
 	nanomanager.update_uis(src)
@@ -688,11 +687,12 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/tequilla = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/vermouth = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/rum = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/wine = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/cognac = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/kahlua = 5,/obj/item/weapon/reagent_containers/food/drinks/cans/beer = 6,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/ale = 6,/obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice = 4,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/kahlua = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer = 6,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale = 6,/obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice = 4,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice = 4,/obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice = 4,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/cream = 4,/obj/item/weapon/reagent_containers/food/drinks/cans/tonic = 8,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 8, /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 15,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/cola = 5, /obj/item/weapon/reagent_containers/food/drinks/bottle/space_up = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/space_mountain_wind = 5, /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/barflask = 2, /obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask = 2,
 					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 30,/obj/item/weapon/reagent_containers/food/drinks/ice = 9,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor = 2,/obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao = 2,
@@ -912,8 +912,8 @@
 	desc = "A kitchen and restaurant equipment vendor."
 	product_ads = "Mm, food stuffs!;Food and food accessories.;Get your plates!;You like forks?;I like forks.;Woo, utensils.;You don't really need these..."
 	icon_state = "dinnerware"
-	products = list(/obj/item/weapon/tray = 8,/obj/item/weapon/material/kitchen/utensil/fork = 6,/obj/item/weapon/material/knife = 3,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,/obj/item/clothing/suit/chef/classic = 2)
-	contraband = list(/obj/item/weapon/material/kitchen/utensil/spoon = 2,/obj/item/weapon/material/kitchen/utensil/knife = 2,/obj/item/weapon/material/kitchen/rollingpin = 2, /obj/item/weapon/material/knife/butch = 2)
+	products = list(/obj/item/weapon/tray = 8,/obj/item/weapon/material/kitchen/utensil/fork = 6, /obj/item/weapon/material/kitchen/utensil/knife = 6, /obj/item/weapon/material/kitchen/utensil/spoon = 6, /obj/item/weapon/material/knife = 3,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,/obj/item/clothing/suit/chef/classic = 2)
+	contraband = list(/obj/item/weapon/material/kitchen/rollingpin = 2, /obj/item/weapon/material/knife/butch = 2)
 
 /obj/machinery/vending/sovietsoda
 	name = "BODA"

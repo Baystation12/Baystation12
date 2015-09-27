@@ -17,7 +17,7 @@
 	max_equip = 3
 
 /obj/mecha/combat/gygax/dark
-	desc = "A lightweight exosuit used by NanoTrasen Heavy Asset Protection. A significantly upgraded Gygax security mech."
+	desc = "A lightweight exosuit used by Heavy Asset Protection. A significantly upgraded Gygax security mech."
 	name = "Dark Gygax"
 	icon_state = "darkgygax"
 	initial_icon = "darkgygax"

@@ -121,7 +121,7 @@ var/list/datum/power/changeling/powerinstances = list()
 
 /datum/power/changeling/DeathSting
 	name = "Death Sting"
-	desc = "We silently sting a human, filling him with potent chemicals. His rapid death is all but assured."
+	desc = "We silently sting a human, filling them with potent chemicals. Their rapid death is all but assured."
 	genomecost = 10
 	verbpath = /mob/proc/changeling_DEATHsting
 
@@ -269,7 +269,7 @@ var/list/datum/power/changeling/powerinstances = list()
 
 					body += "<font size='2'><b>"+desc+"</b></font> <BR>"
 
-					body += "<font size='2'><font color = 'red'><b>"+helptext+"</b></font> <BR>"
+					body += "<font size='2'><font color = 'red'><b>"+helptext+"</b></font></font><BR>"
 
 					if(!ownsthis)
 					{
@@ -428,7 +428,7 @@ var/list/datum/power/changeling/powerinstances = list()
 					<a id='link[i]'
 					onmouseover='expand("item[i]","[P.name]","[P.desc]","[P.helptext]","[P]",[ownsthis])'
 					>
-					<b id='search[i]'>Evolve [P] - Cost: [ownsthis ? "Purchased" : P.genomecost]</b>
+					<span id='search[i]'><b>Evolve [P] - Cost: [ownsthis ? "Purchased" : P.genomecost]</b></span>
 					</a>
 					<br><span id='item[i]'></span>
 				</td>

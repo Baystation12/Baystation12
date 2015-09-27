@@ -1,9 +1,10 @@
 /obj/machinery/computer/cloning
 	name = "cloning control console"
 	icon = 'icons/obj/computer.dmi'
-	icon_state = "dna"
+	icon_keyboard = "med_key"
+	icon_screen = "dna"
 	light_color = "#315ab4"
-	circuit = "/obj/item/weapon/circuitboard/cloning"
+	circuit = /obj/item/weapon/circuitboard/cloning
 	req_access = list(access_heads) //Only used for record deletion right now.
 	var/obj/machinery/dna_scannernew/scanner = null //Linked scanner. For scanning.
 	var/list/pods = list() //Linked cloning pods.
@@ -408,15 +409,3 @@
 			selected_record = R
 			break
 	return selected_record
-
-/obj/machinery/computer/cloning/update_icon()
-
-	if(stat & BROKEN)
-		icon_state = "commb"
-	else
-		if(stat & NOPOWER)
-			src.icon_state = "c_unpowered"
-			stat |= NOPOWER
-		else
-			icon_state = initial(icon_state)
-			stat &= ~NOPOWER

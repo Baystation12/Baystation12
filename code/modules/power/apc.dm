@@ -1,12 +1,12 @@
 //update_state
-#define UPSTATE_CELL_IN 1
-#define UPSTATE_OPENED1 2
-#define UPSTATE_OPENED2 4
-#define UPSTATE_MAINT 8
-#define UPSTATE_BROKE 16
-#define UPSTATE_BLUESCREEN 32
-#define UPSTATE_WIREEXP 64
-#define UPSTATE_ALLGOOD 128
+#define UPDATE_CELL_IN 1
+#define UPDATE_OPENED1 2
+#define UPDATE_OPENED2 4
+#define UPDATE_MAINT 8
+#define UPDATE_BROKE 16
+#define UPDATE_BLUESCREEN 32
+#define UPDATE_WIREEXP 64
+#define UPDATE_ALLGOOD 128
 
 //update_overlay
 #define APC_UPOVERLAY_CHARGEING0 1
@@ -63,6 +63,7 @@
 	var/area/area
 	var/areastring = null
 	var/obj/item/weapon/cell/cell
+	var/chargelevel = 0.0005  // Cap for how fast APC cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
 	var/start_charge = 90				// initial cell charge %
 	var/cell_type = /obj/item/weapon/cell/apc
 	var/opened = 0 //0=closed, 1=opened, 2=cover removed
@@ -287,25 +288,25 @@
 		return
 
 	if(update & 1) // Updating the icon state
-		if(update_state & UPSTATE_ALLGOOD)
+		if(update_state & UPDATE_ALLGOOD)
 			icon_state = "apc0"
-		else if(update_state & (UPSTATE_OPENED1|UPSTATE_OPENED2))
+		else if(update_state & (UPDATE_OPENED1|UPDATE_OPENED2))
 			var/basestate = "apc[ cell ? "2" : "1" ]"
-			if(update_state & UPSTATE_OPENED1)
-				if(update_state & (UPSTATE_MAINT|UPSTATE_BROKE))
+			if(update_state & UPDATE_OPENED1)
+				if(update_state & (UPDATE_MAINT|UPDATE_BROKE))
 					icon_state = "apcmaint" //disabled APC cannot hold cell
 				else
 					icon_state = basestate
-			else if(update_state & UPSTATE_OPENED2)
+			else if(update_state & UPDATE_OPENED2)
 				icon_state = "[basestate]-nocover"
-		else if(update_state & UPSTATE_BROKE)
+		else if(update_state & UPDATE_BROKE)
 			icon_state = "apc-b"
-		else if(update_state & UPSTATE_BLUESCREEN)
+		else if(update_state & UPDATE_BLUESCREEN)
 			icon_state = "apcemag"
-		else if(update_state & UPSTATE_WIREEXP)
+		else if(update_state & UPDATE_WIREEXP)
 			icon_state = "apcewires"
 
-	if(!(update_state & UPSTATE_ALLGOOD))
+	if(!(update_state & UPDATE_ALLGOOD))
 		if(overlays.len)
 			overlays = 0
 			return
@@ -313,7 +314,7 @@
 	if(update & 2)
 		if(overlays.len)
 			overlays.len = 0
-		if(!(stat & (BROKEN|MAINT)) && update_state & UPSTATE_ALLGOOD)
+		if(!(stat & (BROKEN|MAINT)) && update_state & UPDATE_ALLGOOD)
 			overlays += status_overlays_lock[locked+1]
 			overlays += status_overlays_charging[charging+1]
 			if(operating)
@@ -321,6 +322,21 @@
 				overlays += status_overlays_lighting[lighting+1]
 				overlays += status_overlays_environ[environ+1]
 
+	if(update & 3)
+		if(update_state & UPDATE_BLUESCREEN)
+			set_light(l_range = 2, l_power = 0.5, l_color = "#0000FF")
+		else if(!(stat & (BROKEN|MAINT)) && update_state & UPDATE_ALLGOOD)
+			var/color
+			switch(charging)
+				if(0)
+					color = "#F86060"
+				if(1)
+					color = "#A8B0F8"
+				if(2)
+					color = "#82FF4C"
+			set_light(l_range = 2, l_power = 0.5, l_color = color)
+		else
+			set_light(0)
 
 /obj/machinery/power/apc/proc/check_updates()
 
@@ -330,27 +346,27 @@
 	update_overlay = 0
 
 	if(cell)
-		update_state |= UPSTATE_CELL_IN
+		update_state |= UPDATE_CELL_IN
 	if(stat & BROKEN)
-		update_state |= UPSTATE_BROKE
+		update_state |= UPDATE_BROKE
 	if(stat & MAINT)
-		update_state |= UPSTATE_MAINT
+		update_state |= UPDATE_MAINT
 	if(opened)
 		if(opened==1)
-			update_state |= UPSTATE_OPENED1
+			update_state |= UPDATE_OPENED1
 		if(opened==2)
-			update_state |= UPSTATE_OPENED2
+			update_state |= UPDATE_OPENED2
 	else if(emagged || hacker)
-		update_state |= UPSTATE_BLUESCREEN
+		update_state |= UPDATE_BLUESCREEN
 	else if(wiresexposed)
-		update_state |= UPSTATE_WIREEXP
+		update_state |= UPDATE_WIREEXP
 	if(update_state <= 1)
-		update_state |= UPSTATE_ALLGOOD
+		update_state |= UPDATE_ALLGOOD
 
 	if(operating)
 		update_overlay |= APC_UPOVERLAY_OPERATING
 
-	if(update_state & UPSTATE_ALLGOOD)
+	if(update_state & UPDATE_ALLGOOD)
 		if(locked)
 			update_overlay |= APC_UPOVERLAY_LOCKED
 
@@ -505,7 +521,8 @@
 			else
 				user << "<span class='warning'>Access denied.</span>"
 	else if (istype(W, /obj/item/stack/cable_coil) && !terminal && opened && has_electronics!=2)
-		if (src.loc:intact)
+		var/turf/T = loc
+		if(istype(T) && !T.is_plating())
 			user << "<span class='warning'>You must remove the floor plating in front of the APC first.</span>"
 			return
 		var/obj/item/stack/cable_coil/C = W
@@ -517,7 +534,6 @@
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		if(do_after(user, 20))
 			if (C.amount >= 10 && !terminal && opened && has_electronics != 2)
-				var/turf/T = get_turf(src)
 				var/obj/structure/cable/N = T.get_cable_node()
 				if (prob(50) && electrocute_mob(usr, N, N))
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -532,7 +548,8 @@
 				make_terminal()
 				terminal.connect_to_network()
 	else if (istype(W, /obj/item/weapon/wirecutters) && terminal && opened && has_electronics!=2)
-		if (src.loc:intact)
+		var/turf/T = loc
+		if(istype(T) && !T.is_plating())
 			user << "<span class='warning'>You must remove the floor plating in front of the APC first.</span>"
 			return
 		user.visible_message("<span class='warning'>[user.name] dismantles the power terminal from [src].</span>", \
@@ -714,7 +731,7 @@
 	if(!user)
 		return
 
-	if(wiresexposed /*&& (!istype(user, /mob/living/silicon))*/) //Commented out the typecheck to allow engiborgs to repair damaged apcs.
+	if(wiresexposed && !istype(user, /mob/living/silicon/ai))
 		wires.Interact(user)
 
 	return ui_interact(user)
@@ -850,7 +867,7 @@
 			return 0
 	return 1
 
-/obj/machinery/power/apc/Topic(href, href_list, var/nowindow = 0)
+/obj/machinery/power/apc/Topic(href, href_list)
 	if(..())
 		return 1
 
@@ -1021,7 +1038,7 @@
 		if(src.attempt_charging())
 			if(excess > 0)		// check to make sure we have enough to charge
 				// Max charge is capped to % per second constant
-				var/ch = min(excess*CELLRATE, cell.maxcharge*CHARGELEVEL)
+				var/ch = min(excess*CELLRATE, cell.maxcharge*chargelevel)
 
 				ch = draw_power(ch/CELLRATE) // Removes the power we're taking from the grid
 				cell.give(ch*CELLRATE) // actually recharge the cell
@@ -1038,7 +1055,7 @@
 
 		if(chargemode)
 			if(!charging)
-				if(excess > cell.maxcharge*CHARGELEVEL)
+				if(excess > cell.maxcharge*chargelevel)
 					chargecount++
 				else
 					chargecount = 0
@@ -1146,7 +1163,7 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 
 	switch(severity)
 		if(1.0)
-			//set_broken() //now Del() do what we need
+			//set_broken() //now qdel() do what we need
 			if (cell)
 				cell.ex_act(1.0) // more lags woohoo
 			qdel(src)

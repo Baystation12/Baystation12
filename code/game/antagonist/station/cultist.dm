@@ -22,10 +22,13 @@ var/datum/antagonist/cultist/cult
 	victory_feedback_tag = "win - cult win"
 	loss_feedback_tag = "loss - staff stopped the cult"
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	max_antags = 200 // No upper limit.
-	max_antags_round = 200
-	var/allow_narsie = 1
+	hard_cap = 5
+	hard_cap_round = 6
+	initial_spawn_req = 4
+	initial_spawn_target = 6
+	antaghud_indicator = "hudcultist"
 
+	var/allow_narsie = 1
 	var/datum/mind/sacrifice_target
 	var/list/startwords = list("blood","join","self","hell")
 	var/list/allwords = list("travel","self","see","hell","blood","join","tech","destroy", "other", "hide")
@@ -104,9 +107,9 @@ var/datum/antagonist/cultist/cult
 		player.current.visible_message("<FONT size = 3>[player.current] looks like they just reverted to their old faith!</FONT>")
 
 /datum/antagonist/cultist/add_antagonist(var/datum/mind/player)
-	if(!..())
-		return
-	player << "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back."
+	. = ..()
+	if(.)
+		player << "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back."
 
 /datum/antagonist/cultist/can_become_antag(var/datum/mind/player)
 	if(!..())

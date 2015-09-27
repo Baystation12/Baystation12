@@ -34,7 +34,7 @@
 	if(istype(I, /obj/item/weapon/screwdriver))
 		if(mode == 0)
 			var/turf/T = loc
-			if(isturf(T) && !T.intact)
+			if(isturf(T) && !!T.is_plating())
 				attached = locate() in T
 				if(!attached)
 					user << "No exposed cable here to attach to."

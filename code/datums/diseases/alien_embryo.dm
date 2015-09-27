@@ -66,7 +66,7 @@
 				if(prob(20))
 					affected_mob.take_organ_damage(1)
 			if(prob(2))
-				affected_mob << "<span class='warning>Your stomach hurts.</span>"
+				affected_mob << "<span class='warning'>Your stomach hurts.</span>"
 				if(prob(20))
 					affected_mob.adjustToxLoss(1)
 					affected_mob.updatehealth()

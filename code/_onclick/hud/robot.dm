@@ -57,7 +57,7 @@ var/obj/screen/robot_inventory
 	using.name = "act_intent"
 	using.set_dir(SOUTHWEST)
 	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = (mymob.a_intent == I_HURT ? I_HURT : mymob.a_intent)
+	using.icon_state = mymob.a_intent
 	using.screen_loc = ui_acti
 	using.layer = 20
 	src.adding += using
@@ -214,7 +214,7 @@ var/obj/screen/robot_inventory
 		if(!r.robot_modules_background)
 			return
 
-		var/display_rows = round((r.module.modules.len) / 8) +1 //+1 because round() returns floor of number
+		var/display_rows = -round(-(r.module.modules.len) / 8)
 		r.robot_modules_background.screen_loc = "CENTER-4:16,SOUTH+1:7 to CENTER+3:16,SOUTH+[display_rows]:7"
 		r.client.screen += r.robot_modules_background
 

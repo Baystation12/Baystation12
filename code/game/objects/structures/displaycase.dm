@@ -29,7 +29,7 @@
 
 
 /obj/structure/displaycase/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.damage
+	health -= Proj.get_structure_damage()
 	..()
 	src.healthcheck()
 	return

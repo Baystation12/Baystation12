@@ -35,7 +35,7 @@
 
 	playsound(src.loc, 'sound/machines/click.ogg', 15, 1, -3)
 	for(var/obj/O in src)
-		O.loc = get_turf(src)
+		O.forceMove(get_turf(src))
 	icon_state = icon_opened
 	src.opened = 1
 
@@ -60,7 +60,7 @@
 			var/obj/structure/bed/B = O
 			if(B.buckled_mob)
 				continue
-		O.loc = src
+		O.forceMove(src)
 		itemcount++
 
 	icon_state = icon_closed
@@ -75,7 +75,7 @@
 			return
 		user.drop_item()
 		if(W)
-			W.loc = src.loc
+			W.forceMove(src.loc)
 	else if(istype(W, /obj/item/weapon/packageWrap))
 		return
 	else if(istype(W, /obj/item/stack/cable_coil))
@@ -91,7 +91,7 @@
 		if(rigged)
 			user  << "<span class='notice'>You attach [W] to [src].</span>"
 			user.drop_item()
-			W.loc = src
+			W.forceMove(src)
 			return
 	else if(istype(W, /obj/item/weapon/wirecutters))
 		if(rigged)
@@ -154,14 +154,19 @@
 		user << "<span class='warning'>The crate appears to be broken.</span>"
 		return
 	if(src.allowed(user))
-		src.locked = !src.locked
-		for(var/mob/O in viewers(user, 3))
-			if((O.client && !( O.blinded )))
-				O << "<span class='notice'>The crate has been [locked ? null : "un"]locked by [user].</span>"
-		overlays.Cut()
-		overlays += locked ? redlight : greenlight
+		set_locked(!locked, user)
 	else
 		user << "<span class='notice'>Access Denied</span>"
+
+/obj/structure/closet/crate/secure/proc/set_locked(var/newlocked, mob/user = null)
+	if(locked == newlocked) return
+
+	locked = newlocked
+	if(user)
+		for(var/mob/O in viewers(user, 3))
+			O.show_message( "<span class='notice'>The crate has been [locked ? null : "un"]locked by [user].</span>", 1)
+	overlays.Cut()
+	overlays += locked ? redlight : greenlight
 
 /obj/structure/closet/crate/secure/verb/verb_togglelock()
 	set src in oview(1) // One square distance
@@ -432,12 +437,12 @@
 				continue
 			if(!S.anchored)
 				found = 1
-				S.loc = src
+				S.forceMove(src)
 				break
 		if(!found)
 			for(var/obj/machinery/M in src.loc)
 				if(!M.anchored)
-					M.loc = src
+					M.forceMove(src)
 					break
 	return
 
@@ -460,12 +465,12 @@
 				continue
 			if(!S.anchored)
 				found = 1
-				S.loc = src
+				S.forceMove(src)
 				break
 		if(!found)
 			for(var/obj/machinery/M in src.loc)
 				if(!M.anchored)
-					M.loc = src
+					M.forceMove(src)
 					break
 	return
 

@@ -269,7 +269,6 @@
 
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/stack/medical))
-		user.changeNext_move(4)
 		if(stat != DEAD)
 			var/obj/item/stack/medical/MED = O
 			if(health < maxHealth)
@@ -291,7 +290,7 @@
 
 //TODO: refactor mob attackby(), attacked_by(), and friends.
 /mob/living/simple_animal/proc/attacked_with_item(var/obj/item/O, var/mob/user)
-	user.changeNext_move(8)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(!O.force)
 		visible_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
 		return
@@ -305,7 +304,7 @@
 			purge = 3
 		adjustBruteLoss(damage)
 	else
-		usr << "<span class='danger>This weapon is ineffective, it does no damage.</span>"
+		usr << "<span class='danger'>This weapon is ineffective, it does no damage.</span>"
 
 	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")
 	user.do_attack_animation(src)
@@ -397,7 +396,7 @@
 		for(var/i=0;i<actual_meat_amount;i++)
 			var/obj/item/meat = new meat_type(get_turf(src))
 			meat.name = "[src.name] [meat.name]"
-		if(small)
+		if(issmall(src))
 			user.visible_message("<span class='danger'>[user] chops up \the [src]!</span>")
 			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
 			qdel(src)

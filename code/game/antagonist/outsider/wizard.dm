@@ -9,8 +9,13 @@ var/datum/antagonist/wizard/wizards
 	landmark_id = "wizard"
 	welcome_text = "You will find a list of available spells in your spell book. Choose your magic arsenal carefully.<br>In your pockets you will find a teleport scroll. Use it as needed."
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
-	max_antags = 1
-	max_antags_round = 1
+	antaghud_indicator = "hudwizard"
+
+	hard_cap = 1
+	hard_cap_round = 3
+	initial_spawn_req = 1
+	initial_spawn_target = 1
+
 
 /datum/antagonist/wizard/New()
 	..()
@@ -96,7 +101,7 @@ var/datum/antagonist/wizard/wizards
 		world << "<span class='danger'><font size = 3>The [(current_antagonists.len>1)?"[role_text_plural] have":"[role_text] has"] been killed by the crew! The Space Wizards Federation has been taught a lesson they will not soon forget!</font></span>"
 
 //To batch-remove wizard spells. Linked to mind.dm.
-/mob/proc/spellremove(var/mob/M as mob)
+/mob/proc/spellremove()
 	for(var/spell/spell_to_remove in src.spell_list)
 		remove_spell(spell_to_remove)
 

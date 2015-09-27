@@ -253,7 +253,7 @@
 		if(spawnees & 64)
 			C = new(src.loc)
 			C.name = "Drone auto-repair system"
-			C.origin_tech = list(TECH_ENGINERING = rand(3,6))
+			C.origin_tech = list(TECH_ENGINEERING = rand(3,6))
 
 		if(spawnees & 128)
 			C = new(src.loc)

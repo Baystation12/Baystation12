@@ -87,8 +87,8 @@ default behaviour is:
 
 			if((tmob.mob_always_swap || (tmob.a_intent == I_HELP || tmob.restrained()) && (a_intent == I_HELP || src.restrained())) && tmob.canmove && canmove && !dense && can_move_mob(tmob, 1, 0)) // mutual brohugs all around!
 				var/turf/oldloc = loc
-				loc = tmob.loc
-				tmob.loc = oldloc
+				forceMove(tmob.loc)
+				tmob.forceMove(oldloc)
 				now_pushing = 0
 				for(var/mob/living/carbon/slime/slime in view(1,tmob))
 					if(slime.Victim == tmob)
@@ -399,6 +399,7 @@ default behaviour is:
 	fire_stacks = 0
 
 /mob/living/proc/rejuvenate()
+	reagents.clear_reagents()
 
 	// shut down various types of badness
 	setToxLoss(0)
@@ -424,16 +425,11 @@ default behaviour is:
 	ear_damage = 0
 	heal_overall_damage(getBruteLoss(), getFireLoss())
 
-	// restore all of a human's blood
-	if(ishuman(src))
-		var/mob/living/carbon/human/human_mob = src
-		human_mob.restore_blood()
-
 	// fix all of our organs
 	restore_all_organs()
 
 	// remove the character from the list of the dead
-	if(stat == 2)
+	if(stat == DEAD)
 		dead_mob_list -= src
 		living_mob_list += src
 		tod = null
@@ -524,27 +520,30 @@ default behaviour is:
 						var/atom/movable/t = M.pulling
 						M.stop_pulling()
 
-						//this is the gay blood on floor shit -- Added back -- Skie
-						if (M.lying && (prob(M.getBruteLoss() / 6)))
-							var/turf/location = M.loc
-							if (istype(location, /turf/simulated))
-								location.add_blood(M)
-						//pull damage with injured people
-							if(prob(25))
-								M.adjustBruteLoss(1)
-								visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state worsens": "wounds open more"] from being dragged!</span>")
-						if(M.pull_damage())
-							if(prob(25))
-								M.adjustBruteLoss(2)
-								visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state" : "wounds"] worsen terribly from being dragged!</span>")
-								var/turf/location = M.loc
-								if (istype(location, /turf/simulated))
-									location.add_blood(M)
-									if(ishuman(M))
-										var/mob/living/carbon/H = M
-										var/blood_volume = round(H:vessel.get_reagent_amount("blood"))
-										if(blood_volume > 0)
-											H:vessel.remove_reagent("blood",1)
+						if(!istype(M.loc, /turf/space))
+							var/area/A = get_area(M)
+							if(A.has_gravity)
+								//this is the gay blood on floor shit -- Added back -- Skie
+								if (M.lying && (prob(M.getBruteLoss() / 6)))
+									var/turf/location = M.loc
+									if (istype(location, /turf/simulated))
+										location.add_blood(M)
+								//pull damage with injured people
+									if(prob(25))
+										M.adjustBruteLoss(1)
+										visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state worsens": "wounds open more"] from being dragged!</span>")
+								if(M.pull_damage())
+									if(prob(25))
+										M.adjustBruteLoss(2)
+										visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state" : "wounds"] worsen terribly from being dragged!</span>")
+										var/turf/location = M.loc
+										if (istype(location, /turf/simulated))
+											location.add_blood(M)
+											if(ishuman(M))
+												var/mob/living/carbon/human/H = M
+												var/blood_volume = round(H.vessel.get_reagent_amount("blood"))
+												if(blood_volume > 0)
+													H.vessel.remove_reagent("blood", 1)
 
 
 						step(pulling, get_dir(pulling.loc, T))
@@ -574,28 +573,17 @@ default behaviour is:
 	set name = "Resist"
 	set category = "IC"
 
-	if(can_resist())
-		next_move = world.time + 20
-		process_resist()
-
-/mob/living/proc/can_resist()
-	//need to allow !canmove, or otherwise neck grabs can't be resisted
-	//so just check weakened instead.
-	if(stat || weakened)
-		return 0
-	if(next_move > world.time)
-		return 0
-	return 1
+	if(!(stat || next_move > world.time))
+		setClickCooldown(20)
+		resist_grab()
+		if(!weakened)
+			process_resist()
 
 /mob/living/proc/process_resist()
 	//Getting out of someone's inventory.
 	if(istype(src.loc, /obj/item/weapon/holder))
 		escape_inventory(src.loc)
 		return
-
-	//resisting grabs (as if it helps anyone...)
-	if (!restrained())
-		resist_grab()
 
 	//unbuckling yourself
 	if(buckled)
@@ -617,7 +605,7 @@ default behaviour is:
 		src << "<span class='warning'>You wriggle out of [M]'s grip!</span>"
 	else if(istype(H.loc,/obj/item))
 		src << "<span class='warning'>You struggle free of [H.loc].</span>"
-		H.loc = get_turf(H)
+		H.forceMove(get_turf(H))
 
 	if(istype(M))
 		for(var/atom/A in M.contents)
@@ -658,7 +646,15 @@ default behaviour is:
 	set category = "IC"
 
 	resting = !resting
-	src << "\blue You are now [resting ? "resting" : "getting up"]"
+	src << "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>"
+
+/mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	return isnull(get_inventory_slot(carried_item))
+
+/mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	if(carried_item == held_item)
+		return 0
+	return ..()
 
 /mob/living/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null, var/ignore_items = 0) // -- TLE -- Merged by Carn
 	if(stat)
@@ -668,9 +664,9 @@ default behaviour is:
 		src << "You can't vent crawl while you're stunned!"
 		return
 
-	var/special_fail_msg = can_use_vents()
+	var/special_fail_msg = cannot_use_vents()
 	if(special_fail_msg)
-		src << "\red [special_fail_msg]"
+		src << "<span class='warning'>[special_fail_msg]</span>"
 		return
 
 	if(vent_found) // one was passed in, probably from vent/AltClick()
@@ -722,9 +718,10 @@ default behaviour is:
 
 	if(!ignore_items)
 		for(var/obj/item/carried_item in contents)//If the monkey got on objects.
-			if( !istype(carried_item, /obj/item/weapon/implant) && !istype(carried_item, /obj/item/clothing/mask/facehugger) )//If it's not an implant or a facehugger
-				src << "\red You can't be carrying items or have items equipped when vent crawling!"
-				return
+			if(is_allowed_vent_crawl_item(carried_item))
+				continue
+			src << "<span class='warning'>You can't be carrying items or have items equipped when vent crawling!</span>"
+			return
 
 	if(isslime(src))
 		var/mob/living/carbon/slime/S = src
@@ -759,7 +756,7 @@ default behaviour is:
 		if(new_area)
 			new_area.Entered(src)
 
-/mob/living/proc/can_use_vents()
+/mob/living/proc/cannot_use_vents()
 	return "You can't fit into that vent."
 
 /mob/living/proc/has_brain()
@@ -791,7 +788,7 @@ default behaviour is:
 					inertia_dir = 1
 				else if(y >= world.maxy -TRANSITIONEDGE)
 					inertia_dir = 2
-				src << "<span class='warning>Something you are carrying is preventing you from leaving.</span>"
+				src << "<span class='warning'>Something you are carrying is preventing you from leaving.</span>"
 				return
 
 	..()

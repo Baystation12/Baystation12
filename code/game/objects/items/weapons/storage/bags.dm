@@ -107,7 +107,7 @@
 	name = "sheet snatcher"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "sheetsnatcher"
-	desc = "A patented Nanotrasen storage system designed for any kind of mineral sheet."
+	desc = "A patented storage system designed for any kind of mineral sheet."
 
 	var/capacity = 300; //the number of sheets it can carry.
 	w_class = 3
@@ -119,10 +119,10 @@
 		//verbs += /obj/item/weapon/storage/bag/sheetsnatcher/quick_empty
 
 	can_be_inserted(obj/item/W as obj, stop_messages = 0)
-		if(!istype(W,/obj/item/stack/material) || istype(W,/obj/item/stack/material/sandstone) || istype(W,/obj/item/stack/material/wood))
+		if(!istype(W,/obj/item/stack/material))
 			if(!stop_messages)
 				usr << "The snatcher does not accept [W]."
-			return 0 //I don't care, but the existing code rejects them for not being "sheets" *shrug* -Sayu
+			return 0
 		var/current = 0
 		for(var/obj/item/stack/material/S in contents)
 			current += S.amount

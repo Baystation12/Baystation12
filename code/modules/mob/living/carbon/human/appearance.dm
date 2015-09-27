@@ -95,6 +95,8 @@
 	g_hair = green
 	b_hair = blue
 
+	force_update_limbs()
+	update_body()
 	update_hair()
 	return 1
 
@@ -110,7 +112,7 @@
 	return 1
 
 /mob/living/carbon/human/proc/change_skin_color(var/red, var/green, var/blue)
-	if(red == r_skin && green == g_skin && blue == b_skin || !(species.flags & HAS_SKIN_COLOR))
+	if(red == r_skin && green == g_skin && blue == b_skin || !(species.appearance_flags & HAS_SKIN_COLOR))
 		return
 
 	r_skin = red
@@ -122,7 +124,7 @@
 	return 1
 
 /mob/living/carbon/human/proc/change_skin_tone(var/tone)
-	if(s_tone == tone || !(species.flags & HAS_SKIN_TONE))
+	if(s_tone == tone || !(species.appearance_flags & HAS_SKIN_TONE))
 		return
 
 	s_tone = tone
@@ -141,29 +143,29 @@
 		var/datum/species/current_species = all_species[current_species_name]
 
 		if(check_whitelist && config.usealienwhitelist && !check_rights(R_ADMIN, 0, src)) //If we're using the whitelist, make sure to check it!
-			if(!(current_species.flags & CAN_JOIN))
+			if(!(current_species.spawn_flags & CAN_JOIN))
 				continue
 			if(whitelist.len && !(current_species_name in whitelist))
 				continue
 			if(blacklist.len && (current_species_name in blacklist))
 				continue
-			if((current_species.flags & IS_WHITELISTED) && !is_alien_whitelisted(src, current_species_name))
+			if((current_species.spawn_flags & IS_WHITELISTED) && !is_alien_whitelisted(src, current_species_name))
 				continue
 
 		valid_species += current_species_name
 
 	return valid_species
 
-/mob/living/carbon/human/proc/generate_valid_hairstyles()
+/mob/living/carbon/human/proc/generate_valid_hairstyles(var/check_gender = 1)
 	var/list/valid_hairstyles = new()
 	for(var/hairstyle in hair_styles_list)
 		var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
 
-		if(gender == MALE && S.gender == FEMALE)
+		if(check_gender && gender == MALE && S.gender == FEMALE)
 			continue
-		if(gender == FEMALE && S.gender == MALE)
+		if(check_gender && gender == FEMALE && S.gender == MALE)
 			continue
-		if(!(species.name in S.species_allowed))
+		if(!(species.get_bodytype() in S.species_allowed))
 			continue
 		valid_hairstyles += hairstyle
 
@@ -178,16 +180,12 @@
 			continue
 		if(gender == FEMALE && S.gender == MALE)
 			continue
-		if(!(species.name in S.species_allowed))
+		if(!(species.get_bodytype() in S.species_allowed))
 			continue
 
 		valid_facial_hairstyles += facialhairstyle
 
 	return valid_facial_hairstyles
-
-/proc/q()
-	var/mob/living/carbon/human/H = usr
-	H.change_appearance(APPEARANCE_ALL)
 
 /mob/living/carbon/human/proc/force_update_limbs()
 	for(var/obj/item/organ/external/O in organs)

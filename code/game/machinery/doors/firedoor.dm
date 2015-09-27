@@ -1,5 +1,3 @@
-/var/const/OPEN = 1
-/var/const/CLOSED = 2
 
 #define FIREDOOR_MAX_PRESSURE_DIFF 25 // kPa
 #define FIREDOOR_MAX_TEMP 50 // °C
@@ -75,6 +73,8 @@
 		A.all_doors.Remove(src)
 	. = ..()
 
+/obj/machinery/door/firedoor/get_material()
+	return get_material_by_name(DEFAULT_WALL_MATERIAL)
 
 /obj/machinery/door/firedoor/examine(mob/user)
 	. = ..(user, 1)
@@ -147,7 +147,7 @@
 	"\The [src]", "Yes, [density ? "open" : "close"]", "No")
 	if(answer == "No")
 		return
-	if(user.stat || user.stunned || user.weakened || user.paralysis || (!user.canmove && !user.isSilicon()) || (get_dist(src, user) > 1  && !isAI(user)))
+	if(user.incapacitated() || (get_dist(src, user) > 1  && !issilicon(user)))
 		user << "Sorry, you must remain able bodied and close to \the [src] in order to use it."
 		return
 	if(density && (stat & (BROKEN|NOPOWER))) //can still close without power
@@ -167,7 +167,7 @@
 		if(alarmed)
 			// Accountability!
 			users_to_open |= user.name
-			needs_to_close = !user.isSilicon()
+			needs_to_close = !issilicon(user)
 		spawn()
 			open()
 	else
@@ -181,7 +181,7 @@
 				if(A.fire || A.air_doors_activated)
 					alarmed = 1
 			if(alarmed)
-				nextstate = CLOSED
+				nextstate = FIREDOOR_CLOSED
 				close()
 
 /obj/machinery/door/firedoor/attackby(obj/item/weapon/C as obj, mob/user as mob)
@@ -322,11 +322,11 @@
 	if(operating || !nextstate)
 		return
 	switch(nextstate)
-		if(OPEN)
+		if(FIREDOOR_OPEN)
 			nextstate = null
 
 			open()
-		if(CLOSED)
+		if(FIREDOOR_CLOSED)
 			nextstate = null
 			close()
 	return

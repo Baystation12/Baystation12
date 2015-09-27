@@ -66,19 +66,19 @@
 			user << "<span class='info'>You inject the blood sample into the bioprinter.</span>"
 		return
 	// Meat for biomass.
-	else if(!prints_prosthetics && istype(W, /obj/item/weapon/reagent_containers/food/snacks/meat))
+	if(!prints_prosthetics && istype(W, /obj/item/weapon/reagent_containers/food/snacks/meat))
 		stored_matter += 50
 		user.drop_item()
 		user << "<span class='info'>\The [src] processes \the [W]. Levels of stored biomass now: [stored_matter]</span>"
 		qdel(W)
 		return
 	// Steel for matter.
-	else if(prints_prosthetics && istype(W, /obj/item/stack/material/steel))
-		var/obj/item/stack/material/steel/M = W
-		stored_matter += M.amount * 10
+	if(prints_prosthetics && istype(W, /obj/item/stack/material) && W.get_material_name() == DEFAULT_WALL_MATERIAL)
+		var/obj/item/stack/S = W
+		stored_matter += S.amount * 10
 		user.drop_item()
 		user << "<span class='info'>\The [src] processes \the [W]. Levels of stored matter now: [stored_matter]</span>"
 		qdel(W)
 		return
-	else
-		return..()
+	
+	return..()

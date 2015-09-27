@@ -159,7 +159,7 @@
 		precision = max(rand(1,100)*bagholding.len,100)
 		if(istype(teleatom, /mob/living))
 			var/mob/living/MM = teleatom
-			MM << "<span class='danger>The Bluespace interface on your [teleatom] interferes with the teleport!</span>"
+			MM << "<span class='danger'>The Bluespace interface on your [teleatom] interferes with the teleport!</span>"
 	return 1
 
 /datum/teleport/instant/science/teleportChecks()

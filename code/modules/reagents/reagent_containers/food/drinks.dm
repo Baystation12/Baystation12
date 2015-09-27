@@ -14,11 +14,16 @@
 		return
 
 	attack_self(mob/user as mob)
-		return
+		if(!is_open_container())
+			open(user)
+
+	proc/open(mob/user)
+		playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
+		user << "<span class='notice'>You open [src] with an audible pop!</span>"
+		flags |= OPENCONTAINER
 
 	attack(mob/M as mob, mob/user as mob, def_zone)
 		if(standard_feed_mob(user, M))
-			robot_refill(user)
 			return
 
 		return 0
@@ -29,21 +34,26 @@
 		if(standard_dispenser_refill(user, target))
 			return
 		if(standard_pour_into(user, target))
-			robot_refill(user)
 			return
-
 		return ..()
 
-	proc/robot_refill(var/mob/living/silicon/robot/user)
-		if(!istype(user))
-			return 0
+	standard_feed_mob(var/mob/user, var/mob/target)
+		if(!is_open_container())
+			user << "<span class='notice'>You need to open [src]!</span>"
+			return 1
+		return ..()
 
-		user.cell.use(30)
-		var/refill = reagents.get_master_reagent_id()
-		user << "Now synthesizing [amount_per_transfer_from_this] units of [refill]..."
-		spawn(300)
-			reagents.add_reagent(refill, amount_per_transfer_from_this)
-			user << "Cyborg [src] refilled."
+	standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target)
+		if(!is_open_container())
+			user << "<span class='notice'>You need to open [src]!</span>"
+			return 1
+		return ..()
+
+	standard_pour_into(var/mob/user, var/atom/target)
+		if(!is_open_container())
+			user << "<span class='notice'>You need to open [src]!</span>"
+			return 1
+		return ..()
 
 	self_feed_message(var/mob/user)
 		user << "<span class='notice'>You swallow a gulp from \the [src].</span>"

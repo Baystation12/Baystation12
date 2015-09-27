@@ -8,6 +8,7 @@
 	eyeblur = 4
 	var/frequency = 1
 	hitscan = 1
+	invisibility = 101	//beam projectiles are invisible as they are rendered by the effect engine
 
 	muzzle_type = /obj/effect/projectile/laser/muzzle
 	tracer_type = /obj/effect/projectile/laser/tracer
@@ -22,10 +23,15 @@
 	check_armour = "laser"
 	eyeblur = 2
 
+/obj/item/projectile/beam/midlaser
+	damage = 40
+	armor_penetration = 10
+
 /obj/item/projectile/beam/heavylaser
 	name = "heavy laser"
 	icon_state = "heavylaser"
 	damage = 60
+	armor_penetration = 30
 
 	muzzle_type = /obj/effect/projectile/laser_heavy/muzzle
 	tracer_type = /obj/effect/projectile/laser_heavy/tracer
@@ -34,7 +40,8 @@
 /obj/item/projectile/beam/xray
 	name = "xray beam"
 	icon_state = "xray"
-	damage = 30
+	damage = 25
+	armor_penetration = 50
 
 	muzzle_type = /obj/effect/projectile/xray/muzzle
 	tracer_type = /obj/effect/projectile/xray/tracer
@@ -44,6 +51,7 @@
 	name = "pulse"
 	icon_state = "u_laser"
 	damage = 50
+	armor_penetration = 30
 
 	muzzle_type = /obj/effect/projectile/laser_pulse/muzzle
 	tracer_type = /obj/effect/projectile/laser_pulse/tracer
@@ -121,7 +129,8 @@
 /obj/item/projectile/beam/sniper
 	name = "sniper beam"
 	icon_state = "xray"
-	damage = 60
+	damage = 50
+	armor_penetration = 10
 	stun = 3
 	weaken = 3
 	stutter = 3

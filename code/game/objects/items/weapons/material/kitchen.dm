@@ -61,7 +61,7 @@
 	attack_verb = list("attacked", "poked")
 	edge = 0
 	sharp = 0
-	force_divisor = 0.25 //5 when wielded with weight 20 (steel)
+	force_divisor = 0.1 //2 when wielded with weight 20 (steel)
 
 /obj/item/weapon/material/kitchen/utensil/spoon/plastic
 	default_material = "plastic"
@@ -71,9 +71,9 @@
  */
 /obj/item/weapon/material/kitchen/utensil/knife
 	name = "knife"
-	desc = "Can cut through any food."
+	desc = "A knife for eating with. Can cut through any food."
 	icon_state = "knife"
-	force_divisor = 0.2 // 12 when wielded with hardness 60 (steel)
+	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
 
 /obj/item/weapon/material/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
@@ -100,7 +100,7 @@
 	name = "rolling pin"
 	desc = "Used to knock out the Bartender."
 	icon_state = "rolling_pin"
-	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked") //I think the rollingpin attackby will end up ignoring this anyway.
+	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked")
 	default_material = "wood"
 	force_divisor = 0.7 // 10 when wielded with weight 15 (wood)
 	thrown_force_divisor = 1 // as above

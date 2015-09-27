@@ -39,6 +39,8 @@
 	if(!metal && reagents)
 		var/turf/T = get_turf(src)
 		reagents.touch_turf(T)
+		for(var/obj/O in T)
+			reagents.touch_obj(O)
 
 /obj/effect/effect/foam/process()
 	if(--amount < 0)

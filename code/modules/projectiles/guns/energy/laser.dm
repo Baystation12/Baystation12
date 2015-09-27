@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/laser
 	name = "laser carbine"
-	desc = "A common laser weapon, designed to kill with concentrated energy blasts."
+	desc = "An Hesphaistos Industries G40E carbine, designed to kill with concentrated energy blasts."
 	icon_state = "laser"
 	item_state = "laser"
 	fire_sound = 'sound/weapons/Laser.ogg'
@@ -9,23 +9,22 @@
 	force = 10
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
-	projectile_type = /obj/item/projectile/beam
-	fire_delay = 1 //rapid fire
+	projectile_type = /obj/item/projectile/beam/midlaser
 
 /obj/item/weapon/gun/energy/laser/mounted
 	self_recharge = 1
 	use_external_power = 1
 
 /obj/item/weapon/gun/energy/laser/practice
-	name = "practice laser gun"
-	desc = "A modified version of the basic laser gun, this one fires less concentrated energy bolts designed for target practice."
+	name = "practice laser carbine"
+	desc = "A modified version of the HI G40E, this one fires less concentrated energy bolts designed for target practice."
 	projectile_type = /obj/item/projectile/beam/practice
 
 obj/item/weapon/gun/energy/retro
 	name = "retro laser"
 	icon_state = "retro"
 	item_state = "retro"
-	desc = "An older model of the basic lasergun, no longer used by Nanotrasen's security or military forces. Nevertheless, it is still quite deadly and easy to maintain, making it a favorite amongst pirates and other outlaws."
+	desc = "An older model of the basic lasergun. Nevertheless, it is still quite deadly and easy to maintain, making it a favorite amongst pirates and other outlaws."
 	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT
 	w_class = 3
@@ -36,7 +35,7 @@ obj/item/weapon/gun/energy/retro
 	name = "antique laser gun"
 	icon_state = "caplaser"
 	item_state = "caplaser"
-	desc = "This is an antique laser gun. All craftsmanship is of the highest quality. It is decorated with assistant leather and chrome. The object menaces with spikes of energy. On the item is an image of Space Station 13. The station is exploding."
+	desc = "A rare weapon, handcrafted by a now defunct specialty manufacturer on Luna for a small fortune. It's certainly aged well"
 	force = 5
 	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT
@@ -78,8 +77,8 @@ obj/item/weapon/gun/energy/retro
 	fire_delay = 1
 
 /obj/item/weapon/gun/energy/sniperrifle
-	name = "\improper L.W.A.P. sniper rifle"
-	desc = "A high-power laser rifle fitted with a SMART aiming-system scope."
+	name = "marksman energy rifle"
+	desc = "The HI DMR 9E is an older design of Hesphaistos Industries. A designated marksman rifle capable of shooting powerful ionized beams, this is a weapon to kill from a distance."
 	icon_state = "sniper"
 	item_state = "laser"
 	fire_sound = 'sound/weapons/marauder.ogg'

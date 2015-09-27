@@ -9,21 +9,22 @@
 #define SEC_LEVEL_RED   2
 #define SEC_LEVEL_DELTA 3
 
-#define BE_TRAITOR    1
-#define BE_OPERATIVE  2
-#define BE_CHANGELING 4
-#define BE_WIZARD     8
-#define BE_MALF       16
-#define BE_REV        32
-#define BE_ALIEN      64
-#define BE_AI         128
-#define BE_CULTIST    256
-#define BE_MONKEY     512
-#define BE_NINJA      1024
-#define BE_RAIDER     2048
-#define BE_PLANT      4096
-#define BE_MUTINEER   8192
-#define BE_PAI        16384
+#define BE_TRAITOR    0x1
+#define BE_OPERATIVE  0x2
+#define BE_CHANGELING 0x4
+#define BE_WIZARD     0x8
+#define BE_MALF       0x10
+#define BE_REV        0x20
+#define BE_ALIEN      0x40
+#define BE_AI         0x80
+#define BE_CULTIST    0x100
+#define BE_MONKEY     0x200
+#define BE_NINJA      0x400
+#define BE_RAIDER     0x800
+#define BE_PLANT      0x1000
+#define BE_MUTINEER   0x2000
+#define BE_PAI        0x4000
+#define BE_LOYALIST   0x8000
 
 var/list/be_special_flags = list(
 	"Traitor"          = BE_TRAITOR,
@@ -32,6 +33,7 @@ var/list/be_special_flags = list(
 	"Wizard"           = BE_WIZARD,
 	"Malf AI"          = BE_MALF,
 	"Revolutionary"    = BE_REV,
+	"Loyalist"         = BE_LOYALIST,
 	"Xenomorph"        = BE_ALIEN,
 	"Positronic Brain" = BE_AI,
 	"Cultist"          = BE_CULTIST,
@@ -47,17 +49,17 @@ var/list/be_special_flags = list(
 
 
 // Antagonist datum flags.
-#define ANTAG_OVERRIDE_JOB        1 // Assigned job is set to MODE when spawning.
-#define ANTAG_OVERRIDE_MOB        2 // Mob is recreated from datum mob_type var when spawning.
-#define ANTAG_CLEAR_EQUIPMENT     4 // All preexisting equipment is purged.
-#define ANTAG_CHOOSE_NAME         8 // Antagonists are prompted to enter a name.
-#define ANTAG_IMPLANT_IMMUNE     16 // Cannot be loyalty implanted.
-#define ANTAG_SUSPICIOUS         32 // Shows up on roundstart report.
-#define ANTAG_HAS_LEADER         64 // Generates a leader antagonist.
-#define ANTAG_HAS_NUKE          128 // Will spawn a nuke at supplied location.
-#define ANTAG_RANDSPAWN         256 // Potentially randomly spawns due to events.
-#define ANTAG_VOTABLE           512 // Can be voted as an additional antagonist before roundstart.
-#define ANTAG_SET_APPEARANCE   1024 // Causes antagonists to use an appearance modifier on spawn.
+#define ANTAG_OVERRIDE_JOB        0x1 // Assigned job is set to MODE when spawning.
+#define ANTAG_OVERRIDE_MOB        0x2 // Mob is recreated from datum mob_type var when spawning.
+#define ANTAG_CLEAR_EQUIPMENT     0x4 // All preexisting equipment is purged.
+#define ANTAG_CHOOSE_NAME         0x8 // Antagonists are prompted to enter a name.
+#define ANTAG_IMPLANT_IMMUNE     0x10 // Cannot be loyalty implanted.
+#define ANTAG_SUSPICIOUS         0x20 // Shows up on roundstart report.
+#define ANTAG_HAS_LEADER         0x40 // Generates a leader antagonist.
+#define ANTAG_HAS_NUKE           0x80 // Will spawn a nuke at supplied location.
+#define ANTAG_RANDSPAWN         0x100 // Potentially randomly spawns due to events.
+#define ANTAG_VOTABLE           0x200 // Can be voted as an additional antagonist before roundstart.
+#define ANTAG_SET_APPEARANCE    0x400 // Causes antagonists to use an appearance modifier on spawn.
 
 // Mode/antag template macros.
 #define MODE_BORER "borer"
@@ -77,6 +79,7 @@ var/list/be_special_flags = list(
 #define MODE_MONKEY "monkey"
 #define MODE_RENEGADE "renegade"
 #define MODE_REVOLUTIONARY "revolutionary"
+#define MODE_LOYALIST "loyalist"
 #define MODE_MALFUNCTION "malf"
 #define MODE_TRAITOR "traitor"
 
@@ -87,22 +90,22 @@ var/list/be_special_flags = list(
 /////////////////
 
 /*		WIZARD SPELL FLAGS		*/
-#define GHOSTCAST		1	//can a ghost cast it?
-#define NEEDSCLOTHES	2	//does it need the wizard garb to cast? Nonwizard spells should not have this
-#define NEEDSHUMAN		4	//does it require the caster to be human?
-#define Z2NOCAST		8	//if this is added, the spell can't be cast at centcomm
-#define STATALLOWED		16	//if set, the user doesn't have to be conscious to cast. Required for ghost spells
-#define IGNOREPREV		32	//if set, each new target does not overlap with the previous one
+#define GHOSTCAST		0x1		//can a ghost cast it?
+#define NEEDSCLOTHES	0x2		//does it need the wizard garb to cast? Nonwizard spells should not have this
+#define NEEDSHUMAN		0x4		//does it require the caster to be human?
+#define Z2NOCAST		0x8		//if this is added, the spell can't be cast at centcomm
+#define STATALLOWED		0x10	//if set, the user doesn't have to be conscious to cast. Required for ghost spells
+#define IGNOREPREV		0x20	//if set, each new target does not overlap with the previous one
 //The following flags only affect different types of spell, and therefore overlap
 //Targeted spells
-#define INCLUDEUSER		64	//does the spell include the caster in its target selection?
-#define SELECTABLE		128	//can you select each target for the spell?
+#define INCLUDEUSER		0x40	//does the spell include the caster in its target selection?
+#define SELECTABLE		0x80	//can you select each target for the spell?
 //AOE spells
-#define IGNOREDENSE		64	//are dense turfs ignored in selection?
-#define IGNORESPACE		128	//are space turfs ignored in selection?
+#define IGNOREDENSE		0x40	//are dense turfs ignored in selection?
+#define IGNORESPACE		0x80	//are space turfs ignored in selection?
 //End split flags
-#define CONSTRUCT_CHECK	256	//used by construct spells - checks for nullrods
-#define NO_BUTTON		512	//spell won't show up in the HUD with this
+#define CONSTRUCT_CHECK	0x100	//used by construct spells - checks for nullrods
+#define NO_BUTTON		0x200	//spell won't show up in the HUD with this
 
 //invocation
 #define SpI_SHOUT	"shout"

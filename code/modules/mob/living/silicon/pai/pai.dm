@@ -4,9 +4,8 @@
 	icon_state = "repairbot"
 
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
-	small = 1
 	pass_flags = 1
-	holder_type = /obj/item/weapon/holder/pai
+	mob_size = MOB_SMALL
 
 	var/network = "SS13"
 	var/obj/machinery/camera/current = null
@@ -73,8 +72,6 @@
 	var/current_pda_messaging = null
 
 /mob/living/silicon/pai/New(var/obj/item/device/paicard)
-
-	canmove = 0
 	src.loc = paicard
 	card = paicard
 	sradio = new(src)
@@ -119,9 +116,8 @@
 
 /mob/living/silicon/pai/check_eye(var/mob/user as mob)
 	if (!src.current)
-		return null
-	user.reset_view(src.current)
-	return 1
+		return -1
+	return 0
 
 /mob/living/silicon/pai/blob_act()
 	if (src.stat != 2)
@@ -170,9 +166,6 @@
 			src << "<font color=green>You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all.</font>"
 
 /mob/living/silicon/pai/proc/switchCamera(var/obj/machinery/camera/C)
-	if(istype(usr, /mob/living))
-		var/mob/living/U = usr
-		U.cameraFollow = null
 	if (!C)
 		src.unset_machine()
 		src.reset_view(null)
@@ -281,8 +274,6 @@
 		var/obj/item/device/pda/holder = card.loc
 		holder.pai = null
 
-	canmove = 1
-
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = src
 	src.forceMove(get_turf(card))
@@ -344,12 +335,16 @@
 	set name = "Rest"
 	set category = "IC"
 
+	// Pass lying down or getting up to our pet human, if we're in a rig.
 	if(istype(src.loc,/obj/item/device/paicard))
 		resting = 0
+		var/obj/item/weapon/rig/rig = src.get_rig()
+		if(istype(rig))
+			rig.force_rest(src)
 	else
 		resting = !resting
 		icon_state = resting ? "[chassis]_rest" : "[chassis]"
-		src << "\blue You are now [resting ? "resting" : "getting up"]"
+		src << "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>"
 
 	canmove = !resting
 
@@ -384,6 +379,9 @@
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = card
 
+	//stop resting
+	resting = 0
+
 	// If we are being held, handle removing our holder from their inv.
 	var/obj/item/weapon/holder/H = loc
 	if(istype(H))
@@ -398,7 +396,8 @@
 	card.loc = get_turf(card)
 	src.forceMove(card)
 	card.forceMove(card.loc)
-	canmove = 0
+	canmove = 1
+	resting = 0
 	icon_state = "[chassis]"
 
 /mob/living/silicon/pai/start_pulling(var/atom/movable/AM)

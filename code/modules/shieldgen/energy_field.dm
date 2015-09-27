@@ -25,7 +25,7 @@
 	Stress(0.5 + severity)
 
 /obj/effect/energy_field/bullet_act(var/obj/item/projectile/Proj)
-	Stress(Proj.damage / 10)
+	Stress(Proj.get_structure_damage() / 10)
 
 /obj/effect/energy_field/proc/Stress(var/severity)
 	strength -= severity

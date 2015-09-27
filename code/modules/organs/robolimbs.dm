@@ -16,6 +16,7 @@ var/global/datum/robolimb/basic_robolimb
 	var/desc = "A generic unbranded robotic prosthesis." // Seen when examining a limb.
 	var/icon = 'icons/mob/human_races/robotic.dmi'       // Icon base to draw from.
 	var/unavailable_at_chargen                           // If set, not available at chargen.
+	var/list/species_cannot_use = list("Resomi")
 
 /datum/robolimb/bishop
 	company = "Bishop Cybernetics"

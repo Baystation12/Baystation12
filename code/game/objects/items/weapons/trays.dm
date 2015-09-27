@@ -73,7 +73,14 @@
 			return
 
 
-	if(istype(M, /mob/living/carbon/human) && ((H.head && H.head.flags & HEADCOVERSEYES) || (H.wear_mask && H.wear_mask.flags & MASKCOVERSEYES) || (H.glasses && H.glasses.flags & GLASSESCOVERSEYES)))
+	var/protected = 0
+	for(var/slot in list(slot_head, slot_wear_mask, slot_glasses))
+		var/obj/item/protection = M.get_equipped_item(slot)
+		if(istype(protection) && (protection.body_parts_covered & FACE))
+			protected = 1
+			break
+	
+	if(protected)
 		M << "<span class='warning'>You get slammed in the face with the tray, against your mask!</span>"
 		if(prob(33))
 			src.add_blood(H)

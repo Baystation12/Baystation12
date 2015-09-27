@@ -116,6 +116,9 @@ var/list/organ_cache = list()
 		if(B && prob(40))
 			reagents.remove_reagent("blood",0.1)
 			blood_splatter(src,B,1)
+		if(config.organs_decay) damage += rand(1,3)
+		if(damage >= max_damage)
+			damage = max_damage
 		germ_level += rand(2,6)
 		if(germ_level >= INFECTION_LEVEL_TWO)
 			germ_level += rand(2,6)
@@ -224,14 +227,15 @@ var/list/organ_cache = list()
 	W.damage += damage
 	W.time_inflicted = world.time
 
+//Note: external organs have their own version of this proc
 /obj/item/organ/proc/take_damage(amount, var/silent=0)
 	if(src.status & ORGAN_ROBOT)
-		src.damage += (amount * 0.8)
+		src.damage = between(0, src.damage + (amount * 0.8), max_damage)
 	else
-		src.damage += amount
+		src.damage = between(0, src.damage + amount, max_damage)
 
 		//only show this if the organ is not robotic
-		if(owner && parent_organ)
+		if(owner && parent_organ && amount > 0)
 			var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 			if(parent && !silent)
 				owner.custom_pain("Something inside your [parent.name] hurts a lot.", 1)
@@ -341,6 +345,7 @@ var/list/organ_cache = list()
 	user.drop_from_inventory(src)
 	var/obj/item/weapon/reagent_containers/food/snacks/organ/O = new(get_turf(src))
 	O.name = name
+	O.icon = icon
 	O.icon_state = icon_state
 
 	// Pass over the blood.

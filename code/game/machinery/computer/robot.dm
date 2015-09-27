@@ -2,10 +2,11 @@
 	name = "robotics control console"
 	desc = "Used to remotely lockdown or detonate linked cyborgs."
 	icon = 'icons/obj/computer.dmi'
-	icon_state = "robot"
+	icon_keyboard = "tech_key"
+	icon_screen = "robot"
 	light_color = "#a97faa"
 	req_access = list(access_robotics)
-	circuit = "/obj/item/weapon/circuitboard/robotics"
+	circuit = /obj/item/weapon/circuitboard/robotics
 
 	var/safety = 1
 
@@ -20,7 +21,7 @@
 	data["robots"] = get_cyborgs(user)
 	data["safety"] = safety
 	// Also applies for cyborgs. Hides the manual self-destruct button.
-	data["is_ai"] = user.isSilicon()
+	data["is_ai"] = issilicon(user)
 
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -43,7 +44,7 @@
 		var/mob/living/silicon/robot/target = get_cyborg_by_name(href_list["detonate"])
 		if(!target || !istype(target))
 			return
-		if(user.isMobAI() && (target.connected_ai != user))
+		if(isAI(user) && (target.connected_ai != user))
 			user << "Access Denied. This robot is not linked to you."
 			return
 		// Cyborgs may blow up themselves via the console
@@ -75,7 +76,7 @@
 		if(!target || !istype(target))
 			return
 
-		if(user.isMobAI() && (target.connected_ai != user))
+		if(isAI(user) && (target.connected_ai != user))
 			user << "Access Denied. This robot is not linked to you."
 			return
 

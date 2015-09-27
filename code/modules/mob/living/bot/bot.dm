@@ -16,6 +16,7 @@
 
 	var/obj/access_scanner = null
 	var/list/req_access = list()
+	var/list/req_one_access = list()
 
 /mob/living/bot/New()
 	..()
@@ -26,14 +27,16 @@
 
 	access_scanner = new /obj(src)
 	access_scanner.req_access = req_access.Copy()
+	access_scanner.req_one_access = req_one_access.Copy()
 
 /mob/living/bot/Life()
 	..()
+	if(health <= 0)
+		death()
+		return
 	weakened = 0
 	stunned = 0
 	paralysis = 0
-	if(health <= 0)
-		death()
 
 /mob/living/bot/updatehealth()
 	if(status_flags & GODMODE)
@@ -94,10 +97,12 @@
 	..(message, null, verb)
 
 /mob/living/bot/Bump(var/atom/A)
-	if(istype(A, /obj/machinery/door) && botcard)
+	if(on && botcard && istype(A, /obj/machinery/door))
 		var/obj/machinery/door/D = A
 		if(!istype(D, /obj/machinery/door/firedoor) && !istype(D, /obj/machinery/door/blast) && D.check_access(botcard))
 			D.open()
+	else
+		..()
 
 /mob/living/bot/emag_act(var/remaining_charges, var/mob/user)
 	return 0

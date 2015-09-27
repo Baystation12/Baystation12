@@ -248,7 +248,7 @@ datum/signal
 		if(source in S.stored_names)
 			newsign.data["name"] = source
 		else
-			newsign.data["name"] = "<i>[html_encode(uppertext(source))]<i>"
+			newsign.data["name"] = "<i>[html_encode(uppertext(source))]</i>"
 		newsign.data["realname"] = newsign.data["name"]
 		newsign.data["job"] = job
 		newsign.data["compression"] = 0
