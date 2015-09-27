@@ -101,10 +101,9 @@
 
 /obj/machinery/alarm/Destroy()
 	unregister_radio(src, frequency)
-	if(wires)
-		qdel(wires)
-		wires = null
-	..()
+	qdel(wires)
+	wires = null
+	return ..()
 
 /obj/machinery/alarm/New(var/loc, var/dir, var/building = 0)
 	..()
