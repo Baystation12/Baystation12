@@ -105,7 +105,7 @@ Class Procs:
 
 	var/simulated_turf_count = 0
 
-	for(var/turf/simulated/S in world)
+	for(var/turf/simulated/S in turf_list)
 		simulated_turf_count++
 		S.update_air_properties()
 

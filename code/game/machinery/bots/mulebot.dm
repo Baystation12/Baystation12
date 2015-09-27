@@ -70,7 +70,7 @@
 			radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
 
 		var/count = 0
-		for(var/obj/machinery/bot/mulebot/other in world)
+		for(var/obj/machinery/bot/mulebot/other in machines)
 			count++
 		if(!suffix)
 			suffix = "#[count]"

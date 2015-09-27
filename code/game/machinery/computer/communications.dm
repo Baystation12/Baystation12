@@ -423,7 +423,7 @@
 	return dat
 
 /proc/enable_prison_shuttle(var/mob/user)
-	for(var/obj/machinery/computer/prison_shuttle/PS in world)
+	for(var/obj/machinery/computer/prison_shuttle/PS in machines)
 		PS.allowedtocall = !(PS.allowedtocall)
 
 /proc/call_shuttle_proc(var/mob/user)
@@ -525,7 +525,7 @@
 
 
 /proc/is_relay_online()
-    for(var/obj/machinery/bluespacerelay/M in world)
+    for(var/obj/machinery/bluespacerelay/M in machines)
         if(M.stat == 0)
             return 1
     return 0

@@ -31,7 +31,7 @@
 		spawn( 0 )
 			src.Entered(AM)
 			return
-	turfs |= src
+	turf_list += src
 
 	if(dynamic_lighting)
 		luminosity = 0
@@ -42,7 +42,7 @@
 	return
 
 /turf/Destroy()
-	turfs -= src
+	turf_list -= src
 	..()
 
 /turf/ex_act(severity)

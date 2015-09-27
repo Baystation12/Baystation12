@@ -61,7 +61,7 @@
 
 
 	proc/count()
-		for(var/turf/T in world)
+		for(var/turf/T in turf_list)
 			if(isNotStationLevel(T.z)
 				continue
 

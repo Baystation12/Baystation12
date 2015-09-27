@@ -151,7 +151,7 @@ datum
 
 				var/start_time = world.timeofday
 
-				for(var/turf/simulated/S in world)
+				for(var/turf/simulated/S in turf_list)
 					if(!S.blocks_air && !S.parent)
 						assemble_group_turf(S)
 					S.update_air_properties()

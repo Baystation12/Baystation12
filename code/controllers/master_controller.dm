@@ -46,7 +46,7 @@ datum/controller/game_controller/proc/setup()
 datum/controller/game_controller/proc/setup_objects()
 	admin_notice("<span class='danger'>Initializing objects</span>", R_DEBUG)
 	sleep(-1)
-	for(var/atom/movable/object in world)
+	for(var/atom/movable/object in atom_movable_list)
 		object.initialize()
 
 	admin_notice("<span class='danger'>Initializing areas</span>", R_DEBUG)

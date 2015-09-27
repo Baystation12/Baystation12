@@ -6,7 +6,7 @@
 // Variables not to expand the lists of. Vars is pointless to expand, and overlays/underlays cannot be expanded.
 /var/list/view_variables_dont_expand = list("overlays", "underlays", "vars")
 
-/client/proc/debug_variables(datum/D in world)
+/client/proc/debug_variables(datum/D in view())
 	set category = "Debug"
 	set name = "View Variables"
 

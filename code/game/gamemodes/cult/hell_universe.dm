@@ -65,14 +65,14 @@ In short:
 
 /datum/universal_state/hell/OverlayAndAmbientSet()
 	spawn(0)
-		for(var/atom/movable/lighting_overlay/L in world)
+		for(var/atom/movable/lighting_overlay/L in atom_movable_list)
 			L.update_lumcount(1, 0, 0)
 
-		for(var/turf/space/T in turfs)
+		for(var/turf/space/T in turf_list)
 			OnTurfChange(T)
 
 /datum/universal_state/hell/proc/MiscSet()
-	for(var/turf/simulated/floor/T in turfs)
+	for(var/turf/simulated/floor/T in turf_list)
 		if(!T.holy && prob(1))
 			new /obj/effect/gateway/active/cult(T)
 

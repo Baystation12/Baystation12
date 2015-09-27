@@ -7,7 +7,7 @@
 /proc/create_lighting_overlays(zlevel = 0)
 	var/area/A
 	if(zlevel == 0) // populate all zlevels
-		for(var/turf/T in world)
+		for(var/turf/T in turf_list)
 			if(T.dynamic_lighting)
 				A = T.loc
 				if(A.lighting_use_dynamic)
