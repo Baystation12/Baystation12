@@ -1309,3 +1309,7 @@ var/mob/dview/dview_mob = new
 /mob/dview/New()
 	// do nothing. we don't want to be in any mob lists; we're a dummy not a mob.
 
+
+// call to generate a stack trace and print to runtime logs
+/proc/crash_with(msg)
+	CRASH(msg)
