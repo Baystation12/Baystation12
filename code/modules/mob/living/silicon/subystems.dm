@@ -76,7 +76,7 @@
 	set name = "Law Manager"
 	set category = "Subystems"
 
-	law_manager.ui_interact(usr, state = self_state)
+	law_manager.ui_interact(usr, state = conscious_state)
 
 /********************
 *	Power Monitor	*
