@@ -126,24 +126,60 @@
 			adjustEarDamage(-0.05,-1)
 
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
-/mob/living/handle_regular_hud_updates()
-	if(!client)
-		return 0
-	..()
+/mob/living/proc/handle_regular_hud_updates()
+	if(!client)	return 0
 
-	handle_vision()
 	handle_hud_icons()
+	handle_vision()
 
 	return 1
 
 /mob/living/proc/handle_vision()
-	return
+	client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
+
+	update_sight()
+
+	if(stat == DEAD)
+		return
+
+	if(blind)
+		if(eye_blind)
+			blind.layer = 18
+		else
+			blind.layer = 0
+			if (disabilities & NEARSIGHTED)
+				client.screen += global_hud.vimpaired
+			if (eye_blurry)
+				client.screen += global_hud.blurry
+			if (druggy)
+				client.screen += global_hud.druggy
+	if(machine)
+		var/viewflags = machine.check_eye(src)
+		if(viewflags < 0)
+			reset_view(null, 0)
+		else if(viewflags)
+			sight |= viewflags
+	else if(eyeobj && eyeobj.owner != src)
+		reset_view(null)
+	else
+		if(!client.adminobs)
+			reset_view(null)
 
 /mob/living/proc/update_sight()
-	return
+	if(stat == DEAD)
+		sight |= SEE_TURFS
+		sight |= SEE_MOBS
+		sight |= SEE_OBJS
+		see_in_dark = 8
+		see_invisible = SEE_INVISIBLE_LEVEL_TWO
+	else
+		sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
+		see_in_dark = 2
+		see_invisible = SEE_INVISIBLE_LIVING
 
 /mob/living/proc/handle_hud_icons()
 	handle_hud_icons_health()
+	handle_hud_glasses()
 	return
 
 /mob/living/proc/handle_hud_icons_health()

@@ -337,18 +337,18 @@
 		if(!E)
 			return
 		switch(safety)
-			if(1)
+			if(FLASH_PROTECTION_MODERATE)
 				usr << "<span class='warning'>Your eyes sting a little.</span>"
 				E.damage += rand(1, 2)
 				if(E.damage > 12)
 					user.eye_blurry += rand(3,6)
-			if(0)
+			if(FLASH_PROTECTION_NONE)
 				usr << "<span class='warning'>Your eyes burn.</span>"
 				E.damage += rand(2, 4)
 				if(E.damage > 10)
 					E.damage += rand(4,10)
-			if(-1)
-				usr << "<span class='danger'>Your thermals intensify the welder's glow. Your eyes itch and burn severely.</span>"
+			if(FLASH_PROTECTION_REDUCED)
+				usr << "<span class='danger'>Your equipment intensify the welder's glow. Your eyes itch and burn severely.</span>"
 				user.eye_blurry += rand(12,20)
 				E.damage += rand(12, 16)
 		if(safety<2)

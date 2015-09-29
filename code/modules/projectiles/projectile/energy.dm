@@ -22,13 +22,13 @@
 
 	//blind adjacent people
 	for (var/mob/living/carbon/M in viewers(T, flash_range))
-		if(M.eyecheck() < 1)
+		if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
 			flick("e_flash", M.flash)
 
 	//snap pop
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
 	src.visible_message("<span class='warning'>\The [src] explodes in a bright flash!</span>")
-	
+
 	new /obj/effect/decal/cleanable/ash(src.loc) //always use src.loc so that ash doesn't end up inside windows
 	new /obj/effect/effect/sparks(T)
 	new /obj/effect/effect/smoke/illumination(T, brightness=max(flash_range*2, brightness), lifetime=light_duration)

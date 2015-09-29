@@ -663,38 +663,17 @@
 ///eyecheck()
 ///Returns a number between -1 to 2
 /mob/living/carbon/human/eyecheck()
-	var/number = 0
-
 	if(!species.has_organ["eyes"]) //No eyes, can't hurt them.
-		return 2
+		return FLASH_PROTECTION_MAJOR
 
 	if(internal_organs_by_name["eyes"]) // Eyes are fucked, not a 'weak point'.
 		var/obj/item/organ/I = internal_organs_by_name["eyes"]
 		if(I.status & ORGAN_CUT_AWAY)
-			return 2
+			return FLASH_PROTECTION_MAJOR
 	else
-		return 2
+		return
 
-	if(istype(src.head, /obj/item/clothing/head/welding))
-		if(!src.head:up)
-			number += 2
-	if(istype(back, /obj/item/weapon/rig))
-		var/obj/item/weapon/rig/O = back
-		if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
-			number += 2
-	if(istype(src.head, /obj/item/clothing/head/helmet/space))
-		number += 2
-	if(istype(src.head, /obj/item/clothing/head/helmet/space/emergency))
-		number -= 2
-	if(istype(src.glasses, /obj/item/clothing/glasses/thermal))
-		number -= 1
-	if(istype(src.glasses, /obj/item/clothing/glasses/sunglasses))
-		number += 1
-	if(istype(src.glasses, /obj/item/clothing/glasses/welding))
-		var/obj/item/clothing/glasses/welding/W = src.glasses
-		if(!W.up)
-			number += 2
-	return number
+	return flash_protection
 
 //Used by various things that knock people out by applying blunt trauma to the head.
 //Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
