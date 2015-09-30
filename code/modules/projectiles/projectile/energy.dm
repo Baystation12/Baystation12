@@ -44,7 +44,6 @@
 	name = "electrode"
 	icon_state = "spark"
 	nodamage = 1
-	taser_effect = 1
 	agony = 40
 	damage_type = HALLOSS
 	//Damage will be handled on the MOB side, to prevent window shattering.
@@ -52,7 +51,6 @@
 /obj/item/projectile/energy/electrode/stunshot
 	name = "stunshot"
 	damage = 5
-	taser_effect = 1
 	agony = 80
 
 /obj/item/projectile/energy/declone

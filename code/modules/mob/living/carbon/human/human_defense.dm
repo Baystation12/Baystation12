@@ -14,16 +14,11 @@ emp_act
 	if(!has_organ(def_zone))
 		return PROJECTILE_FORCE_MISS //if they don't have the organ in question then the projectile just passes by.
 
-	var/obj/item/organ/external/organ = get_organ()
+	var/obj/item/organ/external/organ = get_organ(def_zone)
 
 	//Shields
-	var/shield_check = check_shields(P.damage, P, null, def_zone, "the [P.name]")
-	if(shield_check)
-		if(shield_check < 0)
-			return shield_check
-		else
-			P.on_hit(src, 2, def_zone)
-			return 2
+	if(check_shields(P.damage, P, null, def_zone, "\the [P]"))
+		return
 
 	//Shrapnel
 	if(P.can_embed())
@@ -37,11 +32,8 @@ emp_act
 
 	return (..(P , def_zone))
 
-/mob/living/carbon/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone)
+/mob/living/carbon/human/stun_effect_act(var/agony_amount, var/def_zone, var/used_weapon = null)
 	var/obj/item/organ/external/affected = get_organ(check_zone(def_zone))
-	var/siemens_coeff = get_siemens_coefficient_organ(affected)
-	stun_amount *= siemens_coeff
-	agony_amount *= siemens_coeff
 
 	switch (def_zone)
 		if("head")
@@ -53,7 +45,7 @@ emp_act
 			else
 				c_hand = r_hand
 
-			if(c_hand && (stun_amount || agony_amount > 10))
+			if(c_hand && (agony_amount > 10))
 				msg_admin_attack("[src.name] ([src.ckey]) was disarmed by a stun effect")
 
 				drop_from_inventory(c_hand)
@@ -63,7 +55,7 @@ emp_act
 					var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
 					emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ]drops what they were holding in their [affected.name]!")
 
-	..(stun_amount, agony_amount, def_zone)
+	..(agony_amount, def_zone, used_weapon)
 
 /mob/living/carbon/human/getarmor(var/def_zone, var/type)
 	var/armorval = 0
@@ -109,7 +101,7 @@ emp_act
 	for(var/gear in protective_gear)
 		if(gear && istype(gear ,/obj/item/clothing))
 			var/obj/item/clothing/C = gear
-			if(istype(C) && C.body_parts_covered & def_zone.body_part)
+			if(C.body_parts_covered & def_zone.body_part)
 				protection += C.armor[type]
 	return protection
 
@@ -189,18 +181,14 @@ emp_act
 	else
 		visible_message("\red <B>[src] has been attacked in the [hit_area] with [I.name] by [user]!</B>")
 
-	var/armor = run_armor_check(affecting, "melee", I.armor_penetration, "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].")
-	var/weapon_sharp = is_sharp(I)
-	var/weapon_edge = has_edge(I)
-	if ((weapon_sharp || weapon_edge) && prob(getarmor(target_zone, "melee")))
-		weapon_sharp = 0
-		weapon_edge = 0
+	var/armor = run_armor_check(affecting, "melee", I.armor_penetration)
+	var/weapon_sharp = is_sharp(I) && !prob(armor)
+	var/weapon_edge = has_edge(I) && !prob(armor)
 
-	if(armor >= 2)			return 0
 	if(!effective_force)	return 0
 	var/Iforce = effective_force //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 
-	apply_damage(effective_force, I.damtype, affecting, armor, sharp=weapon_sharp, edge=weapon_edge, used_weapon=I)
+	apply_damage(effective_force, I.damtype, affecting, armor, I, weapon_sharp, weapon_edge)
 
 	var/bloody = 0
 	if(((I.damtype == BRUTE) || (I.damtype == HALLOSS)) && prob(25 + (effective_force * 2)))
@@ -253,7 +241,7 @@ emp_act
 	if (I && I.damtype == BRUTE && !I.anchored && !is_robot_module(I))
 		var/damage = effective_force
 		if (armor)
-			damage /= armor+1
+			damage *= 1 - armor / 100
 
 		//blunt objects should really not be embedding in things unless a huge amount of force is involved
 		var/embed_chance = weapon_sharp? damage/I.w_class : damage/(I.w_class*3)
@@ -311,10 +299,9 @@ emp_act
 		var/hit_area = affecting.name
 
 		src.visible_message("\red [src] has been hit in the [hit_area] by [O].")
-		var/armor = run_armor_check(affecting, "melee", O.armor_penetration, "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].") //I guess "melee" is the best fit here
+		var/armor = run_armor_check(affecting, "melee", O.armor_penetration) //I guess "melee" is the best fit here
 
-		if(armor < 2)
-			apply_damage(throw_damage, dtype, zone, armor, is_sharp(O), has_edge(O), O)
+		apply_damage(throw_damage, dtype, zone, armor, is_sharp(O), has_edge(O), O)
 
 		if(ismob(O.thrower))
 			var/mob/M = O.thrower
@@ -332,7 +319,7 @@ emp_act
 				var/sharp = is_sharp(I)
 				var/damage = throw_damage
 				if (armor)
-					damage /= armor+1
+					damage *= 1 - armor / 100
 
 				//blunt objects should really not be embedding in things unless a huge amount of force is involved
 				var/embed_chance = sharp? damage/I.w_class : damage/(I.w_class*3)

@@ -366,8 +366,6 @@ This function restores all organs.
 	//Handle BRUTE and BURN damage
 	handle_suit_punctures(damagetype, damage, def_zone)
 
-	if(blocked >= 2)	return 0
-
 	var/obj/item/organ/external/organ = null
 	if(isorgan(def_zone))
 		organ = def_zone
@@ -376,8 +374,7 @@ This function restores all organs.
 		organ = get_organ(check_zone(def_zone))
 	if(!organ)	return 0
 
-	if(blocked)
-		damage = (damage/(blocked+1))
+	damage *= 1 - blocked / 100
 
 	switch(damagetype)
 		if(BRUTE)

@@ -72,7 +72,7 @@
 	src << "\red Warning: Electromagnetic pulse detected."
 	..()
 
-/mob/living/silicon/stun_effect_act(var/stun_amount, var/agony_amount)
+/mob/living/silicon/stun_effect_act()
 	return	//immune
 
 /mob/living/silicon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
