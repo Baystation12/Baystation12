@@ -4,7 +4,7 @@
 	if(!istype(loc, /turf))
 		src << "<span class='danger'>You cannot infest a target in your current position.</span>"
 		return 0
-	if(stat)
+	if(incapacitated())
 		src << "<span class='danger'>You cannot infest a target in your current state.</span>"
 		return 0
 	if(!M)
@@ -28,7 +28,7 @@
 
 	var/list/choices = list()
 	for(var/mob/living/carbon/human/H in view(1,src))
-		if(istype(H.species, /datum/species/xenos)) //Kinda gross, but easier and cleaner than a string check.
+		if(isxenomorph(H))
 			continue
 		if(src.Adjacent(H) && H.lying)
 			choices += H
@@ -61,7 +61,7 @@
 	set name = "Release Host"
 	set desc = "Release your host."
 
-	if(stat)
+	if(incapacitated())
 		src << "You cannot leave your host in your current state."
 		return
 

@@ -10,7 +10,7 @@
 
 /obj/structure/alien/egg/New()
 	..()
-	processing_objects |= src
+	processing_objects += src
 
 /obj/structure/alien/egg/Destroy()
 	processing_objects -= src

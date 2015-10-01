@@ -7,7 +7,7 @@
 
 /obj/structure/alien/node/New()
 	..()
-	processing_objects |= src
+	processing_objects += src
 
 /obj/structure/alien/node/Destroy()
 	processing_objects -= src

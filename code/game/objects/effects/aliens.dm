@@ -3,7 +3,7 @@
  */
 /obj/effect/acid
 	name = "acid"
-	desc = "Burbling ccorrosive stuff. Probably a bad idea to roll around in it."
+	desc = "Burbling corrosive stuff. Probably a bad idea to roll around in it."
 	icon_state = "acid"
 	icon = 'icons/mob/alien.dmi'
 
