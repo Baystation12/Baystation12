@@ -1,6 +1,6 @@
 /obj/item/weapon/paper_bundle
 	name = "paper bundle"
-	gender = PLURAL
+	gender = NEUTER
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper"
 	item_state = "paper"

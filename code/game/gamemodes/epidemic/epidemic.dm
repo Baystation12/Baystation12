@@ -34,7 +34,7 @@
 /////////////////////////////////////////////////////////
 
 /datum/game_mode/epidemic/send_intercept()
-	var/intercepttext = "<FONT size = 3 color='red'><B>CONFIDENTIAL REPORT</FONT><HR>"
+	var/intercepttext = "<FONT size = 3 color='red'><B>CONFIDENTIAL REPORT</B></FONT><HR>"
 	virus_name = "X-[rand(1,99)]&trade;"
 	intercepttext += "<B>Warning: Pathogen [virus_name] has been detected on [station_name()].</B><BR><BR>"
 	intercepttext += "<B>Code violet quarantine of [station_name()] put under immediate effect.</B><BR>"
@@ -64,7 +64,7 @@
 		M << "<span class='danger'>[extra_law]</span>"
 
 /datum/game_mode/epidemic/proc/announce_to_kill_crew()
-	var/intercepttext = "<FONT size = 3 color='red'><B>CONFIDENTIAL REPORT</FONT><HR>"
+	var/intercepttext = "<FONT size = 3 color='red'><B>CONFIDENTIAL REPORT</B></FONT><HR>"
 	intercepttext += "<FONT size = 2;color='red'><B>PATHOGEN [virus_name] IS STILL PRESENT ON [station_name()]. IN COMPLIANCE WITH NANOTRASEN LAWS FOR INTERSTELLAR SAFETY, EMERGENCY SAFETY MEASURES HAVE BEEN AUTHORIZED. ALL INFECTED CREW MEMBERS ON [station_name()] ARE TO BE NEUTRALIZED AND DISPOSED OF IN A MANNER THAT WILL DESTROY ALL TRACES OF THE PATHOGEN. FAILURE TO COMPLY WILL RESULT IN IMMEDIATE DESTRUCTION OF [station_name].</B></FONT><BR>"
 	intercepttext += "<B>CRUISER WILL ARRIVE IN [round(cruiser_seconds()/60)] MINUTES</B><BR>"
 

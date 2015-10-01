@@ -127,7 +127,7 @@ Works together with spawning an observer, noted above.
 	if(antagHUD)
 		var/list/target_list = list()
 		for(var/mob/living/target in oview(src, 14))
-			if(target.mind&&(target.mind.special_role||issilicon(target)) )
+			if(target.mind && target.mind.special_role)
 				target_list += target
 		if(target_list.len)
 			assess_targets(target_list, src)
@@ -144,6 +144,8 @@ Works together with spawning an observer, noted above.
 /mob/dead/proc/assess_targets(list/target_list, mob/dead/observer/U)
 	var/client/C = U.client
 	for(var/mob/living/carbon/human/target in target_list)
+		C.images += target.hud_list[SPECIALROLE_HUD]
+	for(var/mob/living/silicon/target in target_list)
 		C.images += target.hud_list[SPECIALROLE_HUD]
 	return 1
 
@@ -209,7 +211,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		usr << "<span class='warning'>Another consciousness is in your body... it is resisting you.</span>"
 		return
 	mind.current.key = key
-	mind.current.aghosted = null
+	mind.current.teleop = null
 	if(!admin_ghosted)
 		announce_ghost_joinleave(mind, 0, "They now occupy their body again.")
 	return 1
@@ -439,6 +441,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(!MayRespawn(1))
 		return
 
+	var/turf/T = get_turf(src)
+	if(!T || (T.z in config.admin_levels))
+		src << "<span class='warning'>You may not spawn as a mouse on this Z-level.</span>"
+		return
+
 	var/timedifference = world.time - client.time_died_as_mouse
 	if(client.time_died_as_mouse && timedifference <= mouse_respawn_time * 600)
 		var/timedifference_text
@@ -454,8 +461,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/mob/living/simple_animal/mouse/host
 	var/obj/machinery/atmospherics/unary/vent_pump/vent_found
 	var/list/found_vents = list()
-	for(var/obj/machinery/atmospherics/unary/vent_pump/v in world)
-		if(!v.welded && v.z == src.z)
+	for(var/obj/machinery/atmospherics/unary/vent_pump/v in machines)
+		if(!v.welded && v.z == T.z)
 			found_vents.Add(v)
 	if(found_vents.len)
 		vent_found = pick(found_vents)
@@ -560,6 +567,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/canface()
 	return 1
+
+/mob/dead/observer/proc/can_admin_interact()
+	return check_rights(R_ADMIN, 0, src)
 
 /mob/dead/observer/verb/toggle_ghostsee()
 	set name = "Toggle Ghost Vision"

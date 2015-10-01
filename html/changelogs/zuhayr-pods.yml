@@ -1,6 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - rscadd: "Added ballistic supply drop pods."
-  - rscadd: "Added diona gestalt random map template."
-  - tweak: "Swapped the singularity beacon out for a hacked supply beacon."

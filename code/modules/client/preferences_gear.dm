@@ -554,8 +554,45 @@ var/global/list/gear_datums = list()
 	slot = slot_w_uniform
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
-// Attachments
+/datum/gear/resomi_grey
+	display_name = "Resomi uniform, grey"
+	path = /obj/item/clothing/under/resomi
+	cost = 1
+	slot = slot_w_uniform
 
+/datum/gear/resomi_rainbow
+	display_name = "Resomi uniform, rainbow"
+	path = /obj/item/clothing/under/resomi/rainbow
+	cost = 1
+	slot = slot_w_uniform
+
+/datum/gear/resomi_white
+	display_name = "Resomi uniform, white"
+	path = /obj/item/clothing/under/resomi/white
+	cost = 1
+	slot = slot_w_uniform
+
+/datum/gear/resomi_eng
+	display_name = "Resomi uniform, Engineering"
+	path = /obj/item/clothing/under/resomi/yellow
+	cost = 1
+	slot = slot_w_uniform
+	allowed_roles = list("Chief Engineer","Station Engineer","Atmospherics Technician")
+
+/datum/gear/resomi_sec
+	display_name = "Resomi uniform, Security"
+	path = /obj/item/clothing/under/resomi/red
+	cost = 1
+	slot = slot_w_uniform
+	allowed_roles = list("Security Officer","Head of Security","Warden")
+
+/datum/gear/resomi_med
+	display_name = "Resomi uniform, Medical"
+	path = /obj/item/clothing/under/resomi/medical
+	cost = 1
+	slot = slot_w_uniform
+
+// Attachments
 /datum/gear/armband_cargo
 	display_name = "armband, cargo"
 	path = /obj/item/clothing/accessory/armband/cargo

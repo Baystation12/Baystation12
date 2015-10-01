@@ -253,7 +253,7 @@
 			if(prob(5))
 				M.antibodies |= V.antigen
 				if(prob(50))
-					M.radiation += 50 // curing it that way may kill you instead
+					M.apply_effect(50, IRRADIATE, check_protection = 0) // curing it that way may kill you instead
 					var/absorbed = 0
 					var/obj/item/organ/diona/nutrients/rad_organ = locate() in M.internal_organs
 					if(rad_organ && !rad_organ.is_broken())

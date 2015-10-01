@@ -26,13 +26,16 @@ var/datum/antagonist/cultist/cult
 	victory_feedback_tag = "win - cult win"
 	loss_feedback_tag = "loss - staff stopped the cult"
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	max_antags = 200 // No upper limit.
-	max_antags_round = 200
-	var/allow_narsie = 1
+	hard_cap = 5
+	hard_cap_round = 6
+	initial_spawn_req = 4
+	initial_spawn_target = 6
+	antaghud_indicator = "hudcultist"
 
 	var/list/obj/effect/rune/teleport/teleport_runes = list()
 	var/list/rune_strokes = list()
 
+	var/allow_narsie = 1
 	var/datum/mind/sacrifice_target
 	var/list/sacrificed
 	var/cult_rating = 0

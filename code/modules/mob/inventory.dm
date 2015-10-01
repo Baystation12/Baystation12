@@ -78,13 +78,13 @@ var/list/slot_equipment_priority = list( \
 	if(istype(src.back,/obj/item/weapon/storage))
 		var/obj/item/weapon/storage/backpack = src.back
 		if(backpack.contents.len < backpack.storage_slots)
-			newitem.loc = src.back
+			newitem.forceMove(src.back)
 			return 1
 
 	// Try to place it in any item that can store stuff, on the mob.
 	for(var/obj/item/weapon/storage/S in src.contents)
 		if (S.contents.len < S.storage_slots)
-			newitem.loc = S
+			newitem.forceMove(S)
 			return 1
 	return 0
 
@@ -106,7 +106,7 @@ var/list/slot_equipment_priority = list( \
 	if(lying)			return 0
 	if(!istype(W))		return 0
 	if(!l_hand)
-		W.loc = src		//TODO: move to equipped?
+		W.forceMove(src)		//TODO: move to equipped?
 		l_hand = W
 		W.layer = 20	//TODO: move to equipped?
 //		l_hand.screen_loc = ui_lhand
@@ -122,7 +122,7 @@ var/list/slot_equipment_priority = list( \
 	if(lying)			return 0
 	if(!istype(W))		return 0
 	if(!r_hand)
-		W.loc = src
+		W.forceMove(src)
 		r_hand = W
 		W.layer = 20
 //		r_hand.screen_loc = ui_rhand
@@ -157,7 +157,7 @@ var/list/slot_equipment_priority = list( \
 		update_inv_r_hand()
 		return 1
 	else
-		W.loc = get_turf(src)
+		W.forceMove(get_turf(src))
 		W.layer = initial(W.layer)
 		W.dropped()
 		return 0
@@ -219,16 +219,20 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/canUnEquip(obj/item/I)
 	if(!I) //If there's nothing to drop, the drop is automatically successful.
 		return 1
+	var/slot = get_inventory_slot(I)
+	if(slot && !I.mob_can_unequip(src, slot))
+		return 0
+
+	drop_from_inventory(I)
+	return 1
+
+/mob/proc/get_inventory_slot(obj/item/I)
 	var/slot
 	for(var/s in slot_back to slot_tie) //kind of worries me
 		if(get_equipped_item(s) == I)
 			slot = s
 			break
-
-	if(slot && !I.mob_can_unequip(src, slot))
-		return 0
-
-	return 1
+	return slot
 
 //This differs from remove_from_mob() in that it checks if the item can be unequipped first.
 /mob/proc/unEquip(obj/item/I, force = 0) //Force overrides NODROP for things like wizarditis and admin undress.
@@ -246,7 +250,7 @@ var/list/slot_equipment_priority = list( \
 	O.screen_loc = null
 	if(istype(O, /obj/item))
 		var/obj/item/I = O
-		I.loc = src.loc
+		I.forceMove(src.loc)
 		I.dropped(src)
 	return 1
 

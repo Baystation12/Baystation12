@@ -238,7 +238,7 @@
 
 	// Other incidentals.
 	if(istype(suit) && suit.has_sensor == 1)
-		dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors.</A>"
+		dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
 	if(handcuffed)
 		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed]'>Handcuffed</A>"
 	if(legcuffed)
@@ -695,6 +695,28 @@
 		if(!W.up)
 			number += 2
 	return number
+
+//Used by various things that knock people out by applying blunt trauma to the head.
+//Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
+/mob/living/carbon/human/proc/headcheck(var/target_zone, var/brain_tag = "brain")
+	if(!species.has_organ[brain_tag])
+		return 0
+
+	var/obj/item/organ/affecting = internal_organs_by_name[brain_tag]
+
+	target_zone = check_zone(target_zone)
+	if(!affecting || affecting.parent_organ != target_zone)
+		return 0
+
+	//if the parent organ is significantly larger than the brain organ, then hitting it is not guaranteed
+	var/obj/item/organ/parent = get_organ(target_zone)
+	if(!parent)
+		return 0
+
+	if(parent.w_class > affecting.w_class + 1)
+		return prob(100 / 2**(parent.w_class - affecting.w_class - 1))
+
+	return 1
 
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
 	if(species.has_fine_manipulation)
@@ -1155,10 +1177,6 @@
 	else
 		return 0
 
-	mob_bump_flag = species.bump_flag
-	mob_swap_flags = species.swap_flags
-	mob_push_flags = species.push_flags
-
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"
 	set name = "Write in blood"
@@ -1395,7 +1413,7 @@
 
 /mob/living/carbon/human/MouseDrop(var/atom/over_object)
 	var/mob/living/carbon/human/H = over_object
-	if(holder_type && a_intent == "help" && H.a_intent == "help" && istype(H) && !issmall(H) && Adjacent(H))
+	if(holder_type && a_intent == "help" && istype(H) && H.a_intent == "help" && !issmall(H) && Adjacent(H))
 		get_scooped(H)
 		return
 	return ..()

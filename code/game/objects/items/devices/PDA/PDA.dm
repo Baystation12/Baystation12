@@ -11,6 +11,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	item_state = "electronic"
 	w_class = 2.0
 	slot_flags = SLOT_ID | SLOT_BELT
+	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/id.dmi')
 
 	//Main variables
 	var/owner = null
@@ -1041,7 +1042,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 /obj/item/device/pda/proc/new_message(var/sending_unit, var/sender, var/sender_job, var/message)
 	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;notap=[istype(loc, /mob/living/silicon)];skiprefresh=1;target=\ref[sending_unit]'>Reply</a>)"
-	new_info(message_silent, newstone, reception_message)
+	new_info(message_silent, ttone, reception_message)
 
 	log_pda("[usr] (PDA: [sending_unit]) sent \"[message]\" to [name]")
 	new_message = 1
@@ -1239,7 +1240,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 				for(var/datum/disease/D in C.viruses)
 					if(!D.hidden[SCANNER])
-						user.show_message("<span class='warning'>Warning: [D.form] Detected</b>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]</span>")
+						user.show_message("<span class='warning'><b>Warning: [D.form] Detected</b>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]</span>")
 
 			if(2)
 				if (!istype(C:dna, /datum/dna))

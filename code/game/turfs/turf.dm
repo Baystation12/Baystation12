@@ -33,6 +33,11 @@
 			return
 	turfs |= src
 
+	if(dynamic_lighting)
+		luminosity = 0
+	else
+		luminosity = 1
+
 /turf/proc/update_icon()
 	return
 
@@ -70,6 +75,9 @@
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
 		usr << "<span class='warning'>Movement is admin-disabled.</span>" //This is to identify lag problems
 		return
+
+	..()
+
 	if (!mover || !isturf(mover.loc))
 		return 1
 
@@ -175,6 +183,13 @@ var/const/enterloopsanity = 100
 				L.Add(t)
 	return L
 
+/turf/proc/CardinalTurfs()
+	var/L[] = new()
+	for(var/turf/simulated/T in AdjacentTurfs())
+		if(T.x == src.x || T.y == src.y)
+			L.Add(T)
+	return L
+
 /turf/proc/Distance(turf/t)
 	if(get_dist(src,t) == 1)
 		var/cost = (src.x - t.x) * (src.x - t.x) + (src.y - t.y) * (src.y - t.y)
@@ -182,6 +197,7 @@ var/const/enterloopsanity = 100
 		return cost
 	else
 		return get_dist(src,t)
+
 /turf/proc/AdjacentTurfsSpace()
 	var/L[] = new()
 	for(var/turf/t in oview(src,1))

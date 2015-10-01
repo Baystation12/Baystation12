@@ -1,3 +1,28 @@
+/atom/movable/proc/get_mob()
+	return
+
+/obj/machinery/bot/mulebot/get_mob()
+	if(load && istype(load,/mob/living))
+		return load
+
+/obj/mecha/get_mob()
+	return occupant
+
+/obj/vehicle/train/get_mob()
+	return buckled_mob
+
+/mob/get_mob()
+	return src
+
+/proc/mobs_in_view(var/range, var/source)
+	var/list/mobs = list()
+	for(var/atom/movable/AM in view(range, source))
+		var/M = AM.get_mob()
+		if(M)
+			mobs += M
+
+	return mobs
+
 proc/random_hair_style(gender, species = "Human")
 	var/h_style = "Bald"
 
@@ -43,7 +68,7 @@ proc/random_name(gender, species = "Human")
 	if(species)
 		current_species = all_species[species]
 
-	if(!current_species || current_species.name == "Human")
+	if(!current_species || current_species.name_language == null)
 		if(gender==FEMALE)
 			return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
 		else

@@ -59,7 +59,8 @@
 		qdel(assembly)
 		assembly = null
 	qdel(wires)
-	..()
+	wires = null
+	return ..()
 
 /obj/machinery/camera/emp_act(severity)
 	if(!isEmpProof())
@@ -79,8 +80,7 @@
 			..()
 
 /obj/machinery/camera/bullet_act(var/obj/item/projectile/P)
-	if(P.damage_type == BRUTE || P.damage_type == BURN)
-		take_damage(P.damage)
+	take_damage(P.get_structure_damage())
 
 /obj/machinery/camera/ex_act(severity)
 	if(src.invuln)
@@ -304,7 +304,7 @@
 	var/turf/pos = get_turf(src)
 	if(!pos)
 		return list()
-	
+
 	if(isXRay())
 		see = range(view_range, pos)
 	else

@@ -98,7 +98,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "space"
 	requires_power = 1
 	always_unpowered = 1
-	lighting_use_dynamic = 0
+	lighting_use_dynamic = 1
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
@@ -324,13 +324,6 @@ area/space/atmosalert()
 /area/airtunnel1/      // referenced in airtunnel.dm:759
 
 /area/dummy/           // Referenced in engine.dm:261
-
-/area/start            // will be unused once kurper gets his login interface patch done
-	name = "start area"
-	icon_state = "start"
-	requires_power = 0
-	lighting_use_dynamic = 0
-	has_gravity = 1
 
 // === end remove
 
@@ -642,6 +635,7 @@ area/space/atmosalert()
 /area/maintenance
 	flags = RAD_SHIELDED
 	sound_env = TUNNEL_ENCLOSED
+	turf_initializer = new /datum/turf_initializer/maintenance()
 
 /area/maintenance/aft
 	name = "Aft Maintenance"

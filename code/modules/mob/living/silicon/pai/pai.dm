@@ -4,8 +4,8 @@
 	icon_state = "repairbot"
 
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
-	small = 1
 	pass_flags = 1
+	mob_size = MOB_SMALL
 
 	var/network = "SS13"
 	var/obj/machinery/camera/current = null
@@ -378,6 +378,9 @@
 	src.stop_pulling()
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = card
+
+	//stop resting
+	resting = 0
 
 	// If we are being held, handle removing our holder from their inv.
 	var/obj/item/weapon/holder/H = loc

@@ -42,6 +42,8 @@ var/list/mob_hat_cache = list()
 	mob_push_flags = SIMPLE_ANIMAL
 	mob_always_swap = 1
 
+	mob_size = MOB_TINY
+
 	//Used for self-mailing.
 	var/mail_destination = ""
 	var/obj/machinery/drone_fabricator/master_fabricator
@@ -68,6 +70,7 @@ var/list/mob_hat_cache = list()
 	can_pull_mobs = 1
 	hat_x_offset = 1
 	hat_y_offset = -12
+	mob_size = MOB_SMALL
 
 /mob/living/silicon/robot/drone/New()
 
@@ -95,7 +98,7 @@ var/list/mob_hat_cache = list()
 
 /mob/living/silicon/robot/drone/init()
 	aiCamera = new/obj/item/device/camera/siliconcam/drone_camera(src)
-
+	additional_law_channels["Drone"] = ":d"
 	if(!laws) laws = new law_type
 	if(!module) module = new module_type(src)
 

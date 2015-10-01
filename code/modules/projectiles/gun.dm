@@ -15,6 +15,9 @@
 
 	for(var/propname in properties)
 		var/propvalue = properties[propname]
+		
+		if(propname == "mode_name")
+			name = propvalue
 		if(isnull(propvalue))
 			settings[propname] = gun.vars[propname] //better than initial() as it handles list vars like burst_accuracy
 		else
@@ -222,7 +225,7 @@
 
 		if(reflex)
 			user.visible_message(
-				"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!<b></span>",
+				"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!</b></span>",
 				"<span class='reflex_shoot'>You fire \the [src] by reflex!</span>",
 				"You hear a [fire_sound_text]!"
 			)

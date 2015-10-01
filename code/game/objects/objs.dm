@@ -17,7 +17,6 @@
 
 /obj/Destroy()
 	processing_objects -= src
-	nanomanager.close_uis(src)
 	return ..()
 
 /obj/Topic(href, href_list, var/datum/topic_state/state = default_state)

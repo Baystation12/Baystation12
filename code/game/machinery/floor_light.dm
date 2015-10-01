@@ -43,7 +43,7 @@ var/list/floor_light_cache = list()
 
 /obj/machinery/floor_light/attack_hand(var/mob/user)
 
-	if(user.a_intent == "hurt" && !user.small)
+	if(user.a_intent == I_HURT && !issmall(user))
 		if(!isnull(damaged) && !(stat & BROKEN))
 			visible_message("<span class='danger'>\The [user] smashes \the [src]!</span>")
 			playsound(src, "shatter", 70, 1)

@@ -94,7 +94,7 @@ var/list/flooring_types
 
 /decl/flooring/tiling/red
 	name = "floor"
-	icon_base = "red"
+	icon_base = "white"
 	has_damage_range = null
 	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_red
@@ -116,7 +116,7 @@ var/list/flooring_types
 
 /decl/flooring/tiling/yellow
 	name = "floor"
-	icon_base = "yellow"
+	icon_base = "white"
 	has_damage_range = null
 	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_yellow

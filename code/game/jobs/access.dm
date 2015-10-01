@@ -28,12 +28,15 @@
 	if(!req_one_access)	req_one_access = list()
 	if(!L)	return 0
 	if(!istype(L, /list))	return 0
-	for(var/req in src.req_access)
-		if(!(req in L)) //doesn't have this access
+	return has_access(req_access, req_one_access, L)
+
+/proc/has_access(var/list/req_access, var/list/req_one_access, var/list/accesses)
+	for(var/req in req_access)
+		if(!(req in accesses)) //doesn't have this access
 			return 0
-	if(src.req_one_access.len)
-		for(var/req in src.req_one_access)
-			if(req in L) //has an access from the single access list
+	if(req_one_access.len)
+		for(var/req in req_one_access)
+			if(req in accesses) //has an access from the single access list
 				return 1
 		return 0
 	return 1
@@ -219,13 +222,12 @@ proc/get_all_job_icons() //For all existing HUD icons
 
 	if(I)
 		var/job_icons = get_all_job_icons()
-		var/centcom = get_all_centcom_jobs()
-
 		if(I.assignment	in job_icons) //Check if the job has a hud icon
 			return I.assignment
 		if(I.rank in job_icons)
 			return I.rank
 
+		var/centcom = get_all_centcom_jobs()
 		if(I.assignment	in centcom) //Return with the NT logo if it is a Centcom job
 			return "Centcom"
 		if(I.rank in centcom)

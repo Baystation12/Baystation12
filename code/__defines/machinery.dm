@@ -4,7 +4,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
                        // It's a conversion constant. power_used*CELLRATE = charge_provided, or charge_used/CELLRATE = power_provided
 
 // Doors!
-#define DOOR_CRUSH_DAMAGE 10
+#define DOOR_CRUSH_DAMAGE 20
 #define ALIEN_SELECT_AFK_BUFFER  1    // How many minutes that a person can be AFK before not being allowed to be an alien.
 
 // Channel numbers for power.
@@ -26,9 +26,6 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 
 #define AI_CAMERA_LUMINOSITY 6
 
-// Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.
-var/list/restricted_camera_networks = list("thunder","ERT","NUKE","Secret")
-
 // Camera networks
 #define NETWORK_CRESCENT "Crescent"
 #define NETWORK_CIVILIAN_EAST "Civilian East"
@@ -37,9 +34,10 @@ var/list/restricted_camera_networks = list("thunder","ERT","NUKE","Secret")
 #define NETWORK_ENGINE "Engine"
 #define NETWORK_ENGINEERING "Engineering"
 #define NETWORK_ENGINEERING_OUTPOST "Engineering Outpost"
-#define NETWORK_ERT "ERT"
+#define NETWORK_ERT "ZeEmergencyResponseTeam"
 #define NETWORK_EXODUS "Exodus"
 #define NETWORK_MEDICAL "Medical"
+#define NETWORK_MERCENARY "MercurialNet"
 #define NETWORK_MINE "MINE"
 #define NETWORK_RESEARCH "Research"
 #define NETWORK_RESEARCH_OUTPOST "Research Outpost"
@@ -47,7 +45,10 @@ var/list/restricted_camera_networks = list("thunder","ERT","NUKE","Secret")
 #define NETWORK_PRISON "Prison"
 #define NETWORK_SECURITY "Security"
 #define NETWORK_TELECOM "Tcomsat"
-#define NETWORK_THUNDER "thunder"
+#define NETWORK_THUNDER "Thunderdome"
+
+// Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.
+var/list/restricted_camera_networks = list(NETWORK_ERT,NETWORK_MERCENARY,"Secret")
 
 
 //singularity defines

@@ -93,6 +93,11 @@
 	desc = "A card used to provide ID and determine access across the station."
 	icon_state = "id"
 	item_state = "card-id"
+
+	sprite_sheets = list(
+		"Resomi" = 'icons/mob/species/resomi/id.dmi'
+		)
+
 	var/access = list()
 	var/registered_name = "Unknown" // The name registered_name on the card
 	slot_flags = SLOT_ID
@@ -149,7 +154,7 @@
 		id_card.dna_hash		= dna.unique_enzymes
 		id_card.fingerprint_hash= md5(dna.uni_identity)
 	id_card.update_name()
-	
+
 /mob/living/carbon/human/set_id_info(var/obj/item/weapon/card/id/id_card)
 	..()
 	id_card.age = age
@@ -221,16 +226,16 @@
 /obj/item/weapon/card/id/captains_spare/New()
 	access = get_all_station_access()
 	..()
-		
+
 /obj/item/weapon/card/id/synthetic
 	name = "\improper Synthetic ID"
 	desc = "Access module for NanoTrasen Synthetics"
 	icon_state = "id-robot"
 	item_state = "tdgreen"
 	assignment = "Synthetic"
-	
+
 /obj/item/weapon/card/id/synthetic/New()
-	access = get_all_station_access()
+	access = get_all_station_access() + access_synth
 	..()
 
 /obj/item/weapon/card/id/centcom
