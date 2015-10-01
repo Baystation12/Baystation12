@@ -77,10 +77,13 @@
 		name = "Mulebot ([suffix])"
 
 /obj/machinery/bot/mulebot/Destroy()
+	unload(0)
+	qdel(wires)
+	wires = null
 	if(radio_controller)
 		radio_controller.remove_object(src,beacon_freq)
 		radio_controller.remove_object(src,control_freq)
-	..()
+	return ..()
 
 // attack by item
 // emag : lock/unlock,

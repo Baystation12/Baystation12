@@ -61,8 +61,7 @@
 	opacity = 0
 	anchored = 1
 
-	New()
-		. = ..()
+	initialize()
 		for(var/turf/turf in locs)
 			var/turf/simulated/open/above = GetAbove(turf)
 			if(!above)

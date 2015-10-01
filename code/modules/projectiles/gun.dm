@@ -15,6 +15,9 @@
 
 	for(var/propname in properties)
 		var/propvalue = properties[propname]
+		
+		if(propname == "mode_name")
+			name = propvalue
 		if(isnull(propvalue))
 			settings[propname] = gun.vars[propname] //better than initial() as it handles list vars like burst_accuracy
 		else

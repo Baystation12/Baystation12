@@ -160,7 +160,11 @@
 			M.drop_from_inventory(piece)
 		qdel(piece)
 	processing_objects -= src
-	..()
+	qdel(wires)
+	wires = null
+	qdel(spark_system)
+	spark_system = null
+	return ..()
 
 /obj/item/weapon/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || wearer.back != src)

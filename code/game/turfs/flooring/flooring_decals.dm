@@ -56,7 +56,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/blue
 	name = "blue corner"
-	color = "#6A97B0"
+	color = COLOR_BLUE_GRAY
 
 /obj/effect/floor_decal/corner/blue/diagonal
 	icon_state = "corner_white_diagonal"
@@ -66,7 +66,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/paleblue
 	name = "pale blue corner"
-	color = "#8BBBD5"
+	color = COLOR_PALE_BLUE_GRAY
 
 /obj/effect/floor_decal/corner/paleblue/diagonal
 	icon_state = "corner_white_diagonal"
@@ -76,7 +76,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/green
 	name = "green corner"
-	color = "#8DAF6A"
+	color = COLOR_GREEN_GRAY
 
 /obj/effect/floor_decal/corner/green/diagonal
 	icon_state = "corner_white_diagonal"
@@ -86,7 +86,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/lime
 	name = "lime corner"
-	color = "#AED18B"
+	color = COLOR_PALE_GREEN_GRAY
 
 /obj/effect/floor_decal/corner/lime/diagonal
 	icon_state = "corner_white_diagonal"
@@ -96,7 +96,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/yellow
 	name = "yellow corner"
-	color = "#B19664"
+	color = COLOR_BROWN
 
 /obj/effect/floor_decal/corner/yellow/diagonal
 	icon_state = "corner_white_diagonal"
@@ -106,7 +106,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/beige
 	name = "beige corner"
-	color = "#CEB689"
+	color = COLOR_BEIGE
 
 /obj/effect/floor_decal/corner/beige/diagonal
 	icon_state = "corner_white_diagonal"
@@ -116,7 +116,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/red
 	name = "red corner"
-	color = "#AA5F61"
+	color = COLOR_RED_GRAY
 
 /obj/effect/floor_decal/corner/red/diagonal
 	icon_state = "corner_white_diagonal"
@@ -126,7 +126,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/pink
 	name = "pink corner"
-	color = "#CC9090"
+	color = COLOR_PALE_RED_GRAY
 
 /obj/effect/floor_decal/corner/pink/diagonal
 	icon_state = "corner_white_diagonal"
@@ -136,7 +136,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/purple
 	name = "purple corner"
-	color = "#A2819E"
+	color = COLOR_PURPLE_GRAY
 
 /obj/effect/floor_decal/corner/purple/diagonal
 	icon_state = "corner_white_diagonal"
@@ -146,7 +146,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/mauve
 	name = "mauve corner"
-	color = "#BDA2BA"
+	color = COLOR_PALE_PURPLE_GRAY
 
 /obj/effect/floor_decal/corner/mauve/diagonal
 	icon_state = "corner_white_diagonal"
@@ -156,7 +156,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/orange
 	name = "orange corner"
-	color = "#B95A00"
+	color = COLOR_DARK_ORANGE
 
 /obj/effect/floor_decal/corner/orange/diagonal
 	icon_state = "corner_white_diagonal"
@@ -166,7 +166,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/brown
 	name = "brown corner"
-	color = "#917448"
+	color = COLOR_DARK_BROWN
 
 /obj/effect/floor_decal/corner/brown/diagonal
 	icon_state = "corner_white_diagonal"
@@ -271,6 +271,11 @@ var/list/floor_decals = list()
 	name = "carpet"
 	icon = 'icons/turf/flooring/carpet.dmi'
 	icon_state = "carpet_edges"
+
+/obj/effect/floor_decal/carpet/blue
+	name = "carpet"
+	icon = 'icons/turf/flooring/carpet.dmi'
+	icon_state = "bcarpet_edges"
 
 /obj/effect/floor_decal/carpet/corners
 	name = "carpet"

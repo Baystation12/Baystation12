@@ -167,3 +167,17 @@
 // Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
 #define PROJECTILE_CONTINUE   -1 //if the projectile should continue flying after calling bullet_act()
 #define PROJECTILE_FORCE_MISS -2 //if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.
+
+// Custom colors
+#define COLOR_BEIGE "#CEB689"
+#define COLOR_BLUE_GRAY "#6A97B0"
+#define COLOR_BROWN "#B19664"
+#define COLOR_DARK_BROWN "#917448"
+#define COLOR_DARK_ORANGE "#B95A00"
+#define COLOR_GREEN_GRAY "#8DAF6A"
+#define COLOR_RED_GRAY "#AA5F61"
+#define COLOR_PALE_BLUE_GRAY "#8BBBD5"
+#define COLOR_PALE_GREEN_GRAY "#AED18B"
+#define COLOR_PALE_RED_GRAY "#CC9090"
+#define COLOR_PALE_PURPLE_GRAY "#BDA2BA"
+#define COLOR_PURPLE_GRAY "#A2819E"
