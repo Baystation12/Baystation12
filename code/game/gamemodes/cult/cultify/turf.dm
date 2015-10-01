@@ -42,5 +42,5 @@
 	cult.add_cultiness(CULTINESS_PER_TURF)
 
 /turf/proc/cultify_wall()
-	ChangeTurf(/turf/unsimulated/wall/cult)
+	ChangeTurf(/turf/simulated/wall/cult)
 	cult.add_cultiness(CULTINESS_PER_TURF)

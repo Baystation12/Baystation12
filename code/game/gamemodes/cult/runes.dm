@@ -8,11 +8,18 @@
 	layer = TURF_LAYER
 
 	var/blood
+	var/bcolor
 	var/strokes = 2 // IF YOU EVER SET THIS TO MORE THAN TEN, EVERYTHING WILL BREAK
 	var/cultname = ""
 
-/obj/effect/rune/New(var/loc, var/bcolor = "#c80000", var/nblood = "blood")
+/obj/effect/rune/New(var/loc, var/blcolor = "#c80000", var/nblood = "blood")
 	..()
+	bcolor = blcolor
+	blood = nblood
+	update_icon()
+
+/obj/effect/rune/update_icon()
+	overlays.Cut()
 	if(cult.rune_strokes[type])
 		var/list/f = cult.rune_strokes[type]
 		for(var/i in f)
@@ -29,7 +36,6 @@
 			overlays += t
 		cult.rune_strokes[type] = f.Copy()
 	color = bcolor
-	blood = nblood
 	desc = "A strange collection of symbols drawn in [blood]."
 
 /obj/effect/rune/examine(var/mob/user)
@@ -71,7 +77,6 @@
 	for(var/mob/living/M in range(1))
 		if(iscultist(M))
 			. += M
-		. |= M //DEBUG, REMOVE BEFORE RELEASING//TODO
 
 /obj/effect/rune/proc/fizzle(var/mob/living/user)
 	visible_message("<span class='warning'>The markings pulse with a small burst of light, then fall dark.</span>", "You hear a fizzle.")
@@ -336,7 +341,10 @@
 /obj/effect/rune/defile/cast(var/mob/living/user)
 	user.say("Ia! Ia! Zasan therium viortia.")
 	for(var/turf/T in range(1, src))
-		T.cultify()
+		if(T.holy)
+			T.holy = 0
+		else
+			T.cultify()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
 	qdel(src)
 
@@ -406,13 +414,6 @@
 		victim.fire_stacks = max(2, victim.fire_stacks)
 		victim.IgniteMob()
 		victim.take_organ_damage(2 + casters.len, 2 + casters.len) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
-		switch(victim.health)
-			if(50 to INFINITY)
-				victim << "<span class='danger'>Your flesh burns!</span>"
-			if(0 to 50)
-				victim << "<span class='danger'>You feel as if your body is rippened apart and burned!</span>"
-			if(-INFINITY to 0)
-				victim << "<span class='danger'>!</span>" // TODO goddamn this is hard
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
 		cult.add_cultiness(CULTINESS_PER_SACRIFICE)
@@ -445,7 +446,7 @@
 		usr << "<span class='warning'>The Geometer of blood accepts this sacrifice.</span>"
 		usr << "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>"
 		*/
-		victim << "<span class='cult'>The Geometer of Blood claims your body.</span>" //TODO: DON'T FORGET TO CHANGE IT TO VICTIM
+		victim << "<span class='cult'>The Geometer of Blood claims your body.</span>"
 		victim.dust()
 	victim.ExtinguishMob() // Technically allows them to put the fire out by sacrificing them and stopping immediately, but I don't think it'd have much effect
 
@@ -475,22 +476,25 @@
 		ghost = O
 		break
 	if(!ghost)
-		//return fizzle(user)
+		return fizzle(user)
 	user.say("Gal'h'rfikk harfrandid mud[pick("'","`")]gib!")
 	visible_message("<span class='warning'>A shape forms in the center of the rune. A shape of... a man.</span>", "You hear liquid flow.")
 	puppet = new(get_turf(src))
 	puppet.set_species("Cult")
 	puppet.name = puppet.species.get_random_name()
-	//puppet.key = ghost.key
-	//cult.add_antagonist(puppet.mind)
+	puppet.key = ghost.key
+	cult.add_antagonist(puppet.mind)
 
 	log_and_message_admins("used a manifest rune.")
 
-	var/image/I = image('icons/effects/effects.dmi', "rune_sac")
+	/*
+	var/image/I = image('icons/effects/effects.dmi', "rune_sac") // This doesn't work - fuck if I know why
 	overlays += I
+	world << I
 	while(puppet)
 		sleep(10)
-	overlays.Cut()
+	update_icon()
+	*/
 
 /obj/effect/rune/drain
 	cultname = "blood drain"
@@ -511,7 +515,6 @@
 		return fizzle(user)
 	victim.vessel.remove_reagent("blood", 20)
 	admin_attack_log(user, victim, "Used a blood drain rune.", "Was victim of a blood drain rune.", "used a blood drain rune on")
-	victim << "<span class='danger'>You feel weakened.</span>"
 	user.say("Yu[pick("'","`")]gular faras desdae. Havas mithum javara. Umathar uf'kal thenar!")
 	user.visible_message("<span class='warning'>Blood flows from \the [src] into \the [user]!</span>", "<span class='cult'>The blood starts flowing from \the [src] into your frail mortal body. [capitalize(english_list(heal_user(user)))].</span>", "You hear liquid flow.")
 
@@ -712,14 +715,20 @@
 	for(var/mob/living/M in cultists)
 		M.say("Dedo ol[pick("'","`")]btoh!")
 
+	var/list/mob/living/previous = list()
+	var/list/mob/living/current = list()
 	while(cultists.len >= 3)
 		cultists = get_cultists()
 		for(var/mob/living/carbon/M in viewers(src))
+			current |= M
 			var/obj/item/weapon/nullrod/N = locate() in M
 			if(N)
 				continue
 			M.take_overall_damage(5, 5)
-			M << "<span class='danger'>Your blood boils!</span>"
+			if(!(M in previous))
+				M << "<span class='danger'>Your blood boils!</span>"
+		previous = current.Copy()
+		current.Cut()
 		sleep(10)
 
 /* Tier NarNar runes */

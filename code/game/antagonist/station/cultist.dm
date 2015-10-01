@@ -1,7 +1,6 @@
 #define CULTINESS_PER_CULTIST 20
 #define CULTINESS_PER_SACRIFICE 20
-#define CULTINESS_PER_TURF 10
-//TODO: ^change to 2
+#define CULTINESS_PER_TURF 2
 
 var/datum/antagonist/cultist/cult
 

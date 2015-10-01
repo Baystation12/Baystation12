@@ -49,6 +49,9 @@
 	if(istype(get_equipped_item(slot_head), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/cultrobes) && istype(get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
 		has_robes = 1
 	var/turf/T = get_turf(src)
+	if(T.holy)
+		src << "<span class='warning'>This place is blessed, you may not draw runes on it - defile it first.</span>"
+		return
 	if(!istype(T, /turf/simulated))
 		src << "<span class='warning'>You need more space to draw a rune here.</span>"
 		return
