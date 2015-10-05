@@ -168,15 +168,6 @@
 		else
 	return
 
-/obj/machinery/vending/blob_act()
-	if (prob(50))
-		spawn(0)
-			src.malfunction()
-			qdel(src)
-		return
-
-	return
-
 /obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
 		src.emagged = 1

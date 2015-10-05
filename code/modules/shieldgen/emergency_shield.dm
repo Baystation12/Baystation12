@@ -87,9 +87,6 @@
 			if(prob(50))
 				qdel(src)
 
-/obj/machinery/shield/blob_act()
-	qdel(src)
-
 
 /obj/machinery/shield/hitby(AM as mob|obj)
 	//Let everyone know we've been hit!

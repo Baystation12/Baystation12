@@ -146,15 +146,6 @@
 					toner = 0
 	return
 
-/obj/machinery/photocopier/blob_act()
-	if(prob(50))
-		qdel(src)
-	else
-		if(toner > 0)
-			new /obj/effect/decal/cleanable/blood/oil(get_turf(src))
-			toner = 0
-	return
-
 /obj/machinery/photocopier/proc/copy(var/obj/item/weapon/paper/copy)
 	var/obj/item/weapon/paper/c = new /obj/item/weapon/paper (loc)
 	if(toner > 10)	//lots of toner, make it dark

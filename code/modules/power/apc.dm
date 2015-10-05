@@ -1178,12 +1178,6 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 					cell.ex_act(3.0)
 	return
 
-/obj/machinery/power/apc/blob_act()
-	if (prob(75))
-		set_broken()
-		if (cell && prob(5))
-			cell.blob_act()
-
 /obj/machinery/power/apc/disconnect_terminal()
 	if(terminal)
 		terminal.master = null

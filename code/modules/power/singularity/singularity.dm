@@ -53,9 +53,6 @@
 	consume(user)
 	return 1
 
-/obj/singularity/blob_act(severity)
-	return
-
 /obj/singularity/ex_act(severity)
 	if(current_size == STAGE_SUPER)//IT'S UNSTOPPABLE
 		return

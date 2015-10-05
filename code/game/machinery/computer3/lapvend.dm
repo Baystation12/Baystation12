@@ -28,15 +28,6 @@
 	return
 
 
-/obj/machinery/lapvend/blob_act()
-	if (prob(50))
-		spawn(0)
-			qdel(src)
-		return
-
-	return
-
-
 /obj/machinery/lapvend/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(vendmode == 1)
 		if(istype(W, /obj/item/weapon/card))
