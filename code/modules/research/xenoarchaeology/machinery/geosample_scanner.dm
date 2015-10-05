@@ -1,6 +1,6 @@
 
 /obj/machinery/radiocarbon_spectrometer
-	name = "Radiocarbon spectrometer"
+	name = "radiocarbon spectrometer"
 	desc = "A specialised, complex scanner for gleaning information on all manner of small things."
 	anchored = 1
 	density = 1
@@ -91,9 +91,13 @@
 				user << "<span class='info'>You remove [amount_transferred]u of coolant from [src].</span>"
 				update_coolant()
 				return
+		if(scanned_item)
+			user << "<span class=warning>\The [src] already has \a [scanned_item] inside!</span>"
+			return
 		user.drop_item()
 		I.loc = src
 		scanned_item = I
+		user << "<span class=notice>You put \the [I] into \the [src].</span>"
 
 /obj/machinery/radiocarbon_spectrometer/proc/update_coolant()
 	var/total_purity = 0

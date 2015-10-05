@@ -9,4 +9,4 @@
 	uplink_welcome = "Wizardly Uplink Console:"
 	uplink_uses = 10
 	end_on_antag_death = 1
-	antag_tag = MODE_WIZARD
+	antag_tags = list(MODE_WIZARD)

@@ -16,6 +16,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
 //	/datum/admins/proc/show_traitor_panel,	/*interface which shows a mob's mind*/ -Removed due to rare practical use. Moved to debug verbs ~Errorage
 	/datum/admins/proc/show_game_mode,  /*Configuration window for the current game mode.*/
+	/datum/admins/proc/force_mode_latespawn, /*Force the mode to try a latespawn proc*/
+	/datum/admins/proc/force_antag_latespawn, /*Force a specific template to try a latespawn proc*/
 	/datum/admins/proc/toggleenter,		/*toggles whether people can join the current game*/
 	/datum/admins/proc/toggleguests,	/*toggles whether guests can join the current game*/
 	/datum/admins/proc/announce,		/*priority announce something to all clients.*/
@@ -399,7 +401,7 @@ var/list/admin_verbs_mentor = list(
 		var/mob/dead/observer/ghost = body.ghostize(1)
 		ghost.admin_ghosted = 1
 		if(body)
-			body.aghosted = ghost
+			body.teleop = ghost
 			if(!body.key)
 				body.key = "@[key]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
 		feedback_add_details("admin_verb","O") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
