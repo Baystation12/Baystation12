@@ -85,7 +85,7 @@
 				banreason = "[banreason] (CUSTOM CID)"
 		else
 			message_admins("Ban process: A mob matching [playermob.ckey] was found at location [playermob.x], [playermob.y], [playermob.z]. Custom ip and computer id fields replaced with the ip and computer id from the located mob")
-		notes_add(playermob.ckey,banreason,usr)
+		notes_add(banckey,banreason,usr)
 
 		DB_ban_record(bantype, playermob, banduration, banreason, banjob, null, banckey, banip, bancid )
 
@@ -1334,7 +1334,7 @@
 			src.owner << "You sent [input] to [L] via a secure channel."
 			log_admin("[src.owner] replied to [key_name(L)]'s Centcomm message with the message [input].")
 			message_admins("[src.owner] replied to [key_name(L)]'s Centcom message with: \"[input]\"")
-			if(!L.isMobAI())
+			if(!isAI(L))
 				L << "<span class='info'>You hear something crackle in your headset for a moment before a voice speaks.</span>"
 			L << "<span class='info'>Please stand by for a message from Central Command.</span>"
 			L << "<span class='info'>Message as follows.</span>"

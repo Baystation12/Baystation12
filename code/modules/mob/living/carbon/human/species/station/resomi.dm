@@ -27,7 +27,7 @@
 	total_health = 50
 	brute_mod = 1.35
 	burn_mod =  1.35
-	is_small = 1
+	mob_size = MOB_SMALL
 	holder_type = /obj/item/weapon/holder/human
 	short_sighted = 1
 	gluttonous = 1

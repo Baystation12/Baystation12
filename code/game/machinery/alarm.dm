@@ -101,10 +101,9 @@
 
 /obj/machinery/alarm/Destroy()
 	unregister_radio(src, frequency)
-	if(wires)
-		qdel(wires)
-		wires = null
-	..()
+	qdel(wires)
+	wires = null
+	return ..()
 
 /obj/machinery/alarm/New(var/loc, var/dir, var/building = 0)
 	..()
@@ -326,7 +325,7 @@
 		if (2)
 			icon_state = "alarm1"
 			new_color = "#DA0205"
-	
+
 	set_light(l_range = 2, l_power = 0.5, l_color = new_color)
 
 /obj/machinery/alarm/receive_signal(datum/signal/signal)
@@ -488,7 +487,7 @@
 		remote_connection = href["remote_connection"]	// Remote connection means we're non-adjacent/connecting from another computer
 		remote_access = href["remote_access"]			// Remote access means we also have the privilege to alter the air alarm.
 
-	data["locked"] = locked && !user.isSilicon()
+	data["locked"] = locked && !issilicon(user)
 	data["remote_connection"] = remote_connection
 	data["remote_access"] = remote_access
 	data["rcon"] = rcon_setting
@@ -496,7 +495,7 @@
 
 	populate_status(data)
 
-	if(!(locked && !remote_connection) || remote_access || user.isSilicon())
+	if(!(locked && !remote_connection) || remote_access || issilicon(user))
 		populate_controls(data)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -609,7 +608,7 @@
 	if(buildstage != 2)
 		return STATUS_CLOSE
 
-	if(aidisabled && user.isMobAI())
+	if(aidisabled && isAI(user))
 		user << "<span class='warning'>AI control for \the [src] interface has been disabled.</span>"
 		return STATUS_CLOSE
 
@@ -654,7 +653,7 @@
 
 	// hrefs that need the AA unlocked -walter0o
 	var/extra_href = state.href_list(usr)
-	if(!(locked && !extra_href["remote_connection"]) || extra_href["remote_access"] || usr.isSilicon())
+	if(!(locked && !extra_href["remote_connection"]) || extra_href["remote_access"] || issilicon(usr))
 		if(href_list["command"])
 			var/device_id = href_list["id_tag"]
 			switch(href_list["command"])
@@ -910,7 +909,7 @@ FIRE ALARM
 				if("blue")	set_light(l_range = 2, l_power = 0.5, l_color = "#1024A9")
 				if("red")	set_light(l_range = 4, l_power = 2, l_color = "#ff0000")
 				if("delta")	set_light(l_range = 4, l_power = 2, l_color = "#FF6633")
-		
+
 		src.overlays += image('icons/obj/monitors.dmi', "overlay_[seclevel]")
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, temperature, volume)

@@ -58,7 +58,7 @@
 
 			user.drop_from_inventory(W)
 			air_supply = W
-			W.loc = src
+			W.forceMove(src)
 			user << "You slot [W] into [src] and tighten the connecting valve."
 			return
 
@@ -87,7 +87,7 @@
 			user << "You install \the [mod] into \the [src]."
 			user.drop_from_inventory(mod)
 			installed_modules |= mod
-			mod.loc = src
+			mod.forceMove(src)
 			mod.installed(src)
 			update_icon()
 			return 1
@@ -96,7 +96,7 @@
 
 			user << "You jack \the [W] into \the [src]'s battery mount."
 			user.drop_from_inventory(W)
-			W.loc = src
+			W.forceMove(src)
 			src.cell = W
 			return
 
@@ -107,7 +107,7 @@
 				return
 
 			if(user.r_hand && user.l_hand)
-				air_supply.loc = get_turf(user)
+				air_supply.forceMove(get_turf(user))
 			else
 				user.put_in_hands(air_supply)
 			user << "You detach and remove \the [air_supply]."
@@ -139,9 +139,9 @@
 						for(var/obj/item/rig_module/module in installed_modules)
 							module.deactivate()
 						if(user.r_hand && user.l_hand)
-							cell.loc = get_turf(user)
+							cell.forceMove(get_turf(user))
 						else
-							cell.loc = user.put_in_hands(cell)
+							cell.forceMove(user.put_in_hands(cell))
 						cell = null
 					else
 						user << "There is nothing loaded in that mount."
@@ -164,7 +164,7 @@
 
 					var/obj/item/rig_module/removed = possible_removals[removal_choice]
 					user << "You detatch \the [removed] from \the [src]."
-					removed.loc = get_turf(src)
+					removed.forceMove(get_turf(src))
 					removed.removed()
 					installed_modules -= removed
 					update_icon()

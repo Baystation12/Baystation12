@@ -160,7 +160,11 @@
 			M.drop_from_inventory(piece)
 		qdel(piece)
 	processing_objects -= src
-	..()
+	qdel(wires)
+	wires = null
+	qdel(spark_system)
+	spark_system = null
+	return ..()
 
 /obj/item/weapon/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || wearer.back != src)
@@ -629,7 +633,11 @@
 				if(check_slot)
 					H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
 			else
-				H << "<span class='notice'>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</span>"
+				use_obj.forceMove(H)
+				if(!H.equip_to_slot_if_possible(use_obj, equip_to, 0))
+					use_obj.forceMove(src)
+				else
+					H << "<span class='notice'>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</span>"
 
 	if(piece == "helmet" && helmet)
 		helmet.update_light(H)

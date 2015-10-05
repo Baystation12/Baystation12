@@ -85,7 +85,8 @@
 /obj/item/stack/tile/floor_red
 	name = "red floor tile"
 	singular_name = "red floor tile"
-	icon_state = "tile_red"
+	color = COLOR_RED_GRAY
+	icon_state = "tile_white"
 
 /obj/item/stack/tile/floor_steel
 	name = "steel floor tile"
@@ -102,7 +103,8 @@
 /obj/item/stack/tile/floor_yellow
 	name = "yellow floor tile"
 	singular_name = "yellow floor tile"
-	icon_state = "tile_yellow"
+	color = COLOR_BROWN
+	icon_state = "tile_white"
 
 /obj/item/stack/tile/floor_dark
 	name = "dark floor tile"

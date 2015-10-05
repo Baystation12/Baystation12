@@ -990,7 +990,7 @@
 				if(istype(M,/mob/living/carbon/human))
 					M.apply_effect((EG.rad_per_cycle*3),IRRADIATE,0)
 				else
-					M.radiation += EG.rad_per_cycle
+					M.apply_effect(EG.rad_per_cycle, IRRADIATE)
 		return 1
 
 

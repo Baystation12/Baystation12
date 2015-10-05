@@ -11,10 +11,10 @@
 	var/list/underlay_references
 	var/global/overlay_map = list()
 
-/turf/simulated/open/New()
-	. = ..()
-	ASSERT(HasBelow(z))
+/turf/simulated/open/initialize()
+	..()
 	below = GetBelow(src)
+	ASSERT(HasBelow(z))
 
 /turf/simulated/open/Entered(var/atom/movable/mover)
 	// only fall down in defined areas (read: areas with artificial gravitiy)
@@ -29,7 +29,7 @@
 		return
 
 	// Prevent pipes from falling into the void... if there is a pipe to support it.
-	if(istype(mover, /obj/item/pipe) && \
+	if(mover.anchored || istype(mover, /obj/item/pipe) && \
 		(locate(/obj/structure/disposalpipe/up) in below) || \
 		 locate(/obj/machinery/atmospherics/pipe/zpipe/up in below))
 		return
@@ -54,9 +54,9 @@
 	if(!soft)
 		if(!istype(mover, /mob))
 			if(istype(below, /turf/simulated/open))
-				below.visible_message("\The [mover] falls from the deck above through \the [below]!", "You hear a whoosh of displaced air.")
+				mover.visible_message("\The [mover] falls from the deck above through \the [below]!", "You hear a whoosh of displaced air.")
 			else
-				below.visible_message("\The [mover] falls from the deck above and slams into \the [below]!", "You hear something slam into the deck.")
+				mover.visible_message("\The [mover] falls from the deck above and slams into \the [below]!", "You hear something slam into the deck.")
 		else
 			var/mob/M = mover
 			if(istype(below, /turf/simulated/open))

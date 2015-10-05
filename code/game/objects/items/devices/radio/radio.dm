@@ -32,7 +32,6 @@ var/global/list/default_medbay_channels = list(
 	var/frequency = PUB_FREQ //common chat
 	var/traitor_frequency = 0 //tune to frequency to unlock traitor supplies
 	var/canhear_range = 3 // the range which mobs can hear this radio from
-	var/obj/item/device/radio/patch_link = null
 	var/datum/wires/radio/wires = null
 	var/b_stat = 0
 	var/broadcasting = 0
@@ -71,7 +70,7 @@ var/global/list/default_medbay_channels = list(
 		radio_controller.remove_object(src, frequency)
 		for (var/ch_name in channels)
 			radio_controller.remove_object(src, radiochannels[ch_name])
-	..()
+	return ..()
 
 
 /obj/item/device/radio/initialize()

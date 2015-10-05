@@ -28,7 +28,7 @@
 	var/tail_hair
 	var/race_key = 0       	                             // Used for mob icon cache string.
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
-	var/is_small
+	var/mob_size	= MOB_MEDIUM
 	var/show_ssd = "fast asleep"
 	var/virus_immune
 	var/short_sighted
@@ -149,6 +149,8 @@
 	var/bump_flag = HUMAN	// What are we considered to be when bumped?
 	var/push_flags = ~HEAVY	// What can we push?
 	var/swap_flags = ~HEAVY	// What can we swap place with?
+
+	var/pass_flags = 0
 
 /datum/species/New()
 	if(hud_type)
@@ -279,6 +281,11 @@
 
 /datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
 	add_inherent_verbs(H)
+	H.mob_bump_flag = bump_flag
+	H.mob_swap_flags = swap_flags
+	H.mob_push_flags = push_flags
+	H.pass_flags = pass_flags
+	H.mob_size = mob_size
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	return

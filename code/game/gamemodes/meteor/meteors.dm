@@ -18,25 +18,27 @@
 //Meteor spawning global procs
 ///////////////////////////////
 
-/proc/spawn_meteors(var/number = 10, var/list/meteortypes)
-	for(var/i = 0; i < number; i++)
-		spawn_meteor(meteortypes)
+/proc/pick_meteor_start(var/startSide = pick(cardinal))
+	var/startLevel = pick(config.station_levels)
+	var/pickedstart = spaceDebrisStartLoc(startSide, startLevel)
 
-/proc/spawn_meteor(var/list/meteortypes)
-	var/turf/pickedstart
-	var/turf/pickedgoal
-	var/max_i = 10//number of tries to spawn meteor.
-	while (!istype(pickedstart, /turf/space))
-		var/startSide = pick(cardinal)
-		pickedstart = spaceDebrisStartLoc(startSide, 1)
-		pickedgoal = spaceDebrisFinishLoc(startSide, 1)
-		max_i--
-		if(max_i<=0)
-			return
+	return list(startLevel, pickedstart)
+
+/proc/spawn_meteors(var/number = 10, var/list/meteortypes, var/startSide)
+	for(var/i = 0; i < number; i++)
+		spawn_meteor(meteortypes, startSide)
+
+/proc/spawn_meteor(var/list/meteortypes, var/startSide)
+	var/start = pick_meteor_start(startSide)
+
+	var/startLevel = start[1]
+	var/turf/pickedstart = start[2]
+	var/turf/pickedgoal = spaceDebrisFinishLoc(startSide, startLevel)
+
 	var/Me = pickweight(meteortypes)
 	var/obj/effect/meteor/M = new Me(pickedstart)
 	M.dest = pickedgoal
-	M.z_original = 1
+	M.z_original = startLevel
 	spawn(0)
 		walk_towards(M, M.dest, 1)
 	return
@@ -95,7 +97,6 @@
 	var/dest
 	pass_flags = PASSTABLE
 	var/heavy = 0
-	var/meteorsound = 'sound/effects/meteorimpact.ogg'
 	var/z_original = 1
 
 	var/meteordrop = /obj/item/weapon/ore/iron
@@ -128,8 +129,10 @@
 /obj/effect/meteor/Bump(atom/A)
 	if(A)
 		ram_turf(get_turf(A))
-		playsound(src.loc, meteorsound, 40, 1)
 		get_hit()
+
+/obj/effect/meteor/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	return istype(mover, /obj/effect/meteor) ? 1 : ..()
 
 /obj/effect/meteor/proc/ram_turf(var/turf/T)
 	//first bust whatever is in the turf
@@ -165,15 +168,15 @@
 		var/obj/item/O = new meteordrop(get_turf(src))
 		O.throw_at(dest, 5, 10)
 
-/obj/effect/meteor/proc/meteor_effect(var/sound=1)
-	if(sound)
+/obj/effect/meteor/proc/meteor_effect(var/effect=1)
+	if(effect)
 		for(var/mob/M in player_list)
 			var/turf/T = get_turf(M)
 			if(!T || T.z != src.z)
 				continue
 			var/dist = get_dist(M.loc, src.loc)
 			shake_camera(M, dist > 20 ? 3 : 5, dist > 20 ? 1 : 3)
-			M.playsound_local(src.loc, meteorsound, 50, 1, get_rand_frequency(), 10)
+
 
 ///////////////////////
 //Meteor types
@@ -186,7 +189,6 @@
 	pass_flags = PASSTABLE | PASSGRILLE
 	hits = 1
 	hitpwr = 3
-	meteorsound = 'sound/weapons/throwtap.ogg'
 	meteordrop = /obj/item/weapon/ore/glass
 
 //Medium-sized
@@ -200,7 +202,7 @@
 
 //Large-sized
 /obj/effect/meteor/big
-	name = "big meteor"
+	name = "large meteor"
 	icon_state = "large"
 	hits = 6
 	heavy = 1
@@ -216,7 +218,6 @@
 	icon_state = "flaming"
 	hits = 5
 	heavy = 1
-	meteorsound = 'sound/effects/bamf.ogg'
 	meteordrop = /obj/item/weapon/ore/phoron
 
 /obj/effect/meteor/flaming/meteor_effect()
@@ -246,7 +247,6 @@
 	hits = 30
 	hitpwr = 1
 	heavy = 1
-	meteorsound = 'sound/effects/bamf.ogg'
 	meteordrop = /obj/item/weapon/ore/phoron
 
 /obj/effect/meteor/tunguska/meteor_effect()

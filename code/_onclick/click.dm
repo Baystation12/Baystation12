@@ -178,10 +178,6 @@
 		src << "You cannot attack people before the game has started."
 		return 0
 
-	if (istype(get_area(src), /area/start))
-		src << "No attacking people at spawn, you jackass."
-		return 0
-
 	if(stat)
 		return 0
 

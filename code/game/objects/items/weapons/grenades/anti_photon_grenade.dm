@@ -1,6 +1,6 @@
 /obj/item/weapon/grenade/anti_photon
 	desc = "An experimental device for temporarily removing light in a limited area."
-	name = "pgoton disruption grenade"
+	name = "photon disruption grenade"
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "emp"
 	item_state = "emp"

@@ -55,32 +55,52 @@
 
 /obj/structure/stairs
 	name = "Stairs"
-	desc = "Stairs.  You walk up and down them."
-	icon_state = "rampbottom"
-	icon = 'icons/obj/structures.dmi'
+	desc = "Stairs leading to another deck.  Not too useful if the gravity goes out."
+	icon = 'icons/obj/stairs.dmi'
 	density = 0
 	opacity = 0
 	anchored = 1
 
-	var/obj/structure/stairs/connected
-
-	New()
-		..()
-		var/turf/above = GetAbove(src)
-		if(istype(above, /turf/space))
-			above.ChangeTurf(/turf/simulated/open)
-
 	initialize()
-		var/updown = icon_state == "rampbottom" ? UP : DOWN
+		for(var/turf/turf in locs)
+			var/turf/simulated/open/above = GetAbove(turf)
+			if(!above)
+				warning("Stair created without level above: ([loc.x], [loc.y], [loc.z])")
+				return qdel(src)
+			if(!istype(above))
+				above.ChangeTurf(/turf/simulated/open)
 
-		var/turf/T = get_step(src, dir | updown)
-		connected = locate() in T
-		ASSERT(connected)
-
-	Uncross(var/atom/movable/M)
-		if(connected && M.dir == dir)
-			M.loc = connected.loc
+	Uncross(atom/movable/A)
+		if(A.dir == dir)
+			// This is hackish but whatever.
+			var/turf/target = get_step(GetAbove(A), dir)
+			var/turf/source = A.loc
+			if(target.Enter(A, source))
+				A.loc = target
+				target.Entered(A, source)
+			return 0
 		return 1
 
 	CanPass(obj/mover, turf/source, height, airflow)
 		return airflow || !density
+
+	// type paths to make mapping easier.
+	north
+		dir = NORTH
+		bound_height = 64
+		bound_y = -32
+		pixel_y = -32
+
+	south
+		dir = SOUTH
+		bound_height = 64
+
+	east
+		dir = EAST
+		bound_width = 64
+		bound_x = -32
+		pixel_x = -32
+
+	west
+		dir = WEST
+		bound_width = 64

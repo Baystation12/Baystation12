@@ -656,7 +656,7 @@ About the new airlock wires panel:
 	return
 
 /obj/machinery/door/airlock/CanUseTopic(var/mob/user)
-	if(!user.isSilicon())
+	if(issilicon(user))
 		return STATUS_CLOSE
 
 	if(operating < 0) //emagged
@@ -1041,10 +1041,9 @@ About the new airlock wires panel:
 				break
 
 /obj/machinery/door/airlock/Destroy()
-	if(wires)
-		qdel(wires)
-		wires = null
-	..()
+	qdel(wires)
+	wires = null
+	return ..()
 
 // Most doors will never be deconstructed over the course of a round,
 // so as an optimization defer the creation of electronics until

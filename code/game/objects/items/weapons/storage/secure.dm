@@ -151,11 +151,6 @@
 	throw_range = 4
 	w_class = 4.0
 
-	New()
-		..()
-		new /obj/item/weapon/paper(src)
-		new /obj/item/weapon/pen(src)
-
 	attack_hand(mob/user as mob)
 		if ((src.loc == user) && (src.locked == 1))
 			usr << "<span class='warning'>[src] is locked and cannot be opened!</span>"

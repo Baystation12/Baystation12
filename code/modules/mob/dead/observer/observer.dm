@@ -141,6 +141,8 @@ Works together with spawning an observer, noted above.
 	var/client/C = U.client
 	for(var/mob/living/carbon/human/target in target_list)
 		C.images += target.hud_list[SPECIALROLE_HUD]
+	for(var/mob/living/silicon/target in target_list)
+		C.images += target.hud_list[SPECIALROLE_HUD]
 	return 1
 
 /mob/proc/ghostize(var/can_reenter_corpse = 1)
@@ -215,7 +217,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			return
 	mind.current.ajourn=0
 	mind.current.key = key
-	mind.current.aghosted = null
+	mind.current.teleop = null
 	if(!admin_ghosted)
 		announce_ghost_joinleave(mind, 0, "They now occupy their body again.")
 	return 1
@@ -460,6 +462,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(!MayRespawn(1))
 		return
 
+	var/turf/T = get_turf(src)
+	if(!T || (T.z in config.admin_levels))
+		src << "<span class='warning'>You may not spawn as a mouse on this Z-level.</span>"
+		return
+
 	var/timedifference = world.time - client.time_died_as_mouse
 	if(client.time_died_as_mouse && timedifference <= mouse_respawn_time * 600)
 		var/timedifference_text
@@ -475,8 +482,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/mob/living/simple_animal/mouse/host
 	var/obj/machinery/atmospherics/unary/vent_pump/vent_found
 	var/list/found_vents = list()
-	for(var/obj/machinery/atmospherics/unary/vent_pump/v in world)
-		if(!v.welded && v.z == src.z)
+	for(var/obj/machinery/atmospherics/unary/vent_pump/v in machines)
+		if(!v.welded && v.z == T.z)
 			found_vents.Add(v)
 	if(found_vents.len)
 		vent_found = pick(found_vents)

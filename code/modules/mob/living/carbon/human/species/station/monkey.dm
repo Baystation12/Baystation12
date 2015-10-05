@@ -11,7 +11,7 @@
 	language = null
 	default_language = "Chimpanzee"
 	greater_form = "Human"
-	is_small = 1
+	mob_size = MOB_SMALL
 	has_fine_manipulation = 0
 	show_ssd = null
 
@@ -37,6 +37,8 @@
 	bump_flag = MONKEY
 	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL|ALIEN
+
+	pass_flags = PASSTABLE
 
 /datum/species/monkey/handle_npc(var/mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)

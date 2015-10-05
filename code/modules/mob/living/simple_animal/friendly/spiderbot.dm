@@ -5,7 +5,7 @@
 	max_co2 = 0
 	minbodytemp = 0
 	maxbodytemp = 500
-	mob_size = 5
+	mob_size = MOB_SMALL
 
 	var/obj/item/device/radio/borg/radio = null
 	var/mob/living/silicon/ai/connected_ai = null
@@ -39,7 +39,6 @@
 	var/obj/item/held_item = null //Storage for single item they can hold.
 	speed = -1                    //Spiderbots gotta go fast.
 	pass_flags = PASSTABLE
-	small = 1
 	speak_emote = list("beeps","clicks","chirps")
 
 /mob/living/simple_animal/spiderbot/New()

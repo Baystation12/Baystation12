@@ -155,7 +155,7 @@
 /mob/living/silicon/robot/proc/init()
 	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
 	laws = new /datum/ai_laws/nanotrasen()
-	additional_law_channels += "Binary"
+	additional_law_channels["Binary"] = ":b"
 	var/new_ai = select_active_ai_with_fewest_borgs()
 	if(new_ai)
 		lawupdate = 1
@@ -214,7 +214,9 @@
 		mmi = null
 	if(connected_ai)
 		connected_ai.connected_robots -= src
-	..()
+	qdel(wires)
+	wires = null
+	return ..()
 
 /mob/living/silicon/robot/proc/set_module_sprites(var/list/new_sprites)
 	module_sprites = new_sprites.Copy()
