@@ -1,0 +1,3 @@
+author: Datraen
+changes: [Puts spoons in kitchenware vendor's standard inventory, removed from contraband.]
+delete-after: false
