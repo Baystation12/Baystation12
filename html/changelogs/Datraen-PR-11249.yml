@@ -1,0 +1,4 @@
+author: Datraen
+delete-after: true
+changes: 
+  - tweak: "Puts spoons in kitchenware vendor's standard inventory, removed from contraband."
