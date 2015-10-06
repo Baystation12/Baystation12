@@ -79,7 +79,7 @@
 
 					//Blind the AI
 					updateicon()
-					src.blind.screen_loc = "1,1 to 15,15"
+					src.blind.screen_loc = ui_entire_screen
 					if (src.blind.layer!=18)
 						src.blind.layer = 18
 					src.sight = src.sight&~SEE_TURFS
