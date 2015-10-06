@@ -41,14 +41,14 @@ var/list/global_huds = list(
 /datum/global_hud/New()
 	//420erryday psychedellic colours screen overlay for when you are high
 	druggy = new /obj/screen()
-	druggy.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	druggy.screen_loc = ui_entire_screen
 	druggy.icon_state = "druggy"
 	druggy.layer = 17
 	druggy.mouse_opacity = 0
 
 	//that white blurry effect you get when you eyes are damaged
 	blurry = new /obj/screen()
-	blurry.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	blurry.screen_loc = ui_entire_screen
 	blurry.icon_state = "blurry"
 	blurry.layer = 17
 	blurry.mouse_opacity = 0
@@ -74,21 +74,21 @@ var/list/global_huds = list(
 	//welding mask overlay black/dither
 	darkMask = newlist(/obj/screen, /obj/screen, /obj/screen, /obj/screen, /obj/screen, /obj/screen, /obj/screen, /obj/screen)
 	O = darkMask[1]
-	O.screen_loc = "3,3 to 5,13"
+	O.screen_loc = "WEST+2,SOUTH+2 to WEST+4,NORTH-2"
 	O = darkMask[2]
-	O.screen_loc = "5,3 to 10,5"
+	O.screen_loc = "WEST+4,SOUTH+2 to EAST-5,SOUTH+4"
 	O = darkMask[3]
-	O.screen_loc = "6,11 to 10,13"
+	O.screen_loc = "WEST+5,NORTH-4 to EAST-5,NORTH-2"
 	O = darkMask[4]
-	O.screen_loc = "11,3 to 13,13"
+	O.screen_loc = "EAST-4,SOUTH+2 to EAST-2,NORTH-2"
 	O = darkMask[5]
-	O.screen_loc = "1,1 to 15,2"
+	O.screen_loc = "WEST,SOUTH to EAST,SOUTH+1"
 	O = darkMask[6]
-	O.screen_loc = "1,3 to 2,15"
+	O.screen_loc = "WEST,SOUTH+2 to WEST+1,NORTH"
 	O = darkMask[7]
-	O.screen_loc = "14,3 to 15,15"
+	O.screen_loc = "EAST-1,SOUTH+2 to EAST,NORTH"
 	O = darkMask[8]
-	O.screen_loc = "3,14 to 13,15"
+	O.screen_loc = "WEST+2,NORTH-1 to EAST-2,NORTH"
 
 	for(i = 1, i <= 4, i++)
 		O = vimpaired[i]
