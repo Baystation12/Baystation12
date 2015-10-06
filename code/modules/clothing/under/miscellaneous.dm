@@ -513,7 +513,14 @@
 
 /obj/item/clothing/under/blazer
 	name = "blue blazer"
-	desc = "A bold but yet conservative outfit, red corduroys, navy blazer and a tie." 
+	desc = "A bold but yet conservative outfit, red corduroys, navy blazer and a tie."
 	icon_state = "blue_blazer"
 	item_state = "blue_blazer"
 	worn_state = "blue_blazer"
+
+/obj/item/clothing/under/doakes
+	name = "red polo"
+	desc = "Make surprise for those mutherf*ckers! Made by 'Lego Ink.'"
+	icon_state = "doakes_polo"
+	item_state = "doakes_polo_s"
+	worn_state = "doakes_polo"
