@@ -134,7 +134,7 @@
 
 	var/datum/language/new_language = all_languages[language]
 
-	if(!istype(new_language) || new_language in languages)
+	if(!istype(new_language) || (new_language in languages))
 		return 0
 
 	languages.Add(new_language)

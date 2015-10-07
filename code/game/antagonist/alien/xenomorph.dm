@@ -44,4 +44,4 @@ var/datum/antagonist/xenos/xenomorphs
 	player.objectives += new /datum/objective/escape()
 
 /datum/antagonist/xenos/place_mob(var/mob/living/player)
-	player.loc = get_turf(pick(get_vents()))
+	player.forceMove(get_turf(pick(get_vents())))
