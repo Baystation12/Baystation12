@@ -7,7 +7,7 @@
 
 	var/turf/T = get_turf(src)
 	var/obj/effect/plant/plant = locate() in T
-	if(environment.gas["phoron"] > 0 || (plant && plant.seed && plant.seed.name == "xenophage"))
+	if(environment.gas["phoron"] > 0 || (plant && plant.seed.type == /datum/seed/xenomorph))
 		update_progression()
 		adjustBruteLoss(-1)
 		adjustFireLoss(-1)

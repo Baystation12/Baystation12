@@ -16,17 +16,24 @@
 	processing_objects -= src
 	..()
 
+/obj/structure/alien/egg/CanUseTopic(var/mob/user)
+	return isobserver(user) ? STATUS_INTERACTIVE : STATUS_CLOSE
+
+/obj/structure/alien/egg/Topic(href, href_list)
+	if(..())
+		return 1
+
+	if(href_list["spawn"])
+		attack_ghost(usr)
+
 /obj/structure/alien/egg/process()
-	if(progress < MAX_PROGRESS)
-		progress++
-		if(progress == MAX_PROGRESS)
-			for(var/mob/M in dead_mob_list)
-				if(istype(M,/mob/dead) && M.client && M.client.prefs && (M.client.prefs.be_special & BE_ALIEN))
-					M << "An alien egg is ready to hatch!" // Todo add a JUMP link.
+	progress++
+	if(progress >= MAX_PROGRESS)
+		for(var/mob/M in dead_mob_list)
+			if(istype(M,/mob/dead) && M.client && M.client.prefs && (M.client.prefs.be_special & BE_ALIEN))
+				M << "<span class='notice'>An alien is ready to hatch! ([ghost_follow_link(src, M)]) (<a href='byond://?src=\ref[src];spawn=1'>spawn</a>)</span>"
+		processing_objects -= src
 		update_icon()
-		return
-	// Max progress, cancel processing.
-	processing_objects -= src
 
 /obj/structure/alien/egg/update_icon()
 	if(progress == -1)
@@ -37,8 +44,6 @@
 		icon_state = "egg"
 
 /obj/structure/alien/egg/attack_ghost(var/mob/dead/observer/user)
-
-
 	if(progress == -1) //Egg has been hatched.
 		return
 
