@@ -18,7 +18,6 @@
 
 /obj/effect/blob/New(loc)
 	health = maxHealth
-	set_dir(pick(1,2,4,8))
 	update_icon()
 	return ..(loc)
 
@@ -74,10 +73,10 @@
 	if(GR)
 		qdel(GR)
 		return
-	var/obj/machinery/door/D = locate() in T
-	if(D && D.density)
-		D.ex_act(2)
-		return
+	for(var/obj/machinery/door/D in T) // There can be several - and some of them can be open, locate() is not suitable
+		if(D.density)
+			D.ex_act(2)
+			return
 	var/obj/structure/foamedmetal/F = locate() in T
 	if(F)
 		qdel(F)
@@ -97,6 +96,7 @@
 		return
 	var/obj/mecha/M = locate() in T
 	if(M)
+		M.visible_message("<span class='danger'>The blob attacks \the [M]!</span>")
 		M.take_damage(40)
 		return
 
