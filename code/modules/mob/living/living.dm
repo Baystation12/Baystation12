@@ -111,6 +111,14 @@ default behaviour is:
 				if(prob(99))
 					now_pushing = 0
 					return
+			if(tmob.r_hand && istype(tmob.r_hand, /obj/item/weapon/shield/metal))
+				if(prob(99))
+					now_pushing = 0
+					return
+			if(tmob.l_hand && istype(tmob.l_hand, /obj/item/weapon/shield/metal))
+				if(prob(99))
+					now_pushing = 0
+					return
 			if(!(tmob.status_flags & CANPUSH))
 				now_pushing = 0
 				return

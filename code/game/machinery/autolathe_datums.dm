@@ -37,6 +37,11 @@
 	path = /obj/item/device/flashlight
 	category = "General"
 
+/datum/autolathe/recipe/voice
+	name = "voice"
+	path = /obj/item/device/assembly/voice
+	category = "Devices and Components"
+
 /datum/autolathe/recipe/extinguisher
 	name = "extinguisher"
 	path = /obj/item/weapon/extinguisher
@@ -264,6 +269,11 @@
 /datum/autolathe/recipe/signaler
 	name = "signaler"
 	path = /obj/item/device/assembly/signaler
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/voice
+	name = "voice"
+	path = /obj/item/device/assembly/voice
 	category = "Devices and Components"
 
 /datum/autolathe/recipe/sensor_infra
