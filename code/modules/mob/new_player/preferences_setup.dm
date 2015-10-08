@@ -1,11 +1,7 @@
 datum/preferences
 	//The mob should have a gender you want before running this proc. Will run fine without H
 	proc/randomize_appearance_for(var/mob/living/carbon/human/H)
-		if(H)
-			if(H.gender == MALE)
-				gender = MALE
-			else
-				gender = FEMALE
+		gender = pick(MALE, FEMALE)
 		s_tone = random_skin_tone()
 		h_style = random_hair_style(gender, species)
 		f_style = random_facial_hair_style(gender, species)
