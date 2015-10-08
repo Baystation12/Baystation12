@@ -63,17 +63,6 @@
 				descriptive = "cold"
 		user << "<span class='notice'>\The [src] feels [descriptive].</span>"
 
-/obj/item/weapon/tank/blob_act()
-	if(prob(50))
-		var/turf/location = src.loc
-		if (!( istype(location, /turf) ))
-			qdel(src)
-
-		if(src.air_contents)
-			location.assume_air(air_contents)
-
-		qdel(src)
-
 /obj/item/weapon/tank/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if (istype(src.loc, /obj/item/assembly))

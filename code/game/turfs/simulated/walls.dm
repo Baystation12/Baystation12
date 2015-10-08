@@ -193,10 +193,6 @@
 		else
 	return
 
-/turf/simulated/wall/blob_act()
-	take_damage(rand(75, 125))
-	return
-
 // Wall-rot effect, a nasty fungus that destroys walls.
 /turf/simulated/wall/proc/rot()
 	if(locate(/obj/effect/overlay/wallrot) in src)

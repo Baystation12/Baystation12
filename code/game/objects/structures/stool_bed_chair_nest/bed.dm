@@ -86,11 +86,6 @@
 				qdel(src)
 				return
 
-/obj/structure/bed/blob_act()
-	if(prob(75))
-		material.place_sheet(get_turf(src))
-		qdel(src)
-
 /obj/structure/bed/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)

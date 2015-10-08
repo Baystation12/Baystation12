@@ -32,13 +32,6 @@
 	src.healthcheck()
 	return
 
-
-/obj/structure/lamarr/blob_act()
-	if (prob(75))
-		new /obj/item/weapon/material/shard( src.loc )
-		Break()
-		qdel(src)
-
 /obj/structure/lamarr/proc/healthcheck()
 	if (src.health <= 0)
 		if (!( src.destroyed ))

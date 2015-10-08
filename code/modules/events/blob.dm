@@ -12,12 +12,13 @@
 	if(!T)
 		kill()
 		return
-	Blob = new /obj/effect/blob/core(T, 120)
+	Blob = new /obj/effect/blob/core(T)
 	for(var/i = 1; i < rand(3, 4), i++)
 		Blob.process()
 
 /datum/event/blob/tick()
-	if(!Blob)
+	if(!Blob || !Blob.loc)
+		Blob = null
 		kill()
 		return
 	if(IsMultiple(activeFor, 3))

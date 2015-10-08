@@ -59,11 +59,6 @@
 			else
 		return
 
-	blob_act()
-		if(prob(50))
-			new /obj/effect/effect/water(src.loc)
-			qdel(src)
-
 
 
 
@@ -154,9 +149,6 @@
 		if(!istype(Proj ,/obj/item/projectile/beam/lastertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
 			explode()
 
-/obj/structure/reagent_dispensers/fueltank/blob_act()
-	explode()
-
 /obj/structure/reagent_dispensers/fueltank/ex_act()
 	explode()
 
@@ -222,10 +214,6 @@
 	New()
 		..()
 		reagents.add_reagent("beer",1000)
-
-/obj/structure/reagent_dispensers/beerkeg/blob_act()
-	explosion(src.loc,0,3,5,7,10)
-	qdel(src)
 
 /obj/structure/reagent_dispensers/virusfood
 	name = "Virus Food Dispenser"
