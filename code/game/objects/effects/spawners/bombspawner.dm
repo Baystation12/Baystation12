@@ -132,7 +132,7 @@
 	
 	var/assembly_type = /obj/item/device/assembly/signaler
 	
-	//Note that the maximum amount of gas you can put in a 70L air tank at 1013.25 kPa is 16.44 mol.
+	//Note that the maximum amount of gas you can put in a 70L air tank at 1013.25 kPa and 519K is 16.44 mol.
 	var/phoron_amt = 10.96
 	var/oxygen_amt = 16.44
 	var/carbon_amt = 0.0
