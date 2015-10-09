@@ -6,6 +6,13 @@
 /datum/design/item/mechfab/robot
 	category = "Robot"
 
+//if the fabricator is a mech fab pass the manufacturer info over to the robot part constructor
+/datum/design/item/mechfab/robot/Fabricate(var/newloc, var/fabricator)
+	if(istype(fabricator, /obj/machinery/mecha_part_fabricator))
+		var/obj/machinery/mecha_part_fabricator/mechfab = fabricator
+		return new build_path(newloc, mechfab.manufacturer)
+	return ..()
+
 /datum/design/item/mechfab/robot/exoskeleton
 	name = "Robot exoskeleton"
 	id = "robot_exoskeleton"
