@@ -224,7 +224,7 @@
 //Set the stop_messages to stop it from printing messages
 /obj/item/weapon/storage/proc/can_be_inserted(obj/item/W as obj, stop_messages = 0)
 	if(!istype(W)) return //Not an item
-	
+
 	if(!usr.canUnEquip(W))
 		return 0
 
@@ -339,6 +339,21 @@
 
 	if(isrobot(user))
 		return //Robots can't interact with storage items.
+
+	if(istype(W, /obj/item/device/lightreplacer))
+		var/obj/item/device/lightreplacer/LP = W
+		var/amt_inserted = 0
+		var/turf/T = get_turf(user)
+		for(var/obj/item/weapon/light/L in src.contents)
+			if(L.status == 0)
+				if(LP.uses < LP.max_uses)
+					LP.AddUses(1)
+					amt_inserted++
+					remove_from_storage(L, T)
+					qdel(L)
+		if(amt_inserted)
+			user << "You inserted [amt_inserted] light\s into \the [LP.name]. You have [LP.uses] light\s remaining."
+			return
 
 	if(!can_be_inserted(W))
 		return
