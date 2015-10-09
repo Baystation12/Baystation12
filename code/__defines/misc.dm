@@ -181,3 +181,8 @@
 #define COLOR_PALE_RED_GRAY "#CC9090"
 #define COLOR_PALE_PURPLE_GRAY "#BDA2BA"
 #define COLOR_PURPLE_GRAY "#A2819E"
+
+//Camera capture modes
+#define CAPTURE_MODE_REGULAR 0 //Regular polaroid camera mode
+#define CAPTURE_MODE_ALL 1 //Admin camera mode
+#define CAPTURE_MODE_PARTIAL 3 //Simular to regular mode, but does not do dummy check
