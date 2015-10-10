@@ -768,14 +768,26 @@ proc // Creates a single icon from a given /atom or /image.  Only the first argu
 			addY1 = min(flatY1, I:pixel_y+1)
 			addY2 = max(flatY2, I:pixel_y+add.Height())
 
+			//Ratates overlay based on atom direction
+			if((I in A.overlays) || (I in A.underlays))
+				if(istype(A, /obj/machinery/atmospherics/pipe/manifold))
+					var/realdir = A.dir
+					add.Turn(dir2angle(realdir) - 180)
+
 			if(addX1!=flatX1 || addX2!=flatX2 || addY1!=flatY1 || addY2!=flatY2)
 				// Resize the flattened icon so the new icon fits
 				flat.Crop(addX1-flatX1+1, addY1-flatY1+1, addX2-flatX1+1, addY2-flatY1+1)
 				flatX1=addX1;flatX2=addX2
 				flatY1=addY1;flatY2=addY2
-
+			var/iconmode
+			if(I in A.overlays)
+				iconmode = ICON_OVERLAY
+			else if(I in A.underlays)
+				iconmode = ICON_UNDERLAY
+			else
+				iconmode = blendMode2iconMode(curblend)
 			// Blend the overlay into the flattened icon
-			flat.Blend(add, blendMode2iconMode(curblend), I:pixel_x + 2 - flatX1, I:pixel_y + 2 - flatY1)
+			flat.Blend(add, iconmode, I:pixel_x + 2 - flatX1, I:pixel_y + 2 - flatY1)
 
 		if(A.color)
 			flat.Blend(A.color, ICON_MULTIPLY)
