@@ -6644,7 +6644,7 @@
 "cxN" = (/turf/simulated/floor{icon_state = "floorgrime"},/area/maintenance/incinerator)
 "cxO" = (/obj/machinery/atmospherics/binary/pump{dir = 1},/turf/simulated/floor{icon_state = "floorgrime"},/area/maintenance/incinerator)
 "cxP" = (/obj/item/device/radio/intercom{dir = 8; name = "Station Intercom (General)"; pixel_x = 28},/turf/simulated/floor{icon_state = "floorgrime"},/area/maintenance/incinerator)
-"cxQ" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/air/airlock,/turf/simulated/floor/plating{dir = 2; icon_state = "warnplatecorner"},/area/maintenance/medbay)
+"cxQ" = (/obj/machinery/portable_atmospherics/canister/air/airlock,/obj/machinery/atmospherics/portables_connector{dir = 4},/turf/simulated/floor/plating{dir = 2; icon_state = "warnplatecorner"},/area/maintenance/medbay)
 "cxR" = (/obj/machinery/door/airlock{name = "Starboard Emergency Storage"; req_one_access = list(12,47)},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/door/firedoor,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/storage/emergency)
 "cxS" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/closet/secure_closet/personal/patient,/turf/simulated/floor{dir = 8; icon_state = "greencorner"},/area/medical/virology)
 "cxT" = (/obj/machinery/atmospherics/pipe/simple/hidden/purple,/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 8},/turf/simulated/floor{dir = 2; icon_state = "green"},/area/medical/virology)
