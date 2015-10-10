@@ -15,7 +15,7 @@
 //
 // HOW TO REFILL THE DEVICE
 //
-// It will need to be manually refilled with lights.
+// It can be manually refilled or by clicking on a storage item containing lights.
 // If it's part of a robot module, it will charge when the Robot is inside a Recharge Station.
 //
 // EMAGGED FEATURES
@@ -41,7 +41,7 @@
 /obj/item/device/lightreplacer
 
 	name = "light replacer"
-	desc = "A device to automatically replace lights. Refill with working lightbulbs."
+	desc = "A device to automatically replace lights. Refill with working lightbulbs or sheets of glass."
 
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "lightreplacer0"
@@ -51,14 +51,13 @@
 	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_MAGNET = 3, TECH_MATERIAL = 2)
 
-	var/max_uses = 20
-	var/uses = 0
+	var/max_uses = 32
+	var/uses = 32
 	var/emagged = 0
 	var/failmsg = ""
 	var/charge = 0
 
 /obj/item/device/lightreplacer/New()
-	uses = max_uses / 2
 	failmsg = "The [name]'s refill light blinks red."
 	..()
 
@@ -73,8 +72,8 @@
 			user << "<span class='warning'>[src.name] is full.</span>"
 			return
 		else if(G.use(1))
-			AddUses(5)
-			user << "<span class='notice'>You insert a piece of glass into the [src.name]. You have [uses] lights remaining.</span>"
+			AddUses(16) //Autolathe converts 1 sheet into 16 lights.
+			user << "<span class='notice'>You insert a piece of glass into \the [src.name]. You have [uses] light\s remaining.</span>"
 			return
 		else
 			user << "<span class='warning'>You need one sheet of glass to replace lights.</span>"
@@ -84,14 +83,13 @@
 		if(L.status == 0) // LIGHT OKAY
 			if(uses < max_uses)
 				AddUses(1)
-				user << "You insert the [L.name] into the [src.name]. You have [uses] lights remaining."
+				user << "You insert \the [L.name] into \the [src.name]. You have [uses] light\s remaining."
 				user.drop_item()
 				qdel(L)
 				return
 		else
 			user << "You need a working light."
 			return
-
 
 /obj/item/device/lightreplacer/attack_self(mob/user)
 	/* // This would probably be a bit OP. If you want it though, uncomment the code.

@@ -177,6 +177,16 @@
 	icon_state = "Dpacket"
 	item_state = "Dpacket"
 
+/obj/item/weapon/storage/fancy/cigarettes/killthroat
+	name = "\improper AcmeCo packet"
+	desc = "A packet of six AcmeCo cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
+	icon_state = "Bpacket"
+	item_state = "Bpacket" //Doesn't have an inhand state, but neither does dromedary, so, ya know..
+
+	New()
+		..()
+		fill_cigarre_package(src,list("fuel" = 15))
+
 /obj/item/weapon/storage/fancy/cigar
 	name = "cigar case"
 	desc = "A case for holding your cigars when you are not smoking them."

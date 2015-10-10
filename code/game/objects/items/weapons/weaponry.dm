@@ -213,10 +213,6 @@
 	health = 0
 	healthcheck()
 
-/obj/effect/energy_net/blob_act()
-	health = 0
-	healthcheck()
-
 /obj/effect/energy_net/attack_hand(var/mob/user)
 
 	var/mob/living/carbon/human/H = user

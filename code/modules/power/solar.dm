@@ -80,12 +80,6 @@ var/list/solars_list = list()
 	..()
 
 
-/obj/machinery/power/solar/blob_act()
-	src.health--
-	src.healthcheck()
-	return
-
-
 /obj/machinery/power/solar/proc/healthcheck()
 	if (src.health <= 0)
 		if(!(stat & BROKEN))
@@ -170,12 +164,6 @@ var/list/solars_list = list()
 			if (prob(25))
 				broken()
 	return
-
-
-/obj/machinery/power/solar/blob_act()
-	if(prob(75))
-		broken()
-		src.density = 0
 
 
 /obj/machinery/power/solar/fake/New(var/turf/loc, var/obj/item/solar_assembly/S)
@@ -538,12 +526,6 @@ var/list/solars_list = list()
 			if (prob(25))
 				broken()
 	return
-
-
-/obj/machinery/power/solar_control/blob_act()
-	if (prob(75))
-		broken()
-		src.density = 0
 
 // Used for mapping in solar array which automatically starts itself (telecomms, for example)
 /obj/machinery/power/solar_control/autostart

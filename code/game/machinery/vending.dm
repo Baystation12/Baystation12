@@ -168,15 +168,6 @@
 		else
 	return
 
-/obj/machinery/vending/blob_act()
-	if (prob(50))
-		spawn(0)
-			src.malfunction()
-			qdel(src)
-		return
-
-	return
-
 /obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
 		src.emagged = 1
@@ -780,7 +771,7 @@
 	icon_state = "cigs"
 	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/flame/lighter/random = 4)
 	contraband = list(/obj/item/weapon/flame/lighter/zippo = 4)
-	premium = list(/obj/item/weapon/storage/fancy/cigar = 5)
+	premium = list(/obj/item/weapon/storage/fancy/cigar = 5,/obj/item/weapon/storage/fancy/cigarettes/killthroat = 5 )
 	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 15,/obj/item/weapon/storage/box/matches = 1,/obj/item/weapon/flame/lighter/random = 2)
 
 

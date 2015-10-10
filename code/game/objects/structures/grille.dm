@@ -16,9 +16,6 @@
 /obj/structure/grille/ex_act(severity)
 	qdel(src)
 
-/obj/structure/grille/blob_act()
-	qdel(src)
-
 /obj/structure/grille/update_icon()
 	if(destroyed)
 		icon_state = "[initial(icon_state)]-b"

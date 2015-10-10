@@ -122,10 +122,6 @@
 				shatter(0)
 				return
 
-
-/obj/structure/window/blob_act()
-	shatter()
-
 //TODO: Make full windows a separate type of window.
 //Once a full window, it will always be a full window, so there's no point
 //having the same type for both.

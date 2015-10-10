@@ -30,11 +30,6 @@
 	healthcheck()
 	return
 
-/obj/structure/alien/blob_act()
-	health-=50
-	healthcheck()
-	return
-
 /obj/structure/alien/hitby(AM as mob|obj)
 	..()
 	visible_message("<span class='danger'>\The [src] was hit by \the [AM].</span>")

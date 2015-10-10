@@ -161,10 +161,6 @@
 				corrupt()
 	return
 
-/obj/item/weapon/cell/blob_act()
-	if(prob(75))
-		explode()
-
 /obj/item/weapon/cell/proc/get_electrocute_damage()
 	switch (charge)
 /*		if (9000 to INFINITY)

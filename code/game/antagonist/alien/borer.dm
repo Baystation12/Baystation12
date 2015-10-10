@@ -45,7 +45,7 @@ var/datum/antagonist/xenos/borer/borers
 			var/obj/item/organ/external/head = host.get_organ("head")
 			borer.host = host
 			head.implants += borer
-			borer.loc = head
+			borer.forceMove(head)
 			if(!borer.host_brain)
 				borer.host_brain = new(borer)
 			borer.host_brain.name = host.name
