@@ -871,7 +871,7 @@ arguments tx, ty, tz are target coordinates (requred), range defines render dist
 cap_mode is capturing mode (optional), user is capturing mob (requred only wehen cap_mode = CAPTURE_MODE_REGULAR),
 lighting determines lighting capturing (optional), suppress_errors suppreses errors and continues to capture (optional).
 */
-proc/generate_image(var/tx as num, var/ty as num, var/tz as num, var/range as num, var/cap_mode = CAPTURE_MODE_PARTIAL, var/mob/user, var/lighting = 1, var/suppress_errors = 1)
+proc/generate_image(var/tx as num, var/ty as num, var/tz as num, var/range as num, var/cap_mode = CAPTURE_MODE_PARTIAL, var/mob/living/user, var/lighting = 1, var/suppress_errors = 1)
 	var/list/turfstocapture = list()
 	//Lines below determine what tiles will be rendered
 	for(var/xoff = 0 to range)
@@ -879,7 +879,7 @@ proc/generate_image(var/tx as num, var/ty as num, var/tz as num, var/range as nu
 			var/turf/T = locate(tx + xoff,ty + yoff,tz)
 			if(T)
 				if(cap_mode == CAPTURE_MODE_REGULAR)
-					if(can_capture_turf(T, user))
+					if(user.can_capture_turf(T))
 						turfstocapture.Add(T)
 						continue
 				else
@@ -915,13 +915,3 @@ proc/generate_image(var/tx as num, var/ty as num, var/tz as num, var/range as nu
 
 	return cap
 
-
-proc/can_capture_turf(turf/T, mob/user) //function from photography
-	var/mob/dummy = new(T)	//Go go visibility check dummy
-	var/viewer = user
-	if(user.client)		//To make shooting through security cameras possible
-		viewer = user.client.eye
-	var/can_see = (dummy in viewers(world.view, viewer))
-
-	qdel(dummy)
-	return can_see
