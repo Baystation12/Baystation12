@@ -42,13 +42,13 @@
 	dat += "<HR>Current Loaded Programs:<BR>"
 
 	if(!linkedholodeck)
-		dat += "</span class='danger'>Warning: Unable to locate holodeck.<br></span>"
+		dat += "<span class='danger'>Warning: Unable to locate holodeck.<br></span>"
 		user << browse(dat, "window=computer;size=400x500")
 		onclose(user, "computer")
 		return
 
 	if(!supported_programs.len)
-		dat += "</span class='danger'>Warning: No supported holo-programs loaded.<br></span>"
+		dat += "<span class='danger'>Warning: No supported holo-programs loaded.<br></span>"
 		user << browse(dat, "window=computer;size=400x500")
 		onclose(user, "computer")
 		return

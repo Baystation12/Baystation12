@@ -36,7 +36,7 @@
 		qdel(air_contents)
 
 	processing_objects.Remove(src)
-	
+
 	if(istype(loc, /obj/item/device/transfer_valve))
 		var/obj/item/device/transfer_valve/TTV = loc
 		TTV.remove_tank(src)
@@ -120,7 +120,7 @@
 			location = loc.loc
 	else if(istype(loc, /mob/living/carbon))
 		location = loc
-	
+
 	var/using_internal
 	if(istype(location))
 		if(location.internal==src)
@@ -267,19 +267,19 @@
 		var/range = (pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE
 
 		explosion(
-			get_turf(loc), 
-			round(min(BOMBCAP_DVSTN_RADIUS, range*0.25)), 
-			round(min(BOMBCAP_HEAVY_RADIUS, range*0.50)), 
-			round(min(BOMBCAP_LIGHT_RADIUS, range*1.00)), 
-			round(min(BOMBCAP_FLASH_RADIUS, range*1.50)), 
+			get_turf(loc),
+			round(min(BOMBCAP_DVSTN_RADIUS, range*0.25)),
+			round(min(BOMBCAP_HEAVY_RADIUS, range*0.50)),
+			round(min(BOMBCAP_LIGHT_RADIUS, range*1.00)),
+			round(min(BOMBCAP_FLASH_RADIUS, range*1.50)),
 			)
 		qdel(src)
 
 	else if(pressure > TANK_RUPTURE_PRESSURE)
 		#ifdef FIREDBG
-		log_debug("\blue[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]")
+		log_debug("<span class='warning'>[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]</span>")
 		#endif
-		
+
 		if(integrity <= 0)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)
@@ -292,9 +292,9 @@
 
 	else if(pressure > TANK_LEAK_PRESSURE)
 		#ifdef FIREDBG
-		log_debug("\blue[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]")
+		log_debug("<span class='warning'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>")
 		#endif
-		
+
 		if(integrity <= 0)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)
