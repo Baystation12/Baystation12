@@ -20,7 +20,8 @@
 		process_count = 0
 		try_latespawn()
 
-/datum/game_mode/proc/latespawn(var/mob/living/carbon/human/character)
+//This can be overriden in case a game mode needs to do stuff when a player latejoins
+/datum/game_mode/proc/handle_latejoin(var/mob/living/carbon/human/character)
 	if(!character.mind)
 		return
 	try_latespawn(character.mind)

@@ -323,7 +323,7 @@
 			character.loc = C.loc
 
 			AnnounceCyborg(character, rank, "has been downloaded to the empty core in \the [character.loc.loc]")
-			ticker.mode.latespawn(character)
+			ticker.mode.handle_latejoin(character)
 
 			qdel(C)
 			qdel(src)
@@ -354,7 +354,7 @@
 			character.buckled.loc = character.loc
 			character.buckled.set_dir(character.dir)
 
-		ticker.mode.latespawn(character)
+		ticker.mode.handle_latejoin(character)
 
 		if(character.mind.assigned_role != "Cyborg")
 			data_core.manifest_inject(character)
