@@ -572,6 +572,7 @@ var/global/list/additional_antag_types = list()
 			if(antag)
 				antag_templates |= antag
 
+	shuffle(antag_templates) //In the case of multiple antag types
 	newscaster_announcements = pick(newscaster_standard_feeds)
 
 /datum/game_mode/proc/check_victory()
