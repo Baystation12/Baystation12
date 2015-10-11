@@ -27,7 +27,7 @@
 	try_latespawn(character.mind)
 	return 0
 
-/datum/game_mode/proc/try_latespawn(var/datum/mind/player, var/latejoin_only)
+/datum/game_mode/proc/try_latespawn(var/datum/mind/player)
 
 	if(emergency_shuttle.departed || !round_autoantag)
 		return
@@ -38,9 +38,7 @@
 	message_admins("AUTO[uppertext(name)]: Attempting spawn.")
 
 	var/list/usable_templates
-	if(latejoin_only && latejoin_templates.len)
-		usable_templates = get_usable_templates(latejoin_templates)
-	else if (antag_templates && antag_templates.len)
+	if (antag_templates && antag_templates.len)
 		usable_templates = get_usable_templates(antag_templates)
 	else
 		message_admins("AUTO[uppertext(name)]: Failed to find configured mode spawn templates, please disable auto-antagonists until one is added.")
