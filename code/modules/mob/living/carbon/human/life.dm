@@ -370,6 +370,12 @@
 		if(status_flags & GODMODE)
 			return
 
+		//exposure to extreme pressures can rupture lungs
+		if(breath && (breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5))
+			if(!is_lung_ruptured() && prob(5))
+				rupture_lung()
+
+		//check if we actually need to process breath
 		if(!breath || (breath.total_moles == 0) || suiciding)
 			failed_last_breath = 1
 			if(suiciding)

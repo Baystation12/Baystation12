@@ -142,15 +142,15 @@
 
 //These control the speed at which fire burns
 #define FIRE_GAS_BURNRATE_MULT			1
-#define FIRE_LIQUID_BURNRATE_MULT		1
+#define FIRE_LIQUID_BURNRATE_MULT		0.225
 
 //If the fire is burning slower than this rate then the reaction is going too slow to be self sustaining and the fire burns itself out.
 //This ensures that fires don't grind to a near-halt while still remaining active forever.
 #define FIRE_GAS_MIN_BURNRATE			0.01
-#define FIRE_LIQUD_MIN_BURNRATE			0.01
+#define FIRE_LIQUD_MIN_BURNRATE			0.0025
 
 //How many moles of fuel are contained within one solid/liquid fuel volume unit
-#define LIQUIDFUEL_AMOUNT_TO_MOL		1  //mol/volume unit
+#define LIQUIDFUEL_AMOUNT_TO_MOL		0.45  //mol/volume unit
 
 #define T0C  273.15 //    0.0 degrees celcius
 #define T20C 293.15 //   20.0 degrees celcius

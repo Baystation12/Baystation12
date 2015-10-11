@@ -49,7 +49,7 @@
 		breath = environment.remove_volume(volume_needed)
 		handle_chemical_smoke(environment) //handle chemical smoke while we're at it
 	
-	if(breath)
+	if(breath && breath.total_moles)
 		//handle mask filtering
 		if(istype(wear_mask, /obj/item/clothing/mask) && breath)
 			var/obj/item/clothing/mask/M = wear_mask
