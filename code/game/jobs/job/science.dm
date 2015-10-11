@@ -44,14 +44,14 @@
 	department = "Science"
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 5
-	spawn_positions = 3
+	total_positions = 8
+	spawn_positions = 5
 	supervisors = "the research director"
 	selection_color = "#ffeeff"
 	economic_modifier = 7
-	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
-	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
-	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher")
+	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_hydroponics, access_xenoarch)
+	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenobiology, access_hydroponics, access_xenoarch)
+	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher", "Xenobiologist", "Xenobotanist")
 
 	minimal_player_age = 14
 
@@ -68,6 +68,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat/science(H), slot_wear_suit)
 		return 1
 
+/*
 /datum/job/xenobiologist
 	title = "Xenobiologist"
 	flag = XENOBIOLOGIST
@@ -97,6 +98,7 @@
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat/science(H), slot_wear_suit)
 		return 1
+*/
 
 /datum/job/roboticist
 	title = "Roboticist"
