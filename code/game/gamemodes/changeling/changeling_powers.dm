@@ -126,47 +126,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	return
 
-//Used to switch species based on the changeling datum.
-/mob/proc/changeling_change_species()
-
-	set category = "Changeling"
-	set name = "Change Species (5)"
-
-	var/mob/living/carbon/human/H = src
-	if(!istype(H))
-		src << "<span class='warning'>We may only use this power while in humanoid form.</span>"
-		return
-
-	var/datum/changeling/changeling = changeling_power(5,1,0)
-	if(!changeling)	return
-
-	if(changeling.absorbed_species.len < 2)
-		src << "<span class='warning'>We do not know of any other species genomes to use.</span>"
-		return
-
-	var/S = input("Select the target species: ", "Target Species", null) as null|anything in changeling.absorbed_species
-	if(!S)	return
-
-	domutcheck(src, null)
-
-	changeling.chem_charges -= 5
-	changeling.geneticdamage = 30
-
-	src.visible_message("<span class='warning'>[src] transforms!</span>")
-
-	src.verbs -= /mob/proc/changeling_change_species
-	H.set_species(S,1) //Until someone moves body colour into DNA, they're going to have to use the default.
-
-	spawn(10)
-		src.verbs += /mob/proc/changeling_change_species
-		src.regenerate_icons()
-
-	changeling_update_languages(changeling.absorbed_languages)
-	feedback_add_details("changeling_powers","TR")
-
-	return 1
-
-//Absorbs the victim's DNA making them uncloneable. Requires a strong grip on the victim.
+//Absorbs the victim's DNA. Requires a strong grip on the victim.
 //Doesn't cost anything as it's the most basic ability.
 /mob/proc/changeling_absorb_dna()
 	set category = "Changeling"
@@ -278,14 +238,65 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	T.Drain()
 	return 1
 
+/*
+//Used to switch species based on the changeling datum.
+/mob/proc/changeling_change_species()
+
+	set category = "Changeling"
+	set name = "Change Species (5)"
+
+	var/mob/living/carbon/human/H = src
+	if(!istype(H))
+		src << "<span class='warning'>We may only use this power while in humanoid form.</span>"
+		return
+
+	var/datum/changeling/changeling = changeling_power(5,1,0)
+	if(!changeling)	return
+
+	if(changeling.absorbed_species.len < 2)
+		src << "<span class='warning'>We do not know of any other species genomes to use.</span>"
+		return
+
+	var/S = input("Select the target species: ", "Target Species", null) as null|anything in changeling.absorbed_species
+	if(!S)	return
+
+	domutcheck(src, null)
+
+	changeling.chem_charges -= 5
+	changeling.geneticdamage = 30
+
+	src.visible_message("<span class='warning'>[src] transforms!</span>")
+
+	src.verbs -= /mob/proc/changeling_change_species
+	H.set_species(S,1) //Until someone moves body colour into DNA, they're going to have to use the default.
+
+	spawn(10)
+		src.verbs += /mob/proc/changeling_change_species
+		src.regenerate_icons()
+
+	changeling_update_languages(changeling.absorbed_languages)	
+	feedback_add_details("changeling_powers","TR")
+
+	return 1
+*/
 
 //Change our DNA to that of somebody we've absorbed.
 /mob/proc/changeling_transform()
 	set category = "Changeling"
 	set name = "Transform (5)"
+	
+	var/mob/living/carbon/human/H = src
+	if(!istype(H))
+		src << "<span class='warning'>We may only use this power while in humanoid form.</span>"
+		return
 
 	var/datum/changeling/changeling = changeling_power(5,1,0)
 	if(!changeling)	return
+
+	var/S = input("Select the target species: ", "Target Species", null) as null|anything in changeling.absorbed_species
+	if(!S)	return
+
+	domutcheck(src, null)
 
 	var/list/names = list()
 	for(var/datum/dna/DNA in changeling.absorbed_dna)
@@ -308,8 +319,14 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	domutcheck(src, null)
 
 	src.verbs -= /mob/proc/changeling_transform
-	spawn(10)	src.verbs += /mob/proc/changeling_transform
+	H.set_species(S,1)
+	
+	spawn(10)
+		src.verbs += /mob/proc/changeling_change_species
+		src.regenerate_icons()
+		src.verbs += /mob/proc/changeling_transform
 
+	changeling_update_languages(changeling.absorbed_languages)	
 	feedback_add_details("changeling_powers","TR")
 	return 1
 
