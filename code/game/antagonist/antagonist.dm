@@ -186,11 +186,16 @@
 	for(var/datum/mind/player in pending_antagonists)
 		pending_antagonists -= player
 		add_antagonist(player,0,0,1)
+	
+	reset_antag_selection()
 
-//Resets all pending_antagonists, clearing their special_role (and assigned_role if ANTAG_OVERRIDE_JOB is set)
-/datum/antagonist/proc/reset()
+//Resets the antag selection, clearing all pending_antagonists and their special_role 
+//(and assigned_role if ANTAG_OVERRIDE_JOB is set) as well as clearing the candidate list.
+//Existing antagonists are left untouched.
+/datum/antagonist/proc/reset_antag_selection()
 	for(var/datum/mind/player in pending_antagonists)
 		if(flags & ANTAG_OVERRIDE_JOB)
 			player.assigned_role = null
 		player.special_role = null
 	pending_antagonists.Cut()
+	candidates.Cut()

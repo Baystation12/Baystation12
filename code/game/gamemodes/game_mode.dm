@@ -305,7 +305,7 @@ var/global/list/additional_antag_types = list()
 
 /datum/game_mode/proc/fail_setup()
 	for(var/datum/antagonist/antag in antag_templates)
-		antag.reset()
+		antag.reset_antag_selection()
 
 /datum/game_mode/proc/announce_ert_disabled()
 	if(!ert_disabled)
