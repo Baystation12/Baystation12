@@ -12,6 +12,11 @@
 	var/light_range_on = 3
 	var/light_power_on = 1
 
+/obj/machinery/computer/Destroy()
+	qdel(circuit)
+	circuit = null
+	return ..()
+
 /obj/machinery/computer/initialize()
 	power_change()
 
@@ -60,7 +65,6 @@
 		for(var/x in verbs)
 			verbs -= x
 		set_broken()
-		density = 0
 
 /obj/machinery/computer/update_icon()
 	..()
@@ -125,11 +129,4 @@
 			M.deconstruct(src)
 			qdel(src)
 	else
-		src.attack_hand(user)
-	return
-
-
-
-
-
-
+		..()
