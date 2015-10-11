@@ -972,7 +972,7 @@
 
 	if(L && !L.is_bruised())
 		src.custom_pain("You feel a stabbing pain in your chest!", 1)
-		L.damage = L.min_bruised_damage
+		L.bruise()
 
 /*
 /mob/living/carbon/human/verb/simulate()

@@ -20,6 +20,11 @@
 	overlay_layer = layer
 	..()
 
+/obj/machinery/computer/Destroy()
+	qdel(circuit)
+	circuit = null
+	return ..()
+
 /obj/machinery/computer/initialize()
 	power_change()
 	update_icon()
@@ -127,11 +132,4 @@
 			M.deconstruct(src)
 			qdel(src)
 	else
-		src.attack_hand(user)
-	return
-
-
-
-
-
-
+		..()

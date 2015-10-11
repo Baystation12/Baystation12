@@ -191,7 +191,7 @@
 	else
 		if(get_amount() < used)
 			return 0
-		for(var/i = 1 to uses_charge)
+		for(var/i = 1 to charge_costs.len)
 			var/datum/matter_synth/S = synths[i]
 			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
 		return 1
@@ -264,8 +264,8 @@
 			return 0
 		var/datum/matter_synth/S = synths[1]
 		. = round(S.get_charge() / charge_costs[1])
-		if(uses_charge > 1)
-			for(var/i = 2 to uses_charge)
+		if(charge_costs.len > 1)
+			for(var/i = 2 to charge_costs.len)
 				S = synths[i]
 				. = min(., round(S.get_charge() / charge_costs[i]))
 		return
