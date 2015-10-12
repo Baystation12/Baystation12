@@ -3,7 +3,6 @@
 	round_description = "A mercenary strike force is approaching the station to eradicate a xenomorph infestation!"
 	config_tag = "bughunt"
 	required_players = 15
-	required_players_secret = 25
 	required_enemies = 1
 	end_on_antag_death = 1
 	antag_tags = list(MODE_XENOMORPH, MODE_DEATHSQUAD)
