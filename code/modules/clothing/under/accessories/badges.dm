@@ -6,13 +6,13 @@
 
 /obj/item/clothing/accessory/badge
 	name = "detective's badge"
-	desc = "NanoTrasen Security Department detective's badge, made from gold."
+	desc = "[company_name] Security Department detective's badge, made from gold."
 	icon_state = "badge"
 	item_state = "marshalbadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 
 	var/stored_name
-	var/badge_string = "NanoTrasen Security Department"
+	var/badge_string = "[company_name] Security Department"
 
 /obj/item/clothing/accessory/badge/old
 	name = "faded badge"
@@ -43,7 +43,7 @@
 //.Holobadges.
 /obj/item/clothing/accessory/badge/holo
 	name = "holobadge"
-	desc = "This glowing blue badge marks the holder as a member of NanoTrasen Security."
+	desc = "This glowing blue badge marks the holder as a member of [company_name] Security."
 	icon_state = "holobadge"
 	item_state = "holobadge"
 	var/emagged //Emagging removes Sec check.
@@ -58,18 +58,16 @@
 		return
 	return ..()
 
+/obj/item/clothing/accessory/badge/holo/emag_act(var/remaining_charges, var/mob/user)
+	if (emagged)
+		user << "<span class='danger'>\The [src] is already cracked.</span>"
+		return
+	else
+		emagged = 1
+		user << "<span class='danger'>You crack the holobadge security checks.</span>"
+		return 1
+
 /obj/item/clothing/accessory/badge/holo/attackby(var/obj/item/O as obj, var/mob/user as mob)
-
-	if (istype(O, /obj/item/weapon/card/emag))
-		if (emagged)
-			user << "<span class='danger'>[src] is already cracked.</span>"
-			return
-		else
-			emagged = 1
-			user << "<span class='danger'>You swipe [O] and crack the holobadge security checks.</span>"
-			return
-
-	else if(istype(O, /obj/item/weapon/card/id) || istype(O, /obj/item/device/pda))
 
 		var/obj/item/weapon/card/id/id_card = null
 
@@ -110,7 +108,7 @@
 
 /obj/item/clothing/accessory/badge/hos
 	name = "commander's badge"
-	desc = "An immaculately polished gold Nanotrasen Security badge. Labeled 'Commander.'"
+	desc = "An immaculately polished gold [company_name] Security badge. Labeled 'Commander.'"
 	icon_state = "goldbadge"
 	slot_flags = SLOT_TIE
 
