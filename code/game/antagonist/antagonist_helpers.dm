@@ -20,6 +20,9 @@
 /datum/antagonist/proc/get_antag_count()
 	return current_antagonists ? current_antagonists.len : 0
 
+/datum/antagonist/proc/get_active_antag_count()
+	return get_antag_count() //TODO
+
 /datum/antagonist/proc/is_antagonist(var/datum/mind/player)
 	if(player in current_antagonists)
 		return 1
@@ -33,9 +36,6 @@
 	return (flags & ANTAG_VOTABLE)
 
 /datum/antagonist/proc/can_late_spawn()
-	update_current_antag_max()
-	if(get_antag_count() >= cur_max)
-		return 0
 	return 1
 
 /datum/antagonist/proc/is_latejoin_template()
