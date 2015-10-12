@@ -1617,11 +1617,11 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaeracube
 	name = "neaera cube"
-	monkey_type = "Neara"
+	monkey_type = "Neaera"
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube
 	name = "neaera cube"
-	monkey_type = "Neara"
+	monkey_type = "Neaera"
 
 
 /obj/item/weapon/reagent_containers/food/snacks/spellburger

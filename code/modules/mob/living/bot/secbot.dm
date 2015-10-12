@@ -183,6 +183,7 @@
 			if(!Adjacent(target))
 				awaiting_surrender = 5 // I'm done playing nice
 				mode = SECBOT_HUNT
+				return
 			var/threat = check_threat(target)
 			if(threat < 4)
 				target = null
@@ -336,7 +337,7 @@
 		path = list()
 
 /mob/living/bot/secbot/proc/check_threat(var/mob/living/M)
-	if(!M || !istype(M) || M.stat)
+	if(!M || !istype(M) || M.stat || src == M)
 		return 0
 
 	if(emagged)

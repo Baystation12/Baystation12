@@ -70,7 +70,7 @@
 			flick("e_flash", M.flash)
 
 			if(ishuman(M) && ishuman(user) && M.stat!=DEAD)
-				if(user.mind && user.mind in revs.head_revolutionaries)
+				if(user.mind && user.mind in revs.current_antagonists)
 					var/revsafe = 0
 					for(var/obj/item/weapon/implant/loyalty/L in M)
 						if(L && L.implanted)

@@ -87,8 +87,8 @@ default behaviour is:
 
 			if((tmob.mob_always_swap || (tmob.a_intent == I_HELP || tmob.restrained()) && (a_intent == I_HELP || src.restrained())) && tmob.canmove && canmove && !dense && can_move_mob(tmob, 1, 0)) // mutual brohugs all around!
 				var/turf/oldloc = loc
-				loc = tmob.loc
-				tmob.loc = oldloc
+				forceMove(tmob.loc)
+				tmob.forceMove(oldloc)
 				now_pushing = 0
 				for(var/mob/living/carbon/slime/slime in view(1,tmob))
 					if(slime.Victim == tmob)
@@ -574,28 +574,17 @@ default behaviour is:
 	set name = "Resist"
 	set category = "IC"
 
-	if(can_resist())
+	if(!(stat || next_move > world.time))
 		next_move = world.time + 20
-		process_resist()
-
-/mob/living/proc/can_resist()
-	//need to allow !canmove, or otherwise neck grabs can't be resisted
-	//so just check weakened instead.
-	if(stat || weakened)
-		return 0
-	if(next_move > world.time)
-		return 0
-	return 1
+		resist_grab()
+		if(!weakened)
+			process_resist()
 
 /mob/living/proc/process_resist()
 	//Getting out of someone's inventory.
 	if(istype(src.loc, /obj/item/weapon/holder))
 		escape_inventory(src.loc)
 		return
-
-	//resisting grabs (as if it helps anyone...)
-	if (!restrained())
-		resist_grab()
 
 	//unbuckling yourself
 	if(buckled)
@@ -617,7 +606,7 @@ default behaviour is:
 		src << "<span class='warning'>You wriggle out of [M]'s grip!</span>"
 	else if(istype(H.loc,/obj/item))
 		src << "<span class='warning'>You struggle free of [H.loc].</span>"
-		H.loc = get_turf(H)
+		H.forceMove(get_turf(H))
 
 	if(istype(M))
 		for(var/atom/A in M.contents)
@@ -658,27 +647,15 @@ default behaviour is:
 	set category = "IC"
 
 	resting = !resting
-	src << "\blue You are now [resting ? "resting" : "getting up"]"
+	src << "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>"
 
 /mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	if(istype(carried_item, /obj/item/weapon/implant))
-		return 1
-	if(istype(carried_item, /obj/item/clothing/mask/facehugger))
-		return 1
-	return 0
-
-/mob/living/carbon/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	if(carried_item in internal_organs)
-		return 1
-	return ..()
-
-/mob/living/carbon/human/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	if(carried_item in organs)
-		return 1
-	return ..()
+	return isnull(get_inventory_slot(carried_item))
 
 /mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	return carried_item != held_item
+	if(carried_item == held_item)
+		return 0
+	return ..()
 
 /mob/living/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null, var/ignore_items = 0) // -- TLE -- Merged by Carn
 	if(stat)

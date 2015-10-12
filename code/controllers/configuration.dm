@@ -74,9 +74,6 @@ var/list/gamemode_cache = list()
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
 
-	var/rp_rev = 0             // Changes between conversion methods in rev.
-	var/announce_revheads = 0  // Determines if revheads are announced in revolution mode.
-
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
 
@@ -635,12 +632,6 @@ var/list/gamemode_cache = list()
 				if("disable_welder_vision")
 					config.welder_vision = 0
 
-				if("rp_rev")
-					config.rp_rev = 1
-
-				if("announce_revheads")
-					config.announce_revheads = 1
-
 				if("allow_extra_antags")
 					config.allow_extra_antags = 1
 
@@ -840,21 +831,15 @@ var/list/gamemode_cache = list()
 	for (var/game_mode in gamemode_cache)
 		var/datum/game_mode/M = gamemode_cache[game_mode]
 		if (M.config_tag && M.config_tag == mode_name)
-			M.create_antagonists()
 			return M
 	return gamemode_cache["extended"]
 
 /datum/configuration/proc/get_runnable_modes()
-	var/list/datum/game_mode/runnable_modes = new
-	for (var/game_mode in gamemode_cache)
+	var/list/runnable_modes = list()
+	for(var/game_mode in gamemode_cache)
 		var/datum/game_mode/M = gamemode_cache[game_mode]
-		if (!(M.config_tag in modes))
-			continue
-		if (probabilities[M.config_tag]<=0)
-			continue
-		if (M.can_start())
-			runnable_modes[M] = probabilities[M.config_tag]
-			//world << "DEBUG: runnable_mode\[[runnable_modes.len]\] = [M.config_tag]"
+		if(M && M.can_start() && !isnull(config.probabilities[M.config_tag]) && config.probabilities[M.config_tag] > 0)
+			runnable_modes |= M
 	return runnable_modes
 
 /datum/configuration/proc/post_load()

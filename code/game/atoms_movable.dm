@@ -21,14 +21,10 @@
 	if(auto_init && ticker && ticker.current_state == GAME_STATE_PLAYING)
 		initialize()
 
-/proc/generate_debug_runtime() // Guaranteed to runtime and print a stack trace to the runtime log
-	var/t = 0 // BYOND won't let us do var/t = 1/0 directly, but it's fine with this.
-	t = 1 / t
-
 /atom/movable/Del()
 	if(isnull(gcDestroyed) && loc)
 		testing("GC: -- [type] was deleted via del() rather than qdel() --")
-		generate_debug_runtime() // stick a stack trace in the runtime logs
+		crash_with("GC: -- [type] was deleted via del() rather than qdel() --") // stick a stack trace in the runtime logs
 //	else if(isnull(gcDestroyed))
 //		testing("GC: [type] was deleted via GC without qdel()") //Not really a huge issue but from now on, please qdel()
 //	else
