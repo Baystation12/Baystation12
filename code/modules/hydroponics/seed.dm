@@ -48,11 +48,11 @@
 	set_trait(TRAIT_REQUIRES_NUTRIENTS,   1)            // The plant can starve.
 	set_trait(TRAIT_REQUIRES_WATER,       1)            // The plant can become dehydrated.
 	set_trait(TRAIT_WATER_CONSUMPTION,    3)            // Plant drinks this much per tick.
-	set_trait(TRAIT_LIGHT_TOLERANCE,      5)            // Departure from ideal that is survivable.
+	set_trait(TRAIT_LIGHT_TOLERANCE,      4.4)            // Departure from ideal that is survivable.
 	set_trait(TRAIT_TOXINS_TOLERANCE,     5)            // Resistance to poison.
 	set_trait(TRAIT_PEST_TOLERANCE,       5)            // Threshold for pests to impact health.
 	set_trait(TRAIT_WEED_TOLERANCE,       5)            // Threshold for weeds to impact health.
-	set_trait(TRAIT_IDEAL_LIGHT,          8)            // Preferred light level in luminosity.
+	set_trait(TRAIT_IDEAL_LIGHT,          5)            // Preferred light level in luminosity. Lowered from 8 to 5.
 	set_trait(TRAIT_HEAT_TOLERANCE,       20)           // Departure from ideal that is survivable.
 	set_trait(TRAIT_LOWKPA_TOLERANCE,     25)           // Low pressure capacity.
 	set_trait(TRAIT_ENDURANCE,            100)          // Maximum plant HP when growing.
@@ -411,7 +411,9 @@
 			"slimejelly",
 			"cyanide",
 			"mindbreaker",
-			"stoxin"
+			"stoxin",
+			"acetone",
+			"hydrazine"
 			)
 
 		for(var/x=1;x<=additional_chems;x++)
@@ -681,7 +683,6 @@
 					total_yield = get_trait(TRAIT_YIELD) + rand(yield_mod)
 				total_yield = max(1,total_yield)
 
-		currently_querying = list()
 		for(var/i = 0;i<total_yield;i++)
 			var/obj/item/product
 			if(has_mob_product)
