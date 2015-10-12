@@ -132,7 +132,7 @@
 		update_icon()
 		plant_controller.add_plant(src)
 		// Some plants eat through plating.
-		if(!isnull(seed.chems["pacid"]))
+		if(islist(seed.chems) && !isnull(seed.chems["pacid"]))
 			var/turf/T = get_turf(src)
 			T.ex_act(prob(80) ? 3 : 2)
 
@@ -188,12 +188,12 @@
 		icon_state = "[seed.get_trait(TRAIT_PLANT_ICON)]-[growth]"
 
 	if(growth>2 && growth == max_growth)
-		layer = 5
+		layer = (seed && seed.force_layer) ? seed.force_layer : 5
 		opacity = 1
-		if(!isnull(seed.chems["woodpulp"]))
+		if(islist(seed.chems) && !isnull(seed.chems["woodpulp"]))
 			density = 1
 	else
-		layer = 3
+		layer = (seed && seed.force_layer) ? seed.force_layer : 5
 		density = 0
 
 /obj/effect/plant/proc/calc_dir()

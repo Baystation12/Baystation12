@@ -278,20 +278,6 @@
 			return
 		holder.Topic(href, list("makerobot"=href_list["makerobot"]))
 
-	else if(href_list["makealien"])
-		if(!check_rights(R_SPAWN))	return
-
-		var/mob/living/carbon/human/H = locate(href_list["makealien"])
-		if(!istype(H))
-			usr << "This can only be done to instances of type /mob/living/carbon/human"
-			return
-
-		if(alert("Confirm mob type change?",,"Transform","Cancel") != "Transform")	return
-		if(!H)
-			usr << "Mob doesn't exist anymore"
-			return
-		holder.Topic(href, list("makealien"=href_list["makealien"]))
-
 	else if(href_list["makeslime"])
 		if(!check_rights(R_SPAWN))	return
 

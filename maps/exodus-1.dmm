@@ -4305,7 +4305,7 @@
 "bEO" = (/obj/structure/table/standard,/obj/item/weapon/folder/white,/obj/item/weapon/stamp/rd{pixel_x = 3; pixel_y = -2},/obj/item/weapon/paper/monitorkey,/obj/item/device/megaphone,/obj/item/weapon/paper_bin{pixel_x = 1; pixel_y = 9},/obj/item/weapon/pen,/obj/effect/floor_decal/corner/grey/diagonal,/turf/simulated/floor/tiled/white,/area/crew_quarters/heads/hor)
 "bEP" = (/obj/machinery/computer/aifixer,/obj/machinery/requests_console{announcementConsole = 1; department = "Research Director's Desk"; departmentType = 5; name = "Research Director RC"; pixel_x = -2; pixel_y = 30},/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/corner/grey/diagonal,/turf/simulated/floor/tiled/white,/area/crew_quarters/heads/hor)
 "bEQ" = (/obj/structure/table/standard,/obj/effect/floor_decal/corner/grey/diagonal,/turf/simulated/floor/tiled/white,/area/crew_quarters/heads/hor)
-"bER" = (/obj/structure/lamarr,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/crew_quarters/heads/hor)
+"bER" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/crew_quarters/heads/hor)
 "bES" = (/obj/machinery/status_display{layer = 4; pixel_x = 0; pixel_y = 32},/obj/effect/floor_decal/industrial/warning{dir = 8},/turf/simulated/floor/tiled/white,/area/crew_quarters/heads/hor)
 "bET" = (/obj/machinery/ai_status_display{pixel_y = 32},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/machinery/papershredder,/turf/simulated/floor/tiled/white,/area/crew_quarters/heads/hor)
 "bEU" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/obj/effect/floor_decal/corner/blue{dir = 4},/turf/simulated/floor/tiled/white,/area/rnd/docking)
