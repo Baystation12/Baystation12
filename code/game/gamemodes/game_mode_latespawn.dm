@@ -38,4 +38,4 @@
 			return
 		
 	message_admins("[uppertext(name)]: Failed to proc a viable spawn template.")
-	next_spawn = world.time + rand(min_autotraitor_delay, max_autotraitor_delay)
+	next_spawn = world.time + min_autotraitor_delay //recheck again in the miniumum time
