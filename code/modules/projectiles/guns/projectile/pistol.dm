@@ -9,7 +9,7 @@
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/colt/detective
-	magazine_type = /obj/item/ammo_magazine/c45m/rubber
+	magazine_type = /obj/item/ammo_magazine/c45m/flash
 
 /obj/item/weapon/gun/projectile/colt/detective/verb/rename_gun()
 	set name = "Name Gun"
