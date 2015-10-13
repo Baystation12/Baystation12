@@ -418,10 +418,14 @@ obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
 	nuke_disks |= src
 
 /obj/item/weapon/disk/nuclear/Destroy()
-	if(!nuke_disks.len && blobstart.len > 0)
-		var/obj/D = new /obj/item/weapon/disk/nuclear(pick(blobstart))
-		message_admins("[src], the last authentication disk, has been destroyed. Spawning [D] at ([D.x], [D.y], [D.z]).")
-		log_game("[src], the last authentication disk, has been destroyed. Spawning [D] at ([D.x], [D.y], [D.z]).")
+	nuke_disks -= src
+	if(!nuke_disks.len)
+		var/turf/T = pick_area_turf(/area/maintenance, /proc/not_turf_contains_dense_objects)
+		if(T)
+			var/obj/D = new /obj/item/weapon/disk/nuclear(T)
+			log_and_message_admins_with_location("[src], the last authentication disk, has been destroyed. Spawning [D] at ([D.x], [D.y], [D.z]).", T.x, T.y, T.z)
+		else
+			log_and_message_admins("[src], the last authentication disk, has been destroyed. Failed to respawn disc!")
 	..()
 
 /obj/item/weapon/disk/nuclear/touch_map_edge()
