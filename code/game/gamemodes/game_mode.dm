@@ -30,7 +30,6 @@ var/global/list/additional_antag_types = list()
 	var/probability = 0
 
 	var/required_players = 0                 // Minimum players for round to start if voted in.
-	var/required_players_secret = 0          // Minimum number of players for that game mode to be chose in Secret
 	var/required_enemies = 0                 // Minimum antagonists for round to start.
 	var/newscaster_announcements = null
 	var/end_on_antag_death = 0               // Round will end when all antagonists are dead.
@@ -235,12 +234,8 @@ var/global/list/additional_antag_types = list()
 		if((player.client)&&(player.ready))
 			playerC++
 
-	if(master_mode=="secret")
-		if(playerC < required_players_secret)
-			return 0
-	else
-		if(playerC < required_players)
-			return 0
+	if(playerC < required_players)
+		return 0
 
 	if(!(antag_templates && antag_templates.len))
 		return 1

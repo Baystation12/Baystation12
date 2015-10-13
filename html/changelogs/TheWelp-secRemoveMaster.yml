@@ -1,0 +1,6 @@
+author: TheWelp
+
+delete-after: True
+
+changes: 
+  - rscdel: "Removed Higher Secret Player Requirements"

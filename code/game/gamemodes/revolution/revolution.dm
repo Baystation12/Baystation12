@@ -4,7 +4,6 @@
 	round_description = "Some crewmembers are attempting to start a revolution!"
 	extended_round_description = "Revolutionaries - Kill the Captain, HoP, HoS, CE, RD and CMO. Convert other crewmembers (excluding the heads of staff, and security officers) to your cause by flashing them. Protect your leaders.<BR>\nPersonnel - Protect the heads of staff. Kill the leaders of the revolution, and brainwash the other revolutionaries (by beating them in the head)."
 	required_players = 4
-	required_players_secret = 15
 	required_enemies = 3
 	auto_recall_shuttle = 1
 	uplink_welcome = "AntagCorp Uplink Console:"
