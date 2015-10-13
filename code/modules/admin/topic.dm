@@ -2300,7 +2300,7 @@
 					dat += "[sig]<BR>"
 				usr << browse(dat, "window=lastsignalers;size=800x500")
 			if("list_lawchanges")
-				var/dat = "<B>Showing last [length(lawchanges)] law changes.</B><HR>"
+				var/dat = "<B>Showing last [lawchanges.len] law change\s.</B><HR>"
 				for(var/sig in lawchanges)
 					dat += "[sig]<BR>"
 				usr << browse(dat, "window=lawchanges;size=800x500")
