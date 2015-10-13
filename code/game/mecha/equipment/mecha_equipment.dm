@@ -1,4 +1,3 @@
-//TODO: Add critfail checks and reliability
 //DO NOT ADD MECHA PARTS TO THE GAME WITH THE DEFAULT "SPRITE ME" SPRITE!
 //I'm annoyed I even have to tell you this! SPRITE FIRST, then commit.
 
@@ -7,15 +6,12 @@
 	icon = 'icons/mecha/mecha_equipment.dmi'
 	icon_state = "mecha_equip"
 	force = 5
-	origin_tech = "materials=2"
-	construction_time = 100
-	construction_cost = list(DEFAULT_WALL_MATERIAL=10000)
+	origin_tech = list(TECH_MATERIAL = 2)
 	var/equip_cooldown = 0
 	var/equip_ready = 1
 	var/energy_drain = 0
 	var/obj/mecha/chassis = null
 	var/range = MELEE //bitflags
-	reliability = 1000
 	var/salvageable = 1
 	var/required_type = /obj/mecha //may be either a type or a list of allowed types
 
@@ -84,8 +80,6 @@
 	if(!chassis)
 		return 0
 	if(!equip_ready)
-		return 0
-	if(crit_fail)
 		return 0
 	if(energy_drain && !chassis.has_charge(energy_drain))
 		return 0

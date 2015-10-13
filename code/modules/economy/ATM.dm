@@ -15,7 +15,7 @@ log transactions
 /obj/item/weapon/card/id/var/money = 2000
 
 /obj/machinery/atm
-	name = "NanoTrasen Automatic Teller Machine"
+	name = "Automatic Teller Machine"
 	desc = "For all your monetary needs!"
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "atm"
@@ -62,6 +62,22 @@ log transactions
 			playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
 		break
 
+/obj/machinery/atm/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
+		return
+
+	//short out the machine, shoot sparks, spew money!
+	emagged = 1
+	spark_system.start()
+	spawn_money(rand(100,500),src.loc)
+	//we don't want to grief people by locking their id in an emagged ATM
+	release_held_id(user)
+
+	//display a message to the user
+	var/response = pick("Initiating withdraw. Have a nice day!", "CRITICAL ERROR: Activating cash chamber panic siphon.","PIN Code accepted! Emptying account balance.", "Jackpot!")
+	user << "<span class='warning'>\icon[src] The [src] beeps: \"[response]\"</span>"
+	return 1
+
 /obj/machinery/atm/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/card))
 		if(emagged > 0)
@@ -69,16 +85,7 @@ log transactions
 			user << "\red \icon[src] CARD READER ERROR. This system has been compromised!"
 			return
 		else if(istype(I,/obj/item/weapon/card/emag))
-			//short out the machine, shoot sparks, spew money!
-			emagged = 1
-			spark_system.start()
-			spawn_money(rand(100,500),src.loc)
-			//we don't want to grief people by locking their id in an emagged ATM
-			release_held_id(user)
-
-			//display a message to the user
-			var/response = pick("Initiating withdraw. Have a nice day!", "CRITICAL ERROR: Activating cash chamber panic siphon.","PIN Code accepted! Emptying account balance.", "Jackpot!")
-			user << "\red \icon[src] The [src] beeps: \"[response]\""
+			I.resolve_attackby(src, user)
 			return
 
 		var/obj/item/weapon/card/id/idcard = I
@@ -115,17 +122,17 @@ log transactions
 
 /obj/machinery/atm/attack_hand(mob/user as mob)
 	if(istype(user, /mob/living/silicon))
-		user << "\red \icon[src] Artificial unit recognized. Artificial units do not currently receive monetary compensation, as per NanoTrasen regulation #1005."
+		user << "\red \icon[src] Artificial unit recognized. Artificial units do not currently receive monetary compensation, as per system banking regulation #1005."
 		return
 	if(get_dist(src,user) <= 1)
 
 		//js replicated from obj/machinery/computer/card
-		var/dat = "<h1>NanoTrasen Automatic Teller Machine</h1>"
+		var/dat = "<h1>Automatic Teller Machine</h1>"
 		dat += "For all your monetary needs!<br>"
-		dat += "<i>This terminal is</i> [machine_id]. <i>Report this code when contacting NanoTrasen IT Support</i><br/>"
+		dat += "<i>This terminal is</i> [machine_id]. <i>Report this code when contacting IT Support</i><br/>"
 
 		if(emagged > 0)
-			dat += "Card: <span style='color: red;'>LOCKED</span><br><br><span style='color: red;'>Unauthorized terminal access detected! This ATM has been locked. Please contact NanoTrasen IT Support.</span>"
+			dat += "Card: <span style='color: red;'>LOCKED</span><br><br><span style='color: red;'>Unauthorized terminal access detected! This ATM has been locked. Please contact IT Support.</span>"
 		else
 			dat += "Card: <a href='?src=\ref[src];choice=insert_card'>[held_card ? held_card.name : "------"]</a><br><br>"
 

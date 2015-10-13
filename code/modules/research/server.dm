@@ -4,7 +4,7 @@
 	icon_state = "server"
 	var/datum/research/files
 	var/health = 100
-	var/list/id_with_upload = list()		//List of R&D consoles with upload to server access.
+	var/list/id_with_upload = list()	//List of R&D consoles with upload to server access.
 	var/list/id_with_download = list()	//List of R&D consoles with download from server access.
 	var/id_with_upload_string = ""		//String versions for easy editing in map editor.
 	var/id_with_download_string = ""
@@ -22,7 +22,7 @@
 	component_parts += new /obj/item/stack/cable_coil(src)
 	component_parts += new /obj/item/stack/cable_coil(src)
 	RefreshParts()
-	src.initialize(); //Agouri
+	initialize();
 
 /obj/machinery/r_n_d/server/Destroy()
 	griefProtection()
@@ -35,7 +35,8 @@
 	idle_power_usage /= max(1, tot_rating)
 
 /obj/machinery/r_n_d/server/initialize()
-	if(!files) files = new /datum/research(src)
+	if(!files)
+		files = new /datum/research(src)
 	var/list/temp_list
 	if(!id_with_upload.len)
 		temp_list = list()
@@ -70,26 +71,13 @@
 		produce_heat()
 		delay = initial(delay)
 
-/obj/machinery/r_n_d/server/meteorhit(var/obj/O as obj)
-	griefProtection()
-	..()
-
-
 /obj/machinery/r_n_d/server/emp_act(severity)
 	griefProtection()
 	..()
 
-
 /obj/machinery/r_n_d/server/ex_act(severity)
 	griefProtection()
 	..()
-
-
-/obj/machinery/r_n_d/server/blob_act()
-	griefProtection()
-	..()
-
-
 
 //Backup files to centcomm to help admins recover data after greifer attacks
 /obj/machinery/r_n_d/server/proc/griefProtection()
@@ -101,10 +89,10 @@
 		C.files.RefreshResearch()
 
 /obj/machinery/r_n_d/server/proc/produce_heat()
-	if (!produces_heat)
+	if(!produces_heat)
 		return
 
-	if (!use_power)
+	if(!use_power)
 		return
 
 	if(!(stat & (NOPOWER|BROKEN))) //Blatently stolen from telecoms
@@ -124,46 +112,15 @@
 			env.merge(removed)
 
 /obj/machinery/r_n_d/server/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if (disabled)
+	if(default_deconstruction_screwdriver(user, O))
 		return
-	if (shocked)
-		shock(user,50)
-	if (istype(O, /obj/item/weapon/screwdriver))
-		if (!panel_open)
-			panel_open = 1
-			icon_state = "server_o"
-			user << "You open the maintenance hatch of [src]."
-		else
-			panel_open = 0
-			icon_state = "server"
-			user << "You close the maintenance hatch of [src]."
+	if(default_deconstruction_crowbar(user, O))
 		return
-	if (panel_open)
-		if(istype(O, /obj/item/weapon/crowbar))
-			griefProtection()
-			playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-			var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(src.loc)
-			M.state = 2
-			M.icon_state = "box_1"
-			for(var/obj/I in component_parts)
-				if(I.reliability != 100 && crit_fail)
-					I.crit_fail = 1
-				I.loc = src.loc
-			qdel(src)
-			return 1
-
-/obj/machinery/r_n_d/server/attack_hand(mob/user as mob)
-	if (disabled)
+	if(default_part_replacement(user, O))
 		return
-	if (shocked)
-		shock(user,50)
-	return
-
-
-
 
 /obj/machinery/r_n_d/server/centcom
-	name = "Centcom Central R&D Database"
+	name = "Central R&D Database"
 	server_id = -1
 
 /obj/machinery/r_n_d/server/centcom/initialize()
@@ -190,12 +147,12 @@
 		no_id_servers -= S
 
 /obj/machinery/r_n_d/server/centcom/process()
-	return PROCESS_KILL	//don't need process()
-
+	return PROCESS_KILL //don't need process()
 
 /obj/machinery/computer/rdservercontrol
 	name = "R&D Server Controller"
-	icon_state = "rdcomp"
+	icon_keyboard = "rd_key"
+	icon_screen = "rdcomp"
 	light_color = "#a97faa"
 	circuit = /obj/item/weapon/circuitboard/rdservercontrol
 	var/screen = 0
@@ -210,8 +167,8 @@
 
 	add_fingerprint(usr)
 	usr.set_machine(src)
-	if(!src.allowed(usr) && !emagged)
-		usr << "\red You do not have the required access level"
+	if(!allowed(usr) && !emagged)
+		usr << "<span class='warning'>You do not have the required access level</span>"
 		return
 
 	if(href_list["main"])
@@ -267,7 +224,6 @@
 		if(choice == "Continue")
 			for(var/datum/design/D in temp_server.files.known_designs)
 				if(D.id == href_list["reset_design"])
-					D.reliability_mod = 0
 					temp_server.files.known_designs -= D
 					break
 		temp_server.files.RefreshResearch()
@@ -336,21 +292,19 @@
 	onclose(user, "server_control")
 	return
 
-/obj/machinery/computer/rdservercontrol/attackby(var/obj/item/weapon/D as obj, var/mob/user as mob)
-	if(istype(D, /obj/item/weapon/card/emag) && !emagged)
+/obj/machinery/computer/rdservercontrol/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = 1
-		user << "\blue You you disable the security protocols"
-	src.updateUsrDialog()
-	return ..()
-
+		user << "<span class='notice'>You you disable the security protocols.</span>"
+		src.updateUsrDialog()
+		return 1
 
 /obj/machinery/r_n_d/server/robotics
 	name = "Robotics R&D Server"
 	id_with_upload_string = "1;2"
 	id_with_download_string = "1;2"
 	server_id = 2
-
 
 /obj/machinery/r_n_d/server/core
 	name = "Core R&D Server"

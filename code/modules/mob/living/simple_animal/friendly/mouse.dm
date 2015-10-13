@@ -10,7 +10,6 @@
 	emote_hear = list("squeeks","squeaks","squiks")
 	emote_see = list("runs in a circle", "shakes", "scritches at something")
 	pass_flags = PASSTABLE
-	small = 1
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
@@ -28,7 +27,8 @@
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 	universal_speak = 0
 	universal_understand = 1
-	mob_size = 1
+	holder_type = /obj/item/weapon/holder/mouse
+	mob_size = MOB_MINISCULE
 
 /mob/living/simple_animal/mouse/Life()
 	..()
@@ -75,6 +75,22 @@
 	layer = MOB_LAYER
 	if(client)
 		client.time_died_as_mouse = world.time
+
+/mob/living/simple_animal/mouse/MouseDrop(atom/over_object)
+
+	var/mob/living/carbon/H = over_object
+	if(!istype(H) || !Adjacent(H)) return ..()
+
+	if(H.a_intent == "help")
+		get_scooped(H)
+		return
+	else
+		return ..()
+
+/mob/living/simple_animal/mouse/get_scooped(var/mob/living/carbon/grabber)
+	if (stat >= DEAD)
+		return
+	..()
 
 /mob/living/simple_animal/mouse/start_pulling(var/atom/movable/AM)//Prevents mouse from pulling things
 	src << "<span class='warning'>You are too small to pull anything.</span>"

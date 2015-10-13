@@ -33,42 +33,32 @@
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(locked)
-			if ( (istype(W, /obj/item/weapon/card/emag)||istype(W, /obj/item/weapon/melee/energy/blade)) && (!src.emagged))
-				emagged = 1
-				src.overlays += image('icons/obj/storage.dmi', icon_sparking)
-				sleep(6)
-				src.overlays = null
-				overlays += image('icons/obj/storage.dmi', icon_locking)
-				locked = 0
-				if(istype(W, /obj/item/weapon/melee/energy/blade))
-					var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-					spark_system.set_up(5, 0, src.loc)
-					spark_system.start()
-					playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
-					playsound(src.loc, "sparks", 50, 1)
-					user << "You slice through the lock on [src]."
-				else
-					user << "You short out the lock on [src]."
+			if (emag_act(INFINITY, user, "You slice through the lock of \the [src]"))
+				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+				spark_system.set_up(5, 0, src.loc)
+				spark_system.start()
+				playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
+				playsound(src.loc, "sparks", 50, 1)
 				return
 
 			if (istype(W, /obj/item/weapon/screwdriver))
 				if (do_after(user, 20))
 					src.open =! src.open
-					user.show_message(text("\blue You [] the service panel.", (src.open ? "open" : "close")))
+					user.show_message(text("<span class='notice'>You [] the service panel.</span>", (src.open ? "open" : "close")))
 				return
 			if ((istype(W, /obj/item/device/multitool)) && (src.open == 1)&& (!src.l_hacking))
-				user.show_message(text("\red Now attempting to reset internal memory, please hold."), 1)
+				user.show_message("<span class='notice'>Now attempting to reset internal memory, please hold.</span>", 1)
 				src.l_hacking = 1
 				if (do_after(usr, 100))
 					if (prob(40))
 						src.l_setshort = 1
 						src.l_set = 0
-						user.show_message(text("\red Internal memory reset.  Please give it a few seconds to reinitialize."), 1)
+						user.show_message("<span class='notice'>Internal memory reset. Please give it a few seconds to reinitialize.</span>", 1)
 						sleep(80)
 						src.l_setshort = 0
 						src.l_hacking = 0
 					else
-						user.show_message(text("\red Unable to reset internal memory."), 1)
+						user.show_message("<span class='warning'>Unable to reset internal memory.</span>", 1)
 						src.l_hacking = 0
 				else	src.l_hacking = 0
 				return
@@ -136,6 +126,17 @@
 				return
 		return
 
+/obj/item/weapon/storage/secure/emag_act(var/remaining_charges, var/mob/user, var/feedback)
+	if(!emagged)
+		emagged = 1
+		src.overlays += image('icons/obj/storage.dmi', icon_sparking)
+		sleep(6)
+		src.overlays = null
+		overlays += image('icons/obj/storage.dmi', icon_locking)
+		locked = 0
+		user << (feedback ? feedback : "You short out the lock of \the [src].")
+		return 1
+
 // -----------------------------
 //        Secure Briefcase
 // -----------------------------
@@ -150,14 +151,9 @@
 	throw_range = 4
 	w_class = 4.0
 
-	New()
-		..()
-		new /obj/item/weapon/paper(src)
-		new /obj/item/weapon/pen(src)
-
 	attack_hand(mob/user as mob)
 		if ((src.loc == user) && (src.locked == 1))
-			usr << "\red [src] is locked and cannot be opened!"
+			usr << "<span class='warning'>[src] is locked and cannot be opened!</span>"
 		else if ((src.loc == user) && (!src.locked))
 			src.open(usr)
 		else
@@ -167,42 +163,6 @@
 					src.close(M)
 		src.add_fingerprint(user)
 		return
-
-	//I consider this worthless but it isn't my code so whatever.  Remove or uncomment.
-	/*attack(mob/M as mob, mob/living/user as mob)
-		if ((CLUMSY in user.mutations) && prob(50))
-			user << "\red The [src] slips out of your hand and hits your head."
-			user.take_organ_damage(10)
-			user.Paralyse(2)
-			return
-
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
-
-		log_attack("<font color='red'>[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
-
-		var/t = user:zone_sel.selecting
-		if (t == "head")
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				if (H.stat < 2 && H.health < 50 && prob(90))
-				// ******* Check
-					if (istype(H, /obj/item/clothing/head) && H.flags & 8 && prob(80))
-						H << "\red The helmet protects you from being hit hard in the head!"
-						return
-					var/time = rand(2, 6)
-					if (prob(75))
-						H.Paralyse(time)
-					else
-						H.Stun(time)
-					if(H.stat != 2)	H.stat = 1
-					for(var/mob/O in viewers(H, null))
-						O.show_message(text("\red <B>[] has been knocked unconscious!</B>", H), 1, "\red You hear someone fall.", 2)
-				else
-					H << text("\red [] tried to knock you unconcious!",user)
-					H.eye_blurry += 3
-
-		return*/
 
 // -----------------------------
 //        Secure Safe

@@ -217,13 +217,6 @@
 		T.holy = 1
 	return
 
-/datum/reagent/ammonia
-	name = "Ammonia"
-	id = "ammonia"
-	description = "A caustic substance commonly used in fertilizer or household cleaners."
-	reagent_state = GAS
-	color = "#404030"
-
 /datum/reagent/diethylamine
 	name = "Diethylamine"
 	id = "diethylamine"
@@ -231,10 +224,10 @@
 	reagent_state = LIQUID
 	color = "#604030"
 
-/datum/reagent/fluorosurfactant // Foam precursor
-	name = "Fluorosurfactant"
-	id = "fluorosurfactant"
-	description = "A perfluoronated sulfonic acid that forms a foam when mixed with water."
+/datum/reagent/surfactant // Foam precursor
+	name = "Azosurfactant"
+	id = "surfactant"
+	description = "A isocyanate liquid that forms a foam when mixed with water."
 	reagent_state = LIQUID
 	color = "#9E6B38"
 

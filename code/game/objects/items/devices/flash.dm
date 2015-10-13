@@ -8,7 +8,7 @@
 	throw_speed = 4
 	throw_range = 10
 	flags = CONDUCT
-	origin_tech = "magnets=2;combat=1"
+	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 1)
 
 	var/times_used = 0 //Number of times it's been used.
 	var/broken = 0     //Is the flash burnt out?
@@ -16,7 +16,7 @@
 
 /obj/item/device/flash/proc/clown_check(var/mob/user)
 	if(user && (CLUMSY in user.mutations) && prob(50))
-		user << "\red \The [src] slips out of your hand."
+		user << "<span class='warning'>\The [src] slips out of your hand.</span>"
 		user.drop_item()
 		return 0
 	return 1
@@ -64,30 +64,18 @@
 	var/flashfail = 0
 
 	if(iscarbon(M))
-		var/safety = M:eyecheck()
-		if(safety <= 0)
-			M.Weaken(10)
-			flick("e_flash", M.flash)
-
-			if(ishuman(M) && ishuman(user) && M.stat!=DEAD)
-				if(user.mind && user.mind in revs.current_antagonists)
-					var/revsafe = 0
-					for(var/obj/item/weapon/implant/loyalty/L in M)
-						if(L && L.implanted)
-							revsafe = 1
-							break
-					M.mind_initialize()		//give them a mind datum if they don't have one.
-					if(M.mind.has_been_rev)
-						revsafe = 2
-					if(!revsafe)
-						M.mind.has_been_rev = 1
-						revs.add_antagonist(M.mind)
-					else if(revsafe == 1)
-						user << "<span class='warning'>Something seems to be blocking the flash!</span>"
-					else
-						user << "<span class='warning'>This mind seems resistant to the flash!</span>"
-		else
-			flashfail = 1
+		if(M.stat!=DEAD)
+			var/safety = M:eyecheck()
+			if(safety <= 0)
+				var/flash_strength = 10
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					flash_strength *= H.species.flash_mod
+				if(flash_strength > 0)
+					M.Weaken(flash_strength)
+					flick("e_flash", M.flash)
+			else
+				flashfail = 1
 
 	else if(issilicon(M))
 		M.Weaken(rand(5,10))
@@ -193,20 +181,18 @@
 	name = "synthetic flash"
 	desc = "When a problem arises, SCIENCE is the solution."
 	icon_state = "sflash"
-	origin_tech = "magnets=2;combat=1"
-	var/construction_cost = list(DEFAULT_WALL_MATERIAL=750,"glass"=750)
-	var/construction_time=100
+	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 1)
 
 /obj/item/device/flash/synthetic/attack(mob/living/M as mob, mob/user as mob)
 	..()
 	if(!broken)
 		broken = 1
-		user << "\red The bulb has burnt out!"
+		user << "<span class='warning'>The bulb has burnt out!</span>"
 		icon_state = "flashburnt"
 
 /obj/item/device/flash/synthetic/attack_self(mob/living/carbon/user as mob, flag = 0, emp = 0)
 	..()
 	if(!broken)
 		broken = 1
-		user << "\red The bulb has burnt out!"
+		user << "<span class='warning'>The bulb has burnt out!</span>"
 		icon_state = "flashburnt"

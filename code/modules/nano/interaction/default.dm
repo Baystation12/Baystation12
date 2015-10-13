@@ -10,7 +10,7 @@
 	return STATUS_CLOSE // By default no mob can do anything with NanoUI
 
 /mob/dead/observer/default_can_use_topic()
-	if(check_rights(R_ADMIN, 0, src))
+	if(can_admin_interact())
 		return STATUS_INTERACTIVE				// Admins are more equal
 	return STATUS_UPDATE						// Ghosts can view updates
 
@@ -29,21 +29,6 @@
 	if((src_object in view(src)) && get_dist(src_object, src) <= src.client.view)
 		return STATUS_INTERACTIVE	// interactive (green visibility)
 	return STATUS_DISABLED			// no updates, completely disabled (red visibility)
-
-/mob/living/silicon/robot/syndicate/default_can_use_topic(var/src_object)
-	. = ..()
-	if(. != STATUS_INTERACTIVE)
-		return
-
-	if(z in config.admin_levels)						// Syndicate borgs can interact with everything on the admin level
-		return STATUS_INTERACTIVE
-	if(istype(get_area(src), /area/syndicate_station))	// If elsewhere, they can interact with everything on the syndicate shuttle
-		return STATUS_INTERACTIVE
-	if(istype(src_object, /obj/machinery))				// Otherwise they can only interact with emagged machinery
-		var/obj/machinery/Machine = src_object
-		if(Machine.emagged)
-			return STATUS_INTERACTIVE
-	return STATUS_UPDATE
 
 /mob/living/silicon/ai/default_can_use_topic(var/src_object)
 	. = shared_nano_interaction()

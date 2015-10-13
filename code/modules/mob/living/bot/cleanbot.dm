@@ -232,12 +232,14 @@
 			usr << "<span class='notice'>You press the weird button.</span>"
 	attack_hand(usr)
 
-/mob/living/bot/cleanbot/Emag(var/mob/user)
-	..()
-	if(user)
-		user << "<span class='notice'>The [src] buzzes and beeps.</span>"
-	oddbutton = 1
-	screwloose = 1
+/mob/living/bot/cleanbot/emag_act(var/remaining_uses, var/mob/user)
+	. = ..()
+	if(!screwloose || !oddbutton)
+		if(user)
+			user << "<span class='notice'>The [src] buzzes and beeps.</span>"
+		oddbutton = 1
+		screwloose = 1
+		return 1
 
 /mob/living/bot/cleanbot/proc/get_targets()
 	target_types = list()

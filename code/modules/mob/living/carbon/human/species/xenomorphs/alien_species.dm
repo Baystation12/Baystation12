@@ -11,12 +11,12 @@
 
 	has_fine_manipulation = 0
 	siemens_coefficient = 0
-	gluttonous = 2
+	gluttonous = 3
 
 	eyes = "blank_eyes"
 
-	brute_mod = 0.5 // Hardened carapace.
-	burn_mod = 2    // Weak to fire.
+	brute_mod = 0.25 // Hardened carapace.
+	burn_mod = 1.1    // Weak to fire.
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
@@ -25,7 +25,8 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	flags = IS_RESTRICTED | NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON
+	flags =  NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON | NO_MINOR_CUT
+	spawn_flags = IS_RESTRICTED
 
 	reagent_tag = IS_XENOS
 
@@ -97,11 +98,11 @@
 	var/datum/gas_mixture/environment = T.return_air()
 	if(!environment) return
 
-	if(environment.gas["phoron"] > 0 || locate(/obj/effect/alien/weeds) in T)
-		if(!regenerate(H))
-			var/obj/item/organ/xenos/plasmavessel/P = H.internal_organs_by_name["plasma vessel"]
-			P.stored_plasma += weeds_plasma_rate
-			P.stored_plasma = min(max(P.stored_plasma,0),P.max_plasma)
+	var/obj/effect/plant/plant = locate() in T
+	if((environment.gas["phoron"] > 0 || (plant && plant.seed && plant.seed.name == "xenomorph")) && !regenerate(H))
+		var/obj/item/organ/xenos/plasmavessel/P = H.internal_organs_by_name["plasma vessel"]
+		P.stored_plasma += weeds_plasma_rate
+		P.stored_plasma = min(max(P.stored_plasma,0),P.max_plasma)
 	..()
 
 /datum/species/xenos/proc/regenerate(var/mob/living/carbon/human/H)
@@ -138,14 +139,6 @@
 			return 1
 
 	return 0
-
-/datum/species/xenos/handle_login_special(var/mob/living/carbon/human/H)
-	H.AddInfectionImages()
-	..()
-
-/datum/species/xenos/handle_logout_special(var/mob/living/carbon/human/H)
-	H.RemoveInfectionImages()
-	..()
 
 /datum/species/xenos/drone
 	name = "Xenomorph Drone"
@@ -277,7 +270,8 @@
 		/mob/living/carbon/human/proc/transfer_plasma,
 		/mob/living/carbon/human/proc/corrosive_acid,
 		/mob/living/carbon/human/proc/neurotoxin,
-		/mob/living/carbon/human/proc/resin
+		/mob/living/carbon/human/proc/resin,
+		/mob/living/carbon/human/proc/xeno_infest
 		)
 
 /datum/species/xenos/queen/handle_login_special(var/mob/living/carbon/human/H)

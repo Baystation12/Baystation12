@@ -12,48 +12,45 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
 	</div>
 	<div class="itemContent">
 		{{:helper.link('Request Items', 'gear', {'menu' : 0}, null, 'fixedLeftWider')}}
-		{{:helper.link('Exploitable Information', 'gear', {'menu' : 1}, null, 'fixedLeftWider')}}
+		{{:helper.link('Exploitable Information', 'gear', {'menu' : 2}, null, 'fixedLeftWider')}}
 		{{:helper.link('Return', 'arrowreturn-1-w', {'return' : 1}, null, 'fixedLeft')}}
 		{{:helper.link('Close', 'gear', {'lock' : "1"}, null, 'fixedLeft')}}
 	</div>
 </div>
 <br>
-	
+
+<div class="item">
+	<div class="itemLabel">
+		<b>Tele-Crystals</b>:
+	</div>
+	<div class="itemContent">
+		{{:data.crystals}}
+	</div>
+</div>
+
 {{if data.menu == 0}}
+	<H2>Categories:</H2>
+	{{for data.categories}}
+		<div class="item">
+			{{:helper.link(value.name, 'gear', {'menu' : 1, 'category' : value.ref})}}
+		</div>
+	{{/for}}
+{{else data.menu == 1}}
     <H2><span class="white">Request items:</span></H2>
     <span class="white"><i>Each item costs a number of tele-crystals as indicated by the number following their name.</i></span>
-	<div class="item">
-        <div class="itemLabel">
-            <b>Tele-Crystals</b>:
-        </div>
-        <div class="itemContent">
-            {{:data.crystals}}
-        </div>
-    </div>
-    <br>
-    {{for data.nano_items}}
-        <div class="item">
-            <H3><span class="white">{{:value.Category}}</span></H3>
-        </div>
-        {{for value.items :itemValue:itemIndex}}
-            <div class="item">
-                {{:helper.link( itemValue.Name, 'gear', {'buy_item' : itemValue.obj_path, 'cost' : itemValue.Cost}, itemValue.Cost > data.crystals ? 'disabled' : null, null)}} - <span class="white">{{:itemValue.Cost}}</span>
-            </div>
-            
-            {{if itemValue.Cost <= data.crystals}}
-                <div class="item">
-                    {{:itemValue.Description}}
-                </div>
-            {{/if}}
-        {{/for}}
-        <br>
-    {{/for}}
-
-    <div class="item">
-        {{:helper.link('Buy Random (??)' , 'gear', {'buy_item' : 'random'}, data.crystals <= 0 ? 'disabled' : null, null)}}
-    </div>
 	
-{{else data.menu == 1}}
+	{{for data.items}}
+		<div class="item">
+			{{:helper.link(value.name, 'gear', {'buy_item' : value.ref}, value.can_buy ? null : 'disabled')}} - <span class="white">{{:value.cost}}</span>
+		</div>
+            
+		{{if value.can_buy}}
+			<div class="item">
+				{{:value.description}}
+			</div>
+		{{/if}}
+    {{/for}}
+{{else data.menu == 2}}
     <H2><span class="white">Information Record List:</span></H2>
     <br>
     <div class="item">
@@ -62,11 +59,10 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
     <br>
     {{for data.exploit_records}}
         <div class="item">
-             {{:helper.link(value.Name, 'gear', {'menu' : 11, 'id' : value.id}, null, null)}}
+             {{:helper.link(value.Name, 'gear', {'menu' : 21, 'id' : value.id}, null, null)}}
         </div>
     {{/for}}
-	
-{{else data.menu == 11}}
+{{else data.menu == 21}}
     <H2><span class="white">Information Record:</span></H2>
     <br>
     <div class="statusDisplayRecords">

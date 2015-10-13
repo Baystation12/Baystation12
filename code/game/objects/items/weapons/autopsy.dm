@@ -9,7 +9,7 @@
 	icon_state = ""
 	flags = CONDUCT
 	w_class = 2.0
-	origin_tech = "materials=1;biotech=1"
+	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	var/list/datum/autopsy_data_scanner/wdata = list()
 	var/list/datum/autopsy_data_scanner/chemtraces = list()
 	var/target_name = null
@@ -150,7 +150,7 @@
 			scan_data += "<br>"
 
 	for(var/mob/O in viewers(usr))
-		O.show_message("\red \the [src] rattles and prints out a sheet of paper.", 1)
+		O.show_message("<span class='notice'>\The [src] rattles and prints out a sheet of paper.</span>", 1)
 
 	sleep(10)
 
@@ -187,19 +187,19 @@
 		src.wdata = list()
 		src.chemtraces = list()
 		src.timeofdeath = null
-		user << "\red A new patient has been registered.. Purging data for previous patient."
+		user << "<span class='notice'>A new patient has been registered.. Purging data for previous patient.</span>"
 
 	src.timeofdeath = M.timeofdeath
 
 	var/obj/item/organ/external/S = M.get_organ(user.zone_sel.selecting)
 	if(!S)
-		usr << "<b>You can't scan this body part.</b>"
+		usr << "<span class='warning'>You can't scan this body part.</span>"
 		return
 	if(!S.open)
-		usr << "<b>You have to cut the limb open first!</b>"
+		usr << "<span class='warning'>You have to cut the limb open first!</span>"
 		return
 	for(var/mob/O in viewers(M))
-		O.show_message("\red [user.name] scans the wounds on [M.name]'s [S.name] with \the [src.name]", 1)
+		O.show_message("<span class='notice'>\The [user] scans the wounds on [M.name]'s [S.name] with \the [src]</span>", 1)
 
 	src.add_data(S)
 

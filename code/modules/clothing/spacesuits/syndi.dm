@@ -2,7 +2,7 @@
 /obj/item/clothing/head/helmet/space/syndicate
 	name = "red space helmet"
 	icon_state = "syndicate"
-	item_state = "space_helmet_syndicate"
+	item_state = "syndicate"
 	desc = "A crimson helmet sporting clean lines and durable plating. Engineered to look menacing."
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0.6
@@ -107,7 +107,7 @@
 /obj/item/clothing/head/helmet/space/syndicate/black/med
 	name = "black medical space helmet"
 	icon_state = "syndicate-helm-black-med"
-	item_state = "syndicate-helm-black"
+	item_state_slots = list(slot_head_str = "syndicate-black-med")
 
 /obj/item/clothing/suit/space/syndicate/black/med
 	name = "black medical space suit"
@@ -119,7 +119,7 @@
 /obj/item/clothing/head/helmet/space/syndicate/black/orange
 	name = "black and orange space helmet"
 	icon_state = "syndicate-helm-black-orange"
-	item_state = "syndicate-helm-black"
+	item_state_slots = list(slot_head_str = "syndicate-helm-black-orange")
 
 /obj/item/clothing/suit/space/syndicate/black/orange
 	name = "black and orange space suit"
@@ -142,7 +142,7 @@
 /obj/item/clothing/head/helmet/space/syndicate/black/engie
 	name = "black engineering space helmet"
 	icon_state = "syndicate-helm-black-engie"
-	item_state = "syndicate-helm-black"
+	item_state_slots = list(slot_head_str = "syndicate-helm-black-engie")
 
 /obj/item/clothing/suit/space/syndicate/black/engie
 	name = "black engineering space suit"

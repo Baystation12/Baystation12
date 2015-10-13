@@ -4,23 +4,21 @@
 
 	var/obj/effect/blob/core/Blob
 
-
 /datum/event/blob/announce()
-	command_announcement.Announce("Confirmed outbreak of level 7 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", new_sound = 'sound/AI/outbreak7.ogg')
-
+	level_seven_announcement()
 
 /datum/event/blob/start()
 	var/turf/T = pick(blobstart)
 	if(!T)
 		kill()
 		return
-	Blob = new /obj/effect/blob/core(T, 120)
+	Blob = new /obj/effect/blob/core(T)
 	for(var/i = 1; i < rand(3, 4), i++)
 		Blob.process()
 
-
 /datum/event/blob/tick()
-	if(!Blob)
+	if(!Blob || !Blob.loc)
+		Blob = null
 		kill()
 		return
 	if(IsMultiple(activeFor, 3))

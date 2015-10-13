@@ -49,7 +49,7 @@
 				if(T.malfunction)
 					loc_display = pick(teleportlocs)
 				dat += "ID: [T.id] | Location: [loc_display]<BR>"
-				dat += "<A href='?src=\ref[src];warn=\ref[T]'>(<i>Send Message</i></font>)</A> |<BR>"
+				dat += "<A href='?src=\ref[src];warn=\ref[T]'>(<font color=red><i>Send Message</i></font>)</A> |<BR>"
 				dat += "********************************<BR>"
 			dat += "<HR><A href='?src=\ref[src];lock=1'>Lock Console</A>"
 
@@ -96,7 +96,7 @@
 			if( istype(I) && I.imp_in)
 				var/mob/living/carbon/R = I.imp_in
 				log_say("PrisonComputer3 message: [key_name(usr)]->[key_name(R)] : [warning]")
-				R << "\green You hear a voice in your head saying: '[warning]'"
+				R << "<span class='notice'>You hear a voice in your head saying: '[warning]'</span>"
 
 		interact()
 		return

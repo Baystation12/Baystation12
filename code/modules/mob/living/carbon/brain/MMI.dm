@@ -23,11 +23,7 @@
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "mmi_empty"
 	w_class = 3
-	origin_tech = "biotech=3"
-
-	var/list/construction_cost = list(DEFAULT_WALL_MATERIAL=1000,"glass"=500)
-	var/construction_time = 75
-	//these vars are so the mecha fabricator doesn't shit itself anymore. --NEO
+	origin_tech = list(TECH_BIO = 3)
 
 	req_access = list(access_robotics)
 
@@ -122,6 +118,13 @@
 			locked = 1
 			return
 
+/obj/item/device/mmi/relaymove(var/mob/user, var/direction)
+	if(user.stat || user.stunned)
+		return
+	var/obj/item/weapon/rig/rig = src.get_rig()
+	if(rig)
+		rig.forced_move(direction, user)
+
 /obj/item/device/mmi/Destroy()
 	if(isrobot(loc))
 		var/mob/living/silicon/robot/borg = loc
@@ -134,7 +137,7 @@
 /obj/item/device/mmi/radio_enabled
 	name = "radio-enabled man-machine interface"
 	desc = "The Warrior's bland acronym, MMI, obscures the true horror of this monstrosity. This one comes with a built-in radio."
-	origin_tech = "biotech=4"
+	origin_tech = list(TECH_BIO = 4)
 
 	var/obj/item/device/radio/radio = null//Let's give it a radio.
 

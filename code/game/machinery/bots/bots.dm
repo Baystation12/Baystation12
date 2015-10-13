@@ -32,15 +32,18 @@
 	if (src.health <= 0)
 		src.explode()
 
-/obj/machinery/bot/proc/Emag(mob/user as mob)
-	if(locked)
+/obj/machinery/bot/emag_act(var/remaining_charges, var/user)
+	if(locked && !emagged)
 		locked = 0
 		emagged = 1
 		user << "<span class='warning'>You short out [src]'s maintenance hatch lock.</span>"
 		log_and_message_admins("emagged [src]'s maintenance hatch lock")
-	if(!locked && open)
+		return 1
+
+	if(!locked && open && emagged == 1)
 		emagged = 2
 		log_and_message_admins("emagged [src]'s inner circuits")
+		return 1
 
 /obj/machinery/bot/examine(mob/user)
 	..(user)
@@ -60,13 +63,11 @@
 		if(health < maxhealth)
 			if(open)
 				health = min(maxhealth, health+10)
-				user.visible_message("\red [user] repairs [src]!","\blue You repair [src]!")
+				user.visible_message("<span class='warning'>[user] repairs [src]!</span>","<span class='notice'>You repair [src]!</span>")
 			else
 				user << "<span class='notice'>Unable to repair with the maintenance panel closed.</span>"
 		else
 			user << "<span class='notice'>[src] does not need a repair.</span>"
-	else if (istype(W, /obj/item/weapon/card/emag) && emagged < 2)
-		Emag(user)
 	else
 		if(hasvar(W,"force") && hasvar(W,"damtype"))
 			switch(W.damtype)
@@ -85,15 +86,6 @@
 	health -= Proj.damage
 	..()
 	healthcheck()
-
-/obj/machinery/bot/meteorhit()
-	src.explode()
-	return
-
-/obj/machinery/bot/blob_act()
-	src.health -= rand(20,40)*fire_dam_coeff
-	healthcheck()
-	return
 
 /obj/machinery/bot/ex_act(severity)
 	switch(severity)
@@ -143,7 +135,7 @@
 
 	if(user.species.can_shred(user))
 		src.health -= rand(15,30)*brute_dam_coeff
-		src.visible_message("\red <B>[user] has slashed [src]!</B>")
+		src.visible_message("<span class='danger'>[user] has slashed [src]!</span>")
 		playsound(src.loc, 'sound/weapons/slice.ogg', 25, 1, -1)
 		if(prob(10))
 			new /obj/effect/decal/cleanable/blood/oil(src.loc)

@@ -20,22 +20,28 @@
 
 	var/prone_icon                                       // If set, draws this from icobase when mob is prone.
 	var/eyes = "eyes_s"                                  // Icon for eyes.
+	var/has_floating_eyes                                // Eyes will overlay over darkness (glow)
 	var/blood_color = "#A10808"                          // Red.
 	var/flesh_color = "#FFC896"                          // Pink.
 	var/base_color                                       // Used by changelings. Should also be used for icon previes..
 	var/tail                                             // Name of tail state in species effects icon file.
 	var/tail_animation                                   // If set, the icon to obtain tail animation states from.
+	var/tail_hair
 	var/race_key = 0       	                             // Used for mob icon cache string.
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
-	var/is_small
+	var/mob_size	= MOB_MEDIUM
 	var/show_ssd = "fast asleep"
+	var/virus_immune
+	var/short_sighted
 
 	// Language/culture vars.
 	var/default_language = "Galactic Common" // Default language is used when 'say' is used without modifiers.
 	var/language = "Galactic Common"         // Default racial language, if any.
-	var/secondary_langs = list()             // The names of secondary languages that are available to this species.
+	var/list/secondary_langs = list()        // The names of secondary languages that are available to this species.
 	var/list/speech_sounds                   // A list of sounds to potentially play when speaking.
 	var/list/speech_chance                   // The likelihood of a speech sound playing.
+	var/num_alternate_languages = 0          // How many secondary languages are available to select at character creation
+	var/name_language = "Galactic Common"    // The language to use when determining names for this species, or null to use the first name/last name generator
 
 	// Combat vars.
 	var/total_health = 100                   // Point at which the mob will enter crit.
@@ -44,8 +50,12 @@
 		/datum/unarmed_attack/bite
 		)
 	var/list/unarmed_attacks = null          // For empty hand harm-intent attack
-	var/brute_mod = 1                        // Physical damage multiplier.
-	var/burn_mod = 1                         // Burn damage multiplier.
+	var/brute_mod =     1                    // Physical damage multiplier.
+	var/burn_mod =      1                    // Burn damage multiplier.
+	var/oxy_mod =       1                    // Oxyloss modifier
+	var/toxins_mod =    1                    // Toxloss modifier
+	var/radiation_mod = 1                    // Radiation modifier
+	var/flash_mod =     1                    // Stun from blindness modifier.
 	var/vision_flags = SEE_SELF              // Same flags as glasses.
 
 	// Death vars.
@@ -57,6 +67,7 @@
 	var/dusted_anim = "dust-h"
 	var/death_sound
 	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
+	var/knockout_message = "has been knocked unconscious!"
 
 	// Environment tolerance/life processes vars.
 	var/reagent_tag                                   //Used for metabolizing reagents.
@@ -69,7 +80,7 @@
 	var/heat_level_1 = 360                            // Heat damage level 1 above this point.
 	var/heat_level_2 = 400                            // Heat damage level 2 above this point.
 	var/heat_level_3 = 1000                           // Heat damage level 3 above this point.
-	var/synth_temp_gain = 0			                  // IS_SYNTHETIC species will gain this much temperature every second
+	var/passive_temp_gain = 0		                  // Species will gain this much temperature every second
 	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE   // Dangerously high pressure.
 	var/warning_high_pressure = WARNING_HIGH_PRESSURE // High pressure warning.
 	var/warning_low_pressure = WARNING_LOW_PRESSURE   // Low pressure warning.
@@ -101,6 +112,8 @@
 	var/siemens_coefficient = 1   // The lower, the thicker the skin and better the insulation.
 	var/darksight = 2             // Native darksight distance.
 	var/flags = 0                 // Various specific features.
+	var/appearance_flags = 0      // Appearance/display related features.
+	var/spawn_flags = 0           // Flags that specify who can spawn as this species
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
 	var/primitive_form            // Lesser form, if any (ie. monkey for humans)
 	var/greater_form              // Greater form, if any, ie. human for monkeys.
@@ -117,6 +130,7 @@
 		"appendix" = /obj/item/organ/appendix,
 		"eyes" =     /obj/item/organ/eyes
 		)
+	var/vision_organ              // If set, this organ is required for vision. Defaults to "eyes" if the species has them.
 
 	var/list/has_limbs = list(
 		"chest" =  list("path" = /obj/item/organ/external/chest),
@@ -137,15 +151,29 @@
 	var/push_flags = ~HEAVY	// What can we push?
 	var/swap_flags = ~HEAVY	// What can we swap place with?
 
+	var/pass_flags = 0
+
+/datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
+	return
+
 /datum/species/New()
 	if(hud_type)
 		hud = new hud_type()
 	else
 		hud = new()
 
+	//If the species has eyes, they are the default vision organ
+	if(!vision_organ && has_organ["eyes"])
+		vision_organ = "eyes"
+
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
+
+	if(gluttonous)
+		if(!inherent_verbs)
+			inherent_verbs = list()
+		inherent_verbs |= /mob/living/carbon/human/proc/regurgitate
 
 /datum/species/proc/get_station_variant()
 	return name
@@ -175,7 +203,13 @@
 				H << "<span class='danger'>[pick(heat_discomfort_strings)]</span>"
 
 /datum/species/proc/get_random_name(var/gender)
-	var/datum/language/species_language = all_languages[language]
+	if(!name_language)
+		if(gender == FEMALE)
+			return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
+		else
+			return capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
+
+	var/datum/language/species_language = all_languages[name_language]
 	if(!species_language)
 		species_language = all_languages[default_language]
 	if(!species_language)
@@ -222,14 +256,10 @@
 	for(var/obj/item/organ/external/O in H.organs)
 		O.owner = H
 
-	if(flags & IS_SYNTHETIC)
-		for(var/obj/item/organ/external/E in H.organs)
-			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
-			E.robotize()
-		for(var/obj/item/organ/I in H.internal_organs)
-			I.robotize()
-
 /datum/species/proc/hug(var/mob/living/carbon/human/H,var/mob/living/target)
+	if (target.holder_type && target.a_intent == "help" && H.a_intent == "help")
+		target.get_scooped(H)
+		return
 
 	var/t_him = "them"
 	switch(target.gender)
@@ -258,6 +288,8 @@
 	H.mob_bump_flag = bump_flag
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
+	H.pass_flags = pass_flags
+	H.mob_size = mob_size
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	return
@@ -299,3 +331,6 @@
 // Called in life() when the mob has no client.
 /datum/species/proc/handle_npc(var/mob/living/carbon/human/H)
 	return
+
+/datum/species/proc/get_vision_flags(var/mob/living/carbon/human/H)
+	return vision_flags

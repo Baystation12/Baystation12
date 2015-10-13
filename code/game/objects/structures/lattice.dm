@@ -11,7 +11,7 @@
 /obj/structure/lattice/New()
 	..()
 ///// Z-Level Stuff
-	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/floor/open)))
+	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open)))
 ///// Z-Level Stuff
 		qdel(src)
 	for(var/obj/structure/lattice/LAT in src.loc)
@@ -34,10 +34,6 @@
 			L.updateOverlays(src.loc)
 	..()
 
-/obj/structure/lattice/blob_act()
-	qdel(src)
-	return
-
 /obj/structure/lattice/ex_act(severity)
 	switch(severity)
 		if(1.0)
@@ -53,14 +49,14 @@
 
 /obj/structure/lattice/attackby(obj/item/C as obj, mob/user as mob)
 
-	if (istype(C, /obj/item/stack/tile/steel))
+	if (istype(C, /obj/item/stack/tile/floor))
 		var/turf/T = get_turf(src)
 		T.attackby(C, user) //BubbleWrap - hand this off to the underlying turf instead
 		return
 	if (istype(C, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = C
 		if(WT.remove_fuel(0, user))
-			user << "\blue Slicing lattice joints ..."
+			user << "<span class='notice'>Slicing lattice joints ...</span>"
 		PoolOrNew(/obj/item/stack/rods, src.loc)
 		qdel(src)
 

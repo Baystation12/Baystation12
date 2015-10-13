@@ -93,9 +93,6 @@
 			src.use_power = 1	*/
 	return 1
 
-/obj/machinery/containment_field/meteorhit()
-	return 0
-
 /obj/machinery/power/emitter/process()
 	if(stat & (BROKEN))
 		return
@@ -129,27 +126,16 @@
 		//need to calculate the power per shot as the emitter doesn't fire continuously.
 		var/burst_time = (min_burst_delay + max_burst_delay)/2 + 2*(burst_shots-1)
 		var/power_per_shot = active_power_usage * (burst_time/10) / burst_shots
-		var/obj/item/projectile/beam/emitter/A = new /obj/item/projectile/beam/emitter( src.loc )
-		A.damage = round(power_per_shot/EMITTER_DAMAGE_POWER_TRANSFER)
 
 		playsound(src.loc, 'sound/weapons/emitter.ogg', 25, 1)
 		if(prob(35))
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(5, 1, src)
 			s.start()
-		A.set_dir(src.dir)
-		A.starting = get_turf(src)
-		switch(dir)
-			if(NORTH)
-				A.original = locate(x, y+1, z)
-			if(EAST)
-				A.original = locate(x+1, y, z)
-			if(WEST)
-				A.original = locate(x-1, y, z)
-			else // Any other
-				A.original = locate(x, y-1, z)
-		A.process()
 
+		var/obj/item/projectile/beam/emitter/A = new /obj/item/projectile/beam/emitter( src.loc )
+		A.damage = round(power_per_shot/EMITTER_DAMAGE_POWER_TRANSFER)
+		A.launch( get_step(src.loc, src.dir) )
 
 /obj/machinery/power/emitter/attackby(obj/item/W, mob/user)
 
@@ -226,13 +212,12 @@
 		else
 			user << "<span class='warning'>Access denied.</span>"
 		return
+	..()
+	return
 
-
-	if(istype(W, /obj/item/weapon/card/emag) && !emagged)
+/obj/machinery/power/emitter/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
 		locked = 0
 		emagged = 1
 		user.visible_message("[user.name] emags [src].","<span class='warning'>You short out the lock.</span>")
-		return
-
-	..()
-	return
+		return 1

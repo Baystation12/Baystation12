@@ -16,7 +16,7 @@
 	var/mob/living/carbon/C = M
 	if (istype(C,/mob/living/carbon/human/))
 		var/mob/living/carbon/human/H = C
-		if(H.species && H.species.flags & NO_BLOOD)
+		if(H.species.flags & NO_BLOOD)
 			report("Scan aborted: The target does not have blood.", user)
 			return
 

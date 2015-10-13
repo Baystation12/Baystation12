@@ -15,6 +15,7 @@
 	var/list/path = list()
 	var/list/ignorelist = list()
 	var/turf/target
+	var/floor_build_type = /decl/flooring/tiling // Basic steel floor.
 
 /mob/living/bot/floorbot/update_icons()
 	if(repairing)
@@ -47,11 +48,13 @@
 	onclose(user, "autorepair")
 	return
 
-/mob/living/bot/floorbot/Emag(var/mob/user)
-	..()
-	emagged = 1
-	if(user)
-		user << "<span class='notice'>The [src] buzzes and beeps.</span>"
+/mob/living/bot/floorbot/emag_act(var/remaining_charges, var/mob/user)
+	. = ..()
+	if(!emagged)
+		emagged = 1
+		if(user)
+			user << "<span class='notice'>The [src] buzzes and beeps.</span>"
+		return 1
 
 /mob/living/bot/floorbot/Topic(href, href_list)
 	if(..())
@@ -134,7 +137,7 @@
 						target = T
 				if(improvefloors && istype(T, /turf/simulated/floor))
 					var/turf/simulated/floor/F = T
-					if(!F.floor_type && (get_turf(T) == loc || prob(40)))
+					if(!F.flooring && (get_turf(T) == loc || prob(40)))
 						target = T
 
 	if(emagged) // Time to griff
@@ -148,7 +151,7 @@
 
 	if(!target && amount < maxAmount && eattiles || maketiles) // Eat tiles
 		if(eattiles)
-			for(var/obj/item/stack/tile/steel/T in view(src))
+			for(var/obj/item/stack/tile/floor/T in view(src))
 				if(T in ignorelist)
 					continue
 				target = T
@@ -215,7 +218,7 @@
 			if(A && (locate(/obj/structure/lattice, A) && building == 1 || !locate(/obj/structure/lattice, A) && building == 2)) // Make sure that it still needs repairs
 				var/obj/item/I
 				if(building == 1)
-					I = new /obj/item/stack/tile/steel(src)
+					I = new /obj/item/stack/tile/floor(src)
 				else
 					I = PoolOrNew(/obj/item/stack/rods, src)
 				A.attackby(I, src)
@@ -224,20 +227,19 @@
 		update_icons()
 	else if(istype(A, /turf/simulated/floor))
 		var/turf/simulated/floor/F = A
-		if(!F.floor_type && amount)
+		if(!F.flooring && amount)
 			repairing = 1
 			update_icons()
 			visible_message("<span class='notice'>[src] begins to improve the floor.</span>")
 			if(do_after(src, 50))
-				if(!F.floor_type)
-					var/obj/item/stack/tile/steel/T = new /obj/item/stack/tile/steel(src)
-					F.attackby(T, src)
+				if(!F.flooring)
+					F.set_flooring(get_flooring_data(floor_build_type))
 					addTiles(-1)
 			target = null
 			repairing = 0
 			update_icons()
-	else if(istype(A, /obj/item/stack/tile/steel) && amount < maxAmount)
-		var/obj/item/stack/tile/steel/T = A
+	else if(istype(A, /obj/item/stack/tile/floor) && amount < maxAmount)
+		var/obj/item/stack/tile/floor/T = A
 		visible_message("<span class='notice'>[src] begins to collect tiles.</span>")
 		repairing = 1
 		update_icons()
@@ -270,7 +272,7 @@
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
-	var/obj/item/stack/tile/steel/T = new /obj/item/stack/tile/steel(Tsec)
+	var/obj/item/stack/tile/floor/T = new /obj/item/stack/tile/floor(Tsec)
 	T.amount = amount
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)
@@ -286,8 +288,8 @@
 
 /* Assembly */
 
-/obj/item/weapon/storage/toolbox/mechanical/attackby(var/obj/item/stack/tile/steel/T, mob/user as mob)
-	if(!istype(T, /obj/item/stack/tile/steel))
+/obj/item/weapon/storage/toolbox/mechanical/attackby(var/obj/item/stack/tile/floor/T, mob/user as mob)
+	if(!istype(T, /obj/item/stack/tile/floor))
 		..()
 		return
 	if(contents.len >= 1)

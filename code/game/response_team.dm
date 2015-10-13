@@ -12,16 +12,16 @@ var/can_call_ert
 	set desc = "Send an emergency response team to the station"
 
 	if(!holder)
-		usr << "\red Only administrators may use this command."
+		usr << "<span class='danger'>Only administrators may use this command.</span>"
 		return
 	if(!ticker)
-		usr << "\red The game hasn't started yet!"
+		usr << "<span class='danger'>The game hasn't started yet!</span>"
 		return
 	if(ticker.current_state == 1)
-		usr << "\red The round hasn't started yet!"
+		usr << "<span class='danger'>The round hasn't started yet!</span>"
 		return
 	if(send_emergency_team)
-		usr << "\red Central Command has already dispatched an emergency response team!"
+		usr << "<span class='danger'>[boss_name] has already dispatched an emergency response team!</span>"
 		return
 	if(alert("Do you want to dispatch an Emergency Response Team?",,"Yes","No") != "Yes")
 		return
@@ -30,7 +30,7 @@ var/can_call_ert
 			if("No")
 				return
 	if(send_emergency_team)
-		usr << "\red Looks like somebody beat you to it!"
+		usr << "<span class='danger'>Looks like somebody beat you to it!</span>"
 		return
 
 	message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
@@ -51,7 +51,7 @@ client/verb/JoinResponseTeam()
 			usr << "No emergency response team is currently being sent."
 			return
 		if(jobban_isbanned(usr, "Syndicate") || jobban_isbanned(usr, "Emergency Response Team") || jobban_isbanned(usr, "Security Officer"))
-			usr << "<font color=red><b>You are jobbanned from the emergency reponse team!"
+			usr << "<span class='danger'>You are jobbanned from the emergency reponse team!</span>"
 			return
 		if(ert.current_antagonists.len >= ert.hard_cap)
 			usr << "The emergency response team is already full!"
@@ -114,11 +114,11 @@ proc/trigger_armed_response_team(var/force = 0)
 
 	// there's only a certain chance a team will be sent
 	if(!prob(send_team_chance))
-		command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. Unfortunately, we were unable to send one at this time.", "Central Command")
+		command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. Unfortunately, we were unable to send one at this time.", "[boss_name]")
 		can_call_ert = 0 // Only one call per round, ladies.
 		return
 
-	command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. We will prepare and send one as soon as possible.", "Central Command")
+	command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. We will prepare and send one as soon as possible.", "[boss_name]")
 
 	can_call_ert = 0 // Only one call per round, gentleman.
 	send_emergency_team = 1

@@ -85,6 +85,8 @@
 		cell.update_icon()
 
 		src.cell = null
+		on = 0
+		set_light(0)
 		user << "You remove the power cell"
 		update_icon()
 		return

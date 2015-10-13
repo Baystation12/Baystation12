@@ -35,7 +35,9 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 			B.color = B.data["blood_colour"]
 
 // Takes care blood loss and regeneration
-/mob/living/carbon/human/proc/handle_blood()
+/mob/living/carbon/human/handle_blood()
+	if(in_stasis)
+		return
 
 	if(species && species.flags & NO_BLOOD)
 		return
@@ -214,7 +216,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 //Transfers blood from reagents to vessel, respecting blood types compatability.
 /mob/living/carbon/human/inject_blood(var/datum/reagent/blood/injected, var/amount)
 
-	if(species && species.flags & NO_BLOOD)
+	if(species.flags & NO_BLOOD)
 		reagents.add_reagent("blood", amount, injected.data)
 		reagents.update_total()
 		return

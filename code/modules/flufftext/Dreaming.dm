@@ -4,7 +4,7 @@ var/list/dreams = list(
 	"voices from all around","deep space","a doctor","the engine","a traitor","an ally","darkness",
 	"light","a scientist","a monkey","a catastrophe","a loved one","a gun","warmth","freezing","the sun",
 	"a hat","the Luna","a ruined station","a planet","phoron","air","the medical bay","the bridge","blinking lights",
-	"a blue light","an abandoned laboratory","Nanotrasen","mercenaries","blood","healing","power","respect",
+	"a blue light","an abandoned laboratory","NanoTrasen","mercenaries","blood","healing","power","respect",
 	"riches","space","a crash","happiness","pride","a fall","water","flames","ice","melons","flying","the eggs","money",
 	"the head of personnel","the head of security","a chief engineer","a research director","a chief medical officer",
 	"the detective","the warden","a member of the internal affairs","a station engineer","the janitor","atmospheric technician",

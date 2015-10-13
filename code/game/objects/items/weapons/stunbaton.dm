@@ -10,7 +10,7 @@
 	edge = 0
 	throwforce = 7
 	w_class = 3
-	origin_tech = "combat=2"
+	origin_tech = list(TECH_COMBAT = 2)
 	attack_verb = list("beaten")
 	var/stunforce = 0
 	var/agonyforce = 60
@@ -19,7 +19,7 @@
 	var/hitcost = 1000	//oh god why do power cells carry so much charge? We probably need to make a distinction between "industrial" sized power cells for APCs and power cells for everything else.
 
 /obj/item/weapon/melee/baton/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] is putting the live [name] in \his mouth! It looks like \he's trying to commit suicide.</span>")
+	user.visible_message("<span class='suicide'>\The [user] is putting the live [name] in \his mouth! It looks like \he's trying to commit suicide.</span>")
 	return (FIRELOSS)
 
 /obj/item/weapon/melee/baton/New()
@@ -50,6 +50,11 @@
 		icon_state = "[initial(name)]_nocell"
 	else
 		icon_state = "[initial(name)]"
+
+	if(icon_state == "[initial(name)]_active")
+		set_light(1.5, 1, "#FF6A00")
+	else
+		set_light(0)
 
 /obj/item/weapon/melee/baton/examine(mob/user)
 	if(!..(user, 1))
@@ -100,7 +105,7 @@
 
 /obj/item/weapon/melee/baton/attack(mob/M, mob/user)
 	if(status && (CLUMSY in user.mutations) && prob(50))
-		user << "span class='danger'>You accidentally hit yourself with the [src]!</span>"
+		user << "<span class='danger'>You accidentally hit yourself with the [src]!</span>"
 		user.Weaken(30)
 		deductcharge(hitcost)
 		return
@@ -130,7 +135,7 @@
 				target_zone = get_zone_with_miss_chance(user.zone_sel.selecting, L)
 
 			if(!target_zone)
-				L.visible_message("\red <B>[user] misses [L] with \the [src]!")
+				L.visible_message("<span class='danger'>\The [user] misses [L] with \the [src]!</span>")
 				return 0
 
 			var/mob/living/carbon/human/H = L

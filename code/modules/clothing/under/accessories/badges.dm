@@ -6,12 +6,12 @@
 
 /obj/item/clothing/accessory/badge
 	name = "detective's badge"
-	desc = "NanoTrasen Security Department detective's badge, made from gold."
+	desc = "Security Department detective's badge, made from gold."
 	icon_state = "badge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 
 	var/stored_name
-	var/badge_string = "NanoTrasen Security Department"
+	var/badge_string = "Corporate Security"
 
 /obj/item/clothing/accessory/badge/old
 	name = "faded badge"
@@ -56,18 +56,17 @@
 		return
 	return ..()
 
+/obj/item/clothing/accessory/badge/holo/emag_act(var/remaining_charges, var/mob/user)
+	if (emagged)
+		user << "<span class='danger'>\The [src] is already cracked.</span>"
+		return
+	else
+		emagged = 1
+		user << "<span class='danger'>You crack the holobadge security checks.</span>"
+		return 1
+
 /obj/item/clothing/accessory/badge/holo/attackby(var/obj/item/O as obj, var/mob/user as mob)
-
-	if (istype(O, /obj/item/weapon/card/emag))
-		if (emagged)
-			user << "<span class='danger'>[src] is already cracked.</span>"
-			return
-		else
-			emagged = 1
-			user << "<span class='danger'>You swipe [O] and crack the holobadge security checks.</span>"
-			return
-
-	else if(istype(O, /obj/item/weapon/card/id) || istype(O, /obj/item/device/pda))
+	if(istype(O, /obj/item/weapon/card/id) || istype(O, /obj/item/device/pda))
 
 		var/obj/item/weapon/card/id/id_card = null
 

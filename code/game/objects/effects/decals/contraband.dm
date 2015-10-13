@@ -31,7 +31,7 @@
 	//must place on a wall and user must not be inside a closet/mecha/whatever
 	var/turf/W = A
 	if (!iswall(W) || !isturf(user.loc))
-		user << "\red You can't place this here!"
+		user << "<span class='warning'>You can't place this here!</span>"
 		return
 	
 	var/placement_dir = get_dir(user, W)

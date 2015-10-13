@@ -35,6 +35,24 @@
 	icon_state = "pen_red"
 	colour = "red"
 
+/obj/item/weapon/pen/multi
+	desc = "It's a pen with multiple colors of ink!"
+	var/selectedColor = 1
+	var/colors = list("black","blue","red")
+
+/obj/item/weapon/pen/multi/attack_self(mob/user)
+	if(++selectedColor > 3)
+		selectedColor = 1
+
+	colour = colors[selectedColor]
+
+	if(colour == "black")
+		icon_state = "pen"
+	else
+		icon_state = "pen_[colour]"
+
+	user << "<span class='notice'>Changed color to '[colour].'</span>"
+
 /obj/item/weapon/pen/invisible
 	desc = "It's an invisble pen marker."
 	icon_state = "pen"
@@ -58,6 +76,7 @@
 /obj/item/weapon/pen/reagent
 	flags = OPENCONTAINER
 	slot_flags = SLOT_BELT
+	origin_tech = list(TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
 
 /obj/item/weapon/pen/reagent/New()
 	..()
@@ -82,7 +101,7 @@
  */
 /obj/item/weapon/pen/reagent/sleepy
 	desc = "It's a black ink pen with a sharp point and a carefully engraved \"Waffle Co.\""
-	origin_tech = "materials=2;syndicate=5"
+	origin_tech = list(TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
 
 /obj/item/weapon/pen/reagent/sleepy/New()
 	..()
@@ -138,7 +157,7 @@
 			if("Yellow")
 				colour = COLOR_YELLOW
 			if("Green")
-				colour = COLOR_GREEN
+				colour = COLOR_LIME
 			if("Pink")
 				colour = COLOR_PINK
 			if("Blue")

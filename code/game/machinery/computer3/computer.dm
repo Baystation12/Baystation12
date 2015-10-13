@@ -75,15 +75,15 @@
 		set name = "Reset Computer"
 		set category = "Object"
 		set src in view(1)
-		
+
 		if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
-			usr << "\red You can't do that."
+			usr << "<span class='warning'>You can't do that.</span>"
 			return
-		
+
 		if(!Adjacent(usr))
 			usr << "You can't reach it."
 			return
-		
+
 		Reset()
 
 	New(var/L, var/built = 0)
@@ -199,14 +199,6 @@
 
 		// todo does this do enough
 
-
-	meteorhit(var/obj/O as obj)
-		for(var/x in verbs)
-			verbs -= x
-		set_broken()
-		return
-
-
 	emp_act(severity)
 		if(prob(20/severity)) set_broken()
 		..()
@@ -232,12 +224,6 @@
 					set_broken()
 			else
 		return
-
-
-	blob_act()
-		if (prob(75))
-			set_broken()
-			density = 0
 
 	/*
 		Computers have the capability to use a battery backup.
@@ -309,7 +295,6 @@
 	proc/set_broken()
 		icon_state = "computer_b"
 		stat |= BROKEN
-		crit_fail = 1
 		if(program)
 			program.error = BUSTED_ASS_COMPUTER
 		if(os)

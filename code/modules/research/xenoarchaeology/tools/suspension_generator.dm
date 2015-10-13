@@ -131,10 +131,10 @@
 			usr.drop_item()
 			I.loc = src
 			auth_card = I
-			if(attempt_unlock(I))
-				usr << "<span class='info'>You insert [I], the console flashes \'<i>Access granted.</a>\'</span>"
+			if(attempt_unlock(I, usr))
+				usr << "<span class='info'>You insert [I], the console flashes \'<i>Access granted.</i>\'</span>"
 			else
-				usr << "<span class='warning'>You insert [I], the console flashes \'<i>Access denied.</a>\'</span>"
+				usr << "<span class='warning'>You insert [I], the console flashes \'<i>Access denied.</i>\'</span>"
 	else if(href_list["ejectcard"])
 		if(auth_card)
 			if(ishuman(usr))
@@ -215,24 +215,26 @@
 	else if(istype(W, /obj/item/weapon/card))
 		var/obj/item/weapon/card/I = W
 		if(!auth_card)
-			if(attempt_unlock(I))
+			if(attempt_unlock(I, user))
 				user << "<span class='info'>You swipe [I], the console flashes \'<i>Access granted.</i>\'</span>"
 			else
 				user << "<span class='warning'>You swipe [I], console flashes \'<i>Access denied.</i>\'</span>"
 		else
 			user << "<span class='warning'>Remove [auth_card] first.</span>"
 
-/obj/machinery/suspension_gen/proc/attempt_unlock(var/obj/item/weapon/card/C)
+/obj/machinery/suspension_gen/proc/attempt_unlock(var/obj/item/weapon/card/C, var/mob/user)
 	if(!open)
-		if(istype(C, /obj/item/weapon/card/emag) && cell.charge > 0)
-			//put sparks here
-			if(prob(95))
-				locked = 0
+		if(istype(C, /obj/item/weapon/card/emag))
+			C.resolve_attackby(src, user)
 		else if(istype(C, /obj/item/weapon/card/id) && check_access(C))
 			locked = 0
-
 		if(!locked)
 			return 1
+
+/obj/machinery/suspension_gen/emag_act(var/remaining_charges, var/mob/user)
+	if(cell.charge > 0 && locked)
+		locked = 0
+		return 1
 
 //checks for whether the machine can be activated or not should already have occurred by this point
 /obj/machinery/suspension_gen/proc/activate()

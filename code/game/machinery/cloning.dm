@@ -182,6 +182,8 @@
 			return
 
 		else if((occupant.health >= heal_level) && (!eject_wait))
+			playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
+			src.audible_message("\The [src] signals that the cloning process is complete.")
 			connected_message("Cloning Process Complete.")
 			locked = 0
 			go_out()
@@ -216,13 +218,6 @@
 		else
 			locked = 0
 			user << "System unlocked."
-	else if(istype(W, /obj/item/weapon/card/emag))
-		if(isnull(occupant))
-			return
-		user << "You force an emergency ejection."
-		locked = 0
-		go_out()
-		return
 	else if(istype(W, /obj/item/weapon/reagent_containers/food/snacks/meat))
 		user << "<span class='notice'>\The [src] processes \the [W].</span>"
 		biomass += 50
@@ -252,6 +247,14 @@
 	else
 		..()
 
+/obj/machinery/clonepod/emag_act(var/remaining_charges, var/mob/user)
+	if(isnull(occupant))
+		return
+	user << "You force an emergency ejection."
+	locked = 0
+	go_out()
+	return 1
+	
 //Put messages in the connected computer's temp var for display.
 /obj/machinery/clonepod/proc/connected_message(var/message)
 	if((isnull(connected)) || (!istype(connected, /obj/machinery/computer/cloning)))
@@ -306,7 +309,7 @@
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.loc = loc
 	eject_wait = 0 //If it's still set somehow.
-	domutcheck(occupant) //Waiting until they're out before possible monkeyizing.
+	domutcheck(occupant) //Waiting until they're out before possible transforming.
 	occupant = null
 
 	biomass -= CLONE_BIOMASS

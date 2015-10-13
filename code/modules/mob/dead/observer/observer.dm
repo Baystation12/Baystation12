@@ -74,7 +74,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
 
 	if(!T)	T = pick(latejoin)			//Safety in case we cannot find the body's position
-	loc = T
+	forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts
 		name = capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
@@ -91,11 +91,14 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 /mob/dead/observer/Topic(href, href_list)
 	if (href_list["track"])
-		var/mob/target = locate(href_list["track"]) in mob_list
-		if(target)
-			ManualFollow(target)
-
-
+		if(istype(href_list["track"],/mob))
+			var/mob/target = locate(href_list["track"]) in mob_list
+			if(target)
+				ManualFollow(target)
+		else
+			var/atom/target = locate(href_list["track"])
+			if(istype(target))
+				ManualFollow(target)
 
 /mob/dead/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/weapon/book/tome))
@@ -295,7 +298,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		else
 			usr << "No area available."
 
-	usr.loc = pick(L)
+	usr.forceMove(pick(L))
 	following = null
 
 /mob/dead/observer/verb/follow(input in getmobs())
@@ -320,16 +323,56 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(following && following == target)
 			return
 		following = target
-		src << "\blue Now following [target]"
-		spawn(0)
-			while(target && following == target && client)
-				var/turf/T = get_turf(target)
-				if(!T)
-					break
-				// To stop the ghost flickering.
-				if(loc != T)
-					loc = T
-				sleep(15)
+		src << "<span class='notice'>Now following \the [target]</span>"
+		if(ismob(target))
+			forceMove(get_turf(target))
+			var/mob/M = target
+			M.following_mobs += src
+		else
+			spawn(0)
+				while(target && following == target && client)
+					var/turf/T = get_turf(target)
+					if(!T)
+						break
+					// To stop the ghost flickering.
+					if(loc != T)
+						forceMove(T)
+					sleep(15)
+
+/mob/proc/update_following()
+	. = get_turf(src)
+	for(var/mob/dead/observer/M in following_mobs)
+		if(M.following != src)
+			following_mobs -= M
+		else
+			if(M.loc != .)
+				M.forceMove(.)
+
+/mob
+	var/list/following_mobs = list()
+
+/mob/Destroy()
+	for(var/mob/dead/observer/M in following_mobs)
+		M.following = null
+	following_mobs = null
+	return ..()
+
+/mob/dead/observer/Destroy()
+	if(ismob(following))
+		var/mob/M = following
+		M.following_mobs -= src
+	following = null
+	return ..()
+
+/mob/Move()
+	. = ..()
+	if(.)
+		update_following()
+
+/mob/Life()
+	// to catch teleports etc which directly set loc
+	update_following()
+	return ..()
 
 /mob/proc/check_holy(var/turf/T)
 	return 0
@@ -354,7 +397,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			var/turf/T = get_turf(M) //Turf of the destination mob
 
 			if(T && isturf(T))	//Make sure the turf exists, then move the source to that destination.
-				src.loc = T
+				forceMove(T)
 				following = null
 			else
 				src << "This mob is not located in the game world."
@@ -459,7 +502,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		host << "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>"
 
 /mob/dead/observer/verb/view_manfiest()
-	set name = "View Crew Manifest"
+	set name = "Show Crew Manifest"
 	set category = "Ghost"
 
 	var/dat
@@ -624,6 +667,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/dead/observer/canface()
 	return 1
 
+/mob/dead/observer/proc/can_admin_interact()
+	return check_rights(R_ADMIN, 0, src)
+
 /mob/dead/observer/verb/toggle_ghostsee()
 	set name = "Toggle Ghost Vision"
 	set desc = "Toggles your ability to see things only ghosts can see, like other ghosts"
@@ -640,7 +686,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/proc/updateghostsight()
 	if (!seedarkness)
-		see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
+		see_invisible = SEE_INVISIBLE_NOLIGHTING
 	else
 		see_invisible = SEE_INVISIBLE_OBSERVER
 		if (!ghostvision)
@@ -676,3 +722,19 @@ mob/dead/observer/MayRespawn(var/feedback = 0)
 			src << "<span class='warning'>antagHUD restrictions prevent you from respawning.</span>"
 		return 0
 	return 1
+
+/atom/proc/extra_ghost_link()
+	return
+
+/mob/extra_ghost_link(var/atom/ghost)
+	if(client && eyeobj)
+		return "|<a href='byond://?src=\ref[ghost];track=\ref[eyeobj]'>eye</a>"
+
+/mob/dead/observer/extra_ghost_link(var/atom/ghost)
+	if(mind && mind.current)
+		return "|<a href='byond://?src=\ref[ghost];track=\ref[mind.current]'>body</a>"
+
+/proc/ghost_follow_link(var/atom/target, var/atom/ghost)
+	if((!target) || (!ghost)) return
+	. = "<a href='byond://?src=\ref[ghost];track=\ref[target]'>follow</a>"
+	. += target.extra_ghost_link(ghost)

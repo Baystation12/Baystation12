@@ -6,11 +6,13 @@
 // No comment
 /atom/proc/attackby(obj/item/W, mob/user)
 	return
+
 /atom/movable/attackby(obj/item/W, mob/user)
 	if(!(W.flags&NOBLUDGEON))
 		visible_message("<span class='danger'>[src] has been hit by [user] with [W].</span>")
 
 /mob/living/attackby(obj/item/I, mob/user)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(istype(I) && ismob(user))
 		I.attack(src, user)
 
@@ -34,23 +36,6 @@ attacked_by() will handle hitting/missing/logging as it does now, and will call 
 
 	if(!istype(M) || (can_operate(M) && do_surgery(M,user,src))) return 0
 
-	// Knifing
-	if(edge)
-		for(var/obj/item/weapon/grab/G in M.grabbed_by)
-			if(G.assailant == user && G.state >= GRAB_NECK && world.time >= (G.last_action + 20))
-				//TODO: better alternative for applying damage multiple times? Nice knifing sound?
-				M.apply_damage(20, BRUTE, "head", 0, sharp=sharp, edge=edge)
-				M.apply_damage(20, BRUTE, "head", 0, sharp=sharp, edge=edge)
-				M.apply_damage(20, BRUTE, "head", 0, sharp=sharp, edge=edge)
-				M.adjustOxyLoss(60) // Brain lacks oxygen immediately, pass out
-				flick(G.hud.icon_state, G.hud)
-				G.last_action = world.time
-				user.visible_message("<span class='danger'>[user] slit [M]'s throat open with \the [name]!</span>")
-				user.attack_log += "\[[time_stamp()]\]<font color='red'> Knifed [M.name] ([M.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
-				M.attack_log += "\[[time_stamp()]\]<font color='orange'> Got knifed by [user.name] ([user.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
-				msg_admin_attack("[key_name(user)] knifed [key_name(M)] with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])" )
-				return
-
 	/////////////////////////
 	user.lastattacked = M
 	M.lastattacker = user
@@ -60,6 +45,12 @@ attacked_by() will handle hitting/missing/logging as it does now, and will call 
 		M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
 		msg_admin_attack("[key_name(user)] attacked [key_name(M)] with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])" )
 	/////////////////////////
+
+	// Attacking someone with a weapon while they are neck-grabbed
+	if(user.a_intent == I_HURT)
+		for(var/obj/item/weapon/grab/G in M.grabbed_by)
+			if(G.assailant == user && G.state >= GRAB_NECK)
+				M.attack_throat(src, G, user)
 
 	var/power = force
 	if(HULK in user.mutations)
@@ -72,7 +63,7 @@ attacked_by() will handle hitting/missing/logging as it does now, and will call 
 
 		// Handle striking to cripple.
 		var/dislocation_str
-		if(user.a_intent == "disarm")
+		if(user.a_intent == I_DISARM)
 			dislocation_str = H.attack_joint(src, user, def_zone)
 		if(H.attacked_by(src, user, def_zone) && hitsound)
 			playsound(loc, hitsound, 50, 1, -1)

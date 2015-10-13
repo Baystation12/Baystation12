@@ -57,15 +57,18 @@
 				src << "Alert cancelled. Power has been restored without our assistance."
 				aiRestorePowerRoutine = 0
 				src.blind.layer = 0
+				updateicon()
 				return
 			else if (aiRestorePowerRoutine==3)
 				src << "Alert cancelled. Power has been restored."
 				aiRestorePowerRoutine = 0
 				src.blind.layer = 0
+				updateicon()
 				return
 			else if (APU_power)
 				aiRestorePowerRoutine = 0
 				src.blind.layer = 0
+				updateicon()
 				return
 		else
 			var/area/current_area = get_area(src)
@@ -75,8 +78,8 @@
 					aiRestorePowerRoutine = 1
 
 					//Blind the AI
-
-					src.blind.screen_loc = "1,1 to 15,15"
+					updateicon()
+					src.blind.screen_loc = ui_entire_screen
 					if (src.blind.layer!=18)
 						src.blind.layer = 18
 					src.sight = src.sight&~SEE_TURFS
@@ -143,11 +146,12 @@
 									aiRestorePowerRoutine = 3
 									src << "Here are your current laws:"
 									show_laws()
+									updateicon()
 							sleep(50)
 							theAPC = null
 
 	process_queued_alarms()
-	regular_hud_updates()
+	handle_regular_hud_updates()
 	switch(src.sensor_mode)
 		if (SEC_HUD)
 			process_sec_hud(src,0,src.eyeobj)

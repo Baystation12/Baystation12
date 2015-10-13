@@ -26,8 +26,9 @@
 
 	recipes = material.get_recipes()
 	stacktype = material.stack_type
-	origin_tech = material.stack_origin_tech
-	perunit = material.stack_per_sheet
+	if(islist(material.stack_origin_tech))
+		origin_tech = material.stack_origin_tech.Copy()
+	perunit = SHEET_MATERIAL_AMOUNT
 
 	if(apply_colour)
 		color = material.icon_colour
@@ -45,7 +46,7 @@
 /obj/item/stack/material/proc/update_strings()
 	// Update from material datum.
 	singular_name = material.sheet_singular_name
-	
+
 	if(amount>1)
 		name = "[material.use_name] [material.sheet_plural_name]"
 		desc = "A stack of [material.use_name] [material.sheet_plural_name]."
@@ -195,12 +196,15 @@
 	default_type = "rglass"
 
 /obj/item/stack/material/glass/phoronglass
-	name = "phoron glass"
-	singular_name = "phoron glass sheet"
+	name = "borosilicate glass"
+	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures"
+	singular_name = "borosilicate glass sheet"
 	icon_state = "sheet-phoronglass"
-	default_type = "phglass"
+	default_type = "borosilicate glass"
 
 /obj/item/stack/material/glass/phoronrglass
-	name = "reinforced phoron glass"
+	name = "reinforced borosilicate glass"
+	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures. It is reinforced with few rods."
+	singular_name = "reinforced borosilicate glass sheet"
 	icon_state = "sheet-phoronrglass"
-	default_type = "rphglass"
+	default_type = "reinforced borosilicate glass"

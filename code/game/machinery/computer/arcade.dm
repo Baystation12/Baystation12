@@ -3,7 +3,9 @@
 	desc = "Does not support pinball."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "arcade"
-	circuit = "/obj/item/weapon/circuitboard/arcade"
+	icon_keyboard = null
+	icon_screen = "invaders"
+	circuit = /obj/item/weapon/circuitboard/arcade
 	var/enemy_name = "Space Villian"
 	var/temp = "Winners Don't Use Spacedrugs" //Temporary message, for attack messages, etc
 	var/player_hp = 30 //Player health/attack points
@@ -16,7 +18,7 @@
 							/obj/item/toy/blink								= 2,
 							/obj/item/clothing/under/syndicate/tacticool	= 2,
 							/obj/item/toy/sword								= 2,
-							/obj/item/toy/gun								= 2,
+							/obj/item/weapon/gun/projectile/revolver/capgun	= 2,
 							/obj/item/toy/crossbow							= 2,
 							/obj/item/clothing/suit/syndicatefake			= 2,
 							/obj/item/weapon/storage/fancy/crayons			= 2,
@@ -33,7 +35,7 @@
 							/obj/item/toy/prize/odysseus					= 1,
 							/obj/item/toy/prize/phazon						= 1,
 							/obj/item/toy/waterflower						= 1,
-							/obj/random/action_figure								= 1,
+							/obj/random/action_figure						= 1,
 							/obj/random/plushie								= 1,
 							/obj/item/toy/cultsword							= 1
 							)
@@ -69,10 +71,11 @@
 	dat += "<br><center><h3>[src.temp]</h3></center>"
 	dat += "<br><center>Health: [src.player_hp] | Magic: [src.player_mp] | Enemy Health: [src.enemy_hp]</center>"
 
+	dat += "<center><b>"
 	if (src.gameover)
-		dat += "<center><b><a href='byond://?src=\ref[src];newgame=1'>New Game</a>"
+		dat += "<a href='byond://?src=\ref[src];newgame=1'>New Game</a>"
 	else
-		dat += "<center><b><a href='byond://?src=\ref[src];attack=1'>Attack</a> | "
+		dat += "<a href='byond://?src=\ref[src];attack=1'>Attack</a> | "
 		dat += "<a href='byond://?src=\ref[src];heal=1'>Heal</a> | "
 		dat += "<a href='byond://?src=\ref[src];charge=1'>Recharge Power</a>"
 
@@ -166,8 +169,8 @@
 				var/prizeselect = pickweight(prizes)
 				new prizeselect(src.loc)
 
-				if(istype(prizeselect, /obj/item/toy/gun)) //Ammo comes with the gun
-					new /obj/item/toy/ammo/gun(src.loc)
+				if(istype(prizeselect, /obj/item/weapon/gun/projectile/revolver/capgun)) //Ammo comes with the gun
+					new /obj/item/projectile/bullet/pistol/cap(src.loc)
 
 				else if(istype(prizeselect, /obj/item/clothing/suit/syndicatefake)) //Helmet is part of the suit
 					new	/obj/item/clothing/head/syndicatefake(src.loc)
@@ -221,8 +224,8 @@
 	return
 
 
-/obj/machinery/computer/arcade/attackby(I as obj, user as mob)
-	if(istype(I, /obj/item/weapon/card/emag) && !emagged)
+/obj/machinery/computer/arcade/emag_act(var/charges, var/mob/user)
+	if(!emagged)
 		temp = "If you die in the game, you die for real!"
 		player_hp = 30
 		player_mp = 10
@@ -230,17 +233,13 @@
 		enemy_mp = 20
 		gameover = 0
 		blocked = 0
-
 		emagged = 1
 
 		enemy_name = "Cuban Pete"
 		name = "Outbomb Cuban Pete"
 
-
 		src.updateUsrDialog()
-	else
-		..()
-
+		return 1
 
 /obj/machinery/computer/arcade/emp_act(severity)
 	if(stat & (NOPOWER|BROKEN))

@@ -216,11 +216,9 @@ var/list/slot_equipment_priority = list( \
 		update_inv_wear_mask(0)
 	return
 
-//This differs from remove_from_mob() in that it checks if the item can be unequipped first.
-/mob/proc/unEquip(obj/item/I, force = 0) //Force overrides NODROP for things like wizarditis and admin undress.
+/mob/proc/canUnEquip(obj/item/I)
 	if(!I) //If there's nothing to drop, the drop is automatically successful.
 		return 1
-
 	var/slot = get_inventory_slot(I)
 	if(slot && !I.mob_can_unequip(src, slot))
 		return 0
@@ -235,6 +233,13 @@ var/list/slot_equipment_priority = list( \
 			slot = s
 			break
 	return slot
+
+//This differs from remove_from_mob() in that it checks if the item can be unequipped first.
+/mob/proc/unEquip(obj/item/I, force = 0) //Force overrides NODROP for things like wizarditis and admin undress.
+	if(!(force || canUnEquip(I)))
+		return
+	drop_from_inventory(I)
+	return 1
 
 //Attemps to remove an object on a mob.
 /mob/proc/remove_from_mob(var/obj/O)

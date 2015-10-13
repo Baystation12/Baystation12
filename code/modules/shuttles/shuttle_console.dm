@@ -1,7 +1,8 @@
 /obj/machinery/computer/shuttle_control
 	name = "shuttle control console"
 	icon = 'icons/obj/computer.dmi'
-	icon_state = "shuttle"
+	icon_keyboard = "atmos_key"
+	icon_screen = "shuttle"
 	circuit = null
 
 	var/shuttle_tag  // Used to coordinate data in shuttle controller.
@@ -15,7 +16,7 @@
 	if(!allowed(user))
 		user << "\red Access Denied."
 		return 1
-	
+
 	ui_interact(user)
 
 /obj/machinery/computer/shuttle_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
@@ -83,15 +84,13 @@
 	else if(href_list["cancel"])
 		shuttle.cancel_launch(src)
 
-/obj/machinery/computer/shuttle_control/attackby(obj/item/weapon/W as obj, mob/user as mob)
-
-	if (istype(W, /obj/item/weapon/card/emag))
-		src.req_access = list()
-		src.req_one_access = list()
+/obj/machinery/computer/shuttle_control/emag_act(var/remaining_charges, var/mob/user)
+	if (!hacked)
+		req_access = list()
+		req_one_access = list()
 		hacked = 1
-		usr << "You short out the console's ID checking system. It's now available to everyone!"
-	else
-		..()
+		user << "You short out the console's ID checking system. It's now available to everyone!"
+		return 1
 
 /obj/machinery/computer/shuttle_control/bullet_act(var/obj/item/projectile/Proj)
 	visible_message("[Proj] ricochets off [src]!")

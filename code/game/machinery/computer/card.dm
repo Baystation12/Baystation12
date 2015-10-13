@@ -2,11 +2,12 @@
 
 /obj/machinery/computer/card
 	name = "\improper ID card modification console"
-	desc = "Terminal for programming NanoTrasen employee ID cards to access parts of the station."
-	icon_state = "id"
+	desc = "Terminal for programming employee ID cards to access parts of the station."
+	icon_keyboard = "id_key"
+	icon_screen = "id"
 	light_color = "#0099ff"
 	req_access = list(access_change_ids)
-	circuit = "/obj/item/weapon/circuitboard/card"
+	circuit = /obj/item/weapon/circuitboard/card
 	var/obj/item/weapon/card/id/scan = null
 	var/obj/item/weapon/card/id/modify = null
 	var/mode = 0.0
@@ -58,12 +59,10 @@
 	if(!istype(id_card))
 		return ..()
 
-	if(!scan && access_change_ids in id_card.access)
-		user.drop_item()
+	if(!scan && (access_change_ids in id_card.access) && user.unEquip(id_card))
 		id_card.loc = src
 		scan = id_card
 	else if(!modify)
-		user.drop_item()
 		id_card.loc = src
 		modify = id_card
 
@@ -156,8 +155,7 @@
 					modify = null
 			else
 				var/obj/item/I = usr.get_active_hand()
-				if (istype(I, /obj/item/weapon/card/id))
-					usr.drop_item()
+				if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
 					I.loc = src
 					modify = I
 
@@ -183,7 +181,7 @@
 				if(is_authenticated())
 					var/access_type = text2num(href_list["access_target"])
 					var/access_allowed = text2num(href_list["allowed"])
-					if(access_type in (is_centcom() ? get_all_centcom_access() : get_all_accesses()))
+					if(access_type in (is_centcom() ? get_all_centcom_access() : get_all_station_access()))
 						modify.access -= access_type
 						if(!access_allowed)
 							modify.access += access_type
@@ -208,7 +206,7 @@
 								jobdatum = J
 								break
 						if(!jobdatum)
-							usr << "\red No log exists for this job: [t1]"
+							usr << "<span class='warning'>No log exists for this job: [t1]</span>"
 							return
 
 						access = jobdatum.get_access()
@@ -284,7 +282,7 @@
 
 /obj/machinery/computer/card/centcom
 	name = "\improper CentCom ID card modification console"
-	circuit = "/obj/item/weapon/circuitboard/card/centcom"
+	circuit = /obj/item/weapon/circuitboard/card/centcom
 	req_access = list(access_cent_captain)
 
 

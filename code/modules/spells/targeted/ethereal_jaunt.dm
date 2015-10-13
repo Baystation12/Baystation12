@@ -16,7 +16,7 @@
 
 /spell/targeted/ethereal_jaunt/cast(list/targets) //magnets, so mostly hardcoded
 	for(var/mob/living/target in targets)
-		target.monkeyizing = 1 //protects the mob from being transformed (replaced) midjaunt and getting stuck in bluespace
+		target.transforming = 1 //protects the mob from being transformed (replaced) midjaunt and getting stuck in bluespace
 		if(target.buckled) target.buckled = null
 		spawn(0)
 			var/mobloc = get_turf(target.loc)
@@ -33,7 +33,7 @@
 				target.buckled = null
 			jaunt_disappear(animation, target)
 			target.loc = holder
-			target.monkeyizing=0 //mob is safely inside holder now, no need for protection.
+			target.transforming=0 //mob is safely inside holder now, no need for protection.
 			jaunt_steam(mobloc)
 			sleep(duration)
 			mobloc = holder.last_valid_turf

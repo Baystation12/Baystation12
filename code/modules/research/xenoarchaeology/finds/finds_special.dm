@@ -127,7 +127,7 @@
 		playsound(src.loc, pick('sound/hallucinations/wail.ogg','sound/hallucinations/veryfar_noise.ogg','sound/hallucinations/far_noise.ogg'), 50, 1, -3)
 		nearby_mobs.Add(M)
 
-		var/target = pick("chest","groin","head","l_arm","r_arm","r_leg","l_leg","l_hand","r_hand","l_foot","r_foot")
+		var/target = pick(M.organs_by_name)
 		M.apply_damage(rand(5, 10), BRUTE, target)
 		M << "\red The skin on your [parse_zone(target)] feels like it's ripping apart, and a stream of blood flies out."
 		var/obj/effect/decal/cleanable/blood/splatter/animated/B = new(M.loc)

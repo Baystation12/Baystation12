@@ -15,6 +15,20 @@
 
 		return 1
 
+/datum/disease2/disease/get_view_variables_header()
+	. = list()
+	for(var/datum/disease2/effectholder/E in effects)
+		. += "[E.stage]: [E.effect.name]"
+	return {"
+		<b>[name()]</b><br><font size=1>
+		[list2text(., "<br>")]</font>
+	"}
+
+/datum/disease2/disease/get_view_variables_options()
+	return ..() + {"
+		<option value='?src=\ref[src];info=1'>Show info</option>
+	"}
+
 /datum/admins/var/datum/virus2_editor/virus2_editor_datum = new
 /client/proc/virus2_editor()
 	set name = "Virus Editor"
@@ -73,10 +87,11 @@
 		var/f = 1
 		for(var/k in all_species)
 			var/datum/species/S = all_species[k]
-			if(!(S.flags & IS_SYNTHETIC))
-				if(!f) H += " | "
-				else f = 0
-				H += "<a href='?src=\ref[src];what=species;toggle=[k]' style='color:[(k in species) ? "#006600" : "#ff0000"]'>[k]</a>"
+			if(S.virus_immune)
+				continue
+			if(!f) H += " | "
+			else f = 0
+			H += "<a href='?src=\ref[src];what=species;toggle=[k]' style='color:[(k in species) ? "#006600" : "#ff0000"]'>[k]</a>"
 		H += {"
 		<a href="?src=\ref[src];what=species;reset=1" style="color:#0000aa">Reset</a>
 		<br />

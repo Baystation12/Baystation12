@@ -7,7 +7,7 @@
 	item_state = "plasticx"
 	flags = NOBLUDGEON
 	w_class = 2.0
-	origin_tech = "syndicate=2"
+	origin_tech = list(TECH_ILLEGAL = 2)
 	var/datum/wires/explosive/c4/wires = null
 	var/timer = 10
 	var/atom/target = null
@@ -18,6 +18,11 @@
 	wires = new(src)
 	image_overlay = image('icons/obj/assemblies.dmi', "plastic-explosive2")
 	..()
+	
+/obj/item/weapon/plastique/Destroy()
+	qdel(wires)
+	wires = null
+	return ..()
 
 /obj/item/weapon/plastique/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/weapon/screwdriver))

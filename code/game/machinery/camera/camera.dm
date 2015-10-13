@@ -8,7 +8,7 @@
 	active_power_usage = 10
 	layer = 5
 
-	var/list/network = list("Exodus")
+	var/list/network = list(NETWORK_EXODUS)
 	var/c_tag = null
 	var/c_tag_order = 999
 	var/status = 1
@@ -59,7 +59,8 @@
 		qdel(assembly)
 		assembly = null
 	qdel(wires)
-	..()
+	wires = null
+	return ..()
 
 /obj/machinery/camera/emp_act(severity)
 	if(!isEmpProof())
@@ -79,8 +80,7 @@
 			..()
 
 /obj/machinery/camera/bullet_act(var/obj/item/projectile/P)
-	if(P.damage_type == BRUTE || P.damage_type == BURN)
-		take_damage(P.damage)
+	take_damage(P.get_structure_damage())
 
 /obj/machinery/camera/ex_act(severity)
 	if(src.invuln)
@@ -91,10 +91,6 @@
 		destroy()
 
 	..() //and give it the regular chance of being deleted outright
-
-
-/obj/machinery/camera/blob_act()
-	return
 
 /obj/machinery/camera/hitby(AM as mob|obj)
 	..()
@@ -176,16 +172,17 @@
 
 	else if (istype(W, /obj/item/weapon/camera_bug))
 		if (!src.can_use())
-			user << "\blue Camera non-functional"
+			user << "<span class='warning'>Camera non-functional.</span>"
 			return
 		if (src.bugged)
-			user << "\blue Camera bug removed."
+			user << "<span class='notice'>Camera bug removed.</span>"
 			src.bugged = 0
 		else
-			user << "\blue Camera bugged."
+			user << "<span class='notice'>Camera bugged.</span>"
 			src.bugged = 1
 
 	else if(W.damtype == BRUTE || W.damtype == BURN) //bashing cameras
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if (W.force >= src.toughness)
 			user.do_attack_animation(src)
 			visible_message("<span class='warning'><b>[src] has been [pick(W.attack_verb)] with [W] by [user]!</b></span>")
@@ -301,6 +298,9 @@
 /obj/machinery/camera/proc/can_see()
 	var/list/see = null
 	var/turf/pos = get_turf(src)
+	if(!pos)
+		return list()
+
 	if(isXRay())
 		see = range(view_range, pos)
 	else

@@ -76,11 +76,11 @@
 	should_be_mapped = 1
 
 /obj/machinery/power/smes/buildable/Destroy()
-	..()
 	qdel(wires)
-	for(var/obj/nano_module/rcon/R in world)
+	wires = null
+	for(var/datum/nano_module/rcon/R in world)
 		R.FindDevices()
-
+	return ..()
 
 // Proc: process()
 // Parameters: None
@@ -349,8 +349,6 @@
 				M.state = 2
 				M.icon_state = "box_1"
 				for(var/obj/I in component_parts)
-					if(I.reliability != 100 && crit_fail)
-						I.crit_fail = 1
 					I.loc = src.loc
 					component_parts -= I
 				qdel(src)

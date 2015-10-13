@@ -8,7 +8,8 @@
 /obj/machinery/computer/security
 	name = "security camera monitor"
 	desc = "Used to access the various cameras on the station."
-	icon_state = "cameras"
+	icon_keyboard = "security_key"
+	icon_screen = "cameras"
 	light_color = "#a91515"
 	var/obj/machinery/camera/current = null
 	var/last_pic = 1.0
@@ -71,7 +72,7 @@
 			ui.add_template("mapContent", "sec_camera_map_content.tmpl")
 			// adding a template with the key "mapHeader" replaces the map header content
 			ui.add_template("mapHeader", "sec_camera_map_header.tmpl")
-			
+
 			ui.set_initial_data(data)
 			ui.open()
 			ui.set_auto_update(1)
@@ -96,7 +97,7 @@
 
 	attack_hand(var/mob/user as mob)
 		if (src.z > 6)
-			user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
+			user << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!"
 			return
 		if(stat & (NOPOWER|BROKEN))	return
 
@@ -201,23 +202,19 @@
 /obj/machinery/computer/security/telescreen
 	name = "Telescreen"
 	desc = "Used for watching an empty arena."
-	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "telescreen"
+	icon_state = "wallframe"
+	icon_keyboard = null
+	icon_screen = null
+	light_range_on = 0
 	network = list("thunder")
 	density = 0
 	circuit = null
-
-/obj/machinery/computer/security/telescreen/update_icon()
-	icon_state = initial(icon_state)
-	if(stat & BROKEN)
-		icon_state += "b"
-	return
 
 /obj/machinery/computer/security/telescreen/entertainment
 	name = "entertainment monitor"
 	desc = "Damn, why do they never have anything interesting on these things?"
 	icon = 'icons/obj/status_display.dmi'
-	icon_state = "entertainment"
+	icon_screen = "entertainment"
 	light_color = "#FFEEDB"
 	light_range_on = 2
 	circuit = null
@@ -225,7 +222,9 @@
 /obj/machinery/computer/security/wooden_tv
 	name = "security camera monitor"
 	desc = "An old TV hooked into the stations camera network."
-	icon_state = "security_det"
+	icon_state = "television"
+	icon_keyboard = null
+	icon_screen = "detective_tv"
 	circuit = null
 	light_color = "#3848B3"
 	light_power_on = 0.5
@@ -233,7 +232,8 @@
 /obj/machinery/computer/security/mining
 	name = "outpost camera monitor"
 	desc = "Used to access the various cameras on the outpost."
-	icon_state = "miningcameras"
+	icon_keyboard = "mining_key"
+	icon_screen = "mining"
 	network = list("MINE")
 	circuit = /obj/item/weapon/circuitboard/security/mining
 	light_color = "#F9BBFC"
@@ -241,7 +241,8 @@
 /obj/machinery/computer/security/engineering
 	name = "engineering camera monitor"
 	desc = "Used to monitor fires and breaches."
-	icon_state = "engineeringcameras"
+	icon_keyboard = "power_key"
+	icon_screen = "engie_cams"
 	circuit = /obj/item/weapon/circuitboard/security/engineering
 	light_color = "#FAC54B"
 
@@ -254,5 +255,9 @@
 	name = "head mounted camera monitor"
 	desc = "Used to access the built-in cameras in helmets."
 	icon_state = "syndicam"
-	network = list("NUKE")
+	network = list(NETWORK_MERCENARY)
 	circuit = null
+
+/obj/machinery/computer/security/nuclear/New()
+	..()
+	req_access = list(150)

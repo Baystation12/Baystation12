@@ -28,6 +28,10 @@ var/list/delayed_garbage = list()
 	delayed_garbage.Cut()
 	delayed_garbage = null
 
+#ifdef GC_FINDREF
+world/loop_checks = 0
+#endif
+
 /datum/controller/process/garbage_collector/doWork()
 	if(!garbage_collect)
 		return
@@ -36,6 +40,31 @@ var/list/delayed_garbage = list()
 	var/time_to_kill = world.time - collection_timeout // Anything qdel() but not GC'd BEFORE this time needs to be manually del()
 	var/checkRemain = max_checks_multiplier * schedule_interval
 	var/maxDels = max_forcedel_multiplier * schedule_interval
+
+	#ifdef GC_FINDREF
+	var/list/searching = list()
+	for(var/refID in destroyed) // Reference search - before all deletions and for all at once
+		var/GCd_at_time = destroyed[refID]
+		if(GCd_at_time > time_to_kill)
+			break
+		var/atom/A = locate(refID)
+		if(A && A.gcDestroyed == GCd_at_time)
+			searching += A
+		if(searching.len >= checkRemain)
+			break
+
+	for(var/atom/A in searching)
+		testing("GC: Searching references for [A] | [A.type]")
+		if(A.loc != null)
+			testing("GC: [A] | [A.type] is located in [A.loc] instead of null")
+		if(A.contents.len)
+			testing("GC: [A] | [A.type] has contents: [list2text(A.contents)]")
+	if(searching.len)
+		for(var/atom/D in world)
+			LookForRefs(D, searching)
+		for(var/datum/D)
+			LookForRefs(D, searching)
+	#endif
 
 	while(destroyed.len && --checkRemain >= 0)
 		if(dels >= maxDels)
@@ -67,6 +96,32 @@ var/list/delayed_garbage = list()
 		#endif
 		destroyed.Cut(1, 2)
 
+#ifdef GC_FINDREF
+/datum/controller/process/garbage_collector/proc/LookForRefs(var/datum/D, var/list/targ)
+	. = 0
+	for(var/V in D.vars)
+		if(V == "contents")
+			continue
+		if(istype(D.vars[V], /atom))
+			var/atom/A = D.vars[V]
+			if(A in targ)
+				testing("GC: [A] | [A.type] referenced by [D] | [D.type], var [V]")
+				. += 1
+		else if(islist(D.vars[V]))
+			. += LookForListRefs(D.vars[V], targ, D, V)
+
+/datum/controller/process/garbage_collector/proc/LookForListRefs(var/list/L, var/list/targ, var/datum/D, var/V)
+	. = 0
+	for(var/F in L)
+		if(istype(F, /atom))
+			var/atom/A = F
+			if(A in targ)
+				testing("GC: [A] | [A.type] referenced by [D] | [D.type], list [V]")
+				. += 1
+		if(islist(F))
+			. += LookForListRefs(F, targ, D, "[F] in list [V]")
+#endif
+
 /datum/controller/process/garbage_collector/proc/AddTrash(datum/A)
 	if(!istype(A) || !isnull(A.gcDestroyed))
 		return
@@ -81,7 +136,7 @@ var/list/delayed_garbage = list()
 	return ..()+"([garbage_collector.destroyed.len]/[garbage_collector.dels]/[garbage_collector.hard_dels])"
 
 // Tests if an atom has been deleted.
-/proc/deleted(atom/A) 
+/proc/deleted(atom/A)
 	return !A || !isnull(A.gcDestroyed)
 
 // Should be treated as a replacement for the 'del' keyword.
@@ -133,6 +188,7 @@ var/list/delayed_garbage = list()
 // This should be overridden to remove all references pointing to the object being destroyed.
 // Return true if the the GC controller should allow the object to continue existing. (Useful if pooling objects.)
 /datum/proc/Destroy()
+	nanomanager.close_uis(src)
 	tag = null
 	return
 
@@ -203,4 +259,8 @@ var/list/delayed_garbage = list()
 
 #ifdef GC_DEBUG
 #undef GC_DEBUG
+#endif
+
+#ifdef GC_FINDREF
+#undef GC_FINDREF
 #endif

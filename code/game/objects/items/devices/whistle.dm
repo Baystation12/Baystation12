@@ -47,12 +47,10 @@ obj/item/device/hailer/attack_self(mob/living/carbon/user as mob)
 	spawn(20)
 		spamcheck = 0
 
-/obj/item/device/hailer/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/card/emag))
-		if(isnull(insults))
-			user << "<span class='danger'>You overload \the [src]'s voice synthesizer.</span>"
-			insults = rand(1, 3)//to prevent dickflooding
-		else
-			user << "The hailer is fried. You can't even fit the sequencer into the input slot."
+/obj/item/device/hailer/emag_act(var/remaining_charges, var/mob/user)
+	if(isnull(insults))
+		user << "<span class='danger'>You overload \the [src]'s voice synthesizer.</span>"
+		insults = rand(1, 3)//to prevent dickflooding
+		return 1
 	else
-		return .. ()
+		user << "The hailer is fried. You can't even fit the sequencer into the input slot."

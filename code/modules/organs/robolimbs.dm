@@ -7,6 +7,7 @@ var/global/datum/robolimb/basic_robolimb
 	for(var/limb_type in typesof(/datum/robolimb))
 		var/datum/robolimb/R = new limb_type()
 		all_robolimbs[R.company] = R
+		world << "Adding [R.company] as [R], [R.type]"
 		if(!R.unavailable_at_chargen)
 			chargen_robolimbs[R.company] = R
 
@@ -15,6 +16,7 @@ var/global/datum/robolimb/basic_robolimb
 	var/desc = "A generic unbranded robotic prosthesis." // Seen when examining a limb.
 	var/icon = 'icons/mob/human_races/robotic.dmi'       // Icon base to draw from.
 	var/unavailable_at_chargen                           // If set, not available at chargen.
+	var/list/species_cannot_use = list("Resomi")
 
 /datum/robolimb/bishop
 	company = "Bishop Cybernetics"
@@ -35,3 +37,9 @@ var/global/datum/robolimb/basic_robolimb
 	company = "Xion Manufacturing Group"
 	desc = "This limb has a minimalist black and red casing."
 	icon = 'icons/mob/human_races/cyberlimbs/xion.dmi'
+
+/datum/robolimb/ipc
+	company = "Morpheus Cyberkinetics"
+	desc = "This limb is simple and functional; no effort has been made to make it look human."
+	icon = 'icons/mob/human_races/cyberlimbs/ipc.dmi'
+	unavailable_at_chargen = 1

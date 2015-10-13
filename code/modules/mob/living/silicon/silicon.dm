@@ -19,10 +19,13 @@
 	var/local_transmit //If set, can only speak to others of the same type within a short range.
 
 	var/sensor_mode = 0 //Determines the current HUD.
-	var/mob/living/cameraFollow = null
 
 	var/next_alarm_notice
 	var/list/datum/alarm/queued_alarms = new()
+
+	var/list/access_rights
+	var/obj/item/weapon/card/id/idcard
+	var/idcard_type = /obj/item/weapon/card/id/synthetic
 
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
@@ -31,6 +34,7 @@
 	silicon_mob_list |= src
 	..()
 	add_language("Galactic Common")
+	init_id()
 	init_subsystems()
 
 /mob/living/silicon/Destroy()
@@ -38,6 +42,12 @@
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
 		AH.unregister(src)
 	..()
+
+/mob/living/silicon/proc/init_id()
+	if(idcard)
+		return
+	idcard = new idcard_type(src)
+	set_id_info(idcard)
 
 /mob/living/silicon/proc/SetName(pickedName as text)
 	real_name = pickedName
@@ -87,13 +97,6 @@
 /mob/living/silicon/IsAdvancedToolUser()
 	return 1
 
-/mob/living/silicon/blob_act()
-	if (src.stat != 2)
-		src.adjustBruteLoss(60)
-		src.updatehealth()
-		return 1
-	return 0
-
 /mob/living/silicon/bullet_act(var/obj/item/projectile/Proj)
 
 	if(!Proj.nodamage)
@@ -128,6 +131,9 @@
 			drowsyness = max(drowsyness,(effect/(blocked+1)))
 	updatehealth()
 	return 1*/
+
+/mob/living/silicon/attack_throat()
+	return
 
 /proc/islinked(var/mob/living/silicon/robot/bot, var/mob/living/silicon/ai/ai)
 	if(!istype(bot) || !istype(ai))
@@ -188,16 +194,22 @@
 	return universal_speak || (speaking in src.speech_synthesizer_langs)	//need speech synthesizer support to vocalize a language
 
 /mob/living/silicon/add_language(var/language, var/can_speak=1)
-	if (..(language) && can_speak)
-		speech_synthesizer_langs.Add(all_languages[language])
+	var/var/datum/language/added_language = all_languages[language]
+	if(!added_language)
+		return
+
+	. = ..(language)
+	if (can_speak && (added_language in languages) && !(added_language in speech_synthesizer_langs))
+		speech_synthesizer_langs += added_language
 		return 1
 
 /mob/living/silicon/remove_language(var/rem_language)
-	..(rem_language)
+	var/var/datum/language/removed_language = all_languages[rem_language]
+	if(!removed_language)
+		return
 
-	for (var/datum/language/L in speech_synthesizer_langs)
-		if (L.name == rem_language)
-			speech_synthesizer_langs -= L
+	..(rem_language)
+	speech_synthesizer_langs -= removed_language
 
 /mob/living/silicon/check_languages()
 	set name = "Check Known Languages"
@@ -342,6 +354,11 @@
 /mob/living/silicon/proc/is_malf_or_traitor()
 	return is_traitor() || is_malf()
 
+/mob/living/silicon/adjustEarDamage()
+	return
+
+/mob/living/silicon/setEarDamage()
+	return
 
 /mob/living/silicon/reset_view()
 	..()

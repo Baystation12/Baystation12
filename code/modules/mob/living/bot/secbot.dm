@@ -5,7 +5,7 @@
 	maxHealth = 50
 	health = 50
 	req_one_access = list(access_security, access_forensics_lockers)
-	botcard_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
+	botcard_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels)
 
 	var/mob/target
 
@@ -69,6 +69,11 @@
 		icon_state = "secbot-c"
 	else
 		icon_state = "secbot[on]"
+
+	if(on)
+		set_light(2, 1, "#FF6A00")
+	else
+		set_light(0)
 
 /mob/living/bot/secbot/attack_hand(var/mob/user)
 	user.set_machine(src)

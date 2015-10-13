@@ -53,9 +53,6 @@
 	consume(user)
 	return 1
 
-/obj/singularity/blob_act(severity)
-	return
-
 /obj/singularity/ex_act(severity)
 	if(current_size == STAGE_SUPER)//IT'S UNSTOPPABLE
 		return
@@ -270,8 +267,6 @@
 	return 1
 
 /obj/singularity/proc/eat()
-	set background = BACKGROUND_ENABLED
-
 	for(var/atom/X in orange(grav_pull, src))
 		var/dist = get_dist(X, src)
 		var/obj/singularity/S = src

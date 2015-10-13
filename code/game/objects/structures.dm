@@ -28,13 +28,6 @@
 
 	return ..()
 
-/obj/structure/blob_act()
-	if(prob(50))
-		qdel(src)
-
-/obj/structure/meteorhit(obj/O as obj)
-	qdel(src)
-
 /obj/structure/attack_tk()
 	return
 
@@ -49,9 +42,6 @@
 				return
 		if(3.0)
 			return
-
-/obj/structure/meteorhit(obj/O as obj)
-	qdel(src)
 
 /obj/structure/New()
 	..()

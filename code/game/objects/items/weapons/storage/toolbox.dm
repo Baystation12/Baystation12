@@ -12,7 +12,7 @@
 	w_class = 4
 	max_w_class = 3
 	max_storage_space = 14 //can hold 7 w_class-2 items or up to 3 w_class-3 items (with 1 w_class-2 item as change).
-	origin_tech = "combat=1"
+	origin_tech = list(TECH_COMBAT = 1)
 	attack_verb = list("robusted")
 
 /obj/item/weapon/storage/toolbox/emergency
@@ -67,7 +67,7 @@
 	name = "suspicious looking toolbox"
 	icon_state = "syndicate"
 	item_state = "toolbox_syndi"
-	origin_tech = "combat=1;syndicate=1"
+	origin_tech = list(TECH_COMBAT = 1, TECH_ILLEGAL = 1)
 	force = 7.0
 
 	New()

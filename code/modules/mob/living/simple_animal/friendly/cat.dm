@@ -23,7 +23,7 @@
 	minbodytemp = 223		//Below -50 Degrees Celcius
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 	holder_type = /obj/item/weapon/holder/cat
-	mob_size = 5
+	mob_size = MOB_SMALL
 
 /mob/living/simple_animal/cat/Life()
 	//MICE!

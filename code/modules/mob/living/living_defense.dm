@@ -10,24 +10,36 @@
 	1 - halfblock
 	2 - fullblock
 */
-/mob/living/proc/run_armor_check(var/def_zone = null, var/attack_flag = "melee", var/absorb_text = null, var/soften_text = null)
+/mob/living/proc/run_armor_check(var/def_zone = null, var/attack_flag = "melee", var/armour_pen = 0, var/absorb_text = null, var/soften_text = null)
+	if(armour_pen >= 100)
+		return 0 //might as well just skip the processing
+
 	var/armor = getarmor(def_zone, attack_flag)
 	var/absorb = 0
+	
+	//Roll armour
 	if(prob(armor))
 		absorb += 1
 	if(prob(armor))
 		absorb += 1
+	
+	//Roll penetration
+	if(prob(armour_pen))
+		absorb -= 1
+	if(prob(armour_pen))
+		absorb -= 1
+	
 	if(absorb >= 2)
 		if(absorb_text)
 			show_message("[absorb_text]")
 		else
-			show_message("\red Your armor absorbs the blow!")
+			show_message("<span class='warning'>Your armor absorbs the blow!</span>")
 		return 2
 	if(absorb == 1)
 		if(absorb_text)
 			show_message("[soften_text]",4)
 		else
-			show_message("\red Your armor softens the blow!")
+			show_message("<span class='warning'>Your armor softens the blow!</span>")
 		return 1
 	return 0
 
@@ -38,7 +50,6 @@
 
 
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
-	flash_weak_pain()
 
 	//Being hit while using a cloaking device
 	var/obj/item/weapon/cloaking_device/C = locate((/obj/item/weapon/cloaking_device) in src)
@@ -64,7 +75,7 @@
 		return
 
 	//Armor
-	var/absorb = run_armor_check(def_zone, P.check_armour)
+	var/absorb = run_armor_check(def_zone, P.check_armour, P.armor_penetration)
 	var/proj_sharp = is_sharp(P)
 	var/proj_edge = has_edge(P)
 	if ((proj_sharp || proj_edge) && prob(getarmor(def_zone, P.check_armour)))
@@ -219,7 +230,7 @@
 
 /mob/living/proc/handle_fire()
 	if(fire_stacks < 0)
-		fire_stacks = max(0, fire_stacks++) //If we've doused ourselves in water to avoid fire, dry off slowly
+		fire_stacks = min(0, ++fire_stacks) //If we've doused ourselves in water to avoid fire, dry off slowly
 
 	if(!on_fire)
 		return 1
@@ -256,3 +267,125 @@
 
 /mob/living/proc/reagent_permeability()
 	return 1
+	return round(FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE*(fire_stacks/FIRE_MAX_FIRESUIT_STACKS)**2)
+
+/mob/living/proc/handle_actions()
+	//Pretty bad, i'd use picked/dropped instead but the parent calls in these are nonexistent
+	for(var/datum/action/A in actions)
+		if(A.CheckRemoval(src))
+			A.Remove(src)
+	for(var/obj/item/I in src)
+		if(I.action_button_name)
+			if(!I.action)
+				if(I.action_button_is_hands_free)
+					I.action = new/datum/action/item_action/hands_free
+				else
+					I.action = new/datum/action/item_action
+				I.action.name = I.action_button_name
+				I.action.target = I
+			I.action.Grant(src)
+	return
+
+/mob/living/update_action_buttons()
+	if(!hud_used) return
+	if(!client) return
+
+	if(hud_used.hud_shown != 1)	//Hud toggled to minimal
+		return
+
+	client.screen -= hud_used.hide_actions_toggle
+	for(var/datum/action/A in actions)
+		if(A.button)
+			client.screen -= A.button
+
+	if(hud_used.action_buttons_hidden)
+		if(!hud_used.hide_actions_toggle)
+			hud_used.hide_actions_toggle = new(hud_used)
+			hud_used.hide_actions_toggle.UpdateIcon()
+
+		if(!hud_used.hide_actions_toggle.moved)
+			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(1)
+			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,1)
+
+		client.screen += hud_used.hide_actions_toggle
+		return
+
+	var/button_number = 0
+	for(var/datum/action/A in actions)
+		button_number++
+		if(A.button == null)
+			var/obj/screen/movable/action_button/N = new(hud_used)
+			N.owner = A
+			A.button = N
+
+		var/obj/screen/movable/action_button/B = A.button
+
+		B.UpdateIcon()
+
+		B.name = A.UpdateName()
+
+		client.screen += B
+
+		if(!B.moved)
+			B.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number)
+			//hud_used.SetButtonCoords(B,button_number)
+
+	if(button_number > 0)
+		if(!hud_used.hide_actions_toggle)
+			hud_used.hide_actions_toggle = new(hud_used)
+			hud_used.hide_actions_toggle.InitialiseIcon(src)
+		if(!hud_used.hide_actions_toggle.moved)
+			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
+			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,button_number+1)
+		client.screen += hud_used.hide_actions_toggle
+
+
+//If simple_animals are ever moved under carbon, then this can probably be moved to carbon as well
+/mob/living/proc/attack_throat(obj/item/W, obj/item/weapon/grab/G, mob/user)
+
+	// Knifing
+	if(!W.edge || !W.force || W.damtype != BRUTE) return //unsuitable weapon
+
+	user.visible_message("<span class='danger'>\The [user] begins to slit [src]'s throat with \the [W]!</span>")
+
+	user.next_move = world.time + 20 //also should prevent user from triggering this repeatedly
+	if(!do_after(user, 20))
+		return
+	if(!(G && G.assailant == user && G.affecting == src)) //check that we still have a grab
+		return
+
+	var/damage_mod = 1
+	//presumably, if they are wearing a helmet that stops pressure effects, then it probably covers the throat as well
+	var/obj/item/clothing/head/helmet = get_equipped_item(slot_head)
+	if(istype(helmet) && (helmet.body_parts_covered & HEAD) && (helmet.item_flags & STOPPRESSUREDAMAGE))
+		//we don't do an armor_check here because this is not an impact effect like a weapon swung with momentum, that either penetrates or glances off.
+		damage_mod = 1.0 - (helmet.armor["melee"]/100)
+
+	var/total_damage = 0
+	for(var/i in 1 to 3)
+		var/damage = min(W.force*1.5, 20)*damage_mod
+		apply_damage(damage, W.damtype, "head", 0, sharp=W.sharp, edge=W.edge)
+		total_damage += damage
+
+	var/oxyloss = total_damage
+	if(total_damage >= 40) //threshold to make someone pass out
+		oxyloss = 60 // Brain lacks oxygen immediately, pass out
+
+	adjustOxyLoss(min(oxyloss, 100 - getOxyLoss())) //don't put them over 100 oxyloss
+
+	if(total_damage)
+		if(oxyloss >= 40)
+			user.visible_message("<span class='danger'>\The [user] slit [src]'s throat open with \the [W]!</span>")
+		else
+			user.visible_message("<span class='danger'>\The [user] cut [src]'s neck with \the [W]!</span>")
+
+		if(W.hitsound)
+			playsound(loc, W.hitsound, 50, 1, -1)
+
+	G.last_action = world.time
+	flick(G.hud.icon_state, G.hud)
+
+	user.attack_log += "\[[time_stamp()]\]<font color='red'> Knifed [name] ([ckey]) with [W.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(W.damtype)])</font>"
+	src.attack_log += "\[[time_stamp()]\]<font color='orange'> Got knifed by [user.name] ([user.ckey]) with [W.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(W.damtype)])</font>"
+	msg_admin_attack("[key_name(user)] knifed [key_name(src)] with [W.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(W.damtype)])" )
+	return

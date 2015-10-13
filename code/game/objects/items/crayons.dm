@@ -68,7 +68,7 @@
 /obj/item/weapon/pen/crayon/afterattack(atom/target, mob/user as mob, proximity)
 	if(!proximity) return
 	if(istype(target,/turf/simulated/floor))
-		var/drawtype = input("Choose what you'd like to draw.", "Crayon scribbles") in list("graffiti","rune","letter")
+		var/drawtype = input("Choose what you'd like to draw.", "Crayon scribbles") in list("graffiti","rune","letter","arrow")
 		switch(drawtype)
 			if("letter")
 				drawtype = input("Choose the letter.", "Crayon scribbles") in list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
@@ -77,6 +77,9 @@
 				user << "You start drawing graffiti on the [target.name]."
 			if("rune")
 				user << "You start drawing a rune on the [target.name]."
+			if("arrow")
+				drawtype = input("Choose the arrow.", "Crayon scribbles") in list("left", "right", "up", "down")
+				user << "You start drawing an arrow on the [target.name]."
 		if(instant || do_after(user, 50))
 			new /obj/effect/decal/cleanable/crayon(target,colour,shadeColour,drawtype)
 			user << "You finish drawing."
@@ -84,7 +87,7 @@
 			if(uses)
 				uses--
 				if(!uses)
-					user << "\red You used up your crayon!"
+					user << "<span class='warning'>You used up your crayon!</span>"
 					qdel(src)
 	return
 
@@ -96,7 +99,7 @@
 		if(uses)
 			uses -= 5
 			if(uses <= 0)
-				user << "\red You ate your crayon!"
+				user << "<span class='warning'>You ate your crayon!</span>"
 				qdel(src)
 	else
 		..()

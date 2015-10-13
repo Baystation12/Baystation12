@@ -86,11 +86,6 @@
 				qdel(src)
 				return
 
-/obj/structure/bed/blob_act()
-	if(prob(75))
-		material.place_sheet(get_turf(src))
-		qdel(src)
-
 /obj/structure/bed/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -224,7 +219,7 @@
 	if(istype(W,/obj/item/roller_holder))
 		var/obj/item/roller_holder/RH = W
 		if(!RH.held)
-			user << "\blue You collect the roller bed."
+			user << "<span class='notice'>You collect the roller bed.</span>"
 			src.loc = RH
 			RH.held = src
 			return
@@ -245,10 +240,10 @@
 /obj/item/roller_holder/attack_self(mob/user as mob)
 
 	if(!held)
-		user << "\blue The rack is empty."
+		user << "<span class='notice'>The rack is empty.</span>"
 		return
 
-	user << "\blue You deploy the roller bed."
+	user << "<span class='notice'>You deploy the roller bed.</span>"
 	var/obj/structure/bed/roller/R = new /obj/structure/bed/roller(user.loc)
 	R.add_fingerprint(user)
 	qdel(held)

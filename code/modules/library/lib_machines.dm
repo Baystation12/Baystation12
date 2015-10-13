@@ -122,6 +122,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	density = 1
 	var/arcanecheckout = 0
 	var/screenstate = 0 // 0 - Main Menu, 1 - Inventory, 2 - Checked Out, 3 - Check Out a Book
+	var/sortby = "author"
 	var/buffer_book
 	var/buffer_mob
 	var/upload_category = "Fiction"
@@ -195,9 +196,8 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			else
 				dat += {"<A href='?src=\ref[src];orderbyid=1'>(Order book by SS<sup>13</sup>BN)</A><BR><BR>
 				<table>
-				<tr><td>AUTHOR</td><td>TITLE</td><td>CATEGORY</td><td></td></tr>"}
-
-				var/DBQuery/query = dbcon_old.NewQuery("SELECT id, author, title, category FROM library")
+				<tr><td><A href='?src=\ref[src];sort=author>AUTHOR</A></td><td><A href='?src=\ref[src];sort=title>TITLE</A></td><td><A href='?src=\ref[src];sort=category>CATEGORY</A></td><td></td></tr>"}
+				var/DBQuery/query = dbcon_old.NewQuery("SELECT id, author, title, category FROM library ORDER BY [sortby]")
 				query.Execute()
 
 				while(query.NextRow())
@@ -237,9 +237,12 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	user << browse(dat, "window=library")
 	onclose(user, "library")
 
-/obj/machinery/librarycomp/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (src.density && istype(W, /obj/item/weapon/card/emag))
+/obj/machinery/librarycomp/emag_act(var/remaining_charges, var/mob/user)
+	if (src.density && !src.emagged)
 		src.emagged = 1
+		return 1
+
+/obj/machinery/librarycomp/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/barcodescanner))
 		var/obj/item/weapon/barcodescanner/scanner = W
 		scanner.computer = src
@@ -386,6 +389,8 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			if(isnum(orderid))
 				var/nhref = "src=\ref[src];targetid=[orderid]"
 				spawn() src.Topic(nhref, params2list(nhref), src)
+	if(href_list["sort"] in list("author", "title", "category"))
+		sortby = href_list["sort"]
 	src.add_fingerprint(usr)
 	src.updateUsrDialog()
 	return

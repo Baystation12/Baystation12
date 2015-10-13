@@ -15,7 +15,7 @@
 	var/power_output = 1
 
 /obj/machinery/power/port_gen/proc/IsBroken()
-	return (crit_fail || (stat & (BROKEN|EMPED)))
+	return (stat & (BROKEN|EMPED))
 
 /obj/machinery/power/port_gen/proc/HasFuel() //Placeholder for fuel check.
 	return 1
@@ -127,7 +127,7 @@
 
 /obj/machinery/power/port_gen/pacman/Destroy()
 	DropFuel()
-	..()
+	return ..()
 
 /obj/machinery/power/port_gen/pacman/RefreshParts()
 	var/temp_rating = 0
@@ -137,13 +137,6 @@
 		else if(istype(SP, /obj/item/weapon/stock_parts/micro_laser) || istype(SP, /obj/item/weapon/stock_parts/capacitor))
 			temp_rating += SP.rating
 
-	var/temp_reliability = 0
-	var/part_count = 0
-	for(var/obj/item/weapon/CP in component_parts)
-		temp_reliability += CP.reliability
-		part_count++
-
-	reliability = min(round(temp_reliability / part_count), 100)
 	power_gen = round(initial(power_gen) * (max(2, temp_rating) / 2))
 
 /obj/machinery/power/port_gen/pacman/examine(mob/user)
@@ -168,13 +161,6 @@
 		sheets -= amount
 
 /obj/machinery/power/port_gen/pacman/UseFuel()
-	//break down sometimes
-	if (reliability < 100)
-		if (prob(1) && prob(1) && prob(100 - reliability))
-			stat |= BROKEN
-			crit_fail = 1
-			if (prob(100 - reliability))
-				explode()
 
 	//how much material are we using this iteration?
 	var/needed_sheets = power_output / time_per_sheet
@@ -260,6 +246,14 @@
 	sheet_left = 0
 	..()
 
+/obj/machinery/power/port_gen/pacman/emag_act(var/remaining_charges, var/mob/user)
+	if (active && prob(25))
+		explode() //if they're foolish enough to emag while it's running
+
+	if (!emagged)
+		emagged = 1
+		return 1
+
 /obj/machinery/power/port_gen/pacman/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O, sheet_path))
 		var/obj/item/stack/addstack = O
@@ -272,10 +266,6 @@
 		addstack.use(amount)
 		updateUsrDialog()
 		return
-	else if (istype(O, /obj/item/weapon/card/emag))
-		emagged = 1
-		if (active && prob(25))
-			explode() //if they're foolish enough to emag while it's running
 	else if(!active)
 		if(istype(O, /obj/item/weapon/wrench))
 
