@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - tweak: "Blobs can now spawn anywhere in maintenance, rather than picking location from a pre-determined list."
- 
