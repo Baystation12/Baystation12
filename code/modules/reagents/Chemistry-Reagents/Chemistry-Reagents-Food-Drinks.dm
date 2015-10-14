@@ -286,18 +286,18 @@
 		M << "<span class='warning'>Your [safe_thing] protects you from the pepperspray!</span>"
 		return
 	else if(eyes_covered)
-		M << "<span class='warning'>Your [safe_thing] protect you from most of the pepperspray!</span>"
-		M.eye_blurry = max(M.eye_blurry, 15)
-		M.eye_blind = max(M.eye_blind, 5)
+		M << "<span class='warning'>Your [safe_thing] protect your eyes from the pepperspray!</span>"
+		M.eye_blurry = max(M.eye_blurry, 5)
 		M.Stun(5)
 		M.Weaken(5)
 		return
 	else if (mouth_covered) // Mouth cover is better than eye cover
 		M << "<span class='warning'>Your [safe_thing] protects your face from the pepperspray!</span>"
-		M.eye_blurry = max(M.eye_blurry, 5)
+		M.eye_blurry = max(M.eye_blurry, 15)
+		M.eye_blind = max(M.eye_blind, 5)
 		return
 	else // Oh dear :D
-		M << "<span class='warning'>You're sprayed directly in the eyes with pepperspray!</span>"
+		M << "<span class='warning'>You're sprayed directly with the pepperspray!</span>"
 		M.eye_blurry = max(M.eye_blurry, 25)
 		M.eye_blind = max(M.eye_blind, 10)
 		M.Stun(5)
