@@ -137,6 +137,7 @@
 		if (istype(O, /obj/item/stack))
 			var/obj/item/stack/S = O
 			S.amount = produced
+			S.add_to_stacks(user)
 
 		if (istype(O, /obj/item/weapon/storage)) //BubbleWrap - so newly formed boxes are empty
 			for (var/obj/item/I in O)
@@ -284,13 +285,13 @@
 		return
 	return max_amount
 
-/obj/item/stack/proc/add_to_stacks(mob/usr as mob)
-	for (var/obj/item/stack/item in usr.loc)
+/obj/item/stack/proc/add_to_stacks(mob/user as mob)
+	for (var/obj/item/stack/item in user.loc)
 		if (item==src)
 			continue
 		var/transfer = src.transfer_to(item)
 		if (transfer)
-			usr << "You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s."
+			user << "<span class='notice'>You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s.</span>"
 		if(!amount)
 			break
 
