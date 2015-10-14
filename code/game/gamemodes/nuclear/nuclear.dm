@@ -9,7 +9,6 @@ var/list/nuke_disks = list()
 	round_description = "A mercenary strike force is approaching the station!"
 	config_tag = "mercenary"
 	required_players = 15
-	required_players_secret = 25 // 25 players - 5 players to be the nuke ops = 20 players remaining
 	required_enemies = 1
 	end_on_antag_death = 1
 	var/nuke_off_station = 0 //Used for tracking if the syndies actually haul the nuke to the station

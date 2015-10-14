@@ -347,26 +347,16 @@
 	if(status_flags & GODMODE)
 		return
 
-		if(status_flags & GODMODE)
-			return
+	//exposure to extreme pressures can rupture lungs
+	if(breath && (breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5))
+		if(!is_lung_ruptured() && prob(5))
+			rupture_lung()
 
-		//exposure to extreme pressures can rupture lungs
-		if(breath && (breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5))
-			if(!is_lung_ruptured() && prob(5))
-				rupture_lung()
-
-		//check if we actually need to process breath
-		if(!breath || (breath.total_moles == 0) || suiciding)
-			failed_last_breath = 1
-			if(suiciding)
-				adjustOxyLoss(2)//If you are suiciding, you should die a little bit faster
-				oxygen_alert = max(oxygen_alert, 1)
-				return 0
-			if(health > config.health_threshold_crit)
-				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
-			else
-				adjustOxyLoss(HUMAN_CRIT_MAX_OXYLOSS)
-
+	//check if we actually need to process breath
+	if(!breath || (breath.total_moles == 0) || suiciding)
+		failed_last_breath = 1
+		if(suiciding)
+			adjustOxyLoss(2)//If you are suiciding, you should die a little bit faster
 			oxygen_alert = max(oxygen_alert, 1)
 			return 0
 		if(health > config.health_threshold_crit)
@@ -375,7 +365,6 @@
 			adjustOxyLoss(HUMAN_CRIT_MAX_OXYLOSS)
 
 		oxygen_alert = max(oxygen_alert, 1)
-
 		return 0
 
 	var/safe_pressure_min = 16 // Minimum safe partial pressure of breathable gas in kPa
