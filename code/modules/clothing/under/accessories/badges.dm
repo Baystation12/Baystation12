@@ -6,8 +6,9 @@
 
 /obj/item/clothing/accessory/badge
 	name = "detective's badge"
-	desc = "Security Department detective's badge, made from gold."
+	desc = "A corporate security badge, made from gold and set on false leather."
 	icon_state = "badge"
+	item_state = "marshalbadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 
 	var/stored_name
@@ -25,7 +26,7 @@
 /obj/item/clothing/accessory/badge/attack_self(mob/user as mob)
 
 	if(!stored_name)
-		user << "You polish your old badge fondly, shining up the surface."
+		user << "You polish your badge fondly, shining up the surface."
 		set_name(user.real_name)
 		return
 
@@ -42,8 +43,9 @@
 //.Holobadges.
 /obj/item/clothing/accessory/badge/holo
 	name = "holobadge"
-	desc = "This glowing blue badge marks the holder as THE LAW."
+	desc = "This glowing blue badge marks the holder as a member of corporate security."
 	icon_state = "holobadge"
+	item_state = "holobadge"
 	var/emagged //Emagging removes Sec check.
 
 /obj/item/clothing/accessory/badge/holo/cord
@@ -96,3 +98,24 @@
 		new /obj/item/clothing/accessory/badge/holo/cord(src)
 		..()
 		return
+
+
+/obj/item/clothing/accessory/badge/warden
+	name = "warden's badge"
+	desc = "A silver corporate security badge. Stamped with the words 'Brig Officer.'"
+	icon_state = "silverbadge"
+	slot_flags = SLOT_TIE
+
+
+/obj/item/clothing/accessory/badge/hos
+	name = "commander's badge"
+	desc = "An immaculately polished gold security badge. Labeled 'Commander.'"
+	icon_state = "goldbadge"
+	slot_flags = SLOT_TIE
+
+/obj/item/clothing/accessory/badge/marshal
+	name = "marshal's badge"
+	desc = "A leather-backed gold badge displaying the crest of the Colonial Marshals."
+	icon_state = "marshalbadge"
+	badge_string = "Colonial Marshal Bureau"
+
