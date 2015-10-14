@@ -52,10 +52,6 @@
 			prisonsecuritywarp += loc
 			qdel(src)
 			return
-		if("blobstart")
-			blobstart += loc
-			qdel(src)
-			return
 		if("xeno_spawn")
 			xeno_spawn += loc
 			qdel(src)

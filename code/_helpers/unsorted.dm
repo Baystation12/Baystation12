@@ -229,14 +229,14 @@ Turf and target are seperate in case you want to teleport some distance from a t
 #define LOCATE_COORDS(X, Y, Z) locate(between(1, X, world.maxx), between(1, Y, world.maxy), Z)
 /proc/getcircle(turf/center, var/radius) //Uses a fast Bresenham rasterization algorithm to return the turfs in a thin circle.
 	if(!radius) return list(center)
-	
+
 	var/x = 0
 	var/y = radius
 	var/p = 3 - 2 * radius
-	
+
 	. = list()
 	while(y >= x) // only formulate 1/8 of circle
-		
+
 		. += LOCATE_COORDS(center.x - x, center.y - y, center.z) //upper left left
 		. += LOCATE_COORDS(center.x - y, center.y - x, center.z) //upper upper left
 		. += LOCATE_COORDS(center.x + y, center.y - x, center.z) //upper upper right
@@ -247,7 +247,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		. += LOCATE_COORDS(center.x + x, center.y + y, center.z) //lower right right
 
 		if(p < 0)
-			p += 4*x++ + 6; 
+			p += 4*x++ + 6;
 		else
 			p += 4*(x++ - y--) + 10;
 
@@ -717,21 +717,6 @@ proc/GaussRandRound(var/sigma,var/roundto)
 	for(var/area/N in world)
 		if(istype(N, areatype)) areas += N
 	return areas
-
-//Takes: Area type as text string or as typepath OR an instance of the area.
-//Returns: A list of all turfs in areas of that type of that type in the world.
-/proc/get_area_turfs(var/areatype)
-	if(!areatype) return null
-	if(istext(areatype)) areatype = text2path(areatype)
-	if(isarea(areatype))
-		var/area/areatemp = areatype
-		areatype = areatemp.type
-
-	var/list/turfs = new/list()
-	for(var/area/N in world)
-		if(istype(N, areatype))
-			for(var/turf/T in N) turfs += T
-	return turfs
 
 //Takes: Area type as text string or as typepath OR an instance of the area.
 //Returns: A list of all atoms	(objs, turfs, mobs) in areas of that type of that type in the world.
