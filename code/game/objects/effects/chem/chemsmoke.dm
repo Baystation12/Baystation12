@@ -10,6 +10,14 @@
 	var/turf/destination
 
 /obj/effect/effect/smoke/chem/New(var/newloc, turf/dest = null)
+	
+	//Calculate time to live
+	var/pressure = 0
+	var/datum/gas_mixture/environment = loc.return_air()
+	if(environment) pressure = environment.return_pressure()
+	
+	time_to_live = max(5, time_to_live*min(pressure/(ONE_ATMOSPHERE/3), 1))
+	
 	..()
 	create_reagents(500)
 	destination = dest
