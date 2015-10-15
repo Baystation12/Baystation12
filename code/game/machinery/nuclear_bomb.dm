@@ -420,7 +420,7 @@ obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
 /obj/item/weapon/disk/nuclear/Destroy()
 	nuke_disks -= src
 	if(!nuke_disks.len)
-		var/turf/T = pick_area_turf(/area/maintenance, /proc/not_turf_contains_dense_objects)
+		var/turf/T = pick_area_turf(/area/maintenance, list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))
 		if(T)
 			var/obj/D = new /obj/item/weapon/disk/nuclear(T)
 			log_and_message_admins_with_location("[src], the last authentication disk, has been destroyed. Spawning [D] at ([D.x], [D.y], [D.z]).", T.x, T.y, T.z)
