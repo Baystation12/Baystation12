@@ -235,12 +235,12 @@
 	if(can_hold.len)
 		if(!is_type_in_list(W, can_hold))
 			if(!stop_messages && ! istype(W, /obj/item/weapon/hand_labeler))
-				usr << "<span class='notice'>[src] cannot hold [W].</span>"
+				usr << "<span class='notice'>[src] cannot hold \the [W].</span>"
 			return 0
 		var/max_instances = can_hold[W.type]
 		if(max_instances && instances_of_type_in_list(W, contents) >= max_instances)
 			if(!stop_messages && !istype(W, /obj/item/weapon/hand_labeler))
-				usr << "<span class='notice'>[src] has no more space for an additional [W].</span>"
+				usr << "<span class='notice'>[src] has no more space specifically for \the [W].</span>"
 			return 0
 
 	if(cant_hold.len && is_type_in_list(W, cant_hold))
@@ -460,9 +460,9 @@
 	max_w_class = 0
 	max_storage_space = 0
 	for(var/obj/item/I in src)
+		can_hold[I.type]++
 		max_w_class = max(I.w_class, max_w_class)
 		max_storage_space += I.get_storage_cost()
-		can_hold[I.type] = ++can_hold[I.type]
 
 //Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
 //Returns -1 if the atom was not found on container.
