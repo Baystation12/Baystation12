@@ -280,14 +280,15 @@
 		if(I)
 			if(I.flags & MASKCOVERSEYES)
 				eyes_covered = 1
-				eye_protection = I
+				eye_protection = I.name
 			if(I.flags & MASKCOVERSMOUTH)
 				mouth_covered = 1
-				face_protection = I
+				face_protection = I.name
 
 	var/message = null
 	if(eyes_covered)
-		message = "<span class='warning'>Your [eye_protection] protects your eyes from the pepperspray!</span>"
+		if(!mouth_covered)
+			message = "<span class='warning'>Your [eye_protection] protects your eyes from the pepperspray!</span>"
 	else
 		message = "<span class='warning'>The pepperspray gets in your eyes!</span>"
 		if(mouth_covered)

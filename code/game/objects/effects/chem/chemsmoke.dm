@@ -6,11 +6,32 @@
 	opacity = 0
 	time_to_live = 300
 	pass_flags = PASSTABLE | PASSGRILLE | PASSGLASS //PASSGLASS is fine here, it's just so the visual effect can "flow" around glass
+	var/splash_amount = 10 //atoms moving through a smoke cloud get splashed with up to 10 units of reagent
+	var/turf/destination
 
-/obj/effect/effect/smoke/chem/New()
+/obj/effect/effect/smoke/chem/New(var/newloc, turf/dest = null)
 	..()
 	create_reagents(500)
-	return
+	destination = dest
+	if(destination)
+		walk_to(src, destination)
+
+/obj/effect/effect/smoke/chem/Move()
+	var/list/oldlocs = view(1, src)
+	. = ..()
+	if(.)
+		for(var/turf/T in view(1, src) - oldlocs)
+			for(var/atom/movable/AM in T)
+				if(!istype(AM, /obj/effect/effect/smoke/chem))
+					reagents.splash(AM, splash_amount, copy = 1)
+		if(loc == destination)
+			bound_width = 96
+			bound_height = 96
+
+/obj/effect/effect/smoke/chem/Crossed(atom/movable/AM)
+	..()
+	if(!istype(AM, /obj/effect/effect/smoke/chem))
+		reagents.splash(AM, splash_amount, copy = 1)
 
 /datum/effect/effect/system/smoke_spread/chem
 	smoke_type = /obj/effect/effect/smoke/chem
@@ -152,16 +173,16 @@
 	if(passed_smoke)
 		smoke = passed_smoke
 	else
-		smoke = PoolOrNew(/obj/effect/effect/smoke/chem, location)
+		smoke = PoolOrNew(/obj/effect/effect/smoke/chem, list(location, T))
 
 	if(chemholder.reagents.reagent_list.len)
 		chemholder.reagents.trans_to_obj(smoke, chemholder.reagents.total_volume / dist, copy = 1) //copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
+
 	smoke.icon = I
 	smoke.layer = 6
 	smoke.set_dir(pick(cardinal))
 	smoke.pixel_x = -32 + rand(-8, 8)
 	smoke.pixel_y = -32 + rand(-8, 8)
-	walk_to(smoke, T)
 	smoke.opacity = 1		//switching opacity on after the smoke has spawned, and then
 	sleep(150+rand(0,20))	// turning it off before it is deleted results in cleaner
 	smoke.opacity = 0		// lighting and view range updates
