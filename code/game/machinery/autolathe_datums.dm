@@ -37,11 +37,6 @@
 	path = /obj/item/device/flashlight
 	category = "General"
 
-/datum/autolathe/recipe/voice
-	name = "voice"
-	path = /obj/item/device/assembly/voice
-	category = "Devices and Components"
-
 /datum/autolathe/recipe/extinguisher
 	name = "extinguisher"
 	path = /obj/item/weapon/extinguisher
