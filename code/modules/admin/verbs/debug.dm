@@ -16,6 +16,7 @@
 
 // callproc moved to code/modules/admin/callproc
 
+
 /client/proc/Cell()
 	set category = "Debug"
 	set name = "Cell"
@@ -99,23 +100,6 @@
 		if(candidate.key == choice.key)
 			paiController.pai_candidates.Remove(candidate)
 	feedback_add_details("admin_verb","MPAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/client/proc/cmd_admin_alienize(var/mob/M in mob_list)
-	set category = "Fun"
-	set name = "Make Alien"
-
-	if(!ticker)
-		alert("Wait until the game starts")
-		return
-	if(ishuman(M))
-		log_admin("[key_name(src)] has alienized [M.key].")
-		spawn(10)
-			M:Alienize()
-			feedback_add_details("admin_verb","MKAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-		log_admin("[key_name(usr)] made [key_name(M)] into an alien.")
-		message_admins("\blue [key_name_admin(usr)] made [key_name(M)] into an alien.", 1)
-	else
-		alert("Invalid mob")
 
 /client/proc/cmd_admin_slimeize(var/mob/M in mob_list)
 	set category = "Fun"

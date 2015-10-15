@@ -41,6 +41,10 @@
 
 	processing_objects.Remove(src)
 
+	if(istype(loc, /obj/item/device/transfer_valve))
+		var/obj/item/device/transfer_valve/TTV = loc
+		TTV.remove_tank(src)
+
 	..()
 
 /obj/item/weapon/tank/examine(mob/user)
@@ -62,17 +66,6 @@
 			else
 				descriptive = "cold"
 		user << "<span class='notice'>\The [src] feels [descriptive].</span>"
-
-/obj/item/weapon/tank/blob_act()
-	if(prob(50))
-		var/turf/location = src.loc
-		if (!( istype(location, /turf) ))
-			qdel(src)
-
-		if(src.air_contents)
-			location.assume_air(air_contents)
-
-		qdel(src)
 
 /obj/item/weapon/tank/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -260,7 +253,10 @@
 		qdel(src)
 
 	else if(pressure > TANK_RUPTURE_PRESSURE)
-		//world << "<span class='notice'>[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]</span>"
+		#ifdef FIREDBG
+		log_debug("<span class='warning'>[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]</span>")
+		#endif
+
 		if(integrity <= 0)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)
@@ -272,7 +268,10 @@
 			integrity--
 
 	else if(pressure > TANK_LEAK_PRESSURE)
-		//world << "<span class='notice'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>"
+		#ifdef FIREDBG
+		log_debug("<span class='warning'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>")
+		#endif
+
 		if(integrity <= 0)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)

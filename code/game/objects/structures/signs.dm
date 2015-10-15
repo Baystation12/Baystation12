@@ -19,10 +19,6 @@
 		else
 	return
 
-/obj/structure/sign/blob_act()
-	qdel(src)
-	return
-
 /obj/structure/sign/attackby(obj/item/tool as obj, mob/user as mob)	//deconstruction
 	if(istype(tool, /obj/item/weapon/screwdriver) && !istype(src, /obj/structure/sign/double))
 		user << "You unfasten the sign with your [tool]."

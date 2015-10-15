@@ -91,11 +91,14 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 /mob/dead/observer/Topic(href, href_list)
 	if (href_list["track"])
-		var/mob/target = locate(href_list["track"]) in mob_list
-		if(target)
-			ManualFollow(target)
-
-
+		if(istype(href_list["track"],/mob))
+			var/mob/target = locate(href_list["track"]) in mob_list
+			if(target)
+				ManualFollow(target)
+		else
+			var/atom/target = locate(href_list["track"])
+			if(istype(target))
+				ManualFollow(target)
 
 /mob/dead/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/weapon/book/tome))
@@ -149,7 +152,7 @@ Works together with spawning an observer, noted above.
 	if(key)
 		var/mob/dead/observer/ghost = new(src)	//Transfer safety to observer spawning proc.
 		ghost.can_reenter_corpse = can_reenter_corpse
-		ghost.timeofdeath = src.timeofdeath //BS12 EDIT
+		ghost.timeofdeath = src.stat == DEAD ? src.timeofdeath : world.time
 		ghost.key = key
 		if(ghost.client && !ghost.client.holder && !config.antag_hud_allowed)		// For new ghosts we remove the verb from even showing up if it's not allowed.
 			ghost.verbs -= /mob/dead/observer/verb/toggle_antagHUD	// Poor guys, don't know what they are missing!
@@ -320,7 +323,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(following && following == target)
 			return
 		following = target
-		src << "<span class='notice'>Now following [target]</span>"
+		src << "<span class='notice'>Now following \the [target]</span>"
 		if(ismob(target))
 			forceMove(get_turf(target))
 			var/mob/M = target

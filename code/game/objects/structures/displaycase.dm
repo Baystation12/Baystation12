@@ -34,15 +34,6 @@
 	src.healthcheck()
 	return
 
-
-/obj/structure/displaycase/blob_act()
-	if (prob(75))
-		new /obj/item/weapon/material/shard( src.loc )
-		if (occupied)
-			new /obj/item/weapon/gun/energy/captain( src.loc )
-			occupied = 0
-		qdel(src)
-
 /obj/structure/displaycase/proc/healthcheck()
 	if (src.health <= 0)
 		if (!( src.destroyed ))

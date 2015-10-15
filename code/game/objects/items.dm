@@ -108,9 +108,6 @@
 		else
 	return
 
-/obj/item/blob_act()
-	return
-
 //user: The mob that is suiciding
 //damagetype: The type of damage the item will inflict on the user
 //BRUTELOSS = 1

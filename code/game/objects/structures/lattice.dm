@@ -34,10 +34,6 @@
 			L.updateOverlays(src.loc)
 	..()
 
-/obj/structure/lattice/blob_act()
-	qdel(src)
-	return
-
 /obj/structure/lattice/ex_act(severity)
 	switch(severity)
 		if(1.0)

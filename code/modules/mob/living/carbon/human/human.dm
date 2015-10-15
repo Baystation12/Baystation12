@@ -168,15 +168,6 @@
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05, used_weapon = weapon_message)
 	if(update)	UpdateDamageIcon()
 
-
-/mob/living/carbon/human/blob_act()
-	if(stat == 2)	return
-	show_message("\red The blob attacks you!")
-	var/dam_zone = pick(organs_by_name)
-	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
-	apply_damage(rand(30,40), BRUTE, affecting, run_armor_check(affecting, "melee"))
-	return
-
 /mob/living/carbon/human/proc/implant_loyalty(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
 
@@ -981,7 +972,7 @@
 
 	if(L && !L.is_bruised())
 		src.custom_pain("You feel a stabbing pain in your chest!", 1)
-		L.damage = L.min_bruised_damage
+		L.bruise()
 
 /*
 /mob/living/carbon/human/verb/simulate()
@@ -1291,11 +1282,10 @@
 		if(C.body_parts_covered & FEET)
 			feet_exposed = 0
 
-	flavor_text = flavor_texts["general"]
-	flavor_text += "\n\n"
+	flavor_text = ""
 	for (var/T in flavor_texts)
 		if(flavor_texts[T] && flavor_texts[T] != "")
-			if((T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
+			if((T == "general") || (T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
 				flavor_text += flavor_texts[T]
 				flavor_text += "\n\n"
 	if(!shrink)

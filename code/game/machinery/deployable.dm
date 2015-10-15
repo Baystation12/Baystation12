@@ -131,13 +131,6 @@ for reference:
 				dismantle()
 			return
 
-/obj/structure/barricade/blob_act()
-	src.health -= 25
-	if (src.health <= 0)
-		visible_message("<span class='danger'>The blob eats through \the [src]!</span>")
-		qdel(src)
-	return
-
 /obj/structure/barricade/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
 	if(air_group || (height==0))
 		return 1
@@ -231,12 +224,6 @@ for reference:
 			locked = !locked
 			anchored = !anchored
 			icon_state = "barrier[src.locked]"
-
-	blob_act()
-		src.health -= 25
-		if (src.health <= 0)
-			src.explode()
-		return
 
 	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
 		if(air_group || (height==0))

@@ -30,10 +30,6 @@
 		return 1
 
 
-/obj/machinery/containment_field/blob_act()
-	return 0
-
-
 /obj/machinery/containment_field/ex_act(severity)
 	return 0
 

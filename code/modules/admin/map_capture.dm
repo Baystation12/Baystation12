@@ -1,8 +1,15 @@
-/datum/admins/proc/capture_map(tx as num, ty as num, tz as num, range as num)
+/datum/admins/proc/capture_map(tx as null|num, ty as null|num, tz as null|num, range as null|num)
 	set category = "Server"
 	set name = "Capture Map Part"
+	set desc = "Usage: Capture-Map-Part target_x_cord target_y_cord target_z_cord range (captures part of a map originating from bottom left corner)"
 
 	if(!check_rights(R_ADMIN|R_DEBUG|R_SERVER))
+		return
+
+	if(isnull(tx) || isnull(ty) || isnull(tz) || isnull(range))
+		usr << "Capture Map Part, captures part of a map using camara like rendering."
+		usr << "Usage: Capture-Map-Part target_x_cord target_y_cord target_z_cord range"
+		usr << "Target coordinates specify bottom left corner of the capture, range defines render distance to opposite corner."
 		return
 
 	if(range > 32 || range <= 0)
@@ -45,5 +52,8 @@
 					var/yoff = (A.y - ty) * 32
 					cap.Blend(img, blendMode2iconMode(A.blend_mode),  A.pixel_x + xoff, A.pixel_y + yoff)
 
-
-		usr << browse_rsc(cap, "map_capture_x[tx]_y[ty]_z[tz]_r[range].png")
+		var/file_name = "map_capture_x[tx]_y[ty]_z[tz]_r[range].png"
+		usr << "Saved capture in cache as [file_name]."
+		usr << browse_rsc(cap, file_name)
+	else
+		usr << "Target coordinates are incorrect."

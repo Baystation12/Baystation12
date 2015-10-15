@@ -116,11 +116,6 @@
 	..()
 	healthcheck()
 
-/obj/vehicle/blob_act()
-	src.health -= rand(20,40)*fire_dam_coeff
-	healthcheck()
-	return
-
 /obj/vehicle/ex_act(severity)
 	switch(severity)
 		if(1.0)
