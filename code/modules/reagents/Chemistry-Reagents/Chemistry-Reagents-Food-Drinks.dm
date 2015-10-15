@@ -219,6 +219,10 @@
 	description = "This is what makes chilis hot."
 	reagent_state = LIQUID
 	color = "#B31008"
+	var/agony_dose = 5
+	var/agony_amount = 2
+	var/discomfort_message = "<span class='danger'>Your insides feel uncomfortably hot!</span>"
+	var/slime_temp_adj = 10
 
 /datum/reagent/capsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -232,30 +236,31 @@
 		var/mob/living/carbon/human/H = M
 		if(H.species && (H.species.flags & (NO_PAIN | IS_SYNTHETIC)))
 			return
-	if(dose < 5 && (dose == metabolism || prob(5)))
-		M << "<span class='danger'>Your insides feel uncomfortably hot!</span>"
-	if(dose >= 5)
-		M.apply_effect(2, AGONY, 0)
+	if(dose < agony_dose)
+		if(prob(5) || dose == metabolism) //dose == metabolism is a very hacky way of forcing the message the first time this procs
+			M << initial_message
+	else
+		M.apply_effect(agony_amount, AGONY, 0)
 		if(prob(5))
-			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", "<span class='danger'>You feel like your insides are burning!</span>")
+			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>")
+			M << "<span class='danger'>You feel like your insides are burning!</span>"
 	if(istype(M, /mob/living/carbon/slime))
-		M.bodytemperature += rand(10, 25)
+		M.bodytemperature += rand(0, 15) + slime_temp_adj
 	holder.remove_reagent("frostoil", 5)
 
-/datum/reagent/condensedcapsaicin
+/datum/reagent/capsaicin/condensed
 	name = "Condensed Capsaicin"
 	id = "condensedcapsaicin"
 	description = "A chemical agent used for self-defense and in police work."
 	reagent_state = LIQUID
 	touch_met = 50 // Get rid of it quickly
 	color = "#B31008"
+	agony_dose = 0.5
+	agony_amount = 4
+	discomfort_message = "<span class='danger'>You feel like your insides are burning!</span>"
+	slime_temp_adj = 15
 
-/datum/reagent/condensedcapsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-	M.adjustToxLoss(0.5 * removed)
-
-/datum/reagent/condensedcapsaicin/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/capsaicin/condensed/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	var/eyes_covered = 0
 	var/mouth_covered = 0
 	var/obj/item/safe_thing = null
@@ -303,21 +308,6 @@
 		M.Stun(5)
 		M.Weaken(5)
 		return
-
-/datum/reagent/condensedcapsaicin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(H.species && (H.species.flags & (NO_PAIN | IS_SYNTHETIC)))
-			return
-	if(dose == metabolism)
-		M << "<span class='danger'>You feel like your insides are burning!</span>"
-	else
-		M.apply_effect(4, AGONY, 0)
-		if(prob(5))
-			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", "<span class='danger'>You feel like your insides are burning!</span>")
-	if(istype(M, /mob/living/carbon/slime))
-		M.bodytemperature += rand(15, 30)
-	holder.remove_reagent("frostoil", 5)
 
 /* Drinks */
 
