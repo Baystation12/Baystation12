@@ -334,3 +334,42 @@
 
 /datum/species/proc/get_vision_flags(var/mob/living/carbon/human/H)
 	return vision_flags
+
+/datum/species/proc/handle_vision(var/mob/living/carbon/human/H)
+	H.update_sight()
+	H.sight |= get_vision_flags(H)
+	H.sight |= H.equipment_vision_flags
+
+	if(H.stat == DEAD)
+		return 1
+
+	if(!H.druggy)
+		H.see_in_dark = (H.sight == SEE_TURFS|SEE_MOBS|SEE_OBJS) ? 8 : min(darksight + H.equipment_darkness_modifier, 8)
+		if(H.seer)
+			var/obj/effect/rune/R = locate() in H.loc
+			if(R && R.word1 == cultwords["see"] && R.word2 == cultwords["hell"] && R.word3 == cultwords["join"])
+				H.see_invisible = SEE_INVISIBLE_CULT
+		if(H.see_invisible != SEE_INVISIBLE_CULT && H.equipment_see_invis)
+			H.see_invisible = min(H.see_invisible, H.equipment_see_invis)
+
+	if(H.equipment_tint_total >= TINT_BLIND)
+		H.eye_blind = max(H.eye_blind, 1)
+
+	if(H.blind)
+		H.blind.layer = (H.eye_blind ? 18 : 0)
+
+	if(!H.client)//no client, no screen to update
+		return 1
+
+	if(config.welder_vision)
+		if(short_sighted || (H.equipment_tint_total >= TINT_HEAVY))
+			H.client.screen += global_hud.darkMask
+		else if((!H.equipment_prescription && (H.disabilities & NEARSIGHTED)) || H.equipment_tint_total == TINT_MODERATE)
+			H.client.screen += global_hud.vimpaired
+	if(H.eye_blurry)	H.client.screen += global_hud.blurry
+	if(H.druggy)		H.client.screen += global_hud.druggy
+
+	for(var/overlay in H.equipment_overlays)
+		H.client.screen |= overlay
+
+	return 1

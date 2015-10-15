@@ -65,8 +65,9 @@
 
 	if(iscarbon(M))
 		if(M.stat!=DEAD)
-			var/safety = M:eyecheck()
-			if(safety <= 0)
+			var/mob/living/carbon/C = M
+			var/safety = C.eyecheck()
+			if(safety < FLASH_PROTECTION_MODERATE)
 				var/flash_strength = 10
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
@@ -150,8 +151,8 @@
 				for(var/obj/item/weapon/cloaking_device/S in M)
 					S.active = 0
 					S.icon_state = "shield0"
-		var/safety = M:eyecheck()
-		if(!safety)
+		var/safety = M.eyecheck()
+		if(safety < FLASH_PROTECTION_MODERATE)
 			if(!M.blinded)
 				flick("flash", M.flash)
 
@@ -170,7 +171,7 @@
 			if(istype(loc, /mob/living/carbon))
 				var/mob/living/carbon/M = loc
 				var/safety = M.eyecheck()
-				if(safety <= 0)
+				if(safety < FLASH_PROTECTION_MODERATE)
 					M.Weaken(10)
 					flick("e_flash", M.flash)
 					for(var/mob/O in viewers(M, null))

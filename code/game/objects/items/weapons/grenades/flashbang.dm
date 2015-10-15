@@ -49,7 +49,7 @@
 					ear_safety += 1
 
 //Flashing everyone
-		if(eye_safety < 1)
+		if(eye_safety < FLASH_PROTECTION_MODERATE)
 			flick("e_flash", M.flash)
 			M.Stun(2)
 			M.Weaken(10)
