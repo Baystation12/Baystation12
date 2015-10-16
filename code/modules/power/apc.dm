@@ -627,6 +627,7 @@
 			// Malf AI, removes the APC from AI's hacked APCs list.
 			if(hacker && hacker.hacked_apcs && src in hacker.hacked_apcs)
 				hacker.hacked_apcs -= src
+				hacker = null
 			if (opened==2)
 				opened = 1
 			update_icon()
@@ -862,7 +863,7 @@
 				user << "<span class='danger'>\The [src] have AI control disabled!</span>"
 			return 0
 	else
-		if ((!in_range(src, user) || !istype(src.loc, /turf) || hacker)) // AI-hacked APCs cannot be controlled by other AIs, unlinked cyborgs or humans.
+		if (!in_range(src, user) || !istype(src.loc, /turf))
 			return 0
 	var/mob/living/carbon/human/H = user
 	if (istype(H))
