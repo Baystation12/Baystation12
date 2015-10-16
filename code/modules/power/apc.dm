@@ -625,7 +625,7 @@
 			qdel(W)
 			stat &= ~BROKEN
 			// Malf AI, removes the APC from AI's hacked APCs list.
-			if(hacker && hacker.hacked_apcs && src in hacker.hacked_apcs)
+			if(hacker && hacker.hacked_apcs && (src in hacker.hacked_apcs))
 				hacker.hacked_apcs -= src
 				hacker = null
 			if (opened==2)
