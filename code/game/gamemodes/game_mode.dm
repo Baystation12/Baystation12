@@ -21,7 +21,6 @@ var/global/list/additional_antag_types = list()
 
 	var/list/antag_tags = list()             // Core antag templates to spawn.
 	var/list/antag_templates                 // Extra antagonist types to include.
-	var/list/latejoin_templates = list()
 	var/round_autoantag = 0                  // Will this round attempt to periodically spawn more antagonists?
 	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count.
 	var/require_all_templates = 0            // Will only start if all templates are checked and can spawn.
@@ -183,6 +182,7 @@ var/global/list/additional_antag_types = list()
 
 /datum/game_mode/proc/pre_setup()
 	for(var/datum/antagonist/antag in antag_templates)
+		antag.update_current_antag_max()
 		antag.build_candidate_list() //compile a list of all eligible candidates
 
 		//antag roles that replace jobs need to be assigned before the job controller hands out jobs.
@@ -207,8 +207,6 @@ var/global/list/additional_antag_types = list()
 		if(!(antag.flags & ANTAG_OVERRIDE_JOB))
 			antag.attempt_spawn() //select antags to be spawned
 		antag.finalize_spawn() //actually spawn antags
-		if(antag.is_latejoin_template())
-			latejoin_templates |= antag
 
 	if(emergency_shuttle && auto_recall_shuttle)
 		emergency_shuttle.auto_recall = 1
@@ -221,7 +219,7 @@ var/global/list/additional_antag_types = list()
 
 /datum/game_mode/proc/fail_setup()
 	for(var/datum/antagonist/antag in antag_templates)
-		antag.reset()
+		antag.reset_antag_selection()
 
 /datum/game_mode/proc/announce_ert_disabled()
 	if(!ert_disabled)
@@ -491,6 +489,7 @@ var/global/list/additional_antag_types = list()
 			if(antag)
 				antag_templates |= antag
 
+	shuffle(antag_templates) //In the case of multiple antag types
 	newscaster_announcements = pick(newscaster_standard_feeds)
 
 /datum/game_mode/proc/check_victory()
