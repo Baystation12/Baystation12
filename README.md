@@ -3,6 +3,10 @@
 [Вебсайт](http://sovietstation.ru/) - [Код](https://github.com/AndyAdjutor/SovietBay) - [TeamSpeak 3](http://sovietstation.ru/index.php?showtopic=4969) - [Википедия](http://wiki.sovietstation.ru/)
 
 ---
+!ВНИМАНИЕ! 
+Перед редактированием карты обязательно используйте mapmerge! Расположена по следующему пути: "/tools/mapmerge". Инструкция на русском находится там же.
+!ВНИМАНИЕ!
+---
 
 ### КАК ПОЛУЧИТЬ КОД
 Простейший путь для получения master-ветки это скачивание его в .zip архиве.
