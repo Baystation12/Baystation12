@@ -364,16 +364,22 @@
 				internals.icon_state = "internal0"
 		return null
 
+	get_breath_from_environment(var/volume_needed=BREATH_VOLUME)
+		var/datum/gas_mixture/breath = ..()
+	
+		if(breath)
+			//exposure to extreme pressures can rupture lungs
+			var/check_pressure = breath.return_pressure()
+			if(check_pressure < ONE_ATMOSPHERE / 5 || check_pressure > ONE_ATMOSPHERE * 5)
+				if(is_lung_ruptured() && prob(5))
+					rupture_lung()
+		
+		return breath
 
 	handle_breath(datum/gas_mixture/breath)
 
 		if(status_flags & GODMODE)
 			return
-
-		//exposure to extreme pressures can rupture lungs
-		if(breath && (breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5))
-			if(!is_lung_ruptured() && prob(5))
-				rupture_lung()
 
 		//check if we actually need to process breath
 		if(!breath || (breath.total_moles == 0) || suiciding)
