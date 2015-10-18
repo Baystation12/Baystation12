@@ -612,7 +612,7 @@ proc/admin_notice(var/message, var/rights)
 			<A href='?src=\ref[src];secretsadmin=list_bombers'>Bombing List</A><BR>
 			<A href='?src=\ref[src];secretsadmin=check_antagonist'>Show current traitors and objectives</A><BR>
 			<A href='?src=\ref[src];secretsadmin=list_signalers'>Show last [length(lastsignalers)] signalers</A><BR>
-			<A href='?src=\ref[src];secretsadmin=list_lawchanges'>Show last [length(lawchanges)] law changes</A><BR>
+			<A href='?src=\ref[src];secretsadmin=list_lawchanges'>Show last [lawchanges.len] law change\s</A><BR>
 			<A href='?src=\ref[src];secretsadmin=showailaws'>Show AI Laws</A><BR>
 			<A href='?src=\ref[src];secretsadmin=showgm'>Show Game Mode</A><BR>
 			<A href='?src=\ref[src];secretsadmin=manifest'>Show Crew Manifest</A><BR>
@@ -1386,7 +1386,7 @@ proc/admin_notice(var/message, var/rights)
 
 	var/datum/antagonist/antag = all_antag_types[antag_type]
 	message_admins("[key_name(usr)] attempting to force latespawn with template [antag.id].")
-	antag.attempt_late_spawn()
+	antag.attempt_auto_spawn()
 
 /datum/admins/proc/force_mode_latespawn()
 	set category = "Admin"
@@ -1403,6 +1403,5 @@ proc/admin_notice(var/message, var/rights)
 		usr << "Mode has not started."
 		return
 
-	message_admins("[key_name(usr)] attempting to force mode latespawn.")
-	ticker.mode.next_spawn = 0
-	ticker.mode.try_latespawn()
+	message_admins("[key_name(usr)] attempting to force mode autospawn.")
+	ticker.mode.process_autoantag()

@@ -3,55 +3,39 @@
 /datum/game_mode/var/max_autotraitor_delay = 12000 // Approx 20 minutes.
 /datum/game_mode/var/process_count = 0
 
-/datum/game_mode/proc/get_usable_templates(var/list/supplied_templates)
-	var/list/usable_templates = list()
-	for(var/datum/antagonist/A in supplied_templates)
-		if(A.can_late_spawn())
-			message_admins("AUTO[uppertext(name)]: [A.id] selected for spawn attempt.")
-			usable_templates |= A
-	return usable_templates
-
 ///process()
 ///Called by the gameticker
 /datum/game_mode/proc/process()
-	// Slow this down a bit so latejoiners have a chance of being antags.
-	process_count++
-	if(process_count >= 10)
-		process_count = 0
-		try_latespawn()
+	if(round_autoantag && world.time < next_spawn && !emergency_shuttle.departed)
+		process_autoantag()
 
-/datum/game_mode/proc/latespawn(var/mob/living/carbon/human/character)
-	if(!character.mind)
-		return
-	try_latespawn(character.mind)
+//This can be overriden in case a game mode needs to do stuff when a player latejoins
+/datum/game_mode/proc/handle_latejoin(var/mob/living/carbon/human/character)
 	return 0
 
-/datum/game_mode/proc/try_latespawn(var/datum/mind/player, var/latejoin_only)
+/datum/game_mode/proc/process_autoantag()
+	message_admins("[uppertext(name)]: Attempting autospawn.")
 
-	if(emergency_shuttle.departed || !round_autoantag)
-		return
-
-	if(world.time < next_spawn)
-		return
-
-	message_admins("AUTO[uppertext(name)]: Attempting spawn.")
-
-	var/list/usable_templates
-	if(latejoin_only && latejoin_templates.len)
-		usable_templates = get_usable_templates(latejoin_templates)
-	else if (antag_templates && antag_templates.len)
-		usable_templates = get_usable_templates(antag_templates)
-	else
-		message_admins("AUTO[uppertext(name)]: Failed to find configured mode spawn templates, please disable auto-antagonists until one is added.")
+	var/list/usable_templates = list()
+	for(var/datum/antagonist/A in antag_templates)
+		if(A.can_late_spawn())
+			message_admins("[uppertext(name)]: [A.id] selected for spawn attempt.")
+			usable_templates |= A
+	
+	if(!usable_templates.len)
+		message_admins("[uppertext(name)]: Failed to find configured mode spawn templates, please re-enable auto-antagonists after one is added.")
 		round_autoantag = 0
 		return
-
+	
 	while(usable_templates.len)
 		var/datum/antagonist/spawn_antag = pick(usable_templates)
 		usable_templates -= spawn_antag
-		if(spawn_antag.attempt_late_spawn(player))
-			message_admins("AUTO[uppertext(name)]: Attempting to latespawn [spawn_antag.id]. ([spawn_antag.get_antag_count()]/[spawn_antag.cur_max])")
+		
+		if(spawn_antag.attempt_auto_spawn())
+			message_admins("[uppertext(name)]: Auto-added a new [spawn_antag.role_text].")
+			message_admins("There are now [spawn_antag.get_active_antag_count()]/[spawn_antag.cur_max] active [spawn_antag.role_text_plural].")
 			next_spawn = world.time + rand(min_autotraitor_delay, max_autotraitor_delay)
 			return
-	message_admins("AUTO[uppertext(name)]: Failed to proc a viable spawn template.")
-	next_spawn = world.time + rand(min_autotraitor_delay, max_autotraitor_delay)
+		
+	message_admins("[uppertext(name)]: Failed to proc a viable spawn template.")
+	next_spawn = world.time + min_autotraitor_delay //recheck again in the miniumum time

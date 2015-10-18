@@ -113,9 +113,6 @@
 		return ..()
 
 /obj/machinery/chemical_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null, var/force_open = 1)
-	if(stat & (BROKEN|NOPOWER)) return
-	if(user.stat || user.restrained()) return
-
 	// this is the data which will be sent to the ui
 	var/data[0]
 	data["amount"] = amount
@@ -148,8 +145,8 @@
 		ui.open()
 
 /obj/machinery/chemical_dispenser/Topic(href, href_list)
-	if(stat & (NOPOWER|BROKEN))
-		return 0 // don't update UIs attached to this object
+	if(..())
+		return 1
 
 	if(href_list["amount"])
 		amount = round(text2num(href_list["amount"]), 1) // round to nearest 1
@@ -171,9 +168,7 @@
 	return 1 // update UIs attached to this object
 
 /obj/machinery/chemical_dispenser/attack_ai(mob/user as mob)
-	src.attack_hand(user)
+	ui_interact(user)
 
 /obj/machinery/chemical_dispenser/attack_hand(mob/user as mob)
-	if(stat & BROKEN)
-		return
 	ui_interact(user)
