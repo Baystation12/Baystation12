@@ -807,13 +807,44 @@ Note that amputating the affected organ does in fact remove the infection from t
 			"\The [holder.legcuffed.name] falls off you.")
 		holder.drop_from_inventory(holder.legcuffed)
 
+// checks if all wounds on the organ are bandaged
+/obj/item/organ/external/proc/is_bandaged()
+	for(var/datum/wound/W in wounds)
+		if(W.internal) continue
+		if(!W.bandaged)
+			return 0
+	return 1
+
+// checks if all wounds on the organ are salved
+/obj/item/organ/external/proc/is_salved()
+	for(var/datum/wound/W in wounds)
+		if(W.internal) continue
+		if(!W.salved)
+			return 0
+	return 1
+
+// checks if all wounds on the organ are disinfected
+/obj/item/organ/external/proc/is_disinfected()
+	for(var/datum/wound/W in wounds)
+		if(W.internal) continue
+		if(!W.disinfected)
+			return 0
+	return 1
+
 /obj/item/organ/external/proc/bandage()
 	var/rval = 0
-	src.status &= ~ORGAN_BLEEDING
+	status &= ~ORGAN_BLEEDING
 	for(var/datum/wound/W in wounds)
 		if(W.internal) continue
 		rval |= !W.bandaged
 		W.bandaged = 1
+	return rval
+
+/obj/item/organ/external/proc/salve()
+	var/rval = 0
+	for(var/datum/wound/W in wounds)
+		rval |= !W.salved
+		W.salved = 1
 	return rval
 
 /obj/item/organ/external/proc/disinfect()
@@ -832,13 +863,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(W.internal) continue
 		rval |= !W.clamped
 		W.clamped = 1
-	return rval
-
-/obj/item/organ/external/proc/salve()
-	var/rval = 0
-	for(var/datum/wound/W in wounds)
-		rval |= !W.salved
-		W.salved = 1
 	return rval
 
 /obj/item/organ/external/proc/fracture()
