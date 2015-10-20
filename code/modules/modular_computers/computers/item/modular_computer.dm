@@ -270,6 +270,7 @@
 		var/mob/user = usr
 		if(hard_drive)
 			P = hard_drive.find_file_by_name(prog)
+			P.computer = src
 
 		if(!P || !istype(P)) // Program not found or it's not executable program.
 			user << "<span class='danger'>\The [src]'s screen shows \"I/O ERROR - Unable to run program\" warning.</span>"

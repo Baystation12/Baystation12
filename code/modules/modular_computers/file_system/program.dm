@@ -91,7 +91,6 @@
 // This is performed on program startup. May be overriden to add extra logic. Remember to include ..() call. Return 1 on success, 0 on failure.
 // When implementing new program based device, use this to run the program.
 /datum/computer_file/program/proc/run_program(var/mob/living/user)
-
 	if(can_run(user, 1))
 		if(nanomodule_path)
 			NM = new nanomodule_path(computer)	// Computer is passed here as it's (probably!) physical object. Some UI's perform get_turf() and passing program datum wouldn't go well with this.
