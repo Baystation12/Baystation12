@@ -32,12 +32,3 @@
 	if(!available_turfs.len)
 		available_turfs = start_turfs
 	return pick(available_turfs)
-
-/proc/turf_contains_dense_objects(var/turf/T)
-	return T.contains_dense_objects()
-
-/proc/not_turf_contains_dense_objects(var/turf/T)
-	return !turf_contains_dense_objects(T)
-
-/proc/is_station_turf(var/turf/T)
-	return T && isStationLevel(T.z)

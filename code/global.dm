@@ -71,6 +71,7 @@ var/list/tdomeobserve       = list()
 var/list/tdomeadmin         = list()
 var/list/prisonsecuritywarp = list() // Prison security goes to these.
 var/list/prisonwarped       = list() // List of players already warped.
+var/list/blobstart          = list()
 var/list/ninjastart         = list()
 
 var/list/cardinal    = list(NORTH, SOUTH, EAST, WEST)
