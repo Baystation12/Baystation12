@@ -112,7 +112,7 @@
 		slot_r_hand_str = "det_hat",
 		)
 	allowed = list(/obj/item/weapon/reagent_containers/food/snacks/candy_corn, /obj/item/weapon/pen)
-	armor = list(melee = 50, bullet = 5, laser = 25,energy = 10, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 100, bullet = 5, laser = 35, energy = 10, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
@@ -157,7 +157,7 @@
 	icon_state = "hos"
 	item_state = "hos"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
-	armor = list(melee = 65, bullet = 30, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 185, bullet = 45, laser = 100, energy = 10, bomb = 35, bio = 0, rad = 0)
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.6
 

@@ -133,7 +133,7 @@
 	armor_block = target.run_armor_check(affecting, "melee")
 
 	//force will counteract armour, but will never increase duration
-	armor_duration = smash_duration + min(0, force - target.getarmor(affecting, "melee") + 10)
+	armor_duration = smash_duration + min(0, force - target.getarmor_percent(affecting, "melee") + 10)
 
 	//Apply the damage!
 	target.apply_damage(force, BRUTE, affecting, armor_block, sharp=0)

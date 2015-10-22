@@ -4,7 +4,7 @@
 	icon_state = "hardhat0_yellow"
 	brightness_on = 4 //luminosity when on
 	light_overlay = "hardhat_light"
-	armor = list(melee = 30, bullet = 5, laser = 20,energy = 10, bomb = 20, bio = 10, rad = 20)
+	armor = list(melee = 45, bullet = 5, laser = 25, energy = 10, bomb = 25, bio = 10, rad = 20)
 	flags_inv = 0
 	siemens_coefficient = 0.9
 

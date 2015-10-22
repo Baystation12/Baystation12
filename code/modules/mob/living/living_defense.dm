@@ -1,4 +1,13 @@
 
+
+//converts a linear armour level into a protection percentage
+/proc/armor_percent(var/armor_level)
+	return 100 - 100/(armor_level/100 + 1)
+
+//converts a percentage into a linear armour level
+/proc/get_armorlevel(var/protection_perc)
+	return 100*(100/(100-protection_perc) - 1)
+
 /*
 	run_armor_check(a,b)
 	args
@@ -14,7 +23,7 @@
 	if(armour_pen >= 100)
 		return 0 //might as well just skip the processing
 
-	var/armor = getarmor(def_zone, attack_flag)
+	var/armor = getarmor_percent(def_zone, attack_flag)
 	var/absorb = 0
 	
 	//Roll armour
@@ -48,6 +57,12 @@
 /mob/living/proc/getarmor(var/def_zone, var/type)
 	return 0
 
+//returns the percent protection (0-100) against a type of damage
+/mob/living/proc/getarmor_percent(var/def_zone, var/type)
+	var/armor = getarmor(def_zone, type)
+	if(type == "rad" || type == "bio")
+		return armor //some armour types are already specified as a percentage
+	return armor_percent(armor)
 
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
 
@@ -78,7 +93,7 @@
 	var/absorb = run_armor_check(def_zone, P.check_armour, P.armor_penetration)
 	var/proj_sharp = is_sharp(P)
 	var/proj_edge = has_edge(P)
-	if ((proj_sharp || proj_edge) && prob(getarmor(def_zone, P.check_armour)))
+	if ((proj_sharp || proj_edge) && prob(getarmor_percent(def_zone, P.check_armour)))
 		proj_sharp = 0
 		proj_edge = 0
 

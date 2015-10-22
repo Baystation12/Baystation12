@@ -8,7 +8,7 @@
 		)
 	item_flags = THICKMATERIAL
 	body_parts_covered = HEAD
-	armor = list(melee = 50, bullet = 15, laser = 50,energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 100, bullet = 20, laser = 100, energy = 10, bomb = 35, bio = 0, rad = 0)
 	flags_inv = HIDEEARS|HIDEEYES
 	cold_protection = HEAD
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
@@ -22,7 +22,7 @@
 	desc = "It's a helmet specifically designed to protect against close range attacks."
 	icon_state = "riot"
 	body_parts_covered = HEAD|FACE|EYES //face shield
-	armor = list(melee = 82, bullet = 15, laser = 5,energy = 5, bomb = 5, bio = 2, rad = 0)
+	armor = list(melee = 450, bullet = 20, laser = 5, energy = 5, bomb = 5, bio = 2, rad = 0)
 	flags_inv = HIDEEARS
 	siemens_coefficient = 0.7
 
@@ -30,7 +30,7 @@
 	name = "\improper SWAT helmet"
 	desc = "They're often used by highly trained Swat Members."
 	icon_state = "swat"
-	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
+	armor = list(melee = 400, bullet = 150, laser = 100, energy = 35, bomb = 100, bio = 10, rad = 0)
 	flags_inv = HIDEEARS|HIDEEYES
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
@@ -40,7 +40,7 @@
 	name = "\improper Thunderdome helmet"
 	desc = "<i>'Let the battle commence!'</i>"
 	icon_state = "thunderdome"
-	armor = list(melee = 80, bullet = 60, laser = 50,energy = 10, bomb = 25, bio = 10, rad = 0)
+	armor = list(melee = 400, bullet = 150, laser = 100, energy = 10, bomb = 35, bio = 10, rad = 0)
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 1
@@ -62,7 +62,7 @@
 		"Unathi" = 'icons/mob/species/unathi/helmet.dmi'
 		)
 
-	armor = list(melee = 62, bullet = 50, laser = 50,energy = 35, bomb = 10, bio = 2, rad = 0)
+	armor = list(melee = 150, bullet = 100, laser = 100, energy = 55, bomb = 10, bio = 2, rad = 0)
 	flags_inv = HIDEEARS
 	siemens_coefficient = 0.7
 
@@ -70,7 +70,7 @@
 	name = "Augment Array"
 	desc = "A helmet with optical and cranial augments coupled to it."
 	icon_state = "v62"
-	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
+	armor = list(melee = 400, bullet = 150, laser = 100, energy = 35, bomb = 100, bio = 10, rad = 0)
 	flags_inv = HIDEEARS|HIDEEYES
 	body_parts_covered = HEAD|EYES
 	cold_protection = HEAD
@@ -86,7 +86,7 @@
 		slot_l_hand_str = "syndicate-helm-green",
 		slot_r_hand_str = "syndicate-helm-green",
 		)
-	armor = list(melee = 62, bullet = 50, laser = 50,energy = 35, bomb = 10, bio = 2, rad = 0)
+	armor = list(melee = 150, bullet = 100, laser = 100, energy = 55, bomb = 10, bio = 2, rad = 0)
 
 //Commander
 /obj/item/clothing/head/helmet/ert/command
