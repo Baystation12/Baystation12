@@ -17,34 +17,21 @@ var/bomb_set
 	var/yes_code = 0.0
 	var/safety = 1.0
 	var/obj/item/weapon/disk/nuclear/auth = null
-	var/list/wires = list()
-	var/light_wire
-	var/safety_wire
-	var/timing_wire
 	var/removal_stage = 0 // 0 is no removal, 1 is covers removed, 2 is covers open,
 	                      // 3 is sealant open, 4 is unwrenched, 5 is removed from bolts.
 	use_power = 0
-
+	var/datum/wires/nuclearbomb/wires
 
 
 /obj/machinery/nuclearbomb/New()
 	..()
 	r_code = "[rand(10000, 99999.0)]"//Creates a random code upon object spawn.
+	wires = new(src)
 
-	src.wires["Red"] = 0
-	src.wires["Blue"] = 0
-	src.wires["Green"] = 0
-	src.wires["Marigold"] = 0
-	src.wires["Fuschia"] = 0
-	src.wires["Black"] = 0
-	src.wires["Pearl"] = 0
-	var/list/w = list("Red","Blue","Green","Marigold","Black","Fuschia","Pearl")
-	src.light_wire = pick(w)
-	w -= src.light_wire
-	src.timing_wire = pick(w)
-	w -= src.timing_wire
-	src.safety_wire = pick(w)
-	w -= src.safety_wire
+/obj/machinery/nuclearbomb/Destroy()
+	qdel(wires)
+	wires = null
+	return ..()
 
 /obj/machinery/nuclearbomb/process()
 	if (src.timing)
@@ -58,7 +45,6 @@ var/bomb_set
 	return
 
 /obj/machinery/nuclearbomb/attackby(obj/item/weapon/O as obj, mob/user as mob)
-
 	if (istype(O, /obj/item/weapon/screwdriver))
 		src.add_fingerprint(user)
 		if (src.auth)
@@ -83,7 +69,7 @@ var/bomb_set
 		return
 	if (istype(O, /obj/item/weapon/wirecutters) || istype(O, /obj/item/device/multitool))
 		if (src.opened == 1)
-			nukehack_win(user)
+			wires.Interact(user)
 		return
 
 	if (src.extended)
@@ -202,17 +188,6 @@ var/bomb_set
 		src.extended = 1
 	return
 
-obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
-	var/dat as text
-	dat += "<TT><B>Nuclear Fission Explosive</B><BR>\nNuclear Device Wires:</A><HR>"
-	for(var/wire in src.wires)
-		dat += text("[wire] Wire: <A href='?src=\ref[src];wire=[wire];act=wire'>[src.wires[wire] ? "Mend" : "Cut"]</A> <A href='?src=\ref[src];wire=[wire];act=pulse'>Pulse</A><BR>")
-	dat += text("<HR>The device is [src.timing ? "shaking!" : "still"]<BR>")
-	dat += text("The device is [src.safety ? "quiet" : "whirring"].<BR>")
-	dat += text("The lights are [src.lighthack ? "static" : "functional"].<BR>")
-	user << browse("<HTML><HEAD><TITLE>Bomb Defusion</TITLE></HEAD><BODY>[dat]</BODY></HTML>","window=nukebomb_hack")
-	onclose(user, "nukebomb_hack")
-
 /obj/machinery/nuclearbomb/verb/make_deployable()
 	set category = "Object"
 	set name = "Make Deployable"
@@ -239,47 +214,6 @@ obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
 		return
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
 		usr.set_machine(src)
-		if(href_list["act"])
-			var/temp_wire = href_list["wire"]
-			if(href_list["act"] == "pulse")
-				if (!istype(usr.get_active_hand(), /obj/item/device/multitool))
-					usr << "You need a multitool!"
-				else
-					if(src.wires[temp_wire])
-						usr << "You can't pulse a cut wire."
-					else
-						if(src.light_wire == temp_wire)
-							src.lighthack = !src.lighthack
-							spawn(100) src.lighthack = !src.lighthack
-						if(src.timing_wire == temp_wire)
-							if(src.timing)
-								explode()
-						if(src.safety_wire == temp_wire)
-							src.safety = !src.safety
-							spawn(100) src.safety = !src.safety
-							if(src.safety == 1)
-								visible_message("<span class='notice'>The [src] quiets down.</span>")
-								if(!src.lighthack)
-									if (src.icon_state == "nuclearbomb2")
-										src.icon_state = "nuclearbomb1"
-							else
-								visible_message("<span class='notice'>The [src] emits a quiet whirling noise!</span>")
-			if(href_list["act"] == "wire")
-				if (!istype(usr.get_active_hand(), /obj/item/weapon/wirecutters))
-					usr << "You need wirecutters!"
-				else
-					wires[temp_wire] = !wires[temp_wire]
-					if(src.safety_wire == temp_wire)
-						if(src.timing)
-							explode()
-					if(src.timing_wire == temp_wire)
-						if(!src.lighthack)
-							if (src.icon_state == "nuclearbomb2")
-								src.icon_state = "nuclearbomb1"
-						src.timing = 0
-						bomb_set = 0
-					if(src.light_wire == temp_wire)
-						src.lighthack = !src.lighthack
 
 		if (href_list["auth"])
 			if (src.auth)
