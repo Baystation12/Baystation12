@@ -34,10 +34,8 @@
 		else
 			return ..()
 
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(!H.can_eat(src))
-			return
+	if(!M.can_eat(src))
+		return
 
 	if (reagents.total_volume > 0)
 		reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
