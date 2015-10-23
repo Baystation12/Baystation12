@@ -142,8 +142,8 @@
 /obj/item/projectile/beam/stun
 	name = "stun beam"
 	icon_state = "stun"
+	check_armour = "energy"
 	nodamage = 1
-	taser_effect = 1
 	agony = 40
 	damage_type = HALLOSS
 	

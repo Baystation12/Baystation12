@@ -12,7 +12,6 @@
 	w_class = 3
 	origin_tech = list(TECH_COMBAT = 2)
 	attack_verb = list("beaten")
-	var/stunforce = 0
 	var/agonyforce = 60
 	var/status = 0		//whether the thing is on or not
 	var/obj/item/weapon/cell/bcell = null
@@ -115,7 +114,6 @@
 		return
 
 	var/agony = agonyforce
-	var/stun = stunforce
 	var/mob/living/L = M
 
 	var/target_zone = check_zone(user.zone_sel.selecting)
@@ -123,7 +121,6 @@
 		if (!..())	//item/attack() does it's own messaging and logs
 			return 0	// item/attack() will return 1 if they hit, 0 if they missed.
 		agony *= 0.5	//whacking someone causes a much poorer contact than prodding them.
-		stun *= 0.5
 		//we can't really extract the actual hit zone from ..(), unfortunately. Just act like they attacked the area they intended to.
 	else
 		//copied from human_defense.dm - human defence code should really be refactored some time.
@@ -154,7 +151,7 @@
 				L.visible_message("<span class='danger'>[L] has been prodded with [src] by [user]!</span>")
 
 	//stun effects
-	L.stun_effect_act(stun, agony, target_zone, src)
+	L.stun_effect_act(agony, target_zone, src)
 
 	playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 	msg_admin_attack("[key_name(user)] stunned [key_name(L)] with the [src].")
@@ -191,7 +188,6 @@
 	item_state = "prod"
 	force = 3
 	throwforce = 5
-	stunforce = 0
 	agonyforce = 60	//same force as a stunbaton, but uses way more charge.
 	hitcost = 2500
 	attack_verb = list("poked")

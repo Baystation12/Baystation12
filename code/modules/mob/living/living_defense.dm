@@ -1,4 +1,4 @@
-
+var/list/armor_caps = list(melee = 95, bullet = 95, laser = 95, energy = 95, bomb = 90, bio = 100, rad = 100)
 /*
 	run_armor_check(a,b)
 	args
@@ -10,38 +10,14 @@
 	1 - halfblock
 	2 - fullblock
 */
-/mob/living/proc/run_armor_check(var/def_zone = null, var/attack_flag = "melee", var/armour_pen = 0, var/absorb_text = null, var/soften_text = null)
+/mob/living/proc/run_armor_check(var/def_zone = null, var/attack_flag = "melee", var/armour_pen = 0)
 	if(armour_pen >= 100)
 		return 0 //might as well just skip the processing
 
 	var/armor = getarmor(def_zone, attack_flag)
-	var/absorb = 0
-	
-	//Roll armour
-	if(prob(armor))
-		absorb += 1
-	if(prob(armor))
-		absorb += 1
-	
-	//Roll penetration
-	if(prob(armour_pen))
-		absorb -= 1
-	if(prob(armour_pen))
-		absorb -= 1
-	
-	if(absorb >= 2)
-		if(absorb_text)
-			show_message("[absorb_text]")
-		else
-			show_message("<span class='warning'>Your armor absorbs the blow!</span>")
-		return 2
-	if(absorb == 1)
-		if(absorb_text)
-			show_message("[soften_text]",4)
-		else
-			show_message("<span class='warning'>Your armor softens the blow!</span>")
-		return 1
-	return 0
+	if(armour_pen)
+		armor *= 1 - armour_pen / 100
+	return min(armor, armor_caps[attack_flag])
 
 
 //if null is passed for def_zone, then this should return something appropriate for all zones (e.g. area effect damage)
@@ -50,6 +26,7 @@
 
 
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
+	var/protected = run_armor_check(def_zone, P.check_armour, P.armor_penetration) // Armor
 
 	//Being hit while using a cloaking device
 	var/obj/item/weapon/cloaking_device/C = locate((/obj/item/weapon/cloaking_device) in src)
@@ -67,35 +44,16 @@
 			src.visible_message("\red [src] triggers their deadman's switch!")
 			signaler.signal()
 
-	//Stun Beams
-	if(P.taser_effect)
-		stun_effect_act(0, P.agony, def_zone, P)
-		src <<"\red You have been hit by [P]!"
-		qdel(P)
-		return
-
-	//Armor
-	var/absorb = run_armor_check(def_zone, P.check_armour, P.armor_penetration)
-	var/proj_sharp = is_sharp(P)
-	var/proj_edge = has_edge(P)
-	if ((proj_sharp || proj_edge) && prob(getarmor(def_zone, P.check_armour)))
-		proj_sharp = 0
-		proj_edge = 0
-
 	if(!P.nodamage)
-		apply_damage(P.damage, P.damage_type, def_zone, absorb, 0, P, sharp=proj_sharp, edge=proj_edge)
-	P.on_hit(src, absorb, def_zone)
-	return absorb
+		var/proj_sharp = is_sharp(P) && !prob(protected)
+		var/proj_edge = has_edge(P) && !prob(protected)
+		apply_damage(P.damage, P.damage_type, def_zone, protected, P, proj_sharp, proj_edge)
+	P.on_hit(src, protected, def_zone)
+	return
 
 //Handles the effects of "stun" weapons
-/mob/living/proc/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone, var/used_weapon=null)
+/mob/living/proc/stun_effect_act(var/agony_amount, var/def_zone, var/used_weapon = null)
 	flash_pain()
-
-	if (stun_amount)
-		Stun(stun_amount)
-		Weaken(stun_amount)
-		apply_effect(STUTTER, stun_amount)
-		apply_effect(EYE_BLUR, stun_amount)
 
 	if (agony_amount)
 		apply_damage(agony_amount, HALLOSS, def_zone, 0, used_weapon)
@@ -103,7 +61,7 @@
 		apply_effect(EYE_BLUR, agony_amount/10)
 
 /mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
-	  return 0 //only carbon liveforms have this proc
+	return 0 //only carbon liveforms have this proc
 
 /mob/living/emp_act(severity)
 	var/list/L = src.get_contents()
@@ -130,8 +88,7 @@
 		src.visible_message("\red [src] has been hit by [O].")
 		var/armor = run_armor_check(null, "melee")
 
-		if(armor < 2)
-			apply_damage(throw_damage, dtype, null, armor, is_sharp(O), has_edge(O), O)
+		apply_damage(throw_damage, dtype, null, armor, is_sharp(O), has_edge(O), O)
 
 		O.throwing = 0		//it hit, so stop moving
 

@@ -268,7 +268,7 @@
 		if(!C.lying || C.handcuffed || arrest_type)
 			cuff = 0
 		if(!cuff)
-			C.stun_effect_act(0, 60, null)
+			C.stun_effect_act(60, null)
 			playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 			do_attack_animation(C)
 			is_attacking = 1

@@ -33,7 +33,7 @@
 
 	if (M.stuttering < 5)
 		M.stuttering = 5
-	M.stun_effect_act(0, 70, check_zone(user.zone_sel.selecting), src)
+	M.stun_effect_act(70, check_zone(user.zone_sel.selecting), src)
 	user.visible_message("<span class='danger'>\The [user] has prodded \the [M] with \a [src]!</span>")
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
