@@ -498,6 +498,12 @@ proc/is_blind(A)
 /mob/proc/is_client_active(var/active = 1)
 	return client && client.inactivity < active MINUTES
 
+/mob/proc/can_eat()
+	return 1
+
+/mob/proc/can_force_feed()
+	return 1
+
 #define SAFE_PERP -50
 /mob/living/proc/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
 	if(stat == DEAD)

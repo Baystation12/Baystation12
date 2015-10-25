@@ -68,36 +68,23 @@
 				M << "<span class='danger'>You cannot force any more of [src] to go down your throat.</span>"
 				return 0
 		else
-			if(istype(M,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
-				if(!H.check_has_mouth())
-					user << "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!"
-					return
-				var/obj/item/blocked = H.check_mouth_coverage()
-				if(blocked)
-					user << "<span class='warning'>\The [blocked] is in the way!</span>"
-					return
-
-			if(!istype(M, /mob/living/carbon/slime))		//If you're feeding it to someone else.
-
-				if (fullness <= (550 * (1 + M.overeatduration / 1000)))
-					user.visible_message("<span class='danger'>[user] attempts to feed [M] [src].</span>")
-				else
-					user.visible_message("<span class='danger'>[user] cannot force anymore of [src] down [M]'s throat.</span>")
-					return 0
-
-				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-				if(!do_mob(user, M)) return
-
-				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
-				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [src.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
-				msg_admin_attack("[key_name(user)] fed [key_name(M)] with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)])")
-
-				user.visible_message("<span class='danger'>[user] feeds [M] [src].</span>")
-
-			else
-				user << "This creature does not seem to have a mouth!"
+			if(!M.can_force_feed(user, src))
 				return
+
+			if (fullness <= (550 * (1 + M.overeatduration / 1000)))
+				user.visible_message("<span class='danger'>[user] attempts to feed [M] [src].</span>")
+			else
+				user.visible_message("<span class='danger'>[user] cannot force anymore of [src] down [M]'s throat.</span>")
+				return 0
+
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+			if(!do_mob(user, M)) return
+
+			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [src.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
+			msg_admin_attack("[key_name(user)] fed [key_name(M)] with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)])")
+
+			user.visible_message("<span class='danger'>[user] feeds [M] [src].</span>")
 
 		if(reagents)								//Handle ingestion of the reagent.
 			playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
