@@ -21,16 +21,8 @@
 		//TODO: replace with standard_feed_mob() call.
 		
 		if(M == user)
-
-			if(istype(M, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
-				if(!H.check_has_mouth())
-					user << "Where do you intend to put \the [src]? You don't have a mouth!"
-					return
-				var/obj/item/blocked = H.check_mouth_coverage()
-				if(blocked)
-					user << "<span class='warning'>\The [blocked] is in the way!</span>"
-					return
+			if(!M.can_eat(src))
+				return
 
 			M << "<span class='notice'>You swallow \the [src].</span>"
 			M.drop_from_inventory(src) //icon update
@@ -40,14 +32,7 @@
 			return 1
 
 		else if(istype(M, /mob/living/carbon/human))
-
-			var/mob/living/carbon/human/H = M
-			if(!H.check_has_mouth())
-				user << "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!"
-				return
-			var/obj/item/blocked = H.check_mouth_coverage()
-			if(blocked)
-				user << "<span class='warning'>\The [blocked] is in the way!</span>"
+			if(!M.can_force_feed(user, src))
 				return
 
 			user.visible_message("<span class='warning'>[user] attempts to force [M] to swallow \the [src].</span>")
