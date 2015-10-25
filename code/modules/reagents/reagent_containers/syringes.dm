@@ -176,6 +176,9 @@
 					else
 						user.visible_message("<span class='warning'>[user] begins hunting for an injection port on [target]'s suit!</span>")
 
+					user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+					user.do_attack_animation(target)
+
 					if(!do_mob(user, target, injtime))
 						return
 

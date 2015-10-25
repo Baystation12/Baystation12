@@ -61,7 +61,7 @@
 	qdel(src)
 
 /obj/item/weapon/a_gift/attack_self(mob/M as mob)
-	var/gift_type = pick(/obj/item/weapon/sord,
+	var/gift_type = pick(
 		/obj/item/weapon/storage/wallet,
 		/obj/item/weapon/storage/photo_album,
 		/obj/item/weapon/storage/box/snappops,
@@ -80,7 +80,6 @@
 		/obj/item/weapon/bikehorn,
 		/obj/item/weapon/beach_ball,
 		/obj/item/weapon/beach_ball/holoball,
-		/obj/item/weapon/banhammer,
 		/obj/item/toy/balloon,
 		/obj/item/toy/blink,
 		/obj/item/toy/crossbow,

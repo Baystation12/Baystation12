@@ -72,6 +72,9 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool/attack(mob/M as mob, mob/user as mob)
 	if (prob(5) && istype(M,/mob/living))
 		user.visible_message("<span class='danger'>[user] breaks [src] over [M]'s back!</span>")
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(M)
+		
 		user.remove_from_mob(src)
 		dismantle()
 		qdel(src)
