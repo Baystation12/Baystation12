@@ -270,6 +270,7 @@
 	heat_level_2 = 1000
 	heat_level_3 = 2000
 
+	body_temperature = null
 	passive_temp_gain = 10  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | NO_POISON
