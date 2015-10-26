@@ -970,8 +970,8 @@
 				qdel(a)
 
 			if(halloss > 100)
-				src << "<span class='notice'>You're in too much pain to keep going...</span>"
-				src.visible_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.")
+				src << "<span class='warning'>[species.halloss_message_self]</span>"
+				src.visible_message("<B>[src]</B> [species.halloss_message].")
 				Paralyse(10)
 				setHalLoss(99)
 

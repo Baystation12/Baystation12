@@ -258,6 +258,8 @@
 	show_ssd = "flashing a 'system offline' glyph on their monitor"
 	death_message = "gives one shrill beep before falling lifeless."
 	knockout_message = "encounters a hardware fault and suddenly reboots!"
+	halloss_message = "encounters a hardware fault and suddenly reboots."
+	halloss_message_self = "ERROR: Unrecoverable machine check exception.<BR>System halted, rebooting..."
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
