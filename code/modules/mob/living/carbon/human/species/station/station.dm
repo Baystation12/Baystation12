@@ -260,13 +260,13 @@
 	knockout_message = "encounters a hardware fault and suddenly reboots!"
 
 	warning_low_pressure = 50
-	hazard_low_pressure = 0
+	hazard_low_pressure = -1
 
 	cold_level_1 = 50
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	heat_level_1 = 500		// Gives them about 25 seconds in space before taking damage
+	heat_level_1 = 398.15		// Start taking damage above ~125 Degrees C
 	heat_level_2 = 1000
 	heat_level_3 = 2000
 
@@ -299,6 +299,12 @@
 		"r_hand" = list("path" = /obj/item/organ/external/hand/right/ipc),
 		"l_foot" = list("path" = /obj/item/organ/external/foot/ipc),
 		"r_foot" = list("path" = /obj/item/organ/external/foot/right/ipc)
+		)
+
+
+	heat_discomfort_level = 373.15
+	heat_discomfort_strings = list(
+		"Your CPU temperature probes warn you that you are approaching critical heat levels!"
 		)
 
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)
