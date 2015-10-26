@@ -188,7 +188,11 @@
 
 	//Sanitize
 	metadata		= sanitize_text(metadata, initial(metadata))
-	real_name		= sanitizeName(real_name)
+
+	if(species == "Machine")
+		real_name		= sanitizeName(real_name,,1)
+	else
+		real_name		= sanitizeName(real_name)
 
 	if(isnull(species) || !(species in playable_species))
 		species = "Human"
