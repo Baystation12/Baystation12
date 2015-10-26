@@ -103,6 +103,11 @@
 			R.adjustBruteLoss(-weld_rate)
 		if(wire_rate && R.getFireLoss() && cell.checked_use(wire_power_use * wire_rate * CELLRATE))
 			R.adjustFireLoss(-wire_rate)
+	else if(istype(occupant, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = occupant
+		if(!isnull(H.internal_organs_by_name["cell"] && H.nutrition < 450))
+			H.nutrition = min(H.nutrition+10, 450)
+
 
 /obj/machinery/recharge_station/examine(mob/user)
 	..(user)
@@ -200,22 +205,36 @@
 	go_in(R)
 
 /obj/machinery/recharge_station/proc/go_in(var/mob/living/silicon/robot/R)
-	if(!istype(R))
-		return
-	if(occupant)
-		return
 
-	if(R.incapacitated())
-		return
-	if(!R.cell)
-		return
+	if(istype(R, /mob/living/silicon/robot))
+		if(!istype(R))
+			return
+		if(occupant)
+			return
 
-	add_fingerprint(R)
-	R.reset_view(src)
-	R.forceMove(src)
-	occupant = R
-	update_icon()
-	return 1
+		if(R.incapacitated())
+			return
+		if(!R.cell)
+			return
+
+		add_fingerprint(R)
+		R.reset_view(src)
+		R.forceMove(src)
+		occupant = R
+		update_icon()
+		return 1
+
+	else if(istype(R,  /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = R
+		if(!isnull(H.internal_organs_by_name["cell"]))
+			add_fingerprint(H)
+			H.reset_view(src)
+			H.forceMove(src)
+			occupant = H
+			update_icon()
+			return 1
+	else
+		return
 
 /obj/machinery/recharge_station/proc/go_out()
 	if(!occupant)
