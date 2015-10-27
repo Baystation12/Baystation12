@@ -299,7 +299,7 @@
 			M.eye_blind = max(M.eye_blind, 10)
 
 	if(mouth_covered)
-		if(!message) 
+		if(!message)
 			message = "<span class='warning'>Your [face_protection] protects you from the pepperspray!</span>"
 	else if(!no_pain)
 		message = "<span class='danger'>Your face and throat burn!</span>"
@@ -311,7 +311,7 @@
 /datum/reagent/condensedcapsaicin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.species && (H.species.flags & (NO_PAIN | IS_SYNTHETIC)))
+		if(H.species && (H.species.flags & NO_PAIN))
 			return
 	if(dose == metabolism)
 		M << "<span class='danger'>You feel like your insides are burning!</span>"
