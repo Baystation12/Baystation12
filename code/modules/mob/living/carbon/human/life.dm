@@ -382,7 +382,7 @@
 		oxygen_alert = max(oxygen_alert, 1)
 		return 0
 
-	var/safe_pressure_min = 16 // Minimum safe partial pressure of breathable gas in kPa
+	var/safe_pressure_min = species.breath_pressure // Minimum safe partial pressure of breathable gas in kPa
 
 	// Lung damage increases the minimum safe pressure.
 	if(species.has_organ["lungs"])
@@ -974,11 +974,11 @@
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-		if(halloss > 100)
-			src << "<span class='notice'>You're in too much pain to keep going...</span>"
-			src.visible_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.")
-			Paralyse(10)
-			setHalLoss(99)
+			if(halloss > 100)
+				src << "<span class='warning'>[species.halloss_message_self]</span>"
+				src.visible_message("<B>[src]</B> [species.halloss_message].")
+				Paralyse(10)
+				setHalLoss(99)
 
 		if(paralysis || sleeping)
 			blinded = 1
