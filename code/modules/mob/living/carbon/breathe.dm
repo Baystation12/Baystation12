@@ -7,7 +7,7 @@
 
 /mob/living/carbon/proc/breathe()
 	//if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
-	if(species && (species.flags & NO_BREATHE)) return
+	if(species && (species.flags & NO_BREATHE) || does_not_breathe) return
 
 	var/datum/gas_mixture/breath = null
 

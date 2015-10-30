@@ -1,6 +1,7 @@
 /datum/power/changeling/fleshmend
 	name = "Fleshmend"
 	desc = "Begins a slow rengeration of our form.  Does not effect stuns or chemicals."
+	helptext = "Can be used while unconscious."
 	genomecost = 1
 	verbpath = /mob/proc/changeling_fleshmend
 

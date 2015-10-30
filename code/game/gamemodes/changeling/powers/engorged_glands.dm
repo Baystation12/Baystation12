@@ -8,6 +8,6 @@
 
 //Increases macimum chemical storage
 /mob/proc/changeling_engorgedglands()
-	src.mind.changeling.chem_storage += 25
+	src.mind.changeling.chem_storage += 30
 	src.mind.changeling.chem_recharge_rate *= 2
 	return 1

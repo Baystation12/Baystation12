@@ -34,6 +34,6 @@
 	feedback_add_details("changeling_powers","CR")
 	C.stat = CONSCIOUS
 	src.verbs -= /mob/proc/changeling_revive
-	// re-add out changeling powers
+	// re-add our changeling powers
 	C.make_changeling()
 	return 1

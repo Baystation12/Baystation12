@@ -70,10 +70,11 @@
 	name = "chitinous mass"
 	desc = "A tough, hard covering of black chitin."
 	icon_state = "lingarmor"
-	item_state = "lingarmor"
+//	item_state = "lingarmor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	armor = list(melee = 85, bullet = 70, laser = 70, energy = 70, bomb = 70, bio = 0, rad = 0) //It costs 3 points, so it should be very protective.
 	siemens_coefficient = 0.1
+	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	slowdown = 3
 
 /obj/item/clothing/suit/space/changeling/armored/New()
@@ -90,8 +91,29 @@
 	name = "chitinous mass"
 	desc = "A tough, hard covering of black chitin with transparent chitin in front."
 	icon_state = "lingarmorhelmet"
-	item_state = "lingarmorhelmet"
+//	item_state = "lingarmorhelmet"
 	armor = list(melee = 85, bullet = 70, laser = 70,energy = 70, bomb = 70, bio = 0, rad = 0)
+	siemens_coefficient = 0.1
+	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/head/helmet/space/changeling/armored/dropped()
 	qdel(src)
+
+/obj/item/clothing/gloves/combat/changeling //Combined insulated/fireproof gloves
+	name = "chitinous gauntlets"
+	desc = "Very resilient gauntlets made out of black chitin.  It looks very durable, and can probably resist electrical shock in addition to the elements."
+	icon_state = "lingarmorgloves"
+	armor = list(melee = 85, bullet = 70, laser = 70,energy = 70, bomb = 70, bio = 0, rad = 0) //No idea if glove armor gets checked
+	siemens_coefficient = 0
+
+/obj/item/clothing/shoes/combat/changeling //Noslips
+	desc = "chitinous boots"
+	name = "Footwear made out of a hard, black chitinous material.  The bottoms of these appear to have spikes that can protrude or extract itself into and out \
+	of the floor at will, granting the wearer stability."
+	icon_state = "lingboots"
+	armor = list(melee = 85, bullet = 70, laser = 70,energy = 70, bomb = 70, bio = 0, rad = 0)
+	siemens_coefficient = 0.1
+	cold_protection = FEET
+	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
+	heat_protection = FEET
+	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
