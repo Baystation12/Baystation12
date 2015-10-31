@@ -735,6 +735,7 @@
 #include "code\game\objects\items\weapons\storage\fancy.dm"
 #include "code\game\objects\items\weapons\storage\firstaid.dm"
 #include "code\game\objects\items\weapons\storage\internal.dm"
+#include "code\game\objects\items\weapons\storage\laundry_basket.dm"
 #include "code\game\objects\items\weapons\storage\lockbox.dm"
 #include "code\game\objects\items\weapons\storage\misc.dm"
 #include "code\game\objects\items\weapons\storage\secure.dm"
