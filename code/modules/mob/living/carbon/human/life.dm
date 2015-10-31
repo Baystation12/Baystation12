@@ -337,6 +337,17 @@
 			internals.icon_state = "internal0"
 	return null
 
+/mob/living/carbon/human/get_breath_from_environment(var/volume_needed=BREATH_VOLUME)
+	var/datum/gas_mixture/breath = ..()
+
+	if(breath)
+		//exposure to extreme pressures can rupture lungs
+		var/check_pressure = breath.return_pressure()
+		if(check_pressure < ONE_ATMOSPHERE / 5 || check_pressure > ONE_ATMOSPHERE * 5)
+			if(is_lung_ruptured() && prob(5))
+				rupture_lung()
+
+	return breath
 
 /mob/living/carbon/human/handle_breath(datum/gas_mixture/breath)
 	if(status_flags & GODMODE)
