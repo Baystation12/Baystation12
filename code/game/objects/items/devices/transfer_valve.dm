@@ -99,17 +99,9 @@
 	if (src.loc != usr)
 		return 0
 	if(tank_one && href_list["tankone"])
-		split_gases()
-		valve_open = 0
-		tank_one.loc = get_turf(src)
-		tank_one = null
-		update_icon()
+		remove_tank(tank_one)
 	else if(tank_two && href_list["tanktwo"])
-		split_gases()
-		valve_open = 0
-		tank_two.loc = get_turf(src)
-		tank_two = null
-		update_icon()
+		remove_tank(tank_two)
 	else if(href_list["open"])
 		toggle_valve()
 	else if(attached_device)
@@ -148,20 +140,43 @@
 	if(attached_device)
 		overlays += "device"
 
+/obj/item/device/transfer_valve/proc/remove_tank(obj/item/weapon/tank/T)
+	if(tank_one == T)
+		split_gases()
+		tank_one = null
+	else if(tank_two == T)
+		split_gases()
+		tank_two = null
+	else
+		return
+	
+	T.loc = get_turf(src)
+	update_icon()
+
 /obj/item/device/transfer_valve/proc/merge_gases()
+	if(valve_open)
+		return
 	tank_two.air_contents.volume += tank_one.air_contents.volume
 	var/datum/gas_mixture/temp
 	temp = tank_one.air_contents.remove_ratio(1)
 	tank_two.air_contents.merge(temp)
+	valve_open = 1
 
 /obj/item/device/transfer_valve/proc/split_gases()
-	if (!valve_open || !tank_one || !tank_two)
+	if(!valve_open)
 		return
+	
+	valve_open = 0
+	
+	if(deleted(tank_one) || deleted(tank_two))
+		return
+	
 	var/ratio1 = tank_one.air_contents.volume/tank_two.air_contents.volume
 	var/datum/gas_mixture/temp
 	temp = tank_two.air_contents.remove_ratio(ratio1)
 	tank_one.air_contents.merge(temp)
 	tank_two.air_contents.volume -=  tank_one.air_contents.volume
+	
 
 	/*
 	Exadv1: I know this isn't how it's going to work, but this was just to check
@@ -169,8 +184,7 @@
 	*/
 
 /obj/item/device/transfer_valve/proc/toggle_valve()
-	if(valve_open==0 && (tank_one && tank_two))
-		valve_open = 1
+	if(!valve_open && (tank_one && tank_two))
 		var/turf/bombturf = get_turf(src)
 		var/area/A = get_area(bombturf)
 
@@ -196,16 +210,11 @@
 		message_admins(log_str, 0, 1)
 		log_game(log_str)
 		merge_gases()
-		spawn(20) // In case one tank bursts
-			for (var/i=0,i<5,i++)
-				src.update_icon()
-				sleep(10)
-			src.update_icon()
 
 	else if(valve_open==1 && (tank_one && tank_two))
 		split_gases()
-		valve_open = 0
-		src.update_icon()
+
+	src.update_icon()
 
 // this doesn't do anything but the timer etc. expects it to be here
 // eventually maybe have it update icon to show state (timer, prox etc.) like old bombs
