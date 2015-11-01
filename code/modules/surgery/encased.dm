@@ -172,10 +172,12 @@
 
 		affected.createwound(BRUISE, 20)
 		affected.fracture()
-
-		/*if (prob(40)) //TODO: ORGAN REMOVAL UPDATE.
-			user.visible_message("\red A rib pierces the lung!")
-			target.rupture_lung()*/
+		
+		if(affected.internal_organs && affected.internal_organs.len)
+			if(prob(40))
+				var/obj/item/organ/O = pick(affected.internal_organs) //TODO weight by organ size
+				user.visible_message("<span class='danger'>A wayward piece of [target]'s [affected.encased] pierces \his [O.name]!</span>")
+				O.bruise()
 
 /datum/surgery_step/open_encased/mend
 	allowed_tools = list(

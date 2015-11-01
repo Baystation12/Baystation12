@@ -36,7 +36,7 @@ var/datum/antagonist/xenos/borer/borers
 	if(istype(borer))
 		var/mob/living/carbon/human/host
 		for(var/mob/living/carbon/human/H in mob_list)
-			if(H.stat != 2 && !(H.species.flags & IS_SYNTHETIC) && !H.has_brain_worms())
+			if(H.stat != DEAD && !(H.species.flags & IS_SYNTHETIC) && !H.has_brain_worms())
 				host = H
 				break
 		if(istype(host))
@@ -44,7 +44,7 @@ var/datum/antagonist/xenos/borer/borers
 			if(head)
 				borer.host = host
 				head.implants += borer
-				borer.loc = head
+				borer.forceMove(head)
 				if(!borer.host_brain)
 					borer.host_brain = new(borer)
 				borer.host_brain.name = host.name

@@ -45,7 +45,7 @@
 /obj/item/stack/material/proc/update_strings()
 	// Update from material datum.
 	singular_name = material.sheet_singular_name
-	
+
 	if(amount>1)
 		name = "[material.use_name] [material.sheet_plural_name]"
 		desc = "A stack of [material.use_name] [material.sheet_plural_name]."
@@ -64,9 +64,10 @@
 	var/obj/item/stack/material/M = S
 	if(!istype(M) || material.name != M.material.name)
 		return 0
-	..(S,tamount,1)
+	var/transfer = ..(S,tamount,1)
 	if(src) update_strings()
 	if(M) M.update_strings()
+	return transfer
 
 /obj/item/stack/material/attack_self(var/mob/user)
 	if(!material.build_windows(user, src))

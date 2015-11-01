@@ -72,6 +72,14 @@ macro "borghotkeymode"
 		command = ".south"
 		is-disabled = false
 	elem 
+		name = "INSERT"
+		command = "a-intent right"
+		is-disabled = false
+	elem 
+		name = "DELETE"
+		command = "delete-key-pressed"
+		is-disabled = false
+	elem 
 		name = "1"
 		command = "toggle-module 1"
 		is-disabled = false
@@ -102,14 +110,6 @@ macro "borghotkeymode"
 	elem 
 		name = "CTRL+4"
 		command = "a-intent left"
-		is-disabled = false
-	elem 
-		name = "INSERT"
-		command = "a-intent right"
-		is-disabled = false
-	elem 
-		name = "DELETE"
-		command = "delete-key-pressed"
 		is-disabled = false
 	elem 
 		name = "5"
@@ -359,7 +359,7 @@ macro "macro"
 		is-disabled = false
 	elem 
 		name = "CTRL+4"
-		command = "a-intent hurt"
+		command = "a-intent harm"
 		is-disabled = false
 	elem 
 		name = "CTRL+A+REP"

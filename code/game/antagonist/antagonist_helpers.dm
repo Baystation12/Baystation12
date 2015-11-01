@@ -20,6 +20,17 @@
 /datum/antagonist/proc/get_antag_count()
 	return current_antagonists ? current_antagonists.len : 0
 
+/datum/antagonist/proc/get_active_antag_count()
+	var/active_antags = 0
+	for(var/datum/mind/player in current_antagonists)
+		var/mob/living/L = player.current
+		if(!L || L.stat == DEAD)
+			continue //no mob or dead
+		if(!L.client && !L.teleop)
+			continue //SSD
+		active_antags++
+	return active_antags
+
 /datum/antagonist/proc/is_antagonist(var/datum/mind/player)
 	if(player in current_antagonists)
 		return 1
@@ -33,9 +44,6 @@
 	return (flags & ANTAG_VOTABLE)
 
 /datum/antagonist/proc/can_late_spawn()
-	update_current_antag_max()
-	if(get_antag_count() >= cur_max)
-		return 0
 	return 1
 
 /datum/antagonist/proc/is_latejoin_template()
