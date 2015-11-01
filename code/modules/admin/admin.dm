@@ -1354,11 +1354,6 @@ proc/admin_notice(var/message, var/rights)
 		usr << "Mode has not started."
 		return
 
-<<<<<<< HEAD
-	message_admins("[key_name(usr)] attempting to force mode latespawn.")
-	ticker.mode.next_spawn = 0
-	ticker.mode.try_latespawn()
-=======
 	message_admins("[key_name(usr)] attempting to force mode autospawn.")
 	ticker.mode.process_autoantag()
->>>>>>> 392fd6210d1938548d4ffd4030f362c01d1cb8d1
+
