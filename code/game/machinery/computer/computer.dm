@@ -12,11 +12,6 @@
 	var/light_range_on = 3
 	var/light_power_on = 1
 
-/obj/machinery/computer/Destroy()
-	qdel(circuit)
-	circuit = null
-	return ..()
-
 /obj/machinery/computer/initialize()
 	power_change()
 
