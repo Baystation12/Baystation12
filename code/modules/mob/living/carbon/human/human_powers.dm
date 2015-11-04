@@ -229,6 +229,7 @@
 
 	var/mob/living/carbon/alien/diona/S = new(T)
 	S.set_dir(dir)
+	transfer_languages(src, S)
 	if(mind)
 		mind.transfer_to(S)
 
@@ -254,5 +255,3 @@
 	visible_message("<span class='warning'>\The [src] quivers slightly, then splits apart with a wet slithering noise.</span>")
 
 	qdel(src)
-
-

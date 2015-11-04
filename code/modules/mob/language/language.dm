@@ -188,4 +188,8 @@
 	else
 		return ..()
 
+/proc/transfer_languages(var/mob/source, var/mob/target)
+	for(var/datum/language/L in source.languages)
+		target.add_language(L.name)
+
 #undef SCRAMBLE_CACHE_LEN
