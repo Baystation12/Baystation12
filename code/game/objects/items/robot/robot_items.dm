@@ -10,31 +10,20 @@
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "shock"
 
-/obj/item/borg/stun/attack(var/mob/living/M, var/mob/living/silicon/robot/user)
-
-	if(!istype(M))
-		return
-
-	// How the Hell.
+/obj/item/borg/stun/apply_hit_effect(mob/living/M, mob/living/silicon/robot/user, var/hit_zone)
 	if(!istype(user))
-		var/mob/living/temp = user
-		if(istype(temp))
-			temp.drop_from_inventory(src)
-		qdel(src)
 		return
 
-	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
-	msg_admin_attack("[user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+	user.visible_message("<span class='danger'>\The [user] has prodded \the [M] with \a [src]!</span>")
 
 	if(!user.cell || !user.cell.checked_use(1250)) //Slightly more than a baton.
-		user.visible_message("<span class='danger'>\The [user] has prodded \the [M] with its arm!</span>")
 		return
 
-	if (M.stuttering < 5)
-		M.stuttering = 5
-	M.stun_effect_act(0, 70, check_zone(user.zone_sel.selecting), src)
-	user.visible_message("<span class='danger'>\The [user] has prodded \the [M] with \a [src]!</span>")
+	playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
+	
+	M.apply_effect(5, STUTTER)
+	M.stun_effect_act(0, 70, check_zone(hit_zone), src)
+	
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.forcesay(hit_appends)

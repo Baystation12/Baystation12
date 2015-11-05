@@ -119,13 +119,6 @@
 		return -1
 	return 0
 
-/mob/living/silicon/pai/blob_act()
-	if (src.stat != 2)
-		src.adjustBruteLoss(60)
-		src.updatehealth()
-		return 1
-	return 0
-
 /mob/living/silicon/pai/restrained()
 	if(istype(src.loc,/obj/item/device/paicard))
 		return 0

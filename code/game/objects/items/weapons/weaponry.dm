@@ -1,18 +1,3 @@
-/obj/item/weapon/banhammer
-	desc = "banhammer"
-	name = "banhammer"
-	icon = 'icons/obj/items.dmi'
-	icon_state = "toyhammer"
-	slot_flags = SLOT_BELT
-	throwforce = 0
-	w_class = 2.0
-	throw_speed = 7
-	throw_range = 15
-	attack_verb = list("banned")
-
-	suicide_act(mob/user)
-		viewers(user) << "<span class='danger'>[user] is hitting \himself with the [src.name]! It looks like \he's trying to ban \himself from life.</span>"
-		return (BRUTELOSS|FIRELOSS|TOXLOSS|OXYLOSS)
 
 /obj/item/weapon/nullrod
 	name = "null rod"
@@ -44,27 +29,6 @@
 		return
 
 	..()
-
-/obj/item/weapon/sord
-	name = "\improper SORD"
-	desc = "This thing is so unspeakably shitty you are having a hard time even holding it."
-	icon_state = "sord"
-	item_state = "sord"
-	slot_flags = SLOT_BELT
-	force = 2
-	throwforce = 1
-	sharp = 1
-	edge = 1
-	w_class = 3
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-
-	suicide_act(mob/user)
-		viewers(user) << "<span class='danger'>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>"
-		return(BRUTELOSS)
-
-/obj/item/weapon/sord/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
-	return ..()
 
 /obj/item/weapon/energy_net
 	name = "energy net"
@@ -187,10 +151,6 @@
 	return 0
 
 /obj/effect/energy_net/ex_act()
-	health = 0
-	healthcheck()
-
-/obj/effect/energy_net/blob_act()
 	health = 0
 	healthcheck()
 

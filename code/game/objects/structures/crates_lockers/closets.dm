@@ -196,13 +196,6 @@
 
 	return
 
-// this should probably use dump_contents()
-/obj/structure/closet/blob_act()
-	if(prob(75))
-		for(var/atom/movable/A as mob|obj in src)
-			A.forceMove(src.loc)
-		qdel(src)
-
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(src.opened)
 		if(istype(W, /obj/item/weapon/grab))
@@ -223,6 +216,15 @@
 			for(var/mob/M in viewers(src))
 				M.show_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", 3, "You hear welding.", 2)
 			qdel(src)
+			return
+		if(istype(W, /obj/item/weapon/storage/laundry_basket) && W.contents.len)
+			var/obj/item/weapon/storage/laundry_basket/LB = W
+			var/turf/T = get_turf(src)
+			for(var/obj/item/I in LB.contents)
+				LB.remove_from_storage(I, T)
+			user.visible_message("<span class='notice'>[user] empties \the [LB] into \the [src].</span>", \
+								 "<span class='notice'>You empty \the [LB] into \the [src].</span>", \
+								 "<span class='notice'>You hear rustling of clothes.</span>")
 			return
 		if(isrobot(user))
 			return

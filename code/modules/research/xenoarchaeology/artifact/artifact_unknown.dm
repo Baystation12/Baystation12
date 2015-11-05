@@ -82,36 +82,33 @@ var/list/valid_secondary_effect_types = list(\
 		if(prob(75))
 			secondary_effect.ToggleActivate(0)
 
-	icon_num = rand(0,11)
+	icon_num = rand(0,13)
 	icon_state = "ano[icon_num]0"
 	if(icon_num == 7 || icon_num == 8)
-		name = "large crystal"
+		name = "large alien crystal"
 		desc = pick("It shines faintly as it catches the light.",\
 		"It appears to have a faint inner glow.",\
 		"It seems to draw you inward as you look it at.",\
 		"Something twinkles faintly as you look at it.",\
 		"It's mesmerizing to behold.")
-		if(prob(50))
+		if(prob(75))
 			my_effect.trigger = TRIGGER_ENERGY
-	else if(icon_num == 9)
+	else if(icon_num == 1 || icon_num == 6)
+		desc = "There appears to be some kind of environmental scanner on it."
+		if(prob(75))
+			my_effect.trigger = rand(5,8)
+	else if(icon_num == 9 || icon_num == 11 || icon_num == 13)
 		name = "alien computer"
-		desc = "It is covered in strange markings."
 		if(prob(75))
 			my_effect.trigger = TRIGGER_TOUCH
-	else if(icon_num == 10)
-		desc = "A large alien device, there appear to be some kind of vents in the side."
-		if(prob(50))
-			my_effect.trigger = rand(6,12)
-	else if(icon_num == 11)
+	else if(icon_num == 2 || icon_num == 3 || icon_num == 4)
+		desc = "A large alien device, there appear to be vents in the side."
+		if(prob(75))
+			my_effect.trigger = rand(7,12)
+	else if(icon_num == 10 || icon_num == 12)
 		name = "sealed alien pod"
-		desc = "A strange alien device."
-		if(prob(25))
+		if(prob(75))
 			my_effect.trigger = rand(1,4)
-
-#define TRIGGER_PHORON 9
-#define TRIGGER_OXY 10
-#define TRIGGER_CO2 11
-#define TRIGGER_NITRO 12
 
 /obj/machinery/artifact/process()
 

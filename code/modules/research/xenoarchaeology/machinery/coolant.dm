@@ -13,9 +13,6 @@
 		if(!istype(Proj ,/obj/item/projectile/beam/lastertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
 			explode()
 
-/obj/structure/reagent_dispensers/coolanttank/blob_act()
-	explode()
-
 /obj/structure/reagent_dispensers/coolanttank/ex_act()
 	explode()
 

@@ -60,14 +60,6 @@
 		set_broken()
 	..()
 
-
-/obj/machinery/computer/blob_act()
-	if (prob(75))
-		for(var/x in verbs)
-			verbs -= x
-		set_broken()
-		density = 0
-
 /obj/machinery/computer/update_icon()
 	overlays.Cut()
 	if(stat & NOPOWER)
@@ -135,11 +127,4 @@
 			M.deconstruct(src)
 			qdel(src)
 	else
-		src.attack_hand(user)
-	return
-
-
-
-
-
-
+		..()

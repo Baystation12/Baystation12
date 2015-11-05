@@ -28,10 +28,6 @@
 
 	return ..()
 
-/obj/structure/blob_act()
-	if(prob(50))
-		qdel(src)
-
 /obj/structure/attack_tk()
 	return
 

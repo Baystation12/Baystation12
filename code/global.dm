@@ -71,7 +71,6 @@ var/list/tdomeobserve       = list()
 var/list/tdomeadmin         = list()
 var/list/prisonsecuritywarp = list() // Prison security goes to these.
 var/list/prisonwarped       = list() // List of players already warped.
-var/list/blobstart          = list()
 var/list/ninjastart         = list()
 
 var/list/cardinal    = list(NORTH, SOUTH, EAST, WEST)
@@ -83,7 +82,6 @@ var/list/reverse_dir = list( // reverse_dir[dir] = reverse of dir
 	23, 28, 30, 29, 31, 48, 50, 49, 51, 56, 58, 57, 59, 52, 54, 53, 55, 60, 62, 61, 63
 )
 
-var/datum/station_state/start_state = null
 var/datum/configuration/config      = null
 var/datum/sun/sun                   = null
 

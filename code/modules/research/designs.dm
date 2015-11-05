@@ -55,6 +55,11 @@ other types of metals and chemistry for reagents).
 		desc = "Allows for the construction of \a [item_name]."
 	return
 
+//Returns a new instance of the item for this design
+//This is to allow additional initialization to be performed, including possibly additional contructor arguments.
+/datum/design/proc/Fabricate(var/newloc, var/fabricator)
+	return new build_path(newloc)
+
 /datum/design/item
 	build_type = PROTOLATHE
 
@@ -211,6 +216,11 @@ other types of metals and chemistry for reagents).
 	if(build_path)
 		var/obj/item/weapon/cell/C = build_path
 		desc = "Allows the construction of power cells that can hold [initial(C.maxcharge)] units of energy."
+
+/datum/design/item/powercell/Fabricate()
+	var/obj/item/weapon/cell/C = ..()
+	C.charge = 0 //shouldn't produce power out of thin air.
+	return C
 
 /datum/design/item/powercell/basic
 	name = "basic"

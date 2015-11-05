@@ -83,58 +83,66 @@ var/global/list/default_medbay_channels = list(
 		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
 
 /obj/item/device/radio/attack_ghost(mob/user)
-	interact(user)
+	return ui_interact(user)
 
 /obj/item/device/radio/attack_self(mob/user as mob)
 	user.set_machine(src)
 	interact(user)
 
-/obj/item/device/radio/interact(mob/user as mob)
-	if(!on)
-		return
+/obj/item/device/radio/interact(mob/user)
+	if(!user)
+		return 0
 
-	if(active_uplink_check(user))
-		return
+	if(b_stat)
+		wires.Interact(user)
 
-	var/dat = "<html><head><title>[src]</title></head><body><TT>"
+	return ui_interact(user)
 
-	if(!istype(src, /obj/item/device/radio/headset)) //Headsets dont get a mic button
-		dat += "Microphone: [broadcasting ? "<A href='byond://?src=\ref[src];talk=0'>Engaged</A>" : "<A href='byond://?src=\ref[src];talk=1'>Disengaged</A>"]<BR>"
+/obj/item/device/radio/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	var/data[0]
 
-	dat += {"
-				Speaker: [listening ? "<A href='byond://?src=\ref[src];listen=0'>Engaged</A>" : "<A href='byond://?src=\ref[src];listen=1'>Disengaged</A>"]<BR>
-				Frequency:
-				<A href='byond://?src=\ref[src];freq=-10'>-</A>
-				<A href='byond://?src=\ref[src];freq=-2'>-</A>
-				[format_frequency(frequency)]
-				<A href='byond://?src=\ref[src];freq=2'>+</A>
-				<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
-				"}
+	data["mic_status"] = broadcasting
+	data["speaker"] = listening
+	data["freq"] = format_frequency(frequency)
+	data["rawfreq"] = num2text(frequency)
 
-	dat+=list_channels(user)
+	data["mic_cut"] = (wires.IsIndexCut(WIRE_TRANSMIT) || wires.IsIndexCut(WIRE_SIGNAL))
+	data["spk_cut"] = (wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL))
 
-	dat+={"[text_wires()]</TT></body></html>"}
-	user << browse(dat, "window=radio")
-	onclose(user, "radio")
-	return
+	var/list/chanlist = list_channels(user)
+	if(islist(chanlist) && chanlist.len)
+		data["chan_list"] = chanlist
+		data["chan_list_len"] = chanlist.len
+
+	if(syndie)
+		data["useSyndMode"] = 1
+
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "radio_basic.tmpl", "[name]", 400, 430)
+		ui.set_initial_data(data)
+		ui.open()
 
 /obj/item/device/radio/proc/list_channels(var/mob/user)
 	return list_internal_channels(user)
 
 /obj/item/device/radio/proc/list_secure_channels(var/mob/user)
-	var/dat = ""
-	for (var/ch_name in channels)
-		dat+=text_sec_channel(ch_name, channels[ch_name])
+	var/dat[0]
+
+	for(var/ch_name in channels)
+		var/chan_stat = channels[ch_name]
+		var/listening = !!(chan_stat & FREQ_LISTENING) != 0
+
+		dat.Add(list(list("chan" = ch_name, "display_name" = ch_name, "secure_channel" = 1, "sec_channel_listen" = !listening, "chan_span" = frequency_span_class(radiochannels[ch_name]))))
+
 	return dat
 
 /obj/item/device/radio/proc/list_internal_channels(var/mob/user)
-	var/dat = ""
-	for (var/internal_chan in internal_channels)
+	var/dat[0]
+	for(var/internal_chan in internal_channels)
 		if(has_channel_access(user, internal_chan))
-			dat+="<A href='byond://?src=\ref[src];spec_freq=[internal_chan]'>[get_frequency_name(text2num(internal_chan))]</A><br>"
+			dat.Add(list(list("chan" = internal_chan, "display_name" = get_frequency_name(text2num(internal_chan)), "chan_span" = frequency_span_class(text2num(internal_chan)))))
 
-	if(dat)
-		dat = "<br><b>Internal Channels</b><br>" + dat
 	return dat
 
 /obj/item/device/radio/proc/has_channel_access(var/mob/user, var/freq)
@@ -172,9 +180,13 @@ var/global/list/default_medbay_channels = list(
 /obj/item/device/radio/proc/ToggleReception()
 	listening = !listening && !(wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL))
 
+/obj/item/device/radio/CanUseTopic()
+	if(!on)
+		return STATUS_CLOSE
+	return ..()
+
 /obj/item/device/radio/Topic(href, href_list)
-	if(..() || !on)
-		usr << browse(null, "window=radio")
+	if(..())
 		return 1
 
 	usr.set_machine(src)
@@ -216,7 +228,7 @@ var/global/list/default_medbay_channels = list(
 		return 1
 
 	if(.)
-		interact(usr)
+		nanomanager.update_uis(src)
 
 /obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
 	var/datum/radio_frequency/connection = null
@@ -683,31 +695,40 @@ var/global/list/default_medbay_channels = list(
 		. = 1
 
 	if(.)
-		interact(usr)
+		nanomanager.update_uis(src)
 
 /obj/item/device/radio/borg/interact(mob/user as mob)
 	if(!on)
 		return
 
-	var/dat = "<html><head><title>[src]</title></head><body><TT>"
-	dat += {"
-				Speaker: [listening ? "<A href='byond://?src=\ref[src];listen=0'>Engaged</A>" : "<A href='byond://?src=\ref[src];listen=1'>Disengaged</A>"]<BR>
-				Frequency:
-				<A href='byond://?src=\ref[src];freq=-10'>-</A>
-				<A href='byond://?src=\ref[src];freq=-2'>-</A>
-				[format_frequency(frequency)]
-				<A href='byond://?src=\ref[src];freq=2'>+</A>
-				<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
-				Broadcasting: [subspace_transmission ? "<A href='byond://?src=\ref[src];mode=0'>Disable</A>" : "<A href='byond://?src=\ref[src];mode=1'>Enable</A>"]<BR>
-				Loudspeaker: [shut_up ? "<A href='byond://?src=\ref[src];shutup=0'>Enable</A>" : "<A href='byond://?src=\ref[src];shutup=1'>Disable</A>"]<BR>
-				"}
+	. = ..()
 
-	if(subspace_transmission)//Don't even bother if subspace isn't turned on
-		dat+=list_channels(user)
-	dat+={"[text_wires()]</TT></body></html>"}
-	user << browse(dat, "window=radio")
-	onclose(user, "radio")
-	return
+/obj/item/device/radio/borg/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	var/data[0]
+
+	data["mic_status"] = broadcasting
+	data["speaker"] = listening
+	data["freq"] = format_frequency(frequency)
+	data["rawfreq"] = num2text(frequency)
+
+	var/list/chanlist = list_channels(user)
+	if(islist(chanlist) && chanlist.len)
+		data["chan_list"] = chanlist
+		data["chan_list_len"] = chanlist.len
+
+	if(syndie)
+		data["useSyndMode"] = 1
+
+	data["has_loudspeaker"] = 1
+	data["loudspeaker"] = !shut_up
+	data["has_subspace"] = 1
+	data["subspace"] = subspace_transmission
+
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "radio_basic.tmpl", "[name]", 400, 430)
+		ui.set_initial_data(data)
+		ui.open()
 
 /obj/item/device/radio/proc/config(op)
 	if(radio_controller)

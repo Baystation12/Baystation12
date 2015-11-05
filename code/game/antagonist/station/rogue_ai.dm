@@ -22,13 +22,11 @@ var/datum/antagonist/rogue_ai/malf
 	malf = src
 
 
-/datum/antagonist/rogue_ai/get_candidates()
+/datum/antagonist/rogue_ai/build_candidate_list()
 	..()
 	for(var/datum/mind/player in candidates)
 		if(player.assigned_role && player.assigned_role != "AI")
 			candidates -= player
-	if(!candidates.len)
-		return list()
 	return candidates
 
 
