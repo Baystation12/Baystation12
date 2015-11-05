@@ -30,6 +30,16 @@
 		shade = null
 	..()
 
+/obj/item/device/soulstone/update_icon()
+	if(full == 0 || full == -1)
+		icon_state = "soulstone"
+	if(full == 1)
+		icon_state = "soulstone2"
+	if(full == -1)
+		icon_state = "soulstone"//TODO: cracked sprite
+		name = "cracked soulstone"
+		desc = "[initial(desc)] This one is cracked and useless."
+
 /obj/item/device/soulstone/attackby(var/obj/item/I, var/mob/user)
 	..()
 	if(is_evil && istype(I, /obj/item/weapon/nullrod))
@@ -84,14 +94,7 @@
 
 /obj/item/device/soulstone/proc/set_full(var/f)
 	full = f
-	if(full == 0 || full == -1)
-		icon_state = "soulstone"
-	if(full == 1)
-		icon_state = "soulstone2"
-	if(full == -1)
-		icon_state = "soulstone"//TODO: cracked sprite
-		name = "cracked soulstone"
-		desc += " This one is cracked and useless."
+	update_icon()
 
 /obj/structure/constructshell
 	name = "empty shell"

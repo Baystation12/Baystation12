@@ -6,14 +6,6 @@
 	//todo: flooring datum cultify check
 	cultify_floor()
 
-	/*
-/turf/simulated/shuttle/floor/cultify()
-	cultify_floor()
-
-/turf/simulated/shuttle/floor4/cultify()
-	cultify_floor()
-	*/
-
 /turf/simulated/shuttle/wall/cultify()
 	cultify_wall()
 
@@ -28,11 +20,6 @@
 
 /turf/unsimulated/beach/cultify()
 	return
-
-	/*
-/turf/unsimulated/floor/cultify()
-	cultify_floor()
-	*/
 
 /turf/unsimulated/wall/cultify()
 	cultify_wall()
