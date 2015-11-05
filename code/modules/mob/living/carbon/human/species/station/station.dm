@@ -221,7 +221,7 @@
 	return ..()
 
 /datum/species/diona/handle_death(var/mob/living/carbon/human/H)
-	diona_split_into_nymphs(0, 0)
+	H.diona_split_into_nymphs(0)
 
 /datum/species/machine
 	name = "Machine"
