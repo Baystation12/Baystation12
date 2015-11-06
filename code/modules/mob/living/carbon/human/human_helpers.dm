@@ -8,34 +8,34 @@
 	equipment_tint_total += C.tint;
 
 /mob/living/carbon/human/can_eat(var/food, var/feedback = 1)
-	var/status = can_eat_status()
-	if(status == HUMAN_EATING_NO_ISSUE)
+	var/list/status = can_eat_status()
+	if(status[0] == HUMAN_EATING_NO_ISSUE)
 		return 1
 	if(feedback)
-		if(status == HUMAN_EATING_NO_MOUTH)
+		if(status[0] == HUMAN_EATING_NO_MOUTH)
 			src << "Where do you intend to put \the [food]? You don't have a mouth!"
-		else if(status == HUMAN_EATING_BLOCKED_MOUTH)
-			src << "<span class='warning'>\The [blocked] is in the way!</span>"
+		else if(status[0] == HUMAN_EATING_BLOCKED_MOUTH)
+			src << "<span class='warning'>\The [status[1]] is in the way!</span>"
 	return 0
 
 /mob/living/carbon/human/can_force_feed(var/feeder, var/food, var/feedback = 1)
-	var/status = can_eat_status()
-	if(status == HUMAN_EATING_NO_ISSUE)
+	var/list/status = can_eat_status()
+	if(status[0] == HUMAN_EATING_NO_ISSUE)
 		return 1
 	if(feedback)
-		if(status == HUMAN_EATING_NO_MOUTH)
+		if(status[0] == HUMAN_EATING_NO_MOUTH)
 			feeder << "Where do you intend to put \the [food]? \The [src] doesn't have a mouth!"
-		else if(status == HUMAN_EATING_BLOCKED_MOUTH)
-			feeder << "<span class='warning'>\The [blocked] is in the way!</span>"
+		else if(status[0] == HUMAN_EATING_BLOCKED_MOUTH)
+			feeder << "<span class='warning'>\The [status[1]] is in the way!</span>"
 	return 0
 
 /mob/living/carbon/human/proc/can_eat_status()
 	if(!check_has_mouth())
-		return HUMAN_EATING_NO_MOUTH
+		return list(HUMAN_EATING_NO_MOUTH)
 	var/obj/item/blocked = check_mouth_coverage()
 	if(blocked)
-		return HUMAN_EATING_BLOCKED_MOUTH
-	return HUMAN_EATING_NO_ISSUE
+		return list(HUMAN_EATING_BLOCKED_MOUTH, blocked)
+	return list(HUMAN_EATING_NO_ISSUE)
 
 #undef HUMAN_EATING_NO_ISSUE
 #undef HUMAN_EATING_NO_MOUTH
