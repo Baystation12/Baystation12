@@ -55,7 +55,7 @@
 	if(istype(src.glasses, /obj/item/clothing/glasses))
 		process_glasses(glasses)
 	if(istype(src.wear_mask, /obj/item/clothing/mask))
-		add_clothing_protection(head)
+		add_clothing_protection(wear_mask)
 	if(istype(back,/obj/item/weapon/rig))
 		process_rig(back)
 
