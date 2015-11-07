@@ -1,15 +1,15 @@
 
-/proc/power_failure(var/announce = 1)
+/proc/power_failure(var/announce = 1, var/severity = 2)
 	if(announce)
 		command_announcement.Announce("Abnormal activity detected in [station_name()]'s powernet. As a precautionary measure, the station's power will be shut off for an indeterminate duration.", "Critical Power Failure", new_sound = 'sound/AI/poweroff.ogg')
 
 	for(var/obj/machinery/power/smes/buildable/S in world)
-		S.energy_fail(rand(30,60))
+		S.energy_fail(rand(15 * severity,30 * severity))
 
 
 	for(var/obj/machinery/power/apc/C in world)
 		if(!C.is_critical)
-			C.energy_fail(rand(60,120))
+			C.energy_fail(rand(30 * severity,60 * severity))
 
 /proc/power_restore(var/announce = 1)
 	var/list/skipped_areas = list(/area/turret_protected/ai)
