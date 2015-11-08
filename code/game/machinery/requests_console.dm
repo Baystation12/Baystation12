@@ -222,7 +222,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 				else
 					dat += text("Speaker <A href='?src=\ref[src];setSilent=1'>ON</A>")
 
-		user << browse("[dat]", "window=request_console")
+		user << browse("[sanitize_local(dat, SANITIZE_BROWSER)]", "window=request_console")
 		onclose(user, "req_console")
 	return
 
@@ -249,7 +249,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			priority = -1
 
 	if(href_list["writeAnnouncement"])
-		var/new_message = sanitize(input("Write your message:", "Awaiting Input", ""), ja_mode = POPUP)
+		var/new_message = sanitize(input("Write your message:", "Awaiting Input", ""))
 		if(new_message)
 			message = new_message
 			switch(href_list["priority"])
@@ -261,7 +261,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 
 	if(href_list["sendAnnouncement"])
 		if(!announcementConsole)	return
-		announcement.Announce(sanitize_chat(message), msg_sanitized = 1)
+		announcement.Announce(message, msg_sanitized = 1)
 		reset_announce()
 		screen = 0
 

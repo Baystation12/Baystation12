@@ -194,9 +194,9 @@ proc/admin_notice(var/message, var/rights)
 			if(!f) body += " | "
 			else f = 0
 			if(L in M.languages)
-				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#006600'>[k]</a>"
+				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[lhtml_encode(k)]' style='color:#006600'>[k]</a>"
 			else
-				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#ff0000'>[k]</a>"
+				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[lhtml_encode(k)]' style='color:#ff0000'>[k]</a>"
 
 	body += {"<br>
 		</body></html>
@@ -259,7 +259,7 @@ proc/admin_notice(var/message, var/rights)
 			if(index == page)
 				dat += "</b>"
 
-	usr << browse(dat, "window=player_notes;size=400x400")
+	usr << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=player_notes;size=400x400")
 
 
 /datum/admins/proc/player_has_info(var/key as text)
@@ -314,7 +314,7 @@ proc/admin_notice(var/message, var/rights)
 	dat += "<A href='?src=\ref[src];add_player_info=[key]'>Add Comment</A><br>"
 
 	dat += "</body></html>"
-	usr << browse(dat, "window=adminplayerinfo;size=480x480")
+	usr << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=adminplayerinfo;size=480x480")
 
 
 
@@ -559,7 +559,7 @@ proc/admin_notice(var/message, var/rights)
 
 	//world << "Channelname: [src.admincaster_feed_channel.channel_name] [src.admincaster_feed_channel.author]"
 	//world << "Msg: [src.admincaster_feed_message.author] [src.admincaster_feed_message.body]"
-	usr << browse(dat, "window=admincaster_main;size=400x600")
+	usr << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=admincaster_main;size=400x600")
 	onclose(usr, "admincaster_main")
 
 
@@ -574,7 +574,7 @@ proc/admin_notice(var/message, var/rights)
 			r = copytext( r, 1, findtext(r,"##") )//removes the description
 		dat += text("<tr><td>[t] (<A href='?src=\ref[src];removejobban=[r]'>unban</A>)</td></tr>")
 	dat += "</table>"
-	usr << browse(dat, "window=ban;size=400x400")
+	usr << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=ban;size=400x400")
 
 /datum/admins/proc/Game()
 	if(!check_rights(0))	return

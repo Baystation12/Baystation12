@@ -209,7 +209,7 @@
 						dat += "<a href='?src=\ref[src];operation=scan'>Scan</a><br>"
 				dat += "Insert fingerprint card here: <a href='?src=\ref[src];operation=card'>-----</a>"
 
-	user << browse(dat,"window=fscanner")
+	user << browse(sanitize_local(dat, SANITIZE_BROWSER),"window=fscanner")
 	onclose(user,"fscanner")
 
 /obj/machinery/computer/forensic_scanning/Topic(href,href_list)

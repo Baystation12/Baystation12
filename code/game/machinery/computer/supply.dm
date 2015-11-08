@@ -44,7 +44,7 @@
 		<A href='?src=\ref[src];viewrequests=1'>View requests</A><BR><BR>
 		<A href='?src=\ref[user];mach_close=computer'>Close</A>"}
 
-	user << browse(dat, "window=computer;size=575x450")
+	user << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=computer;size=575x450")
 	onclose(user, "computer")
 	return
 
@@ -203,7 +203,7 @@
 		\n<A href='?src=\ref[user];mach_close=computer'>Close</A>"}
 
 
-	user << browse(dat, "window=computer;size=575x450")
+	user << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=computer;size=575x450")
 	onclose(user, "computer")
 	return
 

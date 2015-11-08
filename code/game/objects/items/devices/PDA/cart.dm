@@ -402,7 +402,7 @@
 		for(var/S in supply_controller.shoppinglist)
 			var/datum/supply_order/SO = S
 
-			supplyOrderData[++supplyOrderData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "ApprovedBy" = SO.orderedby, "Comment" = html_encode(SO.comment))
+			supplyOrderData[++supplyOrderData.len] = list("Number" = SO.ordernum, "Name" = lhtml_encode(SO.object.name), "ApprovedBy" = SO.orderedby, "Comment" = lhtml_encode(SO.comment))
 		if(!supplyOrderData.len)
 			supplyOrderData[++supplyOrderData.len] = list("Number" = null, "Name" = null, "OrderedBy"=null)
 
@@ -414,7 +414,7 @@
 		for(var/S in supply_controller.requestlist)
 			var/datum/supply_order/SO = S
 			requestCount++
-			requestData[++requestData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "OrderedBy" = SO.orderedby, "Comment" = html_encode(SO.comment))
+			requestData[++requestData.len] = list("Number" = SO.ordernum, "Name" = lhtml_encode(SO.object.name), "OrderedBy" = SO.orderedby, "Comment" = lhtml_encode(SO.comment))
 		if(!requestData.len)
 			requestData[++requestData.len] = list("Number" = null, "Name" = null, "orderedBy" = null, "Comment" = null)
 

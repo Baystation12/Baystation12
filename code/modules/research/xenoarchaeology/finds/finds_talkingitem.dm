@@ -128,7 +128,7 @@
 		if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
 			listening|=M
 
-	msg = sanitize_chat(msg)
+	msg = sanitize_local(msg)
 
 	for(var/mob/M in listening)
 		M << "\icon[holder_atom] <b>[holder_atom]</b> reverberates, \blue\"[msg]\""
