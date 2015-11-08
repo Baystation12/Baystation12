@@ -115,7 +115,7 @@ client/proc/display_admin_reports()
 	else
 		output += "Whoops, no reports!"
 
-	usr << browse(output, "window=news;size=600x400")
+	usr << browse(sanitize_local(output, SANITIZE_BROWSER), "window=news;size=600x400")
 
 
 client/proc/Report(mob/M as mob in world)

@@ -3,7 +3,7 @@
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
 
-	message = sanitize(message, ja_mode = TEMP)
+	message = sanitize(message)
 	..(message, alt_name = alt_name)
 
 /mob/living/carbon/human/is_muzzled()

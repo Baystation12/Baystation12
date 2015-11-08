@@ -1006,3 +1006,8 @@ var/list/be_special_flags = list(
 	dview_mob.see_invisible = invis_flags; \
 	for(type in view(range, dview_mob))
 #define END_FOR_DVIEW dview_mob.loc = null
+
+#define SANITIZE_CHAT 1
+#define SANITIZE_BROWSER 2
+#define SANITIZE_LOG 3
+#define SANITIZE_TEMP 4

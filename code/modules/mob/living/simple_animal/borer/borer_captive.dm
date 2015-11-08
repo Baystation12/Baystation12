@@ -14,7 +14,7 @@
 
 	if(istype(src.loc,/mob/living/simple_animal/borer))
 
-		message = sanitize(message, ja_mode = TEMP)
+		message = sanitize(message)
 		if (!message)
 			return
 		log_say("[key_name(src)] : [message]")
@@ -53,7 +53,7 @@
 			verbs -= /mob/living/carbon/proc/release_control
 			verbs -= /mob/living/carbon/proc/punish_host
 			verbs -= /mob/living/carbon/proc/spawn_larvae
-		
+
 		return
-	
+
 	..()
