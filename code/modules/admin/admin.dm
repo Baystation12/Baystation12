@@ -755,6 +755,15 @@ proc/admin_notice(var/message, var/rights)
 		log_admin("Announce: [key_name(usr)] : [message]")
 	feedback_add_details("admin_verb","A") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/admins/proc/toggleexplosions()
+	set category = "Server"
+	set desc="Toggles explosions"
+	set name="Toggle Explosions"
+
+	config.explosions_allowed = !(config.explosions_allowed)
+	log_admin("[key_name(usr)] toggled explosions to [config.explosions_allowed].")
+	message_admins("[key_name_admin(usr)] toggled explosions to [config.explosions_allowed].", 1)
+
 /datum/admins/proc/toggleooc()
 	set category = "Server"
 	set desc="Globally Toggles OOC"
