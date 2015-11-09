@@ -36,7 +36,6 @@
 
 	//code in modules/l10n/localisation.dm
 	input = sanitize_local(input, mode)
-	world << "[input]"
 
 	if(extra)
 		input = replace_characters(input, list("\n"=" ","\t"=" "))
