@@ -1,6 +1,0 @@
-author: Atlantis
-
-delete-after: True
-
-changes: 
-  - rscadd: "Expanded gridcheck random event. Affected devices now show error UI and may be restarted manually before the event ends. All Z-levels are now affected equally."
