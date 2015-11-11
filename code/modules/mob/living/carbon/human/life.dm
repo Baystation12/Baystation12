@@ -580,7 +580,14 @@
 			pl_effects()
 			break
 
-	if(!istype(get_turf(src), /turf/space)) //space is not meant to change your body temperature.
+	if(istype(get_turf(src), /turf/space))
+		//Don't bother if the temperature drop is less than 0.1 anyways. Hopefully BYOND is smart enough to turn this constant expression into a constant
+		if(bodytemperature > (0.1 * HUMAN_HEAT_CAPACITY/(HUMAN_EXPOSED_SURFACE_AREA*STEFAN_BOLTZMANN_CONSTANT))**(1/4) + COSMIC_RADIATION_TEMPERATURE)
+			//Thermal radiation into space
+			var/heat_loss = HUMAN_EXPOSED_SURFACE_AREA * STEFAN_BOLTZMANN_CONSTANT * ((bodytemperature - COSMIC_RADIATION_TEMPERATURE)**4)
+			var/temperature_loss = heat_loss/HUMAN_HEAT_CAPACITY
+			bodytemperature -= temperature_loss
+	else
 		var/loc_temp = T0C
 		if(istype(loc, /obj/mecha))
 			var/obj/mecha/M = loc
@@ -594,7 +601,7 @@
 			pressure_alert = 0
 			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
-		//Body temperature adjusts depending on surrounding atmosphere based on your thermal protection
+		//Body temperature adjusts depending on surrounding atmosphere based on your thermal protection (convection)
 		var/temp_adj = 0
 		if(loc_temp < bodytemperature)			//Place is colder than we are
 			var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
@@ -695,7 +702,7 @@
 	if (abs(body_temperature_difference) < 0.5)
 		return //fuck this precision
 	if (on_fire)
-		return //too busy for pesky convection
+		return //too busy for pesky metabolic regulation
 
 	if(bodytemperature < species.cold_level_1) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
 		if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
