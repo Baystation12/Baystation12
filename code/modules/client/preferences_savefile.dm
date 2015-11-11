@@ -85,6 +85,9 @@
 	player_setup.save_character(S)
 	return 1
 
+/datum/preferences/proc/sanitize_preferences()
+	player_setup.sanitize_setup()
+	return 1
 
 #undef SAVEFILE_VERSION_MAX
 #undef SAVEFILE_VERSION_MIN

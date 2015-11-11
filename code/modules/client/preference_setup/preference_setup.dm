@@ -46,6 +46,10 @@
 	selected_category = null
 	return ..()
 
+/datum/category_collection/player_setup_collection/proc/sanitize_setup()
+	for(var/datum/category_group/player_setup_category/PS in categories)
+		PS.sanitize_setup()
+
 /datum/category_collection/player_setup_collection/proc/load_character(var/savefile/S)
 	for(var/datum/category_group/player_setup_category/PS in categories)
 		PS.load_character(S)
@@ -100,24 +104,37 @@
 /datum/category_group/player_setup_category/dd_SortValue()
 	return sort_order
 
+/datum/category_group/player_setup_category/proc/sanitize_setup()
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.sanitize_preferences()
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.sanitize_character()
+
 /datum/category_group/player_setup_category/proc/load_character(var/savefile/S)
+	// Load all data, then sanitize it.
+	// Need due to, for example, the 01_basic module relying on species having been loaded to sanitize correctly but that isn't loaded until module 03_body.
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.load_character(S)
+	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.sanitize_character()
 
 /datum/category_group/player_setup_category/proc/save_character(var/savefile/S)
+	// Sanitize all data, then save it
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.sanitize_character()
+	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.save_character(S)
 
 /datum/category_group/player_setup_category/proc/load_preferences(var/savefile/S)
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.load_preferences(S)
+	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.sanitize_preferences()
 
 /datum/category_group/player_setup_category/proc/save_preferences(var/savefile/S)
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.sanitize_preferences()
+	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.save_preferences(S)
 
 /datum/category_group/player_setup_category/proc/content(var/mob/user)
