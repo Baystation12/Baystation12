@@ -3,7 +3,7 @@ var/datum/antagonist/traitor/traitors
 // Inherits most of its vars from the base datum.
 /datum/antagonist/traitor
 	id = MODE_TRAITOR
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Head of Security", "Captain")
+	protected_jobs = list("Detective", "Internal Affairs Agent", "Head of Security")
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
 
 /datum/antagonist/traitor/New()
@@ -73,19 +73,19 @@ var/datum/antagonist/traitor/traitors
 	return
 
 /datum/antagonist/traitor/equip(var/mob/living/carbon/human/traitor_mob)
+	if(istype(traitor_mob, /mob/living/silicon)) // this needs to be here because ..() returns false if the mob isn't human
+		add_law_zero(traitor_mob)
+		return 1
 
 	if(!..())
 		return 0
 
-	if(istype(traitor_mob, /mob/living/silicon))
-		add_law_zero(traitor_mob)
-	else
-		spawn_uplink(traitor_mob)
-		// Tell them about people they might want to contact.
-		var/mob/living/carbon/human/M = get_nt_opposed()
-		if(M && M != traitor_mob)
-			traitor_mob << "We have received credible reports that [M.real_name] might be willing to help our cause. If you need assistance, consider contacting them."
-			traitor_mob.mind.store_memory("<b>Potential Collaborator</b>: [M.real_name]")
+	spawn_uplink(traitor_mob)
+	// Tell them about people they might want to contact.
+	var/mob/living/carbon/human/M = get_nt_opposed()
+	if(M && M != traitor_mob)
+		traitor_mob << "We have received credible reports that [M.real_name] might be willing to help our cause. If you need assistance, consider contacting them."
+		traitor_mob.mind.store_memory("<b>Potential Collaborator</b>: [M.real_name]")
 
 	//Begin code phrase.
 	give_codewords(traitor_mob)

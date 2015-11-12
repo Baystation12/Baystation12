@@ -32,6 +32,9 @@
 
 /datum/unarmed_attack/proc/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
 
+	if(target.stat == DEAD)
+		return
+
 	var/stun_chance = rand(0, 100)
 
 	if(attack_damage >= 5 && armour < 2 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance

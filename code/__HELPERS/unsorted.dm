@@ -538,7 +538,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/y = min(world.maxy, max(1, A.y + dy))
 	return locate(x,y,A.z)
 
-//Makes sure MIDDLE is between LOW and HIGH. If not, it adjusts it. Returns the adjusted value.
+//Makes sure MIDDLE is between LOW and HIGH. If not, it adjusts it. Returns the adjusted value. Lower bound takes priority.
 /proc/between(var/low, var/middle, var/high)
 	return max(min(middle, high), low)
 
@@ -1309,3 +1309,7 @@ var/mob/dview/dview_mob = new
 /mob/dview/New()
 	// do nothing. we don't want to be in any mob lists; we're a dummy not a mob.
 
+
+// call to generate a stack trace and print to runtime logs
+/proc/crash_with(msg)
+	CRASH(msg)

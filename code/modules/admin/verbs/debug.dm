@@ -25,7 +25,6 @@ Because if you select a player mob as owner it tries to do the proc for
 But you can call procs that are of type /mob/living/carbon/human/proc/ for that player.
 */
 
-#ifdef ALLOW_CALLPROC
 /client/proc/callproc()
 	set category = "Debug"
 	set name = "Advanced ProcCall"
@@ -65,7 +64,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 		var/procname = input("Proc path, eg: /proc/fake_blood","Path:", null) as text|null
 		if(!procname)	return
-	
+
 		if(targetselected)
 			if(!target)
 				usr << "<span class='danger'>Your target no longer exists.</span>"
@@ -148,7 +147,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 		usr << "<font color='blue'>[procname] returned: [returnval ? returnval : "null"]</font>"
 		feedback_add_details("admin_verb","APC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-#endif
 
 /client/proc/Cell()
 	set category = "Debug"

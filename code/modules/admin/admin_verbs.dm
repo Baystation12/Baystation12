@@ -175,9 +175,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/create_random_map,
 	/client/proc/show_plant_genes,
 	/client/proc/enable_debug_verbs,
-	#ifdef ALLOW_CALLPROC
 	/client/proc/callproc,
-	#endif
 	/client/proc/toggledebuglogs,
 	/client/proc/SDQL_query,
 	/client/proc/SDQL2_query,
@@ -188,9 +186,7 @@ var/list/admin_verbs_debug = list(
 	)
 
 var/list/admin_verbs_paranoid_debug = list(
-	#ifdef ALLOW_CALLPROC
 	/client/proc/callproc,
-	#endif
 	/client/proc/debug_controller
 	)
 
@@ -259,9 +255,7 @@ var/list/admin_verbs_hideable = list(
 	/datum/admins/proc/adjump,
 	/client/proc/restart_controller,
 	/client/proc/cmd_admin_list_open_jobs,
-	#ifdef ALLOW_CALLPROC
 	/client/proc/callproc,
-	#endif
 	/client/proc/Debug2,
 	/client/proc/reload_admins,
 	/client/proc/kill_air,
@@ -407,7 +401,7 @@ var/list/admin_verbs_mentor = list(
 		var/mob/dead/observer/ghost = body.ghostize(1)
 		ghost.admin_ghosted = 1
 		if(body)
-			body.aghosted = ghost
+			body.teleop = ghost
 			if(!body.key)
 				body.key = "@[key]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
 		feedback_add_details("admin_verb","O") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

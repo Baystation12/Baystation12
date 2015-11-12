@@ -36,6 +36,10 @@
 		qdel(air_contents)
 
 	processing_objects.Remove(src)
+	
+	if(istype(loc, /obj/item/device/transfer_valve))
+		var/obj/item/device/transfer_valve/TTV = loc
+		TTV.remove_tank(src)
 
 	..()
 
@@ -272,7 +276,10 @@
 		qdel(src)
 
 	else if(pressure > TANK_RUPTURE_PRESSURE)
-		//world << "\blue[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]"
+		#ifdef FIREDBG
+		log_debug("\blue[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]")
+		#endif
+		
 		if(integrity <= 0)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)
@@ -284,7 +291,10 @@
 			integrity--
 
 	else if(pressure > TANK_LEAK_PRESSURE)
-		//world << "\blue[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]"
+		#ifdef FIREDBG
+		log_debug("\blue[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]")
+		#endif
+		
 		if(integrity <= 0)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)

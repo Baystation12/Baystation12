@@ -168,7 +168,7 @@
 			var/obj/effect/plant/P = A
 			P.die_off()
 
-/*
+
 /*
  * Double-Bladed Energy Swords - Cheridan
  */
@@ -211,7 +211,7 @@
 		return 1
 	else
 		return 0
-*/
+
 
 //spears, bay edition
 /obj/item/weapon/material/twohanded/spear

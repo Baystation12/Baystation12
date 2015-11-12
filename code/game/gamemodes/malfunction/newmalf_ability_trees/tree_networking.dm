@@ -38,7 +38,7 @@
 // END RESEARCH DATUMS
 // BEGIN ABILITY VERBS
 
-/datum/game_mode/malfunction/verb/basic_encryption_hack(obj/machinery/power/apc/A as obj in get_all_apcs())
+/datum/game_mode/malfunction/verb/basic_encryption_hack(obj/machinery/power/apc/A as obj in get_unhacked_apcs(src))
 	set category = "Software"
 	set name = "Basic Encryption Hack"
 	set desc = "10 CPU - Basic encryption hack that allows you to overtake APCs on the station."
@@ -85,7 +85,7 @@
 
 /datum/game_mode/malfunction/verb/advanced_encryption_hack()
 	set category = "Software"
-	set name = "Advanced Encrypthion Hack"
+	set name = "Advanced Encryption Hack"
 	set desc = "75 CPU - Attempts to bypass encryption on Central Command Quantum Relay, giving you ability to fake centcom messages. Has chance of failing."
 	var/price = 75
 	var/mob/living/silicon/ai/user = usr
@@ -106,15 +106,12 @@
 			announce_hack_failure(user, "quantum message relay")
 		return
 
-	var/datum/announcement/priority/command/AN = new/datum/announcement/priority/command()
-	AN.title = title
-	AN.Announce(text)
-
+	command_announcement.Announce(text, title)
 
 /datum/game_mode/malfunction/verb/elite_encryption_hack()
 	set category = "Software"
 	set name = "Elite Encryption Hack"
-	set desc = "200 CPU - Allows you to hack station's ALERTCON system, changing alert level. Has high chance of failijng."
+	set desc = "200 CPU - Allows you to hack station's ALERTCON system, changing alert level. Has high chance of failing."
 	var/price = 200
 	var/mob/living/silicon/ai/user = usr
 	if(!ability_prechecks(user, price))

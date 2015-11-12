@@ -98,6 +98,10 @@
 	if(msg=="What" | msg == "Who" | msg == "How" | msg == "Why" | msg == "Are")
 		q=1
 
+	//RuBay
+	if(msg=="Что" | msg == "Кто" | msg == "Как" | msg == "Почему" | msg == "Зачем"  | msg == "Какой" | msg == "А" |  msg == "Сколько")
+		q=1
+
 	text=lowertext_alt(text)
 	for(var/ya,ya <= limit,ya++)
 
@@ -123,6 +127,8 @@
 			continue
 		if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
 			listening|=M
+
+	msg = sanitize_local(msg)
 
 	for(var/mob/M in listening)
 		M << "\icon[holder_atom] <b>[holder_atom]</b> reverberates, \blue\"[msg]\""

@@ -4,13 +4,13 @@
  */
 
 /obj/item/weapon/paper
-	name = "paper"
-	gender = PLURAL
+	name = "sheet of paper"
+	gender = NEUTER
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper"
 	item_state = "paper"
 	throwforce = 0
-	w_class = 1.0
+	w_class = 1
 	throw_range = 1
 	throw_speed = 1
 	layer = 4
@@ -47,7 +47,7 @@
 		desc = "This is a paper titled '" + name + "'."
 
 	if(info != initial(info))
-		info = html_encode(info)
+		info = lhtml_encode(info)
 		info = replacetext(info, "\n", "<BR>")
 		info = parsepencode(info)
 
@@ -81,10 +81,10 @@
 
 /obj/item/weapon/paper/proc/show_content(var/mob/user, var/forceshow=0)
 	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/dead/observer) || istype(user, /mob/living/silicon)) && !forceshow)
-		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", "window=[name]")
+		user << browse(sanitize_local("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", SANITIZE_BROWSER), "window=[name]")
 		onclose(user, "[name]")
 	else
-		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info][stamps]</BODY></HTML>", "window=[name]")
+		user << browse(sanitize_local("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info][stamps]</BODY></HTML>", SANITIZE_BROWSER), "window=[name]")
 		onclose(user, "[name]")
 
 /obj/item/weapon/paper/verb/rename()
@@ -123,10 +123,10 @@
 	else //cyborg or AI not seeing through a camera
 		dist = get_dist(src, user)
 	if(dist < 2)
-		usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info][stamps]</BODY></HTML>", "window=[name]")
+		usr << browse(sanitize_local("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info][stamps]</BODY></HTML>", SANITIZE_BROWSER), "window=[name]")
 		onclose(usr, "[name]")
 	else
-		usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", "window=[name]")
+		usr << browse(sanitize_local("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", SANITIZE_BROWSER), "window=[name]")
 		onclose(usr, "[name]")
 	return
 
@@ -319,7 +319,7 @@
 			usr << "<span class='info'>There isn't enough space left on \the [src] to write anything.</span>"
 			return
 
-		var/t =  sanitize(input("Enter what you want to write:", "Write", null, null) as message, free_space, extra = 0, ja_mode = POPUP)
+		var/t =  sanitize(input("Enter what you want to write:", "Write", null, null) as message, free_space, extra = 0)
 
 		if(!t)
 			return
@@ -349,7 +349,7 @@
 
 		var last_fields_value = fields
 
-		//t = html_encode(t)
+		//t = lhtml_encode(t)
 		t = replacetext(t, "\n", "<BR>")
 		t = parsepencode(t, i, usr, iscrayon) // Encode everything from pencode to html
 
@@ -367,7 +367,7 @@
 
 		update_space(t)
 
-		usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
+		usr << browse(sanitize_local("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links][stamps]</BODY></HTML>", SANITIZE_BROWSER), "window=[name]") // Update the window
 
 		update_icon()
 
@@ -436,7 +436,7 @@
 		if ( istype(RP) && RP.mode == 2 )
 			RP.RenamePaper(user,src)
 		else
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links][stamps]</BODY></HTML>", "window=[name]")
+			user << browse(sanitize_local("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links][stamps]</BODY></HTML>", SANITIZE_BROWSER), "window=[name]")
 		return
 
 	else if(istype(P, /obj/item/weapon/stamp))

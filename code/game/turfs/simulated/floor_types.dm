@@ -39,11 +39,15 @@
 		icon_state = "[type]vault"
 
 /turf/simulated/wall/vault
-	icon_state = "rockvault"
+	icon = 'icons/turf/walls.dmi'
+	icon_state = "riveted"
 
-	New(location,type)
-		..()
-		icon_state = "[type]vault"
+	rockvault
+		icon_state = "rockvault"
+	sandstonevault
+		icon_state = "sandstonevault"
+	alienvault
+		icon_state = "alienvault"
 
 /turf/simulated/floor/engine
 	name = "reinforced floor"

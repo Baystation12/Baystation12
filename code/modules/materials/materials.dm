@@ -128,8 +128,6 @@ var/list/name_to_material
 	var/obj/item/stack/S = new rod_product(get_turf(user))
 	S.add_fingerprint(user)
 	S.add_to_stacks(user)
-	if(!(user.l_hand && user.r_hand))
-		user.put_in_hands(S)
 
 /material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
 	if(!wire_product)
@@ -341,7 +339,7 @@ var/list/name_to_material
 	melting_point = 6000
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
-	icon_colour = "#777777"
+	icon_colour = "#666666"
 	explosion_resistance = 25
 	hardness = 80
 	weight = 23

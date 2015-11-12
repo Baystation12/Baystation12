@@ -85,7 +85,7 @@
 				banreason = "[banreason] (CUSTOM CID)"
 		else
 			message_admins("Ban process: A mob matching [playermob.ckey] was found at location [playermob.x], [playermob.y], [playermob.z]. Custom ip and computer id fields replaced with the ip and computer id from the located mob")
-		notes_add(playermob.ckey,banreason,usr)
+		notes_add(banckey,banreason,usr)
 
 		DB_ban_record(bantype, playermob, banduration, banreason, banjob, null, banckey, banip, bancid )
 
@@ -1319,7 +1319,7 @@
 				var/obj/pageobj = B.pages[page]
 				data += "<A href='?src=\ref[src];AdminFaxViewPage=[page];paper_bundle=\ref[B]'>Page [page] - [pageobj.name]</A><BR>"
 
-			usr << browse(data, "window=[B.name]")
+			usr << browse(sanitize_local(data, SANITIZE_BROWSER), "window=[B.name]")
 		else
 			usr << "\red The faxed item is not viewable. This is probably a bug, and should be reported on the tracker: [fax.type]"
 
@@ -1343,11 +1343,11 @@
 
 		//todo: MD
 		//var/input = input(src.owner, "Please enter a message to reply to [key_name(sender)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
-		var/input = sanitize(input(src.owner, "Please enter a message to reply to [key_name(sender)] via secure connection. NOTE: BBCode does not work.", "Outgoing message from Centcomm", "") as message|null, extra = 0, ja_mode = POPUP)
+		var/input = sanitize(input(src.owner, "Please enter a message to reply to [key_name(sender)] via secure connection. NOTE: BBCode does not work.", "Outgoing message from Centcomm", "") as message|null, extra = 0)
 		input = replacetext(input, "\n", "<br>")
 		if(!input)	return
 
-		var/customname = sanitizeSafe(input(src.owner, "Pick a title for the report", "Title") as text|null, ja_mode = POPUP)
+		var/customname = sanitizeSafe(input(src.owner, "Pick a title for the report", "Title") as text|null)
 
 		// Create the reply message
 		var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( null ) //hopefully the null loc won't cause trouble for us
@@ -2255,7 +2255,7 @@
 					dat += "[sig]<BR>"
 				usr << browse(dat, "window=lastsignalers;size=800x500")
 			if("list_lawchanges")
-				var/dat = "<B>Showing last [length(lawchanges)] law changes.</B><HR>"
+				var/dat = "<B>Showing last [lawchanges.len] law change\s.</B><HR>"
 				for(var/sig in lawchanges)
 					dat += "[sig]<BR>"
 				usr << browse(dat, "window=lawchanges;size=800x500")
@@ -2574,7 +2574,7 @@
 
 	if(href_list["add_player_info"])
 		var/key = href_list["add_player_info"]
-		var/add = sanitize(input("Add Player Info") as null|text, ja_mode = POPUP)
+		var/add = sanitize(input("Add Player Info") as null|text)
 		if(!add) return
 
 		notes_add(key,add,usr)

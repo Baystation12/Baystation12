@@ -5,10 +5,13 @@
 
 	use_power = 1
 	active_power_usage = 8000 //8kW for the scenery + 500W per holoitem
+
+	circuit = /obj/item/weapon/circuitboard/holodeckcontrol
+
 	var/item_power_usage = 500
 
 	var/area/linkedholodeck = null
-	var/area/target = null
+	var/linkedholodeck_area
 	var/active = 0
 	var/list/holographic_objs = list()
 	var/list/holographic_mobs = list()
@@ -17,34 +20,39 @@
 	var/mob/last_to_emag = null
 	var/last_change = 0
 	var/last_gravity_change = 0
-	var/list/supported_programs = list( \
-	"Empty Court" = "emptycourt", \
-	"Basketball Court" = "basketball",	\
-	"Thunderdome Court" = "thunderdomecourt",	\
-	"Boxing Ring"="boxingcourt",	\
-	"Beach" = "beach",	\
-	"Desert" = "desert",	\
-	"Space" = "space",	\
-	"Picnic Area" = "picnicarea",	\
-	"Snow Field" = "snowfield",	\
-	"Theatre" = "theatre",	\
-	"Meeting Hall" = "meetinghall",	\
-	"Courtroom" = "courtroom"	\
-	)
-	var/list/restricted_programs = list("Atmospheric Burn Simulation" = "burntest", "Wildlife Simulation" = "wildlifecarp")
+	var/list/supported_programs
+	var/list/restricted_programs
+
+/obj/machinery/computer/HolodeckControl/New()
+	..()
+	linkedholodeck = locate(linkedholodeck_area)
+	supported_programs = list()
+	restricted_programs = list()
 
 /obj/machinery/computer/HolodeckControl/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
 
 /obj/machinery/computer/HolodeckControl/attack_hand(var/mob/user as mob)
-
 	if(..())
-		return
+		return 1
 	user.set_machine(src)
 	var/dat
 
 	dat += "<B>Holodeck Control System</B><BR>"
 	dat += "<HR>Current Loaded Programs:<BR>"
+
+	if(!linkedholodeck)
+		dat += "</span class='danger'>Warning: Unable to locate holodeck.<br></span>"
+		user << browse(dat, "window=computer;size=400x500")
+		onclose(user, "computer")
+		return
+
+	if(!supported_programs.len)
+		dat += "</span class='danger'>Warning: No supported holo-programs loaded.<br></span>"
+		user << browse(dat, "window=computer;size=400x500")
+		onclose(user, "computer")
+		return
+
 	for(var/prog in supported_programs)
 		dat += "<A href='?src=\ref[src];program=[supported_programs[prog]]'>([prog])</A><BR>"
 
@@ -82,9 +90,7 @@
 
 	user << browse(dat, "window=computer;size=400x500")
 	onclose(user, "computer")
-
 	return
-
 
 /obj/machinery/computer/HolodeckControl/Topic(href, href_list)
 	if(..())
@@ -131,8 +137,9 @@
 			user << "<span class='notice'>You vastly increase projector power and override the safety and security protocols.</span>"
 			user << "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call Nanotrasen maintenance and do not use the simulator."
 			log_game("[key_name(usr)] emagged the Holodeck Control Computer")
-	src.updateUsrDialog()
-	return
+		src.updateUsrDialog()
+	else
+		..()
 
 /obj/machinery/computer/HolodeckControl/proc/update_projections()
 	if (safety_disabled)
@@ -148,10 +155,6 @@
 		C.set_safety(!safety_disabled)
 		if (last_to_emag)
 			C.friends = list(last_to_emag)
-
-/obj/machinery/computer/HolodeckControl/New()
-	..()
-	linkedholodeck = locate(/area/holodeck/alphadeck)
 
 //This could all be done better, but it works for now.
 /obj/machinery/computer/HolodeckControl/Destroy()
@@ -345,3 +348,28 @@
 
 	active = 0
 	use_power = 1
+
+/obj/machinery/computer/HolodeckControl/Exodus
+	linkedholodeck_area = /area/holodeck/alphadeck
+
+/obj/machinery/computer/HolodeckControl/Exodus/New()
+	..()
+	supported_programs = list(
+	"Empty Court" 		= "emptycourt",
+	"Basketball Court" 	= "basketball",
+	"Thunderdome Court"	= "thunderdomecourt",
+	"Boxing Ring"		= "boxingcourt",
+	"Beach" 			= "beach",
+	"Desert" 			= "desert",
+	"Space" 			= "space",
+	"Picnic Area" 		= "picnicarea",
+	"Snow Field" 		= "snowfield",
+	"Theatre" 			= "theatre",
+	"Meeting Hall" 		= "meetinghall",
+	"Courtroom" 		= "courtroom"
+	)
+
+	restricted_programs = list(
+	"Atmospheric Burn Simulation" = "burntest",
+	"Wildlife Simulation" = "wildlifecarp"
+	)

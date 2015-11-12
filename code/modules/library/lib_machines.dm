@@ -63,7 +63,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 					dat += "<tr><td>[author]</td><td>[title]</td><td>[category]</td><td>[id]</td></tr>"
 				dat += "</table><BR>"
 			dat += "<A href='?src=\ref[src];back=1'>\[Go Back\]</A><BR>"
-	user << browse(dat, "window=publiclibrary")
+	user << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=publiclibrary")
 	onclose(user, "publiclibrary")
 
 /obj/machinery/librarypubliccomp/Topic(href, href_list)
@@ -75,7 +75,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	if(href_list["settitle"])
 		var/newtitle = input("Enter a title to search for:") as text|null
 		if(newtitle)
-			title = sanitize(newtitle)//todo: rubay
+			title = sanitize(newtitle)
 		else
 			title = null
 		title = sanitizeSQL(title)
@@ -89,7 +89,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	if(href_list["setauthor"])
 		var/newauthor = input("Enter an author to search for:") as text|null
 		if(newauthor)
-			author = sanitize(newauthor)//todo: rubay
+			author = sanitize(newauthor)
 		else
 			author = null
 		author = sanitizeSQL(author)
@@ -234,7 +234,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			<A href='?src=\ref[src];switchscreen=0'>No.</A><BR>"}
 
 	//dat += "<A HREF='?src=\ref[user];mach_close=library'>Close</A><br><br>"
-	user << browse(dat, "window=library")
+	user << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=library")
 	onclose(user, "library")
 
 /obj/machinery/librarycomp/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -302,7 +302,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	if(href_list["editbook"])
 		buffer_book = sanitizeSafe(input("Enter the book's title:") as text|null)
 	if(href_list["editmob"])
-		buffer_mob = sanitize(input("Enter the recipient's name:") as text|null, MAX_NAME_LEN, ja_mode = POPUP)
+		buffer_mob = sanitize(input("Enter the recipient's name:") as text|null, MAX_NAME_LEN)
 	if(href_list["checkout"])
 		var/datum/borrowbook/b = new /datum/borrowbook
 		b.bookname = sanitizeSafe(buffer_book)
@@ -317,7 +317,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 		var/obj/item/weapon/book/b = locate(href_list["delbook"])
 		inventory.Remove(b)
 	if(href_list["setauthor"])
-		var/newauthor = sanitize(input("Enter the author's name: ") as text|null, ja_mode = POPUP)
+		var/newauthor = sanitize(input("Enter the author's name: ") as text|null)
 		if(newauthor)
 			scanner.cache.author = newauthor
 	if(href_list["setcategory"])
