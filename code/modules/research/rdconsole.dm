@@ -360,59 +360,28 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		linked_lathe.removeFromQueue(text2num(href_list["removeP"]))
 
 	else if(href_list["lathe_ejectsheet"] && linked_lathe) //Causes the protolathe to eject a sheet of material
-		var/desired_num_sheets = text2num(href_list["amount"])
-		var/res_amount, type
-		var/material/M = get_material_by_name(href_list["lathe_ejectsheet"])
-		if(istype(M))
-			type = M.stack_type
-			switch(M.name)
-				if(DEFAULT_WALL_MATERIAL)
-					res_amount = "m_amount"
-				if("glass")
-					res_amount = "g_amount"
-				if("gold")
-					res_amount = "gold_amount"
-				if("silver")
-					res_amount = "silver_amount"
-				if("phoron")
-					res_amount = "phoron_amount"
-				if("uranium")
-					res_amount = "uranium_amount"
-				if("diamond")
-					res_amount = "diamond_amount"
+		var/num_sheets = min(text2num(href_list["amount"]), round(linked_lathe.materials[href_list["lathe_ejectsheet"]] / SHEET_MATERIAL_AMOUNT))
 
-		if(ispath(type) && hasvar(linked_lathe, res_amount))
-			var/obj/item/stack/material/sheet = new type(linked_lathe.loc)
-			var/available_num_sheets = round(linked_lathe.vars[res_amount]/sheet.perunit)
-			if(available_num_sheets > 0)
-				sheet.amount = min(available_num_sheets, desired_num_sheets)
-				linked_lathe.vars[res_amount] = max(0, (linked_lathe.vars[res_amount] - sheet.amount * sheet.perunit))
-			else
-				qdel(sheet)
+		if(num_sheets < 1)
+			return
+
+		var/mattype = linked_lathe.getMaterialType(href_list["lathe_ejectsheet"])
+
+		var/obj/item/stack/material/M = new mattype(linked_lathe.loc)
+		M.amount = num_sheets
+		linked_lathe.materials[href_list["lathe_ejectsheet"]] -= num_sheets * SHEET_MATERIAL_AMOUNT
+
 	else if(href_list["imprinter_ejectsheet"] && linked_imprinter) //Causes the protolathe to eject a sheet of material
-		var/desired_num_sheets = text2num(href_list["amount"])
-		var/res_amount, type
-		switch(href_list["imprinter_ejectsheet"])
-			if("glass")
-				type = /obj/item/stack/material/glass
-				res_amount = "g_amount"
-			if("gold")
-				type = /obj/item/stack/material/gold
-				res_amount = "gold_amount"
-			if("diamond")
-				type = /obj/item/stack/material/diamond
-				res_amount = "diamond_amount"
-			if("uranium")
-				type = /obj/item/stack/material/uranium
-				res_amount = "uranium_amount"
-		if(ispath(type) && hasvar(linked_imprinter, res_amount))
-			var/obj/item/stack/material/sheet = new type(linked_imprinter.loc)
-			var/available_num_sheets = round(linked_imprinter.vars[res_amount]/sheet.perunit)
-			if(available_num_sheets>0)
-				sheet.amount = min(available_num_sheets, desired_num_sheets)
-				linked_imprinter.vars[res_amount] = max(0, (linked_imprinter.vars[res_amount] - sheet.amount * sheet.perunit))
-			else
-				qdel(sheet)
+		var/num_sheets = min(text2num(href_list["amount"]), round(linked_imprinter.materials[href_list["imprinter_ejectsheet"]] / SHEET_MATERIAL_AMOUNT))
+
+		if(num_sheets < 1)
+			return
+
+		var/mattype = linked_imprinter.getMaterialType(href_list["imprinter_ejectsheet"])
+
+		var/obj/item/stack/material/M = new mattype(linked_imprinter.loc)
+		M.amount = num_sheets
+		linked_imprinter.materials[href_list["imprinter_ejectsheet"]] -= num_sheets * SHEET_MATERIAL_AMOUNT
 
 	else if(href_list["find_device"]) //The R&D console looks for devices nearby to link up with.
 		screen = 0.0
