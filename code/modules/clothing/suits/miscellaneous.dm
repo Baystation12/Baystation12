@@ -393,3 +393,12 @@
 	item_state = "black_hoodie"
 	icon_open = "black_hoodie_open"
 	icon_closed = "black_hoodie"
+
+/obj/item/clothing/suit/cat
+	name = "cat suit"
+	desc = "This is Barsik's skin! 'Made by 'Lego Ink.'"
+	icon_state = "cat_suit"
+	item_state = "cat_suit"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	siemens_coefficient = 2.0
