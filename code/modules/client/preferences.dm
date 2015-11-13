@@ -113,7 +113,6 @@ datum/preferences
 
 /datum/preferences/New(client/C)
 	player_setup = new(src)
-
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender,species)
 	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
@@ -235,6 +234,8 @@ datum/preferences
 	return 1
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, safety = 0)
+	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
+	player_setup.sanitize_setup()
 	if(be_random_name)
 		real_name = random_name(gender,species)
 

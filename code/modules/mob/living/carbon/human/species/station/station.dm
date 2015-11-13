@@ -321,3 +321,6 @@
 	H.h_style = ""
 	spawn(100)
 		if(H) H.update_hair()
+
+/datum/species/machine/sanitize_name(var/name)
+	return sanitizeName(name, allow_numbers = 1)
