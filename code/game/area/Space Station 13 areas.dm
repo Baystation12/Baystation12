@@ -447,6 +447,22 @@ area/space/atmosalert()
 	name = "\improper Thunderdome (Observer.)"
 	icon_state = "purple"
 
+//ACTORS GUILD
+/area/acting
+	name = "\improper Centcom Acting Guild"
+	icon_state = "red"
+	lighting_use_dynamic = 0
+	requires_power = 0
+
+/area/acting/backstage
+	name = "\improper Backstage"
+
+/area/acting/stage
+	name = "\improper Stage"
+	lighting_use_dynamic = 1
+	icon_state = "yellow"
+
+
 //ENEMY
 
 //names are used

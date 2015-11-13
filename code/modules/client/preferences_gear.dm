@@ -1118,7 +1118,31 @@ var/global/list/gear_datums = list()
 
 /datum/gear/cards
 	display_name = "deck of cards"
-	path = /obj/item/weapon/deck
+	path = /obj/item/weapon/deck/cards
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/tarot
+	display_name = "deck of tarot cards"
+	path = /obj/item/weapon/deck/tarot
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/holder
+	display_name = "card holder"
+	path = /obj/item/weapon/deck/holder
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/cardemon_pack
+	display_name = "Cardemon booster pack"
+	path = /obj/item/weapon/pack/cardemon
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/spaceball_pack
+	display_name = "Spaceball booster pack"
+	path = /obj/item/weapon/pack/spaceball
 	sort_category = "misc"
 	cost = 1
 

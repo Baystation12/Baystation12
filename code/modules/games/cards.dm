@@ -1,17 +1,24 @@
 /datum/playingcard
 	var/name = "playing card"
 	var/card_icon = "card_back"
+	var/back_icon = "card_back"
 
 /obj/item/weapon/deck
-	name = "deck of cards"
-	desc = "A simple deck of playing cards."
-	icon = 'icons/obj/playing_cards.dmi'
-	icon_state = "deck"
 	w_class = 2
-
+	icon = 'icons/obj/playing_cards.dmi'
 	var/list/cards = list()
 
-/obj/item/weapon/deck/New()
+/obj/item/weapon/deck/holder
+	name = "card box"
+	desc = "A small leather case to show how classy you are compared to everyone else."
+	icon_state = "card_holder"
+
+/obj/item/weapon/deck/cards
+	name = "deck of cards"
+	desc = "A simple deck of playing cards."
+	icon_state = "deck"
+
+/obj/item/weapon/deck/cards/New()
 	..()
 
 	var/datum/playingcard/P
@@ -27,12 +34,14 @@
 			P = new()
 			P.name = "[number] of [suit]"
 			P.card_icon = "[colour]num"
+			P.back_icon = "card_back"
 			cards += P
 
 		for(var/number in list("jack","queen","king"))
 			P = new()
 			P.name = "[number] of [suit]"
 			P.card_icon = "[colour]col"
+			P.back_icon = "card_back"
 			cards += P
 
 
@@ -48,7 +57,7 @@
 		for(var/datum/playingcard/P in H.cards)
 			cards += P
 		qdel(O)
-		user << "You place your cards on the bottom of the deck."
+		user << "You place your cards on the bottom of \the [src]."
 		return
 	..()
 
@@ -128,12 +137,12 @@
 /obj/item/weapon/hand/attackby(obj/O as obj, mob/user as mob)
 	if(istype(O,/obj/item/weapon/hand))
 		var/obj/item/weapon/hand/H = O
-		for(var/datum/playingcard/P in H.cards)
-			cards += P
-		src.concealed = H.concealed
-		qdel(O)
-		user.put_in_hands(src)
-		update_icon()
+		for(var/datum/playingcard/P in cards)
+			H.cards += P
+		H.concealed = src.concealed
+		user.drop_from_inventory(src,user.loc)
+		qdel(src)
+		H.update_icon()
 		return
 	..()
 
@@ -158,6 +167,28 @@
 		return
 
 	deal_at(usr, over)
+
+/obj/item/weapon/pack/
+	name = "Card Pack"
+	desc = "For those with disposible income."
+
+	icon_state = "card_pack"
+	icon = 'icons/obj/playing_cards.dmi'
+	w_class = 1
+	var/list/cards = list()
+
+
+/obj/item/weapon/pack/attack_self(var/mob/user as mob)
+	user.visible_message("[user] rips open \the [src]!")
+	var/obj/item/weapon/hand/H = new()
+
+	H.cards += cards
+	cards.Cut();
+	user.drop_item()
+	qdel(src)
+
+	H.update_icon()
+	user.put_in_active_hand(H)
 
 /obj/item/weapon/hand
 	name = "hand of cards"
@@ -226,7 +257,7 @@
 
 	if(cards.len == 1)
 		var/datum/playingcard/P = cards[1]
-		var/image/I = new(src.icon, (concealed ? "card_back" : "[P.card_icon]") )
+		var/image/I = new(src.icon, (concealed ? "[P.back_icon]" : "[P.card_icon]") )
 		I.pixel_x += (-5+rand(10))
 		I.pixel_y += (-5+rand(10))
 		overlays += I
@@ -249,7 +280,7 @@
 				M.Translate(-2,  0)
 	var/i = 0
 	for(var/datum/playingcard/P in cards)
-		var/image/I = new(src.icon, (concealed ? "card_back" : "[P.card_icon]") )
+		var/image/I = new(src.icon, (concealed ? "[P.back_icon]" : "[P.card_icon]") )
 		//I.pixel_x = origin+(offset*i)
 		switch(direction)
 			if(SOUTH)
