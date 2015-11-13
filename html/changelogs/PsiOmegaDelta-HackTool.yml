@@ -1,0 +1,6 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - rscadd: "Adds a hacking tool that for all intents and purposes acts and works like a multitool until a screwdriver is applied."
+  - rscadd: "Gives full control of airlocks after 20-40 seconds of hacking."
+  - rscadd: "The last 6-8 hacked airlocks are always accessed instantly."
