@@ -498,7 +498,7 @@
 						if(prob(90) && !hull)
 							var/turf/simulated/floor/F = src.loc
 							F.ChangeTurf(/turf/space)
-							src.visible_message("<span class='danger'>Something slams into the floor around \the [src], exposing it to space!", "You hear something crack and break.</span>")
+							src.visible_message("<span class='danger'>Something slams into the floor around \the [src], exposing it to space!</span>", "You hear something crack and break.")
 						else
 							src.visible_message("Something slams into the floor around \the [src] - luckily, it didn't get through!", "You hear something crack.")
 					if(ORION_TRAIL_MALFUNCTION)
