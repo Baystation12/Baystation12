@@ -1,5 +1,5 @@
 /obj/machinery/acting/wardrobe
-	name = "Wardrobe Dispenser"
+	name = "wardrobe dispenser"
 	desc = "A machine that dispenses holo-clothing for those in need."
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "cart"

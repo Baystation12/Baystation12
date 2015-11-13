@@ -400,11 +400,11 @@
 					var/mob/living/M = user
 					M.adjust_fire_stacks(5)
 					M.IgniteMob() //flew into a star, so you're on fire
-					user << "<span class='danger'><font size=3>You feel an immense wave of heat emanate from \the [src]. Your skin bursts into flames.</span>"
+					user << "<span class='danger'><font size=3>You feel an immense wave of heat emanate from \the [src]. Your skin bursts into flames.</span></font>"
 		dat += "<br><P ALIGN=Right><a href='byond://?src=\ref[src];menu=1'>OK...</a></P>"
 
 		if(emagged)
-			user << "<span class='danger'><font size=3>You're never going to make it to Orion...</span></font>"
+			user << "<span class='danger'><font size=3>You're never going to make it to Orion...</font></span>"
 			user.death()
 			emagged = 0 //removes the emagged status after you lose
 			gameStatus = ORION_STATUS_START
