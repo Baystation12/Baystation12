@@ -431,7 +431,7 @@ var/list/admin_verbs_mentor = list(
 	return
 
 /client/proc/player_panel_new()
-	set name = "Player Panel New"
+	set name = "PP New"
 	set category = "Admin"
 	if(holder)
 		holder.player_panel_new()
@@ -439,7 +439,7 @@ var/list/admin_verbs_mentor = list(
 	return
 
 /client/proc/check_antagonists()
-	set name = "Check Antagonists"
+	set name = "Check Antag"
 	set category = "Admin"
 	if(holder)
 		holder.check_antagonists()
@@ -448,7 +448,7 @@ var/list/admin_verbs_mentor = list(
 	return
 
 /client/proc/jobbans()
-	set name = "Display Job bans"
+	set name = "Display Jobbans"
 	set category = "Admin"
 	if(holder)
 		if(config.ban_legacy_system)
@@ -749,7 +749,7 @@ var/list/admin_verbs_mentor = list(
 	feedback_add_details("admin_verb","MSL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/change_human_appearance_admin()
-	set name = "Change Mob Appearance - Admin"
+	set name = "Change Mob Appearance"
 	set desc = "Allows you to change the mob appearance"
 	set category = "Admin"
 
@@ -763,7 +763,7 @@ var/list/admin_verbs_mentor = list(
 	feedback_add_details("admin_verb","CHAA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/change_human_appearance_self()
-	set name = "Change Mob Appearance - Self"
+	set name = "Change Self Appearance"
 	set desc = "Allows the mob to change its appearance"
 	set category = "Admin"
 
