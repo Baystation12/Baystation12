@@ -38,21 +38,7 @@
 			src << "<span class='notice'><b>APU GENERATOR FAILURE! (System Damaged)</b></span>"
 			stop_apu(1)
 
-		var/blind = 0
-		var/area/loc = null
-		if (istype(T, /turf))
-			loc = T.loc
-			if (istype(loc, /area))
-				if (!loc.power_equip && !istype(src.loc,/obj/item) && !APU_power)
-					blind = 1
-
-		if (!blind)
-			src.sight |= SEE_TURFS
-			src.sight |= SEE_MOBS
-			src.sight |= SEE_OBJS
-			src.see_in_dark = 8
-			src.see_invisible = SEE_INVISIBLE_LIVING
-
+		if (!is_blinded())
 			if (aiRestorePowerRoutine==2)
 				src << "Alert cancelled. Power has been restored without our assistance."
 				aiRestorePowerRoutine = 0
@@ -77,25 +63,13 @@
 				if (aiRestorePowerRoutine==0)
 					aiRestorePowerRoutine = 1
 
-					//Blind the AI
-					updateicon()
-					src.blind.screen_loc = ui_entire_screen
-					if (src.blind.layer!=18)
-						src.blind.layer = 18
-					src.sight = src.sight&~SEE_TURFS
-					src.sight = src.sight&~SEE_MOBS
-					src.sight = src.sight&~SEE_OBJS
-					src.see_in_dark = 0
-					src.see_invisible = SEE_INVISIBLE_LIVING
-
 					//Now to tell the AI why they're blind and dying slowly.
-
 					src << "You've lost power!"
 
 					spawn(20)
 						src << "Backup battery online. Scanners, camera, and radio interface offline. Beginning fault-detection."
 						sleep(50)
-						if (loc.power_equip)
+						if (current_area.power_equip)
 							if (!istype(T, /turf/space))
 								src << "Alert cancelled. Power has been restored without our assistance."
 								aiRestorePowerRoutine = 0
@@ -125,7 +99,7 @@
 									else src << "Lost connection with the APC!"
 								src:aiRestorePowerRoutine = 2
 								return
-							if (loc.power_equip)
+							if (current_area.power_equip)
 								if (!istype(T, /turf/space))
 									src << "Alert cancelled. Power has been restored without our assistance."
 									aiRestorePowerRoutine = 0
@@ -177,3 +151,22 @@
 	..()
 	add_ai_verbs(src)
 
+/mob/living/silicon/ai/update_sight()
+	if(is_blinded())
+		updateicon()
+		src.blind.screen_loc = ui_entire_screen
+		if (src.blind.layer!=18)
+			src.blind.layer = 18
+		src.sight = src.sight&~SEE_TURFS
+		src.sight = src.sight&~SEE_MOBS
+		src.sight = src.sight&~SEE_OBJS
+		src.see_in_dark = 0
+		src.see_invisible = SEE_INVISIBLE_LIVING
+	else
+		update_dead_sight()
+
+/mob/living/silicon/ai/proc/is_blinded()
+	var/area/A = get_area(src)
+	if (A && !A.power_equip && !istype(src.loc,/obj/item) && !APU_power)
+		return 1
+	return 0
