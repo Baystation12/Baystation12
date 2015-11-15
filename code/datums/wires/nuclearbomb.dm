@@ -9,9 +9,7 @@ var/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 
 /datum/wires/nuclearbomb/CanUse(var/mob/living/L)
 	var/obj/machinery/nuclearbomb/N = holder
-	if(N.panel_open)
-		return 1
-	return 0
+	return N.panel_open
 
 /datum/wires/nuclearbomb/GetInteractWindow()
 	var/obj/machinery/nuclearbomb/N = holder
@@ -25,12 +23,14 @@ var/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 	switch(index)
 		if(NUCLEARBOMB_WIRE_LIGHT)
 			N.lighthack = !N.lighthack
+			N.update_icon()
 			spawn(100)
 				N.lighthack = !N.lighthack
+				N.update_icon()
 		if(NUCLEARBOMB_WIRE_TIMING)
 			if(N.timing)
 				spawn
-					message_admins("[key_name_admin(usr)] pulsed a nuclear bomb's detonation wire, causing it to explode (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[holder.x];Y=[holder.y];Z=[holder.z]'>JMP</a>)")
+					log_and_message_admins_with_location("pulsed a nuclear bomb's detonation wire, causing it to explode.", holder.x, holder.y, holder.z)
 					N.explode()
 		if(NUCLEARBOMB_WIRE_SAFETY)
 			N.safety = !N.safety
@@ -38,9 +38,7 @@ var/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 				N.safety = !N.safety
 				if(N.safety == 1)
 					N.visible_message("<span class='notice'>\The [N] quiets down.</span>")
-					if(!N.lighthack)
-						if (N.icon_state == "nuclearbomb2")
-							N.icon_state = "nuclearbomb1"
+					N.secure_device()
 				else
 					N.visible_message("<span class='notice'>\The [N] emits a quiet whirling noise!</span>")
 
@@ -48,15 +46,13 @@ var/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 	var/obj/machinery/nuclearbomb/N = holder
 	switch(index)
 		if(NUCLEARBOMB_WIRE_SAFETY)
+			N.safety = mended
 			if(N.timing)
 				spawn
-					message_admins("[key_name_admin(usr)] cut a nuclear bomb's timing wire, causing it to explode (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[holder.x];Y=[holder.y];Z=[holder.z]'>JMP</a>)")
+					log_and_message_admins_with_location("cut a nuclear bomb's timing wire, causing it to explode.", holder.x, holder.y, holder.z)
 					N.explode()
 		if(NUCLEARBOMB_WIRE_TIMING)
-			if(!N.lighthack)
-				if (N.icon_state == "nuclearbomb2")
-					N.icon_state = "nuclearbomb1"
-			N.timing = 0
-			bomb_set = 0
+			N.secure_device()
 		if(NUCLEARBOMB_WIRE_LIGHT)
-			N.lighthack = !N.lighthack
+			N.lighthack = !mended
+			N.update_icon()
