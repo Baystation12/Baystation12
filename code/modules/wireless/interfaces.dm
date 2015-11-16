@@ -23,11 +23,11 @@
 /datum/wifi/receiver/New(var/new_id)
 	..()
 	id = new_id
-	wifi_manager.add_device(src)
+	wirelessProcess.add_device(src)
 
 /datum/wifi/receiver/Destroy()
 	..()
-	wifi_manager.remove_device(src)
+	wirelessProcess.remove_device(src)
 
 
 
@@ -43,7 +43,7 @@
 
 /datum/wifi/sender/proc/send_connection_request()
 	var/datum/connection_request/C = new(src, target)
-	wifi_manager.add_request(C)
+	wirelessProcess.add_request(C)
 
 
 
@@ -54,3 +54,15 @@
 /datum/connection_request/New(var/datum/wifi/sender/sender, var/receiver)
 	source = sender
 	target = receiver
+
+
+/obj/item/device/wireless_tool
+	name = "wireless tool"
+	desc = "Used for connecting machinery to controls for remote operation."
+	icon_state = "wirelesstool_off"
+
+/obj/item/device/wireless_tool/attack_self()
+	if(icon_state == "wirelesstool_off")
+		icon_state = "wirelesstool_on"
+	else
+		icon_state = "wirelesstool_off"

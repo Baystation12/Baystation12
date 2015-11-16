@@ -93,7 +93,7 @@
 			debug_variables(chemistryProcess)
 			feedback_add_details("admin_verb", "DChem")
 		if("Wireless")
-			debug_variables(wifi_manager)
+			debug_variables(wirelessProcess)
 			feedback_add_details("admin_verb", "DWifi")
 	message_admins("Admin [key_name_admin(usr)] is debugging the [controller] controller.")
 	return
