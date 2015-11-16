@@ -187,6 +187,14 @@
 	var/id = 1
 	var/locked = 0
 
+	var/_wifi_id
+	var/datum/wifi/receiver/button/crematorium/wifi_receiver
+
+/obj/structure/crematorium/New()
+	..()
+	if(_wifi_id)
+		wifi_receiver = new(_wifi_id)
+
 /obj/structure/crematorium/Destroy()
 	if(connected)
 		qdel(connected)
