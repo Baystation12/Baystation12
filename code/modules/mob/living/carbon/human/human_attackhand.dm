@@ -296,23 +296,6 @@
 	updatehealth()
 	return 1
 
-/mob/living/carbon/human/proc/attack_joint(var/obj/item/W, var/mob/living/user, var/def_zone)
-	if(!def_zone) def_zone = user.zone_sel.selecting
-	var/target_zone = get_zone_with_miss_chance(check_zone(def_zone), src)
-
-	if(user == src) // Attacking yourself can't miss
-		target_zone = user.zone_sel.selecting
-	if(!target_zone)
-		return null
-	var/obj/item/organ/external/organ = get_organ(check_zone(target_zone))
-	if(!organ || (organ.dislocated == 2) || (organ.dislocated == -1))
-		return null
-	var/dislocation_str
-	if(prob(W.force))
-		dislocation_str = "[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!"
-		organ.dislocate(1)
-	return dislocation_str
-
 //Used to attack a joint through grabbing
 /mob/living/carbon/human/proc/grab_joint(var/mob/living/user, var/def_zone)
 	var/has_grab = 0

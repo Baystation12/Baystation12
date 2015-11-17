@@ -41,11 +41,6 @@
 	if (transforming)
 		return
 
-	//Apparently, the person who wrote this code designed it so that
-	//blinded get reset each cycle and then get activated later in the
-	//code. Very ugly. I dont care. Moving this stuff here so its easy
-	//to find it.
-	blinded = null
 	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
 
 	//TODO: seperate this out
@@ -153,6 +148,26 @@
 		return ONE_ATMOSPHERE + pressure_difference
 
 /mob/living/carbon/human/handle_disabilities()
+	..()
+	//Vision
+	var/obj/item/organ/vision
+	if(species.vision_organ)
+		vision = internal_organs_by_name[species.vision_organ]
+
+	if(!vision) // Presumably if a species has no vision organs, they see via some other means.
+		eye_blind =  0
+		blinded =    0
+		eye_blurry = 0
+	else if(vision.is_broken())   // Vision organs cut out or broken? Permablind.
+		eye_blind =  1
+		blinded =    1
+		eye_blurry = 1
+	else
+		//blindness
+		if(!(sdisabilities & BLIND))
+			if(equipment_tint_total >= TINT_BLIND)	// Covered eyes, heal faster
+				eye_blurry = max(eye_blurry-2, 0)
+
 	if (disabilities & EPILEPSY)
 		if ((prob(1) && paralysis < 1))
 			src << "\red You have a seizure!"
@@ -202,7 +217,7 @@
 					emote("drool")
 	*/
 
-	if(stat != 2)
+	if(stat != DEAD)
 		var/rn = rand(0, 200)
 		if(getBrainLoss() >= 5)
 			if(0 <= rn && rn <= 3)
@@ -342,11 +357,28 @@
 			internals.icon_state = "internal0"
 	return null
 
+/mob/living/carbon/human/get_breath_from_environment(var/volume_needed=BREATH_VOLUME)
+	var/datum/gas_mixture/breath = ..()
+
+	if(breath)
+		//exposure to extreme pressures can rupture lungs
+		var/check_pressure = breath.return_pressure()
+		if(check_pressure < ONE_ATMOSPHERE / 5 || check_pressure > ONE_ATMOSPHERE * 5)
+			if(!is_lung_ruptured() && prob(5))
+				rupture_lung()
+
+	return breath
 
 /mob/living/carbon/human/handle_breath(datum/gas_mixture/breath)
 	if(status_flags & GODMODE)
 		return
 
+	//exposure to extreme pressures can rupture lungs
+	if(breath && (breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5))
+		if(!is_lung_ruptured() && prob(5))
+			rupture_lung()
+
+	//check if we actually need to process breath
 	if(!breath || (breath.total_moles == 0) || suiciding)
 		failed_last_breath = 1
 		if(suiciding)
@@ -359,10 +391,9 @@
 			adjustOxyLoss(HUMAN_CRIT_MAX_OXYLOSS)
 
 		oxygen_alert = max(oxygen_alert, 1)
-
 		return 0
 
-	var/safe_pressure_min = 16 // Minimum safe partial pressure of breathable gas in kPa
+	var/safe_pressure_min = species.breath_pressure // Minimum safe partial pressure of breathable gas in kPa
 
 	// Lung damage increases the minimum safe pressure.
 	if(species.has_organ["lungs"])
@@ -580,7 +611,14 @@
 			pl_effects()
 			break
 
-	if(!istype(get_turf(src), /turf/space)) //space is not meant to change your body temperature.
+	if(istype(get_turf(src), /turf/space))
+		//Don't bother if the temperature drop is less than 0.1 anyways. Hopefully BYOND is smart enough to turn this constant expression into a constant
+		if(bodytemperature > (0.1 * HUMAN_HEAT_CAPACITY/(HUMAN_EXPOSED_SURFACE_AREA*STEFAN_BOLTZMANN_CONSTANT))**(1/4) + COSMIC_RADIATION_TEMPERATURE)
+			//Thermal radiation into space
+			var/heat_loss = HUMAN_EXPOSED_SURFACE_AREA * STEFAN_BOLTZMANN_CONSTANT * ((bodytemperature - COSMIC_RADIATION_TEMPERATURE)**4)
+			var/temperature_loss = heat_loss/HUMAN_HEAT_CAPACITY
+			bodytemperature -= temperature_loss
+	else
 		var/loc_temp = T0C
 		if(istype(loc, /obj/mecha))
 			var/obj/mecha/M = loc
@@ -594,7 +632,7 @@
 			pressure_alert = 0
 			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
-		//Body temperature adjusts depending on surrounding atmosphere based on your thermal protection
+		//Body temperature adjusts depending on surrounding atmosphere based on your thermal protection (convection)
 		var/temp_adj = 0
 		if(loc_temp < bodytemperature)			//Place is colder than we are
 			var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
@@ -687,13 +725,15 @@
 /mob/living/carbon/human/proc/stabilize_body_temperature()
 	if (species.passive_temp_gain) // We produce heat naturally.
 		bodytemperature += species.passive_temp_gain
+	if (species.body_temperature == null)
+		return //this species doesn't have metabolic thermoregulation
 
 	var/body_temperature_difference = species.body_temperature - bodytemperature
 
 	if (abs(body_temperature_difference) < 0.5)
 		return //fuck this precision
 	if (on_fire)
-		return //too busy for pesky convection
+		return //too busy for pesky metabolic regulation
 
 	if(bodytemperature < species.cold_level_1) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
 		if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
@@ -954,11 +994,11 @@
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-		if(halloss > 100)
-			src << "<span class='notice'>You're in too much pain to keep going...</span>"
-			src.visible_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.")
-			Paralyse(10)
-			setHalLoss(99)
+			if(halloss > 100)
+				src << "<span class='warning'>[species.halloss_message_self]</span>"
+				src.visible_message("<B>[src]</B> [species.halloss_message].")
+				Paralyse(10)
+				setHalLoss(99)
 
 		if(paralysis || sleeping)
 			blinded = 1
@@ -990,49 +1030,12 @@
 			if(!E.len)
 				embedded_flag = 0
 
-		//Eyes
-		//Check rig first because it's two-check and other checks will override it.
-		if(istype(back,/obj/item/weapon/rig))
-			var/obj/item/weapon/rig/O = back
-			if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
-				if((O.offline && O.offline_vision_restriction == 2) || (!O.offline && O.vision_restriction == 2))
-					blinded = 1
-
 		// Check everything else.
 
 		//Periodically double-check embedded_flag
 		if(embedded_flag && !(life_tick % 10))
 			if(!embedded_needs_process())
 				embedded_flag = 0
-		//Vision
-		var/obj/item/organ/vision
-		if(species.vision_organ)
-			vision = internal_organs_by_name[species.vision_organ]
-
-		if(!vision) // Presumably if a species has no vision organs, they see via some other means.
-			eye_blind =  0
-			blinded =    0
-			eye_blurry = 0
-		else if(vision.is_broken())   // Vision organs cut out or broken? Permablind.
-			eye_blind =  1
-			blinded =    1
-			eye_blurry = 1
-		else
-			//blindness
-			if(sdisabilities & BLIND) // Disabled-blind, doesn't get better on its own
-				blinded =    1
-			else if(eye_blind)		       // Blindness, heals slowly over time
-				eye_blind =  max(eye_blind-1,0)
-				blinded =    1
-			else if(istype(glasses, /obj/item/clothing/glasses/sunglasses/blindfold))	//resting your eyes with a blindfold heals blurry eyes faster
-				eye_blurry = max(eye_blurry-3, 0)
-				blinded =    1
-
-			//blurry sight
-			if(vision.is_bruised())   // Vision organs impaired? Permablurry.
-				eye_blurry = 1
-			if(eye_blurry)	           // Blurry eyes heal slowly
-				eye_blurry = max(eye_blurry-1, 0)
 
 		//Ears
 		if(sdisabilities & DEAF)	//disabled-deaf, doesn't get better on its own
@@ -1106,14 +1109,8 @@
 
 	// now handle what we see on our screen
 
-	if(!client)
-		return 0
-
-	for(var/image/hud in client.images)
-		if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
-			client.images.Remove(hud)
-
-	client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
+	if(!..())
+		return
 
 	if(damageoverlay.overlays)
 		damageoverlay.overlays = list()
@@ -1185,60 +1182,6 @@
 					I = overlays_cache[23]
 			damageoverlay.overlays += I
 
-	if( stat == DEAD )
-		sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS|SEE_SELF
-		see_in_dark = 8
-		if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
-		if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
-		if(client)
-			if(client.view != world.view) // If mob dies while zoomed in with device, unzoom them.
-				for(var/obj/item/item in contents)
-					if(item.zoom)
-						item.zoom()
-						break
-
-	else
-		sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
-		see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
-
-		if(XRAY in mutations)
-			sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
-			see_in_dark = 8
-			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
-
-		if(seer==1)
-			var/obj/effect/rune/R = locate() in loc
-			if(R && R.word1 == cultwords["see"] && R.word2 == cultwords["hell"] && R.word3 == cultwords["join"])
-				see_invisible = SEE_INVISIBLE_CULT
-			else
-				see_invisible = SEE_INVISIBLE_LIVING
-				seer = 0
-
-		else
-			sight = species.get_vision_flags(src)
-			see_in_dark = species.darksight
-			see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
-		var/tmp/glasses_processed = 0
-		var/obj/item/weapon/rig/rig = back
-		if(istype(rig) && rig.visor)
-			if(!rig.helmet || (head && rig.helmet == head))
-				if(rig.visor && rig.visor.vision && rig.visor.active && rig.visor.vision.glasses)
-					glasses_processed = 1
-					process_glasses(rig.visor.vision.glasses)
-
-		if(glasses && !glasses_processed)
-			glasses_processed = 1
-			process_glasses(glasses)
-		if(XRAY in mutations)
-			sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
-			see_in_dark = 8
-			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
-
-		if(!glasses_processed && (species.get_vision_flags(src) > 0))
-			sight |= species.get_vision_flags(src)
-		if(!seer && !glasses_processed)
-			see_invisible = SEE_INVISIBLE_LIVING
-
 		if(healths)
 			if (analgesic > 100)
 				healths.icon_state = "health_health_numb"
@@ -1257,8 +1200,6 @@
 							if(0 to 20)				healths.icon_state = "health5"
 							else					healths.icon_state = "health6"
 
-			if(!seer)
-				see_invisible = SEE_INVISIBLE_LIVING
 		if(nutrition_icon)
 			switch(nutrition)
 				if(450 to INFINITY)				nutrition_icon.icon_state = "nutrition0"
@@ -1296,112 +1237,40 @@
 					if(260 to 280)			bodytemp.icon_state = "temp-3"
 					else					bodytemp.icon_state = "temp-4"
 			else
+				//TODO: precalculate all of this stuff when the species datum is created
+				var/base_temperature = species.body_temperature
+				if(base_temperature == null) //some species don't have a set metabolic temperature
+					base_temperature = (species.heat_level_1 + species.cold_level_1)/2
+				
 				var/temp_step
-				if (bodytemperature >= species.body_temperature)
-					temp_step = (species.heat_level_1 - species.body_temperature)/4
+				if (bodytemperature >= base_temperature)
+					temp_step = (species.heat_level_1 - base_temperature)/4
 
 					if (bodytemperature >= species.heat_level_1)
 						bodytemp.icon_state = "temp4"
-					else if (bodytemperature >= species.body_temperature + temp_step*3)
+					else if (bodytemperature >= base_temperature + temp_step*3)
 						bodytemp.icon_state = "temp3"
-					else if (bodytemperature >= species.body_temperature + temp_step*2)
+					else if (bodytemperature >= base_temperature + temp_step*2)
 						bodytemp.icon_state = "temp2"
-					else if (bodytemperature >= species.body_temperature + temp_step*1)
+					else if (bodytemperature >= base_temperature + temp_step*1)
 						bodytemp.icon_state = "temp1"
 					else
 						bodytemp.icon_state = "temp0"
 
-				else if (bodytemperature < species.body_temperature)
-					temp_step = (species.body_temperature - species.cold_level_1)/4
+				else if (bodytemperature < base_temperature)
+					temp_step = (base_temperature - species.cold_level_1)/4
 
 					if (bodytemperature <= species.cold_level_1)
 						bodytemp.icon_state = "temp-4"
-					else if (bodytemperature <= species.body_temperature - temp_step*3)
+					else if (bodytemperature <= base_temperature - temp_step*3)
 						bodytemp.icon_state = "temp-3"
-					else if (bodytemperature <= species.body_temperature - temp_step*2)
+					else if (bodytemperature <= base_temperature - temp_step*2)
 						bodytemp.icon_state = "temp-2"
-					else if (bodytemperature <= species.body_temperature - temp_step*1)
+					else if (bodytemperature <= base_temperature - temp_step*1)
 						bodytemp.icon_state = "temp-1"
 					else
 						bodytemp.icon_state = "temp0"
-		if(blind)
-			if(blinded)		blind.layer = 18
-			else			blind.layer = 0
-
-		if(disabilities & NEARSIGHTED)	//this looks meh but saves a lot of memory by not requiring to add var/prescription
-			if(glasses)					//to every /obj/item
-				var/obj/item/clothing/glasses/G = glasses
-				if(!G.prescription)
-					client.screen += global_hud.vimpaired
-			else
-				client.screen += global_hud.vimpaired
-
-		if(eye_blurry)			client.screen += global_hud.blurry
-		if(druggy)				client.screen += global_hud.druggy
-
-		if(config.welder_vision)
-			var/found_welder
-			if(species.short_sighted)
-				found_welder = 1
-			else
-				if(istype(glasses, /obj/item/clothing/glasses/welding))
-					var/obj/item/clothing/glasses/welding/O = glasses
-					if(!O.up)
-						found_welder = 1
-				if(!found_welder && istype(head, /obj/item/clothing/head/welding))
-					var/obj/item/clothing/head/welding/O = head
-					if(!O.up)
-						found_welder = 1
-				if(!found_welder && istype(back, /obj/item/weapon/rig))
-					var/obj/item/weapon/rig/O = back
-					if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
-						if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))
-							found_welder = 1
-			if(found_welder)
-				client.screen |= global_hud.darkMask
-
-		if(machine)
-			var/viewflags = machine.check_eye(src)
-			if(viewflags < 0)
-				reset_view(null, 0)
-			else if(viewflags)
-				sight |= viewflags
-		else if(eyeobj)
-			if(eyeobj.owner != src)
-
-				reset_view(null)
-		else
-			var/isRemoteObserve = 0
-			if((mRemote in mutations) && remoteview_target)
-				if(remoteview_target.stat==CONSCIOUS)
-					isRemoteObserve = 1
-			if(!isRemoteObserve && client && !client.adminobs)
-				remoteview_target = null
-				reset_view(null, 0)
 	return 1
-
-/mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
-	if(G && G.active)
-		see_in_dark += G.darkness_view
-		if(G.overlay)
-			client.screen |= G.overlay
-		if(G.vision_flags)
-			sight |= G.vision_flags
-			if(!druggy && !seer)
-				see_invisible = SEE_INVISIBLE_MINIMUM
-		if(G.see_invisible >= 0)
-			see_invisible = G.see_invisible
-		if(istype(G,/obj/item/clothing/glasses/night) && !seer)
-			see_invisible = SEE_INVISIBLE_MINIMUM
-/* HUD shit goes here, as long as it doesn't modify sight flags */
-// The purpose of this is to stop xray and w/e from preventing you from using huds -- Love, Doohl
-		var/obj/item/clothing/glasses/hud/O = G
-		if(istype(G, /obj/item/clothing/glasses/sunglasses/sechud))
-			var/obj/item/clothing/glasses/sunglasses/sechud/S = G
-			O = S.hud
-		if(istype(O))
-			O.process_hud(src)
-			if(!druggy && !seer)	see_invisible = SEE_INVISIBLE_LIVING
 
 /mob/living/carbon/human/handle_random_events()
 	if(in_stasis)
@@ -1718,6 +1587,38 @@
 /mob/living/carbon/human/rejuvenate()
 	restore_blood()
 	..()
+
+/mob/living/carbon/human/handle_vision()
+	if(client)
+		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
+	if(machine)
+		var/viewflags = machine.check_eye(src)
+		if(viewflags < 0)
+			reset_view(null, 0)
+		else if(viewflags)
+			sight |= viewflags
+	else if(eyeobj)
+		if(eyeobj.owner != src)
+
+			reset_view(null)
+	else
+		var/isRemoteObserve = 0
+		if((mRemote in mutations) && remoteview_target)
+			if(remoteview_target.stat==CONSCIOUS)
+				isRemoteObserve = 1
+		if(!isRemoteObserve && client && !client.adminobs)
+			remoteview_target = null
+			reset_view(null, 0)
+
+	update_equipment_vision()
+	species.handle_vision(src)
+
+/mob/living/carbon/human/update_sight()
+	..()
+	if(stat == DEAD)
+		return
+	if(XRAY in mutations)
+		sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
 
 #undef HUMAN_MAX_OXYLOSS
 #undef HUMAN_CRIT_MAX_OXYLOSS

@@ -17,6 +17,8 @@
 	set_trait(TRAIT_PRODUCT_ICON,"chili")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#ED3300")
 	set_trait(TRAIT_PLANT_ICON,"bush2")
+	set_trait(TRAIT_IDEAL_HEAT, 298)
+	set_trait(TRAIT_IDEAL_LIGHT, 7)
 
 /datum/seed/chili/ice
 	name = "icechili"
@@ -52,6 +54,8 @@
 	set_trait(TRAIT_PRODUCT_ICON,"berry")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#FA1616")
 	set_trait(TRAIT_PLANT_ICON,"bush")
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15) 
 
 /datum/seed/berry/glow
 	name = "glowberries"
@@ -70,6 +74,8 @@
 	set_trait(TRAIT_YIELD,2)
 	set_trait(TRAIT_POTENCY,10)
 	set_trait(TRAIT_PRODUCT_COLOUR,"c9fa16")
+	set_trait(TRAIT_WATER_CONSUMPTION, 3)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.25) 
 
 /datum/seed/berry/poison
 	name = "poisonberries"
@@ -81,6 +87,8 @@
 /datum/seed/berry/poison/New()
 	..()
 	set_trait(TRAIT_PRODUCT_COLOUR,"#6DC961")
+	set_trait(TRAIT_WATER_CONSUMPTION, 3)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.25) 
 
 /datum/seed/berry/poison/death
 	name = "deathberries"
@@ -94,6 +102,7 @@
 	set_trait(TRAIT_YIELD,3)
 	set_trait(TRAIT_POTENCY,50)
 	set_trait(TRAIT_PRODUCT_COLOUR,"#7A5454")
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.35) 
 
 // Nettles/variants.
 /datum/seed/nettle
@@ -152,6 +161,9 @@
 	set_trait(TRAIT_PRODUCT_ICON,"tomato")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#D10000")
 	set_trait(TRAIT_PLANT_ICON,"bush3")
+	set_trait(TRAIT_IDEAL_LIGHT, 6) 
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.25) 
 
 /datum/seed/tomato/blood
 	name = "bloodtomato"
@@ -224,6 +236,8 @@
 	set_trait(TRAIT_PRODUCT_ICON,"eggplant")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#892694")
 	set_trait(TRAIT_PLANT_ICON,"bush4")
+	set_trait(TRAIT_IDEAL_HEAT, 298)
+	set_trait(TRAIT_IDEAL_LIGHT, 7) 
 
 //Apples/varieties.
 /datum/seed/apple
@@ -245,6 +259,7 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#FF540A")
 	set_trait(TRAIT_PLANT_ICON,"tree2")
 	set_trait(TRAIT_FLESH_COLOUR,"#E8E39B")
+	set_trait(TRAIT_IDEAL_LIGHT, 4)
 
 /datum/seed/apple/poison
 	name = "poisonapple"
@@ -286,6 +301,7 @@
 	set_trait(TRAIT_PRODUCT_ICON,"ambrosia")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#9FAD55")
 	set_trait(TRAIT_PLANT_ICON,"ambrosia")
+	set_trait(TRAIT_IDEAL_LIGHT, 6) 
 
 /datum/seed/ambrosia/deus
 	name = "ambrosiadeus"
@@ -321,6 +337,9 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#DBDA72")
 	set_trait(TRAIT_PLANT_COLOUR,"#D9C94E")
 	set_trait(TRAIT_PLANT_ICON,"mushroom")
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+	set_trait(TRAIT_IDEAL_HEAT, 288) 
+	set_trait(TRAIT_LIGHT_TOLERANCE, 6)
 
 /datum/seed/mushroom/mold
 	name = "mold"
@@ -509,6 +528,7 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#C492D6")
 	set_trait(TRAIT_PLANT_COLOUR,"#6B8C5E")
 	set_trait(TRAIT_PLANT_ICON,"flower")
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
 
 /datum/seed/flower/poppy
 	name = "poppies"
@@ -526,6 +546,9 @@
 	set_trait(TRAIT_PRODUCT_ICON,"flower3")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#B33715")
 	set_trait(TRAIT_PLANT_ICON,"flower3")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+	set_trait(TRAIT_WATER_CONSUMPTION, 0.5)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
 
 /datum/seed/flower/sunflower
 	name = "sunflowers"
@@ -538,6 +561,9 @@
 	set_trait(TRAIT_PRODUCT_ICON,"flower2")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#FFF700")
 	set_trait(TRAIT_PLANT_ICON,"flower2")
+	set_trait(TRAIT_IDEAL_LIGHT, 7) 
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15) 
 
 //Grapes/varieties
 /datum/seed/grapes
@@ -558,6 +584,8 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#BB6AC4")
 	set_trait(TRAIT_PLANT_COLOUR,"#378F2E")
 	set_trait(TRAIT_PLANT_ICON,"vine")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)	
 
 /datum/seed/grapes/green
 	name = "greengrapes"
@@ -587,6 +615,7 @@
 	set_trait(TRAIT_PRODUCT_ICON,"potato")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#C4AE7A")
 	set_trait(TRAIT_PLANT_ICON,"bush2")
+	set_trait(TRAIT_IDEAL_LIGHT, 6) 
 
 /datum/seed/cabbage
 	name = "cabbage"
@@ -606,6 +635,9 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#84BD82")
 	set_trait(TRAIT_PLANT_COLOUR,"#6D9C6B")
 	set_trait(TRAIT_PLANT_ICON,"vine2")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
 
 /datum/seed/banana
 	name = "banana"
@@ -625,6 +657,9 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#FFEC1F")
 	set_trait(TRAIT_PLANT_COLOUR,"#69AD50")
 	set_trait(TRAIT_PLANT_ICON,"tree4")
+	set_trait(TRAIT_IDEAL_HEAT, 298)
+	set_trait(TRAIT_IDEAL_LIGHT, 7) 
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
 /datum/seed/corn
 	name = "corn"
@@ -644,6 +679,9 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#FFF23B")
 	set_trait(TRAIT_PLANT_COLOUR,"#87C969")
 	set_trait(TRAIT_PLANT_ICON,"corn")
+	set_trait(TRAIT_IDEAL_HEAT, 298)
+	set_trait(TRAIT_IDEAL_LIGHT, 6) 
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
 /datum/seed/potato
 	name = "potato"
@@ -662,6 +700,7 @@
 	set_trait(TRAIT_PRODUCT_ICON,"potato")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#D4CAB4")
 	set_trait(TRAIT_PLANT_ICON,"bush2")
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
 /datum/seed/soybean
 	name = "soybean"
@@ -698,6 +737,8 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#DBD37D")
 	set_trait(TRAIT_PLANT_COLOUR,"#BFAF82")
 	set_trait(TRAIT_PLANT_ICON,"stalk2")
+	set_trait(TRAIT_IDEAL_LIGHT, 6) 
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
 
 /datum/seed/rice
 	name = "rice"
@@ -716,6 +757,8 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#D5E6D1")
 	set_trait(TRAIT_PLANT_COLOUR,"#8ED17D")
 	set_trait(TRAIT_PLANT_ICON,"stalk2")
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
 
 /datum/seed/carrots
 	name = "carrot"
@@ -733,6 +776,7 @@
 	set_trait(TRAIT_PRODUCT_ICON,"carrot")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#FFDB4A")
 	set_trait(TRAIT_PLANT_ICON,"carrot")
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
 /datum/seed/weeds
 	name = "weeds"
@@ -768,6 +812,7 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#EEF5B0")
 	set_trait(TRAIT_PLANT_COLOUR,"#4D8F53")
 	set_trait(TRAIT_PLANT_ICON,"carrot2")
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
 /datum/seed/sugarcane
 	name = "sugarcane"
@@ -786,6 +831,7 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#B4D6BD")
 	set_trait(TRAIT_PLANT_COLOUR,"#6BBD68")
 	set_trait(TRAIT_PLANT_ICON,"stalk3")
+	set_trait(TRAIT_IDEAL_HEAT, 298)
 
 /datum/seed/watermelon
 	name = "watermelon"
@@ -806,6 +852,9 @@
 	set_trait(TRAIT_PLANT_COLOUR,"#257522")
 	set_trait(TRAIT_PLANT_ICON,"vine2")
 	set_trait(TRAIT_FLESH_COLOUR,"#F22C2C")
+	set_trait(TRAIT_IDEAL_HEAT, 298)
+	set_trait(TRAIT_IDEAL_LIGHT, 6) 
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
 /datum/seed/pumpkin
 	name = "pumpkin"
@@ -825,6 +874,7 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#B4D4B9")
 	set_trait(TRAIT_PLANT_COLOUR,"#BAE8C1")
 	set_trait(TRAIT_PLANT_ICON,"vine2")
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
 /datum/seed/citrus
 	name = "lime"
@@ -858,6 +908,7 @@
 	set_trait(TRAIT_PRODUCES_POWER,1)
 	set_trait(TRAIT_PRODUCT_COLOUR,"#F0E226")
 	set_trait(TRAIT_FLESH_COLOUR,"#F0E226")
+	set_trait(TRAIT_IDEAL_LIGHT, 6) 
 
 /datum/seed/citrus/orange
 	name = "orange"
@@ -888,6 +939,8 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#09FF00")
 	set_trait(TRAIT_PLANT_COLOUR,"#07D900")
 	set_trait(TRAIT_PLANT_ICON,"grass")
+	set_trait(TRAIT_WATER_CONSUMPTION, 0.5)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15) 
 
 /datum/seed/cocoa
 	name = "cocoa"
@@ -905,6 +958,8 @@
 	set_trait(TRAIT_PRODUCT_ICON,"treefruit")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#CCA935")
 	set_trait(TRAIT_PLANT_ICON,"tree2")
+	set_trait(TRAIT_IDEAL_HEAT, 298)
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
 /datum/seed/cherries
 	name = "cherry"
@@ -944,6 +999,7 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#96D278")
 	set_trait(TRAIT_PLANT_COLOUR,"#6F7A63")
 	set_trait(TRAIT_PLANT_ICON,"vine2")
+	set_trait(TRAIT_WATER_CONSUMPTION, 0.5)
 
 /datum/seed/diona
 	name = "diona"
@@ -983,6 +1039,8 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#378C61")
 	set_trait(TRAIT_PLANT_COLOUR,"#378C61")
 	set_trait(TRAIT_PLANT_ICON,"tree5")
+	set_trait(TRAIT_IDEAL_HEAT, 283)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15) 
 
 /datum/seed/mtear
 	name = "mtear"
@@ -1001,6 +1059,8 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#4CC5C7")
 	set_trait(TRAIT_PLANT_COLOUR,"#4CC789")
 	set_trait(TRAIT_PLANT_ICON,"bush7")
+	set_trait(TRAIT_IDEAL_HEAT, 283)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15) 
 
 /datum/seed/telriis
 	name = "telriis"
@@ -1106,3 +1166,23 @@
 	set_trait(TRAIT_PRODUCTION,7)
 	set_trait(TRAIT_YIELD,3)
 	set_trait(TRAIT_POTENCY,3)
+
+// Alien weeds.
+/datum/seed/xenomorph
+	name = "xenomorph"
+	seed_name = "alien weed"
+	display_name = "alien weeds"
+	force_layer = 3
+	chems = list("phoron" = list(1,3))
+
+/datum/seed/xenomorph/New()
+	..()
+	set_trait(TRAIT_PLANT_ICON,"vine2")
+	set_trait(TRAIT_IMMUTABLE,1)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#3D1934")
+	set_trait(TRAIT_FLESH_COLOUR,"#3D1934")
+	set_trait(TRAIT_PLANT_COLOUR,"#3D1934")
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,-1)
+	set_trait(TRAIT_SPREAD,2)
+	set_trait(TRAIT_POTENCY,50)

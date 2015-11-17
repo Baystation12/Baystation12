@@ -34,7 +34,7 @@ var/global/list/robot_modules = list(
 	var/list/obj/item/borg/upgrade/supported_upgrades = list()
 
 	// Bookkeeping
-	var/list/added_languages = list()
+	var/list/original_languages = list()
 	var/list/added_networks = list()
 
 /obj/item/weapon/robot_module/New(var/mob/living/silicon/robot/R)
@@ -69,7 +69,7 @@ var/global/list/robot_modules = list(
 	for(var/module in modules)
 		qdel(module)
 	for(var/synth in synths)
-		qdel(synths)
+		qdel(synth)
 	modules.Cut()
 	synths.Cut()
 	qdel(emag)
@@ -91,6 +91,15 @@ var/global/list/robot_modules = list(
 	return
 
 /obj/item/weapon/robot_module/proc/respawn_consumable(var/mob/living/silicon/robot/R, var/rate)
+	var/obj/item/device/flash/F = locate() in src.modules
+	if(F)
+		if(F.broken)
+			F.broken = 0
+			F.times_used = 0
+			F.icon_state = "flash"
+		else if(F.times_used)
+			F.times_used--
+
 	if(!synths || !synths.len)
 		return
 
@@ -105,14 +114,22 @@ var/global/list/robot_modules = list(
 			modules += O
 
 /obj/item/weapon/robot_module/proc/add_languages(var/mob/living/silicon/robot/R)
+	// Stores the languages as they were before receiving the module, and whether they could be synthezized.
+	for(var/datum/language/language_datum in R.languages)
+		original_languages[language_datum] = (language_datum in R.speech_synthesizer_langs)
+
 	for(var/language in languages)
-		if(R.add_language(language, languages[language]))
-			added_languages |= language
+		R.add_language(language, languages[language])
 
 /obj/item/weapon/robot_module/proc/remove_languages(var/mob/living/silicon/robot/R)
-	for(var/language in added_languages)
+	// Clear all added languages, whether or not we originally had them.
+	for(var/language in languages)
 		R.remove_language(language)
-	added_languages.Cut()
+
+	// Then add back all the original languages, and the relevant synthezising ability
+	for(var/original_language in original_languages)
+		R.add_language(original_language, original_languages[original_language])
+	original_languages.Cut()
 
 /obj/item/weapon/robot_module/proc/add_camera_networks(var/mob/living/silicon/robot/R)
 	if(R.camera && (NETWORK_ROBOTS in R.camera.network))
@@ -263,7 +280,6 @@ var/global/list/robot_modules = list(
 	..()
 
 /obj/item/weapon/robot_module/medical/crisis/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
-
 	var/obj/item/weapon/reagent_containers/syringe/S = locate() in src.modules
 	if(S.mode == 2)
 		S.reagents.clear_reagents()
@@ -415,13 +431,7 @@ var/global/list/robot_modules = list(
 	..()
 
 /obj/item/weapon/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
-	var/obj/item/device/flash/F = locate() in src.modules
-	if(F.broken)
-		F.broken = 0
-		F.times_used = 0
-		F.icon_state = "flash"
-	else if(F.times_used)
-		F.times_used--
+	..()
 	var/obj/item/weapon/gun/energy/taser/mounted/cyborg/T = locate() in src.modules
 	if(T.power_supply.charge < T.power_supply.maxcharge)
 		T.power_supply.give(T.charge_cost * amount)
@@ -454,6 +464,7 @@ var/global/list/robot_modules = list(
 	..()
 
 /obj/item/weapon/robot_module/janitor/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+	..()
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules
 	LR.Charge(R, amount)
 	if(src.emag)
@@ -536,6 +547,7 @@ var/global/list/robot_modules = list(
 	..()
 
 /obj/item/weapon/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+	..()
 	var/obj/item/weapon/reagent_containers/food/condiment/enzyme/E = locate() in src.modules
 	E.reagents.add_reagent("enzyme", 2 * amount)
 	if(src.emag)

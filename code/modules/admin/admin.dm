@@ -1293,7 +1293,7 @@ proc/admin_notice(var/message, var/rights)
 
 	var/datum/antagonist/antag = all_antag_types[antag_type]
 	message_admins("[key_name(usr)] attempting to force latespawn with template [antag.id].")
-	antag.attempt_late_spawn()
+	antag.attempt_auto_spawn()
 
 /datum/admins/proc/force_mode_latespawn()
 	set category = "Admin"
@@ -1310,6 +1310,5 @@ proc/admin_notice(var/message, var/rights)
 		usr << "Mode has not started."
 		return
 
-	message_admins("[key_name(usr)] attempting to force mode latespawn.")
-	ticker.mode.next_spawn = 0
-	ticker.mode.try_latespawn()
+	message_admins("[key_name(usr)] attempting to force mode autospawn.")
+	ticker.mode.process_autoantag()

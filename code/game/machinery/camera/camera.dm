@@ -92,10 +92,6 @@
 
 	..() //and give it the regular chance of being deleted outright
 
-
-/obj/machinery/camera/blob_act()
-	return
-
 /obj/machinery/camera/hitby(AM as mob|obj)
 	..()
 	if (istype(AM, /obj))

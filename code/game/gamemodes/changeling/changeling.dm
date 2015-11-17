@@ -12,7 +12,6 @@
 		certain though... there is never just one of them. Good luck."
 	config_tag = "changeling"
 	required_players = 2
-	required_players_secret = 10
 	required_enemies = 1
 	end_on_antag_death = 1
 	antag_scaling_coeff = 10

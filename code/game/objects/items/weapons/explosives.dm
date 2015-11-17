@@ -46,6 +46,7 @@
 	if (ismob(target) || istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/weapon/storage/) || istype(target, /obj/item/clothing/accessory/storage/) || istype(target, /obj/item/clothing/under))
 		return
 	user << "Planting explosives..."
+	user.do_attack_animation(target)
 
 	if(do_after(user, 50) && in_range(user, target))
 		user.drop_item()

@@ -87,11 +87,6 @@
 	..()
 	healthcheck()
 
-/obj/machinery/bot/blob_act()
-	src.health -= rand(20,40)*fire_dam_coeff
-	healthcheck()
-	return
-
 /obj/machinery/bot/ex_act(severity)
 	switch(severity)
 		if(1.0)
