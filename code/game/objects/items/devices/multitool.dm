@@ -19,5 +19,28 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 20)
 
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
-	var/obj/machinery/telecomms/buffer // simple machine buffer for device linkage
-	var/obj/machinery/clonepod/connecting //same for cryopod linkage
+
+	var/buffer_name
+	var/atom/buffer_object
+
+/obj/item/device/multitool/proc/get_buffer()
+	if(buffer_object)
+		return buffer_object
+	buffer_name = null
+
+/obj/item/device/multitool/proc/set_buffer(var/atom/buffer)
+	if(!buffer || istype(buffer))
+		buffer_object = buffer
+		buffer_name = buffer ? buffer_name : null
+
+/obj/item/device/multitool/resolve_attackby(atom/A, mob/user)
+	if(!isobject(A))
+		return ..(A, user)
+
+	var/obj/O = A
+	var/datum/expansion/multitool/MT = O.expansions[/datum/expansion/multitool]
+	if(!MT)
+		return ..(A, user)
+
+	MT.interact(src, user)
+	return 1

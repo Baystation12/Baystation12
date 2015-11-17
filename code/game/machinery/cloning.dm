@@ -241,7 +241,7 @@
 				user.visible_message("[user] unsecures [src] from the floor.", "You unsecure [src] from the floor.")
 	else if(istype(W, /obj/item/device/multitool))
 		var/obj/item/device/multitool/M = W
-		M.connecting = src
+		M.set_buffer(src)
 		user << "<span class='notice'>You load connection data from [src] to [M].</span>"
 		return
 	else
@@ -249,12 +249,12 @@
 
 /obj/machinery/clonepod/emag_act(var/remaining_charges, var/mob/user)
 	if(isnull(occupant))
-		return
+		return NO_EMAG_ACT
 	user << "You force an emergency ejection."
 	locked = 0
 	go_out()
 	return 1
-	
+
 //Put messages in the connected computer's temp var for display.
 /obj/machinery/clonepod/proc/connected_message(var/message)
 	if((isnull(connected)) || (!istype(connected, /obj/machinery/computer/cloning)))

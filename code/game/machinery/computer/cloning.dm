@@ -72,8 +72,8 @@
 			return
 	else if(istype(W, /obj/item/device/multitool))
 		var/obj/item/device/multitool/M = W
-		var/obj/machinery/clonepod/P = M.connecting
-		if(P && !(P in pods))
+		var/obj/machinery/clonepod/P = M.get_buffer()
+		if(istype(P) && !(P in pods))
 			pods += P
 			P.connected = src
 			P.name = "[initial(P.name)] #[pods.len]"

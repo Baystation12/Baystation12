@@ -195,6 +195,8 @@
 #include "code\datums\diseases\advance\symptoms\voice_change.dm"
 #include "code\datums\diseases\advance\symptoms\vomit.dm"
 #include "code\datums\diseases\advance\symptoms\weight.dm"
+#include "code\datums\expansions\expansion.dm"
+#include "code\datums\expansions\multitool\multitool.dm"
 #include "code\datums\helper_datums\construction_datum.dm"
 #include "code\datums\helper_datums\events.dm"
 #include "code\datums\helper_datums\getrev.dm"
