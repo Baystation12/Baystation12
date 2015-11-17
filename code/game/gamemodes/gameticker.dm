@@ -33,6 +33,8 @@ var/global/datum/controller/gameticker/ticker
 
 	var/round_end_announced = 0 // Spam Prevention. Announce round end only once.
 
+	var/obj/uniform //chosen security uniform for the round
+
 /datum/controller/gameticker/proc/pregame()
 	login_music = pick(\
 	/*'sound/music/halloween/skeletons.ogg',\
@@ -115,7 +117,7 @@ var/global/datum/controller/gameticker/ticker
 				world << "<B>Possibilities:</B> [english_list(tmpmodes)]"
 	else
 		src.mode.announce()
-
+	ConfigureUniforms()
 	setup_economy()
 	current_state = GAME_STATE_PLAYING
 	create_characters() //Create player characters and transfer them

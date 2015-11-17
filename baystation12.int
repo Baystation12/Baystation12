@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\game\gamemodes\gameticker.dm;code\game\gamemodes\uniform_setup.dm;code\modules\clothing\under\jobs\security.dm;icons\mob\suit.dmi;icons\mob\uniform.dmi;baystation12.dme;code\global.dm
+DIR: code code\game code\game\gamemodes code\modules code\modules\clothing code\modules\clothing\under code\modules\clothing\under\jobs icons icons\mob 
+FILE: code\global.dm
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
