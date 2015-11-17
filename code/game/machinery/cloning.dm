@@ -57,6 +57,12 @@
 
 	RefreshParts()
 	update_icon()
+	expansions[/datum/expansion/multitool] = new/datum/expansion/multitool/store(src)
+
+/obj/machinery/clonepod/Destroy()
+    if(connected)
+        connected.release_pod(src)
+    return ..()
 
 /obj/machinery/clonepod/attack_ai(mob/user as mob)
 
@@ -239,11 +245,6 @@
 				user.visible_message("[user] secures [src] to the floor.", "You secure [src] to the floor.")
 			else
 				user.visible_message("[user] unsecures [src] from the floor.", "You unsecure [src] from the floor.")
-	else if(istype(W, /obj/item/device/multitool))
-		var/obj/item/device/multitool/M = W
-		M.set_buffer(src)
-		user << "<span class='notice'>You load connection data from [src] to [M].</span>"
-		return
 	else
 		..()
 

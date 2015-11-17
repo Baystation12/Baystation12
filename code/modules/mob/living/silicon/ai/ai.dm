@@ -83,6 +83,8 @@ var/list/ai_verbs_default = list(
 	var/custom_sprite 	= 0 					// Whether the selected icon is custom
 	var/carded
 
+	var/obj/item/device/multitool/ai_multitool
+
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs |= ai_verbs_default
 	src.verbs |= silicon_subsystems
@@ -173,7 +175,6 @@ var/list/ai_verbs_default = list(
 
 	ai_list += src
 	..()
-	return
 
 /mob/living/silicon/ai/proc/on_mob_init()
 	src << "<B>You are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>"
@@ -201,9 +202,17 @@ var/list/ai_verbs_default = list(
 	setup_icon()
 
 /mob/living/silicon/ai/Destroy()
+	qdel(aiPDA)
+	qdel(aiMulti)
+	qdel(aiRadio)
+	aiPDA = null
+	aiMulti = null
+	aiRadio = null
+
 	ai_list -= src
 	qdel(eyeobj)
-	..()
+	eyeobj = null
+	return ..()
 
 /mob/living/silicon/ai/proc/setup_icon()
 	var/file = file2text("config/custom_sprites.txt")

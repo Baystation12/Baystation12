@@ -23,6 +23,8 @@
 
 #define isnewplayer(A) istype(A, /mob/new_player)
 
+#define isobj(A) istype(A, /obj)
+
 #define isobserver(A) istype(A, /mob/dead/observer)
 
 #define isorgan(A) istype(A, /obj/item/organ/external)

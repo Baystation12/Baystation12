@@ -23,18 +23,20 @@
 	var/buffer_name
 	var/atom/buffer_object
 
-/obj/item/device/multitool/proc/get_buffer()
-	if(buffer_object)
+/obj/item/device/multitool/proc/get_buffer(var/typepath)
+	// Update the buffer name only when someone fetches the buffer.
+	// Means you cannot be sure the source hasn't been destroyed until the very moment it's needed.
+	buffer_name = buffer_object ? buffer_object.name : null
+	if(buffer_object && (!typepath || istype(buffer_object, typepath)))
 		return buffer_object
-	buffer_name = null
 
 /obj/item/device/multitool/proc/set_buffer(var/atom/buffer)
 	if(!buffer || istype(buffer))
 		buffer_object = buffer
-		buffer_name = buffer ? buffer_name : null
+		buffer_name = buffer ? buffer.name : null
 
 /obj/item/device/multitool/resolve_attackby(atom/A, mob/user)
-	if(!isobject(A))
+	if(!isobj(A))
 		return ..(A, user)
 
 	var/obj/O = A
