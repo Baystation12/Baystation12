@@ -54,6 +54,13 @@
 	if(control_disabled || !canClick())
 		return
 
+	if(multitool_mode && isobj(A))
+		var/obj/O = A
+		var/datum/expansion/multitool/MT = O.expansions[/datum/expansion/multitool]
+		if(MT)
+			MT.interact(aiMulti, src)
+			return
+
 	if(aiCamera.in_camera_mode)
 		aiCamera.camera_mode_off()
 		aiCamera.captureimage(A, usr)

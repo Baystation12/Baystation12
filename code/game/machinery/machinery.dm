@@ -184,6 +184,9 @@ Class Procs:
 		use_power(active_power_usage,power_channel, 1)
 	return 1
 
+/proc/is_operable(var/obj/machinery/M, var/mob/user)
+	return istype(M) && M.operable()
+	
 /obj/machinery/proc/operable(var/additional_flags = 0)
 	return !inoperable(additional_flags)
 
@@ -191,12 +194,15 @@ Class Procs:
 	return (stat & (NOPOWER|BROKEN|additional_flags))
 
 /obj/machinery/CanUseTopic(var/mob/user)
+	world << "machinery can use"
 	if(stat & BROKEN)
 		return STATUS_CLOSE
 
 	if(!interact_offline && (stat & NOPOWER))
+		world << "Offline"
 		return STATUS_CLOSE
 
+	world << "Checking base"
 	return ..()
 
 /obj/machinery/CouldUseTopic(var/mob/user)

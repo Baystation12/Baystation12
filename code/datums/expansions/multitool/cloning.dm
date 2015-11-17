@@ -2,10 +2,10 @@
 	return buffer(M)
 
 /datum/expansion/multitool/cryo/receive_buffer(var/obj/item/device/multitool/M, var/atom/buffer, var/mob/user)
-	var/obj/machinery/clonepod/P = M.get_buffer(/obj/machinery/clonepod)
+	var/obj/machinery/clonepod/P = buffer
 	var/obj/machinery/computer/cloning/C = holder
 
-	if(!P)
+	if(!istype(P))
 		user << "<span class='warning'>No valid connection data in \the [M] buffer.</span>"
 		return MT_NOACTION
 

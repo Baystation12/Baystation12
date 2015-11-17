@@ -14,7 +14,7 @@
 	return ..()
 
 /datum/expansion/CanUseTopic(var/mob/user)
-	return holder && user && !user.incapacitated() ? STATUS_INTERACTIVE : STATUS_CLOSE
+	return holder && user ? STATUS_INTERACTIVE : STATUS_CLOSE
 
 /datum/expansion/Topic()
 	if(..())

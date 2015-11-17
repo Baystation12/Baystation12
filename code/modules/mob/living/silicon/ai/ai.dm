@@ -23,7 +23,8 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/sensor_mode,
 	/mob/living/silicon/ai/proc/show_laws_verb,
 	/mob/living/silicon/ai/proc/toggle_acceleration,
-	/mob/living/silicon/ai/proc/toggle_camera_light
+	/mob/living/silicon/ai/proc/toggle_camera_light,
+	/mob/living/silicon/ai/proc/multitool_mode
 )
 
 //Not sure why this is necessary...
@@ -83,7 +84,7 @@ var/list/ai_verbs_default = list(
 	var/custom_sprite 	= 0 					// Whether the selected icon is custom
 	var/carded
 
-	var/obj/item/device/multitool/ai_multitool
+	var/multitool_mode = 0
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs |= ai_verbs_default
@@ -679,6 +680,13 @@ var/list/ai_verbs_default = list(
 		qdel(src)
 		return
 	..()
+
+/mob/living/silicon/ai/proc/multitool_mode()
+	set name = "Toggle Multitool Mode"
+	set category = "AI Commands"
+
+	multitool_mode = !multitool_mode
+	src << "<span class='notice'>Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged</span>"
 
 /mob/living/silicon/ai/updateicon()
 	if(!selected_sprite) selected_sprite = default_ai_icon

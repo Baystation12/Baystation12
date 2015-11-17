@@ -1,9 +1,18 @@
 /datum/expansion/multitool
 	var/window_x = 370
 	var/window_y = 470
+	var/list/interact_predicates
+
+/datum/expansion/multitool/New(var/atom/holder, var/list/can_interact_predicates)
+	..()
+	interact_predicates = can_interact_predicates ? can_interact_predicates : list()
+
+/datum/expansion/multitool/Destroy()
+	interact_predicates.Cut()
+	return ..()
 
 /datum/expansion/multitool/proc/interact(var/obj/item/device/multitool/M, var/mob/user)
-	if(!CanUseTopic(user))
+	if(CanUseTopic(user) != STATUS_INTERACTIVE)
 		return
 
 	var/html = get_interact_window(M, user)
@@ -33,7 +42,14 @@
 	if(. == STATUS_CLOSE)
 		return
 
-	return user.get_multitool() && user.Adjacent(holder) ? STATUS_INTERACTIVE : STATUS_CLOSE
+	if(!user.get_multitool())
+		return STATUS_CLOSE
+
+	if(!all_predicates_true(list(holder, user), interact_predicates))
+		return STATUS_CLOSE
+
+	var/datum/host = holder.nano_host()
+	return user.default_can_use_topic(host)
 
 /datum/expansion/multitool/Topic(href, href_list)
 	if(..())
@@ -59,11 +75,12 @@
 	return 1
 
 /datum/expansion/multitool/proc/OnTopic(href, href_list, usr)
-	return
+	return MT_NOACTION
 
 /datum/expansion/multitool/proc/send_buffer(var/obj/item/device/multitool/M, var/atom/buffer, var/mob/user)
-	if(M.buffer_object == buffer)
+	if(M.get_buffer() == buffer)
 		receive_buffer(M, buffer, user)
+	return MT_REFRESH
 
 /datum/expansion/multitool/proc/receive_buffer(var/obj/item/device/multitool/M, var/atom/buffer, var/mob/user)
 	return
