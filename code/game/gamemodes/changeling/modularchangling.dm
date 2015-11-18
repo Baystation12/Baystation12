@@ -9,6 +9,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	var/name = "Power"
 	var/desc = "Placeholder"
 	var/helptext = ""
+	var/enhancedtext = ""
 	var/isVerb = 1 	// Is it an active power, or passive?
 	var/verbpath // Path to a verb that contains the effects.
 
@@ -19,8 +20,9 @@ var/list/datum/power/changeling/powerinstances = list()
 
 // Modularchangling, totally stolen from the new player panel.  YAYY
 /datum/changeling/proc/EvolutionMenu()//The new one
+	set name = "-Evolution Menu-"
 	set category = "Changeling"
-	set desc = "Level up!"
+	set desc = "Adapt yourself carefully."
 
 	if(!usr || !usr.mind || !usr.mind.changeling)	return
 	src = usr.mind.changeling
@@ -88,7 +90,7 @@ var/list/datum/power/changeling/powerinstances = list()
 
 				}
 
-				function expand(id,name,desc,helptext,power,ownsthis){
+				function expand(id,name,desc,helptext,enhancedtext,power,ownsthis){
 
 					clearAll();
 
@@ -101,6 +103,11 @@ var/list/datum/power/changeling/powerinstances = list()
 					body += "<font size='2'><b>"+desc+"</b></font> <BR>"
 
 					body += "<font size='2'><font color = 'red'><b>"+helptext+"</b></font> <BR>"
+
+					if(enhancedtext)
+					{
+						body += "<font size='2'><font color = 'blue'>Recursive Enhancement Effect: <b>"+enhancedtext+"</b></font></font><BR>"
+					}
 
 					if(!ownsthis)
 					{
@@ -257,7 +264,7 @@ var/list/datum/power/changeling/powerinstances = list()
 				<td align='center' bgcolor='[color]'>
 					<span id='notice_span[i]'></span>
 					<a id='link[i]'
-					onmouseover='expand("item[i]","[P.name]","[P.desc]","[P.helptext]","[P]",[ownsthis])'
+					onmouseover='expand("item[i]","[P.name]","[P.desc]","[P.helptext]","[P.enhancedtext]","[P]",[ownsthis])'
 					>
 					<b id='search[i]'>Evolve [P] - Cost: [ownsthis ? "Purchased" : P.genomecost]</b>
 					</a>

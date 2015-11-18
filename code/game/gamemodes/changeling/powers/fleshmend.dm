@@ -2,6 +2,7 @@
 	name = "Fleshmend"
 	desc = "Begins a slow rengeration of our form.  Does not effect stuns or chemicals."
 	helptext = "Can be used while unconscious."
+	enhancedtext = "Healing is twice as effective."
 	genomecost = 1
 	verbpath = /mob/proc/changeling_fleshmend
 
@@ -17,13 +18,19 @@
 	src.mind.changeling.chem_charges -= 10
 
 	var/mob/living/carbon/human/C = src
+	var/heal_amount = 2
+	if(src.mind.changeling.recursive_enhancement)
+		heal_amount = heal_amount * 2
+		src << "<span class='notice'>We will heal much faster.</span>"
+		src.mind.changeling.recursive_enhancement = 0
+
 	spawn(0)
 		src << "<span class='notice'>We begin to heal ourselves.</span>"
 		for(var/i = 0, i<50,i++)
 			if(C)
-				C.adjustBruteLoss(-2)
-				C.adjustOxyLoss(-2)
-				C.adjustFireLoss(-2)
+				C.adjustBruteLoss(-heal_amount)
+				C.adjustOxyLoss(-heal_amount)
+				C.adjustFireLoss(-heal_amount)
 				sleep(10)
 
 	src.verbs -= /mob/proc/changeling_fleshmend

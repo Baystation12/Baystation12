@@ -31,8 +31,12 @@
 
 	changeling.chem_charges -= 5
 	src.visible_message("<span class='warning'>[src] transforms!</span>")
-	changeling.geneticdamage = 30
+	changeling.geneticdamage = 5
 	src.dna = chosen_dna.Clone()
+	src.dna.b_type = "AB+" //This is needed to avoid blood rejection bugs.  The fact that the blood type might not match up w/ records could be a *FEATURE* too.
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+		H.b_type = "AB+" //For some reason we have two blood types on the mob.
 	src.real_name = chosen_dna.real_name
 	src.flavor_text = ""
 	src.UpdateAppearance()
@@ -68,7 +72,7 @@
 	domutcheck(src, null)
 
 	changeling.chem_charges -= 5
-	changeling.geneticdamage = 30
+	changeling.geneticdamage = 5
 
 	src.visible_message("<span class='warning'>[src] transforms!</span>")
 

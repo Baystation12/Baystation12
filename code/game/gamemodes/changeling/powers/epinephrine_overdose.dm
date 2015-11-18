@@ -2,6 +2,7 @@
 	name = "Epinephrine Overdose"
 	desc = "We evolve additional sacs of adrenaline throughout our body."
 	helptext = "We can instantly recover from stuns and reduce the effect of future stuns, but we will suffer toxicity in the long term.  Can be used while unconscious."
+	enhancedtext = "Constant recovery from stuns for thirty seconds."
 	genomecost = 2
 	verbpath = /mob/proc/changeling_epinephrine_overdose
 
@@ -26,6 +27,21 @@
 	C.update_canmove()
 //	C.reagents.add_reagent("toxin", 10)
 	C.reagents.add_reagent("epinephrine", 20)
+
+	if(src.mind.changeling.recursive_enhancement)
+		src << "<span class='notice'>We feel unstoppable.</span>"
+		src.mind.changeling.recursive_enhancement = 0
+		spawn(1)
+			var/i = 30
+			while(i)
+				C.SetParalysis(0)
+				C.SetStunned(0)
+				C.SetWeakened(0)
+				C.lying = 0
+				C.update_canmove()
+				i--
+				sleep(10)
+			src << "<span class='notice'>We feel our newfound energy fade.</span>"
 
 	feedback_add_details("changeling_powers","UNS")
 	return 1

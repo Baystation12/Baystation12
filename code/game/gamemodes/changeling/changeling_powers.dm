@@ -18,6 +18,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/mimicing = ""
 	var/cloaked = 0
 	var/armor_deployed = 0 //This is only used for changeling_generic_equip_all_slots() at the moment.
+	var/recursive_enhancement = 0 //Used to power up other abilities from the ling power with the same name.
 
 /datum/changeling/New(var/gender=FEMALE)
 	..()

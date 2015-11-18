@@ -90,22 +90,29 @@
 					success = 1
 					break
 
+		if(M.wear_id)
+			for(var/obj/item/weapon/card/id/id_slot in stuff_to_equip)
+				if(istype(M.wear_id,id_slot))
+					qdel(M.wear_id)
+					success = 1
+					break
+
 		if(M.wear_suit)
 			for(var/obj/item/clothing/suit/suit_slot in stuff_to_equip)
-				if(istype(M.glasses,suit_slot))
+				if(istype(M.wear_suit,suit_slot))
 					qdel(M.wear_suit)
 					success = 1
 					break
 
 		if(M.gloves)
 			for(var/obj/item/clothing/gloves/gloves_slot in stuff_to_equip)
-				if(istype(M.head,gloves_slot))
+				if(istype(M.gloves,gloves_slot))
 					qdel(M.gloves)
 					success = 1
 					break
 		if(M.shoes)
 			for(var/obj/item/clothing/shoes/shoes_slot in stuff_to_equip)
-				if(istype(M.head,shoes_slot))
+				if(istype(M.shoes,shoes_slot))
 					qdel(M.shoes)
 					success = 1
 					break
@@ -126,37 +133,33 @@
 
 		if(M.wear_mask)
 			for(var/obj/item/clothing/mask/mask_slot in stuff_to_equip)
-				if(istype(M.glasses,mask_slot))
+				if(istype(M.wear_mask,mask_slot))
 					qdel(M.wear_mask)
 					success = 1
 					break
 
 		if(M.back)
 			for(var/obj/item/weapon/storage/backpack/backpack_slot in stuff_to_equip)
-				if(istype(M.glasses,backpack_slot))
+				if(istype(M.back,backpack_slot))
+					for(var/atom/movable/AM in M.back.contents) //Dump whatever's in the bag before deleting.
+						AM.forceMove(src.loc)
 					qdel(M.back)
 					success = 1
 					break
 
 		if(M.w_uniform)
 			for(var/obj/item/clothing/under/uniform_slot in stuff_to_equip)
-				if(istype(M.head,uniform_slot))
+				if(istype(M.w_uniform,uniform_slot))
 					qdel(M.w_uniform)
 					success = 1
 					break
 
-		if(M.wear_id)
-			for(var/obj/item/weapon/card/id/id_slot in stuff_to_equip)
-				if(istype(M.glasses,id_slot))
-					qdel(M.wear_id)
-					success = 1
-					break
 		if(success)
-			M.mind.changeling.armor_deployed = 0
 			playsound(src, 'sound/effects/splat.ogg', 30, 1)
 			visible_message("<span class='warning'>[src] pulls on their clothes, peeling it off along with parts of their skin attached!</span>",
 			"<span class='notice'>We remove and deform our equipment.</span>")
 		M.update_icons()
+		M.mind.changeling.armor_deployed = 0
 		return success
 
 	else

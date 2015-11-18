@@ -3,6 +3,7 @@
 	desc = "We quickly heal ourselves, removing most advanced injuries, at a high chemical cost."
 	helptext = "This will heal a significant amount of brute, fire, oxy, clone, and brain damage, and heal broken bones, internal bleeding, low blood, \
 	and organ damage.  The process is fast, but anyone who sees us do this will likely realize we are not what we seem."
+	enhancedtext = "Healing increased to heal up to maximum health."
 	genomecost = 2
 	verbpath = /mob/proc/changeling_rapid_regen
 
@@ -19,12 +20,17 @@
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/C = src
+		var/healing_amount = 40
+		if(src.mind.changeling.recursive_enhancement)
+			healing_amount = C.maxHealth
+			src << "<span class='notice'>We completely heal ourselves.</span>"
+			src.mind.changeling.recursive_enhancement = 0
 		spawn(0)
-			C.adjustBruteLoss(-40)
-			C.adjustFireLoss(-40)
-			C.adjustOxyLoss(-40)
-			C.adjustCloneLoss(-40)
-			C.adjustBrainLoss(-40)
+			C.adjustBruteLoss(-healing_amount)
+			C.adjustFireLoss(-healing_amount)
+			C.adjustOxyLoss(-healing_amount)
+			C.adjustCloneLoss(-healing_amount)
+			C.adjustBrainLoss(-healing_amount)
 			C.restore_blood()
 			C.restore_all_organs()
 			C.blinded = 0

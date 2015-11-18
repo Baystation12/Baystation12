@@ -1,7 +1,7 @@
 /datum/power/changeling/EngorgedGlands
 	name = "Engorged Chemical Glands"
 	desc = "Our chemical glands swell, permitting us to store more chemicals inside of them."
-	helptext = "Allows us to store an extra 25 units of chemicals, and doubles production rate."
+	helptext = "Allows us to store an extra 30 units of chemicals, and doubles production rate."
 	genomecost = 1
 	isVerb = 0
 	verbpath = /mob/proc/changeling_engorgedglands

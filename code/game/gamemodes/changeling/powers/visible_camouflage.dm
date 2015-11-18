@@ -3,6 +3,7 @@
 	desc = "We rapidly shape the color of our skin and secrete easily reversible dye on our clothes, to blend in with our surroundings.  \
 	We are undetectable, so long as we move slowly.(Toggle)"
 	helptext = "Running, and performing most acts will reveal us.  Our chemical regeneration is halted while we are hidden."
+	enhancedtext = "True invisiblity while cloaked."
 	genomecost = 3
 	verbpath = /mob/proc/changeling_visible_camouflage
 
@@ -34,6 +35,11 @@
 		H.mind.changeling.chem_recharge_rate = 0
 		animate(src,alpha = 255, alpha = 10, time = 10)
 
+		if(src.mind.changeling.recursive_enhancement)
+			H.invisibility = INVISIBILITY_OBSERVER
+			src << "<span class='notice'>We are now truly invisible.</span>"
+			src.mind.changeling.recursive_enhancement = 0
+
 		while(H.m_intent == "walk" && H.mind.changeling.cloaked) //This loop will keep going until the player uncloaks.
 			if(mind.changeling.chem_recharge_rate != 0) //Without this, there is an exploit that can be done, if one buys engorged chem sacks while cloaked.
 				old_regen_rate += mind.changeling.chem_recharge_rate //Unfortunately, it has to occupy this part of the proc.  This fixes it while at the same time
@@ -41,7 +47,7 @@
 			sleep(10)
 
 
-//		H.invisibility = initial(invisibility)
+		H.invisibility = initial(invisibility)
 		visible_message("<span class='warning'>[src] suddenly fades in, seemingly from nowhere!</span>",
 		"<span class='notice'>We revert our camouflage, revealing ourselves.</span>")
 		H.set_m_intent("run")
@@ -49,15 +55,3 @@
 		H.mind.changeling.chem_recharge_rate = old_regen_rate
 
 		animate(src,alpha = 10, alpha = 255, time = 10)
-
-/*
-	if(holder && mob)
-		if(mob.invisibility == INVISIBILITY_OBSERVER)
-			mob.invisibility = initial(mob.invisibility)
-			mob << "\red <b>Invisimin off. Invisibility reset.</b>"
-			mob.alpha = max(mob.alpha + 100, 255)
-		else
-			mob.invisibility = INVISIBILITY_OBSERVER
-			mob << "\blue <b>Invisimin on. You are now as invisible as a ghost.</b>"
-			mob.alpha = max(mob.alpha - 100, 0)
-*/
