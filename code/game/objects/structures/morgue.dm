@@ -190,15 +190,18 @@
 	var/_wifi_id
 	var/datum/wifi/receiver/button/crematorium/wifi_receiver
 
-/obj/structure/crematorium/New()
+/obj/structure/crematorium/initialize()
 	..()
 	if(_wifi_id)
-		wifi_receiver = new(_wifi_id)
+		wifi_receiver = new(_wifi_id, src)
 
 /obj/structure/crematorium/Destroy()
 	if(connected)
 		qdel(connected)
 		connected = null
+	if(wifi_receiver)
+		qdel(wifi_receiver)
+		wifi_receiver = null
 	return ..()
 
 /obj/structure/crematorium/proc/update()

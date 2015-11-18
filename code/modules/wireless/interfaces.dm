@@ -5,9 +5,10 @@
 	connected_devices = new()
 
 /datum/wifi/Destroy(var/wifi/device)
-	..()
 	for(var/datum/wifi/D in connected_devices)
 		D.disconnect_device(src)
+		disconnect_device(D)
+	return ..()
 
 /datum/wifi/proc/connect_device(var/datum/wifi/device)
 	connected_devices |= device
@@ -26,9 +27,8 @@
 	wirelessProcess.add_device(src)
 
 /datum/wifi/receiver/Destroy()
-	..()
 	wirelessProcess.remove_device(src)
-
+	return ..()
 
 
 /datum/wifi/sender
@@ -37,6 +37,7 @@
 /datum/wifi/sender/New(var/new_target)
 	..()
 	target = new_target
+	send_connection_request()
 
 /datum/wifi/sender/proc/set_target(var/new_target)
 	target = new_target

@@ -13,10 +13,16 @@
 	var/_wifi_id
 	var/datum/wifi/sender/button/wifi_sender
 
-/obj/machinery/button/New()
+/obj/machinery/button/initialize()
 	..()
 	if(_wifi_id)
 		wifi_sender = new(_wifi_id)
+
+/obj/machinery/button/Destroy()
+	if(wifi_sender)
+		qdel(wifi_sender)
+		wifi_sender = null
+	return..()
 
 /obj/machinery/button/attack_ai(mob/user as mob)
 	return src.attack_hand(user)

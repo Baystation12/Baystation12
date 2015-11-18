@@ -24,6 +24,7 @@
 	var/state = 0
 	var/locked = 0
 
+	var/_wifi_id
 	var/datum/wifi/receiver/button/emitter/wifi_receiver
 
 /obj/machinery/power/emitter/verb/rotate()
@@ -41,13 +42,16 @@
 	..()
 	if(state == 2 && anchored)
 		connect_to_network()
-		wifi_receiver = new(id, src)
+		if(_wifi_id)
+			wifi_receiver = new(_wifi_id, src)
 
 /obj/machinery/power/emitter/Destroy()
 	message_admins("Emitter deleted at ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
 	log_game("Emitter deleted at ([x],[y],[z])")
 	investigate_log("<font color='red'>deleted</font> at ([x],[y],[z])","singulo")
-	wifi_receiver.Destroy()
+	if(wifi_receiver)
+		qdel(wifi_receiver)
+		wifi_receiver = null
 	..()
 
 /obj/machinery/power/emitter/update_icon()
