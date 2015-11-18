@@ -183,3 +183,4 @@ var/list/station_departments = list("Command", "Medical", "Engineering", "Scienc
 
 //The selected security uniform for the game.
 var/obj/uniform
+var/obj/uniform_name = "Something bad has happened. You should not be seeing this."
