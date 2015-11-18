@@ -20,6 +20,60 @@
 	var/last_shot = 0
 	var/projectile_type = /obj/item/projectile/beam/stun
 
+/mob/living/bot/secbot/ed209/update_icons()
+	if(on && is_attacking)
+		icon_state = "ed209-c"
+	else
+		icon_state = "ed209[on]"
+
+/mob/living/bot/secbot/ed209/explode()
+	visible_message("<span class='warning'>[src] blows apart!</span>")
+	var/turf/Tsec = get_turf(src)
+
+	new /obj/item/weapon/secbot_assembly/ed209_assembly(Tsec)
+	var/obj/item/weapon/gun/energy/taser/G = new /obj/item/weapon/gun/energy/taser(Tsec)
+	G.power_supply.charge = 0
+	if(prob(50))
+		new /obj/item/robot_parts/l_leg(Tsec)
+	if(prob(50))
+		new /obj/item/robot_parts/r_leg(Tsec)
+	if(prob(50))
+		if(prob(50))
+			new /obj/item/clothing/head/helmet(Tsec)
+		else
+			new /obj/item/clothing/suit/armor/vest(Tsec)
+
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	s.set_up(3, 1, src)
+	s.start()
+
+	new /obj/effect/decal/cleanable/blood/oil(Tsec)
+	qdel(src)
+
+/mob/living/bot/secbot/ed209/RangedAttack(var/atom/A)
+	if(last_shot + shot_delay > world.time)
+		src << "You are not ready to fire yet!"
+		return
+
+	last_shot = world.time
+	var/turf/T = get_turf(src)
+	var/turf/U = get_turf(A)
+	var/projectile = /obj/item/projectile/beam/stun
+	if(emagged)
+		projectile = /obj/item/projectile/beam
+
+	playsound(loc, emagged ? 'sound/weapons/Laser.ogg' : 'sound/weapons/Taser.ogg', 50, 1)
+	var/obj/item/projectile/P = new projectile(loc)
+
+	P.original = A
+	P.starting = T
+	P.current = T
+	P.yo = U.y - T.y
+	P.xo = U.x - T.x
+	spawn()
+		P.process()
+	return
+
 // Assembly
 
 /obj/item/weapon/secbot_assembly/ed209_assembly
