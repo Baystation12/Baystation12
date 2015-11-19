@@ -146,12 +146,14 @@ obj/machinery/gateway/centerstation/process()
 	var/calibrated = 1
 	var/list/linked = list()	//a list of the connected gateway chunks
 	var/ready = 0
-	var/obj/machinery/gateway/centeraway/stationgate = null
+	var/obj/machinery/gateway/centerstation/stationgate = null
 
 
-/obj/machinery/gateway/centeraway/initialize()
+/obj/machinery/gateway/centeraway/New() // Ну серьезно, я не понимаю, почему инитиал, он же не вызывается на подгружаемой карте.  С нью все работает.
 	update_icon()
 	stationgate = locate(/obj/machinery/gateway/centerstation)
+	if(stationgate)
+		stationgate.awaygate = src
 
 
 /obj/machinery/gateway/centeraway/update_icon()
