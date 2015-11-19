@@ -1,5 +1,6 @@
 /datum/controller/process/lighting/setup()
 	name = "lighting"
+    start_delay = 1
 	schedule_interval = 5 // every .5 second
 	lighting_controller.initializeLighting()
 

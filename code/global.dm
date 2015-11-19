@@ -101,7 +101,6 @@ var/join_motd = null
 
 var/datum/nanomanager/nanomanager		= new() // NanoManager, the manager for Nano UIs.
 var/datum/event_manager/event_manager	= new() // Event Manager, the manager for events.
-var/datum/subsystem/alarm/alarm_manager	= new() // Alarm Manager, the manager for alarms.
 
 var/list/awaydestinations = list() // Away missions. A list of landmarks that the warpgate can take you to.
 

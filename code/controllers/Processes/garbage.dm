@@ -1,13 +1,18 @@
+// The time a datum was destroyed by the GC, or null if it hasn't been
+/datum/var/gcDestroyed
+
+#define GC_COLLECTIONS_PER_RUN 150
+#define GC_COLLECTION_TIMEOUT (30 SECONDS)
+#define GC_FORCE_DEL_PER_RUN 30
+
 var/datum/controller/process/garbage_collector/garbage_collector
 var/list/delayed_garbage = list()
 
 /datum/controller/process/garbage_collector
 	var/garbage_collect = 1			// Whether or not to actually do work
-	var/collection_timeout = 300	//deciseconds to wait to let running procs finish before we just say fuck it and force del() the object
-	var/max_checks_multiplier = 5	//multiplier (per-decisecond) for calculating max number of tests per tick. These tests check if our GC'd objects are actually GC'd
-	var/max_forcedel_multiplier = 1	//multiplier (per-decisecond) for calculating max number of force del() calls per tick.
-
-	var/dels 		= 0			// number of del()'s we've done this tick
+	var/total_dels 	= 0			// number of total del()'s
+	var/tick_dels 	= 0			// number of del()'s we've done this tick
+	var/soft_dels	= 0
 	var/hard_dels 	= 0			// number of hard dels in total
 	var/list/destroyed = list() // list of refID's of things that should be garbage collected
 								// refID's are associated with the time at which they time out and need to be manually del()
@@ -18,7 +23,8 @@ var/list/delayed_garbage = list()
 
 /datum/controller/process/garbage_collector/setup()
 	name = "garbage"
-	schedule_interval = 2 SECONDS
+	schedule_interval = 10 SECONDS
+	start_delay = 3
 
 	if(!garbage_collector)
 		garbage_collector = src
@@ -36,10 +42,10 @@ world/loop_checks = 0
 	if(!garbage_collect)
 		return
 
-	dels = 0
-	var/time_to_kill = world.time - collection_timeout // Anything qdel() but not GC'd BEFORE this time needs to be manually del()
-	var/checkRemain = max_checks_multiplier * schedule_interval
-	var/maxDels = max_forcedel_multiplier * schedule_interval
+	tick_dels = 0
+	var/time_to_kill = world.time - GC_COLLECTION_TIMEOUT
+	var/checkRemain = GC_COLLECTIONS_PER_RUN
+	var/remaining_force_dels = GC_FORCE_DEL_PER_RUN
 
 	#ifdef GC_FINDREF
 	var/list/searching = list()
@@ -67,7 +73,7 @@ world/loop_checks = 0
 	#endif
 
 	while(destroyed.len && --checkRemain >= 0)
-		if(dels >= maxDels)
+		if(remaining_force_dels <= 0)
 			#ifdef GC_DEBUG
 			testing("GC: Reached max force dels per tick [dels] vs [maxDels]")
 			#endif
@@ -88,13 +94,22 @@ world/loop_checks = 0
 			testing("GC: -- \ref[A] | [A.type] was unable to be GC'd and was deleted --")
 			logging["[A.type]"]++
 			del(A)
-			++dels
-			++hard_dels
-		#ifdef GC_DEBUG
+
+			hard_dels++
+			remaining_force_dels--
 		else
+			#ifdef GC_DEBUG
 			testing("GC: [refID] properly GC'd at [world.time] with timeout [GCd_at_time]")
-		#endif
+			#endif
+			soft_dels++
+		tick_dels++
+		total_dels++
 		destroyed.Cut(1, 2)
+		SCHECK
+
+#undef GC_FORCE_DEL_PER_TICK
+#undef GC_COLLECTION_TIMEOUT
+#undef GC_COLLECTIONS_PER_TICK
 
 #ifdef GC_FINDREF
 /datum/controller/process/garbage_collector/proc/LookForRefs(var/datum/D, var/list/targ)
@@ -132,8 +147,11 @@ world/loop_checks = 0
 	destroyed -= "\ref[A]" // Removing any previous references that were GC'd so that the current object will be at the end of the list.
 	destroyed["\ref[A]"] = world.time
 
-/datum/controller/process/garbage_collector/getStatName()
-	return ..()+"([garbage_collector.destroyed.len]/[garbage_collector.dels]/[garbage_collector.hard_dels])"
+/datum/controller/process/garbage_collector/statProcess()
+	..()
+	stat(null, "[garbage_collect ? "On" : "Off"], [destroyed.len] queued")
+	stat(null, "Dels: [total_dels], [soft_dels] soft, [hard_dels] hard, [tick_dels]  last run")
+
 
 // Tests if an atom has been deleted.
 /proc/deleted(atom/A)
@@ -149,7 +167,7 @@ world/loop_checks = 0
 		crash_with("qdel() passed object of type [A.type]. qdel() can only handle /datum types.")
 		del(A)
 		if(garbage_collector)
-			garbage_collector.dels++
+			garbage_collector.total_dels++
 			garbage_collector.hard_dels++
 	else if(isnull(A.gcDestroyed))
 		// Let our friend know they're about to get collected
