@@ -39,6 +39,8 @@
 	if(!metal && reagents)
 		var/turf/T = get_turf(src)
 		reagents.touch_turf(T)
+		for(var/obj/O in T)
+			reagents.touch_obj(O)
 
 /obj/effect/effect/foam/process()
 	if(--amount < 0)
@@ -146,9 +148,6 @@
 		icon_state = "ironfoam"
 
 /obj/structure/foamedmetal/ex_act(severity)
-	qdel(src)
-
-/obj/structure/foamedmetal/blob_act()
 	qdel(src)
 
 /obj/structure/foamedmetal/bullet_act()

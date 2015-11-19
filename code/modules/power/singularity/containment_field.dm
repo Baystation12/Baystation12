@@ -10,6 +10,7 @@
 	unacidable = 1
 	use_power = 0
 	light_range = 4
+	flags = PROXMOVE
 	var/obj/machinery/field_generator/FG1 = null
 	var/obj/machinery/field_generator/FG2 = null
 	var/hasShocked = 0 //Used to add a delay between shocks. In some cases this used to crash servers by spawning hundreds of sparks every second.
@@ -27,10 +28,6 @@
 	else
 		shock(user)
 		return 1
-
-
-/obj/machinery/containment_field/blob_act()
-	return 0
 
 
 /obj/machinery/containment_field/ex_act(severity)
@@ -62,7 +59,7 @@
 		user.throw_at(target, 200, 4)
 
 		sleep(20)
-		
+
 		hasShocked = 0
 	return
 

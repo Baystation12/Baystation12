@@ -79,12 +79,14 @@ for reference:
 	maxhealth = material.integrity
 	health = maxhealth
 
+/obj/structure/barricade/get_material()
+	return material
+
 /obj/structure/barricade/attackby(obj/item/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/stack/material))
-		var/obj/item/stack/material/D = W
-		if(D.material.name != material.name)
-			user << "<span class='warning'>That is the wrong material needed to repair \the [src].</span>"
-			return
+	if (istype(W, /obj/item/stack))
+		var/obj/item/stack/D = W
+		if(D.get_material_name() != material.name)
+			return //hitting things with the wrong type of stack usually doesn't produce messages, and probably doesn't need to.
 		if (health < maxhealth)
 			if (D.get_amount() < 1)
 				user << "<span class='warning'>You need one sheet of [material.display_name] to repair \the [src].</span>"
@@ -97,6 +99,7 @@ for reference:
 				return
 		return
 	else
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		switch(W.damtype)
 			if("fire")
 				src.health -= W.force * 1
@@ -109,6 +112,7 @@ for reference:
 			qdel(src)
 			return
 		..()
+
 /obj/structure/barricade/proc/dismantle()
 	material.place_dismantled_product(get_turf(src))
 	qdel(src)
@@ -126,13 +130,6 @@ for reference:
 				visible_message("<span class='danger'>\The [src] is blown apart!</span>")
 				dismantle()
 			return
-
-/obj/structure/barricade/blob_act()
-	src.health -= 25
-	if (src.health <= 0)
-		visible_message("<span class='danger'>The blob eats through \the [src]!</span>")
-		qdel(src)
-	return
 
 /obj/structure/barricade/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
 	if(air_group || (height==0))
@@ -227,12 +224,6 @@ for reference:
 			locked = !locked
 			anchored = !anchored
 			icon_state = "barrier[src.locked]"
-
-	blob_act()
-		src.health -= 25
-		if (src.health <= 0)
-			src.explode()
-		return
 
 	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
 		if(air_group || (height==0))

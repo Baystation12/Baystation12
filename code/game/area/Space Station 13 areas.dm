@@ -26,7 +26,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "unknown"
 	layer = 10
-	luminosity = 1
+	luminosity = 0
 	mouse_opacity = 0
 	var/lightswitch = 1
 
@@ -34,7 +34,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 	var/debug = 0
 	var/requires_power = 1
-	var/unlimited_power = 0
 	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
 
 	var/power_equip = 1
@@ -62,8 +61,8 @@ var/list/teleportlocs = list()
 	for(var/area/AR in world)
 		if(istype(AR, /area/shuttle) || istype(AR, /area/syndicate_station) || istype(AR, /area/wizard_station)) continue
 		if(teleportlocs.Find(AR.name)) continue
-		var/turf/picked = pick(get_area_turfs(AR.type))
-		if (picked.z in config.station_levels)
+		var/turf/picked = pick_area_turf(AR.type, list(/proc/is_station_turf))
+		if (picked)
 			teleportlocs += AR.name
 			teleportlocs[AR.name] = AR
 
@@ -79,8 +78,8 @@ var/list/ghostteleportlocs = list()
 		if(istype(AR, /area/turret_protected/aisat) || istype(AR, /area/derelict) || istype(AR, /area/tdome) || istype(AR, /area/shuttle/specops/centcom))
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
-		var/turf/picked = pick(get_area_turfs(AR.type))
-		if (picked.z in config.player_levels)
+		var/turf/picked = pick_area_turf(AR.type, list(/proc/is_station_turf))
+		if (picked)
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
 
@@ -99,6 +98,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "space"
 	requires_power = 1
 	always_unpowered = 1
+	lighting_use_dynamic = 1
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
@@ -321,21 +321,9 @@ area/space/atmosalert()
 /area/shuttle/research/outpost
 	icon_state = "shuttle"
 
-/area/shuttle/skipjack/station
-	name = "\improper Skipjack"
-	icon_state = "yellow"
-	requires_power = 0
-
 /area/airtunnel1/      // referenced in airtunnel.dm:759
 
 /area/dummy/           // Referenced in engine.dm:261
-
-/area/start            // will be unused once kurper gets his login interface patch done
-	name = "start area"
-	icon_state = "start"
-	requires_power = 0
-	lighting_use_dynamic = 0
-	has_gravity = 1
 
 // === end remove
 
@@ -350,7 +338,6 @@ area/space/atmosalert()
 	name = "\improper Centcom"
 	icon_state = "centcom"
 	requires_power = 0
-	unlimited_power = 1
 	lighting_use_dynamic = 0
 
 /area/centcom/control
@@ -389,7 +376,6 @@ area/space/atmosalert()
 	name = "\improper Mercenary Base"
 	icon_state = "syndie-ship"
 	requires_power = 0
-	unlimited_power = 1
 	lighting_use_dynamic = 0
 
 /area/syndicate_mothership/control
@@ -468,7 +454,6 @@ area/space/atmosalert()
 	name = "\improper Independant Station"
 	icon_state = "yellow"
 	requires_power = 0
-	unlimited_power = 1
 	flags = RAD_SHIELDED
 
 /area/syndicate_station/start
@@ -523,9 +508,18 @@ area/space/atmosalert()
 	name = "\improper Wizard's Den"
 	icon_state = "yellow"
 	requires_power = 0
+	lighting_use_dynamic = 0
+
+/area/skipjack_station
+	name = "\improper Skipjack"
+	icon_state = "yellow"
+	requires_power = 0
+
+/area/skipjack_station/start
+	name = "\improper Skipjack"
+	icon_state = "yellow"
 
 /area/skipjack_station/transit
-
 	name = "\improper hyperspace"
 	icon_state = "shuttle"
 
@@ -641,6 +635,7 @@ area/space/atmosalert()
 /area/maintenance
 	flags = RAD_SHIELDED
 	sound_env = TUNNEL_ENCLOSED
+	turf_initializer = new /datum/turf_initializer/maintenance()
 
 /area/maintenance/aft
 	name = "Aft Maintenance"
@@ -913,7 +908,7 @@ area/space/atmosalert()
 	icon_state = "tcomsatcham"
 
 /area/server
-	name = "\improper Messaging Server Room"
+	name = "\improper Research Server Room"
 	icon_state = "server"
 
 //Crew
@@ -1859,7 +1854,7 @@ area/space/atmosalert()
 	sound_env = SMALL_ENCLOSED
 
 /area/turret_protected/ai_server_room
-	name = "AI Server Room"
+	name = "Messaging Server Room"
 	icon_state = "ai_server"
 	sound_env = SMALL_ENCLOSED
 

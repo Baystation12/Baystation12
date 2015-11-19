@@ -71,11 +71,17 @@ proc/isemptylist(list/list)
 			return 1
 	return 0
 
-//Empties the list by setting the length to 0. Hopefully the elements get garbage collected
-proc/clearlist(list/list)
-	if(istype(list))
-		list.len = 0
-	return
+/proc/instances_of_type_in_list(var/atom/A, var/list/L)
+	var/instances = 0
+	for(var/type in L)
+		if(istype(A, type))
+			instances++
+	return instances
+
+//Empties the list by .Cut(). Setting lenght = 0 has been confirmed to leak references.
+proc/clearlist(var/list/L)
+	if(islist(L))
+		L.Cut()
 
 //Removes any null entries from the list
 proc/listclearnulls(list/list)
@@ -592,7 +598,7 @@ proc/dd_sortedTextList(list/incoming)
 	return dd_sortedtextlist(incoming, case_sensitive)
 
 
-datum/proc/dd_SortValue()
+/datum/proc/dd_SortValue()
 	return "[src]"
 
 /obj/machinery/dd_SortValue()
@@ -604,10 +610,13 @@ datum/proc/dd_SortValue()
 /datum/alarm/dd_SortValue()
 	return "[sanitize_old(last_name)]"
 
+/proc/subtypes(prototype)
+	return (typesof(prototype) - prototype)
+
 //creates every subtype of prototype (excluding prototype) and adds it to list L.
 //if no list/L is provided, one is created.
 /proc/init_subtypes(prototype, list/L)
 	if(!istype(L))	L = list()
-	for(var/path in (typesof(prototype) - prototype))
+	for(var/path in subtypes(prototype))
 		L += new path()
 	return L

@@ -37,6 +37,11 @@
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
 	RefreshParts()
+	
+/obj/machinery/autolathe/Destroy()
+	qdel(wires)
+	wires = null
+	return ..()
 
 /obj/machinery/autolathe/proc/update_recipe_list()
 	if(!machine_recipes)
@@ -290,7 +295,7 @@
 /obj/machinery/autolathe/dismantle()
 
 	for(var/mat in stored_material)
-		var/material/M = name_to_material[mat]
+		var/material/M = get_material_by_name(mat)
 		if(!istype(M))
 			continue
 		var/obj/item/stack/material/S = new M.stack_type(get_turf(src))

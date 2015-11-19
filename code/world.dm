@@ -84,7 +84,7 @@ var/global/datum/global_init/init = new ()
 		// it's brute-forcey, but frankly the alternative is a mine turf rewrite.
 		for(var/turf/simulated/mineral/M in world) // Ugh.
 			M.updateMineralOverlays()
-		for(var/turf/simulated/floor/plating/airless/asteroid/M in world) // Uuuuuugh.
+		for(var/turf/simulated/floor/asteroid/M in world) // Uuuuuugh.
 			M.updateMineralOverlays()
 
 	// Create autolathe recipes, as above.
@@ -127,7 +127,8 @@ var/world_topic_spam_protect_time = world.timeofday
 				n++
 		return n
 
-	else if (T == "status")
+	else if (copytext(T,1,7) == "status")
+		var/input[] = params2list(T)
 		var/list/s = list()
 		s["version"] = game_version
 		s["mode"] = master_mode
@@ -136,23 +137,140 @@ var/world_topic_spam_protect_time = world.timeofday
 		s["vote"] = config.allow_vote_mode
 		s["ai"] = config.allow_ai
 		s["host"] = host ? host : null
-		s["players"] = list()
+
+		// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
+		s["players"] = 0
 		s["stationtime"] = worldtime2text()
-		var/n = 0
-		var/admins = 0
+		s["roundduration"] = round_duration()
 
-		for(var/client/C in clients)
-			if(C.holder)
-				if(C.holder.fakekey)
-					continue	//so stealthmins aren't revealed by the hub
-				admins++
-			s["player[n]"] = C.key
-			n++
-		s["players"] = n
+		if(input["status"] == "2")
+			var/list/players = list()
+			var/list/admins = list()
 
-		s["admins"] = admins
+			for(var/client/C in clients)
+				if(C.holder)
+					if(C.holder.fakekey)
+						continue
+					admins[C.key] = C.holder.rank
+				players += C.key
+
+			s["players"] = players.len
+			s["playerlist"] = list2params(players)
+			s["admins"] = admins.len
+			s["adminlist"] = list2params(admins)
+		else
+			var/n = 0
+			var/admins = 0
+
+			for(var/client/C in clients)
+				if(C.holder)
+					if(C.holder.fakekey)
+						continue	//so stealthmins aren't revealed by the hub
+					admins++
+				s["player[n]"] = C.key
+				n++
+
+			s["players"] = n
+			s["admins"] = admins
 
 		return list2params(s)
+
+	else if(T == "manifest")
+		var/list/positions = list()
+		var/list/set_names = list(
+				"heads" = command_positions,
+				"sec" = security_positions,
+				"eng" = engineering_positions,
+				"med" = medical_positions,
+				"sci" = science_positions,
+				"civ" = civilian_positions,
+				"bot" = nonhuman_positions
+			)
+
+		for(var/datum/data/record/t in data_core.general)
+			var/name = t.fields["name"]
+			var/rank = t.fields["rank"]
+			var/real_rank = make_list_rank(t.fields["real_rank"])
+
+			var/department = 0
+			for(var/k in set_names)
+				if(real_rank in set_names[k])
+					if(!positions[k])
+						positions[k] = list()
+					positions[k][name] = rank
+					department = 1
+			if(!department)
+				if(!positions["misc"])
+					positions["misc"] = list()
+				positions["misc"][name] = rank
+
+		for(var/k in positions)
+			positions[k] = list2params(positions[k]) // converts positions["heads"] = list("Bob"="Captain", "Bill"="CMO") into positions["heads"] = "Bob=Captain&Bill=CMO"
+
+		return list2params(positions)
+
+	else if(copytext(T,1,5) == "info")
+		var/input[] = params2list(T)
+		if(input["key"] != config.comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
+
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+
+			return "Bad Key"
+
+		var/search = input["info"]
+		var/ckey = ckey(search)
+
+		var/list/match = list()
+
+		for(var/mob/M in mob_list)
+			if(findtext(M.name, search))
+				match += M
+			else if(M.ckey == ckey)
+				match += M
+			else if(M.mind && findtext(M.mind.assigned_role, search))
+				match += M
+
+		if(!match.len)
+			return "No matches"
+		else if(match.len == 1)
+			var/mob/M = match[1]
+			var/info = list()
+			info["key"] = M.key
+			info["name"] = M.name == M.real_name ? M.name : "[M.name] ([M.real_name])"
+			info["role"] = M.mind ? (M.mind.assigned_role ? M.mind.assigned_role : "No role") : "No mind"
+			var/turf/MT = get_turf(M)
+			info["loc"] = M.loc ? "[M.loc]" : "null"
+			info["turf"] = MT ? "[MT] @ [MT.x], [MT.y], [MT.z]" : "null"
+			info["area"] = MT ? "[MT.loc]" : "null"
+			info["antag"] = M.mind ? (M.mind.special_role ? M.mind.special_role : "Not antag") : "No mind"
+			info["hasbeenrev"] = M.mind ? M.mind.has_been_rev : "No mind"
+			info["stat"] = M.stat
+			info["type"] = M.type
+			if(isliving(M))
+				var/mob/living/L = M
+				info["damage"] = list2params(list(
+							oxy = L.getOxyLoss(),
+							tox = L.getToxLoss(),
+							fire = L.getFireLoss(),
+							brute = L.getBruteLoss(),
+							clone = L.getCloneLoss(),
+							brain = L.getBrainLoss()
+						))
+			else
+				info["damage"] = "non-living"
+			info["gender"] = M.gender
+			return list2params(info)
+		else
+			var/list/ret = list()
+			for(var/mob/M in match)
+				ret[M.key] = M.name
+			return list2params(ret)
 
 	else if(copytext(T,1,9) == "adminmsg")
 		/*
@@ -188,8 +306,12 @@ var/world_topic_spam_protect_time = world.timeofday
 		if(!C)
 			return "No client with that name on server"
 
-		var/message =	"<font color='red'>IRC-Admin PM from <b><a href='?irc_msg=1'>[C.holder ? "IRC-" + input["sender"] : "Administrator"]</a></b>: [input["msg"]]</font>"
-		var/amessage =  "<font color='blue'>IRC-Admin PM from <a href='?irc_msg=1'>IRC-[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</font>"
+		var/rank = input["rank"]
+		if(!rank)
+			rank = "Admin"
+
+		var/message =	"<font color='red'>IRC-[rank] PM from <b><a href='?irc_msg=[input["sender"]]'>IRC-[input["sender"]]</a></b>: [input["msg"]]</font>"
+		var/amessage =  "<font color='blue'>IRC-[rank] PM from <a href='?irc_msg=[input["sender"]]'>IRC-[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</font>"
 
 		C.received_irc_pm = world.time
 		C.irc_admin = input["sender"]
@@ -294,6 +416,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /hook/startup/proc/loadMods()
 	world.load_mods()
+	world.load_mentors() // no need to write another hook.
 	return 1
 
 /world/proc/load_mods()
@@ -311,7 +434,26 @@ var/world_topic_spam_protect_time = world.timeofday
 					continue
 
 				var/title = "Moderator"
-				if(config.mods_are_mentors) title = "Mentor"
+				var/rights = admin_ranks[title]
+
+				var/ckey = copytext(line, 1, length(line)+1)
+				var/datum/admins/D = new /datum/admins(title, rights, ckey)
+				D.associate(directory[ckey])
+
+/world/proc/load_mentors()
+	if(config.admin_legacy_system)
+		var/text = file2text("config/mentors.txt")
+		if (!text)
+			error("Failed to load config/mentors.txt")
+		else
+			var/list/lines = text2list(text, "\n")
+			for(var/line in lines)
+				if (!line)
+					continue
+				if (copytext(line, 1, 2) == ";")
+					continue
+
+				var/title = "Mentor"
 				var/rights = admin_ranks[title]
 
 				var/ckey = copytext(line, 1, length(line)+1)

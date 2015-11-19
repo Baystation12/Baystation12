@@ -144,11 +144,6 @@
 		new /obj/item/clothing/mask/smokable/cigarette(src)
 	create_reagents(15 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 
-/obj/item/weapon/storage/fancy/cigarettes/Destroy()
-	qdel(reagents)
-	..()
-
-
 /obj/item/weapon/storage/fancy/cigarettes/update_icon()
 	icon_state = "[initial(icon_state)][contents.len]"
 	return
@@ -180,6 +175,16 @@
 	icon_state = "Dpacket"
 	item_state = "Dpacket"
 
+/obj/item/weapon/storage/fancy/cigarettes/killthroat
+	name = "\improper AcmeCo packet"
+	desc = "A packet of six AcmeCo cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
+	icon_state = "Bpacket"
+	item_state = "Bpacket" //Doesn't have an inhand state, but neither does dromedary, so, ya know..
+
+	New()
+		..()
+		fill_cigarre_package(src,list("fuel" = 15))
+
 /obj/item/weapon/storage/fancy/cigar
 	name = "cigar case"
 	desc = "A case for holding your cigars when you are not smoking them."
@@ -199,10 +204,6 @@
 	for(var/i = 1 to storage_slots)
 		new /obj/item/clothing/mask/smokable/cigarette/cigar(src)
 	create_reagents(15 * storage_slots)
-
-/obj/item/weapon/storage/fancy/cigar/Destroy()
-	qdel(reagents)
-	..()
 
 /obj/item/weapon/storage/fancy/cigar/update_icon()
 	icon_state = "[initial(icon_state)][contents.len]"

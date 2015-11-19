@@ -298,6 +298,31 @@
 		new /obj/item/weapon/grenade/empgrenade(src)
 		new /obj/item/weapon/grenade/empgrenade(src)
 
+/obj/item/weapon/storage/box/smokes
+	name = "box of smoke bombs"
+	desc = "A box containing 5 smoke bombs."
+	icon_state = "flashbang"
+
+/obj/item/weapon/storage/box/smokes/New()
+		..()
+		new /obj/item/weapon/grenade/smokebomb(src)
+		new /obj/item/weapon/grenade/smokebomb(src)
+		new /obj/item/weapon/grenade/smokebomb(src)
+		new /obj/item/weapon/grenade/smokebomb(src)
+		new /obj/item/weapon/grenade/smokebomb(src)
+
+/obj/item/weapon/storage/box/anti_photons
+	name = "box of anti-photon grenades"
+	desc = "A box containing 5 experimental photon disruption grenades."
+	icon_state = "flashbang"
+
+/obj/item/weapon/storage/box/anti_photons/New()
+		..()
+		new /obj/item/weapon/grenade/anti_photon(src)
+		new /obj/item/weapon/grenade/anti_photon(src)
+		new /obj/item/weapon/grenade/anti_photon(src)
+		new /obj/item/weapon/grenade/anti_photon(src)
+		new /obj/item/weapon/grenade/anti_photon(src)
 
 /obj/item/weapon/storage/box/trackimp
 	name = "boxed tracking implant kit"
@@ -595,33 +620,36 @@
 	icon_state = "light"
 	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
 	item_state = "syringe_kit"
-	can_hold = list(/obj/item/weapon/light/tube, /obj/item/weapon/light/bulb)
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
+	
+/obj/item/weapon/storage/box/lights/New()
+	..()
+	make_exact_fit()
 
 /obj/item/weapon/storage/box/lights/bulbs/New()
-	..()
 	for(var/i = 0; i < 21; i++)
 		new /obj/item/weapon/light/bulb(src)
+	..()
 
 /obj/item/weapon/storage/box/lights/tubes
 	name = "box of replacement tubes"
 	icon_state = "lighttube"
 
 /obj/item/weapon/storage/box/lights/tubes/New()
-	..()
 	for(var/i = 0; i < 21; i++)
 		new /obj/item/weapon/light/tube(src)
+	..()
 
 /obj/item/weapon/storage/box/lights/mixed
 	name = "box of replacement lights"
 	icon_state = "lightmixed"
 
 /obj/item/weapon/storage/box/lights/mixed/New()
-	..()
 	for(var/i = 0; i < 14; i++)
 		new /obj/item/weapon/light/tube(src)
 	for(var/i = 0; i < 7; i++)
 		new /obj/item/weapon/light/bulb(src)
+	..()
 
 /obj/item/weapon/storage/box/freezer
 	name = "portable freezer"

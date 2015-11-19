@@ -65,7 +65,8 @@
 
 /obj/item/weapon/dnainjector/proc/inject(mob/M as mob, mob/user as mob)
 	if(istype(M,/mob/living))
-		M.radiation += rand(5,20)
+		var/mob/living/L = M
+		L.apply_effect(rand(5,20), IRRADIATE, check_protection = 0)
 
 	if (!(NOCLONE in M.mutations)) // prevents drained people from having their DNA changed
 		if (buf.types & DNA2_BUF_UI)
@@ -112,6 +113,9 @@
 
 	if(!do_after(user,50))
 		return
+
+	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+	user.do_attack_animation(M)
 
 	M.visible_message("<span class='danger'>\The [M] has been injected with \the [src] by \the [user].</span>")
 

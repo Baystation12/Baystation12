@@ -143,7 +143,11 @@
 
 	if(href_list["add_antagonist"])
 		var/datum/antagonist/antag = all_antag_types[href_list["add_antagonist"]]
-		if(antag) antag.add_antagonist(src, 1, 1, 0, 1, 1) // Ignore equipment and role type for this.
+		if(antag) 
+			if(antag.add_antagonist(src, 1, 1, 0, 1, 1)) // Ignore equipment and role type for this.
+				log_admin("[key_name_admin(usr)] made [key_name(src)] into a [antag.role_text].")
+			else
+				usr << "<span class='warning'>[src] could not be made into a [antag.role_text]!</span>"
 
 	else if(href_list["remove_antagonist"])
 		var/datum/antagonist/antag = all_antag_types[href_list["remove_antagonist"]]
@@ -213,7 +217,8 @@
 				if (!new_target) return
 
 				var/objective_path = text2path("/datum/objective/[new_obj_type]")
-				if (new_target == "Free objective")
+				var/mob/living/M = new_target
+				if (!istype(M) || !M.mind || new_target == "Free objective")
 					new_objective = new objective_path
 					new_objective.owner = src
 					new_objective:target = null
@@ -221,9 +226,8 @@
 				else
 					new_objective = new objective_path
 					new_objective.owner = src
-					new_objective:target = new_target:mind
-					//Will display as special role if the target is set as MODE. Ninjas/commandos/nuke ops.
-					new_objective.explanation_text = "[objective_type] [new_target:real_name], the [new_target:mind:assigned_role=="MODE" ? (new_target:mind:special_role) : (new_target:mind:assigned_role)]."
+					new_objective:target = M.mind
+					new_objective.explanation_text = "[objective_type] [M.real_name], the [M.mind.special_role ? M.mind:special_role : M.mind:assigned_role]."
 
 			if ("prevent")
 				new_objective = new /datum/objective/block
@@ -314,7 +318,7 @@
 						if(I in organs.implants)
 							qdel(I)
 							break
-				H << "<span class='notice'><font size =3><B>Your loyalty implant has been deactivated.</font></span>"
+				H << "<span class='notice'><font size =3><B>Your loyalty implant has been deactivated.</B></font></span>"
 				log_admin("[key_name_admin(usr)] has de-loyalty implanted [current].")
 			if("add")
 				H << "<span class='danger'><font size =3>You somehow have become the recepient of a loyalty transplant, and it just activated!</font></span>"

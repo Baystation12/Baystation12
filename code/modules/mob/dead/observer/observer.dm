@@ -74,7 +74,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
 
 	if(!T)	T = pick(latejoin)			//Safety in case we cannot find the body's position
-	loc = T
+	forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts
 		name = capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
@@ -91,11 +91,14 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 /mob/dead/observer/Topic(href, href_list)
 	if (href_list["track"])
-		var/mob/target = locate(href_list["track"]) in mob_list
-		if(target)
-			ManualFollow(target)
-
-
+		if(istype(href_list["track"],/mob))
+			var/mob/target = locate(href_list["track"]) in mob_list
+			if(target)
+				ManualFollow(target)
+		else
+			var/atom/target = locate(href_list["track"])
+			if(istype(target))
+				ManualFollow(target)
 
 /mob/dead/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/weapon/book/tome))
@@ -123,7 +126,7 @@ Works together with spawning an observer, noted above.
 	if(antagHUD)
 		var/list/target_list = list()
 		for(var/mob/living/target in oview(src, 14))
-			if(target.mind&&(target.mind.special_role||issilicon(target)) )
+			if(target.mind && target.mind.special_role)
 				target_list += target
 		if(target_list.len)
 			assess_targets(target_list, src)
@@ -141,24 +144,15 @@ Works together with spawning an observer, noted above.
 	var/client/C = U.client
 	for(var/mob/living/carbon/human/target in target_list)
 		C.images += target.hud_list[SPECIALROLE_HUD]
-
-
-/*
-		else//If the silicon mob has no law datum, no inherent laws, or a law zero, add them to the hud.
-			var/mob/living/silicon/silicon_target = target
-			if(!silicon_target.laws||(silicon_target.laws&&(silicon_target.laws.zeroth||!silicon_target.laws.inherent.len))||silicon_target.mind.special_role=="traitor")
-				if(isrobot(silicon_target))//Different icons for robutts and AI.
-					U.client.images += image(tempHud,silicon_target,"hudmalborg")
-				else
-					U.client.images += image(tempHud,silicon_target,"hudmalai")
-*/
+	for(var/mob/living/silicon/target in target_list)
+		C.images += target.hud_list[SPECIALROLE_HUD]
 	return 1
 
 /mob/proc/ghostize(var/can_reenter_corpse = 1)
 	if(key)
 		var/mob/dead/observer/ghost = new(src)	//Transfer safety to observer spawning proc.
 		ghost.can_reenter_corpse = can_reenter_corpse
-		ghost.timeofdeath = src.timeofdeath //BS12 EDIT
+		ghost.timeofdeath = src.stat == DEAD ? src.timeofdeath : world.time
 		ghost.key = key
 		if(ghost.client && !ghost.client.holder && !config.antag_hud_allowed)		// For new ghosts we remove the verb from even showing up if it's not allowed.
 			ghost.verbs -= /mob/dead/observer/verb/toggle_antagHUD	// Poor guys, don't know what they are missing!
@@ -199,9 +193,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/Stat()
 	..()
-	statpanel("Status")
-	if (client.statpanel == "Status")
-		stat(null, "Station Time: [worldtime2text()]")
+	if(statpanel("Status"))
 		if(emergency_shuttle)
 			var/eta_status = emergency_shuttle.get_status_panel_eta()
 			if(eta_status)
@@ -228,6 +220,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			return
 	mind.current.ajourn=0
 	mind.current.key = key
+	mind.current.teleop = null
 	if(!admin_ghosted)
 		announce_ghost_joinleave(mind, 0, "They now occupy their body again.")
 	return 1
@@ -305,7 +298,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		else
 			usr << "No area available."
 
-	usr.loc = pick(L)
+	usr.forceMove(pick(L))
 	following = null
 
 /mob/dead/observer/verb/follow(input in getmobs())
@@ -330,16 +323,56 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(following && following == target)
 			return
 		following = target
-		src << "\blue Now following [target]"
-		spawn(0)
-			while(target && following == target && client)
-				var/turf/T = get_turf(target)
-				if(!T)
-					break
-				// To stop the ghost flickering.
-				if(loc != T)
-					loc = T
-				sleep(15)
+		src << "<span class='notice'>Now following \the [target]</span>"
+		if(ismob(target))
+			forceMove(get_turf(target))
+			var/mob/M = target
+			M.following_mobs += src
+		else
+			spawn(0)
+				while(target && following == target && client)
+					var/turf/T = get_turf(target)
+					if(!T)
+						break
+					// To stop the ghost flickering.
+					if(loc != T)
+						forceMove(T)
+					sleep(15)
+
+/mob/proc/update_following()
+	. = get_turf(src)
+	for(var/mob/dead/observer/M in following_mobs)
+		if(M.following != src)
+			following_mobs -= M
+		else
+			if(M.loc != .)
+				M.forceMove(.)
+
+/mob
+	var/list/following_mobs = list()
+
+/mob/Destroy()
+	for(var/mob/dead/observer/M in following_mobs)
+		M.following = null
+	following_mobs = null
+	return ..()
+
+/mob/dead/observer/Destroy()
+	if(ismob(following))
+		var/mob/M = following
+		M.following_mobs -= src
+	following = null
+	return ..()
+
+/mob/Move()
+	. = ..()
+	if(.)
+		update_following()
+
+/mob/Life()
+	// to catch teleports etc which directly set loc
+	update_following()
+	return ..()
 
 /mob/proc/check_holy(var/turf/T)
 	return 0
@@ -364,7 +397,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			var/turf/T = get_turf(M) //Turf of the destination mob
 
 			if(T && isturf(T))	//Make sure the turf exists, then move the source to that destination.
-				src.loc = T
+				forceMove(T)
 				following = null
 			else
 				src << "This mob is not located in the game world."
@@ -429,14 +462,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		src << "<span class='warning'>Spawning as a mouse is currently disabled.</span>"
 		return
 
-	if(!MayRespawn(1))
+	if(!MayRespawn(1, round(config.respawn_delay / 6)))
 		return
 
-	var/timedifference = world.time - client.time_died_as_mouse
-	if(client.time_died_as_mouse && timedifference <= mouse_respawn_time * 600)
-		var/timedifference_text
-		timedifference_text = time2text(mouse_respawn_time * 600 - timedifference,"mm:ss")
-		src << "<span class='warning'>You may only spawn again as a mouse more than [mouse_respawn_time] minutes after your death. You have [timedifference_text] left.</span>"
+	var/turf/T = get_turf(src)
+	if(!T || (T.z in config.admin_levels))
+		src << "<span class='warning'>You may not spawn as a mouse on this Z-level.</span>"
 		return
 
 	var/response = alert(src, "Are you -sure- you want to become a mouse?","Are you sure you want to squeek?","Squeek!","Nope!")
@@ -447,8 +478,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/mob/living/simple_animal/mouse/host
 	var/obj/machinery/atmospherics/unary/vent_pump/vent_found
 	var/list/found_vents = list()
-	for(var/obj/machinery/atmospherics/unary/vent_pump/v in world)
-		if(!v.welded && v.z == src.z)
+	for(var/obj/machinery/atmospherics/unary/vent_pump/v in machines)
+		if(!v.welded && v.z == T.z)
 			found_vents.Add(v)
 	if(found_vents.len)
 		vent_found = pick(found_vents)
@@ -464,7 +495,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		host << "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>"
 
 /mob/dead/observer/verb/view_manfiest()
-	set name = "View Crew Manifest"
+	set name = "Show Crew Manifest"
 	set category = "Ghost"
 
 	var/dat
@@ -571,13 +602,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	if(src.invisibility != 0)
 		user.visible_message( \
-			"<span class='warning'>[user] drags ghost, [src], to our plane of reality!</span>", \
+			"<span class='warning'>\The [user] drags ghost, [src], to our plane of reality!</span>", \
 			"<span class='warning'>You drag [src] to our plane of reality!</span>" \
 		)
 		toggle_visibility(1)
 	else
 		user.visible_message ( \
-			"<span class='warning'>[user] just tried to smash his book into that ghost!  It's not very effective.</span>", \
+			"<span class='warning'>\The [user] just tried to smash \his book into that ghost!  It's not very effective.</span>", \
 			"<span class='warning'>You get the feeling that the ghost can't become any more visible.</span>" \
 		)
 
@@ -629,6 +660,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/dead/observer/canface()
 	return 1
 
+/mob/dead/observer/proc/can_admin_interact()
+	return check_rights(R_ADMIN, 0, src)
+
 /mob/dead/observer/verb/toggle_ghostsee()
 	set name = "Toggle Ghost Vision"
 	set desc = "Toggles your ability to see things only ghosts can see, like other ghosts"
@@ -645,7 +679,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/proc/updateghostsight()
 	if (!seedarkness)
-		see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
+		see_invisible = SEE_INVISIBLE_NOLIGHTING
 	else
 		see_invisible = SEE_INVISIBLE_OBSERVER
 		if (!ghostvision)
@@ -669,7 +703,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if (ghostimage)
 			client.images -= ghostimage //remove ourself
 
-mob/dead/observer/MayRespawn(var/feedback = 0)
+mob/dead/observer/MayRespawn(var/feedback = 0, var/respawn_time = 0)
 	if(!client)
 		return 0
 	if(mind && mind.current && mind.current.stat != DEAD && can_reenter_corpse)
@@ -680,6 +714,13 @@ mob/dead/observer/MayRespawn(var/feedback = 0)
 		if(feedback)
 			src << "<span class='warning'>antagHUD restrictions prevent you from respawning.</span>"
 		return 0
+
+	var/timedifference = world.time - timeofdeath
+	if(respawn_time && timeofdeath && timedifference < respawn_time MINUTES)
+		var/timedifference_text = time2text(respawn_time MINUTES - timedifference,"mm:ss")
+		src << "<span class='warning'>You must have been dead for [respawn_time] minute\s to respawn. You have [timedifference_text] left.</span>"
+		return 0
+
 	return 1
 
 /atom/proc/extra_ghost_link()

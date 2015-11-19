@@ -79,10 +79,6 @@
 	griefProtection()
 	..()
 
-/obj/machinery/r_n_d/server/blob_act()
-	griefProtection()
-	..()
-
 //Backup files to centcomm to help admins recover data after greifer attacks
 /obj/machinery/r_n_d/server/proc/griefProtection()
 	for(var/obj/machinery/r_n_d/server/centcom/C in machines)
@@ -124,7 +120,7 @@
 		return
 
 /obj/machinery/r_n_d/server/centcom
-	name = "Centcom Central R&D Database"
+	name = "Central R&D Database"
 	server_id = -1
 
 /obj/machinery/r_n_d/server/centcom/initialize()
@@ -155,7 +151,8 @@
 
 /obj/machinery/computer/rdservercontrol
 	name = "R&D Server Controller"
-	icon_state = "rdcomp"
+	icon_keyboard = "rd_key"
+	icon_screen = "rdcomp"
 	light_color = "#a97faa"
 	circuit = /obj/item/weapon/circuitboard/rdservercontrol
 	var/screen = 0

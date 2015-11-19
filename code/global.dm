@@ -4,7 +4,7 @@
 #endif
 
 // Items that ask to be called every cycle.
-var/global/obj/effect/datacore/data_core = null
+var/global/datum/datacore/data_core = null
 var/global/list/all_areas                = list()
 var/global/list/machines                 = list()
 var/global/list/processing_objects       = list()
@@ -12,6 +12,7 @@ var/global/list/processing_power_items   = list()
 var/global/list/active_diseases          = list()
 var/global/list/med_hud_users            = list() // List of all entities using a medical HUD.
 var/global/list/sec_hud_users            = list() // List of all entities using a security HUD.
+var/global/list/hud_icon_reference       = list()
 
 
 var/global/list/global_mutations  = list() // List of hidden mutation things.
@@ -24,12 +25,17 @@ var/global/list/global_map = null
 var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
 
 
-var/diary          = null
-var/href_logfile   = null
-var/station_name   = "NSS Exodus"
-var/game_version   = "Baystation12"
-var/changelog_hash = ""
-var/game_year      = (text2num(time2text(world.realtime, "YYYY")) + 544)
+var/diary               = null
+var/href_logfile        = null
+var/station_name        = "NSS Exodus"
+var/station_short       = "Exodus"
+var/const/boss_name     = "Central Command"
+var/const/boss_short    = "Centcomm"
+var/const/company_name  = "NanoTrasen"
+var/const/company_short = "NT"
+var/game_version        = "Baystation12"
+var/changelog_hash      = ""
+var/game_year           = (text2num(time2text(world.realtime, "YYYY")) + 544)
 
 var/round_progressing = 1
 var/master_mode       = "extended" // "extended"
@@ -43,8 +49,6 @@ var/list/admin_log     = list()
 var/list/lastsignalers = list() // Keeps last 100 signals here in format: "[src] used \ref[src] @ location [src.loc]: [freq]/[code]"
 var/list/lawchanges    = list() // Stores who uploaded laws to which silicon-based lifeform, and what the law was.
 var/list/reg_dna       = list()
-
-var/mouse_respawn_time = 5 // Amount of time that must pass between a player dying as a mouse and repawning as a mouse. In minutes.
 
 var/list/monkeystart     = list()
 var/list/wizardstart     = list()
@@ -65,10 +69,10 @@ var/list/tdomeobserve       = list()
 var/list/tdomeadmin         = list()
 var/list/prisonsecuritywarp = list() // Prison security goes to these.
 var/list/prisonwarped       = list() // List of players already warped.
-var/list/blobstart          = list()
 var/list/ninjastart         = list()
 
 var/list/cardinal    = list(NORTH, SOUTH, EAST, WEST)
+var/list/cornerdirs  = list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
 var/list/alldirs     = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
 var/list/reverse_dir = list( // reverse_dir[dir] = reverse of dir
 	 2,  1,  3,  8, 10,  9, 11,  4,  6,  5,  7, 12, 14, 13, 15, 32, 34, 33, 35, 40, 42,
@@ -76,7 +80,6 @@ var/list/reverse_dir = list( // reverse_dir[dir] = reverse of dir
 	23, 28, 30, 29, 31, 48, 50, 49, 51, 56, 58, 57, 59, 52, 54, 53, 55, 60, 62, 61, 63
 )
 
-var/datum/station_state/start_state = null
 var/datum/configuration/config      = null
 var/datum/sun/sun                   = null
 

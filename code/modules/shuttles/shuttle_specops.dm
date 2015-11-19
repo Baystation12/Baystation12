@@ -62,7 +62,7 @@
 		var/obj/machinery/computer/C = user
 
 		if(world.time <= reset_time)
-			C.visible_message("\blue Central Command will not allow the Special Operations shuttle to launch yet.")
+			C.visible_message("\blue [boss_name] will not allow the Special Operations shuttle to launch yet.")
 			if (((world.time - reset_time)/10) > 60)
 				C.visible_message("\blue [-((world.time - reset_time)/10)/60] minutes remain!")
 			else
@@ -78,23 +78,30 @@
 
 	sleep_until_launch()
 
+	if (location)
+		var/obj/machinery/light/small/readylight/light = locate() in get_location_area()
+		if(light) light.set_state(0)
+
 	//launch
 	radio_announce("ALERT: INITIATING LAUNCH SEQUENCE")
 	..(user)
 
 /datum/shuttle/ferry/multidock/specops/move(var/area/origin,var/area/destination)
 	..(origin, destination)
-	if (!location)	//just arrived home
-		for(var/turf/T in get_area_turfs(destination))
-			var/mob/M = locate(/mob) in T
-			M << "\red You have arrived at Central Command. Operation has ended!"
-	else	//just left for the station
-		launch_mauraders()
-		for(var/turf/T in get_area_turfs(destination))
-			var/mob/M = locate(/mob) in T
-			M << "\red You have arrived at [station_name]. Commence operation!"
-
-	reset_time = world.time + specops_return_delay	//set the timeout
+	
+	spawn(20)
+		if (!location)	//just arrived home
+			for(var/turf/T in get_area_turfs(destination))
+				var/mob/M = locate(/mob) in T
+				M << "<span class='danger'>You have arrived at [boss_name]. Operation has ended!</span>"
+		else	//just left for the station
+			launch_mauraders()
+			for(var/turf/T in get_area_turfs(destination))
+				var/mob/M = locate(/mob) in T
+				M << "<span class='danger'>You have arrived at [station_name]. Commence operation!</span>"
+				
+				var/obj/machinery/light/small/readylight/light = locate() in T
+				if(light) light.set_state(1)
 
 /datum/shuttle/ferry/multidock/specops/cancel_launch()
 	if (!can_cancel())
@@ -219,3 +226,17 @@
 						M.close()
 		special_ops.readyreset()//Reset firealarm after the team launched.
 	//End Marauder launchpad.
+
+/obj/machinery/light/small/readylight
+	brightness_range = 5
+	brightness_power = 1
+	brightness_color = "#DA0205"
+	var/state = 0
+
+/obj/machinery/light/small/readylight/proc/set_state(var/new_state)
+	state = new_state
+	if(state)
+		brightness_color = "00FF00"
+	else
+		brightness_color = initial(brightness_color)
+	update()

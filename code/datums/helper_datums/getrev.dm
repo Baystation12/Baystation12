@@ -1,11 +1,16 @@
 var/global/datum/getrev/revdata = new()
 
 /datum/getrev
+	var/branch
 	var/revision
 	var/date
 	var/showinfo
 
 /datum/getrev/New()
+	var/list/head_branch = file2list(".git/HEAD", "\n")
+	if(head_branch.len)
+		branch = copytext(head_branch[1], 17)
+
 	var/list/head_log = file2list(".git/logs/HEAD", "\n")
 	for(var/line=head_log.len, line>=1, line--)
 		if(head_log[line])
@@ -18,7 +23,9 @@ var/global/datum/getrev/revdata = new()
 				if(unix_time)
 					date = unix2date(unix_time)
 			break
+
 	world.log << "Running revision:"
+	world.log << branch
 	world.log << date
 	world.log << revision
 	return
@@ -29,7 +36,7 @@ client/verb/showrevinfo()
 	set desc = "Check the current server code revision"
 
 	if(revdata.revision)
-		src << "<b>Server revision:</b> [revdata.date]"
+		src << "<b>Server revision:</b> [revdata.branch] - [revdata.date]"
 		if(config.githuburl)
 			src << "<a href='[config.githuburl]/commit/[revdata.revision]'>[revdata.revision]</a>"
 		else

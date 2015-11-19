@@ -44,20 +44,20 @@
 		if(!machine.ores_stored[ore] && !show_all_ores) continue
 		var/ore/O = ore_data[ore]
 		if(!O) continue
-		dat += "<tr><td width = 40><b>[capitalize(O.display_name)]</b></td><td width = 30>[machine.ores_stored[ore]]</td><td width = 100><font color='"
+		dat += "<tr><td width = 40><b>[capitalize(O.display_name)]</b></td><td width = 30>[machine.ores_stored[ore]]</td><td width = 100>"
 		if(machine.ores_processing[ore])
 			switch(machine.ores_processing[ore])
 				if(0)
-					dat += "red'>not processing"
+					dat += "<font color='red'>not processing</font>"
 				if(1)
-					dat += "orange'>smelting"
+					dat += "<font color='orange'>smelting</font>"
 				if(2)
-					dat += "blue'>compressing"
+					dat += "<font color='blue'>compressing</font>"
 				if(3)
-					dat += "gray'>alloying"
+					dat += "<font color='gray'>alloying</font>"
 		else
-			dat += "red'>not processing"
-		dat += "</font>.</td><td width = 30><a href='?src=\ref[src];toggle_smelting=[ore]'>\[change\]</a></td></tr>"
+			dat += "<font color='red'>not processing</font>"
+		dat += ".</td><td width = 30><a href='?src=\ref[src];toggle_smelting=[ore]'>\[change\]</a></td></tr>"
 
 	dat += "</table><hr>"
 	dat += "Currently displaying [show_all_ores ? "all ore types" : "only available ore types"]. <A href='?src=\ref[src];toggle_ores=1'>\[[show_all_ores ? "show less" : "show more"]\]</a></br>"
@@ -112,16 +112,17 @@
 	var/sheets_per_tick = 10
 	var/list/ores_processing[0]
 	var/list/ores_stored[0]
-	var/list/alloy_data[0]
+	var/static/list/alloy_data
 	var/active = 0
 
 /obj/machinery/mineral/processing_unit/New()
-
 	..()
 
-	//TODO: Ore and alloy global storage datum.
-	for(var/alloytype in typesof(/datum/alloy)-/datum/alloy)
-		alloy_data += new alloytype()
+	// initialize static alloy_data list
+	if(!alloy_data)
+		alloy_data = list()
+		for(var/alloytype in typesof(/datum/alloy)-/datum/alloy)
+			alloy_data += new alloytype()
 
 	if(!ore_data || !ore_data.len)
 		for(var/oretype in typesof(/ore)-/ore)
@@ -209,7 +210,7 @@
 				var/can_make = Clamp(ores_stored[metal],0,sheets_per_tick-sheets)
 				if(can_make%2>0) can_make--
 
-				var/material/M = name_to_material[O.compresses_to]
+				var/material/M = get_material_by_name(O.compresses_to)
 
 				if(!istype(M) || !can_make || ores_stored[metal] < 1)
 					continue
@@ -223,7 +224,7 @@
 
 				var/can_make = Clamp(ores_stored[metal],0,sheets_per_tick-sheets)
 
-				var/material/M = name_to_material[O.smelts_to]
+				var/material/M = get_material_by_name(O.smelts_to)
 				if(!istype(M) || !can_make || ores_stored[metal] < 1)
 					continue
 

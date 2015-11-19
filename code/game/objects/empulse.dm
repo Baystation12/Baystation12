@@ -1,3 +1,9 @@
+// Uncomment this define to check for possible lengthy processing of emp_act()s.
+// If emp_act() takes more than defined deciseconds (1/10 seconds) an admin message and log is created.
+// I do not recommend having this uncommented on main server, it probably causes a bit more lag, espicially with larger EMPs.
+
+// #define EMPDEBUG 10
+
 proc/empulse(turf/epicenter, heavy_range, light_range, log=0)
 	if(!epicenter) return
 
@@ -24,6 +30,9 @@ proc/empulse(turf/epicenter, heavy_range, light_range, log=0)
 		M << 'sound/effects/EMPulse.ogg'
 
 	for(var/atom/T in range(light_range, epicenter))
+		#ifdef EMPDEBUG
+		var/time = world.timeofday
+		#endif
 		var/distance = get_dist(epicenter, T)
 		if(distance < 0)
 			distance = 0
@@ -36,4 +45,8 @@ proc/empulse(turf/epicenter, heavy_range, light_range, log=0)
 				T.emp_act(2)
 		else if(distance <= light_range)
 			T.emp_act(2)
+		#ifdef EMPDEBUG
+		if((world.timeofday - time) >= EMPDEBUG)
+			log_and_message_admins("EMPDEBUG: [T.name] - [T.type] - took [world.timeofday - time]ds to process emp_act()!")
+		#endif
 	return 1

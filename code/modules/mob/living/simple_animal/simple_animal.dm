@@ -269,7 +269,6 @@
 
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/stack/medical))
-		user.changeNext_move(4)
 		if(stat != DEAD)
 			var/obj/item/stack/medical/MED = O
 			if(health < maxHealth)
@@ -287,28 +286,28 @@
 		if(istype(O, /obj/item/weapon/material/knife) || istype(O, /obj/item/weapon/material/knife/butch))
 			harvest(user)
 	else
-		attacked_with_item(O, user)
+		if(!O.force)
+			visible_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
+		else
+			O.attack(src, user, user.zone_sel.selecting)
 
-//TODO: refactor mob attackby(), attacked_by(), and friends.
-/mob/living/simple_animal/proc/attacked_with_item(var/obj/item/O, var/mob/user)
-	user.changeNext_move(8)
-	if(!O.force)
-		visible_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
-		return
-
-	if(O.force > resistance)
-		var/damage = O.force
-		if (O.damtype == HALLOSS)
-			damage = 0
-		if(supernatural && istype(O,/obj/item/weapon/nullrod))
-			damage *= 2
-			purge = 3
-		adjustBruteLoss(damage)
-	else
-		usr << "<span class='danger>This weapon is ineffective, it does no damage.</span>"
+/mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 
 	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")
-	user.do_attack_animation(src)
+
+	if(O.force <= resistance)
+		user << "<span class='danger'>This weapon is ineffective, it does no damage.</span>"
+		return 2
+	
+	var/damage = O.force
+	if (O.damtype == HALLOSS)
+		damage = 0
+	if(supernatural && istype(O,/obj/item/weapon/nullrod))
+		damage *= 2
+		purge = 3
+	adjustBruteLoss(damage)
+
+	return 0
 
 /mob/living/simple_animal/movement_delay()
 	var/tally = 0 //Incase I need to add stuff other than "speed" later
@@ -397,7 +396,7 @@
 		for(var/i=0;i<actual_meat_amount;i++)
 			var/obj/item/meat = new meat_type(get_turf(src))
 			meat.name = "[src.name] [meat.name]"
-		if(small)
+		if(issmall(src))
 			user.visible_message("<span class='danger'>[user] chops up \the [src]!</span>")
 			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
 			qdel(src)

@@ -112,15 +112,9 @@
 		..()
 
 /obj/vehicle/bullet_act(var/obj/item/projectile/Proj)
-	if (Proj.damage_type == BRUTE || Proj.damage_type == BURN)
-		health -= Proj.damage
+	health -= Proj.get_structure_damage()
 	..()
 	healthcheck()
-
-/obj/vehicle/blob_act()
-	src.health -= rand(20,40)*fire_dam_coeff
-	healthcheck()
-	return
 
 /obj/vehicle/ex_act(severity)
 	switch(severity)

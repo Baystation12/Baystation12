@@ -19,7 +19,7 @@
 	brute_dam_coeff = 0.5
 	var/atom/movable/load = null		// the loaded crate (usually)
 	var/beacon_freq = 1400
-	var/control_freq = AI_FREQ
+	var/control_freq = BOT_FREQ
 
 	suffix = ""
 
@@ -59,7 +59,7 @@
 	..()
 	wires = new(src)
 	botcard = new(src)
-	botcard.access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station)
+	botcard.access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	cell = new(src)
 	cell.charge = 2000
 	cell.maxcharge = 2000
@@ -77,10 +77,13 @@
 		name = "Mulebot ([suffix])"
 
 /obj/machinery/bot/mulebot/Destroy()
+	unload(0)
+	qdel(wires)
+	wires = null
 	if(radio_controller)
 		radio_controller.remove_object(src,beacon_freq)
 		radio_controller.remove_object(src,control_freq)
-	..()
+	return ..()
 
 // attack by item
 // emag : lock/unlock,
@@ -711,10 +714,6 @@
 				M.Weaken(5)
 				M.lying = 1
 	..()
-
-/obj/machinery/bot/mulebot/alter_health()
-	return get_turf(src)
-
 
 // called from mob/living/carbon/human/Crossed()
 // when mulebot is in the same loc

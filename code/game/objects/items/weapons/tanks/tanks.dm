@@ -15,6 +15,10 @@
 	throw_speed = 1
 	throw_range = 4
 
+	sprite_sheets = list(
+		"Resomi" = 'icons/mob/species/resomi/back.dmi'
+		)
+
 	var/datum/gas_mixture/air_contents = null
 	var/distribute_pressure = ONE_ATMOSPHERE
 	var/integrity = 3
@@ -37,78 +41,40 @@
 
 	processing_objects.Remove(src)
 
+	if(istype(loc, /obj/item/device/transfer_valve))
+		var/obj/item/device/transfer_valve/TTV = loc
+		TTV.remove_tank(src)
+
 	..()
 
 /obj/item/weapon/tank/examine(mob/user)
-	var/obj/icon = src
-	if (istype(src.loc, /obj/item/assembly))
-		icon = src.loc
-	if (!in_range(src, user))
-		if (icon == src) user << "<span class='notice'>It's \a \icon[icon][src]! If you want any more information you'll need to get closer.</span>"
-		return
-
-	var/celsius_temperature = src.air_contents.temperature-T0C
-	var/descriptive
-	var/status
-
-	if (celsius_temperature < 20)
-		descriptive = "cold"
-		status = "warning"
-	else if (celsius_temperature < 40)
-		descriptive = "room temperature"
-		status = "notice"
-	else if (celsius_temperature < 80)
-		descriptive = "lukewarm"
-		status = "warning"
-	else if (celsius_temperature < 100)
-		descriptive = "warm"
-		status = "warning"
-	else if (celsius_temperature < 300)
-		descriptive = "hot"
-		status = "danger"
-	else
-		descriptive = "furiously hot"
-		status = "danger"
-
-	user << "<span class='[status]'>\The \icon[icon][src] feels [descriptive]</span>"
-
-	return
-
-/obj/item/weapon/tank/blob_act()
-	if(prob(50))
-		var/turf/location = src.loc
-		if (!( istype(location, /turf) ))
-			qdel(src)
-
-		if(src.air_contents)
-			location.assume_air(air_contents)
-
-		qdel(src)
+	. = ..(user, 0)
+	if(.)
+		var/celsius_temperature = air_contents.temperature - T0C
+		var/descriptive
+		switch(celsius_temperature)
+			if(300 to INFINITY)
+				descriptive = "furiously hot"
+			if(100 to 300)
+				descriptive = "hot"
+			if(80 to 100)
+				descriptive = "warm"
+			if(40 to 80)
+				descriptive = "lukewarm"
+			if(20 to 40)
+				descriptive = "room temperature"
+			else
+				descriptive = "cold"
+		user << "<span class='notice'>\The [src] feels [descriptive].</span>"
 
 /obj/item/weapon/tank/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
-	var/obj/icon = src
-
 	if (istype(src.loc, /obj/item/assembly))
 		icon = src.loc
 
 	if ((istype(W, /obj/item/device/analyzer)) && get_dist(user, src) <= 1)
-		for (var/mob/O in viewers(user, null))
-			O << "<span class='notice'>\The [user] has used [W] on \icon[icon] [src]</span>"
-
-		var/pressure = air_contents.return_pressure()
-		manipulated_by = user.real_name			//This person is aware of the contents of the tank.
-		var/total_moles = air_contents.total_moles
-
-		user << "<span class='notice'>Results of analysis of \icon[icon]</span>"
-		if (total_moles>0)
-			user << "<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>"
-			for(var/g in air_contents.gas)
-				user << "<span class='notice'>[gas_data.name[g]]: [(round(air_contents.gas[g] / total_moles) * 100)]%</span>"
-			user << "<span class='notice'>Temperature: [round(air_contents.temperature-T0C)]&deg;C</span>"
-		else
-			user << "<span class='notice'>Tank is empty!</span>"
-		src.add_fingerprint(user)
+		var/obj/item/device/analyzer/A = W
+		A.analyze_gases(src, user)
 	else if (istype(W,/obj/item/latexballon))
 		var/obj/item/latexballon/LB = W
 		LB.blow(src)
@@ -131,7 +97,7 @@
 			location = loc.loc
 	else if(istype(loc, /mob/living/carbon))
 		location = loc
-	
+
 	var/using_internal
 	if(istype(location))
 		if(location.internal==src)
@@ -160,11 +126,11 @@
 				mask_check = 1
 
 		if(mask_check)
-			if(location.wear_mask && (location.wear_mask.flags & AIRTIGHT))
+			if(location.wear_mask && (location.wear_mask.item_flags & AIRTIGHT))
 				data["maskConnected"] = 1
 			else if(istype(location, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = location
-				if(H.head && (H.head.flags & AIRTIGHT))
+				if(H.head && (H.head.item_flags & AIRTIGHT))
 					data["maskConnected"] = 1
 
 	// update the ui if it exists, returns null if no ui is passed/found
@@ -208,11 +174,11 @@
 			else
 
 				var/can_open_valve
-				if(location.wear_mask && (location.wear_mask.flags & AIRTIGHT))
+				if(location.wear_mask && (location.wear_mask.item_flags & AIRTIGHT))
 					can_open_valve = 1
 				else if(istype(location,/mob/living/carbon/human))
 					var/mob/living/carbon/human/H = location
-					if(H.head && (H.head.flags & AIRTIGHT))
+					if(H.head && (H.head.item_flags & AIRTIGHT))
 						can_open_valve = 1
 
 				if(can_open_valve)
@@ -278,16 +244,19 @@
 		var/range = (pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE
 
 		explosion(
-			get_turf(loc), 
-			round(min(BOMBCAP_DVSTN_RADIUS, range*0.25)), 
-			round(min(BOMBCAP_HEAVY_RADIUS, range*0.50)), 
-			round(min(BOMBCAP_LIGHT_RADIUS, range*1.00)), 
-			round(min(BOMBCAP_FLASH_RADIUS, range*1.50)), 
+			get_turf(loc),
+			round(min(BOMBCAP_DVSTN_RADIUS, range*0.25)),
+			round(min(BOMBCAP_HEAVY_RADIUS, range*0.50)),
+			round(min(BOMBCAP_LIGHT_RADIUS, range*1.00)),
+			round(min(BOMBCAP_FLASH_RADIUS, range*1.50)),
 			)
 		qdel(src)
 
 	else if(pressure > TANK_RUPTURE_PRESSURE)
-		//world << "<span class='notice'>[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]</span>"
+		#ifdef FIREDBG
+		log_debug("<span class='warning'>[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]</span>")
+		#endif
+
 		if(integrity <= 0)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)
@@ -299,7 +268,10 @@
 			integrity--
 
 	else if(pressure > TANK_LEAK_PRESSURE)
-		//world << "<span class='notice'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>"
+		#ifdef FIREDBG
+		log_debug("<span class='warning'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>")
+		#endif
+
 		if(integrity <= 0)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)

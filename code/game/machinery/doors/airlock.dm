@@ -48,6 +48,11 @@
 		return
 	..()
 
+/obj/machinery/door/airlock/get_material()
+	if(mineral)
+		return get_material_by_name(mineral)
+	return get_material_by_name(DEFAULT_WALL_MATERIAL)
+
 /obj/machinery/door/airlock/command
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorcom.dmi'
@@ -651,7 +656,7 @@ About the new airlock wires panel:
 	return
 
 /obj/machinery/door/airlock/CanUseTopic(var/mob/user)
-	if(!user.isSilicon())
+	if(issilicon(user))
 		return STATUS_CLOSE
 
 	if(operating < 0) //emagged
@@ -669,7 +674,7 @@ About the new airlock wires panel:
 
 	return ..()
 
-/obj/machinery/door/airlock/Topic(href, href_list, var/nowindow = 0)
+/obj/machinery/door/airlock/Topic(href, href_list)
 	if(..())
 		return 1
 
@@ -906,6 +911,9 @@ About the new airlock wires panel:
 	health -= crush_damage
 	healthcheck()
 
+/obj/effect/energy_field/airlock_crush(var/crush_damage)
+	Stress(crush_damage)
+
 /obj/structure/closet/airlock_crush(var/crush_damage)
 	..()
 	damage(crush_damage)
@@ -1017,6 +1025,9 @@ About the new airlock wires panel:
 			name = "[istext(assembly.glass) ? "[assembly.glass] airlock" : assembly.base_name]"
 
 	//wires
+	var/turf/T = get_turf(newloc)
+	if(T && (T.z in config.admin_levels))
+		secured_wires = 1
 	if (secured_wires)
 		wires = new/datum/wires/airlock/secure(src)
 	else
@@ -1030,10 +1041,9 @@ About the new airlock wires panel:
 				break
 
 /obj/machinery/door/airlock/Destroy()
-	if(wires)
-		qdel(wires)
-		wires = null
-	..()
+	qdel(wires)
+	wires = null
+	return ..()
 
 // Most doors will never be deconstructed over the course of a round,
 // so as an optimization defer the creation of electronics until
@@ -1056,8 +1066,8 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/emp_act(var/severity)
 	if(prob(40/severity))
-		var/duration = world.time + SecondsToTicks(30 / severity)
-		if(duration > electrified_until)
+		var/duration = SecondsToTicks(30 / severity)
+		if(electrified_until > -1 && (duration + world.time) > electrified_until)
 			electrify(duration)
 	..()
 

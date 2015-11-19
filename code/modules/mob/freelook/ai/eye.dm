@@ -27,23 +27,37 @@
 // The AI's "eye". Described on the top of the page.
 
 /mob/living/silicon/ai
-	eyeobj = new /mob/eye/aiEye()
 	var/obj/machinery/hologram/holopad/holo = null
+
+/mob/living/silicon/ai/proc/destroy_eyeobj(var/atom/new_eye)
+	if(!eyeobj) return
+	if(!new_eye)
+		new_eye = src
+	eyeobj.owner = null
+	qdel(eyeobj) // No AI, no Eye
+	eyeobj = null
+	if(client)
+		client.eye = new_eye
+
+/mob/living/silicon/ai/proc/create_eyeobj(var/newloc)
+	if(eyeobj) destroy_eyeobj()
+	if(!newloc) newloc = src.loc
+	eyeobj = PoolOrNew(/mob/eye/aiEye, newloc)
+	eyeobj.owner = src
+	eyeobj.name = "[src.name] (AI Eye)" // Give it a name
+	if(client) client.eye = eyeobj
+	SetName(src.name)
 
 // Intiliaze the eye by assigning it's "ai" variable to us. Then set it's loc to us.
 /mob/living/silicon/ai/New()
 	..()
-	eyeobj.owner = src
-	eyeobj.name = "[src.name] (AI Eye)" // Give it a name
+	create_eyeobj()
 	spawn(5)
 		if(eyeobj)
 			eyeobj.loc = src.loc
 
 /mob/living/silicon/ai/Destroy()
-	if(eyeobj)
-		eyeobj.owner = null
-		qdel(eyeobj) // No AI, no Eye
-		eyeobj = null
+	destroy_eyeobj()
 	..()
 
 /atom/proc/move_camera_by_click()
@@ -53,23 +67,18 @@
 			AI.eyeobj.setLoc(src)
 
 // Return to the Core.
-
 /mob/living/silicon/ai/proc/core()
 	set category = "AI Commands"
 	set name = "AI Core"
 
 	view_core()
 
-
 /mob/living/silicon/ai/proc/view_core()
 	camera = null
 	unset_machine()
 
 	if(!src.eyeobj)
-		src << "ERROR: Eyeobj not found. Creating new eye..."
-		src.eyeobj = new(src.loc)
-		src.eyeobj.owner = src
-		src.SetName(src.name)
+		return
 
 	if(client && client.eye)
 		client.eye = src

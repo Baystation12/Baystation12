@@ -59,11 +59,6 @@
 			else
 		return
 
-	blob_act()
-		if(prob(50))
-			new /obj/effect/effect/water(src.loc)
-			qdel(src)
-
 
 
 
@@ -146,16 +141,13 @@
 
 
 /obj/structure/reagent_dispensers/fueltank/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.damage_type == BRUTE || Proj.damage_type == BURN)
+	if(Proj.get_structure_damage())
 		if(istype(Proj.firer))
 			message_admins("[key_name_admin(Proj.firer)] shot fueltank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>).")
 			log_game("[key_name(Proj.firer)] shot fueltank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]).")
 
 		if(!istype(Proj ,/obj/item/projectile/beam/lastertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
 			explode()
-
-/obj/structure/reagent_dispensers/fueltank/blob_act()
-	explode()
 
 /obj/structure/reagent_dispensers/fueltank/ex_act()
 	explode()
@@ -222,10 +214,6 @@
 	New()
 		..()
 		reagents.add_reagent("beer",1000)
-
-/obj/structure/reagent_dispensers/beerkeg/blob_act()
-	explosion(src.loc,0,3,5,7,10)
-	qdel(src)
 
 /obj/structure/reagent_dispensers/virusfood
 	name = "Virus Food Dispenser"

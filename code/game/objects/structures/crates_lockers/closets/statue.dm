@@ -86,7 +86,7 @@
 			shatter(M)
 
 /obj/structure/closet/statue/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.damage
+	health -= Proj.get_structure_damage()
 	check_health()
 
 	return
@@ -95,10 +95,6 @@
 	if(damage && environment_smash)
 		for(var/mob/M in src)
 			shatter(M)
-
-/obj/structure/closet/statue/blob_act()
-	for(var/mob/M in src)
-		shatter(M)
 
 /obj/structure/closet/statue/ex_act(severity)
 	for(var/mob/M in src)

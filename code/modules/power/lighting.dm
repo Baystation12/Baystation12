@@ -166,6 +166,15 @@
 	desc = "A small lighting fixture."
 	light_type = /obj/item/weapon/light/bulb
 
+/obj/machinery/light/small/emergency
+	brightness_range = 6
+	brightness_power = 2
+	brightness_color = "#da0205"
+
+/obj/machinery/light/small/red
+	brightness_range = 5
+	brightness_power = 1
+	brightness_color = "#da0205"
 
 /obj/machinery/light/spot
 	name = "spotlight"
@@ -189,20 +198,13 @@
 	..()
 
 	spawn(2)
-		var/area/A = get_area(src)
-		if(A && !A.requires_power)
-			on = 1
+		on = has_power()
 
 		switch(fitting)
 			if("tube")
-				brightness_range = 8
-				brightness_power = 3
 				if(prob(2))
 					broken(1)
 			if("bulb")
-				brightness_range = 4
-				brightness_power = 2
-				brightness_color = "#a0a080"
 				if(prob(5))
 					broken(1)
 		spawn(1)
@@ -397,8 +399,8 @@
 // returns whether this light has power
 // true if area has power and lightswitch is on
 /obj/machinery/light/proc/has_power()
-	var/area/A = src.loc.loc
-	return A.lightswitch && A.power_light
+	var/area/A = get_area(src)
+	return A && A.lightswitch && (!A.requires_power || A.power_light)
 
 /obj/machinery/light/proc/flicker(var/amount = rand(10, 20))
 	if(flickering) return
@@ -551,10 +553,6 @@
 
 //blob effect
 
-/obj/machinery/light/blob_act()
-	if(prob(75))
-		broken()
-
 
 // timed process
 // use power
@@ -570,8 +568,7 @@
 // called when area power state changes
 /obj/machinery/light/power_change()
 	spawn(10)
-		var/area/A = src.loc.loc
-		seton(A.lightswitch && A.power_light)
+		seton(has_power())
 
 // called when on fire
 

@@ -1,7 +1,7 @@
 /obj/item/weapon/grenade/empgrenade
 	name = "classic emp grenade"
 	icon_state = "emp"
-	item_state = "emp"
+	item_state = "empgrenade"
 	origin_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 3)
 
 	prime()

@@ -3,15 +3,8 @@
 
 /proc/spacevine_infestation(var/potency_min=70, var/potency_max=100, var/maturation_min=5, var/maturation_max=15)
 	spawn() //to stop the secrets panel hanging
-		var/list/turf/simulated/floor/turfs = list() //list of all the empty floor turfs in the hallway areas
-		for(var/areapath in typesof(/area/hallway))
-			var/area/A = locate(areapath)
-			for(var/turf/simulated/floor/F in A.contents)
-				if(turf_clear(F))
-					turfs += F
-
-		if(turfs.len) //Pick a turf to spawn at if we can
-			var/turf/simulated/floor/T = pick(turfs)
+		var/turf/T = pick_area_turf(/area/hallway, list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))
+		if(T)
 			var/datum/seed/seed = plant_controller.create_random_seed(1)
 			seed.set_trait(TRAIT_SPREAD,2)             // So it will function properly as vines.
 			seed.set_trait(TRAIT_POTENCY,rand(potency_min, potency_max)) // 70-100 potency will help guarantee a wide spread and powerful effects.
@@ -23,9 +16,9 @@
 			vine.mature_time = 0
 			vine.process()
 
-			message_admins("<span class='notice'>Event: Spacevines spawned at [T.loc] ([T.x],[T.y],[T.z])</span>")
+			log_and_message_admins_with_location("Event: Spacevines spawned at [T.loc] ([T.x],[T.y],[T.z])", T.x, T.y, T.z)
 			return
-		message_admins("<span class='notice'>Event: Spacevines failed to find a viable turf.</span>")
+		log_and_message_admins("<span class='notice'>Event: Spacevines failed to find a viable turf.</span>")
 
 /obj/effect/dead_plant
 	anchored = 1
@@ -58,10 +51,10 @@
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0
-	var/sampled
 	var/list/neighbors = list()
 	var/obj/effect/plant/parent
 	var/datum/seed/seed
+	var/sampled = 0
 	var/floor = 0
 	var/spread_chance = 40
 	var/spread_distance = 3
@@ -132,7 +125,7 @@
 		update_icon()
 		plant_controller.add_plant(src)
 		// Some plants eat through plating.
-		if(!isnull(seed.chems["pacid"]))
+		if(islist(seed.chems) && !isnull(seed.chems["pacid"]))
 			var/turf/T = get_turf(src)
 			T.ex_act(prob(80) ? 3 : 2)
 
@@ -188,12 +181,12 @@
 		icon_state = "[seed.get_trait(TRAIT_PLANT_ICON)]-[growth]"
 
 	if(growth>2 && growth == max_growth)
-		layer = 5
+		layer = (seed && seed.force_layer) ? seed.force_layer : 5
 		opacity = 1
-		if(!isnull(seed.chems["woodpulp"]))
+		if(islist(seed.chems) && !isnull(seed.chems["woodpulp"]))
 			density = 1
 	else
-		layer = 3
+		layer = (seed && seed.force_layer) ? seed.force_layer : 5
 		density = 0
 
 /obj/effect/plant/proc/calc_dir()
@@ -234,11 +227,18 @@
 
 /obj/effect/plant/attackby(var/obj/item/weapon/W, var/mob/user)
 
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	plant_controller.add_plant(src)
 
 	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
+		if(sampled)
+			user << "<span class='warning'>\The [src] has already been sampled recently.</span>"
+			return
+		if(!is_mature())
+			user << "<span class='warning'>\The [src] is not mature enough to yield a sample yet.</span>"
+			return
 		if(!seed)
-			user << "<span class='danger'>There is nothing to take a sample from.</span>"
+			user << "<span class='warning'>There is nothing to take a sample from.</span>"
 			return
 		if(sampled)
 			user << "<span class='danger'>You cannot take another sample from \the [src].</span>"
@@ -246,7 +246,8 @@
 		if(prob(70))
 			sampled = 1
 		seed.harvest(user,0,1)
-		health -= (rand(3,5)*10)
+		health -= (rand(3,5)*5)
+		sampled = 1
 	else
 		..()
 		if(W.force)

@@ -41,6 +41,8 @@
 		return 0
 
 	if(istype(M, /mob/living/carbon))
+		//TODO: replace with standard_feed_mob() call.
+
 		var/fullness = M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)
 		if(M == user)								//If you're eating it yourself
 			if(istype(M,/mob/living/carbon/human))
@@ -53,6 +55,7 @@
 					user << "<span class='warning'>\The [blocked] is in the way!</span>"
 					return
 
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //puts a limit on how fast people can eat/drink things
 			if (fullness <= 50)
 				M << "<span class='danger'>You hungrily chew out a piece of [src] and gobble it!</span>"
 			if (fullness > 50 && fullness <= 150)
@@ -65,35 +68,23 @@
 				M << "<span class='danger'>You cannot force any more of [src] to go down your throat.</span>"
 				return 0
 		else
-			if(istype(M,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
-				if(!H.check_has_mouth())
-					user << "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!"
-					return
-				var/obj/item/blocked = H.check_mouth_coverage()
-				if(blocked)
-					user << "<span class='warning'>\The [blocked] is in the way!</span>"
-					return
-
-			if(!istype(M, /mob/living/carbon/slime))		//If you're feeding it to someone else.
-
-				if (fullness <= (550 * (1 + M.overeatduration / 1000)))
-					user.visible_message("<span class='danger'>[user] attempts to feed [M] [src].</span>")
-				else
-					user.visible_message("<span class='danger'>[user] cannot force anymore of [src] down [M]'s throat.</span>")
-					return 0
-
-				if(!do_mob(user, M)) return
-
-				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
-				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [src.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
-				msg_admin_attack("[key_name(user)] fed [key_name(M)] with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)])")
-
-				user.visible_message("<span class='danger'>[user] feeds [M] [src].</span>")
-
-			else
-				user << "This creature does not seem to have a mouth!"
+			if(!M.can_force_feed(user, src))
 				return
+
+			if (fullness <= (550 * (1 + M.overeatduration / 1000)))
+				user.visible_message("<span class='danger'>[user] attempts to feed [M] [src].</span>")
+			else
+				user.visible_message("<span class='danger'>[user] cannot force anymore of [src] down [M]'s throat.</span>")
+				return 0
+
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+			if(!do_mob(user, M)) return
+
+			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [src.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
+			msg_admin_attack("[key_name(user)] fed [key_name(M)] with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)])")
+
+			user.visible_message("<span class='danger'>[user] feeds [M] [src].</span>")
 
 		if(reagents)								//Handle ingestion of the reagent.
 			playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
@@ -463,6 +454,7 @@
 	desc = "An egg!"
 	icon_state = "egg"
 	filling_color = "#FDFFD1"
+	volume = 10
 
 /obj/item/weapon/reagent_containers/food/snacks/egg/New()
 	..()
@@ -1525,11 +1517,13 @@
 		..()
 		reagents.add_reagent("protein", 10)
 
-	afterattack(obj/O as obj, mob/user as mob, proximity)
+	afterattack(obj/O as obj, var/mob/living/carbon/human/user as mob, proximity)
 		if(!proximity) return
 		if(istype(O,/obj/structure/sink) && !wrapped)
 			user << "You place \the [name] under a stream of water..."
-			loc = get_turf(O)
+			if(istype(user))
+				user.unEquip(src)
+			src.loc = get_turf(src)
 			return Expand()
 		..()
 
@@ -1574,11 +1568,14 @@
 	*/
 
 	proc/Expand()
-		for(var/mob/M in viewers(src,7))
-			M << "\red \The [src] expands!"
-		var/mob/living/carbon/human/H = new (src)
+		src.visible_message("<span class='notice'>\The [src] expands!</span>")
+		var/mob/living/carbon/human/H = new(src.loc)
 		H.set_species(monkey_type)
+		H.real_name = H.species.get_random_name()
+		H.name = H.real_name
+		src.loc = null
 		qdel(src)
+		return 1
 
 	proc/Unwrap(mob/user as mob)
 		icon_state = "monkeycube"
@@ -1610,11 +1607,11 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaeracube
 	name = "neaera cube"
-	monkey_type = "Neara"
+	monkey_type = "Neaera"
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube
 	name = "neaera cube"
-	monkey_type = "Neara"
+	monkey_type = "Neaera"
 
 
 /obj/item/weapon/reagent_containers/food/snacks/spellburger

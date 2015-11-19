@@ -77,7 +77,7 @@
 		return
 	if (src.operating)
 		return
-	if (src.density && !M.small && src.allowed(AM))
+	if (src.density && !issmall(M) && src.allowed(AM))
 		open()
 		if(src.check_access(null))
 			sleep(50)
@@ -229,6 +229,7 @@
 
 	//If it's a weapon, smash windoor. Unless it's an id card, agent card, ect.. then ignore it (Cards really shouldnt damage a door anyway)
 	if(src.density && istype(I, /obj/item/weapon) && !istype(I, /obj/item/weapon/card))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		var/aforce = I.force
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		visible_message("<span class='danger'>[src] was hit by [I].</span>")

@@ -1,5 +1,3 @@
-var/list/global/wall_cache = list()
-
 /turf/simulated/wall
 	name = "wall"
 	desc = "A huge chunk of metal used to seperate rooms."
@@ -12,14 +10,21 @@ var/list/global/wall_cache = list()
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 
 	var/damage = 0
-	var/damage_overlay
-	var/global/damage_overlays[8]
+	var/damage_overlay = 0
+	var/global/damage_overlays[16]
 	var/active
 	var/can_open = 0
 	var/material/material
 	var/material/reinf_material
 	var/last_state
 	var/construction_stage
+
+	var/list/wall_connections = list("0", "0", "0", "0")
+
+// Walls always hide the stuff below them.
+/turf/simulated/wall/levelupdate()
+	for(var/obj/O in src)
+		O.hide(1)
 
 /turf/simulated/wall/New(var/newloc, var/materialtype, var/rmaterialtype)
 	..(newloc)
@@ -28,7 +33,7 @@ var/list/global/wall_cache = list()
 		materialtype = DEFAULT_WALL_MATERIAL
 	material = get_material_by_name(materialtype)
 	if(!isnull(rmaterialtype))
-		reinf_material = name_to_material[rmaterialtype]
+		reinf_material = get_material_by_name(rmaterialtype)
 	update_material()
 
 	processing_turfs |= src
@@ -37,7 +42,6 @@ var/list/global/wall_cache = list()
 	processing_turfs -= src
 	dismantle_wall(null,null,1)
 	..()
-
 
 /turf/simulated/wall/process()
 	// Calling parent will kill processing
@@ -50,12 +54,10 @@ var/list/global/wall_cache = list()
 	else if(istype(Proj,/obj/item/projectile/ion))
 		burn(500)
 
-	// Tasers and stuff? No thanks. Also no clone or tox damage crap.
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		return
+	var/proj_damage = Proj.get_structure_damage()
 
 	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
-	var/damage = min(Proj.damage, 100)
+	var/damage = min(proj_damage, 100)
 
 	take_damage(damage)
 	return
@@ -170,9 +172,9 @@ var/list/global/wall_cache = list()
 			O.loc = src
 
 	clear_plants()
-	material = name_to_material["placeholder"]
+	material = get_material_by_name("placeholder")
 	reinf_material = null
-	check_relatives()
+	update_connections(1)
 
 	ChangeTurf(/turf/simulated/floor/plating)
 
@@ -189,10 +191,6 @@ var/list/global/wall_cache = list()
 		if(3.0)
 			take_damage(rand(0, 250))
 		else
-	return
-
-/turf/simulated/wall/blob_act()
-	take_damage(rand(75, 125))
 	return
 
 // Wall-rot effect, a nasty fungus that destroys walls.

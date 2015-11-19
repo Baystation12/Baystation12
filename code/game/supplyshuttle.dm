@@ -70,11 +70,7 @@ var/list/mechtoys = list(
 		for(var/mob_type in mobs_can_pass)
 			if(istype(A, mob_type))
 				return ..()
-		if(istype(A, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.species.is_small)
-				return ..()
-		return 0
+		return issmall(M)
 
 	return ..()
 
@@ -195,16 +191,12 @@ var/list/mechtoys = list(
 							find_slip = 0
 						continue
 
-					// Sell phoron
-					if(istype(A, /obj/item/stack/material/phoron))
-						var/obj/item/stack/material/phoron/P = A
-						phoron_count += P.get_amount()
-
-					// Sell platinum
-					if(istype(A, /obj/item/stack/material/platinum))
-						var/obj/item/stack/material/platinum/P = A
-						plat_count += P.get_amount()
-
+					// Sell phoron and platinum
+					if(istype(A, /obj/item/stack))
+						var/obj/item/stack/P = A
+						switch(P.get_material_name())
+							if("phoron") phoron_count += P.get_amount()
+							if("platinum") plat_count += P.get_amount()
 			qdel(MA)
 
 		if(phoron_count)

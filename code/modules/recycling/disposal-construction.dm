@@ -83,7 +83,7 @@
 
 
 ///// Z-Level stuff
-		if(ptype<6 || ptype>8 && !(ptype==11 || ptype==12))
+		if(!(ptype in list(6, 7, 8, 11, 12, 13, 14)))
 ///// Z-Level stuff
 			icon_state = "con[base_state]"
 		else
@@ -219,7 +219,7 @@
 				ispipe = 1
 
 		var/turf/T = src.loc
-		if(T.intact)
+		if(!T.is_plating())
 			user << "You can only attach the [nicetype] if the floor plating is removed."
 			return
 

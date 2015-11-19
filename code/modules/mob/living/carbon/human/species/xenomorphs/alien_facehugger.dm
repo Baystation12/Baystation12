@@ -15,7 +15,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	icon_state = "facehugger"
 	item_state = "facehugger"
 	w_class = 3 //note: can be picked up by aliens unlike most other items of w_class below 4
-	flags = MASKCOVERSMOUTH | MASKCOVERSEYES | AIRTIGHT
+	flags = PROXMOVE
 	body_parts_covered = FACE|EYES
 	throw_range = 5
 
@@ -32,10 +32,11 @@ var/const/MAX_ACTIVE_TIME = 400
 
 	..()
 
-/obj/item/clothing/mask/facehugger/attack(mob/living/M as mob, mob/user as mob)
-	..()
+/obj/item/clothing/mask/facehugger/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+	. = ..()
 	user.drop_from_inventory(src)
-	Attach(M)
+	if(hit_zone == "head")
+		Attach(target)
 
 /obj/item/clothing/mask/facehugger/New()
 	if(config.aliens_allowed)
@@ -125,15 +126,6 @@ var/const/MAX_ACTIVE_TIME = 400
 	if(!sterile) L.take_organ_damage(strength,0) //done here so that even borgs and humans in helmets take damage
 
 	L.visible_message("\red \b [src] leaps at [L]'s face!")
-
-	/* Tentatively removed since huggers can't be thrown anymore
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		if(H.head && H.head.flags & HEADCOVERSMOUTH)
-			H.visible_message("\red \b [src] smashes against [H]'s [H.head]!")
-			Die()
-			return
-	*/
 
 	if(iscarbon(M))
 		var/mob/living/carbon/target = L
@@ -235,6 +227,6 @@ var/const/MAX_ACTIVE_TIME = 400
 
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
-		if(H.head && H.head.flags & HEADCOVERSMOUTH)
+		if(H.head && (H.head.body_parts_covered & FACE) && !(H.head.item_flags & FLEXIBLEMATERIAL))
 			return 0
 	return 1

@@ -10,7 +10,7 @@
 	..()
 	maximum_volume = max
 	my_atom = A
-	
+
 	//I dislike having these here but map-objects are initialised before world/New() is called. >_>
 	if(!chemical_reagents_list)
 		//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent id
@@ -257,7 +257,7 @@
 	if(!target || !istype(target))
 		return
 
-	amount = min(amount, total_volume, target.get_free_space() / multiplier)
+	amount = max(0, min(amount, total_volume, target.get_free_space() / multiplier))
 
 	if(!amount)
 		return
@@ -277,9 +277,9 @@
 
 /* Holder-to-atom and similar procs */
 
-//The general proc for applying reagents to things. This proc assumes the reagents are being applied externally, 
+//The general proc for applying reagents to things. This proc assumes the reagents are being applied externally,
 //not directly injected into the contents. It first calls touch, then the appropriate trans_to_*() or splash_mob().
-//If for some reason touch effects are bypassed (e.g. injecting stuff directly into a reagent container or person), 
+//If for some reason touch effects are bypassed (e.g. injecting stuff directly into a reagent container or person),
 //call the appropriate trans_to_*() proc.
 /datum/reagents/proc/trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
 	touch(target) //First, handle mere touch effects
@@ -292,13 +292,19 @@
 		return trans_to_obj(target, amount, multiplier, copy)
 	return 0
 
-//Using this in case we want to differentiate splashing an atom from transferring reagents to it later down the road.
-//For now it just calls trans_to.
-/datum/reagents/proc/splash(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
+//Splashing reagents is messier than trans_to, the target's loc gets some of the reagents as well.
+/datum/reagents/proc/splash(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/min_spill=0, var/max_spill=60)
+	var/spill = 0
+	if(!isturf(target) && target.loc)
+		spill = amount*(rand(min_spill, max_spill)/100)
+		amount -= spill
+	if(spill)
+		splash(target.loc, spill, multiplier, copy, min_spill, max_spill)
+	
 	trans_to(target, amount, multiplier, copy)
 
 /datum/reagents/proc/trans_id_to(var/atom/target, var/id, var/amount = 1)
-	if (!target || !target.reagents)
+	if (!target || !target.reagents || !target.simulated)
 		return
 
 	amount = min(amount, get_reagent_amount(id))
@@ -327,7 +333,7 @@
 	return
 
 /datum/reagents/proc/touch_mob(var/mob/target)
-	if(!target || !istype(target))
+	if(!target || !istype(target) || !target.simulated)
 		return
 
 	for(var/datum/reagent/current in reagent_list)
@@ -336,7 +342,7 @@
 	update_total()
 
 /datum/reagents/proc/touch_turf(var/turf/target)
-	if(!target || !istype(target))
+	if(!target || !istype(target) || !target.simulated)
 		return
 
 	for(var/datum/reagent/current in reagent_list)
@@ -345,7 +351,7 @@
 	update_total()
 
 /datum/reagents/proc/touch_obj(var/obj/target)
-	if(!target || !istype(target))
+	if(!target || !istype(target) || !target.simulated)
 		return
 
 	for(var/datum/reagent/current in reagent_list)
@@ -364,7 +370,7 @@
 	return trans_to_mob(target, amount, CHEM_TOUCH, perm, copy)
 
 /datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/type = CHEM_BLOOD, var/multiplier = 1, var/copy = 0) // Transfer after checking into which holder...
-	if(!target || !istype(target))
+	if(!target || !istype(target) || !target.simulated)
 		return
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
@@ -383,20 +389,20 @@
 		R.touch_mob(target)
 
 /datum/reagents/proc/trans_to_turf(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Turfs don't have any reagents (at least, for now). Just touch it.
-	if(!target)
+	if(!target || !target.simulated)
 		return
 
-	var/datum/reagents/R = new /datum/reagents(maximum_volume)
+	var/datum/reagents/R = new /datum/reagents(amount * multiplier)
 	. = trans_to_holder(R, amount, multiplier, copy)
 	R.touch_turf(target)
 	return
 
 /datum/reagents/proc/trans_to_obj(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Objects may or may not; if they do, it's probably a beaker or something and we need to transfer properly; otherwise, just touch.
-	if(!target)
+	if(!target || !target.simulated)
 		return
 
 	if(!target.reagents)
-		var/datum/reagents/R = new /datum/reagents(maximum_volume)
+		var/datum/reagents/R = new /datum/reagents(amount * multiplier)
 		. = trans_to_holder(R, amount, multiplier, copy)
 		R.touch_obj(target)
 		return

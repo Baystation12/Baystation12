@@ -59,18 +59,20 @@ var/list/gamemode_cache = list()
 	var/allow_random_events = 0			// enables random events mid-round when set to 1
 	var/allow_ai = 1					// allow ai job
 	var/hostedby = null
-	var/respawn = 1
+	var/respawn_delay = 30
 	var/guest_jobban = 1
 	var/usewhitelist = 0
-	var/mods_are_mentors = 0
 	var/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
+	var/show_mods = 0
+	var/show_mentors = 0
+	var/mods_can_tempban = 0
+	var/mods_can_job_tempban = 0
+	var/mod_tempban_max = 1440
+	var/mod_job_tempban_max = 1440
 	var/load_jobs_from_txt = 0
 	var/ToRban = 0
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
-
-	var/rp_rev = 0             // Changes between conversion methods in rev.
-	var/announce_revheads = 0  // Determines if revheads are announced in revolution mode.
 
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
@@ -116,6 +118,8 @@ var/list/gamemode_cache = list()
 
 	var/organ_health_multiplier = 1
 	var/organ_regeneration_multiplier = 1
+	var/organs_decay
+	var/default_brain_health = 400
 
 	//Paincrit knocks someone down once they hit 60 shock_stage, so by default make it so that close to 100 additional damage needs to be dealt,
 	//so that it's similar to HALLOSS. Lowered it a bit since hitting paincrit takes much longer to wear off than a halloss stun.
@@ -132,6 +136,7 @@ var/list/gamemode_cache = list()
 
 	var/welder_vision = 1
 	var/generate_asteroid = 0
+	var/no_click_cooldown = 0
 
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
@@ -204,6 +209,8 @@ var/list/gamemode_cache = list()
 	var/law_zero = "ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010"
 
 	var/aggressive_changelog = 0
+
+	var/list/language_prefixes = list(",","#","-")//Default language prefixes
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -318,11 +325,11 @@ var/list/gamemode_cache = list()
 				if ("log_runtime")
 					config.log_runtime = 1
 
-				if ("mentors")
-					config.mods_are_mentors = 1
-
 				if ("generate_asteroid")
 					config.generate_asteroid = 1
+
+				if ("no_click_cooldown")
+					config.no_click_cooldown = 1
 
 				if("allow_admin_ooccolor")
 					config.allow_admin_ooccolor = 1
@@ -372,8 +379,8 @@ var/list/gamemode_cache = list()
 //				if ("authentication")
 //					config.enable_authentication = 1
 
-				if ("norespawn")
-					config.respawn = 0
+				if ("respawn_delay")
+					config.respawn_delay = text2num(value)
 
 				if ("servername")
 					config.server_name = value
@@ -471,6 +478,24 @@ var/list/gamemode_cache = list()
 
 				if("kick_inactive")
 					config.kick_inactive = text2num(value)
+
+				if("show_mods")
+					config.show_mods = 1
+
+				if("show_mentors")
+					config.show_mentors = 1
+
+				if("mods_can_tempban")
+					config.mods_can_tempban = 1
+
+				if("mods_can_job_tempban")
+					config.mods_can_job_tempban = 1
+
+				if("mod_tempban_max")
+					config.mod_tempban_max = text2num(value)
+
+				if("mod_job_tempban_max")
+					config.mod_job_tempban_max = text2num(value)
 
 				if("load_jobs_from_txt")
 					load_jobs_from_txt = 1
@@ -614,12 +639,6 @@ var/list/gamemode_cache = list()
 				if("disable_welder_vision")
 					config.welder_vision = 0
 
-				if("rp_rev")
-					config.rp_rev = 1
-
-				if("announce_revheads")
-					config.announce_revheads = 1
-
 				if("allow_extra_antags")
 					config.allow_extra_antags = 1
 
@@ -662,6 +681,11 @@ var/list/gamemode_cache = list()
 				if("aggressive_changelog")
 					config.aggressive_changelog = 1
 
+				if("default_language_prefixes")
+					var/list/values = text2list(value, " ")
+					if(values.len > 0)
+						language_prefixes = values
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
@@ -689,6 +713,12 @@ var/list/gamemode_cache = list()
 					config.organ_regeneration_multiplier = value / 100
 				if("organ_damage_spillover_multiplier")
 					config.organ_damage_spillover_multiplier = value / 100
+				if("organs_can_decay")
+					config.organs_decay = 1
+				if("default_brain_health")
+					config.default_brain_health = text2num(value)
+					if(!config.default_brain_health || config.default_brain_health < 1)
+						config.default_brain_health = initial(config.default_brain_health)
 				if("bones_can_break")
 					config.bones_can_break = value
 				if("limbs_can_break")
@@ -813,21 +843,15 @@ var/list/gamemode_cache = list()
 	for (var/game_mode in gamemode_cache)
 		var/datum/game_mode/M = gamemode_cache[game_mode]
 		if (M.config_tag && M.config_tag == mode_name)
-			M.create_antagonists()
 			return M
 	return gamemode_cache["extended"]
 
 /datum/configuration/proc/get_runnable_modes()
-	var/list/datum/game_mode/runnable_modes = new
-	for (var/game_mode in gamemode_cache)
+	var/list/runnable_modes = list()
+	for(var/game_mode in gamemode_cache)
 		var/datum/game_mode/M = gamemode_cache[game_mode]
-		if (!(M.config_tag in modes))
-			continue
-		if (probabilities[M.config_tag]<=0)
-			continue
-		if (M.can_start())
-			runnable_modes[M] = probabilities[M.config_tag]
-			//world << "DEBUG: runnable_mode\[[runnable_modes.len]\] = [M.config_tag]"
+		if(M && M.can_start() && !isnull(config.probabilities[M.config_tag]) && config.probabilities[M.config_tag] > 0)
+			runnable_modes |= M
 	return runnable_modes
 
 /datum/configuration/proc/post_load()

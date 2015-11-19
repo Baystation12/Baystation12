@@ -8,6 +8,8 @@
 #define MOLES_PHORON_VISIBLE 0.7 // Moles in a standard cell after which phoron is visible.
 #define MOLES_O2STANDARD     (MOLES_CELLSTANDARD * O2STANDARD) // O2 standard value (21%)
 #define MOLES_N2STANDARD     (MOLES_CELLSTANDARD * N2STANDARD) // N2 standard value (79%)
+#define MOLES_O2ATMOS (MOLES_O2STANDARD*50)
+#define MOLES_N2ATMOS (MOLES_N2STANDARD*50)
 
 // These are for when a mob breathes poisonous air.
 #define MIN_TOXIN_DAMAGE 1
@@ -17,6 +19,7 @@
 #define BREATH_MOLES        (ONE_ATMOSPHERE * BREATH_VOLUME / (T20C * R_IDEAL_GAS_EQUATION)) // Amount of air to take a from a tile
 #define BREATH_PERCENTAGE   (BREATH_VOLUME / CELL_VOLUME)                                    // Amount of air needed before pass out/suffocation commences.
 #define HUMAN_NEEDED_OXYGEN (MOLES_CELLSTANDARD * BREATH_PERCENTAGE * 0.16)
+#define HUMAN_HEAT_CAPACITY 280000 //J/K For 80kg person
 
 #define SOUND_MINIMUM_PRESSURE 10
 
@@ -57,15 +60,15 @@
 
 //These control the speed at which fire burns
 #define FIRE_GAS_BURNRATE_MULT			1
-#define FIRE_LIQUID_BURNRATE_MULT		1
+#define FIRE_LIQUID_BURNRATE_MULT		0.225
 
 //If the fire is burning slower than this rate then the reaction is going too slow to be self sustaining and the fire burns itself out.
 //This ensures that fires don't grind to a near-halt while still remaining active forever.
 #define FIRE_GAS_MIN_BURNRATE			0.01
-#define FIRE_LIQUD_MIN_BURNRATE			0.01
+#define FIRE_LIQUD_MIN_BURNRATE			0.0025
 
 //How many moles of fuel are contained within one solid/liquid fuel volume unit
-#define LIQUIDFUEL_AMOUNT_TO_MOL		1  //mol/volume unit
+#define LIQUIDFUEL_AMOUNT_TO_MOL		0.45  //mol/volume unit
 
 // XGM gas flags.
 #define XGM_GAS_FUEL        1
@@ -84,3 +87,10 @@
 //Flags for zone sleeping
 #define ZONE_ACTIVE   1
 #define ZONE_SLEEPING 0
+
+// Defines how much of certain gas do the Atmospherics tanks start with. Values are in kpa per tile (assuming 20C)
+#define ATMOSTANK_NITROGEN      90000 // A lot of N2 is needed to produce air mix, that's why we keep 90MPa of it
+#define ATMOSTANK_OXYGEN        40000 // O2 is also important for airmix, but not as much as N2 as it's only 21% of it.
+#define ATMOSTANK_CO2           25000 // CO2 and PH are not critically important for station, only for toxins and alternative coolants, no need to store a lot of those.
+#define ATMOSTANK_PHORON        25000
+#define ATMOSTANK_NITROUSOXIDE  10000 // N2O doesn't have a real useful use, i guess it's on station just to allow refilling of sec's riot control canisters?

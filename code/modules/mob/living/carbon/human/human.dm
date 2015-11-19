@@ -7,6 +7,7 @@
 
 	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
+	var/obj/item/weapon/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
 
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
 
@@ -54,16 +55,13 @@
 
 /mob/living/carbon/human/Stat()
 	..()
-	statpanel("Status")
-
-	stat(null, "Intent: [a_intent]")
-	stat(null, "Move Mode: [m_intent]")
-	if(emergency_shuttle)
-		var/eta_status = emergency_shuttle.get_status_panel_eta()
-		if(eta_status)
-			stat(null, eta_status)
-
-	if (client.statpanel == "Status")
+	if(statpanel("Status"))
+		stat(null, "Intent: [a_intent]")
+		stat(null, "Move Mode: [m_intent]")
+		if(emergency_shuttle)
+			var/eta_status = emergency_shuttle.get_status_panel_eta()
+			if(eta_status)
+				stat(null, eta_status)
 
 		if (internal)
 			if (!internal.air_contents)
@@ -170,15 +168,6 @@
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05, used_weapon = weapon_message)
 	if(update)	UpdateDamageIcon()
 
-
-/mob/living/carbon/human/blob_act()
-	if(stat == 2)	return
-	show_message("\red The blob attacks you!")
-	var/dam_zone = pick(organs_by_name)
-	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
-	apply_damage(rand(30,40), BRUTE, affecting, run_armor_check(affecting, "melee"))
-	return
-
 /mob/living/carbon/human/proc/implant_loyalty(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
 
@@ -210,6 +199,9 @@
 
 
 /mob/living/carbon/human/show_inv(mob/user as mob)
+	if(user.incapacitated()  || !user.Adjacent(src))
+		return
+
 	var/obj/item/clothing/under/suit = null
 	if (istype(w_uniform, /obj/item/clothing/under))
 		suit = w_uniform
@@ -237,7 +229,7 @@
 
 	// Other incidentals.
 	if(istype(suit) && suit.has_sensor == 1)
-		dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors.</A>"
+		dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
 	if(handcuffed)
 		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed]'>Handcuffed</A>"
 	if(legcuffed)
@@ -662,38 +654,39 @@
 ///eyecheck()
 ///Returns a number between -1 to 2
 /mob/living/carbon/human/eyecheck()
-	var/number = 0
-
 	if(!species.has_organ["eyes"]) //No eyes, can't hurt them.
-		return 2
+		return FLASH_PROTECTION_MAJOR
 
 	if(internal_organs_by_name["eyes"]) // Eyes are fucked, not a 'weak point'.
 		var/obj/item/organ/I = internal_organs_by_name["eyes"]
 		if(I.status & ORGAN_CUT_AWAY)
-			return 2
+			return FLASH_PROTECTION_MAJOR
 	else
-		return 2
+		return
 
-	if(istype(src.head, /obj/item/clothing/head/welding))
-		if(!src.head:up)
-			number += 2
-	if(istype(back, /obj/item/weapon/rig))
-		var/obj/item/weapon/rig/O = back
-		if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
-			number += 2
-	if(istype(src.head, /obj/item/clothing/head/helmet/space))
-		number += 2
-	if(istype(src.head, /obj/item/clothing/head/helmet/space/emergency))
-		number -= 2
-	if(istype(src.glasses, /obj/item/clothing/glasses/thermal))
-		number -= 1
-	if(istype(src.glasses, /obj/item/clothing/glasses/sunglasses))
-		number += 1
-	if(istype(src.glasses, /obj/item/clothing/glasses/welding))
-		var/obj/item/clothing/glasses/welding/W = src.glasses
-		if(!W.up)
-			number += 2
-	return number
+	return flash_protection
+
+//Used by various things that knock people out by applying blunt trauma to the head.
+//Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
+/mob/living/carbon/human/proc/headcheck(var/target_zone, var/brain_tag = "brain")
+	if(!species.has_organ[brain_tag])
+		return 0
+
+	var/obj/item/organ/affecting = internal_organs_by_name[brain_tag]
+
+	target_zone = check_zone(target_zone)
+	if(!affecting || affecting.parent_organ != target_zone)
+		return 0
+
+	//if the parent organ is significantly larger than the brain organ, then hitting it is not guaranteed
+	var/obj/item/organ/parent = get_organ(target_zone)
+	if(!parent)
+		return 0
+
+	if(parent.w_class > affecting.w_class + 1)
+		return prob(100 / 2**(parent.w_class - affecting.w_class - 1))
+
+	return 1
 
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
 	if(species.has_fine_manipulation)
@@ -723,7 +716,7 @@
 
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)
-		visible_message("\red [src] begins playing his ribcage like a xylophone. It's quite spooky.","\blue You begin to play a spooky refrain on your ribcage.","\red You hear a spooky xylophone melody.")
+		visible_message("\red \The [src] begins playing \his ribcage like a xylophone. It's quite spooky.","\blue You begin to play a spooky refrain on your ribcage.","\red You hear a spooky xylophone melody.")
 		var/song = pick('sound/effects/xylophone1.ogg','sound/effects/xylophone2.ogg','sound/effects/xylophone3.ogg')
 		playsound(loc, song, 50, 1, -1)
 		xylophone = 1
@@ -958,7 +951,7 @@
 
 	if(L && !L.is_bruised())
 		src.custom_pain("You feel a stabbing pain in your chest!", 1)
-		L.damage = L.min_bruised_damage
+		L.bruise()
 
 /*
 /mob/living/carbon/human/verb/simulate()
@@ -1022,23 +1015,29 @@
 
 	return(visible_implants)
 
+/mob/living/carbon/human/embedded_needs_process()
+	for(var/obj/item/organ/external/organ in src.organs)
+		for(var/obj/item/O in organ.implants)
+			if(!istype(O, /obj/item/weapon/implant)) //implant type items do not cause embedding effects, see handle_embedded_objects()
+				return 1
+	return 0
+
 /mob/living/carbon/human/proc/handle_embedded_objects()
 
 	for(var/obj/item/organ/external/organ in src.organs)
 		if(organ.status & ORGAN_SPLINTED) //Splints prevent movement.
 			continue
-		for(var/obj/item/weapon/O in organ.implants)
+		for(var/obj/item/O in organ.implants)
 			if(!istype(O,/obj/item/weapon/implant) && prob(5)) //Moving with things stuck in you could be bad.
 				// All kinds of embedded objects cause bleeding.
-				var/msg = null
-				switch(rand(1,3))
-					if(1)
-						msg ="<span class='warning'>A spike of pain jolts your [organ.name] as you bump [O] inside.</span>"
-					if(2)
-						msg ="<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>"
-					if(3)
-						msg ="<span class='warning'>[O] in your [organ.name] twists painfully as you move.</span>"
-				src << msg
+				if(species.flags & NO_PAIN)
+					src << "<span class='warning'>You feel [O] moving inside your [organ.name].</span>"
+				else
+					var/msg = pick( \
+						"<span class='warning'>A spike of pain jolts your [organ.name] as you bump [O] inside.</span>", \
+						"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>", \
+						"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>")
+					src << msg
 
 				organ.take_damage(rand(1,3), 0, 0)
 				if(!(organ.status & ORGAN_ROBOT) && !(species.flags & NO_BLOOD)) //There is no blood in protheses.
@@ -1086,18 +1085,21 @@
 		else
 			dna.species = new_species
 
+	// No more invisible screaming wheelchairs because of set_species() typos.
+	if(!all_species[new_species])
+		new_species = "Human"
+
 	if(species)
 
 		if(species.name && species.name == new_species)
 			return
 		if(species.language)
 			remove_language(species.language)
-
 		if(species.default_language)
 			remove_language(species.default_language)
-
 		// Clear out their species abilities.
 		species.remove_inherent_verbs(src)
+		holder_type = null
 
 	species = all_species[new_species]
 
@@ -1116,6 +1118,11 @@
 		r_skin = 0
 		g_skin = 0
 		b_skin = 0
+
+	if(species.holder_type)
+		holder_type = species.holder_type
+
+	icon_state = lowertext(species.name)
 
 	species.create_organs(src)
 
@@ -1139,10 +1146,6 @@
 		return 1
 	else
 		return 0
-
-	mob_bump_flag = species.bump_flag
-	mob_swap_flags = species.swap_flags
-	mob_push_flags = species.push_flags
 
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"
@@ -1219,10 +1222,10 @@
 	else
 		switch(target_zone)
 			if("head")
-				if(head && head.flags & THICKMATERIAL)
+				if(head && head.item_flags & THICKMATERIAL)
 					. = 0
 			else
-				if(wear_suit && wear_suit.flags & THICKMATERIAL)
+				if(wear_suit && wear_suit.item_flags & THICKMATERIAL)
 					. = 0
 	if(!. && error_msg && user)
 		if(!fail_msg)
@@ -1258,11 +1261,10 @@
 		if(C.body_parts_covered & FEET)
 			feet_exposed = 0
 
-	flavor_text = flavor_texts["general"]
-	flavor_text += "\n\n"
+	flavor_text = ""
 	for (var/T in flavor_texts)
 		if(flavor_texts[T] && flavor_texts[T] != "")
-			if((T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
+			if((T == "general") || (T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
 				flavor_text += flavor_texts[T]
 				flavor_text += "\n\n"
 	if(!shrink)
@@ -1295,7 +1297,7 @@
 	return 0
 
 /mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
-	if((species.flags & NO_SLIP) || (shoes && (shoes.flags & NOSLIP)))
+	if((species.flags & NO_SLIP) || (shoes && (shoes.item_flags & NOSLIP)))
 		return 0
 	..(slipped_on,stun_duration)
 
@@ -1305,9 +1307,10 @@
 	set desc = "Pop a joint back into place. Extremely painful."
 	set src in view(1)
 
-	if(!isliving(usr) || usr.next_move > world.time)
+	if(!isliving(usr) || !usr.canClick())
 		return
-	usr.next_move = world.time + 20
+
+	usr.setClickCooldown(20)
 
 	if(usr.stat > 0)
 		usr << "You are unconcious and cannot do that!"
@@ -1361,3 +1364,25 @@
 	..()
 	if(update_hud)
 		handle_regular_hud_updates()
+
+/mob/living/carbon/human/Check_Shoegrip()
+	if(shoes && (shoes.item_flags & NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
+		return 1
+	return 0
+
+/mob/living/carbon/human/can_stand_overridden()
+	if(wearing_rig && wearing_rig.ai_can_move_suit(check_for_ai = 1))
+		// Actually missing a leg will screw you up. Everything else can be compensated for.
+		for(var/limbcheck in list("l_leg","r_leg"))
+			var/obj/item/organ/affecting = get_organ(limbcheck)
+			if(!affecting)
+				return 0
+		return 1
+	return 0
+
+/mob/living/carbon/human/MouseDrop(var/atom/over_object)
+	var/mob/living/carbon/human/H = over_object
+	if(holder_type && a_intent == "help" && istype(H) && H.a_intent == "help" && !issmall(H) && Adjacent(H))
+		get_scooped(H)
+		return
+	return ..()

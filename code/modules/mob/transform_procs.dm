@@ -98,8 +98,6 @@
 					loc_landmark = sloc
 
 		O.loc = loc_landmark.loc
-		for (var/obj/item/device/radio/intercom/comm in O.loc)
-			comm.ai += O
 
 	O.on_mob_init()
 
@@ -162,30 +160,6 @@
 	spawn(0)	// Mobs still instantly del themselves, thus we need to spawn or O will never be returned
 		qdel(src)
 	return O
-
-//human -> alien
-/mob/living/carbon/human/proc/Alienize()
-	if (transforming)
-		return
-	for(var/obj/item/W in src)
-		drop_from_inventory(W)
-	regenerate_icons()
-	transforming = 1
-	canmove = 0
-	icon = null
-	invisibility = 101
-	for(var/t in organs)
-		qdel(t)
-
-	var/alien_caste = pick("Hunter","Sentinel","Drone")
-	var/mob/living/carbon/human/new_xeno = create_new_xenomorph(alien_caste,loc)
-
-	new_xeno.a_intent = I_HURT
-	new_xeno.key = key
-
-	new_xeno << "<B>You are now an alien.</B>"
-	qdel(src)
-	return
 
 /mob/living/carbon/human/proc/slimeize(adult as num, reproduce as num)
 	if (transforming)

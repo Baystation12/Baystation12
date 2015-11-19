@@ -1,3 +1,38 @@
+/mob/living/silicon/say(var/message, var/sanitize = 1)
+	return ..(sanitize ? sanitize(message) : message)
+
+/mob/living/silicon/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+	log_say("[key_name(src)] : [message]")
+
+/mob/living/silicon/robot/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+	..()
+	if(message_mode)
+		if(!is_component_functioning("radio"))
+			src << "<span class='warning'>Your radio isn't functional at this time.</span>"
+			return 0
+		if(message_mode == "general")
+			message_mode = null
+		return radio.talk_into(src,message,message_mode,verb,speaking)
+
+/mob/living/silicon/ai/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+	..()
+	if(message_mode == "department")
+		return holopad_talk(message, verb, speaking)
+	else if(message_mode)
+		if (aiRadio.disabledAi || aiRestorePowerRoutine || stat)
+			src << "<span class='danger'>System Error - Transceiver Disabled.</span>"
+			return 0
+		if(message_mode == "general")
+			message_mode = null
+		return aiRadio.talk_into(src,message,message_mode,verb,speaking)
+
+/mob/living/silicon/pai/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+	..()
+	if(message_mode)
+		if(message_mode == "general")
+			message_mode = null
+		return radio.talk_into(src,message,message_mode,verb,speaking)
+
 /mob/living/silicon/say_quote(var/text)
 	var/ending = copytext(text, length(text))
 
@@ -23,131 +58,6 @@
 			return 1
 	return ..()
 
-/mob/living/silicon/say(var/message)
-	if (!message)
-		return 0
-
-	if (src.client)
-		if(client.prefs.muted & MUTE_IC)
-			src << "You cannot send IC messages (muted)."
-			return 0
-		if (src.client.handle_spam_prevention(message,MUTE_IC))
-			return 0
-
-	message = sanitize(message)
-
-	if (stat == 2)
-		return say_dead(message)
-
-	if(copytext(message,1,2) == "*")
-		return emote(copytext(message,2))
-
-	var/bot_type = 0			//Let's not do a fuck ton of type checks, thanks.
-	if(istype(src, /mob/living/silicon/ai))
-		bot_type = IS_AI
-	else if(istype(src, /mob/living/silicon/robot))
-		bot_type = IS_ROBOT
-	else if(istype(src, /mob/living/silicon/pai))
-		bot_type = IS_PAI
-
-	var/mob/living/silicon/ai/AI = src		//and let's not declare vars over and over and over for these guys.
-	var/mob/living/silicon/robot/R = src
-	var/mob/living/silicon/pai/P = src
-
-	//Must be concious to speak
-	if (stat)
-		return 0
-
-	var/verb = say_quote(message)
-
-	//parse radio key and consume it
-	var/message_mode = parse_message_mode(message, "general")
-	if (message_mode)
-		if (message_mode == "general")
-			message = trim(copytext(message,2))
-		else
-			message = trim(copytext(message,3))
-
-	//parse language key and consume it
-	var/datum/language/speaking = parse_language(message)
-	if (speaking)
-		verb = speaking.speech_verb
-		message = trim(copytext(message,2+length(speaking.key)))
-
-		if(speaking.flags & HIVEMIND)
-			speaking.broadcast(src,trim(message))
-			return 1
-
-	// Currently used by drones.
-	if(local_transmit)
-		var/list/listeners = hearers(5,src)
-		listeners |= src
-
-		for(var/mob/living/silicon/D in listeners)
-			if(D.client && istype(D,src.type))
-				D << "<b>[src]</b> transmits, \"[message]\""
-
-		for (var/mob/M in player_list)
-			if (istype(M, /mob/new_player))
-				continue
-			else if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
-				if(M.client) M << "<b>[src]</b> transmits, \"[message]\""
-		return 1
-
-	if(message_mode && bot_type == IS_ROBOT && !R.is_component_functioning("radio"))
-		src << "\red Your radio isn't functional at this time."
-		return 0
-
-	switch(message_mode)
-		if("department")
-			switch(bot_type)
-				if(IS_AI)
-					return AI.holopad_talk(message, verb, speaking)
-				if(IS_ROBOT)
-					log_say("[key_name(src)] : [message]")
-					return R.radio.talk_into(src,message,message_mode,verb,speaking)
-				if(IS_PAI)
-					log_say("[key_name(src)] : [message]")
-					return P.radio.talk_into(src,message,message_mode,verb,speaking)
-			return 0
-
-		if("general")
-			switch(bot_type)
-				if(IS_AI)
-					if (AI.aiRadio.disabledAi || AI.aiRestorePowerRoutine || AI.stat)
-						src << "\red System Error - Transceiver Disabled"
-						return 0
-					else
-						log_say("[key_name(src)] : [message]")
-						return AI.aiRadio.talk_into(src,message,null,verb,speaking)
-				if(IS_ROBOT)
-					log_say("[key_name(src)] : [message]")
-					return R.radio.talk_into(src,message,null,verb,speaking)
-				if(IS_PAI)
-					log_say("[key_name(src)] : [message]")
-					return P.radio.talk_into(src,message,null,verb,speaking)
-			return 0
-
-		else
-			if(message_mode)
-				switch(bot_type)
-					if(IS_AI)
-						if (AI.aiRadio.disabledAi || AI.aiRestorePowerRoutine || AI.stat)
-							src << "\red System Error - Transceiver Disabled"
-							return 0
-						else
-							log_say("[key_name(src)] : [message]")
-							return AI.aiRadio.talk_into(src,message,message_mode,verb,speaking)
-					if(IS_ROBOT)
-						log_say("[key_name(src)] : [message]")
-						return R.radio.talk_into(src,message,message_mode,verb,speaking)
-					if(IS_PAI)
-						log_say("[key_name(src)] : [message]")
-						return P.radio.talk_into(src,message,message_mode,verb,speaking)
-				return 0
-
-	return ..(message,speaking,verb)
-
 //For holopads only. Usable by AI.
 /mob/living/silicon/ai/proc/holopad_talk(var/message, verb, datum/language/speaking)
 
@@ -158,31 +68,46 @@
 	if (!message)
 		return
 
-	var/obj/machinery/hologram/holopad/T = src.holo
-	if(T && T.masters[src])//If there is a hologram and its master is the user.
+	var/obj/machinery/hologram/holopad/H = src.holo
+	if(H && H.masters[src])//If there is a hologram and its master is the user.
 
-		//Human-like, sorta, heard by those who understand humans.
-		var/rendered_a
-		//Speach distorted, heard by those who do not understand AIs.
-		var/message_stars = stars(message)
-		var/rendered_b
-
+		// AI can hear their own message, this formats it for them.
 		if(speaking)
-			rendered_a = "<span class='game say'><span class='name'>[name]</span> [speaking.format_message(message, verb)]</span>"
-			rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> [speaking.format_message(message_stars, verb)]</span>"
-			src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [speaking.format_message(message, verb)]</span></i>"//The AI can "hear" its own message.
+			src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [speaking.format_message(message, verb)]</span></i>"
 		else
-			rendered_a = "<span class='game say'><span class='name'>[name]</span> [verb], <span class='message'>\"[message]\"</span></span>"
-			rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> [verb], <span class='message'>\"[message_stars]\"</span></span>"
-			src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span></i>"//The AI can "hear" its own message.
+			src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span></i>"
 
-		for(var/mob/M in hearers(T.loc))//The location is the object, default distance.
-			if(M.say_understands(src))//If they understand AI speak. Humans and the like will be able to.
-				M.show_message(rendered_a, 2)
-			else//If they do not.
-				M.show_message(rendered_b, 2)
-		/*Radios "filter out" this conversation channel so we don't need to account for them.
-		This is another way of saying that we won't bother dealing with them.*/
+		//This is so pAI's and people inside lockers/boxes,etc can hear the AI Holopad, the alternative being recursion through contents.
+		//This is much faster.
+		var/list/listening = list()
+		var/list/listening_obj = list()
+		var/turf/T = get_turf(H)		
+
+		if(T)
+			var/list/hear = hear(7, T)
+			var/list/hearturfs = list()
+
+			for(var/I in hear)
+				if(istype(I, /mob/))
+					var/mob/M = I
+					listening += M
+					hearturfs += M.locs[1]
+					for(var/obj/O in M.contents)
+						listening_obj |= O
+				else if(istype(I, /obj/))
+					var/obj/O = I
+					hearturfs += O.locs[1]
+					listening_obj |= O
+
+
+			for(var/mob/M in player_list)
+				if(M.stat == DEAD && M.client && (M.client.prefs.toggles & CHAT_GHOSTEARS))
+					M.hear_say(message,verb,speaking,null,null, src)
+					continue
+				if(M.loc && M.locs[1] in hearturfs)
+					M.hear_say(message,verb,speaking,null,null, src)
+
+
 	else
 		src << "No holopad connected."
 		return 0

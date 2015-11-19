@@ -80,12 +80,6 @@ var/list/solars_list = list()
 	..()
 
 
-/obj/machinery/power/solar/blob_act()
-	src.health--
-	src.healthcheck()
-	return
-
-
 /obj/machinery/power/solar/proc/healthcheck()
 	if (src.health <= 0)
 		if(!(stat & BROKEN))
@@ -172,12 +166,6 @@ var/list/solars_list = list()
 	return
 
 
-/obj/machinery/power/solar/blob_act()
-	if(prob(75))
-		broken()
-		src.density = 0
-
-
 /obj/machinery/power/solar/fake/New(var/turf/loc, var/obj/item/solar_assembly/S)
 	..(loc, S, 0)
 
@@ -251,7 +239,7 @@ var/list/solars_list = list()
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return 1
 
-		if(istype(W, /obj/item/stack/material/glass))
+		if(istype(W, /obj/item/stack/material) && (W.get_material_name() == "glass" || W.get_material_name() == "rglass"))
 			var/obj/item/stack/material/S = W
 			if(S.use(2))
 				glass_type = W.type
@@ -360,9 +348,8 @@ var/list/solars_list = list()
 
 /obj/machinery/power/solar_control/initialize()
 	..()
-	if(!powernet) return
+	if(!connect_to_network()) return
 	set_panels(cdir)
-	connect_to_network()
 
 /obj/machinery/power/solar_control/update_icon()
 	if(stat & BROKEN)
@@ -538,12 +525,6 @@ var/list/solars_list = list()
 			if (prob(25))
 				broken()
 	return
-
-
-/obj/machinery/power/solar_control/blob_act()
-	if (prob(75))
-		broken()
-		src.density = 0
 
 // Used for mapping in solar array which automatically starts itself (telecomms, for example)
 /obj/machinery/power/solar_control/autostart

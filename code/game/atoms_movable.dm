@@ -24,6 +24,7 @@
 /atom/movable/Del()
 	if(isnull(gcDestroyed) && loc)
 		testing("GC: -- [type] was deleted via del() rather than qdel() --")
+		crash_with("GC: -- [type] was deleted via del() rather than qdel() --") // stick a stack trace in the runtime logs
 //	else if(isnull(gcDestroyed))
 //		testing("GC: [type] was deleted via GC without qdel()") //Not really a huge issue but from now on, please qdel()
 //	else
@@ -34,6 +35,7 @@
 	. = ..()
 	if(reagents)
 		qdel(reagents)
+		reagents = null
 	for(var/atom/movable/AM in contents)
 		qdel(AM)
 	loc = null
@@ -164,7 +166,7 @@
 			a = get_area(src.loc)
 	else
 		var/error = dist_y/2 - dist_x
-		while(src && target &&((((src.y < target.y && dy == NORTH) || (src.y > target.y && dy == SOUTH)) && dist_travelled < range) || (a.has_gravity == 0)  || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
+		while(src && target &&((((src.y < target.y && dy == NORTH) || (src.y > target.y && dy == SOUTH)) && dist_travelled < range) || (a && a.has_gravity == 0)  || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
 			// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
 			if(error < 0)
 				var/atom/step = get_step(src, dx)
@@ -236,7 +238,7 @@
 			x = world.maxx - TRANSITIONEDGE - 2
 			y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
 
-		else if (x >= (world.maxx - TRANSITIONEDGE - 1))
+		else if (x >= (world.maxx - TRANSITIONEDGE + 1))
 			x = TRANSITIONEDGE + 1
 			y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
 
@@ -244,7 +246,7 @@
 			y = world.maxy - TRANSITIONEDGE -2
 			x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
-		else if (y >= (world.maxy - TRANSITIONEDGE - 1))
+		else if (y >= (world.maxy - TRANSITIONEDGE + 1))
 			y = TRANSITIONEDGE + 1
 			x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 

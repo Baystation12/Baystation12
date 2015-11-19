@@ -9,6 +9,7 @@
 	item_state = "hypo"
 	icon_state = "hypo"
 	amount_per_transfer_from_this = 5
+	unacidable = 1
 	volume = 30
 	possible_transfer_amounts = null
 	flags = OPENCONTAINER
@@ -36,6 +37,8 @@
 			user << "<span class='danger'>You cannot inject a robotic limb.</span>"
 			return
 
+	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+	user.do_attack_animation(M)
 	user << "<span class='notice'>You inject [M] with [src].</span>"
 	M << "<span class='notice'>You feel a tiny prick!</span>"
 

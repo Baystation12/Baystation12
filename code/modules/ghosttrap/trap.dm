@@ -16,6 +16,7 @@ proc/populate_ghost_traps()
 
 /datum/ghosttrap
 	var/object = "positronic brain"
+	var/minutes_since_death = 0     // If non-zero the ghost must have been dead for this many minutes to be allowed to spawn
 	var/list/ban_checks = list("AI","Cyborg")
 	var/pref_check = BE_AI
 	var/ghost_trap_message = "They are occupying a positronic brain now."
@@ -25,8 +26,7 @@ proc/populate_ghost_traps()
 /datum/ghosttrap/proc/assess_candidate(var/mob/dead/observer/candidate)
 	if(!istype(candidate) || !candidate.client || !candidate.ckey)
 		return 0
-	if(!candidate.MayRespawn())
-		candidate << "You have made use of the AntagHUD and hence cannot enter play as \a [object]."
+	if(!candidate.MayRespawn(1, minutes_since_death))
 		return 0
 	if(islist(ban_checks))
 		for(var/bantype in ban_checks)
@@ -107,7 +107,7 @@ proc/populate_ghost_traps()
 	ghost_trap_role = "Plant"
 
 /datum/ghosttrap/plant/welcome_candidate(var/mob/target)
-	target << "<span class='alium><B>You awaken slowly, stirring into sluggish motion as the air caresses you.</B></span>"
+	target << "<span class='alium'><B>You awaken slowly, stirring into sluggish motion as the air caresses you.</B></span>"
 	// This is a hack, replace with some kind of species blurb proc.
 	if(istype(target,/mob/living/carbon/alien/diona))
 		target << "<B>You are \a [target], one of a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>"

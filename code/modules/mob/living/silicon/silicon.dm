@@ -23,6 +23,10 @@
 	var/next_alarm_notice
 	var/list/datum/alarm/queued_alarms = new()
 
+	var/list/access_rights
+	var/obj/item/weapon/card/id/idcard
+	var/idcard_type = /obj/item/weapon/card/id/synthetic
+
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
 
@@ -30,6 +34,7 @@
 	silicon_mob_list |= src
 	..()
 	add_language("Galactic Common")
+	init_id()
 	init_subsystems()
 
 /mob/living/silicon/Destroy()
@@ -37,6 +42,12 @@
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
 		AH.unregister(src)
 	..()
+
+/mob/living/silicon/proc/init_id()
+	if(idcard)
+		return
+	idcard = new idcard_type(src)
+	set_id_info(idcard)
 
 /mob/living/silicon/proc/SetName(pickedName as text)
 	real_name = pickedName
@@ -86,13 +97,6 @@
 /mob/living/silicon/IsAdvancedToolUser()
 	return 1
 
-/mob/living/silicon/blob_act()
-	if (src.stat != 2)
-		src.adjustBruteLoss(60)
-		src.updatehealth()
-		return 1
-	return 0
-
 /mob/living/silicon/bullet_act(var/obj/item/projectile/Proj)
 
 	if(!Proj.nodamage)
@@ -128,9 +132,6 @@
 	updatehealth()
 	return 1*/
 
-/mob/living/silicon/attack_throat()
-	return
-
 /proc/islinked(var/mob/living/silicon/robot/bot, var/mob/living/silicon/ai/ai)
 	if(!istype(bot) || !istype(ai))
 		return 0
@@ -151,12 +152,6 @@
 /mob/living/silicon/proc/show_malf_ai()
 	return 0
 
-
-// this function displays the station time in the status panel
-/mob/living/silicon/proc/show_station_time()
-	stat(null, "Station Time: [worldtime2text()]")
-
-
 // this function displays the shuttles ETA in the status panel if the shuttle has been called
 /mob/living/silicon/proc/show_emergency_shuttle_eta()
 	if(emergency_shuttle)
@@ -168,7 +163,6 @@
 // This adds the basic clock, shuttle recall timer, and malf_ai info to all silicon lifeforms
 /mob/living/silicon/Stat()
 	if(statpanel("Status"))
-		show_station_time()
 		show_emergency_shuttle_eta()
 		show_system_integrity()
 		show_malf_ai()
@@ -197,16 +191,22 @@
 	return universal_speak || (speaking in src.speech_synthesizer_langs)	//need speech synthesizer support to vocalize a language
 
 /mob/living/silicon/add_language(var/language, var/can_speak=1)
-	if (..(language) && can_speak)
-		speech_synthesizer_langs.Add(all_languages[language])
+	var/var/datum/language/added_language = all_languages[language]
+	if(!added_language)
+		return
+
+	. = ..(language)
+	if (can_speak && (added_language in languages) && !(added_language in speech_synthesizer_langs))
+		speech_synthesizer_langs += added_language
 		return 1
 
 /mob/living/silicon/remove_language(var/rem_language)
-	..(rem_language)
+	var/var/datum/language/removed_language = all_languages[rem_language]
+	if(!removed_language)
+		return
 
-	for (var/datum/language/L in speech_synthesizer_langs)
-		if (L.name == rem_language)
-			speech_synthesizer_langs -= L
+	..(rem_language)
+	speech_synthesizer_langs -= removed_language
 
 /mob/living/silicon/check_languages()
 	set name = "Check Known Languages"
@@ -224,7 +224,7 @@
 			if(L == default_language)
 				default_str = " - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a>"
 			else
-				default_str = " - <a href='byond://?src=\ref[src];default_lang=[L]'>set default</a>"
+				default_str = " - <a href='byond://?src=\ref[src];default_lang=\ref[L]'>set default</a>"
 
 			var/synth = (L in speech_synthesizer_langs)
 			dat += "<b>[L.name] (:[L.key])</b>[synth ? default_str : null]<br/>Speech Synthesizer: <i>[synth ? "YES" : "NOT SUPPORTED"]</i><br/>[L.desc]<br/><br/>"

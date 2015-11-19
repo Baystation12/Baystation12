@@ -4,8 +4,8 @@
 	icon_state = "secbot0"
 	maxHealth = 50
 	health = 50
-	req_access = list(access_security, access_forensics_lockers)
-	botcard_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
+	req_one_access = list(access_security, access_forensics_lockers)
+	botcard_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels)
 
 	var/mob/target
 
@@ -30,7 +30,7 @@
 
 	var/obj/secbot_listener/listener = null
 	var/beacon_freq = 1445			// Navigation beacon frequency
-	var/control_freq = AI_FREQ		// Bot control frequency
+	var/control_freq = BOT_FREQ		// Bot control frequency
 	var/list/path = list()
 	var/frustration = 0
 	var/turf/patrol_target = null	// This is where we are headed
@@ -69,6 +69,11 @@
 		icon_state = "secbot-c"
 	else
 		icon_state = "secbot[on]"
+
+	if(on)
+		set_light(2, 1, "#FF6A00")
+	else
+		set_light(0)
 
 /mob/living/bot/secbot/attack_hand(var/mob/user)
 	user.set_machine(src)
@@ -183,6 +188,7 @@
 			if(!Adjacent(target))
 				awaiting_surrender = 5 // I'm done playing nice
 				mode = SECBOT_HUNT
+				return
 			var/threat = check_threat(target)
 			if(threat < 4)
 				target = null
@@ -336,7 +342,7 @@
 		path = list()
 
 /mob/living/bot/secbot/proc/check_threat(var/mob/living/M)
-	if(!M || !istype(M) || M.stat)
+	if(!M || !istype(M) || M.stat || src == M)
 		return 0
 
 	if(emagged)

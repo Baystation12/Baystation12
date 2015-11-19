@@ -32,6 +32,11 @@
 		user << "The charge meter reads [cell ? round(cell.percent(),1) : 0]%"
 	return
 
+/obj/machinery/space_heater/powered()
+	if(cell && cell.charge)
+		return 1
+	return 0
+
 /obj/machinery/space_heater/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
 		..(severity)
@@ -56,6 +61,7 @@
 					C.add_fingerprint(usr)
 
 					user.visible_message("<span class='notice'>[user] inserts a power cell into [src].</span>", "<span class='notice'>You insert the power cell into [src].</span>")
+					power_change()
 		else
 			user << "The hatch must be open to insert a power cell."
 			return
@@ -125,6 +131,7 @@
 					usr.put_in_hands(cell)
 					cell.add_fingerprint(usr)
 					cell = null
+					power_change()
 
 
 			if("cellinstall")
@@ -135,7 +142,7 @@
 						cell = C
 						C.loc = src
 						C.add_fingerprint(usr)
-
+						power_change()
 						usr.visible_message("<span class='notice'>[usr] inserts \the [C] into \the [src].</span>", "<span class='notice'>You insert \the [C] into \the [src].</span>")
 
 		updateDialog()
@@ -176,4 +183,5 @@
 				env.merge(removed)
 		else
 			on = 0
+			power_change()
 			update_icon()

@@ -57,7 +57,7 @@ var/obj/screen/robot_inventory
 	using.name = "act_intent"
 	using.set_dir(SOUTHWEST)
 	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = (mymob.a_intent == I_HURT ? I_HURT : mymob.a_intent)
+	using.icon_state = mymob.a_intent
 	using.screen_loc = ui_acti
 	using.layer = 20
 	src.adding += using
@@ -143,7 +143,7 @@ var/obj/screen/robot_inventory
 	mymob.flash.icon = 'icons/mob/screen1_robot.dmi'
 	mymob.flash.icon_state = "blank"
 	mymob.flash.name = "flash"
-	mymob.flash.screen_loc = "1,1 to 15,15"
+	mymob.flash.screen_loc = ui_entire_screen
 	mymob.flash.layer = 17
 
 	mymob.zone_sel = new /obj/screen/zone_sel()

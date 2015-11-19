@@ -26,6 +26,7 @@
 #define ANTAG_RANDSPAWN         256 // Potentially randomly spawns due to events.
 #define ANTAG_VOTABLE           512 // Can be voted as an additional antagonist before roundstart.
 #define ANTAG_SET_APPEARANCE   1024 // Causes antagonists to use an appearance modifier on spawn.
+#define ANTAG_RANDOM_EXCEPTED  2048 // If a game mode randomly selects antag types, antag types with this flag should be excluded.
 
 // Globals.
 var/global/list/all_antag_types = list()
@@ -70,3 +71,14 @@ var/global/list/antag_names_to_ids = list()
 	if(antag && islist(antag.current_antagonists))
 		return antag.current_antagonists
 	return list()
+
+/proc/player_is_antag(var/datum/mind/player, var/only_offstation_roles = 0)
+	for(var/antag_type in all_antag_types)
+		var/datum/antagonist/antag = all_antag_types[antag_type]
+		if(only_offstation_roles && !(antag.flags & ANTAG_OVERRIDE_JOB))
+			continue
+		if(player in antag.current_antagonists)
+			return 1
+		if(player in antag.pending_antagonists)
+			return 1
+	return 0

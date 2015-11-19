@@ -165,12 +165,13 @@
 
 // Proc: get_unhacked_apcs()
 // Parameters: None
-// Description: Returns a list of APCs that are not yet hacked.
-/proc/get_unhacked_apcs()
+// Description: Returns a list of all unhacked APCs
+/proc/get_unhacked_apcs(var/mob/living/silicon/ai/user)
 	var/list/H = list()
 	for(var/obj/machinery/power/apc/A in machines)
-		if(!A.hacker)
-			H.Add(A)
+		if(A.hacker && A.hacker == user)
+			continue
+		H.Add(A)
 	return H
 
 

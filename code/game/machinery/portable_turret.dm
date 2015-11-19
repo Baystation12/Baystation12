@@ -3,6 +3,10 @@
 		This code is slightly more documented than normal, as requested by XSI on IRC.
 */
 
+#define TURRET_PRIORITY_TARGET 2
+#define TURRET_SECONDARY_TARGET 1
+#define TURRET_NOT_TARGET 0
+
 /obj/machinery/porta_turret
 	name = "turret"
 	icon = 'icons/obj/turrets.dmi'
@@ -170,11 +174,11 @@ var/list/turret_icons
 		icon_state = "turretCover"
 
 /obj/machinery/porta_turret/proc/isLocked(mob/user)
-	if(ailock && user.isSilicon())
+	if(ailock && issilicon(user))
 		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
 		return 1
 
-	if(locked && !user.isSilicon())
+	if(locked && !issilicon(user))
 		user << "<span class='notice'>Access denied.</span>"
 		return 1
 
@@ -236,7 +240,7 @@ var/list/turret_icons
 	return ..()
 
 
-/obj/machinery/porta_turret/Topic(href, href_list, var/nowindow = 0)
+/obj/machinery/porta_turret/Topic(href, href_list)
 	if(..())
 		return 1
 
@@ -334,7 +338,7 @@ var/list/turret_icons
 
 	else
 		//if the turret was attacked with the intention of harming it:
-		user.changeNext_move(NEXT_MOVE_DELAY)
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		take_damage(I.force * 0.5)
 		if(I.force * 0.5 > 1) //if the force of impact dealt at least 1 damage, the turret gets pissed off
 			if(!attacked && !emagged)
@@ -343,7 +347,7 @@ var/list/turret_icons
 					sleep(60)
 					attacked = 0
 		..()
-		
+
 /obj/machinery/porta_turret/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		//Emagging the turret makes it go bonkers and stun everyone. It also makes
@@ -371,7 +375,9 @@ var/list/turret_icons
 		die()	//the death process :(
 
 /obj/machinery/porta_turret/bullet_act(obj/item/projectile/Proj)
-	if(Proj.damage_type == HALLOSS)
+	var/damage = Proj.get_structure_damage()
+
+	if(!damage)
 		return
 
 	if(enabled)
@@ -383,8 +389,7 @@ var/list/turret_icons
 
 	..()
 
-	if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		take_damage(Proj.damage)
+	take_damage(damage)
 
 /obj/machinery/porta_turret/emp_act(severity)
 	if(enabled)
@@ -399,9 +404,9 @@ var/list/turret_icons
 			emagged = 1
 
 		enabled=0
-		sleep(rand(60,600))
-		if(!enabled)
-			enabled=1
+		spawn(rand(60,600))
+			if(!enabled)
+				enabled=1
 
 	..()
 
@@ -439,14 +444,8 @@ var/list/turret_icons
 	var/list/targets = list()			//list of primary targets
 	var/list/secondarytargets = list()	//targets that are least important
 
-	for(var/obj/mecha/ME in view(7,src))
-		assess_and_assign(ME.occupant, targets, secondarytargets)
-
-	for(var/obj/vehicle/train/T in view(7,src))
-		assess_and_assign(T.load, targets, secondarytargets)
-
-	for(var/mob/living/C in view(7,src))	//loops through all living lifeforms in view
-		assess_and_assign(C, targets, secondarytargets)
+	for(var/mob/M in mobs_in_view(world.view, src))
+		assess_and_assign(M, targets, secondarytargets)
 
 	if(!tryToShootAt(targets))
 		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
@@ -474,19 +473,23 @@ var/list/turret_icons
 	if(!L)
 		return TURRET_NOT_TARGET
 
-	// If emagged not even the dead get a rest
-	if(emagged)
-		return L.stat ? TURRET_SECONDARY_TARGET : TURRET_PRIORITY_TARGET
-
-	if(issilicon(L))	// Don't target silica
+	if(!emagged && issilicon(L))	// Don't target silica
 		return TURRET_NOT_TARGET
 
-	if(L.stat)		//if the perp is dead/dying, no need to bother really
+	if(L.stat && !emagged)		//if the perp is dead/dying, no need to bother really
 		return TURRET_NOT_TARGET	//move onto next potential victim!
 
-	var/dst = get_dist(src, L)	//if it's too far away, why bother?
-	if(dst > 7)
-		return 0
+	if(get_dist(src, L) > 7)	//if it's too far away, why bother?
+		return TURRET_NOT_TARGET
+
+	if(!check_trajectory(L, src))	//check if we have true line of sight
+		return TURRET_NOT_TARGET
+
+	if(emagged)		// If emagged not even the dead get a rest
+		return L.stat ? TURRET_SECONDARY_TARGET : TURRET_PRIORITY_TARGET
+
+	if(lethal && locate(/mob/living/silicon/ai) in get_turf(L))		//don't accidentally kill the AI!
+		return TURRET_NOT_TARGET
 
 	if(check_synth)	//If it's set to attack all non-silicons, target them!
 		if(L.lying)
@@ -498,6 +501,7 @@ var/list/turret_icons
 
 	if(isanimal(L) || issmall(L)) // Animals are not so dangerous
 		return check_anomalies ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
+
 	if(isxenomorph(L) || isalien(L)) // Xenos are dangerous
 		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
 
@@ -605,7 +609,6 @@ var/list/turret_icons
 	if(!raised) //the turret has to be raised in order to fire - makes sense, right?
 		return
 
-
 	update_icon()
 	var/obj/item/projectile/A
 	if(emagged || lethal)
@@ -614,19 +617,22 @@ var/list/turret_icons
 	else
 		A = new projectile(loc)
 		playsound(loc, shot_sound, 75, 1)
-	A.original = target
 
 	// Lethal/emagged turrets use twice the power due to higher energy beams
 	// Emagged turrets again use twice as much power due to higher firing rates
 	use_power(reqpower * (2 * (emagged || lethal)) * (2 * emagged))
 
+	//Turrets aim for the center of mass by default.
+	//If the target is grabbing someone then the turret smartly aims for extremities
+	var/def_zone
+	var/obj/item/weapon/grab/G = locate() in target
+	if(G && G.state >= GRAB_NECK) //works because mobs are currently not allowed to upgrade to NECK if they are grabbing two people.
+		def_zone = pick("head", "l_hand", "r_hand", "l_foot", "r_foot", "l_arm", "r_arm", "l_leg", "r_leg")
+	else
+		def_zone = pick("chest", "groin")
+
 	//Shooting Code:
-	A.current = T
-	A.starting = T
-	A.yo = U.y - T.y
-	A.xo = U.x - T.x
-	spawn(1)
-		A.process()
+	A.launch(target, def_zone)
 
 /datum/turret_checks
 	var/enabled
@@ -688,12 +694,12 @@ var/list/turret_icons
 				playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 				user << "<span class='notice'>You dismantle the turret construction.</span>"
 				new /obj/item/stack/material/steel( loc, 5)
-				qdel(src) // qdel
+				qdel(src)
 				return
 
 		if(1)
-			if(istype(I, /obj/item/stack/material/steel))
-				var/obj/item/stack/material/steel/M = I
+			if(istype(I, /obj/item/stack/material) && I.get_material_name() == DEFAULT_WALL_MATERIAL)
+				var/obj/item/stack/M = I
 				if(M.use(2))
 					user << "<span class='notice'>You add some metal armor to the interior frame.</span>"
 					build_step = 2
@@ -746,11 +752,7 @@ var/list/turret_icons
 				installation = I.type //installation becomes I.type
 				gun_charge = E.power_supply.charge //the gun's charge is stored in gun_charge
 				user << "<span class='notice'>You add [I] to the turret.</span>"
-
-				if(istype(installation, /obj/item/weapon/gun/energy/lasertag/blue) || istype(installation, /obj/item/weapon/gun/energy/lasertag/red))
-					target_type = /obj/machinery/porta_turret/tag
-				else
-					target_type = /obj/machinery/porta_turret
+				target_type = /obj/machinery/porta_turret
 
 				build_step = 4
 				qdel(I) //delete the gun :(
@@ -784,8 +786,8 @@ var/list/turret_icons
 			//attack_hand() removes the prox sensor
 
 		if(6)
-			if(istype(I, /obj/item/stack/material/steel))
-				var/obj/item/stack/material/steel/M = I
+			if(istype(I, /obj/item/stack/material) && I.get_material_name() == DEFAULT_WALL_MATERIAL)
+				var/obj/item/stack/M = I
 				if(M.use(2))
 					user << "<span class='notice'>You add some metal armor to the exterior frame.</span>"
 					build_step = 7
@@ -867,3 +869,8 @@ var/list/turret_icons
 
 /atom/movable/porta_turret_cover
 	icon = 'icons/obj/turrets.dmi'
+
+
+#undef TURRET_PRIORITY_TARGET
+#undef TURRET_SECONDARY_TARGET
+#undef TURRET_NOT_TARGET

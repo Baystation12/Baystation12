@@ -1,11 +1,10 @@
 var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called manually after an event.
 
-var/CELLRATE = 0.002 // Multiplier for watts per tick <> cell storage (e.g., 0.02 means if there is a load of 1000 watts, 20 units will be taken from a cell per second)
-                    // It's a conversion constant. power_used*CELLRATE = charge_provided, or charge_used/CELLRATE = power_provided
-var/CHARGELEVEL = 0.0005 // Cap for how fast cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
+#define CELLRATE 0.002 // Multiplier for watts per tick <> cell storage (e.g., 0.02 means if there is a load of 1000 watts, 20 units will be taken from a cell per second)
+                       // It's a conversion constant. power_used*CELLRATE = charge_provided, or charge_used/CELLRATE = power_provided
 
 // Doors!
-#define DOOR_CRUSH_DAMAGE 10
+#define DOOR_CRUSH_DAMAGE 20
 #define ALIEN_SELECT_AFK_BUFFER  1    // How many minutes that a person can be AFK before not being allowed to be an alien.
 
 // Channel numbers for power.
@@ -15,23 +14,17 @@ var/CHARGELEVEL = 0.0005 // Cap for how fast cells charge, as a percentage-per-t
 #define TOTAL   4 // For total power used only.
 
 // Bitflags for machine stat variable.
-#define BROKEN   1
-#define NOPOWER  2
-#define POWEROFF 4  // TBD.
-#define MAINT    8  // Under maintenance.
-#define EMPED    16 // Temporary broken by EMP pulse.
+#define BROKEN   0x1
+#define NOPOWER  0x2
+#define POWEROFF 0x4  // TBD.
+#define MAINT    0x8  // Under maintenance.
+#define EMPED    0x10 // Temporary broken by EMP pulse.
 
-// Bitmasks for door switches.
-#define OPEN   1
-#define IDSCAN 2
-#define BOLTS  4
-#define SHOCK  8
-#define SAFE   16
+// Used by firelocks
+#define FIREDOOR_OPEN 1
+#define FIREDOOR_CLOSED 2
 
 #define AI_CAMERA_LUMINOSITY 6
-
-// Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.
-var/list/restricted_camera_networks = list("thunder","ERT","NUKE","Secret")
 
 // Camera networks
 #define NETWORK_CRESCENT "Crescent"
@@ -41,17 +34,21 @@ var/list/restricted_camera_networks = list("thunder","ERT","NUKE","Secret")
 #define NETWORK_ENGINE "Engine"
 #define NETWORK_ENGINEERING "Engineering"
 #define NETWORK_ENGINEERING_OUTPOST "Engineering Outpost"
-#define NETWORK_ERT "ERT"
+#define NETWORK_ERT "ZeEmergencyResponseTeam"
 #define NETWORK_EXODUS "Exodus"
 #define NETWORK_MEDICAL "Medical"
+#define NETWORK_MERCENARY "MercurialNet"
 #define NETWORK_MINE "MINE"
 #define NETWORK_RESEARCH "Research"
 #define NETWORK_RESEARCH_OUTPOST "Research Outpost"
-#define NETWORK_PRISON "Prison"
 #define NETWORK_ROBOTS "Robots"
+#define NETWORK_PRISON "Prison"
 #define NETWORK_SECURITY "Security"
 #define NETWORK_TELECOM "Tcomsat"
-#define NETWORK_THUNDER "thunder"
+#define NETWORK_THUNDER "Thunderdome"
+
+// Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.
+var/list/restricted_camera_networks = list(NETWORK_ERT,NETWORK_MERCENARY,"Secret")
 
 
 //singularity defines
@@ -63,12 +60,12 @@ var/list/restricted_camera_networks = list("thunder","ERT","NUKE","Secret")
 #define STAGE_SUPER	11
 
 // computer3 error codes, move lower in the file when it passes dev -Sayu
-#define PROG_CRASH          1  // Generic crash.
-#define MISSING_PERIPHERAL  2  // Missing hardware.
-#define BUSTED_ASS_COMPUTER 4  // Self-perpetuating error.  BAC will continue to crash forever.
-#define MISSING_PROGRAM     8  // Some files try to automatically launch a program. This is that failing.
-#define FILE_DRM            16 // Some files want to not be copied/moved. This is them complaining that you tried.
-#define NETWORK_FAILURE     32
+#define PROG_CRASH          0x1  // Generic crash.
+#define MISSING_PERIPHERAL  0x2  // Missing hardware.
+#define BUSTED_ASS_COMPUTER 0x4  // Self-perpetuating error.  BAC will continue to crash forever.
+#define MISSING_PROGRAM     0x8  // Some files try to automatically launch a program. This is that failing.
+#define FILE_DRM            0x10 // Some files want to not be copied/moved. This is them complaining that you tried.
+#define NETWORK_FAILURE     0x20
 
 // NanoUI flags
 #define STATUS_INTERACTIVE 2 // GREEN Visability

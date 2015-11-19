@@ -14,6 +14,7 @@
 	volume = 60
 	w_class = 2
 	flags = OPENCONTAINER
+	unacidable = 1 //glass doesn't dissolve in acid
 
 	var/label_text = ""
 
@@ -34,7 +35,6 @@
 		/obj/machinery/iv_drip,
 		/obj/machinery/disease2/incubator,
 		/obj/machinery/disposal,
-		/obj/machinery/apiary,
 		/mob/living/simple_animal/cow,
 		/mob/living/simple_animal/hostile/retaliate/goat,
 		/obj/machinery/computer/centrifuge,
@@ -42,7 +42,6 @@
 		/obj/machinery/smartfridge/,
 		/obj/machinery/biogenerator,
 		/obj/machinery/constructable_frame,
-		/obj/machinery/bunsen_burner,
 		/obj/machinery/radiocarbon_spectrometer
 		)
 
@@ -220,6 +219,7 @@
 	possible_transfer_amounts = list(10,20,30,60,120)
 	volume = 120
 	flags = OPENCONTAINER
+	unacidable = 0
 
 	attackby(var/obj/D, mob/user as mob)
 		if(isprox(D))

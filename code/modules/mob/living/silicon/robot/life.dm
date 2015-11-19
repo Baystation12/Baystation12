@@ -65,9 +65,9 @@
 
 	if(src.camera && !scrambledcodes)
 		if(src.stat == 2 || wires.IsIndexCut(BORG_WIRE_CAMERA))
-			src.camera.status = 0
+			src.camera.set_status(0)
 		else
-			src.camera.status = 1
+			src.camera.set_status(1)
 
 	updatehealth()
 
@@ -225,10 +225,12 @@
 	if (src.syndicate && src.client)
 		for(var/datum/mind/tra in traitors.current_antagonists)
 			if(tra.current)
+				// TODO: Update to new antagonist system.
 				var/I = image('icons/mob/mob.dmi', loc = tra.current, icon_state = "traitor")
 				src.client.images += I
 		src.disconnect_from_ai()
 		if(src.mind)
+			// TODO: Update to new antagonist system.
 			if(!src.mind.special_role)
 				src.mind.special_role = "traitor"
 				traitors.current_antagonists |= src.mind
@@ -312,7 +314,7 @@
 		killswitch_time --
 		if(killswitch_time <= 0)
 			if(src.client)
-				src << "\red <B>Killswitch Activated"
+				src << "<span class='danger'>Killswitch Activated</span>"
 			killswitch = 0
 			spawn(5)
 				gib()
@@ -323,7 +325,7 @@
 		weaponlock_time --
 		if(weaponlock_time <= 0)
 			if(src.client)
-				src << "\red <B>Weapon Lock Timed Out!"
+				src << "<span class='danger'>Weapon Lock Timed Out!</span>"
 			weapon_lock = 0
 			weaponlock_time = 120
 

@@ -162,6 +162,7 @@ var/list/debug_verbs = list (
         ,/client/proc/testZAScolors_remove
         ,/client/proc/setup_supermatter_engine
 		,/client/proc/atmos_toggle_debug
+		,/client/proc/spawn_tanktransferbomb
 	)
 
 

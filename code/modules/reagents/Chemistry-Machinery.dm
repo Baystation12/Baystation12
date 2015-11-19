@@ -44,10 +44,6 @@
 				qdel(src)
 				return
 
-/obj/machinery/chem_master/blob_act()
-	if (prob(50))
-		qdel(src)
-
 /obj/machinery/chem_master/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
 
 	if(istype(B, /obj/item/weapon/reagent_containers/glass))
@@ -76,13 +72,8 @@
 	return
 
 /obj/machinery/chem_master/Topic(href, href_list)
-	if(stat & (BROKEN|NOPOWER)) return
-	if(usr.stat || usr.restrained()) return
-	if(!in_range(src, usr)) return
-
-	src.add_fingerprint(usr)
-	usr.set_machine(src)
-
+	if(..())
+		return 1
 
 	if (href_list["ejectp"])
 		if(loaded_pill_bottle)
@@ -119,7 +110,7 @@
 
 			if(href_list["amount"])
 				var/id = href_list["add"]
-				var/amount = text2num(href_list["amount"])
+				var/amount = isgoodnumber(text2num(href_list["amount"]))
 				R.trans_id_to(src, id, amount)
 
 		else if (href_list["addcustom"])
@@ -133,7 +124,7 @@
 
 			if(href_list["amount"])
 				var/id = href_list["remove"]
-				var/amount = text2num(href_list["amount"])
+				var/amount = isgoodnumber(text2num(href_list["amount"]))
 				if(mode)
 					reagents.trans_id_to(beaker, id, amount)
 				else
@@ -232,7 +223,7 @@
 	return src.attack_hand(user)
 
 /obj/machinery/chem_master/attack_hand(mob/user as mob)
-	if(stat & BROKEN)
+	if(inoperable())
 		return
 	user.set_machine(src)
 	if(!(user.client in has_sprites))
@@ -297,17 +288,9 @@
 
 /obj/machinery/chem_master/proc/isgoodnumber(var/num)
 	if(isnum(num))
-		if(num > 200)
-			num = 200
-		else if(num < 0)
-			num = 1
-		else
-			num = round(num)
-		return num
+		return Clamp(round(num), 0, 200)
 	else
 		return 0
-
-
 
 /obj/machinery/chem_master/condimaster
 	name = "CondiMaster 3000"
@@ -349,11 +332,8 @@
 
 
 /obj/machinery/computer/pandemic/Topic(href, href_list)
-	if(stat & (NOPOWER|BROKEN)) return
-	if(usr.stat || usr.restrained()) return
-	if(!in_range(src, usr)) return
-
-	usr.set_machine(src)
+	if(..())
+		return 1
 	if(!beaker) return
 
 	if (href_list["create_vaccine"])
@@ -661,10 +641,12 @@
 	return 0
 
 /obj/machinery/reagentgrinder/attack_hand(mob/user as mob)
-	user.set_machine(src)
 	interact(user)
 
 /obj/machinery/reagentgrinder/interact(mob/user as mob) // The microwave Menu
+	if(inoperable())
+		return
+	user.set_machine(src)
 	var/is_chamber_empty = 0
 	var/is_beaker_ready = 0
 	var/processing_chamber = ""
@@ -711,8 +693,8 @@
 
 /obj/machinery/reagentgrinder/Topic(href, href_list)
 	if(..())
-		return
-	usr.set_machine(src)
+		return 1
+
 	switch(href_list["action"])
 		if ("grind")
 			grind()
@@ -721,7 +703,7 @@
 		if ("detach")
 			detach()
 	src.updateUsrDialog()
-	return
+	return 1
 
 /obj/machinery/reagentgrinder/proc/detach()
 
@@ -737,17 +719,13 @@
 
 	if (usr.stat != 0)
 		return
-	if (holdingitems && holdingitems.len == 0)
+	if (!holdingitems || holdingitems.len == 0)
 		return
 
 	for(var/obj/item/O in holdingitems)
 		O.loc = src.loc
 		holdingitems -= O
-	holdingitems = list()
-
-/obj/machinery/reagentgrinder/proc/remove_object(var/obj/item/O)
-	holdingitems -= O
-	qdel(O)
+	holdingitems.Cut()
 
 /obj/machinery/reagentgrinder/proc/grind()
 
@@ -770,10 +748,6 @@
 	// Process.
 	for (var/obj/item/O in holdingitems)
 
-		if(!O || !istype(O))
-			holdingitems -= null
-			continue
-
 		var/remaining_volume = beaker.reagents.maximum_volume - beaker.reagents.total_volume
 		if(remaining_volume <= 0)
 			break
@@ -784,13 +758,16 @@
 				var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/REAGENTS_PER_SHEET)))
 				if(amount_to_take)
 					stack.use(amount_to_take)
+					if(deleted(stack))
+						holdingitems -= stack
 					beaker.reagents.add_reagent(sheet_reagents[stack.type], (amount_to_take*REAGENTS_PER_SHEET))
 					continue
 
 		if(O.reagents)
 			O.reagents.trans_to(beaker, min(O.reagents.total_volume, remaining_volume))
 			if(O.reagents.total_volume == 0)
-				remove_object(O)
+				holdingitems -= O
+				qdel(O)
 			if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 				break
 
