@@ -1,4 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - tweak: "The round start and auto-antag spawners can now check if players have played long enough to be eligable for selection."
