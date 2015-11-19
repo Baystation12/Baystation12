@@ -4,11 +4,13 @@
 /datum/controller/process/disease/setup()
 	name = "disease"
 	schedule_interval = 20 // every 2 seconds
-	updateQueueInstance = new
 
 /datum/controller/process/disease/doWork()
-	updateQueueInstance.init(active_diseases, "process")
-	updateQueueInstance.Run()
+	for(var/disease in active_diseases)
+		var/datum/disease/D = disease
+		D.process()
+		SCHECK
 
-/datum/controller/process/disease/getStatName()
-	return ..()+"([active_diseases.len])"
+/datum/controller/process/disease/statProcess()
+	..()
+	stat(null, "[active_diseases.len] disease\s")
