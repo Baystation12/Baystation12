@@ -46,4 +46,4 @@ var/datum/controller/process/wireless/wirelessProcess
 		input_queue -= C
 		if(!target_found)
 			output_queue += C
-		scheck()
+		SCHECK

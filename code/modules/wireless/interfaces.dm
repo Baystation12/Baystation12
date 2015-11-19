@@ -1,10 +1,17 @@
+//-------------------------------
+// Wifi
+//-------------------------------
 /datum/wifi
+	var/obj/parent
 	var/list/connected_devices
 
-/datum/wifi/New()
+/datum/wifi/New(var/obj/O)
 	connected_devices = new()
+	if(istype(O))
+		parent = O
 
 /datum/wifi/Destroy(var/wifi/device)
+	parent = null
 	for(var/datum/wifi/D in connected_devices)
 		D.disconnect_device(src)
 		disconnect_device(D)
@@ -17,12 +24,14 @@
 	connected_devices -= device
 
 
-
+//-------------------------------
+// Receiver
+//-------------------------------
 /datum/wifi/receiver
 	var/id
 
-/datum/wifi/receiver/New(var/new_id)
-	..()
+/datum/wifi/receiver/New(var/new_id, var/obj/O)
+	..(O)
 	id = new_id
 	wirelessProcess.add_device(src)
 
@@ -31,11 +40,14 @@
 	return ..()
 
 
+//-------------------------------
+// Sender
+//-------------------------------
 /datum/wifi/sender
 	var/target
 
-/datum/wifi/sender/New(var/new_target)
-	..()
+/datum/wifi/sender/New(var/new_target, var/obj/O)
+	..(O)
 	target = new_target
 	send_connection_request()
 
@@ -47,7 +59,9 @@
 	wirelessProcess.add_request(C)
 
 
-
+//-------------------------------
+// Connection request
+//-------------------------------
 /datum/connection_request
 	var/datum/wifi/sender/source	//wifi_sender object creating the request
 	var/target						//id tag of the target device to try to connect to
@@ -57,6 +71,9 @@
 	target = receiver
 
 
+//-------------------------------
+// Wireless tool (temp)
+//-------------------------------
 /obj/item/device/wireless_tool
 	name = "wireless tool"
 	desc = "Used for connecting machinery to controls for remote operation."

@@ -140,7 +140,6 @@
 #include "code\controllers\Processes\turf.dm"
 #include "code\controllers\Processes\vote.dm"
 #include "code\controllers\Processes\wireless.dm"
-#include "code\controllers\ProcessScheduler\core\_define.dm"
 #include "code\controllers\ProcessScheduler\core\_stubs.dm"
 #include "code\controllers\ProcessScheduler\core\process.dm"
 #include "code\controllers\ProcessScheduler\core\processScheduler.dm"

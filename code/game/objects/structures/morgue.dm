@@ -186,7 +186,6 @@
 	var/cremating = 0
 	var/id = 1
 	var/locked = 0
-
 	var/_wifi_id
 	var/datum/wifi/receiver/button/crematorium/wifi_receiver
 
