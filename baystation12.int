@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\gamemodes\gameticker.dm;code\game\gamemodes\uniform_setup.dm;icons\mob\uniform.dmi;code\global.dm;icons\obj\curtain.dmi;icons\obj\narsie.dmi
+WINDOW: code\game\gamemodes\gameticker.dm;code\game\gamemodes\uniform_setup.dm;icons\mob\uniform.dmi;code\global.dm;icons\obj\curtain.dmi;icons\obj\trash.dmi;icons\obj\wizard.dmi;icons\obj\vehicles.dmi;icons\obj\storage.dmi;code\modules\mob\living\carbon\human\examine.dm
 LAST_COMPILE_VERSION: 506.1247
-DIR: code code\game code\game\gamemodes code\game\objects code\game\objects\effects code\game\objects\effects\decals code\game\objects\effects\decals\posters code\modules code\modules\clothing code\modules\clothing\under code\modules\clothing\under\jobs icons icons\mob icons\obj 
+DIR: code code\game code\game\gamemodes code\modules code\modules\examine code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human icons icons\mob 
 FILE: code\game\gamemodes\uniform_setup.dm
-LAST_COMPILE_TIME: 1447877086
+LAST_COMPILE_TIME: 1447962858
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
