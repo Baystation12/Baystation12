@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+LAST_COMPILE_TIME: 1447995129
+DIR: code code\_onclick code\datums code\datums\wires code\game code\game\area code\game\gamemodes code\game\gamemodes\cult code\game\gamemodes\endgame code\game\gamemodes\endgame\supermatter_cascade code\game\gamemodes\events code\game\machinery code\game\machinery\computer3 code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\circuitboards code\game\objects\items\weapons\circuitboards\computer code\game\objects\structures code\game\objects\structures\crates_lockers code\game\objects\structures\crates_lockers\closets code\game\objects\structures\crates_lockers\closets\secure code\game\verbs code\modules code\modules\examine code\modules\examine\descriptions code\modules\power code\modules\power\antimatter code\modules\power\singularity code\modules\supermatter icons icons\obj icons\vending_icons maps maps\overmap maps\RandomZLevels 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 508.1299
+WINDOW: code\game\machinery\computer3\lapvend.dm;code\game\machinery\vending.dm;code\game\objects\structures\crates_lockers\closets\secure\personal.dm
+FILE: code\game\objects\structures\crates_lockers\closets\secure\personal.dm
 */
 // END_INTERNALS
