@@ -7,10 +7,15 @@ var/datum/antagonist/deathsquad/deathsquad
 	role_text_plural = "Death Commandos"
 	welcome_text = "You work in the service of Central Command Asset Protection, answering directly to the Board of Directors."
 	landmark_id = "Commando"
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_HAS_NUKE | ANTAG_HAS_LEADER
-	max_antags = 4
-	max_antags_round = 6
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_HAS_NUKE | ANTAG_HAS_LEADER | ANTAG_RANDOM_EXCEPTED
 	default_access = list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage)
+	antaghud_indicator = "huddeathsquad"
+
+	hard_cap = 4
+	hard_cap_round = 8
+	initial_spawn_req = 4
+	initial_spawn_target = 6
+
 	var/deployed = 0
 
 /datum/antagonist/deathsquad/New(var/no_reference)
@@ -42,7 +47,7 @@ var/datum/antagonist/deathsquad/deathsquad
 		player.equip_to_slot_or_del(new /obj/item/weapon/plastique(player), slot_l_store)
 	player.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/revolver/mateba(player), slot_belt)
 	player.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse_rifle(player), slot_r_hand)
-	player.equip_to_slot_or_del(new /obj/item/weapon/rig/combat(player), slot_back)
+	player.equip_to_slot_or_del(new /obj/item/weapon/rig/ert/assetprotection(player), slot_back)
 	player.equip_to_slot_or_del(new /obj/item/weapon/melee/energy/sword(player), slot_s_store)
 	player.implant_loyalty(player)
 

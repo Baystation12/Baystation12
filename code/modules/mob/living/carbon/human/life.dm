@@ -364,12 +364,24 @@
 				internals.icon_state = "internal0"
 		return null
 
+	get_breath_from_environment(var/volume_needed=BREATH_VOLUME)
+		var/datum/gas_mixture/breath = ..()
+	
+		if(breath)
+			//exposure to extreme pressures can rupture lungs
+			var/check_pressure = breath.return_pressure()
+			if(check_pressure < ONE_ATMOSPHERE / 5 || check_pressure > ONE_ATMOSPHERE * 5)
+				if(!is_lung_ruptured() && prob(5))
+					rupture_lung()
+		
+		return breath
 
 	handle_breath(datum/gas_mixture/breath)
 
 		if(status_flags & GODMODE)
 			return
 
+		//check if we actually need to process breath
 		if(!breath || (breath.total_moles == 0) || suiciding)
 			failed_last_breath = 1
 			if(suiciding)
@@ -385,7 +397,7 @@
 
 			return 0
 
-		var/safe_pressure_min = 16 // Minimum safe partial pressure of breathable gas in kPa
+		var/safe_pressure_min = species.breath_pressure // Minimum safe partial pressure of breathable gas in kPa
 
 		// Lung damage increases the minimum safe pressure.
 		if(species.has_organ["lungs"])
@@ -884,9 +896,9 @@
 				var/turf/T = loc
 				var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in T
 				if(L)
-					light_amount = min(10,L.lum_r + L.lum_g + L.lum_b) - 5 //hardcapped so it's not abused by having a ton of flashlights
+					light_amount = min(10,L.lum_r + L.lum_g + L.lum_b) - 2 //hardcapped so it's not abused by having a ton of flashlights
 				else
-					light_amount =  5
+					light_amount =  1
 			nutrition += light_amount
 			traumatic_shock -= light_amount
 
@@ -941,7 +953,7 @@
 		if(status_flags & GODMODE)	return 0
 
 		//SSD check, if a logged player is awake put them back to sleep!
-		if(species.show_ssd && !client && !aghosted)
+		if(species.show_ssd && !client && !teleop)
 			Sleeping(2)
 
 		if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
@@ -1679,35 +1691,11 @@
 	if (BITTEST(hud_updateflag, SPECIALROLE_HUD))
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
-		if(mind)
-
-			// TODO: Update to new antagonist system.
-			switch(mind.special_role)
-				if("traitor","Mercenary")
-					holder.icon_state = "hudsyndicate"
-				if("Revolutionary")
-					holder.icon_state = "hudrevolutionary"
-				if("Head Revolutionary")
-					holder.icon_state = "hudheadrevolutionary"
-				if("Cultist")
-					holder.icon_state = "hudcultist"
-				if("Changeling")
-					holder.icon_state = "hudchangeling"
-				if("Wizard","Fake Wizard")
-					holder.icon_state = "hudwizard"
-				if("Death Commando")
-					holder.icon_state = "huddeathsquad"
-				if("Ninja")
-					holder.icon_state = "hudninja"
-				if("head_loyalist")
-					holder.icon_state = "hudloyalist"
-				if("loyalist")
-					holder.icon_state = "hudloyalist"
-				if("head_mutineer")
-					holder.icon_state = "hudmutineer"
-				if("mutineer")
-					holder.icon_state = "hudmutineer"
-
+		if(mind && mind.special_role)
+			if(hud_icon_reference[mind.special_role])
+				holder.icon_state = hud_icon_reference[mind.special_role]
+			else
+				holder.icon_state = "hudsyndicate"
 			hud_list[SPECIALROLE_HUD] = holder
 	hud_updateflag = 0
 

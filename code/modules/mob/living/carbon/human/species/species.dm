@@ -60,6 +60,7 @@
 
 	// Environment tolerance/life processes vars.
 	var/reagent_tag                                   //Used for metabolizing reagents.
+	var/breath_pressure = 16                          // Minimum partial pressure safe for breathing, kPa
 	var/breath_type = "oxygen"                        // Non-oxygen gas breathed, if any.
 	var/poison_type = "phoron"                        // Poisonous air.
 	var/exhale_type = "carbon_dioxide"                // Exhaled gas type.
@@ -104,7 +105,8 @@
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
 	var/primitive_form            // Lesser form, if any (ie. monkey for humans)
 	var/greater_form              // Greater form, if any, ie. human for monkeys.
-	var/gluttonous                // Can eat some mobs. 1 for monkeys, 2 for people.
+	var/holder_type
+	var/gluttonous                // Can eat some mobs. 1 for mice, 2 for monkeys, 3 for people.
 	var/rarity_value = 1          // Relative rarity/collector value for this species.
 	                              // Determines the organs that the species spawns with and
 	var/list/has_organ = list(    // which required-organ checks are conducted.
@@ -254,6 +256,9 @@
 
 /datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
 	add_inherent_verbs(H)
+	H.mob_bump_flag = bump_flag
+	H.mob_swap_flags = swap_flags
+	H.mob_push_flags = push_flags
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	return

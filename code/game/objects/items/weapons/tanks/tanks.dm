@@ -36,36 +36,32 @@
 		qdel(air_contents)
 
 	processing_objects.Remove(src)
+	
+	if(istype(loc, /obj/item/device/transfer_valve))
+		var/obj/item/device/transfer_valve/TTV = loc
+		TTV.remove_tank(src)
 
 	..()
 
 /obj/item/weapon/tank/examine(mob/user)
-	var/obj/icon = src
-	if (istype(src.loc, /obj/item/assembly))
-		icon = src.loc
-	if (!in_range(src, user))
-		if (icon == src) user << "\blue It's \a \icon[icon][src]! If you want any more information you'll need to get closer."
-		return
-
-	var/celsius_temperature = src.air_contents.temperature-T0C
-	var/descriptive
-
-	if (celsius_temperature < 20)
-		descriptive = "cold"
-	else if (celsius_temperature < 40)
-		descriptive = "room temperature"
-	else if (celsius_temperature < 80)
-		descriptive = "lukewarm"
-	else if (celsius_temperature < 100)
-		descriptive = "warm"
-	else if (celsius_temperature < 300)
-		descriptive = "hot"
-	else
-		descriptive = "furiously hot"
-
-	user << "\blue \The \icon[icon][src] feels [descriptive]"
-
-	return
+	. = ..(user, 0)
+	if(.)
+		var/celsius_temperature = air_contents.temperature - T0C
+		var/descriptive
+		switch(celsius_temperature)
+			if(300 to INFINITY)
+				descriptive = "furiously hot"
+			if(100 to 300)
+				descriptive = "hot"
+			if(80 to 100)
+				descriptive = "warm"
+			if(40 to 80)
+				descriptive = "lukewarm"
+			if(20 to 40)
+				descriptive = "room temperature"
+			else
+				descriptive = "cold"
+		user << "<span class='notice'>\The [src] feels [descriptive].</span>"
 
 /obj/item/weapon/tank/blob_act()
 	if(prob(50))
@@ -280,7 +276,10 @@
 		qdel(src)
 
 	else if(pressure > TANK_RUPTURE_PRESSURE)
-		//world << "\blue[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]"
+		#ifdef FIREDBG
+		log_debug("\blue[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]")
+		#endif
+		
 		if(integrity <= 0)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)
@@ -292,7 +291,10 @@
 			integrity--
 
 	else if(pressure > TANK_LEAK_PRESSURE)
-		//world << "\blue[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]"
+		#ifdef FIREDBG
+		log_debug("\blue[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]")
+		#endif
+		
 		if(integrity <= 0)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)

@@ -342,7 +342,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 //Picks a string of symbols to display as the law number for hacked or ion laws
 /proc/ionnum()
-	return "[pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]"
+	return "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]"
 
 //When an AI is activated, it can choose from a list of non-slaved borgs to have as a slave.
 /proc/freeborg()
@@ -538,7 +538,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/y = min(world.maxy, max(1, A.y + dy))
 	return locate(x,y,A.z)
 
-//Makes sure MIDDLE is between LOW and HIGH. If not, it adjusts it. Returns the adjusted value.
+//Makes sure MIDDLE is between LOW and HIGH. If not, it adjusts it. Returns the adjusted value. Lower bound takes priority.
 /proc/between(var/low, var/middle, var/high)
 	return max(min(middle, high), low)
 
@@ -623,7 +623,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 
 	else return get_step(ref, base_dir)
 
-/proc/do_mob(var/mob/user, var/mob/target, var/delay, var/numticks = 5, var/needhand = 1) //This is quite an ugly solution but i refuse to use the old request system.
+/proc/do_mob(var/mob/user, var/mob/target, var/delay = 30, var/numticks = 5, var/needhand = 1) //This is quite an ugly solution but i refuse to use the old request system.
 	if(!user || !target)	return 0
 	if(numticks == 0)		return 0
 
@@ -1309,3 +1309,7 @@ var/mob/dview/dview_mob = new
 /mob/dview/New()
 	// do nothing. we don't want to be in any mob lists; we're a dummy not a mob.
 
+
+// call to generate a stack trace and print to runtime logs
+/proc/crash_with(msg)
+	CRASH(msg)

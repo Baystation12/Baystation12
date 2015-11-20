@@ -11,22 +11,22 @@ var/datum/antagonist/rogue_ai/malf
 	victory_text = "The AI has taken control of all of the station's systems."
 	loss_text = "The AI has been shut down!"
 	flags = ANTAG_VOTABLE | ANTAG_OVERRIDE_MOB | ANTAG_OVERRIDE_JOB | ANTAG_CHOOSE_NAME
-	max_antags = 1
-	max_antags_round = 1
-
+	hard_cap = 1
+	hard_cap_round = 1
+	initial_spawn_req = 1
+	initial_spawn_target = 1
+	antaghud_indicator = "hudmalai"
 
 /datum/antagonist/rogue_ai/New()
 	..()
 	malf = src
 
 
-/datum/antagonist/rogue_ai/get_candidates()
+/datum/antagonist/rogue_ai/build_candidate_list()
 	..()
 	for(var/datum/mind/player in candidates)
 		if(player.assigned_role && player.assigned_role != "AI")
 			candidates -= player
-	if(!candidates.len)
-		return list()
 	return candidates
 
 

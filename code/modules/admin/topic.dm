@@ -85,7 +85,7 @@
 				banreason = "[banreason] (CUSTOM CID)"
 		else
 			message_admins("Ban process: A mob matching [playermob.ckey] was found at location [playermob.x], [playermob.y], [playermob.z]. Custom ip and computer id fields replaced with the ip and computer id from the located mob")
-		notes_add(playermob.ckey,banreason,usr)
+		notes_add(banckey,banreason,usr)
 
 		DB_ban_record(bantype, playermob, banduration, banreason, banjob, null, banckey, banip, bancid )
 
@@ -2300,7 +2300,7 @@
 					dat += "[sig]<BR>"
 				usr << browse(dat, "window=lastsignalers;size=800x500")
 			if("list_lawchanges")
-				var/dat = "<B>Showing last [length(lawchanges)] law changes.</B><HR>"
+				var/dat = "<B>Showing last [lawchanges.len] law change\s.</B><HR>"
 				for(var/sig in lawchanges)
 					dat += "[sig]<BR>"
 				usr << browse(dat, "window=lawchanges;size=800x500")

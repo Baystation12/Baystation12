@@ -622,6 +622,12 @@ proc/is_blind(A)
 
 	return 0
 
+/mob/living/carbon/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
+	if(handcuffed)
+		return SAFE_PERP
+
+	return ..()
+
 /mob/living/carbon/human/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
 	var/threatcount = ..()
 	if(. == SAFE_PERP)
@@ -634,7 +640,7 @@ proc/is_blind(A)
 	// A proper	CentCom id is hard currency.
 	else if(id && istype(id, /obj/item/weapon/card/id/centcom))
 		return SAFE_PERP
-	
+
 	if(check_access && !access_obj.allowed(src))
 		threatcount += 4
 

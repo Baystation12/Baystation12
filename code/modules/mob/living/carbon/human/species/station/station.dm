@@ -117,7 +117,7 @@
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
 	eyes = "skrell_eyes_s"
 	language = "Skrellian"
-	primitive_form = "Neara"
+	primitive_form = "Neaera"
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	blurb = "An amphibious species, Skrell come from the star system known as Qerr'Vallis, which translates to 'Star of \
 	the royals' or 'Light of the Crown'.<br/><br/>Skrell are a highly advanced and logical race who live under the rule \
@@ -221,19 +221,7 @@
 	return ..()
 
 /datum/species/diona/handle_death(var/mob/living/carbon/human/H)
-
-	var/mob/living/carbon/alien/diona/S = new(get_turf(H))
-
-	if(H.mind)
-		H.mind.transfer_to(S)
-
-	for(var/mob/living/carbon/alien/diona/D in H.contents)
-		if(D.client)
-			D.loc = H.loc
-		else
-			qdel(D)
-
-	H.visible_message("\red[H] splits apart with a wet slithering noise!")
+	H.diona_split_into_nymphs(0)
 
 /datum/species/machine
 	name = "Machine"

@@ -142,15 +142,15 @@
 
 //These control the speed at which fire burns
 #define FIRE_GAS_BURNRATE_MULT			1
-#define FIRE_LIQUID_BURNRATE_MULT		1
+#define FIRE_LIQUID_BURNRATE_MULT		0.225
 
 //If the fire is burning slower than this rate then the reaction is going too slow to be self sustaining and the fire burns itself out.
 //This ensures that fires don't grind to a near-halt while still remaining active forever.
 #define FIRE_GAS_MIN_BURNRATE			0.01
-#define FIRE_LIQUD_MIN_BURNRATE			0.01
+#define FIRE_LIQUD_MIN_BURNRATE			0.0025
 
 //How many moles of fuel are contained within one solid/liquid fuel volume unit
-#define LIQUIDFUEL_AMOUNT_TO_MOL		1  //mol/volume unit
+#define LIQUIDFUEL_AMOUNT_TO_MOL		0.45  //mol/volume unit
 
 #define T0C  273.15 //    0.0 degrees celcius
 #define T20C 293.15 //   20.0 degrees celcius
@@ -573,10 +573,9 @@
 #define BE_NINJA      1024
 #define BE_RAIDER     2048
 #define BE_PLANT      4096
-#define BE_MUTINEER   8192
+#define BE_LOYALIST   8192
 #define BE_PAI        16384
 
-// TODO: Update to new antagonist system.
 var/list/be_special_flags = list(
 	"Traitor"          = BE_TRAITOR,
 	"Operative"        = BE_OPERATIVE,
@@ -591,7 +590,7 @@ var/list/be_special_flags = list(
 	"Ninja"            = BE_NINJA,
 	"Raider"           = BE_RAIDER,
 	"Diona"            = BE_PLANT,
-	"Mutineer"         = BE_MUTINEER,
+	"Loyalist"         = BE_LOYALIST,
 	"pAI"              = BE_PAI
 )
 
@@ -839,6 +838,7 @@ var/list/be_special_flags = list(
 #define MODE_MONKEY "monkey"
 #define MODE_RENEGADE "renegade"
 #define MODE_REVOLUTIONARY "revolutionary"
+#define MODE_LOYALIST "loyalist"
 #define MODE_MALFUNCTION "malf"
 #define MODE_TRAITOR "traitor"
 

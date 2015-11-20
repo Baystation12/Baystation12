@@ -967,7 +967,7 @@
 
 	if(L && !L.is_bruised())
 		src.custom_pain("You feel a stabbing pain in your chest!", 1)
-		L.damage = L.min_bruised_damage
+		L.bruise()
 
 /*
 /mob/living/carbon/human/verb/simulate()
@@ -1103,18 +1103,21 @@
 		else
 			dna.species = new_species
 
+	// No more invisible screaming wheelchairs because of set_species() typos.
+	if(!all_species[new_species])
+		new_species = "Human"
+
 	if(species)
 
 		if(species.name && species.name == new_species)
 			return
 		if(species.language)
 			remove_language(species.language)
-
 		if(species.default_language)
 			remove_language(species.default_language)
-
 		// Clear out their species abilities.
 		species.remove_inherent_verbs(src)
+		holder_type = null
 
 	species = all_species[new_species]
 
@@ -1133,6 +1136,11 @@
 		r_skin = 0
 		g_skin = 0
 		b_skin = 0
+
+	if(species.holder_type)
+		holder_type = species.holder_type
+
+	icon_state = lowertext(species.name)
 
 	species.create_organs(src)
 
@@ -1156,10 +1164,6 @@
 		return 1
 	else
 		return 0
-
-	mob_bump_flag = species.bump_flag
-	mob_swap_flags = species.swap_flags
-	mob_push_flags = species.push_flags
 
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"
@@ -1265,11 +1269,10 @@
 		if(C.body_parts_covered & FEET)
 			feet_exposed = 0
 
-	flavor_text = flavor_texts["general"]
-	flavor_text += "\n\n"
+	flavor_text = ""
 	for (var/T in flavor_texts)
 		if(flavor_texts[T] && flavor_texts[T] != "")
-			if((T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
+			if((T == "general") || (T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
 				flavor_text += flavor_texts[T]
 				flavor_text += "\n\n"
 	if(!shrink)
@@ -1373,3 +1376,10 @@
 	if(istype(shoes, /obj/item/clothing/shoes/magboots) && (shoes.flags & NOSLIP))  //magboots + dense_object = no floating
 		return 1
 	return 0
+
+/mob/living/carbon/human/MouseDrop(var/atom/over_object)
+	var/mob/living/carbon/human/H = over_object
+	if(holder_type && a_intent == "help" && H.a_intent == "help" && istype(H) && !issmall(H) && Adjacent(H))
+		get_scooped(H)
+		return
+	return ..()

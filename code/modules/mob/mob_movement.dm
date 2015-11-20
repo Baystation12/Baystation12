@@ -165,7 +165,7 @@
 			if(!mob.control_object)	return
 			mob.control_object.dir = direct
 		else
-			mob.control_object.loc = get_step(mob.control_object,direct)
+			mob.control_object.forceMove(get_step(mob.control_object,direct))
 	return
 
 
@@ -360,16 +360,6 @@
 	return Move(n, direct)
 
 
-///Process_Grab()
-///Called by client/Move()
-///Checks to see if you are grabbing anything and if moving will affect your grab.
-/client/proc/Process_Grab()
-	for(var/obj/item/weapon/grab/G in list(mob.l_hand, mob.r_hand))
-		if(G.state == GRAB_KILL) //no wandering across the station/asteroid while choking someone
-			mob.visible_message("<span class='warning'>[mob] lost \his tight grip on [G.affecting]'s neck!</span>")
-			G.hud.icon_state = "kill"
-			G.state = GRAB_NECK
-
 ///Process_Incorpmove
 ///Called by client/Move()
 ///Allows mobs to run though walls
@@ -383,7 +373,7 @@
 				mob << "<span class='warning'>You cannot get past holy grounds while you are in this plane of existence!</span>"
 				return
 			else
-				mob.loc = get_step(mob, direct)
+				mob.forceMove(get_step(mob, direct))
 				mob.dir = direct
 		if(2)
 			if(prob(50))
@@ -412,7 +402,7 @@
 							return
 					else
 						return
-				mob.loc = locate(locx,locy,mobloc.z)
+				mob.forceMove(locate(locx,locy,mobloc.z))
 				spawn(0)
 					var/limit = 2//For only two trailing shadows.
 					for(var/turf/T in getline(mobloc, mob.loc))
@@ -423,7 +413,7 @@
 			else
 				spawn(0)
 					anim(mobloc,mob,'icons/mob/mob.dmi',,"shadow",,mob.dir)
-				mob.loc = get_step(mob, direct)
+				mob.forceMove(get_step(mob, direct))
 			mob.dir = direct
 	// Crossed is always a bit iffy
 	for(var/obj/S in mob.loc)
