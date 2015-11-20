@@ -8,4 +8,4 @@ proc/ConfigureUniforms()
 	AnnounceUniforms()
 
 proc/AnnounceUniforms()
-	world << "<B><FONT COLOR=RED>The chosen security uniform for the round is<FONT COLOR=#000> \icon[uniform] [uniform_name]</FONT>!</B></FONT>"
+	world << "<B><FONT COLOR=RED>The chosen security uniform for the round is<FONT COLOR=#000> \icon[uniform] [uniform_name]</FONT></B></FONT>"
