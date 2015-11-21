@@ -227,7 +227,7 @@
 			icontype = "Custom"
 		else
 			icontype = module_sprites[1]
-			icon_state = module_sprites[icontype]
+		icon_state = module_sprites[icontype]
 	updateicon()
 	return module_sprites
 
