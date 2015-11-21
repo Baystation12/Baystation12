@@ -21,7 +21,7 @@
 			if(H.head && (H.head.body_parts_covered & FACE))
 				user << "<span class='warning'>Remove their [H.head] first.</span>"
 				return
-			user.visible_message("<span class='danger'>\The [user] begins taping over \the [H]'s eyes!")
+			user.visible_message("<span class='danger'>\The [user] begins taping over \the [H]'s eyes!</span>")
 
 			if(!do_after(user, 30))
 				return
@@ -30,7 +30,7 @@
 			if(!H || !src || !H.organs_by_name["head"] || !H.has_eyes() || H.glasses || (H.head && (H.head.body_parts_covered & FACE)))
 				return
 
-			user.visible_message("<span class='danger'>\The [user] has taped up \the [H]'s eyes!")
+			user.visible_message("<span class='danger'>\The [user] has taped up \the [H]'s eyes!</span>")
 			H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/blindfold/tape(H), slot_glasses)
 
 		else if(user.zone_sel.selecting == "mouth" || user.zone_sel.selecting == "head")
@@ -46,7 +46,7 @@
 			if(H.head && (H.head.body_parts_covered & FACE))
 				user << "<span class='warning'>Remove their [H.head] first.</span>"
 				return
-			user.visible_message("<span class='danger'>\The [user] begins taping up \the [H]'s mouth!")
+			user.visible_message("<span class='danger'>\The [user] begins taping up \the [H]'s mouth!</span>")
 
 			if(!do_after(user, 30))
 				return
@@ -55,7 +55,7 @@
 			if(!H || !src || !H.organs_by_name["head"] || !H.check_has_mouth() || H.wear_mask || (H.head && (H.head.body_parts_covered & FACE)))
 				return
 
-			user.visible_message("<span class='danger'>\The [user] has taped up \the [H]'s mouth!")
+			user.visible_message("<span class='danger'>\The [user] has taped up \the [H]'s mouth!</span>")
 			H.equip_to_slot_or_del(new /obj/item/clothing/mask/muzzle/tape(H), slot_wear_mask)
 
 		else if(user.zone_sel.selecting == "r_hand" || user.zone_sel.selecting == "l_hand")
