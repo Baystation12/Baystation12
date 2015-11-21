@@ -1,0 +1,5 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - tweak: "Engineering alarm consoles now display camera alerts."
+  
