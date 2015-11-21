@@ -42,7 +42,7 @@ var/list/mob_hat_cache = list()
 	mob_push_flags = SIMPLE_ANIMAL
 	mob_always_swap = 1
 
-	mob_size = MOB_TINY
+	mob_size = MOB_LARGE // Small mobs can't open doors, it's a huge pain for drones.
 
 	//Used for self-mailing.
 	var/mail_destination = ""
@@ -70,7 +70,6 @@ var/list/mob_hat_cache = list()
 	can_pull_mobs = 1
 	hat_x_offset = 1
 	hat_y_offset = -12
-	mob_size = MOB_SMALL
 
 /mob/living/silicon/robot/drone/New()
 

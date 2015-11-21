@@ -255,6 +255,8 @@ datum/hud/New(mob/owner)
 
 	if(ishuman(mymob))
 		human_hud(ui_style, ui_color, ui_alpha, mymob) // Pass the player the UI style chosen in preferences
+	else if(isrobot(mymob))
+		robot_hud()
 	else if(issmall(mymob))
 		monkey_hud(ui_style, ui_color, ui_alpha)
 	else if(isbrain(mymob))
@@ -265,8 +267,6 @@ datum/hud/New(mob/owner)
 		slime_hud()
 	else if(isAI(mymob))
 		ai_hud()
-	else if(isrobot(mymob))
-		robot_hud()
 	else if(isobserver(mymob))
 		ghost_hud()
 	else

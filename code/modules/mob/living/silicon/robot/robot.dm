@@ -219,14 +219,15 @@
 	return ..()
 
 /mob/living/silicon/robot/proc/set_module_sprites(var/list/new_sprites)
-	module_sprites = new_sprites.Copy()
-	//Custom_sprite check and entry
-	if (custom_sprite == 1)
-		module_sprites["Custom"] = "[src.ckey]-[modtype]"
-		icontype = "Custom"
-	else
-		icontype = module_sprites[1]
-	icon_state = module_sprites[icontype]
+	if(new_sprites && new_sprites.len)
+		module_sprites = new_sprites.Copy()
+		//Custom_sprite check and entry
+		if (custom_sprite == 1)
+			module_sprites["Custom"] = "[src.ckey]-[modtype]"
+			icontype = "Custom"
+		else
+			icontype = module_sprites[1]
+			icon_state = module_sprites[icontype]
 	updateicon()
 	return module_sprites
 
