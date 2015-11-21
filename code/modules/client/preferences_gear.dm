@@ -1104,6 +1104,12 @@ var/global/list/gear_datums = list()
 	sort_category = "misc"
 	cost = 1
 
+/datum/gear/boot_knife
+	display_name = "boot knife"
+	path = /obj/item/weapon/material/kitchen/utensil/knife/boot
+	sort_category = "misc"
+	cost = 3
+
 /datum/gear/cane
 	display_name = "cane"
 	path = /obj/item/weapon/cane
