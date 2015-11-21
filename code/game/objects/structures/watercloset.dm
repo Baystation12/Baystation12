@@ -316,11 +316,11 @@
 
 /obj/machinery/shower/proc/process_heat(mob/living/M)
 	if(!on || !istype(M)) return
-	
+
 	var/temperature = temperature_settings[watertemp]
 	var/temp_adj = between(BODYTEMP_COOLING_MAX, temperature - M.bodytemperature, BODYTEMP_HEATING_MAX)
 	M.bodytemperature += temp_adj
-	
+
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(temperature >= H.species.heat_level_1)
@@ -410,6 +410,11 @@
 				return 1
 	// Short of a rewrite, this is necessary to stop monkeycubes being washed.
 	else if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/monkeycube))
+		return
+	else if(istype(O, /obj/item/weapon/mop))
+		O.reagents.add_reagent("water", 5)
+		user << "<span class='notice'>You wet \the [O] in \the [src].</span>"
+		playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		return
 
 	var/turf/location = user.loc
