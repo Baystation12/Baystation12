@@ -5,7 +5,7 @@
 
 /datum/expansion/New(var/atom/holder)
 	if(!istype(holder))
-		CRASH()
+		CRASH("Invalid holder.")
 	src.holder = holder
 	..()
 

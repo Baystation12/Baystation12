@@ -65,7 +65,7 @@
 		M.set_buffer(null)
 		. = MT_REFRESH
 	else
-		. = OnTopic(href, href_list, user)
+		. = on_topic(href, href_list, user)
 
 	switch(.)
 		if(MT_REFRESH)
@@ -74,7 +74,7 @@
 			close_window(user)
 	return 1
 
-/datum/expansion/multitool/proc/OnTopic(href, href_list, usr)
+/datum/expansion/multitool/proc/on_topic(href, href_list, usr)
 	return MT_NOACTION
 
 /datum/expansion/multitool/proc/send_buffer(var/obj/item/device/multitool/M, var/atom/buffer, var/mob/user)
