@@ -29,6 +29,17 @@
 	icon_state = "ore_glass"
 	origin_tech = list(TECH_MATERIAL = 1)
 	material = "sand"
+	slot_flags = SLOT_HOLSTER
+
+// POCKET SAND!
+/obj/item/weapon/ore/glass/throw_impact(atom/hit_atom)
+	..()
+	var/mob/living/carbon/human/H = hit_atom
+	if(istype(H) && H.has_eyes() && prob(85))
+		H << "<span class='danger'>Some of \the [src] gets in your eyes!</span>"
+		H.eye_blind += 5
+		H.eye_blurry += 10
+
 
 /obj/item/weapon/ore/phoron
 	name = "phoron crystals"
