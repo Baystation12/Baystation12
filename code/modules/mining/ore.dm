@@ -25,7 +25,7 @@
 	material = "carbon"
 
 /obj/item/weapon/ore/glass
-	name = "impure silicates"
+	name = "sand"
 	icon_state = "ore_glass"
 	origin_tech = list(TECH_MATERIAL = 1)
 	material = "sand"
