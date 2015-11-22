@@ -2037,30 +2037,9 @@
 	required_reagents = list("space_up" = 1, "bluecuracao" = 1, "melonliquor" = 1)
 	result_amount = 3
 
-/* Removed xenoarcheology stuff
-datum
-	chemical_reaction
-		lithiumsodiumtungstate	//LiNa2WO4, not the easiest chem to mix
-			name = "Lithium Sodium Tungstate"
-			id = "lithiumsodiumtungstate"
-			result = "lithiumsodiumtungstate"
-			required_reagents = list("lithium" = 1, "sodium" = 2, "tungsten" = 1, "acetone" = 4)
-			result_amount = 8
-
-		density_separated_liquid
-			name = "Density separated sample"
-			id = "density_separated_sample"
-			result = "density_separated_sample"
-			secondary_results = list("chemical_waste" = 1)
-			required_reagents = list("ground_rock" = 1, "lithiumsodiumtungstate" = 2)
-			result_amount = 2
-
-		analysis_liquid
-			name = "Analysis sample"
-			id = "analysis_sample"
-			result = "analysis_sample"
-			secondary_results = list("chemical_waste" = 1)
-			required_reagents = list("density_separated_sample" = 5)
-			result_amount = 4
-			requires_heating = 1
-*/
+/datum/chemical_reaction/luminol
+	name = "Luminol"
+	id = "luminol"
+	result = "luminol"
+	required_reagents = list("hydrogen" = 2, "carbon" = 2, "ammonia" = 2)
+	result_amount = 6

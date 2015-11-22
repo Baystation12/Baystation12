@@ -71,7 +71,7 @@
 		icon_state = "raglit"
 	else
 		icon_state = "rag"
-	
+
 	var/obj/item/weapon/reagent_containers/food/drinks/bottle/B = loc
 	if(istype(B))
 		B.update_icon()
@@ -83,7 +83,7 @@
 	if(reagents.total_volume)
 		var/target_text = trans_dest? "\the [trans_dest]" : "\the [user.loc]"
 		user.visible_message("<span class='danger'>\The [user] begins to wring out [src] over [target_text].</span>", "<span class='notice'>You begin to wring out [src] over [target_text].</span>")
-		
+
 		if(do_after(user, reagents.total_volume*5)) //50 for a fully soaked rag
 			if(trans_dest)
 				reagents.trans_to(trans_dest, reagents.total_volume)
@@ -114,29 +114,29 @@
 			if(user.zone_sel.selecting == "mouth")
 				user.do_attack_animation(src)
 				user.visible_message(
-					"<span class='danger'>\The [user] smothers [target] with [src]!</span>", 
-					"<span class='warning'>You smother [target] with [src]!</span>", 
+					"<span class='danger'>\The [user] smothers [target] with [src]!</span>",
+					"<span class='warning'>You smother [target] with [src]!</span>",
 					"You hear some struggling and muffled cries of surprise"
 					)
-				
+
 				//it's inhaled, so... maybe CHEM_BLOOD doesn't make a whole lot of sense but it's the best we can do for now
 				reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
 				update_name()
 			else
 				wipe_down(target, user)
 		return
-	
+
 	return ..()
-	
+
 /obj/item/weapon/reagent_containers/glass/rag/afterattack(atom/A as obj|turf|area, mob/user as mob, proximity)
-	if(!proximity) 
+	if(!proximity)
 		return
 
 	if(istype(A, /obj/structure/reagent_dispensers))
 		if(!reagents.get_free_space())
 			user << "<span class='warning'>\The [src] is already soaked.</span>"
 			return
-		
+
 		if(A.reagents && A.reagents.trans_to_obj(src, reagents.maximum_volume))
 			user.visible_message("<span class='notice'>\The [user] soaks [src] using [A].</span>", "<span class='notice'>You soak [src] using [A].</span>")
 			update_name()
@@ -167,7 +167,7 @@
 		return
 	if(!can_ignite())
 		return
-	
+
 	//also copied from matches
 	if(reagents.get_reagent_amount("phoron")) // the phoron explodes when exposed to fire
 		visible_message("<span class='danger'>\The [src] conflagrates violently!</span>")
@@ -176,7 +176,7 @@
 		e.start()
 		qdel(src)
 		return
-	
+
 	processing_objects += src
 	set_light(2, null, "#E38F46")
 	on_fire = 1
@@ -187,7 +187,7 @@
 	processing_objects -= src
 	set_light(0)
 	on_fire = 0
-	
+
 	//rags sitting around with 1 second of burn time left is dumb.
 	//ensures players always have a few seconds of burn time left when they light their rag
 	if(burn_time <= 5)
@@ -209,7 +209,7 @@
 	var/turf/location = get_turf(src)
 	if(location)
 		location.hotspot_expose(700, 5)
-	
+
 	if(burn_time <= 0)
 		processing_objects -= src
 		new /obj/effect/decal/cleanable/ash(location)
