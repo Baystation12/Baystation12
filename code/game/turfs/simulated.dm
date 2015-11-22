@@ -14,6 +14,11 @@
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
 	var/dirt = 0
 
+/turf/simulated/clean_blood()
+	for(var/obj/effect/decal/cleanable/blood/B in contents)
+		B.fluorescent = 0
+		B.invisibility = 100
+
 /turf/simulated/New()
 	..()
 	if(istype(loc, /area/chapel))
