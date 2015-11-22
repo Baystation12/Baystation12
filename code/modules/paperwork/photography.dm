@@ -214,7 +214,6 @@ var/global/photo_count = 0
 	var/x_c = target.x - (size-1)/2
 	var/y_c = target.y + (size-1)/2
 	var/z_c	= target.z
-	var/list/turfs = list()
 	var/mobs = ""
 	for(var/i = 1; i <= size; i++)
 		for(var/j = 1; j <= size; j++)
@@ -225,10 +224,10 @@ var/global/photo_count = 0
 		y_c--
 		x_c = x_c - size
 
-	var/obj/item/weapon/photo/p = createpicture(target, user, turfs, mobs, flag)
+	var/obj/item/weapon/photo/p = createpicture(target, user, mobs, flag)
 	printpicture(user, p)
 
-/obj/item/device/camera/proc/createpicture(atom/target, mob/user, list/turfs, mobs, flag)
+/obj/item/device/camera/proc/createpicture(atom/target, mob/user, mobs, flag)
 	var/x_c = target.x - (size-1)/2
 	var/y_c = target.y - (size-1)/2
 	var/z_c	= target.z
