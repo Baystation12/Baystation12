@@ -2,6 +2,11 @@
 	var/last_light_count = 0
 	var/last_overlay_count = 0
 
+/datum/controller/process/lighting/setup()
+	name = "lighting"
+	schedule_interval = LIGHTING_INTERVAL
+	create_lighting_overlays()
+
 /datum/controller/process/lighting/doWork()
 	var/list/lighting_update_lights_old = lighting_update_lights //We use a different list so any additions to the update lists during a delay from SCHECK don't cause things to be cut from the list without being updated.
 	last_light_count = lighting_update_lights.len
