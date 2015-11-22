@@ -49,6 +49,7 @@
 #include "code\_helpers\mobs.dm"
 #include "code\_helpers\names.dm"
 #include "code\_helpers\sanitize_values.dm"
+#include "code\_helpers\spawn_sync.dm"
 #include "code\_helpers\text.dm"
 #include "code\_helpers\time.dm"
 #include "code\_helpers\turfs.dm"
