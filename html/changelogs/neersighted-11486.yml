@@ -1,5 +1,0 @@
-author: neersighted
-delete-after: True
-changes: 
-  - bugfix: "Laptop Vendors now accept ID Containers (PDA, Wallet, etc)."
-  - bugfix: "Personal Lockers now accept ID Containers (PDA, Wallet, etc)."
