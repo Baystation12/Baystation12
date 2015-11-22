@@ -51,7 +51,7 @@
 	investigate_log("<font color='red'>deleted</font> at ([x],[y],[z])","singulo")
 	qdel(wifi_receiver)
 	wifi_receiver = null
-	..()
+	return ..()
 
 /obj/machinery/power/emitter/update_icon()
 	if (active && powernet && avail(active_power_usage))

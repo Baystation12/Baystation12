@@ -5,6 +5,7 @@
 	desc = "A remote control switch for something."
 	var/id = null
 	var/active = 0
+	var/operating = 0
 	anchored = 1.0
 	use_power = 1
 	idle_power_usage = 2
@@ -31,10 +32,13 @@
 
 /obj/machinery/button/attack_hand(mob/living/user)
 	..()
+	activate(user)
 
-	if(!wifi_sender)
+/obj/machinery/button/proc/activate(mob/living/user)
+	if(operating || !wifi_sender)
 		return
 
+	operating = 1
 	use_power(5)
 
 	if(_wifi_toggle)
@@ -51,6 +55,7 @@
 		sleep(10)
 		active = 0
 		update_icon()
+	operating = 0
 
 /obj/machinery/button/update_icon()
 	if(active)
@@ -58,10 +63,54 @@
 	else
 		icon_state = "launcherbtt"
 
-/obj/machinery/button/toggle
+/obj/machinery/button/alternate
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light0"
-	_wifi_toggle = 1
 
-/obj/machinery/button/toggle/update_icon()
+/obj/machinery/button/alternate/update_icon()
 	icon_state = "light[active]"
+
+//-------------------------------
+// Mass Driver Button
+//  Passes the activate call to a mass driver wifi sender
+//-------------------------------
+/obj/machinery/button/mass_driver
+	var/datum/wifi/sender/mass_driver/sender
+
+/obj/machinery/button/mass_driver/initialize()
+	..()
+	sender = new(_wifi_id, src)
+
+/obj/machinery/button/mass_driver/activate(mob/living/user)
+	if(active || !wifi_sender)
+		return
+	use_power(5)
+	active = 1
+	update_icon()
+	sender.cycle()
+	active = 0
+	update_icon()
+
+//-------------------------------
+// Door Button
+//-------------------------------
+/obj/machinery/button/door
+	var/datum/wifi/sender/door/sender
+
+/obj/machinery/button/door/initialize()
+	..()
+	sender = new(_wifi_id, src)
+
+/obj/machinery/button/door/activate(mob/living/user)
+	if(operating || !wifi_sender)
+		return
+
+	operating = 1
+	use_power(5)
+	active = !active
+	update_icon()
+	if(!active)
+		sender.open()
+	else
+		sender.close()
+	operating = 0
