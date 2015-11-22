@@ -9,6 +9,7 @@
 	universal_understand = 1
 	universal_speak = 0      // Dionaea do not need to speak to people other than other dionaea.
 	holder_type = /obj/item/weapon/holder/diona
+	possession_candidate = 1
 	var/obj/item/hat
 
 /mob/living/carbon/alien/diona/New()
