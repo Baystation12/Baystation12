@@ -36,6 +36,7 @@ var/list/mob_hat_cache = list()
 	req_access = list(access_engine, access_robotics)
 	integrated_light_power = 3
 	local_transmit = 1
+	possession_candidate = 1
 
 	mob_bump_flag = SIMPLE_ANIMAL
 	mob_swap_flags = SIMPLE_ANIMAL
@@ -56,6 +57,31 @@ var/list/mob_hat_cache = list()
 	var/hat_y_offset = -13
 
 	holder_type = /obj/item/weapon/holder/drone
+
+/mob/living/silicon/robot/drone/can_be_possessed_by(var/mob/dead/observer/possessor)
+	if(!istype(possessor))
+		return 0
+	if(!config.allow_drone_spawn)
+		src << "<span class='danger'>Playing as drones is not currently permitted.</span>"
+		return 0
+	if(jobban_isbanned(possessor,"Cyborg"))
+		usr << "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>"
+		return 0
+	if(!possessor.MayRespawn(1,DRONE_SPAWN_DELAY))
+		return 0
+	return 1
+
+/mob/living/silicon/robot/drone/do_possession(var/mob/dead/observer/possessor)
+	if(!(istype(possessor) && possessor.ckey))
+		return 0
+	if(src.ckey || src.client)
+		possessor << "<span class='warning'>\The [src] already has a player.</span>"
+		return 0
+	message_admins("<span class='adminnotice'>[key_name_admin(possessor)] has taken control of \the [src].</span>")
+	log_admin("[key_name(possessor)] took control of \the [src].")
+	transfer_personality(possessor.client)
+	qdel(possessor)
+	return 1
 
 /mob/living/silicon/robot/drone/Destroy()
 	if(hat)
