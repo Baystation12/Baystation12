@@ -760,19 +760,17 @@ proc // Creates a single icon from a given /atom or /image.  Only the first argu
 						// Pull the default direction.
 						add = icon(I:icon, I:icon_state)
 			else // 'I' is an appearance object.
-				add = getFlatIcon(new/image(I), curdir, curicon, curstate, curblend)
+				if(istype(A,/obj/machinery/atmospherics) && I in A.underlays)
+					var/image/Im = I
+					add = getFlatIcon(new/image(I), Im.dir, curicon, curstate, curblend, 1)
+				else
+					add = getFlatIcon(new/image(I), curdir, curicon, curstate, curblend, always_use_defdir)
 
 			// Find the new dimensions of the flat icon to fit the added overlay
 			addX1 = min(flatX1, I:pixel_x+1)
 			addX2 = max(flatX2, I:pixel_x+add.Width())
 			addY1 = min(flatY1, I:pixel_y+1)
 			addY2 = max(flatY2, I:pixel_y+add.Height())
-
-			//Ratates overlay based on atom direction
-			if((I in A.overlays) || (I in A.underlays))
-				if(istype(A, /obj/machinery/atmospherics/pipe/manifold))
-					var/realdir = A.dir
-					add.Turn(dir2angle(realdir) - 180)
 
 			if(addX1!=flatX1 || addX2!=flatX2 || addY1!=flatY1 || addY2!=flatY2)
 				// Resize the flattened icon so the new icon fits
