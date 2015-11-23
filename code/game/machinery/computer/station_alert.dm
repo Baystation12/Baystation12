@@ -27,14 +27,14 @@
 	. = ..()
 	unregister()
 
-/obj/machinery/computer/station_alert/proc/register(var/datum/nano_module/alarm_monitor/monitor)
+/obj/machinery/computer/station_alert/proc/register_monitor(var/datum/nano_module/alarm_monitor/monitor)
 	if(monitor.host != src)
 		return
 
 	alarm_monitor = monitor
 	alarm_monitor.register(src, /obj/machinery/computer/station_alert/update_icon)
 
-/obj/machinery/computer/station_alert/proc/unregister()
+/obj/machinery/computer/station_alert/proc/unregister_monitor()
 	if(alarm_monitor)
 		alarm_monitor.unregister(src)
 		qdel(alarm_monitor)

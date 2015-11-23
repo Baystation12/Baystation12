@@ -32,8 +32,19 @@
 
 /obj/item/device/multitool/proc/set_buffer(var/atom/buffer)
 	if(!buffer || istype(buffer))
-		buffer_object = buffer
 		buffer_name = buffer ? buffer.name : null
+		if(buffer != buffer_object)
+			if(buffer_object)
+				buffer_object.unregister(OBSERVER_EVENT_DESTROY, src)
+			buffer_object = buffer
+			if(buffer_object)
+				buffer_object.register(OBSERVER_EVENT_DESTROY, src, /obj/item/device/multitool/proc/on_buffer_destroyed)
+
+/obj/item/device/multitool/proc/on_buffer_destroyed(var/atom/destroyed_buffer)
+	// Only remove the buffered object, don't reset the name
+	// This means one cannot know if the buffer has been destroyed until one attempts to use it.
+	if(destroyed_buffer == buffer_object)
+		buffer_object = null
 
 /obj/item/device/multitool/resolve_attackby(atom/A, mob/user)
 	if(!isobj(A))

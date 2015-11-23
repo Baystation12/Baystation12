@@ -10,14 +10,14 @@
 
 /obj/item/weapon/circuitboard/stationalert/construct(var/obj/machinery/computer/station_alert/SA)
 	if(..(SA))
-		SA.unregister()
+		SA.unregister_monitor()
 
 		var/datum/nano_module/alarm_monitor/monitor = new(SA)
 		monitor.alarm_handlers.Cut()
 		for(var/alarm_handler in alarm_handlers)
 			monitor.alarm_handlers += alarm_handler
 
-		SA.register(monitor)
+		SA.register_monitor(monitor)
 		return 1
 
 /obj/item/weapon/circuitboard/stationalert/deconstruct(var/obj/machinery/computer/station_alert/SA)

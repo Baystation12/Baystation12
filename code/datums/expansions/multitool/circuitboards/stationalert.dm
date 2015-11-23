@@ -1,6 +1,6 @@
 /datum/expansion/multitool/circuitboards/stationalert/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)
 	var/obj/item/weapon/circuitboard/stationalert/SA = holder
-	. += "<b>Alarm Sources<b><br>"
+	. += "<b>Alarm Sources</b><br>"
 	. += "<table>"
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
 		. += "<tr>"
