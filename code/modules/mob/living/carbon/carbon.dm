@@ -318,9 +318,7 @@
 			H.germ_level = 0
 	update_icons()	//apply the now updated overlays to the mob
 
-
 //Throwing stuff
-
 /mob/proc/throw_item(atom/target)
 	return
 

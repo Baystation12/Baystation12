@@ -6,12 +6,14 @@
 	var/list/fingerprintshidden
 	var/fingerprintslast = null
 	var/list/blood_DNA
+	var/was_bloodied
 	var/blood_color
 	var/last_bumped = 0
 	var/pass_flags = 0
 	var/throwpass = 0
 	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
 	var/simulated = 1 //filter for actions - used by lighting overlays
+	var/fluorescent // Shows up under a UV light.
 
 	///Chemistry.
 	var/datum/reagents/reagents = null
@@ -22,6 +24,9 @@
 
 	//Detective Work, used for the duplicate data points kept in the scanners
 	var/list/original_atom
+
+/atom/proc/reveal_blood()
+	return
 
 /atom/proc/assume_air(datum/gas_mixture/giver)
 	return null
@@ -304,7 +309,7 @@ its easier to just keep the beam vertical.
 			fingerprints = list()
 
 		//Hash this shit.
-		var/full_print = md5(H.dna.uni_identity)
+		var/full_print = H.get_full_print()
 
 		// Add the fingerprints
 		//
@@ -387,6 +392,7 @@ its easier to just keep the beam vertical.
 	if(!blood_DNA || !istype(blood_DNA, /list))	//if our list of DNA doesn't exist yet (or isn't a list) initialise it.
 		blood_DNA = list()
 
+	was_bloodied = 1
 	blood_color = "#A10808"
 	if(istype(M))
 		if (!istype(M.dna, /datum/dna))
@@ -406,10 +412,10 @@ its easier to just keep the beam vertical.
 		if(toxvomit)
 			this.icon_state = "vomittox_[pick(1,4)]"
 
-
 /atom/proc/clean_blood()
 	if(!simulated)
 		return
+	fluorescent = 0
 	src.germ_level = 0
 	if(istype(blood_DNA, /list))
 		blood_DNA = null
