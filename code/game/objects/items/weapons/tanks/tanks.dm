@@ -1,9 +1,17 @@
 #define TANK_MAX_RELEASE_PRESSURE (3*ONE_ATMOSPHERE)
 #define TANK_DEFAULT_RELEASE_PRESSURE 24
+#define TANK_IDEAL_PRESSURE 1015 //Arbitrary.
+
+var/list/global/tank_gauge_cache = list()
 
 /obj/item/weapon/tank
 	name = "tank"
 	icon = 'icons/obj/tank.dmi'
+
+	var/gauge_icon = "indicator_tank"
+	var/last_gauge_pressure
+	var/gauge_cap = 6
+
 	flags = CONDUCT
 	slot_flags = SLOT_BACK
 	w_class = 3
@@ -31,8 +39,8 @@
 	src.air_contents = new /datum/gas_mixture()
 	src.air_contents.volume = volume //liters
 	src.air_contents.temperature = T20C
-
 	processing_objects.Add(src)
+	update_gauge()
 	return
 
 /obj/item/weapon/tank/Destroy()
@@ -220,8 +228,28 @@
 /obj/item/weapon/tank/process()
 	//Allow for reactions
 	air_contents.react() //cooking up air tanks - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
+	if(gauge_icon)
+		update_gauge()
 	check_status()
 
+/obj/item/weapon/tank/proc/update_gauge()
+	var/gauge_pressure = 0
+	if(air_contents)
+		gauge_pressure = air_contents.return_pressure()
+		if(gauge_pressure > TANK_IDEAL_PRESSURE)
+			gauge_pressure = -1
+		else
+			gauge_pressure = round((gauge_pressure/TANK_IDEAL_PRESSURE)*gauge_cap)
+
+	if(gauge_pressure == last_gauge_pressure)
+		return
+
+	last_gauge_pressure = gauge_pressure
+	overlays.Cut()
+	var/indicator = "[gauge_icon][(gauge_pressure == -1) ? "overload" : gauge_pressure]"
+	if(!tank_gauge_cache[indicator])
+		tank_gauge_cache[indicator] = image(icon, indicator)
+	overlays += tank_gauge_cache[indicator]
 
 /obj/item/weapon/tank/proc/check_status()
 	//Handle exploding, leaking, and rupturing of the tank

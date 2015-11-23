@@ -38,8 +38,6 @@
 	//stuff in the stomach
 	handle_stomach()
 
-	update_gravity(mob_has_gravity())
-
 	update_pulling()
 
 	for(var/obj/item/weapon/grab/G in src)
