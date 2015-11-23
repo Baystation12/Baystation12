@@ -1,5 +1,5 @@
 /obj/item/weapon/pack/cardemon
-	name = "cardemon booster pack"
+	name = "\improper Cardemon booster pack"
 	desc = "Finally! A children's card game in space!"
 	icon_state = "card_pack_cardemon"
 

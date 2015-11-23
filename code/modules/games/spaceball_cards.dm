@@ -1,5 +1,5 @@
 /obj/item/weapon/pack/spaceball
-	name = "spaceball booster pack"
+	name = "\improper Spaceball booster pack"
 	desc = "Officially licensed to take your money."
 	icon_state = "card_pack_spaceball"
 

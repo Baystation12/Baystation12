@@ -1135,13 +1135,13 @@ var/global/list/gear_datums = list()
 	cost = 1
 
 /datum/gear/cardemon_pack
-	display_name = "Cardemon booster pack"
+	display_name = "\improper Cardemon booster pack"
 	path = /obj/item/weapon/pack/cardemon
 	sort_category = "misc"
 	cost = 1
 
 /datum/gear/spaceball_pack
-	display_name = "Spaceball booster pack"
+	display_name = "\improper Spaceball booster pack"
 	path = /obj/item/weapon/pack/spaceball
 	sort_category = "misc"
 	cost = 1

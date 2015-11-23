@@ -755,7 +755,7 @@ CIRCUITS BELOW
 	id = "oriontrail"
 	req_tech = list(TECH_DATA = 1)
 	build_path = /obj/item/weapon/circuitboard/arcade/orion_trail
-	sort_string = "MAAAA"
+	sort_string = "MABAA"
 
 /datum/design/circuit/seccamera
 	name = "security camera monitor"

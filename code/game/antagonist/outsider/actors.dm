@@ -46,7 +46,7 @@ var/datum/antagonist/actor/actor
 	set desc = "Join as an Actor to entertain the crew through television!"
 
 	if(!MayRespawn(1))
-		usr << "<span class='warning'>You cannot respawn as an actor at this time.</span>"
+		return
 
 
 	if(istype(usr,/mob/dead/observer) || istype(usr,/mob/new_player))

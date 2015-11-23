@@ -169,7 +169,7 @@
 	deal_at(usr, over)
 
 /obj/item/weapon/pack/
-	name = "Card Pack"
+	name = "card pack"
 	desc = "For those with disposible income."
 
 	icon_state = "card_pack"
