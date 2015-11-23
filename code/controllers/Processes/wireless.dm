@@ -1,3 +1,15 @@
+//-------------------------------
+/*
+	Wireless controller
+
+	Used for connecting devices to each other (i.e. machinery, doors, emitters, etc.)
+	Unlike the radio controller, the wireless controller does not pass communications between devices. Once the devices 
+	have been connected they call each others procs directly, they do not use the wireless controller to communicate.
+
+	See code\modules\wireless\interfaces.dm for details of how to connect devices.
+*/
+//-------------------------------
+
 var/datum/controller/process/wireless/wirelessProcess
 
 /datum/controller/process/wireless
@@ -16,29 +28,41 @@ var/datum/controller/process/wireless/wirelessProcess
 	wirelessProcess = src
 
 /datum/controller/process/wireless/proc/add_device(var/datum/wifi/receiver/R)
-	receiver_list |= R
+	if(receiver_list)
+		receiver_list |= R
+	else
+		receiver_list = new()
+		receiver_list |= R
 
 /datum/controller/process/wireless/proc/remove_device(var/datum/wifi/receiver/R)
-	receiver_list -= R
+	if(receiver_list)
+		receiver_list -= R
 
 /datum/controller/process/wireless/proc/add_request(var/datum/connection_request/C)
-	pending_connections += C
+	if(pending_connections)
+		pending_connections += C
+	else
+		pending_connections = new()
+		pending_connections += C
 
 /datum/controller/process/wireless/doWork()
 	//process any pending connection requests
 	if(pending_connections.len > 0)
+		//any that fail are moved to the retry queue
 		process_queue(pending_connections, retry_connections)
-		return		//quit here so the retry connection attempt is delayed
+		//quit here so the retry connection attempt is delayed one cycle
+		return
 
-	//process any connection request waiting to be retried
+	//process any connection requests waiting to be retried
 	if(retry_connections.len > 0)
+		//any that fail are moved into the failed connections list
 		process_queue(retry_connections, failed_connections)
 
 /datum/controller/process/wireless/proc/process_queue(var/list/input_queue, var/list/output_queue)
 	for(var/datum/connection_request/C in input_queue)
 		var/target_found = 0
 		for(var/datum/wifi/receiver/R in receiver_list)
-			if(R.id == C.target)
+			if(R.id == C.id)
 				var/datum/wifi/sender/S = C.source
 				S.connect_device(R)
 				R.connect_device(S)

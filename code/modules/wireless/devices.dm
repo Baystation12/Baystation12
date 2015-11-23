@@ -1,16 +1,9 @@
 //-------------------------------
 // Doors
+//	Sender: sends an open/close request to all connected /door receivers. Utilises spawn_sync to trigger all doors to 
+//			open at approximately the same time. Waits until all doors have finished opening before returning.
+//	Receiver: will try to open/close the parent door when activate/deactivate is called.
 //-------------------------------
-/datum/wifi/receiver/button/door/activate()
-	var/obj/machinery/door/D = parent
-	if(istype(D) && D.can_open())
-		D.open()
-
-/datum/wifi/receiver/button/door/deactivate()
-	var/obj/machinery/door/D = parent
-	if(istype(D) && D.can_close())
-		D.close()
-
 /datum/wifi/sender/door/proc/open()
 	var/datum/spawn_sync/S = new()
 
@@ -45,15 +38,23 @@
 		sleep(1)
 	return
 
+/datum/wifi/receiver/button/door/activate()
+	var/obj/machinery/door/D = parent
+	if(istype(D) && D.can_open())
+		D.open()
+
+/datum/wifi/receiver/button/door/deactivate()
+	var/obj/machinery/door/D = parent
+	if(istype(D) && D.can_close())
+		D.close()
 
 //-------------------------------
 // Buttons
+//	Sender: intended to be used by buttons, when the button is pressed it will call activate() on all connected /button 
+//			receivers.
+//	Receiver: does whatever the subtype does. deactivate() by default calls activate(), so you will have to override in 
+//			  it in a subtype if you want it to do something.
 //-------------------------------
-/datum/wifi/receiver/button/proc/activate(mob/living/user)
-
-/datum/wifi/receiver/button/proc/deactivate(mob/living/user)
-	activate(user)		//override this if you want deactivate to actually do something
-
 /datum/wifi/sender/button/proc/activate(mob/living/user)
 	for(var/datum/wifi/receiver/button/B in connected_devices)
 		B.activate(user)
@@ -62,8 +63,14 @@
 	for(var/datum/wifi/receiver/button/B in connected_devices)
 		B.deactivate(user)
 
+/datum/wifi/receiver/button/proc/activate(mob/living/user)
+
+/datum/wifi/receiver/button/proc/deactivate(mob/living/user)
+	activate(user)		//override this if you want deactivate to actually do something
+
 //-------------------------------
 // Emitter
+// Activates/deactivates the parent emitter.
 //-------------------------------
 /datum/wifi/receiver/button/emitter/activate(mob/living/user)
 	..()
@@ -78,6 +85,7 @@
 
 //-------------------------------
 // Crematorium
+// Triggers cremate() on the parent /crematorium.
 //-------------------------------
 /datum/wifi/receiver/button/crematorium/activate(mob/living/user)
 	..()
@@ -87,6 +95,7 @@
 
 //-------------------------------
 // Mounted Flash
+// Triggers flash() on the parent /flasher.
 //-------------------------------
 /datum/wifi/receiver/button/flasher/activate(mob/living/user)
 	..()
@@ -96,6 +105,7 @@
 
 //-------------------------------
 // Holosign
+// Turns the parent /holosign on/off.
 //-------------------------------
 /datum/wifi/receiver/button/holosign/activate(mob/living/user)
 	..()
@@ -110,6 +120,7 @@
 
 //-------------------------------
 // Igniter
+// Turns the parent /igniter on/off.
 //-------------------------------
 /datum/wifi/receiver/button/igniter/activate(mob/living/user)
 	..()
@@ -126,6 +137,7 @@
 
 //-------------------------------
 // Sparker
+// Triggers the parent /sparker to ignite().
 //-------------------------------
 /datum/wifi/receiver/button/sparker/activate(mob/living/user)
 	..()
@@ -134,16 +146,10 @@
 		S.ignite()
 
 //-------------------------------
-// Mass Driver Button
-//-------------------------------
-/datum/wifi/receiver/button/mass_driver/activate(mob/living/user)
-	..()
-	var/obj/machinery/mass_driver/M = parent
-	if(istype(M))
-		M.drive()
-
-//-------------------------------
-// Mass Driver Process
+// Mass Driver
+//	Sender: carries out a sequence of first opening all connected doors, then activating all connected mass drivers, 
+//			then closes all connected doors. It will wait before continuing the sequence after opening/closing the doors.
+//	Receiver: Triggers the parent mass dirver to activate.
 //-------------------------------
 /datum/wifi/sender/mass_driver/proc/cycle()
 	var/datum/spawn_sync/S = new()
@@ -187,3 +193,9 @@
 	while(S.check())
 		sleep(1)
 	return
+
+/datum/wifi/receiver/button/mass_driver/activate(mob/living/user)
+	..()
+	var/obj/machinery/mass_driver/M = parent
+	if(istype(M))
+		M.drive()

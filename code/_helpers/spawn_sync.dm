@@ -1,9 +1,10 @@
 //-------------------------------
-/* Spawn sync helper
+/* 
+	Spawn sync helper
  
-   Helps syncronize spawn()ing multiple processes in loops.
+	Helps syncronize spawn()ing multiple processes in loops.
  
-   Example for using this:
+	Example for using this:
 
 	//Create new spawn_sync datum
 	var/datum/spawn_sync/sync = new()
@@ -12,24 +13,27 @@
 		//Open a sync counter before a spawn call
 		sync.open()
 		spawn()
-			//Utilise try/catch keywords here so the code continues even if an error occurs
+			//Utilise try/catch keywords here so the code continues even if an error occurs.
 			try
 				//code to do stuff goes here
 				O.do_stuff()
 			catch
+				//code here under catch is optional
 
-			//Close the sync counter
+			//Close a sync counter
 			sync.close()
 
-	//Call sync.finalize() after the last spawn call to finalize the syncronize process
+	//Call sync.finalize() after the last spawn call to finalize the syncronize process.
 	sync.finalize()
 
-	//Create a while loop to check if the sync is complete yet, it will return true once all the spawn threads have completed
+	//Create a while loop to check if the sync is complete yet, it will return true once all the spawn threads have 
+	// completed.
 	while(sync.check())
-		//Add a sleep call to delay each check
+		//Add a sleep call to delay each check.
 		sleep(1)
 
-	//Once all the threads have closed, or the failsafe has triggered, the code will continue
+	//Once all the threads have closed, or the failsafe has triggered, the code will continue. By default the failsafe 
+	// is aprox 10 seconds.
 */
 //-------------------------------
 /datum/spawn_sync

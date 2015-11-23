@@ -11,7 +11,7 @@
 	idle_power_usage = 2
 	active_power_usage = 4
 	var/_wifi_id
-	var/_wifi_toggle = 0
+	var/_wifi_toggle = 0		//set this to 1 if you want the button to have both an on and off state, not just fire a single command
 	var/datum/wifi/sender/button/wifi_sender
 
 /obj/machinery/button/initialize()
@@ -26,16 +26,17 @@
 	return..()
 
 /obj/machinery/button/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
+	return attack_hand(user)
 
-/obj/machinery/button/attackby(obj/item/weapon/W, mob/user as mob)	return src.attack_hand(user)
+/obj/machinery/button/attackby(obj/item/weapon/W, mob/user as mob)
+	return attack_hand(user)
 
 /obj/machinery/button/attack_hand(mob/living/user)
 	..()
 	activate(user)
 
 /obj/machinery/button/proc/activate(mob/living/user)
-	if(operating || !wifi_sender)
+	if(operating || !istype(wifi_sender))
 		return
 
 	operating = 1
@@ -63,6 +64,7 @@
 	else
 		icon_state = "launcherbtt"
 
+//alternate button with the same functionality, except has a lightswitch sprite instead
 /obj/machinery/button/alternate
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light0"
@@ -82,7 +84,7 @@
 	sender = new(_wifi_id, src)
 
 /obj/machinery/button/mass_driver/activate(mob/living/user)
-	if(active || !wifi_sender)
+	if(active || !istype(wifi_sender))
 		return
 	use_power(5)
 	active = 1
@@ -102,7 +104,7 @@
 	sender = new(_wifi_id, src)
 
 /obj/machinery/button/door/activate(mob/living/user)
-	if(operating || !wifi_sender)
+	if(operating || !istype(sender))
 		return
 
 	operating = 1
