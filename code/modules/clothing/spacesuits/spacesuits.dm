@@ -43,17 +43,19 @@
 	if(!camera && camera_networks)
 		camera = new /obj/machinery/camera(src)
 		camera.replace_networks(camera_networks)
-		camera.c_tag = usr.name
-		usr << "<span class='notice'>User scanned as [camera.c_tag]. Camera activated.</span>"
-		usr.update_action_buttons()
-	else if(camera)
-		qdel(camera)
-		camera = null
-		usr << "<span class='notice'>Camera deactivated.</span>"
+		camera.set_status(0)
+
+	if(camera)
+		camera.set_status(!camera.status)
+		if(camera.status)
+			camera.c_tag = usr.name
+			usr << "<span class='notice'>User scanned as [camera.c_tag]. Camera activated.</span>"
+		else
+			usr << "<span class='notice'>Camera deactivated.</span>"
 
 /obj/item/clothing/head/helmet/space/examine(var/mob/user)
 	if(..(user, 1) && camera_networks && camera_networks.len)
-		user << "This helmet has a built-in camera. It's [camera ? "" : "in"]active."
+		user << "This helmet has a built-in camera. It's [camera && camera.status ? "" : "in"]active."
 
 /obj/item/clothing/suit/space
 	name = "Space suit"
