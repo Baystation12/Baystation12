@@ -1,54 +1,4 @@
 //-------------------------------
-// Doors
-//	Sender: sends an open/close request to all connected /door receivers. Utilises spawn_sync to trigger all doors to 
-//			open at approximately the same time. Waits until all doors have finished opening before returning.
-//	Receiver: will try to open/close the parent door when activate/deactivate is called.
-//-------------------------------
-/datum/wifi/sender/door/proc/open()
-	var/datum/spawn_sync/S = new()
-
-	for(var/datum/wifi/receiver/button/door/D in connected_devices)
-		S.open()
-		spawn()
-			try
-				D.activate()
-			catch
-			
-			S.close()
-	S.finalize()
-
-	while(S.check())
-		sleep(1)
-	return
-
-/datum/wifi/sender/door/proc/close()
-	var/datum/spawn_sync/S = new()
-
-	for(var/datum/wifi/receiver/button/door/D in connected_devices)
-		S.open()
-		spawn()
-			try
-				D.deactivate()
-			catch
-			
-			S.close()
-	S.finalize()
-
-	while(S.check())
-		sleep(1)
-	return
-
-/datum/wifi/receiver/button/door/activate()
-	var/obj/machinery/door/D = parent
-	if(istype(D) && D.can_open())
-		D.open()
-
-/datum/wifi/receiver/button/door/deactivate()
-	var/obj/machinery/door/D = parent
-	if(istype(D) && D.can_close())
-		D.close()
-
-//-------------------------------
 // Buttons
 //	Sender: intended to be used by buttons, when the button is pressed it will call activate() on all connected /button 
 //			receivers.
@@ -67,6 +17,38 @@
 
 /datum/wifi/receiver/button/proc/deactivate(mob/living/user)
 	activate(user)		//override this if you want deactivate to actually do something
+
+//-------------------------------
+// Doors
+//	Sender: sends an open/close request to all connected /door receivers. Utilises spawn_sync to trigger all doors to 
+//			open at approximately the same time. Waits until all doors have finished opening before returning.
+//	Receiver: will try to open/close the parent door when activate/deactivate is called.
+//-------------------------------
+/datum/wifi/sender/door/proc/open()
+	var/datum/spawn_sync/S = new()
+
+	for(var/datum/wifi/receiver/button/door/D in connected_devices)
+		S.start_worker(D, "activate")
+	S.wait_until_done()
+	return
+
+/datum/wifi/sender/door/proc/close()
+	var/datum/spawn_sync/S = new()
+
+	for(var/datum/wifi/receiver/button/door/D in connected_devices)
+		S.start_worker(D, "deactivate")
+	S.wait_until_done()
+	return
+
+/datum/wifi/receiver/button/door/activate()
+	var/obj/machinery/door/D = parent
+	if(istype(D) && D.can_open())
+		D.open()
+
+/datum/wifi/receiver/button/door/deactivate()
+	var/obj/machinery/door/D = parent
+	if(istype(D) && D.can_close())
+		D.close()
 
 //-------------------------------
 // Emitter
@@ -156,42 +138,23 @@
 
 	//tell all doors to open
 	for(var/datum/wifi/receiver/button/door/D in connected_devices)
-		S.open()
-		spawn()
-			try
-				D.activate()
-			catch
-			
-			S.close()
-	S.finalize()
+		S.start_worker(D, "activate")
+	S.wait_until_done()
 
-	//wait until they have all opened to continue
-	while(S.check())
-		sleep(1)
-
+	S.reset()
 	//tell all mass drivers to launch
 	for(var/datum/wifi/receiver/button/mass_driver/M in connected_devices)
-		if(istype(M))
-			spawn()
-				M.activate()
+		spawn()
+			M.activate()
 
 	sleep(20)
 
 	//tell all doors to close
 	S.reset()
 	for(var/datum/wifi/receiver/button/door/D in connected_devices)
-		S.open()
-		spawn()
-			try
-				D.deactivate()
-			catch
+		S.start_worker(D, "deactivate")
+	S.wait_until_done()
 
-			S.close()
-	S.finalize()
-
-	//wait until they have all closed to continue
-	while(S.check())
-		sleep(1)
 	return
 
 /datum/wifi/receiver/button/mass_driver/activate(mob/living/user)

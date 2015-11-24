@@ -46,20 +46,18 @@ var/datum/controller/process/wireless/wirelessProcess
 		pending_connections += C
 
 /datum/controller/process/wireless/doWork()
-	//process any pending connection requests
-	if(pending_connections.len > 0)
-		//any that fail are moved to the retry queue
-		process_queue(pending_connections, retry_connections)
-		//quit here so the retry connection attempt is delayed one cycle
-		return
-
 	//process any connection requests waiting to be retried
 	if(retry_connections.len > 0)
 		//any that fail are moved into the failed connections list
 		process_queue(retry_connections, failed_connections)
 
-/datum/controller/process/wireless/proc/process_queue(var/list/input_queue, var/list/output_queue)
-	for(var/datum/connection_request/C in input_queue)
+	//process any pending connection requests
+	if(pending_connections.len > 0)
+		//any that fail are moved to the retry queue
+		process_queue(pending_connections, retry_connections)
+
+/datum/controller/process/wireless/proc/process_queue(var/list/process_conections, var/list/unsuccesful_connections)
+	for(var/datum/connection_request/C in process_conections)
 		var/target_found = 0
 		for(var/datum/wifi/receiver/R in receiver_list)
 			if(R.id == C.id)
@@ -67,7 +65,7 @@ var/datum/controller/process/wireless/wirelessProcess
 				S.connect_device(R)
 				R.connect_device(S)
 				target_found = 1
-		input_queue -= C
+		process_conections -= C
 		if(!target_found)
-			output_queue += C
+			unsuccesful_connections += C
 		SCHECK
