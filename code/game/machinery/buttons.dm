@@ -11,7 +11,6 @@
 	idle_power_usage = 2
 	active_power_usage = 4
 	var/_wifi_id
-	var/_wifi_toggle = 0		//set this to 1 if you want the button to have both an on and off state, not just fire a single command
 	var/datum/wifi/sender/button/wifi_sender
 
 /obj/machinery/button/initialize()
@@ -40,22 +39,13 @@
 		return
 
 	operating = 1
+	active = 1
 	use_power(5)
-
-	if(_wifi_toggle)
-		active = !active
-		if(active)
-			wifi_sender.activate(user)
-		else
-			wifi_sender.deactivate(user)
-		update_icon()
-	else
-		active = 1
-		update_icon()
-		wifi_sender.activate(user)
-		sleep(10)
-		active = 0
-		update_icon()
+	update_icon()
+	wifi_sender.activate(user)
+	sleep(10)
+	active = 0
+	update_icon()
 	operating = 0
 
 /obj/machinery/button/update_icon()
@@ -72,6 +62,29 @@
 /obj/machinery/button/alternate/update_icon()
 	icon_state = "light[active]"
 
+//Toggle button with two states (on and off) and calls seperate procs for each state
+/obj/machinery/button/toggle/activate(mob/living/user)
+	if(operating || !istype(wifi_sender))
+		return
+
+	operating = 1
+	active = !active
+	use_power(5)
+	if(active)
+		wifi_sender.activate(user)
+	else
+		wifi_sender.deactivate(user)
+	update_icon()
+	operating = 0
+
+/obj/machinery/button/toggle/alternate
+	icon = 'icons/obj/power.dmi'
+	icon_state = "light0"
+
+/obj/machinery/button/toggle/alternate/update_icon()
+	icon_state = "light[active]"
+
+
 //-------------------------------
 // Mass Driver Button
 //  Passes the activate call to a mass driver wifi sender
@@ -86,8 +99,8 @@
 /obj/machinery/button/mass_driver/activate(mob/living/user)
 	if(active || !istype(wifi_sender))
 		return
-	use_power(5)
 	active = 1
+	use_power(5)
 	update_icon()
 	sender.cycle()
 	active = 0
@@ -96,20 +109,20 @@
 //-------------------------------
 // Door Button
 //-------------------------------
-/obj/machinery/button/door
+/obj/machinery/button/toggle/door
 	var/datum/wifi/sender/door/sender
 
-/obj/machinery/button/door/initialize()
+/obj/machinery/button/toggle/door/initialize()
 	..()
 	sender = new(_wifi_id, src)
 
-/obj/machinery/button/door/activate(mob/living/user)
+/obj/machinery/button/toggle/door/activate(mob/living/user)
 	if(operating || !istype(sender))
 		return
 
 	operating = 1
-	use_power(5)
 	active = !active
+	use_power(5)
 	update_icon()
 	if(!active)
 		sender.open()

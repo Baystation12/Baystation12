@@ -18,17 +18,12 @@
 	sync.wait_until_done()
 
 	//Once all the workers have completed, or the failsafe has triggered, the code will continue. By default the 
-	// failsafe is 10 seconds.
+	// failsafe is roughly 10 seconds (100 checks).
 */
 //-------------------------------
 /datum/spawn_sync
 	var/count = 1
-	var/safety = 10		//how many seconds before the failsafe triggers and the helper stops waiting
-	var/timer
-
-/datum/spawn_sync/New(var/failsafe = 10)
-	..()
-	safety = failsafe
+	var/failsafe = 100		//how many checks before the failsafe triggers and the helper stops waiting
 
 //Opens a thread counter
 /datum/spawn_sync/proc/open()
@@ -41,13 +36,12 @@
 //Finalizes the spawn sync by removing the original starting count
 /datum/spawn_sync/proc/finalize()
 	close()
-	timer = TimeOfHour + safety * 10
 
 //Resets the counter if you want to utilize the same datum multiple times
-// Optional: pass the number of seconds you want for the failsafe
-/datum/spawn_sync/proc/reset(var/failsafe = 10)
+// Optional: pass the number of checks you want for the failsafe
+/datum/spawn_sync/proc/reset(var/safety = 100)
 	count = 1
-	safety = failsafe
+	failsafe = safety
 
 //Check if all threads have returned
 // Returns 0 if not all threads have completed
@@ -58,12 +52,13 @@
 
 //Failsafe in case something breaks horribly
 /datum/spawn_sync/proc/safety_check()
-	if(TimeOfHour > timer)
+	failsafe--
+	if(failsafe < 1)
 		count = 0
 
-//Set failsafe check count in case you need more time
-/datum/spawn_sync/proc/set_failsafe(var/failsafe)
-	safety = failsafe
+//Set failsafe check count in case you need more time for the workers to return
+/datum/spawn_sync/proc/set_failsafe(var/safety)
+	failsafe = safety
 
 /datum/spawn_sync/proc/start_worker()
 	//Extract the thread run proc and it's arguments from the variadic args list.
@@ -85,7 +80,7 @@
 	finalize()
 
 	//Create a while loop to check if the sync is complete yet, it will return once all the spawn threads have 
-	// completed, or the failsafe timeout has expired.
+	// completed, or the failsafe has expired.
 	while(check())
 		//Add a sleep call to delay each check.
 		sleep(1)

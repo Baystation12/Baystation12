@@ -108,19 +108,3 @@
 	if(istype(sender))
 		source = sender
 		id = receiver
-
-//-------------------------------
-// Wireless tool (temp)
-//-------------------------------
-/*
-/obj/item/device/wireless_tool
-	name = "wireless tool"
-	desc = "Used for connecting machinery to controls for remote operation."
-	icon_state = "wirelesstool_off"
-
-/obj/item/device/wireless_tool/attack_self()
-	if(icon_state == "wirelesstool_off")
-		icon_state = "wirelesstool_on"
-	else
-		icon_state = "wirelesstool_off"
-*/
