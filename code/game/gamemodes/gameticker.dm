@@ -11,6 +11,7 @@ var/global/datum/controller/gameticker/ticker
 	var/event = 0
 
 	var/login_music			// music played in pregame lobby
+	var/closing_music 		// music played in closing credits
 
 	var/list/datum/mind/minds = list()//The people in the game. Used for objective tracking.
 
@@ -33,17 +34,44 @@ var/global/datum/controller/gameticker/ticker
 
 	var/round_end_announced = 0 // Spam Prevention. Announce round end only once.
 
+	var/list/lobby_music = list('sound/music/space.ogg' = "Solus - Endless Space Expanded",\
+								'sound/music/traitor.ogg' = "traitor.ogg",\
+								'sound/music/title2.ogg' = "level3.mod",\
+								'sound/music/space_oddity.ogg' = "Chris Hadfield - Space Oddity",\
+								'sound/music/Alien Swarm - Syntek Residential.ogg' = "Alien Swarm - Syntek Residential",\
+								'sound/music/Civ3 - Stars Full.ogg' = "Civ3 - Stars Full",\
+								'sound/music/Betamaster - Little swedish girl.ogg' = "Betamaster - Little swedish girl",\
+								'sound/music/Digital Insanity - Unreal Superhero.ogg' = "Digital Insanity - Unreal Superhero",\
+								'sound/music/Kelly_Bailey_-_Drums_And_Riffs.ogg' = "Kelly Bailey - Drums And Riffs",\
+								'sound/music/M83_-_Midnight_city_minus.ogg' = "M83 - Midnight city minus",\
+								'sound/music/Ryan Ike - Security, Circuitry and You.ogg' = "Ryan Ike - Security, Circuitry and You",\
+								'sound/music/Space Rangers2 - Fei 1.ogg' = "Space Rangers2 - Fei",\
+								'sound/music/Syrsa - Yonk.ogg' = "Syrsa - Yonk",\
+								'sound/music/The_Clouds_Will_Clear_-_The_Storm_Will_Pass.ogg' = "The Clouds Will Clear - The Storm Will Pass",\
+								'sound/music/Variations on a Space Station.ogg' = "Variations on a Space Station",\
+								'sound/music/Waterflame - Waiting Room.ogg' = "Waterflame - Waiting Room" )
+
+	var/list/ending_music = list('sound/music/space.ogg' = "Solus - Endless Space Expanded",\
+								'sound/music/traitor.ogg' = "traitor.ogg",\
+								'sound/music/title2.ogg' = "level3.mod",\
+								'sound/music/space_oddity.ogg' = "Chris Hadfield - Space Oddity",\
+								'sound/music/Alien Swarm - Syntek Residential.ogg' = "Alien Swarm - Syntek Residential",\
+								'sound/music/Chris Remo - Space Asshole.ogg' = "Chris Remo - Space Asshole",\
+								'sound/music/Civ3 - Stars Full.ogg' = "Civ3 - Stars Full",\
+								'sound/music/Betamaster - Little swedish girl.ogg' = "Betamaster - Little swedish girl",\
+								'sound/music/Digital Insanity - Unreal Superhero.ogg' = "Digital Insanity - Unreal Superhero",\
+								'sound/music/Kelly_Bailey_-_Drums_And_Riffs.ogg' = "Kelly Bailey - Drums And Riffs",\
+								'sound/music/M83_-_Midnight_city_minus.ogg' = "M83 - Midnight city minus",\
+								'sound/music/Ryan Ike - Security, Circuitry and You.ogg' = "Ryan Ike - Security, Circuitry and You",\
+								'sound/music/Space Rangers2 - Fei 1.ogg' = "Space Rangers2 - Fei",\
+								'sound/music/Syrsa - Yonk.ogg' = "Syrsa - Yonk",\
+								'sound/music/The_Clouds_Will_Clear_-_The_Storm_Will_Pass.ogg' = "The Clouds Will Clear - The Storm Will Pass",\
+								'sound/music/Variations on a Space Station.ogg' = "Variations on a Space Station",\
+								'sound/music/Waterflame - Waiting Room.ogg' = "Waterflame - Waiting Room" )
+
 /datum/controller/gameticker/proc/pregame()
-	login_music = pick(\
-	/*'sound/music/halloween/skeletons.ogg',\
-	'sound/music/halloween/halloween.ogg',\
-	'sound/music/halloween/ghosts.ogg'*/
-	'sound/music/space.ogg',\
-	'sound/music/traitor.ogg',\
-	'sound/music/title1.ogg',\
-	'sound/music/title2.ogg',\
-	'sound/music/clouds.s3m',\
-	'sound/music/space_oddity.ogg') //Ground Control to Major Tom, this song is cool, what's going on?
+	login_music = pick(lobby_music)
+	closing_music = pick(ending_music)
 	do
 		pregame_timeleft = 180
 		world << "<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>"
@@ -327,6 +355,11 @@ var/global/datum/controller/gameticker/ticker
 				declare_completion()
 
 			spawn(50)
+				for(var/mob/M in player_list)
+					if(!src || !closing_music) return
+					if(M.client && M.client.prefs.toggles & SOUND_LOBBY)
+						M << sound(closing_music, repeat = 0, wait = 0, volume = 85, channel = 1)
+				showcredits()
 				callHook("roundend")
 
 				if (mode.station_was_nuked)
