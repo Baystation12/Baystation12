@@ -190,15 +190,13 @@ tell_list = {}
 if CORE_DATA.DISABLE_ALL_NON_MANDATORY_SOCKET_CONNECTIONS:
    nudgeable = False
 try:
-   tiedosto = open("replacenames.cache","r")
-   replacenames = pickle.load(tiedosto)
-   tiedosto.close()
+   with open("replacenames.cache","r") as tiedosto:
+      replacenames = pickle.load(tiedosto)
    for i in replacenames.values():
       if len(i) > call_me_max_length:
          replacenames[replacenames.keys()[replacenames.values().index(i)]] = i[:call_me_max_length]
-         tiedosto = open("replacenames.cache","w")
-         pickle.dump(replacenames,tiedosto)
-         tiedosto.close()
+         with open("replacenames.cache","w") as tiedosto:
+            pickle.dump(replacenames,tiedosto)
       if "[\0x01]" in i.lower() or "[\\0x01]" in i.lower():
          i = i.replace("[\0x01]","")
          i = i.replace("[\0X01]","")
@@ -211,13 +209,12 @@ except EOFError: #Cache corrupt
    replacenames = {}
    print "replacenames.cache is corrupt and couldn't be loaded."
 try:
-   tiedosto = open("peopleheknows.cache","r")
-   peopleheknows = pickle.load(tiedosto)
-   tiedosto.close()
+   with open("peopleheknows.cache","r") as tiedosto:
+      peopleheknows = pickle.load(tiedosto)
 except IOError:
    peopleheknows = [[],[]]
-   tiedosto = open("peopleheknows.cache","w")
-   tiedosto.close()
+   with open("peopleheknows.cache","w") as tiedosto:
+      pass
 except EOFError:
    peopleheknows = [[],[]]
    print "peopleheknows.cache is corrupt and couldn't be loaded."
@@ -401,13 +398,12 @@ def target(who,how_long):
       if debug:
          print "Banned",who,"For",how_long,"seconds"
       if logbans:
-         tiedosto = open(targetdirectory+"banlog/"+str(int(start))+"-"+str(int(end))+".txt","w")
-         tiedosto.write("Start of ban on "+who+":"+str(int(start)))
-         tiedosto.write("\n")
-         tiedosto.write("End of ban on "+who+":"+str(int(end)))
-         tiedosto.write("\n")
-         tiedosto.write("In total:"+str(int(end-start))+"Seconds")
-         tiedosto.close()
+         with open(targetdirectory+"banlog/"+str(int(start))+"-"+str(int(end))+".txt","w") as tiedosto:
+            tiedosto.write("Start of ban on "+who+":"+str(int(start)))
+            tiedosto.write("\n")
+            tiedosto.write("End of ban on "+who+":"+str(int(end)))
+            tiedosto.write("\n")
+            tiedosto.write("In total:"+str(int(end-start))+"Seconds")
    else:
       CALL_OFF = False
       pass
