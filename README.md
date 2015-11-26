@@ -1,7 +1,6 @@
-# Halo: Space Station Evloved
+# Halo: Space Station Evolved
 
-[Website](http://projectunsc.com/) - [Code](https://github.com/HaloSpaceStation/HaloSpaceStation13) - [IRC](http://baystation12.net/forums/viewtopic.php?f=12&t=5088)
-
+[Website](http://projectunsc.com/) - [Code](https://github.com/HaloSpaceStation/HaloSpaceStation13) - 
 ---
 
 ### LICENSE
