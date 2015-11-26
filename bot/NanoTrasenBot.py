@@ -35,10 +35,9 @@ except ImportError:
       try:
          tiedosto = open("psycodownload.txt","r")
       except:
-         tiedosto = open("psycodownload.txt","w")
-         tiedosto.write("http://www.voidspace.org.uk/python/modules.shtml#psyco")
-         tiedosto.write("\nhttp://psyco.sourceforge.net/download.html")
-         tiedosto.close()
+         with open("psycodownload.txt","w") as tiedosto:
+            tiedosto.write("http://www.voidspace.org.uk/python/modules.shtml#psyco")
+            tiedosto.write("\nhttp://psyco.sourceforge.net/download.html")
          print "Check psycodownload.txt for a link"
       else:
          print "For god's sake, open psycodownload.txt"
@@ -629,9 +628,8 @@ while True:
                      arg = influx.lower()[8+len(prefix):]
                      if debug:
                         print truesender+":"+prefix+"suggest "+arg
-                     tiedosto = open(targetdirectory+"suggestions/suggestions_"+str(int(time.time()))+".txt","a")
-                     tiedosto.write(arg)
-                     tiedosto.close()
+                     with open(targetdirectory+"suggestions/suggestions_"+str(int(time.time()))+".txt","a") as tiedosto:
+                        tiedosto.write(arg)
                      conn.privmsg(targetchannel,"Suggestion received")
             elif cocheck( prefix+"help "): #Space in front of the ( to make sure that my command finder does not pick this up.
                arg = " ".join(influx.split(" ")[1:]).lower()
