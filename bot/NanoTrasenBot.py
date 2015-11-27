@@ -341,16 +341,14 @@ if aggressive_pinging:
       self_time = 0
       global backup,disconnects,conn
       while disconnects < 5:
-         if backup > self_time:
-            if time.time()-backup > delay:
-               conn.send("PONG "+pongtarg)
-               print "Ponged"
-               self_time = time.time()
-         else:
-            if time.time()-self_time > delay:
-               conn.send("PONG "+pongtarg)
-               print "Ponged"
-               self_time = time.time()
+         if backup > self_time and time.time()-backup > delay:
+            conn.send("PONG "+pongtarg)
+            print "Ponged"
+            self_time = time.time()
+         elif time.time()-self_time > delay:
+            conn.send("PONG "+pongtarg)
+            print "Ponged"
+            self_time = time.time()
          time.sleep(refresh)
    thread.start_new_thread(aggressive_ping,(aggressive_pinging_delay,aggressive_pinging_refresh,))
 def stop(sender,debug=1):
@@ -366,16 +364,15 @@ def stop(sender,debug=1):
          access_granted = True
       else:
          access_granted = False
-   if access_granted:
-      if debug:
-         print sender+":"+prefix+"stop"
-         if random.randint(0,100) == 50:
-            conn.privmsg(channel,"Hammertime!")
-         else:
-            conn.privmsg(channel,"Shutting down.")
-         disconnects = 99999
-         conn.quit()
-         return True
+   if access_granted and debug:
+      print sender+":"+prefix+"stop"
+      if random.randint(0,100) == 50:
+         conn.privmsg(channel,"Hammertime!")
+      else:
+         conn.privmsg(channel,"Shutting down.")
+      disconnects = 99999
+      conn.quit()
+      return True
    else:
       conn.privmsg(channel,"You cannot command me")
       return False
@@ -571,13 +568,12 @@ while True:
                time.sleep(6)
                Name = origname
                conn.nick(Name)
-            if origname in truesender:
-               if influx == prefix+"stop":
-                  time.sleep(0.5) #A small delay
-                  conn.privmsg(channel,"Shutting down.")
-                  conn.quit()
-                  disconnects = 99999
-                  break
+            if origname in truesender and influx == prefix+"stop":
+               time.sleep(0.5) #A small delay
+               conn.privmsg(channel,"Shutting down.")
+               conn.quit()
+               disconnects = 99999
+               break
             if len(translateable) > 0 and enabled == True:
                people = "-5|5|1-".join(users).lower()
                if truesender.lower() in translateable:
