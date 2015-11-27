@@ -123,6 +123,7 @@
 #include "code\controllers\voting.dm"
 #include "code\controllers\observer_listener\atom\observer.dm"
 #include "code\controllers\observer_listener\datum\observer.dm"
+#include "code\controllers\observer_listener\turf\observer.dm"
 #include "code\controllers\Processes\air.dm"
 #include "code\controllers\Processes\alarm.dm"
 #include "code\controllers\Processes\chemistry.dm"

@@ -11,7 +11,7 @@ var/global/list/turf/processing_turf_effects = list()
 			processing_turfs.Remove(T)
 		SCHECK
 
-	for(var/datum/turf_effects/TE in processing_turf_effects)
+	for(var/datum/turf_effect/TE in processing_turf_effects)
 		if(TE.process() == PROCESS_KILL)
 			processing_turf_effects.Remove(TE)
 		SCHECK

@@ -405,20 +405,6 @@ area/space/atmosalert()
 	icon_state = "cave"
 	sound_env = SMALL_ENCLOSED
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /area/planet/clown
 	name = "\improper Clown Planet"
 	icon_state = "honk"

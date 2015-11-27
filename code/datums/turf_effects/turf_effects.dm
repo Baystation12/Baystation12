@@ -12,6 +12,9 @@
 /datum/turf_effect/proc/exited(var/turf/source, var/atom/A)
 	return
 
+/datum/turf_effect/proc/update_icon(var/turf/source)
+	return
+
 /datum/turf_effect/proc/turf_destroyed(var/turf/source)
 	return
 
@@ -29,8 +32,6 @@
 	..()
 
 /turf/Destroy()
-	for(var/datum/turf_effect/TE in turf_effects)
-		TE.turf_destroyed(src)
 	turf_effects.Cut()
 	return ..()
 
@@ -47,7 +48,7 @@
 /turf/update/update_icon()
 	..()
 	for(var/datum/turf_effect/TE in turf_effects)
-		TE.update_turf(src)
+		TE.update_icon(src)
 
 /turf/proc/add_effect(var/datum/turf_effect/TE)
 	turf_effects += TE
