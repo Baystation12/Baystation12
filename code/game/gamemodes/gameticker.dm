@@ -115,7 +115,7 @@ var/global/datum/controller/gameticker/ticker
 				world << "<B>Possibilities:</B> [english_list(tmpmodes)]"
 	else
 		src.mode.announce()
-
+	ConfigureUniforms()
 	setup_economy()
 	current_state = GAME_STATE_PLAYING
 	create_characters() //Create player characters and transfer them

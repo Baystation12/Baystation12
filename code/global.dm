@@ -179,3 +179,7 @@ var/max_explosion_range = 14
 var/global/obj/item/device/radio/intercom/global_announcer = new(null)
 
 var/list/station_departments = list("Command", "Medical", "Engineering", "Science", "Security", "Cargo", "Civilian")
+
+//The selected security uniform for the game.
+var/obj/uniform
+var/obj/uniform_name = "Something bad has happened. You should not be seeing this."
