@@ -224,14 +224,11 @@
 	set name = "Split"
 	set desc = "Split your humanoid form into its constituent nymphs."
 	set category = "Abilities"
-	diona_split_into_nymphs(5)	// Separate proc to void argments being supplied when used as a verb
 
-/mob/living/carbon/human/proc/diona_split_into_nymphs(var/number_of_resulting_nymphs)
 	var/turf/T = get_turf(src)
 
 	var/mob/living/carbon/alien/diona/S = new(T)
 	S.set_dir(dir)
-	transfer_languages(src, S)
 	if(mind)
 		mind.transfer_to(S)
 
@@ -242,18 +239,20 @@
 
 	for(var/mob/living/carbon/alien/diona/D in src)
 		nymphs++
-		D.forceMove(T)
-		transfer_languages(src, D, WHITELISTED|RESTRICTED)
+		D.loc = T
 		D.set_dir(pick(NORTH, SOUTH, EAST, WEST))
 
-	if(nymphs < number_of_resulting_nymphs)
-		for(var/i in nymphs to (number_of_resulting_nymphs - 1))
+	if(nymphs < 5)
+		for(var/i in nymphs to 4)
 			var/mob/M = new /mob/living/carbon/alien/diona(T)
-			transfer_languages(src, M, WHITELISTED|RESTRICTED)
 			M.set_dir(pick(NORTH, SOUTH, EAST, WEST))
+
 
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 
 	visible_message("<span class='warning'>\The [src] quivers slightly, then splits apart with a wet slithering noise.</span>")
+
 	qdel(src)
+
+

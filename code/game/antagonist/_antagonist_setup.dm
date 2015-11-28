@@ -26,7 +26,6 @@
 #define ANTAG_RANDSPAWN         256 // Potentially randomly spawns due to events.
 #define ANTAG_VOTABLE           512 // Can be voted as an additional antagonist before roundstart.
 #define ANTAG_SET_APPEARANCE   1024 // Causes antagonists to use an appearance modifier on spawn.
-#define ANTAG_RANDOM_EXCEPTED  2048 // If a game mode randomly selects antag types, antag types with this flag should be excluded.
 
 // Globals.
 var/global/list/all_antag_types = list()

@@ -1,23 +1,23 @@
 /obj/item/clothing/head/helmet/space/rig/industrial
-	camera_networks = list(NETWORK_MINE)
+	camera_networks = list("Mine")
 
 /obj/item/clothing/head/helmet/space/rig/ce
-	camera_networks = list(NETWORK_ENGINEERING)
+	camera_networks = list("Engineering")
 
 /obj/item/clothing/head/helmet/space/rig/eva
 	light_overlay = "helmet_light_dual"
-	camera_networks = list(NETWORK_ENGINEERING)
+	camera_networks = list("Engineering")
 
 /obj/item/clothing/head/helmet/space/rig/hazmat
 	light_overlay = "hardhat_light"
-	camera_networks = list(NETWORK_RESEARCH)
+	camera_networks = list("Research")
 
 /obj/item/clothing/head/helmet/space/rig/medical
-	camera_networks = list(NETWORK_MEDICAL)
+	camera_networks = list("Medbay")
 
 /obj/item/clothing/head/helmet/space/rig/hazard
 	light_overlay = "helmet_light_dual"
-	camera_networks = list(NETWORK_SECURITY)
+	camera_networks = list("Security")
 
 /obj/item/weapon/rig/industrial
 	name = "industrial suit control module"
