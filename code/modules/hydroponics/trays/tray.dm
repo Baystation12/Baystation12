@@ -342,12 +342,15 @@
 	set category = "Object"
 	set src in view(1)
 
-	if(labelled)
-		usr << "You remove the label."
-		labelled = null
-		update_icon()
-	else
-		usr << "There is no label to remove."
+	if(!usr.canmove || usr.stat || usr.restrained())
+		return
+	if(ishuman(usr) || istype(usr, /mob/living/silicon/robot))
+		if(labelled)
+			usr << "You remove the label."
+			labelled = null
+			update_icon()
+		else
+			usr << "There is no label to remove."
 	return
 
 /obj/machinery/portable_atmospherics/hydroponics/verb/setlight()
@@ -355,10 +358,14 @@
 	set category = "Object"
 	set src in view(1)
 
-	var/new_light = input("Specify a light level.") as null|anything in list(0,1,2,3,4,5,6,7,8,9,10)
-	if(new_light)
-		tray_light = new_light
-		usr << "You set the tray to a light level of [tray_light] lumens."
+	if(!usr.canmove || usr.stat || usr.restrained())
+		return
+	if(ishuman(usr) || istype(usr, /mob/living/silicon/robot))
+		var/new_light = input("Specify a light level.") as null|anything in list(0,1,2,3,4,5,6,7,8,9,10)
+		if(new_light)
+			tray_light = new_light
+			usr << "You set the tray to a light level of [tray_light] lumens."
+	return
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/check_level_sanity()
 	//Make sure various values are sane.
@@ -611,12 +618,14 @@
 	set name = "Toggle Tray Lid"
 	set category = "Object"
 	set src in view(1)
-	close_lid(usr)
+	if(!usr.canmove || usr.stat || usr.restrained())
+		return
+	
+	if(ishuman(usr) || istype(usr, /mob/living/silicon/robot))
+		close_lid(usr)
+	return
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/close_lid(var/mob/living/user)
-	if(!user || user.stat || user.restrained())
-		return
-
 	closed_system = !closed_system
 	user << "You [closed_system ? "close" : "open"] the tray's lid."
 	update_icon()

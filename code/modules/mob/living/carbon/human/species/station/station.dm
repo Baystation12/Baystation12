@@ -221,19 +221,7 @@
 	return ..()
 
 /datum/species/diona/handle_death(var/mob/living/carbon/human/H)
-
-	var/mob/living/carbon/alien/diona/S = new(get_turf(H))
-
-	if(H.mind)
-		H.mind.transfer_to(S)
-
-	for(var/mob/living/carbon/alien/diona/D in H.contents)
-		if(D.client)
-			D.loc = H.loc
-		else
-			qdel(D)
-
-	H.visible_message("\red[H] splits apart with a wet slithering noise!")
+	H.diona_split_into_nymphs(0)
 
 /datum/species/machine
 	name = "Machine"
