@@ -310,7 +310,7 @@
 
 /obj/machinery/computer/arcade/orion_trail
 	name = "orion trail"
-	desc = "Imported straight fron station-TG!"
+	desc = "Imported straight from station-TG!"
 	icon_state = "arcade"
 	circuit = /obj/item/weapon/circuitboard/arcade/orion_trail
 	var/list/supplies = list("1" = 0, "2" = 0, "3" = 0, "4" = 0, "5" = 0, "6" = 0) //engine,hull,electronics,food,fuel
@@ -373,7 +373,7 @@
 	switch(view)
 		if(ORION_VIEW_MAIN)
 			if(event == ORION_TRAIL_START) //new game? New game.
-				dat = "<center><h1>Orion Trail[emagged ? ": Realism Edition" : ""]</h1><br>Learn how our ancestors got to Orion, and have fun in the process!<br><P ALIGN=Right><a href='?src=\ref[src];continue=1'>Start New Game</a></P>"
+				dat = "<center><h1>Orion Trail[emagged ? ": Realism Edition" : ""]</h1><br>Learn how our ancestors got to Orion, and have fun in the process!</center><br><P ALIGN=Right><a href='?src=\ref[src];continue=1'>Start New Game</a></P>"
 				user << browse(dat, "window=arcade")
 				return
 			else
