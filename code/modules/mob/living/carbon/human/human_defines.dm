@@ -80,6 +80,7 @@
 	var/hand_blood_color
 
 	var/list/flavor_texts = list()
+	var/gunshot_residue
 
 	mob_bump_flag = HUMAN
 	mob_push_flags = ~HEAVY

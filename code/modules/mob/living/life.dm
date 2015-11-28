@@ -38,8 +38,6 @@
 	//stuff in the stomach
 	handle_stomach()
 
-	update_gravity(mob_has_gravity())
-
 	update_pulling()
 
 	for(var/obj/item/weapon/grab/G in src)
@@ -136,7 +134,6 @@
 
 /mob/living/proc/handle_vision()
 	client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
-
 	update_sight()
 
 	if(stat == DEAD)
@@ -159,23 +156,26 @@
 			reset_view(null, 0)
 		else if(viewflags)
 			sight |= viewflags
-	else if(eyeobj && eyeobj.owner != src)
-		reset_view(null)
-	else
-		if(!client.adminobs)
+	else if(eyeobj)
+		if(eyeobj.owner != src)
 			reset_view(null)
+	else if(!client.adminobs)
+		reset_view(null)
 
 /mob/living/proc/update_sight()
 	if(stat == DEAD)
-		sight |= SEE_TURFS
-		sight |= SEE_MOBS
-		sight |= SEE_OBJS
-		see_in_dark = 8
-		see_invisible = SEE_INVISIBLE_LEVEL_TWO
+		update_dead_sight()
 	else
 		sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
 		see_in_dark = 2
 		see_invisible = SEE_INVISIBLE_LIVING
+
+/mob/living/proc/update_dead_sight()
+	sight |= SEE_TURFS
+	sight |= SEE_MOBS
+	sight |= SEE_OBJS
+	see_in_dark = 8
+	see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
 /mob/living/proc/handle_hud_icons()
 	handle_hud_icons_health()

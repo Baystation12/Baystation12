@@ -21,6 +21,7 @@ var/list/gamemode_cache = list()
 	var/log_pda = 0						// log pda messages
 	var/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
 	var/log_runtime = 0					// logs world.log to a file
+	var/log_world_output = 0			// log world.log << messages
 	var/sql_enabled = 1					// for sql switching
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
@@ -153,7 +154,8 @@ var/list/gamemode_cache = list()
 
 	var/admin_legacy_system = 0	//Defines whether the server uses the legacy admin system with admins.txt or the SQL system. Config option in config.txt
 	var/ban_legacy_system = 0	//Defines whether the server uses the legacy banning system with the files in /data or the SQL system. Config option in config.txt
-	var/use_age_restriction_for_jobs = 0 //Do jobs use account age restrictions? --requires database
+	var/use_age_restriction_for_jobs = 0   //Do jobs use account age restrictions?   --requires database
+	var/use_age_restriction_for_antags = 0 //Do antags use account age restrictions? --requires database
 
 	var/simultaneous_pm_warning_timeout = 100
 
@@ -268,6 +270,9 @@ var/list/gamemode_cache = list()
 				if ("use_age_restriction_for_jobs")
 					config.use_age_restriction_for_jobs = 1
 
+				if ("use_age_restriction_for_antags")
+					config.use_age_restriction_for_antags = 1
+
 				if ("jobs_have_minimal_access")
 					config.jobs_have_minimal_access = 1
 
@@ -318,6 +323,9 @@ var/list/gamemode_cache = list()
 
 				if ("log_pda")
 					config.log_pda = 1
+
+				if ("log_world_output")
+					config.log_world_output = 1
 
 				if ("log_hrefs")
 					config.log_hrefs = 1

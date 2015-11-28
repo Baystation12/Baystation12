@@ -725,11 +725,6 @@
 	// do APC interaction
 	src.interact(user)
 
-/obj/machinery/power/apc/attack_ghost(user as mob)
-	if(stat & (BROKEN|MAINT))
-		return
-	return ui_interact(user)
-
 /obj/machinery/power/apc/interact(mob/user)
 	if(!user)
 		return

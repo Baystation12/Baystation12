@@ -12,6 +12,18 @@
 	var/lit = 0
 	var/id = null
 	var/on_icon = "sign_on"
+	var/_wifi_id
+	var/datum/wifi/receiver/button/holosign/wifi_receiver
+
+/obj/machinery/holosign/initialize()
+	..()
+	if(_wifi_id)
+		wifi_receiver = new(_wifi_id, src)
+
+/obj/machinery/holosign/Destroy()
+	qdel(wifi_receiver)
+	wifi_receiver = null
+	return ..()
 
 /obj/machinery/holosign/proc/toggle()
 	if (stat & (BROKEN|NOPOWER))

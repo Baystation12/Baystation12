@@ -760,7 +760,11 @@ proc // Creates a single icon from a given /atom or /image.  Only the first argu
 						// Pull the default direction.
 						add = icon(I:icon, I:icon_state)
 			else // 'I' is an appearance object.
-				add = getFlatIcon(new/image(I), curdir, curicon, curstate, curblend)
+				if(istype(A,/obj/machinery/atmospherics) && I in A.underlays)
+					var/image/Im = I
+					add = getFlatIcon(new/image(I), Im.dir, curicon, curstate, curblend, 1)
+				else
+					add = getFlatIcon(new/image(I), curdir, curicon, curstate, curblend, always_use_defdir)
 
 			// Find the new dimensions of the flat icon to fit the added overlay
 			addX1 = min(flatX1, I:pixel_x+1)
@@ -773,9 +777,15 @@ proc // Creates a single icon from a given /atom or /image.  Only the first argu
 				flat.Crop(addX1-flatX1+1, addY1-flatY1+1, addX2-flatX1+1, addY2-flatY1+1)
 				flatX1=addX1;flatX2=addX2
 				flatY1=addY1;flatY2=addY2
-
+			var/iconmode
+			if(I in A.overlays)
+				iconmode = ICON_OVERLAY
+			else if(I in A.underlays)
+				iconmode = ICON_UNDERLAY
+			else
+				iconmode = blendMode2iconMode(curblend)
 			// Blend the overlay into the flattened icon
-			flat.Blend(add, blendMode2iconMode(curblend), I:pixel_x + 2 - flatX1, I:pixel_y + 2 - flatY1)
+			flat.Blend(add, iconmode, I:pixel_x + 2 - flatX1, I:pixel_y + 2 - flatY1)
 
 		if(A.color)
 			flat.Blend(A.color, ICON_MULTIPLY)
@@ -853,3 +863,53 @@ proc/sort_atoms_by_layer(var/list/atoms)
 				result.Swap(i, gap + i)
 				swapped = 1
 	return result
+/*
+generate_image function generates image of specified range and location
+arguments tx, ty, tz are target coordinates (requred), range defines render distance to opposite corner (requred)
+cap_mode is capturing mode (optional), user is capturing mob (requred only wehen cap_mode = CAPTURE_MODE_REGULAR),
+lighting determines lighting capturing (optional), suppress_errors suppreses errors and continues to capture (optional).
+*/
+proc/generate_image(var/tx as num, var/ty as num, var/tz as num, var/range as num, var/cap_mode = CAPTURE_MODE_PARTIAL, var/mob/living/user, var/lighting = 1, var/suppress_errors = 1)
+	var/list/turfstocapture = list()
+	//Lines below determine what tiles will be rendered
+	for(var/xoff = 0 to range)
+		for(var/yoff = 0 to range)
+			var/turf/T = locate(tx + xoff,ty + yoff,tz)
+			if(T)
+				if(cap_mode == CAPTURE_MODE_REGULAR)
+					if(user.can_capture_turf(T))
+						turfstocapture.Add(T)
+						continue
+				else
+					turfstocapture.Add(T)
+			else
+				//Capture includes non-existan turfs
+				if(!suppress_errors)
+					return
+	//Lines below determine what objects will be rendered
+	var/list/atoms = list()
+	for(var/turf/T in turfstocapture)
+		atoms.Add(T)
+		for(var/atom/A in T)
+			if(istype(A, /atom/movable/lighting_overlay) && lighting) //Special case for lighting
+				atoms.Add(A)
+				continue
+			if(A.invisibility) continue
+			atoms.Add(A)
+	//Lines below actually render all colected data
+	atoms = sort_atoms_by_layer(atoms)
+	var/icon/cap = icon('icons/effects/96x96.dmi', "")
+	cap.Scale(range*32, range*32)
+	cap.Blend("#000", ICON_OVERLAY)
+	for(var/atom/A in atoms)
+		if(A)
+			var/icon/img = getFlatIcon(A)
+			if(istype(img, /icon))
+				if(istype(A, /mob/living) && A:lying)
+					img.BecomeLying()
+				var/xoff = (A.x - tx) * 32
+				var/yoff = (A.y - ty) * 32
+				cap.Blend(img, blendMode2iconMode(A.blend_mode),  A.pixel_x + xoff, A.pixel_y + yoff)
+
+	return cap
+

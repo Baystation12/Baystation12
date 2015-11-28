@@ -601,18 +601,24 @@ default behaviour is:
 
 	if(istype(M))
 		M.drop_from_inventory(H)
-		M << "<span class='warning'>[H] wriggles out of your grip!</span>"
-		src << "<span class='warning'>You wriggle out of [M]'s grip!</span>"
-	else if(istype(H.loc,/obj/item))
-		src << "<span class='warning'>You struggle free of [H.loc].</span>"
-		H.forceMove(get_turf(H))
+		M << "<span class='warning'>\The [H] wriggles out of your grip!</span>"
+		src << "<span class='warning'>You wriggle out of \the [M]'s grip!</span>"
 
-	if(istype(M))
+		// Update whether or not this mob needs to pass emotes to contents.
 		for(var/atom/A in M.contents)
 			if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
 				return
+		M.status_flags &= ~PASSEMOTES
 
-	M.status_flags &= ~PASSEMOTES
+	else if(istype(H.loc,/obj/item/clothing/accessory/holster))
+		var/obj/item/clothing/accessory/holster/holster = H.loc
+		if(holster.holstered == H)
+			holster.clear_holster()
+		src << "<span class='warning'>You extricate yourself from \the [holster].</span>"
+		H.forceMove(get_turf(H))
+	else if(istype(H.loc,/obj/item))
+		src << "<span class='warning'>You struggle free of \the [H.loc].</span>"
+		H.forceMove(get_turf(H))
 
 /mob/living/proc/escape_buckle()
 	if(buckled)

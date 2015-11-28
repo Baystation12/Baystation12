@@ -10,4 +10,4 @@
 					log_access("AFK: [key_name(C)]")
 					C << "<SPAN CLASS='warning'>You have been inactive for more than [config.kick_inactive] minute\s and have been disconnected.</SPAN>"
 					del(C)	// Don't qdel, cannot override finalize_qdel behaviour for clients.
-			scheck()
+			SCHECK

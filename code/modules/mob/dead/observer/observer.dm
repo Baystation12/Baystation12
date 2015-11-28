@@ -660,7 +660,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/dead/observer/canface()
 	return 1
 
-/mob/dead/observer/proc/can_admin_interact()
+/mob/proc/can_admin_interact()
+    return 0
+    
+/mob/dead/observer/can_admin_interact()
 	return check_rights(R_ADMIN, 0, src)
 
 /mob/dead/observer/verb/toggle_ghostsee()

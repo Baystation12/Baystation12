@@ -158,6 +158,7 @@
 	spawn(5) // And wait a half-second, since it sounds like you can do this too fast.
 		if(src)
 			winset(src, null, "command=\".configure graphics-hwmode off\"")
+			sleep(2) // wait a bit more, possibly fixes hardware mode not re-activating right
 			winset(src, null, "command=\".configure graphics-hwmode on\"")
 
 	log_client_to_db()
@@ -339,3 +340,9 @@ client/proc/MayRespawn()
 
 	// Something went wrong, client is usually kicked or transfered to a new mob at this point
 	return 0
+
+client/verb/character_setup()
+	set name = "Character Setup"
+	set category = "Preferences"
+	if(prefs)
+		prefs.ShowChoices(usr)
