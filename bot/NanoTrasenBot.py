@@ -35,9 +35,10 @@ except ImportError:
       try:
          tiedosto = open("psycodownload.txt","r")
       except:
-         with open("psycodownload.txt","w") as tiedosto:
-            tiedosto.write("http://www.voidspace.org.uk/python/modules.shtml#psyco")
-            tiedosto.write("\nhttp://psyco.sourceforge.net/download.html")
+         tiedosto = open("psycodownload.txt","w")
+         tiedosto.write("http://www.voidspace.org.uk/python/modules.shtml#psyco")
+         tiedosto.write("\nhttp://psyco.sourceforge.net/download.html")
+         tiedosto.close()
          print "Check psycodownload.txt for a link"
       else:
          print "For god's sake, open psycodownload.txt"
@@ -189,13 +190,15 @@ tell_list = {}
 if CORE_DATA.DISABLE_ALL_NON_MANDATORY_SOCKET_CONNECTIONS:
    nudgeable = False
 try:
-   with open("replacenames.cache","r") as tiedosto:
-      replacenames = pickle.load(tiedosto)
+   tiedosto = open("replacenames.cache","r")
+   replacenames = pickle.load(tiedosto)
+   tiedosto.close()
    for i in replacenames.values():
       if len(i) > call_me_max_length:
          replacenames[replacenames.keys()[replacenames.values().index(i)]] = i[:call_me_max_length]
-         with open("replacenames.cache","w") as tiedosto:
-            pickle.dump(replacenames,tiedosto)
+         tiedosto = open("replacenames.cache","w")
+         pickle.dump(replacenames,tiedosto)
+         tiedosto.close()
       if "[\0x01]" in i.lower() or "[\\0x01]" in i.lower():
          i = i.replace("[\0x01]","")
          i = i.replace("[\0X01]","")
@@ -208,12 +211,13 @@ except EOFError: #Cache corrupt
    replacenames = {}
    print "replacenames.cache is corrupt and couldn't be loaded."
 try:
-   with open("peopleheknows.cache","r") as tiedosto:
-      peopleheknows = pickle.load(tiedosto)
+   tiedosto = open("peopleheknows.cache","r")
+   peopleheknows = pickle.load(tiedosto)
+   tiedosto.close()
 except IOError:
    peopleheknows = [[],[]]
-   with open("peopleheknows.cache","w") as tiedosto:
-      pass
+   tiedosto = open("peopleheknows.cache","w")
+   tiedosto.close()
 except EOFError:
    peopleheknows = [[],[]]
    print "peopleheknows.cache is corrupt and couldn't be loaded."
@@ -341,14 +345,16 @@ if aggressive_pinging:
       self_time = 0
       global backup,disconnects,conn
       while disconnects < 5:
-         if backup > self_time and time.time()-backup > delay:
-            conn.send("PONG "+pongtarg)
-            print "Ponged"
-            self_time = time.time()
-         elif time.time()-self_time > delay:
-            conn.send("PONG "+pongtarg)
-            print "Ponged"
-            self_time = time.time()
+         if backup > self_time:
+            if time.time()-backup > delay:
+               conn.send("PONG "+pongtarg)
+               print "Ponged"
+               self_time = time.time()
+         else:
+            if time.time()-self_time > delay:
+               conn.send("PONG "+pongtarg)
+               print "Ponged"
+               self_time = time.time()
          time.sleep(refresh)
    thread.start_new_thread(aggressive_ping,(aggressive_pinging_delay,aggressive_pinging_refresh,))
 def stop(sender,debug=1):
@@ -364,15 +370,16 @@ def stop(sender,debug=1):
          access_granted = True
       else:
          access_granted = False
-   if access_granted and debug:
-      print sender+":"+prefix+"stop"
-      if random.randint(0,100) == 50:
-         conn.privmsg(channel,"Hammertime!")
-      else:
-         conn.privmsg(channel,"Shutting down.")
-      disconnects = 99999
-      conn.quit()
-      return True
+   if access_granted:
+      if debug:
+         print sender+":"+prefix+"stop"
+         if random.randint(0,100) == 50:
+            conn.privmsg(channel,"Hammertime!")
+         else:
+            conn.privmsg(channel,"Shutting down.")
+         disconnects = 99999
+         conn.quit()
+         return True
    else:
       conn.privmsg(channel,"You cannot command me")
       return False
@@ -394,12 +401,13 @@ def target(who,how_long):
       if debug:
          print "Banned",who,"For",how_long,"seconds"
       if logbans:
-         with open(targetdirectory+"banlog/"+str(int(start))+"-"+str(int(end))+".txt","w") as tiedosto:
-            tiedosto.write("Start of ban on "+who+":"+str(int(start)))
-            tiedosto.write("\n")
-            tiedosto.write("End of ban on "+who+":"+str(int(end)))
-            tiedosto.write("\n")
-            tiedosto.write("In total:"+str(int(end-start))+"Seconds")
+         tiedosto = open(targetdirectory+"banlog/"+str(int(start))+"-"+str(int(end))+".txt","w")
+         tiedosto.write("Start of ban on "+who+":"+str(int(start)))
+         tiedosto.write("\n")
+         tiedosto.write("End of ban on "+who+":"+str(int(end)))
+         tiedosto.write("\n")
+         tiedosto.write("In total:"+str(int(end-start))+"Seconds")
+         tiedosto.close()
    else:
       CALL_OFF = False
       pass
@@ -568,12 +576,13 @@ while True:
                time.sleep(6)
                Name = origname
                conn.nick(Name)
-            if origname in truesender and influx == prefix+"stop":
-               time.sleep(0.5) #A small delay
-               conn.privmsg(channel,"Shutting down.")
-               conn.quit()
-               disconnects = 99999
-               break
+            if origname in truesender:
+               if influx == prefix+"stop":
+                  time.sleep(0.5) #A small delay
+                  conn.privmsg(channel,"Shutting down.")
+                  conn.quit()
+                  disconnects = 99999
+                  break
             if len(translateable) > 0 and enabled == True:
                people = "-5|5|1-".join(users).lower()
                if truesender.lower() in translateable:
@@ -624,8 +633,9 @@ while True:
                      arg = influx.lower()[8+len(prefix):]
                      if debug:
                         print truesender+":"+prefix+"suggest "+arg
-                     with open(targetdirectory+"suggestions/suggestions_"+str(int(time.time()))+".txt","a") as tiedosto:
-                        tiedosto.write(arg)
+                     tiedosto = open(targetdirectory+"suggestions/suggestions_"+str(int(time.time()))+".txt","a")
+                     tiedosto.write(arg)
+                     tiedosto.close()
                      conn.privmsg(targetchannel,"Suggestion received")
             elif cocheck( prefix+"help "): #Space in front of the ( to make sure that my command finder does not pick this up.
                arg = " ".join(influx.split(" ")[1:]).lower()
