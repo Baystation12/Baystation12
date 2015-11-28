@@ -54,8 +54,12 @@
 
 // Check if the user can run program. Only humans can operate computer. Automatically called in run_program()
 // User has to wear their ID or have it inhand for ID Scan to work.
-/datum/computer_file/program/proc/can_run(var/mob/living/user, var/loud = 0)
-	if(!required_access) // No required_access, allow it.
+// Can also be called manually, with optional parameter being access_to_check to scan the user's ID
+/datum/computer_file/program/proc/can_run(var/mob/living/user, var/loud = 0, var/access_to_check)
+	// Defaults to required_access
+	if(!access_to_check)
+		access_to_check = required_access
+	if(!access_to_check) // No required_access, allow it.
 		return 1
 	if(istype(user, /mob/living/silicon)) // AI or robot. Allow it.
 		return 1
@@ -75,7 +79,7 @@
 				user << "<span class='danger'>\The [computer] flashes an \"RFID Error - Unable to scan ID\" warning.</span>"
 			return 0
 
-		if(required_access in I.access)
+		if(access_to_check in I.access)
 			return 1
 	if(loud && computer)
 		user << "<span class='danger'>\The [computer] flashes an \"Access Denied\" warning.</span>"

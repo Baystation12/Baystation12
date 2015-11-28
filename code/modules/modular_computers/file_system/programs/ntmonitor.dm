@@ -4,6 +4,7 @@
 	program_icon_state = "generic"
 	size = 7
 	requires_ntnet = 1
+	required_access = access_network
 	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/computer_ntnetmonitor/
 

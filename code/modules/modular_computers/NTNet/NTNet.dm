@@ -7,6 +7,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	var/list/logs = list()
 	var/list/available_station_software = list()
 	var/list/available_antag_software = list()
+	var/list/chat_channels = list()
 
 	// Amount of logs the system tries to keep in memory. Keep below 999 to prevent byond from acting weirdly.
 	// High values make displaying logs much laggier.
@@ -39,7 +40,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	if(source)
 		log_text += "[source.get_network_tag()] - "
 	else
-		log_text += " *SYSTEM* - "
+		log_text += "*SYSTEM* - "
 	log_text += log_string
 	logs.Add(log_text)
 

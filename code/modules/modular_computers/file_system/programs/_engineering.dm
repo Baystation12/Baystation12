@@ -45,13 +45,3 @@
 	requires_ntnet_feature = NTNET_SYSTEMCONTROL
 	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
 	size = 25
-
-/datum/computer_file/program/suit_sensors
-	filename = "sensormonitor"
-	filedesc = "Suit Sensors Monitoring"
-	nanomodule_path = /datum/nano_module/crew_monitor
-	program_icon_state = "crew"
-	keyboard_icon_state = "keyboard7"
-	requires_ntnet = 1
-	network_destination = "crew lifesigns monitoring system"
-	size = 20

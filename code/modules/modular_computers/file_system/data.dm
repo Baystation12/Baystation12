@@ -8,3 +8,11 @@
 	var/datum/computer_file/data/temp = ..()
 	temp.stored_data = stored_data
 	return temp
+
+// Calculates file size from amount of characters in saved string
+/datum/computer_file/data/proc/calculate_size(var/block_size = 250)
+	size = max(1, round(length(stored_data) / block_size))
+
+/datum/computer_file/data/logfile
+	filetype = "LOG"
+
