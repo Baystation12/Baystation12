@@ -46,10 +46,12 @@ proc/admin_notice(var/message, var/rights)
 	if(M.client)
 		body += " played by <b>[M.client]</b> "
 		body += "\[<A href='?src=\ref[src];editrights=show'>[M.client.holder ? M.client.holder.rank : "Player"]</A>\]"
+
 	if(istype(M, /mob/new_player))
 		body += " <B>Hasn't Entered Game</B> "
 	else
 		body += " \[<A href='?src=\ref[src];revive=\ref[M]'>Heal</A>\] "
+
 	body += {"
 		<br><br>\[
 		<a href='?_src_=vars;Vars=\ref[M]'>VV</a> -
@@ -64,6 +66,7 @@ proc/admin_notice(var/message, var/rights)
 		<A href='?src=\ref[src];jobban2=\ref[M]'>Jobban</A> |
 		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A>
 	"}
+
 	if(M.client)
 		body += "| <A HREF='?src=\ref[src];sendtoprison=\ref[M]'>Prison</A> | "
 		var/muted = M.client.prefs.muted
@@ -75,6 +78,7 @@ proc/admin_notice(var/message, var/rights)
 			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_DEADCHAT]'><font color='[(muted & MUTE_DEADCHAT)?"red":"blue"]'>DEADCHAT</font></a>\]
 			(<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_ALL]'><font color='[(muted & MUTE_ALL)?"red":"blue"]'>toggle all</font></a>)
 		"}
+
 	body += {"<br><br>
 		<A href='?src=\ref[src];jumpto=\ref[M]'><b>Jump to</b></A> |
 		<A href='?src=\ref[src];getmob=\ref[M]'>Get</A> |
@@ -84,21 +88,25 @@ proc/admin_notice(var/message, var/rights)
 		<A href='?src=\ref[src];narrateto=\ref[M]'>Narrate to</A> |
 		<A href='?src=\ref[src];subtlemessage=\ref[M]'>Subtle message</A>
 	"}
+
 	if (M.client)
 		if(!istype(M, /mob/new_player))
 			body += "<br><br>"
 			body += "<b>Transformation:</b>"
 			body += "<br>"
+
 			//Monkey
 			if(issmall(M))
 				body += "<B>Monkeyized</B> | "
 			else
 				body += "<A href='?src=\ref[src];monkeyone=\ref[M]'>Monkeyize</A> | "
+
 			//Corgi
 			if(iscorgi(M))
 				body += "<B>Corgized</B> | "
 			else
 				body += "<A href='?src=\ref[src];corgione=\ref[M]'>Corgize</A> | "
+
 			//AI / Cyborg
 			if(isAI(M))
 				body += "<B>Is an AI</B> "
@@ -108,11 +116,13 @@ proc/admin_notice(var/message, var/rights)
 					<A href='?src=\ref[src];makealien=\ref[M]'>Make Alien</A> |
 					<A href='?src=\ref[src];makeslime=\ref[M]'>Make slime</A>
 				"}
+
 			//Simple Animals
 			if(isanimal(M))
 				body += "<A href='?src=\ref[src];makeanimal=\ref[M]'>Re-Animalize</A> | "
 			else
 				body += "<A href='?src=\ref[src];makeanimal=\ref[M]'>Animalize</A> | "
+
 			// DNA2 - Admin Hax
 			if(M.dna && iscarbon(M))
 				body += "<br><br>"
@@ -131,6 +141,7 @@ proc/admin_notice(var/message, var/rights)
 						body += "[block]"
 					body+="</td>"
 				body += "</tr></table>"
+
 			body += {"<br><br>
 				<b>Rudimentary transformation:</b><font size=2><br>These transformations only create a new mob type and copy stuff over. They do not take into account MMIs and similar mob-specific things. The buttons in 'Transformations' are preferred, when possible.</font><br>
 				<A href='?src=\ref[src];simplemake=observer;mob=\ref[M]'>Observer</A> |
@@ -183,18 +194,23 @@ proc/admin_notice(var/message, var/rights)
 			if(!f) body += " | "
 			else f = 0
 			if(L in M.languages)
-				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#006600'>[k]</a>"
+				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[lhtml_encode(k)]' style='color:#006600'>[k]</a>"
 			else
-				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#ff0000'>[k]</a>"
+				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[lhtml_encode(k)]' style='color:#ff0000'>[k]</a>"
+
 	body += {"<br>
 		</body></html>
 	"}
+
 	usr << browse(body, "window=adminplayeropts;size=550x515")
 	feedback_add_details("admin_verb","SPP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+
 /datum/player_info/var/author // admin who authored the information
 /datum/player_info/var/rank //rank of admin who made the notes
 /datum/player_info/var/content // text content of the information
 /datum/player_info/var/timestamp // Because this is bloody annoying
+
 #define PLAYER_NOTES_ENTRIES_PER_PAGE 50
 /datum/admins/proc/PlayerNotes()
 	set category = "Admin"
@@ -205,6 +221,7 @@ proc/admin_notice(var/message, var/rights)
 		usr << "Error: you are not an admin!"
 		return
 	PlayerNotesPage(1)
+
 /datum/admins/proc/PlayerNotesPage(page)
 	var/dat = "<B>Player notes</B><HR>"
 	var/savefile/S=new("data/player_notes.sav")
@@ -215,6 +232,7 @@ proc/admin_notice(var/message, var/rights)
 	else
 		dat += "<table>"
 		note_keys = sortList(note_keys)
+
 		// Display the notes on the current page
 		var/number_pages = note_keys.len / PLAYER_NOTES_ENTRIES_PER_PAGE
 		// Emulate ceil(why does BYOND not have ceil)
@@ -223,13 +241,16 @@ proc/admin_notice(var/message, var/rights)
 		var/page_index = page - 1
 		if(page_index < 0 || page_index >= number_pages)
 			return
+
 		var/lower_bound = page_index * PLAYER_NOTES_ENTRIES_PER_PAGE + 1
 		var/upper_bound = (page_index + 1) * PLAYER_NOTES_ENTRIES_PER_PAGE
 		upper_bound = min(upper_bound, note_keys.len)
 		for(var/index = lower_bound, index <= upper_bound, index++)
 			var/t = note_keys[index]
 			dat += "<tr><td><a href='?src=\ref[src];notes=show;ckey=[t]'>[t]</a></td></tr>"
+
 		dat += "</table><br>"
+
 		// Display a footer to select different pages
 		for(var/index = 1, index <= number_pages, index++)
 			if(index == page)
@@ -237,13 +258,18 @@ proc/admin_notice(var/message, var/rights)
 			dat += "<a href='?src=\ref[src];notes=list;index=[index]'>[index]</a> "
 			if(index == page)
 				dat += "</b>"
-	usr << browse(dat, "window=player_notes;size=400x400")
+
+	usr << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=player_notes;size=400x400")
+
+
 /datum/admins/proc/player_has_info(var/key as text)
 	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
 	info >> infos
 	if(!infos || !infos.len) return 0
 	else return 1
+
+
 /datum/admins/proc/show_player_info(var/key as text)
 	set category = "Admin"
 	set name = "Show Player Info"
@@ -254,12 +280,14 @@ proc/admin_notice(var/message, var/rights)
 		return
 	var/dat = "<html><head><title>Info on [key]</title></head>"
 	dat += "<body>"
+
 	var/p_age = "unknown"
 	for(var/client/C in clients)
 		if(C.ckey == key)
 			p_age = C.player_age
 			break
 	dat +="<span style='color:#000000; font-weight: bold'>Player age: [p_age]</span><br>"
+
 	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
 	info >> infos
@@ -281,14 +309,20 @@ proc/admin_notice(var/message, var/rights)
 				dat += "<A href='?src=\ref[src];remove_player_info=[key];remove_index=[i]'>Remove</A>"
 			dat += "<br><br>"
 		if(update_file) info << infos
+
 	dat += "<br>"
 	dat += "<A href='?src=\ref[src];add_player_info=[key]'>Add Comment</A><br>"
+
 	dat += "</body></html>"
-	usr << browse(dat, "window=adminplayerinfo;size=480x480")
+	usr << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=adminplayerinfo;size=480x480")
+
+
+
 /datum/admins/proc/access_news_network() //MARKER
 	set category = "Fun"
 	set name = "Access Newscaster Network"
 	set desc = "Allows you to view, add and edit news feeds."
+
 	if (!istype(src,/datum/admins))
 		src = usr.client.holder
 	if (!istype(src,/datum/admins))
@@ -296,6 +330,7 @@ proc/admin_notice(var/message, var/rights)
 		return
 	var/dat
 	dat = text("<HEAD><TITLE>Admin Newscaster</TITLE></HEAD><H3>Admin Newscaster Unit</H3>")
+
 	switch(admincaster_screen)
 		if(0)
 			dat += {"Welcome to the admin newscaster.<BR> Here you can add, edit and censor every newspiece on the network.
@@ -304,14 +339,17 @@ proc/admin_notice(var/message, var/rights)
 			"}
 			if(news_network.wanted_issue)
 				dat+= "<HR><A href='?src=\ref[src];ac_view_wanted=1'>Read Wanted Issue</A>"
+
 			dat+= {"<HR><BR><A href='?src=\ref[src];ac_create_channel=1'>Create Feed Channel</A>
 				<BR><A href='?src=\ref[src];ac_view=1'>View Feed Channels</A>
 				<BR><A href='?src=\ref[src];ac_create_feed_story=1'>Submit new Feed story</A>
 				<BR><BR><A href='?src=\ref[usr];mach_close=newscaster_main'>Exit</A>
 			"}
+
 			var/wanted_already = 0
 			if(news_network.wanted_issue)
 				wanted_already = 1
+
 			dat+={"<HR><B>Feed Security functions:</B><BR>
 				<BR><A href='?src=\ref[src];ac_menu_wanted=1'>[(wanted_already) ? ("Manage") : ("Publish")] \"Wanted\" Issue</A>
 				<BR><A href='?src=\ref[src];ac_menu_censor_story=1'>Censor Feed Stories</A>
@@ -361,21 +399,21 @@ proc/admin_notice(var/message, var/rights)
 		if(6)
 			dat+="<B><FONT COLOR='maroon'>ERROR: Could not submit Feed story to Network.</B></FONT><HR><BR>"
 			if(src.admincaster_feed_channel.channel_name=="")
-				dat+="<FONT COLOR='maroon'>?Invalid receiving channel name.</FONT><BR>"
+				dat+="<FONT COLOR='maroon'>Invalid receiving channel name.</FONT><BR>"
 			if(src.admincaster_feed_message.body == "" || src.admincaster_feed_message.body == "\[REDACTED\]")
-				dat+="<FONT COLOR='maroon'>?Invalid message body.</FONT><BR>"
+				dat+="<FONT COLOR='maroon'>Invalid message body.</FONT><BR>"
 			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[3]'>Return</A><BR>"
 		if(7)
 			dat+="<B><FONT COLOR='maroon'>ERROR: Could not submit Feed Channel to Network.</B></FONT><HR><BR>"
 			if(src.admincaster_feed_channel.channel_name =="" || src.admincaster_feed_channel.channel_name == "\[REDACTED\]")
-				dat+="<FONT COLOR='maroon'>?Invalid channel name.</FONT><BR>"
+				dat+="<FONT COLOR='maroon'>Invalid channel name.</FONT><BR>"
 			var/check = 0
 			for(var/datum/feed_channel/FC in news_network.network_channels)
 				if(FC.channel_name == src.admincaster_feed_channel.channel_name)
 					check = 1
 					break
 			if(check)
-				dat+="<FONT COLOR='maroon'>?Channel name already in use.</FONT><BR>"
+				dat+="<FONT COLOR='maroon'>Channel name already in use.</FONT><BR>"
 			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[2]'>Return</A><BR>"
 		if(9)
 			dat+="<B>[src.admincaster_feed_channel.channel_name]: </B><FONT SIZE=1>\[created by: <FONT COLOR='maroon'>[src.admincaster_feed_channel.author]</FONT>\]</FONT><HR>"
@@ -425,6 +463,7 @@ proc/admin_notice(var/message, var/rights)
 			else
 				for(var/datum/feed_channel/CHANNEL in news_network.network_channels)
 					dat+="<A href='?src=\ref[src];ac_pick_d_notice=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : ()]<BR>"
+
 			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Back</A>"
 		if(12)
 			dat+={"
@@ -456,6 +495,7 @@ proc/admin_notice(var/message, var/rights)
 				else
 					for(var/datum/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
 						dat+="-[MESSAGE.body] <BR><FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"
+
 			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[11]'>Back</A>"
 		if(14)
 			dat+="<B>Wanted Issue Handler:</B>"
@@ -487,9 +527,9 @@ proc/admin_notice(var/message, var/rights)
 		if(16)
 			dat+="<B><FONT COLOR='maroon'>ERROR: Wanted Issue rejected by Network.</B></FONT><HR><BR>"
 			if(src.admincaster_feed_message.author =="" || src.admincaster_feed_message.author == "\[REDACTED\]")
-				dat+="<FONT COLOR='maroon'>?Invalid name for person wanted.</FONT><BR>"
+				dat+="<FONT COLOR='maroon'>Invalid name for person wanted.</FONT><BR>"
 			if(src.admincaster_feed_message.body == "" || src.admincaster_feed_message.body == "\[REDACTED\]")
-				dat+="<FONT COLOR='maroon'>?Invalid description.</FONT><BR>"
+				dat+="<FONT COLOR='maroon'>Invalid description.</FONT><BR>"
 			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>"
 		if(17)
 			dat+={"
@@ -516,12 +556,17 @@ proc/admin_notice(var/message, var/rights)
 			"}
 		else
 			dat+="I'm sorry to break your immersion. This shit's bugged. Report this bug to Agouri, polyxenitopalidou@gmail.com"
+
 	//world << "Channelname: [src.admincaster_feed_channel.channel_name] [src.admincaster_feed_channel.author]"
 	//world << "Msg: [src.admincaster_feed_message.author] [src.admincaster_feed_message.body]"
-	usr << browse(dat, "window=admincaster_main;size=400x600")
+	usr << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=admincaster_main;size=400x600")
 	onclose(usr, "admincaster_main")
+
+
+
 /datum/admins/proc/Jobbans()
 	if(!check_rights(R_BAN))	return
+
 	var/dat = "<B>Job Bans!</B><HR><table>"
 	for(var/t in jobban_keylist)
 		var/r = t
@@ -529,15 +574,18 @@ proc/admin_notice(var/message, var/rights)
 			r = copytext( r, 1, findtext(r,"##") )//removes the description
 		dat += text("<tr><td>[t] (<A href='?src=\ref[src];removejobban=[r]'>unban</A>)</td></tr>")
 	dat += "</table>"
-	usr << browse(dat, "window=ban;size=400x400")
+	usr << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=ban;size=400x400")
+
 /datum/admins/proc/Game()
 	if(!check_rights(0))	return
+
 	var/dat = {"
 		<center><B>Game Panel</B></center><hr>\n
 		<A href='?src=\ref[src];c_mode=1'>Change Game Mode</A><br>
 		"}
 	if(master_mode == "secret")
 		dat += "<A href='?src=\ref[src];f_secret=1'>(Force Secret Mode)</A><br>"
+
 	dat += {"
 		<BR>
 		<A href='?src=\ref[src];create_object=1'>Create Object</A><br>
@@ -548,17 +596,14 @@ proc/admin_notice(var/message, var/rights)
 		<A href='?src=\ref[src];vsc=phoron'>Edit Phoron Settings</A><br>
 		<A href='?src=\ref[src];vsc=default'>Choose a default ZAS setting</A><br>
 		"}
+
 	usr << browse(dat, "window=admin2;size=210x280")
 	return
+
 /datum/admins/proc/Secrets()
 	if(!check_rights(0))	return
-	var/dat = "<B>The first rule of adminbuse is: you don't talk about the adminbuse.</B><HR>"
 
-	if(check_rights(R_SPAWN,0))
-		dat += {"
-			<A href='?src=\ref[src];secretsfun=spawnselfdummy'>Spawn yourself as a Test Dummy</A><BR>
-			<BR>
-			"}
+	var/dat = "<B>The first rule of adminbuse is: you don't talk about the adminbuse.</B><HR>"
 
 	if(check_rights(R_ADMIN,0))
 		dat += {"
@@ -575,6 +620,7 @@ proc/admin_notice(var/message, var/rights)
 			<A href='?src=\ref[src];secretsadmin=fingerprints'>List Fingerprints</A><BR><BR>
 			<BR>
 			"}
+
 	if(check_rights(R_FUN,0))
 		dat += {"
 			<B>'Random' Events</B><BR>
@@ -631,8 +677,10 @@ proc/admin_notice(var/message, var/rights)
 			<A href='?src=\ref[src];secretsfun=friendai'>Best Friend AI</A><BR>
 			<A href='?src=\ref[src];secretsfun=floorlava'>The floor is lava! (DANGEROUS: extremely lame)</A><BR>
 			"}
+
 	if(check_rights(R_SERVER,0))
 		dat += "<A href='?src=\ref[src];secretsfun=togglebombcap'>Toggle bomb cap</A><BR>"
+
 	if(check_rights(R_SERVER|R_FUN,0))
 		dat += {"
 			<BR>
@@ -642,7 +690,9 @@ proc/admin_notice(var/message, var/rights)
 			<A href='?src=\ref[src];secretsfun=hellonearth'>Summon Nar-Sie</A><BR>
 			<A href='?src=\ref[src];secretsfun=supermattercascade'>Start a Supermatter Cascade</A><BR>
 			"}
+
 	dat += "<BR>"
+
 	if(check_rights(R_DEBUG,0))
 		dat += {"
 			<B>Security Level Elevated</B><BR>
@@ -657,10 +707,16 @@ proc/admin_notice(var/message, var/rights)
 			<A href='?src=\ref[src];secretscoder=spawn_objects'>Admin Log</A><BR>
 			<BR>
 			"}
+
 	usr << browse(dat, "window=secrets")
 	return
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////admins2.dm merge
 //i.e. buttons/verbs
+
+
 /datum/admins/proc/restart()
 	set category = "Server"
 	set name = "Restart"
@@ -673,17 +729,23 @@ proc/admin_notice(var/message, var/rights)
 	if(confirm == "Yes")
 		world << "\red <b>Restarting world!</b> \blue Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]!"
 		log_admin("[key_name(usr)] initiated a reboot.")
+
 		feedback_set_details("end_error","admin reboot - by [usr.key] [usr.client.holder.fakekey ? "(stealth)" : ""]")
 		feedback_add_details("admin_verb","R") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 		if(blackbox)
 			blackbox.save_all_data_to_sql()
+
 		sleep(50)
 		world.Reboot()
+
+
 /datum/admins/proc/announce()
 	set category = "Special Verbs"
 	set name = "Announce"
 	set desc="Announce your desires to the world"
 	if(!check_rights(0))	return
+
 	var/message = sanitize(input("Global message to send:", "Admin Announce", null, null)  as message, 500, extra = 0)//todo: MD
 	if(message)
 		//if(!check_rights(R_SERVER,0))
@@ -692,6 +754,15 @@ proc/admin_notice(var/message, var/rights)
 		world << "<span class=notice><b>[usr.client.holder.fakekey ? "Administrator" : usr.key] Announces:</b><p style='text-indent: 50px'>[message]</p></span>"
 		log_admin("Announce: [key_name(usr)] : [message]")
 	feedback_add_details("admin_verb","A") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/datum/admins/proc/toggleexplosions()
+	set category = "Server"
+	set desc="Toggles explosions"
+	set name="Toggle Explosions"
+
+	config.explosions_allowed = !(config.explosions_allowed)
+	log_admin("[key_name(usr)] toggled explosions to [config.explosions_allowed].")
+	message_admins("[key_name_admin(usr)] toggled explosions to [config.explosions_allowed].", 1)
 
 /datum/admins/proc/toggleooc()
 	set category = "Server"
@@ -708,19 +779,6 @@ proc/admin_notice(var/message, var/rights)
 		world << "<B>The OOC channel has been globally disabled!</B>"
 	log_and_message_admins("toggled OOC.")
 	feedback_add_details("admin_verb","TOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/datum/admins/proc/toggleexplosions()
-	set category = "Server"
-	set desc="Toggles explosions"
-	set name="Toggle Explosions"
-
-	if(!check_rights(R_ADMIN))
-		return
-
-	config.explosions_allowed = !(config.explosions_allowed)
-	log_admin("[key_name(usr)] toggled explosions to [config.explosions_allowed].")
-	message_admins("[key_name_admin(usr)] toggled explosions to [config.explosions_allowed].", 1)
-	feedback_add_details("admin_verb","TDEXP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/togglelooc()
 	set category = "Server"
@@ -1354,11 +1412,5 @@ proc/admin_notice(var/message, var/rights)
 		usr << "Mode has not started."
 		return
 
-<<<<<<< HEAD
-	message_admins("[key_name(usr)] attempting to force mode latespawn.")
-	ticker.mode.next_spawn = 0
-	ticker.mode.try_latespawn()
-=======
 	message_admins("[key_name(usr)] attempting to force mode autospawn.")
 	ticker.mode.process_autoantag()
->>>>>>> 392fd6210d1938548d4ffd4030f362c01d1cb8d1

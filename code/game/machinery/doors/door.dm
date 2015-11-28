@@ -317,7 +317,6 @@
 	update_icon()
 	return
 
-
 /obj/machinery/door/examine(mob/user)
 	. = ..()
 	if(src.health < src.maxhealth / 4)

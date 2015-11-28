@@ -1,5 +1,5 @@
 /mob/living/silicon/say(var/message, var/sanitize = 1)
-	return ..(sanitize ? sanitize(message, ja_mode = TEMP) : message)
+	return ..(sanitize ? sanitize(message) : message)
 
 /mob/living/silicon/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	log_say("[key_name(src)] : [message]")
@@ -81,7 +81,7 @@
 		//This is much faster.
 		var/list/listening = list()
 		var/list/listening_obj = list()
-		var/turf/T = get_turf(H)		
+		var/turf/T = get_turf(H)
 
 		if(T)
 			var/list/hear = hear(7, T)

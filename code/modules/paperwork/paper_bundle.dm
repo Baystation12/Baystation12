@@ -24,14 +24,14 @@
 			user << "<span class='notice'>Take off the carbon copy first.</span>"
 			add_fingerprint(user)
 			return
-	// adding sheets		
+	// adding sheets
 	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/photo))
 		insert_sheet_at(user, pages.len+1, W)
-		
-	// burning	
+
+	// burning
 	else if(istype(W, /obj/item/weapon/flame))
 		burnpaper(W, user)
-		
+
 	// merging bundles
 	else if(istype(W, /obj/item/weapon/paper_bundle))
 		user.drop_from_inventory(W)
@@ -55,17 +55,17 @@
 	add_fingerprint(usr)
 	return
 
-/obj/item/weapon/paper_bundle/proc/insert_sheet_at(mob/user, var/index, obj/item/weapon/sheet)	
+/obj/item/weapon/paper_bundle/proc/insert_sheet_at(mob/user, var/index, obj/item/weapon/sheet)
 	if(istype(sheet, /obj/item/weapon/paper))
 		user << "<span class='notice'>You add [(sheet.name == "paper") ? "the paper" : sheet.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>"
 	else if(istype(sheet, /obj/item/weapon/photo))
 		user << "<span class='notice'>You add [(sheet.name == "photo") ? "the photo" : sheet.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>"
-		
+
 	user.drop_from_inventory(sheet)
 	sheet.loc = src
-	
+
 	pages.Insert(index, sheet)
-	
+
 	if(index <= page)
 		page++
 
@@ -126,15 +126,15 @@
 			dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>"
 		else
 			dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>"
-		user << browse(dat, "window=[name]")
+		user << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=[name]")
 	else if(istype(pages[page], /obj/item/weapon/photo))
 		var/obj/item/weapon/photo/P = W
 		user << browse_rsc(P.img, "tmp_photo.png")
-		user << browse(dat + "<html><head><title>[P.name]</title></head>" \
+		user << browse(sanitize_local(dat + "<html><head><title>[P.name]</title></head>" \
 		+ "<body style='overflow:hidden'>" \
 		+ "<div> <img src='tmp_photo.png' width = '180'" \
 		+ "[P.scribble ? "<div> Written on the back:<br><i>[P.scribble]</i>" : ]"\
-		+ "</body></html>", "window=[name]")
+		+ "</body></html>", SANITIZE_BROWSER), "window=[name]")
 
 /obj/item/weapon/paper_bundle/attack_self(mob/user as mob)
 	src.show_content(user)
@@ -150,7 +150,7 @@
 		if(href_list["next_page"])
 			if(in_hand && (istype(in_hand, /obj/item/weapon/paper) || istype(in_hand, /obj/item/weapon/photo)))
 				insert_sheet_at(usr, page+1, in_hand)
-			else if(page != pages.len)	
+			else if(page != pages.len)
 				page++
 				playsound(src.loc, "pageturn", 50, 1)
 		if(href_list["prev_page"])
@@ -163,20 +163,20 @@
 			var/obj/item/weapon/W = pages[page]
 			usr.put_in_hands(W)
 			pages.Remove(pages[page])
-			
+
 			usr << "<span class='notice'>You remove the [W.name] from the bundle.</span>"
-			
+
 			if(pages.len <= 1)
 				var/obj/item/weapon/paper/P = src[1]
 				usr.drop_from_inventory(src)
 				usr.put_in_hands(P)
 				qdel(src)
-				
+
 				return
-				
+
 			if(page > pages.len)
 				page = pages.len
-				
+
 			update_icon()
 	else
 		usr << "<span class='notice'>You need to hold it in hands!</span>"

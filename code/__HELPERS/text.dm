@@ -23,10 +23,10 @@
  */
 
 //Used for preprocessing entered text
-/proc/sanitize(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1, var/ja_mode = CHAT)
+/proc/sanitize(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1, var/mode = SANITIZE_CHAT)
 	#ifdef DEBUG_CYRILLIC
 	world << "\magenta DEBUG: \red <b>sanitize() entered, text:</b> <i>[input]</i>"
-	world << "\magenta DEBUG: \red <b>ja_mode:</b> [ja_mode]"
+	world << "\magenta DEBUG: \red <b>ja_mode:</b> [mode]"
 	#endif
 	if(!input)
 		return
@@ -34,16 +34,17 @@
 	if(max_length)
 		input = copytext(input,1,max_length)
 
-	input = replacetext(input, JA, JA_TEMP)
+	//code in modules/l10n/localisation.dm
+	input = sanitize_local(input, mode)
 
 	if(extra)
 		input = replace_characters(input, list("\n"=" ","\t"=" "))
 
 	if(encode)
-		//In addition to processing html, html_encode removes byond formatting codes like "\red", "\i" and other.
+		//In addition to processing html, lhtml_encode removes byond formatting codes like "\red", "\i" and other.
 		//It is important to avoid double-encode text, it can "break" quotes and some other characters.
 		//Also, keep in mind that escaped characters don't work in the interface (window titles, lower left corner of the main window, etc.)
-		input = html_encode(input)
+		input = lhtml_encode(input)
 	else
 		//If not need encode text, simply remove < and >
 		//note: we can also remove here byond formatting codes: 0xFF + next byte
@@ -53,37 +54,25 @@
 		//Maybe, we need trim text twice? Here and before copytext?
 		input = trim(input)
 
-	switch(ja_mode)
+/*	switch(mode)
 		if(CHAT)
 			input = replacetext(input, JA_TEMP, JA_CHAT)
 		if(POPUP)
 			input = replacetext(input, JA_TEMP, JA_POPUP)
 		//или оставляем как есть, для дальнейшей обработки отдельно
-
+*/
 	#ifdef DEBUG_CYRILLIC
 	world << "\magenta DEBUG: \blue <b>sanitize() finished, text:</b> <i>[input]</i>"
 	#endif
 
 	return input
 
-proc/sanitize_russian(var/msg, var/html = 0)
-	var/rep
-	if(html)
-		rep = "&#x44F;"
-	else
-		rep = "&#255;"
-	var/index = findtext(msg, "y")
-	while(index)
-		msg = copytext(msg, 1, index) + rep + copytext(msg, index + 1)
-		index = findtext(msg, "y")
-	return msg
-
-//Run sanitize(), but remove <, >, " first to prevent displaying them as &gt; &lt; &34; in some places, after html_encode().
+//Run sanitize(), but remove <, >, " first to prevent displaying them as &gt; &lt; &34; in some places, after lhtml_encode().
 //Best used for sanitize object names, window titles.
 //If you have a problem with sanitize() in chat, when quotes and >, < are displayed as html entites -
 //this is a problem of double-encode(when & becomes &amp;), use sanitize() with encode=0, but not the sanitizeSafe()!
-/proc/sanitizeSafe(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1, var/ja_mode = CHAT)
-	return sanitize(replace_characters(input, list(">"=" ","<"=" ", "\""="'")), max_length, encode, trim, extra)
+/proc/sanitizeSafe(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1, var/mode = SANITIZE_CHAT)
+	return sanitize(replace_characters(input, list(">"=" ","<"=" ", "\""="'")), max_length, encode, trim, extra, mode)
 
 //Filters out undesirable characters from names
 /proc/sanitizeName(var/input, var/max_length = MAX_NAME_LEN, var/allow_numbers = 0)
@@ -165,7 +154,7 @@ proc/sanitize_russian(var/msg, var/html = 0)
 
 //Old variant. Haven't dared to replace in some places.
 /proc/sanitize_old(var/t,var/list/repl_chars = list("\n"="#","\t"="#"))
-	return html_encode(replace_characters(t,repl_chars))
+	return lhtml_encode(replace_characters(t,repl_chars))
 
 /*
  * Text searches
@@ -332,9 +321,12 @@ proc/TextPreview(var/string,var/len=40)
 
 //alternative copytext() for encoded text, doesn't break html entities (&#34; and other)
 /proc/copytext_preserve_html(var/text, var/first, var/last)
+	return lhtml_encode(copytext(lhtml_decode(text), first, last))
+/*
 	text = replacetext(text, JA_POPUP, JA_TEMP)//для универсальности
-	text = html_encode(copytext(html_decode(text), first, last))
+	text = lhtml_encode(copytext(lhtml_decode(text), first, last))
 	text = replacetext(text, JA_TEMP, JA_POPUP)
+*/
 	return text
 
 //For generating neat chat tag-images

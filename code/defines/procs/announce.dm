@@ -47,40 +47,40 @@
 	Log(message, message_title)
 
 datum/announcement/proc/Message(message as text, message_title as text)
-	message = html_encode(message)
-	message_title = html_encode(message_title)
+	message = lhtml_encode(message)
+	message_title = lhtml_encode(message_title)
 	for(var/mob/M in player_list)
 		if(!istype(M,/mob/new_player) && !isdeaf(M))
 			M << "<h2 class='alert'>[title]</h2>"
 			M << "<span class='alert'>[message]</span>"
 			if (announcer)
-				M << "<span class='alert'> -[html_encode(announcer)]</span>"
+				M << "<span class='alert'> -[lhtml_encode(announcer)]</span>"
 
 datum/announcement/minor/Message(message as text, message_title as text)
-	world << "<b>[html_encode(message)]</b>"
+	world << "<b>[lhtml_encode(message)]</b>"
 
 datum/announcement/priority/Message(message as text, message_title as text)
-	world << "<h1 class='alert'>[html_encode(message_title)]</h1>"
-	world << "<span class='alert'>[html_encode(message)]</span>"
+	world << "<h1 class='alert'>[lhtml_encode(message_title)]</h1>"
+	world << "<span class='alert'>[lhtml_encode(message)]</span>"
 	if(announcer)
-		world << "<span class='alert'> -[html_encode(announcer)]</span>"
+		world << "<span class='alert'> -[lhtml_encode(announcer)]</span>"
 	world << "<br>"
 
 datum/announcement/priority/command/Message(message as text, message_title as text)
 	var/command
 	command += "<h1 class='alert'>[command_name()] Update</h1>"
 	if (message_title)
-		command += "<br><h2 class='alert'>[html_encode(message_title)]</h2>"
+		command += "<br><h2 class='alert'>[lhtml_encode(message_title)]</h2>"
 
-	command += "<br><span class='alert'>[html_encode(message)]</span><br>"
+	command += "<br><span class='alert'>[lhtml_encode(message)]</span><br>"
 	command += "<br>"
 	for(var/mob/M in player_list)
 		if(!istype(M,/mob/new_player) && !isdeaf(M))
 			M << command
 
 datum/announcement/priority/security/Message(message as text, message_title as text)
-	world << "<font size=4 color='red'>[html_encode(message_title)]</font>"
-	world << "<font color='red'>[html_encode(message)]</font>"
+	world << "<font size=4 color='red'>[lhtml_encode(message_title)]</font>"
+	world << "<font color='red'>[lhtml_encode(message)]</font>"
 
 datum/announcement/proc/NewsCast(message as text, message_title as text)
 	if(!newscast)

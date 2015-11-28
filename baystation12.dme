@@ -62,6 +62,7 @@
 #define FILE_DIR "sound/mecha"
 #define FILE_DIR "sound/misc"
 #define FILE_DIR "sound/music"
+#define FILE_DIR "sound/music/jukebox"
 #define FILE_DIR "sound/piano"
 #define FILE_DIR "sound/violin"
 #define FILE_DIR "sound/voice"
@@ -72,6 +73,7 @@
 #define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
+#include "code\closing_credits.dm"
 #include "code\global.dm"
 #include "code\hub.dm"
 #include "code\names.dm"
@@ -720,6 +722,7 @@
 #include "code\game\objects\items\weapons\circuitboards\computer\air_management.dm"
 #include "code\game\objects\items\weapons\circuitboards\computer\camera_monitor.dm"
 #include "code\game\objects\items\weapons\circuitboards\computer\computer.dm"
+#include "code\game\objects\items\weapons\circuitboards\computer\holodeckcontrol.dm"
 #include "code\game\objects\items\weapons\circuitboards\computer\research.dm"
 #include "code\game\objects\items\weapons\circuitboards\computer\supply.dm"
 #include "code\game\objects\items\weapons\circuitboards\computer\telecomms.dm"
@@ -1110,6 +1113,9 @@
 #include "code\modules\hydroponics\trays\tray_soil.dm"
 #include "code\modules\hydroponics\trays\tray_tools.dm"
 #include "code\modules\hydroponics\trays\tray_update_icons.dm"
+#include "code\modules\l10n\language.dm"
+#include "code\modules\l10n\localisation.dm"
+#include "code\modules\l10n\translation.dm"
 #include "code\modules\library\lib_items.dm"
 #include "code\modules\library\lib_machines.dm"
 #include "code\modules\library\lib_readme.dm"
@@ -1402,6 +1408,7 @@
 #include "code\modules\nano\nanoui.dm"
 #include "code\modules\nano\interaction\admin.dm"
 #include "code\modules\nano\interaction\base.dm"
+#include "code\modules\nano\interaction\conscious.dm"
 #include "code\modules\nano\interaction\contained.dm"
 #include "code\modules\nano\interaction\default.dm"
 #include "code\modules\nano\interaction\inventory.dm"

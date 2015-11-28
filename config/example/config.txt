@@ -362,6 +362,9 @@ NINJAS_ALLOWED
 ## Uncomment to disable ghost chat by default.
 #DISABLE_DSAY
 
+## Uncomment to disable explosions by default.
+#DISABLE_EXPLOSIONS
+
 ## Uncomment to disable respawning by default.
 #DISABLE_RESPAWN
 

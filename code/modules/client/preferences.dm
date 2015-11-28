@@ -47,6 +47,7 @@ datum/preferences
 	var/toggles = TOGGLES_DEFAULT
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
+	var/interface_lang = "main"
 
 	//character preferences
 	var/real_name						//our character's name
@@ -274,6 +275,7 @@ datum/preferences
 	dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "All Speech" : "Nearest Creatures"]</b></a><br>"
 	dat += "<b>Ghost sight:</b> <a href='?_src_=prefs;preference=ghost_sight'><b>[(toggles & CHAT_GHOSTSIGHT) ? "All Emotes" : "Nearest Creatures"]</b></a><br>"
 	dat += "<b>Ghost radio:</b> <a href='?_src_=prefs;preference=ghost_radio'><b>[(toggles & CHAT_GHOSTRADIO) ? "All Chatter" : "Nearest Speakers"]</b></a><br>"
+	dat += "<b>Language:</b> <a href='?_src_=prefs;preference=interface_lang'><b>[interface_lang]</b></a><br>"
 
 	if(config.allow_Metadata)
 		dat += "<b>OOC Notes:</b> <a href='?_src_=prefs;preference=metadata;task=input'> Edit </a><br>"
@@ -453,7 +455,7 @@ datum/preferences
 	dat += "<a href='?_src_=prefs;preference=reset_all'>Reset Setup</a>"
 	dat += "</center></body></html>"
 
-	user << browse(dat, "window=preferences;size=560x736")
+	user << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=preferences;size=560x736")
 
 /datum/preferences/proc/SetChoices(mob/user, limit = 16, list/splitJobs = list("Chief Medical Officer"), width = 550, height = 660)
 	if(!job_master)
@@ -593,7 +595,7 @@ datum/preferences
 	HTML += "</center></tt>"
 
 	user << browse(null, "window=preferences")
-	user << browse(HTML, "window=records;size=350x300")
+	user << browse(sanitize_local(HTML, SANITIZE_BROWSER), "window=records;size=350x300")
 	return
 
 /datum/preferences/proc/SetSpecies(mob/user)
@@ -684,7 +686,7 @@ datum/preferences
 	HTML += "</center></tt>"
 
 	user << browse(null, "window=preferences")
-	user << browse(HTML, "window=antagoptions")
+	user << browse(sanitize_local(HTML, SANITIZE_BROWSER), "window=antagoptions")
 	return
 
 /datum/preferences/proc/SetFlavorText(mob/user)
@@ -723,7 +725,7 @@ datum/preferences
 	HTML +="<a href='?src=\ref[user];preference=flavor_text;task=done'>\[Done\]</a>"
 	HTML += "<tt>"
 	user << browse(null, "window=preferences")
-	user << browse(HTML, "window=flavor_text;size=430x300")
+	user << browse(sanitize_local(HTML, SANITIZE_BROWSER), "window=flavor_text;size=430x300")
 	return
 
 /datum/preferences/proc/SetFlavourTextRobot(mob/user)
@@ -742,7 +744,7 @@ datum/preferences
 	HTML +="<a href='?src=\ref[user];preference=flavour_text_robot;task=done'>\[Done\]</a>"
 	HTML += "<tt>"
 	user << browse(null, "window=preferences")
-	user << browse(HTML, "window=flavour_text_robot;size=430x300")
+	user << browse(sanitize_local(HTML, SANITIZE_BROWSER), "window=flavour_text_robot;size=430x300")
 	return
 
 /datum/preferences/proc/GetPlayerAltTitle(datum/job/job)
@@ -1005,10 +1007,10 @@ datum/preferences
 				ShowChoices(user)
 				return
 			if("general")
-				var/msg = sanitize(input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(revert_ja(flavor_texts[href_list["task"]]))) as message, extra = 0, ja_mode = POPUP)
+				var/msg = sanitize(input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",lhtml_decode(flavor_texts[href_list["task"]])) as message, extra = 0)
 				flavor_texts[href_list["task"]] = msg
 			else
-				var/msg = sanitize(input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(revert_ja(flavor_texts[href_list["task"]]))) as message, extra = 0, ja_mode = POPUP)
+				var/msg = sanitize(input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",lhtml_decode(flavor_texts[href_list["task"]])) as message, extra = 0)
 				flavor_texts[href_list["task"]] = msg
 		SetFlavorText(user)
 		return
@@ -1023,10 +1025,10 @@ datum/preferences
 				ShowChoices(user)
 				return
 			if("Default")
-				var/msg = sanitize(input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(revert_ja(flavour_texts_robot["Default"]))) as message, extra = 0, ja_mode = POPUP)
+				var/msg = sanitize(input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",lhtml_decode(flavour_texts_robot["Default"])) as message, extra = 0)
 				flavour_texts_robot[href_list["task"]] = msg
 			else
-				var/msg = sanitize(input(usr,"Set the flavour text for your robot with [href_list["task"]] module. If you leave this empty, default flavour text will be used for this module.","Flavour Text",html_decode(revert_ja(flavour_texts_robot[href_list["task"]]))) as message, extra = 0, ja_mode = POPUP)
+				var/msg = sanitize(input(usr,"Set the flavour text for your robot with [href_list["task"]] module. If you leave this empty, default flavour text will be used for this module.","Flavour Text",lhtml_decode(flavour_texts_robot[href_list["task"]])) as message, extra = 0)
 				flavour_texts_robot[href_list["task"]] = msg
 		SetFlavourTextRobot(user)
 		return
@@ -1042,24 +1044,24 @@ datum/preferences
 		else
 			user << browse(null, "window=records")
 		if(href_list["task"] == "med_record")
-			var/medmsg = sanitize(input(usr,"Set your medical notes here.","Medical Records",html_decode(revert_ja(med_record))) as message, MAX_PAPER_MESSAGE_LEN, extra = 0, ja_mode = POPUP)
+			var/medmsg = sanitize(input(usr,"Set your medical notes here.","Medical Records",lhtml_decode(med_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if(medmsg != null)
 				med_record = medmsg
 				SetRecords(user)
 
 		if(href_list["task"] == "sec_record")
-			var/secmsg = sanitize(input(usr,"Set your security notes here.","Security Records",html_decode(revert_ja(sec_record))) as message, MAX_PAPER_MESSAGE_LEN, extra = 0, ja_mode = POPUP)
+			var/secmsg = sanitize(input(usr,"Set your security notes here.","Security Records",lhtml_decode(sec_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if(secmsg != null)
 				sec_record = secmsg
 				SetRecords(user)
 		if(href_list["task"] == "gen_record")
-			var/genmsg = sanitize(input(usr,"Set your employment notes here.","Employment Records",html_decode(revert_ja(gen_record))) as message, MAX_PAPER_MESSAGE_LEN, extra = 0, ja_mode = POPUP)
+			var/genmsg = sanitize(input(usr,"Set your employment notes here.","Employment Records",lhtml_decode(gen_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if(genmsg != null)
 				gen_record = genmsg
 				SetRecords(user)
 
 		if(href_list["task"] == "exploitable_record")
-			var/exploitmsg = sanitize(input(usr,"Set exploitable information about you here.","Exploitable Information",html_decode(revert_ja(exploit_record))) as message, MAX_PAPER_MESSAGE_LEN, extra = 0, ja_mode = POPUP)
+			var/exploitmsg = sanitize(input(usr,"Set exploitable information about you here.","Exploitable Information",lhtml_decode(exploit_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if(exploitmsg != null)
 				exploit_record = exploitmsg
 				SetAntagoptions(user)
@@ -1273,7 +1275,7 @@ datum/preferences
 				if("metadata")
 					var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
 					if(new_metadata)
-						metadata = sanitize(new_metadata, ja_mode = POPUP)
+						metadata = sanitize(new_metadata)
 
 				if("b_type")
 					var/new_b_type = input(user, "Choose your character's blood-type:", "Character Preference") as null|anything in list( "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" )
@@ -1496,7 +1498,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a home system.")  as text|null
 						if(raw_choice)
-							home_system = sanitize(raw_choice, ja_mode = POPUP)
+							home_system = sanitize(raw_choice)
 						return
 					home_system = choice
 				if("citizenship")
@@ -1506,7 +1508,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter your current citizenship.", "Character Preference") as text|null
 						if(raw_choice)
-							citizenship = sanitize(raw_choice, ja_mode = POPUP)
+							citizenship = sanitize(raw_choice)
 						return
 					citizenship = choice
 				if("faction")
@@ -1516,7 +1518,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a faction.")  as text|null
 						if(raw_choice)
-							faction = sanitize(raw_choice, ja_mode = POPUP)
+							faction = sanitize(raw_choice)
 						return
 					faction = choice
 				if("religion")
@@ -1526,7 +1528,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a religon.")  as text|null
 						if(raw_choice)
-							religion = sanitize(raw_choice, ja_mode = POPUP)
+							religion = sanitize(raw_choice)
 						return
 					religion = choice
 		else
@@ -1589,6 +1591,11 @@ datum/preferences
 
 				if("ghost_radio")
 					toggles ^= CHAT_GHOSTRADIO
+
+				if("interface_lang")
+					interface_lang = input(usr, "Select a language form list") in interface_languages
+					if(!interface_lang)
+						interface_lang = "main"
 
 				if("save")
 					save_preferences()

@@ -8,7 +8,7 @@ var/list/admin_verbs_default = list(
 	/client/proc/hide_most_verbs,		/*hides all our hideable adminverbs*/
 	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game. +VAREDIT needed to modify*/
 //	/client/proc/check_antagonists,		/*shows all antags*/
-	/client/proc/cmd_mentor_check_new_players
+	/client/proc/cmd_mentor_check_new_players,
 //	/client/proc/deadchat				/*toggles deadchat on/off*/
 	)
 var/list/admin_verbs_admin = list(
@@ -175,9 +175,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/create_random_map,
 	/client/proc/show_plant_genes,
 	/client/proc/enable_debug_verbs,
-	#ifdef ALLOW_CALLPROC
 	/client/proc/callproc,
-	#endif
 	/client/proc/toggledebuglogs,
 	/client/proc/SDQL_query,
 	/client/proc/SDQL2_query,
@@ -188,9 +186,7 @@ var/list/admin_verbs_debug = list(
 	)
 
 var/list/admin_verbs_paranoid_debug = list(
-	#ifdef ALLOW_CALLPROC
 	/client/proc/callproc,
-	#endif
 	/client/proc/debug_controller
 	)
 
@@ -259,9 +255,7 @@ var/list/admin_verbs_hideable = list(
 	/datum/admins/proc/adjump,
 	/client/proc/restart_controller,
 	/client/proc/cmd_admin_list_open_jobs,
-	#ifdef ALLOW_CALLPROC
 	/client/proc/callproc,
-	#endif
 	/client/proc/Debug2,
 	/client/proc/reload_admins,
 	/client/proc/kill_air,
@@ -437,7 +431,7 @@ var/list/admin_verbs_mentor = list(
 	return
 
 /client/proc/player_panel_new()
-	set name = "Player Panel New"
+	set name = "PP New"
 	set category = "Admin"
 	if(holder)
 		holder.player_panel_new()
@@ -445,7 +439,7 @@ var/list/admin_verbs_mentor = list(
 	return
 
 /client/proc/check_antagonists()
-	set name = "Check Antagonists"
+	set name = "Check Antag"
 	set category = "Admin"
 	if(holder)
 		holder.check_antagonists()
@@ -454,7 +448,7 @@ var/list/admin_verbs_mentor = list(
 	return
 
 /client/proc/jobbans()
-	set name = "Display Job bans"
+	set name = "Display Jobbans"
 	set category = "Admin"
 	if(holder)
 		if(config.ban_legacy_system)
@@ -755,7 +749,7 @@ var/list/admin_verbs_mentor = list(
 	feedback_add_details("admin_verb","MSL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/change_human_appearance_admin()
-	set name = "Change Mob Appearance - Admin"
+	set name = "Change Mob Appearance"
 	set desc = "Allows you to change the mob appearance"
 	set category = "Admin"
 
@@ -769,7 +763,7 @@ var/list/admin_verbs_mentor = list(
 	feedback_add_details("admin_verb","CHAA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/change_human_appearance_self()
-	set name = "Change Mob Appearance - Self"
+	set name = "Change Self Appearance"
 	set desc = "Allows the mob to change its appearance"
 	set category = "Admin"
 

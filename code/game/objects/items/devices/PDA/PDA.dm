@@ -287,6 +287,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		else
 			HTML += addtext("<i><b>&larr; From <a href='byond://?src=\ref[src];choice=Message;notap=1;target=",index["target"],"'>", index["owner"],"</a>:</b></i><br>", index["message"], "<br>")
 	HTML +="</body></html>"
+	HTML = sanitize_local(HTML, SANITIZE_BROWSER)
 	usr << browse(HTML, "window=log;size=400x444;border=1;can_resize=1;can_close=1;can_minimize=0")
 
 
@@ -401,7 +402,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			data["records"] = cartridge.create_NanoUI_values()
 
 		if(mode == 0)
-			cartdata["name"] = html_encode(cartridge.name)//RuBay (убираем improper из названия картриджа)
+			cartdata["name"] = lhtml_encode(cartridge.name)
 			if(isnull(cartridge.radio))
 				cartdata["radio"] = 0
 			else
@@ -667,9 +668,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if ("Edit")
 			var/n = input(U, "Please enter message", name, notehtml) as message
 			if (in_range(src, U) && loc == U)
-				n = sanitizeSafe(n, extra = 0, ja_mode = POPUP)
+				n = sanitizeSafe(n, extra = 0)
 				if (mode == 1)
-					note = html_decode(n)
+					note = lhtml_decode(n)
 					notehtml = note
 					note = replacetext(note, "\n", "<br>")
 			else
@@ -951,7 +952,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		U.visible_message("<span class='notice'>[U] taps on \his PDA's screen.</span>")
 	U.last_target_click = world.time
 	var/t = input(U, "Please enter message", P.name, null) as text
-	t = sanitize(t, ja_mode = POPUP)
+	t = sanitize(t)
 	//t = readd_quotes(t)
 	t = replace_characters(t, list("&#34;" = "\""))
 	if (!t || !istype(P))
@@ -983,12 +984,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
 		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))
-		var/t_chat = sanitize_chat(t)
 		for(var/mob/M in player_list)
 			if(M.stat == DEAD && M.client && (M.client.prefs.toggles & CHAT_GHOSTEARS)) // src.client is so that ghosts don't have to listen to mice
 				if(istype(M, /mob/new_player))
 					continue
-				M.show_message("<span class='game say'>PDA Message - <span class='name'>[owner]</span> -> <span class='name'>[P.owner]</span>: <span class='message'>[t_chat]</span></span>")
+				M.show_message("<span class='game say'>PDA Message - <span class='name'>[owner]</span> -> <span class='name'>[P.owner]</span>: <span class='message'>[t]</span></span>")
 
 		if(!conversations.Find("\ref[P]"))
 			conversations.Add("\ref[P]")
@@ -1003,9 +1003,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			for(var/mob/living/silicon/ai/ai in mob_list)
 				// Allows other AIs to intercept the message but the AI won't intercept their own message.
 				if(ai.aiPDA != P && ai.aiPDA != src)
-					ai.show_message("<i>Intercepted message from <b>[who]</b>: [t_chat]</i>")
+					ai.show_message("<i>Intercepted message from <b>[who]</b>: [t]</i>")
 
-		P.new_message_from_pda(src, t_chat)
+		P.new_message_from_pda(src, t)
 		nanomanager.update_user_uis(U, src) // Update the sending user's PDA UI so that they can see the new message
 	else
 		U << "<span class='notice'>ERROR: Messaging server is not responding.</span>"
@@ -1052,7 +1052,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/ai/new_message(var/atom/movable/sending_unit, var/sender, var/sender_job, var/message)
 	var/track = ""
 	if(ismob(sending_unit.loc) && isAI(loc))
-		track = "(<a href='byond://?src=\ref[loc];track=\ref[sending_unit.loc];trackname=[html_encode(sender)]'>Follow</a>)"
+		track = "(<a href='byond://?src=\ref[loc];track=\ref[sending_unit.loc];trackname=[lhtml_encode(sender)]'>Follow</a>)"
 
 	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;skiprefresh=1;target=\ref[sending_unit]'>Reply</a>) [track]"
 	new_info(message_silent, newstone, reception_message)

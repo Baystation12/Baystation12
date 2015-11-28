@@ -49,7 +49,7 @@
 		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> <A href='?src=\ref[src];rename=\ref[Ph]'>Rename</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
 	for(var/obj/item/weapon/paper_bundle/Pb in src)
 		dat += "<A href='?src=\ref[src];remove=\ref[Pb]'>Remove</A> <A href='?src=\ref[src];rename=\ref[Pb]'>Rename</A> - <A href='?src=\ref[src];browse=\ref[Pb]'>[Pb.name]</A><BR>"
-	user << browse(dat, "window=folder")
+	user << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=folder")
 	onclose(user, "folder")
 	add_fingerprint(usr)
 	return
@@ -71,10 +71,10 @@
 			var/obj/item/weapon/paper/P = locate(href_list["read"])
 			if(P && (P.loc == src) && istype(P))
 				if(!(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/dead/observer) || istype(usr, /mob/living/silicon)))
-					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
+					usr << browse(sanitize_local("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", SANITIZE_BROWSER), "window=[P.name]")
 					onclose(usr, "[P.name]")
 				else
-					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", "window=[P.name]")
+					usr << browse(sanitize_local("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", SANITIZE_BROWSER), "window=[P.name]")
 					onclose(usr, "[P.name]")
 		else if(href_list["look"])
 			var/obj/item/weapon/photo/P = locate(href_list["look"])
@@ -87,20 +87,20 @@
 				onclose(usr, "[P.name]")
 		else if(href_list["rename"])
 			var/obj/item/weapon/O = locate(href_list["rename"])
-			
+
 			if(O && (O.loc == src))
 				if(istype(O, /obj/item/weapon/paper))
 					var/obj/item/weapon/paper/to_rename = O
 					to_rename.rename()
-					
+
 				else if(istype(O, /obj/item/weapon/photo))
 					var/obj/item/weapon/photo/to_rename = O
 					to_rename.rename()
-					
+
 				else if(istype(O, /obj/item/weapon/paper_bundle))
 					var/obj/item/weapon/paper_bundle/to_rename = O
 					to_rename.rename()
-					
+
 		//Update everything
 		attack_self(usr)
 		update_icon()
