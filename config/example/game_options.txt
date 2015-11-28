@@ -22,7 +22,7 @@ ORGAN_HEALTH_MULTIPLIER 100
 
 ## multiplier which influences how fast organs regenerate naturally
 ## 100 means normal, 50 means half
-ORGAN_REGENERATION_MULTIPLIER 75
+ORGAN_REGENERATION_MULTIPLIER 100
 
 ### REVIVAL ###
 
@@ -63,4 +63,4 @@ ANIMAL_DELAY 0
 ## Config options which, of course, don't fit into previous categories.
 
 ## Remove the # in front of this config option to have loyalty implants spawn by default on your server.
-#USE_LOYALTY_IMPLANTS
+USE_LOYALTY_IMPLANTS

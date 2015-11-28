@@ -266,6 +266,11 @@
 	path = /obj/item/device/assembly/signaler
 	category = "Devices and Components"
 
+/datum/autolathe/recipe/voice
+	name = "voice"
+	path = /obj/item/device/assembly/voice
+	category = "Devices and Components"
+
 /datum/autolathe/recipe/sensor_infra
 	name = "infrared sensor"
 	path = /obj/item/device/assembly/infra

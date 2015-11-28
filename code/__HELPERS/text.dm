@@ -23,12 +23,18 @@
  */
 
 //Used for preprocessing entered text
-/proc/sanitize(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1)
+/proc/sanitize(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1, var/ja_mode = CHAT)
+	#ifdef DEBUG_CYRILLIC
+	world << "\magenta DEBUG: \red <b>sanitize() entered, text:</b> <i>[input]</i>"
+	world << "\magenta DEBUG: \red <b>ja_mode:</b> [ja_mode]"
+	#endif
 	if(!input)
 		return
 
 	if(max_length)
 		input = copytext(input,1,max_length)
+
+	input = replacetext(input, JA, JA_TEMP)
 
 	if(extra)
 		input = replace_characters(input, list("\n"=" ","\t"=" "))
@@ -47,13 +53,36 @@
 		//Maybe, we need trim text twice? Here and before copytext?
 		input = trim(input)
 
+	switch(ja_mode)
+		if(CHAT)
+			input = replacetext(input, JA_TEMP, JA_CHAT)
+		if(POPUP)
+			input = replacetext(input, JA_TEMP, JA_POPUP)
+		//или оставляем как есть, для дальнейшей обработки отдельно
+
+	#ifdef DEBUG_CYRILLIC
+	world << "\magenta DEBUG: \blue <b>sanitize() finished, text:</b> <i>[input]</i>"
+	#endif
+
 	return input
+
+proc/sanitize_russian(var/msg, var/html = 0)
+	var/rep
+	if(html)
+		rep = "&#x44F;"
+	else
+		rep = "&#255;"
+	var/index = findtext(msg, "y")
+	while(index)
+		msg = copytext(msg, 1, index) + rep + copytext(msg, index + 1)
+		index = findtext(msg, "y")
+	return msg
 
 //Run sanitize(), but remove <, >, " first to prevent displaying them as &gt; &lt; &34; in some places, after html_encode().
 //Best used for sanitize object names, window titles.
 //If you have a problem with sanitize() in chat, when quotes and >, < are displayed as html entites -
 //this is a problem of double-encode(when & becomes &amp;), use sanitize() with encode=0, but not the sanitizeSafe()!
-/proc/sanitizeSafe(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1)
+/proc/sanitizeSafe(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1, var/ja_mode = CHAT)
 	return sanitize(replace_characters(input, list(">"=" ","<"=" ", "\""="'")), max_length, encode, trim, extra)
 
 //Filters out undesirable characters from names
@@ -224,7 +253,7 @@
 
 //Returns a string with the first element of the string capitalized.
 /proc/capitalize(var/t as text)
-	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
+	return uppertext_alt(copytext(t, 1, 2)) + copytext(t, 2)
 
 //This proc strips html properly, remove < > and all text between
 //for complete text sanitizing should be used sanitize()
@@ -303,7 +332,10 @@ proc/TextPreview(var/string,var/len=40)
 
 //alternative copytext() for encoded text, doesn't break html entities (&#34; and other)
 /proc/copytext_preserve_html(var/text, var/first, var/last)
-	return html_encode(copytext(html_decode(text), first, last))
+	text = replacetext(text, JA_POPUP, JA_TEMP)//для универсальности
+	text = html_encode(copytext(html_decode(text), first, last))
+	text = replacetext(text, JA_TEMP, JA_POPUP)
+	return text
 
 //For generating neat chat tag-images
 //The icon var could be local in the proc, but it's a waste of resources

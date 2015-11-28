@@ -156,8 +156,10 @@
 
 	//Flavour text for robots.
 	S["flavour_texts_robot_Default"] >> flavour_texts_robot["Default"]
+	flavour_texts_robot["Default"] = sanitize_popup(revert_ja(flavour_texts_robot["Default"]))
 	for(var/module in robot_module_types)
 		S["flavour_texts_robot_[module]"] >> flavour_texts_robot[module]
+		flavour_texts_robot[module] = sanitize_popup(revert_ja(flavour_texts_robot[module]))
 
 	//Miscellaneous
 	S["med_record"]			>> med_record
@@ -185,6 +187,27 @@
 
 	S["UI_style_color"]		<< UI_style_color
 	S["UI_style_alpha"]		<< UI_style_alpha
+
+	//RuBay: нельзя быть уверенным, что "я" хранится в нужной нам кодировке (учитывая возможные предыдущие фиксы "я")
+	metadata = sanitize_popup(revert_ja(metadata))
+
+	flavor_texts["general"] = sanitize_popup(revert_ja(flavor_texts["general"]))
+	flavor_texts["head"] = sanitize_popup(revert_ja(flavor_texts["head"]))
+	flavor_texts["face"] = sanitize_popup(revert_ja(flavor_texts["face"]))
+	flavor_texts["eyes"] = sanitize_popup(revert_ja(flavor_texts["eyes"]))
+	flavor_texts["torso"] = sanitize_popup(revert_ja(flavor_texts["torso"]))
+	flavor_texts["arms"] = sanitize_popup(revert_ja(flavor_texts["arms"]))
+	flavor_texts["hands"] = sanitize_popup(revert_ja(flavor_texts["hands"]))
+	flavor_texts["legs"] = sanitize_popup(revert_ja(flavor_texts["legs"]))
+	flavor_texts["feet"] = sanitize_popup(revert_ja(flavor_texts["feet"]))
+
+	med_record = sanitize_popup(revert_ja(med_record))
+	sec_record = sanitize_popup(revert_ja(sec_record))
+	gen_record = sanitize_popup(revert_ja(gen_record))
+	home_system = sanitize_popup(revert_ja(home_system))
+	citizenship = sanitize_popup(revert_ja(citizenship))
+	faction = sanitize_popup(revert_ja(faction))
+	religion = sanitize_popup(revert_ja(religion))
 
 	//Sanitize
 	metadata		= sanitize_text(metadata, initial(metadata))

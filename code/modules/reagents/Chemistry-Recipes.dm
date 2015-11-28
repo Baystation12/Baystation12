@@ -946,7 +946,8 @@
 	P.loc = get_turf(holder.my_atom)
 	..()
 
-//Gold - removed
+
+//Gold - no longer removed.
 /datum/chemical_reaction/slime/crit
 	name = "Slime Crit"
 	id = "m_tele"
@@ -954,7 +955,23 @@
 	required_reagents = list("phoron" = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/gold
-	mix_message = "The slime core fizzles disappointingly."
+
+/datum/chemical_reaction/slime/crit/on_reaction(var/datum/reagents/holder)
+	var/list/crit = typesof(/mob/living/simple_animal/hostile) - /mob/living/simple_animal/hostile
+	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
+	for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
+		if(M.eyecheck() <= 0)
+			flick("e_flash", M.flash)
+
+	for(var/i = 1, i <= 4 + rand(1,2), i++)
+		var/chosen = pick(crit)
+		var/obj/B = new chosen
+		if(B)
+			B.loc = get_turf(holder.my_atom)
+			if(prob(50))
+				for(var/j = 1, j <= rand(1, 3), j++)
+					step(B, pick(NORTH, SOUTH, EAST, WEST))
+	..()
 
 //Silver
 /datum/chemical_reaction/slime/bork

@@ -291,3 +291,17 @@
 /obj/item/weapon/card/id/centcom/ERT/New()
 	..()
 	access += get_all_accesses()
+
+/obj/item/weapon/card/id/admin
+	name = "\improper Admin"
+	desc = "Admin`s ID. Never touch it."
+	registered_name = "Admin"
+	assignment = "Admin"
+	icon_state = "gold"
+	item_state = "gold_id"
+
+/obj/item/weapon/card/id/admin/New()
+	..()
+	access = get_all_accesses()
+	access += get_all_centcom_access()
+	access += get_all_syndicate_access()

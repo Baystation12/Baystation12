@@ -899,7 +899,7 @@
 "ro" = (/obj/machinery/clonepod,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/shuttle/administration/centcom)
 "rp" = (/obj/machinery/computer/scan_consolenew,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/shuttle/administration/centcom)
 "rq" = (/obj/item/clothing/gloves/yellow,/obj/item/device/assembly/signaler{pixel_y = 2},/obj/item/clothing/glasses/night,/obj/structure/table/steel,/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
-"rr" = (/obj/structure/device/piano{dir = 4},/turf/unsimulated/floor{icon_state = "redyellowfull"},/area/centcom/living)
+"rr" = (/obj/structure/piano{dir = 4},/turf/unsimulated/floor{icon_state = "redyellowfull"},/area/centcom/living)
 "rs" = (/obj/item/weapon/stool{pixel_y = 8},/turf/unsimulated/floor{icon_state = "redyellowfull"},/area/centcom/living)
 "rt" = (/obj/item/clothing/gloves/yellow,/obj/item/device/assembly/prox_sensor{pixel_x = -8; pixel_y = 4},/obj/item/clothing/glasses/night,/obj/machinery/light{dir = 4},/obj/structure/table/steel,/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
 "ru" = (/obj/structure/reagent_dispensers/beerkeg,/turf/unsimulated/floor{icon_state = "cafeteria"; dir = 2},/area/centcom/living)
