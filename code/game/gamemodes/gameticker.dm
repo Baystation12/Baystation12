@@ -39,13 +39,6 @@ var/global/datum/controller/gameticker/ticker
 								'sound/music/title2.ogg' = "level3.mod",\
 								'sound/music/space_oddity.ogg' = "Chris Hadfield - Space Oddity",\
 								'sound/music/Alien Swarm - Syntek Residential.ogg' = "Alien Swarm - Syntek Residential",\
-								'sound/music/Civ3 - Stars Full.ogg' = "Civ3 - Stars Full",\
-								'sound/music/Betamaster - Little swedish girl.ogg' = "Betamaster - Little swedish girl",\
-								'sound/music/Digital Insanity - Unreal Superhero.ogg' = "Digital Insanity - Unreal Superhero",\
-								'sound/music/Kelly_Bailey_-_Drums_And_Riffs.ogg' = "Kelly Bailey - Drums And Riffs",\
-								'sound/music/M83_-_Midnight_city_minus.ogg' = "M83 - Midnight city minus",\
-								'sound/music/Ryan Ike - Security, Circuitry and You.ogg' = "Ryan Ike - Security, Circuitry and You",\
-								'sound/music/Space Rangers2 - Fei 1.ogg' = "Space Rangers2 - Fei",\
 								'sound/music/Syrsa - Yonk.ogg' = "Syrsa - Yonk",\
 								'sound/music/The_Clouds_Will_Clear_-_The_Storm_Will_Pass.ogg' = "The Clouds Will Clear - The Storm Will Pass",\
 								'sound/music/Variations on a Space Station.ogg' = "Variations on a Space Station",\
@@ -55,7 +48,6 @@ var/global/datum/controller/gameticker/ticker
 								'sound/music/traitor.ogg' = "traitor.ogg",\
 								'sound/music/title2.ogg' = "level3.mod",\
 								'sound/music/space_oddity.ogg' = "Chris Hadfield - Space Oddity",\
-								'sound/music/Alien Swarm - Syntek Residential.ogg' = "Alien Swarm - Syntek Residential",\
 								'sound/music/Chris Remo - Space Asshole.ogg' = "Chris Remo - Space Asshole",\
 								'sound/music/Civ3 - Stars Full.ogg' = "Civ3 - Stars Full",\
 								'sound/music/Betamaster - Little swedish girl.ogg' = "Betamaster - Little swedish girl",\
