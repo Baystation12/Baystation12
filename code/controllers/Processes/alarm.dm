@@ -19,7 +19,8 @@ var/datum/controller/process/alarm/alarm_manager
 	alarm_manager = src
 
 /datum/controller/process/alarm/doWork()
-	for(var/datum/alarm_handler/AH in all_handlers)
+	for(last_object in all_handlers)
+		var/datum/alarm_handler/AH = last_object
 		AH.process()
 		SCHECK
 
