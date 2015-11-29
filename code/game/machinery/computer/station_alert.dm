@@ -20,10 +20,10 @@
 /obj/machinery/computer/station_alert/initialize()
 	..()
 	alarm_monitor = new monitor_type(src)
-	alarm_monitor.register(src, /obj/machinery/computer/station_alert/update_icon)
+	alarm_monitor.register_alarm(src, /obj/machinery/computer/station_alert/update_icon)
 
 /obj/machinery/computer/station_alert/Destroy()
-	alarm_monitor.unregister(src)
+	alarm_monitor.unregister_alarm(src)
 	qdel(alarm_monitor)
 	..()
 
