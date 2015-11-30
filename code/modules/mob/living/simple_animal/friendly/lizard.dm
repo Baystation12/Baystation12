@@ -15,3 +15,4 @@
 	response_disarm = "shoos"
 	response_harm   = "stomps on"
 	mob_size = MOB_MINISCULE
+	possession_candidate = 1

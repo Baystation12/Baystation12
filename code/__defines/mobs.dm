@@ -125,3 +125,6 @@
 #define FLASH_PROTECTION_NONE 0
 #define FLASH_PROTECTION_MODERATE 1
 #define FLASH_PROTECTION_MAJOR 2
+
+#define ANIMAL_SPAWN_DELAY round(config.respawn_delay / 6)
+#define DRONE_SPAWN_DELAY  round(config.respawn_delay / 3)
