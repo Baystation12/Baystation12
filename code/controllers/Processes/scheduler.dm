@@ -1,16 +1,23 @@
-var/global/list/scheduled_tasks
+/var/global/datum/controller/process/scheduler/scheduler
+
+/************
+* Scheduler *
+************/
+/datum/controller/process/scheduler
+	var/list/scheduled_tasks
 
 /datum/controller/process/scheduler/setup()
 	name = "scheduler"
 	schedule_interval = 7 SECONDS
 	scheduled_tasks = list()
+	scheduler = src
 
 /datum/controller/process/scheduler/doWork()
 	for(last_object in scheduled_tasks)
 		var/datum/scheduled_task/scheduled_task = last_object
 		try
 			if(world.time > scheduled_task.trigger_time)
-				scheduled_tasks -= scheduled_task
+				unschedule(scheduled_task)
 				scheduled_task.process()
 		catch(var/exception/e)
 			catchException(e, last_object)
@@ -18,7 +25,38 @@ var/global/list/scheduled_tasks
 
 /datum/controller/process/scheduler/statProcess()
 	..()
-	stat(null, "[scheduled_tasks.len] tasks")
+	stat(null, "[scheduled_tasks.len] task\s")
+
+/datum/controller/process/scheduler/proc/schedule(var/datum/scheduled_task/st)
+	if(world.time < st.trigger_time)
+		scheduled_tasks += st
+		st.register(OBSERVER_EVENT_DESTROY, src, /datum/controller/process/scheduler/proc/unschedule)
+	else
+		st.process()
+
+/datum/controller/process/scheduler/proc/unschedule(var/datum/scheduled_task/st)
+	if(st in scheduled_tasks)
+		scheduled_tasks -= st
+		st.unregister(OBSERVER_EVENT_DESTROY, src)
+
+/**********
+* Helpers *
+**********/
+/proc/schedule_task(var/trigger_time, var/repeat_interval, var/procedure, var/list/arguments)
+	var/datum/scheduled_task/st = new/datum/scheduled_task(trigger_time, procedure, arguments, /proc/destroy_scheduled_task, list())
+	scheduler.schedule(st)
+
+/proc/schedule_task_with_source(var/trigger_time, var/repeat_interval, var/source, var/procedure, var/list/arguments)
+	var/datum/scheduled_task/st = new/datum/scheduled_task/source(trigger_time, source, procedure, arguments, /proc/destroy_scheduled_task, list())
+	scheduler.schedule(st)
+
+/proc/schedule_repeating_task(var/trigger_time, var/repeat_interval, var/procedure, var/list/arguments)
+	var/datum/scheduled_task/st = new/datum/scheduled_task(trigger_time, procedure, arguments, /proc/repeat_scheduled_task, list(repeat_interval))
+	scheduler.schedule(st)
+
+/proc/schedule_repeating_task_with_source(var/trigger_time, var/repeat_interval, var/source, var/procedure, var/list/arguments)
+	var/datum/scheduled_task/st = new/datum/scheduled_task/source(trigger_time, source, procedure, arguments, /proc/repeat_scheduled_task, list(repeat_interval))
+	scheduler.schedule(st)
 
 /*************
 * Task Datum *
@@ -37,10 +75,8 @@ var/global/list/scheduled_tasks
 	src.task_after_process = task_after_process ? task_after_process : /proc/destroy_scheduled_task
 	src.task_after_process_args = istype(task_after_process_args) ? task_after_process_args : list()
 	task_after_process_args += src
-	scheduled_tasks += src
 
 /datum/scheduled_task/Destroy()
-	scheduled_tasks -= src
 	procedure = null
 	arguments.Cut()
 	task_after_process = null
@@ -73,9 +109,9 @@ var/global/list/scheduled_tasks
 /datum/scheduled_task/source/proc/source_destroyed()
 	qdel(src)
 
-/proc/destroy_scheduled_task(var/datum/scheduled_task/gt)
-	qdel(gt)
+/proc/destroy_scheduled_task(var/datum/scheduled_task/st)
+	qdel(st)
 
-/proc/repeat_scheduled_task(var/trigger_delay, var/datum/scheduled_task/gt)
-	gt.trigger_time = world.time + trigger_delay
-	scheduled_tasks += gt
+/proc/repeat_scheduled_task(var/trigger_delay, var/datum/scheduled_task/st)
+	st.trigger_time = world.time + trigger_delay
+	scheduler.schedule(st)
