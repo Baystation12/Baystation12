@@ -74,7 +74,6 @@
 	var/exploit_record = ""
 	var/blinded = null
 	var/bhunger = 0			//Carbon
-	var/ajourn = 0
 	var/druggy = 0			//Carbon
 	var/confused = 0		//Carbon
 	var/antitoxs = null
@@ -125,8 +124,6 @@
 	var/obj/item/weapon/tank/internal = null//Human/Monkey
 	var/obj/item/weapon/storage/s_active = null//Carbon
 	var/obj/item/clothing/mask/wear_mask = null//Carbon
-
-	var/seer = 0 //for cult//Carbon, probably Human
 
 	var/datum/hud/hud_used = null
 

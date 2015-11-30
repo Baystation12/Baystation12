@@ -30,6 +30,16 @@
 			make_plating(1)
 			playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
 			return
+		else if(istype(C, /obj/item/weapon/weldingtool) && (flooring.flags & TURF_REMOVE_WELDER))
+			var/obj/item/weapon/weldingtool/welder = C
+			if(welder.isOn())
+				if(welder.remove_fuel(0, user))
+					user << "<span class='notice'>You burn through the [flooring.descriptor].</span>"
+					make_plating()
+					playsound(src, 'sound/items/Welder.ogg', 80, 1)
+					return
+				else
+					user << "<span class='warning'>You need more welding fuel to complete this task.</span>"
 		else if(istype(C, /obj/item/weapon/shovel) && (flooring.flags & TURF_REMOVE_SHOVEL))
 			user << "<span class='notice'>You shovel off the [flooring.descriptor].</span>"
 			make_plating(1)

@@ -112,3 +112,25 @@ proc/populate_ghost_traps()
 	if(istype(target,/mob/living/carbon/alien/diona))
 		target << "<B>You are \a [target], one of a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>"
 		target << "<B>Too much darkness will send you into shock and starve you, but light will help you heal.</B>"
+
+/datum/ghosttrap/cult
+	object = "cultist"
+	ban_checks = list("cultist")
+	pref_check = BE_CULTIST
+	ghost_trap_message = "They are occupying a cultist's body now."
+	ghost_trap_role = "Cultist"
+
+/datum/ghosttrap/cult/welcome_candidate(var/mob/target)
+	var/obj/item/device/soulstone/S = target.loc
+	if(istype(S))
+		if(S.is_evil)
+			cult.add_antagonist(target.mind)
+			target << "<b>Remember, you serve the one who summoned you first, and the cult second.</b>"
+		else
+			target << "<b>This soultone has been purified. You do not belong to the cult.</b>"
+			target << "<b>Remember, you only serve the one who summoned you.</b>"
+
+/datum/ghosttrap/cult/shade
+	object = "soul stone"
+	ghost_trap_message = "They are occupying a soul stone now."
+	ghost_trap_role = "Shade"
