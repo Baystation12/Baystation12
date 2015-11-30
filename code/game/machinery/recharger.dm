@@ -9,7 +9,7 @@ obj/machinery/recharger
 	idle_power_usage = 4
 	active_power_usage = 15000	//15 kW
 	var/obj/item/charging = null
-	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/laptop, /obj/item/weapon/cell)
+	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/laptop, /obj/item/weapon/cell, /obj/item/modular_computer/)
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
 	var/icon_state_idle = "recharger0" //also when unpowered
@@ -40,6 +40,11 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 			var/obj/item/laptop/L = G
 			if(!L.stored_computer.battery)
 				user << "There's no battery in it!"
+				return
+		if(istype(G, /obj/item/modular_computer))
+			var/obj/item/modular_computer/C = G
+			if(!C.battery)
+				user << "This device does not have a battery installed."
 				return
 		user.drop_item()
 		G.loc = src
@@ -106,6 +111,17 @@ obj/machinery/recharger/process()
 			if(!L.stored_computer.battery.fully_charged())
 				icon_state = icon_state_charging
 				L.stored_computer.battery.give(active_power_usage*CELLRATE)
+				update_use_power(2)
+			else
+				icon_state = icon_state_charged
+				update_use_power(1)
+			return
+
+		if(istype(charging, /obj/item/modular_computer))
+			var/obj/item/modular_computer/C = charging
+			if(!C.battery.fully_charged())
+				icon_state = icon_state_charging
+				C.battery.give(active_power_usage*CELLRATE)
 				update_use_power(2)
 			else
 				icon_state = icon_state_charged

@@ -99,10 +99,11 @@
 			return
 		var/datum/computer_file/data/logfile = new/datum/computer_file/data/logfile()
 		// Now we will generate HTML-compliant file that can actually be viewed/printed.
-		logfile.stored_data = "<b>Logfile dump from NTNRC channel [channel.title]</b><BR>"
+		logfile.filename = logname
+		logfile.stored_data = "\[b\]Logfile dump from NTNRC channel [channel.title]\[/b\]\[BR\]"
 		for(var/logstring in channel.messages)
-			logfile.stored_data += "[logstring]<BR>"
-		logfile.stored_data = "<b>Logfile dump completed.</b>"
+			logfile.stored_data += "[logstring]\[BR\]"
+		logfile.stored_data += "\[b\]Logfile dump completed.\[/b\]"
 		logfile.calculate_size()
 		if(!computer || !computer.hard_drive || !computer.hard_drive.store_file(logfile))
 			if(!computer)

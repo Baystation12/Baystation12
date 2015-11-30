@@ -211,10 +211,10 @@
 	return data
 
 // Installs programs necessary for computer function.
-// TODO: Implement program for downloading of other programs, and replace hardcoded program addition here
 /obj/item/modular_computer/proc/install_default_programs()
 	hard_drive.store_file(new/datum/computer_file/program/computerconfig(src)) 		// Computer configuration utility, allows hardware control and displays more info than status bar
 	hard_drive.store_file(new/datum/computer_file/program/ntnetdownload(src))		// NTNet Downloader Utility, allows users to download more software from NTNet repository
+	hard_drive.store_file(new/datum/computer_file/program/filemanager(src))			// File manager, allows text editor functions and basic file manipulation.
 
 // Relays kill program request to currently active program. Use this to quit current program.
 /obj/item/modular_computer/proc/kill_program(var/forced = 0)
@@ -327,6 +327,11 @@
 		I.forceMove(src)
 		user << "You insert \the [I] into \the [src]."
 		return
+	if(istype(W, /obj/item/weapon/paper))
+		var/obj/item/weapon/paper/P = W
+		if(!nano_printer)
+			return
+		nano_printer.load_paper(P)
 
 	..()
 

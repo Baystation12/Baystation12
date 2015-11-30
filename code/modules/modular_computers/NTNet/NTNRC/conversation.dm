@@ -16,7 +16,7 @@
 	trim_message_list()
 
 /datum/ntnet_conversation/proc/add_status_message(var/message)
-	messages.Add("-!- [message]")
+	messages.Add("[worldtime2text()] -!- [message]")
 	trim_message_list()
 
 /datum/ntnet_conversation/proc/trim_message_list()

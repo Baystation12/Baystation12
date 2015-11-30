@@ -1,19 +1,37 @@
-datum/computer_hardware/nano_printer
+/datum/computer_hardware/nano_printer
 	name = "Nano Printer"
 	desc = "Small integrated printer with scanner and paper recycling module."
 	power_usage = 50
-	var/stored_paper = 0
+	var/stored_paper = 5
 	var/max_paper = 10
 	var/obj/item/weapon/paper/P = null	// Currently stored paper for scanning.
 
-datum/computer_hardware/nano_printer/proc/load_paper(var/obj/item/weapon/paper/paper)
+
+/datum/computer_hardware/nano_printer/proc/print_text(var/text_to_print)
+	if(!stored_paper)
+		return 0
+
+	// Recycle stored paper
+	if(P)
+		stored_paper++
+		qdel(P)
+		P = null
+
+	P = new/obj/item/weapon/paper(get_turf(holder2))
+	P.info = text_to_print
+	P.update_icon()
+	stored_paper--
+	P = null
+	return 1
+
+/datum/computer_hardware/nano_printer/proc/load_paper(var/obj/item/weapon/paper/paper)
 	if(!paper || !istype(paper))
-		return
+		return 0
 
 	// We already have paper loaded, recycle it.
 	if(P && try_recycle_paper())
 		P = paper
-		P.loc = holder ? holder : holder2
+		P.forceMove(holder ? holder : holder2)
 
 /datum/computer_hardware/nano_printer/proc/try_recycle_paper()
 	if(!P)
@@ -22,8 +40,9 @@ datum/computer_hardware/nano_printer/proc/load_paper(var/obj/item/weapon/paper/p
 	if(stored_paper >= max_paper)
 		return 0
 
-		qdel(P)
-		P = null
+	qdel(P)
+	P = null
+	return 1
 
 /datum/computer_hardware/nano_printer/Destroy()
 	if(holder && (holder.nano_printer == src))
