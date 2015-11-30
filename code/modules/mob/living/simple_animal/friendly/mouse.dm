@@ -31,6 +31,9 @@
 	mob_size = MOB_MINISCULE
 	possession_candidate = 1
 
+	can_pull_size = 1
+	can_pull_mobs = MOB_PULL_NONE
+
 /mob/living/simple_animal/mouse/Life()
 	..()
 	if(!stat && prob(speak_chance))
@@ -89,10 +92,6 @@
 	if (stat >= DEAD)
 		return
 	..()
-
-/mob/living/simple_animal/mouse/start_pulling(var/atom/movable/AM)//Prevents mouse from pulling things
-	src << "<span class='warning'>You are too small to pull anything.</span>"
-	return
 
 /mob/living/simple_animal/mouse/Crossed(AM as mob|obj)
 	if( ishuman(AM) )

@@ -1,0 +1,5 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: Drones can now pull a variety of things (such as scrubbers). This came with a pulling refactor so please report any strangeness with pulling in general.
+  - rscadd: Drones (and any mob that can be picked up) can be bashed against airlocks and such to use their internal access, so long as the person using them does not have an ID card equipped.

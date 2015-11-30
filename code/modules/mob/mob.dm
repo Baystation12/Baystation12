@@ -561,19 +561,28 @@
 			pullin.icon_state = "pull0"
 
 /mob/proc/start_pulling(var/atom/movable/AM)
+
 	if ( !AM || !usr || src==AM || !isturf(src.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
 		return
 
 	if (AM.anchored)
-		usr << "<span class='notice'>It won't budge!</span>"
+		src << "<span class='warning'>It won't budge!</span>"
 		return
 
 	var/mob/M = AM
 	if(ismob(AM))
+		if(!can_pull_mobs || can_pull_mobs == MOB_PULL_NONE || (mob_size >= M.mob_size && can_pull_mobs == MOB_PULL_SMALLER) || (mob_size < M.mob_size && can_pull_mobs != MOB_PULL_LARGER))
+			src << "<span class='warning'>It won't budge!</span>"
+			return
 		if(!iscarbon(src))
 			M.LAssailant = null
 		else
 			M.LAssailant = usr
+	else if(isobj(AM))
+		var/obj/I = AM
+		if(!can_pull_size || can_pull_size < I.w_class)
+			src << "<span class='warning'>It won't budge!</span>"
+			return
 
 	if(pulling)
 		var/pulling_old = pulling
