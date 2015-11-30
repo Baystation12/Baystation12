@@ -479,8 +479,6 @@
 					user << "<span class='warning'>There is nothing to secure.</span>"
 					return
 				update_icon()
-		else if(emagged)
-			user << "The interface is broken."
 		else
 			wiresexposed = !wiresexposed
 			user << "The wires have been [wiresexposed ? "exposed" : "unexposed"]"
@@ -750,7 +748,7 @@
 		return
 
 	var/list/data = list(
-		"locked" = locked,
+		"locked" = (locked && !emagged) ? 1 : 0,
 		"isOperating" = operating,
 		"externalPower" = main_status,
 		"powerCellStatus" = cell ? cell.percent() : null,
@@ -882,7 +880,7 @@
 	if(!can_use(usr, 1))
 		return 1
 
-	if(!istype(usr, /mob/living/silicon) && locked)
+	if(!istype(usr, /mob/living/silicon) && (locked && !emagged))
 		// Shouldn't happen, this is here to prevent href exploits
 		usr << "You must unlock the panel to use this!"
 		return 1
