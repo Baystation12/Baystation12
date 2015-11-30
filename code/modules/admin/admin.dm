@@ -725,6 +725,19 @@ proc/admin_notice(var/message, var/rights)
 	message_admins("[key_name_admin(usr)] toggled Dead OOC.", 1)
 	feedback_add_details("admin_verb","TDOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/admins/proc/togglehubvisibility()
+	set category = "Server"
+	set desc="Globally Toggles Hub Visibility"
+	set name="Toggle Hub Visibility"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	world.visibility = !(world.visibility)
+	log_admin("[key_name(usr)] toggled hub visibility.")
+	message_admins("[key_name_admin(usr)] toggled hub visibility.  The server is now [world.visibility ? "visible" : "invisible"] ([world.visibility]).", 1)
+	feedback_add_details("admin_verb","THUB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
+
 /datum/admins/proc/toggletraitorscaling()
 	set category = "Server"
 	set desc="Toggle traitor scaling"
