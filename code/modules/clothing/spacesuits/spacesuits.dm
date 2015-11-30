@@ -48,7 +48,7 @@
 	if(camera)
 		camera.set_status(!camera.status)
 		if(camera.status)
-			camera.c_tag = usr.name
+			camera.c_tag = FindNameFromID(usr)
 			usr << "<span class='notice'>User scanned as [camera.c_tag]. Camera activated.</span>"
 		else
 			usr << "<span class='notice'>Camera deactivated.</span>"
