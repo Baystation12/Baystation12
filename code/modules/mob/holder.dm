@@ -48,7 +48,6 @@ var/list/holder_mob_icon_cache = list()
 	return null
 
 /obj/item/weapon/holder/GetAccess()
-	world << "getting access for [src]"
 	var/obj/item/I = GetID()
 	return I ? I.GetAccess() : ..()
 
