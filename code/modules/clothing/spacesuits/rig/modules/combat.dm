@@ -135,8 +135,8 @@
 	suit_overlay_active = "mounted-taser"
 	suit_overlay_inactive = "mounted-taser"
 
-	interface_name = "mounted energy gun"
-	interface_desc = "A shoulder-mounted cell-powered energy gun."
+	interface_name = "mounted taser"
+	interface_desc = "A shoulder-mounted cell-powered taser."
 
 	gun_type = /obj/item/weapon/gun/energy/taser/mounted
 
