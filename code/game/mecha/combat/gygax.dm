@@ -42,15 +42,8 @@
 	ME.attach(src)
 	return
 
-/obj/mecha/combat/gygax/dark/add_cell(var/obj/item/weapon/cell/C=null)
-	if(C)
-		C.forceMove(src)
-		cell = C
-		return
-	cell = new(src)
-	cell.charge = 30000
-	cell.maxcharge = 30000
-
+/obj/mecha/combat/gygax/dark/add_cell()
+	cell = new /obj/item/weapon/cell/hyper(src)
 
 /obj/mecha/combat/gygax/verb/overload()
 	set category = "Exosuit Interface"
@@ -72,7 +65,7 @@
 	src.log_message("Toggled leg actuators overload.")
 	return
 
-/obj/mecha/combat/gygax/dyndomove(direction)
+/obj/mecha/combat/gygax/do_move(direction)
 	if(!..()) return
 	if(overload)
 		health--

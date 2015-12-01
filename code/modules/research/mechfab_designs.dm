@@ -561,14 +561,14 @@
 	id = "mech_ccw_armor"
 	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 20000, "silver" = 5000)
-	build_path = /obj/item/mecha_parts/mecha_equipment/anticcw_armor_booster
+	build_path = /obj/item/mecha_parts/mecha_equipment/armor_booster/anticcw_armor_booster
 
 /datum/design/item/mecha/proj_armor
 	desc = "Exosuit projectile armor booster."
 	id = "mech_proj_armor"
 	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 20000, "gold" = 5000)
-	build_path = /obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster
+	build_path = /obj/item/mecha_parts/mecha_equipment/armor_booster/antiproj_armor_booster
 
 /datum/design/item/mecha/diamond_drill
 	name = "Diamond drill"
