@@ -310,7 +310,7 @@
 
 /obj/machinery/computer/arcade/orion_trail
 	name = "orion trail"
-	desc = "Imported straight from station-TG!"
+	desc = "Imported straight from Outpost-T71!"
 	icon_state = "arcade"
 	circuit = /obj/item/weapon/circuitboard/arcade/orion_trail
 	var/list/supplies = list("1" = 0, "2" = 0, "3" = 0, "4" = 0, "5" = 0, "6" = 0) //engine,hull,electronics,food,fuel
