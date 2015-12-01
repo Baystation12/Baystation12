@@ -162,7 +162,8 @@ var/global/list/robot_modules = list(
 	sprites = list(	"Basic" = "robot_old",
 					"Android" = "droid",
 					"Default" = "robot",
-					"Drone" = "drone-standard"
+					"Drone" = "drone-standard",
+					"Alcatraz" = "alcatraz-standard"
 				  )
 
 /obj/item/weapon/robot_module/standard/New()
@@ -189,7 +190,8 @@ var/global/list/robot_modules = list(
 					"Standard" = "surgeon",
 					"Advanced Droid" = "droid-medical",
 					"Needles" = "medicalrobot",
-					"Drone" = "drone-surgery"
+					"Drone" = "drone-surgery",
+					"Alcatraz" = "alcatraz-medical"
 					)
 
 /obj/item/weapon/robot_module/medical/surgeon/New()
@@ -240,7 +242,8 @@ var/global/list/robot_modules = list(
 					"Advanced Droid" = "droid-medical",
 					"Needles" = "medicalrobot",
 					"Drone - Medical" = "drone-medical",
-					"Drone - Chemistry" = "drone-chemistry"
+					"Drone - Chemistry" = "drone-chemistry",
+					"Alcatraz" = "alcatraz-medical"
 					)
 
 /obj/item/weapon/robot_module/medical/crisis/New()
@@ -304,7 +307,8 @@ var/global/list/robot_modules = list(
 					"Antique" = "engineerrobot",
 					"Landmate" = "landmate",
 					"Landmate - Treaded" = "engiborg+tread",
-					"Drone" = "drone-engineer"
+					"Drone" = "drone-engineer",
+					"Alcatraz" = "alcatraz-engineering"
 					)
 
 /obj/item/weapon/robot_module/engineering/construction
@@ -417,7 +421,8 @@ var/global/list/robot_modules = list(
 					"Black Knight" = "securityrobot",
 					"Bloodhound" = "bloodhound",
 					"Bloodhound - Treaded" = "secborg+tread",
-					"Drone" = "drone-sec"
+					"Drone" = "drone-sec",
+					"Alcatraz" = "alcatraz-security"
 				)
 
 /obj/item/weapon/robot_module/security/general/New()
@@ -449,7 +454,8 @@ var/global/list/robot_modules = list(
 					"Basic" = "JanBot2",
 					"Mopbot"  = "janitorrobot",
 					"Mop Gear Rex" = "mopgearrex",
-					"Drone" = "drone-janitor"
+					"Drone" = "drone-janitor",
+					"Alcatraz" = "alcatraz-janitor"
 					)
 
 /obj/item/weapon/robot_module/janitor/New()
@@ -492,7 +498,8 @@ var/global/list/robot_modules = list(
 					"Rich" = "maximillion",
 					"Default" = "Service2",
 					"Drone - Service" = "drone-service",
-					"Drone - Hydro" = "drone-hydro"
+					"Drone - Hydro" = "drone-hydro",
+					"Alcatraz" = "alcatraz-standard"
 				  	)
 
 /obj/item/weapon/robot_module/clerical/butler/New()
@@ -534,7 +541,8 @@ var/global/list/robot_modules = list(
 					"Bro" = "Brobot",
 					"Rich" = "maximillion",
 					"Default" = "Service2",
-					"Drone" = "drone-service"
+					"Drone" = "drone-service",
+					"Alcatraz" = "alcatraz-standard"
 					)
 
 /obj/item/weapon/robot_module/clerical/general/New()
@@ -562,7 +570,8 @@ var/global/list/robot_modules = list(
 					"Basic" = "Miner_old",
 					"Advanced Droid" = "droid-miner",
 					"Treadhead" = "Miner",
-					"Drone" = "drone-miner"
+					"Drone" = "drone-miner",
+					"Alcatraz" = "alcatraz-miner"
 				)
 	supported_upgrades = list(/obj/item/borg/upgrade/jetpack)
 
@@ -585,7 +594,8 @@ var/global/list/robot_modules = list(
 	channels = list("Science" = 1)
 	sprites = list(
 					"Droid" = "droid-science",
-					"Drone" = "drone-science"
+					"Drone" = "drone-science",
+					"Alcatraz" = "alcatraz-research"
 					)
 
 /obj/item/weapon/robot_module/research/New()
