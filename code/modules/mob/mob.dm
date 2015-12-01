@@ -571,13 +571,28 @@
 
 	var/mob/M = AM
 	if(ismob(AM))
-		if(!can_pull_mobs || can_pull_mobs == MOB_PULL_NONE || (mob_size >= M.mob_size && can_pull_mobs == MOB_PULL_SMALLER) || (mob_size < M.mob_size && can_pull_mobs != MOB_PULL_LARGER))
+
+		if(!can_pull_mobs || !can_pull_size)
 			src << "<span class='warning'>It won't budge!</span>"
 			return
+
+		if((mob_size < M.mob_size) && (can_pull_mobs != MOB_PULL_LARGER))
+			src << "<span class='warning'>It won't budge!</span>"
+			return
+
+		if((mob_size == M.mob_size) && (can_pull_mobs == MOB_PULL_SMALLER))
+			src << "<span class='warning'>It won't budge!</span>"
+			return
+
+		// If your size is larger than theirs and you have some
+		// kind of mob pull value AT ALL, you will be able to pull
+		// them, so don't bother checking that explicitly.
+
 		if(!iscarbon(src))
 			M.LAssailant = null
 		else
 			M.LAssailant = usr
+
 	else if(isobj(AM))
 		var/obj/I = AM
 		if(!can_pull_size || can_pull_size < I.w_class)
