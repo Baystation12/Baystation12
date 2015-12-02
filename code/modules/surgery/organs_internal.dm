@@ -273,11 +273,11 @@
 
 		if((affected.status & ORGAN_ROBOT) && !(O.status & ORGAN_ROBOT))
 			user << "<span class='danger'>You cannot install a naked organ into a robotic body.</span>"
-			return 2
+			return SURGERY_FAILURE
 
 		if(!target.species)
 			user << "\red You have no idea what species this person is. Report this on the bug tracker."
-			return 2
+			return SURGERY_FAILURE
 
 		var/o_is = (O.gender == PLURAL) ? "are" : "is"
 		var/o_a =  (O.gender == PLURAL) ? "" : "a "
@@ -289,22 +289,22 @@
 
 			if(O.damage > (O.max_damage * 0.75))
 				user << "\red \The [O.organ_tag] [o_is] in no state to be transplanted."
-				return 2
+				return SURGERY_FAILURE
 
 			if(!target.internal_organs_by_name[O.organ_tag])
 				organ_missing = 1
 			else
 				user << "\red \The [target] already has [o_a][O.organ_tag]."
-				return 2
+				return SURGERY_FAILURE
 
 			if(O && affected.limb_name == O.parent_organ)
 				organ_compatible = 1
 			else
 				user << "\red \The [O.organ_tag] [o_do] normally go in \the [affected.name]."
-				return 2
+				return SURGERY_FAILURE
 		else
 			user << "\red You're pretty sure [target.species.name_plural] don't normally have [o_a][O.organ_tag]."
-			return 2
+			return SURGERY_FAILURE
 
 		return ..() && organ_missing && organ_compatible
 

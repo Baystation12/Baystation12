@@ -91,7 +91,7 @@ proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 		if(S.tool_quality(tool))
 			var/step_is_valid = S.can_use(user, M, zone, tool)
 			if(step_is_valid && S.is_valid_target(M))
-				if(step_is_valid == 2) // This is a failure that already has a message for failing.
+				if(step_is_valid == SURGERY_FAILURE) // This is a failure that already has a message for failing.
 					return 1
 				M.op_stage.in_progress += zone
 				S.begin_step(user, M, zone, tool)		//start on it
