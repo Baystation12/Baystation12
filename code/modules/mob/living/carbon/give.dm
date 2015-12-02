@@ -1,8 +1,9 @@
 mob/living/carbon/verb/give(var/mob/living/carbon/target in view(1)-usr)
 	set category = "IC"
 	set name = "Give"
-	if(!istype(target) || target.stat == 2 || usr.stat == 2|| target.client == null)
+	if(!istype(target) || target.stat == 2 || usr.stat == 2|| target.client == null || isnymph(target))
 		return
+
 	var/obj/item/I
 	if(!usr.hand && usr.r_hand == null)
 		usr << "<span class='warning'>You don't have anything in your right hand to give to [target.name]</span>"
