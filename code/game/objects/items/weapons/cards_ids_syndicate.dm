@@ -33,7 +33,7 @@ var/global/list/syndicate_ids = list()
 	if(istype(O, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/I = O
 		src.access |= I.access
-		if(player_is_antag(user))
+		if(player_is_antag(user.mind))
 			user << "<span class='notice'>The microscanner activates as you pass it over the ID, copying its access.</span>"
 
 /obj/item/weapon/card/id/syndicate/attack_self(mob/user as mob)
