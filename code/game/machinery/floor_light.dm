@@ -19,6 +19,9 @@ var/list/floor_light_cache = list()
 	var/default_light_power = 2
 	var/default_light_colour = "#FFFFFF"
 
+/obj/machinery/floor_light/prebuilt
+	anchored = 1
+
 /obj/machinery/floor_light/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/weapon/screwdriver))
 		anchored = !anchored
