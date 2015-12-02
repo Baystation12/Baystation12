@@ -1,0 +1,4 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - tweak: "Rewrote fireaxe cabinets. Click with a multitool to unlock or loc, click with a hand to open or close, smash with anything that does damage, and drag onto your icon to remove the fireaxe."
