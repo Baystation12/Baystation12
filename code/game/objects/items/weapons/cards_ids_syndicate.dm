@@ -1,28 +1,17 @@
-var/global/list/syndicate_ids = list()
-
 /obj/item/weapon/card/id/syndicate
 	name = "agent card"
 	icon_state = "syndicate"
 	assignment = "Agent"
 	origin_tech = list(TECH_ILLEGAL = 3)
 	var/electronic_warfare = 1
-	var/registered_user = null
+	var/mob/registered_user = null
 
 /obj/item/weapon/card/id/syndicate/New(mob/user as mob)
-	syndicate_ids += src
 	..()
 	access = syndicate_access.Copy()
 
 /obj/item/weapon/card/id/syndicate/Destroy()
-	syndicate_ids -= src
 	registered_user = null
-	return ..()
-
-// On mob destruction, ensure any references are cleared
-/mob/Destroy()
-	for(var/obj/item/weapon/card/id/syndicate/SID in syndicate_ids)
-		if(SID.registered_user == src)
-			SID.registered_user = null
 	return ..()
 
 /obj/item/weapon/card/id/syndicate/prevent_tracking()
@@ -37,9 +26,8 @@ var/global/list/syndicate_ids = list()
 			user << "<span class='notice'>The microscanner activates as you pass it over the ID, copying its access.</span>"
 
 /obj/item/weapon/card/id/syndicate/attack_self(mob/user as mob)
-	if(!registered_user)
-		registered_user = user
-		user.set_id_info(src)
+	// We use the fact that registered_name is not unset should the owner be vaporized, to ensure the id doesn't magically become unlocked.
+	if(!registered_user && !registered_name && register_user(user))
 		user << "<span class='notice'>The microscanner marks you as its owner, preventing others from accessing its internals.</span>"
 	if(registered_user == user)
 		switch(alert("Would you like edit the ID, or show it?","Show or Edit?", "Edit","Show"))
@@ -71,6 +59,21 @@ var/global/list/syndicate_ids = list()
 		ui = new(user, src, ui_key, "agent_id_card.tmpl", "Agent id", 600, 400)
 		ui.set_initial_data(data)
 		ui.open()
+
+/obj/item/weapon/card/id/syndicate/proc/register_user(var/mob/user)
+	if(!istype(user) || user == registered_user)
+		return FALSE
+	unset_registered_user()
+	registered_user = user
+	user.set_id_info(src)
+	user.register(OBSERVER_EVENT_DESTROY, src, /obj/item/weapon/card/id/syndicate/proc/unset_registered_user)
+	return TRUE
+
+/obj/item/weapon/card/id/syndicate/proc/unset_registered_user(var/mob/user)
+	if(!registered_user || (user && user != registered_user))
+		return
+	registered_user.unregister(OBSERVER_EVENT_DESTROY, src)
+	registered_user = null
 
 /obj/item/weapon/card/id/syndicate/CanUseTopic(mob/user)
 	if(user != registered_user)
@@ -172,7 +175,7 @@ var/global/list/syndicate_ids = list()
 					icon_state = initial(icon_state)
 					name = initial(name)
 					registered_name = initial(registered_name)
-					registered_user = null
+					unset_registered_user()
 					sex = initial(sex)
 					user << "<span class='notice'>All information has been deleted from \the [src].</span>"
 					. = 1
