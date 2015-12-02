@@ -1,0 +1,5 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - tweak: "Backend change: allowed accessories to be placed on any clothing item with the appropriate variables set."
+
