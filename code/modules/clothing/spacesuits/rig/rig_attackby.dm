@@ -56,7 +56,7 @@
 				user << "\The [src] already has a tank installed."
 				return
 
-			user.drop_from_inventory(W)
+			user.unEquip(W)
 			air_supply = W
 			W.forceMove(src)
 			user << "You slot [W] into [src] and tighten the connecting valve."
@@ -85,7 +85,7 @@
 			if(!user || !W)
 				return
 			user << "You install \the [mod] into \the [src]."
-			user.drop_from_inventory(mod)
+			user.unEquip(mod)
 			installed_modules |= mod
 			mod.forceMove(src)
 			mod.installed(src)
@@ -95,7 +95,7 @@
 		else if(!cell && istype(W,/obj/item/weapon/cell))
 
 			user << "You jack \the [W] into \the [src]'s battery mount."
-			user.drop_from_inventory(W)
+			user.unEquip(W)
 			W.forceMove(src)
 			src.cell = W
 			return

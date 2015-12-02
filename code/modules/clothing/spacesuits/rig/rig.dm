@@ -307,7 +307,7 @@
 		if(piece.loc != src && !(wearer && piece.loc == wearer))
 			if(istype(piece.loc, /mob/living))
 				M = piece.loc
-				M.drop_from_inventory(piece)
+				M.unEquip(piece)
 			piece.forceMove(src)
 
 	if(!istype(wearer) || loc != wearer || wearer.back != src || canremove || !cell || cell.charge <= 0)
@@ -561,7 +561,7 @@
 		if(!do_after(M,seal_delay))
 			if(M && M.back == src)
 				M.back = null
-				M.drop_from_inventory(src)
+				M.unEquip(src)
 			src.forceMove(get_turf(src))
 			return
 
@@ -618,7 +618,7 @@
 					if(use_obj && check_slot == use_obj)
 						H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "retract" : "retracts"] swiftly.</b></font>"
 						use_obj.canremove = 1
-						holder.drop_from_inventory(use_obj)
+						holder.unEquip(use_obj)
 						use_obj.forceMove(get_turf(src))
 						use_obj.dropped()
 						use_obj.canremove = 0
@@ -632,12 +632,9 @@
 				use_obj.forceMove(src)
 				if(check_slot)
 					H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
+					return
 			else
-				use_obj.forceMove(H)
-				if(!H.equip_to_slot_if_possible(use_obj, equip_to, 0))
-					use_obj.forceMove(src)
-				else
-					H << "<span class='notice'>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</span>"
+				H << "<span class='notice'>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</span>"
 
 	if(piece == "helmet" && helmet)
 		helmet.update_light(H)
@@ -654,25 +651,25 @@
 	if(sealed)
 		if(H.head)
 			var/obj/item/garbage = H.head
-			H.drop_from_inventory(garbage)
+			H.unEquip(garbage)
 			H.head = null
 			qdel(garbage)
 
 		if(H.gloves)
 			var/obj/item/garbage = H.gloves
-			H.drop_from_inventory(garbage)
+			H.unEquip(garbage)
 			H.gloves = null
 			qdel(garbage)
 
 		if(H.shoes)
 			var/obj/item/garbage = H.shoes
-			H.drop_from_inventory(garbage)
+			H.unEquip(garbage)
 			H.shoes = null
 			qdel(garbage)
 
 		if(H.wear_suit)
 			var/obj/item/garbage = H.wear_suit
-			H.drop_from_inventory(garbage)
+			H.unEquip(garbage)
 			H.wear_suit = null
 			qdel(garbage)
 
