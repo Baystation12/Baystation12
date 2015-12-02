@@ -560,8 +560,8 @@
 		M.visible_message("<font color='blue'>[M] starts putting on \the [src]...</font>", "<font color='blue'>You start putting on \the [src]...</font>")
 		if(!do_after(M,seal_delay))
 			if(M && M.back == src)
-				M.back = null
-				M.unEquip(src)
+				if(!M.unEquip(src))
+					return
 			src.forceMove(get_turf(src))
 			return
 
@@ -618,7 +618,7 @@
 					if(use_obj && check_slot == use_obj)
 						H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "retract" : "retracts"] swiftly.</b></font>"
 						use_obj.canremove = 1
-						holder.unEquip(use_obj)
+						holder.drop_from_inventory(use_obj)
 						use_obj.forceMove(get_turf(src))
 						use_obj.dropped()
 						use_obj.canremove = 0
@@ -651,25 +651,25 @@
 	if(sealed)
 		if(H.head)
 			var/obj/item/garbage = H.head
-			H.unEquip(garbage)
+			H.drop_from_inventory(garbage)
 			H.head = null
 			qdel(garbage)
 
 		if(H.gloves)
 			var/obj/item/garbage = H.gloves
-			H.unEquip(garbage)
+			H.drop_from_inventory(garbage)
 			H.gloves = null
 			qdel(garbage)
 
 		if(H.shoes)
 			var/obj/item/garbage = H.shoes
-			H.unEquip(garbage)
+			H.drop_from_inventory(garbage)
 			H.shoes = null
 			qdel(garbage)
 
 		if(H.wear_suit)
 			var/obj/item/garbage = H.wear_suit
-			H.unEquip(garbage)
+			H.drop_from_inventory(garbage)
 			H.wear_suit = null
 			qdel(garbage)
 
