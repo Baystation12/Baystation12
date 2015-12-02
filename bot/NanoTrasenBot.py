@@ -11,6 +11,10 @@
 # "Foreign" Modules:
 # Psyco 2.0 / Psyco 1.6
 ################# DEBUG STUFF #####################
+
+# BlueNexus: I'm leaving this till last, because i'm sorry, 1569 PEP8 breaches is not my idea of a good time.
+
+
 import sys
 import CORE_DATA
 
