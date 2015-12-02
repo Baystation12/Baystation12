@@ -272,7 +272,7 @@
 
 /obj/item/weapon/storage/box/flashbangs
 	name = "box of flashbangs"
-	desc = "A box containing 7 antipersonnel flashbang grenades.<br> WARNING: These devices are extremely dangerous and can cause blindness or deafness in repeated use.</B>"
+	desc = "A box containing 7 antipersonnel flashbang grenades.<br> WARNING: These devices are extremely dangerous and can cause blindness or deafness in repeated use."
 	icon_state = "flashbang"
 
 	New()
