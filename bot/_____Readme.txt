@@ -3,6 +3,8 @@
 /// All derivative works of this bot must properly credit Skibiliano as the original author
 /// Big thanks to Skibiliano  his bot and allowing distribution, and to BS12 for sharing their code for making use of it ingame
 
+/// Refactored for PEP8 compliance by BlueNexus (https://github.com/BlueNexus)
+
 QUESTION: What does this bot do?
 ANSWER: It, in conjunction with BYOND, relays adminhelps to a designated channel, along with various extra functions that can be accessed by saying !help in the same channel/in a query with the bot.
 
@@ -17,18 +19,18 @@ BOT CONFIG:
 Move everything in this folder (this file noninclusive) to the same folder as the hosting server (where your .dmb, config folder, and python are installed)
 Open CORE_DATA.py with a text editor of your choice (recommended to be notepad++ or notepad)
 You should see 14 lines of code which look like
-			Name = "CC_NanoTrasen" #The name he uses to connect
-			no_absolute_paths = True #Do not change this.
+			Name = "CC_NanoTrasen"  #The name he uses to connect
+			no_absolute_paths = True  #Do not change this.
 			debug_on = False
-			SName = ["cc","nt","trasen","nano","nanotrasen"] #Other names he will respond to, must be lowercase
+			SName = ["cc", "nt", "trasen", "nano", "nanotrasen"]  #Other names he will respond to, must be lowercase
 			DISABLE_ALL_NON_MANDATORY_SOCKET_CONNECTIONS = False
-			directory = "BOT DIRECTORY GOES HERE/" #make sure to keep the "/" at the end
+			directory = "BOT DIRECTORY GOES HERE/"  #make sure to keep the "/" at the end
 			version = "TG CC-BY-SA 6"
-			Network = 'irc.server.goes.here' #e.g. "irc.rizon.net"
-			channel = "#CHANNEL GOES HERE" #what channel you want the bot in
-			channels = ["#CHANNEL GOES HERE","#ALSO ANOTHER CHANNEL GOES HERE IF YOU WANT"] #same as above
-			greeting = "Welcome!" #what he says when a person he hasn't seen before joins
-			prefix = "!" #prefix for bot commands
+			Network = 'irc.server.goes.here'  #e.g. "irc.rizon.net"
+			channel = "#CHANNEL GOES HERE"  #what channel you want the bot in
+			channels = ["#CHANNEL GOES HERE", "#ALSO ANOTHER CHANNEL GOES HERE IF YOU WANT"]  #same as above
+			greeting = "Welcome!"  #what he says when a person he hasn't seen before joins
+			prefix = "!"  #prefix for bot commands
 			Port = 7000
 There are some basic comments besides every important config option in here, but I'll summarize them in detail
 NAME - The name the bot assumes when it connects to IRC, so in this example it would join the IRC under the nickname "CC_Nanotrasen"
