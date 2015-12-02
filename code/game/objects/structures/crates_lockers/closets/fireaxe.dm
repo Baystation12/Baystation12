@@ -21,7 +21,12 @@
 	attackby(var/obj/item/O as obj, var/mob/user as mob)  //Marker -Agouri
 		//..() //That's very useful, Erro
 
-		var/hasaxe = 0       //gonna come in handy later~
+		// This could stand to be put further in, made better, etc. but fuck you. Fuck whoever
+		// wrote this code. Fuck everything about this object. I hope you step on a Lego.
+		user.setClickCooldown(10)
+		// Seriously why the fuck is this even a closet aghasjdhasd I hate you
+
+		var/hasaxe = 0       //gonna come in handy later~ // FUCK YOUR TILDES.
 		if(fireaxe)
 			hasaxe = 1
 
