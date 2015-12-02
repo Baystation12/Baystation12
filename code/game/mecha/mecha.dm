@@ -996,6 +996,11 @@
 
 	if (usr.stat || !ishuman(usr))
 		return
+
+	if (usr.buckled)
+		usr << "\red You can't climb into the exosuit while buckled!"
+		return
+
 	src.log_message("[usr] tries to move in.")
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
