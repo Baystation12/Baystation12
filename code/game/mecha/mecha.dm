@@ -998,7 +998,7 @@
 		return
 
 	if (usr.buckled)
-		usr << "\red You can't climb into the exosuit while buckled!"
+		usr << "<span class='warning'>You can't climb into the exosuit while buckled!</span>"
 		return
 
 	src.log_message("[usr] tries to move in.")
