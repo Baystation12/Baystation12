@@ -29,6 +29,7 @@
 	universal_understand = 1
 	holder_type = /obj/item/weapon/holder/mouse
 	mob_size = MOB_MINISCULE
+	possession_candidate = 1
 
 /mob/living/simple_animal/mouse/Life()
 	..()

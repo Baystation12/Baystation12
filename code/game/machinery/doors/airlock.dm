@@ -34,6 +34,9 @@
 	var/open_sound_powered = 'sound/machines/airlock.ogg'
 	var/open_sound_unpowered = 'sound/machines/airlock_creaking.ogg'
 
+	var/_wifi_id
+	var/datum/wifi/receiver/button/door/wifi_receiver
+
 /obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
 	if(stat & (BROKEN|NOPOWER))
 		if(damage >= 10)
@@ -1037,9 +1040,15 @@ About the new airlock wires panel:
 				src.closeOther = A
 				break
 
+	//wireless connection
+	if(_wifi_id)
+		wifi_receiver = new(_wifi_id, src)
+
 /obj/machinery/door/airlock/Destroy()
 	qdel(wires)
 	wires = null
+	qdel(wifi_receiver)
+	wifi_receiver = null
 	return ..()
 
 // Most doors will never be deconstructed over the course of a round,

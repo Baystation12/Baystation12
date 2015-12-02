@@ -24,7 +24,8 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/show_laws_verb,
 	/mob/living/silicon/ai/proc/toggle_acceleration,
 	/mob/living/silicon/ai/proc/toggle_camera_light,
-	/mob/living/silicon/ai/proc/multitool_mode
+	/mob/living/silicon/ai/proc/multitool_mode,
+	/mob/living/silicon/ai/proc/toggle_hologram_movement
 )
 
 //Not sure why this is necessary...
@@ -62,6 +63,7 @@ var/list/ai_verbs_default = list(
 	var/control_disabled = 0
 	var/datum/announcement/priority/announcement
 	var/obj/machinery/ai_powersupply/psupply = null // Backwards reference to AI's powersupply object.
+	var/hologram_follow = 1 //This is used for the AI eye, to determine if a holopad's hologram should follow it or not
 
 	//NEWMALF VARIABLES
 	var/malfunctioning = 0						// Master var that determines if AI is malfunctioning.
@@ -653,6 +655,14 @@ var/list/ai_verbs_default = list(
 	set category = "AI Commands"
 	set desc = "Augment visual feed with internal sensor overlays"
 	toggle_sensor_mode()
+
+/mob/living/silicon/ai/proc/toggle_hologram_movement()
+	set name = "Toggle Hologram Movement"
+	set category = "AI Commands"
+	set desc = "Toggles hologram movement based on moving with your virtual eye."
+
+	hologram_follow = !hologram_follow
+	usr << "<span class='info'>Your hologram will now [hologram_follow ? "follow" : "no longer follow"] you.</span>"
 
 /mob/living/silicon/ai/proc/check_unable(var/flags = 0, var/feedback = 1)
 	if(stat == DEAD)

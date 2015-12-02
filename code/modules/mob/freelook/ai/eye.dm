@@ -18,7 +18,7 @@
 			ai.ai_cancel_tracking()
 
 		//Holopad
-		if(ai.holo)
+		if(ai.holo && ai.hologram_follow)
 			ai.holo.move_hologram(ai)
 		return 1
 
