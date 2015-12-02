@@ -85,6 +85,7 @@
 			var/obj/machinery/artifact/A = scanned_object
 			A.anchored = 0
 			A.being_used = 0
+			scanned_object = null
 
 /obj/machinery/artifact_analyser/Topic(href, href_list)
 	if(href_list["begin_scan"])
@@ -97,8 +98,8 @@
 					continue
 				if(O.invisibility)
 					continue
-				if(istype(scanned_object, /obj/machinery/artifact))
-					var/obj/machinery/artifact/A = scanned_object
+				if(istype(O, /obj/machinery/artifact))
+					var/obj/machinery/artifact/A = O
 					if(A.being_used)
 						artifact_in_use = 1
 					else
