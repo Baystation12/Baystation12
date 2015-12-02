@@ -13,7 +13,7 @@
 		</div><hr>
 		{{:data.filedata}}
 	{{else}}
-		<h2>Available files:</h2>
+		<h2>Available files (local):</h2>
 		<table>
 			<tr><th>File name
 			<th>File type
@@ -28,8 +28,30 @@
 					{{:helper.link('DELETE', null, { "PRG_deletefile" : value.name }, value.undeletable ? 'disabled' : null)}}
 					{{:helper.link('RENAME', null, { "PRG_rename" : value.name }, value.undeletable ? 'disabled' : null)}}
 					{{:helper.link('CLONE', null, { "PRG_clone" : value.name }, value.undeletable ? 'disabled' : null)}}
+					{{if data.usbconnected}}
+						{{:helper.link('EXPORT', null, { "PRG_copytousb" : value.name }, value.undeletable ? 'disabled' : null)}}
+					{{/if}}
 			{{/for}}
 		</table>
+		{{if data.usbconnected}}
+		<h2>Available files (portable device):</h2>
+		<table>
+			<tr><th>File name
+			<th>File type
+			<th>File size (GQ)
+			<th>Operations
+			{{for data.usbfiles}}
+				<tr><td>{{:value.name}}
+				<td>.{{:value.type}}
+				<td>{{:value.size}}GQ
+				<td>
+					{{:helper.link('DELETE', null, { "PRG_usbdeletefile" : value.name }, value.undeletable ? 'disabled' : null)}}
+					{{if data.usbconnected}}
+						{{:helper.link('IMPORT', null, { "PRG_copyfromusb" : value.name }, value.undeletable ? 'disabled' : null)}}
+					{{/if}}
+			{{/for}}
+		</table>
+		{{/if}}
 		{{:helper.link('NEW DATA FILE', null, { "PRG_newtextfile" : 1 })}}
 	{{/if}}
 	

@@ -60,6 +60,14 @@
 	nokeyboard = 1
 	base_idle_power_usage = 25
 	base_active_power_usage = 200
+	max_hardware_size = 2
+
+/obj/machinery/modular_computer/laptop/buildable/New()
+	..()
+	// User-built consoles start as empty frames.
+	qdel(tesla_link)
+	qdel(cpu.network_card)
+	qdel(cpu.hard_drive)
 
 // Close the computer. collapsing it into movable item that can't be used.
 /obj/machinery/modular_computer/laptop/verb/close_computer()

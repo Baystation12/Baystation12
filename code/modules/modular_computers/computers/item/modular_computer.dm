@@ -6,7 +6,7 @@
 	name = "Modular Microcomputer"
 	desc = "A small portable microcomputer"
 
-	var/enabled = 1											// Whether the computer is turned on.
+	var/enabled = 0											// Whether the computer is turned on.
 	var/screen_on = 1										// Whether the computer is active/opened/it's screen is on.
 	var/datum/computer_file/program/active_program = null	// A currently active program running on the computer.
 	var/hardware_flag = 0									// A flag that describes this device type
@@ -23,14 +23,19 @@
 	icon_state = "laptop-open"
 	var/icon_state_unpowered = null							// Icon state when the computer is turned off
 	var/icon_state_menu = "menu"							// Icon state overlay when the computer is turned on, but no program is loaded that would override the screen.
+	var/max_hardware_size = 0								// Maximal hardware size. Currently, tablets have 1, laptops 2 and consoles 3. Limits what hardware types can be installed.
+	var/steel_sheet_cost = 5								// Amount of steel sheets refunded when disassembling an empty frame of this computer.
+
 
 	// Important hardware (must be installed for computer to work)
-	var/datum/computer_hardware/network_card/network_card	// Network Card component of this computer. Allows connection to NTNet
-	var/datum/computer_hardware/hard_drive/hard_drive		// Hard Drive component of this computer. Stores programs and files.
-	var/obj/item/weapon/cell/battery = null					// Battery component of this computer. Powers the computer. Áll computers can have batteries.
+	var/obj/item/weapon/computer_hardware/network_card/network_card					// Network Card component of this computer. Allows connection to NTNet
+	var/obj/item/weapon/computer_hardware/hard_drive/hard_drive						// Hard Drive component of this computer. Stores programs and files.
+	var/obj/item/weapon/computer_hardware/battery_module/battery_module				// An internal power source for this computer. Can be recharged.
 	// Optional hardware (improves functionality, but is not critical for computer to work)
-	var/datum/computer_hardware/card_slot/card_slot			// ID Card slot component of this computer. Mostly for HoP modification console that needs ID slot for modification.
-	var/datum/computer_hardware/nano_printer/nano_printer	// Nano Printer component of this computer, for your everyday paperwork needs.
+	var/obj/item/weapon/computer_hardware/card_slot/card_slot						// ID Card slot component of this computer. Mostly for HoP modification console that needs ID slot for modification.
+	var/obj/item/weapon/computer_hardware/nano_printer/nano_printer					// Nano Printer component of this computer, for your everyday paperwork needs.
+	var/obj/item/weapon/computer_hardware/hard_drive/portable/portable_drive		// Portable data storage
+
 
 // Eject ID card from computer, if it has ID slot with card inside.
 /obj/item/modular_computer/verb/eject_id()
@@ -64,7 +69,6 @@
 	card_slot.stored_card = null
 	user << "You remove the card from \the [src]"
 
-// TODO: Convert hardware creation specific stuff to vending machine that handles laptops.
 /obj/item/modular_computer/New()
 	processing_objects.Add(src)
 	update_icon()
@@ -76,8 +80,8 @@
 		qdel(network_card)
 	if(hard_drive)
 		qdel(hard_drive)
-	if(battery)
-		qdel(battery)
+	if(battery_module)
+		qdel(battery_module)
 	if(nano_printer)
 		qdel(nano_printer)
 	if(card_slot)
@@ -105,7 +109,7 @@
 		if(ui)
 			ui.close()
 		return 0
-	if((!battery || !battery.charge) && !check_power_override())
+	if((!battery_module || !battery_module.battery.charge) && !check_power_override())
 		if(ui)
 			ui.close()
 		return 0
@@ -145,7 +149,7 @@
 /obj/item/modular_computer/attack_self(mob/user)
 	if(enabled)
 		ui_interact(user)
-	else if((battery && battery.charge) || check_power_override()) // Battery-run and charged or non-battery but powered by APC.
+	else if((battery_module && battery_module.battery.charge) || check_power_override()) // Battery-run and charged or non-battery but powered by APC.
 		user << "You press the power button and start up \the [src]"
 		enabled = 1
 		update_icon()
@@ -174,8 +178,8 @@
 /obj/item/modular_computer/proc/get_header_data()
 	var/list/data = list()
 
-	if(battery)
-		switch(battery.percent())
+	if(battery_module)
+		switch(battery_module.battery.percent())
 			if(80 to 200) // 100 should be maximal but just in case..
 				data["PC_batteryicon"] = "batt_100.gif"
 			if(60 to 80)
@@ -188,12 +192,12 @@
 				data["PC_batteryicon"] = "batt_20.gif"
 			else
 				data["PC_batteryicon"] = "batt_5.gif"
-		data["PC_batterypercent"] = "[round(battery.percent())] %"
+		data["PC_batterypercent"] = "[round(battery_module.battery.percent())] %"
 		data["PC_showbatteryicon"] = 1
 	else
 		data["PC_batteryicon"] = "batt_5.gif"
 		data["PC_batterypercent"] = "N/C"
-		data["PC_showbatteryicon"] = battery ? 1 : 0
+		data["PC_showbatteryicon"] = battery_module ? 1 : 0
 
 	switch(get_ntnet_status())
 		if(0)
@@ -209,12 +213,6 @@
 	data["PC_hasheader"] = 1
 	data["PC_showexitprogram"] = active_program ? 1 : 0 // Hides "Exit Program" button on mainscreen
 	return data
-
-// Installs programs necessary for computer function.
-/obj/item/modular_computer/proc/install_default_programs()
-	hard_drive.store_file(new/datum/computer_file/program/computerconfig(src)) 		// Computer configuration utility, allows hardware control and displays more info than status bar
-	hard_drive.store_file(new/datum/computer_file/program/ntnetdownload(src))		// NTNet Downloader Utility, allows users to download more software from NTNet repository
-	hard_drive.store_file(new/datum/computer_file/program/filemanager(src))			// File manager, allows text editor functions and basic file manipulation.
 
 // Relays kill program request to currently active program. Use this to quit current program.
 /obj/item/modular_computer/proc/kill_program(var/forced = 0)
@@ -253,17 +251,18 @@
 		kill_program()
 		return
 	if( href_list["PC_enable_component"] )
-		var/datum/computer_hardware/H = find_hardware_by_name(href_list["PC_enable_component"])
+		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_enable_component"])
 		if(H && istype(H) && !H.enabled)
 			H.enabled = 1
 		return
 	if( href_list["PC_disable_component"] )
-		var/datum/computer_hardware/H = find_hardware_by_name(href_list["PC_disable_component"])
+		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_disable_component"])
 		if(H && istype(H) && H.enabled)
 			H.enabled = 0
 		return
 	if( href_list["PC_shutdown"] )
 		shutdown_computer()
+		return
 	if( href_list["PC_runprogram"] )
 		var/prog = href_list["PC_runprogram"]
 		var/datum/computer_file/program/P = null
@@ -297,7 +296,7 @@
 
 // Handles power-related things, such as battery interaction, recharging, shutdown when it's discharged
 /obj/item/modular_computer/proc/handle_power()
-	if(!battery || battery.charge <= 0) // Battery-run but battery is depleted.
+	if(!battery_module || battery_module.battery.charge <= 0) // Battery-run but battery is depleted.
 		power_failure()
 		return 0
 
@@ -308,8 +307,8 @@
 	if(hard_drive && hard_drive.enabled)
 		power_usage += hard_drive.power_usage
 
-	if(battery)
-		battery.use(power_usage * CELLRATE)
+	if(battery_module)
+		battery_module.battery.use(power_usage * CELLRATE)
 	last_power_usage = power_usage
 
 /obj/item/modular_computer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
@@ -332,11 +331,129 @@
 		if(!nano_printer)
 			return
 		nano_printer.load_paper(P)
+	if(istype(W, /obj/item/weapon/computer_hardware))
+		var/obj/item/weapon/computer_hardware/C = W
+		if(C.hardware_size <= max_hardware_size)
+			try_install_component(user, C)
+		else
+			user << "This component is too large for \the [src]."
+	if(istype(W, /obj/item/weapon/wrench))
+		var/list/components = get_all_components()
+		if(components.len)
+			user << "Remove all components from \the [src] before disassembling it."
+			return
+		new /obj/item/stack/material/steel( get_turf(src.loc), steel_sheet_cost )
+		src.visible_message("\The [src] has been disassembled by [user].")
+
+	if(istype(W, /obj/item/weapon/screwdriver))
+		var/list/all_components = get_all_components()
+		if(!all_components.len)
+			user << "This device doesn't have any components installed."
+			return
+		var/list/component_names = list()
+		for(var/obj/item/weapon/computer_hardware/H in all_components)
+			component_names.Add(H.name)
+
+		var/choice = input(usr, "Which component do you want to uninstall?", "Computer maintenance", null) as null|anything in component_names
+
+		if(!choice)
+			return
+
+		if(!Adjacent(usr))
+			return
+
+		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(choice)
+
+		if(!H)
+			return
+
+		uninstall_component(user, H)
+
+		return
 
 	..()
 
+// Attempts to install the hardware into apropriate slot.
+/obj/item/modular_computer/proc/try_install_component(var/mob/living/user, var/obj/item/weapon/computer_hardware/H, var/found = 0)
+	// "USB" flash drive.
+	if(istype(H, /obj/item/weapon/computer_hardware/hard_drive/portable))
+		if(portable_drive)
+			user << "This computer's portable drive slot is already occupied by \the [portable_drive]."
+			return
+		found = 1
+		portable_drive = H
+	else if(istype(H, /obj/item/weapon/computer_hardware/hard_drive))
+		if(hard_drive)
+			user << "This computer's hard drive slot is already occupied by \the [hard_drive]."
+			return
+		found = 1
+		hard_drive = H
+	else if(istype(H, /obj/item/weapon/computer_hardware/network_card))
+		if(network_card)
+			user << "This computer's network card slot is already occupied by \the [network_card]."
+			return
+		found = 1
+		network_card = H
+	else if(istype(H, /obj/item/weapon/computer_hardware/nano_printer))
+		if(nano_printer)
+			user << "This computer's nano printer slot is already occupied by \the [nano_printer]."
+			return
+		found = 1
+		nano_printer = H
+	else if(istype(H, /obj/item/weapon/computer_hardware/card_slot))
+		if(card_slot)
+			user << "This computer's card slot is already occupied by \the [card_slot]."
+			return
+		found = 1
+		card_slot = H
+	else if(istype(H, /obj/item/weapon/computer_hardware/battery_module))
+		if(battery_module)
+			user << "This computer's battery slot is already occupied by \the [battery_module]."
+			return
+		found = 1
+		battery_module = H
+	if(found)
+		user << "You install \the [H] into \the [src]"
+		H.holder2 = src
+		user.drop_from_inventory(H)
+		H.forceMove(src)
+
+// Uninstalls component. Found and Critical vars may be passed by parent types, if they have additional hardware.
+/obj/item/modular_computer/proc/uninstall_component(var/mob/living/user, var/obj/item/weapon/computer_hardware/H, var/found = 0, var/critical = 0)
+	if(portable_drive == H)
+		portable_drive = null
+		found = 1
+	if(hard_drive == H)
+		hard_drive = null
+		found = 1
+		critical = 1
+	if(network_card == H)
+		network_card = null
+		found = 1
+	if(nano_printer == H)
+		nano_printer = null
+		found = 1
+	if(card_slot == H)
+		card_slot = null
+		found = 1
+	if(battery_module == H)
+		battery_module = null
+		found = 1
+	if(found)
+		user << "You remove \the [H] from \the [src]."
+		H.forceMove(get_turf(src))
+		H.holder2 = null
+	if(critical)
+		user << "<span class='danger'>\The [src]'s screen freezes for few seconds and then displays an \"HARDWARE ERROR: Critical component disconnected. Please verify component connection and reboot the device. If the problem persists contact technical support for assistance.\" warning.</span>"
+		kill_program(1)
+		enabled = 0
+		update_icon()
+
+
 // Checks all hardware pieces to determine if name matches, if yes, returns the hardware piece, otherwise returns null
 /obj/item/modular_computer/proc/find_hardware_by_name(var/name)
+	if(portable_drive && (portable_drive.name == name))
+		return portable_drive
 	if(hard_drive && (hard_drive.name == name))
 		return hard_drive
 	if(network_card && (network_card.name == name))
@@ -345,4 +462,23 @@
 		return nano_printer
 	if(card_slot && (card_slot.name == name))
 		return card_slot
+	if(battery_module && (battery_module.name == name))
+		return battery_module
 	return null
+
+// Returns list of all components
+/obj/item/modular_computer/proc/get_all_components()
+	var/list/all_components = list()
+	if(hard_drive)
+		all_components.Add(hard_drive)
+	if(network_card)
+		all_components.Add(network_card)
+	if(portable_drive)
+		all_components.Add(portable_drive)
+	if(nano_printer)
+		all_components.Add(nano_printer)
+	if(card_slot)
+		all_components.Add(card_slot)
+	if(battery_module)
+		all_components.Add(battery_module)
+	return all_components

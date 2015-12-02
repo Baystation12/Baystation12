@@ -6,6 +6,7 @@
 	nanomodule_path = /datum/nano_module/power_monitor/
 	program_icon_state = "power_monitor"
 	keyboard_icon_state = "keyboard9"
+	required_access = access_engine
 	requires_ntnet = 1
 	network_destination = "power monitoring system"
 	size = 8

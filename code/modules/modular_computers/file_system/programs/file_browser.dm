@@ -17,7 +17,7 @@
 		var/newname = sanitize(input(usr, "Enter file name or leave blank to cancel:", "File rename"))
 		if(!newname)
 			return
-		var/datum/computer_hardware/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
 		if(!HDD)
 			return
 		var/datum/computer_file/data/F = new/datum/computer_file/data()
@@ -25,18 +25,26 @@
 		F.filetype = "TXT"
 		HDD.store_file(F)
 	if(href_list["PRG_deletefile"])
-		var/datum/computer_hardware/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
 		if(!HDD)
 			return
 		var/datum/computer_file/file = HDD.find_file_by_name(href_list["PRG_deletefile"])
 		if(!file || file.undeletable)
 			return
 		HDD.remove_file(file)
+	if(href_list["PRG_usbdeletefile"])
+		var/obj/item/weapon/computer_hardware/hard_drive/RHDD = computer.portable_drive
+		if(!RHDD)
+			return
+		var/datum/computer_file/file = RHDD.find_file_by_name(href_list["PRG_usbdeletefile"])
+		if(!file || file.undeletable)
+			return
+		RHDD.remove_file(file)
 	if(href_list["PRG_closefile"])
 		open_file = null
 		error = null
 	if(href_list["PRG_clone"])
-		var/datum/computer_hardware/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
 		if(!HDD)
 			return
 		var/datum/computer_file/F = HDD.find_file_by_name(href_list["PRG_clone"])
@@ -45,7 +53,7 @@
 		var/datum/computer_file/C = F.clone(1)
 		HDD.store_file(C)
 	if(href_list["PRG_rename"])
-		var/datum/computer_hardware/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
 		if(!HDD)
 			return
 		var/datum/computer_file/file = HDD.find_file_by_name(href_list["PRG_rename"])
@@ -57,7 +65,7 @@
 	if(href_list["PRG_edit"])
 		if(!open_file)
 			return
-		var/datum/computer_hardware/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
 		if(!HDD)
 			return
 		var/datum/computer_file/data/F = HDD.find_file_by_name(open_file)
@@ -78,7 +86,7 @@
 	if(href_list["PRG_printfile"])
 		if(!open_file)
 			return
-		var/datum/computer_hardware/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
 		if(!HDD)
 			return
 		var/datum/computer_file/data/F = HDD.find_file_by_name(open_file)
@@ -90,6 +98,26 @@
 		if(!computer.nano_printer.print_text(parse_tags(F.stored_data)))
 			error = "Hardware error: Printer was unable to print the file. It may be out of paper."
 			return
+	if(href_list["PRG_copytousb"])
+		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/computer_hardware/hard_drive/portable/RHDD = computer.portable_drive
+		if(!HDD || !RHDD)
+			return
+		var/datum/computer_file/F = HDD.find_file_by_name(href_list["PRG_copytousb"])
+		if(!F || !istype(F))
+			return
+		var/datum/computer_file/C = F.clone(0)
+		RHDD.store_file(C)
+	if(href_list["PRG_copyfromusb"])
+		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/computer_hardware/hard_drive/portable/RHDD = computer.portable_drive
+		if(!HDD || !RHDD)
+			return
+		var/datum/computer_file/F = RHDD.find_file_by_name(href_list["PRG_copyfromusb"])
+		if(!F || !istype(F))
+			return
+		var/datum/computer_file/C = F.clone(0)
+		HDD.store_file(C)
 	..(href, href_list)
 
 /datum/computer_file/program/filemanager/proc/parse_tags(var/t)
@@ -143,7 +171,8 @@
 	else
 		return
 
-	var/datum/computer_hardware/hard_drive/HDD
+	var/obj/item/weapon/computer_hardware/hard_drive/HDD
+	var/obj/item/weapon/computer_hardware/hard_drive/portable/RHDD
 	if(PRG.error)
 		data["error"] = PRG.error
 	if(PRG.open_file)
@@ -164,6 +193,7 @@
 			data["error"] = "I/O ERROR: Unable to access hard drive."
 		else
 			HDD = PRG.computer.hard_drive
+			RHDD = PRG.computer.portable_drive
 			var/list/files[0]
 			for(var/datum/computer_file/F in HDD.stored_files)
 				files.Add(list(list(
@@ -173,6 +203,17 @@
 					"undeletable" = F.undeletable
 				)))
 			data["files"] = files
+			if(RHDD)
+				data["usbconnected"] = 1
+				var/list/usbfiles[0]
+				for(var/datum/computer_file/F in RHDD.stored_files)
+					usbfiles.Add(list(list(
+						"name" = F.filename,
+						"type" = F.filetype,
+						"size" = F.size,
+						"undeletable" = F.undeletable
+					)))
+				data["usbfiles"] = usbfiles
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

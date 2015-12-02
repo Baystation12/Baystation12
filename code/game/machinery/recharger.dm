@@ -38,12 +38,12 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 			return
 		if(istype(G, /obj/item/laptop))
 			var/obj/item/laptop/L = G
-			if(!L.stored_computer.battery)
+			if(!L.stored_computer.cpu.battery_module)
 				user << "There's no battery in it!"
 				return
 		if(istype(G, /obj/item/modular_computer))
 			var/obj/item/modular_computer/C = G
-			if(!C.battery)
+			if(!C.battery_module)
 				user << "This device does not have a battery installed."
 				return
 		user.drop_item()
@@ -108,9 +108,9 @@ obj/machinery/recharger/process()
 
 		if(istype(charging, /obj/item/laptop))
 			var/obj/item/laptop/L = charging
-			if(!L.stored_computer.battery.fully_charged())
+			if(!L.stored_computer.cpu.battery_module.battery.fully_charged())
 				icon_state = icon_state_charging
-				L.stored_computer.battery.give(active_power_usage*CELLRATE)
+				L.stored_computer.cpu.battery_module.battery.give(active_power_usage*CELLRATE)
 				update_use_power(2)
 			else
 				icon_state = icon_state_charged
@@ -119,9 +119,9 @@ obj/machinery/recharger/process()
 
 		if(istype(charging, /obj/item/modular_computer))
 			var/obj/item/modular_computer/C = charging
-			if(!C.battery.fully_charged())
+			if(!C.battery_module.battery.fully_charged())
 				icon_state = icon_state_charging
-				C.battery.give(active_power_usage*CELLRATE)
+				C.battery_module.battery.give(active_power_usage*CELLRATE)
 				update_use_power(2)
 			else
 				icon_state = icon_state_charged

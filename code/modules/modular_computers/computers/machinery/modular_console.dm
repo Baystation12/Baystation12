@@ -13,15 +13,24 @@
 	density = 1
 	base_idle_power_usage = 100
 	base_active_power_usage = 500
+	max_hardware_size = 3
+	steel_sheet_cost = 20
+
+/obj/machinery/modular_computer/console/buildable/New()
+	..()
+	// User-built consoles start as empty frames.
+	qdel(tesla_link)
+	qdel(cpu.network_card)
+	qdel(cpu.hard_drive)
 
 /obj/machinery/modular_computer/console/New()
 	..()
-	battery = null
-	cpu.network_card = new/datum/computer_hardware/network_card/wired(src)
-	tesla_link = new/datum/computer_hardware/tesla_link(src)
+	cpu.battery_module = null
+	cpu.network_card = new/obj/item/weapon/computer_hardware/network_card/wired(src)
+	tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(src)
 	tesla_link.enabled = 1
 	tesla_link.critical = 1 // Consoles don't usually come with cells, and this prevents people from disabling their only power source, as they wouldn't be able to enable it again.
-	cpu.hard_drive = new/datum/computer_hardware/hard_drive/super(src) // Consoles generally have better HDDs due to lower space limitations
+	cpu.hard_drive = new/obj/item/weapon/computer_hardware/hard_drive/super(src) // Consoles generally have better HDDs due to lower space limitations
 	var/area/A = get_area(src)
 	// Attempts to set this console's tag according to our area. Since some areas have stuff like "XX - YY" in their names we try to remove that too.
 	if(A && console_department)
@@ -35,9 +44,9 @@
 	if(cpu)
 		cpu.screen_on = 1
 		cpu.enabled = 1
-	install_default_programs()
 	update_icon()
 
+/*
 /obj/machinery/modular_computer/console/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(istype(W, /obj/item/weapon/cell)) // Power Cell. Try to insert it into the console, if it doesn't have cell installed.
 		if(!cpu || (stat & (BROKEN|MAINT)))
@@ -50,8 +59,6 @@
 		user.drop_from_inventory(W)
 		W.forceMove(src)
 		user << "You insert \the [W] into \the [cpu]'s battery slot."
-		return
-	if(istype(W, /obj/item/weapon/screwdriver)) // TODO: Screwdriver - begin deconstructing the computer.
 		return
 	if(istype(W, /obj/item/weapon/crowbar)) // Crowbar, remove power cell, if it has one.
 		if(!cpu || (stat & (BROKEN|MAINT)))
@@ -69,3 +76,4 @@
 			power_change()
 		return
 	return ..()
+*/

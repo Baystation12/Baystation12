@@ -4,10 +4,10 @@
 	name = "modular computer"
 	desc = "An advanced computer"
 
-	var/battery_powered = 0									// Whether computer should be battery powered. It is set automatically
+	var/battery_powered = 0											// Whether computer should be battery powered. It is set automatically
 	use_power = 0
-	var/hardware_flag = 0									// A flag that describes this device type
-	var/last_power_usage = 0								// Power usage during last tick
+	var/hardware_flag = 0											// A flag that describes this device type
+	var/last_power_usage = 0										// Power usage during last tick
 
 	// Modular computers can run on various devices. Each DEVICE (Laptop, Console, Tablet,..)
 	// must have it's own DMI file. Icon states must be called exactly the same in all files, but may look differently
@@ -15,24 +15,19 @@
 
 	icon = null
 	icon_state = null
-	var/icon_state_unpowered = null							// Icon state when the computer is turned off
-	var/screen_icon_state_menu = "menu"						// Icon state overlay when the computer is turned on, but no program is loaded that would override the screen.
-	var/keyboard_icon_state_menu = "keyboard1"				// Keyboard's icon state overlay when the computer is turned on and no program is loaded
-	var/nokeyboard = 0										// Set to 1 to disable keyboard icons for this subtype.
+	var/icon_state_unpowered = null									// Icon state when the computer is turned off
+	var/screen_icon_state_menu = "menu"								// Icon state overlay when the computer is turned on, but no program is loaded that would override the screen.
+	var/keyboard_icon_state_menu = "keyboard1"						// Keyboard's icon state overlay when the computer is turned on and no program is loaded
+	var/nokeyboard = 0												// Set to 1 to disable keyboard icons for this subtype.
+	var/max_hardware_size = 0										// Maximal hardware size. Currently, tablets have 1, laptops 2 and consoles 3. Limits what hardware types can be installed.
+	var/steel_sheet_cost = 10										// Amount of steel sheets refunded when disassembling an empty frame of this computer.
 
-	var/base_active_power_usage = 100						// Power usage when the computer is open (screen is active) and can be interacted with. Remember hardware can use power too.
-	var/base_idle_power_usage = 10							// Power usage when the computer is idle and screen is off (currently only applies to laptops)
+	var/base_active_power_usage = 100								// Power usage when the computer is open (screen is active) and can be interacted with. Remember hardware can use power too.
+	var/base_idle_power_usage = 10									// Power usage when the computer is idle and screen is off (currently only applies to laptops)
 
-	// Important hardware (must be installed for computer to work)
-	var/datum/computer_hardware/network_card/network_card	// Network Card component of this computer. Allows connection to NTNet
-	var/datum/computer_hardware/hard_drive/hard_drive		// Hard Drive component of this computer. Stores programs and files.
-	var/obj/item/weapon/cell/battery = null					// Battery component of this computer. Powers the computer. Áll computers can have batteries.
-	// Optional hardware (improves functionality, but is not critical for computer to work)
-	var/datum/computer_hardware/tesla_link/tesla_link		// Tesla Link component of this computer. Allows remote charging from nearest APC.
-	var/datum/computer_hardware/card_slot/card_slot			// ID Card slot component of this computer. Mostly for HoP modification console that needs ID slot for modification.
-	var/datum/computer_hardware/nano_printer/nano_printer	// Nano Printer component of this computer, for your everyday paperwork needs.
+	var/obj/item/weapon/computer_hardware/tesla_link/tesla_link		// Tesla Link component of this computer. Allows remote charging from nearest APC.
 
-	var/obj/item/modular_computer/processor/cpu = null		// CPU that handles most logic while this type only handles power and other specific things.
+	var/obj/item/modular_computer/processor/cpu = null				// CPU that handles most logic while this type only handles power and other specific things.
 
 /obj/machinery/modular_computer/update_icon()
 	icon_state = icon_state_unpowered
@@ -62,12 +57,6 @@
 	..()
 	cpu = new(src)
 
-// Installs programs necessary for computer function.
-// TODO: Implement program for downloading of other programs, and replace hardcoded program addition here
-/obj/machinery/modular_computer/proc/install_default_programs()
-	if(cpu && cpu.hard_drive)
-		cpu.install_default_programs()
-
 // On-click handling. Turns on the computer if it's off and opens the GUI.
 /obj/machinery/modular_computer/attack_hand(mob/user)
 	if(cpu)
@@ -89,7 +78,7 @@
 // Used in following function to reduce copypaste
 /obj/machinery/modular_computer/proc/power_failure()
 	if(cpu && cpu.enabled) // Shut down the computer
-		visible_message("<span class='danger'>\The [src]'s screen flickers [battery ? "\"BATTERY CRITICAL\"" : "\"EXTERNAL POWER LOSS\""] warning as it shuts down unexpectedly.</span>")
+		visible_message("<span class='danger'>\The [src]'s screen flickers [cpu.battery_module ? "\"BATTERY CRITICAL\"" : "\"EXTERNAL POWER LOSS\""] warning as it shuts down unexpectedly.</span>")
 		if(cpu)
 			cpu.kill_program(1)
 			cpu.enabled = 0
@@ -99,16 +88,16 @@
 
 // Called by cpu item's process() automatically, handles our power interaction.
 /obj/machinery/modular_computer/proc/handle_power()
-	if(cpu.battery && cpu.battery.charge <= 0) // Battery-run but battery is depleted.
+	if(cpu.battery_module && cpu.battery_module.battery.charge <= 0) // Battery-run but battery is depleted.
 		power_failure()
 		return 0
-	else if(!cpu.battery && (!powered() || !tesla_link || !tesla_link.enabled)) // Not battery run, but lacking APC connection.
+	else if(!cpu.battery_module && (!powered() || !tesla_link || !tesla_link.enabled)) // Not battery run, but lacking APC connection.
 		power_failure()
 		return 0
 	else if(stat & NOPOWER)
 		stat &= ~NOPOWER
 
-	if(cpu.battery && cpu.battery.charge)
+	if(cpu.battery_module && cpu.battery_module.battery.charge)
 		battery_powered = 1
 	else
 		battery_powered = 0
@@ -132,18 +121,18 @@
 		active_power_usage = idle_power_usage + 100 	// APCLink only charges at 100W rate, but covers any power usage.
 		use_power = 1
 		// Battery is not fully charged. Begin slowly recharging.
-		if(cpu.battery && cpu.battery.charge < cpu.battery.maxcharge)
+		if(cpu.battery_module && (cpu.battery_module.battery.charge < cpu.battery_module.battery.maxcharge))
 			use_power = 2
 
-		if(cpu.battery && powered() && (use_power == 2)) // Battery charging itself
-			cpu.battery.give(100 * CELLRATE)
-		else if(cpu.battery && !powered()) // Unpowered, but battery covers the usage.
-			cpu.battery.use(idle_power_usage * CELLRATE)
+		if(cpu.battery_module && powered() && (use_power == 2)) // Battery charging itself
+			cpu.battery_module.battery.give(100 * CELLRATE)
+		else if(cpu.battery_module && !powered()) // Unpowered, but battery covers the usage.
+			cpu.battery_module.battery.use(idle_power_usage * CELLRATE)
 
 	else	// No wireless connection run only on battery.
 		use_power = 0
-		if (cpu.battery)
-			cpu.battery.use(power_usage * CELLRATE)
+		if (cpu.battery_module)
+			cpu.battery_module.battery.use(power_usage * CELLRATE)
 	cpu.last_power_usage = power_usage
 
 // Modular computers can have battery in them, we handle power in previous proc, so prevent this from messing it up for us.

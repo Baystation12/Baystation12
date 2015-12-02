@@ -1,26 +1,25 @@
-/datum/computer_hardware/
-	var/name = "Hardware"
-	var/desc = "Unknown Hardware"
+/obj/item/weapon/computer_hardware/
+	name = "Hardware"
+	desc = "Unknown Hardware"
+	icon = 'icons/obj/modular_components.dmi'
 	// Following two variables reference the machine that holds this hardware
 	// It is necessary to have two variables as we have modular_computer machine and item.
-	var/obj/machinery/modular_computer/holder = null
 	var/obj/item/modular_computer/holder2 = null
-	var/power_usage = 0 // If the hardware uses extra power, change this.
-	var/enabled = 1		// If the hardware is turned off set this to 0.
-	var/critical = 1	// Prevent disabling for important component, like the HDD.
+	var/power_usage = 0 	// If the hardware uses extra power, change this.
+	var/enabled = 1			// If the hardware is turned off set this to 0.
+	var/critical = 1		// Prevent disabling for important component, like the HDD.
+	var/hardware_size = 1	// Limits which devices can contain this component. 1: Tablets/Laptops/Consoles, 2: Laptops/Consoles, 3: Consoles only
 
-/datum/computer_hardware/New(var/obj/L)
+/obj/item/weapon/computer_hardware/New(var/obj/L)
 	if(istype(L, /obj/machinery/modular_computer))
-		holder = L
-		return
+		var/obj/machinery/modular_computer/C = L
+		if(C.cpu)
+			holder2 = C.cpu
+			return
 	if(istype(L, /obj/item/modular_computer))
 		holder2 = L
 		return
 
-	CRASH("Inapropriate type passed to computer_hardware/New()!")
-	qdel(src)
-
-/datum/computer_hardware/Destroy()
-	holder = null
+/obj/item/weapon/computer_hardware/Destroy()
 	holder2 = null
 	..()

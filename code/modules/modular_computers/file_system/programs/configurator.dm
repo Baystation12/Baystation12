@@ -50,16 +50,17 @@
 		hardware.Add(movable.hard_drive)
 		hardware.Add(movable.card_slot)
 		hardware.Add(movable.nano_printer)
+		hardware.Add(movable.battery_module)
 		data["disk_size"] = movable.hard_drive.max_capacity
 		data["disk_used"] = movable.hard_drive.used_capacity
 		data["power_usage"] = movable.last_power_usage
-		data["battery_exists"] = movable.battery ? 1 : 0
-		if(movable.battery)
-			data["battery_rating"] = movable.battery.maxcharge
-			data["battery_percent"] = round(movable.battery.percent())
+		data["battery_exists"] = movable.battery_module ? 1 : 0
+		if(movable.battery_module)
+			data["battery_rating"] = movable.battery_module.battery.maxcharge
+			data["battery_percent"] = round(movable.battery_module.battery.percent())
 
 	var/list/all_entries[0]
-	for(var/datum/computer_hardware/H in hardware)
+	for(var/obj/item/weapon/computer_hardware/H in hardware)
 		all_entries.Add(list(list(
 		"name" = H.name,
 		"desc" = H.desc,

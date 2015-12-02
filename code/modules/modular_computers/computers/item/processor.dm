@@ -32,9 +32,11 @@
 	machinery_computer = comp
 	machinery_computer.cpu = src
 	hardware_flag = machinery_computer.hardware_flag
+	max_hardware_size = machinery_computer.max_hardware_size
+	steel_sheet_cost = machinery_computer.steel_sheet_cost
 
 /obj/item/modular_computer/processor/find_hardware_by_name(var/N)
-	var/datum/computer_hardware/H = machinery_computer.find_hardware_by_name(N)
+	var/obj/item/weapon/computer_hardware/H = machinery_computer.find_hardware_by_name(N)
 	if(H)
 		return H
 	else
@@ -72,3 +74,39 @@
 	enabled = 0
 	machinery_computer.update_icon()
 	return
+
+// Tesla links only work on machinery types, so we'll override the default try_install_component() proc
+/obj/item/modular_computer/processor/try_install_component(var/mob/living/user, var/obj/item/weapon/computer_hardware/H, var/found = 0)
+	if(istype(H, /obj/item/weapon/computer_hardware/tesla_link))
+		if(machinery_computer.tesla_link)
+			user << "This computer's tesla link slot is already occupied by \the [machinery_computer.tesla_link]."
+			return
+		var/obj/item/weapon/computer_hardware/tesla_link/L = H
+		L.holder = machinery_computer
+		machinery_computer.tesla_link = L
+		// Consoles don't usually have internal power source, so we can't disable tesla link in them.
+		if(istype(machinery_computer, /obj/machinery/modular_computer/console))
+			L.critical = 1
+		found = 1
+	..(user, H, found)
+
+/obj/item/modular_computer/processor/uninstall_component(var/mob/living/user, var/obj/item/weapon/computer_hardware/H, var/found = 0, var/critical = 0)
+	if(machinery_computer.tesla_link == H)
+		machinery_computer.tesla_link = null
+		var/obj/item/weapon/computer_hardware/tesla_link/L = H
+		L.critical = 0		// That way we can install tesla link from console to laptop and it will be possible to turn it off via config.
+		L.holder = null
+		found = 1
+	..(user, H, found, critical)
+
+/obj/item/modular_computer/processor/get_all_components()
+	var/list/all_components = ..()
+	if(machinery_computer.tesla_link)
+		all_components.Add(machinery_computer.tesla_link)
+	return all_components
+
+// Perform adjacency checks on our machinery counterpart, rather than on ourselves.
+/obj/item/modular_computer/processor/Adjacent(var/atom/neighbor)
+	if(!machinery_computer)
+		return 0
+	return machinery_computer.Adjacent(neighbor)
