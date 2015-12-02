@@ -1,0 +1,6 @@
+author: Mechoid
+
+delete-after: True
+
+changes: 
+  - rscadd: "Attention Roboticists: After tweaking of their base functions, Blutag and Redtag ED blueprints are now permitted for general use once again, using a lasertag vest, a lasertag gun of the same color, and a soft grey hat for their respective components. Central may now also change their internal targetting systems to fire upon all tag players by setting their laser's color focus to setting 'o' for omni."
