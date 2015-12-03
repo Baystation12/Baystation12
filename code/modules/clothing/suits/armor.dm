@@ -1,6 +1,6 @@
 
 /obj/item/clothing/suit/armor
-	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
+	allowed = list(/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	item_flags = THICKMATERIAL
 
@@ -66,7 +66,7 @@
 /obj/item/clothing/suit/armor/laserproof/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(istype(damage_source, /obj/item/projectile/energy) || istype(damage_source, /obj/item/projectile/beam))
 		var/obj/item/projectile/P = damage_source
-	
+
 		var/reflectchance = 40 - round(damage/3)
 		if(!(def_zone in list("chest", "groin")))
 			reflectchance /= 2
@@ -146,12 +146,12 @@
 		if(!turfs.len) turfs += pick(/turf in orange(6))
 		var/turf/picked = pick(turfs)
 		if(!isturf(picked)) return
-		
+
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
 		playsound(user.loc, "sparks", 50, 1)
-		
+
 		user.loc = picked
 		return PROJECTILE_FORCE_MISS
 	return 0
@@ -244,102 +244,58 @@
 	icon_state = "ertarmor_med"
 
 //New Vests
-/obj/item/clothing/suit/storage/vest
+/obj/item/clothing/suit/armor/vest
 	name = "armor vest"
-	desc = "A simple kevlar plate carrier."
+	desc = "An armor vest made of synthetic fibers."
 	icon_state = "kvest"
-	item_state = "kvest"
+	item_state = "armor"
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
-	allowed = list(/obj/item/weapon/gun,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
+
+/obj/item/clothing/suit/armor/vest/security
+	name = "security vest"
+	desc = "A synthetic armor vest. This one is marked with the crest of NanoTrasen."
+	icon_state = "secvest"
+
+/obj/item/clothing/suit/armor/vest/detective
+	name = "detective armor vest"
+	desc = "An synthetic armor vest colored in a vintage brown."
+	icon_state = "detvest"
+
+/obj/item/clothing/suit/storage/vest
+	name = "webbed armor vest"
+	desc = "A synthetic armor vest. This one has added webbing and ballistic plates."
+	icon_state = "webvest"
+	armor = list(melee = 50, bullet = 40, laser = 50, energy = 25, bomb = 30, bio = 0, rad = 0)
+	allowed = list(/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
 
 /obj/item/clothing/suit/storage/vest/officer
-	name = "officer armor vest"
-	desc = "A simple kevlar plate carrier. This one has a security holobadge clipped to the chest."
-	icon_state = "officervest_nobadge"
-	item_state = "officervest_nobadge"
-	icon_badge = "officervest_badge"
-	icon_nobadge = "officervest_nobadge"
+	name = "security armor vest"
+	desc = "A synthetic armor vest with SECURITY printed in red lettering on the chest. This one has added webbing and ballistic plates."
+	icon_state = "officervest"
 
 /obj/item/clothing/suit/storage/vest/warden
 	name = "warden armor vest"
-	desc = "A simple kevlar plate carrier. This one has a silver badge clipped to the chest."
-	icon_state = "wardenvest_nobadge"
-	item_state = "wardenvest_nobadge"
-	icon_badge = "wardenvest_badge"
-	icon_nobadge = "wardenvest_nobadge"
+	desc = "A synthetic armor vest with WARDEN printed in silver lettering on the chest. This one has added webbing and ballistic plates."
+	icon_state = "wardenvest"
 
 /obj/item/clothing/suit/storage/vest/hos
 	name = "commander armor vest"
-	desc = "A simple kevlar plate carrier. This one has a gold badge clipped to the chest."
-	icon_state = "hosvest_nobadge"
-	item_state = "hosvest_nobadge"
-	icon_badge = "hosvest_badge"
-	icon_nobadge = "hosvest_nobadge"
+	desc = "A synthetic armor vest with COMMANDER printed in gold lettering on the chest. This one has added webbing and ballistic plates."
+	icon_state = "hosvest"
 
 /obj/item/clothing/suit/storage/vest/pcrc
 	name = "PCRC armor vest"
-	desc = "A simple kevlar plate carrier belonging to Proxima Centauri Risk Control. This one has a PCRC crest clipped to the chest."
-	icon_state = "pcrcvest_nobadge"
-	item_state = "pcrcvest_nobadge"
-	icon_badge = "pcrcvest_badge"
-	icon_nobadge = "pcrcvest_nobadge"
-
-/obj/item/clothing/suit/storage/vest/detective
-	name = "detective armor vest"
-	desc = "A simple kevlar plate carrier in a vintage brown, it has a badge clipped to the chest that reads, 'Private investigator'."
-	icon_state = "detectivevest_nobadge"
-	item_state = "detectivevest_nobadge"
-	icon_badge = "detectivevest_badge"
-	icon_nobadge = "detectivevest_nobadge"
-
-/obj/item/clothing/suit/storage/vest/heavy
-	name = "heavy armor vest"
-	desc = "A heavy kevlar plate carrier with webbing attached."
-	icon_state = "webvest"
-	item_state = "webvest"
-	armor = list(melee = 50, bullet = 40, laser = 50, energy = 25, bomb = 30, bio = 0, rad = 0)
-	slowdown = 1
-
-/obj/item/clothing/suit/storage/vest/heavy/officer
-	name = "officer heavy armor vest"
-	desc = "A heavy kevlar plate carrier with webbing attached. This one has a security holobadge clipped to the chest."
-	icon_state = "officerwebvest_nobadge"
-	item_state = "officerwebvest_nobadge"
-	icon_badge = "officerwebvest_badge"
-	icon_nobadge = "officerwebvest_nobadge"
-
-/obj/item/clothing/suit/storage/vest/heavy/warden
-	name = "warden heavy armor vest"
-	desc = "A heavy kevlar plate carrier with webbing attached. This one has a silver badge clipped to the chest."
-	icon_state = "wardenwebvest_nobadge"
-	item_state = "wardenwebvest_nobadge"
-	icon_badge = "wardenwebvest_badge"
-	icon_nobadge = "wardenwebvest_nobadge"
-
-/obj/item/clothing/suit/storage/vest/heavy/hos
-	name = "commander heavy armor vest"
-	desc = "A heavy kevlar plate carrier with webbing attached. This one has a gold badge clipped to the chest."
-	icon_state = "hoswebvest_nobadge"
-	item_state = "hoswebvest_nobadge"
-	icon_badge = "hoswebvest_badge"
-	icon_nobadge = "hoswebvest_nobadge"
-
-/obj/item/clothing/suit/storage/vest/heavy/pcrc
-	name = "PCRC heavy armor vest"
-	desc = "A heavy kevlar plate carrier belonging to Proxima Centauri Risk Control with webbing attached. This one has a PCRC crest clipped to the chest."
-	icon_state = "pcrcwebvest_nobadge"
-	item_state = "pcrcwebvest_nobadge"
-	icon_badge = "pcrcwebvest_badge"
-	icon_nobadge = "pcrcwebvest_nobadge"
+	desc = "A synthetic armor vest with SECURITY printed in cyan lettering on the chest. This one has added webbing and ballistic plates."
+	icon_state = "pcrcvest"
 
 //Provides the protection of a merc voidsuit, but only covers the chest/groin, and also takes up a suit slot. In exchange it has no slowdown and provides storage.
-/obj/item/clothing/suit/storage/vest/heavy/merc
+/obj/item/clothing/suit/storage/vest/merc
 	name = "heavy armor vest"
-	desc = "A high-quality heavy kevlar plate carrier in a fetching tan. The vest is surprisingly flexible, and possibly made of an advanced material."
+	desc = "A high-quality armor vest in a fetching tan. It is surprisingly flexible and light, even with the added webbing and armor plating."
 	icon_state = "mercwebvest"
 	item_state = "mercwebvest"
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 40, bio = 0, rad = 0)
-	slowdown = 0
+
 
 //All of the armor below is mostly unused
 
