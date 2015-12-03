@@ -385,3 +385,7 @@ STARLIGHT 0
 
 ## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , # and - 
 # DEFAULT_LANGUAGE_PREFIXES , # -
+
+## A ; separated list of lobby screens to randomly pick from. The listed screens must exist as icon states in '/icons/misc/title.dmi'.
+## Defaults to 'title' if left unset.
+# LOBBY_SCREENS title

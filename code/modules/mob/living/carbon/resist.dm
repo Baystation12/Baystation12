@@ -20,7 +20,7 @@
 		return
 
 	..()
-	
+
 	if(handcuffed)
 		spawn() escape_handcuffs()
 	else if(legcuffed)
@@ -46,6 +46,11 @@
 	if(istype(HC))
 		breakouttime = HC.breakouttime
 		displaytime = breakouttime / 600 //Minutes
+
+	var/mob/living/carbon/human/H = src
+	if(istype(H) && H.gloves && istype(H.gloves,/obj/item/clothing/gloves/rig))
+		breakouttime /= 2
+		displaytime /= 2
 
 	visible_message(
 		"<span class='danger'>[src] attempts to remove \the [HC]!</span>",

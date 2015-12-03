@@ -12,7 +12,7 @@ var/global/list/minor_air_alarms = list()
 	icon_screen = "alert:0"
 	light_color = "#e6ffff"
 
-/obj/machinery/computer/atmos_alert/New()
+/obj/machinery/computer/atmos_alert/initialize()
 	..()
 	atmosphere_alarm.register_alarm(src, /obj/machinery/computer/station_alert/update_icon)
 
