@@ -36,6 +36,7 @@
 	update_material()
 
 /turf/simulated/wall/update_icon()
+	..()
 	if(!material)
 		return
 

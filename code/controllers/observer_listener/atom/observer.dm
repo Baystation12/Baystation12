@@ -1,18 +1,21 @@
-#define OBSERVER_EVENT_DESTROY "OnDestroy"
+#define OBSERVER_ON_DESTROY "OnDestroy"
 
 /atom
 	var/list/observer_events
 
 /atom/Destroy()
-	var/list/destroy_listeners = get_listener_list_from_event(OBSERVER_EVENT_DESTROY)
-	if(destroy_listeners)
-		for(var/destroy_listener in destroy_listeners)
-			call(destroy_listener, destroy_listeners[destroy_listener])(src)
-
-	for(var/list/listeners in observer_events)
+	raise_event(OBSERVER_ON_DESTROY, list(src))
+	for(var/list/observer_event in observer_events)
+		var/list/listeners = observer_events[observer_event]
 		listeners.Cut()
+	observer_events.Cut()
 
 	return ..()
+
+/atom/proc/raise_event(var/event_type, var/list/arguments)
+	var/list/listeners = get_listener_list_from_event(event_type)
+	for(var/listener in listeners)
+		call(listener, listeners[listener])(arglist(arguments))
 
 /atom/proc/register(var/event, var/procOwner, var/proc_call)
 	var/list/listeners = get_listener_list_from_event(event)
