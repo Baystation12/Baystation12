@@ -5,6 +5,7 @@
 	icon_state = "dispenser"
 	density = 1
 	anchored = 1.0
+	w_class = 5
 	var/oxygentanks = 10
 	var/phorontanks = 10
 	var/list/oxytanks = list()	//sorry for the similar var names

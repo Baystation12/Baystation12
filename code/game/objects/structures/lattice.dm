@@ -5,6 +5,7 @@
 	icon_state = "latticefull"
 	density = 0
 	anchored = 1.0
+	w_class = 3
 	layer = 2.3 //under pipes
 	//	flags = CONDUCT
 

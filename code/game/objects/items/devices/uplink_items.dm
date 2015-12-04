@@ -334,7 +334,7 @@ datum/uplink_item/dd_SortValue()
 /datum/uplink_item/item/tools/heavy_vest
 	name = "Heavy Armor Vest"
 	item_cost = 4
-	path = /obj/item/clothing/suit/storage/vest/heavy/merc
+	path = /obj/item/clothing/suit/storage/vest/merc
 
 /datum/uplink_item/item/tools/encryptionkey_radio
 	name = "Encrypted Radio Channel Key"

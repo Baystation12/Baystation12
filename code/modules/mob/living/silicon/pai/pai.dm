@@ -393,18 +393,6 @@
 	resting = 0
 	icon_state = "[chassis]"
 
-/mob/living/silicon/pai/start_pulling(var/atom/movable/AM)
-
-	if(istype(AM,/obj/item))
-		var/obj/item/O = AM
-		if(O.w_class == 1)
-			..()
-		else
-			src << "<span class='warning'>You are too small to pull that.</span>"
-	else
-		src << "<span class='warning'>You are too small to pull that.</span>"
-		return
-
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()
 	return 0
