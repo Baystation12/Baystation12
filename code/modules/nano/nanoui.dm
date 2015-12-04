@@ -428,6 +428,9 @@ nanoui is used to open and update nano browser uis
 	user << browse(null, "window=[window_id]")
 	for(var/datum/nanoui/child in children)
 		child.close()
+	children.Cut()
+	state = null
+	master_ui = null
 
  /**
   * Set the UI window to call the nanoclose verb when the window is closed
