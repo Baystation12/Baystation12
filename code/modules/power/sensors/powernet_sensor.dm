@@ -12,12 +12,18 @@
 	desc = "Small machine which transmits data about specific powernet"
 	anchored = 1
 	density = 0
-	layer = 2.46 // Above cables, but should be below floors.
+	level = 1
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "floor_beacon" // If anyone wants to make better sprite, feel free to do so without asking me.
 
 	var/name_tag = "#UNKN#" // ID tag displayed in list of powernet sensors. Each sensor should have it's own tag!
 	var/long_range = 0		// If 1, sensor reading will show on all computers, regardless of Zlevel
+	
+/obj/machinery/power/sensor/hide(var/i)
+	invisibility = i ? 101 : 0
+
+/obj/machinery/power/sensor/hides_under_flooring()
+	return 1
 
 // Proc: New()
 // Parameters: None
