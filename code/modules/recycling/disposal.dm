@@ -940,6 +940,9 @@
 			expel(H, T, 0)
 	..()
 
+/obj/structure/disposalpipe/hides_under_flooring()
+	return 1
+
 // *** TEST verb
 //client/verb/dispstop()
 //	for(var/obj/structure/disposalholder/H in world)
