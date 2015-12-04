@@ -29,18 +29,18 @@
 #define FIRE_DAMAGE_MODIFIER 0.0215 // Higher values result in more external fire damage to the skin. (default 0.0215)
 #define  AIR_DAMAGE_MODIFIER 2.025  // More means less damage from hot air scalding lungs, less = more damage. (default 2.025)
 
-/*// Organ defines.
-#define ORGAN_CUT_AWAY   1<<0
-#define ORGAN_BLEEDING   1<<1
-#define ORGAN_BROKEN     1<<2
-#define ORGAN_DESTROYED  1<<3
-#define ORGAN_ROBOT      1<<4
-#define ORGAN_SPLINTED   1<<5
-#define ORGAN_DEAD       1<<6
-#define ORGAN_MUTATED    1<<7
-#define ORGAN_ASSISTED   1<<8*/
-
 // Organ defines.
+#define ORGAN_CUT_AWAY   (1<<0)
+#define ORGAN_BLEEDING   (1<<1)
+#define ORGAN_BROKEN     (1<<2)
+#define ORGAN_DESTROYED  (1<<3)
+#define ORGAN_ROBOT      (1<<4)
+#define ORGAN_SPLINTED   (1<<5)
+#define ORGAN_DEAD       (1<<6)
+#define ORGAN_MUTATED    (1<<7)
+#define ORGAN_ASSISTED   (1<<8)
+
+/*// Organ defines.
 #define ORGAN_CUT_AWAY   1
 #define ORGAN_BLEEDING   2
 #define ORGAN_BROKEN     4
@@ -49,7 +49,7 @@
 #define ORGAN_SPLINTED   32
 #define ORGAN_DEAD       64
 #define ORGAN_MUTATED    128
-#define ORGAN_ASSISTED   256
+#define ORGAN_ASSISTED   256*/
 
 #define DROPLIMB_EDGE 0
 #define DROPLIMB_BLUNT 1

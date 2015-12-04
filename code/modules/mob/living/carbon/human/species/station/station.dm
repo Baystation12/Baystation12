@@ -266,7 +266,7 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	heat_level_1 = 398.15		// Start taking damage above ~125 Degrees C
+	heat_level_1 = 500		// Gives them about 25 seconds in space before taking damage
 	heat_level_2 = 1000
 	heat_level_3 = 2000
 
@@ -312,3 +312,6 @@
 	H.h_style = ""
 	spawn(100)
 		if(H) H.update_hair()
+
+/datum/species/machine/sanitize_name(var/new_name)
+	return sanitizeName(new_name,allow_numbers=1)
