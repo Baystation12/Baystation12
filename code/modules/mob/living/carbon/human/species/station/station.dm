@@ -250,7 +250,7 @@
 	halloss_message_self = "ERROR: Unrecoverable machine check exception.<BR>System halted, rebooting..."
 
 	warning_low_pressure = 50
-	hazard_low_pressure = 0
+	hazard_low_pressure = -1
 
 	cold_level_1 = 50
 	cold_level_2 = -1
@@ -292,8 +292,17 @@
 		"r_foot" = list("path" = /obj/item/organ/external/foot/right/ipc)
 		)
 
+
+	heat_discomfort_level = 373.15
+	heat_discomfort_strings = list(
+		"Your CPU temperature probes warn you that you are approaching critical heat levels!"
+		)
+
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)
 	..()
 	H.h_style = ""
 	spawn(100)
 		if(H) H.update_hair()
+
+/datum/species/machine/sanitize_name(var/new_name)
+	return sanitizeName(new_name,allow_numbers=1)

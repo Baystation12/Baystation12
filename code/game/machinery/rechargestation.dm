@@ -88,7 +88,7 @@
 
 //Processes the occupant, drawing from the internal power cell if needed.
 /obj/machinery/recharge_station/proc/process_occupant()
-	if(istype(occupant, /mob/living/silicon/robot))
+	if(isrobot(occupant))
 		var/mob/living/silicon/robot/R = occupant
 
 		if(R.module)
@@ -103,6 +103,12 @@
 			R.adjustBruteLoss(-weld_rate)
 		if(wire_rate && R.getFireLoss() && cell.checked_use(wire_power_use * wire_rate * CELLRATE))
 			R.adjustFireLoss(-wire_rate)
+	else if(ishuman(occupant))
+		var/mob/living/carbon/human/H = occupant
+		if(!isnull(H.internal_organs_by_name["cell"]) && H.nutrition < 450)
+			H.nutrition = min(H.nutrition+10, 450)
+			cell.use(7000/450*10)
+
 
 /obj/machinery/recharge_station/examine(mob/user)
 	..(user)
@@ -199,23 +205,29 @@
 /obj/machinery/recharge_station/Bumped(var/mob/living/silicon/robot/R)
 	go_in(R)
 
-/obj/machinery/recharge_station/proc/go_in(var/mob/living/silicon/robot/R)
-	if(!istype(R))
-		return
+/obj/machinery/recharge_station/proc/go_in(var/mob/M)
 	if(occupant)
 		return
-
-	if(R.incapacitated())
-		return
-	if(!R.cell)
+	if(!hascell(M))
 		return
 
-	add_fingerprint(R)
-	R.reset_view(src)
-	R.forceMove(src)
-	occupant = R
+	add_fingerprint(M)
+	M.reset_view(src)
+	M.forceMove(src)
+	occupant = M
 	update_icon()
 	return 1
+
+/obj/machinery/recharge_station/proc/hascell(var/mob/M)
+	if(isrobot(M))
+		var/mob/living/silicon/robot/R = M
+		if(R.cell)
+			return 1
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(!isnull(H.internal_organs_by_name["cell"]))
+			return 1
+	return 0
 
 /obj/machinery/recharge_station/proc/go_out()
 	if(!occupant)
@@ -243,4 +255,6 @@
 	set name = "Enter Recharger"
 	set src in oview(1)
 
+	if(!usr.incapacitated())
+		return
 	go_in(usr)

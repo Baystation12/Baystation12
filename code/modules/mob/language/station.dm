@@ -108,10 +108,9 @@
 
 /datum/language/machine/get_random_name()
 	if(prob(70))
-		name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
+		return "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
 	else
-		name = pick(ai_names)
-	return name
+		return pick(ai_names)
 
 //Syllable Lists
 /*

@@ -1183,7 +1183,12 @@ datum/preferences
 				if("name")
 					var/raw_name = input(user, "Choose your character's name:", "Character Preference")  as text|null
 					if (!isnull(raw_name)) // Check to ensure that the user entered text (rather than cancel.)
-						var/new_name = sanitizeName(raw_name)
+						var/new_name
+						var/datum/species/S = all_species[species]
+						if(istype(S))
+							new_name = S.sanitize_name(raw_name)
+						else
+							new_name = sanitizeName(raw_name)
 						if(new_name)
 							real_name = new_name
 						else

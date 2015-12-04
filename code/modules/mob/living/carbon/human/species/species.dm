@@ -157,6 +157,9 @@
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
 
+/datum/species/proc/sanitize_name(var/new_name)
+	return sanitizeName(new_name)
+
 /datum/species/proc/get_station_variant()
 	return name
 
