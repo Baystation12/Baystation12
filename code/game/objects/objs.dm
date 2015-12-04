@@ -44,7 +44,8 @@
 	return STATUS_CLOSE
 
 /mob/living/silicon/CanUseObjTopic(var/obj/O)
-	return O.allowed(src)
+	var/id = src.GetIdCard()
+	return O.check_access(id)
 
 /mob/proc/CanUseObjTopic()
 	return 1

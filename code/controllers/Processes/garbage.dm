@@ -1,7 +1,7 @@
 // The time a datum was destroyed by the GC, or null if it hasn't been
 /datum/var/gcDestroyed
 
-#define GC_COLLECTIONS_PER_RUN 150
+#define GC_COLLECTIONS_PER_RUN 300
 #define GC_COLLECTION_TIMEOUT (30 SECONDS)
 #define GC_FORCE_DEL_PER_RUN 30
 
@@ -23,7 +23,7 @@ var/list/delayed_garbage = list()
 
 /datum/controller/process/garbage_collector/setup()
 	name = "garbage"
-	schedule_interval = 10 SECONDS
+	schedule_interval = 5 SECONDS
 	start_delay = 3
 
 	if(!garbage_collector)
@@ -46,31 +46,6 @@ world/loop_checks = 0
 	var/time_to_kill = world.time - GC_COLLECTION_TIMEOUT
 	var/checkRemain = GC_COLLECTIONS_PER_RUN
 	var/remaining_force_dels = GC_FORCE_DEL_PER_RUN
-
-	#ifdef GC_FINDREF
-	var/list/searching = list()
-	for(var/refID in destroyed) // Reference search - before all deletions and for all at once
-		var/GCd_at_time = destroyed[refID]
-		if(GCd_at_time > time_to_kill)
-			break
-		var/atom/A = locate(refID)
-		if(A && A.gcDestroyed == GCd_at_time)
-			searching += A
-		if(searching.len >= checkRemain)
-			break
-
-	for(var/atom/A in searching)
-		testing("GC: Searching references for [A] | [A.type]")
-		if(A.loc != null)
-			testing("GC: [A] | [A.type] is located in [A.loc] instead of null")
-		if(A.contents.len)
-			testing("GC: [A] | [A.type] has contents: [list2text(A.contents)]")
-	if(searching.len)
-		for(var/atom/D in world)
-			LookForRefs(D, searching)
-		for(var/datum/D)
-			LookForRefs(D, searching)
-	#endif
 
 	while(destroyed.len && --checkRemain >= 0)
 		if(remaining_force_dels <= 0)
