@@ -140,11 +140,11 @@
 	if(istype(M) && M.client && M.machine == src)
 		src.attack_self(M)
 
-/obj/proc/hide(h)
-	return
+/obj/proc/hide(var/hide)
+	invisibility = hide ? INVISIBILITY_MAXIMUM : initial(invisibility)
 
 /obj/proc/hides_under_flooring()
-	return 0
+	return level == 1
 
 /obj/proc/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	if(talking_atom)

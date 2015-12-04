@@ -18,12 +18,6 @@
 
 	var/name_tag = "#UNKN#" // ID tag displayed in list of powernet sensors. Each sensor should have it's own tag!
 	var/long_range = 0		// If 1, sensor reading will show on all computers, regardless of Zlevel
-	
-/obj/machinery/power/sensor/hide(var/i)
-	invisibility = i ? 101 : 0
-
-/obj/machinery/power/sensor/hides_under_flooring()
-	return 1
 
 // Proc: New()
 // Parameters: None
