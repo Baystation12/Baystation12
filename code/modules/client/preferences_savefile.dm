@@ -189,13 +189,14 @@
 	//Sanitize
 	metadata		= sanitize_text(metadata, initial(metadata))
 
-	if(species == "Machine")
-		real_name		= sanitizeName(real_name,,1)
-	else
-		real_name		= sanitizeName(real_name)
-
 	if(isnull(species) || !(species in playable_species))
 		species = "Human"
+
+	var/datum/species/cur_species = all_species[species]
+	if(istype(cur_species))
+		real_name = cur_species.sanitize_name(real_name)
+	else
+		real_name = sanitizeName(real_name)
 
 	if(isnum(underwear))
 		var/list/undies = gender == MALE ? underwear_m : underwear_f

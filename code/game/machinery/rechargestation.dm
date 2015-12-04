@@ -207,14 +207,14 @@
 
 /obj/machinery/recharge_station/proc/go_in(var/mob/living/silicon/robot/R)
 
+	if(occupant)
+		return
+
 	if(istype(R, /mob/living/silicon/robot))
-		if(!istype(R))
-			return
-		if(occupant)
-			return
 
 		if(R.incapacitated())
 			return
+
 		if(!R.cell)
 			return
 
