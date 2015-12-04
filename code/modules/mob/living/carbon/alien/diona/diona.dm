@@ -8,6 +8,10 @@
 	death_msg = "expires with a pitiful chirrup..."
 	universal_understand = 1
 	universal_speak = 0      // Dionaea do not need to speak to people other than other dionaea.
+
+	can_pull_size = 2
+	can_pull_mobs = MOB_PULL_SMALLER
+
 	holder_type = /obj/item/weapon/holder/diona
 	possession_candidate = 1
 	var/obj/item/hat
@@ -17,19 +21,6 @@
 	..()
 	species = all_species["Diona"]
 	verbs += /mob/living/carbon/alien/diona/proc/merge
-
-/mob/living/carbon/alien/diona/start_pulling(var/atom/movable/AM)
-	//TODO: Collapse these checks into one proc (see pai and drone)
-	if(istype(AM,/obj/item))
-		var/obj/item/O = AM
-		if(O.w_class > 2)
-			src << "<span class='warning'>You are too small to pull that.</span>"
-			return
-		else
-			..()
-	else
-		src << "<span class='warning'>You are too small to pull that.</span>"
-		return
 
 /mob/living/carbon/alien/diona/put_in_hands(var/obj/item/W) // No hands.
 	W.loc = get_turf(src)
