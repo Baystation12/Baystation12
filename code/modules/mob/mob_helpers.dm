@@ -9,6 +9,11 @@
 		return 1
 	return 0
 
+/proc/isnymph(A)
+	if(istype(A, /mob/living/carbon/alien/diona))
+		return 1
+	return 0
+
 /proc/isxenomorph(A)
 	if(istype(A, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = A
