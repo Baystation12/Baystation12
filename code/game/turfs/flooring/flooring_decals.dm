@@ -39,6 +39,7 @@ var/list/floor_decals = list()
 	if(T.decals && T.decals.len)
 		T.decals.Cut()
 		T.update_icon()
+	qdel(src)
 	return
 
 /obj/effect/floor_decal/corner

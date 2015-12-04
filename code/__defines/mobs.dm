@@ -128,8 +128,19 @@
 #define ANIMAL_SPAWN_DELAY round(config.respawn_delay / 6)
 #define DRONE_SPAWN_DELAY  round(config.respawn_delay / 3)
 
+#define ANIMAL_SPAWN_DELAY round(config.respawn_delay / 6)
+#define DRONE_SPAWN_DELAY  round(config.respawn_delay / 3)
+
+// Incapacitation flags, used by the mob/proc/incapacitated() proc
+#define INCAPACITATION_RESTRAINED 1
+#define INCAPACITATION_BUCKLED_PARTIALLY 2
+#define INCAPACITATION_BUCKLED_FULLY 4
+
+#define INCAPACITATION_DEFAULT (INCAPACITATION_RESTRAINED|INCAPACITATION_BUCKLED_FULLY)
+#define INCAPACITATION_ALL (INCAPACITATION_RESTRAINED|INCAPACITATION_BUCKLED_PARTIALLY|INCAPACITATION_BUCKLED_FULLY)
 
 #define MOB_PULL_NONE 0
 #define MOB_PULL_SMALLER 1
 #define MOB_PULL_SAME 2
 #define MOB_PULL_LARGER 3
+
