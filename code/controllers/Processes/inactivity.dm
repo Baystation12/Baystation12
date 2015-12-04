@@ -4,7 +4,8 @@
 
 /datum/controller/process/inactivity/doWork()
 	if(config.kick_inactive)
-		for(var/client/C in clients)
+		for(last_object in clients)
+			var/client/C = last_object
 			if(!C.holder && C.is_afk(config.kick_inactive MINUTES))
 				if(!istype(C.mob, /mob/dead))
 					log_access("AFK: [key_name(C)]")

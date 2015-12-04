@@ -18,7 +18,8 @@ var/datum/controller/process/chemistry/chemistryProcess
 	stat(null, "[active_holders.len] reagent holder\s")
 
 /datum/controller/process/chemistry/doWork()
-	for(var/datum/reagents/holder in active_holders)
+	for(last_object in active_holders)
+		var/datum/reagents/holder = last_object
 		if(!holder.process_reactions())
 			active_holders -= holder
 		SCHECK

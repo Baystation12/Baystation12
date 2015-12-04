@@ -3,7 +3,7 @@
 	Wireless controller
 
 	Used for connecting devices to each other (i.e. machinery, doors, emitters, etc.)
-	Unlike the radio controller, the wireless controller does not pass communications between devices. Once the devices 
+	Unlike the radio controller, the wireless controller does not pass communications between devices. Once the devices
 	have been connected they call each others procs directly, they do not use the wireless controller to communicate.
 
 	See code\modules\wireless\interfaces.dm for details of how to connect devices.
@@ -57,7 +57,8 @@ var/datum/controller/process/wireless/wirelessProcess
 		process_queue(pending_connections, retry_connections)
 
 /datum/controller/process/wireless/proc/process_queue(var/list/process_conections, var/list/unsuccesful_connections)
-	for(var/datum/connection_request/C in process_conections)
+	for(last_object in process_conections)
+		var/datum/connection_request/C = last_object
 		var/target_found = 0
 		for(var/datum/wifi/receiver/R in receiver_list)
 			if(R.id == C.id)
