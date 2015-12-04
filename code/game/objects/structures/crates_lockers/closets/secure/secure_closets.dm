@@ -90,7 +90,7 @@
 	else
 		togglelock(user)
 
-/obj/structure/closet/secure_closet/attack_hand(var/remaining_charges, var/mob/user, var/visual_feedback, var/audible_feedback)
+/obj/structure/closet/secure_closet/emag_act(var/remaining_charges, var/mob/user, var/emag_source, var/visual_feedback = "", var/audible_feedback = "")
 	if(!broken)
 		broken = 1
 		locked = 0
@@ -100,8 +100,11 @@
 
 		if(visual_feedback)
 			visible_message(visual_feedback, audible_feedback)
+		else if(user && emag_source)
+			visible_message("<span class='warning'>\The [src] has been broken by \the [user] with \an [emag_source]!</span>", "You hear a faint electrical spark.")
 		else
-			visible_message("<span class='warning'>The locker has been broken by [user] with an electromagnetic card!</span>", "You hear a faint electrical spark.")
+			visible_message("<span class='warning'>\The [src] sparks and breaks open!</span>", "You hear a faint electrical spark.")
+		return 1
 
 /obj/structure/closet/secure_closet/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)
