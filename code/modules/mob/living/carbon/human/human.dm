@@ -1412,6 +1412,7 @@
 	W.forceMove(src)
 	l_hand = W
 	W.equipped(src,slot_l_hand)
+	W.add_fingerprint(src)
 	update_inv_l_hand()
 	return 1
 
@@ -1421,4 +1422,6 @@
 	W.forceMove(src)
 	r_hand = W
 	W.equipped(src,slot_r_hand)
+	W.add_fingerprint(src)
 	update_inv_r_hand()
+	return 1
