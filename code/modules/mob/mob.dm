@@ -85,8 +85,7 @@
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
 
 /mob/visible_message(var/message, var/self_message, var/blind_message)
-
-	var/list/see = get_mobs_or_objects_in_view(world.view,src) | viewers(get_turf(src), null)
+	var/list/see = get_mobs_or_objects_in_view(world.view,src) | viewers(world.view,src)
 
 	for(var/I in see)
 		if(isobj(I))
@@ -152,8 +151,33 @@
 	//handle_typing_indicator() //You said the typing indicator would be fine. The test determined that was a lie.
 	return
 
-/mob/proc/incapacitated()
-	return (stat || paralysis || stunned || weakened || restrained())
+#define UNBUCKLED 0
+#define PARTIALLY_BUCKLED 1
+#define FULLY_BUCKLED 2
+/mob/proc/buckled()
+	// Preliminary work for a future buckle rewrite,
+	// where one might be fully restrained (like an elecrical chair), or merely secured (shuttle chair, keeping you safe but not otherwise restrained from acting)
+	return buckled ? FULLY_BUCKLED : UNBUCKLED
+
+/mob/proc/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
+	if (stat || paralysis || stunned || weakened || resting || sleeping || (status_flags & FAKEDEATH))
+		return 1
+
+	if((incapacitation_flags & INCAPACITATION_RESTRAINED) && restrained())
+		return 1
+
+	if((incapacitation_flags & (INCAPACITATION_BUCKLED_PARTIALLY|INCAPACITATION_BUCKLED_FULLY)))
+		var/buckling = buckled()
+		if(buckling >= PARTIALLY_BUCKLED && (incapacitation_flags & INCAPACITATION_BUCKLED_PARTIALLY))
+			return 1
+		if(buckling == FULLY_BUCKLED && (incapacitation_flags & INCAPACITATION_BUCKLED_FULLY))
+			return 1
+
+	return 0
+
+#undef UNBUCKLED
+#undef PARTIALLY_BUCKLED
+#undef FULLY_BUCKLED
 
 /mob/proc/restrained()
 	return
@@ -675,7 +699,7 @@
 	return 0
 
 /mob/proc/cannot_stand()
-	return incapacitated() || restrained() || resting || sleeping || (status_flags & FAKEDEATH)
+	return incapacitated(INCAPACITATION_DEFAULT & (~INCAPACITATION_RESTRAINED))
 
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
 /mob/proc/update_canmove()
