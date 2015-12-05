@@ -31,7 +31,7 @@
 	return attack_hand(user)
 
 /obj/machinery/button/attack_hand(mob/living/user)
-	..()
+	if(..()) return 1
 	activate(user)
 
 /obj/machinery/button/proc/activate(mob/living/user)
@@ -55,12 +55,23 @@
 		icon_state = "launcherbtt"
 
 //alternate button with the same functionality, except has a lightswitch sprite instead
-/obj/machinery/button/alternate
+/obj/machinery/button/switch
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light0"
 
-/obj/machinery/button/alternate/update_icon()
+/obj/machinery/button/switch/update_icon()
 	icon_state = "light[active]"
+
+//alternate button with the same functionality, except has a door control sprite instead
+/obj/machinery/button/alternate
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "doorctrl0"
+
+/obj/machinery/button/alternate/update_icon()
+	if(active)
+		icon_state = "doorctrl0"
+	else
+		icon_state = "doorctrl2"
 
 //Toggle button with two states (on and off) and calls seperate procs for each state
 /obj/machinery/button/toggle/activate(mob/living/user)
@@ -77,19 +88,31 @@
 	update_icon()
 	operating = 0
 
-/obj/machinery/button/toggle/alternate
+//alternate button with the same toggle functionality, except has a lightswitch sprite instead
+/obj/machinery/button/toggle/switch
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light0"
 
-/obj/machinery/button/toggle/alternate/update_icon()
+/obj/machinery/button/toggle/switch/update_icon()
 	icon_state = "light[active]"
 
+//alternate button with the same toggle functionality, except has a door control sprite instead
+/obj/machinery/button/toggle/alternate
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "doorctrl0"
+
+/obj/machinery/button/toggle/alternate/update_icon()
+	if(active)
+		icon_state = "doorctrl0"
+	else
+		icon_state = "doorctrl2"
 
 //-------------------------------
 // Mass Driver Button
 //  Passes the activate call to a mass driver wifi sender
 //-------------------------------
 /obj/machinery/button/mass_driver
+	name = "mass driver button"
 	var/datum/wifi/sender/mass_driver/sender
 
 /obj/machinery/button/mass_driver/initialize()
@@ -110,7 +133,15 @@
 // Door Button
 //-------------------------------
 /obj/machinery/button/toggle/door
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "doorctrl0"
 	var/datum/wifi/sender/door/sender
+
+/obj/machinery/button/toggle/door/update_icon()
+	if(active)
+		icon_state = "doorctrl0"
+	else
+		icon_state = "doorctrl2"
 
 /obj/machinery/button/toggle/door/initialize()
 	..()
@@ -124,7 +155,7 @@
 	active = !active
 	use_power(5)
 	update_icon()
-	if(!active)
+	if(active)			//active is open
 		sender.open()
 	else
 		sender.close()

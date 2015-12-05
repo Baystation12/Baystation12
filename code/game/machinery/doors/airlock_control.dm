@@ -133,8 +133,17 @@ obj/machinery/door/airlock/initialize()
 	if(frequency)
 		set_frequency(frequency)
 
-	update_icon()
+	//wireless connection
+	if(_wifi_id)
+		wifi_receiver = new(_wifi_id, src)
 
+	if(src.closeOtherId != null)
+		for (var/obj/machinery/door/airlock/A in world)
+			if(A.closeOtherId == src.closeOtherId && A != src)
+				src.closeOther = A
+				break
+
+	update_icon()
 
 obj/machinery/door/airlock/New()
 	..()

@@ -1033,16 +1033,8 @@ About the new airlock wires panel:
 	else
 		wires = new/datum/wires/airlock(src)
 
-/obj/machinery/door/airlock/initialize()
-	if(src.closeOtherId != null)
-		for (var/obj/machinery/door/airlock/A in world)
-			if(A.closeOtherId == src.closeOtherId && A != src)
-				src.closeOther = A
-				break
-
-	//wireless connection
-	if(_wifi_id)
-		wifi_receiver = new(_wifi_id, src)
+//obj/machinery/door/airlock/initialize()
+//This is in airlock_control.dm
 
 /obj/machinery/door/airlock/Destroy()
 	qdel(wires)
