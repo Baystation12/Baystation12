@@ -1,7 +1,5 @@
 /datum/expansion
-
-/datum/expansion
-	var/atom/holder = null // The holder
+	var/datum/holder = null // The holder
 
 /datum/expansion/New(var/atom/holder)
 	if(!istype(holder))
@@ -22,3 +20,18 @@
 	if(CanUseTopic(usr) != STATUS_INTERACTIVE)
 		return 1
 	return 0
+
+/obj
+	var/list/datum/expansion/expansions = list()
+
+/obj/Destroy()
+	if(expansions)
+		for(var/expansion in expansions)
+			qdel(expansions[expansion])
+		expansions.Cut()
+	return ..()
+
+/obj/proc/set_expansion(var/type, var/instance)
+	if(expansions[type])
+		qdel(expansions[type])
+	expansions[type] = instance

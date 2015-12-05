@@ -24,11 +24,18 @@
 	var/atom/buffer_object
 
 /obj/item/device/multitool/proc/get_buffer(var/typepath)
-	// Update the buffer name only when someone fetches the buffer.
+	// Only allow clearing the buffer name when someone fetches the buffer.
 	// Means you cannot be sure the source hasn't been destroyed until the very moment it's needed.
-	buffer_name = buffer_object ? buffer_object.name : null
+	get_buffer_name(TRUE)
 	if(buffer_object && (!typepath || istype(buffer_object, typepath)))
 		return buffer_object
+
+/obj/item/device/multitool/proc/get_buffer_name(var/null_name_if_missing = FALSE)
+	if(buffer_object)
+		buffer_name = buffer_object.name
+	else if(null_name_if_missing)
+		buffer_name = null
+	return buffer_name
 
 /obj/item/device/multitool/proc/set_buffer(var/atom/buffer)
 	if(!buffer || istype(buffer))

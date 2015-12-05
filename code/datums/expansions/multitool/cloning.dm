@@ -1,5 +1,9 @@
 /datum/expansion/multitool/cryo/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)
-	return buffer(M)
+	. += buffer(M)
+	. += "<HR><b>Connected Cloning Pods:</b><br>"
+	var/obj/machinery/computer/cloning/C = holder
+	for(var/atom/cloning_pod in C.pods)
+		. += "[cloning_pod.name]<br>"
 
 /datum/expansion/multitool/cryo/receive_buffer(var/obj/item/device/multitool/M, var/atom/buffer, var/mob/user)
 	var/obj/machinery/clonepod/P = buffer

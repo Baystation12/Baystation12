@@ -17,9 +17,9 @@
 
 	var/html = get_interact_window(M, user)
 	if(html)
-		var/datum/browser/popup = new(usr, "multitool", holder.name, window_x, window_y)
+		var/datum/browser/popup = new(usr, "multitool", "Multitool Menu", window_x, window_y)
 		popup.set_content(html)
-		popup.set_title_image(user.browse_rsc_icon(holder.icon, holder.icon_state))
+		popup.set_title_image(user.browse_rsc_icon(M.icon, M.icon_state))
 		popup.open()
 	else
 		close_window(usr)
@@ -32,8 +32,9 @@
 
 /datum/expansion/multitool/proc/buffer(var/obj/item/device/multitool/multitool)
 	. += "<b>Buffer Memory:</b><br>"
-	if(multitool.buffer_name)
-		. += "[multitool.buffer_name] <a href='?src=\ref[src];send=\ref[multitool.buffer_object]'>Send</a> <a href='?src=\ref[src];purge=1'>Purge</a><br>"
+	var/buffer_name = multitool.get_buffer_name()
+	if(buffer_name)
+		. += "[buffer_name] <a href='?src=\ref[src];send=\ref[multitool.buffer_object]'>Send</a> <a href='?src=\ref[src];purge=1'>Purge</a><br>"
 	else
 		. += "No connection stored in the buffer."
 
@@ -78,8 +79,10 @@
 	return MT_NOACTION
 
 /datum/expansion/multitool/proc/send_buffer(var/obj/item/device/multitool/M, var/atom/buffer, var/mob/user)
-	if(M.get_buffer() == buffer)
+	if(M.get_buffer() == buffer && buffer)
 		receive_buffer(M, buffer, user)
+	else if(!buffer)
+		user << "<span class='warning'>Unable to acquire data from the buffered object. Purging from memory.</span>"
 	return MT_REFRESH
 
 /datum/expansion/multitool/proc/receive_buffer(var/obj/item/device/multitool/M, var/atom/buffer, var/mob/user)

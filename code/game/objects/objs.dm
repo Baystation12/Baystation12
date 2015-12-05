@@ -14,14 +14,8 @@
 	var/force = 0
 	var/armor_penetration = 0
 
-	var/list/datum/expansion/expansions = list()
-
 /obj/Destroy()
 	processing_objects -= src
-	for(var/expansion in expansions)
-		qdel(expansions[expansion])
-	if(expansions)
-		expansions.Cut()
 	return ..()
 
 /obj/Topic(href, href_list, var/datum/topic_state/state = default_state)
