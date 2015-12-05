@@ -19,7 +19,7 @@
 	return ..()
 
 /obj/Topic(href, href_list, var/datum/topic_state/state = default_state)
-	if(usr && ..())
+	if(..())
 		return 1
 
 	// In the far future no checks are made in an overriding Topic() beyond if(..()) return
