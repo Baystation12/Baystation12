@@ -24,31 +24,69 @@
 //			open at approximately the same time. Waits until all doors have finished opening before returning.
 //	Receiver: will try to open/close the parent door when activate/deactivate is called.
 //-------------------------------
-/datum/wifi/sender/door/proc/open()
+
+// Sender procs
+/datum/wifi/sender/door/proc/activate(var/command)
+	if(!command)
+		return
+
 	var/datum/spawn_sync/S = new()
 
 	for(var/datum/wifi/receiver/button/door/D in connected_devices)
-		S.start_worker(D, "activate")
+		S.start_worker(D, command)
 	S.wait_until_done()
 	return
 
-/datum/wifi/sender/door/proc/close()
-	var/datum/spawn_sync/S = new()
-
-	for(var/datum/wifi/receiver/button/door/D in connected_devices)
-		S.start_worker(D, "deactivate")
-	S.wait_until_done()
-	return
-
-/datum/wifi/receiver/button/door/activate()
+//Receiver procs
+/datum/wifi/receiver/button/door/proc/open()
 	var/obj/machinery/door/D = parent
 	if(istype(D) && D.can_open())
 		D.open()
 
-/datum/wifi/receiver/button/door/deactivate()
+/datum/wifi/receiver/button/door/proc/close()
 	var/obj/machinery/door/D = parent
 	if(istype(D) && D.can_close())
 		D.close()
+
+/datum/wifi/receiver/button/door/proc/lock()
+	var/obj/machinery/door/airlock/D = parent
+	if(istype(D))
+		D.lock()
+
+/datum/wifi/receiver/button/door/proc/unlock()
+	var/obj/machinery/door/airlock/D = parent
+	if(istype(D))
+		D.unlock()
+
+/datum/wifi/receiver/button/door/proc/enable_idscan()
+	var/obj/machinery/door/airlock/D = parent
+	if(istype(D))
+		D.set_idscan(1)
+
+/datum/wifi/receiver/button/door/proc/disable_idscan()
+	var/obj/machinery/door/airlock/D = parent
+	if(istype(D))
+		D.set_idscan(0)
+
+/datum/wifi/receiver/button/door/proc/enable_safeties()
+	var/obj/machinery/door/airlock/D = parent
+	if(istype(D))
+		D.set_safeties(1)
+
+/datum/wifi/receiver/button/door/proc/disable_safeties()
+	var/obj/machinery/door/airlock/D = parent
+	if(istype(D))
+		D.set_safeties(0)
+
+/datum/wifi/receiver/button/door/proc/electrify()
+	var/obj/machinery/door/airlock/D = parent
+	if(istype(D))
+		D.electrify(-1)
+
+/datum/wifi/receiver/button/door/proc/unelectrify()
+	var/obj/machinery/door/airlock/D = parent
+	if(istype(D))
+		D.electrify(0)
 
 //-------------------------------
 // Emitter

@@ -129,13 +129,29 @@
 	active = 0
 	update_icon()
 
+
 //-------------------------------
 // Door Button
 //-------------------------------
+
+// Bitmasks for door switches.
+#define OPEN   0x1
+#define IDSCAN 0x2
+#define BOLTS  0x4
+#define SHOCK  0x8
+#define SAFE   0x10
+
 /obj/machinery/button/toggle/door
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "doorctrl0"
 	var/datum/wifi/sender/door/sender
+
+	var/_door_functions = 1
+/*	Bitflag, 	1 = open
+				2 = idscan
+				4 = bolts
+				8 = shock
+				16 = door safties  */
 
 /obj/machinery/button/toggle/door/update_icon()
 	if(active)
@@ -155,8 +171,32 @@
 	active = !active
 	use_power(5)
 	update_icon()
-	if(active)			//active is open
-		sender.open()
+	if(active)
+		if(_door_functions & IDSCAN)
+			sender.activate("enable_idscan")
+		if(_door_functions & SHOCK)
+			sender.activate("electrify")
+		if(_door_functions & SAFE)
+			sender.activate("enable_safeties")
+		if(_door_functions & BOLTS)
+			sender.activate("unlock")
+		if(_door_functions & OPEN)
+			sender.activate("open")
 	else
-		sender.close()
+		if(_door_functions & IDSCAN)
+			sender.activate("disable_idscan")
+		if(_door_functions & SHOCK)
+			sender.activate("unelectrify")
+		if(_door_functions & SAFE)
+			sender.activate("disable_safeties")
+		if(_door_functions & OPEN)
+			sender.activate("close")
+		if(_door_functions & BOLTS)
+			sender.activate("lock")
 	operating = 0
+
+#undef OPEN
+#undef IDSCAN
+#undef BOLTS
+#undef SHOCK
+#undef SAFE
