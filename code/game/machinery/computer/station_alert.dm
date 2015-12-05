@@ -7,7 +7,7 @@
 	light_color = "#e6ffff"
 	circuit = /obj/item/weapon/circuitboard/stationalert
 	var/datum/nano_module/alarm_monitor/alarm_monitor
-	var/monitor_type
+	var/monitor_type = /datum/nano_module/alarm_monitor
 
 /obj/machinery/computer/station_alert/engineering
 	monitor_type = /datum/nano_module/alarm_monitor/engineering
