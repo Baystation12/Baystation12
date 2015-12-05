@@ -971,6 +971,7 @@
 #include "code\modules\blob\blob.dm"
 #include "code\modules\client\client defines.dm"
 #include "code\modules\client\client procs.dm"
+#include "code\modules\client\movement.dm"
 #include "code\modules\client\preferences.dm"
 #include "code\modules\client\preferences_factions.dm"
 #include "code\modules\client\preferences_gear.dm"
