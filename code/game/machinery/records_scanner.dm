@@ -88,7 +88,7 @@ obj/machinery/scanner/attack_hand(mob/living/carbon/human/user)
 	G.fields["rank"] = "Unassigned"
 	G.fields["real_rank"] = G.fields["rank"]
 	G.fields["name"] = mname
-	G.fields["id"] = text("[]", add_zero(num2hex(rand(1, 1.6777215E7)), 6))
+	G.fields["id"] = generate_record_id()
 	M.fields["name"] = G.fields["name"]
 	M.fields["id"] = G.fields["id"]
 	S.fields["name"] = G.fields["name"]
