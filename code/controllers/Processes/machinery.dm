@@ -18,7 +18,8 @@
 		machines = dd_sortedObjectList(machines)
 
 /datum/controller/process/machinery/proc/internal_process_machinery()
-	for(var/obj/machinery/M in machines)
+	for(last_object in machines)
+		var/obj/machinery/M = last_object
 		if(M && !M.gcDestroyed)
 			if(M.process() == PROCESS_KILL)
 				//M.inMachineList = 0 We don't use this debugging function
@@ -31,7 +32,8 @@
 		SCHECK
 
 /datum/controller/process/machinery/proc/internal_process_power()
-	for(var/datum/powernet/powerNetwork in powernets)
+	for(last_object in powernets)
+		var/datum/powernet/powerNetwork = last_object
 		if(istype(powerNetwork) && isnull(powerNetwork.gcDestroyed))
 			powerNetwork.reset()
 			SCHECK
@@ -41,13 +43,15 @@
 
 /datum/controller/process/machinery/proc/internal_process_power_drain()
 	// Currently only used by powersinks. These items get priority processed before machinery
-	for(var/obj/item/I in processing_power_items)
+	for(last_object in processing_power_items)
+		var/obj/item/I = last_object
 		if(!I.pwr_drain()) // 0 = Process Kill, remove from processing list.
 			processing_power_items.Remove(I)
 		SCHECK
 
 /datum/controller/process/machinery/proc/internal_process_pipenets()
-	for(var/datum/pipe_network/pipeNetwork in pipe_networks)
+	for(last_object in pipe_networks)
+		var/datum/pipe_network/pipeNetwork = last_object
 		if(istype(pipeNetwork) && isnull(pipeNetwork.gcDestroyed))
 			pipeNetwork.process()
 			SCHECK

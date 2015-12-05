@@ -181,8 +181,8 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/storage/toolbox/emergency,
 					/obj/item/clothing/suit/storage/hazardvest,
 					/obj/item/clothing/suit/storage/hazardvest,
-					/obj/item/clothing/suit/storage/vest,
-					/obj/item/clothing/suit/storage/vest,
+					/obj/item/clothing/suit/armor/vest,
+					/obj/item/clothing/suit/armor/vest,
 					/obj/item/weapon/tank/emergency_oxygen/engi,
 					/obj/item/weapon/tank/emergency_oxygen/engi,
 					/obj/item/weapon/tank/emergency_oxygen/engi,
@@ -728,7 +728,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/gun/projectile/sec,
 					/obj/item/weapon/gun/projectile/sec,
 					/obj/item/weapon/storage/box/flashbangs,
-					/obj/item/weapon/storage/box/flashbangs)
+					/obj/item/weapon/storage/box/teargas)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "Weapons crate"
@@ -763,17 +763,14 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/randomised/armor
 	num_contained = 5
-	contains = list(/obj/item/clothing/suit/storage/vest,
-					/obj/item/clothing/suit/storage/vest/officer,
-					/obj/item/clothing/suit/storage/vest/warden,
+	contains = list(/obj/item/clothing/suit/armor/vest,
+					/obj/item/clothing/suit/armor/vest/security,
+					/obj/item/clothing/suit/armor/vest/detective,
 					/obj/item/clothing/suit/storage/vest/hos,
 					/obj/item/clothing/suit/storage/vest/pcrc,
-					/obj/item/clothing/suit/storage/vest/detective,
-					/obj/item/clothing/suit/storage/vest/heavy,
-					/obj/item/clothing/suit/storage/vest/heavy/officer,
-					/obj/item/clothing/suit/storage/vest/heavy/warden,
-					/obj/item/clothing/suit/storage/vest/heavy/hos,
-					/obj/item/clothing/suit/storage/vest/heavy/pcrc)
+					/obj/item/clothing/suit/storage/vest/warden,
+					/obj/item/clothing/suit/storage/vest/officer,
+					/obj/item/clothing/suit/storage/vest)
 
 	name = "Armor crate"
 	cost = 40
@@ -801,6 +798,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/head/helmet/riot,
 					/obj/item/clothing/suit/armor/riot,
 					/obj/item/weapon/storage/box/flashbangs,
+					/obj/item/weapon/storage/box/teargas,
 					/obj/item/weapon/storage/box/beanbags,
 					/obj/item/weapon/storage/box/handcuffs)
 	cost = 60
@@ -1308,14 +1306,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Security"
 	access = access_armory
 	contains = list(/obj/item/clothing/under/tactical,
-					/obj/item/clothing/suit/armor/tactical,
-					/obj/item/clothing/head/helmet/tactical,
-					/obj/item/clothing/mask/balaclava/tactical,
-					/obj/item/clothing/glasses/sunglasses/sechud/tactical,
-					/obj/item/weapon/storage/belt/security/tactical,
-					/obj/item/clothing/shoes/jackboots,
-					/obj/item/clothing/gloves/black,
-					/obj/item/clothing/under/tactical,
 					/obj/item/clothing/suit/armor/tactical,
 					/obj/item/clothing/head/helmet/tactical,
 					/obj/item/clothing/mask/balaclava/tactical,

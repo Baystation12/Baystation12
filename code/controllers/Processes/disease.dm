@@ -6,8 +6,8 @@
 	schedule_interval = 20 // every 2 seconds
 
 /datum/controller/process/disease/doWork()
-	for(var/disease in active_diseases)
-		var/datum/disease/D = disease
+	for(last_object in active_diseases)
+		var/datum/disease/D = last_object
 		D.process()
 		SCHECK
 

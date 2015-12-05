@@ -1,6 +1,9 @@
 /datum/proc/nano_host()
 	return src
 
+/datum/proc/nano_container()
+	return src
+
 /datum/proc/CanUseTopic(var/mob/user, var/datum/topic_state/state)
 	var/src_object = nano_host()
 	return state.can_use_topic(src_object, user)

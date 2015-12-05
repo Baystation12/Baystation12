@@ -17,11 +17,11 @@
 
 
 /obj/item/mecha_parts/mecha_equipment/proc/do_after_cooldown(target=1)
-	sleep(equip_cooldown)
-	set_ready_state(1)
-	if(target && chassis)
-		return 1
-	return 0
+	spawn(equip_cooldown)
+		set_ready_state(1)
+		if(target && chassis)
+			return 1
+		return 0
 
 
 /obj/item/mecha_parts/mecha_equipment/New()

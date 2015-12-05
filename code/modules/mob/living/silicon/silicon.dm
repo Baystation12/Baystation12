@@ -40,7 +40,7 @@
 /mob/living/silicon/Destroy()
 	silicon_mob_list -= src
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
-		AH.unregister(src)
+		AH.unregister_alarm(src)
 	..()
 
 /mob/living/silicon/proc/init_id()

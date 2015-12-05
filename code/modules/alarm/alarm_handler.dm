@@ -86,10 +86,10 @@
 /turf/get_alarm_origin()
 	return get_area(src)
 
-/datum/alarm_handler/proc/register(var/object, var/procName)
+/datum/alarm_handler/proc/register_alarm(var/object, var/procName)
 	listeners[object] = procName
 
-/datum/alarm_handler/proc/unregister(var/object)
+/datum/alarm_handler/proc/unregister_alarm(var/object)
 	listeners -= object
 
 /datum/alarm_handler/proc/notify_listeners(var/alarm, var/was_raised)

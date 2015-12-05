@@ -462,7 +462,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		src << "<span class='warning'>Spawning as a mouse is currently disabled.</span>"
 		return
 
-	if(!MayRespawn(1, round(config.respawn_delay / 6)))
+	if(!MayRespawn(1, ANIMAL_SPAWN_DELAY))
 		return
 
 	var/turf/T = get_turf(src)
@@ -507,11 +507,27 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 //This is called when a ghost is drag clicked to something.
 /mob/dead/observer/MouseDrop(atom/over)
 	if(!usr || !over) return
-	if (isobserver(usr) && usr.client && usr.client.holder && isliving(over))
-		if (usr.client.holder.cmd_ghost_drag(src,over))
+	if(isobserver(usr) && usr.client && isliving(over))
+		var/mob/living/M = over
+		// If they an admin, see if control can be resolved.
+		if(usr.client.holder && usr.client.holder.cmd_ghost_drag(src,M))
+			return
+		// Otherwise, see if we can possess the target.
+		if(usr == src && try_possession(M))
+			return
+	if(istype(over, /obj/machinery/drone_fabricator))
+		if(try_drone_spawn(src, over))
 			return
 
 	return ..()
+
+/mob/dead/observer/proc/try_possession(var/mob/living/M)
+	if(!config.ghosts_can_possess_animals)
+		usr << "<span class='warning'>Ghosts are not permitted to possess animals.</span>"
+		return 0
+	if(!M.can_be_possessed_by(src))
+		return 0
+	return M.do_possession(src)
 
 //Used for drawing on walls with blood puddles as a spooky ghost.
 /mob/dead/verb/bloody_doodle()
@@ -530,12 +546,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if (usr != src)
 		return 0 //something is terribly wrong
 
-	var/ghosts_can_write
-	if(ticker.mode.name == "cult")
-		if(cult.current_antagonists.len > config.cult_ghostwriter_req_cultists)
-			ghosts_can_write = 1
-
-	if(!ghosts_can_write)
+	if(!round_is_spooky())
 		src << "\red The veil is not thin enough for you to do that."
 		return
 
@@ -662,7 +673,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/proc/can_admin_interact()
     return 0
-    
+
 /mob/dead/observer/can_admin_interact()
 	return check_rights(R_ADMIN, 0, src)
 

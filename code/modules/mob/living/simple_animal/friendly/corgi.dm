@@ -19,6 +19,7 @@
 	response_harm   = "kicks"
 	see_in_dark = 5
 	mob_size = 8
+	possession_candidate = 1
 
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back

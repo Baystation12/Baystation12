@@ -36,6 +36,10 @@ var/list/mob_hat_cache = list()
 	req_access = list(access_engine, access_robotics)
 	integrated_light_power = 3
 	local_transmit = 1
+	possession_candidate = 1
+
+	can_pull_size = 3
+	can_pull_mobs = MOB_PULL_SMALLER
 
 	mob_bump_flag = SIMPLE_ANIMAL
 	mob_swap_flags = SIMPLE_ANIMAL
@@ -49,13 +53,36 @@ var/list/mob_hat_cache = list()
 	var/obj/machinery/drone_fabricator/master_fabricator
 	var/law_type = /datum/ai_laws/drone
 	var/module_type = /obj/item/weapon/robot_module/drone
-	var/can_pull_size = 2
-	var/can_pull_mobs
 	var/obj/item/hat
 	var/hat_x_offset = 0
 	var/hat_y_offset = -13
 
 	holder_type = /obj/item/weapon/holder/drone
+
+/mob/living/silicon/robot/drone/can_be_possessed_by(var/mob/dead/observer/possessor)
+	if(!istype(possessor))
+		return 0
+	if(!config.allow_drone_spawn)
+		src << "<span class='danger'>Playing as drones is not currently permitted.</span>"
+		return 0
+	if(jobban_isbanned(possessor,"Cyborg"))
+		usr << "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>"
+		return 0
+	if(!possessor.MayRespawn(1,DRONE_SPAWN_DELAY))
+		return 0
+	return 1
+
+/mob/living/silicon/robot/drone/do_possession(var/mob/dead/observer/possessor)
+	if(!(istype(possessor) && possessor.ckey))
+		return 0
+	if(src.ckey || src.client)
+		possessor << "<span class='warning'>\The [src] already has a player.</span>"
+		return 0
+	message_admins("<span class='adminnotice'>[key_name_admin(possessor)] has taken control of \the [src].</span>")
+	log_admin("[key_name(possessor)] took control of \the [src].")
+	transfer_personality(possessor.client)
+	qdel(possessor)
+	return 1
 
 /mob/living/silicon/robot/drone/Destroy()
 	if(hat)
@@ -66,10 +93,10 @@ var/list/mob_hat_cache = list()
 	icon_state = "constructiondrone"
 	law_type = /datum/ai_laws/construction_drone
 	module_type = /obj/item/weapon/robot_module/drone/construction
-	can_pull_size = 5
-	can_pull_mobs = 1
 	hat_x_offset = 1
 	hat_y_offset = -12
+	can_pull_size = 5
+	can_pull_mobs = MOB_PULL_SAME
 
 /mob/living/silicon/robot/drone/New()
 
@@ -314,20 +341,6 @@ var/list/mob_hat_cache = list()
 	src << "You have no individual will, no personality, and no drives or urges other than your laws."
 	src << "Remember,  you are <b>lawed against interference with the crew</b>. Also remember, <b>you DO NOT take orders from the AI.</b>"
 	src << "Use <b>say ;Hello</b> to talk to other drones and <b>say Hello</b> to speak silently to your nearby fellows."
-
-/mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
-
-	if(!(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct)))
-		if(istype(AM,/obj/item))
-			var/obj/item/O = AM
-			if(O.w_class > can_pull_size)
-				src << "<span class='warning'>You are too small to pull that.</span>"
-				return
-		else
-			if(!can_pull_mobs)
-				src << "<span class='warning'>You are too small to pull that.</span>"
-				return
-	..()
 
 /mob/living/silicon/robot/drone/add_robot_verbs()
 	src.verbs |= silicon_subsystems
