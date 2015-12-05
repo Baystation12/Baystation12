@@ -947,7 +947,7 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 					var/old_underlays = T.underlays.Copy()
 
 					if(platingRequired)
-						if(istype(B, get_base_turf(B.z)))
+						if(istype(B, get_base_turf_by_area(B)))
 							continue moving
 
 					var/turf/X = B

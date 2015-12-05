@@ -146,6 +146,7 @@ area/space/atmosalert()
 /area/shuttle
 	requires_power = 0
 	sound_env = SMALL_ENCLOSED
+	base_turf = /turf/space
 
 /area/shuttle/arrival
 	name = "\improper Arrival Shuttle"
@@ -158,6 +159,7 @@ area/space/atmosalert()
 
 /area/shuttle/escape
 	name = "\improper Emergency Shuttle"
+	flags = RAD_SHIELDED
 	music = "music/escape.ogg"
 
 /area/shuttle/escape/station
@@ -175,6 +177,7 @@ area/space/atmosalert()
 /area/shuttle/escape_pod1
 	name = "\improper Escape Pod One"
 	music = "music/escape.ogg"
+	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod1/station
 	icon_state = "shuttle2"
@@ -188,6 +191,7 @@ area/space/atmosalert()
 /area/shuttle/escape_pod2
 	name = "\improper Escape Pod Two"
 	music = "music/escape.ogg"
+	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod2/station
 	icon_state = "shuttle2"
@@ -201,6 +205,7 @@ area/space/atmosalert()
 /area/shuttle/escape_pod3
 	name = "\improper Escape Pod Three"
 	music = "music/escape.ogg"
+	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod3/station
 	icon_state = "shuttle2"
@@ -214,6 +219,7 @@ area/space/atmosalert()
 /area/shuttle/escape_pod5 //Pod 4 was lost to meteors
 	name = "\improper Escape Pod Five"
 	music = "music/escape.ogg"
+	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod5/station
 	icon_state = "shuttle2"
@@ -263,19 +269,26 @@ area/space/atmosalert()
 
 /area/shuttle/specops/centcom
 	name = "\improper Special Ops Shuttle"
+	flags = RAD_SHIELDED
+
+/area/shuttle/specops/centcom
 	icon_state = "shuttlered"
 
 /area/shuttle/specops/station
-	name = "\improper Special Ops Shuttle"
 	icon_state = "shuttlered2"
 
-/area/shuttle/syndicate_elite/mothership
+/area/shuttle/syndicate_elite
 	name = "\improper Merc Elite Shuttle"
+	flags = RAD_SHIELDED
+
+/area/shuttle/syndicate_elite/mothership
 	icon_state = "shuttlered"
 
 /area/shuttle/syndicate_elite/station
-	name = "\improper Merc Elite Shuttle"
 	icon_state = "shuttlered2"
+
+/area/shuttle/administration
+	flags = RAD_SHIELDED
 
 /area/shuttle/administration/centcom
 	name = "\improper Administration Shuttle Centcom"
@@ -1167,6 +1180,7 @@ area/space/atmosalert()
 	requires_power = 1
 	always_unpowered = 1
 	lighting_use_dynamic = 0
+	base_turf = /turf/space
 
 	auxport
 		name = "\improper Fore Port Solar Array"

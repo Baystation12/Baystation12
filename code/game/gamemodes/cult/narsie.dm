@@ -223,9 +223,9 @@ var/global/list/narsie_list = list()
 				consume(AM2)
 				continue
 
-		if (dist <= consume_range && !istype(A, get_base_turf(A.z)))
+		if (dist <= consume_range && !istype(A, get_base_turf_by_area(A)))
 			var/turf/T2 = A
-			T2.ChangeTurf(get_base_turf(A.z))
+			T2.ChangeTurf(get_base_turf_by_area(A))
 
 /obj/singularity/narsie/consume(const/atom/A) //This one is for the small ones.
 	if(!(A.singuloCanEat()))
@@ -265,9 +265,9 @@ var/global/list/narsie_list = list()
 				spawn (0)
 					AM2.singularity_pull(src, src.current_size)
 
-		if (dist <= consume_range && !istype(A, get_base_turf(A.z)))
+		if (dist <= consume_range && !istype(A, get_base_turf_by_area(A)))
 			var/turf/T2 = A
-			T2.ChangeTurf(get_base_turf(A.z))
+			T2.ChangeTurf(get_base_turf_by_area(A))
 
 /obj/singularity/narsie/ex_act(severity) //No throwing bombs at it either. --NEO
 	return
