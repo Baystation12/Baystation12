@@ -194,8 +194,6 @@
 	if((brute <= 0) && (burn <= 0))
 		return 0
 
-	if(status & ORGAN_DESTROYED)
-		return 0
 	if(status & ORGAN_ROBOT )
 
 		var/brmod = 0.66
@@ -431,15 +429,10 @@ This function completely restores a damaged organ to perfect condition.
 /obj/item/organ/external/process()
 	if(owner)
 		//Dismemberment
-		if(status & ORGAN_DESTROYED)
-			if(config.limbs_can_break)
-				droplimb(0,DROPLIMB_EDGE) //Might be worth removing this check since take_damage handles it.
-			return
-		if(parent)
-			if(parent.status & ORGAN_DESTROYED)
-				status |= ORGAN_DESTROYED
-				owner.update_body(1)
-				return
+		//if(parent && parent.is_stump()) //should never happen
+		//	warning("\The [src] ([src.type]) belonging to [owner] ([owner.type]) was attached to a stump")
+		//	remove()
+		//	return
 
 		// Process wounds, doing healing etc. Only do this every few ticks to save processing power
 		if(owner.life_tick % wound_update_accuracy == 0)
@@ -485,7 +478,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 */
 /obj/item/organ/external/proc/update_germs()
 
-	if(status & (ORGAN_ROBOT|ORGAN_DESTROYED) || (owner.species && owner.species.flags & IS_PLANT)) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
+	if(status & (ORGAN_ROBOT) || (owner.species && owner.species.flags & IS_PLANT)) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
 		germ_level = 0
 		return
 
@@ -657,8 +650,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 // new damage icon system
 // returns just the brute/burn damage code
 /obj/item/organ/external/proc/damage_state_text()
-	if(status & ORGAN_DESTROYED)
-		return "--"
 
 	var/tburn = 0
 	var/tbrute = 0
@@ -919,7 +910,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return 0
 
 /obj/item/organ/external/proc/is_usable()
-	return !is_dislocated() && !(status & (ORGAN_DESTROYED|ORGAN_MUTATED|ORGAN_DEAD))
+	return !is_dislocated() && !(status & (ORGAN_MUTATED|ORGAN_DEAD))
 
 /obj/item/organ/external/proc/is_malfunctioning()
 	return ((status & ORGAN_ROBOT) && (brute_dam + burn_dam) >= 10 && prob(brute_dam + burn_dam))
@@ -947,7 +938,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	..()
 
-	status |= ORGAN_DESTROYED
 	victim.bad_external_organs -= src
 
 	for(var/atom/movable/implant in implants)

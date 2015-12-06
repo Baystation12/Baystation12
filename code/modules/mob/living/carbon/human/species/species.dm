@@ -221,15 +221,9 @@
 			O.organ_tag = organ_tag
 		H.internal_organs_by_name[organ_tag] = O
 
-	//These should be unnecessary
-	//for(var/name in H.organs_by_name)
-	//	H.organs |= H.organs_by_name[name]
-	//for(var/obj/item/organ/external/O in H.organs)
-	//	O.owner = H
-
 	if(flags & IS_SYNTHETIC)
 		for(var/obj/item/organ/external/E in H.organs)
-			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
+			if(E.status & ORGAN_CUT_AWAY || E.is_stump()) continue
 			E.robotize()
 		for(var/obj/item/organ/I in H.internal_organs)
 			I.robotize()

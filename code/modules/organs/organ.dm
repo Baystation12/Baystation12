@@ -216,7 +216,6 @@ var/list/organ_cache = list()
 	src.status &= ~ORGAN_SPLINTED
 	src.status &= ~ORGAN_CUT_AWAY
 	src.status &= ~ORGAN_ATTACHABLE
-	src.status &= ~ORGAN_DESTROYED
 	src.status |= ORGAN_ROBOT
 	src.status |= ORGAN_ASSISTED
 

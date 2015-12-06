@@ -512,7 +512,6 @@
 #define ORGAN_ATTACHABLE 4
 #define ORGAN_BLEEDING   8
 #define ORGAN_BROKEN     32
-#define ORGAN_DESTROYED  64
 #define ORGAN_ROBOT      128
 #define ORGAN_SPLINTED   256
 #define SALVED           512

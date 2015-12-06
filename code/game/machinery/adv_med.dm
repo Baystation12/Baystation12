@@ -400,7 +400,7 @@
 
 		if(!AN && !open && !infected & !imp)
 			AN = "None:"
-		if(!(e.status & ORGAN_DESTROYED))
+		if(!e.is_stump())
 			dat += "<td>[e.name]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[robot][bled][AN][splint][open][infected][imp][internal_bleeding][lung_ruptured]</td>"
 		else
 			dat += "<td>[e.name]</td><td>-</td><td>-</td><td>Not Found</td>"
