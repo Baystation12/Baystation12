@@ -192,9 +192,9 @@ datum/preferences
 
 	if(path)
 		dat += "Slot - "
-		dat += "<a href=\"byond://?src=\ref[user];preference=open_load_dialog\">Load slot</a> - "
-		dat += "<a href=\"byond://?src=\ref[user];preference=save\">Save slot</a> - "
-		dat += "<a href=\"byond://?src=\ref[user];preference=reload\">Reload slot</a>"
+		dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
+		dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
+		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a>"
 
 	else
 		dat += "Please create an account to save your preferences."
@@ -218,26 +218,30 @@ datum/preferences
 		else
 			user << "<span class='danger'>The forum URL is not set in the server configuration.</span>"
 			return
+	ShowChoices(usr)
+	return 1
+
+/datum/preferences/Topic(href, list/href_list)
+	if(..())
+		return 1
+
+	if(href_list["save"])
+		save_preferences()
+		save_character()
+	else if(href_list["reload"])
+		load_preferences()
+		load_character()
+	else if(href_list["load"])
+		if(!IsGuestKey(usr.key))
+			open_load_dialog(usr)
+			return 1
+	else if(href_list["changeslot"])
+		load_character(text2num(href_list["changeslot"]))
+		close_load_dialog(usr)
 	else
-		switch(href_list["preference"])
-			if("save")
-				save_preferences()
-				save_character()
+		return 0
 
-			if("reload")
-				load_preferences()
-				load_and_update_character()
-
-			if("open_load_dialog")
-				if(!IsGuestKey(user.key))
-					open_load_dialog(user)
-					return 1
-
-			if("changeslot")
-				load_and_update_character(text2num(href_list["num"]))
-				close_load_dialog(user)
-
-	ShowChoices(user)
+	ShowChoices(usr)
 	return 1
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, safety = 0)
@@ -364,10 +368,9 @@ datum/preferences
 			if(!name)	name = "Character[i]"
 			if(i==default_slot)
 				name = "<b>[name]</b>"
-			dat += "<a href='?_src_=prefs;preference=changeslot;num=[i];'>[name]</a><br>"
+			dat += "<a href='?src=\ref[src];changeslot=[i]'>[name]</a><br>"
 
 	dat += "<hr>"
-	dat += "<a href='byond://?src=\ref[user];preference=close_load_dialog'>Close</a><br>"
 	dat += "</center></tt>"
 	user << browse(dat, "window=saves;size=300x390")
 
