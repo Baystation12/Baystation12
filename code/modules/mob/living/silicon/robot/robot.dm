@@ -452,6 +452,7 @@
 			return
 		var/obj/item/weapon/weldingtool/WT = W
 		if (WT.remove_fuel(0))
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			adjustBruteLoss(-30)
 			updatehealth()
 			add_fingerprint(user)
@@ -467,6 +468,7 @@
 			return
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.use(1))
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			adjustFireLoss(-30)
 			updatehealth()
 			for(var/mob/O in viewers(user, null))
