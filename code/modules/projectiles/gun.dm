@@ -340,7 +340,8 @@
 
 		in_chamber.on_hit(M)
 		if (in_chamber.damage_type != HALLOSS)
-			user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, "head", used_weapon = "Point blank shot in the mouth with \a [in_chamber]", sharp=1)
+			log_and_message_admins("[key_name(user)] commited suicide using \a [src]")
+			user.apply_damage(in_chamber.damage*3.0, in_chamber.damage_type, "head", used_weapon = "Point blank shot in the mouth with \a [in_chamber]", sharp=1)
 			user.death()
 		else
 			user << "<span class = 'notice'>Ow...</span>"
