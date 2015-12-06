@@ -84,14 +84,14 @@ proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 		return 0
 	var/zone = user.zone_sel.selecting
 	if(zone in M.op_stage.in_progress) //Can't operate on someone repeatedly.
-		user << "\red You can't operate on this area while surgery is already in progress."
+		user << "<span class='warning'>You can't operate on this area while surgery is already in progress.</span>"
 		return 1
 	for(var/datum/surgery_step/S in surgery_steps)
 		//check if tool is right or close enough and if this step is possible
 		if(S.tool_quality(tool))
 			var/step_is_valid = S.can_use(user, M, zone, tool)
 			if(step_is_valid && S.is_valid_target(M))
-				if(step_is_valid == 2) // This is a failure that already has a message for failing.
+				if(step_is_valid == SURGERY_FAILURE) // This is a failure that already has a message for failing.
 					return 1
 				M.op_stage.in_progress += zone
 				S.begin_step(user, M, zone, tool)		//start on it
@@ -101,7 +101,7 @@ proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 				else if ((tool in user.contents) && user.Adjacent(M))			//or
 					S.fail_step(user, M, zone, tool)		//malpractice~
 				else // This failing silently was a pain.
-					user << "\red You must remain close to your patient to conduct surgery."
+					user << "<span class='warning'>You must remain close to your patient to conduct surgery.</span>"
 				M.op_stage.in_progress -= zone 									// Clear the in-progress flag.
 				if (ishuman(M))
 					var/mob/living/carbon/human/H = M
@@ -109,7 +109,7 @@ proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 				return	1	  												//don't want to do weapony things after surgery
 
 	if (user.a_intent == I_HELP)
-		user << "\red You can't see any useful way to use [tool] on [M]."
+		user << "<span class='warning'>You can't see any useful way to use [tool] on [M].</span>"
 		return 1
 	return 0
 
