@@ -1039,10 +1039,7 @@ About the new airlock wires panel:
 			if(A.closeOtherId == src.closeOtherId && A != src)
 				src.closeOther = A
 				break
-
-	//wireless connection
-	if(_wifi_id)
-		wifi_receiver = new(_wifi_id, src)
+	..()
 
 /obj/machinery/door/airlock/Destroy()
 	qdel(wires)
