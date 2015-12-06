@@ -159,8 +159,8 @@
 	return
 
 
-/obj/item/organ/external/New(var/mob/living/carbon/holder, var/internal)
-	..()
+/obj/item/organ/external/New(var/mob/living/carbon/holder)
+	..(holder, 0)
 	if(owner)
 		replaced(owner)
 		sync_colour_to_human(owner)

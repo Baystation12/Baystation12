@@ -213,15 +213,19 @@
 		var/obj/item/organ/O = new limb_path(H)
 		organ_data["descriptor"] = O.name
 
-	for(var/organ in has_organ)
-		var/organ_type = has_organ[organ]
-		H.internal_organs_by_name[organ] = new organ_type(H,1)
+	for(var/organ_tag in has_organ)
+		var/organ_type = has_organ[organ_tag]
+		var/obj/item/organ/O = new organ_type(H,1)
+		if(organ_tag != O.organ_tag)
+			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
+			O.organ_tag = organ_tag
+		H.internal_organs_by_name[organ_tag] = O
 
-	for(var/name in H.organs_by_name)
-		H.organs |= H.organs_by_name[name]
-
-	for(var/obj/item/organ/external/O in H.organs)
-		O.owner = H
+	//These should be unnecessary
+	//for(var/name in H.organs_by_name)
+	//	H.organs |= H.organs_by_name[name]
+	//for(var/obj/item/organ/external/O in H.organs)
+	//	O.owner = H
 
 	if(flags & IS_SYNTHETIC)
 		for(var/obj/item/organ/external/E in H.organs)
