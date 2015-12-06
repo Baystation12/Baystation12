@@ -711,22 +711,21 @@ Note that amputating the affected organ does in fact remove the infection from t
 				"<span class='danger'>You hear the sickening splatter of gore.</span>")
 
 	var/mob/living/carbon/human/victim = owner //Keep a reference for post-removed().
+	var/obj/item/organ/external/parent_organ = parent
 	removed(null, ignore_children)
 	victim.traumatic_shock += 60
 
 	wounds.Cut()
-	if(parent)
+	if(parent_organ)
 		var/datum/wound/lost_limb/W = new (src, disintegrate, clean)
-		parent.children -= src
 		if(clean)
-			parent.wounds |= W
-			parent.update_damages()
+			parent_organ.wounds |= W
+			parent_organ.update_damages()
 		else
 			var/obj/item/organ/external/stump/stump = new (victim, 0, src)
 			stump.wounds |= W
 			victim.organs |= stump
 			stump.update_damages()
-		parent = null
 
 	spawn(1)
 		victim.updatehealth()
@@ -973,6 +972,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 	for(var/obj/item/organ/organ in internal_organs)
 		organ.removed()
 		organ.loc = src
+
+	// Remove parent references
+	parent.children -= src
+	parent = null
 
 	release_restraints(victim)
 	victim.organs -= src
