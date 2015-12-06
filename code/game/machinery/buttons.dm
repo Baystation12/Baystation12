@@ -11,13 +11,13 @@
 	idle_power_usage = 2
 	active_power_usage = 4
 	var/_wifi_id
-	var/datum/wifi/sender/button/wifi_sender
+	var/datum/wifi/sender/wifi_sender
 
 /obj/machinery/button/initialize()
 	..()
 	update_icon()
-	if(_wifi_id)
-		wifi_sender = new(_wifi_id, src)
+	if(_wifi_id && !wifi_sender)
+		wifi_sender = new/datum/wifi/sender/button(_wifi_id, src)
 
 /obj/machinery/button/Destroy()
 	qdel(wifi_sender)
@@ -113,19 +113,20 @@
 //-------------------------------
 /obj/machinery/button/mass_driver
 	name = "mass driver button"
-	var/datum/wifi/sender/mass_driver/sender
 
 /obj/machinery/button/mass_driver/initialize()
+	if(_wifi_id)
+		wifi_sender = new/datum/wifi/sender/mass_driver(_wifi_id, src)
 	..()
-	sender = new(_wifi_id, src)
 
 /obj/machinery/button/mass_driver/activate(mob/living/user)
 	if(active || !istype(wifi_sender))
 		return
+
 	active = 1
 	use_power(5)
 	update_icon()
-	sender.cycle()
+	wifi_sender.activate()
 	active = 0
 	update_icon()
 
@@ -144,7 +145,6 @@
 /obj/machinery/button/toggle/door
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "doorctrl0"
-	var/datum/wifi/sender/door/sender
 
 	var/_door_functions = 1
 /*	Bitflag, 	1 = open
@@ -160,11 +160,12 @@
 		icon_state = "doorctrl2"
 
 /obj/machinery/button/toggle/door/initialize()
+	if(_wifi_id)
+		wifi_sender = new/datum/wifi/sender/door(_wifi_id, src)
 	..()
-	sender = new(_wifi_id, src)
 
 /obj/machinery/button/toggle/door/activate(mob/living/user)
-	if(operating || !istype(sender))
+	if(operating || !istype(wifi_sender))
 		return
 
 	operating = 1
@@ -173,26 +174,26 @@
 	update_icon()
 	if(active)
 		if(_door_functions & IDSCAN)
-			sender.activate("enable_idscan")
+			wifi_sender.activate("enable_idscan")
 		if(_door_functions & SHOCK)
-			sender.activate("electrify")
+			wifi_sender.activate("electrify")
 		if(_door_functions & SAFE)
-			sender.activate("enable_safeties")
+			wifi_sender.activate("enable_safeties")
 		if(_door_functions & BOLTS)
-			sender.activate("unlock")
+			wifi_sender.activate("unlock")
 		if(_door_functions & OPEN)
-			sender.activate("open")
+			wifi_sender.activate("open")
 	else
 		if(_door_functions & IDSCAN)
-			sender.activate("disable_idscan")
+			wifi_sender.activate("disable_idscan")
 		if(_door_functions & SHOCK)
-			sender.activate("unelectrify")
+			wifi_sender.activate("unelectrify")
 		if(_door_functions & SAFE)
-			sender.activate("disable_safeties")
+			wifi_sender.activate("disable_safeties")
 		if(_door_functions & OPEN)
-			sender.activate("close")
+			wifi_sender.activate("close")
 		if(_door_functions & BOLTS)
-			sender.activate("lock")
+			wifi_sender.activate("lock")
 	operating = 0
 
 #undef OPEN

@@ -5,11 +5,11 @@
 //	Receiver: does whatever the subtype does. deactivate() by default calls activate(), so you will have to override in 
 //			  it in a subtype if you want it to do something.
 //-------------------------------
-/datum/wifi/sender/button/proc/activate(mob/living/user)
+/datum/wifi/sender/button/activate(mob/living/user)
 	for(var/datum/wifi/receiver/button/B in connected_devices)
 		B.activate(user)
 
-/datum/wifi/sender/button/proc/deactivate(mob/living/user)
+/datum/wifi/sender/button/deactivate(mob/living/user)
 	for(var/datum/wifi/receiver/button/B in connected_devices)
 		B.deactivate(user)
 
@@ -26,7 +26,7 @@
 //-------------------------------
 
 // Sender procs
-/datum/wifi/sender/door/proc/activate(var/command)
+/datum/wifi/sender/door/activate(var/command)
 	if(!command)
 		return
 
@@ -171,28 +171,25 @@
 //			then closes all connected doors. It will wait before continuing the sequence after opening/closing the doors.
 //	Receiver: Triggers the parent mass dirver to activate.
 //-------------------------------
-/datum/wifi/sender/mass_driver/proc/cycle()
+/datum/wifi/sender/mass_driver/activate()
 	var/datum/spawn_sync/S = new()
 
 	//tell all doors to open
 	for(var/datum/wifi/receiver/button/door/D in connected_devices)
-		S.start_worker(D, "activate")
+		S.start_worker(D, "open")
 	S.wait_until_done()
-
 	S.reset()
 	//tell all mass drivers to launch
 	for(var/datum/wifi/receiver/button/mass_driver/M in connected_devices)
 		spawn()
 			M.activate()
-
 	sleep(20)
 
 	//tell all doors to close
 	S.reset()
 	for(var/datum/wifi/receiver/button/door/D in connected_devices)
-		S.start_worker(D, "deactivate")
+		S.start_worker(D, "close")
 	S.wait_until_done()
-
 	return
 
 /datum/wifi/receiver/button/mass_driver/activate(mob/living/user)
