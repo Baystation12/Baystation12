@@ -78,15 +78,15 @@
 			if(istype(I,/obj/item/organ))
 				continue
 			removable_objects |= I
-	if(!removable_objects.len)
-		return ..()
-	var/obj/item/I = pick(removable_objects)
-	if(!istype(I))
-		return ..()
-	I.loc = get_turf(user)
-	if(!(user.l_hand && user.r_hand))
-		user.put_in_hands(I)
-	user.visible_message("<span class='danger'>\The [user] rips \the [I] out of \the [src]!</span>")
+	if(removable_objects.len)
+		var/obj/item/I = pick(removable_objects)
+		I.loc = get_turf(user) //just in case something was embedded that is not an item
+		if(istype(I))
+			if(!(user.l_hand && user.r_hand))
+				user.put_in_hands(I)
+		user.visible_message("<span class='danger'>\The [user] rips \the [I] out of \the [src]!</span>")
+		return //no eating the limb until everything's been removed
+	return ..()
 
 /obj/item/organ/external/examine()
 	..()
