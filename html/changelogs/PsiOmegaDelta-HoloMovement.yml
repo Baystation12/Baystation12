@@ -1,4 +1,0 @@
-author: Neerti
-delete-after: True
-changes: 
-  - rscadd: "The AI can now toggle whether its hologram will move towards the center of its view using the 'Toggle Hologram Movement' verb."
