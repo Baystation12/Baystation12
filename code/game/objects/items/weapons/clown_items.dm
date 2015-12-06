@@ -42,6 +42,7 @@
 		var/turf/T = target
 		T.clean(src, user)
 	else if(istype(target,/obj/structure/sink))
+		user << "<span class='notice'>You wet \the [src] in the sink.</span>"
 		wet()
 	else
 		user << "<span class='notice'>You clean \the [target.name].</span>"
