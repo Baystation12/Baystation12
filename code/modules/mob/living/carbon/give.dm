@@ -2,8 +2,7 @@
 	set category = "IC"
 	set name = "Give"
 
-	// TODO :  Change to incapacitated() on merge.
-	if(usr.stat || usr.lying || usr.resting || usr.buckled)
+	if(incapacitated())
 		return
 	if(!istype(target) || target.stat || target.lying || target.resting || target.buckled || target.client == null)
 		return
