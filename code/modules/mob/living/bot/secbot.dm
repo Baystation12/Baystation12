@@ -4,7 +4,7 @@
 	icon_state = "secbot0"
 	maxHealth = 50
 	health = 50
-	req_one_access = list(access_security, access_forensics_lockers, access_robotics)
+	req_one_access = list(access_security, access_forensics_lockers)
 	botcard_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels)
 
 	var/mob/target
