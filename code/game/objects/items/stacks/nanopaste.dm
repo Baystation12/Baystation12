@@ -14,6 +14,7 @@
 	if (istype(M,/mob/living/silicon/robot))	//Repairing cyborgs
 		var/mob/living/silicon/robot/R = M
 		if (R.getBruteLoss() || R.getFireLoss() )
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			R.adjustBruteLoss(-15)
 			R.adjustFireLoss(-15)
 			R.updatehealth()
@@ -30,6 +31,7 @@
 		if(S.open == 1)
 			if (S && (S.status & ORGAN_ROBOT))
 				if(S.get_damage())
+					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 					S.heal_damage(15, 15, robo_repair = 1)
 					H.updatehealth()
 					use(1)

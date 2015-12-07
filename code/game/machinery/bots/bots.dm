@@ -64,6 +64,7 @@
 			if(open)
 				health = min(maxhealth, health+10)
 				user.visible_message("<span class='warning'>[user] repairs [src]!</span>","<span class='notice'>You repair [src]!</span>")
+				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			else
 				user << "<span class='notice'>Unable to repair with the maintenance panel closed.</span>"
 		else
@@ -75,6 +76,7 @@
 					src.health -= W.force * fire_dam_coeff
 				if("brute")
 					src.health -= W.force * brute_dam_coeff
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			..()
 			healthcheck()
 		else
