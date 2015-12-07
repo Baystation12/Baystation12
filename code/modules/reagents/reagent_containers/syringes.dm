@@ -223,7 +223,7 @@
 			var/target_zone = ran_zone(check_zone(user.zone_sel.selecting, target))
 			var/obj/item/organ/external/affecting = H.get_organ(target_zone)
 
-			if (!affecting || (affecting.status & ORGAN_DESTROYED) || affecting.is_stump())
+			if (!affecting || affecting.is_stump())
 				user << "<span class='danger'>They are missing that limb!</span>"
 				return
 

@@ -70,7 +70,7 @@
 
 	for(var/limb_tag in list("l_leg","r_leg","l_foot","r_foot"))
 		var/obj/item/organ/external/E = organs_by_name[limb_tag]
-		if(!E || (E.status & (ORGAN_DESTROYED|ORGAN_DEAD)))
+		if(!E || (E.status & (ORGAN_MUTATED|ORGAN_DEAD)) || E.is_stump()) //should just be !E.is_usable() here but dislocation screws that up.
 			stance_damage += 2 // let it fail even if just foot&leg
 		else if (E.is_malfunctioning())
 			//malfunctioning only happens intermittently so treat it as a missing limb when it procs
