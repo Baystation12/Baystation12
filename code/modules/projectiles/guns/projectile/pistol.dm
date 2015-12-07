@@ -1,4 +1,5 @@
 /obj/item/weapon/gun/projectile/colt
+	var/unique_reskin
 	name = "vintage .45 pistol"
 	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 rounds."
 	magazine_type = /obj/item/ammo_magazine/c45m
@@ -10,6 +11,18 @@
 
 /obj/item/weapon/gun/projectile/colt/detective
 	magazine_type = /obj/item/ammo_magazine/c45m/flash
+
+/obj/item/weapon/gun/projectile/colt/detective/update_icon()
+	if(ammo_magazine)
+		if(unique_reskin)
+			icon_state = unique_reskin
+		else
+			icon_state = initial(icon_state)
+	else
+		if(unique_reskin)
+			icon_state = "[unique_reskin]-e"
+		else
+			icon_state = "[initial(icon_state)]-e"
 
 /obj/item/weapon/gun/projectile/colt/detective/verb/rename_gun()
 	set name = "Name Gun"
@@ -29,6 +42,27 @@
 		M << "You name the gun [input]. Say hello to your new friend."
 		return 1
 
+/obj/item/weapon/gun/projectile/colt/detective/verb/reskin_gun()
+	set name = "Reskin gun"
+	set category = "Object"
+	set desc = "Click to reskin your gun."
+
+	var/mob/M = usr
+	var/list/options = list()
+	options["NT Mk. 58"] = "secguncomp"
+	options["NT Mk. 58 Custom"] = "secgundark"
+	options["Colt M1911"] = "colt"
+	options["USP"] = "usp"
+	options["H&K VP"] = "VP78"
+	options["P08 Luger"] = "p08"
+	options["P08 Luger, Brown"] = "p08b"
+	var/choice = input(M,"What do you want to skin the gun to?","Reskin Gun") in options
+	if(src && choice && !M.stat && in_range(M,src))
+		icon_state = options[choice]
+		unique_reskin = options[choice]
+		M << "Your gun is now skinned as [choice]. Say hello to your new friend."
+		return 1
+
 /obj/item/weapon/gun/projectile/sec
 	name = ".45 pistol"
 	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Found pretty much everywhere humans are. Uses .45 rounds."
@@ -39,6 +73,13 @@
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 
+/obj/item/weapon/gun/projectile/sec/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "secguncomp"
+	else
+		icon_state = "secguncomp-e"
+
 /obj/item/weapon/gun/projectile/sec/flash
 	name = ".45 signal pistol"
 
@@ -46,6 +87,13 @@
 	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. This one has a sweet wooden grip. Uses .45 rounds."
 	name = "custom .45 Pistol"
 	icon_state = "secgundark"
+
+/obj/item/weapon/gun/projectile/sec/wood/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "secgundark"
+	else
+		icon_state = "secgundark-e"
 
 /obj/item/weapon/gun/projectile/silenced
 	name = "silenced pistol"
