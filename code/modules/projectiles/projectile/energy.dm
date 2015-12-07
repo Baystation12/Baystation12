@@ -31,7 +31,7 @@
 	src.visible_message("<span class='warning'>\The [src] explodes in a bright flash!</span>")
 
 	new /obj/effect/decal/cleanable/ash(src.loc) //always use src.loc so that ash doesn't end up inside windows
-	new /obj/effect/effect/sparks(T)
+	new /obj/effect/sparks(T)
 	new /obj/effect/effect/smoke/illumination(T, brightness=max(flash_range*2, brightness), lifetime=light_duration)
 
 //blinds people like the flash round, but can also be used for temporary illumination
