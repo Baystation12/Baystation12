@@ -8,7 +8,7 @@
 
 /datum/controller/process/scheduler/setup()
 	name = "scheduler"
-	schedule_interval = 7 SECONDS
+	schedule_interval = 3 SECONDS
 	scheduled_tasks = list()
 	scheduler = src
 
@@ -42,11 +42,14 @@
 /**********
 * Helpers *
 **********/
-/proc/schedule_task(var/trigger_time, var/repeat_interval, var/procedure, var/list/arguments)
+/proc/schedule_task_in(var/in_time, var/procedure, var/list/arguments)
+	schedule_task(world.time + in_time, procedure, arguments)
+
+/proc/schedule_task(var/trigger_time, var/procedure, var/list/arguments)
 	var/datum/scheduled_task/st = new/datum/scheduled_task(trigger_time, procedure, arguments, /proc/destroy_scheduled_task, list())
 	scheduler.schedule(st)
 
-/proc/schedule_task_with_source(var/trigger_time, var/repeat_interval, var/source, var/procedure, var/list/arguments)
+/proc/schedule_task_with_source(var/trigger_time, var/source, var/procedure, var/list/arguments)
 	var/datum/scheduled_task/st = new/datum/scheduled_task/source(trigger_time, source, procedure, arguments, /proc/destroy_scheduled_task, list())
 	scheduler.schedule(st)
 
