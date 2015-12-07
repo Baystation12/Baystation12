@@ -74,6 +74,7 @@
 	i.loc = src
 	user << "<span class='notice'>You put [i] in [src].</span>"
 	papers.Add(i)
+	update_icon()
 	amount++
 
 
