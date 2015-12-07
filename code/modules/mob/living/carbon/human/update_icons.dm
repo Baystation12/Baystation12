@@ -770,6 +770,12 @@ var/global/list/damage_icon_parts = list()
 			bloodsies.color = wear_suit.blood_color
 			standing.overlays	+= bloodsies
 
+		// Accessories - copied from uniform, BOILERPLATE because fuck this system.
+		var/obj/item/clothing/suit/suit = wear_suit
+		if(istype(suit) && suit.accessories.len)
+			for(var/obj/item/clothing/accessory/A in suit.accessories)
+				standing.overlays |= A.get_mob_overlay()
+
 		overlays_standing[SUIT_LAYER]	= standing
 		update_tail_showing(0)
 

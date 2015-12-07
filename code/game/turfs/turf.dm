@@ -140,7 +140,7 @@ var/const/enterloopsanity = 100
 	..()
 	var/objects = 0
 	if(A && (A.flags & PROXMOVE))
-		for(var/atom/thing as mob|obj|turf|area in range(1))
+		for(var/atom/movable/thing in range(1))
 			if(objects > enterloopsanity) break
 			objects++
 			spawn(0)

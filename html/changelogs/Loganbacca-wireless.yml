@@ -1,4 +1,0 @@
-author: Loganbacca
-delete-after: True
-changes: 
-  - rscadd: "Added a backend (wireless) system for communication between machinery and other devices."

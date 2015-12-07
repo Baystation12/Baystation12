@@ -11,6 +11,7 @@
 	name = "chemical shell"
 	icon_state = "bullet"
 	damage = 5
+	agony = 10
 	kill_count = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
 	var/flash_range = 0
 	var/brightness = 7

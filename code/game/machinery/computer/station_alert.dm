@@ -18,12 +18,12 @@
 	circuit = /obj/item/weapon/circuitboard/stationalert_all
 
 /obj/machinery/computer/station_alert/initialize()
-	..()
 	alarm_monitor = new monitor_type(src)
-	alarm_monitor.register(src, /obj/machinery/computer/station_alert/update_icon)
+	alarm_monitor.register_alarm(src, /obj/machinery/computer/station_alert/update_icon)
+	..()
 
 /obj/machinery/computer/station_alert/Destroy()
-	alarm_monitor.unregister(src)
+	alarm_monitor.unregister_alarm(src)
 	qdel(alarm_monitor)
 	..()
 
@@ -46,7 +46,7 @@
 
 /obj/machinery/computer/station_alert/update_icon()
 	if(!(stat & (BROKEN|NOPOWER)))
-		var/list/alarms = alarm_monitor.major_alarms()
+		var/list/alarms = alarm_monitor ? alarm_monitor.major_alarms() : list()
 		if(alarms.len)
 			icon_screen = "alert:2"
 		else

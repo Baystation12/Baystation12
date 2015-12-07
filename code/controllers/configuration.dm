@@ -6,6 +6,8 @@ var/list/gamemode_cache = list()
 
 	var/nudge_script_path = "nudge.py"  // where the nudge.py script is located
 
+	var/list/lobby_screens = list("title") // Which lobby screens are available
+
 	var/log_ooc = 0						// log OOC channel
 	var/log_access = 0					// log login/logout
 	var/log_say = 0						// log client say
@@ -698,6 +700,9 @@ var/list/gamemode_cache = list()
 					var/list/values = text2list(value, " ")
 					if(values.len > 0)
 						language_prefixes = values
+
+				if ("lobby_screens")
+					config.lobby_screens = text2list(value, ";")
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

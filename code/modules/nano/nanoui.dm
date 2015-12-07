@@ -140,6 +140,7 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/update_status(var/push_update = 0)
+	src_object = src_object.nano_host()
 	var/new_status = src_object.CanUseTopic(user, state)
 	if(master_ui)
 		new_status = min(new_status, master_ui.status)
@@ -428,6 +429,9 @@ nanoui is used to open and update nano browser uis
 	user << browse(null, "window=[window_id]")
 	for(var/datum/nanoui/child in children)
 		child.close()
+	children.Cut()
+	state = null
+	master_ui = null
 
  /**
   * Set the UI window to call the nanoclose verb when the window is closed

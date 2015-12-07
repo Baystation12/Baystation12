@@ -96,6 +96,11 @@
 	var/datum/connection_request/C = new(src, id)
 	wirelessProcess.add_request(C)
 
+/datum/wifi/sender/proc/activate(mob/living/user)
+	return
+
+/datum/wifi/sender/proc/deactivate(mob/living/user)
+	return
 
 //-------------------------------
 // Connection request
