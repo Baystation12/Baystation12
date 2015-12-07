@@ -124,6 +124,9 @@
 		else
 			icon_state = "intercom"
 
+/obj/item/device/radio/intercom/broadcasting
+	broadcasting = 1
+
 /obj/item/device/radio/intercom/locked
     var/locked_frequency
 

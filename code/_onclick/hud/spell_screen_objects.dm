@@ -19,9 +19,12 @@
 	spell_objects.Cut()
 	if(spell_holder)
 		spell_holder.spell_masters -= src
+		if(spell_holder.client && spell_holder.client.screen)
+			spell_holder.client.screen -= src
+		spell_holder = null
 
 /obj/screen/movable/spell_master/ResetVars()
-	..("spell_objects")
+	..("spell_objects", args)
 	spell_objects = list()
 
 /obj/screen/movable/spell_master/MouseDrop()
@@ -47,24 +50,33 @@
 		overlays.len = 0
 		overlays.Add(closed_state)
 	else if(forced_state != 1)
-		var/temp_loc = screen_loc
-
-		var/x_position = text2num(copytext(temp_loc, 1, findtext(temp_loc, ":")))
-		var/x_pix = text2num(copytext(temp_loc, findtext(temp_loc, ":") + 1, findtext(temp_loc, ",")))
-		temp_loc = copytext(temp_loc, findtext(temp_loc, ",") + 1)
-		var/y_position = text2num(copytext(temp_loc, 1, findtext(temp_loc, ":")))
-		var/y_pix = text2num(copytext(temp_loc, findtext(temp_loc, ":")+1))
-
-		for(var/i = 1; i <= spell_objects.len; i++)
-			var/obj/screen/spell/S = spell_objects[i]
-			S.screen_loc = "[x_position + (x_position < 8 ? 1 : -1)*(i%7)]:[x_pix],[y_position + (y_position < 8 ? round(i/7) : -round(i/7))]:[y_pix]"
-			if(spell_holder && spell_holder.client)
-				spell_holder.client.screen += S
-				S.handle_icon_updates = 1
+		open_spellmaster()
 		update_spells(1)
 		showing = 1
 		overlays.len = 0
 		overlays.Add(open_state)
+
+/obj/screen/movable/spell_master/proc/open_spellmaster()
+	var/list/screen_loc_xy = text2list(screen_loc,",")
+
+	//Create list of X offsets
+	var/list/screen_loc_X = text2list(screen_loc_xy[1],":")
+	var/x_position = decode_screen_X(screen_loc_X[1])
+	var/x_pix = screen_loc_X[2]
+
+	//Create list of Y offsets
+	var/list/screen_loc_Y = text2list(screen_loc_xy[2],":")
+	var/y_position = decode_screen_Y(screen_loc_Y[1])
+	var/y_pix = screen_loc_Y[2]
+
+	for(var/i = 1; i <= spell_objects.len; i++)
+		var/obj/screen/spell/S = spell_objects[i]
+		var/xpos = x_position + (x_position < 8 ? 1 : -1)*(i%7)
+		var/ypos = y_position + (y_position < 8 ? round(i/7) : -round(i/7))
+		S.screen_loc = "[encode_screen_X(xpos)]:[x_pix],[encode_screen_Y(ypos)]:[y_pix]"
+		if(spell_holder && spell_holder.client)
+			spell_holder.client.screen += S
+			S.handle_icon_updates = 1
 
 /obj/screen/movable/spell_master/proc/add_spell(var/spell/spell)
 	if(!spell) return
@@ -74,13 +86,14 @@
 			return
 		else
 			spell_objects.Add(spell.connected_button)
-			toggle_open(2)
+			if(spell_holder.client)
+				toggle_open(2)
 			return
 
 	if(spell.spell_flags & NO_BUTTON) //no button to add if we don't get one
 		return
 
-	var/obj/screen/spell/newscreen = new /obj/screen/spell
+	var/obj/screen/spell/newscreen = PoolOrNew(/obj/screen/spell)
 	newscreen.spellmaster = src
 	newscreen.spell = spell
 
@@ -96,7 +109,8 @@
 	newscreen.name = spell.name
 	newscreen.update_charge(1)
 	spell_objects.Add(newscreen)
-	toggle_open(2) //forces the icons to refresh on screen
+	if(spell_holder.client)
+		toggle_open(2) //forces the icons to refresh on screen
 
 /obj/screen/movable/spell_master/proc/remove_spell(var/spell/spell)
 	qdel(spell.connected_button)
@@ -151,6 +165,8 @@
 	last_charged_icon = null
 	if(spellmaster)
 		spellmaster.spell_objects -= src
+		if(spellmaster.spell_holder && spellmaster.spell_holder.client)
+			spellmaster.spell_holder.client.screen -= src
 	if(spellmaster && !spellmaster.spell_objects.len)
 		qdel(spellmaster)
 	spellmaster = null

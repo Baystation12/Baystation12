@@ -91,6 +91,9 @@
 
 		if(invisibility)				// if invisible, fade icon
 			alpha = 128
+		else
+			alpha = 255
+			//otherwise burying half-finished pipes under floors causes them to half-fade
 
 	// hide called by levelupdate if turf intact status changes
 	// change visibility status and force update of icon
@@ -318,3 +321,9 @@
 			else
 				user << "You need to attach it to the plating first!"
 				return
+
+/obj/structure/disposalconstruct/hides_under_flooring()
+	if(anchored)
+		return 1
+	else
+		return 0

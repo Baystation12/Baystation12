@@ -19,7 +19,7 @@
 	return ..()
 
 /obj/Topic(href, href_list, var/datum/topic_state/state = default_state)
-	if(usr && ..())
+	if(..())
 		return 1
 
 	// In the far future no checks are made in an overriding Topic() beyond if(..()) return
@@ -141,11 +141,11 @@
 	if(istype(M) && M.client && M.machine == src)
 		src.attack_self(M)
 
-/obj/proc/hide(h)
-	return
+/obj/proc/hide(var/hide)
+	invisibility = hide ? INVISIBILITY_MAXIMUM : initial(invisibility)
 
 /obj/proc/hides_under_flooring()
-	return 0
+	return level == 1
 
 /obj/proc/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	if(talking_atom)
