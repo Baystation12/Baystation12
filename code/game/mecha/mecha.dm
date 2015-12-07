@@ -996,6 +996,11 @@
 
 	if (usr.stat || !ishuman(usr))
 		return
+
+	if (usr.buckled)
+		usr << "<span class='warning'>You can't climb into the exosuit while buckled!</span>"
+		return
+
 	src.log_message("[usr] tries to move in.")
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
