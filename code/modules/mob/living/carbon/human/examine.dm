@@ -269,7 +269,6 @@
 
 		var/list/organ_data = species.has_limbs[organ_tag]
 		var/organ_descriptor = organ_data["descriptor"]
-		is_destroyed["organ_descriptor"] = 1
 
 		var/obj/item/organ/external/E = organs_by_name[organ_tag]
 		if(!E)
@@ -277,15 +276,10 @@
 		else if(E.is_stump())
 			wound_flavor_text["[organ_descriptor]"] = "<span class='warning'><b>[t_He] has a stump where [t_his] [organ_descriptor] should be.</b></span>\n"
 		else
-			is_destroyed["organ_descriptor"] = 0
 			continue
 
 	for(var/obj/item/organ/external/temp in organs)
 		if(temp)
-			if(temp.status & ORGAN_DESTROYED)
-				is_destroyed["[temp.name]"] = 1
-				wound_flavor_text["[temp.name]"] = "<span class='warning'><b>[t_He] [t_is] missing [t_his] [temp.name].</b></span>\n"
-				continue
 			if(temp.status & ORGAN_ROBOT)
 				if(!(temp.brute_dam + temp.burn_dam))
 					wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] has a robot [temp.name]!</span>\n"
