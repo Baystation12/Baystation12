@@ -262,7 +262,6 @@
 			msg += "<span class='deadsay'>[t_He] [t_is] [species.show_ssd].</span>\n"
 
 	var/list/wound_flavor_text = list()
-	var/list/is_destroyed = list()
 	var/list/is_bleeding = list()
 
 	for(var/organ_tag in species.has_limbs)

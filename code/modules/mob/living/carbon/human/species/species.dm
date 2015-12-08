@@ -233,13 +233,6 @@
 			O.organ_tag = organ_tag
 		H.internal_organs_by_name[organ_tag] = O
 
-	if(flags & IS_SYNTHETIC)
-		for(var/obj/item/organ/external/E in H.organs)
-			if(E.status & ORGAN_CUT_AWAY || E.is_stump()) continue
-			E.robotize()
-		for(var/obj/item/organ/I in H.internal_organs)
-			I.robotize()
-
 /datum/species/proc/hug(var/mob/living/carbon/human/H,var/mob/living/target)
 	if (target.holder_type && target.a_intent == "help" && H.a_intent == "help")
 		target.get_scooped(H)
