@@ -430,6 +430,7 @@
 #include "code\game\machinery\computer\ai_core.dm"
 #include "code\game\machinery\computer\aifixer.dm"
 #include "code\game\machinery\computer\arcade.dm"
+#include "code\game\machinery\computer\arcade_orion.dm"
 #include "code\game\machinery\computer\atmos_alert.dm"
 #include "code\game\machinery\computer\atmos_control.dm"
 #include "code\game\machinery\computer\buildandrepair.dm"
