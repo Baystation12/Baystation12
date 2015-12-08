@@ -36,6 +36,7 @@
 	interface_desc = "A self-sustaining plasma arc capable of cutting through walls."
 	suit_overlay_active = "plasmacutter"
 	suit_overlay_inactive = "plasmacutter"
+	use_power_cost = 0.5
 
 	device_type = /obj/item/weapon/pickaxe/plasmacutter
 
@@ -56,6 +57,7 @@
 	interface_desc = "A diamond-tipped industrial drill."
 	suit_overlay_active = "mounted-drill"
 	suit_overlay_inactive = "mounted-drill"
+	use_power_cost = 0.1
 
 	device_type = /obj/item/weapon/pickaxe/diamonddrill
 
