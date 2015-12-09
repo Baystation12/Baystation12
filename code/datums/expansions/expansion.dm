@@ -25,7 +25,7 @@
 	var/list/datum/expansion/expansions = list()
 
 /obj/Destroy()
-	if(expansions)
+	if(istype(expansions))
 		for(var/expansion in expansions)
 			qdel(expansions[expansion])
 		expansions.Cut()
