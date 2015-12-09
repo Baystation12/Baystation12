@@ -24,6 +24,7 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/show_laws_verb,
 	/mob/living/silicon/ai/proc/toggle_acceleration,
 	/mob/living/silicon/ai/proc/toggle_camera_light,
+	/mob/living/silicon/ai/proc/multitool_mode,
 	/mob/living/silicon/ai/proc/toggle_hologram_movement
 )
 
@@ -84,6 +85,8 @@ var/list/ai_verbs_default = list(
 	var/datum/ai_icon/selected_sprite			// The selected icon set
 	var/custom_sprite 	= 0 					// Whether the selected icon is custom
 	var/carded
+
+	var/multitool_mode = 0
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs |= ai_verbs_default
@@ -175,7 +178,6 @@ var/list/ai_verbs_default = list(
 
 	ai_list += src
 	..()
-	return
 
 /mob/living/silicon/ai/proc/on_mob_init()
 	src << "<B>You are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>"
@@ -203,10 +205,17 @@ var/list/ai_verbs_default = list(
 	setup_icon()
 
 /mob/living/silicon/ai/Destroy()
+	qdel(aiPDA)
+	qdel(aiMulti)
+	qdel(aiRadio)
+	aiPDA = null
+	aiMulti = null
+	aiRadio = null
+
 	ai_list -= src
 	qdel(eyeobj)
 	eyeobj = null
-	..()
+	return ..()
 
 /mob/living/silicon/ai/proc/setup_icon()
 	var/file = file2text("config/custom_sprites.txt")
@@ -681,6 +690,13 @@ var/list/ai_verbs_default = list(
 		qdel(src)
 		return
 	..()
+
+/mob/living/silicon/ai/proc/multitool_mode()
+	set name = "Toggle Multitool Mode"
+	set category = "AI Commands"
+
+	multitool_mode = !multitool_mode
+	src << "<span class='notice'>Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged</span>"
 
 /mob/living/silicon/ai/updateicon()
 	if(!selected_sprite) selected_sprite = default_ai_icon

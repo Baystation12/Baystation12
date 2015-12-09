@@ -3,6 +3,10 @@
 	var/list_cameras = 0						// Whether or not to list camera references. A future goal would be to merge this with the enginering/security camera console. Currently really only for AI-use.
 	var/list/datum/alarm_handler/alarm_handlers // The particular list of alarm handlers this alarm monitor should present to the user.
 
+/datum/nano_module/alarm_monitor/New()
+	..()
+	alarm_handlers = list()
+
 /datum/nano_module/alarm_monitor/all/New()
 	..()
 	alarm_handlers = alarm_manager.all_handlers
