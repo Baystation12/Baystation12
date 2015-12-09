@@ -1,0 +1,9 @@
+author: Atlantis
+
+delete-after: True
+
+changes: 
+  - rscadd: "Added Inflatables Dispenser(ID), an item that allows rapid deployment, transport and removal of inflatables."
+  - rscadd: "Engineering, Construction and Crisis modules are now outfitted with ID."
+  - rscadd: "Three boxes in engineering have been replaced by three IDs."
+  - tweak: "w_classes of inflatables readjusted. Boxes and IDs can be carried in backpack now. Individual inflatables are small enough to fit in pocket."
