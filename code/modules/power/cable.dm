@@ -22,7 +22,15 @@ If d1 = dir1 and d2 = dir2, it's a full X-X cable, getting from dir1 to dir2
 By design, d1 is the smallest direction and d2 is the highest
 */
 
-var/list/possible_cable_coil_colours = list ("Yellow", "Green", "Pink", "Blue", "Orange", "Cyan", "Red")
+var/list/possible_cable_coil_colours = list(
+		"Yellow" = COLOR_YELLOW,
+		"Green" = COLOR_LIME,
+		"Pink" = COLOR_PINK,
+		"Blue" = COLOR_BLUE,
+		"Orange" = COLOR_ORANGE,
+		"Cyan" = COLOR_CYAN,
+		"Red" = COLOR_RED
+	)
 
 /obj/structure/cable
 	level = 1
@@ -556,22 +564,11 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	if(!selected_color)
 		return
 
-	switch(selected_color)
-		if("Yellow")
-			color = COLOR_YELLOW
-		if("Green")
-			color = COLOR_LIME
-		if("Pink")
-			color = COLOR_PINK
-		if("Blue")
-			color = COLOR_BLUE
-		if("Orange")
-			color = COLOR_ORANGE
-		if("Cyan")
-			color = COLOR_CYAN
-		else
-			color = COLOR_RED
-			selected_color = "red"
+	var/final_color = possible_cable_coil_colours[selected_color]
+	if(!final_color)
+		final_color = possible_cable_coil_colours["Red"]
+		selected_color = "red"
+	color = final_color
 	user << "<span class='notice'>You change \the [src]'s color to [lowertext(selected_color)].</span>"
 
 /obj/item/stack/cable_coil/proc/update_wclass()
