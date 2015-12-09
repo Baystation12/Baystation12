@@ -2,12 +2,12 @@
 /obj/item/taperoll
 	name = "tape roll"
 	icon = 'icons/policetape.dmi'
-	icon_state = "rollstart"
+	icon_state = "tape"
 	w_class = 2.0
 	var/turf/start
 	var/turf/end
 	var/tape_type = /obj/item/tape
-	var/icon_base
+	var/icon_base = "tape"
 
 var/list/image/hazard_overlays
 var/list/tape_roll_applications = list()
@@ -15,11 +15,12 @@ var/list/tape_roll_applications = list()
 /obj/item/tape
 	name = "tape"
 	icon = 'icons/policetape.dmi'
+	icon_state = "tape"
 	anchored = 1
 	var/lifted = 0
 	var/crumpled = 0
 	var/tape_dir = 0
-	var/icon_base
+	var/icon_base = "tape"
 
 /obj/item/tape/New()
 	..()
@@ -33,41 +34,38 @@ var/list/tape_roll_applications = list()
 /obj/item/taperoll/police
 	name = "police tape"
 	desc = "A roll of police tape used to block off crime scenes from the public."
-	icon_state = "police"
 	tape_type = /obj/item/tape/police
-	icon_base = "police"
+	color = "#FF0000"
 
 /obj/item/tape/police
 	name = "police tape"
 	desc = "A length of police tape.  Do not cross."
 	req_access = list(access_security)
-	icon_base = "police"
+	color = "#FF0000"
 
 /obj/item/taperoll/engineering
 	name = "engineering tape"
 	desc = "A roll of engineering tape used to block off working areas from the public."
-	icon_state = "engineering"
 	tape_type = /obj/item/tape/engineering
-	icon_base = "engineering"
+	color = "#FFCC33"
 
 /obj/item/tape/engineering
 	name = "engineering tape"
 	desc = "A length of engineering tape. Better not cross it."
 	req_one_access = list(access_engine,access_atmospherics)
-	icon_base = "engineering"
+	color = "#FFCC33"
 
 /obj/item/taperoll/atmos
 	name = "atmospherics tape"
 	desc = "A roll of atmospherics tape used to block off working areas from the public."
-	icon_state = "atmos"
 	tape_type = /obj/item/tape/atmos
-	icon_base = "atmos"
+	color = "#33CCFF"
 
 /obj/item/tape/atmos
 	name = "atmospherics tape"
 	desc = "A length of atmospherics tape. Better not cross it."
 	req_one_access = list(access_engine,access_atmospherics)
-	icon_base = "atmos"
+	color = "#33CCFF"
 
 /obj/item/taperoll/update_icon()
 	overlays.Cut()

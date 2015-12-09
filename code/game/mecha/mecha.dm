@@ -803,10 +803,12 @@
 			if (hasInternalDamage(MECHA_INT_TANK_BREACH))
 				clearInternalDamage(MECHA_INT_TANK_BREACH)
 				user << "<span class='notice'>You repair the damaged gas tank.</span>"
+				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		else
 			return
 		if(src.health<initial(src.health))
 			user << "<span class='notice'>You repair some damage to [src.name].</span>"
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			src.health += min(10, initial(src.health)-src.health)
 		else
 			user << "The [src.name] is at full integrity"
@@ -999,6 +1001,11 @@
 
 	if (usr.stat || !ishuman(usr))
 		return
+
+	if (usr.buckled)
+		usr << "<span class='warning'>You can't climb into the exosuit while buckled!</span>"
+		return
+
 	src.log_message("[usr] tries to move in.")
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
