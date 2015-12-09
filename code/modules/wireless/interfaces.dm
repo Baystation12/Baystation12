@@ -31,7 +31,7 @@
 	addition to) a /wifi/receiver variable.
 	You will however need to call the /wifi/senders code to pass commands onto any connected receivers.
 	Example:
-		/obj/machinery/button/attack_hand()
+		obj/machinery/button/attack_hand()
 			wifi_sender.activate()
 */
 //-------------------------------
