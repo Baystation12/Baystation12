@@ -415,13 +415,13 @@ swapmap
 	proc/HiCorner(z=z2)
 		return locate(x2,y2,z)
 
-	/*
-		Build procs: Take 2 turfs as corners, plus an item type.
-		An item may be like:
 
-		/turf/wall
-		/obj/fence{icon_state="iron"}
-	 */
+	//	Build procs: Take 2 turfs as corners, plus an item type.
+	//	An item may be like:
+	//
+	//	/turf/wall
+	//	/obj/fence{icon_state="iron"}
+
 	proc/BuildFilledRectangle(turf/T1,turf/T2,item)
 		if(!Contains(T1) || !Contains(T2)) return
 		var/turf/T=T1
