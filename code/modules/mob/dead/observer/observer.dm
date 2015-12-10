@@ -29,6 +29,8 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	var/image/ghostimage = null //this mobs ghost image, for deleting and stuff
 	var/ghostvision = 1 //is the ghost able to see things humans can't?
 	var/seedarkness = 1
+
+	var/obj/item/device/multitool/ghost_multitool
 	incorporeal_move = 1
 
 /mob/dead/observer/New(mob/body)
@@ -79,9 +81,14 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	if(!name)							//To prevent nameless ghosts
 		name = capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
 	real_name = name
+
+	ghost_multitool = new(src)
 	..()
 
 /mob/dead/observer/Destroy()
+	qdel(ghost_multitool)
+	ghost_multitool = null
+
 	if (ghostimage)
 		ghost_darkness_images -= ghostimage
 		qdel(ghostimage)

@@ -5,11 +5,11 @@
 	self-explanatory but the various object types may have their own documentation. ~Z
 
 	PATHS THAT USE DATUMS
-		/turf/simulated/wall
-		/obj/item/weapon/material
-		/obj/structure/barricade
-		/obj/item/stack/material
-		/obj/structure/table
+		turf/simulated/wall
+		obj/item/weapon/material
+		obj/structure/barricade
+		obj/item/stack/material
+		obj/structure/table
 
 	VALID ICONS
 		WALLS

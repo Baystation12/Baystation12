@@ -18,11 +18,12 @@
 
 /obj/machinery/computer/cloning/initialize()
 	..()
+	set_expansion(/datum/expansion/multitool, new/datum/expansion/multitool/cryo(src, list(/proc/is_operable)))
 	updatemodules()
 
 /obj/machinery/computer/cloning/Destroy()
 	releasecloner()
-	..()
+	return ..()
 
 /obj/machinery/computer/cloning/proc/updatemodules()
 	src.scanner = findscanner()
@@ -52,6 +53,33 @@
 		P.name = initial(P.name)
 	pods.Cut()
 
+/obj/machinery/computer/cloning/proc/connect_pod(var/obj/machinery/clonepod/P)
+	if(P in pods)
+		return 0
+
+	if(P.connected)
+		P.connected.release_pod(P)
+	P.connected = src
+	pods += P
+	rename_pods()
+
+	return 1
+
+/obj/machinery/computer/cloning/proc/release_pod(var/obj/machinery/clonepod/P)
+	if(!(P in pods))
+		return
+
+	P.connected = null
+	P.name = initial(P.name)
+	pods -= P
+	rename_pods()
+	return 1
+
+/obj/machinery/computer/cloning/proc/rename_pods()
+	for(var/i = 1 to pods.len)
+		var/atom/P = pods[i]
+		P.name = "[initial(P.name)] #[i]"
+
 /obj/machinery/computer/cloning/proc/findcloner()
 	var/num = 1
 	var/area/A = get_area(src)
@@ -70,14 +98,6 @@
 			user << "You insert [W]."
 			src.updateUsrDialog()
 			return
-	else if(istype(W, /obj/item/device/multitool))
-		var/obj/item/device/multitool/M = W
-		var/obj/machinery/clonepod/P = M.connecting
-		if(P && !(P in pods))
-			pods += P
-			P.connected = src
-			P.name = "[initial(P.name)] #[pods.len]"
-			user << "<span class='notice'>You connect [P] to [src].</span>"
 	else
 		..()
 	return

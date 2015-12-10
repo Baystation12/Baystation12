@@ -121,6 +121,11 @@
 
 	if(T.contains_dense_objects())
 		H << "<span class='warning'>You cannot teleport to a location with solid objects.</span>"
+		return 0
+
+	if(T.z != H.z || get_dist(T, get_turf(H)) > world.view)
+		H << "<span class='warning'>You cannot teleport to such a distant object.</span>"
+		return 0
 
 	phase_out(H,get_turf(H))
 	H.forceMove(T)
