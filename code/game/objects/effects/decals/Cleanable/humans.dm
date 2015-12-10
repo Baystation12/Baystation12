@@ -34,6 +34,7 @@ var/global/list/image/splatter_cache=list()
 		invisibility = 100
 		amount = 0
 		processing_objects -= src
+	..(ignore=1)
 
 /obj/effect/decal/cleanable/blood/Destroy()
 	for(var/datum/disease/D in viruses)
