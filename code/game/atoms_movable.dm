@@ -13,6 +13,7 @@
 	var/throw_range = 7
 	var/moved_recently = 0
 	var/mob/pulledby = null
+	var/item_state = null // Used to specify the item state for the on-mob overlays.
 
 	var/auto_init = 1
 
