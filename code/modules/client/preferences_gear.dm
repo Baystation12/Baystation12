@@ -18,7 +18,17 @@ var/global/list/gear_datums = list()
 
 	//create a list of gear datums to sort
 	for(var/type in typesof(/datum/gear)-/datum/gear)
-		var/datum/gear/G = new type()
+		var/datum/gear/G = type
+		if(!initial(G.display_name))
+			error("Loadout - Missing display name: [G]")
+			continue
+		if(!initial(G.cost))
+			error("Loadout - Missing cost: [G]")
+			continue
+		if(!initial(G.path))
+			error("Loadout - Missing path definition: [G]")
+			continue
+		G = new G()
 
 		var/category = (G.sort_category in sort_categories)? G.sort_category : "unknown"
 		sort_categories[category][G.display_name] = G
