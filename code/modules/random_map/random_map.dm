@@ -162,12 +162,4 @@ var/global/list/random_maps = list()
 			map[check_cell] = 3
 		ore_count--
 
-	sleep(-1)
-
-	// Place random asteroid rooms.
-	var/rooms_placed = 0
-	for(var/i = 0, i < max_secret_rooms, i++)
-		if(make_mining_asteroid_secret())
-			rooms_placed++
-	admin_notice("<span class='danger'>Placed [rooms_placed] secrets.</span>", R_DEBUG)
 	return 1
