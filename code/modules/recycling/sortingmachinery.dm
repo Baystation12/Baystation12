@@ -19,7 +19,7 @@
 
 /obj/structure/bigDelivery/proc/unwrap()
 	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
-		wrapped.loc = (get_turf(src.loc))
+		wrapped.forceMove(get_turf(src.loc))
 		if(istype(wrapped, /obj/structure/closet))
 			var/obj/structure/closet/O = wrapped
 			O.welded = 0
@@ -123,11 +123,11 @@
 
 /obj/item/smallDelivery/attack_self(mob/user as mob)
 	if (src.wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
-		wrapped.loc = user.loc
+		wrapped.forceMove(user.loc)
 		if(ishuman(user))
 			user.put_in_hands(wrapped)
 		else
-			wrapped.loc = get_turf(src)
+			wrapped.forceMove(get_turf(src))
 
 	qdel(src)
 	return
@@ -247,7 +247,7 @@
 				if(user.client)
 					user.client.screen -= O
 			P.wrapped = O
-			O.loc = P
+			O.forceMove(P)
 			var/i = round(O.w_class)
 			if(i in list(1,2,3,4,5))
 				P.icon_state = "deliverycrate[i]"
@@ -275,7 +275,7 @@
 			var/obj/structure/bigDelivery/P = new /obj/structure/bigDelivery(get_turf(O.loc))
 			P.icon_state = "deliverycrate"
 			P.wrapped = O
-			O.loc = P
+			O.forceMove(P)
 			src.amount -= 3
 			user.visible_message("\The [user] wraps \a [target] with \a [src].",\
 			"<span class='notice'>You wrap \the [target], leaving [amount] units of paper on \the [src].</span>",\
@@ -288,7 +288,7 @@
 			var/obj/structure/bigDelivery/P = new /obj/structure/bigDelivery(get_turf(O.loc))
 			P.wrapped = O
 			O.welded = 1
-			O.loc = P
+			O.forceMove(P)
 			src.amount -= 3
 			user.visible_message("\The [user] wraps \a [target] with \a [src].",\
 			"<span class='notice'>You wrap \the [target], leaving [amount] units of paper on \the [src].</span>",\
@@ -397,10 +397,10 @@
 
 	if(istype(AM, /obj))
 		var/obj/O = AM
-		O.loc = src
+		O.forceMove(src)
 	else if(istype(AM, /mob))
 		var/mob/M = AM
-		M.loc = src
+		M.forceMove(src)
 	src.flush()
 
 /obj/machinery/disposal/deliveryChute/flush()
@@ -442,10 +442,10 @@
 			return
 	else if(istype(I,/obj/item/weapon/weldingtool) && c_mode==1)
 		var/obj/item/weapon/weldingtool/W = I
-		if(W.remove_fuel(0,user))
-			playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
+		if(W.remove_fuel(1,user))
 			user << "You start slicing the floorweld off the delivery chute."
 			if(do_after(user,20))
+				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				if(!src || !W.isOn()) return
 				user << "You sliced the floorweld off the delivery chute."
 				var/obj/structure/disposalconstruct/C = new (src.loc)
