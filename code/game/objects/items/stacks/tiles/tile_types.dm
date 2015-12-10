@@ -12,7 +12,6 @@
 	desc = "A non-descript floor tile"
 	w_class = 3
 	max_amount = 60
-	var/build_type = null
 
 /obj/item/stack/tile/New()
 	..()
