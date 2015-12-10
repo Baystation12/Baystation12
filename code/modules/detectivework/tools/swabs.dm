@@ -15,30 +15,30 @@
 		return ..()
 
 	if(is_used())
-		return 0
+		return
 
 	var/mob/living/carbon/human/H = M
 	var/sample_type
 
 	if(H.wear_mask)
 		user << "<span class='warning'>\The [H] is wearing a mask.</span>"
-		return 1
+		return
 
 	if(!H.dna || !H.dna.unique_enzymes)
 		user << "<span class='warning'>They don't seem to have DNA!</span>"
-		return 1
+		return
 
 	if(user != H && H.a_intent != "help" && !H.lying)
 		user.visible_message("<span class='danger'>\The [user] tries to take a swab sample from \the [H], but they move away.</span>")
-		return 1
+		return
 
 	if(user.zone_sel.selecting == "mouth")
 		if(!H.organs_by_name["head"])
 			user << "<span class='warning'>They don't have a head.</span>"
-			return 1
+			return
 		if(!H.check_has_mouth())
 			user << "<span class='warning'>They don't have a mouth.</span>"
-			return 1
+			return
 		user.visible_message("[user] swabs \the [H]'s mouth for a saliva sample.")
 		dna = list(H.dna.unique_enzymes)
 		sample_type = "DNA"
@@ -54,24 +54,21 @@
 				has_hand = 1
 		if(!has_hand)
 			user << "<span class='warning'>They don't have any hands.</span>"
-			return 1
+			return
 		user.visible_message("[user] swabs [H]'s palm for a sample.")
 		sample_type = "GSR"
 		gsr = H.gunshot_residue
 	else
-		return 0
+		return
 
 	if(sample_type)
-		used = 1
-		name = "[initial(name)] ([sample_type] - [H])"
-		desc = "[initial(desc)] The label on the vial reads 'Sample of [sample_type] from [H].'."
-		icon_state = "swab_used"
-		return 1
-	return 0
+		set_used(sample_type, H)
+		return
+	return 1
 
 /obj/item/weapon/forensics/swab/afterattack(var/atom/A, var/mob/user, var/proximity)
 
-	if(!proximity || istype(A, /obj/item/weapon/forensics/slide))
+	if(!proximity || istype(A, /obj/item/weapon/forensics/slide) || istype(A, /obj/machinery/dnaforensics))
 		return
 
 	if(is_used())
@@ -103,6 +100,7 @@
 		if(!A.blood_DNA || !A.blood_DNA.len) return
 		dna = A.blood_DNA.Copy()
 		sample_type = "blood"
+
 	else if(choice == "Gunshot Residue")
 		var/obj/item/clothing/B = A
 		if(!istype(B) || !B.gunshot_residue)
@@ -113,7 +111,10 @@
 
 	if(sample_type)
 		user.visible_message("\The [user] swabs \the [A] for a sample.", "You swab \the [A] for a sample.")
-		name = "[initial(name)] ([sample_type] - [A])"
-		desc = "[initial(desc)] The label on the vial reads 'Sample of [sample_type] from [A].'."
-		icon_state = "swab_used"
+		set_used(sample_type, A)
 
+/obj/item/weapon/forensics/swab/proc/set_used(var/sample_str, var/atom/source)
+	name = "[initial(name)] ([sample_str] - [source])"
+	desc = "[initial(desc)] The label on the vial reads 'Sample of [sample_str] from [source].'."
+	icon_state = "swab_used"
+	used = 1

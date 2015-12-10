@@ -421,7 +421,6 @@ its easier to just keep the beam vertical.
 		blood_DNA = null
 		return 1
 
-
 /atom/proc/get_global_map_pos()
 	if(!islist(global_map) || isemptylist(global_map)) return
 	var/cur_x = null
