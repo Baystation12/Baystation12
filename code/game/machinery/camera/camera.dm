@@ -145,7 +145,6 @@
 				assembly.camera_network = english_list(network, "Exodus", ",", ",")
 				assembly.update_icon()
 				assembly.dir = src.dir
-				assembly = null //so qdel doesn't eat it.
 				if(stat & BROKEN)
 					assembly.state = 2
 					user << "<span class='notice'>You repaired \the [src] frame.</span>"
@@ -153,6 +152,7 @@
 					assembly.state = 1
 					user << "<span class='notice'>You cut \the [src] free from the wall.</span>"
 					new /obj/item/stack/cable_coil(src.loc, length=2)
+				assembly = null //so qdel doesn't eat it.
 			qdel(src)
 
 	// OTHER
