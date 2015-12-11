@@ -137,30 +137,24 @@ var/global/datum/controller/occupations/job_master
 
 				// Build a weighted list, weight by age.
 				var/list/weightedCandidates = list()
-
-				// Different head positions have different good ages.
-				var/good_age_minimal = 25
-				var/good_age_maximal = 60
-				if(command_position == "Captain")
-					good_age_minimal = 30
-					good_age_maximal = 70 // Old geezer captains ftw
-
 				for(var/mob/V in candidates)
 					// Log-out during round-start? What a bad boy, no head position for you!
 					if(!V.client) continue
 					var/age = V.client.prefs.age
+
+					if(age < job.minimum_character_age) // Nope.
+						continue
+
 					switch(age)
-						if(good_age_minimal - 10 to good_age_minimal)
+						if(job.minimum_character_age to (job.minimum_character_age+10))
 							weightedCandidates[V] = 3 // Still a bit young.
-						if(good_age_minimal to good_age_minimal + 10)
+						if((job.minimum_character_age+10) to (job.ideal_character_age-10))
 							weightedCandidates[V] = 6 // Better.
-						if(good_age_minimal + 10 to good_age_maximal - 10)
+						if((job.ideal_character_age-10) to (job.ideal_character_age+10))
 							weightedCandidates[V] = 10 // Great.
-						if(good_age_maximal - 10 to good_age_maximal)
+						if((job.ideal_character_age+10) to (job.ideal_character_age+20))
 							weightedCandidates[V] = 6 // Still good.
-						if(good_age_maximal to good_age_maximal + 10)
-							weightedCandidates[V] = 6 // Bit old, don't you think?
-						if(good_age_maximal to good_age_maximal + 50)
+						if((job.ideal_character_age+20) to INFINITY)
 							weightedCandidates[V] = 3 // Geezer.
 						else
 							// If there's ABSOLUTELY NOBODY ELSE
