@@ -70,7 +70,7 @@ var/list/tape_roll_applications = list()
 /obj/item/taperoll/research
 	name = "research tape"
 	desc = "A roll of research tape used to block off working areas from the public."
-	tape_type = /obj/item/tape/atmos
+	tape_type = /obj/item/tape/research
 	color = COLOR_PURPLE
 
 /obj/item/tape/research
@@ -82,7 +82,7 @@ var/list/tape_roll_applications = list()
 /obj/item/taperoll/medical
 	name = "medical tape"
 	desc = "A roll of medical tape used to block off working areas from the public."
-	tape_type = /obj/item/tape/atmos
+	tape_type = /obj/item/tape/medical
 	color = COLOR_GREEN
 
 /obj/item/tape/medical

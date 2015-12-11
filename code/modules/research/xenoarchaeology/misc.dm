@@ -105,6 +105,7 @@
 		new /obj/item/weapon/pickaxe/hand(src)
 		new /obj/item/weapon/storage/bag/fossils(src)
 		new /obj/item/weapon/hand_labeler(src)
+		new /obj/item/taperoll/research(src)
 		return
 
 //---- Isolation room air alarms
