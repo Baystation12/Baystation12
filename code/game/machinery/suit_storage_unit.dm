@@ -819,14 +819,11 @@
 		dat += "<A href='?src=\ref[src];apply_paintjob=1'><br>\[apply customisation routine\]</a><br><hr>"
 
 	if(panel_open)
-		dat += wires()
+		wires.Interact(user)
 
 	user << browse(dat, "window=suit_cycler")
 	onclose(user, "suit_cycler")
 	return
-
-/obj/machinery/suit_cycler/proc/wires()
-	return wires.GetInteractWindow()
 
 /obj/machinery/suit_cycler/Topic(href, href_list)
 	if(href_list["eject_suit"])
