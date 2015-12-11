@@ -75,7 +75,7 @@
 			close_window(user)
 	return 1
 
-/datum/expansion/multitool/proc/on_topic(href, href_list, usr)
+/datum/expansion/multitool/proc/on_topic(href, href_list, user)
 	return MT_NOACTION
 
 /datum/expansion/multitool/proc/send_buffer(var/obj/item/device/multitool/M, var/atom/buffer, var/mob/user)
