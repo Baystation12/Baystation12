@@ -183,6 +183,7 @@ var/world_topic_spam_protect_time = world.timeofday
 				"eng" = engineering_positions,
 				"med" = medical_positions,
 				"sci" = science_positions,
+				"car" = cargo_positions,
 				"civ" = civilian_positions,
 				"bot" = nonhuman_positions
 			)
