@@ -160,7 +160,7 @@
 	return buckled ? FULLY_BUCKLED : UNBUCKLED
 
 /mob/proc/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
-	if (stat || paralysis || stunned || weakened || resting || sleeping || (status_flags & FAKEDEATH))
+	if ((incapacitation_flags & INCAPACITATION_DISABLED) && (stat || paralysis || stunned || weakened || resting || sleeping || (status_flags & FAKEDEATH)))
 		return 1
 
 	if((incapacitation_flags & INCAPACITATION_RESTRAINED) && restrained())
@@ -734,9 +734,9 @@
 	else
 		if(istype(buckled, /obj/vehicle))
 			var/obj/vehicle/V = buckled
-			if(cannot_stand())
-				lying = 0
-				canmove = 1
+			if(incapacitated(INCAPACITATION_DISABLED))
+				lying = 1
+				canmove = 0
 				pixel_y = V.mob_offset_y - 5
 			else
 				if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
