@@ -49,9 +49,15 @@ var/global/datum/controller/occupations/job_master
 		Debug("Running AR, Player: [player], Rank: [rank], LJ: [latejoin]")
 		if(player && player.mind && rank)
 			var/datum/job/job = GetJob(rank)
-			if(!job)	return 0
-			if(jobban_isbanned(player, rank))	return 0
-			if(!job.player_old_enough(player.client)) return 0
+			if(!job)
+				return 0
+			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
+				return 0
+			if(jobban_isbanned(player, rank))
+				return 0
+			if(!job.player_old_enough(player.client))
+				return 0
+
 			var/position_limit = job.total_positions
 			if(!latejoin)
 				position_limit = job.spawn_positions
@@ -82,6 +88,9 @@ var/global/datum/controller/occupations/job_master
 			if(!job.player_old_enough(player.client))
 				Debug("FOC player not old enough, Player: [player]")
 				continue
+			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
+				Debug("FOC character not old enough, Player: [player]")
+				continue
 			if(flag && (!player.client.prefs.be_special & flag))
 				Debug("FOC flag failed, Player: [player], Flag: [flag], ")
 				continue
@@ -94,6 +103,9 @@ var/global/datum/controller/occupations/job_master
 		Debug("GRJ Giving random job, Player: [player]")
 		for(var/datum/job/job in shuffle(occupations))
 			if(!job)
+				continue
+
+			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
 				continue
 
 			if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!

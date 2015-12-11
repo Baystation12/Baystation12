@@ -12,6 +12,8 @@
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()
 	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant","Visitor")
+	minimum_character_age = null
+	ideal_character_age = null
 
 /datum/job/assistant/equip(var/mob/living/carbon/human/H)
 	if(!H)	return 0
