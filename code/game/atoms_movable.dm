@@ -78,7 +78,7 @@
 	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
 		if(!O.anchored)
-			step(O, src.dir)
+			step(O, src.last_move)
 		O.hitby(src,speed)
 
 	else if(isturf(hit_atom))
@@ -86,7 +86,7 @@
 		var/turf/T = hit_atom
 		if(T.density)
 			spawn(2)
-				step(src, turn(src.dir, 180))
+				step(src, turn(src.last_move, 180))
 			if(istype(src,/mob/living))
 				var/mob/living/M = src
 				M.turf_collision(T, speed)
