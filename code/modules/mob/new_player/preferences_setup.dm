@@ -6,15 +6,24 @@ datum/preferences
 				gender = MALE
 			else
 				gender = FEMALE
-		s_tone = random_skin_tone()
+		var/datum/species/current_species = all_species[species]
+
+		if(current_species)
+			if(current_species.flags & HAS_SKIN_TONE)
+				s_tone = random_skin_tone()
+			if(current_species.flags & HAS_EYE_COLOR)
+				randomize_eyes_color()
+			if(current_species.flags & HAS_SKIN_COLOR)
+				randomize_skin_color()
+			if(current_species.flags & HAS_UNDERWEAR)
+				underwear = rand(1,underwear_m.len)
+				undershirt = rand(1,undershirt_t.len)
+
 		h_style = random_hair_style(gender, species)
 		f_style = random_facial_hair_style(gender, species)
 		randomize_hair_color("hair")
 		randomize_hair_color("facial")
-		randomize_eyes_color()
-		randomize_skin_color()
-		underwear = rand(1,underwear_m.len)
-		undershirt = rand(1,undershirt_t.len)
+
 		backbag = 2
 		age = rand(AGE_MIN,AGE_MAX)
 		if(H)
