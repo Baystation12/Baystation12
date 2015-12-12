@@ -740,16 +740,19 @@
 
 	// expel the held objects into a turf
 	// called when there is a break in the pipe
-	//
-
 	proc/expel(var/obj/structure/disposalholder/H, var/turf/T, var/direction)
-
-		var/turf/target
-
-		if(T.density)		// dense ouput turf, so stop holder
-			H.active = 0
-			H.loc = src
+		if(!istype(H))
 			return
+
+		// Empty the holder if it is expelled into a dense turf.
+		// Leaving it intact and sitting in a wall is stupid.
+		if(T.density)
+			for(var/atom/movable/AM in H)
+				AM.loc = T
+				AM.pipe_eject(0)
+			qdel(H)
+			return
+
 		if(T.intact && istype(T,/turf/simulated/floor)) //intact floor, pop the tile
 			var/turf/simulated/floor/F = T
 			//F.health	= 100
@@ -759,6 +762,7 @@
 			new /obj/item/stack/tile(H)	// add to holder so it will be thrown with other stuff
 			F.icon_state = "Floor[F.burnt ? "1" : ""]"
 
+		var/turf/target
 		if(direction)		// direction is specified
 			if(istype(T, /turf/space)) // if ended in space, then range is unlimited
 				target = get_edge_target_turf(T, direction)
