@@ -23,18 +23,18 @@
 	alarm_monitor.register_alarm(src, /obj/machinery/computer/station_alert/update_icon)
 	..()
 	if(monitor_type)
-		register(new monitor_type(src))
+		register_monitor(new monitor_type(src))
 
 /obj/machinery/computer/station_alert/Destroy()
 	. = ..()
-	unregister()
+	unregister_monitor()
 
 /obj/machinery/computer/station_alert/proc/register_monitor(var/datum/nano_module/alarm_monitor/monitor)
 	if(monitor.host != src)
 		return
 
 	alarm_monitor = monitor
-	alarm_monitor.register(src, /obj/machinery/computer/station_alert/update_icon)
+	alarm_monitor.register_alarm(src, /obj/machinery/computer/station_alert/update_icon)
 
 /obj/machinery/computer/station_alert/proc/unregister_monitor()
 	if(alarm_monitor)
@@ -43,22 +43,17 @@
 		alarm_monitor = null
 
 /obj/machinery/computer/station_alert/attack_ai(mob/user)
-	add_fingerprint(user)
-	if(stat & (BROKEN|NOPOWER))
-		return
-	interact(user)
-	return
+	ui_interact(user)
 
 /obj/machinery/computer/station_alert/attack_hand(mob/user)
-	add_fingerprint(user)
-	if(stat & (BROKEN|NOPOWER))
-		return
-	interact(user)
-	return
+	ui_interact(user)
 
-/obj/machinery/computer/station_alert/interact(mob/user)
+/obj/machinery/computer/station_alert/ui_interact(mob/user)
 	if(alarm_monitor)
 		alarm_monitor.ui_interact(user)
+
+/obj/machinery/computer/station_alert/nano_container()
+	return alarm_monitor
 
 /obj/machinery/computer/station_alert/update_icon()
 	icon_screen = initial(icon_screen)
