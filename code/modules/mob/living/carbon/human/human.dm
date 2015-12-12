@@ -764,7 +764,8 @@
 
 	if(!check_has_mouth())
 		return
-
+	if(stat == DEAD)
+		return
 	if(!lastpuke)
 		lastpuke = 1
 		src << "<span class='warning'>You feel nauseous...</span>"
