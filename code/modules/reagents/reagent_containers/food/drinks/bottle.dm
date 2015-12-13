@@ -190,6 +190,15 @@
 		..()
 		reagents.add_reagent("whiskey", 100)
 
+/obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey
+	name = "Special Blend Whiskey"
+	desc = "Just when you thought regular station whiskey was good... This silky, amber goodness has to come along and ruin everything."
+	icon_state = "whiskeybottle2"
+	center_of_mass = list("x"=16, "y"=3)
+	New()
+		..()
+		reagents.add_reagent("specialwhiskey", 100)
+
 /obj/item/weapon/reagent_containers/food/drinks/bottle/vodka
 	name = "Tunguska Triple Distilled"
 	desc = "Aah, vodka. Prime choice of drink AND fuel by Russians worldwide."
