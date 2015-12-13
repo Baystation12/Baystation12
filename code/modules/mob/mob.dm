@@ -37,10 +37,10 @@
 	pressure = null
 	damageoverlay = null
 	pain = null
-	item_use_icon = null
-	gun_move_icon = null
-	gun_run_icon = null
-	gun_setting_icon = null
+	//item_use_icon = null
+	//gun_move_icon = null
+	//gun_run_icon = null
+	//gun_setting_icon = null
 	spell_masters = null
 	zone_sel = null
 

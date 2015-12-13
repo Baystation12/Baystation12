@@ -279,7 +279,7 @@ var/global/list/default_medbay_channels = list(
 	if(wires.IsIndexCut(WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
 		return 0
 
-	M.last_target_radio = world.time // For the projectile targeting system
+	//M.last_target_radio = world.time // For the projectile targeting system
 
 	if(!radio_connection)
 		set_frequency(frequency)

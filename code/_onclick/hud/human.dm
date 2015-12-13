@@ -337,6 +337,7 @@
 	mymob.zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]")
 	hud_elements |= mymob.zone_sel
 
+	/*
 	//Handle the gun settings buttons
 	mymob.gun_setting_icon = new /obj/screen/gun/mode(null)
 	mymob.gun_setting_icon.icon = ui_style
@@ -363,7 +364,7 @@
 	mymob.radio_use_icon.icon = ui_style
 	mymob.radio_use_icon.color = ui_color
 	mymob.radio_use_icon.alpha = ui_alpha
-
+	*/
 
 	mymob.client.screen = null
 

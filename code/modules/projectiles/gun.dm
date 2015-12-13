@@ -15,7 +15,7 @@
 
 	for(var/propname in properties)
 		var/propvalue = properties[propname]
-		
+
 		if(propname == "mode_name")
 			name = propvalue
 		else if(isnull(propvalue))
@@ -122,17 +122,20 @@
 /obj/item/weapon/gun/afterattack(atom/A, mob/living/user, adjacent, params)
 	if(adjacent) return //A is adjacent, is the user, or is on the user's person
 
-	//decide whether to aim or shoot normally
-	var/aiming = 0
+	/*
 	if(user && user.client && !(A in aim_targets))
 		if(user.client.gun_mode)
 			aiming = PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
+			return
+	*/
 
-	if (!aiming)
-		if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
-			user << "\red You refrain from firing your [src] as your intent is set to help."
-		else
-			Fire(A,user,params) //Otherwise, fire normally.
+	if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
+		user << "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>"
+	else
+		Fire(A,user,params) //Otherwise, fire normally.
+
+/obj/item/weapon/gun/proc/PreFire(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, params)
+	return
 
 /obj/item/weapon/gun/attack(atom/A, mob/living/user, def_zone)
 	if (A == user && user.zone_sel.selecting == "mouth" && !mouthshoot)

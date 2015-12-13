@@ -95,38 +95,6 @@
 			usr.ClickOn(master)
 	return 1
 
-/obj/screen/gun
-	name = "gun"
-	icon = 'icons/mob/screen1.dmi'
-	master = null
-	dir = 2
-
-	move
-		name = "Allow Walking"
-		icon_state = "no_walk0"
-		screen_loc = ui_gun2
-
-	run
-		name = "Allow Running"
-		icon_state = "no_run0"
-		screen_loc = ui_gun3
-
-	item
-		name = "Allow Item Use"
-		icon_state = "no_item0"
-		screen_loc = ui_gun1
-
-	mode
-		name = "Toggle Gun Mode"
-		icon_state = "gun0"
-		screen_loc = ui_gun_select
-		//dir = 1
-
-	radio
-		name = "Allow Radio Use"
-		icon_state = "no_radio0"
-		screen_loc = ui_gun4
-
 /obj/screen/zone_sel
 	name = "damage zone"
 	icon_state = "zone_sel"
@@ -432,6 +400,7 @@
 			if(istype(usr, /mob/living/silicon/robot))
 				usr:toggle_module(3)
 
+		/*
 		if("Allow Walking", "Disallow Walking")
 			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
 				return
@@ -470,7 +439,7 @@
 				return
 			usr.client.AllowTargetRadio()
 			gun_click_time = world.time
-
+		*/
 		else
 			return 0
 	return 1
