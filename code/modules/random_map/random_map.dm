@@ -206,5 +206,6 @@ var/global/list/map_count = list()
 			target_map.map[target_map.get_map_cell(tx+x,ty+y)] = map[current_cell]
 	handle_post_overlay_on(target_map,tx,ty)
 
+
 /datum/random_map/proc/handle_post_overlay_on(var/datum/random_map/target_map, var/tx, var/ty)
 	return
