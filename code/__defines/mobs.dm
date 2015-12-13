@@ -25,6 +25,7 @@
 #define BORGMESON 1
 #define BORGTHERM 2
 #define BORGXRAY  4
+#define BORGMATERIAL  8
 
 #define HOSTILE_STANCE_IDLE      1
 #define HOSTILE_STANCE_ALERT     2

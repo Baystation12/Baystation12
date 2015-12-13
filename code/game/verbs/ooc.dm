@@ -108,7 +108,7 @@
 	log_ooc("(LOCAL) [mob.name]/[key] : [msg]")
 
 	var/mob/source = mob.get_looc_source()
-	var/list/heard = get_mobs_in_view(7, get_turf(source))
+	var/list/heard = get_mobs_or_objects_in_view(7, get_turf(source), 1, 0)
 
 	var/display_name = key
 	if(holder && holder.fakekey)
