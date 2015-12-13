@@ -125,9 +125,6 @@ var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_plant,
 	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
 	/client/proc/respawn_character,
-	/client/proc/FireLaser,
-	/client/proc/FireCannons,
-	/client/proc/ChangeIcarusPosition,
 	/client/proc/virus2_editor,
 	/client/proc/spawn_chemdisp_cartridge
 	)
