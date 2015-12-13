@@ -45,11 +45,19 @@
 	return 1
 
 /obj/proc/CouldUseTopic(var/mob/user)
-	if(!isAI(user) && src.Adjacent(user))
-		// We are -probably- in physical contact with the object, better than how Topics() previously did it and always applied fingerprints.
-		add_fingerprint(user)
+	user.AddTopicPrint(src)
+
+/mob/proc/AddTopicPrint(var/obj/target)
+	target.add_hiddenprint(src)
+
+/mob/living/AddTopicPrint(var/obj/target)
+	if(Adjacent(target))
+		target.add_fingerprint(src)
 	else
-		add_hiddenprint(user)
+		target.add_hiddenprint(src)
+
+/mob/living/silicon/ai/AddTopicPrint(var/obj/target)
+	target.add_hiddenprint(src)
 
 /obj/proc/CouldNotUseTopic(var/mob/user)
 	// Nada

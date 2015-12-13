@@ -151,6 +151,17 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Party equipment"
 	group = "Hospitality"
 
+/datum/supply_packs/lasertag
+	name = "Lasertag equipment"
+	contains = list(/obj/item/weapon/gun/energy/lasertag/red,
+					/obj/item/clothing/suit/redtag,
+					/obj/item/weapon/gun/energy/lasertag/blue,
+					/obj/item/clothing/suit/bluetag)
+	containertype = /obj/structure/closet
+	containername = "Lasertag Closet"
+	group = "Hospitality"
+	cost = 20
+
 /datum/supply_packs/internals
 	name = "Internals crate"
 	contains = list(/obj/item/clothing/mask/gas,
@@ -1126,6 +1137,17 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	cost = 30
 	containertype = /obj/structure/closet
 	containername = "Formalwear for the best occasions."
+	group = "Miscellaneous"
+
+/datum/supply_packs/randomised/card_packs
+	num_contained = 5
+	contains = list(/obj/item/weapon/pack/cardemon,
+					/obj/item/weapon/pack/spaceball,
+					/obj/item/weapon/deck/holder)
+	name = "Trading Card Crate"
+	cost = 20
+	containertype = /obj/structure/closet/crate
+	containername = "cards crate"
 	group = "Miscellaneous"
 
 /datum/supply_packs/shield_gen

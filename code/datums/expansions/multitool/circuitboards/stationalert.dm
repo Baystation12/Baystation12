@@ -12,7 +12,7 @@
 		. += "</tr>"
 	. += "</table>"
 
-/datum/expansion/multitool/circuitboards/stationalert/on_topic(href, href_list, usr)
+/datum/expansion/multitool/circuitboards/stationalert/on_topic(href, href_list, user)
 	var/obj/item/weapon/circuitboard/stationalert/SA = holder
 	if(href_list["add"])
 		var/datum/alarm_handler/AH = locate(href_list["add"]) in alarm_manager.all_handlers

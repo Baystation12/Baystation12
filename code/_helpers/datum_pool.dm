@@ -94,8 +94,8 @@ var/global/list/GlobalPool = list()
 		loc = args
 	..()
 
-/datum/proc/ResetVars(var/list/exlude = list())
-	var/list/excluded = list("animate_movement", "loc", "locs", "parent_type", "vars", "verbs", "type") + exlude
+/datum/proc/ResetVars(var/list/exclude = list())
+	var/list/excluded = list("animate_movement", "loc", "locs", "parent_type", "vars", "verbs", "type") + exclude
 
 	for(var/V in vars)
 		if(V in excluded)
