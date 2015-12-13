@@ -188,7 +188,7 @@
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
 		user.do_attack_animation(src)
 		usr.visible_message("<span class='danger'>[usr.name] bangs against the [src.name]!</span>",
-							"<<span class='danger'>You bang against the [src.name]!</span>",
+							"<span class='danger'>You bang against the [src.name]!</span>",
 							"You hear a banging sound.")
 	else
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
