@@ -12,7 +12,6 @@
 	layer = 20.0
 	unacidable = 1
 	var/obj/master = null	//A reference to the object in the slot. Grabs or items, generally.
-	var/gun_click_time = -100 //I'm lazy.
 
 /obj/screen/Destroy()
 	master = null
@@ -169,7 +168,6 @@
 
 /obj/screen/Click(location, control, params)
 	if(!usr)	return 1
-
 	switch(name)
 		if("toggle")
 			if(usr.hud_used.inventory_shown)
@@ -399,47 +397,6 @@
 		if("module3")
 			if(istype(usr, /mob/living/silicon/robot))
 				usr:toggle_module(3)
-
-		/*
-		if("Allow Walking", "Disallow Walking")
-			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
-				return
-			if(!istype(usr.get_active_hand(),/obj/item/weapon/gun))
-				usr << "You need your gun in your active hand to do that!"
-				return
-			usr.client.AllowTargetMove()
-			gun_click_time = world.time
-
-		if("Allow Running", "Disallow Running")
-			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
-				return
-			if(!istype(usr.get_active_hand(),/obj/item/weapon/gun))
-				usr << "You need your gun in your active hand to do that!"
-				return
-			usr.client.AllowTargetRun()
-			gun_click_time = world.time
-
-		if("Allow Item Use", "Disallow Item Use")
-			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
-				return
-			if(!istype(usr.get_active_hand(),/obj/item/weapon/gun))
-				usr << "You need your gun in your active hand to do that!"
-				return
-			usr.client.AllowTargetClick()
-			gun_click_time = world.time
-
-		if("Toggle Gun Mode")
-			usr.client.ToggleGunMode()
-
-		if("Allow Radio Use", "Disallow Radio Use")
-			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
-				return
-			if(!istype(usr.get_active_hand(),/obj/item/weapon/gun))
-				usr << "You need your gun in your active hand to do that!"
-				return
-			usr.client.AllowTargetRadio()
-			gun_click_time = world.time
-		*/
 		else
 			return 0
 	return 1

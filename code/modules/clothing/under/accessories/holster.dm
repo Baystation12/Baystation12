@@ -5,8 +5,8 @@
 	slot = "utility"
 	var/obj/item/holstered = null
 
-/obj/item/clothing/accessory/holster/proc/holster(obj/item/I, mob/user as mob)
-	if(holstered)
+/obj/item/clothing/accessory/holster/proc/holster(var/obj/item/I, var/mob/living/user)
+	if(holstered && istype(user))
 		user << "<span class='warning'>There is already \a [holstered] holstered here!</span>"
 		return
 
@@ -14,6 +14,8 @@
 		user << "<span class='warning'>[I] won't fit in [src]!</span>"
 		return
 
+	if(istype(user))
+		user.stop_aiming(no_message=1)
 	holstered = I
 	user.drop_from_inventory(holstered)
 	holstered.loc = src

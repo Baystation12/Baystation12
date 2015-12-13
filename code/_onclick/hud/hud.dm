@@ -293,7 +293,7 @@ datum/hud/New(mob/owner)
 		else
 			src.client.screen -= src.healths
 			src.client.screen -= src.internals
-			//src.client.screen -= src.gun_setting_icon
+			src.client.screen -= src.gun_setting_icon
 
 		//These ones are not a part of 'adding', 'other' or 'hotkeybuttons' but we want them gone.
 		src.client.screen -= src.zone_sel	//zone_sel is a mob variable for some reason.
@@ -310,8 +310,8 @@ datum/hud/New(mob/owner)
 			src.client.screen |= src.healths
 		if(src.internals)
 			src.client.screen |= src.internals
-		//if(src.gun_setting_icon)
-		//	src.client.screen |= src.gun_setting_icon
+		if(src.gun_setting_icon)
+			src.client.screen |= src.gun_setting_icon
 
 		src.hud_used.action_intent.screen_loc = ui_acti //Restore intent selection to the original position
 		src.client.screen += src.zone_sel				//This one is a special snowflake

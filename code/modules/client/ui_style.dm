@@ -35,13 +35,10 @@
 	//update UI
 	var/list/icons = usr.hud_used.adding + usr.hud_used.other + usr.hud_used.hotkeybuttons
 	icons.Add(usr.zone_sel)
-	/*
 	icons.Add(usr.gun_setting_icon)
 	icons.Add(usr.item_use_icon)
 	icons.Add(usr.gun_move_icon)
-	icons.Add(usr.gun_run_icon)
 	icons.Add(usr.radio_use_icon)
-	*/
 
 	var/icon/ic = all_ui_styles[UI_style_new]
 
