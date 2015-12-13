@@ -1,9 +1,0 @@
-author: TheWelp
-
-delete-after: True
-
-changes: 
-  - rscadd: "Added boardgame item for use with table-top board games."
-  - rscadd: "Added Actors Guild, an alternate spawn that allows players to control actors."
-  - rscadd: "Added differing card decks, including a Tarot deck and two trading card games."
-  - rscadd: "Remade /TG/Station's Orion Trail arcade machine with bay-specific modifications."

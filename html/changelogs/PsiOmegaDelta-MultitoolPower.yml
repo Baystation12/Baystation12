@@ -1,8 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - experiment: "Adds a system to allow objects to implement custom multitool interactions in a modular manner."
-  - rscadd: "The AI can now toggle multitool mode on/off, using the new 'Toggle Multitool Mode' verb."
-  - rscadd: "Cloning vats can now be connected to a cloning console by using a multitool."
-  - rscadd: "Station alert console circuits can now be altered using a multitool, changing which alarm types are displayed."
-  - rscadd: "Can now select the color of a cable coil using a multitool."
