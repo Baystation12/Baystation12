@@ -6,6 +6,7 @@
 	w_class = 2.0
 	force = 2.0
 	det_time = null
+	unacidable = 1
 	var/stage = 0
 	var/state = 0
 	var/path = 0
