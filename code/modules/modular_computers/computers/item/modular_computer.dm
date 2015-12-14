@@ -75,6 +75,7 @@
 	..()
 
 /obj/item/modular_computer/Destroy()
+	kill_program(1)
 	processing_objects.Remove(src)
 	if(network_card)
 		qdel(network_card)

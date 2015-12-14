@@ -8,7 +8,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	var/list/available_station_software = list()
 	var/list/available_antag_software = list()
 	var/list/chat_channels = list()
-
+	var/list/fileservers = list()
 	// Amount of logs the system tries to keep in memory. Keep below 999 to prevent byond from acting weirdly.
 	// High values make displaying logs much laggier.
 	var/setting_maxlogcount = 100

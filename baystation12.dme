@@ -1396,6 +1396,7 @@
 #include "code\modules\modular_computers\file_system\programs\ntdownloader.dm"
 #include "code\modules\modular_computers\file_system\programs\ntmonitor.dm"
 #include "code\modules\modular_computers\file_system\programs\ntnrc_client.dm"
+#include "code\modules\modular_computers\file_system\programs\nttransfer.dm"
 #include "code\modules\modular_computers\hardware\battery_module.dm"
 #include "code\modules\modular_computers\hardware\card_slot.dm"
 #include "code\modules\modular_computers\hardware\hard_drive.dm"

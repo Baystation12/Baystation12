@@ -127,6 +127,9 @@
 		data["disk_used"] = my_computer.hard_drive.used_capacity
 		var/list/all_entries[0]
 		for(var/datum/computer_file/program/P in ntnet_global.available_station_software)
+			// Only those programs our user can run will show in the list
+			if(!P.can_run(user))
+				continue
 			all_entries.Add(list(list(
 			"filename" = P.filename,
 			"filedesc" = P.filedesc,
