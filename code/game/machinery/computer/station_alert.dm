@@ -38,7 +38,7 @@
 
 /obj/machinery/computer/station_alert/proc/unregister_monitor()
 	if(alarm_monitor)
-		alarm_monitor.unregister(src)
+		alarm_monitor.unregister_alarm(src)
 		qdel(alarm_monitor)
 		alarm_monitor = null
 

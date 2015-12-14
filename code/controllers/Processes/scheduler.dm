@@ -28,16 +28,13 @@
 	stat(null, "[scheduled_tasks.len] task\s")
 
 /datum/controller/process/scheduler/proc/schedule(var/datum/scheduled_task/st)
-	if(world.time < st.trigger_time)
-		scheduled_tasks += st
-		st.register(OBSERVER_EVENT_DESTROY, src, /datum/controller/process/scheduler/proc/unschedule)
-	else
-		st.process()
+	scheduled_tasks += st
+	st.destruction.register(src, /datum/controller/process/scheduler/proc/unschedule)
 
 /datum/controller/process/scheduler/proc/unschedule(var/datum/scheduled_task/st)
 	if(st in scheduled_tasks)
 		scheduled_tasks -= st
-		st.unregister(OBSERVER_EVENT_DESTROY, src)
+		st.destruction.unregister(src)
 
 /**********
 * Helpers *
@@ -98,7 +95,7 @@
 
 /datum/scheduled_task/source/New(var/trigger_time, var/datum/source, var/procedure, var/list/arguments, var/proc/task_after_process, var/list/task_after_process_args)
 	src.source = source
-	src.source.register(OBSERVER_EVENT_DESTROY, src, /datum/scheduled_task/source/proc/source_destroyed)
+	src.source.destruction.register(src, /datum/scheduled_task/source/proc/source_destroyed)
 	..(trigger_time, procedure, arguments, task_after_process, task_after_process_args)
 
 /datum/scheduled_task/source/Destroy()
