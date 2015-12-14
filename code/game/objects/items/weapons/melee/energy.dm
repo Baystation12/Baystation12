@@ -50,13 +50,6 @@
 	add_fingerprint(user)
 	return
 
-/obj/item/weapon/melee/energy/suicide_act(mob/user)
-	var/tempgender = "[user.gender == MALE ? "he's" : user.gender == FEMALE ? "she's" : "they are"]"
-	if (active)
-		viewers(user) << pick("<span class='danger'>\The [user] is slitting \his stomach open with \the [src]! It looks like [tempgender] trying to commit seppuku.</span>", \
-		                      "<span class='danger'>\The [user] is falling on \the [src]! It looks like [tempgender] trying to commit suicide.</span>")
-		return (BRUTELOSS|FIRELOSS)
-
 /*
  * Energy Axe
  */
@@ -90,10 +83,6 @@
 	..()
 	icon_state = initial(icon_state)
 	user << "<span class='notice'>\The [src] is de-energised. It's just a regular axe now.</span>"
-
-/obj/item/weapon/melee/energy/axe/suicide_act(mob/user)
-	viewers(user) << "<span class='warning'>\The [user] swings \the [src] towards \his head! It looks like \he's trying to commit suicide.</span>"
-	return (BRUTELOSS|FIRELOSS)
 
 /*
  * Energy Sword
@@ -154,7 +143,7 @@
 /obj/item/weapon/melee/energy/sword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(active && default_parry_check(user, attacker, damage_source) && prob(50))
 		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
-		
+
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()

@@ -19,17 +19,9 @@
 		return 1
 	return 0
 
-/obj/item/weapon/material/sword/suicide_act(mob/user)
-	viewers(user) << "<span class='danger'>[user] is falling on the [src.name]! It looks like \he's trying to commit suicide.</span>"
-	return(BRUTELOSS)
-
 /obj/item/weapon/material/sword/katana
 	name = "katana"
 	desc = "Woefully underpowered in D20. This one looks pretty sharp."
 	icon_state = "katana"
 	item_state = "katana"
 	slot_flags = SLOT_BELT | SLOT_BACK
-
-/obj/item/weapon/material/sword/katana/suicide_act(mob/user)
-	viewers(user) << "<span class='danger'>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</span>"
-	return(BRUTELOSS)

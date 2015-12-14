@@ -259,9 +259,6 @@
 	if(H.stat == DEAD) // He's dead, Jim
 		return null
 
-	if(H.suiciding)
-		return null
-
 	if(H in ignored)
 		return null
 

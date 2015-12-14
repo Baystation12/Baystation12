@@ -273,10 +273,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 40)
 	attack_verb = list("whipped", "lashed", "disciplined", "tickled")
 
-	suicide_act(mob/user)
-		viewers(user) << "<span class='warning'><b>[user] is strangling \himself with \the [src]! It looks like \he's trying to commit suicide.</b></span>"
-		return (OXYLOSS)
-
 /obj/item/weapon/module
 	icon = 'icons/obj/module.dmi'
 	icon_state = "std_module"

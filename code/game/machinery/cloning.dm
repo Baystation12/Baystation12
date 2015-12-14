@@ -149,7 +149,6 @@
 	for(var/datum/language/L in R.languages)
 		H.add_language(L.name)
 	H.flavor_texts = R.flavor.Copy()
-	H.suiciding = 0
 	attempting = 0
 	return 1
 
@@ -163,7 +162,7 @@
 		return
 
 	if((occupant) && (occupant.loc == src))
-		if((occupant.stat == DEAD) || (occupant.suiciding) || !occupant.key)  //Autoeject corpses and suiciding dudes.
+		if((occupant.stat == DEAD) || !occupant.key)
 			locked = 0
 			go_out()
 			connected_message("Clone Rejected: Deceased.")

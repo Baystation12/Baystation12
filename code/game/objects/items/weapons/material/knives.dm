@@ -62,12 +62,6 @@
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	unbreakable = 1
 
-/obj/item/weapon/material/knife/suicide_act(mob/user)
-	viewers(user) << pick("<span class='danger'>\The [user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</span>", \
-	                      "<span class='danger'>\The [user] is slitting \his throat with \the [src]! It looks like \he's trying to commit suicide.</span>", \
-	                      "<span class='danger'>\The [user] is slitting \his stomach open with \the [src]! It looks like \he's trying to commit seppuku.</span>")
-	return (BRUTELOSS)
-
 /obj/item/weapon/material/knife/hook
 	name = "meat hook"
 	desc = "A sharp, metal hook what sticks into things."
