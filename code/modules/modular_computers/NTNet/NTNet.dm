@@ -21,7 +21,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	var/setting_disabled = 0					// Setting to 1 will disable all wireless, independently on relays status.
 
 	var/intrusion_detection_enabled = 1 		// Whether the IDS warning system is enabled
-	var/intrusion_detection_alarm = 0			// Set when there is an IDS warning due to malicious (antag) software. Currently only for monitor UI testing, things that would set it are not coded yet
+	var/intrusion_detection_alarm = 0			// Set when there is an IDS warning due to malicious (antag) software.
 
 
 // If new NTNet datum is spawned, it replaces the old one.

@@ -11,6 +11,7 @@
 	var/datum/ntnet/NTNet = null // This is mostly for backwards reference and to allow varedit modifications from ingame.
 	var/enabled = 1				// Set to 0 if the relay was turned off
 	var/dos_failure = 0			// Set to 1 if the relay failed due to (D)DoS attack
+	var/list/dos_sources = list()	// Backwards reference for qdel() stuff
 
 	// Denial of Service attack variables
 	var/dos_overload = 0		// Amount of DoS "packets" in this relay's buffer
@@ -86,6 +87,8 @@
 		update_icon()
 
 /obj/machinery/ntnet_relay/New()
+	uid = gl_uid
+	gl_uid++
 	component_parts = list()
 	component_parts += new /obj/item/stack/cable_coil(src,15)
 	component_parts += new /obj/item/weapon/circuitboard/ntnet_relay(src)
@@ -101,6 +104,9 @@
 		ntnet_global.relays.Remove(src)
 		ntnet_global.add_log("Quantum relay connection severed. Current amount of linked relays: [NTNet.relays.len]")
 		NTNet = null
+	for(var/datum/computer_file/program/ntnet_dos/D in dos_sources)
+		D.target = null
+		D.error = "Connection to quantum relay severed"
 	..()
 
 /obj/machinery/ntnet_relay/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
