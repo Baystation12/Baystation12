@@ -1434,6 +1434,13 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/shield_cap
 	sort_string = "VAAAC"
 
+/datum/design/circuit/ntnet_relay
+	name = "NTNet Quantum Relay"
+	id = "ntnet_relay"
+	req_tech = list(TECH_DATA = 4)
+	build_path = /obj/item/weapon/circuitboard/ntnet_relay
+	sort_string = "WAAAA"
+
 /datum/design/circuit/aicore
 	name = "AI core"
 	id = "aicore"
