@@ -19,13 +19,18 @@
 		i = i * 2
 		src << "<span class='notice'>Our toxin will be extra potent, when it strikes.</span>"
 		src.mind.changeling.recursive_enhancement = 0
-	spawn(120) //Two minutes
+	spawn(2 MINUTES)
 		if(T) //We might not exist in two minutes, for whatever reason.
 			T << "<span class='danger'>You feel a burning sensation flowing through your veins!</span>"
 			while(i)
 				T.adjustToxLoss(1)
 				i--
 				sleep(20)
+	src.verbs -= /mob/proc/changeling_delayed_toxic_sting
+	spawn(3 MINUTES)
+		src << "<span class='notice'>We are ready to use our delayed toxic string once more.</span>"
+		src.verbs |= /mob/proc/changeling_delayed_toxic_sting
 
-			feedback_add_details("changeling_powers","DTS")
-			return 1
+
+	feedback_add_details("changeling_powers","DTS")
+	return 1
