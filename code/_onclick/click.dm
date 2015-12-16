@@ -38,8 +38,10 @@
 	* mob/RangedAttack(atom,params) - used only ranged, only used for tk and laser eyes but could be changed
 */
 /mob/proc/ClickOn(var/atom/A, var/params)
+
 	if(world.time <= next_click) // Hard check, before anything else, to avoid crashing
 		return
+
 	next_click = world.time + 1
 
 	if(client.buildmode)
@@ -49,19 +51,19 @@
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
-		return
+		return 1
 	if(modifiers["middle"])
 		MiddleClickOn(A)
-		return
+		return 1
 	if(modifiers["shift"])
 		ShiftClickOn(A)
-		return
+		return 0
 	if(modifiers["alt"]) // alt and alt-gr (rightalt)
 		AltClickOn(A)
-		return
+		return 1
 	if(modifiers["ctrl"])
 		CtrlClickOn(A)
-		return
+		return 1
 
 	if(stat || paralysis || stunned || weakened)
 		return
@@ -80,16 +82,13 @@
 	if(restrained())
 		setClickCooldown(10)
 		RestrainedClickOn(A)
-		return
+		return 1
 
 	if(in_throw_mode)
 		if(isturf(A) || isturf(A.loc))
 			throw_item(A)
-			return
+			return 1
 		throw_mode_off()
-
-	if(!istype(A, /obj/item/weapon/gun) && !isturf(A) && !istype(A, /obj/screen))
-		last_target_click = world.time
 
 	var/obj/item/W = get_active_hand()
 
@@ -99,7 +98,7 @@
 			update_inv_l_hand(0)
 		else
 			update_inv_r_hand(0)
-		return
+		return 1
 
 	//Atoms on your person
 	// A is your location but is not a turf; or is on you (backpack); or is on something on you (box in backpack); sdepth is needed here because contents depth does not equate inventory storage depth.
@@ -117,7 +116,7 @@
 			if(ismob(A)) // No instant mob attacking
 				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			UnarmedAttack(A, 1)
-		return
+		return 1
 
 	if(!isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
 		return
@@ -144,8 +143,7 @@
 				W.afterattack(A, src, 0, params) // 0: not Adjacent
 			else
 				RangedAttack(A, params)
-
-	return
+	return 1
 
 /mob/proc/setClickCooldown(var/timeout)
 	next_move = max(world.time + timeout, next_move)

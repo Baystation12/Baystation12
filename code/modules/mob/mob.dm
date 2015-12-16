@@ -39,7 +39,6 @@
 	pain = null
 	item_use_icon = null
 	gun_move_icon = null
-	gun_run_icon = null
 	gun_setting_icon = null
 	spell_masters = null
 	zone_sel = null
@@ -767,8 +766,8 @@
 
 	if(lying)
 		density = 0
-		drop_l_hand()
-		drop_r_hand()
+		if(l_hand) unEquip(l_hand)
+		if(r_hand) unEquip(r_hand)
 	else
 		density = initial(density)
 

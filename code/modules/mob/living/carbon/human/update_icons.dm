@@ -429,17 +429,6 @@ var/global/list/damage_icon_parts = list()
 		overlays_standing[MUTATIONS_LAYER]	= null
 	if(update_icons)   update_icons()
 
-//Call when target overlay should be added/removed
-/mob/living/carbon/human/update_targeted(var/update_icons=1)
-	if (targeted_by && target_locked)
-		overlays_standing[TARGETED_LAYER]	= target_locked
-	else if (!targeted_by && target_locked)
-		qdel(target_locked)
-	if (!targeted_by)
-		overlays_standing[TARGETED_LAYER]	= null
-	if(update_icons)		update_icons()
-
-
 /* --------------------------------------- */
 //For legacy support.
 /mob/living/carbon/human/regenerate_icons()
