@@ -658,17 +658,17 @@
 			if(!TurfAdjacent(listed_turf))
 				listed_turf = null
 			else
-				statpanel(listed_turf.name, null, listed_turf)
-				for(var/atom/A in listed_turf)
-					if(!A.mouse_opacity)
-						continue
-					if(A.invisibility > see_invisible)
-						continue
-					if(is_type_in_list(A, shouldnt_see))
-						continue
-					statpanel(listed_turf.name, null, A)
+				if(statpanel("Turf"))
+					stat("\icon[listed_turf]", listed_turf.name)
+					for(var/atom/A in listed_turf)
+						if(!A.mouse_opacity)
+							continue
+						if(A.invisibility > see_invisible)
+							continue
+						if(is_type_in_list(A, shouldnt_see))
+							continue
+						stat(A)
 
-	sleep(4) //Prevent updating the stat panel for the next .4 seconds, prevents clientside latency from updates
 
 // facing verbs
 /mob/proc/canface()
