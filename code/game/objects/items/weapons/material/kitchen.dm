@@ -44,7 +44,8 @@
 		overlays.Cut()
 		return
 	else
-		..()
+		user << "\red You don't have anything on \the [src]."	//if we have help intent and no food scooped up DON'T STAB OURSELVES WITH THE FORK GODDAMNIT
+		return
 
 /obj/item/weapon/material/kitchen/utensil/fork
 	name = "fork"
