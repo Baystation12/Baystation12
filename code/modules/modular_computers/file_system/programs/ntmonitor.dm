@@ -2,6 +2,7 @@
 	filename = "ntmonitor"
 	filedesc = "NTNet Diagnostics and Monitoring"
 	program_icon_state = "generic"
+	extended_desc = "This program monitors stationwide NTNet network, provides access to logging systems, and allows for configuration changes"
 	size = 7
 	requires_ntnet = 1
 	required_access = access_network

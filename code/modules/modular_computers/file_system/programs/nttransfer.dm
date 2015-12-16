@@ -3,6 +3,7 @@ var/global/nttransfer_uid = 0
 /datum/computer_file/program/nttransfer
 	filename = "nttransfer"
 	filedesc = "NTNet P2P Transfer Client"
+	extended_desc = "This program allows for simple file transfer via direct peer to peer connection."
 	program_icon_state = "generic"
 	size = 5
 	requires_ntnet = 1

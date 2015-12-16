@@ -1,6 +1,7 @@
 /datum/computer_file/program/filemanager
 	filename = "filemanager"
 	filedesc = "NTOS File Manager"
+	extended_desc = "This program allows management of files."
 	program_icon_state = "generic"
 	size = 10
 	requires_ntnet = 0

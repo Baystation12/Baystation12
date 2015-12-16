@@ -2,6 +2,7 @@
 	filename = "ntndownloader"
 	filedesc = "NTNet Software Download Tool"
 	program_icon_state = "generic"
+	extended_desc = "This program allows downloads of software from official NT repositories"
 	unsendable = 1
 	undeletable = 1
 	size = 3
@@ -133,7 +134,8 @@
 			all_entries.Add(list(list(
 			"filename" = P.filename,
 			"filedesc" = P.filedesc,
-			"size" = P.size,
+			"fileinfo" = P.extended_desc,
+			"size" = P.size
 			)))
 		data["hackedavailable"] = 0
 		if(prog.computer_emagged) // If we are running on emagged computer we have access to some "bonus" software
@@ -143,6 +145,7 @@
 				hacked_programs.Add(list(list(
 				"filename" = P.filename,
 				"filedesc" = P.filedesc,
+				"fileinfo" = P.extended_desc,
 				"size" = P.size
 				)))
 			data["hacked_programs"] = hacked_programs

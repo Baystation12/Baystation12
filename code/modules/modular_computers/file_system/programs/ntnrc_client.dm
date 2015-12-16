@@ -2,6 +2,7 @@
 	filename = "ntnrc_client"
 	filedesc = "NTNet Relay Chat Client"
 	program_icon_state = "generic"
+	extended_desc = "This program allows communication over NTNRC network"
 	size = 10
 	requires_ntnet = 1
 	requires_ntnet_feature = NTNET_COMMUNICATION

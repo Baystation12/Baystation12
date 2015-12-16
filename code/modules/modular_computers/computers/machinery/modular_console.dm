@@ -43,37 +43,4 @@
 		cpu.network_card.identification_string = "Unknown Console"
 	if(cpu)
 		cpu.screen_on = 1
-		cpu.enabled = 1
 	update_icon()
-
-/*
-/obj/machinery/modular_computer/console/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(istype(W, /obj/item/weapon/cell)) // Power Cell. Try to insert it into the console, if it doesn't have cell installed.
-		if(!cpu || (stat & (BROKEN|MAINT)))
-			user << "\The [cpu] seems to be broken."
-			return
-		if(cpu.battery)
-			user << "You try to insert \the [W] into \the [cpu], but it't battery slot is occupied."
-			return
-		cpu.battery = W
-		user.drop_from_inventory(W)
-		W.forceMove(src)
-		user << "You insert \the [W] into \the [cpu]'s battery slot."
-		return
-	if(istype(W, /obj/item/weapon/crowbar)) // Crowbar, remove power cell, if it has one.
-		if(!cpu || (stat & (BROKEN|MAINT)))
-			user << "\The [cpu] seems to be broken."
-			return
-		if(!cpu.battery)
-			user << "\The [cpu] doesn't seem to have battery installed."
-			return
-		user << "You begin removing \the [cpu.battery] from \the [cpu]."
-		if(do_after(user, 20))
-			cpu.battery.forceMove(get_turf(src))
-			user << "You crowbar \the [cpu.battery] from \the [cpu]."
-			cpu.battery = null
-			battery_powered = 0
-			power_change()
-		return
-	return ..()
-*/

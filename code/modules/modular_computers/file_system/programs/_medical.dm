@@ -3,6 +3,7 @@
 	filedesc = "Suit Sensors Monitoring"
 	nanomodule_path = /datum/nano_module/crew_monitor
 	program_icon_state = "crew"
+	extended_desc = "This program connects to life signs monitoring system to provide basic information on crew health."
 	keyboard_icon_state = "keyboard7"
 	required_access = access_medical
 	requires_ntnet = 1

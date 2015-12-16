@@ -8,6 +8,7 @@
 	var/running = 0							// Set to 1 when the program is run and back to 0 when it's stopped.
 	var/obj/item/modular_computer/computer	// Device that runs this program.
 	var/filedesc = "Unknown Program"		// User-friendly name of this program.
+	var/extended_desc = "N/A"				// Short description of this program's function.
 	var/program_icon_state = null			// Program-specific screen icon state
 	var/keyboard_icon_state = null			// Program-specific keboard icon state, only supported on some devices.
 	var/requires_ntnet = 0					// Set to 1 for program to require nonstop NTNet connection to run. If NTNet connection is lost program crashes.
