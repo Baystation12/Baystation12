@@ -20,7 +20,6 @@
 			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva, access_external_airlocks)
 
 	minimal_player_age = 10
-	minimum_character_age = 35
 	ideal_character_age = 50
 
 	equip(var/mob/living/carbon/human/H)

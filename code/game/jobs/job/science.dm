@@ -22,7 +22,6 @@
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch)
 
 	minimal_player_age = 14
-	minimum_character_age = 35
 	ideal_character_age = 50
 
 	equip(var/mob/living/carbon/human/H)
