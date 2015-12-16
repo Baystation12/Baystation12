@@ -76,6 +76,7 @@
 #define COLOR_CYAN             "#00ffff"
 #define COLOR_TEAL             "#008080"
 #define COLOR_BLUE             "#0000ff"
+#define COLOR_BLUE_LIGHT       "#33ccff"
 #define COLOR_NAVY             "#000080"
 #define COLOR_PINK             "#ff00ff"
 #define COLOR_PURPLE           "#800080"
