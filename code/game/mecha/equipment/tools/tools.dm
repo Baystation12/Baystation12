@@ -284,7 +284,7 @@
 					if(do_after_cooldown(target))
 						if(disabled) return
 						chassis.spark_system.start()
-						target:ChangeTurf(get_base_turf(target.z))
+						target:ChangeTurf(get_base_turf_by_area(target))
 						playsound(target, 'sound/items/Deconstruct.ogg', 50, 1)
 						chassis.use_power(energy_drain)
 				else if (istype(target, /obj/machinery/door/airlock))
@@ -297,7 +297,7 @@
 						playsound(target, 'sound/items/Deconstruct.ogg', 50, 1)
 						chassis.use_power(energy_drain)
 			if(1)
-				if(istype(target, /turf/space) || istype(target,get_base_turf(target.z)))
+				if(istype(target, /turf/space) || istype(target,get_base_turf_by_area(target)))
 					occupant_message("Building Floor...")
 					set_ready_state(0)
 					if(do_after_cooldown(target))

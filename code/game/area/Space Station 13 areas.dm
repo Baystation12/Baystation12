@@ -51,6 +51,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
 	var/list/forced_ambience = null
 	var/sound_env = STANDARD_STATION
+	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
+
 /*Adding a wizard area teleport list because motherfucking lag -- Urist*/
 /*I am far too lazy to make it a proper list of areas so I'll just make it run the usual telepot routine at the start of the game*/
 var/list/teleportlocs = list()
@@ -142,6 +144,7 @@ area/space/atmosalert()
 /area/shuttle
 	requires_power = 0
 	sound_env = SMALL_ENCLOSED
+	base_turf = /turf/space
 
 /area/shuttle/arrival
 	name = "\improper Arrival Shuttle"
@@ -154,6 +157,8 @@ area/space/atmosalert()
 
 /area/shuttle/escape
 	name = "\improper Emergency Shuttle"
+	flags = RAD_SHIELDED
+	music = "music/escape.ogg"
 
 /area/shuttle/escape/station
 	name = "\improper Emergency Shuttle Station"
@@ -169,6 +174,8 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod1
 	name = "\improper Escape Pod One"
+	music = "music/escape.ogg"
+	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod1/station
 	icon_state = "shuttle2"
@@ -181,6 +188,8 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod2
 	name = "\improper Escape Pod Two"
+	music = "music/escape.ogg"
+	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod2/station
 	icon_state = "shuttle2"
@@ -193,6 +202,8 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod3
 	name = "\improper Escape Pod Three"
+	music = "music/escape.ogg"
+	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod3/station
 	icon_state = "shuttle2"
@@ -205,6 +216,8 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod5 //Pod 4 was lost to meteors
 	name = "\improper Escape Pod Five"
+	music = "music/escape.ogg"
+	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod5/station
 	icon_state = "shuttle2"
@@ -253,19 +266,26 @@ area/space/atmosalert()
 
 /area/shuttle/specops/centcom
 	name = "\improper Special Ops Shuttle"
+	flags = RAD_SHIELDED
+
+/area/shuttle/specops/centcom
 	icon_state = "shuttlered"
 
 /area/shuttle/specops/station
-	name = "\improper Special Ops Shuttle"
 	icon_state = "shuttlered2"
 
-/area/shuttle/syndicate_elite/mothership
+/area/shuttle/syndicate_elite
 	name = "\improper Merc Elite Shuttle"
+	flags = RAD_SHIELDED
+
+/area/shuttle/syndicate_elite/mothership
 	icon_state = "shuttlered"
 
 /area/shuttle/syndicate_elite/station
-	name = "\improper Merc Elite Shuttle"
 	icon_state = "shuttlered2"
+
+/area/shuttle/administration
+	flags = RAD_SHIELDED
 
 /area/shuttle/administration/centcom
 	name = "\improper Administration Shuttle Centcom"
@@ -1171,6 +1191,7 @@ area/space/atmosalert()
 	requires_power = 1
 	always_unpowered = 1
 	lighting_use_dynamic = 0
+	base_turf = /turf/space
 
 	auxport
 		name = "\improper Fore Port Solar Array"
