@@ -491,7 +491,7 @@ var/global/list/damage_icon_parts = list()
 
 		//need to append _s to the icon state for legacy compatibility
 		var/image/standing = image(icon = under_icon, icon_state = "[under_state]_s")
-		standing.color = under.color
+		standing.color = w_uniform.color
 
 		//apply blood overlay
 		if(w_uniform.blood_DNA)
