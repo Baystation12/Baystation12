@@ -386,7 +386,7 @@
 			safe_pressure_min *= 1.25
 
 	var/safe_exhaled_max = 10
-	var/safe_toxins_max = 0.005
+	var/safe_toxins_max = 0.2
 	var/SA_para_min = 1
 	var/SA_sleep_min = 5
 	var/inhaled_gas_used = 0
