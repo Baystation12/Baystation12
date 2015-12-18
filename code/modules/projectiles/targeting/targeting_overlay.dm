@@ -1,5 +1,5 @@
 /obj/aiming_overlay
-	name = "target indicator"
+	name = ""
 	desc = "Stick 'em up!"
 	icon = 'icons/effects/Targeted.dmi'
 	icon_state = "locking"
@@ -8,6 +8,7 @@
 	opacity = 0
 	layer = FLY_LAYER
 	simulated = 0
+	mouse_opacity = 0
 
 	var/mob/living/aiming_at   // Who are we currently targeting, if anyone?
 	var/obj/item/aiming_with   // What are we targeting with?
@@ -21,6 +22,7 @@
 	..()
 	owner = newowner
 	loc = null
+	verbs.Cut()
 
 /obj/aiming_overlay/proc/toggle_permission(var/perm)
 
