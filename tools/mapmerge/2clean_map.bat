@@ -1,8 +1,8 @@
 SET z_levels=6
 cd 
 
-FOR /L %%i IN (1,1,%z_levels%) DO (
-  java -jar MapPatcher.jar -clean ../../maps/exodus-%%i.dmm.backup ../../maps/exodus-%%i.dmm ../../maps/exodus-%%i.dmm
+FOR %%f IN (../../maps/*.dmm) DO (
+  java -jar MapPatcher.jar -clean ../../maps/%%f.backup ../../maps/%%f ../../maps/%%f
 )
 
 pause
