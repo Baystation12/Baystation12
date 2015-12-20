@@ -156,8 +156,13 @@
 /mob/proc/buckled()
 	// Preliminary work for a future buckle rewrite,
 	// where one might be fully restrained (like an elecrical chair), or merely secured (shuttle chair, keeping you safe but not otherwise restrained from acting)
-	return buckled ? FULLY_BUCKLED : UNBUCKLED
+	if(!buckled)
+		return UNBUCKLED
+	return restrained() ? FULLY_BUCKLED : PARTIALLY_BUCKLED
 
+/mob/proc/is_physically_disabled()
+	return incapacitated(INCAPACITATION_DISABLED)
+	
 /mob/proc/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
 	if ((incapacitation_flags & INCAPACITATION_DISABLED) && (stat || paralysis || stunned || weakened || resting || sleeping || (status_flags & FAKEDEATH)))
 		return 1
@@ -733,7 +738,7 @@
 	else
 		if(istype(buckled, /obj/vehicle))
 			var/obj/vehicle/V = buckled
-			if(incapacitated(INCAPACITATION_DISABLED))
+			if(is_physically_disabled())
 				lying = 1
 				canmove = 0
 				pixel_y = V.mob_offset_y - 5
