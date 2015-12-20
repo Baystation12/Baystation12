@@ -158,7 +158,6 @@ var/list/ai_verbs_default = list(
 	spawn(5)
 		new /obj/machinery/ai_powersupply(src)
 
-
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[LIFE_HUD] 		  = image('icons/mob/hud.dmi', src, "hudblank")
@@ -199,8 +198,23 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/Destroy()
 	ai_list -= src
+
 	qdel(eyeobj)
-	..()
+	eyeobj = null
+
+	qdel(psupply)
+	psupply = null
+
+	qdel(aiMulti)
+	aiMulti = null
+
+	qdel(aiRadio)
+	aiRadio = null
+
+	qdel(aiCamera)
+	aiCamera = null
+
+	return ..()
 
 /mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
 	set popup_menu = 0
@@ -234,20 +248,22 @@ var/list/ai_verbs_default = list(
 /obj/machinery/ai_powersupply/New(var/mob/living/silicon/ai/ai=null)
 	powered_ai = ai
 	powered_ai.psupply = src
-	if(isnull(powered_ai))
-		qdel(src)
-
-	loc = powered_ai.loc
-	use_power(1) // Just incase we need to wake up the power system.
+	forceMove(powered_ai.loc)
 
 	..()
+	use_power(1) // Just incase we need to wake up the power system.
+
+/obj/machinery/ai_powersupply/Destroy()
+	. = ..()
+	powered_ai = null
 
 /obj/machinery/ai_powersupply/process()
-	if(!powered_ai || powered_ai.stat & DEAD)
-		qdel()
+	if(!powered_ai || powered_ai.stat == DEAD)
+		qdel(src)
 		return
 	if(powered_ai.psupply != src) // For some reason, the AI has different powersupply object. Delete this one, it's no longer needed.
 		qdel(src)
+		return
 	if(powered_ai.APU_power)
 		use_power = 0
 		return

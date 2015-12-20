@@ -48,7 +48,7 @@
 		else
 			assignment = "Unassigned"
 
-		var/id = add_zero(num2hex(rand(1, 1.6777215E7)), 6)	//this was the best they could come up with? A large random number? *sigh*
+		var/id = generate_record_id()
 		var/icon/front = new(get_id_photo(H), dir = SOUTH)
 		var/icon/side = new(get_id_photo(H), dir = WEST)
 		//General Record
@@ -136,8 +136,10 @@
 		locked += L
 	return
 
+/proc/generate_record_id()
+	return add_zero(num2hex(rand(1, 65535)), 4)	//no point generating higher numbers because of the limitations of num2hex
 
-proc/get_id_photo(var/mob/living/carbon/human/H)
+/proc/get_id_photo(var/mob/living/carbon/human/H)
 	var/icon/preview_icon = null
 
 	var/g = "m"
