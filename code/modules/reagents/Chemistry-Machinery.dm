@@ -27,7 +27,6 @@
 	var/pillsprite = "1"
 	var/client/has_sprites = list()
 	var/max_pill_count = 20
-	flags = OPENCONTAINER
 
 /obj/machinery/chem_master/New()
 	..()

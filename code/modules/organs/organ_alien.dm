@@ -158,6 +158,14 @@
 	name = "anchoring ligament"
 	parent_organ = "groin"
 
+/obj/item/organ/diona/node
+	name = "receptor node"
+	parent_organ = "head"
+
+/obj/item/organ/diona/nutrients
+	name = "nutrient vessel"
+	parent_organ = "chest"
+
 /obj/item/organ/diona
 	name = "diona nymph"
 	icon = 'icons/obj/objects.dmi'
@@ -175,9 +183,8 @@
 // These are different to the standard diona organs as they have a purpose in other
 // species (absorbing radiation and light respectively)
 /obj/item/organ/diona/nutrients
-	name = "nutrient channel"
-	parent_organ = "chest"
-	organ_tag = "nutrient channel"
+	name = "nutrient vessel"
+	organ_tag = "nutrient vessel"
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "claw"
 
@@ -185,8 +192,7 @@
 	return
 
 /obj/item/organ/diona/node
-	name = "response node"
-	parent_organ = "head"
+	name = "receptor node"
 	organ_tag = "receptor node"
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "claw"

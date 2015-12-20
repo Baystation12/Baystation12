@@ -28,6 +28,9 @@ datum/pipeline
 				if(!member.check_pressure(pressure))
 					break //Only delete 1 pipe per process
 
+		//Allow for reactions
+		//air.react() //Should be handled by pipe_network now
+
 	proc/temporarily_store_air()
 		//Update individual gas_mixtures by volume ratio
 

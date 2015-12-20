@@ -205,7 +205,7 @@
 					if(40 to INFINITY)
 						status += "peeling away"
 
-				if(org.is_stump())
+				if(org.status & ORGAN_DESTROYED)
 					status += "MISSING"
 				if(org.status & ORGAN_MUTATED)
 					status += "weirdly shapen"

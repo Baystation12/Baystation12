@@ -19,12 +19,9 @@
 	spell_objects.Cut()
 	if(spell_holder)
 		spell_holder.spell_masters -= src
-		if(spell_holder.client && spell_holder.client.screen)
-			spell_holder.client.screen -= src
-		spell_holder = null
 
 /obj/screen/movable/spell_master/ResetVars()
-	..("spell_objects", args)
+	..("spell_objects")
 	spell_objects = list()
 
 /obj/screen/movable/spell_master/MouseDrop()

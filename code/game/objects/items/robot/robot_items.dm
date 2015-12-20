@@ -71,10 +71,6 @@
 	icon_state = "meson"
 	icon = 'icons/obj/clothing/glasses.dmi'
 
-/obj/item/borg/sight/material
-	name = "\proper material scanner vision"
-	sight_mode = BORGMATERIAL
-
 /obj/item/borg/sight/hud
 	name = "hud"
 	var/obj/item/clothing/glasses/hud/hud = null

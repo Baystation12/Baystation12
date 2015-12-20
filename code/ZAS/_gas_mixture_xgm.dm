@@ -308,7 +308,7 @@
 	return 1
 
 
-/datum/gas_mixture/proc/react()
+/datum/gas_mixture/proc/react(atom/dump_location)
 	zburn(null, force_burn=0, no_check=0) //could probably just call zburn() here with no args but I like being explicit.
 
 
@@ -444,25 +444,20 @@
 			total_gas[g] += gasmix.gas[g]
 
 	if(total_volume > 0)
-		var/datum/gas_mixture/combined = new(total_volume)
-		combined.gas = total_gas
+		//Average out the gases
+		for(var/g in total_gas)
+			total_gas[g] /= total_volume
 
 		//Calculate temperature
+		var/temperature = 0
+
 		if(total_heat_capacity > 0)
-			combined.temperature = total_thermal_energy / total_heat_capacity
-		combined.update_values()
-
-		//Allow for reactions
-		combined.react()
-
-		//Average out the gases
-		for(var/g in combined.gas)
-			combined.gas[g] /= total_volume
+			temperature = total_thermal_energy / total_heat_capacity
 
 		//Update individual gas_mixtures
 		for(var/datum/gas_mixture/gasmix in gases)
-			gasmix.gas = combined.gas.Copy()
-			gasmix.temperature = combined.temperature
+			gasmix.gas = total_gas.Copy()
+			gasmix.temperature = temperature
 			gasmix.multiply(gasmix.volume)
 
 	return 1

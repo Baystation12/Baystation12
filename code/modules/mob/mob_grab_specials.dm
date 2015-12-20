@@ -3,7 +3,7 @@
 	
 	var/obj/item/organ/external/E = H.get_organ(target_zone)
 	
-	if(!E || E.is_stump())
+	if(!E || (E.status & ORGAN_DESTROYED))
 		user << "<span class='notice'>[H] is missing that bodypart.</span>"
 		return
 

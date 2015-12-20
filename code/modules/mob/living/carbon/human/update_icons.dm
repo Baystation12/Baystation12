@@ -186,10 +186,9 @@ var/global/list/damage_icon_parts = list()
 	for(var/obj/item/organ/external/O in organs)
 		if(O.is_stump())
 			continue
-		//if(O.status & ORGAN_DESTROYED) damage_appearance += "d" //what is this?
-		//else
-		//	damage_appearance += O.damage_state
-		damage_appearance += O.damage_state
+		if(O.status & ORGAN_DESTROYED) damage_appearance += "d"
+		else
+			damage_appearance += O.damage_state
 
 	if(damage_appearance == previous_damage_appearance)
 		// nothing to do here
@@ -205,20 +204,20 @@ var/global/list/damage_icon_parts = list()
 	for(var/obj/item/organ/external/O in organs)
 		if(O.is_stump())
 			continue
+		if(!(O.status & ORGAN_DESTROYED))
+			O.update_icon()
+			if(O.damage_state == "00") continue
+			var/icon/DI
+			var/cache_index = "[O.damage_state]/[O.icon_name]/[species.blood_color]/[species.get_bodytype()]"
+			if(damage_icon_parts[cache_index] == null)
+				DI = new /icon(species.damage_overlays, O.damage_state)			// the damage icon for whole human
+				DI.Blend(new /icon(species.damage_mask, O.icon_name), ICON_MULTIPLY)	// mask with this organ's pixels
+				DI.Blend(species.blood_color, ICON_MULTIPLY)
+				damage_icon_parts[cache_index] = DI
+			else
+				DI = damage_icon_parts[cache_index]
 
-		O.update_icon()
-		if(O.damage_state == "00") continue
-		var/icon/DI
-		var/cache_index = "[O.damage_state]/[O.icon_name]/[species.blood_color]/[species.get_bodytype()]"
-		if(damage_icon_parts[cache_index] == null)
-			DI = new /icon(species.damage_overlays, O.damage_state)			// the damage icon for whole human
-			DI.Blend(new /icon(species.damage_mask, O.icon_name), ICON_MULTIPLY)	// mask with this organ's pixels
-			DI.Blend(species.blood_color, ICON_MULTIPLY)
-			damage_icon_parts[cache_index] = DI
-		else
-			DI = damage_icon_parts[cache_index]
-
-		standing_image.overlays += DI
+			standing_image.overlays += DI
 
 	overlays_standing[DAMAGE_LAYER]	= standing_image
 
@@ -258,7 +257,7 @@ var/global/list/damage_icon_parts = list()
 
 	for(var/organ_tag in species.has_limbs)
 		var/obj/item/organ/external/part = organs_by_name[organ_tag]
-		if(isnull(part) || part.is_stump())
+		if(isnull(part) || part.is_stump() || (part.status & ORGAN_DESTROYED))
 			icon_key += "0"
 		else if(part.status & ORGAN_ROBOT)
 			icon_key += "2[part.model ? "-[part.model]": ""]"
@@ -337,7 +336,7 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[HAIR_LAYER]	= null
 
 	var/obj/item/organ/external/head/head_organ = get_organ("head")
-	if(!head_organ || head_organ.is_stump() )
+	if(!head_organ || head_organ.is_stump() || (head_organ.status & ORGAN_DESTROYED) )
 		if(update_icons)   update_icons()
 		return
 

@@ -48,15 +48,13 @@
 				victim.verbs -= V
 
 		var/mob/dead/observer/ghost = victim.ghostize(0)
-		ghost.spell_list += victim.spell_list//If they have spells, transfer them. Now we basically have a backup mob.
+		ghost.spell_list = victim.spell_list//If they have spells, transfer them. Now we basically have a backup mob.
 
 		caster.mind.transfer_to(victim)
-		for(var/spell/S in victim.spell_list) //get rid of spells the new way
-			victim.remove_spell(S) //This will make it so that players will not get the HUD and all that spell bugginess that caused copies of spells and stuff of that nature.
-
+		victim.spell_list = list() //clear those out
 		for(var/spell/S in caster.spell_list)
 			victim.add_spell(S) //Now they are inside the victim's body - this also generates the HUD
-			caster.remove_spell(S) //remove the spells from the caster
+		caster.spell_list = list() //clean that out as well
 
 		if(victim.mind.special_verbs.len)//To add all the special verbs for the original caster.
 			for(var/V in caster.mind.special_verbs)//Not too important but could come into play.
