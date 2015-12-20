@@ -1387,9 +1387,6 @@
 	if(holder_type && a_intent == I_HELP && istype(H) && H == usr && H.a_intent == I_HELP && !issmall(H) && Adjacent(H))
 		get_scooped(H)
 		return
-<<<<<<< HEAD
-	return ..()
-=======
 	return ..()
 
 //Puts the item into our active hand if possible. returns 1 on success.
@@ -1433,4 +1430,3 @@
 	W.add_fingerprint(src)
 	update_inv_r_hand()
 	return 1
->>>>>>> 1cb2239938725404167224ba7aab27cab86c4275
