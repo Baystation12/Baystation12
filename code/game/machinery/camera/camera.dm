@@ -140,9 +140,19 @@
 		if(weld(W, user))
 			if(assembly)
 				assembly.loc = src.loc
-				assembly.state = 1
+				assembly.anchored = 1
+				assembly.camera_name = c_tag
+				assembly.camera_network = english_list(network, "Exodus", ",", ",")
+				assembly.update_icon()
+				assembly.dir = src.dir
+				if(stat & BROKEN)
+					assembly.state = 2
+					user << "<span class='notice'>You repaired \the [src] frame.</span>"
+				else
+					assembly.state = 1
+					user << "<span class='notice'>You cut \the [src] free from the wall.</span>"
+					new /obj/item/stack/cable_coil(src.loc, length=2)
 				assembly = null //so qdel doesn't eat it.
-				new /obj/item/stack/cable_coil(src.loc, length=2)
 			qdel(src)
 
 	// OTHER

@@ -1,15 +1,7 @@
 /*
 Add fingerprints to items when we put them in our hands.
 This saves us from having to call add_fingerprint() any time something is put in a human's hands programmatically.
-
 */
-/mob/living/carbon/human/put_in_l_hand(var/obj/item/W)
-	. = ..()
-	if(.) W.add_fingerprint(src)
-
-/mob/living/carbon/human/put_in_r_hand(var/obj/item/W)
-	. = ..()
-	if(.) W.add_fingerprint(src)
 
 /mob/living/carbon/human/verb/quick_equip()
 	set name = "quick-equip"
@@ -41,7 +33,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 /mob/living/carbon/human/proc/has_organ(name)
 	var/obj/item/organ/external/O = organs_by_name[name]
 
-	return (O && !(O.status & ORGAN_DESTROYED) && !O.is_stump())
+	return (O && !O.is_stump())
 
 /mob/living/carbon/human/proc/has_organ_for_slot(slot)
 	switch(slot)
