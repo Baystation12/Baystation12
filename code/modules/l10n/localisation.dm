@@ -9,7 +9,7 @@
 
 */
 /*
-	The most used output way is text chat. So fatal letters by default should be transformed in chat version.
+	The most used output way is text chat. So fatal letters by default should be transformed into chat version.
 	Also, it`s easier to fix all browser() calls than search all possible "[src|usr|mob|any other var] <<" calls.
 	Logs need a special letter, because watch normal text with ascii code insertions is weird.
 	And sometimes we need special unique temp letter for input windows whitch allows to edit text.
