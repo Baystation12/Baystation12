@@ -494,6 +494,7 @@
 #define BORGMESON 1
 #define BORGTHERM 2
 #define BORGXRAY  4
+#define BORGMATERIAL 8
 
 // Some arbitrary defines to be used by self-pruning global lists. (see master_controller)
 #define PROCESS_KILL 26 // Used to trigger removal from a processing list.
@@ -509,10 +510,8 @@
 // Organ defines.
 #define ORGAN_CUT_AWAY   1
 #define ORGAN_GAUZED     2
-#define ORGAN_ATTACHABLE 4
 #define ORGAN_BLEEDING   8
 #define ORGAN_BROKEN     32
-#define ORGAN_DESTROYED  64
 #define ORGAN_ROBOT      128
 #define ORGAN_SPLINTED   256
 #define SALVED           512

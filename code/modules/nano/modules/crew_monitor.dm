@@ -2,7 +2,7 @@
 	name = "Crew monitor"
 
 /obj/nano_module/crew_monitor/Topic(href, href_list)
-	if(..()) return
+	if(..()) return 1
 	var/turf/T = get_turf(src)
 	if (!T || !(T.z in config.player_levels))
 		usr << "<span class='warning'>Unable to establish a connection<span>: You're too far away from the station!"
