@@ -31,6 +31,7 @@
 		if(held_item)
 			var/damagetype = held_item.suicide_act(src)
 			if(damagetype)
+				log_and_message_admins("[key_name(src)] commited suicide using \a [held_item]")
 				var/damage_mod = 1
 				switch(damagetype) //Sorry about the magic numbers.
 								   //brute = 1, burn = 2, tox = 4, oxy = 8
@@ -70,7 +71,7 @@
 				updatehealth()
 				return
 
-
+		log_and_message_admins("[key_name(src)] commited suicide")
 		viewers(src) << pick("\red <b>[src] is attempting to bite \his tongue off! It looks like \he's trying to commit suicide.</b>", \
 							"\red <b>[src] is jamming \his thumbs into \his eye sockets! It looks like \he's trying to commit suicide.</b>", \
 							"\red <b>[src] is twisting \his own neck! It looks like \he's trying to commit suicide.</b>", \
