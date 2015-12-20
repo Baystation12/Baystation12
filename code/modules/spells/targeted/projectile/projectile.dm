@@ -15,7 +15,7 @@ If the spell_projectile is seeking, it will update its target every process and 
 	var/proj_step_delay = 1 //lower = faster
 	var/cast_prox_range = 1
 
-/spell/targeted/projectile/cast(list/targets, mob/user = usr)
+/spell/targeted/projectile/cast(list/targets, mob/user = usr, var/target_zone)
 
 	if(istext(proj_type))
 		proj_type = text2path(proj_type) // sanity filters
@@ -26,19 +26,14 @@ If the spell_projectile is seeking, it will update its target every process and 
 		if(!projectile)
 			return
 
-		projectile.original = target
-		projectile.starting = get_turf(user)
+
 		projectile.shot_from = user //fired from the user
-		projectile.current = projectile.original
-		projectile.yo = target.y - user.y
-		projectile.xo = target.x - user.x
-		projectile.kill_count = src.duration
 		projectile.hitscan = !proj_step_delay
 		projectile.step_delay = proj_step_delay
 		if(istype(projectile, /obj/item/projectile/spell_projectile))
 			var/obj/item/projectile/spell_projectile/SP = projectile
 			SP.carried = src //casting is magical
-		spawn projectile.process()
+		projectile.launch(target, target_zone="chest")
 	return
 
 /spell/targeted/projectile/proc/choose_prox_targets(mob/user = usr, var/atom/movable/spell_holder)
