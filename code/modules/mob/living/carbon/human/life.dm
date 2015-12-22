@@ -1266,7 +1266,7 @@
 
 			if(healths)
 				if (analgesic > 100)
-					healths.icon_state = "health_health_numb"
+					healths.icon_state = "health_numb"
 				else
 					switch(hal_screwyhud)
 						if(1)	healths.icon_state = "health6"
