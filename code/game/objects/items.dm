@@ -157,7 +157,7 @@
 			user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
 			return
 		if(!temp)
-			user << "<span class='notice'>You try to use your hand, but realize it is no longer attached!"
+			user << "<span class='notice'>You try to use your hand, but realize it is no longer attached!</span>"
 			return
 	src.pickup(user)
 	if (istype(src.loc, /obj/item/weapon/storage))
