@@ -36,4 +36,5 @@ script:
   - python tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
   - DreamMaker baystation12.dme
+  - DreamDaemon baystation12.dmb -invisible -trusted
 
