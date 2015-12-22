@@ -127,7 +127,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/process()
 	..()
 
-	if (hibernate)
+	if (hibernate > world.time)
 		return 1
 
 	if (!node)
@@ -152,9 +152,7 @@
 
 	if(scrubbing && power_draw < 0 && controller_iteration > 10)	//99% of all scrubbers
 		//Fucking hibernate because you ain't doing shit.
-		hibernate = 1
-		spawn(rand(100,200))	//hibernate for 10 or 20 seconds randomly
-			hibernate = 0
+		hibernate = world.time + (rand(100,200))
 
 	if (power_draw >= 0)
 		last_power_draw = power_draw
