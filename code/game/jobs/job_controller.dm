@@ -49,9 +49,15 @@ var/global/datum/controller/occupations/job_master
 		Debug("Running AR, Player: [player], Rank: [rank], LJ: [latejoin]")
 		if(player && player.mind && rank)
 			var/datum/job/job = GetJob(rank)
-			if(!job)	return 0
-			if(jobban_isbanned(player, rank))	return 0
-			if(!job.player_old_enough(player.client)) return 0
+			if(!job)
+				return 0
+			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
+				return 0
+			if(jobban_isbanned(player, rank))
+				return 0
+			if(!job.player_old_enough(player.client))
+				return 0
+
 			var/position_limit = job.total_positions
 			if(!latejoin)
 				position_limit = job.spawn_positions
@@ -82,6 +88,9 @@ var/global/datum/controller/occupations/job_master
 			if(!job.player_old_enough(player.client))
 				Debug("FOC player not old enough, Player: [player]")
 				continue
+			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
+				Debug("FOC character not old enough, Player: [player]")
+				continue
 			if(flag && (!player.client.prefs.be_special & flag))
 				Debug("FOC flag failed, Player: [player], Flag: [flag], ")
 				continue
@@ -94,6 +103,9 @@ var/global/datum/controller/occupations/job_master
 		Debug("GRJ Giving random job, Player: [player]")
 		for(var/datum/job/job in shuffle(occupations))
 			if(!job)
+				continue
+
+			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
 				continue
 
 			if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!
@@ -137,30 +149,24 @@ var/global/datum/controller/occupations/job_master
 
 				// Build a weighted list, weight by age.
 				var/list/weightedCandidates = list()
-
-				// Different head positions have different good ages.
-				var/good_age_minimal = 25
-				var/good_age_maximal = 60
-				if(command_position == "Captain")
-					good_age_minimal = 30
-					good_age_maximal = 70 // Old geezer captains ftw
-
 				for(var/mob/V in candidates)
 					// Log-out during round-start? What a bad boy, no head position for you!
 					if(!V.client) continue
 					var/age = V.client.prefs.age
+
+					if(age < job.minimum_character_age) // Nope.
+						continue
+
 					switch(age)
-						if(good_age_minimal - 10 to good_age_minimal)
+						if(job.minimum_character_age to (job.minimum_character_age+10))
 							weightedCandidates[V] = 3 // Still a bit young.
-						if(good_age_minimal to good_age_minimal + 10)
+						if((job.minimum_character_age+10) to (job.ideal_character_age-10))
 							weightedCandidates[V] = 6 // Better.
-						if(good_age_minimal + 10 to good_age_maximal - 10)
+						if((job.ideal_character_age-10) to (job.ideal_character_age+10))
 							weightedCandidates[V] = 10 // Great.
-						if(good_age_maximal - 10 to good_age_maximal)
+						if((job.ideal_character_age+10) to (job.ideal_character_age+20))
 							weightedCandidates[V] = 6 // Still good.
-						if(good_age_maximal to good_age_maximal + 10)
-							weightedCandidates[V] = 6 // Bit old, don't you think?
-						if(good_age_maximal to good_age_maximal + 50)
+						if((job.ideal_character_age+20) to INFINITY)
 							weightedCandidates[V] = 3 // Geezer.
 						else
 							// If there's ABSOLUTELY NOBODY ELSE
