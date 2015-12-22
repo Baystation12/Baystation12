@@ -150,7 +150,7 @@
 
 		power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
 
-	if(scrubbing && power_draw < 0)	//99% of all scrubbers
+	if(scrubbing && power_draw <= 0)	//99% of all scrubbers
 		//Fucking hibernate because you ain't doing shit.
 		hibernate = world.time + (rand(100,200))
 
