@@ -1395,7 +1395,7 @@ proc/admin_notice(var/message, var/rights)
 
 	if (!istype(src,/datum/admins))
 		src = usr.client.holder
-	if (!istype(src,/datum/admins))
+	if (!istype(src,/datum/admins) || !check_rights(R_ADMIN))
 		usr << "Error: you are not an admin!"
 		return
 
@@ -1413,7 +1413,7 @@ proc/admin_notice(var/message, var/rights)
 
 	var/msg
 
-	if(check_rights(R_ADMIN|R_MOD))
+	if(check_rights(R_ADMIN))
 		if (H.paralysis == 0)
 			H.paralysis = 8000
 			msg = "has paralyzed [key_name(H)]."
