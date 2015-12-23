@@ -897,6 +897,9 @@ About the new airlock wires panel:
 /obj/machinery/door/blocks_airlock()
 	return 0
 
+/obj/structure/window/blocks_airlock()
+	return 0
+
 /obj/machinery/mech_sensor/blocks_airlock()
 	return 0
 
@@ -905,6 +908,9 @@ About the new airlock wires panel:
 
 /atom/movable/proc/airlock_crush(var/crush_damage)
 	return 0
+
+/obj/structure/window/airlock_crush(var/crush_damage)
+	ex_act(2)//Smashin windows
 
 /obj/machinery/portable_atmospherics/canister/airlock_crush(var/crush_damage)
 	. = ..()
@@ -962,12 +968,8 @@ About the new airlock wires panel:
 		playsound(src.loc, open_sound_powered, 100, 1)
 	else
 		playsound(src.loc, open_sound_unpowered, 100, 1)
-	for(var/turf/turf in locs)
-		var/obj/structure/window/killthis = (locate(/obj/structure/window) in turf)
-		if(killthis)
-			killthis.ex_act(2)//Smashin windows
+
 	..()
-	return
 
 /obj/machinery/door/airlock/proc/lock(var/forced=0)
 	if(locked)
