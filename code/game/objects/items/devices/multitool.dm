@@ -66,5 +66,6 @@
 	if(!MT)
 		return ..(A, user)
 
+	user.AddTopicPrint(src)
 	MT.interact(src, user)
 	return 1
