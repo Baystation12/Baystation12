@@ -271,9 +271,9 @@
 
 		var/obj/item/organ/external/E = organs_by_name[organ_tag]
 		if(!E)
-			wound_flavor_text["[organ_descriptor]"] = "<span class='warning'><b>[t_He] is missing [t_his] [organ_descriptor].</b></span>\n"
+			wound_flavor_text["[organ_descriptor]"] = "<span class='warning'><b>[t_He] [t_is] missing [t_his] [organ_descriptor].</b></span>\n"
 		else if(E.is_stump())
-			wound_flavor_text["[organ_descriptor]"] = "<span class='warning'><b>[t_He] has a stump where [t_his] [organ_descriptor] should be.</b></span>\n"
+			wound_flavor_text["[organ_descriptor]"] = "<span class='warning'><b>[t_He] [t_has] a stump where [t_his] [organ_descriptor] should be.</b></span>\n"
 		else
 			continue
 
@@ -284,13 +284,13 @@
 					wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] has a robot [temp.name]!</span>\n"
 					continue
 				else
-					wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] has a robot [temp.name]. It has[temp.get_wounds_desc()]!</span>\n"
+					wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] [t_has] a robot [temp.name]. It has[temp.get_wounds_desc()]!</span>\n"
 			else if(temp.wounds.len > 0 || temp.open)
 				if(temp.is_stump() && temp.parent_organ && organs_by_name[temp.parent_organ])
 					var/obj/item/organ/external/parent = organs_by_name[temp.parent_organ]
-					wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] has [temp.get_wounds_desc()] on [t_his] [parent.name].</span><br>"
+					wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] [t_has] [temp.get_wounds_desc()] on [t_his] [parent.name].</span><br>"
 				else
-					wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] has [temp.get_wounds_desc()] on [t_his] [temp.name].</span><br>"
+					wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] [t_has] [temp.get_wounds_desc()] on [t_his] [temp.name].</span><br>"
 				if(temp.status & ORGAN_BLEEDING)
 					is_bleeding["[temp.name]"] = "<span class='danger'>[capitalize(t_his)] [temp.name] is bleeding!</span><br>"
 			else
