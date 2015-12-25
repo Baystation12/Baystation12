@@ -21,4 +21,13 @@
 
 	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 		if(istype(mover) && mover.checkpass(PASSBLOB))	return 1
-		return 0
+		return !density
+
+/obj/effect/blob/shield/New()
+	..()
+	update_nearby_tiles()
+
+/obj/effect/blob/shield/Destroy()
+	density = 0
+	update_nearby_tiles()
+	..()
