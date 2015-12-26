@@ -21,7 +21,6 @@
 	else i = 3
 	icon_state = "candle[i][lit ? "_lit" : ""]"
 
-
 /obj/item/weapon/flame/candle/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if(istype(W, /obj/item/weapon/weldingtool))
@@ -41,30 +40,28 @@
 		if(C.lit)
 			light()
 
-
-/obj/item/weapon/flame/candle/proc/light(var/flavor_text = "<span class='notice'>\The [usr] lights the [name].</span>")
-	if(!src.lit)
-		src.lit = 1
-		//src.damtype = "fire"
-		for(var/mob/O in viewers(usr, null))
-			O.show_message(flavor_text, 1)
-		set_light(CANDLE_LUM)
-		processing_objects.Add(src)
-
+/obj/item/weapon/flame/candle/light(var/flavor_text = "<span class='notice'>\The [usr] lights the [name].</span>")
+	if(!..())
+		return
+	visible_message(flavor_text, 1)
+	set_light(CANDLE_LUM)
 
 /obj/item/weapon/flame/candle/process()
-	if(!lit)
+	if(..())
+		wax--
+		if(!wax)
+			die()
+
+/obj/item/weapon/flame/candle/die()
+	set_light(0)
+	if(!..())
 		return
-	wax--
-	if(!wax)
-		new/obj/item/trash/candle(src.loc)
-		if(istype(src.loc, /mob))
-			src.dropped()
-		qdel(src)
-	update_icon()
-	if(istype(loc, /turf)) //start a fire if possible
-		var/turf/T = loc
-		T.hotspot_expose(700, 5)
+	var/obj/item/trash/candle/C = new (get_turf(src))
+	var/mob/living/carbon/human/holder = loc
+	if(istype(holder))
+		holder.unEquip(src)
+		holder.put_in_hands(C)
+	qdel(src)
 
 /obj/item/weapon/flame/candle/attack_self(mob/user as mob)
 	if(lit)
