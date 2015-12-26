@@ -1,22 +1,23 @@
 
-/datum/lang/main/turf
-	name = "turf"
+/datum/lang/ru_RU/turf
+	name = "турф"
+	gender = MALE
 
-	var/movement_disabled = "\red Movement is admin-disabled."
+	var/movement_disabled = "\red Передвижение заблокировано администрацией."
 	proc/clean(var/args = null)
 		return "\The [translation(args)] is too dry to wash that."
 
 	simulated
-		name = "station"
+		name = "турф с симуляцией воздуха"
 
 		var/more_fuel = "You need more welding fuel to complete this task."
 		var/no_dex = "You don't have the dexterity to do this!"
 
 		floor
-			name = "floor"
+			name = "пол"
 
-			var/replace_bulb = "You replace the light bulb."
-			var/bulb_fine = "The lightbulb seems fine, no need to replace it."
+			var/replace_bulb = "Вы заменили лампу."
+			var/bulb_fine = "Лампочка цела, нет необходимости её заменять."
 			var/remove_broken = "You remove the broken plating."
 			var/pry_off = "You forcefully pry off the planks, destroying them in the process."
 			proc/remove(var/args = null)
@@ -35,37 +36,43 @@
 			light
 				name = "light floor"
 			engine
-				name = "reinforced floor"
+				name = "укреплённый пол"
 
 				cult
-					name = "engraved floor"
+					name = "гравированный пол"
 				vacuum
 					name = "vacuum floor"
 			plating
-				name = "plating"
+				name = "обшивка"
+				gender = FEMALE
 
 				airless
-					name = "airless plating"
+					name = "внешняя обшивка"
 
 					asteroid
-						name = "asteroid"
+						name = "астероид"
+						gender = MALE
 
 						var/been_dug = "\red This area has already been dug"
 						var/digging = "\red You start digging."
 						var/dug = "\blue You dug a hole."
 				ironsand
-					name = "iron sand"
+					name = "железистый песок"
+					gender = MALE
 				snow
-					name = "snow"
+					name = "снег"
+					gender = MALE
 			shuttle
 				name = "shuttle"
 
 				wall
-					name = "wall"
+					name = "стена"
+					gender = FEMALE
 				floor
-					name = "floor"
+					name = "пол"
 				plating
-					name = "plating"
+					name = "обшивка"
+					gender = FEMALE
 				floor4
 					name = "brig floor"
 
@@ -85,12 +92,13 @@
 			carpet
 				name = "carpet"
 		wall
-			name = "wall"
+			name = "стена"
+			gender = FEMALE
 			proc/name()
 				if(refObj:reinf_material)
-					return "reinforced [refObj:material.display_name] wall"
+					return "укреплённая [refObj:material.display_name] стена"
 				else
-					return "[refObj:material.display_name] wall"
+					return "[refObj:material.display_name] стена"
 
 			desc = "A huge chunk of metal used to seperate rooms."
 			proc/desc()
@@ -138,13 +146,14 @@
 				name = "cult wall"
 				desc = "Hideous images dance beneath the surface."
 		mineral
-			name = "rock"
+			name = "скала"
+			gender = FEMALE
 
 			proc/name()
 				if(refObj:mineral)
-					return "\improper [refObj:mineral.display_name] deposit"
+					return "\improper месторождение [refObj:mineral.display_name]"
 				else
-					return "\improper rock"
+					return "\improper скала"
 			proc/tape_m(var/args = null)	return "\blue [args ? args["user"] : "user"] extends [args ? args["P"] : "measuring tape"] towards [GetVar()]."
 			proc/tape_sm(var/args = null)	return "\blue You extend [args ? args["P"] : "measuring tape"] towards [GetVar()]."
 			proc/tape(var/args = null)	return "\blue \icon[args ? args["P"] : null] [GetVar()] has been excavated to a depth of [2*(args ? args["excavation_level"] : 0)]cm."
@@ -159,32 +168,36 @@
 				name = "mineral deposit"
 
 	space
-		name = "\proper space"
+		name = "\proper космос"
 
 		var/lattice = "\blue Constructing support lattice ..."
 		var/need_support = "\red The plating is going to need some support."
 		var/nuke = "\red Something you are carrying is preventing you from leaving. Don't play stupid; you know exactly what it is."
 
 	unsimulated
-		name = "command"
+		name = "турф без симуляции воздуха"
 
 		beach
-			name = "beach"
+			name = "пляж"
 
 			sand
-				name = "sand"
+				name = "песок"
 			coastline
-				name = "coastline"
+				name = "берег"
 			water
-				name = "water"
+				name = "вода"
+				gender = FEMALE
 		floor
-			name = "floor"
+			name = "пол"
 		mask
-			name = "mask"
+			name = "маска генерации астероида"
+			gender = FEMALE
 		wall
-			name = "wall"
+			name = "стена"
+			gender = FEMALE
 
 			fakeglass
-				name = "window"
+				name = "окно"
+				gender = NEUTER
 			splashscreen
-				name = "Space Station 13"
+				name = "Космическая станция 13"

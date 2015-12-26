@@ -1,5 +1,5 @@
 
-/datum/lang/main/turf
+/datum/lang/ru_EN/turf
 	name = "turf"
 
 	var/movement_disabled = "\red Movement is admin-disabled."

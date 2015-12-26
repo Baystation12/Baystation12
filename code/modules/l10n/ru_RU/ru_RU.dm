@@ -8,17 +8,16 @@
 	area/name = null
 	mob/name = null
 	obj/name = null
-	turf/name = "пол"
 	datum/name = null
 
 	examine(args = null)
-		switch(args)
-			if("name")
-				return "[GetVar()]"
-			if("That's")
-				return "Это"
-			if("stained")
-				if(refObj:blood_color != "#030303")
-					return "<span class='danger'>окровавленн[GenderForm(gender,"ый","а&#255;","ое","ые")] [GetVar()]</span>"
-				else
-					return "<span class='danger'>измазанн[GenderForm(gender,"ый","а&#255;","ое","ые")] маслом [GetVar()]</span>"
+		var/result = "\icon[refObj] Это "
+		if(refObj:blood_DNA && refObj:blood_DNA.len && !istype(refObj, /obj/effect/decal))
+			if(refObj:blood_color != "#030303")
+				result += "<span class='danger'>окровавленн[GenderForm(gender,"ый","ая","ое","ые")]</span> [GetVar()][args["infix"]]!"
+			else
+				result += "замасленн[GenderForm(gender,"ый","ая","ое","ые")] [GetVar()][args["infix"]]."
+		else
+			result += "[GetVar()][args["infix"]]. [args["suffix"]]"
+
+		return result

@@ -3,6 +3,7 @@
 	var/refObj = null
 	var/name = "language"
 	var/name_capital = "Language"
+	var/desc = null
 	var/gender = NEUTER
 
 	New(var/RO)
