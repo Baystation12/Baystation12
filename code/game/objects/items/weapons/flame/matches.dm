@@ -43,9 +43,8 @@
 /obj/item/weapon/flame/match/process()
 	if(..())
 		smoketime--
-		if(smoketime < 1)
+		if(smoketime < 1 || istype(loc, /turf))
 			die()
-			return
 
 /obj/item/weapon/flame/match/update_icon()
 	item_state = "cigoff"
@@ -63,12 +62,3 @@
 	damtype = "brute"
 	name = "burnt match"
 	desc = "A match. This one has seen better days."
-
-/obj/item/weapon/flame/match/dropped(mob/user as mob)
-	if(lit)
-		spawn(0)
-			var/turf/location = src.loc
-			if(istype(location))
-				location.hotspot_expose(700, 5)
-			die()
-	return ..()
