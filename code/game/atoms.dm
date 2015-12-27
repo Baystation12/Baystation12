@@ -195,7 +195,7 @@ its easier to just keep the beam vertical.
 		return distance == -1 || (get_dist(src, user) <= distance)
 	*/
 	var/f_name = "\a [src][infix]."
-	if(src.blood_DNA && src.blood_DNA.len && !istype(src, /obj/effect/decal))
+	if(src.blood_DNA && !istype(src, /obj/effect/decal))
 		if(gender == PLURAL)
 			f_name = "some "
 		else
@@ -420,6 +420,7 @@ its easier to just keep the beam vertical.
 	src.germ_level = 0
 	if(istype(blood_DNA, /list))
 		blood_DNA.Cut()
+		blood_DNA = null
 		return 1
 
 

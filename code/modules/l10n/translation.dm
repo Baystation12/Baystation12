@@ -1,5 +1,5 @@
 
-var/global/list/interface_languages = list("main", "ru_RU", "ru_EN", "en_RU")
+var/global/list/interface_languages = list("main", "ru_RU")
 
 /client/verb/change_language()
 	set name = "Change Language"

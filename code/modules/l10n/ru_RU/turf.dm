@@ -62,22 +62,6 @@
 				snow
 					name = "снег"
 					gender = MALE
-			shuttle
-				name = "shuttle"
-
-				wall
-					name = "стена"
-					gender = FEMALE
-				floor
-					name = "пол"
-				plating
-					name = "обшивка"
-					gender = FEMALE
-				floor4
-					name = "brig floor"
-
-					vox
-						name = "skipjack floor"
 			beach
 				name = "beach"
 
@@ -91,6 +75,22 @@
 				name = "grass patch"
 			carpet
 				name = "carpet"
+		shuttle
+			name = "shuttle"
+
+			wall
+				name = "стена"
+				gender = FEMALE
+			floor
+				name = "пол"
+			plating
+				name = "обшивка"
+				gender = FEMALE
+			floor4
+				name = "brig floor"
+
+				vox
+					name = "skipjack floor"
 		wall
 			name = "стена"
 			gender = FEMALE
@@ -168,7 +168,7 @@
 				name = "mineral deposit"
 
 	space
-		name = "\proper космос"
+		name = "космос"
 
 		var/lattice = "\blue Constructing support lattice ..."
 		var/need_support = "\red The plating is going to need some support."

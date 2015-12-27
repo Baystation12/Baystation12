@@ -489,7 +489,7 @@ var/global/list/damage_icon_parts = list()
 		var/image/standing = image(icon = under_icon, icon_state = "[under_state]_s")
 
 		//apply blood overlay
-		if(w_uniform.blood_DNA && w_uniform.blood_DNA.len)
+		if(w_uniform.blood_DNA)
 			var/image/bloodsies	= image(icon = species.blood_mask, icon_state = "uniformblood")
 			bloodsies.color		= w_uniform.blood_color
 			standing.overlays	+= bloodsies
@@ -535,14 +535,14 @@ var/global/list/damage_icon_parts = list()
 		else
 			standing = image("icon" = 'icons/mob/hands.dmi', "icon_state" = "[t_state]")
 
-		if(gloves.blood_DNA && gloves.blood_DNA.len)
+		if(gloves.blood_DNA)
 			var/image/bloodsies	= image("icon" = species.blood_mask, "icon_state" = "bloodyhands")
 			bloodsies.color = gloves.blood_color
 			standing.overlays	+= bloodsies
 		gloves.screen_loc = ui_gloves
 		overlays_standing[GLOVES_LAYER]	= standing
 	else
-		if(blood_DNA && blood_DNA.len)
+		if(blood_DNA)
 			var/image/bloodsies	= image("icon" = species.blood_mask, "icon_state" = "bloodyhands")
 			bloodsies.color = hand_blood_color
 			overlays_standing[GLOVES_LAYER]	= bloodsies
@@ -611,13 +611,13 @@ var/global/list/damage_icon_parts = list()
 		else
 			standing = image("icon" = 'icons/mob/feet.dmi', "icon_state" = "[shoes.icon_state]")
 
-		if(shoes.blood_DNA && shoes.blood_DNA.len)
+		if(shoes.blood_DNA)
 			var/image/bloodsies = image("icon" = species.blood_mask, "icon_state" = "shoeblood")
 			bloodsies.color = shoes.blood_color
 			standing.overlays += bloodsies
 		overlays_standing[SHOES_LAYER] = standing
 	else
-		if(feet_blood_DNA  && feet_blood_DNA.len)
+		if(feet_blood_DNA)
 			var/image/bloodsies = image("icon" = species.blood_mask, "icon_state" = "shoeblood")
 			bloodsies.color = feet_blood_color
 			overlays_standing[SHOES_LAYER] = bloodsies
@@ -659,7 +659,7 @@ var/global/list/damage_icon_parts = list()
 		//Create the image
 		var/image/standing = image(icon = t_icon, icon_state = t_state)
 
-		if(head.blood_DNA && head.blood_DNA.len)
+		if(head.blood_DNA)
 			var/image/bloodsies = image("icon" = species.blood_mask, "icon_state" = "helmetblood")
 			bloodsies.color = head.blood_color
 			standing.overlays	+= bloodsies
@@ -720,7 +720,7 @@ var/global/list/damage_icon_parts = list()
 			drop_l_hand()
 			drop_r_hand()
 
-		if(wear_suit.blood_DNA && wear_suit.blood_DNA.len)
+		if(wear_suit.blood_DNA)
 			var/obj/item/clothing/suit/S = wear_suit
 			var/image/bloodsies = image("icon" = species.blood_mask, "icon_state" = "[S.blood_overlay_type]blood")
 			bloodsies.color = wear_suit.blood_color
@@ -756,7 +756,7 @@ var/global/list/damage_icon_parts = list()
 		else
 			standing = image("icon" = 'icons/mob/mask.dmi', "icon_state" = "[wear_mask.icon_state]")
 
-		if(!istype(wear_mask, /obj/item/clothing/mask/smokable/cigarette) && wear_mask.blood_DNA && wear_mask.blood_DNA.len)
+		if(!istype(wear_mask, /obj/item/clothing/mask/smokable/cigarette) && wear_mask.blood_DNA)
 			var/image/bloodsies = image("icon" = species.blood_mask, "icon_state" = "maskblood")
 			bloodsies.color = wear_mask.blood_color
 			standing.overlays	+= bloodsies

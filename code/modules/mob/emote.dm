@@ -37,7 +37,7 @@
 			if(findtext(message," snores.")) //Because we have so many sleeping people.
 				break
 			if(M.stat == 2 && (M.client.prefs.toggles & CHAT_GHOSTSIGHT) && !(M in viewers(src,null)))
-				M.show_message(message)
+				M.show_message("(<a href='?src=\ref[M];speakerinfo=\ref[src]'>?</a>)(<a href='byond://?src=\ref[M];track=\ref[src]'>f</a>)[message]")
 
 		for(var/I in view(world.view, get_turf(usr))) //get_turf is needed to stop weirdness with x-ray.
 			if(istype(I, /mob/))

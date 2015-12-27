@@ -47,7 +47,7 @@ var/religion_name = null
 	return "Nyx"
 
 /proc/station_name()
-	if (station_name)
+	if(station_name)
 		return station_name
 
 	var/random = rand(1,5)
@@ -59,6 +59,7 @@ var/religion_name = null
 		station_name = name + " "
 
 	// Prefix
+	Get_Holiday()
 	switch(Holiday)
 		//get normal name
 		if(null,"",0)
@@ -98,7 +99,7 @@ var/religion_name = null
 
 
 	if (config && config.server_name)
-		world.name = "[config.server_name]: [name]"
+		world.name = "[config.server_name]: [station_name]"
 	else
 		world.name = station_name
 

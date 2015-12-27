@@ -20,7 +20,7 @@
 			var/remove_broken = "You remove the broken plating."
 			var/pry_off = "You forcefully pry off the planks, destroying them in the process."
 			proc/remove(var/args = null)
-				return "You remove the [args ? translation(args) : "floor"]."
+				return "You remove the [args ? translation(args) : args]."
 			var/unscrew = "You unscrew the planks."
 			var/more_rods = "You need more rods."
 			var/reinforcing = "Reinforcing the floor..."
@@ -57,20 +57,6 @@
 					name = "iron sand"
 				snow
 					name = "snow"
-			shuttle
-				name = "shuttle"
-
-				wall
-					name = "wall"
-				floor
-					name = "floor"
-				plating
-					name = "plating"
-				floor4
-					name = "brig floor"
-
-					vox
-						name = "skipjack floor"
 			beach
 				name = "beach"
 
@@ -84,6 +70,20 @@
 				name = "grass patch"
 			carpet
 				name = "carpet"
+		shuttle
+			name = "shuttle"
+
+			wall
+				name = "wall"
+			floor
+				name = "floor"
+			plating
+				name = "plating"
+			floor4
+				name = "brig floor"
+
+				vox
+					name = "skipjack floor"
 		wall
 			name = "wall"
 			proc/name()
@@ -111,8 +111,8 @@
 			proc/reinf_crumbly()	return "\The [refObj:reinf_material:display_name] feels porous and crumbly."
 			proc/crumbles()	return "\The [refObj:material.display_name] crumbles under your touch!"
 			var/push = "You push the wall, but nothing happens."
-			proc/burn_fungi(var/args = null) return "You burn away the fungi with \the [args ? translation(args) : "welder"]."
-			proc/crumbles_force(var/args = null) return "\The [GetVar()] crumbles away under the force of your [args ? translation(args) : "weapon"]."
+			proc/burn_fungi(var/args = null) return "You burn away the fungi with \the [args ? translation(args) : args]."
+			proc/crumbles_force(var/args = null) return "\The [GetVar()] crumbles away under the force of your [args ? translation(args) : args]."
 			proc/thermit_eblade(var/args = null) return "You slash \the [GetVar()] with \the [args ? translation(args) : "energy blade"]; the thermite ignites!"
 			proc/start_repear()	return "You start repairing the damage to [GetVar()]."
 			proc/finish_repear()	return "You finish repairing the damage to [GetVar()]."

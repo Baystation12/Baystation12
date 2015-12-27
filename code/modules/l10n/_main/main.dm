@@ -12,7 +12,7 @@
 
 	examine(args = null)
 		var/result = "\icon[refObj] That's [GenderForm(gender,"a","a","a","some")] "
-		if(refObj:blood_DNA && refObj:blood_DNA.len && !istype(refObj, /obj/effect/decal))
+		if(refObj:blood_DNA && !istype(refObj, /obj/effect/decal))
 			if(refObj:blood_color != "#030303")
 				result += "<span class='danger'>blood-stained</span> [GetVar()][args["infix"]]!"
 			else

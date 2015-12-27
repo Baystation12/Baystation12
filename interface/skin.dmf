@@ -249,7 +249,7 @@ macro "borghotkeymode"
 		is-disabled = false
 	elem 
 		name = "F6"
-		command = "Player-Panel-New"
+		command = "PP-New"
 		is-disabled = false
 	elem 
 		name = "F7"
@@ -443,7 +443,7 @@ macro "macro"
 		is-disabled = false
 	elem 
 		name = "F6"
-		command = "Player-Panel-New"
+		command = "PP-New"
 		is-disabled = false
 	elem 
 		name = "F7"
@@ -725,7 +725,7 @@ macro "hotkeymode"
 		is-disabled = false
 	elem 
 		name = "F6"
-		command = "Player-Panel-New"
+		command = "PP-New"
 		is-disabled = false
 	elem 
 		name = "F7"
@@ -915,7 +915,7 @@ macro "borgmacro"
 		is-disabled = false
 	elem 
 		name = "F6"
-		command = "Player-Panel-New"
+		command = "PP-New"
 		is-disabled = false
 	elem 
 		name = "F7"
@@ -1312,7 +1312,7 @@ window "mainwindow"
 		right-click = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		on-size = ""
-		title = "Space Station 13"
+		title = ""
 		titlebar = true
 		statusbar = true
 		can-close = true
