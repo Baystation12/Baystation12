@@ -12,7 +12,7 @@
 
 /obj/structure/mopbucket/New()
 	create_reagents(100)
-
+	..()
 
 /obj/structure/mopbucket/examine(mob/user)
 	if(..(user, 1))

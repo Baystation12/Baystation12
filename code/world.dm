@@ -24,6 +24,11 @@ var/global/datum/global_init/init = new ()
 
 	qdel(src) //we're done
 
+/datum/global_init/init_observers()
+	return
+
+/datum/global_init/destroy_observers()
+	return
 
 /world
 	mob = /mob/new_player

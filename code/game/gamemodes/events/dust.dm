@@ -53,6 +53,7 @@ The "dust" will damage the hull of the station causin minor hull breaches.
 
 
 	New()
+		..()
 		var/startx = 0
 		var/starty = 0
 		var/endy = 0
