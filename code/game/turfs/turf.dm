@@ -69,7 +69,7 @@
 
 /turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
-		usr << "\red Movement is admin-disabled." //This is to identify lag problems
+		usr << "\red [translation(src,"movement_disabled")]" //This is to identify lag problems
 		return
 	if (!mover || !isturf(mover.loc))
 		return 1
@@ -112,7 +112,7 @@
 
 /turf/Entered(atom/atom as mob|obj)
 	if(movement_disabled)
-		usr << "\red Movement is admin-disabled." //This is to identify lag problems
+		usr << "\red [translation(src,"movement_disabled")]" //This is to identify lag problems
 		return
 	..()
 //vvvvv Infared beam stuff vvvvv
@@ -408,5 +408,5 @@
 			if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
 				qdel(O)
 	else
-		user << "<span class='warning'>\The [source] is too dry to wash that.</span>"
+		user << "<span class='warning'>[translation(src,"clean",1,source)]</span>"
 	source.reagents.trans_to_turf(src, 1, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
