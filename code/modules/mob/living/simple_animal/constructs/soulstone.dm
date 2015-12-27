@@ -72,7 +72,7 @@
 				A.status_flags &= ~GODMODE
 				A.canmove = 1
 				A << "<b>You have been released from your prison, but you are still bound to [U.name]'s will. Help them suceed in their goals at all costs.</b>"
-				A.loc = U.loc
+				A.forceMove(U.loc)
 				A.cancel_camera()
 				src.icon_state = "soulstone"
 	attack_self(U)
@@ -102,16 +102,16 @@
 	if(!istype(T))
 		return;
 	if(src.imprinted != "empty")
-		U << "\red <b>Capture failed!</b>: \black The soul stone has already been imprinted with [src.imprinted]'s mind!"
+		U << "<span class='danger'>Capture failed!</span>: The soul stone has already been imprinted with [src.imprinted]'s mind!"
 		return
 	if ((T.health + T.halloss) > config.health_threshold_crit && T.stat != DEAD)
-		U << "\red <b>Capture failed!</b>: \black Kill or maim the victim first!"
+		U << "<span class='danger'>Capture failed!</span>: Kill or maim the victim first!"
 		return
 	if(T.client == null)
-		U << "\red <b>Capture failed!</b>: \black The soul has already fled it's mortal frame."
+		U << "<span class='danger'>Capture failed!</span>: The soul has already fled it's mortal frame."
 		return
 	if(src.contents.len)
-		U << "\red <b>Capture failed!</b>: \black The soul stone is full! Use or free an existing soul to make room."
+		U << "<span class='danger'>Capture failed!</span>: The soul stone is full! Use or free an existing soul to make room."
 		return
 
 	for(var/obj/item/W in T)
@@ -146,7 +146,7 @@
 	src.icon_state = "soulstone2"
 	src.name = "Soul Stone: [S.real_name]"
 	S << "Your soul has been captured! You are now bound to [U.name]'s will, help them suceed in their goals at all costs."
-	U << "\blue <b>Capture successful!</b>: \black [T.real_name]'s soul has been ripped from their body and stored within the soul stone."
+	U << "<span class='notice'>Capture successful!</span> : [T.real_name]'s soul has been ripped from their body and stored within the soul stone."
 	U << "The soulstone has been imprinted with [S.real_name]'s mind, it will no longer react to other souls."
 	src.imprinted = "[S.name]"
 	qdel(T)
@@ -155,13 +155,13 @@
 	if(!istype(T))
 		return;
 	if (T.stat == DEAD)
-		U << "\red <b>Capture failed!</b>: \black The shade has already been banished!"
+		U << "<span class='danger'>Capture failed!</span>: The shade has already been banished!"
 		return
 	if(src.contents.len)
-		U << "\red <b>Capture failed!</b>: \black The soul stone is full! Use or free an existing soul to make room."
+		U << "<span class='danger'>Capture failed!</span>: The soul stone is full! Use or free an existing soul to make room."
 		return
 	if(T.name != src.imprinted)
-		U << "\red <b>Capture failed!</b>: \black The soul stone has already been imprinted with [src.imprinted]'s mind!"
+		U << "<span class='danger'>Capture failed!</span>: The soul stone has already been imprinted with [src.imprinted]'s mind!"
 		return
 
 	T.loc = src //put shade in stone
@@ -171,11 +171,11 @@
 	src.icon_state = "soulstone2"
 
 	T << "Your soul has been recaptured by the soul stone, its arcane energies are reknitting your ethereal form"
-	U << "\blue <b>Capture successful!</b>: \black [T.name]'s has been recaptured and stored within the soul stone."
+	U << "<span class='notice'>Capture successful!</span> : [T.name]'s has been recaptured and stored within the soul stone."
 /obj/item/device/soulstone/proc/transfer_construct(var/obj/structure/constructshell/T,var/mob/U)
 	var/mob/living/simple_animal/shade/A = locate() in src
 	if(!A)
-		U << "\red <b>Creation failed!</b>: \black The soul stone is empty! Go kill someone!"
+		U << "<span class='danger'>Capture failed!</span>: The soul stone is empty! Go kill someone!"
 		return;
 	var/construct_class = alert(U, "Please choose which type of construct you wish to create.",,"Juggernaut","Wraith","Artificer")
 	switch(construct_class)
