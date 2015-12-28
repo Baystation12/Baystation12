@@ -183,7 +183,7 @@ var/list/ai_verbs_default = list(
 	src << "<B>To look at other parts of the station, click on yourself to get a camera menu.</B>"
 	src << "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>"
 	src << "To use something, simply click on it."
-	src << "Use say :b to speak to your cyborgs through binary. Use say :h to speak from an active holopad."
+	src << "Use say [get_language_prefix()]b to speak to your cyborgs through binary. Use say :h to speak from an active holopad."
 	src << "For department channels, use the following say commands:"
 
 	var/radio_text = ""
