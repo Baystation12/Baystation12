@@ -1,5 +1,5 @@
 /datum/language/diona
-	name = "Rootspeak"
+	name = LANGUAGE_ROOTSPEAK
 	desc = "A creaking, subvocal language spoken instinctively by the Dionaea. Due to the unique makeup of the average Diona, a phrase of Rootspeak can be a combination of anywhere from one to twelve individual voices and notes."
 	speech_verb = "creaks and rustles"
 	ask_verb = "creaks"
@@ -15,7 +15,7 @@
 	return new_name
 
 /datum/language/unathi
-	name = "Sinta'unathi"
+	name = LANGUAGE_UNATHI
 	desc = "The common language of Moghes, composed of sibilant hisses and rattles. Spoken natively by Unathi."
 	speech_verb = "hisses"
 	ask_verb = "hisses"
@@ -33,7 +33,7 @@
 	return capitalize(new_name)
 
 /datum/language/tajaran
-	name = "Siik'tajr"
+	name = LANGUAGE_SIIK_TAJR
 	desc = "The traditionally employed tongue of Ahdomai, composed of expressive yowls and chirps. Native to the Tajaran."
 	speech_verb = "mrowls"
 	ask_verb = "mrowls"
@@ -56,7 +56,7 @@
 	return new_name
 
 /datum/language/skrell
-	name = "Skrellian"
+	name = LANGUAGE_SKRELLIAN
 	desc = "A melodic and complex language spoken by the Skrell of Qerrbalak. Some of the notes are inaudible to humans."
 	speech_verb = "warbles"
 	ask_verb = "warbles"
@@ -67,7 +67,7 @@
 	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix","*","!")
 
 /datum/language/human
-	name = "Sol Common"
+	name = LANGUAGE_SOL_COMMON
 	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."
 	speech_verb = "says"
 	whisper_verb = "whispers"
@@ -112,7 +112,7 @@
 	return pick(ai_names)
 
 /datum/language/resomi
-	name = "Resomi"
+	name = LANGUAGE_RESOMI
 	desc = "A trilling language spoken by the diminutive Resomi."
 	speech_verb = "chirps"
 	ask_verb = "chirrups"
