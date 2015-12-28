@@ -95,7 +95,7 @@
 		return ..()
 
 /datum/language/machine
-	name = "Encoded Audio Language"
+	name = LANGUAGE_EAL
 	desc = "A language of encoded tones that allow for IPCs to communicate auditorily between each other in a manner that allows for easier transfer of information."
 	speech_verb = "beeps"
 	ask_verb = "beeps"
