@@ -16,7 +16,7 @@
 	. += "<b>Language Keys</b><br>"
 	. += " [english_list(pref.language_prefixes, and_text = " ", comma_text = " ")] <a href='?src=\ref[src];change_prefix=1'>Change</a> <a href='?src=\ref[src];reset_prefix=1'>Reset</a><br>"
 
-/datum/category_item/player_setup_item/player_global/language/OnTopic(var/href,var/list/href_list, var/mob/user)
+/datum/category_item/player_setup_item/player_global/language/OnTopic(var/href, var/list/href_list, var/mob/user)
 	if(href_list["change_prefix"])
 		var/char
 		var/keys[0]
@@ -47,6 +47,9 @@
 
 
 /datum/category_item/player_setup_item/player_global/language/update_setup(var/savefile/preferences, var/savefile/character)
+	if(!preferences || !character)
+		return
+
 	if(preferences["version"] == 11)
 		var/list/prefixes = character["language_prefixes"]
 		if(istype(prefixes) && prefixes.len)
