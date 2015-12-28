@@ -135,7 +135,21 @@
 		var/obj/item/weapon/grab/G = O
 		user << "<span class='warning'>This is ridiculous. You can not fit \the [G.affecting] in this [src].</span>"
 		return 1
+	else if(istype(O,/obj/item/weapon/crowbar))
+		user.visible_message( \
+			"<span class='notice'>\The [user] begins [src.anchored ? "dislodging" : "prying"] the microwave [src.anchored ? "out of" : "into"] the frame.</span>", \
+			"<span class='notice'>You attempt to [src.anchored ? "dislodge" : "pry"] the microwave [src.anchored ? "out of" : "into"] the frame.</span>"
+			)
+		if (do_after(user,20))
+			user.visible_message( \
+			"<span class='notice'>\The [user] [src.anchored ? "dislodges" : "prys"] the microwave [src.anchored ? "out of" : "into"] the frame.</span>", \
+			"<span class='notice'>You [src.anchored ? "dislodge" : "pry"] the microwave [src.anchored ? "out of" : "into"] the frame.</span>"
+			)
+			src.anchored = !src.anchored
+		else
+			user << "<span class='notice'>You decide not to do that.</span>"
 	else
+
 		user << "<span class='warning'>You have no idea what you can cook with this [O].</span>"
 	..()
 	src.updateUsrDialog()
