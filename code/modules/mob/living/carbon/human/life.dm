@@ -1023,13 +1023,6 @@
 		else
 			stat = CONSCIOUS
 
-		//Periodically double-check embedded_flag
-		if(embedded_flag && !(life_tick % 10))
-			var/list/E
-			E = get_visible_implants(0)
-			if(!E.len)
-				embedded_flag = 0
-
 		// Check everything else.
 
 		//Periodically double-check embedded_flag
