@@ -97,6 +97,7 @@
 	spark_system.attach(src)
 
 	add_language("Robot Talk", 1)
+	add_language(LANGUAGE_EAL, 1)
 
 	wires = new(src)
 
@@ -155,7 +156,6 @@
 /mob/living/silicon/robot/proc/init()
 	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
 	laws = new /datum/ai_laws/nanotrasen()
-	additional_law_channels["Binary"] = ":b"
 	var/new_ai = select_active_ai_with_fewest_borgs()
 	if(new_ai)
 		lawupdate = 1

@@ -133,7 +133,6 @@ var/list/ai_verbs_default = list(
 	aiRadio = new(src)
 	common_radio = aiRadio
 	aiRadio.myAi = src
-	additional_law_channels["Binary"] = ":b"
 	additional_law_channels["Holopad"] = ":h"
 
 	aiCamera = new/obj/item/device/camera/siliconcam/ai_camera(src)
@@ -144,12 +143,14 @@ var/list/ai_verbs_default = list(
 	//Languages
 	add_language("Robot Talk", 1)
 	add_language("Galactic Common", 1)
-	add_language("Sol Common", 0)
-	add_language("Sinta'unathi", 0)
-	add_language("Siik'tajr", 0)
-	add_language("Skrellian", 0)
-	add_language("Tradeband", 1)
-	add_language("Gutter", 0)
+	add_language(LANGUAGE_EAL, 1)
+	add_language(LANGUAGE_SOL_COMMON, 0)
+	add_language(LANGUAGE_UNATHI, 0)
+	add_language(LANGUAGE_SIIK_TAJR, 0)
+	add_language(LANGUAGE_SKRELLIAN, 0)
+	add_language(LANGUAGE_RESOMI, 0)
+	add_language(LANGUAGE_TRADEBAND, 1)
+	add_language(LANGUAGE_GUTTER, 0)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -183,7 +184,7 @@ var/list/ai_verbs_default = list(
 	src << "<B>To look at other parts of the station, click on yourself to get a camera menu.</B>"
 	src << "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>"
 	src << "To use something, simply click on it."
-	src << "Use say :b to speak to your cyborgs through binary. Use say :h to speak from an active holopad."
+	src << "Use say [get_language_prefix()]b to speak to your cyborgs through binary. Use say :h to speak from an active holopad."
 	src << "For department channels, use the following say commands:"
 
 	var/radio_text = ""
