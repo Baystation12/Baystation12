@@ -100,7 +100,7 @@
 	icon_state = "emergencyhelm"
 	item_state = "emergencyhelm"
 	desc = "A simple helmet with a built in light, smells like mothballs."
-
+	flash_protection = FLASH_PROTECTION_NONE
 
 /obj/item/clothing/suit/space/emergency
 	name = "Emergency Softsuit"

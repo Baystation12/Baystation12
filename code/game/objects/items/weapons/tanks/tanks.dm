@@ -1,9 +1,17 @@
 #define TANK_MAX_RELEASE_PRESSURE (3*ONE_ATMOSPHERE)
 #define TANK_DEFAULT_RELEASE_PRESSURE 24
+#define TANK_IDEAL_PRESSURE 1015 //Arbitrary.
+
+var/list/global/tank_gauge_cache = list()
 
 /obj/item/weapon/tank
 	name = "tank"
 	icon = 'icons/obj/tank.dmi'
+
+	var/gauge_icon = "indicator_tank"
+	var/last_gauge_pressure
+	var/gauge_cap = 6
+
 	flags = CONDUCT
 	slot_flags = SLOT_BACK
 	w_class = 3
@@ -14,6 +22,10 @@
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 4
+
+	sprite_sheets = list(
+		"Resomi" = 'icons/mob/species/resomi/back.dmi'
+		)
 
 	var/datum/gas_mixture/air_contents = null
 	var/distribute_pressure = ONE_ATMOSPHERE
@@ -27,8 +39,8 @@
 	src.air_contents = new /datum/gas_mixture()
 	src.air_contents.volume = volume //liters
 	src.air_contents.temperature = T20C
-
 	processing_objects.Add(src)
+	update_gauge()
 	return
 
 /obj/item/weapon/tank/Destroy()
@@ -37,53 +49,31 @@
 
 	processing_objects.Remove(src)
 
+	if(istype(loc, /obj/item/device/transfer_valve))
+		var/obj/item/device/transfer_valve/TTV = loc
+		TTV.remove_tank(src)
+
 	..()
 
 /obj/item/weapon/tank/examine(mob/user)
-	var/obj/icon = src
-	if (istype(src.loc, /obj/item/assembly))
-		icon = src.loc
-	if (!in_range(src, user))
-		if (icon == src) user << "<span class='notice'>It's \a \icon[icon][src]! If you want any more information you'll need to get closer.</span>"
-		return
-
-	var/celsius_temperature = src.air_contents.temperature-T0C
-	var/descriptive
-	var/status
-
-	if (celsius_temperature < 20)
-		descriptive = "cold"
-		status = "warning"
-	else if (celsius_temperature < 40)
-		descriptive = "room temperature"
-		status = "notice"
-	else if (celsius_temperature < 80)
-		descriptive = "lukewarm"
-		status = "warning"
-	else if (celsius_temperature < 100)
-		descriptive = "warm"
-		status = "warning"
-	else if (celsius_temperature < 300)
-		descriptive = "hot"
-		status = "danger"
-	else
-		descriptive = "furiously hot"
-		status = "danger"
-
-	user << "<span class='[status]'>\The \icon[icon][src] feels [descriptive]</span>"
-
-	return
-
-/obj/item/weapon/tank/blob_act()
-	if(prob(50))
-		var/turf/location = src.loc
-		if (!( istype(location, /turf) ))
-			qdel(src)
-
-		if(src.air_contents)
-			location.assume_air(air_contents)
-
-		qdel(src)
+	. = ..(user, 0)
+	if(.)
+		var/celsius_temperature = air_contents.temperature - T0C
+		var/descriptive
+		switch(celsius_temperature)
+			if(300 to INFINITY)
+				descriptive = "furiously hot"
+			if(100 to 300)
+				descriptive = "hot"
+			if(80 to 100)
+				descriptive = "warm"
+			if(40 to 80)
+				descriptive = "lukewarm"
+			if(20 to 40)
+				descriptive = "room temperature"
+			else
+				descriptive = "cold"
+		user << "<span class='notice'>\The [src] feels [descriptive].</span>"
 
 /obj/item/weapon/tank/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -238,8 +228,28 @@
 /obj/item/weapon/tank/process()
 	//Allow for reactions
 	air_contents.react() //cooking up air tanks - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
+	if(gauge_icon)
+		update_gauge()
 	check_status()
 
+/obj/item/weapon/tank/proc/update_gauge()
+	var/gauge_pressure = 0
+	if(air_contents)
+		gauge_pressure = air_contents.return_pressure()
+		if(gauge_pressure > TANK_IDEAL_PRESSURE)
+			gauge_pressure = -1
+		else
+			gauge_pressure = round((gauge_pressure/TANK_IDEAL_PRESSURE)*gauge_cap)
+
+	if(gauge_pressure == last_gauge_pressure)
+		return
+
+	last_gauge_pressure = gauge_pressure
+	overlays.Cut()
+	var/indicator = "[gauge_icon][(gauge_pressure == -1) ? "overload" : gauge_pressure]"
+	if(!tank_gauge_cache[indicator])
+		tank_gauge_cache[indicator] = image(icon, indicator)
+	overlays += tank_gauge_cache[indicator]
 
 /obj/item/weapon/tank/proc/check_status()
 	//Handle exploding, leaking, and rupturing of the tank
@@ -271,7 +281,10 @@
 		qdel(src)
 
 	else if(pressure > TANK_RUPTURE_PRESSURE)
-		//world << "<span class='notice'>[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]</span>"
+		#ifdef FIREDBG
+		log_debug("<span class='warning'>[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]</span>")
+		#endif
+
 		if(integrity <= 0)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)
@@ -283,7 +296,10 @@
 			integrity--
 
 	else if(pressure > TANK_LEAK_PRESSURE)
-		//world << "<span class='notice'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>"
+		#ifdef FIREDBG
+		log_debug("<span class='warning'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>")
+		#endif
+
 		if(integrity <= 0)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)

@@ -57,6 +57,12 @@
 
 	RefreshParts()
 	update_icon()
+	set_expansion(/datum/expansion/multitool, new/datum/expansion/multitool/store(src))
+
+/obj/machinery/clonepod/Destroy()
+    if(connected)
+        connected.release_pod(src)
+    return ..()
 
 /obj/machinery/clonepod/attack_ai(mob/user as mob)
 
@@ -131,6 +137,7 @@
 	else
 		H.dna = R.dna
 	H.UpdateAppearance()
+	H.sync_organ_dna()
 	if(heal_level < 60)
 		randmutb(H) //Sometimes the clones come out wrong.
 		H.dna.UpdateSE()
@@ -182,6 +189,8 @@
 			return
 
 		else if((occupant.health >= heal_level) && (!eject_wait))
+			playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
+			src.audible_message("\The [src] signals that the cloning process is complete.")
 			connected_message("Cloning Process Complete.")
 			locked = 0
 			go_out()
@@ -237,22 +246,17 @@
 				user.visible_message("[user] secures [src] to the floor.", "You secure [src] to the floor.")
 			else
 				user.visible_message("[user] unsecures [src] from the floor.", "You unsecure [src] from the floor.")
-	else if(istype(W, /obj/item/device/multitool))
-		var/obj/item/device/multitool/M = W
-		M.connecting = src
-		user << "<span class='notice'>You load connection data from [src] to [M].</span>"
-		return
 	else
 		..()
 
 /obj/machinery/clonepod/emag_act(var/remaining_charges, var/mob/user)
 	if(isnull(occupant))
-		return
+		return NO_EMAG_ACT
 	user << "You force an emergency ejection."
 	locked = 0
 	go_out()
 	return 1
-	
+
 //Put messages in the connected computer's temp var for display.
 /obj/machinery/clonepod/proc/connected_message(var/message)
 	if((isnull(connected)) || (!istype(connected, /obj/machinery/computer/cloning)))

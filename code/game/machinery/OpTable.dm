@@ -41,10 +41,6 @@
 		else
 	return
 
-/obj/machinery/optable/blob_act()
-	if(prob(75))
-		qdel(src)
-
 /obj/machinery/optable/attack_hand(mob/user as mob)
 	if (HULK in usr.mutations)
 		visible_message("<span class='danger'>\The [usr] destroys \the [src]!</span>")

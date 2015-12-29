@@ -8,8 +8,8 @@
 	var/total_burn  = 0
 	var/total_brute = 0
 	for(var/obj/item/organ/external/O in organs)	//hardcoded to streamline things a bit
-		if(O.status & ORGAN_ROBOT)
-			continue //robot limbs don't count towards shock and crit
+		if(O.status & ORGAN_ROBOT && !O.vital)
+			continue //*non-vital* robot limbs don't count towards shock and crit
 		total_brute += O.brute_dam
 		total_burn  += O.burn_dam
 
@@ -85,9 +85,7 @@
 
 
 /mob/living/carbon/human/adjustBruteLoss(var/amount)
-	if(species && species.brute_mod)
-		amount = amount*species.brute_mod
-
+	amount = amount*species.brute_mod
 	if(amount > 0)
 		take_overall_damage(amount, 0)
 	else
@@ -95,9 +93,7 @@
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/adjustFireLoss(var/amount)
-	if(species && species.burn_mod)
-		amount = amount*species.burn_mod
-
+	amount = amount*species.burn_mod
 	if(amount > 0)
 		take_overall_damage(0, amount)
 	else
@@ -105,9 +101,7 @@
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/proc/adjustBruteLossByPart(var/amount, var/organ_name, var/obj/damage_source = null)
-	if(species && species.brute_mod)
-		amount = amount*species.brute_mod
-
+	amount = amount*species.brute_mod
 	if (organ_name in organs_by_name)
 		var/obj/item/organ/external/O = get_organ(organ_name)
 
@@ -120,9 +114,7 @@
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/proc/adjustFireLossByPart(var/amount, var/organ_name, var/obj/damage_source = null)
-	if(species && species.burn_mod)
-		amount = amount*species.burn_mod
-
+	amount = amount*species.burn_mod
 	if (organ_name in organs_by_name)
 		var/obj/item/organ/external/O = get_organ(organ_name)
 
@@ -205,7 +197,8 @@
 	if(species.flags & NO_BREATHE)
 		oxyloss = 0
 	else
-		..()
+		amount = amount*species.oxy_mod
+		..(amount)
 
 /mob/living/carbon/human/setOxyLoss(var/amount)
 	if(species.flags & NO_BREATHE)
@@ -222,7 +215,8 @@
 	if(species.flags & NO_POISON)
 		toxloss = 0
 	else
-		..()
+		amount = amount*species.toxins_mod
+		..(amount)
 
 /mob/living/carbon/human/setToxLoss(var/amount)
 	if(species.flags & NO_POISON)
@@ -361,7 +355,7 @@ This function restores all organs.
 	//visible_message("Hit debug. [damage] | [damagetype] | [def_zone] | [blocked] | [sharp] | [used_weapon]")
 
 	//Handle other types of damage
-	if((damagetype != BRUTE) && (damagetype != BURN))
+	if(!stat && damagetype != BRUTE && damagetype != BURN)
 		if(damagetype == HALLOSS && !(species && (species.flags & NO_PAIN)))
 			if ((damage > 25 && prob(20)) || (damage > 50 && prob(60)))
 				emote("scream")
@@ -388,14 +382,12 @@ This function restores all organs.
 	switch(damagetype)
 		if(BRUTE)
 			damageoverlaytemp = 20
-			if(species && species.brute_mod)
-				damage = damage*species.brute_mod
+			damage = damage*species.brute_mod
 			if(organ.take_damage(damage, 0, sharp, edge, used_weapon))
 				UpdateDamageIcon()
 		if(BURN)
 			damageoverlaytemp = 20
-			if(species && species.burn_mod)
-				damage = damage*species.burn_mod
+			damage = damage*species.burn_mod
 			if(organ.take_damage(0, damage, sharp, edge, used_weapon))
 				UpdateDamageIcon()
 

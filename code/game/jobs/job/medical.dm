@@ -18,7 +18,9 @@
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_genetics, access_heads,
 			access_chemistry, access_virology, access_cmo, access_surgery, access_RC_announce,
 			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva, access_external_airlocks)
+
 	minimal_player_age = 10
+	ideal_character_age = 50
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -205,7 +207,7 @@
 	selection_color = "#ffeef0"
 	economic_modifier = 4
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist)
-	minimal_access = list(access_medical, access_medical_equip, access_eva, access_maint_tunnels, access_external_airlocks)
+	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
 	alt_titles = list("Emergency Medical Technician")
 
 	equip(var/mob/living/carbon/human/H)

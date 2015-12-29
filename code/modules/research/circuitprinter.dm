@@ -79,10 +79,6 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	else
 		icon_state = "circuit_imprinter"
 
-/obj/machinery/r_n_d/circuit_imprinter/blob_act()
-	if(prob(50))
-		qdel(src)
-
 /obj/machinery/r_n_d/circuit_imprinter/proc/TotalMaterials()
 	var/t = 0
 	for(var/f in materials)
@@ -199,7 +195,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 		reagents.remove_reagent(C, D.chemicals[C] * mat_efficiency)
 
 	if(D.build_path)
-		var/obj/new_item = new D.build_path(src)
+		var/obj/new_item = D.Fabricate(src, src)
 		new_item.loc = loc
 		if(mat_efficiency != 1) // No matter out of nowhere
 			if(new_item.matter && new_item.matter.len > 0)

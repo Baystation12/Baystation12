@@ -85,61 +85,47 @@
 
 	drone_progress = 0
 
-/mob/dead/verb/join_as_drone()
-
+/mob/dead/observer/verb/join_as_drone()
 	set category = "Ghost"
 	set name = "Join As Drone"
 	set desc = "If there is a powered, enabled fabricator in the game world with a prepared chassis, join as a maintenance drone."
+	try_drone_spawn(src)
+
+/proc/try_drone_spawn(var/mob/user, var/obj/machinery/drone_fabricator/fabricator)
 
 	if(ticker.current_state < GAME_STATE_PLAYING)
-		src << "<span class='danger'>The game hasn't started yet!</span>"
+		user << "<span class='danger'>The game hasn't started yet!</span>"
 		return
 
 	if(!(config.allow_drone_spawn))
-		src << "<span class='danger'>That verb is not currently permitted.</span>"
+		user << "<span class='danger'>That verb is not currently permitted.</span>"
 		return
 
-	if (!src.stat)
+	if(jobban_isbanned(user,"Cyborg"))
+		user << "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>"
 		return
 
-	if (usr != src)
-		return 0 //something is terribly wrong
-
-	if(jobban_isbanned(src,"Cyborg"))
-		usr << "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>"
+	if(!user.MayRespawn(1, DRONE_SPAWN_DELAY))
 		return
 
-	if(!MayRespawn(1))
-		return
+	if(!fabricator)
 
-	var/deathtime = world.time - src.timeofdeath
-	var/deathtimeminutes = round(deathtime / 600)
-	var/pluralcheck = "minute"
-	if(deathtimeminutes == 0)
-		pluralcheck = ""
-	else if(deathtimeminutes == 1)
-		pluralcheck = " [deathtimeminutes] minute and"
-	else if(deathtimeminutes > 1)
-		pluralcheck = " [deathtimeminutes] minutes and"
-	var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
-
-	if (deathtime < 6000)
-		usr << "You have been dead for[pluralcheck] [deathtimeseconds] seconds."
-		usr << "You must wait 10 minutes to respawn as a drone!"
-		return
-
-	var/list/all_fabricators = list()
-	for(var/obj/machinery/drone_fabricator/DF in world)
-		if(DF.stat & NOPOWER || !DF.produce_drones)
-			continue
-		if(DF.drone_progress >= 100)
+		var/list/all_fabricators = list()
+		for(var/obj/machinery/drone_fabricator/DF in machines)
+			if((DF.stat & NOPOWER) || !DF.produce_drones || DF.drone_progress < 100)
+				continue
 			all_fabricators[DF.fabricator_tag] = DF
 
-	if(!all_fabricators.len)
-		src << "<span class='danger'>There are no available drone spawn points, sorry.</span>"
-		return
+		if(!all_fabricators.len)
+			user << "<span class='danger'>There are no available drone spawn points, sorry.</span>"
+			return
 
-	var/choice = input(src,"Which fabricator do you wish to use?") as null|anything in all_fabricators
-	if(choice)
-		var/obj/machinery/drone_fabricator/chosen_fabricator = all_fabricators[choice]
-		chosen_fabricator.create_drone(src.client)
+		var/choice = input(user,"Which fabricator do you wish to use?") as null|anything in all_fabricators
+		if(!choice || !all_fabricators[choice])
+			return
+		fabricator = all_fabricators[choice]
+
+	if(user && fabricator && !((fabricator.stat & NOPOWER) || !fabricator.produce_drones || fabricator.drone_progress < 100))
+		fabricator.create_drone(user.client)
+		return 1
+	return

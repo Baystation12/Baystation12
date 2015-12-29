@@ -162,10 +162,11 @@
 /mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	switch(message_mode)
 		if("intercom")
-			for(var/obj/item/device/radio/intercom/I in view(1))
-				I.talk_into(src, message, verb, speaking)
-				I.add_fingerprint(src)
-				used_radios += I
+			if(!src.restrained())
+				for(var/obj/item/device/radio/intercom/I in view(1))
+					I.talk_into(src, message, null, verb, speaking)
+					I.add_fingerprint(src)
+					used_radios += I
 		if("headset")
 			if(l_ear && istype(l_ear,/obj/item/device/radio))
 				var/obj/item/device/radio/R = l_ear

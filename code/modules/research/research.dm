@@ -98,7 +98,7 @@ research holder datum.
 		var/datum/design/A = known_designs[i]
 		if(A.id == D.id) // We are guaranteed to reach this if the ids are the same, because sort_string will also be the same
 			return
-		if(A.sort_string >= D.sort_string)
+		if(A.sort_string > D.sort_string)
 			known_designs.Insert(i, D)
 			return
 	known_designs.Add(D)

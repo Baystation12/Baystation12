@@ -62,8 +62,7 @@
 
 /obj/item/weapon/material/shard/Crossed(AM as mob|obj)
 	..()
-	
-	if(ismob(AM))
+	if(isliving(AM))
 		var/mob/M = AM
 		
 		if(M.buckled) //wheelchairs, office chairs, rollerbeds

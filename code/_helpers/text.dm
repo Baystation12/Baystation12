@@ -314,3 +314,19 @@ proc/TextPreview(var/string,var/len=40)
 	if(C && (C.prefs.toggles & CHAT_NOICONS))
 		return tagdesc
 	return "<IMG src='\ref[text_tag_icons.icon]' class='text_tag' iconstate='[tagname]'" + (tagdesc ? " alt='[tagdesc]'" : "") + ">"
+
+/proc/contains_az09(var/input)
+	for(var/i=1, i<=length(input), i++)
+		var/ascii_char = text2ascii(input,i)
+		switch(ascii_char)
+			// A  .. Z
+			if(65 to 90)			//Uppercase Letters
+				return 1
+			// a  .. z
+			if(97 to 122)			//Lowercase Letters
+				return 1
+
+			// 0  .. 9
+			if(48 to 57)			//Numbers
+				return 1
+	return 0

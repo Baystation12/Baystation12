@@ -17,6 +17,7 @@
 	var/list/eng = new()
 	var/list/med = new()
 	var/list/sci = new()
+	var/list/car = new()
 	var/list/civ = new()
 	var/list/bot = new()
 	var/list/misc = new()
@@ -67,6 +68,9 @@
 		if(real_rank in science_positions)
 			sci[name] = rank
 			department = 1
+		if(real_rank in cargo_positions)
+			car[name] = rank
+			department = 1
 		if(real_rank in civilian_positions)
 			civ[name] = rank
 			department = 1
@@ -99,6 +103,11 @@
 		dat += "<tr><th colspan=3>Science</th></tr>"
 		for(name in sci)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[sci[name]]</td><td>[isactive[name]]</td></tr>"
+			even = !even
+	if(car.len > 0)
+		dat += "<tr><th colspan=3>Cargo</th></tr>"
+		for(name in car)
+			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[car[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(civ.len > 0)
 		dat += "<tr><th colspan=3>Civilian</th></tr>"
@@ -157,7 +166,7 @@
 	if(H.mind && !player_is_antag(H.mind, only_offstation_roles = 1))
 		var/assignment = GetAssignment(H)
 
-		var/id = add_zero(num2hex(rand(1, 1.6777215E7)), 6)	//this was the best they could come up with? A large random number? *sigh*
+		var/id = generate_record_id()
 		//General Record
 		var/datum/data/record/G = CreateGeneralRecord(H, id)
 		G.fields["name"]		= H.real_name
@@ -212,6 +221,9 @@
 			L.fields["exploit_record"] = "No additional information acquired."
 		locked += L
 	return
+
+/proc/generate_record_id()
+	return add_zero(num2hex(rand(1, 65535)), 4)	//no point generating higher numbers because of the limitations of num2hex
 
 proc/get_id_photo(var/mob/living/carbon/human/H, var/assigned_role)
 	var/icon/preview_icon = null

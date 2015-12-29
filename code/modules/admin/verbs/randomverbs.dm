@@ -235,7 +235,7 @@ Ccomp's first proc.
 	var/list/mobs = list()
 	var/list/ghosts = list()
 	var/list/sortmob = sortAtom(mob_list)                           // get the mob list.
-	/var/any=0
+	var/any=0
 	for(var/mob/dead/observer/M in sortmob)
 		mobs.Add(M)                                             //filter it where it's only ghosts
 		any = 1                                                 //if no ghosts show up, any will just be 0
@@ -520,7 +520,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		if(! (C.stat & (BROKEN|NOPOWER) ) )
 			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( C.loc )
 			P.name = "'[command_name()] Update.'"
-			P.info = input
+			P.info = replacetext(input, "\n", "<br/>")
+			P.update_space(P.info)
 			P.update_icon()
 			C.messagetitle.Add("[command_name()] Update")
 			C.messagetext.Add(P.info)
@@ -536,7 +537,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	message_admins("[key_name_admin(src)] has created a command report", 1)
 	feedback_add_details("admin_verb","CCR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_admin_delete(atom/O as obj|mob|turf in world)
+/client/proc/cmd_admin_delete(atom/O as obj|mob|turf in range(world.view))
 	set category = "Admin"
 	set name = "Delete"
 
@@ -562,7 +563,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			src << "[job.title]: [job.total_positions]"
 	feedback_add_details("admin_verb","LFS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_admin_explosion(atom/O as obj|mob|turf in world)
+/client/proc/cmd_admin_explosion(atom/O as obj|mob|turf in range(world.view))
 	set category = "Special Verbs"
 	set name = "Explosion"
 
@@ -590,7 +591,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	else
 		return
 
-/client/proc/cmd_admin_emp(atom/O as obj|mob|turf in world)
+/client/proc/cmd_admin_emp(atom/O as obj|mob|turf in range(world.view))
 	set category = "Special Verbs"
 	set name = "EM Pulse"
 
@@ -778,7 +779,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(confirm != "Yes") return
 
 	var/choice
-	if(ticker.mode.name == "revolution" || ticker.mode.name == "confliction")
+	if(ticker.mode.auto_recall_shuttle)
 		choice = input("The shuttle will just return if you call it. Call anyway?") in list("Confirm", "Cancel")
 		if(choice == "Confirm")
 			emergency_shuttle.auto_recall = 1	//enable auto-recall
@@ -865,7 +866,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	message_admins("Admin [key_name_admin(usr)] has forced the players to have random appearances.", 1)
 
 	if(notifyplayers == "Yes")
-		world << "\blue <b>Admin [usr.key] has forced the players to have completely random identities!"
+		world << "\blue <b>Admin [usr.key] has forced the players to have completely random identities!</b>"
 
 	usr << "<i>Remember: you can always disable the randomness by using the verb again, assuming the round hasn't started yet</i>."
 

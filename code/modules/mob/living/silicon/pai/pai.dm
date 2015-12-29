@@ -4,8 +4,8 @@
 	icon_state = "repairbot"
 
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
-	small = 1
 	pass_flags = 1
+	mob_size = MOB_SMALL
 
 	var/network = "SS13"
 	var/obj/machinery/camera/current = null
@@ -117,13 +117,6 @@
 /mob/living/silicon/pai/check_eye(var/mob/user as mob)
 	if (!src.current)
 		return -1
-	return 0
-
-/mob/living/silicon/pai/blob_act()
-	if (src.stat != 2)
-		src.adjustBruteLoss(60)
-		src.updatehealth()
-		return 1
 	return 0
 
 /mob/living/silicon/pai/restrained()
@@ -379,6 +372,9 @@
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = card
 
+	//stop resting
+	resting = 0
+
 	// If we are being held, handle removing our holder from their inv.
 	var/obj/item/weapon/holder/H = loc
 	if(istype(H))
@@ -397,25 +393,13 @@
 	resting = 0
 	icon_state = "[chassis]"
 
-/mob/living/silicon/pai/start_pulling(var/atom/movable/AM)
-
-	if(istype(AM,/obj/item))
-		var/obj/item/O = AM
-		if(O.w_class == 1)
-			..()
-		else
-			src << "<span class='warning'>You are too small to pull that.</span>"
-	else
-		src << "<span class='warning'>You are too small to pull that.</span>"
-		return
-
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()
 	return 0
 
 // Handle being picked up.
-/mob/living/silicon/pai/get_scooped(var/mob/living/carbon/grabber)
-	var/obj/item/weapon/holder/H = ..()
+/mob/living/silicon/pai/get_scooped(var/mob/living/carbon/grabber, var/self_drop)
+	var/obj/item/weapon/holder/H = ..(grabber, self_drop)
 	if(!istype(H))
 		return
 	H.icon_state = "pai-[icon_state]"

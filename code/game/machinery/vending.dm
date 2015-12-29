@@ -148,7 +148,7 @@
 	wires = null
 	qdel(coin)
 	coin = null
-	..()
+	return ..()
 
 /obj/machinery/vending/ex_act(severity)
 	switch(severity)
@@ -168,15 +168,6 @@
 		else
 	return
 
-/obj/machinery/vending/blob_act()
-	if (prob(50))
-		spawn(0)
-			src.malfunction()
-			qdel(src)
-		return
-
-	return
-	
 /obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
 		src.emagged = 1
@@ -235,26 +226,25 @@
 		nanomanager.update_uis(src)
 		return
 	else if(istype(W, /obj/item/weapon/wrench))
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
+		if(anchored)
+			user.visible_message("[user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
+		else
+			user.visible_message("[user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
+
 		if(do_after(user, 20))
 			if(!src) return
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-			switch (anchored)
-				if (0)
-					anchored = 1
-					user.visible_message("\The [user] tightens the bolts securing \the [src] to the floor.", "You tighten the bolts securing \the [src] to the floor.")
-				if (1)
-					user.visible_message("\The [user] unfastens the bolts securing \the [src] to the floor.", "You unfasten the bolts securing \the [src] to the floor.")
-					anchored = 0
+			user << "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>"
+			anchored = !anchored
 		return
 
-	else if(src.panel_open)
+	else
 
 		for(var/datum/data/vending_product/R in product_records)
 			if(istype(W, R.product_path))
 				stock(R, user)
 				qdel(W)
-
-	else
+				return
 		..()
 
 /**
@@ -560,7 +550,7 @@
 
 /obj/machinery/vending/proc/stock(var/datum/data/vending_product/R, var/mob/user)
 	if(src.panel_open)
-		user << "<span class='notice'>You stock \the [src] with \a [R.product_name]</span>"
+		user << "<span class='notice'>You insert \the [src] in the product receptor.</span>"
 		R.amount++
 
 	nanomanager.update_uis(src)
@@ -692,7 +682,8 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale = 6,/obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice = 4,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice = 4,/obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice = 4,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/cream = 4,/obj/item/weapon/reagent_containers/food/drinks/cans/tonic = 8,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 8, /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 15,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/cola = 5, /obj/item/weapon/reagent_containers/food/drinks/bottle/space_up = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/space_mountain_wind = 5, /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/barflask = 2, /obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask = 2,
 					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 30,/obj/item/weapon/reagent_containers/food/drinks/ice = 9,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor = 2,/obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao = 2,
@@ -780,7 +771,7 @@
 	icon_state = "cigs"
 	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/flame/lighter/random = 4)
 	contraband = list(/obj/item/weapon/flame/lighter/zippo = 4)
-	premium = list(/obj/item/weapon/storage/fancy/cigar = 5)
+	premium = list(/obj/item/weapon/storage/fancy/cigar = 5,/obj/item/weapon/storage/fancy/cigarettes/killthroat = 5 )
 	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 15,/obj/item/weapon/storage/box/matches = 1,/obj/item/weapon/flame/lighter/random = 2)
 
 
@@ -837,7 +828,7 @@
 	icon_state = "sec"
 	icon_deny = "sec-deny"
 	req_access = list(access_security)
-	products = list(/obj/item/weapon/handcuffs = 8,/obj/item/weapon/grenade/flashbang = 4,/obj/item/device/flash = 5,
+	products = list(/obj/item/weapon/handcuffs = 8,/obj/item/weapon/grenade/flashbang = 4,/obj/item/weapon/grenade/chem_grenade/teargas = 4,/obj/item/device/flash = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 12,/obj/item/weapon/storage/box/evidence = 6)
 	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/weapon/storage/box/donut = 2)
 
@@ -975,3 +966,17 @@
 					/obj/item/weapon/screwdriver = 5,/obj/item/weapon/crowbar = 5)
 	//everything after the power cell had no amounts, I improvised.  -Sayu
 
+//FOR ACTORS GUILD - mainly props that cannot be spawned otherwise
+/obj/machinery/vending/props
+	name = "prop dispenser"
+	desc = "All the props an actor could need. Probably."
+	icon_state = "Theater"
+	products = list(/obj/structure/flora/pottedplant = 2, /obj/item/device/flashlight/lamp = 2, /obj/item/device/flashlight/lamp/green = 2, /obj/item/weapon/reagent_containers/food/drinks/jar = 1,
+					/obj/item/weapon/nullrod = 1, /obj/item/toy/cultsword = 4, /obj/item/toy/katana = 2, /obj/item/weapon/phone = 3)
+
+//FOR ACTORS GUILD - Containers
+/obj/machinery/vending/containers
+	name = "container dispenser"
+	desc = "A container that dispenses containers."
+	icon_state = "robotics"
+	products = list(/obj/structure/closet/crate/freezer = 2, /obj/structure/closet = 3, /obj/structure/closet/crate = 3)

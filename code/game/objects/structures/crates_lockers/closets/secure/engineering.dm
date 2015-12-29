@@ -148,5 +148,5 @@
 		new /obj/item/clothing/suit/storage/hazardvest(src)
 		new /obj/item/clothing/mask/gas(src)
 		new /obj/item/weapon/cartridge/atmos(src)
-		new /obj/item/taperoll/engineering(src)
+		new /obj/item/taperoll/atmos(src)
 		return

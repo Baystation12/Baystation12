@@ -133,13 +133,6 @@
 	name = "disk"
 	icon = 'icons/obj/items.dmi'
 
-/obj/item/weapon/disk/nuclear
-	name = "nuclear authentication disk"
-	desc = "Better keep this safe."
-	icon_state = "nucleardisk"
-	item_state = "card-id"
-	w_class = 2.0
-
 /*
 /obj/item/weapon/game_kit
 	name = "Gaming Kit"
@@ -174,6 +167,7 @@
 	w_class = 3.0
 	origin_tech = list(TECH_MATERIAL = 1)
 	var/breakouttime = 300	//Deciseconds = 30s = 0.5 minute
+	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/handcuffs.dmi')
 
 /obj/item/weapon/caution
 	desc = "Caution! Wet Floor!"

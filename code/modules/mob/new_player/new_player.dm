@@ -289,7 +289,7 @@
 
 
 	proc/AttemptLateSpawn(rank,var/spawning_at)
-		if (src != usr)
+		if(src != usr)
 			return 0
 		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
 			usr << "\red The round is either not ready, or has already finished..."
@@ -323,30 +323,14 @@
 			character.loc = C.loc
 
 			AnnounceCyborg(character, rank, "has been downloaded to the empty core in \the [character.loc.loc]")
-			ticker.mode.latespawn(character)
+			ticker.mode.handle_latejoin(character)
 
 			qdel(C)
 			qdel(src)
 			return
 
 		//Find our spawning point.
-		var/join_message
-		var/datum/spawnpoint/S
-
-		if(spawning_at)
-			S = spawntypes[spawning_at]
-
-		if(S && istype(S))
-			if(S.check_job_spawning(rank))
-				character.loc = pick(S.turfs)
-				join_message = S.msg
-			else
-				character << "Your chosen spawnpoint ([S.display_name]) is unavailable for your chosen job. Spawning you at the Arrivals shuttle instead."
-				character.loc = pick(latejoin)
-				join_message = "has arrived on the station"
-		else
-			character.loc = pick(latejoin)
-			join_message = "has arrived on the station"
+		var/join_message = job_master.LateSpawn(character, rank)
 
 		character.lastarea = get_area(loc)
 		// Moving wheelchair if they have one
@@ -354,7 +338,7 @@
 			character.buckled.loc = character.loc
 			character.buckled.set_dir(character.dir)
 
-		ticker.mode.latespawn(character)
+		ticker.mode.handle_latejoin(character)
 
 		if(character.mind.assigned_role != "Cyborg")
 			data_core.manifest_inject(character)
@@ -391,9 +375,11 @@
 				else						// Crew transfer initiated
 					dat += "<font color='red'>The station is currently undergoing crew transfer procedures.</font><br>"
 
-		dat += "Choose from the following open positions:<br>"
+		dat += "Choose from the following open/valid positions:<br>"
 		for(var/datum/job/job in job_master.occupations)
 			if(job && IsJobAvailable(job.title))
+				if(job.minimum_character_age && (client.prefs.age < job.minimum_character_age))
+					continue
 				var/active = 0
 				// Only players with the job assigned and AFK for less than 10 minutes count as active
 				for(var/mob/M in player_list) if(M.mind && M.client && M.mind.assigned_role == job.title && M.client.inactivity <= 10 * 60 * 10)
@@ -486,7 +472,7 @@
 		src << browse(null, "window=playersetup") //closes the player setup window
 
 	proc/has_admin_rights()
-		return client.holder.rights & R_ADMIN
+		return check_rights(R_ADMIN, 0, src)
 
 	proc/is_species_whitelisted(datum/species/S)
 		if(!S) return 1

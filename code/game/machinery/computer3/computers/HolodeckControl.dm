@@ -26,12 +26,12 @@
 		if(!interactable())
 			return
 		var/dat = "<h3>Current Loaded Programs</h3>"
-		dat += "<A href='?src=\ref[src];emptycourt'>((Empty Court)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];boxingcourt'>((Boxing Court)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];basketball'>((Basketball Court)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];thunderdomecourt'>((Thunderdome Court)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];beach'>((Beach)</font>)</A><BR>"
-//		dat += "<A href='?src=\ref[src];turnoff'>((Shutdown System)</font>)</A><BR>"
+		dat += "<A href='?src=\ref[src];emptycourt'>((Empty Court))</A><BR>"
+		dat += "<A href='?src=\ref[src];boxingcourt'>((Boxing Court))</A><BR>"
+		dat += "<A href='?src=\ref[src];basketball'>((Basketball Court))</A><BR>"
+		dat += "<A href='?src=\ref[src];thunderdomecourt'>((Thunderdome Court))</A><BR>"
+		dat += "<A href='?src=\ref[src];beach'>((Beach))</A><BR>"
+//		dat += "<A href='?src=\ref[src];turnoff'>((Shutdown System))</A><BR>"
 
 		dat += "<span class='notice'>Please ensure that only holographic weapons are used in the holodeck if a combat simulation has been loaded.</span><BR>"
 

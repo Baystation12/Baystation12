@@ -8,11 +8,6 @@
 	w_class = 2
 	gas_transfer_coefficient = 0.10
 	permeability_coefficient = 0.50
-
-	sprite_sheets = list(
-		"Vox" = 'icons/mob/species/vox/masks.dmi'
-		)
-
 	var/hanging = 0
 
 /obj/item/clothing/mask/breath/proc/adjust_mask(mob/user)

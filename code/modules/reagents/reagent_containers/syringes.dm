@@ -176,6 +176,9 @@
 					else
 						user.visible_message("<span class='warning'>[user] begins hunting for an injection port on [target]'s suit!</span>")
 
+					user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+					user.do_attack_animation(target)
+
 					if(!do_mob(user, target, injtime))
 						return
 
@@ -231,13 +234,13 @@
 			var/target_zone = ran_zone(check_zone(user.zone_sel.selecting, target))
 			var/obj/item/organ/external/affecting = H.get_organ(target_zone)
 
-			if (!affecting || (affecting.status & ORGAN_DESTROYED) || affecting.is_stump())
+			if (!affecting || affecting.is_stump())
 				user << "<span class='danger'>They are missing that limb!</span>"
 				return
 
 			var/hit_area = affecting.name
 
-			if((user != target) && H.check_shields(7, "the [src.name]"))
+			if((user != target) && H.check_shields(7, src, user, "\the [src]"))
 				return
 
 			if (target != user && H.getarmor(target_zone, "melee") > 5 && prob(50))

@@ -1,5 +1,5 @@
 #ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it! 
+#error T_BOARD macro is not defined but we need it!
 #endif
 
 /obj/item/weapon/circuitboard/message_monitor
@@ -57,18 +57,6 @@
 	name = T_BOARD("employment records console")
 	build_path = /obj/machinery/computer/skills
 
-/obj/item/weapon/circuitboard/stationalert_engineering
-	name = T_BOARD("station alert console (engineering)")
-	build_path = /obj/machinery/computer/station_alert
-	
-/obj/item/weapon/circuitboard/stationalert_security
-	name = T_BOARD("station alert console (security)")
-	build_path = /obj/machinery/computer/station_alert
-	
-/obj/item/weapon/circuitboard/stationalert_all
-	name = T_BOARD("station alert console (all)")
-	build_path = /obj/machinery/computer/station_alert/all
-
 /obj/item/weapon/circuitboard/atmos_alert
 	name = T_BOARD("atmospheric alert console")
 	build_path = /obj/machinery/computer/atmos_alert
@@ -92,9 +80,14 @@
 	build_path = /obj/machinery/computer/cloning
 	origin_tech = list(TECH_DATA = 3, TECH_BIO = 3)
 
-/obj/item/weapon/circuitboard/arcade
-	name = T_BOARD("arcade machine")
-	build_path = /obj/machinery/computer/arcade
+/obj/item/weapon/circuitboard/arcade/battle
+	name = T_BOARD("battle arcade machine")
+	build_path = /obj/machinery/computer/arcade/battle
+	origin_tech = list(TECH_DATA = 1)
+
+/obj/item/weapon/circuitboard/arcade/orion_trail
+	name = T_BOARD("orion trail arcade machine")
+	build_path = /obj/machinery/computer/arcade/orion_trail
 	origin_tech = list(TECH_DATA = 1)
 
 /obj/item/weapon/circuitboard/turbine_control

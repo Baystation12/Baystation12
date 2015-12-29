@@ -98,6 +98,8 @@
 	name = "head of personnel's encryption key"
 	icon_state = "hop_cypherkey"
 	channels = list("Supply" = 1, "Service" = 1, "Command" = 1, "Security" = 0)
+
+
 /*
 /obj/item/device/encryptionkey/headset_mine
 	name = "mining radio encryption key"
@@ -122,3 +124,7 @@
 /obj/item/device/encryptionkey/ert
 	name = "\improper ERT radio encryption key"
 	channels = list("Response Team" = 1, "Science" = 1, "Command" = 1, "Medical" = 1, "Engineering" = 1, "Security" = 1, "Supply" = 1, "Service" = 1)
+
+/obj/item/device/encryptionkey/entertainment
+	name = "entertainment radio key"
+	channels = list("Entertainment" = 1)

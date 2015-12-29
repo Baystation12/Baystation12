@@ -225,12 +225,6 @@
 			else
 		return
 
-
-	blob_act()
-		if (prob(75))
-			set_broken()
-			density = 0
-
 	/*
 		Computers have the capability to use a battery backup.
 		Note that auto_use_power's return value is strictly whether

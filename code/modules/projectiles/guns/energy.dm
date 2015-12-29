@@ -20,7 +20,8 @@
 	var/charge_tick = 0
 
 /obj/item/weapon/gun/energy/switch_firemodes()
-	if(..())
+	. = ..()
+	if(.)
 		update_icon()
 
 /obj/item/weapon/gun/energy/emp_act(severity)

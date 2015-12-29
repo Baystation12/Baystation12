@@ -56,20 +56,9 @@
 	return
 
 /obj/machinery/computer/bullet_act(var/obj/item/projectile/Proj)
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		return
-
-	if(prob(Proj.damage))
+	if(prob(Proj.get_structure_damage()))
 		set_broken()
 	..()
-
-
-/obj/machinery/computer/blob_act()
-	if (prob(75))
-		for(var/x in verbs)
-			verbs -= x
-		set_broken()
-		density = 0
 
 /obj/machinery/computer/update_icon()
 	overlays.Cut()
@@ -107,15 +96,6 @@
 	text = replacetext(text, "\n", "<BR>")
 	return text
 
-
-/obj/machinery/computer/attack_ghost(user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/computer/attack_hand(user as mob)
-	/* Observers can view computers, but not actually use them via Topic*/
-	if(istype(user, /mob/dead/observer)) return 0
-	return ..()
-
 /obj/machinery/computer/attackby(I as obj, user as mob)
 	if(istype(I, /obj/item/weapon/screwdriver) && circuit)
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
@@ -138,11 +118,4 @@
 			M.deconstruct(src)
 			qdel(src)
 	else
-		src.attack_hand(user)
-	return
-
-
-
-
-
-
+		..()

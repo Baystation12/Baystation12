@@ -146,19 +146,23 @@
 
 /mob/living/silicon/robot/handle_regular_hud_updates()
 
-	if (src.stat == 2 || XRAY in mutations || src.sight_mode & BORGXRAY)
+	if (src.stat == 2 || (XRAY in mutations) || (src.sight_mode & BORGXRAY))
 		src.sight |= SEE_TURFS
 		src.sight |= SEE_MOBS
 		src.sight |= SEE_OBJS
 		src.see_in_dark = 8
 		src.see_invisible = SEE_INVISIBLE_MINIMUM
-	else if (src.sight_mode & BORGMESON && src.sight_mode & BORGTHERM)
+	else if ((src.sight_mode & BORGMESON) && (src.sight_mode & BORGTHERM))
 		src.sight |= SEE_TURFS
 		src.sight |= SEE_MOBS
 		src.see_in_dark = 8
 		see_invisible = SEE_INVISIBLE_MINIMUM
 	else if (src.sight_mode & BORGMESON)
 		src.sight |= SEE_TURFS
+		src.see_in_dark = 8
+		see_invisible = SEE_INVISIBLE_MINIMUM
+	else if (src.sight_mode & BORGMATERIAL)
+		src.sight |= SEE_OBJS
 		src.see_in_dark = 8
 		see_invisible = SEE_INVISIBLE_MINIMUM
 	else if (src.sight_mode & BORGTHERM)
@@ -314,7 +318,7 @@
 		killswitch_time --
 		if(killswitch_time <= 0)
 			if(src.client)
-				src << "\red <B>Killswitch Activated"
+				src << "<span class='danger'>Killswitch Activated</span>"
 			killswitch = 0
 			spawn(5)
 				gib()
@@ -325,7 +329,7 @@
 		weaponlock_time --
 		if(weaponlock_time <= 0)
 			if(src.client)
-				src << "\red <B>Weapon Lock Timed Out!"
+				src << "<span class='danger'>Weapon Lock Timed Out!</span>"
 			weapon_lock = 0
 			weaponlock_time = 120
 

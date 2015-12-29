@@ -15,7 +15,15 @@
 /*
  * Soap
  */
-/obj/item/weapon/soap/Crossed(AM as mob|obj) //EXACTLY the same as bananapeel for now, so it makes sense to put it in the same dm -- Urist
+/obj/item/weapon/soap/New()
+	..()
+	create_reagents(5)
+	wet()
+ 
+/obj/item/weapon/soap/proc/wet()
+	reagents.add_reagent("cleaner", 5)
+
+/obj/item/weapon/soap/Crossed(AM as mob|obj)
 	if (istype(AM, /mob/living))
 		var/mob/living/M =	AM
 		M.slip("the [src.name]",3)
@@ -32,15 +40,20 @@
 	else if(istype(target,/turf))
 		user << "<span class='notice'>You scrub \the [target.name] clean.</span>"
 		var/turf/T = target
-		T.clean(src)
+		T.clean(src, user)
+	else if(istype(target,/obj/structure/sink))
+		user << "<span class='notice'>You wet \the [src] in the sink.</span>"
+		wet()
 	else
 		user << "<span class='notice'>You clean \the [target.name].</span>"
 		target.clean_blood()
 	return
 
-/obj/item/weapon/soap/attack(mob/target as mob, mob/user as mob)
+//attack_as_weapon
+/obj/item/weapon/soap/attack(mob/living/target, mob/living/user, var/target_zone)
 	if(target && user && ishuman(target) && ishuman(user) && !target.stat && !user.stat && user.zone_sel &&user.zone_sel.selecting == "mouth" )
 		user.visible_message("<span class='danger'>\The [user] washes \the [target]'s mouth out with soap!</span>")
+		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //prevent spam
 		return
 	..()
 

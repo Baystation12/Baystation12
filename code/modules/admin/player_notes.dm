@@ -106,7 +106,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	message_admins("\blue [key_name_admin(user)] has edited [key]'s notes.")
 	log_admin("[key_name(user)] has edited [key]'s notes.")
 
-	qdel(info)
+	del(info) // savefile, so NOT qdel
 
 	//Updating list of keys with notes on them
 	var/savefile/note_list = new("data/player_notes.sav")
@@ -115,7 +115,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	if(!note_keys) note_keys = list()
 	if(!note_keys.Find(key)) note_keys += key
 	note_list << note_keys
-	qdel(note_list)
+	del(note_list) // savefile, so NOT qdel
 
 
 /proc/notes_del(var/key, var/index)

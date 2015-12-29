@@ -15,7 +15,10 @@
 
 	for(var/propname in properties)
 		var/propvalue = properties[propname]
-		if(isnull(propvalue))
+
+		if(propname == "mode_name")
+			name = propvalue
+		else if(isnull(propvalue))
 			settings[propname] = gun.vars[propname] //better than initial() as it handles list vars like burst_accuracy
 		else
 			settings[propname] = propvalue
@@ -103,7 +106,7 @@
 			if(process_projectile(P, user, user, pick("l_foot", "r_foot")))
 				handle_post_fire(user, user)
 				user.visible_message(
-					"<span class='danger'>[user] shoots \himself in the foot with \the [src]!</span>",
+					"<span class='danger'>\The [user] shoots \himself in the foot with \the [src]!</span>",
 					"<span class='danger'>You shoot yourself in the foot with \the [src]!</span>"
 					)
 				M.drop_item()
@@ -119,17 +122,17 @@
 /obj/item/weapon/gun/afterattack(atom/A, mob/living/user, adjacent, params)
 	if(adjacent) return //A is adjacent, is the user, or is on the user's person
 
-	//decide whether to aim or shoot normally
-	var/aiming = 0
-	if(user && user.client && !(A in aim_targets))
-		if(user.client.gun_mode)
-			aiming = PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
+	if(!user.aiming)
+		user.aiming = new(user)
 
-	if (!aiming)
-		if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
-			user << "\red You refrain from firing your [src] as your intent is set to help."
-		else
-			Fire(A,user,params) //Otherwise, fire normally.
+	if(user && user.client && user.aiming && user.aiming.active && user.aiming.aiming_at != A)
+		PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
+		return
+
+	if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
+		user << "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>"
+	else
+		Fire(A,user,params) //Otherwise, fire normally.
 
 /obj/item/weapon/gun/attack(atom/A, mob/living/user, def_zone)
 	if (A == user && user.zone_sel.selecting == "mouth" && !mouthshoot)
@@ -186,7 +189,7 @@
 	update_held_icon()
 
 	//update timing
-	user.setClickCooldown(4)
+	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.setMoveCooldown(move_delay)
 	next_fire_time = world.time + fire_delay
 
@@ -222,7 +225,7 @@
 
 		if(reflex)
 			user.visible_message(
-				"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!<b></span>",
+				"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!</b></span>",
 				"<span class='reflex_shoot'>You fire \the [src] by reflex!</span>",
 				"You hear a [fire_sound_text]!"
 			)
@@ -258,7 +261,7 @@
 			for(var/obj/item/weapon/grab/G in M.grabbed_by)
 				grabstate = max(grabstate, G.state)
 			if(grabstate >= GRAB_NECK)
-				damage_mult = 3.0
+				damage_mult = 2.5
 			else if(grabstate >= GRAB_AGGRESSIVE)
 				damage_mult = 1.5
 	P.damage *= damage_mult
@@ -329,6 +332,7 @@
 
 		in_chamber.on_hit(M)
 		if (in_chamber.damage_type != HALLOSS)
+			log_and_message_admins("[key_name(user)] commited suicide using \a [src]")
 			user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, "head", used_weapon = "Point blank shot in the mouth with \a [in_chamber]", sharp=1)
 			user.death()
 		else

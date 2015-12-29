@@ -18,7 +18,17 @@ var/global/list/gear_datums = list()
 
 	//create a list of gear datums to sort
 	for(var/type in typesof(/datum/gear)-/datum/gear)
-		var/datum/gear/G = new type()
+		var/datum/gear/G = type
+		if(!initial(G.display_name))
+			error("Loadout - Missing display name: [G]")
+			continue
+		if(!initial(G.cost))
+			error("Loadout - Missing cost: [G]")
+			continue
+		if(!initial(G.path))
+			error("Loadout - Missing path definition: [G]")
+			continue
+		G = new G()
 
 		var/category = (G.sort_category in sort_categories)? G.sort_category : "unknown"
 		sort_categories[category][G.display_name] = G
@@ -141,13 +151,13 @@ var/global/list/gear_datums = list()
 	cost = 1
 	slot = slot_head
 
- /datum/gear/grcap
+/datum/gear/grcap
 	display_name = "cap, grey"
 	path = /obj/item/clothing/head/soft/grey
 	cost = 1
 	slot = slot_head
 
- /datum/gear/ocap
+/datum/gear/ocap
 	display_name = "cap, orange"
 	path = /obj/item/clothing/head/soft/orange
 	cost = 1
@@ -219,7 +229,7 @@ var/global/list/gear_datums = list()
 	cost = 1
 	slot = slot_head
 
- /datum/gear/bowler
+/datum/gear/bowler
 	display_name = "hat, bowler"
 	path = /obj/item/clothing/head/bowler
 	cost = 1
@@ -311,17 +321,18 @@ var/global/list/gear_datums = list()
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
 /datum/gear/thugshades
-	display_name = "Sunglasses, Fat (Security)"
+	display_name = "Sunglasses, Fat"
 	path = /obj/item/clothing/glasses/sunglasses/big
 	cost = 1
 	slot = slot_glasses
-	allowed_roles = list("Security Officer","Head of Security","Warden")
+	allowed_roles = list("Security Officer","Head of Security","Warden","Detective","Internal Affairs Agent","Quartermaster","Head of Personnel","Captain")
 
 /datum/gear/prescriptionsun
 	display_name = "sunglasses, presciption"
 	path = /obj/item/clothing/glasses/sunglasses/prescription
 	cost = 2
 	slot = slot_glasses
+	allowed_roles = list("Security Officer","Head of Security","Warden","Detective","Internal Affairs Agent","Quartermaster","Head of Personnel","Captain")
 
 // Mask
 
@@ -554,8 +565,45 @@ var/global/list/gear_datums = list()
 	slot = slot_w_uniform
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
-// Attachments
+/datum/gear/resomi_grey
+	display_name = "Resomi uniform, grey"
+	path = /obj/item/clothing/under/resomi
+	cost = 1
+	slot = slot_w_uniform
 
+/datum/gear/resomi_rainbow
+	display_name = "Resomi uniform, rainbow"
+	path = /obj/item/clothing/under/resomi/rainbow
+	cost = 1
+	slot = slot_w_uniform
+
+/datum/gear/resomi_white
+	display_name = "Resomi uniform, white"
+	path = /obj/item/clothing/under/resomi/white
+	cost = 1
+	slot = slot_w_uniform
+
+/datum/gear/resomi_eng
+	display_name = "Resomi uniform, Engineering"
+	path = /obj/item/clothing/under/resomi/yellow
+	cost = 1
+	slot = slot_w_uniform
+	allowed_roles = list("Chief Engineer","Station Engineer","Atmospherics Technician")
+
+/datum/gear/resomi_sec
+	display_name = "Resomi uniform, Security"
+	path = /obj/item/clothing/under/resomi/red
+	cost = 1
+	slot = slot_w_uniform
+	allowed_roles = list("Security Officer","Head of Security","Warden")
+
+/datum/gear/resomi_med
+	display_name = "Resomi uniform, Medical"
+	path = /obj/item/clothing/under/resomi/medical
+	cost = 1
+	slot = slot_w_uniform
+
+// Attachments
 /datum/gear/armband_cargo
 	display_name = "armband, cargo"
 	path = /obj/item/clothing/accessory/armband/cargo
@@ -1066,6 +1114,12 @@ var/global/list/gear_datums = list()
 	sort_category = "misc"
 	cost = 1
 
+/datum/gear/boot_knife
+	display_name = "boot knife"
+	path = /obj/item/weapon/material/kitchen/utensil/knife/boot
+	sort_category = "misc"
+	cost = 3
+
 /datum/gear/cane
 	display_name = "cane"
 	path = /obj/item/weapon/cane
@@ -1080,7 +1134,31 @@ var/global/list/gear_datums = list()
 
 /datum/gear/cards
 	display_name = "deck of cards"
-	path = /obj/item/weapon/deck
+	path = /obj/item/weapon/deck/cards
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/tarot
+	display_name = "deck of tarot cards"
+	path = /obj/item/weapon/deck/tarot
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/holder
+	display_name = "card holder"
+	path = /obj/item/weapon/deck/holder
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/cardemon_pack
+	display_name = "\improper Cardemon booster pack"
+	path = /obj/item/weapon/pack/cardemon
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/spaceball_pack
+	display_name = "\improper Spaceball booster pack"
+	path = /obj/item/weapon/pack/spaceball
 	sort_category = "misc"
 	cost = 1
 

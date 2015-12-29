@@ -64,7 +64,7 @@ var/list/organ_cache = list()
 		var/mob/living/carbon/human/H = holder
 		if(istype(H))
 			if(internal)
-				var/obj/item/organ/external/E = H.organs_by_name[src.parent_organ]
+				var/obj/item/organ/external/E = H.get_organ(parent_organ)
 				if(E)
 					if(E.internal_organs == null)
 						E.internal_organs = list()
@@ -240,13 +240,15 @@ var/list/organ_cache = list()
 			if(parent && !silent)
 				owner.custom_pain("Something inside your [parent.name] hurts a lot.", 1)
 
+/obj/item/organ/proc/bruise()
+	damage = max(damage, min_bruised_damage)
+
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
 	robotic = 2
 	src.status &= ~ORGAN_BROKEN
 	src.status &= ~ORGAN_BLEEDING
 	src.status &= ~ORGAN_SPLINTED
 	src.status &= ~ORGAN_CUT_AWAY
-	src.status &= ~ORGAN_DESTROYED
 	src.status |= ORGAN_ROBOT
 	src.status |= ORGAN_ASSISTED
 
@@ -262,13 +264,13 @@ var/list/organ_cache = list()
 		return
 	switch (severity)
 		if (1.0)
-			take_damage(0,20)
+			take_damage(20)
 			return
 		if (2.0)
-			take_damage(0,7)
+			take_damage(7)
 			return
 		if(3.0)
-			take_damage(0,3)
+			take_damage(3)
 
 /obj/item/organ/proc/removed(var/mob/living/user)
 
@@ -345,6 +347,7 @@ var/list/organ_cache = list()
 	user.drop_from_inventory(src)
 	var/obj/item/weapon/reagent_containers/food/snacks/organ/O = new(get_turf(src))
 	O.name = name
+	O.icon = icon
 	O.icon_state = icon_state
 
 	// Pass over the blood.

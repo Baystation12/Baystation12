@@ -2,8 +2,14 @@
 /datum/hud/proc/unplayer_hud()
 	return
 
+/mob/dead/observer/instantiate_hud(var/datum/hud/HUD)
+	HUD.ghost_hud()
+
 /datum/hud/proc/ghost_hud()
 	return
+
+/mob/living/carbon/brain/instantiate_hud(var/datum/hud/HUD)
+	HUD.brain_hud()
 
 /datum/hud/proc/brain_hud(ui_style = 'icons/mob/screen1_Midnight.dmi')
 	mymob.blind = new /obj/screen()
@@ -12,6 +18,9 @@
 	mymob.blind.name = " "
 	mymob.blind.screen_loc = "1,1"
 	mymob.blind.layer = 0
+
+/mob/living/silicon/ai/instantiate_hud(var/datum/hud/HUD)
+	HUD.ai_hud()
 
 /datum/hud/proc/ai_hud()
 	return
@@ -33,6 +42,9 @@
 	mymob.client.screen = null
 
 	mymob.client.screen += list(blobpwrdisplay, blobhealthdisplay)
+
+/mob/living/carbon/slime/instantiate_hud(var/datum/hud/HUD)
+	HUD.slime_hud()
 
 /datum/hud/proc/slime_hud(ui_style = 'icons/mob/screen1_Midnight.dmi')
 
@@ -121,7 +133,7 @@
 	mymob.flash.icon = 'icons/mob/screen1.dmi'
 	mymob.flash.icon_state = "blank"
 	mymob.flash.name = "flash"
-	mymob.flash.screen_loc = "1,1 to 15,15"
+	mymob.flash.screen_loc = ui_entire_screen
 	mymob.flash.layer = 17
 
 	if(constructtype)

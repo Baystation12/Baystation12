@@ -88,7 +88,7 @@
 	emagged = !emagged
 	user << "<span class='danger'>You [emagged ? "disable" : "enable"] the gibber safety guard.</span>"
 	return 1
-	
+
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
 	var/obj/item/weapon/grab/G = W
 
@@ -195,7 +195,7 @@
 		slab_type = H.species.meat_type
 
 	// Small mobs don't give as much nutrition.
-	if(src.occupant.small)
+	if(issmall(src.occupant))
 		slab_nutrition *= 0.5
 	slab_nutrition /= slab_count
 

@@ -59,7 +59,8 @@
 		qdel(assembly)
 		assembly = null
 	qdel(wires)
-	..()
+	wires = null
+	return ..()
 
 /obj/machinery/camera/emp_act(severity)
 	if(!isEmpProof())
@@ -79,8 +80,7 @@
 			..()
 
 /obj/machinery/camera/bullet_act(var/obj/item/projectile/P)
-	if(P.damage_type == BRUTE || P.damage_type == BURN)
-		take_damage(P.damage)
+	take_damage(P.get_structure_damage())
 
 /obj/machinery/camera/ex_act(severity)
 	if(src.invuln)
@@ -91,10 +91,6 @@
 		destroy()
 
 	..() //and give it the regular chance of being deleted outright
-
-
-/obj/machinery/camera/blob_act()
-	return
 
 /obj/machinery/camera/hitby(AM as mob|obj)
 	..()
@@ -140,9 +136,19 @@
 		if(weld(W, user))
 			if(assembly)
 				assembly.loc = src.loc
-				assembly.state = 1
+				assembly.anchored = 1
+				assembly.camera_name = c_tag
+				assembly.camera_network = english_list(network, "Exodus", ",", ",")
+				assembly.update_icon()
+				assembly.dir = src.dir
+				if(stat & BROKEN)
+					assembly.state = 2
+					user << "<span class='notice'>You repaired \the [src] frame.</span>"
+				else
+					assembly.state = 1
+					user << "<span class='notice'>You cut \the [src] free from the wall.</span>"
+					new /obj/item/stack/cable_coil(src.loc, length=2)
 				assembly = null //so qdel doesn't eat it.
-				new /obj/item/stack/cable_coil(src.loc, length=2)
 			qdel(src)
 
 	// OTHER
@@ -304,7 +310,7 @@
 	var/turf/pos = get_turf(src)
 	if(!pos)
 		return list()
-	
+
 	if(isXRay())
 		see = range(view_range, pos)
 	else

@@ -1,6 +1,10 @@
 /mob/living/carbon/human/proc/get_unarmed_attack(var/mob/living/carbon/human/target, var/hit_zone)
 	for(var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
 		if(u_attack.is_usable(src, target, hit_zone))
+			if(pulling_punches)
+				var/datum/unarmed_attack/soft_variant = u_attack.get_sparring_variant()
+				if(soft_variant)
+					return soft_variant
 			return u_attack
 	return null
 
@@ -19,8 +23,7 @@
 
 	// Should this all be in Touch()?
 	if(istype(H))
-		if((H != src) && check_shields(0, H.name))
-			visible_message("\red <B>[H] attempted to touch [src]!</B>")
+		if(H != src && check_shields(0, null, H, H.zone_sel.selecting, H.name))
 			H.do_attack_animation(src)
 			return 0
 
@@ -125,7 +128,7 @@
 			var/hit_zone = H.zone_sel.selecting
 			var/obj/item/organ/external/affecting = get_organ(hit_zone)
 
-			if(!affecting || affecting.is_stump() || (affecting.status & ORGAN_DESTROYED))
+			if(!affecting || affecting.is_stump())
 				M << "<span class='danger'>They are missing that limb!</span>"
 				return 1
 
@@ -222,7 +225,7 @@
 			attack.apply_effects(H, src, armour, rand_damage, hit_zone)
 
 			// Finally, apply damage to target
-			apply_damage(real_damage, BRUTE, affecting, armour, sharp=attack.sharp, edge=attack.edge)
+			apply_damage(real_damage, (attack.deal_halloss ? HALLOSS : BRUTE), affecting, armour, sharp=attack.sharp, edge=attack.edge)
 
 		if(I_DISARM)
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
@@ -296,23 +299,6 @@
 	apply_damage(damage, BRUTE, affecting, armor_block)
 	updatehealth()
 	return 1
-
-/mob/living/carbon/human/proc/attack_joint(var/obj/item/W, var/mob/living/user, var/def_zone)
-	if(!def_zone) def_zone = user.zone_sel.selecting
-	var/target_zone = get_zone_with_miss_chance(check_zone(def_zone), src)
-
-	if(user == src) // Attacking yourself can't miss
-		target_zone = user.zone_sel.selecting
-	if(!target_zone)
-		return null
-	var/obj/item/organ/external/organ = get_organ(check_zone(target_zone))
-	if(!organ || (organ.dislocated == 2) || (organ.dislocated == -1))
-		return null
-	var/dislocation_str
-	if(prob(W.force))
-		dislocation_str = "[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!"
-		organ.dislocate(1)
-	return dislocation_str
 
 //Used to attack a joint through grabbing
 /mob/living/carbon/human/proc/grab_joint(var/mob/living/user, var/def_zone)

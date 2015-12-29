@@ -417,7 +417,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+="Channel messages listed below. If you deem them dangerous to the station, you can <A href='?src=\ref[src];toggle_d_notice=\ref[src.viewing_channel]'>Bestow a D-Notice upon the channel</A>.<HR>"
 				if(src.viewing_channel.censored)
 					dat+="<FONT COLOR='red'><B>ATTENTION: </B></FONT>This channel has been deemed as threatening to the welfare of the station, and marked with a [company_name] D-Notice.<BR>"
-					dat+="No further feed story additions are allowed while the D-Notice is in effect.</FONT><BR><BR>"
+					dat+="No further feed story additions are allowed while the D-Notice is in effect.<BR><BR>"
 				else
 					if( isemptylist(src.viewing_channel.messages) )
 						dat+="<I>No feed messages found in channel...</I><BR>"
@@ -747,6 +747,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			O.show_message("<EM>[user.name]</EM> further abuses the shattered [src.name].")
 	else
 		if(istype(I, /obj/item/weapon) )
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			var/obj/item/weapon/W = I
 			if(W.force <15)
 				for (var/mob/O in hearers(5, src.loc))
@@ -764,7 +765,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 						O.show_message("[user.name] forcefully slams the [src.name] with the [I.name]!" )
 					playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
 		else
-			user << "<FONT COLOR='blue'>This does nothing.</FONT>"
+			user << "<span class='notice'>This does nothing.</span>"
 	src.update_icon()
 
 /obj/machinery/newscaster/attack_ai(mob/user as mob)

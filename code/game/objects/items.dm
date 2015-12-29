@@ -1,6 +1,8 @@
 /obj/item
 	name = "item"
 	icon = 'icons/obj/items.dmi'
+	w_class = 3.0
+
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/abstract = 0
 	var/r_speed = 1.0
@@ -8,7 +10,6 @@
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = null
-	var/w_class = 3.0
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
 	pass_flags = PASSTABLE
@@ -29,9 +30,9 @@
 	//It should be used purely for appearance. For gameplay effects caused by items covering body parts, use body_parts_covered.
 	var/flags_inv = 0
 	var/body_parts_covered = 0 //see setup.dm for appropriate bit flags
-	
+
 	var/item_flags = 0 //Miscellaneous flags pertaining to equippable objects.
-	
+
 	//var/heat_transfer_coefficient = 1 //0 prevents all transfers, 1 is invisible
 	var/gas_transfer_coefficient = 1 // for leaking gas from turf to mask and vice-versa (for masks right now, but at some point, i'd like to include space helmets)
 	var/permeability_coefficient = 1 // for chemicals/diseases
@@ -108,9 +109,6 @@
 		else
 	return
 
-/obj/item/blob_act()
-	return
-
 //user: The mob that is suiciding
 //damagetype: The type of damage the item will inflict on the user
 //BRUTELOSS = 1
@@ -159,6 +157,9 @@
 			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
 			user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
+			return
+		if(!temp)
+			user << "<span class='notice'>You try to use your hand, but realize it is no longer attached!</span>"
 			return
 	src.pickup(user)
 	if (istype(src.loc, /obj/item/weapon/storage))
@@ -250,6 +251,9 @@
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
+	layer = 20
+	if(user.client)	user.client.screen |= src
+	if(user.pulling == src) user.stop_pulling()
 	return
 
 //Defines which slots correspond to which slot flags
@@ -409,7 +413,12 @@ var/list/global/slot_flags_enumeration = list(
 /obj/item/proc/ui_action_click()
 	attack_self(usr)
 
-/obj/item/proc/IsShield()
+//RETURN VALUES
+//handle_shield should return a positive value to indicate that the attack is blocked and should be prevented.
+//If a negative value is returned, it should be treated as a special return value for bullet_act() and handled appropriately.
+//For non-projectile attacks this usually means the attack is blocked.
+//Otherwise should return 0 to indicate that the attack is not affected in any way.
+/obj/item/proc/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	return 0
 
 /obj/item/proc/get_loc_turf()
@@ -435,6 +444,9 @@ var/list/global/slot_flags_enumeration = list(
 	user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 	M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 	msg_admin_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)") //BS12 EDIT ALG
+
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.do_attack_animation(M)
 
 	src.add_fingerprint(user)
 	//if((CLUMSY in user.mutations) && prob(50))
@@ -492,6 +504,12 @@ var/list/global/slot_flags_enumeration = list(
 		var/obj/item/clothing/gloves/G = src
 		G.transfer_blood = 0
 
+/obj/item/reveal_blood()
+	if(was_bloodied && !fluorescent)
+		fluorescent = 1
+		blood_color = COLOR_LUMINOL
+		blood_overlay.color = COLOR_LUMINOL
+		update_icon()
 
 /obj/item/add_blood(mob/living/carbon/human/M as mob)
 	if (!..())
@@ -609,7 +627,3 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
-
-/obj/item/proc/resolve_attackby(atom/A, mob/source)
-	return A.attackby(src,source)
-

@@ -24,7 +24,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 /datum/emergency_shuttle_controller/proc/process()
 	if (wait_for_launch)
-		if (auto_recall && world.time >= auto_recall_time)
+		if (evac && auto_recall && world.time >= auto_recall_time)
 			recall()
 		if (world.time >= launch_time)	//time to launch the shuttle
 			stop_launch_countdown()

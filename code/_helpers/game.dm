@@ -360,6 +360,13 @@ proc/isInSight(var/atom/A, var/atom/B)
 			for(var/client/C in group)
 				C.screen -= O
 
+/proc/flick_overlay(image/I, list/show_to, duration)
+	for(var/client/C in show_to)
+		C.images += I
+	spawn(duration)
+		for(var/client/C in show_to)
+			C.images -= I
+
 datum/projectile_data
 	var/src_x
 	var/src_y
@@ -525,3 +532,6 @@ datum/projectile_data
 
 /proc/SecondsToTicks(var/seconds)
 	return seconds * 10
+
+/proc/round_is_spooky(var/spookiness_threshold = config.cult_ghostwriter_req_cultists)
+	return (cult.current_antagonists.len > spookiness_threshold)

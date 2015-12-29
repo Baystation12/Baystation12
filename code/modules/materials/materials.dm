@@ -5,11 +5,11 @@
 	self-explanatory but the various object types may have their own documentation. ~Z
 
 	PATHS THAT USE DATUMS
-		/turf/simulated/wall
-		/obj/item/weapon/material
-		/obj/structure/barricade
-		/obj/item/stack/material
-		/obj/structure/table
+		turf/simulated/wall
+		obj/item/weapon/material
+		obj/structure/barricade
+		obj/item/stack/material
+		obj/structure/table
 
 	VALID ICONS
 		WALLS
@@ -127,8 +127,6 @@ var/list/name_to_material
 	var/obj/item/stack/S = new rod_product(get_turf(user))
 	S.add_fingerprint(user)
 	S.add_to_stacks(user)
-	if(!(user.l_hand && user.r_hand))
-		user.put_in_hands(S)
 
 /material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
 	if(!wire_product)
@@ -326,6 +324,20 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
 
+/material/diona
+	name = "biomass"
+	icon_colour = null
+	stack_type = null
+	integrity = 600
+	icon_base = "diona"
+	icon_reinf = "noreinf"
+
+/material/diona/place_dismantled_product()
+	return
+
+/material/diona/place_dismantled_girder(var/turf/target)
+	spawn_diona_nymph(target)
+
 /material/steel/holographic
 	name = "holo" + DEFAULT_WALL_MATERIAL
 	display_name = DEFAULT_WALL_MATERIAL
@@ -345,6 +357,14 @@ var/list/name_to_material
 	weight = 23
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
+
+/material/plasteel/titanium
+	name = "titanium"
+	stack_type = null
+	icon_base = "metal"
+	door_icon_base = "metal"
+	icon_colour = "#D1E6E3"
+	icon_reinf = "reinf_metal"
 
 /material/glass
 	name = "glass"
@@ -454,23 +474,22 @@ var/list/name_to_material
 	rod_product = null
 
 /material/glass/phoron
-	name = "phglass"
-	display_name = "phoron glass"
+	name = "borosilicate glass"
+	display_name = "borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MATERIAL_BRITTLE
-	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE+300
-	integrity = 200 // idk why but phoron windows are strong, so.
+	integrity = 100
 	icon_colour = "#FC2BC5"
-	stack_origin_tech = list(TECH_MATERIAL = 3, TECH_PHORON = 2)
+	stack_origin_tech = list(TECH_MATERIAL = 4)
 	created_window = /obj/structure/window/phoronbasic
 	wire_product = null
 	rod_product = /obj/item/stack/material/glass/phoronrglass
 
 /material/glass/phoron/reinforced
-	name = "rphglass"
-	display_name = "reinforced phoron glass"
+	name = "reinforced borosilicate glass"
+	display_name = "reinforced borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronrglass
-	stack_origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 2)
+	stack_origin_tech = list(TECH_MATERIAL = 5)
 	composite_material = list() //todo
 	created_window = /obj/structure/window/phoronreinforced
 	hardness = 40
@@ -552,7 +571,7 @@ var/list/name_to_material
 	name = "wood"
 	stack_type = /obj/item/stack/material/wood
 	icon_colour = "#824B28"
-	integrity = 25
+	integrity = 50
 	icon_base = "solid"
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER

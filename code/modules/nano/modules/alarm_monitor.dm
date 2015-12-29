@@ -3,25 +3,29 @@
 	var/list_cameras = 0						// Whether or not to list camera references. A future goal would be to merge this with the enginering/security camera console. Currently really only for AI-use.
 	var/list/datum/alarm_handler/alarm_handlers // The particular list of alarm handlers this alarm monitor should present to the user.
 
+/datum/nano_module/alarm_monitor/New()
+	..()
+	alarm_handlers = list()
+
 /datum/nano_module/alarm_monitor/all/New()
 	..()
 	alarm_handlers = alarm_manager.all_handlers
 
 /datum/nano_module/alarm_monitor/engineering/New()
 	..()
-	alarm_handlers = list(atmosphere_alarm, fire_alarm, power_alarm)
+	alarm_handlers = list(atmosphere_alarm, camera_alarm, fire_alarm, power_alarm)
 
 /datum/nano_module/alarm_monitor/security/New()
 	..()
 	alarm_handlers = list(camera_alarm, motion_alarm)
 
-/datum/nano_module/alarm_monitor/proc/register(var/object, var/procName)
+/datum/nano_module/alarm_monitor/proc/register_alarm(var/object, var/procName)
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		AH.register(object, procName)
+		AH.register_alarm(object, procName)
 
-/datum/nano_module/alarm_monitor/proc/unregister(var/object)
+/datum/nano_module/alarm_monitor/proc/unregister_alarm(var/object)
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		AH.unregister(object)
+		AH.unregister_alarm(object)
 
 /datum/nano_module/alarm_monitor/proc/all_alarms()
 	var/list/all_alarms = new()
@@ -68,7 +72,7 @@
 			var/cameras[0]
 			var/lost_sources[0]
 
-			if(user.isMobAI())
+			if(isAI(user))
 				for(var/obj/machinery/camera/C in A.cameras())
 					cameras[++cameras.len] = C.nano_structure()
 			for(var/datum/alarm_source/AS in A.sources)

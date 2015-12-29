@@ -23,7 +23,9 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/sensor_mode,
 	/mob/living/silicon/ai/proc/show_laws_verb,
 	/mob/living/silicon/ai/proc/toggle_acceleration,
-	/mob/living/silicon/ai/proc/toggle_camera_light
+	/mob/living/silicon/ai/proc/toggle_camera_light,
+	/mob/living/silicon/ai/proc/multitool_mode,
+	/mob/living/silicon/ai/proc/toggle_hologram_movement
 )
 
 //Not sure why this is necessary...
@@ -61,6 +63,7 @@ var/list/ai_verbs_default = list(
 	var/control_disabled = 0
 	var/datum/announcement/priority/announcement
 	var/obj/machinery/ai_powersupply/psupply = null // Backwards reference to AI's powersupply object.
+	var/hologram_follow = 1 //This is used for the AI eye, to determine if a holopad's hologram should follow it or not
 
 	//NEWMALF VARIABLES
 	var/malfunctioning = 0						// Master var that determines if AI is malfunctioning.
@@ -82,6 +85,8 @@ var/list/ai_verbs_default = list(
 	var/datum/ai_icon/selected_sprite			// The selected icon set
 	var/custom_sprite 	= 0 					// Whether the selected icon is custom
 	var/carded
+
+	var/multitool_mode = 0
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs |= ai_verbs_default
@@ -128,8 +133,7 @@ var/list/ai_verbs_default = list(
 	aiRadio = new(src)
 	common_radio = aiRadio
 	aiRadio.myAi = src
-	additional_law_channels += "Binary"
-	additional_law_channels += "Holopad"
+	additional_law_channels["Holopad"] = ":h"
 
 	aiCamera = new/obj/item/device/camera/siliconcam/ai_camera(src)
 
@@ -139,12 +143,14 @@ var/list/ai_verbs_default = list(
 	//Languages
 	add_language("Robot Talk", 1)
 	add_language("Galactic Common", 1)
-	add_language("Sol Common", 0)
-	add_language("Sinta'unathi", 0)
-	add_language("Siik'tajr", 0)
-	add_language("Skrellian", 0)
-	add_language("Tradeband", 1)
-	add_language("Gutter", 0)
+	add_language(LANGUAGE_EAL, 1)
+	add_language(LANGUAGE_SOL_COMMON, 0)
+	add_language(LANGUAGE_UNATHI, 0)
+	add_language(LANGUAGE_SIIK_TAJR, 0)
+	add_language(LANGUAGE_SKRELLIAN, 0)
+	add_language(LANGUAGE_RESOMI, 0)
+	add_language(LANGUAGE_TRADEBAND, 1)
+	add_language(LANGUAGE_GUTTER, 0)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -160,7 +166,6 @@ var/list/ai_verbs_default = list(
 	spawn(5)
 		new /obj/machinery/ai_powersupply(src)
 
-
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[LIFE_HUD] 		  = image('icons/mob/hud.dmi', src, "hudblank")
@@ -173,14 +178,13 @@ var/list/ai_verbs_default = list(
 
 	ai_list += src
 	..()
-	return
 
 /mob/living/silicon/ai/proc/on_mob_init()
 	src << "<B>You are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>"
 	src << "<B>To look at other parts of the station, click on yourself to get a camera menu.</B>"
 	src << "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>"
 	src << "To use something, simply click on it."
-	src << "Use say :b to speak to your cyborgs through binary. Use say :h to speak from an active holopad."
+	src << "Use say [get_language_prefix()]b to speak to your cyborgs through binary. Use say :h to speak from an active holopad."
 	src << "For department channels, use the following say commands:"
 
 	var/radio_text = ""
@@ -201,9 +205,31 @@ var/list/ai_verbs_default = list(
 	setup_icon()
 
 /mob/living/silicon/ai/Destroy()
+	qdel(aiPDA)
+	qdel(aiMulti)
+	qdel(aiRadio)
+	aiPDA = null
+	aiMulti = null
+	aiRadio = null
+
 	ai_list -= src
+
 	qdel(eyeobj)
-	..()
+	eyeobj = null
+
+	qdel(psupply)
+	psupply = null
+
+	qdel(aiMulti)
+	aiMulti = null
+
+	qdel(aiRadio)
+	aiRadio = null
+
+	qdel(aiCamera)
+	aiCamera = null
+
+	return ..()
 
 /mob/living/silicon/ai/proc/setup_icon()
 	var/file = file2text("config/custom_sprites.txt")
@@ -258,20 +284,22 @@ var/list/ai_verbs_default = list(
 /obj/machinery/ai_powersupply/New(var/mob/living/silicon/ai/ai=null)
 	powered_ai = ai
 	powered_ai.psupply = src
-	if(isnull(powered_ai))
-		qdel(src)
-
-	loc = powered_ai.loc
-	use_power(1) // Just incase we need to wake up the power system.
+	forceMove(powered_ai.loc)
 
 	..()
+	use_power(1) // Just incase we need to wake up the power system.
+
+/obj/machinery/ai_powersupply/Destroy()
+	. = ..()
+	powered_ai = null
 
 /obj/machinery/ai_powersupply/process()
-	if(!powered_ai || powered_ai.stat & DEAD)
-		qdel()
+	if(!powered_ai || powered_ai.stat == DEAD)
+		qdel(src)
 		return
 	if(powered_ai.psupply != src) // For some reason, the AI has different powersupply object. Delete this one, it's no longer needed.
 		qdel(src)
+		return
 	if(powered_ai.APU_power)
 		use_power = 0
 		return
@@ -644,6 +672,14 @@ var/list/ai_verbs_default = list(
 	set desc = "Augment visual feed with internal sensor overlays"
 	toggle_sensor_mode()
 
+/mob/living/silicon/ai/proc/toggle_hologram_movement()
+	set name = "Toggle Hologram Movement"
+	set category = "AI Commands"
+	set desc = "Toggles hologram movement based on moving with your virtual eye."
+
+	hologram_follow = !hologram_follow
+	usr << "<span class='info'>Your hologram will now [hologram_follow ? "follow" : "no longer follow"] you.</span>"
+
 /mob/living/silicon/ai/proc/check_unable(var/flags = 0, var/feedback = 1)
 	if(stat == DEAD)
 		if(feedback) src << "<span class='warning'>You are dead!</span>"
@@ -670,6 +706,13 @@ var/list/ai_verbs_default = list(
 		qdel(src)
 		return
 	..()
+
+/mob/living/silicon/ai/proc/multitool_mode()
+	set name = "Toggle Multitool Mode"
+	set category = "AI Commands"
+
+	multitool_mode = !multitool_mode
+	src << "<span class='notice'>Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged</span>"
 
 /mob/living/silicon/ai/updateicon()
 	if(!selected_sprite) selected_sprite = default_ai_icon

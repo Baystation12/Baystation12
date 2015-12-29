@@ -96,6 +96,8 @@ Class Procs:
 /obj/machinery
 	name = "machinery"
 	icon = 'icons/obj/stationobjs.dmi'
+	w_class = 10
+
 	var/stat = 0
 	var/emagged = 0
 	var/use_power = 1
@@ -171,10 +173,6 @@ Class Procs:
 		else
 	return
 
-/obj/machinery/blob_act()
-	if(prob(50))
-		qdel(src)
-
 //sets the use_power var and then forces an area power update
 /obj/machinery/proc/update_use_power(var/new_use_power)
 	use_power = new_use_power
@@ -188,6 +186,9 @@ Class Procs:
 		use_power(active_power_usage,power_channel, 1)
 	return 1
 
+/proc/is_operable(var/obj/machinery/M, var/mob/user)
+	return istype(M) && M.operable()
+
 /obj/machinery/proc/operable(var/additional_flags = 0)
 	return !inoperable(additional_flags)
 
@@ -195,7 +196,10 @@ Class Procs:
 	return (stat & (NOPOWER|BROKEN|additional_flags))
 
 /obj/machinery/CanUseTopic(var/mob/user)
-	if(!interact_offline && (stat & (NOPOWER|BROKEN)))
+	if(stat & BROKEN)
+		return STATUS_CLOSE
+
+	if(!interact_offline && (stat & NOPOWER))
 		return STATUS_CLOSE
 
 	return ..()

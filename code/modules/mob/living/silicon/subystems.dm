@@ -39,7 +39,7 @@
 		return
 
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
-		AH.register(src, /mob/living/silicon/proc/receive_alarm)
+		AH.register_alarm(src, /mob/living/silicon/proc/receive_alarm)
 		queued_alarms[AH] = list()	// Makes sure alarms remain listed in consistent order
 
 /********************
@@ -76,7 +76,7 @@
 	set name = "Law Manager"
 	set category = "Subystems"
 
-	law_manager.ui_interact(usr, state = self_state)
+	law_manager.ui_interact(usr, state = conscious_state)
 
 /********************
 *	Power Monitor	*

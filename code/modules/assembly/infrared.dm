@@ -187,13 +187,10 @@
 	return
 
 /obj/effect/beam/i_beam/process()
-	//world << "i_beam \ref[src] : process"
 
-	if((loc.density || !(master)))
-	//	world << "beam hit loc [loc] or no master [master], deleting"
+	if((loc && loc.density) || !master)
 		qdel(src)
 		return
-	//world << "proccess: [src.left] left"
 
 	if(left > 0)
 		left--

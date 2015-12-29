@@ -6,8 +6,11 @@ var/datum/antagonist/highlander/highlanders
 	welcome_text = "There can be only one."
 	id = MODE_HIGHLANDER
 	flags = ANTAG_SUSPICIOUS | ANTAG_IMPLANT_IMMUNE //| ANTAG_RANDSPAWN | ANTAG_VOTABLE // Someday...
-	max_antags = 5
-	max_antags_round = 7
+
+	hard_cap = 5
+	hard_cap_round = 7
+	initial_spawn_req = 3
+	initial_spawn_target = 5
 
 /datum/antagonist/highlander/New()
 	..()

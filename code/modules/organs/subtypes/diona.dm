@@ -1,5 +1,5 @@
-/proc/spawn_diona_nymph_from_organ(var/obj/item/organ/organ)
-	if(!istype(organ))
+/proc/spawn_diona_nymph(var/turf/target)
+	if(!istype(target))
 		return 0
 
 	//This is a terrible hack and I should be ashamed.
@@ -8,7 +8,7 @@
 		return 0
 
 	spawn(1) // So it has time to be thrown about by the gib() proc.
-		var/mob/living/carbon/alien/diona/D = new(get_turf(organ))
+		var/mob/living/carbon/alien/diona/D = new(target)
 		var/datum/ghosttrap/plant/P = get_ghost_trap("living plant")
 		P.request_player(D, "A diona nymph has split off from its gestalt. ")
 		spawn(60)
@@ -144,7 +144,7 @@
 	..()
 	if(!istype(H) || !H.organs || !H.organs.len)
 		H.death()
-	if(prob(50) && spawn_diona_nymph_from_organ(src))
+	if(prob(50) && spawn_diona_nymph(get_turf(src)))
 		qdel(src)
 
 /obj/item/organ/diona/process()
@@ -166,14 +166,6 @@
 	name = "anchoring ligament"
 	parent_organ = "groin"
 
-/obj/item/organ/diona/node
-	name = "receptor node"
-	parent_organ = "head"
-
-/obj/item/organ/diona/nutrients
-	name = "nutrient vessel"
-	parent_organ = "chest"
-
 /obj/item/organ/diona
 	name = "diona nymph"
 	icon = 'icons/obj/objects.dmi'
@@ -185,14 +177,15 @@
 	..()
 	if(!istype(H) || !H.organs || !H.organs.len)
 		H.death()
-	if(prob(50) && spawn_diona_nymph_from_organ(src))
+	if(prob(50) && spawn_diona_nymph(get_turf(src)))
 		qdel(src)
 
 // These are different to the standard diona organs as they have a purpose in other
 // species (absorbing radiation and light respectively)
 /obj/item/organ/diona/nutrients
-	name = "nutrient vessel"
-	organ_tag = "nutrient vessel"
+	name = "nutrient channel"
+	parent_organ = "chest"
+	organ_tag = "nutrient channel"
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "claw"
 
@@ -200,7 +193,8 @@
 	return
 
 /obj/item/organ/diona/node
-	name = "receptor node"
+	name = "response node"
+	parent_organ = "head"
 	organ_tag = "receptor node"
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "claw"

@@ -13,6 +13,7 @@
 #define GAS_CRITICAL_TEMPERATURE     132.65    // K. The critical point temperature for air.
 
 #define RADIATOR_EXPOSED_SURFACE_AREA_RATIO 0.04 // (3 cm + 100 cm * sin(3deg))/(2*(3+100 cm)). Unitless ratio.
+#define HUMAN_EXPOSED_SURFACE_AREA          5.2 //m^2, surface area of 1.7m (H) x 0.46m (D) cylinder
 
 #define T0C  273.15 //    0.0 degrees celcius
 #define T20C 293.15 //   20.0 degrees celcius

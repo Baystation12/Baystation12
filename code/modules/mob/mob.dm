@@ -39,7 +39,6 @@
 	pain = null
 	item_use_icon = null
 	gun_move_icon = null
-	gun_run_icon = null
 	gun_setting_icon = null
 	spell_masters = null
 	zone_sel = null
@@ -85,8 +84,7 @@
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
 
 /mob/visible_message(var/message, var/self_message, var/blind_message)
-
-	var/list/see = get_mobs_or_objects_in_view(world.view,src) | viewers(get_turf(src), null)
+	var/list/see = get_mobs_or_objects_in_view(world.view,src) | viewers(world.view,src)
 
 	for(var/I in see)
 		if(isobj(I))
@@ -152,8 +150,38 @@
 	//handle_typing_indicator() //You said the typing indicator would be fine. The test determined that was a lie.
 	return
 
-/mob/proc/incapacitated()
-	return (stat || paralysis || stunned || weakened || restrained())
+#define UNBUCKLED 0
+#define PARTIALLY_BUCKLED 1
+#define FULLY_BUCKLED 2
+/mob/proc/buckled()
+	// Preliminary work for a future buckle rewrite,
+	// where one might be fully restrained (like an elecrical chair), or merely secured (shuttle chair, keeping you safe but not otherwise restrained from acting)
+	if(!buckled)
+		return UNBUCKLED
+	return restrained() ? FULLY_BUCKLED : PARTIALLY_BUCKLED
+
+/mob/proc/is_physically_disabled()
+	return incapacitated(INCAPACITATION_DISABLED)
+	
+/mob/proc/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
+	if ((incapacitation_flags & INCAPACITATION_DISABLED) && (stat || paralysis || stunned || weakened || resting || sleeping || (status_flags & FAKEDEATH)))
+		return 1
+
+	if((incapacitation_flags & INCAPACITATION_RESTRAINED) && restrained())
+		return 1
+
+	if((incapacitation_flags & (INCAPACITATION_BUCKLED_PARTIALLY|INCAPACITATION_BUCKLED_FULLY)))
+		var/buckling = buckled()
+		if(buckling >= PARTIALLY_BUCKLED && (incapacitation_flags & INCAPACITATION_BUCKLED_PARTIALLY))
+			return 1
+		if(buckling == FULLY_BUCKLED && (incapacitation_flags & INCAPACITATION_BUCKLED_FULLY))
+			return 1
+
+	return 0
+
+#undef UNBUCKLED
+#undef PARTIALLY_BUCKLED
+#undef FULLY_BUCKLED
 
 /mob/proc/restrained()
 	return
@@ -359,39 +387,20 @@
 	if (!( config.abandon_allowed ))
 		usr << "<span class='notice'>Respawn is disabled.</span>"
 		return
-	if ((stat != 2 || !( ticker )))
+	if ((stat != DEAD || !( ticker )))
 		usr << "<span class='notice'><B>You must be dead to use this!</B></span>"
 		return
 	if (ticker.mode.deny_respawn) //BS12 EDIT
 		usr << "<span class='notice'>Respawn is disabled for this roundtype.</span>"
 		return
-	else
-		var/deathtime = world.time - src.timeofdeath
-		if(istype(src,/mob/dead/observer))
-			var/mob/dead/observer/G = src
-			if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
-				usr << "\blue <B>Upon using the antagHUD you forfeighted the ability to join the round.</B>"
-				return
-		var/deathtimeminutes = round(deathtime / 600)
-		var/pluralcheck = "minute"
-		if(deathtimeminutes == 0)
-			pluralcheck = ""
-		else if(deathtimeminutes == 1)
-			pluralcheck = " [deathtimeminutes] minute and"
-		else if(deathtimeminutes > 1)
-			pluralcheck = " [deathtimeminutes] minutes and"
-		var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
-		usr << "You have been dead for[pluralcheck] [deathtimeseconds] seconds."
+	else if(!MayRespawn(1, config.respawn_delay))
+		return
 
-		if (deathtime < 18000)
-			usr << "You must wait 30 minutes to respawn!"
-			return
-		else
-			usr << "You can respawn now, enjoy your new life!"
+	usr << "You can respawn now, enjoy your new life!"
 
 	log_game("[usr.name]/[usr.key] used abandon mob.")
 
-	usr << "\blue <B>Make sure to play a different character, and please roleplay correctly!</B>"
+	usr << "<span class='notice'><B>Make sure to play a different character, and please roleplay correctly!</B></span>"
 
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
@@ -580,19 +589,43 @@
 			pullin.icon_state = "pull0"
 
 /mob/proc/start_pulling(var/atom/movable/AM)
+
 	if ( !AM || !usr || src==AM || !isturf(src.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
 		return
 
 	if (AM.anchored)
-		usr << "<span class='notice'>It won't budge!</span>"
+		src << "<span class='warning'>It won't budge!</span>"
 		return
 
 	var/mob/M = AM
 	if(ismob(AM))
+
+		if(!can_pull_mobs || !can_pull_size)
+			src << "<span class='warning'>It won't budge!</span>"
+			return
+
+		if((mob_size < M.mob_size) && (can_pull_mobs != MOB_PULL_LARGER))
+			src << "<span class='warning'>It won't budge!</span>"
+			return
+
+		if((mob_size == M.mob_size) && (can_pull_mobs == MOB_PULL_SMALLER))
+			src << "<span class='warning'>It won't budge!</span>"
+			return
+
+		// If your size is larger than theirs and you have some
+		// kind of mob pull value AT ALL, you will be able to pull
+		// them, so don't bother checking that explicitly.
+
 		if(!iscarbon(src))
 			M.LAssailant = null
 		else
 			M.LAssailant = usr
+
+	else if(isobj(AM))
+		var/obj/I = AM
+		if(!can_pull_size || can_pull_size < I.w_class)
+			src << "<span class='warning'>It won't budge!</span>"
+			return
 
 	if(pulling)
 		var/pulling_old = pulling
@@ -649,7 +682,7 @@
 
 /mob/Stat()
 	..()
-	. = (client && client.inactivity < 1200)
+	. = (is_client_active(10 MINUTES))
 
 	if(.)
 		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
@@ -658,31 +691,28 @@
 
 		if(client.holder)
 			if(statpanel("Status"))
-				stat("Location:","([x], [y], [z])")
-			if(statpanel("Processes"))
+				stat("Location:", "([x], [y], [z]) [loc]")
 				stat("CPU:","[world.cpu]")
 				stat("Instances:","[world.contents.len]")
-				if(processScheduler && processScheduler.getIsRunning())
-					for(var/datum/controller/process/P in processScheduler.processes)
-						stat(P.getStatName(), P.getTickTime())
-				else
-					stat("processScheduler is not running.")
+			if(statpanel("Processes"))
+				if(processScheduler)
+					processScheduler.statProcesses()
 
 		if(listed_turf && client)
 			if(!TurfAdjacent(listed_turf))
 				listed_turf = null
 			else
-				statpanel(listed_turf.name, null, listed_turf)
-				for(var/atom/A in listed_turf)
-					if(!A.mouse_opacity)
-						continue
-					if(A.invisibility > see_invisible)
-						continue
-					if(is_type_in_list(A, shouldnt_see))
-						continue
-					statpanel(listed_turf.name, null, A)
+				if(statpanel("Turf"))
+					stat("\icon[listed_turf]", listed_turf.name)
+					for(var/atom/A in listed_turf)
+						if(!A.mouse_opacity)
+							continue
+						if(A.invisibility > see_invisible)
+							continue
+						if(is_type_in_list(A, shouldnt_see))
+							continue
+						stat(A)
 
-	sleep(4) //Prevent updating the stat panel for the next .4 seconds, prevents clientside latency from updates
 
 // facing verbs
 /mob/proc/canface()
@@ -697,7 +727,7 @@
 	return 0
 
 /mob/proc/cannot_stand()
-	return incapacitated() || restrained() || resting || sleeping || (status_flags & FAKEDEATH)
+	return incapacitated(INCAPACITATION_DEFAULT & (~INCAPACITATION_RESTRAINED))
 
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
 /mob/proc/update_canmove()
@@ -708,7 +738,7 @@
 	else
 		if(istype(buckled, /obj/vehicle))
 			var/obj/vehicle/V = buckled
-			if(cannot_stand())
+			if(is_physically_disabled())
 				lying = 1
 				canmove = 0
 				pixel_y = V.mob_offset_y - 5
@@ -741,8 +771,8 @@
 
 	if(lying)
 		density = 0
-		drop_l_hand()
-		drop_r_hand()
+		if(l_hand) unEquip(l_hand)
+		if(r_hand) unEquip(r_hand)
 	else
 		density = initial(density)
 
@@ -966,7 +996,7 @@ mob/proc/yank_out_object()
 			var/mob/living/carbon/human/human_user = U
 			human_user.bloody_hands(H)
 
-	selection.loc = get_turf(src)
+	selection.forceMove(get_turf(src))
 	if(!(U.l_hand && U.r_hand))
 		U.put_in_hands(selection)
 

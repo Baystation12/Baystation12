@@ -33,6 +33,11 @@
 			return
 	turfs |= src
 
+	if(dynamic_lighting)
+		luminosity = 0
+	else
+		luminosity = 1
+
 /turf/proc/update_icon()
 	return
 
@@ -70,6 +75,9 @@
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
 		usr << "<span class='warning'>Movement is admin-disabled.</span>" //This is to identify lag problems
 		return
+
+	..()
+
 	if (!mover || !isturf(mover.loc))
 		return 1
 
@@ -132,7 +140,7 @@ var/const/enterloopsanity = 100
 	..()
 	var/objects = 0
 	if(A && (A.flags & PROXMOVE))
-		for(var/atom/thing as mob|obj|turf|area in range(1))
+		for(var/atom/movable/thing in range(1))
 			if(objects > enterloopsanity) break
 			objects++
 			spawn(0)
@@ -175,6 +183,13 @@ var/const/enterloopsanity = 100
 				L.Add(t)
 	return L
 
+/turf/proc/CardinalTurfs()
+	var/L[] = new()
+	for(var/turf/simulated/T in AdjacentTurfs())
+		if(T.x == src.x || T.y == src.y)
+			L.Add(T)
+	return L
+
 /turf/proc/Distance(turf/t)
 	if(get_dist(src,t) == 1)
 		var/cost = (src.x - t.x) * (src.x - t.x) + (src.y - t.y) * (src.y - t.y)
@@ -182,6 +197,7 @@ var/const/enterloopsanity = 100
 		return cost
 	else
 		return get_dist(src,t)
+
 /turf/proc/AdjacentTurfsSpace()
 	var/L[] = new()
 	for(var/turf/t in oview(src,1))
@@ -200,3 +216,20 @@ var/const/enterloopsanity = 100
 		if(A.density && !(A.flags & ON_BORDER))
 			return 1
 	return 0
+
+//expects an atom containing the reagents used to clean the turf
+/turf/proc/clean(atom/source, mob/user)
+	if(source.reagents.has_reagent("water", 1) || source.reagents.has_reagent("cleaner", 1))
+		clean_blood()
+		if(istype(src, /turf/simulated))
+			var/turf/simulated/T = src
+			T.dirt = 0
+		for(var/obj/effect/O in src)
+			if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
+				qdel(O)
+	else
+		user << "<span class='warning'>\The [source] is too dry to wash that.</span>"
+	source.reagents.trans_to_turf(src, 1, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
+
+/turf/proc/update_blood_overlays()
+	return

@@ -174,11 +174,11 @@ var/list/turret_icons
 		icon_state = "turretCover"
 
 /obj/machinery/porta_turret/proc/isLocked(mob/user)
-	if(ailock && user.isSilicon())
+	if(ailock && issilicon(user))
 		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
 		return 1
 
-	if(locked && !user.isSilicon())
+	if(locked && !issilicon(user))
 		user << "<span class='notice'>Access denied.</span>"
 		return 1
 
@@ -375,7 +375,9 @@ var/list/turret_icons
 		die()	//the death process :(
 
 /obj/machinery/porta_turret/bullet_act(obj/item/projectile/Proj)
-	if(Proj.damage_type == HALLOSS)
+	var/damage = Proj.get_structure_damage()
+
+	if(!damage)
 		return
 
 	if(enabled)
@@ -387,8 +389,7 @@ var/list/turret_icons
 
 	..()
 
-	if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		take_damage(Proj.damage)
+	take_damage(damage)
 
 /obj/machinery/porta_turret/emp_act(severity)
 	if(enabled)
@@ -412,7 +413,6 @@ var/list/turret_icons
 /obj/machinery/porta_turret/ex_act(severity)
 	switch (severity)
 		if (1)
-			del(src)
 			qdel(src)
 		if (2)
 			if (prob(25))
@@ -444,14 +444,8 @@ var/list/turret_icons
 	var/list/targets = list()			//list of primary targets
 	var/list/secondarytargets = list()	//targets that are least important
 
-	for(var/obj/mecha/ME in view(7,src))
-		assess_and_assign(ME.occupant, targets, secondarytargets)
-
-	for(var/obj/vehicle/train/T in view(7,src))
-		assess_and_assign(T.load, targets, secondarytargets)
-
-	for(var/mob/living/C in view(7,src))	//loops through all living lifeforms in view
-		assess_and_assign(C, targets, secondarytargets)
+	for(var/mob/M in mobs_in_view(world.view, src))
+		assess_and_assign(M, targets, secondarytargets)
 
 	if(!tryToShootAt(targets))
 		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
@@ -623,7 +617,6 @@ var/list/turret_icons
 	else
 		A = new projectile(loc)
 		playsound(loc, shot_sound, 75, 1)
-	A.original = target
 
 	// Lethal/emagged turrets use twice the power due to higher energy beams
 	// Emagged turrets again use twice as much power due to higher firing rates
@@ -631,19 +624,15 @@ var/list/turret_icons
 
 	//Turrets aim for the center of mass by default.
 	//If the target is grabbing someone then the turret smartly aims for extremities
+	var/def_zone
 	var/obj/item/weapon/grab/G = locate() in target
 	if(G && G.state >= GRAB_NECK) //works because mobs are currently not allowed to upgrade to NECK if they are grabbing two people.
-		A.def_zone = pick("head", "l_hand", "r_hand", "l_foot", "r_foot", "l_arm", "r_arm", "l_leg", "r_leg")
+		def_zone = pick("head", "l_hand", "r_hand", "l_foot", "r_foot", "l_arm", "r_arm", "l_leg", "r_leg")
 	else
-		A.def_zone = pick("chest", "groin")
+		def_zone = pick("chest", "groin")
 
 	//Shooting Code:
-	A.current = T
-	A.starting = T
-	A.yo = U.y - T.y
-	A.xo = U.x - T.x
-	spawn(1)
-		A.process()
+	A.launch(target, def_zone)
 
 /datum/turret_checks
 	var/enabled
@@ -705,7 +694,7 @@ var/list/turret_icons
 				playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 				user << "<span class='notice'>You dismantle the turret construction.</span>"
 				new /obj/item/stack/material/steel( loc, 5)
-				qdel(src) // qdel
+				qdel(src)
 				return
 
 		if(1)

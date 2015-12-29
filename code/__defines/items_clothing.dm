@@ -44,7 +44,6 @@
 #define PASSTABLE  0x1
 #define PASSGLASS  0x2
 #define PASSGRILLE 0x4
-#define PASSBLOB   0x8
 
 // Bitmasks for the flags_inv variable. These determine when a piece of clothing hides another, i.e. a helmet hiding glasses.
 // WARNING: The following flags apply only to the external suit!

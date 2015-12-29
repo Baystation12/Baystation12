@@ -5,6 +5,7 @@
 	density = 1
 	var/health = 100.0
 	flags = CONDUCT
+	w_class = 5
 
 	var/valve_open = 0
 	var/release_pressure = ONE_ATMOSPHERE
@@ -17,6 +18,7 @@
 	var/temperature_resistance = 1000 + T0C
 	volume = 1000
 	use_power = 0
+	interact_offline = 1 // Allows this to be used when not in powered area.
 	var/release_log = ""
 	var/update_flag = 0
 
@@ -225,11 +227,6 @@ update_flag
 	if(GM && GM.volume>0)
 		return GM.return_pressure()
 	return 0
-
-/obj/machinery/portable_atmospherics/canister/blob_act()
-	src.health -= 200
-	healthcheck()
-	return
 
 /obj/machinery/portable_atmospherics/canister/bullet_act(var/obj/item/projectile/Proj)
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))

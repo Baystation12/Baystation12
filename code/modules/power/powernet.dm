@@ -19,8 +19,14 @@
 	..()
 
 /datum/powernet/Destroy()
+	for(var/obj/structure/cable/C in cables)
+		cables -= C
+		C.powernet = null
+	for(var/obj/machinery/power/M in nodes)
+		nodes -= M
+		M.powernet = null
 	powernets -= src
-	..()
+	return ..()
 
 //Returns the amount of excess power (before refunding to SMESs) from last tick.
 //This is for machines that might adjust their power consumption using this data.

@@ -54,12 +54,10 @@
 	else if(istype(Proj,/obj/item/projectile/ion))
 		burn(500)
 
-	// Tasers and stuff? No thanks. Also no clone or tox damage crap.
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		return
+	var/proj_damage = Proj.get_structure_damage()
 
 	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
-	var/damage = min(Proj.damage, 100)
+	var/damage = min(proj_damage, 100)
 
 	take_damage(damage)
 	return
@@ -193,10 +191,6 @@
 		if(3.0)
 			take_damage(rand(0, 250))
 		else
-	return
-
-/turf/simulated/wall/blob_act()
-	take_damage(rand(75, 125))
 	return
 
 // Wall-rot effect, a nasty fungus that destroys walls.

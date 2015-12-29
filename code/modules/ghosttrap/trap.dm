@@ -16,6 +16,7 @@ proc/populate_ghost_traps()
 
 /datum/ghosttrap
 	var/object = "positronic brain"
+	var/minutes_since_death = 0     // If non-zero the ghost must have been dead for this many minutes to be allowed to spawn
 	var/list/ban_checks = list("AI","Cyborg")
 	var/pref_check = BE_AI
 	var/ghost_trap_message = "They are occupying a positronic brain now."
@@ -25,8 +26,7 @@ proc/populate_ghost_traps()
 /datum/ghosttrap/proc/assess_candidate(var/mob/dead/observer/candidate)
 	if(!istype(candidate) || !candidate.client || !candidate.ckey)
 		return 0
-	if(!candidate.MayRespawn())
-		candidate << "You have made use of the AntagHUD and hence cannot enter play as \a [object]."
+	if(!candidate.MayRespawn(1, minutes_since_death))
 		return 0
 	if(islist(ban_checks))
 		for(var/bantype in ban_checks)
@@ -81,7 +81,7 @@ proc/populate_ghost_traps()
 	target << "<b>You are a positronic brain, brought into existence on [station_name()].</b>"
 	target << "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>"
 	target << "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>"
-	target << "<b>Use say :b to speak to other artificial intelligences.</b>"
+	target << "<b>Use say [target.get_language_prefix()]b to speak to other artificial intelligences.</b>"
 	var/turf/T = get_turf(target)
 	T.visible_message("<span class='notice'>\The [src] chimes quietly.</span>")
 	var/obj/item/device/mmi/digital/posibrain/P = target.loc

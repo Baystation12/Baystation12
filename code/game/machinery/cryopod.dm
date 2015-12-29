@@ -110,7 +110,7 @@
 
 		visible_message("<span class='notice'>The console beeps happily as it disgorges \the [I].</span>", 3)
 
-		I.loc = get_turf(src)
+		I.forceMove(get_turf(src))
 		frozen_items -= I
 
 	else if(href_list["allitems"])
@@ -123,7 +123,7 @@
 		visible_message("<span class='notice'>The console beeps happily as it disgorges the desired objects.</span>", 3)
 
 		for(var/obj/item/I in frozen_items)
-			I.loc = get_turf(src)
+			I.forceMove(get_turf(src))
 			frozen_items -= I
 
 	src.updateUsrDialog()
@@ -210,7 +210,7 @@
 
 /obj/machinery/cryopod/Destroy()
 	if(occupant)
-		occupant.loc = loc
+		occupant.forceMove(loc)
 		occupant.resting = 1
 	..()
 
@@ -220,7 +220,11 @@
 	find_control_computer()
 
 /obj/machinery/cryopod/proc/find_control_computer(urgent=0)
-	control_computer = locate(/obj/machinery/computer/cryopod) in src.loc.loc
+	// Workaround for http://www.byond.com/forum/?post=2007448
+	for(var/obj/machinery/computer/cryopod/C in src.loc.loc)
+		control_computer = C
+		break
+	// control_computer = locate(/obj/machinery/computer/cryopod) in src.loc.loc
 
 	// Don't send messages unless we *need* the computer, and less than five minutes have passed since last time we messaged
 	if(!control_computer && urgent && last_no_computer_message + 5*60*10 < world.time)
@@ -268,7 +272,7 @@
 	qdel(R.mmi)
 	for(var/obj/item/I in R.module) // the tools the borg has; metal, glass, guns etc
 		for(var/obj/item/O in I) // the things inside the tools, if anything; mainly for janiborg trash bags
-			O.loc = R
+			O.forceMove(R)
 		qdel(I)
 	qdel(R.module)
 
@@ -280,13 +284,13 @@
 	//Drop all items into the pod.
 	for(var/obj/item/W in occupant)
 		occupant.drop_from_inventory(W)
-		W.loc = src
+		W.forceMove(src)
 
 		if(W.contents.len) //Make sure we catch anything not handled by qdel() on the items.
 			for(var/obj/item/O in W.contents)
 				if(istype(O,/obj/item/weapon/storage/internal)) //Stop eating pockets, you fuck!
 					continue
-				O.loc = src
+				O.forceMove(src)
 
 	//Delete all items not on the preservation list.
 	var/list/items = src.contents.Copy()
@@ -296,10 +300,18 @@
 	for(var/obj/item/W in items)
 
 		var/preserve = null
-		for(var/T in preserve_items)
-			if(istype(W,T))
+		// Snowflaaaake.
+		if(istype(W, /obj/item/device/mmi))
+			var/obj/item/device/mmi/brain = W
+			if(brain.brainmob && brain.brainmob.client && brain.brainmob.key)
 				preserve = 1
-				break
+			else
+				continue
+		else
+			for(var/T in preserve_items)
+				if(istype(W,T))
+					preserve = 1
+					break
 
 		if(!preserve)
 			qdel(W)
@@ -308,26 +320,16 @@
 				control_computer.frozen_items += W
 				W.loc = null
 			else
-				W.loc = src.loc
+				W.forceMove(src.loc)
 
 	//Update any existing objectives involving this mob.
 	for(var/datum/objective/O in all_objectives)
 		// We don't want revs to get objectives that aren't for heads of staff. Letting
 		// them win or lose based on cryo is silly so we remove the objective.
-		if(istype(O,/datum/objective/mutiny) && O.target == occupant.mind)
+		if(O.target == occupant.mind)
+			if(O.owner && O.owner.current)
+				O.owner.current << "<span class='warning'>You get the feeling your target is no longer within your reach...</span>"
 			qdel(O)
-		else if(O.target && istype(O.target,/datum/mind))
-			if(O.target == occupant.mind)
-				if(O.owner && O.owner.current)
-					O.owner.current << "<span class='warning'>You get the feeling your target is no longer within your reach. Time for Plan [pick(list("A","B","C","D","X","Y","Z"))]...</span>"
-				O.target = null
-				spawn(1) //This should ideally fire after the occupant is deleted.
-					if(!O) return
-					O.find_target()
-					if(!(O.target))
-						all_objectives -= O
-						O.owner.objectives -= O
-						qdel(O)
 
 	//Handle job slot/tater cleanup.
 	var/job = occupant.mind.assigned_role
@@ -408,7 +410,7 @@
 			if(do_after(user, 20))
 				if(!M || !G || !G:affecting) return
 
-				M.loc = src
+				M.forceMove(src)
 
 				if(M.client)
 					M.client.perspective = EYE_PERSPECTIVE
@@ -444,7 +446,7 @@
 	if(announce) items -= announce
 
 	for(var/obj/item/W in items)
-		W.loc = get_turf(src)
+		W.forceMove(get_turf(src))
 
 	src.go_out()
 	add_fingerprint(usr)
@@ -483,7 +485,7 @@
 		usr.stop_pulling()
 		usr.client.perspective = EYE_PERSPECTIVE
 		usr.client.eye = src
-		usr.loc = src
+		usr.forceMove(src)
 		set_occupant(usr)
 
 		icon_state = occupied_icon_state
@@ -506,7 +508,7 @@
 		occupant.client.eye = src.occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
 
-	occupant.loc = get_turf(src)
+	occupant.forceMove(get_turf(src))
 	set_occupant(null)
 
 	icon_state = base_icon_state
@@ -518,8 +520,3 @@
 	name = initial(name)
 	if(occupant)
 		name = "[name] ([occupant])"
-
-
-//Attacks/effects.
-/obj/machinery/cryopod/blob_act()
-	return //Sorta gamey, but we don't really want these to be destroyed.

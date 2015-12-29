@@ -1,7 +1,7 @@
 /datum/species/slime
 	name = "Slime"
 	name_plural = "slimes"
-	is_small = 1
+	mob_size = MOB_SMALL
 
 	icobase = 'icons/mob/human_races/r_slime.dmi'
 	deform = 'icons/mob/human_races/r_slime.dmi'

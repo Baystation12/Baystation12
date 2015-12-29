@@ -45,7 +45,7 @@
 			var/turf/simulated/floor/asteroid/T = turf_to_check
 			T.updateMineralOverlays()
 		else if(istype(turf_to_check,/turf/space) || istype(turf_to_check,/turf/simulated/floor))
-			turf_to_check.overlays += image('icons/turf/walls.dmi', "rock_side_[direction]")
+			turf_to_check.overlays += image('icons/turf/walls.dmi', "rock_side", dir = turn(step_overlays[direction], 180))
 
 /turf/simulated/mineral/ex_act(severity)
 	switch(severity)
@@ -292,7 +292,7 @@
 			T.overlays.Cut()
 			for(var/next_direction in step_overlays)
 				if(istype(get_step(T, step_overlays[next_direction]),/turf/simulated/mineral))
-					T.overlays += image('icons/turf/walls.dmi', "rock_side_[next_direction]")
+					T.overlays += image('icons/turf/walls.dmi', "rock_side", dir = step_overlays[next_direction])
 
 	if(istype(N))
 		N.overlay_detail = "asteroid[rand(0,9)]"
@@ -497,10 +497,10 @@
 	for(var/direction in step_overlays)
 
 		if(istype(get_step(src, step_overlays[direction]), /turf/space))
-			overlays += image('icons/turf/floors.dmi', "asteroid_edge_[direction]")
+			overlays += image('icons/turf/flooring/asteroid.dmi', "asteroid_edges", dir = step_overlays[direction])
 
 		if(istype(get_step(src, step_overlays[direction]), /turf/simulated/mineral))
-			overlays += image('icons/turf/walls.dmi', "rock_side_[direction]")
+			overlays += image('icons/turf/walls.dmi', "rock_side", dir = step_overlays[direction])
 
 	//todo cache
 	if(overlay_detail) overlays |= image(icon = 'icons/turf/flooring/decals.dmi', icon_state = overlay_detail)

@@ -97,14 +97,14 @@
 
 
 /datum/gas_mixture/proc/equalize(datum/gas_mixture/sharer)
-	for(var/g in sharer.gas)
+	var/our_heatcap = heat_capacity()
+	var/share_heatcap = sharer.heat_capacity()
+
+	for(var/g in gas|sharer.gas)
 		var/comb = gas[g] + sharer.gas[g]
 		comb /= volume + sharer.volume
 		gas[g] = comb * volume
 		sharer.gas[g] = comb * sharer.volume
-
-	var/our_heatcap = heat_capacity()
-	var/share_heatcap = sharer.heat_capacity()
 
 	if(our_heatcap + share_heatcap)
 		temperature = ((temperature * our_heatcap) + (sharer.temperature * share_heatcap)) / (our_heatcap + share_heatcap)
@@ -306,7 +306,7 @@
 	return 1
 
 
-/datum/gas_mixture/proc/react(atom/dump_location)
+/datum/gas_mixture/proc/react()
 	zburn(null, force_burn=0, no_check=0) //could probably just call zburn() here with no args but I like being explicit.
 
 
@@ -442,20 +442,25 @@
 			total_gas[g] += gasmix.gas[g]
 
 	if(total_volume > 0)
-		//Average out the gases
-		for(var/g in total_gas)
-			total_gas[g] /= total_volume
+		var/datum/gas_mixture/combined = new(total_volume)
+		combined.gas = total_gas
 
 		//Calculate temperature
-		var/temperature = 0
-
 		if(total_heat_capacity > 0)
-			temperature = total_thermal_energy / total_heat_capacity
+			combined.temperature = total_thermal_energy / total_heat_capacity
+		combined.update_values()
+
+		//Allow for reactions
+		combined.react()
+
+		//Average out the gases
+		for(var/g in combined.gas)
+			combined.gas[g] /= total_volume
 
 		//Update individual gas_mixtures
 		for(var/datum/gas_mixture/gasmix in gases)
-			gasmix.gas = total_gas.Copy()
-			gasmix.temperature = temperature
+			gasmix.gas = combined.gas.Copy()
+			gasmix.temperature = combined.temperature
 			gasmix.multiply(gasmix.volume)
 
 	return 1

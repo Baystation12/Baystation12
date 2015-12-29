@@ -28,26 +28,15 @@
 	return
 
 
-/obj/machinery/lapvend/blob_act()
-	if (prob(50))
-		spawn(0)
-			qdel(src)
-		return
-
-	return
-
-
 /obj/machinery/lapvend/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(vendmode == 1)
-		if(istype(W, /obj/item/weapon/card))
-			var/obj/item/weapon/card/I = W
-			scan_card(I)
+	var/obj/item/weapon/card/id/I = W.GetID()
+
+	if(vendmode == 1 && I)
+		scan_id(I, W)
+		vendmode = 0
+	if(vendmode == 3 && I)
+		if(reimburse_id(I, W))
 			vendmode = 0
-	if(vendmode == 3)
-		if(istype(W,/obj/item/weapon/card))
-			var/obj/item/weapon/card/I = W
-			if(reimburse(I))
-				vendmode = 0
 	if(vendmode == 0)
 		if(istype(W, /obj/item/device/laptop))
 			var/obj/item/device/laptop/L = W
@@ -67,14 +56,14 @@
 	var/dat = "<TT><center><b>[vendorname]</b></center><hr /><br>" //display the name, and added a horizontal rule
 	if(vendmode == 0)
 		dat += "<center><b>Please choose your laptop customization options</b></center><br>"
-		dat += "<center>Your comptuer will automatically be loaded with any programs you can use after the transaction is complete."
+		dat += "<center>Your comptuer will automatically be loaded with any programs you can use after the transaction is complete.</center>"
 		dat += "<center><b>Some programs will require additional components to be installed!</center></b><hr /><br>"
 		dat += "<center><b>HDD (Required)</b> : Added</center><br>"
-		dat += "<center><b>Card Reader</b> : <A href='?src=\ref[src];choice=single_add'>Single (50)</a> | <A href='?src=\ref[src];choice=dual_add'>Dual (125)</a><br>"
-		dat += "<center><b>Floppy Drive</b>: <A href='?src=\ref[src];choice=floppy_add'>Add (50)</a><br>"
-		dat += "<center><b>Radio Network card</b> <A href='?src=\ref[src];choice=radio_add'>Add (50)</a><br>"
-		dat += "<center><b>Camera Card</b> <A href='?src=\ref[src];choice=camnet_add'>Add (100)</a><br>"
-		dat += "<center><b> Network card</b> <A href='?src=\ref[src];choice=area_add'>Area (75)</a> <A href='?src=\ref[src];choice=prox_add'>Adjacent (50)</a><A href='?src=\ref[src];choice=cable_add'>Powernet (25)</a><br>"
+		dat += "<center><b>Card Reader</b> : <A href='?src=\ref[src];choice=single_add'>Single (50)</a> | <A href='?src=\ref[src];choice=dual_add'>Dual (125)</a></center><br>"
+		dat += "<center><b>Floppy Drive</b>: <A href='?src=\ref[src];choice=floppy_add'>Add (50)</a></center><br>"
+		dat += "<center><b>Radio Network card</b> <A href='?src=\ref[src];choice=radio_add'>Add (50)</a></center><br>"
+		dat += "<center><b>Camera Card</b> <A href='?src=\ref[src];choice=camnet_add'>Add (100)</a></center><br>"
+		dat += "<center><b> Network card</b> <A href='?src=\ref[src];choice=area_add'>Area (75)</a> <A href='?src=\ref[src];choice=prox_add'>Adjacent (50)</a><A href='?src=\ref[src];choice=cable_add'>Powernet (25)</a></center><br>"
 		dat += "<hr /><center> Power source upgrade</center> <A href='?src=\ref[src];choice=high_add'>Extended (175)</a> <A href='?src=\ref[src];choice=super_add'>Unreal (250)</a>"
 
 	if(vendmode == 0 || vendmode == 1)
@@ -210,26 +199,24 @@
 
 	newlap.spawn_parts()
 
-/obj/machinery/lapvend/proc/scan_card(var/obj/item/weapon/card/I)
-	if (istype(I, /obj/item/weapon/card/id))
-		var/obj/item/weapon/card/id/C = I
-		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
-		var/datum/money_account/CH = get_account(C.associated_account_number)
-		if(!CH)
-			usr << "\icon[src]<span class='warning'>No valid account number is associated with this card.</span>"
-			return
-		if(CH.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
-			if(vendor_account)
-				var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
-				var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
-				if(D)
-					transfer_and_vend(D, C)
-				else
-					usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
+/obj/machinery/lapvend/proc/scan_id(var/obj/item/weapon/card/id/C, var/obj/item/I)
+	visible_message("<span class='info'>\The [usr] swipes \the [I] through \the [src].</span>")
+	var/datum/money_account/CH = get_account(C.associated_account_number)
+	if(!CH)
+		usr << "\icon[src]<span class='warning'>No valid account number is associated with this card.</span>"
+		return
+	if(CH.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
+		if(vendor_account)
+			var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
+			var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
+			if(D)
+				transfer_and_vend(D, C)
 			else
 				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call [boss_short] Support.</span>"
 		else
-			transfer_and_vend(CH, C)
+			usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
+	else
+		transfer_and_vend(CH, C)
 
 
 // Transfers money and vends the laptop.
@@ -361,30 +348,28 @@
 
 
 
-/obj/machinery/lapvend/proc/reimburse(var/obj/item/weapon/card/I)
-	if (istype(I, /obj/item/weapon/card/id))
-		var/obj/item/weapon/card/id/C = I
-		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
-		var/datum/money_account/CH = get_account(C.associated_account_number)
-		if(!CH)
-			usr << "\icon[src]<span class='warning'>No valid account number is associated with this card.</span>"
-			return 0
-		if(CH.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
-			if(vendor_account)
-				var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
-				var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
-				if(D)
-					transfer_and_reimburse(D)
-					return 1
-				else
-					usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
-					return 0
+/obj/machinery/lapvend/proc/reimburse_id(var/obj/item/weapon/card/id/C, var/obj/item/I)
+	visible_message("<span class='info'>\The [usr] swipes \the [I] through \the [src].</span>")
+	var/datum/money_account/CH = get_account(C.associated_account_number)
+	if(!CH)
+		usr << "\icon[src]<span class='warning'>No valid account number is associated with this card.</span>"
+		return 0
+	if(CH.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
+		if(vendor_account)
+			var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
+			var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
+			if(D)
+				transfer_and_reimburse(D)
+				return 1
 			else
 				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call [boss_short] Support.</span>"
 				return 0
 		else
-			transfer_and_reimburse(CH)
-			return 1
+			usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
+			return 0
+	else
+		transfer_and_reimburse(CH)
+		return 1
 
 /obj/machinery/lapvend/proc/transfer_and_reimburse(var/datum/money_account/D)
 	var/transaction_amount = total()

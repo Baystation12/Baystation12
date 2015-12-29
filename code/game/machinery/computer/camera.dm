@@ -206,7 +206,7 @@
 	icon_keyboard = null
 	icon_screen = null
 	light_range_on = 0
-	network = list("thunder")
+	network = list(NETWORK_THUNDER)
 	density = 0
 	circuit = null
 
@@ -255,7 +255,7 @@
 	name = "head mounted camera monitor"
 	desc = "Used to access the built-in cameras in helmets."
 	icon_state = "syndicam"
-	network = list("NUKE")
+	network = list(NETWORK_MERCENARY)
 	circuit = null
 
 /obj/machinery/computer/security/nuclear/New()

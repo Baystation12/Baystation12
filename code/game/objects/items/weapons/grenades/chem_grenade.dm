@@ -6,6 +6,7 @@
 	w_class = 2.0
 	force = 2.0
 	det_time = null
+	unacidable = 1
 	var/stage = 0
 	var/state = 0
 	var/path = 0
@@ -162,7 +163,7 @@
 		playsound(src.loc, 'sound/effects/bamf.ogg', 50, 1)
 
 		for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
-			G.reagents.trans_to(src, G.reagents.total_volume)
+			G.reagents.trans_to_obj(src, G.reagents.total_volume)
 
 		if(src.reagents.total_volume) //The possible reactions didnt use up all reagents.
 			var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
@@ -278,3 +279,27 @@
 		beakers += B1
 		beakers += B2
 		icon_state = initial(icon_state) +"_locked"
+
+/obj/item/weapon/grenade/chem_grenade/teargas
+	name = "tear gas grenade"
+	desc = "Concentrated Capsaicin. Contents under pressure. Use with caution."
+	stage = 2
+	path = 1
+
+	New()
+		..()
+		var/obj/item/weapon/reagent_containers/glass/beaker/large/B1 = new(src)
+		var/obj/item/weapon/reagent_containers/glass/beaker/large/B2 = new(src)
+
+		B1.reagents.add_reagent("phosphorus", 40)
+		B1.reagents.add_reagent("potassium", 40)
+		B1.reagents.add_reagent("condensedcapsaicin", 40)
+		B2.reagents.add_reagent("sugar", 40)
+		B2.reagents.add_reagent("condensedcapsaicin", 80)
+
+		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
+
+		beakers += B1
+		beakers += B2
+		icon_state = initial(icon_state) +"_locked"
+

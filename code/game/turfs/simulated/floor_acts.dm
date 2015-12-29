@@ -2,14 +2,14 @@
 	//set src in oview(1)
 	switch(severity)
 		if(1.0)
-			src.ChangeTurf(get_base_turf(src.z))
+			src.ChangeTurf(get_base_turf_by_area(src))
 		if(2.0)
 			switch(pick(40;1,40;2,3))
 				if (1)
 					if(prob(33)) new /obj/item/stack/material/steel(src)
 					src.ReplaceWithLattice()
 				if(2)
-					src.ChangeTurf(get_base_turf(src.z))
+					src.ChangeTurf(get_base_turf_by_area(src))
 				if(3)
 					if(prob(33)) new /obj/item/stack/material/steel(src)
 					if(prob(80))
@@ -43,6 +43,3 @@
 	for(var/obj/structure/window/W in src)
 		if(W.dir == dir_to || W.is_fulltile()) //Same direction or diagonal (full tile)
 			W.fire_act(adj_air, adj_temp, adj_volume)
-
-/turf/simulated/floor/blob_act()
-	return

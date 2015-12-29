@@ -4,6 +4,7 @@
 	icon_state = "x2"
 	anchored = 1.0
 	unacidable = 1
+	simulated = 0
 
 /obj/effect/landmark/New()
 	..()
@@ -49,10 +50,6 @@
 			tdomeobserve += loc
 		if("prisonsecuritywarp")
 			prisonsecuritywarp += loc
-			qdel(src)
-			return
-		if("blobstart")
-			blobstart += loc
 			qdel(src)
 			return
 		if("xeno_spawn")

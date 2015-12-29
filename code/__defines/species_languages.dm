@@ -20,13 +20,16 @@
 #define HAS_LIPS          0x4    // Lips are drawn onto the mob icon. (lipstick)
 #define HAS_UNDERWEAR     0x8    // Underwear is drawn onto the mob icon.
 #define HAS_EYE_COLOR     0x10   // Eye colour selectable in chargen. (RGB)
+#define HAS_HAIR_COLOR    0x20   // Hair colour selectable in chargen. (RGB)
 
 // Languages.
+#define LANGUAGE_EAL "Encoded Audio Language"
 #define LANGUAGE_SOL_COMMON "Sol Common"
 #define LANGUAGE_UNATHI "Sinta'unathi"
 #define LANGUAGE_SIIK_MAAS "Siik'maas"
 #define LANGUAGE_SIIK_TAJR "Siik'tajr"
 #define LANGUAGE_SKRELLIAN "Skrellian"
+#define LANGUAGE_RESOMI "Resomi"
 #define LANGUAGE_ROOTSPEAK "Rootspeak"
 #define LANGUAGE_TRADEBAND "Tradeband"
 #define LANGUAGE_GUTTER "Gutter"
@@ -41,5 +44,3 @@
 #define INNATE       64  // All mobs can be assumed to speak and understand this language. (audible emotes)
 #define NO_TALK_MSG  128 // Do not show the "\The [speaker] talks into \the [radio]" message
 #define NO_STUTTER   256 // No stuttering, slurring, or other speech problems
-#define COMMON_VERBS 512 // Robots will apply regular verbs to this
-

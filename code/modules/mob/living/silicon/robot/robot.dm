@@ -97,6 +97,7 @@
 	spark_system.attach(src)
 
 	add_language("Robot Talk", 1)
+	add_language(LANGUAGE_EAL, 1)
 
 	wires = new(src)
 
@@ -155,7 +156,6 @@
 /mob/living/silicon/robot/proc/init()
 	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
 	laws = new /datum/ai_laws/nanotrasen()
-	additional_law_channels += "Binary"
 	var/new_ai = select_active_ai_with_fewest_borgs()
 	if(new_ai)
 		lawupdate = 1
@@ -214,17 +214,20 @@
 		mmi = null
 	if(connected_ai)
 		connected_ai.connected_robots -= src
-	..()
+	qdel(wires)
+	wires = null
+	return ..()
 
 /mob/living/silicon/robot/proc/set_module_sprites(var/list/new_sprites)
-	module_sprites = new_sprites.Copy()
-	//Custom_sprite check and entry
-	if (custom_sprite == 1)
-		module_sprites["Custom"] = "[src.ckey]-[modtype]"
-		icontype = "Custom"
-	else
-		icontype = module_sprites[1]
-	icon_state = module_sprites[icontype]
+	if(new_sprites && new_sprites.len)
+		module_sprites = new_sprites.Copy()
+		//Custom_sprite check and entry
+		if (custom_sprite == 1)
+			module_sprites["Custom"] = "[src.ckey]-[modtype]"
+			icontype = "Custom"
+		else
+			icontype = module_sprites[1]
+		icon_state = module_sprites[icontype]
 	updateicon()
 	return module_sprites
 
@@ -449,6 +452,7 @@
 			return
 		var/obj/item/weapon/weldingtool/WT = W
 		if (WT.remove_fuel(0))
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			adjustBruteLoss(-30)
 			updatehealth()
 			add_fingerprint(user)
@@ -464,6 +468,7 @@
 			return
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.use(1))
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			adjustFireLoss(-30)
 			updatehealth()
 			for(var/mob/O in viewers(user, null))
@@ -688,14 +693,6 @@
 		else
 			icon_state = module_sprites[icontype]
 		return
-
-//Call when target overlay should be added/removed
-/mob/living/silicon/robot/update_targeted()
-	if(!targeted_by && target_locked)
-		qdel(target_locked)
-	updateicon()
-	if (targeted_by && target_locked)
-		overlays += target_locked
 
 /mob/living/silicon/robot/proc/installed_modules()
 	if(weapon_lock)

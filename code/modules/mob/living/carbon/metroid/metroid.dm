@@ -194,26 +194,6 @@
 	updatehealth()
 
 
-/mob/living/carbon/slime/blob_act()
-	if (stat == 2)
-		return
-	var/shielded = 0
-
-	var/damage = null
-	if (stat != 2)
-		damage = rand(10,30)
-
-	if(shielded)
-		damage /= 4
-
-	show_message("<span class='danger'> The blob attacks you!</span>")
-
-	adjustFireLoss(damage)
-
-	updatehealth()
-	return
-
-
 /mob/living/carbon/slime/u_equip(obj/item/W as obj)
 	return
 

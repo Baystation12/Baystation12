@@ -14,6 +14,11 @@
 	emote_see = list("jiggles", "bounces in place")
 	var/colour = "grey"
 
+/mob/living/simple_animal/slime/can_force_feed(var/feeder, var/food, var/feedback)
+	if(feedback)
+		feeder << "Where do you intend to put \the [food]? \The [src] doesn't have a mouth!"
+	return 0
+
 /mob/living/simple_animal/adultslime
 	name = "pet slime"
 	desc = "A lovable, domesticated slime."

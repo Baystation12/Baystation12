@@ -25,11 +25,6 @@
 /obj/item/weapon/reagent_containers/attack_self(mob/user as mob)
 	return
 
-/obj/item/weapon/reagent_containers/attack(mob/M as mob, mob/user as mob, def_zone)
-	if(can_operate(M))//Checks if mob is lying down on table for surgery
-		if(do_surgery(M, user, src))
-			return
-
 /obj/item/weapon/reagent_containers/afterattack(obj/target, mob/user, flag)
 	return
 
@@ -106,6 +101,7 @@
 				user << "<span class='warning'>\The [blocked] is in the way!</span>"
 				return
 
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //puts a limit on how fast people can eat/drink things
 		self_feed_message(user)
 		reagents.trans_to_mob(user, amount_per_transfer_from_this, CHEM_INGEST)
 		feed_sound(user)
@@ -123,6 +119,7 @@
 
 		other_feed_message_start(user, target)
 
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(!do_mob(user, target))
 			return
 

@@ -85,7 +85,7 @@
 				banreason = "[banreason] (CUSTOM CID)"
 		else
 			message_admins("Ban process: A mob matching [playermob.ckey] was found at location [playermob.x], [playermob.y], [playermob.z]. Custom ip and computer id fields replaced with the ip and computer id from the located mob")
-		notes_add(playermob.ckey,banreason,usr)
+		notes_add(banckey,banreason,usr)
 
 		DB_ban_record(bantype, playermob, banduration, banreason, banjob, null, banckey, banip, bancid )
 
@@ -1119,16 +1119,6 @@
 		log_admin("[key_name(usr)] AIized [key_name(H)]")
 		H.AIize()
 
-	else if(href_list["makealien"])
-		if(!check_rights(R_SPAWN))	return
-
-		var/mob/living/carbon/human/H = locate(href_list["makealien"])
-		if(!istype(H))
-			usr << "This can only be used on instances of type /mob/living/carbon/human"
-			return
-
-		usr.client.cmd_admin_alienize(H)
-
 	else if(href_list["makeslime"])
 		if(!check_rights(R_SPAWN))	return
 
@@ -1334,7 +1324,7 @@
 			src.owner << "You sent [input] to [L] via a secure channel."
 			log_admin("[src.owner] replied to [key_name(L)]'s Centcomm message with the message [input].")
 			message_admins("[src.owner] replied to [key_name(L)]'s Centcom message with: \"[input]\"")
-			if(!L.isMobAI())
+			if(!isAI(L))
 				L << "<span class='info'>You hear something crackle in your headset for a moment before a voice speaks.</span>"
 			L << "<span class='info'>Please stand by for a message from Central Command.</span>"
 			L << "<span class='info'>Message as follows.</span>"
@@ -1681,13 +1671,8 @@
 		else
 			var/choice = alert("Please confirm Feed channel creation","Network Channel Handler","Confirm","Cancel")
 			if(choice=="Confirm")
-				var/datum/feed_channel/newChannel = new /datum/feed_channel
-				newChannel.channel_name = src.admincaster_feed_channel.channel_name
-				newChannel.author = src.admincaster_signature
-				newChannel.locked = src.admincaster_feed_channel.locked
-				newChannel.is_admin_channel = 1
-				feedback_inc("newscaster_channels",1)
-				news_network.network_channels += newChannel                        //Adding channel to the global network
+				news_network.CreateFeedChannel(admincaster_feed_channel.channel_name, admincaster_signature, admincaster_feed_channel.locked, 1)
+				feedback_inc("newscaster_channels",1)                  //Adding channel to the global network
 				log_admin("[key_name_admin(usr)] created command feed channel: [src.admincaster_feed_channel.channel_name]!")
 				src.admincaster_screen=5
 		src.access_news_network()

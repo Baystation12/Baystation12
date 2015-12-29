@@ -6,8 +6,6 @@
 	w_class = 3
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 4, TECH_BLUESPACE = 2, TECH_DATA = 4)
 
-	construction_cost = list(DEFAULT_WALL_MATERIAL=500,"glass"=500,"silver"=200,"gold"=200,"phoron"=100,"diamond"=10)
-	construction_time = 75
 	var/searching = 0
 	var/askDelay = 10 * 60 * 1
 	req_access = list(access_robotics)
@@ -65,7 +63,7 @@
 	src.brainmob << "<b>You are a positronic brain, brought into existence on [station_name()].</b>"
 	src.brainmob << "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>"
 	src.brainmob << "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>"
-	src.brainmob << "<b>Use say :b to speak to other artificial intelligences.</b>"
+	src.brainmob << "<b>Use say [candidate.get_language_prefix()]b to speak to other artificial intelligences.</b>"
 	src.brainmob.mind.assigned_role = "Positronic Brain"
 
 	var/turf/T = get_turf_or_move(src.loc)

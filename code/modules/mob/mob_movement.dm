@@ -11,7 +11,7 @@
 	return
 
 /mob/proc/setMoveCooldown(var/timeout)
-	if(client) 
+	if(client)
 		client.move_delay = max(world.time + timeout, client.move_delay)
 
 /client/North()
@@ -176,7 +176,7 @@
 			if(!mob.control_object)	return
 			mob.control_object.dir = direct
 		else
-			mob.control_object.loc = get_step(mob.control_object,direct)
+			mob.control_object.forceMove(get_step(mob.control_object,direct))
 	return
 
 
@@ -265,7 +265,7 @@
 			return 0
 
 		move_delay = world.time//set move delay
-		mob.last_move_intent = world.time + 10
+
 		switch(mob.m_intent)
 			if("run")
 				if(mob.drowsyness > 0)
@@ -304,7 +304,7 @@
 					var/mob/living/carbon/human/driver = mob.buckled
 					var/obj/item/organ/external/l_hand = driver.get_organ("l_hand")
 					var/obj/item/organ/external/r_hand = driver.get_organ("r_hand")
-					if((!l_hand || (l_hand.status & ORGAN_DESTROYED)) && (!r_hand || (r_hand.status & ORGAN_DESTROYED)))
+					if((!l_hand || l_hand.is_stump()) && (!r_hand || r_hand.is_stump()))
 						return // No hands to drive your chair? Tough luck!
 				//drunk wheelchair driving
 				if(mob.confused)
@@ -369,16 +369,6 @@
 	return Move(n, direct)
 
 
-///Process_Grab()
-///Called by client/Move()
-///Checks to see if you are grabbing anything and if moving will affect your grab.
-/client/proc/Process_Grab()
-	for(var/obj/item/weapon/grab/G in list(mob.l_hand, mob.r_hand))
-		if(G.state == GRAB_KILL) //no wandering across the station/asteroid while choking someone
-			mob.visible_message("<span class='warning'>[mob] lost \his tight grip on [G.affecting]'s neck!</span>")
-			G.hud.icon_state = "kill"
-			G.state = GRAB_NECK
-
 ///Process_Incorpmove
 ///Called by client/Move()
 ///Allows mobs to run though walls
@@ -392,7 +382,7 @@
 				mob << "<span class='warning'>You cannot get past holy grounds while you are in this plane of existence!</span>"
 				return
 			else
-				mob.loc = get_step(mob, direct)
+				mob.forceMove(get_step(mob, direct))
 				mob.dir = direct
 		if(2)
 			if(prob(50))
@@ -421,7 +411,7 @@
 							return
 					else
 						return
-				mob.loc = locate(locx,locy,mobloc.z)
+				mob.forceMove(locate(locx,locy,mobloc.z))
 				spawn(0)
 					var/limit = 2//For only two trailing shadows.
 					for(var/turf/T in getline(mobloc, mob.loc))
@@ -432,7 +422,7 @@
 			else
 				spawn(0)
 					anim(mobloc,mob,'icons/mob/mob.dmi',,"shadow",,mob.dir)
-				mob.loc = get_step(mob, direct)
+				mob.forceMove(get_step(mob, direct))
 			mob.dir = direct
 	// Crossed is always a bit iffy
 	for(var/obj/S in mob.loc)
@@ -467,8 +457,8 @@
 		return 0
 
 	//Check to see if we slipped
-	if(prob(Process_Spaceslipping(5)))
-		src << "\blue <B>You slipped!</B>"
+	if(prob(slip_chance(5)) && !buckled)
+		src << "<span class='warning'>You slipped!</span>"
 		src.inertia_dir = src.last_move
 		step(src, src.inertia_dir)
 		return 0
@@ -478,52 +468,30 @@
 
 /mob/proc/Check_Dense_Object() //checks for anything to push off in the vicinity. also handles magboots on gravity-less floors tiles
 
-	var/dense_object = 0
-	var/shoegrip
+	var/shoegrip = Check_Shoegrip()
 
-	for(var/turf/turf in oview(1,src))
-		if(istype(turf,/turf/space))
-			continue
+	for(var/turf/simulated/T in trange(1,src)) //we only care for non-space turfs
+		if(T.density)	//walls work
+			return 1
+		else
+			var/area/A = T.loc
+			if(A.has_gravity || shoegrip)
+				return 1
 
-		if(istype(turf,/turf/simulated/floor)) // Floors don't count if they don't have gravity
-			var/area/A = turf.loc
-			if(istype(A) && A.has_gravity == 0)
-				if(shoegrip == null)
-					shoegrip = Check_Shoegrip() //Shoegrip is only ever checked when a zero-gravity floor is encountered to reduce load
-				if(!shoegrip)
-					continue
+	for(var/obj/O in orange(1, src))
+		if(istype(O, /obj/structure/lattice))
+			return 1
+		if(O && O.density && O.anchored)
+			return 1
 
-		dense_object++
-		break
-
-	if(!dense_object && (locate(/obj/structure/lattice) in oview(1, src)))
-		dense_object++
-
-	//Lastly attempt to locate any dense objects we could push off of
-	//TODO: If we implement objects drifing in space this needs to really push them
-	//Due to a few issues only anchored and dense objects will now work.
-	if(!dense_object)
-		for(var/obj/O in oview(1, src))
-			if((O) && (O.density) && (O.anchored))
-				dense_object++
-				break
-
-	return dense_object
+	return 0
 
 /mob/proc/Check_Shoegrip()
 	return 0
 
-/mob/proc/Process_Spaceslipping(var/prob_slip = 5)
-	//Setup slipage
-	//If knocked out we might just hit it and stop.  This makes it possible to get dead bodies and such.
+/mob/proc/slip_chance(var/prob_slip = 5)
 	if(stat)
-		prob_slip = 0  // Changing this to zero to make it line up with the comment.
-
-	prob_slip = round(prob_slip)
-	return(prob_slip)
-
-/mob/proc/mob_has_gravity(turf/T)
-	return has_gravity(src, T)
-
-/mob/proc/update_gravity()
-	return
+		return 0
+	if(Check_Shoegrip())
+		return 0
+	return prob_slip

@@ -347,6 +347,16 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         {{/if}}
                     {{/for}}
                 {{/if}}
+				{{if data.manifest.car.length}}
+                    <tr><th colspan="3" class="car">Cargo</th></tr>
+                    {{for data.manifest["car"]}}
+                        {{if value.rank == "Quartermaster"}}
+                            <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
+                        {{else}}
+                            <tr><td><span class="average">{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
+                        {{/if}}
+                    {{/for}}
+                {{/if}}
                 {{if data.manifest.civ.length}}
                     <tr><th colspan="3" class="civ">Civilian</th></tr>
                     {{for data.manifest["civ"]}}

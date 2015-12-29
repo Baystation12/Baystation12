@@ -9,7 +9,7 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
-	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue)
+	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_bar)
 
 
@@ -37,7 +37,7 @@
 	spawn_positions = 2
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
-	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue)
+	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_kitchen)
 	alt_titles = list("Cook")
 
@@ -64,8 +64,8 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
-	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue) // Removed tox and chem access because STOP PISSING OFF THE CHEMIST GUYS // //Removed medical access because WHAT THE FUCK YOU AREN'T A DOCTOR YOU GROW WHEAT //Given Morgue access because they have a viable means of cloning.
-	minimal_access = list(access_hydroponics, access_morgue) // Removed tox and chem access because STOP PISSING OFF THE CHEMIST GUYS // //Removed medical access because WHAT THE FUCK YOU AREN'T A DOCTOR YOU GROW WHEAT //Given Morgue access because they have a viable means of cloning.
+	access = list(access_hydroponics, access_bar, access_kitchen)
+	minimal_access = list(access_hydroponics)
 	alt_titles = list("Hydroponicist")
 
 
@@ -100,6 +100,8 @@
 	economic_modifier = 5
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
+
+	ideal_character_age = 40
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -178,79 +180,6 @@
 		if(!H)	return 0
 		H.species.equip_survival_gear(H,1)
 		return 1
-
-
-//Griff //BS12 EDIT
-/*
-/datum/job/clown
-	title = "Clown"
-	flag = CLOWN
-	department_flag = CIVILIAN
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
-	access = list(access_clown, access_theatre, access_maint_tunnels)
-	minimal_access = list(access_clown, access_theatre)
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/clown(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/clown(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/clown_shoes(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/clown(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/clown_hat(H), slot_wear_mask)
-		H.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/food/snacks/grown/banana(H), slot_in_backpack)
-		H.equip_to_slot_or_del(new /obj/item/weapon/bikehorn(H), slot_in_backpack)
-		H.equip_to_slot_or_del(new /obj/item/weapon/stamp/clown(H), slot_in_backpack)
-		H.equip_to_slot_or_del(new /obj/item/weapon/pen/crayon/rainbow(H), slot_in_backpack)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/fancy/crayons(H), slot_in_backpack)
-		H.equip_to_slot_or_del(new /obj/item/toy/waterflower(H), slot_in_backpack)
-		H.mutations.Add(CLUMSY)
-		return 1
-
-
-
-/datum/job/mime
-	title = "Mime"
-	flag = MIME
-	department_flag = CIVILIAN
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
-	access = list(access_mime, access_theatre, access_maint_tunnels)
-	minimal_access = list(access_mime, access_theatre)
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		if(H.backbag == 2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
-		if(H.backbag == 3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/mime(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/mime(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/white(H), slot_gloves)
-		H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/mime(H), slot_wear_mask)
-		H.equip_to_slot_or_del(new /obj/item/clothing/head/beret(H), slot_head)
-		H.equip_to_slot_or_del(new /obj/item/clothing/suit/suspenders(H), slot_wear_suit)
-		if(H.backbag == 1)
-			H.equip_to_slot_or_del(new /obj/item/weapon/pen/crayon/mime(H), slot_l_store)
-			H.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing(H), slot_l_hand)
-		else
-			H.equip_to_slot_or_del(new /obj/item/weapon/pen/crayon/mime(H), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing(H), slot_in_backpack)
-		H.verbs += /client/proc/mimespeak
-		H.verbs += /client/proc/mimewall
-		H.mind.special_verbs += /client/proc/mimespeak
-		H.mind.special_verbs += /client/proc/mimewall
-		H.miming = 1
-		return 1
-*/
-
 
 /datum/job/janitor
 	title = "Janitor"

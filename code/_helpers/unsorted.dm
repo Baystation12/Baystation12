@@ -226,6 +226,33 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			line+=locate(px,py,M.z)
 	return line
 
+#define LOCATE_COORDS(X, Y, Z) locate(between(1, X, world.maxx), between(1, Y, world.maxy), Z)
+/proc/getcircle(turf/center, var/radius) //Uses a fast Bresenham rasterization algorithm to return the turfs in a thin circle.
+	if(!radius) return list(center)
+
+	var/x = 0
+	var/y = radius
+	var/p = 3 - 2 * radius
+
+	. = list()
+	while(y >= x) // only formulate 1/8 of circle
+
+		. += LOCATE_COORDS(center.x - x, center.y - y, center.z) //upper left left
+		. += LOCATE_COORDS(center.x - y, center.y - x, center.z) //upper upper left
+		. += LOCATE_COORDS(center.x + y, center.y - x, center.z) //upper upper right
+		. += LOCATE_COORDS(center.x + x, center.y - y, center.z) //upper right right
+		. += LOCATE_COORDS(center.x - x, center.y + y, center.z) //lower left left
+		. += LOCATE_COORDS(center.x - y, center.y + x, center.z) //lower lower left
+		. += LOCATE_COORDS(center.x + y, center.y + x, center.z) //lower lower right
+		. += LOCATE_COORDS(center.x + x, center.y + y, center.z) //lower right right
+
+		if(p < 0)
+			p += 4*x++ + 6;
+		else
+			p += 4*(x++ - y--) + 10;
+
+#undef LOCATE_COORDS
+
 //Returns whether or not a player is a guest using their ckey as an input
 /proc/IsGuestKey(key)
 	if (findtext(key, "Guest-", 1, 7) != 1) //was findtextEx
@@ -243,10 +270,10 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	return 1
 
 //Ensure the frequency is within bounds of what it should be sending/recieving at
-/proc/sanitize_frequency(var/f)
+/proc/sanitize_frequency(var/f, var/low = PUBLIC_LOW_FREQ, var/high = PUBLIC_HIGH_FREQ)
 	f = round(f)
-	f = max(1441, f) // 144.1
-	f = min(1489, f) // 148.9
+	f = max(low, f)
+	f = min(high, f)
 	if ((f % 2) == 0) //Ensure the last digit is an odd number
 		f += 1
 	return f
@@ -345,7 +372,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 //Picks a string of symbols to display as the law number for hacked or ion laws
 /proc/ionnum()
-	return "[pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]"
+	return "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]"
 
 //When an AI is activated, it can choose from a list of non-slaved borgs to have as a slave.
 /proc/freeborg()
@@ -531,7 +558,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/y = min(world.maxy, max(1, A.y + dy))
 	return locate(x,y,A.z)
 
-//Makes sure MIDDLE is between LOW and HIGH. If not, it adjusts it. Returns the adjusted value.
+//Makes sure MIDDLE is between LOW and HIGH. If not, it adjusts it. Returns the adjusted value. Lower bound takes priority.
 /proc/between(var/low, var/middle, var/high)
 	return max(min(middle, high), low)
 
@@ -569,7 +596,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 	var/turf/current = get_turf(source)
 	var/turf/target_turf = get_turf(target)
 	var/steps = 0
-	
+
 	if(!current || !target_turf)
 		return 0
 
@@ -619,7 +646,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 
 	else return get_step(ref, base_dir)
 
-/proc/do_mob(var/mob/user, var/mob/target, var/delay, var/numticks = 5, var/needhand = 1) //This is quite an ugly solution but i refuse to use the old request system.
+/proc/do_mob(var/mob/user, var/mob/target, var/delay = 30, var/numticks = 5, var/needhand = 1) //This is quite an ugly solution but i refuse to use the old request system.
 	if(!user || !target)	return 0
 	if(numticks == 0)		return 0
 
@@ -690,21 +717,6 @@ proc/GaussRandRound(var/sigma,var/roundto)
 	for(var/area/N in world)
 		if(istype(N, areatype)) areas += N
 	return areas
-
-//Takes: Area type as text string or as typepath OR an instance of the area.
-//Returns: A list of all turfs in areas of that type of that type in the world.
-/proc/get_area_turfs(var/areatype)
-	if(!areatype) return null
-	if(istext(areatype)) areatype = text2path(areatype)
-	if(isarea(areatype))
-		var/area/areatemp = areatype
-		areatype = areatemp.type
-
-	var/list/turfs = new/list()
-	for(var/area/N in world)
-		if(istype(N, areatype))
-			for(var/turf/T in N) turfs += T
-	return turfs
 
 //Takes: Area type as text string or as typepath OR an instance of the area.
 //Returns: A list of all atoms	(objs, turfs, mobs) in areas of that type of that type in the world.
@@ -848,7 +860,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 					if(turftoleave)
 						fromupdate += T.ChangeTurf(turftoleave)
 					else
-						T.ChangeTurf(get_base_turf(T.z))
+						T.ChangeTurf(get_base_turf_by_area(T))
 
 					refined_src -= T
 					refined_trg -= B
@@ -935,7 +947,7 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 					var/old_underlays = T.underlays.Copy()
 
 					if(platingRequired)
-						if(istype(B, get_base_turf(B.z)))
+						if(istype(B, get_base_turf_by_area(B)))
 							continue moving
 
 					var/turf/X = B
@@ -1053,12 +1065,10 @@ proc/get_mob_with_client_list()
 
 //gets the turf the atom is located in (or itself, if it is a turf).
 //returns null if the atom is not in a turf.
-/proc/get_turf(atom/location)
-	while(location)
-		if(isturf(location))
-			return location
-		location = location.loc
-	return null
+/proc/get_turf(atom/A)
+	if(!istype(A)) return
+	for(A, A && !isturf(A), A=A.loc);
+	return A
 
 /proc/get(atom/loc, type)
 	while(loc)
@@ -1322,3 +1332,7 @@ var/mob/dview/dview_mob = new
 		dead_mob_list -= src
 	else
 		living_mob_list -= src
+
+// call to generate a stack trace and print to runtime logs
+/proc/crash_with(msg)
+	CRASH(msg)

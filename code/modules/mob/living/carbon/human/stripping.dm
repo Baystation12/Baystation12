@@ -3,7 +3,7 @@
 	if(!slot_to_strip || !istype(user))
 		return
 
-	if(user.incapacitated())
+	if(user.incapacitated()  || !user.Adjacent(src))
 		user << browse(null, text("window=mob[src.name]"))
 		return
 

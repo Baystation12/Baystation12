@@ -181,7 +181,7 @@
 				</table>
 				<br>
 			"}
-		else
+		else //</font></font>
 			dat += "<b>Radio Uplink</b><br>"
 			dat += "<font color=red><i>Radio firmware not loaded. Please install a pAI personality to load firmware.</i></font><br>"
 		dat += {"
@@ -320,7 +320,7 @@
 		qdel(src)
 
 /obj/item/device/paicard/see_emote(mob/living/M, text)
-	if(pai && pai.client)
+	if(pai && pai.client && !pai.canmove)
 		var/rendered = "<span class='message'>[text]</span>"
 		pai.show_message(rendered, 2)
 	..()

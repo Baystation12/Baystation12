@@ -1,6 +1,9 @@
 /mob/var/lastattacker = null
 /mob/var/lastattacked = null
-/mob/var/attack_log = list( )
+/mob/var/attack_log = list()
+
+proc/log_and_message_admins_with_location(var/message, var/x, var/y, var/z, var/mob/user = usr)
+	log_and_message_admins("[message] (<a HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)", user)
 
 proc/log_and_message_admins(var/message as text, var/mob/user = usr)
 	log_admin(user ? "[key_name(user)] [message]" : "EVENT [message]")

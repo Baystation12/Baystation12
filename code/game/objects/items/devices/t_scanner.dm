@@ -8,7 +8,7 @@
 	w_class = 2
 	item_state = "electronic"
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
-	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
+	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 
 	var/scan_range = 1
 

@@ -2,7 +2,7 @@
 	name = "Cleanbot"
 	desc = "A little cleaning robot, he looks so excited!"
 	icon_state = "cleanbot0"
-	req_access = list(access_janitor)
+	req_one_access = list(access_janitor, access_robotics)
 	botcard_access = list(access_janitor, access_maint_tunnels)
 
 	locked = 0 // Start unlocked so roboticist can set them to patrol.

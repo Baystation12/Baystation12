@@ -56,8 +56,8 @@
 /mob/living/carbon/human/Stat()
 	..()
 	if(statpanel("Status"))
-		stat(null, "Intent: [a_intent]")
-		stat(null, "Move Mode: [m_intent]")
+		stat("Intent:", "[a_intent]")
+		stat("Move Mode:", "[m_intent]")
 		if(emergency_shuttle)
 			var/eta_status = emergency_shuttle.get_status_panel_eta()
 			if(eta_status)
@@ -168,15 +168,6 @@
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05, used_weapon = weapon_message)
 	if(update)	UpdateDamageIcon()
 
-
-/mob/living/carbon/human/blob_act()
-	if(stat == 2)	return
-	show_message("\red The blob attacks you!")
-	var/dam_zone = pick(organs_by_name)
-	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
-	apply_damage(rand(30,40), BRUTE, affecting, run_armor_check(affecting, "melee"))
-	return
-
 /mob/living/carbon/human/proc/implant_loyalty(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
 
@@ -208,7 +199,7 @@
 
 
 /mob/living/carbon/human/show_inv(mob/user as mob)
-	if(user.incapacitated())
+	if(user.incapacitated()  || !user.Adjacent(src))
 		return
 
 	var/obj/item/clothing/under/suit = null
@@ -238,7 +229,7 @@
 
 	// Other incidentals.
 	if(istype(suit) && suit.has_sensor == 1)
-		dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors.</A>"
+		dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
 	if(handcuffed)
 		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed]'>Handcuffed</A>"
 	if(legcuffed)
@@ -328,7 +319,7 @@
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
 /mob/living/carbon/human/proc/get_face_name()
 	var/obj/item/organ/external/head = get_organ("head")
-	if(!head || head.disfigured || (head.status & ORGAN_DESTROYED) || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
+	if(!head || head.disfigured || head.is_stump() || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
 		return "Unknown"
 	return real_name
 
@@ -663,38 +654,39 @@
 ///eyecheck()
 ///Returns a number between -1 to 2
 /mob/living/carbon/human/eyecheck()
-	var/number = 0
-
 	if(!species.has_organ["eyes"]) //No eyes, can't hurt them.
-		return 2
+		return FLASH_PROTECTION_MAJOR
 
 	if(internal_organs_by_name["eyes"]) // Eyes are fucked, not a 'weak point'.
 		var/obj/item/organ/I = internal_organs_by_name["eyes"]
 		if(I.status & ORGAN_CUT_AWAY)
-			return 2
+			return FLASH_PROTECTION_MAJOR
 	else
-		return 2
+		return
 
-	if(istype(src.head, /obj/item/clothing/head/welding))
-		if(!src.head:up)
-			number += 2
-	if(istype(back, /obj/item/weapon/rig))
-		var/obj/item/weapon/rig/O = back
-		if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
-			number += 2
-	if(istype(src.head, /obj/item/clothing/head/helmet/space))
-		number += 2
-	if(istype(src.head, /obj/item/clothing/head/helmet/space/emergency))
-		number -= 2
-	if(istype(src.glasses, /obj/item/clothing/glasses/thermal))
-		number -= 1
-	if(istype(src.glasses, /obj/item/clothing/glasses/sunglasses))
-		number += 1
-	if(istype(src.glasses, /obj/item/clothing/glasses/welding))
-		var/obj/item/clothing/glasses/welding/W = src.glasses
-		if(!W.up)
-			number += 2
-	return number
+	return flash_protection
+
+//Used by various things that knock people out by applying blunt trauma to the head.
+//Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
+/mob/living/carbon/human/proc/headcheck(var/target_zone, var/brain_tag = "brain")
+	if(!species.has_organ[brain_tag])
+		return 0
+
+	var/obj/item/organ/affecting = internal_organs_by_name[brain_tag]
+
+	target_zone = check_zone(target_zone)
+	if(!affecting || affecting.parent_organ != target_zone)
+		return 0
+
+	//if the parent organ is significantly larger than the brain organ, then hitting it is not guaranteed
+	var/obj/item/organ/parent = get_organ(target_zone)
+	if(!parent)
+		return 0
+
+	if(parent.w_class > affecting.w_class + 1)
+		return prob(100 / 2**(parent.w_class - affecting.w_class - 1))
+
+	return 1
 
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
 	if(species.has_fine_manipulation)
@@ -743,7 +735,8 @@
 
 	if(!check_has_mouth())
 		return
-
+	if(stat == DEAD)
+		return
 	if(!lastpuke)
 		lastpuke = 1
 		src << "<span class='warning'>You feel nauseous...</span>"
@@ -959,7 +952,7 @@
 
 	if(L && !L.is_bruised())
 		src.custom_pain("You feel a stabbing pain in your chest!", 1)
-		L.damage = L.min_bruised_damage
+		L.bruise()
 
 /*
 /mob/living/carbon/human/verb/simulate()
@@ -1005,8 +998,14 @@
 	verbs += /mob/living/carbon/human/proc/bloody_doodle
 	return 1 //we applied blood to the item
 
+/mob/living/carbon/human/proc/get_full_print()
+	if(!dna ||!dna.uni_identity)
+		return
+	return md5(dna.uni_identity)
+
 /mob/living/carbon/human/clean_blood(var/clean_feet)
 	.=..()
+	gunshot_residue = null
 	if(clean_feet && !shoes && istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
 		feet_blood_color = null
 		qdel(feet_blood_DNA)
@@ -1093,18 +1092,21 @@
 		else
 			dna.species = new_species
 
+	// No more invisible screaming wheelchairs because of set_species() typos.
+	if(!all_species[new_species])
+		new_species = "Human"
+
 	if(species)
 
 		if(species.name && species.name == new_species)
 			return
 		if(species.language)
 			remove_language(species.language)
-
 		if(species.default_language)
 			remove_language(species.default_language)
-
 		// Clear out their species abilities.
 		species.remove_inherent_verbs(src)
+		holder_type = null
 
 	species = all_species[new_species]
 
@@ -1123,6 +1125,11 @@
 		r_skin = 0
 		g_skin = 0
 		b_skin = 0
+
+	if(species.holder_type)
+		holder_type = species.holder_type
+
+	icon_state = lowertext(species.name)
 
 	species.create_organs(src)
 
@@ -1146,10 +1153,6 @@
 		return 1
 	else
 		return 0
-
-	mob_bump_flag = species.bump_flag
-	mob_swap_flags = species.swap_flags
-	mob_push_flags = species.push_flags
 
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"
@@ -1265,11 +1268,10 @@
 		if(C.body_parts_covered & FEET)
 			feet_exposed = 0
 
-	flavor_text = flavor_texts["general"]
-	flavor_text += "\n\n"
+	flavor_text = ""
 	for (var/T in flavor_texts)
 		if(flavor_texts[T] && flavor_texts[T] != "")
-			if((T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
+			if((T == "general") || (T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
 				flavor_text += flavor_texts[T]
 				flavor_text += "\n\n"
 	if(!shrink)
@@ -1370,10 +1372,6 @@
 	if(update_hud)
 		handle_regular_hud_updates()
 
-/mob/living/carbon/human/Check_Shoegrip()
-	if((shoes.item_flags & NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
-		return 1
-	return 0
 
 /mob/living/carbon/human/can_stand_overridden()
 	if(wearing_rig && wearing_rig.ai_can_move_suit(check_for_ai = 1))
@@ -1384,3 +1382,63 @@
 				return 0
 		return 1
 	return 0
+
+/mob/living/carbon/human/MouseDrop(var/atom/over_object)
+	var/mob/living/carbon/human/H = over_object
+	if(holder_type && istype(H) && !H.lying && !issmall(H) && Adjacent(H))
+		get_scooped(H, (usr == src))
+		return
+	return ..()
+
+//Puts the item into our active hand if possible. returns 1 on success.
+/mob/living/carbon/human/put_in_active_hand(var/obj/item/W)
+	return (hand ? put_in_l_hand(W) : put_in_r_hand(W))
+
+//Puts the item into our inactive hand if possible. returns 1 on success.
+/mob/living/carbon/human/put_in_inactive_hand(var/obj/item/W)
+	return (hand ? put_in_r_hand(W) : put_in_l_hand(W))
+
+/mob/living/carbon/human/put_in_hands(var/obj/item/W)
+	if(!W)
+		return 0
+	if(put_in_active_hand(W))
+		update_inv_l_hand()
+		update_inv_r_hand()
+		return 1
+	else if(put_in_inactive_hand(W))
+		update_inv_l_hand()
+		update_inv_r_hand()
+		return 1
+	else
+		return ..()
+
+/mob/living/carbon/human/put_in_l_hand(var/obj/item/W)
+	if(!..() || l_hand)
+		return 0
+	W.forceMove(src)
+	l_hand = W
+	W.equipped(src,slot_l_hand)
+	W.add_fingerprint(src)
+	update_inv_l_hand()
+	return 1
+
+/mob/living/carbon/human/put_in_r_hand(var/obj/item/W)
+	if(!..() || r_hand)
+		return 0
+	W.forceMove(src)
+	r_hand = W
+	W.equipped(src,slot_r_hand)
+	W.add_fingerprint(src)
+	update_inv_r_hand()
+	return 1
+
+/mob/living/carbon/human/verb/pull_punches()
+	set name = "Pull Punches"
+	set desc = "Try not to hurt them."
+	set category = "IC"
+
+	if(stat) return
+	pulling_punches = !pulling_punches
+	src << "<span class='notice'>You are now [pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>"
+	return
+

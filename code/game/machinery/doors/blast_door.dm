@@ -28,6 +28,19 @@
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
+	var/_wifi_id
+	var/datum/wifi/receiver/button/door/wifi_receiver
+
+/obj/machinery/door/blast/initialize()
+	..()
+	if(_wifi_id)
+		wifi_receiver = new(_wifi_id, src)
+
+/obj/machinery/door/airlock/Destroy()
+	qdel(wifi_receiver)
+	wifi_receiver = null
+	return ..()
+
 // Proc: Bumped()
 // Parameters: 1 (AM - Atom that tried to walk through this object)
 // Description: If we are open returns zero, otherwise returns result of parent function.
@@ -144,7 +157,7 @@
 	if(stat & BROKEN)
 		stat &= ~BROKEN
 
-		
+
 /obj/machinery/door/blast/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group) return 1
 	return ..()

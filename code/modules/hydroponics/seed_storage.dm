@@ -101,7 +101,7 @@
 				if(seed.get_trait(TRAIT_REQUIRES_NUTRIENTS))
 					if(seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) < 0.05)
 						dat += "<td>Low</td>"
-					else if(seed.get_trait(TRAIT_REQUIRES_NUTRIENTS) > 0.2)
+					else if(seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) > 0.2)
 						dat += "<td>High</td>"
 					else
 						dat += "<td>Norm</td>"

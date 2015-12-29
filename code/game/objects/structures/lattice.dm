@@ -5,13 +5,14 @@
 	icon_state = "latticefull"
 	density = 0
 	anchored = 1.0
+	w_class = 3
 	layer = 2.3 //under pipes
 	//	flags = CONDUCT
 
 /obj/structure/lattice/New()
 	..()
 ///// Z-Level Stuff
-	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/floor/open)))
+	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open)))
 ///// Z-Level Stuff
 		qdel(src)
 	for(var/obj/structure/lattice/LAT in src.loc)
@@ -33,10 +34,6 @@
 			L = locate(/obj/structure/lattice, get_step(src, dir))
 			L.updateOverlays(src.loc)
 	..()
-
-/obj/structure/lattice/blob_act()
-	qdel(src)
-	return
 
 /obj/structure/lattice/ex_act(severity)
 	switch(severity)

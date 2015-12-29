@@ -12,6 +12,7 @@ var/global/list/processing_power_items   = list()
 var/global/list/active_diseases          = list()
 var/global/list/med_hud_users            = list() // List of all entities using a medical HUD.
 var/global/list/sec_hud_users            = list() // List of all entities using a security HUD.
+var/global/list/hud_icon_reference       = list()
 
 
 var/global/list/global_mutations  = list() // List of hidden mutation things.
@@ -49,8 +50,6 @@ var/list/lastsignalers = list() // Keeps last 100 signals here in format: "[src]
 var/list/lawchanges    = list() // Stores who uploaded laws to which silicon-based lifeform, and what the law was.
 var/list/reg_dna       = list()
 
-var/mouse_respawn_time = 5 // Amount of time that must pass between a player dying as a mouse and repawning as a mouse. In minutes.
-
 var/list/monkeystart     = list()
 var/list/wizardstart     = list()
 var/list/newplayer_start = list()
@@ -70,7 +69,6 @@ var/list/tdomeobserve       = list()
 var/list/tdomeadmin         = list()
 var/list/prisonsecuritywarp = list() // Prison security goes to these.
 var/list/prisonwarped       = list() // List of players already warped.
-var/list/blobstart          = list()
 var/list/ninjastart         = list()
 
 var/list/cardinal    = list(NORTH, SOUTH, EAST, WEST)
@@ -82,7 +80,6 @@ var/list/reverse_dir = list( // reverse_dir[dir] = reverse of dir
 	23, 28, 30, 29, 31, 48, 50, 49, 51, 56, 58, 57, 59, 52, 54, 53, 55, 60, 62, 61, 63
 )
 
-var/datum/station_state/start_state = null
 var/datum/configuration/config      = null
 var/datum/sun/sun                   = null
 
@@ -104,7 +101,6 @@ var/join_motd = null
 
 var/datum/nanomanager/nanomanager		= new() // NanoManager, the manager for Nano UIs.
 var/datum/event_manager/event_manager	= new() // Event Manager, the manager for events.
-var/datum/subsystem/alarm/alarm_manager	= new() // Alarm Manager, the manager for alarms.
 
 var/list/awaydestinations = list() // Away missions. A list of landmarks that the warpgate can take you to.
 

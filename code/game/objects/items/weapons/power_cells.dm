@@ -14,8 +14,6 @@
 	var/maxcharge = 1000
 	var/rigged = 0		// true if rigged to explode
 	var/minor_fault = 0 //If not 100% reliable, it will build up faults.
-	var/construction_cost = list(DEFAULT_WALL_MATERIAL=750,"glass"=75)
-	var/construction_time=100
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 
 	suicide_act(mob/user)
@@ -73,6 +71,13 @@
 	maxcharge = 10000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 60)
 
+/obj/item/weapon/cell/mecha
+	name = "exosuit-grade power cell"
+	origin_tech = list(TECH_POWER = 3)
+	icon_state = "hcell"
+	maxcharge = 15000
+	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
+
 /obj/item/weapon/cell/high/empty/New()
 	..()
 	charge = 0
@@ -83,7 +88,6 @@
 	icon_state = "scell"
 	maxcharge = 20000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
-	construction_cost = list(DEFAULT_WALL_MATERIAL=750,"glass"=100)
 
 /obj/item/weapon/cell/super/empty/New()
 	..()
@@ -95,7 +99,6 @@
 	icon_state = "hpcell"
 	maxcharge = 30000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 80)
-	construction_cost = list(DEFAULT_WALL_MATERIAL=500,"glass"=150,"gold"=200,"silver"=200)
 
 /obj/item/weapon/cell/hyper/empty/New()
 	..()

@@ -9,12 +9,9 @@
 		reagents.add_reagent("coolant",1000)
 
 /obj/structure/reagent_dispensers/coolanttank/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.damage_type == BRUTE || Proj.damage_type == BURN)
+	if(Proj.get_structure_damage())
 		if(!istype(Proj ,/obj/item/projectile/beam/lastertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
 			explode()
-
-/obj/structure/reagent_dispensers/coolanttank/blob_act()
-	explode()
 
 /obj/structure/reagent_dispensers/coolanttank/ex_act()
 	explode()

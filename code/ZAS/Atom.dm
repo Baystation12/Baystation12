@@ -64,9 +64,9 @@ turf/c_airblock(turf/other)
 	#ifdef ZLEVELS
 	if(other.z != src.z)
 		if(other.z < src.z)
-			if(!istype(src, /turf/simulated/floor/open)) return BLOCKED
+			if(!istype(src, /turf/simulated/open)) return BLOCKED
 		else
-			if(!istype(other, /turf/simulated/floor/open)) return BLOCKED
+			if(!istype(other, /turf/simulated/open)) return BLOCKED
 	#endif
 
 	var/result = 0

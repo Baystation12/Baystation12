@@ -413,5 +413,3 @@
 	path = /obj/item/weapon/handcuffs
 	hidden = 1
 	category = "General"
-
-

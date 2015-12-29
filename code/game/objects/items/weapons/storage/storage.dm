@@ -224,7 +224,7 @@
 //Set the stop_messages to stop it from printing messages
 /obj/item/weapon/storage/proc/can_be_inserted(obj/item/W as obj, stop_messages = 0)
 	if(!istype(W)) return //Not an item
-	
+
 	if(!usr.canUnEquip(W))
 		return 0
 
@@ -235,12 +235,16 @@
 			usr << "<span class='notice'>[src] is full, make some space.</span>"
 		return 0 //Storage item is full
 
-	if(can_hold.len && !is_type_in_list(W, can_hold))
-		if(!stop_messages)
-			if (istype(W, /obj/item/weapon/hand_labeler))
-				return 0
-			usr << "<span class='notice'>[src] cannot hold [W].</span>"
-		return 0
+	if(can_hold.len)
+		if(!is_type_in_list(W, can_hold))
+			if(!stop_messages && ! istype(W, /obj/item/weapon/hand_labeler))
+				usr << "<span class='notice'>[src] cannot hold \the [W].</span>"
+			return 0
+		var/max_instances = can_hold[W.type]
+		if(max_instances && instances_of_type_in_list(W, contents) >= max_instances)
+			if(!stop_messages && !istype(W, /obj/item/weapon/hand_labeler))
+				usr << "<span class='notice'>[src] has no more space specifically for \the [W].</span>"
+			return 0
 
 	if(cant_hold.len && is_type_in_list(W, cant_hold))
 		if(!stop_messages)
@@ -339,6 +343,21 @@
 
 	if(isrobot(user))
 		return //Robots can't interact with storage items.
+
+	if(istype(W, /obj/item/device/lightreplacer))
+		var/obj/item/device/lightreplacer/LP = W
+		var/amt_inserted = 0
+		var/turf/T = get_turf(user)
+		for(var/obj/item/weapon/light/L in src.contents)
+			if(L.status == 0)
+				if(LP.uses < LP.max_uses)
+					LP.AddUses(1)
+					amt_inserted++
+					remove_from_storage(L, T)
+					qdel(L)
+		if(amt_inserted)
+			user << "You inserted [amt_inserted] light\s into \the [LP.name]. You have [LP.uses] light\s remaining."
+			return
 
 	if(!can_be_inserted(W))
 		return
@@ -445,6 +464,17 @@
 		if(src.verbs.Find(/obj/item/weapon/storage/verb/quick_empty))
 			src.quick_empty()
 			return 1
+
+/obj/item/weapon/storage/proc/make_exact_fit()
+	storage_slots = contents.len
+
+	can_hold.Cut()
+	max_w_class = 0
+	max_storage_space = 0
+	for(var/obj/item/I in src)
+		can_hold[I.type]++
+		max_w_class = max(I.w_class, max_w_class)
+		max_storage_space += I.get_storage_cost()
 
 //Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
 //Returns -1 if the atom was not found on container.

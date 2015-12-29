@@ -3,11 +3,15 @@
 	desc = "A window."
 	icon = 'icons/obj/structures.dmi'
 	density = 1
+	w_class = 3
+
 	layer = 3.2//Just above doors
 	pressure_resistance = 4*ONE_ATMOSPHERE
 	anchored = 1.0
 	flags = ON_BORDER
 	var/maxhealth = 14.0
+	var/maximal_heat = T0C + 100 		// Maximal heat before this window begins taking damage from fire
+	var/damage_per_fire_tick = 2.0 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
 	var/health
 	var/ini_dir = null
 	var/state = 2
@@ -99,12 +103,11 @@
 
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
 
-	//Tasers and the like should not damage windows.
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		return
+	var/proj_damage = Proj.get_structure_damage()
+	if(!proj_damage) return
 
 	..()
-	take_damage(Proj.damage)
+	take_damage(proj_damage)
 	return
 
 
@@ -121,10 +124,6 @@
 				shatter(0)
 				return
 
-
-/obj/structure/window/blob_act()
-	shatter()
-
 //TODO: Make full windows a separate type of window.
 //Once a full window, it will always be a full window, so there's no point
 //having the same type for both.
@@ -136,7 +135,7 @@
 		return 1
 	if(is_full_window())
 		return 0	//full tile window, you can't move into it!
-	if(get_dir(loc, target) == dir)
+	if(get_dir(loc, target) & dir)
 		return !density
 	else
 		return 1
@@ -188,8 +187,8 @@
 
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
 		user.do_attack_animation(src)
-		usr.visible_message("<span class='danger'>[usr.name] bangs against the [src.name]!</span>",
-							"<<span class='danger'>You bang against the [src.name]!</span>",
+		usr.visible_message("<span class='danger'>\The [usr] bangs against \the [src]!</span>",
+							"<span class='danger'>You bang against \the [src]!</span>",
 							"You hear a banging sound.")
 	else
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
@@ -296,7 +295,7 @@
 
 	if(usr.incapacitated())
 		return 0
-	
+
 	if(anchored)
 		usr << "It is fastened to the floor therefore you can't rotate it!"
 		return 0
@@ -398,8 +397,8 @@
 	return
 
 /obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > T0C + 800)
-		hit(round(exposed_volume / 100), 0)
+	if(exposed_temperature > maximal_heat)
+		hit(damage_per_fire_tick, 0)
 	..()
 
 
@@ -409,43 +408,45 @@
 	icon_state = "window"
 	basestate = "window"
 	glasstype = /obj/item/stack/material/glass
-
+	maximal_heat = T0C + 100
+	damage_per_fire_tick = 2.0
+	maxhealth = 12.0
 
 /obj/structure/window/phoronbasic
 	name = "phoron window"
-	desc = "A phoron-glass alloy window. It looks insanely tough to break. It appears it's also insanely tough to burn through."
+	desc = "A borosilicate alloy window. It seems to be quite strong."
 	basestate = "phoronwindow"
 	icon_state = "phoronwindow"
 	shardtype = /obj/item/weapon/material/shard/phoron
 	glasstype = /obj/item/stack/material/glass/phoronglass
-	maxhealth = 120
-
-/obj/structure/window/phoronbasic/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > T0C + 32000)
-		hit(round(exposed_volume / 1000), 0)
-	..()
+	maximal_heat = T0C + 2000
+	damage_per_fire_tick = 1.0
+	maxhealth = 40.0
 
 /obj/structure/window/phoronreinforced
-	name = "reinforced phoron window"
-	desc = "A phoron-glass alloy window, with rods supporting it. It looks hopelessly tough to break. It also looks completely fireproof, considering how basic phoron windows are insanely fireproof."
+	name = "reinforced borosilicate window"
+	desc = "A borosilicate alloy window, with rods supporting it. It seems to be very strong."
 	basestate = "phoronrwindow"
 	icon_state = "phoronrwindow"
 	shardtype = /obj/item/weapon/material/shard/phoron
 	glasstype = /obj/item/stack/material/glass/phoronrglass
 	reinf = 1
-	maxhealth = 160
+	maximal_heat = T0C + 4000
+	damage_per_fire_tick = 1.0 // This should last for 80 fire ticks if the window is not damaged at all. The idea is that borosilicate windows have something like ablative layer that protects them for a while.
+	maxhealth = 80.0
 
-/obj/structure/window/phoronreinforced/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	return
 
 /obj/structure/window/reinforced
 	name = "reinforced window"
 	desc = "It looks rather strong. Might take a few good hits to shatter it."
 	icon_state = "rwindow"
 	basestate = "rwindow"
-	maxhealth = 40
+	maxhealth = 40.0
 	reinf = 1
+	maximal_heat = T0C + 750
+	damage_per_fire_tick = 2.0
 	glasstype = /obj/item/stack/material/glass/reinforced
+
 
 /obj/structure/window/New(Loc, constructed=0)
 	..()
@@ -492,7 +493,23 @@
 		animate(src, color="#222222", time=5)
 		set_opacity(1)
 
+/obj/structure/window/reinforced/crescent/attack_hand()
+	return
 
+/obj/structure/window/reinforced/crescent/attackby()
+	return
+
+/obj/structure/window/reinforced/crescent/ex_act()
+	return
+
+/obj/structure/window/reinforced/crescent/hitby()
+	return
+
+/obj/structure/window/reinforced/crescent/take_damage()
+	return
+
+/obj/structure/window/reinforced/crescent/shatter()
+	return
 
 /obj/machinery/button/windowtint
 	name = "window tint control"

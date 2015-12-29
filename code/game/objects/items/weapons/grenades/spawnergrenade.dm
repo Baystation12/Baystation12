@@ -16,7 +16,7 @@
 			var/turf/T = get_turf(src)
 			playsound(T, 'sound/effects/phasein.ogg', 100, 1)
 			for(var/mob/living/carbon/human/M in viewers(T, null))
-				if(M:eyecheck() <= 0)
+				if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
 					flick("e_flash", M.flash)
 
 			for(var/i=1, i<=deliveryamt, i++)

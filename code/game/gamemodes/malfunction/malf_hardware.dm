@@ -34,7 +34,7 @@
 	desc = "Secondary coprocessor that increases amount of generated CPU power by 50%"
 
 /datum/malf_hardware/dual_cpu/get_examine_desc()
-	return "It seems to have an additional CPU connected to it's core."
+	return "It seems to have an additional CPU connected to its core."
 
 /datum/malf_hardware/dual_ram
 	name = "Secondary Memory Bank"

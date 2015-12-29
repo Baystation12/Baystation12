@@ -34,6 +34,9 @@
 	var/open_sound_powered = 'sound/machines/airlock.ogg'
 	var/open_sound_unpowered = 'sound/machines/airlock_creaking.ogg'
 
+	var/_wifi_id
+	var/datum/wifi/receiver/button/door/wifi_receiver
+
 /obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
 	if(stat & (BROKEN|NOPOWER))
 		if(damage >= 10)
@@ -541,7 +544,7 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/attack_ai(mob/user as mob)
 	ui_interact(user)
 
-/obj/machinery/door/airlock/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/door/airlock/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/data[0]
 
 	data["main_power_loss"]		= round(main_power_lost_until 	> 0 ? max(main_power_lost_until - world.time,	0) / 10 : main_power_lost_until,	1)
@@ -561,7 +564,7 @@ About the new airlock wires panel:
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "door_control.tmpl", "Door Controls", 450, 350)
+		ui = new(user, src, ui_key, "door_control.tmpl", "Door Controls", 450, 350, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -656,13 +659,10 @@ About the new airlock wires panel:
 	return
 
 /obj/machinery/door/airlock/CanUseTopic(var/mob/user)
-	if(!user.isSilicon())
-		return STATUS_CLOSE
-
 	if(operating < 0) //emagged
 		user << "<span class='warning'>Unable to interface: Internal error.</span>"
 		return STATUS_CLOSE
-	if(!src.canAIControl())
+	if(issilicon(user) && !src.canAIControl())
 		if(src.canAIHack(user))
 			src.hack(user)
 		else
@@ -738,7 +738,7 @@ About the new airlock wires panel:
 		if(src.isElectrified())
 			if(src.shock(user, 75))
 				return
-	if(istype(C, /obj/item/device/detective_scanner) || istype(C, /obj/item/taperoll))
+	if(istype(C, /obj/item/taperoll))
 		return
 
 	src.add_fingerprint(user)
@@ -897,6 +897,9 @@ About the new airlock wires panel:
 /obj/machinery/door/blocks_airlock()
 	return 0
 
+/obj/structure/window/blocks_airlock()
+	return 0
+
 /obj/machinery/mech_sensor/blocks_airlock()
 	return 0
 
@@ -906,10 +909,16 @@ About the new airlock wires panel:
 /atom/movable/proc/airlock_crush(var/crush_damage)
 	return 0
 
+/obj/structure/window/airlock_crush(var/crush_damage)
+	ex_act(2)//Smashin windows
+
 /obj/machinery/portable_atmospherics/canister/airlock_crush(var/crush_damage)
 	. = ..()
 	health -= crush_damage
 	healthcheck()
+
+/obj/effect/energy_field/airlock_crush(var/crush_damage)
+	Stress(crush_damage)
 
 /obj/structure/closet/airlock_crush(var/crush_damage)
 	..()
@@ -959,12 +968,8 @@ About the new airlock wires panel:
 		playsound(src.loc, open_sound_powered, 100, 1)
 	else
 		playsound(src.loc, open_sound_unpowered, 100, 1)
-	for(var/turf/turf in locs)
-		var/obj/structure/window/killthis = (locate(/obj/structure/window) in turf)
-		if(killthis)
-			killthis.ex_act(2)//Smashin windows
+
 	..()
-	return
 
 /obj/machinery/door/airlock/proc/lock(var/forced=0)
 	if(locked)
@@ -1036,12 +1041,14 @@ About the new airlock wires panel:
 			if(A.closeOtherId == src.closeOtherId && A != src)
 				src.closeOther = A
 				break
+	..()
 
 /obj/machinery/door/airlock/Destroy()
-	if(wires)
-		qdel(wires)
-		wires = null
-	..()
+	qdel(wires)
+	wires = null
+	qdel(wifi_receiver)
+	wifi_receiver = null
+	return ..()
 
 // Most doors will never be deconstructed over the course of a round,
 // so as an optimization defer the creation of electronics until
@@ -1064,8 +1071,8 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/emp_act(var/severity)
 	if(prob(40/severity))
-		var/duration = world.time + SecondsToTicks(30 / severity)
-		if(duration > electrified_until)
+		var/duration = SecondsToTicks(30 / severity)
+		if(electrified_until > -1 && (duration + world.time) > electrified_until)
 			electrify(duration)
 	..()
 

@@ -38,8 +38,8 @@
 
 /datum/random_map/noise/ore/apply_to_turf(var/x,var/y)
 
-	var/tx = (origin_x+(x-1))*chunk_size
-	var/ty = (origin_y+(y-1))*chunk_size
+	var/tx = ((origin_x-1)+x)*chunk_size
+	var/ty = ((origin_y-1)+y)*chunk_size
 
 	for(var/i=0,i<chunk_size,i++)
 		for(var/j=0,j<chunk_size,j++)

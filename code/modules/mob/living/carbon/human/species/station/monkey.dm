@@ -11,7 +11,7 @@
 	language = null
 	default_language = "Chimpanzee"
 	greater_form = "Human"
-	is_small = 1
+	mob_size = MOB_SMALL
 	has_fine_manipulation = 0
 	show_ssd = null
 
@@ -38,6 +38,8 @@
 	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL|ALIEN
 
+	pass_flags = PASSTABLE
+
 /datum/species/monkey/handle_npc(var/mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)
 		return
@@ -63,14 +65,14 @@
 	tail = "farwatail"
 
 /datum/species/monkey/skrell
-	name = "Neara"
-	name_plural = "Neara"
+	name = "Neaera"
+	name_plural = "Neaera"
 
-	icobase = 'icons/mob/human_races/monkeys/r_neara.dmi'
-	deform = 'icons/mob/human_races/monkeys/r_neara.dmi'
+	icobase = 'icons/mob/human_races/monkeys/r_neaera.dmi'
+	deform = 'icons/mob/human_races/monkeys/r_neaera.dmi'
 
 	greater_form = "Skrell"
-	default_language = "Neara"
+	default_language = "Neaera"
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
 	reagent_tag = IS_SKRELL

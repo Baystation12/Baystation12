@@ -16,7 +16,8 @@
 	create_objectives(target)
 	update_icons_added(target)
 	greet(target)
-	announce_antagonist_spawn()
+	if(!gag_announcement)
+		announce_antagonist_spawn()
 
 /datum/antagonist/proc/create_default(var/mob/source)
 	var/mob/living/M

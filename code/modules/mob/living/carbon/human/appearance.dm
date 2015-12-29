@@ -95,6 +95,8 @@
 	g_hair = green
 	b_hair = blue
 
+	force_update_limbs()
+	update_body()
 	update_hair()
 	return 1
 

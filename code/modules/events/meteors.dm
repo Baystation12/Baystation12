@@ -3,9 +3,12 @@
 	endWhen 		= 7
 	var/next_meteor = 6
 	var/waves = 1
+	var/start_side
 
 /datum/event/meteor_wave/setup()
 	waves = severity * rand(1,3)
+	start_side = pick(cardinal)
+	endWhen = worst_case_end()
 
 /datum/event/meteor_wave/announce()
 	switch(severity)
@@ -14,13 +17,17 @@
 		else
 			command_announcement.Announce("The station is now in a meteor shower.", "Meteor Alert")
 
-//meteor showers are lighter and more common,
 /datum/event/meteor_wave/tick()
 	if(waves && activeFor >= next_meteor)
-		spawn() spawn_meteors(severity * rand(1,2), get_meteors())
+		var/pick_side = prob(80) ? start_side : (prob(50) ? turn(start_side, 90) : turn(start_side, -90))
+
+		spawn() spawn_meteors(severity * rand(1,2), get_meteors(), pick_side)
 		next_meteor += rand(15, 30) / severity
 		waves--
-		endWhen = (waves ? next_meteor + 1 : activeFor + 15)
+		endWhen = worst_case_end()
+
+/datum/event/meteor_wave/proc/worst_case_end()
+	return activeFor + ((30 / severity) * waves) + 10
 
 /datum/event/meteor_wave/end()
 	switch(severity)

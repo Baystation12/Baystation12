@@ -127,7 +127,7 @@
 
 /obj/machinery/power/port_gen/pacman/Destroy()
 	DropFuel()
-	..()
+	return ..()
 
 /obj/machinery/power/port_gen/pacman/RefreshParts()
 	var/temp_rating = 0
@@ -245,11 +245,11 @@
 	sheets = 0
 	sheet_left = 0
 	..()
-	
+
 /obj/machinery/power/port_gen/pacman/emag_act(var/remaining_charges, var/mob/user)
 	if (active && prob(25))
 		explode() //if they're foolish enough to emag while it's running
-	
+
 	if (!emagged)
 		emagged = 1
 		return 1

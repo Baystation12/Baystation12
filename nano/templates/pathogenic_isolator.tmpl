@@ -81,7 +81,7 @@
       {{if data.database}}
         {{for data.database}}
           <div class='itemContent'>
-            <div class='highlight fixedLeft'>{{:data.name}}</div>
+            <div class='highlight fixedLeft'>{{:value.name}}</div>
             {{:helper.link('Details', 'circle-arrow-s', { 'entry' : 1, 'view' : value.record }, null, 'fixedLeft')}}
           </div>
         {{/for}}

@@ -8,33 +8,40 @@
 	w_class = 2.0
 	var/obj/item/weapon/implant/imp = null
 
+/obj/item/weapon/implanter/attack_self(var/mob/user)
+	if(!imp)
+		return ..()
+	imp.loc = get_turf(src)
+	user.put_in_hands(imp)
+	user << "<span class='notice'>You remove \the [imp] from \the [src].</span>"
+	name = "implanter"
+	imp = null
+	update()
+	return
+
 /obj/item/weapon/implanter/proc/update()
-
-
-/obj/item/weapon/implanter/update()
 	if (src.imp)
 		src.icon_state = "implanter1"
 	else
 		src.icon_state = "implanter0"
 	return
 
-
 /obj/item/weapon/implanter/attack(mob/M as mob, mob/user as mob)
 	if (!istype(M, /mob/living/carbon))
 		return
 	if (user && src.imp)
-		for (var/mob/O in viewers(M, null))
-			O.show_message("<span class='warning'>[user] is attemping to implant [M].</span>", 1)
+		M.visible_message("<span class='warning'>[user] is attemping to implant [M].</span>")
+		
+		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+		user.do_attack_animation(M)
 
 		var/turf/T1 = get_turf(M)
 		if (T1 && ((M == user) || do_after(user, 50)))
 			if(user && M && (get_turf(M) == T1) && src && src.imp)
-				for (var/mob/O in viewers(M, null))
-					O.show_message("<span class='warning'>[M] has been implanted by [user].</span>", 1)
+				M.visible_message("<span class='warning'>[M] has been implanted by [user].</span>")
 
 				admin_attack_log(user, M, "Implanted using \the [src.name] ([src.imp.name])", "Implanted with \the [src.name] ([src.imp.name])", "used an implanter, [src.name] ([src.imp.name]), on")
 
-				user.show_message("<span class='warning'>You implanted the implant into [M].</span>")
 				if(src.imp.implanted(M))
 					src.imp.loc = M
 					src.imp.imp_in = M
@@ -51,8 +58,6 @@
 				update()
 
 	return
-
-
 
 /obj/item/weapon/implanter/loyalty
 	name = "implanter-loyalty"

@@ -39,6 +39,9 @@
 /obj/machinery/computer/skills/attack_hand(mob/user as mob)
 	if(..())
 		return
+	ui_interact(user)
+
+/obj/machinery/computer/skills/ui_interact(mob/user as mob)
 	if (src.z > 6)
 		user << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!"
 		return
@@ -277,7 +280,11 @@ What a mess.*/
 					else
 						P.info += "<B>General Record Lost!</B><BR>"
 					P.info += "</TT>"
-					P.name = "Employment Record ([active1.fields["name"]])"
+					if(active1)
+						P.name = "Employment Record ([active1.fields["name"]])"
+					else
+						P.name = "Employment Record (Unknown/Invald Entry)"
+						log_debug("[usr] ([usr.ckey]) attempted to print a null employee record, this should be investigated.")
 					printing = null
 //RECORD DELETE
 			if ("Delete All Records")

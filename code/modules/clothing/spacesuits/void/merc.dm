@@ -7,7 +7,7 @@
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 60)
 	siemens_coefficient = 0.6
 	species_restricted = list("Human")
-	camera_networks = list("NUKE")
+	camera_networks = list(NETWORK_MERCENARY)
 	light_overlay = "helmet_light_green" //todo: species-specific light overlays
 
 /obj/item/clothing/suit/space/void/merc

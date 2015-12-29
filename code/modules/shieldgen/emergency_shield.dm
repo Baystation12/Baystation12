@@ -60,7 +60,7 @@
 	..()
 
 /obj/machinery/shield/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.damage
+	health -= Proj.get_structure_damage()
 	..()
 	check_failure()
 	opacity = 1
@@ -86,9 +86,6 @@
 		if(2)
 			if(prob(50))
 				qdel(src)
-
-/obj/machinery/shield/blob_act()
-	qdel(src)
 
 
 /obj/machinery/shield/hitby(AM as mob|obj)

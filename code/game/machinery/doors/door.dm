@@ -99,7 +99,7 @@
 		var/mob/M = AM
 		if(world.time - M.last_bumped <= 10) return	//Can bump-open one airlock per second. This is to prevent shock spam.
 		M.last_bumped = world.time
-		if(!M.restrained() && !M.small)
+		if(!M.restrained() && !issmall(M))
 			bumpopen(M)
 		return
 
@@ -156,12 +156,10 @@
 /obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
 	..()
 
-	//Tasers and the like should not damage doors. Nor should TOX, OXY, CLONE, etc damage types
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		return
+	var/damage = Proj.get_structure_damage()
 
 	// Emitter Blasts - these will eventually completely destroy the door, given enough time.
-	if (Proj.damage > 90)
+	if (damage > 90)
 		destroy_hits--
 		if (destroy_hits <= 0)
 			visible_message("<span class='danger'>\The [src.name] disintegrates!</span>")
@@ -173,9 +171,9 @@
 					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
 			qdel(src)
 
-	if(Proj.damage)
+	if(damage)
 		//cap projectile damage so that there's still a minimum number of hits required to break the door
-		take_damage(min(Proj.damage, 100))
+		take_damage(min(damage, 100))
 
 
 
@@ -204,8 +202,6 @@
 	..()
 
 /obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/device/detective_scanner))
-		return
 	src.add_fingerprint(user)
 
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
@@ -335,12 +331,6 @@
 	return
 
 
-/obj/machinery/door/blob_act()
-	if(prob(40))
-		qdel(src)
-	return
-
-
 /obj/machinery/door/emp_act(severity)
 	if(prob(20/severity) && (istype(src,/obj/machinery/door/airlock) || istype(src,/obj/machinery/door/window)) )
 		spawn(0)
@@ -407,12 +397,12 @@
 	set_opacity(0)
 	sleep(3)
 	src.density = 0
+	update_nearby_tiles()
 	sleep(7)
 	src.layer = open_layer
 	explosion_resistance = 0
 	update_icon()
 	set_opacity(0)
-	update_nearby_tiles()
 	operating = 0
 
 	if(autoclose)
@@ -434,12 +424,12 @@
 	src.density = 1
 	explosion_resistance = initial(explosion_resistance)
 	src.layer = closed_layer
+	update_nearby_tiles()
 	sleep(7)
 	update_icon()
 	if(visible && !glass)
 		set_opacity(1)	//caaaaarn!
 	operating = 0
-	update_nearby_tiles()
 
 	//I shall not add a check every x ticks if a door has closed over some fire.
 	var/obj/fire/fire = locate() in loc

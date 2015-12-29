@@ -68,31 +68,46 @@
 	if (!message)
 		return
 
-	var/obj/machinery/hologram/holopad/T = src.holo
-	if(T && T.masters[src])//If there is a hologram and its master is the user.
+	var/obj/machinery/hologram/holopad/H = src.holo
+	if(H && H.masters[src])//If there is a hologram and its master is the user.
 
-		//Human-like, sorta, heard by those who understand humans.
-		var/rendered_a
-		//Speach distorted, heard by those who do not understand AIs.
-		var/message_stars = stars(message)
-		var/rendered_b
-
+		// AI can hear their own message, this formats it for them.
 		if(speaking)
-			rendered_a = "<span class='game say'><span class='name'>[name]</span> [speaking.format_message(message, verb)]</span>"
-			rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> [speaking.format_message(message_stars, verb)]</span>"
-			src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [speaking.format_message(message, verb)]</span></i>"//The AI can "hear" its own message.
+			src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [speaking.format_message(message, verb)]</span></i>"
 		else
-			rendered_a = "<span class='game say'><span class='name'>[name]</span> [verb], <span class='message'>\"[message]\"</span></span>"
-			rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> [verb], <span class='message'>\"[message_stars]\"</span></span>"
-			src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span></i>"//The AI can "hear" its own message.
+			src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span></i>"
 
-		for(var/mob/M in hearers(T.loc))//The location is the object, default distance.
-			if(M.say_understands(src))//If they understand AI speak. Humans and the like will be able to.
-				M.show_message(rendered_a, 2)
-			else//If they do not.
-				M.show_message(rendered_b, 2)
-		/*Radios "filter out" this conversation channel so we don't need to account for them.
-		This is another way of saying that we won't bother dealing with them.*/
+		//This is so pAI's and people inside lockers/boxes,etc can hear the AI Holopad, the alternative being recursion through contents.
+		//This is much faster.
+		var/list/listening = list()
+		var/list/listening_obj = list()
+		var/turf/T = get_turf(H)		
+
+		if(T)
+			var/list/hear = hear(7, T)
+			var/list/hearturfs = list()
+
+			for(var/I in hear)
+				if(istype(I, /mob/))
+					var/mob/M = I
+					listening += M
+					hearturfs += M.locs[1]
+					for(var/obj/O in M.contents)
+						listening_obj |= O
+				else if(istype(I, /obj/))
+					var/obj/O = I
+					hearturfs += O.locs[1]
+					listening_obj |= O
+
+
+			for(var/mob/M in player_list)
+				if(M.stat == DEAD && M.client && (M.client.prefs.toggles & CHAT_GHOSTEARS))
+					M.hear_say(message,verb,speaking,null,null, src)
+					continue
+				if(M.loc && M.locs[1] in hearturfs)
+					M.hear_say(message,verb,speaking,null,null, src)
+
+
 	else
 		src << "No holopad connected."
 		return 0

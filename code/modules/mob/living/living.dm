@@ -87,8 +87,8 @@ default behaviour is:
 
 			if((tmob.mob_always_swap || (tmob.a_intent == I_HELP || tmob.restrained()) && (a_intent == I_HELP || src.restrained())) && tmob.canmove && canmove && !dense && can_move_mob(tmob, 1, 0)) // mutual brohugs all around!
 				var/turf/oldloc = loc
-				loc = tmob.loc
-				tmob.loc = oldloc
+				forceMove(tmob.loc)
+				tmob.forceMove(oldloc)
 				now_pushing = 0
 				for(var/mob/living/carbon/slime/slime in view(1,tmob))
 					if(slime.Victim == tmob)
@@ -96,6 +96,9 @@ default behaviour is:
 				return
 
 			if(!can_move_mob(tmob, 0, 0))
+				now_pushing = 0
+				return
+			if(a_intent == I_HELP || src.restrained())
 				now_pushing = 0
 				return
 			if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
@@ -573,28 +576,17 @@ default behaviour is:
 	set name = "Resist"
 	set category = "IC"
 
-	if(can_resist())
+	if(!(stat || next_move > world.time))
 		setClickCooldown(20)
-		process_resist()
-
-/mob/living/proc/can_resist()
-	//need to allow !canmove, or otherwise neck grabs can't be resisted
-	//so just check weakened instead.
-	if(stat || weakened)
-		return 0
-	if(!canClick())
-		return 0
-	return 1
+		resist_grab()
+		if(!weakened)
+			process_resist()
 
 /mob/living/proc/process_resist()
 	//Getting out of someone's inventory.
 	if(istype(src.loc, /obj/item/weapon/holder))
 		escape_inventory(src.loc)
 		return
-
-	//resisting grabs (as if it helps anyone...)
-	if (!restrained())
-		resist_grab()
 
 	//unbuckling yourself
 	if(buckled)
@@ -612,18 +604,24 @@ default behaviour is:
 
 	if(istype(M))
 		M.drop_from_inventory(H)
-		M << "<span class='warning'>[H] wriggles out of your grip!</span>"
-		src << "<span class='warning'>You wriggle out of [M]'s grip!</span>"
-	else if(istype(H.loc,/obj/item))
-		src << "<span class='warning'>You struggle free of [H.loc].</span>"
-		H.loc = get_turf(H)
+		M << "<span class='warning'>\The [H] wriggles out of your grip!</span>"
+		src << "<span class='warning'>You wriggle out of \the [M]'s grip!</span>"
 
-	if(istype(M))
+		// Update whether or not this mob needs to pass emotes to contents.
 		for(var/atom/A in M.contents)
 			if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
 				return
+		M.status_flags &= ~PASSEMOTES
 
-	M.status_flags &= ~PASSEMOTES
+	else if(istype(H.loc,/obj/item/clothing/accessory/holster))
+		var/obj/item/clothing/accessory/holster/holster = H.loc
+		if(holster.holstered == H)
+			holster.clear_holster()
+		src << "<span class='warning'>You extricate yourself from \the [holster].</span>"
+		H.forceMove(get_turf(H))
+	else if(istype(H.loc,/obj/item))
+		src << "<span class='warning'>You struggle free of \the [H.loc].</span>"
+		H.forceMove(get_turf(H))
 
 /mob/living/proc/escape_buckle()
 	if(buckled)
@@ -657,7 +655,15 @@ default behaviour is:
 	set category = "IC"
 
 	resting = !resting
-	src << "<span class='notice'>You are now [resting ? "resting" : "getting up"].</span>"
+	src << "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>"
+
+/mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	return isnull(get_inventory_slot(carried_item))
+
+/mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	if(carried_item == held_item)
+		return 0
+	return ..()
 
 /mob/living/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null, var/ignore_items = 0) // -- TLE -- Merged by Carn
 	if(stat)
@@ -721,9 +727,10 @@ default behaviour is:
 
 	if(!ignore_items)
 		for(var/obj/item/carried_item in contents)//If the monkey got on objects.
-			if( !istype(carried_item, /obj/item/weapon/implant) && !istype(carried_item, /obj/item/clothing/mask/facehugger) )//If it's not an implant or a facehugger
-				src << "\red You can't be carrying items or have items equipped when vent crawling!"
-				return
+			if(is_allowed_vent_crawl_item(carried_item))
+				continue
+			src << "<span class='warning'>You can't be carrying items or have items equipped when vent crawling!</span>"
+			return
 
 	if(isslime(src))
 		var/mob/living/carbon/slime/S = src
@@ -806,3 +813,43 @@ default behaviour is:
 		ear_damage = damage
 	if(deaf >= 0)
 		ear_deaf = deaf
+
+/mob/living/proc/can_be_possessed_by(var/mob/dead/observer/possessor)
+	if(!istype(possessor))
+		return 0
+	if(!possession_candidate)
+		possessor << "<span class='warning'>That animal cannot be possessed.</span>"
+		return 0
+	if(jobban_isbanned(possessor, "Animal"))
+		possessor << "<span class='warning'>You are banned from animal roles.</span>"
+		return 0
+	if(!possessor.MayRespawn(1,ANIMAL_SPAWN_DELAY))
+		return 0
+	return 1
+
+/mob/living/proc/do_possession(var/mob/dead/observer/possessor)
+
+	if(!(istype(possessor) && possessor.ckey))
+		return 0
+
+	if(src.ckey || src.client)
+		possessor << "<span class='warning'>\The [src] already has a player.</span>"
+		return 0
+
+	message_admins("<span class='adminnotice'>[key_name_admin(possessor)] has taken control of \the [src].</span>")
+	log_admin("[key_name(possessor)] took control of \the [src].")
+	src.ckey = possessor.ckey
+	qdel(possessor)
+
+	if(round_is_spooky(6)) // Six or more active cultists.
+		src << "<span class='notice'>You reach out with tendrils of ectoplasm and invade the mind of \the [src]...</span>"
+		src << "<b>You have assumed direct control of \the [src].</b>"
+		src << "<span class='notice'>Due to the spookiness of the round, you have taken control of the poor animal as an invading, possessing spirit - roleplay accordingly.</span>"
+		src.universal_speak = 1
+		src.universal_understand = 1
+		//src.cultify() // Maybe another time.
+		return
+
+	src << "<b>You are now \the [src]!</b>"
+	src << "<span class='notice'>Remember to stay in character for a mob of this type!</span>"
+	return 1

@@ -15,6 +15,20 @@
 
 		return 1
 
+/datum/disease2/disease/get_view_variables_header()
+	. = list()
+	for(var/datum/disease2/effectholder/E in effects)
+		. += "[E.stage]: [E.effect.name]"
+	return {"
+		<b>[name()]</b><br><font size=1>
+		[list2text(., "<br>")]</font>
+	"}
+
+/datum/disease2/disease/get_view_variables_options()
+	return ..() + {"
+		<option value='?src=\ref[src];info=1'>Show info</option>
+	"}
+
 /datum/admins/var/datum/virus2_editor/virus2_editor_datum = new
 /client/proc/virus2_editor()
 	set name = "Virus Editor"
