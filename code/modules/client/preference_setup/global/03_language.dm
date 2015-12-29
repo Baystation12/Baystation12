@@ -47,9 +47,6 @@
 
 
 /datum/category_item/player_setup_item/player_global/language/update_setup(var/savefile/preferences, var/savefile/character)
-	if(!preferences || !character)
-		return
-
 	if(preferences["version"] == 11)
 		var/list/prefixes = character["language_prefixes"]
 		if(istype(prefixes) && prefixes.len)

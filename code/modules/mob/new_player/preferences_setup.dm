@@ -12,11 +12,10 @@ datum/preferences
 			if(current_species.appearance_flags & HAS_SKIN_COLOR)
 				randomize_skin_color()
 			if(current_species.appearance_flags & HAS_UNDERWEAR)
-				switch(gender)
-					if(MALE)
-						underwear = underwear_m[pick(underwear_m)]
-					if(FEMALE)
-						underwear = underwear_f[pick(underwear_f)]
+				if(gender == FEMALE)
+					underwear = underwear_f[pick(underwear_f)]
+				else
+					underwear = underwear_m[pick(underwear_m)]
 				undershirt = undershirt_t[pick(undershirt_t)]
 
 		h_style = random_hair_style(gender, species)
