@@ -135,11 +135,6 @@
 	else
 		return ..()
 
-/mob/living/simple_animal/cat/get_scooped(var/mob/living/carbon/grabber)
-	if (stat >= DEAD)
-		return //since the holder icon looks like a living cat
-	..()
-
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff
 	var/mob/living/carbon/human/friend
