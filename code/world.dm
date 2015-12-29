@@ -184,6 +184,12 @@ var/world_topic_spam_protect_time = world.timeofday
 
 		return list2params(positions)
 
+	else if(T == "revision")
+		if(revdata.revision)
+			return list2params(list(branch = revdata.branch, date = revdata.date, revision = revdata.revision))
+		else
+			return "unknown"
+
 	else if(copytext(T,1,5) == "info")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
