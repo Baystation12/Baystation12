@@ -10,6 +10,7 @@
 #define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
+#include "code\__defines\unit_testing.dm"
 #include "code\_macros.dm"
 #include "code\global.dm"
 #include "code\hub.dm"
@@ -1865,6 +1866,8 @@
 #include "code\modules\wireless\interfaces.dm"
 #include "code\modules\xgm\xgm_gas_data.dm"
 #include "code\modules\xgm\xgm_gas_mixture.dm"
+#include "code\unit_tests\unit_test.dm"
+#include "code\unit_tests\mob_tests.dm"
 #include "code\ZAS\_docs.dm"
 #include "code\ZAS\Airflow.dm"
 #include "code\ZAS\Atom.dm"
