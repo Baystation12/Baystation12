@@ -113,18 +113,9 @@
 	for(var/x in variables)
 		. += make_view_variables_var_entry(D, x, D.vars[x])
 
-/proc/make_view_variables_var_entry(datum/D, varname, value, level=0)
-	var/ecm = null
-	var/vtext = null
-	var/extra = null
-
-	if(D)
-		ecm = {"
-			(<a href='?_src_=vars;datumedit=\ref[D];varnameedit=[varname]'>E</a>)
-			(<a href='?_src_=vars;datumchange=\ref[D];varnamechange=[varname]'>C</a>)
-			(<a href='?_src_=vars;datummass=\ref[D];varnamemass=[varname]'>M</a>)
-			"}
-
+/proc/make_view_variables_value(value, varname = "*")
+	var/vtext = ""
+	var/extra = list()
 	if(isnull(value))
 		vtext = "null"
 	else if(istext(value))
@@ -146,16 +137,29 @@
 		var/list/L = value
 		vtext = "/list ([L.len])"
 		if(!(varname in view_variables_dont_expand) && L.len > 0 && L.len < 100)
-			extra = "<ul>"
-			var/index = 1
-			for (var/entry in L)
-				if(istext(entry))
-					extra += make_view_variables_var_entry(null, entry, L[entry], level+1)
+			extra += "<ul>"
+			for (var/index = 1 to L.len)
+				var/entry = L[index]
+				if(!isnum(entry) && !isnull(entry) && L[entry] != null)
+					extra += "<li>[index]: [make_view_variables_value(entry)] -> [make_view_variables_value(L[entry])]</li>"
 				else
-					extra += make_view_variables_var_entry(null, index, L[index], level+1)
-				index++
+					extra += "<li>[index]: [make_view_variables_value(entry)]</li>"
 			extra += "</ul>"
 	else
 		vtext = "[value]"
 
-	return "<li>[ecm][varname] = <span class='value'>[vtext]</span>[extra]</li>"
+	return "<span class=value>[vtext]</span>[list2text(extra)]"
+
+/proc/make_view_variables_var_entry(datum/D, varname, value, level=0)
+	var/ecm = null
+
+	if(D)
+		ecm = {"
+			(<a href='?_src_=vars;datumedit=\ref[D];varnameedit=[varname]'>E</a>)
+			(<a href='?_src_=vars;datumchange=\ref[D];varnamechange=[varname]'>C</a>)
+			(<a href='?_src_=vars;datummass=\ref[D];varnamemass=[varname]'>M</a>)
+			"}
+
+	var/valuestr = make_view_variables_value(value, varname)
+
+	return "<li>[ecm][varname] = [valuestr]</li>"
