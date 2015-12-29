@@ -1,3 +1,14 @@
+/*
+ *
+ *  Mob Unit Tests.
+ *  Human suffocation in Space.
+ *  Human 
+ *
+ */
+
+// 
+// Tests Life() and mob breathing in space.
+
 datum/unit_test/human_breath
 	name = "Human Suffocates in Space"
 	var/starting_oxyloss = null
@@ -14,16 +25,16 @@ datum/unit_test/human_breath/start_test()
 
 	H = new(T)
 
-	starting_oxyloss = H.oxyloss
+	starting_oxyloss = H.getOxyLoss()
 
-	return
+	return 1
 
 datum/unit_test/human_breath/check_result()
 
 	if(H.life_tick < 10) 	// Finish Condition
 		return 0	// Return 0 to try again later.
 
-	ending_oxyloss = H.oxyloss
+	ending_oxyloss = H.getOxyLoss()
 
 	if(starting_oxyloss < ending_oxyloss)
 		pass("Oxyloss = [ending_oxyloss]")
@@ -32,4 +43,12 @@ datum/unit_test/human_breath/check_result()
 	
 	qdel(H)
 	return 1	// return 1 to show we're done.
-	
+
+// ============================================================================
+
+/*
+datum/unit_test/human_cold
+	name "Human Reaction to Cold"
+
+	var/turf/T = locate(
+*/
