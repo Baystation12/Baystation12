@@ -10,6 +10,7 @@
 	var/datum/computer_file/program/active_program = null	// A currently active program running on the computer.
 	var/hardware_flag = 0									// A flag that describes this device type
 	var/last_power_usage = 0
+	var/computer_emagged = 0								// Whether the computer is emagged.
 
 	var/base_active_power_usage = 50						// Power usage when the computer is open (screen is active) and can be interacted with. Remember hardware can use power too.
 	var/base_idle_power_usage = 5							// Power usage when the computer is idle and screen is off (currently only applies to laptops)
@@ -67,6 +68,15 @@
 	card_slot.stored_card.forceMove(get_turf(src))
 	card_slot.stored_card = null
 	user << "You remove the card from \the [src]"
+
+/obj/item/modular_computer/emag_act(var/remaining_charges, var/mob/user)
+	if(computer_emagged)
+		user << "\The [src] was already emagged."
+		return NO_EMAG_ACT
+	else
+		computer_emagged = 1
+		user << "You emag \the [src]. It's screen briefly shows a \"OVERRIDE ACCEPTED: New software downloads available.\" message."
+		return 1
 
 /obj/item/modular_computer/New()
 	processing_objects.Add(src)
@@ -162,7 +172,7 @@
 	if(active_program)
 		active_program.process_tick()
 		active_program.ntnet_status = get_ntnet_status()
-	// TODO: Implement computer_emagged handling for programs
+		active_program.computer_emagged = computer_emagged
 
 	handle_power() // Handles all computer power interaction
 
