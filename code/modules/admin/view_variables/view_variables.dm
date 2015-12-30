@@ -5,6 +5,8 @@
 /var/list/view_variables_hide_vars = list("bound_x", "bound_y", "bound_height", "bound_width", "bounds", "parent_type", "step_x", "step_y", "step_size")
 // Variables not to expand the lists of. Vars is pointless to expand, and overlays/underlays cannot be expanded.
 /var/list/view_variables_dont_expand = list("overlays", "underlays", "vars")
+// Variables that runtime if you try to test associativity of the lists they contain by indexing
+/var/list/view_variables_no_assoc = list("verbs", "contents")
 
 // Acceptable 'in world', as VV would be incredibly hampered otherwise
 /client/proc/debug_variables(datum/D in world)
@@ -140,7 +142,7 @@
 			extra += "<ul>"
 			for (var/index = 1 to L.len)
 				var/entry = L[index]
-				if(!isnum(entry) && !isnull(entry) && L[entry] != null)
+				if(!isnum(entry) && !isnull(entry) && !(varname in view_variables_no_assoc) && L[entry] != null)
 					extra += "<li>[index]: [make_view_variables_value(entry)] -> [make_view_variables_value(L[entry])]</li>"
 				else
 					extra += "<li>[index]: [make_view_variables_value(entry)]</li>"
