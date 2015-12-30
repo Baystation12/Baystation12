@@ -13,7 +13,7 @@ datum/unit_test/zas_escape_shuttle
         name = "ZAS: Escape Shuttle"
 
 datum/unit_test/zas_escape_shuttle/start_test()
-	var/list/result = test_air_in_area("/area/shuttle/escape/centcom")
+	var/list/result = test_air_in_area(/area/shuttle/escape/centcom)
 	if(isnull(result))
 		fail("Check Runtimed")
 
@@ -23,14 +23,13 @@ datum/unit_test/zas_escape_shuttle/start_test()
 		fail(result["msg"])
 	return 1
 
-// ============================================================================
+// ==================================================================================================
 
-proc/test_air_in_area(var/A_txt)
-	var/test_area = text2path(A_txt)
+proc/test_air_in_area(var/test_area)
 	var/area/A = locate(test_area)
 
 	if(!istype(A, test_area))
-		return(list("success" = 0,  "msg" = "Unable to get [A_txt]"))
+		return(list("success" = 0,  "msg" = "Unable to get [test_area]"))
 
 	var/list/GM_checked = list()
 
@@ -61,11 +60,13 @@ proc/test_air_in_area(var/A_txt)
 		return(list("success"=0, "msg" = "No zones checked."))
 
 
+// ==================================================================================================
+
 datum/unit_test/zas_supply_shuttle_centcomm
 	name = "ZAS: Supply Shuttle (At CentComm)"
 
 datum/unit_test/zas_supply_shuttle_centcomm/start_test()
-	var/list/result = test_air_in_area("/area/supply/dock")
+	var/list/result = test_air_in_area(/area/supply/dock)
 	if(isnull(result))
 		fail("Check Runtimed")
 		return 1
@@ -75,6 +76,8 @@ datum/unit_test/zas_supply_shuttle_centcomm/start_test()
 	else
 		fail(result["msg"])
 	return 1
+
+// ==================================================================================================
 
 datum/unit_test/zas_supply_shuttle_moved
 	name = "ZAS: Supply Shuttle (When Moved)"
@@ -111,7 +114,7 @@ datum/unit_test/zas_supply_shuttle_moved/check_result()
 
 	sleep(20)	// Give ZAS a chance to catchup.
 
-	var/list/result = test_air_in_area("/area/supply/station")
+	var/list/result = test_air_in_area(/area/supply/station)
 	if(isnull(result))
 		fail("Check Runtimed")
 		return 1
