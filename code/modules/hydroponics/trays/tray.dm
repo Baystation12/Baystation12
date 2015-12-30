@@ -167,6 +167,7 @@
 	..()
 	temp_chem_holder = new()
 	temp_chem_holder.create_reagents(10)
+	temp_chem_holder.flags |= OPENCONTAINER
 	create_reagents(200)
 	if(mechanical)
 		connect()
@@ -623,7 +624,7 @@
 	set src in view(1)
 	if(usr.incapacitated())
 		return
-	
+
 	if(ishuman(usr) || istype(usr, /mob/living/silicon/robot))
 		close_lid(usr)
 	return
