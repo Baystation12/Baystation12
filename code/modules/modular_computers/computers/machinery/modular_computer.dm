@@ -17,8 +17,6 @@
 	icon_state = null
 	var/icon_state_unpowered = null									// Icon state when the computer is turned off
 	var/screen_icon_state_menu = "menu"								// Icon state overlay when the computer is turned on, but no program is loaded that would override the screen.
-	var/keyboard_icon_state_menu = "keyboard1"						// Keyboard's icon state overlay when the computer is turned on and no program is loaded
-	var/nokeyboard = 0												// Set to 1 to disable keyboard icons for this subtype.
 	var/max_hardware_size = 0										// Maximal hardware size. Currently, tablets have 1, laptops 2 and consoles 3. Limits what hardware types can be installed.
 	var/steel_sheet_cost = 10										// Amount of steel sheets refunded when disassembling an empty frame of this computer.
 
@@ -37,12 +35,8 @@
 		return
 	if(cpu.active_program)
 		overlays.Add(cpu.active_program.program_icon_state ? cpu.active_program.program_icon_state : screen_icon_state_menu)
-		if(!nokeyboard)
-			overlays.Add(cpu.active_program.keyboard_icon_state ? cpu.active_program.keyboard_icon_state : keyboard_icon_state_menu)
 	else
 		overlays.Add(screen_icon_state_menu)
-		if(!nokeyboard)
-			overlays.Add(keyboard_icon_state_menu)
 
 // Eject ID card from computer, if it has ID slot with card inside.
 /obj/machinery/modular_computer/verb/eject_id()
@@ -103,17 +97,9 @@
 		battery_powered = 0
 
 	var/power_usage = cpu.screen_on ? base_active_power_usage : base_idle_power_usage
-	if(cpu.network_card && cpu.network_card.enabled)
-		power_usage += cpu.network_card.power_usage
-
-	if(cpu.hard_drive && cpu.hard_drive.enabled)
-		power_usage += cpu.hard_drive.power_usage
-
-	if(cpu.nano_printer && cpu.nano_printer.enabled)
-		power_usage += cpu.nano_printer.power_usage
-
-	if(cpu.card_slot && cpu.card_slot.enabled)
-		power_usage += cpu.card_slot.power_usage
+	for(var/obj/item/weapon/computer_hardware/CH in src.cpu.get_all_components())
+		if(CH.enabled)
+			power_usage += CH.power_usage
 
 	// Wireless APC connection exists.
 	if(tesla_link && tesla_link.enabled)

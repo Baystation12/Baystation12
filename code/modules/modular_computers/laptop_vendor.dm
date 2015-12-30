@@ -1,6 +1,6 @@
 // A vendor machine for modular computer portable devices - Laptops and Tablets
 
-/obj/machinery/lapvend // This is now in place to correct compile errors.
+/obj/machinery/lapvend
 	name = "computer vendor"
 	desc = "A vending machine with microfabricator capable of dispensing various NT-branded computers"
 	icon = 'icons/obj/vending.dmi'
@@ -53,14 +53,14 @@
 		switch(dev_battery)
 			if(1) // Basic(750C)
 				if(fabricate)
-					fabricated_tablet.battery_module = new/obj/item/weapon/computer_hardware/battery_module(fabricated_tablet)
+					fabricated_laptop.cpu.battery_module = new/obj/item/weapon/computer_hardware/battery_module(fabricated_tablet)
 			if(2) // Upgraded(1100C)
 				if(fabricate)
-					fabricated_tablet.battery_module = new/obj/item/weapon/computer_hardware/battery_module/advanced(fabricated_tablet)
+					fabricated_laptop.cpu.battery_module = new/obj/item/weapon/computer_hardware/battery_module/advanced(fabricated_tablet)
 				total_price += 199
 			if(3) // Advanced(1500C)
 				if(fabricate)
-					fabricated_tablet.battery_module = new/obj/item/weapon/computer_hardware/battery_module/super(fabricated_tablet)
+					fabricated_laptop.cpu.battery_module = new/obj/item/weapon/computer_hardware/battery_module/super(fabricated_tablet)
 				total_price += 499
 		switch(dev_disk)
 			if(1) // Basic(128GQ)

@@ -10,7 +10,6 @@
 	var/filedesc = "Unknown Program"		// User-friendly name of this program.
 	var/extended_desc = "N/A"				// Short description of this program's function.
 	var/program_icon_state = null			// Program-specific screen icon state
-	var/keyboard_icon_state = null			// Program-specific keboard icon state, only supported on some devices.
 	var/requires_ntnet = 0					// Set to 1 for program to require nonstop NTNet connection to run. If NTNet connection is lost program crashes.
 	var/requires_ntnet_feature = 0			// Optional, if above is set to 1 checks for specific function of NTNet (currently NTNET_SOFTWAREDOWNLOAD, NTNET_PEERTOPEER, NTNET_SYSTEMCONTROL and NTNET_COMMUNICATION)
 	var/ntnet_status = 1					// NTNet status, updated every tick by computer running this program. Don't use this for checks if NTNet works, computers do that. Use this for calculations, etc.
@@ -62,29 +61,17 @@
 		access_to_check = required_access
 	if(!access_to_check) // No required_access, allow it.
 		return 1
-	if(istype(user, /mob/living/silicon)) // AI or robot. Allow it.
-		return 1
-	if(istype(user, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = user
-		var/obj/item/weapon/card/id/I = H.wear_id
-		var/obj/item/device/pda/P = H.wear_id
-		if(P && istype(P)) // PDA. Try to grab the ID from it then.
-			I = P.id
-		if(!I) // No equipped ID, let's try checking active hand too
-			I = H.get_active_hand()
-			P = H.get_active_hand()
-			if(P && istype(P))
-				I = P.id
-		if(!I || !istype(I)) // Still no ID.
-			if(loud && computer)
-				user << "<span class='danger'>\The [computer] flashes an \"RFID Error - Unable to scan ID\" warning.</span>"
-			return 0
 
-		if(access_to_check in I.access)
-			return 1
-	if(loud && computer)
+	var/obj/item/weapon/card/id/I = user.GetIdCard()
+	if(!I)
+		if(loud)
+			user << "<span class='danger'>\The [computer] flashes an \"RFID Error - Unable to scan ID\" warning.</span>"
+		return 0
+
+	if(access_to_check in I.access)
+		return 1
+	else if(loud)
 		user << "<span class='danger'>\The [computer] flashes an \"Access Denied\" warning.</span>"
-	return 0
 
 // This attempts to retrieve header data for NanoUIs. If implementing completely new device of different type than existing ones
 // always include the device here in this proc. This proc basically relays the request to whatever is running the program.
@@ -122,7 +109,7 @@
 	if(!running) // Our program was closed. Close the ui if it exists.
 		if(ui)
 			ui.close()
-		return 0
+		return computer.ui_interact(user)
 	if(istype(NM))
 		NM.ui_interact(user, ui_key, null, force_open)
 		return 0

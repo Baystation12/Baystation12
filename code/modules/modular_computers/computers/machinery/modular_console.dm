@@ -6,7 +6,6 @@
 	icon_state = "console"
 	icon_state_unpowered = "console"
 	screen_icon_state_menu = "menu"
-	keyboard_icon_state_menu = "kb_menu"
 	hardware_flag = PROGRAM_CONSOLE
 	var/console_department = "" // Used in New() to set network tag according to our area.
 	anchored = 1

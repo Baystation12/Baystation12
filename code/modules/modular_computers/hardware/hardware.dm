@@ -2,8 +2,6 @@
 	name = "Hardware"
 	desc = "Unknown Hardware"
 	icon = 'icons/obj/modular_components.dmi'
-	// Following two variables reference the machine that holds this hardware
-	// It is necessary to have two variables as we have modular_computer machine and item.
 	var/obj/item/modular_computer/holder2 = null
 	var/power_usage = 0 	// If the hardware uses extra power, change this.
 	var/enabled = 1			// If the hardware is turned off set this to 0.

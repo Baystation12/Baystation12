@@ -6,11 +6,10 @@
 	nanomodule_path = /datum/nano_module/power_monitor/
 	program_icon_state = "power_monitor"
 	extended_desc = "This program connects to sensors around the station to provide information about electrical systems"
-	keyboard_icon_state = "keyboard9"
 	required_access = access_engine
 	requires_ntnet = 1
 	network_destination = "power monitoring system"
-	size = 8
+	size = 9
 
 /datum/computer_file/program/alarm_monitor
 	filename = "alarmmonitor"
@@ -18,7 +17,6 @@
 	nanomodule_path = /datum/nano_module/alarm_monitor/engineering
 	program_icon_state = "alarm_monitor"
 	extended_desc = "This program provides visual interface for station's alarm system."
-	keyboard_icon_state = "keyboard4"
 	requires_ntnet = 1
 	network_destination = "alarm monitoring network"
 	size = 5
@@ -29,7 +27,6 @@
 	nanomodule_path = /datum/nano_module/atmos_control
 	program_icon_state = "atmos_control"
 	extended_desc = "This program allows remote control of air alarms around the station"
-	keyboard_icon_state = "keyboard4"
 	required_access = access_atmospherics
 	requires_ntnet = 1
 	network_destination = "atmospheric control system"
@@ -43,10 +40,9 @@
 	nanomodule_path = /datum/nano_module/rcon
 	program_icon_state = "generic"
 	extended_desc = "This program allows remote control of power distribution systems around the station."
-	keyboard_icon_state = "keyboard1"
 	required_access = access_engine
 	requires_ntnet = 1
 	network_destination = "RCON remote control system"
 	requires_ntnet_feature = NTNET_SYSTEMCONTROL
 	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
-	size = 25
+	size = 19

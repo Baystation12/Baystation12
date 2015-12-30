@@ -57,7 +57,6 @@
 	icon_state_unpowered = "laptop-open"					// Icon state when the computer is turned off
 	icon = 'icons/obj/modular_laptop.dmi'
 	icon_state = "laptop-open"
-	nokeyboard = 1
 	base_idle_power_usage = 25
 	base_active_power_usage = 200
 	max_hardware_size = 2

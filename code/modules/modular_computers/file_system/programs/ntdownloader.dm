@@ -5,7 +5,7 @@
 	extended_desc = "This program allows downloads of software from official NT repositories"
 	unsendable = 1
 	undeletable = 1
-	size = 3
+	size = 4
 	requires_ntnet = 1
 	requires_ntnet_feature = NTNET_SOFTWAREDOWNLOAD
 	available_on_ntnet = 0

@@ -35,6 +35,9 @@
 	max_hardware_size = machinery_computer.max_hardware_size
 	steel_sheet_cost = machinery_computer.steel_sheet_cost
 
+/obj/item/modular_computer/processor/relay_qdel()
+	qdel(machinery_computer)
+
 /obj/item/modular_computer/processor/find_hardware_by_name(var/N)
 	var/obj/item/weapon/computer_hardware/H = machinery_computer.find_hardware_by_name(N)
 	if(H)

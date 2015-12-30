@@ -1,9 +1,9 @@
 /datum/computer_file/program/chatclient
 	filename = "ntnrc_client"
 	filedesc = "NTNet Relay Chat Client"
-	program_icon_state = "generic"
+	program_icon_state = "command"
 	extended_desc = "This program allows communication over NTNRC network"
-	size = 10
+	size = 8
 	requires_ntnet = 1
 	requires_ntnet_feature = NTNET_COMMUNICATION
 	network_destination = "NTNRC server"

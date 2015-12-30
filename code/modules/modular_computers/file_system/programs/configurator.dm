@@ -9,7 +9,7 @@
 	program_icon_state = "generic"
 	unsendable = 1
 	undeletable = 1
-	size = 2
+	size = 4
 	available_on_ntnet = 0
 	requires_ntnet = 0
 	nanomodule_path = /datum/nano_module/computer_configurator/

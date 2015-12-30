@@ -1,7 +1,6 @@
-// Modular microcomputer, currently only for tablets.
-// This is mostly modified copypaste of modular_computer.dm. It is necessary as
-// modular_computer MUST stay as machinery subtype, while this must be an item subtype
-// as it's portable.
+// This is the base type that does all the hardware stuff.
+// Other types expand it - tablets use a direct subtypes, and
+// consoles and laptops use "procssor" item that is held inside machinery piece
 /obj/item/modular_computer
 	name = "Modular Microcomputer"
 	desc = "A small portable microcomputer"
@@ -77,16 +76,8 @@
 /obj/item/modular_computer/Destroy()
 	kill_program(1)
 	processing_objects.Remove(src)
-	if(network_card)
-		qdel(network_card)
-	if(hard_drive)
-		qdel(hard_drive)
-	if(battery_module)
-		qdel(battery_module)
-	if(nano_printer)
-		qdel(nano_printer)
-	if(card_slot)
-		qdel(card_slot)
+	for(var/obj/item/weapon/computer_hardware/CH in src.get_all_components())
+		qdel(CH)
 	..()
 
 /obj/item/modular_computer/update_icon()
@@ -345,6 +336,9 @@
 			return
 		new /obj/item/stack/material/steel( get_turf(src.loc), steel_sheet_cost )
 		src.visible_message("\The [src] has been disassembled by [user].")
+		relay_qdel()
+		qdel(src)
+		return
 
 	if(istype(W, /obj/item/weapon/screwdriver))
 		var/list/all_components = get_all_components()
@@ -373,6 +367,10 @@
 		return
 
 	..()
+
+// Used by processor to relay qdel() to machinery type.
+/obj/item/modular_computer/proc/relay_qdel()
+	return
 
 // Attempts to install the hardware into apropriate slot.
 /obj/item/modular_computer/proc/try_install_component(var/mob/living/user, var/obj/item/weapon/computer_hardware/H, var/found = 0)

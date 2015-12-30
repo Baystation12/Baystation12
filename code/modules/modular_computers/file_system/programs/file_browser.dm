@@ -3,9 +3,9 @@
 	filedesc = "NTOS File Manager"
 	extended_desc = "This program allows management of files."
 	program_icon_state = "generic"
-	size = 10
+	size = 8
 	requires_ntnet = 0
-	available_on_ntnet = 1
+	available_on_ntnet = 0
 	undeletable = 1
 	nanomodule_path = /datum/nano_module/computer_filemanager/
 	var/open_file
