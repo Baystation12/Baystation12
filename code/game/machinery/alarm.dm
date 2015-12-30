@@ -321,7 +321,7 @@
 			new_color = "#03A728"
 		if (1)
 			icon_state = "alarm2" //yes, alarm2 is yellow alarm
-			new_color = "#EC8B2F"
+			new_color = COLOR_SUN
 		if (2)
 			icon_state = "alarm1"
 			new_color = "#DA0205"
@@ -901,13 +901,13 @@ FIRE ALARM
 	else
 		if(!src.detecting)
 			icon_state = "fire1"
-			set_light(l_range = 4, l_power = 2, l_color = "#ff0000")
+			set_light(l_range = 4, l_power = 2, l_color = COLOR_RED)
 		else
 			icon_state = "fire0"
 			switch(seclevel)
-				if("green")	set_light(l_range = 2, l_power = 0.5, l_color = "#00ff00")
+				if("green")	set_light(l_range = 2, l_power = 0.5, l_color = COLOR_LIME)
 				if("blue")	set_light(l_range = 2, l_power = 0.5, l_color = "#1024A9")
-				if("red")	set_light(l_range = 4, l_power = 2, l_color = "#ff0000")
+				if("red")	set_light(l_range = 4, l_power = 2, l_color = COLOR_RED)
 				if("delta")	set_light(l_range = 4, l_power = 2, l_color = "#FF6633")
 
 		src.overlays += image('icons/obj/monitors.dmi', "overlay_[seclevel]")

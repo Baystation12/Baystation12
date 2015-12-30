@@ -68,6 +68,7 @@
 #define COLOR_GRAY             "#808080"
 #define COLOR_BLACK            "#000000"
 #define COLOR_RED              "#ff0000"
+#define COLOR_RED_LIGHT        "#ff3333"
 #define COLOR_MAROON           "#800000"
 #define COLOR_YELLOW           "#ffff00"
 #define COLOR_OLIVE            "#808000"
@@ -94,6 +95,7 @@
 #define COLOR_PALE_RED_GRAY    "#cc9090"
 #define COLOR_PALE_PURPLE_GRAY "#bda2ba"
 #define COLOR_PURPLE_GRAY      "#a2819e"
+#define COLOR_SUN              "#ec8b2f"
 
 //	Shuttles.
 
