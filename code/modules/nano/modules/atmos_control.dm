@@ -33,6 +33,9 @@
 	var/data[0]
 	var/alarms[0]
 
+	if(program)
+		data = program.get_header_data()
+
 	// TODO: Move these to a cache, similar to cameras
 	for(var/obj/machinery/alarm/alarm in (monitored_alarms.len ? monitored_alarms : machines))
 		alarms[++alarms.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = max(alarm.danger_level, alarm.alarm_area.atmosalm))
@@ -41,6 +44,8 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "atmos_control.tmpl", src.name, 625, 625, state = state)
+		if(program) // This is necessary to ensure the status bar remains updated along with rest of the UI.
+			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

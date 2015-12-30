@@ -17,6 +17,8 @@
 
 /datum/nano_module/crew_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/data[0]
+	if(program)
+		data = program.get_header_data()
 	var/turf/T = get_turf(nano_host())
 
 	data["isAI"] = isAI(user)
@@ -36,12 +38,3 @@
 
 		// should make the UI auto-update; doesn't seem to?
 		ui.set_auto_update(1)
-
-/*/datum/nano_module/crew_monitor/proc/scan()
-	for(var/mob/living/carbon/human/H in mob_list)
-		if(istype(H.w_uniform, /obj/item/clothing/under))
-			var/obj/item/clothing/under/C = H.w_uniform
-			if (C.has_sensor)
-				tracked |= C
-	return 1
-*/

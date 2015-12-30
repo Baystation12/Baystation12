@@ -7,8 +7,13 @@
 	..()
 	refresh_sensors()
 
+// If PC is not null header template is loaded. Use PC.get_header_data() to get relevant nanoui data from it. All data entries begin with "PC_...."
+// In future it may be expanded to other modular computer devices.
 /datum/nano_module/power_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = list()
+	if(program)
+		data = program.get_header_data()
+
 	var/list/sensors = list()
 	// Focus: If it remains null if no sensor is selected and UI will display sensor list, otherwise it will display sensor reading.
 	var/obj/machinery/power/sensor/focus = null
@@ -29,6 +34,8 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "power_monitor.tmpl", "Power Monitoring Console", 800, 500, state = state)
+		if(program) // This is necessary to ensure the status bar remains updated along with rest of the UI.
+			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -37,6 +44,8 @@
 /datum/nano_module/power_monitor/proc/refresh_sensors()
 	grid_sensors = list()
 	var/turf/T = get_turf(nano_host())
+	if(!T) // Safety check
+		return
 	for(var/obj/machinery/power/sensor/S in machines)
 		if((T && S.loc.z == T.z) || (S.long_range)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			if(S.name_tag == "#UNKN#") // Default name. Shouldn't happen!

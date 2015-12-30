@@ -10,6 +10,8 @@
 /datum/nano_module/rcon/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1, var/datum/topic_state/state = default_state)
 	FindDevices() // Update our devices list
 	var/data[0]
+	if(program)
+		data = program.get_header_data()
 
 	// SMES DATA (simplified view)
 	var/list/smeslist[0]
@@ -41,6 +43,8 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "rcon.tmpl", "RCON Console", 600, 400, state = state)
+		if(program) // This is necessary to ensure the status bar remains updated along with rest of the UI.
+			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
