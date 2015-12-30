@@ -10,7 +10,7 @@
 // Tests Life() and mob breathing in space.
 
 datum/unit_test/human_breath
-	name = "Human Suffocates in Space"
+	name = "Mob: Human Suffocates in Space"
 	var/starting_oxyloss = null
 	var/ending_oxyloss = null
 	var/mob/living/carbon/human/H

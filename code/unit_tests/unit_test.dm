@@ -47,7 +47,7 @@ proc/initialize_unit_tests()
 		world.Del()
 
 
-	log_unit_test("Waiting 10 seconds for roundstart functions to finish")	
+	log_unit_test("Waiting 10 seconds or more for roundstart functions to finish")	
 	sleep(100)
 
 	//
@@ -57,13 +57,13 @@ proc/initialize_unit_tests()
 	var/list/test_datums = typesof(/datum/unit_test) - /datum/unit_test
 
 
-	var/testnum = 1
+	//var/testnum = 1
 	var/list/async_test = list()
 	var/list/started_tests = list()
 
 	for (var/test in test_datums)
 		var/datum/unit_test/d = new test()
-		log_unit_test("Now starting \[[d.name]\] [testnum++] of [test_datums.len]")
+		//log_unit_test("Now starting \[[d.name]\] [testnum++] of [test_datums.len]")
 
 		if(isnull(d.start_test()))		// Start the test.
 			d.fail("Test Runtimed")
