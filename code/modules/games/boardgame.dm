@@ -39,7 +39,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 	for(i=0;i<64;i++)
 		if(!board["[i]"])
 			board["[i]"] = I
-			return
+			break
 
 	src.updateDialog()
 
@@ -47,14 +47,16 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 
 	var/dat = "<HTML>"
 	dat += "<table border='0'>"
-	var i;
+	var i, stagger;
+	stagger = 0 //so we can have the checkerboard effect
 	for(i=0; i<64; i++)
 		if(i%8 == 0)
 			dat += "<tr>"
+			stagger = !stagger
 		dat += "<td align='center' height='50' width='50' bgcolor="
 		if(selected == i)
 			dat += "'#FF8566'>"
-		else if(i%2 == 0)
+		else if((i + stagger)%2 == 0)
 			dat += "'#66CCFF'>"
 		else
 			dat += "'#252536'>"
