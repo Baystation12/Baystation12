@@ -186,19 +186,20 @@ var/list/slot_equipment_priority = list( \
 		wear_mask = null
 		update_inv_wear_mask(0)
 	return
+    
+/mob/proc/isEquipped(obj/item/I)
+	if(!I)
+		return 0
+	return get_inventory_slot(I) != 0
 
 /mob/proc/canUnEquip(obj/item/I)
 	if(!I) //If there's nothing to drop, the drop is automatically successful.
 		return 1
 	var/slot = get_inventory_slot(I)
-	if(slot && !I.mob_can_unequip(src, slot))
-		return 0
-
-	drop_from_inventory(I)
-	return 1
+	return slot && I.mob_can_unequip(src, slot)
 
 /mob/proc/get_inventory_slot(obj/item/I)
-	var/slot
+	var/slot = 0
 	for(var/s in slot_back to slot_tie) //kind of worries me
 		if(get_equipped_item(s) == I)
 			slot = s

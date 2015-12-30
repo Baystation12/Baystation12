@@ -211,7 +211,7 @@
 					else if(success)
 						user << "<span class='notice'>You put some things in [S].</span>"
 					else
-						user << "<span class='notice'>You fail to pick anything up with [S].</span>"
+						user << "<span class='notice'>You fail to pick anything up with \the [S].</span>"
 
 			else if(S.can_be_inserted(src))
 				S.handle_item_insertion(src)
