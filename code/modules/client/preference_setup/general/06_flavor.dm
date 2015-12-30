@@ -42,7 +42,6 @@
 	. += "<a href='?src=\ref[src];flavour_text_robot=open'>Set Robot Flavor Text</a><br/>"
 
 /datum/category_item/player_setup_item/general/flavor/OnTopic(var/href,var/list/href_list, var/mob/user)
-	user << href_list["flavor_text"]
 	if(href_list["flavor_text"])
 		switch(href_list["flavor_text"])
 			if("open")
