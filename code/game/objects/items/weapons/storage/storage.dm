@@ -225,7 +225,7 @@
 /obj/item/weapon/storage/proc/can_be_inserted(obj/item/W as obj, stop_messages = 0)
 	if(!istype(W)) return //Not an item
 
-	if(!usr.canUnEquip(W))
+	if(usr.isEquipped(W) && !usr.canUnEquip(W))
 		return 0
 
 	if(src.loc == W)
@@ -234,6 +234,9 @@
 		if(!stop_messages)
 			usr << "<span class='notice'>[src] is full, make some space.</span>"
 		return 0 //Storage item is full
+
+	if(W.anchored)
+		return 0
 
 	if(can_hold.len)
 		if(!is_type_in_list(W, can_hold))
