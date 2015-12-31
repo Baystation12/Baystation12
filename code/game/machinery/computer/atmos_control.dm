@@ -23,6 +23,7 @@
 	desc = "A cheap laptop."
 	icon_state = "laptop"
 	icon_keyboard = "laptop_key"
+	icon_screen = "atmoslaptop"
 	density = 0
 
 /obj/machinery/computer/atmoscontrol/attack_ai(var/mob/user as mob)
