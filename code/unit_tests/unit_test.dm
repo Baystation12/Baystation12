@@ -12,7 +12,7 @@ datum/unit_test/proc/fail(var/message)
 	all_unit_tests_passed = 0
 	failed_unit_tests++
 	reported = 1
-	log_unit_test("*** FAILURE *** \[[name]\]: [message]")
+	log_unit_test("!!! FAILURE !!! \[[name]\]: [message]")
 
 datum/unit_test/proc/pass(var/message)
 	reported = 1
