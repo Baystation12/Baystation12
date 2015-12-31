@@ -29,6 +29,10 @@
 	if(!istype(movable))
 		movable = null
 
+	if(istype(movable, /obj/item/modular_computer/processor))
+		var/obj/item/modular_computer/processor/P = movable
+		stationary = P.machinery_computer
+
 	// No computer connection, we can't get data from that.
 	if(!movable && !stationary)
 		return 0
