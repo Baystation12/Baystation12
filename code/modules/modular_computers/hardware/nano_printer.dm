@@ -2,6 +2,7 @@
 	name = "nano printer"
 	desc = "Small integrated printer with scanner and paper recycling module."
 	power_usage = 50
+	critical = 0
 	icon_state = "printer"
 	hardware_size = 1
 	var/stored_paper = 5
