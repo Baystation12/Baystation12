@@ -1454,6 +1454,7 @@
 #include "code\modules\modular_computers\file_system\program.dm"
 #include "code\modules\modular_computers\file_system\programs\_engineering.dm"
 #include "code\modules\modular_computers\file_system\programs\_medical.dm"
+#include "code\modules\modular_computers\file_system\programs\card.dm"
 #include "code\modules\modular_computers\file_system\programs\configurator.dm"
 #include "code\modules\modular_computers\file_system\programs\file_browser.dm"
 #include "code\modules\modular_computers\file_system\programs\ntdownloader.dm"

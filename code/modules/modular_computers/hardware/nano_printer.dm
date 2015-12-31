@@ -9,7 +9,7 @@
 	var/obj/item/weapon/paper/P = null	// Currently stored paper for scanning.
 
 
-/obj/item/weapon/computer_hardware/nano_printer/proc/print_text(var/text_to_print)
+/obj/item/weapon/computer_hardware/nano_printer/proc/print_text(var/text_to_print, var/paper_title = null)
 	if(!stored_paper)
 		return 0
 
@@ -21,6 +21,8 @@
 
 	P = new/obj/item/weapon/paper(get_turf(holder2))
 	P.info = text_to_print
+	if(paper_title)
+		P.name = paper_title
 	P.update_icon()
 	stored_paper--
 	P = null
