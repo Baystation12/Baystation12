@@ -38,7 +38,7 @@ proc/initialize_unit_tests()
 
 	var/said_msg = 0
 	while(ticker.pregame_timeleft && ticker.pregame_timeleft > 160) 	// Make sure the initial startup is complete.
-		if(ticker.pregame_timeleft > 178 && !said_msg)
+		if(ticker.pregame_timeleft < 178 && !said_msg)
 			said_msg = 1
 			log_unit_test("Pregame Count down has started, giving it 20 seconds to finish.")
 		sleep(1)
@@ -66,6 +66,10 @@ proc/initialize_unit_tests()
 
 	for (var/test in test_datums)
 		var/datum/unit_test/d = new test()
+		
+		if(d.disabled)
+			qdel(d)
+			continue
 
 		if(isnull(d.start_test()))		// Start the test.
 			d.fail("Test Runtimed")

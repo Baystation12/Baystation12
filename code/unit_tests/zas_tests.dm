@@ -7,7 +7,7 @@
  */
 
 #define UT_NORMAL 1                   // Standard one atmosphere 20celsius
-#define UT_VACUME 2                   // Vacume on simulated turfs
+#define UT_VACUUM 2                   // Vacume on simulated turfs
 #define UT_NORMAL_COLD 3              // Cold but standard atmosphere.
 
 //
@@ -59,7 +59,7 @@ proc/test_air_in_area(var/test_area, var/expectation = UT_NORMAL)
 
 		switch(expectation)
 
-			if(UT_VACUME)
+			if(UT_VACUUM)
 				if(pressure > 10)
 					return(list("success" = 0, "msg" = "Pressure out of bounds: [pressure] | [t_msg]"))
 
@@ -152,7 +152,7 @@ datum/unit_test/zas_area_test/mining_area
 	name = "ZAS: Mining Area (Vacume)"
 	area_path = /area/mine/explored
 	disabled = 0
-	expectation = UT_VACUME
+	expectation = UT_VACUUM
 
 datum/unit_test/zas_area_test/
 	name = "ZAS:  Cargo Bay"
@@ -212,5 +212,5 @@ datum/unit_test/zas_supply_shuttle_moved/check_result()
 	return 1
 
 #undef UT_NORMAL
-#undef UT_VACUME
+#undef UT_VACUUM
 #undef UT_NORMAL_COLD
