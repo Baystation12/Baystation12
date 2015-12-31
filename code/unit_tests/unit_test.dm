@@ -4,8 +4,8 @@ var/total_unit_tests = 0
 
 datum/unit_test
 	var/name = "Fix Me"
-	var/DISABLED = 0	// If we want to keep a unit test in the codebase but not run it for some reason.
-	var/async = 0   	// If the check can be left to do it's own thing, you must define a check_result() proc if you use this.
+	var/disabled = 0        // If we want to keep a unit test in the codebase but not run it for some reason.
+	var/async = 0           // If the check can be left to do it's own thing, you must define a check_result() proc if you use this.
 	var/reported = 0
 
 datum/unit_test/proc/fail(var/message)
@@ -32,22 +32,24 @@ proc/initialize_unit_tests()
 	//Start the Round.
 	//
 
-	world.save_mode("extended")
-
-	sleep(1)
-
 	if(!ticker)
 		crash_with("No Ticker")
 		world.Del()
 
-	if(ticker.current_state == GAME_STATE_PREGAME)
-		ticker.current_state = GAME_STATE_SETTING_UP
-	else
-		crash_with("Game wasn't in pregame.")
-		world.Del()
+	var/said_msg = 0
+	while(ticker.pregame_timeleft && ticker.pregame_timeleft > 160) 	// Make sure the initial startup is complete.
+		if(ticker.pregame_timeleft > 178 && !said_msg)
+			said_msg = 1
+			log_unit_test("Pregame Count down has started, giving it 20 seconds to finish.")
+		sleep(1)
 
+	world.save_mode("extended")
 
-	log_unit_test("Waiting 10 seconds or more for roundstart functions to finish")	
+	sleep(1)
+
+	ticker.current_state = GAME_STATE_SETTING_UP
+
+	log_unit_test("RoundStart:  waiting 10 seconds to start tests.")
 	sleep(100)
 
 	//
@@ -57,13 +59,13 @@ proc/initialize_unit_tests()
 	var/list/test_datums = typesof(/datum/unit_test) - /datum/unit_test
 
 
-	//var/testnum = 1
 	var/list/async_test = list()
 	var/list/started_tests = list()
 
+	log_unit_test("Testing Started.")
+
 	for (var/test in test_datums)
 		var/datum/unit_test/d = new test()
-		//log_unit_test("Now starting \[[d.name]\] [testnum++] of [test_datums.len]")
 
 		if(isnull(d.start_test()))		// Start the test.
 			d.fail("Test Runtimed")
