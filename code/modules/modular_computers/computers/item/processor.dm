@@ -10,6 +10,12 @@
 
 	var/obj/machinery/modular_computer/machinery_computer = null
 
+/obj/item/modular_computer/processor/Destroy()
+	if(machinery_computer && (machinery_computer.cpu == src))
+		machinery_computer.cpu = null
+	machinery_computer = null
+	return ..()
+
 // Due to how processes work, we'd receive two process calls - one from machinery type and one from our own type.
 // Since we want this to be in-sync with machinery (as it's hidden type for machinery-based computers) we'll ignore
 // non-relayed process calls.
