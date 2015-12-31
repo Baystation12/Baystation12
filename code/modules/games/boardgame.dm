@@ -1,8 +1,3 @@
-/*TODO:
-	implement icon loading that is efficient using browse_rsc
-	implement being able to move pieces
-*/
-
 /obj/item/weapon/board
 	name = "board"
 	desc = "A standard 12' checkerboard. Well used."
@@ -14,12 +9,25 @@
 	var/board = list()
 	var/selected = -1
 
+/obj/item/weapon/board/New()
+	..()
+	var i
+	for(i = 0; i < 12; i++)
+		new /obj/item/weapon/checker(src.loc)
+		new /obj/item/weapon/checker/red(src.loc)
+
 /obj/item/weapon/board/examine(mob/user, var/distance = -1)
 	if(in_range(user,src))
 		user.set_machine(src)
 		interact(user)
 		return
 	..()
+
+/obj/item/weapon/board/attack_hand(mob/living/carbon/human/M as mob)
+	if(M.machine == src)
+		..()
+	else
+		src.examine(M)
 
 obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 	if(I.w_class != 1) //only small stuff
