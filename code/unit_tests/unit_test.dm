@@ -22,9 +22,19 @@ datum/unit_test/proc/start_test()
 	fail("No test proc.")
 
 datum/unit_test/proc/check_result()
-	fail("No check results")
+	fail("No check results proc")
 	return 1
 	
+
+proc/load_unit_test_changes()
+
+	if(config.generate_asteroid != 1)
+		log_unit_test("Overiding Configuration option for Asteroid Generation")
+		config.generate_asteroid = 1	// The default map requires it, the example config doesn't have this enabled.
+
+
+
+
 proc/initialize_unit_tests()
 	log_unit_test("Initializing Unit Testing")	
 	
