@@ -61,10 +61,12 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 		else
 			dat += "'#252536'>"
 		if(!isobserver(user))
-			dat += "<A href='?src=\ref[src];select=[i]'>"
+			dat += "<A href='?src=\ref[src];select=[i]'"
 		if(board["[i]"])
 			var/obj/item/I = board["[i]"]
 			user << browse_rsc(board_icons["[I.icon] [I.icon_state]"],"[I.icon_state].png")
+			if(!isobserver(user))
+				dat += ">"
 			dat += "<image src='[I.icon_state].png' style='border-style: none'>"
 		else
 			dat += "style='display:block;text-decoration:none;'>&nbsp;"
