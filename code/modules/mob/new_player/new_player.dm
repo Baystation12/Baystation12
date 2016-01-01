@@ -143,14 +143,14 @@
 				usr << "\red The round is either not ready, or has already finished..."
 				return
 
-			if(client.prefs.species != "Human" && !check_rights(R_ADMIN, 0))
-				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
+			if(!check_rights(R_ADMIN, 0))
+				var/datum/species/S = all_species[client.prefs.species]
+				if((S.spawn_flags & IS_WHITELISTED) && !is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
 
-				var/datum/species/S = all_species[client.prefs.species]
-				if(!(S.spawn_flags & IS_WHITELISTED))
-					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
+				if(!(S.spawn_flags & CAN_JOIN))
+					src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
 					return 0
 
 			LateChoices()
@@ -167,15 +167,14 @@
 				usr << "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>"
 				return
 
-			if(client.prefs.species != "Human")
-				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
-					src << alert("You are currently not whitelisted to play [client.prefs.species].")
-					return 0
+			var/datum/species/S = all_species[client.prefs.species]
+			if((S.spawn_flags & IS_WHITELISTED) && !is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
+				src << alert("You are currently not whitelisted to play [client.prefs.species].")
+				return 0
 
-				var/datum/species/S = all_species[client.prefs.species]
-				if(!(S.spawn_flags & CAN_JOIN))
-					src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
-					return 0
+			if(!(S.spawn_flags & CAN_JOIN))
+				src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
+				return 0
 
 			AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
 			return
