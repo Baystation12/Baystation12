@@ -1106,6 +1106,18 @@ var/global/list/gear_datums = list()
 	sort_category = "utility"
 	cost = 2
 
+/datum/gear/cheaptablet
+	display_name = "cheap tablet computer"
+	path = /obj/item/modular_computer/tablet/preset/custom_loadout/cheap
+	sort_category = "utility"
+	cost = 3
+
+/datum/gear/normaltablet
+	display_name = "tablet computer"
+	path = /obj/item/modular_computer/tablet/preset/custom_loadout/advanced
+	sort_category = "utility"
+	cost = 4
+
 // The rest of the trash.
 
 /datum/gear/ashtray

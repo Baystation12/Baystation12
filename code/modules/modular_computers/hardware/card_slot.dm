@@ -11,6 +11,7 @@
 /obj/item/weapon/computer_hardware/card_slot/Destroy()
 	if(holder2 && (holder2.card_slot == src))
 		holder2.card_slot = null
-	stored_card.loc = get_turf(holder2)
+	if(stored_card)
+		stored_card.forceMove(get_turf(holder2))
 	holder2 = null
 	..()
