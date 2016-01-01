@@ -135,7 +135,15 @@
 		return 1
 
 /obj/item/weapon/reagent_containers/proc/standard_pour_into(var/mob/user, var/atom/target) // This goes into afterattack and yes, it's atom-level
-	if(!target.is_open_container() || !target.reagents)
+	if(!target.reagents)
+		return 0
+
+	// Ensure we don't splash beakers and similar containers.
+	if(!target.is_open_container() && istype(target, /obj/item/weapon/reagent_containers))
+		user << "<span class='notice'>\The [target] is closed.</span>"
+		return 1
+	// Otherwise don't care about splashing.
+	else if(!target.is_open_container())
 		return 0
 
 	if(!reagents || !reagents.total_volume)
