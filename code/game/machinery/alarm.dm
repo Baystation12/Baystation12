@@ -69,7 +69,7 @@
 	var/datum/radio_frequency/radio_connection
 
 	var/list/TLV = list()
-	var/list/trace_gas = list("sleeping_agent", "volatile_fuel") //list of other gases that this air alarm is able to detect
+	var/list/trace_gas = list("sleeping_agent") //list of other gases that this air alarm is able to detect
 
 	var/danger_level = 0
 	var/pressure_dangerlevel = 0

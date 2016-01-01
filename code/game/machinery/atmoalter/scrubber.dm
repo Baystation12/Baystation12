@@ -17,7 +17,7 @@
 	var/minrate = 0
 	var/maxrate = 10 * ONE_ATMOSPHERE
 
-	var/list/scrubbing_gas = list("phoron", "carbon_dioxide", "sleeping_agent", "oxygen_agent_b")
+	var/list/scrubbing_gas = list("phoron", "carbon_dioxide", "sleeping_agent")
 
 /obj/machinery/portable_atmospherics/powered/scrubber/New()
 	..()
