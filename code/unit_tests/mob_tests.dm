@@ -8,6 +8,9 @@
 
 // 
 // Tests Life() and mob breathing in space.
+//
+
+
 
 datum/unit_test/human_breath
 	name = "MOB: Human Suffocates in Space"
@@ -42,7 +45,31 @@ datum/unit_test/human_breath/check_result()
 		fail("Mob is not taking oxygen damage.  Oxyloss is [ending_oxyloss]")
 	
 	qdel(H)
-	return 1	// return 1 to show we're done.
+	return 1	// return 1 to show we're done and don't want to recheck the result.
 
 // ============================================================================
 
+//#define BRUTE     "brute"
+//#define BURN      "fire"
+//#define TOX       "tox"
+//#define OXY       "oxy"
+//#define CLONE     "clone"
+//#define HALLOSS   "halloss"
+
+
+proc/create_test_mob_with_mind(var/turf/mobloc = null)
+	if(isnull(mobloc))
+		mobloc = locate("landmark*tdome1")
+	if(mobloc)
+		return 0
+
+
+	return 1
+
+datum/unit_test/mob_damage
+	name = "MOB: Template for enviromental damage"
+	var/mob/living/carbon/human/testmob = null
+	var/damagetype = BRUTE
+	
+
+datum/unit_test/mob_damage
