@@ -22,6 +22,7 @@
 		return 1
 
 	if(href_list["PRG_speak"])
+		. = 1
 		if(!channel)
 			return 1
 		var/mob/living/user = usr
@@ -31,6 +32,7 @@
 		channel.add_message(message, username)
 
 	if(href_list["PRG_joinchannel"])
+		. = 1
 		var/datum/ntnet_conversation/C
 		for(var/datum/ntnet_conversation/chan in ntnet_global.chat_channels)
 			if(chan.title == href_list["PRG_joinchannel"])
@@ -54,10 +56,12 @@
 		C.add_client(src)
 		channel = C
 	if(href_list["PRG_leavechannel"])
+		. = 1
 		if(channel)
 			channel.remove_client(src)
 		channel = null
 	if(href_list["PRG_newchannel"])
+		. = 1
 		var/mob/living/user = usr
 		var/channel_title = sanitize(input(user,"Enter channel name or leave blank to cancel:"))
 		if(!channel_title)
@@ -68,6 +72,7 @@
 		channel = C
 		C.title = channel_title
 	if(href_list["PRG_toggleadmin"])
+		. = 1
 		if(netadmin_mode)
 			netadmin_mode = 0
 			if(channel)
@@ -86,6 +91,7 @@
 					return
 			netadmin_mode = 1
 	if(href_list["PRG_changename"])
+		. = 1
 		var/mob/living/user = usr
 		var/newname = sanitize(input(user,"Enter new nickname or leave blank to cancel:"))
 		if(!newname)
@@ -95,6 +101,7 @@
 		username = newname
 
 	if(href_list["PRG_savelog"])
+		. = 1
 		if(!channel)
 			return
 		var/mob/living/user = usr
@@ -119,6 +126,7 @@
 			else	// In 99.9% cases this will mean our HDD is full
 				computer.visible_message("\The [computer] shows an \"I/O Error - Hard drive may be full. Please free some space and try again. Required space: [logfile.size]GQ\" warning.")
 	if(href_list["PRG_renamechannel"])
+		. = 1
 		if(!operator_mode || !channel)
 			return 1
 		var/mob/living/user = usr
@@ -128,10 +136,12 @@
 		channel.add_status_message("Channel renamed from [channel.title] to [newname] by operator.")
 		channel.title = newname
 	if(href_list["PRG_deletechannel"])
+		. = 1
 		if(channel && ((channel.operator == src) || netadmin_mode))
 			qdel(channel)
 			channel = null
 	if(href_list["PRG_setpassword"])
+		. = 1
 		if(!channel || ((channel.operator != src) && !netadmin_mode))
 			return 1
 
@@ -144,8 +154,6 @@
 			channel.password = ""
 		else
 			channel.password = newpassword
-
-	return 1
 
 /datum/computer_file/program/chatclient/kill_program(var/forced = 0)
 	if(channel)

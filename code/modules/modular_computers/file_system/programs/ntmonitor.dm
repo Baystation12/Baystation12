@@ -47,14 +47,17 @@
 	if(..())
 		return 1
 	if(href_list["resetIDS"])
+		. = 1
 		if(ntnet_global)
 			ntnet_global.resetIDS()
 		return 1
 	if(href_list["toggleIDS"])
+		. = 1
 		if(ntnet_global)
 			ntnet_global.toggleIDS()
 		return 1
 	if(href_list["toggleWireless"])
+		. = 1
 		if(!ntnet_global)
 			return 1
 
@@ -72,16 +75,17 @@
 			ntnet_global.setting_disabled = 1
 		return 1
 	if(href_list["purgelogs"])
+		. = 1
 		if(ntnet_global)
 			ntnet_global.purge_logs()
 	if(href_list["updatemaxlogs"])
+		. = 1
 		var/mob/user = usr
 		var/logcount = text2num(input(user,"Enter amount of logs to keep in memory ([MIN_NTNET_LOGS]-[MAX_NTNET_LOGS]):"))
 		if(ntnet_global)
 			ntnet_global.update_max_log_count(logcount)
 	if(href_list["toggle_function"])
+		. = 1
 		if(!ntnet_global)
 			return 1
 		ntnet_global.toggle_function(href_list["toggle_function"])
-
-	return 1
