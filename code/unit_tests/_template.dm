@@ -6,7 +6,7 @@
  */
 
 datum/unit_test/template
-	name = "Test Template - Change My name" // Set it's name.
+	name = "Test Template - Change My name"		// If it's a template leave the word "template" in it's name so it's not ran.
 	
 	async = 1 // Set if we should continue testing elsewhere and come back and check on the results.
 	
