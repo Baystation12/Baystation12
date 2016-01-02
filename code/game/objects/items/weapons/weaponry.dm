@@ -11,10 +11,6 @@
 	throwforce = 10
 	w_class = 2
 
-	suicide_act(mob/user)
-		viewers(user) << "<span class='danger'>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>"
-		return (BRUTELOSS|FIRELOSS)
-
 /obj/item/weapon/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
 
 	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")

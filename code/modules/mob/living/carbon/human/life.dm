@@ -379,12 +379,8 @@
 			rupture_lung()
 
 	//check if we actually need to process breath
-	if(!breath || (breath.total_moles == 0) || suiciding)
+	if(!breath || (breath.total_moles == 0))
 		failed_last_breath = 1
-		if(suiciding)
-			adjustOxyLoss(2)//If you are suiciding, you should die a little bit faster
-			oxygen_alert = max(oxygen_alert, 1)
-			return 0
 		if(health > config.health_threshold_crit)
 			adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 		else

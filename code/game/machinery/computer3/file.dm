@@ -100,6 +100,7 @@
 		if(content)
 			if(file_increment > 1)
 				volume = round(file_increment * length(content))
+		..()
 
 /*
 	A generic file that contains text

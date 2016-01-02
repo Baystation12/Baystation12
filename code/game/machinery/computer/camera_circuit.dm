@@ -17,6 +17,7 @@
 		possibleNets["Cargo"] = access_qm
 		possibleNets["Research"] = access_rd
 		possibleNets["Medbay"] = access_cmo
+		..()
 
 	proc/updateBuildPath()
 		build_path = null

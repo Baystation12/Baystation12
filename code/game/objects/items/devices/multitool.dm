@@ -48,13 +48,13 @@
 			unregister_buffer(buffer_object)
 			buffer_object = buffer
 			if(buffer_object)
-				buffer_object.register(OBSERVER_EVENT_DESTROY, src, /obj/item/device/multitool/proc/unregister_buffer)
+				buffer_object.destruction.register(src, /obj/item/device/multitool/proc/unregister_buffer)
 
 /obj/item/device/multitool/proc/unregister_buffer(var/atom/buffer_to_unregister)
 	// Only remove the buffered object, don't reset the name
 	// This means one cannot know if the buffer has been destroyed until one attempts to use it.
 	if(buffer_to_unregister == buffer_object && buffer_object)
-		buffer_object.unregister(OBSERVER_EVENT_DESTROY, src)
+		buffer_object.destruction.unregister(src)
 		buffer_object = null
 
 /obj/item/device/multitool/resolve_attackby(atom/A, mob/user)

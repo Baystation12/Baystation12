@@ -378,9 +378,6 @@
 		else
 			scantemp = "Error: No signs of intelligence detected."
 		return
-	if (subject.suiciding == 1)
-		scantemp = "Error: Subject's brain is not responding to scanning stimuli."
-		return
 	if ((!subject.ckey) || (!subject.client))
 		scantemp = "Error: Mental interface failure."
 		return

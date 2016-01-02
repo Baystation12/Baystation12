@@ -16,11 +16,6 @@
 	unbreakable = 1 //It's already broken.
 	drops_debris = 0
 
-/obj/item/weapon/material/shard/suicide_act(mob/user)
-	viewers(user) << pick("<span class='danger'>\The [user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</span>",
-	                      "<span class='danger'>\The [user] is slitting \his throat with \the [src]! It looks like \he's trying to commit suicide.</span>")
-	return (BRUTELOSS)
-
 /obj/item/weapon/material/shard/set_material(var/new_material)
 	..(new_material)
 	if(!istype(material))

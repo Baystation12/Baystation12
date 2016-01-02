@@ -187,9 +187,6 @@
 		if(o && o.status & ORGAN_SPLINTED)
 			msg += "<span class='warning'>[T.He] [T.has] a splint on [T.his] [o.name]!</span>\n"
 
-	if(suiciding)
-		msg += "<span class='warning'>[T.He] appears to have commited suicide... there is no hope of recovery.</span>\n"
-
 	if(mSmallsize in mutations)
 		msg += "[T.He] [T.is] small halfling!\n"
 

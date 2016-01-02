@@ -44,6 +44,7 @@
 
 /obj/item/weapon/soap/deluxe/New()
 	desc = "A deluxe Waffle Co. brand bar of soap. Smells of [pick("lavender", "vanilla", "strawberry", "chocolate" ,"space")]."
+	..()
 
 /obj/item/weapon/soap/syndie
 	desc = "An untrustworthy bar of soap. Smells of fear."
@@ -273,10 +274,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 40)
 	attack_verb = list("whipped", "lashed", "disciplined", "tickled")
 
-	suicide_act(mob/user)
-		viewers(user) << "<span class='warning'><b>[user] is strangling \himself with \the [src]! It looks like \he's trying to commit suicide.</b></span>"
-		return (OXYLOSS)
-
 /obj/item/weapon/module
 	icon = 'icons/obj/module.dmi'
 	icon_state = "std_module"
@@ -399,9 +396,11 @@
 	icon = 'icons/obj/stock_parts.dmi'
 	w_class = 2.0
 	var/rating = 1
-	New()
-		src.pixel_x = rand(-5.0, 5)
-		src.pixel_y = rand(-5.0, 5)
+	
+/obj/item/weapon/stock_parts/New()
+	src.pixel_x = rand(-5.0, 5)
+	src.pixel_y = rand(-5.0, 5)
+	..()
 
 //Rank 1
 

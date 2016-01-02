@@ -930,17 +930,13 @@ CIRCUITS BELOW
 /datum/design/circuit/AssembleDesignName()
 	..()
 	if(build_path)
-		var/obj/item/weapon/circuitboard/C = new build_path()
-		if(C && istype(C))
-			if(C.board_type == "machine")
-				name = "Machine circuit design ([item_name])"
-				qdel(C)
-				return
-			else if(C.board_type == "computer")
-				name = "Computer circuit design ([item_name])"
-				qdel(C)
-				return
-	name = "Circuit design ([item_name])"
+		var/obj/item/weapon/circuitboard/C = build_path
+		if(initial(C.board_type) == "machine")
+			name = "Machine circuit design ([item_name])"
+		else if(initial(C.board_type) == "computer")
+			name = "Computer circuit design ([item_name])"
+		else
+			name = "Circuit design ([item_name])"
 
 /datum/design/circuit/AssembleDesignDesc()
 	if(!desc)

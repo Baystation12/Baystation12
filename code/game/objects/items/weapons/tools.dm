@@ -47,11 +47,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 75)
 	attack_verb = list("stabbed")
 
-	suicide_act(mob/user)
-		viewers(user) << pick("<span class='danger'>\The [user] is stabbing the [src.name] into \his temple! It looks like \he's trying to commit suicide.</span>", \
-		                       "<span class='danger'>\The [user] is stabbing the [src.name] into \his heart! It looks like \he's trying to commit suicide.</span>")
-		return(BRUTELOSS)
-
 /obj/item/weapon/screwdriver/New()
 	switch(pick("red","blue","purple","brown","green","cyan","yellow"))
 		if ("red")
@@ -78,7 +73,7 @@
 
 	if (prob(75))
 		src.pixel_y = rand(0, 16)
-	return
+	..()
 
 /obj/item/weapon/screwdriver/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M) || user.a_intent == "help")
@@ -113,6 +108,7 @@
 	if(prob(50))
 		icon_state = "cutters-y"
 		item_state = "cutters_yellow"
+	..()
 
 /obj/item/weapon/wirecutters/attack(mob/living/carbon/C as mob, mob/user as mob)
 	if(user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/weapon/handcuffs/cable)))
@@ -161,12 +157,12 @@
 	reagents = R
 	R.my_atom = src
 	R.add_reagent("fuel", max_fuel)
-	return
+	..()
 
 /obj/item/weapon/weldingtool/Destroy()
 	if(welding)
 		processing_objects -= src
-	..()
+	return ..()
 
 /obj/item/weapon/weldingtool/examine(mob/user)
 	if(..(user, 0))

@@ -88,6 +88,7 @@
 	var/list/ammo_states = list()	//values
 
 /obj/item/ammo_magazine/New()
+	..()
 	if(multiple_sprites)
 		initialize_magazine_icondata(src)
 

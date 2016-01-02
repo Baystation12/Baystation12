@@ -134,7 +134,7 @@ Class Procs:
 	if(contents) // The same for contents.
 		for(var/atom/A in contents)
 			qdel(A)
-	..()
+	return ..()
 
 /obj/machinery/process()//If you dont use process or power why are you here
 	if(!(use_power || idle_power_usage || active_power_usage))

@@ -45,7 +45,8 @@
 		pulledby = null
 
 /atom/movable/proc/initialize()
-	return
+	if(!isnull(gcDestroyed))
+		crash_with("GC: -- [type] had initialize() called after qdel() --")
 
 /atom/movable/Bump(var/atom/A, yes)
 	if(src.throwing)
@@ -210,7 +211,7 @@
 /atom/movable/overlay/New()
 	for(var/x in src.verbs)
 		src.verbs -= x
-	return
+	..()
 
 /atom/movable/overlay/attackby(a, b)
 	if (src.master)
