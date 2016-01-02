@@ -161,7 +161,7 @@ var/global/nttransfer_uid = 0
 				return
 		downloaded_file = remote.provided_file.clone()
 		remote.connected_clients.Add(src)
-		return
+		return 1
 	if(href_list["PRG_reset"])
 		error = ""
 		upload_menu = 0
@@ -171,7 +171,7 @@ var/global/nttransfer_uid = 0
 		for(var/datum/computer_file/program/nttransfer/T in connected_clients)
 			T.crash_download("Remote server has forcibly closed the connection")
 		provided_file = null
-		return
+		return 1
 	if(href_list["PRG_setpassword"])
 		var/pass = sanitize(input(usr, "Enter new server password. Leave blank to cancel, input 'none' to disable password.", "Server security", "none"))
 		if(!pass)
@@ -180,7 +180,7 @@ var/global/nttransfer_uid = 0
 			server_password = ""
 			return
 		server_password = pass
-		return
+		return 1
 	if(href_list["PRG_uploadfile"])
 		for(var/datum/computer_file/F in computer.hard_drive.stored_files)
 			if("[F.uid]" == href_list["PRG_uploadfile"])
@@ -191,7 +191,7 @@ var/global/nttransfer_uid = 0
 				ntnet_global.fileservers.Add(src)
 				return
 		error = "I/O Error: Unable to locate file on hard drive."
-		return
+		return 1
 	if(href_list["PRG_uploadmenu"])
 		upload_menu = 1
 	return 0
