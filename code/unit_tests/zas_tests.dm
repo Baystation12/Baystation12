@@ -152,7 +152,7 @@ datum/unit_test/zas_area_test/west_hall_mining_outpost
 	area_path = /area/outpost/mining_main/west_hall
 
 datum/unit_test/zas_area_test/mining_area
-	name = "ZAS: Mining Area (Vacume)"
+	name = "ZAS: Mining Area (Vacuum)"
 	area_path = /area/mine/explored
 	expectation = UT_VACUUM
 
