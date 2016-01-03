@@ -19,12 +19,18 @@
  *   
  *   At the same time, Unit tests are intended to reflect standard usage so avoid changing to much about how stuff is processed.
  *
+ *
+ *   WRITE UNIT TEST TEMPLATES AS GENERIC AS POSSIBLE (makes for easy reusability)
+ *
  */
 
 
 var/all_unit_tests_passed = 1
 var/failed_unit_tests = 0
 var/total_unit_tests = 0
+
+// For console out put in Linux/Bash makes the output green or red.
+// Should probably only be used for unit tests/Travis since some special folks use winders to host servers.
 var/ascii_esc = ascii2text(27)
 var/ascii_red = "[ascii_esc]\[31m"
 var/ascii_green = "[ascii_esc]\[32m"
@@ -39,7 +45,7 @@ datum/unit_test
 	var/disabled = 0        // If we want to keep a unit test in the codebase but not run it for some reason.
 	var/async = 0           // If the check can be left to do it's own thing, you must define a check_result() proc if you use this.
 	var/reported = 0	// If it's reported a success or failure.  Any tests that have not are assumed to be failures.
-	var/why_disabled = ""   // If we disable a unit test we will display why so it reminds us to check back on it later.
+	var/why_disabled = "No reason set."   // If we disable a unit test we will display why so it reminds us to check back on it later.
 
 
 datum/unit_test/proc/fail(var/message)
