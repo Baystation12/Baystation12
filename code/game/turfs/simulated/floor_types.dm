@@ -27,6 +27,10 @@
 	name = "plating"
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "plating"
+	level = 1
+    
+/turf/simulated/shuttle/plating/is_plating()
+	return 1
 
 /turf/simulated/shuttle/plating/vox //Skipjack plating
 	oxygen = 0
