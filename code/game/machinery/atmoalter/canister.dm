@@ -36,6 +36,9 @@
 	icon_state = "red"
 	canister_color = "red"
 	can_label = 0
+    
+/obj/machinery/portable_atmospherics/canister/nitrogen/prechilled
+	name = "Canister: \[N2 (Cooling)\]"
 
 /obj/machinery/portable_atmospherics/canister/oxygen
 	name = "Canister: \[O2\]"
@@ -380,8 +383,6 @@ update_flag
 
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled/New()
 	..()
-
-	src.air_contents.adjust_gas("oxygen", MolesForPressure())
 	src.air_contents.temperature = 80
 	src.update_icon()
 	return 1
@@ -407,10 +408,14 @@ update_flag
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/nitrogen/New()
-
 	..()
-
 	src.air_contents.adjust_gas("nitrogen", MolesForPressure())
+	src.update_icon()
+	return 1
+
+/obj/machinery/portable_atmospherics/canister/nitrogen/prechilled/New()
+	..()
+	src.air_contents.temperature = 80
 	src.update_icon()
 	return 1
 
