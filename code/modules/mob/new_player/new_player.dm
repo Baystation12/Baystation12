@@ -143,14 +143,14 @@
 				usr << "\red The round is either not ready, or has already finished..."
 				return
 
-			if(client.prefs.species != "Human" && !check_rights(R_ADMIN, 0))
-				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
+			if(!check_rights(R_ADMIN, 0))
+				var/datum/species/S = all_species[client.prefs.species]
+				if((S.spawn_flags & IS_WHITELISTED) && !is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
 
-				var/datum/species/S = all_species[client.prefs.species]
-				if(!(S.spawn_flags & IS_WHITELISTED))
-					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
+				if(!(S.spawn_flags & CAN_JOIN))
+					src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
 					return 0
 
 			LateChoices()
@@ -167,15 +167,14 @@
 				usr << "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>"
 				return
 
-			if(client.prefs.species != "Human")
-				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
-					src << alert("You are currently not whitelisted to play [client.prefs.species].")
-					return 0
+			var/datum/species/S = all_species[client.prefs.species]
+			if((S.spawn_flags & IS_WHITELISTED) && !is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
+				src << alert("You are currently not whitelisted to play [client.prefs.species].")
+				return 0
 
-				var/datum/species/S = all_species[client.prefs.species]
-				if(!(S.spawn_flags & CAN_JOIN))
-					src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
-					return 0
+			if(!(S.spawn_flags & CAN_JOIN))
+				src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
+				return 0
 
 			AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
 			return
@@ -375,9 +374,11 @@
 				else						// Crew transfer initiated
 					dat += "<font color='red'>The station is currently undergoing crew transfer procedures.</font><br>"
 
-		dat += "Choose from the following open positions:<br>"
+		dat += "Choose from the following open/valid positions:<br>"
 		for(var/datum/job/job in job_master.occupations)
 			if(job && IsJobAvailable(job.title))
+				if(job.minimum_character_age && (client.prefs.age < job.minimum_character_age))
+					continue
 				var/active = 0
 				// Only players with the job assigned and AFK for less than 10 minutes count as active
 				for(var/mob/M in player_list) if(M.mind && M.client && M.mind.assigned_role == job.title && M.client.inactivity <= 10 * 60 * 10)

@@ -39,8 +39,6 @@ var/datum/uplink/uplink = new()
 	..()
 	antag_roles = list()
 
-
-
 /datum/uplink_item/proc/buy(var/obj/item/device/uplink/U, var/mob/user)
 	var/extra_args = extra_args(user)
 	if(!extra_args)
@@ -144,43 +142,44 @@ datum/uplink_item/dd_SortValue()
 * Ammunition *
 *************/
 /datum/uplink_item/item/ammo
-	item_cost = 2
+	item_cost = 4
 	category = /datum/uplink_category/ammunition
-
-/datum/uplink_item/item/ammo/a357
-	name = ".357"
-	path = /obj/item/ammo_magazine/a357
 
 /datum/uplink_item/item/ammo/mc9mm
 	name = "9mm"
+	item_cost = 1
 	path = /obj/item/ammo_magazine/mc9mm
-
-/datum/uplink_item/item/ammo/darts
-	name = "Darts"
-	path = /obj/item/ammo_magazine/chemdart
-
-/datum/uplink_item/item/ammo/sniperammo
-	name = "14.5mm"
-	path = /obj/item/weapon/storage/box/sniperammo
 
 /datum/uplink_item/item/ammo/a10mm
 	name = "10mm"
+	item_cost = 1
 	path = /obj/item/ammo_magazine/a10mm
+
+/datum/uplink_item/item/ammo/darts
+	name = "Darts"
+	item_cost = 1
+	path = /obj/item/ammo_magazine/chemdart
+
+/datum/uplink_item/item/ammo/a357
+	name = ".357"
+	item_cost = 2
+	path = /obj/item/ammo_magazine/a357
 
 /datum/uplink_item/item/ammo/a762
 	name = "7.62mm"
+	item_cost = 3
 	path = /obj/item/ammo_magazine/a762
+
+/datum/uplink_item/item/ammo/sniperammo
+	name = "14.5mm"
+	item_cost = 4
+	path = /obj/item/weapon/storage/box/sniperammo
 
 /***************************************
 * Highly Visible and Dangerous Weapons *
 ***************************************/
 /datum/uplink_item/item/visible_weapons
 	category = /datum/uplink_category/visible_weapons
-
-/datum/uplink_item/item/visible_weapons/energy_sword
-	name = "Energy Sword"
-	item_cost = 4
-	path = /obj/item/weapon/melee/energy/sword
 
 /datum/uplink_item/item/visible_weapons/dartgun
 	name = "Dart Gun"
@@ -189,39 +188,44 @@ datum/uplink_item/dd_SortValue()
 
 /datum/uplink_item/item/visible_weapons/crossbow
 	name = "Energy Crossbow"
-	item_cost = 5
+	item_cost = 6
 	path = /obj/item/weapon/gun/energy/crossbow
+
+/datum/uplink_item/item/visible_weapons/energy_sword
+	name = "Energy Sword"
+	item_cost = 8
+	path = /obj/item/weapon/melee/energy/sword
 
 /datum/uplink_item/item/visible_weapons/g9mm
 	name = "Silenced 9mm"
-	item_cost = 5
+	item_cost = 8
 	path = /obj/item/weapon/storage/box/syndie_kit/g9mm
 
 /datum/uplink_item/item/visible_weapons/riggedlaser
-	name = "Exosuit Rigged Laser"
-	item_cost = 6
+	name = "Exosuit (APLU) Rigged Laser"
+	item_cost = 8
 	path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser
 
 /datum/uplink_item/item/visible_weapons/revolver
 	name = "Revolver"
-	item_cost = 6
+	item_cost = 12
 	path = /obj/item/weapon/gun/projectile/revolver
+
+//These are for traitors (or other antags, perhaps) to have the option of purchasing some merc gear.
+/datum/uplink_item/item/visible_weapons/submachinegun
+	name = "Submachine Gun"
+	item_cost = 12
+	path = /obj/item/weapon/gun/projectile/automatic/c20r
+
+/datum/uplink_item/item/visible_weapons/assaultrifle
+	name = "Assault Rifle"
+	item_cost = 14
+	path = /obj/item/weapon/gun/projectile/automatic/sts35
 
 /datum/uplink_item/item/visible_weapons/heavysniper
 	name = "Anti-materiel Rifle"
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
 	path = /obj/item/weapon/gun/projectile/heavysniper
-
-//These are for traitors (or other antags, perhaps) to have the option of purchasing some merc gear.
-/datum/uplink_item/item/visible_weapons/submachinegun
-	name = "Submachine Gun"
-	item_cost = 6
-	path = /obj/item/weapon/gun/projectile/automatic/c20r
-
-/datum/uplink_item/item/visible_weapons/assaultrifle
-	name = "Assault Rifle"
-	item_cost = 7
-	path = /obj/item/weapon/gun/projectile/automatic/sts35
 
 /*************************************
 * Stealthy and Inconspicuous Weapons *
@@ -234,30 +238,30 @@ datum/uplink_item/dd_SortValue()
 	item_cost = 1
 	path = /obj/item/weapon/soap/syndie
 
+/datum/uplink_item/item/stealthy_weapons/cigarette_kit
+	name = "Cigarette Kit"
+	item_cost = 2
+	path = /obj/item/weapon/storage/box/syndie_kit/cigarette
+
 /datum/uplink_item/item/stealthy_weapons/concealed_cane
 	name = "Concealed Cane Sword"
-	item_cost = 1
+	item_cost = 2
 	path = /obj/item/weapon/cane/concealed
+
+/datum/uplink_item/item/stealthy_weapons/random_toxin
+	name = "Random Toxin - Beaker"
+	item_cost = 2
+	path = /obj/item/weapon/storage/box/syndie_kit/toxin
 
 /datum/uplink_item/item/stealthy_weapons/detomatix
 	name = "Detomatix PDA Cartridge"
-	item_cost = 3
+	item_cost = 4
 	path = /obj/item/weapon/cartridge/syndicate
 
 /datum/uplink_item/item/stealthy_weapons/parapen
 	name = "Paralysis Pen"
-	item_cost = 3
+	item_cost = 6
 	path = /obj/item/weapon/pen/reagent/paralysis
-
-/datum/uplink_item/item/stealthy_weapons/cigarette_kit
-	name = "Cigarette Kit"
-	item_cost = 3
-	path = /obj/item/weapon/storage/box/syndie_kit/cigarette
-
-/datum/uplink_item/item/stealthy_weapons/random_toxin
-	name = "Random Toxin - Beaker"
-	item_cost = 3
-	path = /obj/item/weapon/storage/box/syndie_kit/toxin
 
 /*******************************
 * Stealth and Camouflage Items *
@@ -265,14 +269,9 @@ datum/uplink_item/dd_SortValue()
 /datum/uplink_item/item/stealth_items
 	category = /datum/uplink_category/stealth_items
 
-/datum/uplink_item/item/stealth_items/id
-	name = "Agent ID card"
-	item_cost = 2
-	path = /obj/item/weapon/card/id/syndicate
-
 /datum/uplink_item/item/stealth_items/syndigaloshes
 	name = "No-Slip Shoes"
-	item_cost = 2
+	item_cost = 1
 	path = /obj/item/clothing/shoes/syndigaloshes
 
 /datum/uplink_item/item/stealth_items/spy
@@ -280,30 +279,25 @@ datum/uplink_item/dd_SortValue()
 	item_cost = 2
 	path = /obj/item/weapon/storage/box/syndie_kit/spy
 
+/datum/uplink_item/item/stealth_items/id
+	name = "Agent ID card"
+	item_cost = 3
+	path = /obj/item/weapon/card/id/syndicate
+
 /datum/uplink_item/item/stealth_items/chameleon_kit
 	name = "Chameleon Kit"
-	item_cost = 3
+	item_cost = 5
 	path = /obj/item/weapon/storage/box/syndie_kit/chameleon
-
-/datum/uplink_item/item/stealth_items/chameleon_projector
-	name = "Chameleon-Projector"
-	item_cost = 4
-	path = /obj/item/device/chameleon
-
-/datum/uplink_item/item/stealth_items/chameleon_projector
-	name = "Chameleon-Projector"
-	item_cost = 4
-	path = /obj/item/device/chameleon
 
 /datum/uplink_item/item/stealth_items/voice
 	name = "Voice Changer"
-	item_cost = 4
+	item_cost = 5
 	path = /obj/item/clothing/mask/gas/voice
 
-/datum/uplink_item/item/stealth_items/camera_floppy
-	name = "Camera Network Access - Floppy"
-	item_cost = 6
-	path = /obj/item/weapon/disk/file/cameras/syndicate
+/datum/uplink_item/item/stealth_items/chameleon_projector
+	name = "Chameleon-Projector"
+	item_cost = 8
+	path = /obj/item/device/chameleon
 
 /********************
 * Devices and Tools *
@@ -313,78 +307,86 @@ datum/uplink_item/dd_SortValue()
 
 /datum/uplink_item/item/tools/toolbox
 	name = "Fully Loaded Toolbox"
-	item_cost = 1
+	item_cost = 2
 	path = /obj/item/weapon/storage/toolbox/syndicate
 
-/datum/uplink_item/item/tools/plastique
-	name = "C-4 (Destroys walls)"
+/datum/uplink_item/item/tools/money
+	name = "Operations Funding"
 	item_cost = 2
-	path = /obj/item/weapon/plastique
-
-/datum/uplink_item/item/tools/encryptionkey_radio
-	name = "Encrypted Radio Channel Key"
-	item_cost = 2
-	path = /obj/item/device/encryptionkey/syndicate
-
-/datum/uplink_item/item/tools/encryptionkey_binary
-	name = "Binary Translator Key"
-	item_cost = 3
-	path = /obj/item/device/encryptionkey/binary
-
-/datum/uplink_item/item/tools/emag
-	name = "Cryptographic Sequencer"
-	item_cost = 3
-	path = /obj/item/weapon/card/emag
+	path = /obj/item/weapon/storage/secure/briefcase/money
+	desc = "A briefcase with 10,000 untraceable thalers for funding your sneaky activities."
 
 /datum/uplink_item/item/tools/clerical
 	name = "Morphic Clerical Kit"
 	item_cost = 3
 	path = /obj/item/weapon/storage/box/syndie_kit/clerical
 
-/datum/uplink_item/item/tools/space_suit
-	name = "Space Suit"
-	item_cost = 3
-	path = /obj/item/weapon/storage/box/syndie_kit/space
-
-/datum/uplink_item/item/tools/thermal
-	name = "Thermal Imaging Glasses"
-	item_cost = 3
-	path = /obj/item/clothing/glasses/thermal/syndi
+/datum/uplink_item/item/tools/plastique
+	name = "C-4 (Destroys walls)"
+	item_cost = 4
+	path = /obj/item/weapon/plastique
 
 /datum/uplink_item/item/tools/heavy_vest
 	name = "Heavy Armor Vest"
 	item_cost = 4
-	path = /obj/item/clothing/suit/storage/vest/heavy/merc
+	path = /obj/item/clothing/suit/storage/vest/merc
+
+/datum/uplink_item/item/tools/encryptionkey_radio
+	name = "Encrypted Radio Channel Key"
+	item_cost = 4
+	path = /obj/item/device/encryptionkey/syndicate
+
+/datum/uplink_item/item/tools/encryptionkey_binary
+	name = "Binary Translator Key"
+	item_cost = 5
+	path = /obj/item/device/encryptionkey/binary
+
+/datum/uplink_item/item/tools/emag
+	name = "Cryptographic Sequencer"
+	item_cost = 6
+	path = /obj/item/weapon/card/emag
+
+/datum/uplink_item/item/tools/hacking_tool
+	name = "Door Hacking Tool"
+	item_cost = 6
+	path = /obj/item/device/multitool/hacktool
+	desc = "Appears and functions as a standard multitool until the mode is toggled by applying a screwdriver appropriately. \
+			When in hacking mode this device will grant full access to any standard airlock within 20 to 40 seconds. \
+			This device will also be able to immediately access the last 6 to 8 hacked airlocks."
+
+/datum/uplink_item/item/tools/space_suit
+	name = "Space Suit"
+	item_cost = 6
+	path = /obj/item/weapon/storage/box/syndie_kit/space
+
+/datum/uplink_item/item/tools/thermal
+	name = "Thermal Imaging Glasses"
+	item_cost = 6
+	path = /obj/item/clothing/glasses/thermal/syndi
 
 /datum/uplink_item/item/tools/powersink
 	name = "Powersink (DANGER!)"
-	item_cost = 5
+	item_cost = 10
 	path = /obj/item/device/powersink
-
-/datum/uplink_item/item/tools/ai_module
-	name = "Hacked AI Upload Module"
-	item_cost = 7
-	path = /obj/item/weapon/aiModule/syndicate
-
-/datum/uplink_item/item/tools/supply_beacon
-	name = "Hacked Supply Beacon (DANGER!)"
-	item_cost = 7
-	path = /obj/item/supply_beacon
 
 /datum/uplink_item/item/tools/teleporter
 	name = "Teleporter Circuit Board"
-	item_cost = 20
+	item_cost = 10
 	path = /obj/item/weapon/circuitboard/teleporter
 
 /datum/uplink_item/item/tools/teleporter/New()
 	..()
 	antag_roles = list(MODE_MERCENARY)
 
-/datum/uplink_item/item/tools/money
-	name = "Operations Funding"
-	item_cost = 3
-	path = /obj/item/weapon/storage/secure/briefcase/money
-	desc = "A briefcase with 10,000 untraceable thalers for funding your sneaky activities."
+/datum/uplink_item/item/tools/ai_module
+	name = "Hacked AI Upload Module"
+	item_cost = 14
+	path = /obj/item/weapon/aiModule/syndicate
+
+/datum/uplink_item/item/tools/supply_beacon
+	name = "Hacked Supply Beacon (DANGER!)"
+	item_cost = 14
+	path = /obj/item/supply_beacon
 
 /***********
 * Implants *
@@ -394,23 +396,27 @@ datum/uplink_item/dd_SortValue()
 
 /datum/uplink_item/item/implants/imp_freedom
 	name = "Freedom Implant"
-	item_cost = 3
+	item_cost = 6
 	path = /obj/item/weapon/storage/box/syndie_kit/imp_freedom
 
 /datum/uplink_item/item/implants/imp_compress
 	name = "Compressed Matter Implant"
-	item_cost = 4
+	item_cost = 8
 	path = /obj/item/weapon/storage/box/syndie_kit/imp_compress
 
 /datum/uplink_item/item/implants/imp_explosive
 	name = "Explosive Implant (DANGER!)"
-	item_cost = 6
+	item_cost = 10
 	path = /obj/item/weapon/storage/box/syndie_kit/imp_explosive
 
 /datum/uplink_item/item/implants/imp_uplink
-	name = "Uplink Implant (Contains 5 Telecrystals)"
-	item_cost = 10
+	name = "Uplink Implant"
 	path = /obj/item/weapon/storage/box/syndie_kit/imp_uplink
+
+/datum/uplink_item/item/implants/imp_uplink/New()
+	..()
+	item_cost = round(DEFAULT_TELECRYSTAL_AMOUNT / 2)
+	desc = "Contains [round((DEFAULT_TELECRYSTAL_AMOUNT / 2) * 0.8)] Telecrystal\s"
 
 /**********
 * Medical *
@@ -420,17 +426,17 @@ datum/uplink_item/dd_SortValue()
 
 /datum/uplink_item/item/medical/sinpockets
 	name = "Box of Sin-Pockets"
-	item_cost = 1
+	item_cost = 2
 	path = /obj/item/weapon/storage/box/sinpockets
 
 /datum/uplink_item/item/medical/surgery
 	name = "Surgery kit"
-	item_cost = 6
+	item_cost = 10
 	path = /obj/item/weapon/storage/firstaid/surgery
 
 /datum/uplink_item/item/medical/combat
 	name = "Combat medical kit"
-	item_cost = 6
+	item_cost = 12
 	path = /obj/item/weapon/storage/firstaid/combat
 
 /*******************
@@ -441,37 +447,37 @@ datum/uplink_item/dd_SortValue()
 
 /datum/uplink_item/item/hardsuit_modules/thermal
 	name = "Thermal Scanner"
-	item_cost = 2
+	item_cost = 4
 	path = /obj/item/rig_module/vision/thermal
 
 /datum/uplink_item/item/hardsuit_modules/energy_net
 	name = "Net Projector"
-	item_cost = 3
+	item_cost = 5
 	path = /obj/item/rig_module/fabricator/energy_net
 
 /datum/uplink_item/item/ewar_voice
 	name = "Electrowarfare Suite and Voice Synthesiser"
-	item_cost = 4
+	item_cost = 6
 	path = /obj/item/weapon/storage/box/syndie_kit/ewar_voice
 
 /datum/uplink_item/item/hardsuit_modules/maneuvering_jets
 	name = "Maneuvering Jets"
-	item_cost = 4
+	item_cost = 8
 	path = /obj/item/rig_module/maneuvering_jets
 
 /datum/uplink_item/item/hardsuit_modules/egun
 	name = "Mounted Energy Gun"
-	item_cost = 6
+	item_cost = 12
 	path = /obj/item/rig_module/mounted/egun
 
 /datum/uplink_item/item/hardsuit_modules/power_sink
 	name = "Power Sink"
-	item_cost = 6
+	item_cost = 12
 	path = /obj/item/rig_module/power_sink
 
 /datum/uplink_item/item/hardsuit_modules/laser_canon
 	name = "Mounted Laser Cannon"
-	item_cost = 8
+	item_cost = 16
 	path = /obj/item/rig_module/mounted
 
 /***********
@@ -482,18 +488,18 @@ datum/uplink_item/dd_SortValue()
 
 /datum/uplink_item/item/grenades/anti_photon
 	name = "5xPhoton Disruption Grenades"
-	item_cost = 2
+	item_cost = 4
 	path = /obj/item/weapon/storage/box/anti_photons
-
-/datum/uplink_item/item/grenades/emp
-	name = "5xEMP Grenades"
-	item_cost = 3
-	path = /obj/item/weapon/storage/box/emps
 
 /datum/uplink_item/item/grenades/smoke
 	name = "5xSmoke Grenades"
-	item_cost = 2
+	item_cost = 4
 	path = /obj/item/weapon/storage/box/smokes
+
+/datum/uplink_item/item/grenades/emp
+	name = "5xEMP Grenades"
+	item_cost = 6
+	path = /obj/item/weapon/storage/box/emps
 
 /************
 * Badassery *
@@ -550,8 +556,8 @@ datum/uplink_item/dd_SortValue()
 ****************/
 /datum/uplink_item/item/badassery/surplus
 	name = "Surplus Crate"
-	item_cost = 40
-	var/item_worth = 60
+	item_cost = DEFAULT_TELECRYSTAL_AMOUNT * 4
+	var/item_worth = DEFAULT_TELECRYSTAL_AMOUNT * 6
 	var/icon
 
 /datum/uplink_item/item/badassery/surplus/New()
@@ -598,14 +604,11 @@ var/image/default_abstract_uplink_icon
 	if(.)
 		log_and_message_admins("has triggered a falsified [src]", user)
 
-/datum/uplink_item/abstract/announcements/fake_centcom
-	item_cost = DEFAULT_TELECRYSTAL_AMOUNT / 2
-
 /datum/uplink_item/abstract/announcements/fake_centcom/New()
 	..()
 	name = "[command_name()] Update Announcement"
+	item_cost = round(DEFAULT_TELECRYSTAL_AMOUNT / 2)
 	desc = "Causes a falsified [command_name()] Update. Triggers immediately after supplying additional data."
-	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/abstract/announcements/fake_centcom/get_goods(var/obj/item/device/uplink/U, var/loc, var/mob/user, var/list/args)
 	command_announcement.Announce(args.["message"], args.["title"])
@@ -614,7 +617,7 @@ var/image/default_abstract_uplink_icon
 /datum/uplink_item/abstract/announcements/fake_crew_arrival
 	name = "Crew Arrival Announcement/Records"
 	desc = "Creates a fake crew arrival announcement as well as fake crew records, using your current appearance (including held items!) and worn id card. Trigger with care!"
-	item_cost = 4
+	item_cost = 8
 
 /datum/uplink_item/abstract/announcements/fake_crew_arrival/New()
 	..()
@@ -676,7 +679,7 @@ var/image/default_abstract_uplink_icon
 /datum/uplink_item/abstract/announcements/fake_ion_storm
 	name = "Ion Storm Announcement"
 	desc = "Interferes with the station's ion sensors. Triggers immediately upon investment."
-	item_cost = 1
+	item_cost = 2
 
 /datum/uplink_item/abstract/announcements/fake_ion_storm/get_goods(var/obj/item/device/uplink/U, var/loc)
 	ion_storm_announcement()
@@ -685,7 +688,7 @@ var/image/default_abstract_uplink_icon
 /datum/uplink_item/abstract/announcements/fake_radiation
 	name = "Radiation Storm Announcement"
 	desc = "Interferes with the station's radiation sensors. Triggers immediately upon investment."
-	item_cost = 3
+	item_cost = 6
 
 /datum/uplink_item/abstract/announcements/fake_radiation/get_goods(var/obj/item/device/uplink/U, var/loc)
 	var/datum/event_meta/EM = new(EVENT_LEVEL_MUNDANE, "Fake Radiation Storm", add_to_queue = 0)

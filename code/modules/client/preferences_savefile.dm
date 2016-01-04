@@ -1,30 +1,5 @@
 #define SAVEFILE_VERSION_MIN	8
-#define SAVEFILE_VERSION_MAX	11
-
-//handles converting savefiles to new formats
-//MAKE SURE YOU KEEP THIS UP TO DATE!
-//If the sanity checks are capable of handling any issues. Only increase SAVEFILE_VERSION_MAX,
-//this will mean that savefile_version will still be over SAVEFILE_VERSION_MIN, meaning
-//this savefile update doesn't run everytime we load from the savefile.
-//This is mainly for format changes, such as the bitflags in toggles changing order or something.
-//if a file can't be updated, return 0 to delete it and start again
-//if a file was updated, return 1
-/datum/preferences/proc/savefile_update()
-	if(savefile_version < 8)	//lazily delete everything + additional files so they can be saved in the new format
-		for(var/ckey in preferences_datums)
-			var/datum/preferences/D = preferences_datums[ckey]
-			if(D == src)
-				var/delpath = "data/player_saves/[copytext(ckey,1,2)]/[ckey]/"
-				if(delpath && fexists(delpath))
-					fdel(delpath)
-				break
-		return 0
-
-	if(savefile_version == SAVEFILE_VERSION_MAX)	//update successful.
-		save_preferences()
-		save_character()
-		return 1
-	return 0
+#define SAVEFILE_VERSION_MAX	12
 
 /datum/preferences/proc/load_path(ckey,filename="preferences.sav")
 	if(!ckey)	return
@@ -39,15 +14,8 @@
 	S.cd = "/"
 
 	S["version"] >> savefile_version
-	//Conversion
-	if(!savefile_version || !isnum(savefile_version) || savefile_version < SAVEFILE_VERSION_MIN || savefile_version > SAVEFILE_VERSION_MAX)
-		if(!savefile_update())  //handles updates
-			savefile_version = SAVEFILE_VERSION_MAX
-			save_preferences()
-			save_character()
-			return 0
-
 	player_setup.load_preferences(S)
+	loaded_preferences = S
 	return 1
 
 /datum/preferences/proc/save_preferences()
@@ -56,8 +24,9 @@
 	if(!S)					return 0
 	S.cd = "/"
 
-	S["version"] << savefile_version
+	S["version"] << SAVEFILE_VERSION_MAX
 	player_setup.save_preferences(S)
+	loaded_preferences = S
 	return 1
 
 /datum/preferences/proc/load_character(slot)
@@ -74,6 +43,7 @@
 	S.cd = "/character[slot]"
 
 	player_setup.load_character(S)
+	loaded_character = S
 	return 1
 
 /datum/preferences/proc/save_character()
@@ -82,12 +52,19 @@
 	if(!S)					return 0
 	S.cd = "/character[default_slot]"
 
+	S["version"] << SAVEFILE_VERSION_MAX
 	player_setup.save_character(S)
-	return 1
+	loaded_character = S
+	return S
 
 /datum/preferences/proc/sanitize_preferences()
 	player_setup.sanitize_setup()
 	return 1
+
+/datum/preferences/proc/update_setup(var/savefile/preferences, var/savefile/character)
+	if(!preferences || !character)
+		return 0
+	return player_setup.update_setup(preferences, character)
 
 #undef SAVEFILE_VERSION_MAX
 #undef SAVEFILE_VERSION_MIN

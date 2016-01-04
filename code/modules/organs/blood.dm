@@ -216,7 +216,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 //Transfers blood from reagents to vessel, respecting blood types compatability.
 /mob/living/carbon/human/inject_blood(var/datum/reagent/blood/injected, var/amount)
 
-	if(species.flags & NO_BLOOD)
+	if(!(species.flags & NO_BLOOD))
 		reagents.add_reagent("blood", amount, injected.data)
 		reagents.update_total()
 		return
@@ -316,4 +316,6 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large)
 	if(source.data["virus2"])
 		B.virus2 = virus_copylist(source.data["virus2"])
 
+	B.fluorescent  = 0
+	B.invisibility = 0
 	return B

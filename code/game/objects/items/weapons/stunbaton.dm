@@ -18,10 +18,6 @@
 	var/obj/item/weapon/cell/bcell = null
 	var/hitcost = 1000	//oh god why do power cells carry so much charge? We probably need to make a distinction between "industrial" sized power cells for APCs and power cells for everything else.
 
-/obj/item/weapon/melee/baton/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>\The [user] is putting the live [name] in \his mouth! It looks like \he's trying to commit suicide.</span>")
-	return (FIRELOSS)
-
 /obj/item/weapon/melee/baton/New()
 	..()
 	update_icon()

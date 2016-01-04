@@ -153,26 +153,23 @@
 /obj/item/organ/diona/strata
 	name = "neural strata"
 	parent_organ = "chest"
+	organ_tag = "neural strata"
+	
 
 /obj/item/organ/diona/bladder
 	name = "gas bladder"
 	parent_organ = "head"
+	organ_tag = "gas bladder"
 
 /obj/item/organ/diona/polyp
 	name = "polyp segment"
 	parent_organ = "groin"
+	organ_tag = "polyp segment"
 
 /obj/item/organ/diona/ligament
 	name = "anchoring ligament"
 	parent_organ = "groin"
-
-/obj/item/organ/diona/node
-	name = "receptor node"
-	parent_organ = "head"
-
-/obj/item/organ/diona/nutrients
-	name = "nutrient vessel"
-	parent_organ = "chest"
+	organ_tag = "anchoring ligament"
 
 /obj/item/organ/diona
 	name = "diona nymph"
@@ -191,8 +188,9 @@
 // These are different to the standard diona organs as they have a purpose in other
 // species (absorbing radiation and light respectively)
 /obj/item/organ/diona/nutrients
-	name = "nutrient vessel"
-	organ_tag = "nutrient vessel"
+	name = "nutrient channel"
+	parent_organ = "chest"
+	organ_tag = "nutrient channel"
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "claw"
 
@@ -200,8 +198,9 @@
 	return
 
 /obj/item/organ/diona/node
-	name = "receptor node"
-	organ_tag = "receptor node"
+	name = "response node"
+	parent_organ = "head"
+	organ_tag = "response node"
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "claw"
 

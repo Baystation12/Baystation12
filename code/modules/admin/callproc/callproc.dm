@@ -33,7 +33,7 @@
 
 	callproc_targetpicked(targetselected, target)
 
-/client/proc/callproc_target(atom/A in world)
+/client/proc/callproc_target(atom/A in range(world.view))
 	set category = "Debug"
 	set name = "Advanced ProcCall Target"
 

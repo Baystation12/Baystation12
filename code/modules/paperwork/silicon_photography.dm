@@ -69,8 +69,9 @@
 	aipictures -= selection
 	usr << "<span class='unconscious'>Local image deleted</span>"
 
-/obj/item/device/camera/siliconcam/ai_camera/can_capture_turf(turf/T, mob/user)
-	var/mob/living/silicon/ai = user
+//Capture Proc for AI / Robot
+/mob/living/silicon/ai/can_capture_turf(turf/T)
+	var/mob/living/silicon/ai = src
 	return ai.TurfAdjacent(T)
 
 /obj/item/device/camera/siliconcam/proc/toggle_camera_mode()

@@ -1,6 +1,8 @@
 /obj/item
 	name = "item"
 	icon = 'icons/obj/items.dmi'
+	w_class = 3.0
+
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/abstract = 0
 	var/r_speed = 1.0
@@ -8,7 +10,6 @@
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = null
-	var/w_class = 3.0
 	var/storage_cost = null
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
@@ -30,9 +31,9 @@
 	//It should be used purely for appearance. For gameplay effects caused by items covering body parts, use body_parts_covered.
 	var/flags_inv = 0
 	var/body_parts_covered = 0 //see setup.dm for appropriate bit flags
-	
+
 	var/item_flags = 0 //Miscellaneous flags pertaining to equippable objects.
-	
+
 	//var/heat_transfer_coefficient = 1 //0 prevents all transfers, 1 is invisible
 	var/gas_transfer_coefficient = 1 // for leaking gas from turf to mask and vice-versa (for masks right now, but at some point, i'd like to include space helmets)
 	var/permeability_coefficient = 1 // for chemicals/diseases
@@ -109,16 +110,6 @@
 		else
 	return
 
-//user: The mob that is suiciding
-//damagetype: The type of damage the item will inflict on the user
-//BRUTELOSS = 1
-//FIRELOSS = 2
-//TOXLOSS = 4
-//OXYLOSS = 8
-//Output a creative message and then return the damagetype done
-/obj/item/proc/suicide_act(mob/user)
-	return
-
 /obj/item/verb/move_to_top()
 	set name = "Move To Top"
 	set category = "Object"
@@ -157,6 +148,9 @@
 			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
 			user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
+			return
+		if(!temp)
+			user << "<span class='notice'>You try to use your hand, but realize it is no longer attached!</span>"
 			return
 	src.pickup(user)
 	if (istype(src.loc, /obj/item/weapon/storage))
@@ -208,7 +202,7 @@
 					else if(success)
 						user << "<span class='notice'>You put some things in [S].</span>"
 					else
-						user << "<span class='notice'>You fail to pick anything up with [S].</span>"
+						user << "<span class='notice'>You fail to pick anything up with \the [S].</span>"
 
 			else if(S.can_be_inserted(src))
 				S.handle_item_insertion(src)
@@ -248,6 +242,9 @@
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
+	layer = 20
+	if(user.client)	user.client.screen |= src
+	if(user.pulling == src) user.stop_pulling()
 	return
 
 //Defines which slots correspond to which slot flags
@@ -498,6 +495,12 @@ var/list/global/slot_flags_enumeration = list(
 		var/obj/item/clothing/gloves/G = src
 		G.transfer_blood = 0
 
+/obj/item/reveal_blood()
+	if(was_bloodied && !fluorescent)
+		fluorescent = 1
+		blood_color = COLOR_LUMINOL
+		blood_overlay.color = COLOR_LUMINOL
+		update_icon()
 
 /obj/item/add_blood(mob/living/carbon/human/M as mob)
 	if (!..())

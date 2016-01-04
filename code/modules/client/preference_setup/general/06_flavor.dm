@@ -45,8 +45,8 @@
 	if(href_list["flavor_text"])
 		switch(href_list["flavor_text"])
 			if("open")
-			else if("general")
-				var/msg = sanitize(input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(pref.flavor_texts[href_list["task"]])) as message, extra = 0)
+			if("general")
+				var/msg = sanitize(input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(pref.flavor_texts[href_list["flavor_text"]])) as message, extra = 0)
 				if(CanUseTopic(user))
 					pref.flavor_texts[href_list["flavor_text"]] = msg
 			else
@@ -59,7 +59,7 @@
 	else if(href_list["flavour_text_robot"])
 		switch(href_list["flavour_text_robot"])
 			if("open")
-			else if("Default")
+			if("Default")
 				var/msg = sanitize(input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(pref.flavour_texts_robot["Default"])) as message, extra = 0)
 				if(CanUseTopic(user))
 					pref.flavour_texts_robot[href_list["flavour_text_robot"]] = msg

@@ -197,22 +197,22 @@
 	return botcard
 
 /mob/living/carbon/human/GetIdCard()
-	if(wear_id)
-		var/id = wear_id.GetID()
+	var/obj/item/I = get_active_hand()
+	if(I)
+		var/id = I.GetID()
 		if(id)
 			return id
-	if(get_active_hand())
-		var/obj/item/I = get_active_hand()
-		return I.GetID()
+	if(wear_id)
+		return wear_id.GetID()
 
 /mob/living/silicon/GetIdCard()
 	return idcard
 
-proc/FindNameFromID(var/mob/living/carbon/human/H)
-	ASSERT(istype(H))
-	var/obj/item/weapon/card/id/C = H.GetIdCard()
+proc/FindNameFromID(var/mob/M, var/missing_id_name = "Unknown")
+	var/obj/item/weapon/card/id/C = M.GetIdCard()
 	if(C)
 		return C.registered_name
+	return missing_id_name
 
 proc/get_all_job_icons() //For all existing HUD icons
 	return joblist + list("Prisoner")

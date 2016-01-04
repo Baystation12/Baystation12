@@ -206,7 +206,7 @@
 	icon_keyboard = null
 	icon_screen = null
 	light_range_on = 0
-	network = list("thunder")
+	network = list(NETWORK_THUNDER)
 	density = 0
 	circuit = null
 

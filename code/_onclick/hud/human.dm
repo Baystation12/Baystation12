@@ -1,5 +1,7 @@
-/datum/hud/proc/human_hud(var/ui_style='icons/mob/screen1_White.dmi', var/ui_color = "#ffffff", var/ui_alpha = 255, var/mob/living/carbon/human/target)
+/mob/living/carbon/human/instantiate_hud(var/datum/hud/HUD, var/ui_style, var/ui_color, var/ui_alpha)
+	HUD.human_hud(ui_style, ui_color, ui_alpha, src)
 
+/datum/hud/proc/human_hud(var/ui_style='icons/mob/screen1_White.dmi', var/ui_color = "#ffffff", var/ui_alpha = 255, var/mob/living/carbon/human/target)
 	var/datum/hud_data/hud_data
 	if(!istype(target))
 		hud_data = new()
@@ -349,16 +351,10 @@
 	mymob.gun_move_icon.color = ui_color
 	mymob.gun_move_icon.alpha = ui_alpha
 
-	mymob.gun_run_icon = new /obj/screen/gun/run(null)
-	mymob.gun_run_icon.icon = ui_style
-	mymob.gun_run_icon.color = ui_color
-	mymob.gun_run_icon.alpha = ui_alpha
-
 	mymob.radio_use_icon = new /obj/screen/gun/radio(null)
 	mymob.radio_use_icon.icon = ui_style
 	mymob.radio_use_icon.color = ui_color
 	mymob.radio_use_icon.alpha = ui_alpha
-
 
 	mymob.client.screen = null
 

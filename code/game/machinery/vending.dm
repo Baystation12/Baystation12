@@ -19,9 +19,8 @@
 	src.product_path = path
 
 	if(!name)
-		var/atom/tmp = new path
+		var/atom/tmp = path
 		src.product_name = initial(tmp.name)
-		qdel(tmp)
 	else
 		src.product_name = name
 
@@ -828,7 +827,7 @@
 	icon_state = "sec"
 	icon_deny = "sec-deny"
 	req_access = list(access_security)
-	products = list(/obj/item/weapon/handcuffs = 8,/obj/item/weapon/grenade/flashbang = 4,/obj/item/device/flash = 5,
+	products = list(/obj/item/weapon/handcuffs = 8,/obj/item/weapon/grenade/flashbang = 4,/obj/item/weapon/grenade/chem_grenade/teargas = 4,/obj/item/device/flash = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 12,/obj/item/weapon/storage/box/evidence = 6)
 	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/weapon/storage/box/donut = 2)
 
@@ -966,3 +965,17 @@
 					/obj/item/weapon/screwdriver = 5,/obj/item/weapon/crowbar = 5)
 	//everything after the power cell had no amounts, I improvised.  -Sayu
 
+//FOR ACTORS GUILD - mainly props that cannot be spawned otherwise
+/obj/machinery/vending/props
+	name = "prop dispenser"
+	desc = "All the props an actor could need. Probably."
+	icon_state = "Theater"
+	products = list(/obj/structure/flora/pottedplant = 2, /obj/item/device/flashlight/lamp = 2, /obj/item/device/flashlight/lamp/green = 2, /obj/item/weapon/reagent_containers/food/drinks/jar = 1,
+					/obj/item/weapon/nullrod = 1, /obj/item/toy/cultsword = 4, /obj/item/toy/katana = 2, /obj/item/weapon/phone = 3)
+
+//FOR ACTORS GUILD - Containers
+/obj/machinery/vending/containers
+	name = "container dispenser"
+	desc = "A container that dispenses containers."
+	icon_state = "robotics"
+	products = list(/obj/structure/closet/crate/freezer = 2, /obj/structure/closet = 3, /obj/structure/closet/crate = 3)

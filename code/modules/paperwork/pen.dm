@@ -111,7 +111,7 @@
 /*
  * Parapens
  */
- /obj/item/weapon/pen/reagent/paralysis
+/obj/item/weapon/pen/reagent/paralysis
 	origin_tech = "materials=2;syndicate=5"
 
 /obj/item/weapon/pen/reagent/paralysis/New()
@@ -191,10 +191,6 @@
 	var/uses = 30 //0 for unlimited uses
 	var/instant = 0
 	var/colourName = "red" //for updateIcon purposes
-
-	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is jamming the [src.name] up \his nose and into \his brain. It looks like \he's trying to commit suicide.</b>"
-		return (BRUTELOSS|OXYLOSS)
 
 	New()
 		name = "[colourName] crayon"

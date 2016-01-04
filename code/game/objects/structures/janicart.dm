@@ -107,7 +107,7 @@
 	if(!isliving(usr))
 		return
 	var/mob/living/user = usr
-	
+
 	if(href_list["take"])
 		switch(href_list["take"])
 			if("garbage")
@@ -175,7 +175,6 @@
 
 /obj/structure/bed/chair/janicart/New()
 	create_reagents(100)
-	update_layer()
 
 
 /obj/structure/bed/chair/janicart/examine(mob/user)
@@ -235,13 +234,6 @@
 	return ..()
 
 
-/obj/structure/bed/chair/janicart/update_layer()
-	if(dir == SOUTH)
-		layer = FLY_LAYER
-	else
-		layer = OBJ_LAYER
-
-
 /obj/structure/bed/chair/janicart/unbuckle_mob()
 	var/mob/living/M = ..()
 	if(M)
@@ -252,7 +244,6 @@
 
 /obj/structure/bed/chair/janicart/set_dir()
 	..()
-	update_layer()
 	if(buckled_mob)
 		if(buckled_mob.loc != loc)
 			buckled_mob.buckled = null //Temporary, so Move() succeeds.

@@ -115,6 +115,7 @@
 	else if (istype(I, /obj/item/weapon/wrench))
 		if (src.health < maxhealth)
 			src.health = min(maxhealth, src.health+25)
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			user.visible_message(
 				"<span class='notice'>\The [user] repairs \the [src]!</span>",
 				"<span class='notice'>You repair \the [src]!</span>"
@@ -127,6 +128,7 @@
 			user.visible_message("<span class='warning'>[user] knocks [load] off [src] with \the [I]!</span>", "<span class='warning'>You knock [load] off [src] with \the [I]!</span>")
 		else
 			user << "You hit [src] with \the [I] but to no effect."
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	else
 		..()
 	return

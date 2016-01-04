@@ -21,7 +21,7 @@ var/list/floor_decals = list()
 		var/cache_key = "[alpha]-[color]-[dir]-[icon_state]-[layer]"
 		if(!floor_decals[cache_key])
 			var/image/I = image(icon = src.icon, icon_state = src.icon_state, dir = src.dir)
-			I.layer = T.layer + 0.01
+			I.layer = T.layer
 			I.color = src.color
 			I.alpha = src.alpha
 			floor_decals[cache_key] = I
@@ -39,6 +39,7 @@ var/list/floor_decals = list()
 	if(T.decals && T.decals.len)
 		T.decals.Cut()
 		T.update_icon()
+	qdel(src)
 	return
 
 /obj/effect/floor_decal/corner

@@ -74,7 +74,6 @@ var/global/list/GlobalPool = list()
 
 	D.Destroy()
 	D.ResetVars()
-	D.disposed = 1 //Set to stop processing while pooled
 
 /proc/IsPooled(var/datum/D)
 	if(isnull(GlobalPool[D.type]))
@@ -86,7 +85,6 @@ var/global/list/GlobalPool = list()
 		New(arglist(args))
 	else
 		New(args)
-	disposed = null
 
 /atom/movable/Prepare(args)
 	var/list/args_list = args
@@ -96,8 +94,8 @@ var/global/list/GlobalPool = list()
 		loc = args
 	..()
 
-/datum/proc/ResetVars(var/list/exlude = list())
-	var/list/excluded = list("animate_movement", "loc", "locs", "parent_type", "vars", "verbs", "type") + exlude
+/datum/proc/ResetVars(var/list/exclude = list())
+	var/list/excluded = list("animate_movement", "loc", "locs", "parent_type", "vars", "verbs", "type") + exclude
 
 	for(var/V in vars)
 		if(V in excluded)

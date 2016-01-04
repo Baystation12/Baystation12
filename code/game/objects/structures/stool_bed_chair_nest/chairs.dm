@@ -8,12 +8,6 @@
 	buckle_lying = 0 //force people to sit up in chairs when buckled
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
 
-/obj/structure/bed/chair/New()
-	..() //Todo make metal/stone chairs display as thrones
-	spawn(3)	//sorry. i don't think there's a better way to do this.
-		update_layer()
-	return
-
 /obj/structure/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if(!padding_material && istype(W, /obj/item/assembly/shock_kit))
@@ -42,8 +36,26 @@
 
 /obj/structure/bed/chair/update_icon()
 	..()
+
+	var/cache_key = "[base_icon]-[material.name]-over"
+	if(isnull(stool_cache[cache_key]))
+		var/image/I = image('icons/obj/furniture.dmi', "[base_icon]_over")
+		I.color = material.icon_colour
+		I.layer = FLY_LAYER
+		stool_cache[cache_key] = I
+	overlays |= stool_cache[cache_key]
+	// Padding overlay.
+	if(padding_material)
+		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]-over"
+		if(isnull(stool_cache[padding_cache_key]))
+			var/image/I =  image(icon, "[base_icon]_padding_over")
+			I.color = padding_material.icon_colour
+			I.layer = FLY_LAYER
+			stool_cache[padding_cache_key] = I
+		overlays |= stool_cache[padding_cache_key]
+
 	if(buckled_mob && padding_material)
-		var/cache_key = "[base_icon]-armrest-[padding_material.name]"
+		cache_key = "[base_icon]-armrest-[padding_material.name]"
 		if(isnull(stool_cache[cache_key]))
 			var/image/I = image(icon, "[base_icon]_armrest")
 			I.layer = MOB_LAYER + 0.1
@@ -51,15 +63,8 @@
 			stool_cache[cache_key] = I
 		overlays |= stool_cache[cache_key]
 
-/obj/structure/bed/chair/proc/update_layer()
-	if(src.dir == NORTH)
-		src.layer = FLY_LAYER
-	else
-		src.layer = OBJ_LAYER
-
 /obj/structure/bed/chair/set_dir()
 	..()
-	update_layer()
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
 
@@ -172,6 +177,12 @@
 /obj/structure/bed/chair/office/dark
 	icon_state = "officechair_dark"
 
+/obj/structure/bed/chair/office/New()
+	..()
+	var/image/I = image(icon, "[icon_state]_over")
+	I.layer = FLY_LAYER
+	overlays += I
+
 // Chair types
 /obj/structure/bed/chair/wood
 	name = "wooden chair"
@@ -188,6 +199,9 @@
 
 /obj/structure/bed/chair/wood/New(var/newloc)
 	..(newloc, "wood")
+	var/image/I = image(icon, "[icon_state]_over")
+	I.layer = FLY_LAYER
+	overlays += I
 
 /obj/structure/bed/chair/wood/wings
 	icon_state = "wooden_chair_wings"

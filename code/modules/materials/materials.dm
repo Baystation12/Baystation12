@@ -5,11 +5,11 @@
 	self-explanatory but the various object types may have their own documentation. ~Z
 
 	PATHS THAT USE DATUMS
-		/turf/simulated/wall
-		/obj/item/weapon/material
-		/obj/structure/barricade
-		/obj/item/stack/material
-		/obj/structure/table
+		turf/simulated/wall
+		obj/item/weapon/material
+		obj/structure/barricade
+		obj/item/stack/material
+		obj/structure/table
 
 	VALID ICONS
 		WALLS
@@ -571,7 +571,7 @@ var/list/name_to_material
 	name = "wood"
 	stack_type = /obj/item/stack/material/wood
 	icon_colour = "#824B28"
-	integrity = 25
+	integrity = 50
 	icon_base = "solid"
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER

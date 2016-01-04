@@ -16,6 +16,8 @@ var/global/list/additional_antag_types = list()
 	var/ert_disabled = 0                     // ERT cannot be called.
 	var/deny_respawn = 0	                 // Disable respawn during this round.
 
+	var/list/disabled_jobs = list()           // Mostly used for Malf.  This check is performed in job_controller so it doesn't spawn a regular AI.
+
 	var/shuttle_delay = 1                    // Shuttle transit time is multiplied by this.
 	var/auto_recall_shuttle = 0              // Will the shuttle automatically be recalled?
 
@@ -518,9 +520,6 @@ proc/display_roundstart_logout_report()
 				msg += "<b>[L.name]</b> ([L.ckey]), the [L.job] (<font color='#ffcc00'><b>Connected, Inactive</b></font>)\n"
 				continue //AFK client
 			if(L.stat)
-				if(L.suiciding)	//Suicider
-					msg += "<b>[L.name]</b> ([L.ckey]), the [L.job] (<font color='red'><b>Suicide</b></font>)\n"
-					continue //Disconnected client
 				if(L.stat == UNCONSCIOUS)
 					msg += "<b>[L.name]</b> ([L.ckey]), the [L.job] (Dying)\n"
 					continue //Unconscious
@@ -532,12 +531,8 @@ proc/display_roundstart_logout_report()
 		for(var/mob/dead/observer/D in mob_list)
 			if(D.mind && (D.mind.original == L || D.mind.current == L))
 				if(L.stat == DEAD)
-					if(L.suiciding)	//Suicider
-						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (<font color='red'><b>Suicide</b></font>)\n"
-						continue //Disconnected client
-					else
-						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (Dead)\n"
-						continue //Dead mob, ghost abandoned
+					msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (Dead)\n"
+					continue //Dead mob, ghost abandoned
 				else
 					if(D.can_reenter_corpse)
 						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (<font color='red'><b>Adminghosted</b></font>)\n"

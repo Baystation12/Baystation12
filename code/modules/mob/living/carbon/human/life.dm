@@ -379,12 +379,8 @@
 			rupture_lung()
 
 	//check if we actually need to process breath
-	if(!breath || (breath.total_moles == 0) || suiciding)
+	if(!breath || (breath.total_moles == 0))
 		failed_last_breath = 1
-		if(suiciding)
-			adjustOxyLoss(2)//If you are suiciding, you should die a little bit faster
-			oxygen_alert = max(oxygen_alert, 1)
-			return 0
 		if(health > config.health_threshold_crit)
 			adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 		else
@@ -406,7 +402,7 @@
 			safe_pressure_min *= 1.25
 
 	var/safe_exhaled_max = 10
-	var/safe_toxins_max = 0.005
+	var/safe_toxins_max = 0.2
 	var/SA_para_min = 1
 	var/SA_sleep_min = 5
 	var/inhaled_gas_used = 0
@@ -1023,13 +1019,6 @@
 		else
 			stat = CONSCIOUS
 
-		//Periodically double-check embedded_flag
-		if(embedded_flag && !(life_tick % 10))
-			var/list/E
-			E = get_visible_implants(0)
-			if(!E.len)
-				embedded_flag = 0
-
 		// Check everything else.
 
 		//Periodically double-check embedded_flag
@@ -1184,7 +1173,7 @@
 
 		if(healths)
 			if (analgesic > 100)
-				healths.icon_state = "health_health_numb"
+				healths.icon_state = "health_numb"
 			else
 				switch(hal_screwyhud)
 					if(1)	healths.icon_state = "health6"
@@ -1241,7 +1230,7 @@
 				var/base_temperature = species.body_temperature
 				if(base_temperature == null) //some species don't have a set metabolic temperature
 					base_temperature = (species.heat_level_1 + species.cold_level_1)/2
-				
+
 				var/temp_step
 				if (bodytemperature >= base_temperature)
 					temp_step = (species.heat_level_1 - base_temperature)/4
@@ -1599,7 +1588,6 @@
 			sight |= viewflags
 	else if(eyeobj)
 		if(eyeobj.owner != src)
-
 			reset_view(null)
 	else
 		var/isRemoteObserve = 0
@@ -1610,6 +1598,8 @@
 			remoteview_target = null
 			reset_view(null, 0)
 
+	eye_blind =  0
+	blinded = 0
 	update_equipment_vision()
 	species.handle_vision(src)
 

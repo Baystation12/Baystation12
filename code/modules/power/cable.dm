@@ -10,17 +10,27 @@
 /* Cable directions (d1 and d2)
 
 
-  9   1   5
-	\ | /
-  8 - 0 - 4
-	/ | \
-  10  2   6
+>  9   1   5
+>    \ | /
+>  8 - 0 - 4
+>    / | \
+>  10  2   6
 
 If d1 = 0 and d2 = 0, there's no cable
 If d1 = 0 and d2 = dir, it's a O-X cable, getting from the center of the tile to dir (knot cable)
 If d1 = dir1 and d2 = dir2, it's a full X-X cable, getting from dir1 to dir2
 By design, d1 is the smallest direction and d2 is the highest
 */
+
+var/list/possible_cable_coil_colours = list(
+		"Yellow" = COLOR_YELLOW,
+		"Green" = COLOR_LIME,
+		"Pink" = COLOR_PINK,
+		"Blue" = COLOR_BLUE,
+		"Orange" = COLOR_ORANGE,
+		"Cyan" = COLOR_CYAN,
+		"Red" = COLOR_RED
+	)
 
 /obj/structure/cable
 	level = 1
@@ -480,6 +490,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	slot_flags = SLOT_BELT
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
+	stacktype = /obj/item/stack/cable_coil
 
 /obj/item/stack/cable_coil/cyborg
 	name = "cable coil synthesizer"
@@ -488,14 +499,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	matter = null
 	uses_charge = 1
 	charge_costs = list(1)
-	stacktype = /obj/item/stack/cable_coil
-
-/obj/item/stack/cable_coil/suicide_act(mob/user)
-	if(locate(/obj/item/weapon/stool) in user.loc)
-		user.visible_message("<span class='suicide'>[user] is making a noose with the [src.name]! It looks like \he's trying to commit suicide.</span>")
-	else
-		user.visible_message("<span class='suicide'>[user] is strangling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>")
-	return(OXYLOSS)
 
 /obj/item/stack/cable_coil/New(loc, length = MAXCOIL, var/param_color = null)
 	..()
@@ -525,7 +528,8 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		if(S.burn_dam)
 			if(S.burn_dam < ROBOLIMB_SELF_REPAIR_CAP)
 				S.heal_damage(0,15,0,1)
-				user.visible_message("<span class='danger'>\The [user] repairs some burn damage on \the [M]'s [S.name] with \the [src].</span>")
+				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+				user.visible_message("<span class='danger'>\The [user] patches some damaged wiring on \the [M]'s [S.name] with \the [src].</span>")
 			else if(S.open != 2)
 				user << "<span class='danger'>The damage is far too severe to patch over externally.</span>"
 			return 1
@@ -548,6 +552,17 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	else
 		icon_state = "coil"
 		name = "cable coil"
+
+/obj/item/stack/cable_coil/proc/set_cable_color(var/selected_color, var/user)
+	if(!selected_color)
+		return
+
+	var/final_color = possible_cable_coil_colours[selected_color]
+	if(!final_color)
+		final_color = possible_cable_coil_colours["Red"]
+		selected_color = "red"
+	color = final_color
+	user << "<span class='notice'>You change \the [src]'s color to [lowertext(selected_color)].</span>"
 
 /obj/item/stack/cable_coil/proc/update_wclass()
 	if(amount == 1)
@@ -589,26 +604,8 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	set name = "Change Colour"
 	set category = "Object"
 
-	var/list/possible_colours = list ("Yellow", "Green", "Pink", "Blue", "Orange", "Cyan", "Red")
-	var/selected_type = input("Pick new colour.", "Cable Colour", null, null) as null|anything in possible_colours
-
-	if(selected_type)
-		switch(selected_type)
-			if("Yellow")
-				color = COLOR_YELLOW
-			if("Green")
-				color = COLOR_LIME
-			if("Pink")
-				color = COLOR_PINK
-			if("Blue")
-				color = COLOR_BLUE
-			if("Orange")
-				color = COLOR_ORANGE
-			if("Cyan")
-				color = COLOR_CYAN
-			else
-				color = COLOR_RED
-		usr << "You change your cable coil's colour to [selected_type]"
+	var/selected_type = input("Pick new colour.", "Cable Colour", null, null) as null|anything in possible_cable_coil_colours
+	set_cable_color(selected_type, usr)
 
 // Items usable on a cable coil :
 //   - Wirecutters : cut them duh !

@@ -18,7 +18,17 @@ var/global/list/gear_datums = list()
 
 	//create a list of gear datums to sort
 	for(var/type in typesof(/datum/gear)-/datum/gear)
-		var/datum/gear/G = new type()
+		var/datum/gear/G = type
+		if(!initial(G.display_name))
+			error("Loadout - Missing display name: [G]")
+			continue
+		if(!initial(G.cost))
+			error("Loadout - Missing cost: [G]")
+			continue
+		if(!initial(G.path))
+			error("Loadout - Missing path definition: [G]")
+			continue
+		G = new G()
 
 		var/category = (G.sort_category in sort_categories)? G.sort_category : "unknown"
 		sort_categories[category][G.display_name] = G
@@ -141,13 +151,13 @@ var/global/list/gear_datums = list()
 	cost = 1
 	slot = slot_head
 
- /datum/gear/grcap
+/datum/gear/grcap
 	display_name = "cap, grey"
 	path = /obj/item/clothing/head/soft/grey
 	cost = 1
 	slot = slot_head
 
- /datum/gear/ocap
+/datum/gear/ocap
 	display_name = "cap, orange"
 	path = /obj/item/clothing/head/soft/orange
 	cost = 1
@@ -219,7 +229,7 @@ var/global/list/gear_datums = list()
 	cost = 1
 	slot = slot_head
 
- /datum/gear/bowler
+/datum/gear/bowler
 	display_name = "hat, bowler"
 	path = /obj/item/clothing/head/bowler
 	cost = 1
@@ -1096,6 +1106,18 @@ var/global/list/gear_datums = list()
 	sort_category = "utility"
 	cost = 2
 
+/datum/gear/cheaptablet
+	display_name = "cheap tablet computer"
+	path = /obj/item/modular_computer/tablet/preset/custom_loadout/cheap
+	sort_category = "utility"
+	cost = 3
+
+/datum/gear/normaltablet
+	display_name = "tablet computer"
+	path = /obj/item/modular_computer/tablet/preset/custom_loadout/advanced
+	sort_category = "utility"
+	cost = 4
+
 // The rest of the trash.
 
 /datum/gear/ashtray
@@ -1103,6 +1125,12 @@ var/global/list/gear_datums = list()
 	path = /obj/item/weapon/material/ashtray/plastic
 	sort_category = "misc"
 	cost = 1
+
+/datum/gear/boot_knife
+	display_name = "boot knife"
+	path = /obj/item/weapon/material/kitchen/utensil/knife/boot
+	sort_category = "misc"
+	cost = 3
 
 /datum/gear/cane
 	display_name = "cane"
@@ -1118,7 +1146,31 @@ var/global/list/gear_datums = list()
 
 /datum/gear/cards
 	display_name = "deck of cards"
-	path = /obj/item/weapon/deck
+	path = /obj/item/weapon/deck/cards
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/tarot
+	display_name = "deck of tarot cards"
+	path = /obj/item/weapon/deck/tarot
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/holder
+	display_name = "card holder"
+	path = /obj/item/weapon/deck/holder
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/cardemon_pack
+	display_name = "\improper Cardemon booster pack"
+	path = /obj/item/weapon/pack/cardemon
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/spaceball_pack
+	display_name = "\improper Spaceball booster pack"
+	path = /obj/item/weapon/pack/spaceball
 	sort_category = "misc"
 	cost = 1
 

@@ -68,6 +68,16 @@
 /obj/item/weapon/gun/projectile/proc/process_chambered()
 	if (!chambered) return
 
+	// Aurora forensics port, gunpowder residue.
+	if(chambered.leaves_residue)
+		var/mob/living/carbon/human/H = loc
+		if(istype(H))
+			if(!H.gloves)
+				H.gunshot_residue = chambered.caliber
+			else
+				var/obj/item/clothing/G = H.gloves
+				G.gunshot_residue = chambered.caliber
+
 	switch(handle_casings)
 		if(EJECT_CASINGS) //eject casing onto ground.
 			chambered.loc = get_turf(src)
@@ -166,7 +176,7 @@
 
 /obj/item/weapon/gun/projectile/attack_self(mob/user as mob)
 	if(firemodes.len > 1)
-		switch_firemodes(user)
+		..()
 	else
 		unload_ammo(user)
 

@@ -256,7 +256,12 @@
 	desc = "Quartermaster"
 	region = ACCESS_REGION_SUPPLY
 
-// /var/const/free_access_id = 43
+/var/const/access_network = 42
+/datum/access/network
+	id = access_network
+	desc = "Station Network"
+	region = ACCESS_REGION_RESEARCH
+
 // /var/const/free_access_id = 43
 // /var/const/free_access_id = 44
 

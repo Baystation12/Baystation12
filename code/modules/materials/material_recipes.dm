@@ -11,7 +11,7 @@
 	recipes += new/datum/stack_recipe("[display_name] ashtray", /obj/item/weapon/material/ashtray, 2, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
 	recipes += new/datum/stack_recipe("[display_name] spoon", /obj/item/weapon/material/kitchen/utensil/spoon/plastic, 1, on_floor = 1, supplied_material = "[name]")
 
-	if(integrity>=100)
+	if(integrity>=50)
 		recipes += new/datum/stack_recipe("[display_name] door", /obj/structure/simple_door, 10, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
 		recipes += new/datum/stack_recipe("[display_name] barricade", /obj/structure/barricade, 5, time = 50, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
 		recipes += new/datum/stack_recipe("[display_name] stool", /obj/item/weapon/stool, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
@@ -77,6 +77,9 @@
 	recipes += new/datum/stack_recipe("apc frame", /obj/item/frame/apc, 2)
 	recipes += new/datum/stack_recipe("air alarm frame", /obj/item/frame/air_alarm, 2)
 	recipes += new/datum/stack_recipe("fire alarm frame", /obj/item/frame/fire_alarm, 2)
+	recipes += new/datum/stack_recipe("modular console frame", /obj/machinery/modular_computer/console/buildable, 20)
+	recipes += new/datum/stack_recipe("modular laptop frame", /obj/machinery/modular_computer/laptop/buildable, 10)
+	recipes += new/datum/stack_recipe("modular tablet frame", /obj/item/modular_computer/tablet, 5)
 
 /material/plasteel/generate_recipes()
 	..()

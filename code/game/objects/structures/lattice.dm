@@ -5,10 +5,11 @@
 	icon_state = "latticefull"
 	density = 0
 	anchored = 1.0
+	w_class = 3
 	layer = 2.3 //under pipes
 	//	flags = CONDUCT
 
-/obj/structure/lattice/New()
+/obj/structure/lattice/initialize()
 	..()
 ///// Z-Level Stuff
 	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open)))

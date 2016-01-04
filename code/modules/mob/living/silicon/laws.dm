@@ -61,7 +61,9 @@
 	var/prefix = ""
 	if(MAIN_CHANNEL == lawchannel)
 		prefix = ";"
-	else if(lawchannel in additional_law_channels)
+	else if(lawchannel == "Binary")
+		prefix = "[get_language_prefix()]b"
+	else if((lawchannel in additional_law_channels))
 		prefix = additional_law_channels[lawchannel]
 	else
 		prefix = get_radio_key_from_channel(lawchannel)
@@ -98,6 +100,7 @@
 	channels += MAIN_CHANNEL
 	channels += common_radio.channels
 	channels += additional_law_channels
+	channels += "Binary"
 	return channels
 
 /mob/living/silicon/proc/lawsync()

@@ -22,6 +22,20 @@ var/global/list/image/splatter_cache=list()
 	var/amount = 5
 	var/drytime
 
+/obj/effect/decal/cleanable/blood/reveal_blood()
+	if(!fluorescent)
+		fluorescent = 1
+		basecolor = COLOR_LUMINOL
+		update_icon()
+
+/obj/effect/decal/cleanable/blood/clean_blood()
+	fluorescent = 0
+	if(invisibility != 100)
+		invisibility = 100
+		amount = 0
+		processing_objects -= src
+	..(ignore=1)
+
 /obj/effect/decal/cleanable/blood/Destroy()
 	for(var/datum/disease/D in viruses)
 		D.cure(0)
@@ -60,7 +74,7 @@ var/global/list/image/splatter_cache=list()
 	var/obj/item/organ/external/l_foot = perp.get_organ("l_foot")
 	var/obj/item/organ/external/r_foot = perp.get_organ("r_foot")
 	var/hasfeet = 1
-	if((!l_foot || l_foot.status & ORGAN_DESTROYED) && (!r_foot || r_foot.status & ORGAN_DESTROYED))
+	if((!l_foot || l_foot.is_stump()) && (!r_foot || r_foot.is_stump()))
 		hasfeet = 0
 	if(perp.shoes && !perp.buckled)//Adding blood to shoes
 		var/obj/item/clothing/shoes/S = perp.shoes

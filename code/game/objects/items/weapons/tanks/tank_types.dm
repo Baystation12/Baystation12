@@ -85,6 +85,7 @@
 	name = "phoron tank"
 	desc = "Contains dangerous phoron. Do not inhale. Warning: extremely flammable."
 	icon_state = "phoron"
+	gauge_icon = null
 	flags = CONDUCT
 	slot_flags = null	//they have no straps!
 
@@ -114,6 +115,8 @@
 	name = "emergency oxygen tank"
 	desc = "Used for emergencies. Contains very little oxygen, so try to conserve it until you actually need it."
 	icon_state = "emergency"
+	gauge_icon = "indicator_emergency"
+	gauge_cap = 4
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	w_class = 2.0
@@ -142,12 +145,15 @@
 /obj/item/weapon/tank/emergency_oxygen/double
 	name = "double emergency oxygen tank"
 	icon_state = "emergency_double"
+	gauge_icon = "indicator_emergency_double"
 	volume = 10
 
 /obj/item/weapon/tank/emergency_nitrogen
 	name = "emergency nitrogen tank"
 	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
 	icon_state = "emergency_nitro"
+	gauge_icon = "indicator_emergency"
+	gauge_cap = 4
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	w_class = 2.0

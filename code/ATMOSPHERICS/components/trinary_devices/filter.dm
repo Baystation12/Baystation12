@@ -40,7 +40,7 @@
 	..()
 	switch(filter_type)
 		if(0) //removing hydrocarbons
-			filtered_out = list("phoron", "oxygen_agent_b")
+			filtered_out = list("phoron")
 		if(1) //removing O2
 			filtered_out = list("oxygen")
 		if(2) //removing N2
@@ -95,10 +95,10 @@
 
 /obj/machinery/atmospherics/trinary/filter/process()
 	..()
-	
+
 	last_power_draw = 0
 	last_flow_rate = 0
-	
+
 	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return
 
@@ -206,7 +206,6 @@
 		switch(filter_type)
 			if(0) //removing hydrocarbons
 				filtered_out += "phoron"
-				filtered_out += "oxygen_agent_b"
 			if(1) //removing O2
 				filtered_out += "oxygen"
 			if(2) //removing N2

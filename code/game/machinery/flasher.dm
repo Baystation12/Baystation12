@@ -15,6 +15,8 @@
 	use_power = 1
 	idle_power_usage = 2
 	flags = PROXMOVE
+	var/_wifi_id
+	var/datum/wifi/receiver/button/flasher/wifi_receiver
 
 /obj/machinery/flasher/portable //Portable version of the flasher. Only flashes when anchored
 	name = "portable flasher"
@@ -24,6 +26,16 @@
 	anchored = 0
 	base_state = "pflash"
 	density = 1
+
+/obj/machinery/flasher/initialize()
+	..()
+	if(_wifi_id)
+		wifi_receiver = new(_wifi_id, src)
+
+/obj/machinery/flasher/Destroy()
+	qdel(wifi_receiver)
+	wifi_receiver = null
+	return ..()
 
 /obj/machinery/flasher/power_change()
 	..()

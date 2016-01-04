@@ -130,11 +130,15 @@ obj/machinery/door/airlock/proc/set_frequency(new_frequency)
 
 
 obj/machinery/door/airlock/initialize()
+	..()
 	if(frequency)
 		set_frequency(frequency)
 
-	update_icon()
+	//wireless connection
+	if(_wifi_id)
+		wifi_receiver = new(_wifi_id, src)
 
+	update_icon()
 
 obj/machinery/door/airlock/New()
 	..()

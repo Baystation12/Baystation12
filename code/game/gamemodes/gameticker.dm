@@ -326,8 +326,11 @@ var/global/datum/controller/gameticker/ticker
 			spawn(50)
 				callHook("roundend")
 
-				if (mode.station_was_nuked)
-					feedback_set_details("end_proper","nuke")
+				if (universe_has_ended)
+					if(mode.station_was_nuked)
+						feedback_set_details("end_proper","nuke")
+					else
+						feedback_set_details("end_proper","universe destroyed")
 					if(!delay_end)
 						world << "<span class='notice'><b>Rebooting due to destruction of station in [restart_timeout/10] seconds</b></span>"
 				else

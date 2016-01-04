@@ -9,10 +9,12 @@
 /mob/proc/default_can_use_topic(var/src_object)
 	return STATUS_CLOSE // By default no mob can do anything with NanoUI
 
-/mob/dead/observer/default_can_use_topic()
+/mob/dead/observer/default_can_use_topic(var/src_object)
 	if(can_admin_interact())
-		return STATUS_INTERACTIVE				// Admins are more equal
-	return STATUS_UPDATE						// Ghosts can view updates
+		return STATUS_INTERACTIVE							// Admins are more equal
+	if(!client || get_dist(src_object, src)	> client.view)	// Preventing ghosts from having a million windows open by limiting to objects in range
+		return STATUS_CLOSE
+	return STATUS_UPDATE									// Ghosts can view updates
 
 /mob/living/silicon/pai/default_can_use_topic(var/src_object)
 	if((src_object == src || src_object == radio) && !stat)

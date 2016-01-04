@@ -94,35 +94,35 @@ steam.start() -- spawns the effect
 // will always spawn at the items location.
 /////////////////////////////////////////////
 
-/obj/effect/effect/sparks
+/obj/effect/sparks
 	name = "sparks"
 	icon_state = "sparks"
 	var/amount = 6.0
 	anchored = 1.0
 	mouse_opacity = 0
 
-/obj/effect/effect/sparks/New()
+/obj/effect/sparks/New()
 	..()
 	playsound(src.loc, "sparks", 100, 1)
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
-	spawn (100)
-		qdel(src)
-	return
+		
+/obj/effect/sparks/initialize()
+	..()
+	schedule_task_in(10 SECONDS, /proc/qdel, list(src))
 
-/obj/effect/effect/sparks/Destroy()
+/obj/effect/sparks/Destroy()
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
 	return ..()
 
-/obj/effect/effect/sparks/Move()
+/obj/effect/sparks/Move()
 	..()
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
-	return
 
 /datum/effect/effect/system/spark_spread
 	var/total_sparks = 0 // To stop it being spammed and lagging!
@@ -145,7 +145,7 @@ steam.start() -- spawns the effect
 			spawn(0)
 				if(holder)
 					src.location = get_turf(holder)
-				var/obj/effect/effect/sparks/sparks = PoolOrNew(/obj/effect/effect/sparks, src.location)
+				var/obj/effect/sparks/sparks = PoolOrNew(/obj/effect/sparks, src.location)
 				src.total_sparks++
 				var/direction
 				if(src.cardinals)
@@ -187,7 +187,6 @@ steam.start() -- spawns the effect
 	..()
 	spawn (time_to_live)
 		qdel(src)
-	return
 
 /obj/effect/effect/smoke/Crossed(mob/living/carbon/M as mob )
 	..()

@@ -747,6 +747,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			O.show_message("<EM>[user.name]</EM> further abuses the shattered [src.name].")
 	else
 		if(istype(I, /obj/item/weapon) )
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			var/obj/item/weapon/W = I
 			if(W.force <15)
 				for (var/mob/O in hearers(5, src.loc))
@@ -764,7 +765,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 						O.show_message("[user.name] forcefully slams the [src.name] with the [I.name]!" )
 					playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
 		else
-			user << "<FONT COLOR='blue'>This does nothing.</FONT>"
+			user << "<span class='notice'>This does nothing.</span>"
 	src.update_icon()
 
 /obj/machinery/newscaster/attack_ai(mob/user as mob)

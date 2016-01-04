@@ -119,7 +119,7 @@
 		alert("Invalid mob")
 
 /*
-/client/proc/cmd_admin_monkeyize(var/mob/M in world)
+/client/proc/cmd_admin_monkeyize(var/mob/M in mob_list)
 	set category = "Fun"
 	set name = "Make Monkey"
 
@@ -134,7 +134,7 @@
 	else
 		alert("Invalid mob")
 
-/client/proc/cmd_admin_changelinginize(var/mob/M in world)
+/client/proc/cmd_admin_changelinginize(var/mob/M in mob_list)
 	set category = "Fun"
 	set name = "Make Changeling"
 
@@ -152,7 +152,7 @@
 		alert("Invalid mob")
 */
 /*
-/client/proc/cmd_admin_abominize(var/mob/M in world)
+/client/proc/cmd_admin_abominize(var/mob/M in mob_list)
 	set category = null
 	set name = "Make Abomination"
 
@@ -169,7 +169,7 @@
 
 */
 /*
-/client/proc/make_cultist(var/mob/M in world) // -- TLE, modified by Urist
+/client/proc/make_cultist(var/mob/M in mob_list) // -- TLE, modified by Urist
 	set category = "Fun"
 	set name = "Make Cultist"
 	set desc = "Makes target a cultist"

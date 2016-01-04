@@ -24,6 +24,7 @@
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 	holder_type = /obj/item/weapon/holder/cat
 	mob_size = MOB_SMALL
+	possession_candidate = 1
 
 /mob/living/simple_animal/cat/Life()
 	//MICE!
@@ -133,11 +134,6 @@
 		return
 	else
 		return ..()
-
-/mob/living/simple_animal/cat/get_scooped(var/mob/living/carbon/grabber)
-	if (stat >= DEAD)
-		return //since the holder icon looks like a living cat
-	..()
 
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff

@@ -37,6 +37,8 @@
 		operating = 1
 		setmove()
 
+
+
 /obj/machinery/conveyor/proc/setmove()
 	if(operating == 1)
 		movedir = forwards
@@ -78,6 +80,14 @@
 
 // attack with item, place item on conveyor
 /obj/machinery/conveyor/attackby(var/obj/item/I, mob/user)
+	if(istype(I, /obj/item/weapon/crowbar))
+		if(!(stat & BROKEN))
+			var/obj/item/conveyor_construct/C = new/obj/item/conveyor_construct(src.loc)
+			C.id = id
+			transfer_fingerprints_to(C)
+		user << "<span class='notice'>You remove the conveyor belt.</span>"
+		qdel(src)
+		return
 	if(isrobot(user))	return //Carn: fix for borgs dropping their modules on conveyor belts
 	if(I.loc != user)	return // This should stop mounted modules ending up outside the module.
 
@@ -162,8 +172,10 @@
 
 
 
-/obj/machinery/conveyor_switch/New()
-	..()
+/obj/machinery/conveyor_switch/New(loc, newid)
+	..(loc)
+	if(!id)
+		id = newid
 	update()
 
 	spawn(5)		// allow map load
@@ -221,6 +233,15 @@
 			S.position = position
 			S.update()
 
+
+/obj/machinery/conveyor_switch/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/weapon/crowbar))
+		var/obj/item/conveyor_switch_construct/C = new/obj/item/conveyor_switch_construct(src.loc)
+		C.id = id
+		transfer_fingerprints_to(C)
+		user << "<span class='notice'>You deattach the conveyor switch.</span>"
+		qdel(src)
+
 /obj/machinery/conveyor_switch/oneway
 	var/convdir = 1 //Set to 1 or -1 depending on which way you want the convayor to go. (In other words keep at 1 and set the proper dir on the belts.)
 	desc = "A conveyor control switch. It appears to only go in one direction."
@@ -240,3 +261,67 @@
 		if(S.id == src.id)
 			S.position = position
 			S.update()
+
+
+
+//
+// CONVEYOR CONSTRUCTION STARTS HERE
+//
+
+/obj/item/conveyor_construct
+	icon = 'icons/obj/recycling.dmi'
+	icon_state = "conveyor0"
+	name = "conveyor belt assembly"
+	desc = "A conveyor belt assembly."
+	w_class = 4
+	var/id = "" //inherited by the belt
+
+/obj/item/conveyor_construct/attackby(obj/item/I, mob/user, params)
+	..()
+	if(istype(I, /obj/item/conveyor_switch_construct))
+		user << "<span class='notice'>You link the switch to the conveyor belt assembly.</span>"
+		var/obj/item/conveyor_switch_construct/C = I
+		id = C.id
+
+/obj/item/conveyor_construct/afterattack(atom/A, mob/user, proximity)
+	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
+		return
+	var/cdir = get_dir(A, user)
+	if(!(cdir in cardinal) || A == user.loc)
+		return
+	for(var/obj/machinery/conveyor/CB in A)
+		if(CB.dir == cdir || CB.dir == turn(cdir,180))
+			return
+		cdir |= CB.dir
+		qdel(CB)
+	var/obj/machinery/conveyor/C = new/obj/machinery/conveyor(A,cdir)
+	C.id = id
+	transfer_fingerprints_to(C)
+	qdel(src)
+
+/obj/item/conveyor_switch_construct
+	name = "conveyor switch assembly"
+	desc = "A conveyor control switch assembly."
+	icon = 'icons/obj/recycling.dmi'
+	icon_state = "switch-off"
+	w_class = 4
+	var/id = "" //inherited by the switch
+
+/obj/item/conveyor_switch_construct/New()
+	..()
+	id = rand() //this couldn't possibly go wrong
+
+/obj/item/conveyor_switch_construct/afterattack(atom/A, mob/user, proximity)
+	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
+		return
+	var/found = 0
+	for(var/obj/machinery/conveyor/C in view())
+		if(C.id == src.id)
+			found = 1
+			break
+	if(!found)
+		user << "\icon[src]<span class=notice>The conveyor switch did not detect any linked conveyor belts in range.</span>"
+		return
+	var/obj/machinery/conveyor_switch/NC = new/obj/machinery/conveyor_switch(A, id)
+	transfer_fingerprints_to(NC)
+	qdel(src)

@@ -7,6 +7,8 @@
 
 #define isanimal(A) istype(A, /mob/living/simple_animal)
 
+#define isairlock(A) istype(A, /obj/machinery/door/airlock)
+
 #define isbrain(A) istype(A, /mob/living/carbon/brain)
 
 #define iscarbon(A) istype(A, /mob/living/carbon)
@@ -22,6 +24,8 @@
 #define ismouse(A) istype(A, /mob/living/simple_animal/mouse)
 
 #define isnewplayer(A) istype(A, /mob/new_player)
+
+#define isobj(A) istype(A, /obj)
 
 #define isobserver(A) istype(A, /mob/dead/observer)
 

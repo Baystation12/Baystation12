@@ -201,9 +201,6 @@
 									available_channels.Add(":d")
 								if("Cargo")
 									available_channels.Add(":q")
-
-						if(headset_to_add.translate_binary)
-							available_channels.Add(":b")
 		else
 			..()
 

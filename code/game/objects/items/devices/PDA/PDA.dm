@@ -950,7 +950,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/proc/create_message(var/mob/living/U = usr, var/obj/item/device/pda/P, var/tap = 1)
 	if(tap)
 		U.visible_message("<span class='notice'>\The [U] taps on \his PDA's screen.</span>")
-	U.last_target_click = world.time
 	var/t = input(U, "Please enter message", P.name, null) as text
 	t = sanitize(t)
 	//t = readd_quotes(t)

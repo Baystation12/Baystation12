@@ -7,7 +7,6 @@
 	icon = "ICON FILENAME" 			(defaults to areas.dmi)
 	icon_state = "NAME OF ICON" 	(defaults to "unknown" (blank))
 	requires_power = 0 				(defaults to 1)
-	music = "music/music.ogg"		(defaults to "music/music.ogg")
 
 NOTE: there are two lists of areas in the end of this file: centcom and station itself. Please maintain these lists valid. --rastaf0
 
@@ -39,7 +38,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/power_equip = 1
 	var/power_light = 1
 	var/power_environ = 1
-	var/music = null
 	var/used_equip = 0
 	var/used_light = 0
 	var/used_environ = 0
@@ -53,6 +51,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
 	var/list/forced_ambience = null
 	var/sound_env = STANDARD_STATION
+	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
+
 /*Adding a wizard area teleport list because motherfucking lag -- Urist*/
 /*I am far too lazy to make it a proper list of areas so I'll just make it run the usual telepot routine at the start of the game*/
 var/list/teleportlocs = list()
@@ -144,6 +144,7 @@ area/space/atmosalert()
 /area/shuttle
 	requires_power = 0
 	sound_env = SMALL_ENCLOSED
+	base_turf = /turf/space
 
 /area/shuttle/arrival
 	name = "\improper Arrival Shuttle"
@@ -156,7 +157,7 @@ area/space/atmosalert()
 
 /area/shuttle/escape
 	name = "\improper Emergency Shuttle"
-	music = "music/escape.ogg"
+	flags = RAD_SHIELDED
 
 /area/shuttle/escape/station
 	name = "\improper Emergency Shuttle Station"
@@ -172,7 +173,7 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod1
 	name = "\improper Escape Pod One"
-	music = "music/escape.ogg"
+	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod1/station
 	icon_state = "shuttle2"
@@ -185,7 +186,7 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod2
 	name = "\improper Escape Pod Two"
-	music = "music/escape.ogg"
+	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod2/station
 	icon_state = "shuttle2"
@@ -198,7 +199,7 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod3
 	name = "\improper Escape Pod Three"
-	music = "music/escape.ogg"
+	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod3/station
 	icon_state = "shuttle2"
@@ -211,7 +212,7 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod5 //Pod 4 was lost to meteors
 	name = "\improper Escape Pod Five"
-	music = "music/escape.ogg"
+	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod5/station
 	icon_state = "shuttle2"
@@ -224,7 +225,6 @@ area/space/atmosalert()
 
 /area/shuttle/mining
 	name = "\improper Mining Shuttle"
-	music = "music/escape.ogg"
 
 /area/shuttle/mining/station
 	icon_state = "shuttle2"
@@ -261,19 +261,26 @@ area/space/atmosalert()
 
 /area/shuttle/specops/centcom
 	name = "\improper Special Ops Shuttle"
+	flags = RAD_SHIELDED
+
+/area/shuttle/specops/centcom
 	icon_state = "shuttlered"
 
 /area/shuttle/specops/station
-	name = "\improper Special Ops Shuttle"
 	icon_state = "shuttlered2"
 
-/area/shuttle/syndicate_elite/mothership
+/area/shuttle/syndicate_elite
 	name = "\improper Merc Elite Shuttle"
+	flags = RAD_SHIELDED
+
+/area/shuttle/syndicate_elite/mothership
 	icon_state = "shuttlered"
 
 /area/shuttle/syndicate_elite/station
-	name = "\improper Merc Elite Shuttle"
 	icon_state = "shuttlered2"
+
+/area/shuttle/administration
+	flags = RAD_SHIELDED
 
 /area/shuttle/administration/centcom
 	name = "\improper Administration Shuttle Centcom"
@@ -313,7 +320,6 @@ area/space/atmosalert()
 
 /area/shuttle/research
 	name = "\improper Research Shuttle"
-	music = "music/escape.ogg"
 
 /area/shuttle/research/station
 	icon_state = "shuttle2"
@@ -446,6 +452,22 @@ area/space/atmosalert()
 /area/tdome/tdomeobserve
 	name = "\improper Thunderdome (Observer.)"
 	icon_state = "purple"
+
+//ACTORS GUILD
+/area/acting
+	name = "\improper Centcom Acting Guild"
+	icon_state = "red"
+	lighting_use_dynamic = 0
+	requires_power = 0
+
+/area/acting/backstage
+	name = "\improper Backstage"
+
+/area/acting/stage
+	name = "\improper Stage"
+	lighting_use_dynamic = 1
+	icon_state = "yellow"
+
 
 //ENEMY
 
@@ -862,12 +884,11 @@ area/space/atmosalert()
 /area/bridge
 	name = "\improper Bridge"
 	icon_state = "bridge"
-	music = "signal"
 
 /area/bridge/meeting_room
 	name = "\improper Heads of Staff Meeting Room"
 	icon_state = "bridge"
-	music = null
+	ambience = list()
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/crew_quarters/captain
@@ -1165,6 +1186,7 @@ area/space/atmosalert()
 	requires_power = 1
 	always_unpowered = 1
 	lighting_use_dynamic = 0
+	base_turf = /turf/space
 
 	auxport
 		name = "\improper Fore Port Solar Array"
@@ -1239,17 +1261,14 @@ area/space/atmosalert()
 /area/teleporter
 	name = "\improper Teleporter"
 	icon_state = "teleporter"
-	music = "signal"
 
 /area/gateway
 	name = "\improper Gateway"
 	icon_state = "teleporter"
-	music = "signal"
 
 /area/AIsattele
 	name = "\improper AI Satellite Teleporter Room"
 	icon_state = "teleporter"
-	music = "signal"
 	ambience = list('sound/ambience/ambimalf.ogg')
 
 //MedBay
@@ -1257,43 +1276,43 @@ area/space/atmosalert()
 /area/medical/medbay
 	name = "\improper Medbay Hallway - Port"
 	icon_state = "medbay"
-	music = 'sound/ambience/signal.ogg'
+	ambience = list('sound/ambience/signal.ogg')
 
 //Medbay is a large area, these additional areas help level out APC load.
 /area/medical/medbay2
 	name = "\improper Medbay Hallway - Starboard"
 	icon_state = "medbay2"
-	music = 'sound/ambience/signal.ogg'
+	ambience = list('sound/ambience/signal.ogg')
 
 /area/medical/medbay3
 	name = "\improper Medbay Hallway - Fore"
 	icon_state = "medbay3"
-	music = 'sound/ambience/signal.ogg'
+	ambience = list('sound/ambience/signal.ogg')
 
 /area/medical/medbay4
 	name = "\improper Medbay Hallway - Aft"
 	icon_state = "medbay4"
-	music = 'sound/ambience/signal.ogg'
+	ambience = list('sound/ambience/signal.ogg')
 
 /area/medical/biostorage
 	name = "\improper Secondary Storage"
 	icon_state = "medbay2"
-	music = 'sound/ambience/signal.ogg'
+	ambience = list('sound/ambience/signal.ogg')
 
 /area/medical/reception
 	name = "\improper Medbay Reception"
 	icon_state = "medbay"
-	music = 'sound/ambience/signal.ogg'
+	ambience = list('sound/ambience/signal.ogg')
 
 /area/medical/psych
 	name = "\improper Psych Room"
 	icon_state = "medbay3"
-	music = 'sound/ambience/signal.ogg'
+	ambience = list('sound/ambience/signal.ogg')
 
 /area/crew_quarters/medbreak
 	name = "\improper Break Room"
 	icon_state = "medbay3"
-	music = 'sound/ambience/signal.ogg'
+	ambience = list('sound/ambience/signal.ogg')
 
 /area/medical/patients_rooms
 	name = "\improper Patient's Rooms"
@@ -2179,10 +2198,10 @@ var/list/the_station_areas = list (
 	/area/rnd,
 	/area/storage,
 	/area/construction,
-	/area/ai_monitored/storage/eva, //do not try to simplify to "/area/ai_monitored" --rastaf0
+	/area/ai_monitored/storage/eva, //do not try to simplify to "/area/ai_monitored" --rastaf0,
 	/area/ai_monitored/storage/secure,
 	/area/ai_monitored/storage/emergency,
-	/area/turret_protected/ai_upload, //do not try to simplify to "/area/turret_protected" --rastaf0
+	/area/turret_protected/ai_upload, //do not try to simplify to "/area/turret_protected" --rastaf0,
 	/area/turret_protected/ai_upload_foyer,
 	/area/turret_protected/ai,
 )

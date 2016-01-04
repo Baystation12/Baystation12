@@ -3,25 +3,29 @@
 	var/list_cameras = 0						// Whether or not to list camera references. A future goal would be to merge this with the enginering/security camera console. Currently really only for AI-use.
 	var/list/datum/alarm_handler/alarm_handlers // The particular list of alarm handlers this alarm monitor should present to the user.
 
+/datum/nano_module/alarm_monitor/New()
+	..()
+	alarm_handlers = list()
+
 /datum/nano_module/alarm_monitor/all/New()
 	..()
 	alarm_handlers = alarm_manager.all_handlers
 
 /datum/nano_module/alarm_monitor/engineering/New()
 	..()
-	alarm_handlers = list(atmosphere_alarm, fire_alarm, power_alarm)
+	alarm_handlers = list(atmosphere_alarm, camera_alarm, fire_alarm, power_alarm)
 
 /datum/nano_module/alarm_monitor/security/New()
 	..()
 	alarm_handlers = list(camera_alarm, motion_alarm)
 
-/datum/nano_module/alarm_monitor/proc/register(var/object, var/procName)
+/datum/nano_module/alarm_monitor/proc/register_alarm(var/object, var/procName)
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		AH.register(object, procName)
+		AH.register_alarm(object, procName)
 
-/datum/nano_module/alarm_monitor/proc/unregister(var/object)
+/datum/nano_module/alarm_monitor/proc/unregister_alarm(var/object)
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		AH.unregister(object)
+		AH.unregister_alarm(object)
 
 /datum/nano_module/alarm_monitor/proc/all_alarms()
 	var/list/all_alarms = new()
@@ -58,6 +62,9 @@
 /datum/nano_module/alarm_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/data[0]
 
+	if(program)
+		data = program.get_header_data()
+
 	var/categories[0]
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		categories[++categories.len] = list("category" = AH.category, "alarms" = list())
@@ -83,6 +90,8 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "alarm_monitor.tmpl", "Alarm Monitoring Console", 800, 800, state = state)
+		if(program) // This is necessary to ensure the status bar remains updated along with rest of the UI.
+			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

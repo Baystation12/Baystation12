@@ -108,11 +108,12 @@ Class Procs:
 	c_invalidate()
 	for(var/turf/simulated/T in contents)
 		into.add(T)
+		T.update_graphic(graphic_remove = air.graphic)
 		#ifdef ZASDBG
 		T.dbg(merged)
 		#endif
-	
-	//rebuild the old zone's edges so that the will be possesed by the new zone
+
+	//rebuild the old zone's edges so that they will be possessed by the new zone
 	for(var/connection_edge/E in edges)
 		if(E.contains_zone(into))
 			continue //don't need to rebuild this edge

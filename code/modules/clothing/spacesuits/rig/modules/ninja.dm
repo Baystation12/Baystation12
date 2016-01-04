@@ -121,6 +121,11 @@
 
 	if(T.contains_dense_objects())
 		H << "<span class='warning'>You cannot teleport to a location with solid objects.</span>"
+		return 0
+
+	if(T.z != H.z || get_dist(T, get_turf(H)) > world.view)
+		H << "<span class='warning'>You cannot teleport to such a distant object.</span>"
+		return 0
 
 	phase_out(H,get_turf(H))
 	H.forceMove(T)
@@ -169,6 +174,10 @@
 
 	interface_name = "dead man's switch"
 	interface_desc = "An integrated self-destruct module. When the wearer dies, so does the surrounding area. Do not press this button."
+	var/list/explosion_values = list(1,2,4,5)
+
+/obj/item/rig_module/self_destruct/small
+	explosion_values = list(0,0,3,4)
 
 /obj/item/rig_module/self_destruct/activate()
 	return
@@ -184,17 +193,12 @@
 
 	//OH SHIT.
 	if(holder.wearer.stat == 2)
-		engage()
+		engage(1)
 
-/obj/item/rig_module/self_destruct/engage()
-	explosion(get_turf(src), 1, 2, 4, 5)
-	if(holder && holder.wearer)
-		holder.wearer.drop_from_inventory(src)
-		qdel(holder)
-	qdel(src)
-
-/obj/item/rig_module/self_destruct/small/engage()
-	explosion(get_turf(src), 0, 0, 3, 4)
+/obj/item/rig_module/self_destruct/engage(var/skip_check)
+	if(!skip_check && usr && alert(usr, "Are you sure you want to push that button?", "Self-destruct", "No", "Yes") == "No")
+		return
+	explosion(get_turf(src), explosion_values[1], explosion_values[2], explosion_values[3], explosion_values[4])
 	if(holder && holder.wearer)
 		holder.wearer.drop_from_inventory(src)
 		qdel(holder)

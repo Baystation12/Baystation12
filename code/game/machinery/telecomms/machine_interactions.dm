@@ -164,8 +164,9 @@
 		dat += "<hr>"
 
 		if(P)
-			if(P.buffer)
-				dat += "<br><br>MULTITOOL BUFFER: [P.buffer] ([P.buffer.id]) <a href='?src=\ref[src];link=1'>\[Link\]</a> <a href='?src=\ref[src];flush=1'>\[Flush\]"
+			var/obj/machinery/telecomms/device = P.get_buffer()
+			if(istype(device))
+				dat += "<br><br>MULTITOOL BUFFER: [device] ([device.id]) <a href='?src=\ref[src];link=1'>\[Link\]</a> <a href='?src=\ref[src];flush=1'>\[Flush\]"
 			else
 				dat += "<br><br>MULTITOOL BUFFER: <a href='?src=\ref[src];buffer=1'>\[Add Machine\]</a>"
 
@@ -365,28 +366,30 @@
 	if(href_list["link"])
 
 		if(P)
-			if(P.buffer && P.buffer != src)
-				if(!(src in P.buffer.links))
-					P.buffer.links.Add(src)
+			var/obj/machinery/telecomms/device = P.get_buffer()
+			if(istype(device) && device != src)
+				if(!(src in device.links))
+					device.links.Add(src)
 
-				if(!(P.buffer in src.links))
-					src.links.Add(P.buffer)
+				if(!(device in src.links))
+					src.links.Add(device)
 
-				temp = "<font color = #666633>-% Successfully linked with \ref[P.buffer] [P.buffer.name] %-</font>"
+				temp = "<font color = #666633>-% Successfully linked with \ref[device] [device.name] %-</font>"
 
 			else
 				temp = "<font color = #666633>-% Unable to acquire buffer %-</font>"
 
 	if(href_list["buffer"])
 
-		P.buffer = src
-		temp = "<font color = #666633>-% Successfully stored \ref[P.buffer] [P.buffer.name] in buffer %-</font>"
+		P.set_buffer(src)
+		var/atom/buffer = P.get_buffer()
+		temp = "<font color = #666633>-% Successfully stored \ref[buffer] [buffer.name] in buffer %-</font>"
 
 
 	if(href_list["flush"])
 
 		temp = "<font color = #666633>-% Buffer successfully flushed. %-</font>"
-		P.buffer = null
+		P.set_buffer(null)
 
 	src.Options_Topic(href, href_list)
 

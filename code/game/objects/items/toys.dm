@@ -407,12 +407,12 @@
  * Bosun's whistle
  */
 
- /obj/item/toy/bosunwhistle
- 	name = "bosun's whistle"
- 	desc = "A genuine Admiral Krush Bosun's Whistle, for the aspiring ship's captain! Suitable for ages 8 and up, do not swallow."
- 	icon = 'icons/obj/toy.dmi'
- 	icon_state = "bosunwhistle"
- 	var/cooldown = 0
+/obj/item/toy/bosunwhistle
+	name = "bosun's whistle"
+	desc = "A genuine Admiral Krush Bosun's Whistle, for the aspiring ship's captain! Suitable for ages 8 and up, do not swallow."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "bosunwhistle"
+	var/cooldown = 0
 	w_class = 1
 	slot_flags = SLOT_EARS
 

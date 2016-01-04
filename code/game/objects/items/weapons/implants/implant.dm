@@ -6,6 +6,7 @@
 	name = "implant"
 	icon = 'icons/obj/device.dmi'
 	icon_state = "implant"
+	w_class = 1
 	var/implanted = null
 	var/mob/imp_in = null
 	var/obj/item/organ/external/part = null

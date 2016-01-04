@@ -4,6 +4,7 @@
 	opacity = 0
 	density = 0
 	layer = 3.5
+	w_class = 3
 
 /obj/structure/sign/ex_act(severity)
 	switch(severity)

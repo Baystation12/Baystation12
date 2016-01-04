@@ -16,10 +16,6 @@
 	var/minor_fault = 0 //If not 100% reliable, it will build up faults.
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 
-	suicide_act(mob/user)
-		viewers(user) << "<span class='danger'>\The [user] is licking the electrodes of \the [src]! It looks like \he's trying to commit suicide.</span>"
-		return (FIRELOSS)
-
 //currently only used by energy-type guns, that may change in the future.
 /obj/item/weapon/cell/device
 	name = "device power cell"
@@ -70,6 +66,13 @@
 	icon_state = "hcell"
 	maxcharge = 10000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 60)
+
+/obj/item/weapon/cell/mecha
+	name = "exosuit-grade power cell"
+	origin_tech = list(TECH_POWER = 3)
+	icon_state = "hcell"
+	maxcharge = 15000
+	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
 
 /obj/item/weapon/cell/high/empty/New()
 	..()

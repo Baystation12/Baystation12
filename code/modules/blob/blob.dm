@@ -54,7 +54,7 @@
 	update_icon()
 
 /obj/effect/blob/proc/expand(var/turf/T)
-	if(istype(T, /turf/unsimulated/) || istype(T, /turf/space))
+	if(istype(T, /turf/unsimulated/) || istype(T, /turf/space) || (istype(T, /turf/simulated/mineral) && T.density))
 		return
 	if(istype(T, /turf/simulated/wall))
 		var/turf/simulated/wall/SW = T
@@ -120,7 +120,8 @@
 		if(prob(health))
 			expand(T)
 		return
-	B.pulse(forceLeft - 1, dirs)
+	if(forceLeft)
+		B.pulse(forceLeft - 1, dirs)
 
 /obj/effect/blob/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)
@@ -158,6 +159,7 @@
 	fire_resist = 2
 
 	expandType = /obj/effect/blob/shield
+	var/blob_may_process = 1
 
 /obj/effect/blob/core/update_icon()
 	return
@@ -171,10 +173,16 @@
 	return ..()
 
 /obj/effect/blob/core/process()
+	set waitfor = 0
+	if(!blob_may_process)
+		return
+	blob_may_process = 0
+	sleep(0)
 	pulse(20, list(NORTH, EAST))
 	pulse(20, list(NORTH, WEST))
 	pulse(20, list(SOUTH, EAST))
 	pulse(20, list(SOUTH, WEST))
+	blob_may_process = 1
 
 /obj/effect/blob/shield
 	name = "strong blob"

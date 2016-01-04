@@ -2,7 +2,7 @@
 	name = "Medbot"
 	desc = "A little medical robot. He looks somewhat underwhelmed."
 	icon_state = "medibot0"
-	req_access = list(access_medical)
+	req_one_access = list(access_medical, access_robotics)
 
 	var/skin = null //Set to "tox", "ointment" or "o2" for the other two firstaid kits.
 	botcard_access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
@@ -257,9 +257,6 @@
 
 /mob/living/bot/medbot/proc/valid_healing_target(var/mob/living/carbon/human/H)
 	if(H.stat == DEAD) // He's dead, Jim
-		return null
-
-	if(H.suiciding)
 		return null
 
 	if(H in ignored)

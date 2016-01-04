@@ -63,23 +63,39 @@
 #define 	  LIFE_HUD 10 // STATUS_HUD that only reports dead or alive
 
 //some colors
-#define COLOR_WHITE  "#FFFFFF"
-#define COLOR_SILVER "#C0C0C0"
-#define COLOR_GRAY   "#808080"
-#define COLOR_BLACK  "#000000"
-#define COLOR_RED    "#FF0000"
-#define COLOR_MAROON "#800000"
-#define COLOR_YELLOW "#FFFF00"
-#define COLOR_OLIVE  "#808000"
-#define COLOR_LIME   "#00FF00"
-#define COLOR_GREEN  "#008000"
-#define COLOR_CYAN   "#00FFFF"
-#define COLOR_TEAL   "#008080"
-#define COLOR_BLUE   "#0000FF"
-#define COLOR_NAVY   "#000080"
-#define COLOR_PINK   "#FF00FF"
-#define COLOR_PURPLE "#800080"
-#define COLOR_ORANGE "#FF9900"
+#define COLOR_WHITE            "#ffffff"
+#define COLOR_SILVER           "#c0c0c0"
+#define COLOR_GRAY             "#808080"
+#define COLOR_BLACK            "#000000"
+#define COLOR_RED              "#ff0000"
+#define COLOR_RED_LIGHT        "#ff3333"
+#define COLOR_MAROON           "#800000"
+#define COLOR_YELLOW           "#ffff00"
+#define COLOR_OLIVE            "#808000"
+#define COLOR_LIME             "#00ff00"
+#define COLOR_GREEN            "#008000"
+#define COLOR_CYAN             "#00ffff"
+#define COLOR_TEAL             "#008080"
+#define COLOR_BLUE             "#0000ff"
+#define COLOR_BLUE_LIGHT       "#33ccff"
+#define COLOR_NAVY             "#000080"
+#define COLOR_PINK             "#ff00ff"
+#define COLOR_PURPLE           "#800080"
+#define COLOR_ORANGE           "#ff9900"
+#define COLOR_LUMINOL          "#66ffff"
+#define COLOR_BEIGE            "#ceb689"
+#define COLOR_BLUE_GRAY        "#6a97b0"
+#define COLOR_BROWN            "#b19664"
+#define COLOR_DARK_BROWN       "#917448"
+#define COLOR_DARK_ORANGE      "#b95a00"
+#define COLOR_GREEN_GRAY       "#8daf6a"
+#define COLOR_RED_GRAY         "#aa5f61"
+#define COLOR_PALE_BLUE_GRAY   "#8bbbd5"
+#define COLOR_PALE_GREEN_GRAY  "#aed18b"
+#define COLOR_PALE_RED_GRAY    "#cc9090"
+#define COLOR_PALE_PURPLE_GRAY "#bda2ba"
+#define COLOR_PURPLE_GRAY      "#a2819e"
+#define COLOR_SUN              "#ec8b2f"
 
 //	Shuttles.
 
@@ -163,21 +179,33 @@
 #define BOMBCAP_HEAVY_RADIUS (max_explosion_range/2)
 #define BOMBCAP_LIGHT_RADIUS max_explosion_range
 #define BOMBCAP_FLASH_RADIUS (max_explosion_range*1.5)
+									// NTNet module-configuration values. Do not change these. If you need to add another use larger number (5..6..7 etc)
+#define NTNET_SOFTWAREDOWNLOAD 1 	// Downloads of software from NTNet
+#define NTNET_PEERTOPEER 2			// P2P transfers of files between devices
+#define NTNET_COMMUNICATION 3		// Communication (messaging)
+#define NTNET_SYSTEMCONTROL 4		// Control of various systems, RCon, air alarm control, etc.
+
+// NTNet transfer speeds, used when downloading/uploading a file/program.
+#define NTNETSPEED_LOWSIGNAL 0.025	// GQ/s transfer speed when the device is wirelessly connected and on Low signal
+#define NTNETSPEED_HIGHSIGNAL 0.1	// GQ/s transfer speed when the device is wirelessly connected and on High signal
+#define NTNETSPEED_ETHERNET 0.5		// GQ/s transfer speed when the device is using wired connection
+
+// Program bitflags
+#define PROGRAM_ALL 7
+#define PROGRAM_CONSOLE 1
+#define PROGRAM_LAPTOP 2
+#define PROGRAM_TABLET 4
+
+// Caps for NTNet logging. Less than 10 would make logging useless anyway, more than 500 may make the log browser too laggy. Defaults to 100 unless user changes it.
+#define MAX_NTNET_LOGS 500
+#define MIN_NTNET_LOGS 10
+
 
 // Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
 #define PROJECTILE_CONTINUE   -1 //if the projectile should continue flying after calling bullet_act()
 #define PROJECTILE_FORCE_MISS -2 //if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.
 
-// Custom colors
-#define COLOR_BEIGE "#CEB689"
-#define COLOR_BLUE_GRAY "#6A97B0"
-#define COLOR_BROWN "#B19664"
-#define COLOR_DARK_BROWN "#917448"
-#define COLOR_DARK_ORANGE "#B95A00"
-#define COLOR_GREEN_GRAY "#8DAF6A"
-#define COLOR_RED_GRAY "#AA5F61"
-#define COLOR_PALE_BLUE_GRAY "#8BBBD5"
-#define COLOR_PALE_GREEN_GRAY "#AED18B"
-#define COLOR_PALE_RED_GRAY "#CC9090"
-#define COLOR_PALE_PURPLE_GRAY "#BDA2BA"
-#define COLOR_PURPLE_GRAY "#A2819E"
+//Camera capture modes
+#define CAPTURE_MODE_REGULAR 0 //Regular polaroid camera mode
+#define CAPTURE_MODE_ALL 1 //Admin camera mode
+#define CAPTURE_MODE_PARTIAL 3 //Simular to regular mode, but does not do dummy check

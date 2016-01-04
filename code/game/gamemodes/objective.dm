@@ -12,6 +12,7 @@ datum/objective
 		all_objectives |= src
 		if(text)
 			explanation_text = text
+		..()
 
 	Destroy()
 		all_objectives -= src

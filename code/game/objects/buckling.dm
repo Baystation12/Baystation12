@@ -56,7 +56,8 @@
 		user << "<span class='warning'>You can't buckle anyone in before the game starts.</span>"
 	if(!user.Adjacent(M) || user.restrained() || user.lying || user.stat || istype(user, /mob/living/silicon/pai))
 		return
-
+	if(M == buckled_mob)
+		return
 	if(istype(M, /mob/living/carbon/slime))
 		user << "<span class='warning'>The [M] is too squishy to buckle in.</span>"
 		return

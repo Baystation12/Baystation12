@@ -271,8 +271,8 @@
 		new /obj/item/ammo_casing/a145(src)
 
 /obj/item/weapon/storage/box/flashbangs
-	name = "box of flashbangs (WARNING)"
-	desc = "<B>WARNING: These devices are extremely dangerous and can cause blindness or deafness in repeated use.</B>"
+	name = "box of flashbangs"
+	desc = "A box containing 7 antipersonnel flashbang grenades.<br> WARNING: These devices are extremely dangerous and can cause blindness or deafness in repeated use."
 	icon_state = "flashbang"
 
 	New()
@@ -284,6 +284,22 @@
 		new /obj/item/weapon/grenade/flashbang(src)
 		new /obj/item/weapon/grenade/flashbang(src)
 		new /obj/item/weapon/grenade/flashbang(src)
+
+/obj/item/weapon/storage/box/teargas
+	name = "box of pepperspray grenades"
+	desc = "A box containing 7 tear gas grenades. A gas mask is printed on the label.<br> WARNING: Exposure carries risk of serious injury or death. Keep away from persons with lung conditions."
+	icon_state = "flashbang"
+
+	New()
+		..()
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+
+
 
 /obj/item/weapon/storage/box/emps
 	name = "box of emp grenades"
@@ -621,7 +637,7 @@
 	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
 	item_state = "syringe_kit"
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
-	
+
 /obj/item/weapon/storage/box/lights/New()
 	..()
 	make_exact_fit()

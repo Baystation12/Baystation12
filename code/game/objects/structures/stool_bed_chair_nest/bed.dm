@@ -57,6 +57,7 @@
 			I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]
+
 	// Strings.
 	desc = initial(desc)
 	if(padding_material)

@@ -14,6 +14,11 @@
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
 	var/dirt = 0
 
+/turf/simulated/clean_blood()
+	for(var/obj/effect/decal/cleanable/blood/B in contents)
+		B.clean_blood()
+	..()
+
 /turf/simulated/New()
 	..()
 	if(istype(loc, /area/chapel))
@@ -117,6 +122,8 @@
 
 	if(istype(M))
 		for(var/obj/effect/decal/cleanable/blood/B in contents)
+			if(!B.blood_DNA)
+				B.blood_DNA = list()
 			if(!B.blood_DNA[M.dna.unique_enzymes])
 				B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 				B.virus2 = virus_copylist(M.virus2)

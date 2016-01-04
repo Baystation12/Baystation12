@@ -11,7 +11,7 @@
 	for(var/areapath in typesof(areatype))
 		var/area/A = locate(areapath)
 		for(var/turf/T in A.contents)
-			if(!predicates || all_predicates_true(T, predicates))
+			if(!predicates || all_predicates_true(list(T), predicates))
 				turfs += T
 	return turfs
 

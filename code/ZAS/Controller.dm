@@ -234,6 +234,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 /datum/controller/air_system/proc/remove_zone(zone/z)
 	zones.Remove(z)
+	zones_to_update.Remove(z)
 
 /datum/controller/air_system/proc/air_blocked(turf/A, turf/B)
 	#ifdef ZASDBG

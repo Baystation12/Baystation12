@@ -56,8 +56,8 @@
 /mob/living/carbon/human/Stat()
 	..()
 	if(statpanel("Status"))
-		stat(null, "Intent: [a_intent]")
-		stat(null, "Move Mode: [m_intent]")
+		stat("Intent:", "[a_intent]")
+		stat("Move Mode:", "[m_intent]")
 		if(emergency_shuttle)
 			var/eta_status = emergency_shuttle.get_status_panel_eta()
 			if(eta_status)
@@ -319,7 +319,7 @@
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
 /mob/living/carbon/human/proc/get_face_name()
 	var/obj/item/organ/external/head = get_organ("head")
-	if(!head || head.disfigured || (head.status & ORGAN_DESTROYED) || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
+	if(!head || head.disfigured || head.is_stump() || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
 		return "Unknown"
 	return real_name
 
@@ -735,7 +735,8 @@
 
 	if(!check_has_mouth())
 		return
-
+	if(stat == DEAD)
+		return
 	if(!lastpuke)
 		lastpuke = 1
 		src << "<span class='warning'>You feel nauseous...</span>"
@@ -997,8 +998,14 @@
 	verbs += /mob/living/carbon/human/proc/bloody_doodle
 	return 1 //we applied blood to the item
 
+/mob/living/carbon/human/proc/get_full_print()
+	if(!dna ||!dna.uni_identity)
+		return
+	return md5(dna.uni_identity)
+
 /mob/living/carbon/human/clean_blood(var/clean_feet)
 	.=..()
+	gunshot_residue = null
 	if(clean_feet && !shoes && istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
 		feet_blood_color = null
 		qdel(feet_blood_DNA)
@@ -1365,10 +1372,6 @@
 	if(update_hud)
 		handle_regular_hud_updates()
 
-/mob/living/carbon/human/Check_Shoegrip()
-	if(shoes && (shoes.item_flags & NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
-		return 1
-	return 0
 
 /mob/living/carbon/human/can_stand_overridden()
 	if(wearing_rig && wearing_rig.ai_can_move_suit(check_for_ai = 1))
@@ -1382,7 +1385,60 @@
 
 /mob/living/carbon/human/MouseDrop(var/atom/over_object)
 	var/mob/living/carbon/human/H = over_object
-	if(holder_type && a_intent == "help" && istype(H) && H.a_intent == "help" && !issmall(H) && Adjacent(H))
-		get_scooped(H)
+	if(holder_type && istype(H) && !H.lying && !issmall(H) && Adjacent(H))
+		get_scooped(H, (usr == src))
 		return
 	return ..()
+
+//Puts the item into our active hand if possible. returns 1 on success.
+/mob/living/carbon/human/put_in_active_hand(var/obj/item/W)
+	return (hand ? put_in_l_hand(W) : put_in_r_hand(W))
+
+//Puts the item into our inactive hand if possible. returns 1 on success.
+/mob/living/carbon/human/put_in_inactive_hand(var/obj/item/W)
+	return (hand ? put_in_r_hand(W) : put_in_l_hand(W))
+
+/mob/living/carbon/human/put_in_hands(var/obj/item/W)
+	if(!W)
+		return 0
+	if(put_in_active_hand(W))
+		update_inv_l_hand()
+		update_inv_r_hand()
+		return 1
+	else if(put_in_inactive_hand(W))
+		update_inv_l_hand()
+		update_inv_r_hand()
+		return 1
+	else
+		return ..()
+
+/mob/living/carbon/human/put_in_l_hand(var/obj/item/W)
+	if(!..() || l_hand)
+		return 0
+	W.forceMove(src)
+	l_hand = W
+	W.equipped(src,slot_l_hand)
+	W.add_fingerprint(src)
+	update_inv_l_hand()
+	return 1
+
+/mob/living/carbon/human/put_in_r_hand(var/obj/item/W)
+	if(!..() || r_hand)
+		return 0
+	W.forceMove(src)
+	r_hand = W
+	W.equipped(src,slot_r_hand)
+	W.add_fingerprint(src)
+	update_inv_r_hand()
+	return 1
+
+/mob/living/carbon/human/verb/pull_punches()
+	set name = "Pull Punches"
+	set desc = "Try not to hurt them."
+	set category = "IC"
+
+	if(stat) return
+	pulling_punches = !pulling_punches
+	src << "<span class='notice'>You are now [pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>"
+	return
+

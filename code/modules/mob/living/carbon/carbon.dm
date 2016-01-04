@@ -207,7 +207,7 @@
 					if(40 to INFINITY)
 						status += "peeling away"
 
-				if(org.status & ORGAN_DESTROYED)
+				if(org.is_stump())
 					status += "MISSING"
 				if(org.status & ORGAN_MUTATED)
 					status += "weirdly shapen"
@@ -318,9 +318,7 @@
 			H.germ_level = 0
 	update_icons()	//apply the now updated overlays to the mob
 
-
 //Throwing stuff
-
 /mob/proc/throw_item(atom/target)
 	return
 

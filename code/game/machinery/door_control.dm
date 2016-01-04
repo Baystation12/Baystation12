@@ -24,22 +24,6 @@
 		user << "Error, no route to host."
 
 /obj/machinery/button/remote/attackby(obj/item/weapon/W, mob/user as mob)
-	/* For later implementation
-	if (istype(W, /obj/item/weapon/screwdriver))
-	{
-		if(wiresexposed)
-			icon_state = "doorctrl0"
-			wiresexposed = 0
-
-		else
-			icon_state = "doorctrl-open"
-			wiresexposed = 1
-
-		return
-	}
-	*/
-	if(istype(W, /obj/item/device/detective_scanner))
-		return
 	return src.attack_hand(user)
 
 /obj/machinery/button/remote/emag_act(var/remaining_charges, var/mob/user)

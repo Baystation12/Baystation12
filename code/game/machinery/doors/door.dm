@@ -99,7 +99,7 @@
 		var/mob/M = AM
 		if(world.time - M.last_bumped <= 10) return	//Can bump-open one airlock per second. This is to prevent shock spam.
 		M.last_bumped = world.time
-		if(!M.restrained() && !issmall(M))
+		if(!M.restrained() && (!issmall(M) || ishuman(M)))
 			bumpopen(M)
 		return
 
@@ -202,8 +202,6 @@
 	..()
 
 /obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/device/detective_scanner))
-		return
 	src.add_fingerprint(user)
 
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
@@ -399,12 +397,12 @@
 	set_opacity(0)
 	sleep(3)
 	src.density = 0
+	update_nearby_tiles()
 	sleep(7)
 	src.layer = open_layer
 	explosion_resistance = 0
 	update_icon()
 	set_opacity(0)
-	update_nearby_tiles()
 	operating = 0
 
 	if(autoclose)
@@ -426,12 +424,12 @@
 	src.density = 1
 	explosion_resistance = initial(explosion_resistance)
 	src.layer = closed_layer
+	update_nearby_tiles()
 	sleep(7)
 	update_icon()
 	if(visible && !glass)
 		set_opacity(1)	//caaaaarn!
 	operating = 0
-	update_nearby_tiles()
 
 	//I shall not add a check every x ticks if a door has closed over some fire.
 	var/obj/fire/fire = locate() in loc

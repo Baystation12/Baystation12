@@ -93,6 +93,7 @@
 			if(health < maxhealth)
 				if(open)
 					health = min(maxhealth, health+10)
+					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 					user.visible_message("\red [user] repairs [src]!","\blue You repair [src]!")
 				else
 					user << "<span class='notice'>Unable to repair with the maintenance panel closed.</span>"
@@ -101,6 +102,7 @@
 		else
 			user << "<span class='notice'>Unable to repair while [src] is off.</span>"
 	else if(hasvar(W,"force") && hasvar(W,"damtype"))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		switch(W.damtype)
 			if("fire")
 				health -= W.force * fire_dam_coeff

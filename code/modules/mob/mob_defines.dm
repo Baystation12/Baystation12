@@ -149,6 +149,8 @@
 	var/const/deafness = 2//Carbon
 	var/const/muteness = 4//Carbon
 
+	var/can_pull_size = 10              // Maximum w_class the mob can pull.
+	var/can_pull_mobs = MOB_PULL_LARGER // Whether or not the mob can pull other mobs.
 
 	var/datum/dna/dna = null//Carbon
 	var/radiation = 0.0//Carbon

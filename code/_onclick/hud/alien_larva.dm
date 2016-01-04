@@ -1,3 +1,6 @@
+/mob/living/carbon/alien/instantiate_hud(var/datum/hud/HUD)
+	HUD.larva_hud()
+
 /datum/hud/proc/larva_hud()
 
 	src.adding = list()

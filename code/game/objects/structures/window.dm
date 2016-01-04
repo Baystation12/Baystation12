@@ -3,6 +3,8 @@
 	desc = "A window."
 	icon = 'icons/obj/structures.dmi'
 	density = 1
+	w_class = 3
+
 	layer = 3.2//Just above doors
 	pressure_resistance = 4*ONE_ATMOSPHERE
 	anchored = 1.0
@@ -133,7 +135,7 @@
 		return 1
 	if(is_full_window())
 		return 0	//full tile window, you can't move into it!
-	if(get_dir(loc, target) == dir)
+	if(get_dir(loc, target) & dir)
 		return !density
 	else
 		return 1
@@ -185,8 +187,8 @@
 
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
 		user.do_attack_animation(src)
-		usr.visible_message("<span class='danger'>[usr.name] bangs against the [src.name]!</span>",
-							"<<span class='danger'>You bang against the [src.name]!</span>",
+		usr.visible_message("<span class='danger'>\The [usr] bangs against \the [src]!</span>",
+							"<span class='danger'>You bang against \the [src]!</span>",
 							"You hear a banging sound.")
 	else
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
@@ -452,6 +454,10 @@
 	//player-constructed windows
 	if (constructed)
 		state = 0
+
+/obj/structure/window/reinforced/full
+    dir = 5
+    icon_state = "fwindow"
 
 /obj/structure/window/reinforced/tinted
 	name = "tinted window"

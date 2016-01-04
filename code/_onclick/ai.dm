@@ -54,6 +54,13 @@
 	if(control_disabled || !canClick())
 		return
 
+	if(multitool_mode && isobj(A))
+		var/obj/O = A
+		var/datum/expansion/multitool/MT = O.expansions[/datum/expansion/multitool]
+		if(MT)
+			MT.interact(aiMulti, src)
+			return
+
 	if(aiCamera.in_camera_mode)
 		aiCamera.camera_mode_off()
 		aiCamera.captureimage(A, usr)
@@ -121,9 +128,9 @@
 
 /obj/machinery/door/airlock/AIShiftClick()  // Opens and closes doors!
 	if(density)
-		Topic(src, list("src"= "\ref[src]", "command"="open", "activate" = "1"), 1) // 1 meaning no window (consistency!)
+		Topic(src, list("command"="open", "activate" = "1"))
 	else
-		Topic(src, list("src"= "\ref[src]", "command"="open", "activate" = "0"), 1)
+		Topic(src, list("command"="open", "activate" = "0"))
 	return 1
 
 /atom/proc/AICtrlClick()
@@ -131,17 +138,17 @@
 
 /obj/machinery/door/airlock/AICtrlClick() // Bolts doors
 	if(locked)
-		Topic(src, list("src"= "\ref[src]", "command"="bolts", "activate" = "0"), 1)// 1 meaning no window (consistency!)
+		Topic(src, list("command"="bolts", "activate" = "0"))
 	else
-		Topic(src, list("src"= "\ref[src]", "command"="bolts", "activate" = "1"), 1)
+		Topic(src, list("command"="bolts", "activate" = "1"))
 	return 1
 
 /obj/machinery/power/apc/AICtrlClick() // turns off/on APCs.
-	Topic(src, list("src"= "\ref[src]", "breaker"="1"), 1) // 1 meaning no window (consistency!)
+	Topic(src, list("breaker"="1"))
 	return 1
 
 /obj/machinery/turretid/AICtrlClick() //turns off/on Turrets
-	Topic(src, list("src"= "\ref[src]", "command"="enable", "value"="[!enabled]"), 1) // 1 meaning no window (consistency!)
+	Topic(src, list("command"="enable", "value"="[!enabled]"))
 	return 1
 
 /atom/proc/AIAltClick(var/atom/A)
@@ -150,14 +157,14 @@
 /obj/machinery/door/airlock/AIAltClick() // Electrifies doors.
 	if(!electrified_until)
 		// permanent shock
-		Topic(src, list("src"= "\ref[src]", "command"="electrify_permanently", "activate" = "1"), 1) // 1 meaning no window (consistency!)
+		Topic(src, list("command"="electrify_permanently", "activate" = "1"))
 	else
 		// disable/6 is not in Topic; disable/5 disables both temporary and permanent shock
-		Topic(src, list("src"= "\ref[src]", "command"="electrify_permanently", "activate" = "0"), 1)
+		Topic(src, list("command"="electrify_permanently", "activate" = "0"))
 	return 1
 
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
-	Topic(src, list("src"= "\ref[src]", "command"="lethal", "value"="[!lethal]"), 1) // 1 meaning no window (consistency!)
+	Topic(src, list("command"="lethal", "value"="[!lethal]"))
 	return 1
 
 /atom/proc/AIMiddleClick(var/mob/living/silicon/user)
@@ -169,9 +176,9 @@
 		return
 
 	if(!src.lights)
-		Topic(src, list("src"= "\ref[src]", "command"="lights", "activate" = "1"), 1) // 1 meaning no window (consistency!)
+		Topic(src, list("command"="lights", "activate" = "1"))
 	else
-		Topic(src, list("src"= "\ref[src]", "command"="lights", "activate" = "0"), 1)
+		Topic(src, list("command"="lights", "activate" = "0"))
 	return 1
 
 //

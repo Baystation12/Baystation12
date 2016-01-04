@@ -45,7 +45,8 @@
 		pulledby = null
 
 /atom/movable/proc/initialize()
-	return
+	if(!isnull(gcDestroyed))
+		crash_with("GC: -- [type] had initialize() called after qdel() --")
 
 /atom/movable/Bump(var/atom/A, yes)
 	if(src.throwing)
@@ -78,7 +79,7 @@
 	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
 		if(!O.anchored)
-			step(O, src.dir)
+			step(O, src.last_move)
 		O.hitby(src,speed)
 
 	else if(isturf(hit_atom))
@@ -86,7 +87,7 @@
 		var/turf/T = hit_atom
 		if(T.density)
 			spawn(2)
-				step(src, turn(src.dir, 180))
+				step(src, turn(src.last_move, 180))
 			if(istype(src,/mob/living))
 				var/mob/living/M = src
 				M.turf_collision(T, speed)
@@ -210,7 +211,7 @@
 /atom/movable/overlay/New()
 	for(var/x in src.verbs)
 		src.verbs -= x
-	return
+	..()
 
 /atom/movable/overlay/attackby(a, b)
 	if (src.master)

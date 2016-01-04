@@ -22,7 +22,14 @@ var/global/list/robot_modules = list(
 	flags = CONDUCT
 	var/channels = list()
 	var/networks = list()
-	var/languages = list(LANGUAGE_SOL_COMMON = 1, LANGUAGE_TRADEBAND = 1, LANGUAGE_UNATHI = 0, LANGUAGE_SIIK_TAJR = 0, LANGUAGE_SKRELLIAN = 0, LANGUAGE_GUTTER = 0)
+	var/languages = list(
+		LANGUAGE_SOL_COMMON = 1,
+		LANGUAGE_TRADEBAND = 1,
+		LANGUAGE_UNATHI = 0,
+		LANGUAGE_SIIK_TAJR = 0,
+		LANGUAGE_SKRELLIAN = 0,
+		LANGUAGE_RESOMI = 0,
+		LANGUAGE_GUTTER = 0)
 	var/sprites = list()
 	var/can_be_pushed = 1
 	var/no_slip = 0
@@ -162,7 +169,8 @@ var/global/list/robot_modules = list(
 	sprites = list(	"Basic" = "robot_old",
 					"Android" = "droid",
 					"Default" = "robot",
-					"Drone" = "drone-standard"
+					"Drone" = "drone-standard",
+					"Eyebot" = "eyebot-standard"
 				  )
 
 /obj/item/weapon/robot_module/standard/New()
@@ -189,7 +197,8 @@ var/global/list/robot_modules = list(
 					"Standard" = "surgeon",
 					"Advanced Droid" = "droid-medical",
 					"Needles" = "medicalrobot",
-					"Drone" = "drone-surgery"
+					"Drone" = "drone-surgery",
+					"Eyebot" = "eyebot-medical"
 					)
 
 /obj/item/weapon/robot_module/medical/surgeon/New()
@@ -240,7 +249,8 @@ var/global/list/robot_modules = list(
 					"Advanced Droid" = "droid-medical",
 					"Needles" = "medicalrobot",
 					"Drone - Medical" = "drone-medical",
-					"Drone - Chemistry" = "drone-chemistry"
+					"Drone - Chemistry" = "drone-chemistry",
+					"Eyebot" = "eyebot-medical"
 					)
 
 /obj/item/weapon/robot_module/medical/crisis/New()
@@ -254,6 +264,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/reagent_containers/dropper/industrial(src)
 	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
 	src.modules += new /obj/item/weapon/extinguisher/mini(src)
+	src.modules += new /obj/item/weapon/inflatable_dispenser(src) // Allows usage of inflatables. Since they are basically robotic alternative to EMTs, they should probably have them.
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 	src.emag.reagents.add_reagent("pacid", 250)
 	src.emag.name = "Polyacid spray"
@@ -304,7 +315,8 @@ var/global/list/robot_modules = list(
 					"Antique" = "engineerrobot",
 					"Landmate" = "landmate",
 					"Landmate - Treaded" = "engiborg+tread",
-					"Drone" = "drone-engineer"
+					"Drone" = "drone-engineer",
+					"Eyebot" = "eyebot-engineering"
 					)
 
 /obj/item/weapon/robot_module/engineering/construction
@@ -321,6 +333,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/crowbar(src)
 	src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.modules += new /obj/item/device/pipe_painter(src)
+	src.modules += new /obj/item/weapon/gripper/no_use/loader(src)
 
 	var/datum/matter_synth/metal = new /datum/matter_synth/metal()
 	var/datum/matter_synth/plasteel = new /datum/matter_synth/plasteel()
@@ -362,6 +375,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/taperoll/engineering(src)
 	src.modules += new /obj/item/weapon/gripper(src)
 	src.modules += new /obj/item/device/pipe_painter(src)
+	src.modules += new /obj/item/weapon/inflatable_dispenser(src)
 	src.emag = new /obj/item/borg/stun(src)
 
 	var/datum/matter_synth/metal = new /datum/matter_synth/metal(40000)
@@ -417,7 +431,8 @@ var/global/list/robot_modules = list(
 					"Black Knight" = "securityrobot",
 					"Bloodhound" = "bloodhound",
 					"Bloodhound - Treaded" = "secborg+tread",
-					"Drone" = "drone-sec"
+					"Drone" = "drone-sec",
+					"Eyebot" = "eyebot-security"
 				)
 
 /obj/item/weapon/robot_module/security/general/New()
@@ -449,7 +464,8 @@ var/global/list/robot_modules = list(
 					"Basic" = "JanBot2",
 					"Mopbot"  = "janitorrobot",
 					"Mop Gear Rex" = "mopgearrex",
-					"Drone" = "drone-janitor"
+					"Drone" = "drone-janitor",
+					"Eyebot" = "eyebot-janitor"
 					)
 
 /obj/item/weapon/robot_module/janitor/New()
@@ -480,6 +496,7 @@ var/global/list/robot_modules = list(
 					LANGUAGE_SIIK_MAAS	= 1,
 					LANGUAGE_SIIK_TAJR	= 0,
 					LANGUAGE_SKRELLIAN	= 1,
+					LANGUAGE_RESOMI		= 1,
 					LANGUAGE_ROOTSPEAK	= 1,
 					LANGUAGE_TRADEBAND	= 1,
 					LANGUAGE_GUTTER		= 1
@@ -492,7 +509,8 @@ var/global/list/robot_modules = list(
 					"Rich" = "maximillion",
 					"Default" = "Service2",
 					"Drone - Service" = "drone-service",
-					"Drone - Hydro" = "drone-hydro"
+					"Drone - Hydro" = "drone-hydro",
+					"Eyebot" = "eyebot-standard"
 				  	)
 
 /obj/item/weapon/robot_module/clerical/butler/New()
@@ -534,7 +552,8 @@ var/global/list/robot_modules = list(
 					"Bro" = "Brobot",
 					"Rich" = "maximillion",
 					"Default" = "Service2",
-					"Drone" = "drone-service"
+					"Drone" = "drone-service",
+					"Eyebot" = "eyebot-standard"
 					)
 
 /obj/item/weapon/robot_module/clerical/general/New()
@@ -562,13 +581,14 @@ var/global/list/robot_modules = list(
 					"Basic" = "Miner_old",
 					"Advanced Droid" = "droid-miner",
 					"Treadhead" = "Miner",
-					"Drone" = "drone-miner"
+					"Drone" = "drone-miner",
+					"Eyebot" = "eyebot-miner"
 				)
 	supported_upgrades = list(/obj/item/borg/upgrade/jetpack)
 
 /obj/item/weapon/robot_module/miner/New()
 	src.modules += new /obj/item/device/flash(src)
-	src.modules += new /obj/item/borg/sight/meson(src)
+	src.modules += new /obj/item/borg/sight/material(src)
 	src.modules += new /obj/item/weapon/wrench(src)
 	src.modules += new /obj/item/weapon/screwdriver(src)
 	src.modules += new /obj/item/weapon/storage/bag/ore(src)
@@ -585,7 +605,8 @@ var/global/list/robot_modules = list(
 	channels = list("Science" = 1)
 	sprites = list(
 					"Droid" = "droid-science",
-					"Drone" = "drone-science"
+					"Drone" = "drone-science",
+					"Eyebot" = "eyebot-science"
 					)
 
 /obj/item/weapon/robot_module/research/New()
@@ -669,7 +690,7 @@ var/global/list/robot_modules = list(
 	no_slip = 1
 	networks = list(NETWORK_ENGINEERING)
 
-/obj/item/weapon/robot_module/drone/New()
+/obj/item/weapon/robot_module/drone/New(var/mob/living/silicon/robot/robot)
 	src.modules += new /obj/item/weapon/weldingtool(src)
 	src.modules += new /obj/item/weapon/screwdriver(src)
 	src.modules += new /obj/item/weapon/wrench(src)
@@ -679,6 +700,12 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.modules += new /obj/item/weapon/gripper(src)
 	src.modules += new /obj/item/weapon/soap(src)
+	src.modules += new /obj/item/weapon/gripper/no_use/loader(src)
+	src.modules += new /obj/item/weapon/extinguisher(src)
+
+	robot.internals = new/obj/item/weapon/tank/jetpack/carbondioxide(src)
+	src.modules += robot.internals
+
 	src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.emag.name = "Plasma Cutter"
 

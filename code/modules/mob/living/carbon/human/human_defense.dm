@@ -143,6 +143,11 @@ emp_act
 	for(var/obj/O in src)
 		if(!O)	continue
 		O.emp_act(severity)
+	for(var/obj/item/organ/external/O  in organs)
+		O.emp_act(severity)
+		for(var/obj/item/organ/I  in O.internal_organs)
+			if(I.robotic == 0)	continue
+			I.emp_act(severity)
 	..()
 
 /mob/living/carbon/human/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
@@ -162,7 +167,7 @@ emp_act
 		return null
 
 	var/obj/item/organ/external/affecting = get_organ(hit_zone)
-	if (!affecting || (affecting.status & ORGAN_DESTROYED) || affecting.is_stump())
+	if (!affecting || affecting.is_stump())
 		user << "<span class='danger'>They are missing that limb!</span>"
 		return null
 
@@ -190,7 +195,7 @@ emp_act
 		effective_force /= 2 //half the effective force
 		if(!..(I, effective_force, blocked, hit_zone))
 			return 0
-		
+
 		attack_joint(affecting, I, blocked) //but can dislocate joints
 	else if(!..())
 		return 0
@@ -210,11 +215,11 @@ emp_act
 				if(prob(effective_force + 10))
 					visible_message("<span class='danger'>[src] has been knocked down!</span>")
 					apply_effect(6, WEAKEN, blocked)
-		
+
 		//Apply blood
 		if(!(I.flags & NOBLOODY))
 			I.add_blood(src)
-		
+
 		if(prob(33))
 			var/turf/location = loc
 			if(istype(location, /turf/simulated))

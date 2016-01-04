@@ -713,6 +713,209 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/storage/box/syndie_kit/chameleon
 	sort_string = "VASBA"
 
+// Modular computer components
+// Hard drives
+/datum/design/item/modularcomponent/disk/normal
+	name = "basic hard drive"
+	id = "hdd_basic"
+	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 100)
+	build_path = /obj/item/weapon/computer_hardware/hard_drive/
+	sort_string = "VBAAA"
+
+/datum/design/item/modularcomponent/disk/advanced
+	name = "advanced hard drive"
+	id = "hdd_advanced"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 4000, "glass" = 200)
+	build_path = /obj/item/weapon/computer_hardware/hard_drive/advanced
+	sort_string = "VBAAB"
+
+/datum/design/item/modularcomponent/disk/super
+	name = "super hard drive"
+	id = "hdd_super"
+	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 8000, "glass" = 400)
+	build_path = /obj/item/weapon/computer_hardware/hard_drive/super
+	sort_string = "VBAAC"
+
+/datum/design/item/modularcomponent/disk/cluster
+	name = "cluster hard drive"
+	id = "hdd_cluster"
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 16000, "glass" = 800)
+	build_path = /obj/item/weapon/computer_hardware/hard_drive/cluster
+	sort_string = "VBAAD"
+
+/datum/design/item/modularcomponent/disk/small
+	name = "small hard drive"
+	id = "hdd_small"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 4000, "glass" = 200)
+	build_path = /obj/item/weapon/computer_hardware/hard_drive/small
+	sort_string = "VBAAE"
+
+/datum/design/item/modularcomponent/disk/micro
+	name = "micro hard drive"
+	id = "hdd_micro"
+	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 100)
+	build_path = /obj/item/weapon/computer_hardware/hard_drive/micro
+	sort_string = "VBAAF"
+
+// Network cards
+/datum/design/item/modularcomponent/netcard/basic
+	name = "basic network card"
+	id = "netcard_basic"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 1)
+	build_type = IMPRINTER
+	materials = list(DEFAULT_WALL_MATERIAL = 500, "glass" = 100)
+	chemicals = list("sacid" = 20)
+	build_path = /obj/item/weapon/computer_hardware/network_card
+	sort_string = "VBAAG"
+
+/datum/design/item/modularcomponent/netcard/advanced
+	name = "advanced network card"
+	id = "netcard_advanced"
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 2)
+	build_type = IMPRINTER
+	materials = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 200)
+	chemicals = list("sacid" = 20)
+	build_path = /obj/item/weapon/computer_hardware/network_card/advanced
+	sort_string = "VBAAH"
+
+/datum/design/item/modularcomponent/netcard/wired
+	name = "wired network card"
+	id = "netcard_wired"
+	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 3)
+	build_type = IMPRINTER
+	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 400)
+	chemicals = list("sacid" = 20)
+	build_path = /obj/item/weapon/computer_hardware/network_card/wired
+	sort_string = "VBAAI"
+
+// Data crystals (USB flash drives)
+/datum/design/item/modularcomponent/portabledrive/basic
+	name = "basic data crystal"
+	id = "portadrive_basic"
+	req_tech = list(TECH_DATA = 1)
+	build_type = IMPRINTER
+	materials = list("glass" = 8000)
+	chemicals = list("sacid" = 20)
+	build_path = /obj/item/weapon/computer_hardware/hard_drive/portable
+	sort_string = "VBAAJ"
+
+/datum/design/item/modularcomponent/portabledrive/advanced
+	name = "advanced data crystal"
+	id = "portadrive_advanced"
+	req_tech = list(TECH_DATA = 2)
+	build_type = IMPRINTER
+	materials = list("glass" = 16000)
+	chemicals = list("sacid" = 20)
+	build_path = /obj/item/weapon/computer_hardware/hard_drive/portable/advanced
+	sort_string = "VBAAK"
+
+/datum/design/item/modularcomponent/portabledrive/super
+	name = "super data crystal"
+	id = "portadrive_super"
+	req_tech = list(TECH_DATA = 4)
+	build_type = IMPRINTER
+	materials = list("glass" = 32000)
+	chemicals = list("sacid" = 20)
+	build_path = /obj/item/weapon/computer_hardware/hard_drive/portable/super
+	sort_string = "VBAAL"
+
+// Card slot
+/datum/design/item/modularcomponent/cardslot
+	name = "RFID card slot"
+	id = "cardslot"
+	req_tech = list(TECH_DATA = 2)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 3000)
+	build_path = /obj/item/weapon/computer_hardware/card_slot
+	sort_string = "VBAAM"
+
+// Nano printer
+/datum/design/item/modularcomponent/nanoprinter
+	name = "nano printer"
+	id = "nanoprinter"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 3000)
+	build_path = /obj/item/weapon/computer_hardware/nano_printer
+	sort_string = "VBAAN"
+
+// Card slot
+/datum/design/item/modularcomponent/teslalink
+	name = "tesla link"
+	id = "teslalink"
+	req_tech = list(TECH_DATA = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 10000)
+	build_path = /obj/item/weapon/computer_hardware/tesla_link
+	sort_string = "VBAAO"
+
+// Batteries
+/datum/design/item/modularcomponent/battery/normal
+	name = "standard battery module"
+	id = "bat_normal"
+	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 2000)
+	build_path = /obj/item/weapon/computer_hardware/battery_module
+	sort_string = "VBAAP"
+
+/datum/design/item/modularcomponent/battery/advanced
+	name = "advanced battery module"
+	id = "bat_advanced"
+	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 4000)
+	build_path = /obj/item/weapon/computer_hardware/battery_module/advanced
+	sort_string = "VBAAQ"
+
+/datum/design/item/modularcomponent/battery/super
+	name = "super battery module"
+	id = "bat_super"
+	req_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 3)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 8000)
+	build_path = /obj/item/weapon/computer_hardware/battery_module/super
+	sort_string = "VBAAR"
+
+/datum/design/item/modularcomponent/battery/ultra
+	name = "ultra battery module"
+	id = "bat_ultra"
+	req_tech = list(TECH_POWER = 5, TECH_ENGINEERING = 4)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 16000)
+	build_path = /obj/item/weapon/computer_hardware/battery_module/ultra
+	sort_string = "VBAAS"
+
+/datum/design/item/modularcomponent/battery/nano
+	name = "nano battery module"
+	id = "bat_nano"
+	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 2000)
+	build_path = /obj/item/weapon/computer_hardware/battery_module/nano
+	sort_string = "VBAAT"
+
+/datum/design/item/modularcomponent/battery/micro
+	name = "micro battery module"
+	id = "bat_micro"
+	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 4000)
+	build_path = /obj/item/weapon/computer_hardware/battery_module/micro
+	sort_string = "VBAAU"
+
 /*
 CIRCUITS BELOW
 */
@@ -727,28 +930,31 @@ CIRCUITS BELOW
 /datum/design/circuit/AssembleDesignName()
 	..()
 	if(build_path)
-		var/obj/item/weapon/circuitboard/C = new build_path()
-		if(C && istype(C))
-			if(C.board_type == "machine")
-				name = "Machine circuit design ([item_name])"
-				qdel(C)
-				return
-			else if(C.board_type == "computer")
-				name = "Computer circuit design ([item_name])"
-				qdel(C)
-				return
-	name = "Circuit design ([item_name])"
+		var/obj/item/weapon/circuitboard/C = build_path
+		if(initial(C.board_type) == "machine")
+			name = "Machine circuit design ([item_name])"
+		else if(initial(C.board_type) == "computer")
+			name = "Computer circuit design ([item_name])"
+		else
+			name = "Circuit design ([item_name])"
 
 /datum/design/circuit/AssembleDesignDesc()
 	if(!desc)
 		desc = "Allows for the construction of \a [item_name] circuit board."
 
 /datum/design/circuit/arcademachine
-	name = "arcade machine"
+	name = "battle arcade machine"
 	id = "arcademachine"
 	req_tech = list(TECH_DATA = 1)
-	build_path = /obj/item/weapon/circuitboard/arcade
+	build_path = /obj/item/weapon/circuitboard/arcade/battle
 	sort_string = "MAAAA"
+
+/datum/design/circuit/oriontrail
+	name = "orion trail arcade machine"
+	id = "oriontrail"
+	req_tech = list(TECH_DATA = 1)
+	build_path = /obj/item/weapon/circuitboard/arcade/orion_trail
+	sort_string = "MABAA"
 
 /datum/design/circuit/seccamera
 	name = "security camera monitor"
@@ -1075,12 +1281,6 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/communications
 	sort_string = "LAAAA"
 
-/datum/design/circuit/idcardconsole
-	name = "ID card modification console"
-	id = "idcardconsole"
-	build_path = /obj/item/weapon/circuitboard/card
-	sort_string = "LAAAB"
-
 /datum/design/circuit/emp_data
 	name = "employment records console"
 	id = "emp_data"
@@ -1245,6 +1445,13 @@ CIRCUITS BELOW
 	req_tech = list(TECH_MAGNET = 3, TECH_POWER = 4)
 	build_path = /obj/item/weapon/circuitboard/shield_cap
 	sort_string = "VAAAC"
+
+/datum/design/circuit/ntnet_relay
+	name = "NTNet Quantum Relay"
+	id = "ntnet_relay"
+	req_tech = list(TECH_DATA = 4)
+	build_path = /obj/item/weapon/circuitboard/ntnet_relay
+	sort_string = "WAAAA"
 
 /datum/design/circuit/aicore
 	name = "AI core"

@@ -4,6 +4,7 @@
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "closed"
 	density = 1
+	w_class = 5
 	var/icon_closed = "closed"
 	var/icon_opened = "open"
 	var/opened = 0
@@ -164,19 +165,18 @@
 		if(1)
 			for(var/atom/movable/A as mob|obj in src)//pulls everything out of the locker and hits it with an explosion
 				A.forceMove(src.loc)
-				A.ex_act(severity++)
+				A.ex_act(severity + 1)
 			qdel(src)
 		if(2)
 			if(prob(50))
 				for (var/atom/movable/A as mob|obj in src)
 					A.forceMove(src.loc)
-					A.ex_act(severity++)
+					A.ex_act(severity + 1)
 				qdel(src)
 		if(3)
 			if(prob(5))
 				for(var/atom/movable/A as mob|obj in src)
 					A.forceMove(src.loc)
-					A.ex_act(severity++)
 				qdel(src)
 
 /obj/structure/closet/proc/damage(var/damage)

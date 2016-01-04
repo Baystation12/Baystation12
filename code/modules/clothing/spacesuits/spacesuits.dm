@@ -30,23 +30,32 @@
 	brightness_on = 4
 	on = 0
 
-/obj/item/clothing/head/helmet/space/attack_self(mob/user)
+/obj/item/clothing/head/helmet/space/initialize()
+	..()
+	if(camera_networks && camera_networks.len)
+		verbs += /obj/item/clothing/head/helmet/space/proc/toggle_camera
+
+/obj/item/clothing/head/helmet/space/proc/toggle_camera()
+	set name = "Toggle Helmet Camera"
+	set category = "Object"
+	set src in usr
 
 	if(!camera && camera_networks)
-
 		camera = new /obj/machinery/camera(src)
 		camera.replace_networks(camera_networks)
-		camera.c_tag = user.name
-		user << "\blue User scanned as [camera.c_tag]. Camera activated."
-		user.update_action_buttons()
-		return 1
+		camera.set_status(0)
 
-	..()
+	if(camera)
+		camera.set_status(!camera.status)
+		if(camera.status)
+			camera.c_tag = FindNameFromID(usr)
+			usr << "<span class='notice'>User scanned as [camera.c_tag]. Camera activated.</span>"
+		else
+			usr << "<span class='notice'>Camera deactivated.</span>"
 
-/obj/item/clothing/head/helmet/space/examine()
-	..()
-	if(camera_networks && get_dist(usr,src) <= 1)
-		usr << "This helmet has a built-in camera. It's [camera ? "" : "in"]active."
+/obj/item/clothing/head/helmet/space/examine(var/mob/user)
+	if(..(user, 1) && camera_networks && camera_networks.len)
+		user << "This helmet has a built-in camera. It's [camera && camera.status ? "" : "in"]active."
 
 /obj/item/clothing/suit/space
 	name = "Space suit"
