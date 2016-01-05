@@ -66,11 +66,12 @@
 			src.MouseDrop_T(W:affecting, user)      //act like they were dragged onto the closet
 		user.drop_item()
 		if (W) W.forceMove(src.loc)
-	else if(istype(W, /obj/item/weapon/card/id))
+	else if(W.GetID())
+		var/obj/item/weapon/card/id/I = W.GetID()
+
 		if(src.broken)
 			user << "<span class='warning'>It appears to be broken.</span>"
 			return
-		var/obj/item/weapon/card/id/I = W
 		if(!I || !I.registered_name)	return
 		if(src.allowed(user) || !src.registered_name || (istype(I) && (src.registered_name == I.registered_name)))
 			//they can open all lockers, or nobody owns this, or they own this locker

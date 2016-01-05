@@ -102,7 +102,7 @@ var/list/wood_icons = list("wood","wood-broken")
 	return
 
 /turf/simulated/floor/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	
+
 	var/temp_destroy = get_damage_temperature()
 	if(!burnt && prob(5))
 		burn_tile(exposed_temperature)
@@ -309,16 +309,16 @@ turf/simulated/floor/proc/update_icon()
 /turf/simulated/floor/proc/burn_tile(var/exposed_temperature)
 	if(istype(src,/turf/simulated/floor/engine)) return
 	if(istype(src,/turf/simulated/floor/plating/airless/asteroid)) return//Asteroid tiles don't burn
-	
+
 	var/damage_temp = get_damage_temperature()
-	
+
 	if(broken) return
 	if(burnt)
 		if(is_steel_floor() && exposed_temperature >= damage_temp) //allow upgrading from scorched tiles to damaged tiles
 			src.icon_state = "damaged[pick(1,2,3,4,5)]"
 			broken = 1
 		return
-	
+
 	if(is_steel_floor() && exposed_temperature >= T0C+300) //enough to char the floor, but not hot enough to actually burn holes in it
 		src.icon_state = "floorscorched[pick(1,2)]"
 		burnt = 1
@@ -480,23 +480,23 @@ turf/simulated/floor/proc/update_icon()
 				qdel(C)
 				set_lightfloor_state(0) //fixing it by bashing it with a light bulb, fun eh?
 				update_icon()
-				user << "\blue You replace the light bulb."
+				user << "\blue [translation(src, "replace_bulb")]"
 			else
-				user << "\blue The lightbulb seems fine, no need to replace it."
+				user << "\blue [translation(src, "bulb_fine")]"
 
 	if(istype(C, /obj/item/weapon/crowbar) && (!(is_plating())))
 		if(broken || burnt)
-			user << "\red You remove the broken plating."
+			user << "\red [translation(src, "remove_broken")]"
 		else
 			if(is_wood_floor())
-				user << "\red You forcefully pry off the planks, destroying them in the process."
+				user << "\red [translation(src, "pry_off")]"
 			else
 				var/obj/item/I = new floor_type(src)
 				if(is_light_floor())
 					var/obj/item/stack/tile/light/L = I
 					L.on = get_lightfloor_on()
 					L.state = get_lightfloor_state()
-				user << "\red You remove the [I.name]."
+				user << "\red [translation(src,"remove",1,I)]"
 
 		make_plating()
 		playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
@@ -508,7 +508,7 @@ turf/simulated/floor/proc/update_icon()
 			return
 		else
 			if(is_wood_floor())
-				user << "\red You unscrew the planks."
+				user << "\red [translation(src, "unscrew")]"
 				new floor_type(src)
 
 		make_plating()
@@ -520,9 +520,9 @@ turf/simulated/floor/proc/update_icon()
 		var/obj/item/stack/rods/R = C
 		if (is_plating())
 			if (R.get_amount() < 2)
-				user << "<span class='warning'>You need more rods.</span>"
+				user << "<span class='warning'>[translation(src, "more_rods")]</span>"
 				return
-			user << "\blue Reinforcing the floor..."
+			user << "\blue [translation(src, "reinforcing")]"
 			if(do_after(user, 30) && is_plating())
 				if (R.use(2))
 					ChangeTurf(/turf/simulated/floor/engine)
@@ -530,7 +530,7 @@ turf/simulated/floor/proc/update_icon()
 				return
 			else
 		else
-			user << "\red You must remove the plating first."
+			user << "\red [translation(src, "remove_first")]"
 		return
 
 	if(istype(C, /obj/item/stack/tile))
@@ -563,7 +563,7 @@ turf/simulated/floor/proc/update_icon()
 				levelupdate()
 				playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			else
-				user << "\blue This section is too damaged to support a tile. Use a welder to fix the damage."
+				user << "\blue [translation(src, "too_damaged")]"
 
 
 	if(istype(C, /obj/item/stack/cable_coil))
@@ -571,29 +571,29 @@ turf/simulated/floor/proc/update_icon()
 			var/obj/item/stack/cable_coil/coil = C
 			coil.turf_place(src, user)
 		else
-			user << "\red You must remove the plating first."
+			user << "\red [translation(src, "remove_first")]"
 
 	if(istype(C, /obj/item/weapon/shovel))
 		if(is_grass_floor())
 			new /obj/item/weapon/ore/glass(src)
 			new /obj/item/weapon/ore/glass(src) //Make some sand if you shovel grass
-			user << "\blue You shovel the grass."
+			user << "\blue [translation(src, "shovel_grass")]"
 			make_plating()
 		else
-			user << "\red You cannot shovel this."
+			user << "\red [translation(src, "cannot_shovel")]"
 
 	if(istype(C, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/welder = C
 		if(welder.isOn() && (is_plating()))
 			if(broken || burnt)
 				if(welder.remove_fuel(0,user))
-					user << "\red You fix some dents on the broken plating."
+					user << "\red [translation(src, "fix_dents")]"
 					playsound(src, 'sound/items/Welder.ogg', 80, 1)
 					icon_state = "plating"
 					burnt = 0
 					broken = 0
 				else
-					user << "\blue You need more welding fuel to complete this task."
+					user << "\blue [translation(src, "more_fuel")]"
 
 #undef LIGHTFLOOR_ON_BIT
 

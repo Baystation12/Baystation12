@@ -44,18 +44,24 @@
 	set name = "github"
 	set desc = "GitHub."
 	set hidden = 1
-	if(alert("This will open the GitHub page in your browser. Are you sure?",,"Yes","No")=="No")
-		return
-	src << link("https://github.com/AndyAdjutor/SovietBay")
+	if(config.githuburl)
+		if(alert("This will open the GitHub page in your browser. Are you sure?",,"Yes","No")=="No")
+			return
+		src << link(config.githuburl)
+	else
+		src << "\red The GitHub URL is not set in the server configuration."
 	return
 
 /client/verb/bugreport()
 	set name = "Bug Report"
 	set desc = "GitHub."
 	set hidden = 1
-	if(alert("This will open the GitHub page in your browser. Are you sure?",,"Yes","No")=="No")
-		return
-	src << link("https://github.com/AndyAdjutor/SovietBay/issues/new")
+	if(config.githuburl)
+		if(alert("This will open the GitHub bugtracker page in your browser. Are you sure?",,"Yes","No")=="No")
+			return
+		src << link("[config.githuburl]/issues/new")
+	else
+		src << "\red The GitHub bugtracker URL is not set in the server configuration."
 	return
 
 /client/verb/hotkeys_help()

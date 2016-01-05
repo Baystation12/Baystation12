@@ -47,6 +47,7 @@ datum/preferences
 	var/toggles = TOGGLES_DEFAULT
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
+	var/interface_lang = "main"
 
 	//character preferences
 	var/real_name						//our character's name
@@ -274,6 +275,7 @@ datum/preferences
 	dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "All Speech" : "Nearest Creatures"]</b></a><br>"
 	dat += "<b>Ghost sight:</b> <a href='?_src_=prefs;preference=ghost_sight'><b>[(toggles & CHAT_GHOSTSIGHT) ? "All Emotes" : "Nearest Creatures"]</b></a><br>"
 	dat += "<b>Ghost radio:</b> <a href='?_src_=prefs;preference=ghost_radio'><b>[(toggles & CHAT_GHOSTRADIO) ? "All Chatter" : "Nearest Speakers"]</b></a><br>"
+	dat += "<b>Language:</b> <a href='?_src_=prefs;preference=interface_lang'><b>[interface_lang]</b></a><br>"
 
 	if(config.allow_Metadata)
 		dat += "<b>OOC Notes:</b> <a href='?_src_=prefs;preference=metadata;task=input'> Edit </a><br>"
@@ -1589,6 +1591,11 @@ datum/preferences
 
 				if("ghost_radio")
 					toggles ^= CHAT_GHOSTRADIO
+
+				if("interface_lang")
+					interface_lang = input(usr, "Select a language form list") in interface_languages
+					if(!interface_lang)
+						interface_lang = "main"
 
 				if("save")
 					save_preferences()

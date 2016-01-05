@@ -198,18 +198,32 @@ var/world_topic_spam_protect_time = world.timeofday
 
 			return "Bad Key"
 
-		var/search = input["info"]
-		var/ckey = ckey(search)
+		var/list/search = params2list(input["info"])
+		var/list/ckeysearch = list()
+		for(var/text in search)
+			ckeysearch += ckey(text)
 
 		var/list/match = list()
 
 		for(var/mob/M in mob_list)
-			if(findtext(M.name, search))
-				match += M
-			else if(M.ckey == ckey)
-				match += M
-			else if(M.mind && findtext(M.mind.assigned_role, search))
-				match += M
+			var/strings = list(M.name, M.ckey)
+			if(M.mind)
+				strings += M.mind.assigned_role
+				strings += M.mind.special_role
+			for(var/text in strings)
+				if(ckey(text) in ckeysearch)
+					match[M] += 10 // an exact match is far better than a partial one
+				else
+					for(var/searchstr in search)
+						if(findtext(text, searchstr))
+							match[M] += 1
+
+		var/maxstrength = 0
+		for(var/mob/M in match)
+			maxstrength = max(match[M], maxstrength)
+		for(var/mob/M in match)
+			if(match[M] < maxstrength)
+				match -= M
 
 		if(!match.len)
 			return "No matches"
@@ -440,7 +454,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (config && config.server_name)
 		s += "<b>[config.server_name]</b> &#8212; "
 
-	s += "<b>[station_name()]</b>(<a href=\"http://sovietstation.ru\"> Join Soviet Community!</a>)"
+	s += "<b>[station_name()]</b>(<a href=\"[config.forumurl]\"> Join Soviet Community!</a>)"
 
 	var/list/features = list()
 

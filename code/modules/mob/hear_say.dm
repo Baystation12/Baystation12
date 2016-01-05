@@ -50,11 +50,14 @@
 		message = "<i>[message]</i>"
 
 	var/track = null
+	var/speaker_info = null
 	if(istype(src, /mob/dead/observer))
 		if(italics && client.prefs.toggles & CHAT_GHOSTRADIO)
 			return
 		if(speaker_name != speaker.real_name && speaker.real_name)
 			speaker_name = "[speaker.real_name] ([speaker_name])"
+		if(ismob(speaker))
+			speaker_info = "(<a href='?src=\ref[src];speakerinfo=\ref[speaker]'>?</a>)"
 		track = "(<a href='byond://?src=\ref[src];track=\ref[speaker]'>follow</a>) "
 		if(client.prefs.toggles & CHAT_GHOSTEARS && speaker in view(src))
 			message = "<b>[message]</b>"
@@ -69,7 +72,7 @@
 		if(language)
 			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>")
 		else
-			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
+			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [speaker_info][track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
 		if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
 			var/turf/source = speaker? get_turf(speaker) : get_turf(src)
 			src.playsound_local(source, speech_sound, sound_vol, 1)

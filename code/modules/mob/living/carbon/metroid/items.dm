@@ -11,6 +11,7 @@
 	origin_tech = "biotech=4"
 	var/Uses = 1 // uses before it goes inert
 	var/enhanced = 0 //has it been enhanced before?
+	flags = OPENCONTAINER
 
 	attackby(obj/item/O as obj, mob/user as mob)
 		if(istype(O, /obj/item/weapon/slimesteroid2))

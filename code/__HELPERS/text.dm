@@ -24,10 +24,6 @@
 
 //Used for preprocessing entered text
 /proc/sanitize(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1, var/mode = SANITIZE_CHAT)
-	#ifdef DEBUG_CYRILLIC
-	world << "\magenta DEBUG: \red <b>sanitize() entered, text:</b> <i>[input]</i>"
-	world << "\magenta DEBUG: \red <b>ja_mode:</b> [mode]"
-	#endif
 	if(!input)
 		return
 
@@ -53,17 +49,6 @@
 	if(trim)
 		//Maybe, we need trim text twice? Here and before copytext?
 		input = trim(input)
-
-/*	switch(mode)
-		if(CHAT)
-			input = replacetext(input, JA_TEMP, JA_CHAT)
-		if(POPUP)
-			input = replacetext(input, JA_TEMP, JA_POPUP)
-		//или оставляем как есть, для дальнейшей обработки отдельно
-*/
-	#ifdef DEBUG_CYRILLIC
-	world << "\magenta DEBUG: \blue <b>sanitize() finished, text:</b> <i>[input]</i>"
-	#endif
 
 	return input
 

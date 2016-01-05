@@ -69,7 +69,7 @@
 
 /turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
-		usr << "\red Movement is admin-disabled." //This is to identify lag problems
+		usr << "\red [translation(src,"movement_disabled")]" //This is to identify lag problems
 		return
 	if (!mover || !isturf(mover.loc))
 		return 1
@@ -112,7 +112,7 @@
 
 /turf/Entered(atom/atom as mob|obj)
 	if(movement_disabled)
-		usr << "\red Movement is admin-disabled." //This is to identify lag problems
+		usr << "\red [translation(src,"movement_disabled")]" //This is to identify lag problems
 		return
 	..()
 //vvvvv Infared beam stuff vvvvv
@@ -396,3 +396,17 @@
 		if(A.density && !(A.flags & ON_BORDER))
 			return 1
 	return 0
+
+//expects an atom containing the reagents used to clean the turf
+/turf/proc/clean(atom/source, mob/user)
+	if(source.reagents.has_reagent("water", 1) || source.reagents.has_reagent("cleaner", 1))
+		clean_blood()
+		if(istype(src, /turf/simulated))
+			var/turf/simulated/T = src
+			T.dirt = 0
+		for(var/obj/effect/O in src)
+			if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
+				qdel(O)
+	else
+		user << "<span class='warning'>[translation(src,"clean",1,source)]</span>"
+	source.reagents.trans_to_turf(src, 1, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.

@@ -261,7 +261,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 
 	if(href_list["sendAnnouncement"])
 		if(!announcementConsole)	return
-		announcement.Announce(message, msg_sanitized = 1)
+		announcement.Announce(message, new_sound = 'sound/misc/announce.ogg', msg_sanitized = 1)
 		reset_announce()
 		screen = 0
 

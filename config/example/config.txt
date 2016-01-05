@@ -214,7 +214,7 @@ FORUMURL http://sovietstation.ru
 WIKIURL http://wiki.sovietstation.ru
 
 ## GitHub address
-GITHUBURL https://github.com/Reynevanie/SovietBay
+GITHUBURL https://github.com/AndyAdjutor/SovietBay
 
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
 BANAPPEALS http://sovietstation.ru/index.php?showforum=7
@@ -239,7 +239,7 @@ ALLOW_HOLIDAYS
 TICKLAG 0.5
 
 ## Defines if Tick Compensation is used.  It results in a minor slowdown of movement of all mobs, but attempts to result in a level movement speed across all ticks.  Recommended if tickrate is lowered.
-TICKCOMP 0
+# TICKCOMP 0
 
 ## Whether the server will talk to other processes through socket_talk
 SOCKET_TALK 0

@@ -68,6 +68,7 @@
 		..()
 
 		if(statpanel("Lobby") && ticker)
+			stat("Currently Playing:", "[ticker.lobby_music[ticker.login_music]]")
 			if(ticker.hide_mode)
 				stat("Game Mode:", "Secret")
 			else

@@ -84,23 +84,33 @@
 // self_message (optional) is what the src mob sees  e.g. "You do something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
 
-/mob/visible_message(var/message, var/self_message, var/blind_message)
+/mob/visible_message(var/message, var/self_message, var/blind_message, var/translation = null)
+	var/temp_m = null
+	var/temp_sm = null
+	var/temp_bm = null
 	for(var/mob/M in viewers(src))
-		if(self_message && M==src)
-			M.show_message(self_message, 1, blind_message, 2)
+		temp_bm = translation && blind_message ? translation(translation["object"],"[translation["name"]]_bm",translation["v"],translation["args"],M.client.prefs.interface_lang) : blind_message
+		if(self_message && M == src)
+			temp_sm = translation && self_message ? translation(translation["object"],"[translation["name"]]_sm",translation["v"],translation["args"],M.client.prefs.interface_lang) : self_message
+			M.show_message("[temp_sm ? temp_sm : self_message]", 1, "[temp_bm ? temp_bm : blind_message]", 2)
 		else if(M.see_invisible < invisibility)  // Cannot view the invisible, but you can hear it.
 			if(blind_message)
-				M.show_message(blind_message, 2)
+				M.show_message("[temp_bm ? temp_bm : blind_message]", 2)
 		else
-			M.show_message(message, 1, blind_message, 2)
+			temp_m = translation && message ? translation(translation["object"],"[translation["name"]]_m",translation["v"],translation["args"],M.client.prefs.interface_lang) : message
+			M.show_message("[temp_m ? temp_m : message]", 1, "[temp_bm ? temp_bm : blind_message]", 2)
 
 // Show a message to all mobs in sight of this atom
 // Use for objects performing visible actions
 // message is output to anyone who can see, e.g. "The [src] does something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
-/atom/proc/visible_message(var/message, var/blind_message)
+/atom/proc/visible_message(var/message, var/blind_message, var/translation = null)
+	var/temp_m = null
+	var/temp_bm = null
 	for(var/mob/M in viewers(src))
-		M.show_message( message, 1, blind_message, 2)
+		temp_m = translation && message ? translation(translation["object"],"[translation["name"]]_m",translation["v"],translation["args"],M.client.prefs.interface_lang) : message
+		temp_bm = translation && blind_message ? translation(translation["object"],"[translation["name"]]_bm",translation["v"],translation["args"],M.client.prefs.interface_lang) : blind_message
+		M.show_message("[temp_m ? temp_m : message]", 1, "[temp_bm ? temp_bm : blind_message]", 2)
 
 // Returns an amount of power drawn from the object (-1 if it's not viable).
 // If drain_check is set it will not actually drain power, just return a value.
@@ -659,17 +669,17 @@
 			if(!TurfAdjacent(listed_turf))
 				listed_turf = null
 			else
-				statpanel(listed_turf.name, null, listed_turf)
-				for(var/atom/A in listed_turf)
-					if(!A.mouse_opacity)
-						continue
-					if(A.invisibility > see_invisible)
-						continue
-					if(is_type_in_list(A, shouldnt_see))
-						continue
-					statpanel(listed_turf.name, null, A)
+				if(statpanel("Turf"))
+					stat("\icon[listed_turf]", listed_turf.name)
+					for(var/atom/A in listed_turf)
+						if(!A.mouse_opacity)
+							continue
+						if(A.invisibility > see_invisible)
+							continue
+						if(is_type_in_list(A, shouldnt_see))
+							continue
+						stat(A)
 
-	sleep(4) //Prevent updating the stat panel for the next .4 seconds, prevents clientside latency from updates
 
 // facing verbs
 /mob/proc/canface()

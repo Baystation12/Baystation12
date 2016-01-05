@@ -254,3 +254,10 @@
 	icon_state = "orange_bandana"
 	item_state = "orange_bandana"
 	body_parts_covered = 0
+
+/obj/item/clothing/head/cat
+	name = "cat suit head"
+	desc = "Who said 'meow'? 'Made by 'Lego Ink.'"
+	icon_state = "cat_mask"
+	item_state = "cat_mask"
+	body_parts_covered = HEAD|FACE|EYES

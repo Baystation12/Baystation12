@@ -90,10 +90,65 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	..()
 
 /mob/dead/observer/Topic(href, href_list)
-	if (href_list["track"])
+	if(href_list["track"])
 		var/mob/target = locate(href_list["track"]) in mob_list
 		if(target)
 			ManualFollow(target)
+	else if(href_list["antag_hud"])
+		toggle_antagHUD()
+	else if(href_list["speakerinfo"])
+		var/mob/M = locate(href_list["speakerinfo"])
+		if(!ismob(M))
+			usr << "This can only be used on instances of type /mob"
+			return
+
+		var/location_description = ""
+		var/special_role_description = ""
+		var/health_description = ""
+		var/gender_description = ""
+		var/turf/T = get_turf(M)
+
+		//Location
+		if(isturf(T))
+			if(isarea(T.loc))
+				location_description = "([M.loc == T ? "at coordinates " : "in [M.loc] at coordinates "] [T.x], [T.y], [T.z] in area <b>[T.loc]</b>)"
+			else
+				location_description = "([M.loc == T ? "at coordinates " : "in [M.loc] at coordinates "] [T.x], [T.y], [T.z])"
+
+		//Job + antagonist
+		if(M.mind)
+			if(client.holder || (config.antag_hud_allowed && (!config.antag_hud_restricted || (config.antag_hud_restricted && has_enabled_antagHUD == 1))))
+				special_role_description = "Role: <b>[M.mind.assigned_role]</b>; Antagonist: <font color='red'><b>[M.mind.special_role]</b></font>; Has been rev: [(M.mind.has_been_rev)?"Yes":"No"]"
+			else
+				special_role_description = "Role: <b>[M.mind.assigned_role]</b>; Antagonist: <font color='red'><b>enable <a href='?src=\ref[usr];antag_hud=1'>antagHUD</a> to watch special roles.</b></font>"
+		else
+			special_role_description = "Role: <i>Mind datum missing</i> Antagonist: <i>Mind datum missing</i>; Has been rev: <i>Mind datum missing</i>;"
+
+		//Health
+		if(isliving(M))
+			var/mob/living/L = M
+			var/status
+			switch (M.stat)
+				if (0) status = "Alive"
+				if (1) status = "<font color='orange'><b>Unconscious</b></font>"
+				if (2) status = "<font color='red'><b>Dead</b></font>"
+			health_description = "Status = [status]"
+			health_description += "<BR>Oxy: [L.getOxyLoss()] - Tox: [L.getToxLoss()] - Fire: [L.getFireLoss()] - Brute: [L.getBruteLoss()] - Clone: [L.getCloneLoss()] - Brain: [L.getBrainLoss()]"
+		else
+			health_description = "This mob type has no health to speak of."
+
+		//Gener
+		switch(M.gender)
+			if(MALE,FEMALE)	gender_description = "[M.gender]"
+			else			gender_description = "<font color='red'><b>[M.gender]</b></font>"
+
+		src << "<b>Info about [M.name]:</b> "
+		src << "Mob type = [M.type]; Gender = [gender_description] Damage = [health_description]"
+		src << "Name = <b>[M.name]</b>; Real_name = [M.real_name]; Mind_name = [M.mind?"[M.mind.name]":""]; Key = <b>[M.key]</b>;"
+		src << "Location = [location_description];"
+		src << "[special_role_description]"
+		if(client.holder)
+			src << "(<a href='?src=\ref[usr];priv_msg=\ref[M]'>PM</a>) (<A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[M]'>VV</A>) (<A HREF='?src=\ref[src];subtlemessage=\ref[M]'>SM</A>) (<A HREF='?src=\ref[src];adminplayerobservejump=\ref[M]'>JMP</A>) (<A HREF='?src=\ref[src];secretsadmin=check_antagonist'>CA</A>)"
 
 
 
@@ -151,6 +206,8 @@ Works together with spawning an observer, noted above.
 		ghost.can_reenter_corpse = can_reenter_corpse
 		ghost.timeofdeath = src.stat == DEAD ? src.timeofdeath : world.time
 		ghost.key = key
+		if(ghost.client)
+			ghost.client.time_died_as_mouse = ghost.timeofdeath
 		if(ghost.client && !ghost.client.holder && !config.antag_hud_allowed)		// For new ghosts we remove the verb from even showing up if it's not allowed.
 			ghost.verbs -= /mob/dead/observer/verb/toggle_antagHUD	// Poor guys, don't know what they are missing!
 		return ghost

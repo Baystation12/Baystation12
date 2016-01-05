@@ -524,3 +524,10 @@
 	icon_state = "doakes_polo"
 	item_state = "doakes_polo_s"
 	worn_state = "doakes_polo"
+
+/obj/item/clothing/under/franklin
+	name = "blue pullover"
+	desc = "For real bald niggas.Made by 'Lego Ink.'"
+	icon_state = "franklin_pullover"
+	item_state = "franklin_pullover_s"
+	worn_state = "franklin_pullover"

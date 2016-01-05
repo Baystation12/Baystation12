@@ -56,6 +56,7 @@
 	S["toggles"]			>> toggles
 	S["UI_style_color"]		>> UI_style_color
 	S["UI_style_alpha"]		>> UI_style_alpha
+	S["interface_lang"]		>> interface_lang
 
 	//Sanitize
 	ooccolor		= sanitize_hexcolor(ooccolor, initial(ooccolor))
@@ -66,6 +67,7 @@
 	toggles			= sanitize_integer(toggles, 0, 65535, initial(toggles))
 	UI_style_color	= sanitize_hexcolor(UI_style_color, initial(UI_style_color))
 	UI_style_alpha	= sanitize_integer(UI_style_alpha, 0, 255, initial(UI_style_alpha))
+	interface_lang	= sanitize_text(interface_lang, initial(interface_lang))
 
 	return 1
 
@@ -84,6 +86,7 @@
 	S["be_special"]			<< be_special
 	S["default_slot"]		<< default_slot
 	S["toggles"]			<< toggles
+	S["interface_lang"]		<< interface_lang
 
 	return 1
 
