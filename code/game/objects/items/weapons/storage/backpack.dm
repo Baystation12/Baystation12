@@ -22,8 +22,8 @@
 		)
 	w_class = 4
 	slot_flags = SLOT_BACK
-	max_w_class = 3
-	max_storage_space = 28
+	max_w_class = 4
+	max_storage_space = 16
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (src.use_sound)

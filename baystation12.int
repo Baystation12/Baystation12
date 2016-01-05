@@ -1,11 +1,6 @@
 // BEGIN_INTERNALS
 /*
-LAST_COMPILE_TIME: 1447913478
-DIR: code code\game code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\storage code\modules code\modules\mob 
-AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
-LAST_COMPILE_VERSION: 507.1286
-WINDOW: code\game\objects\items\weapons\storage\storage.dm;code\game\objects\items\weapons\tape.dm;code\modules\mob\inventory.dm
-FILE: code\game\objects\items\weapons\storage\storage.dm
+AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
