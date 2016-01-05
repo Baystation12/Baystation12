@@ -496,7 +496,7 @@ turf/simulated/floor/proc/update_icon()
 					var/obj/item/stack/tile/light/L = I
 					L.on = get_lightfloor_on()
 					L.state = get_lightfloor_state()
-				user << "\red [translation(src,"remove",1,I)]"
+				user << "\red [translation(src,"remove",I)]"
 
 		make_plating()
 		playsound(src, 'sound/items/Crowbar.ogg', 80, 1)

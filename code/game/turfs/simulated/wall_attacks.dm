@@ -102,13 +102,13 @@
 		if(istype(W, /obj/item/weapon/weldingtool) )
 			var/obj/item/weapon/weldingtool/WT = W
 			if( WT.remove_fuel(0,user) )
-				user << "<span class='notice'>[translation(src, "burn_fungi",1,WT)]</span>"
+				user << "<span class='notice'>[translation(src, "burn_fungi",WT)]</span>"
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
 				for(var/obj/effect/overlay/wallrot/WR in src)
 					qdel(WR)
 				return
 		else if(!is_sharp(W) && W.force >= 10 || W.force >= 20)
-			user << "<span class='notice'>[translation(src, "crumbles_force",1,W)]</span>"
+			user << "<span class='notice'>[translation(src, "crumbles_force",W)]</span>"
 			src.dismantle_wall(1)
 			return
 
@@ -128,7 +128,7 @@
 			var/obj/item/weapon/melee/energy/blade/EB = W
 
 			EB.spark_system.start()
-			user << "<span class='notice'>[translation(src, "crumbles_force",1,EB)]</span>"
+			user << "<span class='notice'>[translation(src, "crumbles_force",EB)]</span>"
 			playsound(src, "sparks", 50, 1)
 			playsound(src, 'sound/weapons/blade1.ogg', 50, 1)
 
@@ -184,7 +184,7 @@
 
 		if(dismantle_verb)
 
-			user << "<span class='notice'>[translation(src, "dismantle",1,dismantle_verb)]</span>"
+			user << "<span class='notice'>[translation(src, "dismantle",dismantle_verb)]</span>"
 			if(dismantle_sound)
 				playsound(src, dismantle_sound, 100, 1)
 
@@ -195,7 +195,7 @@
 				return
 
 			user << "<span class='notice'>[translation(src, "remove_plating")]</span>"
-			user.visible_message("<span class='warning'>The wall was torn open by [user]!</span>", translation = list("object"=src,"name"="dismantle","v"=1,"args"=user))
+			user.visible_message("<span class='warning'>The wall was torn open by [user]!</span>", translation = list("object"=src,"name"="dismantle","args"=user))
 			dismantle_wall()
 			return
 

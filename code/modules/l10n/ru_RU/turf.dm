@@ -20,8 +20,7 @@
 			var/bulb_fine = "Лампочка цела, нет необходимости её заменять."
 			var/remove_broken = "You remove the broken plating."
 			var/pry_off = "You forcefully pry off the planks, destroying them in the process."
-			proc/remove(var/args = null)
-				return "You remove the [args ? translation(args) : "floor"]."
+			proc/remove(var/args = null)	return "You remove the [args ? translation(args) : "floor"]."
 			var/unscrew = "You unscrew the planks."
 			var/more_rods = "You need more rods."
 			var/reinforcing = "Reinforcing the floor..."
@@ -112,7 +111,7 @@
 			var/moderately = "It looks moderately damaged."
 			var/heavily = "It looks heavily damaged."
 			proc/fungus()	return "There is fungus growing on [GetVar()]."
-			proc/combusts()	return "\The [GetVar()] spontaneously combusts!."
+			proc/combusts_m()	return "\The [GetVar()] spontaneously combusts!."
 			var/thermite = "The thermite starts melting through the wall."
 			var/fail_smash = "You smash against the wall!"
 			var/success_smash = "You smash through the wall!"

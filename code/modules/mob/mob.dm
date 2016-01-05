@@ -89,15 +89,15 @@
 	var/temp_sm = null
 	var/temp_bm = null
 	for(var/mob/M in viewers(src))
-		temp_bm = translation && blind_message ? translation(translation["object"],"[translation["name"]]_bm",translation["v"],translation["args"],M.client.prefs.interface_lang) : blind_message
+		temp_bm = translation && blind_message ? translation(translation["object"],"[translation["name"]]_bm",translation["args"],M.client.prefs.interface_lang) : blind_message
 		if(self_message && M == src)
-			temp_sm = translation && self_message ? translation(translation["object"],"[translation["name"]]_sm",translation["v"],translation["args"],M.client.prefs.interface_lang) : self_message
+			temp_sm = translation && self_message ? translation(translation["object"],"[translation["name"]]_sm",translation["args"],M.client.prefs.interface_lang) : self_message
 			M.show_message("[temp_sm ? temp_sm : self_message]", 1, "[temp_bm ? temp_bm : blind_message]", 2)
 		else if(M.see_invisible < invisibility)  // Cannot view the invisible, but you can hear it.
 			if(blind_message)
 				M.show_message("[temp_bm ? temp_bm : blind_message]", 2)
 		else
-			temp_m = translation && message ? translation(translation["object"],"[translation["name"]]_m",translation["v"],translation["args"],M.client.prefs.interface_lang) : message
+			temp_m = translation && message ? translation(translation["object"],"[translation["name"]]_m",translation["args"],M.client.prefs.interface_lang) : message
 			M.show_message("[temp_m ? temp_m : message]", 1, "[temp_bm ? temp_bm : blind_message]", 2)
 
 // Show a message to all mobs in sight of this atom
@@ -108,8 +108,8 @@
 	var/temp_m = null
 	var/temp_bm = null
 	for(var/mob/M in viewers(src))
-		temp_m = translation && message ? translation(translation["object"],"[translation["name"]]_m",translation["v"],translation["args"],M.client.prefs.interface_lang) : message
-		temp_bm = translation && blind_message ? translation(translation["object"],"[translation["name"]]_bm",translation["v"],translation["args"],M.client.prefs.interface_lang) : blind_message
+		temp_m = translation && message ? translation(translation["object"],"[translation["name"]]_m",translation["args"],M.client.prefs.interface_lang) : message
+		temp_bm = translation && blind_message ? translation(translation["object"],"[translation["name"]]_bm",translation["args"],M.client.prefs.interface_lang) : blind_message
 		M.show_message("[temp_m ? temp_m : message]", 1, "[temp_bm ? temp_bm : blind_message]", 2)
 
 // Returns an amount of power drawn from the object (-1 if it's not viable).
