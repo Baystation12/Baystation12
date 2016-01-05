@@ -178,7 +178,8 @@
 		return 1
 
 
-/datum/job/mime
+
+/datum/job/artist
 	title = "Artist"
 	flag = MIME
 	department_flag = CIVILIAN
