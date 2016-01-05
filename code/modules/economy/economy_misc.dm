@@ -52,6 +52,7 @@
 												/datum/species/skrell	= 12,
 												/datum/species/tajaran	= 7,
 												/datum/species/unathi	= 7,
+												/datum/species/diona	= 5,
 												/datum/species/vox		= 1
 											)
 
