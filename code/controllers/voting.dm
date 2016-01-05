@@ -39,12 +39,12 @@ datum/controller/vote
 				result()
 				for(var/client/C in voting)
 					if(C)
-						C << browse(null,"window=vote;can_close=0")
+						C << browse(null,"window=vote")
 				reset()
 			else
 				for(var/client/C in voting)
 					if(C)
-						C << browse(vote.interface(C),"window=vote;can_close=0")
+						C << browse(vote.interface(C),"window=vote")
 
 				voting.Cut()
 
@@ -392,4 +392,4 @@ datum/controller/vote
 	set name = "Vote"
 
 	if(vote)
-		src << browse(vote.interface(client),"window=vote;can_close=0")
+		src << browse(vote.interface(client),"window=vote")
