@@ -44,6 +44,7 @@
 			return
 	if(!path.len)
 		spawn(0)
+//		spawn(0)
 			path = AStar(loc, target.loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 30, id = botcard)
 			if(!path)
 				custom_emote(2, "[src] can't reach the target and is giving up.")
