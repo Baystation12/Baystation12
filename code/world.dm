@@ -41,6 +41,8 @@ var/global/datum/global_init/init = new ()
 
 #define RECOMMENDED_VERSION 508
 /world/New()
+	crash_with("Aaaay! Crashy")
+	del(world)
 	//logs
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
 	href_logfile = file("data/logs/[date_string] hrefs.htm")
@@ -73,7 +75,7 @@ var/global/datum/global_init/init = new ()
 
 	sleep_offline = 1
 
-#elseif 
+#elseif
 
 	log_unit_test("Unit Tests Enabled.  This will destroy the world when testing is complete.")
 	log_unit_test("If you did not intend to enable this please check code/__defines/unit_testing.dm")
@@ -118,7 +120,7 @@ var/global/datum/global_init/init = new ()
 #if UNIT_TEST
 		initialize_unit_tests()
 #endif
-		
+
 
 
 	spawn(3000)		//so we aren't adding to the round-start lag
