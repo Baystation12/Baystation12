@@ -75,13 +75,18 @@
 			ignorelist -= gib
 
 	if(!target) // Find a target
-		for(var/obj/effect/decal/cleanable/D in view(7, src))
+		var/maximum_range = 7
+		var/i
+		for(i=0, i <= maximum_range, i++)
+			for(var/obj/effect/decal/cleanable/D in view(i, src))
 			if(D in ignorelist)
 				continue
 			for(var/T in target_types)
 				if(istype(D, T))
 					target = D
 					patrol_path = list()
+			if (target)
+				break
 
 		if(!target) // No targets in range
 			if(!should_patrol)
