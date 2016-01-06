@@ -89,19 +89,22 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 			dat += "'#66CCFF'>"
 		else
 			dat += "'#252536'>"
-		dat += "<A href='?src=\ref[src];select=[i];person=\ref[user]'"
+		if(!isobserver(user))
+			dat += "<A href='?src=\ref[src];select=[i]' style='display:block;text-decoration:none;'>"
 		if(board["[i]"])
 			var/obj/item/I = board["[i]"]
 			user << browse_rsc(board_icons["[I.icon] [I.icon_state]"],"[I.icon_state].png")
-			dat += "><image src='[I.icon_state].png' style='border-style: none'>"
+			dat += "<image src='[I.icon_state].png' style='border-style: none'>"
 		else
-			dat += "style='display:block;text-decoration:none;'>&nbsp;"
+			dat += "&nbsp;"
 
-		dat += "</A></td>"
+		if(!isobserver(user))
+			dat += "</A>"
+		dat += "</td>"
 
 	dat += "</table><br>"
 
-	if(selected >= 0)
+	if(selected >= 0 && !isobserver(user))
 		dat += "<br><A href='?src=\ref[src];remove=0'>Remove Selected Piece</A>"
 	user << browse(dat,"window=boardgame;size=500x500")
 	onclose(usr, "boardgame")
