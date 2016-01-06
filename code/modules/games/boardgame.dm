@@ -30,28 +30,49 @@
 		src.examine(M)
 
 obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
+	if(!addPiece(I,user))
+		..()
+
+/obj/item/weapon/board/proc/addPiece(obj/item/I as obj, mob/user as mob, var/tile = 0)
 	if(I.w_class != 1) //only small stuff
 		user.show_message("<span class='warning'>\The [I] is too big to be used as a board piece.</span>")
-		return
+		return 0
 	if(num == 64)
 		user.show_message("<span class='warning'>\The [src] is already full!</span>")
-		return
+		return 0
+	if(tile > 0 && board["[tile]"])
+		user.show_message("<span class='warning'>That space is already filled!</span>")
+		return 0
+	if(!user.Adjacent(src))
+		return 0
+
 	user.drop_from_inventory(I)
 	I.forceMove(src)
 	num++
 
+
 	if(!board_icons["[I.icon] [I.icon_state]"])
 		board_icons["[I.icon] [I.icon_state]"] = new /icon(I.icon,I.icon_state)
 
-	var i;
-	for(i=0;i<64;i++)
-		if(!board["[i]"])
-			board["[i]"] = I
-			break
+	if(tile == 0)
+		var i;
+		for(i=0;i<64;i++)
+			if(!board["[i]"])
+				board["[i]"] = I
+				break
+	else
+		board["[tile]"] = I
 
 	src.updateDialog()
 
+	return 1
+
+
 /obj/item/weapon/board/interact(mob/user as mob)
+	if(user.incapacitated(INCAPACITATION_DISABLED) || (!isAI(user) && !user.Adjacent(src))) //can't see if you arent conscious. If you are not an AI you can't see it unless you are next to it, either.
+		user << browse(null, "window=boardgame")
+		user.unset_machine()
+		return
 
 	var/dat = "<HTML>"
 	dat += "<table border='0'>"
@@ -68,7 +89,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 			dat += "'#66CCFF'>"
 		else
 			dat += "'#252536'>"
-		dat += "<A href='?src=\ref[src];select=[i]'"
+		dat += "<A href='?src=\ref[src];select=[i];person=\ref[user]'"
 		if(board["[i]"])
 			var/obj/item/I = board["[i]"]
 			user << browse_rsc(board_icons["[I.icon] [I.icon_state]"],"[I.icon_state].png")
@@ -86,42 +107,61 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 	onclose(usr, "boardgame")
 
 /obj/item/weapon/board/Topic(href, href_list)
-	if(href_list["select"])
-		var/s = href_list["select"]
-		var/obj/item/I = board["[s]"]
-		if(selected >= 0)
-			if(I) //cant put items on other items.
-				return
+	if(!usr.Adjacent(src))
+		usr.unset_machine()
+		usr << browse(null, "window=boardgame")
+		return
+
+	if(!usr.incapacitated()) //you can't move pieces if you can't move
+		if(href_list["select"])
+			var/s = href_list["select"]
+			var/obj/item/I = board["[s]"]
+			if(selected >= 0)
+				//check to see if clicked on tile is currently selected one
+				if(text2num(s) == selected)
+					selected = 0 //deselect it
+					return
+
+				if(I) //cant put items on other items.
+					return
 
 			//put item in new spot.
-			I = board["[selected]"]
+				I = board["[selected]"]
+				board["[selected]"] = null
+				board -= "[selected]"
+				board -= null
+				board["[s]"] = I
+				selected = -1
+			else
+				if(I)
+					selected = text2num(s)
+				else
+					var/mob/living/carbon/human/H = locate(href_list["person"])
+					if(!istype(H))
+						return
+					var/obj/item/O = H.get_active_hand()
+					if(!O)
+						return
+					addPiece(O,H,text2num(s))
+		if(href_list["remove"])
+			var/obj/item/I = board["[selected]"]
 			board["[selected]"] = null
 			board -= "[selected]"
 			board -= null
-			board["[s]"] = I
+			I.forceMove(src.loc)
+			num--
 			selected = -1
-		else
-			if(I)
-				selected = text2num(s)
-	if(href_list["remove"])
-		var/obj/item/I = board["[selected]"]
-		board["[selected]"] = null
-		board -= "[selected]"
-		board -= null
-		I.forceMove(src.loc)
-		num--
-		selected = -1
-		var j
-		for(j=0;j<64;j++)
-			if(board["[j]"])
-				var/obj/item/K = board["[j]"]
-				if(K.icon == I.icon && cmptext(K.icon_state,I.icon_state))
-					src.updateDialog()
-					return
-		//Didn't find it in use, remove it and allow GC to delete it.
-		board_icons["[I.icon] [I.icon_state]"] = null
-		board_icons -= "[I.icon] [I.icon_state]"
-		board_icons -= null
+			var j
+			for(j=0;j<64;j++)
+				if(board["[j]"])
+					var/obj/item/K = board["[j]"]
+					if(K.icon == I.icon && cmptext(K.icon_state,I.icon_state))
+						src.updateDialog()
+						return
+			//Didn't find it in use, remove it and allow GC to delete it.
+			board_icons["[I.icon] [I.icon_state]"] = null
+			board_icons -= "[I.icon] [I.icon_state]"
+			board_icons -= null
 	src.updateDialog()
 
 /obj/item/weapon/checker/
