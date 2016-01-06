@@ -40,8 +40,7 @@ script:
   - python tools/TagMatcher/tag-matcher.py ../..
   - python tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
-  - echo "#define UNIT_TEST 1" > code/_unit_testing.dm
   - cp config/example/* config/
-  - DreamMaker baystation12.dme
+  - scripts/dm.sh -DUNIT_TEST baystation12.dme
   - DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt
   - grep "All Unit Tests Passed" log.txt
