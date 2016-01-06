@@ -37,23 +37,22 @@
 		radio_controller.add_object(listener, beacon_freq, filter = RADIO_NAVBEACONS)
 
 /mob/living/bot/cleanbot/proc/handle_target()
-	..()
 	if(loc == target.loc)
 		if(!cleaning)
 			UnarmedAttack(target)
-			return
+			return 1
 	if(!path.len)
-		spawn(0)
 //		spawn(0)
 			path = AStar(loc, target.loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 30, id = botcard)
 			if(!path)
 				custom_emote(2, "[src] can't reach the target and is giving up.")
+			target = null
 				path = list()
 		return
 	if(path.len)
 		step_to(src, path[1])
 		path -= path[1]
-		return
+		return 1
 	return
 		
 /mob/living/bot/cleanbot/Life()
@@ -94,8 +93,11 @@
 		spawn(600)
 			ignorelist -= gib
 
-	if(!target) // Find a target
-		var/maximum_range = 7
+	if(target)
+		handle_target()
+	else
+		// Find a target
+		var/maximum_range = 5
 		var/i
 		search_loop:
 		for(i=0, i <= maximum_range, i++)
@@ -104,9 +106,15 @@
 				continue
 			for(var/T in target_types)
 				if(istype(D, T))
-					target = D
 					patrol_path = list()
+							target = D
+							var/success
+							success = handle_target()
+							if (success)
 							break search_loop
+							else
+								target = null
+								continue
 
 		if(!target) // No targets in range
 			if(!should_patrol)
@@ -143,8 +151,6 @@
 				var/moved = step_towards(src, patrol_path[1])
 				if(moved)
 					patrol_path -= patrol_path[1]
-	if(target)
-		handle_target()
 
 	
 
