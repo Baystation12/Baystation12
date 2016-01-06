@@ -127,7 +127,6 @@
 
 
 	if(!found_spot && !target) // No targets in range
-				return
 
 			if(!patrol_path || !patrol_path.len)
 				if(!signal_sent || signal_sent > world.time + 200) // Waited enough or didn't send yet
