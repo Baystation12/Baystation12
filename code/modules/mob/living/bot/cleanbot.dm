@@ -65,9 +65,7 @@
 
 	if(client)
 		return
-	if(cleaning)
-		return
-
+	
 	if(!screwloose && !oddbutton && prob(5))
 		custom_emote(2, "makes an excited beeping booping sound!")
 
@@ -100,7 +98,10 @@
 	if(pulledby) // Don't wiggle if someone pulls you
 		patrol_path = list()
 		return
-	var/found_spot
+	if(cleaning)
+		return
+
+		var/found_spot
 	var/i
 	search_loop:
 		for(i=0, i <= maximum_search_range, i++)
