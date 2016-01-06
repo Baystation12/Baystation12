@@ -1,6 +1,7 @@
 /datum/game_mode/bughunt
 	name = "Bughunt"
 	round_description = "A mercenary strike force is approaching the station to eradicate a xenomorph infestation!"
+	extended_round_description = "Mercenaries and xenomorphs spawn in this game mode."
 	config_tag = "bughunt"
 	required_players = 15
 	required_enemies = 1
