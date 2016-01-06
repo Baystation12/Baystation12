@@ -155,6 +155,8 @@
 		if(!D)
 			return
 		qdel(D)
+		if(D == target)
+			target = null
 	cleaning = 0
 	update_icons()
 
