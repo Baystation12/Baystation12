@@ -44,21 +44,19 @@
 			UnarmedAttack(target)
 			return 1
 	if(!path.len)
-		custom_emote(2, "path doesn't exist yet, generating")
 //		spawn(0)
-		path = AStar(loc, target.loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 30, id = botcard)
-		if(!path)
-			custom_emote(2, "[src] can't reach the target and is giving up.")
+			path = AStar(loc, target.loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 30, id = botcard)
+			if(!path)
+				custom_emote(2, "[src] can't reach the target and is giving up.")
 			target = null
-			path = list()
+				path = list()
 		return
 	if(path.len)
-		custom_emote(2, "[src] moving closer to target.")
 		step_to(src, path[1])
 		path -= path[1]
 		return 1
 	return
-
+		
 /mob/living/bot/cleanbot/Life()
 	..()
 
@@ -97,23 +95,20 @@
 		spawn(600)
 			ignorelist -= gib
 
-	// Find a target
+		// Find a target
 	
 	if(pulledby) // Don't wiggle if someone pulls you
 		patrol_path = list()
 		return
 	var/found_spot
-	var/i
-	search_loop:
+		var/i
+		search_loop:
 		for(i=0, i <= maximum_search_range, i++)
-			custom_emote(2, "is trying range [i].")
 			for(var/obj/effect/decal/cleanable/D in view(i, src))
-				custom_emote(2, "is checking [D] at [D.x] [D.y].")
-				if(D in ignorelist)
-					continue
-				for(var/T in target_types)
-					if(istype(D, T))
-						custom_emote(2, "has found [D] to clean at [D.x] [D.y].")
+			if(D in ignorelist)
+				continue
+			for(var/T in target_types)
+				if(istype(D, T))
 //TODO: starting point for optimizing later
 //						if (target)
 //							if (target == D)
@@ -122,66 +117,50 @@
 //								break search_loop
 //							else
 //								custom_emote(2, "abandoning target at [target.x] [target.y].")
-						patrol_path = list()
-						target = D
-						var/x = D.x
-						var/y = D.y
-						
+					patrol_path = list()
+							target = D
 						found_spot = handle_target()
-						if (found_spot)
-							custom_emote(2, "has found a path to [D] to clean at [x] [y].")
 							break search_loop
-						else
-							target = null
-							custom_emote(2, "has not found a path to [D] and will try another target.")
-							continue
+							else
+								target = null
+								continue
 
 
 	if(!found_spot && !target) // No targets in range
-		if(should_patrol)
-			custom_emote(2, "beeps excitedly.")
-		else
-			custom_emote(2, "beeps sadly.")
 
-		if(!patrol_path || !patrol_path.len)
-			custom_emote(2, "needs a patrol path.")
-			if(!signal_sent || signal_sent > world.time + 200) // Waited enough or didn't send yet
-				custom_emote(2, "is waiting for the nav beacon message.")
-				var/datum/radio_frequency/frequency = radio_controller.return_frequency(beacon_freq)
-				if(!frequency)
-					return
+			if(!patrol_path || !patrol_path.len)
+				if(!signal_sent || signal_sent > world.time + 200) // Waited enough or didn't send yet
+					var/datum/radio_frequency/frequency = radio_controller.return_frequency(beacon_freq)
+					if(!frequency)
+						return
 
-				closest_dist = 9999
-				next_dest = null
-				next_dest_loc = null
+					closest_dist = 9999
+					next_dest = null
+					next_dest_loc = null
 
-				var/datum/signal/signal = new()
-				signal.source = src
-				signal.transmission_method = 1
-				signal.data = list("findbeakon" = "patrol")
-				frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
-				signal_sent = world.time
-			else
-				if(next_dest)
-					next_dest_loc = listener.memorized[next_dest]
-					if(next_dest_loc)
-						patrol_path = AStar(loc, next_dest_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 120, id = botcard, exclude = null)
-						signal_sent = 0
+					var/datum/signal/signal = new()
+					signal.source = src
+					signal.transmission_method = 1
+					signal.data = list("findbeakon" = "patrol")
+					frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
+					signal_sent = world.time
 				else
-					custom_emote(2, "can't find the next patrol destination.")
+					if(next_dest)
+						next_dest_loc = listener.memorized[next_dest]
+						if(next_dest_loc)
+							patrol_path = AStar(loc, next_dest_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 120, id = botcard, exclude = null)
+							signal_sent = 0
+			else
+				if(pulledby) // Don't wiggle if someone pulls you
+					patrol_path = list()
+					return
+				if(patrol_path[1] == loc)
+					patrol_path -= patrol_path[1]
+				var/moved = step_towards(src, patrol_path[1])
+				if(moved)
+					patrol_path -= patrol_path[1]
 
-		else
-			if(pulledby) // Don't wiggle if someone pulls you
-				patrol_path = list()
-				return
-			if(patrol_path[1] == loc)
-				custom_emote(2, "has reached a patrol node.")
-				patrol_path -= patrol_path[1]
-			var/moved = step_towards(src, patrol_path[1])
-			if(moved)
-				patrol_path -= patrol_path[1]
-
-
+	
 
 /mob/living/bot/cleanbot/UnarmedAttack(var/obj/effect/decal/cleanable/D, var/proximity)
 	if(!..())
@@ -194,6 +173,7 @@
 		return
 
 	cleaning = 1
+	custom_emote(2, "begins to clean up the [D]")
 	custom_emote(2, "begins to clean up [D]")
 	update_icons()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
