@@ -77,6 +77,7 @@
 	if(!target) // Find a target
 		var/maximum_range = 7
 		var/i
+		search_loop:
 		for(i=0, i <= maximum_range, i++)
 			for(var/obj/effect/decal/cleanable/D in view(i, src))
 			if(D in ignorelist)
@@ -85,8 +86,7 @@
 				if(istype(D, T))
 					target = D
 					patrol_path = list()
-			if (target)
-				break
+							break search_loop
 
 		if(!target) // No targets in range
 			if(!should_patrol)
