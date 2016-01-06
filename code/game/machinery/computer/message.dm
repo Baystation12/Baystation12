@@ -3,11 +3,10 @@
 /obj/machinery/computer/message_monitor
 	name = "messaging monitor console"
 	desc = "Used to access and maintain data on messaging servers. Allows you to view PDA and request console messages."
-	icon_state = "comm_logs"
+	icon_screen = "comm_logs"
 	light_color = "#00b000"
-	var/hack_icon = "comm_logsc"
-	var/normal_icon = "comm_logs"
-	circuit = "/obj/item/weapon/circuitboard/message_monitor"
+	var/hack_icon = "error"
+	circuit = /obj/item/weapon/circuitboard/message_monitor
 	//Server linked to.
 	var/obj/machinery/message_server/linkedServer = null
 	//Sparks effect - For emag
@@ -37,24 +36,6 @@
 		return
 	if(!istype(user))
 		return
-	if(istype(O,/obj/item/weapon/card/emag/))
-		// Will create sparks and print out the console's password. You will then have to wait a while for the console to be back online.
-		// It'll take more time if there's more characters in the password..
-		if(!emag)
-			if(!isnull(src.linkedServer))
-				icon_state = hack_icon // An error screen I made in the computers.dmi
-				emag = 1
-				screen = 2
-				spark_system.set_up(5, 0, src)
-				src.spark_system.start()
-				var/obj/item/weapon/paper/monitorkey/MK = new/obj/item/weapon/paper/monitorkey
-				MK.loc = src.loc
-				// Will help make emagging the console not so easy to get away with.
-				MK.info += "<br><br><font color='red'>£%@%(*$%&(£&?*(%&£/{}</font>"
-				spawn(100*length(src.linkedServer.decryptkey)) UnmagConsole()
-				message = rebootmsg
-			else
-				user << "<span class='notice'>A no server error appears on the screen.</span>"
 	if(isscrewdriver(O) && emag)
 		//Stops people from just unscrewing the monitor and putting it back to get the console working again.
 		user << "<span class='warning'>It is too hot to mess with!</span>"
@@ -63,14 +44,32 @@
 	..()
 	return
 
+/obj/machinery/computer/message_monitor/emag_act(var/remaining_charges, var/mob/user)
+	// Will create sparks and print out the console's password. You will then have to wait a while for the console to be back online.
+	// It'll take more time if there's more characters in the password..
+	if(!emag && operable())
+		if(!isnull(src.linkedServer))
+			emag = 1
+			screen = 2
+			spark_system.set_up(5, 0, src)
+			src.spark_system.start()
+			var/obj/item/weapon/paper/monitorkey/MK = new/obj/item/weapon/paper/monitorkey
+			MK.loc = src.loc
+			// Will help make emagging the console not so easy to get away with.
+			MK.info += "<br><br><font color='red'>£%@%(*$%&(£&?*(%&£/{}</font>"
+			spawn(100*length(src.linkedServer.decryptkey)) UnmagConsole()
+			message = rebootmsg
+			update_icon()
+			return 1
+		else
+			user << "<span class='notice'>A no server error appears on the screen.</span>"
+
 /obj/machinery/computer/message_monitor/update_icon()
-	..()
-	if(stat & (NOPOWER|BROKEN))
-		return
 	if(emag || hacking)
-		icon_state = hack_icon
+		icon_screen = hack_icon
 	else
-		icon_state = normal_icon
+		icon_screen = initial(icon_screen)
+	..()
 
 /obj/machinery/computer/message_monitor/initialize()
 	//Is the server isn't linked to a server, and there's a server available, default it to the first one in the list.
@@ -211,7 +210,7 @@
 			<td width='20%'>[customjob]</td>
 			<td width='20%'>[customrecepient ? customrecepient.owner : "NONE"]</td>
 			<td width='300px'>[custommessage]</td></tr>"}
-			dat += "</table><br><center><A href='?src=\ref[src];select=Send'>Send</a>"
+			dat += "</table><br><center><A href='?src=\ref[src];select=Send'>Send</a></center>"
 
 		//Request Console Logs
 		if(4)
@@ -269,12 +268,12 @@
 		var/currentKey = src.linkedServer.decryptkey
 		user << "<span class='warning'>Brute-force completed! The key is '[currentKey]'.</span>"
 	src.hacking = 0
-	src.icon_state = normal_icon
+	update_icon()
 	src.screen = 0 // Return the screen back to normal
 
 /obj/machinery/computer/message_monitor/proc/UnmagConsole()
-	src.icon_state = normal_icon
 	src.emag = 0
+	update_icon()
 
 /obj/machinery/computer/message_monitor/proc/ResetMessage()
 	customsender 	= "System Administrator"
@@ -366,7 +365,7 @@
 			if((istype(usr, /mob/living/silicon/ai) || istype(usr, /mob/living/silicon/robot)) && (usr.mind.special_role && usr.mind.original == usr))
 				src.hacking = 1
 				src.screen = 2
-				src.icon_state = hack_icon
+				update_icon()
 				//Time it takes to bruteforce is dependant on the password length.
 				spawn(100*length(src.linkedServer.decryptkey))
 					if(src && src.linkedServer && usr)

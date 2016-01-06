@@ -63,7 +63,7 @@
 
 /datum/mind/New(var/key)
 	src.key = key
-
+	..()
 
 /datum/mind/proc/transfer_to(mob/living/new_character)
 	if(!istype(new_character))
@@ -318,10 +318,10 @@
 						if(I in organs.implants)
 							qdel(I)
 							break
-				H << "<span class='notice'><font size =3><B>Your loyalty implant has been deactivated.</font></span>"
+				H << "<span class='notice'><font size =3><B>Your loyalty implant has been deactivated.</B></font></span>"
 				log_admin("[key_name_admin(usr)] has de-loyalty implanted [current].")
 			if("add")
-				H << "<span class='danger'><font size =3>You somehow have become the recepient of a loyalty transplant, and it just activated!</font>"
+				H << "<span class='danger'><font size =3>You somehow have become the recepient of a loyalty transplant, and it just activated!</font></span>"
 				H.implant_loyalty(H, override = TRUE)
 				log_admin("[key_name_admin(usr)] has loyalty implanted [current].")
 			else

@@ -21,8 +21,8 @@
 	item_state = "electronic"
 	throw_speed = 4
 	throw_range = 20
+	origin_tech = list(TECH_MAGNET = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 400)
-	origin_tech = "magnets=1"
 
 /obj/item/weapon/locator/attack_self(mob/user as mob)
 	user.set_machine(src)
@@ -132,8 +132,8 @@ Frequency:
 	w_class = 2.0
 	throw_speed = 3
 	throw_range = 5
+	origin_tech = list(TECH_MAGNET = 1, TECH_BLUESPACE = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 10000)
-	origin_tech = "magnets=1;bluespace=3"
 
 /obj/item/weapon/hand_tele/attack_self(mob/user as mob)
 	var/turf/current_location = get_turf(user)//What turf is the user on?

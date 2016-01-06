@@ -17,7 +17,6 @@
 	w_class = 2.0
 
 	var/emagged = 0
-	crit_fail = 0
 
 	// the computer that this device is attached to
 	var/obj/machinery/computer3/computer
@@ -61,7 +60,7 @@
 
 				if(istype(comp_ai))
 					if(busy)
-						user << "\red <b>ERROR</b>: \black Reconstruction in progress."
+						user << "<span class='danger'>ERROR:</span> Reconstruction in progress."
 						return
 					card.grab_ai(comp_ai, user)
 					if(!(locate(/mob/living/silicon/ai) in src)) occupant = null
@@ -83,7 +82,7 @@
 
 	// Transfer over the AI.
 	transfer << "You have been uploaded to a stationary terminal. Sadly, there is no remote access from here."
-	user << "\blue <b>Transfer successful</b>: \black [transfer.name] ([rand(1000,9999)].exe) installed and executed successfully. Local copy has been removed."
+	user << "<span class='notice'>Transfer successful:</span> [transfer.name] ([rand(1000,9999)].exe) installed and executed successfully. Local copy has been removed."
 
 	transfer.loc = src
 	transfer.cancel_camera()

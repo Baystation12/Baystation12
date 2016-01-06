@@ -14,15 +14,15 @@
 /obj/item/device/megaphone/attack_self(mob/living/user as mob)
 	if (user.client)
 		if(user.client.prefs.muted & MUTE_IC)
-			src << "\red You cannot speak in IC (muted)."
+			src << "<span class='warning'>You cannot speak in IC (muted).</span>"
 			return
 	if(!ishuman(user))
-		user << "\red You don't know how to use this!"
+		user << "<span class='warning'>You don't know how to use this!</span>"
 		return
 	if(user.silent)
 		return
 	if(spamcheck)
-		user << "\red \The [src] needs to recharge!"
+		user << "<span class='warning'>\The [src] needs to recharge!</span>"
 		return
 
 	var/message = sanitize(input(user, "Shout a message?", "Megaphone", null)  as text)
@@ -36,7 +36,7 @@
 					O.show_message("<B>[user]</B> broadcasts, <FONT size=3>\"[pick(insultmsg)]\"</FONT>",2) // 2 stands for hearable message
 				insults--
 			else
-				user << "\red *BZZZZzzzzzt*"
+				user << "<span class='warning'>*BZZZZzzzzzt*</span>"
 		else
 			for(var/mob/O in (viewers(user)))
 				O.show_message("<B>[user]</B> broadcasts, <FONT size=3>\"[message]\"</FONT>",2) // 2 stands for hearable message
@@ -46,10 +46,9 @@
 			spamcheck = 0
 		return
 
-/obj/item/device/megaphone/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/card/emag) && !emagged)
-		user << "\red You overload \the [src]'s voice synthesizer."
+/obj/item/device/megaphone/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
+		user << "<span class='warning'>You overload \the [src]'s voice synthesizer.</span>"
 		emagged = 1
 		insults = rand(1, 3)//to prevent dickflooding
-		return
-	return
+		return 1

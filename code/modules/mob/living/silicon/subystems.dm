@@ -1,11 +1,11 @@
 /mob/living/silicon
 	var/register_alarms = 1
-	var/obj/nano_module/alarm_monitor/all/alarm_monitor
-	var/obj/nano_module/atmos_control/atmos_control
-	var/obj/nano_module/crew_monitor/crew_monitor
-	var/obj/nano_module/law_manager/law_manager
-	var/obj/nano_module/power_monitor/power_monitor
-	var/obj/nano_module/rcon/rcon
+	var/datum/nano_module/alarm_monitor/all/alarm_monitor
+	var/datum/nano_module/atmos_control/atmos_control
+	var/datum/nano_module/crew_monitor/crew_monitor
+	var/datum/nano_module/law_manager/law_manager
+	var/datum/nano_module/power_monitor/power_monitor
+	var/datum/nano_module/rcon/rcon
 
 /mob/living/silicon
 	var/list/silicon_subsystems = list(
@@ -39,7 +39,7 @@
 		return
 
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
-		AH.register(src, /mob/living/silicon/proc/receive_alarm)
+		AH.register_alarm(src, /mob/living/silicon/proc/receive_alarm)
 		queued_alarms[AH] = list()	// Makes sure alarms remain listed in consistent order
 
 /********************

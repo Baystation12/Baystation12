@@ -3,7 +3,7 @@
 /obj/machinery/computer/pod
 	name = "pod launch control console"
 	desc = "A control console for launching pods. Some people prefer firing Mechas."
-	icon_state = "computer_generic"
+	icon_screen = "mass_driver"
 	light_color = "#00b000"
 	circuit = /obj/item/weapon/circuitboard/pod
 	var/id = 1.0
@@ -56,7 +56,7 @@
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20))
 			if(stat & BROKEN)
-				user << "\blue The broken glass falls out."
+				user << "<span class='notice'>The broken glass falls out.</span>"
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( loc )
 				new /obj/item/weapon/material/shard( loc )
 
@@ -80,7 +80,7 @@
 				A.anchored = 1
 				qdel(src)
 			else
-				user << "\blue You disconnect the monitor."
+				user << "<span class='notice'>You disconnect the monitor.</span>"
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( loc )
 
 				//generate appropriate circuitboard. Accounts for /pod/old computer types
@@ -194,7 +194,9 @@
 
 
 /obj/machinery/computer/pod/old
-	icon_state = "old"
+	icon_state = "oldcomp"
+	icon_keyboard = null
+	icon_screen = "library"
 	name = "DoorMex Control Computer"
 	title = "Door Controls"
 
@@ -208,7 +210,7 @@
 
 /obj/machinery/computer/pod/old/syndicate/attack_hand(var/mob/user as mob)
 	if(!allowed(user))
-		user << "\red Access Denied"
+		user << "<span class='warning'>Access Denied</span>"
 		return
 	else
 		..()

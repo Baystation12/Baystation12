@@ -1,7 +1,7 @@
 /obj/item/mecha_parts/mecha_equipment/weapon
 	name = "mecha weapon"
 	range = RANGED
-	origin_tech = "materials=3;combat=3"
+	origin_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 3)
 	var/projectile //Type of projectile fired.
 	var/projectiles = 1 //Amount of projectiles loaded.
 	var/projectiles_per_shot = 1 //Amount of projectiles fired per single shot.
@@ -48,7 +48,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/weapon/proc/Fire(atom/A, atom/target, turf/aimloc)
 	var/obj/item/projectile/P = A
-	P.shot_from = src
+	P.shot_from = src.name
 	P.original = target
 	P.starting = P.loc
 	P.current = P.loc
@@ -100,7 +100,7 @@
 	name = "eZ-13 mk2 heavy pulse rifle"
 	icon_state = "mecha_pulse"
 	energy_drain = 120
-	origin_tech = "materials=3;combat=6;powerstorage=4"
+	origin_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 6, TECH_POWER = 4)
 	projectile = /obj/item/projectile/beam/pulse/heavy
 	fire_sound = 'sound/weapons/marauder.ogg'
 
@@ -274,7 +274,6 @@
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang/clusterbang//Because I am a heartless bastard -Sieve
 	name = "\improper SOP-6 grenade launcher"
 	projectile = /obj/item/weapon/grenade/flashbang/clusterbang
-	construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"gold"=6000,"uranium"=6000)
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang/clusterbang/limited/get_equip_info()//Limited version of the clusterbang launcher that can't reload
 	return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[chassis.selected==src?"<b>":"<a href='?src=\ref[chassis];select_equip=\ref[src]'>"][src.name][chassis.selected==src?"</b>":"</a>"]\[[src.projectiles]\]"

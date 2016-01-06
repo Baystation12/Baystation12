@@ -7,7 +7,7 @@
 							/obj/item/toy/blink								= 2,
 							/obj/item/clothing/under/syndicate/tacticool	= 2,
 							/obj/item/toy/sword								= 2,
-							/obj/item/toy/gun								= 2,
+							/obj/item/weapon/gun/projectile/revolver/capgun	= 2,
 							/obj/item/toy/crossbow							= 2,
 							/obj/item/clothing/suit/syndicatefake			= 2,
 							/obj/item/weapon/storage/fancy/crayons			= 2,
@@ -28,8 +28,8 @@
 		if(computer && !computer.stat)
 			var/prizeselect = pickweight(prizes)
 			new prizeselect(computer.loc)
-			if(istype(prizeselect, /obj/item/toy/gun)) //Ammo comes with the gun
-				new /obj/item/toy/ammo/gun(computer.loc)
+			if(istype(prizeselect, /obj/item/weapon/gun/projectile/revolver/capgun)) //Ammo comes with the gun
+				new /obj/item/projectile/bullet/pistol/cap(src.loc)
 			else if(istype(prizeselect, /obj/item/clothing/suit/syndicatefake)) //Helmet is part of the suit
 				new	/obj/item/clothing/head/syndicatefake(computer.loc)
 			feedback_inc("arcade_win_normal")
@@ -37,7 +37,7 @@
 
 
 /datum/file/program/arcade
-	desc = "The best arcade game ever produced by Nanotrasen's short-lived entertainment divison."
+	desc = "The best arcade game ever produced by the Company's short-lived entertainment divison."
 	//headcanon: they also ported E.T. for the atari 2600, superman 64, and basically every other movie tie-in game ever
 
 	active_state = "generic"
@@ -75,11 +75,12 @@
 
 	dat += "<br><center><h3>[temp]</h3></center>"
 	dat += "<br><center>Health: [player_hp] | Magic: [player_mp] | Enemy Health: [enemy_hp]</center>"
+	dat += "<center><b>"
 
 	if (gameover)
-		dat += "<center><b>[topic_link(src,"newgame","New Game")]"
+		dat += "[topic_link(src,"newgame","New Game")]"
 	else
-		dat += "<center><b>[topic_link(src,"attack","Attack")] | [topic_link(src,"heal","Heal")] | [topic_link(src,"charge","Recharge Power")]"
+		dat += "[topic_link(src,"attack","Attack")] | [topic_link(src,"heal","Heal")] | [topic_link(src,"charge","Recharge Power")]"
 
 	dat += "</b></center>"
 

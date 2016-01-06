@@ -271,8 +271,8 @@
 		new /obj/item/ammo_casing/a145(src)
 
 /obj/item/weapon/storage/box/flashbangs
-	name = "box of flashbangs (WARNING)"
-	desc = "<B>WARNING: These devices are extremely dangerous and can cause blindness or deafness in repeated use.</B>"
+	name = "box of flashbangs"
+	desc = "A box containing 7 antipersonnel flashbang grenades.<br> WARNING: These devices are extremely dangerous and can cause blindness or deafness in repeated use."
 	icon_state = "flashbang"
 
 	New()
@@ -284,6 +284,22 @@
 		new /obj/item/weapon/grenade/flashbang(src)
 		new /obj/item/weapon/grenade/flashbang(src)
 		new /obj/item/weapon/grenade/flashbang(src)
+
+/obj/item/weapon/storage/box/teargas
+	name = "box of pepperspray grenades"
+	desc = "A box containing 7 tear gas grenades. A gas mask is printed on the label.<br> WARNING: Exposure carries risk of serious injury or death. Keep away from persons with lung conditions."
+	icon_state = "flashbang"
+
+	New()
+		..()
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+
+
 
 /obj/item/weapon/storage/box/emps
 	name = "box of emp grenades"
@@ -298,6 +314,31 @@
 		new /obj/item/weapon/grenade/empgrenade(src)
 		new /obj/item/weapon/grenade/empgrenade(src)
 
+/obj/item/weapon/storage/box/smokes
+	name = "box of smoke bombs"
+	desc = "A box containing 5 smoke bombs."
+	icon_state = "flashbang"
+
+/obj/item/weapon/storage/box/smokes/New()
+		..()
+		new /obj/item/weapon/grenade/smokebomb(src)
+		new /obj/item/weapon/grenade/smokebomb(src)
+		new /obj/item/weapon/grenade/smokebomb(src)
+		new /obj/item/weapon/grenade/smokebomb(src)
+		new /obj/item/weapon/grenade/smokebomb(src)
+
+/obj/item/weapon/storage/box/anti_photons
+	name = "box of anti-photon grenades"
+	desc = "A box containing 5 experimental photon disruption grenades."
+	icon_state = "flashbang"
+
+/obj/item/weapon/storage/box/anti_photons/New()
+		..()
+		new /obj/item/weapon/grenade/anti_photon(src)
+		new /obj/item/weapon/grenade/anti_photon(src)
+		new /obj/item/weapon/grenade/anti_photon(src)
+		new /obj/item/weapon/grenade/anti_photon(src)
+		new /obj/item/weapon/grenade/anti_photon(src)
 
 /obj/item/weapon/storage/box/trackimp
 	name = "boxed tracking implant kit"
@@ -599,7 +640,7 @@
 	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
 	item_state = "syringe_kit"
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
-	
+
 /obj/item/weapon/storage/box/lights/New()
 	..()
 	make_exact_fit()
@@ -628,3 +669,15 @@
 	for(var/i = 0; i < 7; i++)
 		new /obj/item/weapon/light/bulb(src)
 	..()
+
+/obj/item/weapon/storage/box/freezer
+	name = "portable freezer"
+	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "portafreezer"
+	item_state = "medicalpack"
+	storage_slots=7
+	max_w_class = 3
+	can_hold = list(/obj/item/organ, /obj/item/weapon/reagent_containers/food, /obj/item/weapon/reagent_containers/glass)
+	max_storage_space = 21
+	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try

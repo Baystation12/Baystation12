@@ -37,6 +37,11 @@
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
 	RefreshParts()
+	
+/obj/machinery/autolathe/Destroy()
+	qdel(wires)
+	wires = null
+	return ..()
 
 /obj/machinery/autolathe/proc/update_recipe_list()
 	if(!machine_recipes)
@@ -262,7 +267,7 @@
 		if(!making || !src) return
 
 		//Create the desired item.
-		var/obj/item/I = new making.path(get_step(loc, get_dir(src,usr)))
+		var/obj/item/I = new making.path(loc)
 		if(multiplier > 1 && istype(I, /obj/item/stack))
 			var/obj/item/stack/S = I
 			S.amount = multiplier

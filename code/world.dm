@@ -1,3 +1,14 @@
+
+/*
+	The initialization of the game happens roughly like this:
+
+	1. All global variables are initialized (including the global_init instance).
+	2. The map is initialized, and map objects are created.
+	3. world/New() runs, creating the process scheduler (and the old master controller) and spawning their setup.
+	4. processScheduler/setup() runs, creating all the processes. game_controller/setup() runs, calling initialize() on all movable atoms in the world.
+	5. The gameticker is created.
+
+*/
 var/global/datum/global_init/init = new ()
 
 /*
@@ -8,8 +19,16 @@ var/global/datum/global_init/init = new ()
 	makeDatumRefLists()
 	load_configuration()
 
-	qdel(src)
+	initialize_chemical_reagents()
+	initialize_chemical_reactions()
 
+	qdel(src) //we're done
+
+/datum/global_init/init_observers()
+	return
+
+/datum/global_init/destroy_observers()
+	return
 
 /world
 	mob = /mob/new_player
@@ -20,7 +39,7 @@ var/global/datum/global_init/init = new ()
 
 
 
-#define RECOMMENDED_VERSION 501
+#define RECOMMENDED_VERSION 509
 /world/New()
 	//logs
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
@@ -50,7 +69,18 @@ var/global/datum/global_init/init = new ()
 
 	. = ..()
 
+#ifndef UNIT_TEST
+
 	sleep_offline = 1
+
+#else
+
+	log_unit_test("Unit Tests Enabled.  This will destroy the world when testing is complete.")
+	log_unit_test("If you did not intend to enable this please check code/__defines/unit_testing.dm")
+
+	load_unit_test_changes()
+
+#endif
 
 	// Set up roundstart seed list.
 	plant_controller = new()
@@ -58,9 +88,20 @@ var/global/datum/global_init/init = new ()
 	// This is kinda important. Set up details of what the hell things are made of.
 	populate_material_list()
 
-	//Create the asteroid Z-level.
 	if(config.generate_asteroid)
-		new /datum/random_map(null,13,32,5,217,223)
+		// These values determine the specific area that the map is applied to.
+		// If you do not use the official Baycode moonbase map, you will need to change them.
+		//Create the mining Z-level.
+		new /datum/random_map/automata/cave_system(null,1,1,5,255,255)
+		//new /datum/random_map/noise/volcanism(null,1,1,5,255,255) // Not done yet! Pretty, though.
+		// Create the mining ore distribution map.
+		new /datum/random_map/noise/ore(null, 1, 1, 5, 64, 64)
+		// Update all turfs to ensure everything looks good post-generation. Yes,
+		// it's brute-forcey, but frankly the alternative is a mine turf rewrite.
+		for(var/turf/simulated/mineral/M in world) // Ugh.
+			M.updateMineralOverlays()
+		for(var/turf/simulated/floor/asteroid/M in world) // Uuuuuugh.
+			M.updateMineralOverlays()
 
 	// Create autolathe recipes, as above.
 	populate_lathe_recipes()
@@ -74,6 +115,11 @@ var/global/datum/global_init/init = new ()
 		processScheduler.deferSetupFor(/datum/controller/process/ticker)
 		processScheduler.setup()
 		master_controller.setup()
+#ifdef UNIT_TEST
+		initialize_unit_tests()
+#endif
+
+
 
 	spawn(3000)		//so we aren't adding to the round-start lag
 		if(config.ToRban)
@@ -158,6 +204,7 @@ var/world_topic_spam_protect_time = world.timeofday
 				"eng" = engineering_positions,
 				"med" = medical_positions,
 				"sci" = science_positions,
+				"car" = cargo_positions,
 				"civ" = civilian_positions,
 				"bot" = nonhuman_positions
 			)
@@ -498,13 +545,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if (n > 0)
 		features += "~[n] player"
 
-	/*
-	is there a reason for this? the byond site shows 'hosted by X' when there is a proper host already.
-	if (host)
-		features += "hosted by <b>[host]</b>"
-	*/
 
-	if (!host && config && config.hostedby)
+	if (config && config.hostedby)
 		features += "hosted by <b>[config.hostedby]</b>"
 
 	if (features)

@@ -22,6 +22,20 @@ var/global/list/image/splatter_cache=list()
 	var/amount = 5
 	var/drytime
 
+/obj/effect/decal/cleanable/blood/reveal_blood()
+	if(!fluorescent)
+		fluorescent = 1
+		basecolor = COLOR_LUMINOL
+		update_icon()
+
+/obj/effect/decal/cleanable/blood/clean_blood()
+	fluorescent = 0
+	if(invisibility != 100)
+		invisibility = 100
+		amount = 0
+		processing_objects -= src
+	..(ignore=1)
+
 /obj/effect/decal/cleanable/blood/Destroy()
 	for(var/datum/disease/D in viruses)
 		D.cure(0)
@@ -153,7 +167,7 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/writing/examine(mob/user)
 	..(user)
-	user << "It reads: <font color='[basecolor]'>\"[message]\"<font>"
+	user << "It reads: <font color='[basecolor]'>\"[message]\"</font>"
 
 /obj/effect/decal/cleanable/blood/gibs
 	name = "gibs"

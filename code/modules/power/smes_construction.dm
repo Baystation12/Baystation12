@@ -76,11 +76,11 @@
 	should_be_mapped = 1
 
 /obj/machinery/power/smes/buildable/Destroy()
-	..()
 	qdel(wires)
-	for(var/obj/nano_module/rcon/R in world)
+	wires = null
+	for(var/datum/nano_module/rcon/R in world)
 		R.FindDevices()
-
+	return ..()
 
 // Proc: process()
 // Parameters: None
@@ -93,7 +93,7 @@
 		s.start()
 		charge -= (output_level_max * SMESRATE)
 		if(prob(1)) // Small chance of overload occuring since grounding is disabled.
-			apcs_overload(5,10)
+			apcs_overload(5,10,20)
 
 	..()
 
@@ -214,6 +214,7 @@
 				h_user.Paralyse(5)
 			spawn(0)
 				empulse(src.loc, 2, 4)
+			apcs_overload(0, 5, 10)
 			charge = 0
 
 		if (36 to 60)
@@ -232,7 +233,8 @@
 			spawn(0)
 				empulse(src.loc, 8, 16)
 			charge = 0
-			apcs_overload(1, 10)
+			apcs_overload(1, 10, 20)
+			energy_fail(10)
 			src.ping("Caution. Output regulators malfunction. Uncontrolled discharge detected.")
 
 		if (61 to INFINITY)
@@ -247,7 +249,8 @@
 			spawn(0)
 				empulse(src.loc, 32, 64)
 			charge = 0
-			apcs_overload(5, 25)
+			apcs_overload(5, 25, 100)
+			energy_fail(30)
 			src.ping("Caution. Output regulators malfunction. Significant uncontrolled discharge detected.")
 
 			if (prob(50))
@@ -270,9 +273,9 @@
 
 
 // Proc: apcs_overload()
-// Parameters: 2 (failure_chance - chance to actually break the APC, overload_chance - Chance of breaking lights)
+// Parameters: 3 (failure_chance - chance to actually break the APC, overload_chance - Chance of breaking lights, reboot_chance - Chance of temporarily disabling the APC)
 // Description: Damages output powernet by power surge. Destroys few APCs and lights, depending on parameters.
-/obj/machinery/power/smes/buildable/proc/apcs_overload(var/failure_chance, var/overload_chance)
+/obj/machinery/power/smes/buildable/proc/apcs_overload(var/failure_chance, var/overload_chance, var/reboot_chance)
 	if (!src.powernet)
 		return
 
@@ -283,6 +286,8 @@
 				A.overload_lighting()
 			if (prob(failure_chance))
 				A.set_broken()
+			if(prob(reboot_chance))
+				A.energy_fail(rand(30,60))
 
 // Proc: update_icon()
 // Parameters: None
@@ -349,8 +354,6 @@
 				M.state = 2
 				M.icon_state = "box_1"
 				for(var/obj/I in component_parts)
-					if(I.reliability != 100 && crit_fail)
-						I.crit_fail = 1
 					I.loc = src.loc
 					component_parts -= I
 				qdel(src)

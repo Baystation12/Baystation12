@@ -50,7 +50,7 @@
 		if(!interactable())
 			return
 		if (computer.z > 6)
-			usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
+			usr << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!"
 			return
 		var/dat
 
@@ -181,7 +181,7 @@
 				scan = null
 			else
 				var/obj/item/I = usr.get_active_hand()
-				if (istype(I, /obj/item/weapon/card/id))
+				if (istype(I, /obj/item/weapon/card/id) && usr.drop_item(I))
 					computer.cardslot.insert(I, 1)
 					scan = I
 
@@ -194,7 +194,7 @@
 				scan2 = null
 			else
 				var/obj/item/I = usr.get_active_hand()
-				if (istype(I, /obj/item/weapon/card/id))
+				if (istype(I, /obj/item/weapon/card/id) && usr.drop_item(I))
 					computer.cardslot.insert(I, 2)
 					scan2 = I
 

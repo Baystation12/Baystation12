@@ -127,7 +127,7 @@ About the Holder:
 		trans_to_obj(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
 			If target has reagents, transfers [amount] to it. Otherwise, same as trans_to_turf().
 
-		/atom/proc/create_reagents(var/max_vol)
+		atom/proc/create_reagents(var/max_vol)
 			Creates a new reagent datum.
 
 About Reagents:
@@ -285,7 +285,7 @@ About the Tools:
 	By default, all atom have a reagents var - but its empty. if you want to use an object for the chem.
 	system you'll need to add something like this in its new proc:
 
-		/atom/proc/create_reagents(var/max_volume)
+		atom/proc/create_reagents(var/max_volume)
 
 	Other important stuff:
 

@@ -29,6 +29,13 @@ var/global/list/image/fluidtrack_cache=list()
 		src.basecolor=_color
 		src.wet=_wet
 
+/obj/effect/decal/cleanable/blood/tracks/reveal_blood()
+	if(!fluorescent)
+		if(stack && stack.len)
+			for(var/datum/fluidtrack/track in stack)
+				track.basecolor = COLOR_LUMINOL
+		..()
+
 // Footprints, tire trails...
 /obj/effect/decal/cleanable/blood/tracks
 	amount = 0
@@ -114,7 +121,8 @@ var/global/list/image/fluidtrack_cache=list()
 				updated=1
 
 		dirs |= comingdir|realgoing
-		blood_DNA |= DNA.Copy()
+		if(islist(blood_DNA))
+			blood_DNA |= DNA.Copy()
 		if(updated)
 			update_icon()
 

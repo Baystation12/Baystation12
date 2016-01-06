@@ -19,8 +19,7 @@
 
 /datum/antagonist/proc/update_access(var/mob/living/player)
 	for(var/obj/item/weapon/card/id/id in player.contents)
-		id.name = "[player.real_name]'s ID Card"
-		id.registered_name = player.real_name
+		player.set_id_info(id)
 
 /datum/antagonist/proc/clear_indicators(var/datum/mind/recipient)
 	if(!recipient.current || !recipient.current.client)
@@ -33,7 +32,7 @@
 	if(!antag_indicator || !other.current || !recipient.current)
 		return
 	var/indicator = (faction_indicator && (other in faction_members)) ? faction_indicator : antag_indicator
-	return image('icons/mob/mob.dmi', loc = other.current, icon_state = indicator)
+	return image('icons/mob/mob.dmi', loc = other.current, icon_state = indicator, layer = LIGHTING_LAYER+0.1)
 
 /datum/antagonist/proc/update_all_icons()
 	if(!antag_indicator)

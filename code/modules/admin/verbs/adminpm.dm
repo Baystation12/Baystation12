@@ -133,7 +133,7 @@
 	// Handled on Bot32's end, unsure about other bots
 //	if(length(msg) > 400) // TODO: if message length is over 400, divide it up into seperate messages, the message length restriction is based on IRC limitations.  Probably easier to do this on the bots ends.
 //		src << "<span class='warning'>Your message was not sent because it was more then 400 characters find your message below for ease of copy/pasting</span>"
-//		src << "\blue [msg]</span>"
+//		src << "<span class='notice'>[msg]</span>"
 //		return
 
 	send2adminirc("PlayerPM to [sender] from [key_name(src)]: [html_decode(msg)]")

@@ -6,18 +6,18 @@
 
 	if(density)
 		can_open = WALL_OPENING
-		set_wall_state("[material.icon_base]fwall_open")
 		//flick("[material.icon_base]fwall_opening", src)
 		sleep(15)
 		density = 0
 		opacity = 0
+		update_icon()
 		set_light(0)
 	else
 		can_open = WALL_OPENING
 		//flick("[material.icon_base]fwall_closing", src)
-		set_wall_state("[material.icon_base]0")
 		density = 1
 		opacity = 1
+		update_icon()
 		sleep(15)
 		set_light(1)
 
@@ -58,6 +58,7 @@
 
 	radiate()
 	add_fingerprint(user)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/rotting = (locate(/obj/effect/overlay/wallrot) in src)
 	if (HULK in user.mutations)
 		if (rotting || !prob(material.hardness))
@@ -71,6 +72,7 @@
 /turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
 
 	radiate()
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/rotting = (locate(/obj/effect/overlay/wallrot) in src)
 	if(!damage || !wallbreaker)
 		try_touch(user, rotting)
@@ -88,6 +90,7 @@
 
 /turf/simulated/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if (!user.)
 		user << "<span class='warning'>You don't have the dexterity to do this!</span>"
 		return
@@ -210,7 +213,7 @@
 					construction_stage = 5
 					new /obj/item/stack/rods( src )
 					user << "<span class='notice'>You cut the outer grille.</span>"
-					set_wall_state()
+					update_icon()
 					return
 			if(5)
 				if (istype(W, /obj/item/weapon/screwdriver))
@@ -219,7 +222,7 @@
 					if(!do_after(user,40) || !istype(src, /turf/simulated/wall) || construction_stage != 5)
 						return
 					construction_stage = 4
-					set_wall_state()
+					update_icon()
 					user << "<span class='notice'>You remove the support lines.</span>"
 					return
 				else if( istype(W, /obj/item/stack/rods) )
@@ -227,7 +230,7 @@
 					if(O.get_amount()>0)
 						O.use(1)
 						construction_stage = 6
-						set_wall_state()
+						update_icon()
 						user << "<span class='notice'>You replace the outer grille.</span>"
 						return
 			if(4)
@@ -249,7 +252,7 @@
 					if(!do_after(user, 60) || !istype(src, /turf/simulated/wall) || construction_stage != 4)
 						return
 					construction_stage = 3
-					set_wall_state()
+					update_icon()
 					user << "<span class='notice'>You press firmly on the cover, dislodging it.</span>"
 					return
 			if(3)
@@ -259,7 +262,7 @@
 					if(!do_after(user,100) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
 						return
 					construction_stage = 2
-					set_wall_state()
+					update_icon()
 					user << "<span class='notice'>You pry off the cover.</span>"
 					return
 			if(2)
@@ -269,7 +272,7 @@
 					if(!do_after(user,40) || !istype(src, /turf/simulated/wall) || construction_stage != 2)
 						return
 					construction_stage = 1
-					set_wall_state()
+					update_icon()
 					user << "<span class='notice'>You remove the bolts anchoring the support rods.</span>"
 					return
 			if(1)
@@ -289,7 +292,7 @@
 					if(!do_after(user,70) || !istype(src, /turf/simulated/wall) || construction_stage != 1)
 						return
 					construction_stage = 0
-					set_wall_state()
+					update_icon()
 					new /obj/item/stack/rods(src)
 					user << "<span class='notice'>The support rods drop out as you cut them loose from the frame.</span>"
 					return

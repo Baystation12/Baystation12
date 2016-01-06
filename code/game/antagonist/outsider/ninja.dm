@@ -7,7 +7,7 @@ var/datum/antagonist/ninja/ninjas
 	role_text_plural = "Ninja"
 	bantype = "ninja"
 	landmark_id = "ninjastart"
-	welcome_text = "You are an elite mercenary assassin of the Spider Clan. You have a variety of abilities at your disposal, thanks to your nano-enhanced cyber armor.</span>"
+	welcome_text = "<span class='info'>You are an elite mercenary assassin of the Spider Clan. You have a variety of abilities at your disposal, thanks to your nano-enhanced cyber armor.</span>"
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_RANDSPAWN | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
 	antaghud_indicator = "hudninja"
 
@@ -129,7 +129,7 @@ var/datum/antagonist/ninja/ninjas
 			player << "<span class='danger'>You forgot to turn on your internals! Quickly, toggle the valve!</span>"
 
 /datum/antagonist/ninja/proc/generate_ninja_directive(side)
-	var/directive = "[side=="face"?"Nanotrasen":"A criminal syndicate"] is your employer. "//Let them know which side they're on.
+	var/directive = "[side=="face"?"[company_name]":"A criminal syndicate"] is your employer. "//Let them know which side they're on.
 	switch(rand(1,19))
 		if(1)
 			directive += "The Spider Clan must not be linked to this operation. Remain hidden and covert when possible."
@@ -140,7 +140,7 @@ var/datum/antagonist/ninja/ninjas
 		if(4)
 			directive += "The Spider Clan absolutely cannot be linked to this operation. Eliminate witnesses at your discretion."
 		if(5)
-			directive += "We are currently negotiating with NanoTrasen Central Command. Prioritize saving human lives over ending them."
+			directive += "We are currently negotiating with [company_name] [boss_name]. Prioritize saving human lives over ending them."
 		if(6)
 			directive += "We are engaged in a legal dispute over [station_name]. If a laywer is present on board, force their cooperation in the matter."
 		if(7)
@@ -148,7 +148,7 @@ var/datum/antagonist/ninja/ninjas
 		if(8)
 			directive += "Let no one question the mercy of the Spider Clan. Ensure the safety of all non-essential personnel you encounter."
 		if(9)
-			directive += "A free agent has proposed a lucrative business deal. Implicate Nanotrasen involvement in the operation."
+			directive += "A free agent has proposed a lucrative business deal. Implicate [company_name] involvement in the operation."
 		if(10)
 			directive += "Our reputation is on the line. Harm as few civilians and innocents as possible."
 		if(11)
@@ -156,14 +156,14 @@ var/datum/antagonist/ninja/ninjas
 		if(12)
 			directive += "We are currently negotiating with a mercenary leader. Disguise assassinations as suicide or other natural causes."
 		if(13)
-			directive += "Some disgruntled NanoTrasen employees have been supportive of our operations. Be wary of any mistreatment by command staff."
+			directive += "Some disgruntled [company_name] employees have been supportive of our operations. Be wary of any mistreatment by command staff."
 		if(14)
 			var/xenorace = pick("Unathi","Tajara", "Skrell")
 			directive += "A group of [xenorace] radicals have been loyal supporters of the Spider Clan. Favor [xenorace] crew whenever possible."
 		if(15)
 			directive += "The Spider Clan has recently been accused of religious insensitivity. Attempt to speak with the Chaplain and prove these accusations false."
 		if(16)
-			directive += "The Spider Clan has been bargaining with a competing prosthetics manufacturer. Try to shine NanoTrasen prosthetics in a bad light."
+			directive += "The Spider Clan has been bargaining with a competing prosthetics manufacturer. Try to shine [company_name] prosthetics in a bad light."
 		if(17)
 			directive += "The Spider Clan has recently begun recruiting outsiders. Consider suitable candidates and assess their behavior amongst the crew."
 		if(18)

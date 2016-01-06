@@ -6,9 +6,6 @@
 	message = sanitize(message)
 	..(message, alt_name = alt_name)
 
-/mob/living/carbon/human/is_muzzled()
-	return istype(src.wear_mask, /obj/item/clothing/mask/muzzle)
-
 /mob/living/carbon/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
 		if(client)
@@ -132,11 +129,11 @@
 	if(silent || (sdisabilities & MUTE))
 		message = ""
 		speech_problem_flag = 1
-	else if(istype(wear_mask, /obj/item/clothing/mask/horsehead))
-		var/obj/item/clothing/mask/horsehead/hoers = wear_mask
-		if(hoers.voicechange)
-			message = pick("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
-			verb = pick("whinnies","neighs", "says")
+	else if(istype(wear_mask, /obj/item/clothing/mask))
+		var/obj/item/clothing/mask/M = wear_mask
+		if(M.voicechange)
+			message = pick(M.say_messages)
+			verb = pick(M.say_verbs)
 			speech_problem_flag = 1
 
 	if(message != "")

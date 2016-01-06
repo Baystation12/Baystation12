@@ -25,7 +25,7 @@
 
 	examine(mob/user)
 		if(..(user, 0) && air_contents.gas["oxygen"] < 10)
-			user << text("\red <B>The meter on the [src.name] indicates you are almost out of oxygen!</B>")
+			user << text("<span class='warning'>The meter on \the [src] indicates you are almost out of oxygen!</span>")
 			//playsound(usr, 'sound/effects/alert.ogg', 50, 1)
 
 
@@ -67,7 +67,7 @@
 
 	examine(mob/user)
 		if(..(user, 0) && air_contents.gas["oxygen"] < 1 && loc==user)
-			user << "\red <B>The meter on the [src.name] indicates you are almost out of air!</B>"
+			user << "<span class='danger'>The meter on the [src.name] indicates you are almost out of air!</span>"
 			user << sound('sound/effects/alert.ogg')
 
 /obj/item/weapon/tank/air/New()
@@ -85,6 +85,7 @@
 	name = "phoron tank"
 	desc = "Contains dangerous phoron. Do not inhale. Warning: extremely flammable."
 	icon_state = "phoron"
+	gauge_icon = null
 	flags = CONDUCT
 	slot_flags = null	//they have no straps!
 
@@ -114,6 +115,8 @@
 	name = "emergency oxygen tank"
 	desc = "Used for emergencies. Contains very little oxygen, so try to conserve it until you actually need it."
 	icon_state = "emergency"
+	gauge_icon = "indicator_emergency"
+	gauge_cap = 4
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	w_class = 2.0
@@ -131,7 +134,7 @@
 
 	examine(mob/user)
 		if(..(user, 0) && air_contents.gas["oxygen"] < 0.2 && loc==user)
-			user << text("\red <B>The meter on the [src.name] indicates you are almost out of air!</B>")
+			user << text("<span class='danger'>The meter on the [src.name] indicates you are almost out of air!</span>")
 			user << sound('sound/effects/alert.ogg')
 
 /obj/item/weapon/tank/emergency_oxygen/engi
@@ -142,12 +145,15 @@
 /obj/item/weapon/tank/emergency_oxygen/double
 	name = "double emergency oxygen tank"
 	icon_state = "emergency_double"
+	gauge_icon = "indicator_emergency_double"
 	volume = 10
 
 /obj/item/weapon/tank/emergency_nitrogen
 	name = "emergency nitrogen tank"
 	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
 	icon_state = "emergency_nitro"
+	gauge_icon = "indicator_emergency"
+	gauge_cap = 4
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	w_class = 2.0
@@ -164,7 +170,7 @@
 
 	examine(mob/user)
 		if(..(user, 0) && air_contents.gas["nitrogen"] < 0.2 && loc==user)
-			user << text("\red <B>The meter on the [src.name] indicates you are almost out of air!</B>")
+			user << text("<span class='danger'>The meter on \the [src] indicates you are almost out of air!</span>")
 			user << sound('sound/effects/alert.ogg')
 
 /*
@@ -185,5 +191,5 @@
 
 /obj/item/weapon/tank/nitrogen/examine(mob/user)
 	if(..(user, 0) && air_contents.gas["nitrogen"] < 10)
-		user << text("\red <B>The meter on the [src.name] indicates you are almost out of nitrogen!</B>")
+		user << text("<span class='danger'>The meter on \the [src] indicates you are almost out of nitrogen!</span>")
 		//playsound(user, 'sound/effects/alert.ogg', 50, 1)

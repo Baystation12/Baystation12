@@ -217,13 +217,6 @@
 		T.holy = 1
 	return
 
-/datum/reagent/ammonia
-	name = "Ammonia"
-	id = "ammonia"
-	description = "A caustic substance commonly used in fertilizer or household cleaners."
-	reagent_state = GAS
-	color = "#404030"
-
 /datum/reagent/diethylamine
 	name = "Diethylamine"
 	id = "diethylamine"
@@ -231,10 +224,10 @@
 	reagent_state = LIQUID
 	color = "#604030"
 
-/datum/reagent/fluorosurfactant // Foam precursor
-	name = "Fluorosurfactant"
-	id = "fluorosurfactant"
-	description = "A perfluoronated sulfonic acid that forms a foam when mixed with water."
+/datum/reagent/surfactant // Foam precursor
+	name = "Azosurfactant"
+	id = "surfactant"
+	description = "A isocyanate liquid that forms a foam when mixed with water."
 	reagent_state = LIQUID
 	color = "#9E6B38"
 
@@ -278,10 +271,7 @@
 	touch_met = 50
 
 /datum/reagent/space_cleaner/touch_obj(var/obj/O)
-	if(istype(O, /obj/effect/decal/cleanable))
-		qdel(O)
-	else
-		O.clean_blood()
+	O.clean_blood()
 
 /datum/reagent/space_cleaner/touch_turf(var/turf/T)
 	if(volume >= 1)
@@ -382,3 +372,23 @@
 	id = "glue"
 	description = "An extremely powerful bonding agent."
 	color = "#FFFFCC"
+
+/datum/reagent/woodpulp
+	name = "Wood Pulp"
+	id = "woodpulp"
+	description = "A mass of wood fibers."
+	reagent_state = LIQUID
+	color = "#B97A57"
+
+/datum/reagent/luminol
+	name = "Luminol"
+	id = "luminol"
+	description = "A compound that interacts with blood on the molecular level."
+	reagent_state = LIQUID
+	color = "#F2F3F4"
+
+/datum/reagent/luminol/touch_obj(var/obj/O)
+	O.reveal_blood()
+
+/datum/reagent/luminol/touch_mob(var/mob/living/L)
+	L.reveal_blood()

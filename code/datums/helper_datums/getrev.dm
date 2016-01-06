@@ -28,7 +28,6 @@ var/global/datum/getrev/revdata = new()
 	world.log << branch
 	world.log << date
 	world.log << revision
-	return
 
 client/verb/showrevinfo()
 	set category = "OOC"
@@ -43,4 +42,3 @@ client/verb/showrevinfo()
 			src << revdata.revision
 	else
 		src << "Revision unknown"
-	return

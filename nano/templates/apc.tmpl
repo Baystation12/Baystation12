@@ -1,3 +1,11 @@
+{{if data.failTime}}
+<div class='notice'>
+	<b><h3>SYSTEM FAILURE</h3></b>
+	<i>I/O regulators malfunction detected! Waiting for system reboot...</i><br>
+	Automatic reboot in {{:data.failTime}} seconds...
+	{{:helper.link('Reboot Now', 'refresh', {'reboot' : 1})}}<br><br><br>
+</div>
+{{else}}
 <div class='notice'>
 	{{if data.siliconUser}}
 		<div class="itemContentSmall">
@@ -178,4 +186,4 @@
 	{{/if}}
 
 </div>
-		
+{{/if}}

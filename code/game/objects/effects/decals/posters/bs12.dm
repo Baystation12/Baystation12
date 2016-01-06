@@ -37,12 +37,12 @@
 /datum/poster/bay_8
 	icon_state="bsposter8"
 	name = "Pinup Girl Cindy"
-	desc = "This particular one is of Nanotrasen's PR girl, Cindy, in a particularly feminine pose."
+	desc = "This particular one is of a historical corporate PR girl, Cindy, in a particularly feminine pose."
 
 /datum/poster/bay_9
 	icon_state="bsposter9"
 	name = "Pinup Girl Amy"
-	desc = "This particular one is of Amy, the nymphomaniac Urban Legend of Nanotrasen Space Stations. How this photograph came to be is not known."
+	desc = "This particular one is of Amy, the nymphomaniac urban legend of deep space. How this photograph came to be is not known."
 
 /datum/poster/bay_10
 	icon_state="bsposter10"
@@ -52,12 +52,12 @@
 /datum/poster/bay_11
 	icon_state="bsposter11"
 	name = "Underwater Laboratory"
-	desc = "This particular one is of the fabled last crew of Nanotrasen's previous project before going big on phoron research."
+	desc = "This particular one is of the fabled last crew of a previous Company project."
 
 /datum/poster/bay_12
 	icon_state="bsposter12"
 	name = "Rogue AI"
-	desc = "This particular one depicts the shell of the infamous AI that catastropically comandeered one of Nanotrasen's earliest space stations. Back then, the corporation was just known as TriOptimum."
+	desc = "This particular one depicts the shell of the infamous AI that catastropically comandeered one of humanity's earliest space stations. Back then, the Company was just known as TriOptimum."
 
 /datum/poster/bay_13
 	icon_state="bsposter13"
@@ -172,7 +172,7 @@
 /datum/poster/bay_35
 	icon_state="bsposter35"
 	name = "Lamarr"
-	desc = "This is a poster depicting the pet and mascot of the NSS Exodus science department."
+	desc = "This is a poster depicting the pet and mascot of the science department."
 
 /datum/poster/bay_36
 	icon_state="bsposter36"

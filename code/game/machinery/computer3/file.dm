@@ -25,7 +25,7 @@
 	// If you overwrite this function, use the return value to make sure it succeeded
 	//
 	proc/copy(var/obj/item/part/computer/storage/dest)
-		if(!computer || computer.crit_fail) return null
+		if(!computer) return null
 		if(drm)
 			if(!computer.emagged)
 				return null
@@ -39,7 +39,7 @@
 	// Returns null on failure even though the existing file doesn't go away
 	//
 	proc/move(var/obj/item/part/computer/storage/dest)
-		if(!computer || computer.crit_fail) return null
+		if(!computer) return null
 		if(drm)
 			if(!computer.emagged)
 				return null
@@ -55,7 +55,7 @@
 	//
 
 	proc/edit()
-		if(!computer || computer.crit_fail)
+		if(!computer)
 			return 0
 		if(readonly && !computer.emagged)
 			return 0 //
@@ -100,6 +100,7 @@
 		if(content)
 			if(file_increment > 1)
 				volume = round(file_increment * length(content))
+		..()
 
 /*
 	A generic file that contains text

@@ -225,12 +225,18 @@
 /obj/item/weapon/storage/proc/can_be_inserted(obj/item/W as obj, stop_messages = 0)
 	if(!istype(W)) return //Not an item
 
+	if(usr.isEquipped(W) && !usr.canUnEquip(W))
+		return 0
+
 	if(src.loc == W)
 		return 0 //Means the item is already in the storage item
 	if(contents.len >= storage_slots)
 		if(!stop_messages)
 			usr << "<span class='notice'>[src] is full, make some space.</span>"
 		return 0 //Storage item is full
+
+	if(W.anchored)
+		return 0
 
 	if(can_hold.len)
 		if(!is_type_in_list(W, can_hold))
@@ -290,9 +296,9 @@
 				if (M == usr)
 					usr << "<span class='notice'>You put \the [W] into [src].</span>"
 				else if (M in range(1)) //If someone is standing close enough, they can tell what it is...
-					M.show_message("<span class='notice'>[usr] puts [W] into [src].</span>")
+					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
 				else if (W && W.w_class >= 3) //Otherwise they can only see large or normal items from a distance...
-					M.show_message("<span class='notice'>[usr] puts [W] into [src].</span>")
+					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
 
 		src.orient2hud(usr)
 		if(usr.s_active)
@@ -341,6 +347,21 @@
 	if(isrobot(user))
 		return //Robots can't interact with storage items.
 
+	if(istype(W, /obj/item/device/lightreplacer))
+		var/obj/item/device/lightreplacer/LP = W
+		var/amt_inserted = 0
+		var/turf/T = get_turf(user)
+		for(var/obj/item/weapon/light/L in src.contents)
+			if(L.status == 0)
+				if(LP.uses < LP.max_uses)
+					LP.AddUses(1)
+					amt_inserted++
+					remove_from_storage(L, T)
+					qdel(L)
+		if(amt_inserted)
+			user << "You inserted [amt_inserted] light\s into \the [LP.name]. You have [LP.uses] light\s remaining."
+			return
+
 	if(!can_be_inserted(W))
 		return
 
@@ -348,14 +369,14 @@
 		var/obj/item/weapon/tray/T = W
 		if(T.calc_carry() > 0)
 			if(prob(85))
-				user << "\red The tray won't fit in [src]."
+				user << "<span class='warning'>The tray won't fit in [src].</span>"
 				return
 			else
 				W.loc = user.loc
 				if ((user.client && user.s_active != src))
 					user.client.screen -= W
 				W.dropped(user)
-				user << "\red God damnit!"
+				user << "<span class='warning'>God damnit!</span>"
 
 	W.add_fingerprint(user)
 	return handle_item_insertion(W)
@@ -446,12 +467,6 @@
 		if(src.verbs.Find(/obj/item/weapon/storage/verb/quick_empty))
 			src.quick_empty()
 			return 1
-
-/obj/item/weapon/storage/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
-	for (var/atom/A in src)
-		if(istype(A,/obj/))
-			var/obj/O = A
-			O.hear_talk(M, text, verb, speaking)
 
 /obj/item/weapon/storage/proc/make_exact_fit()
 	storage_slots = contents.len

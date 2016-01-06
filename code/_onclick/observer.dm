@@ -6,9 +6,9 @@
 	if(!client) return
 	client.inquisitive_ghost = !client.inquisitive_ghost
 	if(client.inquisitive_ghost)
-		src << "\blue You will now examine everything you click on."
+		src << "<span class='notice'>You will now examine everything you click on.</span>"
 	else
-		src << "\blue You will no longer examine things you click on."
+		src << "<span class='notice'>You will no longer examine things you click on.</span>"
 
 /mob/dead/observer/DblClickOn(var/atom/A, var/params)
 	if(client.buildmode)
@@ -26,14 +26,14 @@
 	// Otherwise jump
 	else
 		following = null
-		loc = get_turf(A)
+		forceMove(get_turf(A))
 
 /mob/dead/observer/ClickOn(var/atom/A, var/params)
 	if(client.buildmode)
 		build_click(src, client.buildmode, params, A)
 		return
-	if(world.time <= next_move) return
-	next_move = world.time + 8
+	if(!canClick()) return
+	setClickCooldown(4)
 	// You are responsible for checking config.ghost_interaction when you override this function
 	// Not all of them require checking, see below
 	A.attack_ghost(src)

@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/taser
 	name = "taser gun"
-	desc = "A small, low capacity gun used for non-lethal takedowns."
+	desc = "The NT Mk30 NL is a small, low capacity gun used for non-lethal takedowns. Produced by NT, it's actually a licensed version of a W-T design."
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
@@ -20,11 +20,11 @@
 
 /obj/item/weapon/gun/energy/stunrevolver
 	name = "stun revolver"
-	desc = "A high-tech revolver that fires stun cartridges. The stun cartridges can be recharged using a conventional energy weapon recharger."
+	desc = "A LAEP20 Zeus. Designed by Lawson Arms and produced under the wing of the FTU, several TSCs have been trying to get a hold of the blueprints for half a decade."
 	icon_state = "stunrevolver"
 	item_state = "stunrevolver"
 	fire_sound = 'sound/weapons/Gunshot.ogg'
-	origin_tech = "combat=3;materials=3;powerstorage=2"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 2)
 	projectile_type = /obj/item/projectile/energy/electrode
 	max_shots = 8
 
@@ -35,8 +35,8 @@
 	icon_state = "crossbow"
 	w_class = 2.0
 	item_state = "crossbow"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2, TECH_ILLEGAL = 5)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
-	origin_tech = "combat=2;magnets=2;syndicate=5"
 	slot_flags = SLOT_BELT
 	silenced = 1
 	fire_sound = 'sound/weapons/Genhit.ogg'

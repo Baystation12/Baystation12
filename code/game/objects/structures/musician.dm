@@ -291,7 +291,7 @@
 					Notes are played by the names of the note, and optionally, the accidental, and/or the octave number.<br>
 					By default, every note is natural and in octave 3. Defining otherwise is remembered for each note.<br>
 					Example: <i>C,D,E,F,G,A,B</i> will play a C major scale.<br>
-					After a note has an accidental placed, it will be remembered: <i>C,C4,C,C3</i> is C3,C4,C4,C3</i><br>
+					After a note has an accidental placed, it will be remembered: <i>C,C4,C,C3</i> is <i>C3,C4,C4,C3</i><br>
 					Chords can be played simply by seperating each note with a hyphon: <i>A-C#,Cn-E,E-G#,Gn-B</i><br>
 					A pause may be denoted by an empty chord: <i>C,E,,C,G</i><br>
 					To make a chord be a different time, end it with /x, where the chord length will be length<br>
@@ -415,20 +415,20 @@
 	if (istype(O, /obj/item/weapon/wrench))
 		if (anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			user << "\blue You begin to loosen \the [src]'s casters..."
+			user << "<span class='notice'>You begin to loosen \the [src]'s casters...</span>"
 			if (do_after(user, 40))
 				user.visible_message( \
 					"[user] loosens \the [src]'s casters.", \
-					"\blue You have loosened \the [src]. Now it can be pulled somewhere else.", \
+					"<span class='notice'>You have loosened \the [src]. Now it can be pulled somewhere else.</span>", \
 					"You hear ratchet.")
 				src.anchored = 0
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			user << "\blue You begin to tighten \the [src] to the floor..."
+			user << "<span class='notice'>You begin to tighten \the [src] to the floor...</span>"
 			if (do_after(user, 20))
 				user.visible_message( \
 					"[user] tightens \the [src]'s casters.", \
-					"\blue You have tightened \the [src]'s casters. Now it can be played again.", \
+					"<span class='notice'>You have tightened \the [src]'s casters. Now it can be played again</span>.", \
 					"You hear ratchet.")
 				src.anchored = 1
 	else

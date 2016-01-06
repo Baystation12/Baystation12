@@ -79,5 +79,5 @@
 
 /obj/item/weapon/haircomb/attack_self(mob/user)
 	if(user.r_hand == src || user.l_hand == src)
-		user.visible_message(text("\red [] uses [] to comb their hair with incredible style and sophistication. What a [].", user, src, user.gender == FEMALE ? "lady" : "guy"))
+		user.visible_message(text("<span class='notice'>[] uses [] to comb their hair with incredible style and sophistication. What a [].</span>", user, src, user.gender == FEMALE ? "lady" : "guy"))
 	return

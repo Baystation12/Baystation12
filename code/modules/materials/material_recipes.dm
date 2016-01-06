@@ -46,7 +46,7 @@
 	recipes += new/datum/stack_recipe("closet", /obj/structure/closet, 2, time = 15, one_per_turf = 1, on_floor = 1)
 	recipes += new/datum/stack_recipe("canister", /obj/machinery/portable_atmospherics/canister, 10, time = 15, one_per_turf = 1, on_floor = 1)
 	recipes += new/datum/stack_recipe("cannon frame", /obj/item/weapon/cannonframe, 10, time = 15, one_per_turf = 0, on_floor = 0)
-	recipes += new/datum/stack_recipe("floor tile", /obj/item/stack/tile/steel, 1, 4, 20)
+	recipes += new/datum/stack_recipe("regular floor tile", /obj/item/stack/tile/floor, 1, 4, 20)
 	recipes += new/datum/stack_recipe("metal rod", /obj/item/stack/rods, 1, 2, 60)
 	recipes += new/datum/stack_recipe("computer frame", /obj/structure/computerframe, 5, time = 25, one_per_turf = 1, on_floor = 1)
 	recipes += new/datum/stack_recipe("wall girders", /obj/structure/girder, 2, time = 50, one_per_turf = 1, on_floor = 1)
@@ -77,12 +77,16 @@
 	recipes += new/datum/stack_recipe("apc frame", /obj/item/frame/apc, 2)
 	recipes += new/datum/stack_recipe("air alarm frame", /obj/item/frame/air_alarm, 2)
 	recipes += new/datum/stack_recipe("fire alarm frame", /obj/item/frame/fire_alarm, 2)
+	recipes += new/datum/stack_recipe("modular console frame", /obj/machinery/modular_computer/console/buildable, 20)
+	recipes += new/datum/stack_recipe("modular laptop frame", /obj/machinery/modular_computer/laptop/buildable, 10)
+	recipes += new/datum/stack_recipe("modular tablet frame", /obj/item/modular_computer/tablet, 5)
 
 /material/plasteel/generate_recipes()
 	..()
 	recipes += new/datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = 1)
 	recipes += new/datum/stack_recipe("Metal crate", /obj/structure/closet/crate, 10, time = 50, one_per_turf = 1)
 	recipes += new/datum/stack_recipe("knife grip", /obj/item/weapon/material/butterflyhandle, 4, time = 20, one_per_turf = 0, on_floor = 1, supplied_material = "[name]")
+	recipes += new/datum/stack_recipe("dark floor tile", /obj/item/stack/tile/floor_dark, 1, 4, 20)
 
 /material/sandstone/generate_recipes()
 	..()
@@ -96,6 +100,8 @@
 	recipes += new/datum/stack_recipe("reagent dispenser cartridge (large)", /obj/item/weapon/reagent_containers/chem_disp_cartridge,        5, on_floor=0) // 500u
 	recipes += new/datum/stack_recipe("reagent dispenser cartridge (med)",   /obj/item/weapon/reagent_containers/chem_disp_cartridge/medium, 3, on_floor=0) // 250u
 	recipes += new/datum/stack_recipe("reagent dispenser cartridge (small)", /obj/item/weapon/reagent_containers/chem_disp_cartridge/small,  1, on_floor=0) // 100u
+	recipes += new/datum/stack_recipe("white floor tile", /obj/item/stack/tile/floor_white, 1, 4, 20)
+	recipes += new/datum/stack_recipe("freezer floor tile", /obj/item/stack/tile/floor_freezer, 1, 4, 20)
 
 /material/wood/generate_recipes()
 	..()
@@ -104,6 +110,9 @@
 	recipes += new/datum/stack_recipe("wooden chair", /obj/structure/bed/chair/wood, 3, time = 10, one_per_turf = 1, on_floor = 1)
 	recipes += new/datum/stack_recipe("crossbow frame", /obj/item/weapon/crossbowframe, 5, time = 25, one_per_turf = 0, on_floor = 0)
 	recipes += new/datum/stack_recipe("coffin", /obj/structure/closet/coffin, 5, time = 15, one_per_turf = 1, on_floor = 1)
+	recipes += new/datum/stack_recipe("beehive assembly", /obj/item/beehive_assembly, 4)
+	recipes += new/datum/stack_recipe("beehive frame", /obj/item/honey_frame, 1)
+	recipes += new/datum/stack_recipe("book shelf", /obj/structure/bookcase, 5, time = 15, one_per_turf = 1, on_floor = 1)
 
 /material/cardboard/generate_recipes()
 	..()

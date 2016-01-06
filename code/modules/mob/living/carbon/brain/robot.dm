@@ -4,7 +4,7 @@
 	icon = 'icons/obj/module.dmi'
 	icon_state = "mainboard"
 	w_class = 3
-	origin_tech = "engineering=4;materials=3;programming=4"
+	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 3, TECH_DATA = 4)
 
 /obj/item/device/mmi/digital/robot/New()
 	..()

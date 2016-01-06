@@ -198,6 +198,12 @@
 	if(grown_seed.get_trait(TRAIT_TELEPORTING))
 		dat += "<br>The fruit is temporal/spatially unstable."
 
+	if(grown_seed.get_trait(TRAIT_EXUDE_GASSES))
+		dat += "<br>It will release gas into the environment."
+
+	if(grown_seed.get_trait(TRAIT_CONSUME_GASSES))
+		dat += "<br>It will remove gas from the environment."
+
 	if(dat)
 		last_data = dat
 		dat += "<br><br>\[<a href='?src=\ref[src];print=1'>print report</a>\]"

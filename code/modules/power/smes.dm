@@ -37,6 +37,7 @@
 	var/input_pulsed = 0
 	var/output_cut = 0
 	var/output_pulsed = 0
+	var/failure_timer = 0			// Set by gridcheck event, temporarily disables the SMES.
 
 	var/open_hatch = 0
 	var/name_tag = null
@@ -116,6 +117,9 @@
 
 /obj/machinery/power/smes/process()
 	if(stat & BROKEN)	return
+	if(failure_timer)	// Disabled by gridcheck.
+		failure_timer--
+		return
 
 	//store machine state to see if we need to update the icon overlays
 	var/last_disp = chargedisplay()
@@ -204,7 +208,7 @@
 		user << "<span class='warning'>You can't build a terminal on space.</span>"
 		return 1
 	else if (istype(tempLoc))
-		if(tempLoc.intact)
+		if(!tempLoc.is_plating())
 			user << "<span class='warning'>You must remove the floor plating first.</span>"
 			return 1
 	user << "<span class='notice'>You start adding cable to the [src].</span>"
@@ -223,10 +227,7 @@
 
 
 /obj/machinery/power/smes/attack_ai(mob/user)
-	add_fingerprint(user)
-	ui_interact(user)
-
-/obj/machinery/power/smes/attack_ghost(mob/user)
+	add_hiddenprint(user)
 	ui_interact(user)
 
 /obj/machinery/power/smes/attack_hand(mob/user)
@@ -246,7 +247,7 @@
 			return 0
 
 	if (!open_hatch)
-		user << "<span class='warning'>You need to open access hatch on [src] first!</spann>"
+		user << "<span class='warning'>You need to open access hatch on [src] first!</span>"
 		return 0
 
 	if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)
@@ -272,7 +273,7 @@
 		building_terminal = 1
 		var/turf/tempTDir = terminal.loc
 		if (istype(tempTDir))
-			if(tempTDir.intact)
+			if(!tempTDir.is_plating())
 				user << "<span class='warning'>You must remove the floor plating first.</span>"
 			else
 				user << "<span class='notice'>You begin to cut the cables...</span>"
@@ -311,6 +312,7 @@
 	data["outputLevel"] = output_level
 	data["outputMax"] = output_level_max
 	data["outputLoad"] = round(output_used)
+	data["failTime"] = failure_timer * 2
 
 	if(outputting)
 		data["outputting"] = 2			// smes is outputting
@@ -346,6 +348,9 @@
 	else if( href_list["online"] )
 		outputting(!output_attempt)
 		update_icon()
+	else if( href_list["reboot"] )
+		failure_timer = 0
+		update_icon()
 	else if( href_list["input"] )
 		switch( href_list["input"] )
 			if("min")
@@ -366,10 +371,12 @@
 				output_level = input(usr, "Enter new output level (0-[output_level_max])", "SMES Output Power Control", output_level) as num
 		output_level = max(0, min(output_level_max, output_level))	// clamp to range
 
-	investigate_log("input/output; [input_level>output_level?"<font color='green'>":"<font color='red'>"][input_level]/[output_level]</font> | Output-mode: [output_attempt?"<font color='green'>on</font>":"<font color='red'>off</font>"] | Input-mode: [input_attempt?"<font color='green'>auto</font>":"<font color='red'>off</font>"] by [usr.key]","singulo")
+	investigate_log("input/output; <font color='[input_level>output_level?"green":"red"][input_level]/[output_level]</font> | Output-mode: [output_attempt?"<font color='green'>on</font>":"<font color='red'>off</font>"] | Input-mode: [input_attempt?"<font color='green'>auto</font>":"<font color='red'>off</font>"] by [usr.key]","singulo")
 
 	return 1
 
+/obj/machinery/power/smes/proc/energy_fail(var/duration)
+	failure_timer = max(failure_timer, duration)
 
 /obj/machinery/power/smes/proc/ion_act()
 	if(src.z in config.station_levels)
@@ -384,7 +391,7 @@
 			explosion(src.loc, -1, 0, 1, 3, 1, 0)
 			qdel(src)
 			return
-		if(prob(15)) //Power drain
+		else if(prob(15)) //Power drain
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
@@ -392,11 +399,13 @@
 				emp_act(1)
 			else
 				emp_act(2)
-		if(prob(5)) //smoke only
+		else if(prob(5)) //smoke only
 			var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
 			smoke.set_up(3, 0, src.loc)
 			smoke.attach(src)
 			smoke.start()
+		else
+			energy_fail(rand(0, 30))
 
 /obj/machinery/power/smes/proc/inputting(var/do_input)
 	input_attempt = do_input
@@ -409,21 +418,26 @@
 		outputting = 0
 
 /obj/machinery/power/smes/emp_act(severity)
-	inputting(rand(0,1))
-	outputting(rand(0,1))
-	output_level = rand(0, output_level_max)
-	input_level = rand(0, input_level_max)
-	charge -= 1e6/severity
-	if (charge < 0)
-		charge = 0
+	if(prob(50))
+		inputting(rand(0,1))
+		outputting(rand(0,1))
+	if(prob(50))
+		output_level = rand(0, output_level_max)
+		input_level = rand(0, input_level_max)
+	if(prob(50))
+		charge -= 1e6/severity
+		if (charge < 0)
+			charge = 0
+	if(prob(50))
+		energy_fail(rand(0 + (severity * 30),30 + (severity * 30)))
 	update_icon()
 	..()
 
 
 /obj/machinery/power/smes/magical
-	name = "magical power storage unit"
-	desc = "A high-capacity superconducting magnetic energy storage (SMES) unit. Magically produces power."
-	capacity = 9000000
+	name = "quantum power storage unit"
+	desc = "A high-capacity superconducting magnetic energy storage (SMES) unit. Gains energy from quantum entanglement link."
+	capacity = 5000000
 	output_level = 250000
 	should_be_mapped = 1
 

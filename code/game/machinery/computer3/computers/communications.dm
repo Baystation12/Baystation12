@@ -60,7 +60,7 @@
 		if(!interactable() || !computer.radio || ..(href,href_list) )
 			return
 		if (computer.z > 1)
-			usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
+			usr << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!"
 			return
 
 		if("main" in href_list)
@@ -192,12 +192,12 @@
 				if(centcomm_message_cooldown)
 					usr << "Arrays recycling.  Please stand by."
 					return
-				var/input = sanitize(input("Please choose a message to transmit to Centcomm via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response.", "To abort, send an empty message.", ""))
+				var/input = sanitize(input("Please choose a message to transmit to [boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response.", "To abort, send an empty message.", ""))
 				if(!input || !interactable())
 					return
 				Centcomm_announce(input, usr)
 				usr << "Message transmitted."
-				log_say("[key_name(usr)] has made a Centcomm announcement: [input]")
+				log_say("[key_name(usr)] has made a [boss_short] announcement: [input]")
 				centcomm_message_cooldown = 1
 				spawn(600)//10 minute cooldown
 					centcomm_message_cooldown = 0
@@ -288,7 +288,7 @@
 			if (authenticated==2)
 				dat += "<BR>\[ <A HREF='?src=\ref[src];announce'>Make An Announcement</A> \]"
 				if(computer.emagged == 0)
-					dat += "<BR>\[ <A HREF='?src=\ref[src];MessageCentcomm'>Send an emergency message to Centcomm</A> \]"
+					dat += "<BR>\[ <A HREF='?src=\ref[src];MessageCentcomm'>Send an emergency message to [boss_short]</A> \]"
 				else
 					dat += "<BR>\[ <A HREF='?src=\ref[src];MessageSyndicate'>Send an emergency message to \[UNKNOWN\]</A> \]"
 					dat += "<BR>\[ <A HREF='?src=\ref[src];RestoreBackup'>Restore Backup Routing Data</A> \]"

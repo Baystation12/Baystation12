@@ -1,0 +1,91 @@
+<h3>Sleeper</h3>
+{{if !data.power}}
+	<div class="item">
+	<div class="itemLabel">
+		NO POWER
+	</div>
+	{{if data.occupant}}
+		<div class="itemContent">
+			{{:helper.link("Eject occupant", null, {'eject' : 0})}}
+		</div>
+	{{/if}}
+{{else}}
+	{{if data.occupant}}
+		<div class="item">
+			<div class="itemLabel">
+			Occupant status:
+			</div>
+			<div class="itemContent">
+				Health: {{:data.health}}% ({{:data.stat}}).
+			</div>
+			<div class="itemLabel">
+				Pulse:
+			</div>
+			<div class="itemContent">
+				{{:data.pulse}}
+			</div>
+			<div class="itemLabel">
+				Brute damage:
+			</div>
+			<div class="itemContent">
+				{{:helper.displayBar(data.brute, 0, 100, (data.brute <= 25) ? 'good' : (data.brute <= 50) ? 'average' : 'bad')}}{{:helper.round(data.brute)}}
+			</div>
+			<div class="itemLabel">
+				Burn severity:
+			</div>
+			<div class="itemContent">
+			{{:helper.displayBar(data.burn, 0, 100, (data.burn <= 25) ? 'good' : (data.burn <= 50) ? 'average' : 'bad')}}{{:helper.round(data.burn)}}
+			</div>
+			<div class="itemLabel">
+				Respiratory damage:
+			</div>
+			<div class="itemContent">
+			{{:helper.displayBar(data.oxy, 0, 100, (data.oxy <= 25) ? 'good' : (data.oxy <= 50) ? 'average' : 'bad')}}{{:helper.round(data.oxy)}}
+			</div>
+			<div class="itemLabel">
+				Toxin content:
+			</div>
+			<div class="itemContent">
+			{{:helper.displayBar(data.tox, 0, 100, (data.tox <= 25) ? 'good' : (data.tox <= 50) ? 'average' : 'bad')}}{{:helper.round(data.tox)}}
+			</div>
+			<div class="itemContent">
+			{{:helper.link(data.filtering ? "Dialysis active" : "Dialysis inactive", null, {'filter' : !data.filtering})}}
+			</div>
+			<div class="itemContent">
+				{{:helper.link("Eject occupant", null, {'eject' : 0})}}
+			</div>
+		</div>
+	{{else}}
+		<div class="item">
+			No occupant.
+		</div>
+	{{/if}}
+	<div class="item">
+	{{for data.reagents}}
+		<div class="itemLabel">
+		{{:value.name}}
+		</div>
+		<div class="itemContent">
+			{{if data.occupant}}Occupant: {{:value.amount}} units{{/if}}
+			{{:helper.link('Inject 5', null, {'chemical' : value.id, 'amount' : 5}, data.occupant ? null : 'disabled')}}{{:helper.link('Inject 10', null, {'chemical' : value.id, 'amount' : 10}, data.occupant ? null : 'disabled')}}
+		</div>
+	{{/for}}
+	</div>
+	{{if data.beaker != -1}}
+		<div class="item">
+			<div class="itemLabel">
+				Beaker:
+			</div>
+			<div class="itemContent">
+				{{:data.beaker}} units of free space remaining.
+				{{:helper.link("Eject", null, {'beaker' : 0})}}
+			</div>
+		</div>
+	{{else}}
+		<div class="item">
+			<div class="itemLabel">
+				No beaker inserted.
+			</div>
+		</div>
+	{{/if}}
+{{/if}}
