@@ -93,9 +93,6 @@
 		spawn(600)
 			ignorelist -= gib
 
-	if(target)
-		handle_target()
-	else
 		// Find a target
 		var/maximum_range = 5
 		var/i
