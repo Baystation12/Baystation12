@@ -102,9 +102,8 @@
 		return
 
 	var/found_spot
-	var/i
 	search_loop:
-		for(i=0, i <= maximum_search_range, i++)
+		for(var/i=0, i <= maximum_search_range, i++)
 			for(var/obj/effect/decal/cleanable/D in view(i, src))
 				if(D in ignorelist)
 					continue
@@ -166,7 +165,7 @@
 		return
 
 	cleaning = 1
-	custom_emote(2, "begins to clean up [D]")
+	custom_emote(2, "begins to clean up \the [D]")
 	update_icons()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
 	if(do_after(src, cleantime))
