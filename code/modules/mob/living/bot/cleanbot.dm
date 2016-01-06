@@ -101,7 +101,7 @@
 	if(cleaning)
 		return
 
-		var/found_spot
+	var/found_spot
 	var/i
 	search_loop:
 		for(i=0, i <= maximum_search_range, i++)
