@@ -45,11 +45,11 @@
 			return 1
 	if(!path.len)
 //		spawn(0)
-			path = AStar(loc, target.loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 30, id = botcard)
-			if(!path)
-				custom_emote(2, "[src] can't reach the target and is giving up.")
+		path = AStar(loc, target.loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 30, id = botcard)
+		if(!path)
+			custom_emote(2, "[src] can't reach the target and is giving up.")
 			target = null
-				path = list()
+			path = list()
 		return
 	if(path.len)
 		step_to(src, path[1])
@@ -101,66 +101,58 @@
 		patrol_path = list()
 		return
 	var/found_spot
-		var/i
-		search_loop:
+	var/i
+	search_loop:
 		for(i=0, i <= maximum_search_range, i++)
 			for(var/obj/effect/decal/cleanable/D in view(i, src))
-			if(D in ignorelist)
-				continue
-			for(var/T in target_types)
-				if(istype(D, T))
-//TODO: starting point for optimizing later
-//						if (target)
-//							if (target == D)
-//								custom_emote(2, "continuing with target at [target.x] [target.y].")
-//								found_spot = 1
-//								break search_loop
-//							else
-//								custom_emote(2, "abandoning target at [target.x] [target.y].")
-					patrol_path = list()
-							target = D
+				if(D in ignorelist)
+					continue
+				for(var/T in target_types)
+					if(istype(D, T))
+						patrol_path = list()
+						target = D
 						found_spot = handle_target()
+						if (found_spot)
 							break search_loop
-							else
-								target = null
-								continue
+						else
+							target = null
+							continue // no need to check the other types
 
 
 	if(!found_spot && !target) // No targets in range
-
-			if(!patrol_path || !patrol_path.len)
-				if(!signal_sent || signal_sent > world.time + 200) // Waited enough or didn't send yet
-					var/datum/radio_frequency/frequency = radio_controller.return_frequency(beacon_freq)
-					if(!frequency)
-						return
-
-					closest_dist = 9999
-					next_dest = null
-					next_dest_loc = null
-
-					var/datum/signal/signal = new()
-					signal.source = src
-					signal.transmission_method = 1
-					signal.data = list("findbeakon" = "patrol")
-					frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
-					signal_sent = world.time
-				else
-					if(next_dest)
-						next_dest_loc = listener.memorized[next_dest]
-						if(next_dest_loc)
-							patrol_path = AStar(loc, next_dest_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 120, id = botcard, exclude = null)
-							signal_sent = 0
-			else
-				if(pulledby) // Don't wiggle if someone pulls you
-					patrol_path = list()
+		if(!patrol_path || !patrol_path.len)
+			if(!signal_sent || signal_sent > world.time + 200) // Waited enough or didn't send yet
+				var/datum/radio_frequency/frequency = radio_controller.return_frequency(beacon_freq)
+				if(!frequency)
 					return
-				if(patrol_path[1] == loc)
-					patrol_path -= patrol_path[1]
-				var/moved = step_towards(src, patrol_path[1])
-				if(moved)
-					patrol_path -= patrol_path[1]
 
-	
+				closest_dist = 9999
+				next_dest = null
+				next_dest_loc = null
+
+				var/datum/signal/signal = new()
+				signal.source = src
+				signal.transmission_method = 1
+				signal.data = list("findbeakon" = "patrol")
+				frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
+				signal_sent = world.time
+			else
+				if(next_dest)
+					next_dest_loc = listener.memorized[next_dest]
+					if(next_dest_loc)
+						patrol_path = AStar(loc, next_dest_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 120, id = botcard, exclude = null)
+						signal_sent = 0
+		else
+			if(pulledby) // Don't wiggle if someone pulls you
+				patrol_path = list()
+				return
+			if(patrol_path[1] == loc)
+				patrol_path -= patrol_path[1]
+			var/moved = step_towards(src, patrol_path[1])
+			if(moved)
+				patrol_path -= patrol_path[1]
+
+
 
 /mob/living/bot/cleanbot/UnarmedAttack(var/obj/effect/decal/cleanable/D, var/proximity)
 	if(!..())
@@ -173,7 +165,6 @@
 		return
 
 	cleaning = 1
-	custom_emote(2, "begins to clean up the [D]")
 	custom_emote(2, "begins to clean up [D]")
 	update_icons()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
