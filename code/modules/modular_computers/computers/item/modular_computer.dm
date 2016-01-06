@@ -69,6 +69,14 @@
 	card_slot.stored_card = null
 	user << "You remove the card from \the [src]"
 
+/obj/item/modular_computer/attack_ghost(var/mob/dead/observer/user)
+	if(enabled)
+		ui_interact(user)
+	else if(check_rights(R_ADMIN, 0, user))
+		var/response = alert(user, "This computer is turned off. Would you like to turn it on?", "Admin Override", "Yes", "No")
+		if(response == "Yes")
+			turn_on(user)
+
 /obj/item/modular_computer/emag_act(var/remaining_charges, var/mob/user)
 	if(computer_emagged)
 		user << "\The [src] was already emagged."
@@ -151,13 +159,24 @@
 /obj/item/modular_computer/attack_self(mob/user)
 	if(enabled)
 		ui_interact(user)
-	else if((battery_module && battery_module.battery.charge) || check_power_override()) // Battery-run and charged or non-battery but powered by APC.
-		user << "You press the power button and start up \the [src]"
+	else
+		turn_on(user)
+
+/obj/item/modular_computer/proc/turn_on(var/mob/user)
+	var/issynth = issilicon(user) // Robots and AIs get different activation messages.
+	if((battery_module && battery_module.battery.charge) || check_power_override()) // Battery-run and charged or non-battery but powered by APC.
+		if(issynth)
+			user << "You send an activation signal to \the [src], turning it on"
+		else
+			user << "You press the power button and start up \the [src]"
 		enabled = 1
 		update_icon()
 		ui_interact(user)
 	else // Unpowered
-		user << "You press the power button but \the [src] does not respond."
+		if(issynth)
+			user << "You send an activation signal to \the [src] but it does not respond"
+		else
+			user << "You press the power button but \the [src] does not respond"
 
 // Process currently calls handle_power(), may be expanded in future if more things are added.
 /obj/item/modular_computer/process()
