@@ -1,9 +1,9 @@
 "a" = (/turf/simulated/floor,/area/space)
 "b" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/space)
 "c" = (/obj/structure/shuttle/window,/turf/simulated/floor,/area/space)
-"d" = (/obj/effect/landmark/start,/turf/simulated/floor,/area/space)
-"e" = (/obj/structure/displaycase,/turf/simulated/floor,/area/space)
-"f" = (/obj/effect/decal/cleanable/dirt,/mob/living/bot/cleanbot,/turf/simulated/floor,/area/space)
+"d" = (/obj/structure/displaycase,/turf/simulated/floor,/area/space)
+"e" = (/obj/effect/decal/cleanable/dirt,/mob/living/bot/cleanbot{should_patrol = 1},/turf/simulated/floor,/area/space)
+"f" = (/obj/effect/landmark/start,/turf/simulated/floor,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
