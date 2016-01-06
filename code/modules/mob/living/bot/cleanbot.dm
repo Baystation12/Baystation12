@@ -26,6 +26,8 @@
 	var/blood = 1
 	var/list/target_types = list()
 
+	var/maximum_search_range = 7
+
 /mob/living/bot/cleanbot/New()
 	..()
 	get_targets()
@@ -94,27 +96,37 @@
 			ignorelist -= gib
 
 		// Find a target
-		var/maximum_range = 5
+	
+	if(pulledby) // Don't wiggle if someone pulls you
+		patrol_path = list()
+		return
+	var/found_spot
 		var/i
 		search_loop:
-		for(i=0, i <= maximum_range, i++)
+		for(i=0, i <= maximum_search_range, i++)
 			for(var/obj/effect/decal/cleanable/D in view(i, src))
 			if(D in ignorelist)
 				continue
 			for(var/T in target_types)
 				if(istype(D, T))
+//TODO: starting point for optimizing later
+//						if (target)
+//							if (target == D)
+//								custom_emote(2, "continuing with target at [target.x] [target.y].")
+//								found_spot = 1
+//								break search_loop
+//							else
+//								custom_emote(2, "abandoning target at [target.x] [target.y].")
 					patrol_path = list()
 							target = D
-							var/success
-							success = handle_target()
-							if (success)
+						found_spot = handle_target()
 							break search_loop
 							else
 								target = null
 								continue
 
-		if(!target) // No targets in range
-			if(!should_patrol)
+
+	if(!found_spot && !target) // No targets in range
 				return
 
 			if(!patrol_path || !patrol_path.len)
@@ -163,6 +175,7 @@
 
 	cleaning = 1
 	custom_emote(2, "begins to clean up the [D]")
+	custom_emote(2, "begins to clean up [D]")
 	update_icons()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
 	if(do_after(src, cleantime))
