@@ -44,3 +44,4 @@ script:
   - scripts/dm.sh -DUNIT_TEST baystation12.dme
   - DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt
   - grep "All Unit Tests Passed" log.txt
+  - (! grep "runtime error:" log.txt)
