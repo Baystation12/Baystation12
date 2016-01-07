@@ -64,6 +64,13 @@
 		user.visible_message("<span class='danger'>[user] hits [src] and bounces off!</span>")
 	return 1
 
+/obj/structure/mirror/Destroy()
+	for(var/user in ui_users)
+		var/datum/nano_module/appearance_changer/AC = ui_users[user]
+		qdel(AC)
+	ui_users.Cut()
+	..()
+
 // The following mirror is ~special~.
 /obj/structure/mirror/raider
 	name = "cracked mirror"
@@ -108,3 +115,10 @@
 			AC.flags = APPEARANCE_HAIR
 			ui_users[user] = AC
 		AC.ui_interact(user)
+
+/obj/item/weapon/mirror/Destroy()
+	for(var/user in ui_users)
+		var/datum/nano_module/appearance_changer/AC = ui_users[user]
+		qdel(AC)
+	ui_users.Cut()
+	..()
