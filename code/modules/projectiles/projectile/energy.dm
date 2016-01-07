@@ -43,7 +43,7 @@
 /obj/item/projectile/energy/electrode
 	name = "electrode"
 	icon_state = "spark"
-	nodamage = 1
+	damage = 0
 	stun = 10
 	weaken = 10
 	stutter = 10
