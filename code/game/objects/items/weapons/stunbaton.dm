@@ -12,7 +12,7 @@
 	w_class = 3
 	origin_tech = "combat=2"
 	attack_verb = list("beaten")
-	var/stunforce = 3
+	var/stunforce = 10
 	var/agonyforce = 0
 	var/status = 0		//whether the thing is on or not
 	var/obj/item/weapon/cell/bcell = null

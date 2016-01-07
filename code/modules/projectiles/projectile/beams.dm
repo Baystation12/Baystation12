@@ -135,8 +135,9 @@
 	name = "stun beam"
 	icon_state = "stun"
 	nodamage = 1
-	weaken = 3
-	stun = 3
+	taser_effect = 1
+	agony = 40
+	damage_type = HALLOSS
 
 	muzzle_type = /obj/effect/projectile/stun/muzzle
 	tracer_type = /obj/effect/projectile/stun/tracer
