@@ -54,7 +54,7 @@
 
 	//give them an account in the station database
 	var/species_modifier = (H.species ? economic_species_modifier[H.species.type] : 2)
-	if(species_modifier == 0)
+	if(!species_modifier)
 		species_modifier = economic_species_modifier[/datum/species/human]
 	
 	var/money_amount = (rand(5,50) + rand(5, 50)) * loyalty * economic_modifier * species_modifier
