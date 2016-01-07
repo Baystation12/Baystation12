@@ -456,6 +456,7 @@
 				new_character.rename_self("clown")
 			mind.original = new_character
 			mind.transfer_to(new_character)					//won't transfer key since the mind is not active
+			mind.active = 1
 
 		new_character.name = real_name
 		new_character.dna.ready_dna(new_character)

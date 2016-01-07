@@ -36,6 +36,9 @@
 			message_admins("Translation error in GetVar of [type] [v]: no referenced object.", 1)
 			return "Translation module error, please, contact administration!"
 
+		if((v in refObj:vars) && refObj:is_instance)		//duct tape for objects created not in code but on map and ingame
+			return refObj:vars[v]
+
 		if(hascall(src, v) && call(src, v)())			//sometimes we need to call a special proc named as needed var to find a value
 			return call(src, v)()						//for example, name var in id card, which isn`t constant and is created from name and rank
 		else

@@ -1,6 +1,8 @@
 
 var/global/list/interface_languages = list("main", "ru_RU")
 
+/datum/var/is_instance = 0
+
 /client/verb/change_language()
 	set name = "Change Language"
 	set category = "Preferences"
@@ -58,7 +60,7 @@ proc/translation(var/obj, var/v = null, var/procArgs = null, var/language = null
 															//we can translate vars and proc/verb
 	if(hascall(P, v) && call(P, v)(procArgs))				//it can be used for easier translation of browser windows and funcs like examine()
 		result = call(P, v)(procArgs)						//so, if datum has such proc and it return something, return it
-	else if((v in P:vars) && P:GetVar(v))						//else, trying to get var value, if exists
+	else if((v in P:vars) && P:GetVar(v))					//else, trying to get var value, if exists
 		result = P:GetVar(v)								//GetVar() proc uses for inner needs, but there it isn`t necessary
 	else
 		del(P)
