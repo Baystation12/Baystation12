@@ -110,7 +110,6 @@ proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 
 	if (user.a_intent == I_HELP)
 		user << "<span class='warning'>You can't see any useful way to use [tool] on [M].</span>"
-		return 1
 	return 0
 
 proc/sort_surgeries()
