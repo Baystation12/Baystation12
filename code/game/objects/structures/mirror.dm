@@ -30,7 +30,7 @@
 
 
 /obj/structure/mirror/bullet_act(var/obj/item/projectile/Proj)
-	
+
 	if(prob(Proj.get_structure_damage() * 2))
 		if(!shattered)
 			shatter()
@@ -91,3 +91,20 @@
 					raiders.update_access(vox)
 				qdel(user)
 	..()
+
+/obj/item/weapon/mirror
+	name = "mirror"
+	desc = "A SalonPro Nano-Mirror(TM) brand mirror! Now a portable version."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "mirror"
+	var/list/ui_users = list()
+
+/obj/item/weapon/mirror/attack_self(mob/user as mob)
+	if(ishuman(user))
+		var/datum/nano_module/appearance_changer/AC = ui_users[user]
+		if(!AC)
+			AC = new(src, user)
+			AC.name = "SalonPro Nano-Mirror&trade;"
+			AC.flags = APPEARANCE_HAIR
+			ui_users[user] = AC
+		AC.ui_interact(user)
