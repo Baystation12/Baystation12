@@ -57,13 +57,13 @@
 				var/decl/flooring/F = flooring_types[flooring_type]
 				if(!F.build_type)
 					continue
-				if((S.type == F.build_type) || (S.build_type == F.build_type))
+				if(ispath(S.type, F.build_type) || ispath(S.build_type, F.build_type))
 					use_flooring = F
 					break
 			if(!use_flooring)
 				return
 			// Do we have enough?
-			if(use_flooring.build_cost && S.amount < use_flooring.build_cost)
+			if(use_flooring.build_cost && S.get_amount() < use_flooring.build_cost)
 				user << "<span class='warning'>You require at least [use_flooring.build_cost] [S.name] to complete the [use_flooring.descriptor].</span>"
 				return
 			// Stay still and focus...
