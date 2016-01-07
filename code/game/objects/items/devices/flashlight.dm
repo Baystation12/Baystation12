@@ -64,7 +64,7 @@
 					return
 				if(XRAY in M.mutations)
 					user << "<span class='notice'>\The [M] pupils give an eerie glow!</span>"
-				if(vision.is_bruised())
+				if(vision.damage)
 					user << "<span class='warning'>There's visible damage to [M]'s [vision.name]!</span>"
 				else if(M.eye_blurry)
 					user << "<span class='notice'>\The [M]'s pupils react slower than normally.</span>"
@@ -79,7 +79,7 @@
 					user << "<span class='notice'>\The [M]'s pupils narrow slightly, but are still very dilated.</span>"
 				else
 					user << "<span class='notice'>\The [M]'s pupils narrow.</span>"
-			
+
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //can be used offensively
 			flick("flash", M.flash)
 	else

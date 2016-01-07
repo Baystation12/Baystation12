@@ -1,0 +1,5 @@
+author: Chinsky
+
+delete-after: True
+changes: 
+  - bugfix: "Can pick up monkeys / undress resomi now properly. HELP intent for scooping, NON-HELP for undressing."
