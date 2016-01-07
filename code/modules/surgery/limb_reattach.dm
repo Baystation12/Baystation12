@@ -32,7 +32,6 @@
 		"<span class='notice'>You have attached [target]'s [E.name] to the [E.amputation_point].</span>")
 		user.drop_from_inventory(E)
 		E.replaced(target)
-		E.loc = target
 		target.update_body()
 		target.updatehealth()
 		target.UpdateDamageIcon()
