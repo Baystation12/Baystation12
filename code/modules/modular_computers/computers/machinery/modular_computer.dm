@@ -27,6 +27,10 @@
 
 	var/obj/item/modular_computer/processor/cpu = null				// CPU that handles most logic while this type only handles power and other specific things.
 
+/obj/machinery/modular_computer/attack_ghost(var/mob/dead/observer/user)
+	if(cpu)
+		cpu.attack_ghost(user)
+
 /obj/machinery/modular_computer/emag_act(var/remaining_charges, var/mob/user)
 	return cpu ? cpu.emag_act(remaining_charges, user) : NO_EMAG_ACT
 
