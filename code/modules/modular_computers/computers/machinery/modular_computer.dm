@@ -40,7 +40,7 @@
 	overlays.Cut()
 
 	if(!cpu || !cpu.enabled)
-		if (!(stat & NOPOWER))
+		if (!(stat & NOPOWER) || battery_powered)
 			overlays.Add(screen_icon_screensaver)
 		return
 	if(cpu.active_program)
