@@ -69,14 +69,13 @@
 	icon_state = "candlebox5"
 	icon_type = "candle"
 	item_state = "candlebox5"
-	storage_slots = 5
 	throwforce = 2
 	slot_flags = SLOT_BELT
 
 
 /obj/item/weapon/storage/fancy/candle_box/New()
 	..()
-	for(var/i=1; i <= storage_slots; i++)
+	for(var/i=1; i <= 5; i++)
 		new /obj/item/weapon/flame/candle(src)
 	return
 
@@ -90,7 +89,6 @@
 	icon = 'icons/obj/crayons.dmi'
 	icon_state = "crayonbox"
 	w_class = 2.0
-	storage_slots = 6
 	icon_type = "crayon"
 	can_hold = list(
 		/obj/item/weapon/pen/crayon

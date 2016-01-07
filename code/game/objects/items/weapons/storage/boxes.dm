@@ -478,7 +478,6 @@
 	desc = "Drymate brand monkey cubes. Just add water!"
 	icon = 'icons/obj/food.dmi'
 	icon_state = "monkeycubebox"
-	storage_slots = 7
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube)
 	New()
 		..()
@@ -592,11 +591,10 @@
 	desc = "Eight wrappers of fun! Ages 8 and up. Not suitable for children."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "spbox"
-	storage_slots = 8
 	can_hold = list(/obj/item/toy/snappop)
 	New()
 		..()
-		for(var/i=1; i <= storage_slots; i++)
+		for(var/i=1; i <= 8; i++)
 			new /obj/item/toy/snappop(src)
 
 /obj/item/weapon/storage/box/matches
@@ -605,14 +603,13 @@
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "matchbox"
 	item_state = "zippo"
-	storage_slots = 10
 	w_class = 1
 	slot_flags = SLOT_BELT
 	can_hold = list(/obj/item/weapon/flame/match)
 
 	New()
 		..()
-		for(var/i=1; i <= storage_slots; i++)
+		for(var/i=1; i <= 10; i++)
 			new /obj/item/weapon/flame/match(src)
 
 	attackby(obj/item/weapon/flame/match/W as obj, mob/user as mob)
@@ -630,7 +627,7 @@
 	icon_state = "syringe"
 	New()
 		..()
-		for (var/i; i < storage_slots; i++)
+		for (var/i; i < 7; i++)
 			new /obj/item/weapon/reagent_containers/hypospray/autoinjector(src)
 
 /obj/item/weapon/storage/box/lights
@@ -676,7 +673,6 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "portafreezer"
 	item_state = "medicalpack"
-	storage_slots=7
 	max_w_class = 3
 	can_hold = list(/obj/item/organ, /obj/item/weapon/reagent_containers/food, /obj/item/weapon/reagent_containers/glass)
 	max_storage_space = 21
