@@ -160,7 +160,7 @@
 			proc/start_drill(var/args = null)	return "\red You start [args ? translation(args, "drill_verb") : "drilling"]."
 			proc/finish_drill(var/args = null)	return "\blue You finish [args ? translation(args, "drill_verb") : "drilling"] the rock."
 			proc/artifact_fail()	return "[pick("A high pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!"
-			proc/find_crate()	return "<span class='notice'>An old dusty crate was buried within!</span>"
+			proc/find_crate_m()	return "<span class='notice'>An old dusty crate was buried within!</span>"
 			proc/find_break(var/args = null)	return "\red<b>[pick("[args ? translation(args, "display_name") : "Something"] crumbles away into dust","[args ? translation(args, "display_name") : "Something"] breaks apart")].</b>"
 
 			random
