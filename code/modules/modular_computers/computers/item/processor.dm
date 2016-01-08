@@ -78,9 +78,7 @@
 /obj/item/modular_computer/processor/shutdown_computer()
 	if(!machinery_computer)
 		return
-	kill_program(1)
-	visible_message("\The [machinery_computer] shuts down.")
-	enabled = 0
+	..()
 	machinery_computer.update_icon()
 	return
 

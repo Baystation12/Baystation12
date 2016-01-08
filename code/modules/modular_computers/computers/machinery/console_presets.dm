@@ -8,6 +8,7 @@
 	. = ..()
 	if(!cpu)
 		return
+	cpu.processor_unit = new/obj/item/weapon/computer_hardware/processor_unit(cpu)
 	if(_has_id_slot)
 		cpu.card_slot = new/obj/item/weapon/computer_hardware/card_slot(cpu)
 	if(_has_printer)
