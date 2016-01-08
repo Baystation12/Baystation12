@@ -85,6 +85,8 @@
 	view = ORION_VIEW_MAIN
 
 /obj/machinery/computer/arcade/orion_trail/attack_hand(mob/user)
+	if(..())
+		return
 	var/dat = ""
 	if(event == null)
 		newgame()
