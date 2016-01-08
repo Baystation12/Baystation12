@@ -193,6 +193,15 @@
 /mob/proc/GetIdCard()
 	return null
 
+var/obj/item/weapon/card/id/all_access/ghost_all_access
+/mob/dead/observer/GetIdCard()
+	if(!is_admin(src))
+		return
+
+	if(!ghost_all_access)
+		ghost_all_access = new()
+	return ghost_all_access
+
 /mob/living/bot/GetIdCard()
 	return botcard
 
