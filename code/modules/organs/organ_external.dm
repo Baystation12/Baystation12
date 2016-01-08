@@ -191,6 +191,7 @@
 			for(var/datum/wound/lost_limb/W in parent.wounds)
 				parent.wounds -= W
 				qdel(W)
+				break
 			parent.update_damages()
 
 
