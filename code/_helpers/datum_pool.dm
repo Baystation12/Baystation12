@@ -94,21 +94,21 @@ var/global/list/GlobalPool = list()
 		loc = args
 	..()
 
-var/list/exclude = list("animate_movement", "contents", "loc", "locs", "parent_type", "vars", "verbs", "type")
+var/list/excluded_vars = list("animate_movement", "contents", "loc", "locs", "parent_type", "vars", "verbs", "type")
 var/list/pooledvariables = list()
 //thanks to clusterfack @ /vg/station for these two procs
-/datum/proc/createVariables()
+/datum/proc/createVariables(var/list/excluded)
 	pooledvariables[type] = new/list()
-	var/list/exclude = global.exclude + args
+	var/list/all_excluded = excluded_vars + excluded
 
 	for(var/key in vars)
-		if(key in exclude)
+		if(key in all_excluded)
 			continue
 		pooledvariables[type][key] = initial(vars[key])
 
-/datum/proc/ResetVars()
+/datum/proc/ResetVars(var/list/excluded = list())
 	if(!pooledvariables[type])
-		createVariables(args)
+		createVariables(excluded)
 
 	for(var/key in pooledvariables[type])
 		vars[key] = pooledvariables[type][key]
