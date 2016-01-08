@@ -27,6 +27,10 @@
 
 	var/obj/item/modular_computer/processor/cpu = null				// CPU that handles most logic while this type only handles power and other specific things.
 
+/obj/machinery/modular_computer/attack_ghost(var/mob/dead/observer/user)
+	if(cpu)
+		cpu.attack_ghost(user)
+
 /obj/machinery/modular_computer/emag_act(var/remaining_charges, var/mob/user)
 	return cpu ? cpu.emag_act(remaining_charges, user) : NO_EMAG_ACT
 
@@ -77,8 +81,7 @@
 	if(cpu && cpu.enabled) // Shut down the computer
 		visible_message("<span class='danger'>\The [src]'s screen flickers [cpu.battery_module ? "\"BATTERY CRITICAL\"" : "\"EXTERNAL POWER LOSS\""] warning as it shuts down unexpectedly.</span>")
 		if(cpu)
-			cpu.kill_program(1)
-			cpu.enabled = 0
+			cpu.shutdown_computer(0)
 		battery_powered = 0
 		update_icon()
 	stat |= NOPOWER

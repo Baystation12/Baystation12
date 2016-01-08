@@ -28,6 +28,7 @@
 
 
 	// Important hardware (must be installed for computer to work)
+	var/obj/item/weapon/computer_hardware/processor_unit/processor_unit				// CPU. Without it the computer won't run. Better CPUs can run more programs at once.
 	var/obj/item/weapon/computer_hardware/network_card/network_card					// Network Card component of this computer. Allows connection to NTNet
 	var/obj/item/weapon/computer_hardware/hard_drive/hard_drive						// Hard Drive component of this computer. Stores programs and files.
 	var/obj/item/weapon/computer_hardware/battery_module/battery_module				// An internal power source for this computer. Can be recharged.
@@ -35,6 +36,8 @@
 	var/obj/item/weapon/computer_hardware/card_slot/card_slot						// ID Card slot component of this computer. Mostly for HoP modification console that needs ID slot for modification.
 	var/obj/item/weapon/computer_hardware/nano_printer/nano_printer					// Nano Printer component of this computer, for your everyday paperwork needs.
 	var/obj/item/weapon/computer_hardware/hard_drive/portable/portable_drive		// Portable data storage
+
+	var/list/idle_threads = list()							// Idle programs on background. They still receive process calls but can't be interacted with.
 
 
 // Eject ID card from computer, if it has ID slot with card inside.
@@ -68,6 +71,14 @@
 	card_slot.stored_card.forceMove(get_turf(src))
 	card_slot.stored_card = null
 	user << "You remove the card from \the [src]"
+
+/obj/item/modular_computer/attack_ghost(var/mob/dead/observer/user)
+	if(enabled)
+		ui_interact(user)
+	else if(check_rights(R_ADMIN, 0, user))
+		var/response = alert(user, "This computer is turned off. Would you like to turn it on?", "Admin Override", "Yes", "No")
+		if(response == "Yes")
+			turn_on(user)
 
 /obj/item/modular_computer/emag_act(var/remaining_charges, var/mob/user)
 	if(computer_emagged)
@@ -151,13 +162,24 @@
 /obj/item/modular_computer/attack_self(mob/user)
 	if(enabled)
 		ui_interact(user)
-	else if((battery_module && battery_module.battery.charge) || check_power_override()) // Battery-run and charged or non-battery but powered by APC.
-		user << "You press the power button and start up \the [src]"
+	else
+		turn_on(user)
+
+/obj/item/modular_computer/proc/turn_on(var/mob/user)
+	var/issynth = issilicon(user) // Robots and AIs get different activation messages.
+	if(processor_unit && ((battery_module && battery_module.battery.charge) || check_power_override())) // Battery-run and charged or non-battery but powered by APC.
+		if(issynth)
+			user << "You send an activation signal to \the [src], turning it on"
+		else
+			user << "You press the power button and start up \the [src]"
 		enabled = 1
 		update_icon()
 		ui_interact(user)
 	else // Unpowered
-		user << "You press the power button but \the [src] does not respond."
+		if(issynth)
+			user << "You send an activation signal to \the [src] but it does not respond"
+		else
+			user << "You press the power button but \the [src] does not respond"
 
 // Process currently calls handle_power(), may be expanded in future if more things are added.
 /obj/item/modular_computer/process()
@@ -169,10 +191,21 @@
 		kill_program(1)
 		visible_message("<span class='danger'>\The [src]'s screen briefly freezes and then shows \"NETWORK ERROR - NTNet connection lost. Please retry. If problem persists contact your system administrator.\" error.</span>")
 
+	for(var/datum/computer_file/program/P in idle_threads)
+		if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature))
+			P.kill_program(1)
+			idle_threads.Remove(P)
+			visible_message("<span class='danger'>\The [src] screen displays an \"Process [P.filename].[P.filetype] (PID [rand(100,999)]) terminated - Network Error\" error</span>")
+
 	if(active_program)
 		active_program.process_tick()
 		active_program.ntnet_status = get_ntnet_status()
 		active_program.computer_emagged = computer_emagged
+
+	for(var/datum/computer_file/program/P in idle_threads)
+		P.process_tick()
+		P.ntnet_status = get_ntnet_status()
+		P.computer_emagged = computer_emagged
 
 	handle_power() // Handles all computer power interaction
 
@@ -211,6 +244,17 @@
 		if(3)
 			data["PC_ntneticon"] = "sig_lan.gif"
 
+	if(idle_threads.len)
+		var/list/program_headers = list()
+		for(var/datum/computer_file/program/P in idle_threads)
+			if(!P.ui_header)
+				continue
+			program_headers.Add(list(list(
+				"icon" = P.ui_header
+			)))
+
+		data["PC_programheaders"] = program_headers
+
 	data["PC_stationtime"] = worldtime2text()
 	data["PC_hasheader"] = 1
 	data["PC_showexitprogram"] = active_program ? 1 : 0 // Hides "Exit Program" button on mainscreen
@@ -238,9 +282,13 @@
 		return 0
 	return ntnet_global.add_log(text, network_card)
 
-/obj/item/modular_computer/proc/shutdown_computer()
+/obj/item/modular_computer/proc/shutdown_computer(var/loud = 1)
 	kill_program(1)
-	visible_message("\The [src] shuts down.")
+	for(var/datum/computer_file/program/P in idle_threads)
+		P.kill_program(1)
+		idle_threads.Remove(P)
+	if(loud)
+		visible_message("\The [src] shuts down.")
 	enabled = 0
 	update_icon()
 	return
@@ -265,6 +313,23 @@
 	if( href_list["PC_shutdown"] )
 		shutdown_computer()
 		return
+	if( href_list["PC_minimize"] )
+		var/mob/user = usr
+		if(!active_program || !processor_unit)
+			return
+
+		if(idle_threads.len >= processor_unit.max_idle_programs)
+			user << "<span class='notice'>\The [src] displays a \"Maximal CPU load reached. Unable to minimize another program.\" error</span>"
+			return
+
+		idle_threads.Add(active_program)
+		active_program.running = 0 // Should close any existing UIs
+		nanomanager.close_uis(active_program.NM ? active_program.NM : active_program)
+		active_program = null
+		update_icon()
+		if(user && istype(user))
+			ui_interact(user) // Re-open the UI on this computer. It should show the main screen now.
+
 	if( href_list["PC_runprogram"] )
 		var/prog = href_list["PC_runprogram"]
 		var/datum/computer_file/program/P = null
@@ -280,6 +345,14 @@
 		if(!P.is_supported_by_hardware(hardware_flag, 1, user))
 			return
 
+		// The program is already running. Resume it.
+		if(P in idle_threads)
+			P.running = 1
+			active_program = P
+			idle_threads.Remove(P)
+			update_icon()
+			return
+
 		if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature)) // The program requires NTNet connection, but we are not connected to NTNet.
 			user << "<span class='danger'>\The [src]'s screen shows \"NETWORK ERROR - Unable to connect to NTNet. Please retry. If problem persists contact your system administrator.\" warning.</span>"
 			return
@@ -292,9 +365,7 @@
 /obj/item/modular_computer/proc/power_failure()
 	if(enabled) // Shut down the computer
 		visible_message("<span class='danger'>\The [src]'s screen flickers \"BATTERY CRITICAL\" warning as it shuts down unexpectedly.</span>")
-		kill_program(1)
-		enabled = 0
-		update_icon()
+		shutdown_computer(0)
 
 // Handles power-related things, such as battery interaction, recharging, shutdown when it's discharged
 /obj/item/modular_computer/proc/handle_power()
@@ -303,11 +374,10 @@
 		return 0
 
 	var/power_usage = screen_on ? base_active_power_usage : base_idle_power_usage
-	if(network_card && network_card.enabled)
-		power_usage += network_card.power_usage
 
-	if(hard_drive && hard_drive.enabled)
-		power_usage += hard_drive.power_usage
+	for(var/obj/item/weapon/computer_hardware/H in get_all_components())
+		if(H.enabled)
+			power_usage += H.power_usage
 
 	if(battery_module)
 		battery_module.battery.use(power_usage * CELLRATE)
@@ -421,6 +491,12 @@
 			return
 		found = 1
 		battery_module = H
+	else if(istype(H, /obj/item/weapon/computer_hardware/processor_unit))
+		if(processor_unit)
+			user << "This computer's processor slot is already occupied by \the [processor_unit]."
+			return
+		found = 1
+		processor_unit = H
 	if(found)
 		user << "You install \the [H] into \the [src]"
 		H.holder2 = src
@@ -448,11 +524,15 @@
 	if(battery_module == H)
 		battery_module = null
 		found = 1
+	if(processor_unit == H)
+		processor_unit = null
+		found = 1
+		critical = 1
 	if(found)
 		user << "You remove \the [H] from \the [src]."
 		H.forceMove(get_turf(src))
 		H.holder2 = null
-	if(critical)
+	if(critical && enabled)
 		user << "<span class='danger'>\The [src]'s screen freezes for few seconds and then displays an \"HARDWARE ERROR: Critical component disconnected. Please verify component connection and reboot the device. If the problem persists contact technical support for assistance.\" warning.</span>"
 		kill_program(1)
 		enabled = 0
@@ -473,6 +553,8 @@
 		return card_slot
 	if(battery_module && (battery_module.name == name))
 		return battery_module
+	if(processor_unit && (processor_unit.name == name))
+		return processor_unit
 	return null
 
 // Returns list of all components
@@ -490,4 +572,6 @@
 		all_components.Add(card_slot)
 	if(battery_module)
 		all_components.Add(battery_module)
+	if(processor_unit)
+		all_components.Add(processor_unit)
 	return all_components

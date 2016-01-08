@@ -7,8 +7,10 @@
 	requires_ntnet = 1
 	requires_ntnet_feature = NTNET_COMMUNICATION
 	network_destination = "NTNRC server"
+	ui_header = "ntnrc_idle.gif"
 	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/computer_chatclient/
+	var/last_message = null				// Used to generate the toolbar icon
 	var/username
 	var/datum/ntnet_conversation/channel = null
 	var/operator_mode = 0		// Channel operator mode
@@ -35,7 +37,7 @@
 		. = 1
 		var/datum/ntnet_conversation/C
 		for(var/datum/ntnet_conversation/chan in ntnet_global.chat_channels)
-			if(chan.title == href_list["PRG_joinchannel"])
+			if(chan.id == text2num(href_list["PRG_joinchannel"]))
 				C = chan
 				break
 
@@ -155,6 +157,21 @@
 		else
 			channel.password = newpassword
 
+/datum/computer_file/program/chatclient/process_tick()
+	..()
+	if(running)
+		ui_header = "ntnrc_idle.gif"
+		if(channel)
+			// Remember the last message. If there is no message in the channel remember null.
+			last_message = channel.messages.len ? channel.messages[channel.messages.len - 1] : null
+		else
+			last_message = null
+		return 1
+	if(channel && channel.messages && channel.messages.len)
+		ui_header = last_message == channel.messages[channel.messages.len - 1] ? "ntnrc_idle.gif" : "ntnrc_new.gif"
+	else
+		ui_header = "ntnrc_idle.gif"
+
 /datum/computer_file/program/chatclient/kill_program(var/forced = 0)
 	if(channel)
 		channel.remove_client(src)
@@ -199,7 +216,8 @@
 		for(var/datum/ntnet_conversation/conv in ntnet_global.chat_channels)
 			if(conv && conv.title)
 				all_channels.Add(list(list(
-					"chan" = conv.title
+					"chan" = conv.title,
+					"id" = conv.id
 				)))
 		data["all_channels"] = all_channels
 

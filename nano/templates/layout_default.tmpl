@@ -17,6 +17,9 @@
 			{{if data.PC_stationtime}}
 				<td><b>{{:data.PC_stationtime}}<b>
 			{{/if}}
+			{{for data.PC_programheaders}}
+				<td><img src='{{:value.icon}}'>
+			{{/for}}
 			</table>
 		</div>
 	</div>
@@ -25,6 +28,7 @@
 			<td>{{:helper.link('Shutdown', null, {'PC_shutdown' : 1})}}
 			{{if data.PC_showexitprogram}}
 				<td>{{:helper.link('Exit Program', null, {'PC_exit' : 1})}}
+				<td>{{:helper.link('Minimize Program', null, {'PC_minimize' : 1})}}
 			{{/if}}
 		</table>
 	</div>

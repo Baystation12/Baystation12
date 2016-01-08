@@ -85,6 +85,10 @@
 /proc/log_misc(text)
 	diary << "\[[time_stamp()]]MISC: [text][log_end]"
 
+/proc/log_unit_test(text)
+	world.log << "## UNIT_TEST ##: [text]"
+	
+
 //pretty print a direction bitflag, can be useful for debugging.
 /proc/print_dir(var/dir)
 	var/list/comps = list()

@@ -1,0 +1,6 @@
+author: RavingManiac
+
+delete-after: True
+
+changes: 
+  - rscadd: "Storage in backpacks, boxes and other containers is now capacity-based. Some containers like belts remain slot-based."
