@@ -917,7 +917,7 @@ other types of metals and chemistry for reagents).
 	sort_string = "VBAAU"
 
 /datum/design/item/modularcomponent/cpu/
-	name = "processor unit"
+	name = "computer processor unit"
 	id = "cpu_normal"
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
 	build_type = IMPRINTER
@@ -927,7 +927,7 @@ other types of metals and chemistry for reagents).
 	sort_string = "VBAAV"
 
 /datum/design/item/modularcomponent/cpu/small
-	name = "microprocessor unit"
+	name = "computer microprocessor unit"
 	id = "cpu_small"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = IMPRINTER
@@ -937,7 +937,7 @@ other types of metals and chemistry for reagents).
 	sort_string = "VBAAW"
 
 /datum/design/item/modularcomponent/cpu/photonic
-	name = "photonic processor unit"
+	name = "computer photonic processor unit"
 	id = "pcpu_normal"
 	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 4)
 	build_type = IMPRINTER
@@ -947,8 +947,8 @@ other types of metals and chemistry for reagents).
 	sort_string = "VBAAX"
 
 /datum/design/item/modularcomponent/cpu/photonic/small
-	name = "photonic processor unit"
-	id = "pcpu_normal"
+	name = "computer photonic microprocessor unit"
+	id = "pcpu_small"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
 	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 16000, glass = 4000)

@@ -32,8 +32,7 @@
 	if(href_list["PRG_joinchannel"])
 		var/datum/ntnet_conversation/C
 		for(var/datum/ntnet_conversation/chan in ntnet_global.chat_channels)
-			world << "DEBUG L35/NTNRC_CLIENT.DM: \"[href_list["PRG_joinchannel"]]\" / \"[chan.title]\""
-			if(chan.title == href_list["PRG_joinchannel"])
+			if(chan.id == text2num(href_list["PRG_joinchannel"]))
 				C = chan
 				break
 
@@ -205,7 +204,8 @@
 		for(var/datum/ntnet_conversation/conv in ntnet_global.chat_channels)
 			if(conv && conv.title)
 				all_channels.Add(list(list(
-					"chan" = conv.title
+					"chan" = conv.title,
+					"id" = conv.id
 				)))
 		data["all_channels"] = all_channels
 
