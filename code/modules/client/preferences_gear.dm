@@ -1233,6 +1233,12 @@ var/global/list/gear_datums = list()
 	sort_category = "misc"
 	cost = 1
 
+/datum/gear/mirror
+	display_name = "handheld mirror"
+	path = /obj/item/weapon/mirror
+	sort_category = "misc"
+	cost = 1
+
 /datum/gear/zippo
 	display_name = "zippo"
 	path = /obj/item/weapon/flame/lighter/zippo
