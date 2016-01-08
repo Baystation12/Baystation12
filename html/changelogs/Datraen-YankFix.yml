@@ -1,0 +1,4 @@
+author: Datraen
+delete-after: True
+changes: 
+  - bugfix: "Objects can now be yanked out of synthetics."
