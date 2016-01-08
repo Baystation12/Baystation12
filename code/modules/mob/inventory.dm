@@ -1,7 +1,13 @@
 //This proc is called whenever someone clicks an inventory ui slot.
 /mob/proc/attack_ui(slot)
 	var/obj/item/W = get_active_hand()
-	if(istype(W))
+	var/obj/item/E = get_equipped_item(slot)
+	if (istype(E))
+		if(istype(W))
+			E.attackby(W,src)
+		else
+			E.attack_hand(src)
+	else
 		equip_to_slot_if_possible(W, slot)
 
 /mob/proc/put_in_any_hand_if_possible(obj/item/W as obj, del_on_fail = 0, disable_warning = 1, redraw_mob = 1)
@@ -186,7 +192,7 @@ var/list/slot_equipment_priority = list( \
 		wear_mask = null
 		update_inv_wear_mask(0)
 	return
-    
+
 /mob/proc/isEquipped(obj/item/I)
 	if(!I)
 		return 0
