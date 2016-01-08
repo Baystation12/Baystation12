@@ -916,6 +916,45 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/computer_hardware/battery_module/micro
 	sort_string = "VBAAU"
 
+/datum/design/item/modularcomponent/cpu/
+	name = "processor unit"
+	id = "cpu_normal"
+	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
+	build_type = IMPRINTER
+	materials = list(DEFAULT_WALL_MATERIAL = 8000)
+	chemicals = list("sacid" = 20)
+	build_path = /obj/item/weapon/computer_hardware/processor_unit
+	sort_string = "VBAAV"
+
+/datum/design/item/modularcomponent/cpu/small
+	name = "microprocessor unit"
+	id = "cpu_small"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
+	build_type = IMPRINTER
+	materials = list(DEFAULT_WALL_MATERIAL = 4000)
+	chemicals = list("sacid" = 20)
+	build_path = /obj/item/weapon/computer_hardware/processor_unit/small
+	sort_string = "VBAAW"
+
+/datum/design/item/modularcomponent/cpu/photonic
+	name = "photonic processor unit"
+	id = "pcpu_normal"
+	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 4)
+	build_type = IMPRINTER
+	materials = list(DEFAULT_WALL_MATERIAL = 32000, glass = 8000)
+	chemicals = list("sacid" = 40)
+	build_path = /obj/item/weapon/computer_hardware/processor_unit/photonic
+	sort_string = "VBAAX"
+
+/datum/design/item/modularcomponent/cpu/photonic/small
+	name = "photonic processor unit"
+	id = "pcpu_normal"
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
+	build_type = IMPRINTER
+	materials = list(DEFAULT_WALL_MATERIAL = 16000, glass = 4000)
+	chemicals = list("sacid" = 20)
+	build_path = /obj/item/weapon/computer_hardware/processor_unit/photonic/small
+	sort_string = "VBAAY"
 /*
 CIRCUITS BELOW
 */

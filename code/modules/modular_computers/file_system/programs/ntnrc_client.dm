@@ -7,8 +7,10 @@
 	requires_ntnet = 1
 	requires_ntnet_feature = NTNET_COMMUNICATION
 	network_destination = "NTNRC server"
+	ui_header = "ntnrc_idle.gif"
 	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/computer_chatclient/
+	var/last_message = null				// Used to generate the toolbar icon
 	var/username
 	var/datum/ntnet_conversation/channel = null
 	var/operator_mode = 0		// Channel operator mode
@@ -30,6 +32,7 @@
 	if(href_list["PRG_joinchannel"])
 		var/datum/ntnet_conversation/C
 		for(var/datum/ntnet_conversation/chan in ntnet_global.chat_channels)
+			world << "DEBUG L35/NTNRC_CLIENT.DM: \"[href_list["PRG_joinchannel"]]\" / \"[chan.title]\""
 			if(chan.title == href_list["PRG_joinchannel"])
 				C = chan
 				break
@@ -143,6 +146,20 @@
 
 	..(href, href_list)
 
+/datum/computer_file/program/chatclient/process_tick()
+	..()
+	if(running)
+		ui_header = "ntnrc_idle.gif"
+		if(channel)
+			// Remember the last message. If there is no message in the channel remember null.
+			last_message = channel.messages.len ? channel.messages[channel.messages.len - 1] : null
+		else
+			last_message = null
+		return 1
+	if(channel && channel.messages && channel.messages.len)
+		ui_header = last_message == channel.messages[channel.messages.len - 1] ? "ntnrc_idle.gif" : "ntnrc_new.gif"
+	else
+		ui_header = "ntnrc_idle.gif"
 
 /datum/computer_file/program/chatclient/kill_program(var/forced = 0)
 	if(channel)

@@ -10,6 +10,7 @@
 	requires_ntnet_feature = NTNET_SOFTWAREDOWNLOAD
 	available_on_ntnet = 0
 	nanomodule_path = /datum/nano_module/computer_ntnetdownload/
+	ui_header = "downloader_finished.gif"
 	var/datum/computer_file/program/downloaded_file = null
 	var/hacked_download = 0
 	var/download_completion = 0 //GQ of downloaded data.
@@ -32,6 +33,8 @@
 	if(!computer || !computer.hard_drive || !computer.hard_drive.try_store_file(PRG))
 		return 0
 
+	ui_header = "downloader_running.gif"
+
 	if(PRG in ntnet_global.available_station_software)
 		generate_network_log("Began downloading file [PRG.filename].[PRG.filetype] from NTNet Software Repository.")
 		hacked_download = 0
@@ -50,6 +53,7 @@
 	generate_network_log("Aborted download of file [hacked_download ? "**ENCRYPTED**" : downloaded_file.filename].[downloaded_file.filetype].")
 	downloaded_file = null
 	download_completion = 0
+	ui_header = "downloader_finished.gif"
 
 /datum/computer_file/program/ntnetdownload/proc/complete_file_download()
 	if(!downloaded_file)
@@ -60,6 +64,7 @@
 		downloaderror = "I/O ERROR - Unable to save file. Check whether you have enough free space on your hard drive and whether your hard drive is properly connected. If the issue persists contact your system administrator for assistance."
 	downloaded_file = null
 	download_completion = 0
+	ui_header = "downloader_finished.gif"
 
 /datum/computer_file/program/ntnetdownload/process_tick()
 	if(!downloaded_file)
