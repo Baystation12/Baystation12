@@ -285,7 +285,7 @@ var/bomb_set
 
 				if (!timing && !safety)
 					timing = 1
-					log_and_message_admins_with_location("engaged a nuclear bomb", x, y, ,z)
+					log_and_message_admins("engaged a nuclear bomb")
 					bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
 					update_icon()
 				else
@@ -413,7 +413,7 @@ if(!N.lighthack)
 		var/turf/T = pick_area_turf(/area/maintenance, list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))
 		if(T)
 			var/obj/D = new /obj/item/weapon/disk/nuclear(T)
-			log_and_message_admins_with_location("[src], the last authentication disk, has been destroyed. Spawning [D] at ([D.x], [D.y], [D.z]).", T.x, T.y, T.z)
+			log_and_message_admins("[src], the last authentication disk, has been destroyed. Spawning [D] at ([D.x], [D.y], [D.z]).", location = T)
 		else
 			log_and_message_admins("[src], the last authentication disk, has been destroyed. Failed to respawn disc!")
 	return ..()
