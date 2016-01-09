@@ -1,4 +1,7 @@
+var/global/ntnrc_uid = 0
+
 /datum/ntnet_conversation/
+	var/id = null
 	var/title = "Untitled Conversation"
 	var/datum/computer_file/program/chatclient/operator // "Administrator" of this channel. Creator starts as channel's operator,
 	var/list/messages = list()
@@ -6,6 +9,8 @@
 	var/password
 
 /datum/ntnet_conversation/New()
+	id = ntnrc_uid
+	ntnrc_uid++
 	if(ntnet_global)
 		ntnet_global.chat_channels.Add(src)
 	..()

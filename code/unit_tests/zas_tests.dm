@@ -133,7 +133,7 @@ datum/unit_test/zas_area_test/incinerator
 	name = "ZAS: Incinerator"
 	area_path = /area/maintenance/incinerator 
 	disabled = 1		
-	why_disabled = "Failing currently for existing bug: #11846"
+	why_disabled = "Incernator blast doors not blocking air flow.  See bug #11846"
 
 datum/unit_test/zas_area_test/virology
 	name = "ZAS: Virology"
@@ -151,11 +151,14 @@ datum/unit_test/zas_area_test/west_hall_mining_outpost
 	name = "ZAS: Mining outpost West Hallway"
 	area_path = /area/outpost/mining_main/west_hall
 
+/*
 datum/unit_test/zas_area_test/mining_area
 	name = "ZAS: Mining Area (Vacuum)"
 	area_path = /area/mine/explored
 	expectation = UT_VACUUM
-
+	disabled = 1
+	why_disabled = "Asteroid Generation disabled"
+ */
 datum/unit_test/zas_area_test/
 	name = "ZAS: Cargo Bay"
 	area_path = /area/quartermaster/storage

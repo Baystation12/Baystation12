@@ -48,6 +48,9 @@ var/datum/antagonist/actor/actor
 	if(!MayRespawn(1))
 		return
 
+	var/choice = alert("Are you sure you'd like to join as an actor?", "Confirmation","Yes", "No")
+	if(choice != "Yes")
+		return
 
 	if(istype(usr,/mob/dead/observer) || istype(usr,/mob/new_player))
 		if(actor.current_antagonists.len >= actor.hard_cap)

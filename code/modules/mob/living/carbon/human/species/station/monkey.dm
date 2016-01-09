@@ -39,7 +39,7 @@
 	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL|ALIEN
 
 	pass_flags = PASSTABLE
-
+	holder_type = /obj/item/weapon/holder
 /datum/species/monkey/handle_npc(var/mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)
 		return

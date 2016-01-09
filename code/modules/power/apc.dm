@@ -43,6 +43,16 @@
 /obj/machinery/power/apc/high
 	cell_type = /obj/item/weapon/cell/high
 
+// Construction site APC, starts turned off
+/obj/machinery/power/apc/high/inactive
+	cell_type = /obj/item/weapon/cell/high
+	lighting = 0
+	equipment = 0
+	environ = 0
+	locked = 0
+	coverlocked = 0
+	start_charge = 100
+
 /obj/machinery/power/apc/super
 	cell_type = /obj/item/weapon/cell/super
 

@@ -41,6 +41,14 @@
 
 	return all_alarms
 
+// Modified version of above proc that uses slightly less resources, returns 1 if there is a major alarm, 0 otherwise.
+/datum/nano_module/alarm_monitor/proc/has_major_alarms()
+	for(var/datum/alarm_handler/AH in alarm_handlers)
+		if(AH.has_major_alarms())
+			return 1
+
+	return 0
+
 /datum/nano_module/alarm_monitor/proc/minor_alarms()
 	var/list/all_alarms = new()
 	for(var/datum/alarm_handler/AH in alarm_handlers)

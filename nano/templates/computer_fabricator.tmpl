@@ -30,6 +30,10 @@
 			<td>{{:helper.link('Advanced', null, { "hw_netcard" : 2 }, data.hw_netcard == 2 ? 'selected' : null)}}
 		{{if data.devtype != 2}} <!-- No tablets -->
 		<tr>
+			<td><b>Processor Unit:</b>
+			<td>{{:helper.link('Standard', null, { "hw_cpu" : 1 }, data.hw_cpu == 1 ? 'selected' : null)}}
+			<td>{{:helper.link('Advanced', null, { "hw_cpu" : 2 }, data.hw_cpu == 2 ? 'selected' : null)}}
+		<tr>
 			<td><b>Tesla Relay:</b>
 			<td>{{:helper.link('None', null, { "hw_tesla" : 0 }, data.hw_tesla == 0 ? 'selected' : null)}}
 			<td>{{:helper.link('Standard', null, { "hw_tesla" : 1 }, data.hw_tesla == 1 ? 'selected' : null)}}
@@ -50,6 +54,7 @@
 	<b>Battery</b> allows your device to operate without external utility power source. Advanced batteries increase battery life.<br>
 	<b>Hard Drive</b> stores file on your device. Advanced drives can store more files, but use more power, shortening battery life.<br>
 	<b>Network Card</b> allows your device to wirelessly connect to stationwide NTNet network. Basic cards are limited to on-station use, while advanced cards can operate anywhere near the station, which includes the asteroid outposts.<br>
+	<b>Processor Unit</b> is critical for your device's functionality. It allows you to run programs from your hard drive. Advanced CPUs use more power, but allow you to run more programs on background at once.<br>
 	<b>Tesla Relay</b> is an advanced wireless power relay that allows your device to connect to nearby area power controller to provide alternative power source. This component is currently unavailable on tablet computers due to size restrictions.<br>
 	<b>Nano Printer</b> is device that allows for various paperwork manipulations, such as, scanning of documents or printing new ones. This device was certified EcoFriendlyPlus and is capable of recycling existing paper for printing purposes.<br>
 	<b>Card Reader</b> adds a slot that allows you to manipulate RFID cards. Please note that this is not necessary to allow the device to read your identification, it is just necessary to manipulate other cards.
