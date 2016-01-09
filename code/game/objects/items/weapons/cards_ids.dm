@@ -257,3 +257,15 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/id/centcom/ERT/New()
 	..()
 	access |= get_all_station_access()
+
+/obj/item/weapon/card/id/all_access
+	name = "\improper Administrator's spare ID"
+	desc = "The spare ID of the Lord of Lords himself."
+	icon_state = "data"
+	item_state = "tdgreen"
+	registered_name = "Administrator"
+	assignment = "Administrator"
+/obj/item/weapon/card/id/all_access/New()
+	access = get_access_ids()
+	..()
+    
