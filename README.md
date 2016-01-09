@@ -1,5 +1,7 @@
 # Halo: Space Station Evolved
 
+[![Build Status](https://travis-ci.org/HaloSpaceStation/HaloSpaceStation13.svg?branch=alpha)](https://travis-ci.org/HaloSpaceStation/HaloSpaceStation13)
+
 [Website](http://projectunsc.com/) - [Code](https://github.com/HaloSpaceStation/HaloSpaceStation13) - 
 ---
 
