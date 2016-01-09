@@ -16,7 +16,7 @@
 			vine.mature_time = 0
 			vine.process()
 
-			log_and_message_admins_with_location("Event: Spacevines spawned at [T.loc] ([T.x],[T.y],[T.z])", T.x, T.y, T.z)
+			log_and_message_admins("Spacevines spawned at \the [get_area(T)]", location = T)
 			return
 		log_and_message_admins("<span class='notice'>Event: Spacevines failed to find a viable turf.</span>")
 

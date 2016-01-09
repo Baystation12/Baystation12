@@ -2,10 +2,11 @@
 /mob/var/lastattacked = null
 /mob/var/attack_log = list()
 
-proc/log_and_message_admins_with_location(var/message, var/x, var/y, var/z, var/mob/user = usr)
-	log_and_message_admins("[message] (<a HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)", user)
+proc/log_and_message_admins(var/message as text, var/mob/user = usr, var/turf/location)
+	var/turf/T = location ? location : (user ? get_turf(user) : null)
+	if(T)
+		message = message + " (<a HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>)"
 
-proc/log_and_message_admins(var/message as text, var/mob/user = usr)
 	log_admin(user ? "[key_name(user)] [message]" : "EVENT [message]")
 	message_admins(user ? "[key_name_admin(user)] [message]" : "EVENT [message]")
 

@@ -45,3 +45,4 @@ script:
   - DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt
   - grep "All Unit Tests Passed" log.txt
   - (! grep "runtime error:" log.txt)
+  - (! grep 'Process scheduler caught exception processing' log.txt)

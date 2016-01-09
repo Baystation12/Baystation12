@@ -47,7 +47,6 @@
 	var/zoom = 0 //1 if item is actively being used to zoom. For scoped guns and binoculars.
 
 	var/icon_override = null  //Used to override hardcoded clothing dmis in human clothing proc.
-	var/item_state = null // Used to specify the item state for the on-mob overlays.
 
 	//** These specify item/icon overrides for _slots_
 

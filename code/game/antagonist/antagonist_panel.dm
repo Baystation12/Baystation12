@@ -27,7 +27,7 @@
 		var/mob/M = player.current
 		dat += "<tr>"
 		if(M)
-			dat += "<td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>"
+			dat += "<td><a href='?_src_=holder;adminplayeropts=\ref[M]'>[M.real_name]</a>"
 			if(!M.client)      dat += " <i>(logged out)</i>"
 			if(M.stat == DEAD) dat += " <b><font color=red>(DEAD)</font></b>"
 			dat += "</td>"

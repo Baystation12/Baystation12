@@ -94,17 +94,32 @@ var/global/list/GlobalPool = list()
 		loc = args
 	..()
 
-/datum/proc/ResetVars(var/list/exclude = list())
-	var/list/excluded = list("animate_movement", "loc", "locs", "parent_type", "vars", "verbs", "type") + exclude
+var/list/excluded_vars = list("animate_movement", "contents", "loc", "locs", "parent_type", "vars", "verbs", "type")
+var/list/pooledvariables = list()
+//thanks to clusterfack @ /vg/station for these two procs
+/datum/proc/createVariables(var/list/excluded)
+	pooledvariables[type] = new/list()
+	var/list/all_excluded = excluded_vars + excluded
 
-	for(var/V in vars)
-		if(V in excluded)
+	for(var/key in vars)
+		if(key in all_excluded)
 			continue
+		pooledvariables[type][key] = initial(vars[key])
 
-		vars[V] = initial(vars[V])
+/datum/proc/ResetVars(var/list/excluded = list())
+	if(!pooledvariables[type])
+		createVariables(excluded)
+
+	for(var/key in pooledvariables[type])
+		vars[key] = pooledvariables[type][key]
 
 /atom/movable/ResetVars()
 	..()
-	vars["loc"] = null
+	loc = null
+	contents = initial(contents) //something is really wrong if this object still has stuff in it by this point
+
+/image/ResetVars()
+	..()
+	loc = null
 
 #undef ATOM_POOL_COUNT

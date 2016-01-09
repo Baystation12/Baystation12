@@ -101,7 +101,7 @@
 		)
 	var/list/cold_discomfort_strings = list(
 		"You feel chilly.",
-		"You shiver suddely.",
+		"You shiver suddenly.",
 		"Your chilly flesh stands out in goosebumps."
 		)
 

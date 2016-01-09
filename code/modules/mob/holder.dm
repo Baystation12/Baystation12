@@ -60,6 +60,7 @@ var/list/holder_mob_icon_cache = list()
 	overlays.Cut()
 	icon = M.icon
 	icon_state = M.icon_state
+	item_state = M.item_state
 	color = M.color
 	name = M.name
 	desc = M.desc

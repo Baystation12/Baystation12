@@ -13,7 +13,7 @@
 		kill()
 		return
 
-	log_and_message_admins_with_location("Event: Blob spawned at \the [get_area(T)] ([T.x],[T.y],[T.z])", T.x, T.y, T.z)
+	log_and_message_admins("Blob spawned at \the [get_area(T)]", location = T)
 	Blob = new /obj/effect/blob/core(T)
 	for(var/i = 1; i < rand(3, 4), i++)
 		Blob.process()
