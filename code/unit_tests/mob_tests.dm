@@ -49,7 +49,6 @@ datum/unit_test/human_breath/check_result()
 	else
 		fail("Mob is not taking oxygen damage.  Damange is [ending_oxyloss]")
 	
-	qdel(H)
 	return 1	// return 1 to show we're done and don't want to recheck the result.
 
 // ============================================================================
@@ -210,8 +209,6 @@ datum/unit_test/mob_damage/start_test()
 		fail(msg)
 	else
 		pass(msg)
-
-	qdel(H)
 
 	return 1
 

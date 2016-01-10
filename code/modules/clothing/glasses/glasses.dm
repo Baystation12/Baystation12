@@ -43,6 +43,7 @@
 	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
 	toggleable = 1
 	vision_flags = SEE_TURFS
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
 
 /obj/item/clothing/glasses/meson/New()
 	..()

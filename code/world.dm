@@ -74,12 +74,8 @@ var/global/datum/global_init/init = new ()
 	sleep_offline = 1
 
 #else
-
 	log_unit_test("Unit Tests Enabled.  This will destroy the world when testing is complete.")
-	log_unit_test("If you did not intend to enable this please check code/__defines/unit_testing.dm")
-
 	load_unit_test_changes()
-
 #endif
 
 	// Set up roundstart seed list.
