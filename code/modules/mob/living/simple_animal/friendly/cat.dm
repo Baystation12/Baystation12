@@ -46,16 +46,18 @@
 			audible_emote(pick("hisses and spits!","mrowls fiercely!","eyes [snack] hungrily."))
 		break
 
-	if(!stat && !resting && !buckled)
-		turns_since_scan++
-		if (turns_since_scan > 5)
-			walk_to(src,0)
-			turns_since_scan = 0
+	if(incapacitated())
+		return
+	
+	turns_since_scan++
+	if (turns_since_scan > 5)
+		walk_to(src,0)
+		turns_since_scan = 0
 
-			if (flee_target) //fleeing takes precendence
-				handle_flee_target()
-			else
-				handle_movement_target()
+		if (flee_target) //fleeing takes precendence
+			handle_flee_target()
+		else
+			handle_movement_target()
 
 	if(prob(2)) //spooky
 		var/mob/dead/observer/spook = locate() in range(src,5)
