@@ -127,6 +127,8 @@ proc/initialize_unit_tests()
 
 		if(isnull(d.start_test()))		// Start the test.
 			d.fail("Test Runtimed")
+			continue
+
 		if(d.async)				// If it's async then we'll need to check back on it later.
 			async_test.Add(d)
 		total_unit_tests++

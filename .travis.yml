@@ -3,9 +3,13 @@ language: c
 sudo: false
 
 env:
-  BYOND_MAJOR="509"
-  BYOND_MINOR="1318"
-  MACRO_COUNT=1048
+  global:
+    BYOND_MAJOR="509"
+    BYOND_MINOR="1318"
+    MACRO_COUNT=1048
+  matrix:
+    - MODE="-UNIT_TEST_FAST"
+    - MODE="-_JUST_COMPILE"
   
 cache:
   directories:
@@ -41,8 +45,4 @@ script:
   - python tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
   - cp config/example/* config/
-  - scripts/dm.sh -DUNIT_TEST baystation12.dme
-  - DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt
-  - grep "All Unit Tests Passed" log.txt
-  - (! grep "runtime error:" log.txt)
-  - (! grep 'Process scheduler caught exception processing' log.txt)
+  - scripts/dm.sh ${MODE} baystation12.dme
