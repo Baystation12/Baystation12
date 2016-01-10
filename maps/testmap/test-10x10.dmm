@@ -1,0 +1,21 @@
+"a" = (/turf/simulated/wall/iron,/area/quartermaster/storage)
+"b" = (/obj/machinery/power/smes/magical,/obj/structure/cable/pink{dir = 8},/turf/simulated/floor/fixed,/area/quartermaster/storage)
+"c" = (/obj/machinery/power/apc/super,/obj/machinery/power/terminal,/obj/structure/cable/pink{dir = 4},/turf/simulated/floor/fixed,/area/quartermaster/storage)
+"d" = (/obj/machinery/light/built,/turf/simulated/floor/fixed,/area/quartermaster/storage)
+"e" = (/turf/simulated/floor/fixed,/area/quartermaster/storage,/obj/effect/landmark{name = "tdome1"})
+"f" = (/obj/effect/landmark/start,/turf/simulated/floor/fixed,/area/quartermaster/storage)
+
+
+(1,1,1) = {"
+aaaaaaaaaa
+abcdeeedea
+aeeeeeeeea
+adeeeeeeda
+aeeeeeeeea
+aeeeeeeeea
+adeeeeeeda
+aeeeeeeeea
+afedeeedea
+aaaaaaaaaa
+"}
+

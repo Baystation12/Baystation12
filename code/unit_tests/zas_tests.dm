@@ -1,3 +1,4 @@
+#ifndef UNIT_TEST_NO_ZAS
 /*
  *
  *  Zas Unit Tests.
@@ -27,6 +28,7 @@ datum/unit_test/zas_area_test/start_test()
 
 	if(isnull(test))
 		fail("Check Runtimed")
+		return 0
 
 	if(test["result"] == SUCCESS)
 		pass(test["msg"])
@@ -219,3 +221,4 @@ datum/unit_test/zas_supply_shuttle_moved/check_result()
 #undef UT_NORMAL_COLD
 #undef SUCCESS
 #undef FAILURE
+#endif

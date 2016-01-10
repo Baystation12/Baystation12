@@ -16,6 +16,8 @@
 //
 
 
+#ifndef UNIT_TEST_NO_ZAS
+// We don't run this code if there is no ZAS checks.  Usually this is because of a test map to speed up other unit_test
 
 datum/unit_test/human_breath
 	name = "MOB: Human Suffocates in Space"
@@ -30,6 +32,11 @@ datum/unit_test/human_breath/start_test()
 
 	if(!istype(T, /turf/space))	//If the above isn't a space turf then we force it to find one will most likely pick 1,1,1
 		T = locate(/turf/space)
+		if(!istype(T, /turf/space))
+			fail("Unable to locate /turf/space.")
+			async = 0
+			return 0
+
 
 	H = new(T)
 
@@ -53,6 +60,7 @@ datum/unit_test/human_breath/check_result()
 	return 1	// return 1 to show we're done and don't want to recheck the result.
 
 // ============================================================================
+#endif
 
 //#define BRUTE     "brute"
 //#define BURN      "fire"
