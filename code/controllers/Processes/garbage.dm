@@ -91,6 +91,7 @@ var/list/delayed_garbage = list()
 		return
 	if(!istype(A))
 		warning("qdel() passed object of type [A.type]. qdel() can only handle /datum types.")
+		crash_with("qdel() passed object of type [A.type]. qdel() can only handle /datum types.")
 		del(A)
 		if(garbage_collector)
 			garbage_collector.dels++

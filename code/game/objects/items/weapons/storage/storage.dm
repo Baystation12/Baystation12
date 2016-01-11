@@ -51,10 +51,10 @@
 		//there's got to be a better way of doing this.
 		if (!(src.loc == usr) || (src.loc && src.loc.loc == usr))
 			return
-		
+
 		if (( usr.restrained() ) || ( usr.stat ))
 			return
-		
+
 		if ((src.loc == usr) && !usr.unEquip(src))
 			return
 
@@ -232,12 +232,16 @@
 			usr << "<span class='notice'>[src] is full, make some space.</span>"
 		return 0 //Storage item is full
 
-	if(can_hold.len && !is_type_in_list(W, can_hold))
-		if(!stop_messages)
-			if (istype(W, /obj/item/weapon/hand_labeler))
-				return 0
-			usr << "<span class='notice'>[src] cannot hold [W].</span>"
-		return 0
+	if(can_hold.len)
+		if(!is_type_in_list(W, can_hold))
+			if(!stop_messages && ! istype(W, /obj/item/weapon/hand_labeler))
+				usr << "<span class='notice'>[src] cannot hold \the [W].</span>"
+			return 0
+		var/max_instances = can_hold[W.type]
+		if(max_instances && instances_of_type_in_list(W, contents) >= max_instances)
+			if(!stop_messages && !istype(W, /obj/item/weapon/hand_labeler))
+				usr << "<span class='notice'>[src] has no more space specifically for \the [W].</span>"
+			return 0
 
 	if(cant_hold.len && is_type_in_list(W, cant_hold))
 		if(!stop_messages)
@@ -448,6 +452,17 @@
 		if(istype(A,/obj/))
 			var/obj/O = A
 			O.hear_talk(M, text, verb, speaking)
+
+/obj/item/weapon/storage/proc/make_exact_fit()
+	storage_slots = contents.len
+
+	can_hold.Cut()
+	max_w_class = 0
+	max_storage_space = 0
+	for(var/obj/item/I in src)
+		can_hold[I.type]++
+		max_w_class = max(I.w_class, max_w_class)
+		max_storage_space += I.get_storage_cost()
 
 //Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
 //Returns -1 if the atom was not found on container.

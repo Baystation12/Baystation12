@@ -27,6 +27,7 @@
 	var/pillsprite = "1"
 	var/client/has_sprites = list()
 	var/max_pill_count = 20
+	flags = OPENCONTAINER
 
 /obj/machinery/chem_master/New()
 	..()
@@ -80,13 +81,8 @@
 	return
 
 /obj/machinery/chem_master/Topic(href, href_list)
-	if(stat & (BROKEN|NOPOWER)) return
-	if(usr.stat || usr.restrained()) return
-	if(!in_range(src, usr)) return
-
-	src.add_fingerprint(usr)
-	usr.set_machine(src)
-
+	if(..())
+		return 1
 
 	if (href_list["ejectp"])
 		if(loaded_pill_bottle)
@@ -236,7 +232,7 @@
 	return src.attack_hand(user)
 
 /obj/machinery/chem_master/attack_hand(mob/user as mob)
-	if(stat & BROKEN)
+	if(inoperable())
 		return
 	user.set_machine(src)
 	if(!(user.client in has_sprites))
@@ -345,11 +341,8 @@
 
 
 /obj/machinery/computer/pandemic/Topic(href, href_list)
-	if(stat & (NOPOWER|BROKEN)) return
-	if(usr.stat || usr.restrained()) return
-	if(!in_range(src, usr)) return
-
-	usr.set_machine(src)
+	if(..())
+		return 1
 	if(!beaker) return
 
 	if (href_list["create_vaccine"])
@@ -657,10 +650,12 @@
 	return 0
 
 /obj/machinery/reagentgrinder/attack_hand(mob/user as mob)
-	user.set_machine(src)
 	interact(user)
 
 /obj/machinery/reagentgrinder/interact(mob/user as mob) // The microwave Menu
+	if(inoperable())
+		return
+	user.set_machine(src)
 	var/is_chamber_empty = 0
 	var/is_beaker_ready = 0
 	var/processing_chamber = ""
@@ -707,8 +702,8 @@
 
 /obj/machinery/reagentgrinder/Topic(href, href_list)
 	if(..())
-		return
-	usr.set_machine(src)
+		return 1
+
 	switch(href_list["action"])
 		if ("grind")
 			grind()
@@ -717,7 +712,7 @@
 		if ("detach")
 			detach()
 	src.updateUsrDialog()
-	return
+	return 1
 
 /obj/machinery/reagentgrinder/proc/detach()
 

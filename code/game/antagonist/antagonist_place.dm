@@ -23,4 +23,5 @@
 /datum/antagonist/proc/place_mob(var/mob/living/mob)
 	if(!starting_locations || !starting_locations.len)
 		return
-	mob.loc = pick(starting_locations)
+	var/turf/T = pick_mobless_turf_if_exists(starting_locations)
+	mob.forceMove(T)

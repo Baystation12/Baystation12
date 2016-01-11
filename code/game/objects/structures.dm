@@ -79,7 +79,7 @@
 		return ..()
 
 /obj/structure/proc/can_climb(var/mob/living/user, post_climb_check=0)
-	if (!can_touch(user) || !climbable || (!post_climb_check && (user in climbers)))
+	if (!climbable || !can_touch(user) || (!post_climb_check && (user in climbers)))
 		return 0
 
 	if (!user.Adjacent(src))

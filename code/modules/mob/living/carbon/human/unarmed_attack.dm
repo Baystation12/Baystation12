@@ -18,11 +18,11 @@
 
 	// Check if they have a functioning hand.
 	var/obj/item/organ/external/E = user.organs_by_name["l_hand"]
-	if(E && !(E.status & ORGAN_DESTROYED))
+	if(E && !E.is_stump())
 		return 1
 
 	E = user.organs_by_name["r_hand"]
-	if(E && !(E.status & ORGAN_DESTROYED))
+	if(E && !E.is_stump())
 		return 1
 
 	return 0
@@ -31,6 +31,9 @@
 	return damage
 
 /datum/unarmed_attack/proc/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
+
+	if(target.stat == DEAD)
+		return
 
 	var/stun_chance = rand(0, 100)
 
@@ -167,11 +170,11 @@
 		return 0
 
 	var/obj/item/organ/external/E = user.organs_by_name["l_foot"]
-	if(E && !(E.status & ORGAN_DESTROYED))
+	if(E && !E.is_stump())
 		return 1
 
 	E = user.organs_by_name["r_foot"]
-	if(E && !(E.status & ORGAN_DESTROYED))
+	if(E && !E.is_stump())
 		return 1
 
 	return 0
@@ -211,11 +214,11 @@
 		if(target.grabbed_by == user && target.lying)
 			return 0
 		var/obj/item/organ/external/E = user.organs_by_name["l_foot"]
-		if(E && !(E.status & ORGAN_DESTROYED))
+		if(E && !E.is_stump())
 			return 1
 
 		E = user.organs_by_name["r_foot"]
-		if(E && !(E.status & ORGAN_DESTROYED))
+		if(E && !E.is_stump())
 			return 1
 
 		return 0

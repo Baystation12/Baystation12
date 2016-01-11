@@ -413,7 +413,7 @@ its easier to just keep the beam vertical.
 		return
 	src.germ_level = 0
 	if(istype(blood_DNA, /list))
-		blood_DNA.Cut()
+		blood_DNA = null
 		return 1
 
 

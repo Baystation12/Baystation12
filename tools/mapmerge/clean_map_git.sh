@@ -1,10 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
-for i in {1..6}
+for MAPFILE in ../../maps/*.dmm
 do
-	MAPFILE="exodus-$i.dmm"
-
-	git show HEAD:maps/$MAPFILE > tmp.dmm
-	java -jar MapPatcher.jar -clean tmp.dmm '../../maps/'$MAPFILE '../../maps/'$MAPFILE
+	MAPNAME=$(basename $MAPFILE)
+	git show HEAD:maps/$MAPNAME > tmp.dmm
+	java -jar MapPatcher.jar -clean tmp.dmm $MAPFILE $MAPFILE
 	rm tmp.dmm
 done

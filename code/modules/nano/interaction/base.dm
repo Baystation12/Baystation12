@@ -14,7 +14,7 @@
 /mob/proc/shared_nano_interaction()
 	if (src.stat || !client)
 		return STATUS_CLOSE						// no updates, close the interface
-	else if (restrained() || lying || stat || stunned || weakened)
+	else if (restrained() || lying || stat || stunned || weakened)	// TODO: Change to incapaciated() on merge
 		return STATUS_UPDATE					// update only (orange visibility)
 	return STATUS_INTERACTIVE
 

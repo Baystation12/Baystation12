@@ -15,6 +15,7 @@
 	pressure_resistance = 15
 	anchored = 1
 	can_buckle = 1
+	buckle_dir = SOUTH
 	buckle_lying = 1
 	var/material/material
 	var/material/padding_material
@@ -131,14 +132,18 @@
 		remove_padding()
 
 	else if(istype(W, /obj/item/weapon/grab))
-		user.visible_message("<span class='notice'>[user] attempts to buckle [W:affecting] into \the [src]!</span>")
+		var/obj/item/weapon/grab/G = W
+		var/mob/living/affecting = G.affecting
+		user.visible_message("<span class='notice'>[user] attempts to buckle [affecting] into \the [src]!</span>")
 		if(do_after(user, 20))
-			W:affecting.loc = loc
-			if(buckle_mob(W:affecting))
-				W:affecting.visible_message(\
-					"<span class='danger'>[W:affecting.name] is buckled to [src] by [user.name]!</span>",\
-					"<span class='danger'>You are buckled to [src] by [user.name]!</span>",\
-					"<span class='notice'>You hear metal clanking.</span>")
+			affecting.loc = loc
+			spawn(0)
+				if(buckle_mob(affecting))
+					affecting.visible_message(\
+						"<span class='danger'>[affecting.name] is buckled to [src] by [user.name]!</span>",\
+						"<span class='danger'>You are buckled to [src] by [user.name]!</span>",\
+						"<span class='notice'>You hear metal clanking.</span>")
+			qdel(W)
 	else
 		..()
 

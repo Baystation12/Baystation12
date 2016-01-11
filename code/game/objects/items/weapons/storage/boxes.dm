@@ -598,32 +598,33 @@
 	icon_state = "light"
 	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
 	item_state = "syringe_kit"
-	storage_slots=21
-	can_hold = list(/obj/item/weapon/light/tube, /obj/item/weapon/light/bulb)
-	max_storage_space = 42	//holds 21 items of w_class 2
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
+	
+/obj/item/weapon/storage/box/lights/New()
+	..()
+	make_exact_fit()
 
 /obj/item/weapon/storage/box/lights/bulbs/New()
-	..()
 	for(var/i = 0; i < 21; i++)
 		new /obj/item/weapon/light/bulb(src)
+	..()
 
 /obj/item/weapon/storage/box/lights/tubes
 	name = "box of replacement tubes"
 	icon_state = "lighttube"
 
 /obj/item/weapon/storage/box/lights/tubes/New()
-	..()
 	for(var/i = 0; i < 21; i++)
 		new /obj/item/weapon/light/tube(src)
+	..()
 
 /obj/item/weapon/storage/box/lights/mixed
 	name = "box of replacement lights"
 	icon_state = "lightmixed"
 
 /obj/item/weapon/storage/box/lights/mixed/New()
-	..()
 	for(var/i = 0; i < 14; i++)
 		new /obj/item/weapon/light/tube(src)
 	for(var/i = 0; i < 7; i++)
 		new /obj/item/weapon/light/bulb(src)
+	..()

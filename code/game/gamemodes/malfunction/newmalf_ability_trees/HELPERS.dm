@@ -163,12 +163,14 @@
 
 	command_announcement.Announce(fulltext)
 
-// Proc: get_all_apcs()
+// Proc: get_unhacked_apcs()
 // Parameters: None
-// Description: Returns a list of all APCs
-/proc/get_all_apcs()
+// Description: Returns a list of all unhacked APCs
+/proc/get_unhacked_apcs(var/mob/living/silicon/ai/user)
 	var/list/H = list()
 	for(var/obj/machinery/power/apc/A in machines)
+		if(A.hacker && A.hacker == user)
+			continue
 		H.Add(A)
 	return H
 

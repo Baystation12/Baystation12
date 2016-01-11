@@ -21,6 +21,10 @@
 		runerandom()
 	var/list/runes = list("Teleport", "Teleport Other", "Spawn a Tome", "Change Construct Type", "Convert", "EMP", "Drain Blood", "See Invisible", "Resurrect", "Hide Runes", "Reveal Runes", "Astral Journey", "Manifest a Ghost", "Imbue Talisman", "Sacrifice", "Wall", "Free Cultist", "Summon Cultist", "Deafen", "Blind", "BloodBoil", "Communicate", "Stun")
 	var/r = input(user, "Choose a rune to scribe", "Rune Scribing") in runes //not cancellable.
+	if(locate(/obj/effect/rune) in user.loc)
+		user << "<span class='warning'>There is already a rune in this location.</span>"
+		return
+
 	var/obj/effect/rune/R = new /obj/effect/rune(user.loc)
 	if(istype(user.loc,/turf))
 		var/area/A = get_area(user)

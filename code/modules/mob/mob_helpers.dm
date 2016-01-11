@@ -640,7 +640,7 @@ proc/is_blind(A)
 	// A proper	CentCom id is hard currency.
 	else if(id && istype(id, /obj/item/weapon/card/id/centcom))
 		return SAFE_PERP
-	
+
 	if(check_access && !access_obj.allowed(src))
 		threatcount += 4
 

@@ -47,7 +47,7 @@
 // Allows us to process UI clicks, which are relayed in form of hrefs.
 /obj/nano_module/power_monitor/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	if( href_list["clear"] )
 		active_sensor = null
 	if( href_list["refresh"] )

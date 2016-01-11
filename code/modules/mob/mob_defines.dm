@@ -214,8 +214,9 @@
 
 	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
 
-	//Indicates if a clientless mob is actually an admin aghosting
-	var/mob/dead/observer/aghosted = null
+	//If set, indicates that the client "belonging" to this (clientless) mob is currently controlling some other mob
+	//so don't treat them as being SSD even though their client var is null.
+	var/mob/teleop = null
 
 	var/turf/listed_turf = null  	//the current turf being examined in the stat panel
 	var/list/shouldnt_see = list()	//list of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes

@@ -68,6 +68,9 @@
 /datum/seed/proc/get_trait(var/trait)
 	return traits["[trait]"]
 
+/datum/seed/proc/get_trash_type()
+	return trash_type
+
 /datum/seed/proc/set_trait(var/trait,var/nval,var/ubound,var/lbound, var/degrade)
 	if(!isnull(degrade)) nval *= degrade
 	if(!isnull(ubound))  nval = min(nval,ubound)

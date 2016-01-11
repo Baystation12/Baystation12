@@ -151,6 +151,9 @@
 		if(temp && !temp.is_usable())
 			user << "<span class='notice'>You try to move your [temp.name], but cannot!"
 			return
+		if(!temp)
+			user << "<span class='notice'>You try to use your hand, but realize it is no longer attached!"
+			return
 	src.pickup(user)
 	if (istype(src.loc, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = src.loc
@@ -242,6 +245,9 @@
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
+	layer = 20
+	if(user.client)	user.client.screen |= src
+	if(user.pulling == src) user.stop_pulling()
 	return
 
 //Defines which slots correspond to which slot flags

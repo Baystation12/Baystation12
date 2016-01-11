@@ -188,16 +188,22 @@
 	return universal_speak || (speaking in src.speech_synthesizer_langs)	//need speech synthesizer support to vocalize a language
 
 /mob/living/silicon/add_language(var/language, var/can_speak=1)
-	if (..(language) && can_speak)
-		speech_synthesizer_langs.Add(all_languages[language])
+	var/var/datum/language/added_language = all_languages[language]
+	if(!added_language)
+		return
+
+	. = ..(language)
+	if (can_speak && (added_language in languages) && !(added_language in speech_synthesizer_langs))
+		speech_synthesizer_langs += added_language
 		return 1
 
 /mob/living/silicon/remove_language(var/rem_language)
-	..(rem_language)
+	var/var/datum/language/removed_language = all_languages[rem_language]
+	if(!removed_language)
+		return
 
-	for (var/datum/language/L in speech_synthesizer_langs)
-		if (L.name == rem_language)
-			speech_synthesizer_langs -= L
+	..(rem_language)
+	speech_synthesizer_langs -= removed_language
 
 /mob/living/silicon/check_languages()
 	set name = "Check Known Languages"

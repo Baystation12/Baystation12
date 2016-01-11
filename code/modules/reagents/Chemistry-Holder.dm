@@ -301,7 +301,7 @@
 		return splash_mob(target, amount, copy)
 	if(isturf(target))
 		return trans_to_turf(target, amount, multiplier, copy)
-	if(isobj(target))
+	if(isobj(target) && target.is_open_container())
 		return trans_to_obj(target, amount, multiplier, copy)
 	return 0
 
@@ -311,7 +311,7 @@
 	trans_to(target, amount, multiplier, copy)
 
 /datum/reagents/proc/trans_id_to(var/atom/target, var/id, var/amount = 1)
-	if (!target || !target.reagents)
+	if (!target || !target.reagents || !target.simulated)
 		return
 
 	amount = min(amount, get_reagent_amount(id))
@@ -340,7 +340,7 @@
 	return
 
 /datum/reagents/proc/touch_mob(var/mob/target)
-	if(!target || !istype(target))
+	if(!target || !istype(target) || !target.simulated)
 		return
 
 	for(var/datum/reagent/current in reagent_list)
@@ -349,7 +349,7 @@
 	update_total()
 
 /datum/reagents/proc/touch_turf(var/turf/target)
-	if(!target || !istype(target))
+	if(!target || !istype(target) || !target.simulated)
 		return
 
 	for(var/datum/reagent/current in reagent_list)
@@ -358,7 +358,7 @@
 	update_total()
 
 /datum/reagents/proc/touch_obj(var/obj/target)
-	if(!target || !istype(target))
+	if(!target || !istype(target) || !target.simulated)
 		return
 
 	for(var/datum/reagent/current in reagent_list)
@@ -377,7 +377,7 @@
 	return trans_to_mob(target, amount, CHEM_TOUCH, perm, copy)
 
 /datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/type = CHEM_BLOOD, var/multiplier = 1, var/copy = 0) // Transfer after checking into which holder...
-	if(!target || !istype(target))
+	if(!target || !istype(target) || !target.simulated)
 		return
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
@@ -396,7 +396,7 @@
 		R.touch_mob(target)
 
 /datum/reagents/proc/trans_to_turf(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Turfs don't have any reagents (at least, for now). Just touch it.
-	if(!target)
+	if(!target || !target.simulated)
 		return
 
 	var/datum/reagents/R = new /datum/reagents(amount * multiplier)
@@ -405,7 +405,7 @@
 	return
 
 /datum/reagents/proc/trans_to_obj(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Objects may or may not; if they do, it's probably a beaker or something and we need to transfer properly; otherwise, just touch.
-	if(!target)
+	if(!target || !target.simulated)
 		return
 
 	if(!target.reagents)

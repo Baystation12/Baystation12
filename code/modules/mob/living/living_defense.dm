@@ -219,7 +219,7 @@
 
 /mob/living/proc/handle_fire()
 	if(fire_stacks < 0)
-		fire_stacks = max(0, fire_stacks++) //If we've doused ourselves in water to avoid fire, dry off slowly
+		fire_stacks = min(0, ++fire_stacks) //If we've doused ourselves in water to avoid fire, dry off slowly
 
 	if(!on_fire)
 		return 1
