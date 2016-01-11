@@ -43,12 +43,9 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
 		<div class="item">
 			{{:helper.link(value.name, 'gear', {'buy_item' : value.ref}, value.can_buy ? null : 'disabled')}} - <span class="white">{{:value.cost}}</span>
 		</div>
-            
-		{{if value.can_buy}}
-			<div class="item">
-				{{:value.description}}
-			</div>
-		{{/if}}
+		<div class="item">
+			{{:value.description}}
+		</div>
     {{/for}}
 {{else data.menu == 2}}
     <H2><span class="white">Information Record List:</span></H2>

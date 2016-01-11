@@ -31,7 +31,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 /obj/item/device/uplink/Destroy()
 	world_uplinks -= src
-	..()
+	return ..()
 
 // HIDDEN UPLINK - Can be stored in anything but the host item has to have a trigger for it.
 /* How to create an uplink in 3 easy steps!
