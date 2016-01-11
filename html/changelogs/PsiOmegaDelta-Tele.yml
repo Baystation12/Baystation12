@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - rscadd: "Uplink crystals can now be converted into physical form to allow transfer between uplink devices."
