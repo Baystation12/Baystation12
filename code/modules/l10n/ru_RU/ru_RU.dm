@@ -5,6 +5,8 @@
 /datum/lang/ru_RU
 	name = "default russian"
 
+	directions = list("Север"="North","Восток"="East","Юг"="South","Запад"="West","Отмена"="Cancel")
+
 	area/name = null
 	mob/name = null
 	obj/name = null

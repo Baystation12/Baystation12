@@ -408,5 +408,5 @@
 			if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
 				qdel(O)
 	else
-		user << "<span class='warning'>[translation(src,"clean",1,source)]</span>"
+		user << "<span class='warning'>[translation(src,"clean",source)]</span>"
 	source.reagents.trans_to_turf(src, 1, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.

@@ -19,8 +19,7 @@
 			var/bulb_fine = "The lightbulb seems fine, no need to replace it."
 			var/remove_broken = "You remove the broken plating."
 			var/pry_off = "You forcefully pry off the planks, destroying them in the process."
-			proc/remove(var/args = null)
-				return "You remove the [args ? translation(args) : args]."
+			proc/remove(var/args = null)	return "You remove the [args ? translation(args) : args]."
 			var/unscrew = "You unscrew the planks."
 			var/more_rods = "You need more rods."
 			var/reinforcing = "Reinforcing the floor..."
@@ -104,7 +103,7 @@
 			var/moderately = "It looks moderately damaged."
 			var/heavily = "It looks heavily damaged."
 			proc/fungus()	return "There is fungus growing on [GetVar()]."
-			proc/combusts()	return "\The [GetVar()] spontaneously combusts!."
+			proc/combusts_m()	return "\The [GetVar()] spontaneously combusts!."
 			var/thermite = "The thermite starts melting through the wall."
 			var/fail_smash = "You smash against the wall!"
 			var/success_smash = "You smash through the wall!"
@@ -152,7 +151,7 @@
 			proc/start_drill(var/args = null)	return "\red You start [args ? translation(args, "drill_verb") : "drilling"]."
 			proc/finish_drill(var/args = null)	return "\blue You finish [args ? translation(args, "drill_verb") : "drilling"] the rock."
 			proc/artifact_fail()	return "[pick("A high pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!"
-			proc/find_crate()	return "<span class='notice'>An old dusty crate was buried within!</span>"
+			proc/find_crate_m()	return "<span class='notice'>An old dusty crate was buried within!</span>"
 			proc/find_break(var/args = null)	return "\red<b>[pick("[args ? translation(args, "display_name") : "Something"] crumbles away into dust","[args ? translation(args, "display_name") : "Something"] breaks apart")].</b>"
 
 			random

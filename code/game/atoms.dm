@@ -188,8 +188,9 @@ its easier to just keep the beam vertical.
 //All atoms
 /atom/proc/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
-	if(isturf(src))		//temporatory duct tape
-		user << translation(src,"examine",1,list("infix"=infix,"suffix"=suffix))
+	if(isturf(src) || \
+	istype(src, /obj/structure/sign))		//temporatory duct tape
+		user << translation(src,"examine",list("infix"=infix,"suffix"=suffix))
 		user << translation(src,"desc")
 		return distance == -1 || (get_dist(src, user) <= distance)
 

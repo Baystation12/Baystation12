@@ -123,7 +123,7 @@
 
 	if (istype(W, /obj/item/device/measuring_tape))
 		var/obj/item/device/measuring_tape/P = W
-		user.visible_message("\blue[user] extends [P] towards [src].","\blue You extend [P] towards [src].", translation = list("object"=src,"name"="tape","v"=1,"args"=list("user"=user,"P"=P)))
+		user.visible_message("\blue[user] extends [P] towards [src].","\blue You extend [P] towards [src].", translation = list("object"=src,"name"="tape","args"=list("user"=user,"P"=P)))
 		if(do_after(user,25))
 			user << "[translation(src,"tape",1,list("P"=P, "excavation_level"=excavation_level))]"
 		return
@@ -296,7 +296,7 @@
 	N.updateMineralOverlays(1)
 
 	if(rand(1,500) == 1)
-		visible_message("<span class='notice'>An old dusty crate was buried within!</span>", translation = list("object"=src,"name"="find_crate","v"=0))
+		visible_message("<span class='notice'>An old dusty crate was buried within!</span>", translation = list("object"=src,"name"="find_crate"))
 		new /obj/structure/closet/crate/secure/loot(src)
 
 
@@ -324,7 +324,7 @@
 		var/obj/effect/suspension_field/S = locate() in src
 		if(!S || S.field_type != get_responsive_reagent(F.find_type))
 			if(X)
-				visible_message("\red<b>[pick("[display_name] crumbles away into dust","[display_name] breaks apart")].</b>", translation = list("object"=src,"name"="find_crate","v"=1,"args"=X))
+				visible_message("\red<b>[pick("[display_name] crumbles away into dust","[display_name] breaks apart")].</b>", translation = list("object"=src,"name"="find_crate","args"=X))
 				qdel(X)
 
 	finds.Remove(F)

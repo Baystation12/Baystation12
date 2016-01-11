@@ -147,6 +147,13 @@ var/global/list/endgame_safespawns = list()
 		var/datum/letter/L = new T
 		localisation += L
 
+	//Barsigns
+	paths = typesof(/datum/barsign) - /datum/barsign
+	for(var/T in paths)
+		var/datum/barsign/BS = new T
+		if(!BS.hidden)
+			barsigns += BS
+
 	return 1
 
 /* // Uncomment to debug chemical reaction list.

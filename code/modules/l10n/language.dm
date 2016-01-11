@@ -36,12 +36,20 @@
 			message_admins("Translation error in GetVar of [type] [v]: no referenced object.", 1)
 			return "Translation module error, please, contact administration!"
 
-		if(v in vars)									//sometimes we need to call a special proc named as needed var to find a value
-			if(hascall(src, v) && call(src, v)())		//for example, name var in id card, which isn`t constant and is created from name and rank
-				return call(src, v)()
-			else if(vars[v])
+		if((v in refObj:vars) && refObj:is_instance)		//duct tape for objects created not in code but on map and ingame
+			return refObj:vars[v]
+
+		if(hascall(src, v) && call(src, v)())			//sometimes we need to call a special proc named as needed var to find a value
+			return call(src, v)()						//for example, name var in id card, which isn`t constant and is created from name and rank
+		else
+			if((v in vars) && vars[v])
 				return vars[v]
-		return refObj:vars[v]
+			else if(v in refObj:vars)
+				return refObj:vars[v]
+			else
+				log_admin("Translation error in GetVar of [type] [v]: no valid result.")
+				message_admins("Translation error in GetVar of [type] [v]: no valid result.", 1)
+				return "Translation module error, please, contact administration!"
 /*
 
 	/atom procs
@@ -49,6 +57,9 @@
 */
 	proc/examine(var/args = null)
 		return 0
+
+	var/directions = list("North"="North","East"="East","South"="South","West"="West","Cancel"="Cancel")
+	proc/directions_return(var/args)	return directions[args]
 /*
 /atom/proc/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody

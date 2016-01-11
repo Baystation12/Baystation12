@@ -395,7 +395,7 @@
 	icon_state = "guitar"
 	item_state = "guitar"
 	icon_override = 'icons/obj/musician.dmi'
-	force = 10
+	force = 15
 	var/datum/song/handheld/song
 	hitsound = 'sound/weapons/guitarsmash.ogg'
 

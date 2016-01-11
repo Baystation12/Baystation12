@@ -1,6 +1,8 @@
 
 var/global/list/interface_languages = list("main", "ru_RU")
 
+/datum/var/is_instance = 0
+
 /client/verb/change_language()
 	set name = "Change Language"
 	set category = "Preferences"
@@ -32,69 +34,56 @@ proc/LangPath(var/path, var/lang = "main")
 			return text2path(P)
 	return 0
 
-proc/translation(var/obj, var/v = null, var/isProc = 0, var/procArgs = null, var/language = null)
+proc/translation(var/obj, var/v = null, var/procArgs = null, var/language = null)
 	if(!obj || !obj:vars)									//vars is default for any class in byond
 		return 0											//so it`s true for classes, but not for num/string/image/file/etc, and also null
 
 	if(!v)
 		v = "name"											//calling without var arg will always return translated name
-		isProc = 0											//even if other args are
-//	if(!((isProc && hascall(obj, v)) || (!isProc && v in obj:vars)))
-//		return 0											//checking vars and procs in original class
 
 	var/result = null
 	var/P = null											//language arg uses only if we should force language, for example, in remaked visible_message()
 	var/lang = language ? language : usr.client.prefs.interface_lang
 
-	P = LangPath(obj:type, lang)	//checking lang path
+	P = LangPath(obj:type, lang)							//checking lang path
 	if(!P)
 		P = LangPath(obj:type)								//if something wrong, checking basic eng path
 		if(!P)
-			if(isProc)										//proc without lang path couldn`t return anything good
+			if(v in obj:vars)								//var can has basic eng value, so just return default
+				return obj:vars[v]
+			else											//but proc without lang path couldn`t return anything good
 				log_admin("Translation error in [obj:type] [v]. Couldn`t find main and [lang] path.")
 				message_admins("Translation error in [obj:type] [v]. Couldn`t find main and [lang] path.", 1)
 				return "Translation module error, please, contact administration!"
-			else											//instead of proc, var can has basic eng value
-				return obj:vars[v]							//so just return default
 
 	P = new P(obj)											//after all, creating lang obj
-
 															//we can translate vars and proc/verb
-	if(isProc)												//it can be used for easier translation of browser windows and funcs like examine()
-		if(hascall(P, v) && call(P, v)(procArgs))			//so, if datum has such proc and it return something, return it
-			result = call(P, v)(procArgs)
-			del(P)
-		else												//else, trying to find basic eng form
-			del(P)
-			P = LangPath(obj:type)
-			if(!P)
+	if(hascall(P, v) && call(P, v)(procArgs))				//it can be used for easier translation of browser windows and funcs like examine()
+		result = call(P, v)(procArgs)						//so, if datum has such proc and it return something, return it
+	else if((v in P:vars) && P:GetVar(v))					//else, trying to get var value, if exists
+		result = P:GetVar(v)								//GetVar() proc uses for inner needs, but there it isn`t necessary
+	else
+		del(P)
+		P = LangPath(obj:type)								//else, trying to find basic eng form
+		if(!P)
+			if(v in obj:vars)
+				result = obj:vars[v]
+			else
 				log_admin("Translation error in [obj:type] [v]: [lang] has no such verb or returns null and main path didn`t exist.")
 				message_admins("Translation error in [obj:type] [v]: [lang] has no such verb or returns null and main path didn`t exist.", 1)
-				return "Translation module error, please, contact administration!"
+				result = "Translation module error, please, contact administration!"
+		else
 			P = new P(obj)
-			if(hascall(P, v) && call(P, v)(procArgs))		//same check for eng proc
+			if(hascall(P, v) && call(P, v)(procArgs))		//and do everything as in previous part
 				result = call(P, v)(procArgs)
-				del(P)
-			else
-				del(P)
-				log_admin("Translation error in [obj:type] [v]: [lang] and main has no such verb or returns null.")
-				message_admins("Translation module error in [obj:type]:[v]: [lang] and main has no such verb or returns null.", 1)
-				return "Translation module error, please, contact administration!"
-	else													//as was written before, instead of proc, var can has basic eng value"
-		if((v in P:vars) && P:GetVar(v))					//so we should use it if have neither translation, nor parental value
-			result = P:GetVar(v)
-			del(P)
-		else												//if needed lang path has no such translation, we`ll take basic eng path
-			del(P)
-			P = LangPath(obj:type)
-			if(!P)											//if didn`t exist, just using object basic eng arg value
-				del(P)
-				return obj:vars[v]
-			P = new P(obj)
-			if((v in P:vars) && P:GetVar(v))
+			else if((v in P:vars) && P:GetVar(v))
 				result = P:GetVar(v)
-				del(P)
-			else											//same if no var or value
-				del(P)
-				return obj:vars[v]
+			else if(v in obj:vars)							//if still didn`t exist, just using object basic var value or return error
+				result = obj:vars[v]
+			else
+				log_admin("Translation error in [obj:type] [v]: [lang] and main has no result or returns null.")
+				message_admins("Translation module error in [obj:type]:[v]: [lang] and main has no result or returns null.", 1)
+				result = "Translation module error, please, contact administration!"
+
+	del(P)
 	return sanitize_local(result)
