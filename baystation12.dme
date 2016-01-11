@@ -1712,4 +1712,5 @@
 #include "maps\exodus-4.dmm"
 #include "maps\exodus-5.dmm"
 #include "maps\exodus-6.dmm"
+#include "maps\quickcashmapjpeg.dmm"
 // END_INCLUDE
