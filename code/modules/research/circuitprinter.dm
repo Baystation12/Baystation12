@@ -9,7 +9,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	icon_state = "circuit_imprinter"
 	flags = OPENCONTAINER
 
-	var/list/materials = list("metal" = 0, "glass" = 0, "gold" = 0, "silver" = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0)
+	var/list/materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, "gold" = 0, "silver" = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0)
 	var/list/datum/design/queue = list()
 	var/progress = 0
 
