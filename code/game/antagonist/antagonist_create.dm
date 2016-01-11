@@ -27,6 +27,7 @@
 		M = new /mob/living/carbon/human(get_turf(source))
 	M.real_name = source.real_name
 	M.name = M.real_name
+	source.mind.transfer_to(M)
 	M.ckey = source.ckey
 	add_antagonist(M.mind, 1, 0, 1) // Equip them and move them to spawn.
 	return M
