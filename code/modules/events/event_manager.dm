@@ -23,14 +23,6 @@
 /datum/event_manager/New()
 	allEvents = typesof(/datum/event) - /datum/event
 
-/datum/event_manager/proc/process()
-	for(var/datum/event/E in event_manager.active_events)
-		E.process()
-
-	for(var/i = EVENT_LEVEL_MUNDANE to EVENT_LEVEL_MAJOR)
-		var/list/datum/event_container/EC = event_containers[i]
-		EC.process()
-
 /datum/event_manager/proc/event_complete(var/datum/event/E)
 	if(!E.event_meta || !E.severity)	// datum/event is used here and there for random reasons, maintaining "backwards compatibility"
 		log_debug("Event of '[E.type]' with missing meta-data has completed.")
