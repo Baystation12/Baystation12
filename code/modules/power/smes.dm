@@ -146,10 +146,6 @@
 		charge -= output_used*SMESRATE		// reduce the storage (may be recovered in /restore() if excessive)
 
 		add_avail(output_used)				// add output to powernet (smes side)
-
-		if(output_used < 0.0001)			// either from no charge or set to 0
-			outputting(0)
-			investigate_log("lost power and turned <font color='red'>off</font>","singulo")
 	else if(output_attempt && output_level > 0)
 		outputting = 1
 	else
