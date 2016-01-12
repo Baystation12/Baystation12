@@ -1,12 +1,16 @@
 /obj/machinery/portable_atmospherics/hydroponics
 	name = "hydroponics tray"
 	icon = 'icons/obj/hydroponics_machines.dmi'
-	icon_state = "hydrotray3"
+	icon_state = "hydrotray_0"
+	use_power = 1
+	idle_power_usage = 0
+	active_power_usage = 20
 	density = 1
 	anchored = 1
 	flags = OPENCONTAINER
 	volume = 100
 
+	var/on = 0                 // Is it on?
 	var/mechanical = 1         // Set to 0 to stop it from drawing the alert lights.
 	var/base_name = "tray"
 
@@ -197,6 +201,16 @@
 	else
 		return 0
 
+/obj/machinery/portable_atmospherics/hydroponics/power_change()
+	..()
+	if (!mechanical)	return
+
+	if(!on || inoperable())
+		icon_state = "hydrotray_0"
+	else
+		icon_state = "hydrotray_1"
+	update_icon()	//adjust all overlays to conform, i.e. lights
+
 /obj/machinery/portable_atmospherics/hydroponics/proc/check_health()
 	if(seed && !dead && health <= 0)
 		die()
@@ -313,7 +327,8 @@
 
 // If a weed growth is sufficient, this proc is called.
 /obj/machinery/portable_atmospherics/hydroponics/proc/weed_invasion()
-
+	if(mechanical && (!on || inoperable()))
+		return
 	//Remove the seed if something is already planted.
 	if(seed) seed = null
 	seed = plant_controller.seeds[pick(list("reishi","nettles","amanita","mushrooms","plumphelmet","towercap","harebells","weeds"))]
@@ -563,6 +578,8 @@
 		harvest(user)
 	else if(dead)
 		remove_dead(user)
+	else
+		toggle_power()
 
 /obj/machinery/portable_atmospherics/hydroponics/examine()
 
@@ -590,7 +607,7 @@
 	else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
 		usr << "The plant looks <span class='danger'>unhealthy</span>."
 
-	if(mechanical)
+	if(mechanical && on && !inoperable())
 		var/turf/T = loc
 		var/datum/gas_mixture/environment
 
@@ -617,6 +634,14 @@
 			light_string = "a light level of [light_available] lumens"
 
 		usr << "The tray's sensor suite is reporting [light_string] and a temperature of [environment.temperature]K."
+
+/obj/machinery/portable_atmospherics/hydroponics/verb/toggle_power()
+	set name = "Toggle Tray Power"
+	set category = "Object"
+	set src in view(1)
+	on = !on
+	usr.visible_message("<span class='notice'>[usr] switches [on ? "on" : "off"] the [src].</span>","<span class='notice'>You switch [on ? "on" : "off"] the [src].</span>")
+	power_change()
 
 /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid_verb()
 	set name = "Toggle Tray Lid"
