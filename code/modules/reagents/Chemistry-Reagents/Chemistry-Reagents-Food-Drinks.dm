@@ -123,24 +123,7 @@
 		qdel(hotspot)
 
 	if(volume >= 3)
-		if(T.wet >= 1)
-			return
-		T.wet = 1
-		if(T.wet_overlay)
-			T.overlays -= T.wet_overlay
-			T.wet_overlay = null
-		T.wet_overlay = image('icons/effects/water.dmi',T,"wet_floor")
-		T.overlays += T.wet_overlay
-
-		spawn(800) // This is terrible and needs to be changed when possible.
-			if(!T || !istype(T))
-				return
-			if(T.wet >= 2)
-				return
-			T.wet = 0
-			if(T.wet_overlay)
-				T.overlays -= T.wet_overlay
-				T.wet_overlay = null
+		T.wet_floor()
 
 /datum/reagent/nutriment/virus_food
 	name = "Virus Food"

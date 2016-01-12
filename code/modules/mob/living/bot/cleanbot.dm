@@ -74,19 +74,7 @@
 	if(screwloose && prob(5)) // Make a mess
 		if(istype(loc, /turf/simulated))
 			var/turf/simulated/T = loc
-			if(T.wet < 1)
-				T.wet = 1
-				if(T.wet_overlay)
-					T.overlays -= T.wet_overlay
-					T.wet_overlay = null
-				T.wet_overlay = image('icons/effects/water.dmi', T, "wet_floor")
-				T.overlays += T.wet_overlay
-				spawn(800)
-					if(istype(T) && T.wet < 2)
-						T.wet = 0
-						if(T.wet_overlay)
-							T.overlays -= T.wet_overlay
-							T.wet_overlay = null
+			T.wet_floor()
 
 	if(oddbutton && prob(5)) // Make a big mess
 		visible_message("Something flies out of [src]. He seems to be acting oddly.")
