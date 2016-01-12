@@ -34,9 +34,11 @@
 		powernet.trigger_warning()
 		return powernet.draw_power(amount)
 
-/obj/machinery/power/proc/add_avail(var/amount)
+/obj/machinery/power/proc/add_avail(var/amount, var/is_smes = 0)
 	if(powernet)
 		powernet.newavail += amount
+		if(is_smes)
+			powernet.smes_newavail += amount
 
 /obj/machinery/power/proc/draw_power(var/amount)
 	if(powernet)

@@ -24,8 +24,6 @@
 		if(current_area.type in skipped_areas || isNotStationLevel(S.z))
 			continue
 		S.charge = S.capacity
-		S.output_attempt = S.last_output_attempt
-		S.input_attempt = S.last_input_attempt
 		S.update_icon()
 		S.power_change()
 
