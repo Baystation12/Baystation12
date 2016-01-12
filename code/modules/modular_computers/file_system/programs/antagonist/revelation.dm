@@ -49,6 +49,7 @@
 		if(!newname)
 			return
 		filedesc = newname
+	return 1
 
 /datum/computer_file/program/revelation/clone()
 	var/datum/computer_file/program/revelation/temp = ..()

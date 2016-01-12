@@ -20,9 +20,13 @@
 	username = "DefaultUser[rand(100, 999)]"
 
 /datum/computer_file/program/chatclient/Topic(href, href_list)
+	if(..())
+		return 1
+
 	if(href_list["PRG_speak"])
+		. = 1
 		if(!channel)
-			return
+			return 1
 		var/mob/living/user = usr
 		var/message = sanitize(input(user, "Enter message or leave blank to cancel: "))
 		if(!message || !channel)
@@ -30,6 +34,7 @@
 		channel.add_message(message, username)
 
 	if(href_list["PRG_joinchannel"])
+		. = 1
 		var/datum/ntnet_conversation/C
 		for(var/datum/ntnet_conversation/chan in ntnet_global.chat_channels)
 			if(chan.id == text2num(href_list["PRG_joinchannel"]))
@@ -37,11 +42,11 @@
 				break
 
 		if(!C)
-			return
+			return 1
 
 		if(netadmin_mode)
 			channel = C		// Bypasses normal leave/join and passwords. Technically makes the user invisible to others.
-			return
+			return 1
 
 		if(C.password)
 			var/mob/living/user = usr
@@ -49,14 +54,16 @@
 			if(C && (password == C.password))
 				C.add_client(src)
 				channel = C
-			return
+			return 1
 		C.add_client(src)
 		channel = C
 	if(href_list["PRG_leavechannel"])
+		. = 1
 		if(channel)
 			channel.remove_client(src)
 		channel = null
 	if(href_list["PRG_newchannel"])
+		. = 1
 		var/mob/living/user = usr
 		var/channel_title = sanitize(input(user,"Enter channel name or leave blank to cancel:"))
 		if(!channel_title)
@@ -67,12 +74,13 @@
 		channel = C
 		C.title = channel_title
 	if(href_list["PRG_toggleadmin"])
+		. = 1
 		if(netadmin_mode)
 			netadmin_mode = 0
 			if(channel)
 				channel.remove_client(src) // We shouldn't be in channel's user list, but just in case...
 				channel = null
-			return
+			return 1
 		var/mob/living/user = usr
 		if(can_run(usr, 1, access_network))
 			if(channel)
@@ -85,21 +93,23 @@
 					return
 			netadmin_mode = 1
 	if(href_list["PRG_changename"])
+		. = 1
 		var/mob/living/user = usr
 		var/newname = sanitize(input(user,"Enter new nickname or leave blank to cancel:"))
 		if(!newname)
-			return
+			return 1
 		if(channel)
 			channel.add_status_message("[username] is now known as [newname].")
 		username = newname
 
 	if(href_list["PRG_savelog"])
+		. = 1
 		if(!channel)
 			return
 		var/mob/living/user = usr
 		var/logname = input(user,"Enter desired logfile name (.log) or leave blank to cancel:")
 		if(!logname || !channel)
-			return
+			return 1
 		var/datum/computer_file/data/logfile = new/datum/computer_file/data/logfile()
 		// Now we will generate HTML-compliant file that can actually be viewed/printed.
 		logfile.filename = logname
@@ -112,14 +122,15 @@
 			if(!computer)
 				// This program shouldn't even be runnable without computer.
 				CRASH("Var computer is null!")
-				return
+				return 1
 			if(!computer.hard_drive)
 				computer.visible_message("\The [computer] shows an \"I/O Error - Hard drive connection error\" warning.")
 			else	// In 99.9% cases this will mean our HDD is full
 				computer.visible_message("\The [computer] shows an \"I/O Error - Hard drive may be full. Please free some space and try again. Required space: [logfile.size]GQ\" warning.")
 	if(href_list["PRG_renamechannel"])
+		. = 1
 		if(!operator_mode || !channel)
-			return
+			return 1
 		var/mob/living/user = usr
 		var/newname = sanitize(input(user, "Enter new channel name or leave blank to cancel:"))
 		if(!newname || !channel)
@@ -127,23 +138,24 @@
 		channel.add_status_message("Channel renamed from [channel.title] to [newname] by operator.")
 		channel.title = newname
 	if(href_list["PRG_deletechannel"])
+		. = 1
 		if(channel && ((channel.operator == src) || netadmin_mode))
-			del(channel)
+			qdel(channel)
+			channel = null
 	if(href_list["PRG_setpassword"])
+		. = 1
 		if(!channel || ((channel.operator != src) && !netadmin_mode))
-			return
+			return 1
 
 		var/mob/living/user = usr
 		var/newpassword = sanitize(input(user, "Enter new password for this channel. Leave blank to cancel, enter 'nopassword' to remove password completely:"))
 		if(!channel || !newpassword || ((channel.operator != src) && !netadmin_mode))
-			return
+			return 1
 
 		if(newpassword == "nopassword")
 			channel.password = ""
 		else
 			channel.password = newpassword
-
-	..(href, href_list)
 
 /datum/computer_file/program/chatclient/process_tick()
 	..()

@@ -107,7 +107,10 @@
 
 
 /datum/computer_file/program/card_mod/Topic(href, href_list)
-	var/mob/living/user = usr
+	if(..())
+		return 1
+
+	var/mob/user = usr
 	var/obj/item/weapon/card/id/user_id_card = user.GetIdCard()
 	var/obj/item/weapon/card/id/id_card = computer.card_slot.stored_card
 	var/datum/nano_module/card_mod/module = NM
@@ -214,5 +217,4 @@
 		id_card.name = text("[id_card.registered_name]'s ID Card ([id_card.assignment])")
 
 	nanomanager.update_uis(NM)
-	..(href, href_list)
 	return 1

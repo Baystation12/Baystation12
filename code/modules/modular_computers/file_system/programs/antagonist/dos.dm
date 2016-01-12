@@ -87,13 +87,13 @@
 		for(var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
 			if("[R.uid]" == href_list["PRG_target_relay"])
 				target = R
-		return
+		return 1
 	if(href_list["PRG_reset"])
 		target.dos_sources.Remove(src)
 		target = null
 		executed = 0
 		error = ""
-		return
+		return 1
 	if(href_list["PRG_execute"])
 		if(target)
 			executed = 1
@@ -101,4 +101,4 @@
 			if(ntnet_global.intrusion_detection_enabled)
 				ntnet_global.add_log("IDS WARNING - Excess traffic flood targeting relay [target.uid] detected from device: [computer.network_card.get_network_tag()]")
 				ntnet_global.intrusion_detection_alarm = 1
-		return
+		return 1
