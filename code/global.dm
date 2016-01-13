@@ -29,6 +29,7 @@ var/diary               = null
 var/href_logfile        = null
 var/station_name        = "NSS Exodus"
 var/station_short       = "Exodus"
+var/const/dock_name     = "N.A.S. Crescent"
 var/const/boss_name     = "Central Command"
 var/const/boss_short    = "Centcomm"
 var/const/company_name  = "NanoTrasen"
