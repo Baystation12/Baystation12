@@ -80,6 +80,7 @@
 		return
 	..()
 	machinery_computer.update_icon()
+	machinery_computer.use_power = 0
 	return
 
 // Tesla links only work on machinery types, so we'll override the default try_install_component() proc
@@ -94,6 +95,7 @@
 		// Consoles don't usually have internal power source, so we can't disable tesla link in them.
 		if(istype(machinery_computer, /obj/machinery/modular_computer/console))
 			L.critical = 1
+			L.enabled = 1
 		found = 1
 	..(user, H, found)
 

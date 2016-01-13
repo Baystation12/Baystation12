@@ -14,6 +14,25 @@
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
 	var/dirt = 0
 
+// This is not great.
+/turf/simulated/proc/wet_floor(var/wet_val = 1)
+	spawn(0)
+		if(wet_val <= wet)
+			return
+		wet = wet_val
+		if(wet_overlay)
+			overlays -= wet_overlay
+			wet_overlay = null
+		wet_overlay = image('icons/effects/water.dmi',src,"wet_floor")
+		overlays += wet_overlay
+		sleep(800)
+		if(wet >= 2)
+			return
+		wet = 0
+		if(wet_overlay)
+			overlays -= wet_overlay
+			wet_overlay = null
+
 /turf/simulated/clean_blood()
 	for(var/obj/effect/decal/cleanable/blood/B in contents)
 		B.clean_blood()

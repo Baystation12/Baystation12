@@ -175,6 +175,8 @@ datum/unit_test/zas_supply_shuttle_moved
 
 	var/datum/shuttle/ferry/supply/Shuttle = null
 
+	var/testtime = 0	//Used as a timer.
+
 datum/unit_test/zas_supply_shuttle_moved/start_test()
 
 	if(!shuttle_controller || !shuttle_controller.shuttles.len)
@@ -189,8 +191,6 @@ datum/unit_test/zas_supply_shuttle_moved/start_test()
 	// Initiate the Move.
 	Shuttle.short_jump(Shuttle.area_offsite, Shuttle.area_station)
 
-	sleep(20)	// Give the shuttle some time to do it's thing.
-
 	return 1
 
 datum/unit_test/zas_supply_shuttle_moved/check_result()
@@ -201,7 +201,12 @@ datum/unit_test/zas_supply_shuttle_moved/check_result()
 	if(!Shuttle.at_station())
 		return 0
 
-	sleep(20)	// Give ZAS a chance to catchup.
+	if(!testtime)
+		testtime = world.time+40                // Wait another 2 ticks then proceed.
+
+	if(world.time < testtime)
+		return 0
+		
 
 	var/list/test = test_air_in_area(/area/supply/station)
 	if(isnull(test))

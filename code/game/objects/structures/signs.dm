@@ -172,6 +172,11 @@
 	desc = "A warning sign which reads 'HYDROPONICS'."
 	icon_state = "hydro1"
 
+/obj/structure/sign/directions
+	name = "direction sign"
+	desc = "A direction sign, claiming to know the way."
+	icon_state = "direction"
+
 /obj/structure/sign/directions/science
 	name = "\improper Science department"
 	desc = "A direction sign, pointing out which way the Science department is."

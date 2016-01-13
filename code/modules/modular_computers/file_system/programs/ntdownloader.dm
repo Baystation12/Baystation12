@@ -89,16 +89,15 @@
 	if(href_list["PRG_downloadfile"])
 		if(!downloaded_file)
 			begin_file_download(href_list["PRG_downloadfile"])
-		return
+		return 1
 	if(href_list["PRG_reseterror"])
 		if(downloaderror)
 			download_completion = 0
 			download_netspeed = 0
 			downloaded_file = null
 			downloaderror = ""
-		return
+		return 1
 	return 0
-
 
 /datum/nano_module/computer_ntnetdownload
 	name = "Network Downloader"
