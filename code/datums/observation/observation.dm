@@ -44,6 +44,7 @@
 
 /datum/proc/init_observers()
 	destruction = new()
+	return TRUE
 
 /datum/proc/destroy_observers()
 	if(!destruction)
@@ -56,8 +57,8 @@
 
 // This ensures that observer handlers don't create their own observer handlers, which create their own handlers, which create...
 /datum/observ/init_observers()
-	return
+	return FALSE
 
 // And this ensures that observer handlers don't attempt to notify others about their own death while being unable to.
 /datum/observ/destroy_observers()
-	return
+	return FALSE
