@@ -33,7 +33,7 @@
 	if (!iswall(W) || !isturf(user.loc))
 		user << "<span class='warning'>You can't place this here!</span>"
 		return
-	
+
 	var/placement_dir = get_dir(user, W)
 	if (!(placement_dir in cardinal))
 		user << "<span class='warning'>You must stand directly in front of the wall you wish to place that on.</span>"
@@ -43,7 +43,7 @@
 	var/stuff_on_wall = 0
 	if (locate(/obj/structure/sign/poster) in W)
 		stuff_on_wall = 1
-	
+
 	//crude, but will cover most cases. We could do stuff like check pixel_x/y but it's not really worth it.
 	for (var/dir in cardinal)
 		var/turf/T = get_step(W, dir)
@@ -61,7 +61,7 @@
 
 	flick("poster_being_set", P)
 	//playsound(W, 'sound/items/poster_being_created.ogg', 100, 1) //why the hell does placing a poster make printer sounds?
-	
+
 	var/oldsrc = src //get a reference to src so we can delete it after detaching ourselves
 	src = null
 	spawn(17)
@@ -71,7 +71,7 @@
 			user << "<span class='notice'>You place the poster!</span>"
 		else
 			P.roll_and_drop(P.loc)
-	
+
 	qdel(oldsrc)	//delete it now to cut down on sanity checks afterwards. Agouri's code supports rerolling it anyway
 
 //############################## THE ACTUAL DECALS ###########################
@@ -90,11 +90,11 @@
 
 	if(!serial)
 		serial = rand(1, poster_designs.len) //use a random serial if none is given
-	
+
 	serial_number = serial
 	var/datum/poster/design = poster_designs[serial_number]
 	set_poster(design)
-	
+
 	switch (placement_dir)
 		if (NORTH)
 			pixel_x = 0
@@ -133,22 +133,22 @@
 
 
 /obj/structure/sign/poster/attack_hand(mob/user as mob)
+
 	if(ruined)
 		return
-	var/temp_loc = user.loc
-	switch(alert("Do I want to rip the poster from the wall?","You think...","Yes","No"))
-		if("Yes")
-			if(user.loc != temp_loc)
-				return
-			visible_message("<span class='warning'>[user] rips [src] in a single, decisive motion!</span>" )
-			playsound(src.loc, 'sound/items/poster_ripped.ogg', 100, 1)
-			ruined = 1
-			icon_state = "poster_ripped"
-			name = "ripped poster"
-			desc = "You can't make out anything from the poster's original print. It's ruined."
-			add_fingerprint(user)
-		if("No")
+
+	if(alert("Do I want to rip the poster from the wall?","You think...","Yes","No") == "Yes")
+
+		if(ruined || !user.Adjacent(src))
 			return
+
+		visible_message("<span class='warning'>[user] rips [src] in a single, decisive motion!</span>" )
+		playsound(src.loc, 'sound/items/poster_ripped.ogg', 100, 1)
+		ruined = 1
+		icon_state = "poster_ripped"
+		name = "ripped poster"
+		desc = "You can't make out anything from the poster's original print. It's ruined."
+		add_fingerprint(user)
 
 /obj/structure/sign/poster/proc/roll_and_drop(turf/newloc)
 	var/obj/item/weapon/contraband/poster/P = new(src, serial_number)
