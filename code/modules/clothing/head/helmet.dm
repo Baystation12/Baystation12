@@ -86,7 +86,7 @@
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
 		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
 		)
-	
+
 	armor = list(melee = 62, bullet = 50, laser = 50,energy = 35, bomb = 10, bio = 2, rad = 0)
 	flags_inv = HIDEEARS
 	siemens_coefficient = 0.7
@@ -121,6 +121,14 @@
 	name = "emergency response team security helmet"
 	desc = "An in-atmosphere helmet worn by security members of the NanoTrasen Emergency Response Team. Has red highlights."
 	icon_state = "erthelmet_sec"
+
+/obj/item/clothing/head/helmet/laserproof
+	name = "ablative helmet"
+	desc = "A helmet that excels in protecting the wearer against energy projectiles."
+	icon_state = "helmet_reflec"
+	item_state = "helmet_reflec"
+	armor = list(melee = 10, bullet = 10, laser = 80, energy = 59, bomb = 0, bio = 0, rad = 0)
+	siemens_coefficient = 0
 
 //Engineer
 /obj/item/clothing/head/helmet/ert/engineer
