@@ -69,7 +69,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 
 
 /obj/item/weapon/board/interact(mob/user as mob)
-	if(user.incapacitated(INCAPACITATION_DISABLED) || (!isAI(user) && !user.Adjacent(src))) //can't see if you arent conscious. If you are not an AI you can't see it unless you are next to it, either.
+	if(user.is_physically_disabled() || (!isAI(user) && !user.Adjacent(src))) //can't see if you arent conscious. If you are not an AI you can't see it unless you are next to it, either.
 		user << browse(null, "window=boardgame")
 		user.unset_machine()
 		return

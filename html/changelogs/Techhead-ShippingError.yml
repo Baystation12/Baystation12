@@ -1,6 +1,0 @@
-author: Techhead
-
-delete-after: True
-
-changes: 
-  - rscadd: "Added a new random event: Shipping Error - A random crate is mistakenly shipped to the station."
