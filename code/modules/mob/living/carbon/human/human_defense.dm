@@ -41,6 +41,26 @@ emp_act
 
 				return PROJECTILE_CONTINUE // complete projectile permutation
 
+	//Laserproof helmet
+	if(head && istype(head, /obj/item/clothing/head/helmet/laserproof))
+		if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
+			var/reflectchance = 40 - round(P.damage/3)
+			if(!(def_zone in list("head")))
+				reflectchance /= 2
+			if(prob(reflectchance))
+				visible_message("\red <B>\The [P] gets reflected by \the [src]'s [head.name]!</B>")
+
+				// Find a turf near or on the original location to bounce to
+				if(P.starting)
+					var/new_x = P.starting.x + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
+					var/new_y = P.starting.y + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
+					var/turf/curloc = get_turf(src)
+
+					// redirect the projectile
+					P.redirect(new_x, new_y, curloc, src)
+
+				return PROJECTILE_CONTINUE // complete projectile permutation
+
 	//Shrapnel
 	if(P.can_embed())
 		var/armor = getarmor_organ(organ, "bullet")
