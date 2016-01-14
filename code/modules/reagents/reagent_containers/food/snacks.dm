@@ -105,11 +105,11 @@
 	if (bitecount==0)
 		return
 	else if (bitecount==1)
-		user << "\blue \The [src] was bitten by someone!"
+		user << "<span class='notice'>\The [src] was bitten by someone!</span>"
 	else if (bitecount<=3)
-		user << "\blue \The [src] was bitten [bitecount] times!"
+		user << "<span class='notice'>\The [src] was bitten [bitecount] time\s!</span>"
 	else
-		user << "\blue \The [src] was bitten multiple times!"
+		user << "<span class='notice'>\The [src] was bitten multiple times!</span>"
 
 /obj/item/weapon/reagent_containers/food/snacks/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/storage))
@@ -124,12 +124,12 @@
 				U.create_reagents(5)
 
 			if (U.reagents.total_volume > 0)
-				user << "\red You already have something on your [U]."
+				user << "<span class='warning'>You already have something on your [U].</span>"
 				return
 
 			user.visible_message( \
-				"[user] scoops up some [src] with \the [U]!", \
-				"\blue You scoop up some [src] with \the [U]!" \
+				"\The [user] scoops up some [src] with \the [U]!", \
+				"<span class='notice'>You scoop up some [src] with \the [U]!</span>" \
 			)
 
 			src.bitecount++
@@ -154,7 +154,7 @@
 			if (W.w_class >= src.w_class || is_robot_module(W))
 				return
 
-			user << "\red You slip [W] inside [src]."
+			user << "<span class='warning'>You slip \the [W] inside \the [src].</span>"
 			user.remove_from_mob(W)
 			W.dropped(user)
 			add_fingerprint(user)
@@ -163,15 +163,15 @@
 
 		if (has_edge(W))
 			if (!can_slice_here)
-				user << "\red You cannot slice [src] here! You need a table or at least a tray to do it."
+				user << "<span class='warning'>You cannot slice \the [src] here! You need a table or at least a tray to do it.</span>"
 				return
 
 			var/slices_lost = 0
 			if (W.w_class > 3)
-				user.visible_message("\blue [user] crudely slices \the [src] with [W]!", "\blue You crudely slice \the [src] with your [W]!")
+				user.visible_message("<span class='notice'>\The [user] crudely slices \the [src] with [W]!</span>", "<span class='notice'>You crudely slice \the [src] with your [W]!</span>")
 				slices_lost = rand(1,min(1,round(slices_num/2)))
 			else
-				user.visible_message("\blue [user] slices \the [src]!", "\blue You slice \the [src]!")
+				user.visible_message("<span class='notice'>\The [user] slices \the [src]!</span>", "<span class='notice'>You slice \the [src]!</span>")
 
 			var/reagents_per_slice = reagents.total_volume/slices_num
 			for(var/i=1 to (slices_num-slices_lost))
@@ -474,7 +474,7 @@
 	..()
 	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
 	src.reagents.splash(hit_atom, reagents.total_volume)
-	src.visible_message("\red [src.name] has been squashed.","\red You hear a smack.")
+	src.visible_message("<span class='warning'>\The [src] has been squashed!</span>","<span class='warning'>You hear a smack.</span>")
 	qdel(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/egg/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -483,10 +483,10 @@
 		var/clr = C.colourName
 
 		if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))
-			usr << "\blue The egg refuses to take on this color!"
+			usr << "<span class='notice'>The egg refuses to take on this color!</span>"
 			return
 
-		usr << "\blue You color \the [src] [clr]"
+		usr << "<span class='notice'>You color \the [src] [clr]</span>"
 		icon_state = "egg-[clr]"
 	else
 		..()
@@ -1114,7 +1114,7 @@
 		bitesize = 0.1 //this snack is supposed to be eating during looooong time. And this it not dinner food! --rastaf0
 	On_Consume()
 		if(prob(unpopped))	//lol ...what's the point?
-			usr << "\red You bite down on an un-popped kernel!"
+			usr << "<span class='warning'>You bite down on an un-popped kernel!</span>"
 			unpopped = max(0, unpopped-1)
 		..()
 
@@ -2674,7 +2674,7 @@
 	if( open && pizza )
 		user.put_in_hands( pizza )
 
-		user << "\red You take the [src.pizza] out of the [src]."
+		user << "<span class='warning'>You take \the [src.pizza] out of \the [src].</span>"
 		src.pizza = null
 		update_icon()
 		return
@@ -2688,7 +2688,7 @@
 		boxes -= box
 
 		user.put_in_hands( box )
-		user << "\red You remove the topmost [src] from your hand."
+		user << "<span class='warning'>You remove the topmost [src] from your hand.</span>"
 		box.update_icon()
 		update_icon()
 		return
@@ -2727,11 +2727,11 @@
 				box.update_icon()
 				update_icon()
 
-				user << "\red You put the [box] ontop of the [src]!"
+				user << "<span class='warning'>You put \the [box] ontop of \the [src]!</span>"
 			else
-				user << "\red The stack is too high!"
+				user << "<span class='warning'>The stack is too high!</span>"
 		else
-			user << "\red Close the [box] first!"
+			user << "<span class='warning'>Close \the [box] first!</span>"
 
 		return
 
@@ -2744,9 +2744,9 @@
 
 			update_icon()
 
-			user << "\red You put the [I] in the [src]!"
+			user << "<span class='warning'>You put \the [I] in \the [src]!</span>"
 		else
-			user << "\red You try to push the [I] through the lid but it doesn't work!"
+			user << "<span class='warning'>You try to push \the [I] through the lid but it doesn't work!</span>"
 		return
 
 	if( istype(I, /obj/item/weapon/pen/) )
