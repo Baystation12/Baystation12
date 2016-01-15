@@ -48,6 +48,12 @@ var/list/ghost_traps
 
 // Print a message to all ghosts with the right prefs/lack of bans.
 /datum/ghosttrap/proc/request_player(var/mob/target, var/request_string, var/request_timeout)
+	if(request_timeout)
+		request_timeouts[target] = world.time + request_timeout
+		target.destruction.register(src, /datum/ghosttrap/proc/target_destroyed)
+	else
+		request_timeouts -= target
+
 	for(var/mob/dead/observer/O in player_list)
 		if(!O.MayRespawn())
 			continue
@@ -58,12 +64,6 @@ var/list/ghost_traps
 		if(pref_check && !(pref_check in O.client.prefs.be_special_role))
 			continue
 		if(O.client)
-			if(request_timeout)
-				request_timeouts[target] = world.time + request_timeout
-				target.destruction.register(src, /datum/ghosttrap/proc/target_destroyed)
-			else
-				request_timeouts -= target
-
 			O << "[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])"
 
 /datum/ghosttrap/proc/target_destroyed(var/destroyed_target)

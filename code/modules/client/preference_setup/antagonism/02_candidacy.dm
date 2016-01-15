@@ -1,7 +1,8 @@
+var/list/private_valid_special_roles
+
 /datum/category_item/player_setup_item/antagonism/candidacy
 	name = "Candidacy"
 	sort_order = 2
-	var/list/private_valid_special_roles
 
 /datum/category_item/player_setup_item/antagonism/candidacy/load_character(var/savefile/S)
 	S["be_special"]	>> pref.be_special_role

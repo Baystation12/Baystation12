@@ -815,7 +815,7 @@ default behaviour is:
 		ear_deaf = deaf
 
 /mob/proc/can_be_possessed_by(var/mob/dead/observer/possessor)
-	return istype(possessor) && possessor.client  && possessor.ckey
+	return istype(possessor) && possessor.client
 
 /mob/living/can_be_possessed_by(var/mob/dead/observer/possessor)
 	if(!..())

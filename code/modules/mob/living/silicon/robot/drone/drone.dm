@@ -65,6 +65,9 @@ var/list/mob_hat_cache = list()
 	if(!config.allow_drone_spawn)
 		src << "<span class='danger'>Playing as drones is not currently permitted.</span>"
 		return 0
+	if(too_many_active_drones())
+		src << "<span class='danger'>The maximum number of active drones has been reached..</span>"
+		return 0
 	if(jobban_isbanned(possessor,"Cyborg"))
 		usr << "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>"
 		return 0
@@ -299,7 +302,7 @@ var/list/mob_hat_cache = list()
 //Reboot procs.
 
 /mob/living/silicon/robot/drone/proc/request_player()
-	if(active_drones() >= config.max_maint_drones)
+	if(too_many_active_drones())
 		return
 	var/datum/ghosttrap/G = get_ghost_trap("maintenance drone")
 	G.request_player(src, "Someone is attempting to reboot a maintenance drone.", 30 SECONDS)
@@ -342,9 +345,9 @@ var/list/mob_hat_cache = list()
 	real_name = "construction drone ([rand(100,999)])"
 	name = real_name
 
-/proc/active_drones()
+/proc/too_many_active_drones()
 	var/drones = 0
 	for(var/mob/living/silicon/robot/drone/D in mob_list)
 		if(D.key && D.client)
 			drones++
-	return drones
+	return drones >= config.max_maint_drones
