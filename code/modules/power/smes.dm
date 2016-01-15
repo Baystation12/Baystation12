@@ -89,6 +89,12 @@
 
 	return
 
+/obj/machinery/power/smes/add_avail(var/amount)
+	if(..(amount))
+		powernet.smes_newavail += amount
+		return 1
+	return 0
+
 
 /obj/machinery/power/smes/disconnect_terminal()
 	if(terminal)
@@ -161,7 +167,7 @@
 	if(output_attempt && (!output_pulsed && !output_cut) && powernet && charge)
 		output_used = min( charge/SMESRATE, output_level)		//limit output to that stored
 		charge -= output_used*SMESRATE		// reduce the storage (may be recovered in /restore() if excessive)
-		add_avail(output_used, 1)				// add output to powernet (smes side)
+		add_avail(output_used)				// add output to powernet (smes side)
 		outputting = 2
 	else if(!powernet || !charge)
 		outputting = 1

@@ -5173,7 +5173,7 @@
 "bVy" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/machinery/meter,/obj/effect/floor_decal/industrial/warning{dir = 4},/turf/simulated/floor/tiled/white,/area/rnd/mixing)
 "bVz" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/obj/machinery/airlock_sensor{pixel_y = -25},/turf/simulated/floor/airless,/area/rnd/mixing)
 "bVA" = (/obj/machinery/mass_driver{dir = 4; id = "toxinsdriver"},/turf/simulated/floor/airless,/area/rnd/mixing)
-"bVB" = (/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/obj/machinery/power/smes/buildable{charge = 5e+006; input_attempt = 1; input_level = 250000; inputting = 1; output_level = 250000; outputting = 1; RCon_tag = "Engine - Core"},/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/plating,/area/engineering/engine_room)
+"bVB" = (/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/obj/machinery/power/smes/buildable{charge = 5e+006; input_attempt = 1; input_level = 250000; inputting = 1; output_attempt = 1; output_level = 250000; outputting = 0; RCon_tag = "Engine - Core"},/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/plating,/area/engineering/engine_room)
 "bVC" = (/obj/structure/table/woodentable,/obj/item/weapon/book/manual/engineering_guide{pixel_x = 3; pixel_y = 2},/obj/item/weapon/book/manual/atmospipes,/obj/machinery/light{dir = 1},/turf/simulated/floor/carpet,/area/engineering/break_room)
 "bVD" = (/obj/structure/table/woodentable,/obj/item/weapon/book/manual/engineering_construction,/obj/item/weapon/book/manual/evaguide{pixel_x = -2; pixel_y = 7},/turf/simulated/floor/carpet,/area/engineering/break_room)
 "bVE" = (/obj/structure/bookcase/manuals/engineering,/turf/simulated/floor/carpet,/area/engineering/break_room)
