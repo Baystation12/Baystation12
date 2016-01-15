@@ -108,7 +108,6 @@
 	log_ooc("(LOCAL) [mob.name]/[key] : [msg]")
 
 	var/mob/source = mob.get_looc_source()
-	var/list/heard = get_mobs_or_objects_in_view(7, get_turf(source), 1, 0)
 
 	var/display_name = key
 	if(holder && holder.fakekey)
@@ -116,34 +115,65 @@
 	if(mob.stat != DEAD)
 		display_name = mob.name
 
-	for(var/client/target in clients)
-		if(target.prefs.toggles & CHAT_LOOC)
-			var/prefix = ""
-			var/admin_stuff = ""
-			var/send = 0
+	var/turf/T = get_turf(source)
+	var/list/listening = list()
+	listening |= src	// We can always hear ourselves.
+	var/list/listening_obj = list()
+	var/list/eye_heard = list()
 
-			if(target in admins)
-				admin_stuff += "/([key])"
-				if(target != src)
-					admin_stuff += "([admin_jump_link(mob, target.holder)])"
+		// This is essentially a copy/paste from living/say() the purpose is to get mobs inside of objects without recursing through
+		// the contents of every mob and object in get_mobs_or_objects_in_view() looking for PAI's inside of the contents of a bag inside the
+		// contents of a mob inside the contents of a welded shut locker we essentially get a list of turfs and see if the mob is on one of them.
 
-			if(target.mob in heard)
-				send = 1
-				if(isAI(target.mob))
-					prefix = "(Core) "
+	if(T)
+		var/list/hear = hear(7,T)
+		var/list/hearturfs = list()
 
-			else if(isAI(target.mob)) // Special case
-				var/mob/living/silicon/ai/A = target.mob
-				if(A.eyeobj in hearers(7, source))
-					send = 1
-					prefix = "(Eye) "
+		for(var/I in hear)
+			if(ismob(I))
+				var/mob/M = I
+				listening |= M.client
+				hearturfs += M.locs[1]
+			else if(isobj(I))
+				var/obj/O = I
+				hearturfs |= O.locs[1]
+				listening_obj |= O
 
-			if(!send && (target in admins))
-				send = 1
-				prefix = "(R)"
+		for(var/mob/M in player_list)
+			if(!M.client || !(M.client.prefs.toggles & CHAT_LOOC))
+				continue
+			if(isAI(M))
+				var/mob/living/silicon/ai/A = M
+				if(A.eyeobj.locs[1] in hearturfs)
+					eye_heard |= M.client
+					listening |= M.client
+					continue
+				
+			if(M.loc && M.locs[1] in hearturfs)
+				listening |= M.client
 
-			if(send)
-				target << "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", target) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[msg]</span></span></span>"
+	
+	for(var/client/t in listening)
+		var/admin_stuff = ""
+		var/prefix = ""
+		if(t in admins)
+			admin_stuff += "/([key])"
+			if(t != src)
+				admin_stuff += "([admin_jump_link(mob, t.holder)])"
+		if(isAI(t.mob))
+			if(t in eye_heard)
+				prefix = "(Eye) "
+			else
+				prefix = "(Core) "
+		t << "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", t) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[msg]</span></span></span>"
+
+
+	for(var/client/adm in admins)	//Now send to all admins that weren't in range.
+		if(!(adm in listening))
+			var/admin_stuff = "/([key])([admin_jump_link(mob, adm.holder)])"
+			var/prefix = "(R)"
+
+			adm << "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", adm) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[msg]</span></span></span>"
 
 /mob/proc/get_looc_source()
 	return src
