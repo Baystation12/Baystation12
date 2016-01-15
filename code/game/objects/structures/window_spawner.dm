@@ -13,6 +13,10 @@
 	var/win_path = /obj/structure/window/basic
 	var/activated
 
+// stops ZAS expanding zones past us, the windows will block the zone anyway
+/obj/effect/wingrille_spawn/CanPass()
+	return 0
+
 /obj/effect/wingrille_spawn/attack_hand()
 	attack_generic()
 
