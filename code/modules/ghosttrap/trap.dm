@@ -3,12 +3,17 @@
 
 var/list/ghost_traps
 
-proc/get_ghost_trap(var/trap_key)
+/proc/get_ghost_trap(var/trap_key)
 	if(!ghost_traps)
 		populate_ghost_traps()
 	return ghost_traps[trap_key]
 
-proc/populate_ghost_traps()
+/proc/get_ghost_traps()
+	if(!ghost_traps)
+		populate_ghost_traps()
+	return ghost_traps
+
+/proc/populate_ghost_traps()
 	ghost_traps = list()
 	for(var/traptype in typesof(/datum/ghosttrap))
 		var/datum/ghosttrap/G = new traptype
@@ -21,11 +26,11 @@ proc/populate_ghost_traps()
 	var/pref_check = BE_AI
 	var/ghost_trap_message = "They are occupying a positronic brain now."
 	var/ghost_trap_role = "Positronic Brain"
+	var/can_set_own_name = TRUE
+	var/list_as_special_role = TRUE	// If true, this entry will be listed as a special role in the character setup
 
 // Check for bans, proper atom types, etc.
-/datum/ghosttrap/proc/assess_candidate(var/mob/dead/observer/candidate)
-	if(!istype(candidate) || !candidate.client || !candidate.ckey)
-		return 0
+/datum/ghosttrap/proc/assess_candidate(var/mob/dead/observer/candidate, var/mob/target)
 	if(!candidate.MayRespawn(1, minutes_since_death))
 		return 0
 	if(islist(ban_checks))
@@ -36,9 +41,7 @@ proc/populate_ghost_traps()
 	return 1
 
 // Print a message to all ghosts with the right prefs/lack of bans.
-/datum/ghosttrap/proc/request_player(var/mob/target, var/request_string)
-	if(!target)
-		return
+/datum/ghosttrap/proc/request_player(var/mob/target, var/request_string, var/valid_time)
 	for(var/mob/dead/observer/O in player_list)
 		if(!O.MayRespawn())
 			continue
@@ -46,10 +49,10 @@ proc/populate_ghost_traps()
 			for(var/bantype in ban_checks)
 				if(jobban_isbanned(O, "[bantype]"))
 					continue
-		if(pref_check && !(O.client.prefs.be_special & pref_check))
+		if(pref_check && !(pref_check in O.client.prefs.be_special_role))
 			continue
 		if(O.client)
-			O << "[request_string]<a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>Click here</a> if you wish to play as this option."
+			O << "[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]';valid_until=[world.time + valid_time]>(Occupy)</a> ([ghost_follow_link(target, O)])"
 
 // Handles a response to request_player().
 /datum/ghosttrap/Topic(href, href_list)
@@ -58,9 +61,18 @@ proc/populate_ghost_traps()
 	if(href_list["candidate"] && href_list["target"])
 		var/mob/dead/observer/candidate = locate(href_list["candidate"]) // BYOND magic.
 		var/mob/target = locate(href_list["target"])                     // So much BYOND magic.
+		var/valid_until = text2num(href_list["valid_until"])
 		if(!target || !candidate)
 			return
-		if(candidate == usr && assess_candidate(candidate) && !target.ckey)
+		if(candidate != usr)
+			return
+		if(valid_until && world.time > valid_until)
+			candidate << "This occupation request is no longer valid."
+			return
+		if(target.key)
+			candidate << "The target is already occupied."
+			return
+		if(assess_candidate(candidate, target))
 			transfer_personality(candidate,target)
 		return 1
 
@@ -93,12 +105,17 @@ proc/populate_ghost_traps()
 
 // Allows people to set their own name. May or may not need to be removed for posibrains if people are dumbasses.
 /datum/ghosttrap/proc/set_new_name(var/mob/target)
+	if(!can_set_own_name)
+		return
+
 	var/newname = sanitizeSafe(input(target,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
 	if (newname != "")
 		target.real_name = newname
 		target.name = target.real_name
 
-// Doona pods and walking mushrooms.
+/***********************************
+* Diona pods and walking mushrooms *
+***********************************/
 /datum/ghosttrap/plant
 	object = "living plant"
 	ban_checks = list("Dionaea")
@@ -112,3 +129,46 @@ proc/populate_ghost_traps()
 	if(istype(target,/mob/living/carbon/alien/diona))
 		target << "<B>You are \a [target], one of a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>"
 		target << "<B>Too much darkness will send you into shock and starve you, but light will help you heal.</B>"
+
+/*****************
+* Cortical Borer *
+*****************/
+/datum/ghosttrap/borer
+	object = "cortical borer"
+	ban_checks = list("Borer")
+	pref_check = BE_ALIEN
+	ghost_trap_message = "They are occupying a borer now."
+	ghost_trap_role = "Cortical Borer"
+	can_set_own_name = FALSE
+	list_as_special_role = FALSE
+
+/datum/ghosttrap/borer/welcome_candidate(var/mob/target)
+	target << "<span class='notice'>You are a cortical borer!</span> You are a brain slug that worms its way \
+	into the head of its victim. Use stealth, persuasion and your powers of mind control to keep you, \
+	your host and your eventual spawn safe and warm."
+	target << "You can speak to your victim with <b>say</b>, to other borers with <b>say [target.get_language_prefix()]x</b>, and use your Abilities tab to access powers."
+
+/********************
+* Maintenance Drone *
+*********************/
+/datum/ghosttrap/drone
+	object = "maintenance drone"
+	pref_check = BE_PAI
+	ghost_trap_message = "They are occupying a maintenance drone now."
+	ghost_trap_role = "Maintenance Drone"
+	can_set_own_name = FALSE
+	list_as_special_role = FALSE
+
+/datum/ghosttrap/drone/New()
+	minutes_since_death = DRONE_SPAWN_DELAY
+	..()
+
+datum/ghosttrap/drone/assess_candidate(var/mob/dead/observer/candidate, var/mob/target)
+	. = ..()
+	if(. && !target.can_be_possessed_by(candidate))
+		return 0
+
+datum/ghosttrap/drone/transfer_personality(var/mob/candidate, var/mob/living/silicon/robot/drone/drone)
+	if(!assess_candidate(candidate))
+		return 0
+	drone.transfer_personality(candidate.client)
