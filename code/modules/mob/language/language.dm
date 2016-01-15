@@ -5,19 +5,19 @@
 */
 
 /datum/language
-	var/name = "an unknown language" // Fluff name of language if any.
-	var/desc = "A language."         // Short description for 'Check Languages'.
-	var/speech_verb = "says"         // 'says', 'hisses', 'farts'.
-	var/ask_verb = "asks"            // Used when sentence ends in a ?
-	var/exclaim_verb = "exclaims"    // Used when sentence ends in a !
-	var/whisper_verb                 // Optional. When not specified speech_verb + quietly/softly is used instead.
-	var/signlang_verb = list()       // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
-	var/colour = "body"              // CSS style to use for strings in this language.
-	var/key = "x"                    // Character used to speak in language eg. :o for Unathi.
-	var/flags = 0                    // Various language flags.
-	var/native                       // If set, non-native speakers will have trouble speaking.
-	var/list/syllables               // Used when scrambling text for a non-speaker.
-	var/list/space_chance = 55       // Likelihood of getting a space in the random scramble string
+	var/name = "an unknown language"  // Fluff name of language if any.
+	var/desc = "A language."          // Short description for 'Check Languages'.
+	var/speech_verb = "says"          // 'says', 'hisses', 'farts'.
+	var/ask_verb = "asks"             // Used when sentence ends in a ?
+	var/exclaim_verb = "exclaims"     // Used when sentence ends in a !
+	var/whisper_verb = "whispers"     // Optional. When not specified speech_verb + quietly/softly is used instead.
+	var/signlang_verb = list("signs") // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
+	var/colour = "body"               // CSS style to use for strings in this language.
+	var/key = "x"                     // Character used to speak in language eg. :o for Unathi.
+	var/flags = 0                     // Various language flags.
+	var/native                        // If set, non-native speakers will have trouble speaking.
+	var/list/syllables                // Used when scrambling text for a non-speaker.
+	var/list/space_chance = 55        // Likelihood of getting a space in the random scramble string
 
 /datum/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	if(!syllables || !syllables.len)

@@ -12,20 +12,18 @@
 
 /obj/item/clothing/mask/breath/proc/adjust_mask(mob/user)
 	if(user.canmove && !user.stat)
-		if(!src.hanging)
-			src.hanging = !src.hanging
-			gas_transfer_coefficient = 1 //gas is now escaping to the turf and vice versa
-			item_flags &= ~(AIRTIGHT)
-			body_parts_covered = ~(FACE)
+		src.hanging = !src.hanging
+		if (src.hanging)
+			gas_transfer_coefficient = 1
+			body_parts_covered = body_parts_covered & ~FACE
+			item_flags = item_flags & ~AIRTIGHT
 			icon_state = "breathdown"
 			user << "Your mask is now hanging on your neck."
-
 		else
-			src.hanging = !src.hanging
 			gas_transfer_coefficient = initial(gas_transfer_coefficient)
-			item_flags |= AIRTIGHT
-			body_parts_covered |= FACE
-			icon_state = "breath"
+			body_parts_covered = initial(body_parts_covered)
+			item_flags = initial(item_flags)
+			icon_state = initial(icon_state)
 			user << "You pull the mask up to cover your face."
 		update_clothing_icon()
 

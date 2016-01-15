@@ -8,7 +8,7 @@
 	var/total_burn  = 0
 	var/total_brute = 0
 	for(var/obj/item/organ/external/O in organs)	//hardcoded to streamline things a bit
-		if(O.status & ORGAN_ROBOT && !O.vital)
+		if((O.status & ORGAN_ROBOT) && !O.vital)
 			continue //*non-vital* robot limbs don't count towards shock and crit
 		total_brute += O.brute_dam
 		total_burn  += O.burn_dam
