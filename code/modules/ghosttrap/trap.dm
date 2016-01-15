@@ -29,6 +29,12 @@ var/list/ghost_traps
 	var/can_set_own_name = TRUE
 	var/list_as_special_role = TRUE	// If true, this entry will be listed as a special role in the character setup
 
+	var/list/request_timeouts
+
+/datum/ghosttrap/New()
+	request_timeouts = list()
+	..()
+
 // Check for bans, proper atom types, etc.
 /datum/ghosttrap/proc/assess_candidate(var/mob/dead/observer/candidate, var/mob/target)
 	if(!candidate.MayRespawn(1, minutes_since_death))
@@ -41,7 +47,7 @@ var/list/ghost_traps
 	return 1
 
 // Print a message to all ghosts with the right prefs/lack of bans.
-/datum/ghosttrap/proc/request_player(var/mob/target, var/request_string, var/valid_time)
+/datum/ghosttrap/proc/request_player(var/mob/target, var/request_string, var/request_timeout)
 	for(var/mob/dead/observer/O in player_list)
 		if(!O.MayRespawn())
 			continue
@@ -52,7 +58,16 @@ var/list/ghost_traps
 		if(pref_check && !(pref_check in O.client.prefs.be_special_role))
 			continue
 		if(O.client)
-			O << "[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]';valid_until=[world.time + valid_time]>(Occupy)</a> ([ghost_follow_link(target, O)])"
+			if(request_timeout)
+				request_timeouts[target] = world.time + request_timeout
+				target.destruction.register(src, /datum/ghosttrap/proc/target_destroyed)
+			else
+				request_timeouts -= target
+
+			O << "[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])"
+
+/datum/ghosttrap/proc/target_destroyed(var/destroyed_target)
+	request_timeouts -= destroyed_target
 
 // Handles a response to request_player().
 /datum/ghosttrap/Topic(href, href_list)
@@ -61,12 +76,11 @@ var/list/ghost_traps
 	if(href_list["candidate"] && href_list["target"])
 		var/mob/dead/observer/candidate = locate(href_list["candidate"]) // BYOND magic.
 		var/mob/target = locate(href_list["target"])                     // So much BYOND magic.
-		var/valid_until = text2num(href_list["valid_until"])
 		if(!target || !candidate)
 			return
 		if(candidate != usr)
 			return
-		if(valid_until && world.time > valid_until)
+		if(request_timeouts[target] && world.time > request_timeouts[target])
 			candidate << "This occupation request is no longer valid."
 			return
 		if(target.key)
