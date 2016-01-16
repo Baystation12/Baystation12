@@ -478,6 +478,38 @@ datum/unit_test/mob_damage/machine/halloss
 	name = "MOB: IPC Halloss Damage Check"
 	damagetype = HALLOSS
 
+
+// ==============================================================================
+
+
+datum/unit_test/robot_module_icons
+	name = "MOB: Robot module icon check"
+	var/icon_file = 'icons/mob/screen1_robot.dmi'
+
+datum/unit_test/robot_module_icons/start_test()
+	var/failed = 0
+	if(!isicon(icon_file))
+		fail("[icon_file] is not a valid icon file.")
+		return 1
+
+	var/list/valid_states = icon_states(icon_file)
+
+	if(!valid_states.len)
+		return 1
+
+	for(var/i=1, i<=robot_modules.len, i++)
+		var/bad_msg = "[ascii_red]--------------- [robot_modules[i]]"
+		if(!(lowertext(robot_modules[i]) in valid_states))
+			log_unit_test("[bad_msg] does not contain a valid icon state in [icon_file][ascii_reset]")
+			failed=1
+
+	if(failed)
+		fail("Some icon states did not exist")
+	else
+		pass("All modules had valid icon states")
+
+	return 1
+
 #undef VULNERABLE
 #undef IMMUNE
 #undef SUCCESS
