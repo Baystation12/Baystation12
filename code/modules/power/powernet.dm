@@ -8,6 +8,12 @@
 	var/viewload = 0			// the load as it appears on the power console (gradually updated)
 	var/number = 0				// Unused //TODEL
 
+	var/smes_demand = 0			// Amount of power demanded by all SMESs from this network. Needed for load balancing.
+	var/list/inputting = list()	// List of SMESs that are demanding power from this network. Needed for load balancing.
+
+	var/smes_avail = 0			// Amount of power (avail) from SMESes. Used by SMES load balancing
+	var/smes_newavail = 0		// As above, just for newavail
+
 	var/perapc = 0			// per-apc avilability
 	var/perapc_excess = 0
 	var/netexcess = 0			// excess power on the powernet (typically avail-load)
@@ -113,9 +119,18 @@
 
 		perapc = avail/numapc + perapc_excess
 
-	if(netexcess > 100 && nodes && nodes.len)		// if there was excess power last cycle
-		for(var/obj/machinery/power/smes/S in nodes)	// find the SMESes in the network
-			S.restore()				// and restore some of the power that was used
+	// At this point, all other machines have finished using power. Anything left over may be used up to charge SMESs.
+	if(inputting.len && smes_demand)
+		var/smes_input_percentage = between(0, (netexcess / smes_demand) * 100, 100)
+		for(var/obj/machinery/power/smes/S in inputting)
+			S.input_power(smes_input_percentage)
+
+	netexcess = avail - load
+
+	if(netexcess)
+		var/perc = get_percent_load(1)
+		for(var/obj/machinery/power/smes/S in nodes)
+			S.restore(perc)
 
 	//updates the viewed load (as seen on power computers)
 	viewload = round(load)
@@ -123,7 +138,22 @@
 	//reset the powernet
 	load = 0
 	avail = newavail
+	smes_avail = smes_newavail
+	inputting.Cut()
+	smes_demand = 0
 	newavail = 0
+	smes_newavail = 0
+
+/datum/powernet/proc/get_percent_load(var/smes_only = 0)
+	if(smes_only)
+		var/smes_used = load - (avail - smes_avail) 			// SMESs are always last to provide power
+		if(!smes_used || smes_used < 0 || !smes_avail)			// SMES power isn't available or being used at all, SMES load is therefore 0%
+			return 0
+		return between(0, (smes_used / smes_avail) * 100, 100)	// Otherwise return percentage load of SMESs.
+	else
+		if(!load)
+			return 0
+		return between(0, (avail / load) * 100, 100)
 
 /datum/powernet/proc/get_electrocute_damage()
 	switch(avail)

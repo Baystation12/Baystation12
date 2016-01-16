@@ -14,24 +14,37 @@
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
 	var/dirt = 0
 
+	var/datum/scheduled_task/unwet_task
+
 // This is not great.
 /turf/simulated/proc/wet_floor(var/wet_val = 1)
-	spawn(0)
-		if(wet_val <= wet)
-			return
+	if(wet_val < wet)
+		return
+
+	if(!wet)
 		wet = wet_val
-		if(wet_overlay)
-			overlays -= wet_overlay
-			wet_overlay = null
 		wet_overlay = image('icons/effects/water.dmi',src,"wet_floor")
 		overlays += wet_overlay
-		sleep(800)
-		if(wet >= 2)
-			return
-		wet = 0
-		if(wet_overlay)
-			overlays -= wet_overlay
-			wet_overlay = null
+
+	if(unwet_task)
+		unwet_task.trigger_task_in(8 SECONDS)
+	else
+		unwet_task = schedule_task_in(8 SECONDS)
+		unwet_task.triggered.register(src, /turf/simulated/proc/task_unwet_floor)
+
+/turf/simulated/proc/task_unwet_floor(var/triggered_task)
+	if(triggered_task == unwet_task)
+		unwet_task = null
+		unwet_floor(TRUE)
+
+/turf/simulated/proc/unwet_floor(var/check_very_wet)
+	if(check_very_wet && wet >= 2)
+		return
+
+	wet = 0
+	if(wet_overlay)
+		overlays -= wet_overlay
+		wet_overlay = null
 
 /turf/simulated/clean_blood()
 	for(var/obj/effect/decal/cleanable/blood/B in contents)
@@ -43,6 +56,11 @@
 	if(istype(loc, /area/chapel))
 		holy = 1
 	levelupdate()
+
+/turf/simulated/Destroy()
+	qdel(unwet_task)
+	unwet_task = null
+	return ..()
 
 /turf/simulated/proc/initialize()
 	return

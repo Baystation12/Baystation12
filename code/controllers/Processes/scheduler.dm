@@ -18,7 +18,9 @@
 		try
 			if(world.time > scheduled_task.trigger_time)
 				unschedule(scheduled_task)
+				scheduled_task.pre_process()
 				scheduled_task.process()
+				scheduled_task.post_process()
 		catch(var/exception/e)
 			catchException(e, last_object)
 		SCHECK
@@ -40,26 +42,30 @@
 * Helpers *
 **********/
 /proc/schedule_task_in(var/in_time, var/procedure, var/list/arguments = list())
-	schedule_task(world.time + in_time, procedure, arguments)
+	return schedule_task(world.time + in_time, procedure, arguments)
 
 /proc/schedule_task_with_source_in(var/in_time, var/source, var/procedure, var/list/arguments = list())
-	schedule_task_with_source(world.time + in_time, source, procedure, arguments)
+	return schedule_task_with_source(world.time + in_time, source, procedure, arguments)
 
 /proc/schedule_task(var/trigger_time, var/procedure, var/list/arguments)
 	var/datum/scheduled_task/st = new/datum/scheduled_task(trigger_time, procedure, arguments, /proc/destroy_scheduled_task, list())
 	scheduler.schedule(st)
+	return st
 
 /proc/schedule_task_with_source(var/trigger_time, var/source, var/procedure, var/list/arguments)
 	var/datum/scheduled_task/st = new/datum/scheduled_task/source(trigger_time, source, procedure, arguments, /proc/destroy_scheduled_task, list())
 	scheduler.schedule(st)
+	return st
 
 /proc/schedule_repeating_task(var/trigger_time, var/repeat_interval, var/procedure, var/list/arguments)
 	var/datum/scheduled_task/st = new/datum/scheduled_task(trigger_time, procedure, arguments, /proc/repeat_scheduled_task, list(repeat_interval))
 	scheduler.schedule(st)
+	return st
 
 /proc/schedule_repeating_task_with_source(var/trigger_time, var/repeat_interval, var/source, var/procedure, var/list/arguments)
 	var/datum/scheduled_task/st = new/datum/scheduled_task/source(trigger_time, source, procedure, arguments, /proc/repeat_scheduled_task, list(repeat_interval))
 	scheduler.schedule(st)
+	return st
 
 /*************
 * Task Datum *
@@ -70,6 +76,7 @@
 	var/list/arguments
 	var/task_after_process
 	var/list/task_after_process_args
+	var/datum/observ/triggered
 
 /datum/scheduled_task/New(var/trigger_time, var/procedure, var/list/arguments, var/proc/task_after_process, var/list/task_after_process_args)
 	..()
@@ -87,12 +94,30 @@
 	task_after_process_args.Cut()
 	return ..()
 
-/datum/scheduled_task/proc/process()
-	call(procedure)(arglist(arguments))
-	after_process()
+/datum/scheduled_task/init_observers()
+	. = ..()
+	if(.)
+		triggered = new()
 
-/datum/scheduled_task/proc/after_process()
+/datum/scheduled_task/destroy_observers()
+	. = ..()
+	if(.)
+		qdel(triggered)
+		triggered = null
+
+/datum/scheduled_task/proc/pre_process()
+	triggered.raise_event(list(src))
+
+/datum/scheduled_task/proc/process()
+	if(procedure)
+		call(procedure)(arglist(arguments))
+
+/datum/scheduled_task/proc/post_process()
 	call(task_after_process)(arglist(task_after_process_args))
+
+// Resets the trigger time, has no effect if the task has already triggered
+/datum/scheduled_task/proc/trigger_task_in(var/trigger_in)
+	src.trigger_time = world.time + trigger_in
 
 /datum/scheduled_task/source
 	var/datum/source
@@ -108,7 +133,6 @@
 
 /datum/scheduled_task/source/process()
 	call(source, procedure)(arglist(arguments))
-	after_process()
 
 /datum/scheduled_task/source/proc/source_destroyed()
 	qdel(src)

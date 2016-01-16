@@ -40,7 +40,7 @@
 /obj/item/stack/examine(mob/user)
 	if(..(user, 1))
 		if(!uses_charge)
-			user << "There are [src.amount] [src.singular_name]\s in the stack."
+			user << "There [src.amount == 1 ? "is" : "are"] [src.amount] [src.singular_name]\s in the stack."
 		else
 			user << "There is enough charge for [get_amount()]."
 
