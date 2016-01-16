@@ -1,0 +1,9 @@
+author: Atlantis
+
+delete-after: True
+
+changes: 
+  - rscdel: "Construction robot module removed"
+  - rscadd: "Engineering robot module now contains most tools of construction robot, primarily plasteel. RCD is not included by default."
+  - rscadd: "Engineering Robot RCD upgrade is now buildable. This upgrade unlocks robot's RCD. It is fairly expensive, requiring small amount of gold and silver, as well as phoron and steel to build."
+  - rscadd: "Floodlight upgrade added. This upgrade doubles robot's light intensity (it will be more or less same as actual floodlight), at the cost of higher power usage."
