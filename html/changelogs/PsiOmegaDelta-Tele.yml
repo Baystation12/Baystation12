@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - rscadd: "Uplink crystals can now be converted into physical form to allow transfer between uplink devices."
-  - rscadd: "Each mercenary now spawn with their own private uplink, with each indivual uplink having the same number of telecrystals as the normal traitor uplink."
