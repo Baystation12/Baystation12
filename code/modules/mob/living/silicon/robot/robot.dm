@@ -60,6 +60,8 @@
 
 	var/obj/item/device/pda/ai/rbPDA = null
 
+	var/obj/item/weapon/stock_parts/matter_bin/storage = null
+
 	var/opened = 0
 	var/emagged = 0
 	var/wiresexposed = 0
@@ -152,6 +154,15 @@
 	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
+
+/mob/living/silicon/robot/proc/recalculate_synth_capacities()
+	if(!module || !module.synths)
+		return
+	var/mult = 1
+	if(storage)
+		mult += storage.rating
+	for(var/datum/matter_synth/M in module.synths)
+		M.set_multiplier(mult)
 
 /mob/living/silicon/robot/proc/init()
 	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
@@ -252,6 +263,7 @@
 	hands.icon_state = lowertext(modtype)
 	feedback_inc("cyborg_[lowertext(modtype)]",1)
 	updatename()
+	recalculate_synth_capacities()
 	notify_ai(ROBOT_NOTIFICATION_NEW_MODULE, module.name)
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
@@ -409,7 +421,7 @@
 		stat(null, text("Lights: [lights_on ? "ON" : "OFF"]"))
 		if(module)
 			for(var/datum/matter_synth/ms in module.synths)
-				stat("[ms.name]: [ms.energy]/[ms.max_energy]")
+				stat("[ms.name]: [ms.energy]/[ms.max_energy_multiplied]")
 
 /mob/living/silicon/robot/restrained()
 	return 0
@@ -529,6 +541,17 @@
 				user << "You open the cover."
 				opened = 1
 				updateicon()
+	else if (istype(W, /obj/item/weapon/stock_parts/matter_bin) && opened) // Installing/swapping a matter bin
+		if(storage)
+			user << "You replace \the [storage] with \the [W]"
+			storage.forceMove(get_turf(src))
+			storage = null
+		else
+			user << "You install \the [W]"
+		user.drop_item()
+		storage = W
+		W.forceMove(src)
+		recalculate_synth_capacities()
 
 	else if (istype(W, /obj/item/weapon/cell) && opened)	// trying to put a cell inside
 		var/datum/robot_component/C = components["power cell"]
