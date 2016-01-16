@@ -55,6 +55,23 @@
 
 	return 1
 
+/obj/item/borg/upgrade/floodlight
+	name = "robot floodlight module"
+	desc = "Used to boost cyborg's light intensity."
+	icon_state = "cyborg_upgrade1"
+
+/obj/item/borg/upgrade/floodlight/action(var/mob/living/silicon/robot/R)
+	if(..()) return 0
+
+	if(R.intenselight)
+		usr << "This cyborg's light was already upgraded"
+		return 0
+	else
+		R.intenselight = 1
+		R.update_robot_light()
+		R << "Lighting systems upgrade detected."
+	return 1
+
 /obj/item/borg/upgrade/restart
 	name = "robot emergency restart module"
 	desc = "Used to force a restart of a disabled-but-repaired robot, bringing it back online."

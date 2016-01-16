@@ -87,6 +87,7 @@
 	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
 	var/tracking_entities = 0 //The number of known entities currently accessing the internal camera
 	var/braintype = "Cyborg"
+	var/intenselight = 0	// Whether cyborg's integrated light was upgraded
 
 	var/list/robot_verbs_default = list(
 		/mob/living/silicon/robot/proc/sensor_mode,
@@ -343,10 +344,7 @@
 
 	lights_on = !lights_on
 	usr << "You [lights_on ? "enable" : "disable"] your integrated light."
-	if(lights_on)
-		set_light(integrated_light_power) // 1.5x luminosity of flashlight
-	else
-		set_light(0)
+	update_robot_light()
 
 /mob/living/silicon/robot/verb/self_diagnosis_verb()
 	set category = "Robot Commands"
@@ -385,6 +383,15 @@
 	else
 		C.toggled = 1
 		src << "\red You enable [C.name]."
+
+/mob/living/silicon/robot/proc/update_robot_light()
+	if(lights_on)
+		if(intenselight)
+			set_light(integrated_light_power * 2, integrated_light_power)
+		else
+			set_light(integrated_light_power)
+	else
+		set_light(0)
 
 // this function displays jetpack pressure in the stat panel
 /mob/living/silicon/robot/proc/show_jetpack_pressure()

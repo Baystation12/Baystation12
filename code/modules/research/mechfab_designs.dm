@@ -334,6 +334,12 @@
 	id = "borg_reset_module"
 	build_path = /obj/item/borg/upgrade/reset
 
+/datum/design/item/robot_upgrade/floodlight
+	name = "Floodlight module"
+	desc = "Used to boost cyborg's integrated light intensity."
+	id = "borg_floodlight_module"
+	build_path = /obj/item/borg/upgrade/floodlight
+
 /datum/design/item/robot_upgrade/restart
 	name = "Emergency restart module"
 	desc = "Used to force a restart of a disabled-but-repaired robot, bringing it back online."
