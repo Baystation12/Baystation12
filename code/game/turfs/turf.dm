@@ -144,9 +144,10 @@ var/const/enterloopsanity = 100
 			if(objects > enterloopsanity) break
 			objects++
 			spawn(0)
-				A.HasProximity(thing, 1)
-				if ((thing && A) && (thing.flags & PROXMOVE))
-					thing.HasProximity(A, 1)
+				if(A)
+					A.HasProximity(thing, 1)
+					if ((thing && A) && (thing.flags & PROXMOVE))
+						thing.HasProximity(A, 1)
 	return
 
 /turf/proc/adjacent_fire_act(turf/simulated/floor/source, temperature, volume)
