@@ -13,7 +13,7 @@
 
 /obj/item/weapon/reagent_containers/food/New()
 	..()
-	if (!pixel_x && !pixel_y)
+	if (isnull(center_of_mass) && !pixel_x && !pixel_y)
 		src.pixel_x = rand(-6.0, 6) //Randomizes postion
 		src.pixel_y = rand(-6.0, 6)
 
