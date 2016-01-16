@@ -1,6 +1,8 @@
 var/global/list/empty_playable_ai_cores = list()
 
 /hook/roundstart/proc/spawn_empty_ai()
+	if(ticker && ticker.mode && ticker.mode.name == "Ai malfunction")
+		return 1	// Don't make empty AI's on malf.
 	for(var/obj/effect/landmark/start/S in landmarks_list)
 		if(S.name != "AI")
 			continue
