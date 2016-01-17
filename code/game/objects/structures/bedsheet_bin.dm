@@ -31,7 +31,7 @@ LINEN BINS
 		if(do_after(user, 50))
 			user << "<span class='notice'>You cut [src] into pieces!</span>"
 			for(var/i in 1 to rand(2,5))
-				new /obj/item/weapon/reagent_containers/glass/rag(src.loc)
+				new /obj/item/weapon/reagent_containers/glass/rag(get_turf(src))
 			qdel(src)
 		return
 	..()
