@@ -305,8 +305,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		else
 			usr << "No area available."
 
+	stop_following()
 	usr.forceMove(pick(L))
-	following = null
 
 /mob/dead/observer/verb/follow(input in getmobs())
 	set category = "Ghost"
@@ -319,67 +319,30 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 // This is the ghost's follow verb with an argument
 /mob/dead/observer/proc/ManualFollow(var/atom/movable/target)
-	if(!target)
+	if(!target || target == following || target == src)
 		return
 
-	var/turf/targetloc = get_turf(target)
-	if(check_holy(targetloc))
-		usr << "<span class='warning'>You cannot follow a mob standing on holy grounds!</span>"
+	stop_following()
+	following = target
+	following.moved.register(src, /atom/movable/proc/move_to_destination)
+	following.destruction.register(src, /mob/dead/observer/proc/stop_following)
+
+	src << "<span class='notice'>Now following \the [following]</span>"
+	move_to_destination(following, following.loc, following.loc)
+
+/mob/dead/observer/proc/stop_following()
+	if(following)
+		src << "<span class='notice'>No longer following \the [following]</span>"
+		following.moved.unregister(src)
+		following.destruction.unregister(src)
+		following = null
+
+/mob/dead/observer/move_to_destination(var/atom/movable/am, var/old_loc, var/new_loc)
+	var/turf/T = get_turf(new_loc)
+	if(check_holy(T))
+		usr << "<span class='warning'>You cannot follow something standing on holy grounds!</span>"
 		return
-	if(target != src)
-		if(following && following == target)
-			return
-		following = target
-		src << "<span class='notice'>Now following \the [target]</span>"
-		if(ismob(target))
-			forceMove(get_turf(target))
-			var/mob/M = target
-			M.following_mobs += src
-		else
-			spawn(0)
-				while(target && following == target && client)
-					var/turf/T = get_turf(target)
-					if(!T)
-						break
-					// To stop the ghost flickering.
-					if(loc != T)
-						forceMove(T)
-					sleep(15)
-
-/mob/proc/update_following()
-	. = get_turf(src)
-	for(var/mob/dead/observer/M in following_mobs)
-		if(M.following != src)
-			following_mobs -= M
-		else
-			if(M.loc != .)
-				M.forceMove(.)
-
-/mob
-	var/list/following_mobs = list()
-
-/mob/Destroy()
-	for(var/mob/dead/observer/M in following_mobs)
-		M.following = null
-	following_mobs = null
-	return ..()
-
-/mob/dead/observer/Destroy()
-	if(ismob(following))
-		var/mob/M = following
-		M.following_mobs -= src
-	following = null
-	return ..()
-
-/mob/Move()
-	. = ..()
-	if(.)
-		update_following()
-
-/mob/Life()
-	// to catch teleports etc which directly set loc
-	update_following()
-	return ..()
+	..()
 
 /mob/proc/check_holy(var/turf/T)
 	return 0
@@ -404,8 +367,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			var/turf/T = get_turf(M) //Turf of the destination mob
 
 			if(T && isturf(T))	//Make sure the turf exists, then move the source to that destination.
+				stop_following()
 				forceMove(T)
-				following = null
 			else
 				src << "This mob is not located in the game world."
 /*
@@ -433,7 +396,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	src << "\red You are dead! You have no mind to store memory!"
 
 /mob/dead/observer/Post_Incorpmove()
-	following = null
+	stop_following()
 
 /mob/dead/observer/verb/analyze_air()
 	set name = "Analyze Air"

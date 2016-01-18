@@ -16,19 +16,19 @@
 
 	var/armor = getarmor(def_zone, attack_flag)
 	var/absorb = 0
-	
+
 	//Roll armour
 	if(prob(armor))
 		absorb += 1
 	if(prob(armor))
 		absorb += 1
-	
+
 	//Roll penetration
 	if(prob(armour_pen))
 		absorb -= 1
 	if(prob(armour_pen))
 		absorb -= 1
-	
+
 	if(absorb >= 2)
 		if(absorb_text)
 			show_message("[absorb_text]")
@@ -129,7 +129,7 @@
 
 //returns 0 if the effects failed to apply for some reason, 1 otherwise.
 /mob/living/proc/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/blocked, var/hit_zone)
-	if(!effective_force || blocked >= 2) 
+	if(!effective_force || blocked >= 2)
 		return 0
 
 	//Hulk modifier
@@ -298,7 +298,7 @@
 		return 0
 
 	//Scale quadratically so that single digit numbers of fire stacks don't burn ridiculously hot.
-	//lower limit of 700 K, same as matches and roughly the temperature of a cool flame. 
+	//lower limit of 700 K, same as matches and roughly the temperature of a cool flame.
 	return max(2.25*round(FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE*(fire_stacks/FIRE_MAX_FIRESUIT_STACKS)**2), 700)
 
 /mob/living/proc/reagent_permeability()
@@ -339,7 +339,7 @@
 			hud_used.hide_actions_toggle = new(hud_used)
 			hud_used.hide_actions_toggle.UpdateIcon()
 
-		if(!hud_used.hide_actions_toggle.moved)
+		if(!hud_used.hide_actions_toggle.has_moved)
 			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(1)
 			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,1)
 
@@ -362,7 +362,7 @@
 
 		client.screen += B
 
-		if(!B.moved)
+		if(!B.has_moved)
 			B.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number)
 			//hud_used.SetButtonCoords(B,button_number)
 
@@ -370,7 +370,7 @@
 		if(!hud_used.hide_actions_toggle)
 			hud_used.hide_actions_toggle = new(hud_used)
 			hud_used.hide_actions_toggle.InitialiseIcon(src)
-		if(!hud_used.hide_actions_toggle.moved)
+		if(!hud_used.hide_actions_toggle.has_moved)
 			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
 			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,button_number+1)
 		client.screen += hud_used.hide_actions_toggle

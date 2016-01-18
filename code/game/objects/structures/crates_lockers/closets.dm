@@ -22,6 +22,7 @@
 	var/store_mobs = 1
 
 /obj/structure/closet/initialize()
+	..()
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
 		var/obj/item/I
 		for(I in src.loc)
