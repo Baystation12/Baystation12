@@ -11,6 +11,8 @@
 	var/busy = 0
 	var/obj/machinery/computer/rdconsole/linked_console
 
+	var/list/materials = list()
+
 /obj/machinery/r_n_d/attack_hand(mob/user as mob)
 	return
 
@@ -48,3 +50,16 @@
 			return "uranium"
 		if(/obj/item/stack/material/diamond)
 			return "diamond"
+
+/obj/machinery/r_n_d/proc/eject(var/material, var/amount)
+	if(!(material in materials))
+		return
+	var/obj/item/stack/material/sheetType = getMaterialType(material)
+	var/perUnit = initial(sheetType.perunit)
+	var/eject = round(materials[material] / perUnit)
+	eject = amount == -1 ? eject : min(eject, amount)
+	if(eject < 1)
+		return
+	var/obj/item/stack/material/S = new sheetType(loc)
+	S.amount = eject
+	materials[material] -= eject * perUnit

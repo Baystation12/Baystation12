@@ -8,13 +8,14 @@
 	active_power_usage = 5000
 
 	var/max_material_storage = 100000
-	var/list/materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, "gold" = 0, "silver" = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0)
 
 	var/list/datum/design/queue = list()
 	var/progress = 0
 
 	var/mat_efficiency = 1
 	var/speed = 1
+
+	materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, "gold" = 0, "silver" = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0)
 
 /obj/machinery/r_n_d/protolathe/New()
 	..()
@@ -202,16 +203,3 @@
 			if(new_item.matter && new_item.matter.len > 0)
 				for(var/i in new_item.matter)
 					new_item.matter[i] = new_item.matter[i] * mat_efficiency
-
-/obj/machinery/r_n_d/protolathe/proc/eject(var/material, var/amount)
-	if(!(material in materials))
-		return
-	var/obj/item/stack/material/sheetType = getMaterialType(material)
-	var/perUnit = initial(sheetType.perunit)
-	var/eject = round(materials[material] / perUnit)
-	eject = amount == -1 ? eject : min(eject, amount)
-	if(eject < 1)
-		return
-	var/obj/item/stack/material/S = new sheetType(loc)
-	S.amount = eject
-	materials[material] -= eject * perUnit
