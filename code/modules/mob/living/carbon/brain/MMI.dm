@@ -2,12 +2,11 @@
 
 /obj/item/device/mmi/digital/New()
 	src.brainmob = new(src)
+	src.brainmob.stat = CONSCIOUS
 	src.brainmob.add_language("Robot Talk")
-	src.brainmob.loc = src
 	src.brainmob.container = src
-	src.brainmob.stat = 0
 	src.brainmob.silent = 0
-	dead_mob_list -= src.brainmob
+	..()
 
 /obj/item/device/mmi/digital/transfer_identity(var/mob/living/carbon/H)
 	brainmob.dna = H.dna

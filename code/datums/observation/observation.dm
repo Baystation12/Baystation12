@@ -1,26 +1,40 @@
 /datum/observ
+	var/event_holder
 	var/list/listeners
 
+/datum/observ/New(var/event_holder)
+	src.event_holder = event_holder
+	..()
+
 /datum/observ/Destroy()
+	event_holder = null
 	if(listeners)
 		for(var/listener in listeners)
 			unregister(listener)
 		listeners.Cut()
 	return ..()
 
+/datum/observ/proc/is_listening(var/datum/procOwner, var/proc_call)
+	return listeners && (procOwner in listeners) && (!proc_call || listeners[procOwner] == proc_call)
+
+/datum/observ/proc/has_listeners()
+	return listeners && listeners.len
+
 /datum/observ/proc/register(var/datum/procOwner, var/proc_call)
 	if(!(procOwner && procOwner.destruction))
-		return
+		return FALSE
 	if(!listeners)
 		listeners = list()
 	listeners[procOwner] = proc_call
 	procOwner.destruction.register(src, /datum/observ/proc/unregister)
+	return TRUE
 
 /datum/observ/proc/unregister(var/datum/procOwner)
 	if(!(listeners && procOwner && procOwner.destruction))
-		return
+		return FALSE
 	listeners -= procOwner
 	procOwner.destruction.unregister(src)
+	return TRUE
 
 /datum/observ/proc/raise_event(var/list/args = list())
 	if(!listeners)
@@ -35,15 +49,15 @@
 	var/datum/observ/destruction
 
 /datum/New()
-	init_observers()
+	init_observers(src)
 	..()
 
 /datum/Destroy()
 	destroy_observers()
 	return ..()
 
-/datum/proc/init_observers()
-	destruction = new()
+/datum/proc/init_observers(var/event_holder)
+	destruction = new(event_holder)
 	return TRUE
 
 /datum/proc/destroy_observers()
