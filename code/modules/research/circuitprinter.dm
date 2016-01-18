@@ -201,3 +201,16 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 			if(new_item.matter && new_item.matter.len > 0)
 				for(var/i in new_item.matter)
 					new_item.matter[i] = new_item.matter[i] * mat_efficiency
+
+/obj/machinery/r_n_d/circuit_imprinter/proc/eject(var/material, var/amount)
+	if(!(material in materials))
+		return
+	var/obj/item/stack/material/sheetType = getMaterialType(material)
+	var/perUnit = initial(sheetType.perunit)
+	var/eject = round(materials[material] / perUnit)
+	eject = amount == -1 ? eject : min(eject, amount)
+	if(eject < 1)
+		return
+	var/obj/item/stack/material/S = new sheetType(loc)
+	S.amount = eject
+	materials[material] -= eject * perUnit
