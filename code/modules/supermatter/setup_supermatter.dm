@@ -1,20 +1,23 @@
 #define SETUP_OK 1			// All good
 #define SETUP_WARNING 2		// Something that shouldn't happen happened, but it's not critical so we will continue
 #define SETUP_ERROR 3		// Something bad happened, and it's important so we won't continue setup.
+#define SETUP_DELAYED 4		// Wait for other things first.
 
 
 #define ENERGY_NITROGEN 115			// Roughly 8 emitter shots.
 #define ENERGY_CARBONDIOXIDE 150	// Roughly 10 emitter shots.
 #define ENERGY_PHORON 300			// Roughly 20 emitter shots. Phoron can take more but this is enough to max out both SMESs anyway.
 
-// Called by admin command setup-supermatter, this system uses landmarks to set up the engine.
-/client/proc/setup_supermatter_engine()
-	set category = "Debug"
-	set name = "Setup supermatter"
-	set desc = "Sets up the supermatter engine"
 
-	if(!check_rights(R_DEBUG|R_ADMIN))
-		usr << "You do not have access to this command!"
+/datum/admins/proc/setup_supermatter()
+	set category = "Debug"
+	set name = "Setup Supermatter"
+	set desc = "Allows you to start the Supermatter engine."
+
+	if (!istype(src,/datum/admins))
+		src = usr.client.holder
+	if (!istype(src,/datum/admins))
+		usr << "Error: you are not an admin!"
 		return
 
 	var/response = input(usr, "Are you sure? This will start up the engine with selected gas as coolant.", "Engine setup") as null|anything in list("N2", "CO2", "PH", "Abort")
@@ -25,7 +28,7 @@
 	var/warnings = 0
 	var/success = 0
 
-	log_and_message_admins("## SUPERMATTER SETUP - Setup initiated by [src]/[src.ckey] using coolant type [response].")
+	log_and_message_admins("## SUPERMATTER SETUP - Setup initiated by [usr] using coolant type [response].")
 
 	// CONFIGURATION PHASE
 	// Coolant canisters, set types according to response.
@@ -56,9 +59,10 @@
 	for(var/obj/effect/engine_setup/filter/F in world)
 		F.coolant = response
 
+	var/list/delayed_objects = list()
 	// SETUP PHASE
 	for(var/obj/effect/engine_setup/S in world)
-		var/result = S.activate()
+		var/result = S.activate(0)
 		switch(result)
 			if(SETUP_OK)
 				success++
@@ -70,6 +74,24 @@
 				errors++
 				log_and_message_admins("## SUPERMATTER SETUP - Error encountered! Aborting.")
 				break
+			if(SETUP_DELAYED)
+				delayed_objects.Add(S)
+				continue
+
+	if(!errors)
+		for(var/obj/effect/engine_setup/S in delayed_objects)
+			var/result = S.activate(1)
+			switch(result)
+				if(SETUP_OK)
+					success++
+					continue
+				if(SETUP_WARNING)
+					warnings++
+					continue
+				if(SETUP_ERROR)
+					errors++
+					log_and_message_admins("## SUPERMATTER SETUP - Error encountered! Aborting.")
+					break
 
 	log_and_message_admins("## SUPERMATTER SETUP - Setup completed with [errors] errors, [warnings] warnings and [success] successful steps.")
 
@@ -86,7 +108,7 @@
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x2"
 
-/obj/effect/engine_setup/proc/activate()
+/obj/effect/engine_setup/proc/activate(var/last = 0)
 	return 1
 
 
@@ -149,7 +171,9 @@
 	name = "Supermatter Core Marker"
 	var/energy_setting = 0
 
-/obj/effect/engine_setup/core/activate()
+/obj/effect/engine_setup/core/activate(var/last = 0)
+	if(!last)
+		return SETUP_DELAYED
 	..()
 	var/obj/machinery/power/supermatter/SM = locate() in get_turf(src)
 	if(!SM)
@@ -221,6 +245,7 @@
 #undef SETUP_OK
 #undef SETUP_WARNING
 #undef SETUP_ERROR
+#undef SETUP_DELAYED
 #undef ENERGY_NITROGEN
 #undef ENERGY_CARBONDIOXIDE
 #undef ENERGY_PHORON

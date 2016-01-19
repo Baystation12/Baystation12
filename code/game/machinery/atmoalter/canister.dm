@@ -36,7 +36,7 @@
 	icon_state = "red"
 	canister_color = "red"
 	can_label = 0
-    
+
 /obj/machinery/portable_atmospherics/canister/nitrogen/prechilled
 	name = "Canister: \[N2 (Cooling)\]"
 
@@ -439,18 +439,18 @@ update_flag
 // Special types used for engine setup admin verb, they contain double amount of that of normal canister.
 /obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup/New()
 	..()
-	src.air_contents.adjust_gas("nitrogen", MolesForPressure() * 2)
+	src.air_contents.adjust_gas("nitrogen", MolesForPressure())
 	src.update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup/New()
 	..()
-	src.air_contents.adjust_gas("carbon_dioxide", MolesForPressure() * 2)
+	src.air_contents.adjust_gas("carbon_dioxide", MolesForPressure())
 	src.update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/phoron/engine_setup/New()
 	..()
-	src.air_contents.adjust_gas("phoron", MolesForPressure() * 2)
+	src.air_contents.adjust_gas("phoron", MolesForPressure())
 	src.update_icon()
 	return 1
