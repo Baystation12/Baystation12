@@ -298,8 +298,6 @@
 
 		before_move()
 		Move(location.return_turf())
-		if(after_move())
-			return 1
 
 		if(!bumped && !isturf(original))
 			if(loc == get_turf(original))
@@ -317,9 +315,6 @@
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
 
 /obj/item/projectile/proc/before_move()
-	return 0
-
-/obj/item/projectile/proc/after_move()
 	return 0
 
 /obj/item/projectile/proc/setup_trajectory(turf/startloc, turf/targloc, var/x_offset = 0, var/y_offset = 0)
