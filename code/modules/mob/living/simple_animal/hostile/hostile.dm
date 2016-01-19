@@ -193,6 +193,7 @@
 	A.current = target
 	A.starting = get_turf(src)
 	A.original = get_turf(target)
+	A.setup_trajectory(A.starting, A.original)
 	A.yo = target:y - start:y
 	A.xo = target:x - start:x
 	spawn( 0 )
