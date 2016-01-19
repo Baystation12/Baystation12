@@ -277,3 +277,24 @@
 
 /obj/item/projectile/beam/pulse/drone
 	damage = 10
+
+/obj/item/projectile/beam/drone/after_move()
+	var/turf/T = get_turf(src)
+	var/mob/living/carbon/human/H = locate() in T
+	if(!H)
+		return 0
+	if(H.lying)
+		Bump(H, 1)	// Force the bump since mobs lying don't trigger it.  We'll only do this for drones since they don't target the mob they target the turf.
+		return 1
+	return 0
+
+/obj/item/projectile/beam/pulse/drone/after_move()
+	var/turf/T = get_turf(src)
+	var/mob/living/carbon/human/H = locate() in T
+	if(!H)
+		return 0
+	if(H.lying)
+		Bump(H, 1)      // Force the bump since mobs lying don't trigger it.  We'll only do this for drones since they don't target the mob they target the turf.
+		return 1
+	return 0
+
