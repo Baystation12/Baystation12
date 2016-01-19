@@ -680,8 +680,9 @@
 	..()
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, user, ONLY_RETRACT)
-	wearer.wearing_rig = null
-	wearer = null
+	if(wearer)
+		wearer.wearing_rig = null
+		wearer = null
 
 //Todo
 /obj/item/weapon/rig/proc/malfunction()
