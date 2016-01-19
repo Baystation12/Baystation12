@@ -1842,6 +1842,7 @@
 #include "code\modules\spells\targeted\projectile\fireball.dm"
 #include "code\modules\spells\targeted\projectile\magic_missile.dm"
 #include "code\modules\spells\targeted\projectile\projectile.dm"
+#include "code\modules\supermatter\setup_supermatter.dm"
 #include "code\modules\supermatter\supermatter.dm"
 #include "code\modules\surgery\_defines.dm"
 #include "code\modules\surgery\bones.dm"

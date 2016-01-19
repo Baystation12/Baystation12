@@ -1,0 +1,6 @@
+author: Atlantis
+
+delete-after: True
+
+changes: 
+  - tweak: "Setup Supermatter admin button now uses map markers and supports all coolant types."
