@@ -63,6 +63,8 @@
 	var/scoped_accuracy = null
 	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
 	var/list/dispersion = list(0)
+	var/requires_two_hands
+	var/wielded_icon = "gun_wielded"
 
 	var/next_fire_time = 0
 
@@ -86,17 +88,28 @@
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
 
+/obj/item/weapon/gun/update_held_icon()
+	if(requires_two_hands)
+		var/mob/living/M = loc
+		if(istype(M))
+			if((M.l_hand == src && !M.r_hand) || (M.r_hand == src && !M.l_hand))
+				item_state = wielded_icon
+			else
+				item_state = initial(item_state)
+				update_icon() // In case item_state is set somewhere else.
+	..()
+
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
 //Otherwise, if you want handle_click_empty() to be called, check in consume_next_projectile() and return null there.
 /obj/item/weapon/gun/proc/special_check(var/mob/user)
+
 	if(!istype(user, /mob/living))
 		return 0
 	if(!user.IsAdvancedToolUser())
 		return 0
 
 	var/mob/living/M = user
-
 	if(HULK in M.mutations)
 		M << "<span class='danger'>Your fingers are much too large for the trigger guard!</span>"
 		return 0
@@ -160,6 +173,14 @@
 	user.setMoveCooldown(shoot_time) //no moving while shooting either
 	next_fire_time = world.time + shoot_time
 
+	var/held_acc_mod = 0
+	var/held_disp_mod = 0
+	if(requires_two_hands)
+		update_held_icon()
+		if((user.l_hand == src && user.r_hand) || (user.r_hand == src && user.l_hand))
+			held_acc_mod = -3
+			held_disp_mod = 3
+
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
 	for(var/i in 1 to burst)
@@ -168,8 +189,8 @@
 			handle_click_empty(user)
 			break
 
-		var/acc = burst_accuracy[min(i, burst_accuracy.len)]
-		var/disp = dispersion[min(i, dispersion.len)]
+		var/acc = burst_accuracy[min(i, burst_accuracy.len)] + held_acc_mod
+		var/disp = dispersion[min(i, dispersion.len)] + held_disp_mod
 		process_accuracy(projectile, user, target, acc, disp)
 
 		if(pointblank)
