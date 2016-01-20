@@ -1885,6 +1885,7 @@
 #include "code\unit_tests\equipment_tests.dm"
 #include "code\unit_tests\map_tests.dm"
 #include "code\unit_tests\mob_tests.dm"
+#include "code\unit_tests\observation_tests.dm"
 #include "code\unit_tests\unit_test.dm"
 #include "code\unit_tests\zas_tests.dm"
 #include "code\ZAS\_docs.dm"
