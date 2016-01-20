@@ -49,6 +49,9 @@
 	var/SStun = 0 // NPC stun variable. Used to calm them down when they are attacked while feeding, or they will immediately re-attach
 	var/Discipline = 0 // if a slime has been hit with a freeze gun, or wrestled/attacked off a human, they become disciplined and don't attack anymore for a while. The part about freeze gun is a lie
 
+	var/hurt_temperature = T0C-50 // slime keeps taking damage when its bodytemperature is below this
+	var/die_temperature = 50 // slime dies instantly when its bodytemperature is below this
+
 	///////////TIME FOR SUBSPECIES
 
 	var/colour = "grey"
