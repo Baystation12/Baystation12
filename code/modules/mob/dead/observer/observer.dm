@@ -86,6 +86,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	..()
 
 /mob/dead/observer/Destroy()
+	stop_following()
 	qdel(ghost_multitool)
 	ghost_multitool = null
 
@@ -94,7 +95,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		qdel(ghostimage)
 		ghostimage = null
 		updateallghostimages()
-	..()
+	return ..()
 
 /mob/dead/observer/Topic(href, href_list)
 	if (href_list["track"])
@@ -225,6 +226,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(!found_rune)
 			usr << "<span class='warning'>The astral cord that ties your body and your spirit has been severed. You are likely to wander the realm beyond until your body is finally dead and thus reunited with you.</span>"
 			return
+	stop_following()
 	mind.current.ajourn=0
 	mind.current.key = key
 	mind.current.teleop = null
