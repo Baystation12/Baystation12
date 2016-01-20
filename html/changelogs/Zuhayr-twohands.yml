@@ -1,0 +1,5 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Added functionality for two-handed guns; these guns will give an accuracy penalty if fired without an empty offhand."
+  - rscadd: "Unified two-handed melee weapons with the above; while the offhand is empty, the weapon will count as wielded."
