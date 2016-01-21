@@ -315,7 +315,7 @@
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
 
 /obj/item/projectile/proc/before_move()
-	return
+	return 0
 
 /obj/item/projectile/proc/setup_trajectory(turf/startloc, turf/targloc, var/x_offset = 0, var/y_offset = 0)
 	// setup projectile state

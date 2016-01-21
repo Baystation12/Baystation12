@@ -133,7 +133,7 @@ datum/unit_test/zas_area_test/incinerator
 	name = "ZAS: Incinerator"
 	area_path = /area/maintenance/incinerator 
 	disabled = 1		
-	why_disabled = "Incernator blast doors not blocking air flow.  See bug #11846"
+	why_disabled = "Scrubber pulls air, this area cannot be tested."
 
 datum/unit_test/zas_area_test/virology
 	name = "ZAS: Virology"

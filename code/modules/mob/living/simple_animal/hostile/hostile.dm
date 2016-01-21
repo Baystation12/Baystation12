@@ -155,22 +155,21 @@
 	var/target = target_mob
 	visible_message("\red <b>[src]</b> fires at [target]!", 1)
 
-	var/tturf = get_turf(target)
 	if(rapid)
 		spawn(1)
-			Shoot(tturf, src.loc, src)
+			Shoot(target, src.loc, src)
 			if(casingtype)
 				new casingtype(get_turf(src))
 		spawn(4)
-			Shoot(tturf, src.loc, src)
+			Shoot(target, src.loc, src)
 			if(casingtype)
 				new casingtype(get_turf(src))
 		spawn(6)
-			Shoot(tturf, src.loc, src)
+			Shoot(target, src.loc, src)
 			if(casingtype)
 				new casingtype(get_turf(src))
 	else
-		Shoot(tturf, src.loc, src)
+		Shoot(target, src.loc, src)
 		if(casingtype)
 			new casingtype
 
@@ -187,17 +186,7 @@
 	playsound(user, projectilesound, 100, 1)
 	if(!A)	return
 
-	if (!istype(target, /turf))
-		qdel(A)
-		return
-	A.current = target
-	A.starting = get_turf(src)
-	A.original = get_turf(target)
-	A.yo = target:y - start:y
-	A.xo = target:x - start:x
-	spawn( 0 )
-		A.process()
-	return
+	A.launch(target, "chest")
 
 /mob/living/simple_animal/hostile/proc/DestroySurroundings()
 	if(prob(break_stuff_probability))
