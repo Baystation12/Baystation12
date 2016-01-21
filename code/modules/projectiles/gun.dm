@@ -93,10 +93,12 @@
 		var/mob/living/M = loc
 		if(istype(M))
 			if((M.l_hand == src && !M.r_hand) || (M.r_hand == src && !M.l_hand))
+				name = "[initial(name)] (wielded)"
 				item_state = wielded_icon
 			else
+				name = initial(name)
 				item_state = initial(item_state)
-				update_icon() // In case item_state is set somewhere else.
+				update_icon(ignore_inhands=1) // In case item_state is set somewhere else.
 	..()
 
 //Checks whether a given mob can use the gun
@@ -176,7 +178,6 @@
 	var/held_acc_mod = 0
 	var/held_disp_mod = 0
 	if(requires_two_hands)
-		update_held_icon()
 		if((user.l_hand == src && user.r_hand) || (user.r_hand == src && user.l_hand))
 			held_acc_mod = -3
 			held_disp_mod = 3
@@ -206,8 +207,6 @@
 		if(!(target && target.loc))
 			target = targloc
 			pointblank = 0
-
-	update_held_icon()
 
 	//update timing
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)

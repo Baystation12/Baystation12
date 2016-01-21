@@ -32,7 +32,7 @@
 	if(istype(M) && !issmall(M) && ((M.r_hand == src && !M.l_hand) || (M.l_hand == src && !M.r_hand)))
 		wielded = 1
 		force = force_wielded
-		name = "[base_name] (Wielded)"
+		name = "[base_name] (wielded)"
 		update_icon()
 	else
 		wielded = 0
