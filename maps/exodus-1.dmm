@@ -1472,7 +1472,7 @@
 "aCp" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/firedoor/border_only,/obj/machinery/camera/network/civilian_east{c_tag = "Dormitory Holodeck South"; dir = 1; pixel_y = 6},/turf/simulated/floor/plating,/area/crew_quarters/fitness)
 "aCq" = (/obj/machinery/shower{dir = 8; icon_state = "shower"; pixel_x = -5; pixel_y = 0},/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/freezer,/area/crew_quarters/toilet)
 "aCr" = (/obj/structure/bed/chair{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/tiled,/area/crew_quarters/fitness)
-"aCs" = (/obj/machinery/computer/HolodeckControl,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/crew_quarters/fitness)
+"aCs" = (/obj/machinery/computer/HolodeckControl/Exodus,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/crew_quarters/fitness)
 "aCt" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/effect/floor_decal/industrial/warning{dir = 8},/turf/simulated/floor/tiled,/area/hallway/secondary/entry/port)
 "aCu" = (/turf/simulated/wall,/area/maintenance/substation/civilian_east)
 "aCv" = (/turf/simulated/wall/r_wall,/area/maintenance/auxsolarstarboard)
