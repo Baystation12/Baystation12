@@ -231,6 +231,7 @@ area/space/atmosalert()
 
 /area/shuttle/mining/outpost
 	icon_state = "shuttle"
+	base_turf = /turf/simulated/floor/asteroid
 
 /area/shuttle/transport1/centcom
 	icon_state = "shuttle"
