@@ -25,6 +25,7 @@
 	update_Login_details()	//handles setting lastKnownIP and computer_id for use by the ban systems as well as checking for multikeying
 	if(join_motd)
 		src << "<div class=\"motd\">[join_motd]</div>"
+	src << "<div class='info'>Game ID: <div class='danger'>[game_id]</div></div>"
 
 	if(!mind)
 		mind = new /datum/mind(key)
