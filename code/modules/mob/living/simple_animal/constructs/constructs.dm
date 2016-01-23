@@ -27,6 +27,7 @@
 	show_stat_health = 1
 	faction = "cult"
 	supernatural = 1
+	see_in_dark = 8
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	var/nullblock = 0
 
@@ -249,16 +250,6 @@
 	set_light(2, -2, l_color = "#FFFFFF")
 
 ////////////////HUD//////////////////////
-
-// We override mob/living/update_sight() so constructs don't get their vision reset to the default of /mob/living
-
-/mob/living/simple_animal/construct/update_sight()
-        if(stat == DEAD)
-                update_dead_sight()
-        else
-                sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
-                see_in_dark = initial(see_in_dark)
-                see_invisible = initial(see_invisible)
 
 /mob/living/simple_animal/construct/Life()
 	. = ..()
