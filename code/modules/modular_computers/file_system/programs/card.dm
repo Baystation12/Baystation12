@@ -224,12 +224,7 @@
 	return 1
 
 /datum/computer_file/program/card_mod/proc/remove_nt_access(var/obj/item/weapon/card/id/id_card)
-	var/known_access_rights = get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM)
-
-	for(var/access in id_card.access)
-		if(access in known_access_rights)
-			id_card.access -= access
+	id_card.access -= get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM)
 
 /datum/computer_file/program/card_mod/proc/apply_access(var/obj/item/weapon/card/id/id_card, var/list/accesses)
-	for(var/access in accesses)
-		id_card.access |= access
+	id_card.access |= accesses
