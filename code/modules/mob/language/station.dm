@@ -23,14 +23,16 @@
 	colour = "soghun"
 	key = "o"
 	flags = WHITELISTED
-	syllables = list("ss","ss","ss","ss","skak","seeki","resh","las","esi","kor","sh")
-
-/datum/language/unathi/get_random_name()
-
-	var/new_name = ..()
-	while(findtextEx(new_name,"sss",1,null))
-		new_name = replacetext(new_name, "sss", "ss")
-	return capitalize(new_name)
+	space_chance = 40
+	syllables = list(
+		"za", "az", "ze", "ez", "zi", "iz", "zo", "oz", "zu", "uz", "zs", "sz",
+		"ha", "ah", "he", "eh", "hi", "ih", "ho", "oh", "hu", "uh", "hs", "sh",
+		"la", "al", "le", "el", "li", "il", "lo", "ol", "lu", "ul", "ls", "sl",
+		"ka", "ak", "ke", "ek", "ki", "ik", "ko", "ok", "ku", "uk", "ks", "sk",
+		"sa", "as", "se", "es", "si", "is", "so", "os", "su", "us", "ss", "ss",
+		"ra", "ar", "re", "er", "ri", "ir", "ro", "or", "ru", "ur", "rs", "sr",
+		"a",  "a",  "e",  "e",  "i",  "i",  "o",  "o",  "u",  "u",  "s",  "s"
+	)
 
 /datum/language/tajaran
 	name = LANGUAGE_SIIK_TAJR
