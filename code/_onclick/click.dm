@@ -298,22 +298,12 @@
 /mob/living/LaserEyes(atom/A)
 	setClickCooldown(4)
 	var/turf/T = get_turf(src)
-	var/turf/U = get_turf(A)
 
-	var/obj/item/projectile/beam/LE = new /obj/item/projectile/beam( loc )
+	var/obj/item/projectile/beam/LE = new (T)
 	LE.icon = 'icons/effects/genetics.dmi'
 	LE.icon_state = "eyelasers"
 	playsound(usr.loc, 'sound/weapons/taser2.ogg', 75, 1)
-
-	LE.firer = src
-	LE.def_zone = get_organ_target()
-	LE.original = A
-	LE.current = T
-	LE.yo = U.y - T.y
-	LE.xo = U.x - T.x
-	spawn( 1 )
-		LE.process()
-
+	LE.launch(A)
 /mob/living/carbon/human/LaserEyes()
 	if(nutrition>0)
 		..()
