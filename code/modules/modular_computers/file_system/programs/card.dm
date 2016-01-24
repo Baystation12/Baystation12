@@ -138,8 +138,11 @@
 									<u>Blood Type:</u> [id_card.blood_type]<br><br>
 									<u>Access:</u><br>
 								"}
+
+						var/known_access_rights = get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM)
 						for(var/A in id_card.access)
-							contents += "  [get_access_desc(A)]"
+							if(A in known_access_rights)
+								contents += "  [get_access_desc(A)]"
 
 						if(!computer.nano_printer.print_text(contents,"access report"))
 							usr << "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>"
@@ -162,7 +165,7 @@
 		if("terminate")
 			if(computer && can_run(user, 1))
 				id_card.assignment = "Terminated"
-				id_card.access = list()
+				remove_nt_access(id_card)
 				callHook("terminate_employee", list(id_card))
 		if("edit")
 			if(computer && can_run(user, 1))
@@ -200,7 +203,8 @@
 
 						access = jobdatum.get_access()
 
-					id_card.access = access
+					remove_nt_access(id_card)
+					apply_access(id_card, access)
 					id_card.assignment = t1
 					id_card.rank = t1
 
@@ -209,7 +213,7 @@
 			if(href_list["allowed"] && computer && can_run(user, 1))
 				var/access_type = text2num(href_list["access_target"])
 				var/access_allowed = text2num(href_list["allowed"])
-				if(access_type in (get_all_centcom_access() + get_all_station_access()))
+				if(access_type in get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM))
 					id_card.access -= access_type
 					if(!access_allowed)
 						id_card.access += access_type
@@ -218,3 +222,14 @@
 
 	nanomanager.update_uis(NM)
 	return 1
+
+/datum/computer_file/program/card_mod/proc/remove_nt_access(var/obj/item/weapon/card/id/id_card)
+	var/known_access_rights = get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM)
+
+	for(var/access in id_card.access)
+		if(access in known_access_rights)
+			id_card.access -= access
+
+/datum/computer_file/program/card_mod/proc/apply_access(var/obj/item/weapon/card/id/id_card, var/list/accesses)
+	for(var/access in accesses)
+		id_card.access |= access
