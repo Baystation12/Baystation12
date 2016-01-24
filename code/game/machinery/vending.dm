@@ -1011,7 +1011,7 @@
 	/obj/item/weapon/c_tube = 10,/obj/item/weapon/pen = 5,/obj/item/weapon/pen/blue = 5,
 	/obj/item/weapon/pen/red = 5)
 	contraband = list(/obj/item/weapon/pen/crayon/mime = 1,/obj/item/weapon/pen/crayon/rainbow = 1)
-	premium = list(/obj/item/weapon/contraband/poster = 5)
+	premium = list(/obj/item/weapon/poster/contraband = 5)
 
 /obj/machinery/vending/hatdispenser
 	name = "Hatlord 9000"

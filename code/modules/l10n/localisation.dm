@@ -16,9 +16,6 @@
 	Like in custom event message, admin memo and VV.
 */
 
-var/global/list/localisation = list()
-/*	letters list filling in code/__HELPERS/global_lists.dm in /proc/makeDatumRefLists()		*/
-
 /datum/letter
 	var/letter = ""			//weird letter
 	var/chat = ""			//chat letter

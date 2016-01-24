@@ -125,7 +125,7 @@
 		var/obj/item/device/measuring_tape/P = W
 		user.visible_message("\blue[user] extends [P] towards [src].","\blue You extend [P] towards [src].", translation = list("object"=src,"name"="tape","args"=list("user"=user,"P"=P)))
 		if(do_after(user,25))
-			user << "[translation(src,"tape",1,list("P"=P, "excavation_level"=excavation_level))]"
+			user << "\blue [translation(src,"tape",list("P"=P, "excavation_level"=excavation_level))]"
 		return
 
 	if (istype(W, /obj/item/weapon/pickaxe))
@@ -146,9 +146,9 @@
 			var/datum/find/F = finds[1]
 			if(excavation_level + P.excavation_amount > F.excavation_required)
 				//Chance to destroy / extract any finds here
-				fail_message = "[translation(src,"fail_message",1,W)]"
+				fail_message = "[translation(src,"fail_message",W)]"
 
-		user << "[translation(src,"start_drill",1,P)][fail_message ? fail_message : ""]"
+		user << "\red [translation(src,"start_drill",P)][fail_message ? fail_message : ""]"
 
 		if(fail_message && prob(90))
 			if(prob(25))
@@ -159,7 +159,7 @@
 					artifact_debris()
 
 		if(do_after(user,P.digspeed))
-			user << "[translation(src,"finish_drill",1,P)]"
+			user << "\blue [translation(src,"finish_drill",P)]"
 
 			if(finds && finds.len)
 				var/datum/find/F = finds[1]
@@ -438,19 +438,19 @@
 
 	if(valid_tool)
 		if (dug)
-			user << "[translation(src,"been_dug")]"
+			user << "\red [translation(src,"been_dug")]"
 			return
 
 		var/turf/T = user.loc
 		if (!(istype(T)))
 			return
 
-		user << "[translation(src,"digging")]"
+		user << "\red [translation(src,"digging")]"
 		playsound(user.loc, 'sound/effects/rustle1.ogg', 50, 1)
 
 		if(!do_after(user,40)) return
 
-		user << "[translation(src,"dug")]"
+		user << "\blue [translation(src,"dug")]"
 		gets_dug()
 
 	else if(istype(W,/obj/item/weapon/storage/bag/ore))

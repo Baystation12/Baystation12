@@ -36,7 +36,7 @@
 			message_admins("Translation error in GetVar of [type] [v]: no referenced object.", 1)
 			return "Translation module error, please, contact administration!"
 
-		if((v in refObj:vars) && refObj:is_instance)		//duct tape for objects created not in code but on map and ingame
+		if((v in refObj:vars) && refObj:is_instance)	//duct tape for objects created not in code but on map and ingame
 			return refObj:vars[v]
 
 		if(hascall(src, v) && call(src, v)())			//sometimes we need to call a special proc named as needed var to find a value
@@ -57,6 +57,10 @@
 */
 	proc/examine(var/args = null)
 		return 0
+
+	var/yes = "Yes"
+	var/no = "No"
+	var/yesno = list("Yes"="Yes","No"="No")
 
 	var/directions = list("North"="North","East"="East","South"="South","West"="West","Cancel"="Cancel")
 	proc/directions_return(var/args)	return directions[args]
