@@ -12,7 +12,7 @@
 
 	var/mob/living/aiming_at   // Who are we currently targeting, if anyone?
 	var/obj/item/aiming_with   // What are we targeting with?
-	var/mob/owner              // Who do we belong to?
+	var/mob/living/owner       // Who do we belong to?
 	var/locked =    0          // Have we locked on?
 	var/lock_time = 0          // When -will- we lock on?
 	var/active =    0          // Is our owner intending to take hostages?
@@ -84,12 +84,8 @@
 	update_aiming()
 
 /obj/aiming_overlay/Destroy()
-	if(aiming_at)
-		aiming_at.aimed -= src
-		aiming_at = null
+	cancel_aiming(1)
 	owner = null
-	aiming_with = null
-	processing_objects -= src
 	return ..()
 
 obj/aiming_overlay/proc/update_aiming_deferred()
@@ -121,7 +117,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 		owner << "<span class='warning'>You must be conscious and standing to keep track of your target!</span>"
 	else if(aiming_at.alpha == 0 || (aiming_at.invisibility > owner.see_invisible))
 		owner << "<span class='warning'>Your target has become invisible!</span>"
-	else if(get_dist(get_turf(owner), get_turf(aiming_at)) > 7) // !(owner in viewers(aiming_at, 7))
+	else if(!(aiming_at in view(owner)))
 		owner << "<span class='warning'>Your target is too far away to track!</span>"
 	else
 		cancel_aim = 0
@@ -154,7 +150,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	if(aiming_at)
 		if(aiming_at == target)
 			return
-		aiming_at.aimed -= src
+		cancel_aiming(1)
 		owner.visible_message("<span class='danger'>\The [owner] turns \the [thing] on \the [target]!</span>")
 	else
 		owner.visible_message("<span class='danger'>\The [owner] aims \the [thing] at \the [target]!</span>")
@@ -166,6 +162,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	aiming_at = target
 	if(istype(aiming_with, /obj/item/weapon/gun))
 		playsound(get_turf(owner), 'sound/weapons/TargetOn.ogg', 50,1)
+
 	forceMove(get_turf(target))
 	processing_objects |= src
 
@@ -174,6 +171,9 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	locked = 0
 	update_icon()
 	lock_time = world.time + 35
+	owner.moved.register(src, /obj/aiming_overlay/proc/update_aiming)
+	aiming_at.moved.register(src, /obj/aiming_overlay/proc/target_moved)
+	aiming_at.destruction.register(src, /obj/aiming_overlay/proc/cancel_aiming)
 
 /obj/aiming_overlay/update_icon()
 	if(locked)
@@ -208,9 +208,17 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	if(!no_message)
 		owner.visible_message("<span class='notice'>\The [owner] lowers \the [aiming_with].</span>")
 
+	owner.moved.unregister(src)
+	if(aiming_at)
+		aiming_at.moved.unregister(src)
+		aiming_at.destruction.unregister(src)
+		aiming_at.aimed -= src
+		aiming_at = null
+
 	aiming_with = null
-	aiming_at.aimed -= src
-	aiming_at = null
 	loc = null
 	processing_objects -= src
 
+/obj/aiming_overlay/proc/target_moved()
+	update_aiming()
+	trigger(TARGET_CAN_MOVE)

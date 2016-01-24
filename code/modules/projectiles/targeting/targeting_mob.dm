@@ -42,17 +42,3 @@
 	aimed.Cut()
 	return ..()
 
-/turf/Enter(var/mob/living/mover)
-	. = ..()
-	if(istype(mover))
-		if(mover.aiming && mover.aiming.aiming_at)
-			mover.aiming.update_aiming()
-		if(mover.aimed.len)
-			mover.trigger_aiming(TARGET_CAN_MOVE)
-
-/mob/living/forceMove(var/atom/destination)
-	. = ..()
-	if(aiming && aiming.aiming_at)
-		aiming.update_aiming()
-	if(aimed.len)
-		trigger_aiming(TARGET_CAN_MOVE)
