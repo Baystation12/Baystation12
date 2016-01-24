@@ -129,7 +129,7 @@
 // Calls beginning with "PC_" are reserved for computer handling (by whatever runs the program)
 // ALWAYS INCLUDE PARENT CALL ..() OR DIE IN FIRE.
 /datum/computer_file/program/Topic(href, href_list)
+	if(..())
+		return 1
 	if(computer)
-		computer.Topic(href, href_list)
-	..()
-
+		return computer.Topic(href, href_list)

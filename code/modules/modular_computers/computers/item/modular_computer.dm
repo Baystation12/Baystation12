@@ -46,7 +46,7 @@
 	set category = "Object"
 	set src in view(1)
 
-	if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
+	if(usr.incapacitated() || !istype(usr, /mob/living))
 		usr << "<span class='warning'>You can't do that.</span>"
 		return
 
@@ -70,6 +70,7 @@
 
 	card_slot.stored_card.forceMove(get_turf(src))
 	card_slot.stored_card = null
+	nanomanager.update_uis(src)
 	user << "You remove the card from \the [src]"
 
 /obj/item/modular_computer/attack_ghost(var/mob/dead/observer/user)
@@ -99,7 +100,7 @@
 	processing_objects.Remove(src)
 	for(var/obj/item/weapon/computer_hardware/CH in src.get_all_components())
 		qdel(CH)
-	..()
+	return ..()
 
 /obj/item/modular_computer/update_icon()
 	icon_state = icon_state_unpowered
@@ -299,20 +300,20 @@
 		return 1
 	if( href_list["PC_exit"] )
 		kill_program()
-		return
+		return 1
 	if( href_list["PC_enable_component"] )
 		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_enable_component"])
 		if(H && istype(H) && !H.enabled)
 			H.enabled = 1
-		return
+		return 1
 	if( href_list["PC_disable_component"] )
 		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_disable_component"])
 		if(H && istype(H) && H.enabled)
 			H.enabled = 0
-		return
+		return 1
 	if( href_list["PC_shutdown"] )
 		shutdown_computer()
-		return
+		return 1
 	if( href_list["PC_minimize"] )
 		var/mob/user = usr
 		if(!active_program || !processor_unit)
@@ -359,7 +360,7 @@
 		if(P.run_program(user))
 			active_program = P
 			update_icon()
-		return
+		return 1
 
 // Used in following function to reduce copypaste
 /obj/item/modular_computer/proc/power_failure()
@@ -396,6 +397,7 @@
 		user.drop_from_inventory(I)
 		card_slot.stored_card = I
 		I.forceMove(src)
+		nanomanager.update_uis(src)
 		user << "You insert \the [I] into \the [src]."
 		return
 	if(istype(W, /obj/item/weapon/paper))
