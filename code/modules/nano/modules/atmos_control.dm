@@ -48,7 +48,7 @@
 			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
-		ui.set_auto_update(1)
+		ui.set_auto_update(0)
 	ui_ref = ui
 
 /datum/nano_module/atmos_control/proc/generate_state(air_alarm)

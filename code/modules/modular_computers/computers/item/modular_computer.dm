@@ -10,6 +10,8 @@
 	var/datum/computer_file/program/active_program = null	// A currently active program running on the computer.
 	var/hardware_flag = 0									// A flag that describes this device type
 	var/last_power_usage = 0
+	var/last_battery_percent = 0							// Used for deciding if battery percentage has chandged
+	var/last_world_time = "00:00"
 	var/computer_emagged = 0								// Whether the computer is emagged.
 
 	var/base_active_power_usage = 50						// Power usage when the computer is open (screen is active) and can be interacted with. Remember hardware can use power too.
@@ -70,7 +72,7 @@
 
 	card_slot.stored_card.forceMove(get_turf(src))
 	card_slot.stored_card = null
-	nanomanager.update_uis(src)
+	update_uis()
 	user << "You remove the card from \the [src]"
 
 /obj/item/modular_computer/attack_ghost(var/mob/dead/observer/user)
@@ -207,6 +209,10 @@
 		P.process_tick()
 		P.ntnet_status = get_ntnet_status()
 		P.computer_emagged = computer_emagged
+
+	if(worldtime2text() != last_world_time)
+		last_world_time = worldtime2text()
+		update_uis()
 
 	handle_power() // Handles all computer power interaction
 
@@ -382,6 +388,12 @@
 
 	if(battery_module)
 		battery_module.battery.use(power_usage * CELLRATE)
+		var/batery_percent = battery_module.battery.percent()
+
+		if(last_battery_percent != batery_percent) //Let's update UI on percent chandge
+			update_uis()
+			last_battery_percent = batery_percent
+
 	last_power_usage = power_usage
 
 /obj/item/modular_computer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
@@ -397,7 +409,7 @@
 		user.drop_from_inventory(I)
 		card_slot.stored_card = I
 		I.forceMove(src)
-		nanomanager.update_uis(src)
+		update_uis()
 		user << "You insert \the [I] into \the [src]."
 		return
 	if(istype(W, /obj/item/weapon/paper))
@@ -577,3 +589,11 @@
 	if(processor_unit)
 		all_components.Add(processor_unit)
 	return all_components
+
+/obj/item/modular_computer/proc/update_uis()
+	if(active_program) //Should we update program ui or computer ui?
+		nanomanager.update_uis(active_program)
+		if(active_program.NM)
+			nanomanager.update_uis(active_program.NM)
+	else
+		nanomanager.update_uis(src)

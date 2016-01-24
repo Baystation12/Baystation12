@@ -88,7 +88,7 @@
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
-		ui.set_auto_update(1)
+		ui.set_auto_update(0)
 
 /datum/nano_module/card_mod/proc/format_jobs(list/jobs)
 	var/obj/item/weapon/card/id/id_card = program.computer.card_slot.stored_card
