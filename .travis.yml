@@ -1,4 +1,6 @@
 #pretending we're C because otherwise ruby will initialize, even with "language: dm".
+# The final test
+
 language: c
 sudo: false
 
