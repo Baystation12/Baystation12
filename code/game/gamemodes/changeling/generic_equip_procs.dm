@@ -49,110 +49,60 @@
 	var/mob/living/carbon/human/M = src
 
 	var/success = 0
-/*
-		slot_back,\
-		slot_wear_id,\
-		slot_w_uniform,\
-		slot_wear_suit,\
-		slot_wear_mask,\
-		slot_head,\
-		slot_shoes,\
-		slot_gloves,\
-		slot_l_ear,\
-		slot_r_ear,\
-		slot_glasses,\
-		slot_belt,\
-		slot_s_store,\
-		slot_tie,\
-		slot_l_store,\
-		slot_r_store\
-	)
-*/
+
 	//First, check if we're already wearing the armor, and if so, take it off.
-/*
-	if(istype(M.wear_suit, armor_type) || istype(M.head, helmet_type))
-		M.visible_message("<span class='warning'>[M] casts off their [M.wear_suit.name]!</span>",
-		"<span class='warning'>We cast off our [M.wear_suit.name]</span>",
-		"<span class='italics'>You hear the organic matter ripping and tearing!</span>")
-		qdel(M.wear_suit)
-		qdel(M.head)
-		M.update_inv_wear_suit()
-		M.update_inv_head()
-		M.update_hair()
-		return 1
-*/
 
 	if(M.mind.changeling.armor_deployed)
-		if(M.head)
-			for(var/obj/item/clothing/head/head_slot in stuff_to_equip)
-				if(istype(M.head,head_slot))
-					qdel(M.head)
-					success = 1
-					break
+		if(M.head && stuff_to_equip["head"])
+			if(istype(M.head, stuff_to_equip["head"]))
+				qdel(M.head)
+				success = 1
 
-		if(M.wear_id)
-			for(var/obj/item/weapon/card/id/id_slot in stuff_to_equip)
-				if(istype(M.wear_id,id_slot))
-					qdel(M.wear_id)
-					success = 1
-					break
+		if(M.wear_id && stuff_to_equip["wear_id"])
+			if(istype(M.wear_id, stuff_to_equip["wear_id"]))
+				qdel(M.wear_id)
+				success = 1
 
-		if(M.wear_suit)
-			for(var/obj/item/clothing/suit/suit_slot in stuff_to_equip)
-				if(istype(M.wear_suit,suit_slot))
-					qdel(M.wear_suit)
-					success = 1
-					break
+		if(M.wear_suit && stuff_to_equip["wear_suit"])
+			if(istype(M.wear_suit, stuff_to_equip["wear_suit"]))
+				qdel(M.wear_suit)
+				success = 1
 
-		if(M.gloves)
-			for(var/obj/item/clothing/gloves/gloves_slot in stuff_to_equip)
-				if(istype(M.gloves,gloves_slot))
-					qdel(M.gloves)
-					success = 1
-					break
-		if(M.shoes)
-			for(var/obj/item/clothing/shoes/shoes_slot in stuff_to_equip)
-				if(istype(M.shoes,shoes_slot))
-					qdel(M.shoes)
-					success = 1
-					break
+		if(M.gloves && stuff_to_equip["gloves"])
+			if(istype(M.gloves, stuff_to_equip["gloves"]))
+				qdel(M.gloves)
+				success = 1
+		if(M.shoes && stuff_to_equip["shoes"])
+			if(istype(M.shoes, stuff_to_equip["shoes"]))
+				qdel(M.shoes)
+				success = 1
 
-		if(M.belt)
-			for(var/obj/item/weapon/storage/belt/belt_slot in stuff_to_equip)
-				if(istype(M.belt,belt_slot))
-					qdel(M.belt)
-					success = 1
-					break
+		if(M.belt && stuff_to_equip["belt"])
+			if(istype(M.belt, stuff_to_equip["belt"]))
+				qdel(M.belt)
+				success = 1
 
-		if(M.glasses)
-			for(var/obj/item/clothing/glasses/glasses_slot in stuff_to_equip)
-				if(istype(M.glasses,glasses_slot))
-					qdel(M.glasses)
-					success = 1
-					break
+		if(M.glasses && stuff_to_equip["glasses"])
+			if(istype(M.glasses, stuff_to_equip["glasses"]))
+				qdel(M.glasses)
+				success = 1
 
-		if(M.wear_mask)
-			for(var/obj/item/clothing/mask/mask_slot in stuff_to_equip)
-				if(istype(M.wear_mask,mask_slot))
-					qdel(M.wear_mask)
-					success = 1
-					break
+		if(M.wear_mask && stuff_to_equip["wear_mask"])
+			if(istype(M.wear_mask, stuff_to_equip["wear_mask"]))
+				qdel(M.wear_mask)
+				success = 1
 
-		if(M.back)
-			for(var/obj/item/weapon/storage/backpack/backpack_slot in stuff_to_equip)
-				if(istype(M.back,backpack_slot))
-					for(var/atom/movable/AM in M.back.contents) //Dump whatever's in the bag before deleting.
-						AM.forceMove(src.loc)
-					qdel(M.back)
-					success = 1
-					break
+		if(M.back && stuff_to_equip["back"])
+			if(istype(M.back, stuff_to_equip["back"]))
+				for(var/atom/movable/AM in M.back.contents) //Dump whatever's in the bag before deleting.
+					AM.forceMove(src.loc)
+				qdel(M.back)
+				success = 1
 
-		if(M.w_uniform)
-			for(var/obj/item/clothing/under/uniform_slot in stuff_to_equip)
-				if(istype(M.w_uniform,uniform_slot))
-					qdel(M.w_uniform)
-					success = 1
-					break
+		if(M.w_uniform && stuff_to_equip["w_uniform"])
+			if(istype(M.w_uniform, stuff_to_equip["w_uniform"]))
+				qdel(M.w_uniform)
+				success = 1
 
 		if(success)
 			playsound(src, 'sound/effects/splat.ogg', 30, 1)
@@ -167,115 +117,106 @@
 		M << "<span class='notice'>We begin growing our new equipment...</span>"
 
 		var/list/grown_items_list = list()
-		if(!M.head)
-			for(var/obj/item/clothing/head/head_slot in stuff_to_equip)
-				var/I = new head_slot.type
-				M.equip_to_slot_or_del(I, slot_head)
-				grown_items_list.Add("a helmet")
-				playsound(src, 'sound/effects/blobattack.ogg', 30, 1)
-				M.update_icons()
-				success = 1
-				sleep(20)
-				break
 
-		if(!M.w_uniform)
-			for(var/obj/item/clothing/under/uniform_slot in stuff_to_equip)
-				var/I = new uniform_slot.type
-				M.equip_to_slot_or_del(I, slot_w_uniform)
-				grown_items_list.Add("a uniform")
-				playsound(src, 'sound/effects/blobattack.ogg', 30, 1)
-				M.update_icons()
-				success = 1
-				sleep(20)
-				break
+		var/t = stuff_to_equip["head"]
+		if(!M.head && t)
+			var/I = new t
+			M.equip_to_slot_or_del(I, slot_head)
+			grown_items_list.Add("a helmet")
+			playsound(src, 'sound/effects/blobattack.ogg', 30, 1)
+			M.update_icons()
+			success = 1
+			sleep(20)
 
-		if(!M.gloves)
-			for(var/obj/item/clothing/gloves/gloves_slot in stuff_to_equip)
-				var/I = new gloves_slot.type
-				M.equip_to_slot_or_del(I, slot_gloves)
-				grown_items_list.Add("some gloves")
-				playsound(src, 'sound/effects/splat.ogg', 30, 1)
-				M.update_icons()
-				success = 1
-				sleep(20)
-				break
+		t = stuff_to_equip["w_uniform"]
+		if(!M.w_uniform && t)
+			var/I = new t
+			M.equip_to_slot_or_del(I, slot_w_uniform)
+			grown_items_list.Add("a uniform")
+			playsound(src, 'sound/effects/blobattack.ogg', 30, 1)
+			M.update_icons()
+			success = 1
+			sleep(20)
 
-		if(!M.shoes)
-			for(var/obj/item/clothing/shoes/shoes_slot in stuff_to_equip)
-				var/I = new shoes_slot.type
-				M.equip_to_slot_or_del(I, slot_shoes)
-				grown_items_list.Add("shoes")
-				playsound(src, 'sound/effects/splat.ogg', 30, 1)
-				M.update_icons()
-				success = 1
-				sleep(20)
-				break
+		t = stuff_to_equip["gloves"]
+		if(!M.gloves && t)
+			var/I = new t
+			M.equip_to_slot_or_del(I, slot_gloves)
+			grown_items_list.Add("some gloves")
+			playsound(src, 'sound/effects/splat.ogg', 30, 1)
+			M.update_icons()
+			success = 1
+			sleep(20)
 
-		if(!M.belt)
-			for(var/obj/item/weapon/storage/belt/belt_slot in stuff_to_equip)
-				var/I = new belt_slot.type
-				M.equip_to_slot_or_del(I, slot_belt)
-				grown_items_list.Add("a belt")
-				playsound(src, 'sound/effects/splat.ogg', 30, 1)
-				M.update_icons()
-				success = 1
-				sleep(20)
-				break
+		t = stuff_to_equip["shoes"]
+		if(!M.shoes && t)
+			var/I = new t
+			M.equip_to_slot_or_del(I, slot_shoes)
+			grown_items_list.Add("shoes")
+			playsound(src, 'sound/effects/splat.ogg', 30, 1)
+			M.update_icons()
+			success = 1
+			sleep(20)
 
-		if(!M.glasses)
-			for(var/obj/item/clothing/glasses/glasses_slot in stuff_to_equip)
-				var/I = new glasses_slot.type
-				M.equip_to_slot_or_del(I, slot_glasses)
-				grown_items_list.Add("some glasses")
-				playsound(src, 'sound/effects/splat.ogg', 30, 1)
-				M.update_icons()
-				success = 1
-				sleep(20)
-				break
+		t = stuff_to_equip["belt"]
+		if(!M.belt && t)
+			var/I = new t
+			M.equip_to_slot_or_del(I, slot_belt)
+			grown_items_list.Add("a belt")
+			playsound(src, 'sound/effects/splat.ogg', 30, 1)
+			M.update_icons()
+			success = 1
+			sleep(20)
 
-		if(!M.wear_mask)
-			for(var/obj/item/clothing/mask/mask_slot in stuff_to_equip)
-				var/I = new mask_slot.type
-				M.equip_to_slot_or_del(I, slot_wear_mask)
-				grown_items_list.Add("a mask")
-				playsound(src, 'sound/effects/splat.ogg', 30, 1)
-				M.update_icons()
-				success = 1
-				sleep(20)
-				break
+		t = stuff_to_equip["glasses"]
+		if(!M.glasses && t)
+			var/I = new t
+			M.equip_to_slot_or_del(I, slot_glasses)
+			grown_items_list.Add("some glasses")
+			playsound(src, 'sound/effects/splat.ogg', 30, 1)
+			M.update_icons()
+			success = 1
+			sleep(20)
 
-		if(!M.back)
-			for(var/obj/item/weapon/storage/backpack/backpack_slot in stuff_to_equip)
-				var/I = new backpack_slot.type
-				M.equip_to_slot_or_del(I, slot_back)
-				grown_items_list.Add("a backpack")
-				playsound(src, 'sound/effects/blobattack.ogg', 30, 1)
-				M.update_icons()
-				success = 1
-				sleep(20)
-				break
+		t = stuff_to_equip["wear_mask"]
+		if(!M.wear_mask && t)
+			var/I = new t
+			M.equip_to_slot_or_del(I, slot_wear_mask)
+			grown_items_list.Add("a mask")
+			playsound(src, 'sound/effects/splat.ogg', 30, 1)
+			M.update_icons()
+			success = 1
+			sleep(20)
 
-		if(!M.wear_suit)
-			for(var/obj/item/clothing/suit/suit_slot in stuff_to_equip)
-				var/I = new suit_slot.type
-				M.equip_to_slot_or_del(I, slot_wear_suit)
-				grown_items_list.Add("an exosuit")
-				playsound(src, 'sound/effects/blobattack.ogg', 30, 1)
-				M.update_icons()
-				success = 1
-				sleep(20)
-				break
+		t = stuff_to_equip["back"]
+		if(!M.back && t)
+			var/I = new t
+			M.equip_to_slot_or_del(I, slot_back)
+			grown_items_list.Add("a backpack")
+			playsound(src, 'sound/effects/blobattack.ogg', 30, 1)
+			M.update_icons()
+			success = 1
+			sleep(20)
 
-		if(!M.wear_id)
-			for(var/obj/item/weapon/card/id/id_slot in stuff_to_equip)
-				var/I = new id_slot.type
-				M.equip_to_slot_or_del(I, slot_wear_id)
-				grown_items_list.Add("an ID card")
-				playsound(src, 'sound/effects/splat.ogg', 30, 1)
-				M.update_icons()
-				success = 1
-				sleep(20)
-				break
+		t = stuff_to_equip["wear_suit"]
+		if(!M.wear_suit && t)
+			var/I = new t
+			M.equip_to_slot_or_del(I, slot_wear_suit)
+			grown_items_list.Add("an exosuit")
+			playsound(src, 'sound/effects/blobattack.ogg', 30, 1)
+			M.update_icons()
+			success = 1
+			sleep(20)
+
+		t = stuff_to_equip["wear_id"]
+		if(!M.wear_id && t)
+			var/I = new t
+			M.equip_to_slot_or_del(I, slot_wear_id)
+			grown_items_list.Add("an ID card")
+			playsound(src, 'sound/effects/splat.ogg', 30, 1)
+			M.update_icons()
+			success = 1
+			sleep(20)
 
 		var/feedback = english_list(grown_items_list, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "" )
 

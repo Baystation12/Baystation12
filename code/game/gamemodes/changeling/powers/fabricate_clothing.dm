@@ -1,14 +1,14 @@
 var/global/list/changeling_fabricated_clothing = list(
-	new /obj/item/clothing/under/chameleon/changeling,
-	new /obj/item/clothing/head/chameleon/changeling,
-	new /obj/item/clothing/suit/chameleon/changeling,
-	new /obj/item/clothing/shoes/chameleon/changeling,
-	new /obj/item/clothing/gloves/chameleon/changeling,
-	new /obj/item/clothing/mask/chameleon/changeling,
-	new /obj/item/clothing/glasses/chameleon/changeling,
-	new /obj/item/weapon/storage/backpack/chameleon/changeling,
-	new /obj/item/weapon/storage/belt/chameleon/changeling,
-	new /obj/item/weapon/card/id/syndicate/changeling
+	"w_uniform" = /obj/item/clothing/under/chameleon/changeling,
+	"head" = /obj/item/clothing/head/chameleon/changeling,
+	"wear_suit" = /obj/item/clothing/suit/chameleon/changeling,
+	"shoes" = /obj/item/clothing/shoes/chameleon/changeling,
+	"gloves" = /obj/item/clothing/gloves/chameleon/changeling,
+	"wear_mask" = /obj/item/clothing/mask/chameleon/changeling,
+	"glasses" = /obj/item/clothing/glasses/chameleon/changeling,
+	"back" = /obj/item/weapon/storage/backpack/chameleon/changeling,
+	"belt" = /obj/item/weapon/storage/belt/chameleon/changeling,
+	"wear_id" = /obj/item/weapon/card/id/syndicate/changeling
 	)
 
 /datum/power/changeling/fabricate_clothing
