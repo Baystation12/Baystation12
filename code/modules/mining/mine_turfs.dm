@@ -275,6 +275,9 @@
 					M.Stun(5)
 			M.apply_effect(25, IRRADIATE)
 
+	if(rand(1,500) == 1)
+		visible_message("<span class='notice'>An old dusty crate was buried within!</span>", translation = list("object"=src,"name"="find_crate"))
+		new /obj/structure/closet/crate/secure/loot(src)
 
 	var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)
 
@@ -294,10 +297,6 @@
 
 	// Update the
 	N.updateMineralOverlays(1)
-
-	if(rand(1,500) == 1)
-		visible_message("<span class='notice'>An old dusty crate was buried within!</span>", translation = list("object"=src,"name"="find_crate"))
-		new /obj/structure/closet/crate/secure/loot(src)
 
 
 /turf/simulated/mineral/proc/excavate_find(var/prob_clean = 0, var/datum/find/F)

@@ -128,6 +128,7 @@
 		set_poster(design)
 
 /obj/structure/sign/poster/proc/set_poster(var/datum/poster/design)
+	src.design = design
 	name = "[initial(name)] [design.name]"
 	desc = "[initial(desc)] [design.desc]"
 	icon_state = design.icon_state
