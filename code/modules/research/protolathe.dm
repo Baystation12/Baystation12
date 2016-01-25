@@ -1,5 +1,5 @@
 /obj/machinery/r_n_d/protolathe
-	name = "Protolathe"
+	name = "\improper Protolathe"
 	icon_state = "protolathe"
 	flags = OPENCONTAINER
 
@@ -15,9 +15,8 @@
 	var/mat_efficiency = 1
 	var/speed = 1
 
-	materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, "gold" = 0, "silver" = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0)
-
 /obj/machinery/r_n_d/protolathe/New()
+	materials = default_material_composition.Copy()
 	..()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/protolathe(src)
@@ -148,7 +147,7 @@
 	if(t)
 		if(do_after(user, 16))
 			if(stack.use(amount))
-				user << "<span class='notice'>You add [amount] sheets to \the [src].</span>"
+				user << "<span class='notice'>You add [amount] sheet\s to \the [src].</span>"
 				materials[t] += amount * SHEET_MATERIAL_AMOUNT
 	busy = 0
 	updateUsrDialog()
