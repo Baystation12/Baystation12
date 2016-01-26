@@ -30,7 +30,7 @@
 		unwet_task.trigger_task_in(8 SECONDS)
 	else
 		unwet_task = schedule_task_in(8 SECONDS)
-		unwet_task.triggered.register(src, /turf/simulated/proc/task_unwet_floor)
+		task_triggered_event.register(unwet_task, src, /turf/simulated/proc/task_unwet_floor)
 
 /turf/simulated/proc/task_unwet_floor(var/triggered_task)
 	if(triggered_task == unwet_task)

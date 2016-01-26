@@ -326,8 +326,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	stop_following()
 	following = target
-	following.moved.register(src, /atom/movable/proc/move_to_destination)
-	following.destruction.register(src, /mob/dead/observer/proc/stop_following)
+	moved_event.register(following, src, /atom/movable/proc/move_to_destination)
+	destroyed_event.register(following, src, /mob/dead/observer/proc/stop_following)
 
 	src << "<span class='notice'>Now following \the [following]</span>"
 	move_to_destination(following, following.loc, following.loc)
@@ -335,8 +335,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/dead/observer/proc/stop_following()
 	if(following)
 		src << "<span class='notice'>No longer following \the [following]</span>"
-		following.moved.unregister(src)
-		following.destruction.unregister(src)
+		moved_event.unregister(following, src)
+		destroyed_event.unregister(following, src)
 		following = null
 
 /mob/dead/observer/move_to_destination(var/atom/movable/am, var/old_loc, var/new_loc)

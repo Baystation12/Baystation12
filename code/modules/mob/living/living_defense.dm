@@ -339,7 +339,7 @@
 			hud_used.hide_actions_toggle = new(hud_used)
 			hud_used.hide_actions_toggle.UpdateIcon()
 
-		if(!hud_used.hide_actions_toggle.has_moved)
+		if(!hud_used.hide_actions_toggle.moved)
 			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(1)
 			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,1)
 
@@ -362,7 +362,7 @@
 
 		client.screen += B
 
-		if(!B.has_moved)
+		if(!B.moved)
 			B.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number)
 			//hud_used.SetButtonCoords(B,button_number)
 
@@ -370,7 +370,7 @@
 		if(!hud_used.hide_actions_toggle)
 			hud_used.hide_actions_toggle = new(hud_used)
 			hud_used.hide_actions_toggle.InitialiseIcon(src)
-		if(!hud_used.hide_actions_toggle.has_moved)
+		if(!hud_used.hide_actions_toggle.moved)
 			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
 			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,button_number+1)
 		client.screen += hud_used.hide_actions_toggle

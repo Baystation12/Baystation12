@@ -17,7 +17,7 @@
 /obj/item/device/multitool/hacktool/Destroy()
 	for(var/T in known_targets)
 		var/atom/target = T
-		target.destruction.unregister(src)
+		destroyed_event.unregister(target, src)
 	known_targets.Cut()
 	qdel(hack_state)
 	hack_state = null
@@ -68,7 +68,7 @@
 		return 0
 
 	known_targets.Insert(1, target)	// Insert the newly hacked target first,
-	target.destruction.register(src, /obj/item/device/multitool/hacktool/proc/on_target_destroy)
+	destroyed_event.register(target, src, /obj/item/device/multitool/hacktool/proc/on_target_destroy)
 	return 1
 
 /obj/item/device/multitool/hacktool/proc/sanity_check()
@@ -77,7 +77,7 @@
 	if(known_targets.len > max_known_targets)
 		for(var/i = (max_known_targets + 1) to known_targets.len)
 			var/atom/A = known_targets[i]
-			A.destruction.unregister(src)
+			destroyed_event.unregister(A, src)
 		known_targets.Cut(max_known_targets + 1)
 
 /obj/item/device/multitool/hacktool/proc/on_target_destroy(var/target)

@@ -10,7 +10,7 @@
 
 /obj/screen/movable
 	var/snap2grid = FALSE
-	var/has_moved = FALSE
+	var/moved = FALSE
 
 //Snap Screen Object
 //Tied to the grid, snaps to the nearest turf
