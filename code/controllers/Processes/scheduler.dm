@@ -31,12 +31,12 @@
 
 /datum/controller/process/scheduler/proc/schedule(var/datum/scheduled_task/st)
 	scheduled_tasks += st
-	st.destruction.register(src, /datum/controller/process/scheduler/proc/unschedule)
+	destroyed_event.register(st, src, /datum/controller/process/scheduler/proc/unschedule)
 
 /datum/controller/process/scheduler/proc/unschedule(var/datum/scheduled_task/st)
 	if(st in scheduled_tasks)
 		scheduled_tasks -= st
-		st.destruction.unregister(src)
+		destroyed_event.unregister(st, src)
 
 /**********
 * Helpers *
@@ -76,7 +76,6 @@
 	var/list/arguments
 	var/task_after_process
 	var/list/task_after_process_args
-	var/datum/observ/triggered
 
 /datum/scheduled_task/New(var/trigger_time, var/procedure, var/list/arguments, var/proc/task_after_process, var/list/task_after_process_args)
 	..()
@@ -94,19 +93,8 @@
 	task_after_process_args.Cut()
 	return ..()
 
-/datum/scheduled_task/init_observers()
-	. = ..()
-	if(.)
-		triggered = new()
-
-/datum/scheduled_task/destroy_observers()
-	. = ..()
-	if(.)
-		qdel(triggered)
-		triggered = null
-
 /datum/scheduled_task/proc/pre_process()
-	triggered.raise_event(list(src))
+	task_triggered_event.raise_event(list(src))
 
 /datum/scheduled_task/proc/process()
 	if(procedure)
@@ -124,7 +112,7 @@
 
 /datum/scheduled_task/source/New(var/trigger_time, var/datum/source, var/procedure, var/list/arguments, var/proc/task_after_process, var/list/task_after_process_args)
 	src.source = source
-	src.source.destruction.register(src, /datum/scheduled_task/source/proc/source_destroyed)
+	destroyed_event.register(src.source, src, /datum/scheduled_task/source/proc/source_destroyed)
 	..(trigger_time, procedure, arguments, task_after_process, task_after_process_args)
 
 /datum/scheduled_task/source/Destroy()
