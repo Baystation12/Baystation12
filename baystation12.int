@@ -1,9 +1,6 @@
 // BEGIN_INTERNALS
 /*
-DIR: code code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\living\carbon\human\species code\modules\mob\living\carbon\human\species\station html icons interface 
-AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
-WINDOW: code\global.dm;code\modules\mob\living\carbon\human\species\station\station.dm
-FILE: code\modules\mob\living\carbon\human\species\station\station.dm
+AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
