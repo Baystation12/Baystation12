@@ -177,11 +177,36 @@
 /turf/simulated/floor/airless/lava
 /turf/simulated/floor/light
 /turf/simulated/floor/snow
-/turf/simulated/floor/beach
-/turf/simulated/floor/beach/sand
-/turf/simulated/floor/beach/sand/desert
 /turf/simulated/floor/beach/coastline
-/turf/simulated/floor/beach/water
-/turf/simulated/floor/beach/water/ocean
 /turf/simulated/floor/plating/snow
 /turf/simulated/floor/airless/ceiling
+
+/turf/simulated/floor/beach
+	name = "beach"
+	icon = 'icons/misc/beach.dmi'
+
+/turf/simulated/floor/beach/sand
+	name = "sand"
+	icon_state = "sand"
+
+/turf/simulated/floor/beach/sand/desert
+	icon_state = "desert"
+
+/turf/simulated/floor/beach/coastline
+	name = "coastline"
+	icon = 'icons/misc/beach2.dmi'
+	icon_state = "sandwater"
+
+/turf/simulated/floor/beach/water
+	name = "water"
+	icon_state = "water"
+
+/turf/simulated/floor/beach/water/update_dirt()
+	return	// Water doesn't become dirty
+
+/turf/simulated/floor/beach/water/ocean
+	icon_state = "seadeep"
+
+/turf/simulated/floor/beach/water/New()
+	..()
+	overlays += image("icon"='icons/misc/beach.dmi',"icon_state"="water5","layer"=MOB_LAYER+0.1)
