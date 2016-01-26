@@ -28,6 +28,9 @@
 			for(var/atom/A in T)
 				if(!ismob(A) && A.simulated) // Mobs are handled differently
 					reagents.touch(A)
+				// choosing the first one breaks with dead mobs: 
+				// there can be more than one dead mob on the same tile
+				// or a dead with an alive one
 				else if(ismob(A) && !M)
 					M = A
 			if(M)
