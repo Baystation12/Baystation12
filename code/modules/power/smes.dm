@@ -113,15 +113,19 @@
 		overlays += image('icons/obj/power.dmi', "smes-oc2")
 	else if (inputting == 1)
 		overlays += image('icons/obj/power.dmi', "smes-oc1")
-	else
-		if(input_attempt)
-			overlays += image('icons/obj/power.dmi', "smes-oc0")
+	else if (input_attempt)
+		overlays += image('icons/obj/power.dmi', "smes-oc0")
 
 	var/clevel = chargedisplay()
-	if(clevel>0)
+	if(clevel)
 		overlays += image('icons/obj/power.dmi', "smes-og[clevel]")
-	return
 
+	if(outputting == 2)
+		overlays += image('icons/obj/power.dmi', "smes-op2")
+	else if (outputting == 1)
+		overlays += image('icons/obj/power.dmi', "smes-op1")
+	else
+		overlays += image('icons/obj/power.dmi', "smes-op0")
 
 /obj/machinery/power/smes/proc/chargedisplay()
 	return round(5.5*charge/(capacity ? capacity : 5e6))
@@ -132,9 +136,9 @@
 	if(terminal && terminal.powernet)
 		inputted_power = terminal.powernet.draw_power(inputted_power)
 		charge += inputted_power * SMESRATE
-		if(inputted_power == input_level)
+		if(percentage == 100)
 			inputting = 2
-		else if(inputted_power)
+		else if(percentage)
 			inputting = 1
 		// else inputting = 0, as set in process()
 
