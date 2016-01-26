@@ -72,7 +72,7 @@
 	tracks.AddTracks(bloodDNA,comingdir,goingdir,bloodcolor)
 
 /turf/simulated/proc/update_dirt()
-	dirt = min(dirt++, 101)
+	dirt = min(dirt+1, 101)
 	var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
 	if (dirt > 50)
 		if (!dirtoverlay)
