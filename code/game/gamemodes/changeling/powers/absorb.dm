@@ -98,24 +98,9 @@
 		changeling.max_geneticpoints += 5
 		src << "<span class='notice'>We absorbed another changeling, and we grow stronger.  Our genomes increase.</span>"
 
-/*
-		if(T.mind.changeling.purchasedpowers)
-			for(var/datum/power/changeling/Tp in T.mind.changeling.purchasedpowers)
-				if(Tp in changeling.purchasedpowers)
-					continue
-				else
-					changeling.purchasedpowers += Tp
-
-					if(!Tp.isVerb)
-						call(Tp.verbpath)()
-					else
-						src.make_changeling()
-
-		changeling.chem_charges += T.mind.changeling.chem_charges
-		changeling.geneticpoints += T.mind.changeling.geneticpoints
-*/
 		T.mind.changeling.chem_charges = 0
-		T.mind.changeling.geneticpoints = 0
+		T.mind.changeling.geneticpoints = -1
+		T.mind.changeling.max_geneticpoints = -1 //To prevent revival.
 		T.mind.changeling.absorbedcount = 0
 
 	changeling.absorbedcount++

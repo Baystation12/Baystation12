@@ -16,6 +16,11 @@
 		return
 
 	var/mob/living/carbon/C = src
+
+	if(changeling.max_geneticpoints < 0) //Absorbed by another ling
+		src << "<span class='danger'>You have no genomes, not even your own, and cannot regenerate.</span>"
+		return 0
+
 	if(!C.stat && alert("Are we sure we wish to fake our death?",,"Yes","No") == "No")//Confirmation for living changelings if they want to fake their death
 		return
 	C << "<span class='notice'>We will attempt to regenerate our form.</span>"
@@ -32,25 +37,6 @@
 		//The ling will now be able to choose when to revive
 		src.verbs += /mob/proc/changeling_revive
 		src << "<span class='notice'>We are ready to rise.  Use the Revive verb when you are ready.</span>"
-		/*
-		// charge the changeling chemical cost for stasis
-		changeling.chem_charges -= 20
-
-		// restore us to health
-		C.revive()
-
-		// remove our fake death flag
-		C.status_flags &= ~(FAKEDEATH)
-
-		// let us move again
-		C.update_canmove()
-
-		// re-add out changeling powers
-		C.make_changeling()
-
-		// sending display messages
-		C << "<span class='notice'>We have regenerated.</span>"
-		*/
 
 	feedback_add_details("changeling_powers","FD")
 	return 1

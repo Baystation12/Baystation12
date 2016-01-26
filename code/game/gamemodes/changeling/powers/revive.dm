@@ -8,6 +8,10 @@
 	if(!changeling)
 		return 0
 
+	if(changeling.max_geneticpoints < 0) //Absorbed by another ling
+		src << "<span class='danger'>You have no genomes, not even your own, and cannot revive.</span>"
+		return 0
+
 	if(src.stat == DEAD)
 		dead_mob_list -= src
 		living_mob_list += src
@@ -21,6 +25,8 @@
 	C.SetStunned(0)
 	C.SetWeakened(0)
 	C.radiation = 0
+	C.halloss = 0
+	C.shock_stage = 0 //Pain
 	C.heal_overall_damage(C.getBruteLoss(), C.getFireLoss())
 	C.reagents.clear_reagents()
 	C.restore_all_organs() //Covers things like fractures and other things not covered by the above.
