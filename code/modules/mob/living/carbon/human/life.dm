@@ -1413,7 +1413,7 @@
 /mob/living/carbon/human/proc/handle_hud_list()
 	if (BITTEST(hud_updateflag, HEALTH_HUD))
 		var/image/holder = hud_list[HEALTH_HUD]
-		if(stat == 2)
+		if(stat == DEAD)
 			holder.icon_state = "hudhealth-100" 	// X_X
 		else
 			var/percentage_health = RoundHealth((health-config.health_threshold_crit)/(maxHealth-config.health_threshold_crit)*100)
@@ -1421,11 +1421,12 @@
 		hud_list[HEALTH_HUD] = holder
 
 	if (BITTEST(hud_updateflag, LIFE_HUD))
-		var/image/holder = hud_list[STATUS_HUD]
+		var/image/holder = hud_list[LIFE_HUD]
 		if(stat == DEAD)
 			holder.icon_state = "huddead"
 		else
 			holder.icon_state = "hudhealthy"
+		hud_list[LIFE_HUD] = holder
 
 	if (BITTEST(hud_updateflag, STATUS_HUD))
 		var/foundVirus = 0
@@ -1438,13 +1439,10 @@
 				break
 
 		var/image/holder = hud_list[STATUS_HUD]
-		var/image/holder2 = hud_list[STATUS_HUD_OOC]
-		if(stat == 2)
+		if(stat == DEAD)
 			holder.icon_state = "huddead"
-			holder2.icon_state = "huddead"
 		else if(status_flags & XENO_HOST)
 			holder.icon_state = "hudxeno"
-			holder2.icon_state = "hudxeno"
 		else if(foundVirus)
 			holder.icon_state = "hudill"
 		else if(has_brain_worms())
@@ -1453,13 +1451,20 @@
 				holder.icon_state = "hudbrainworm"
 			else
 				holder.icon_state = "hudhealthy"
-			holder2.icon_state = "hudbrainworm"
 		else
 			holder.icon_state = "hudhealthy"
-			if(virus2.len)
-				holder2.icon_state = "hudill"
-			else
-				holder2.icon_state = "hudhealthy"
+
+		var/image/holder2 = hud_list[STATUS_HUD_OOC]
+		if(stat == DEAD)
+			holder2.icon_state = "huddead"
+		else if(status_flags & XENO_HOST)
+			holder2.icon_state = "hudxeno"
+		else if(has_brain_worms())
+			holder2.icon_state = "hudbrainworm"
+		else if(virus2.len)
+			holder2.icon_state = "hudill"
+		else
+			holder2.icon_state = "hudhealthy"
 
 		hud_list[STATUS_HUD] = holder
 		hud_list[STATUS_HUD_OOC] = holder2
@@ -1598,8 +1603,6 @@
 			remoteview_target = null
 			reset_view(null, 0)
 
-	eye_blind =  0
-	blinded = 0
 	update_equipment_vision()
 	species.handle_vision(src)
 

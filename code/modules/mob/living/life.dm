@@ -43,6 +43,8 @@
 	for(var/obj/item/weapon/grab/G in src)
 		G.process()
 
+	blinded = 0 // Placing this here just show how out of place it is.
+	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
 	if(handle_regular_status_updates()) // Status & health update, are we dead or alive etc.
 		handle_disabilities() // eye, ear, brain damages
 		handle_status_effects() //all special effects, stunned, weakened, jitteryness, hallucination, sleeping, etc
@@ -51,8 +53,7 @@
 
 	update_canmove()
 
-	if(client)
-		handle_regular_hud_updates()
+	handle_regular_hud_updates()
 
 /mob/living/proc/handle_breathing()
 	return
@@ -180,7 +181,6 @@
 /mob/living/proc/handle_hud_icons()
 	handle_hud_icons_health()
 	handle_hud_glasses()
-	return
 
 /mob/living/proc/handle_hud_icons_health()
 	return
