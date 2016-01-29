@@ -135,6 +135,9 @@
 		var/datum/computer_file/C = F.clone(0)
 		HDD.store_file(C)
 
+	nanomanager.update_uis(NM)
+	return 0
+
 /datum/computer_file/program/filemanager/proc/parse_tags(var/t)
 	t = replacetext(t, "\[center\]", "<center>")
 	t = replacetext(t, "\[/center\]", "</center>")

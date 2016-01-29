@@ -367,6 +367,9 @@
 			update_icon()
 		return 1
 
+	update_uis()
+	return 0
+
 // Used in following function to reduce copypaste
 /obj/item/modular_computer/proc/power_failure()
 	if(enabled) // Shut down the computer
