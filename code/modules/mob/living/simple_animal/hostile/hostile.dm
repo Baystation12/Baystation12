@@ -186,8 +186,8 @@
 	var/obj/item/projectile/A = new projectiletype(user:loc)
 	playsound(user, projectilesound, 100, 1)
 	if(!A)	return
-
-	A.launch(target, "chest")
+	var/def_zone = get_exposed_defense_zone(target)
+	A.launch(target, def_zone)
 
 /mob/living/simple_animal/hostile/proc/DestroySurroundings()
 	if(prob(break_stuff_probability))
