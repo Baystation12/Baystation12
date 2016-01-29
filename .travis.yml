@@ -40,6 +40,7 @@ script:
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
   - cp config/example/* config/
   - scripts/dm.sh -DUNIT_TEST baystation12.dme
+  - grep "0 warnings" build_log.txt
   - DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt
   - grep "All Unit Tests Passed" log.txt
   - (! grep "runtime error:" log.txt)
