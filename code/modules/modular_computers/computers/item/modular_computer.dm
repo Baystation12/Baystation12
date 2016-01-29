@@ -10,6 +10,9 @@
 	var/datum/computer_file/program/active_program = null	// A currently active program running on the computer.
 	var/hardware_flag = 0									// A flag that describes this device type
 	var/last_power_usage = 0
+	var/last_battery_percent = 0							// Used for deciding if battery percentage has chandged
+	var/last_world_time = "00:00"
+	var/list/last_header_icons
 	var/computer_emagged = 0								// Whether the computer is emagged.
 
 	var/base_active_power_usage = 50						// Power usage when the computer is open (screen is active) and can be interacted with. Remember hardware can use power too.
@@ -70,7 +73,7 @@
 
 	card_slot.stored_card.forceMove(get_turf(src))
 	card_slot.stored_card = null
-	nanomanager.update_uis(src)
+	update_uis()
 	user << "You remove the card from \the [src]"
 
 /obj/item/modular_computer/attack_ghost(var/mob/dead/observer/user)
@@ -208,7 +211,9 @@
 		P.ntnet_status = get_ntnet_status()
 		P.computer_emagged = computer_emagged
 
+
 	handle_power() // Handles all computer power interaction
+	check_update_ui_need()
 
 // Function used by NanoUI's to obtain data for header. All relevant entries begin with "PC_"
 /obj/item/modular_computer/proc/get_header_data()
@@ -382,6 +387,7 @@
 
 	if(battery_module)
 		battery_module.battery.use(power_usage * CELLRATE)
+
 	last_power_usage = power_usage
 
 /obj/item/modular_computer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
@@ -397,7 +403,7 @@
 		user.drop_from_inventory(I)
 		card_slot.stored_card = I
 		I.forceMove(src)
-		nanomanager.update_uis(src)
+		update_uis()
 		user << "You insert \the [I] into \the [src]."
 		return
 	if(istype(W, /obj/item/weapon/paper))
@@ -577,3 +583,37 @@
 	if(processor_unit)
 		all_components.Add(processor_unit)
 	return all_components
+
+/obj/item/modular_computer/proc/update_uis()
+	if(active_program) //Should we update program ui or computer ui?
+		nanomanager.update_uis(active_program)
+		if(active_program.NM)
+			nanomanager.update_uis(active_program.NM)
+	else
+		nanomanager.update_uis(src)
+
+/obj/item/modular_computer/proc/check_update_ui_need()
+	var/ui_updated_needed = 0
+	if(battery_module)
+		var/batery_percent = battery_module.battery.percent()
+		if(last_battery_percent != batery_percent) //Let's update UI on percent chandge
+			ui_updated_needed = 1
+			last_battery_percent = batery_percent
+
+	if(worldtime2text() != last_world_time)
+		last_world_time = worldtime2text()
+		ui_updated_needed = 1
+
+	if(idle_threads.len)
+		var/list/current_header_icons = list()
+		for(var/datum/computer_file/program/P in idle_threads)
+			if(!P.ui_header)
+				continue
+			current_header_icons[P.type] = P.ui_header
+
+		if (!(last_header_icons.len == current_header_icons.len && !length(last_header_icons^current_header_icons)))
+			last_header_icons = current_header_icons
+			ui_updated_needed = 1
+
+	if(ui_updated_needed)
+		update_uis
