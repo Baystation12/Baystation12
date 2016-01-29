@@ -610,8 +610,10 @@
 			if(!P.ui_header)
 				continue
 			current_header_icons[P.type] = P.ui_header
+		if(!last_header_icons)
+			last_header_icons = current_header_icons
 
-		if (!(last_header_icons.len == current_header_icons.len && !length(last_header_icons^current_header_icons)))
+		if(list2params(last_header_icons) != list2params(current_header_icons))
 			last_header_icons = current_header_icons
 			ui_updated_needed = 1
 
