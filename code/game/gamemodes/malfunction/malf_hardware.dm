@@ -60,11 +60,6 @@
 
 /datum/malf_hardware/strong_turrets/install()
 	..()
-	for(var/obj/machinery/turret/T in machines)
-		T.maxhealth = round(initial(T.maxhealth) * 1.4)
-		T.shot_delay = round(initial(T.shot_delay) / 2)
-		T.auto_repair = 1
-		T.active_power_usage = round(initial(T.active_power_usage) * 5)
 	for(var/obj/machinery/porta_turret/T in machines)
 		T.maxhealth = round(initial(T.maxhealth) * 1.4)
 		T.shot_delay = round(initial(T.shot_delay) / 2)
