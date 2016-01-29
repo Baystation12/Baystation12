@@ -613,9 +613,15 @@
 		if(!last_header_icons)
 			last_header_icons = current_header_icons
 
-		if(list2params(last_header_icons) != list2params(current_header_icons))
+		else if(!listequal(last_header_icons, current_header_icons))
 			last_header_icons = current_header_icons
 			ui_updated_needed = 1
+		else
+			for(var/x in last_header_icons|current_header_icons)
+				if(last_header_icons[x]!=current_header_icons[x])
+					last_header_icons = current_header_icons
+					ui_updated_needed = 1
+					break
 
 	if(ui_updated_needed)
 		update_uis()
