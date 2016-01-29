@@ -1,4 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - experiment: "We now support tg's online changelog auto-creation. See https://tgstation13.org/wiki/Guide_to_Changelogs#Online_auto-creation."
