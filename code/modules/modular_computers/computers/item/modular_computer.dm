@@ -616,4 +616,4 @@
 			ui_updated_needed = 1
 
 	if(ui_updated_needed)
-		update_uis
+		update_uis()
