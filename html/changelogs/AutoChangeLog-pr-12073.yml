@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - bugfix: "Agent ids can now be assigned an owner even after having been dropped on the floor."
