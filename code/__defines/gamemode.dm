@@ -9,25 +9,9 @@
 #define SEC_LEVEL_RED   2
 #define SEC_LEVEL_DELTA 3
 
-#define BE_TRAITOR    0x1
-#define BE_OPERATIVE  0x2
-#define BE_CHANGELING 0x4
-#define BE_WIZARD     0x8
-#define BE_MALF       0x10
-#define BE_REV        0x20
-#define BE_ALIEN      0x40
-#define BE_AI         0x80
-#define BE_CULTIST    0x100
-#define BE_MONKEY     0x200
-#define BE_NINJA      0x400
-#define BE_RAIDER     0x800
-#define BE_PLANT      0x1000
-#define BE_MUTINEER   0x2000
-#define BE_PAI        0x4000
-#define BE_LOYALIST   0x8000
-
-#define IS_MODE_COMPILED(MODE) (ispath(text2path("/datum/game_mode/"+(MODE))))
-
+#define BE_PLANT "BE_PLANT"
+#define BE_SYNTH "BE_SYNTH"
+#define BE_PAI   "BE_PAI"
 
 // Antagonist datum flags.
 #define ANTAG_OVERRIDE_JOB        0x1 // Assigned job is set to MODE when spawning.

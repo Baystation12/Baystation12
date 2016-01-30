@@ -2,7 +2,6 @@ var/datum/antagonist/ninja/ninjas
 
 /datum/antagonist/ninja
 	id = MODE_NINJA
-	role_type = BE_NINJA
 	role_text = "Ninja"
 	role_text_plural = "Ninja"
 	bantype = "ninja"

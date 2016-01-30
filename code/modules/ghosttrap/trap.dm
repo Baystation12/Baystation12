@@ -23,7 +23,7 @@ var/list/ghost_traps
 	var/object = "positronic brain"
 	var/minutes_since_death = 0     // If non-zero the ghost must have been dead for this many minutes to be allowed to spawn
 	var/list/ban_checks = list("AI","Cyborg")
-	var/pref_check = BE_AI
+	var/pref_check = BE_SYNTH
 	var/ghost_trap_message = "They are occupying a positronic brain now."
 	var/ghost_trap_role = "Positronic Brain"
 	var/can_set_own_name = TRUE
@@ -150,7 +150,7 @@ var/list/ghost_traps
 /datum/ghosttrap/borer
 	object = "cortical borer"
 	ban_checks = list("Borer")
-	pref_check = BE_ALIEN
+	pref_check = MODE_BORER
 	ghost_trap_message = "They are occupying a borer now."
 	ghost_trap_role = "Cortical Borer"
 	can_set_own_name = FALSE

@@ -2,8 +2,7 @@ var/datum/antagonist/actor/actor
 
 /datum/antagonist/actor
 	id = MODE_ACTOR
-	bantype = "operative"
-	role_type = BE_OPERATIVE
+	bantype = "actor"
 	role_text = "NanoTrasen Actor"
 	role_text_plural = "NanoTrasen Actors"
 	welcome_text = "You've been hired to entertain people through the power of television!"

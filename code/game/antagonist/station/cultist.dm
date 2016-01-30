@@ -13,7 +13,6 @@ var/datum/antagonist/cultist/cult
 	bantype = "cultist"
 	restricted_jobs = list("Chaplain","AI", "Cyborg", "Internal Affairs Agent", "Head of Security", "Captain")
 	protected_jobs = list("Security Officer", "Warden", "Detective")
-	role_type = BE_CULTIST
 	feedback_tag = "cult_objective"
 	antag_indicator = "cult"
 	welcome_text = "You have a talisman in your possession; one that will help you start the cult on this station. Use it well and remember - there are others."
