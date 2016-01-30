@@ -4,20 +4,31 @@ Used In File(s): \code\game\machinery\computer\camera.dm
  -->
 {{:helper.link('Show Map', 'pin-s', {'showMap' : 1})}}
 {{:helper.link('Reset', 'refresh', {'reset' : 1})}}
+<div style="float:left;">
+    <div class='item'>
+        <div class='itemLabel'>Current Camera:&nbsp;</div>
+        {{if data.current_camera}}
+            <div class='itemContent'><b>{{:data.current_camera.name}}</b></div>
+        {{else}}
+            <div class='itemContent'>None</div>
+        {{/if}}
+    </div>
+</div>
 <div class='item'>
-	<div class='itemLabel'>Current Camera: </div>
-	{{if data.current}}
-		<div class='itemContent'><b>{{:data.current.name}}</b></div>
-	{{else}}
-		<div class='itemContent'>None</div>
-	{{/if}}
+	<div class='itemLabel'>Networks:</div>
+</div>
+{{for data.networks}}
+	{{:helper.link(value, '', {'switch_network' : value}, null, data.current_network == value ? 'selected' : null)}}
+{{/for}}
+<div class='item'>
+	<div class='itemLabel'>Cameras:</div>
 </div>
 {{for data.cameras}}
-	{{if data.current && value.name == data.current.name}}
-		{{:helper.link(value.name, '', {'switchTo' : value.camera}, 'selected')}}
+	{{if data.current_camera && value.name == data.current_camera.name}}
+		{{:helper.link(value.name, '', {'switch_camera' : value.camera}, 'selected')}}
 	{{else value.deact}}
 		{{:helper.link(value.name + " (deactivated)", '', {}, 'inactive')}}
 	{{else}}
-		{{:helper.link(value.name, '', {'switchTo' : value.camera})}}
+		{{:helper.link(value.name, '', {'switch_camera' : value.camera})}}
 	{{/if}}
 {{/for}}
