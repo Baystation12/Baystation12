@@ -224,9 +224,6 @@
 
 	msg += "</span>"
 
-	if(getBrainLoss() >= 60)
-		msg += "[T.He] [T.has] a stupid expression on [T.his] face.\n"
-
 	if(species.show_ssd && (!species.has_organ["brain"] || has_brain()) && stat != DEAD)
 		if(!key)
 			msg += "<span class='deadsay'>[T.He] [T.is] [species.show_ssd]. It doesn't look like [T.he] [T.is] waking up anytime soon.</span>\n"

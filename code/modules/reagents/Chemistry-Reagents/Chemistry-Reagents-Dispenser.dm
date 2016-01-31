@@ -222,7 +222,7 @@
 			step(M, pick(cardinal))
 		if(prob(5))
 			M.emote(pick("twitch", "drool", "moan"))
-		M.adjustBrainLoss(2)
+		M.adjustBrainLoss(0.1)
 
 /datum/reagent/phosphorus
 	name = "Phosphorus"
