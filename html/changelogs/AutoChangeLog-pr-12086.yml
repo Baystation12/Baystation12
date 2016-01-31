@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - bugfix: "Monkey cubes can now be expanded in sinks again."
