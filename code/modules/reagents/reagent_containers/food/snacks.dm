@@ -1595,6 +1595,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube
 	name = "monkey cube"
 	desc = "Just add water!"
+	flags = 0
 	icon_state = "monkeycube"
 	bitesize = 12
 	filling_color = "#ADAC7F"
