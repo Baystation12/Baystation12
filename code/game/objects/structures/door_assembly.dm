@@ -277,7 +277,6 @@
 				path = text2path("/obj/machinery/door/airlock[airlock_type]")
 
 			var/obj/machinery/door/new_airlock = new path(src.loc, src)
-			new_airlock.dir = src.dir
 			qdel(src)
 	else
 		..()
