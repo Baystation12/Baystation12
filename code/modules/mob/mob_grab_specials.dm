@@ -146,11 +146,13 @@
 		can_eat = 1
 	else
 		var/mob/living/carbon/human/H = user
-		if(istype(H) && H.species.gluttonous)
-			if(H.species.gluttonous == 2)
-				can_eat = 2
-			else if((H.mob_size > target.mob_size) && !ishuman(target) && (iscarbon(target) || isanimal(target)))
+		if(istype(H) && H.species.gluttonous && (iscarbon(target) || isanimal(target)))
+			if(H.species.gluttonous == 1 && (target.mob_size <= MOB_TINY) && !ishuman(target)) // Anything MOB_TINY or smaller
 				can_eat = 1
+			else if(H.species.gluttonous == 2 && (H.mob_size > target.mob_size)) // Anything we're larger than
+				can_eat = 1
+			else if(H.species.gluttonous == 3) // Eat anything ever
+				can_eat = 2
 
 	if(can_eat)
 		var/mob/living/carbon/attacker = user
