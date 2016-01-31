@@ -174,7 +174,7 @@
 			occupant.adjustCloneLoss(-2 * heal_rate)
 
 			//Premature clones may have brain damage.
-			occupant.adjustBrainLoss(-(n_ceil(0.5*heal_rate)))
+			occupant.adjustBrainLoss(-(ceil(0.5*heal_rate)))
 
 			//So clones don't die of oxyloss in a running pod.
 			if(occupant.reagents.get_reagent_amount("inaprovaline") < 30)
