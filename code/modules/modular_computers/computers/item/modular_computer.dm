@@ -310,12 +310,12 @@
 		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_enable_component"])
 		if(H && istype(H) && !H.enabled)
 			H.enabled = 1
-		return 1
+		. = 1
 	if( href_list["PC_disable_component"] )
 		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_disable_component"])
 		if(H && istype(H) && H.enabled)
 			H.enabled = 0
-		return 1
+		. = 1
 	if( href_list["PC_shutdown"] )
 		shutdown_computer()
 		return 1
@@ -366,6 +366,8 @@
 			active_program = P
 			update_icon()
 		return 1
+	if(.)
+		update_uis()
 
 // Used in following function to reduce copypaste
 /obj/item/modular_computer/proc/power_failure()
@@ -610,10 +612,18 @@
 			if(!P.ui_header)
 				continue
 			current_header_icons[P.type] = P.ui_header
+		if(!last_header_icons)
+			last_header_icons = current_header_icons
 
-		if (!(last_header_icons.len == current_header_icons.len && !length(last_header_icons^current_header_icons)))
+		else if(!listequal(last_header_icons, current_header_icons))
 			last_header_icons = current_header_icons
 			ui_updated_needed = 1
+		else
+			for(var/x in last_header_icons|current_header_icons)
+				if(last_header_icons[x]!=current_header_icons[x])
+					last_header_icons = current_header_icons
+					ui_updated_needed = 1
+					break
 
 	if(ui_updated_needed)
 		update_uis()
