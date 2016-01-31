@@ -1,5 +1,5 @@
 
-/datum/lang/main/obj/structure/sign
+/datum/lang/ru_RU/obj/structure/sign
 	name = "sign"
 
 	proc/unfasten(var/args) return "You unfasten the sign with your [args ? translation(args) : "screwdriver"]."
@@ -203,8 +203,23 @@
 			var/emag = "You emag the barsign. Takeover in progress..."
 			var/pick_name = "Bar Sign"
 			var/pick_desc = "Available Signage"
+	poster
+		name = "poster"
+		proc/name()
+			if(refObj:ruined)
+				return "ripped poster"
+			else
+				return "[initial(name)] - [translation(refObj:design) ? translation(refObj:design) : "empty"]"
+		desc = "A large piece of space-resistant printed paper."
+		proc/desc()
+			if(refObj:ruined)
+				return "You can't make out anything from the poster's original print. It's ruined."
+			else
+				return "[initial(desc)][translation(refObj:design, "desc") ? " [translation(refObj:design, "desc")]" : ""]"
 
-/datum/lang/main/obj/item/sign
-	var/which_direction = "In which direction?"
-	var/select_direction = "Select direction"
-	proc/fasten(var/args)	return "You fasten \the [translation(args["sign"]) ? translation(args["sign"]) : "sign"] with your [translation(args["tool"]) ? translation(args["tool"]) : "screwdriver"]."
+		var/remove_remnants = "You remove the remnants of the poster."
+		var/remove_poster = "You carefully remove the poster from the wall."
+
+		var/remove_poster_name = "Do I want to rip the poster from the wall?"
+		var/remove_poster_desc = "You think..."
+		proc/rip_poster_m(var/args = null)	return "[args ? args : "Someone"] rips [GetVar()] in a single, decisive motion!"

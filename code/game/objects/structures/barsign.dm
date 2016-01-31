@@ -1,6 +1,4 @@
 
-var/global/list/barsigns = list()
-
 /obj/structure/sign/double/barsign
 	name = "bar sign"
 	desc = "A bar sign with no writing on it"
@@ -184,6 +182,17 @@ var/global/list/barsigns = list()
 	name = "Carpe Carp"
 	desc = null
 	icon_state = "carpecarp"
+
+/datum/barsign/casino
+	name = "Casino"
+	desc = null
+	icon_state = "casino"
+	hidden = 1
+
+/obj/structure/sign/double/barsign/casino
+	icon_state = "casino"
+	sign = /datum/barsign/casino
+	no_change = 1
 
 /datum/barsign/cavern
 	name = "The Cavern"

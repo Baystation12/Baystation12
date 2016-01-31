@@ -1,5 +1,5 @@
 
-/datum/lang/ru_RU/datum/barsign
+/datum/lang/main/datum/barsign
 	name = null
 	desc = null
 
@@ -38,6 +38,9 @@
 		desc = null
 	carpecarp
 		name = "Carpe Carp"
+		desc = null
+	casino
+		name = "Casino"
 		desc = null
 	cavern
 		name = "The Cavern"

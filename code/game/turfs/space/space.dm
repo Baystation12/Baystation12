@@ -34,7 +34,7 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 			return
 		var/obj/item/stack/rods/R = C
 		if (R.use(1))
-			user << "[translation(src, "lattice")]"
+			user << "\blue [translation(src, "lattice")]"
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			ReplaceWithLattice()
 		return
@@ -51,7 +51,7 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 			S.use(1)
 			return
 		else
-			user << "[translation(src, "need_support")]"
+			user << "\red [translation(src, "need_support")]"
 	return
 
 
@@ -59,7 +59,7 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 
 /turf/space/Entered(atom/movable/A as mob|obj)
 	if(movement_disabled)
-		usr << "[translation(src, "movement_disabled")]" //This is to identify lag problems
+		usr << "\red [translation(src, "movement_disabled")]" //This is to identify lag problems
 		return
 	..()
 	if ((!(A) || src != A.loc))	return
@@ -85,7 +85,7 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 				if(istype(A, /mob/living))
 					var/mob/living/MM = A
 					if(MM.client && !MM.stat)
-						MM << "[translation(src, "nuke")]"
+						MM << "\red [translation(src, "nuke")]"
 						if(MM.x <= TRANSITIONEDGE)
 							MM.inertia_dir = 4
 						else if(MM.x >= world.maxx -TRANSITIONEDGE)
