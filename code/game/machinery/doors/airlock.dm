@@ -1028,6 +1028,9 @@ About the new airlock wires panel:
 		else
 			name = "[istext(assembly.glass) ? "[assembly.glass] airlock" : assembly.base_name]"
 
+		//get the dir from the assembly
+		set_dir(assembly.dir)
+
 	//wires
 	var/turf/T = get_turf(newloc)
 	if(T && (T.z in config.admin_levels))
