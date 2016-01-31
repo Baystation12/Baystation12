@@ -9,7 +9,7 @@
 	var/list/network
 	var/locked = 1
 	var/emagged = 0
-	
+
 /obj/item/weapon/circuitboard/security/New()
 	..()
 	network = station_networks
@@ -18,7 +18,7 @@
 	name = T_BOARD("engineering camera monitor")
 	build_path = /obj/machinery/computer/security/engineering
 	req_access = list()
-	
+
 /obj/item/weapon/circuitboard/security/engineering/New()
 	..()
 	network = engineering_networks
@@ -31,12 +31,12 @@
 
 /obj/item/weapon/circuitboard/security/construct(var/obj/machinery/computer/security/C)
 	if (..(C))
-		C.network = network
+		C.network = network.Copy()
 
 /obj/item/weapon/circuitboard/security/deconstruct(var/obj/machinery/computer/security/C)
 	if (..(C))
-		network = C.network
-	
+		network = C.network.Copy()
+
 /obj/item/weapon/circuitboard/security/emag_act(var/remaining_charges, var/mob/user)
 	if(emagged)
 		user << "Circuit lock is already removed."

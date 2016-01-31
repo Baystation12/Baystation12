@@ -1,28 +1,25 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
-/var/camera_cache_id = 1
-
-/proc/invalidateCameraCache()
-	camera_cache_id = (++camera_cache_id % 999999)
-
 /obj/machinery/computer/security
 	name = "security camera monitor"
 	desc = "Used to access the various cameras on the station."
 	icon_keyboard = "security_key"
 	icon_screen = "cameras"
 	light_color = "#a91515"
-	var/obj/machinery/camera/current = null
+	var/current_network = null
+	var/obj/machinery/camera/current_camera = null
 	var/last_pic = 1.0
 	var/list/network
 	var/mapping = 0//For the overview file, interesting bit of code.
 	var/cache_id = 0
 	circuit = /obj/item/weapon/circuitboard/security
-	var/camera_cache = null
 
 	New()
 		if(!network)
-			network = station_networks
+			network = station_networks.Copy()
 		..()
+		if(network.len)
+			current_network = network[1]
 
 	attack_ai(var/mob/user as mob)
 		return attack_hand(user)
@@ -30,9 +27,9 @@
 	check_eye(var/mob/user as mob)
 		if (user.stat || ((get_dist(user, src) > 1 || !( user.canmove ) || user.blinded) && !istype(user, /mob/living/silicon))) //user can't see - not sure why canmove is here.
 			return -1
-		if(!current)
+		if(!current_camera)
 			return 0
-		var/viewflag = current.check_eye(user)
+		var/viewflag = current_camera.check_eye(user)
 		if ( viewflag < 0 ) //camera doesn't work
 			reset_current()
 		return viewflag
@@ -44,25 +41,11 @@
 
 		var/data[0]
 
-		data["current"] = null
-
-		if(camera_cache_id != cache_id)
-			cache_id = camera_cache_id
-			cameranet.process_sort()
-
-			var/cameras[0]
-			for(var/obj/machinery/camera/C in cameranet.cameras)
-				if(!can_access_camera(C))
-					continue
-
-				var/cam = C.nano_structure()
-				cameras[++cameras.len] = cam
-
-			camera_cache=list2json(cameras)
-
-		if(current)
-			data["current"] = current.nano_structure()
-		data["cameras"] = list("__json_cache" = camera_cache)
+		data["current_camera"] = current_camera ? current_camera.nano_structure() : null
+		data["current_network"] = current_network
+		data["networks"] = network ? network : list()
+		if(current_network)
+			data["cameras"] = camera_repository.cameras_in_network(current_network)
 
 		ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 		if (!ui)
@@ -75,22 +58,32 @@
 
 			ui.set_initial_data(data)
 			ui.open()
-			ui.set_auto_update(1)
 
 	Topic(href, href_list)
-		if(href_list["switchTo"])
+		if(..())
+			return 1
+		if(href_list["switch_camera"])
 			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
 			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
-			var/obj/machinery/camera/C = locate(href_list["switchTo"]) in cameranet.cameras
-			if(!C) return
+			var/obj/machinery/camera/C = locate(href_list["switch_camera"]) in cameranet.cameras
+			if(!C)
+				return
+			if(!(current_network in C.network))
+				return
 
 			switch_to_camera(usr, C)
+			return 1
+		else if(href_list["switch_network"])
+			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
+			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
+			if(href_list["switch_network"] in network)
+				current_network = href_list["switch_network"]
 			return 1
 		else if(href_list["reset"])
 			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
 			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
 			reset_current()
-			usr.reset_view(current)
+			usr.reset_view(current_camera)
 			return 1
 		else
 			. = ..()
@@ -104,12 +97,6 @@
 		if(!isAI(user))
 			user.set_machine(src)
 		ui_interact(user)
-
-	proc/can_access_camera(var/obj/machinery/camera/C)
-		var/list/shared_networks = src.network & C.network
-		if(shared_networks.len)
-			return 1
-		return 0
 
 	proc/switch_to_camera(var/mob/user, var/obj/machinery/camera/C)
 		//don't need to check if the camera works for AI because the AI jumps to the camera location and doesn't actually look through cameras.
@@ -126,7 +113,7 @@
 		if (!C.can_use() || user.stat || (get_dist(user, src) > 1 || user.machine != src || user.blinded || !( user.canmove ) && !istype(user, /mob/living/silicon)))
 			return 0
 		set_current(C)
-		user.reset_view(current)
+		user.reset_view(current_camera)
 		check_eye(user)
 		return 1
 
@@ -160,26 +147,37 @@
 		if(can_access_camera(jump_to))
 			switch_to_camera(user,jump_to)
 
+/obj/machinery/computer/security/process()
+	if(cache_id != camera_repository.camera_cache_id)
+		cache_id = camera_repository.camera_cache_id
+		nanomanager.update_uis(src)
+
+/obj/machinery/computer/security/proc/can_access_camera(var/obj/machinery/camera/C)
+	var/list/shared_networks = src.network & C.network
+	if(shared_networks.len)
+		return 1
+	return 0
+
 /obj/machinery/computer/security/proc/set_current(var/obj/machinery/camera/C)
-	if(current == C)
+	if(current_camera == C)
 		return
 
-	if(current)
+	if(current_camera)
 		reset_current()
 
-	src.current = C
-	if(current)
+	src.current_camera = C
+	if(current_camera)
 		use_power = 2
-		var/mob/living/L = current.loc
+		var/mob/living/L = current_camera.loc
 		if(istype(L))
 			L.tracking_initiated()
 
 /obj/machinery/computer/security/proc/reset_current()
-	if(current)
-		var/mob/living/L = current.loc
+	if(current_camera)
+		var/mob/living/L = current_camera.loc
 		if(istype(L))
 			L.tracking_cancelled()
-	current = null
+	current_camera = null
 	use_power = 1
 
 //Camera control: mouse.
@@ -192,7 +190,7 @@
 /mob/Move(n,direct)
 	if(istype(machine,/obj/machinery/computer/security))
 		var/obj/machinery/computer/security/console = machine
-		var/turf/T = get_turf(console.current)
+		var/turf/T = get_turf(console.current_camera)
 		for(var/i;i<10;i++)
 			T = get_step(T,direct)
 		console.jump_on_click(src,T)
@@ -248,7 +246,7 @@
 
 /obj/machinery/computer/security/engineering/New()
 	if(!network)
-		network = engineering_networks
+		network = engineering_networks.Copy()
 	..()
 
 /obj/machinery/computer/security/nuclear
