@@ -118,8 +118,8 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 		return 1
 	if(O.is_open_container())
 		return 0
-	if(!istype(O, /obj/item/stack/material/glass) && !istype(O, /obj/item/stack/material/gold) && !istype(O, /obj/item/stack/material/diamond) && !istype(O, /obj/item/stack/material/uranium))
-		user << "<span class='notice'>You cannot insert this item into \the [src].</span>"
+	if(!istype(O, /obj/item/stack/material))
+		user << "<span class='notice'>You cannot insert this item into \the [src]!</span>"
 		return 1
 	if(stat)
 		return 1
@@ -128,8 +128,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 		user << "<span class='notice'>\The [src]'s material bin is full. Please remove material before adding more.</span>"
 		return 1
 
-	var/obj/item/stack/stack = O
-
+	var/obj/item/stack/material/stack = O
 	var/amount = round(input("How many sheets do you want to add?") as num)
 	if(!O)
 		return
