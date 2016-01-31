@@ -1283,7 +1283,7 @@
 			if(M.loc != src)
 				stomach_contents.Remove(M)
 				continue
-			if(istype(M, /mob/living/carbon) && stat != 2)
+			if(iscarbon(M)|| isanimal(M))
 				if(M.stat == 2)
 					M.death(1)
 					stomach_contents.Remove(M)
