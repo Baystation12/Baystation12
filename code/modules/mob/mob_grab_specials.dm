@@ -158,9 +158,9 @@
 		var/mob/living/carbon/attacker = user
 		user.visible_message("<span class='danger'>[user] is attempting to devour [target]!</span>")
 		if(can_eat == 2)
-			if(!do_mob(user, target)||!do_after(user, 30)) return
+			if(!do_mob(user, target, 30)) return
 		else
-			if(!do_mob(user, target)||!do_after(user, 100)) return
+			if(!do_mob(user, target, 100)) return
 		user.visible_message("<span class='danger'>[user] devours [target]!</span>")
 		admin_attack_log(attacker, target, "Devoured.", "Was devoured by.", "devoured")
 		target.loc = user
