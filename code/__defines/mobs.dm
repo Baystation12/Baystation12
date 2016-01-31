@@ -117,6 +117,11 @@
 #define MOB_TINY 		5
 #define MOB_MINISCULE	1
 
+// Gluttony levels. 
+#define GLUT_TINY 1       // Eat anything tiny and smaller
+#define GLUT_SMALLER 2    // Eat anything smaller than we are
+#define GLUT_ANYTHING 3   // Eat anything, ever
+
 #define TINT_NONE 0
 #define TINT_MODERATE 1
 #define TINT_HEAVY 2
