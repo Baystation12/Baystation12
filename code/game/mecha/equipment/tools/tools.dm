@@ -83,8 +83,8 @@
 			if(!target_obj.vars.Find("unacidable") || target_obj.unacidable)	return
 		set_ready_state(0)
 		chassis.use_power(energy_drain)
-		chassis.visible_message("<span class='danger'>[chassis] starts to drill [target]</span>", "<span class='warning'>You hear the drill.</span>")
-		occupant_message("<span class='danger'>You start to drill [target]</span>")
+		chassis.visible_message("<span class='danger'>\The [chassis] starts to drill \the [target]</span>", "<span class='warning'>You hear a large drill.</span>")
+		occupant_message("<span class='danger'>You start to drill \the [target]</span>")
 		var/T = chassis.loc
 		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
@@ -92,15 +92,15 @@
 				if(istype(target, /turf/simulated/wall))
 					var/turf/simulated/wall/W = target
 					if(W.reinf_material)
-						occupant_message("<span class='warning'>[target] is too durable to drill through.</span>")
+						occupant_message("<span class='warning'>\The [target] is too durable to drill through.</span>")
 					else
-						log_message("Drilled through [target]")
+						log_message("Drilled through \the [target]")
 						target.ex_act(2)
 				else if(istype(target, /turf/simulated/mineral))
 					for(var/turf/simulated/mineral/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
 							M.GetDrilled()
-					log_message("Drilled through [target]")
+					log_message("Drilled through \the [target]")
 					if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
 						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in chassis:cargo
 						if(ore_box)
@@ -111,7 +111,7 @@
 					for(var/turf/simulated/floor/asteroid/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
 							M.gets_dug()
-					log_message("Drilled through [target]")
+					log_message("Drilled through \the [target]")
 					if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
 						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in chassis:cargo
 						if(ore_box)
@@ -119,7 +119,7 @@
 								if(get_dir(chassis,ore)&chassis.dir)
 									ore.Move(ore_box)
 				else if(target.loc == C)
-					log_message("Drilled through [target]")
+					log_message("Drilled through \the [target]")
 					target.ex_act(2)
 		return 1
 
@@ -138,8 +138,8 @@
 			if(target_obj.unacidable)	return
 		set_ready_state(0)
 		chassis.use_power(energy_drain)
-		chassis.visible_message("<span class='danger'>[chassis] starts to drill [target]</span>", "<span class='warning'>You hear the drill.</span>")
-		occupant_message("<span class='danger'>You start to drill [target]</span>")
+		chassis.visible_message("<span class='danger'>\The [chassis] starts to drill \the [target]</span>", "<span class='warning'>You hear a large drill.</span>")
+		occupant_message("<span class='danger'>You start to drill \the [target]</span>")
 		var/T = chassis.loc
 		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
@@ -147,13 +147,13 @@
 				if(istype(target, /turf/simulated/wall))
 					var/turf/simulated/wall/W = target
 					if(!W.reinf_material || do_after_cooldown(target))//To slow down how fast mechs can drill through the station
-						log_message("Drilled through [target]")
+						log_message("Drilled through \the [target]")
 						target.ex_act(3)
 				else if(istype(target, /turf/simulated/mineral))
 					for(var/turf/simulated/mineral/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
 							M.GetDrilled()
-					log_message("Drilled through [target]")
+					log_message("Drilled through \the [target]")
 					if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
 						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in chassis:cargo
 						if(ore_box)
@@ -163,14 +163,14 @@
 				else if(istype(target,/turf/simulated/floor/asteroid))
 					for(var/turf/simulated/floor/asteroid/M in range(target,1))
 						M.gets_dug()
-					log_message("Drilled through [target]")
+					log_message("Drilled through \the [target]")
 					if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
 						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in chassis:cargo
 						if(ore_box)
 							for(var/obj/item/weapon/ore/ore in range(target,1))
 								ore.Move(ore_box)
 				else if(target.loc == C)
-					log_message("Drilled through [target]")
+					log_message("Drilled through \the [target]")
 					target.ex_act(2)
 		return 1
 
