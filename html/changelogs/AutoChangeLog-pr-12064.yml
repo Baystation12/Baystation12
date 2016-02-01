@@ -1,4 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - bugfix: "ED-209s, hostile mobs, and mecha weapons should again be able to fire without issue."
