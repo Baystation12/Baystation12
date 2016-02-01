@@ -1,4 +1,5 @@
 /mob/living
+	see_in_dark = 2
 	see_invisible = SEE_INVISIBLE_LIVING
 
 	//Health and life related vars
