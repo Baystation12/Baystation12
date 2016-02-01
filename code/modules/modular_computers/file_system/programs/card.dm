@@ -160,6 +160,8 @@
 						computer.visible_message("<span class='notice'>[computer] prints out paper.</span>")
 		if("eject")
 			if(computer && computer.card_slot)
+				if(id_card)
+					data_core.manifest_modify(id_card.registered_name, id_card.assignment)
 				computer.proc_eject_id(user)
 		if("terminate")
 			if(computer && can_run(user, 1))
