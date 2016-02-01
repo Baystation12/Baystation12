@@ -4,6 +4,7 @@
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock-dark"
 	blocks_air = 1
+	density = 1
 
 /turf/simulated/mineral //wall piece
 	name = "Rock"
