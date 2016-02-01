@@ -382,6 +382,10 @@ macro "macro"
 		command = "a-intent right"
 		is-disabled = false
 	elem 
+		name = "CTRL+SHIFT+G"
+		command = ".configure graphics-hwmode on"
+		is-disabled = false
+	elem 
 		name = "CTRL+Q"
 		command = ".northwest"
 		is-disabled = false
