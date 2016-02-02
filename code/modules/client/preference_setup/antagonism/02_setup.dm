@@ -1,8 +1,8 @@
 var/global/list/uplink_locations = list("PDA", "Headset", "None")
 
 /datum/category_item/player_setup_item/antagonism/basic
-	name = "Basic"
-	sort_order = 1
+	name = "Setup"
+	sort_order = 2
 
 /datum/category_item/player_setup_item/antagonism/basic/load_character(var/savefile/S)
 	S["uplinklocation"] >> pref.uplinklocation
@@ -16,9 +16,9 @@ var/global/list/uplink_locations = list("PDA", "Headset", "None")
 	pref.uplinklocation	= sanitize_inlist(pref.uplinklocation, uplink_locations, initial(pref.uplinklocation))
 
 /datum/category_item/player_setup_item/antagonism/basic/content(var/mob/user)
-	. +="<b>Uplink Type : <a href='?src=\ref[src];antagtask=1'>[pref.uplinklocation]</a></b>"
-	. +="<br>"
-	. +="<b>Exploitable information:</b><br>"
+	. +="<b>Antag Setup:</b><br>"
+	. +="Uplink Type: <a href='?src=\ref[src];antagtask=1'>[pref.uplinklocation]</a><br>"
+	. +="Exploitable information:<br>"
 	if(jobban_isbanned(user, "Records"))
 		. += "<b>You are banned from using character records.</b><br>"
 	else

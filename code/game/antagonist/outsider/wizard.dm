@@ -2,7 +2,6 @@ var/datum/antagonist/wizard/wizards
 
 /datum/antagonist/wizard
 	id = MODE_WIZARD
-	role_type = BE_WIZARD
 	role_text = "Space Wizard"
 	role_text_plural = "Space Wizards"
 	bantype = "wizard"

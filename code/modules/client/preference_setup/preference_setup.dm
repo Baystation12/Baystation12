@@ -19,7 +19,7 @@
 	category_item_type = /datum/category_item/player_setup_item/occupation
 
 /datum/category_group/player_setup_category/appearance_preferences
-	name = "Antagonism"
+	name = "Roles"
 	sort_order = 4
 	category_item_type = /datum/category_item/player_setup_item/antagonism
 

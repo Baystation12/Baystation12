@@ -4,7 +4,7 @@
 	if(!host || !istype(host)) return
 
 	var/datum/ghosttrap/plant/P = get_ghost_trap("living plant")
-	P.request_player(host, "Someone is harvesting [display_name]. ")
+	P.request_player(host, "Someone is harvesting \a [display_name].")
 
 	spawn(75)
 		if(!host.ckey && !host.client)

@@ -2,7 +2,6 @@ var/datum/antagonist/revolutionary/revs
 
 /datum/antagonist/revolutionary
 	id = MODE_REVOLUTIONARY
-	role_type = BE_REV
 	role_text = "Head Revolutionary"
 	role_text_plural = "Revolutionaries"
 	bantype = "revolutionary"
