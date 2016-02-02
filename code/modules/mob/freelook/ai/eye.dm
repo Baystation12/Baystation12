@@ -54,7 +54,7 @@
 	create_eyeobj()
 	spawn(5)
 		if(eyeobj)
-			eyeobj.loc = src.loc
+			eyeobj.forceMove(src.loc)
 
 /mob/living/silicon/ai/Destroy()
 	destroy_eyeobj()
