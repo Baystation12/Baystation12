@@ -1,7 +1,7 @@
 /datum/expansion
 	var/datum/holder = null // The holder
 
-/datum/expansion/New(var/atom/holder)
+/datum/expansion/New(var/datum/holder)
 	if(!istype(holder))
 		CRASH("Invalid holder.")
 	src.holder = holder
