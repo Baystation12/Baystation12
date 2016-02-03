@@ -44,8 +44,7 @@ if [[ $DM == "" ]]; then
     exit 3
 fi
 
-"$DM" $dmepath.mdme > build_log.txt
-cat build_log.txt
+"$DM" $dmepath.mdme | tee build_log.txt
 retval=$?
 
 mv $dmepath.mdme.dmb $dmepath.dmb
