@@ -127,13 +127,12 @@
 	var/obj/effect/mist/mymist = null
 	var/ismist = 0				//needs a var so we can make it linger~
 	var/watertemp = "normal"	//freezing, normal, or boiling
-	var/mobpresent = 0		//true if there is a mob on the shower's loc, this is to ease process()
 	var/is_washing = 0
 	var/list/temperature_settings = list("normal" = 310, "boiling" = T0C+100, "freezing" = T0C)
 
 /obj/machinery/shower/New()
 	..()
-	create_reagents(2)
+	create_reagents(50)
 
 //add heat controls? when emagged, you can freeze to death in it?
 
@@ -171,6 +170,7 @@
 	overlays.Cut()					//once it's been on for a while, in addition to handling the water overlay.
 	if(mymist)
 		qdel(mymist)
+		mymist = null
 
 	if(on)
 		overlays += image('icons/obj/watercloset.dmi', src, "water", MOB_LAYER + 1, dir)
@@ -190,19 +190,8 @@
 		spawn(250)
 			if(src && !on)
 				qdel(mymist)
+				mymist = null
 				ismist = 0
-
-/obj/machinery/shower/Crossed(atom/movable/O)
-	..()
-	wash(O)
-	if(ismob(O))
-		mobpresent += 1
-		process_heat(O)
-
-/obj/machinery/shower/Uncrossed(atom/movable/O)
-	if(ismob(O))
-		mobpresent -= 1
-	..()
 
 //Yes, showers are super powerful as far as washing goes.
 /obj/machinery/shower/proc/wash(atom/movable/O as obj|mob)
@@ -292,24 +281,31 @@
 
 	if(isturf(loc))
 		var/turf/tile = loc
-		loc.clean_blood()
 		for(var/obj/effect/E in tile)
 			if(istype(E,/obj/effect/rune) || istype(E,/obj/effect/decal/cleanable) || istype(E,/obj/effect/overlay))
 				qdel(E)
 
+	reagents.splash(O, 10)
+
 /obj/machinery/shower/process()
 	if(!on) return
+
+	for(var/thing in loc)
+		var/atom/movable/AM = thing
+		var/mob/living/L = thing
+		if(istype(AM) && AM.simulated)
+			wash(AM)
+			if(istype(L))
+				process_heat(L)
 	wash_floor()
-	if(!mobpresent)	return
-	for(var/mob/living/L in loc)
-		process_heat(L)
+	reagents.add_reagent("water", reagents.get_free_space())
 
 /obj/machinery/shower/proc/wash_floor()
 	if(!ismist && is_washing)
 		return
 	is_washing = 1
 	var/turf/T = get_turf(src)
-	reagents.add_reagent("water", 2)
+	reagents.splash(T, reagents.total_volume)
 	T.clean(src)
 	spawn(100)
 		is_washing = 0
@@ -408,9 +404,6 @@
 					"<span class='danger'>[user] was stunned by \his wet [O]!</span>", \
 					"<span class='userdanger'>[user] was stunned by \his wet [O]!</span>")
 				return 1
-	// Short of a rewrite, this is necessary to stop monkeycubes being washed.
-	else if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/monkeycube))
-		return
 	else if(istype(O, /obj/item/weapon/mop))
 		O.reagents.add_reagent("water", 5)
 		user << "<span class='notice'>You wet \the [O] in \the [src].</span>"
