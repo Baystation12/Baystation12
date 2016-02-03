@@ -1,7 +1,4 @@
 
-
-/atom/var/pressure_resistance = ONE_ATMOSPHERE
-
 /atom/proc/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
 	//Purpose: Determines if the object (or airflow) can pass this atom.
 	//Called by: Movement, airflow.

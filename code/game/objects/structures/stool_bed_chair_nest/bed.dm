@@ -12,7 +12,6 @@
 	desc = "This is used to lie in, sleep in or strap on."
 	icon = 'icons/obj/furniture.dmi'
 	icon_state = "bed"
-	pressure_resistance = 15
 	anchored = 1
 	can_buckle = 1
 	buckle_dir = SOUTH

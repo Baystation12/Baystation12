@@ -22,7 +22,6 @@
 	throw_range = 15
 	matter = list(DEFAULT_WALL_MATERIAL = 10)
 	var/colour = "black"	//what colour the ink is!
-	pressure_resistance = 2
 
 
 /obj/item/weapon/pen/blue
