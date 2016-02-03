@@ -50,7 +50,7 @@ var/list/ghost_traps
 /datum/ghosttrap/proc/request_player(var/mob/target, var/request_string, var/request_timeout)
 	if(request_timeout)
 		request_timeouts[target] = world.time + request_timeout
-		target.destruction.register(src, /datum/ghosttrap/proc/target_destroyed)
+		destroyed_event.register(target, src, /datum/ghosttrap/proc/target_destroyed)
 	else
 		request_timeouts -= target
 
