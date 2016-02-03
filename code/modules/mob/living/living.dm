@@ -827,8 +827,11 @@ default behaviour is:
 	if(deaf >= 0)
 		ear_deaf = deaf
 
-/mob/living/proc/can_be_possessed_by(var/mob/dead/observer/possessor)
-	if(!istype(possessor))
+/mob/proc/can_be_possessed_by(var/mob/dead/observer/possessor)
+	return istype(possessor) && possessor.client
+
+/mob/living/can_be_possessed_by(var/mob/dead/observer/possessor)
+	if(!..())
 		return 0
 	if(!possession_candidate)
 		possessor << "<span class='warning'>That animal cannot be possessed.</span>"

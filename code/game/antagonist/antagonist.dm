@@ -14,7 +14,7 @@
 
 	// Role data.
 	var/id = "traitor"                      // Unique datum identifier.
-	var/role_type = BE_TRAITOR              // Preferences option for this role.
+	var/role_type                           // Preferences option for this role. Defaults to the id if unset
 	var/role_text = "Traitor"               // special_role text.
 	var/role_text_plural = "Traitors"       // As above but plural.
 
@@ -72,6 +72,9 @@
 
 /datum/antagonist/New()
 	..()
+	if(!role_type)
+		role_type = id
+
 	cur_max = hard_cap
 	get_starting_locations()
 	if(!role_text_plural)

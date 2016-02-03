@@ -68,14 +68,14 @@ mob/eye/Destroy()
 	if(owner)
 		T = get_turf(T)
 		if(T != loc)
-			loc = T
+			forceMove(T)
 
 			if(owner.client)
 				owner.client.eye = src
 
 			if(owner_follows_eye)
 				visualnet.updateVisibility(owner, 0)
-				owner.loc = loc
+				owner.forceMove(loc)
 				visualnet.updateVisibility(owner, 0)
 
 			visualnet.visibility(src)

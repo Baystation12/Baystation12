@@ -60,10 +60,13 @@ var/list/mob_hat_cache = list()
 	holder_type = /obj/item/weapon/holder/drone
 
 /mob/living/silicon/robot/drone/can_be_possessed_by(var/mob/dead/observer/possessor)
-	if(!istype(possessor))
+	if(!istype(possessor) || !possessor.client || !possessor.ckey)
 		return 0
 	if(!config.allow_drone_spawn)
 		src << "<span class='danger'>Playing as drones is not currently permitted.</span>"
+		return 0
+	if(too_many_active_drones())
+		src << "<span class='danger'>The maximum number of active drones has been reached..</span>"
 		return 0
 	if(jobban_isbanned(possessor,"Cyborg"))
 		usr << "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>"
@@ -161,7 +164,7 @@ var/list/mob_hat_cache = list()
 	if(hat)
 		return
 	hat = new_hat
-	new_hat.loc = src
+	new_hat.forceMove(src)
 	updateicon()
 
 //Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
@@ -196,12 +199,7 @@ var/list/mob_hat_cache = list()
 				return
 
 			user.visible_message("<span class='danger'>\The [user] swipes \his ID card through \the [src], attempting to reboot it.</span>", "<span class='danger'>>You swipe your ID card through \the [src], attempting to reboot it.</span>")
-			var/drones = 0
-			for(var/mob/living/silicon/robot/drone/D in world)
-				if(D.key && D.client)
-					drones++
-			if(drones < config.max_maint_drones)
-				request_player()
+			request_player()
 			return
 
 		else
@@ -304,28 +302,13 @@ var/list/mob_hat_cache = list()
 //Reboot procs.
 
 /mob/living/silicon/robot/drone/proc/request_player()
-	for(var/mob/dead/observer/O in player_list)
-		if(jobban_isbanned(O, "Cyborg"))
-			continue
-		if(O.client)
-			if(O.client.prefs.be_special & BE_PAI)
-				question(O.client)
-
-/mob/living/silicon/robot/drone/proc/question(var/client/C)
-	spawn(0)
-		if(!C || jobban_isbanned(C,"Cyborg"))	return
-		var/response = alert(C, "Someone is attempting to reboot a maintenance drone. Would you like to play as one?", "Maintenance drone reboot", "Yes", "No", "Never for this round")
-		if(!C || ckey)
-			return
-		if(response == "Yes")
-			transfer_personality(C)
-		else if (response == "Never for this round")
-			C.prefs.be_special ^= BE_PAI
+	if(too_many_active_drones())
+		return
+	var/datum/ghosttrap/G = get_ghost_trap("maintenance drone")
+	G.request_player(src, "Someone is attempting to reboot a maintenance drone.", 30 SECONDS)
 
 /mob/living/silicon/robot/drone/proc/transfer_personality(var/client/player)
-
 	if(!player) return
-
 	src.ckey = player.ckey
 
 	if(player.mob && player.mob.mind)
@@ -361,3 +344,10 @@ var/list/mob_hat_cache = list()
 /mob/living/silicon/robot/drone/construction/updatename()
 	real_name = "construction drone ([rand(100,999)])"
 	name = real_name
+
+/proc/too_many_active_drones()
+	var/drones = 0
+	for(var/mob/living/silicon/robot/drone/D in mob_list)
+		if(D.key && D.client)
+			drones++
+	return drones >= config.max_maint_drones
