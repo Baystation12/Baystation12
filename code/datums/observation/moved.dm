@@ -20,7 +20,8 @@ var/datum/observ/moved/moved_event = new()
 
 /atom/movable/Move()
 	var/old_loc = loc
-	if(..())
+	. = ..()
+	if(.)
 		moved_event.raise_event(list(src, old_loc, loc))
 
 /atom/movable/proc/move_to_destination(var/atom/movable/am, var/old_loc, var/new_loc)
