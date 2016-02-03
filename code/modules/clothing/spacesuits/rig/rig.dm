@@ -189,14 +189,19 @@
 			piece.item_flags &= ~(STOPPRESSUREDAMAGE|AIRTIGHT)
 	update_icon(1)
 
-/obj/item/weapon/rig/proc/toggle_seals(var/mob/living/carbon/human/M,var/instant)
-
+/obj/item/weapon/rig/proc/toggle_seals(var/mob/initiator,var/instant)
+		
 	if(sealing) return
-
-	if(!check_power_cost(M))
+	
+	// Seal toggling can be initiated by the suit AI, too
+	if(!wearer)
+		initiator << "<span class='danger'>Cannot toggle suit: The suit is currently not being worn by anyone.</span>"
 		return 0
 
-	deploy(M,instant)
+	if(!check_power_cost(wearer))
+		return 0
+
+	deploy(wearer,instant)
 
 	var/seal_target = !canremove
 	var/failed_to_seal
@@ -205,21 +210,21 @@
 	sealing = 1
 
 	if(!seal_target && !suit_is_deployed())
-		M.visible_message("<span class='danger'>[M]'s suit flashes an error light.</span>","<span class='danger'>Your suit flashes an error light. It can't function properly without being fully deployed.</span>")
+		wearer.visible_message("<span class='danger'>[wearer]'s suit flashes an error light.</span>","<span class='danger'>Your suit flashes an error light. It can't function properly without being fully deployed.</span>")
 		failed_to_seal = 1
 
 	if(!failed_to_seal)
 
 		if(!instant)
-			M.visible_message("<font color='blue'>[M]'s suit emits a quiet hum as it begins to adjust its seals.</font>","<font color='blue'>With a quiet hum, the suit begins running checks and adjusting components.</font>")
-			if(seal_delay && !do_after(M,seal_delay))
-				if(M) M << "<span class='warning'>You must remain still while the suit is adjusting the components.</span>"
+			wearer.visible_message("<font color='blue'>[wearer]'s suit emits a quiet hum as it begins to adjust its seals.</font>","<font color='blue'>With a quiet hum, the suit begins running checks and adjusting components.</font>")
+			if(seal_delay && !do_after(wearer,seal_delay))
+				if(wearer) wearer << "<span class='warning'>You must remain still while the suit is adjusting the components.</span>"
 				failed_to_seal = 1
 
-		if(!M)
+		if(!wearer)
 			failed_to_seal = 1
 		else
-			for(var/list/piece_data in list(list(M.shoes,boots,"boots",boot_type),list(M.gloves,gloves,"gloves",glove_type),list(M.head,helmet,"helmet",helm_type),list(M.wear_suit,chest,"chest",chest_type)))
+			for(var/list/piece_data in list(list(wearer.shoes,boots,"boots",boot_type),list(wearer.gloves,gloves,"gloves",glove_type),list(wearer.head,helmet,"helmet",helm_type),list(wearer.wear_suit,chest,"chest",chest_type)))
 
 				var/obj/item/piece = piece_data[1]
 				var/obj/item/compare_piece = piece_data[2]
@@ -229,30 +234,30 @@
 				if(!piece || !piece_type)
 					continue
 
-				if(!istype(M) || !istype(piece) || !istype(compare_piece) || !msg_type)
-					if(M) M << "<span class='warning'>You must remain still while the suit is adjusting the components.</span>"
+				if(!istype(wearer) || !istype(piece) || !istype(compare_piece) || !msg_type)
+					if(wearer) wearer << "<span class='warning'>You must remain still while the suit is adjusting the components.</span>"
 					failed_to_seal = 1
 					break
 
-				if(!failed_to_seal && M.back == src && piece == compare_piece)
+				if(!failed_to_seal && wearer.back == src && piece == compare_piece)
 
-					if(seal_delay && !instant && !do_after(M,seal_delay,needhand=0))
+					if(seal_delay && !instant && !do_after(wearer,seal_delay,needhand=0))
 						failed_to_seal = 1
 
 					piece.icon_state = "[initial(icon_state)][!seal_target ? "_sealed" : ""]"
 					switch(msg_type)
 						if("boots")
-							M << "<font color='blue'>\The [piece] [!seal_target ? "seal around your feet" : "relax their grip on your legs"].</font>"
-							M.update_inv_shoes()
+							wearer << "<font color='blue'>\The [piece] [!seal_target ? "seal around your feet" : "relax their grip on your legs"].</font>"
+							wearer.update_inv_shoes()
 						if("gloves")
-							M << "<font color='blue'>\The [piece] [!seal_target ? "tighten around your fingers and wrists" : "become loose around your fingers"].</font>"
-							M.update_inv_gloves()
+							wearer << "<font color='blue'>\The [piece] [!seal_target ? "tighten around your fingers and wrists" : "become loose around your fingers"].</font>"
+							wearer.update_inv_gloves()
 						if("chest")
-							M << "<font color='blue'>\The [piece] [!seal_target ? "cinches tight again your chest" : "releases your chest"].</font>"
-							M.update_inv_wear_suit()
+							wearer << "<font color='blue'>\The [piece] [!seal_target ? "cinches tight again your chest" : "releases your chest"].</font>"
+							wearer.update_inv_wear_suit()
 						if("helmet")
-							M << "<font color='blue'>\The [piece] hisses [!seal_target ? "closed" : "open"].</font>"
-							M.update_inv_head()
+							wearer << "<font color='blue'>\The [piece] hisses [!seal_target ? "closed" : "open"].</font>"
+							wearer.update_inv_head()
 							if(helmet)
 								helmet.update_light(wearer)
 
@@ -265,7 +270,7 @@
 				else
 					failed_to_seal = 1
 
-		if((M && !(istype(M) && M.back == src) && !istype(M,/mob/living/silicon)) || (!seal_target && !suit_is_deployed()))
+		if((wearer && !(istype(wearer) && wearer.back == src)) || (!seal_target && !suit_is_deployed()))
 			failed_to_seal = 1
 
 	sealing = null
@@ -282,7 +287,10 @@
 
 	// Success!
 	canremove = seal_target
-	M << "<font color='blue'><b>Your entire suit [canremove ? "loosens as the components relax" : "tightens around you as the components lock into place"].</b></font>"
+	wearer << "<font color='blue'><b>Your entire suit [canremove ? "loosens as the components relax" : "tightens around you as the components lock into place"].</b></font>"
+	
+	if(wearer != initiator)
+		initiator << "<font color='blue'>Suit adjustment complete. Suit is now [canremove ? "unsealed" : "sealed"].</font>"
 
 	if(canremove)
 		for(var/obj/item/rig_module/module in installed_modules)
@@ -571,7 +579,7 @@
 		wearer.wearing_rig = src
 		update_icon()
 
-/obj/item/weapon/rig/proc/toggle_piece(var/piece, var/mob/living/carbon/human/H, var/deploy_mode)
+/obj/item/weapon/rig/proc/toggle_piece(var/piece, var/mob/initiator, var/deploy_mode)
 
 	if(sealing || !cell || !cell.charge)
 		return
@@ -579,33 +587,33 @@
 	if(!istype(wearer) || !wearer.back == src)
 		return
 
-	if(usr == wearer && (usr.stat||usr.paralysis||usr.stunned)) // If the usr isn't wearing the suit it's probably an AI.
+	if(initiator == wearer && (usr.stat||usr.paralysis||usr.stunned)) // If the initiator isn't wearing the suit it's probably an AI.
 		return
 
 	var/obj/item/check_slot
 	var/equip_to
 	var/obj/item/use_obj
 
-	if(!H)
+	if(!wearer)
 		return
 
 	switch(piece)
 		if("helmet")
 			equip_to = slot_head
 			use_obj = helmet
-			check_slot = H.head
+			check_slot = wearer.head
 		if("gauntlets")
 			equip_to = slot_gloves
 			use_obj = gloves
-			check_slot = H.gloves
+			check_slot = wearer.gloves
 		if("boots")
 			equip_to = slot_shoes
 			use_obj = boots
-			check_slot = H.shoes
+			check_slot = wearer.shoes
 		if("chest")
 			equip_to = slot_wear_suit
 			use_obj = chest
-			check_slot = H.wear_suit
+			check_slot = wearer.wear_suit
 
 	if(use_obj)
 		if(check_slot == use_obj && deploy_mode != ONLY_DEPLOY)
@@ -616,7 +624,7 @@
 				holder = use_obj.loc
 				if(istype(holder))
 					if(use_obj && check_slot == use_obj)
-						H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "retract" : "retracts"] swiftly.</b></font>"
+						wearer << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "retract" : "retracts"] swiftly.</b></font>"
 						use_obj.canremove = 1
 						holder.drop_from_inventory(use_obj)
 						use_obj.forceMove(get_turf(src))
@@ -627,17 +635,17 @@
 		else if (deploy_mode != ONLY_RETRACT)
 			if(check_slot && check_slot == use_obj)
 				return
-			use_obj.forceMove(H)
-			if(!H.equip_to_slot_if_possible(use_obj, equip_to, 0, 1))
+			use_obj.forceMove(wearer)
+			if(!wearer.equip_to_slot_if_possible(use_obj, equip_to, 0, 1))
 				use_obj.forceMove(src)
 				if(check_slot)
-					H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
+					initiator << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
 					return
 			else
-				H << "<span class='notice'>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</span>"
+				wearer << "<span class='notice'>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</span>"
 
 	if(piece == "helmet" && helmet)
-		helmet.update_light(H)
+		helmet.update_light(wearer)
 
 /obj/item/weapon/rig/proc/deploy(mob/M,var/sealed)
 
