@@ -305,6 +305,20 @@ var/list/solars_list = list()
 	var/obj/machinery/power/tracker/connected_tracker = null
 	var/list/connected_panels = list()
 
+//Solar Computer that automatically checks for connected solars at round start
+
+/obj/machinery/power/solar_control/auto_scan
+	track = 2
+
+/obj/machinery/power/solar_control/auto_scan/New()
+	..()
+	if(ticker)
+		initialize()
+	connect_to_network()
+	spawn(10)
+		search_for_connected()
+
+
 /obj/machinery/power/solar_control/drain_power()
 	return -1
 
