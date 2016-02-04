@@ -136,7 +136,7 @@
 		var/mob/living/silicon/robot/R = loc
 		severity *= R.cell_emp_mult
 
-	charge -= maxcharge / severity
+	charge -= charge / severity
 	if (charge < 0)
 		charge = 0
 	..()

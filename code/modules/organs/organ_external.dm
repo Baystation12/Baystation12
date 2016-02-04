@@ -72,6 +72,15 @@
 
 	return ..()
 
+/obj/item/organ/external/emp_act(severity)
+	if(!(status & ORGAN_ROBOT))
+		return
+	switch (severity)
+		if (1)
+			take_damage(8)
+		if (2)
+			take_damage(4)
+
 /obj/item/organ/external/attack_self(var/mob/user)
 	if(!contents.len)
 		return ..()
@@ -209,6 +218,7 @@
 	return (vital || brute_dam + burn_dam + additional_damage < max_damage)
 
 /obj/item/organ/external/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
+	world << "take_damage([brute], [burn], [sharp], [edge], [used_weapon], [forbidden_limbs]) called on [src.name]."
 	if((brute <= 0) && (burn <= 0))
 		return 0
 

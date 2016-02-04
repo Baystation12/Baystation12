@@ -63,13 +63,13 @@
 	switch(severity)
 		if(1)
 			src.take_organ_damage(0,20,emp=1)
-			Stun(rand(5,10))
+			confused = (min(confused + 5, 30))
 		if(2)
 			src.take_organ_damage(0,10,emp=1)
-			Stun(rand(1,5))
-	flick("noise", src:flash)
-	src << "\red <B>*BZZZT*</B>"
-	src << "\red Warning: Electromagnetic pulse detected."
+			confused = (min(confused + 2, 30))
+	flick("noise", src.flash)
+	src << "<span class='danger'><B>*BZZZT*</B></span>"
+	src << "<span class='danger'>Warning: Electromagnetic pulse detected.</span>"
 	..()
 
 /mob/living/silicon/stun_effect_act(var/stun_amount, var/agony_amount)

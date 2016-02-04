@@ -229,6 +229,7 @@ var/list/organ_cache = list()
 
 //Note: external organs have their own version of this proc
 /obj/item/organ/proc/take_damage(amount, var/silent=0)
+	world << "take_damage([amount], [silent]) called on [src.name]."
 	if(src.status & ORGAN_ROBOT)
 		src.damage = between(0, src.damage + (amount * 0.8), max_damage)
 	else
@@ -263,14 +264,10 @@ var/list/organ_cache = list()
 	if(!(status & ORGAN_ROBOT))
 		return
 	switch (severity)
-		if (1.0)
-			take_damage(20)
-			return
-		if (2.0)
-			take_damage(7)
-			return
-		if(3.0)
-			take_damage(3)
+		if (1)
+			take_damage(5)
+		if (2)
+			take_damage(2)
 
 /obj/item/organ/proc/removed(var/mob/living/user)
 
