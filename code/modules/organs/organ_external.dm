@@ -218,7 +218,6 @@
 	return (vital || brute_dam + burn_dam + additional_damage < max_damage)
 
 /obj/item/organ/external/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
-	world << "take_damage([brute], [burn], [sharp], [edge], [used_weapon], [forbidden_limbs]) called on [src.name]."
 	if((brute <= 0) && (burn <= 0))
 		return 0
 
