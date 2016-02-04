@@ -1933,9 +1933,6 @@ area/space/atmosalert()
 	name = "\improper Telecommunications Power Control"
 	icon_state = "tcomsatwest"
 
-/area/tcommsat/maintenance
-	name = "\improper Telecommunications Maintenance Hallway"
-	icon_state = "tcomsatlounge"
 
 // Away Missions
 /area/awaymission
