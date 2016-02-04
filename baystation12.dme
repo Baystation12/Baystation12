@@ -967,6 +967,7 @@
 #include "code\modules\awaymissions\trigger.dm"
 #include "code\modules\awaymissions\zlevel.dm"
 #include "code\modules\blob\blob.dm"
+#include "code\modules\client\asset_cache.dm"
 #include "code\modules\client\client defines.dm"
 #include "code\modules\client\client procs.dm"
 #include "code\modules\client\movement.dm"
