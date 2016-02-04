@@ -306,6 +306,20 @@
 
 	return net1
 
+//Solar Computer that automatically checks for connected solars at round start
+
+/obj/machinery/power/solar_control/auto_scan
+	track = 2
+
+/obj/machinery/power/solar_control/auto_scan/New()
+	..()
+	if(ticker)
+		initialize()
+	connect_to_network()
+	spawn(10)
+		search_for_connected()
+
+
 //Determines how strong could be shock, deals damage to mob, uses power.
 //M is a mob who touched wire/whatever
 //power_source is a source of electricity, can be powercell, area, apc, cable, powernet or null
