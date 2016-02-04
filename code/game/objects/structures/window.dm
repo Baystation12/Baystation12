@@ -6,7 +6,6 @@
 	w_class = 3
 
 	layer = 3.2//Just above doors
-	pressure_resistance = 4*ONE_ATMOSPHERE
 	anchored = 1.0
 	flags = ON_BORDER
 	var/maxhealth = 14.0

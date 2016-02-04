@@ -9,7 +9,6 @@
 	icon_state = "wingrille"
 	density = 1
 	anchored = 1.0
-	pressure_resistance = 4*ONE_ATMOSPHERE
 	var/win_path = /obj/structure/window/basic
 	var/activated
 

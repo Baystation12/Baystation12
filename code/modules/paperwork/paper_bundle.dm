@@ -9,7 +9,6 @@
 	throw_range = 2
 	throw_speed = 1
 	layer = 4
-	pressure_resistance = 1
 	attack_verb = list("bapped")
 	var/page = 1    // current page
 	var/list/pages = list()  // Ordered list of pages as they are to be displayed. Can be different order than src.contents.
