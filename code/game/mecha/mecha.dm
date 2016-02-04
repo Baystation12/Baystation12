@@ -21,6 +21,7 @@
 	var/initial_icon = null //Mech type for resetting icon. Only used for reskinning kits (see custom items)
 	var/can_move = 1
 	var/mob/living/carbon/occupant = null
+	var/list/dropped_items = list()
 	var/step_in = 10 //make a step in step_in/10 sec.
 	var/dir_in = 2//What direction will the mech face when entered/powered on? Defaults to South.
 	var/step_energy_drain = 10
@@ -1112,6 +1113,10 @@
 		mob_container = brain.container
 	else
 		return
+	for(var/item in dropped_items)
+		var/atom/movable/I = item
+		I.forceMove(loc)
+	dropped_items.Cut()
 	if(mob_container.forceMove(src.loc))//ejecting mob container
 	/*
 		if(ishuman(occupant) && (return_pressure() > HAZARD_HIGH_PRESSURE))
@@ -1718,6 +1723,11 @@
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
 	return 1
 
+/obj/mecha/Entered(var/atom/movable/AM, var/atom/old_loc, var/special_event)
+	if(MOVED_DROP == special_event)
+		dropped_items |= AM
+		return ..(AM, old_loc, 0)
+	return ..()
 
 //////////////////////////////////////////
 ////////  Mecha global iterators  ////////

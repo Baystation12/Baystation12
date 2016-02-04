@@ -149,7 +149,7 @@ var/list/slot_equipment_priority = list( \
 		remove_from_mob(W)
 		if(!(W && W.loc)) return 1 // self destroying objects (tk, grabs)
 
-		W.forceMove(Target)
+		W.forceMove(Target, MOVED_DROP)
 		update_icons()
 		return 1
 	return 0
@@ -228,7 +228,7 @@ var/list/slot_equipment_priority = list( \
 	O.screen_loc = null
 	if(istype(O, /obj/item))
 		var/obj/item/I = O
-		I.forceMove(src.loc)
+		I.forceMove(src.loc, MOVED_DROP)
 		I.dropped(src)
 	return 1
 
