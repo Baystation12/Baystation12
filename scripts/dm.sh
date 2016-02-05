@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -o pipefail
+
 dmepath=""
 retval=1
 
@@ -47,8 +49,10 @@ fi
 "$DM" $dmepath.mdme | tee build_log.txt
 retval=$?
 
-mv $dmepath.mdme.dmb $dmepath.dmb
-mv $dmepath.mdme.rsc $dmepath.rsc
+if [[ $retval == 0 ]]; then
+    mv $dmepath.mdme.dmb $dmepath.dmb
+    mv $dmepath.mdme.rsc $dmepath.rsc
+fi
 
 rm $dmepath.mdme
 
