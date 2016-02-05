@@ -54,6 +54,11 @@
 		return 0
 	return 1
 
+/datum/computer_file/program/proc/get_signal(var/specific_action = 0)
+	if(computer)
+		return computer.get_ntnet_status(specific_action)
+	return 0
+
 // Called by Process() on device that runs us, once every tick.
 /datum/computer_file/program/proc/process_tick()
 	return 1

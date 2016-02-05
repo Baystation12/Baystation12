@@ -45,14 +45,8 @@
 	intercepttext += "<B>* A cure is to be researched immediately, but NanoTrasen intellectual property must be respected. To prevent knowledge of [virus_name] from falling into unauthorized hands, all medical staff that work with the pathogen must be enhanced with a NanoTrasen loyality implant.</B><BR>"
 
 
-	for (var/obj/machinery/computer/communications/comm in world)
-		if (!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)
-			var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper( comm.loc )
-			intercept.name = "paper"
-			intercept.info = intercepttext
-
-			comm.messagetitle.Add("Cent. Com. CONFIDENTIAL REPORT")
-			comm.messagetext.Add(intercepttext)
+	//New message handling won't hurt if someone enables epidemic
+	post_comm_message("Cent. Com. CONFIDENTIAL REPORT", intercepttext)
 
 	world << sound('sound/AI/commandreport.ogg')
 
@@ -67,14 +61,8 @@
 	intercepttext += "<FONT size = 2;color='red'><B>PATHOGEN [virus_name] IS STILL PRESENT ON [station_name()]. IN COMPLIANCE WITH NANOTRASEN LAWS FOR INTERSTELLAR SAFETY, EMERGENCY SAFETY MEASURES HAVE BEEN AUTHORIZED. ALL INFECTED CREW MEMBERS ON [station_name()] ARE TO BE NEUTRALIZED AND DISPOSED OF IN A MANNER THAT WILL DESTROY ALL TRACES OF THE PATHOGEN. FAILURE TO COMPLY WILL RESULT IN IMMEDIATE DESTRUCTION OF [station_name].</B></FONT><BR>"
 	intercepttext += "<B>CRUISER WILL ARRIVE IN [round(cruiser_seconds()/60)] MINUTES</B><BR>"
 
-	for (var/obj/machinery/computer/communications/comm in world)
-		if (!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)
-			var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper( comm.loc )
-			intercept.name = "paper"
-			intercept.info = intercepttext
+	post_comm_message("Cent. Com. CONFIDENTIAL REPORT", intercepttext)
 
-			comm.messagetitle.Add("Cent. Com. CONFIDENTIAL REPORT")
-			comm.messagetext.Add(intercepttext)
 	world << sound('sound/AI/commandreport.ogg')
 
 
