@@ -155,9 +155,6 @@
 	return ..()
 
 /mob/living/carbon/escape_buckle()
-	if(!canClick())
-		return
-
 	setClickCooldown(100)
 	if(!buckled) return
 
