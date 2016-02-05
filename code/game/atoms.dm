@@ -496,6 +496,4 @@ its easier to just keep the beam vertical.
 	return ..()
 
 /turf/Entered(var/atom/movable/AM, var/atom/old_loc, var/special_event)
-	if(special_event == MOVED_DROP)
-		return ..(AM, old_loc, 0)
-	return ..()
+	return ..(AM, old_loc, 0)

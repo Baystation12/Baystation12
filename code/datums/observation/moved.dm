@@ -29,11 +29,13 @@ var/datum/observ/moved/moved_event = new()
 	moved_event.raise_event(list(src, old_loc, new_loc))
 
 /atom/Entered(var/atom/movable/am, var/atom/old_loc)
-	if(..() != CANCEL_MOVE_EVENT)
+	. = ..()
+	if(. != CANCEL_MOVE_EVENT)
 		moved_event.raise_event(list(am, old_loc, am.loc))
 
 /atom/movable/Entered(var/atom/movable/am, atom/old_loc)
-	if(..() != CANCEL_MOVE_EVENT && moved_event.has_listeners(am) && !moved_event.is_listening(src, am))
+	. = ..()
+	if(. != CANCEL_MOVE_EVENT && moved_event.has_listeners(am) && !moved_event.is_listening(src, am))
 		moved_event.register(src, am, /atom/movable/proc/recursive_move)
 
 /atom/movable/Exited(var/atom/movable/am, atom/old_loc)
