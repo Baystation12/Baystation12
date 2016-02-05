@@ -30,6 +30,10 @@ var/global/list/turfs = list()						//list of all turfs
 var/global/list/all_species[0]
 var/global/list/all_languages[0]
 var/global/list/language_keys[0]					// Table of say codes for all languages
+
+var/global/list/radio_channels_by_type[0] // Associative table of radio channel type -> radio channel instance
+var/global/list/radio_channels_by_key[0]  // Associative table of radio channel key -> radio channel instance
+
 var/global/list/whitelisted_species = list("Human") // Species that require a whitelist check.
 var/global/list/playable_species = list("Human")    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
@@ -174,6 +178,12 @@ var/global/list/string_slot_flags = list(
 		var/datum/language/L = all_languages[language_name]
 		if(!(L.flags & NONGLOBAL))
 			language_keys[lowertext(L.key)] = L
+
+	for (var/radio_channel in subtypesof(/datum/radio_channel))
+		var/datum/radio_channel/R = new radio_channel
+		radio_channels_by_type[radio_channel] = R
+		if(R.key)
+			radio_channels_by_key[lowertext(R.key)] = R
 
 	var/rkey = 0
 	paths = typesof(/datum/species)-/datum/species

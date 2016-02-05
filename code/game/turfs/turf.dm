@@ -45,6 +45,7 @@
 	turfs -= src
 	remove_cleanables()
 	..()
+	return QDEL_HINT_HARDDEL_NOW
 
 /turf/ex_act(severity)
 	return 0
@@ -126,7 +127,7 @@ var/const/enterloopsanity = 100
 		var/mob/M = A
 		if(!M.check_solid_ground())
 			inertial_drift(M)
-			//we'll end up checking solid ground again but we still need to check the other things. 
+			//we'll end up checking solid ground again but we still need to check the other things.
 			//Ususally most people aren't in space anyways so hopefully this is acceptable.
 			M.update_floating()
 		else

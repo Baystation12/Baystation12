@@ -85,40 +85,6 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 		user << "<span class='danger'>ERROR:</span> Unable to project hologram."
 	return
 
-/*This is the proc for special two-way communication between AI and holopad/people talking near holopad.
-For the other part of the code, check silicon say.dm. Particularly robot talk.*/
-/obj/machinery/hologram/holopad/hear_talk(mob/living/M, text, verb, datum/language/speaking)
-	if(M)
-		for(var/mob/living/silicon/ai/master in masters)
-			if(!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.
-				if(speaking)
-					text = speaking.scramble(text)
-				else
-					text = stars(text)
-			var/name_used = M.GetVoice()
-			//This communication is imperfect because the holopad "filters" voices and is only designed to connect to the master only.
-			var/rendered
-			if(speaking)
-				rendered = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb)]</span></i>"
-			else
-				rendered = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [verb], <span class='message'>\"[text]\"</span></span></i>"
-			master.show_message(rendered, 2)
-
-/obj/machinery/hologram/holopad/see_emote(mob/living/M, text)
-	if(M)
-		for(var/mob/living/silicon/ai/master in masters)
-			//var/name_used = M.GetVoice()
-			var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[text]</span></span></i>"
-			//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
-			master.show_message(rendered, 2)
-	return
-
-/obj/machinery/hologram/holopad/show_message(msg, type, alt, alt_type)
-	for(var/mob/living/silicon/ai/master in masters)
-		var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[msg]</span></span></i>"
-		master.show_message(rendered, type)
-	return
-
 /obj/machinery/hologram/holopad/proc/create_holo(mob/living/silicon/ai/A, turf/T = loc)
 	var/obj/effect/overlay/hologram = new(T)//Spawn a blank effect at the location.
 	hologram.overlays += A.holo_icon // Add it as an overlay to keep coloration!

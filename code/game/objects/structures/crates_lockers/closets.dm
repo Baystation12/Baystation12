@@ -268,7 +268,7 @@
 		return
 	if(O.loc == user)
 		return
-	if(user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis)
+	if(user.incapacitated())
 		return
 	if((!( istype(O, /atom/movable) ) || O.anchored || !Adjacent(user) || !Adjacent(O) || !user.Adjacent(O) || user.contents.Find(src)))
 		return
@@ -280,7 +280,7 @@
 		return
 	step_towards(O, src.loc)
 	if(user != O)
-		user.show_viewers("<span class='danger'>[user] stuffs [O] into [src]!</span>")
+		user.visible_message("<span class='danger'>[user] stuffs \the [O] into \the [src]!</span>", "<span class='warning'>You stuff \the [O] into \the [src]!</span>")
 	src.add_fingerprint(user)
 	return
 

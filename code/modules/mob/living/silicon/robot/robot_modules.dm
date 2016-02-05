@@ -22,7 +22,7 @@ var/global/list/robot_modules = list(
 	var/hide_on_manifest = 0
 	var/channels = list()
 	var/networks = list()
-	var/languages = list(
+	var/available_languages = list(
 		LANGUAGE_SOL_COMMON = 1,
 		LANGUAGE_TRADEBAND = 1,
 		LANGUAGE_UNATHI = 0,
@@ -125,12 +125,12 @@ var/global/list/robot_modules = list(
 	for(var/datum/language/language_datum in R.languages)
 		original_languages[language_datum] = (language_datum in R.speech_synthesizer_langs)
 
-	for(var/language in languages)
+	for(var/language in available_languages)
 		R.add_language(language, languages[language])
 
 /obj/item/weapon/robot_module/proc/remove_languages(var/mob/living/silicon/robot/R)
 	// Clear all added languages, whether or not we originally had them.
-	for(var/language in languages)
+	for(var/language in available_languages)
 		R.remove_language(language)
 
 	// Then add back all the original languages, and the relevant synthezising ability
@@ -461,7 +461,7 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/clerical
 	name = "service robot module"
 	channels = list("Service" = 1)
-	languages = list(
+	available_languages = list(
 					LANGUAGE_SOL_COMMON	= 1,
 					LANGUAGE_UNATHI		= 1,
 					LANGUAGE_SIIK_MAAS	= 1,
@@ -611,7 +611,7 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/syndicate
 	name = "illegal robot module"
 	hide_on_manifest = 1
-	languages = list(
+	available_languages = list(
 					LANGUAGE_SOL_COMMON = 1,
 					LANGUAGE_TRADEBAND = 1,
 					LANGUAGE_UNATHI = 0,
@@ -745,7 +745,7 @@ var/global/list/robot_modules = list(
 	name = "construction drone module"
 	hide_on_manifest = 1
 	channels = list("Engineering" = 1)
-	languages = list()
+	available_languages = list()
 
 /obj/item/weapon/robot_module/drone/construction/New()
 	src.modules += new /obj/item/weapon/rcd/borg(src)

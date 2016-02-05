@@ -89,13 +89,6 @@
 /mob/living/bot/attack_ai(var/mob/user)
 	return attack_hand(user)
 
-/mob/living/bot/say(var/message)
-	var/verb = "beeps"
-
-	message = sanitize(message)
-
-	..(message, null, verb)
-
 /mob/living/bot/Bump(var/atom/A)
 	if(on && botcard && istype(A, /obj/machinery/door))
 		var/obj/machinery/door/D = A

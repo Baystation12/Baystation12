@@ -29,7 +29,7 @@
 	proc/get_data()
 		return "No information available"
 
-	proc/hear(message, source as mob)
+	proc/hear_input(message, source as mob)
 		return
 
 	proc/islegal()
@@ -151,7 +151,7 @@ Implant Specifics:<BR>"}
 		hear(msg)
 		return
 
-	hear(var/msg)
+	hear_input(var/msg)
 		var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
 		msg = replace_characters(msg, replacechars)
 		if(findtext(msg,phrase))

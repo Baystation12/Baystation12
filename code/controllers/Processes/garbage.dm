@@ -84,9 +84,88 @@ world/loop_checks = 0
 		destroyed.Cut(1, 2)
 		SCHECK
 
-#undef GC_FORCE_DEL_PER_TICK
-#undef GC_COLLECTION_TIMEOUT
-#undef GC_COLLECTIONS_PER_TICK
+/datum/controller/process/garbage_collector/proc/AddTrash(datum/A)
+	#ifdef GC_DEBUG
+	testing("GC: AddTrash(\ref[A] - [A.type])")
+	#endif
+	destroyed -= "\ref[A]" // Removing any previous references that were GC'd so that the current object will be at the end of the list.
+	destroyed["\ref[A]"] = world.time
+
+/datum/controller/process/garbage_collector/statProcess()
+	..()
+	stat(null, "[garbage_collect ? "On" : "Off"], [destroyed.len] queued")
+	stat(null, "Dels: [total_dels], [soft_dels] soft, [hard_dels] hard, [tick_dels]  last run")
+
+
+// Tests if an atom has been deleted.
+/proc/qdeleted(datum/D)
+	return istype(D) && !isnull(D.gcDestroyed)
+
+// Should be treated as a replacement for the 'del' keyword.
+// Datums passed to this will be given a chance to clean up references to allow the GC to collect them.
+/proc/qdel(var/datum/D)
+	if(isnull(D))
+		return
+
+	if(!istype(D)) // A non-datum was passed into qdel - just delete it outright.
+		// warning("qdel() passed object of type [D.type]. qdel() can only handle /datum/ types.")
+		del(D)
+		return
+
+	if(isnull(garbage_collector))
+		delayed_garbage |= D
+		return
+
+	if(isnull(D.gcDestroyed))
+		// Let our friend know they're about to get deleted.
+		var/hint
+		D.gcDestroyed = world.time
+		try
+			hint = D.Destroy()
+		catch(var/exception/e)
+			if(istype(e))
+				gcwarning("qdel() caught runtime destroying [D.type]: [e] in [e.file], line [e.line]")
+			else
+				gcwarning("qdel() caught runtime destroying [D.type]: [e]")
+			del(D)
+			garbage_collector.hard_dels++
+			return
+		if(!isnull(D.gcDestroyed) && D.gcDestroyed != world.time)
+			gcwarning("Sleep detected in Destroy() call of [D.type]")
+			D.gcDestroyed = world.time
+
+		// This should only exist until everything has been converted to things that are pooled
+		if(hint == QDEL_HINT_QUEUE && IsPooled(D))
+			hint = QDEL_HINT_PUTINPOOL
+
+		switch(hint)
+			if(QDEL_HINT_QUEUE)     //qdel should queue the object for deletion
+				garbage_collector.AddTrash(D)
+			if(QDEL_HINT_LETMELIVE)   //qdel should let the object live after calling destroy.
+				return
+			if(QDEL_HINT_IWILLGC)   //functionally the same as the above. qdel should assume the object will gc on its own, and not check it.
+				return
+			if (QDEL_HINT_HARDDEL_NOW)  //qdel should assume this object won't gc, and hard del it post haste.
+				del(D)
+				garbage_collector.hard_dels++
+			if (QDEL_HINT_PUTINPOOL)  //qdel will put this object in the pool.
+				PlaceInPool(D,0)
+			if (QDEL_HINT_FINDREFERENCE)//qdel will, if TESTING is enabled, display all references to this object, then queue the object for deletion.
+				#ifdef TESTING
+				D.find_references(remove_from_queue = FALSE)
+				#endif
+				garbage_collector.AddTrash(D)
+			else
+				// world << "WARNING GC DID NOT GET A RETURN VALUE FOR [D], [D.type]!"
+				garbage_collector.AddTrash(D)
+
+// Default implementation of clean-up code.
+// This should be overridden to remove all references pointing to the object being destroyed.
+// Return true if the the GC controller should allow the object to continue existing. (Useful if pooling objects.)
+/datum/proc/Destroy()
+	nanomanager.close_uis(src)
+	tag = null
+	return QDEL_HINT_QUEUE
 
 #ifdef GC_FINDREF
 
@@ -132,81 +211,6 @@ world/loop_checks = 0
 			. += LookForListRefs(F, A, D, "[F] in list [V]")
 #endif
 
-/datum/controller/process/garbage_collector/proc/AddTrash(datum/A)
-	if(!istype(A) || !isnull(A.gcDestroyed))
-		return
-	#ifdef GC_DEBUG
-	testing("GC: AddTrash(\ref[A] - [A.type])")
-	#endif
-	A.gcDestroyed = world.time
-	destroyed -= "\ref[A]" // Removing any previous references that were GC'd so that the current object will be at the end of the list.
-	destroyed["\ref[A]"] = world.time
-
-/datum/controller/process/garbage_collector/statProcess()
-	..()
-	stat(null, "[garbage_collect ? "On" : "Off"], [destroyed.len] queued")
-	stat(null, "Dels: [total_dels], [soft_dels] soft, [hard_dels] hard, [tick_dels]  last run")
-
-
-// Tests if an atom has been deleted.
-/proc/deleted(atom/A)
-	return !A || !isnull(A.gcDestroyed)
-
-// Should be treated as a replacement for the 'del' keyword.
-// Datums passed to this will be given a chance to clean up references to allow the GC to collect them.
-/proc/qdel(var/datum/A)
-	if(!A)
-		return
-	if(!istype(A))
-		warning("qdel() passed object of type [A.type]. qdel() can only handle /datum types.")
-		crash_with("qdel() passed object of type [A.type]. qdel() can only handle /datum types.")
-		del(A)
-		if(garbage_collector)
-			garbage_collector.total_dels++
-			garbage_collector.hard_dels++
-	else if(isnull(A.gcDestroyed))
-		// Let our friend know they're about to get collected
-		. = !A.Destroy()
-		if(. && A)
-			A.finalize_qdel()
-
-/datum/proc/finalize_qdel()
-	if(IsPooled(src))
-		PlaceInPool(src)
-	else
-		del(src)
-
-/atom/finalize_qdel()
-	if(IsPooled(src))
-		PlaceInPool(src)
-	else
-		if(garbage_collector)
-			garbage_collector.AddTrash(src)
-		else
-			delayed_garbage |= src
-
-/icon/finalize_qdel()
-	del(src)
-
-/image/finalize_qdel()
-	del(src)
-
-/mob/finalize_qdel()
-	del(src)
-
-/turf/finalize_qdel()
-	del(src)
-	
-/area/finalize_qdel()
-    del(src)
-
-// Default implementation of clean-up code.
-// This should be overridden to remove all references pointing to the object being destroyed.
-// Return true if the the GC controller should allow the object to continue existing. (Useful if pooling objects.)
-/datum/proc/Destroy()
-	nanomanager.close_uis(src)
-	tag = null
-	return
 
 #ifdef TESTING
 /client/var/running_find_references
@@ -273,6 +277,9 @@ world/loop_checks = 0
 			garbage_collector.destroyed.Cut(1, 2)
 #endif
 
+/proc/gcwarning(msg)
+	log_to_dd("## GC WARNING: [msg]")
+
 #ifdef GC_DEBUG
 #undef GC_DEBUG
 #endif
@@ -280,3 +287,7 @@ world/loop_checks = 0
 #ifdef GC_FINDREF
 #undef GC_FINDREF
 #endif
+
+#undef GC_FORCE_DEL_PER_TICK
+#undef GC_COLLECTION_TIMEOUT
+#undef GC_COLLECTIONS_PER_TICK

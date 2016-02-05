@@ -188,16 +188,6 @@ var/list/ai_verbs_default = list(
 	src << "Use say [get_language_prefix()]b to speak to your cyborgs through binary. Use say :h to speak from an active holopad."
 	src << "For department channels, use the following say commands:"
 
-	var/radio_text = ""
-	for(var/i = 1 to common_radio.channels.len)
-		var/channel = common_radio.channels[i]
-		var/key = get_radio_key_from_channel(channel)
-		radio_text += "[key] - [channel]"
-		if(i != common_radio.channels.len)
-			radio_text += ", "
-
-	src << radio_text
-
 	if (malf && !(mind in malf.current_antagonists))
 		show_laws()
 		src << "<b>These laws may be changed by other players, or by you being the traitor.</b>"

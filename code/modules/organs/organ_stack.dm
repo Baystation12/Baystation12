@@ -17,7 +17,7 @@
 	var/ownerckey
 	var/invasive
 	var/default_language
-	var/list/languages = list()
+	var/list/known_languages = list()
 	var/datum/mind/backup
 
 /obj/item/organ/stack/emp_act()
@@ -29,7 +29,7 @@
 
 /obj/item/organ/stack/proc/do_backup()
 	if(owner && owner.stat != DEAD && !is_broken() && owner.mind)
-		languages = owner.languages.Copy()
+		known_languages = owner.languages.Copy()
 		backup = owner.mind
 		default_language = owner.default_language
 		if(owner.ckey)
@@ -82,5 +82,5 @@
 	backup.active = 1
 	backup.transfer_to(owner)
 	if(default_language) owner.default_language = default_language
-	owner.languages = languages.Copy()
+	owner.languages = known_languages.Copy()
 	owner << "<span class='notice'>Consciousness slowly creeps over you as your new body awakens.</span>"

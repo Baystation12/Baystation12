@@ -429,7 +429,7 @@
 		return default_language
 
 	if(!species)
-		return null
+		return ..()
 	return species.default_language ? all_languages[species.default_language] : null
 
 /mob/living/carbon/show_inv(mob/user as mob)

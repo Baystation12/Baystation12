@@ -17,7 +17,7 @@ var/list/_client_preferences_by_type
 	if(ispath(preference))
 		return get_client_preference_by_type(preference)
 	return get_client_preference_by_key(preference)
-    
+
 /proc/get_client_preference_by_key(var/preference)
 	if(!_client_preferences_by_key)
 		_client_preferences_by_key = list()
@@ -105,8 +105,8 @@ var/list/_client_preferences_by_type
 	disabled_description = "Hide"
 
 /datum/client_preference/show_typing_indicator/toggled(var/mob/preference_mob, var/enabled)
-	if(!enabled)
-		preference_mob.set_typing_indicator(0)
+	//if(!enabled)
+	//	preference_mob.set_typing_indicator(0)
 
 /datum/client_preference/show_ooc
 	description ="OOC chat"

@@ -14,6 +14,9 @@
 	update_starlight()
 	..()
 
+/turf/space/Destroy()
+	return QDEL_HINT_LETMELIVE
+
 // override for space turfs, since they should never hide anything
 /turf/space/levelupdate()
 	for(var/obj/O in src)

@@ -155,7 +155,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 		if(word1 == cultwords["destroy"] && word2 == cultwords["see"] && word3 == cultwords["blood"])
 			return bloodboil()
 		if(word1 == cultwords["self"] && word2 == cultwords["other"] && word3 == cultwords["technology"])
-			return communicate()
+			return communicate_rune()
 		if(word1 == cultwords["travel"] && word2 == cultwords["other"])
 			return itemport(src.word3)
 		if(word1 == cultwords["join"] && word2 == cultwords["hide"] && word3 == cultwords["technology"])

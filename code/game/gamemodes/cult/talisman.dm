@@ -23,7 +23,7 @@
 					call(/obj/effect/rune/proc/teleport)(imbue)
 				if("communicate")
 					//If the user cancels the talisman this var will be set to 0
-					delete = call(/obj/effect/rune/proc/communicate)()
+					delete = call(/obj/effect/rune/proc/communicate_rune)()
 				if("deafen")
 					call(/obj/effect/rune/proc/deafen)()
 				if("blind")

@@ -15,7 +15,8 @@
 	if(mind && mind.current == src)
 		spellremove(src)
 	ghostize()
-	. = ..()
+	..()
+	return QDEL_HINT_HARDDEL_NOW
 
 /mob/proc/remove_screen_obj_references()
 	hands = null
@@ -672,16 +673,6 @@
 
 /mob/proc/get_gender()
 	return gender
-
-/mob/proc/see(message)
-	if(!is_active())
-		return 0
-	src << message
-	return 1
-
-/mob/proc/show_viewers(message)
-	for(var/mob/M in viewers())
-		M.see(message)
 
 /mob/Stat()
 	..()

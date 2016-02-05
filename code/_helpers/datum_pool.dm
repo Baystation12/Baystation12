@@ -80,6 +80,7 @@ var/global/list/GlobalPool = list()
 	return 1
 
 /datum/proc/Prepare(args)
+	gcDestroyed = null
 	if(islist(args))
 		New(arglist(args))
 	else

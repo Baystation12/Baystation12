@@ -4,15 +4,19 @@ var/const/GHOST_IMAGE_SIGHTLESS = 2
 var/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 
 /mob/observer
+	alpha = 127
+	anchored = 1
+	canmove = 0
 	density = 0
 	invisibility = INVISIBILITY_OBSERVER
 	layer = FLY_LAYER
+	see_in_dark = 32
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	sight = SEE_TURFS|SEE_MOBS|SEE_OBJS|SEE_SELF
 	simulated = FALSE
 	stat = DEAD
 	status_flags = GODMODE
-	var/ghost_image_flag = GHOST_IMAGE_DARKNESS
+	var/ghost_image_flag = GHOST_IMAGE_ALL
 	var/image/ghost_image = null //this mobs ghost image, for deleting and stuff
 
 /mob/observer/New()

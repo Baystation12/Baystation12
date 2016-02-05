@@ -79,7 +79,8 @@
 
 /obj/effect/landmark/Destroy()
 	landmarks_list -= src
-	return ..()
+	..()
+	return QDEL_HINT_HARDDEL_NOW
 
 /obj/effect/landmark/start
 	name = "start"

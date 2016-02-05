@@ -42,7 +42,6 @@
 	var/list/scramble_cache = list()
 
 /datum/language/proc/scramble(var/input)
-
 	if(!syllables || !syllables.len)
 		return stars(input)
 
@@ -94,6 +93,9 @@
 /datum/language/proc/format_message_radio(message, verb)
 	return "[verb], <span class='[colour]'>\"[capitalize(message)]\"</span>"
 
+/datum/language/proc/format_message_special_quotes(message, verb, var/quotes)
+	return "[verb], <span class='message'><span class='[colour]'>[quotes & 1 ? "\"" : ""][capitalize(message)][quotes & 2 ? "\"" : ""]</span></span>"
+
 /datum/language/proc/get_talkinto_msg_range(message)
 	// if you yell, you'll be heard from two tiles over instead of one
 	return (copytext(message, length(message)) == "!") ? 2 : 1
@@ -132,31 +134,17 @@
 			return ask_verb
 	return speech_verb
 
-// Language handling.
-/mob/proc/add_language(var/language)
+/atom/proc/is_visible_emote_prefix(var/prefix)
+	return prefix == "^"
 
-	var/datum/language/new_language = all_languages[language]
+/mob/proc/get_visible_emote_prefix()
+	return "^"
 
-	if(!istype(new_language) || (new_language in languages))
-		return 0
+/atom/proc/is_audible_emote_prefix(var/prefix)
+	return prefix == "!"
 
-	languages.Add(new_language)
-	return 1
-
-/mob/proc/remove_language(var/rem_language)
-	var/datum/language/L = all_languages[rem_language]
-	. = (L in languages)
-	languages.Remove(L)
-
-/mob/living/remove_language(rem_language)
-	var/datum/language/L = all_languages[rem_language]
-	if(default_language == L)
-		default_language = null
-	return ..()
-
-// Can we speak this language, as opposed to just understanding it?
-/mob/proc/can_speak(datum/language/speaking)
-	return (universal_speak || (speaking && speaking.flags & INNATE) || speaking in src.languages)
+/atom/proc/is_language_prefix(var/prefix)
+	return (prefix in config.language_prefixes)
 
 /mob/proc/get_language_prefix()
 	if(client && client.prefs.language_prefixes && client.prefs.language_prefixes.len)
@@ -164,11 +152,11 @@
 
 	return config.language_prefixes[1]
 
-/mob/proc/is_language_prefix(var/prefix)
+/mob/is_language_prefix(var/prefix)
 	if(client && client.prefs.language_prefixes && client.prefs.language_prefixes.len)
 		return prefix in client.prefs.language_prefixes
 
-	return prefix in config.language_prefixes
+	return ..()
 
 //TBD
 /mob/verb/check_languages()

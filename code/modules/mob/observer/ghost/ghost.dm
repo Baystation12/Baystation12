@@ -9,7 +9,8 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	appearance_flags = KEEP_TOGETHER
 	canmove = 0
 	blinded = 0
-	anchored = 1	//  don't get pushed around
+	ghost_image_flag = GHOST_IMAGE_DARKNESS
+	see_in_dark = 100
 	universal_speak = 1
 	var/is_manifest = FALSE
 	var/next_visibility_toggle = 0
@@ -34,7 +35,6 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	var/list/hud_images // A list of hud images
 
 /mob/observer/ghost/New(mob/body)
-	see_in_dark = 100
 	verbs += /mob/observer/ghost/proc/dead_tele
 	verbs += /mob/proc/toggle_antag_pool
 
@@ -51,8 +51,6 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 			icon = body.icon
 			icon_state = body.icon_state
 			overlays = body.overlays
-
-		alpha = 127
 
 		gender = body.gender
 		if(body.mind && body.mind.name)
