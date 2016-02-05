@@ -203,7 +203,9 @@ var/list/organ_cache = list()
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()
-	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	var/antibiotics = 0
+	if(owner)
+		antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 
 	if (!germ_level || antibiotics < 5)
 		return

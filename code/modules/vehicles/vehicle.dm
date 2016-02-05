@@ -189,7 +189,7 @@
 		return 1
 
 /obj/vehicle/proc/explode()
-	src.visible_message("\red <B>[src] blows apart!</B>", 1)
+	src.visible_message("<span class='danger'>\The [src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
 	PoolOrNew(/obj/item/stack/rods, Tsec)
@@ -352,9 +352,10 @@
 /obj/vehicle/attack_generic(var/mob/user, var/damage, var/attack_message)
 	if(!damage)
 		return
-	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
-	user.do_attack_animation(src)
+	visible_message("<span class='danger'>\The [user] [attack_message] the [src]!</span>")
+	if(istype(user))
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+		user.do_attack_animation(src)
 	src.health -= damage
 	if(prob(10))
 		new /obj/effect/decal/cleanable/blood/oil(src.loc)

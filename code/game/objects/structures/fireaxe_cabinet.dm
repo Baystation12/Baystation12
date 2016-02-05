@@ -12,7 +12,8 @@
 	var/obj/item/weapon/material/twohanded/fireaxe/fireaxe
 
 /obj/structure/fireaxecabinet/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
-	user.do_attack_animation(src)
+	if(istype(user))
+		user.do_attack_animation(src)
 	playsound(user, 'sound/effects/Glasshit.ogg', 50, 1)
 	visible_message("<span class='danger'>[user] [attack_verb] \the [src]!</span>")
 	if(damage_threshold > damage)

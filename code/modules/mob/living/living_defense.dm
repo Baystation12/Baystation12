@@ -234,7 +234,7 @@
 
 /mob/living/attack_generic(var/mob/user, var/damage, var/attack_message)
 
-	if(!damage)
+	if(!damage || !istype(user))
 		return
 
 	adjustBruteLoss(damage)
