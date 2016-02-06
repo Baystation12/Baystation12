@@ -1,5 +1,3 @@
-var/list/private_valid_special_roles
-
 /datum/category_item/player_setup_item/antagonism/candidacy
 	name = "Candidacy"
 	sort_order = 1
@@ -68,17 +66,16 @@ var/list/private_valid_special_roles
 	return ..()
 
 /datum/category_item/player_setup_item/antagonism/candidacy/proc/valid_special_roles()
-	if(!(private_valid_special_roles && private_valid_special_roles.len))
-		private_valid_special_roles = list()
-		for(var/antag_type in all_antag_types)
-			var/datum/antagonist/antag = all_antag_types[antag_type]
-			private_valid_special_roles += antag.role_type
+	var/list/private_valid_special_roles = list()
+	for(var/antag_type in all_antag_types)
+		var/datum/antagonist/antag = all_antag_types[antag_type]
+		private_valid_special_roles += antag.role_type
 
-		var/list/ghost_traps = get_ghost_traps()
-		for(var/ghost_trap_key in ghost_traps)
-			var/datum/ghosttrap/ghost_trap = ghost_traps[ghost_trap_key]
-			if(!ghost_trap.list_as_special_role)
-				continue
-			private_valid_special_roles += ghost_trap.pref_check
+	var/list/ghost_traps = get_ghost_traps()
+	for(var/ghost_trap_key in ghost_traps)
+		var/datum/ghosttrap/ghost_trap = ghost_traps[ghost_trap_key]
+		if(!ghost_trap.list_as_special_role)
+			continue
+		private_valid_special_roles += ghost_trap.pref_check
 
 	return private_valid_special_roles
