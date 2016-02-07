@@ -341,6 +341,20 @@
 	anchored = 1
 	var/busy = 0 	//Something's being washed at the moment
 
+/obj/structure/sink/MouseDrop_T(var/obj/item/thing, var/mob/user)
+	..()
+	if(!istype(thing) || !thing.is_open_container())
+		return ..()
+	if(!usr.Adjacent(src))
+		return ..()
+	if(!thing.reagents || thing.reagents.total_volume == 0)
+		usr << "<span class='warning'>\The [thing] is empty.</span>"
+		return
+	// Clear the vessel.
+	visible_message("<span class='notice'>\The [usr] tips the contents of \the [thing] into \the [src].</span>")
+	thing.reagents.clear_reagents()
+	thing.update_icon()
+
 /obj/structure/sink/attack_hand(mob/user as mob)
 	if (ishuman(user))
 		var/mob/living/carbon/human/H = user
@@ -435,7 +449,6 @@
 /obj/structure/sink/kitchen
 	name = "kitchen sink"
 	icon_state = "sink_alt"
-
 
 /obj/structure/sink/puddle	//splishy splashy ^_^
 	name = "puddle"
