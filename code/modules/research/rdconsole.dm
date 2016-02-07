@@ -360,28 +360,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		linked_lathe.removeFromQueue(text2num(href_list["removeP"]))
 
 	else if(href_list["lathe_ejectsheet"] && linked_lathe) //Causes the protolathe to eject a sheet of material
-		var/num_sheets = min(text2num(href_list["amount"]), round(linked_lathe.materials[href_list["lathe_ejectsheet"]] / SHEET_MATERIAL_AMOUNT))
-
-		if(num_sheets < 1)
-			return
-
-		var/mattype = linked_lathe.getMaterialType(href_list["lathe_ejectsheet"])
-
-		var/obj/item/stack/material/M = new mattype(linked_lathe.loc)
-		M.amount = num_sheets
-		linked_lathe.materials[href_list["lathe_ejectsheet"]] -= num_sheets * SHEET_MATERIAL_AMOUNT
+		linked_lathe.eject(href_list["lathe_ejectsheet"], text2num(href_list["amount"]))
 
 	else if(href_list["imprinter_ejectsheet"] && linked_imprinter) //Causes the protolathe to eject a sheet of material
-		var/num_sheets = min(text2num(href_list["amount"]), round(linked_imprinter.materials[href_list["imprinter_ejectsheet"]] / SHEET_MATERIAL_AMOUNT))
-
-		if(num_sheets < 1)
-			return
-
-		var/mattype = linked_imprinter.getMaterialType(href_list["imprinter_ejectsheet"])
-
-		var/obj/item/stack/material/M = new mattype(linked_imprinter.loc)
-		M.amount = num_sheets
-		linked_imprinter.materials[href_list["imprinter_ejectsheet"]] -= num_sheets * SHEET_MATERIAL_AMOUNT
+		linked_imprinter.eject(href_list["imprinter_ejectsheet"], text2num(href_list["amount"]))
 
 	else if(href_list["find_device"]) //The R&D console looks for devices nearby to link up with.
 		screen = 0.0
