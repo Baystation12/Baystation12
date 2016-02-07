@@ -256,17 +256,3 @@
 	oldMob.open_uis.Cut()
 
 	return 1 // success
-
- /**
-  * Sends all nano assets to the client
-  * This is called on user login
-  *
-  * @param client /client The user's client
-  *
-  * @return nothing
-  */
-
-/datum/nanomanager/proc/send_resources(client)
-	for(var/file in asset_files)
-		client << browse_rsc(file)	// send the file to the client
-

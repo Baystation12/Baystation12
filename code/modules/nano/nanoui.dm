@@ -95,6 +95,8 @@ nanoui is used to open and update nano browser uis
 		ref = nref
 
 	add_common_assets()
+	var/datum/asset/assets = get_asset_datum(/datum/asset/nanoui)
+	assets.send(user, ntemplate_filename)
 
  /**
   * Use this proc to add assets which are common to (and required by) all nano uis
