@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - rscadd: "Showers now splash objects on their turf with water."
-  - tweak: "Can now expand unwrapped monkey cubes using showers, sinks, or just about any source that applies water."
