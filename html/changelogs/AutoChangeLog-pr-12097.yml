@@ -1,0 +1,4 @@
+author: atlantiscze
+delete-after: True
+changes: 
+  - rscadd: "Players will now be warned when selected spawn point has dangerous atmosphere, and will be able to abort spawning and spawn elsewhere"
