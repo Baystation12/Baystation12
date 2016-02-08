@@ -71,6 +71,16 @@
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
 
+/obj/item/equipped()
+	..()
+	var/mob/M = loc
+	if(!istype(M))
+		return
+	if(M.l_hand)
+		M.l_hand.update_held_icon()
+	if(M.r_hand)
+		M.r_hand.update_held_icon()
+
 /obj/item/Destroy()
 	if(ismob(loc))
 		var/mob/m = loc
@@ -89,7 +99,7 @@
 		var/mob/M = src.loc
 		if(M.l_hand == src)
 			M.update_inv_l_hand()
-		if(M.r_hand == src)
+		else if(M.r_hand == src)
 			M.update_inv_r_hand()
 
 /obj/item/ex_act(severity)
