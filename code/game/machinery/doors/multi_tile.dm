@@ -4,13 +4,20 @@
 
 /obj/machinery/door/airlock/multi_tile/New()
 	..()
-	switch(dir)
-		if(EAST, WEST)
-			bound_width = width * world.icon_size
-			bound_height = world.icon_size
-		else
-			bound_width = world.icon_size
-			bound_height = width * world.icon_size
+	SetBounds()
+
+/obj/machinery/door/airlock/multi_tile/Move()
+	. = ..()
+	SetBounds()
+
+
+/obj/machinery/door/airlock/multi_tile/proc/SetBounds()
+	if(dir in list(EAST, WEST))
+		bound_width = width * world.icon_size
+		bound_height = world.icon_size
+	else
+		bound_width = world.icon_size
+		bound_height = width * world.icon_size
 
 /obj/machinery/door/airlock/multi_tile/glass
 	name = "Glass Airlock"

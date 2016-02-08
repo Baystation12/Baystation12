@@ -64,11 +64,11 @@
 	return
 
 /obj/machinery/turretid/proc/isLocked(mob/user)
-	if(ailock && user.isSilicon())
+	if(ailock && issilicon(user))
 		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
 		return 1
 
-	if(locked && !user.isSilicon())
+	if(locked && !issilicon(user))
 		user << "<span class='notice'>Access denied.</span>"
 		return 1
 
@@ -84,13 +84,6 @@
 	if(stat & BROKEN)
 		return
 
-	if(!emagged && istype(W, /obj/item/weapon/card/emag))
-		user << "<span class='danger'>You short out the turret controls' access analysis module.</span>"
-		emagged = 1
-		locked = 0
-		ailock = 0
-		return
-
 	if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
 		if(src.allowed(usr))
 			if(emagged)
@@ -100,6 +93,14 @@
 				user << "<span class='notice'>You [ locked ? "lock" : "unlock"] the panel.</span>"
 		return
 	return ..()
+
+/obj/machinery/turretid/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
+		user << "<span class='danger'>You short out the turret controls' access analysis module.</span>"
+		emagged = 1
+		locked = 0
+		ailock = 0
+		return 1
 
 /obj/machinery/turretid/attack_ai(mob/user as mob)
 	if(isLocked(user))
@@ -138,7 +139,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/turretid/Topic(href, href_list, var/nowindow = 0)
+/obj/machinery/turretid/Topic(href, href_list)
 	if(..())
 		return 1
 
@@ -191,13 +192,17 @@
 	..()
 	if(stat & NOPOWER)
 		icon_state = "control_off"
+		set_light(0)
 	else if (enabled)
 		if (lethal)
 			icon_state = "control_kill"
+			set_light(1.5, 1,"#990000")
 		else
 			icon_state = "control_stun"
+			set_light(1.5, 1,"#FF9900")
 	else
 		icon_state = "control_standby"
+		set_light(1.5, 1,"#003300")
 
 /obj/machinery/turretid/emp_act(severity)
 	if(enabled)

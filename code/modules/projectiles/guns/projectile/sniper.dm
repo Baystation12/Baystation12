@@ -1,12 +1,12 @@
 /obj/item/weapon/gun/projectile/heavysniper
-	name = "\improper PTR-7 rifle"
-	desc = "A portable anti-armour rifle fitted with a scope. Originally designed to used against armoured exosuits, it is capable of punching through windows and non-reinforced walls with ease. Fires armor piercing 14.5mm shells."
+	name = "anti-materiel rifle"
+	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease. Fires armor piercing 14.5mm shells."
 	icon_state = "heavysniper"
 	item_state = "l6closednomag" //placeholder
 	w_class = 4
 	force = 10
 	slot_flags = SLOT_BACK
-	origin_tech = "combat=8;materials=2;syndicate=8"
+	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	caliber = "14.5mm"
 	recoil = 2 //extra kickback
 	//fire_sound = 'sound/weapons/sniper.ogg'

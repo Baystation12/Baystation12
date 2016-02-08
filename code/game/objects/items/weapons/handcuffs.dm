@@ -10,12 +10,14 @@
 	w_class = 2.0
 	throw_speed = 2
 	throw_range = 5
+	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 500)
-	origin_tech = "materials=1"
+	var/elastic
 	var/dispenser = 0
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
+	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/handcuffs.dmi')
 
 /obj/item/weapon/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
 
@@ -52,26 +54,29 @@
 
 	var/mob/living/carbon/human/H = target
 	if(!istype(H))
-		return
+		return 0
 
 	if (!H.has_organ_for_slot(slot_handcuffed))
 		user << "<span class='danger'>\The [H] needs at least two wrists before you can cuff them together!</span>"
-		return
+		return 0
 
-	if(istype(H.gloves,/obj/item/clothing/gloves/rig)) // Can't cuff someone who's in a deployed hardsuit.
-		user << "<span class='danger'>The cuffs won't fit around \the [H.gloves]!</span>"
-		return
+	if(istype(H.gloves,/obj/item/clothing/gloves/rig) && !elastic) // Can't cuff someone who's in a deployed hardsuit.
+		user << "<span class='danger'>\The [src] won't fit around \the [H.gloves]!</span>"
+		return 0
 
 	user.visible_message("<span class='danger'>\The [user] is attempting to put [cuff_type] on \the [H]!</span>")
 
 	if(!do_after(user,30))
-		return
+		return 0
 
 	H.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been handcuffed (attempt) by [user.name] ([user.ckey])</font>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to handcuff [H.name] ([H.ckey])</font>")
 	msg_admin_attack("[key_name(user)] attempted to handcuff [key_name(H)]")
 	feedback_add_details("handcuffs","H")
 
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.do_attack_animation(H)
+	
 	user.visible_message("<span class='danger'>\The [user] has put [cuff_type] on \the [H]!</span>")
 
 	// Apply cuffs.
@@ -83,7 +88,7 @@
 	cuffs.loc = target
 	target.handcuffed = cuffs
 	target.update_inv_handcuffed()
-	return
+	return 1
 
 var/last_chew = 0
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
@@ -100,8 +105,8 @@ var/last_chew = 0
 	var/obj/item/organ/external/O = H.organs_by_name[H.hand?"l_hand":"r_hand"]
 	if (!O) return
 
-	var/s = "\red [H.name] chews on \his [O.name]!"
-	H.visible_message(s, "\red You chew on your [O.name]!")
+	var/s = "<span class='warning'>[H.name] chews on \his [O.name]!</span>"
+	H.visible_message(s, "<span class='warning'>You chew on your [O.name]!</span>")
 	H.attack_log += text("\[[time_stamp()]\] <font color='red'>[s] ([H.ckey])</font>")
 	log_attack("[s] ([H.ckey])")
 
@@ -117,6 +122,7 @@ var/last_chew = 0
 	breakouttime = 300 //Deciseconds = 30s
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"
+	elastic = 1
 
 /obj/item/weapon/handcuffs/cable/red
 	color = "#DD0000"
@@ -155,3 +161,12 @@ var/last_chew = 0
 
 /obj/item/weapon/handcuffs/cyborg
 	dispenser = 1
+
+/obj/item/weapon/handcuffs/cable/tape
+	name = "tape restraints"
+	desc = "DIY!"
+	icon_state = "tape_cross"
+	item_state = null
+	icon = 'icons/obj/bureaucracy.dmi'
+	breakouttime = 200
+	cuff_type = "duct tape"

@@ -1,3 +1,4 @@
+
 // Reports are a way to notify admins of wrongdoings that happened
 // while no admin was present. They work a bit similar to news, but
 // they can only be read by admins and moderators.
@@ -115,10 +116,10 @@ client/proc/display_admin_reports()
 	else
 		output += "Whoops, no reports!"
 
-	usr << browse(sanitize_local(output, SANITIZE_BROWSER), "window=news;size=600x400")
+	usr << browse(output, "window=news;size=600x400")
 
 
-client/proc/Report(mob/M as mob in world)
+client/proc/Report(mob/M as mob in mob_list)
 	set category = "Admin"
 	if(!src.holder)
 		return
@@ -158,7 +159,7 @@ client/proc/mark_report_done(ID as num)
 
 client/proc/edit_report(ID as num)
 	if(!src.holder || src.holder.level < 0)
-		src << "<b>You tried to modify the news, but you're not an admin!"
+		src << "<b>You tried to modify the news, but you're not an admin!</b>"
 		return
 
 	var/savefile/Reports = new("data/reports.sav")

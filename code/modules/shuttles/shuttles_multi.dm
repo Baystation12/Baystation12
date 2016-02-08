@@ -34,12 +34,12 @@
 			destination_dock_controllers[destination] = docking_controller
 		else
 			var/datum/computer/file/embedded_program/docking/C = locate(controller_tag)
-			
+
 			if(!istype(C))
 				world << "<span class='danger'>warning: shuttle with docking tag [controller_tag] could not find it's controller!</span>"
 			else
 				destination_dock_controllers[destination] = C
-	
+
 	//might as well set this up here.
 	if(origin) last_departed = origin
 	last_location = start_location
@@ -59,18 +59,19 @@
 	if(cloaked || isnull(departure_message))
 		return
 
-	command_announcement.Announce(departure_message,(announcer ? announcer : "Central Command"))
+	command_announcement.Announce(departure_message,(announcer ? announcer : "[boss_name]"))
 
 /datum/shuttle/multi_shuttle/proc/announce_arrival()
 
 	if(cloaked || isnull(arrival_message))
 		return
 
-	command_announcement.Announce(arrival_message,(announcer ? announcer : "Central Command"))
+	command_announcement.Announce(arrival_message,(announcer ? announcer : "[boss_name]"))
 
 
 /obj/machinery/computer/shuttle_control/multi
-	icon_state = "syndishuttle"
+	icon_keyboard = "syndie_key"
+	icon_screen = "syndishuttle"
 
 /obj/machinery/computer/shuttle_control/multi/attack_hand(user as mob)
 
@@ -99,15 +100,15 @@
 	dat += "<br><b><A href='?src=\ref[src];toggle_cloak=[1]'>Toggle cloaking field</A></b><br>"
 	dat += "<b><A href='?src=\ref[src];move_multi=[1]'>Move ship</A></b><br>"
 	dat += "<b><A href='?src=\ref[src];start=[1]'>Return to base</A></b></center>"
-	
+
 	//Docking
 	dat += "<center><br><br>"
 	if(MS.skip_docking_checks())
-		dat += "Docking Status: <font color='grey'>Not in use.</font></center>"
+		dat += "Docking Status: <font color='grey'>Not in use.</font>"
 	else
 		var/override_en = MS.docking_controller.override_enabled
 		var/docking_status = MS.docking_controller.get_docking_status()
-		
+
 		dat += "Docking Status: "
 		switch(docking_status)
 			if("undocked")
@@ -118,16 +119,17 @@
 				dat += "<font color='[override_en? "red" : "yellow"]'>Undocking</font>"
 			if("docked")
 				dat += "<font color='[override_en? "red" : "green"]'>Docked</font>"
-		
+
 		if(override_en) dat += " <font color='red'>(Override Enabled)</font>"
-		
+
 		dat += ". <A href='?src=\ref[src];refresh=[1]'>\[Refresh\]</A><br><br>"
-		
+
 		switch(docking_status)
 			if("undocked")
-				dat += "<b><A href='?src=\ref[src];dock_command=[1]'>Dock</A></b></center>"
+				dat += "<b><A href='?src=\ref[src];dock_command=[1]'>Dock</A></b>"
 			if("docked")
-				dat += "<b><A href='?src=\ref[src];undock_command=[1]'>Undock</A></b></center>"
+				dat += "<b><A href='?src=\ref[src];undock_command=[1]'>Undock</A></b>"
+	dat += "</center>"
 
 	user << browse("[dat]", "window=[shuttle_tag]shuttlecontrol;size=300x600")
 
@@ -139,11 +141,11 @@
 	var/choice = alert("The shuttle is currently docked! Please undock before continuing.","Error","Cancel","Force Launch")
 	if(choice == "Cancel")
 		return 0
-			
+
 	choice = alert("Forcing a shuttle launch while docked may result in severe injury, death and/or damage to property. Are you sure you wish to continue?", "Force Launch", "Force Launch", "Cancel")
 	if(choice == "Cancel")
 		return 0
-	
+
 	return 1
 
 /obj/machinery/computer/shuttle_control/multi/Topic(href, href_list)
@@ -165,11 +167,11 @@
 	if (MS.moving_status != SHUTTLE_IDLE)
 		usr << "\blue [shuttle_tag] vessel is moving."
 		return
-	
+
 	if(href_list["dock_command"])
 		MS.dock()
 		return
-	
+
 	if(href_list["undock_command"])
 		MS.undock()
 		return
@@ -178,7 +180,7 @@
 		if(MS.at_origin)
 			usr << "\red You are already at your home base."
 			return
-	
+
 		if((MS.last_move + MS.cooldown*10) > world.time)
 			usr << "\red The ship's drive is inoperable while the engines are charging."
 			return
@@ -186,7 +188,7 @@
 		if(!check_docking(MS))
 			updateUsrDialog()
 			return
-		
+
 		if(!MS.return_warning)
 			usr << "\red Returning to your home base will end your mission. If you are sure, press the button again."
 			//TODO: Actually end the mission.
@@ -207,11 +209,11 @@
 		if((MS.last_move + MS.cooldown*10) > world.time)
 			usr << "\red The ship's drive is inoperable while the engines are charging."
 			return
-		
+
 		if(!check_docking(MS))
 			updateUsrDialog()
 			return
-		
+
 		var/choice = input("Select a destination.") as null|anything in MS.destinations
 		if(!choice) return
 

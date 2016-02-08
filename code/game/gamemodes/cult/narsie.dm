@@ -70,8 +70,6 @@ var/global/list/narsie_list = list()
 		mezzer()
 
 /obj/singularity/narsie/large/eat()
-	set background = BACKGROUND_ENABLED
-
 	for (var/turf/A in orange(consume_range, src))
 		consume(A)
 
@@ -146,6 +144,7 @@ var/global/list/narsie_list = list()
 	if(!(istype(T, /turf/simulated/wall/cult)||istype(T, /turf/space)))
 		if(T.icon_state != "cult-narsie")
 			T.desc = "something that goes beyond your understanding went this way"
+			T.icon = 'icons/turf/flooring/cult.dmi'
 			T.icon_state = "cult-narsie"
 			T.set_light(1)
 
@@ -224,9 +223,9 @@ var/global/list/narsie_list = list()
 				consume(AM2)
 				continue
 
-		if (dist <= consume_range && !istype(A, /turf/space))
+		if (dist <= consume_range && !istype(A, get_base_turf_by_area(A)))
 			var/turf/T2 = A
-			T2.ChangeTurf(/turf/space)
+			T2.ChangeTurf(get_base_turf_by_area(A))
 
 /obj/singularity/narsie/consume(const/atom/A) //This one is for the small ones.
 	if(!(A.singuloCanEat()))
@@ -266,9 +265,9 @@ var/global/list/narsie_list = list()
 				spawn (0)
 					AM2.singularity_pull(src, src.current_size)
 
-		if (dist <= consume_range && !istype(A, /turf/space))
+		if (dist <= consume_range && !istype(A, get_base_turf_by_area(A)))
 			var/turf/T2 = A
-			T2.ChangeTurf(/turf/space)
+			T2.ChangeTurf(get_base_turf_by_area(A))
 
 /obj/singularity/narsie/ex_act(severity) //No throwing bombs at it either. --NEO
 	return
@@ -355,8 +354,6 @@ var/global/list/narsie_list = list()
 	grav_pull = 0
 
 /obj/singularity/narsie/wizard/eat()
-	set background = BACKGROUND_ENABLED
-
 	for (var/turf/T in trange(consume_range, src))
 		consume(T)
 

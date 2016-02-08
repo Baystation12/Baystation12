@@ -10,8 +10,8 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 3.0
+	origin_tech = list(TECH_COMBAT = 1, TECH_PHORON = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 500)
-	origin_tech = "combat=1;phorontech=1"
 	var/status = 0
 	var/throw_amount = 100
 	var/lit = 0	//on or off
@@ -112,20 +112,9 @@
 		update_icon()
 		return
 
-	if(istype(W, /obj/item/device/analyzer) && ptank)
-		var/obj/item/weapon/icon = src
-		user.visible_message("<span class='notice'>[user] has used the analyzer on \icon[icon]</span>")
-		var/pressure = ptank.air_contents.return_pressure()
-		var/total_moles = ptank.air_contents.total_moles
-
-		user << "\blue Results of analysis of \icon[icon]"
-		if(total_moles>0)
-			user << "\blue Pressure: [round(pressure,0.1)] kPa"
-			for(var/g in ptank.air_contents.gas)
-				user << "\blue [gas_data.name[g]]: [round((ptank.air_contents.gas[g] / total_moles) * 100)]%"
-			user << "\blue Temperature: [round(ptank.air_contents.temperature-T0C)]&deg;C"
-		else
-			user << "\blue Tank is empty!"
+	if(istype(W, /obj/item/device/analyzer))
+		var/obj/item/device/analyzer/A = W
+		A.analyze_gases(src, user)
 		return
 	..()
 	return

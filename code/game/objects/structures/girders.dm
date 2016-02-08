@@ -3,6 +3,7 @@
 	anchored = 1
 	density = 1
 	layer = 2
+	w_class = 5
 	var/state = 0
 	var/health = 200
 	var/cover = 50 //how much cover the girder provides against projectiles.
@@ -28,11 +29,10 @@
 	if(Proj.original != src && !prob(cover))
 		return PROJECTILE_CONTINUE //pass through
 
-	//Tasers and the like should not damage girders.
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+	var/damage = Proj.get_structure_damage()
+	if(!damage)
 		return
 
-	var/damage = Proj.damage
 	if(!istype(Proj, /obj/item/projectile/beam))
 		damage *= 0.4 //non beams do reduced damage
 
@@ -202,10 +202,6 @@
 		dismantle()
 		return
 	return ..()
-
-/obj/structure/girder/blob_act()
-	if(prob(40))
-		qdel(src)
 
 
 /obj/structure/girder/ex_act(severity)

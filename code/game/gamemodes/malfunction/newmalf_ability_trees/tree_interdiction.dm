@@ -40,7 +40,7 @@
 
 /datum/game_mode/malfunction/verb/recall_shuttle()
 	set name = "Recall Shuttle"
-	set desc = "25 CPU - Sends termination signal to CentCom quantum relay aborting current shuttle call."
+	set desc = "25 CPU - Sends termination signal to quantum relay aborting current shuttle call."
 	set category = "Software"
 	var/price = 25
 	var/mob/living/silicon/ai/user = usr

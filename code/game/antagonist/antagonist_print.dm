@@ -26,7 +26,7 @@
 					text += "<br><font color='green'><B>The [role_text] was successful!</B></font>"
 
 	if(global_objectives && global_objectives.len)
-		text += "<BR><FONT size = 2>Their objectives were:<FONT>"
+		text += "<BR><FONT size = 2>Their objectives were:</FONT>"
 		var/num = 1
 		for(var/datum/objective/O in global_objectives)
 			text += print_objective(O, num, 1)
@@ -72,15 +72,26 @@
 		if(H && H.uplink_owner && H.uplink_owner == ply)
 			TC_uses += H.used_TC
 			uplink_true = 1
-			var/list/refined_log = new()
-			for(var/datum/uplink_item/UI in H.purchase_log)
-				var/obj/I = new UI.path
-				refined_log.Add("[H.purchase_log[UI]]x\icon[I][UI.name]")
-				qdel(I)
-			purchases = english_list(refined_log, nothing_text = "")
+			purchases += get_uplink_purchases(H)
 	if(uplink_true)
 		text += " (used [TC_uses] TC)"
 		if(purchases)
 			text += "<br>[purchases]"
 
 	return text
+
+/proc/print_ownerless_uplinks()
+	var/has_printed = 0
+	for(var/obj/item/device/uplink/H in world_uplinks)
+		if(isnull(H.uplink_owner) && H.used_TC)
+			if(!has_printed)
+				has_printed = 1
+				world << "<b>Ownerless Uplinks</b>"
+			world << "[H.loc] (used [H.used_TC] TC)"
+			world << get_uplink_purchases(H)
+
+/proc/get_uplink_purchases(var/obj/item/device/uplink/H)
+	var/list/refined_log = new()
+	for(var/datum/uplink_item/UI in H.purchase_log)
+		refined_log.Add("[H.purchase_log[UI]]x[UI.log_icon()][UI.name]")
+	. = english_list(refined_log, nothing_text = "")

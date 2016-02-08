@@ -15,7 +15,7 @@
 /obj/structure/bed/chair/wheelchair/set_dir()
 	..()
 	overlays = null
-	var/image/O = image(icon = 'icons/obj/objects.dmi', icon_state = "w_overlay", layer = FLY_LAYER, dir = src.dir)
+	var/image/O = image(icon = 'icons/obj/furniture.dmi', icon_state = "w_overlay", layer = FLY_LAYER, dir = src.dir)
 	overlays += O
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
@@ -31,7 +31,7 @@
 		if(user==pulling)
 			pulling = null
 			user.pulledby = null
-			user << "\red You lost your grip!"
+			user << "<span class='warning'>You lost your grip!</span>"
 		return
 	if(buckled_mob && pulling && user == buckled_mob)
 		if(pulling.stat || pulling.stunned || pulling.weakened || pulling.paralysis || pulling.lying || pulling.restrained())
@@ -49,10 +49,10 @@
 		if(user==pulling)
 			return
 	if(pulling && (get_dir(src.loc, pulling.loc) == direction))
-		user << "\red You cannot go there."
+		user << "<span class='warning'>You cannot go there.</span>"
 		return
 	if(pulling && buckled_mob && (buckled_mob == user))
-		user << "\red You cannot drive while being pushed."
+		user << "<span class='warning'>You cannot drive while being pushed.</span>"
 		return
 
 	// Let's roll
@@ -103,7 +103,7 @@
 					unbuckle_mob()
 			if (pulling && (get_dist(src, pulling) > 1))
 				pulling.pulledby = null
-				pulling << "\red You lost your grip!"
+				pulling << "<span class='warning'>You lost your grip!</span>"
 				pulling = null
 		else
 			if (occupant && (src.loc != occupant.loc))
@@ -116,26 +116,21 @@
 		user_unbuckle_mob(user)
 	return
 
-/obj/structure/bed/chair/wheelchair/MouseDrop(over_object, src_location, over_location)
-	..()
-	if(over_object == usr && in_range(src, usr))
-		if(!ishuman(usr))	return
-		if(usr == buckled_mob)
-			usr << "\red You realize you are unable to push the wheelchair you sit in."
+/obj/structure/bed/chair/wheelchair/CtrlClick(var/mob/user)
+	if(in_range(src, user))
+		if(!ishuman(user))	return
+		if(user == buckled_mob)
+			user << "<span class='warning'>You realize you are unable to push the wheelchair you sit in.</span>"
 			return
 		if(!pulling)
-			pulling = usr
-			usr.pulledby = src
-			if(usr.pulling)
-				usr.stop_pulling()
-			usr.set_dir(get_dir(usr, src))
-			usr << "You grip \the [name]'s handles."
+			pulling = user
+			user.pulledby = src
+			if(user.pulling)
+				user.stop_pulling()
+			user.set_dir(get_dir(user, src))
+			user << "You grip \the [name]'s handles."
 		else
-			if(usr != pulling)
-				for(var/mob/O in viewers(pulling, null))
-					O.show_message("\red [usr] breaks [pulling]'s grip on the wheelchair.", 1)
-			else
-				usr << "You let go of \the [name]'s handles."
+			usr << "You let go of \the [name]'s handles."
 			pulling.pulledby = null
 			pulling = null
 		return

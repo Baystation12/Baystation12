@@ -12,10 +12,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 18750)
 	var/deployed = 0
 
-/obj/item/weapon/beartrap/suicide_act(mob/user)
-	viewers(user) << "<span class='danger'>[user] is putting the [src.name] on \his head! It looks like \he's trying to commit suicide.</span>"
-	return (BRUTELOSS)
-
 /obj/item/weapon/beartrap/proc/can_use(mob/user)
 	return (user.IsAdvancedToolUser() && !issilicon(user) && !user.stat && !user.restrained())
 

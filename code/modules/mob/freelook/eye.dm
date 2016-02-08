@@ -41,11 +41,14 @@ mob/eye/Destroy()
 		updateallghostimages()
 	..()
 
-// Movement code. Returns 0 to stop air movement from moving it.
 /mob/eye/Move(n, direct)
 	if(owner == src)
-		EyeMove(n, direct)
+		return EyeMove(n, direct)
 	return 0
+
+/mob/eye/airflow_hit(atom/A)
+	airflow_speed = 0
+	airflow_dest = null
 
 /mob/eye/examinate()
 	set popup_menu = 0
@@ -65,14 +68,14 @@ mob/eye/Destroy()
 	if(owner)
 		T = get_turf(T)
 		if(T != loc)
-			loc = T
+			forceMove(T)
 
 			if(owner.client)
 				owner.client.eye = src
 
 			if(owner_follows_eye)
 				visualnet.updateVisibility(owner, 0)
-				owner.loc = loc
+				owner.forceMove(loc)
 				visualnet.updateVisibility(owner, 0)
 
 			visualnet.visibility(src)
@@ -110,3 +113,4 @@ mob/eye/Destroy()
 		sprint = min(sprint + 0.5, max_sprint)
 	else
 		sprint = initial
+	return 1

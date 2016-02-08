@@ -11,27 +11,24 @@
 
 /datum/chunk/cult/acquireVisibleTurfs(var/list/visible)
 	for(var/mob/living/L in living_mob_list)
-		for(var/turf/t in L.seen_turfs())
+		for(var/turf/t in L.seen_cult_turfs())
 			visible[t] = t
 
-/mob/living/proc/seen_turfs()
+/mob/living/proc/seen_cult_turfs()
 	return seen_turfs_in_range(src, 3)
 
-/mob/living/carbon/human/seen_turfs()
-	/*if(src.isSynthetic())
-		return list()*/
-
+/mob/living/carbon/human/seen_cult_turfs()
 	if(mind in cult.current_antagonists)
-		return seen_turfs_in_range(src, client ? client.view : 7)
+		return seen_turfs_in_range(src, world.view)
 	return ..()
 
-/mob/living/silicon/seen_turfs()
+/mob/living/silicon/seen_cult_turfs()
 	return list()
 
-/mob/living/simple_animal/seen_turfs()
+/mob/living/simple_animal/seen_cult_turfs()
 	return seen_turfs_in_range(src, 1)
 
-/mob/living/simple_animal/shade/narsie/seen_turfs()
+/mob/living/simple_animal/shade/narsie/seen_cult_turfs()
 	return view(2, src)
 
 /proc/seen_turfs_in_range(var/source, var/range)

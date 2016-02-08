@@ -25,11 +25,6 @@
 /obj/item/weapon/reagent_containers/attack_self(mob/user as mob)
 	return
 
-/obj/item/weapon/reagent_containers/attack(mob/M as mob, mob/user as mob, def_zone)
-	if(can_operate(M))//Checks if mob is lying down on table for surgery
-		if(do_surgery(M, user, src))
-			return
-
 /obj/item/weapon/reagent_containers/afterattack(obj/target, mob/user, flag)
 	return
 
@@ -71,7 +66,7 @@
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to splash [target.name] ([target.key]). Reagents: [contained]</font>")
 	msg_admin_attack("[user.name] ([user.ckey]) splashed [target.name] ([target.key]) with [name]. Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
-	user.visible_message("<span class='danger'>[target] has been splashed with something by [user]!", "<span class = 'notice'>You splash the solution onto [target].</span>")
+	user.visible_message("<span class='danger'>[target] has been splashed with something by [user]!</span>", "<span class = 'notice'>You splash the solution onto [target].</span>")
 	reagents.splash(target, reagents.total_volume)
 	return 1
 
@@ -79,10 +74,10 @@
 	user << "<span class='notice'>You eat \the [src]</span>"
 
 /obj/item/weapon/reagent_containers/proc/other_feed_message_start(var/mob/user, var/mob/target)
-	user.visible_message("<span class='warning'>[user] is trying to feed [target] \the [src]!")
+	user.visible_message("<span class='warning'>[user] is trying to feed [target] \the [src]!</span>")
 
 /obj/item/weapon/reagent_containers/proc/other_feed_message_finish(var/mob/user, var/mob/target)
-	user.visible_message("<span class='warning'>[user] has fed [target] \the [src]!")
+	user.visible_message("<span class='warning'>[user] has fed [target] \the [src]!</span>")
 
 /obj/item/weapon/reagent_containers/proc/feed_sound(var/mob/user)
 	return
@@ -98,15 +93,15 @@
 	if(target == user)
 		if(istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
-			if(H.species.flags & IS_SYNTHETIC)
-				H << "<span class='notice'>You have a monitor for a head, where do you think you're going to put that?</span>"
-				return 1
-
+			if(!H.check_has_mouth())
+				user << "Where do you intend to put \the [src]? You don't have a mouth!"
+				return
 			var/obj/item/blocked = H.check_mouth_coverage()
 			if(blocked)
 				user << "<span class='warning'>\The [blocked] is in the way!</span>"
 				return
 
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //puts a limit on how fast people can eat/drink things
 		self_feed_message(user)
 		reagents.trans_to_mob(user, amount_per_transfer_from_this, CHEM_INGEST)
 		feed_sound(user)
@@ -114,10 +109,9 @@
 	else
 		if(istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = target
-			if(H.species.flags & IS_SYNTHETIC)
-				H << "<span class='notice'>They have a monitor for a head, where do you think you're going to put that?</span>"
+			if(!H.check_has_mouth())
+				user << "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!"
 				return
-
 			var/obj/item/blocked = H.check_mouth_coverage()
 			if(blocked)
 				user << "<span class='warning'>\The [blocked] is in the way!</span>"
@@ -125,6 +119,7 @@
 
 		other_feed_message_start(user, target)
 
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(!do_mob(user, target))
 			return
 
@@ -140,7 +135,15 @@
 		return 1
 
 /obj/item/weapon/reagent_containers/proc/standard_pour_into(var/mob/user, var/atom/target) // This goes into afterattack and yes, it's atom-level
-	if(!target.is_open_container() || !target.reagents)
+	if(!target.reagents)
+		return 0
+
+	// Ensure we don't splash beakers and similar containers.
+	if(!target.is_open_container() && istype(target, /obj/item/weapon/reagent_containers))
+		user << "<span class='notice'>\The [target] is closed.</span>"
+		return 1
+	// Otherwise don't care about splashing.
+	else if(!target.is_open_container())
 		return 0
 
 	if(!reagents || !reagents.total_volume)

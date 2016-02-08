@@ -2,9 +2,10 @@
 	name = "Maintenance Drone Control"
 	desc = "Used to monitor the station's drone population and the assembler that services them."
 	icon = 'icons/obj/computer.dmi'
-	icon_state = "power"
+	icon_keyboard = "power_key"
+	icon_screen = "power"
 	req_access = list(access_engine_equip)
-	circuit = "/obj/item/weapon/circuitboard/drone_control"
+	circuit = /obj/item/weapon/circuitboard/drone_control
 
 	//Used when pinging drones.
 	var/drone_call_area = "Engineering"
@@ -29,7 +30,7 @@
 	for(var/mob/living/silicon/robot/drone/D in world)
 		if(D.z != src.z)
 			continue
-		dat += "<BR>[D.real_name] ([D.stat == 2 ? "<font color='red'>INACTIVE" : "<font color='green'>ACTIVE"]</FONT>)"
+		dat += "<BR>[D.real_name] ([D.stat == 2 ? "<font color='red'>INACTIVE</FONT>" : "<font color='green'>ACTIVE</FONT>"])"
 		dat += "<font dize = 9><BR>Cell charge: [D.cell.charge]/[D.cell.maxcharge]."
 		dat += "<BR>Currently located in: [get_area(D)]."
 		dat += "<BR><A href='?src=\ref[src];resync=\ref[D]'>Resync</A> | <A href='?src=\ref[src];shutdown=\ref[D]'>Shutdown</A></font>"

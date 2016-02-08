@@ -1,6 +1,7 @@
 /obj/machinery/computer/helm
 	name = "helm control console"
-	icon_state = "id"
+	icon_keyboard = "med_key"
+	icon_screen = "id"
 	var/state = "status"
 	var/obj/effect/map/ship/linked			//connected overmap object
 	var/autopilot = 0

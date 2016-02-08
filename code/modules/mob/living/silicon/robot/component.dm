@@ -217,8 +217,6 @@
 /obj/item/robot_parts/robot_component
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "working"
-	construction_time = 200
-	construction_cost = list(DEFAULT_WALL_MATERIAL=5000)
 	var/brute = 0
 	var/burn = 0
 	var/icon_state_broken = "broken"

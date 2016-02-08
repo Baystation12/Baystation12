@@ -164,8 +164,9 @@
 		dat += "<hr>"
 
 		if(P)
-			if(P.buffer)
-				dat += "<br><br>MULTITOOL BUFFER: [P.buffer] ([P.buffer.id]) <a href='?src=\ref[src];link=1'>\[Link\]</a> <a href='?src=\ref[src];flush=1'>\[Flush\]"
+			var/obj/machinery/telecomms/device = P.get_buffer()
+			if(istype(device))
+				dat += "<br><br>MULTITOOL BUFFER: [device] ([device.id]) <a href='?src=\ref[src];link=1'>\[Link\]</a> <a href='?src=\ref[src];flush=1'>\[Flush\]"
 			else
 				dat += "<br><br>MULTITOOL BUFFER: <a href='?src=\ref[src];buffer=1'>\[Add Machine\]</a>"
 
@@ -231,7 +232,7 @@
 /obj/machinery/telecomms/processor/Options_Topic(href, href_list)
 
 	if(href_list["process"])
-		temp = "<font color = #666633>-% Processing mode changed. %-</font color>"
+		temp = "<font color = #666633>-% Processing mode changed. %-</font>"
 		src.process_mode = !src.process_mode
 */
 
@@ -249,18 +250,18 @@
 
 	if(href_list["receive"])
 		receiving = !receiving
-		temp = "<font color = #666633>-% Receiving mode changed. %-</font color>"
+		temp = "<font color = #666633>-% Receiving mode changed. %-</font>"
 	if(href_list["broadcast"])
 		broadcasting = !broadcasting
-		temp = "<font color = #666633>-% Broadcasting mode changed. %-</font color>"
+		temp = "<font color = #666633>-% Broadcasting mode changed. %-</font>"
 	if(href_list["change_listening"])
 		//Lock to the station OR lock to the current position!
 		//You need at least two receivers and two broadcasters for this to work, this includes the machine.
 		var/result = toggle_level()
 		if(result)
-			temp = "<font color = #666633>-% [src]'s signal has been successfully changed.</font color>"
+			temp = "<font color = #666633>-% [src]'s signal has been successfully changed.</font>"
 		else
-			temp = "<font color = #666633>-% [src] could not lock it's signal onto the station. Two broadcasters or receivers required.</font color>"
+			temp = "<font color = #666633>-% [src] could not lock it's signal onto the station. Two broadcasters or receivers required.</font>"
 
 // BUS
 
@@ -279,10 +280,10 @@
 					newfreq *= 10 // shift the decimal one place
 				if(newfreq < 10000)
 					change_frequency = newfreq
-					temp = "<font color = #666633>-% New frequency to change to assigned: \"[newfreq] GHz\" %-</font color>"
+					temp = "<font color = #666633>-% New frequency to change to assigned: \"[newfreq] GHz\" %-</font>"
 			else
 				change_frequency = 0
-				temp = "<font color = #666633>-% Frequency changing deactivated %-</font color>"
+				temp = "<font color = #666633>-% Frequency changing deactivated %-</font>"
 
 
 /obj/machinery/telecomms/Topic(href, href_list)
@@ -302,27 +303,27 @@
 			if("toggle")
 
 				src.toggled = !src.toggled
-				temp = "<font color = #666633>-% [src] has been [src.toggled ? "activated" : "deactivated"].</font color>"
+				temp = "<font color = #666633>-% [src] has been [src.toggled ? "activated" : "deactivated"].</font>"
 				update_power()
 
 			/*
 			if("hide")
 				src.hide = !hide
-				temp = "<font color = #666633>-% Shadow Link has been [src.hide ? "activated" : "deactivated"].</font color>"
+				temp = "<font color = #666633>-% Shadow Link has been [src.hide ? "activated" : "deactivated"].</font>"
 			*/
 
 			if("id")
 				var/newid = copytext(reject_bad_text(input(usr, "Specify the new ID for this machine", src, id) as null|text),1,MAX_MESSAGE_LEN)
 				if(newid && canAccess(usr))
 					id = newid
-					temp = "<font color = #666633>-% New ID assigned: \"[id]\" %-</font color>"
+					temp = "<font color = #666633>-% New ID assigned: \"[id]\" %-</font>"
 
 			if("network")
 				var/newnet = input(usr, "Specify the new network for this machine. This will break all current links.", src, network) as null|text
 				if(newnet && canAccess(usr))
 
 					if(length(newnet) > 15)
-						temp = "<font color = #666633>-% Too many characters in new network tag %-</font color>"
+						temp = "<font color = #666633>-% Too many characters in new network tag %-</font>"
 
 					else
 						for(var/obj/machinery/telecomms/T in links)
@@ -330,7 +331,7 @@
 
 						network = newnet
 						links = list()
-						temp = "<font color = #666633>-% New network tag assigned: \"[network]\" %-</font color>"
+						temp = "<font color = #666633>-% New network tag assigned: \"[network]\" %-</font>"
 
 
 			if("freq")
@@ -340,21 +341,21 @@
 						newfreq *= 10 // shift the decimal one place
 					if(!(newfreq in freq_listening) && newfreq < 10000)
 						freq_listening.Add(newfreq)
-						temp = "<font color = #666633>-% New frequency filter assigned: \"[newfreq] GHz\" %-</font color>"
+						temp = "<font color = #666633>-% New frequency filter assigned: \"[newfreq] GHz\" %-</font>"
 
 	if(href_list["delete"])
 
 		// changed the layout about to workaround a pesky runtime -- Doohl
 
 		var/x = text2num(href_list["delete"])
-		temp = "<font color = #666633>-% Removed frequency filter [x] %-</font color>"
+		temp = "<font color = #666633>-% Removed frequency filter [x] %-</font>"
 		freq_listening.Remove(x)
 
 	if(href_list["unlink"])
 
 		if(text2num(href_list["unlink"]) <= length(links))
 			var/obj/machinery/telecomms/T = links[text2num(href_list["unlink"])]
-			temp = "<font color = #666633>-% Removed \ref[T] [T.name] from linked entities. %-</font color>"
+			temp = "<font color = #666633>-% Removed \ref[T] [T.name] from linked entities. %-</font>"
 
 			// Remove link entries from both T and src.
 
@@ -365,28 +366,30 @@
 	if(href_list["link"])
 
 		if(P)
-			if(P.buffer && P.buffer != src)
-				if(!(src in P.buffer.links))
-					P.buffer.links.Add(src)
+			var/obj/machinery/telecomms/device = P.get_buffer()
+			if(istype(device) && device != src)
+				if(!(src in device.links))
+					device.links.Add(src)
 
-				if(!(P.buffer in src.links))
-					src.links.Add(P.buffer)
+				if(!(device in src.links))
+					src.links.Add(device)
 
-				temp = "<font color = #666633>-% Successfully linked with \ref[P.buffer] [P.buffer.name] %-</font color>"
+				temp = "<font color = #666633>-% Successfully linked with \ref[device] [device.name] %-</font>"
 
 			else
-				temp = "<font color = #666633>-% Unable to acquire buffer %-</font color>"
+				temp = "<font color = #666633>-% Unable to acquire buffer %-</font>"
 
 	if(href_list["buffer"])
 
-		P.buffer = src
-		temp = "<font color = #666633>-% Successfully stored \ref[P.buffer] [P.buffer.name] in buffer %-</font color>"
+		P.set_buffer(src)
+		var/atom/buffer = P.get_buffer()
+		temp = "<font color = #666633>-% Successfully stored \ref[buffer] [buffer.name] in buffer %-</font>"
 
 
 	if(href_list["flush"])
 
-		temp = "<font color = #666633>-% Buffer successfully flushed. %-</font color>"
-		P.buffer = null
+		temp = "<font color = #666633>-% Buffer successfully flushed. %-</font>"
+		P.set_buffer(null)
 
 	src.Options_Topic(href, href_list)
 

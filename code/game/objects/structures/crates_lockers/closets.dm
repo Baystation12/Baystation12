@@ -4,6 +4,7 @@
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "closed"
 	density = 1
+	w_class = 5
 	var/icon_closed = "closed"
 	var/icon_opened = "open"
 	var/opened = 0
@@ -11,7 +12,7 @@
 	var/wall_mounted = 0 //never solid (You can always pass over it)
 	var/health = 100
 	var/breakout = 0 //if someone is currently breaking out. mutex
-	var/storage_capacity = 30 //This is so that someone can't pack hundreds of items in a locker/crate
+	var/storage_capacity = 2 * MOB_MEDIUM //This is so that someone can't pack hundreds of items in a locker/crate
 							  //then open it in a populated area to crash clients.
 	var/open_sound = 'sound/machines/click.ogg'
 	var/close_sound = 'sound/machines/click.ogg'
@@ -20,9 +21,8 @@
 	var/store_items = 1
 	var/store_mobs = 1
 
-	var/const/default_mob_size = 15
-
 /obj/structure/closet/initialize()
+	..()
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
 		var/obj/item/I
 		for(I in src.loc)
@@ -52,11 +52,6 @@
 			user << "There is still some free space."
 		else
 			user << "It is full."
-
-
-
-/obj/structure/closet/alter_health()
-	return get_turf(src)
 
 /obj/structure/closet/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0 || wall_mounted)) return 1
@@ -150,14 +145,13 @@
 	for(var/mob/living/M in src.loc)
 		if(M.buckled || M.pinned.len)
 			continue
-		var/current_mob_size = (M.mob_size ? M.mob_size : default_mob_size)
-		if(stored_units + added_units + current_mob_size > storage_capacity)
+		if(stored_units + added_units + M.mob_size > storage_capacity)
 			break
 		if(M.client)
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 		M.forceMove(src)
-		added_units += current_mob_size
+		added_units += M.mob_size
 	return added_units
 
 /obj/structure/closet/proc/toggle(mob/user as mob)
@@ -194,27 +188,14 @@
 		qdel(src)
 
 /obj/structure/closet/bullet_act(var/obj/item/projectile/Proj)
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+	var/proj_damage = Proj.get_structure_damage()
+	if(!proj_damage)
 		return
 
 	..()
-	damage(Proj.damage)
+	damage(proj_damage)
 
 	return
-
-// this should probably use dump_contents()
-/obj/structure/closet/blob_act()
-	if(prob(75))
-		for(var/atom/movable/A as mob|obj in src)
-			A.forceMove(src.loc)
-		qdel(src)
-
-/obj/structure/closet/meteorhit(obj/O as obj)
-	if(O.icon_state == "flaming")
-		for(var/mob/M in src)
-			M.meteorhit(O)
-		src.dump_contents()
-		qdel(src)
 
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(src.opened)
@@ -236,6 +217,15 @@
 			for(var/mob/M in viewers(src))
 				M.show_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", 3, "You hear welding.", 2)
 			qdel(src)
+			return
+		if(istype(W, /obj/item/weapon/storage/laundry_basket) && W.contents.len)
+			var/obj/item/weapon/storage/laundry_basket/LB = W
+			var/turf/T = get_turf(src)
+			for(var/obj/item/I in LB.contents)
+				LB.remove_from_storage(I, T)
+			user.visible_message("<span class='notice'>[user] empties \the [LB] into \the [src].</span>", \
+								 "<span class='notice'>You empty \the [LB] into \the [src].</span>", \
+								 "<span class='notice'>You hear rustling of clothes.</span>")
 			return
 		if(isrobot(user))
 			return
@@ -327,12 +317,6 @@
 	else
 		icon_state = icon_opened
 
-/obj/structure/closet/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
-	for (var/atom/A in src)
-		if(istype(A,/obj/))
-			var/obj/O = A
-			O.hear_talk(M, text, verb, speaking)
-
 /obj/structure/closet/attack_generic(var/mob/user, var/damage, var/attack_message = "destroys", var/wallbreaker)
 	if(!damage || !wallbreaker)
 		return
@@ -357,9 +341,9 @@
 	if(!req_breakout())
 		return
 
+	escapee.setClickCooldown(100)
+
 	//okay, so the closet is either welded or locked... resist!!!
-	escapee.next_move = world.time + 100
-	escapee.last_special = world.time + 100
 	escapee << "<span class='warning'>You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)</span>"
 
 	visible_message("<span class='danger'>The [src] begins to shake violently!</span>")

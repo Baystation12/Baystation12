@@ -10,3 +10,6 @@
 	src.icon_state = "ai"
 	src.anchored = 1
 	src.canmove = 0
+
+/mob/living/silicon/decoy/initialize()
+	return

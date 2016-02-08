@@ -11,18 +11,10 @@
 		return chest.attackby(W,user)
 
 	// Lock or unlock the access panel.
-	if(istype(W, /obj/item/weapon/card) || istype(W, /obj/item/device/pda))
-
+	if(W.GetID())
 		if(subverted)
 			locked = 0
 			user << "<span class='danger'>It looks like the locking system has been shorted out.</span>"
-			return
-		else if(istype(W, /obj/item/weapon/card/emag))
-			req_access.Cut()
-			req_one_access.Cut()
-			locked = 0
-			subverted = 1
-			user << "<span class='danger'>You short out the access protocol for the suit.</span>"
 			return
 
 		if((!req_access || !req_access.len) && (!req_one_access || !req_one_access.len))
@@ -64,7 +56,7 @@
 				user << "\The [src] already has a tank installed."
 				return
 
-			user.drop_from_inventory(W)
+			if(!user.unEquip(W)) return
 			air_supply = W
 			W.forceMove(src)
 			user << "You slot [W] into [src] and tighten the connecting valve."
@@ -92,8 +84,8 @@
 				return
 			if(!user || !W)
 				return
+			if(!user.unEquip(mod)) return
 			user << "You install \the [mod] into \the [src]."
-			user.drop_from_inventory(mod)
 			installed_modules |= mod
 			mod.forceMove(src)
 			mod.installed(src)
@@ -102,8 +94,8 @@
 
 		else if(!cell && istype(W,/obj/item/weapon/cell))
 
+			if(!user.unEquip(W)) return
 			user << "You jack \the [W] into \the [src]'s battery mount."
-			user.drop_from_inventory(W)
 			W.forceMove(src)
 			src.cell = W
 			return
@@ -193,3 +185,12 @@
 		if(shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
 			return
 	..()
+
+/obj/item/weapon/rig/emag_act(var/remaining_charges, var/mob/user)
+	if(!subverted)
+		req_access.Cut()
+		req_one_access.Cut()
+		locked = 0
+		subverted = 1
+		user << "<span class='danger'>You short out the access protocol for the suit.</span>"
+		return 1

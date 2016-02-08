@@ -1,12 +1,11 @@
 /obj/machinery/camera
-
 	var/list/motionTargets = list()
 	var/detectTime = 0
 	var/area/ai_monitored/area_motion = null
 	var/alarm_delay = 100 // Don't forget, there's another 10 seconds in queueAlarm()
+	flags = PROXMOVE
 
-
-/obj/machinery/camera/process()
+/obj/machinery/camera/internal_process()
 	// motion camera event loop
 	if (stat & (EMPED|NOPOWER))
 		return

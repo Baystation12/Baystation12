@@ -1,3 +1,23 @@
+var/list/mob_hat_cache = list()
+/proc/get_hat_icon(var/obj/item/hat, var/offset_x = 0, var/offset_y = 0)
+	var/t_state = hat.icon_state
+	if(hat.item_state_slots && hat.item_state_slots[slot_head_str])
+		t_state = hat.item_state_slots[slot_head_str]
+	else if(hat.item_state)
+		t_state = hat.item_state
+	var/key = "[t_state]_[offset_x]_[offset_y]"
+	if(!mob_hat_cache[key])            // Not ideal as there's no guarantee all hat icon_states
+		var/t_icon = INV_HEAD_DEF_ICON // are unique across multiple dmis, but whatever.
+		if(hat.icon_override)
+			t_icon = hat.icon_override
+		else if(hat.item_icons && (slot_head_str in hat.item_icons))
+			t_icon = hat.item_icons[slot_head_str]
+		var/image/I = image(icon = t_icon, icon_state = t_state)
+		I.pixel_x = offset_x
+		I.pixel_y = offset_y
+		mob_hat_cache[key] = I
+	return mob_hat_cache[key]
+
 /mob/living/silicon/robot/drone
 	name = "drone"
 	real_name = "drone"
@@ -16,21 +36,70 @@
 	req_access = list(access_engine, access_robotics)
 	integrated_light_power = 3
 	local_transmit = 1
+	possession_candidate = 1
+
+	can_pull_size = 3
+	can_pull_mobs = MOB_PULL_SMALLER
 
 	mob_bump_flag = SIMPLE_ANIMAL
 	mob_swap_flags = SIMPLE_ANIMAL
 	mob_push_flags = SIMPLE_ANIMAL
 	mob_always_swap = 1
 
+	mob_size = MOB_MEDIUM // Small mobs can't open doors, it's a huge pain for drones.
+
 	//Used for self-mailing.
 	var/mail_destination = ""
 	var/obj/machinery/drone_fabricator/master_fabricator
 	var/law_type = /datum/ai_laws/drone
 	var/module_type = /obj/item/weapon/robot_module/drone
-	var/can_pull_size = 2
-	var/can_pull_mobs
+	var/obj/item/hat
+	var/hat_x_offset = 0
+	var/hat_y_offset = -13
 
 	holder_type = /obj/item/weapon/holder/drone
+
+/mob/living/silicon/robot/drone/can_be_possessed_by(var/mob/dead/observer/possessor)
+	if(!istype(possessor) || !possessor.client || !possessor.ckey)
+		return 0
+	if(!config.allow_drone_spawn)
+		src << "<span class='danger'>Playing as drones is not currently permitted.</span>"
+		return 0
+	if(too_many_active_drones())
+		src << "<span class='danger'>The maximum number of active drones has been reached..</span>"
+		return 0
+	if(jobban_isbanned(possessor,"Cyborg"))
+		usr << "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>"
+		return 0
+	if(!possessor.MayRespawn(1,DRONE_SPAWN_DELAY))
+		return 0
+	return 1
+
+/mob/living/silicon/robot/drone/do_possession(var/mob/dead/observer/possessor)
+	if(!(istype(possessor) && possessor.ckey))
+		return 0
+	if(src.ckey || src.client)
+		possessor << "<span class='warning'>\The [src] already has a player.</span>"
+		return 0
+	message_admins("<span class='adminnotice'>[key_name_admin(possessor)] has taken control of \the [src].</span>")
+	log_admin("[key_name(possessor)] took control of \the [src].")
+	transfer_personality(possessor.client)
+	qdel(possessor)
+	return 1
+
+/mob/living/silicon/robot/drone/Destroy()
+	if(hat)
+		hat.loc = get_turf(src)
+	..()
+
+/mob/living/silicon/robot/drone/construction
+	icon_state = "constructiondrone"
+	law_type = /datum/ai_laws/construction_drone
+	module_type = /obj/item/weapon/robot_module/drone/construction
+	hat_x_offset = 1
+	hat_y_offset = -12
+	can_pull_size = 5
+	can_pull_mobs = MOB_PULL_SAME
 
 /mob/living/silicon/robot/drone/New()
 
@@ -58,11 +127,11 @@
 
 /mob/living/silicon/robot/drone/init()
 	aiCamera = new/obj/item/device/camera/siliconcam/drone_camera(src)
-
+	additional_law_channels["Drone"] = ":d"
 	if(!laws) laws = new law_type
 	if(!module) module = new module_type(src)
 
-	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT logo and the subscript: 'NanoTrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
+	flavor_text = "It's a tiny little repair drone. The casing is stamped with an corporate logo and the subscript: '[company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 
 //Redefining some robot procs...
@@ -82,6 +151,8 @@
 		overlays += "eyes-[icon_state]"
 	else
 		overlays -= "eyes"
+	if(hat) // Let the drones wear hats.
+		overlays |= get_hat_icon(hat, hat_x_offset, hat_y_offset)
 
 /mob/living/silicon/robot/drone/choose_icon()
 	return
@@ -89,50 +160,30 @@
 /mob/living/silicon/robot/drone/pick_module()
 	return
 
-//Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
-/mob/living/silicon/robot/drone/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/mob/living/silicon/robot/drone/proc/wear_hat(var/obj/item/new_hat)
+	if(hat)
+		return
+	hat = new_hat
+	new_hat.forceMove(src)
+	updateicon()
 
-	if(istype(W, /obj/item/borg/upgrade/))
+//Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
+/mob/living/silicon/robot/drone/attackby(var/obj/item/weapon/W, var/mob/user)
+
+	if(user.a_intent == "help" && istype(W, /obj/item/clothing/head))
+		if(hat)
+			user << "<span class='warning'>\The [src] is already wearing \the [hat].</span>"
+			return
+		user.unEquip(W)
+		wear_hat(W)
+		user.visible_message("<span class='notice'>\The [user] puts \the [W] on \the [src].</span>")
+		return
+	else if(istype(W, /obj/item/borg/upgrade/))
 		user << "<span class='danger'>\The [src] is not compatible with \the [W].</span>"
 		return
 
 	else if (istype(W, /obj/item/weapon/crowbar))
 		user << "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>"
-		return
-
-	else if (istype(W, /obj/item/weapon/card/emag))
-
-		if(!client || stat == 2)
-			user << "<span class='danger'>There's not much point subverting this heap of junk.</span>"
-			return
-
-		if(emagged)
-			src << "<span class='danger'>\The [user] attempts to load subversive software into you, but your hacked subroutines ignore the attempt.</span>"
-			user << "<span class='danger'>You attempt to subvert [src], but the sequencer has no effect.</span>"
-			return
-
-		user << "<span class='danger'>You swipe the sequencer across [src]'s interface and watch its eyes flicker.</span>"
-		src << "<span class='danger'>You feel a sudden burst of malware loaded into your execute-as-root buffer. Your tiny brain methodically parses, loads and executes the script.</span>"
-
-		var/obj/item/weapon/card/emag/emag = W
-		emag.uses--
-
-		message_admins("[key_name_admin(user)] emagged drone [key_name_admin(src)].  Laws overridden.")
-		log_game("[key_name(user)] emagged drone [key_name(src)].  Laws overridden.")
-		var/time = time2text(world.realtime,"hh:mm:ss")
-		lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
-
-		emagged = 1
-		lawupdate = 0
-		connected_ai = null
-		clear_supplied_laws()
-		clear_inherent_laws()
-		laws = new /datum/ai_laws/syndicate_override
-		set_zeroth_law("Only [user] and people \he designates as being such are operatives.")
-
-		src << "<b>Obey these laws:</b>"
-		laws.show_laws(src)
-		src << "<span class='danger'>ALERT: [user] is your new master. Obey \his commands and your new laws.</span>"
 		return
 
 	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
@@ -148,12 +199,7 @@
 				return
 
 			user.visible_message("<span class='danger'>\The [user] swipes \his ID card through \the [src], attempting to reboot it.</span>", "<span class='danger'>>You swipe your ID card through \the [src], attempting to reboot it.</span>")
-			var/drones = 0
-			for(var/mob/living/silicon/robot/drone/D in world)
-				if(D.key && D.client)
-					drones++
-			if(drones < config.max_maint_drones)
-				request_player()
+			request_player()
 			return
 
 		else
@@ -170,6 +216,37 @@
 		return
 
 	..()
+
+/mob/living/silicon/robot/drone/emag_act(var/remaining_charges, var/mob/user)
+	if(!client || stat == 2)
+		user << "<span class='danger'>There's not much point subverting this heap of junk.</span>"
+		return
+
+	if(emagged)
+		src << "<span class='danger'>\The [user] attempts to load subversive software into you, but your hacked subroutines ignore the attempt.</span>"
+		user << "<span class='danger'>You attempt to subvert [src], but the sequencer has no effect.</span>"
+		return
+
+	user << "<span class='danger'>You swipe the sequencer across [src]'s interface and watch its eyes flicker.</span>"
+	src << "<span class='danger'>You feel a sudden burst of malware loaded into your execute-as-root buffer. Your tiny brain methodically parses, loads and executes the script.</span>"
+
+	message_admins("[key_name_admin(user)] emagged drone [key_name_admin(src)].  Laws overridden.")
+	log_game("[key_name(user)] emagged drone [key_name(src)].  Laws overridden.")
+	var/time = time2text(world.realtime,"hh:mm:ss")
+	lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
+
+	emagged = 1
+	lawupdate = 0
+	connected_ai = null
+	clear_supplied_laws()
+	clear_inherent_laws()
+	laws = new /datum/ai_laws/syndicate_override
+	set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
+
+	src << "<b>Obey these laws:</b>"
+	laws.show_laws(src)
+	src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and \his commands.</span>"
+	return 1
 
 //DRONE LIFE/DEATH
 
@@ -195,7 +272,7 @@
 	..()
 
 //DRONE MOVEMENT.
-/mob/living/silicon/robot/drone/Process_Spaceslipping(var/prob_slip)
+/mob/living/silicon/robot/drone/slip_chance(var/prob_slip)
 	return 0
 
 //CONSOLE PROCS
@@ -225,28 +302,13 @@
 //Reboot procs.
 
 /mob/living/silicon/robot/drone/proc/request_player()
-	for(var/mob/dead/observer/O in player_list)
-		if(jobban_isbanned(O, "Cyborg"))
-			continue
-		if(O.client)
-			if(O.client.prefs.be_special & BE_PAI)
-				question(O.client)
-
-/mob/living/silicon/robot/drone/proc/question(var/client/C)
-	spawn(0)
-		if(!C || jobban_isbanned(C,"Cyborg"))	return
-		var/response = alert(C, "Someone is attempting to reboot a maintenance drone. Would you like to play as one?", "Maintenance drone reboot", "Yes", "No", "Never for this round")
-		if(!C || ckey)
-			return
-		if(response == "Yes")
-			transfer_personality(C)
-		else if (response == "Never for this round")
-			C.prefs.be_special ^= BE_PAI
+	if(too_many_active_drones())
+		return
+	var/datum/ghosttrap/G = get_ghost_trap("maintenance drone")
+	G.request_player(src, "Someone is attempting to reboot a maintenance drone.", 30 SECONDS)
 
 /mob/living/silicon/robot/drone/proc/transfer_personality(var/client/player)
-
 	if(!player) return
-
 	src.ckey = player.ckey
 
 	if(player.mob && player.mob.mind)
@@ -263,32 +325,11 @@
 	src << "Remember,  you are <b>lawed against interference with the crew</b>. Also remember, <b>you DO NOT take orders from the AI.</b>"
 	src << "Use <b>say ;Hello</b> to talk to other drones and <b>say Hello</b> to speak silently to your nearby fellows."
 
-/mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
-
-	if(!(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct)))
-		if(istype(AM,/obj/item))
-			var/obj/item/O = AM
-			if(O.w_class > can_pull_size)
-				src << "<span class='warning'>You are too small to pull that.</span>"
-				return
-		else
-			if(!can_pull_mobs)
-				src << "<span class='warning'>You are too small to pull that.</span>"
-				return
-	..()
-
 /mob/living/silicon/robot/drone/add_robot_verbs()
 	src.verbs |= silicon_subsystems
 
 /mob/living/silicon/robot/drone/remove_robot_verbs()
 	src.verbs -= silicon_subsystems
-
-/mob/living/silicon/robot/drone/construction
-	icon_state = "constructiondrone"
-	law_type = /datum/ai_laws/construction_drone
-	module_type = /obj/item/weapon/robot_module/drone/construction
-	can_pull_size = 5
-	can_pull_mobs = 1
 
 /mob/living/silicon/robot/drone/construction/welcome_drone()
 	src << "<b>You are a construction drone, an autonomous engineering and fabrication system.</b>."
@@ -303,3 +344,10 @@
 /mob/living/silicon/robot/drone/construction/updatename()
 	real_name = "construction drone ([rand(100,999)])"
 	name = real_name
+
+/proc/too_many_active_drones()
+	var/drones = 0
+	for(var/mob/living/silicon/robot/drone/D in mob_list)
+		if(D.key && D.client)
+			drones++
+	return drones >= config.max_maint_drones

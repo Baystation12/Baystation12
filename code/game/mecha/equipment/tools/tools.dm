@@ -83,8 +83,8 @@
 			if(!target_obj.vars.Find("unacidable") || target_obj.unacidable)	return
 		set_ready_state(0)
 		chassis.use_power(energy_drain)
-		chassis.visible_message("<span class='danger'>[chassis] starts to drill [target]</span>", "<span class='warning'>You hear the drill.</span>")
-		occupant_message("<span class='danger'>You start to drill [target]</span>")
+		chassis.visible_message("<span class='danger'>\The [chassis] starts to drill \the [target]</span>", "<span class='warning'>You hear a large drill.</span>")
+		occupant_message("<span class='danger'>You start to drill \the [target]</span>")
 		var/T = chassis.loc
 		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
@@ -92,26 +92,26 @@
 				if(istype(target, /turf/simulated/wall))
 					var/turf/simulated/wall/W = target
 					if(W.reinf_material)
-						occupant_message("<span class='warning'>[target] is too durable to drill through.</span>")
+						occupant_message("<span class='warning'>\The [target] is too durable to drill through.</span>")
 					else
-						log_message("Drilled through [target]")
+						log_message("Drilled through \the [target]")
 						target.ex_act(2)
 				else if(istype(target, /turf/simulated/mineral))
 					for(var/turf/simulated/mineral/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
 							M.GetDrilled()
-					log_message("Drilled through [target]")
+					log_message("Drilled through \the [target]")
 					if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
 						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in chassis:cargo
 						if(ore_box)
 							for(var/obj/item/weapon/ore/ore in range(chassis,1))
 								if(get_dir(chassis,ore)&chassis.dir)
 									ore.Move(ore_box)
-				else if(istype(target, /turf/simulated/floor/plating/airless/asteroid))
-					for(var/turf/simulated/floor/plating/airless/asteroid/M in range(chassis,1))
+				else if(istype(target, /turf/simulated/floor/asteroid))
+					for(var/turf/simulated/floor/asteroid/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
 							M.gets_dug()
-					log_message("Drilled through [target]")
+					log_message("Drilled through \the [target]")
 					if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
 						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in chassis:cargo
 						if(ore_box)
@@ -119,7 +119,7 @@
 								if(get_dir(chassis,ore)&chassis.dir)
 									ore.Move(ore_box)
 				else if(target.loc == C)
-					log_message("Drilled through [target]")
+					log_message("Drilled through \the [target]")
 					target.ex_act(2)
 		return 1
 
@@ -127,8 +127,7 @@
 	name = "diamond drill"
 	desc = "This is an upgraded version of the drill that'll pierce the heavens! (Can be attached to: Combat and Engineering Exosuits)"
 	icon_state = "mecha_diamond_drill"
-	origin_tech = "materials=4;engineering=3"
-	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"diamond"=6500)
+	origin_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
 	equip_cooldown = 20
 	force = 15
 
@@ -139,8 +138,8 @@
 			if(target_obj.unacidable)	return
 		set_ready_state(0)
 		chassis.use_power(energy_drain)
-		chassis.visible_message("<span class='danger'>[chassis] starts to drill [target]</span>", "<span class='warning'>You hear the drill.</span>")
-		occupant_message("<span class='danger'>You start to drill [target]</span>")
+		chassis.visible_message("<span class='danger'>\The [chassis] starts to drill \the [target]</span>", "<span class='warning'>You hear a large drill.</span>")
+		occupant_message("<span class='danger'>You start to drill \the [target]</span>")
 		var/T = chassis.loc
 		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
@@ -148,30 +147,30 @@
 				if(istype(target, /turf/simulated/wall))
 					var/turf/simulated/wall/W = target
 					if(!W.reinf_material || do_after_cooldown(target))//To slow down how fast mechs can drill through the station
-						log_message("Drilled through [target]")
+						log_message("Drilled through \the [target]")
 						target.ex_act(3)
 				else if(istype(target, /turf/simulated/mineral))
 					for(var/turf/simulated/mineral/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
 							M.GetDrilled()
-					log_message("Drilled through [target]")
+					log_message("Drilled through \the [target]")
 					if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
 						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in chassis:cargo
 						if(ore_box)
 							for(var/obj/item/weapon/ore/ore in range(chassis,1))
 								if(get_dir(chassis,ore)&chassis.dir)
 									ore.Move(ore_box)
-				else if(istype(target,/turf/simulated/floor/plating/airless/asteroid))
-					for(var/turf/simulated/floor/plating/airless/asteroid/M in range(target,1))
+				else if(istype(target,/turf/simulated/floor/asteroid))
+					for(var/turf/simulated/floor/asteroid/M in range(target,1))
 						M.gets_dug()
-					log_message("Drilled through [target]")
+					log_message("Drilled through \the [target]")
 					if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
 						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in chassis:cargo
 						if(ore_box)
 							for(var/obj/item/weapon/ore/ore in range(target,1))
 								ore.Move(ore_box)
 				else if(target.loc == C)
-					log_message("Drilled through [target]")
+					log_message("Drilled through \the [target]")
 					target.ex_act(2)
 		return 1
 
@@ -251,12 +250,10 @@
 	name = "mounted RCD"
 	desc = "An exosuit-mounted Rapid Construction Device. (Can be attached to: Any exosuit)"
 	icon_state = "mecha_rcd"
-	origin_tech = "materials=4;bluespace=3;magnets=4;powerstorage=4"
+	origin_tech = list(TECH_MATERIAL = 4, TECH_BLUESPACE = 3, TECH_MAGNET = 4, TECH_POWER = 4)
 	equip_cooldown = 10
 	energy_drain = 250
 	range = MELEE|RANGED
-	construction_time = 1200
-	construction_cost = list(DEFAULT_WALL_MATERIAL=30000,"phoron"=25000,"silver"=20000,"gold"=20000)
 	var/mode = 0 //0 - deconstruct, 1 - wall or floor, 2 - airlock.
 	var/disabled = 0 //malf
 
@@ -287,7 +284,7 @@
 					if(do_after_cooldown(target))
 						if(disabled) return
 						chassis.spark_system.start()
-						target:ChangeTurf(/turf/space)
+						target:ChangeTurf(get_base_turf_by_area(target))
 						playsound(target, 'sound/items/Deconstruct.ogg', 50, 1)
 						chassis.use_power(energy_drain)
 				else if (istype(target, /obj/machinery/door/airlock))
@@ -300,7 +297,7 @@
 						playsound(target, 'sound/items/Deconstruct.ogg', 50, 1)
 						chassis.use_power(energy_drain)
 			if(1)
-				if(istype(target, /turf/space))
+				if(istype(target, /turf/space) || istype(target,get_base_turf_by_area(target)))
 					occupant_message("Building Floor...")
 					set_ready_state(0)
 					if(do_after_cooldown(target))
@@ -356,7 +353,7 @@
 	name = "teleporter"
 	desc = "An exosuit module that allows exosuits to teleport to any position in view."
 	icon_state = "mecha_teleport"
-	origin_tech = "bluespace=10"
+	origin_tech = list(TECH_BLUESPACE = 10)
 	equip_cooldown = 150
 	energy_drain = 1000
 	range = RANGED
@@ -376,7 +373,7 @@
 	name = "wormhole generator"
 	desc = "An exosuit module that allows generating of small quasi-stable wormholes."
 	icon_state = "mecha_wholegen"
-	origin_tech = "bluespace=3"
+	origin_tech = list(TECH_BLUESPACE = 3)
 	equip_cooldown = 50
 	energy_drain = 300
 	range = RANGED
@@ -426,7 +423,7 @@
 	name = "gravitational catapult"
 	desc = "An exosuit mounted Gravitational Catapult."
 	icon_state = "mecha_teleport"
-	origin_tech = "bluespace=2;magnets=3"
+	origin_tech = list(TECH_BLUESPACE = 2, TECH_MAGNET = 3)
 	equip_cooldown = 10
 	energy_drain = 100
 	range = MELEE|RANGED
@@ -498,136 +495,103 @@
 		return
 
 
-/obj/item/mecha_parts/mecha_equipment/anticcw_armor_booster //what is that noise? A BAWWW from TK mutants.
+/obj/item/mecha_parts/mecha_equipment/armor_booster
+	name = "armor booster"
+	desc = "Powered armor-enhancing mech equipment."
+	icon_state = "mecha_abooster_proj"
+	equip_cooldown = 10
+	energy_drain = 50
+	range = 0
+	var/deflect_coeff = 1
+	var/damage_coeff = 1
+	var/melee
+
+	attach(obj/mecha/M as obj)
+		..()
+		activate_boost()
+		return
+
+	detach()
+		if(equip_ready)
+			deactivate_boost()
+		..()
+		return
+
+	get_equip_info()
+		if(!chassis) return
+		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name]"
+
+	proc/activate_boost()
+		if(!src.chassis)
+			return 0
+		return 1
+
+	proc/deactivate_boost()
+		if(!src.chassis)
+			return 0
+		return 1
+
+	set_ready_state(state)
+		if(state && !equip_ready)
+			activate_boost()
+		else if(equip_ready)
+			deactivate_boost()
+		..()
+
+
+/obj/item/mecha_parts/mecha_equipment/armor_booster/anticcw_armor_booster //what is that noise? A BAWWW from TK mutants.
 	name = "\improper CCW armor booster"
 	desc = "Close-combat armor booster. Boosts exosuit armor against armed melee attacks. Requires energy to operate."
 	icon_state = "mecha_abooster_ccw"
-	origin_tech = "materials=3"
-	equip_cooldown = 10
-	energy_drain = 50
-	range = 0
-	construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"silver"=5000)
-	var/deflect_coeff = 1.15
-	var/damage_coeff = 0.8
+	origin_tech = list(TECH_MATERIAL = 3)
+	deflect_coeff = 1.15
+	damage_coeff = 0.8
+	melee = 1
 
-	can_attach(obj/mecha/M as obj)
+	activate_boost()
 		if(..())
-			if(!M.proc_res["dynattackby"])
-				return 1
-		return 0
-
-	attach(obj/mecha/M as obj)
-		..()
-		chassis.proc_res["dynattackby"] = src
-		return
-
-	detach()
-		chassis.proc_res["dynattackby"] = null
-		..()
-		return
-
-	get_equip_info()
-		if(!chassis) return
-		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name]"
-
-	proc/dynattackby(obj/item/weapon/W as obj, mob/user as mob)
-		if(!action_checks(user))
-			return chassis.dynattackby(W,user)
-		chassis.log_message("Attacked by [W]. Attacker - [user]")
-		if(prob(chassis.deflect_chance*deflect_coeff))
-			user << "\red The [W] bounces off [chassis] armor."
-			chassis.log_append_to_last("Armor saved.")
-		else
-			chassis.occupant_message("<span class='danger'>[user] hits [chassis] with [W].</span>")
-			user.visible_message("<span class='danger'><b>[user] hits [chassis] with [W].</span>", "<span class='danger'>You hit [src] with [W].</span>")
-			chassis.take_damage(round(W.force*damage_coeff),W.damtype)
-			chassis.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
-		set_ready_state(0)
-		chassis.use_power(energy_drain)
-		do_after_cooldown()
-		return
+			chassis.m_deflect_coeff *= deflect_coeff
+			chassis.m_damage_coeff *= damage_coeff
+			chassis.mhit_power_use += energy_drain
 
 
-/obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster
+	deactivate_boost()
+		if(..())
+			chassis.m_deflect_coeff /= deflect_coeff
+			chassis.m_damage_coeff /= damage_coeff
+			chassis.mhit_power_use -= energy_drain
+
+
+/obj/item/mecha_parts/mecha_equipment/armor_booster/antiproj_armor_booster
 	name = "\improper RW armor booster"
 	desc = "Ranged-weaponry armor booster. Boosts exosuit armor against ranged attacks. Completely blocks taser shots, but requires energy to operate."
 	icon_state = "mecha_abooster_proj"
-	origin_tech = "materials=4"
-	equip_cooldown = 10
-	energy_drain = 50
-	range = 0
-	construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"gold"=5000)
-	var/deflect_coeff = 1.15
-	var/damage_coeff = 0.8
+	origin_tech = list(TECH_MATERIAL = 4)
+	deflect_coeff = 1.15
+	damage_coeff = 0.8
+	melee = 0
 
-	can_attach(obj/mecha/M as obj)
+	activate_boost()
 		if(..())
-			if(!M.proc_res["dynbulletdamage"] && !M.proc_res["dynhitby"])
-				return 1
-		return 0
+			chassis.r_deflect_coeff *= deflect_coeff
+			chassis.r_damage_coeff *= damage_coeff
+			chassis.rhit_power_use += energy_drain
 
-	attach(obj/mecha/M as obj)
-		..()
-		chassis.proc_res["dynbulletdamage"] = src
-		chassis.proc_res["dynhitby"] = src
-		return
-
-	detach()
-		chassis.proc_res["dynbulletdamage"] = null
-		chassis.proc_res["dynhitby"] = null
-		..()
-		return
-
-	get_equip_info()
-		if(!chassis) return
-		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name]"
-
-	proc/dynbulletdamage(var/obj/item/projectile/Proj)
-		if(!action_checks(src))
-			return chassis.dynbulletdamage(Proj)
-		if(prob(chassis.deflect_chance*deflect_coeff))
-			chassis.occupant_message("<span class='notice'>The armor deflects incoming projectile.</span>")
-			chassis.visible_message("The [chassis.name] armor deflects the projectile")
-			chassis.log_append_to_last("Armor saved.")
-		else
-			chassis.take_damage(round(Proj.damage*src.damage_coeff),Proj.check_armour)
-			chassis.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
-			Proj.on_hit(chassis)
-		set_ready_state(0)
-		chassis.use_power(energy_drain)
-		do_after_cooldown()
-		return
-
-	proc/dynhitby(atom/movable/A)
-		if(!action_checks(A))
-			return chassis.dynhitby(A)
-		if(prob(chassis.deflect_chance*deflect_coeff) || istype(A, /mob/living) || istype(A, /obj/item/mecha_parts/mecha_tracking))
-			chassis.occupant_message("<span class='notice'>The [A] bounces off the armor.</span>")
-			chassis.visible_message("The [A] bounces off the [chassis] armor")
-			chassis.log_append_to_last("Armor saved.")
-			if(istype(A, /mob/living))
-				var/mob/living/M = A
-				M.take_organ_damage(10)
-		else if(istype(A, /obj))
-			var/obj/O = A
-			if(O.throwforce)
-				chassis.take_damage(round(O.throwforce*damage_coeff))
-				chassis.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
-		set_ready_state(0)
-		chassis.use_power(energy_drain)
-		do_after_cooldown()
-		return
+	deactivate_boost()
+		if(..())
+			chassis.r_deflect_coeff /= deflect_coeff
+			chassis.r_damage_coeff /= damage_coeff
+			chassis.rhit_power_use -= energy_drain
 
 
 /obj/item/mecha_parts/mecha_equipment/repair_droid
 	name = "repair droid"
 	desc = "Automated repair droid. Scans exosuit for damage and repairs it. Can fix almost any type of external or internal damage."
 	icon_state = "repair_droid"
-	origin_tech = "magnets=3;programming=3"
+	origin_tech = list(TECH_MAGNET = 3, TECH_DATA = 3)
 	equip_cooldown = 20
 	energy_drain = 100
 	range = 0
-	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"gold"=1000,"silver"=2000,"glass"=5000)
 	var/health_boost = 2
 	var/datum/global_iterator/pr_repair_droid
 	var/icon/droid_overlay
@@ -718,11 +682,10 @@
 	name = "energy relay"
 	desc = "Wirelessly drains energy from any available power channel in area. The performance index is quite low."
 	icon_state = "tesla"
-	origin_tech = "magnets=4;syndicate=2"
+	origin_tech = list(TECH_MAGNET = 4, TECH_ILLEGAL = 2)
 	equip_cooldown = 10
 	energy_drain = 0
 	range = 0
-	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"gold"=2000,"silver"=3000,"glass"=2000)
 	var/datum/global_iterator/pr_energy_relay
 	var/coeff = 100
 	var/list/use_channels = list(EQUIP,ENVIRON,LIGHT)
@@ -740,34 +703,12 @@
 
 	detach()
 		pr_energy_relay.stop()
-//		chassis.proc_res["dynusepower"] = null
-		chassis.proc_res["dyngetcharge"] = null
 		..()
 		return
 
 	attach(obj/mecha/M)
 		..()
-		chassis.proc_res["dyngetcharge"] = src
-//		chassis.proc_res["dynusepower"] = src
 		return
-
-	can_attach(obj/mecha/M)
-		if(..())
-			if(!M.proc_res["dyngetcharge"])// && !M.proc_res["dynusepower"])
-				return 1
-		return 0
-
-	proc/dyngetcharge()
-		if(equip_ready) //disabled
-			return chassis.dyngetcharge()
-		var/area/A = get_area(chassis)
-		var/pow_chan = get_power_channel(A)
-		var/charge = 0
-		if(pow_chan)
-			charge = 1000 //making magic
-		else
-			return chassis.dyngetcharge()
-		return charge
 
 	proc/get_power_channel(var/area/A)
 		var/pow_chan
@@ -792,15 +733,6 @@
 	get_equip_info()
 		if(!chassis) return
 		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name] - <a href='?src=\ref[src];toggle_relay=1'>[pr_energy_relay.active()?"Dea":"A"]ctivate</a>"
-
-/*	proc/dynusepower(amount)
-		if(!equip_ready) //enabled
-			var/area/A = get_area(chassis)
-			var/pow_chan = get_power_channel(A)
-			if(pow_chan)
-				A.master.use_power(amount*coeff, pow_chan)
-				return 1
-		return chassis.dynusepower(amount)*/
 
 /datum/global_iterator/mecha_energy_relay
 
@@ -835,11 +767,10 @@
 	name = "phoron generator"
 	desc = "Generates power using solid phoron as fuel. Pollutes the environment."
 	icon_state = "tesla"
-	origin_tech = "phorontech=2;powerstorage=2;engineering=1"
+	origin_tech = list(TECH_PHORON = 2, TECH_POWER = 2, TECH_ENGINEERING = 1)
 	equip_cooldown = 10
 	energy_drain = 0
 	range = MELEE
-	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"silver"=500,"glass"=1000)
 	var/datum/global_iterator/pr_mech_generator
 	var/coeff = 100
 	var/obj/item/stack/material/fuel
@@ -847,7 +778,6 @@
 	var/fuel_per_cycle_idle = 100
 	var/fuel_per_cycle_active = 500
 	var/power_per_cycle = 20
-	reliability = 1000
 
 	New()
 		..()
@@ -954,10 +884,6 @@
 			EG.log_message("Deactivated - no fuel.")
 			EG.set_ready_state(1)
 			return 0
-		if(anyprob(EG.reliability))
-			EG.critfail()
-			stop()
-			return 0
 		var/cur_charge = EG.chassis.get_charge()
 		if(isnull(cur_charge))
 			EG.set_ready_state(1)
@@ -978,14 +904,12 @@
 	name = "\improper ExoNuclear reactor"
 	desc = "Generates power using uranium. Pollutes the environment."
 	icon_state = "tesla"
-	origin_tech = "powerstorage=3;engineering=3"
-	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"silver"=500,"glass"=1000)
+	origin_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 3)
 	max_fuel = 50000
 	fuel_per_cycle_idle = 10
 	fuel_per_cycle_active = 30
 	power_per_cycle = 50
 	var/rad_per_cycle = 0.3
-	reliability = 1000
 
 	init()
 		fuel = new /obj/item/stack/material/uranium(src)
@@ -1005,7 +929,7 @@
 				if(istype(M,/mob/living/carbon/human))
 					M.apply_effect((EG.rad_per_cycle*3),IRRADIATE,0)
 				else
-					M.radiation += EG.rad_per_cycle
+					M.apply_effect(EG.rad_per_cycle, IRRADIATE)
 		return 1
 
 
@@ -1058,7 +982,7 @@
 			if(M.stat>1) return
 			if(chassis.occupant.a_intent == I_HURT)
 				chassis.occupant_message("<span class='danger'>You obliterate [target] with [src.name], leaving blood and guts everywhere.</span>")
-				chassis.visible_message("<span class='danger'>[chassis] destroys [target] in an unholy fury.<span>")
+				chassis.visible_message("<span class='danger'>[chassis] destroys [target] in an unholy fury.</span>")
 			if(chassis.occupant.a_intent == I_DISARM)
 				chassis.occupant_message("<span class='danger'>You tear [target]'s limbs off with [src.name].</span>")
 				chassis.visible_message("<span class='danger'>[chassis] rips [target]'s arms off.</span>")
@@ -1075,11 +999,9 @@
 	name = "passenger compartment"
 	desc = "A mountable passenger compartment for exo-suits. Rather cramped."
 	icon_state = "mecha_abooster_ccw"
-	origin_tech = "engineering=1;biotech=1"
+	origin_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 1)
 	energy_drain = 10
 	range = MELEE
-	construction_cost = list(DEFAULT_WALL_MATERIAL=5000,"glass"=5000)
-	reliability = 1000
 	equip_cooldown = 20
 	var/mob/living/carbon/occupant = null
 	var/door_locked = 1
@@ -1165,7 +1087,6 @@
 
 #define LOCKED 1
 #define OCCUPIED 2
-#undefine
 
 /obj/mecha/proc/move_inside_passenger()
 	set category = "Object"
@@ -1218,3 +1139,6 @@
 			usr << "<span class='danger'>All of the passenger compartments are already occupied or locked!</span>"
 		if (0)
 			usr << "<span class='warning'>\The [src] doesn't have a passenger compartment.</span>"
+
+#undef LOCKED
+#undef OCCUPIED

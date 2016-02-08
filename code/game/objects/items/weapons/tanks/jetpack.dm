@@ -4,6 +4,7 @@
 	name = "jetpack (empty)"
 	desc = "A tank of compressed gas for use as propulsion in zero-gravity areas. Use with caution."
 	icon_state = "jetpack"
+	gauge_icon = null
 	w_class = 4.0
 	item_state = "jetpack"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
@@ -11,7 +12,7 @@
 	var/on = 0.0
 	var/stabilization_on = 0
 	var/volume_rate = 500              //Needed for borg jetpack transfer
-	icon_action_button = "action_jetpack"
+	action_button_name = "Toggle Jetpack"
 
 /obj/item/weapon/tank/jetpack/New()
 	..()
@@ -49,6 +50,7 @@
 	if (ismob(usr))
 		var/mob/M = usr
 		M.update_inv_back()
+		M.update_action_buttons()
 
 	usr << "You toggle the thrusters [on? "on":"off"]."
 
