@@ -382,15 +382,13 @@
 
 
 /obj/machinery/power/supermatter/proc/supermatter_pull()
-	for(var/atom/movable/AM in range(255, src))
-		if(AM.anchored)
-			continue
-		if(istype(AM, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = AM
+	for(var/atom/A in range(255, src))
+		A.singularity_pull(src, STAGE_FIVE)
+		if(istype(A, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = A
 			if(!H.lying)
 				H << "<span class='danger'>A strong gravitational force slams you to the ground!</span>"
 				H.Weaken(20)
-		step_towards(AM, src)
 
 
 /obj/machinery/power/supermatter/GotoAirflowDest(n) //Supermatter not pushed around by airflow
