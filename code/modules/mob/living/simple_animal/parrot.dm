@@ -33,7 +33,7 @@
 	icon_living = "parrot_fly"
 	icon_dead = "parrot_dead"
 	pass_flags = PASSTABLE
-	small = 1
+	mob_size = MOB_SMALL
 
 	speak = list("Hi","Hello!","Cracker?","BAWWWWK george mellons griffing me")
 	speak_emote = list("squawks","says","yells")
@@ -201,9 +201,6 @@
 									available_channels.Add(":d")
 								if("Cargo")
 									available_channels.Add(":q")
-
-						if(headset_to_add.translate_binary)
-							available_channels.Add(":b")
 		else
 			..()
 

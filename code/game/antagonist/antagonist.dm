@@ -14,7 +14,7 @@
 
 	// Role data.
 	var/id = "traitor"                      // Unique datum identifier.
-	var/role_type = BE_TRAITOR              // Preferences option for this role.
+	var/role_type                           // Preferences option for this role. Defaults to the id if unset
 	var/role_text = "Traitor"               // special_role text.
 	var/role_text_plural = "Traitors"       // As above but plural.
 
@@ -46,6 +46,7 @@
 	var/mob_path = /mob/living/carbon/human // Mobtype this antag will use if none is provided.
 	var/feedback_tag = "traitor_objective"  // End of round
 	var/bantype = "Syndicate"               // Ban to check when spawning this antag.
+	var/minimum_player_age = 7            	// Players need to be at least minimum_player_age days old before they are eligable for auto-spawning
 	var/suspicion_chance = 50               // Prob of being on the initial Command report
 	var/flags = 0                           // Various runtime options.
 
@@ -71,6 +72,9 @@
 
 /datum/antagonist/New()
 	..()
+	if(!role_type)
+		role_type = id
+
 	cur_max = hard_cap
 	get_starting_locations()
 	if(!role_text_plural)
@@ -95,6 +99,8 @@
 	for(var/datum/mind/player in ticker.mode.get_players_for_role(role_type, id))
 		if(ghosts_only && !istype(player.current, /mob/dead))
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: Only ghosts may join as this role!")
+		else if(config.use_age_restriction_for_antags && player.current.client.player_age < minimum_player_age)
+			log_debug("[key_name(player)] is not eligible to become a [role_text]: Is only [player.current.client.player_age] day\s old, has to be [minimum_player_age] day\s!")
 		else if(player.special_role)
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: They already have a special role ([player.special_role])!")
 		else if (player in pending_antagonists)
@@ -198,10 +204,10 @@
 	for(var/datum/mind/player in pending_antagonists)
 		pending_antagonists -= player
 		add_antagonist(player,0,0,1)
-	
+
 	reset_antag_selection()
 
-//Resets the antag selection, clearing all pending_antagonists and their special_role 
+//Resets the antag selection, clearing all pending_antagonists and their special_role
 //(and assigned_role if ANTAG_OVERRIDE_JOB is set) as well as clearing the candidate list.
 //Existing antagonists are left untouched.
 /datum/antagonist/proc/reset_antag_selection()

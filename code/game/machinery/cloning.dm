@@ -57,6 +57,12 @@
 
 	RefreshParts()
 	update_icon()
+	set_expansion(/datum/expansion/multitool, new/datum/expansion/multitool/store(src))
+
+/obj/machinery/clonepod/Destroy()
+    if(connected)
+        connected.release_pod(src)
+    return ..()
 
 /obj/machinery/clonepod/attack_ai(mob/user as mob)
 
@@ -131,6 +137,7 @@
 	else
 		H.dna = R.dna
 	H.UpdateAppearance()
+	H.sync_organ_dna()
 	if(heal_level < 60)
 		randmutb(H) //Sometimes the clones come out wrong.
 		H.dna.UpdateSE()
@@ -142,7 +149,6 @@
 	for(var/datum/language/L in R.languages)
 		H.add_language(L.name)
 	H.flavor_texts = R.flavor.Copy()
-	H.suiciding = 0
 	attempting = 0
 	return 1
 
@@ -156,7 +162,7 @@
 		return
 
 	if((occupant) && (occupant.loc == src))
-		if((occupant.stat == DEAD) || (occupant.suiciding) || !occupant.key)  //Autoeject corpses and suiciding dudes.
+		if((occupant.stat == DEAD) || !occupant.key)
 			locked = 0
 			go_out()
 			connected_message("Clone Rejected: Deceased.")
@@ -182,6 +188,8 @@
 			return
 
 		else if((occupant.health >= heal_level) && (!eject_wait))
+			playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
+			src.audible_message("\The [src] signals that the cloning process is complete.")
 			connected_message("Cloning Process Complete.")
 			locked = 0
 			go_out()
@@ -216,13 +224,6 @@
 		else
 			locked = 0
 			user << "System unlocked."
-	else if(istype(W, /obj/item/weapon/card/emag))
-		if(isnull(occupant))
-			return
-		user << "You force an emergency ejection."
-		locked = 0
-		go_out()
-		return
 	else if(istype(W, /obj/item/weapon/reagent_containers/food/snacks/meat))
 		user << "<span class='notice'>\The [src] processes \the [W].</span>"
 		biomass += 50
@@ -244,13 +245,16 @@
 				user.visible_message("[user] secures [src] to the floor.", "You secure [src] to the floor.")
 			else
 				user.visible_message("[user] unsecures [src] from the floor.", "You unsecure [src] from the floor.")
-	else if(istype(W, /obj/item/device/multitool))
-		var/obj/item/device/multitool/M = W
-		M.connecting = src
-		user << "<span class='notice'>You load connection data from [src] to [M].</span>"
-		return
 	else
 		..()
+
+/obj/machinery/clonepod/emag_act(var/remaining_charges, var/mob/user)
+	if(isnull(occupant))
+		return NO_EMAG_ACT
+	user << "You force an emergency ejection."
+	locked = 0
+	go_out()
+	return 1
 
 //Put messages in the connected computer's temp var for display.
 /obj/machinery/clonepod/proc/connected_message(var/message)
@@ -306,7 +310,7 @@
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.loc = loc
 	eject_wait = 0 //If it's still set somehow.
-	domutcheck(occupant) //Waiting until they're out before possible monkeyizing.
+	domutcheck(occupant) //Waiting until they're out before possible transforming.
 	occupant = null
 
 	biomass -= CLONE_BIOMASS
@@ -405,6 +409,7 @@
 	read_only = 1
 
 	New()
+		..()
 		initializeDisk()
 		buf.types=DNA2_BUF_UE|DNA2_BUF_UI
 		//data = "066000033000000000AF00330660FF4DB002690"
@@ -420,6 +425,7 @@
 	read_only = 1
 
 	New()
+		..()
 		initializeDisk()
 		buf.types=DNA2_BUF_SE
 		var/list/new_SE=list(0x098,0x3E8,0x403,0x44C,0x39F,0x4B0,0x59D,0x514,0x5FC,0x578,0x5DC,0x640,0x6A4)

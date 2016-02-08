@@ -17,7 +17,7 @@ var/global/datum/controller/occupations/job_master
 		occupations = list()
 		var/list/all_jobs = typesof(/datum/job)
 		if(!all_jobs.len)
-			world << "\red \b Error setting up jobs, no job datums found"
+			world << "<span class='warning'>Error setting up jobs, no job datums found!</span>"
 			return 0
 		for(var/J in all_jobs)
 			var/datum/job/job = new J()
@@ -49,9 +49,15 @@ var/global/datum/controller/occupations/job_master
 		Debug("Running AR, Player: [player], Rank: [rank], LJ: [latejoin]")
 		if(player && player.mind && rank)
 			var/datum/job/job = GetJob(rank)
-			if(!job)	return 0
-			if(jobban_isbanned(player, rank))	return 0
-			if(!job.player_old_enough(player.client)) return 0
+			if(!job)
+				return 0
+			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
+				return 0
+			if(jobban_isbanned(player, rank))
+				return 0
+			if(!job.player_old_enough(player.client))
+				return 0
+
 			var/position_limit = job.total_positions
 			if(!latejoin)
 				position_limit = job.spawn_positions
@@ -82,7 +88,10 @@ var/global/datum/controller/occupations/job_master
 			if(!job.player_old_enough(player.client))
 				Debug("FOC player not old enough, Player: [player]")
 				continue
-			if(flag && (!player.client.prefs.be_special & flag))
+			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
+				Debug("FOC character not old enough, Player: [player]")
+				continue
+			if(flag && !(flag in player.client.prefs.be_special_role))
 				Debug("FOC flag failed, Player: [player], Flag: [flag], ")
 				continue
 			if(player.client.prefs.GetJobDepartment(job, level) & job.flag)
@@ -94,6 +103,9 @@ var/global/datum/controller/occupations/job_master
 		Debug("GRJ Giving random job, Player: [player]")
 		for(var/datum/job/job in shuffle(occupations))
 			if(!job)
+				continue
+
+			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
 				continue
 
 			if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!
@@ -137,30 +149,24 @@ var/global/datum/controller/occupations/job_master
 
 				// Build a weighted list, weight by age.
 				var/list/weightedCandidates = list()
-
-				// Different head positions have different good ages.
-				var/good_age_minimal = 25
-				var/good_age_maximal = 60
-				if(command_position == "Captain")
-					good_age_minimal = 30
-					good_age_maximal = 70 // Old geezer captains ftw
-
 				for(var/mob/V in candidates)
 					// Log-out during round-start? What a bad boy, no head position for you!
 					if(!V.client) continue
 					var/age = V.client.prefs.age
+
+					if(age < job.minimum_character_age) // Nope.
+						continue
+
 					switch(age)
-						if(good_age_minimal - 10 to good_age_minimal)
+						if(job.minimum_character_age to (job.minimum_character_age+10))
 							weightedCandidates[V] = 3 // Still a bit young.
-						if(good_age_minimal to good_age_minimal + 10)
+						if((job.minimum_character_age+10) to (job.ideal_character_age-10))
 							weightedCandidates[V] = 6 // Better.
-						if(good_age_minimal + 10 to good_age_maximal - 10)
+						if((job.ideal_character_age-10) to (job.ideal_character_age+10))
 							weightedCandidates[V] = 10 // Great.
-						if(good_age_maximal - 10 to good_age_maximal)
+						if((job.ideal_character_age+10) to (job.ideal_character_age+20))
 							weightedCandidates[V] = 6 // Still good.
-						if(good_age_maximal to good_age_maximal + 10)
-							weightedCandidates[V] = 6 // Bit old, don't you think?
-						if(good_age_maximal to good_age_maximal + 50)
+						if((job.ideal_character_age+20) to INFINITY)
 							weightedCandidates[V] = 3 // Geezer.
 						else
 							// If there's ABSOLUTELY NOBODY ELSE
@@ -341,7 +347,7 @@ var/global/datum/controller/occupations/job_master
 							permitted = 0
 
 						if(!permitted)
-							H << "\red Your current job or whitelist status does not permit you to spawn with [thing]!"
+							H << "<span class='warning'>Your current job or whitelist status does not permit you to spawn with [thing]!</span>"
 							continue
 
 						if(G.slot && !(G.slot in custom_equip_slots))
@@ -350,7 +356,7 @@ var/global/datum/controller/occupations/job_master
 							if(G.slot == slot_wear_mask || G.slot == slot_wear_suit || G.slot == slot_head)
 								custom_equip_leftovers += thing
 							else if(H.equip_to_slot_or_del(new G.path(H), G.slot))
-								H << "\blue Equipping you with [thing]!"
+								H << "<span class='notice'>Equipping you with [thing]!</span>"
 								custom_equip_slots.Add(G.slot)
 							else
 								custom_equip_leftovers.Add(thing)
@@ -358,6 +364,7 @@ var/global/datum/controller/occupations/job_master
 							spawn_in_storage += thing
 			//Equip job items.
 			job.equip(H)
+			job.setup_account(H)
 			job.equip_backpack(H)
 			job.equip_survival(H)
 			job.apply_fingerprints(H)
@@ -369,7 +376,7 @@ var/global/datum/controller/occupations/job_master
 					spawn_in_storage += thing
 				else
 					if(H.equip_to_slot_or_del(new G.path(H), G.slot))
-						H << "\blue Equipping you with [thing]!"
+						H << "<span class='notice'>Equipping you with [thing]!</span>"
 						custom_equip_slots.Add(G.slot)
 					else
 						spawn_in_storage += thing
@@ -389,25 +396,13 @@ var/global/datum/controller/occupations/job_master
 				S = locate("start*[rank]") // use old stype
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 				H.loc = S.loc
+			else
+				LateSpawn(H, rank)
+
 			// Moving wheelchair if they have one
 			if(H.buckled && istype(H.buckled, /obj/structure/bed/chair/wheelchair))
 				H.buckled.loc = H.loc
 				H.buckled.set_dir(H.dir)
-
-		//give them an account in the station database
-		var/datum/money_account/M = create_account(H.real_name, rand(50,500)*10, null)
-		if(H.mind)
-			var/remembered_info = ""
-			remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"
-			remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
-			remembered_info += "<b>Your account funds are:</b> $[M.money]<br>"
-
-			if(M.transaction_log.len)
-				var/datum/transaction/T = M.transaction_log[1]
-				remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.source_terminal]<br>"
-			H.mind.store_memory(remembered_info)
-
-			H.mind.initial_account = M
 
 		// If they're head, give them the account info for their department
 		if(H.mind && job.head_position)
@@ -420,9 +415,6 @@ var/global/datum/controller/occupations/job_master
 				remembered_info += "<b>Your department's account funds are:</b> $[department_account.money]<br>"
 
 			H.mind.store_memory(remembered_info)
-
-		spawn(0)
-			H << "\blue<b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b>"
 
 		var/alt_title = null
 		if(H.mind)
@@ -447,11 +439,11 @@ var/global/datum/controller/occupations/job_master
 
 				if(!isnull(B))
 					for(var/thing in spawn_in_storage)
-						H << "\blue Placing [thing] in your [B]!"
+						H << "<span class='notice'>Placing [thing] in your [B]!</span>"
 						var/datum/gear/G = gear_datums[thing]
 						new G.path(B)
 				else
-					H << "\red Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug."
+					H << "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>"
 
 		if(istype(H)) //give humans wheelchairs, if they need them.
 			var/obj/item/organ/external/l_foot = H.get_organ("l_foot")
@@ -509,10 +501,9 @@ var/global/datum/controller/occupations/job_master
 		else
 			C = new /obj/item/weapon/card/id(H)
 		if(C)
-			C.registered_name = H.real_name
 			C.rank = rank
 			C.assignment = title ? title : rank
-			C.name = "[C.registered_name]'s ID Card ([C.assignment])"
+			H.set_id_info(C)
 
 			//put the player's account number onto the ID
 			if(H.mind && H.mind.initial_account)
@@ -595,3 +586,23 @@ var/global/datum/controller/occupations/job_master
 
 			tmp_str += "HIGH=[level1]|MEDIUM=[level2]|LOW=[level3]|NEVER=[level4]|BANNED=[level5]|YOUNG=[level6]|-"
 			feedback_add_details("job_preferences",tmp_str)
+
+/datum/controller/occupations/proc/LateSpawn(var/mob/living/carbon/human/H, var/rank)
+	//spawn at one of the latespawn locations
+
+	var/datum/spawnpoint/spawnpos
+
+	if(H.client.prefs.spawnpoint)
+		spawnpos = spawntypes[H.client.prefs.spawnpoint]
+
+	if(spawnpos && istype(spawnpos))
+		if(spawnpos.check_job_spawning(rank))
+			H.loc = pick(spawnpos.turfs)
+			. = spawnpos.msg
+		else
+			H << "Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job. Spawning you at the Arrivals shuttle instead."
+			H.loc = pick(latejoin)
+			. = "has arrived on the station"
+	else
+		H.loc = pick(latejoin)
+		. = "has arrived on the station"

@@ -4,6 +4,7 @@
 	opacity = 0
 	density = 0
 	layer = 3.5
+	w_class = 3
 
 /obj/structure/sign/ex_act(severity)
 	switch(severity)
@@ -17,10 +18,6 @@
 			qdel(src)
 			return
 		else
-	return
-
-/obj/structure/sign/blob_act()
-	qdel(src)
 	return
 
 /obj/structure/sign/attackby(obj/item/tool as obj, mob/user as mob)	//deconstruction
@@ -150,6 +147,11 @@
 	name = "\improper DISPOSAL LEADS TO SPACE"
 	desc = "A warning sign which reads 'DISPOSAL LEADS TO SPACE'."
 	icon_state = "deathsposal"
+
+/obj/structure/sign/directions
+	name = "direction sign"
+	desc = "A direction sign, claiming to know the way."
+	icon_state = "direction"
 
 /obj/structure/sign/directions/engineering
 	name = "\improper Engineering department"

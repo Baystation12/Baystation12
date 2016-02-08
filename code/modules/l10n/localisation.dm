@@ -1,6 +1,6 @@
 
 /*
-	This should be in code/setup.dm
+	This should be in code/__defines/misc.dm
 
 #define SANITIZE_CHAT 1
 #define SANITIZE_BROWSER 2

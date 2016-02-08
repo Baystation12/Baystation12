@@ -53,7 +53,7 @@
 	if(energy < 0)
 		energy = 0
 
-	regular_hud_updates(src)
+	handle_hud_glasses(src)
 	if(star_form == 1)
 		process_med_hud(src)
 
@@ -242,7 +242,7 @@
 			src << "Target moved too far away"
 			return
 
-		if(M.species.flags & IS_SYNTHETIC)
+		if((M.species.flags & NO_SCAN) && !(M.species.flags & IS_PLANT))
 			src << "\red This creature ignores my attempt to influence it's mind"
 			return
 
@@ -1088,7 +1088,7 @@
 		src << "I can't hypnotize dead or sleeping creatures"
 		return
 
-	if(M.species.flags & IS_SYNTHETIC)
+	if((M.species.flags & NO_SCAN) && !(M.species.flags & IS_PLANT))
 		src << "\red This creature ignores my attempt to hypnotize it"
 		return
 
@@ -1258,7 +1258,7 @@
 	if((!M.ckey) || (!M.client))
 		src << "\red There is no soul in that creature, so I can't revive it."
 		return
-	if(M.species.flags & IS_SYNTHETIC)
+	if((M.species.flags & NO_SCAN) && !(M.species.flags & IS_PLANT))
 		src << "\red I can't revive silicon creatures"
 		return
 	if(M == null || M.stat !=2)

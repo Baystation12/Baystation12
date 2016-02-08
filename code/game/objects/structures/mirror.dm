@@ -14,10 +14,10 @@
 	if(shattered)	return
 
 	if(ishuman(user))
-		var/obj/nano_module/appearance_changer/AC = ui_users[user]
+		var/datum/nano_module/appearance_changer/AC = ui_users[user]
 		if(!AC)
 			AC = new(src, user)
-			AC.name = "SalonPro Nano-Mirror(TM)"
+			AC.name = "SalonPro Nano-Mirror&trade;"
 			ui_users[user] = AC
 		AC.ui_interact(user)
 
@@ -30,10 +30,8 @@
 
 
 /obj/structure/mirror/bullet_act(var/obj/item/projectile/Proj)
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		return
 
-	if(prob(Proj.damage * 2))
+	if(prob(Proj.get_structure_damage() * 2))
 		if(!shattered)
 			shatter()
 		else
@@ -60,11 +58,18 @@
 		return 0
 
 	if(damage)
-		user.visible_message("<span class='danger'>[user] smashes [src]!")
+		user.visible_message("<span class='danger'>[user] smashes [src]!</span>")
 		shatter()
 	else
 		user.visible_message("<span class='danger'>[user] hits [src] and bounces off!</span>")
 	return 1
+
+/obj/structure/mirror/Destroy()
+	for(var/user in ui_users)
+		var/datum/nano_module/appearance_changer/AC = ui_users[user]
+		qdel(AC)
+	ui_users.Cut()
+	..()
 
 // The following mirror is ~special~.
 /obj/structure/mirror/raider
@@ -92,4 +97,28 @@
 					vox.name = vox.real_name
 					raiders.update_access(vox)
 				qdel(user)
+	..()
+
+/obj/item/weapon/mirror
+	name = "mirror"
+	desc = "A SalonPro Nano-Mirror(TM) brand mirror! Now a portable version."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "mirror"
+	var/list/ui_users = list()
+
+/obj/item/weapon/mirror/attack_self(mob/user as mob)
+	if(ishuman(user))
+		var/datum/nano_module/appearance_changer/AC = ui_users[user]
+		if(!AC)
+			AC = new(src, user)
+			AC.name = "SalonPro Nano-Mirror&trade;"
+			AC.flags = APPEARANCE_HAIR
+			ui_users[user] = AC
+		AC.ui_interact(user)
+
+/obj/item/weapon/mirror/Destroy()
+	for(var/user in ui_users)
+		var/datum/nano_module/appearance_changer/AC = ui_users[user]
+		qdel(AC)
+	ui_users.Cut()
 	..()

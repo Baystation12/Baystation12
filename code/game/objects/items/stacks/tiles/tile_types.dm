@@ -5,14 +5,18 @@
  *		Wood
  *		Carpet
  */
- 
+
 /obj/item/stack/tile
 	name = "tile"
 	singular_name = "tile"
 	desc = "A non-descript floor tile"
 	w_class = 3
 	max_amount = 60
-	var/build_type = null
+
+/obj/item/stack/tile/New()
+	..()
+	pixel_x = rand(-7, 7)
+	pixel_y = rand(-7, 7)
 
 /*
  * Grass
@@ -27,7 +31,7 @@
 	throw_speed = 5
 	throw_range = 20
 	flags = 0
-	origin_tech = "biotech=1"
+	origin_tech = list(TECH_BIO = 1)
 
 /*
  * Wood
@@ -64,3 +68,61 @@
 	throw_speed = 5
 	throw_range = 20
 	flags = 0
+
+/obj/item/stack/tile/floor
+	name = "floor tile"
+	singular_name = "floor tile"
+	desc = "Those could work as a pretty decent throwing weapon" //why?
+	icon_state = "tile"
+	force = 6.0
+	matter = list(DEFAULT_WALL_MATERIAL = 937.5)
+	throwforce = 15.0
+	throw_speed = 5
+	throw_range = 20
+	flags = CONDUCT
+
+/obj/item/stack/tile/floor_red
+	name = "red floor tile"
+	singular_name = "red floor tile"
+	color = COLOR_RED_GRAY
+	icon_state = "tile_white"
+
+/obj/item/stack/tile/floor_steel
+	name = "steel floor tile"
+	singular_name = "steel floor tile"
+	icon_state = "tile_steel"
+	matter = list("plasteel" = 937.5)
+
+/obj/item/stack/tile/floor_white
+	name = "white floor tile"
+	singular_name = "white floor tile"
+	icon_state = "tile_white"
+	matter = list("plastic" = 937.5)
+
+/obj/item/stack/tile/floor_yellow
+	name = "yellow floor tile"
+	singular_name = "yellow floor tile"
+	color = COLOR_BROWN
+	icon_state = "tile_white"
+
+/obj/item/stack/tile/floor_dark
+	name = "dark floor tile"
+	singular_name = "dark floor tile"
+	icon_state = "fr_tile"
+	matter = list("plasteel" = 937.5)
+
+/obj/item/stack/tile/floor_freezer
+	name = "freezer floor tile"
+	singular_name = "freezer floor tile"
+	icon_state = "tile_freezer"
+	matter = list("plastic" = 937.5)
+
+/obj/item/stack/tile/floor/cyborg
+	name = "floor tile synthesizer"
+	desc = "A device that makes floor tiles."
+	gender = NEUTER
+	matter = null
+	uses_charge = 1
+	charge_costs = list(250)
+	stacktype = /obj/item/stack/tile/floor
+	build_type = /obj/item/stack/tile/floor

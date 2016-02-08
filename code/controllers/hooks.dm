@@ -9,7 +9,7 @@
  *
  * To add some code to be called by the hook, define a proc under the type, as so:
  * @code
-	/hook/foo/proc/bar()
+	hook/foo/proc/bar()
 		if(1)
 			return 1 //Sucessful
 		else

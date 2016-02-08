@@ -29,14 +29,14 @@ var/global/list/navbeacons			// no I don't like putting this in, but it will do 
 		set_codes()
 
 		var/turf/T = loc
-		hide(T.intact)
-		
+		hide(!T.is_plating())
+
 		// add beacon to MULE bot beacon list
 		if(freq == 1400)
 			if(!navbeacons)
 				navbeacons = new()
 			navbeacons += src
-			
+
 
 		spawn(5)	// must wait for map loading to finish
 			if(radio_controller)
@@ -111,7 +111,7 @@ var/global/list/navbeacons			// no I don't like putting this in, but it will do 
 
 	attackby(var/obj/item/I, var/mob/user)
 		var/turf/T = loc
-		if(T.intact)
+		if(!T.is_plating())
 			return		// prevent intraction when T-scanner revealed
 
 		if(istype(I, /obj/item/weapon/screwdriver))
@@ -127,7 +127,7 @@ var/global/list/navbeacons			// no I don't like putting this in, but it will do 
 					src.locked = !src.locked
 					user << "Controls are now [src.locked ? "locked." : "unlocked."]"
 				else
-					user << "\red Access denied."
+					user << "<span class='warning'>Access denied.</span>"
 				updateDialog()
 			else
 				user << "You must open the cover first!"
@@ -145,7 +145,7 @@ var/global/list/navbeacons			// no I don't like putting this in, but it will do 
 
 	interact(var/mob/user, var/ai = 0)
 		var/turf/T = loc
-		if(T.intact)
+		if(!T.is_plating())
 			return		// prevent intraction when T-scanner revealed
 
 		if(!open && !ai)	// can't alter controls if not open, unless you're an AI

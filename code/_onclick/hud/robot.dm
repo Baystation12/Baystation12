@@ -1,5 +1,7 @@
 var/obj/screen/robot_inventory
 
+/mob/living/silicon/robot/instantiate_hud(var/datum/hud/HUD)
+	HUD.robot_hud()
 
 /datum/hud/proc/robot_hud()
 
@@ -143,7 +145,7 @@ var/obj/screen/robot_inventory
 	mymob.flash.icon = 'icons/mob/screen1_robot.dmi'
 	mymob.flash.icon_state = "blank"
 	mymob.flash.name = "flash"
-	mymob.flash.screen_loc = "1,1 to 15,15"
+	mymob.flash.screen_loc = ui_entire_screen
 	mymob.flash.layer = 17
 
 	mymob.zone_sel = new /obj/screen/zone_sel()
@@ -153,31 +155,13 @@ var/obj/screen/robot_inventory
 
 	//Handle the gun settings buttons
 	mymob.gun_setting_icon = new /obj/screen/gun/mode(null)
-	if (mymob.client)
-		if (mymob.client.gun_mode) // If in aim mode, correct the sprite
-			mymob.gun_setting_icon.set_dir(2)
-	for(var/obj/item/weapon/gun/G in mymob) // If targeting someone, display other buttons
-		if (G.aim_targets)
-			mymob.item_use_icon = new /obj/screen/gun/item(null)
-			if (mymob.client.target_can_click)
-				mymob.item_use_icon.set_dir(1)
-			src.adding += mymob.item_use_icon
-			mymob.radio_use_icon = new /obj/screen/gun/radio(null)
-			if (mymob.client.target_can_radio)
-				mymob.radio_use_icon.set_dir(1)
-			src.adding += mymob.radio_use_icon
-			mymob.gun_move_icon = new /obj/screen/gun/move(null)
-			if (mymob.client.target_can_move)
-				mymob.gun_move_icon.set_dir(1)
-				mymob.gun_run_icon = new /obj/screen/gun/run(null)
-				if (mymob.client.target_can_run)
-					mymob.gun_run_icon.set_dir(1)
-				src.adding += mymob.gun_run_icon
-			src.adding += mymob.gun_move_icon
+	mymob.item_use_icon = new /obj/screen/gun/item(null)
+	mymob.gun_move_icon = new /obj/screen/gun/move(null)
+	mymob.radio_use_icon = new /obj/screen/gun/radio(null)
 
 	mymob.client.screen = null
 
-	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.fire, mymob.hands, mymob.healths, mymob:cells, mymob.pullin, mymob.blind, mymob.flash, mymob.gun_setting_icon, robot_inventory) //, mymob.rest, mymob.sleep, mymob.mach )
+	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.fire, mymob.hands, mymob.healths, mymob:cells, mymob.pullin, mymob.blind, mymob.flash, robot_inventory, mymob.gun_setting_icon)
 	mymob.client.screen += src.adding + src.other
 
 	return

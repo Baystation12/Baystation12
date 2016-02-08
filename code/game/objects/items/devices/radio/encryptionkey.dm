@@ -1,6 +1,6 @@
 
 /obj/item/device/encryptionkey/
-	name = "standard encrpytion key"
+	name = "standard encryption key"
 	desc = "An encryption key for a radio headset. Contains cypherkeys."
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "cypherkey"
@@ -12,21 +12,18 @@
 	var/syndie = 0
 	var/list/channels = list()
 
-
-/obj/item/device/encryptionkey/New()
-
 /obj/item/device/encryptionkey/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 /obj/item/device/encryptionkey/syndicate
 	icon_state = "cypherkey"
 	channels = list("Mercenary" = 1)
-	origin_tech = "syndicate=3"
+	origin_tech = list(TECH_ILLEGAL = 3)
 	syndie = 1//Signifies that it de-crypts Syndicate transmissions
 
 /obj/item/device/encryptionkey/binary
 	icon_state = "cypherkey"
 	translate_binary = 1
-	origin_tech = "syndicate=3"
+	origin_tech = list(TECH_ILLEGAL = 3)
 
 /obj/item/device/encryptionkey/headset_sec
 	name = "security radio encryption key"
@@ -98,6 +95,8 @@
 	name = "head of personnel's encryption key"
 	icon_state = "hop_cypherkey"
 	channels = list("Supply" = 1, "Service" = 1, "Command" = 1, "Security" = 0)
+
+
 /*
 /obj/item/device/encryptionkey/headset_mine
 	name = "mining radio encryption key"
@@ -120,5 +119,9 @@
 	channels = list("Service" = 1)
 
 /obj/item/device/encryptionkey/ert
-	name = "\improper NanoTrasen ERT radio encryption key"
+	name = "\improper ERT radio encryption key"
 	channels = list("Response Team" = 1, "Science" = 1, "Command" = 1, "Medical" = 1, "Engineering" = 1, "Security" = 1, "Supply" = 1, "Service" = 1)
+
+/obj/item/device/encryptionkey/entertainment
+	name = "entertainment radio key"
+	channels = list("Entertainment" = 1)

@@ -13,10 +13,11 @@ var/prison_shuttle_timeleft = 0
 /obj/machinery/computer/prison_shuttle
 	name = "prison shuttle control console"
 	icon = 'icons/obj/computer.dmi'
-	icon_state = "shuttle"
+	icon_keyboard = "security_key"
+	icon_screen = "syndishuttle"
 	light_color = "#00ffff"
 	req_access = list(access_security)
-	circuit = "/obj/item/weapon/circuitboard/prison_shuttle"
+	circuit = /obj/item/weapon/circuitboard/prison_shuttle
 	var/temp = null
 	var/hacked = 0
 	var/allowedtocall = 0
@@ -37,29 +38,26 @@ var/prison_shuttle_timeleft = 0
 				A.anchored = 1
 
 				if (src.stat & BROKEN)
-					user << "\blue The broken glass falls out."
+					user << "<span class='notice'>The broken glass falls out.</span>"
 					new /obj/item/weapon/material/shard( src.loc )
 					A.state = 3
 					A.icon_state = "3"
 				else
-					user << "\blue You disconnect the monitor."
+					user << "<span class='notice'>You disconnect the monitor.</span>"
 					A.state = 4
 					A.icon_state = "4"
 
 				qdel(src)
-		else if(istype(I,/obj/item/weapon/card/emag) && (!hacked))
-			hacked = 1
-			user << "\blue You disable the lock."
 		else
 			return src.attack_hand(user)
 
 
 	attack_hand(var/mob/user as mob)
 		if(!src.allowed(user) && (!hacked))
-			user << "\red Access Denied."
+			user << "<span class='warning'>Access Denied.</span>"
 			return
 		if(prison_break)
-			user << "\red Unable to locate shuttle."
+			user << "<span class='warning'>Unable to locate shuttle.</span>"
 			return
 		if(..())
 			return
@@ -88,11 +86,11 @@ var/prison_shuttle_timeleft = 0
 
 		if (href_list["sendtodock"])
 			if (!prison_can_move())
-				usr << "\red The prison shuttle is unable to leave."
+				usr << "<span class='warning'>The prison shuttle is unable to leave.</span>"
 				return
 			if(!prison_shuttle_at_station|| prison_shuttle_moving_to_station || prison_shuttle_moving_to_prison) return
 			post_signal("prison")
-			usr << "\blue The prison shuttle has been called and will arrive in [(PRISON_MOVETIME/10)] seconds."
+			usr << "<span class='notice'>The prison shuttle has been called and will arrive in [(PRISON_MOVETIME/10)] seconds.</span>"
 			src.temp += "Shuttle sent.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
 			src.updateUsrDialog()
 			prison_shuttle_moving_to_prison = 1
@@ -102,11 +100,11 @@ var/prison_shuttle_timeleft = 0
 
 		else if (href_list["sendtostation"])
 			if (!prison_can_move())
-				usr << "\red The prison shuttle is unable to leave."
+				usr << "<span class='warning'>The prison shuttle is unable to leave.</span>"
 				return
 			if(prison_shuttle_at_station || prison_shuttle_moving_to_station || prison_shuttle_moving_to_prison) return
 			post_signal("prison")
-			usr << "\blue The prison shuttle has been called and will arrive in [(PRISON_MOVETIME/10)] seconds."
+			usr << "<span class='notice'>The prison shuttle has been called and will arrive in [(PRISON_MOVETIME/10)] seconds.</span>"
 			src.temp += "Shuttle sent.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
 			src.updateUsrDialog()
 			prison_shuttle_moving_to_station = 1
@@ -174,7 +172,7 @@ var/prison_shuttle_timeleft = 0
 				if (prison_shuttle_moving_to_station || prison_shuttle_moving_to_prison) return
 
 				if (!prison_can_move())
-					usr << "\red The prison shuttle is unable to leave."
+					usr << "<span class='warning'>The prison shuttle is unable to leave.</span>"
 					return
 
 				var/area/start_location = locate(/area/shuttle/prison/prison)
@@ -203,7 +201,7 @@ var/prison_shuttle_timeleft = 0
 				if (prison_shuttle_moving_to_station || prison_shuttle_moving_to_prison) return
 
 				if (!prison_can_move())
-					usr << "\red The prison shuttle is unable to leave."
+					usr << "<span class='warning'>The prison shuttle is unable to leave.</span>"
 					return
 
 				var/area/start_location = locate(/area/shuttle/prison/station)
@@ -235,3 +233,9 @@ var/prison_shuttle_timeleft = 0
 
 				start_location.move_contents_to(end_location)
 		return
+
+/obj/machinery/computer/prison_shuttle/emag_act(var/charges, var/mob/user)
+	if(!hacked)
+		hacked = 1
+		user << "<span class='notice'>You disable the lock.</span>"
+		return 1

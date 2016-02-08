@@ -25,46 +25,31 @@
 			if(SEC_LEVEL_GREEN)
 				security_announcement_down.Announce("[config.alert_desc_green]", "Attention! Security level lowered to green")
 				security_level = SEC_LEVEL_GREEN
-				for(var/obj/machinery/firealarm/FA in machines)
-					if(FA.z in config.contact_levels)
-						FA.overlays = list()
-						FA.overlays += image('icons/obj/monitors.dmi', "overlay_green")
 			if(SEC_LEVEL_BLUE)
 				if(security_level < SEC_LEVEL_BLUE)
 					security_announcement_up.Announce("[config.alert_desc_blue_upto]", "Attention! Security level elevated to blue")
 				else
 					security_announcement_down.Announce("[config.alert_desc_blue_downto]", "Attention! Security level lowered to blue")
 				security_level = SEC_LEVEL_BLUE
-				for(var/obj/machinery/firealarm/FA in machines)
-					if(FA.z in config.contact_levels)
-						FA.overlays = list()
-						FA.overlays += image('icons/obj/monitors.dmi', "overlay_blue")
 			if(SEC_LEVEL_RED)
 				if(security_level < SEC_LEVEL_RED)
 					security_announcement_up.Announce("[config.alert_desc_red_upto]", "Attention! Code red!")
 				else
 					security_announcement_down.Announce("[config.alert_desc_red_downto]", "Attention! Code red!")
 				security_level = SEC_LEVEL_RED
-
 				/*	- At the time of commit, setting status displays didn't work properly
 				var/obj/machinery/computer/communications/CC = locate(/obj/machinery/computer/communications,world)
 				if(CC)
 					CC.post_status("alert", "redalert")*/
-
-				for(var/obj/machinery/firealarm/FA in machines)
-					if(FA.z in config.contact_levels)
-						FA.overlays = list()
-						FA.overlays += image('icons/obj/monitors.dmi', "overlay_red")
-
 			if(SEC_LEVEL_DELTA)
 				security_announcement_up.Announce("[config.alert_desc_delta]", "Attention! Delta security level reached!", new_sound = 'sound/effects/siren.ogg')
 				security_level = SEC_LEVEL_DELTA
-				for(var/obj/machinery/firealarm/FA in machines)
-					if(FA.z in config.contact_levels)
-						FA.overlays = list()
-						FA.overlays += image('icons/obj/monitors.dmi', "overlay_delta")
-	else
-		return
+
+		var/newlevel = get_security_level()
+		for(var/obj/machinery/firealarm/FA in machines)
+			if(FA.z in config.contact_levels)
+				FA.set_security_level(newlevel)
+
 
 /proc/get_security_level()
 	switch(security_level)

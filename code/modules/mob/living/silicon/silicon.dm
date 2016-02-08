@@ -19,10 +19,13 @@
 	var/local_transmit //If set, can only speak to others of the same type within a short range.
 
 	var/sensor_mode = 0 //Determines the current HUD.
-	var/mob/living/cameraFollow = null
 
 	var/next_alarm_notice
 	var/list/datum/alarm/queued_alarms = new()
+
+	var/list/access_rights
+	var/obj/item/weapon/card/id/idcard
+	var/idcard_type = /obj/item/weapon/card/id/synthetic
 
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
@@ -31,13 +34,20 @@
 	silicon_mob_list |= src
 	..()
 	add_language("Galactic Common")
+	init_id()
 	init_subsystems()
 
 /mob/living/silicon/Destroy()
 	silicon_mob_list -= src
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
-		AH.unregister(src)
+		AH.unregister_alarm(src)
 	..()
+
+/mob/living/silicon/proc/init_id()
+	if(idcard)
+		return
+	idcard = new idcard_type(src)
+	set_id_info(idcard)
 
 /mob/living/silicon/proc/SetName(pickedName as text)
 	real_name = pickedName
@@ -86,13 +96,6 @@
 
 /mob/living/silicon/IsAdvancedToolUser()
 	return 1
-
-/mob/living/silicon/blob_act()
-	if (src.stat != 2)
-		src.adjustBruteLoss(60)
-		src.updatehealth()
-		return 1
-	return 0
 
 /mob/living/silicon/bullet_act(var/obj/item/projectile/Proj)
 
@@ -224,7 +227,7 @@
 				default_str = " - <a href='byond://?src=\ref[src];default_lang=\ref[L]'>set default</a>"
 
 			var/synth = (L in speech_synthesizer_langs)
-			dat += "<b>[L.name] (:[L.key])</b>[synth ? default_str : null]<br/>Speech Synthesizer: <i>[synth ? "YES" : "NOT SUPPORTED"]</i><br/>[L.desc]<br/><br/>"
+			dat += "<b>[L.name] ([get_language_prefix()][L.key])</b>[synth ? default_str : null]<br/>Speech Synthesizer: <i>[synth ? "YES" : "NOT SUPPORTED"]</i><br/>[L.desc]<br/><br/>"
 
 	src << browse(dat, "window=checklanguage")
 	return
@@ -348,6 +351,11 @@
 /mob/living/silicon/proc/is_malf_or_traitor()
 	return is_traitor() || is_malf()
 
+/mob/living/silicon/adjustEarDamage()
+	return
+
+/mob/living/silicon/setEarDamage()
+	return
 
 /mob/living/silicon/reset_view()
 	..()

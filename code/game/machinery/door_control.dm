@@ -24,27 +24,14 @@
 		user << "Error, no route to host."
 
 /obj/machinery/button/remote/attackby(obj/item/weapon/W, mob/user as mob)
-	/* For later implementation
-	if (istype(W, /obj/item/weapon/screwdriver))
-	{
-		if(wiresexposed)
-			icon_state = "doorctrl0"
-			wiresexposed = 0
+	return src.attack_hand(user)
 
-		else
-			icon_state = "doorctrl-open"
-			wiresexposed = 1
-
-		return
-	}
-	*/
-	if(istype(W, /obj/item/device/detective_scanner))
-		return
-	if(istype(W, /obj/item/weapon/card/emag))
+/obj/machinery/button/remote/emag_act(var/remaining_charges, var/mob/user)
+	if(req_access.len || req_one_access.len)
 		req_access = list()
 		req_one_access = list()
 		playsound(src.loc, "sparks", 100, 1)
-	return src.attack_hand(user)
+		return 1
 
 /obj/machinery/button/remote/attack_hand(mob/user as mob)
 	if(..())
@@ -82,6 +69,14 @@
 /*
 	Airlock remote control
 */
+
+// Bitmasks for door switches.
+#define OPEN   0x1
+#define IDSCAN 0x2
+#define BOLTS  0x4
+#define SHOCK  0x8
+#define SAFE   0x10
+
 /obj/machinery/button/remote/airlock
 	name = "remote door-control"
 	desc = "It controls doors, remotely."
@@ -125,6 +120,12 @@
 					D.electrify(0)
 				if(specialfunctions & SAFE)
 					D.set_safeties(1)
+
+#undef OPEN
+#undef IDSCAN
+#undef BOLTS
+#undef SHOCK
+#undef SAFE
 
 /*
 	Blast door remote control

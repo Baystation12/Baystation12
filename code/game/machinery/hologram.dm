@@ -113,6 +113,12 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			master.show_message(rendered, 2)
 	return
 
+/obj/machinery/hologram/holopad/show_message(msg, type, alt, alt_type)
+	for(var/mob/living/silicon/ai/master in masters)
+		var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[msg]</span></span></i>"
+		master.show_message(rendered, type)
+	return
+
 /obj/machinery/hologram/holopad/proc/create_holo(mob/living/silicon/ai/A, turf/T = loc)
 	var/obj/effect/overlay/hologram = new(T)//Spawn a blank effect at the location.
 	hologram.icon = A.holo_icon
@@ -140,21 +146,14 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 
 /obj/machinery/hologram/holopad/process()
 	for (var/mob/living/silicon/ai/master in masters)
-		var/active_ai = (master && !master.stat && master.client && master.eyeobj)//If there is an AI attached, it's not incapacitated, it has a client, and the client eye is centered on the projector.
+		var/active_ai = (master && !master.incapacitated() && master.client && master.eyeobj)//If there is an AI with an eye attached, it's not incapacitated, and it has a client
 		if((stat & NOPOWER) || !active_ai)
 			clear_holo(master)
 			continue
 
-		if((HOLOPAD_MODE == RANGE_BASED && (get_dist(master.eyeobj, src) > holo_range)))
+		if(!(masters[master] in view(src)))
 			clear_holo(master)
 			continue
-
-		if(HOLOPAD_MODE == AREA_BASED)
-			var/area/holo_area = get_area(src)
-			var/area/eye_area = get_area(master.eyeobj)
-			if(eye_area != holo_area)
-				clear_holo(master)
-				continue
 
 		use_power(power_per_hologram)
 	return 1
@@ -163,8 +162,21 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	if(masters[user])
 		step_to(masters[user], user.eyeobj) // So it turns.
 		var/obj/effect/overlay/H = masters[user]
-		H.loc = get_turf(user.eyeobj)
+		H.forceMove(get_turf(user.eyeobj))
 		masters[user] = H
+
+		if(!(H in view(src)))
+			clear_holo(user)
+			return 0
+
+		if((HOLOPAD_MODE == RANGE_BASED && (get_dist(user.eyeobj, src) > holo_range)))
+			clear_holo(user)
+
+		if(HOLOPAD_MODE == AREA_BASED)
+			var/area/holo_area = get_area(src)
+			var/area/hologram_area = get_area(H)
+			if(hologram_area != holo_area)
+				clear_holo(user)
 	return 1
 
 /*
@@ -188,14 +200,6 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		if(3.0)
 			if (prob(5))
 				qdel(src)
-	return
-
-/obj/machinery/hologram/blob_act()
-	qdel(src)
-	return
-
-/obj/machinery/hologram/meteorhit()
-	qdel(src)
 	return
 
 /obj/machinery/hologram/holopad/Destroy()

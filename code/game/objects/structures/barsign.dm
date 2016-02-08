@@ -302,8 +302,14 @@
 
 /datum/barsign/narsiebistro
 	name = "Nar-Sie Bistro"
-	desc = null
+	desc = "It shows a picture of a large black and red being. Spooky!"
 	icon_state = "narsiebistro"
+	hidden = 1
+
+/obj/structure/sign/double/barsign/narsiebistro
+	icon_state = "narsiebistro"
+	sign = /datum/barsign/narsiebistro
+	no_change = 1
 
 /datum/barsign/nest
 	name = "The Nest"
