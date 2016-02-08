@@ -33,7 +33,7 @@
 	holder_type = /obj/item/weapon/holder/human
 	short_sighted = 1
 	gluttonous = GLUT_TINY
-	blood_volume = 300
+	blood_volume = 400
 	hunger_factor = 0.2
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED

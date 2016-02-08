@@ -33,7 +33,7 @@
 	var/show_ssd = "fast asleep"
 	var/virus_immune
 	var/short_sighted                                    // Permanent weldervision.
-	var/blood_volume = 500                               // Initial blood volume.
+	var/blood_volume = 560                               // Initial blood volume.
 	var/hunger_factor = 0.05                             // Multiplier for hunger.
 
 	var/min_age = 17
