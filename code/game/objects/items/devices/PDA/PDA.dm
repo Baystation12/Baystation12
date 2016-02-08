@@ -514,9 +514,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			if(!FC.censored)
 				var/index = 0
 				for(var/datum/feed_message/FM in FC.messages)
-					index++
+					++index
 					if(FM.img)
-						usr << browse_rsc(FM.img, "pda_news_tmp_photo_[feed["channel"]]_[index].png")
+						send_asset(usr.client, "newscaster_photo_[sanitize(FC.channel_name)]_[index].png")
 					// News stories are HTML-stripped but require newline replacement to be properly displayed in NanoUI
 					var/body = replacetext(FM.body, "\n", "<br>")
 					messages[++messages.len] = list("author" = FM.author, "body" = body, "message_type" = FM.message_type, "time_stamp" = FM.time_stamp, "has_image" = (FM.img != null), "caption" = FM.caption, "index" = index)
@@ -545,6 +545,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 //NOTE: graphic resources are loaded on client login
 /obj/item/device/pda/attack_self(mob/user as mob)
+	var/datum/asset/assets = get_asset_datum(/datum/asset/simple/pda)
+	assets.send(user)
 
 	user.set_machine(src)
 
