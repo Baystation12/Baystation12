@@ -32,7 +32,9 @@
 	var/mob_size	= MOB_MEDIUM
 	var/show_ssd = "fast asleep"
 	var/virus_immune
-	var/short_sighted
+	var/short_sighted                                    // Permanent weldervision.
+	var/blood_volume = 500                               // Initial blood volume.
+	var/hunger_factor = 0.05                             // Multiplier for hunger.
 
 	var/min_age = 17
 	var/max_age = 70

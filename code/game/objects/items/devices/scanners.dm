@@ -162,12 +162,11 @@ REAGENT SCANNER
 				break
 		if(M:vessel)
 			var/blood_volume = round(M:vessel.get_reagent_amount("blood"))
-			var/blood_percent =  blood_volume / 560
+			var/blood_percent =  round(blood_volume / H.species.blood_volume)*100
 			var/blood_type = M.dna.b_type
-			blood_percent *= 100
-			if(blood_volume <= 500 && blood_volume > 336)
+			if(blood_percent <= BLOOD_VOLUME_SAFE && blood_percent > BLOOD_VOLUME_BAD)
 				user.show_message("<span class='danger'>Warning: Blood Level LOW: [blood_percent]% [blood_volume]cl.</span> <span class='notice'>Type: [blood_type]</span>")
-			else if(blood_volume <= 336)
+			else if(blood_percent <= BLOOD_VOLUME_BAD)
 				user.show_message("<span class='danger'><i>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl.</i></span> <span class='notice'>Type: [blood_type]</span>")
 			else
 				user.show_message("<span class='notice'>Blood Level Normal: [blood_percent]% [blood_volume]cl. Type: [blood_type]</span>")

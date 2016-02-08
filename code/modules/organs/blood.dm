@@ -2,13 +2,13 @@
 				BLOOD SYSTEM
 ****************************************************/
 //Blood levels
-var/const/BLOOD_VOLUME_SAFE = 501
-var/const/BLOOD_VOLUME_OKAY = 336
-var/const/BLOOD_VOLUME_BAD = 224
-var/const/BLOOD_VOLUME_SURVIVE = 122
+var/const/BLOOD_VOLUME_SAFE =    85
+var/const/BLOOD_VOLUME_OKAY =    75
+var/const/BLOOD_VOLUME_BAD =     60
+var/const/BLOOD_VOLUME_SURVIVE = 40
 
-/mob/living/carbon/human/var/datum/reagents/vessel	//Container for blood and BLOOD ONLY. Do not transfer other chems here.
-/mob/living/carbon/human/var/var/pale = 0			//Should affect how mob sprite is drawn, but currently doesn't.
+/mob/living/carbon/human/var/datum/reagents/vessel // Container for blood and BLOOD ONLY. Do not transfer other chems here.
+/mob/living/carbon/human/var/var/pale = 0          // Should affect how mob sprite is drawn, but currently doesn't.
 
 //Initializes blood vessels
 /mob/living/carbon/human/proc/make_blood()
@@ -16,13 +16,13 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 	if(vessel)
 		return
 
-	vessel = new/datum/reagents(600)
+	vessel = new/datum/reagents(species.blood_volume)
 	vessel.my_atom = src
 
 	if(species && species.flags & NO_BLOOD) //We want the var for safety but we can do without the actual blood.
 		return
 
-	vessel.add_reagent("blood",560)
+	vessel.add_reagent("blood",(species.blood_volume * 0.95))
 	spawn(1)
 		fixblood()
 
@@ -44,10 +44,10 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 	if(stat != DEAD && bodytemperature >= 170)	//Dead or cryosleep people do not pump the blood.
 
-		var/blood_volume = round(vessel.get_reagent_amount("blood"))
+		var/blood_volume = round(vessel.get_reagent_amount("blood")/species.blood_volume)*100 // Percentage.
 
 		//Blood regeneration if there is some space
-		if(blood_volume < 560 && blood_volume)
+		if(blood_volume < species.blood_volume && blood_volume)
 			var/datum/reagent/blood/B = locate() in vessel.reagent_list //Grab some blood
 			if(B) // Make sure there's some blood at all
 				if(B.data["donor"] != src) //If it's not theirs, then we look for theirs
@@ -210,7 +210,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 	var/list/chems = list()
 	chems = params2list(injected.data["trace_chem"])
 	for(var/C in chems)
-		src.reagents.add_reagent(C, (text2num(chems[C]) / 560) * amount)//adds trace chemicals to owner's blood
+		src.reagents.add_reagent(C, (text2num(chems[C]) / species.blood_volume) * amount)//adds trace chemicals to owner's blood
 	reagents.update_total()
 
 //Transfers blood from reagents to vessel, respecting blood types compatability.
