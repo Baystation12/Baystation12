@@ -58,61 +58,21 @@
 	if(min_cold_protection_temperature == SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE)
 		armor_stats += "It provides very good protection against very cold temperatures. \n"
 
-	var/list/covers_these = list()
+	var/list/covers = list()
+	var/list/slots = list()
 
-	//This is superugly :(
-	if(body_parts_covered & HEAD)
-		covers_these.Add("head")
-	if(body_parts_covered & FACE)
-		covers_these.Add("face")
-	if(body_parts_covered & EYES)
-		covers_these.Add("eyes")
-	if(body_parts_covered & UPPER_TORSO)
-		covers_these.Add("upper body")
-	if(body_parts_covered & LOWER_TORSO)
-		covers_these.Add("lower body")
-	if(body_parts_covered & LEGS)
-		covers_these.Add("legs")
-	if(body_parts_covered & FEET)
-		covers_these.Add("feet")
-	if(body_parts_covered & ARMS)
-		covers_these.Add("arms")
-	if(body_parts_covered & HANDS)
-		covers_these.Add("hands")
+	for(var/name in string_part_flags)
+		if(body_parts_covered & string_part_flags[name])
+			covers += name
 
-	if(covers_these.len)
-		armor_stats += "It covers the [english_list(covers_these)]. \n"
+	for(var/name in string_slot_flags)
+		if(slot_flags & string_slot_flags[name])
+			slots += name
 
-	var/list/goes_on = list()
+	if(covers.len)
+		armor_stats += "It covers the [english_list(covers)]. \n"
 
-	if(slot_flags & SLOT_BACK)
-		goes_on.Add("back")
-	if(slot_flags & SLOT_MASK)
-		goes_on.Add("face")
-	if(slot_flags & SLOT_BELT)
-		goes_on.Add("waist")
-	if(slot_flags & SLOT_ID)
-		goes_on.Add("uniform's ID slot")
-	if(slot_flags & SLOT_EARS)
-		goes_on.Add("ears")
-	if(slot_flags & SLOT_EYES)
-		goes_on.Add("eyes")
-	if(slot_flags & SLOT_GLOVES)
-		goes_on.Add("hands")
-	if(slot_flags & SLOT_HEAD)
-		goes_on.Add("head")
-	if(slot_flags & SLOT_FEET)
-		goes_on.Add("feet")
-	if(slot_flags & SLOT_OCLOTHING)
-		goes_on.Add("exo slot")
-	if(slot_flags & SLOT_ICLOTHING)
-		goes_on.Add("body")
-	if(slot_flags & SLOT_TIE)
-		goes_on.Add("uniform")
-	if(slot_flags & SLOT_HOLSTER)
-		goes_on.Add("holster")
-
-	if(goes_on.len)
-		armor_stats += "It can be worn on your [english_list(goes_on)]. \n"
+	if(slots.len)
+		armor_stats += "It can be worn on your [english_list(slots)]. \n"
 
 	return armor_stats
