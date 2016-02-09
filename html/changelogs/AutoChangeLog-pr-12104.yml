@@ -1,0 +1,7 @@
+author: atlantiscze
+delete-after: True
+changes: 
+  - tweak: "Supermatter no longer pulls anchored objects. To compensate, pull radius was increased. It is currently limited by range() proc to approximately 32 tiles."
+  - tweak: "Supermatter delamination's explosion strength reduced slightly. This will hopefully motivate players to actually attempt repairs as it will be possible to complete them within 1-2 hours."
+  - tweak: "Supermatter spends more time (30 seconds compared to 10 seconds) in pulling mode before exploding during delamination."
+  - rscadd: "Supermatter's UI now shows \"Relative EER\" (Energy Emission Ratio) value which represents how energised the supermatter is."
