@@ -352,9 +352,9 @@
 /obj/vehicle/attack_generic(var/mob/user, var/damage, var/attack_message)
 	if(!damage)
 		return
-	visible_message("<span class='danger'>\The [user] [attack_message] the [src]!</span>")
+	visible_message("<span class='danger'>\The [user] [attack_message] the \the [src]!</span>")
 	if(istype(user))
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked \the [src.name]</font>")
 		user.do_attack_animation(src)
 	src.health -= damage
 	if(prob(10))

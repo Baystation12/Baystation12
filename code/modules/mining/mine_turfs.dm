@@ -38,6 +38,12 @@
 		MineralSpread()
 	spawn(2)
 		updateMineralOverlays(1)
+		
+/turf/simulated/mineral/can_build_cable()
+	return !density
+	
+/turf/simulated/mineral/is_plating()
+	return 1
 
 /turf/simulated/mineral/proc/updateMineralOverlays(var/update_neighbors)
 	var/list/step_overlays = list("s" = NORTH, "n" = SOUTH, "w" = EAST, "e" = WEST)
@@ -237,7 +243,7 @@
 				O.geologic_data = geologic_data
 
 	else
-		return attack_hand(user)
+		return ..()
 
 /turf/simulated/mineral/proc/clear_ore_effects()
 	for(var/obj/effect/mineral/M in contents)
