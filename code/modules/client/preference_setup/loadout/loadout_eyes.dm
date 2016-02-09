@@ -34,18 +34,10 @@
 	path = /obj/item/clothing/glasses/hud/security
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
-/datum/gear/eyes/security/prescriptionsec
-	display_name = "Security HUD, prescription"
-	path = /obj/item/clothing/glasses/hud/security/prescription
-
 /datum/gear/eyes/medical
 	display_name = "Medical HUD"
 	path = /obj/item/clothing/glasses/hud/health
 	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist")
-
-/datum/gear/eyes/medical/prescriptionmed
-	display_name = "Medical HUD, prescription"
-	path = /obj/item/clothing/glasses/hud/health/prescription
 
 /datum/gear/eyes/shades
 	display_name = "Sunglasses, fat"

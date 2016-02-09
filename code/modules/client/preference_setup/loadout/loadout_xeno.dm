@@ -21,79 +21,40 @@
 /datum/gear/ears/skrell/plate
 	display_name = "headtail-wear, male, bands (Skrell)"
 	path = /obj/item/clothing/ears/skrell/band
+/datum/gear/resomi_grey
+	display_name = "Resomi uniform, grey"
+	path = /obj/item/clothing/under/resomi
+	cost = 1
+	slot = slot_w_uniform
 
-/datum/gear/ears/skrell/cloth //male/red
-	display_name = "headtail-wear, male, red, cloth (Skrell)"
-	path = /obj/item/clothing/ears/skrell/cloth_male
+/datum/gear/resomi_rainbow
+	display_name = "Resomi uniform, rainbow"
+	path = /obj/item/clothing/under/resomi/rainbow
+	cost = 1
+	slot = slot_w_uniform
 
-/datum/gear/ears/skrell/cloth/male //black
-	display_name = "headtail-wear, male, black, cloth (Skrell)"
-	path = /obj/item/clothing/ears/skrell/cloth_male/black
+/datum/gear/resomi_white
+	display_name = "Resomi uniform, white"
+	path = /obj/item/clothing/under/resomi/white
+	cost = 1
+	slot = slot_w_uniform
 
-/datum/gear/ears/skrell/cloth/male/blue
-	display_name = "headtail-wear, male, blue, cloth (Skrell)"
-	path = /obj/item/clothing/ears/skrell/cloth_male/blue
+/datum/gear/resomi_eng
+	display_name = "Resomi uniform, Engineering"
+	path = /obj/item/clothing/under/resomi/yellow
+	cost = 1
+	slot = slot_w_uniform
+	allowed_roles = list("Chief Engineer","Station Engineer","Atmospherics Technician")
 
-/datum/gear/ears/skrell/cloth/male/green
-	display_name = "headtail-wear, male, green, cloth (Skrell)"
-	path = /obj/item/clothing/ears/skrell/cloth_male/green
+/datum/gear/resomi_sec
+	display_name = "Resomi uniform, Security"
+	path = /obj/item/clothing/under/resomi/red
+	cost = 1
+	slot = slot_w_uniform
+	allowed_roles = list("Security Officer","Head of Security","Warden")
 
-/datum/gear/ears/skrell/cloth/male/pink
-	display_name = "headtail-wear, male, pink, cloth (Skrell)"
-	path = /obj/item/clothing/ears/skrell/cloth_male/pink
-
-/datum/gear/ears/skrell/cloth/female
-	display_name = "headtail-wear, female, red, cloth (Skrell)"
-	path = /obj/item/clothing/ears/skrell/cloth_female
-
-/datum/gear/ears/skrell/cloth/female/black
-	display_name = "headtail-wear, female, black, cloth (Skrell)"
-	path = /obj/item/clothing/ears/skrell/cloth_female/black
-
-/datum/gear/ears/skrell/cloth/female/blue
-	display_name = "headtail-wear, female, blue, cloth (Skrell)"
-	path = /obj/item/clothing/ears/skrell/cloth_female/blue
-
-/datum/gear/ears/skrell/cloth/female/green
-	display_name = "headtail-wear, female, green, cloth (Skrell)"
-	path = /obj/item/clothing/ears/skrell/cloth_female/green
-
-/datum/gear/ears/skrell/cloth/female/pink
-	display_name = "headtail-wear, female, pink, cloth (Skrell)"
-	path = /obj/item/clothing/ears/skrell/cloth_female/pink
-
-/datum/gear/uniform/jumpsuit/teshari
-	display_name = "smock, grey (Teshari)"
-	path = /obj/item/clothing/under/seromi
-	whitelisted = "Teshari"
-	sort_category = "Xenowear"
-
-/datum/gear/uniform/jumpsuit/teshari/yellow
-	display_name = "smock, yellow (Teshari)"
-	path = /obj/item/clothing/under/seromi/yellow
-
-/datum/gear/uniform/jumpsuit/teshari/red
-	display_name = "smock, red (Teshari)"
-	path = /obj/item/clothing/under/seromi/red
-
-/datum/gear/uniform/jumpsuit/teshari/white
-	display_name = "smock, white (Teshari)"
-	path = /obj/item/clothing/under/seromi/white
-
-/datum/gear/uniform/jumpsuit/teshari/medical
-	display_name = "smock, Medical (Teshari)"
-	path = /obj/item/clothing/under/seromi/medical
-
-/datum/gear/uniform/jumpsuit/teshari/rainbow
-	display_name = "smock, rainbow (Teshari)"
-	path = /obj/item/clothing/under/seromi/rainbow
-
-/datum/gear/mask/ipc_monitor
-	display_name = "display monitor (Full Body Prosthetic)"
-	path = /obj/item/clothing/mask/monitor
-	sort_category = "Xenowear"
-
-/datum/gear/uniform/harness
-	display_name = "gear harness (Full Body Prosthetic, Diona)"
-	path = /obj/item/clothing/under/harness
-	sort_category = "Xenowear"
+/datum/gear/resomi_med
+	display_name = "Resomi uniform, Medical"
+	path = /obj/item/clothing/under/resomi/medical
+	cost = 1
+	slot = slot_w_uniform

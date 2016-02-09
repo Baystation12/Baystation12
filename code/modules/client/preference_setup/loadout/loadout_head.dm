@@ -44,10 +44,6 @@
 	path = /obj/item/clothing/head/beret/sec
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
-/datum/gear/head/cap
-	display_name = "cap, black"
-	path = /obj/item/clothing/head/soft/black
-
 /datum/gear/head/cap/blue
 	display_name = "cap, blue"
 	path = /obj/item/clothing/head/soft/blue
@@ -102,34 +98,9 @@
 	display_name = "cap, white"
 	path = /obj/item/clothing/head/soft/mime
 
-/datum/gear/head/cowboy
-	display_name = "cowboy, rodeo"
-	path = /obj/item/clothing/head/cowboy_hat
-	cost = 3
-
 /datum/gear/head/hairflower
 	display_name = "hair flower pin, red"
 	path = /obj/item/clothing/head/hairflower
-
-/datum/gear/head/hairflower/yellow
-	display_name = "hair flower pin, yellow"
-	path = /obj/item/clothing/head/hairflower/yellow
-
-/datum/gear/head/hairflower/pink
-	display_name = "hair flower pin, pink"
-	path = /obj/item/clothing/head/hairflower/pink
-
-/datum/gear/head/hairflower/blue
-	display_name = "hair flower pin, blue"
-	path = /obj/item/clothing/head/hairflower/blue
-
-/datum/gear/head/hairflower/violet
-	display_name = "hair flower pin, violet"
-	path = /obj/item/clothing/head/hairflower/violet
-
-/datum/gear/head/hairflower/orange
-	display_name = "hair flower pin, orange"
-	path = /obj/item/clothing/head/hairflower/orange
 
 /datum/gear/head/hardhat
 	display_name = "hardhat, yellow"
@@ -171,15 +142,6 @@
 /datum/gear/head/ushanka
 	display_name = "ushanka"
 	path = /obj/item/clothing/head/ushanka
-
-/datum/gear/head/santahat
-	display_name = "santa hat, red (holiday)"
-	path = /obj/item/clothing/head/santa
-	cost = 11
-
-/datum/gear/head/santahat/green
-	display_name = "santa hat, green (holiday)"
-	path = /obj/item/clothing/head/santa/green
 
 /datum/gear/head/zhan_scarf
 	display_name = "Zhan headscarf"

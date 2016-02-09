@@ -8,10 +8,6 @@
 	display_name = "clipboard"
 	path = /obj/item/weapon/clipboard
 
-/datum/gear/utility/communicator
-	display_name = "personal communicator"
-	path = /obj/item/device/communicator
-
 /datum/gear/utility/folder_blue
 	display_name = "folder, blue"
 	path = /obj/item/weapon/folder/blue

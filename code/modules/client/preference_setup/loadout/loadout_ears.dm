@@ -4,7 +4,3 @@
 	display_name = "earmuffs"
 	path = /obj/item/clothing/ears/earmuffs
 	sort_category = "Earwear"
-
-/datum/gear/ears/headphones
-	display_name = "headphones"
-	path = /obj/item/clothing/ears/earmuffs/headphones
