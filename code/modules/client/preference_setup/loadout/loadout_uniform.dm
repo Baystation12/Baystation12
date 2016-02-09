@@ -73,6 +73,11 @@
 	display_name = "skirt, black"
 	path = /obj/item/clothing/under/blackskirt
 
+/datum/gear/uniform/roboticist_skirt
+	display_name = "skirt, roboticist"
+	path = /obj/item/clothing/under/rank/roboticist/skirt
+	allowed_roles = list("Roboticist")
+
 /datum/gear/uniform/suit  //amish
 	display_name = "suit, amish"
 	path = /obj/item/clothing/under/sl_suit

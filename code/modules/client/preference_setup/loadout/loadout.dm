@@ -18,16 +18,6 @@ var/list/gear_datums = list()
 		var/use_name = initial(G.display_name)
 		var/use_category = initial(G.sort_category)
 
-		if(!use_name)
-			error("Loadout - Missing display name: [G]")
-			continue
-		if(!initial(G.cost))
-			error("Loadout - Missing cost: [G]")
-			continue
-		if(!initial(G.path))
-			error("Loadout - Missing path definition: [G]")
-			continue
-
 		if(!loadout_categories[use_category])
 			loadout_categories[use_category] = new /datum/loadout_category(use_category)
 		var/datum/loadout_category/LC = loadout_categories[use_category]
@@ -92,7 +82,7 @@ var/list/gear_datums = list()
 	var/fcolor =  "#3366CC"
 	if(total_cost < MAX_GEAR_COST)
 		fcolor = "#E67300"
-	. += "<table align = 'center' width = 500px>"
+	. += "<table align = 'center' width = 100%>"
 	. += "<tr><td colspan=3><center><b><font color = '[fcolor]'>[total_cost]/[MAX_GEAR_COST]</font> loadout points spent.</b> \[<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>\]</center></td></tr>"
 
 	. += "<tr><td colspan=3><center><b>"
@@ -120,11 +110,13 @@ var/list/gear_datums = list()
 	. += "<tr><td colspan=3><b><center>[LC.category]</center></b></td></tr>"
 	. += "<tr><td colspan=3><hr></td></tr>"
 	for(var/gear_name in LC.gear)
+		if(!(gear_name in valid_gear_choices()))
+			continue
 		var/datum/gear/G = LC.gear[gear_name]
 		var/ticked = (G.display_name in pref.gear)
 		var/obj/item/temp = G.path
-		. += "<tr><td width=25%><a href='?src=\ref[src];toggle_gear=[G.display_name]'><font color='[ticked ? "#E67300" : "#3366CC"]'>[initial(temp.name)]</font></a></td>"
-		. += "<td width = 10%>[G.cost]</td>"
+		. += "<tr style='vertical-align:top'><td width=25%><a href='?src=\ref[src];toggle_gear=[G.display_name]'><font color='[ticked ? "#E67300" : "#3366CC"]'>[G.display_name]</font></a></td>"
+		. += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		. += "<td><font size=2><i>[initial(temp.desc)]</i></font></td></tr>"
 	. += "</table>"
 

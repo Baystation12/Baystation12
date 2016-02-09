@@ -31,3 +31,13 @@
 /datum/gear/utility/paicard
 	display_name = "personal AI device"
 	path = /obj/item/device/paicard
+
+/datum/gear/utility/cheaptablet
+	display_name = "cheap tablet computer"
+	path = /obj/item/modular_computer/tablet/preset/custom_loadout/cheap
+	cost = 3
+
+/datum/gear/utility/normaltablet
+	display_name = "tablet computer"
+	path = /obj/item/modular_computer/tablet/preset/custom_loadout/advanced
+	cost = 4

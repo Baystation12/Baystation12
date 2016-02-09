@@ -21,40 +21,39 @@
 /datum/gear/ears/skrell/plate
 	display_name = "headtail-wear, male, bands (Skrell)"
 	path = /obj/item/clothing/ears/skrell/band
-/datum/gear/resomi_grey
-	display_name = "Resomi uniform, grey"
+
+/datum/gear/ears/skrell/cloth_male
+	display_name = "headtail-wear, male, cloth (Skrell)"
+	path = /obj/item/clothing/ears/skrell/cloth_male
+
+/datum/gear/ears/skrell/cloth_female
+	display_name = "headtail-wear, female, cloth (Skrell)"
+	path = /obj/item/clothing/ears/skrell/cloth_female
+
+/datum/gear/uniform/resomi
+	display_name = "uniform, grey (Resomi)"
 	path = /obj/item/clothing/under/resomi
-	cost = 1
-	slot = slot_w_uniform
+	sort_category = "Xenowear"
+	whitelisted = "Resomi"
 
-/datum/gear/resomi_rainbow
-	display_name = "Resomi uniform, rainbow"
+/datum/gear/uniform/resomi/rainbow
+	display_name = "uniform, rainbow (Resomi)"
 	path = /obj/item/clothing/under/resomi/rainbow
-	cost = 1
-	slot = slot_w_uniform
 
-/datum/gear/resomi_white
-	display_name = "Resomi uniform, white"
+/datum/gear/uniform/resomi/white
+	display_name = "uniform, white (Resomi)"
 	path = /obj/item/clothing/under/resomi/white
-	cost = 1
-	slot = slot_w_uniform
 
-/datum/gear/resomi_eng
-	display_name = "Resomi uniform, Engineering"
+/datum/gear/uniform/resomi/eng
+	display_name = "uniform, Engineering (Resomi)"
 	path = /obj/item/clothing/under/resomi/yellow
-	cost = 1
-	slot = slot_w_uniform
 	allowed_roles = list("Chief Engineer","Station Engineer","Atmospherics Technician")
 
-/datum/gear/resomi_sec
-	display_name = "Resomi uniform, Security"
+/datum/gear/uniform/resomi/sec
+	display_name = "uniform, Security (Resomi)"
 	path = /obj/item/clothing/under/resomi/red
-	cost = 1
-	slot = slot_w_uniform
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
-/datum/gear/resomi_med
-	display_name = "Resomi uniform, Medical"
+/datum/gear/uniform/resomi/med
+	display_name = "uniform, Medical (Resomi)"
 	path = /obj/item/clothing/under/resomi/medical
-	cost = 1
-	slot = slot_w_uniform

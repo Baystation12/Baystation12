@@ -37,3 +37,13 @@
 /datum/gear/comb
 	display_name = "purple comb"
 	path = /obj/item/weapon/haircomb
+
+/datum/gear/boot_knife
+	display_name = "boot knife"
+	path = /obj/item/weapon/material/kitchen/utensil/knife/boot
+	cost = 3
+
+/datum/gear/mirror
+	display_name = "handheld mirror"
+	path = /obj/item/weapon/mirror
+	cost = 1
