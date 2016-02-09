@@ -9,6 +9,8 @@
 	num_alternate_languages = 2
 	secondary_langs = list("Resomi")
 	name_language = "Resomi"
+	min_age = 12
+	max_age = 45
 
 	blood_color = "#D514F7"
 	flesh_color = "#5F7BB0"
