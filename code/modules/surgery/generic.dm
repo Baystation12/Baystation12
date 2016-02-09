@@ -135,6 +135,7 @@
 
 		if(istype(target) && !(target.species.flags & NO_BLOOD))
 			affected.status |= ORGAN_BLEEDING
+		playsound(target.loc, 'sound/weapons/bladeslice.ogg', 50, 1)
 
 		affected.createwound(CUT, 1)
 
@@ -172,6 +173,7 @@
 		"\blue You clamp bleeders in [target]'s [affected.name] with \the [tool].")
 		affected.clamp()
 		spread_germs_to_organ(affected, user)
+		playsound(target.loc, 'sound/items/Welder.ogg', 50, 1)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
