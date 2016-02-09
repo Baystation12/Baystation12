@@ -213,8 +213,7 @@
 
 /obj/structure/grille/attack_generic(var/mob/user, var/damage, var/attack_verb)
 	visible_message("<span class='danger'>[user] [attack_verb] the [src]!</span>")
-	if(istype(user))
-		user.do_attack_animation(src)
+	attack_animation(user)
 	health -= damage
 	spawn(1) healthcheck()
 	return 1

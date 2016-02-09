@@ -320,8 +320,7 @@
 /obj/structure/closet/attack_generic(var/mob/user, var/damage, var/attack_message = "destroys", var/wallbreaker)
 	if(!damage || !wallbreaker)
 		return
-	if(istype(user))
-		user.do_attack_animation(src)
+	attack_animation(user)
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
 	dump_contents()
 	spawn(1) qdel(src)

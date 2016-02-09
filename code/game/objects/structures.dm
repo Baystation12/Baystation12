@@ -183,7 +183,6 @@
 	if(!breakable || !damage || !wallbreaker)
 		return 0
 	visible_message("<span class='danger'>[user] [attack_verb] the [src] apart!</span>")
-	if(istype(user))
-		user.do_attack_animation(src)
+	attack_animation(user)
 	spawn(1) qdel(src)
 	return 1
