@@ -5,7 +5,7 @@
 	var/required_access = null				// List of required accesses to *run* the program.
 	var/datum/nano_module/NM = null			// If the program uses NanoModule, put it here and it will be automagically opened. Otherwise implement ui_interact.
 	var/nanomodule_path = null				// Path to nanomodule, make sure to set this if implementing new program.
-	var/running = 0							// Set to 1 when the program is run and back to 0 when it's stopped.
+	var/program_state = PROGRAM_STATE_KILLED// PROGRAM_STATE_KILLED or PROGRAM_STATE_BACKGROUND or PROGRAM_STATE_ACTIVE - specifies whether this program is running.
 	var/obj/item/modular_computer/computer	// Device that runs this program.
 	var/filedesc = "Unknown Program"		// User-friendly name of this program.
 	var/extended_desc = "N/A"				// Short description of this program's function.
@@ -19,7 +19,6 @@
 	var/available_on_syndinet = 0			// Whether the program can be downloaded from SyndiNet (accessible via emagging the computer). Set to 1 to enable.
 	var/computer_emagged = 0				// Set to 1 if computer that's running us was emagged. Computer updates this every Process() tick
 	var/ui_header = null					// Example: "something.gif" - a header image that will be rendered in computer's UI when this program is running at background. Images are taken from /nano/images/status_icons. Be careful not to use too large images!
-
 
 /datum/computer_file/program/New(var/obj/item/modular_computer/comp = null)
 	..()
@@ -96,13 +95,13 @@
 			NM.program = src					// Set the program reference to separate variable, instead.
 		if(requires_ntnet && network_destination)
 			generate_network_log("Connection opened to [network_destination].")
-		running = 1
+		program_state = PROGRAM_STATE_ACTIVE
 		return 1
 	return 0
 
 // Use this proc to kill the program. Designed to be implemented by each program if it requires on-quit logic, such as the NTNRC client.
 /datum/computer_file/program/proc/kill_program(var/forced = 0)
-	running = 0
+	program_state = PROGRAM_STATE_KILLED
 	if(network_destination)
 		generate_network_log("Connection to [network_destination] closed.")
 	if(NM)
@@ -113,7 +112,7 @@
 // This is called every tick when the program is enabled. Ensure you do parent call if you override it. If parent returns 1 continue with UI initialisation.
 // It returns 0 if it can't run or if NanoModule was used instead. I suggest using NanoModules where applicable.
 /datum/computer_file/program/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	if(!running) // Our program was closed. Close the ui if it exists.
+	if(program_state != PROGRAM_STATE_ACTIVE) // Our program was closed. Close the ui if it exists.
 		if(ui)
 			ui.close()
 		return computer.ui_interact(user)
