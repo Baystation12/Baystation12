@@ -19,10 +19,38 @@ datum/unit_test/observation/proc/dump_received_moves()
 		var/list/l = entry
 		log_unit_test("[l[1]] - [l[2]] - [l[3]]")
 
+datum/unit_test/observation/global_listeners_shall_receive_events
+	name = "OBSERVATION: Global listeners shall receive events"
+
+datum/unit_test/observation/global_listeners_shall_receive_events/start_test()
+	..()
+	var/turf/start = locate(20,20,1)
+	var/turf/target = locate(20,21,1)
+	var/mob/living/carbon/human/H = new(start)
+
+	moved_event.register_global(src, /datum/unit_test/observation/proc/receive_move)
+	H.forceMove(target)
+
+	if(received_moves.len != 1)
+		fail("Expected 1 raised moved event, were [received_moves.len].")
+		dump_received_moves()
+		return 1
+
+	var/list/event = received_moves[1]
+	if(event[1] != H || event[2] != start || event[3] != target)
+		fail("Unepected move event received. Expected [H], was [event[1]]. Expected [start], was [event[2]]. Expected [target], was [event[3]]")
+	else
+		pass("Received the expected move event.")
+
+	moved_event.unregister_global(src)
+	qdel(H)
+	return 1
+
 datum/unit_test/observation/moved_observer_shall_register_on_follow
 	name = "OBSERVATION: Moved - Observer Shall Register on Follow"
 
 datum/unit_test/observation/moved_observer_shall_register_on_follow/start_test()
+	..()
 	var/turf/T = locate(20,20,1)
 	var/mob/living/carbon/human/H = new(T)
 	var/mob/dead/observer/O = new(T)
@@ -41,6 +69,7 @@ datum/unit_test/observation/moved_observer_shall_unregister_on_nofollow
 	name = "OBSERVATION: Moved - Observer Shall Unregister on NoFollow"
 
 datum/unit_test/observation/moved_observer_shall_unregister_on_nofollow/start_test()
+	..()
 	var/turf/T = locate(20,20,1)
 	var/mob/living/carbon/human/H = new(T)
 	var/mob/dead/observer/O = new(T)
@@ -60,6 +89,7 @@ datum/unit_test/observation/moved_shall_not_register_on_enter_without_listeners
 	name = "OBSERVATION: Moved - Shall Not Register on Enter Without Listeners"
 
 datum/unit_test/observation/moved_shall_not_register_on_enter_without_listeners/start_test()
+	..()
 	var/turf/T = locate(20,20,1)
 	var/mob/living/carbon/human/H = new(T)
 	var/obj/structure/closet/C = new(T)
@@ -78,6 +108,7 @@ datum/unit_test/observation/moved_shall_registers_recursively_on_new_listener
 	name = "OBSERVATION: Moved - Shall Register Recursively on New Listener"
 
 datum/unit_test/observation/moved_shall_registers_recursively_on_new_listener/start_test()
+	..()
 	var/turf/T = locate(20,20,1)
 	var/mob/living/carbon/human/H = new(T)
 	var/obj/structure/closet/C = new(T)
@@ -101,6 +132,7 @@ datum/unit_test/observation/moved_shall_registers_recursively_with_existing_list
 	name = "OBSERVATION: Moved - Shall Register Recursively with Existing Listener"
 
 datum/unit_test/observation/moved_shall_registers_recursively_with_existing_listener/start_test()
+	..()
 	var/turf/T = locate(20,20,1)
 	var/mob/living/carbon/human/H = new(T)
 	var/obj/structure/closet/C = new(T)
@@ -160,6 +192,7 @@ datum/unit_test/observation/moved_shall_only_trigger_for_recursive_drop/start_te
 	else
 		pass("One one moved event with expected arguments raised.")
 
+	moved_event.unregister(held_item, src)
 	qdel(mech)
 	qdel(held_item)
 	qdel(held_mob)

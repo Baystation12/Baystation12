@@ -1,12 +1,21 @@
+//	Observer Pattern Implementation: Moved
+//		Registration type: /atom/movable
+//
+//		Raised when: An /atom/movable instance has moved.
+//
+//		Arguments that the called proc should expect:
+//			/atom/movable/moving_instance: The instance that moved
+//			/atom/old_loc: The loc before the move.
+//			/atom/new_loc: The loc after the move.
 #define CANCEL_MOVE_EVENT -55
 
-var/datum/observ/moved/moved_event = new()
+var/decl/observ/moved/moved_event = new()
 
-/datum/observ/moved
+/decl/observ/moved
 	name = "Moved"
 	expected_type = /atom/movable
 
-/datum/observ/moved/register(var/eventSource, var/datum/procOwner, var/proc_call)
+/decl/observ/moved/register(var/eventSource, var/datum/procOwner, var/proc_call)
 	. = ..()
 	var/atom/movable/child = eventSource
 	if(.)
@@ -19,7 +28,6 @@ var/datum/observ/moved/moved_event = new()
 /********************
 * Movement Handling *
 ********************/
-
 /atom/movable/proc/move_to_destination(var/atom/movable/am, var/old_loc, var/new_loc)
 	var/turf/T = get_turf(new_loc)
 	if(T && T != loc)
