@@ -24,8 +24,7 @@ datum/preferences
 		randomize_hair_color("facial")
 
 		backbag = 2
-		var/datum/species/S = all_species[species]
-		age = rand(S.min_age,S.max_age)
+		age = rand(current_species.min_age, current_species.max_age)
 		if(H)
 			copy_to(H,1)
 
