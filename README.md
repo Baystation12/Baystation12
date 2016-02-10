@@ -84,7 +84,9 @@ For a basic setup, simply copy every file from config/example to config.
 
 ### SQL Setup
 
-The SQL backend for the library and stats tracking requires a MySQL server.  Your server details go in /config/dbconfig.txt, and the SQL schema is in /SQL/tgstation_schema.sql.  More detailed setup instructions arecoming soon, for now ask in our IRC channel.
+The SQL backend for the library/stats and bans requires a MySQL server.  Your server details go in config/dbconfig.txt.
+
+For initial setup and migrations refer to sql/README.md
 
 ---
 
