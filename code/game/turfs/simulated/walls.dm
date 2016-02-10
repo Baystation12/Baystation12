@@ -93,18 +93,18 @@
 	. = ..(user)
 
 	if(!damage)
-		user << "<span class='notice'>It looks fully intact.</span>"
+		user << "<span class='notice'>[translation(src, "intact")]</span>"
 	else
 		var/dam = damage / material.integrity
 		if(dam <= 0.3)
-			user << "<span class='warning'>It looks slightly damaged.</span>"
+			user << "<span class='warning'>[translation(src, "slightly")]</span>"
 		else if(dam <= 0.6)
-			user << "<span class='warning'>It looks moderately damaged.</span>"
+			user << "<span class='warning'>[translation(src, "moderately")]</span>"
 		else
-			user << "<span class='danger'>It looks heavily damaged.</span>"
+			user << "<span class='danger'>[translation(src, "heavily")]</span>"
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
-		user << "<span class='warning'>There is fungus growing on [src].</span>"
+		user << "<span class='warning'>[translation(src, "fungus")]</span>"
 
 //Damage
 
@@ -120,7 +120,7 @@
 		return
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
-	visible_message("<span class='danger'>\The [src] spontaneously combusts!.</span>") //!!OH SHIT!!
+	visible_message("<span class='danger'>\The [src] spontaneously combusts!.</span>",translation = list("object"=src,"name"="combusts")) //!!OH SHIT!!
 	return
 
 /turf/simulated/wall/proc/take_damage(dam)
@@ -223,7 +223,7 @@
 	var/turf/simulated/floor/F = src
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
-	user << "<span class='warning'>The thermite starts melting through the wall.</span>"
+	user << "<span class='warning'>[translation(src, "thermite")]</span>"
 
 	spawn(100)
 		if(O)

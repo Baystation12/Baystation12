@@ -1,3 +1,4 @@
+
 /obj/item/weapon/paper/carbon
 	name = "paper"
 	icon_state = "paper_stack"

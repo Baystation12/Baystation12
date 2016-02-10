@@ -112,7 +112,7 @@
 /turf/simulated/mineral/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
-		usr << "\red You don't have the dexterity to do this!"
+		usr << "[translation(src,"no_dex")]"
 		return
 
 	if (istype(W, /obj/item/device/core_sampler))
@@ -128,9 +128,9 @@
 
 	if (istype(W, /obj/item/device/measuring_tape))
 		var/obj/item/device/measuring_tape/P = W
-		user.visible_message("\blue[user] extends [P] towards [src].","\blue You extend [P] towards [src].")
+		user.visible_message("\blue[user] extends [P] towards [src].","\blue You extend [P] towards [src].", translation = list("object"=src,"name"="tape","args"=list("user"=user,"P"=P)))
 		if(do_after(user,25))
-			user << "\blue \icon[P] [src] has been excavated to a depth of [2*excavation_level]cm."
+			user << "\blue [translation(src,"tape",list("P"=P, "excavation_level"=excavation_level))]"
 		return
 
 	if (istype(W, /obj/item/weapon/pickaxe))
@@ -151,9 +151,9 @@
 			var/datum/find/F = finds[1]
 			if(excavation_level + P.excavation_amount > F.excavation_required)
 				//Chance to destroy / extract any finds here
-				fail_message = ". <b>[pick("There is a crunching noise","[W] collides with some different rock","Part of the rock face crumbles away","Something breaks under [W]")]</b>"
+				fail_message = "[translation(src,"fail_message",W)]"
 
-		user << "\red You start [P.drill_verb][fail_message ? fail_message : ""]."
+		user << "\red [translation(src,"start_drill",P)][fail_message ? fail_message : ""]"
 
 		if(fail_message && prob(90))
 			if(prob(25))
@@ -164,7 +164,7 @@
 					artifact_debris()
 
 		if(do_after(user,P.digspeed))
-			user << "\blue You finish [P.drill_verb] the rock."
+			user << "\blue [translation(src,"finish_drill",P)]"
 
 			if(finds && finds.len)
 				var/datum/find/F = finds[1]
@@ -269,7 +269,7 @@
 		if(prob(50))
 			pain = 1
 		for(var/mob/living/M in range(src, 200))
-			M << "<font color='red'><b>[pick("A high pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!</b></font>"
+			M << "<font color='red'><b>[translation(src,"artifact_fail")]</b></font>"
 			if(pain)
 				flick("pain",M.pain)
 				if(prob(50))
@@ -280,6 +280,9 @@
 					M.Stun(5)
 			M.apply_effect(25, IRRADIATE)
 
+	if(rand(1,500) == 1)
+		visible_message("<span class='notice'>An old dusty crate was buried within!</span>", translation = list("object"=src,"name"="find_crate"))
+		new /obj/structure/closet/crate/secure/loot(src)
 
 	var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)
 
@@ -324,7 +327,7 @@
 		var/obj/effect/suspension_field/S = locate() in src
 		if(!S || S.field_type != get_responsive_reagent(F.find_type))
 			if(X)
-				visible_message("\red<b>[pick("[display_name] crumbles away into dust","[display_name] breaks apart")].</b>")
+				visible_message("\red<b>[pick("[display_name] crumbles away into dust","[display_name] breaks apart")].</b>", translation = list("object"=src,"name"="find_crate","args"=X))
 				qdel(X)
 
 	finds.Remove(F)
@@ -447,19 +450,19 @@
 
 	if(valid_tool)
 		if (dug)
-			user << "\red This area has already been dug"
+			user << "\red [translation(src,"been_dug")]"
 			return
 
 		var/turf/T = user.loc
 		if (!(istype(T)))
 			return
 
-		user << "\red You start digging."
+		user << "\red [translation(src,"digging")]"
 		playsound(user.loc, 'sound/effects/rustle1.ogg', 50, 1)
 
 		if(!do_after(user,40)) return
 
-		user << "\blue You dug a hole."
+		user << "\blue [translation(src,"dug")]"
 		gets_dug()
 
 	else if(istype(W,/obj/item/weapon/storage/bag/ore))

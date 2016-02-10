@@ -351,7 +351,7 @@ var/list/name_to_material
 	melting_point = 6000
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
-	icon_colour = "#777777"
+	icon_colour = "#666666"
 	explosion_resistance = 25
 	hardness = 80
 	weight = 23
@@ -658,7 +658,7 @@ var/list/name_to_material
 //TODO PLACEHOLDERS:
 /material/leather
 	name = "leather"
-	icon_colour = "#5C4831"
+	icon_colour = "#BA5100"
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+300
@@ -687,7 +687,7 @@ var/list/name_to_material
 	name = "teal"
 	display_name ="teal"
 	use_name = "teal cloth"
-	icon_colour = "#00EAFA"
+	icon_colour = "#00BABA"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -696,7 +696,7 @@ var/list/name_to_material
 	name = "black"
 	display_name = "black"
 	use_name = "black cloth"
-	icon_colour = "#505050"
+	icon_colour = "#64625C"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -732,7 +732,7 @@ var/list/name_to_material
 	name = "beige"
 	display_name = "beige"
 	use_name = "beige cloth"
-	icon_colour = "#E8E7C8"
+	icon_colour = "#C9C699"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -741,7 +741,7 @@ var/list/name_to_material
 	name = "lime"
 	display_name = "lime"
 	use_name = "lime cloth"
-	icon_colour = "#62E36C"
+	icon_colour = "#BAB700"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300

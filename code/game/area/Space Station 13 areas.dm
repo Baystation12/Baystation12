@@ -95,7 +95,7 @@ var/list/ghostteleportlocs = list()
 
 /area/space
 	name = "\improper Space"
-	icon_state = "space"
+	icon_state = "unknown"
 	requires_power = 1
 	always_unpowered = 1
 	lighting_use_dynamic = 1
@@ -1138,6 +1138,10 @@ area/space/atmosalert()
 	icon_state = "engine"
 	sound_env = LARGE_ENCLOSED
 
+/area/engineering/engine_sing_room
+	name = "\improper Singularity Room"
+	icon_state = "engine"
+
 /area/engineering/engine_airlock
 	name = "\improper Engine Room Airlock"
 	icon_state = "engine"
@@ -1455,6 +1459,9 @@ area/space/atmosalert()
 	name = "\improper Security - Tactical Equipment"
 	icon_state = "Tactical"
 
+/area/security/Medbay
+	name = "\improper Security - MedBay"
+	icon_state = "MedBayBrig"
 
 /*
 	New()

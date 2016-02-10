@@ -2,42 +2,42 @@
 var/list/admin_verbs_default = list(
 	/datum/admins/proc/show_player_panel,	//shows an interface for individual players, with various links (links require additional flags,
 	/client/proc/player_panel,
-	/client/proc/toggleadminhelpsound,	//toggles whether we hear a sound when adminhelps/PMs are used,
-	/client/proc/deadmin_self,			//destroys our own admin datum so we can play as a regular player,
-	/client/proc/hide_verbs,			//hides all our adminverbs,
-	/client/proc/hide_most_verbs,		//hides all our hideable adminverbs,
-	/client/proc/debug_variables,		//allows us to -see- the variables of any instance in the game. +VAREDIT needed to modify,
-//	/client/proc/check_antagonists,		//shows all antags,
-	/client/proc/cmd_mentor_check_new_players
-//	/client/proc/deadchat				//toggles deadchat on/off,
+	/client/proc/toggleadminhelpsound,	/*toggles whether we hear a sound when adminhelps/PMs are used*/
+	/client/proc/deadmin_self,			/*destroys our own admin datum so we can play as a regular player*/
+	/client/proc/hide_verbs,			/*hides all our adminverbs*/
+	/client/proc/hide_most_verbs,		/*hides all our hideable adminverbs*/
+	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game. +VAREDIT needed to modify*/
+//	/client/proc/check_antagonists,		/*shows all antags*/
+	/client/proc/cmd_mentor_check_new_players,
+//	/client/proc/deadchat				/*toggles deadchat on/off*/
 	)
 var/list/admin_verbs_admin = list(
-	/client/proc/player_panel_new,		//shows an interface for all players, with links to various panels,
-	/client/proc/invisimin,				//allows our mob to go invisible/visible,
-//	/datum/admins/proc/show_traitor_panel,	//interface which shows a mob's mind, -Removed due to rare practical use. Moved to debug verbs ~Errorage,
-	/datum/admins/proc/show_game_mode,  //Configuration window for the current game mode.,
-	/datum/admins/proc/force_mode_latespawn, //Force the mode to try a latespawn proc,
-	/datum/admins/proc/force_antag_latespawn, //Force a specific template to try a latespawn proc,
-	/datum/admins/proc/toggleenter,		//toggles whether people can join the current game,
-	/datum/admins/proc/toggleguests,	//toggles whether guests can join the current game,
-	/datum/admins/proc/announce,		//priority announce something to all clients.,
-	/client/proc/colorooc,				//allows us to set a custom colour for everythign we say in ooc,
-	/client/proc/admin_ghost,			//allows us to ghost/reenter body at will,
-	/client/proc/toggle_view_range,		//changes how far we can see,
-	/datum/admins/proc/view_txt_log,	//shows the server log (diary) for today,
-	/datum/admins/proc/view_atk_log,	//shows the server combat-log, doesn't do anything presently,
-	/client/proc/cmd_admin_pm_context,	//right-click adminPM interface,
-	/client/proc/cmd_admin_pm_panel,	//admin-pm list,
-	/client/proc/cmd_admin_subtle_message,	//send an message to somebody as a 'voice in their head',
-	/client/proc/cmd_admin_delete,		//delete an instance/object/mob/etc,
-	/client/proc/cmd_admin_check_contents,	//displays the contents of an instance,
-	/datum/admins/proc/access_news_network,	//allows access of newscasters,
-	/client/proc/giveruntimelog,		//allows us to give access to runtime logs to somebody,
-	/client/proc/getserverlog,			//allows us to fetch server logs (diary) for other days,
-	/client/proc/jumptocoord,			//we ghost and jump to a coordinate,
-	/client/proc/Getmob,				//teleports a mob to our location,
-	/client/proc/Getkey,				//teleports a mob with a certain ckey to our location,
-//	/client/proc/sendmob,				//sends a mob somewhere, -Removed due to it needing two sorting procs to work, which were executed every time an admin right-clicked. ~Errorage,
+	/client/proc/player_panel_new,		/*shows an interface for all players, with links to various panels*/
+	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
+//	/datum/admins/proc/show_traitor_panel,	/*interface which shows a mob's mind*/ -Removed due to rare practical use. Moved to debug verbs ~Errorage
+	/datum/admins/proc/show_game_mode,  /*Configuration window for the current game mode.*/
+	/datum/admins/proc/force_mode_latespawn, /*Force the mode to try a latespawn proc*/
+	/datum/admins/proc/force_antag_latespawn, /*Force a specific template to try a latespawn proc*/
+	/datum/admins/proc/toggleenter,		/*toggles whether people can join the current game*/
+	/datum/admins/proc/toggleguests,	/*toggles whether guests can join the current game*/
+	/datum/admins/proc/announce,		/*priority announce something to all clients.*/
+	/client/proc/colorooc,				/*allows us to set a custom colour for everythign we say in ooc*/
+	/client/proc/admin_ghost,			/*allows us to ghost/reenter body at will*/
+	/client/proc/toggle_view_range,		/*changes how far we can see*/
+	/datum/admins/proc/view_txt_log,	/*shows the server log (diary) for today*/
+//	/datum/admins/proc/view_atk_log,	/*shows the server combat-log, doesn't do anything presently*/
+	/client/proc/cmd_admin_pm_context,	/*right-click adminPM interface*/
+	/client/proc/cmd_admin_pm_panel,	/*admin-pm list*/
+	/client/proc/cmd_admin_subtle_message,	/*send an message to somebody as a 'voice in their head'*/
+	/client/proc/cmd_admin_delete,		/*delete an instance/object/mob/etc*/
+	/client/proc/cmd_admin_check_contents,	/*displays the contents of an instance*/
+	/datum/admins/proc/access_news_network,	/*allows access of newscasters*/
+	/client/proc/giveruntimelog,		/*allows us to give access to runtime logs to somebody*/
+	/client/proc/getserverlog,			/*allows us to fetch server logs (diary) for other days*/
+	/client/proc/jumptocoord,			/*we ghost and jump to a coordinate*/
+	/client/proc/Getmob,				/*teleports a mob to our location*/
+	/client/proc/Getkey,				/*teleports a mob with a certain ckey to our location*/
+//	/client/proc/sendmob,				/*sends a mob somewhere*/ -Removed due to it needing two sorting procs to work, which were executed every time an admin right-clicked. ~Errorage
 	/client/proc/Jump,
 	/client/proc/jumptokey,				//allows us to jump to the location of a mob with a certain ckey,
 	/client/proc/jumptomob,				//allows us to jump to a specific mob,
@@ -59,12 +59,13 @@ var/list/admin_verbs_admin = list(
 	/client/proc/toggle_hear_radio,		//toggles whether we hear the radio,
 	/client/proc/investigate_show,		//various admintools for investigation. Such as a singulo grief-log,
 	/client/proc/secrets,
-	/datum/admins/proc/toggleooc,		//toggles ooc on/off for everyone,
-	/datum/admins/proc/togglelooc,		//toggles looc on/off for everyone,
-	/datum/admins/proc/toggleoocdead,	//toggles ooc on/off for everyone who is dead,
-	/datum/admins/proc/toggledsay,		//toggles dsay on/off for everyone,
-	/client/proc/game_panel,			//game panel, allows to change game-mode etc,
-	/client/proc/cmd_admin_say,			//admin-only ooc chat,
+	/datum/admins/proc/toggleooc,		/*toggles ooc on/off for everyone*/
+	/datum/admins/proc/togglelooc,		/*toggles looc on/off for everyone*/
+	/datum/admins/proc/toggleoocdead,	/*toggles ooc on/off for everyone who is dead*/
+	/datum/admins/proc/toggledsay,		/*toggles dsay on/off for everyone*/
+	/datum/admins/proc/toggleexplosions,/*toggles all explosions*/
+	/client/proc/game_panel,			/*game panel, allows to change game-mode etc*/
+	/client/proc/cmd_admin_say,			/*admin-only ooc chat*/
 	/datum/admins/proc/togglehubvisibility, //toggles visibility on the BYOND Hub,
 	/datum/admins/proc/PlayerNotes,
 	/client/proc/cmd_mod_say,
@@ -85,7 +86,6 @@ var/list/admin_verbs_admin = list(
 	/client/proc/toggle_antagHUD_restrictions,
 	/client/proc/allow_character_respawn,    // Allows a ghost to respawn ,
 	/client/proc/event_manager_panel,
-	/client/proc/empty_ai_core_toggle_latejoin,
 	/client/proc/empty_ai_core_toggle_latejoin,
 	/client/proc/aooc,
 	/client/proc/change_human_appearance_admin,	// Allows an admin to change the basic appearance of human-based mobs ,
@@ -223,7 +223,7 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/admin_ghost,
 	/client/proc/toggle_view_range,
 	/datum/admins/proc/view_txt_log,
-	/datum/admins/proc/view_atk_log,
+//	/datum/admins/proc/view_atk_log,
 	/client/proc/cmd_admin_subtle_message,
 	/client/proc/cmd_admin_check_contents,
 	/datum/admins/proc/access_news_network,
@@ -441,7 +441,7 @@ var/list/admin_verbs_mentor = list(
 	return
 
 /client/proc/player_panel_new()
-	set name = "Player Panel New"
+	set name = "PP New"
 	set category = "Admin"
 	if(holder)
 		holder.player_panel_new()
@@ -449,7 +449,7 @@ var/list/admin_verbs_mentor = list(
 	return
 
 /client/proc/check_antagonists()
-	set name = "Check Antagonists"
+	set name = "Check Antag"
 	set category = "Admin"
 	if(holder)
 		holder.check_antagonists()
@@ -458,7 +458,7 @@ var/list/admin_verbs_mentor = list(
 	return
 
 /client/proc/jobbans()
-	set name = "Display Job bans"
+	set name = "Display Jobbans"
 	set category = "Admin"
 	if(holder)
 		if(config.ban_legacy_system)
@@ -759,7 +759,7 @@ var/list/admin_verbs_mentor = list(
 	feedback_add_details("admin_verb","MSL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/change_human_appearance_admin()
-	set name = "Change Mob Appearance - Admin"
+	set name = "Change Mob Appearance"
 	set desc = "Allows you to change the mob appearance"
 	set category = "Admin"
 
@@ -773,7 +773,7 @@ var/list/admin_verbs_mentor = list(
 	feedback_add_details("admin_verb","CHAA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/change_human_appearance_self()
-	set name = "Change Mob Appearance - Self"
+	set name = "Change Self Appearance"
 	set desc = "Allows the mob to change its appearance"
 	set category = "Admin"
 

@@ -14,9 +14,6 @@
 
 	feedback_add_details("admin_verb","DG2") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-// callproc moved to code/modules/admin/callproc
-
-
 /client/proc/Cell()
 	set category = "Debug"
 	set name = "Cell"

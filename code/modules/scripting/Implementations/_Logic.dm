@@ -128,11 +128,11 @@
 // String stuff
 /proc/n_lower(var/string)
 	if(istext(string))
-		return lowertext(string)
+		return lowertext_alt(string)
 
 /proc/n_upper(var/string)
 	if(istext(string))
-		return uppertext(string)
+		return uppertext_alt(string)
 
 /*
 //Makes a list where all indicies in a string is a seperate index in the list

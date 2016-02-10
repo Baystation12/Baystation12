@@ -618,4 +618,4 @@ wink, yawn, swish, sway/wag, fastsway/qwag, stopsway/swag"}
 	HTML += "<hr />"
 	HTML +="<a href='?src=\ref[src];flavor_change=done'>\[Done\]</a>"
 	HTML += "<tt>"
-	src << browse(HTML, "window=flavor_changes;size=430x300")
+	src << browse(sanitize_local(HTML, SANITIZE_BROWSER), "window=flavor_changes;size=430x300")

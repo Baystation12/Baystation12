@@ -33,7 +33,7 @@
 		new_name = ""
 		for(var/x = rand(Floor(syllable_count/syllable_divisor),syllable_count);x>0;x--)
 			new_name += pick(syllables)
-		full_name += " [capitalize(lowertext(new_name))]"
+		full_name += " [capitalize(lowertext_alt(new_name))]"
 
 	return "[trim(full_name)]"
 

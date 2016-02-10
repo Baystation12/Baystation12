@@ -1,9 +1,7 @@
 //This could either be split into the proper DM files or placed somewhere else all together, but it'll do for now -Nodrak
 
 /*
-
 A list of items and costs is stored under the datum of every game mode, alongside the number of crystals, and the welcoming message.
-
 */
 
 /obj/item/device/uplink
@@ -35,12 +33,9 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 // HIDDEN UPLINK - Can be stored in anything but the host item has to have a trigger for it.
 /* How to create an uplink in 3 easy steps!
-
  1. All obj/item 's have a hidden_uplink var. By default it's null. Give the item one with "new(src)", it must be in it's contents. Feel free to add "uses".
-
  2. Code in the triggers. Use check_trigger for this, I recommend closing the item's menu with "usr << browse(null, "window=windowname") if it returns true.
  The var/value is the value that will be compared with the var/target. If they are equal it will activate the menu.
-
  3. If you want the menu to stay until the users locks his uplink, add an active_uplink_check(mob/user as mob) in your interact/attack_hand proc.
  Then check if it's true, if true return. This will stop the normal menu appearing and will instead show the uplink menu.
 */
@@ -158,18 +153,18 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 				nanoui_data["exploit"] = list()  // Setting this to equal L.fields passes it's variables that are lists as reference instead of value.
 								 // We trade off being able to automatically add shit for more control over what gets passed to json
 								 // and if it's sanitized for html.
-				nanoui_data["exploit"]["nanoui_exploit_record"] = html_encode(L.fields["exploit_record"])                         		// Change stuff into html
-				nanoui_data["exploit"]["nanoui_exploit_record"] = replacetext(nanoui_data["exploit"]["nanoui_exploit_record"], "\n", "<br>")    // change line breaks into <br>
-				nanoui_data["exploit"]["name"] =  html_encode(L.fields["name"])
-				nanoui_data["exploit"]["sex"] =  html_encode(L.fields["sex"])
-				nanoui_data["exploit"]["age"] =  html_encode(L.fields["age"])
-				nanoui_data["exploit"]["species"] =  html_encode(L.fields["species"])
-				nanoui_data["exploit"]["rank"] =  html_encode(L.fields["rank"])
-				nanoui_data["exploit"]["home_system"] =  html_encode(L.fields["home_system"])
-				nanoui_data["exploit"]["citizenship"] =  html_encode(L.fields["citizenship"])
-				nanoui_data["exploit"]["faction"] =  html_encode(L.fields["faction"])
-				nanoui_data["exploit"]["religion"] =  html_encode(L.fields["religion"])
-				nanoui_data["exploit"]["fingerprint"] =  html_encode(L.fields["fingerprint"])
+				nanoui_data["exploit"]["nanoui_exploit_record"]	 = lhtml_encode(L.fields["exploit_record"])   		// Change stuff into html
+				nanoui_data["exploit"]["nanoui_exploit_record"]	 = replacetext(nanoui_data["exploit"]["nanoui_exploit_record"], "\n", "<br>")    // change line breaks into <br>
+				nanoui_data["exploit"]["name"]					 = lhtml_encode(L.fields["name"])
+				nanoui_data["exploit"]["sex"]					 = lhtml_encode(L.fields["sex"])
+				nanoui_data["exploit"]["age"]					 = lhtml_encode(L.fields["age"])
+				nanoui_data["exploit"]["species"]				 = lhtml_encode(L.fields["species"])
+				nanoui_data["exploit"]["rank"]					 = lhtml_encode(L.fields["rank"])
+				nanoui_data["exploit"]["home_system"]			 = lhtml_encode(L.fields["home_system"])
+				nanoui_data["exploit"]["citizenship"]			 = lhtml_encode(L.fields["citizenship"])
+				nanoui_data["exploit"]["faction"]				 = lhtml_encode(L.fields["faction"])
+				nanoui_data["exploit"]["religion"]				 = lhtml_encode(L.fields["religion"])
+				nanoui_data["exploit"]["fingerprint"]			 = lhtml_encode(L.fields["fingerprint"])
 
 				nanoui_data["exploit_exists"] = 1
 				break

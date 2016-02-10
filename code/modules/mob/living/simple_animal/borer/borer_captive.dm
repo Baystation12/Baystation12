@@ -53,7 +53,7 @@
 			verbs -= /mob/living/carbon/proc/release_control
 			verbs -= /mob/living/carbon/proc/punish_host
 			verbs -= /mob/living/carbon/proc/spawn_larvae
-		
+
 		return
-	
+
 	..()

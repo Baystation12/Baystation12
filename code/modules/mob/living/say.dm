@@ -92,7 +92,7 @@ proc/get_radio_key_from_channel(var/channel)
 	var/speech_problem_flag = 0
 
 	if((HULK in mutations) && health >= 25 && length(message))
-		message = "[uppertext(message)]!!!"
+		message = "[uppertext_alt(message)]!!!"
 		verb = pick("yells","roars","hollers")
 		speech_problem_flag = 1
 	if(slurring)
@@ -134,6 +134,8 @@ proc/get_radio_key_from_channel(var/channel)
 		if(client.prefs.muted & MUTE_IC)
 			src << "\red You cannot speak in IC (Muted)."
 			return
+
+	message = sanitize_local(message)
 
 	if(stat)
 		if(stat == 2)

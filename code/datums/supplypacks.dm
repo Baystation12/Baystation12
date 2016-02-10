@@ -995,13 +995,30 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	/obj/item/weapon/reagent_containers/glass/paint/purple,
 	/obj/item/weapon/reagent_containers/glass/paint/black,
 	/obj/item/weapon/reagent_containers/glass/paint/white,
-	/obj/item/weapon/contraband/poster,
+	/obj/item/weapon/poster,
 	/obj/item/weapon/wrapping_paper,
 	/obj/item/weapon/wrapping_paper,
 	/obj/item/weapon/wrapping_paper)
 	cost = 10
 	containertype = "/obj/structure/closet/crate"
 	containername = "Arts and Crafts crate"
+	group = "Operations"
+
+/datum/supply_packs/posters
+	name = "Motivational Posters"
+	contains = list(/obj/item/weapon/poster/legit,
+	/obj/item/weapon/poster/legit,
+	/obj/item/weapon/poster/legit,
+	/obj/item/weapon/poster/legit,
+	/obj/item/weapon/poster/legit,
+	/obj/item/weapon/poster/legit,
+	/obj/item/weapon/poster/legit,
+	/obj/item/weapon/poster/legit,
+	/obj/item/weapon/poster/legit,
+	/obj/item/weapon/poster/legit)
+	cost = 10
+	containertype = "/obj/structure/closet/crate"
+	containername = "Motivational Posters crate"
 	group = "Operations"
 
 

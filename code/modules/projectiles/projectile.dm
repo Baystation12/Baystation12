@@ -143,19 +143,19 @@
 		user.bullet_act(src, target_zone)
 		qdel(src)
 		return 0
-	
+
 	loc = get_turf(user) //move the projectile out into the world
-	
+
 	firer = user
 	shot_from = launcher.name
 	silenced = launcher.silenced
-	
+
 	return launch(target, target_zone, x_offset, y_offset)
 
 //Used to change the direction of the projectile in flight.
 /obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null)
 	var/turf/new_target = locate(new_x, new_y, src.z)
-	
+
 	original = new_target
 	if(new_firer)
 		firer = src
@@ -401,9 +401,9 @@
 	var/turf/targloc = get_turf(target)
 	if(!curloc || !targloc)
 		return 0
-	
+
 	original = target
-	
+
 	//plot the initial trajectory
 	setup_trajectory(curloc, targloc)
 	return process(targloc)
@@ -437,7 +437,7 @@
 
 	//Set the flags and pass flags to that of the real projectile...
 	if(!isnull(flags))
-		trace.flags = flags 
+		trace.flags = flags
 	trace.pass_flags = pass_flags
 
 	var/output = trace.launch(target) //Test it!

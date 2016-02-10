@@ -160,7 +160,7 @@
 	force = 4.0
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	volume = 2
-	
+
 	New()
 		..()
 		src.air_contents.adjust_gas("nitrogen", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
@@ -181,6 +181,9 @@
 	desc = "A tank of nitrogen."
 	icon_state = "oxygen_fr"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
+
+	nitrogen_vox
+		slot_flags = SLOT_BELT
 
 
 /obj/item/weapon/tank/nitrogen/New()
