@@ -36,4 +36,4 @@ changes:
   - bugfix: "EMP no longer hits twice on humans."
   - tweak: "EMP drains powercells using the cell's current charge, and not the cell's maximum potential charge, to ensure two blasts do not completely disable a synthetic."
   - tweak: "EMP hitting a prosthetic limb or organ will now do less damage."
-  - tweak: "EMP hitting a cyborg will no longer outright stun them.  Instead, they gain the 'confused' status for a few moments, making movement difficult.  In addition, their HUD gets staticy, and their modules are forced to be retracted.
+  - tweak: "EMP hitting a cyborg will no longer outright stun them.  Instead, they gain the 'confused' status for a few moments, making movement difficult.  In addition, their HUD gets staticy, and their modules are forced to be retracted."
