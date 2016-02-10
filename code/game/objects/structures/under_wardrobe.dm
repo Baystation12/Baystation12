@@ -8,7 +8,7 @@
 /obj/structure/undies_wardrobe/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)
 	var/mob/living/carbon/human/H = user
-	if(!ishuman(user) || (H.species && !(H.species.flags & HAS_UNDERWEAR)))
+	if(!ishuman(user) || (H.species && !(H.species.appearance_flags & HAS_UNDERWEAR)))
 		user << "<span class='warning'>Sadly there's nothing in here for you to wear.</span>"
 		return 0
 

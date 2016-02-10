@@ -34,10 +34,6 @@
 	hold.emp_act(severity)
 	..()
 
-/obj/item/clothing/accessory/storage/hear_talk(mob/M, var/msg, verb, datum/language/speaking)
-	hold.hear_talk(M, msg, verb, speaking)
-	..()
-
 /obj/item/clothing/accessory/storage/attack_self(mob/user as mob)
 	user << "<span class='notice'>You empty [src].</span>"
 	var/turf/T = get_turf(src)

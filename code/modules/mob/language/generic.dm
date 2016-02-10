@@ -25,7 +25,7 @@
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	key = "0"
-	flags = RESTRICTED | COMMON_VERBS
+	flags = RESTRICTED
 	syllables = list("blah","blah","blah","bleh","meh","neh","nah","wah")
 
 //TODO flag certain languages to use the mob-type specific say_quote and then get rid of these.

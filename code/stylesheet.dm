@@ -49,6 +49,7 @@ a:visited				{color: #0000ff;}
 .syndradio				{color: #6D3F40;}
 .centradio				{color: #5C5C8A;}
 .airadio				{color: #FF00FF;}
+.entradio				{color: #339966;}
 
 .secradio				{color: #A30000;}
 .engradio				{color: #A66300;}
@@ -75,6 +76,7 @@ h1.alert, h2.alert		{color: #000000;}
 .danger					{color: #ff0000; font-weight: bold;}
 .warning				{color: #ff0000; font-style: italic;}
 .rose					{color: #ff5050;}
+.blue					{color: #0000FF;}
 .info					{color: #0000CC;}
 .notice					{color: #000099;}
 .alium					{color: #00ff00;}
@@ -96,6 +98,9 @@ h1.alert, h2.alert		{color: #000000;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
 
 .interface				{color: #330033;}
+
+.good                   {color: #4f7529; font-weight: bold;}
+.bad                    {color: #ee0000; font-weight: bold;}
 
 BIG IMG.icon 			{width: 32px; height: 32px;}
 

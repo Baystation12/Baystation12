@@ -18,7 +18,7 @@
 			ai.ai_cancel_tracking()
 
 		//Holopad
-		if(ai.holo)
+		if(ai.holo && ai.hologram_follow)
 			ai.holo.move_hologram(ai)
 		return 1
 
@@ -54,7 +54,7 @@
 	create_eyeobj()
 	spawn(5)
 		if(eyeobj)
-			eyeobj.loc = src.loc
+			eyeobj.forceMove(src.loc)
 
 /mob/living/silicon/ai/Destroy()
 	destroy_eyeobj()

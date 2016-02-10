@@ -1,14 +1,48 @@
+
+/*
+	The initialization of the game happens roughly like this:
+
+	1. All global variables are initialized (including the global_init instance).
+	2. The map is initialized, and map objects are created.
+	3. world/New() runs, creating the process scheduler (and the old master controller) and spawning their setup.
+	4. processScheduler/setup() runs, creating all the processes. game_controller/setup() runs, calling initialize() on all movable atoms in the world.
+	5. The gameticker is created.
+
+*/
 var/global/datum/global_init/init = new ()
 
 /*
 	Pre-map initialization stuff should go here.
 */
 /datum/global_init/New()
+	generate_gameid()
 
 	makeDatumRefLists()
 	load_configuration()
 
-	qdel(src)
+	initialize_chemical_reagents()
+	initialize_chemical_reactions()
+
+	qdel(src) //we're done
+
+/var/game_id = null
+/proc/generate_gameid()
+	if(game_id != null)
+		return
+	game_id = ""
+
+	var/list/c = list("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
+	var/l = c.len
+
+	var/t = world.timeofday
+	for(var/_ = 1 to 4)
+		game_id = "[c[(t % l) + 1]][game_id]"
+		t = round(t / l)
+	game_id = "-[game_id]"
+	t = round(world.realtime / (10 * 60 * 60 * 24))
+	for(var/_ = 1 to 3)
+		game_id = "[c[(t % l) + 1]][game_id]"
+		t = round(t / l)
 
 
 /world
@@ -19,14 +53,13 @@ var/global/datum/global_init/init = new ()
 	cache_lifespan = 0	//stops player uploaded stuff from being kept in the rsc past the current session
 
 
-
-#define RECOMMENDED_VERSION 501
+#define RECOMMENDED_VERSION 509
 /world/New()
 	//logs
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
 	href_logfile = file("data/logs/[date_string] hrefs.htm")
 	diary = file("data/logs/[date_string].log")
-	diary << "[log_end]\n[log_end]\nStarting up. [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]"
+	diary << "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]"
 	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
 
 	if(byond_version < RECOMMENDED_VERSION)
@@ -50,7 +83,14 @@ var/global/datum/global_init/init = new ()
 
 	. = ..()
 
+#ifndef UNIT_TEST
+
 	sleep_offline = 1
+
+#else
+	log_unit_test("Unit Tests Enabled.  This will destroy the world when testing is complete.")
+	load_unit_test_changes()
+#endif
 
 	// Set up roundstart seed list.
 	plant_controller = new()
@@ -58,9 +98,20 @@ var/global/datum/global_init/init = new ()
 	// This is kinda important. Set up details of what the hell things are made of.
 	populate_material_list()
 
-	//Create the asteroid Z-level.
 	if(config.generate_asteroid)
-		new /datum/random_map(null,13,32,5,217,223)
+		// These values determine the specific area that the map is applied to.
+		// If you do not use the official Baycode moonbase map, you will need to change them.
+		//Create the mining Z-level.
+		new /datum/random_map/automata/cave_system(null,1,1,5,255,255)
+		//new /datum/random_map/noise/volcanism(null,1,1,5,255,255) // Not done yet! Pretty, though.
+		// Create the mining ore distribution map.
+		new /datum/random_map/noise/ore(null, 1, 1, 5, 64, 64)
+		// Update all turfs to ensure everything looks good post-generation. Yes,
+		// it's brute-forcey, but frankly the alternative is a mine turf rewrite.
+		for(var/turf/simulated/mineral/M in world) // Ugh.
+			M.updateMineralOverlays()
+		for(var/turf/simulated/floor/asteroid/M in world) // Uuuuuugh.
+			M.updateMineralOverlays()
 
 	// Create autolathe recipes, as above.
 	populate_lathe_recipes()
@@ -74,6 +125,11 @@ var/global/datum/global_init/init = new ()
 		processScheduler.deferSetupFor(/datum/controller/process/ticker)
 		processScheduler.setup()
 		master_controller.setup()
+#ifdef UNIT_TEST
+		initialize_unit_tests()
+#endif
+
+
 
 	spawn(3000)		//so we aren't adding to the round-start lag
 		if(config.ToRban)
@@ -158,6 +214,7 @@ var/world_topic_spam_protect_time = world.timeofday
 				"eng" = engineering_positions,
 				"med" = medical_positions,
 				"sci" = science_positions,
+				"car" = cargo_positions,
 				"civ" = civilian_positions,
 				"bot" = nonhuman_positions
 			)
@@ -183,6 +240,12 @@ var/world_topic_spam_protect_time = world.timeofday
 			positions[k] = list2params(positions[k]) // converts positions["heads"] = list("Bob"="Captain", "Bill"="CMO") into positions["heads"] = "Bob=Captain&Bill=CMO"
 
 		return list2params(positions)
+
+	else if(T == "revision")
+		if(revdata.revision)
+			return list2params(list(branch = revdata.branch, date = revdata.date, revision = revdata.revision))
+		else
+			return "unknown"
 
 	else if(copytext(T,1,5) == "info")
 		var/input[] = params2list(T)
@@ -485,13 +548,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if (n > 0)
 		features += "~[n] player"
 
-	/*
-	is there a reason for this? the byond site shows 'hosted by X' when there is a proper host already.
-	if (host)
-		features += "hosted by <b>[host]</b>"
-	*/
 
-	if (!host && config && config.hostedby)
+	if (config && config.hostedby)
 		features += "hosted by <b>[config.hostedby]</b>"
 
 	if (features)

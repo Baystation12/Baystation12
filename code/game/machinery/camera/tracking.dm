@@ -47,20 +47,20 @@
 
 	loc = sanitize(loc)
 	if(!loc)
-		src << "\red Must supply a location name"
+		src << "<span class='warning'>Must supply a location name</span>"
 		return
 
 	if(stored_locations.len >= max_locations)
-		src << "\red Cannot store additional locations. Remove one first"
+		src << "<span class='warning'>Cannot store additional locations. Remove one first</span>"
 		return
 
 	if(loc in stored_locations)
-		src << "\red There is already a stored location by this name"
+		src << "<span class='warning'>There is already a stored location by this name</span>"
 		return
 
 	var/L = src.eyeobj.getLoc()
 	if (InvalidPlayerTurf(get_turf(L)))
-		src << "\red Unable to store this location"
+		src << "<span class='warning'>Unable to store this location</span>"
 		return
 
 	stored_locations[loc] = L
@@ -75,7 +75,7 @@
 	set desc = "Returns to the selected camera location"
 
 	if (!(loc in stored_locations))
-		src << "\red Location [loc] not found"
+		src << "<span class='warning'>Location [loc] not found</span>"
 		return
 
 	var/L = stored_locations[loc]
@@ -87,7 +87,7 @@
 	set desc = "Deletes the selected camera location"
 
 	if (!(loc in stored_locations))
-		src << "\red Location [loc] not found"
+		src << "<span class='warning'>Location [loc] not found</span>"
 		return
 
 	stored_locations.Remove(loc)
@@ -155,6 +155,11 @@
 	if(!istype(target))	return
 	var/mob/living/silicon/ai/U = usr
 
+	if(target == U.cameraFollow)
+		return
+
+	if(U.cameraFollow)
+		U.ai_cancel_tracking()
 	U.cameraFollow = target
 	U << "Now tracking [target.name] on camera."
 	target.tracking_initiated()
@@ -218,6 +223,9 @@ mob/living/proc/near_camera()
 /mob/living/proc/tracking_status()
 	// Easy checks first.
 	// Don't detect mobs on Centcom. Since the wizard den is on Centcomm, we only need this.
+	var/obj/item/weapon/card/id/id = GetIdCard()
+	if(id && id.prevent_tracking())
+		return TRACKING_TERMINATE
 	if(InvalidPlayerTurf(get_turf(src)))
 		return TRACKING_TERMINATE
 	if(invisibility >= INVISIBILITY_LEVEL_ONE) //cloaked
@@ -235,13 +243,8 @@ mob/living/proc/near_camera()
 	if(. == TRACKING_NO_COVERAGE)
 		return camera && camera.can_use() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
 
-/mob/living/silicon/robot/syndicate/tracking_status()
-	return TRACKING_TERMINATE
-
 /mob/living/carbon/human/tracking_status()
 	//Cameras can't track people wearing an agent card or a ninja hood.
-	if(wear_id && istype(wear_id.GetID(), /obj/item/weapon/card/id/syndicate))
-		return TRACKING_TERMINATE
 	if(istype(head, /obj/item/clothing/head/helmet/space/rig))
 		var/obj/item/clothing/head/helmet/space/rig/helmet = head
 		if(helmet.prevent_track())

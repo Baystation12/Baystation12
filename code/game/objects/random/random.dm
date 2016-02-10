@@ -11,8 +11,10 @@
 	..()
 	if (!prob(spawn_nothing_percentage))
 		spawn_item()
+		
+/obj/random/initialize()
+	..()
 	qdel(src)
-
 
 // this function should return a specific item to spawn
 /obj/random/proc/item_to_spawn()
@@ -161,7 +163,7 @@
 					prob(4);/obj/item/weapon/haircomb,\
 					prob(2);/obj/item/weapon/storage/pill_bottle/happy,\
 					prob(2);/obj/item/weapon/storage/pill_bottle/zoom,\
-					prob(5);/obj/item/weapon/contraband/poster,\
+					prob(5);/obj/item/weapon/poster/contraband,\
 					prob(2);/obj/item/weapon/material/butterfly,\
 					prob(3);/obj/item/weapon/material/butterflyblade,\
 					prob(3);/obj/item/weapon/material/butterflyhandle,\

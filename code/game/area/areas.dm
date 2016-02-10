@@ -18,6 +18,11 @@
 		power_equip = 0
 		power_environ = 0
 
+	if(lighting_use_dynamic)
+		luminosity = 0
+	else
+		luminosity = 1
+
 	..()
 
 /area/proc/initialize()
@@ -67,7 +72,7 @@
 		for(var/obj/machinery/door/firedoor/E in all_doors)
 			if(!E.blocked)
 				if(E.operating)
-					E.nextstate = CLOSED
+					E.nextstate = FIREDOOR_CLOSED
 				else if(!E.density)
 					spawn(0)
 						E.close()
@@ -78,7 +83,7 @@
 		for(var/obj/machinery/door/firedoor/E in all_doors)
 			if(!E.blocked)
 				if(E.operating)
-					E.nextstate = OPEN
+					E.nextstate = FIREDOOR_OPEN
 				else if(E.density)
 					spawn(0)
 						E.open()
@@ -92,7 +97,7 @@
 		for(var/obj/machinery/door/firedoor/D in all_doors)
 			if(!D.blocked)
 				if(D.operating)
-					D.nextstate = CLOSED
+					D.nextstate = FIREDOOR_CLOSED
 				else if(!D.density)
 					spawn()
 						D.close()
@@ -105,7 +110,7 @@
 		for(var/obj/machinery/door/firedoor/D in all_doors)
 			if(!D.blocked)
 				if(D.operating)
-					D.nextstate = OPEN
+					D.nextstate = FIREDOOR_OPEN
 				else if(D.density)
 					spawn(0)
 					D.open()
@@ -137,7 +142,7 @@
 		for(var/obj/machinery/door/firedoor/D in src)
 			if(!D.blocked)
 				if(D.operating)
-					D.nextstate = OPEN
+					D.nextstate = FIREDOOR_OPEN
 				else if(D.density)
 					spawn(0)
 					D.open()
@@ -275,7 +280,7 @@ var/list/mob/living/forced_ambiance_list = new
 
 	if(istype(mob,/mob/living/carbon/human/))
 		var/mob/living/carbon/human/H = mob
-		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))
+		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & NOSLIP))
 			return
 
 		if(H.m_intent == "run")
@@ -286,3 +291,24 @@ var/list/mob/living/forced_ambiance_list = new
 			H.AdjustWeakened(1)
 		mob << "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>"
 
+/area/proc/prison_break()
+	for(var/obj/machinery/power/apc/temp_apc in src)
+		temp_apc.overload_lighting(70)
+	for(var/obj/machinery/door/airlock/temp_airlock in src)
+		temp_airlock.prison_open()
+	for(var/obj/machinery/door/window/temp_windoor in src)
+		temp_windoor.open()
+
+/area/proc/has_gravity()
+	return has_gravity
+
+/area/space/has_gravity()
+	return 0
+
+/proc/has_gravity(atom/AT, turf/T)
+	if(!T)
+		T = get_turf(AT)
+	var/area/A = get_area(T)
+	if(A && A.has_gravity())
+		return 1
+	return 0

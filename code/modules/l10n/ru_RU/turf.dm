@@ -3,7 +3,7 @@
 	name = "турф"
 	gender = MALE
 
-	var/movement_disabled = "\red Передвижение заблокировано администрацией."
+	var/movement_disabled = "Передвижение заблокировано администрацией."
 	proc/clean(var/args = null)
 		return "\The [translation(args)] is too dry to wash that."
 
@@ -20,8 +20,7 @@
 			var/bulb_fine = "Лампочка цела, нет необходимости её заменять."
 			var/remove_broken = "You remove the broken plating."
 			var/pry_off = "You forcefully pry off the planks, destroying them in the process."
-			proc/remove(var/args = null)
-				return "You remove the [args ? translation(args) : "floor"]."
+			proc/remove(var/args = null)	return "You remove the [args ? translation(args) : "floor"]."
 			var/unscrew = "You unscrew the planks."
 			var/more_rods = "You need more rods."
 			var/reinforcing = "Reinforcing the floor..."
@@ -53,9 +52,9 @@
 						name = "астероид"
 						gender = MALE
 
-						var/been_dug = "\red This area has already been dug"
-						var/digging = "\red You start digging."
-						var/dug = "\blue You dug a hole."
+						var/been_dug = "This area has already been dug"
+						var/digging = "You start digging."
+						var/dug = "You dug a hole."
 				ironsand
 					name = "железистый песок"
 					gender = MALE
@@ -112,7 +111,7 @@
 			var/moderately = "It looks moderately damaged."
 			var/heavily = "It looks heavily damaged."
 			proc/fungus()	return "There is fungus growing on [GetVar()]."
-			proc/combusts()	return "\The [GetVar()] spontaneously combusts!."
+			proc/combusts_m()	return "\The [GetVar()] spontaneously combusts!."
 			var/thermite = "The thermite starts melting through the wall."
 			var/fail_smash = "You smash against the wall!"
 			var/success_smash = "You smash through the wall!"
@@ -151,18 +150,18 @@
 
 			proc/name()
 				if(refObj:mineral)
-					return "\improper месторождение [refObj:mineral.display_name]"
+					return "месторождение [refObj:mineral.display_name]"
 				else
-					return "\improper скала"
-			proc/tape_m(var/args = null)	return "\blue [args ? args["user"] : "user"] extends [args ? args["P"] : "measuring tape"] towards [GetVar()]."
-			proc/tape_sm(var/args = null)	return "\blue You extend [args ? args["P"] : "measuring tape"] towards [GetVar()]."
-			proc/tape(var/args = null)	return "\blue \icon[args ? args["P"] : null] [GetVar()] has been excavated to a depth of [2*(args ? args["excavation_level"] : 0)]cm."
+					return "скала"
+			proc/tape_m(var/args = null)	return "<span class='blue'>[args ? args["user"] : "user"] extends [args ? args["P"] : "measuring tape"] towards [GetVar()].</span>"
+			proc/tape_sm(var/args = null)	return "<span class='blue'>You extend [args ? args["P"] : "measuring tape"] towards [GetVar()].</span>"
+			proc/tape(var/args = null)	return "\icon[args ? args["P"] : null] [GetVar()] has been excavated to a depth of [2*(args ? args["excavation_level"] : 0)]cm."
 			proc/fail_message(var/args = null)	return " <b>[pick("There is a crunching noise","[args ? translation(args) : "Pickaxe"] collides with some different rock","Part of the rock face crumbles away","Something breaks under [args ? translation(args) : "pickaxe"]")].</b>" //TODO:LANG name_capital
-			proc/start_drill(var/args = null)	return "\red You start [args ? translation(args, "drill_verb") : "drilling"]."
-			proc/finish_drill(var/args = null)	return "\blue You finish [args ? translation(args, "drill_verb") : "drilling"] the rock."
+			proc/start_drill(var/args = null)	return "You start [args ? translation(args, "drill_verb") : "drilling"]."
+			proc/finish_drill(var/args = null)	return "You finish [args ? translation(args, "drill_verb") : "drilling"] the rock."
 			proc/artifact_fail()	return "[pick("A high pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!"
-			proc/find_crate()	return "<span class='notice'>An old dusty crate was buried within!</span>"
-			proc/find_break(var/args = null)	return "\red<b>[pick("[args ? translation(args, "display_name") : "Something"] crumbles away into dust","[args ? translation(args, "display_name") : "Something"] breaks apart")].</b>"
+			proc/find_crate_m()	return "<span class='notice'>An old dusty crate was buried within!</span>"
+			proc/find_break(var/args = null)	return "<span class='danger'><b>[pick("[args ? translation(args, "display_name") : "Something"] crumbles away into dust","[args ? translation(args, "display_name") : "Something"] breaks apart")].</b></span>"
 
 			random
 				name = "mineral deposit"
@@ -170,9 +169,9 @@
 	space
 		name = "космос"
 
-		var/lattice = "\blue Constructing support lattice ..."
-		var/need_support = "\red The plating is going to need some support."
-		var/nuke = "\red Something you are carrying is preventing you from leaving. Don't play stupid; you know exactly what it is."
+		var/lattice = "Constructing support lattice ..."
+		var/need_support = "The plating is going to need some support."
+		var/nuke = "Something you are carrying is preventing you from leaving. Don't play stupid; you know exactly what it is."
 
 	unsimulated
 		name = "турф без симуляции воздуха"

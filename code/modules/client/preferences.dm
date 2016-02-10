@@ -2,31 +2,6 @@
 
 var/list/preferences_datums = list()
 
-var/global/list/special_roles = list( //keep synced with the defines BE_* in setup.dm --rastaf
-//some autodetection here.
-// TODO: Update to new antagonist system.
-	"traitor" = IS_MODE_COMPILED("traitor"),             // 0
-	"operative" = IS_MODE_COMPILED("nuclear"),           // 1
-	"changeling" = IS_MODE_COMPILED("changeling"),       // 2
-	"wizard" = IS_MODE_COMPILED("wizard"),               // 3
-	"malf AI" = IS_MODE_COMPILED("malfunction"),         // 4
-	"revolutionary" = IS_MODE_COMPILED("revolution"),    // 5
-	"alien candidate" = 1, //always show                 // 6
-	"positronic brain" = 1,                              // 7
-	"cultist" = IS_MODE_COMPILED("cult"),                // 8
-	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
-	"ninja" = "true",                                    // 10
-	"raider" = IS_MODE_COMPILED("heist"),                // 11
-	"diona" = 1,                                         // 12
-	"loyalist" = IS_MODE_COMPILED("revolution"),         // 13
-	"pAI candidate" = 1, // -- TLE                       // 14
-)
-
-//used for alternate_option
-#define GET_RANDOM_JOB 0
-#define BE_ASSISTANT 1
-#define RETURN_TO_LOBBY 2
-
 datum/preferences
 	//doohickeys for savefiles
 	var/path
@@ -42,7 +17,7 @@ datum/preferences
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 	var/ooccolor = "#010000"			//Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
-	var/be_special = 0					//Special role selection
+	var/list/be_special_role = list()		//Special role selection
 	var/UI_style = "Midnight"
 	var/toggles = TOGGLES_DEFAULT
 	var/UI_style_color = "#ffffff"
@@ -76,7 +51,8 @@ datum/preferences
 	var/b_eyes = 0						//Eye color
 	var/species = "Human"               //Species datum to use.
 	var/species_preview                 //Used for the species selection window.
-	var/language = "None"				//Secondary language
+	var/list/alternate_languages = list() //Secondary language(s)
+	var/list/language_prefixes = list() //Kanguage prefix keys
 	var/list/gear						//Custom/fluff item loadout.
 
 		//Some faction information.
@@ -129,22 +105,35 @@ datum/preferences
 
 	var/uplinklocation = "PDA"
 
-		// OOC Metadata:
+	// OOC Metadata:
 	var/metadata = ""
-	var/slot_name = ""
+
+	var/client/client = null
+
+	var/savefile/loaded_preferences
+	var/savefile/loaded_character
+	var/datum/category_collection/player_setup_collection/player_setup
 
 /datum/preferences/New(client/C)
-	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
-	if(istype(C))
-		if(!IsGuestKey(C.key))
-			load_path(C.ckey)
-			if(load_preferences())
-				if(load_character())
-					return
+	player_setup = new(src)
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender,species)
+	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 
 	gear = list()
+
+	if(istype(C))
+		client = C
+		if(!IsGuestKey(C.key))
+			load_path(C.ckey)
+			load_preferences()
+			load_and_update_character()
+
+/datum/preferences/proc/load_and_update_character(var/slot)
+	load_character(slot)
+	if(update_setup(loaded_preferences, loaded_character))
+		save_preferences()
+		save_character()
 
 /datum/preferences/proc/ZeroSkills(var/forced = 0)
 	for(var/V in SKILLS) for(var/datum/skill/S in SKILLS[V])
@@ -198,69 +187,25 @@ datum/preferences
 		if(24 to 1000)
 			return "God"
 
-/datum/preferences/proc/SetSkills(mob/user)
-	if(SKILLS == null)
-		setup_skills()
-
-	if(skills.len == 0)
-		ZeroSkills()
-
-
-	var/HTML = "<body>"
-	HTML += "<b>Select your Skills</b><br>"
-	HTML += "Current skill level: <b>[GetSkillClass(used_skillpoints)]</b> ([used_skillpoints])<br>"
-	HTML += "<a href=\"byond://?src=\ref[user];preference=skills;preconfigured=1;\">Use preconfigured skillset</a><br>"
-	HTML += "<table>"
-	for(var/V in SKILLS)
-		HTML += "<tr><th colspan = 5><b>[V]</b>"
-		HTML += "</th></tr>"
-		for(var/datum/skill/S in SKILLS[V])
-			var/level = skills[S.ID]
-			HTML += "<tr style='text-align:left;'>"
-			HTML += "<th><a href='byond://?src=\ref[user];preference=skills;skillinfo=\ref[S]'>[S.name]</a></th>"
-			HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_NONE]'><font color=[(level == SKILL_NONE) ? "red" : "black"]>\[Untrained\]</font></a></th>"
-			// secondary skills don't have an amateur level
-			if(S.secondary)
-				HTML += "<th></th>"
-			else
-				HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_BASIC]'><font color=[(level == SKILL_BASIC) ? "red" : "black"]>\[Amateur\]</font></a></th>"
-			HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_ADEPT]'><font color=[(level == SKILL_ADEPT) ? "red" : "black"]>\[Trained\]</font></a></th>"
-			HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_EXPERT]'><font color=[(level == SKILL_EXPERT) ? "red" : "black"]>\[Professional\]</font></a></th>"
-			HTML += "</tr>"
-	HTML += "</table>"
-	HTML += "<a href=\"byond://?src=\ref[user];preference=skills;cancel=1;\">\[Done\]</a>"
-
-	user << browse(null, "window=preferences")
-	user << browse(HTML, "window=show_skills;size=600x800")
-	return
-
 /datum/preferences/proc/ShowChoices(mob/user)
 	if(!user || !user.client)	return
-	update_preview_icon()
-	if(preview_icon_front && preview_icon_side)
-		user << browse_rsc(preview_icon_front, "previewicon.png")
-		user << browse_rsc(preview_icon_side, "previewicon2.png")
 	var/dat = "<html><body><center>"
 
 	if(path)
-		dat += "<center>"
-		dat += "Slot <b>[slot_name]</b> - "
-		dat += "<a href=\"byond://?src=\ref[user];preference=open_load_dialog\">Load slot</a> - "
-		dat += "<a href=\"byond://?src=\ref[user];preference=save\">Save slot</a> - "
-		dat += "<a href=\"byond://?src=\ref[user];preference=reload\">Reload slot</a>"
-		dat += "</center>"
+		dat += "Slot - "
+		dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
+		dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
+		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a>"
 
 	else
 		dat += "Please create an account to save your preferences."
 
-	dat += "</center><hr><table><tr><td width='340px' height='320px'>"
-
-	dat += "<b>Name:</b> "
-	dat += "<a href='?_src_=prefs;preference=name;task=input'><b>[real_name]</b></a><br>"
-	dat += "(<a href='?_src_=prefs;preference=name;task=random'>Random Name</A>) "
-	dat += "(<a href='?_src_=prefs;preference=name'>Always Random Name: [be_random_name ? "Yes" : "No"]</a>)"
 	dat += "<br>"
-
+	dat += player_setup.header()
+	dat += "<br><HR></center>"
+	dat += player_setup.content(user)
+/*
+<<<<<<< HEAD
 	dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
 	dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a><br>"
 	dat += "<b>Spawn Point</b>: <a href='byond://?src=\ref[user];preference=spawnpoint;task=input'>[spawnpoint]</a>"
@@ -878,6 +823,10 @@ datum/preferences
 				else
 					job_engsec_low |= job.flag
 	return 1
+=======
+*/
+	dat += "</html></body>"
+	user << browse(dat, "window=preferences;size=625x736")
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
 	if(!user)	return
@@ -890,7 +839,10 @@ datum/preferences
 		else
 			user << "<span class='danger'>The forum URL is not set in the server configuration.</span>"
 			return
-
+	ShowChoices(usr)
+	return 1
+/*
+<<<<<<< HEAD
 	if(href_list["preference"] == "job")
 		switch(href_list["task"])
 			if("close")
@@ -1081,34 +1033,29 @@ datum/preferences
 		if (href_list["antagtask"] == "done")
 			user << browse(null, "window=antagoptions")
 			ShowChoices(user)
+=======
+*/
+/datum/preferences/Topic(href, list/href_list)
+	if(..())
 		return 1
 
-	else if (href_list["preference"] == "loadout")
-
-		if(href_list["task"] == "input")
-
-			var/list/valid_gear_choices = list()
-
-			for(var/gear_name in gear_datums)
-				var/datum/gear/G = gear_datums[gear_name]
-				if(G.whitelisted && !is_alien_whitelisted(user, G.whitelisted))
-					continue
-				valid_gear_choices += gear_name
-
-			var/choice = input(user, "Select gear to add: ") as null|anything in valid_gear_choices
-
-			if(choice && gear_datums[choice])
-
-				var/total_cost = 0
-
-				if(isnull(gear) || !islist(gear)) gear = list()
-
-				if(gear && gear.len)
-					for(var/gear_name in gear)
-						if(gear_datums[gear_name])
-							var/datum/gear/G = gear_datums[gear_name]
-							total_cost += G.cost
-
+	if(href_list["save"])
+		save_preferences()
+		save_character()
+	else if(href_list["reload"])
+		load_preferences()
+		load_character()
+	else if(href_list["load"])
+		if(!IsGuestKey(usr.key))
+			open_load_dialog(usr)
+			return 1
+	else if(href_list["changeslot"])
+		load_character(text2num(href_list["changeslot"]))
+		close_load_dialog(usr)
+	else
+		return 0
+/*
+<<<<<<< HEAD
 				var/datum/gear/C = gear_datums[choice]
 				total_cost += C.cost
 				if(C && total_cost <= MAX_GEAR_COST)
@@ -1617,9 +1564,14 @@ datum/preferences
 					close_load_dialog(user)
 
 	ShowChoices(user)
+=======
+*/
+	ShowChoices(usr)
 	return 1
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, safety = 0)
+	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
+	player_setup.sanitize_setup()
 	if(be_random_name)
 		real_name = random_name(gender,species)
 
@@ -1741,10 +1693,9 @@ datum/preferences
 			if(!name)	name = "Character[i]"
 			if(i==default_slot)
 				name = "<b>[name]</b>"
-			dat += "<a href='?_src_=prefs;preference=changeslot;num=[i];'>[name]</a><br>"
+			dat += "<a href='?src=\ref[src];changeslot=[i]'>[name]</a><br>"
 
 	dat += "<hr>"
-	dat += "<a href='byond://?src=\ref[user];preference=close_load_dialog'>Close</a><br>"
 	dat += "</center></tt>"
 	user << browse(dat, "window=saves;size=300x390")
 

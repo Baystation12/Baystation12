@@ -6,16 +6,18 @@
 
 	if(density)
 		can_open = WALL_OPENING
-		set_wall_state("[material.icon_base]fwall_open")
 		//flick("[material.icon_base]fwall_opening", src)
 		sleep(15)
 		density = 0
+		opacity = 0
+		update_icon()
 		set_light(0)
 	else
 		can_open = WALL_OPENING
 		//flick("[material.icon_base]fwall_closing", src)
-		set_wall_state("[material.icon_base]0")
 		density = 1
+		opacity = 1
+		update_icon()
 		sleep(15)
 		set_light(1)
 
@@ -56,6 +58,7 @@
 
 	radiate()
 	add_fingerprint(user)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/rotting = (locate(/obj/effect/overlay/wallrot) in src)
 	if (HULK in user.mutations)
 		if (rotting || !prob(material.hardness))
@@ -69,6 +72,7 @@
 /turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
 
 	radiate()
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/rotting = (locate(/obj/effect/overlay/wallrot) in src)
 	if(!damage || !wallbreaker)
 		try_touch(user, rotting)
@@ -86,6 +90,7 @@
 
 /turf/simulated/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if (!user.)
 		user << "<span class='warning'>[translation(src, "no_dex")]</span>"
 		return
@@ -102,13 +107,13 @@
 		if(istype(W, /obj/item/weapon/weldingtool) )
 			var/obj/item/weapon/weldingtool/WT = W
 			if( WT.remove_fuel(0,user) )
-				user << "<span class='notice'>[translation(src, "burn_fungi",1,WT)]</span>"
+				user << "<span class='notice'>[translation(src, "burn_fungi",WT)]</span>"
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
 				for(var/obj/effect/overlay/wallrot/WR in src)
 					qdel(WR)
 				return
 		else if(!is_sharp(W) && W.force >= 10 || W.force >= 20)
-			user << "<span class='notice'>[translation(src, "crumbles_force",1,W)]</span>"
+			user << "<span class='notice'>[translation(src, "crumbles_force",W)]</span>"
 			src.dismantle_wall(1)
 			return
 
@@ -128,7 +133,7 @@
 			var/obj/item/weapon/melee/energy/blade/EB = W
 
 			EB.spark_system.start()
-			user << "<span class='notice'>[translation(src, "crumbles_force",1,EB)]</span>"
+			user << "<span class='notice'>[translation(src, "crumbles_force",EB)]</span>"
 			playsound(src, "sparks", 50, 1)
 			playsound(src, 'sound/weapons/blade1.ogg', 50, 1)
 
@@ -184,7 +189,7 @@
 
 		if(dismantle_verb)
 
-			user << "<span class='notice'>[translation(src, "dismantle",1,dismantle_verb)]</span>"
+			user << "<span class='notice'>[translation(src, "dismantle",dismantle_verb)]</span>"
 			if(dismantle_sound)
 				playsound(src, dismantle_sound, 100, 1)
 
@@ -195,7 +200,7 @@
 				return
 
 			user << "<span class='notice'>[translation(src, "remove_plating")]</span>"
-			user.visible_message("<span class='warning'>The wall was torn open by [user]!</span>", translation = list("object"=src,"name"="dismantle","v"=1,"args"=user))
+			user.visible_message("<span class='warning'>The wall was torn open by [user]!</span>", translation = list("object"=src,"name"="dismantle","args"=user))
 			dismantle_wall()
 			return
 
@@ -208,7 +213,7 @@
 					construction_stage = 5
 					new /obj/item/stack/rods( src )
 					user << "<span class='notice'>[translation(src, "cut_grille")]</span>"
-					set_wall_state()
+					update_icon()
 					return
 			if(5)
 				if (istype(W, /obj/item/weapon/screwdriver))
@@ -217,7 +222,7 @@
 					if(!do_after(user,40) || !istype(src, /turf/simulated/wall) || construction_stage != 5)
 						return
 					construction_stage = 4
-					set_wall_state()
+					update_icon()
 					user << "<span class='notice'>[translation(src, "remove_sup")]</span>"
 					return
 				else if( istype(W, /obj/item/stack/rods) )
@@ -225,7 +230,7 @@
 					if(O.get_amount()>0)
 						O.use(1)
 						construction_stage = 6
-						set_wall_state()
+						update_icon()
 						user << "<span class='notice'>[translation(src, "replace_grille")]</span>"
 						return
 			if(4)
@@ -247,7 +252,7 @@
 					if(!do_after(user, 60) || !istype(src, /turf/simulated/wall) || construction_stage != 4)
 						return
 					construction_stage = 3
-					set_wall_state()
+					update_icon()
 					user << "<span class='notice'>[translation(src, "dislodging")]</span>"
 					return
 			if(3)
@@ -257,7 +262,7 @@
 					if(!do_after(user,100) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
 						return
 					construction_stage = 2
-					set_wall_state()
+					update_icon()
 					user << "<span class='notice'>[translation(src, "pry_off_cover")]</span>"
 					return
 			if(2)
@@ -267,7 +272,7 @@
 					if(!do_after(user,40) || !istype(src, /turf/simulated/wall) || construction_stage != 2)
 						return
 					construction_stage = 1
-					set_wall_state()
+					update_icon()
 					user << "<span class='notice'>[translation(src, "remove_bolts")]</span>"
 					return
 			if(1)
@@ -287,7 +292,7 @@
 					if(!do_after(user,70) || !istype(src, /turf/simulated/wall) || construction_stage != 1)
 						return
 					construction_stage = 0
-					set_wall_state()
+					update_icon()
 					new /obj/item/stack/rods(src)
 					user << "<span class='notice'>[translation(src, "rods_drop")]</span>"
 					return

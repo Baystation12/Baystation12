@@ -31,8 +31,6 @@
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
 
-	handle_hud_list()
-
 	//Handle species-specific deaths.
 	species.handle_death(src)
 	animate_tail_stop()
@@ -61,12 +59,15 @@
 	if(!gibbed && species.death_sound)
 		playsound(loc, species.death_sound, 80, 1, 1)
 
-
 	if(ticker && ticker.mode)
 		sql_report_death(src)
 		ticker.mode.check_win()
 
-	return ..(gibbed,species.death_message)
+	if(wearing_rig)
+		wearing_rig.notify_ai("<span class='danger'>Warning: user death event. Mobility control passed to integrated intelligence system.</span>")
+
+	. = ..(gibbed,species.death_message)
+	handle_hud_list()
 
 /mob/living/carbon/human/proc/ChangeToHusk()
 	if(HUSK in mutations)	return

@@ -1,14 +1,4 @@
 // fun if you want to typecast humans/monkeys/etc without writing long path-filled lines.
-/proc/ishuman(A)
-	if(istype(A, /mob/living/carbon/human))
-		return 1
-	return 0
-
-/proc/isalien(A)
-	if(istype(A, /mob/living/carbon/alien))
-		return 1
-	return 0
-
 /proc/isxenomorph(A)
 	if(istype(A, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = A
@@ -16,95 +6,23 @@
 	return 0
 
 /proc/issmall(A)
-	if(A && istype(A, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = A
-		if(H.species && H.species.is_small)
-			return 1
+	if(A && istype(A, /mob/living))
+		var/mob/living/L = A
+		return L.mob_size <= MOB_SMALL
 	return 0
 
-/proc/isbrain(A)
-	if(A && istype(A, /mob/living/carbon/brain))
-		return 1
-	return 0
-
-/proc/isslime(A)
-	if(istype(A, /mob/living/carbon/slime))
-		return 1
-	return 0
-
-/proc/isrobot(A)
-	if(istype(A, /mob/living/silicon/robot))
-		return 1
-	return 0
-
-/proc/isanimal(A)
-	if(istype(A, /mob/living/simple_animal))
-		return 1
-	return 0
-
-/proc/iscorgi(A)
-	if(istype(A, /mob/living/simple_animal/corgi))
-		return 1
-	return 0
-
-/proc/iscrab(A)
-	if(istype(A, /mob/living/simple_animal/crab))
-		return 1
-	return 0
-
-/proc/iscat(A)
-	if(istype(A, /mob/living/simple_animal/cat))
-		return 1
-	return 0
-
-/proc/ismouse(A)
-	if(istype(A, /mob/living/simple_animal/mouse))
-		return 1
-	return 0
-
-/proc/isbear(A)
-	if(istype(A, /mob/living/simple_animal/hostile/bear))
-		return 1
-	return 0
-
-/proc/iscarp(A)
-	if(istype(A, /mob/living/simple_animal/hostile/carp))
-		return 1
-	return 0
-
-/proc/isclown(A)
-	if(istype(A, /mob/living/simple_animal/hostile/retaliate/clown))
-		return 1
-	return 0
-
-/mob/proc/isSilicon()
-	return 0
-
-/mob/living/silicon/isSilicon()
-	return 1
-
-/proc/isAI(A)
-	if(istype(A, /mob/living/silicon/ai))
-		return 1
-	return 0
-
-/mob/proc/isMobAI()
-	return 0
-
-/mob/living/silicon/ai/isMobAI()
-	return 1
-
-/mob/proc/isSynthetic()
+/mob/living/proc/isSynthetic()
 	return 0
 
 /mob/living/carbon/human/isSynthetic()
-	return species.flags & IS_SYNTHETIC
+	// If they are 100% robotic, they count as synthetic.
+	for(var/obj/item/organ/external/E in organs)
+		if(!(E.status & ORGAN_ROBOT))
+			return 0
+	return 1
 
 /mob/living/silicon/isSynthetic()
 	return 1
-
-/mob/living/carbon/human/isMonkey()
-	return istype(species, /datum/species/monkey)
 
 /mob/proc/isMonkey()
 	return 0
@@ -112,45 +30,10 @@
 /mob/living/carbon/human/isMonkey()
 	return istype(species, /datum/species/monkey)
 
-/proc/ispAI(A)
-	if(istype(A, /mob/living/silicon/pai))
-		return 1
-	return 0
-
-/proc/iscarbon(A)
-	if(istype(A, /mob/living/carbon))
-		return 1
-	return 0
-
-/proc/issilicon(A)
-	if(istype(A, /mob/living/silicon))
-		return 1
-	return 0
-
-/proc/isliving(A)
-	if(istype(A, /mob/living))
-		return 1
-	return 0
-
-proc/isobserver(A)
-	if(istype(A, /mob/dead/observer))
-		return 1
-	return 0
-
-proc/isorgan(A)
-	if(istype(A, /obj/item/organ/external))
-		return 1
-	return 0
-
 proc/isdeaf(A)
 	if(istype(A, /mob))
 		var/mob/M = A
 		return (M.sdisabilities & DEAF) || M.ear_deaf
-	return 0
-
-proc/isnewplayer(A)
-	if(istype(A, /mob/new_player))
-		return 1
 	return 0
 
 proc/hasorgans(A) // Fucking really??
@@ -414,7 +297,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 
 /proc/shake_camera(mob/M, duration, strength=1)
-	if(!M || !M.client || M.shakecamera)
+	if(!M || !M.client || M.shakecamera || M.stat || isEye(M) || isAI(M))
 		return
 	M.shakecamera = 1
 	spawn(1)
@@ -553,9 +436,9 @@ proc/is_blind(A)
 			var/lname
 			if(subject)
 				if(subject != M)
-					follow = "(<a href='byond://?src=\ref[M];track=\ref[subject]'>follow</a>) "
+					follow = "([ghost_follow_link(subject, M)]) "
 				if(M.stat != DEAD && M.client.holder)
-					follow = "(<a href='?src=\ref[M.client.holder];adminplayerobservejump=\ref[subject]'>JMP</a>) "
+					follow = "([admin_jump_link(subject, M.client.holder)]) "
 				var/mob/dead/observer/DM
 				if(istype(subject, /mob/dead/observer))
 					DM = subject
@@ -623,6 +506,12 @@ proc/is_blind(A)
 /mob/proc/is_client_active(var/active = 1)
 	return client && client.inactivity < active MINUTES
 
+/mob/proc/can_eat()
+	return 1
+
+/mob/proc/can_force_feed()
+	return 1
+
 #define SAFE_PERP -50
 /mob/living/proc/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
 	if(stat == DEAD)
@@ -642,7 +531,7 @@ proc/is_blind(A)
 		return SAFE_PERP
 
 	//Agent cards lower threatlevel.
-	var/obj/item/weapon/card/id/id = GetIdCard(src)
+	var/obj/item/weapon/card/id/id = GetIdCard()
 	if(id && istype(id, /obj/item/weapon/card/id/syndicate))
 		threatcount -= 2
 	// A proper	CentCom id is hard currency.
@@ -689,3 +578,19 @@ proc/is_blind(A)
 	return threatcount
 
 #undef SAFE_PERP
+
+/mob/proc/get_multitool(var/obj/item/device/multitool/P)
+	if(istype(P))
+		return P
+
+mob/dead/observer/get_multitool()
+	return can_admin_interact() && ..(ghost_multitool)
+
+/mob/living/carbon/human/get_multitool()
+	return ..(get_active_hand())
+
+/mob/living/silicon/robot/get_multitool()
+	return ..(get_active_hand())
+
+/mob/living/silicon/ai/get_multitool()
+	return ..(aiMulti)

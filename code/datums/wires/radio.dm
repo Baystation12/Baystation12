@@ -12,11 +12,6 @@ var/const/WIRE_TRANSMIT = 4
 		return 1
 	return 0
 
-/datum/wires/radio/Interact(var/mob/living/user)
-	if(CanUse(user))
-		var/obj/item/device/radio/R = holder
-		R.interact(user)
-
 /datum/wires/radio/UpdatePulsed(var/index)
 	var/obj/item/device/radio/R = holder
 	switch(index)
@@ -29,6 +24,7 @@ var/const/WIRE_TRANSMIT = 4
 
 		if(WIRE_TRANSMIT)
 			R.broadcasting = !R.broadcasting && !IsIndexCut(WIRE_SIGNAL)
+	nanomanager.update_uis(holder)
 
 /datum/wires/radio/UpdateCut(var/index, var/mended)
 	var/obj/item/device/radio/R = holder
@@ -42,3 +38,4 @@ var/const/WIRE_TRANSMIT = 4
 
 		if(WIRE_TRANSMIT)
 			R.broadcasting = mended && !IsIndexCut(WIRE_SIGNAL)
+	nanomanager.update_uis(holder)

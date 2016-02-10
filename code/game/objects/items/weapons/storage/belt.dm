@@ -4,9 +4,24 @@
 	icon = 'icons/obj/clothing/belts.dmi'
 	icon_state = "utilitybelt"
 	item_state = "utility"
+	storage_slots = 7
+	max_w_class = 3
+	max_storage_space = 28
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
+	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/belt.dmi')
 
+	var/show_above_suit = 0
+
+/obj/item/weapon/storage/belt/verb/toggle_layer()
+	set name = "Switch Belt Layer"
+	set category = "Object"
+
+	if(show_above_suit == -1)
+		usr << "<span class='notice'>\The [src] cannot be worn above your suit!</span>"
+		return
+	show_above_suit = !show_above_suit
+	update_icon()
 
 /obj/item/weapon/storage/update_icon()
 	if (ismob(src.loc))
@@ -100,9 +115,6 @@
 	desc = "Can hold security gear like handcuffs and flashes."
 	icon_state = "securitybelt"
 	item_state = "security"
-	storage_slots = 7
-	max_w_class = 3
-	max_storage_space = 28
 	can_hold = list(
 		/obj/item/weapon/grenade,
 		/obj/item/weapon/reagent_containers/spray/pepper,
@@ -162,5 +174,3 @@
 	icon_state = "swatbelt"
 	item_state = "swatbelt"
 	storage_slots = 9
-	max_w_class = 3
-	max_storage_space = 28

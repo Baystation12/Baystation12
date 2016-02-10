@@ -56,25 +56,14 @@
 		return
 
 	last_shot = world.time
-	var/turf/T = get_turf(src)
-	var/turf/U = get_turf(A)
-
 	var/projectile = /obj/item/projectile/beam/stun
 	if(emagged)
 		projectile = /obj/item/projectile/beam
 
 	playsound(loc, emagged ? 'sound/weapons/Laser.ogg' : 'sound/weapons/Taser.ogg', 50, 1)
 	var/obj/item/projectile/P = new projectile(loc)
-
-	P.original = A
-	P.starting = T
-	P.current = T
-	P.yo = U.y - T.y
-	P.xo = U.x - T.x
-	spawn()
-		P.process()
-	return
-
+	var/def_zone = get_exposed_defense_zone(A)
+	P.launch(A, def_zone)
 // Assembly
 
 /obj/item/weapon/secbot_assembly/ed209_assembly

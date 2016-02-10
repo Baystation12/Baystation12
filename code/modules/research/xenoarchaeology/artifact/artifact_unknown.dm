@@ -18,44 +18,6 @@
 #define TRIGGER_CO2 11
 #define TRIGGER_NITRO 12
 #define MAX_TRIGGER 12
-/*
-//sleeping gas appears to be bugged, currently
-var/list/valid_primary_effect_types = list(\
-	/datum/artifact_effect/cellcharge,\
-	/datum/artifact_effect/celldrain,\
-	/datum/artifact_effect/forcefield,\
-	/datum/artifact_effect/gasoxy,\
-	/datum/artifact_effect/gasplasma,\
-/*	/datum/artifact_effect/gassleeping,\*/
-	/datum/artifact_effect/heal,\
-	/datum/artifact_effect/hurt,\
-	/datum/artifact_effect/emp,\
-	/datum/artifact_effect/teleport,\
-	/datum/artifact_effect/robohurt,\
-	/datum/artifact_effect/roboheal)
-
-var/list/valid_secondary_effect_types = list(\
-	/datum/artifact_effect/cold,\
-	/datum/artifact_effect/badfeeling,\
-	/datum/artifact_effect/cellcharge,\
-	/datum/artifact_effect/celldrain,\
-	/datum/artifact_effect/dnaswitch,\
-	/datum/artifact_effect/emp,\
-	/datum/artifact_effect/gasco2,\
-	/datum/artifact_effect/gasnitro,\
-	/datum/artifact_effect/gasoxy,\
-	/datum/artifact_effect/gasphoron,\
-/*	/datum/artifact_effect/gassleeping,\*/
-	/datum/artifact_effect/goodfeeling,\
-	/datum/artifact_effect/heal,\
-	/datum/artifact_effect/hurt,\
-	/datum/artifact_effect/radiate,\
-	/datum/artifact_effect/roboheal,\
-	/datum/artifact_effect/robohurt,\
-	/datum/artifact_effect/sleepy,\
-	/datum/artifact_effect/stun,\
-	/datum/artifact_effect/teleport)
-	*/
 
 /obj/machinery/artifact
 	name = "alien artifact"
@@ -82,36 +44,33 @@ var/list/valid_secondary_effect_types = list(\
 		if(prob(75))
 			secondary_effect.ToggleActivate(0)
 
-	icon_num = rand(0,11)
+	icon_num = rand(0,13)
 	icon_state = "ano[icon_num]0"
 	if(icon_num == 7 || icon_num == 8)
-		name = "large crystal"
+		name = "large alien crystal"
 		desc = pick("It shines faintly as it catches the light.",\
 		"It appears to have a faint inner glow.",\
 		"It seems to draw you inward as you look it at.",\
 		"Something twinkles faintly as you look at it.",\
 		"It's mesmerizing to behold.")
-		if(prob(50))
+		if(prob(75))
 			my_effect.trigger = TRIGGER_ENERGY
-	else if(icon_num == 9)
+	else if(icon_num == 1 || icon_num == 6)
+		desc = "There appears to be some kind of environmental scanner on it."
+		if(prob(75))
+			my_effect.trigger = rand(5,8)
+	else if(icon_num == 9 || icon_num == 11 || icon_num == 13)
 		name = "alien computer"
-		desc = "It is covered in strange markings."
 		if(prob(75))
 			my_effect.trigger = TRIGGER_TOUCH
-	else if(icon_num == 10)
-		desc = "A large alien device, there appear to be some kind of vents in the side."
-		if(prob(50))
-			my_effect.trigger = rand(6,12)
-	else if(icon_num == 11)
+	else if(icon_num == 2 || icon_num == 3 || icon_num == 4)
+		desc = "A large alien device, there appear to be vents in the side."
+		if(prob(75))
+			my_effect.trigger = rand(7,12)
+	else if(icon_num == 10 || icon_num == 12)
 		name = "sealed alien pod"
-		desc = "A strange alien device."
-		if(prob(25))
+		if(prob(75))
 			my_effect.trigger = rand(1,4)
-
-#define TRIGGER_PHORON 9
-#define TRIGGER_OXY 10
-#define TRIGGER_CO2 11
-#define TRIGGER_NITRO 12
 
 /obj/machinery/artifact/process()
 
@@ -235,7 +194,7 @@ var/list/valid_secondary_effect_types = list(\
 	src.add_fingerprint(user)
 
 	if(my_effect.trigger == TRIGGER_TOUCH)
-		user << "<b>You touch [src].<b>"
+		user << "<b>You touch [src].</b>"
 		my_effect.ToggleActivate()
 	else
 		user << "<b>You touch [src],</b> [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")]."
@@ -321,7 +280,7 @@ var/list/valid_secondary_effect_types = list(\
 			warn = 1
 
 		if(warn)
-			M << "<b>You accidentally touch [src].<b>"
+			M << "<b>You accidentally touch [src].</b>"
 	..()
 
 /obj/machinery/artifact/bullet_act(var/obj/item/projectile/P)

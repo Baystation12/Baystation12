@@ -3,6 +3,7 @@
 	name = "cat"
 	desc = "A domesticated, feline pet. Has a tendency to adopt crewmembers."
 	icon_state = "cat2"
+	item_state = "cat2"
 	icon_living = "cat2"
 	icon_dead = "cat2_dead"
 	speak = list("Meow!","Esp!","Purr!","HSSSSS")
@@ -23,7 +24,8 @@
 	minbodytemp = 223		//Below -50 Degrees Celcius
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 	holder_type = /obj/item/weapon/holder/cat
-	mob_size = 5
+	mob_size = MOB_SMALL
+	possession_candidate = 1
 
 /mob/living/simple_animal/cat/Life()
 	//MICE!
@@ -44,16 +46,18 @@
 			audible_emote(pick("hisses and spits!","mrowls fiercely!","eyes [snack] hungrily."))
 		break
 
-	if(!stat && !resting && !buckled)
-		turns_since_scan++
-		if (turns_since_scan > 5)
-			walk_to(src,0)
-			turns_since_scan = 0
+	if(incapacitated())
+		return
+	
+	turns_since_scan++
+	if (turns_since_scan > 5)
+		walk_to(src,0)
+		turns_since_scan = 0
 
-			if (flee_target) //fleeing takes precendence
-				handle_flee_target()
-			else
-				handle_movement_target()
+		if (flee_target) //fleeing takes precendence
+			handle_flee_target()
+		else
+			handle_movement_target()
 
 	if(prob(2)) //spooky
 		var/mob/dead/observer/spook = locate() in range(src,5)
@@ -133,11 +137,6 @@
 		return
 	else
 		return ..()
-
-/mob/living/simple_animal/cat/get_scooped(var/mob/living/carbon/grabber)
-	if (stat >= DEAD)
-		return //since the holder icon looks like a living cat
-	..()
 
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff
@@ -221,6 +220,7 @@
 	desc = "Her fur has the look and feel of velvet, and her tail quivers occasionally."
 	gender = FEMALE
 	icon_state = "cat"
+	item_state = "cat"
 	icon_living = "cat"
 	icon_dead = "cat_dead"
 	befriend_job = "Chief Medical Officer"
@@ -229,6 +229,7 @@
 	name = "kitten"
 	desc = "D'aaawwww"
 	icon_state = "kitten"
+	item_state = "kitten"
 	icon_living = "kitten"
 	icon_dead = "kitten_dead"
 	gender = NEUTER
@@ -245,6 +246,7 @@
 	desc = "That's Bones the cat. He's a laid back, black cat. Meow."
 	gender = MALE
 	icon_state = "cat3"
+	item_state = "cat3"
 	icon_living = "cat3"
 	icon_dead = "cat3_dead"
 	holder_type = /obj/item/weapon/holder/cat/fluff/bones

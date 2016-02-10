@@ -12,7 +12,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/changelingID = "Changeling"
 	var/geneticdamage = 0
 	var/isabsorbing = 0
-	var/geneticpoints = 5
+	var/geneticpoints = 25
 	var/purchasedpowers = list()
 	var/mimicing = ""
 
@@ -374,7 +374,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	for (var/obj/item/weapon/implant/I in C) //Still preserving implants
 		implants += I
 
-	C.monkeyizing = 1
+	C.transforming = 1
 	C.canmove = 0
 	C.icon = null
 	C.overlays.Cut()

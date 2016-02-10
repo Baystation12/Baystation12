@@ -38,15 +38,6 @@
 		return
 
 	else if(TK in mutations)
-		switch(get_dist(src,A))
-			if(1 to 5) // not adjacent may mean blocked by window
-				next_move += 2
-			if(5 to 7)
-				next_move += 5
-			if(8 to 15)
-				next_move += 10
-			if(16 to 128)
-				return
 		A.attack_tk(src)
 
 /mob/living/RestrainedClickOn(var/atom/A)
@@ -97,8 +88,6 @@
 				if (powerlevel > 0 && !istype(A, /mob/living/carbon/slime))
 					if(ishuman(M))
 						var/mob/living/carbon/human/H = M
-						if(H.species.flags & IS_SYNTHETIC)
-							return
 						stunprob *= H.species.siemens_coefficient
 
 

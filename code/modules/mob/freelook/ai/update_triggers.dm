@@ -4,19 +4,34 @@
 
 // Update the portable camera everytime the Robot moves.
 // This might be laggy, comment it out if there are problems.
-/mob/living/silicon/robot/var/updating = 0
+/mob/living/silicon/var/updating = 0
 
 /mob/living/silicon/robot/Move()
 	var/oldLoc = src.loc
 	. = ..()
 	if(.)
-		if(src.camera && src.camera.network.len)
+		if(provides_camera_vision())
 			if(!updating)
 				updating = 1
 				spawn(BORG_CAMERA_BUFFER)
 					if(oldLoc != src.loc)
 						cameranet.updatePortableCamera(src.camera)
 					updating = 0
+
+/mob/living/silicon/AI/Move()
+	var/oldLoc = src.loc
+	. = ..()
+	if(.)
+		if(provides_camera_vision())
+			if(!updating)
+				updating = 1
+				spawn(BORG_CAMERA_BUFFER)
+					if(oldLoc != src.loc)
+						cameranet.updateVisibility(oldLoc, 0)
+						cameranet.updateVisibility(loc, 0)
+					updating = 0
+
+#undef BORG_CAMERA_BUFFER
 
 // CAMERA
 
@@ -42,8 +57,19 @@
 	update_coverage(1)
 
 /obj/machinery/camera/Destroy()
-	cameranet.cameras -= src
 	clear_all_networks()
+	cameranet.cameras -= src
 	..()
 
-#undef BORG_CAMERA_BUFFER
+// Mobs
+/mob/living/silicon/ai/rejuvenate()
+	var/was_dead = stat == DEAD
+	..()
+	if(was_dead && stat != DEAD)
+		// Arise!
+		cameranet.updateVisibility(src, 0)
+
+/mob/living/silicon/ai/death(gibbed)
+	if(..())
+		// If true, the mob went from living to dead (assuming everyone has been overriding as they should...)
+		cameranet.updateVisibility(src, 0)

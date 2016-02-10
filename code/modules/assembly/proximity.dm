@@ -2,9 +2,9 @@
 	name = "proximity sensor"
 	desc = "Used for scanning and alerting when someone enters a certain proximity."
 	icon_state = "prox"
+	origin_tech = list(TECH_MAGNET = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 800, "glass" = 200, "waste" = 50)
-	origin_tech = "magnets=1"
-
+	flags = PROXMOVE
 	wires = WIRE_PULSE
 
 	secured = 0
@@ -40,6 +40,9 @@
 
 
 	HasProximity(atom/movable/AM as mob|obj)
+		if(!istype(AM))
+			log_debug("DEBUG: HasProximity called with [AM] on [src] ([usr]).")
+			return
 		if (istype(AM, /obj/effect/beam))	return
 		if (AM.move_speed < 12)	sense()
 		return

@@ -47,9 +47,10 @@
 	var/global/list/toxic_reagents = list(
 		"anti_toxin" =     -2,
 		"toxin" =           2,
-		"fluorine" =        2.5,
-		"chlorine" =        1.5,
+		"hydrazine" =       2.5,
+		"acetone" =	        1,
 		"sacid" =           1.5,
+		"hclacid" =         1.5,
 		"pacid" =           3,
 		"plantbgone" =      3,
 		"cryoxadone" =     -3,
@@ -70,11 +71,11 @@
 		"left4zed" =        1
 		)
 	var/global/list/weedkiller_reagents = list(
-		"fluorine" =       -4,
-		"chlorine" =       -3,
+		"hydrazine" =      -4,
 		"phosphorus" =     -2,
 		"sugar" =           2,
 		"sacid" =          -2,
+		"hclacid" =        -2,
 		"pacid" =          -4,
 		"plantbgone" =     -8,
 		"adminordrazine" = -5
@@ -89,8 +90,7 @@
 		"adminordrazine" =  1,
 		"milk" =            0.9,
 		"beer" =            0.7,
-		"fluorine" =       -0.5,
-		"chlorine" =       -0.5,
+		"hydrazine" =      -2,
 		"phosphorus" =     -0.5,
 		"water" =           1,
 		"sodawater" =       1,
@@ -99,11 +99,11 @@
 	// Beneficial reagents also have values for modifying yield_mod and mut_mod (in that order).
 	var/global/list/beneficial_reagents = list(
 		"beer" =           list( -0.05, 0,   0  ),
-		"fluorine" =       list( -2,    0,   0  ),
-		"chlorine" =       list( -1,    0,   0  ),
+		"hydrazine" =      list( -2,    0,   0  ),
 		"phosphorus" =     list( -0.75, 0,   0  ),
 		"sodawater" =      list(  0.1,  0,   0  ),
 		"sacid" =          list( -1,    0,   0  ),
+		"hclacid" =        list( -1,    0,   0  ),
 		"pacid" =          list( -2,    0,   0  ),
 		"plantbgone" =     list( -2,    0,   0.2),
 		"cryoxadone" =     list(  3,    0,   0  ),
@@ -124,12 +124,27 @@
 		)
 
 /obj/machinery/portable_atmospherics/hydroponics/AltClick()
-	if(mechanical && !usr.stat && !usr.lying && Adjacent(usr))
+	if(mechanical && !usr.incapacitated() && Adjacent(usr))
 		close_lid(usr)
-		return
+		return 1
 	return ..()
 
+/obj/machinery/portable_atmospherics/hydroponics/attack_ghost(var/mob/dead/observer/user)
+
+	if(!(harvest && seed && seed.has_mob_product))
+		return
+
+	var/datum/ghosttrap/plant/G = get_ghost_trap("living plant")
+	if(!G.assess_candidate(user))
+		return
+	var/response = alert(user, "Are you sure you want to harvest this [seed.display_name]?", "Living plant request", "Yes", "No")
+	if(response == "Yes")
+		harvest()
+	return
+
 /obj/machinery/portable_atmospherics/hydroponics/attack_generic(var/mob/user)
+
+	// Why did I ever think this was a good idea. TODO: move this onto the nymph mob.
 	if(istype(user,/mob/living/carbon/alien/diona))
 		var/mob/living/carbon/alien/diona/nymph = user
 
@@ -152,6 +167,7 @@
 	..()
 	temp_chem_holder = new()
 	temp_chem_holder.create_reagents(10)
+	temp_chem_holder.flags |= OPENCONTAINER
 	create_reagents(200)
 	if(mechanical)
 		connect()
@@ -342,7 +358,7 @@
 	set category = "Object"
 	set src in view(1)
 
-	if(!usr.canmove || usr.stat || usr.restrained())
+	if(usr.incapacitated())
 		return
 	if(ishuman(usr) || istype(usr, /mob/living/silicon/robot))
 		if(labelled)
@@ -358,7 +374,7 @@
 	set category = "Object"
 	set src in view(1)
 
-	if(!usr.canmove || usr.stat || usr.restrained())
+	if(usr.incapacitated())
 		return
 	if(ishuman(usr) || istype(usr, /mob/living/silicon/robot))
 		var/new_light = input("Specify a light level.") as null|anything in list(0,1,2,3,4,5,6,7,8,9,10)
@@ -524,20 +540,8 @@
 		anchored = !anchored
 		user << "You [anchored ? "wrench" : "unwrench"] \the [src]."
 
-	else if(istype(O, /obj/item/apiary))
-
-		if(seed)
-			user << "<span class='danger'>[src] is already occupied!</span>"
-		else
-			user.drop_item()
-			qdel(O)
-
-			var/obj/machinery/apiary/A = new(src.loc)
-			A.icon = src.icon
-			A.icon_state = src.icon_state
-			A.hydrotray_type = src.type
-			qdel(src)
 	else if(O.force && seed)
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.visible_message("<span class='danger'>\The [seed.display_name] has been attacked by [user] with \the [O]!</span>")
 		if(!dead)
 			health -= O.force
@@ -568,7 +572,7 @@
 		usr << "[src] is empty."
 		return
 
-	usr << "<span class='notice'>[seed.display_name]</span> are growing here.</span>"
+	usr << "<span class='notice'>[seed.display_name] are growing here.</span>"
 
 	if(!Adjacent(usr))
 		return
@@ -618,9 +622,9 @@
 	set name = "Toggle Tray Lid"
 	set category = "Object"
 	set src in view(1)
-	if(!usr.canmove || usr.stat || usr.restrained())
+	if(usr.incapacitated())
 		return
-	
+
 	if(ishuman(usr) || istype(usr, /mob/living/silicon/robot))
 		close_lid(usr)
 	return

@@ -1,22 +1,14 @@
-/obj/machinery/computer/arcade
-	name = "arcade machine"
-	desc = "Does not support pinball."
-	icon = 'icons/obj/computer.dmi'
+/obj/machinery/computer/arcade/
+	name = "random arcade"
+	desc = "random arcade machine"
 	icon_state = "arcade"
-	circuit = "/obj/item/weapon/circuitboard/arcade"
-	var/enemy_name = "Space Villian"
-	var/temp = "Winners Don't Use Spacedrugs" //Temporary message, for attack messages, etc
-	var/player_hp = 30 //Player health/attack points
-	var/player_mp = 10
-	var/enemy_hp = 45 //Enemy health/attack points
-	var/enemy_mp = 20
-	var/gameover = 0
-	var/blocked = 0 //Player cannot attack/heal while set
+	icon_keyboard = null
+	icon_screen = "invaders"
 	var/list/prizes = list(	/obj/item/weapon/storage/box/snappops			= 2,
 							/obj/item/toy/blink								= 2,
 							/obj/item/clothing/under/syndicate/tacticool	= 2,
 							/obj/item/toy/sword								= 2,
-							/obj/item/toy/gun								= 2,
+							/obj/item/weapon/gun/projectile/revolver/capgun	= 2,
 							/obj/item/toy/crossbow							= 2,
 							/obj/item/clothing/suit/syndicatefake			= 2,
 							/obj/item/weapon/storage/fancy/crayons			= 2,
@@ -33,33 +25,89 @@
 							/obj/item/toy/prize/odysseus					= 1,
 							/obj/item/toy/prize/phazon						= 1,
 							/obj/item/toy/waterflower						= 1,
-							/obj/random/action_figure								= 1,
+							/obj/random/action_figure						= 1,
 							/obj/random/plushie								= 1,
 							/obj/item/toy/cultsword							= 1
 							)
 
-/obj/machinery/computer/arcade
+/obj/machinery/computer/arcade/New()
+	..()
+	// If it's a generic arcade machine, pick a random arcade
+	// circuit board for it and make the new machine
+	if(!circuit)
+		var/choice = pick(typesof(/obj/item/weapon/circuitboard/arcade) - /obj/item/weapon/circuitboard/arcade)
+		var/obj/item/weapon/circuitboard/CB = new choice()
+		new CB.build_path(loc, CB)
+		qdel(src)
+
+/obj/machinery/computer/arcade/proc/prizevend()
+	if(!contents.len)
+		var/prizeselect = pickweight(prizes)
+		new prizeselect(src.loc)
+
+		if(istype(prizeselect, /obj/item/clothing/suit/syndicatefake)) //Helmet is part of the suit
+			new	/obj/item/clothing/head/syndicatefake(src.loc)
+
+	else
+		var/atom/movable/prize = pick(contents)
+		prize.loc = src.loc
+
+/obj/machinery/computer/arcade/attack_ai(mob/user as mob)
+	return src.attack_hand(user)
+
+
+/obj/machinery/computer/arcade/emp_act(severity)
+	if(stat & (NOPOWER|BROKEN))
+		..(severity)
+		return
+	var/empprize = null
+	var/num_of_prizes = 0
+	switch(severity)
+		if(1)
+			num_of_prizes = rand(1,4)
+		if(2)
+			num_of_prizes = rand(0,2)
+	for(num_of_prizes; num_of_prizes > 0; num_of_prizes--)
+		empprize = pickweight(prizes)
+		new empprize(src.loc)
+
+	..(severity)
+
+///////////////////
+//  BATTLE HERE  //
+///////////////////
+
+/obj/machinery/computer/arcade/battle
+	name = "arcade machine"
+	desc = "Does not support Pinball."
+	icon_state = "arcade"
+	circuit = /obj/item/weapon/circuitboard/arcade/battle
+	var/enemy_name = "Space Villian"
+	var/temp = "Winners don't use space drugs" //Temporary message, for attack messages, etc
+	var/player_hp = 30 //Player health/attack points
+	var/player_mp = 10
+	var/enemy_hp = 45 //Enemy health/attack points
+	var/enemy_mp = 20
+	var/gameover = 0
+	var/blocked = 0 //Player cannot attack/heal while set
 	var/turtle = 0
 
-/obj/machinery/computer/arcade/New()
+/obj/machinery/computer/arcade/battle/New()
 	..()
 	var/name_action
 	var/name_part1
 	var/name_part2
 
-	name_action = pick("Defeat ", "Annihilate ", "Save ", "Strike ", "Stop ", "Destroy ", "Robust ", "Romance ", "Pwn ", "Own ")
+	name_action = pick("Defeat ", "Annihilate ", "Save ", "Strike ", "Stop ", "Destroy ", "Robust ", "Romance ", "Pwn ", "Own ", "Ban ")
 
 	name_part1 = pick("the Automatic ", "Farmer ", "Lord ", "Professor ", "the Cuban ", "the Evil ", "the Dread King ", "the Space ", "Lord ", "the Great ", "Duke ", "General ")
-	name_part2 = pick("Melonoid", "Murdertron", "Sorcerer", "Ruin", "Jeff", "Ectoplasm", "Crushulon", "Uhangoid", "Vhakoid", "Peteoid", "slime", "Griefer", "ERPer", "Lizard Man", "Unicorn")
+	name_part2 = pick("Melonoid", "Murdertron", "Sorcerer", "Ruin", "Jeff", "Ectoplasm", "Crushulon", "Uhangoid", "Vhakoid", "Peteoid", "slime", "Griefer", "ERPer", "Lizard Man", "Unicorn", "Bloopers")
 
 	src.enemy_name = replacetext((name_part1 + name_part2), "the ", "")
 	src.name = (name_action + name_part1 + name_part2)
 
 
-/obj/machinery/computer/arcade/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/computer/arcade/attack_hand(mob/user as mob)
+/obj/machinery/computer/arcade/battle/attack_hand(mob/user as mob)
 	if(..())
 		return
 	user.set_machine(src)
@@ -69,10 +117,11 @@
 	dat += "<br><center><h3>[src.temp]</h3></center>"
 	dat += "<br><center>Health: [src.player_hp] | Magic: [src.player_mp] | Enemy Health: [src.enemy_hp]</center>"
 
+	dat += "<center><b>"
 	if (src.gameover)
-		dat += "<center><b><a href='byond://?src=\ref[src];newgame=1'>New Game</a>"
+		dat += "<a href='byond://?src=\ref[src];newgame=1'>New Game</a>"
 	else
-		dat += "<center><b><a href='byond://?src=\ref[src];attack=1'>Attack</a> | "
+		dat += "<a href='byond://?src=\ref[src];attack=1'>Attack</a> | "
 		dat += "<a href='byond://?src=\ref[src];heal=1'>Heal</a> | "
 		dat += "<a href='byond://?src=\ref[src];charge=1'>Recharge Power</a>"
 
@@ -82,7 +131,7 @@
 	onclose(user, "arcade")
 	return
 
-/obj/machinery/computer/arcade/Topic(href, href_list)
+/obj/machinery/computer/arcade/battle/Topic(href, href_list)
 	if(..())
 		return 1
 
@@ -147,7 +196,7 @@
 	src.updateUsrDialog()
 	return
 
-/obj/machinery/computer/arcade/proc/arcade_action()
+/obj/machinery/computer/arcade/battle/proc/arcade_action()
 	if ((src.enemy_mp <= 0) || (src.enemy_hp <= 0))
 		if(!gameover)
 			src.gameover = 1
@@ -163,19 +212,11 @@
 				emagged = 0
 			else if(!contents.len)
 				feedback_inc("arcade_win_normal")
-				var/prizeselect = pickweight(prizes)
-				new prizeselect(src.loc)
-
-				if(istype(prizeselect, /obj/item/toy/gun)) //Ammo comes with the gun
-					new /obj/item/toy/ammo/gun(src.loc)
-
-				else if(istype(prizeselect, /obj/item/clothing/suit/syndicatefake)) //Helmet is part of the suit
-					new	/obj/item/clothing/head/syndicatefake(src.loc)
+				src.prizevend()
 
 			else
 				feedback_inc("arcade_win_normal")
-				var/atom/movable/prize = pick(contents)
-				prize.loc = src.loc
+				src.prizevend()
 
 	else if (emagged && (turtle >= 4))
 		var/boomamt = rand(5,10)
@@ -221,8 +262,8 @@
 	return
 
 
-/obj/machinery/computer/arcade/attackby(I as obj, user as mob)
-	if(istype(I, /obj/item/weapon/card/emag) && !emagged)
+/obj/machinery/computer/arcade/battle/emag_act(var/charges, var/mob/user)
+	if(!emagged)
 		temp = "If you die in the game, you die for real!"
 		player_hp = 30
 		player_mp = 10
@@ -230,31 +271,10 @@
 		enemy_mp = 20
 		gameover = 0
 		blocked = 0
-
 		emagged = 1
 
 		enemy_name = "Cuban Pete"
 		name = "Outbomb Cuban Pete"
 
-
 		src.updateUsrDialog()
-	else
-		..()
-
-
-/obj/machinery/computer/arcade/emp_act(severity)
-	if(stat & (NOPOWER|BROKEN))
-		..(severity)
-		return
-	var/empprize = null
-	var/num_of_prizes = 0
-	switch(severity)
-		if(1)
-			num_of_prizes = rand(1,4)
-		if(2)
-			num_of_prizes = rand(0,2)
-	for(num_of_prizes; num_of_prizes > 0; num_of_prizes--)
-		empprize = pickweight(prizes)
-		new empprize(src.loc)
-
-	..(severity)
+		return 1

@@ -17,8 +17,6 @@
 			return 0
 		if (affected.is_stump())
 			return 0
-		if (target_zone == "head" && target.species && (target.species.flags & IS_SYNTHETIC))
-			return 1
 		if (affected.status & ORGAN_ROBOT)
 			return 0
 		return 1

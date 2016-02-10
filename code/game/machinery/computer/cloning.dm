@@ -1,9 +1,10 @@
 /obj/machinery/computer/cloning
 	name = "cloning control console"
 	icon = 'icons/obj/computer.dmi'
-	icon_state = "dna"
+	icon_keyboard = "med_key"
+	icon_screen = "dna"
 	light_color = "#315ab4"
-	circuit = "/obj/item/weapon/circuitboard/cloning"
+	circuit = /obj/item/weapon/circuitboard/cloning
 	req_access = list(access_heads) //Only used for record deletion right now.
 	var/obj/machinery/dna_scannernew/scanner = null //Linked scanner. For scanning.
 	var/list/pods = list() //Linked cloning pods.
@@ -17,11 +18,12 @@
 
 /obj/machinery/computer/cloning/initialize()
 	..()
+	set_expansion(/datum/expansion/multitool, new/datum/expansion/multitool/cryo(src, list(/proc/is_operable)))
 	updatemodules()
 
 /obj/machinery/computer/cloning/Destroy()
 	releasecloner()
-	..()
+	return ..()
 
 /obj/machinery/computer/cloning/proc/updatemodules()
 	src.scanner = findscanner()
@@ -51,6 +53,33 @@
 		P.name = initial(P.name)
 	pods.Cut()
 
+/obj/machinery/computer/cloning/proc/connect_pod(var/obj/machinery/clonepod/P)
+	if(P in pods)
+		return 0
+
+	if(P.connected)
+		P.connected.release_pod(P)
+	P.connected = src
+	pods += P
+	rename_pods()
+
+	return 1
+
+/obj/machinery/computer/cloning/proc/release_pod(var/obj/machinery/clonepod/P)
+	if(!(P in pods))
+		return
+
+	P.connected = null
+	P.name = initial(P.name)
+	pods -= P
+	rename_pods()
+	return 1
+
+/obj/machinery/computer/cloning/proc/rename_pods()
+	for(var/i = 1 to pods.len)
+		var/atom/P = pods[i]
+		P.name = "[initial(P.name)] #[i]"
+
 /obj/machinery/computer/cloning/proc/findcloner()
 	var/num = 1
 	var/area/A = get_area(src)
@@ -69,14 +98,6 @@
 			user << "You insert [W]."
 			src.updateUsrDialog()
 			return
-	else if(istype(W, /obj/item/device/multitool))
-		var/obj/item/device/multitool/M = W
-		var/obj/machinery/clonepod/P = M.connecting
-		if(P && !(P in pods))
-			pods += P
-			P.connected = src
-			P.name = "[initial(P.name)] #[pods.len]"
-			user << "<span class='notice'>You connect [P] to [src].</span>"
 	else
 		..()
 	return
@@ -357,9 +378,6 @@
 		else
 			scantemp = "Error: No signs of intelligence detected."
 		return
-	if (subject.suiciding == 1)
-		scantemp = "Error: Subject's brain is not responding to scanning stimuli."
-		return
 	if ((!subject.ckey) || (!subject.client))
 		scantemp = "Error: Mental interface failure."
 		return
@@ -408,15 +426,3 @@
 			selected_record = R
 			break
 	return selected_record
-
-/obj/machinery/computer/cloning/update_icon()
-
-	if(stat & BROKEN)
-		icon_state = "commb"
-	else
-		if(stat & NOPOWER)
-			src.icon_state = "c_unpowered"
-			stat |= NOPOWER
-		else
-			icon_state = initial(icon_state)
-			stat &= ~NOPOWER

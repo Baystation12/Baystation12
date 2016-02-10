@@ -214,7 +214,7 @@
 		//spawn 1-4 boards of a random type
 		var/spawnees = 0
 		var/num_boards = rand(1,4)
-		var/list/options = list(1,2,4,8,16,32,64,128,256, 512)
+		var/list/options = list(1,2,4,8,16,32,64,128,256,512)
 		for(var/i=0, i<num_boards, i++)
 			var/chosen = pick(options)
 			options.Remove(options.Find(chosen))
@@ -223,52 +223,52 @@
 		if(spawnees & 1)
 			C = new(src.loc)
 			C.name = "Drone CPU motherboard"
-			C.origin_tech = "programming=[rand(3,6)]"
+			C.origin_tech = list(TECH_DATA = rand(3, 6))
 
 		if(spawnees & 2)
 			C = new(src.loc)
 			C.name = "Drone neural interface"
-			C.origin_tech = "biotech=[rand(3,6)]"
+			C.origin_tech = list(TECH_BIO = rand(3,6))
 
 		if(spawnees & 4)
 			C = new(src.loc)
 			C.name = "Drone suspension processor"
-			C.origin_tech = "magnets=[rand(3,6)]"
+			C.origin_tech = list(TECH_MAGNET = rand(3,6))
 
 		if(spawnees & 8)
 			C = new(src.loc)
 			C.name = "Drone shielding controller"
-			C.origin_tech = "bluespace=[rand(3,6)]"
+			C.origin_tech = list(TECH_BLUESPACE = rand(3,6))
 
 		if(spawnees & 16)
 			C = new(src.loc)
 			C.name = "Drone power capacitor"
-			C.origin_tech = "powerstorage=[rand(3,6)]"
+			C.origin_tech = list(TECH_POWER = rand(3,6))
 
 		if(spawnees & 32)
 			C = new(src.loc)
 			C.name = "Drone hull reinforcer"
-			C.origin_tech = "materials=[rand(3,6)]"
+			C.origin_tech = list(TECH_MATERIAL = rand(3,6))
 
 		if(spawnees & 64)
 			C = new(src.loc)
 			C.name = "Drone auto-repair system"
-			C.origin_tech = "engineering=[rand(3,6)]"
+			C.origin_tech = list(TECH_ENGINEERING = rand(3,6))
 
 		if(spawnees & 128)
 			C = new(src.loc)
 			C.name = "Drone phoron overcharge counter"
-			C.origin_tech = "phorontech=[rand(3,6)]"
+			C.origin_tech = list(TECH_PHORON = rand(3,6))
 
 		if(spawnees & 256)
 			C = new(src.loc)
 			C.name = "Drone targetting circuitboard"
-			C.origin_tech = "combat=[rand(3,6)]"
+			C.origin_tech = list(TECH_COMBAT = rand(3,6))
 
 		if(spawnees & 512)
 			C = new(src.loc)
 			C.name = "Corrupted drone morality core"
-			C.origin_tech = "illegal=[rand(3,6)]"
+			C.origin_tech = list(TECH_ILLEGAL = rand(3,6))
 
 	..()
 

@@ -14,7 +14,18 @@
 	var/code = 1.0
 	var/id = 1.0
 	var/drive_range = 50 //this is mostly irrelevant since current mass drivers throw into space, but you could make a lower-range mass driver for interstation transport or something I guess.
+	var/_wifi_id
+	var/datum/wifi/receiver/button/mass_driver/wifi_receiver
 
+/obj/machinery/mass_driver/initialize()
+	..()
+	if(_wifi_id)
+		wifi_receiver = new(_wifi_id, src)
+
+/obj/machinery/mass_driver/Destroy()
+	qdel(wifi_receiver)
+	wifi_receiver = null
+	return ..()
 
 /obj/machinery/mass_driver/proc/drive(amount)
 	if(stat & (BROKEN|NOPOWER))
@@ -27,7 +38,7 @@
 			O_limit++
 			if(O_limit >= 20)
 				for(var/mob/M in hearers(src, null))
-					M << "\blue The mass driver lets out a screech, it mustn't be able to handle any more items."
+					M << "<span class='notice'>The mass driver lets out a screech, it mustn't be able to handle any more items.</span>"
 				break
 			use_power(500)
 			spawn( 0 )

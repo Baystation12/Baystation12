@@ -88,7 +88,7 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has cut away necrotic tissue in [target]'s [affected.name] with \the [tool].", \
 			"\blue You have cut away necrotic tissue in [target]'s [affected.name] with \the [tool].")
-		affected.open = 3
+		affected.status &= ~ORGAN_DEAD
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -186,7 +186,7 @@
 			return 0
 		if(istype(tool,/obj/item/weapon/weldingtool))
 			var/obj/item/weapon/weldingtool/welder = tool
-			if(!welder.isOn())
+			if(!welder.isOn() || !welder.remove_fuel(1,user))
 				return 0
 		return (target_zone == "chest") && istype(target.back, /obj/item/weapon/rig) && !(target.back.canremove)
 

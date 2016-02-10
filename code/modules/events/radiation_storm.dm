@@ -3,6 +3,7 @@
 	var/const/radIntervall 	= 5	// Enough time between enter/leave belt for 10 hits, as per original implementation
 	var/const/leaveBelt		= 80
 	var/const/revokeAccess	= 135
+	startWhen				= 2
 	announceWhen			= 1
 	endWhen					= revokeAccess
 	var/postStartTicks 		= 0
@@ -52,3 +53,6 @@
 
 /datum/event/radiation_storm/end()
 	revoke_maint_all_access()
+
+/datum/event/radiation_storm/syndicate/radiate()
+	return

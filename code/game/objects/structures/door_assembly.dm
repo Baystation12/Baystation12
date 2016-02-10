@@ -4,6 +4,7 @@
 	icon_state = "door_as_0"
 	anchored = 0
 	density = 1
+	w_class = 5
 	var/state = 0
 	var/base_icon_state = ""
 	var/base_name = "Airlock"
@@ -149,7 +150,7 @@
 				user.visible_message("[user] welds the [glass] plating off the airlock assembly.", "You start to weld the [glass] plating off the airlock assembly.")
 				if(do_after(user, 40))
 					if(!src || !WT.isOn()) return
-					user << "\blue You welded the [glass] plating off!"
+					user << "<span class='notice'>You welded the [glass] plating off!</span>"
 					var/M = text2path("/obj/item/stack/material/[glass]")
 					new M(src.loc, 2)
 					glass = 0
@@ -157,18 +158,18 @@
 				user.visible_message("[user] welds the glass panel out of the airlock assembly.", "You start to weld the glass panel out of the airlock assembly.")
 				if(do_after(user, 40))
 					if(!src || !WT.isOn()) return
-					user << "\blue You welded the glass panel out!"
+					user << "<span class='notice'>You welded the glass panel out!</span>"
 					new /obj/item/stack/material/glass/reinforced(src.loc)
 					glass = 0
 			else if(!anchored)
 				user.visible_message("[user] dissassembles the airlock assembly.", "You start to dissassemble the airlock assembly.")
 				if(do_after(user, 40))
 					if(!src || !WT.isOn()) return
-					user << "\blue You dissasembled the airlock assembly!"
+					user << "<span class='notice'>You dissasembled the airlock assembly!</span>"
 					new /obj/item/stack/material/steel(src.loc, 4)
 					qdel (src)
 		else
-			user << "\blue You need more welding fuel."
+			user << "<span class='notice'>You need more welding fuel.</span>"
 			return
 
 	else if(istype(W, /obj/item/weapon/wrench) && state == 0)
@@ -180,7 +181,7 @@
 
 		if(do_after(user, 40))
 			if(!src) return
-			user << "\blue You [anchored? "un" : ""]secured the airlock assembly!"
+			user << "<span class='notice'>You [anchored? "un" : ""]secured the airlock assembly!</span>"
 			anchored = !anchored
 
 	else if(istype(W, /obj/item/stack/cable_coil) && state == 0 && anchored)
@@ -200,7 +201,7 @@
 
 		if(do_after(user, 40))
 			if(!src) return
-			user << "\blue You cut the airlock wires.!"
+			user << "<span class='notice'>You cut the airlock wires.!</span>"
 			new/obj/item/stack/cable_coil(src.loc, 1)
 			src.state = 0
 
@@ -212,7 +213,7 @@
 			if(!src) return
 			user.drop_item()
 			W.loc = src
-			user << "\blue You installed the airlock electronics!"
+			user << "<span class='notice'>You installed the airlock electronics!</span>"
 			src.state = 2
 			src.name = "Near finished Airlock Assembly"
 			src.electronics = W
@@ -229,7 +230,7 @@
 
 		if(do_after(user, 40))
 			if(!src) return
-			user << "\blue You removed the airlock electronics!"
+			user << "<span class='notice'>You removed the airlock electronics!</span>"
 			src.state = 1
 			src.name = "Wired Airlock Assembly"
 			electronics.loc = src.loc
@@ -262,11 +263,11 @@
 
 	else if(istype(W, /obj/item/weapon/screwdriver) && state == 2 )
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		user << "\blue Now finishing the airlock."
+		user << "<span class='notice'>Now finishing the airlock.</span>"
 
 		if(do_after(user, 40))
 			if(!src) return
-			user << "\blue You finish the airlock!"
+			user << "<span class='notice'>You finish the airlock!</span>"
 			var/path
 			if(istext(glass))
 				path = text2path("/obj/machinery/door/airlock/[glass]")
@@ -275,8 +276,7 @@
 			else
 				path = text2path("/obj/machinery/door/airlock[airlock_type]")
 
-			var/obj/machinery/door/new_airlock = new path(src.loc, src)
-			new_airlock.dir = src.dir
+			new path(src.loc, src)
 			qdel(src)
 	else
 		..()

@@ -17,7 +17,7 @@
 			if(istype(P, /obj/item/weapon/wrench))
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 				if(do_after(user, 20))
-					user << "\blue You wrench the frame into place."
+					user << "<span class='notice'>You wrench the frame into place.</span>"
 					anchored = 1
 					state = 1
 			if(istype(P, /obj/item/weapon/weldingtool))
@@ -28,31 +28,31 @@
 				playsound(loc, 'sound/items/Welder.ogg', 50, 1)
 				if(do_after(user, 20))
 					if(!src || !WT.remove_fuel(0, user)) return
-					user << "\blue You deconstruct the frame."
+					user << "<span class='notice'>You deconstruct the frame.</span>"
 					new /obj/item/stack/material/plasteel( loc, 4)
 					qdel(src)
 		if(1)
 			if(istype(P, /obj/item/weapon/wrench))
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 				if(do_after(user, 20))
-					user << "\blue You unfasten the frame."
+					user << "<span class='notice'>You unfasten the frame.</span>"
 					anchored = 0
 					state = 0
 			if(istype(P, /obj/item/weapon/circuitboard/aicore) && !circuit)
 				playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
-				user << "\blue You place the circuit board inside the frame."
+				user << "<span class='notice'>You place the circuit board inside the frame.</span>"
 				icon_state = "1"
 				circuit = P
 				user.drop_item()
 				P.loc = src
 			if(istype(P, /obj/item/weapon/screwdriver) && circuit)
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-				user << "\blue You screw the circuit board into place."
+				user << "<span class='notice'>You screw the circuit board into place.</span>"
 				state = 2
 				icon_state = "2"
 			if(istype(P, /obj/item/weapon/crowbar) && circuit)
 				playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-				user << "\blue You remove the circuit board."
+				user << "<span class='notice'>You remove the circuit board.</span>"
 				state = 1
 				icon_state = "0"
 				circuit.loc = loc
@@ -60,7 +60,7 @@
 		if(2)
 			if(istype(P, /obj/item/weapon/screwdriver) && circuit)
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-				user << "\blue You unfasten the circuit board."
+				user << "<span class='notice'>You unfasten the circuit board.</span>"
 				state = 1
 				icon_state = "1"
 			if(istype(P, /obj/item/stack/cable_coil))
@@ -82,7 +82,7 @@
 					user << "Get that brain out of there first"
 				else
 					playsound(loc, 'sound/items/Wirecutter.ogg', 50, 1)
-					user << "\blue You remove the cables."
+					user << "<span class='notice'>You remove the cables.</span>"
 					state = 2
 					icon_state = "2"
 					var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( loc )
@@ -126,14 +126,14 @@
 			if(istype(P, /obj/item/device/mmi))
 				var/obj/item/device/mmi/M = P
 				if(!M.brainmob)
-					user << "\red Sticking an empty [P] into the frame would sort of defeat the purpose."
+					user << "<span class='warning'>Sticking an empty [P] into the frame would sort of defeat the purpose.</span>"
 					return
 				if(M.brainmob.stat == 2)
-					user << "\red Sticking a dead [P] into the frame would sort of defeat the purpose."
+					user << "<span class='warning'>Sticking a dead [P] into the frame would sort of defeat the purpose.</span>"
 					return
 
 				if(jobban_isbanned(M.brainmob, "AI"))
-					user << "\red This [P] does not seem to fit."
+					user << "<span class='warning'>This [P] does not seem to fit.</span>"
 					return
 
 				if(M.brainmob.mind)
@@ -147,7 +147,7 @@
 
 			if(istype(P, /obj/item/weapon/crowbar) && brain)
 				playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-				user << "\blue You remove the brain."
+				user << "<span class='notice'>You remove the brain.</span>"
 				brain.loc = loc
 				brain = null
 				icon_state = "3"
@@ -155,7 +155,7 @@
 		if(4)
 			if(istype(P, /obj/item/weapon/crowbar))
 				playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-				user << "\blue You remove the glass panel."
+				user << "<span class='notice'>You remove the glass panel.</span>"
 				state = 3
 				if (brain)
 					icon_state = "3b"
@@ -166,7 +166,7 @@
 
 			if(istype(P, /obj/item/weapon/screwdriver))
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-				user << "\blue You connect the monitor."
+				user << "<span class='notice'>You connect the monitor.</span>"
 				if(!brain)
 					var/open_for_latejoin = alert(user, "Would you like this core to be open for latejoining AIs?", "Latejoin", "Yes", "Yes", "No") == "Yes"
 					var/obj/structure/AIcore/deactivated/D = new(loc)
@@ -202,7 +202,7 @@
 	transfer.loc = get_turf(src)
 	transfer.create_eyeobj()
 	transfer.cancel_camera()
-	user << "\blue <b>Transfer successful</b>: \black [transfer.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped."
+	user << "<span class='notice'>Transfer successful:</span> [transfer.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped."
 	transfer << "You have been uploaded to a stationary terminal. Remote device connection restored."
 
 	if(card)
@@ -224,23 +224,23 @@
 		if(transfer)
 			load_ai(transfer,card,user)
 		else
-			user << "\red <b>ERROR</b>: \black Unable to locate artificial intelligence."
+			user << "<span class='danger'>ERROR:</span> Unable to locate artificial intelligence."
 		return
 	else if(istype(W, /obj/item/weapon/wrench))
 		if(anchored)
-			user.visible_message("\blue \The [user] starts to unbolt \the [src] from the plating...")
+			user.visible_message("<span class='notice'>\The [user] starts to unbolt \the [src] from the plating...</span>")
 			if(!do_after(user,40))
-				user.visible_message("\blue \The [user] decides not to unbolt \the [src].")
+				user.visible_message("<span class='notice'>\The [user] decides not to unbolt \the [src].</span>")
 				return
-			user.visible_message("\blue \The [user] finishes unfastening \the [src]!")
+			user.visible_message("<span class='notice'>\The [user] finishes unfastening \the [src]!</span>")
 			anchored = 0
 			return
 		else
-			user.visible_message("\blue \The [user] starts to bolt \the [src] to the plating...")
+			user.visible_message("<span class='notice'>\The [user] starts to bolt \the [src] to the plating...</span>")
 			if(!do_after(user,40))
-				user.visible_message("\blue \The [user] decides not to bolt \the [src].")
+				user.visible_message("<span class='notice'>\The [user] decides not to bolt \the [src].</span>")
 				return
-			user.visible_message("\blue \The [user] finishes fastening down \the [src]!")
+			user.visible_message("<span class='notice'>\The [user] finishes fastening down \the [src]!</span>")
 			anchored = 1
 			return
 	else

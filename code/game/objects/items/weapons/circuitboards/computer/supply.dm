@@ -5,7 +5,7 @@
 /obj/item/weapon/circuitboard/supplycomp
 	name = T_BOARD("supply control console")
 	build_path = /obj/machinery/computer/supplycomp
-	origin_tech = "programming=3"
+	origin_tech = list(TECH_DATA = 3)
 	var/contraband_enabled = 0
 
 /obj/item/weapon/circuitboard/supplycomp/construct(var/obj/machinery/computer/supplycomp/SC)

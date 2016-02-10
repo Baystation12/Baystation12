@@ -160,17 +160,8 @@ FLOOR SAFES
 			return
 
 
-obj/structure/safe/blob_act()
-	return
-
-
 obj/structure/safe/ex_act(severity)
 	return
-
-
-obj/structure/safe/meteorhit(obj/O as obj)
-	return
-
 
 //FLOOR SAFES
 /obj/structure/safe/floor
@@ -180,12 +171,15 @@ obj/structure/safe/meteorhit(obj/O as obj)
 	level = 1	//underfloor
 	layer = 2.5
 
-
 /obj/structure/safe/floor/initialize()
 	..()
 	var/turf/T = loc
-	hide(T.intact)
-
+	if(istype(T) && !T.is_plating())
+		hide(1)
+	update_icon()
 
 /obj/structure/safe/floor/hide(var/intact)
 	invisibility = intact ? 101 : 0
+
+/obj/structure/safe/floor/hides_under_flooring()
+	return 1

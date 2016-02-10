@@ -71,6 +71,14 @@
 			O.unwield()
 	return	unwield()
 
+//Allow a small chance of parrying melee attacks when wielded - maybe generalize this to other weapons someday
+/obj/item/weapon/material/twohanded/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+	if(wielded && default_parry_check(user, attacker, damage_source) && prob(15))
+		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
+		playsound(user.loc, 'sound/weapons/punchmiss.ogg', 50, 1)
+		return 1
+	return 0
+
 /obj/item/weapon/material/twohanded/update_icon()
 	icon_state = "[base_icon][wielded]"
 	item_state = icon_state
@@ -84,7 +92,7 @@
 
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		if(H.species.is_small)
+		if(issmall(H))
 			user << "<span class='warning'>It's too heavy for you to wield fully.</span>"
 			return
 	else
@@ -168,6 +176,25 @@
 			var/obj/effect/plant/P = A
 			P.die_off()
 
+//spears, bay edition
+/obj/item/weapon/material/twohanded/spear
+	icon_state = "spearglass0"
+	base_icon = "spearglass"
+	name = "spear"
+	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
+	force = 10
+	w_class = 4.0
+	slot_flags = SLOT_BACK
+	force_wielded = 0.75           // 22 when wielded with hardness 15 (glass)
+	unwielded_force_divisor = 0.65 // 14 when unwielded based on above
+	thrown_force_divisor = 1.5 // 20 when thrown with weight 15 (glass)
+	throw_speed = 3
+	edge = 1
+	sharp = 1
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
+	default_material = "glass"
+
 
 /*
  * Double-Bladed Energy Swords - Cheridan
@@ -187,7 +214,6 @@
 	force_wielded = 30
 	wieldsound = 'sound/weapons/saberon.ogg'
 	unwieldsound = 'sound/weapons/saberoff.ogg'
-	flags = NOSHIELD
 	origin_tech = "magnets=3;syndicate=4"
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharp = 1
@@ -205,30 +231,3 @@
 			for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2))
 				user.set_dir(i)
 				sleep(1)
-
-/obj/item/weapon/material/twohanded/dualsaber/IsShield()
-	if(wielded)
-		return 1
-	else
-		return 0
-
-
-//spears, bay edition
-/obj/item/weapon/material/twohanded/spear
-	icon_state = "spearglass0"
-	base_icon = "spearglass"
-	name = "spear"
-	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
-	force = 10
-	w_class = 4.0
-	slot_flags = SLOT_BACK
-	force_wielded = 0.75           // 22 when wielded with hardness 15 (glass)
-	unwielded_force_divisor = 0.65 // 14 when unwielded based on above
-	thrown_force_divisor = 1.5 // 20 when thrown with weight 15 (glass)
-	throw_speed = 3
-	edge = 1
-	sharp = 1
-	flags = NOSHIELD
-	hitsound = 'sound/weapons/bladeslice.ogg'
-	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
-	default_material = "glass"

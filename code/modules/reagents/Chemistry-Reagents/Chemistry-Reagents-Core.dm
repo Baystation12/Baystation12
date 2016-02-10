@@ -70,6 +70,8 @@
 					infect_virus2(M, V.getcopy())
 
 /datum/reagent/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_MACHINE)
+		return
 	if(data && data["viruses"])
 		for(var/datum/disease/D in data["viruses"])
 			if(D.spread_type == SPECIAL || D.spread_type == NON_CONTAGIOUS)
@@ -158,24 +160,7 @@
 			T.visible_message("<span class='warning'>The water sizzles as it lands on \the [T]!</span>")
 
 	else if(volume >= 10)
-		if(T.wet >= 1)
-			return
-		T.wet = 1
-		if(T.wet_overlay)
-			T.overlays -= T.wet_overlay
-			T.wet_overlay = null
-		T.wet_overlay = image('icons/effects/water.dmi',T,"wet_floor")
-		T.overlays += T.wet_overlay
-
-		spawn(800) // This is terrible and needs to be changed when possible.
-			if(!T || !istype(T))
-				return
-			if(T.wet >= 2)
-				return
-			T.wet = 0
-			if(T.wet_overlay)
-				T.overlays -= T.wet_overlay
-				T.wet_overlay = null
+		T.wet_floor(1)
 
 /datum/reagent/water/touch_obj(var/obj/O)
 	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/monkeycube))
@@ -211,6 +196,7 @@
 	description = "Required for welders. Flamable."
 	reagent_state = LIQUID
 	color = "#660000"
+	touch_met = 5
 
 	glass_icon_state = "dr_gibb_glass"
 	glass_name = "glass of welder fuel"

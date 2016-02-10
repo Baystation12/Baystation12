@@ -58,7 +58,7 @@
 			speaker_name = "[speaker.real_name] ([speaker_name])"
 		if(ismob(speaker))
 			speaker_info = "(<a href='?src=\ref[src];speakerinfo=\ref[speaker]'>?</a>)"
-		track = "(<a href='byond://?src=\ref[src];track=\ref[speaker]'>follow</a>) "
+		track = "([ghost_follow_link(speaker, src)]) "
 		if(client.prefs.toggles & CHAT_GHOSTEARS && speaker in view(src))
 			message = "<b>[message]</b>"
 
@@ -70,7 +70,7 @@
 				src << "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear \him."
 	else
 		if(language)
-			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>")
+			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [speaker_info][track][language.format_message(message, verb)]</span>")
 		else
 			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [speaker_info][track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
 		if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
@@ -185,7 +185,7 @@
 	if(istype(src, /mob/dead/observer))
 		if(speaker_name != speaker.real_name && !isAI(speaker)) //Announce computer and various stuff that broadcasts doesn't use it's real name but AI's can't pretend to be other mobs.
 			speaker_name = "[speaker.real_name] ([speaker_name])"
-		track = "[speaker_name] (<a href='byond://?src=\ref[src];track=\ref[speaker]'>follow</a>)"
+		track = "[speaker_name] ([ghost_follow_link(speaker, src)])"
 
 	var/formatted
 	if(language)
@@ -202,18 +202,18 @@
 	return "<span class='say_quote'>\[[worldtime2text()]\]</span>"
 
 /mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
-	src << "[part_a][speaker_name][part_b][formatted]</span></span>"
+	src << "[part_a][speaker_name][part_b][formatted]"
 
 /mob/dead/observer/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
-	src << "[part_a][track][part_b][formatted]</span></span>"
+	src << "[part_a][track][part_b][formatted]"
 
 /mob/living/silicon/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 	var/time = say_timestamp()
-	src << "[time][part_a][speaker_name][part_b][formatted]</span></span>"
+	src << "[time][part_a][speaker_name][part_b][formatted]"
 
 /mob/living/silicon/ai/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 	var/time = say_timestamp()
-	src << "[time][part_a][track][part_b][formatted]</span></span>"
+	src << "[time][part_a][track][part_b][formatted]"
 
 /mob/proc/hear_signlang(var/message, var/verb = "gestures", var/datum/language/language, var/mob/speaker = null)
 	if(!client)
