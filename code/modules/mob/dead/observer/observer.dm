@@ -326,7 +326,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	stop_following()
 	following = target
-	moved_event.register(following, src, /atom/movable/proc/move_to_destination)
+	moved_event.register(following, src, /mob/dead/observer/proc/move_to_destination)
 	destroyed_event.register(following, src, /mob/dead/observer/proc/stop_following)
 
 	src << "<span class='notice'>Now following \the [following]</span>"
@@ -339,12 +339,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		destroyed_event.unregister(following, src)
 		following = null
 
-/mob/dead/observer/move_to_destination(var/atom/movable/am, var/old_loc, var/new_loc)
+/mob/dead/observer/proc/move_to_destination(var/atom/movable/am, var/old_loc, var/new_loc)
 	var/turf/T = get_turf(new_loc)
 	if(check_holy(T))
 		usr << "<span class='warning'>You cannot follow something standing on holy grounds!</span>"
 		return
-	..()
+	if(T && T != loc)
+		forceMove(T)
 
 /mob/proc/check_holy(var/turf/T)
 	return 0
