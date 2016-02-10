@@ -23,40 +23,41 @@
 
 
 /obj/item/clothing/get_description_info()
-	var/armor_stats = description_info + "\
-	<br>"
+	. = list()
+	. += description_info + "\
+		<br>"
 
 	if(armor["melee"])
-		armor_stats += "[describe_armor("melee","blunt force")] \n"
+		. += "[describe_armor("melee","blunt force")] \n"
 	if(armor["bullet"])
-		armor_stats += "[describe_armor("bullet","ballistics")] \n"
+		. += "[describe_armor("bullet","ballistics")] \n"
 	if(armor["laser"])
-		armor_stats += "[describe_armor("laser","lasers")] \n"
+		. += "[describe_armor("laser","lasers")] \n"
 	if(armor["energy"])
-		armor_stats += "[describe_armor("energy","energy")] \n"
+		. += "[describe_armor("energy","energy")] \n"
 	if(armor["bomb"])
-		armor_stats += "[describe_armor("bomb","explosions")] \n"
+		. += "[describe_armor("bomb","explosions")] \n"
 	if(armor["bio"])
-		armor_stats += "[describe_armor("bio","biohazards")] \n"
+		. += "[describe_armor("bio","biohazards")] \n"
 	if(armor["rad"])
-		armor_stats += "[describe_armor("rad","radiation")] \n"
+		. += "[describe_armor("rad","radiation")] \n"
 
-	armor_stats += "\n"
+	. += "\n"
 
 	if(flags & AIRTIGHT)
-		armor_stats += "It is airtight. \n"
+		. += "It is airtight. \n"
 
 	if(flags & STOPPRESSUREDAMAGE)
-		armor_stats += "Wearing this will protect you from the vacuum of space. \n"
+		. += "Wearing this will protect you from the vacuum of space. \n"
 
 	if(flags & THICKMATERIAL)
-		armor_stats += "The material is exceptionally thick. \n"
+		. += "The material is exceptionally thick. \n"
 
 	if(max_heat_protection_temperature == FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE)
-		armor_stats += "It provides very good protection against fire and heat. \n"
+		. += "It provides very good protection against fire and heat. \n"
 
 	if(min_cold_protection_temperature == SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE)
-		armor_stats += "It provides very good protection against very cold temperatures. \n"
+		. += "It provides very good protection against very cold temperatures. \n"
 
 	var/list/covers = list()
 	var/list/slots = list()
@@ -70,9 +71,9 @@
 			slots += name
 
 	if(covers.len)
-		armor_stats += "It covers the [english_list(covers)]. \n"
+		. += "It covers the [english_list(covers)]. \n"
 
 	if(slots.len)
-		armor_stats += "It can be worn on your [english_list(slots)]. \n"
+		. += "It can be worn on your [english_list(slots)]. \n"
 
-	return armor_stats
+	return list2text(.)
