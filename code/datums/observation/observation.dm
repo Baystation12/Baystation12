@@ -3,61 +3,58 @@
 //
 //	Implements a basic observer pattern with the following main procs:
 //
-//	/decl/observ/proc/is_listening(var/event_source, var/datum/proc_owner, var/proc_call)
+//	/decl/observ/proc/is_listening(var/event_source, var/datum/listener, var/proc_call)
 //		event_source: The instance which is generating events.
-//		proc_owner: The instance which may be listening to events by event_source
+//		listener: The instance which may be listening to events by event_source
 //		proc_call: Optional. The specific proc to call when the event is raised.
 //
-//		Returns true if proc_owner is listening for events by event_source, and proc_call supplied is either null or the same proc that will be called when an event is raised.
+//		Returns true if listener is listening for events by event_source, and proc_call supplied is either null or one of the proc that will be called when an event is raised.
 //
 //	/decl/observ/proc/has_listeners(var/event_source)
 //		event_source: The instance which is generating events.
 //
-//		Returns true if the given event_source has any listeners at all.
+//		Returns true if the given event_source has any listeners at all, globally or to specific event sources.
 //
-//	/decl/observ/proc/register(var/event_source, var/datum/proc_owner, var/proc_call)
+//	/decl/observ/proc/register(var/event_source, var/datum/listener, var/proc_call)
 //		event_source: The instance you wish to receive events from.
-//		proc_owner: The instance/owner of the proc to call when an event is raised by the event_source.
+//		listener: The instance/owner of the proc to call when an event is raised by the event_source.
 //		proc_call: The proc to call when an event is raised.
 //
-//		Calling register() multiple times using the same event_source and proc_owner will replace the current proc to be called with the supplied proc_call.
-//		As such, some care will have to be taken should you even conduct registrations for other instances/proc_owners than src in case other registrations have already been made.
-//		A call to register() does not override the proc_call provided in a register_global() call, these are fully separate.
+//		It is possible to register the same listener to the same event_source multiple times as long as it is using different proc_calls.
+//		Registering again using the same event_source, listener, and proc_call that has been registered previously will have no additional effect.
+//			I.e.: The proc_call will still only be called once per raised event. That particular proc_call will only have to be unregistered once.
 //
 //		When proc_call is called the first argument is always the source of the event (event_source).
 //		Additional arguments may or may not be supplied, see individual event definition files (destroyed.dm, moved.dm, etc.) for details.
 //
-//		The instance making the register() call is also responsible for calling unregister(), including when event_source is destroyed.
-//			This can be handled by listening to the event_source's destroyed event, unregistering in the proc_owner's Destroy() proc, etc.
+//		The instance making the register() call is also responsible for calling unregister(), see below for additonal details, including when event_source is destroyed.
+//			This can be handled by listening to the event_source's destroyed event, unregistering in the listener's Destroy() proc, etc.
 //
-//	/decl/observ/proc/unregister(var/event_source, var/datum/proc_owner)
+//	/decl/observ/proc/unregister(var/event_source, var/datum/listener, var/proc_call)
 //		event_source: The instance you wish to stop receiving events from.
-//		proc_owner: The instance/owner of the proc which will no longer receive the events.
+//		listener: The instance which will no longer receive the events.
+//		proc_call: Optional: The proc_call to unregister.
 //
-//		Calling unregister() multiple times with the same event_source and proc_owner is safe/will have no side-effect once a prior register() call has been undone.
+//		Unregisters the listener from the event_source.
+//		If a proc_call has been supplied only that particular proc_call will be unregistered. If the proc_call isn't currently registered there will be no effect.
+//		If no proc_call has been supplied, the listener will have all registrations made to the given event_source undone.
 //
-//	/decl/observ/proc/register_global(var/datum/proc_owner, var/proc_call)
-//		proc_owner: The instance/owner of the proc to call when an event is raised by any and all sources.
+//	/decl/observ/proc/register_global(var/datum/listener, var/proc_call)
+//		listener: The instance/owner of the proc to call when an event is raised by any and all sources.
 //		proc_call: The proc to call when an event is raised.
 //
-//		Calling register_global() multiple times using the same proc_owner will replace the current proc to be called with the supplied proc_call.
-//		As such, some care will have to be taken should you even conduct registrations for other instances/proc_owners than src in case other registrations have already been made.
-//		A call to register_global() does not override the proc_call provided in a register() call, these are fully separate.
+//		Works very much the same as register(), only the listener/proc_call will receive all relevant events from all event sources.
+//		Global registrations can overlap with registrations made to specific event sources and these will not affect each other.
 //
-//		The instance making the register() call is also responsible for calling unregister(), except for when event_sources are destroyed (as it isn't bound to any specific instance).
-//			This can for example be handled in the proc_owner's Destroy() proc.
+//	/decl/observ/proc/unregister_global(var/datum/listener, var/proc_call)
+//		listener: The instance/owner of the proc which will no longer receive the events.
+//		proc_call: Optional: The proc_call to unregister.
 //
-//		For additional details see: /decl/observ/proc/register() above as details concerning which arguments proc_call will receive.
+//		Works very much the same as unregister(), only it undoes global registrations instead.
 //
-//	/decl/observ/proc/unregister_global(var/datum/proc_owner)
-//		proc_owner: The instance/owner of the proc which will no longer receive the events.
-//
-//		Calling unregister_global() multiple times with the same event_source and proc_owner is safe/will have no side-effect once a prior register_global() call has been undone.
-//
-//	/decl/observ/proc/raise_event(var/list/args = list())
+//	/decl/observ/proc/raise_event(src, ...)
 //		Should never be called unless implementing a new event type.
-//		The argument shall always be a list, and the first element shall always be the event_source instance belonging to the event.
-//		Beyond that there are no restrictions.
+//		The first argument shall always be the event_source belonging to the event. Beyond that there are no restrictions.
 
 /decl/observ
 	var/name = "Unnamed Event"          // The name of this event, used mainly for debug/VV purposes. The list of event managers can be reached through the "Debug Controller" verb, selecting the "Observation" entry.

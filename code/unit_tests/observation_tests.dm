@@ -186,7 +186,7 @@ datum/unit_test/observation/moved_shall_only_trigger_for_recursive_drop/start_te
 
 	var/list/event = received_moves[1]
 	if(event[1] != held_item || event[2] != held_mob || event[3] != mech)
-		fail("Unepected move event received. Expected [held_item], was [event[1]]. Expected [held_mob], was [event[2]]. Expected [mech], was [event[3]]")
+		fail("Unexpected move event received. Expected [held_item], was [event[1]]. Expected [held_mob], was [event[2]]. Expected [mech], was [event[3]]")
 	else if(!(held_item in mech.dropped_items))
 		fail("Expected \the [held_item] to be in the mechs' dropped item list")
 	else
@@ -200,3 +200,52 @@ datum/unit_test/observation/moved_shall_only_trigger_for_recursive_drop/start_te
 
 	return 1
 
+datum/unit_test/observation/moved_shall_not_unregister_recursively_one
+	name = "OBSERVATION: Moved - Shall Not Unregister Recursively - One"
+
+datum/unit_test/observation/moved_shall_not_unregister_recursively_one/start_test()
+	..()
+	var/turf/T = locate(20,20,1)
+	var/mob/dead/observer/one = new(T)
+	var/mob/dead/observer/two = new(T)
+	var/mob/dead/observer/three = new(T)
+
+	two.ManualFollow(one)
+	three.ManualFollow(two)
+
+	two.stop_following()
+	if(is_listening_to_movement(two, three))
+		pass("Observer three is still following observer two.")
+	else
+		fail("Observer three is no longer following observer two.")
+
+	qdel(one)
+	qdel(two)
+	qdel(three)
+
+	return 1
+
+datum/unit_test/observation/moved_shall_not_unregister_recursively_two
+	name = "OBSERVATION: Moved - Shall Not Unregister Recursively - Two"
+
+datum/unit_test/observation/moved_shall_not_unregister_recursively_two/start_test()
+	..()
+	var/turf/T = locate(20,20,1)
+	var/mob/dead/observer/one = new(T)
+	var/mob/dead/observer/two = new(T)
+	var/mob/dead/observer/three = new(T)
+
+	two.ManualFollow(one)
+	three.ManualFollow(two)
+
+	three.stop_following()
+	if(is_listening_to_movement(one, two))
+		pass("Observer two is still following observer one.")
+	else
+		fail("Observer two is no longer following observer one.")
+
+	qdel(one)
+	qdel(two)
+	qdel(three)
+
+	return 1
