@@ -178,6 +178,7 @@ var/list/gamemode_cache = list()
 	var/irc_bot_export = 0 // whether the IRC bot in use is a Bot32 (or similar) instance; Bot32 uses world.Export() instead of nudge.py/libnudge
 	var/main_irc = ""
 	var/admin_irc = ""
+	var/announce_shuttle_dock_to_irc = FALSE
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 	var/use_overmap = 0
@@ -611,6 +612,9 @@ var/list/gamemode_cache = list()
 
 				if("admin_irc")
 					config.admin_irc = value
+
+				if("announce_shuttle_dock_to_irc")
+					config.announce_shuttle_dock_to_irc = TRUE
 
 				if("python_path")
 					if(value)
