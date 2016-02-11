@@ -11,5 +11,5 @@ var/decl/observ/destroyed/destroyed_event = new()
 	name = "Destroyed"
 
 /datum/Destroy()
-	destroyed_event.raise_event(list(src))
+	destroyed_event.raise_event(src)
 	. = ..()

@@ -104,10 +104,10 @@ datum/unit_test/observation/moved_shall_not_register_on_enter_without_listeners/
 	qdel(H)
 	return 1
 
-datum/unit_test/observation/moved_shall_registers_recursively_on_new_listener
+datum/unit_test/observation/moved_shall_register_recursively_on_new_listener
 	name = "OBSERVATION: Moved - Shall Register Recursively on New Listener"
 
-datum/unit_test/observation/moved_shall_registers_recursively_on_new_listener/start_test()
+datum/unit_test/observation/moved_shall_register_recursively_on_new_listener/start_test()
 	..()
 	var/turf/T = locate(20,20,1)
 	var/mob/living/carbon/human/H = new(T)
@@ -128,10 +128,10 @@ datum/unit_test/observation/moved_shall_registers_recursively_on_new_listener/st
 	qdel(O)
 	return 1
 
-datum/unit_test/observation/moved_shall_registers_recursively_with_existing_listener
+datum/unit_test/observation/moved_shall_register_recursively_with_existing_listener
 	name = "OBSERVATION: Moved - Shall Register Recursively with Existing Listener"
 
-datum/unit_test/observation/moved_shall_registers_recursively_with_existing_listener/start_test()
+datum/unit_test/observation/moved_shall_register_recursively_with_existing_listener/start_test()
 	..()
 	var/turf/T = locate(20,20,1)
 	var/mob/living/carbon/human/H = new(T)
