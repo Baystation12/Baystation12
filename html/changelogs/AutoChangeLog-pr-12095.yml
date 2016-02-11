@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - bugfix: "Items dropped by mobs that are held by another mob should no longer be lost."
-  - bugfix: "Items dropped inside mechs should no longer be lost."
