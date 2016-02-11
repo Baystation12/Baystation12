@@ -9,6 +9,7 @@
 
 #define CUT       "cut"
 #define BRUISE    "bruise"
+#define PIERCE    "pierce"
 
 #define STUN      "stun"
 #define WEAKEN    "weaken"
