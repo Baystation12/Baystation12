@@ -38,6 +38,11 @@ var/decl/observ/moved/moved_event = new()
 * Movement Handling *
 ********************/
 
+/atom/movable/proc/move_to_destination(var/atom/movable/am, var/old_loc, var/new_loc)
+	var/turf/T = get_turf(new_loc)
+	if(T && T != loc)
+		forceMove(T)
+
 /atom/Entered(var/atom/movable/am, var/atom/old_loc)
 	. = ..()
 	if(. != CANCEL_MOVE_EVENT)
