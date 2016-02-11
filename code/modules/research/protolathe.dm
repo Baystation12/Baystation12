@@ -117,7 +117,7 @@
 		return 1
 	if(!istype(O, /obj/item/stack/material))
 		user << "<span class='notice'>You cannot insert this item into \the [src]!</span>"
-		return 1
+		return 0
 	if(stat)
 		return 1
 
