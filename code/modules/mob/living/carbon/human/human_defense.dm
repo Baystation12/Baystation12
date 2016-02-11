@@ -202,7 +202,6 @@ emp_act
 
 	if(effective_force > 10 || effective_force >= 5 && prob(33))
 		forcesay(hit_appends)	//forcesay checks stat already
-
 	if((I.damtype == BRUTE || I.damtype == HALLOSS) && prob(25 + (effective_force * 2)))
 		if(!stat)
 			if(headcheck(hit_zone))
@@ -220,7 +219,7 @@ emp_act
 		if(!(I.flags & NOBLOODY))
 			I.add_blood(src)
 
-		if(prob(33))
+		if(prob(33 + I.sharp*10))
 			var/turf/location = loc
 			if(istype(location, /turf/simulated))
 				location.add_blood(src)
