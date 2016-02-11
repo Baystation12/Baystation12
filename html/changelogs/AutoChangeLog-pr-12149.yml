@@ -1,0 +1,5 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - tweak: "Changes the way loadout is handled in the character setup."
+  - tweak: "Can no longer see loadout items restricted to a race you're not whitelisted for (hence why you may see empty categories)."
