@@ -17,12 +17,9 @@
 	if(can_reenter_corpse && mind && mind.current)
 		if(A == mind.current || (mind.current in A)) // double click your corpse or whatever holds it
 			reenter_corpse()						// (cloning scanner, body bag, closet, mech, etc)
-			return									// seems legit.
-
 	// Things you might plausibly want to follow
-	if((ismob(A) && A != src) || istype(A,/obj/machinery/bot) || istype(A,/obj/singularity))
+	else if(istype(A,/atom/movable))
 		ManualFollow(A)
-
 	// Otherwise jump
 	else
 		stop_following()
