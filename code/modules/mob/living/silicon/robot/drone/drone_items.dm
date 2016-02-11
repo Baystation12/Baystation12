@@ -26,8 +26,6 @@
 
 	var/obj/item/wrapped = null // Item currently being held.
 
-	var/force_holder = null //
-
 // VEEEEERY limited version for mining borgs. Basically only for swapping cells and upgrading the drills.
 /obj/item/weapon/gripper/miner
 	name = "drill maintenance gripper"
@@ -126,13 +124,7 @@
 	//update_icon()
 
 /obj/item/weapon/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(wrapped) 	//The force of the wrapped obj gets set to zero during the attack() and afterattack().
-		force_holder = wrapped.force
-		wrapped.force = 0.0
-		wrapped.attack(M,user)
-		if(deleted(wrapped))
-			wrapped = null
-		return 1
+	// Don't fall through and smack people with gripper, instead just no-op
 	return 0
 
 /obj/item/weapon/gripper/afterattack(var/atom/target, var/mob/living/user, proximity, params)
@@ -150,14 +142,17 @@
 		//Temporary put wrapped into user so target's attackby() checks pass.
 		wrapped.loc = user
 
+		//The force of the wrapped obj gets set to zero during the attack() and afterattack().
+		var/force_holder = wrapped.force
+		wrapped.force = 0.0
+		
 		//Pass the attack on to the target. This might delete/relocate wrapped.
 		var/resolved = target.attackby(wrapped,user)
 		if(!resolved && wrapped && target)
 			wrapped.afterattack(target,user,1)
 
-		//wrapped's force was set to zero.  This resets it to the value it had before.
 		wrapped.force = force_holder
-		force_holder = null
+
 		//If wrapped was neither deleted nor put into target, put it back into the gripper.
 		if(wrapped && user && (wrapped.loc == user))
 			wrapped.loc = src
