@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - rscadd: "Ghosts can now follow any movable object."
