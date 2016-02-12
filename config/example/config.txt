@@ -391,3 +391,6 @@ STARLIGHT 0
 ## A ; separated list of lobby screens to randomly pick from. The listed screens must exist as icon states in '/icons/misc/title.dmi'.
 ## Defaults to 'title' if left unset.
 # LOBBY_SCREENS title
+
+## Uncomment this line to announce shuttle dock announcements to the main IRC channel, if MAIN_IRC has also been setup.
+# ANNOUNCE_SHUTTLE_DOCK_TO_IRC
