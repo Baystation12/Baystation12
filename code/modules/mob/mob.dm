@@ -703,7 +703,7 @@
 				listed_turf = null
 			else
 				if(statpanel("Turf"))
-					stat("\icon[listed_turf]", listed_turf.name)
+					stat(listed_turf)
 					for(var/atom/A in listed_turf)
 						if(!A.mouse_opacity)
 							continue
