@@ -53,6 +53,7 @@
 												/datum/species/tajaran	= 7,
 												/datum/species/unathi	= 7,
 												/datum/species/diona	= 5,
+												/datum/species/resomi	= 5,
 												/datum/species/vox		= 1
 											)
 
