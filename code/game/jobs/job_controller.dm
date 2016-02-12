@@ -591,14 +591,11 @@ var/global/datum/controller/occupations/job_master
 	//spawn at one of the latespawn locations
 
 	var/datum/spawnpoint/spawnpos
-	var/mob/living/carbon/human/H
+
 	if(!C)
 		CRASH("Null client passed to LateSpawn() proc!")
 
-	H = C.mob
-	if(!istype(H))
-		H = null
-
+	var/mob/H = C.mob
 	if(C.prefs.spawnpoint)
 		spawnpos = spawntypes[C.prefs.spawnpoint]
 
