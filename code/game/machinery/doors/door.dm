@@ -324,18 +324,8 @@
 
 /obj/machinery/door/proc/set_broken()
 	stat |= BROKEN
-	for (var/mob/O in viewers(src, null))
-		if ((O.client && !( O.blinded )))
-			O.show_message("[src.name] breaks!" )
+	visible_message("<span class = 'warning'>\The [src.name] breaks!</span>")
 	update_icon()
-	return
-
-
-/obj/machinery/door/emp_act(severity)
-	if(prob(20/severity) && (istype(src,/obj/machinery/door/airlock) || istype(src,/obj/machinery/door/window)) )
-		spawn(0)
-			open()
-	..()
 
 
 /obj/machinery/door/ex_act(severity)
