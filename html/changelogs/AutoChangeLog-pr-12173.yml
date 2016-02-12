@@ -1,0 +1,4 @@
+author: Ccomp5950
+delete-after: True
+changes: 
+  - bugfix: "Fixes slimes not hearing people (Kudos Karolis2011)"
