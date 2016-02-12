@@ -30,7 +30,7 @@ If you're using a database since before we moved to flyway, it's a bit more invo
 
 In the root project directory, run:
 
-    path/to/flyway migrate -user=USER -password=PASSWORD -url=jdbc:mysql://HOST/DATABASE -baselineVersion=001 -baselineDescription="Initial schema"
+    path/to/flyway baseline -user=USER -password=PASSWORD -url=jdbc:mysql://HOST/DATABASE -baselineVersion=001 -baselineDescription="Initial schema"
 
 From there, you can run migrations as normal.
 
