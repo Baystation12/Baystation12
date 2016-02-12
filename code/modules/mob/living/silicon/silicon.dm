@@ -63,7 +63,7 @@
 	switch(severity)
 		if(1)
 			src.take_organ_damage(0,20,emp=1)
-			confused = (min(confused + 5, 30))
+			Stun(rand(5,10))
 		if(2)
 			src.take_organ_damage(0,10,emp=1)
 			confused = (min(confused + 2, 30))
