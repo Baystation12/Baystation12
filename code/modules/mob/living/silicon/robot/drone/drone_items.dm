@@ -97,6 +97,11 @@
 		/obj/item/stack/material
 		)
 
+/obj/item/weapon/gripper/examine(mob/user)
+	..()
+	if(wrapped)
+		user << "It is holding \a [wrapped]."
+		
 /obj/item/weapon/gripper/attack_self(mob/user as mob)
 	if(wrapped)
 		return wrapped.attack_self(user)
