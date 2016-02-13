@@ -1594,7 +1594,7 @@
 
 	proc/Expand()
 		src.visible_message("<span class='notice'>\The [src] expands!</span>")
-		var/mob/living/carbon/human/H = new(src.loc)
+		var/mob/living/carbon/human/H = new(get_turf(src))
 		H.set_species(monkey_type)
 		H.real_name = H.species.get_random_name()
 		H.name = H.real_name
