@@ -7,8 +7,8 @@
 	advanced post-scarcity culture on good terms with Skrellian and Human interests."
 
 	num_alternate_languages = 2
-	secondary_langs = list("Resomi")
-	name_language = "Resomi"
+	secondary_langs = list(LANGUAGE_RESOMI)
+	name_language = LANGUAGE_RESOMI
 
 	blood_color = "#D514F7"
 	flesh_color = "#5F7BB0"
