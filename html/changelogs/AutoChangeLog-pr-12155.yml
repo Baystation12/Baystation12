@@ -1,0 +1,4 @@
+author: Neerti
+delete-after: True
+changes: 
+  - rscadd: "The examination tab now includes additional information about examined clothing and armor."
