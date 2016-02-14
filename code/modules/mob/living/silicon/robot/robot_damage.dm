@@ -147,3 +147,7 @@
 		burn	-= (picked.electronics_damage - burn_was)
 
 		parts -= picked
+
+/mob/living/silicon/robot/emp_act(severity)
+	uneq_all()
+	..() //Damage is handled at /silicon/ level.

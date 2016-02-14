@@ -263,14 +263,12 @@ var/list/organ_cache = list()
 	if(!(status & ORGAN_ROBOT))
 		return
 	switch (severity)
-		if (1.0)
-			take_damage(20)
-			return
-		if (2.0)
-			take_damage(7)
-			return
-		if(3.0)
+		if (1)
+			take_damage(9)
+		if (2)
 			take_damage(3)
+		if (3)
+			take_damage(1)
 
 /obj/item/organ/proc/removed(var/mob/living/user)
 
