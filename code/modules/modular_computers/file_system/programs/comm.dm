@@ -124,7 +124,7 @@
 					usr << "Please allow at least one minute to pass between announcements"
 					nanomanager.update_uis(src)
 					return
-				var/input = input(usr, "Please write a message to announce to the station crew.", "Priority Announcement")
+				var/input = input(usr, "Please write a message to announce to the station crew.", "Priority Announcement") as null|text
 				if(!input || !can_still_topic())
 					nanomanager.update_uis(src)
 					return
@@ -140,7 +140,7 @@
 							usr << "<span class='warning'>Arrays recycling. Please stand by.</span>"
 							nanomanager.update_uis(src)
 							return
-						var/input = sanitize(input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", ""))
+						var/input = sanitize(input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
 						if(!input || !can_still_topic())
 							nanomanager.update_uis(src)
 							return
@@ -160,7 +160,7 @@
 						usr <<"<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>"
 						nanomanager.update_uis(src)
 						return
-					var/input = sanitize(input("Please choose a message to transmit to [boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", ""))
+					var/input = sanitize(input("Please choose a message to transmit to [boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
 					if(!input || !can_still_topic())
 						nanomanager.update_uis(src)
 						return
