@@ -1,0 +1,4 @@
+author: Ccomp5950
+delete-after: True
+changes: 
+  - bugfix: "Mobs will now have the correct health indicator when they die.  X_X"
