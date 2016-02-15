@@ -363,6 +363,6 @@ var/list/organ_cache = list()
 /obj/item/organ/attack_self(mob/user as mob)
 
 	// Convert it to an edible form, yum yum.
-	if(!robotic && user.a_intent == "help" && user.zone_sel.selecting == "mouth")
+	if(!robotic && user.a_intent == I_HELP && user.zone_sel.selecting == "mouth")
 		bitten(user)
 		return
