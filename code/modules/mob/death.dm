@@ -76,8 +76,14 @@
 	drop_r_hand()
 	drop_l_hand()
 
+	//TODO:  Change death state to health_dead for all these icon files.  This is a stop gap.
+	 
 	if(healths)
-		healths.icon_state = "health6"
+		if("health7" in icon_states(healths.icon))
+			healths.icon_state = "health7"
+		else
+			healths.icon_state = "health6"
+			log_debug("[src] ([src.type]) died but does not have a valid health7 icon_state (using health6 instead). report this error to Ccomp5950 or your nearest Developer")
 
 	timeofdeath = world.time
 	if(mind) mind.store_memory("Time of death: [worldtime2text()]", 0)

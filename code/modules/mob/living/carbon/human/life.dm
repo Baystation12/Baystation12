@@ -1157,7 +1157,7 @@
 					I = overlays_cache[23]
 			damageoverlay.overlays += I
 
-		if(healths)
+		if(healths  && stat != DEAD) // They are dead, let death() handle their hud update on this.
 			if (analgesic > 100)
 				healths.icon_state = "health_numb"
 			else
