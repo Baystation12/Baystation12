@@ -26,7 +26,7 @@
 
 		if(!changeling)
 			return 0
-
+		changeling.chem_charges -= 10
 		var/old_regen_rate = H.mind.changeling.chem_recharge_rate
 
 		H << "<span class='notice'>We vanish from sight, and will remain hidden, so long as we move carefully.</span>"
@@ -40,7 +40,7 @@
 			src << "<span class='notice'>We are now truly invisible.</span>"
 			src.mind.changeling.recursive_enhancement = 0
 
-		while(H.m_intent == "walk" && H.mind.changeling.cloaked) //This loop will keep going until the player uncloaks.
+		while(H.m_intent == "walk" && H.mind.changeling.cloaked && !H.stat) //This loop will keep going until the player uncloaks.
 			if(mind.changeling.chem_recharge_rate != 0) //Without this, there is an exploit that can be done, if one buys engorged chem sacks while cloaked.
 				old_regen_rate += mind.changeling.chem_recharge_rate //Unfortunately, it has to occupy this part of the proc.  This fixes it while at the same time
 				mind.changeling.chem_recharge_rate = 0 //making sure nobody loses out on their bonus regeneration after they're done hiding.

@@ -36,6 +36,12 @@ proc/isdeaf(A)
 		return (M.sdisabilities & DEAF) || M.ear_deaf
 	return 0
 
+/mob/proc/get_ear_protection()
+	return 0
+
+/mob/proc/break_cloak()
+	return
+
 proc/hasorgans(A) // Fucking really??
 	return ishuman(A)
 

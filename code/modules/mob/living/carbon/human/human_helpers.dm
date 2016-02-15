@@ -37,6 +37,30 @@
 		return list(HUMAN_EATING_BLOCKED_MOUTH, blocked)
 	return list(HUMAN_EATING_NO_ISSUE)
 
+//This is called when we want different types of 'cloaks' to stop working, e.g. when attacking.
+/mob/living/carbon/human/break_cloak()
+	if(mind && mind.changeling) //Changeling visible camo
+		mind.changeling.cloaked = 0
+	if(istype(back, /obj/item/weapon/rig)) //Ninja cloak
+		var/obj/item/weapon/rig/suit = back
+		for(var/obj/item/rig_module/stealth_field/cloaker in suit.installed_modules)
+			if(cloaker.active)
+				cloaker.deactivate()
+
+/mob/living/carbon/human/get_ear_protection()
+	var/sum = 0
+	if(istype(l_ear, /obj/item/clothing/ears))
+		var/obj/item/clothing/ears/L = l_ear
+		sum += L.ear_protection
+	if(istype(r_ear, /obj/item/clothing/ears))
+		var/obj/item/clothing/ears/R = r_ear
+		sum += R.ear_protection
+	if(istype(head, /obj/item/clothing/head))
+		var/obj/item/clothing/head/H = head
+		sum += H.ear_protection
+	return sum
+
+
 #undef HUMAN_EATING_NO_ISSUE
 #undef HUMAN_EATING_NO_MOUTH
 #undef HUMAN_EATING_BLOCKED_MOUTH

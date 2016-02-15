@@ -22,8 +22,18 @@
 
 	var/datum/changeling/changeling = changeling_power(20,0,100,CONSCIOUS)
 	if(!changeling)	return 0
-	changeling.chem_charges -= 20
 
+	if(is_muzzled())
+		src << "<span class='danger'>Mmmf mrrfff!</span>"
+		return 0
+
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+		if(H.silent)
+			src << "<span class='danger'>You can't speak!</span>"
+			return 0
+
+	changeling.chem_charges -= 20
 	var/range = 4
 	if(src.mind.changeling.recursive_enhancement)
 		range = range * 2
@@ -33,13 +43,21 @@
 	for(var/mob/living/M in range(range, src))
 		if(iscarbon(M))
 			if(!M.mind || !M.mind.changeling)
+				if(M.get_ear_protection() >= 2)
+					continue
+				M << "<span class='danger'>You hear an extremely loud screeching sound!  It \
+				[pick("confuses","confounds","perturbs","befuddles","dazes","unsettles","disorients")] you.</span>"
 				M.adjustEarDamage(0,30)
 				M.confused += 20
+				M << sound('sound/effects/screech.ogg')
 			else
+				if(M != src)
+					M << "<span class='notice'>You hear a familiar screech from nearby.  It has no effect on you.</span>"
 				M << sound('sound/effects/screech.ogg')
 
 		if(issilicon(M))
 			M << sound('sound/weapons/flash.ogg')
+			M << "<span class='notice'>Auditory input overloaded.  Reinitializing...</span>"
 			M.Weaken(rand(5,10))
 
 	for(var/obj/machinery/light/L in range(range, src))
@@ -57,6 +75,17 @@
 
 	var/datum/changeling/changeling = changeling_power(20,0,100,CONSCIOUS)
 	if(!changeling)	return 0
+
+	if(is_muzzled())
+		src << "<span class='danger'>Mmmf mrrfff!</span>"
+		return 0
+
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+		if(H.silent)
+			src << "<span class='danger'>You can't speak!</span>"
+			return 0
+
 	changeling.chem_charges -= 20
 
 	var/range_heavy = 2
