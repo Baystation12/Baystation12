@@ -278,6 +278,9 @@
 	num_alternate_languages = 1 // potentially could be 2?
 	name_language = LANGUAGE_EAL
 
+	min_age = 1
+	max_age = 90
+
 	eyes = "blank_eyes"
 	brute_mod = 1.875 // 100% * 1.875 * 0.8 (robolimbs) ~= 150%
 	burn_mod = 1.875  // So they take 50% extra damage from brute/burn overall.
