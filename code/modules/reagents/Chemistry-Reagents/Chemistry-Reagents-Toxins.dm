@@ -11,6 +11,7 @@
 
 /datum/reagent/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(strength && alien != IS_DIONA)
+		if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
 		M.adjustToxLoss(strength * removed)
 
 /datum/reagent/toxin/plasticide
@@ -270,12 +271,17 @@
 /datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	if(dose < 1)
-		if(dose == metabolism * 2 || prob(5))
+
+	var/effective_dose = dose
+	if(issmall(M))
+		effective_dose *= 2
+
+	if(effective_dose < 1)
+		if(effective_dose == metabolism * 2 || prob(5))
 			M.emote("yawn")
-	else if(dose < 1.5)
+	else if(effective_dose < 1.5)
 		M.eye_blurry = max(M.eye_blurry, 10)
-	else if(dose < 5)
+	else if(effective_dose < 5)
 		if(prob(50))
 			M.Weaken(2)
 		M.drowsyness = max(M.drowsyness, 20)
@@ -295,16 +301,21 @@
 /datum/reagent/chloralhydrate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	if(dose == metabolism)
+
+	var/effective_dose = dose
+	if(issmall(M))
+		effective_dose *= 2
+
+	if(effective_dose == metabolism)
 		M.confused += 2
 		M.drowsyness += 2
-	else if(dose < 2)
+	else if(effective_dose < 2)
 		M.Weaken(30)
 		M.eye_blurry = max(M.eye_blurry, 10)
 	else
 		M.sleeping = max(M.sleeping, 30)
 
-	if(dose > 1)
+	if(effective_dose > 1)
 		M.adjustToxLoss(removed)
 
 /datum/reagent/chloralhydrate/beer2 //disguised as normal beer for use by emagged brobots
@@ -383,7 +394,7 @@
 		return
 	M.jitteriness = max(M.jitteriness - 5, 0)
 	if(prob(80))
-		M.adjustBrainLoss(3 * removed)
+		M.adjustBrainLoss(0.1 * removed)
 	if(prob(50))
 		M.drowsyness = max(M.drowsyness, 3)
 	if(prob(10))
@@ -415,12 +426,15 @@
 	if(alien == IS_DIONA)
 		return
 	M.druggy = max(M.druggy, 30)
-	if(dose < 1)
+
+	var/effective_dose = dose
+	if(issmall(M)) effective_dose *= 2
+	if(effective_dose < 1)
 		M.apply_effect(3, STUTTER)
 		M.make_dizzy(5)
 		if(prob(5))
 			M.emote(pick("twitch", "giggle"))
-	else if(dose < 2)
+	else if(effective_dose < 2)
 		M.apply_effect(3, STUTTER)
 		M.make_jittery(5)
 		M.make_dizzy(5)

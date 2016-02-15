@@ -176,3 +176,13 @@
 		this.blood_DNA["UNKNOWN BLOOD"] = "X*"
 	else if( istype(M, /mob/living/silicon/robot ))
 		new /obj/effect/decal/cleanable/blood/oil(src)
+
+/turf/simulated/proc/can_build_cable(var/mob/user)
+	return 0
+
+/turf/simulated/attackby(var/obj/item/thing, var/mob/user)
+	if(istype(thing, /obj/item/stack/cable_coil) && can_build_cable(user))
+		var/obj/item/stack/cable_coil/coil = thing
+		coil.turf_place(src, user)
+		return
+	return ..()

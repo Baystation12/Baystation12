@@ -303,7 +303,7 @@ BLIND     // can't see anything
 		return ..()
 
 /obj/item/clothing/head/attack_generic(var/mob/user)
-	if(!mob_wear_hat(user))
+	if(!istype(user) || !mob_wear_hat(user))
 		return ..()
 
 /obj/item/clothing/head/proc/mob_wear_hat(var/mob/user)

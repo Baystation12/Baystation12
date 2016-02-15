@@ -143,16 +143,6 @@
 		if(parent[3])
 			speech_problem_flag = 1
 
-		var/braindam = getBrainLoss()
-		if(braindam >= 60)
-			speech_problem_flag = 1
-			if(prob(braindam/4))
-				message = stutter(message)
-				verb = pick("stammers", "stutters")
-			if(prob(braindam))
-				message = uppertext(message)
-				verb = "yells loudly"
-
 	var/list/returns[3]
 	returns[1] = message
 	returns[2] = verb

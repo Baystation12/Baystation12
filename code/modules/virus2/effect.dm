@@ -228,7 +228,7 @@
 			if (B && B.damage < B.min_broken_damage)
 				B.take_damage(5)
 		else
-			mob.setBrainLoss(50)
+			mob.setBrainLoss(10)
 
 /datum/disease2/effect/hallucinations
 	name = "Hallucinational Syndrome"

@@ -102,7 +102,7 @@
 	usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
 	climbers |= user
 
-	if(!do_after(user,50))
+	if(!do_after(user,(issmall(user) ? 30 : 50)))
 		climbers -= user
 		return
 
@@ -183,6 +183,6 @@
 	if(!breakable || !damage || !wallbreaker)
 		return 0
 	visible_message("<span class='danger'>[user] [attack_verb] the [src] apart!</span>")
-	user.do_attack_animation(src)
+	attack_animation(user)
 	spawn(1) qdel(src)
 	return 1

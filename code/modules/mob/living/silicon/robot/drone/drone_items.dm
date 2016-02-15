@@ -311,7 +311,7 @@
 					glass.add_charge(250)
 			else
 				continue
-		else if(istype(W,/obj/effect/decal/remains/robot))
+		else if(istype(W,/obj/item/remains/robot))
 			if(metal)
 				metal.add_charge(2000)
 			if(plastic)

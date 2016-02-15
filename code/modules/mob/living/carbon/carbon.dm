@@ -4,7 +4,6 @@
 	ingested = new/datum/reagents/metabolism(1000, src, CHEM_INGEST)
 	touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
 	reagents = bloodstr
-
 	..()
 
 /mob/living/carbon/Life()
@@ -36,9 +35,9 @@
 	. = ..()
 	if(.)
 		if(src.nutrition && src.stat != 2)
-			src.nutrition -= HUNGER_FACTOR/10
+			src.nutrition -= DEFAULT_HUNGER_FACTOR/10
 			if(src.m_intent == "run")
-				src.nutrition -= HUNGER_FACTOR/10
+				src.nutrition -= DEFAULT_HUNGER_FACTOR/10
 		if((FAT in src.mutations) && src.m_intent == "run" && src.bodytemperature <= 360)
 			src.bodytemperature += 2
 

@@ -437,7 +437,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Medical"
 
 /datum/supply_packs/cryobag
-	name = "Statis bag crate"
+	name = "Stasis bag crate"
 	contains = list(/obj/item/bodybag/cryobag,
 				    /obj/item/bodybag/cryobag,
 	    			/obj/item/bodybag/cryobag)

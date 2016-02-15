@@ -125,7 +125,7 @@ var/list/organ_cache = list()
 		if(germ_level >= INFECTION_LEVEL_THREE)
 			die()
 
-	else if(owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
+	else if(owner && owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
 		//** Handle antibiotics and curing infections
 		handle_antibiotics()
 		handle_rejection()
@@ -203,7 +203,9 @@ var/list/organ_cache = list()
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()
-	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	var/antibiotics = 0
+	if(owner)
+		antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 
 	if (!germ_level || antibiotics < 5)
 		return
