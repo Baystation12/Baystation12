@@ -72,6 +72,9 @@
 /turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
 
 	radiate()
+	if(!istype(user))
+		return
+
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/rotting = (locate(/obj/effect/overlay/wallrot) in src)
 	if(!damage || !wallbreaker)

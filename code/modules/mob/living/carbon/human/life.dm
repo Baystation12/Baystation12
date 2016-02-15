@@ -51,9 +51,6 @@
 	if(wearing_rig && wearing_rig.offline)
 		wearing_rig = null
 
-	in_stasis = istype(loc, /obj/structure/closet/body_bag/cryobag) && loc:opened == 0
-	if(in_stasis) loc:used++
-
 	..()
 
 	if(life_tick%30==15)
@@ -205,17 +202,6 @@
 		speech_problem_flag = 1
 		if (prob(10))
 			stuttering = max(10, stuttering)
-	// No. -- cib
-	/*if (getBrainLoss() >= 60 && stat != 2)
-		if (prob(3))
-			switch(pick(1,2,3))
-				if(1)
-					say(pick("IM A PONY NEEEEEEIIIIIIIIIGH", "without oxigen blob don't evoluate?", "CAPTAINS A COMDOM", "[pick("", "that meatball traitor")] [pick("joerge", "george", "gorge", "gdoruge")] [pick("mellens", "melons", "mwrlins")] is grifing me HAL;P!!!", "can u give me [pick("telikesis","halk","eppilapse")]?", "THe saiyans screwed", "Bi is THE BEST OF BOTH WORLDS>", "I WANNA PET TEH monkeyS", "stop grifing me!!!!", "SOTP IT#"))
-				if(2)
-					say(pick("FUS RO DAH","fucking 4rries!", "stat me", ">my face", "roll it easy!", "waaaaaagh!!!", "red wonz go fasta", "FOR TEH EMPRAH", "lol2cat", "dem dwarfs man, dem dwarfs", "SPESS MAHREENS", "hwee did eet fhor khayosss", "lifelike texture ;_;", "luv can bloooom", "PACKETS!!!"))
-				if(3)
-					emote("drool")
-	*/
 
 	if(stat != DEAD)
 		var/rn = rand(0, 200)
@@ -928,7 +914,7 @@
 
 	// nutrition decrease
 	if (nutrition > 0 && stat != 2)
-		nutrition = max (0, nutrition - HUNGER_FACTOR)
+		nutrition = max (0, nutrition - species.hunger_factor)
 
 	if (nutrition > 450)
 		if(overeatduration < 600) //capped so people don't take forever to unfat

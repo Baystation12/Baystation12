@@ -135,8 +135,7 @@
 	on_hit(var/atom/target, var/blocked = 0)
 		if(ishuman(target))
 			var/mob/living/carbon/human/M = target
-			M.adjustBrainLoss(20)
-			M.hallucination += 20
+			M.confused += rand(5,8)
 /obj/item/projectile/chameleon
 	name = "bullet"
 	icon_state = "bullet"

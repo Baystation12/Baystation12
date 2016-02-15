@@ -19,7 +19,7 @@
 	var/minimal_player_age = 0            // If you have use_age_restriction_for_jobs config option enabled and the database set up, this option will add a requirement for players to be at least minimal_player_age days old. (meaning they first signed in at least that many days before.)
 	var/department = null                 // Does this position have a department tag?
 	var/head_position = 0                 // Is this position Command?
-	var/minimum_character_age = 17
+	var/minimum_character_age = 0
 	var/ideal_character_age = 30
 
 	var/account_allowed = 1				  // Does this job type come with a station account?
@@ -56,7 +56,7 @@
 	var/species_modifier = (H.species ? economic_species_modifier[H.species.type] : 2)
 	if(!species_modifier)
 		species_modifier = economic_species_modifier[/datum/species/human]
-	
+
 	var/money_amount = (rand(5,50) + rand(5, 50)) * loyalty * economic_modifier * species_modifier
 	var/datum/money_account/M = create_account(H.real_name, money_amount, null)
 	if(H.mind)

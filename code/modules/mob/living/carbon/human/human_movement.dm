@@ -13,7 +13,7 @@
 	if(CE_SPEEDBOOST in chem_effects)
 		return -1
 
-	var/health_deficiency = (100 - health)
+	var/health_deficiency = (maxHealth - health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 
 	if (!(species && (species.flags & NO_PAIN)))

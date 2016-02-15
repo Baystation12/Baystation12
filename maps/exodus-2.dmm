@@ -1852,7 +1852,7 @@
 "Kg" = (/turf/unsimulated/wall/fakeglass{dir = 1; icon_state = "fakewindows"},/area/wizard_station)
 "Kh" = (/turf/unsimulated/wall/fakeglass{icon_state = "fakewindows"; dir = 4},/area/wizard_station)
 "Kj" = (/obj/machinery/door/airlock/external{req_access = list(150)},/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_mothership{name = "\improper Raider Base"})
-"Kk" = (/obj/effect/decal/remains/human,/turf/unsimulated/floor{tag = "icon-lava"; name = "plating"; icon_state = "lava"},/area/wizard_station)
+"Kk" = (/obj/item/remains/human,/turf/unsimulated/floor{tag = "icon-lava"; name = "plating"; icon_state = "lava"},/area/wizard_station)
 "Kl" = (/turf/unsimulated/floor{tag = "icon-lava"; name = "plating"; icon_state = "lava"},/area/wizard_station)
 "Km" = (/obj/machinery/recharger,/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/acting/backstage)
 "Kn" = (/obj/machinery/papershredder,/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/acting/backstage)
