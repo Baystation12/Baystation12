@@ -1,0 +1,7 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - rscadd: "Sharp objects now have a greater chance of causing bleeding."
+  - rscadd: "Can now pour reagent containers down the sink."
+  - tweak: "Wrapped parcels now take on the size of the wrapped object."
+  - tweak: "Security vests now only protect the torso, arms and other limbs are fair game."
