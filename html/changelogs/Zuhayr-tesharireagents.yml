@@ -1,9 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - rscadd: "Small species now take smaller bites/gulps from food and drink."
-  - rscadd: "Small species are now effected by alchol and toxins twice as much."
-  - rscadd: "blood_volume is now a species-level var and Resomi have lowered blood volume."
-  - rscadd: "Hunger is a species var and Resomi get hungry faster."
-  - rscadd: "Small mobs have a reduced climb delay."
-  - rscadd: "Resomi gain more nutrition from meat."
