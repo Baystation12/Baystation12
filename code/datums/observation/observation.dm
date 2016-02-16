@@ -73,7 +73,7 @@
 
 	// Return whether anything is listening to a source, if no listener is given.
 	if (!listener)
-		return global_listeners.len || event_source in event_sources
+		return global_listeners.len || (event_source in event_sources)
 
 	// Return false if nothing is associated with that source.
 	if (!(event_source in event_sources))
@@ -93,7 +93,7 @@
 	if (!callback)
 		return FALSE
 
-	return proc_call in callback
+	return (proc_call in callback)
 
 /decl/observ/proc/has_listeners(var/event_source)
 	return is_listening(event_source)
@@ -127,7 +127,7 @@
 
 /decl/observ/proc/unregister(var/event_source, var/datum/listener, var/proc_call)
 	// Sanity.
-	if (!(event_source && listener && event_source in event_sources))
+	if (!(event_source && listener && (event_source in event_sources)))
 		return FALSE
 
 	// Return false if nothing is listening for this event.
@@ -150,12 +150,9 @@
 		return FALSE
 
 	// See if the callback exists.
-	var/index = callbacks.Find(proc_call)
-	if (!index)
+	if(!callbacks.Remove(proc_call))
 		return FALSE
 
-	// Remove the callback and do some cleanup.
-	callbacks.Cut(index, index + 1)
 	if (!callbacks.len)
 		listeners -= listener
 	if (!listeners.len)
@@ -179,7 +176,7 @@
 
 /decl/observ/proc/unregister_global(var/datum/listener, var/proc_call)
 	// Return false unless the listener is set as a global listener.
-	if (!(listener && listener in global_listeners))
+	if (!(listener && (listener in global_listeners)))
 		return FALSE
 
 	// Remove all callbacks if no specific one is given.
