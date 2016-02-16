@@ -132,6 +132,9 @@
 		admins += src
 		holder.owner = src
 
+	if(is_vip(src))
+		add_vip_verbs()
+
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
 	prefs = preferences_datums[ckey]
 	if(!prefs)

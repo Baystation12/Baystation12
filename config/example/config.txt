@@ -74,6 +74,9 @@ LOG_PDA
 ## log admin warning messages
 ##LOG_ADMINWARN  ## Also duplicates a bunch of other messages.
 
+## log VIP channel
+LOG_VIP
+
 ## sql switching
 # SQL_ENABLED
 

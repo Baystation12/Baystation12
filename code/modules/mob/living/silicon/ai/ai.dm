@@ -317,7 +317,7 @@ var/list/ai_verbs_default = list(
 		return
 
 	if (!custom_sprite)
-		var/new_sprite = input("Select an icon!", "AI", selected_sprite) as null|anything in ai_icons
+		var/new_sprite = input("Select an icon!", "AI", selected_sprite) as null|anything in ai_icons(src)
 		if(new_sprite) selected_sprite = new_sprite
 	updateicon()
 

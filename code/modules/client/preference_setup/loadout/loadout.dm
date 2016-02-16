@@ -10,7 +10,6 @@ var/list/gear_datums = list()
 	..()
 
 /hook/startup/proc/populate_gear_list()
-
 	//create a list of gear datums to sort
 	for(var/geartype in typesof(/datum/gear)-/datum/gear)
 		var/datum/gear/G = geartype
@@ -45,7 +44,7 @@ var/list/gear_datums = list()
 	var/list/valid_gear_choices = list()
 	for(var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
-		if(G.whitelisted && !is_alien_whitelisted(preference_mob(), G.whitelisted))
+		if(!G.can_use(preference_mob()))
 			continue
 		if(max_cost && G.cost > max_cost)
 			continue
@@ -149,5 +148,11 @@ var/list/gear_datums = list()
 	var/list/allowed_roles //Roles that can spawn with this item.
 	var/whitelisted        //Term to check the whitelist for..
 	var/sort_category = "General"
+	var/vip_only = FALSE   //Whether this gear is restricted to VIP members or not.
 
-
+/datum/gear/proc/can_use(var/mob/M)
+	if(whitelisted && !is_alien_whitelisted(M, whitelisted))
+		return FALSE
+	if(vip_only && !is_vip(M.client))
+		return FALSE
+	return TRUE

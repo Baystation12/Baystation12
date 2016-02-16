@@ -1,0 +1,4 @@
+#########################################
+# VIP users get cosmetic perks in game. #
+# Add one ckey per line.                #
+#########################################
