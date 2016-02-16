@@ -5,7 +5,6 @@
 	set category = "OOC"
 	set name = "Vsay"
 	set desc = "VIP channel, only seen by other VIPs."
-	set hidden = 1
 
 	if(!is_vip(src))
 		return
@@ -17,9 +16,14 @@
 	msg = sanitize(msg)
 	if (!msg)
 		return
-	log_vip("[mob.name]/[key] : [msg]")
+
+	// Reusing CHAT_OOC because we've run out of preference toggles.
+	if(!may_ooc_checks(msg, config.vsay_allowed, CHAT_OOC, MUTE_VSAY, FALSE))
+		return
+
+	log_vsay("[mob.name]/[key] : [msg]")
 	for(var/client/C in clients)
-		if(!is_vip(C))
+		if(!(is_vip(C) && (prefs.toggles & CHAT_OOC)))
 			continue
 		C << "<span class='vip_channel'>" + create_text_tag("vip", "VIP:", C) + " <span class='name'>[src.key]</span>: <span class='message'>[msg]</span></span>"
 
@@ -41,10 +45,10 @@
 	usr << "<b>VIPs:</b>"
 	for(var/tkey in vips) usr << "- [tkey]"
 
-/mob/Login()
+/client/New()
 	..()
-	if(client.IsByondMember())
-		vips |= client.ckey
+	if(IsByondMember())
+		vips |= ckey
 
 /client/proc/add_vip_verbs()
 	verbs |= /client/proc/cmd_vip_say

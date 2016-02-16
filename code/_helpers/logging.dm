@@ -56,9 +56,9 @@
 	if (config.log_ooc)
 		game_log("OOC", text)
 		
-/proc/log_vip(text)
-	if (config.log_vip)
-		game_log("VIP", text)
+/proc/log_vsay(text)
+	if (config.log_vsay)
+		game_log("VSAY", text)
 
 /proc/log_whisper(text)
 	if (config.log_whisper)
