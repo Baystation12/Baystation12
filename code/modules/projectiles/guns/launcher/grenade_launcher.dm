@@ -43,13 +43,16 @@
 			user << "\A [chambered] is chambered."
 
 /obj/item/weapon/gun/launcher/grenade/proc/load(obj/item/weapon/grenade/G, mob/user)
-	if(grenades.len >= max_grenades)
-		user << "<span class='warning'>[src] is full.</span>"
+	if(G.loadable)
+		if(grenades.len >= max_grenades)
+			user << "<span class='warning'>[src] is full.</span>"
+			return
+		user.remove_from_mob(G)
+		G.loc = src
+		grenades.Insert(1, G) //add to the head of the list, so that it is loaded on the next pump
+		user.visible_message("[user] inserts \a [G] into [src].", "<span class='notice'>You insert \a [G] into [src].</span>")
 		return
-	user.remove_from_mob(G)
-	G.loc = src
-	grenades.Insert(1, G) //add to the head of the list, so that it is loaded on the next pump
-	user.visible_message("[user] inserts \a [G] into [src].", "<span class='notice'>You insert \a [G] into [src].</span>")
+	user << "<span class='warning'>[G] doesn't seem to fit in the [src]!</span>"
 
 /obj/item/weapon/gun/launcher/grenade/proc/unload(mob/user)
 	if(grenades.len)
@@ -99,13 +102,16 @@
 
 //load and unload directly into chambered
 /obj/item/weapon/gun/launcher/grenade/underslung/load(obj/item/weapon/grenade/G, mob/user)
-	if(chambered)
-		user << "<span class='warning'>[src] is already loaded.</span>"
+	if(G.loadable)
+		if(chambered)
+			user << "<span class='warning'>[src] is already loaded.</span>"
+			return
+		user.remove_from_mob(G)
+		G.loc = src
+		chambered = G
+		user.visible_message("[user] load \a [G] into [src].", "<span class='notice'>You load \a [G] into [src].</span>")
 		return
-	user.remove_from_mob(G)
-	G.loc = src
-	chambered = G
-	user.visible_message("[user] load \a [G] into [src].", "<span class='notice'>You load \a [G] into [src].</span>")
+	user << "<span class='warning'>[G] doesn't seem to fit in the [src]!</span>"
 
 /obj/item/weapon/gun/launcher/grenade/underslung/unload(mob/user)
 	if(chambered)
