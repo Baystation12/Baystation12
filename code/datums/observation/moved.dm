@@ -1,7 +1,7 @@
 //	Observer Pattern Implementation: Moved
 //		Registration type: /atom/movable
 //
-//		Raised when: An /atom/movable instance has moved.
+//		Raised when: An /atom/movable instance has moved using Move() or forceMove().
 //
 //		Arguments that the called proc should expect:
 //			/atom/movable/moving_instance: The instance that moved
