@@ -14,8 +14,8 @@
 	name = "fragmentation grenade"
 	desc = "A military fragmentation grenade, designed to explode in a deadly shower of fragments."
 	icon_state = "frag"
-	loadable = null
-	
+	loadable = FALSE
+
 	var/num_fragments = 200  //total number of fragments produced by the grenade
 	var/fragment_damage = 15
 	var/damage_step = 2      //projectiles lose a fragment each time they travel this distance. Can be a non-integer.
