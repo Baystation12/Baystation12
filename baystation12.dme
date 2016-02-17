@@ -707,7 +707,6 @@
 #include "code\game\objects\items\weapons\grenades\emgrenade.dm"
 #include "code\game\objects\items\weapons\grenades\explosive.dm"
 #include "code\game\objects\items\weapons\grenades\flashbang.dm"
-#include "code\game\objects\items\weapons\grenades\fragmentation.dm"
 #include "code\game\objects\items\weapons\grenades\grenade.dm"
 #include "code\game\objects\items\weapons\grenades\smokebomb.dm"
 #include "code\game\objects\items\weapons\grenades\spawnergrenade.dm"
