@@ -10,6 +10,7 @@
 	invocation_type = SpI_SHOUT
 	range = 7
 	max_targets = 1
+	level_max = list(Sp_TOTAL = 4, Sp_SPEED = 4, Sp_POWER = 1)
 	cooldown_min = 30 //30 deciseconds reduction per rank
 	selection_type = "range"
 
@@ -31,9 +32,16 @@
 /spell/targeted/equip_item/horsemask/summon_item(var/new_type)
 	var/obj/item/new_item = new new_type
 	new_item.canremove = 0		//curses!
-	new_item.unacidable = 1
 	if(istype(new_item, /obj/item/clothing/mask/horsehead))
 		var/obj/item/clothing/mask/horsehead/magichead = new_item
 		magichead.flags_inv = null	//so you can still see their face
 		magichead.voicechange = 1	//NEEEEIIGHH
 	return new_item
+
+/spell/targeted/equip_item/horsemask/empower_spell()
+	if(!..())
+		return 0
+
+	spell_flags = SELECTABLE
+
+	return "You can now select your target with [src]"

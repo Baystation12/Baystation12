@@ -38,6 +38,7 @@ code\game\dna\genes\goon_powers.dm
 	invocation = "STI KALY"
 	invocation_type = SpI_WHISPER
 	message = "<span class='danger'>Your eyes cry out in pain!</span>"
+	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 1, Sp_POWER = 3)
 	cooldown_min = 50
 
 	range = 7
@@ -47,6 +48,13 @@ code\game\dna\genes\goon_powers.dm
 	amt_eye_blurry = 20
 
 	hud_state = "wiz_blind"
+
+/spell/targeted/genetic/blind/empower_spell()
+	if(!..())
+		return 0
+	duration += 100
+
+	return "[src] will now blind for a longer period of time."
 
 /spell/targeted/genetic/mutate
 	name = "Mutate"
@@ -63,6 +71,8 @@ code\game\dna\genes\goon_powers.dm
 
 	mutations = list(LASER, HULK)
 	duration = 300
-	cooldown_min = 300 //25 deciseconds reduction per rank
+
+	level_max = list(Sp_TOTAL = 1, Sp_SPEED = 1, Sp_POWER = 0)
+	cooldown_min = 300
 
 	hud_state = "wiz_hulk"

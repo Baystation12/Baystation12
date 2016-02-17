@@ -9,6 +9,7 @@
 	invocation_type = SpI_NONE
 	range = -1
 	max_targets = 1
+	level_max = list(Sp_TOTAL = 4, Sp_SPEED = 4, Sp_POWER = 3)
 	cooldown_min = 100 //50 deciseconds reduction per rank
 	duration = 50 //in deciseconds
 
@@ -54,6 +55,14 @@
 			target.client.eye = target
 			qdel(animation)
 			qdel(holder)
+
+
+/spell/targeted/ethereal_jaunt/empower_spell()
+	if(!..())
+		return 0
+	duration += 20
+
+	return "[src] now lasts longer."
 
 /spell/targeted/ethereal_jaunt/proc/jaunt_disappear(var/atom/movable/overlay/animation, var/mob/living/target)
 	animation.icon_state = "liquify"
