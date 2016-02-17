@@ -35,4 +35,4 @@ delete-after: True
 changes: 
   - rscadd: "Added the Assembly System."
   - rscadd: "Added the Intelligun."
-  - tweak:  "Some wires can be diagnosed to see what they do."
+  - rscadd:  "Some wires can be diagnosed to see what they do."
