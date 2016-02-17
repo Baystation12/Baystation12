@@ -103,8 +103,8 @@
 			attached_overlays += "prox_scanning"
 		if(holder)
 			holder.update_icon()
-		if(holder && istype(holder.loc,/obj/item/weapon/grenade/chem_grenade))
-			var/obj/item/weapon/grenade/chem_grenade/grenade = holder.loc
+		if(holder && istype(holder.loc,/obj/item/device/assembly_holder/grenade/chem_grenade))
+			var/obj/item/device/assembly_holder/grenade/chem_grenade/grenade = holder.loc
 			grenade.primed(scanning)
 		return
 

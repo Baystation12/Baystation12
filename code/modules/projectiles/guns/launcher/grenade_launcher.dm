@@ -12,7 +12,7 @@
 	throw_distance = 7
 	release_force = 5
 
-	var/obj/item/weapon/grenade/chambered
+	var/obj/item/device/assembly_holder/grenade/chambered
 	var/list/grenades = new/list()
 	var/max_grenades = 5 //holds this + one in the chamber
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
@@ -21,7 +21,7 @@
 /obj/item/weapon/gun/launcher/grenade/proc/pump(mob/M as mob)
 	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
 
-	var/obj/item/weapon/grenade/next
+	var/obj/item/device/assembly_holder/grenade/next
 	if(grenades.len)
 		next = grenades[1] //get this first, so that the chambered grenade can still be removed if the grenades list is empty
 	if(chambered)
@@ -42,7 +42,7 @@
 		if(chambered)
 			user << "\A [chambered] is chambered."
 
-/obj/item/weapon/gun/launcher/grenade/proc/load(obj/item/weapon/grenade/G, mob/user)
+/obj/item/weapon/gun/launcher/grenade/proc/load(obj/item/device/assembly_holder/grenade/G, mob/user)
 	if(grenades.len >= max_grenades)
 		user << "<span class='warning'>[src] is full.</span>"
 		return
@@ -53,7 +53,7 @@
 
 /obj/item/weapon/gun/launcher/grenade/proc/unload(mob/user)
 	if(grenades.len)
-		var/obj/item/weapon/grenade/G = grenades[grenades.len]
+		var/obj/item/device/assembly_holder/grenade/G = grenades[grenades.len]
 		grenades.len--
 		user.put_in_hands(G)
 		user.visible_message("[user] removes \a [G] from [src].", "<span class='notice'>You remove \a [G] from [src].</span>")
@@ -64,7 +64,7 @@
 	pump(user)
 
 /obj/item/weapon/gun/launcher/grenade/attackby(obj/item/I, mob/user)
-	if((istype(I, /obj/item/weapon/grenade)))
+	if((istype(I, /obj/item/device/assembly_holder/grenade)))
 		load(I, user)
 	else
 		..()
@@ -77,8 +77,7 @@
 
 /obj/item/weapon/gun/launcher/grenade/consume_next_projectile()
 	if(chambered)
-		chambered.det_time = 10
-		chambered.activate(null)
+		chambered.prime()
 	return chambered
 
 /obj/item/weapon/gun/launcher/grenade/handle_post_fire(mob/user)
@@ -98,7 +97,7 @@
 	return
 
 //load and unload directly into chambered
-/obj/item/weapon/gun/launcher/grenade/underslung/load(obj/item/weapon/grenade/G, mob/user)
+/obj/item/weapon/gun/launcher/grenade/underslung/load(obj/item/device/assembly_holder/grenade/G, mob/user)
 	if(chambered)
 		user << "<span class='warning'>[src] is already loaded.</span>"
 		return

@@ -81,3 +81,43 @@ proc/Ellipsis(original_msg, chance = 50)
 	new_msg = list2text(new_words," ")
 
 	return new_msg
+
+//Makes messages get gradually more distorted throughout the message.
+proc/RadioChat(message, distortion_chance = 60, distortion_speed = 1)
+	var/new_message = ""
+	var/progress = 1
+	var/list/string = string_explode(message, " ")
+	for(var/i=1, i<=string.len, i++)
+		var/character_index = length(string[i])
+		while(character_index > 0)
+			var/temp = 0
+			var/newletter = copytext(string[i], character_index, character_index+1)
+			if(newletter != " ")
+				if(prob(distortion_chance * progress) && newletter != ".")
+					if(prob(0.25 * progress))
+						newletter = pick("*zzzt*", "...", "- ") // Audible minor cutout
+						i += rand(1, (length(message) - i))
+						temp += 1
+					else if(prob(1 * progress))
+						newletter = "..." // Random silences
+						temp += 0.25
+					else if(prob(1.5 * progress))
+						newletter =	pick("a","e","i","o","u") // Minor mishearing.
+						temp += 0.25
+					else if(prob(1.25 * progress))
+						newletter = pick("ø", "Ð", "%", "æ", "µ") // Major mishearings
+						temp += 0.5
+					else if(prob(0.01 * progress))
+						newletter = "¦w¡¼b»%>-BZZT-"	 // Audible major cutout
+						new_message += newletter
+						break
+			else
+				if(prob(2 * progress))
+					newletter = " *crackle* "
+					progress += 0.25 * distortion_speed
+			new_message += newletter
+			progress += temp * distortion_speed
+			temp = 0
+			character_index--
+	return new_message
+
