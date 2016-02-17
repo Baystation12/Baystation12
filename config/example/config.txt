@@ -357,8 +357,8 @@ EVENT_CUSTOM_START_MAJOR 80;100
 ## Uncomment to disable ghost chat by default.
 #DISABLE_DSAY
 
-## Uncomment to disable VIP chat by default.
-#DISABLE_VSAY
+## Uncomment to enable VIP chat by default.
+#ENABLE_VSAY
 
 ## Uncomment to disable respawning by default.
 #DISABLE_RESPAWN

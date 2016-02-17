@@ -209,7 +209,7 @@ var/list/gamemode_cache = list()
 	var/looc_allowed = 1
 	var/dooc_allowed = 1
 	var/dsay_allowed = 1
-	var/vsay_allowed = TRUE
+	var/vsay_allowed = FALSE
 
 	var/starlight = 0	// Whether space turfs have ambient light or not
 
@@ -455,8 +455,8 @@ var/list/gamemode_cache = list()
 				if ("disable_dsay")
 					config.dsay_allowed = 0
 
-				if ("disable_vsay")
-					config.vsay_allowed = FALSE
+				if ("enable_vsay")
+					config.vsay_allowed = TRUE
 
 				if ("disable_respawn")
 					config.abandon_allowed = 0
