@@ -105,7 +105,6 @@
 	..()
 
 /obj/item/device/assembly_holder/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	user.set_machine(user)
 	update_holder()
 	var/list/data = list()
 	var/list/devices = list()
@@ -558,28 +557,29 @@
 	//This is so individual devices still interact with them.
 	//TODO: Modular way to do this. This is hideous.
 	if(istype(O, /obj/item/stack/) || istype(O, /obj/item/weapon/module/power_control))
+		var/obj/item/stack/S = O
 		if(istype(O, /obj/item/stack/material/steel))
 			if(upgraded["steel"] < 15)
-				if(O:can_use(5))
-					O:use(5)
+				if(S.can_use(5))
+					S.use(5)
 					user << "<span class='notice'>You expand \the [src]'s frame!</span>"
 					upgraded["steel"] += 5
 		else if(istype(O, /obj/item/stack/cable_coil))
 			if(upgraded["cable"] < 10)
-				if(O:can_use(5))
-					O:use(5)
+				if(S.can_use(5))
+					S.use(5)
 					user << "<span class='notice'>You expand \the [src]'s circuitry!</span>"
 					upgraded["cable"] += 5
 		else if(istype(O, /obj/item/stack/rods))
 			if(upgraded["rods"] < 5)
-				if(O:can_use(5))
-					O:use(5)
+				if(S.can_use(5))
+					S.use(5)
 					user << "<span class='notice'>You expand \the [src]'s internal support!</span>"
 					upgraded["rods"] = 5
 		else if(istype(O, /obj/item/stack/material/plasteel))
 			if(upgraded["plasteel"] < 1)
-				if(O:can_use(1))
-					O:use(1)
+				if(S.can_use(1))
+					S.use(1)
 					user << "<span class='notice'>You reinforce \the [src]'s frame!</span>"
 					upgraded["plasteel"] = 1
 		else if(istype(O, /obj/item/weapon/module/power_control))

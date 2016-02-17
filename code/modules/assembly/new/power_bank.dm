@@ -33,7 +33,7 @@
 			O.loc = src
 			usr << "<span class='notice'>You install \the [O] into \the [src]!</span>"
 		else
-			usr << "<span class='notice;>\The [src] cannot fit the [O]!</span>"
+			usr << "<span class='notice'>\The [src] cannot fit the [O]!</span>"
 	if(istype(O, /obj/item/weapon/screwdriver))
 		if(!cells.len)
 			user << "<span class='warning'>\The [src] holds no cells!</span>"

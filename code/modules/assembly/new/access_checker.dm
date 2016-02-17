@@ -29,16 +29,13 @@
 
 	receive_data(var/list/data)
 		add_debug_log("Data Process Begun \[[src]\]")
-		world << "len:[data.len]"
 		var/match_count = 0
 		for(var/N in data)
 			world << "Data:[N]"
 			var/access = text2num(N)
-			world << "Access:[access]"
 			if(access && access in get_all_accesses())
 				if(access in access_required)
 					match_count++
-		world << "[match_count]/[access_required.len]"
 		switch(access_levels_required)
 			if("One")
 				if(match_count)
