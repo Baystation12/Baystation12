@@ -14,7 +14,6 @@
 /obj/item/weapon/gun/energy/advanced/proc/insert_pai(var/obj/item/device/paicard/card)
 	if(held_pai) return
 	if(card.pai)
-		world << "Inserting pAI"
 		card.loc = src
 		held_pai = card
 		card.pai << "You've been inserted into \the [src]"
@@ -43,7 +42,6 @@
 				return
 			card.pai << "Initiating control software.."
 			spawn(50)
-				world << "Adding verbs!"
 				held_pai.pai.verbs += /obj/item/weapon/gun/energy/advanced/proc/access_interface
 				held_pai.pai.verbs += /obj/item/weapon/gun/energy/advanced/proc/speech
 				held_pai.pai.verbs += /obj/item/weapon/gun/energy/advanced/verb/eject_pai
@@ -174,7 +172,6 @@
 	for(var/obj/item/weapon/gun/energy/advanced/A in T.loc)
 		if(A.held_pai.pai == usr) gun = A
 	if(!gun) return
-	world << "Speaking"
 	if(findtext(message, ";", 1, 1) || findtext(message, ":s", 1, 1))
 		gun.radio.autosay(message, ai_name, "Security")
 		return
@@ -214,7 +211,6 @@
 	for(var/obj/item/weapon/gun/energy/advanced/A in T.loc)
 		if(A.held_pai.pai == usr) gun = A
 	if(!gun) return
-	world << "Interacting!"
 	gun.ui_interact(usr, state = contained_state)
 
 /obj/item/weapon/gun/energy/advanced/proc/hack_into()
@@ -245,7 +241,7 @@
 							gun.reliability -= (rand(1, 20))
 							gun.spark()
 							spawn(15)
-								gun.speak("<span class='danger'>-BZZT-", 0, 1)
+								gun.speak("<span class='danger'>-BZZT-</span>", 0, 1)
 						return
 					usr.verbs += /obj/item/weapon/gun/energy/advanced/proc/shutdown_auto_ai
 					usr << "<span class='warning'>AI Programming shutdown pending activation.</span>"

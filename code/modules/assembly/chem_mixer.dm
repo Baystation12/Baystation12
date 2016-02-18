@@ -36,7 +36,7 @@
 		else
 			if(W.reagents.total_volume)
 				user << "<span class='notice'>You add \the [W] to the assembly.</span>"
-				user.drop_item()
+				user.remove_from_mob(src)
 				W.loc = src
 				beakers += W
 			else

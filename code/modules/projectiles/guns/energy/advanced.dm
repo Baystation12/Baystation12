@@ -315,7 +315,7 @@
 			else if(ai)
 				user << "<span class='notice'>[src] already has an AI installed!</span>"
 				return
-			user.visible_message("<span class='notice'>[user] inserts the [card] into [src].</span>", "<span clss='notice'>You insert the [card] into [src]</span>")
+			user.visible_message("<span class='notice'>[user] inserts the [card] into [src].</span>", "<span class='notice'>You insert the [card] into [src]</span>")
 			user.drop_item()
 			card.loc = src
 			ai = card
@@ -639,7 +639,6 @@
 		return target
 
 /obj/item/weapon/gun/energy/advanced/hear_talk(var/mob/M, message, var/verb="says", datum/language/speaking=null)
-	world << "Hear talk"
 	if(intelligun_status & INTELLIGUN_BACKUP_POWER)
 		return
 	if(can_use_charge(3))

@@ -112,7 +112,7 @@ var/const/WIRE_ASSEMBLY_PASSWORD = 16384 // All assemblies have these
 		if(A.wires & WIRE_MISC_SPECIAL)
 			. += "<br>The <font color=#FF00FF>pink</font> light is [A.active_wires & WIRE_MISC_SPECIAL ? "[on]" : "[off]"]"
 		if(A.wires & WIRE_MISC_CONNECTION)
-			. += "<br>The <font color=#FFFFFF>white<?/font> light is [A.active_wires & WIRE_MISC_CONNECTION ? "[on]" : "[off]"]<br><hr>"
+			. += "<br>The <font color=#FFFFFF>white</font> light is [A.active_wires & WIRE_MISC_CONNECTION ? "[on]" : "[off]"]<br><hr>"
 		if(A.wires & WIRE_ASSEMBLY_PROCESS)
 			. += "<br>The check wiring light is [A.active_wires & WIRE_ASSEMBLY_PROCESS ? "[off]" : "[on]"]"
 		if(A.wires & WIRE_ASSEMBLY_SAFETY)
