@@ -254,7 +254,7 @@
 			usr << "<span class='notice'>Override Software uploaded. Disabling firewall..</span>"
 			spawn(rand(80,150))
 				gun.spark()
-				usr << "<span class='notice'>Firewall disabled. Overriding security matrix..</span class='notice'>"
+				usr << "<span class='notice'>Firewall disabled. Overriding security matrix..</span>"
 				spawn(rand(80, 150))
 					if(gun.held_pai.pai != usr) return
 					gun.spark()

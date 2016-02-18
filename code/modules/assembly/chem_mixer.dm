@@ -28,7 +28,7 @@
 	R.my_atom = src
 	update_icon()
 
-/obj/item/device/assembly/chem_mixer/attackby(var/obj/item/W, var/mob/living/carbon/user as mob)
+/obj/item/device/assembly/chem_mixer/attackby(var/obj/item/W, var/mob/living/carbon/user)
 	if(is_type_in_list(W, allowed_containers))
 		if(beakers.len >= max_beakers)
 			user << "<span class='warning'>\The [src] can not hold more containers.</span>"

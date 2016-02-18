@@ -22,7 +22,7 @@
 			examined_additions.Add(message)
 			add_debug_log("Message set to: [message] \[[src]\]")
 			if(holder)
-				holder.visible_message("<span class='notice'><IMG CLASS=icon SRC=\ref[icon] ICONSTATE='[icon_state]'>[holder] flashes: \"[message]\"!")
+				holder.visible_message("<span class='notice'><IMG CLASS=icon SRC=\ref[icon] ICONSTATE='[icon_state]'>[holder] flashes: \"[message]\"!</span>")
 
 		return 1
 
@@ -31,7 +31,7 @@
 		if(holder)
 			if(on)
 				examined_additions.Add(message)
-				holder.visible_message("<span class='notice'><IMG CLASS=icon SRC=\ref[icon] ICONSTATE='[icon_state]'>[holder] flashes: \"[message]\"!")
+				holder.visible_message("<span class='notice'><IMG CLASS=icon SRC=\ref[icon] ICONSTATE='[icon_state]'>[holder] flashes: \"[message]\"!</span>")
 		return 1
 
 	examine(var/mob/user)

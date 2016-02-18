@@ -289,7 +289,7 @@
 			if(backup_power && primary_power)
 				user << "<span class='notice'>[src] already has a power supply!</span>"
 				return
-			user.visible_message("<span class='notice'>[user] inserts the [W] into [src].<span>", "<span clss='notice'>You insert the [W] into [src]</span>")
+			user.visible_message("<span class='notice'>[user] inserts the [W] into [src].</span>", "<span clss='notice'>You insert the [W] into [src]</span>")
 			user.drop_item()
 			W.loc = src
 			if(!primary_power)
@@ -310,12 +310,12 @@
 					return
 				user.drop_item()
 				insert_pai(card)
-				user.visible_message("<span class='notice'>[user] inserts the [card] into [src].<span>", "<span clss='notice'>You insert the [card] into [src]</span>")
+				user.visible_message("<span class='notice'>[user] inserts the [card] into [src].</span>", "<span clss='notice'>You insert the [card] into [src]</span>")
 				return
 			else if(ai)
 				user << "<span class='notice'>[src] already has an AI installed!</span>"
 				return
-			user.visible_message("<span class='notice'>[user] inserts the [card] into [src].<span>", "<span clss='notice'>You insert the [card] into [src]</span>")
+			user.visible_message("<span class='notice'>[user] inserts the [card] into [src].</span>", "<span clss='notice'>You insert the [card] into [src]</span>")
 			user.drop_item()
 			card.loc = src
 			ai = card
@@ -400,7 +400,7 @@
 					if(power_supply.charge < charge_cost)
 						return null
 					var/turf/T = get_turf(src)
-					T.visible_message("<span class='danger'>[src] appears to be billowing smoke!</danger>")
+					T.visible_message("<span class='danger'>[src] appears to be billowing smoke!</span>")
 					spawn(30)
 						switch(rand(1, 4))
 							if(1)
@@ -606,7 +606,7 @@
 				held_pai.pai << "<font color=#FF0000>[rand(1,8)][rand(1,8)][rand(1,9)][rand(1,9)][pick("A","C","F","Z","X")]#System Message -</font><span class='notice'>  [RadioChat(strip_html_properly(message), 75, 1.5)]</span>"
 		if(!ai || !(intelligun_status & INTELLIGUN_AI_ENABLED)) return
 		var/turf/T = get_turf(src)
-		T.visible_message("<span class='game say'>\icon[src.icon]<span class='name'>[ai_name]</span> [pick(speech_verbs)], \"<span class='notice'>[message]</span>\"</span>")
+		T.visible_message("<span class='game say'>\icon[src.icon]</span><span class='name'>[ai_name]</span> [pick(speech_verbs)], \"<span class='notice'>[message]</span>\"</span>")
 
 /obj/item/weapon/gun/energy/advanced/proc/find_said_name(var/message as text, var/mob/user)
 	var/mob/living/carbon/human/target = null

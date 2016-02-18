@@ -20,7 +20,7 @@
 		intelligun_status |= INTELLIGUN_ANALYZING
 		spawn(15)
 			if(!can_use_charge(60)) return
-			src.speak("<span class='notice'>Current Status: [H.stat > 1 ? "<span class='warning'>dead</dead>" : "[H.health]% healthy"]</span>")
+			src.speak("<span class='notice'>Current Status: [H.stat > 1 ? "<span class='warning'>dead</span>" : "[H.health]% healthy"]</span>")
 			medical_data += "<b>Scan Results for: [H]</b><br><hr><br>"
 			medical_data += "<span class='notice'>Overall Status: [H.stat > 1 ? "<span class='warning'>dead</span>" : "[H.health]% healthy"]</span><br>"
 			if(H.health < 75)

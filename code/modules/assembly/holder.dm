@@ -196,7 +196,7 @@
 			drawing_connection = null
 		else
 			if(admin_access(usr))
-				usr << "<span class='notice'>You begin drawing connections!</span>3"
+				usr << "<span class='notice'>You begin drawing connections!</span>"
 				drawing_connection = href_list["connect"]
 				add_debug_log("Drawing connection: [drawing_connection]")
 	if(href_list["connect_to"])
@@ -216,7 +216,7 @@
 		else if(first == second)
 			usr << "<span class='warning'>You cannot link an object to itself!</span>"
 		else if(first.connects_to.Find(index) || first.connects_to.Find(index))
-			usr << "<span class='warning'>They are already connected!</span."
+			usr << "<span class='warning'>They are already connected!</span>"
 //			if(drawing_connection in second.connects_to)
 //				var/list/new_connections = second.connects_to.Copy()
 //				if(new_connections.Remove(drawing_connection))

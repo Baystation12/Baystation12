@@ -195,7 +195,7 @@ REAGENT SCANNER
 
 	if (!istype(M, /mob/living/carbon) || M.isSynthetic())
 		//these sensors are designed for organic life
-		scanned_data.Add("<span class='notice;>Analyzing Results for ERROR:\n\t Overall Status: ERROR</span>")
+		scanned_data.Add("<span class='notice'>Analyzing Results for ERROR:\n\t Overall Status: ERROR</span>")
 		scanned_data.Add("\t Key: <font color='blue'>Suffocation</font>/<font color='green'>Toxin</font>/<font color='#FFA500'>Burns</font>/<font color='red'>Brute</font>")
 		scanned_data.Add("\t Damage Specifics: <font color='blue'>?</font> - <font color='green'>?</font> - <font color='#FFA500'>?</font> - <font color='red'>?</font>")
 		scanned_data.Add("<span class='notice'> Body Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)</span>")
