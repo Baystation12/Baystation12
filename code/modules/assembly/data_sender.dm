@@ -93,18 +93,18 @@
 				if("Send Signal")
 					send_data(list(data_to_transform, data_secondary))
 				if("Reset Data")
-					usr << "\blue You reset \the [src]'s data!"
+					usr << "<span class='notice'>You reset \the [src]'s data!</span>"
 					data_to_transform = "ACTIVATE"
 					data_secondary = "NULL"
 					data_source = null
 					data_source_var = null
 				if("Data Source")
 					if(!holder || !(active_wires & WIRE_MISC_CONNECTION))
-						usr << "\red There's nothing to connect \the [src] too!"
+						usr << "<span class='warning'> There's nothing to connect \the [src] too!</span>"
 					else
 						var/list/devices = get_holder_linked_devices_reversed()
 						if(!devices.len)
-							usr << "\red There's nothing to connect \the [src] too!"
+							usr << "<span class='warning'>There's nothing to connect \the [src] too!</span>"
 						else
 							var/list/choices = list()
 							for(var/i=1,i<=devices.len,i++)
@@ -125,9 +125,9 @@
 									data_source_var = input(usr, "What data would you like to use?", "Data") in data_source_vars
 									fetched_data = data_source.vars[data_source_var]
 								else
-									usr << "\red There is no applicable data to fetch!"
+									usr << "<span class='warning'>There is no applicable data to fetch!</span>"
 							else
-								usr << "\red Cannot find applicable devices!"
+								usr << "<span class='warning'>Cannot find applicable devices!</span>"
 				if("Mode")
 					mode = !mode
 		..()

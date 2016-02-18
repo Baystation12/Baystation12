@@ -41,6 +41,9 @@
 	get_data()
 		return list("Protected Wire", protected_wire, "Pulse Protection", pulse)
 
+	get_buttons()
+		return list("Wire Protection")
+
 	get_nonset_data()
 		var/cp = 90
 		var/pp = 40
@@ -54,7 +57,9 @@
 	Topic(href, href_list)
 		if(href_list["option"])
 			switch(href_list["option"])
-				if("Protected Wire")
+				if("Wire Protection")
+					open_window(usr)
+/*				if("Protected Wire")
 					var/choice = input(usr, "What wire would you like to protect?", "Wire Safety") in choice_wires
 					if(choice && choice_wires[choice])
 						protected_wire = choice
@@ -62,11 +67,11 @@
 					else
 						protected_wire = "NULL"
 						protected_index = 0
-				if("Pulse Protection")
+*/				if("Pulse Protection")
 					pulse = !pulse
 		if(href_list["index"])
 			if(!(protected_index.Remove(href_list["index"])))
-				protected_index.Add(href_list["index"])
+				protected_index |= href_list["index"]
 		..()
 	//Access window, but for wires.
 	proc/open_window(var/mob/user as mob)

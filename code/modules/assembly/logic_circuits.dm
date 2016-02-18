@@ -40,7 +40,7 @@
 						operation = operations[1]
 					else
 						operation = operations[(index+1)]
-					usr << "\blue You set \the [src]'s operation to: \"[operation]\"!"
+					usr << "<span class='notice'>You set \the [src]'s operation to: \"[operation]\"!</span>"
 			if("Value One")
 				var/inp = input(usr, "What value would you like to set?", "Value")
 				if(inp)
@@ -69,7 +69,7 @@
 				else_connection = 0
 				else_connection_name = "NULL"
 			if("Else if connection")
-				add_debug_log("\red Setting else!")
+				add_debug_log("Setting else!")
 				if(!holder)
 					usr << "There's nothing you can connect \the [src] to!"
 				else
@@ -83,21 +83,21 @@
 					var/index = find_holder_linked_devices(connect_to)
 					add_debug_log("Got: [connect_to.name] Index: [index]")
 					if(num2text(index) == else_connection || num2text(index) in connects_to)
-						usr << "\red \The [src] is already connected to \the [connect_to.name]"
+						usr << "<span class='warning'> \The [src] is already connected to \the [connect_to.name]</span>"
 					else if(index)
-						add_debug_log("\red Index does exist! \[[src] : [usr]\]")
+						add_debug_log("Index does exist! \[[src] : [usr]\]")
 						if(connect_to != src)
 							else_connection = text2num(index)
-							usr << "\blue You set \the [src]'s alternate connection to [connect_to.name]!"
+							usr << "<span class='notice'>You set \the [src]'s alternate connection to [connect_to.name]!</span>"
 							else_connection_name = connect_to.name
 						else
-							usr << "\red You cannot connect \the [src] to itself!"
+							usr << "<span class='warning'>You cannot connect \the [src] to itself!</span>"
 			if("Else Send Data")
 				var/index = else_send_values.Find(else_send_value)
 				if(!index || index == else_send_values.len) index = 1
 				else index += 1
 				else_send_value = else_send_values[index]
-				usr << "\blue You set \the [src]'s alternate send data to [else_send_value]!"
+				usr << "<span class='notice'>You set \the [src]'s alternate send data to [else_send_value]!</span>"
 
 	..()
 
@@ -157,11 +157,11 @@
 				user.drop_from_inventory(src)
 				created.loc = get_turf(src)
 				src.loc = created
-				user << "\blue You've changed \the [src] to a [created.name]"
+				user << "<span class='notice'>You've changed \the [src] to a [created.name]</span>"
 				qdel(src)
 				return 1
 		else
-			user << "\red Invalid choice!"
+			user << "Invalid choice!"
 
 /obj/item/device/assembly/logic_circuit/get_data()
 	var/list/data = list()
@@ -517,7 +517,7 @@
 					var/index = operations2.Find(operation2)
 					if(!index || index == operations2.len) index = 1
 					else operation2 = operations2[(index+1)]
-					usr << "\blue You set \the [src]'s comparison operation to [operation2]!"
+					usr << "<span class='notice'>You set \the [src]'s comparison operation to [operation2]!</span>"
 
 		..()
 
@@ -614,7 +614,7 @@
 					if(src == receiver) continue
 					sender.send_direct_pulse(wait_list[(i+1)])
 				else
-					add_debug_log("\red Fatal error: Invalid connection between \[[src]\] and connection sender.")
+					add_debug_log("Fatal error: Invalid connection between \[[src]\] and connection sender.")
 			sleep(delay)
 		value1 = 0
 		value2 = 0

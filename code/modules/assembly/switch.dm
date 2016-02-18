@@ -36,7 +36,7 @@
 			switch(href_list["option"])
 				if("Active")
 					on = !on
-					usr << "\blue You turn \the [src] [on ? "on" : "off"]"
+					usr << "<span class='notice'>You turn \the [src] [on ? "on" : "off"]</span>"
 				if("Toggle Data")
 					var/inp = input(usr, "What data would you like to search for?", "Data")
 					if(inp)
@@ -74,7 +74,7 @@
 			if("Toggle After Activation")
 				if(true == "TRUE") true = "FALSE"
 				else true = "TRUE"
-				usr << "\blue You set \the [src]'s \"Toggle After Activate\" to \"[true]\""
+				usr << "<span class='notice'> You set \the [src]'s \"Toggle After Activate\" to \"[true]\"</span>"
 			if("Alt.Connection")
 				if(!holder)
 					usr << "There's nothing you can connect \the [src] to!"
@@ -92,15 +92,14 @@
 					var/index = find_holder_linked_devices(connect_to)
 					add_debug_log("\[[src] : Got: [connect_to.name] Index: [index]\]")
 					if(num2text(index) == alt_connected_to || num2text(index) in connects_to)
-						usr << "\red \The [src] is already connected to \the [connect_to.interface_name]"
+						usr << "<span class='warning'>\The [src] is already connected to \the [connect_to.interface_name]</span>"
 					else if(index)
-						add_debug_log("\red Index does exist!")
 						if(connect_to != src)
 							alt_connected_to = text2num(index)
-							usr << "\blue You set \the [src]'s alternate connection to [connect_to.interface_name]!"
+							usr << "<span class='notice'>You set \the [src]'s alternate connection to [connect_to.interface_name]!</span>"
 							alt_connected_to_name = connect_to.interface_name
 						else
-							usr << "\red You cannot connect \the [src] to itself!"
+							usr << "<span class='warning'>You cannot connect \the [src] to itself!</span>"
 	..()
 
 /obj/item/device/assembly/switch_device/multi_way
@@ -143,6 +142,6 @@
 			if("Change After Activation")
 				if(true == "TRUE") true = "FALSE"
 				else true = "TRUE"
-				usr << "\blue You set \the [src]'s \"Toggle After Activate\" to \"[true]\""
+				usr << "<span class='notice'>You set \the [src]'s \"Toggle After Activate\" to \"[true]\"</span>"
 	..()
 

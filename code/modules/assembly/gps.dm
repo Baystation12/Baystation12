@@ -17,7 +17,7 @@
 /obj/item/device/assembly/gps/activate()
 	var/turf/T = get_turf(src)
 	if(T)
-		T.visible_message("\blue \icon[src] [src] flashes <i>[T.x].[rand(0,9)]:[T.y].[rand(0,9)]:[T.z].[rand(0,9)]</i>.")
+		T.visible_message("<span class='notice'> \icon[src] [src] flashes <i>[T.x].[rand(0,9)]:[T.y].[rand(0,9)]:[T.z].[rand(0,9)]</i></span>.")
 		if(holder)
 			switch(sent_type)
 				if("x")
@@ -47,7 +47,7 @@
 				if(!index || index == sent_types.len) sent_type = sent_types[1]
 				else
 					sent_type = sent_types[(index+1)]
-				usr << "\blue You set \the [src]'s sent data to: \"[sent_type]\""
+				usr << "<span class='notice'>You set \the [src]'s sent data to: \"[sent_type]\"</span>"
 	..()
 
 

@@ -42,18 +42,18 @@
 						devices.Add(A)
 					var/obj/item/device/assembly/connect_to = input(usr, "What device would you like to connect to?", "Connection") in devices
 					var/index = find_holder_linked_devices(connect_to)
-					add_debug_log("\red Got: [connect_to.name] Index: [index] \[[src]\]")
+					add_debug_log("Got: [connect_to.name] Index: [index] \[[src]\]")
 					if(num2text(index) == alt_connected_to || num2text(index) in connects_to)
-						usr << "\red \The [src] is already connected to \the [connect_to.name]"
+						usr << "<span class='warning'>\The [src] is already connected to \the [connect_to.name]</span>"
 					else if(!index)
 						add_debug_log("Index does not exist! \[[src]\]")
 					else if(index)
 						if(connect_to != src)
 							alt_connected_to = text2num(index)
-							usr << "\blue You set \the [src]'s alternate connection to [connect_to.name]!"
+							usr << "<span class='notice'>You set \the [src]'s alternate connection to [connect_to.name]!</span>"
 							alt_connected_to_name = connect_to.name
 						else
-							usr << "\red You cannot connect \the [src] to itself!"
+							usr << "<span class='warning'>You cannot connect \the [src] to itself!</span>"
 	..()
 
 /obj/item/device/assembly/keypad/holder_attack_self(var/mob/user)

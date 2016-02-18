@@ -89,7 +89,7 @@
 /obj/item/device/assembly/powersink/get_nonset_data()
 	var/list/data = list()
 	if(!mode)
-		data += "\red <b>Not anchored!</b>"
+		data += "<span class='warning'><b>Not anchored!</b></span>"
 	else
 		data += "Drained power: [power_drained]"
 	var/M = "NULL"

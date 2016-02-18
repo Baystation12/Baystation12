@@ -125,6 +125,6 @@
 					if(!index || index == access_levels_requireds.len) index = 1
 					else index += 1
 					access_levels_required = access_levels_requireds[index]
-					usr << "\blue You set \the [src]'s required match count to \"[access_levels_required]\""
+					usr << "<span class='notice'>You set \the [src]'s required match count to \"[access_levels_required]\"</span>"
 
 		..()

@@ -55,6 +55,6 @@
 					if(!index || index == trigger_actions.len) index = 1
 					else index += 1
 					trigger_action = trigger_actions[index]
-					usr << "\blue You set \the [src]'s trigger action to \"[trigger_action]\""
+					usr << "<span class='notice'>You set \the [src]'s trigger action to \"[trigger_action]\"</span>"
 		..()
 

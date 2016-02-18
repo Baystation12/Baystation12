@@ -37,7 +37,7 @@
 	..()
 	if(istype(W, /obj/item/weapon/screwdriver))
 		if(used)
-			user << "\blue You reset \the [src]"
+			user << "<span class='notice'>You reset \the [src]</span>"
 			used = 0
 /obj/item/device/assembly/explosive/emexplosive/process_activation()
 	if(!draw_power(power_cost)) return 0

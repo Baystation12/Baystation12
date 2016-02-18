@@ -18,7 +18,7 @@
 
 /obj/item/device/assembly/flash/proc/clown_check(var/mob/user)
 	if(user && (CLUMSY in user.mutations) && prob(50))
-		user << "\red \The [src] slips out of your hand."
+		user << "<span class='warning'>\The [src] slips out of your hand.</span>"
 		user.drop_item()
 		return 0
 	return 1
@@ -206,6 +206,6 @@
 	if(!broken)
 		broken = 1
 		var/turf/T = get_turf(src)
-		if(T) T.audible_message("\red [src]'s bulb fizzles loudly!")
+		if(T) T.audible_message("<span class='warning'>[src]'s bulb fizzles loudly!</span>")
 		icon_state = "flashburnt"
 

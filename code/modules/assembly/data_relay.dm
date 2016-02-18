@@ -59,7 +59,7 @@
 		switch(href_list["option"])
 			if("Alt.Connection")
 				if(!holder || !(active_wires & WIRE_MISC_CONNECTION))
-					usr << "\red There's nothing to connect \the [src] too!"
+					usr << "<span class='warning'>There's nothing to connect \the [src] too!</span>"
 				else
 					if(holder.connected_devices.len > 1)
 						var/list/choices = list()
@@ -76,12 +76,12 @@
 				var/data = input(usr, "What data would you like sent?", "Data")
 				if(data)
 					alt_data_send = data
-					usr << "\blue You've set the data to [data]!"
+					usr << "<span class='notice'>You've set the data to [data]!</span>"
 			if("Reset Data")
 				alt_connected_to = initial(alt_connected_to)
 				alt_connected_to_name = "NULL"
 				alt_data_send = "NULL"
-				usr << "\blue You reset \the [src]'s data!"
+				usr << "<span class='notice'>You reset \the [src]'s data!</span>"
 			if("Send Alt.Data")
 				if(!holder) return 0
 				var/obj/item/device/assembly/A = holder.connected_devices[alt_connected_to]

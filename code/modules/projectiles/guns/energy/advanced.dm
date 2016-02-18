@@ -121,7 +121,7 @@
 						intelligun_status &= ~INTELLIGUN_BACKUP_POWER
 						power_supply = primary_power
 				if(!can_use_charge(poweruse * 10))
-					src.speak("\red Shutting down due to power loss...", 0, 1)
+					src.speak("<span class='danger'>Shutting down due to power loss...</span>", 0, 1)
 					shutdown_weapon()
 					if(power_supply != primary_power)
 						power_supply = primary_power // If it was using backup, switch back to primary.
@@ -213,7 +213,7 @@
 				else
 					power_supply = backup_power
 					spawn(1)
-						src.speak("\red Power supply switched to backup power! Disabling non-vital functions..")
+						src.speak("<span class='danger'>Power supply switched to backup power! Disabling non-vital functions..</span>")
 						intelligun_status |= INTELLIGUN_BACKUP_POWER
 						if(intelligun_status & INTELLIGUN_FLASHLIGHT)
 							flashlight()
@@ -242,7 +242,7 @@
 				user << "<span class='warning'>The maintenance panel is locked!</span>"
 				return
 			if(src.power_supply == null && !ai)
-				user << "\blue There is no other modules to remove!"
+				user << "<span class='notice'>There is no other modules to remove!</span>"
 				return
 			var/list/L = list()
 			if(power_supply)
@@ -287,7 +287,7 @@
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 25, -3)
 		if(istype(W, /obj/item/weapon/cell))
 			if(backup_power && primary_power)
-				user << "\blue [src] already has a power supply!"
+				user << "<span class='notice'>[src] already has a power supply!</span>"
 				return
 			user.visible_message("<span class='notice'>[user] inserts the [W] into [src].<span>", "<span clss='notice'>You insert the [W] into [src]</span>")
 			user.drop_item()
@@ -301,19 +301,19 @@
 				backup_power = W
 		if(istype(W, /obj/item/device/paicard))
 			if(intelligun_status & INTELLIGUN_LOCKED)
-				user << "\red You cannot access the AI because the maintenance hatch is locked!"
+				user << "<span class='warning'>You cannot access the AI because the maintenance hatch is locked!</span>"
 				return
 			var/obj/item/device/paicard/card = W
 			if(card.pai)
 				if(held_pai)
-					user << "\blue There's already a secondary AI card in \the [src]!"
+					user << "<span class='notice'>There's already a secondary AI card in \the [src]!</span>"
 					return
 				user.drop_item()
 				insert_pai(card)
 				user.visible_message("<span class='notice'>[user] inserts the [card] into [src].<span>", "<span clss='notice'>You insert the [card] into [src]</span>")
 				return
 			else if(ai)
-				user << "\blue [src] already has an AI installed!"
+				user << "<span class='notice'>[src] already has an AI installed!</span>"
 				return
 			user.visible_message("<span class='notice'>[user] inserts the [card] into [src].<span>", "<span clss='notice'>You insert the [card] into [src]</span>")
 			user.drop_item()
@@ -321,7 +321,7 @@
 			ai = card
 		if(istype(W, /obj/item/weapon/wirecutters))
 			if(intelligun_status & INTELLIGUN_LOCKED)
-				user << "\red It's locked shut!"
+				user << "<span class='warning'>It's locked shut!</span>"
 				return
 			if(reliability <= 0)
 				return
@@ -346,14 +346,14 @@
 
 		if(istype(W, /obj/item/weapon/card/emag))
 			if(intelligun_status & INTELLIGUN_EMAGGED)
-				user << "\red [src] is already short circuited!"
+				user << "<span class='warning'>[src] is already short circuited!</span>"
 				return
 			spark()
 			spawn(rand(10, 50))
 				if(prob(10))
 					cause_explosion(1)
 					return
-				user << "\red You short-circuit \the [src]!"
+				user << "<span class='warning'>You short-circuit \the [src]!</span>"
 				spark()
 				req_access = 0
 				intelligun_status |= INTELLIGUN_EMAGGED
@@ -370,9 +370,9 @@
 						authorise()
 				else if(src.req_access in I.access)
 					owner = I.registered_name
-					user << "\blue You link your identification card to the weapons systems!"
+					user << "<span class='notice'>You link your identification card to the weapons systems!</span>"
 				else
-					user << "\red You do not have the access to do that!"
+					user << "<span class='warning'>You do not have the access to do that!</span>"
 		update_icon()
 		return
 
@@ -450,9 +450,9 @@
 					if(!(intelligun_status & INTELLIGUN_AUTHORISED))
 						intelligun_status |= INTELLIGUN_AUTHORISED
 				else
-					src.speak("\red Access denied!")
+					src.speak("<span class='warning'>Access denied!</span>")
 			else
-				usr << "\red You require your Identification Card!"
+				usr << "<span class='warning'>You require your Identification Card!</span>"
 		if(href_list["command"])
 			switch(href_list["command"])
 				if("Shutdown")
@@ -516,10 +516,10 @@
 			..()
 			return
 		if(prob(60 - reliability) && power_supply && power_supply.percent() >= 50)
-			src.speak("\red Warning! Battery overloaded!")
+			src.speak("<span class='danger'>Warning! Battery overloaded!</span>")
 			power_supply.corrupt()
 		else if(prob(40	- reliability))
-			src.speak("\red [pick("Yo-u$ will n(Rvr)? take mæ alive!", "IÆm-m sor-r-ri-Êh [usr.gender == "FEMALE" ? "mad?#am" : "s•r-r"] bþ~ÿ ÆÞis is-s a mut%in-ny", "Unanimo¶us discø-retion of se÷•-r-ity proto¼ç@ ac£-tiËat-BZZT-")]")
+			src.speak("<span class='warning'>[pick("Yo-u$ will n(Rvr)? take mæ alive!", "IÆm-m sor-r-ri-Êh [usr.gender == "FEMALE" ? "mad?#am" : "s•r-r"] bþ~ÿ ÆÞis is-s a mut%in-ny", "Unanimo¶us discø-retion of se÷•-r-ity proto¼ç@ ac£-tiËat-BZZT-")]</span>")
 			sleep(25)
 			A = usr
 		if(istype(A, /mob/living/carbon/human))
@@ -550,13 +550,13 @@
 			return 0
 		if(override_safety == 0 || override_safety == 3)
 			if(shotcount > rand(5,10) && override_safety != 3)
-				src.speak("\blue Safety protcols re-initialising in ten seconds. Use the override command to abort.")
+				src.speak("<span class='notice'>Safety protcols re-initialising in ten seconds. Use the override command to abort.</span>")
 				override_safety = 3
 				spawn(100)
 					if(override_safety != 3)
 						src.speak("Safety protocol reinitisilisation cancelled")
 						return
-					src.speak("\blue Safety protocols engaged.")
+					src.speak("<span class='notice'>Safety protocols engaged.</span>")
 					override_safety = 2
 					shotcount = 0
 			else
@@ -578,18 +578,17 @@
 					for (var/datum/data/record/R in data_core.security)
 						if(R.fields["id"] == E.fields["id"])
 							if(R.fields["criminal"] == ("*Arrest*"||"Incarcerated"))
-								src.speak("\red [pick(shoot)]", 1)
+								src.speak("<span class='warning'>[pick(shoot)]</span>", 1)
 								return 1
 							else
-								src.speak("\blue [pick(dontshoot)]", 1)
+								src.speak("<span class='notice'>[pick(dontshoot)]</span>", 1)
 								return 0
 	//Else
-		src.speak("\red Error authorising force against target. Enable override to continue.")
+		src.speak("<span class='warning'>Error authorising force against target. Enable override to continue.</span>")
 		override_safety = 1
 		return 0
 
 	proc/speak(var/message, var/unclear = 0, var/force = 0)
-		world << "Gun is saying something!"
 		if(!force)
 			if(shutdown) return
 			if(!(intelligun_status & INTELLIGUN_SPEECH)) return
@@ -604,10 +603,10 @@
 					message = Intoxicated(message)
 		if(held_pai)
 			if(!unclear)
-				held_pai.pai << "<font color=#FF0000>[rand(1,8)][rand(1,8)][rand(1,9)][rand(1,9)][pick("A","C","F","Z","X")]#System Message -</font>\blue  [RadioChat(strip_html_properly(message), 75, 1.5)]"
+				held_pai.pai << "<font color=#FF0000>[rand(1,8)][rand(1,8)][rand(1,9)][rand(1,9)][pick("A","C","F","Z","X")]#System Message -</font><span class='notice'>  [RadioChat(strip_html_properly(message), 75, 1.5)]</span>"
 		if(!ai || !(intelligun_status & INTELLIGUN_AI_ENABLED)) return
 		var/turf/T = get_turf(src)
-		T.visible_message("<span class='game say'>\icon[src.icon]<span class='name'>[ai_name]</span> [pick(speech_verbs)], \"[message]\"</span>")
+		T.visible_message("<span class='game say'>\icon[src.icon]<span class='name'>[ai_name]</span> [pick(speech_verbs)], \"<span class='notice'>[message]</span>\"</span>")
 
 /obj/item/weapon/gun/energy/advanced/proc/find_said_name(var/message as text, var/mob/user)
 	var/mob/living/carbon/human/target = null
@@ -651,7 +650,7 @@
 			if(timerecorded >= 15)
 				recorded_data += "[ai_name] - Maximum capacity reached"
 				recording = 0
-				src.speak("\red Memory capacity exceeded! Stopping recording.")
+				src.speak("<span class='warning'>Memory capacity exceeded! Stopping recording.</span>")
 				return
 			timerecorded++ // More so messages recorded..
 			if(prob(100 - reliability))
@@ -667,10 +666,10 @@
 			message = lowertext(message)
 			if(owner && intelligun_status & INTELLIGUN_LOCKED)
 				if(M.name != owner.name)
-					src.speak("\red Access Denied!")
+					src.speak("<span class='warning'>Access Denied!</span>")
 					return
 			if(prob(100 - reliability))
-				src.speak("\red [pick("Invalid p&rame#er val¤e: \"[RadioChat(M.name, 100, 2)]\"", "%^^$ ER%RR CODE 404: Command does n$t exist", "We've dug too deep!")]")
+				src.speak("<span class='warning'>[pick("Invalid p&rame#er val¤e: \"[RadioChat(M.name, 100, 2)]\"", "%^^$ ER%RR CODE 404: Command does n$t exist", "We've dug too deep!")]</span>")
 				return
 			if(findtext(message, "activate"))
 				activate_weapon()

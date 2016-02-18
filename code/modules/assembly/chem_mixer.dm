@@ -28,26 +28,26 @@
 	R.my_atom = src
 	update_icon()
 
-/obj/item/device/assembly/chem_mixer/attackby(/obj/item/W as obj, var/mob/living/carbon/user as mob)
+/obj/item/device/assembly/chem_mixer/attackby(var/obj/item/W, var/mob/living/carbon/user as mob)
 	if(is_type_in_list(W, allowed_containers))
 		if(beakers.len >= max_beakers)
-			user << "\red \The [src] can not hold more containers."
+			user << "<span class='warning'>\The [src] can not hold more containers.</span>"
 			return
 		else
 			if(W.reagents.total_volume)
-				user << "\blue You add \the [W] to the assembly."
+				user << "<span class='notice'>You add \the [W] to the assembly.</span>"
 				user.drop_item()
 				W.loc = src
 				beakers += W
 			else
-				user << "\red \The [W] is empty."
+				user << "<span class='warning'>\The [W] is empty.</span>"
 	else if(istype(W, /obj/item/stack/cable_coil) && used)
 		var/obj/item/stack/cable_coil/C = W
 		if(C.use(5))
-			user << "\blue You reset \the [src]!"
+			user << "<span class='notice'>You reset \the [src]!</span>"
 			used = 0
 		else
-			user << "\blue You need atleast 5 units of cable to do that!"
+			user << "<span class='notice'>You need atleast 5 units of cable to do that!</span>"
 			return
 	else
 		..(W, user)

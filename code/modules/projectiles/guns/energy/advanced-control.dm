@@ -17,8 +17,8 @@
 		world << "Inserting pAI"
 		card.loc = src
 		held_pai = card
-		card.pai << "\blue You've been inserted into \the [src]"
-		card.pai << "\blue Uploading control software..."
+		card.pai << "You've been inserted into \the [src]"
+		card.pai << "Uploading control software..."
 		spawn(50)
 			if(intelligun_status & INTELLIGUN_SUPERCHARGED && prob(50))
 				spark()
@@ -27,7 +27,7 @@
 					card.pai.emp_act(rand(1, 3))
 			if(prob(100 - reliability))
 				spark()
-				src.speak("\red Unidentified foreign software detected! Beginning purge..")
+				src.speak("<span class='danger'>Unidentified foreign software detected! Beginning purge..</span>")
 				spawn(rand(20, 60))
 					if(prob(40) && held_pai)
 						held_pai << "<span class='danger'>You feel a sudden surge of electricity pulse through your circuits!</span>"
@@ -41,7 +41,7 @@
 						card.pai << "<span class='warning'>You feel a sudden pulse of electricity, and disconnect your wiring before you are damaged!</span>"
 						eject_pai()
 				return
-			card.pai << "\blue Initiating control software.."
+			card.pai << "Initiating control software.."
 			spawn(50)
 				world << "Adding verbs!"
 				held_pai.pai.verbs += /obj/item/weapon/gun/energy/advanced/proc/access_interface
@@ -49,7 +49,7 @@
 				held_pai.pai.verbs += /obj/item/weapon/gun/energy/advanced/verb/eject_pai
 				held_pai.pai.verbs += /obj/item/weapon/gun/energy/advanced/proc/hack_into
 				held_pai.pai.verbs += /obj/item/weapon/gun/energy/advanced/proc/authorise
-				card.pai << "\blue Initiated!"
+				card.pai << "Initiated!"
 
 /obj/item/weapon/gun/energy/advanced/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nano_ui/master_ui = null, var/datum/topic_state/state = default_state)
 	var/list/data = list()
@@ -97,13 +97,13 @@
 		ui.open()
 
 /obj/item/weapon/gun/energy/advanced/proc/disable_auto_ai()
-	speak("\red Automatic AI [intelligun_status & INTELLIGUN_AI_ENABLED == 1 ? "dis" : "en"]abled", 0, 1)
+	speak("<span class='notice'>Automatic AI [intelligun_status & INTELLIGUN_AI_ENABLED == 1 ? "dis" : "en"]abled</span>", 0, 1)
 	if(intelligun_status & INTELLIGUN_BACKUP_POWER)
 		if(power_supply.percent() < 50 && power_supply.charge && !(intelligun_status & INTELLIGUN_AI_ENABLED))
 			src.speak("<span class='danger'>This feature is disabled due to power loss!</span>", 0, 1)
 			return
 	if(held_pai && usr == held_pai.pai)
-		usr << "\red You don't have the access to do that!"
+		usr << "<span class='warning'>You don't have the access to do that!</span>"
 		return
 	spawn(5)
 		if(intelligun_status & INTELLIGUN_AI_ENABLED)
@@ -162,7 +162,7 @@
 	if(gun.intelligun_status & INTELLIGUN_AUTHORISED)
 		gun.intelligun_status &= INTELLIGUN_AUTHORISED
 	else gun.intelligun_status |= INTELLIGUN_AUTHORISED
-	gun.speak("\blue Interface [gun.intelligun_status & INTELLIGUN_AUTHORISED ? "" : "un"]locked")
+	gun.speak("Interface [gun.intelligun_status & INTELLIGUN_AUTHORISED ? "" : "un"]locked")
 
 /obj/item/weapon/gun/energy/advanced/proc/speech()
 	set name = "Speak"
@@ -185,16 +185,16 @@
 	set name = "Remove pAI"
 	set src in usr
 	if(!src.held_pai)
-		usr << "\blue There is no pAI in \the [src]!"
+		usr << "There is no pAI in \the [src]!"
 		return
 	if(src.intelligun_status & INTELLIGUN_LOCKED)
-		usr << "\blue [src] is locked shut!"
+		usr << "[src] is locked shut!"
 		return
 	src.held_pai.loc = get_turf(src)
 	if(istype(usr, /mob/living/carbon/human))
 		usr.put_in_hands(src.held_pai)
 	else
-		src.visible_message("\red [src.held_pai] drops onto the ground!")
+		src.visible_message("<span class='warning'>[src.held_pai] drops onto the ground!</span>")
 	src.held_pai = null
 	held_pai.pai.verbs -= /obj/item/weapon/gun/energy/advanced/proc/access_interface
 	held_pai.pai.verbs -= /obj/item/weapon/gun/energy/advanced/proc/speech

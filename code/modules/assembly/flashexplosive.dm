@@ -41,7 +41,7 @@
 		return
 
 	proc/bang(var/turf/T , var/mob/living/carbon/M)					// Added a new proc called 'bang' that takes a location and a person to be banged.
-		M << "\red <B>BANG</B>"
+		M << "<span class='danger'><B>BANG</B></span>"
 		playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, 5)
 
 //Checking for protections
@@ -95,19 +95,19 @@
 			var/mob/living/carbon/human/H = M
 			var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 			if (E && E.damage >= E.min_bruised_damage)
-				M << "\red Your eyes start to burn badly!"
+				M << "<span class='warning'>Your eyes start to burn badly!</span>"
 				if(!banglet && !(istype(src , /obj/item/device/assembly/explosive/flash/clusterbang)))
 					if (E.damage >= E.min_broken_damage)
-						M << "\red You can't see anything!"
+						M << "<span class='warning'>You can't see anything!</span>"
 		if (M.ear_damage >= 15)
-			M << "\red Your ears start to ring badly!"
+			M << "<span class='warning'>Your ears start to ring badly!</span>"
 			if(!banglet && !(istype(src , /obj/item/device/assembly/explosive/flash/clusterbang)))
 				if (prob(M.ear_damage - 10 + 5))
-					M << "\red You can't hear anything!"
+					M << "<span class='warning'>You can't hear anything!</span>"
 					M.sdisabilities |= DEAF
 		else
 			if (M.ear_damage >= 5)
-				M << "\red Your ears start to ring!"
+				M << "<span class='warning'>Your ears start to ring!</span>"
 		M.update_icons()
 
 /obj/item/device/assembly/explosive/flash/clusterbang //Created by Polymorph, fixed by Sieve (update by rose)

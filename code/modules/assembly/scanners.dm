@@ -176,16 +176,16 @@ REAGENT SCANNER
 		return
 	if(user)
 		if (( (CLUMSY in user.mutations) || user.getBrainLoss() >= 60) && prob(50) && user)
-			user << text("\red You try to analyze the floor's vitals!")
+			user << text("<span class='warning'>You try to analyze the floor's vitals!</span>")
 			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\red [user] has analyzed the floor's vitals!"))
-			scanned_data.Add(text("\blue Analyzing Results for The floor:\n\t Overall Status: Healthy"))
-			scanned_data.Add(text("\blue \t Damage Specifics: [0]-[0]-[0]-[0]"))
-			scanned_data.Add("\blue Key: Suffocation/Toxin/Burns/Brute")
-			scanned_data.Add("\blue Body Temperature: ???")
+				O.show_message(text("<span class='warning'>[user] has analyzed the floor's vitals!</span>"))
+			scanned_data.Add(text("<span class='notice'>Analyzing Results for The floor:\n\t Overall Status: Healthy</span>"))
+			scanned_data.Add(text("<span class='notice'> \t Damage Specifics: [0]-[0]-[0]-[0]</span>"))
+			scanned_data.Add("<span class='notice'> Key: Suffocation/Toxin/Burns/Brute</span>")
+			scanned_data.Add("<span class='notice'> Body Temperature: ???</span>")
 			return
 		if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey" && user)
-			usr << "\red You don't have the dexterity to do this!"
+			usr << "<span class='warning'>You don't have the dexterity to do this!</span>"
 			return
 	if(user)
 		user.visible_message("<span class='notice'> [user] has analyzed [M]'s vitals.</span>","<span class='notice'> You have analyzed [M]'s vitals.</span>")
@@ -195,12 +195,12 @@ REAGENT SCANNER
 
 	if (!istype(M, /mob/living/carbon) || M.isSynthetic())
 		//these sensors are designed for organic life
-		scanned_data.Add("\blue Analyzing Results for ERROR:\n\t Overall Status: ERROR")
+		scanned_data.Add("<span class='notice;>Analyzing Results for ERROR:\n\t Overall Status: ERROR</span>")
 		scanned_data.Add("\t Key: <font color='blue'>Suffocation</font>/<font color='green'>Toxin</font>/<font color='#FFA500'>Burns</font>/<font color='red'>Brute</font>")
 		scanned_data.Add("\t Damage Specifics: <font color='blue'>?</font> - <font color='green'>?</font> - <font color='#FFA500'>?</font> - <font color='red'>?</font>")
-		scanned_data.Add("\blue Body Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)")
-		scanned_data.Add("\red <b>Warning: Blood Level ERROR: --% --cl.\blue Type: ERROR</b>")
-		scanned_data.Add("\blue Subject's pulse: <font color='red'>-- bpm.</font>")
+		scanned_data.Add("<span class='notice'> Body Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)</span>")
+		scanned_data.Add("<span class='warning'> <b>Warning: Blood Level ERROR: --% --cl.\blue Type: ERROR</b></span>")
+		scanned_data.Add("<span class='notice'> Subject's pulse: <font color='red'>-- bpm.</font></span>")
 		return
 
 	var/fake_oxy = max(rand(1,40), M.getOxyLoss(), (300 - (M.getToxLoss() + M.getFireLoss() + M.getBruteLoss())))
@@ -218,36 +218,36 @@ REAGENT SCANNER
 		send_data(list(M.getFireLoss()))
 	if(M.status_flags & FAKEDEATH)
 		OX = fake_oxy > 50 			? 	"<b>[fake_oxy]</b>" 			: fake_oxy
-		scanned_data.Add("\blue Analyzing Results for [M]:\n\t Overall Status: dead")
+		scanned_data.Add("<span class='notice'>Analyzing Results for [M]:\n\t Overall Status: dead</span>")
 	else
-		scanned_data.Add("\blue Analyzing Results for [M]:\n\t Overall Status: [M.stat > 1 ? "dead" : "[M.health - M.halloss]% healthy"]")
+		scanned_data.Add("<span class='notice'>Analyzing Results for [M]:\n\t Overall Status: [M.stat > 1 ? "dead" : "[M.health - M.halloss]% healthy"]</span>")
 		if(sent_data == "Overall Health Status")
 			send_data(list("[M.health - M.halloss]"))
 	scanned_data.Add("\t Key: <font color='blue'>Suffocation</font>/<font color='green'>Toxin</font>/<font color='#FFA500'>Burns</font>/<font color='red'>Brute</font>")
 	scanned_data.Add("\t Damage Specifics: <font color='blue'>[OX]</font> - <font color='green'>[TX]</font> - <font color='#FFA500'>[BU]</font> - <font color='red'>[BR]</font>")
-	scanned_data.Add("\blue Body Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)")
+	scanned_data.Add("<span class='notice'>Body Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)</span>")
 	if(M.tod && (M.stat == DEAD || (M.status_flags & FAKEDEATH)))
-		scanned_data.Add("\blue Time of Death: [M.tod]")
+		scanned_data.Add("<span class='notice'>Time of Death: [M.tod]</span>")
 	if(istype(M, /mob/living/carbon/human) && mode == 1)
 		var/mob/living/carbon/human/H = M
 		var/list/damaged = H.get_damaged_organs(1,1)
-		scanned_data.Add("\blue Localized Damage, Brute/Burn:")
+		scanned_data.Add("<span class='notice'>Localized Damage, Brute/Burn:</span>")
 		if(length(damaged)>0)
 			for(var/obj/item/organ/external/org in damaged)
-				scanned_data.Add(text("\blue \t []: [][]\blue - []",	\
+				scanned_data.Add(text("<span class='notice'>\t []: [][]\blue - []</span>",	\
 				"[capitalize(org.name)][org.status & ORGAN_ROBOT ? "(Cybernetic)" : ""]",	\
-				(org.brute_dam > 0)	?	"\red [org.brute_dam]"							:0,		\
-				(org.status & ORGAN_BLEEDING)?"\red <b>\[Bleeding\]</b>":"\t", 		\
+				(org.brute_dam > 0)	?	"<span class='warning'>[org.brute_dam]</span>"							:0,		\
+				(org.status & ORGAN_BLEEDING)?"<span class='warning'><b>\[Bleeding\]</b></span>":"\t", 		\
 				(org.burn_dam > 0)	?	"<font color='#FFA500'>[org.burn_dam]</font>"	:0),1)
 		else
-			scanned_data.Add("\blue \t Limbs are OK.")
+			scanned_data.Add("<span class='notice'>\t Limbs are OK.</span>")
 
 	OX = M.getOxyLoss() > 50 ? 	"<font color='blue'><b>Severe oxygen deprivation detected</b></font>" 		: 	"Subject bloodstream oxygen level normal"
 	TX = M.getToxLoss() > 50 ? 	"<font color='green'><b>Dangerous amount of toxins detected</b></font>" 	: 	"Subject bloodstream toxin level minimal"
 	BU = M.getFireLoss() > 50 ? 	"<font color='#FFA500'><b>Severe burn damage detected</b></font>" 			:	"Subject burn injury status O.K"
 	BR = M.getBruteLoss() > 50 ? "<font color='red'><b>Severe anatomical damage detected</b></font>" 		: 	"Subject brute-force injury status O.K"
 	if(M.status_flags & FAKEDEATH)
-		OX = fake_oxy > 50 ? 		"\red Severe oxygen deprivation detected\blue" 	: 	"Subject bloodstream oxygen level normal"
+		OX = fake_oxy > 50 ? 		"<span class='danger'>Severe oxygen deprivation detected</span>" 	: 	"Subject bloodstream oxygen level normal"
 	scanned_data.Add("[OX] | [TX] | [BU] | [BR]")
 	if(istype(M, /mob/living/carbon))
 		var/mob/living/carbon/C = M
@@ -257,15 +257,15 @@ REAGENT SCANNER
 			for(var/A in C.reagents.reagent_list)
 				var/datum/reagent/R = A
 				if(R.scannable)
-					reagentdata["[R.id]"] = "\t \blue [round(C.reagents.get_reagent_amount(R.id), 1)]u [R.name]"
+					reagentdata["[R.id]"] = "\t <span class='notice'> [round(C.reagents.get_reagent_amount(R.id), 1)]u [R.name]</span>"
 				else
 					unknown++
 			if(reagentdata.len)
-				scanned_data.Add("\blue Beneficial reagents detected in subject's blood:")
+				scanned_data.Add("<span class='notice'>Beneficial reagents detected in subject's blood:</span>")
 				for(var/d in reagentdata)
 					scanned_data.Add(reagentdata[d])
 			if(unknown)
-				scanned_data.Add(text("\red Warning: Unknown substance[(unknown>1)?"s":""] detected in subject's blood."))
+				scanned_data.Add(text("<span class='warning'>Warning: Unknown substance[(unknown>1)?"s":""] detected in subject's blood.</span>"))
 		if(C.ingested && C.ingested.total_volume && user)
 			var/unknown = 0
 			for(var/datum/reagent/R in C.ingested.reagent_list)
@@ -279,23 +279,23 @@ REAGENT SCANNER
 			for (var/ID in C.virus2)
 				if (ID in virusDB)
 					var/datum/data/record/V = virusDB[ID]
-					scanned_data.Add(text("\red Warning: Pathogen [V.fields["name"]] detected in subject's blood. Known antigen : [V.fields["antigen"]]"))
+					scanned_data.Add(text(">span class='warning'>Warning: Pathogen [V.fields["name"]] detected in subject's blood. Known antigen : [V.fields["antigen"]]</span>"))
 //			user.show_message(text("\red Warning: Unknown pathogen detected in subject's blood."))
 	if (M.getCloneLoss())
-		scanned_data.Add("\red Subject appears to have been imperfectly cloned.")
+		scanned_data.Add("<span class='warning'>Subject appears to have been imperfectly cloned.</span>")
 	for(var/datum/disease/D in M.viruses)
 		if(!D.hidden[SCANNER])
-			scanned_data.Add(text("\red <b>Warning: [D.form] Detected</b>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]"))
+			scanned_data.Add(text("<span class='warning'><b>Warning: [D.form] Detected</b>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]</span>"))
 //	if (M.reagents && M.reagents.get_reagent_amount("inaprovaline"))
 //		user.show_message("\blue Bloodstream Analysis located [M.reagents:get_reagent_amount("inaprovaline")] units of rejuvenation chemicals.")
 	if (M.has_brain_worms())
-		scanned_data.Add("\red Subject suffering from aberrant brain activity. Recommend further scanning.")
+		scanned_data.Add("<span class='warning'>Subject suffering from aberrant brain activity. Recommend further scanning.</span>")
 	else if (M.getBrainLoss() >= 100 || !M.has_brain())
-		scanned_data.Add("\red Subject is brain dead.")
+		scanned_data.Add("<span class='warning'>Subject is brain dead.</span>")
 	else if (M.getBrainLoss() >= 60)
-		scanned_data.Add("\red Severe brain damage detected. Subject likely to have mental retardation.")
+		scanned_data.Add("<span class='warning'>Severe brain damage detected. Subject likely to have mental retardation.</span>")
 	else if (M.getBrainLoss() >= 10)
-		scanned_data.Add("\red Significant brain damage detected. Subject may have had a concussion.")
+		scanned_data.Add("<span class='warning'>Significant brain damage detected. Subject may have had a concussion</span>")
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/name in H.organs_by_name)
@@ -305,20 +305,20 @@ REAGENT SCANNER
 			var/limb = e.name
 			if(e.status & ORGAN_BROKEN && user)
 				if(((e.name == "l_arm") || (e.name == "r_arm") || (e.name == "l_leg") || (e.name == "r_leg")) && (!(e.status & ORGAN_SPLINTED)))
-					user << "\red Unsecured fracture in subject [limb]. Splinting recommended for transport."
+					user << "<span class='warning'>Unsecured fracture in subject [limb]. Splinting recommended for transport.</span>"
 			if(e.has_infected_wound() && user)
-				user << "\red Infected wound detected in subject [limb]. Disinfection recommended."
+				user << "<span class='warning'>Infected wound detected in subject [limb]. Disinfection recommended.</span>"
 
 		for(var/name in H.organs_by_name)
 			var/obj/item/organ/external/e = H.organs_by_name[name]
 			if(e && e.status & ORGAN_BROKEN)
-				scanned_data.Add(text("\red Bone fractures detected. Advanced scanner required for location."))
+				scanned_data.Add(text("<span class='warning'>Bone fractures detected. Advanced scanner required for location.</span>"))
 				break
 		for(var/obj/item/organ/external/e in H.organs)
 			if(!e)
 				continue
 			for(var/datum/wound/W in e.wounds) if(W.internal)
-				scanned_data.Add(text("\red Internal bleeding detected. Advanced scanner required for location."))
+				scanned_data.Add(text("<span class='warning'>Internal bleeding detected. Advanced scanner required for location.</span>"))
 				break
 		if(M:vessel)
 			var/blood_volume = round(M:vessel.get_reagent_amount("blood"))
@@ -328,12 +328,12 @@ REAGENT SCANNER
 			if(sent_data == "Blood Level")
 				send_data(list(blood_percent))
 			if(blood_volume <= 500 && blood_volume > 336)
-				scanned_data.Add("\red <b>Warning: Blood Level LOW: [blood_percent]% [blood_volume]cl.</b>\blue Type: [blood_type]")
+				scanned_data.Add("<span class='warning'><b>Warning: Blood Level LOW: [blood_percent]% [blood_volume]cl.</span></b><span class='notice'> Type: [blood_type]</span>")
 			else if(blood_volume <= 336)
-				scanned_data.Add("\red <b>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl.</b>\blue Type: [blood_type]")
+				scanned_data.Add("<span class='warning'><b>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl.</b></span><span class='notice'> Type: [blood_type]</span><")
 			else
-				scanned_data.Add("\blue Blood Level Normal: [blood_percent]% [blood_volume]cl. Type: [blood_type]")
-		scanned_data.Add("\blue Subject's pulse: <font color='[H.pulse == PULSE_THREADY || H.pulse == PULSE_NONE ? "red" : "blue"]'>[H.get_pulse(GETPULSE_TOOL)] bpm.</font>")
+				scanned_data.Add("<span class='notice'>Blood Level Normal: [blood_percent]% [blood_volume]cl. Type: [blood_type]</span>")
+		scanned_data.Add("<span class='notice'>Subject's pulse: <font color='[H.pulse == PULSE_THREADY || H.pulse == PULSE_NONE ? "red" : "blue"]'>[H.get_pulse(GETPULSE_TOOL)] bpm.</font></span>")
 	if(user)
 		src.add_fingerprint(user)
 	if(user)
@@ -371,7 +371,7 @@ REAGENT SCANNER
 						new_scan = sendable_data[1]
 					else
 						new_scan = sendable_data[(index+1)]
-					usr << "\blue You set \the	[src]'s sent data type to \"[new_scan]\"!"
+					usr << "<span class='notice'>You set \the	[src]'s sent data type to \"[new_scan]\"!</span>"
 					sent_data = new_scan
 	..()
 
