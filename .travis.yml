@@ -29,7 +29,7 @@ script:
   - shopt -s globstar
   - (! grep 'step_[xy]' maps/**/*.dmm)
   - (! find nano/templates/ -type f -exec md5sum {} + | sort | uniq -D -w 32 | grep nano)
-  - (! grep -E "<\s*span\s+class\s*=\s*('[^'>]+|[^'>]+')\s*>" **/*.dm)
+  - (! grep -En "<\s*span\s+class\s*=\s*('[^'>]+|[^'>]+')\s*>" **/*.dm)
   - (num=`grep -E '\\\\(red|blue|green|black|b|i[^mc])' **/*.dm | wc -l`; echo "$num escapes (expecting ${MACRO_COUNT} or less)"; [ $num -le ${MACRO_COUNT} ])
   - (num=`grep -E '\WDel\(' **/*.dm | wc -l`; echo "$num Del()s (expecting 4 or less)"; [ $num -le 4 ])
   - awk -f tools/indentation.awk **/*.dm
