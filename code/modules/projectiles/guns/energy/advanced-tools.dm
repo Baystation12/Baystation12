@@ -328,7 +328,7 @@
 	var/location = A.name
 	if(prob(102 - reliability))
 		location = pick("Candy Land", "Space", "%ʤzrt", "A smelly pile of garbage")
-	src.speak("<span class='warning'?This is [owner ? "[owner.name]" : "[ai_name]"] requesting backup at the location of: [location] immediatley.</span>", 1)
+	src.speak("<span class='warning'>This is [owner ? "[owner.name]" : "[ai_name]"] requesting backup at the location of: [location] immediatley.</span>", 1)
 	radio.autosay("This is [owner ? "[owner.name]" : "[ai_name]"] requesting backup at the location of: [location] immediately.", ai_name, "Security")
 
 /obj/item/weapon/gun/energy/advanced/proc/shutup()
