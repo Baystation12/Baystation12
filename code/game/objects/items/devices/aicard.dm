@@ -97,7 +97,7 @@
 		user << "<span class='danger'>Transfer failed:</span> Existing AI found on remote terminal. Remove existing AI to install a new one."
 		return 0
 
-	if(ai.is_malf())
+	if(ai.malfunctioning)
 		user << "<span class='danger'>ERROR:</span> Remote transfer interface disabled."
 		return 0
 
@@ -108,7 +108,7 @@
 	admin_attack_log(user, ai, "Carded with [src.name]", "Was carded with [src.name]", "used the [src.name] to card")
 	src.name = "[initial(name)] - [ai.name]"
 
-	ai.loc = src
+	ai.forceMove(src)
 	ai.destroy_eyeobj(src)
 	ai.cancel_camera()
 	ai.control_disabled = 1
