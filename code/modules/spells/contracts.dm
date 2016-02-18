@@ -48,7 +48,7 @@
 
 
 /obj/item/weapon/contract/wizard //contracts that involve making a deal with the Wizard Acadamy (or NON PLAYERS)
-	contract_master = "\improper Wizard Acadamy"
+	contract_master = "\improper Wizard Academy"
 
 /obj/item/weapon/contract/wizard/xray
 	name = "xray vision contract"
@@ -65,58 +65,83 @@
 		return 1
 	return 0
 
-/obj/item/weapon/contract/wizard/spell //wizard spells that do spells. Simple as that.
-	var/spell = /spell/targeted/projectile/magic_missile
-	var/spell_name = "sandbox"
+/mob/item/weapon/contract/wizard/tk
+	name = "telekinesis contract"
+	desc = "This contract makes your mind buzz."
 
-/obj/item/weapon/contract/wizard/spell/New()
-	name = "spell contract of [spell_name]"
-
-
-/obj/item/weapon/contract/wizard/spell/contract_effect(mob/user as mob)
+/obj/item/weapon/contract/wizard/tk/contract_effect(mob/user as mob)
 	..()
-	user.add_spell(new spell)
-	return 1
+	if(!(TK in user.mutations))
+		user.mutations.Add(TK)
+		user << "<span class='notice'>You feel your mind expanding!</span>"
+		return 1
+	return 0
 
+/obj/item/weapon/contract/boon
+	name = "boon contract"
+	desc = "this contract grants you a boon for signing it."
+	var/path
+	var/item_name
 
-/obj/item/weapon/contract/wizard/spell/artificer
-	spell_name = "artificing"
-	spell = /spell/aoe_turf/conjure/construct
+/obj/item/weapon/contract/boon/New(var/newloc,var/new_name, var/new_path)
+	..(newloc)
+	if(new_path)
+		path = new_path
+	if(new_name)
+		item_name = new_name
+	name = "[item_name] contract"
+
+/obj/item/weapon/contract/boon/contract_effect(mob/user as mob)
+	..()
+	if(ispath(path,/spell))
+		user.add_spell(new path)
+		return 1
+	if(ispath(path,/obj))
+		new path(get_turf(user.loc))
+		flick("e_flash", usr.flash)
+		return 1
+
+/obj/item/weapon/contract/boon/wizard
+	contract_master = "\improper Wizard Academy"
+
+/obj/item/weapon/contract/boon/wizard/artificer
+	item_name = "artificing"
+	path = /spell/aoe_turf/conjure/construct
 	desc = "This contract has a passage dedicated to an entity known as 'Nar-Sie'"
 
-/obj/item/weapon/contract/wizard/spell/fireball
-	spell = /spell/targeted/projectile/dumbfire/fireball
-	spell_name = "fireball"
+/obj/item/weapon/contract/boon/wizard/fireball
+	path = /spell/targeted/projectile/dumbfire/fireball
+	item_name = "fireball"
 	desc = "This contract feels warm to the touch."
 
-/obj/item/weapon/contract/wizard/spell/smoke
-	spell = /spell/aoe_turf/smoke
-	spell_name = "smoke"
+/obj/item/weapon/contract/boon/wizard/smoke
+	path = /spell/aoe_turf/smoke
+	item_name = "smoke"
 	desc = "This contract smells as dank as they come."
 
-/obj/item/weapon/contract/wizard/spell/mindswap
-	spell = /spell/targeted/mind_transfer
-	spell_name = "mindswap"
+/obj/item/weapon/contract/boon/wizard/mindswap
+	path = /spell/targeted/mind_transfer
+	item_name = "mindswap"
 	desc = "This contract looks ragged and torn."
 
-/obj/item/weapon/contract/wizard/spell/forcewall
-	spell = /spell/aoe_turf/conjure/forcewall
-	spell_name = "forcewall"
+/obj/item/weapon/contract/boon/wizard/forcewall
+	path = /spell/aoe_turf/conjure/forcewall
+	item_name = "forcewall"
 	contract_master = "\improper Mime Federation"
 	desc = "This contract has a dedication to mimes everywhere at the top."
 
-/obj/item/weapon/contract/wizard/spell/knock
-	spell = /spell/aoe_turf/knock
-	spell_name = "knock"
+/obj/item/weapon/contract/boon/wizard/knock
+	path = /spell/aoe_turf/knock
+	item_name = "knock"
 	desc = "This contract is hard to hold still."
 
-/obj/item/weapon/contract/wizard/spell/horsemask
-	spell = /spell/targeted/equip_item/horsemask
-	spell_name = "horses"
+/obj/item/weapon/contract/boon/wizard/horsemask
+	path = /spell/targeted/equip_item/horsemask
+	item_name = "horses"
 	desc = "This contract is more horse than your mind has room for."
 
-/obj/item/weapon/contract/wizard/spell/charge
-	spell = /spell/aoe_turf/charge
-	spell_name = "charging"
+/obj/item/weapon/contract/boon/wizard/charge
+	path = /spell/aoe_turf/charge
+	item_name = "charging"
 	desc = "This contract is made of 100% post-consumer wizard."
 

@@ -15,6 +15,8 @@ var/datum/antagonist/wizard/wizards
 	initial_spawn_req = 1
 	initial_spawn_target = 1
 
+	faction = "wizard"
+
 
 /datum/antagonist/wizard/New()
 	..()

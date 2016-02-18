@@ -18,6 +18,8 @@ var/datum/antagonist/raider/raiders
 
 	id_type = /obj/item/weapon/card/id/syndicate
 
+	faction = "pirate"
+
 	// Heist overrides check_victory() and doesn't need victory or loss strings/tags.
 	var/list/raider_uniforms = list(
 		/obj/item/clothing/under/soviet,

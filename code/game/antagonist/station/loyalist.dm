@@ -29,6 +29,8 @@ var/datum/antagonist/loyalists/loyalists
 	faction_invisible = 1
 	restricted_jobs = list("AI", "Cyborg")
 
+	faction = "loyalist"
+
 /datum/antagonist/loyalists/New()
 	..()
 	loyalists = src
