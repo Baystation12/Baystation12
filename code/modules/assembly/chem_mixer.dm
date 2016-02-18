@@ -28,30 +28,30 @@
 	R.my_atom = src
 	update_icon()
 
+/obj/item/device/assembly/chem_mixer/proc/attach_container(var/obj/item/W)
+	if(is_type_in_list(W, allowed_containers))
+		W.loc = src
+		beakers += W
+
 /obj/item/device/assembly/chem_mixer/attackby(var/obj/item/W, var/mob/living/carbon/user)
 	if(is_type_in_list(W, allowed_containers))
 		if(beakers.len >= max_beakers)
-			if(user)
-				user << "<span class='warning'>\The [src] can not hold more containers.</span>"
+			user << "<span class='warning'>\The [src] can not hold more containers.</span>"
 			return
 		else
 			if(W.reagents.total_volume)
-				if(istype(user))
-					user << "<span class='notice'>You add \the [W] to the assembly.</span>"
-					user.remove_from_mob(src)
-				W.loc = src
-				beakers += W
-			else if(user)
+				user << "<span class='notice'>You add \the [W] to the assembly.</span>"
+				user.remove_from_mob(src)
+				attach_container(W)
+			else
 				user << "<span class='warning'>\The [W] is empty.</span>"
 	else if(istype(W, /obj/item/stack/cable_coil) && used)
 		var/obj/item/stack/cable_coil/C = W
 		if(C.use(5))
-			if(user)
-				user << "<span class='notice'>You reset \the [src]!</span>"
+			user << "<span class='notice'>You reset \the [src]!</span>"
 			used = 0
 		else
-			if(user)
-				user << "<span class='notice'>You need atleast 5 units of cable to do that!</span>"
+			user << "<span class='notice'>You need atleast 5 units of cable to do that!</span>"
 			return
 	else
 		..(W, user)

@@ -36,8 +36,8 @@
 		B2.reagents.add_reagent("foaming_agent", 10)
 		B2.reagents.add_reagent("pacid", 10)
 
-		explosive.attackby(B1, src)
-		explosive.attackby(B2, src)
+		explosive.attach_container(B1, src)
+		explosive.attach_container(B2, src)
 		icon_state = initial(icon_state) +"_locked"
 
 /obj/item/device/assembly_holder/grenade/chem_grenade/incendiary
@@ -55,8 +55,8 @@
 		B2.reagents.add_reagent("sacid", 15)
 		B1.reagents.add_reagent("fuel",20)
 
-		explosive.attackby(B1, src)
-		explosive.attackby(B2, src)
+		explosive.attach_container(B1, src)
+		explosive.attach_container(B2, src)
 		icon_state = initial(icon_state) +"_locked"
 
 /obj/item/device/assembly_holder/grenade/chem_grenade/antiweed
@@ -73,8 +73,8 @@
 		B2.reagents.add_reagent("phosphorus", 25)
 		B2.reagents.add_reagent("sugar", 25)
 
-		explosive.attackby(B1, src)
-		explosive.attackby(B2, src)
+		explosive.attach_container(B1, src)
+		explosive.attach_container(B2, src)
 		icon_state = "grenade"
 
 /obj/item/device/assembly_holder/grenade/chem_grenade/cleaner
@@ -90,8 +90,8 @@
 		B2.reagents.add_reagent("water", 40)
 		B2.reagents.add_reagent("cleaner", 10)
 
-		explosive.attackby(B1, src)
-		explosive.attackby(B2, src)
+		explosive.attach_container(B1, src)
+		explosive.attach_container(B2, src)
 		icon_state = initial(icon_state) +"_locked"
 
 /obj/item/device/assembly_holder/grenade/chem_grenade/teargas
@@ -109,6 +109,6 @@
 		B2.reagents.add_reagent("sugar", 40)
 		B2.reagents.add_reagent("condensedcapsaicin", 80)
 
-		explosive.attackby(B1, src)
-		explosive.attackby(B2, src)
+		explosive.attach_container(B1, src)
+		explosive.attach_container(B2, src)
 		icon_state = initial(icon_state) +"_locked"
