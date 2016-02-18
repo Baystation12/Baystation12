@@ -31,23 +31,27 @@
 /obj/item/device/assembly/chem_mixer/attackby(var/obj/item/W, var/mob/living/carbon/user)
 	if(is_type_in_list(W, allowed_containers))
 		if(beakers.len >= max_beakers)
-			user << "<span class='warning'>\The [src] can not hold more containers.</span>"
+			if(user)
+				user << "<span class='warning'>\The [src] can not hold more containers.</span>"
 			return
 		else
 			if(W.reagents.total_volume)
-				user << "<span class='notice'>You add \the [W] to the assembly.</span>"
-				user.remove_from_mob(src)
+				if(istype(user))
+					user << "<span class='notice'>You add \the [W] to the assembly.</span>"
+					user.remove_from_mob(src)
 				W.loc = src
 				beakers += W
-			else
+			else if(user)
 				user << "<span class='warning'>\The [W] is empty.</span>"
 	else if(istype(W, /obj/item/stack/cable_coil) && used)
 		var/obj/item/stack/cable_coil/C = W
 		if(C.use(5))
-			user << "<span class='notice'>You reset \the [src]!</span>"
+			if(user)
+				user << "<span class='notice'>You reset \the [src]!</span>"
 			used = 0
 		else
-			user << "<span class='notice'>You need atleast 5 units of cable to do that!</span>"
+			if(user)
+				user << "<span class='notice'>You need atleast 5 units of cable to do that!</span>"
 			return
 	else
 		..(W, user)
