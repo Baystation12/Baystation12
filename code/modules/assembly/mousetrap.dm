@@ -10,18 +10,18 @@
 	wire_num = 0
 
 
-	examine(mob/user)
-		..(user)
-		if(armed)
-			user << "It looks like it's armed."
+/obj/item/device/assembly/mousetrap/examine(mob/user)
+	..(user)
+	if(armed)
+		user << "It looks like it's armed."
 
-	update_icon()
-		if(armed)
-			icon_state = "mousetraparmed"
-		else
-			icon_state = "mousetrap"
-		if(holder)
-			holder.update_icon()
+/obj/item/device/assembly/mousetrap/update_icon()
+	if(armed)
+		icon_state = "mousetraparmed"
+	else
+		icon_state = "mousetrap"
+	if(holder)
+		holder.update_icon()
 
 /obj/item/device/assembly/mousetrap/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/stack/cable_coil))

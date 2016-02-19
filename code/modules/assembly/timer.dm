@@ -14,50 +14,52 @@
 	proc
 		timer_end()
 
-	get_data()
-		var/list/data = list()
-		data.Add("Time", time, "Time to Set", time_to_set)
-		return data
+/obj/item/device/assembly/timer/get_data()
+	var/list/data = list()
+	data.Add("Time", time, "Time to Set", time_to_set)
+	return data
 
-	New()
-		..()
-		processing_objects.Add(src)
+/obj/item/device/assembly/timer/New()
+	..()
+	processing_objects.Add(src)
 
-	Destroy()
-		processing_objects.Remove(src)
-		..()
+/obj/item/device/assembly/timer/Destroy()
+	processing_objects.Remove(src)
+	..()
 
-	activate()
-		timing = 1
-		update_icon()
+/obj/item/device/assembly/timer/activate()
+	timing = 1
+	update_icon()
+	return 1
+
+/obj/item/device/assembly/timer/timer_end()
+	if(holder)
+		misc_activate()
+	else
+		visible_message("\icon[src] *beep* *beep*", "*beep* *beep*")
+	spawn(10)
+		time = time_to_set
+	timing = 0
+	return
+
+/obj/item/device/assembly/timer/misc_activate()
+	if(active_wires & WIRE_MISC_ACTIVATE)
+		send_pulse_to_connected()
 		return 1
-
-	timer_end()
-		if(holder)
-			misc_activate()
-		else
-			visible_message("\icon[src] *beep* *beep*", "*beep* *beep*")
-		spawn(10)
-			time = time_to_set
-		timing = 0
-		return
-
-	misc_activate()
-		if(active_wires & WIRE_MISC_ACTIVATE)
-			send_pulse_to_connected()
+	return 0
 
 
-	process()
-		if(active_wires & WIRE_ASSEMBLY_PROCESS)
-			if(timing && (time > 0))
-				time--
-				add_debug_log("\[[src] : [time]\]")
-			if(timing && time <= 0)
-				timing = 0
-				timer_end()
-		else
+/obj/item/device/assembly/timer/process()
+	if(active_wires & WIRE_ASSEMBLY_PROCESS)
+		if(timing && (time > 0))
+			time--
+			add_debug_log("\[[src] : [time]\]")
+		if(timing && time <= 0)
 			timing = 0
 			timer_end()
+	else
+		timing = 0
+		timer_end()
 		return
 
 
@@ -76,21 +78,21 @@
 		return
 */
 
-	Topic(href, href_list)
-		if(href_list["option"])
-			switch(href_list["option"])
-				if("Time")
-					var/inp = input(usr, "What would you like to set the time to?", "[src.interface_name]")
-					inp = text2num(inp)
-					if(inp)
-						inp = max(1, inp)
-						time = min(300, inp) // 5 mins max.
-				if("Time to Set")
-					var/num = input(usr, "What would you like to set the default time to?", "Repeater")
-					if(num)
-						time_to_set = min(120, num)
-						time_to_set = max(0, num)
-		..()
+/obj/item/device/assembly/timer/Topic(href, href_list)
+	if(href_list["option"])
+		switch(href_list["option"])
+			if("Time")
+				var/inp = input(usr, "What would you like to set the time to?", "[src.interface_name]")
+				inp = text2num(inp)
+				if(inp)
+					inp = max(1, inp)
+					time = min(300, inp) // 5 mins max.
+			if("Time to Set")
+				var/num = input(usr, "What would you like to set the default time to?", "Repeater")
+				if(num)
+					time_to_set = min(120, num)
+					time_to_set = max(0, num)
+	..()
 
 /obj/item/device/assembly/timer/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/stack/cable_coil))

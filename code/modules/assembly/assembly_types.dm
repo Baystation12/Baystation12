@@ -91,7 +91,7 @@
 			choices = list("plumphelmet", "donut", "pen")
 		if("yellow")
 			choices = list("banana-peel", "cake", "wet-floor-sign", "toy")
-	var/inp = input(usr, "What would you like \the [src] to look like?", "[src]") in choices
+	var/inp = input(user, "What would you like \the [src] to look like?", "[src]") in choices
 	icon_state = "p_[inp]"
 	name = inp
 	painted = 1

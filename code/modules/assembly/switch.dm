@@ -12,36 +12,36 @@
 	var/on = 1
 	var/toggle_data = "TOGGLE"
 
-	receive_data(var/list/data, var/obj/item/device/assembly/A)
-		if(toggle_data in data)
-			misc_activate()
-		return 1
+/obj/item/device/assembly/switch_device/receive_data(var/list/data, var/obj/item/device/assembly/A)
+	if(toggle_data in data)
+		misc_activate()
+	return 1
 
-	misc_activate()
-		if(active_wires & WIRE_MISC_ACTIVATE)
-			on = !on
+/obj/item/device/assembly/switch_device/misc_activate()
+	if(active_wires & WIRE_MISC_ACTIVATE)
+		on = !on
 
-	activate()
-		if(on)
-			..()
-		return 1
-
-	get_data()
-		var/list/data = list()
-		data.Add("Active", on, "Toggle Data", toggle_data)
-		return data
-
-	Topic(href, href_list)
-		if(href_list["option"])
-			switch(href_list["option"])
-				if("Active")
-					on = !on
-					usr << "<span class='notice'>You turn \the [src] [on ? "on" : "off"]</span>"
-				if("Toggle Data")
-					var/inp = input(usr, "What data would you like to search for?", "Data")
-					if(inp)
-						toggle_data = inp
+/obj/item/device/assembly/switch_device/activate()
+	if(on)
 		..()
+	return 1
+
+/obj/item/device/assembly/switch_device/get_data()
+	var/list/data = list()
+	data.Add("Active", on, "Toggle Data", toggle_data)
+	return data
+
+/obj/item/device/assembly/switch_device/Topic(href, href_list)
+	if(href_list["option"])
+		switch(href_list["option"])
+			if("Active")
+				on = !on
+				usr << "<span class='notice'>You turn \the [src] [on ? "on" : "off"]</span>"
+			if("Toggle Data")
+				var/inp = input(usr, "What data would you like to search for?", "Data")
+				if(inp)
+					toggle_data = inp
+	..()
 
 
 /obj/item/device/assembly/switch_device/two_way
@@ -52,18 +52,18 @@
 	var/alt_connected_to_name = "NULL"
 	var/true = "TRUE"
 
-	activate()
-		if(on && alt_connected_to)
-			var/obj/item/device/assembly/A = holder.connected_devices[alt_connected_to]
-			if(A)
-				send_direct_pulse(A)
-		else
-			send_pulse_to_connected()
-		if(true == "TRUE")
-			on = !on
-		return 1
+/obj/item/device/assembly/switch_device/two_way/activate()
+	if(on && alt_connected_to)
+		var/obj/item/device/assembly/A = holder.connected_devices[alt_connected_to]
+		if(A)
+			send_direct_pulse(A)
+	else
+		send_pulse_to_connected()
+	if(true == "TRUE")
+		on = !on
+	return 1
 
-	get_data()
+/obj/item/device/assembly/switch_device/two_way/get_data()
 		var/list/data = list()
 		data.Add("Active", on, "Toggle Data", toggle_data, "Alt.Connection", alt_connected_to_name, "Toggle After Activation", true)
 		return data
@@ -110,33 +110,34 @@
 	var/alt_connection = 1
 	var/obj/item/device/assembly/alt_connected_to
 
-	activate()
-		if(on)
-			if(alt_connection > connects_to.len)
-				alt_connection = 1
-			var/index = text2num(connects_to[alt_connection])
-			alt_connected_to = holder.connected_devices[index]
-			if(alt_connected_to)
-				send_direct_pulse(alt_connected_to)
-			if(true == "TRUE")
-				alt_connection += 1
+/obj/item/device/assembly/switch_device/multi_way/activate()
+	if(on)
+		if(alt_connection > connects_to.len)
+			alt_connection = 1
+		var/index = text2num(connects_to[alt_connection])
+		alt_connected_to = holder.connected_devices[index]
+		if(alt_connected_to)
+			send_direct_pulse(alt_connected_to)
+		if(true == "TRUE")
+			alt_connection += 1
+	return 1
+
+/obj/item/device/assembly/switch_device/multi_way/get_data()
+	var/list/data = list()
+	data.Add("Active", on, "Toggle Data", toggle_data, "Change After Activation", true)
+	return data
+
+/obj/item/device/assembly/switch_device/multi_way/misc_activate()
+	if(active_wires & WIRE_MISC_ACTIVATE)
+		alt_connection++
 		return 1
 
-	get_data()
-		var/list/data = list()
-		data.Add("Active", on, "Toggle Data", toggle_data, "Change After Activation", true)
-		return data
+/obj/item/device/assembly/switch_device/multi_way/receive_data(var/list/data)
+	if(toggle_data in data)
+		on = !on
+	return 1
 
-	misc_activate()
-		if(active_wires & WIRE_MISC_ACTIVATE)
-			alt_connection++
-
-	receive_data(var/list/data)
-		if(toggle_data in data)
-			on = !on
-		return 1
-
-/obj/item/device/assembly/switch_device/two_way/Topic(href, href_list)
+/obj/item/device/assembly/switch_device/multi_way/Topic(href, href_list)
 	if(href_list["option"])
 		switch(href_list["option"])
 			if("Change After Activation")

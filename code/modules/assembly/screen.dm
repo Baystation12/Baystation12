@@ -11,55 +11,56 @@
 	var/on = 0
 	var/flash = 0
 
-	receive_data(var/list/data, var/obj/item/device/assembly/sender)
-		if(!data.len || !on)
-			add_debug_log("Unable to obtain data \[[src]\]")
-			return 0
-		if(istext(data[1]))
-			pmessage = message
-			message = data[1]
-			examined_additions.Cut()
-			examined_additions.Add(message)
-			add_debug_log("Message set to: [message] \[[src]\]")
-			if(holder)
-				holder.visible_message("<span class='notice'><IMG CLASS=icon SRC=\ref[icon] ICONSTATE='[icon_state]'>[holder] flashes: \"[message]\"!</span>")
-
-		return 1
-
-	activate()
-		on = !on
+/obj/item/device/assembly/screen/receive_data(var/list/data, var/obj/item/device/assembly/sender)
+	if(!data.len || !on)
+		add_debug_log("Unable to obtain data \[[src]\]")
+		return 0
+	if(istext(data[1]))
+		pmessage = message
+		message = data[1]
+		examined_additions.Cut()
+		examined_additions.Add(message)
+		add_debug_log("Message set to: [message] \[[src]\]")
 		if(holder)
-			if(on)
-				examined_additions.Add(message)
-				holder.visible_message("<span class='notice'><IMG CLASS=icon SRC=\ref[icon] ICONSTATE='[icon_state]'>[holder] flashes: \"[message]\"!</span>")
-		return 1
+			holder.visible_message("<span class='notice'><IMG CLASS=icon SRC=\ref[icon] ICONSTATE='[icon_state]'>[holder] flashes: \"[message]\"!</span>")
 
-	examine(var/mob/user)
-		..()
-		if(message)
-			user << message
+	return 1
 
-	emp_act(var/severity = 1)
-		receive_data(pick("E-ER&%O-", "HONK!", "A fatal error has occured. Please cons^$- CapTin&Krun-nch!"))
+/obj/item/device/assembly/screen/activate()
+	on = !on
+	if(holder)
+		if(on)
+			examined_additions.Add(message)
+			holder.visible_message("<span class='notice'><IMG CLASS=icon SRC=\ref[icon] ICONSTATE='[icon_state]'>[holder] flashes: \"[message]\"!</span>")
+	return 1
 
-	get_data(var/mob/user, var/ui_key)
-		var/list/data = list()
-		data.Add("Message", message, "On", on, "Flash Message", flash)
-		return data
+/obj/item/device/assembly/screen/examine(var/mob/user)
+	..()
+	if(message)
+		user << message
 
-	Topic(href, href_list)
-		if(href_list["option"])
-			switch(href_list["option"])
-				if("Message")
-					var/new_message = input(usr, "What message would you like to display?", "Message")
-					if(new_message)
-						pmessage = message
-						message = new_message
-						examined_additions.Add(message)
-				if("On")
-					process_activation()
-					usr << "You turn \the [src] [on ? "on" : "off"]"
-				if("Flash Message")
-					flash = !flash
-		..()
+/obj/item/device/assembly/screen/emp_act(var/severity = 1)
+	receive_data(pick("E-ER&%O-", "HONK!", "A fatal error has occured. Please cons^$- CapTin&Krun-nch!"))
+	..()
+
+/obj/item/device/assembly/screen/get_data(var/mob/user, var/ui_key)
+	var/list/data = list()
+	data.Add("Message", message, "On", on, "Flash Message", flash)
+	return data
+
+/obj/item/device/assembly/screen/Topic(href, href_list)
+	if(href_list["option"])
+		switch(href_list["option"])
+			if("Message")
+				var/new_message = input(usr, "What message would you like to display?", "Message")
+				if(new_message)
+					pmessage = message
+					message = new_message
+					examined_additions.Add(message)
+			if("On")
+				process_activation()
+				usr << "You turn \the [src] [on ? "on" : "off"]"
+			if("Flash Message")
+				flash = !flash
+	..()
 

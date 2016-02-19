@@ -10,24 +10,24 @@
 
 	var/obj/machinery/atmospherics/pipe/target = null
 
-	activate()
-		var/datum/gas_mixture/environment
-		if(target)
-			environment = target.return_air()
-		else
-			var/turf/T = get_turf(src.loc)
-			if(T) environment = T.return_air()
-		if(!environment)
-			return 0
+/obj/item/device/assembly/meter/activate()
+	var/datum/gas_mixture/environment
+	if(target)
+		environment = target.return_air()
+	else
+		var/turf/T = get_turf(src.loc)
+		if(T) environment = T.return_air()
+	if(!environment)
+		return 0
 
-		var/env_pressure = environment.return_pressure()
-		return send_data(list(env_pressure))
+	var/env_pressure = environment.return_pressure()
+	return send_data(list(env_pressure))
 
-	anchored(var/anchored = 0)
-		if(anchored)
-			for(var/obj/machinery/atmospherics/pipe/P in src.loc)
-			target = locate(/obj/machinery/atmospherics/pipe) in get_turf(src)
-		else if(target)
-			target = null
-		return 1
+/obj/item/device/assembly/meter/anchored(var/anchored = 0)
+	if(anchored)
+		for(var/obj/machinery/atmospherics/pipe/P in src.loc)
+		target = locate(/obj/machinery/atmospherics/pipe) in get_turf(src)
+	else if(target)
+		target = null
+	return 1
 

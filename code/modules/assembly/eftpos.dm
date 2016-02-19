@@ -210,7 +210,7 @@
 		if(linked_account)
 			scan_card(I, O)
 		else
-			usr << "\icon[src]<span class='warning'>Unable to connect to linked account.</span>"
+			user << "\icon[src]<span class='warning'>Unable to connect to linked account.</span>"
 	else if (istype(O, /obj/item/weapon/spacecash/ewallet))
 		var/obj/item/weapon/spacecash/ewallet/E = O
 		if (linked_account)
@@ -235,11 +235,11 @@
 						T.time = worldtime2text()
 						linked_account.transaction_log.Add(T)
 					else
-						usr << "\icon[src]<span class='warning'>\The [O] doesn't have that much money!</span>"
+						user << "\icon[src]<span class='warning'>\The [O] doesn't have that much money!</span>"
 			else
-				usr << "\icon[src]<span class='warning'>Connected account has been suspended.</span>"
+				user << "\icon[src]<span class='warning'>Connected account has been suspended.</span>"
 		else
-			usr << "\icon[src]<span class='warning'>EFTPOS is not connected to an account.</span>"
+			user << "\icon[src]<span class='warning'>EFTPOS is not connected to an account.</span>"
 
 	else
 		..()

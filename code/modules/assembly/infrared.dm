@@ -15,75 +15,77 @@
 	var/obj/effect/beam/i_beam/first = null
 	var/range = 7
 
-	anchored(var/anchored = 0)
-		if(!anchored)
-			trigger_beam()
-			if(on)
-				activate()
-		sleep(0)
+/obj/item/device/assembly/infra/anchored(var/anchored = 0)
+	if(!anchored)
+		trigger_beam()
+		if(on)
+			activate()
+	sleep(0)
+	return 1
+
+/obj/item/device/assembly/infra/activate()
+	if(anchored || (holder && holder.anchored))
+		on = !on
+		if(on)
+			processing_objects.Add(src)
+		else
+			if(first) qdel(first)
+			processing_objects.Remove(src)
+	return 1
+
+/obj/item/device/assembly/infra/process()//Old code
+	if(holder) dir = holder.dir
+	if(!first && !triggered && (istype(loc, /turf) || holder && istype(holder.loc, /turf)))
+		var/obj/effect/beam/i_beam/I = new /obj/effect/beam/i_beam(get_turf(src))
+		I.master = src
+		I.density = 1
+		I.set_dir(dir)
+		step(I, I.dir)
+		if(I)
+			I.density = 0
+			first = I
+			I.vis_spread(visible)
+			spawn(0)
+				if(I)
+					//world << "infra: setting limit"
+					I.limit = range
+					//world << "infra: processing beam \ref[I]"
+					I.process()
+				return
+	return
+
+/obj/item/device/assembly/infra/Move()
+	var/t = dir
+	..()
+	set_dir(t)
+	qdel(first)
+	return
+
+
+/obj/item/device/assembly/infra/holder_movement()
+	if(!holder)	return 0
+	set_dir(holder.dir)
+//	qdel(first)
+	return 1
+
+/obj/item/device/assembly/infra/misc_activate()
+	if(active_wires & WIRE_MISC_ACTIVATE)
+		send_pulse_to_connected()
 		return 1
+	return 0
 
-	activate()
-		if(anchored || (holder && holder.anchored))
-			on = !on
-			if(on)
-				processing_objects.Add(src)
-			else
-				if(first) qdel(first)
-				processing_objects.Remove(src)
-		return 1
 
-	process()//Old code
-		if(holder) dir = holder.dir
-		if(!first && !triggered && (istype(loc, /turf) || holder && istype(holder.loc, /turf)))
-			var/obj/effect/beam/i_beam/I = new /obj/effect/beam/i_beam(get_turf(src))
-			I.master = src
-			I.density = 1
-			I.set_dir(dir)
-			step(I, I.dir)
-			if(I)
-				I.density = 0
-				first = I
-				I.vis_spread(visible)
-				spawn(0)
-					if(I)
-						//world << "infra: setting limit"
-						I.limit = range
-						//world << "infra: processing beam \ref[I]"
-						I.process()
-					return
-		return
-
-	Move()
-		var/t = dir
-		..()
-		set_dir(t)
+/obj/item/device/assembly/infra/proc/trigger_beam()
+	if(first)
 		qdel(first)
-		return
-
-
-	holder_movement()
-		if(!holder)	return 0
-		set_dir(holder.dir)
-//		qdel(first)
-		return 1
-
+	triggered = 1
+	spawn(50)
+		triggered = 0
+	if(!on)	return 0
 	misc_activate()
-		if(active_wires & WIRE_MISC_ACTIVATE)
-			send_pulse_to_connected()
-
-
-	proc/trigger_beam()
-		if(first)
-			qdel(first)
-		triggered = 1
-		spawn(50)
-			triggered = 0
-		if(!on)	return 0
-		misc_activate()
-		if(!holder)
-			visible_message("\icon[src] *beep* *beep*")
-		return
+	if(!holder)
+		visible_message("\icon[src] *beep* *beep*")
+	return
 
 /*
 	interact(mob/user as mob)//TODO: change this this to the wire control panel
@@ -96,26 +98,26 @@
 		onclose(user, "infra")
 		return
 */
-	get_data()
-		return list("On", on, "Visible", visible, "Range", range)
+/obj/item/device/assembly/infra/get_data()
+	return list("On", on, "Visible", visible, "Range", range)
 
 
-	Topic(href, href_list)
-		if(href_list["option"])
-			switch(href_list["option"])
-				if("On")
-					if(anchored || (holder && holder.anchored))
-						process_activation()
-					else
-						usr << "<span class='notice'>You need to anchor \the [src] first!</span>"
-				if("Visible")
-					visible = !visible
-				if("Range")
-					var/inp = max(1, min(text2num(input(usr,"What would you like the range to be?", "Infrared")), 10))
-					if(inp)
-						range = inp
-					else range = 4
-		..()
+/obj/item/device/assembly/infra/Topic(href, href_list)
+	if(href_list["option"])
+		switch(href_list["option"])
+			if("On")
+				if(anchored || (holder && holder.anchored))
+					process_activation()
+				else
+					usr << "<span class='notice'>You need to anchor \the [src] first!</span>"
+			if("Visible")
+				visible = !visible
+			if("Range")
+				var/inp = max(1, min(text2num(input(usr,"What would you like the range to be?", "Infrared")), 10))
+				if(inp)
+					range = inp
+				else range = 4
+	..()
 
 /*
 	verb/rotate()//This could likely be better

@@ -158,10 +158,10 @@
 
 /obj/item/device/assembly_holder/proc/admin_access(var/mob/user)
 	if(advanced_settings["noadmin"]==1 || debug_mode) return 1
-	var/inp = input(usr, "Enter admin password")
+	var/inp = input(user, "Enter admin password")
 	if(inp == password)
 		return 1
-	usr << "<span class='warning'>Access denied!</span>"
+	user << "<span class='warning'>Access denied!</span>"
 	return 0
 
 

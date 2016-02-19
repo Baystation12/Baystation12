@@ -10,22 +10,22 @@
 	var/init_cycles = 0
 	var/delay = 0
 
-	process()
-		if(timing)
-			time--
-		if(timing && time <= 0)
-			timing = 0
-			timer_end()
-			sleep(0)
-			if(repeat_cycles)
-				add_debug_log("Cycles Remaining: [repeat_cycles]")
-				repeat_cycles--
-				spawn(delay*10)
-					time = time_to_set // Keeps repeating itself.
-					timing = 1
-			else
-				repeat_cycles =	init_cycles
-		return
+/obj/item/device/assembly/timer/repeater/process()
+	if(timing)
+		time--
+	if(timing && time <= 0)
+		timing = 0
+		timer_end()
+		sleep(0)
+		if(repeat_cycles)
+			add_debug_log("Cycles Remaining: [repeat_cycles]")
+			repeat_cycles--
+			spawn(delay*10)
+				time = time_to_set // Keeps repeating itself.
+				timing = 1
+		else
+			repeat_cycles =	init_cycles
+	return
 
 /obj/item/device/assembly/timer/repeater/proc/change_repeat_cycles(var/amount)
 	repeat_cycles = min(10, amount)

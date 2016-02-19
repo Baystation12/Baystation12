@@ -12,49 +12,51 @@
 
 	var/obj/machinery/door/airlock/target
 
-	door_opened()
-		if(trigger_action == "Activate on door open")
-			return misc_activate()
-		return 0
+/obj/item/device/assembly/pressure_clamp/door_opened()
+	if(trigger_action == "Activate on door open")
+		return misc_activate()
+	return 0
 
-	misc_activate()
-		if(active_wires & WIRE_MISC_ACTIVATE)
-			send_pulse_to_connected()
-			return 1
-
-	attached_to(var/obj/machinery/door/airlock/D)
-		if(D && istype(D))
-			target = D
+/obj/item/device/assembly/pressure_clamp/misc_activate()
+	if(active_wires & WIRE_MISC_ACTIVATE)
+		send_pulse_to_connected()
 		return 1
 
-	detatched_from(var/obj/machinery/door/airlock/D)
-		if(D == target)
-			target = null
+/obj/item/device/assembly/pressure_clamp/attached_to(var/obj/machinery/door/airlock/D)
+	if(D && istype(D))
+		target = D
+	return 1
+
+/obj/item/device/assembly/pressure_clamp/detatched_from(var/obj/machinery/door/airlock/D)
+	if(D == target)
+		target = null
+	return 1
+
+/obj/item/device/assembly/pressure_clamp/get_data()
+	var/list/data = list()
+	data.Add("Function", trigger_action)
+	return data
+
+/obj/item/device/assembly/pressure_clamp/activate()
+	if(target)
+		switch(trigger_action)
+			if("Open Door")
+				target.open(0)
+			if("Close Door")
+				target.close(0)
+			if("Lock Door")
+				target.lock(0)
 		return 1
+	return 0
 
-	get_data()
-		var/list/data = list()
-		data.Add("Function", trigger_action)
-		return data
-
-	activate()
-		if(target)
-			switch(trigger_action)
-				if("Open Door")
-					target.open(0)
-				if("Close Door")
-					target.close(0)
-				if("Lock Door")
-					target.lock(0)
-
-	Topic(href, href_list)
-		if(href_list["option"])
-			switch(href_list["option"])
-				if("Trigger Action")
-					var/index = trigger_actions.Find(trigger_action)
-					if(!index || index == trigger_actions.len) index = 1
-					else index += 1
-					trigger_action = trigger_actions[index]
-					usr << "<span class='notice'>You set \the [src]'s trigger action to \"[trigger_action]\"</span>"
-		..()
+/obj/item/device/assembly/pressure_clamp/Topic(href, href_list)
+	if(href_list["option"])
+		switch(href_list["option"])
+			if("Trigger Action")
+				var/index = trigger_actions.Find(trigger_action)
+				if(!index || index == trigger_actions.len) index = 1
+				else index += 1
+				trigger_action = trigger_actions[index]
+				usr << "<span class='notice'>You set \the [src]'s trigger action to \"[trigger_action]\"</span>"
+	..()
 

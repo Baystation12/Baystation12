@@ -60,7 +60,7 @@
 	user.visible_message("<span class='notice'>\The [user] begins inspecting \the [holder] carefully..</span>")
 	sleep(10)
 	if(istype(user, /mob/living/carbon/human))
-		var/entered = text2num(input(usr, "Please enter up to a 4 digit password."))
+		var/entered = text2num(input(user, "Please enter up to a 4 digit password."))
 		if(entered == password)
 			user << "<span class='notice'>Access Granted!</span>"
 			process_activation()

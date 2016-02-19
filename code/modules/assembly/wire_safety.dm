@@ -18,60 +18,60 @@
 								 "Data Connection" = 2048, "Internal Ticker" = 4096,\
 								 "Safety" = 8192, "Maintenance" = 16384, "Clear" = 0)
 
-	has_safety(index)
-		if(index == protected_index)
-			return 1
-		return 0
+/obj/item/device/assembly/wire_safety/has_safety(index)
+	if(index == protected_index)
+		return 1
+	return 0
 
-	holder_wire_safety(var/obj/item/device/assembly/A, var/index = 0, var/pulsed = 0)
-		var/cp = 90
-		var/pp = 40
-		if(pulse)
-			cp = 0
-			pp = 75
-		cp /= (connects_to.len * protected_index.len)
-		cp /= (connects_to.len * protected_index.len)
-		if(index && index == protected_index)
-			if(holder.get_index(A) in connects_to)
-				if(pulsed && prob(pp))
-					process_activation()
-				else if(!pulsed && prob(cp))
-					process_activation()
+/obj/item/device/assembly/wire_safety/holder_wire_safety(var/obj/item/device/assembly/A, var/index = 0, var/pulsed = 0)
+	var/cp = 90
+	var/pp = 40
+	if(pulse)
+		cp = 0
+		pp = 75
+	cp /= (connects_to.len * protected_index.len)
+	cp /= (connects_to.len * protected_index.len)
+	if(index && index == protected_index)
+		if(holder.get_index(A) in connects_to)
+			if(pulsed && prob(pp))
+				process_activation()
+			else if(!pulsed && prob(cp))
+				process_activation()
 
-	get_data()
-		return list("Pulse Protection", pulse)
+/obj/item/device/assembly/wire_safety/get_data()
+	return list("Pulse Protection", pulse)
 
-	get_buttons()
-		return list("Wire Protection")
+/obj/item/device/assembly/wire_safety/get_buttons()
+	return list("Wire Protection")
 
-	get_nonset_data()
-		var/cp = 90
-		var/pp = 40
-		if(pulse)
-			cp = 0
-			pp = 75
-		cp /= (connects_to.len * protected_index.len)
-		cp /= (connects_to.len * protected_index.len)
-		return list("Cut Detection Percentage:", cp, "Pulse Detection Percentage:", pp)
+/obj/item/device/assembly/wire_safety/get_nonset_data()
+	var/cp = 90
+	var/pp = 40
+	if(pulse)
+		cp = 0
+		pp = 75
+	cp /= (connects_to.len * protected_index.len)
+	cp /= (connects_to.len * protected_index.len)
+	return list("Cut Detection Percentage:", cp, "Pulse Detection Percentage:", pp)
 
-	Topic(href, href_list)
-		if(href_list["option"])
-			switch(href_list["option"])
-				if("Wire Protection")
-					open_window(usr)
-				if("Pulse Protection")
-					pulse = !pulse
-		if(href_list["index"])
-			protected_index |= href_list["index"]
-		..()
+/obj/item/device/assembly/wire_safety/Topic(href, href_list)
+	if(href_list["option"])
+		switch(href_list["option"])
+			if("Wire Protection")
+				open_window(usr)
+			if("Pulse Protection")
+				pulse = !pulse
+	if(href_list["index"])
+		protected_index |= href_list["index"]
+	..()
 	//Access window, but for wires.
-	proc/open_window(var/mob/user as mob)
-		var/t1 = ""
-		for(var/W in choice_wires)
-			if(!protected_index.len || !(choice_wires[W] in protected_index))
-				t1 += "<a href='?src=\ref[src];index=[(choice_wires[W])]'>[W]</a><br>"
-			else
-				t1 += "<a style='color: red' href='?src=\ref[src];index=[(choice_wires[W])]'>[W]</a><br>"
-		t1 += text("<p><a href='?src=\ref[];close=1'>Close</a></p>\n", src)
-		user << browse(t1, "window=wires")
-		onclose(user, "wiring")
+/obj/item/device/assembly/wire_safety/proc/open_window(var/mob/user as mob)
+	var/t1 = ""
+	for(var/W in choice_wires)
+		if(!protected_index.len || !(choice_wires[W] in protected_index))
+			t1 += "<a href='?src=\ref[src];index=[(choice_wires[W])]'>[W]</a><br>"
+		else
+			t1 += "<a style='color: red' href='?src=\ref[src];index=[(choice_wires[W])]'>[W]</a><br>"
+	t1 += text("<p><a href='?src=\ref[];close=1'>Close</a></p>\n", src)
+	user << browse(t1, "window=wires")
+	onclose(user, "wiring")

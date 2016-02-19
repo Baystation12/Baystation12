@@ -10,21 +10,22 @@
 	var/list/modes = list("Name", "Gender")
 	var/mode = "Name"
 
-	misc_special(var/mob/living/L)
-		switch(mode)
-			if("Name")
-				send_data(list(L.name))
-			if("Gender")
-				send_data(list(L.gender))
-	get_data()
-		return list("Mode", mode)
+/obj/item/device/assembly/target_control/misc_special(var/mob/living/L)
+	switch(mode)
+		if("Name")
+			send_data(list(L.name))
+		if("Gender")
+			send_data(list(L.gender))
+	return 1
+/obj/item/device/assembly/target_control/get_data()
+	return list("Mode", mode)
 
-	Topic(href, href_list)
-		if(href_list["option"])
-			switch(href_list["option"])
-				if("Mode")
-					var/i = modes.Find(mode)
-					i++
-					if(i > modes.len) i = 1
-					mode = modes[i]
-		..()
+/obj/item/device/assembly/target_control/Topic(href, href_list)
+	if(href_list["option"])
+		switch(href_list["option"])
+			if("Mode")
+				var/i = modes.Find(mode)
+				i++
+				if(i > modes.len) i = 1
+				mode = modes[i]
+	..()

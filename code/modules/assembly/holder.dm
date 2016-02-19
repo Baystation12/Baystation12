@@ -481,7 +481,7 @@
 			if(A)
 				choices.Add(A.interface_name)
 		var/obj/item/device/assembly/removed
-		var/choice = input(usr, "What device would you like to fetch data from?", "Data") in choices
+		var/choice = input(user, "What device would you like to fetch data from?", "Data") in choices
 		var/failed = 0
 		for(var/i=1,i<=connected_devices.len,i++)
 			var/obj/item/device/assembly/A = connected_devices[i]
@@ -539,7 +539,7 @@
 				acting = 0
 				return
 			stage = 1
-			user.visible_message("<span class='notice'>\The [usr] attaches \the [A] to \the [src]!</span>", "<span class='notice'>You attach \the [A] to \the [src].</span>")
+			user.visible_message("<span class='notice'>\The [user] attaches \the [A] to \the [src]!</span>", "<span class='notice'>You attach \the [A] to \the [src].</span>")
 			stage = 2
 			user.drop_item()
 			A.loc = src

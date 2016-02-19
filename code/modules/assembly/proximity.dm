@@ -19,61 +19,59 @@
 		sense()
 
 
-	activate()
-		..() // Sends pulse to connected devices
-		timing = !timing
-		update_icon()
+/obj/item/device/assembly/prox_sensor/activate()
+	timing = !timing
+	update_icon()
+	return ..()
+
+/obj/item/device/assembly/prox_sensor/HasProximity(atom/movable/AM as mob|obj)
+	if (istype(AM, /obj/effect/beam))	return
+	if (AM.move_speed < 12)	sense(AM)
+	return
+
+
+/obj/item/device/assembly/prox_sensor/sense(var/atom/movable/AM)
+	if(active_wires & WIRE_DIRECT_RECEIVE && scanning)
+		var/turf/mainloc = get_turf(src)
+		if(send_type || (AM && !istype(AM, /mob/living)))
+			receive_direct_pulse()
+		else
+			for(var/obj/item/device/assembly/A in get_holder_linked_devices())
+				A.misc_special(AM)
+		if(!holder)
+			mainloc.visible_message("\icon[src] *beep* *beep*", "*beep* *beep*")
 		return
 
-	HasProximity(atom/movable/AM as mob|obj)
-		if (istype(AM, /obj/effect/beam))	return
-		if (AM.move_speed < 12)	sense(AM)
-		return
+/obj/item/device/assembly/prox_sensor/process()
+	if(scanning)
+		var/turf/mainloc = get_turf(src)
+		for(var/mob/living/A in range(range,mainloc))
+			if (A.move_speed < 12)
+				sense(A)
+	if(timing)
+		time--
+	if(timing && time <= 0)
+		timing = 0
+		toggle_scan()
+		time = 10
+	return
 
 
-	sense(var/atom/movable/AM)
-		if(active_wires & WIRE_DIRECT_RECEIVE && scanning)
-			var/turf/mainloc = get_turf(src)
-			if(send_type || (AM && !istype(AM, /mob/living)))
-				receive_direct_pulse()
-			else
-				for(var/obj/item/device/assembly/A in get_holder_linked_devices())
-					A.misc_special(AM)
-			if(!holder)
-				mainloc.visible_message("\icon[src] *beep* *beep*", "*beep* *beep*")
-			return
-
-	process()
-		if(scanning)
-			var/turf/mainloc = get_turf(src)
-			for(var/mob/living/A in range(range,mainloc))
-				if (A.move_speed < 12)
-					sense(A)
-
-		if(timing)
-			time--
-		if(timing && time <= 0)
-			timing = 0
-			toggle_scan()
-			time = 10
-		return
-
-
-	dropped()
-		spawn(0)
-			sense()
-			return
-		return
-
-
-	toggle_scan()
-		scanning = !scanning
-		return
-
-	Move()
-		..()
+/obj/item/device/assembly/prox_sensor/dropped()
+	spawn(0)
 		sense()
 		return
+	return
+
+
+/obj/item/device/assembly/prox_sensor/toggle_scan()
+	scanning = !scanning
+	return
+
+/obj/item/device/assembly/prox_sensor/Move()
+	..()
+	sense()
+	return
 
 /*
 	interact(mob/user as mob)//TODO: Change this to the wires thingy
@@ -88,37 +86,37 @@
 		onclose(user, "prox")
 		return
 */
-	get_data()
-		return list("Scanning", scanning, "Range", range, "Time", time, "Armed", timing, "Send Type", (send_type ? "Pulse" : "Target communication"))
+/obj/item/device/assembly/prox_sensor/get_data()
+	return list("Scanning", scanning, "Range", range, "Time", time, "Armed", timing, "Send Type", (send_type ? "Pulse" : "Target communication"))
 
 
-	Topic(href, href_list)
-		if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
-			usr << browse(null, "window=prox")
-			onclose(usr, "prox")
-			return
+/obj/item/device/assembly/prox_sensor/Topic(href, href_list)
+	if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
+		usr << browse(null, "window=prox")
+		onclose(usr, "prox")
+		return
 
-		if(href_list["option"])
-			switch(href_list["option"])
-				if("Scanning")
-					toggle_scan()
-				if("Time")
-					var/inp = text2num(input(usr, "What would you like to set the time to?", "Proximity Sensor"))
-					if(inp && isnum(inp))
-						time = min(max(round(inp), 0), 600)
-				if("Range")
-					var/inp = text2num(input(usr, "What would you like to set the time to?", "Proximity Sensor"))
-					if(inp && isnum(inp))
-						range = min(max(inp, 1), 6)
-				if("Armed")
-					if(scanning)
-						timing = !timing
-						if(timing)
-							processing_objects.Add(src)
-						else
-							processing_objects.Remove(src)
+	if(href_list["option"])
+		switch(href_list["option"])
+			if("Scanning")
+				toggle_scan()
+			if("Time")
+				var/inp = text2num(input(usr, "What would you like to set the time to?", "Proximity Sensor"))
+				if(inp && isnum(inp))
+					time = min(max(round(inp), 0), 600)
+			if("Range")
+				var/inp = text2num(input(usr, "What would you like to set the time to?", "Proximity Sensor"))
+				if(inp && isnum(inp))
+					range = min(max(inp, 1), 6)
+			if("Armed")
+				if(scanning)
+					timing = !timing
+					if(timing)
+						processing_objects.Add(src)
 					else
-						usr << "<span class='notice'>The proximity sensor is not scanning!</span>"
-				if("Send Type")
-					send_type = !send_type
-		..()
+						processing_objects.Remove(src)
+				else
+					usr << "<span class='notice'>The proximity sensor is not scanning!</span>"
+			if("Send Type")
+				send_type = !send_type
+	..()

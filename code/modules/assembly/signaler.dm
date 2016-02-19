@@ -17,92 +17,90 @@
 	var/datum/wires/connected = null
 	var/deadman = 0
 
-	activate()
-		send_radio_pulse(list("ACTIVATE"))
+/obj/item/device/assembly/signaler/activate()
+	send_radio_pulse(list("ACTIVATE"))
+	return 1
+
+/obj/item/device/assembly/signaler/get_data(var/mob/user, var/ui_key)
+	var/list/data = list()
+	data.Add("Frequency", format_frequency(src.frequency), "Code", code)
+	return data
+
+/obj/item/device/assembly/signaler/get_buttons(var/mob/user, var/ui_key)
+	var/list/data = list()
+	data.Add("Send Signal")
+	return data
+
+/obj/item/device/assembly/signaler/Topic(href, href_list)
+	if(href_list["option"])
+		switch(href_list["option"])
+			if("Frequency")
+				var/new_frequency = input(usr, "What would you like to set the frequency to?", "Frequency")
+				new_frequency = text2num(new_frequency)
+				if(new_frequency < 1200 || new_frequency > 1600)
+					new_frequency = sanitize_frequency(new_frequency)
+				set_frequency(new_frequency)
+
+			if("Code")
+				var/new_code = input(usr, "What would you like to set the code to?", "Code")
+				new_code = text2num(new_code)
+				if(new_code)
+					src.code = new_code
+					src.code = round(src.code)
+					src.code = min(100, src.code)
+					src.code = max(1, src.code)
+
+			if("Send Signal")
+				process_activation()
+	..()
+
+/obj/item/device/assembly/signaler/receive_radio_pulse(datum/signal/signal)
+	if(!signal)	return 0
+	if(signal.encryption != code)	return 0
+	add_debug_log("Radio pulse received \[[src]\]")
+	if(!(src.active_wires & WIRE_RADIO_RECEIVE))	return 0
+	if(src.active_wires & WIRE_MISC_ACTIVATE)
+		misc_activate()
 		return 1
+	return 0
 
-	update_icon()
-		if(holder)
-			holder.update_icon()
-		return
 
-	get_data(var/mob/user, var/ui_key)
-		var/list/data = list()
-		data.Add("Frequency", format_frequency(src.frequency), "Code", code)
-		return data
-
-	get_buttons(var/mob/user, var/ui_key)
-		var/list/data = list()
-		data.Add("Send Signal")
-		return data
-
-	Topic(href, href_list)
-		if(href_list["option"])
-			switch(href_list["option"])
-				if("Frequency")
-					var/new_frequency = input(usr, "What would you like to set the frequency to?", "Frequency")
-					new_frequency = text2num(new_frequency)
-					if(new_frequency < 1200 || new_frequency > 1600)
-						new_frequency = sanitize_frequency(new_frequency)
-					set_frequency(new_frequency)
-
-				if("Code")
-					var/new_code = input(usr, "What would you like to set the code to?", "Code")
-					new_code = text2num(new_code)
-					if(new_code)
-						src.code = new_code
-						src.code = round(src.code)
-						src.code = min(100, src.code)
-						src.code = max(1, src.code)
-
-				if("Send Signal")
-					process_activation()
-		..()
-
-	receive_radio_pulse(datum/signal/signal)
-		if(!signal)	return 0
-		if(signal.encryption != code)	return 0
-		add_debug_log("Radio pulse received \[[src]\]")
-		if(!(src.active_wires & WIRE_RADIO_RECEIVE))	return 0
-		if(src.active_wires & WIRE_MISC_ACTIVATE)
-			misc_activate()
+/obj/item/device/assembly/signaler/misc_activate()
+	add_debug_log("Misc activation \[[src]\]")
+	if(src.connected && src.active_wires & (WIRE_DIRECT_SEND))
+		if(process_signals(1))
+			connected.Pulse(src)
 			return 1
-		return 0
+	if(holder)
+		send_pulse_to_connected()
+		return 1
+	else
+		for(var/mob/O in hearers(1, src.loc))
+			O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
+			return 1
+	return 0
 
+/obj/item/device/assembly/signaler/process()
+	if(!deadman)
+		processing_objects.Remove(src)
+	var/mob/M = src.loc
+	if(!M || !ismob(M))
+		if(prob(5))
+			send_radio_pulse()
+		deadman = 0
+		processing_objects.Remove(src)
+	else if(prob(5))
+		M.visible_message("[M]'s finger twitches a bit over [src]'s signal button!")
+	return
 
-	misc_activate()
-		add_debug_log("Misc activation \[[src]\]")
-		if(src.connected && src.active_wires & (WIRE_DIRECT_SEND))
-			if(process_signals(1))
-				connected.Pulse(src)
-		if(holder)
-			send_pulse_to_connected()
-		else
-			for(var/mob/O in hearers(1, src.loc))
-				O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
-		return
-
-	process()
-		if(!deadman)
-			processing_objects.Remove(src)
-		var/mob/M = src.loc
-		if(!M || !ismob(M))
-			if(prob(5))
-				send_radio_pulse()
-			deadman = 0
-			processing_objects.Remove(src)
-		else if(prob(5))
-			M.visible_message("[M]'s finger twitches a bit over [src]'s signal button!")
-		return
-
-	verb/deadman_it()
-		set src in usr
-		set name = "Threaten to push the button!"
-		set desc = "BOOOOM!"
-		deadman = 1
-		processing_objects.Add(src)
-		log_and_message_admins("is threatening to trigger a signaler deadman's switch")
-		usr.visible_message("<span class='warning'>[usr] moves their finger over [src]'s signal button...</span>")
+/obj/item/device/assembly/signaler/verb/deadman_it()
+	set src in usr
+	set name = "Threaten to push the button!"
+	set desc = "BOOOOM!"
+	deadman = 1
+	processing_objects.Add(src)
+	log_and_message_admins("is threatening to trigger a signaler deadman's switch")
+	usr.visible_message("<span class='warning'>[usr] moves their finger over [src]'s signal button...</span>")
 
 /obj/item/device/assembly/signaler/Destroy()
 	if(radio_controller)
