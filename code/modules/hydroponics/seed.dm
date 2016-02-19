@@ -349,8 +349,8 @@
 	set_trait(TRAIT_POTENCY,rand(5,30),200,0)
 	set_trait(TRAIT_PRODUCT_ICON,pick(plant_controller.plant_product_sprites))
 	set_trait(TRAIT_PLANT_ICON,pick(plant_controller.plant_sprites))
-	set_trait(TRAIT_PLANT_COLOUR,"#[get_random_colour(0,75,190)]")
-	set_trait(TRAIT_PRODUCT_COLOUR,"#[get_random_colour(0,75,190)]")
+	set_trait(TRAIT_PLANT_COLOUR,get_random_colour(0,75,190))
+	set_trait(TRAIT_PRODUCT_COLOUR,get_random_colour(0,75,190))
 	update_growth_stages()
 
 	if(prob(20))
@@ -482,7 +482,7 @@
 
 	if(prob(5))
 		set_trait(TRAIT_BIOLUM,1)
-		set_trait(TRAIT_BIOLUM_COLOUR,"#[get_random_colour(0,75,190)]")
+		set_trait(TRAIT_BIOLUM_COLOUR,get_random_colour(0,75,190))
 
 	set_trait(TRAIT_ENDURANCE,rand(60,100))
 	set_trait(TRAIT_YIELD,rand(3,15))
@@ -554,7 +554,7 @@
 					if(get_trait(TRAIT_BIOLUM))
 						source_turf.visible_message("<span class='notice'>\The [display_name] begins to glow!</span>")
 						if(prob(degree*2))
-							set_trait(TRAIT_BIOLUM_COLOUR,"#[get_random_colour(0,75,190)]")
+							set_trait(TRAIT_BIOLUM_COLOUR,get_random_colour(0,75,190))
 							source_turf.visible_message("<span class='notice'>\The [display_name]'s glow </span><font color='[get_trait(TRAIT_BIOLUM_COLOUR)]'>changes colour</font>!")
 					else
 						source_turf.visible_message("<span class='notice'>\The [display_name]'s glow dims...</span>")
