@@ -63,36 +63,36 @@ var/const/WIRE_ASSEMBLY_PASSWORD = 16384 // All assemblies have these
 		var/off = "<font color=#FF0000>off!</font>"
 		var/on = "<font color=#00FF00>on</font>"
 		var/blinking = "<font color=#FFA500>blinking!</font>"
-		if((A.wires & WIRE_DIRECT_RECEIVE) && (A.wires & WIRE_DIRECT_SEND))
+		if(A.wires & (WIRE_DIRECT_RECEIVE|WIRE_DIRECT_SEND) && (A.wires & WIRE_DIRECT_SEND))
 			if(A.active_wires & WIRE_DIRECT_RECEIVE && A.active_wires & WIRE_DIRECT_SEND)
 				. += "The <font color=#80000>dark red</font> light is [on]"
-			else if(!(A.active_wires & WIRE_DIRECT_RECEIVE) && !(A.active_wires & WIRE_DIRECT_SEND))
+			else if(!(A.active_wires & (WIRE_DIRECT_RECEIVE|WIRE_DIRECT_SEND)))
 				. += "The <font color=#80000>dark red</font> light is [off]"
 			else
 				. += "The <font color=#80000>dark red</font> light is [blinking]"
-		else if(A.wires & WIRE_DIRECT_RECEIVE || A.wires & WIRE_DIRECT_SEND)
+		else if(A.wires & (WIRE_DIRECT_RECEIVE|WIRE_DIRECT_SEND))
 			. += "The <font color=#80000>dark red</font> light is [(A.active_wires & WIRE_DIRECT_RECEIVE || A.active_wires & WIRE_DIRECT_SEND)? "[on]" : "[off]"]"
 
 
 		if(A.wires & WIRE_RADIO_RECEIVE && A.wires & WIRE_RADIO_SEND)
 			if(A.active_wires & WIRE_RADIO_RECEIVE && A.active_wires & WIRE_RADIO_SEND)
 				. += "<br>The <font color=#0000A0>dark blue</font> light is [on]"
-			else if(!(A.active_wires & WIRE_RADIO_RECEIVE) && !(A.active_wires & WIRE_RADIO_SEND))
+			else if(!(A.active_wires & (WIRE_RADIO_RECEIVE|WIRE_RADIO_SEND)))
 				. += "<br>The <font color=#0000A0>dark blue</font> light is [off]"
 			else
 				. += "<br>The <font color=#0000A0>dark blue</font> light is [blinking]"
-		else if(A.wires & WIRE_RADIO_RECEIVE || A.wires & WIRE_RADIO_SEND)
+		else if(A.wires & (WIRE_RADIO_RECEIVE|WIRE_RADIO_SEND))
 			. += "<br>The <font color=#0000A0>dark blue</font> light is [(A.active_wires & WIRE_RADIO_RECEIVE || A.active_wires & WIRE_RADIO_SEND)? "[on]" : "[off]"]"
 
 
 		if(A.wires & WIRE_PROCESS_RECEIVE && A.wires & WIRE_PROCESS_SEND)
 			if(A.active_wires & WIRE_PROCESS_RECEIVE && A.active_wires & WIRE_PROCESS_SEND)
 				. += "<br>The <font color=#800080>dark purple</font> light is [on]"
-			else if(!(A.active_wires & WIRE_PROCESS_RECEIVE) && !(A.active_wires & WIRE_PROCESS_SEND))
+			else if(!(A.active_wires & (WIRE_PROCESS_RECEIVE|WIRE_PROCESS_SEND)))
 				. += "<br>The <font color=#800080>dark purple</font> light is [off]"
 			else
 				. += "<br>The <font color=#800080>dark purple</font> light is [blinking]"
-		else if(A.wires & WIRE_PROCESS_RECEIVE || A.wires & WIRE_PROCESS_SEND)
+		else if(A.wires & (WIRE_PROCESS_RECEIVE|WIRE_PROCESS_SEND))
 			. += "<br>The <font color=#800080>dark purple</font> light is [(A.active_wires & WIRE_PROCESS_RECEIVE || A.active_wires & WIRE_PROCESS_SEND)? "[on]" : "[off]"]"
 
 		if(A.wires & WIRE_PROCESS_ACTIVATE)
@@ -101,11 +101,11 @@ var/const/WIRE_ASSEMBLY_PASSWORD = 16384 // All assemblies have these
 		if(A.wires & WIRE_POWER_RECEIVE && WIRE_POWER_SEND)
 			if(A.active_wires & WIRE_POWER_RECEIVE && A.active_wires & WIRE_POWER_SEND)
 				. += "<br>The <font color=#FFFF00>yellow</font> light is [on]"
-			else if(!(A.active_wires & WIRE_POWER_RECEIVE) && !(A.active_wires & WIRE_POWER_SEND))
+			else if(!(A.active_wires & (WIRE_POWER_RECEIVE|WIRE_POWER_SEND)))
 				. += "<br>The <font color=#FFFF00>yellow</font> light is [off]"
 			else
 				. += "<br>The <font color=#FFFF00>yellow</font> light is [blinking]"
-		else if(A.wires & WIRE_POWER_RECEIVE || A.wires & WIRE_POWER_SEND)
+		else if(A.wires & (WIRE_POWER_RECEIVE|WIRE_POWER_SEND))
 			. += "<br>The <font color=#FFFF00>yellow</font> light is [(A.active_wires & WIRE_RADIO_RECEIVE || A.active_wires & WIRE_RADIO_SEND)? "[on]" : "[off]"]"
 		if(A.wires & WIRE_MISC_ACTIVATE)
 			. += "<br>The <font color=#FFA500>orange</font> light is [A.active_wires & WIRE_MISC_ACTIVATE ? "[on]" : "[off]"]"
@@ -124,7 +124,10 @@ var/const/WIRE_ASSEMBLY_PASSWORD = 16384 // All assemblies have these
 	A.wire_safety(index, 1)
 	if(A.holder) A.holder.wire_pulsed(A, index)
 	sleep(0)
+
 	switch(index)
+		if(WIRE_POWER_RECEIVE, WIRE_POWER_SEND, WIRE_MISC_ACTIVATE, WIRE_MISC_SPECIAL, WIRE_ASSEMBLY_PROCESS, WIRE_ASSEMBLY_SAFETY, WIRE_MISC_CONNECTION)
+			A.active_wires ^= index
 		if(WIRE_DIRECT_RECEIVE)
 			A.receive_direct_pulse()
 		if(WIRE_DIRECT_SEND)
@@ -137,32 +140,12 @@ var/const/WIRE_ASSEMBLY_PASSWORD = 16384 // All assemblies have these
 				A.send_radio_pulse()
 		if(WIRE_PROCESS_ACTIVATE)
 			A.process_activation()
-		if(WIRE_POWER_RECEIVE)
-			if(A.active_wires & WIRE_POWER_RECEIVE) A.active_wires &= ~WIRE_POWER_RECEIVE
-			else A.active_wires |= WIRE_PROCESS_SEND
-		if(WIRE_POWER_SEND)
-			if(A.active_wires & WIRE_POWER_SEND) A.active_wires &= ~WIRE_POWER_SEND
-			else A.active_wires |= WIRE_POWER_SEND
-		if(WIRE_MISC_ACTIVATE)
-			if(A.active_wires & WIRE_MISC_ACTIVATE) A.active_wires &= ~WIRE_MISC_ACTIVATE
-			else A.active_wires |= WIRE_MISC_ACTIVATE
-		if(WIRE_MISC_SPECIAL)
-			if(A.active_wires & WIRE_MISC_SPECIAL) A.active_wires &= ~WIRE_MISC_SPECIAL
-			else A.active_wires |= WIRE_MISC_SPECIAL
-		if(WIRE_MISC_CONNECTION)
-			if(A.active_wires & WIRE_MISC_SPECIAL) A.active_wires &= ~WIRE_MISC_SPECIAL
-			else A.active_wires |= WIRE_MISC_SPECIAL
-		if(WIRE_ASSEMBLY_PROCESS)
-			if(A.active_wires & WIRE_ASSEMBLY_PROCESS) A.active_wires &= ~WIRE_ASSEMBLY_PROCESS
-			else A.active_wires |= WIRE_ASSEMBLY_PROCESS
-		if(WIRE_ASSEMBLY_SAFETY)
-			if(A.active_wires & WIRE_ASSEMBLY_SAFETY) A.active_wires &= ~WIRE_ASSEMBLY_SAFETY
-			else A.active_wires |= WIRE_ASSEMBLY_SAFETY
 		if(WIRE_ASSEMBLY_PASSWORD)
-			for(var/mob/M in view(2))
-				M.show_message("<span class='warning'><small>*click*</small></span>", 2)
-			if(A.active_wires & WIRE_ASSEMBLY_SAFETY) A.active_wires &= ~WIRE_ASSEMBLY_SAFETY
-			else A.active_wires |= WIRE_ASSEMBLY_SAFETY
+			if(A.holder)
+				A.holder.audible_message("<span class='warning'><small>*click*</small></span>")
+			else
+				A.audible_message("<span class='warning'><small>*click*</small></span>")
+			A.active_wires ^= index
 
 /datum/wires/assembly/UpdateCut(var/index, var/mended)
 	var/obj/item/device/assembly/A = holder

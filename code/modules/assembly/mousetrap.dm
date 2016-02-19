@@ -39,7 +39,7 @@
 				cable.use(10)
 				user.visible_message("<span class='warning'>\The [user] modifies \the [src]!</span>", "<span class='notice'>You add some wiring to \the [src], allowing it to trigger devices when tripped!</span>")
 				var/obj/item/device/assembly/mousetrap/pressure_plate/trap = new()
-				trap.loc = src.loc
+				trap.forceMove(get_turf(src))
 				qdel(src)
 				return
 	..()

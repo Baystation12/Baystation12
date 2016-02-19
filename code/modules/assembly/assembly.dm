@@ -9,7 +9,7 @@
 	throwforce = 2
 	throw_speed = 3
 	throw_range = 10
-	origin_tech = "magnets=1"
+	origin_tech = list(TECH_MAGNET = 1)
 	var/reliability = 90
 
 	var/datum/wires/assembly/wire_holder = null
@@ -279,14 +279,10 @@
 	return 0
 
 /obj/item/device/assembly/attackby(var/obj/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/device/multitool))
+	if(istype(O, /obj/item/device/multitool) || istype(O, /obj/item/weapon/wirecutters))
 		if(!wires) return
-		user.set_machine(src)
 		wire_holder.Interact(user)
-	if(istype(O, /obj/item/weapon/wirecutters))
-		if(!wires) return
-		user.set_machine(src)
-		wire_holder.Interact(user)
+	..()
 
 /obj/item/device/assembly/proc/draw_power(var/amount = 0)
 	add_debug_log("Drawing power: \[[src]:([amount]w)\]")

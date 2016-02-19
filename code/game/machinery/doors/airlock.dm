@@ -768,7 +768,7 @@ About the new airlock wires panel:
 		src.update_icon()
 	else if(istype(C, /obj/item/weapon/wirecutters))
 		if(attached_assembly)
-			usr << "<span class='notice'>You remove \the [attached_assembly]!</span>"
+			user << "<span class='notice'>You remove \the [attached_assembly]!</span>"
 			attached_assembly.detatched_from(src)
 			return
 		return src.attack_hand(user)

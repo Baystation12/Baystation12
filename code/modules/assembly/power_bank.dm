@@ -39,7 +39,7 @@
 			user << "<span class='warning'>\The [src] holds no cells!</span>"
 		else
 			for(var/obj/item/C in cells)
-				C.loc = get_turf(src)
+				C.forceMove(get_turf(src))
 				cells -= C
 		user.visible_message("<span class='notice'>\The [user] removes the cells from \the [src]!</span>", "<span class='notice'>You remove the cells from \the [src]!</span>")
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 25, -3)

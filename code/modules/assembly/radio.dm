@@ -18,7 +18,7 @@
 /obj/item/device/assembly/speaker/radio/activate()
 	if(active_wires & WIRE_RADIO_SEND)
 		if(process_signals(1))
-			radio_device.autosay(RadioChat(message, 100, (1+((100-reliability)*0.05))), voice, current_channel)
+			radio_device.autosay(RadioChat(strip_html_properly(message), 100, (1+((100-reliability)*0.05))), voice, current_channel)
 		return 1
 	return 0
 

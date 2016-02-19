@@ -17,7 +17,7 @@
 		var/turf/T = get_turf(src.loc)
 		if(!message || !voice) return
 		if(T)
-			T.audible_message("\icon[src.icon]<span class='name'>[voice]</span> bleeps, <span class='[active_tone]'>\"[message]\"</span>")
+			T.audible_message("\icon[src.icon]<span class='name'>[voice]</span> bleeps, <span class='[active_tone]'>\"[strip_html_properly(message)]\"</span>")
 
 	receive_data(var/list/data, var/obj/item/device/assembly/sender)
 		add_debug_log("Received data \[[src]:[data.len]\]")

@@ -354,7 +354,7 @@
 				new_list.Cut(i,i+1)
 				connected_devices = new_list
 		removed.holder = null
-		removed.loc = get_turf(src)
+		removed.forceMove(get_turf(src))
 		removed.connects_to.Cut()
 		add_debug_log("Device removed: [removed]")
 		update_holder()
@@ -460,21 +460,16 @@
 				acting = 1
 				if(do_after(user, rand(20,60)))
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 25, -3)
+					user.visible_message("<span class='notice'>\The [user] removes \the [stage_name] from \the [src]!</span>", "<span class='notice'>You remove \the [stage_name] from \the [src]</span>")
+					stage = 0
+					stage_name = ""
+					acting = 0
 					if(remove_connected_device(removing))
-						user.visible_message("<span class='notice'>\The [user] removes \the [stage_name] from \the [src]!</span>", "<span class='notice'>You remove \the [stage_name] from \the [src]</span>")
-						stage = 0
-						stage_name = ""
-						acting = 0
 						if(!user.put_in_hands(removing))
-							removing.loc = get_turf(src)
-						removing = null
+							removing.forceMove(get_turf(src))
 					else
-						user.visible_message("<span class='notice'>\The [user] removes \the [stage_name] from \the [src]!</span>", "<span class='notice'>You remove \the [stage_name] from \the [src]</span>")
-						removing.loc = get_turf(src.loc)
-						stage = 0
-						stage_name = ""
-						removing = null
-						acting = 0
+						removing.forceMove(get_turf(src))
+					removing = null
 		else
 			user << "<span class='warning'>You cannot do that while modifying \the [stage_name]!</span>"
 			return

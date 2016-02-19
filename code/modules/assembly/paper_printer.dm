@@ -46,7 +46,7 @@
 	if(stored && stored.info)
 		var/turf/T = get_turf(src)
 		if(T)
-			stored.loc = T
+			stored.forceMove(T)
 			T.visible_message("<span class='notice'>\The [holder ? "[holder]" : "[src]"] rattles and spits out a piece of paper!</span>")
 			return 1
 	return 0

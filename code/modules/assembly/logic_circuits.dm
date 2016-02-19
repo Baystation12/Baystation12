@@ -155,7 +155,7 @@
 				if(src.value3)
 					created.value3 = src.value3
 				user.drop_from_inventory(src)
-				created.loc = get_turf(src)
+				created.forceMove(get_turf(src))
 				src.loc = created
 				user << "<span class='notice'>You've changed \the [src] to a [created.name]</span>"
 				qdel(src)
