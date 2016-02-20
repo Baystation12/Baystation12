@@ -89,7 +89,7 @@
 			bee_count = 20
 			B.empty()
 		else
-			user.visible_message("<span class='notice'>[user] puts bees and larvae from \the [src] into \the [I].</span>", "<span class='notice'>You put puts bees and larvae from \the [src] into \the [I].</span>")
+			user.visible_message("<span class='notice'>[user] puts bees and larvae from \the [src] into \the [I].</span>", "<span class='notice'>You put bees and larvae from \the [src] into \the [I].</span>")
 			bee_count /= 2
 			B.fill()
 		update_icon()
