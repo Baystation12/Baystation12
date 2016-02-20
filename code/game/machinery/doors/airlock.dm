@@ -843,7 +843,8 @@ About the new airlock wires panel:
 		else
 			user << "<span class='notice'>You attach \the [C] to \the [src]!</span>"
 			attached_assembly = C
-			C:attached_to(src)
+			var/obj/item/device/assembly_holder/A = C
+			A.attached_to(src)
 
 	else
 		..()
