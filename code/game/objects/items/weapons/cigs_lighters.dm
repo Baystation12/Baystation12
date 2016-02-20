@@ -198,7 +198,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/smokable/attack(var/mob/living/M, var/mob/living/user, def_zone)
 	if(istype(M) && M.on_fire)
 		user.do_attack_animation(M)
-		light("<span class='notice'>[user] coldly lights the [name] with the burning body of [M]. Clearly, they offer the warmest of regards...</span>")
+		light("<span class='notice'>[user] coldly lights the [name] with the burning body of [M].</span>")
 		return 1
 	else
 		return ..()
