@@ -215,8 +215,13 @@ its easier to just keep the beam vertical.
 
 //called to set the atom's dir and used to add behaviour to dir-changes
 /atom/proc/set_dir(new_dir)
-	. = new_dir != dir
+	var/old_dir = dir
+	if(new_dir == old_dir)
+		return FALSE
+
 	dir = new_dir
+	dir_set_event.raise_event(src, old_dir, new_dir)
+	return TRUE
 
 /atom/proc/ex_act()
 	return
