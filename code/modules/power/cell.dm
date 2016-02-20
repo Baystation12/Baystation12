@@ -6,6 +6,18 @@
 	..()
 	charge = maxcharge
 
+	switch(maxcharge)
+		if(20001 to INFINITY)
+			desc = "This is a top grade NT-brand power cell. Shines with high polish."
+		if(10001 to 20000)
+			desc = "This is an advanced NT-brand power cell used in various heavy duty applications."
+		if(2501 to 10000)
+			desc = "This is a standard NT-brand power cell used in various systems around the station."
+		else
+			desc = "This is a standard NT-brand power cell used in various systems around the station. This one seems to be quite old and rusty."
+
+	desc += "It's rating is [maxcharge]."
+
 /obj/item/weapon/cell/initialize()
 	..()
 	update_icon()
@@ -72,13 +84,8 @@
 
 
 /obj/item/weapon/cell/examine(mob/user)
-	if(get_dist(src, user) > 1)
-		return
-
-	if(maxcharge <= 2500)
-		user << "[desc]\nThe manufacturer's label states this cell has a power rating of [maxcharge], and that you should not swallow it.\nThe charge meter reads [round(src.percent() )]%."
-	else
-		user << "This power cell has an exciting chrome finish, as it is an uber-capacity cell type! It has a power rating of [maxcharge]!\nThe charge meter reads [round(src.percent() )]%."
+	..()
+	user << "The charge meter shows [round(percent())]%"
 
 /obj/item/weapon/cell/attackby(obj/item/W, mob/user)
 	..()
@@ -126,58 +133,22 @@
 
 /obj/item/weapon/cell/proc/corrupt()
 	charge /= 2
-	maxcharge /= 2
-	if (prob(10))
-		rigged = 1 //broken batterys are dangerous
+	maxcharge /= 4
 
-/obj/item/weapon/cell/emp_act(severity)
-	//remove this once emp changes on dev are merged in
-	if(isrobot(loc))
-		var/mob/living/silicon/robot/R = loc
-		severity *= R.cell_emp_mult
-
-	// Lose 1/2, 1/4, 1/8 of the current charge per hit or 1/4, 1/8, 1/24 of the max charge per hit, whichever is highest
-	charge -= max(charge / (2 / severity), maxcharge/(4 / severity))
-	if (charge < 0)
-		charge = 0
+/obj/item/weapon/cell/emp_act(var/severity)
+	// EMP causes the cell to lose relatively small amount of power. This will be quite notable with low grade cell, but not as serious as we get to higher cell capacities.
+	charge -= rand(min(maxcharge/8 ,1000), min(maxcharge/4 ,2000)) / severity
+	// Cells that are not part of a machine or something are hit more seriously, losing some maximal capacity permanently, to simulate the EMP affecting electronics of the cell.
+	// This prevents EMPs from screwing up synthetics, APCs and similar things too much, while still keeping them as a threat.
+	if(istype(loc, /turf/))
+		maxcharge -= (rand(maxcharge/8, maxcharge/16) / severity)
+	charge = between(0, charge, maxcharge)
 	..()
 
-/obj/item/weapon/cell/ex_act(severity)
 
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(50))
-				qdel(src)
-				return
-			if (prob(50))
-				corrupt()
-		if(3.0)
-			if (prob(25))
-				qdel(src)
-				return
-			if (prob(25))
-				corrupt()
-	return
 
 /obj/item/weapon/cell/proc/get_electrocute_damage()
 	switch (charge)
-/*		if (9000 to INFINITY)
-			return min(rand(90,150),rand(90,150))
-		if (2500 to 9000-1)
-			return min(rand(70,145),rand(70,145))
-		if (1750 to 2500-1)
-			return min(rand(35,110),rand(35,110))
-		if (1500 to 1750-1)
-			return min(rand(30,100),rand(30,100))
-		if (750 to 1500-1)
-			return min(rand(25,90),rand(25,90))
-		if (250 to 750-1)
-			return min(rand(20,80),rand(20,80))
-		if (100 to 250-1)
-			return min(rand(20,65),rand(20,65))*/
 		if (1000000 to INFINITY)
 			return min(rand(50,160),rand(50,160))
 		if (200000 to 1000000-1)
