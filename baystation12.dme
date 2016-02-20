@@ -221,6 +221,7 @@
 #include "code\datums\observation\moved.dm"
 #include "code\datums\observation\observation.dm"
 #include "code\datums\observation\task_triggered.dm"
+#include "code\datums\observation\~cleanup.dm"
 #include "code\datums\repositories\cameras.dm"
 #include "code\datums\repositories\crew.dm"
 #include "code\datums\repositories\repository.dm"
