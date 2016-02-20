@@ -19,6 +19,9 @@
 		return ..()
 	if(istype(M, /mob/living/carbon/human/dummy))
 		return..()
+	if(jobban_isbanned(M, "cultist"))
+		user << "<span class='warning'>This person's soul is too corrupt and cannot be captured!</span>"
+		return..()
 
 	if(M.has_brain_worms()) //Borer stuff - RR
 		user << "<span class='warning'>This being is corrupted by an alien intelligence and cannot be soul trapped.</span>"
