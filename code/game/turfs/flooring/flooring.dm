@@ -88,6 +88,7 @@ var/list/flooring_types
 	icon = 'icons/turf/flooring/linoleum.dmi'
 	icon_base = "lino"
 	can_paint = 1
+	build_type = /obj/item/stack/tile/linoleum
 	flags = TURF_REMOVE_SCREWDRIVER
 
 /decl/flooring/tiling/red
