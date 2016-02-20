@@ -1,5 +1,4 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
-
 /obj/item/device/assembly/infra
 	name = "infrared emitter"
 	desc = "Emits a visible or invisible beam and is triggered when the beam is interrupted."
@@ -7,57 +6,37 @@
 	origin_tech = list(TECH_MAGNET = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 500, "waste" = 100)
 
-	wires = WIRE_PULSE
-
-	secured = 0
+	wires = WIRE_DIRECT_RECEIVE | WIRE_PROCESS_RECEIVE | WIRE_PROCESS_ACTIVATE | WIRE_PROCESS_SEND | WIRE_DIRECT_SEND | WIRE_MISC_ACTIVATE
+	wire_num = 6
 
 	var/on = 0
 	var/visible = 0
+	var/triggered = 0
 	var/obj/effect/beam/i_beam/first = null
+	var/range = 7
 
-	proc
-		trigger_beam()
-
-
-	activate()
-		if(!..())	return 0//Cooldown check
-		on = !on
-		update_icon()
+	anchored(var/anchored = 0)
+		if(!anchored)
+			trigger_beam()
+			if(on)
+				activate()
+		sleep(0)
 		return 1
 
-
-	toggle_secure()
-		secured = !secured
-		if(secured)
-			processing_objects.Add(src)
-		else
-			on = 0
-			if(first)	qdel(first)
-			processing_objects.Remove(src)
-		update_icon()
-		return secured
-
-
-	update_icon()
-		overlays.Cut()
-		attached_overlays = list()
-		if(on)
-			overlays += "infrared_on"
-			attached_overlays += "infrared_on"
-
-		if(holder)
-			holder.update_icon()
-		return
-
+	activate()
+		if(anchored || (holder && holder.anchored))
+			on = !on
+			if(on)
+				processing_objects.Add(src)
+			else
+				if(first) qdel(first)
+				processing_objects.Remove(src)
+		return 1
 
 	process()//Old code
-		if(!on)
-			if(first)
-				qdel(first)
-				return
-
-		if((!(first) && (secured && (istype(loc, /turf) || (holder && istype(holder.loc, /turf))))))
-			var/obj/effect/beam/i_beam/I = new /obj/effect/beam/i_beam((holder ? holder.loc : loc) )
+		if(holder) dir = holder.dir
+		if(!first && !triggered && (istype(loc, /turf) || holder && istype(holder.loc, /turf)))
+			var/obj/effect/beam/i_beam/I = new /obj/effect/beam/i_beam(get_turf(src))
 			I.master = src
 			I.density = 1
 			I.set_dir(dir)
@@ -69,18 +48,11 @@
 				spawn(0)
 					if(I)
 						//world << "infra: setting limit"
-						I.limit = 8
+						I.limit = range
 						//world << "infra: processing beam \ref[I]"
 						I.process()
 					return
 		return
-
-
-	attack_hand()
-		qdel(first)
-		..()
-		return
-
 
 	Move()
 		var/t = dir
@@ -92,22 +64,28 @@
 
 	holder_movement()
 		if(!holder)	return 0
-//		set_dir(holder.dir)
-		qdel(first)
+		set_dir(holder.dir)
+//		qdel(first)
 		return 1
 
+	misc_activate()
+		if(active_wires & WIRE_MISC_ACTIVATE)
+			send_pulse_to_connected()
 
-	trigger_beam()
-		if((!secured)||(!on)||(cooldown > 0))	return 0
-		pulse(0)
+
+	proc/trigger_beam()
+		if(first)
+			qdel(first)
+		triggered = 1
+		spawn(50)
+			triggered = 0
+		if(!on)	return 0
+		misc_activate()
 		if(!holder)
 			visible_message("\icon[src] *beep* *beep*")
-		cooldown = 2
-		spawn(10)
-			process_cooldown()
 		return
 
-
+/*
 	interact(mob/user as mob)//TODO: change this this to the wire control panel
 		if(!secured)	return
 		user.set_machine(src)
@@ -117,35 +95,29 @@
 		user << browse(dat, "window=infra")
 		onclose(user, "infra")
 		return
+*/
+	get_data()
+		return list("On", on, "Visible", visible, "Range", range)
 
 
 	Topic(href, href_list)
-		if(..()) return 1
-		if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
-			usr << browse(null, "window=infra")
-			onclose(usr, "infra")
-			return
+		if(href_list["option"])
+			switch(href_list["option"])
+				if("On")
+					if(anchored || (holder && holder.anchored))
+						process_activation()
+					else
+						usr << "<span class='notice'>You need to anchor \the [src] first!</span>"
+				if("Visible")
+					visible = !visible
+				if("Range")
+					var/inp = max(1, min(text2num(input(usr,"What would you like the range to be?", "Infrared")), 10))
+					if(inp)
+						range = inp
+					else range = 4
+		..()
 
-		if(href_list["state"])
-			on = !(on)
-			update_icon()
-
-		if(href_list["visible"])
-			visible = !(visible)
-			spawn(0)
-				if(first)
-					first.vis_spread(visible)
-
-		if(href_list["close"])
-			usr << browse(null, "window=infra")
-			return
-
-		if(usr)
-			attack_self(usr)
-
-		return
-
-
+/*
 	verb/rotate()//This could likely be better
 		set name = "Rotate Infrared Laser"
 		set category = "Object"
@@ -153,7 +125,7 @@
 
 		set_dir(turn(dir, 90))
 		return
-
+*/
 
 
 /***************************IBeam*********************************/
@@ -202,18 +174,17 @@
 	else
 		invisibility = 0
 
+	if(!next && get_dist(src, master) < master.range)
+		//world << "now [src.left] left"
+		var/obj/effect/beam/i_beam/I = new /obj/effect/beam/i_beam(loc)
+		I.master = master
+		I.density = 1
+		I.set_dir(dir)
+		//world << "created new beam \ref[I] at [I.x] [I.y] [I.z]"
+		step(I, I.dir)
 
-	//world << "now [src.left] left"
-	var/obj/effect/beam/i_beam/I = new /obj/effect/beam/i_beam(loc)
-	I.master = master
-	I.density = 1
-	I.set_dir(dir)
-	//world << "created new beam \ref[I] at [I.x] [I.y] [I.z]"
-	step(I, I.dir)
-
-	if(I)
-		//world << "step worked, now at [I.x] [I.y] [I.z]"
-		if(!(next))
+		if(I)
+			//world << "step worked, now at [I.x] [I.y] [I.z]"
 			//world << "no next"
 			I.density = 0
 			//world << "spreading"
@@ -222,23 +193,19 @@
 			spawn(0)
 				//world << "limit = [limit] "
 				if((I && limit > 0))
-					I.limit = limit - 1
+					I.limit = limit-1
 					//world << "calling next process"
 					I.process()
 				return
-		else
-			//world << "is a next: \ref[next], deleting beam \ref[I]"
-			qdel(I)
-	else
-		//world << "step failed, deleting \ref[next]"
-		qdel(next)
 	spawn(10)
 		process()
 		return
 	return
 
-/obj/effect/beam/i_beam/Bump()
-	qdel(src)
+/obj/effect/beam/i_beam/Bump(var/atom/A)
+	if(!istype(A, /mob/))
+		qdel(src)
+	else hit()
 	return
 
 /obj/effect/beam/i_beam/Bumped()

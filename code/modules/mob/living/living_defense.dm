@@ -57,7 +57,7 @@
 		if(signaler.deadman && prob(80))
 			log_and_message_admins("has triggered a signaler deadman's switch")
 			src.visible_message("\red [src] triggers their deadman's switch!")
-			signaler.signal()
+			signaler.process_activation()
 
 	//Stun Beams
 	if(P.taser_effect)

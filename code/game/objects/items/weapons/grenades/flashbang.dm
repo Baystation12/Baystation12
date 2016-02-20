@@ -1,4 +1,4 @@
-/obj/item/weapon/grenade/flashbang
+/obj/item/device/assembly_holder/grenade/flashbang
 	name = "flashbang"
 	icon_state = "flashbang"
 	item_state = "flashbang"
@@ -83,12 +83,12 @@
 			var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 			if (E && E.damage >= E.min_bruised_damage)
 				M << "<span class='danger'>Your eyes start to burn badly!</span>"
-				if(!banglet && !(istype(src , /obj/item/weapon/grenade/flashbang/clusterbang)))
+				if(!banglet && !(istype(src , /obj/item/device/assembly_holder/grenade/flashbang/clusterbang)))
 					if (E.damage >= E.min_broken_damage)
 						M << "<span class='danger'>You can't see anything!</span>"
 		if (M.ear_damage >= 15)
 			M << "<span class='danger'>Your ears start to ring badly!</span>"
-			if(!banglet && !(istype(src , /obj/item/weapon/grenade/flashbang/clusterbang)))
+			if(!banglet && !(istype(src , /obj/item/device/assembly_holder/grenade/flashbang/clusterbang)))
 				if (prob(M.ear_damage - 10 + 5))
 					M << "<span class='danger'>You can't hear anything!</span>"
 					M.sdisabilities |= DEAF
@@ -97,13 +97,13 @@
 				M << "<span class='danger'>Your ears start to ring!</span>"
 		M.update_icons()
 
-/obj/item/weapon/grenade/flashbang/clusterbang//Created by Polymorph, fixed by Sieve
+/obj/item/device/assembly_holder/grenade/flashbang/clusterbang//Created by Polymorph, fixed by Sieve
 	desc = "Use of this weapon may constiute a war crime in your area, consult your local captain."
 	name = "clusterbang"
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "clusterbang"
 
-/obj/item/weapon/grenade/flashbang/clusterbang/prime()
+/obj/item/device/assembly_holder/grenade/flashbang/clusterbang/prime()
 	var/numspawned = rand(4,8)
 	var/again = 0
 	for(var/more = numspawned,more > 0,more--)
@@ -113,23 +113,23 @@
 
 	for(,numspawned > 0, numspawned--)
 		spawn(0)
-			new /obj/item/weapon/grenade/flashbang/cluster(src.loc)//Launches flashbangs
+			new /obj/item/device/assembly_holder/grenade/flashbang/cluster(src.loc)//Launches flashbangs
 			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 
 	for(,again > 0, again--)
 		spawn(0)
-			new /obj/item/weapon/grenade/flashbang/clusterbang/segment(src.loc)//Creates a 'segment' that launches a few more flashbangs
+			new /obj/item/device/assembly_holder/grenade/flashbang/clusterbang/segment(src.loc)//Creates a 'segment' that launches a few more flashbangs
 			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 	qdel(src)
 	return
 
-/obj/item/weapon/grenade/flashbang/clusterbang/segment
+/obj/item/device/assembly_holder/grenade/flashbang/clusterbang/segment
 	desc = "A smaller segment of a clusterbang. Better run."
 	name = "clusterbang segment"
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "clusterbang_segment"
 
-/obj/item/weapon/grenade/flashbang/clusterbang/segment/New()//Segments should never exist except part of the clusterbang, since these immediately 'do their thing' and asplode
+/obj/item/device/assembly_holder/grenade/flashbang/clusterbang/segment/New()//Segments should never exist except part of the clusterbang, since these immediately 'do their thing' and asplode
 	icon_state = "clusterbang_segment_active"
 	active = 1
 	banglet = 1
@@ -141,7 +141,7 @@
 		prime()
 	..()
 
-/obj/item/weapon/grenade/flashbang/clusterbang/segment/prime()
+/obj/item/device/assembly_holder/grenade/flashbang/clusterbang/segment/prime()
 	var/numspawned = rand(4,8)
 	for(var/more = numspawned,more > 0,more--)
 		if(prob(35))
@@ -149,12 +149,12 @@
 
 	for(,numspawned > 0, numspawned--)
 		spawn(0)
-			new /obj/item/weapon/grenade/flashbang/cluster(src.loc)
+			new /obj/item/device/assembly_holder/grenade/flashbang/cluster(src.loc)
 			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 	qdel(src)
 	return
 
-/obj/item/weapon/grenade/flashbang/cluster/New()//Same concept as the segments, so that all of the parts don't become reliant on the clusterbang
+/obj/item/device/assembly_holder/grenade/flashbang/cluster/New()//Same concept as the segments, so that all of the parts don't become reliant on the clusterbang
 	spawn(0)
 		icon_state = "flashbang_active"
 		active = 1

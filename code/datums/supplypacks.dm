@@ -32,11 +32,11 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/specialops
 	name = "Special Ops supplies"
 	contains = list(/obj/item/weapon/storage/box/emps,
-					/obj/item/weapon/grenade/smokebomb,
-					/obj/item/weapon/grenade/smokebomb,
-					/obj/item/weapon/grenade/smokebomb,
+					/obj/item/device/assembly_holder/grenade/smokebomb,
+					/obj/item/device/assembly_holder/grenade/smokebomb,
+					/obj/item/device/assembly_holder/grenade/smokebomb,
 					/obj/item/weapon/pen/reagent/paralysis,
-					/obj/item/weapon/grenade/chem_grenade/incendiary)
+					/obj/item/device/assembly_holder/grenade/chem_grenade/incendiary)
 	cost = 20
 	containertype = /obj/structure/closet/crate
 	containername = "Special Ops crate"
@@ -228,9 +228,9 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/device/lightreplacer,
 					/obj/item/weapon/reagent_containers/spray/cleaner,
 					/obj/item/weapon/reagent_containers/glass/rag,
-					/obj/item/weapon/grenade/chem_grenade/cleaner,
-					/obj/item/weapon/grenade/chem_grenade/cleaner,
-					/obj/item/weapon/grenade/chem_grenade/cleaner,
+					/obj/item/device/assembly_holder/grenade/chem_grenade/cleaner,
+					/obj/item/device/assembly_holder/grenade/chem_grenade/cleaner,
+					/obj/item/device/assembly_holder/grenade/chem_grenade/cleaner,
 					/obj/structure/mopbucket)
 	cost = 10
 	containertype = /obj/structure/closet/crate
@@ -372,8 +372,8 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/reagent_containers/spray/plantbgone,
 					/obj/item/clothing/mask/gas,
 					/obj/item/clothing/mask/gas,
-					/obj/item/weapon/grenade/chem_grenade/antiweed,
-					/obj/item/weapon/grenade/chem_grenade/antiweed)
+					/obj/item/device/assembly_holder/grenade/chem_grenade/antiweed,
+					/obj/item/device/assembly_holder/grenade/chem_grenade/antiweed)
 	cost = 25
 	containertype = /obj/structure/closet/crate/hydroponics
 	containername = "Weed control crate"
