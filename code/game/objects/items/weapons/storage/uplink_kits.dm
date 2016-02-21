@@ -170,6 +170,21 @@
 
 	startswith = list(/obj/item/weapon/spacecash/bundle/c1000 = 10)
 
+
+
+/obj/item/weapon/storage/secure/briefcase/money/New()
+	..()
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/armor
 	name = "armor satchel"
 	desc = "A satchel for when you don't want to try a diplomatic approach."
@@ -177,3 +192,5 @@
 		/obj/item/clothing/suit/storage/vest/merc,
 		/obj/item/clothing/head/helmet/merc
 	)
+
+

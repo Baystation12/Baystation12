@@ -231,14 +231,17 @@
 		to_chat(usr, "\icon[cashmoney] <span class='warning'>That is not enough money.</span>")
 		return 0
 
-	visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
-	cashmoney.worth -= currently_vending.price
+	if(istype(cashmoney, /obj/item/weapon/spacecash))
 
-	if(cashmoney.worth <= 0)
-		usr.drop_from_inventory(cashmoney)
-		qdel(cashmoney)
-	else
-		cashmoney.update_icon()
+		visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
+		var/obj/item/weapon/spacecash/bundle/cashmoney_bundle = cashmoney
+		cashmoney_bundle.worth -= currently_vending.price
+
+		if(cashmoney_bundle.worth <= 0)
+			usr.drop_from_inventory(cashmoney_bundle)
+			qdel(cashmoney_bundle)
+		else
+			cashmoney_bundle.update_icon()
 
 	// Vending machines have no idea who paid with cash
 	credit_purchase("(cash)")
