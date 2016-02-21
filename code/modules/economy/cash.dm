@@ -21,15 +21,7 @@
 	if(istype(W, /obj/item/weapon/spacecash))
 		if(istype(W, /obj/item/weapon/spacecash/ewallet)) return 0
 
-		var/obj/item/weapon/spacecash/bundle/bundle
-		if(!istype(W, /obj/item/weapon/spacecash/bundle))
-			var/obj/item/weapon/spacecash/cash = W
-			user.drop_from_inventory(cash)
-			bundle = new (src.loc)
-			bundle.worth += cash.worth
-			qdel(cash)
-		else //is bundle
-			bundle = W
+		var/obj/item/weapon/spacecash/bundle = W
 		bundle.worth += src.worth
 		bundle.update_icon()
 		if(istype(user, /mob/living/carbon/human))
@@ -37,7 +29,7 @@
 			h_user.drop_from_inventory(src)
 			h_user.drop_from_inventory(bundle)
 			h_user.put_in_hands(bundle)
-		to_chat(user, "<span class='notice'>You add [src.worth] Thalers worth of money to the bundles.<br>It holds [bundle.worth] Thalers now.</span>")
+		to_chat(user, "<span class='notice'>You combine the Thalers to a bundle of [bundle.worth] Thalers.</span>")
 		qdel(src)
 
 /obj/item/weapon/spacecash/proc/getMoneyImages()
@@ -54,6 +46,11 @@
 	if(icon_state)
 		return list(icon_state)
 	. = list()
+	name = "[worth] Thaler\s"
+	if(worth in list(1000,500,200,100,50,20,10,1))
+		icon_state = "spacecash[worth]"
+		desc = "It's worth [worth] Thalers."
+		return
 	var/sum = src.worth
 	var/num = 0
 	for(var/i in denominations)
@@ -97,7 +94,7 @@
 	if(!worth)
 		usr.drop_from_inventory(src)
 	if(amount in list(1000,500,200,100,50,20,1))
-		var/cashtype = text2path("/obj/item/weapon/spacecash/bundle/c[amount]")
+		var/cashtype = text2path("/obj/item/weapon/spacecash/c[amount]")
 		var/obj/cash = new cashtype (usr.loc)
 		usr.put_in_hands(cash)
 	else
@@ -108,66 +105,60 @@
 	if(!worth)
 		qdel(src)
 
-/obj/item/weapon/spacecash/bundle/c1
+/obj/item/weapon/spacecash/c1
 	name = "1 Thaler"
 	icon_state = "spacecash1"
 	desc = "It's worth 1 credit."
 	worth = 1
 
-/obj/item/weapon/spacecash/bundle/c10
+/obj/item/weapon/spacecash/c10
 	name = "10 Thaler"
 	icon_state = "spacecash10"
 	desc = "It's worth 10 Thalers."
 	worth = 10
 
-/obj/item/weapon/spacecash/bundle/c20
+/obj/item/weapon/spacecash/c20
 	name = "20 Thaler"
 	icon_state = "spacecash20"
 	desc = "It's worth 20 Thalers."
 	worth = 20
 
-/obj/item/weapon/spacecash/bundle/c50
+/obj/item/weapon/spacecash/c50
 	name = "50 Thaler"
 	icon_state = "spacecash50"
 	desc = "It's worth 50 Thalers."
 	worth = 50
 
-/obj/item/weapon/spacecash/bundle/c100
+/obj/item/weapon/spacecash/c100
 	name = "100 Thaler"
 	icon_state = "spacecash100"
 	desc = "It's worth 100 Thalers."
 	worth = 100
 
-/obj/item/weapon/spacecash/bundle/c200
+/obj/item/weapon/spacecash/c200
 	name = "200 Thaler"
 	icon_state = "spacecash200"
 	desc = "It's worth 200 Thalers."
 	worth = 200
 
-/obj/item/weapon/spacecash/bundle/c500
+/obj/item/weapon/spacecash/c500
 	name = "500 Thaler"
 	icon_state = "spacecash500"
 	desc = "It's worth 500 Thalers."
 	worth = 500
 
-/obj/item/weapon/spacecash/bundle/c1000
+/obj/item/weapon/spacecash/c1000
 	name = "1000 Thaler"
 	icon_state = "spacecash1000"
 	desc = "It's worth 1000 Thalers."
 	worth = 1000
 
 proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
-	if(sum in list(1000,500,200,100,50,20,10,1))
-		var/cash_type = text2path("/obj/item/weapon/spacecash/bundle/c[sum]")
-		var/obj/cash = new cash_type (usr.loc)
-		if(ishuman(human_user) && !human_user.get_active_hand())
-			human_user.put_in_hands(cash)
-	else
-		var/obj/item/weapon/spacecash/bundle/bundle = new (spawnloc)
-		bundle.worth = sum
-		bundle.update_icon()
-		if (ishuman(human_user) && !human_user.get_active_hand())
-			human_user.put_in_hands(bundle)
+	var/obj/item/weapon/spacecash/bundle/bundle = new (spawnloc)
+	bundle.worth = sum
+	bundle.update_icon()
+	if (ishuman(human_user) && !human_user.get_active_hand())
+		human_user.put_in_hands(bundle)
 	return
 
 /obj/item/weapon/spacecash/ewallet
@@ -175,6 +166,9 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 	icon_state = "efundcard"
 	desc = "A card that holds an amount of money."
 	var/owner_name = "" //So the ATM can set it so the EFTPOS can put a valid name on transactions.
+	attack_self() return  //Don't act
+	attackby()    return  //like actual
+	update_icon() return  //space cash
 
 /obj/item/weapon/spacecash/ewallet/examine(mob/user)
 	. = ..(user)
