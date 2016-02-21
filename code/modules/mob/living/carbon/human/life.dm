@@ -150,11 +150,11 @@
 	if(species.vision_organ)
 		vision = internal_organs_by_name[species.vision_organ]
 
-	if(!vision) // Presumably if a species has no vision organs, they see via some other means.
+	if(!species.vision_organ) // Presumably if a species has no vision organs, they see via some other means.
 		eye_blind =  0
 		blinded =    0
 		eye_blurry = 0
-	else if(vision.is_broken())   // Vision organs cut out or broken? Permablind.
+	else if(!vision || (vision && vision.is_broken()))   // Vision organs cut out or broken? Permablind.
 		eye_blind =  1
 		blinded =    1
 		eye_blurry = 1
@@ -189,13 +189,7 @@
 						emote("twitch")
 					if(2 to 3)
 						say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
-				var/old_x = pixel_x
-				var/old_y = pixel_y
-				pixel_x += rand(-2,2)
-				pixel_y += rand(-1,1)
-				sleep(2)
-				pixel_x = old_x
-				pixel_y = old_y
+				make_jittery(100)
 				return
 	if (disabilities & NERVOUS)
 		speech_problem_flag = 1
