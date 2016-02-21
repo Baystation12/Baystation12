@@ -115,9 +115,11 @@
 	if(!linked_console)
 		user << "<span class='notice'>\The [src] must be linked to an R&D console first!</span>"
 		return 1
+	if(is_robot_module(O))
+		return 0
 	if(!istype(O, /obj/item/stack/material))
 		user << "<span class='notice'>You cannot insert this item into \the [src]!</span>"
-		return 1
+		return 0
 	if(stat)
 		return 1
 

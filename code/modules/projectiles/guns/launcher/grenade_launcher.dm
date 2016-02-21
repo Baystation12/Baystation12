@@ -77,7 +77,8 @@
 
 /obj/item/weapon/gun/launcher/grenade/consume_next_projectile()
 	if(chambered)
-		chambered.prime()
+		spawn(10)
+			chambered.prime()
 	return chambered
 
 /obj/item/weapon/gun/launcher/grenade/handle_post_fire(mob/user)
