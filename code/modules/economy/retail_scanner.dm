@@ -22,6 +22,8 @@
 // Claim machine ID
 /obj/item/device/retail_scanner/New()
 	machine_id = "[station_name()] RETAIL #[num_financial_terminals++]"
+	if(locate(/obj/structure/table) in loc)
+		pixel_y = 3
 
 
 // Always face the user when put on a table

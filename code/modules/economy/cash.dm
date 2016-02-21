@@ -21,15 +21,15 @@
 	if(istype(W, /obj/item/weapon/spacecash))
 		if(istype(W, /obj/item/weapon/spacecash/ewallet)) return 0
 
-		var/obj/item/weapon/spacecash/bundle = W
-		bundle.worth += src.worth
-		bundle.update_icon()
+		var/obj/item/weapon/spacecash/SC = W
+		SC.worth += src.worth
+		SC.update_icon()
 		if(istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/h_user = user
 			h_user.drop_from_inventory(src)
 			h_user.drop_from_inventory(bundle)
 			h_user.put_in_hands(bundle)
-		to_chat(user, "<span class='notice'>You combine the Thalers to a bundle of [bundle.worth] Thalers.</span>")
+		to_chat(user, "<span class='notice'>You combine the Thalers to a bundle of [SC.worth] Thalers.</span>")
 		qdel(src)
 
 /obj/item/weapon/spacecash/bundle/getMoneyImages()
@@ -88,10 +88,10 @@
 		var/obj/cash = new cashtype (usr.loc)
 		usr.put_in_hands(cash)
 	else
-		var/obj/item/weapon/spacecash/bundle/bundle = new (usr.loc)
-		bundle.worth = amount
-		bundle.update_icon()
-		usr.put_in_hands(bundle)
+		var/obj/item/weapon/spacecash/SC = new (usr.loc)
+		SC.worth = amount
+		SC.update_icon()
+		usr.put_in_hands(SC)
 	if(!worth)
 		qdel(src)
 

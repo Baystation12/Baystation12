@@ -234,14 +234,13 @@
 	if(istype(cashmoney, /obj/item/weapon/spacecash))
 
 		visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
-		var/obj/item/weapon/spacecash/bundle/cashmoney_bundle = cashmoney
-		cashmoney_bundle.worth -= currently_vending.price
+		cashmoney.worth -= currently_vending.price
 
-		if(cashmoney_bundle.worth <= 0)
-			usr.drop_from_inventory(cashmoney_bundle)
-			qdel(cashmoney_bundle)
+		if(cashmoney.worth <= 0)
+			usr.drop_from_inventory(cashmoney)
+			qdel(cashmoney)
 		else
-			cashmoney_bundle.update_icon()
+			cashmoney.update_icon()
 
 	// Vending machines have no idea who paid with cash
 	credit_purchase("(cash)")

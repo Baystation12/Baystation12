@@ -1,5 +1,5 @@
 /obj/machinery/cash_register
-	name = "retail scanner"
+	name = "cash register"
 	desc = "Swipe your ID card to make purchases electronically."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "register_idle"
@@ -49,7 +49,7 @@
 	// Reset if necessary
 	else if(transaction_amount)
 		reset_memory()
-		user << "<span class='notice'>You reset the memory.</span>"
+		user << "<span class='notice'>You reset the machine's memory.</span>"
 	else
 		custom_interface(user)
 
@@ -174,6 +174,11 @@
 		usr.visible_message("\icon[src]<span class='warning'>Unable to connect to linked account.</span>")
 		return
 
+	if (cash_open)
+		playsound(src, 'sound/machines/buzz-sigh.ogg', 25)
+		usr << "\icon[src]<span class='warning'>The cash box is open.</span>"
+		return
+
 	// Access account for transaction
 	if(check_account())
 		var/datum/money_account/D = get_account(I.associated_account_number)
@@ -230,6 +235,11 @@
 	if(!confirm(E))
 		return
 
+	if (cash_open)
+		playsound(src, 'sound/machines/buzz-sigh.ogg', 25)
+		usr << "\icon[src]<span class='warning'>The cash box is open.</span>"
+		return
+
 	// Access account for transaction
 	if(check_account())
 		if(transaction_amount > E.worth)
@@ -263,6 +273,11 @@
 	if(!confirm(SC))
 		return
 
+	if (cash_open)
+		playsound(src, 'sound/machines/buzz-sigh.ogg', 25)
+		usr << "\icon[src]<span class='warning'>The cash box is open.</span>"
+		return
+
 	// Access account for transaction
 	if(check_account())
 		if(transaction_amount > SC.worth)
@@ -287,6 +302,11 @@
 
 /obj/machinery/cash_register/proc/scan_item_price(obj/O)
 	if(!istype(O))	return
+	if (cash_open)
+		playsound(src, 'sound/machines/buzz-sigh.ogg', 25)
+		usr << "\icon[src]<span class='warning'>The cash box is open.</span>"
+		return
+
 	// First check if item has a valid price
 	var/price = O.get_item_cost()
 	if(isnull(price))
@@ -370,10 +390,12 @@
 		usr << "<span class='warning'>The cash box is locked.</span>"
 	else if(cash_open)
 		cash_open = 0
+		overlays -= "register_approve"
 		overlays -= "register_open"
 		overlays -= "register_cash"
 	else
 		cash_open = 1
+		overlays += "register_approve"
 		overlays += "register_open"
 		if(cash_stored)
 			overlays += "register_cash"
