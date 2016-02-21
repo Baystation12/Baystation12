@@ -1,3 +1,4 @@
+//Leaving this to old code, as it's not /device/assembly. A little qwerky but it should be alright
 /obj/item/assembly/shock_kit
 	name = "electrohelmet assembly"
 	desc = "This appears to be made from both an electropack and a helmet."
