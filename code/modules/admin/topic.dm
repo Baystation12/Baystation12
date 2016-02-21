@@ -164,6 +164,7 @@
 			var/client/C = directory[adm_ckey]						//find the client with the specified ckey (if they are logged in)
 			D.associate(C)											//link up with the client and add verbs
 
+			C << "[key_name_admin(usr)] has set your admin rank to: [new_rank]."
 			message_admins("[key_name_admin(usr)] edited the admin rank of [adm_ckey] to [new_rank]")
 			log_admin("[key_name(usr)] edited the admin rank of [adm_ckey] to [new_rank]")
 			log_admin_rank_modification(adm_ckey, new_rank)
@@ -177,6 +178,8 @@
 			if(!new_permission)	return
 			D.rights ^= permissionlist[new_permission]
 
+			var/client/C = directory[adm_ckey]
+			C << "[key_name_admin(usr)] has toggled your permission: [new_permission]."
 			message_admins("[key_name_admin(usr)] toggled the [new_permission] permission of [adm_ckey]")
 			log_admin("[key_name(usr)] toggled the [new_permission] permission of [adm_ckey]")
 			log_admin_permission_modification(adm_ckey, permissionlist[new_permission])
