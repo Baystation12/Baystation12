@@ -948,7 +948,7 @@
 			return 1
 
 		//UNCONSCIOUS. NO-ONE IS HOME
-		if((getOxyLoss() > 50) || (health <= config.health_threshold_crit))
+		if((getOxyLoss() > (species.total_health/2)) || (health <= config.health_threshold_crit))
 			Paralyse(3)
 
 		if(hallucination)
@@ -967,7 +967,7 @@
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-			if(halloss > 100)
+			if(halloss >= species.total_health)
 				src << "<span class='warning'>[species.halloss_message_self]</span>"
 				src.visible_message("<B>[src]</B> [species.halloss_message].")
 				Paralyse(10)
