@@ -19,6 +19,8 @@
 
 	amt_stunned = 6
 
+	hud_state = "wiz_cuff"
+
 /spell/targeted/projectile/dumbfire/stuncuff/prox_cast(var/list/targets, spell_holder)
 	for(var/mob/living/M in targets)
 		if(istype(M,/mob/living/carbon/human))
@@ -35,7 +37,7 @@
 	name = "beams of light"
 	desc = "Undescribable and unpenetrable. Or so they say."
 
-	breakouttime = 600
+	breakouttime = 300 //30 seconds
 
 /obj/item/weapon/handcuffs/wizard/dropped(var/mob/user)
 	qdel(src)

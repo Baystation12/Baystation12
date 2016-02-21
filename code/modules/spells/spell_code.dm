@@ -114,6 +114,8 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			target.adjustToxLoss(amount)
 		if("oxyloss")
 			target.adjustOxyLoss(amount)
+		if("brainloss")
+			target.adjustBrainLoss(amount)
 		if("stunned")
 			target.AdjustStunned(amount)
 		if("weakened")

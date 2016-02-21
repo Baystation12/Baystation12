@@ -1,8 +1,8 @@
 /obj/item/weapon/contract
 	name = "contract"
 	desc = "written in the blood of some unfortunate fellow."
-	icon = 'icons/obj/wizard.dmi'
-	icon_state = "scroll"
+	icon = 'icons/mob/screen_spells.dmi'
+	icon_state = "master_open"
 
 	var/contract_master = null
 
@@ -39,6 +39,7 @@
 
 /obj/item/weapon/contract/apprentice
 	name = "apprentice wizarding contract"
+	color = "#993300"
 
 /obj/item/weapon/contract/apprentice/contract_effect(mob/user as mob)
 	if(wizards.add_antagonist_mind(user.mind,1,"apprentice","<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))

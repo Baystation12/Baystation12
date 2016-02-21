@@ -1,5 +1,8 @@
 //Cleric is all about healing. Mobility and offense comes at a higher price but not impossible.
 /obj/item/weapon/spellbook/cleric
+	spellbook_type = /datum/spellbook/cleric
+
+/datum/spellbook/cleric
 	name = "Cleric's Tome"
 	desc = "For those who do not harm, or at least feel sorry about it."
 	title = "Cleric's Tome of Healing"
@@ -16,8 +19,10 @@
 					"Ethereal Jaunt" = 						"EJ",
 					"Knock" = 								"KN",
 					"Summon Holy Relic" = 					"SR",
+					"Grove" = 								"GO",
 					"Fireball" = 							"FB",
 					"Forcewall" = 							"FW",
+					"Artefact: Magical Rock" = 				"RA",
 					"Artefact: Mental Focus" = 				"MF",
 					"Contract: Apprenticeship" = 			"CP"
 					)
@@ -30,8 +35,10 @@
 					"This spell creates your ethereal form, temporarily making you invisible and able to pass through walls.",
 					"This spell opens nearby doors and does not require wizard garb.",
 					"This spell summons a purifying relic into your hand. Requires wizard garb.",
+					"This spell summons a sacred natural sanctuary and will grow potent healing plants.",
 					"This spell fires a fireball in the direction you're facing and does not require wizard garb. Be careful not to fire it at people that are standing next to you.",
 					"This spell creates an unbreakable wall that lasts for 30 seconds and does not need wizard garb.",
+					"It is said this rock unlocks the potential of the person that uses it.",
 					"An artefact that channels the will of the user into destructive bolts of force.",
 					"A standardized Wizarding Apprenticeship contract. Lets a wizard contract a non-wizard into an apprenticeship."
 					)
@@ -44,8 +51,10 @@
 				/spell/targeted/ethereal_jaunt = 					2,
 				/spell/aoe_turf/knock = 							1,
 				/spell/targeted/equip_item/holy_relic = 			1,
+				/spell/aoe_turf/conjure/grove = 					1,
 				/spell/targeted/projectile/dumbfire/fireball = 		2,
 				/spell/aoe_turf/conjure/forcewall = 				1,
+				/obj/item/weapon/magic_rock = 						1,
 				/obj/item/weapon/gun/energy/staff/focus = 			2,
 				/obj/item/weapon/contract/apprentice = 				1
 				)

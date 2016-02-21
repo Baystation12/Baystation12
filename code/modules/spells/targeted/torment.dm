@@ -17,6 +17,8 @@
 
 	var/loss = 30
 
+	hud_state = "wiz_horse"
+
 
 /spell/targeted/torment/cast(var/list/targets, var/mob/user)
 	gibs(user.loc)

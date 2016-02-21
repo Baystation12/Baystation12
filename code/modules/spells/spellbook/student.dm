@@ -1,6 +1,9 @@
 //wizard's training wheels. Basically. Same shit as in the general one.
 
 /obj/item/weapon/spellbook/student
+	spellbook_type = /datum/spellbook/student
+
+/datum/spellbook/student
 	name = "student's spell book"
 	desc = "This spell book has a sticker on it that says, 'certified for children 5 and older'."
 

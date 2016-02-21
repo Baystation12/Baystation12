@@ -1,5 +1,5 @@
 /spell/targeted/heal_target
-	name = "cure light wounds"
+	name = "Cure Light Wounds"
 	desc = "a rudimentary spell used mainly by wizards to heal papercuts."
 
 	school = "cleric"
@@ -28,7 +28,7 @@
 	return "[src] will now heal more."
 
 /spell/targeted/heal_target/major
-	name = "cure major wounds"
+	name = "Cure Major Wounds"
 	desc = "A spell used to fix others that cannot be fixed with regular medicine. Requires wizard garb."
 
 	charge_max = 300
@@ -53,7 +53,7 @@
 	return "[src] now heals oxygen loss and toxic damage."
 
 /spell/targeted/heal_target/area
-	name = "cure area"
+	name = "Cure Area"
 	desc = "This spell heals everyone in an area."
 
 	charge_max = 600
@@ -79,7 +79,7 @@
 
 
 /spell/targeted/heal_target/sacrifice
-	name = "sacrifice"
+	name = "Sacrifice"
 	desc = "This spell heals immensily. For a price."
 
 	spell_flags = SELECTABLE

@@ -10,6 +10,10 @@
 	universal_speak = 0
 	universal_understand = 1
 
+	min_oxy = 1 //still require a /bit/ of air.
+	max_co2 = 0
+	unsuitable_atoms_damage = 1
+
 	var/list/wizardy_spells = list()
 
 /mob/living/simple_animal/familiar/New()
@@ -77,8 +81,8 @@
 	health = 25
 	maxHealth = 25
 
-	wizardy_spells = list(	/spell/targeted/heal_target,
-							/spell/targeted/heal_target/area)
+	wizardy_spells = list(/spell/targeted/heal_target,
+						/spell/targeted/heal_target/area)
 
 /mob/living/simple_animal/familiar/pet //basically variants of normal animals with spells.
 	icon = 'icons/mob/animal.dmi'

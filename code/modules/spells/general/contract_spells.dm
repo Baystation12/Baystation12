@@ -2,7 +2,7 @@
 //As such they are REALLY REALLY powerful (because the victim is rewarded for signing it, and signing contracts is completely voluntary)
 
 /spell/contract
-	name = "contract spell"
+	name = "Contract Spell"
 	desc = "A spell perfecting the techniques of keeping a servant happy and obedient."
 
 	school = "transmutation"
@@ -16,6 +16,7 @@
 /spell/contract/New(var/mob/M)
 	..()
 	subject = M
+	name += " ([M.real_name])"
 
 /spell/contract/choose_targets()
 	return list(subject)
@@ -31,7 +32,7 @@
 
 
 /spell/contract/reward
-	name = "reward contractee"
+	name = "Reward Contractee"
 	desc = "A spell that makes your contracted victim feel better."
 
 	charge_max = 300
@@ -48,7 +49,7 @@
 	target.ExtinguishMob()
 
 /spell/contract/punish
-	name = "punish contractee"
+	name = "Punish Contractee"
 	desc = "A spell that sets your contracted victim ablaze."
 
 	charge_max = 300

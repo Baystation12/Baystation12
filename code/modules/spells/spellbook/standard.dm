@@ -1,6 +1,9 @@
 //the spellbook we know and love. Well, the one we know, at least.
 
 /obj/item/weapon/spellbook/standard
+	spellbook_type = /datum/spellbook/standard
+
+/datum/spellbook/standard
 	name = "spellbook"
 
 	title = "Book of Spells and Artefacts"
@@ -30,6 +33,7 @@
 							 "Artefact: Staff of Animation" = 			"SA",
 							 "Artefact: Scrying Orb" = 					"SO",
 							 "Artefact: Monster Manual" = 				"MA",
+							 "Artefact: Magical Rock" = 				"RA",
 							 "Contract: Apprenticeship" = 				"CP"
 							 )
 	spell_desc = list("This spell fires several, slow moving, magic projectiles at nearby targets. If they hit a target, it is paralyzed and takes minor damage.",
@@ -53,6 +57,7 @@
 							"An arcane staff capable of shooting bolts of eldritch energy which cause inanimate objects to come to life. This magic doesn't affect machines.",
 							"An incandescent orb of crackling energy, using it will allow you to ghost while alive, allowing you to spy upon the station with ease. In addition, buying it will permanently grant you x-ray vision.",
 							"A tome dedicated to the cataloguing of various magical beasts. You can use it to summon a familiar using a passing soul.",
+							"It is said this rock unlocks the potential of the person that uses it.",
 							"A standardized Wizarding Apprenticeship contract. Lets a wizard contract a non-wizard into an apprenticeship."
 							)
 	spells = list(/spell/targeted/projectile/magic_missile = 			1,
@@ -76,5 +81,6 @@
 							/obj/item/weapon/gun/energy/staff/animate = 		1,
 							/obj/structure/closet/wizard/scrying = 				1,
 							/obj/item/weapon/monster_manual = 					2,
+							/obj/item/weapon/magic_rock = 						1,
 							/obj/item/weapon/contract/apprentice = 				1
 							)

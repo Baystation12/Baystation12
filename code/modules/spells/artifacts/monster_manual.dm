@@ -66,6 +66,7 @@
 
 		var/mob/living/simple_animal/familiar/F = new path(get_turf(src))
 		F.ckey = C.ckey
+		F.faction = usr.faction
 		F.add_spell(new /spell/contract/return_master(usr),"const_spell_ready")
 		if(C.mob && C.mob.mind)
 			C.mob.mind.transfer_to(F)

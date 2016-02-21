@@ -57,9 +57,9 @@
 
 	summon_type = list(/mob/living/simple_animal/hostile/carp)
 
-	hud_state = "boo"
+	hud_state = "wiz_carp"
 
-	newVars = list("melee_damage_lower" = 0, "melee_damage_upper" = 0, "break_stuff_probability" = 0)
+	newVars = list("melee_damage_lower" = 0, "melee_damage_upper" = 0, "break_stuff_probability" = 0, "density" = 0)
 
 /spell/aoe_turf/conjure/mirage/empower_spell()
 	if(!..())

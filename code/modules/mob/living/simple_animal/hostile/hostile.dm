@@ -78,7 +78,6 @@
 			walk_to(src, target_mob, 1, move_to_delay)
 
 /mob/living/simple_animal/hostile/proc/AttackTarget()
-
 	stop_automated_movement = 1
 	if(!target_mob || SA_attackable(target_mob))
 		LoseTarget()
@@ -104,6 +103,7 @@
 	if(istype(target_mob,/obj/machinery/bot))
 		var/obj/machinery/bot/B = target_mob
 		B.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+		return B
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
