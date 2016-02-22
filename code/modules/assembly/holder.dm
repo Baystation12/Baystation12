@@ -272,7 +272,7 @@
 		if(weight + A.weight > max_weight) return
 		else if(connected_devices.len < max_connections)
 			connected_devices.Add(A)
-			A.loc = src
+			A.forceMove(src)
 			A.holder = src
 			if(connected_devices.len > 1 && advanced_settings["autoconnect"] == 1)
 				var/obj/item/device/assembly/prev = connected_devices[(connected_devices.len - 1)]
@@ -542,7 +542,7 @@
 			user.visible_message("<span class='notice'>\The [user] attaches \the [A] to \the [src]!</span>", "<span class='notice'>You attach \the [A] to \the [src].</span>")
 			stage = 2
 			user.drop_item()
-			A.loc = src
+			A.forceMove(src)
 			stage_name = A.name
 			removing = A
 			acting = 0
@@ -743,7 +743,7 @@
 		A.implanted()
 	if(!(src in affected.implants))
 		affected.implants.Add(src)
-	src.loc = affected
+	src.forceMove(affected)
 	implanted = target
 	implanted_in = affected
 	processing_objects.Add(src)
