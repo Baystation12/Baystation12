@@ -1,9 +1,0 @@
-// BEGIN_INTERNALS
-/*
-DIR: code code\modules code\modules\assembly code\modules\projectiles code\modules\projectiles\guns code\modules\projectiles\guns\energy 
-AUTO_FILE_DIR: OFF
-MAP_ICON_TYPE: 0
-WINDOW: code\modules\assembly\assembly.dm
-FILE: code\modules\assembly\assembly.dm
-*/
-// END_INTERNALS
