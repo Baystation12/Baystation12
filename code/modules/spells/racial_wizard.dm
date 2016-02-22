@@ -19,6 +19,10 @@
 	var/reward = potentials[H.species.get_bodytype()] //we get body type because that lets us ignore subspecies.
 	if(!reward)
 		return
+	for(var/spell/S in user.spell_list)
+		if(istype(S,reward))
+			user << "\The [src] can do no more for you."
+			return
 	user.drop_from_inventory(src)
 	var/a = new reward()
 	if(ispath(reward,/spell))

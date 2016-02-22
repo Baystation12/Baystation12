@@ -63,6 +63,7 @@
 /mob/living/simple_animal/familiar/horror/death()
 	..(null,"rapidly deteriorates")
 
+	ghostize()
 	gibs(src.loc)
 	qdel(src)
 
@@ -83,6 +84,8 @@
 
 	wizardy_spells = list(/spell/targeted/heal_target,
 						/spell/targeted/heal_target/area)
+
+
 
 /mob/living/simple_animal/familiar/pet //basically variants of normal animals with spells.
 	icon = 'icons/mob/animal.dmi'

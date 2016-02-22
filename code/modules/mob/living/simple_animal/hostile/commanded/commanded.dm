@@ -162,7 +162,6 @@
 		return 1
 	var/list/targets = get_targets_by_name(text)
 	if(targets.len > 1 || !targets.len) //CONFUSED. WHO DO I FOLLOW?
-		src.visible_message("\The [src] is visibly confused on who to follow.")
 		return 0
 
 	stance = COMMANDED_FOLLOW //GOT SOMEBODY. BETTER FOLLOW EM.

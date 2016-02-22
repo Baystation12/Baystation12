@@ -4,8 +4,8 @@
 /mob/living/simple_animal/hostile/commanded/nanomachine
 	name = "swarm"
 	desc = "a cloud of tiny, tiny robots."
-	icon = 'icons/obj/beekeeping.dmi'
-	icon_state = "bees3"
+	icon = 'icons/mob/critter.dmi'
+	icon_state = "blobsquiggle_grey"
 	health = 10
 	maxHealth = 10
 	var/regen_time = 0
@@ -14,9 +14,13 @@
 	var/emergency_protocols = 0
 	known_commands = list("stay", "stop", "attack", "follow", "heal", "emergency protocol")
 
+	response_help = "waves their hands through"
+	response_harm = "hits"
+	response_disarm = "fans at"
+
 /mob/living/simple_animal/hostile/commanded/nanomachine/Life()
 	regen_time++
-	if(regen_time && health < maxHealth) //1hp per 2 ticks.
+	if(regen_time == 2 && health < maxHealth) //slow regen
 		regen_time = 0
 		health++
 	. = ..()
@@ -28,6 +32,10 @@
 				move_to_heal()
 			if(COMMANDED_HEALING)
 				heal()
+
+/mob/living/simple_animal/hostile/commanded/nanomachine/death()
+	..(null,"Dissipates into thin air")
+	qdel(src)
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/proc/move_to_heal()
 	if(!target_mob)
@@ -65,19 +73,23 @@
 			return 1
 		var/list/targets = get_targets_by_name(text)
 		if(targets.len > 1 || !targets.len)
-			src.visible_message("\The [src] beeps, <b>'ERROR. TARGET COULD NOT BE PARSED.'</b>")
+			src.say("ERROR. TARGET COULD NOT BE PARSED.")
 			return 0
 		target_mob = targets[1]
 		stance = COMMANDED_HEAL
 		return 1
 	if(findtext(text,"emergency protocol"))
 		if(findtext(text,"deactivate"))
+			if(emergency_protocols)
+				src.say("EMERGENCY PROTOCOLS DEACTIVATED.")
 			emergency_protocols = 0
 			return 1
 		if(findtext(text,"activate"))
+			if(!emergency_protocols)
+				src.say("EMERGENCY PROTOCOLS ACTIVATED.")
 			emergency_protocols = 1
 			return 1
 		if(findtext(text,"check"))
-			src.audible_message("\The [src] beeps, <b>'EMERGENCY PROTOCOLS [emergency_protocols ? "ACTIVATED" : "DEACTIVATED"]'</b>")
+			src.say("EMERGENCY PROTOCOLS [emergency_protocols ? "ACTIVATED" : "DEACTIVATED"].")
 			return 1
 	return 0
