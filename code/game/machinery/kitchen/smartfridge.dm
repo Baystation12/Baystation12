@@ -135,7 +135,7 @@
 
 /obj/machinery/smartfridge/drying_rack/process()
 	..()
-	if(stat & (BROKEN|NOPOWER))
+	if(inoperable())
 		return
 	if(contents.len)
 		dry()
@@ -143,14 +143,13 @@
 
 /obj/machinery/smartfridge/drying_rack/update_icon()
 	overlays.Cut()
-	var/not_working = stat & (BROKEN|NOPOWER)
-	if(not_working)
+	if(inoperable())
 		icon_state = icon_off
 	else
 		icon_state = icon_on
 	if(contents.len)
 		overlays += "drying_rack_filled"
-		if(!not_working)
+		if(!inoperable())
 			overlays += "drying_rack_drying"
 
 /obj/machinery/smartfridge/drying_rack/proc/dry()
