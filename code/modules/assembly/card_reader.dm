@@ -34,7 +34,7 @@
 	if(istype(O, /obj/item/weapon/card/id))
 		user.drop_item()
 		inserted = O
-		inserted.loc = src
+		inserted.forceMove(src)
 		if(activate_on_insert == "TRUE")
 			misc_activate()
 
@@ -81,5 +81,5 @@
 	if(usr)
 		usr.put_in_hands(inserted)
 	else
-		inserted.loc = get_turf(src)
+		inserted.forceMove(get_turf(src))
 		inserted = null

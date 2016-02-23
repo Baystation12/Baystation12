@@ -86,9 +86,8 @@
 		if(!do_after(user, rand(20, 60))) return
 		user << "<span class='notice'>You've successfully modified \the [src]!</span>"
 		user.drop_from_inventory(src)
-		var/obj/item/device/assembly/speaker/radio/R = new(src.loc)
+		var/obj/item/device/assembly/speaker/radio/R = new()
+		R.forceMove(get_turf(src))
 		user.drop_item()
-		src.loc = R
 		qdel(src)
-		O.loc = R
 		qdel(O)

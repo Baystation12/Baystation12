@@ -197,7 +197,6 @@
 	name = "synthetic flash"
 	desc = "When a problem arises, SCIENCE is the solution."
 	icon_state = "sflash"
-	origin_tech = "magnets=2;combat=1"
 	var/construction_cost = list(DEFAULT_WALL_MATERIAL=750,"glass"=750)
 	var/construction_time=100
 

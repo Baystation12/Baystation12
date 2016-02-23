@@ -187,7 +187,10 @@
 /obj/item/device/assembly/Destroy()
 	if(radio_controller)
 		radio_controller.remove_object(src,frequency)
-	frequency = 0
+	if(wire_holder)
+		qdel(wire_holder)
+	if(holder)
+		holder.remove_connected_device(src)
 	..()
 
 /obj/item/device/assembly/proc/set_frequency(new_frequency)

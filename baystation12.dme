@@ -994,6 +994,7 @@
 #include "code\modules\assembly\target_finder.dm"
 #include "code\modules\assembly\timer.dm"
 #include "code\modules\assembly\transfer_valve.dm"
+#include "code\modules\assembly\valve.dm"
 #include "code\modules\assembly\voice.dm"
 #include "code\modules\assembly\wire_safety.dm"
 #include "code\modules\assembly\premade\bomb.dm"
@@ -1985,9 +1986,4 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\exodus-1.dmm"
-#include "maps\exodus-2.dmm"
-#include "maps\exodus-3.dmm"
-#include "maps\exodus-4.dmm"
-#include "maps\exodus-5.dmm"
-#include "maps\exodus-6.dmm"
 // END_INCLUDE

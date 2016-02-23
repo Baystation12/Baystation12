@@ -36,7 +36,7 @@
 				radio_device.channels.Add(newkey.channels[i])
 				used = 1
 		if(used)
-			O.loc = src
+			O.forceMove(src)
 			qdel(O)
 		else
 			user << "<span class='notice'>\The [O] does not have any new channels!</span>"

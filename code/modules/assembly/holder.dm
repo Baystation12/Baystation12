@@ -272,7 +272,7 @@
 		if(weight + A.weight > max_weight) return
 		else if(connected_devices.len < max_connections)
 			connected_devices.Add(A)
-			A.loc = src
+			A.forceMove(src)
 			A.holder = src
 			if(connected_devices.len > 1 && advanced_settings["autoconnect"] == 1)
 				var/obj/item/device/assembly/prev = connected_devices[(connected_devices.len - 1)]
@@ -285,37 +285,7 @@
 						add_debug_log("Automatic connection established. \[[prev.interface_name] > [A.interface_name]\]")
 					else
 						add_debug_log("Automatic connection unavailable. \[[prev.interface_name] > [A.interface_name]\]")
-//			reset_wiring() -- Replaced with automatic wiring
-			setup_verbs()
-//	if(connected_devices.len < max_connections && O in attachable_devices)
-//		O.loc = src
-//		connected_devices += O
 	update_holder()
-
-//Debug procs
-
-/obj/item/device/assembly_holder/proc/reset_wiring()
-	for(var/i=1, i<connected_devices.len, i++)
-		var/obj/item/device/assembly/object = connected_devices[i]
-		if(!istype(object)) return
-		object.connects_to.Cut()
-		object.connects_to += "[(i+1)]"
-
-/obj/item/device/assembly_holder/proc/setup_verbs()
-	src.verbs.Cut()
-	for(var/obj/item/device/assembly/A in connected_devices)
-		if(A.verbs.len)
-			src.verbs.Add(A.verbs)
-
-/obj/item/device/assembly_holder/proc/generate_name()
-	if(connected_devices.len > 3 || connected_devices.len == 0)
-		return initial(name)
-	var/new_name = "[initial(name)]("
-	for(var/obj/O in connected_devices)
-		new_name += "[O.name], "
-	new_name += ")"
-	return new_name
-//--
 
 /obj/item/device/assembly_holder/examine(mob/user)
 	..(user)
@@ -542,7 +512,7 @@
 			user.visible_message("<span class='notice'>\The [user] attaches \the [A] to \the [src]!</span>", "<span class='notice'>You attach \the [A] to \the [src].</span>")
 			stage = 2
 			user.drop_item()
-			A.loc = src
+			A.forceMove(src)
 			stage_name = A.name
 			removing = A
 			acting = 0
@@ -743,7 +713,7 @@
 		A.implanted()
 	if(!(src in affected.implants))
 		affected.implants.Add(src)
-	src.loc = affected
+	src.forceMove(affected)
 	implanted = target
 	implanted_in = affected
 	processing_objects.Add(src)
@@ -777,7 +747,7 @@
 		A.implant_process()
 
 /obj/item/device/assembly_holder/frame
-	name = "Metal frame"
+	name = "assembly frame"
 	desc = "A metal frame capable of holding two devices"
 	icon = 'icons/obj/assemblies/assembly_holders.dmi'
 	icon_state = "2frame"

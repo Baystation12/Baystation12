@@ -30,7 +30,7 @@
 
 /obj/item/device/assembly/chem_mixer/proc/attach_container(var/obj/item/W)
 	if(is_type_in_list(W, allowed_containers))
-		W.loc = src
+		W.forceMove(src)
 		beakers += W
 
 /obj/item/device/assembly/chem_mixer/attackby(var/obj/item/W, var/mob/living/carbon/user)
@@ -100,7 +100,7 @@
 	if(href_list["option"])
 		if(href_list["option"] == "Eject Beakers")
 			for(var/obj/O in beakers)
-				O.loc = get_turf(src)
+				O.forceMove(get_turf(src))
 				beakers -= O
 		if(href_list["option"] == "Activate")
 			process_activation()

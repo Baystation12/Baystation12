@@ -82,61 +82,40 @@
 					var/inp2 = input("Would you like to make a stronger explosive?", "Explosive") in list("Yes", "No")
 					if(inp2 == "Yes")
 						var/obj/item/device/assembly/explosive/strong/E = new(src.loc)
-						if(holder)
-							E.connects_to = connects_to
-							E.holder = holder
-							E.loc = holder
-						if(user.get_active_hand() == src)
-							user.drop_item()
+						user.remove_from_mob(src)
+						E.forceMove(get_turf(src))
 						qdel(src)
 						return
 				if(emp_explosive_matches == 4)
 					var/inp2 = input("Would you like to make an emp explosive?", "Explosive") in list("Yes", "No")
 					if(inp2 == "Yes")
 						var/obj/item/device/assembly/explosive/emexplosive/E = new(get_turf(src))
-						if(holder)
-							E.connects_to = connects_to
-							E.holder = holder
-							E.loc = holder
-						if(user.get_active_hand() == src)
-							user.drop_item()
-						src.loc = E
+						user.remove_from_mob(src)
+						E.forceMove(get_turf(src))
 						qdel(src)
 						return
 				if(flash_explosive_matches == 3)
 					var/inp2 = input("Would you like to make a flash explosive?", "Explosive") in list("Yes", "No")
 					if(inp2 == "Yes")
 						var/obj/item/device/assembly/explosive/flash/E = new(src.loc)
-						if(holder)
-							E.connects_to = connects_to
-							E.holder = holder
-							E.loc = holder
-						if(user.get_active_hand() == src)
-							user.drop_item()
+						user.remove_from_mob(src)
+						E.forceMove(get_turf(src))
 						qdel(src)
 						return
 				if(bomb_explosive_matches == 2)
 					var/inp2 = input("Would you like to make a standard explosive?", "Explosive") in list("Yes", "No")
 					if(inp2 == "Yes")
 						var/obj/item/device/assembly/explosive/bomb/E = new(src.loc)
-						if(holder)
-							E.connects_to = connects_to
-							E.holder = holder
-							E.loc = holder
-						if(user.get_active_hand() == src)
-							user.drop_item()
+						user.remove_from_mob(src)
+						E.forceMove(get_turf(src))
 						qdel(src)
 						return
 				if(scatter_explosive_matches == 2)
 					var/inp2 = input("Would you like to make a scatter explosive?", "Explosive") in list("Yes", "No")
 					if(inp2 == "Yes")
-						var/obj/item/device/assembly/explosive/bomb/scatter/E = new(src.loc)
-						if(holder)
-							E.connects_to = connects_to
-							E.holder = holder
-							E.loc = holder
-						if(user.get_active_hand() == src)
-							user.drop_item()
+						var/obj/item/device/assembly/explosive/bomb/scatter/E = new()
+						user.remove_from_mob(src)
+						E.forceMove(get_turf(src))
 						qdel(src)
 						return
 				else
@@ -188,7 +167,6 @@
 			if(!do_after(user, 50)) return
 			user << "<span class='notice'>You wire the light to \the [src]!</span>"
 			user.drop_item()
-			O.loc = src
 			qdel(O)
 			modified_contents.Add("Light")
 		if(istype(O, /obj/item/weapon/module/power_control) && !("Power" in modified_contents))
@@ -196,7 +174,6 @@
 			if(!do_after(user, 80)) return
 			user << "<span class='notice'>You wire the power module to \the [src]!</span>"
 			user.drop_item()
-			O.loc = src
 			qdel(O)
 			modified_contents.Add("Power")
 		if(istype(O, /obj/item/weapon/cell) && !("Cell" in modified_contents))
@@ -204,7 +181,6 @@
 			if(!do_after(user, 120)) return
 			user << "<span class='notice'>You attach the power cell to \the [src]!</span>"
 			user.drop_item()
-			O.loc = src
 			qdel(O)
 			modified_contents.Add("Cell")
 
@@ -213,31 +189,34 @@
 	desc = "A self-igniting explosive."
 	icon_state = "bomb"
 	wires = WIRE_DIRECT_RECEIVE | WIRE_PROCESS_RECEIVE | WIRE_PROCESS_ACTIVATE
+	wire_num = 3
 
-	activate()
-		prime()
-		return 1
+/obj/item/device/assembly/explosive/bomb/activate()
+	prime()
+	return 1
 
-	boom()
-		if(used) return
-		if(modifying) return
-		playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
-		var/turf/T = get_turf(src)
-		if(T)
-			explosion(T, 0, 1, rand(3,4), 7)
+/obj/item/device/assembly/explosive/bomb/boom()
+	if(used) return
+	if(modifying) return
+	playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
+	var/turf/T = get_turf(src)
+	if(T)
+		explosion(T, 0, 1, (rand(3,4)*power), 7)
+	used = 1
 
 /obj/item/device/assembly/explosive/bomb/scatter
 	name = "scatter bomb"
 	desc = "A self-igniting explosive that spreads itself across a large range."
 	wires = WIRE_DIRECT_RECEIVE | WIRE_PROCESS_RECEIVE | WIRE_PROCESS_ACTIVATE
 
-	boom()
-		if(used) return
-		if(modifying) return
-		playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
-		var/turf/T = get_turf(src)
-		if(T)
-			explosion(T, 0, 0, rand(4,8), 7)
+/obj/item/device/assembly/explosive/bomb/scatter/boom()
+	if(used) return
+	if(modifying) return
+	playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
+	var/turf/T = get_turf(src)
+	if(T)
+		explosion(T, 0, 0, (rand(5,12)*power), 7)
+	used = 1
 
 /obj/item/device/assembly/explosive/anti_photon
 	desc = "An experimental device for temporarily removing light in a limited area."

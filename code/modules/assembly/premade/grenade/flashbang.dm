@@ -3,7 +3,6 @@
 	desc = "A bang. That makes a flash. Or is it a flash that makes a bang.."
 	icon_state = "flashbang"
 	item_state = "flashbang"
-	origin_tech = "materials=2;combat=1"
 	var/banglet = 0
 	default_grenade = 0
 

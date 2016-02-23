@@ -8,7 +8,6 @@
 	icon_state = "signaller"
 	item_state = "signaler"
 	matter = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 200, "waste" = 100)
-	origin_tech = "magnets=1"
 	wires = WIRE_DIRECT_RECEIVE | WIRE_RADIO_RECEIVE | WIRE_PROCESS_RECEIVE | WIRE_PROCESS_ACTIVATE | WIRE_PROCESS_SEND | WIRE_RADIO_SEND | WIRE_MISC_ACTIVATE | WIRE_DIRECT_SEND
 	wire_num = 8
 

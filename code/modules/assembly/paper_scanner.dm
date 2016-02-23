@@ -23,7 +23,7 @@
 		else
 			stored = O
 			user.drop_item()
-			O.loc = src
+			O.forceMove(src)
 			spawn(1)
 				user << "<span class='notice'>You put \the [stored] into \the [src]!</span>"
 				if(insert)

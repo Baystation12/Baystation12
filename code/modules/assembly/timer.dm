@@ -109,7 +109,7 @@
 				cable.use(10)
 				user.visible_message("<span class='warning'>\The [user] modifies \the [src]!</span>", "<span class='notice'>You add some wiring to \the [src], allowing it to trigger devices when tripped!</span>")
 				var/obj/item/device/assembly/timer/repeater/repeater = new()
-				repeater.loc = src.loc
+				repeater.forceMove(get_turf(src))
 				qdel(src)
 				return
 	..()

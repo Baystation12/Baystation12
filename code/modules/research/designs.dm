@@ -559,7 +559,6 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/gun/energy/temperature
 	sort_string = "TABAC"
 
-
 /datum/design/item/weapon/intelligun
 	desc = "An advanced prototype weapon with inbuilt security protocols."
 	id = "temp_gun"

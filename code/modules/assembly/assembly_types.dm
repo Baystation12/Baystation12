@@ -51,7 +51,7 @@
 			desc = "A chemical grenade."
 			icon_state = "chemg"
 			item_state = "chemg"
-		else if(istype(A, /obj/item/device/assembly/igniter))
+		else if(istype(A, /obj/item/device/assembly/igniter) || istype(A, /obj/item/device/assembly/explosive))
 			name = "modified explosive"
 			desc = "An explosive! You can almost hear a quiet ticking.."
 			icon_state = "grenade"

@@ -52,7 +52,6 @@
 		if(!do_after(user, 60)) return
 		user << "<span class='notice'>You successfully install an explosive mechanism into \the [src]!</span>"
 		user.drop_item()
-		O.loc = src
 		qdel(O)
 		stage = 1
 		name = "modified [initial(name)]"
@@ -62,10 +61,9 @@
 		if(!do_after(user, 80)) return
 		user << "<span class='notice'>You've made a makeshift explosive!</span>"
 		stage = 4
-		user.drop_item()
+		user.remove_from_mob(src)
 		var/obj/item/device/assembly/explosive/E = new(get_turf(src))
 		E.reliability = rand(50, 100)
-		src.loc = E
 		qdel(src)
 		msg_admin_attack("[user.name] ([user.ckey]) assembled an explosive! (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 		return
@@ -74,7 +72,6 @@
 		if(!do_after(user, 50)) return
 		user << "<span class='notice'>You focus the ignition on the explsive mechanism!</span>"
 		user.drop_item()
-		O.loc = src
 		qdel(O)
 		stage = 3
 		return

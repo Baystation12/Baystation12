@@ -25,7 +25,6 @@
 
 /obj/item/device/assembly/meter/anchored(var/anchored = 0)
 	if(anchored)
-		for(var/obj/machinery/atmospherics/pipe/P in src.loc)
 		target = locate(/obj/machinery/atmospherics/pipe) in get_turf(src)
 	else if(target)
 		target = null

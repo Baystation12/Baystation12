@@ -21,12 +21,12 @@
 		if(!tank_one)
 			tank_one = item
 			user.drop_item()
-			item.loc = src
+			item.forceMove(src)
 			user << "<span class='notice'>You attach the tank to the transfer valve.</span>"
 		else if(!tank_two)
 			tank_two = item
 			user.drop_item()
-			item.loc = src
+			item.forceMove(src)
 			user << "<span class='notice'>You attach the tank to the transfer valve.</span>"
 			message_admins("[key_name_admin(user)] attached both tanks to a transfer valve. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
 			log_game("[key_name_admin(user)] attached both tanks to a transfer valve.")
@@ -47,7 +47,7 @@
 			return
 		user.remove_from_mob(item)
 		attached_device = A
-		A.loc = src
+		A.forceMove(src)
 		user << "<span class='notice'>You attach the [item] to the valve controls and secure it.</span>"
 		A.holder = src
 
@@ -94,20 +94,20 @@
 	if(tank_one && href_list["tankone"])
 		split_gases()
 		valve_open = 0
-		tank_one.loc = get_turf(src)
+		tank_one.forceMove(get_turf(src))
 		tank_one = null
 		update_icon()
 	else if(tank_two && href_list["tanktwo"])
 		split_gases()
 		valve_open = 0
-		tank_two.loc = get_turf(src)
+		tank_two.forceMove(get_turf(src))
 		tank_two = null
 		update_icon()
 	else if(href_list["open"])
 		toggle_valve()
 	else if(attached_device)
 		if(href_list["rem_device"])
-			attached_device.loc = get_turf(src)
+			attached_device.forceMove(get_turf(src))
 			attached_device:holder = null
 			attached_device = null
 			update_icon()
@@ -185,12 +185,12 @@
 	if(O == tank_two)
 		split_gases()
 		valve_open = 0
-		tank_two.loc = get_turf(src)
+		tank_two.forceMove(get_turf(src))
 		tank_two = null
 		update_icon()
 	else if(O == tank_one)
 		split_gases()
 		valve_open = 0
-		tank_one.loc = get_turf(src)
+		tank_one.forceMove(get_turf(src))
 		tank_one = null
 		update_icon()

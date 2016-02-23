@@ -33,9 +33,9 @@
 			var/mob/M = A
 			if(holder)
 				if(M.layer >= holder.layer)
-					M.loc = D
+					M.forceMove(D)
 			else if(M.layer >= src.layer)
-				M.loc = D
+				M.forceMove(D)
 			M << "<span class='danger'>You feel something suck you downwards into darkness!</span>"
 		if(istype(A, /obj/item))
 			var/obj/item/O = A
@@ -44,7 +44,7 @@
 			if(istype(O, /obj/item/device/assembly_holder))
 				if(O == holder) continue
 			if(O == src) continue
-			O.loc = D
+			O.forceMove(D)
 
 	add_debug_log("Beginning pneumatic flush...\[[src]\]")
 

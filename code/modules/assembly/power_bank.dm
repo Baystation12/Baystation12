@@ -30,7 +30,7 @@
 		if(cells.len < max_cells)
 			cells += O
 			user.drop_item()
-			O.loc = src
+			O.forceMove(src)
 			user << "<span class='notice'>You install \the [O] into \the [src]!</span>"
 		else
 			user << "<span class='notice'>\The [src] cannot fit the [O]!</span>"
