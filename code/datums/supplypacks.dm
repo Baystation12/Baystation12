@@ -1323,6 +1323,15 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	contains = list(/obj/item/stack/tile/carpet)
 	amount = 50
 
+/datum/supply_packs/linoleum
+	name = "Linoleum"
+	containertype = /obj/structure/closet
+	containername = "Linoleum crate"
+	cost = 15
+	group = "Miscellaneous"
+	contains = list(/obj/item/stack/tile/linoleum)
+	amount = 50
+
 /datum/supply_packs/hydrotray
 	name = "Empty hydroponics tray"
 	cost = 30
