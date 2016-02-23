@@ -1294,7 +1294,7 @@ var/list/WALLITEMS = list(
 			if(length(temp_col )<2)
 				temp_col  = "0[temp_col]"
 			colour += temp_col
-	return colour
+	return "#[colour]"
 
 var/mob/dview/dview_mob = new
 
