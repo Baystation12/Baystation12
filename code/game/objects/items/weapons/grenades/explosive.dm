@@ -9,10 +9,14 @@
 	no_attack_log = 1
 	muzzle_type = null
 
+<<<<<<< HEAD:code/game/objects/items/weapons/grenades/fragmentation.dm
+/obj/item/device/assembly_holder/grenade/frag
+=======
 /obj/item/projectile/bullet/pellet/fragment/strong
 	damage = 15
 
 /obj/item/weapon/grenade/explosive
+>>>>>>> 8186b768ba7827ef3581d05d6635ce7deb67582e:code/game/objects/items/weapons/grenades/explosive.dm
 	name = "fragmentation grenade"
 	desc = "A fragmentation grenade, optimized for harming personnel without causing massive structural damage."
 	icon_state = "frggrenade"
@@ -28,7 +32,11 @@
 	//The radius of the circle used to launch projectiles. Lower values mean less projectiles are used but if set too low gaps may appear in the spread pattern
 	var/spread_range = 7
 
+<<<<<<< HEAD:code/game/objects/items/weapons/grenades/fragmentation.dm
+/obj/item/device/assembly_holder/grenade/frag/prime()
+=======
 /obj/item/weapon/grenade/explosive/prime()
+>>>>>>> 8186b768ba7827ef3581d05d6635ce7deb67582e:code/game/objects/items/weapons/grenades/explosive.dm
 	set waitfor = 0
 	..()
 

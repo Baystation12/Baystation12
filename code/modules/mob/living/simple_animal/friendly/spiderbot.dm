@@ -221,11 +221,11 @@
 		usr << "\red You have nothing to drop!"
 		return 0
 
-	if(istype(held_item, /obj/item/weapon/grenade))
+	if(istype(held_item, /obj/item/device/assembly_holder/grenade))
 		visible_message("<span class='danger'>\The [src] launches \the [held_item]!</span>", \
 			"<span class='danger'>You launch \the [held_item]!</span>", \
 			"You hear a skittering noise and a thump!")
-		var/obj/item/weapon/grenade/G = held_item
+		var/obj/item/device/assembly_holder/grenade/G = held_item
 		G.loc = src.loc
 		G.prime()
 		held_item = null
