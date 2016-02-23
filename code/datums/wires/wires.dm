@@ -16,6 +16,8 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 	var/holder_type = null // The holder type; used to make sure that the holder is the correct type.
 	var/wire_count = 0 // Max is 16
 	var/wires_status = 0 // BITFLAG OF WIRES
+	var/can_diagnose = 0
+	var/show_random = 1
 
 	var/list/wires = list()
 	var/list/signallers = list()
@@ -98,11 +100,13 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 		html += "<td[row_options2]>"
 		html += "<A href='?src=\ref[src];action=1;cut=[colour]'>[IsColourCut(colour) ? "Mend" :  "Cut"]</A>"
 		html += " <A href='?src=\ref[src];action=1;pulse=[colour]'>Pulse</A>"
+		if(can_diagnose)
+			html += " <A href='?src=\ref[src];action=1;diagnose=[colour]'>Diagnose</A>"
 		html += " <A href='?src=\ref[src];action=1;attach=[colour]'>[IsAttached(colour) ? "Detach" : "Attach"] Signaller</A></td></tr>"
 	html += "</table>"
 	html += "</div>"
 
-	if (random)
+	if (random && show_random)
 		html += "<i>\The [holder] appears to have tamper-resistant electronics installed.</i><br><br>" //maybe this could be more generic?
 
 	return html
@@ -210,6 +214,9 @@ var/const/POWER = 8
 		return index
 	else
 		CRASH("[colour] is not a key in wires.")
+
+/datum/wires/proc/DiagnoseColour(var/colour, var/mob/living/L)
+	return 1
 
 //
 // Is Index/Colour Cut procs
