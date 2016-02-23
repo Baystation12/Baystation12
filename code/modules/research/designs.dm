@@ -561,7 +561,7 @@ other types of metals and chemistry for reagents).
 
 /datum/design/item/weapon/intelligun
 	desc = "An advanced prototype weapon with inbuilt security protocols."
-	id = "temp_gun"
+	id = "intelligun"
 	req_tech = list(TECH_COMBAT = 3, TECH_DATA = 2, TECH_POWER = 3, TECH_BIO = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 6800, "glass" = 1000, "gold" = 500)
 	build_path = /obj/item/weapon/gun/energy/advanced
