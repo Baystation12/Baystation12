@@ -49,7 +49,8 @@
 	overlays.Cut()
 	var/sum = src.worth
 	var/num = 0
-	for(var/i in list(1000,500,200,100,50,20,10,1))
+	var/list/denominations = list(1000,500,200,100,50,20,10,1)
+	for(var/i in denominations)
 		while(sum >= i && num < 50)
 			sum -= i
 			num++
@@ -67,6 +68,10 @@
 		banknote.transform = M
 		src.overlays += banknote
 	src.desc = "They are worth [worth] Thalers."
+	if(worth in denominations)
+		src.name = "[worth] Thaler"
+	else
+		src.name = "pile of thalers"
 
 /obj/item/weapon/spacecash/bundle/attack_self()
 	var/amount = input(usr, "How many Thalers do you want to take? (0 to [src.worth])", "Take Money", 20) as num
