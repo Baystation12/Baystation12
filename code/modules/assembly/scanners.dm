@@ -205,7 +205,7 @@
 			for (var/ID in C.virus2)
 				if (ID in virusDB)
 					var/datum/data/record/V = virusDB[ID]
-					scanned_data.Add(text(">span class='warning'>Warning: Pathogen [V.fields["name"]] detected in subject's blood. Known antigen : [V.fields["antigen"]]</span>"))
+					scanned_data.Add(text("<span class='warning'>Warning: Pathogen [V.fields["name"]] detected in subject's blood. Known antigen : [V.fields["antigen"]]</span>"))
 //			user.show_message(text("\red Warning: Unknown pathogen detected in subject's blood."))
 	if (M.getCloneLoss())
 		scanned_data.Add("<span class='warning'>Subject appears to have been imperfectly cloned.</span>")
