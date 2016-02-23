@@ -456,6 +456,15 @@ var/global/list/damage_icon_parts = list()
 	if(w_uniform && istype(w_uniform, /obj/item/clothing/under) )
 		w_uniform.screen_loc = ui_iclothing
 
+		//determine state to use
+		var/under_state //switched determining state first so we can make a check in icon.
+		if(w_uniform.item_state_slots && w_uniform.item_state_slots[slot_w_uniform_str])
+			under_state = w_uniform.item_state_slots[slot_w_uniform_str]
+		else if(w_uniform.item_state)
+			under_state = w_uniform.item_state
+		else
+			under_state = w_uniform.icon_state
+
 		//determine the icon to use
 		var/icon/under_icon
 		if(w_uniform.icon_override)
@@ -466,15 +475,6 @@ var/global/list/damage_icon_parts = list()
 			under_icon = w_uniform.item_icons[slot_w_uniform_str]
 		else
 			under_icon = INV_W_UNIFORM_DEF_ICON
-
-		//determine state to use
-		var/under_state
-		if(w_uniform.item_state_slots && w_uniform.item_state_slots[slot_w_uniform_str])
-			under_state = w_uniform.item_state_slots[slot_w_uniform_str]
-		else if(w_uniform.item_state)
-			under_state = w_uniform.item_state
-		else
-			under_state = w_uniform.icon_state
 
 		//need to append _s to the icon state for legacy compatibility
 		var/image/standing = image(icon = under_icon, icon_state = "[under_state]_s")
@@ -641,18 +641,6 @@ var/global/list/damage_icon_parts = list()
 	if(head)
 		head.screen_loc = ui_head		//TODO
 
-		//Determine the icon to use
-		var/t_icon
-		if(head.icon_override)
-			t_icon = head.icon_override
-		else if(head.sprite_sheets && head.sprite_sheets[species.get_bodytype()])
-			t_icon = head.sprite_sheets[species.get_bodytype()]
-
-		else if(head.item_icons && (slot_head_str in head.item_icons))
-			t_icon = head.item_icons[slot_head_str]
-		else
-			t_icon = INV_HEAD_DEF_ICON
-
 		//Determine the state to use
 		var/t_state
 		if(istype(head, /obj/item/weapon/paper))
@@ -666,6 +654,19 @@ var/global/list/damage_icon_parts = list()
 				t_state = head.item_state
 			else
 				t_state = head.icon_state
+		//Determine the icon to use
+		var/t_icon
+		if(head.icon_override)
+			t_icon = head.icon_override
+		else if(head.sprite_sheets && head.sprite_sheets[species.get_bodytype()] && (t_state in icon_states(head.sprite_sheets[species.get_bodytype()])))
+			t_icon = head.sprite_sheets[species.get_bodytype()]
+
+		else if(head.item_icons && (slot_head_str in head.item_icons))
+			t_icon = head.item_icons[slot_head_str]
+		else
+			t_icon = INV_HEAD_DEF_ICON
+
+
 
 		//Create the image
 		var/image/standing = image(icon = t_icon, icon_state = t_state)
@@ -735,8 +736,8 @@ var/global/list/damage_icon_parts = list()
 		var/t_icon = INV_SUIT_DEF_ICON
 		if(wear_suit.icon_override)
 			t_icon = wear_suit.icon_override
-		else if(wear_suit.sprite_sheets && wear_suit.sprite_sheets[species.get_bodytype()])
-			t_icon = wear_suit.sprite_sheets[species.name]
+		else if(wear_suit.sprite_sheets && wear_suit.sprite_sheets[species.get_bodytype()] && ("[wear_suit.icon_state]" in icon_states(wear_suit.sprite_sheets[species.get_bodytype()])))
+			t_icon = wear_suit.sprite_sheets[species.get_bodytype()]
 		else if(wear_suit.item_icons && wear_suit.item_icons[slot_wear_suit_str])
 			t_icon = wear_suit.item_icons[slot_wear_suit_str]
 
@@ -785,7 +786,7 @@ var/global/list/damage_icon_parts = list()
 		var/image/standing
 		if(wear_mask.icon_override)
 			standing = image("icon" = wear_mask.icon_override, "icon_state" = "[wear_mask.icon_state]")
-		else if(wear_mask.sprite_sheets && wear_mask.sprite_sheets[species.get_bodytype()])
+		else if(wear_mask.sprite_sheets && wear_mask.sprite_sheets[species.get_bodytype()] && ("[wear_mask.icon_state]" in icon_states(wear_mask.sprite_sheets[species.get_bodytype()])))
 			standing = image("icon" = wear_mask.sprite_sheets[species.get_bodytype()], "icon_state" = "[wear_mask.icon_state]")
 		else
 			standing = image("icon" = 'icons/mob/mask.dmi', "icon_state" = "[wear_mask.icon_state]")
