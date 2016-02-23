@@ -162,7 +162,7 @@
 					Combined, an example is: <i>E-E4/4,F#/2,G#/8,B/8,E3-E4/4</i>
 					<br>
 					Lines may be up to 50 characters.<br>
-					A song may only contain up to 50 lines.<br>
+					A song may only contain up to 350 lines.<br>
 					"}
 		else
 			dat += "<B><A href='?src=\ref[src];help=2'>Show Help</A></B><BR>"
@@ -193,7 +193,7 @@
 			if(!in_range(instrumentObj, usr))
 				return
 
-			if(lentext(t) >= 3072)
+			if(lentext(t) >= 3072*7)
 				var/cont = input(usr, "Your message is too long! Would you like to continue editing it?", "", "yes") in list("yes", "no")
 				if(cont == "no")
 					break
@@ -212,7 +212,7 @@
 				lines.Cut(201)
 			var/linenum = 1
 			for(var/l in lines)
-				if(lentext(l) > 50)
+				if(lentext(l) > 350)
 					usr << "Line [linenum] too long!"
 					lines.Remove(l)
 				else
@@ -250,10 +250,10 @@
 		var/newline = html_encode(input("Enter your line: ", instrumentObj.name) as text|null)
 		if(!newline || !in_range(instrumentObj, usr))
 			return
-		if(lines.len > 50)
+		if(lines.len > 350)
 			return
-		if(lentext(newline) > 50)
-			newline = copytext(newline, 1, 50)
+		if(lentext(newline) > 350)
+			newline = copytext(newline, 1, 350)
 		lines.Add(newline)
 
 	else if(href_list["deleteline"])
@@ -267,8 +267,8 @@
 		var/content = html_encode(input("Enter your line: ", instrumentObj.name, lines[num]) as text|null)
 		if(!content || !in_range(instrumentObj, usr))
 			return
-		if(lentext(content) > 50)
-			content = copytext(content, 1, 50)
+		if(lentext(content) > 350)
+			content = copytext(content, 1, 350)
 		if(num > lines.len || num < 1)
 			return
 		lines[num] = content
