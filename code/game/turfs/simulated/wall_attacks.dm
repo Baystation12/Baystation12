@@ -48,7 +48,7 @@
 
 	if(!can_open)
 		user << "<span class='notice'>You push the wall, but nothing happens.</span>"
-		playsound(src, 'sound/weapons/Genhit.ogg', 25, 1)
+		playsound(src, hitsound, 25, 1)
 	else
 		toggle_open(user)
 	return 0
@@ -316,5 +316,19 @@
 		return
 
 	else if(!istype(W,/obj/item/weapon/rcd) && !istype(W, /obj/item/weapon/reagent_containers))
-		return attack_hand(user)
-
+		if(!W.force)
+			return attack_hand(user)
+		var/dam_threshhold = material.integrity
+		if(reinf_material)
+			dam_threshhold = ceil(max(dam_threshhold,reinf_material.integrity)/2)
+		var/dam_prob = min(100,material.hardness*1.5)
+		if(dam_prob < 100 && W.force > (dam_threshhold/10))
+			playsound(src, hitsound, 80, 1)
+			if(!prob(dam_prob))
+				visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W] and it [material.destruction_desc]!</span>")
+				dismantle_wall(1)
+			else
+				visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W]!</span>")
+		else
+			visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W], but it bounces off!</span>")
+		return
