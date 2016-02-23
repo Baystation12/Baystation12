@@ -7,6 +7,8 @@
 	pass_flags = 1
 	mob_size = MOB_SMALL
 
+	idcard_type = /obj/item/weapon/card/id
+
 	var/network = "SS13"
 	var/obj/machinery/camera/current = null
 
