@@ -1,0 +1,4 @@
+author: Yoshax
+delete-after: True
+changes: 
+  - bugfix: "Tajara should now react appropriately to various chemical reagents, such as coffee."
