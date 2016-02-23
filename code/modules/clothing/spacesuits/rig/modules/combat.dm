@@ -21,7 +21,7 @@
 	name = "mounted grenade launcher"
 	desc = "A shoulder-mounted micro-explosive dispenser."
 	selectable = 1
-	icon_state = "grenade"
+	icon_state = "grenadelauncher"
 
 	interface_name = "integrated grenade launcher"
 	interface_desc = "Discharges loaded grenades against the wearer's location."
