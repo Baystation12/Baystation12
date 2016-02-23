@@ -54,6 +54,20 @@
 		var/trans = target.reagents.trans_to_obj(syringe_holder, target.amount_per_transfer_from_this)
 		user << "<span class='notice'>You fill the syringe with [trans] units of the solution.</span>"
 		update_icon()
+	if(istype(O, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = O
+		if(reagents.total_volume)
+			user << "<span class='notice'>You must empty \the [src] first!</span>"
+			return
+		if(C.use(5))
+			user.visible_message("<span class='notice'>[user] begins attaching some wires to \the [src]...</span>", "<span class='notice'>You begin attaching some wires to \the [src]..</span>")
+			if(do_after(user, 60))
+				user << "<span class='notice'>You have modified \the [src]!</span>"
+				var/obj/item/device/assembly/syringe/S = new()
+				S.forceMove(get_turf(src))
+				qdel(src)
+		else
+			user << "<span class='notice'>You need atleast five lengths of cable to do that!</span>"
 
 /obj/item/device/assembly/syringe/attack(var/atom/A, var/mob/user)
 	return syringe_holder.attack(A, user)
