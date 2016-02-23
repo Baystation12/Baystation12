@@ -559,6 +559,14 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/gun/energy/temperature
 	sort_string = "TABAC"
 
+/datum/design/item/weapon/intelligun
+	desc = "An advanced prototype weapon with inbuilt security operations and a functioning AI."
+	id = "intelligun"
+	req_tech = list(TECH_COMBAT = 3, TECH_BIO = 3, TECH_POWER = 3, TECH_DATA = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000, "gold" = 1000)
+	build_path = /obj/item/weapon/gun/energy/temperature
+	sort_string = "TABAC"
+
 /datum/design/item/weapon/large_grenade
 	id = "large_Grenade"
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)

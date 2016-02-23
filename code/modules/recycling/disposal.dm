@@ -658,6 +658,7 @@
 	var/base_icon_state	// initial icon state on map
 	var/sortType = ""
 	var/subtype = 0
+	var/obj/item/device/assembly_holder/attached
 	// new pipe, set the icon_state as on map
 	New()
 		..()
@@ -668,6 +669,8 @@
 	// pipe is deleted
 	// ensure if holder is present, it is expelled
 	Destroy()
+		if(attached)
+			qdel(attached)
 		var/obj/structure/disposalholder/H = locate() in src
 		if(H)
 			// holder was present
@@ -702,6 +705,8 @@
 		H.set_dir(nextdir)
 		var/turf/T = H.nextloc()
 		var/obj/structure/disposalpipe/P = H.findpipe(T)
+		if(attached)
+			attached.disposal_trigger(src)
 
 		if(P)
 			// find other holder in next loc, if inactive merge it with current
