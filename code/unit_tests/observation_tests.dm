@@ -22,17 +22,23 @@
 			fail("[phase]: [event] - The global listeners list contains a null entry.")
 
 		for(var/event_source in event.event_sources)
-			for(var/list_of_listeners in event.event_sources[event_source])
+			for(var/list/list_of_listeners in event.event_sources[event_source])
 				if(isnull(list_of_listeners))
 					fail("[phase]: [event] - The event source list contains a null entry.")
+				else if(!istype(list_of_listeners))
+					fail("[phase]: [event] - The list of listeners was not of the expected type. Was [list_of_listeners.type].")
 				else
 					for(var/listener in list_of_listeners)
 						if(isnull(listener))
-							fail("[event] - The event source listener list contains a null entry.")
+							fail("[phase]: [event] - The event source listener list contains a null entry.")
 						else
-							for(var/proc_call in list_of_listeners[listener])
-								if(isnull(proc_call))
-									fail("[phase]: [event] - [listener]- The proc call list contains a null entry.")
+							var/proc_calls = list_of_listeners[listener]
+							if(isnull(proc_calls))
+								fail("[phase]: [event] - [listener] - The proc call list was null.")
+							else
+								for(var/proc_call in proc_calls)
+									if(isnull(proc_call))
+										fail("[phase]: [event] - [listener]- The proc call list contains a null entry.")
 
 /datum/unit_test/observation/proc/conduct_test()
 	return 0
