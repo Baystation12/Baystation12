@@ -24,7 +24,6 @@
 /obj/item/weapon/storage/box/evidence
 	name = "evidence bag box"
 	desc = "A box claiming to contain evidence bags."
-	storage_slots = 6
 	can_hold = list(/obj/item/weapon/evidencebag)
 
 /obj/item/weapon/storage/box/evidence/New()
