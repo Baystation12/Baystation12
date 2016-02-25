@@ -19,7 +19,7 @@
 	var/cover_open = 0		//is the cover open?
 	var/obj/item/weapon/cell/cell
 	var/max_cooling = 12				//in degrees per second - probably don't need to mess with heat capacity here
-	var/charge_consumption = 16.6		//charge per second at max_cooling
+	var/charge_consumption = 3		//charge per second at max_cooling
 	var/thermostat = T20C
 
 	//TODO: make it heat up the surroundings when not in space
