@@ -1,0 +1,5 @@
+author: Snapshot
+delete-after: True
+changes: 
+  - bugfix: "Syndicate hardsuit helmet was invisible for humans when worn"
+  - bugfix: "Balances to IPC suit cooler battery usage."
