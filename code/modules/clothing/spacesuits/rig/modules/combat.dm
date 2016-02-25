@@ -117,7 +117,7 @@
 
 	if(!target)
 		gun.attack_self(holder.wearer)
-		return 1
+		return
 
 	gun.Fire(target,holder.wearer)
 	return 1
