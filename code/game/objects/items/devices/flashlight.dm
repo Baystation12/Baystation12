@@ -187,6 +187,14 @@
 		src.force = on_damage
 		src.damtype = "fire"
 		processing_objects += src
+		
+/obj/item/device/flashlight/flare/proc/ignite() //Used for flare launchers.
+	on = !on
+	update_icon()
+	force = on_damage
+	damtype = "fire"
+	processing_objects += src
+	return 1
 
 /obj/item/device/flashlight/slime
 	gender = PLURAL
