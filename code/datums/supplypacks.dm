@@ -1316,7 +1316,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/carpet
 	name = "Imported carpet"
-	containertype = /obj/structure/closet
+	containertype = /obj/structure/closet/crate
 	containername = "\improper Imported carpet crate"
 	cost = 15
 	group = "Miscellaneous"
@@ -1325,7 +1325,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/linoleum
 	name = "Linoleum"
-	containertype = /obj/structure/closet
+	containertype = /obj/structure/closet/crate
 	containername = "\improper Linoleum crate"
 	cost = 15
 	group = "Miscellaneous"
@@ -1334,7 +1334,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/white_tiles
 	name = "White floor tiles"
-	containertype = /obj/structure/closet
+	containertype = /obj/structure/closet/crate
 	containername = "\improper White floor tile crate"
 	cost = 15
 	group = "Miscellaneous"
@@ -1343,7 +1343,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/dark_tiles
 	name = "Dark floor tiles"
-	containertype = /obj/structure/closet
+	containertype = /obj/structure/closet/crate
 	containername = "\improper Dark floor tile crate"
 	cost = 15
 	group = "Miscellaneous"
@@ -1352,7 +1352,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/freezer_tiles
 	name = "Freezer floor tiles"
-	containertype = /obj/structure/closet
+	containertype = /obj/structure/closet/crate
 	containername = "\improper Freezer floor tile crate"
 	cost = 15
 	group = "Miscellaneous"
