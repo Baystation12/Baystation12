@@ -1,4 +1,5 @@
 /datum/expansion
+
 	var/datum/holder = null // The holder
 
 /datum/expansion/New(var/datum/holder)
@@ -25,8 +26,12 @@
 	var/list/datum/expansion/expansions = list()
 
 /obj/Destroy()
-	for(var/expansion in expansions)
-		qdel(expansions[expansion])
+	for(var/expansion_key in expansions)
+		var/list/expansion = expansions[expansion_key]
+		if(islist(expansion))
+			expansion.Cut()
+		else
+			qdel(expansion)
 	expansions.Cut()
 	return ..()
 
@@ -35,7 +40,16 @@
 	..(exclude)
 	//expansions = list()
 
-/obj/proc/set_expansion(var/type, var/instance)
-	if(expansions[type])
-		qdel(expansions[type])
-	expansions[type] = instance
+/proc/set_expansion(var/obj/source, var/base_type, var/expansion_type, var/list/arguments = list())
+	source.expansions[base_type] = list(expansion_type, arguments)
+
+/proc/get_expansion(var/obj/source, var/base_type)
+	var/list/expansion = source.expansions[base_type]
+	if(!expansion)
+		return
+	if(istype(expansion))
+		var/expansion_type = expansion[1]
+		var/expansion_arguments = expansion[2]
+		expansion = new expansion_type(source, expansion_arguments)
+		source.expansions[base_type] = expansion
+	return expansion

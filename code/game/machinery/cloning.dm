@@ -45,6 +45,7 @@
 	var/biomass = CLONE_BIOMASS * 3
 
 /obj/machinery/clonepod/New()
+	set_expansion(src, /datum/expansion/multitool, /datum/expansion/multitool/store)
 	..()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/clonepod(src)
@@ -57,7 +58,6 @@
 
 	RefreshParts()
 	update_icon()
-	set_expansion(/datum/expansion/multitool, new/datum/expansion/multitool/store(src))
 
 /obj/machinery/clonepod/Destroy()
     if(connected)
