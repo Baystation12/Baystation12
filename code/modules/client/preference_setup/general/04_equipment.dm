@@ -19,9 +19,9 @@
 
 	var/undies = get_undies()
 	if(!get_key_by_value(undies, pref.underwear))
-		pref.underwear = undies[1]
+		pref.underwear = undies[undies[1]]
 	if(!get_key_by_value(undershirt_t, pref.undershirt))
-		pref.undershirt = undershirt_t[1]
+		pref.undershirt = undershirt_t[undershirt_t[1]]
 
 /datum/category_item/player_setup_item/general/equipment/content()
 	. += "<b>Equipment:</b><br>"
