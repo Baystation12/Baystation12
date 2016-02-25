@@ -1,0 +1,4 @@
+author: Kelenius
+delete-after: True
+changes: 
+  - imageadd: "Additional sprites for the drying racks."
