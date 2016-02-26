@@ -64,7 +64,7 @@ var/list/solars_list = list()
 	if(istype(W, /obj/item/weapon/crowbar))
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message("<span class='notice'>[user] begins to take the glass off the solar panel.</span>")
-		if(do_after(user, 50))
+		if(do_after(user, 50,src))
 			var/obj/item/solar_assembly/S = locate() in src
 			if(S)
 				S.loc = src.loc
@@ -403,7 +403,7 @@ var/list/solars_list = list()
 /obj/machinery/power/solar_control/attackby(I as obj, user as mob)
 	if(istype(I, /obj/item/weapon/screwdriver))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20))
+		if(do_after(user, 20,src))
 			if (src.stat & BROKEN)
 				user << "\blue The broken glass falls out."
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )

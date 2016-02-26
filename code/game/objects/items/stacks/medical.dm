@@ -275,7 +275,7 @@
 				user << "<span class='danger'>You can't apply a splint to the arm you're using!</span>"
 				return
 			user.visible_message("<span class='danger'>[user] starts to apply \the [src] to their [limb].</span>", "<span class='danger'>You start to apply \the [src] to your [limb].</span>", "<span class='danger'>You hear something being wrapped.</span>")
-		if(do_after(user, 50))
+		if(do_after(user, 50, M))
 			if (M != user)
 				user.visible_message("<span class='danger'>[user] finishes applying \the [src] to [M]'s [limb].</span>", "<span class='danger'>You finish applying \the [src] to [M]'s [limb].</span>", "<span class='danger'>You hear something being wrapped.</span>")
 			else

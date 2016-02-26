@@ -109,7 +109,7 @@
 		return
 	user.visible_message("<span class='warning'>\The [user] holds \the [P] up to \the [src]. It looks like \he's trying to burn it!</span>", \
 		"<span class='warning'>You hold \the [P] up to \the [src], burning it slowly.</span>")
-	if(!do_after(user,20))
+	if(!do_after(user,20, src))
 		user << "<span class='warning'>You must hold \the [P] steady to burn \the [src].</span>"
 		return
 	user.visible_message("<span class='danger'>\The [user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \

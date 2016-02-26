@@ -43,7 +43,7 @@
 
 	visible_message("<span class='danger'>\The [src] begins questing blindly towards \the [H]'s warm flesh...</span>")
 
-	if(!do_after(src,30))
+	if(!do_after(src,30, H))
 		return
 
 	if(!check_can_infest(H))
@@ -77,7 +77,7 @@
 
 	src << "<span class='danger'>You begin writhing your way free of \the [H]'s flesh...</span>"
 
-	if(!do_after(src, 30))
+	if(!do_after(src, 30, H))
 		return
 
 	if(!H || !src)

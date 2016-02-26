@@ -132,8 +132,8 @@
 
 	user.visible_message("<span class='danger'>[user] starts to put [victim] into the gibber!</span>")
 	src.add_fingerprint(user)
-	if(do_after(user, 30) && victim.Adjacent(src) && user.Adjacent(src) && victim.Adjacent(user) && !occupant)
-		user.visible_message("<span class='danger'>[user] stuffs [victim] into the gibber!</span>")
+	if(do_after(user, 30, src) && victim.Adjacent(src) && user.Adjacent(src) && victim.Adjacent(user) && !occupant)
+		user.visible_message("<span class='danger'>\The [user] stuffs \the [victim] into the gibber!</span>")
 		if(victim.client)
 			victim.client.perspective = EYE_PERSPECTIVE
 			victim.client.eye = src

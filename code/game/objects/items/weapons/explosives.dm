@@ -18,7 +18,7 @@
 	wires = new(src)
 	image_overlay = image('icons/obj/assemblies.dmi', "plastic-explosive2")
 	..()
-	
+
 /obj/item/weapon/plastique/Destroy()
 	qdel(wires)
 	wires = null
@@ -48,7 +48,7 @@
 	user << "Planting explosives..."
 	user.do_attack_animation(target)
 
-	if(do_after(user, 50) && in_range(user, target))
+	if(do_after(user, 50, target) && in_range(user, target))
 		user.drop_item()
 		src.target = target
 		loc = null

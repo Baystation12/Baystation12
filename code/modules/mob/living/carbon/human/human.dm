@@ -1351,7 +1351,7 @@
 	else
 		U << "<span class='warning'>You begin to relocate [S]'s [current_limb.joint]...</span>"
 
-	if(!do_after(U, 30))
+	if(!do_after(U, 30, src))
 		return
 	if(!choice || !current_limb || !S || !U)
 		return
