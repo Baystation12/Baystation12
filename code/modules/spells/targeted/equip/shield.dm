@@ -9,6 +9,8 @@
 	range = -1
 	max_targets = 1
 
+	compatible_mobs = list(/mob/living/carbon/human)
+
 	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 2, Sp_POWER = 1)
 	charge_type = Sp_RECHARGE
 	charge_max = 900

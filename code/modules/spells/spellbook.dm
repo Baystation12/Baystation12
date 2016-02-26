@@ -128,7 +128,7 @@
 	for(var/spell/S in user.spell_list)
 		if(istype(S,spell_path))
 			if(!S.can_improve())
-				uses += spells[spell_path]
+				uses += spells.spells[spell_path]
 				return "You cannot improve the spell [S] further."
 			if(S.can_improve(Sp_SPEED) && S.can_improve(Sp_POWER))
 				switch(alert(user, "Do you want to upgrade this spell's speed or power?", "Spell upgrade", "Speed", "Power", "Cancel"))
@@ -137,7 +137,7 @@
 					if("Power")
 						return S.empower_spell()
 					else
-						uses += spells[spell_path]
+						uses += spells.spells[spell_path]
 						return
 			else if(S.can_improve(Sp_POWER))
 				return S.empower_spell()

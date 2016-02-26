@@ -46,7 +46,6 @@
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "horror"
 	icon_living = "horror"
-	icon_dead = "shade_dead"
 
 	speak_emote = list("moans", "groans")
 

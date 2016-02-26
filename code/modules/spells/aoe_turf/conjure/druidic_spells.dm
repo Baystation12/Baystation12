@@ -3,6 +3,7 @@
 	cast_sound = 'sound/weapons/wave.ogg'
 
 /spell/aoe_turf/conjure/summon/before_cast()
+	..()
 	if(name_summon)
 		var/newName = sanitize(input("Would you like to name your summon?") as null|text, MAX_NAME_LEN)
 		if(newName)

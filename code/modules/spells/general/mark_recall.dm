@@ -3,11 +3,11 @@
 	desc = "This spell was created so wizards could get home from the bar without driving."
 
 	school = "abjuration"
-	charge_max = 1800 //3 minutes for how OP this shit is.
-	spell_flags = 0
+	charge_max = 1200 //2 minutes for how OP this shit is.
+	spell_flags = Z2NOCAST
 	invocation = "RE ALKI R'NATHA"
 	invocation_type = SpI_WHISPER
-	cooldown_min = 1200
+	cooldown_min = 600
 
 	smoke_amt = 1
 	smoke_spread = 5
@@ -15,7 +15,6 @@
 	level_max = list(Sp_TOTAL = 4, Sp_SPEED = 4, Sp_POWER = 1)
 
 	cast_sound = 'sound/effects/teleport.ogg'
-
 	hud_state = "wiz_mark"
 	var/mark = null
 
@@ -49,8 +48,8 @@
 	return "You no longer have to be conscious to activate this spell."
 
 /obj/effect/wizard_mark
-	name = "Mark of the Wizard"
-	desc = "A strange rune said to be made by wizards."
+	name = "\improper Mark of the Wizard"
+	desc = "A strange rune said to be made by wizards. Or its just some shmuck playing with crayons again."
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "wizard_mark"
 
@@ -69,8 +68,13 @@
 	spell = null
 	..()
 
+/obj/effect/wizard_mark/attack_hand(var/mob/user)
+	if(user == spell.holder)
+		user.visible_message("\The [user] mutters an incantation and \the [src] disappears!")
+		qdel(src)
+
 /obj/effect/wizard_mark/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/weapon/nullrod))
+	if(istype(I, /obj/item/weapon/nullrod) || istype(I, /obj/item/weapon/spellbook))
 		src.visible_message("\The [src] fades away!")
 		qdel(src)
 		return

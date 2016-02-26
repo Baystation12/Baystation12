@@ -58,3 +58,12 @@
 	else
 		charged_item.visible_message("<span class='notice'>[charged_item] suddenly sparks with energy!</span>")
 		return 1
+
+
+/spell/aoe_turf/charge/blood
+	name = "blood charge"
+	desc = "This spell charges things around it using the lifeforce gained by sacrificed blood."
+
+	charge_type = Sp_HOLDVAR
+	holder_var_type = "bruteloss"
+	holder_var_amount = 30

@@ -9,7 +9,7 @@
 	invocation = "Ria'li  akta"
 
 	equipped_summons = list("active hand" = /obj/item/seeds/random)
-	compatible_mobs = (/mob/living/carbon/human)
+	compatible_mobs = list(/mob/living/carbon/human)
 
 	charge_max = 600 //1 minute
 	cooldown_min = 200 //20 seconds
