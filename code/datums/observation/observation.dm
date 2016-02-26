@@ -59,7 +59,7 @@
 /decl/observ
 	var/name = "Unnamed Event"          // The name of this event, used mainly for debug/VV purposes. The list of event managers can be reached through the "Debug Controller" verb, selecting the "Observation" entry.
 	var/expected_type = /datum          // The expected event source for this event. register() will CRASH() if it receives an unexpected type.
-	var/list/event_sources = list()     // Associative list of event sources, each with their own associative list. This associative list contains an instance/proc pair to call when the event is raised.
+	var/list/event_sources = list()     // Associative list of event sources, each with their own associative list. This associative list contains an instance/list of procs to call when the event is raised.
 	var/list/global_listeners = list()  // Associative list of instances that listen to all events of this type (as opposed to events belonging to a specific source) and the proc to call.
 
 /decl/observ/New()
@@ -121,8 +121,12 @@
 		callbacks = list()
 		listeners[listener] = callbacks
 
+	// If the proc_call is already registered skip
+	if(proc_call in callbacks)
+		return FALSE
+
 	// Add the callback, and return true.
-	callbacks |= proc_call
+	callbacks += proc_call
 	return TRUE
 
 /decl/observ/proc/unregister(var/event_source, var/datum/listener, var/proc_call)
@@ -190,12 +194,9 @@
 		return FALSE
 
 	// See if the callback exists.
-	var/index = callbacks.Find(proc_call)
-	if (!index)
+	if(!callbacks.Remove(proc_call))
 		return FALSE
 
-	// Remove the callback and perform cleanup.
-	callbacks.Cut(index, index + 1)
 	if (!callbacks.len)
 		global_listeners -= listener
 	return TRUE
@@ -203,7 +204,7 @@
 /decl/observ/proc/raise_event()
 	// Sanity
 	if (!args.len)
-		return
+		return FALSE
 
 	// Call the global listeners.
 	for (var/datum/listener in global_listeners)
@@ -231,3 +232,5 @@
 				catch (var/exception/e)
 					error(e.desc)
 					unregister(source, listener, proc_call)
+
+	return TRUE

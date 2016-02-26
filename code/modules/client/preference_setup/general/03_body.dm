@@ -126,7 +126,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				R = all_robolimbs[pref.rlimb_data[name]]
 			else
 				R = basic_robolimb
-			. += "\t[R.company] [organ_name] prothesis"
+			. += "\t[R.company] [organ_name] prosthesis"
 		else if(status == "amputated")
 			++ind
 			if(ind > 1)
@@ -370,7 +370,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				limb = "r_hand"
 				third_limb = "r_arm"
 
-		var/new_state = input(user, "What state do you wish the limb to be in?") as null|anything in list("Normal","Amputated","Prothesis")
+		var/new_state = input(user, "What state do you wish the limb to be in?") as null|anything in list("Normal","Amputated","Prosthesis")
 		if(!new_state && !CanUseTopic(user)) return TOPIC_NOACTION
 
 		switch(new_state)
@@ -387,7 +387,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					pref.organ_data[second_limb] = "amputated"
 					pref.rlimb_data[second_limb] = null
 
-			if("Prothesis")
+			if("Prosthesis")
 				var/tmp_species = pref.species ? pref.species : "Human"
 				var/list/usable_manufacturers = list()
 				for(var/company in chargen_robolimbs)

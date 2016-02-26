@@ -122,6 +122,9 @@
 /obj/machinery/smartfridge/drying_rack
 	name = "\improper Drying Rack"
 	desc = "A machine for drying plants."
+	icon_state = "drying_rack"
+	icon_on = "drying_rack_on"
+	icon_off = "drying_rack"
 
 /obj/machinery/smartfridge/drying_rack/accept_check(var/obj/item/O as obj)
 	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/))
@@ -132,8 +135,22 @@
 
 /obj/machinery/smartfridge/drying_rack/process()
 	..()
-	if (contents.len)
+	if(inoperable())
+		return
+	if(contents.len)
 		dry()
+		update_icon()
+
+/obj/machinery/smartfridge/drying_rack/update_icon()
+	overlays.Cut()
+	if(inoperable())
+		icon_state = icon_off
+	else
+		icon_state = icon_on
+	if(contents.len)
+		overlays += "drying_rack_filled"
+		if(!inoperable())
+			overlays += "drying_rack_drying"
 
 /obj/machinery/smartfridge/drying_rack/proc/dry()
 	for(var/obj/item/weapon/reagent_containers/food/snacks/S in contents)

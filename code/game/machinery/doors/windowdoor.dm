@@ -171,6 +171,12 @@
 		open()
 		return 1
 
+/obj/machinery/door/emp_act(severity)
+	if(prob(20/severity))
+		spawn(0)
+			open()
+	..()
+
 /obj/machinery/door/window/attackby(obj/item/weapon/I as obj, mob/user as mob)
 
 	//If it's in the process of opening/closing, ignore the click

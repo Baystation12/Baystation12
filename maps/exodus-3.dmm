@@ -168,7 +168,7 @@
 "dl" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/tiled,/area/tcommsat/computer)
 "dm" = (/obj/structure/bed/chair/office/dark{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/tiled,/area/tcommsat/computer)
 "dn" = (/obj/machinery/computer/telecomms/server{network = "tcommsat"},/turf/simulated/floor/tiled,/area/tcommsat/computer)
-"do" = (/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh{name = "Cuban Pete-Meat"},/obj/item/weapon/spacecash/c1,/turf/simulated/floor/reinforced,/area/tcommsat/computer)
+"do" = (/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh{name = "Cuban Pete-Meat"},/obj/item/weapon/spacecash/bundle/c1,/turf/simulated/floor/reinforced,/area/tcommsat/computer)
 "dp" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled,/area/tcommsat/computer)
 "dq" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/tiled,/area/tcommsat/computer)
 "dr" = (/obj/structure/bed/chair{dir = 4},/turf/simulated/floor/tiled,/area/tcommsat/computer)
