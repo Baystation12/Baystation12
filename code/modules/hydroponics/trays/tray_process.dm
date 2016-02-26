@@ -5,7 +5,11 @@
 		if(smoke.reagents.total_volume)
 			smoke.reagents.trans_to_obj(src, 5, copy = 1)
 
-	//Do this even if we're not ready for a plant cycle.
+	// Don't do anything if no power
+	if(mechanical && (!on || inoperable()))
+		return
+
+	// Do this even if we're not ready for a plant cycle.
 	process_reagents()
 
 	// Update values every cycle rather than every process() tick.

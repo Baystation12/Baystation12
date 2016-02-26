@@ -16,7 +16,7 @@
 	// Updates the plant overlay.
 	if(!isnull(seed))
 
-		if(mechanical && health <= (seed.get_trait(TRAIT_ENDURANCE) / 2))
+		if(mechanical && !(!on || inoperable()) && health <= (seed.get_trait(TRAIT_ENDURANCE) / 2))
 			overlays += "over_lowhealth3"
 
 		if(dead)
@@ -62,7 +62,7 @@
 		overlays += "hydrocover"
 
 	//Updated the various alert icons.
-	if(mechanical)
+	if(mechanical && on && !inoperable())
 		if(waterlevel <= 10)
 			overlays += "over_lowwater3"
 		if(nutrilevel <= 2)
