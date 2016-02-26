@@ -50,7 +50,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/storage/box/swabs,
 					/obj/item/weapon/storage/box/swabs,
 					/obj/item/weapon/storage/box/swabs,
-					/obj/item/weapon/storage/box/slides,
 					/obj/item/weapon/reagent_containers/spray/luminol)
 	cost = 30
 	containertype = /obj/structure/closet/crate

@@ -1092,7 +1092,6 @@
 #include "code\modules\detectivework\forensics.dm"
 #include "code\modules\detectivework\microscope\dnascanner.dm"
 #include "code\modules\detectivework\microscope\microscope.dm"
-#include "code\modules\detectivework\microscope\slides.dm"
 #include "code\modules\detectivework\tools\crimekit.dm"
 #include "code\modules\detectivework\tools\evidencebag.dm"
 #include "code\modules\detectivework\tools\luminol.dm"
