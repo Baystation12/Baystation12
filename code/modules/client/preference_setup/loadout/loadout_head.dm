@@ -73,7 +73,7 @@
 	display_name = "cap, orange"
 	path = /obj/item/clothing/head/soft/orange
 
-/datum/gear/head/cap/orange
+/datum/gear/head/cap/purple
 	display_name = "cap, purple"
 	path = /obj/item/clothing/head/soft/purple
 
