@@ -815,7 +815,7 @@
 "apI" = (/turf/simulated/floor/tiled/dark,/area/lawoffice)
 "apJ" = (/obj/machinery/newscaster{pixel_x = 30},/obj/machinery/papershredder,/turf/simulated/floor/tiled/dark,/area/lawoffice)
 "apK" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/maintenance/evahallway)
-"apL" = (/obj/structure/table/steel_reinforced,/obj/machinery/microscope,/obj/item/weapon/storage/box/slides,/turf/simulated/floor/tiled/white,/area/security/detectives_office)
+"apL" = (/obj/structure/table/steel_reinforced,/obj/machinery/microscope,/turf/simulated/floor/tiled/white,/area/security/detectives_office)
 "apM" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/turf/simulated/floor/plating,/area/security/brig)
 "apN" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/white,/area/security/detectives_office)
 "apO" = (/obj/structure/disposalpipe/segment,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/turf/simulated/floor/tiled/white,/area/security/detectives_office)
