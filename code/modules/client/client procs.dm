@@ -280,6 +280,9 @@
 	if(inactivity > duration)	return inactivity
 	return 0
 
+/client/proc/last_activity_seconds()
+	return inactivity / 10
+
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()
 

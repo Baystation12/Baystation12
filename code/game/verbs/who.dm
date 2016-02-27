@@ -86,7 +86,10 @@
 					msg += " - Playing"
 
 				if(C.is_afk())
-					msg += " (AFK)"
+					var/seconds = C.last_activity_seconds()
+					msg += " (AFK - "
+					msg += "[round(seconds / 60)] minutes, "
+					msg += "[seconds % 60] seconds)"
 				msg += "\n"
 
 				num_admins_online++
@@ -101,7 +104,10 @@
 					modmsg += " - Playing"
 
 				if(C.is_afk())
-					modmsg += " (AFK)"
+					var/seconds = C.last_activity_seconds()
+					modmsg += " (AFK - "
+					modmsg += "[round(seconds / 60)] minutes, "
+					modmsg += "[seconds % 60] seconds)"
 				modmsg += "\n"
 				num_mods_online++
 
@@ -115,7 +121,10 @@
 					mentmsg += " - Playing"
 
 				if(C.is_afk())
-					mentmsg += " (AFK)"
+					var/seconds = C.last_activity_seconds()
+					mentmsg += " (AFK - "
+					mentmsg += "[round(seconds / 60)] minutes, "
+					mentmsg += "[seconds % 60] seconds)"
 				mentmsg += "\n"
 				num_mentors_online++
 
