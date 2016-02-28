@@ -73,7 +73,7 @@
 
 /datum/category_collection/player_setup_collection/proc/update_setup(var/savefile/preferences, var/savefile/character)
 	for(var/datum/category_group/player_setup_category/PS in categories)
-		. = . || PS.update_setup(preferences, character)
+		. = . && PS.update_setup(preferences, character)
 
 /datum/category_collection/player_setup_collection/proc/header()
 	var/dat = ""
@@ -148,7 +148,7 @@
 
 /datum/category_group/player_setup_category/proc/update_setup(var/savefile/preferences, var/savefile/character)
 	for(var/datum/category_item/player_setup_item/PI in items)
-		. = . || PI.update_setup(preferences, character)
+		. = . && PI.update_setup(preferences, character)
 
 /datum/category_group/player_setup_category/proc/content(var/mob/user)
 	. = "<table style='width:100%'><tr style='vertical-align:top'><td style='width:50%'>"

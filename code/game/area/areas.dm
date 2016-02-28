@@ -243,7 +243,7 @@ var/list/mob/living/forced_ambiance_list = new
 
 /area/proc/play_ambience(var/mob/living/L)
 	// Ambience goes down here -- make sure to list each area seperately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
-	if(!(L && L.client && (L.client.prefs.toggles & SOUND_AMBIENCE)))	return
+	if(!(L && L.is_preference_enabled(/datum/client_preference/play_ambiance)))	return
 
 	// If we previously were in an area with force-played ambiance, stop it.
 	if(L in forced_ambiance_list)
