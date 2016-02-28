@@ -11,7 +11,8 @@
 	opacity = 0
 	anchored = 1
 
-	var/obj/structure/ladder/target
+	var/obj/structure/ladder/target_up
+	var/obj/structure/ladder/target_down
 
 	initialize()
 		// the upper will connect to the lower
@@ -19,14 +20,15 @@
 			return
 
 		for(var/obj/structure/ladder/L in GetBelow(src))
-			if(L.icon_state == "ladderup")
-				target = L
-				L.target = src
+			if(L.icon_state != "ladderdown")
+				target_down = L
+				L.target_up = src
 				return
 
 	Destroy()
-		if(target && icon_state == "ladderdown")
-			qdel(target)
+		if(target_down && icon_state == "ladderdown")
+			target_down.target_up = null
+			qdel(target_down)
 		return ..()
 
 	attackby(obj/item/C as obj, mob/user as mob)
@@ -35,24 +37,39 @@
 		return
 
 	attack_hand(var/mob/M)
-		if(!target || !istype(target.loc, /turf))
+		if((!target_up && !target_down) || (target_up && !istype(target_up.loc, /turf) || (target_down && !istype(target_down.loc,/turf))))
 			M << "<span class='notice'>\The [src] is incomplete and can't be climbed.</span>"
 			return
+		var/obj/structure/ladder/target = target_up
+		if(target_down)
+			if(target_up)
+				var/choice = alert(M,"Do you want to go up or down?", "Ladder", "Up", "Down", "Cancel")
+				switch(choice)
+					if("Up")
+						target = target_up
+					if("Down")
+						target = target_down
+					else
+						return
+			else
+				target = target_down
 
 		var/turf/T = target.loc
 		for(var/atom/A in T)
 			if(A.density)
 				M << "<span class='notice'>\A [A] is blocking \the [src].</span>"
 				return
-
-		M.visible_message("<span class='notice'>\A [M] climbs [icon_state == "ladderup" ? "up" : "down"] \a [src]!</span>",
-			"You climb [icon_state == "ladderup"  ? "up" : "down"] \the [src]!",
+		if(!istype(M,/mob/dead))
+			M.visible_message("<span class='notice'>\A [M] climbs [target == target_up ? "up" : "down"] \a [src]!</span>",
+			"You climb [target == target_down  ? "up" : "down"] \the [src]!",
 			"You hear the grunting and clanging of a metal ladder being used.")
 		M.Move(T)
 
 	CanPass(obj/mover, turf/source, height, airflow)
 		return airflow || !density
 
+	attack_ghost(var/mob/M)
+		attack_hand(M)
 /obj/structure/stairs
 	name = "Stairs"
 	desc = "Stairs leading to another deck.  Not too useful if the gravity goes out."

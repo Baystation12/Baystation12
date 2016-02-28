@@ -1944,4 +1944,8 @@
 #include "maps\exodus-4.dmm"
 #include "maps\exodus-5.dmm"
 #include "maps\exodus-6.dmm"
+#include "maps\ship-1.dmm"
+#include "maps\ship-2.dmm"
+#include "maps\ship-3.dmm"
+#include "maps\ship-4.dmm"
 // END_INCLUDE
