@@ -16,7 +16,7 @@
 		user << "<span class='warning'>There is already a slide in the microscope.</span>"
 		return
 
-	if(istype(W, /obj/item/weapon/forensics/slide) || istype(W, /obj/item/weapon/sample/print))
+	if(istype(W, /obj/item/weapon/forensics/swab)|| istype(W, /obj/item/weapon/sample/fibers) || istype(W, /obj/item/weapon/sample/print))
 		user << "<span class='notice'>You insert \the [W] into the microscope.</span>"
 		user.unEquip(W)
 		W.forceMove(src)
@@ -33,6 +33,7 @@
 	user << "<span class='notice'>The microscope whirrs as you examine \the [sample].</span>"
 
 	if(!do_after(user, 25) || !sample)
+		user << "<span class='notice'>You stop examining \the [sample].</span>"
 		return
 
 	user << "<span class='notice'>Printing findings now...</span>"
@@ -41,32 +42,27 @@
 	report.overlays = list("paper_stamped")
 	report_num++
 
-	if(istype(sample, /obj/item/weapon/forensics/slide))
-		var/obj/item/weapon/forensics/slide/slide = sample
-		if(slide.has_swab)
-			var/obj/item/weapon/forensics/swab/swab = slide.has_swab
+	if(istype(sample, /obj/item/weapon/forensics/swab))
+		var/obj/item/weapon/forensics/swab/swab = sample
 
-			report.name = "GSR report #[++report_num]: [swab.name]"
-			report.info = "<b>Scanned item:</b><br>[swab.name]<br><br>"
+		report.name = "GSR report #[++report_num]: [swab.name]"
+		report.info = "<b>Scanned item:</b><br>[swab.name]<br><br>"
 
-			if(swab.gsr)
-				report.info += "Residue from a [swab.gsr] bullet detected."
-			else
-				report.info += "No gunpowder residue found."
-
-		else if(slide.has_sample)
-			var/obj/item/weapon/sample/fibers/fibers = slide.has_sample
-			report.name = "Fiber report #[++report_num]: [fibers.name]"
-			report.info = "<b>Scanned item:</b><br>[fibers.name]<br><br>"
-			if(fibers.evidence)
-				report.info = "Molecular analysis on provided sample has determined the presence of unique fiber strings.<br><br>"
-				for(var/fiber in fibers.evidence)
-					report.info += "<span class='notice'>Most likely match for fibers: [fiber]</span><br><br>"
-			else
-				report.info += "No fibers found."
+		if(swab.gsr)
+			report.info += "Residue from a [swab.gsr] bullet detected."
 		else
-			report.name = "Empty slide report #[report_num]"
-			report.info = "Evidence suggests that there's nothing in this slide."
+			report.info += "No gunpowder residue found."
+
+	else if(istype(sample, /obj/item/weapon/sample/fibers))
+		var/obj/item/weapon/sample/fibers/fibers = sample
+		report.name = "Fiber report #[++report_num]: [fibers.name]"
+		report.info = "<b>Scanned item:</b><br>[fibers.name]<br><br>"
+		if(fibers.evidence)
+			report.info = "Molecular analysis on provided sample has determined the presence of unique fiber strings.<br><br>"
+			for(var/fiber in fibers.evidence)
+				report.info += "<span class='notice'>Most likely match for fibers: [fiber]</span><br><br>"
+		else
+			report.info += "No fibers found."
 	else if(istype(sample, /obj/item/weapon/sample/print))
 		report.name = "Fingerprint report #[report_num]: [sample.name]"
 		report.info = "<b>Fingerprint analysis report #[report_num]</b>: [sample.name]<br>"

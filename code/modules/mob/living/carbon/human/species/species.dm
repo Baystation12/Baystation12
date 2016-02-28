@@ -32,7 +32,12 @@
 	var/mob_size	= MOB_MEDIUM
 	var/show_ssd = "fast asleep"
 	var/virus_immune
-	var/short_sighted
+	var/short_sighted                                    // Permanent weldervision.
+	var/blood_volume = 560                               // Initial blood volume.
+	var/hunger_factor = DEFAULT_HUNGER_FACTOR            // Multiplier for hunger.
+
+	var/min_age = 17
+	var/max_age = 70
 
 	// Language/culture vars.
 	var/default_language = "Galactic Common" // Default language is used when 'say' is used without modifiers.
@@ -62,7 +67,7 @@
 	var/meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/human
 	var/gibber_type = /obj/effect/gibspawner/human
 	var/single_gib_type = /obj/effect/decal/cleanable/blood/gibs
-	var/remains_type = /obj/effect/decal/remains/xeno
+	var/remains_type = /obj/item/remains/xeno
 	var/gibbed_anim = "gibbed-h"
 	var/dusted_anim = "dust-h"
 	var/death_sound

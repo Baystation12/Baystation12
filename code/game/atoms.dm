@@ -221,8 +221,13 @@ its easier to just keep the beam vertical.
 
 //called to set the atom's dir and used to add behaviour to dir-changes
 /atom/proc/set_dir(new_dir)
-	. = new_dir != dir
+	var/old_dir = dir
+	if(new_dir == old_dir)
+		return FALSE
+
 	dir = new_dir
+	dir_set_event.raise_event(src, old_dir, new_dir)
+	return TRUE
 
 /atom/proc/ex_act()
 	return
@@ -495,3 +500,12 @@ its easier to just keep the beam vertical.
 		else if(ismob(I))
 			var/mob/M = I
 			M.show_message( message, 2, deaf_message, 1)
+
+/atom/Entered(var/atom/movable/AM, var/atom/old_loc, var/special_event)
+	if(loc && MOVED_DROP == special_event)
+		AM.forceMove(loc, MOVED_DROP)
+		return CANCEL_MOVE_EVENT
+	return ..()
+
+/turf/Entered(var/atom/movable/AM, var/atom/old_loc, var/special_event)
+	return ..(AM, old_loc, 0)

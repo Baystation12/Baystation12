@@ -1,7 +1,7 @@
 /mob/living/carbon/alien/diona/MouseDrop(atom/over_object)
 	var/mob/living/carbon/H = over_object
 	if(!istype(H) || !Adjacent(H)) return ..()
-	if(H.a_intent == "help")
+	if(H.a_intent == I_HELP)
 		if(H.species && H.species.name == "Diona" && do_merge(H))
 			return
 		get_scooped(H)
@@ -16,7 +16,7 @@
 		return ..()
 
 /mob/living/carbon/alien/diona/attackby(var/obj/item/weapon/W, var/mob/user)
-	if(user.a_intent == "help" && istype(W, /obj/item/clothing/head))
+	if(user.a_intent == I_HELP && istype(W, /obj/item/clothing/head))
 		if(hat)
 			user << "<span class='warning'>\The [src] is already wearing \the [hat].</span>"
 			return

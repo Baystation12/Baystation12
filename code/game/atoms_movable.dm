@@ -62,12 +62,13 @@
 	..()
 	return
 
-/atom/movable/proc/forceMove(atom/destination)
+/atom/movable/proc/forceMove(atom/destination, var/special_event)
 	if(destination)
-		if(loc)
-			loc.Exited(src)
+		var/atom/old_loc = loc
+		if(old_loc)
+			old_loc.Exited(src)
 		loc = destination
-		loc.Entered(src)
+		loc.Entered(src, old_loc, special_event)
 		return 1
 	return 0
 

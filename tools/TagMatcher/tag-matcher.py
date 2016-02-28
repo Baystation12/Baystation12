@@ -18,6 +18,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 '''
 import argparse, re, sys
+from collections import defaultdict
 from os import path, walk
 
 opt = argparse.ArgumentParser()
@@ -37,66 +38,83 @@ tag_tuples = [	('<span>', re.compile('<span(.*?)>', re.IGNORECASE), re.compile('
 				('<i>', re.compile('<i>', re.IGNORECASE), re.compile('</i>', re.IGNORECASE))]
 
 # The keys of this dictionary will be the file path of each parsed *.dm file
-# The values of this dictionary will be in the format provided by populate_match_list().
-matches = { }
+# The values of this dictionary is a another dictionary with the key/value pair: tag/list of unmatched lines
+mismatches_by_file = { }
 
-# Support def for setting up a dictionary, populating it with all defined tuple names as key with each being assigned the value 0.
-# One such dictionary is created for each parsed file.
-def populate_match_list():
-	match_list = { }
+# Loops over all defined tag tuples and returns a dictionary with the key/value pair: tag/mismatch_count (positive means excess of opening tag, negative means excess of closing tags)
+def get_tag_matches(line):
+	mismatch_count_by_tag = { }
 	for tag_tuple in tag_tuples:
-		match_list[tag_tuple[0]] = 0
-	return match_list
+		mismatch_count = 0
+		mismatch_count += len(tag_tuple[1].findall(line))
+		mismatch_count -= len(tag_tuple[2].findall(line))
+		if mismatch_count != 0:
+			mismatch_count_by_tag[tag_tuple[0]] = mismatch_count
+	return mismatch_count_by_tag
 
-# This def shall be provided by a dictionary in the format given by populate_match_list() and a line of text.
-# It loops over all defined tag tuples, adding the number of open tags found and subtracting the number of close tag found to the corresponding tuple name in the match list.
-# This def is currently run with the same match_list for a given file and for all lines of that file.
-def get_tag_matches(match_list, line):
-	for tag_tuple in tag_tuples:
-		match_list[tag_tuple[0]] += len(tag_tuple[1].findall(line))
-		match_list[tag_tuple[0]] -= len(tag_tuple[2].findall(line))
-	return 
-
-# Support def that simply checks if a given dictionary in the format given by populate_match_list() contains any value that is non-zero.
-# That is, a tag which had a non-equal amount of open/closing tags.
+# Support def that simply checks if a given dictionary in the format tag/list of unmatched lines has mismatch entries.
 def has_mismatch(match_list):
-	for tag, match_number in match_list.iteritems():
-		if(match_number != 0):
+	for tag, list_of_mismatched_lines in match_list.iteritems():
+		if(len(list_of_mismatched_lines) > 0):
 			return 1
 	return 0
+	
+def arrange_mismatches(mismatches_by_tag, mismatch_line, mismatch_counts):
+	for tag, mismatch_count in mismatch_counts.iteritems():
+		stack_of_existing_mismatches = mismatches_by_tag[tag]
+		for i in range(0, abs(mismatch_count)):
+			if len(stack_of_existing_mismatches) == 0:
+				if(mismatch_count > 0):
+					stack_of_existing_mismatches.append(mismatch_line)
+				else:
+					stack_of_existing_mismatches.append(-mismatch_line)
+			else:
+				if stack_of_existing_mismatches[0] > 0:
+					if mismatch_count > 0:
+						stack_of_existing_mismatches.append(mismatch_line)
+					else:
+						stack_of_existing_mismatches.pop()
+				else:
+					if mismatch_count < 0:
+						stack_of_existing_mismatches.append(-mismatch_line)
+					else:
+						stack_of_existing_mismatches.pop()
+
 
 # This section parses all *.dm files in the given directory, recursively.
 for root, subdirs, files in walk(args.dir):
     for filename in files:
         if filename.endswith('.dm'):
             file_path = path.join(root, filename)
-            with open(file_path, 'r') as f:
-				# For each file, generate the match dictionary.
-				matches[file_path] = populate_match_list()
-				for x in f:
+            with open(file_path, 'r') as file:
+				mismatches_by_file[file_path] = defaultdict(list)
+				for line_number, line in enumerate(file, 1):
 					# Then for each line in the file, conduct the tuple open/close matching.
-					get_tag_matches(matches[file_path], x)
+					mismatches_by_tag = get_tag_matches(line)
+					arrange_mismatches(mismatches_by_file[file_path], line_number, mismatches_by_tag)
 
 # Pretty printing section.
 # Loops over all matches and checks if there is a mismatch of tags.
 # If so, then and only then is the corresponding file path printed along with the number of unmatched open/close tags.
-total_mismatch = 0
-for file, match_list in matches.iteritems():
-	if(has_mismatch(match_list)):
+total_mismatches = 0
+for file, mismatches_by_tag in mismatches_by_file.iteritems():
+	if has_mismatch(mismatches_by_tag):
 		print(file)
-		for tag, match_number in match_list.iteritems():
+		for tag, mismatch_list in mismatches_by_tag.iteritems():
 			# A positive number means an excess of opening tag, a negative number means an excess of closing tags.
-			if(match_number > 0):
-				total_mismatch += match_number
-				print('\t{0} - Excess of {1} opening tag(s)'.format(tag, match_number))
-			elif (match_number < 0):
-				total_mismatch -= match_number
-				print('\t{0} - Excess of {1} closing tag(s)'.format(tag, -match_number))
+			total_mismatches += len(mismatch_list)
+			if len(mismatch_list) > 0:
+				if mismatch_list[0] > 0:
+					print('\t{0} - Excess of {1} opening tag(s)'.format(tag, len(mismatch_list)))
+				elif mismatch_list[0] < 0:
+					print('\t{0} - Excess of {1} closing tag(s)'.format(tag, len(mismatch_list)))
+				for mismatch_line in sorted(set(mismatch_list)):
+					print('\t\tLine {0}'.format(abs(mismatch_line)))
 
 # Simply prints the total number of mismatches found and if so returns 1 to, for example, fail Travis builds.				
-if(total_mismatch == 0):
+if(total_mismatches == 0):
 	print('No mismatches found.')
 else:	
 	print('')
-	print('Total number of mismatches: {0}'.format(total_mismatch))
+	print('Total number of mismatches: {0}'.format(total_mismatches))
 	sys.exit(1)

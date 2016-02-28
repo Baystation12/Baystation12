@@ -285,8 +285,8 @@
 /obj/item/weapon/reagent_containers/syringe/ld50_syringe
 	name = "Lethal Injection Syringe"
 	desc = "A syringe used for lethal injections."
-	amount_per_transfer_from_this = 50
-	volume = 50
+	amount_per_transfer_from_this = 60
+	volume = 60
 	visible_name = "a giant syringe"
 	time = 300
 
@@ -343,6 +343,6 @@
 /obj/item/weapon/reagent_containers/syringe/ld50_syringe/choral
 	New()
 		..()
-		reagents.add_reagent("chloralhydrate", 50)
+		reagents.add_reagent("chloralhydrate", 60)
 		mode = SYRINGE_INJECT
 		update_icon()

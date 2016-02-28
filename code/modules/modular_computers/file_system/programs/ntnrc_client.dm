@@ -159,7 +159,7 @@
 
 /datum/computer_file/program/chatclient/process_tick()
 	..()
-	if(running)
+	if(program_state != PROGRAM_STATE_KILLED)
 		ui_header = "ntnrc_idle.gif"
 		if(channel)
 			// Remember the last message. If there is no message in the channel remember null.

@@ -62,7 +62,7 @@
 		return ..(A, user)
 
 	var/obj/O = A
-	var/datum/expansion/multitool/MT = O.expansions[/datum/expansion/multitool]
+	var/datum/expansion/multitool/MT = get_expansion(O, /datum/expansion/multitool)
 	if(!MT)
 		return ..(A, user)
 

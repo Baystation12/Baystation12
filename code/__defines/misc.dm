@@ -23,11 +23,6 @@
 
 // Some arbitrary defines to be used by self-pruning global lists. (see master_controller)
 #define PROCESS_KILL 26 // Used to trigger removal from a processing list.
-
-// Age limits on a character.
-#define AGE_MIN 17
-#define AGE_MAX 85
-
 #define MAX_GEAR_COST 5 // Used in chargen for accessory loadout limit.
 
 // Preference toggles.
@@ -195,6 +190,10 @@
 #define PROGRAM_CONSOLE 1
 #define PROGRAM_LAPTOP 2
 #define PROGRAM_TABLET 4
+
+#define PROGRAM_STATE_KILLED 0
+#define PROGRAM_STATE_BACKGROUND 1
+#define PROGRAM_STATE_ACTIVE 2
 
 // Caps for NTNet logging. Less than 10 would make logging useless anyway, more than 500 may make the log browser too laggy. Defaults to 100 unless user changes it.
 #define MAX_NTNET_LOGS 500

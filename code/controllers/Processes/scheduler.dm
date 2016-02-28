@@ -94,7 +94,7 @@
 	return ..()
 
 /datum/scheduled_task/proc/pre_process()
-	task_triggered_event.raise_event(list(src))
+	task_triggered_event.raise_event(src)
 
 /datum/scheduled_task/proc/process()
 	if(procedure)

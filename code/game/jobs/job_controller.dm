@@ -397,7 +397,7 @@ var/global/datum/controller/occupations/job_master
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 				H.loc = S.loc
 			else
-				LateSpawn(H, rank)
+				LateSpawn(H.client, rank)
 
 			// Moving wheelchair if they have one
 			if(H.buckled && istype(H.buckled, /obj/structure/bed/chair/wheelchair))
@@ -587,22 +587,38 @@ var/global/datum/controller/occupations/job_master
 			tmp_str += "HIGH=[level1]|MEDIUM=[level2]|LOW=[level3]|NEVER=[level4]|BANNED=[level5]|YOUNG=[level6]|-"
 			feedback_add_details("job_preferences",tmp_str)
 
-/datum/controller/occupations/proc/LateSpawn(var/mob/living/carbon/human/H, var/rank)
+/datum/controller/occupations/proc/LateSpawn(var/client/C, var/rank, var/return_location = 0)
 	//spawn at one of the latespawn locations
 
 	var/datum/spawnpoint/spawnpos
 
-	if(H.client.prefs.spawnpoint)
-		spawnpos = spawntypes[H.client.prefs.spawnpoint]
+	if(!C)
+		CRASH("Null client passed to LateSpawn() proc!")
+
+	var/mob/H = C.mob
+	if(C.prefs.spawnpoint)
+		spawnpos = spawntypes[C.prefs.spawnpoint]
 
 	if(spawnpos && istype(spawnpos))
 		if(spawnpos.check_job_spawning(rank))
-			H.loc = pick(spawnpos.turfs)
-			. = spawnpos.msg
+			if(return_location)
+				return pick(spawnpos.turfs)
+			else
+				if(H)
+					H.forceMove(pick(spawnpos.turfs))
+				return spawnpos.msg
 		else
-			H << "Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job. Spawning you at the Arrivals shuttle instead."
-			H.loc = pick(latejoin)
-			. = "has arrived on the station"
+			if(return_location)
+				return pick(latejoin)
+			else
+				if(H)
+					H << "Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job. Spawning you at the default spawn point instead."
+					H.forceMove(pick(latejoin))
+				return "has arrived on the station"
 	else
-		H.loc = pick(latejoin)
-		. = "has arrived on the station"
+		if(return_location)
+			return pick(latejoin)
+		else
+			if(H)
+				H.forceMove(pick(latejoin))
+			return "has arrived on the station"

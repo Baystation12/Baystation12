@@ -4,7 +4,6 @@ Contains most of the procs that are called when a mob is attacked by something
 bullet_act
 ex_act
 meteor_act
-emp_act
 
 */
 
@@ -159,17 +158,6 @@ emp_act
 		if(.) return
 	return 0
 
-/mob/living/carbon/human/emp_act(severity)
-	for(var/obj/O in src)
-		if(!O)	continue
-		O.emp_act(severity)
-	for(var/obj/item/organ/external/O  in organs)
-		O.emp_act(severity)
-		for(var/obj/item/organ/I  in O.internal_organs)
-			if(I.robotic == 0)	continue
-			I.emp_act(severity)
-	..()
-
 /mob/living/carbon/human/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
 	if(check_attack_throat(I, user))
 		return null
@@ -222,7 +210,6 @@ emp_act
 
 	if(effective_force > 10 || effective_force >= 5 && prob(33))
 		forcesay(hit_appends)	//forcesay checks stat already
-
 	if((I.damtype == BRUTE || I.damtype == HALLOSS) && prob(25 + (effective_force * 2)))
 		if(!stat)
 			if(headcheck(hit_zone))
@@ -240,7 +227,7 @@ emp_act
 		if(!(I.flags & NOBLOODY))
 			I.add_blood(src)
 
-		if(prob(33))
+		if(prob(33 + I.sharp*10))
 			var/turf/location = loc
 			if(istype(location, /turf/simulated))
 				location.add_blood(src)

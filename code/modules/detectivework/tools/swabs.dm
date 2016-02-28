@@ -28,7 +28,7 @@
 		user << "<span class='warning'>They don't seem to have DNA!</span>"
 		return
 
-	if(user != H && H.a_intent != "help" && !H.lying)
+	if(user != H && H.a_intent != I_HELP && !H.lying)
 		user.visible_message("<span class='danger'>\The [user] tries to take a swab sample from \the [H], but they move away.</span>")
 		return
 
@@ -68,7 +68,7 @@
 
 /obj/item/weapon/forensics/swab/afterattack(var/atom/A, var/mob/user, var/proximity)
 
-	if(!proximity || istype(A, /obj/item/weapon/forensics/slide) || istype(A, /obj/machinery/dnaforensics))
+	if(!proximity || istype(A, /obj/machinery/dnaforensics))
 		return
 
 	if(is_used())

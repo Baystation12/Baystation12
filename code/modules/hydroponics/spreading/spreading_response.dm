@@ -17,7 +17,8 @@
 	manual_unbuckle(user)
 
 /obj/effect/plant/attack_generic(var/mob/user)
-	manual_unbuckle(user)
+	if(istype(user))
+		manual_unbuckle(user)
 
 /obj/effect/plant/proc/trodden_on(var/mob/living/victim)
 	if(!is_mature())

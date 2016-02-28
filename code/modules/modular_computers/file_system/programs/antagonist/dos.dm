@@ -24,7 +24,7 @@
 			dos_speed = NTNETSPEED_ETHERNET * 10
 	if(target && executed)
 		target.dos_overload += dos_speed
-		if(target.is_operational())
+		if(!target.is_operational())
 			target.dos_sources.Remove(src)
 			target = null
 			error = "Connection to destination relay lost."
@@ -89,8 +89,9 @@
 				target = R
 		return 1
 	if(href_list["PRG_reset"])
-		target.dos_sources.Remove(src)
-		target = null
+		if(target)
+			target.dos_sources.Remove(src)
+			target = null
 		executed = 0
 		error = ""
 		return 1

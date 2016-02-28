@@ -915,7 +915,7 @@
 /mob/living/carbon/human/revive()
 
 	if(species && !(species.flags & NO_BLOOD))
-		vessel.add_reagent("blood",560-vessel.total_volume)
+		vessel.add_reagent("blood",species.blood_volume-vessel.total_volume)
 		fixblood()
 
 	// Fix up all organs.
@@ -1137,7 +1137,10 @@
 
 	spawn(0)
 		regenerate_icons()
-		vessel.add_reagent("blood",560-vessel.total_volume)
+		if(vessel.total_volume < species.blood_volume)
+			vessel.add_reagent("blood", species.blood_volume - vessel.total_volume)
+		else if(vessel.total_volume > species.blood_volume)
+			vessel.remove_reagent("blood", vessel.total_volume - species.blood_volume)
 		fixblood()
 
 	// Rebuild the HUD. If they aren't logged in then login() should reinstantiate it for them.

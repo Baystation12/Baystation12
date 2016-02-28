@@ -18,7 +18,7 @@
 
 /obj/machinery/computer/cloning/initialize()
 	..()
-	set_expansion(/datum/expansion/multitool, new/datum/expansion/multitool/cryo(src, list(/proc/is_operable)))
+	set_expansion(src, /datum/expansion/multitool, /datum/expansion/multitool/cryo, list(/proc/is_operable))
 	updatemodules()
 
 /obj/machinery/computer/cloning/Destroy()

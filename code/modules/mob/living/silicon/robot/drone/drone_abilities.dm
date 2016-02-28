@@ -24,7 +24,7 @@
 /mob/living/silicon/robot/drone/MouseDrop(atom/over_object)
 	var/mob/living/carbon/H = over_object
 	if(!istype(H) || !Adjacent(H)) return ..()
-	if(H.a_intent == "help")
+	if(H.a_intent == I_HELP)
 		get_scooped(H)
 		return
 	else if(H.a_intent == "grab" && hat && !(H.l_hand && H.r_hand))

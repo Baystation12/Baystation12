@@ -323,7 +323,7 @@
 "gk" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/wall/r_wall{can_open = 1},/area/ship/scrap/unused3)
 "gl" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/plating,/area/ship/scrap/unused3)
 "gm" = (/obj/item/weapon/stool/padded,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/turf/simulated/floor/plating,/area/ship/scrap/unused3)
-"gn" = (/obj/structure/table/reinforced,/obj/item/device/flashlight/lamp,/obj/item/weapon/spacecash/c1000,/turf/simulated/floor/plating,/area/ship/scrap/unused3)
+"gn" = (/obj/structure/table/reinforced,/obj/item/device/flashlight/lamp,/obj/item/weapon/spacecash/bundle/c1000,/turf/simulated/floor/plating,/area/ship/scrap/unused3)
 "go" = (/obj/machinery/portable_atmospherics/powered/scrubber,/obj/effect/floor_decal/corner/blue{dir = 1},/obj/effect/floor_decal/corner/yellow{dir = 8},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/turf/simulated/floor/tiled,/area/ship/scrap/unused1)
 "gp" = (/turf/simulated/floor/tiled,/area/ship/scrap/unused1)
 "gq" = (/obj/machinery/power/apc{name = "Fire Closet APC"},/obj/structure/cable,/obj/structure/dispenser,/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_y = -24},/turf/simulated/floor/tiled,/area/ship/scrap/unused1)

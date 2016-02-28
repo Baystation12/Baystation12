@@ -18,7 +18,7 @@
 	var/material/reinf_material
 	var/last_state
 	var/construction_stage
-
+	var/hitsound = 'sound/weapons/Genhit.ogg'
 	var/list/wall_connections = list("0", "0", "0", "0")
 
 // Walls always hide the stuff below them.
@@ -35,7 +35,7 @@
 	if(!isnull(rmaterialtype))
 		reinf_material = get_material_by_name(rmaterialtype)
 	update_material()
-
+	hitsound = material.hitsound
 	processing_turfs |= src
 
 /turf/simulated/wall/Destroy()

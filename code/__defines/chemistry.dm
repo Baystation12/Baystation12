@@ -1,4 +1,4 @@
-#define HUNGER_FACTOR              0.05 // Factor of how fast mob nutrition decreases
+#define DEFAULT_HUNGER_FACTOR 0.05 // Factor of how fast mob nutrition decreases
 
 #define REM 0.2 // Means 'Reagent Effect Multiplier'. This is how many units of reagent are consumed per tick
 
@@ -24,6 +24,7 @@
 #define IS_TAJARA  5
 #define IS_XENOS   6
 #define IS_MACHINE 7
+#define IS_RESOMI 8
 
 #define CE_STABLE "stable" // Inaprovaline
 #define CE_ANTIBIOTIC "antibiotic" // Spaceacilin
@@ -36,5 +37,5 @@
 // Chemistry lists.
 var/list/tachycardics  = list("coffee", "inaprovaline", "hyperzine", "nitroglycerin", "thirteenloko", "nicotine") // Increase heart rate.
 var/list/bradycardics  = list("neurotoxin", "cryoxadone", "clonexadone", "space_drugs", "stoxin")                 // Decrease heart rate.
-var/list/heartstopper  = list("potassium_phorochloride", "zombie_powder") // This stops the heart.
+var/list/heartstopper  = list("potassium_chlorophoride", "zombie_powder") // This stops the heart.
 var/list/cheartstopper = list("potassium_chloride")                       // This stops the heart when overdose is met. -- c = conditional

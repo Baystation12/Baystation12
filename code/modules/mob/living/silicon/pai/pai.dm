@@ -7,6 +7,8 @@
 	pass_flags = 1
 	mob_size = MOB_SMALL
 
+	idcard_type = /obj/item/weapon/card/id
+
 	var/network = "SS13"
 	var/obj/machinery/camera/current = null
 
@@ -410,7 +412,7 @@
 /mob/living/silicon/pai/MouseDrop(atom/over_object)
 	var/mob/living/carbon/H = over_object
 	if(!istype(H) || !Adjacent(H)) return ..()
-	if(H.a_intent == "help")
+	if(H.a_intent == I_HELP)
 		get_scooped(H)
 		return
 	else

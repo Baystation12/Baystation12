@@ -1075,6 +1075,9 @@ About the new airlock wires panel:
 		electronics.one_access = 1
 
 /obj/machinery/door/airlock/emp_act(var/severity)
+	if(prob(20/severity))
+		spawn(0)
+			open()
 	if(prob(40/severity))
 		var/duration = SecondsToTicks(30 / severity)
 		if(electrified_until > -1 && (duration + world.time) > electrified_until)

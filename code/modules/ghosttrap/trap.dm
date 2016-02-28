@@ -109,8 +109,8 @@ var/list/ghost_traps
 	target << "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>"
 	target << "<b>Use say [target.get_language_prefix()]b to speak to other artificial intelligences.</b>"
 	var/turf/T = get_turf(target)
-	T.visible_message("<span class='notice'>\The [src] chimes quietly.</span>")
 	var/obj/item/device/mmi/digital/posibrain/P = target.loc
+	T.visible_message("<span class='notice'>\The [P] chimes quietly.</span>")
 	if(!istype(P)) //wat
 		return
 	P.searching = 0
@@ -186,3 +186,18 @@ datum/ghosttrap/drone/transfer_personality(var/mob/candidate, var/mob/living/sil
 	if(!assess_candidate(candidate))
 		return 0
 	drone.transfer_personality(candidate.client)
+
+/**************
+* personal AI *
+**************/
+/datum/ghosttrap/pai
+	object = "pAI"
+	pref_check = BE_PAI
+	ghost_trap_message = "They are occupying a pAI now."
+	ghost_trap_role = "pAI"
+
+datum/ghosttrap/pai/assess_candidate(var/mob/dead/observer/candidate, var/mob/target)
+	return 0
+
+datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silicon/robot/drone/drone)
+	return 0

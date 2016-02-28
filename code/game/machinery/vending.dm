@@ -188,9 +188,9 @@
 			var/obj/item/weapon/spacecash/ewallet/C = W
 			paid = pay_with_ewallet(C)
 			handled = 1
-		else if (istype(W, /obj/item/weapon/spacecash))
-			var/obj/item/weapon/spacecash/C = W
-			paid = pay_with_cash(C, user)
+		else if (istype(W, /obj/item/weapon/spacecash/bundle))
+			var/obj/item/weapon/spacecash/bundle/C = W
+			paid = pay_with_cash(C)
 			handled = 1
 
 		if(paid)
@@ -248,42 +248,22 @@
 
 /**
  *  Receive payment with cashmoney.
- *
- *  usr is the mob who gets the change.
  */
-/obj/machinery/vending/proc/pay_with_cash(var/obj/item/weapon/spacecash/cashmoney, mob/user)
+/obj/machinery/vending/proc/pay_with_cash(var/obj/item/weapon/spacecash/bundle/cashmoney)
 	if(currently_vending.price > cashmoney.worth)
-
 		// This is not a status display message, since it's something the character
 		// themselves is meant to see BEFORE putting the money in
 		usr << "\icon[cashmoney] <span class='warning'>That is not enough money.</span>"
 		return 0
 
-	if(istype(cashmoney, /obj/item/weapon/spacecash/bundle))
-		// Bundles can just have money subtracted, and will work
+	visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
+	cashmoney.worth -= currently_vending.price
 
-		visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
-		var/obj/item/weapon/spacecash/bundle/cashmoney_bundle = cashmoney
-		cashmoney_bundle.worth -= currently_vending.price
-
-		if(cashmoney_bundle.worth <= 0)
-			usr.drop_from_inventory(cashmoney_bundle)
-			qdel(cashmoney_bundle)
-		else
-			cashmoney_bundle.update_icon()
-	else
-		// Bills (banknotes) cannot really have worth different than face value,
-		// so we have to eat the bill and spit out change in a bundle
-		// This is really dirty, but there's no superclass for all bills, so we
-		// just assume that all spacecash that's not something else is a bill
-
-		visible_message("<span class='info'>\The [usr] inserts a bill into \the [src].</span>")
-		var/left = cashmoney.worth - currently_vending.price
+	if(cashmoney.worth <= 0)
 		usr.drop_from_inventory(cashmoney)
 		qdel(cashmoney)
-
-		if(left)
-			spawn_money(left, src.loc, user)
+	else
+		cashmoney.update_icon()
 
 	// Vending machines have no idea who paid with cash
 	credit_purchase("(cash)")

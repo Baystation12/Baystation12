@@ -668,7 +668,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 //////////////////////////////////////////////
 
 // called when cable_coil is clicked on a turf/simulated/floor
-/obj/item/stack/cable_coil/proc/turf_place(turf/simulated/floor/F, mob/user)
+/obj/item/stack/cable_coil/proc/turf_place(turf/simulated/F, mob/user)
 	if(!isturf(user.loc))
 		return
 
@@ -780,7 +780,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	if(get_dist(C, user) > 1)		// make sure it's close enough
 		user << "You can't lay cable at a place that far away."
 		return
-
 
 	if(U == T) //if clicked on the turf we're standing on, try to put a cable in the direction we're facing
 		turf_place(T,user)

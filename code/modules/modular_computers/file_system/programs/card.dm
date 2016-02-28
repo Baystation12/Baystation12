@@ -147,7 +147,7 @@
 							usr << "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>"
 							return
 						else
-							computer.visible_message("<span class='notice'>[computer] prints out paper.</span>")
+							computer.visible_message("<span class='notice'>\The [computer] prints out paper.</span>")
 				else
 					var/contents = {"<h4>Crew Manifest</h4>
 									<br>
@@ -157,7 +157,7 @@
 						usr << "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>"
 						return
 					else
-						computer.visible_message("<span class='notice'>[computer] prints out paper.</span>")
+						computer.visible_message("<span class='notice'>\The [computer] prints out paper.</span>")
 		if("eject")
 			if(computer && computer.card_slot)
 				if(id_card)

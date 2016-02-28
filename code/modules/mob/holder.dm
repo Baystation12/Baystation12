@@ -19,11 +19,14 @@ var/list/holder_mob_icon_cache = list()
 		)
 	pixel_y = 8
 
+	var/last_holder
+
 /obj/item/weapon/holder/New()
 	..()
 	processing_objects.Add(src)
 
 /obj/item/weapon/holder/Destroy()
+	last_holder = null
 	processing_objects.Remove(src)
 	..()
 
@@ -35,14 +38,22 @@ var/list/holder_mob_icon_cache = list()
 	spawn(1)
 		update_state()
 
-/obj/item/weapon/proc/update_state()
+/obj/item/weapon/holder/proc/update_state()
+	if(last_holder != loc)
+		for(var/mob/M in contents)
+			unregister_all_movement(last_holder, M)
+
 	if(istype(loc,/turf) || !(contents.len))
 		for(var/mob/M in contents)
-			var/atom/movable/mob_container
-			mob_container = M
-			mob_container.forceMove(get_turf(src))
+			var/atom/movable/mob_container = M
+			mob_container.forceMove(loc, MOVED_DROP)
 			M.reset_view()
 		qdel(src)
+	else if(last_holder != loc)
+		for(var/mob/M in contents)
+			register_all_movement(loc, M)
+
+	last_holder = loc
 
 /obj/item/weapon/holder/GetID()
 	for(var/mob/M in contents)
@@ -70,6 +81,9 @@ var/list/holder_mob_icon_cache = list()
 	desc = M.desc
 	overlays |= M.overlays
 	var/mob/living/carbon/human/H = loc
+	last_holder = H
+	register_all_movement(H, M)
+
 	if(istype(H))
 		if(H.l_hand == src)
 			H.update_inv_l_hand()
@@ -126,7 +140,6 @@ var/list/holder_mob_icon_cache = list()
 	slot_flags = SLOT_BACK
 
 /obj/item/weapon/holder/human/sync(var/mob/living/M)
-
 	// Generate appropriate on-mob icons.
 	var/mob/living/carbon/human/owner = M
 	if(istype(owner) && owner.species)

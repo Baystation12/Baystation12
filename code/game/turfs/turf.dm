@@ -137,7 +137,7 @@ var/const/enterloopsanity = 100
 		else if(is_space())
 			M.inertia_dir = 0
 			M.make_floating(0)
-	..()
+
 	var/objects = 0
 	if(A && (A.flags & PROXMOVE))
 		for(var/atom/movable/thing in range(1))
