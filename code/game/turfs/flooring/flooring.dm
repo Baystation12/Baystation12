@@ -91,13 +91,6 @@ var/list/flooring_types
 	build_type = /obj/item/stack/tile/linoleum
 	flags = TURF_REMOVE_SCREWDRIVER
 
-/decl/flooring/tiling/red
-	name = "floor"
-	icon_base = "white"
-	has_damage_range = null
-	flags = TURF_REMOVE_CROWBAR
-	build_type = /obj/item/stack/tile/floor_red
-
 /decl/flooring/tiling/steel
 	name = "floor"
 	icon_base = "steel"
@@ -112,13 +105,6 @@ var/list/flooring_types
 	has_damage_range = null
 	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_white
-
-/decl/flooring/tiling/yellow
-	name = "floor"
-	icon_base = "white"
-	has_damage_range = null
-	flags = TURF_REMOVE_CROWBAR
-	build_type = /obj/item/stack/tile/floor_yellow
 
 /decl/flooring/tiling/dark
 	name = "floor"
