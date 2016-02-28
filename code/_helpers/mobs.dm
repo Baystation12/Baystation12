@@ -200,9 +200,14 @@ Proc for attack log creation, because really why not
 			. = 0
 			break
 
-		if(target.loc != target_loc || user.get_active_hand() != holding)
+		if(target.loc != target_loc)
 			. = 0
 			break
+
+		if(user.get_active_hand() != holding)
+			. = 0
+			break
+
 	if (progbar)
 		qdel(progbar)
 
@@ -216,10 +221,6 @@ Proc for attack log creation, because really why not
 	var/atom/original_loc = user.loc
 
 	var/holding = user.get_active_hand()
-
-	var/holdingnull = 1 //User's hand started out empty, check for an empty hand
-	if(holding)
-		holdingnull = 0 //Users hand started holding something, check to see if it's still holding that
 
 	var/datum/progressbar/progbar
 	if (progress)
@@ -242,12 +243,6 @@ Proc for attack log creation, because really why not
 			break
 
 		if(needhand)
-			//This might seem like an odd check, but you can still need a hand even when it's empty
-			//i.e the hand is used to pull some item/tool out of the construction
-			if(!holdingnull)
-				if(!holding)
-					. = 0
-					break
 			if(user.get_active_hand() != holding)
 				. = 0
 				break
