@@ -41,7 +41,7 @@
 		var/dat = "<B>Noticeboard</B><BR>"
 		for(var/obj/item/weapon/paper/P in src)
 			dat += "<A href='?src=\ref[src];read=\ref[P]'>[P.name]</A> <A href='?src=\ref[src];write=\ref[P]'>Write</A> <A href='?src=\ref[src];remove=\ref[P]'>Remove</A><BR>"
-		user << browse("<HEAD><TITLE>Notices</TITLE></HEAD>[dat]","window=noticeboard")
+		user << browse("<HEAD><TITLE>Notices</TITLE></HEAD>[sanitize_local(dat, SANITIZE_BROWSER)]","window=noticeboard")
 		onclose(user, "noticeboard")
 	else
 		..()
@@ -76,6 +76,6 @@
 	if(href_list["read"])
 		var/obj/item/weapon/paper/P = locate(href_list["read"])
 		if((P && P.loc == src))
-			usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY><TT>[P.info]</TT></BODY></HTML>", "window=[P.name]")
+			usr << browse("<HTML><HEAD><TITLE>[sanitize_local(P.name, SANITIZE_BROWSER)]</TITLE></HEAD><BODY><TT>[sanitize_local(P.info, SANITIZE_BROWSER)]</TT></BODY></HTML>", "window=[P.name]")
 			onclose(usr, "[P.name]")
 	return

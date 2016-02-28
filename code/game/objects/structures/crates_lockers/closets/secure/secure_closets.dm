@@ -87,6 +87,26 @@
 			spark_system.start()
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			playsound(src.loc, "sparks", 50, 1)
+	else if(istype(W, /obj/item/device/multitool))
+		var/obj/item/device/multitool/multi = W
+		if(multi.in_use)
+			user << "<span class='warning'>This multitool is already in use!</span>"
+			return
+		multi.in_use = 1
+		var/i
+		for(i=0, i<6, i++)
+			user.visible_message("<span class='warning'>[user] picks in wires of the [src.name] with a multitool.</span>",
+			"<span class='warning'>Resetting circuitry ([i]/6)...</span>")
+			if(!do_after(user,500)||opened)
+				multi.in_use=0
+				world << "test"
+				return
+		src.locked=!src.locked
+		src.update_icon()
+		multi.in_use=0
+		user.visible_message("<span class='warning'>[user] [src.locked?"locks":"unlocks"] [name] with a multitool.</span>",
+		"<span class='warning'>You [src.locked?"enable":"disable"] the locking modules.</span>")
+		return
 	else if(istype(W,/obj/item/weapon/packageWrap) || istype(W,/obj/item/weapon/weldingtool))
 		return ..(W,user)
 	else

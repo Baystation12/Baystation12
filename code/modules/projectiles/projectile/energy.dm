@@ -44,10 +44,13 @@
 /obj/item/projectile/energy/electrode
 	name = "electrode"
 	icon_state = "spark"
-	nodamage = 1
-	taser_effect = 1
+	damage = 0
+	stun = 10
+	weaken = 10
+	stutter = 10
+	/*taser_effect = 1
 	agony = 40
-	damage_type = HALLOSS
+	damage_type = HALLOSS*/
 	//Damage will be handled on the MOB side, to prevent window shattering.
 
 /obj/item/projectile/energy/electrode/stunshot

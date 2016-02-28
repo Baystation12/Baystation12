@@ -34,7 +34,7 @@
 			if(findtext(message," snores.")) //Because we have so many sleeping people.
 				break
 			if(M.stat == 2 && (M.client.prefs.toggles & CHAT_GHOSTSIGHT) && !(M in viewers(src,null)))
-				M.show_message(message, m_type)
+				M.show_message("(<a href='?src=\ref[M];speakerinfo=\ref[src]'>?</a>)(<a href='byond://?src=\ref[M];track=\ref[src]'>F</a>)[message]", m_type)
 
 		if (m_type & 1)
 			var/list/see = get_mobs_or_objects_in_view(world.view,src) | viewers(get_turf(src), null)

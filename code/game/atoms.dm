@@ -192,6 +192,12 @@ its easier to just keep the beam vertical.
 //All atoms
 /atom/proc/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
+/*	if(isturf(src) || \
+	istype(src, /obj/structure/sign))		//temporatory duct tape
+		user << translation(src,"examine",list("infix"=infix,"suffix"=suffix))
+		user << translation(src,"desc")
+		return distance == -1 || (get_dist(src, user) <= distance)
+*/
 	var/f_name = "\a [src][infix]."
 	if(src.blood_DNA && !istype(src, /obj/effect/decal))
 		if(gender == PLURAL)
@@ -236,7 +242,7 @@ its easier to just keep the beam vertical.
 	return
 
 /atom/proc/hitby(atom/movable/AM as mob|obj)
-	if (density)
+	if(density)
 		AM.throwing = 0
 	return
 
@@ -423,6 +429,7 @@ its easier to just keep the beam vertical.
 	fluorescent = 0
 	src.germ_level = 0
 	if(istype(blood_DNA, /list))
+		blood_DNA.Cut()
 		blood_DNA = null
 		return 1
 

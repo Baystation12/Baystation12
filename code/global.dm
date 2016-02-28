@@ -23,22 +23,67 @@ var/global/list/global_map = null
 
 // Noises made when hit while typing.
 var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
+//var/list/hit_appends = list("-Œ…", "-¿…", "-”‘", "- ’–", "-ﬂ…!", "-›…!", "-¿–√’!", "-¡Àﬂ!")
 
+/*
+<<<<<<< HEAD
+// The way blocks are handled badly needs a rewrite, this is horrible.
+// Too much of a project to handle at the moment, TODO for later.
+var/BLINDBLOCK    = 0
+var/DEAFBLOCK     = 0
+var/HULKBLOCK     = 0
+var/TELEBLOCK     = 0
+var/FIREBLOCK     = 0
+var/XRAYBLOCK     = 0
+var/CLUMSYBLOCK   = 0
+var/FAKEBLOCK     = 0
+var/COUGHBLOCK    = 0
+var/GLASSESBLOCK  = 0
+var/EPILEPSYBLOCK = 0
+var/TWITCHBLOCK   = 0
+var/NERVOUSBLOCK  = 0
+var/MONKEYBLOCK   = 27
 
-var/diary               = null
-var/href_logfile        = null
-var/station_name        = "NSS Exodus"
-var/station_short       = "Exodus"
+var/BLOCKADD = 0
+var/DIFFMUT  = 0
+
+var/HEADACHEBLOCK      = 0
+var/NOBREATHBLOCK      = 0
+var/REMOTEVIEWBLOCK    = 0
+var/REGENERATEBLOCK    = 0
+var/INCREASERUNBLOCK   = 0
+var/REMOTETALKBLOCK    = 0
+var/MORPHBLOCK         = 0
+var/BLENDBLOCK         = 0
+var/HALLUCINATIONBLOCK = 0
+var/NOPRINTSBLOCK      = 0
+var/SHOCKIMMUNITYBLOCK = 0
+var/SMALLSIZEBLOCK     = 0
+
+var/skipupdate = 0
+
+var/eventchance = 10 // Percent chance per 5 minutes.
+var/event       = 0
+var/hadevent    = 0
+var/blobevent   = 0
+
+var/going             = 1.0
+*/
+var/diary          = null
+var/href_logfile   = null
+var/station_name   = null
+var/station_short  = "Exodus"
 var/const/dock_name     = "N.A.S. Crescent"
 var/const/boss_name     = "Central Command"
 var/const/boss_short    = "Centcomm"
 var/const/company_name  = "NanoTrasen"
 var/const/company_short = "NT"
-var/game_version        = "Baystation12"
-var/changelog_hash      = ""
-var/game_year           = (text2num(time2text(world.realtime, "YYYY")) + 544)
+var/game_version   = "Baystation12"
+var/changelog_hash = ""
+var/game_year      = (text2num(time2text(world.realtime, "YYYY")) + 544)
 
 var/round_progressing = 1
+
 var/master_mode       = "extended" // "extended"
 var/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
 

@@ -67,6 +67,7 @@
 	..()
 
 	if(statpanel("Lobby") && ticker)
+		stat("Currently Playing:", "[ticker.lobby_music[ticker.login_music]]")
 		if(ticker.hide_mode)
 			stat("Game Mode:", "Secret")
 		else
@@ -366,7 +367,6 @@
 		ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 
 		//Grab some data from the character prefs for use in random news procs.
-
 		AnnounceArrival(character, rank, join_message)
 	else
 		AnnounceCyborg(character, rank, join_message)

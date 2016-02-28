@@ -1,0 +1,8 @@
+D:\#ANYTHING#\SOVIET_ACTIVE_BUILD\midi2piano350\bin\x86\Debug\midi2piano.exe
+D:\#ANYTHING#\SOVIET_ACTIVE_BUILD\midi2piano350\bin\x86\Debug\midi2piano.pdb
+D:\#ANYTHING#\SOVIET_ACTIVE_BUILD\midi2piano350\bin\x86\Debug\Sanford.Multimedia.Midi.dll
+D:\#ANYTHING#\SOVIET_ACTIVE_BUILD\midi2piano350\obj\x86\Debug\midi2piano.csprojResolveAssemblyReference.cache
+D:\#ANYTHING#\SOVIET_ACTIVE_BUILD\midi2piano350\obj\x86\Debug\midi2piano.Form1.resources
+D:\#ANYTHING#\SOVIET_ACTIVE_BUILD\midi2piano350\obj\x86\Debug\midi2piano.csproj.GenerateResource.Cache
+D:\#ANYTHING#\SOVIET_ACTIVE_BUILD\midi2piano350\obj\x86\Debug\midi2piano.exe
+D:\#ANYTHING#\SOVIET_ACTIVE_BUILD\midi2piano350\obj\x86\Debug\midi2piano.pdb

@@ -346,7 +346,7 @@ datum/controller/vote
 				. += "<li><a href='?src=\ref[src];vote=custom'>Custom</a></li>"
 			. += "</ul><hr>"
 		. += "<a href='?src=\ref[src];vote=close' style='position:absolute;right:50px'>Close</a></body></html>"
-		return .
+		return sanitize_local(., SANITIZE_BROWSER)
 
 
 	Topic(href,href_list[],hsrc)

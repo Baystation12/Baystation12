@@ -924,7 +924,7 @@
 "rN" = (/obj/machinery/chem_master/condimaster{name = "CondiMaster Neo"; pixel_x = -5},/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/centcom/living)
 "rO" = (/obj/item/weapon/stool{pixel_y = 8},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/living)
 "rP" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/shuttle/plating,/area/skipjack_station/start)
-"rQ" = (/obj/structure/device/piano{dir = 4},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/living)
+"rQ" = (/obj/structure/piano{dir = 4},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/living)
 "rR" = (/obj/machinery/door/window{dir = 4; name = "Infirmary"; req_access = list(150)},/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/syndicate_station/start)
 "rS" = (/obj/machinery/door/window/westright{name = "Tool Storage"; req_access = list(150)},/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
 "rT" = (/obj/effect/spawner/newbomb/timer/syndicate,/obj/structure/table/steel,/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)

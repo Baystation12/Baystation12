@@ -6,16 +6,19 @@
 	S["lastchangelog"]	>> pref.lastchangelog
 	S["default_slot"]	>> pref.default_slot
 	S["toggles"]		>> pref.toggles
+	S["interface_lang"]	>> pref.interface_lang
 
 /datum/category_item/player_setup_item/player_global/settings/save_preferences(var/savefile/S)
 	S["lastchangelog"]	<< pref.lastchangelog
 	S["default_slot"]	<< pref.default_slot
 	S["toggles"]		<< pref.toggles
+	S["interface_lang"]	<< pref.interface_lang
 
 /datum/category_item/player_setup_item/player_global/settings/sanitize_preferences()
 	pref.lastchangelog	= sanitize_text(pref.lastchangelog, initial(pref.lastchangelog))
 	pref.default_slot	= sanitize_integer(pref.default_slot, 1, config.character_slots, initial(pref.default_slot))
 	pref.toggles		= sanitize_integer(pref.toggles, 0, 65535, initial(pref.toggles))
+	pref.interface_lang	= sanitize_text(pref.interface_lang, initial(pref.interface_lang))
 
 /datum/category_item/player_setup_item/player_global/settings/content(var/mob/user)
 	. += "<b>Play admin midis:</b> <a href='?src=\ref[src];toggle=[SOUND_MIDI]'><b>[(pref.toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
@@ -23,6 +26,7 @@
 	. += "<b>Ghost ears:</b> <a href='?src=\ref[src];toggle=[CHAT_GHOSTEARS]'><b>[(pref.toggles & CHAT_GHOSTEARS) ? "All Speech" : "Nearest Creatures"]</b></a><br>"
 	. += "<b>Ghost sight:</b> <a href='?src=\ref[src];toggle=[CHAT_GHOSTSIGHT]'><b>[(pref.toggles & CHAT_GHOSTSIGHT) ? "All Emotes" : "Nearest Creatures"]</b></a><br>"
 	. += "<b>Ghost radio:</b> <a href='?src=\ref[src];toggle=[CHAT_GHOSTRADIO]'><b>[(pref.toggles & CHAT_GHOSTRADIO) ? "All Chatter" : "Nearest Speakers"]</b></a><br>"
+	. += "<b>Language:</b> <a href='?src=\ref[src];interface_lang=1'><b>[pref.interface_lang]</b></a><br>"
 
 /datum/category_item/player_setup_item/player_global/settings/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["toggle"])
@@ -33,6 +37,11 @@
 				user << sound(ticker.login_music, repeat = 0, wait = 0, volume = 85, channel = 1)
 			else
 				user << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1)
+		return TOPIC_REFRESH
+	if(href_list["interface_lang"])
+		pref.interface_lang = input(usr, "Select a language form list") in interface_languages
+		if(!pref.interface_lang)
+			pref.interface_lang = "main"
 		return TOPIC_REFRESH
 
 	return ..()

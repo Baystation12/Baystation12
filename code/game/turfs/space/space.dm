@@ -38,7 +38,7 @@
 			return
 		var/obj/item/stack/rods/R = C
 		if (R.use(1))
-			user << "<span class='notice'>Constructing support lattice ...</span>"
+			user << "<span class='notice'>[translation(src, "lattice")]</span>"
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			ReplaceWithLattice()
 		return
@@ -55,7 +55,7 @@
 			ChangeTurf(/turf/simulated/floor/airless)
 			return
 		else
-			user << "<span class='warning'>The plating is going to need some support.</span>"
+			user << "<span class='warning'>[translation(src, "need_support")]</span>"
 	return
 
 
@@ -63,7 +63,7 @@
 
 /turf/space/Entered(atom/movable/A as mob|obj)
 	if(movement_disabled)
-		usr << "<span class='warning'>Movement is admin-disabled.</span>" //This is to identify lag problems
+		usr << "<span class='warning'>[translation(src, "movement_disabled")]</span>" //This is to identify lag problems
 		return
 	..()
 	if ((!(A) || src != A.loc))	return

@@ -262,8 +262,8 @@
 	desc = "Station Network"
 	region = ACCESS_REGION_RESEARCH
 
-// /var/const/free_access_id = 43
-// /var/const/free_access_id = 44
+// /var/const/free_access_id = 43 Clown
+// /var/const/free_access_id = 44 Mime
 
 /var/const/access_surgery = 45
 /datum/access/surgery
@@ -271,7 +271,11 @@
 	desc = "Surgery"
 	region = ACCESS_REGION_MEDBAY
 
-// /var/const/free_access_id = 46
+/var/const/access_theatre = 46
+/datum/access/theatre
+	id = access_theatre
+	desc = "Theatre"
+	region = ACCESS_REGION_GENERAL
 
 /var/const/access_research = 47
 /datum/access/research

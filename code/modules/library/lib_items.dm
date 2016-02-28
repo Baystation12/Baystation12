@@ -161,7 +161,7 @@
 			user << "<span class='notice'>The pages of [title] have been cut out!</span>"
 			return
 	if(src.dat)
-		user << browse("<TT><I>Penned by [author].</I></TT> <BR>" + "[dat]", "window=book")
+		user << browse(sanitize_local("<TT><I>Penned by [author].</I></TT> <BR>" + "[dat]", SANITIZE_BROWSER), "window=book")
 		user.visible_message("[user] opens a book titled \"[src.title]\" and begins reading intently.")
 		onclose(user, "book")
 	else
@@ -255,9 +255,8 @@
 	if(user.zone_sel.selecting == "eyes")
 		user.visible_message("<span class='notice'>You open up the book and show it to [M]. </span>", \
 			"<span class='notice'> [user] opens up a book and shows it to [M]. </span>")
-		M << browse("<TT><I>Penned by [author].</I></TT> <BR>" + "[dat]", "window=book")
+		M << browse(sanitize_local("<TT><I>Penned by [author].</I></TT> <BR>" + "[dat]", SANITIZE_BROWSER), "window=book")
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //to prevent spam
-
 
 /*
  * Barcode Scanner
