@@ -71,6 +71,12 @@
 		user << "There is no card in \the [src]"
 		return
 
+	if(active_program)
+		active_program.event_idremoved(0)
+
+	for(var/datum/computer_file/program/P in idle_threads)
+		P.event_idremoved(1)
+
 	card_slot.stored_card.forceMove(get_turf(src))
 	card_slot.stored_card = null
 	update_uis()
@@ -192,25 +198,27 @@
 		return 0
 
 	if(active_program && active_program.requires_ntnet && !get_ntnet_status(active_program.requires_ntnet_feature)) // Active program requires NTNet to run but we've just lost connection. Crash.
-		kill_program(1)
-		visible_message("<span class='danger'>\The [src]'s screen briefly freezes and then shows \"NETWORK ERROR - NTNet connection lost. Please retry. If problem persists contact your system administrator.\" error.</span>")
+		active_program.event_networkfailure(0)
 
 	for(var/datum/computer_file/program/P in idle_threads)
 		if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature))
-			P.kill_program(1)
-			idle_threads.Remove(P)
-			visible_message("<span class='danger'>\The [src] screen displays an \"Process [P.filename].[P.filetype] (PID [rand(100,999)]) terminated - Network Error\" error</span>")
+			P.event_networkfailure(1)
 
 	if(active_program)
-		active_program.process_tick()
-		active_program.ntnet_status = get_ntnet_status()
-		active_program.computer_emagged = computer_emagged
+		if(active_program.program_state != PROGRAM_STATE_KILLED)
+			active_program.process_tick()
+			active_program.ntnet_status = get_ntnet_status()
+			active_program.computer_emagged = computer_emagged
+		else
+			active_program = null
 
 	for(var/datum/computer_file/program/P in idle_threads)
-		P.process_tick()
-		P.ntnet_status = get_ntnet_status()
-		P.computer_emagged = computer_emagged
-
+		if(P.program_state != PROGRAM_STATE_KILLED)
+			P.process_tick()
+			P.ntnet_status = get_ntnet_status()
+			P.computer_emagged = computer_emagged
+		else
+			idle_threads.Remove(P)
 
 	handle_power() // Handles all computer power interaction
 	check_update_ui_need()
@@ -329,7 +337,7 @@
 			return
 
 		idle_threads.Add(active_program)
-		active_program.running = 0 // Should close any existing UIs
+		active_program.program_state = PROGRAM_STATE_BACKGROUND // Should close any existing UIs
 		nanomanager.close_uis(active_program.NM ? active_program.NM : active_program)
 		active_program = null
 		update_icon()
@@ -353,7 +361,7 @@
 
 		// The program is already running. Resume it.
 		if(P in idle_threads)
-			P.running = 1
+			P.program_state = PROGRAM_STATE_ACTIVE
 			active_program = P
 			idle_threads.Remove(P)
 			update_icon()
@@ -373,6 +381,10 @@
 /obj/item/modular_computer/proc/power_failure()
 	if(enabled) // Shut down the computer
 		visible_message("<span class='danger'>\The [src]'s screen flickers \"BATTERY CRITICAL\" warning as it shuts down unexpectedly.</span>")
+		if(active_program)
+			active_program.event_powerfailure(0)
+		for(var/datum/computer_file/program/PRG in idle_threads)
+			PRG.event_powerfailure(1)
 		shutdown_computer(0)
 
 // Handles power-related things, such as battery interaction, recharging, shutdown when it's discharged

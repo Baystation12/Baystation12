@@ -38,3 +38,5 @@
 #define issilicon(A) istype(A, /mob/living/silicon)
 
 #define isslime(A) istype(A, /mob/living/carbon/slime)
+
+#define attack_animation(A) if(istype(A)) A.do_attack_animation(src)

@@ -212,7 +212,7 @@
 		if(prob(5))
 			remove_fuel(1)
 
-		if(get_fuel() == 0)
+		if(get_fuel() < 1)
 			setWelding(0)
 
 	//I'm not sure what this does. I assume it has to do with starting fires...

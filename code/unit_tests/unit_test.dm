@@ -1,11 +1,11 @@
 /*   Unit Tests originally designed by Ccomp5950
- *  
+ *
  *   Tests are created to prevent changes that would create bugs or change expected behaviour.
  *   For the most part I think any test can be created that doesn't require a client in a mob or require a game mode other then extended
- *   
+ *
  *   The easiest way to make effective tests is to create a "template" if you intend to run the same test over and over and make your actual
  *   tests be a "child object" of those templates.  Be sure and name your templates with the word "template" somewhere in var/name.
- *   
+ *
  *   The goal is to have all sorts of tests that run and to run them as quickly as possible.
  *
  *   Tests that require time to run we instead just check back on their results later instead of waiting around in a sleep(1) for each test.
@@ -16,7 +16,7 @@
  *
  *   If your test requires a significant amount of time...cheat on the timers.  Either speed up the process/life runs or do as we did in the timers for the shuttle
  *   transfers in zas_tests.dm   we move a shuttle but instead of waiting 3 minutes we set the travel time to a very low number.
- *   
+ *
  *   At the same time, Unit tests are intended to reflect standard usage so avoid changing to much about how stuff is processed.
  *
  *
@@ -28,6 +28,7 @@
 var/all_unit_tests_passed = 1
 var/failed_unit_tests = 0
 var/total_unit_tests = 0
+var/currently_running_tests = 0
 
 // For console out put in Linux/Bash makes the output green or red.
 // Should probably only be used for unit tests/Travis since some special folks use winders to host servers.
@@ -64,7 +65,7 @@ datum/unit_test/proc/start_test()
 datum/unit_test/proc/check_result()
 	fail("No check results proc")
 	return 1
-	
+
 
 proc/load_unit_test_changes()
 /*
@@ -78,15 +79,15 @@ proc/load_unit_test_changes()
 
 
 proc/initialize_unit_tests()
-	log_unit_test("Initializing Unit Testing")	
-	
+	log_unit_test("Initializing Unit Testing")
+
 	//
 	//Start the Round.
 	//
 
 	if(!ticker)
 		crash_with("No Ticker")
-		world.Del()
+		del(world)
 
 	var/said_msg = 0
 	while(ticker.pregame_timeleft && ticker.pregame_timeleft > 160) 	// Make sure the initial startup is complete.
@@ -108,7 +109,19 @@ proc/initialize_unit_tests()
 	// Run Tests
 	//
 
-	var/list/test_datums = typesof(/datum/unit_test)
+	var/list/test_datums = get_test_datums()
+	run_unit_tests(test_datums)
+	del(world)
+
+/proc/run_unit_tests(var/list/test_datums, var/skip_disabled_tests = TRUE)
+	if(currently_running_tests)
+		log_unit_test("Already running unit tests")
+		return
+	currently_running_tests = 1
+
+	all_unit_tests_passed = 1
+	failed_unit_tests = 0
+	total_unit_tests = 0
 
 	var/list/async_test = list()
 	var/list/started_tests = list()
@@ -118,11 +131,8 @@ proc/initialize_unit_tests()
 	for (var/test in test_datums)
 		var/datum/unit_test/d = new test()
 
-		if(d.disabled)
+		if(d.disabled && skip_disabled_tests)
 			d.pass("[ascii_red]Check Disabled: [d.why_disabled]")
-			continue
-
-		if(findtext(d.name, "template"))
 			continue
 
 		if(isnull(d.start_test()))		// Start the test.
@@ -130,12 +140,10 @@ proc/initialize_unit_tests()
 		if(d.async)				// If it's async then we'll need to check back on it later.
 			async_test.Add(d)
 		total_unit_tests++
-		
-
 
 	//
 	// Check the async tests to see if they are finished.
-	// 
+	//
 
 	while(async_test.len)
 		for(var/datum/unit_test/test  in async_test)
@@ -153,7 +161,28 @@ proc/initialize_unit_tests()
 
 	if(all_unit_tests_passed)
 		log_unit_test("[ascii_green]**** All Unit Tests Passed \[[total_unit_tests]\] ****[ascii_reset]")
-		world.Del()
 	else
 		log_unit_test("[ascii_red]**** \[[failed_unit_tests]\\[total_unit_tests]\] Unit Tests Failed ****[ascii_reset]")
-		world.Del()
+	currently_running_tests = 0
+
+/proc/get_test_datums()
+	var/list/tests = list()
+	for(var/test in typesof(/datum/unit_test))
+		var/datum/unit_test/d = test
+		if(!findtext(initial(d.name), "template"))
+			tests += d
+	return tests
+
+/datum/admins/proc/run_unit_test(var/datum/unit_test/unit_test_type in get_test_datums())
+	set name = "Run Unit Test"
+	set desc = "Runs the selected unit test - Remember to enable Debug Log Messages"
+	set category = "Debug"
+
+	if(!unit_test_type)
+		return
+
+	if(!check_rights(R_DEBUG))
+		return
+
+	log_and_message_admins("has started the unit test '[initial(unit_test_type.name)]'")
+	run_unit_tests(list(unit_test_type), FALSE)

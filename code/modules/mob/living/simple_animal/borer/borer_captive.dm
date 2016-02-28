@@ -46,7 +46,7 @@
 		spawn(rand(200,250)+B.host.brainloss)
 			if(!B || !B.controlling) return
 
-			B.host.adjustBrainLoss(rand(5,10))
+			B.host.adjustBrainLoss(rand(0.1,0.5))
 			H << "<span class='danger'>With an immense exertion of will, you regain control of your body!</span>"
 			B.host << "<span class='danger'>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</span>"
 			B.detatch()

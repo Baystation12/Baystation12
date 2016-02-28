@@ -212,7 +212,7 @@
 	visible_message("<span class='warning'><B>[src] vomits up a thick purple substance and begins to shape it!</B></span>", "<span class='alium'>You shape a [choice].</span>")
 	switch(choice)
 		if("resin door")
-			new /obj/structure/simple_door/resin(loc)
+			new /obj/machinery/door/unpowered/simple/resin(loc)
 		if("resin wall")
 			new /obj/structure/alien/resin/wall(loc)
 		if("resin membrane")

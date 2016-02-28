@@ -1,6 +1,6 @@
 /obj/structure/closet/secure_closet
 	name = "secure locker"
-	desc = "It's an immobile card-locked storage unit."
+	desc = "It's a card-locked storage unit."
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "secure1"
 	density = 1
@@ -151,8 +151,11 @@
 
 /obj/structure/closet/secure_closet/update_icon()//Putting the welded stuff in updateicon() so it's easy to overwrite for special cases (Fridges, cabinets, and whatnot)
 	overlays.Cut()
+
 	if(!opened)
-		if(locked)
+		if(broken)
+			icon_state = icon_off
+		else if(locked)
 			icon_state = icon_locked
 		else
 			icon_state = icon_closed
@@ -161,24 +164,12 @@
 	else
 		icon_state = icon_opened
 
-
 /obj/structure/closet/secure_closet/req_breakout()
 	if(!opened && locked) return 1
 	return ..() //It's a secure closet, but isn't locked.
 
 /obj/structure/closet/secure_closet/break_open()
 	desc += " It appears to be broken."
-	icon_state = icon_off
-	spawn()
-		flick(icon_broken, src)
-		sleep(10)
-		flick(icon_broken, src)
-		sleep(10)
 	broken = 1
 	locked = 0
-	update_icon()
-	//Do this to prevent contents from being opened into nullspace (read: bluespace)
-	if(istype(loc, /obj/structure/bigDelivery))
-		var/obj/structure/bigDelivery/BD = loc
-		BD.unwrap()
-	open()
+	..()

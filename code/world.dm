@@ -25,6 +25,9 @@ var/global/datum/global_init/init = new ()
 
 	qdel(src) //we're done
 
+/datum/global_init/Destroy()
+	return 1
+
 /var/game_id = null
 /proc/generate_gameid()
 	if(game_id != null)

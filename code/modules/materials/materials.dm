@@ -109,6 +109,8 @@ var/list/name_to_material
 	var/tableslam_noise = 'sound/weapons/tablehit1.ogg'
 	// Noise made when a simple door made of this material opens or closes.
 	var/dooropen_noise = 'sound/effects/stonedoor_openclose.ogg'
+	// Noise made when you hit structure made of this material.
+	var/hitsound = 'sound/weapons/genhit.ogg'
 	// Path to resulting stacktype. Todo remove need for this.
 	var/stack_type
 	// Wallrot crumble message.
@@ -323,6 +325,7 @@ var/list/name_to_material
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
+	hitsound = 'sound/weapons/smash.ogg'
 
 /material/diona
 	name = "biomass"
@@ -331,6 +334,7 @@ var/list/name_to_material
 	integrity = 600
 	icon_base = "diona"
 	icon_reinf = "noreinf"
+	hitsound = 'sound/effects/attackblob.ogg'
 
 /material/diona/place_dismantled_product()
 	return
@@ -357,6 +361,7 @@ var/list/name_to_material
 	weight = 23
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
+	hitsound = 'sound/effects/blobattack.ogg'
 
 /material/plasteel/titanium
 	name = "titanium"
@@ -382,6 +387,7 @@ var/list/name_to_material
 	window_options = list("One Direction" = 1, "Full Window" = 4)
 	created_window = /obj/structure/window/basic
 	rod_product = /obj/item/stack/material/glass/reinforced
+	hitsound = 'sound/effects/Glasshit.ogg'
 
 /material/glass/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
 
@@ -554,6 +560,7 @@ var/list/name_to_material
 	weight = 22
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	hitsound = 'sound/weapons/smash.ogg'
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy
@@ -586,6 +593,7 @@ var/list/name_to_material
 	destruction_desc = "splinters"
 	sheet_singular_name = "plank"
 	sheet_plural_name = "planks"
+	hitsound = 'sound/effects/woodhit.ogg'
 
 /material/wood/holographic
 	name = "holowood"
@@ -638,7 +646,7 @@ var/list/name_to_material
 	display_name = "human remains"
 
 /material/cult/reinf/place_dismantled_product(var/turf/target)
-	new /obj/effect/decal/remains/human(target)
+	new /obj/item/remains/human(target)
 
 /material/resin
 	name = "resin"

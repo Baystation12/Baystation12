@@ -17,6 +17,7 @@
 	affect_ingest(M, alien, removed)
 
 /datum/reagent/nutriment/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
 	M.heal_organ_damage(0.5 * removed, 0)
 	M.nutrition += nutriment_factor * removed // For hunger and fatness
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
@@ -27,9 +28,13 @@
 	color = "#440000"
 
 /datum/reagent/nutriment/protein/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien && alien == IS_SKRELL)
-		M.adjustToxLoss(0.5 * removed)
-		return
+	switch(alien)
+		if(IS_SKRELL)
+			M.adjustToxLoss(0.5 * removed)
+			return
+		if(IS_RESOMI)
+			..(M, alien, removed*1.2) // Resomi get a bit more nutrition from meat.
+			return
 	..()
 
 /datum/reagent/nutriment/protein/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)

@@ -285,7 +285,7 @@
 
 /mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message)
 
-	if(!damage)
+	if(!damage || !istype(user))
 		return
 
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")

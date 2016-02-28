@@ -205,6 +205,7 @@
 			if(O && istype(O))
 				O.removed(user)
 			target.op_stage.current_organ = null
+			playsound(target.loc, 'sound/effects/squelch1.ogg', 50, 1)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -283,6 +284,7 @@
 		if(istype(O))
 			user.remove_from_mob(O)
 			O.replaced(target,affected)
+			playsound(target.loc, 'sound/effects/squelch1.ogg', 50, 1)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("<span class='warning'>[user]'s hand slips, damaging \the [tool]!</span>", \

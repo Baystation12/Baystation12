@@ -473,7 +473,10 @@
 			usr << "This can only be done on mobs with clients"
 			return
 
-		nanomanager.send_resources(H.client)
+		nanomanager.close_uis(H)
+		H.client.cache.Cut()
+		var/datum/asset/assets = get_asset_datum(/datum/asset/nanoui)
+		assets.send(H)
 
 		usr << "Resource files sent"
 		H << "Your NanoUI Resource files have been refreshed"

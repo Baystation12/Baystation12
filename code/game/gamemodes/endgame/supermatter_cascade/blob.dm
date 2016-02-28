@@ -61,7 +61,8 @@
 		return
 
 /turf/unsimulated/wall/supermatter/attack_generic(mob/user as mob)
-	return attack_hand(user)
+	if(istype(user))
+		return attack_hand(user)
 
 /turf/unsimulated/wall/supermatter/attack_robot(mob/user as mob)
 	if(Adjacent(user))

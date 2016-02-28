@@ -146,7 +146,7 @@ var/list/ai_verbs_default = list(
 	add_language(LANGUAGE_EAL, 1)
 	add_language(LANGUAGE_SOL_COMMON, 0)
 	add_language(LANGUAGE_UNATHI, 0)
-	add_language(LANGUAGE_SIIK_TAJR, 0)
+	add_language(LANGUAGE_SIIK_MAAS, 0)
 	add_language(LANGUAGE_SKRELLIAN, 0)
 	add_language(LANGUAGE_RESOMI, 0)
 	add_language(LANGUAGE_TRADEBAND, 1)
