@@ -21,7 +21,7 @@
 		. += "[E.stage]: [E.effect.name]"
 	return {"
 		<b>[name()]</b><br><font size=1>
-		[list2text(., "<br>")]</font>
+		[jointext(., "<br>")]</font>
 	"}
 
 /datum/disease2/disease/get_view_variables_options()

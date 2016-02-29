@@ -1,3 +1,5 @@
+#if DM_VERSION < 510
+
 json_token
 	var
 		value
@@ -203,3 +205,5 @@ json_reader
 		die(json_token/T)
 			if(!T) T = get_token()
 			CRASH("Unexpected token: [T.value].")
+
+#endif
