@@ -16,7 +16,7 @@
 		if(0)
 			if(istype(P, /obj/item/weapon/wrench))
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-				if(do_after(user, 20))
+				if(do_after(user, 20, src))
 					user << "<span class='notice'>You wrench the frame into place.</span>"
 					anchored = 1
 					state = 1
@@ -26,15 +26,16 @@
 					user << "The welder must be on for this task."
 					return
 				playsound(loc, 'sound/items/Welder.ogg', 50, 1)
-				if(do_after(user, 20))
+				if(do_after(user, 20, src))
 					if(!src || !WT.remove_fuel(0, user)) return
 					user << "<span class='notice'>You deconstruct the frame.</span>"
 					new /obj/item/stack/material/plasteel( loc, 4)
 					qdel(src)
+					return
 		if(1)
 			if(istype(P, /obj/item/weapon/wrench))
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-				if(do_after(user, 20))
+				if(do_after(user, 20, src))
 					user << "<span class='notice'>You unfasten the frame.</span>"
 					anchored = 0
 					state = 0
@@ -70,7 +71,7 @@
 					return
 				user << "<span class='notice'>You start to add cables to the frame.</span>"
 				playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
-				if (do_after(user, 20) && state == 2)
+				if (do_after(user, 20, src) && state == 2)
 					if (C.use(5))
 						state = 3
 						icon_state = "3"
@@ -95,7 +96,7 @@
 					return
 				user << "<span class='notice'>You start to put in the glass panel.</span>"
 				playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
-				if (do_after(user, 20) && state == 3)
+				if (do_after(user, 20,src) && state == 3)
 					if(RG.use(2))
 						user << "<span class='notice'>You put in the glass panel.</span>"
 						state = 4
@@ -229,7 +230,7 @@
 	else if(istype(W, /obj/item/weapon/wrench))
 		if(anchored)
 			user.visible_message("<span class='notice'>\The [user] starts to unbolt \the [src] from the plating...</span>")
-			if(!do_after(user,40))
+			if(!do_after(user,40,src))
 				user.visible_message("<span class='notice'>\The [user] decides not to unbolt \the [src].</span>")
 				return
 			user.visible_message("<span class='notice'>\The [user] finishes unfastening \the [src]!</span>")
@@ -237,7 +238,7 @@
 			return
 		else
 			user.visible_message("<span class='notice'>\The [user] starts to bolt \the [src] to the plating...</span>")
-			if(!do_after(user,40))
+			if(!do_after(user,40,src))
 				user.visible_message("<span class='notice'>\The [user] decides not to bolt \the [src].</span>")
 				return
 			user.visible_message("<span class='notice'>\The [user] finishes fastening down \the [src]!</span>")

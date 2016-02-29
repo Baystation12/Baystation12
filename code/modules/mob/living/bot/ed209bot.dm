@@ -146,7 +146,7 @@
 					user << "<span class='warning'>You need one coil of wire to wire [src].</span>"
 					return
 				user << "<span class='notice'>You start to wire [src].</span>"
-				if(do_after(user, 40) && build_step == 6)
+				if(do_after(user, 40, src) && build_step == 6)
 					if(C.use(1))
 						build_step++
 						user << "<span class='notice'>You wire the ED-209 assembly.</span>"

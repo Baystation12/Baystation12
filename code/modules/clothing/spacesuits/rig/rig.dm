@@ -190,9 +190,9 @@
 	update_icon(1)
 
 /obj/item/weapon/rig/proc/toggle_seals(var/mob/initiator,var/instant)
-		
+
 	if(sealing) return
-	
+
 	// Seal toggling can be initiated by the suit AI, too
 	if(!wearer)
 		initiator << "<span class='danger'>Cannot toggle suit: The suit is currently not being worn by anyone.</span>"
@@ -217,7 +217,7 @@
 
 		if(!instant)
 			wearer.visible_message("<font color='blue'>[wearer]'s suit emits a quiet hum as it begins to adjust its seals.</font>","<font color='blue'>With a quiet hum, the suit begins running checks and adjusting components.</font>")
-			if(seal_delay && !do_after(wearer,seal_delay))
+			if(seal_delay && !do_after(wearer,seal_delay, src))
 				if(wearer) wearer << "<span class='warning'>You must remain still while the suit is adjusting the components.</span>"
 				failed_to_seal = 1
 
@@ -241,7 +241,7 @@
 
 				if(!failed_to_seal && wearer.back == src && piece == compare_piece)
 
-					if(seal_delay && !instant && !do_after(wearer,seal_delay,needhand=0))
+					if(seal_delay && !instant && !do_after(wearer,seal_delay,src,needhand=0))
 						failed_to_seal = 1
 
 					piece.icon_state = "[initial(icon_state)][!seal_target ? "_sealed" : ""]"
@@ -288,7 +288,7 @@
 	// Success!
 	canremove = seal_target
 	wearer << "<font color='blue'><b>Your entire suit [canremove ? "loosens as the components relax" : "tightens around you as the components lock into place"].</b></font>"
-	
+
 	if(wearer != initiator)
 		initiator << "<font color='blue'>Suit adjustment complete. Suit is now [canremove ? "unsealed" : "sealed"].</font>"
 
@@ -566,7 +566,7 @@
 
 	if(seal_delay > 0 && istype(M) && M.back == src)
 		M.visible_message("<font color='blue'>[M] starts putting on \the [src]...</font>", "<font color='blue'>You start putting on \the [src]...</font>")
-		if(!do_after(M,seal_delay))
+		if(!do_after(M,seal_delay,src))
 			if(M && M.back == src)
 				if(!M.unEquip(src))
 					return

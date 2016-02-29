@@ -155,7 +155,7 @@
 		if(WT.remove_fuel(0,user))
 			user << "<span class='notice'>You start repairing the damage to [src].</span>"
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, max(5, damage / 5)) && WT && WT.isOn())
+			if(do_after(user, max(5, damage / 5), src) && WT && WT.isOn())
 				user << "<span class='notice'>You finish repairing the damage to [src].</span>"
 				take_damage(-damage)
 		else
@@ -199,7 +199,7 @@
 			if(cut_delay<0)
 				cut_delay = 0
 
-			if(!do_after(user,cut_delay))
+			if(!do_after(user,cut_delay,src))
 				return
 
 			user << "<span class='notice'>You remove the outer plating.</span>"
@@ -222,7 +222,7 @@
 				if (istype(W, /obj/item/weapon/screwdriver))
 					user << "<span class='notice'>You begin removing the support lines.</span>"
 					playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
-					if(!do_after(user,40) || !istype(src, /turf/simulated/wall) || construction_stage != 5)
+					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 5)
 						return
 					construction_stage = 4
 					update_icon()
@@ -252,7 +252,7 @@
 				if(cut_cover)
 					user << "<span class='notice'>You begin slicing through the metal cover.</span>"
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
-					if(!do_after(user, 60) || !istype(src, /turf/simulated/wall) || construction_stage != 4)
+					if(!do_after(user, 60, src) || !istype(src, /turf/simulated/wall) || construction_stage != 4)
 						return
 					construction_stage = 3
 					update_icon()
@@ -262,7 +262,7 @@
 				if (istype(W, /obj/item/weapon/crowbar))
 					user << "<span class='notice'>You struggle to pry off the cover.</span>"
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-					if(!do_after(user,100) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
+					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
 						return
 					construction_stage = 2
 					update_icon()
@@ -272,7 +272,7 @@
 				if (istype(W, /obj/item/weapon/wrench))
 					user << "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>"
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
-					if(!do_after(user,40) || !istype(src, /turf/simulated/wall) || construction_stage != 2)
+					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 2)
 						return
 					construction_stage = 1
 					update_icon()
@@ -292,7 +292,7 @@
 				if(cut_cover)
 					user << "<span class='notice'>You begin slicing through the support rods.</span>"
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
-					if(!do_after(user,70) || !istype(src, /turf/simulated/wall) || construction_stage != 1)
+					if(!do_after(user,70,src) || !istype(src, /turf/simulated/wall) || construction_stage != 1)
 						return
 					construction_stage = 0
 					update_icon()

@@ -57,7 +57,7 @@
 		"<span class='warning'>You attempt to remove \the [HC]. (This will take around [displaytime] minutes and you need to stand still)</span>"
 		)
 
-	if(do_after(src, breakouttime))
+	if(do_after(src, breakouttime, progress = 0))
 		if(!handcuffed || buckled)
 			return
 		visible_message(
@@ -91,7 +91,7 @@
 		"<span class='warning'>You attempt to remove \the [HC]. (This will take around [displaytime] minutes and you need to stand still)</span>"
 		)
 
-	if(do_after(src, breakouttime))
+	if(do_after(src, breakouttime, progress = 0))
 		if(!legcuffed || buckled)
 			return
 		visible_message(
@@ -113,7 +113,7 @@
 		"<span class='warning'>You attempt to break your [handcuffed.name]. (This will take around 5 seconds and you need to stand still)</span>"
 		)
 
-	if(do_after(src, 50))
+	if(do_after(src, 50, progress = 0))
 		if(!handcuffed || buckled)
 			return
 
@@ -134,7 +134,7 @@
 	src << "<span class='warning'>You attempt to break your legcuffs. (This will take around 5 seconds and you need to stand still)</span>"
 	visible_message("<span class='danger'>[src] is trying to break the legcuffs!</span>")
 
-	if(do_after(src, 50))
+	if(do_after(src, 50, progress = 0))
 		if(!legcuffed || buckled)
 			return
 
@@ -166,9 +166,9 @@
 			"<span class='warning'>You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)</span>"
 			)
 
-		if(do_after(usr, 1200))
+		if(do_after(usr, 1200, progress = 0))
 			if(!buckled)
 				return
-			visible_message("<span class='danger'>[usr] manages to unbuckle themself!</span>",
+			visible_message("<span class='danger'>\The [usr] manages to unbuckle themself!</span>",
 							"<span class='notice'>You successfully unbuckle yourself.</span>")
 			buckled.user_unbuckle_mob(src)
