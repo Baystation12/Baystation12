@@ -40,7 +40,7 @@
 			if(prob(95)) //5% chance of SHERK
 				spawned_carp.Add(new /mob/living/simple_animal/hostile/carp(spawn_locations[i]))
 			else
-				spawned_carp.Add(new /mob/living/simple_animal/hostile/carp/shark(spawn_locations[i]))
+				spawned_carp.Add(new /mob/living/simple_animal/hostile/carp/pike(spawn_locations[i]))
 		i++
 
 /datum/event/carp_migration/end()
