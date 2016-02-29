@@ -2,6 +2,7 @@
 	var/name = "playing card"
 	var/card_icon = "card_back"
 	var/back_icon = "card_back"
+	var/desc = "regular old playing card."
 
 /obj/item/weapon/deck
 	w_class = 2
@@ -214,7 +215,6 @@
 	if(!discarding || !to_discard[discarding] || !usr || !src) return
 
 	var/datum/playingcard/card = to_discard[discarding]
-	qdel(to_discard)
 
 	var/obj/item/weapon/hand/H = new(src.loc)
 	H.cards += card
@@ -249,8 +249,9 @@
 		name = "hand of cards"
 		desc = "Some playing cards."
 	else
-		name = "a playing card"
-		desc = "A playing card."
+		var/datum/playingcard/P = cards[1]
+		name = "[P.name]"
+		desc = "[P.desc]"
 
 	overlays.Cut()
 
