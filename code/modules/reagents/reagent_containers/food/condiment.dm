@@ -45,7 +45,8 @@
 
 			var/trans = reagents.trans_to_obj(target, amount_per_transfer_from_this)
 			user << "<span class='notice'>You add [trans] units of the condiment to \the [target].</span>"
-		else(..())
+		else
+			..()
 
 	feed_sound(var/mob/user)
 		playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
