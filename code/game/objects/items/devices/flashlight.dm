@@ -172,25 +172,17 @@
 	update_icon()
 
 /obj/item/device/flashlight/flare/attack_self(mob/user)
+	if(turn_on(user))
+		user.visible_message("<span class='notice'>\The [user] activates \the [src].</span>", "<span class='notice'>You pull the cord on the flare, activating it!</span>")
 
-	// Usual checks
-	if(!fuel)
-		user << "<span class='notice'>It's out of fuel.</span>"
-		return
+/obj/item/device/flashlight/flare/proc/turn_on(var/mob/user)
 	if(on)
-		return
-
-	. = ..()
-	// All good, turn it on.
-	if(.)
-		user.visible_message("<span class='notice'>[user] activates the flare.</span>", "<span class='notice'>You pull the cord on the flare, activating it!</span>")
-		src.force = on_damage
-		src.damtype = "fire"
-		processing_objects += src
-		
-/obj/item/device/flashlight/flare/proc/ignite() //Used for flare launchers.
-	on = !on
-	update_icon()
+		return FALSE
+	if(!fuel)
+		if(user)
+			user << "<span class='notice'>It's out of fuel.</span>"
+		return FALSE
+	on = TRUE
 	force = on_damage
 	damtype = "fire"
 	processing_objects += src

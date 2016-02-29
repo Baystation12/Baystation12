@@ -222,7 +222,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/Fire(atom/movable/AM, atom/target)
 	AM.throw_at(target,missile_range, missile_speed, chassis)
-	
+
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flare
 	name = "\improper BNI Flare Launcher"
 	icon_state = "mecha_flaregun"
@@ -235,10 +235,10 @@
 	missile_speed = 1
 	missile_range = 15
 	required_type = /obj/mecha  //Why restrict it to just mining or combat mechs?
-	
+
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flare/Fire(atom/movable/AM, atom/target, turf/aimloc)
 	var/obj/item/device/flashlight/flare/fired = AM
-	fired.ignite()
+	fired.turn_on()
 	..()
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive
