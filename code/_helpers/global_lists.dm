@@ -172,6 +172,13 @@ var/global/list/string_slot_flags = list(
 		var/datum/poster/P = new T
 		poster_designs += P
 
+	//AI displays
+	for(var/ai_icon_type in subtypesof(/datum/ai_icon))
+		var/ai_icon = new ai_icon_type
+		if(!ai_icons)
+			ai_icons = list()
+		dd_insertObjectList(ai_icons, ai_icon)
+
 	return 1
 
 /* // Uncomment to debug chemical reaction list.

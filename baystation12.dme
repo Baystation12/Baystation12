@@ -1897,6 +1897,8 @@
 #include "code\modules\vehicles\cargo_train.dm"
 #include "code\modules\vehicles\train.dm"
 #include "code\modules\vehicles\vehicle.dm"
+#include "code\modules\vip\vip.dm"
+#include "code\modules\vip\vip_hooks.dm"
 #include "code\modules\virus2\admin.dm"
 #include "code\modules\virus2\analyser.dm"
 #include "code\modules\virus2\antibodies.dm"

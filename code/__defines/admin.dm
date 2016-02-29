@@ -1,11 +1,12 @@
 // A set of constants used to determine which type of mute an admin wishes to apply.
 // Please read and understand the muting/automuting stuff before changing these. MUTE_IC_AUTO, etc. = (MUTE_IC << 1)
 // Therefore there needs to be a gap between the flags for the automute flags.
-#define MUTE_IC        0x1
-#define MUTE_OOC       0x2
-#define MUTE_PRAY      0x4
-#define MUTE_ADMINHELP 0x8
-#define MUTE_DEADCHAT  0x10
+#define MUTE_IC        0x0001
+#define MUTE_OOC       0x0002
+#define MUTE_PRAY      0x0004
+#define MUTE_ADMINHELP 0x0008
+#define MUTE_DEADCHAT  0x0010
+#define MUTE_VSAY      0x0020
 #define MUTE_ALL       0xFFFF
 
 // Number of identical messages required to get the spam-prevention auto-mute thing to trigger warnings and automutes.

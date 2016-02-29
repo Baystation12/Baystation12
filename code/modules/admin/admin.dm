@@ -73,6 +73,7 @@ proc/admin_notice(var/message, var/rights)
 		body += {"<br><b>Mute: </b>
 			\[<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_IC]'><font color='[(muted & MUTE_IC)?"red":"blue"]'>IC</font></a> |
 			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_OOC]'><font color='[(muted & MUTE_OOC)?"red":"blue"]'>OOC</font></a> |
+			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_VSAY]'><font color='[(muted & MUTE_VSAY)?"red":"blue"]'>VSAY</font></a> |
 			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_PRAY]'><font color='[(muted & MUTE_PRAY)?"red":"blue"]'>PRAY</font></a> |
 			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_ADMINHELP]'><font color='[(muted & MUTE_ADMINHELP)?"red":"blue"]'>ADMINHELP</font></a> |
 			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_DEADCHAT]'><font color='[(muted & MUTE_DEADCHAT)?"red":"blue"]'>DEADCHAT</font></a>\]
@@ -694,7 +695,6 @@ proc/admin_notice(var/message, var/rights)
 	log_and_message_admins("toggled LOOC.")
 	feedback_add_details("admin_verb","TLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-
 /datum/admins/proc/toggledsay()
 	set category = "Server"
 	set desc="Globally Toggles DSAY"
@@ -711,6 +711,22 @@ proc/admin_notice(var/message, var/rights)
 	log_admin("[key_name(usr)] toggled deadchat.")
 	message_admins("[key_name_admin(usr)] toggled deadchat.", 1)
 	feedback_add_details("admin_verb","TDSAY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
+
+/datum/admins/proc/togglevsay()
+	set category = "Server"
+	set desc="Globally Toggles VSAY"
+	set name="Toggle VSAY"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	config.vsay_allowed = !(config.vsay_allowed)
+	if (config.vsay_allowed)
+		world << "<B>VSAY has been globally enabled!</B>"
+	else
+		world << "<B>VSAY has been globally disabled!</B>"
+	log_and_message_admins("toggled VSAY.")
+	feedback_add_details("admin_verb","TVSAY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
 
 /datum/admins/proc/toggleoocdead()
 	set category = "Server"

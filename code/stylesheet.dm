@@ -36,6 +36,9 @@ em						{font-style: normal;font-weight: bold;}
 .mod_channel .admin		{color: #b82e00;	font-weight: bold;}
 .admin_channel			{color: #9611D4;	font-weight: bold;}
 
+/* VIP: Channels */
+.vip_channel			{color: #D6AD33;	font-weight: bold;}
+
 /* Radio: Misc */
 .deadsay				{color: #530FAD;}
 .radio					{color: #008000;}

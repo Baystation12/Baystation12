@@ -1,6 +1,16 @@
 var/datum/ai_icon/default_ai_icon = new/datum/ai_icon/blue()
 var/list/datum/ai_icon/ai_icons
 
+/proc/ai_icons(mob/user)
+	var/list/icons = list()
+	for(var/datum/ai_icon/AI in ai_icons)
+		if(AI.can_use(user))
+			icons += AI
+	return icons
+
+/datum/ai_icon/dd_SortValue()
+	return name
+
 /datum/ai_icon
 	var/name
 	var/alive_icon
@@ -9,20 +19,12 @@ var/list/datum/ai_icon/ai_icons
 	var/nopower_light = "#FFFFFF"
 	var/dead_icon = "ai-crash"
 	var/dead_light = "#000099"
+	var/vip_only = FALSE
 
-/datum/ai_icon/New(var/name, var/alive_icon, var/nopower_icon, var/dead_icon, var/alive_light, var/nopower_light, var/dead_light)
-	if(name)
-		src.name = name
-		src.alive_icon = alive_icon
-		src.nopower_icon = nopower_icon
-		src.dead_icon = dead_icon
-		src.alive_light = alive_light
-		src.nopower_light = nopower_light
-		src.dead_light = dead_light
-	if(!ai_icons)
-		ai_icons = list()
-		init_subtypes(/datum/ai_icon, ai_icons)
-	..()
+/datum/ai_icon/proc/can_use(mob/user)
+	if(vip_only && !is_vip(user.client))
+		return FALSE
+	return TRUE
 
 /datum/ai_icon/red
 	name = "Red"
@@ -144,7 +146,7 @@ var/list/datum/ai_icon/ai_icons
 	name = "Trapped"
 	alive_icon = "ai-hades"
 
-/datum/ai_icon/triumvirate_static
+/datum/ai_icon/triumvirate
 	name = "Triumvirate"
 	alive_icon = "ai-triumvirate"
 	alive_light = "#020B2B"
@@ -153,3 +155,9 @@ var/list/datum/ai_icon/ai_icons
 	name = "Triumvirate Static"
 	alive_icon = "ai-static"
 	alive_light = "#020B2B"
+
+/datum/ai_icon/rainbow2
+	name = "Rainbow 2"
+	alive_icon = "ai-clown2"
+	alive_light = "#E50213"
+	vip_only = TRUE

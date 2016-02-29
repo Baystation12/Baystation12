@@ -24,6 +24,7 @@ var/list/gamemode_cache = list()
 	var/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
 	var/log_runtime = 0					// logs world.log to a file
 	var/log_world_output = 0			// log world.log << messages
+	var/log_vsay = 0					// log VIP channel
 	var/sql_enabled = 1					// for sql switching
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
@@ -208,6 +209,7 @@ var/list/gamemode_cache = list()
 	var/looc_allowed = 1
 	var/dooc_allowed = 1
 	var/dsay_allowed = 1
+	var/vsay_allowed = FALSE
 
 	var/starlight = 0	// Whether space turfs have ambient light or not
 
@@ -341,6 +343,9 @@ var/list/gamemode_cache = list()
 				if ("log_runtime")
 					config.log_runtime = 1
 
+				if ("log_vsay")
+					config.log_vsay = TRUE
+
 				if ("generate_asteroid")
 					config.generate_asteroid = 1
 
@@ -449,6 +454,9 @@ var/list/gamemode_cache = list()
 
 				if ("disable_dsay")
 					config.dsay_allowed = 0
+
+				if ("enable_vsay")
+					config.vsay_allowed = TRUE
 
 				if ("disable_respawn")
 					config.abandon_allowed = 0

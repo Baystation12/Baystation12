@@ -15,27 +15,8 @@
 	msg = sanitize(msg)
 	if(!msg)	return
 
-	if(!(prefs.toggles & CHAT_OOC))
-		src << "<span class='warning'>You have OOC muted.</span>"
+	if(!may_ooc_checks(msg, config.ooc_allowed, CHAT_OOC, MUTE_OOC))
 		return
-
-	if(!holder)
-		if(!config.ooc_allowed)
-			src << "<span class='danger'>OOC is globally muted.</span>"
-			return
-		if(!config.dooc_allowed && (mob.stat == DEAD))
-			usr << "<span class='danger'>OOC for dead mobs has been turned off.</span>"
-			return
-		if(prefs.muted & MUTE_OOC)
-			src << "<span class='danger'>You cannot use OOC (muted).</span>"
-			return
-		if(handle_spam_prevention(msg,MUTE_OOC))
-			return
-		if(findtext(msg, "byond://"))
-			src << "<B>Advertising other servers is not allowed.</B>"
-			log_admin("[key_name(src)] has attempted to advertise in OOC: [msg]")
-			message_admins("[key_name_admin(src)] has attempted to advertise in OOC: [msg]")
-			return
 
 	log_ooc("[mob.name]/[key] : [msg]")
 
@@ -83,27 +64,8 @@
 	if(!msg)
 		return
 
-	if(!(prefs.toggles & CHAT_LOOC))
-		src << "<span class='danger'>You have LOOC muted.</span>"
+	if(!may_ooc_checks(msg, config.looc_allowed, CHAT_LOOC, MUTE_OOC))
 		return
-
-	if(!holder)
-		if(!config.looc_allowed)
-			src << "<span class='danger'>LOOC is globally muted.</span>"
-			return
-		if(!config.dooc_allowed && (mob.stat == DEAD))
-			usr << "<span class='danger'>OOC for dead mobs has been turned off.</span>"
-			return
-		if(prefs.muted & MUTE_OOC)
-			src << "<span class='danger'>You cannot use OOC (muted).</span>"
-			return
-		if(handle_spam_prevention(msg, MUTE_OOC))
-			return
-		if(findtext(msg, "byond://"))
-			src << "<B>Advertising other servers is not allowed.</B>"
-			log_admin("[key_name(src)] has attempted to advertise in OOC: [msg]")
-			message_admins("[key_name_admin(src)] has attempted to advertise in OOC: [msg]")
-			return
 
 	log_ooc("(LOCAL) [mob.name]/[key] : [msg]")
 
@@ -148,11 +110,11 @@
 					eye_heard |= M.client
 					listening |= M.client
 					continue
-				
+
 			if(M.loc && M.locs[1] in hearturfs)
 				listening |= M.client
 
-	
+
 	for(var/client/t in listening)
 		var/admin_stuff = ""
 		var/prefix = ""
@@ -182,3 +144,27 @@
 	if(eyeobj)
 		return eyeobj
 	return src
+
+/client/proc/may_ooc_checks(var/msg, var/ooc_config, var/ooc_toogle_flag, var/ooc_mute_flag, var/check_death = 1)
+	if(holder)
+		return TRUE
+
+	if(!ooc_config)
+		src << "<span class='danger'>This OOC channel is globally muted.</span>"
+		return
+	if(!(prefs.toggles & ooc_toogle_flag))
+		src << "<span class='danger'>You have muted this OOC channel.</span>"
+		return
+	if(prefs.muted & ooc_mute_flag)
+		src << "<span class='danger'>You cannot use OOC (muted).</span>"
+		return FALSE
+	if(handle_spam_prevention(msg, ooc_mute_flag))
+		return FALSE
+	if(check_death && !config.dooc_allowed && (mob.stat == DEAD))
+		usr << "<span class='danger'>OOC for dead mobs has been turned off.</span>"
+		return
+	if(findtext(msg, "byond://"))
+		src << "<B>Advertising other servers is not allowed.</B>"
+		log_and_message_admins("has attempted to advertise in OOC: [msg]")
+		return FALSE
+	return TRUE
