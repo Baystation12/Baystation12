@@ -81,7 +81,7 @@
 		//This is much faster.
 		var/list/listening = list()
 		var/list/listening_obj = list()
-		var/turf/T = get_turf(H)		
+		var/turf/T = get_turf(H)
 
 		if(T)
 			var/list/hear = hear(7, T)
@@ -101,10 +101,10 @@
 
 
 			for(var/mob/M in player_list)
-				if(M.stat == DEAD && M.client && (M.client.prefs.toggles & CHAT_GHOSTEARS))
+				if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
 					M.hear_say(message,verb,speaking,null,null, src)
 					continue
-				if(M.loc && M.locs[1] in hearturfs)
+				if(M.loc && (M.locs[1] in hearturfs))
 					M.hear_say(message,verb,speaking,null,null, src)
 
 
