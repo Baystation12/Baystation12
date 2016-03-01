@@ -31,16 +31,16 @@
 		There are no connected devices!
 	{{/for}}
 {{else data.state == "LOGS"}}
+	<br>
 	{{for data.logs}}
 		<b>{{:value}}</b><br>
 	{{/for}}
-{{else data.state == "DIAGRAM"}}
-	todo
 {{else data.state == "ADMIN"}}
+	<br>
 	<div style='itemLabelWide'>
 		{{:helper.link('Password', 'gear', { 'password' : 1})}}</div>
 	<div style='itemContentWide'>
-		{{:data.password}}</div>
+		{{:data.password}}</div><br>
 	<div style='itemLabel'>
 		{{:helper.link('Advanced Settings', 'gear', { 'advsettings' : 1})}}</div>
 		

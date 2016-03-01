@@ -169,6 +169,10 @@ var/const/WIRE_ASSEMBLY_PASSWORD = 16384 // All assemblies have these
 			return 0
 		var/P = rand(0,100)
 		var/prob_text = ""
+		if(holder)
+			var/obj/item/device/assembly/ass = holder
+			if(ass.holder && ass.holder.advanced_settings["wiredetector"]==1)
+				P = 100
 		switch(P)
 			if(0 to 10)
 				prob_text = "randomly guess that"
@@ -188,7 +192,7 @@ var/const/WIRE_ASSEMBLY_PASSWORD = 16384 // All assemblies have these
 				prob_text = "are certain that"
 		var/list/random_lights = list()
 		var/obj/item/device/assembly/A = holder
-		if(A.wires & (WIRE_DIRECT_RECEIVE|WIRE_DIRECT_SEND))
+		if(A.wires & (WIRE_DIRECT_RECEIVE|WIRE_DIRECT_SEND)) // Is there a better way to do this?
 			random_lights += "Dark Red"
 		if(A.wires & (WIRE_RADIO_RECEIVE|WIRE_RADIO_SEND))
 			random_lights += "Dark Blue"
@@ -213,10 +217,6 @@ var/const/WIRE_ASSEMBLY_PASSWORD = 16384 // All assemblies have these
 		var/index = GetIndex(colour)
 		if(A.IndexHasSafety(index))
 			L << "<span class='notice'>You find a safety device on \the [colour] wire!</span>"
-		if(holder)
-			var/obj/item/device/assembly/ass = holder
-			if(ass.holder && ass.holder.advanced_settings["wiredetector"]==1)
-				P = 100
 		if(prob(P))
 			switch(index)
 				if(WIRE_DIRECT_RECEIVE,WIRE_DIRECT_SEND)
