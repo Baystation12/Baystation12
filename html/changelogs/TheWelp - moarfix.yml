@@ -1,5 +1,0 @@
-author: TheWelp
-delete-after: True
-changes: 
-  - bugfix: "Board game now properly takes things out of your hand again."
-  - rscadd: "Individual cards now set their name and description so they are no longer just a playing card."
