@@ -50,7 +50,7 @@
 		. += "</tr>"
 
 	. += "</table>"
-	return list2text(.)
+	return jointext(., null)
 
 /datum/category_item/player_setup_item/player_global/settings/OnTopic(var/href,var/list/href_list, var/mob/user)
 	var/mob/pref_mob = preference_mob()
