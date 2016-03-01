@@ -33,11 +33,11 @@
 	if (user.client != client)
 		if (client)
 			client.images -= bar
-		if (user.client)
-			user.client.images += bar
+			shown = 0
+		client = user.client
 
 	progress = Clamp(progress, 0, goal)
 	bar.icon_state = "prog_bar_[round(((progress / goal) * 100), 5)]"
-	if (!shown)
+	if (!shown && user.is_preference_enabled(/datum/client_preference/show_progress_bar))
 		user.client.images += bar
 		shown = 1

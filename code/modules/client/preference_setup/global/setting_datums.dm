@@ -119,6 +119,12 @@ var/list/_client_preferences_by_type
 	enabled_description = "Show"
 	disabled_description = "Hide"
 
+/datum/client_preference/show_progress_bar
+	description ="Progress Bar"
+	key = "SHOW_PROGRESS"
+	enabled_description = "Show"
+	disabled_description = "Hide"
+
 /********************
 * Admin Preferences *
 ********************/
