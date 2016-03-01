@@ -42,7 +42,7 @@
 	school = "racial"
 	spell_flags = Z2NOCAST
 	invocation_type = SpI_EMOTE
-	invocation = "spasms a moment as nanomachines come out of a port on his back!"
+	invocation = "spasms a moment as nanomachines come out of a port on their back!"
 
 	level_max = list(Sp_TOTAL = 0, Sp_SPEED = 0, Sp_POWER = 0)
 
@@ -142,7 +142,7 @@
 //UNATHI
 /spell/moghes_blessing
 	name = "Moghes Blessing"
-	desc = "Imbue your weapon with memories of Moghe"
+	desc = "Imbue your weapon with memories of Moghes"
 
 	school = "racial"
 	spell_flags = 0
