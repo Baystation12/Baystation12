@@ -117,7 +117,7 @@
 		if(findtext(text, "[M]"))
 			found = 1
 		else
-			var/list/parsed_name = text2list(replace_characters(lowertext(html_decode("[M]")),list("-"=" ", "."=" ", "," = " ", "'" = " ")), " ") //this big MESS is basically 'turn this into words, no punctuation, lowercase so we can check first name/last name/etc'
+			var/list/parsed_name = splittext(replace_characters(lowertext(html_decode("[M]")),list("-"=" ", "."=" ", "," = " ", "'" = " ")), " ") //this big MESS is basically 'turn this into words, no punctuation, lowercase so we can check first name/last name/etc'
 			for(var/a in parsed_name)
 				if(a == "the" || length(a) < 2) //get rid of shit words.
 					continue
