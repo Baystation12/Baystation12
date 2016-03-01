@@ -100,7 +100,7 @@
 	wires = new(src)
 	spawn(4)
 		if(src.product_slogans)
-			src.slogan_list += text2list(src.product_slogans, ";")
+			src.slogan_list += splittext(src.product_slogans, ";")
 
 			// So not all machines speak at the exact same time.
 			// The first time this machine says something will be at slogantime + this random value,
@@ -108,7 +108,7 @@
 			src.last_slogan = world.time + rand(0, slogan_delay)
 
 		if(src.product_ads)
-			src.ads_list += text2list(src.product_ads, ";")
+			src.ads_list += splittext(src.product_ads, ";")
 
 		src.build_inventory()
 		power_change()
@@ -231,7 +231,7 @@
 		else
 			user.visible_message("[user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
 
-		if(do_after(user, 20))
+		if(do_after(user, 20, src))
 			if(!src) return
 			user << "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>"
 			anchored = !anchored

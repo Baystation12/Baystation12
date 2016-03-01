@@ -119,9 +119,9 @@
 			usr << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"
 			return
 		usr << "<span class='notice'>You begin repairing [src]...</span>"
-		if(do_after(usr, 30))
+		if(do_after(usr, 30, src))
 			if(P.use(amt))
-				usr << "<span class='notice'>You have repaired \The [src]</span>"
+				usr << "<span class='notice'>You have repaired \the [src]</span>"
 				src.repair()
 			else
 				usr << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"

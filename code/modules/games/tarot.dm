@@ -15,6 +15,7 @@
 		P.name = "[name]"
 		P.card_icon = "tarot_major"
 		P.back_icon = "card_back_tarot"
+		P.desc = "Some sort of major tarot card."
 		cards += P
 	for(var/suit in list("wands","pentacles","cups","swords"))
 
@@ -24,6 +25,7 @@
 			P.name = "[number] of [suit]"
 			P.card_icon = "tarot_[suit]"
 			P.back_icon = "card_back_tarot"
+			P.desc = "A Rider-Waite tarot card."
 			cards += P
 
 /obj/item/weapon/deck/tarot/attack_self(var/mob/user as mob)

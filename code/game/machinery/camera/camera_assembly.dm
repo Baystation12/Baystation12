@@ -85,7 +85,7 @@
 					usr << "No input found please hang up and try your call again."
 					return
 
-				var/list/tempnetwork = text2list(input, ",")
+				var/list/tempnetwork = splittext(input, ",")
 				if(tempnetwork.len < 1)
 					usr << "No network found please hang up and try your call again."
 					return
@@ -160,11 +160,11 @@
 	if(!WT.isOn())
 		return 0
 
-	user << "<span class='notice'>You start to weld the [src]..</span>"
+	user << "<span class='notice'>You start to weld \the [src]..</span>"
 	playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 	WT.eyecheck(user)
 	busy = 1
-	if(do_after(user, 20))
+	if(do_after(user, 20, src))
 		busy = 0
 		if(!WT.isOn())
 			return 0

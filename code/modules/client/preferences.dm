@@ -19,7 +19,6 @@ datum/preferences
 	var/ooccolor = "#010000"			//Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
 	var/list/be_special_role = list()		//Special role selection
 	var/UI_style = "Midnight"
-	var/toggles = TOGGLES_DEFAULT
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
 
@@ -205,7 +204,7 @@ datum/preferences
 	dat += player_setup.content(user)
 
 	dat += "</html></body>"
-	user << browse(dat, "window=preferences;size=625x736")
+	user << browse(dat, "window=preferences;size=635x736")
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
 	if(!user)	return

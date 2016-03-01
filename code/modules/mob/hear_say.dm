@@ -4,7 +4,7 @@
 	if(!client)
 		return
 
-	if(speaker && !speaker.client && istype(src,/mob/dead/observer) && client.prefs.toggles & CHAT_GHOSTEARS && !speaker in view(src))
+	if(speaker && !speaker.client && istype(src,/mob/dead/observer) && is_preference_enabled(/datum/client_preference/ghost_ears) && !(speaker in view(src)))
 			//Does the speaker have a client?  It's either random stuff that observers won't care about (Experiment 97B says, 'EHEHEHEHEHEHEHE')
 			//Or someone snoring.  So we make it where they won't hear it.
 		return
@@ -51,12 +51,12 @@
 
 	var/track = null
 	if(istype(src, /mob/dead/observer))
-		if(italics && client.prefs.toggles & CHAT_GHOSTRADIO)
+		if(italics && is_preference_enabled(/datum/client_preference/ghost_radio))
 			return
 		if(speaker_name != speaker.real_name && speaker.real_name)
 			speaker_name = "[speaker.real_name] ([speaker_name])"
 		track = "([ghost_follow_link(speaker, src)]) "
-		if(client.prefs.toggles & CHAT_GHOSTEARS && speaker in view(src))
+		if(is_preference_enabled(/datum/client_preference/ghost_ears) && (speaker in view(src)))
 			message = "<b>[message]</b>"
 
 	if(sdisabilities & DEAF || ear_deaf)
@@ -230,7 +230,7 @@
 	var/heard = ""
 	if(prob(15))
 		var/list/punctuation = list(",", "!", ".", ";", "?")
-		var/list/messages = text2list(message, " ")
+		var/list/messages = splittext(message, " ")
 		var/R = rand(1, messages.len)
 		var/heardword = messages[R]
 		if(copytext(heardword,1, 1) in punctuation)

@@ -1,3 +1,5 @@
+#if DM_VERSION < 510
+
 json_writer
 	var
 		use_cache = 0
@@ -48,7 +50,7 @@ json_writer
 					var/lrep = length(json_escape[targ])
 					txt = copytext(txt, 1, i) + json_escape[targ] + copytext(txt, i + length(targ))
 					start = i + lrep
-					
+
 			return {""[txt]""}
 
 		is_associative(list/L)
@@ -56,3 +58,5 @@ json_writer
 				// if the key is a list that means it's actually an array of lists (stupid Byond...)
 				if(!isnum(key) && !isnull(L[key]) && !istype(key, /list))
 					return TRUE
+
+#endif
