@@ -123,7 +123,7 @@
 		user.setClickCooldown(10)
 		user << "<span class='notice'>You begin [unlocked ? "enabling" : "disabling"] \the [src]'s maglock.</span>"
 
-		if(!do_after(user, 20))
+		if(!do_after(user, 20,src))
 			return
 
 		if(shattered) return

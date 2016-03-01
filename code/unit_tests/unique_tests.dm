@@ -1,5 +1,5 @@
 datum/unit_test/research_designs_shall_be_unique
-	name = "RESEARCH: Designs Shall Be Unique"
+	name = "UNIQUENESS: Research Designs Shall Be Unique"
 
 datum/unit_test/research_designs_shall_be_unique/start_test()
 	var/list/ids = list()
@@ -23,7 +23,25 @@ datum/unit_test/research_designs_shall_be_unique/start_test()
 
 	return 1
 
-datum/unit_test/research_designs_shall_be_unique/proc/group_by(var/list/entries, var/datum/design/entry, var/value)
+datum/unit_test/player_preferences_shall_have_unique_key
+	name = "UNIQUENESS: Player Preferences Shall Be Unique"
+
+datum/unit_test/player_preferences_shall_have_unique_key/start_test()
+	var/list/preference_keys = list()
+
+	for(var/cp in get_client_preferences())
+		var/datum/client_preference/client_pref = cp
+		group_by(preference_keys, client_pref, client_pref.key)
+
+	var/number_of_issues = number_of_issues(preference_keys, "Keys")
+	if(number_of_issues)
+		fail("[number_of_issues] issues with player preferences found.")
+	else
+		pass("All player preferences have unique keys.")
+	return 1
+
+
+datum/unit_test/proc/group_by(var/list/entries, var/datum/design/entry, var/value)
 	var/designs = entries[value]
 	if(!designs)
 		designs = list()
@@ -31,7 +49,7 @@ datum/unit_test/research_designs_shall_be_unique/proc/group_by(var/list/entries,
 
 	designs += entry
 
-datum/unit_test/research_designs_shall_be_unique/proc/number_of_issues(var/list/entries, var/type)
+datum/unit_test/proc/number_of_issues(var/list/entries, var/type)
 	var/issues = 0
 	for(var/value in entries)
 		var/list/list_of_designs = entries[value]

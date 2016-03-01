@@ -32,7 +32,7 @@ var/list/floor_light_cache = list()
 			user << "<span class='warning'>\The [src] must be on to complete this task.</span>"
 			return
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(!do_after(user, 20))
+		if(!do_after(user, 20, src))
 			return
 		if(!src || !WT.isOn())
 			return

@@ -147,7 +147,7 @@
 	busy = 1
 	use_power(max(1000, (SHEET_MATERIAL_AMOUNT * amount / 10)))
 	if(t)
-		if(do_after(user, 16))
+		if(do_after(user, 16,src))
 			if(stack.use(amount))
 				user << "<span class='notice'>You add [amount] sheet\s to \the [src].</span>"
 				materials[t] += amount * SHEET_MATERIAL_AMOUNT

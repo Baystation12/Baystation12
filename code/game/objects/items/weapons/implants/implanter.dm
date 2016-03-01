@@ -31,12 +31,12 @@
 		return
 	if (user && src.imp)
 		M.visible_message("<span class='warning'>[user] is attemping to implant [M].</span>")
-		
+
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		user.do_attack_animation(M)
 
 		var/turf/T1 = get_turf(M)
-		if (T1 && ((M == user) || do_after(user, 50)))
+		if (T1 && ((M == user) || do_after(user, 50, M)))
 			if(user && M && (get_turf(M) == T1) && src && src.imp)
 				M.visible_message("<span class='warning'>[M] has been implanted by [user].</span>")
 

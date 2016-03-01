@@ -907,7 +907,7 @@
 				src << "<span class='warning'>[species.halloss_message_self]</span>"
 				src.visible_message("<B>[src]</B> [species.halloss_message].")
 				Paralyse(10)
-				setHalLoss(99)
+				setHalLoss(species.total_health-1)
 
 		if(paralysis || sleeping)
 			blinded = 1

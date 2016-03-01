@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - tweak: "Player preferences has been overhauled. Please update your preferences, found at \"Character Setup\" > \"Global\" > \"Preferences\", as they have been reset."
