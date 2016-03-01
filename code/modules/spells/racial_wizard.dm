@@ -10,7 +10,7 @@
 	throw_range = 3
 	force = 15
 	var/list/potentials = list("Resomi" = /spell/aoe_turf/conjure/summon/resomi, "Human" = /obj/item/weapon/storage/bag/cash/infinite, "Vox" = /spell/targeted/shapeshift/true_form,
-		"Tajara" = /spell/messa_shroud, "Unathi" = /spell/moghes_blessing, "Diona" = /spell/aoe_turf/conjure/grove/gestalt)
+		"Tajara" = /spell/messa_shroud, "Unathi" = /spell/moghes_blessing, "Diona" = /spell/aoe_turf/conjure/grove/gestalt, "Skrell" = /obj/item/weapon/contract/apprentice/skrell)
 
 /obj/item/weapon/magic_rock/attack_self(mob/user)
 	if(!istype(user,/mob/living/carbon/human))
@@ -187,3 +187,37 @@
 	seed_type = /datum/seed/diona
 
 	hud_state = "wiz_diona"
+
+//SKRELL
+/obj/item/weapon/contract/apprentice/skrell
+	name = "skrellian apprenticeship contract"
+	var/obj/item/weapon/spellbook/linked
+	color = "#3366ff"
+
+/obj/item/weapon/contract/apprentice/skrell/New(var/newloc,var/spellbook, var/owner)
+	..()
+	if(istype(spellbook,/obj/item/weapon/spellbook))
+		linked = spellbook
+	if(istype(owner,/mob))
+		contract_master = owner
+
+/obj/item/weapon/contract/apprentice/skrell/attack_self(mob/user as mob)
+	if(!linked)
+		user << "<span class='warning'>This contract requires a link to a spellbook.</span>"
+		return
+	..()
+
+/obj/item/weapon/contract/apprentice/skrell/afterattack(atom/A, mob/user as mob, proximity)
+	if(!linked && istype(A,/obj/item/weapon/spellbook))
+		linked = A
+		user << "<span class='notice'>You've linked \the [A] to \the [src]</span>"
+		return
+	..()
+
+/obj/item/weapon/contract/apprentice/skrell/contract_effect(mob/user as mob)
+	. = ..()
+	if(.)
+		linked.uses += 0.5
+		var/obj/item/I = new /obj/item/weapon/contract/apprentice/skrell(get_turf(src),linked,contract_master)
+		user.put_in_hands(I)
+		new /obj/item/weapon/contract/apprentice/skrell(get_turf(src),linked,contract_master)

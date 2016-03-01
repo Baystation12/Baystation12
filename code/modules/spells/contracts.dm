@@ -5,6 +5,7 @@
 	icon_state = "master_open"
 
 	var/contract_master = null
+	var/list/contract_spells = list(/spell/contract/reward,/spell/contract/punish,/spell/contract/return_master)
 
 /obj/item/weapon/contract/attack_self(mob/user as mob)
 	if(contract_master == null)
@@ -21,14 +22,13 @@
 	if(ans == "Yes")
 		user.visible_message("\The [user] signs the contract, their body glowing a deep yellow.")
 		if(!src.contract_effect(user))
-			user.visible_message("\The [src] visibly rejects \the [user]. Erasing their signature from the line.")
+			user.visible_message("\The [src] visibly rejects \the [user], erasing their signature from the line.")
 			return
 		user.visible_message("\The [src] disappears with a flash of light.")
-		if(istype(contract_master,/mob/living)) //if it aint text its probably a mob or another user
+		if(contract_spells.len && istype(contract_master,/mob/living)) //if it aint text its probably a mob or another user
 			var/mob/living/M = contract_master
-			M.add_spell(new /spell/contract/reward(user), "const_spell_ready")
-			M.add_spell(new /spell/contract/punish(user), "const_spell_ready")
-			M.add_spell(new /spell/contract/return_master(user), "const_spell_ready")
+			for(var/spell_type in contract_spells)
+				M.add_spell(new spell_type(user), "const_spell_ready")
 		log_and_message_admins("signed their soul over to \the [contract_master] using \the [src].", user)
 		user.drop_from_inventory(src)
 		qdel(src)
@@ -42,6 +42,9 @@
 	color = "#993300"
 
 /obj/item/weapon/contract/apprentice/contract_effect(mob/user as mob)
+	if(user.mind.special_role == "apprentice")
+		user << "<span class='warning'>You are already a wizarding apprentice!</span>"
+		return 0
 	if(wizards.add_antagonist_mind(user.mind,1,"apprentice","<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))
 		user << "<span class='notice'>With the signing of this paper you agree to become \the [contract_master]'s apprentice in the art of wizardry.</span>"
 		return 1

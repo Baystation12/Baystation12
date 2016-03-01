@@ -1,4 +1,3 @@
-#define DESTROY_AFTER_USE 	1
 #define LOCKED 				2
 #define CAN_MAKE_CONTRACTS	4
 
@@ -65,6 +64,9 @@
 	if(!istype(H))
 		return
 
+	if(H.mind && spells.book_flags & LOCKED && H.mind.special_role == "apprentice") //make sure no scrubs get behind the lock
+		return
+
 	if(!H.contents.Find(src))
 		H << browse(null,"window=spellbook")
 		return
@@ -107,11 +109,6 @@
 					spells.max_uses -= spells.spells[path]
 					//finally give it a bit of an oomf
 					playsound(get_turf(usr),'sound/effects/phasein.ogg',50,1)
-				if(uses == 0 && spells.book_flags & DESTROY_AFTER_USE)
-					usr << "<span class='warning'>\The [src] fades away!</span>"
-					H << browse(null,"window=spellbook")
-					H.drop_from_inventory(src)
-					qdel(src)
 	if(href_list["reset"])
 		var/area/wizard_station/A = locate()
 		if(usr in A.contents)
@@ -151,7 +148,7 @@
 /datum/spellbook
 	var/name = "\improper Book of Tomes"
 	var/desc = "The legendary book of spells of the wizard."
-	var/book_flags = 1
+	var/book_flags = 0
 	var/max_uses = 1
 	var/title = "Book of Tomes"
 	var/title_desc = "This tome marks down all the available tomes for use. Choose wisely, there are no refunds."
