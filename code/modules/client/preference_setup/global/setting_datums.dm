@@ -159,9 +159,3 @@ var/list/_client_preferences_by_type
 	key = "SOUND_ADMINHELP"
 	enabled_description = "Hear"
 	disabled_description = "Silent"
-
-/datum/client_preference/holder/hear_radio
-	description = "Radio chatter"
-	key = "CHAT_RADIO"
-	enabled_description = "Show"
-	disabled_description = "Hide"

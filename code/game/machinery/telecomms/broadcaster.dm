@@ -286,10 +286,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	for (var/mob/R in receive)
 
 	  /* --- Loop through the receivers and categorize them --- */
-
-		if (!R.is_preference_enabled(/datum/client_preference/holder/hear_radio))
-			continue
-
 		if(istype(R, /mob/new_player)) // we don't want new players to hear messages. rare but generates runtimes.
 			continue
 
@@ -489,10 +485,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	for (var/mob/R in receive)
 
 	  /* --- Loop through the receivers and categorize them --- */
-
-		if(!R.is_preference_enabled(/datum/client_preference/holder/hear_radio)) //Adminning with 80 people on can be fun when you're trying to talk and all you can hear is radios.
-			continue
-
 		// --- Check for compression ---
 		if(compression > 0)
 
