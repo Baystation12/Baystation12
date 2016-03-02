@@ -1336,9 +1336,6 @@
 
 	if (BITTEST(hud_updateflag, STATUS_HUD))
 		var/foundVirus = 0
-		for(var/datum/disease/D in viruses)
-			if(!D.hidden[SCANNER])
-				foundVirus++
 		for (var/ID in virus2)
 			if (ID in virusDB)
 				foundVirus = 1

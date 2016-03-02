@@ -13,8 +13,6 @@
 		client.screen = list()
 	if(mind && mind.current == src)
 		spellremove(src)
-	for(var/infection in viruses)
-		qdel(infection)
 	ghostize()
 	..()
 

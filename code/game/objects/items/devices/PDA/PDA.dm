@@ -1240,10 +1240,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					else
 						user.show_message("<span class='notice'>    Limbs are OK.</span>",1)
 
-				for(var/datum/disease/D in C.viruses)
-					if(!D.hidden[SCANNER])
-						user.show_message("<span class='warning'><b>Warning: [D.form] Detected</b>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]</span>")
-
 			if(2)
 				if (!istype(C:dna, /datum/dna))
 					user << "<span class='notice'>No fingerprints found on [C]</span>"
