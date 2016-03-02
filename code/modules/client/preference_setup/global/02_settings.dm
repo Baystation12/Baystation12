@@ -8,17 +8,17 @@
 /datum/category_item/player_setup_item/player_global/settings/load_preferences(var/savefile/S)
 	S["lastchangelog"]	>> pref.lastchangelog
 	S["default_slot"]	>> pref.default_slot
-	S["preferences"]		>> pref.preferences
+	S["preferences"]	>> pref.preferences
 
 /datum/category_item/player_setup_item/player_global/settings/save_preferences(var/savefile/S)
 	S["lastchangelog"]	<< pref.lastchangelog
 	S["default_slot"]	<< pref.default_slot
-	S["preferences"]		<< pref.preferences
+	S["preferences"]	<< pref.preferences
 
 /datum/category_item/player_setup_item/player_global/settings/sanitize_preferences()
+	var/mob/pref_mob = preference_mob()
 	if(!istype(pref.preferences, /list))
 		pref.preferences = list()
-		var/mob/pref_mob = preference_mob()
 		for(var/cp in get_client_preferences())
 			var/datum/client_preference/client_pref = cp
 			if(!client_pref.enabled_by_default || !client_pref.may_toggle(pref_mob))
@@ -26,7 +26,8 @@
 			pref.preferences += client_pref.key
 
 	for(var/preference in pref.preferences)
-		if(!get_client_preference_by_key(preference))
+		var/datum/client_preference/client_pref = get_client_preference_by_key(preference)
+		if(!client_pref || !client_pref.may_toggle(pref_mob))
 			pref.preferences -= preference
 
 	pref.lastchangelog	= sanitize_text(pref.lastchangelog, initial(pref.lastchangelog))
