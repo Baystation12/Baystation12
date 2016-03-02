@@ -331,7 +331,7 @@
 	icon_state ="bookblind"
 	desc = "This book looks blurry, no matter how you look at it."
 
-/obj/item/weapon/spellbook/oneuse/blind/recoil(mob/user as mob)
+/obj/item/weapon/spellbook/oneuse/blind/recoil(mob/living/user as mob)
 	..()
 	user <<"<span class='warning'>You go blind!</span>"
 	user.eye_blind = 10

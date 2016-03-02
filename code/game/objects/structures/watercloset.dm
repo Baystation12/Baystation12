@@ -390,7 +390,7 @@
 		V.show_message("<span class='notice'>[user] washes their hands using \the [src].</span>")
 
 
-/obj/structure/sink/attackby(obj/item/O as obj, mob/user as mob)
+/obj/structure/sink/attackby(obj/item/O as obj, mob/living/user as mob)
 	if(busy)
 		user << "<span class='warning'>Someone's already washing here.</span>"
 		return

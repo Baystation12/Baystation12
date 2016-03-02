@@ -64,14 +64,14 @@
 				M << "<span class='notice'>You take a bite of [src].</span>"
 			if (fullness > 350 && fullness <= 550)
 				M << "<span class='notice'>You unwillingly chew a bit of [src].</span>"
-			if (fullness > (550 * (1 + M.overeatduration / 2000)))	// The more you eat - the more you can eat
+			if (fullness > 550)
 				M << "<span class='danger'>You cannot force any more of [src] to go down your throat.</span>"
 				return 0
 		else
 			if(!M.can_force_feed(user, src))
 				return
 
-			if (fullness <= (550 * (1 + M.overeatduration / 1000)))
+			if (fullness <= 550)
 				user.visible_message("<span class='danger'>[user] attempts to feed [M] [src].</span>")
 			else
 				user.visible_message("<span class='danger'>[user] cannot force anymore of [src] down [M]'s throat.</span>")

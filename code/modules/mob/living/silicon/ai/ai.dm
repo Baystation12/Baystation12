@@ -121,8 +121,6 @@ var/list/ai_verbs_default = list(
 
 	holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
 
-	proc_holder_list = new()
-
 	if(L)
 		if (istype(L, /datum/ai_laws))
 			laws = L
