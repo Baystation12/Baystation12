@@ -1,10 +1,10 @@
 /* Toxins, poisons, venoms */
 
 /datum/reagent/toxin
-	name = "Toxin"
-	id = "toxin"
+	name = "bitterness"
+	id = "bitterness"
 	description = "A toxic chemical."
-	taste_description = "toxin"
+	taste_description = "bitterness"
 	taste_mult = 1.2
 	reagent_state = LIQUID
 	color = "#CF3600"
@@ -278,7 +278,7 @@
 	name = "Soporific"
 	id = "stoxin"
 	description = "An effective hypnotic used to treat insomnia."
-	taste_description = "toxin"
+	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#009CA8"
 	metabolism = REM * 0.5
@@ -309,7 +309,7 @@
 	name = "Chloral Hydrate"
 	id = "chloralhydrate"
 	description = "A powerful sedative."
-	taste_description = "toxin"
+	taste_description = "bitterness"
 	reagent_state = SOLID
 	color = "#000067"
 	metabolism = REM * 0.5
@@ -476,7 +476,7 @@
 	name = "Nicotine"
 	id = "nicotine"
 	description = "A highly addictive stimulant extracted from the tobacco plant."
-	taste_description = "toxin"
+	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#181818"
 

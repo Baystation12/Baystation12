@@ -15,7 +15,7 @@
 	smell.<br/><br/>Most humans will never meet a Vox raider, instead learning of this insular species through \
 	dealing with their traders and merchants; those that do rarely enjoy the experience."
 
-	taste_sensitivity = 2 //what is taste?
+	taste_sensitivity = TASTE_DULL
 
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20

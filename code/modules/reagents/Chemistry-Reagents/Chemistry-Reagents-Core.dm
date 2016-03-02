@@ -5,7 +5,7 @@
 	reagent_state = LIQUID
 	metabolism = REM * 5
 	color = "#C80000"
-	taste_description = "copper"
+	taste_description = "iron"
 	taste_mult = 1.3
 	glass_icon_state = "glass_red"
 	glass_name = "glass of tomato juice"

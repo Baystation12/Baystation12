@@ -15,16 +15,16 @@
 
 	if(!islist(newdata) || !newdata.len)
 		return
-	for(var/i = 1, i <= newdata.len, i++)
+	for(var/i in 1 to newdata.len)
 		if(!(newdata[i] in data))
 			data.Add(newdata[i])
 			data[newdata[i]] = 0
 		data[newdata[i]] += newdata[newdata[i]]
 	var/totalFlavor = 0
-	for(var/i = 1, i <= data.len, i++)
+	for(var/i in 1 to data.len)
 		totalFlavor += data[data[i]]
-	for(var/i = 1, i <= data.len, i++) //cull the tasteless
-		if(data[data[i]]/totalFlavor * 100 < 4)
+	for(var/i in 1 to data.len) //cull the tasteless
+		if(data[data[i]]/totalFlavor * 100 < 10)
 			data[data[i]] = null
 			data -= data[i]
 			data -= null
@@ -104,7 +104,7 @@
 	name = "Soysauce"
 	id = "soysauce"
 	description = "A salty sauce made from the soy plant."
-	taste_description = "soysauce"
+	taste_description = "umami"
 	taste_mult = 1.1
 	reagent_state = LIQUID
 	nutriment_factor = 2
@@ -143,7 +143,7 @@
 	name = "Corn Oil"
 	id = "cornoil"
 	description = "An oil derived from various types of corn."
-	taste_description = "slimey"
+	taste_description = "slime"
 	taste_mult = 0.1
 	reagent_state = LIQUID
 	nutriment_factor = 20
@@ -168,7 +168,7 @@
 	name = "Virus Food"
 	id = "virusfood"
 	description = "A mixture of water, milk, and oxygen. Virus cells can use this mixture to reproduce."
-	taste_description = "throw up"
+	taste_description = "vomit"
 	taste_mult = 2
 	reagent_state = LIQUID
 	nutriment_factor = 2
@@ -178,7 +178,7 @@
 	name = "Sprinkles"
 	id = "sprinkles"
 	description = "Multi-colored little bits of sugar, commonly found on donuts. Loved by cops."
-	taste_description = "sprinkles!"
+	taste_description = "childhood whimsy"
 	nutriment_factor = 1
 	color = "#FF00FF"
 
@@ -238,7 +238,7 @@
 	name = "Frost Oil"
 	id = "frostoil"
 	description = "A special oil that noticably chills the body. Extracted from Ice Peppers."
-	taste_description = "fresh green"
+	taste_description = "mint"
 	taste_mult = 1.5
 	reagent_state = LIQUID
 	color = "#B31008"
@@ -257,7 +257,7 @@
 	name = "Capsaicin Oil"
 	id = "capsaicin"
 	description = "This is what makes chilis hot."
-	taste_description = "hot peppers!"
+	taste_description = "hot peppers"
 	taste_mult = 1.5
 	reagent_state = LIQUID
 	color = "#B31008"
@@ -978,7 +978,7 @@
 	name = "Hell Ramen"
 	id = "hell_ramen"
 	description = "The noodles are boiled, the flavors are artificial, just like being back in school."
-	taste_description = "wet and cheap noodles"
+	taste_description = "wet and cheap noodles on fire"
 	reagent_state = LIQUID
 	color = "#302000"
 	nutrition = 5
@@ -1348,7 +1348,7 @@
 	name = "Amasec"
 	id = "amasec"
 	description = "Official drink of the Gun Club!"
-	taste_description = "dark and metalic"
+	taste_description = "dark and metallic"
 	reagent_state = LIQUID
 	color = "#664300"
 	strength = 25
@@ -1579,7 +1579,7 @@
 	name = "Demons Blood"
 	id = "demonsblood"
 	description = "AHHHH!!!!"
-	taste_description = "sweet tasting copper"
+	taste_description = "sweet tasting iron"
 	taste_mult = 1.5
 	color = "#820000"
 	strength = 15
@@ -1593,7 +1593,7 @@
 	name = "Devils Kiss"
 	id = "devilskiss"
 	description = "Creepy time!"
-	taste_description = "bitter copper"
+	taste_description = "bitter iron"
 	color = "#A68310"
 	strength = 15
 
@@ -1948,7 +1948,7 @@
 	name = "Sbiten"
 	id = "sbiten"
 	description = "A spicy Vodka! Might be a little hot for the little guys!"
-	taste_description = "hot and spice!"
+	taste_description = "hot and spice"
 	color = "#664300"
 	strength = 15
 	adj_temp = 50
