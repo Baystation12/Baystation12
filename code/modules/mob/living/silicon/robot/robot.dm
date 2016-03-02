@@ -234,9 +234,17 @@
 	if(new_sprites && new_sprites.len)
 		module_sprites = new_sprites.Copy()
 		//Custom_sprite check and entry
+		
 		if (custom_sprite == 1)
-			module_sprites["Custom"] = "[src.ckey]-[modtype]"
-			icontype = "Custom"
+			var/list/valid_states = icon_states(CUSTOM_ITEM_SYNTH)
+			if("[ckey]-[modtype]" in valid_states)
+				module_sprites["Custom"] = "[src.ckey]-[modtype]"
+				icon = CUSTOM_ITEM_SYNTH
+				icontype = "Custom"
+			else
+				icontype = module_sprites[1]
+				icon = 'icons/mob/robots.dmi'
+				src << "<span class='warning'>Custom Sprite Sheet does not contain a valid icon_state for [ckey]-[modtype]</span>"
 		else
 			icontype = module_sprites[1]
 		icon_state = module_sprites[icontype]
