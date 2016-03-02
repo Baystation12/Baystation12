@@ -131,6 +131,7 @@
 	w_class = 3
 	body_part = HEAD
 	parent_organ = "chest"
+	var/can_intake_reagents = 0 // Because it doesn't inherit regular head stuff because it's a subtype of diona for some inexplicable reason.
 
 /obj/item/organ/external/diona/head/removed()
 	if(owner)
