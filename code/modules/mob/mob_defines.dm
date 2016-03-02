@@ -77,7 +77,6 @@
 	var/ajourn = 0
 	var/druggy = 0			//Carbon
 	var/confused = 0		//Carbon
-	var/antitoxs = null
 	var/phoron = null
 	var/sleeping = 0		//Carbon
 	var/resting = 0			//Carbon
@@ -141,13 +140,7 @@
 
 	var/inertia_dir = 0
 
-	var/music_lastplayed = "null"
-
 	var/job = null//Living
-
-	var/const/blindness = 1//Carbon
-	var/const/deafness = 2//Carbon
-	var/const/muteness = 4//Carbon
 
 	var/can_pull_size = 10              // Maximum w_class the mob can pull.
 	var/can_pull_mobs = MOB_PULL_LARGER // Whether or not the mob can pull other mobs.
