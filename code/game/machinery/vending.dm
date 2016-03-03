@@ -528,9 +528,9 @@
 		nanomanager.update_uis(src)
 
 /obj/machinery/vending/proc/stock(var/datum/data/vending_product/R, var/mob/user)
-	if(src.panel_open)
-		user << "<span class='notice'>You insert \the [src] in the product receptor.</span>"
-		R.amount++
+
+	user << "<span class='notice'>You insert \the [src] in the product receptor.</span>"
+	R.amount++
 
 	nanomanager.update_uis(src)
 
