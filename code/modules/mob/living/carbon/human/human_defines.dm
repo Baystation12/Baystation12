@@ -99,3 +99,5 @@
 	var/sec_record = ""
 	var/gen_record = ""
 	var/exploit_record = ""
+
+	var/stance_damage = 0 //Whether this mob's ability to stand has been affected

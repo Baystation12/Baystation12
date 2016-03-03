@@ -12,7 +12,6 @@
 // Takes care of organ related updates, such as broken and missing limbs
 /mob/living/carbon/human/proc/handle_organs()
 
-	number_wounds = 0
 	var/force_process = 0
 	var/damage_this_tick = getBruteLoss() + getFireLoss() + getToxLoss()
 	if(damage_this_tick > last_dam)
@@ -41,7 +40,6 @@
 			continue
 		else
 			E.process()
-			number_wounds += E.number_wounds
 
 			if (!lying && !buckled && world.time - l_move_time < 15)
 			//Moving around with fractured ribs won't do you any good

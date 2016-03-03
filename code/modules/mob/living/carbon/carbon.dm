@@ -29,6 +29,7 @@
 	bloodstr.clear_reagents()
 	ingested.clear_reagents()
 	touching.clear_reagents()
+	nutrition = 400
 	..()
 
 /mob/living/carbon/Move(NewLoc, direct)

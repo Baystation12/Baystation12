@@ -63,7 +63,6 @@
 	var/ajourn = 0
 	var/druggy = 0			//Carbon
 	var/confused = 0		//Carbon
-	var/phoron = null
 	var/sleeping = 0		//Carbon
 	var/resting = 0			//Carbon
 	var/lying = 0
@@ -82,20 +81,16 @@
 
 	var/name_archive //For admin things like possession
 
-	var/timeofdeath = 0.0//Living
-	var/cpr_time = 1.0//Carbon
+	var/timeofdeath = 0.0
 
 	var/bodytemperature = 310.055	//98.7 F
 	var/drowsyness = 0.0//Carbon
-	var/nutrition = 400.0//Carbon
 	var/old_x = 0
 	var/old_y = 0
 
-//	var/overeatduration = 0		// How long this guy is overeating //Carbon
 	var/paralysis = 0.0
 	var/stunned = 0.0
 	var/weakened = 0.0
-//	var/intent = null//Living
 	var/shakecamera = 0
 	var/a_intent = I_HELP//Living
 	var/m_int = null//Living
@@ -118,7 +113,6 @@
 
 	var/in_throw_mode = 0
 
-	var/coughedtime = null
 
 	var/inertia_dir = 0
 
@@ -161,8 +155,6 @@
 	//Whether or not mobs can understand other mobtypes. These stay in /mob so that ghosts can hear everything.
 	var/universal_speak = 0 // Set to 1 to enable the mob to speak to everyone -- TLE
 	var/universal_understand = 0 // Set to 1 to enable the mob to understand everyone, not necessarily speak
-
-	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
 
 	//If set, indicates that the client "belonging" to this (clientless) mob is currently controlling some other mob
 	//so don't treat them as being SSD even though their client var is null.
