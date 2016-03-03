@@ -20,8 +20,13 @@
 	var/datum/reagents/metabolism/ingested = null
 	var/datum/reagents/metabolism/touching = null
 	var/losebreath = 0 //if we failed to breathe last tick
+
 	var/coughedtime = null
+	var/lastpuke = 0
+
 	var/cpr_time = 1.0
 	var/nutrition = 400.0//Carbon
 
 	var/pulse = PULSE_NORM	//current pulse level
+
+	var/obj/item/weapon/tank/internal = null//Human/Monkey
