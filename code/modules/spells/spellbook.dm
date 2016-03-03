@@ -12,7 +12,7 @@
 	w_class = 2
 	var/uses = 1
 	var/temp = null
-	var/datum/spellbook/spells
+	var/datum/spellbook/spellbook
 	var/spellbook_type = /datum/spellbook/ //for spawning specific spellbooks.
 
 /obj/item/weapon/spellbook/New()
@@ -20,19 +20,19 @@
 	set_spellbook(spellbook_type)
 
 /obj/item/weapon/spellbook/proc/set_spellbook(var/type)
-	if(spells)
-		qdel(spells)
-	spells = new type()
-	uses = spells.max_uses
-	name = spells.name
-	desc = spells.desc
+	if(spellbook)
+		qdel(spellbook)
+	spellbook = new type()
+	uses = spellbook.max_uses
+	name = spellbook.name
+	desc = spellbook.desc
 
 /obj/item/weapon/spellbook/attack_self(mob/user as mob)
 	if(user.mind)
 		if(!wizards.is_antagonist(user.mind))
 			user << "You can't make heads or tails of this book."
 			return
-		if(spells.book_flags & LOCKED)
+		if(spellbook.book_flags & LOCKED)
 			if(user.mind.special_role == "apprentice")
 				user << "<span class='warning'>Drat! This spellbook's apprentice proof lock is on!.</span>"
 				return
@@ -46,11 +46,15 @@
 	if(temp)
 		dat = "[temp]<br><a href='byond://?src=\ref[src];temp=1'>Return</a>"
 	else
-		dat = "<center><h3>[spells.title]</h3><i>[spells.title_desc]</i><br>You have [uses] spell slot[uses > 1 ? "s" : ""] left.</center><br>"
-		for(var/i in 1 to spells.spell_name.len)
-			dat += "<A href='byond://?src=\ref[src];path=[spells.spells[i]]'>[spells.spell_name[i]]</a> ([spells.spells[spells.spells[i]]] spell slot[spells.spells[spells.spells[i]] > 1 ? "s" : "" ]) [spells.book_flags & CAN_MAKE_CONTRACTS ? "<A href='byond://?src=\ref[src];path=[spells.spells[i]];contract=1;name=[spells.spell_name[i]]'>Make Contract</a>" : ""]<br><i>[spells.spell_desc[i]]</i><br>"
-		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spells.</a></center>"
-		dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spells.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"
+		dat = "<center><h3>[spellbook.title]</h3><i>[spellbook.title_desc]</i><br>You have [uses] spell slot[uses > 1 ? "s" : ""] left.</center><br>"
+		for(var/i in 1 to spellbook.spell_name.len)
+			dat += "<A href='byond://?src=\ref[src];path=[spellbook.spells[i]]'>[spellbook.spell_name[i]]</a>"
+			dat += " ([spellbook.spells[spellbook.spells[i]]] spell slot[spellbook.spells[spellbook.spells[i]] > 1 ? "s" : "" ])"
+			if(spellbook.book_flags & CAN_MAKE_CONTRACTS)
+				dat += " <A href='byond://?src=\ref[src];path=[spellbook.spells[i]];contract=1;name=[spellbook.spell_name[i]]'>Make Contract</a>"
+			dat += "<br><i>[spellbook.spell_desc[i]]</i><br>"
+		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spellbook.</a></center>"
+		dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spellbook.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"
 	user << browse(dat,"window=spellbook")
 
 /obj/item/weapon/spellbook/Topic(href,href_list)
@@ -64,7 +68,7 @@
 	if(!istype(H))
 		return
 
-	if(H.mind && spells.book_flags & LOCKED && H.mind.special_role == "apprentice") //make sure no scrubs get behind the lock
+	if(H.mind && spellbook.book_flags & LOCKED && H.mind.special_role == "apprentice") //make sure no scrubs get behind the lock
 		return
 
 	if(!H.contents.Find(src))
@@ -72,31 +76,31 @@
 		return
 
 	if(href_list["lock"])
-		if(spells.book_flags & LOCKED)
-			spells.book_flags &= ~LOCKED
+		if(spellbook.book_flags & LOCKED)
+			spellbook.book_flags &= ~LOCKED
 		else
-			spells.book_flags |= LOCKED
+			spellbook.book_flags |= LOCKED
 
 	if(href_list["temp"])
 		temp = null
 
 	if(href_list["path"])
 		var/path = text2path(href_list["path"])
-		if(uses < spells.spells[path])
+		if(uses < spellbook.spells[path])
 			usr << "<span class='notice'>You do not have enough spell slots to purchase this.</span>"
 			return
 		//add feedback
-		if(spells.spell_name[path])
-			feedback_add_details("wizard_spell_learned","[spells.spell_name[path]]")
-		uses -= spells.spells[path]
+		if(spellbook.spell_name[path])
+			feedback_add_details("wizard_spell_learned","[spellbook.spell_name[path]]")
+		uses -= spellbook.spells[path]
 		if(ispath(path,/datum/spellbook))
 			src.set_spellbook(path)
 			temp = "You have chosen a new spellbook."
 		else
 			if(href_list["contract"])
-				if(!(spells.book_flags & CAN_MAKE_CONTRACTS))
+				if(!(spellbook.book_flags & CAN_MAKE_CONTRACTS))
 					return //no
-				spells.max_uses -= spells.spells[path] //no basksies
+				spellbook.max_uses -= spellbook.spells[path] //no basksies
 				var/name = href_list["name"]
 				new /obj/item/weapon/contract/boon(get_turf(usr),name,path)
 				temp = "You have purchased the [name] contract."
@@ -106,13 +110,13 @@
 				else
 					new path(get_turf(usr))
 					temp = "You have purchased an artifact."
-					spells.max_uses -= spells.spells[path]
+					spellbook.max_uses -= spellbook.spells[path]
 					//finally give it a bit of an oomf
 					playsound(get_turf(usr),'sound/effects/phasein.ogg',50,1)
 	if(href_list["reset"])
 		var/area/wizard_station/A = locate()
 		if(usr in A.contents)
-			uses = spells.max_uses
+			uses = spellbook.max_uses
 			H.spellremove()
 			temp = "All spells have been removed. You may now memorize a new set of spells."
 			feedback_add_details("wizard_spell_learned","UM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
@@ -125,7 +129,7 @@
 	for(var/spell/S in user.spell_list)
 		if(istype(S,spell_path))
 			if(!S.can_improve())
-				uses += spells.spells[spell_path]
+				uses += spellbook.spells[spell_path]
 				return "You cannot improve the spell [S] further."
 			if(S.can_improve(Sp_SPEED) && S.can_improve(Sp_POWER))
 				switch(alert(user, "Do you want to upgrade this spell's speed or power?", "Spell upgrade", "Speed", "Power", "Cancel"))
@@ -134,7 +138,7 @@
 					if("Power")
 						return S.empower_spell()
 					else
-						uses += spells.spells[spell_path]
+						uses += spellbook.spells[spell_path]
 						return
 			else if(S.can_improve(Sp_POWER))
 				return S.empower_spell()
