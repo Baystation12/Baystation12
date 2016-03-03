@@ -20,7 +20,8 @@
 	name = "Bicaridine"
 	id = "bicaridine"
 	description = "Bicaridine is an analgesic medication and can be used to treat blunt trauma."
-	taste_description = "extreme bitterness"
+	taste_description = "bitterness"
+	taste_mult = 3
 	reagent_state = LIQUID
 	color = "#BF0000"
 	overdose = REAGENTS_OVERDOSE

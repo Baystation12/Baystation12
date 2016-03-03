@@ -378,6 +378,7 @@
 	name = "Hydrochloric Acid"
 	id = "hclacid"
 	description = "A very corrosive mineral acid with the molecular formula HCl."
+	taste_description = "stomach acid"
 	reagent_state = LIQUID
 	color = "#808080"
 	power = 3

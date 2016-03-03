@@ -1280,7 +1280,7 @@
 	name = "Whiskey"
 	id = "whiskey"
 	description = "A superb and well-aged single-malt whiskey. Damn."
-	taste_description = "caramel"
+	taste_description = "molasses"
 	color = "#664300"
 	strength = 25
 

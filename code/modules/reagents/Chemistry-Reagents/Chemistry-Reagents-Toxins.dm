@@ -20,6 +20,7 @@
 	name = "Plasticide"
 	id = "plasticide"
 	description = "Liquid plastic, do not eat."
+	taste_description = "plastic"
 	reagent_state = LIQUID
 	color = "#CF3600"
 	strength = 5
@@ -28,6 +29,7 @@
 	name = "Amatoxin"
 	id = "amatoxin"
 	description = "A powerful poison derived from certain species of mushroom."
+	taste_description = "mushroom"
 	reagent_state = LIQUID
 	color = "#792300"
 	strength = 10
@@ -69,6 +71,7 @@
 	name = "Cyanide"
 	id = "cyanide"
 	description = "A highly toxic chemical."
+	taste_mult = 0.6
 	reagent_state = LIQUID
 	color = "#CF3600"
 	strength = 20
@@ -354,7 +357,8 @@
 	name = "Space drugs"
 	id = "space_drugs"
 	description = "An illegal chemical compound used as drug."
-	taste_description = "bitter toxin"
+	taste_description = "bitterness"
+	taste_mult = 0.4
 	reagent_state = LIQUID
 	color = "#60A584"
 	metabolism = REM * 0.5
@@ -406,6 +410,7 @@
 	name = "Impedrezene"
 	id = "impedrezene"
 	description = "Impedrezene is a narcotic that impedes one's ability by slowing down the higher brain cell functions."
+	taste_description = "numbness"
 	reagent_state = LIQUID
 	color = "#C8A5DC"
 	overdose = REAGENTS_OVERDOSE
@@ -440,7 +445,7 @@
 	name = "Psilocybin"
 	id = "psilocybin"
 	description = "A strong psycotropic derived from certain species of mushroom."
-	taste_description = "mushroom slime"
+	taste_description = "mushroom"
 	color = "#E700E7"
 	overdose = REAGENTS_OVERDOSE
 	metabolism = REM * 0.5

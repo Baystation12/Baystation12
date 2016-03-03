@@ -228,7 +228,7 @@
 	name = "Diethylamine"
 	id = "diethylamine"
 	description = "A secondary amine, mildly corrosive."
-	taste_description = "copper"
+	taste_description = "iron"
 	reagent_state = LIQUID
 	color = "#604030"
 
@@ -363,7 +363,7 @@
 	name = "Nitroglycerin"
 	id = "nitroglycerin"
 	description = "Nitroglycerin is a heavy, colorless, oily, explosive liquid obtained by nitrating glycerol."
-	taste_description = "something oily and bitter"
+	taste_description = "oil"
 	reagent_state = LIQUID
 	color = "#808080"
 
@@ -371,7 +371,8 @@
 	name = "Coolant"
 	id = "coolant"
 	description = "Industrial cooling substance."
-	taste_description = "addictive bitterness"
+	taste_description = "sourness"
+	taste_mult = 1.1
 	reagent_state = LIQUID
 	color = "#C8A5DC"
 
