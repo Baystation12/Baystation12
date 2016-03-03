@@ -19,7 +19,7 @@
 /obj/item/device/assembly/data_relay/receive_data(var/list/data, var/obj/item/device/assembly/sender)
 	var/broken_connection = 0
 	if(process_signals(1))
-		for(var/obj/item/device/assembly/A in get_holder_linked_devices())
+		for(var/obj/item/device/assembly/A in get_connected_devices())
 			if(!(A.receive_data(data, sender)))
 				broken_connection = 1
 				break

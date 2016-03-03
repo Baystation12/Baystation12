@@ -20,7 +20,7 @@
 		if(send_type == "Pulse")
 			send_pulse_to_connected()
 		else
-			for(var/obj/item/device/assembly/A in get_holder_linked_devices())
+			for(var/obj/item/device/assembly/A in get_connected_devices())
 				A.misc_special(M)
 /obj/item/device/assembly/voice/activate()
 	on = !on

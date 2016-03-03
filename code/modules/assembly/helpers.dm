@@ -1,3 +1,4 @@
+//For the sake of old code.
 /proc/isassembly(O)
 	if(istype(O, /obj/item/device/assembly))
 		return 1
@@ -28,7 +29,7 @@
 		return 1
 	return 0
 
-/obj/item/device/assembly/proc/get_holder_linked_devices()
+/obj/item/device/assembly/proc/get_connected_devices()
 //	add_debug_log("Getting linked devices: \[[src]\]")
 	var/list/devices = list()
 	if(connects_to.len && holder)
@@ -38,7 +39,7 @@
 	add_debug_log("Got linked devices: \[[src]:[devices.len]\]")
 	return devices
 
-/obj/item/device/assembly/proc/find_holder_linked_devices(var/obj/item/device/assembly/A)
+/obj/item/device/assembly/proc/get_device_index(var/obj/item/device/assembly/A)
 //	add_debug_log("Finding index: \[[src] ([A])\]")
 	var/index = 0
 	if(holder)
@@ -52,12 +53,12 @@
 		return index
 	return 0
 
-/obj/item/device/assembly/proc/get_holder_linked_devices_reversed()
+/obj/item/device/assembly/proc/get_devices_connected_to()
 //	add_debug_log("Getting devices linked to \[[src]\]")
 	var/list/devices = list()
 	if(!holder) return
 	for(var/obj/item/device/assembly/connected in holder.connected_devices)
-		if(src in connected.get_holder_linked_devices())
+		if(src in connected.get_connected_devices())
 			devices += connected
 
 	add_debug_log("Got devices linked to \[[src]:[devices.len]\]")
@@ -85,13 +86,13 @@
 	if(index)
 		index += 1
 		var/pulses = recent_pulses[index]
-		if(pulses > 20) // We'll cut infinite loops, literally.
+		if(pulses >= MAX_PULSE_COUNT) // We'll cut infinite loops, literally.
 			sender.wire_holder.CutAll()
 			var/turf/T = get_turf(src.loc)
 			if(T) T.visible_message("<span class='danger'>\The [src] sparks dangerously!</span>")
 			recent_pulses[index] = 0
 		recent_pulses[index] += 1
-		spawn(5)
+		spawn(PULSE_DELAY)
 			recent_pulses[index] -= 1
 	if(fail)
 		add_debug_log("Sending pulse interrupted! \[[sender] > [receiver]\]")
@@ -135,7 +136,7 @@
 
 /obj/item/device/assembly_holder/proc/add_debug_log(var/message as text)
 	if(message)
-		if(logs.len >= 50)
+		if(logs.len >= MAX_LOG_LENGTH)
 			logs.Cut(1, 2)
 		logs.Add(message)
 		if(debug_mode)
@@ -149,9 +150,9 @@
 			return i
 	return 0
 
-/obj/item/device/assembly/proc/IndexHasSafety(var/index)
+/obj/item/device/assembly/proc/IndexHasSafety(var/index) // Wire proc
 	if(wires & index)
-		for(var/obj/item/device/assembly/A in get_holder_linked_devices_reversed())
+		for(var/obj/item/device/assembly/A in get_devices_connected_to())
 			if(A.has_safety(index))
 				return 1
 	return 0
@@ -164,7 +165,7 @@
 	user << "<span class='warning'>Access denied!</span>"
 	return 0
 
-
+//Miscellaneous procs.
 /obj/item/device/assembly/proc/holder_pulsing(var/obj/item/device/assembly/sender, var/obj/item/device/assembly/receiver) // ^^
 	return 1
 /obj/item/device/assembly/proc/holder_movement() // Called when the holder moves (e.g. pulling, throwing)

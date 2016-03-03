@@ -80,7 +80,7 @@
 						if(i in connects_to || i == else_connection) continue
 						devices.Add(A)
 					var/obj/item/device/assembly/connect_to = input(usr, "What device would you like to connect to?", "Connection") in devices
-					var/index = find_holder_linked_devices(connect_to)
+					var/index = get_device_index(connect_to)
 					add_debug_log("Got: [connect_to.name] Index: [index]")
 					if(num2text(index) == else_connection || num2text(index) in connects_to)
 						usr << "<span class='warning'> \The [src] is already connected to \the [connect_to.name]</span>"
@@ -620,7 +620,7 @@
 		wait_list.Cut()
 
 	holder_pulsing(var/obj/item/device/assembly/sender, var/obj/item/device/assembly/receiver)
-		var/list/devices = get_holder_linked_devices_reversed()
+		var/list/devices = get_devices_connected_to()
 		if(sender in devices)
 			if(!(sender in wait_list))
 				value2++

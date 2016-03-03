@@ -22,7 +22,7 @@
 		add_debug_log("Range check failure! \[[src]\]")
 		return 0
 	else if(active_wires & WIRE_MISC_SPECIAL)
-		for(var/obj/item/device/assembly/O in get_holder_linked_devices())
+		for(var/obj/item/device/assembly/O in get_connected_devices())
 			if(!data_mode)
 				O.misc_special(target, user)
 			else
@@ -42,7 +42,7 @@
 
 /obj/item/device/assembly/target_finder/get_data(var/mob/user, var/ui_key)
 	var/list/data = list()
-//	var/list/devices = get_holder_linked_devices()
+//	var/list/devices = get_connected_devices()
 //	for(var/i=1;i<=devices.len;i++)
 //		if(istype(devices[i], /obj/item/device/assembly))
 //			var/obj/item/device/assembly/A = devices[i]

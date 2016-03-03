@@ -102,7 +102,7 @@
 					if(!holder || !(active_wires & WIRE_MISC_CONNECTION))
 						usr << "<span class='warning'> There's nothing to connect \the [src] too!</span>"
 					else
-						var/list/devices = get_holder_linked_devices_reversed()
+						var/list/devices = get_devices_connected_to()
 						if(!devices.len)
 							usr << "<span class='warning'>There's nothing to connect \the [src] too!</span>"
 						else

@@ -21,26 +21,23 @@
 	var/weight = 0 // >5:Cannot be put in storage >10:Cannot be picked up >20:Anchored
 
 	//Connections
-	var/list/attachable_devices = list()
 	var/list/connected_devices = list()
 	var/max_connections = 5
 	var/drawing_connection // Interface var
 	//Examine
 	var/list/examine_additions = list()
 	//Debug | Admin
-	var/debug_mode = 1
+	var/debug_mode = 0
 	var/list/recent_pulses = list() // To prevent infinite loops
 	var/list/logs = list() // For debugging
-	var/list/data_log = list()
 	var/state = "HOME"
 	//Clothing | Implants
 	var/implantable = 0
-	var/mob/living/carbon/human/implanted
+	var/mob/living/carbon/human/owner // implanted or attached to
 	var/implanted_in
 
 	var/attachable = 0
-	var/mob/living/carbon/human/attached_to
-	var/base_slot_flags = SLOT_BACK|SLOT_MASK // So we can easily apply these flags when we need them
+	var/tmp/base_slot_flags = SLOT_BACK|SLOT_MASK // So we can easily apply these flags when we need them
 	slot_flags = 0
 
 	var/password = "admin"
@@ -60,13 +57,10 @@
 	density = initial(density)
 	examine_additions.Cut()
 	var/list/calculated_names = list()
-	for(var/i=1;i<=connected_devices.len;i++)
+	for(var/i=1 to connected_devices.len)
 		var/obj/item/device/assembly/A = connected_devices[i]
 		examine_additions += A.examined_additions
-		A.update_icon()
 		weight += A.weight
-		if(!(A in recent_pulses))
-			recent_pulses.Add(A, 0)
 		if(weight <= 10)
 			if(A.implantable)
 				implantable = 1
@@ -76,7 +70,7 @@
 			calculated_names.Add(A.interface_name, 0) // Index-associative?
 		else
 			var/matched = 0
-			for(var/n=1;n<=calculated_names.len,n++)
+			for(var/n = 1 to calculated_names.len)
 				if(A.interface_name == calculated_names[n])
 					calculated_names[(n+1)] += 1
 					matched = 1
@@ -173,8 +167,6 @@
 					else
 						usr << "<span class='warning'>Access denied!</span>"
 	if(href_list["wiring"])
-		if(!(usr.get_active_hand() == src || usr.get_inactive_hand() == src))
-			usr << "You cannot reach into \the [src] from there!"
 		var/index = href_list["wiring"]
 		var/failed = 0
 		var/list/failures = list()
@@ -217,22 +209,6 @@
 			usr << "<span class='warning'>You cannot link an object to itself!</span>"
 		else if(first.connects_to.Find(index) || first.connects_to.Find(index))
 			usr << "<span class='warning'>They are already connected!</span>"
-//			if(drawing_connection in second.connects_to)
-//				var/list/new_connections = second.connects_to.Copy()
-//				if(new_connections.Remove(drawing_connection))
-//					for(var/i=1,i<=new_connections.len,i++)
-//						if(new_connections[i] == null || new_connections[i] == 0)
-//							new_connections.Cut(i,i+1)
-//					second.connects_to = new_connections
-//					first.connects_to.Add(drawing_connection)
-//			else
-//				var/list/new_connections = first.connects_to.Copy()
-//				if(new_connections.Remove(index))
-//					for(var/i=1,i<=new_connections.len,i++)
-//						if(new_connections[i] == null || new_connections[i] == 0)
-//							new_connections.Cut(i,i+1)
-//					first.connects_to = new_connections
-//					first.connects_to.Add(index)
 		else
 			first.connects_to.Add(index)
 			usr << "<span class='notice'>You successfully link [first] and [second]!</span>"
@@ -240,8 +216,6 @@
 
 	src.add_fingerprint(usr)
 	nanomanager.update_uis(src)
-
-
 
 /obj/item/device/assembly_holder/proc/wire_cut(var/obj/item/device/assembly/A, var/index)
 	for(var/obj/item/device/assembly/B in connected_devices)
@@ -285,6 +259,8 @@
 						add_debug_log("Automatic connection established. \[[prev.interface_name] > [A.interface_name]\]")
 					else
 						add_debug_log("Automatic connection unavailable. \[[prev.interface_name] > [A.interface_name]\]")
+		if(!A in recent_pulses)
+			recent_pulses.Add(A)
 	update_holder()
 
 /obj/item/device/assembly_holder/examine(mob/user)
@@ -305,7 +281,7 @@
 		if(connected_devices[removed_index] != removed)
 			add_debug_log("Error. No index found!")
 		if(removed.connects_to.len) // Need to get rid of any old connections. Could leave it up to the player, but..
-			for(var/obj/item/device/assembly/connected in removed.get_holder_linked_devices_reversed())
+			for(var/obj/item/device/assembly/connected in removed.get_devices_connected_to())
 				var/connected_removed_index = connected.connects_to.Find(removed_index)
 				if(!connected_removed_index)
 					add_debug_log("Error: No match found \[[connected]\], wiping connection data")
@@ -323,6 +299,8 @@
 			if(new_list[i] == null)
 				new_list.Cut(i,i+1)
 				connected_devices = new_list
+		var/pulse_index = recent_pulses.Find(removed)
+		if(pulse_index) recent_pulses.Cut(pulse_index, pulse_index+1)
 		removed.holder = null
 		removed.forceMove(get_turf(src))
 		removed.connects_to.Cut()
@@ -337,7 +315,9 @@
 		if(user == M)
 			user.visible_message("<span class='danger'>[user] stabs \the [src] into themselves!</span>", "<span class='warning'>You stab \the [src] into yourself!</span>")
 		else
-			user.visible_message("<span class='danger'>[user] stabs \the [src] into [M]!</span>", "<span class='warning'>You stab \the [src] into [M]!</span>")
+			user.visible_message("<span class='danger'>[user] begins stabbing \the [src] into [M]!</span>")
+			if(do_after(user, 60))
+				user.visible_message("<span class='danger'>[user] stabs \the [src] into [M]!</span>", "<span class='warning'>You stab \the [src] into [M]!</span>")
 		var/obj/item/organ/external/affected = M.get_organ(user.zone_sel.selecting)
 		implanted(target, affected)
 	else
@@ -373,7 +353,7 @@
 	if(weight >= 20)
 		user << "<span class='warning'>\The [src] is too large and heavy!</span>"
 		return 0
-	if(anchored)
+	if(anchored) // ?
 		user << "<span class='warning'>\The [src] is anchored to the ground!</span>"
 		return 0
 	..()
@@ -706,15 +686,15 @@
 						sleep(0)
 						step_to(O, T)
 						if(prob(50))
-							ex_act(severity)
+							O.ex_act(severity)
 
 /obj/item/device/assembly_holder/proc/implanted(var/mob/living/carbon/target, var/obj/item/organ/external/affected)
 	for(var/obj/item/device/assembly/A in connected_devices)
-		A.implanted()
+		A.implanted(target)
 	if(!(src in affected.implants))
 		affected.implants.Add(src)
 	src.forceMove(affected)
-	implanted = target
+	owner = target
 	implanted_in = affected
 	processing_objects.Add(src)
 	return 1
@@ -731,15 +711,15 @@
 
 /obj/item/device/assembly_holder/mob_can_equip(M as mob, slot, disable_warning = 0)
 	if(..())
-		attached_to = M
+		owner = M
 		for(var/obj/item/device/assembly/A in connected_devices)
 			A.attached(M)
 		return 1
 
 
 /obj/item/device/assembly_holder/process()
-	if(!implanted || !src in implanted.contents)
-		implanted = null
+	if(!owner || !src in owner.contents)
+		owner = null
 		implanted_in = null
 		processing_objects.Remove(src)
 		return

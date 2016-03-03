@@ -41,7 +41,7 @@
 						if(i in connects_to || i == alt_connected_to) continue
 						devices.Add(A)
 					var/obj/item/device/assembly/connect_to = input(usr, "What device would you like to connect to?", "Connection") in devices
-					var/index = find_holder_linked_devices(connect_to)
+					var/index = get_device_index(connect_to)
 					add_debug_log("Got: [connect_to.name] Index: [index] \[[src]\]")
 					if(num2text(index) == alt_connected_to || num2text(index) in connects_to)
 						usr << "<span class='warning'>\The [src] is already connected to \the [connect_to.name]</span>"

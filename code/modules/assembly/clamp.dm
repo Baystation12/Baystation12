@@ -57,7 +57,7 @@
 		misc_activate()
 
 /obj/item/device/assembly/clamp/misc_activate()
-	for(var/obj/item/device/assembly/A in get_holder_linked_devices())
+	for(var/obj/item/device/assembly/A in get_connected_devices())
 		if(prob(80))
 			A.receive_direct_pulse(src)
 
@@ -87,7 +87,7 @@
 	..()
 
 /obj/item/device/assembly/clamp/mob_can_unequip(mob/M, slot, disable_warning = 0)
-	if(!holder || !holder.attached_to)
+	if(!holder || !holder.owner)
 		return ..()
 	if(being_removed)
 		M << "<span class='warning'>\The [src] is already being pulled off by \the [remover]!</span>"
@@ -104,54 +104,54 @@
 		return 1
 
 /obj/item/device/assembly/clamp/attached(var/mob/M)
-	if(src.draw_power((((initial(grip_strength) - grip_strength)) * 10) + 20))
+	if(src.draw_power((((initial(grip_strength) - grip_strength)) * 10) + 20) && holder && !holder.implanted_in)
 		M.visible_message("<span class='danger'>\The [src] clamps onto [M]!</span>", "<span class='danger'>\The [src] clamps onto you!</span>")
 	return 1
 
 /obj/item/device/assembly/clamp/process()
-	if(holder && holder.attachable && attachable && holder.attached_to && grip_strength > 0)
+	if(holder && holder.attachable && attachable && holder.owner && grip_strength > 0)
 		tick_delay++
 		if(tick_delay >= req_tick_delay)
 			if(do_after(remover, 1))
 				req_tick_delay += rand(1,(150 * (initial(grip_strength) - grip_strength)))
 				tick_delay = 0
 				if(!src.draw_power((((initial(grip_strength) - grip_strength)) * 10) + 100))
-					holder.attached_to.visible_message("<span class='notice'>\The [src] sighs mechanically and relaxes it's grip.</span>")
+					holder.owner.visible_message("<span class='notice'>\The [src] sighs mechanically and relaxes it's grip.</span>")
 					active = 0
 				else
 					if(prob(grip_strength))
 						switch(in_slot)
 							if(slot_back)
-								holder.attached_to << "<span class='danger'>You feel something tear the skin off of your back!</span>"
-								holder.attached_to.emote("scream")
+								holder.owner << "<span class='danger'>You feel something tear the skin off of your back!</span>"
+								holder.owner.emote("scream")
 								if(prob(60))
 									grip_strength -= 2
-								holder.attached_to.visible_message("<span class='danger'>\The [src] slips slightly, tearing [holder.attached_to]'s skin!</span>")
+								holder.owner.visible_message("<span class='danger'>\The [src] slips slightly, tearing [holder.owner]'s skin!</span>")
 							if(slot_wear_mask)
-								holder.attached_to << "<span class='danger'>You feel something tear the skin off of your face!</span>"
-								holder.attached_to.emote("scream")
-								holder.attached_to.Weaken(15)
+								holder.owner << "<span class='danger'>You feel something tear the skin off of your face!</span>"
+								holder.owner.emote("scream")
+								holder.owner.Weaken(15)
 								if(prob(60))
 									grip_strength -= 2
-								holder.attached_to.visible_message("<span class='danger'>\The [src] slips slightly, tearing [holder.attached_to]'s skin!</span>")
+								holder.owner.visible_message("<span class='danger'>\The [src] slips slightly, tearing [holder.owner]'s skin!</span>")
 					else if(prob(((initial(grip_strength) - grip_strength) * 5) + 30))
 						if(grip_strength <= initial(grip_strength) / 4)
-							holder.attached_to.visible_message("<span class='danger'>\The [src] is quickly losing it's grip on \the [holder.attached_to]!</span>")
+							holder.owner.visible_message("<span class='danger'>\The [src] is quickly losing it's grip on \the [holder.owner]!</span>")
 						else if(grip_strength <= initial(grip_strength) / 3)
-							holder.attached_to.visible_message("<span class='danger'>\The [src] is losing it's remaining grip on \the [holder.attached_to]!</span>")
+							holder.owner.visible_message("<span class='danger'>\The [src] is losing it's remaining grip on \the [holder.owner]!</span>")
 						else if(grip_strength <= initial(grip_strength) / 2)
-							holder.attached_to.visible_message("<span class='danger'>\The [src]'s grip on [holder.attached_to] is getting looser!</span>")
+							holder.owner.visible_message("<span class='danger'>\The [src]'s grip on [holder.owner] is getting looser!</span>")
 						else
-							holder.attached_to.visible_message("<span class='danger'>[remover] tugs on \the [src] attached to [holder.attached_to], loosening it slightly!</span>")
+							holder.owner.visible_message("<span class='danger'>[remover] tugs on \the [src] attached to [holder.owner], loosening it slightly!</span>")
 						grip_strength -= rand(1, 3)
 					else if(prob(grip_strength * 2))
-						holder.attached_to.visible_message("<span class='danger'>\The [src] is tightening it's grip on [holder.attached_to]!</span>")
+						holder.owner.visible_message("<span class='danger'>\The [src] is tightening it's grip on [holder.owner]!</span>")
 						grip_strength += rand(1, 3)
 					else if(prob((80 - reliability) / 2))
-						holder.attached_to.visible_message("<span class='danger'>\The [src] suddenly lets go of [holder.attached_to]!</span>")
+						holder.owner.visible_message("<span class='danger'>\The [src] suddenly lets go of [holder.owner]!</span>")
 						active = 0
 					else
-						holder.attached_to.visible_message("<span class='danger'>[remover] tugs on \the [src] attached to [holder.attached_to]!</span>")
+						holder.owner.visible_message("<span class='danger'>[remover] tugs on \the [src] attached to [holder.owner]!</span>")
 				return 1
 	processing_objects.Remove(src)
 	being_removed = 0

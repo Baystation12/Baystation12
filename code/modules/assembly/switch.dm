@@ -89,7 +89,7 @@
 						choices.Add(A.interface_name)
 					var/inp = input(usr, "What device would you like to connect to?", "Connection") in choices
 					var/obj/item/device/assembly/connect_to = devices[(choices.Find(inp))]
-					var/index = find_holder_linked_devices(connect_to)
+					var/index = get_device_index(connect_to)
 					add_debug_log("\[[src] : Got: [connect_to.name] Index: [index]\]")
 					if(num2text(index) == alt_connected_to || num2text(index) in connects_to)
 						usr << "<span class='warning'>\The [src] is already connected to \the [connect_to.interface_name]</span>"

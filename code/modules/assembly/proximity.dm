@@ -36,7 +36,7 @@
 		if(send_type || (AM && !istype(AM, /mob/living)))
 			receive_direct_pulse()
 		else
-			for(var/obj/item/device/assembly/A in get_holder_linked_devices())
+			for(var/obj/item/device/assembly/A in get_connected_devices())
 				A.misc_special(AM)
 		if(!holder)
 			mainloc.visible_message("\icon[src] *beep* *beep*", "*beep* *beep*")

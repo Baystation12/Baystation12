@@ -47,7 +47,7 @@
 
 
 	activate()
-		var/list/devices = get_holder_linked_devices_reversed()
+		var/list/devices = get_devices_connected_to()
 		if(devices.len)
 			if(!(active_wires & WIRE_PROCESS_ACTIVATE & WIRE_DIRECT_SEND & WIRE_PROCESS_SEND & WIRE_MISC_CONNECTION)) return 0
 			for(var/i=1,i<=stored_data.len,i++)
@@ -57,7 +57,7 @@
 						if(!istype(sender)) return
 						var/data = stored_data[(i+1)]
 						if(pass_data)
-							for(var/obj/item/device/assembly/A in get_holder_linked_devices())
+							for(var/obj/item/device/assembly/A in get_connected_devices())
 								if(istype(A))
 									send_data(data)
 						else if(!pass_data || pass_data == 2)

@@ -81,7 +81,7 @@
 
 /obj/item/device/assembly/igniter/activate()
 	if(holder)
-		for(var/obj/item/device/assembly/O in get_holder_linked_devices())
+		for(var/obj/item/device/assembly/O in get_connected_devices())
 			O.igniter_act()
 	else
 		var/turf/location = get_turf(loc)

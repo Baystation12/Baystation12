@@ -1,3 +1,6 @@
+#define MAX_PULSE_COUNT 20 //How many pulses can happen within pulse_delay before an infinite loop is detected.
+#define PULSE_DELAY 15 // The amount of time after a pulse before the pulse_count is reduced.
+#define MAX_LOG_LENGTH 30 // The max debug log messages stored.
 /obj/item/device/assembly
 	name = "assembly"
 	desc = "A small electronic device that should never exist."
@@ -46,7 +49,7 @@
 	var/failed = 0
 	if(active_wires & WIRE_MISC_CONNECTION)
 		if(process_signals(1))
-			for(var/obj/item/device/assembly/A in get_holder_linked_devices())
+			for(var/obj/item/device/assembly/A in get_connected_devices())
 				add_debug_log("Sent data \[[src] : [A]\]")
 				if(!holder.sending_pulse(src, A))
 					break
@@ -103,12 +106,12 @@
 	var/list/devices = list()
 	if(holder) // Not using associative lists for ui.
 		for(var/obj/item/device/assembly/A in holder.connected_devices) // We need the index AND object, can't use helper procs.
-			var/index = find_holder_linked_devices(A)
+			var/index = get_device_index(A)
 			if(index)
 				if(num2text(index) in connects_to)
 					devices.Add(A.interface_name, index)
 					add_debug_log("Connected device: [src]:[A.name]")
-	if(issilicon(user))
+	if(issilicon(user)) // As of yet unused.
 		data["ai"] = 1
 	else
 		data["ai"] = 0
@@ -126,7 +129,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-//Index 1 for the button text, index 2 for a VARIABLE to associate with; Directly associative lists are kinda fiddly.
+//Index 1 for the button text, index 2 for a VARIABLE to associate with.
 /obj/item/device/assembly/proc/get_data(var/mob/user, var/ui_key)
 	return 1
 
@@ -162,7 +165,7 @@
 					usr.set_machine(opened)
 					opened.wire_holder.Interact(usr)
 	if(href_list["activate"])
-		usr << "You active \the [src]!"
+		usr << "You activate \the [src]!"
 		process_activation()
 	if(href_list["option"])
 		switch(href_list["option"])
@@ -191,6 +194,7 @@
 		qdel(wire_holder)
 	if(holder)
 		holder.remove_connected_device(src)
+	sleep(0) // Let the holder do its thang
 	..()
 
 /obj/item/device/assembly/proc/set_frequency(new_frequency)
@@ -246,7 +250,7 @@
 
 /obj/item/device/assembly/proc/send_pulse_to_connected()
 	add_debug_log("Sending pulse to connected \[[src]\]")
-	for(var/obj/item/device/assembly/O in get_holder_linked_devices())
+	for(var/obj/item/device/assembly/O in get_connected_devices())
 		send_direct_pulse(O)
 	return 1
 
@@ -290,7 +294,7 @@
 /obj/item/device/assembly/proc/draw_power(var/amount = 0)
 	add_debug_log("Drawing power: \[[src]:([amount]w)\]")
 	if(active_wires & WIRE_POWER_RECEIVE)
-		for(var/obj/item/device/assembly/A in get_holder_linked_devices_reversed())
+		for(var/obj/item/device/assembly/A in get_devices_connected_to())
 			if(istype(A))
 				add_debug_log("Finding power source: [A.name]")
 				if(A.attempt_get_power_amount(src, amount))
