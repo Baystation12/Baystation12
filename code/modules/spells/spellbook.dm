@@ -47,7 +47,7 @@
 		dat = "[temp]<br><a href='byond://?src=\ref[src];temp=1'>Return</a>"
 	else
 		dat = "<center><h3>[spells.title]</h3><i>[spells.title_desc]</i><br>You have [uses] spell slot[uses > 1 ? "s" : ""] left.</center><br>"
-		for(var/i=1;i<=spells.spell_name.len;i++)
+		for(var/i in 1 to spells.spell_name.len)
 			dat += "<A href='byond://?src=\ref[src];path=[spells.spells[i]]'>[spells.spell_name[i]]</a> ([spells.spells[spells.spells[i]]] spell slot[spells.spells[spells.spells[i]] > 1 ? "s" : "" ]) [spells.book_flags & CAN_MAKE_CONTRACTS ? "<A href='byond://?src=\ref[src];path=[spells.spells[i]];contract=1;name=[spells.spell_name[i]]'>Make Contract</a>" : ""]<br><i>[spells.spell_desc[i]]</i><br>"
 		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spells.</a></center>"
 		dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spells.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"

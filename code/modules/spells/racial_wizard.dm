@@ -10,7 +10,8 @@
 	throw_range = 3
 	force = 15
 	var/list/potentials = list("Resomi" = /spell/aoe_turf/conjure/summon/resomi, "Human" = /obj/item/weapon/storage/bag/cash/infinite, "Vox" = /spell/targeted/shapeshift/true_form,
-		"Tajara" = /spell/messa_shroud, "Unathi" = /spell/moghes_blessing, "Diona" = /spell/aoe_turf/conjure/grove/gestalt, "Skrell" = /obj/item/weapon/contract/apprentice/skrell)
+		"Tajara" = /spell/messa_shroud, "Unathi" = /spell/moghes_blessing, "Diona" = /spell/aoe_turf/conjure/grove/gestalt, "Skrell" = /obj/item/weapon/contract/apprentice/skrell,
+		"Machine" = /spell/camera_connection)
 
 /obj/item/weapon/magic_rock/attack_self(mob/user)
 	if(!istype(user,/mob/living/carbon/human))
@@ -175,6 +176,8 @@
 	name = "Convert Gestalt"
 	desc = "Converts the surrounding area into a Dionaea gestalt."
 
+	school = "racial"
+	spell_flags = 0
 	invocation_type = SpI_EMOTE
 	invocation = "rumbles as green alien plants grow quickly along the floor."
 
@@ -221,3 +224,62 @@
 		var/obj/item/I = new /obj/item/weapon/contract/apprentice/skrell(get_turf(src),linked,contract_master)
 		user.put_in_hands(I)
 		new /obj/item/weapon/contract/apprentice/skrell(get_turf(src),linked,contract_master)
+
+//IPC
+/spell/camera_connection
+	name = "Camera Connection"
+	desc = "This spell allows the wizard to connect to the local camera network and see what it sees."
+
+	school = "racial"
+
+	invocation_type = SpI_EMOTE
+	invocation = "emits a beeping sound before standing very, very still."
+
+	charge_max = 600 //1 minute
+	charge_type = Sp_RECHARGE
+
+
+	spell_flags = Z2NOCAST
+	hud_state = "wiz_IPC"
+	var/mob/eye/ipc_eye/vision
+
+/spell/camera_connection/New()
+	..()
+	vision = new(src)
+
+/spell/camera_connection/choose_targets()
+	var/mob/living/L = holder
+	if(!istype(L) || L.eyeobj) //no using if we already have an eye on.
+		return null
+	return list(holder)
+
+/spell/camera_connection/cast(var/list/targets, mob/user)
+	var/mob/living/L = targets[1]
+
+	vision.owner = L
+	L.eyeobj = vision
+	if(L.client)
+		L.client.eye = vision
+	for(var/datum/chunk/c in vision.visibleChunks)
+		c.remove(vision)
+	vision.setLoc(get_turf(L))
+
+	L.verbs += /mob/living/proc/release_eye
+
+
+/mob/eye/ipc_eye/New() //we dont use the Ai one because it has AI specific procs imbedded in it.
+	..()
+	visualnet = cameranet
+
+/mob/living/proc/release_eye()
+	set name = "Release Vision"
+	set desc = "Return your sight to your body."
+	set category = "Abilities"
+
+	verbs -= /mob/living/proc/release_eye //regardless of if we have an eye or not we want to get rid of this verb.
+
+	if(!eyeobj)
+		return
+
+	eyeobj.owner = null
+	eyeobj = null

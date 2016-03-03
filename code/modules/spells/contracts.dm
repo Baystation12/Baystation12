@@ -102,7 +102,7 @@
 		return 1
 	if(ispath(path,/obj))
 		new path(get_turf(user.loc))
-		flick("e_flash", usr.flash)
+		playsound(get_turf(usr),'sound/effects/phasein.ogg',50,1)
 		return 1
 
 /obj/item/weapon/contract/boon/wizard
