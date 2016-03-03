@@ -95,17 +95,10 @@
 	icon_state = "dark"
 	initial_flooring = /decl/flooring/tiling/dark
 
-/turf/simulated/floor/tiled/red
-	name = "red floor"
-	color = COLOR_RED_GRAY
-	icon_state = "white"
-	initial_flooring = /decl/flooring/tiling/red
-
 /turf/simulated/floor/tiled/steel
 	name = "steel floor"
 	icon_state = "steel_dirty"
 	initial_flooring = /decl/flooring/tiling/steel
-
 
 /turf/simulated/floor/tiled/steel/airless
 	oxygen = 0
@@ -115,12 +108,6 @@
 	name = "white floor"
 	icon_state = "white"
 	initial_flooring = /decl/flooring/tiling/white
-
-/turf/simulated/floor/tiled/yellow
-	name = "yellow floor"
-	color = COLOR_BROWN
-	icon_state = "white"
-	initial_flooring = /decl/flooring/tiling/yellow
 
 /turf/simulated/floor/tiled/freezer
 	name = "tiles"

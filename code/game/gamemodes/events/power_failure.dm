@@ -17,12 +17,14 @@
 	if(announce)
 		command_announcement.Announce("Power has been restored to [station_name()]. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
 	for(var/obj/machinery/power/apc/C in world)
-		if(C.cell && (C.z in config.station_levels))
+		C.failure_timer = 0
+		if(C.cell)
 			C.cell.charge = C.cell.maxcharge
 	for(var/obj/machinery/power/smes/S in world)
 		var/area/current_area = get_area(S)
-		if(current_area.type in skipped_areas || isNotStationLevel(S.z))
+		if(current_area.type in skipped_areas)
 			continue
+		S.failure_timer = 0
 		S.charge = S.capacity
 		S.update_icon()
 		S.power_change()
@@ -32,8 +34,7 @@
 	if(announce)
 		command_announcement.Announce("All SMESs on [station_name()] have been recharged. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
 	for(var/obj/machinery/power/smes/S in world)
-		if(isNotStationLevel(S.z))
-			continue
+		S.failure_timer = 0
 		S.charge = S.capacity
 		S.output_level = S.output_level_max
 		S.output_attempt = 1

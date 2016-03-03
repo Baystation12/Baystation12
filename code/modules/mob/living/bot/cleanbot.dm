@@ -56,7 +56,7 @@
 		path -= path[1]
 		return 1
 	return
-		
+
 /mob/living/bot/cleanbot/Life()
 	..()
 
@@ -67,7 +67,7 @@
 		return
 	if(cleaning)
 		return
-	
+
 	if(!screwloose && !oddbutton && prob(5))
 		custom_emote(2, "makes an excited beeping booping sound!")
 
@@ -84,7 +84,7 @@
 			ignorelist -= gib
 
 		// Find a target
-	
+
 	if(pulledby) // Don't wiggle if someone pulls you
 		patrol_path = list()
 		return
@@ -156,7 +156,7 @@
 	custom_emote(2, "begins to clean up \the [D]")
 	update_icons()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
-	if(do_after(src, cleantime))
+	if(do_after(src, cleantime, progres = 0))
 		if(istype(loc, /turf/simulated))
 			var/turf/simulated/f = loc
 			f.dirt = 0

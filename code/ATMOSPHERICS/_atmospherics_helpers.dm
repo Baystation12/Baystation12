@@ -502,6 +502,6 @@
 
 
     if(returntext)
-        return list2text(status, " ")
+        return jointext(status, " ")
     else
         return status.len

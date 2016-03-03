@@ -86,7 +86,7 @@
 					msg += " - Playing"
 
 				if(C.is_afk())
-					msg += " (AFK)"
+					msg += " (AFK - [C.inactivity2text()])"
 				msg += "\n"
 
 				num_admins_online++
@@ -101,7 +101,7 @@
 					modmsg += " - Playing"
 
 				if(C.is_afk())
-					modmsg += " (AFK)"
+					modmsg += " (AFK - [C.inactivity2text()])"
 				modmsg += "\n"
 				num_mods_online++
 
@@ -115,7 +115,7 @@
 					mentmsg += " - Playing"
 
 				if(C.is_afk())
-					mentmsg += " (AFK)"
+					mentmsg += " (AFK - [C.inactivity2text()])"
 				mentmsg += "\n"
 				num_mentors_online++
 

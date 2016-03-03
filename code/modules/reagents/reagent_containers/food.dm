@@ -14,12 +14,12 @@
 
 /obj/item/weapon/reagent_containers/food/New()
 	..()
-	if (isnull(center_of_mass) && !pixel_x && !pixel_y)
+	if (center_of_mass.len && !pixel_x && !pixel_y)
 		src.pixel_x = rand(-6.0, 6) //Randomizes postion
 		src.pixel_y = rand(-6.0, 6)
 
 /obj/item/weapon/reagent_containers/food/afterattack(atom/A, mob/user, proximity, params)
-	if(proximity && params && istype(A, /obj/structure/table) && center_of_mass.len)
+	if(center_of_mass.len && proximity && params && istype(A, /obj/structure/table))
 		//Places the item on a grid
 		var/list/mouse_control = params2list(params)
 

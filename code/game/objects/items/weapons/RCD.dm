@@ -131,7 +131,7 @@
 	working = 1
 	user << "[(deconstruct ? "Deconstructing" : "Building")] [build_type]..."
 
-	if(build_delay && !do_after(user, build_delay))
+	if(build_delay && !do_after(user, build_delay, src))
 		working = 0
 		return 0
 

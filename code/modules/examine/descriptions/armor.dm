@@ -76,4 +76,4 @@
 	if(slots.len)
 		. += "It can be worn on your [english_list(slots)]. \n"
 
-	return list2text(.)
+	return jointext(., null)

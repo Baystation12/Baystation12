@@ -38,10 +38,10 @@
 		MineralSpread()
 	spawn(2)
 		updateMineralOverlays(1)
-		
+
 /turf/simulated/mineral/can_build_cable()
 	return !density
-	
+
 /turf/simulated/mineral/is_plating()
 	return 1
 
@@ -134,9 +134,9 @@
 
 	if (istype(W, /obj/item/device/measuring_tape))
 		var/obj/item/device/measuring_tape/P = W
-		user.visible_message("\blue[user] extends [P] towards [src].","\blue You extend [P] towards [src].")
-		if(do_after(user,25))
-			user << "\blue \icon[P] [src] has been excavated to a depth of [2*excavation_level]cm."
+		user.visible_message("<span class='notice'>\The [user] extends [P] towards [src].</span>","<span class='notice'>You extend [P] towards [src].</span>")
+		if(do_after(user,25, src))
+			user << "<span class='notice'>\icon[P] [src] has been excavated to a depth of [2*excavation_level]cm.</span>"
 		return
 
 	if (istype(W, /obj/item/weapon/pickaxe))
@@ -169,8 +169,8 @@
 				if(prob(50))
 					artifact_debris()
 
-		if(do_after(user,P.digspeed))
-			user << "\blue You finish [P.drill_verb] the rock."
+		if(do_after(user,P.digspeed, src))
+			user << "<span class='notice'>You finish [P.drill_verb] the rock.</span>"
 
 			if(finds && finds.len)
 				var/datum/find/F = finds[1]
@@ -463,9 +463,9 @@
 		user << "\red You start digging."
 		playsound(user.loc, 'sound/effects/rustle1.ogg', 50, 1)
 
-		if(!do_after(user,40)) return
+		if(!do_after(user,40, src)) return
 
-		user << "\blue You dug a hole."
+		user << "<span class='notice'>You dug a hole.</span>"
 		gets_dug()
 
 	else if(istype(W,/obj/item/weapon/storage/bag/ore))
