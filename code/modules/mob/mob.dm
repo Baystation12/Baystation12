@@ -1080,7 +1080,7 @@ mob/proc/yank_out_object()
 		usr << "You are now facing [dir2text(facing_dir)]."
 
 /mob/proc/set_face_dir(var/newdir)
-	if(newdir == facing_dir)
+	if(!isnull(facing_dir) && newdir == facing_dir)
 		facing_dir = null
 	else if(newdir)
 		set_dir(newdir)
