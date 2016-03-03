@@ -1,8 +1,8 @@
 /* Toxins, poisons, venoms */
 
 /datum/reagent/toxin
-	name = "bitterness"
-	id = "bitterness"
+	name = "toxin"
+	id = "toxin"
 	description = "A toxic chemical."
 	taste_description = "bitterness"
 	taste_mult = 1.2
@@ -47,6 +47,7 @@
 	name = "Phoron"
 	id = "phoron"
 	description = "Phoron in its liquid form."
+	taste_mult = 1.5
 	reagent_state = LIQUID
 	color = "#9D14DB"
 	strength = 30

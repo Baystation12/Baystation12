@@ -177,7 +177,7 @@
 	name = "Hydrazine"
 	id = "hydrazine"
 	description = "A toxic, colorless, flammable liquid with a strong ammonia-like odor, in hydrate form."
-	taste_description = "toxin"
+	taste_description = "sweet tasting metal"
 	reagent_state = LIQUID
 	color = "#808080"
 	metabolism = REM * 0.2
