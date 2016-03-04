@@ -1127,7 +1127,7 @@
 "vI" = (/obj/structure/bed/chair{dir = 4},/obj/effect/floor_decal/carpet{dir = 8},/turf/unsimulated/floor{icon_state = "carpet"; dir = 2},/area/centcom/control)
 "vJ" = (/obj/structure/table/standard,/obj/effect/floor_decal/carpet{dir = 4},/turf/unsimulated/floor{icon_state = "carpet"; dir = 2},/area/centcom/control)
 "vK" = (/obj/machinery/vending/tool,/turf/unsimulated/floor{icon_state = "vault"; dir = 1},/area/centcom/specops)
-"vL" = (/obj/structure/sign/poster{poster_type = "/datum/poster/bay_50"; pixel_x = -32},/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
+"vL" = (/obj/structure/sign/poster{pixel_x = -32; poster_type = "/datum/poster/bay50"},/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
 "vM" = (/obj/item/weapon/aiModule/nanotrasen,/obj/item/weapon/aiModule/reset,/obj/item/weapon/aiModule/freeformcore,/obj/item/weapon/aiModule/protectStation,/obj/item/weapon/aiModule/quarantine,/obj/item/weapon/aiModule/paladin,/obj/item/weapon/aiModule/robocop,/obj/item/weapon/aiModule/safeguard,/obj/structure/table/rack,/turf/unsimulated/floor{icon_state = "vault"; dir = 1},/area/centcom/specops)
 "vN" = (/obj/effect/floor_decal/corner/green/three_quarters{dir = 4},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/tdome)
 "vO" = (/obj/machinery/door/airlock/centcom{name = "Maintenance Access"; opacity = 1; req_access = list(106)},/turf/unsimulated/floor{icon_state = "dark"},/area/centcom/control)
