@@ -206,18 +206,20 @@
 		reagents.add_reagent("water",500)
 
 /obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	src.add_fingerprint(user)
 	if (istype(W,/obj/item/weapon/wrench))
+		src.add_fingerprint(user)
 		if(anchored)
-			user.visible_message("[user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
+			user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
 		else
-			user.visible_message("[user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
+			user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
 
 		if(do_after(user, 20, src))
 			if(!src) return
 			user << "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>"
 			anchored = !anchored
 		return
+	else
+		return ..()
 
 /obj/structure/reagent_dispensers/beerkeg
 	name = "beer keg"
