@@ -1,7 +1,7 @@
 /spell/targeted/equip_item/shield
 	name = "Summon Shield"
 	desc = "Summons the most holy of shields, the riot shield. Commonly used during wizard riots."
-
+	feedback = "SH"
 	school = "evocation"
 	invocation = "Sia helda!"
 	invocation_type = SpI_SHOUT

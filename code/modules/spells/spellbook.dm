@@ -1,6 +1,18 @@
 #define LOCKED 				2
 #define CAN_MAKE_CONTRACTS	4
-
+//spells/spellbooks have a variable for this but as artefacts are literal items they do not.
+//so we do this instead.
+var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
+								/obj/item/weapon/gun/energy/staff/focus = 	"MF",
+								/obj/item/weapon/monster_manual = 			"MA",
+								/obj/item/weapon/magic_rock = 				"RA",
+								/obj/item/weapon/contract/apprentice = 		"CP",
+								/obj/structure/closet/wizard/souls = 		"SS",
+								/obj/item/weapon/contract/wizard/tk = 		"TK",
+								/obj/structure/closet/wizard/scrying = 		"SO",
+								/obj/item/weapon/teleportation_scroll = 	"TS",
+								/obj/item/weapon/gun/energy/staff = 		"ST",
+								/obj/item/weapon/gun/energy/staff/animate =	"SA")
 
 /obj/item/weapon/spellbook
 	name = "master spell book"
@@ -47,16 +59,29 @@
 		dat = "[temp]<br><a href='byond://?src=\ref[src];temp=1'>Return</a>"
 	else
 		dat = "<center><h3>[spellbook.title]</h3><i>[spellbook.title_desc]</i><br>You have [uses] spell slot[uses > 1 ? "s" : ""] left.</center><br>"
-		for(var/i in 1 to spellbook.spell_name.len)
-			dat += "<A href='byond://?src=\ref[src];path=[spellbook.spells[i]]'>[spellbook.spell_name[i]]</a>"
+		for(var/i in 1 to spellbook.spells.len)
+			var/name = ""
+			var/desc = ""
+			if(ispath(spellbook.spells[i],/datum/spellbook))
+				var/datum/spellbook/S = spellbook.spells[i]
+				name = initial(S.name)
+				desc = initial(S.book_desc)
+			else if(ispath(spellbook.spells[i],/obj))
+				var/obj/O = spellbook.spells[i]
+				name = "Artefact: [capitalize(initial(O.name))]" //because 99.99% of objects dont have capitals in them and it makes it look weird.
+				desc = initial(O.desc)
+			else if(ispath(spellbook.spells[i],/spell))
+				var/spell/S = spellbook.spells[i]
+				name = initial(S.name)
+				desc = initial(S.desc)
+			dat += "<A href='byond://?src=\ref[src];path=[spellbook.spells[i]]'>[name]</a>"
 			dat += " ([spellbook.spells[spellbook.spells[i]]] spell slot[spellbook.spells[spellbook.spells[i]] > 1 ? "s" : "" ])"
 			if(spellbook.book_flags & CAN_MAKE_CONTRACTS)
-				dat += " <A href='byond://?src=\ref[src];path=[spellbook.spells[i]];contract=1;name=[spellbook.spell_name[i]]'>Make Contract</a>"
-			dat += "<br><i>[spellbook.spell_desc[i]]</i><br>"
+				dat += " <A href='byond://?src=\ref[src];path=[spellbook.spells[i]];contract=1;'>Make Contract</a>"
+			dat += "<br><i>[desc]</i><br>"
 		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spellbook.</a></center>"
 		dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spellbook.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"
 	user << browse(dat,"window=spellbook")
-
 /obj/item/weapon/spellbook/Topic(href,href_list)
 	..()
 
@@ -89,10 +114,8 @@
 		if(uses < spellbook.spells[path])
 			usr << "<span class='notice'>You do not have enough spell slots to purchase this.</span>"
 			return
-		//add feedback
-		if(spellbook.spell_name[path])
-			feedback_add_details("wizard_spell_learned","[spellbook.spell_name[path]]")
 		uses -= spellbook.spells[path]
+		send_feedback(path) //feedback stuff
 		if(ispath(path,/datum/spellbook))
 			src.set_spellbook(path)
 			temp = "You have chosen a new spellbook."
@@ -101,15 +124,14 @@
 				if(!(spellbook.book_flags & CAN_MAKE_CONTRACTS))
 					return //no
 				spellbook.max_uses -= spellbook.spells[path] //no basksies
-				var/name = href_list["name"]
-				new /obj/item/weapon/contract/boon(get_turf(usr),name,path)
-				temp = "You have purchased the [name] contract."
+				var/obj/O = new /obj/item/weapon/contract/boon(get_turf(usr),path)
+				temp = "You have purchased \the [O]."
 			else
 				if(ispath(path,/spell))
 					temp = src.add_spell(usr,path)
 				else
-					new path(get_turf(usr))
-					temp = "You have purchased an artifact."
+					var/obj/O = new path(get_turf(usr))
+					temp = "You have purchased \a [O]."
 					spellbook.max_uses -= spellbook.spells[path]
 					//finally give it a bit of an oomf
 					playsound(get_turf(usr),'sound/effects/phasein.ogg',50,1)
@@ -124,6 +146,18 @@
 			usr << "<span class='warning'>You must be in the wizard academy to re-memorize your spells.</span>"
 
 	src.interact(usr)
+
+
+/obj/item/weapon/spellbook/proc/send_feedback(var/path)
+	if(ispath(path,/datum/spellbook))
+		var/datum/spellbook/S = path
+		feedback_add_details("wizard_spell_learned","[initial(S.feedback)]")
+	else if(ispath(path,/spell))
+		var/spell/S = path
+		feedback_add_details("wizard_spell_learned","[initial(S.feedback)]")
+	else if(ispath(path,/obj))
+		feedback_add_details("wizard_spell_learned","[artefact_feedback[path]]")
+
 
 /obj/item/weapon/spellbook/proc/add_spell(var/mob/user, var/spell_path)
 	for(var/spell/S in user.spell_list)
@@ -152,24 +186,12 @@
 /datum/spellbook
 	var/name = "\improper Book of Tomes"
 	var/desc = "The legendary book of spells of the wizard."
+	var/book_desc = "Holds information on the various tomes available to a wizard"
+	var/feedback = "" //doesn't need one.
 	var/book_flags = 0
 	var/max_uses = 1
 	var/title = "Book of Tomes"
 	var/title_desc = "This tome marks down all the available tomes for use. Choose wisely, there are no refunds."
-	var/list/spell_name = list("Standard Spell Book" = 		"SB",
-					"Cleric's Tome"        = 				"CR",
-					"Battlemage's Bible"  = 				"BM",
-					"Spatial Manual" = 						"SP",
-					"Druid's Leaflet" = 					"DL",
-					"Student's Spell Book" = 				"ST"
-					) //spell name = spell feedback initials (Make sure the initials are consistent between spellbooks and are unique to each spell/artifact)
-	var/list/spell_desc = list("This spell book was standardized by the Wizard Acadamy for use with general wizarding activities.",
-					"A Cleric's spellbook. Filled with healing and self defense magical spells and artifacts.",
-					"Full of knowledge on battle and magic. Often both.",
-					"A book for those who don't like to walk anywhere, it provides many different mobility spells.",
-					"A book all about nature and its beasts, this magic relies on the elements and the brute strength of allies.",
-					"This spell book is popular with children due to its easy to use list of spells and indepth explanation of how to be a wizard."
-					)
 	var/list/spells = list(/datum/spellbook/standard = 1,
 				/datum/spellbook/cleric = 1,
 				/datum/spellbook/battlemage = 1,

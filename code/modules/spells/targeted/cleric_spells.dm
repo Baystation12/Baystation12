@@ -1,7 +1,7 @@
 /spell/targeted/heal_target
 	name = "Cure Light Wounds"
-	desc = "a rudimentary spell used mainly by wizards to heal papercuts."
-
+	desc = "a rudimentary spell used mainly by wizards to heal papercuts. Does not require wizard garb."
+	feedback = "CL"
 	school = "cleric"
 	charge_max = 200
 	spell_flags = INCLUDEUSER | SELECTABLE
@@ -30,7 +30,7 @@
 /spell/targeted/heal_target/major
 	name = "Cure Major Wounds"
 	desc = "A spell used to fix others that cannot be fixed with regular medicine. Requires wizard garb."
-
+	feedback = "CM"
 	charge_max = 300
 	spell_flags = SELECTABLE | NEEDSCLOTHES
 	invocation = "Borv Di'Nath"
@@ -54,8 +54,8 @@
 
 /spell/targeted/heal_target/area
 	name = "Cure Area"
-	desc = "This spell heals everyone in an area."
-
+	desc = "This spell heals everyone in an area. Does not require wizard garb."
+	feedback = "HA"
 	charge_max = 600
 	spell_flags = INCLUDEUSER
 	invocation = "Nal Di'Nath"
@@ -80,8 +80,8 @@
 
 /spell/targeted/heal_target/sacrifice
 	name = "Sacrifice"
-	desc = "This spell heals immensily. For a price."
-
+	desc = "This spell heals immensily. For a price. Does not require wizard garb."
+	feedback = "SF"
 	spell_flags = SELECTABLE
 	invocation = "Ei'Nath Borv Di'Nath"
 	charge_type = Sp_HOLDVAR

@@ -1,7 +1,7 @@
 /spell/mark_recall
 	name = "Mark and Recall"
-	desc = "This spell was created so wizards could get home from the bar without driving."
-
+	desc = "This spell was created so wizards could get home from the bar without driving. Does not require wizard garb."
+	feedback = "MK"
 	school = "abjuration"
 	charge_max = 1200 //2 minutes for how OP this shit is.
 	spell_flags = Z2NOCAST

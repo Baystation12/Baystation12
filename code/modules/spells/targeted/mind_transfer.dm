@@ -1,7 +1,7 @@
 /spell/targeted/mind_transfer
 	name = "Mind Transfer"
 	desc = "This spell allows the user to switch bodies with a target."
-
+	feedback = "MT"
 	school = "transmutation"
 	charge_max = 600
 	spell_flags = 0

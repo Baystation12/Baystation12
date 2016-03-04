@@ -39,6 +39,7 @@
 
 /obj/item/weapon/contract/apprentice
 	name = "apprentice wizarding contract"
+	desc = "a wizarding school contract for those who want to sign their soul for a piece of the magic pie."
 	color = "#993300"
 
 /obj/item/weapon/contract/apprentice/contract_effect(mob/user as mob)
@@ -71,7 +72,7 @@
 
 /mob/item/weapon/contract/wizard/tk
 	name = "telekinesis contract"
-	desc = "This contract makes your mind buzz."
+	desc = "This contract makes your mind buzz. It promises to give you the ability to move things with your mind. At a price."
 
 /obj/item/weapon/contract/wizard/tk/contract_effect(mob/user as mob)
 	..()
@@ -85,14 +86,18 @@
 	name = "boon contract"
 	desc = "this contract grants you a boon for signing it."
 	var/path
-	var/item_name
 
-/obj/item/weapon/contract/boon/New(var/newloc,var/new_name, var/new_path)
+/obj/item/weapon/contract/boon/New(var/newloc, var/new_path)
 	..(newloc)
 	if(new_path)
 		path = new_path
-	if(new_name)
-		item_name = new_name
+	var/item_name = ""
+	if(ispath(path,/obj))
+		var/obj/O = path
+		item_name = initial(O.name)
+	else if(ispath(path,/spell))
+		var/spell/S = path
+		item_name = initial(S.name)
 	name = "[item_name] contract"
 
 /obj/item/weapon/contract/boon/contract_effect(mob/user as mob)
@@ -100,7 +105,7 @@
 	if(ispath(path,/spell))
 		user.add_spell(new path)
 		return 1
-	if(ispath(path,/obj))
+	else if(ispath(path,/obj))
 		new path(get_turf(user.loc))
 		playsound(get_turf(usr),'sound/effects/phasein.ogg',50,1)
 		return 1
@@ -109,43 +114,35 @@
 	contract_master = "\improper Wizard Academy"
 
 /obj/item/weapon/contract/boon/wizard/artificer
-	item_name = "artificing"
 	path = /spell/aoe_turf/conjure/construct
 	desc = "This contract has a passage dedicated to an entity known as 'Nar-Sie'"
 
 /obj/item/weapon/contract/boon/wizard/fireball
 	path = /spell/targeted/projectile/dumbfire/fireball
-	item_name = "fireball"
 	desc = "This contract feels warm to the touch."
 
 /obj/item/weapon/contract/boon/wizard/smoke
 	path = /spell/aoe_turf/smoke
-	item_name = "smoke"
 	desc = "This contract smells as dank as they come."
 
 /obj/item/weapon/contract/boon/wizard/mindswap
 	path = /spell/targeted/mind_transfer
-	item_name = "mindswap"
 	desc = "This contract looks ragged and torn."
 
 /obj/item/weapon/contract/boon/wizard/forcewall
 	path = /spell/aoe_turf/conjure/forcewall
-	item_name = "forcewall"
 	contract_master = "\improper Mime Federation"
 	desc = "This contract has a dedication to mimes everywhere at the top."
 
 /obj/item/weapon/contract/boon/wizard/knock
 	path = /spell/aoe_turf/knock
-	item_name = "knock"
 	desc = "This contract is hard to hold still."
 
 /obj/item/weapon/contract/boon/wizard/horsemask
 	path = /spell/targeted/equip_item/horsemask
-	item_name = "horses"
 	desc = "This contract is more horse than your mind has room for."
 
 /obj/item/weapon/contract/boon/wizard/charge
 	path = /spell/aoe_turf/charge
-	item_name = "charging"
 	desc = "This contract is made of 100% post-consumer wizard."
 

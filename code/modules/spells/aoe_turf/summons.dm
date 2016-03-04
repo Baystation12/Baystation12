@@ -42,8 +42,8 @@
 
 /spell/aoe_turf/conjure/mirage
 	name = "Summon Mirage"
-	desc = "This spell summons a harmless carp mirage for a few seconds."
-
+	desc = "This spell summons a harmless carp mirage for a few seconds. Requires wizard garb."
+	feedback = "MR"
 	school = "illusion"
 	charge_max = 1200
 	spell_flags = NEEDSCLOTHES

@@ -1,7 +1,7 @@
 /spell/targeted/projectile/magic_missile
 	name = "Magic Missile"
 	desc = "This spell fires several, slow moving, magic projectiles at nearby targets."
-
+	feedback = "MM"
 	school = "evocation"
 	charge_max = 150
 	spell_flags = NEEDSCLOTHES

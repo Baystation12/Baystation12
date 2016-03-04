@@ -1,7 +1,7 @@
 /spell/aoe_turf/blink
 	name = "Blink"
 	desc = "This spell randomly teleports you a short distance."
-
+	feedback = "BL"
 	school = "abjuration"
 	charge_max = 20
 	spell_flags = Z2NOCAST | IGNOREDENSE | IGNORESPACE

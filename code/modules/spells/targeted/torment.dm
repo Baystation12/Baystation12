@@ -1,7 +1,7 @@
 /spell/targeted/torment
 	name = "Torment"
 	desc = "this spell causes pain to all those in its radius."
-
+	feedback = "TM"
 	school = "evocation"
 	charge_max = 150
 	spell_flags = 0

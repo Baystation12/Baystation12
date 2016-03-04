@@ -1,7 +1,7 @@
 /spell/targeted/projectile/dumbfire/stuncuff
 	name = "Stun Cuff"
 	desc = "This spell fires out a small curse that stuns and cuffs the target. Requires wizard garb. Uses charges."
-
+	feedback = "SC"
 	proj_type = /obj/item/projectile/spell_projectile/stuncuff
 
 	charge_type = Sp_CHARGES
