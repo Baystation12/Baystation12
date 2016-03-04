@@ -26,7 +26,7 @@
 		if(round(owner.vessel.get_reagent_amount("blood")) <= BLOOD_VOLUME_BAD)	//how much blood do we have
 			pulse  = PULSE_THREADY	//not enough :(
 
-		if(owner.status_flags & FAKEDEATH)
+		if(owner.status_flags & FAKEDEATH || owner.chem_effects[CE_NOPULSE])
 			pulse = PULSE_NONE		//pretend that we're dead. unlike actual death, can be inflienced by meds
 
 		pulse = Clamp(pulse + owner.chem_effects[CE_PULSE], PULSE_SLOW, PULSE_2FAST)

@@ -577,6 +577,7 @@
 		M.make_jittery(4) //extra sensitive to caffine
 	if(adj_temp > 0)
 		holder.remove_reagent("frostoil", 10 * removed)
+	M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -592,6 +593,7 @@
 		M.adjustToxLoss(4 * REM)
 		M.apply_effect(3, STUTTER)
 	M.make_jittery(5)
+	M.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/drink/coffee/icecoffee
 	name = "Iced Coffee"
@@ -1131,6 +1133,7 @@
 	if (M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 	M.make_jittery(5)
+	M.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/ethanol/vermouth
 	name = "Vermouth"
@@ -1721,6 +1724,7 @@
 /datum/reagent/ethanol/neurotoxin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.Weaken(3)
+	M.add_chemical_effect(CE_PULSE, -1)
 
 /datum/reagent/ethanol/patron
 	name = "Patron"
