@@ -1567,6 +1567,7 @@
 #include "code\modules\organs\pain.dm"
 #include "code\modules\organs\robolimbs.dm"
 #include "code\modules\organs\wound.dm"
+#include "code\modules\organs\internal\heart.dm"
 #include "code\modules\organs\subtypes\diona.dm"
 #include "code\modules\organs\subtypes\machine.dm"
 #include "code\modules\organs\subtypes\resomi.dm"
