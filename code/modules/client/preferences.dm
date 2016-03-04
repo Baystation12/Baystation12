@@ -106,7 +106,7 @@ datum/preferences
 	// OOC Metadata:
 	var/metadata = ""
 
-	var/client/client = null
+	var/client_ckey = null
 
 	var/savefile/loaded_preferences
 	var/savefile/loaded_character
@@ -121,7 +121,7 @@ datum/preferences
 	gear = list()
 
 	if(istype(C))
-		client = C
+		client_ckey = C.ckey
 		if(!IsGuestKey(C.key))
 			load_path(C.ckey)
 			load_preferences()
@@ -187,6 +187,12 @@ datum/preferences
 
 /datum/preferences/proc/ShowChoices(mob/user)
 	if(!user || !user.client)	return
+
+	if(!get_mob_by_key(client_ckey))
+		user << "<span class='danger'>No mob exists for the given client!</span>"
+		close_load_dialog(user)
+		return
+
 	var/dat = "<html><body><center>"
 
 	if(path)
