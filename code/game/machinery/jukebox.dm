@@ -66,6 +66,10 @@ datum/track/New(var/title_name, var/audio)
 			overlays += "[state_base]-running"
 
 /obj/machinery/media/jukebox/interact(mob/user)
+	if(!anchored)
+		usr << "<span class='warning'>You must secure \the [src] first.</span>"
+		return
+
 	if(stat & (NOPOWER|BROKEN))
 		usr << "\The [src] doesn't appear to function."
 		return
@@ -93,7 +97,7 @@ datum/track/New(var/title_name, var/audio)
 	return data
 
 /obj/machinery/media/jukebox/ui_act(action, params)
-	if(..())
+	if(..() || !anchored || stat & (NOPOWER|BROKEN))
 		return TRUE
 	switch(action)
 		if("change_track")
