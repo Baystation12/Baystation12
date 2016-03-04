@@ -94,7 +94,7 @@
 				H.losebreath = max(10, H.losebreath - 10)
 			H.adjustOxyLoss(2)
 			H.Weaken(10)
-		M.add_chemical_effect(NO_PULSE, 1)
+		M.add_chemical_effect(CE_NOPULSE, 1)
 
 
 /datum/reagent/toxin/potassium_chlorophoride
@@ -115,7 +115,7 @@
 				H.losebreath = max(10, M.losebreath-10)
 			H.adjustOxyLoss(2)
 			H.Weaken(10)
-		M.add_chemical_effect(NO_PULSE, 1)
+		M.add_chemical_effect(CE_NOPULSE, 1)
 
 /datum/reagent/toxin/zombiepowder
 	name = "Zombie Powder"
