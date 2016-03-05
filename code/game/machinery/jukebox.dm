@@ -74,11 +74,10 @@ datum/track/New(var/title_name, var/audio)
 		usr << "\The [src] doesn't appear to function."
 		return
 
-	ui_interact(user)
+	tg_ui_interact(user)
 
-/obj/machinery/media/jukebox/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, \
-										datum/tgui/master_ui = null, datum/ui_state/state = default_state)
-	ui = tguiProcess.try_update_ui(user, src, ui_key, ui, force_open)
+/obj/machinery/media/jukebox/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = tg_default_state)
+	ui = tgui_process.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "jukebox", "RetroBox - Space Style", 340, 440, master_ui, state)
 		ui.open()
@@ -89,7 +88,7 @@ datum/track/New(var/title_name, var/audio)
 		juke_tracks.Add(T.title)
 
 	var/list/data = list(
-		"current_track" = current_track != null ? current_track.title : "",
+		"current_track" = current_track != null ? current_track.title : "No track selected",
 		"playing" = playing,
 		"tracks" = juke_tracks
 	)
