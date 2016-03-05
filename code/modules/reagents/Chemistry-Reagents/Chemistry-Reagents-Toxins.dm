@@ -544,13 +544,6 @@
 	reagent_state = LIQUID
 	color = "#535E66"
 
-/datum/reagent/nanites/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	if(prob(10))
-		M.contract_disease(new /datum/disease/robotic_transformation(0), 1) //What
-
-/datum/reagent/nanites/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.contract_disease(new /datum/disease/robotic_transformation(0), 1)
-
 /datum/reagent/xenomicrobes
 	name = "Xenomicrobes"
 	id = "xenomicrobes"
@@ -558,10 +551,3 @@
 	taste_description = "sludge"
 	reagent_state = LIQUID
 	color = "#535E66"
-
-/datum/reagent/xenomicrobes/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	if(prob(10))
-		M.contract_disease(new /datum/disease/xeno_transformation(0), 1)
-
-/datum/reagent/xenomicrobes/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.contract_disease(new /datum/disease/xeno_transformation(0), 1)

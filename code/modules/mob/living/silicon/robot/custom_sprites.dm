@@ -26,5 +26,10 @@ var/list/robot_custom_icons
 	if(rname && rname == real_name)
 		custom_sprite = 1
 		icon = CUSTOM_ITEM_SYNTH
+		var/list/valid_states = icon_states(icon)
 		if(icon_state == "robot")
-			icon_state = "[ckey]-Standard"
+			if("[ckey]-Standard" in valid_states)
+				icon_state = "[ckey]-Standard"
+			else
+				src << "<span class='warning'>Could not locate [ckey]-Standard sprite.</span>"
+				icon =  'icons/mob/robots.dmi'

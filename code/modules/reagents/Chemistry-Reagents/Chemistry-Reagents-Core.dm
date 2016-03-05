@@ -24,23 +24,6 @@
 		t["virus2"] = v.Copy()
 	return t
 
-/datum/reagent/blood/mix_data(var/newdata, var/newamount) // You have a reagent with data, and new reagent with its own data get added, how do you deal with that?
-	if(data["viruses"] || newdata["viruses"])
-		var/list/mix1 = data["viruses"]
-		var/list/mix2 = newdata["viruses"]
-		var/list/to_mix = list() // Stop issues with the list changing during mixing.
-		for(var/datum/disease/advance/AD in mix1)
-			to_mix += AD
-		for(var/datum/disease/advance/AD in mix2)
-			to_mix += AD
-		var/datum/disease/advance/AD = Advance_Mix(to_mix)
-		if(AD)
-			var/list/preserve = list(AD)
-			for(var/D in data["viruses"])
-				if(!istype(D, /datum/disease/advance))
-					preserve += D
-			data["viruses"] = preserve
-
 /datum/reagent/blood/touch_turf(var/turf/simulated/T)
 	if(!istype(T) || volume < 3)
 		return
@@ -60,12 +43,6 @@
 		M.adjustToxLoss(removed)
 	if(effective_dose > 15)
 		M.adjustToxLoss(removed)
-	if(data && data["viruses"])
-		for(var/datum/disease/D in data["viruses"])
-			if(D.spread_type == SPECIAL || D.spread_type == NON_CONTAGIOUS)
-				continue
-			if(D.spread_type in list(CONTACT_FEET, CONTACT_HANDS, CONTACT_GENERAL))
-				M.contract_disease(D)
 	if(data && data["virus2"])
 		var/list/vlist = data["virus2"]
 		if(vlist.len)
@@ -77,12 +54,6 @@
 /datum/reagent/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_MACHINE)
 		return
-	if(data && data["viruses"])
-		for(var/datum/disease/D in data["viruses"])
-			if(D.spread_type == SPECIAL || D.spread_type == NON_CONTAGIOUS)
-				continue
-			if(D.spread_type in list(CONTACT_FEET, CONTACT_HANDS, CONTACT_GENERAL))
-				M.contract_disease(D)
 	if(data && data["virus2"])
 		var/list/vlist = data["virus2"]
 		if(vlist.len)
@@ -96,27 +67,6 @@
 /datum/reagent/blood/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.inject_blood(src, volume)
 	remove_self(volume)
-
-/datum/reagent/vaccine
-	name = "Vaccine"
-	taste_description = "slime"
-	id = "vaccine"
-	reagent_state = LIQUID
-	color = "#C81040"
-
-/datum/reagent/vaccine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(data)
-		for(var/datum/disease/D in M.viruses)
-			if(istype(D, /datum/disease/advance))
-				var/datum/disease/advance/A = D
-				if(A.GetDiseaseID() == data)
-					D.cure()
-			else
-				if(D.type == data)
-					D.cure()
-
-		M.resistances += data
-	return
 
 // pure concentrated antibodies
 /datum/reagent/antibodies
