@@ -21,11 +21,6 @@
 	name = T_BOARD("medical records console")
 	build_path = /obj/machinery/computer/med_data
 
-/obj/item/weapon/circuitboard/pandemic
-	name = T_BOARD("PanD.E.M.I.C. 2200")
-	build_path = /obj/machinery/computer/pandemic
-	origin_tech = list(TECH_DATA = 2, TECH_BIO = 2)
-
 /obj/item/weapon/circuitboard/scan_consolenew
 	name = T_BOARD("DNA machine")
 	build_path = /obj/machinery/computer/scan_consolenew

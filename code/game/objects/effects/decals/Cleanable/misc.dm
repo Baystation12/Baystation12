@@ -103,8 +103,6 @@
 	var/list/viruses = list()
 
 	Destroy()
-		for(var/datum/disease/D in viruses)
-			D.cure(0)
 		..()
 
 /obj/effect/decal/cleanable/tomato_smudge

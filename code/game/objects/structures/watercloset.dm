@@ -67,8 +67,7 @@
 					swirlie = GM
 					if(do_after(user, 30, src))
 						user.visible_message("<span class='danger'>[user] gives [GM.name] a swirlie!</span>", "<span class='notice'>You give [GM.name] a swirlie!</span>", "You hear a toilet flushing.")
-						if(!GM.internal)
-							GM.adjustOxyLoss(5)
+						GM.adjustOxyLoss(5)
 					swirlie = null
 				else
 					user.visible_message("<span class='danger'>[user] slams [GM.name] into the [src]!</span>", "<span class='notice'>You slam [GM.name] into the [src]!</span>")
@@ -390,7 +389,7 @@
 		V.show_message("<span class='notice'>[user] washes their hands using \the [src].</span>")
 
 
-/obj/structure/sink/attackby(obj/item/O as obj, mob/user as mob)
+/obj/structure/sink/attackby(obj/item/O as obj, mob/living/user as mob)
 	if(busy)
 		user << "<span class='warning'>Someone's already washing here.</span>"
 		return
