@@ -1659,7 +1659,7 @@
 	name = "Pan-Galactic Gargle Blaster"
 	id = "gargleblaster"
 	description = "Whoah, this stuff looks volatile!"
-	taste_description = "a kick in the teeth"
+	taste_description = "your brains smashed out by a lemon wrapped around a gold brick"
 	taste_mult = 5
 	reagent_state = LIQUID
 	color = "#664300"
