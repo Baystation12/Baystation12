@@ -141,11 +141,6 @@
 	M.confused = 0
 	M.sleeping = 0
 	M.jitteriness = 0
-	for(var/datum/disease/D in M.viruses)
-		D.spread = "Remissive"
-		D.stage--
-		if(D.stage < 1)
-			D.cure()
 
 /datum/reagent/gold
 	name = "Gold"

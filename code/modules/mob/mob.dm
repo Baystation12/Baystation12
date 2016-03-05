@@ -13,8 +13,6 @@
 		client.screen = list()
 	if(mind && mind.current == src)
 		spellremove(src)
-	for(var/infection in viruses)
-		qdel(infection)
 	ghostize()
 	..()
 
@@ -202,21 +200,6 @@
 
 
 /mob/proc/show_inv(mob/user as mob)
-	user.set_machine(src)
-	var/dat = {"
-	<B><HR><FONT size=3>[name]</FONT></B>
-	<BR><HR>
-	<BR><B>Head(Mask):</B> <A href='?src=\ref[src];item=mask'>[(wear_mask ? wear_mask : "Nothing")]</A>
-	<BR><B>Left Hand:</B> <A href='?src=\ref[src];item=l_hand'>[(l_hand ? l_hand  : "Nothing")]</A>
-	<BR><B>Right Hand:</B> <A href='?src=\ref[src];item=r_hand'>[(r_hand ? r_hand : "Nothing")]</A>
-	<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back ? back : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(back, /obj/item/weapon/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
-	<BR>[(internal ? text("<A href='?src=\ref[src];item=internal'>Remove Internal</A>") : "")]
-	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
-	<BR><A href='?src=\ref[user];refresh=1'>Refresh</A>
-	<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>
-	<BR>"}
-	user << browse(dat, text("window=mob[];size=325x500", name))
-	onclose(user, "mob[name]")
 	return
 
 //mob verbs are faster than object verbs. See http://www.byond.com/forum/?post=1326139&page=2#comment8198716 for why this isn't atom/verb/examine()
@@ -1082,7 +1065,7 @@ mob/proc/yank_out_object()
 		usr << "You are now facing [dir2text(facing_dir)]."
 
 /mob/proc/set_face_dir(var/newdir)
-	if(newdir == facing_dir)
+	if(!isnull(facing_dir) && newdir == facing_dir)
 		facing_dir = null
 	else if(newdir)
 		set_dir(newdir)

@@ -284,10 +284,6 @@
 	if((H.getToxLoss() >= heal_threshold) && (!H.reagents.has_reagent(treatment_tox)))
 		return treatment_tox
 
-	for(var/datum/disease/D in H.viruses)
-		if (!H.reagents.has_reagent(treatment_virus))
-			return treatment_virus // STOP DISEASE FOREVER
-
 /* Construction */
 
 /obj/item/weapon/storage/firstaid/attackby(var/obj/item/robot_parts/S, mob/user as mob)

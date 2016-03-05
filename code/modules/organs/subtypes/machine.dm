@@ -145,7 +145,7 @@
 	robotize()
 	stored_mmi = new /obj/item/device/mmi/digital/posibrain(src)
 	..()
-	spawn(1)
+	spawn(30)
 		if(owner)
 			stored_mmi.name = "positronic brain ([owner.name])"
 			stored_mmi.brainmob.real_name = owner.name

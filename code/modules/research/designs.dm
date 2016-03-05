@@ -1025,12 +1025,6 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/operating
 	sort_string = "FACAA"
 
-/datum/design/circuit/pandemic
-	name = "PanD.E.M.I.C. 2200"
-	id = "pandemic"
-	build_path = /obj/item/weapon/circuitboard/pandemic
-	sort_string = "FAEAA"
-
 /datum/design/circuit/scan_console
 	name = "DNA machine"
 	id = "scan_console"
