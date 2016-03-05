@@ -125,6 +125,18 @@ var/list/_client_preferences_by_type
 	enabled_description = "Show"
 	disabled_description = "Hide"
 
+/datum/client_preference/tgui_style
+	description ="tgui Style"
+	key = "TGUI_FANCY"
+	enabled_description = "Fancy"
+	disabled_description = "Plain"
+
+/datum/client_preference/tgui_monitors
+	description ="tgui Monitors"
+	key = "TGUI_MONITORS"
+	enabled_description = "Primary"
+	disabled_description = "All"
+
 /********************
 * Admin Preferences *
 ********************/

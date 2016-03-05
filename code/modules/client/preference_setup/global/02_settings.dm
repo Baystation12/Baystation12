@@ -1,4 +1,6 @@
 /datum/preferences
+	var/tgui_fancy = 1
+	var/tgui_lock = 1
 	var/preferences = null
 
 /datum/category_item/player_setup_item/player_global/settings
