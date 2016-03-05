@@ -58,6 +58,7 @@
 /obj/item/weapon/contract/wizard/xray
 	name = "xray vision contract"
 	desc = "This contract is almost see-through..."
+	color = "#339900"
 
 /obj/item/weapon/contract/wizard/xray/contract_effect(mob/user as mob)
 	..()
@@ -73,6 +74,7 @@
 /mob/item/weapon/contract/wizard/tk
 	name = "telekinesis contract"
 	desc = "This contract makes your mind buzz. It promises to give you the ability to move things with your mind. At a price."
+	color = "#990033"
 
 /obj/item/weapon/contract/wizard/tk/contract_effect(mob/user as mob)
 	..()
