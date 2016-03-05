@@ -215,8 +215,8 @@
 			"screen"	= src_object.ui_screen,
 			"style"     = style,
 			"interface" = interface,
-			"fancy"     = user.client.prefs.tgui_fancy,
-			"locked"    = user.client.prefs.tgui_lock,
+			"fancy"     = user.is_preference_enabled(/datum/client_preference/tgui_style),
+			"locked"    = user.is_preference_enabled(/datum/client_preference/tgui_monitor),
 			"window"    = window_id,
 			"ref"       = "\ref[src]",
 			"user"      = list(
@@ -277,9 +277,9 @@
 		if("tgui:link")
 			user << link(params["url"])
 		if("tgui:fancy")
-			user.client.prefs.tgui_fancy = TRUE
+			user.set_preference(/datum/client_preference/tgui_style, TRUE)
 		if("tgui:nofrills")
-			user.client.prefs.tgui_fancy = FALSE
+			user.set_preference(/datum/client_preference/tgui_style, FALSE)
 		else
 			update_status(push = 0) // Update the window state.
 			if(src_object.ui_act(action, params, src, state)) // Call ui_act() on the src_object.
@@ -331,7 +331,7 @@
   * optional force_open bool If force_open should be passed to ui_interact.
  **/
 /datum/tgui/proc/update(force_open = 0)
-	src_object.ui_interact(user, ui_key, src, force_open, master_ui, state)
+	src_object.tg_ui_interact(user, ui_key, src, force_open, master_ui, state)
 
  /**
   * private

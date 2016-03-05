@@ -131,9 +131,9 @@ var/list/_client_preferences_by_type
 	enabled_description = "Fancy"
 	disabled_description = "Plain"
 
-/datum/client_preference/tgui_monitors
-	description ="tgui Monitors"
-	key = "TGUI_MONITORS"
+/datum/client_preference/tgui_monitor
+	description ="tgui Monitor"
+	key = "TGUI_MONITOR"
 	enabled_description = "Primary"
 	disabled_description = "All"
 

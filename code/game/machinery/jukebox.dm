@@ -8,7 +8,7 @@ datum/track/New(var/title_name, var/audio)
 	title = title_name
 	sound = audio
 
-/obj/machinery/media/jukebox/
+/obj/machinery/media/jukebox
 	name = "space jukebox"
 	icon = 'icons/obj/jukebox.dmi'
 	icon_state = "jukebox2-nopower"
@@ -35,10 +35,13 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
 	)
 
+/obj/machinery/media/jukebox/New()
+	..()
+	update_icon()
 
 /obj/machinery/media/jukebox/Destroy()
 	StopPlaying()
-	..()
+	. = ..()
 
 /obj/machinery/media/jukebox/power_change()
 	if(!powered(power_channel) || !anchored)
@@ -74,11 +77,15 @@ datum/track/New(var/title_name, var/audio)
 		usr << "\The [src] doesn't appear to function."
 		return
 
-	ui_interact(user)
+	tg_ui_interact(user)
 
-/obj/machinery/media/jukebox/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, \
-										datum/tgui/master_ui = null, datum/ui_state/state = default_state)
-	ui = tguiProcess.try_update_ui(user, src, ui_key, ui, force_open)
+/obj/machinery/media/jukebox/ui_status(mob/user, datum/ui_state/state)
+	if(!anchored || inoperable())
+		return UI_CLOSE
+	return ..()
+
+/obj/machinery/media/jukebox/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = tg_default_state)
+	ui = tgui_process.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "jukebox", "RetroBox - Space Style", 340, 440, master_ui, state)
 		ui.open()
@@ -89,7 +96,7 @@ datum/track/New(var/title_name, var/audio)
 		juke_tracks.Add(T.title)
 
 	var/list/data = list(
-		"current_track" = current_track != null ? current_track.title : "",
+		"current_track" = current_track != null ? current_track.title : "No track selected",
 		"playing" = playing,
 		"tracks" = juke_tracks
 	)
@@ -97,7 +104,7 @@ datum/track/New(var/title_name, var/audio)
 	return data
 
 /obj/machinery/media/jukebox/ui_act(action, params)
-	if(..() || !anchored || stat & (NOPOWER|BROKEN))
+	if(..())
 		return TRUE
 	switch(action)
 		if("change_track")
@@ -106,8 +113,10 @@ datum/track/New(var/title_name, var/audio)
 					current_track = T
 					StartPlaying()
 					break
+			. = TRUE
 		if("stop")
 			StopPlaying()
+			. = TRUE
 		if("play")
 			if(emagged)
 				emag_play()
@@ -115,6 +124,7 @@ datum/track/New(var/title_name, var/audio)
 				usr << "No track selected."
 			else
 				StartPlaying()
+			. = TRUE
 
 /obj/machinery/media/jukebox/proc/emag_play()
 	playsound(loc, 'sound/items/AirHorn.ogg', 100, 1)

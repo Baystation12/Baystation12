@@ -15,7 +15,9 @@
   * return UI_state The state of the UI.
  **/
 /datum/proc/ui_status(mob/user, datum/ui_state/state)
-	var/src_object = ui_host()
+	var/datum/src_object = ui_host()
+	if(src_object != src)
+		return src_object.ui_status(user, state)
 
 	if(istype(user, /mob/dead/observer)) // Special-case ghosts.
 		if(user.can_admin_interact())
