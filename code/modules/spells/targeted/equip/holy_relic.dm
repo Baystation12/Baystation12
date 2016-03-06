@@ -1,6 +1,6 @@
 /spell/targeted/equip_item/holy_relic
 	name = "Summon Holy Relic"
-	desc = "This spell summons a relic of purity into your hand for a short while. It requires wizard garb."
+	desc = "This spell summons a relic of purity into your hand for a short while."
 	feedback = "SR"
 	school = "transmutation"
 	charge_type = Sp_RECHARGE

@@ -1,6 +1,6 @@
 /spell/targeted/equip_item/seed
 	name = "Summon Seed"
-	desc = "This spell summons a random seed into the hand of the wizard. Requires wizard garb."
+	desc = "This spell summons a random seed into the hand of the wizard."
 	feedback = "SE"
 	delete_old = 0
 

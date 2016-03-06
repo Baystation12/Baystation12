@@ -29,7 +29,7 @@
 
 /spell/targeted/heal_target/major
 	name = "Cure Major Wounds"
-	desc = "A spell used to fix others that cannot be fixed with regular medicine. Requires wizard garb."
+	desc = "A spell used to fix others that cannot be fixed with regular medicine."
 	feedback = "CM"
 	charge_max = 300
 	spell_flags = SELECTABLE | NEEDSCLOTHES
@@ -54,7 +54,7 @@
 
 /spell/targeted/heal_target/area
 	name = "Cure Area"
-	desc = "This spell heals everyone in an area. Does not require wizard garb."
+	desc = "This spell heals everyone in an area."
 	feedback = "HA"
 	charge_max = 600
 	spell_flags = INCLUDEUSER
