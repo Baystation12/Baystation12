@@ -346,6 +346,10 @@
 	reagent_state = LIQUID
 	color = "#808080"
 
+/datum/reagent/nitroglycerin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.add_chemical_effect(CE_PULSE, 2)
+
 /datum/reagent/coolant
 	name = "Coolant"
 	id = "coolant"
