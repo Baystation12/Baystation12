@@ -241,9 +241,8 @@
 
 		for(var/datum/data/vending_product/R in product_records)
 			if(istype(W, R.product_path))
-				stock(R, user)
-				qdel(W)
-				return
+				stock(W, R, user)
+				return 1
 		..()
 
 /**
@@ -527,10 +526,17 @@
 		currently_vending = null
 		nanomanager.update_uis(src)
 
-/obj/machinery/vending/proc/stock(var/datum/data/vending_product/R, var/mob/user)
-	if(src.panel_open)
-		user << "<span class='notice'>You insert \the [src] in the product receptor.</span>"
-		R.amount++
+/**
+ * Add item to the machine
+ *
+ * Checks if item is vendable in this machine should be performed before
+ * calling. W is the item being inserted, R is the associated vending_product entry.
+ */	
+/obj/machinery/vending/proc/stock(obj/item/weapon/W, var/datum/data/vending_product/R, var/mob/user)
+
+	user << "<span class='notice'>You insert \the [W] in the product receptor.</span>"
+	R.amount++
+	qdel(W)
 
 	nanomanager.update_uis(src)
 
