@@ -78,7 +78,7 @@
 
 	..()
 
-	if (!mover || !isturf(mover.loc))
+	if (!mover || !mover.density || !isturf(mover.loc))
 		return 1
 
 	//First, check objects to block exit that are not on the border

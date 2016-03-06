@@ -1884,6 +1884,7 @@
 #include "code\unit_tests\loadout_tests.dm"
 #include "code\unit_tests\map_tests.dm"
 #include "code\unit_tests\mob_tests.dm"
+#include "code\unit_tests\movement_tests.dm"
 #include "code\unit_tests\observation_tests.dm"
 #include "code\unit_tests\test_obj.dm"
 #include "code\unit_tests\unique_tests.dm"

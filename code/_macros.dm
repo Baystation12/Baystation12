@@ -23,6 +23,8 @@
 
 #define ismouse(A) istype(A, /mob/living/simple_animal/mouse)
 
+#define ismovable(A) istype(A, /atom/movable)
+
 #define isnewplayer(A) istype(A, /mob/new_player)
 
 #define isobj(A) istype(A, /obj)
