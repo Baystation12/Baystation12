@@ -59,13 +59,16 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		dat = "[temp]<br><a href='byond://?src=\ref[src];temp=1'>Return</a>"
 	else
 		dat = "<center><h3>[spellbook.title]</h3><i>[spellbook.title_desc]</i><br>You have [uses] spell slot[uses > 1 ? "s" : ""] left.</center><br>"
+		dat += "<center><font color='#ff33cc'>Requires Wizard Garb</font><br><font color='#ff6600'>Selectable Target</font><br><font color='#33cc33'>Spell Charge Type: Recharge, Sacrifice, Charges</font></center><br>"
 		for(var/i in 1 to spellbook.spells.len)
-			var/name = ""
-			var/desc = ""
+			var/name = "" //name of target
+			var/desc = "" //description of target
+			var/info = "" //additional information
 			if(ispath(spellbook.spells[i],/datum/spellbook))
 				var/datum/spellbook/S = spellbook.spells[i]
 				name = initial(S.name)
 				desc = initial(S.book_desc)
+				info = "<font color='#ff33cc'>[initial(S.max_uses)] Spell Slots</font>"
 			else if(ispath(spellbook.spells[i],/obj))
 				var/obj/O = spellbook.spells[i]
 				name = "Artefact: [capitalize(initial(O.name))]" //because 99.99% of objects dont have capitals in them and it makes it look weird.
@@ -74,7 +77,21 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 				var/spell/S = spellbook.spells[i]
 				name = initial(S.name)
 				desc = initial(S.desc)
+				var/testing = initial(S.spell_flags)
+				if(testing & NEEDSCLOTHES)
+					info = "<font color='#ff33cc'>W</font>"
+				var/type = ""
+				switch(initial(S.charge_type))
+					if(Sp_RECHARGE)
+						type = "R"
+					if(Sp_HOLDVAR)
+						type = "S"
+					if(Sp_CHARGES)
+						type = "C"
+				info += "<font color='#33cc33'>[type]</font>"
 			dat += "<A href='byond://?src=\ref[src];path=[spellbook.spells[i]]'>[name]</a>"
+			if(length(info))
+				dat += " ([info])"
 			dat += " ([spellbook.spells[spellbook.spells[i]]] spell slot[spellbook.spells[spellbook.spells[i]] > 1 ? "s" : "" ])"
 			if(spellbook.book_flags & CAN_MAKE_CONTRACTS)
 				dat += " <A href='byond://?src=\ref[src];path=[spellbook.spells[i]];contract=1;'>Make Contract</a>"
