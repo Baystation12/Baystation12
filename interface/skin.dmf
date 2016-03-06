@@ -2113,7 +2113,7 @@ window "rpane"
 		right-click = false
 		saved-params = "is-checked"
 		on-size = ""
-		text = "Github"
+		text = "GitHub"
 		image = ""
 		command = "Github"
 		is-flat = false
