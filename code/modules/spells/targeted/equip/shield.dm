@@ -21,6 +21,8 @@
 	var/item_color = "#6666ff"
 	var/block_chance = 30
 
+	hud_state = "wiz_shield"
+
 /spell/targeted/equip_item/shield/summon_item(var/new_type)
 	var/obj/item/weapon/shield/I = new new_type()
 	I.icon_state = "buckler"

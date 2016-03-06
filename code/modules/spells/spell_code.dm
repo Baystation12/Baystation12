@@ -16,6 +16,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	var/still_recharging_msg = "<span class='notice'>The spell is still recharging.</span>"
 
 	var/silenced = 0 //not a binary - the length of time we can't cast this for
+	var/processing = 0 //are we processing already? Mainly used so that silencing a spell doesn't call process() again. (and inadvertedly making it run twice as fast)
 
 	var/holder_var_type = "bruteloss" //only used if charge_type equals to "holder_var"
 	var/holder_var_amount = 20 //same. The amount adjusted with the mob's var when the spell is used
@@ -66,9 +67,20 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	charge_counter = charge_max
 
 /spell/proc/process()
-	spawn while(charge_counter < charge_max)
-		charge_counter++
-		sleep(1)
+	if(processing)
+		return
+	processing = 1
+	spawn(0)
+		while(charge_counter < charge_max || silenced > 0)
+			charge_counter = min(charge_max,charge_counter+1)
+			silenced = max(0,silenced-1)
+			sleep(1)
+		if(connected_button)
+			var/obj/screen/spell/S = connected_button
+			if(!istype(S))
+				return
+			S.update_charge(1)
+		processing = 0
 	return
 
 /////////////////
@@ -86,7 +98,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	if(cast_delay && !spell_do_after(user, cast_delay))
 		return
 	var/list/targets = choose_targets(user)
-	if(targets && targets.len)
+	if(targets && targets.len && cast_check(1,user)) //we check again, otherwise you can choose a target and then wait for when you are no longer able to cast (I.E. Incapacitated) to use it.
 		invocation(user, targets)
 		take_charge(user, skipcharge)
 
