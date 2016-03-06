@@ -123,9 +123,6 @@ REAGENT SCANNER
 //			user.show_message(text("<span class='warning'>Warning: Unknown pathogen detected in subject's blood.</span>"))
 	if (M.getCloneLoss())
 		user.show_message("<span class='warning'>Subject appears to have been imperfectly cloned.</span>")
-	for(var/datum/disease/D in M.viruses)
-		if(!D.hidden[SCANNER])
-			user.show_message(text("<span class='danger'>Warning: [D.form] Detected</span><span class='warning'>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]</span>"))
 //	if (M.reagents && M.reagents.get_reagent_amount("inaprovaline"))
 //		user.show_message("<span class='notice'>Bloodstream Analysis located [M.reagents:get_reagent_amount("inaprovaline")] units of rejuvenation chemicals.</span>")
 	if (M.has_brain_worms())
@@ -170,7 +167,7 @@ REAGENT SCANNER
 				user.show_message("<span class='danger'><i>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl.</i></span> <span class='notice'>Type: [blood_type]</span>")
 			else
 				user.show_message("<span class='notice'>Blood Level Normal: [blood_percent]% [blood_volume]cl. Type: [blood_type]</span>")
-		user.show_message("<span class='notice'>Subject's pulse: <font color='[H.pulse == PULSE_THREADY || H.pulse == PULSE_NONE ? "red" : "blue"]'>[H.get_pulse(GETPULSE_TOOL)] bpm.</font></span>")
+		user.show_message("<span class='notice'>Subject's pulse: <font color='[H.pulse() == PULSE_THREADY || H.pulse() == PULSE_NONE ? "red" : "blue"]'>[H.get_pulse(GETPULSE_TOOL)] bpm.</font></span>")
 	src.add_fingerprint(user)
 	return
 

@@ -201,7 +201,7 @@
 			usr.visible_message("<b>[usr]</b> checks [src]'s pulse.", "You check [src]'s pulse.")
 		spawn(15)
 			if(distance <= 1 && usr.stat != 1)
-				if(pulse == PULSE_NONE)
+				if(pulse() == PULSE_NONE)
 					usr << "<span class='deadsay'>[T.He] [T.has] no pulse[src.client ? "" : " and [T.his] soul has departed"]...</span>"
 				else
 					usr << "<span class='deadsay'>[T.He] [T.has] a pulse!</span>"

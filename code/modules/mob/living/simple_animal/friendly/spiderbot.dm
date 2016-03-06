@@ -204,7 +204,7 @@
 	held_item.loc = src.loc
 	held_item = null
 
-	gibs(loc, viruses, null, null, /obj/effect/gibspawner/robot) //TODO: use gib() or refactor spiderbots into synthetics.
+	gibs(loc, null, null, /obj/effect/gibspawner/robot) //TODO: use gib() or refactor spiderbots into synthetics.
 	qdel(src)
 	return
 

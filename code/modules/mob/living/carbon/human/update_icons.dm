@@ -176,9 +176,6 @@ var/global/list/damage_icon_parts = list()
 	for(var/obj/item/organ/external/O in organs)
 		if(O.is_stump())
 			continue
-		//if(O.status & ORGAN_DESTROYED) damage_appearance += "d" //what is this?
-		//else
-		//	damage_appearance += O.damage_state
 		damage_appearance += O.damage_state
 
 	if(damage_appearance == previous_damage_appearance)
@@ -187,16 +184,14 @@ var/global/list/damage_icon_parts = list()
 
 	previous_damage_appearance = damage_appearance
 
-	var/icon/standing = new /icon(species.damage_overlays, "00")
-
-	var/image/standing_image = new /image("icon" = standing)
+	var/image/standing_image = image(species.damage_overlays, icon_state = "00")
 
 	// blend the individual damage states with our icons
 	for(var/obj/item/organ/external/O in organs)
 		if(O.is_stump())
 			continue
 
-		O.update_icon()
+		O.update_damstate()
 		if(O.damage_state == "00") continue
 		var/icon/DI
 		var/cache_index = "[O.damage_state]/[O.icon_name]/[species.blood_color]/[species.get_bodytype()]"

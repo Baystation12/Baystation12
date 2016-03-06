@@ -241,9 +241,8 @@
 
 		for(var/datum/data/vending_product/R in product_records)
 			if(istype(W, R.product_path))
-				stock(R, user)
-				qdel(W)
-				return
+				stock(W, R, user)
+				return 1
 		..()
 
 /**
@@ -527,10 +526,17 @@
 		currently_vending = null
 		nanomanager.update_uis(src)
 
-/obj/machinery/vending/proc/stock(var/datum/data/vending_product/R, var/mob/user)
-	if(src.panel_open)
-		user << "<span class='notice'>You insert \the [src] in the product receptor.</span>"
-		R.amount++
+/**
+ * Add item to the machine
+ *
+ * Checks if item is vendable in this machine should be performed before
+ * calling. W is the item being inserted, R is the associated vending_product entry.
+ */	
+/obj/machinery/vending/proc/stock(obj/item/weapon/W, var/datum/data/vending_product/R, var/mob/user)
+
+	user << "<span class='notice'>You insert \the [W] in the product receptor.</span>"
+	R.amount++
+	qdel(W)
 
 	nanomanager.update_uis(src)
 
@@ -886,7 +892,6 @@
 	vend_reply = "Have an enchanted evening!"
 	product_ads = "FJKLFJSD;AJKFLBJAKL;1234 LOONIES LOL!;>MFW;Kill them fuckers!;GET DAT FUKKEN DISK;HONK!;EI NATH;Destroy the station!;Admin conspiracies since forever!;Space-time bending hardware!"
 	products = list(/obj/item/clothing/head/wizard = 1,/obj/item/clothing/suit/wizrobe = 1,/obj/item/clothing/head/wizard/red = 1,/obj/item/clothing/suit/wizrobe/red = 1,/obj/item/clothing/shoes/sandal = 1,/obj/item/weapon/staff = 2)
-	contraband = list(/obj/item/weapon/reagent_containers/glass/bottle/wizarditis = 1)	//No one can get to the machine to hack it anyways; for the lulz - Microwave
 
 /obj/machinery/vending/dinnerware
 	name = "Dinnerware"

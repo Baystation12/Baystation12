@@ -141,11 +141,6 @@
 	M.confused = 0
 	M.sleeping = 0
 	M.jitteriness = 0
-	for(var/datum/disease/D in M.viruses)
-		D.spread = "Remissive"
-		D.stage--
-		if(D.stage < 1)
-			D.cure()
 
 /datum/reagent/gold
 	name = "Gold"
@@ -350,6 +345,10 @@
 	description = "Nitroglycerin is a heavy, colorless, oily, explosive liquid obtained by nitrating glycerol."
 	reagent_state = LIQUID
 	color = "#808080"
+
+/datum/reagent/nitroglycerin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/coolant
 	name = "Coolant"

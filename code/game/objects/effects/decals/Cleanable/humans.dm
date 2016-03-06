@@ -37,8 +37,6 @@ var/global/list/image/splatter_cache=list()
 	..(ignore=1)
 
 /obj/effect/decal/cleanable/blood/Destroy()
-	for(var/datum/disease/D in viruses)
-		D.cure(0)
 	processing_objects -= src
 	return ..()
 
@@ -221,10 +219,6 @@ var/global/list/image/splatter_cache=list()
                                 var/obj/effect/decal/cleanable/blood/b = PoolOrNew(/obj/effect/decal/cleanable/blood/splatter, src.loc)
                                 b.basecolor = src.basecolor
                                 b.update_icon()
-                                for(var/datum/disease/D in src.viruses)
-                                        var/datum/disease/ND = D.Copy(1)
-                                        b.viruses += ND
-                                        ND.holder = b
 
                         if (step_to(src, get_step(src, direction), 0))
                                 break
