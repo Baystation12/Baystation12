@@ -1,3 +1,5 @@
+
+/* TODO: Update to new health analyzer.
 /obj/item/device/assembly/scanner/healthanalyzer
 	name = "health analyzer"
 	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
@@ -300,3 +302,4 @@
 					usr << "<span class='notice'>You set \the	[src]'s sent data type to \"[new_scan]\"!</span>"
 					sent_data = new_scan
 	..()
+*/

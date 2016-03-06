@@ -326,7 +326,18 @@
 
 
 
+/*
+/obj/item/device/assembly/nano_host()
+    if(istype(loc, /obj/item/device/assembly_holder))
+        return loc.nano_host()
+    return ..()
 
+	var/small_icon_state = null//If this obj will go inside the assembly use this for icons
+	var/list/small_icon_state_overlays = null//Same here
+	var/obj/holder = null
+	var/cooldown = 0//To prevent spam
+
+*/
 
 
 
