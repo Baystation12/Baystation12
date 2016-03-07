@@ -25,14 +25,14 @@
 		log_unit_test("[exp]/([exp.type]) was not strictly of the type /datum/extension/multitool/cryo.")
 		number_of_failures++
 	else
-		if(multi.interact_predicates.len != 2)
-			log_unit_test("Unexpected interaction predicate length. Was [multi.interact_predicates.len], expected 2.")
+		if(multi.host_predicates.len != 2)
+			log_unit_test("Unexpected interaction predicate length. Was [multi.host_predicates.len], expected 2.")
 			number_of_failures++
-		else if(multi.interact_predicates[1] != /proc/is_operable)
-			log_unit_test("Unexpected interaction predicate at index 1. Was [multi.interact_predicates[1]], expected /proc/is_operable.")
+		else if(multi.host_predicates[1] != /proc/is_operable)
+			log_unit_test("Unexpected interaction predicate at index 1. Was [multi.host_predicates[1]], expected /proc/is_operable.")
 			number_of_failures++
-		else if(multi.interact_predicates[2] != /proc/is_operable)
-			log_unit_test("Unexpected interaction predicate at index 2. Was [multi.interact_predicates[2]], expected /proc/is_operable.")
+		else if(multi.host_predicates[2] != /proc/is_operable)
+			log_unit_test("Unexpected interaction predicate at index 2. Was [multi.host_predicates[2]], expected /proc/is_operable.")
 			number_of_failures++
 
 	if(number_of_failures)

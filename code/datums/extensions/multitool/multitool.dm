@@ -1,18 +1,9 @@
 /datum/extension/multitool
 	var/window_x = 370
 	var/window_y = 470
-	var/list/interact_predicates
-
-/datum/extension/multitool/New(var/atom/holder, var/list/can_interact_predicates)
-	..()
-	interact_predicates = can_interact_predicates ? can_interact_predicates : list()
-
-/datum/extension/multitool/Destroy()
-	interact_predicates.Cut()
-	return ..()
 
 /datum/extension/multitool/proc/interact(var/obj/item/device/multitool/M, var/mob/user)
-	if(CanUseTopic(user) != STATUS_INTERACTIVE)
+	if(extension_status(user) != STATUS_INTERACTIVE)
 		return
 
 	var/html = get_interact_window(M, user)
@@ -38,26 +29,16 @@
 	else
 		. += "No connection stored in the buffer."
 
-/datum/extension/multitool/CanUseTopic(var/mob/user)
-	. = ..()
-	if(. == STATUS_CLOSE)
-		return
-
+/datum/extension/multitool/extension_status(var/mob/user)
 	if(!user.get_multitool())
 		return STATUS_CLOSE
+	. = ..()
 
-	if(!all_predicates_true(list(holder, user), interact_predicates))
-		return STATUS_CLOSE
-
-	var/datum/host = holder.nano_host()
-	return user.default_can_use_topic(host)
-
-/datum/extension/multitool/Topic(href, href_list)
+/datum/extension/multitool/extension_act(href, href_list, var/mob/user)
 	if(..())
 		close_window(usr)
-		return 1
+		return TRUE
 
-	var/mob/user = usr
 	var/obj/item/device/multitool/M = user.get_multitool()
 	if(href_list["send"])
 		var/atom/buffer = locate(href_list["send"])
@@ -73,7 +54,7 @@
 			interact(M, user)
 		if(MT_CLOSE)
 			close_window(user)
-	return 1
+	return MT_NOACTION ? FALSE : TRUE
 
 /datum/extension/multitool/proc/on_topic(href, href_list, user)
 	return MT_NOACTION
