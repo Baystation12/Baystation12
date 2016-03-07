@@ -226,13 +226,13 @@
 /datum/category_item/player_setup_item/Topic(var/href,var/list/href_list)
 	if(..())
 		return 1
-	var/mob/user = usr
-	if(!user.client)
+	var/mob/pref_mob = preference_mob()
+	if(!pref_mob || !pref_mob.client)
 		return 1
 
-	. = OnTopic(href, href_list, user)
+	. = OnTopic(href, href_list, usr)
 	if(. == TOPIC_REFRESH)
-		user.client.prefs.ShowChoices(user)
+		pref_mob.client.prefs.ShowChoices(usr)
 
 /datum/category_item/player_setup_item/CanUseTopic(var/mob/user)
 	return 1
@@ -241,5 +241,4 @@
 	return TOPIC_NOACTION
 
 /datum/category_item/player_setup_item/proc/preference_mob()
-	if(pref && pref.client && pref.client.mob)
-		return pref.client.mob
+    return get_mob_by_key(pref.client_ckey)
