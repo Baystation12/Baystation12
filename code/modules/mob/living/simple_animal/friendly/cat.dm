@@ -48,7 +48,7 @@
 
 	if(incapacitated())
 		return
-	
+
 	turns_since_scan++
 	if (turns_since_scan > 5)
 		walk_to(src,0)
@@ -205,14 +205,17 @@
 		say("Meow!")
 		return
 
-	if (!(ishuman(usr) && befriend_job && usr.job == befriend_job))
-		usr << "<span class='notice'>[src] ignores you.</span>"
-		return
+	if (ishuman(usr))
+		var/mob/living/carbon/human/H = usr
+		if(H.job == befriend_job)
+			friend = usr
+			set_dir(get_dir(src, friend))
+			say("Meow!")
+			return
 
-	friend = usr
+	usr << "<span class='notice'>[src] ignores you.</span>"
+	return
 
-	set_dir(get_dir(src, friend))
-	say("Meow!")
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
 /mob/living/simple_animal/cat/fluff/Runtime

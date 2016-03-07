@@ -149,5 +149,10 @@ var/list/gear_datums = list()
 	var/list/allowed_roles //Roles that can spawn with this item.
 	var/whitelisted        //Term to check the whitelist for..
 	var/sort_category = "General"
+	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
 
-
+/datum/gear/proc/spawn_item(var/location)
+	var/item = new path(location)
+	for(var/datum/gear_tweak/gt in gear_tweaks)
+		gt.apply_tweak(item)
+	return item

@@ -445,7 +445,7 @@
 		var/obj/item/weapon/weldingtool/W = I
 		if(W.remove_fuel(1,user))
 			user << "You start slicing the floorweld off the delivery chute."
-			if(do_after(user,20))
+			if(do_after(user,20, src))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				if(!src || !W.isOn()) return
 				user << "You sliced the floorweld off the delivery chute."

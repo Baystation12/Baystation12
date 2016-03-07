@@ -319,7 +319,7 @@
 			else if(brute >= max_damage / DROPLIMB_THRESHOLD_TEAROFF && prob(brute/3))
 				droplimb(0, DROPLIMB_EDGE)
 
-	return update_icon()
+	return update_damstate()
 
 /obj/item/organ/external/proc/heal_damage(brute, burn, internal = 0, robo_repair = 0)
 	if(status & ORGAN_ROBOT && !robo_repair)
@@ -349,8 +349,7 @@
 	src.update_damages()
 	owner.updatehealth()
 
-	var/result = update_icon()
-	return result
+	return update_damstate()
 
 /*
 This function completely restores a damaged organ to perfect condition.
@@ -628,7 +627,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
-	if (update_icon())
+	if (update_damstate())
 		owner.UpdateDamageIcon(1)
 
 //Updates brute_damn and burn_damn from wound damages. Updates BLEEDING status.
@@ -667,9 +666,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(config.bones_can_break && brute_dam > min_broken_damage * config.organ_health_multiplier && !(status & ORGAN_ROBOT))
 		src.fracture()
 
-// new damage icon system
-// adjusted to set damage_state to brute/burn code only (without r_name0 as before)
-/obj/item/organ/external/update_icon()
+//Returns 1 if damage_state changed
+/obj/item/organ/external/proc/update_damstate()
 	var/n_is = damage_state_text()
 	if (n_is != damage_state)
 		damage_state = n_is
@@ -945,7 +943,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	dislocated = -1 //TODO, make robotic limbs a separate type, remove snowflake
 	cannot_break = 1
-	get_icon()
+	update_icon(1)
 	unmutate()
 	for (var/obj/item/organ/external/T in children)
 		if(T)

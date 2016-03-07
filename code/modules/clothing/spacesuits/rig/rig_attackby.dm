@@ -80,7 +80,7 @@
 
 			var/obj/item/rig_module/mod = W
 			user << "You begin installing \the [mod] into \the [src]."
-			if(!do_after(user,40))
+			if(!do_after(user,40,src))
 				return
 			if(!user || !W)
 				return

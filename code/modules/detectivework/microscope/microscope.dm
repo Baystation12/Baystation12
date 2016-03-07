@@ -32,7 +32,7 @@
 
 	user << "<span class='notice'>The microscope whirrs as you examine \the [sample].</span>"
 
-	if(!do_after(user, 25) || !sample)
+	if(!do_after(user, 25, src) || !sample)
 		user << "<span class='notice'>You stop examining \the [sample].</span>"
 		return
 

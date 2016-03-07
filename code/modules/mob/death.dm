@@ -16,7 +16,7 @@
 	animation.master = src
 
 	flick(anim, animation)
-	if(do_gibs) gibs(loc, viruses, dna)
+	if(do_gibs) gibs(loc, dna)
 
 	spawn(15)
 		if(animation)	qdel(animation)
@@ -77,7 +77,7 @@
 	drop_l_hand()
 
 	//TODO:  Change death state to health_dead for all these icon files.  This is a stop gap.
-	 
+
 	if(healths)
 		if("health7" in icon_states(healths.icon))
 			healths.icon_state = "health7"

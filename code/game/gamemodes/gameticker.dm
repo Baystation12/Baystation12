@@ -347,7 +347,7 @@ var/global/datum/controller/gameticker/ticker
 			spawn(50)
 				for(var/mob/M in player_list)
 					if(!src || !closing_music) return
-					if(M.client && M.client.prefs.toggles & SOUND_LOBBY)
+					if(M.client && M.client.is_preference_enabled(/datum/client_preference/play_lobby_music))
 						M << sound(closing_music, repeat = 0, wait = 0, volume = 85, channel = 1)
 				showcredits()
 				callHook("roundend")

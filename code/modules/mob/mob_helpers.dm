@@ -31,8 +31,8 @@
 	return istype(species, /datum/species/monkey)
 
 proc/isdeaf(A)
-	if(istype(A, /mob))
-		var/mob/M = A
+	if(isliving(A))
+		var/mob/living/M = A
 		return (M.sdisabilities & DEAF) || M.ear_deaf
 	return 0
 
@@ -431,7 +431,7 @@ proc/is_blind(A)
 				name = realname
 
 	for(var/mob/M in player_list)
-		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && !is_mentor(M.client))) && (M.client.prefs.toggles & CHAT_DEAD))
+		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && !is_mentor(M.client))) && M.is_preference_enabled(/datum/client_preference/show_dsay))
 			var/follow
 			var/lname
 			if(subject)

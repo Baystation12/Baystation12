@@ -112,7 +112,7 @@
 			return
 		user << "<span class='notice'>You start dismantling \the [src]...</span>"
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 30))
+		if(do_after(user, 30, src))
 			user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
 			new /obj/item/beehive_assembly(loc)
 			qdel(src)
@@ -127,7 +127,7 @@
 			user << "<span class='notice'>The bees won't let you take the honeycombs out like this, smoke them first.</span>"
 			return
 		user.visible_message("<span class='notice'>\The [user] starts taking the honeycombs out of \the [src].</span>", "<span class='notice'>You start taking the honeycombs out of \the [src]...</span>")
-		while(honeycombs >= 100 && do_after(user, 30))
+		while(honeycombs >= 100 && do_after(user, 30, src))
 			new /obj/item/honey_frame/filled(loc)
 			honeycombs -= 100
 			--frames
@@ -226,7 +226,7 @@
 
 /obj/item/beehive_assembly/attack_self(var/mob/user)
 	user << "<span class='notice'>You start assembling \the [src]...</span>"
-	if(do_after(user, 30))
+	if(do_after(user, 30, src))
 		user.visible_message("<span class='notice'>\The [user] constructs a beehive.</span>", "<span class='notice'>You construct a beehive.</span>")
 		new /obj/machinery/beehive(get_turf(user))
 		user.drop_from_inventory(src)
