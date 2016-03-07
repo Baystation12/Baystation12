@@ -1470,15 +1470,15 @@
 	name = "Iced Tea"
 	id = "icetea"
 	result = "icetea"
-	required_reagents = list("ice" = 1, "tea" = 4)
-	result_amount = 4
+	required_reagents = list("ice" = 1, "tea" = 2)
+	result_amount = 3
 
 /datum/chemical_reaction/icecoffee
 	name = "Iced Coffee"
 	id = "icecoffee"
 	result = "icecoffee"
-	required_reagents = list("ice" = 1, "coffee" = 4)
-	result_amount = 4
+	required_reagents = list("ice" = 1, "coffee" = 2)
+	result_amount = 3
 
 /datum/chemical_reaction/nuka_cola
 	name = "Nuka Cola"
