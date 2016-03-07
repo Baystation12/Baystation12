@@ -280,6 +280,10 @@
 	if(inactivity > duration)	return inactivity
 	return 0
 
+/client/proc/inactivity2text()
+	var/seconds = inactivity/10
+	return "[round(seconds / 60)] minute\s, [seconds % 60] second\s"
+
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()
 

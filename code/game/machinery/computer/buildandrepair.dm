@@ -15,7 +15,7 @@
 		if(0)
 			if(istype(P, /obj/item/weapon/wrench))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-				if(do_after(user, 20))
+				if(do_after(user, 20, src))
 					user << "<span class='notice'>You wrench the frame into place.</span>"
 					src.anchored = 1
 					src.state = 1
@@ -25,7 +25,7 @@
 					user << "The welding tool must be on to complete this task."
 					return
 				playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-				if(do_after(user, 20))
+				if(do_after(user, 20, src))
 					if(!src || !WT.isOn()) return
 					user << "<span class='notice'>You deconstruct the frame.</span>"
 					new /obj/item/stack/material/steel( src.loc, 5 )
@@ -33,7 +33,7 @@
 		if(1)
 			if(istype(P, /obj/item/weapon/wrench))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-				if(do_after(user, 20))
+				if(do_after(user, 20, src))
 					user << "<span class='notice'>You unfasten the frame.</span>"
 					src.anchored = 0
 					src.state = 0
@@ -73,7 +73,7 @@
 					return
 				user << "<span class='notice'>You start to add cables to the frame.</span>"
 				playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-				if(do_after(user, 20) && state == 2)
+				if(do_after(user, 20, src) && state == 2)
 					if (C.use(5))
 						user << "<span class='notice'>You add cables to the frame.</span>"
 						state = 3
@@ -94,7 +94,7 @@
 					return
 				playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 				user << "<span class='notice'>You start to put in the glass panel.</span>"
-				if(do_after(user, 20) && state == 3)
+				if(do_after(user, 20, src) && state == 3)
 					if (G.use(2))
 						user << "<span class='notice'>You put in the glass panel.</span>"
 						src.state = 4

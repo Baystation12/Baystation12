@@ -18,7 +18,7 @@
 
 /obj/item/weapon/storage/box/evidence/New()
 	..()
-	for(var/i=0;i<storage_slots,i++)
+	for(var/i = 1 to 7)
 		new /obj/item/weapon/evidencebag(src)
 
 /obj/item/weapon/storage/box/fingerprints

@@ -60,12 +60,12 @@
 		if(locked)
 			user << "<span class='warning'>Circuit controls are locked.</span>"
 			return
-		var/existing_networks = list2text(network,",")
+		var/existing_networks = jointext(network,",")
 		var/input = sanitize(input(usr, "Which networks would you like to connect this camera console circuit to? Seperate networks with a comma. No Spaces!\nFor example: SS13,Security,Secret ", "Multitool-Circuitboard interface", existing_networks))
 		if(!input)
 			usr << "No input found please hang up and try your call again."
 			return
-		var/list/tempnetwork = text2list(input, ",")
+		var/list/tempnetwork = splittext(input, ",")
 		tempnetwork = difflist(tempnetwork,restricted_camera_networks,1)
 		if(tempnetwork.len < 1)
 			usr << "No network found please hang up and try your call again."

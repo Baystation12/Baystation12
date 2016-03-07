@@ -21,7 +21,7 @@
 
 	for(var/client/C in admins)
 		if(R_ADMIN & C.holder.rights)
-			if(C.prefs.toggles & CHAT_PRAYER)
+			if(C.is_preference_enabled(/datum/client_preference/admin/show_chat_prayers))
 				C << msg
 	usr << "Your prayers have been received by the gods."
 

@@ -65,7 +65,7 @@
 	caliber = "shotgun"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 1)
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
-	
+
 	burst_delay = 0
 	firemodes = list(
 		list(mode_name="fire one barrel at a time", burst=1),
@@ -93,7 +93,7 @@
 				playsound(user, fire_sound, 50, 1)
 			user.visible_message("<span class='danger'>The shotgun goes off!</span>", "<span class='danger'>The shotgun goes off in your face!</span>")
 			return
-		if(do_after(user, 30))	//SHIT IS STEALTHY EYYYYY
+		if(do_after(user, 30, src))	//SHIT IS STEALTHY EYYYYY
 			icon_state = "sawnshotgun"
 			item_state = "sawnshotgun"
 			w_class = 3

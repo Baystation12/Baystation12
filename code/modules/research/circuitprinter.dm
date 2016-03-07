@@ -146,7 +146,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	var/stacktype = stack.type
 	var/t = getMaterialName(stacktype)
 	if(t)
-		if(do_after(usr, 16))
+		if(do_after(usr, 16, src))
 			if(stack.use(amount))
 				user << "<span class='notice'>You add [amount] sheet\s to \the [src].</span>"
 				materials[t] += amount * SHEET_MATERIAL_AMOUNT

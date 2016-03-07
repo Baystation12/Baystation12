@@ -75,7 +75,7 @@
 		K.new_icon_file = CUSTOM_ITEM_OBJ
 		if(istype(item, /obj/item/device/kit/paint))
 			var/obj/item/device/kit/paint/kit = item
-			kit.allowed_types = text2list(additional_data, ", ")
+			kit.allowed_types = splittext(additional_data, ", ")
 		else if(istype(item, /obj/item/device/kit/suit))
 			var/obj/item/device/kit/suit/kit = item
 			kit.new_light_overlay = additional_data
@@ -130,7 +130,7 @@
 /hook/startup/proc/load_custom_items()
 
 	var/datum/custom_item/current_data
-	for(var/line in text2list(file2text("config/custom_items.txt"), "\n"))
+	for(var/line in splittext(file2text("config/custom_items.txt"), "\n"))
 
 		line = trim(line)
 		if(line == "" || !line || findtext(line, "#", 1, 2))
@@ -173,7 +173,7 @@
 			if("req_access")
 				current_data.req_access = text2num(field_data)
 			if("req_titles")
-				current_data.req_titles = text2list(field_data,", ")
+				current_data.req_titles = splittext(field_data,", ")
 			if("kit_name")
 				current_data.kit_name = field_data
 			if("kit_desc")

@@ -33,7 +33,8 @@
 				continue
 			if(findtext(message," snores.")) //Because we have so many sleeping people.
 				break
-			if(M.stat == 2 && (M.client.prefs.toggles & CHAT_GHOSTSIGHT) && !(M in viewers(src,null)))
+
+			if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_sight) && !(M in viewers(src,null)))
 				M.show_message("(<a href='?src=\ref[M];speakerinfo=\ref[src]'>?</a>)(<a href='byond://?src=\ref[M];track=\ref[src]'>F</a>)[message]", m_type)
 
 		if (m_type & 1)
@@ -66,7 +67,7 @@
 		src << "<span class='danger'>You cannot send deadchat emotes (muted).</span>"
 		return
 
-	if(!(client.prefs.toggles & CHAT_DEAD))
+	if(!is_preference_enabled(/datum/client_preference/show_dsay))
 		src << "<span class='danger'>You have deadchat muted.</span>"
 		return
 

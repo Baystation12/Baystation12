@@ -367,7 +367,7 @@ obj/structure/ex_act(severity)
 //  currently on.
 /obj/structure/transit_tube_pod/proc/mix_air()
 	var/datum/gas_mixture/environment = loc.return_air()
-	
+
 	//note that share_ratio assumes both gas mixes have the same volume,
 	//so if the volume is changed this may need to be changed as well.
 	air_contents.share_ratio(environment, 1)
@@ -539,7 +539,7 @@ obj/structure/ex_act(severity)
 	if(text in direction_table)
 		return direction_table[text]
 
-	var/list/split_text = text2list(text, "-")
+	var/list/split_text = splittext(text, "-")
 
 	// If the first token is D, the icon_state represents
 	//  a purely decorative tube, and doesn't actually
