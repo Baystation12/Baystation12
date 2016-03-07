@@ -263,7 +263,7 @@
 		else
 			user << "The device must first be secured to the floor."
 	return
-	
+
 /obj/machinery/shieldgen/emag_act(var/remaining_charges, var/mob/user)
 	if(!malfunction)
 		malfunction = 1
@@ -284,7 +284,7 @@
 		var/obj/item/stack/cable_coil/coil = W
 		user << "<span class='notice'>You begin to replace the wires.</span>"
 		//if(do_after(user, min(60, round( ((maxhealth/health)*10)+(malfunction*10) ))) //Take longer to repair heavier damage
-		if(do_after(user, 30))
+		if(do_after(user, 30,src))
 			if (coil.use(1))
 				health = max_health
 				malfunction = 0

@@ -6,7 +6,7 @@
 	..()
 
 /mob/living/carbon/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/blocked, var/hit_zone)
-	if(!effective_force || blocked >= 2) 
+	if(!effective_force || blocked >= 2)
 		return 0
 
 	//Hulk modifier
@@ -50,13 +50,13 @@
 // Knifing
 /mob/living/carbon/proc/attack_throat(obj/item/W, obj/item/weapon/grab/G, mob/user)
 
-	if(!W.edge || !W.force || W.damtype != BRUTE) 
+	if(!W.edge || !W.force || W.damtype != BRUTE)
 		return 0 //unsuitable weapon
 
 	user.visible_message("<span class='danger'>\The [user] begins to slit [src]'s throat with \the [W]!</span>")
 
 	user.next_move = world.time + 20 //also should prevent user from triggering this repeatedly
-	if(!do_after(user, 20))
+	if(!do_after(user, 20, progress=0))
 		return 0
 	if(!(G && G.assailant == user && G.affecting == src)) //check that we still have a grab
 		return 0

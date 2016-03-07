@@ -327,6 +327,7 @@ area/space/atmosalert()
 
 /area/shuttle/research/outpost
 	icon_state = "shuttle"
+	base_turf = /turf/simulated/floor/asteroid
 
 /area/airtunnel1/      // referenced in airtunnel.dm:759
 
@@ -514,6 +515,7 @@ area/space/atmosalert()
 /area/syndicate_station/mining
 	name = "\improper northeast of the mining station"
 	icon_state = "north"
+	base_turf = /turf/simulated/floor/asteroid
 
 /area/syndicate_station/arrivals_dock
 	name = "\improper docked with station"
@@ -565,6 +567,7 @@ area/space/atmosalert()
 /area/skipjack_station/mining
 	name = "\improper south of mining station"
 	icon_state = "north"
+	base_turf = /turf/simulated/floor/asteroid
 
 //PRISON
 /area/prison
@@ -1762,6 +1765,7 @@ area/space/atmosalert()
 
 /area/shuttle/constructionsite/site
 	name = "\improper Construction Site Shuttle"
+	base_turf = /turf/simulated/floor/asteroid
 
 /area/constructionsite
 	name = "\improper Construction Site"

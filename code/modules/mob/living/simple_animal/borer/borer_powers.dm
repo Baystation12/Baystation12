@@ -88,7 +88,7 @@
 	M << "Something slimy begins probing at the opening of your ear canal..."
 	src << "You slither up [M] and begin probing at their ear canal..."
 
-	if(!do_after(src,30))
+	if(!do_after(src,30, progress = 0))
 		src << "As [M] moves away, you are dislodged and fall to the ground."
 		return
 

@@ -76,9 +76,9 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 
 	var/dat = "<HTML>"
 	dat += "<table border='0'>"
-	var i, stagger;
+	var i, stagger
 	stagger = 0 //so we can have the checkerboard effect
-	for(i=0; i<64; i++)
+	for(i=0, i<64, i++)
 		if(i%8 == 0)
 			dat += "<tr>"
 			stagger = !stagger
@@ -90,7 +90,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 		else
 			dat += "'#252536'>"
 		if(!isobserver(user))
-			dat += "<A href='?src=\ref[src];select=[i]' style='display:block;text-decoration:none;'>"
+			dat += "<A href='?src=\ref[src];select=[i];person=\ref[user]' style='display:block;text-decoration:none;'>"
 		if(board["[i]"])
 			var/obj/item/I = board["[i]"]
 			user << browse_rsc(board_icons["[I.icon] [I.icon_state]"],"[I.icon_state].png")

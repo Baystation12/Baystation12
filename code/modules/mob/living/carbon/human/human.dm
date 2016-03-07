@@ -75,6 +75,12 @@
 		if(P)
 			stat(null, "Phoron Stored: [P.stored_plasma]/[P.max_plasma]")
 
+		var/obj/item/organ/cooler/C = internal_organs_by_name["cooler"]
+		if(C)
+			stat("Charge", "[src.nutrition / 4]%")
+			stat("Cooler", C.enabled ? "enabled":"disabled")
+			stat("Temperature", "[src.bodytemperature] K")
+
 		if(back && istype(back,/obj/item/weapon/rig))
 			var/obj/item/weapon/rig/suit = back
 			var/cell_status = "ERROR"
@@ -930,8 +936,6 @@
 						H.brainmob.mind.transfer_to(src)
 						qdel(H)
 
-	for (var/datum/disease/virus in viruses)
-		virus.cure()
 
 	for (var/ID in virus2)
 		var/datum/disease2/disease/V = virus2[ID]
@@ -1067,7 +1071,7 @@
 		usr.visible_message("<span class='notice'>[usr] begins counting their pulse.</span>",\
 		"You begin counting your pulse.")
 
-	if(src.pulse)
+	if(pulse())
 		usr << "<span class='notice'>[self ? "You have a" : "[src] has a"] pulse! Counting...</span>"
 	else
 		usr << "<span class='danger'>[src] has no pulse!</span>"	//it is REALLY UNLIKELY that a dead person would check his own pulse
@@ -1356,7 +1360,7 @@
 	else
 		U << "<span class='warning'>You begin to relocate [S]'s [current_limb.joint]...</span>"
 
-	if(!do_after(U, 30))
+	if(!do_after(U, 30, src))
 		return
 	if(!choice || !current_limb || !S || !U)
 		return
@@ -1448,3 +1452,29 @@
 	pulling_punches = !pulling_punches
 	src << "<span class='notice'>You are now [pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>"
 	return
+
+//generates realistic-ish pulse output based on preset levels
+/mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
+	var/temp = 0
+	switch(pulse())
+		if(PULSE_NONE)
+			return "0"
+		if(PULSE_SLOW)
+			temp = rand(40, 60)
+		if(PULSE_NORM)
+			temp = rand(60, 90)
+		if(PULSE_FAST)
+			temp = rand(90, 120)
+		if(PULSE_2FAST)
+			temp = rand(120, 160)
+		if(PULSE_THREADY)
+			return method ? ">250" : "extremely weak and fast, patient's artery feels like a thread"
+	return "[method ? temp : temp + rand(-10, 10)]"
+//			output for machines^	^^^^^^^output for people^^^^^^^^^
+
+/mob/living/carbon/human/proc/pulse()
+	var/obj/item/organ/heart/H = internal_organs_by_name["heart"]
+	if(!H)
+		return PULSE_NONE
+	else
+		return H.pulse

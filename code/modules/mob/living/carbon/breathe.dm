@@ -2,7 +2,7 @@
 
 //Start of a breath chain, calls breathe()
 /mob/living/carbon/handle_breathing()
-	if(air_master.current_cycle%4==2 || failed_last_breath || (health < config.health_threshold_crit)) 	//First, resolve location and get a breath
+	if(life_tick%2==0 || failed_last_breath || (health < config.health_threshold_crit)) 	//First, resolve location and get a breath
 		breathe()
 
 /mob/living/carbon/proc/breathe()

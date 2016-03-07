@@ -124,7 +124,7 @@
 
 		if(iscarbon(affecting))
 			handle_eye_mouth_covering(affecting, assailant, assailant.zone_sel.selecting)
-		
+
 		if(force_down)
 			if(affecting.loc != assailant.loc)
 				force_down = 0
@@ -138,17 +138,18 @@
 			L.adjustOxyLoss(1)
 
 	if(state >= GRAB_KILL)
-		//affecting.apply_effect(STUTTER, 5) //would do this, but affecting isn't declared as mob/living for some stupid reason.
-		affecting.stuttering = max(affecting.stuttering, 5) //It will hamper your voice, being choked and all.
-		affecting.Weaken(5)	//Should keep you down unless you get help.
-		affecting.losebreath = max(affecting.losebreath + 2, 3)
+		if(iscarbon(affecting))
+			var/mob/living/carbon/C = affecting
+			C.apply_effect(STUTTER, 5) //It will hamper your voice, being choked and all.
+			C.Weaken(5)	//Should keep you down unless you get help.
+			C.losebreath = max(C.losebreath + 2, 3)
 
 	adjust_position()
 
 /obj/item/weapon/grab/proc/handle_eye_mouth_covering(mob/living/carbon/target, mob/user, var/target_zone)
 	var/announce = (target_zone != last_hit_zone) //only display messages when switching between different target zones
 	last_hit_zone = target_zone
-	
+
 	switch(target_zone)
 		if("mouth")
 			if(announce)
@@ -232,7 +233,7 @@
 		else
 			assailant.visible_message("<span class='warning'>[assailant] pins [affecting] down to the ground (now hands)!</span>")
 			apply_pinning(affecting, assailant)
-		
+
 		state = GRAB_AGGRESSIVE
 		icon_state = "grabbed1"
 		hud.icon_state = "reinforce1"
@@ -262,8 +263,10 @@
 		msg_admin_attack("[key_name(assailant)] strangled (kill intent) [key_name(affecting)]")
 
 		affecting.setClickCooldown(10)
-		affecting.losebreath += 1
 		affecting.set_dir(WEST)
+		if(iscarbon(affecting))
+			var/mob/living/carbon/C = affecting
+			C.losebreath += 1
 	adjust_position()
 
 //This is used to make sure the victim hasn't managed to yackety sax away before using the grab.
@@ -284,10 +287,10 @@
 		return
 	if(world.time < (last_action + 20))
 		return
-	
+
 	last_action = world.time
 	reset_kill_state() //using special grab moves will interrupt choking them
-	
+
 	//clicking on the victim while grabbing them
 	if(M == affecting)
 		if(ishuman(affecting))
@@ -300,10 +303,10 @@
 						force_down = 0
 						return
 					inspect_organ(affecting, assailant, hit_zone)
-				
+
 				if(I_GRAB)
 					jointlock(affecting, assailant, hit_zone)
-				
+
 				if(I_HURT)
 					if(hit_zone == "eyes")
 						attack_eye(affecting, assailant)
@@ -311,10 +314,10 @@
 						headbut(affecting, assailant)
 					else
 						dislocate(affecting, assailant, hit_zone)
-				
+
 				if(I_DISARM)
 					pin_down(affecting, assailant)
-	
+
 	//clicking on yourself while grabbing them
 	if(M == assailant && state >= GRAB_AGGRESSIVE)
 		devour(affecting, assailant)
@@ -325,7 +328,7 @@
 		qdel(src)
 
 /obj/item/weapon/grab/proc/reset_kill_state()
-	if(state == GRAB_KILL) 
+	if(state == GRAB_KILL)
 		assailant.visible_message("<span class='warning'>[assailant] lost \his tight grip on [affecting]'s neck!</span>")
 		hud.icon_state = "kill"
 		state = GRAB_NECK

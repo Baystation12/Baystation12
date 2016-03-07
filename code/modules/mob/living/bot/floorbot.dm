@@ -194,12 +194,12 @@
 		update_icons()
 		if(F.is_plating())
 			visible_message("<span class='warning'>[src] begins to tear the floor tile from the floor!</span>")
-			if(do_after(src, 50))
+			if(do_after(src, 50, F))
 				F.break_tile_to_plating()
 				addTiles(1)
 		else
 			visible_message("<span class='danger'>[src] begins to tear through the floor!</span>")
-			if(do_after(src, 150)) // Extra time because this can and will kill.
+			if(do_after(src, 150, F)) // Extra time because this can and will kill.
 				F.ReplaceWithLattice()
 				addTiles(1)
 		target = null
@@ -214,7 +214,7 @@
 		repairing = 1
 		update_icons()
 		visible_message("<span class='notice'>[src] begins to repair the hole.</span>")
-		if(do_after(src, 50))
+		if(do_after(src, 50, A))
 			if(A && (locate(/obj/structure/lattice, A) && building == 1 || !locate(/obj/structure/lattice, A) && building == 2)) // Make sure that it still needs repairs
 				var/obj/item/I
 				if(building == 1)
@@ -231,7 +231,7 @@
 			repairing = 1
 			update_icons()
 			visible_message("<span class='notice'>[src] begins to improve the floor.</span>")
-			if(do_after(src, 50))
+			if(do_after(src, 50, F))
 				if(!F.flooring)
 					F.set_flooring(get_flooring_data(floor_build_type))
 					addTiles(-1)
@@ -240,7 +240,7 @@
 			update_icons()
 	else if(istype(A, /obj/item/stack/tile/floor) && amount < maxAmount)
 		var/obj/item/stack/tile/floor/T = A
-		visible_message("<span class='notice'>[src] begins to collect tiles.</span>")
+		visible_message("<span class='notice'>\The [src] begins to collect tiles.</span>")
 		repairing = 1
 		update_icons()
 		if(do_after(src, 20))
@@ -254,10 +254,10 @@
 	else if(istype(A, /obj/item/stack/material) && amount + 4 <= maxAmount)
 		var/obj/item/stack/material/M = A
 		if(M.get_material_name() == DEFAULT_WALL_MATERIAL)
-			visible_message("<span class='notice'>[src] begins to make tiles.</span>")
+			visible_message("<span class='notice'>\The [src] begins to make tiles.</span>")
 			repairing = 1
 			update_icons()
-			if(do_after(50))
+			if(do_after(src, 50))
 				if(M)
 					M.use(1)
 					addTiles(4)

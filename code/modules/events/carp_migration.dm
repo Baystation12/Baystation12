@@ -32,16 +32,19 @@
 			spawn_locations.Add(C.loc)
 	spawn_locations = shuffle(spawn_locations)
 	num_groups = min(num_groups, spawn_locations.len)
-	
+
 	var/i = 1
 	while (i <= num_groups)
 		var/group_size = rand(group_size_min, group_size_max)
 		for (var/j = 1, j <= group_size, j++)
-			spawned_carp.Add(new /mob/living/simple_animal/hostile/carp(spawn_locations[i]))
+			if(prob(95)) //5% chance of SHERK
+				spawned_carp.Add(new /mob/living/simple_animal/hostile/carp(spawn_locations[i]))
+			else
+				spawned_carp.Add(new /mob/living/simple_animal/hostile/carp/pike(spawn_locations[i]))
 		i++
 
 /datum/event/carp_migration/end()
-	for(var/mob/living/simple_animal/hostile/carp/C in spawned_carp)
+	for(var/mob/living/simple_animal/hostile/C in spawned_carp)
 		if(!C.stat)
 			var/turf/T = get_turf(C)
 			if(istype(T, /turf/space))
