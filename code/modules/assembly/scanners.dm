@@ -104,7 +104,7 @@
 		for(var/mob/O in viewers(M, null))
 			O.show_message("<span class='warning'>\The [user] has analyzed the floor's vitals!</span>", 1)
 		scanned_data.Add("<span class='notice'>Analyzing Results for The floor:</span>", 1)
-		scanned_data.Add("Overall Status: Healthy</span>", 1)
+		scanned_data.Add("<span class='notice'>Overall Status: Healthy</span>", 1)
 		scanned_data.Add("<span class='notice'>    Damage Specifics: 0-0-0-0</span>", 1)
 		scanned_data.Add("<span class='notice'>Key: Suffocation/Toxin/Burns/Brute</span>", 1)
 		scanned_data.Add("<span class='notice'>Body Temperature: ???</span>", 1)
