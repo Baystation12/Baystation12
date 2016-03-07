@@ -75,6 +75,12 @@
 		if(P)
 			stat(null, "Phoron Stored: [P.stored_plasma]/[P.max_plasma]")
 
+		var/obj/item/organ/cooler/C = internal_organs_by_name["cooler"]
+		if(C)
+			stat("Charge", "[src.nutrition / 4]%")
+			stat("Cooler", C.enabled ? "enabled":"disabled")
+			stat("Temperature", "[src.bodytemperature] K")
+
 		if(back && istype(back,/obj/item/weapon/rig))
 			var/obj/item/weapon/rig/suit = back
 			var/cell_status = "ERROR"

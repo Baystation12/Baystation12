@@ -323,3 +323,16 @@
 		spawn(3000)
 			H.miming = 1
 	return
+
+/mob/living/carbon/human/proc/toggle_cooler()
+	set category = "IC"
+	set name = "Toggle Cooler"
+	set desc = "Enables or disables cooler"
+	for(var/obj/item/organ/cooler/C in src.internal_organs)
+		if(C)
+			if(C.enabled)
+				src << "You disabled cooler"
+				C.enabled = 0
+			else
+				src << "You enabled cooler"
+				C.enabled = 1

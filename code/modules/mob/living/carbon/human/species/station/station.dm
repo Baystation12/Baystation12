@@ -317,7 +317,8 @@
 	has_organ = list(
 		"brain" = /obj/item/organ/mmi_holder/posibrain,
 		"cell" = /obj/item/organ/cell,
-		"optics" = /obj/item/organ/optical_sensor
+		"optics" = /obj/item/organ/optical_sensor,
+		"cooler" = /obj/item/organ/cooler
 		)
 
 	vision_organ = "optics"
@@ -336,6 +337,9 @@
 		"r_foot" = list("path" = /obj/item/organ/external/foot/right/ipc)
 		)
 
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/toggle_cooler
+		)
 
 	heat_discomfort_level = 373.15
 	heat_discomfort_strings = list(
