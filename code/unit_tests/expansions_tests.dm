@@ -1,13 +1,13 @@
-/datum/unit_test/expansions
-	name = "EXPANSIONS template"
+/datum/unit_test/extensions
+	name = "EXTENSIONS template"
 	async = 0
 
-/datum/unit_test/expansions/shall_initalize_as_expected
-	name = "EXPANSIONS - Shall Initialize as Expected"
+/datum/unit_test/extensions/shall_initalize_as_expected
+	name = "EXTENSIONS - Shall Initialize as Expected"
 
-/datum/unit_test/expansions/shall_initalize_as_expected/start_test()
+/datum/unit_test/extensions/shall_initalize_as_expected/start_test()
 	var/turf/start = locate(20,20,1)
-	var/obj/test/expansions/expansion_obj = new(start, TRUE)
+	var/obj/test/extensions/expansion_obj = new(start, TRUE)
 
 	var/number_of_failures = 0
 	for(var/extension in expansion_obj)
@@ -15,14 +15,14 @@
 			log_unit_test("[extension] was uninitalized.")
 			number_of_failures++
 
-	var/datum/expansion/exp = get_expansion(expansion_obj, /datum/expansion)
-	if(exp.type != /datum/expansion)
-		log_unit_test("[exp]/([exp.type]) was not strictly of the type /datum/expansion.")
+	var/datum/extension/exp = get_extension(expansion_obj, /datum/extension)
+	if(exp.type != /datum/extension)
+		log_unit_test("[exp]/([exp.type]) was not strictly of the type /datum/extension.")
 		number_of_failures++
 
-	var/datum/expansion/multitool/multi = get_expansion(expansion_obj, /datum/expansion/multitool)
-	if(multi.type != /datum/expansion/multitool/cryo)
-		log_unit_test("[exp]/([exp.type]) was not strictly of the type /datum/expansion/multitool/cryo.")
+	var/datum/extension/multitool/multi = get_extension(expansion_obj, /datum/extension/multitool)
+	if(multi.type != /datum/extension/multitool/cryo)
+		log_unit_test("[exp]/([exp.type]) was not strictly of the type /datum/extension/multitool/cryo.")
 		number_of_failures++
 	else
 		if(multi.interact_predicates.len != 2)
@@ -43,7 +43,7 @@
 	qdel(expansion_obj)
 	return TRUE
 
-/obj/test/expansions/New()
-	set_expansion(src, /datum/expansion, /datum/expansion)
-	set_expansion(src, /datum/expansion/multitool, /datum/expansion/multitool/cryo, list(/proc/is_operable, /proc/is_operable))
+/obj/test/extensions/New()
+	set_extension(src, /datum/extension, /datum/extension)
+	set_extension(src, /datum/extension/multitool, /datum/extension/multitool/cryo, list(/proc/is_operable, /proc/is_operable))
 	..()
