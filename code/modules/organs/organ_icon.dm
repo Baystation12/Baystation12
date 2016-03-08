@@ -40,9 +40,10 @@ var/global/list/limb_icon_cache = list()
 	h_col = list(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
 
 /obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
-	..()
 	var/obj/item/organ/eyes/eyes = owner.internal_organs_by_name["eyes"]
-	if(eyes) eyes.update_colour()
+	if(eyes)
+		eyes.update_colour()
+	..()
 
 /obj/item/organ/external/head/removed()
 	update_icon(1)
