@@ -82,7 +82,7 @@
 	update_uis()
 	user << "You remove the card from \the [src]"
 
-/obj/item/modular_computer/attack_ghost(var/mob/dead/observer/user)
+/obj/item/modular_computer/attack_ghost(var/mob/observer/ghost/user)
 	if(enabled)
 		ui_interact(user)
 	else if(check_rights(R_ADMIN, 0, user))

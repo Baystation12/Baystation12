@@ -17,7 +17,7 @@
 	..()
 
 /obj/structure/alien/egg/CanUseTopic(var/mob/user)
-	return isobserver(user) ? STATUS_INTERACTIVE : STATUS_CLOSE
+	return isghost(user) ? STATUS_INTERACTIVE : STATUS_CLOSE
 
 /obj/structure/alien/egg/Topic(href, href_list)
 	if(..())
@@ -43,7 +43,7 @@
 	else
 		icon_state = "egg"
 
-/obj/structure/alien/egg/attack_ghost(var/mob/dead/observer/user)
+/obj/structure/alien/egg/attack_ghost(var/mob/observer/ghost/user)
 	if(progress == -1) //Egg has been hatched.
 		return
 

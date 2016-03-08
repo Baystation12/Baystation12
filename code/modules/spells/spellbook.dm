@@ -369,7 +369,7 @@
 		for(var/V in stored_swap.mind.special_verbs)
 			stored_swap.verbs -= V
 
-	var/mob/dead/observer/ghost = stored_swap.ghostize(0)
+	var/mob/observer/ghost/ghost = stored_swap.ghostize(0)
 	ghost.spell_list = stored_swap.spell_list
 
 	user.mind.transfer_to(stored_swap)

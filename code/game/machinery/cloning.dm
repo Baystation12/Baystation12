@@ -93,7 +93,7 @@
 		if(ckey(clonemind.key) != R.ckey)
 			return 0
 	else
-		for(var/mob/dead/observer/G in player_list)
+		for(var/mob/observer/ghost/G in player_list)
 			if(G.ckey == R.ckey)
 				if(G.can_reenter_corpse)
 					break

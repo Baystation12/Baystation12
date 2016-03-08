@@ -431,7 +431,7 @@ proc/is_blind(A)
 					follow = "([ghost_follow_link(subject, M)]) "
 				if(M.stat != DEAD && M.client.holder)
 					follow = "([admin_jump_link(subject, M.client.holder)]) "
-				var/mob/dead/observer/DM
+				var/mob/observer/ghost/DM
 				if(istype(subject, /mob/dead/observer))
 					DM = subject
 				if(M.client.holder) 							// What admins see
@@ -575,7 +575,7 @@ proc/is_blind(A)
 	if(istype(P))
 		return P
 
-mob/dead/observer/get_multitool()
+/mob/observer/ghost/get_multitool()
 	return can_admin_interact() && ..(ghost_multitool)
 
 /mob/living/carbon/human/get_multitool()

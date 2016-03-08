@@ -1175,7 +1175,7 @@
 		var/mob/M = locate(href_list["adminplayerobservejump"])
 
 		var/client/C = usr.client
-		if(!isobserver(usr))	C.admin_ghost()
+		if(!isghost(usr))	C.admin_ghost()
 		sleep(2)
 		C.jumptomob(M)
 
@@ -1190,7 +1190,7 @@
 		var/z = text2num(href_list["Z"])
 
 		var/client/C = usr.client
-		if(!isobserver(usr))	C.admin_ghost()
+		if(!isghost(usr))	C.admin_ghost()
 		sleep(2)
 		C.jumptocoord(x,y,z)
 
@@ -1920,7 +1920,7 @@ mob/living/silicon/ai/can_centcom_reply()
 	if(client && eyeobj)
 		return "|<A HREF='?[source];adminplayerobservejump=\ref[eyeobj]'>EYE</A>"
 
-/mob/dead/observer/extra_admin_link(var/source)
+/mob/observer/ghost/extra_admin_link(var/source)
 	if(mind && mind.current)
 		return "|<A HREF='?[source];adminplayerobservejump=\ref[mind.current]'>BDY</A>"
 

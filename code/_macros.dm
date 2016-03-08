@@ -27,7 +27,9 @@
 
 #define isobj(A) istype(A, /obj)
 
-#define isobserver(A) istype(A, /mob/dead/observer)
+#define isghost(A) istype(A, /mob/observer/ghost)
+
+#define isobserver(A) istype(A, /mob/observer)
 
 #define isorgan(A) istype(A, /obj/item/organ/external)
 

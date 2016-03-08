@@ -47,7 +47,7 @@
 			for(var/V in victim.mind.special_verbs)
 				victim.verbs -= V
 
-		var/mob/dead/observer/ghost = victim.ghostize(0)
+		var/mob/observer/ghost/ghost = victim.ghostize(0)
 		ghost.spell_list += victim.spell_list//If they have spells, transfer them. Now we basically have a backup mob.
 
 		caster.mind.transfer_to(victim)

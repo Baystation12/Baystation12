@@ -28,7 +28,7 @@
 
 	var/obj/item/modular_computer/processor/cpu = null				// CPU that handles most logic while this type only handles power and other specific things.
 
-/obj/machinery/modular_computer/attack_ghost(var/mob/dead/observer/user)
+/obj/machinery/modular_computer/attack_ghost(var/mob/observer/ghost/user)
 	if(cpu)
 		cpu.attack_ghost(user)
 

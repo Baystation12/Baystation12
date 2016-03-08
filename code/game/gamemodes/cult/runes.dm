@@ -328,8 +328,8 @@ var/list/sacrificed = list()
 					usr << "<span class='warning'>The sacrifical corpse is not dead. You must free it from this world of illusions before it may be used.</span>"
 				return fizzle()
 
-			var/mob/dead/observer/ghost
-			for(var/mob/dead/observer/O in loc)
+			var/mob/observer/ghost/ghost
+			for(var/mob/observer/ghost/O in loc)
 				if(!O.client)	continue
 				if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
 				ghost = O
@@ -423,8 +423,8 @@ var/list/sacrificed = list()
 			src = null
 			if(usr.loc!=this_rune.loc)
 				return this_rune.fizzle()
-			var/mob/dead/observer/ghost
-			for(var/mob/dead/observer/O in this_rune.loc)
+			var/mob/observer/ghost/ghost
+			for(var/mob/observer/ghost/O in this_rune.loc)
 				if(!O.client)	continue
 				if(!O.MayRespawn()) continue
 				if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue

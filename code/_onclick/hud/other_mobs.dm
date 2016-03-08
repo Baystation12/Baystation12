@@ -2,7 +2,7 @@
 /datum/hud/proc/unplayer_hud()
 	return
 
-/mob/dead/observer/instantiate_hud(var/datum/hud/HUD)
+/mob/observer/ghost/instantiate_hud(var/datum/hud/HUD)
 	HUD.ghost_hud()
 
 /datum/hud/proc/ghost_hud()

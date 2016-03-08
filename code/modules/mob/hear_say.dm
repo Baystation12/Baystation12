@@ -199,7 +199,7 @@
 /mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 	src << "[part_a][speaker_name][part_b][formatted]"
 
-/mob/dead/observer/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
+/mob/observer/ghost/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 	src << "[part_a][track][part_b][formatted]"
 
 /mob/living/silicon/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
