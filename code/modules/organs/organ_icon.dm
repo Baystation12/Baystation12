@@ -25,6 +25,7 @@ var/global/list/limb_icon_cache = list()
 	if(human.species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(human.r_skin, human.g_skin, human.b_skin)
 	h_col = list(human.r_hair, human.g_hair, human.b_hair)
+	update_icon()
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
 	s_tone = null
@@ -39,9 +40,10 @@ var/global/list/limb_icon_cache = list()
 	h_col = list(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
 
 /obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
-	..()
 	var/obj/item/organ/eyes/eyes = owner.internal_organs_by_name["eyes"]
-	if(eyes) eyes.update_colour()
+	if(eyes)
+		eyes.update_colour()
+	..()
 
 /obj/item/organ/external/head/removed()
 	update_icon(1)
