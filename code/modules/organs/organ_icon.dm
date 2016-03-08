@@ -25,6 +25,7 @@ var/global/list/limb_icon_cache = list()
 	if(human.species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(human.r_skin, human.g_skin, human.b_skin)
 	h_col = list(human.r_hair, human.g_hair, human.b_hair)
+	update_icon()
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
 	s_tone = null
