@@ -122,6 +122,20 @@ research holder datum.
 			KT.level = max(KT.level + 1, level - 1)
 	return
 
+// A simple helper proc to find the name of a tech with a given ID.
+/proc/CallTechName(var/ID) 
+	var/datum/tech/check_tech
+	var/return_name = null
+	for(var/T in typesof(/datum/tech) - /datum/tech)
+		check_tech = null
+		check_tech = new T()
+		if(check_tech.id == ID)
+			return_name = check_tech.name
+			qdel(check_tech)
+			check_tech = null
+			break
+	return return_name
+	
 /***************************************************************
 **						Technology Datums					  **
 **	Includes all the various technoliges and what they make.  **
