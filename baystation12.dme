@@ -1178,6 +1178,7 @@
 #include "code\modules\library\lib_machines.dm"
 #include "code\modules\library\lib_readme.dm"
 #include "code\modules\lighting\_lighting_defs.dm"
+#include "code\modules\lighting\light_source.dm"
 #include "code\modules\lighting\lighting_atom.dm"
 #include "code\modules\lighting\lighting_overlay.dm"
 #include "code\modules\lighting\lighting_process.dm"
