@@ -1,97 +1,102 @@
 /atom/movable/lighting_overlay
-	name             = ""
+	name = ""
+	mouse_opacity = 0
 	simulated = 0
 	anchored = 1
 
-	icon             = 'icons/effects/lighting_overlay.dmi'
-	color            = LIGHTING_BASE_MATRIX
-
-	mouse_opacity    = 0
-	layer            = LIGHTING_LAYER
-	invisibility     = INVISIBILITY_LIGHTING
-
-	blend_mode       = BLEND_MULTIPLY
-
-	var/needs_update = FALSE
+	icon = LIGHTING_ICON
+	icon_state = "light1"
+	layer = LIGHTING_LAYER
+	invisibility = INVISIBILITY_LIGHTING
+	color = "#000000"
 
 	var/lum_r
 	var/lum_g
 	var/lum_b
 
-/atom/movable/lighting_overlay/New(var/atom/loc, var/no_update = FALSE)
+	var/needs_update
+
+/atom/movable/lighting_overlay/New()
 	. = ..()
 	verbs.Cut()
-	global.all_lighting_overlays += src
 
-	var/turf/T         = loc // If this runtimes atleast we'll know what's creating overlays in things that aren't turfs.
-	T.lighting_overlay = src
-	T.luminosity       = FALSE
+	var/turf/T = loc //If this runtimes atleast we'll know what's creating overlays in things that aren't turfs.
+	T.luminosity = 0
 
-	if(no_update)
+/atom/movable/lighting_overlay/proc/update_lumcount(delta_r, delta_g, delta_b)
+	if(!delta_r && !delta_g && !delta_b) //Nothing is being changed all together.
 		return
 
-	update_overlay()
+	var/should_update = 0
 
-/atom/movable/lighting_overlay/Destroy()
-	var/turf/T   = loc
-	if(istype(T))
-		T.lighting_overlay = null
+	if(!needs_update) //If this isn't true, we're already updating anyways.
+		if(max(lum_r, lum_g, lum_b) < 1) //Any change that could happen WILL change appearance.
+			should_update = 1
 
-		T.luminosity = TRUE
+		else if(max(lum_r + delta_r, lum_g + delta_g, lum_b + delta_b) < 1) //The change would bring us under 1 max lum, again, guaranteed to change appearance.
+			should_update = 1
 
-	lighting_update_overlays -= src;
+		else //We need to make sure that the colour ratios won't change in this code block.
+			var/mx1 = max(lum_r, lum_g, lum_b)
+			var/mx2 = max(lum_r + delta_r, lum_g + delta_g, lum_b + delta_b)
 
-	..()
+			if(lum_r / mx1 != (lum_r + delta_r) / mx2 || lum_g / mx1 != (lum_g + delta_g) / mx2 || lum_b / mx1 != (lum_b + delta_b) / mx2) //Stuff would change.
+				should_update = 1
+
+	lum_r += delta_r
+	lum_g += delta_g
+	lum_b += delta_b
+
+	if(!needs_update && should_update)
+		needs_update = 1
+		lighting_update_overlays += src
 
 /atom/movable/lighting_overlay/proc/update_overlay()
 	var/turf/T = loc
-	if(!istype(T)) // Erm...
-		if(loc)
-			warning("A lighting overlay realised its loc was NOT a turf (actual loc: [loc], [loc.type]) in update_overlay() and got pooled!")
 
+	if(istype(T)) //Incase we're not on a turf, pool ourselves, something happened.
+		if(lum_r == lum_g && lum_r == lum_b) //greyscale
+			blend_mode = BLEND_OVERLAY
+			if(lum_r <= 0)
+				T.luminosity = 0
+				color = "#000000"
+				alpha = 255
+			else
+				T.luminosity = 1
+				color = "#000000"
+				alpha = (1 - min(lum_r, 1)) * 255
 		else
-			warning("A lighting overlay realised it was in nullspace in update_overlay() and got pooled!")
+			alpha = 255
+			var/mx = max(lum_r, lum_g, lum_b)
+			. = 1 // factor
+			if(mx > 1)
+				. = 1/mx
+			blend_mode = BLEND_MULTIPLY
+			color = rgb(lum_r * 255 * ., lum_g * 255 * ., lum_b * 255 * .)
+			if(color != "#000000")
+				T.luminosity = 1
+			else  //No light, set the turf's luminosity to 0 to remove it from view()
+				T.luminosity = 0
+	else
+		warning("A lighting overlay realised its loc was NOT a turf (actual loc: [loc][loc ? ", " + loc.type : ""]) in update_overlay() and got pooled!")
+		qdel(src)
 
-		PlaceInPool(src)
-
-	var/list/L = src.color:Copy() // For some dumb reason BYOND won't allow me to use [] on a colour matrix directly.
-	var/max    = 0
+/atom/movable/lighting_overlay/ResetVars()
+	loc = null
 
 	lum_r = 0
 	lum_g = 0
 	lum_b = 0
 
-	for(var/datum/lighting_corner/C in T.corners)
-		var/i = 0
+	color = "#000000"
 
-		// Huge switch to determine i based on D.
-		switch(turn(C.masters[T], 180))
-			if(NORTHEAST)
-				i = AR
+	needs_update = 0
 
-			if(SOUTHEAST)
-				i = GR
+/atom/movable/lighting_overlay/Destroy()
+	lighting_update_overlays -= src
 
-			if(SOUTHWEST)
-				i = RR
-
-			if(NORTHWEST)
-				i = BR
-
-		var/mx = max(C.lum_r, C.lum_g, C.lum_b) // Scale it so 1 is the strongest lum, if it is above 1.
-		. = 1 // factor
-		if(mx > 1)
-			. = 1 / mx
-
-		max = max(., mx)
-
-		L[i + 0]   = C.lum_r * .
-		L[i + 1]   = C.lum_g * .
-		L[i + 2]   = C.lum_b * .
-
-		lum_r += C.lum_r
-		lum_g += C.lum_g
-		lum_b += C.lum_b
-
-	src.color  = L
-	luminosity = (max > LIGHTING_SOFT_THRESHOLD)
+	var/turf/T = loc
+	if(istype(T))
+		T.lighting_overlay = null
+	
+	..()

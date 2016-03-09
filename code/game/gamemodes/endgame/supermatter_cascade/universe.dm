@@ -92,7 +92,7 @@ The access requirements on the Asteroid Shuttles' consoles have now been revoked
 		A.updateicon()
 
 /datum/universal_state/supermatter_cascade/OverlayAndAmbientSet()
-/*	spawn(0)
+	spawn(0)
 		for(var/atom/movable/lighting_overlay/L in world)
 			if(L.z in config.admin_levels)
 				L.update_lumcount(1,1,1)
@@ -100,7 +100,7 @@ The access requirements on the Asteroid Shuttles' consoles have now been revoked
 				L.update_lumcount(0.0, 0.4, 1)
 
 		for(var/turf/space/T in turfs)
-			OnTurfChange(T)*/
+			OnTurfChange(T)
 
 /datum/universal_state/supermatter_cascade/proc/MiscSet()
 	for (var/obj/machinery/firealarm/alm in machines)
