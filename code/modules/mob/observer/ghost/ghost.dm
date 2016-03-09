@@ -9,7 +9,6 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	canmove = 0
 	blinded = 0
 	anchored = 1	//  don't get pushed around
-	invisibility = INVISIBILITY_OBSERVER
 	var/can_reenter_corpse
 	var/datum/hud/living/carbon/hud = null // hud
 	var/bootime = 0
@@ -23,7 +22,6 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	var/atom/movable/following = null
 	var/admin_ghosted = 0
 	var/anonsay = 0
-	var/image/ghostimage = null //this mobs ghost image, for deleting and stuff
 	var/ghostvision = 1 //is the ghost able to see things humans can't?
 	var/seedarkness = 1
 
@@ -334,7 +332,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/check_holy(var/turf/T)
 	if(check_rights(R_ADMIN|R_FUN, 0, src))
 		return 0
-
 	return (T && T.holy) && (invisibility <= SEE_INVISIBLE_LIVING || (mind in cult.current_antagonists))
 
 /mob/observer/ghost/verb/jumptomob(target in getmobs()) //Moves the ghost instead of just changing the ghosts's eye -Nodrak
@@ -649,23 +646,21 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if (!seedarkness)
 		see_invisible = SEE_INVISIBLE_NOLIGHTING
 	else
-		see_invisible = SEE_INVISIBLE_OBSERVER
-		if (!ghostvision)
-			see_invisible = SEE_INVISIBLE_LIVING;
+		see_invisible = ghostvision ? SEE_INVISIBLE_OBSERVER : SEE_INVISIBLE_LIVING
 	updateghostimages()
 
 /mob/observer/ghost/proc/updateghostimages()
 	if (!client)
 		return
-	if (seedarkness || !ghostvision)
-		client.images -= ghost_darkness_images
+	client.images -= ghost_sightless_images
+	client.images -= ghost_darkness_images
+	if(!seedarkness)
 		client.images |= ghost_sightless_images
-	else
-		//add images for the 60inv things ghosts can normally see when darkness is enabled so they can see them now
-		client.images -= ghost_sightless_images
-		client.images |= ghost_darkness_images
-		if (ghostimage)
-			client.images -= ghostimage //remove ourself
+		if(ghostvision)
+			client.images |= ghost_darkness_images
+	else if(seedarkness && !ghostvision)
+		client.images |= ghost_sightless_images
+	client.images -= ghost_image //remove ourself
 
 /mob/observer/ghost/MayRespawn(var/feedback = 0, var/respawn_time = 0)
 	if(!client)
