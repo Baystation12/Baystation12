@@ -107,7 +107,7 @@
 /mob/dead/singuloCanEat()
 	return 0
 
-/mob/eye/singuloCanEat()
+/mob/observer/eye/singuloCanEat()
 	return 0
 
 /mob/new_player/singuloCanEat()

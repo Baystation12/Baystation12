@@ -3,15 +3,15 @@
 // A mob that the AI controls to look around the station with.
 // It streams chunks as it moves around, which will show it what the AI can and cannot see.
 
-/mob/eye/aiEye
+/mob/observer/eye/aiEye
 	name = "Inactive AI Eye"
 	icon_state = "AI-eye"
 
-/mob/eye/aiEye/New()
+/mob/observer/eye/aiEye/New()
 	..()
 	visualnet = cameranet
 
-/mob/eye/aiEye/setLoc(var/T, var/cancel_tracking = 1)
+/mob/observer/eye/aiEye/setLoc(var/T, var/cancel_tracking = 1)
 	if(..())
 		var/mob/living/silicon/ai/ai = owner
 		if(cancel_tracking)
@@ -42,7 +42,7 @@
 /mob/living/silicon/ai/proc/create_eyeobj(var/newloc)
 	if(eyeobj) destroy_eyeobj()
 	if(!newloc) newloc = src.loc
-	eyeobj = PoolOrNew(/mob/eye/aiEye, newloc)
+	eyeobj = PoolOrNew(/mob/observer/eye/aiEye, newloc)
 	eyeobj.owner = src
 	eyeobj.name = "[src.name] (AI Eye)" // Give it a name
 	if(client) client.eye = eyeobj

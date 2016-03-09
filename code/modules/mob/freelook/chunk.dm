@@ -25,7 +25,7 @@
 
 // Add an eye to the chunk, then update if changed.
 
-/datum/chunk/proc/add(mob/eye/eye)
+/datum/chunk/proc/add(mob/observer/eye/eye)
 	if(!eye.owner)
 		return
 	eye.visibleChunks += src
@@ -38,7 +38,7 @@
 
 // Remove an eye from the chunk, then update if changed.
 
-/datum/chunk/proc/remove(mob/eye/eye)
+/datum/chunk/proc/remove(mob/observer/eye/eye)
 	if(!eye.owner)
 		return
 	eye.visibleChunks -= src
@@ -91,7 +91,7 @@
 		if(t.obfuscations[obfuscation.type])
 			obscured -= t.obfuscations[obfuscation.type]
 			for(var/eye in seenby)
-				var/mob/eye/m = eye
+				var/mob/observer/eye/m = eye
 				if(!m || !m.owner)
 					continue
 				if(m.owner.client)
@@ -105,7 +105,7 @@
 
 			obscured += t.obfuscations[obfuscation.type]
 			for(var/eye in seenby)
-				var/mob/eye/m = eye
+				var/mob/observer/eye/m = eye
 				if(!m || !m.owner)
 					seenby -= m
 					continue

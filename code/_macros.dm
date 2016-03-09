@@ -15,7 +15,7 @@
 
 #define iscorgi(A) istype(A, /mob/living/simple_animal/corgi)
 
-#define isEye(A) istype(A, /mob/eye)
+#define isEye(A) istype(A, /mob/observer/eye)
 
 #define ishuman(A) istype(A, /mob/living/carbon/human)
 

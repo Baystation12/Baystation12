@@ -36,7 +36,7 @@
 
 // Updates what the aiEye can see. It is recommended you use this when the aiEye moves or it's location is set.
 
-/datum/visualnet/proc/visibility(mob/eye/eye)
+/datum/visualnet/proc/visibility(mob/observer/eye/eye)
 	// 0xf = 15
 	var/x1 = max(0, eye.x - 16) & ~0xf
 	var/y1 = max(0, eye.y - 16) & ~0xf

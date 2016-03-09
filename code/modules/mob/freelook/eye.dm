@@ -3,7 +3,7 @@
 // A mob that another mob controls to look around the station with.
 // It streams chunks as it moves around, which will show it what the controller can and cannot see.
 
-/mob/eye
+/mob/observer/eye
 	name = "Eye"
 	icon = 'icons/mob/eye.dmi'
 	icon_state = "default-eye"
@@ -25,14 +25,14 @@
 	var/ghostimage = null
 	var/datum/visualnet/visualnet
 
-/mob/eye/New()
+/mob/observer/eye/New()
 	ghostimage = image(src.icon,src,src.icon_state)
 	ghost_darkness_images |= ghostimage //so ghosts can see the eye when they disable darkness
 	ghost_sightless_images |= ghostimage //so ghosts can see the eye when they disable ghost sight
 	updateallghostimages()
 	..()
 
-mob/eye/Destroy()
+/mob/observer/eye/Destroy()
 	if (ghostimage)
 		ghost_darkness_images -= ghostimage
 		ghost_sightless_images -= ghostimage
@@ -41,30 +41,30 @@ mob/eye/Destroy()
 		updateallghostimages()
 	..()
 
-/mob/eye/Move(n, direct)
+/mob/observer/eye/Move(n, direct)
 	if(owner == src)
 		return EyeMove(n, direct)
 	return 0
 
-/mob/eye/airflow_hit(atom/A)
+/mob/observer/eye/airflow_hit(atom/A)
 	airflow_speed = 0
 	airflow_dest = null
 
-/mob/eye/examinate()
+/mob/observer/eye/examinate()
 	set popup_menu = 0
 	set src = usr.contents
 	return 0
 
-/mob/eye/pointed()
+/mob/observer/eye/pointed()
 	set popup_menu = 0
 	set src = usr.contents
 	return 0
 
-/mob/eye/examine(mob/user)
+/mob/observer/eye/examine(mob/user)
 
 // Use this when setting the eye's location.
 // It will also stream the chunk that the new loc is in.
-/mob/eye/proc/setLoc(var/T)
+/mob/observer/eye/proc/setLoc(var/T)
 	if(owner)
 		T = get_turf(T)
 		if(T != loc)
@@ -82,13 +82,13 @@ mob/eye/Destroy()
 			return 1
 	return 0
 
-/mob/eye/proc/getLoc()
+/mob/observer/eye/proc/getLoc()
 	if(owner)
 		if(!isturf(owner.loc) || !owner.client)
 			return
 		return loc
 /mob
-	var/mob/eye/eyeobj
+	var/mob/observer/eye/eyeobj
 
 /mob/proc/EyeMove(n, direct)
 	if(!eyeobj)
@@ -96,7 +96,7 @@ mob/eye/Destroy()
 
 	return eyeobj.EyeMove(n, direct)
 
-/mob/eye/EyeMove(n, direct)
+/mob/observer/eye/EyeMove(n, direct)
 	var/initial = initial(sprint)
 	var/max_sprint = 50
 
