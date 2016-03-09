@@ -37,7 +37,7 @@
 	icon_state = "darkmatter"
 	density = 1
 	anchored = 0
-	light_range = 4
+	light_range = 3
 
 	var/gasefficency = 0.25
 
