@@ -126,7 +126,7 @@
 	desc = "A desk lamp with an adjustable mount."
 	icon_state = "lamp"
 	item_state = "lamp"
-	brightness_on = 5
+	brightness_on = 3
 	w_class = 4
 	flags = CONDUCT
 
@@ -138,7 +138,7 @@
 	desc = "A classic green-shaded desk lamp."
 	icon_state = "lampgreen"
 	item_state = "lampgreen"
-	brightness_on = 5
+	brightness_on = 3
 	light_color = "#FFC58F"
 
 /obj/item/device/flashlight/lamp/verb/toggle_light()
@@ -162,7 +162,7 @@ obj/item/device/flashlight/lamp/bananalamp
 	name = "flare"
 	desc = "A red standard-issue flare. There are instructions on the side reading 'pull cord, make light'."
 	w_class = 2.0
-	brightness_on = 8 // Pretty bright.
+	brightness_on = 6 // Pretty bright.
 	light_power = 3
 	light_color = "#e58775"
 	icon_state = "flare"
