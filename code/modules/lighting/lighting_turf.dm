@@ -31,7 +31,13 @@
 
 	var/area/A = loc
 	if(A.lighting_use_dynamic)
-		GetFromPool(/atom/movable/lighting_overlay, src)
+		getFromPool(/atom/movable/lighting_overlay, src)
+
+		for(var/i = 1 to 4)
+			if(corners[i]) // Already have a corner on this direction.
+				continue
+
+			corners[i] = new/datum/lighting_corner(src, LIGHTING_CORNER_DIAGONAL[i])
 
 		for(var/datum/lighting_corner/C in corners)
 			if(!C.active) // We would activate the corner, calculate the lighting for it.
