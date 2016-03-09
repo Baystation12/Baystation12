@@ -42,6 +42,7 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Night Shift", 'sound/music/jukebox/mus_industrialist_03.ogg'),
 		new/datum/track("Stayin Alive", 'sound/music/jukebox/Stayin_Alive.ogg'),
 		new/datum/track("Bad Man", 'sound/music/jukebox/One_bad_man.ogg'),
+		new/datum/track("Nightcall", 'sound/music/jukebox/Kavinsky_Nightcall.ogg'),
 	)
 
 
