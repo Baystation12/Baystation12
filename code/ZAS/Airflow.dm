@@ -43,9 +43,6 @@ mob/check_airflow_movable(n)
 		return 0
 	return 1
 
-mob/dead/observer/check_airflow_movable()
-	return 0
-
 mob/living/silicon/check_airflow_movable()
 	return 0
 

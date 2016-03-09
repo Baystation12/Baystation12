@@ -8,7 +8,6 @@
 	icon = 'icons/mob/eye.dmi'
 	icon_state = "default-eye"
 	alpha = 127
-	density = 0
 
 	var/sprint = 10
 	var/cooldown = 0
@@ -16,39 +15,18 @@
 	var/owner_follows_eye = 0
 
 	see_in_dark = 7
-	status_flags = GODMODE
 	invisibility = INVISIBILITY_EYE
 
+	ghost_image_flag = GHOST_IMAGE_ALL
 	var/mob/owner = null
 	var/list/visibleChunks = list()
 
-	var/ghostimage = null
 	var/datum/visualnet/visualnet
-
-/mob/observer/eye/New()
-	ghostimage = image(src.icon,src,src.icon_state)
-	ghost_darkness_images |= ghostimage //so ghosts can see the eye when they disable darkness
-	ghost_sightless_images |= ghostimage //so ghosts can see the eye when they disable ghost sight
-	updateallghostimages()
-	..()
-
-/mob/observer/eye/Destroy()
-	if (ghostimage)
-		ghost_darkness_images -= ghostimage
-		ghost_sightless_images -= ghostimage
-		qdel(ghostimage)
-		ghostimage = null
-		updateallghostimages()
-	..()
 
 /mob/observer/eye/Move(n, direct)
 	if(owner == src)
 		return EyeMove(n, direct)
 	return 0
-
-/mob/observer/eye/airflow_hit(atom/A)
-	airflow_speed = 0
-	airflow_dest = null
 
 /mob/observer/eye/examinate()
 	set popup_menu = 0

@@ -6,9 +6,6 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	desc = "It's a g-g-g-g-ghooooost!" //jinkies!
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "ghost"
-	layer = 4
-	stat = DEAD
-	density = 0
 	canmove = 0
 	blinded = 0
 	anchored = 1	//  don't get pushed around
@@ -34,16 +31,8 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	incorporeal_move = 1
 
 /mob/observer/ghost/New(mob/body)
-	sight |= SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
-	see_invisible = SEE_INVISIBLE_OBSERVER
 	see_in_dark = 100
 	verbs += /mob/observer/ghost/proc/dead_tele
-
-	stat = DEAD
-
-	ghostimage = image(src.icon,src,src.icon_state)
-	ghost_darkness_images |= ghostimage
-	updateallghostimages()
 
 	var/turf/T
 	if(ismob(body))
@@ -89,12 +78,6 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	stop_following()
 	qdel(ghost_multitool)
 	ghost_multitool = null
-
-	if (ghostimage)
-		ghost_darkness_images -= ghostimage
-		qdel(ghostimage)
-		ghostimage = null
-		updateallghostimages()
 	return ..()
 
 /mob/observer/ghost/Topic(href, href_list)
@@ -108,13 +91,11 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 			if(istype(target))
 				ManualFollow(target)
 
-/mob/dead/attackby(obj/item/W, mob/user)
+/mob/observer/ghost/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/weapon/book/tome))
 		var/mob/observer/ghost/M = src
 		M.manifest(user)
 
-/mob/dead/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	return 1
 /*
 Transfer_mind is there to check if mob is being deleted/not going to have a body.
 Works together with spawning an observer, noted above.
@@ -124,7 +105,6 @@ Works together with spawning an observer, noted above.
 	..()
 	if(!loc) return
 	if(!client) return 0
-
 
 	if(client.images.len)
 		for(var/image/hud in client.images)
@@ -148,7 +128,7 @@ Works together with spawning an observer, noted above.
 		C.images += patient.hud_list[HEALTH_HUD]
 		C.images += patient.hud_list[STATUS_HUD_OOC]
 
-/mob/observer/ghost/proc/assess_targets(list/target_list, mob/dead/observer/U)
+/mob/observer/ghost/proc/assess_targets(list/target_list, mob/observer/ghost/U)
 	var/client/C = U.client
 	for(var/mob/living/carbon/human/target in target_list)
 		C.images += target.hud_list[SPECIALROLE_HUD]
@@ -279,7 +259,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set category = "Ghost"
 	set name = "Teleport"
 	set desc= "Teleport to a location"
-	if(!istype(usr, /mob/dead/observer))
+	if(!isghost(usr))
 		usr << "Not when you're not dead!"
 		return
 	usr.verbs -= /mob/observer/ghost/proc/dead_tele
@@ -362,7 +342,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Jump to Mob"
 	set desc = "Teleport to a mob"
 
-	if(istype(usr, /mob/dead/observer)) //Make sure they're an observer!
+	if(isghost(usr)) //Make sure they're an observer!
 
 		if (!target)//Make sure we actually have a target
 			return
@@ -406,7 +386,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Analyze Air"
 	set category = "Ghost"
 
-	if(!istype(usr, /mob/dead/observer)) return
+	if(!isghost(usr)) return
 
 	// Shamelessly copied from the Gas Analyzers
 	if (!( istype(usr.loc, /turf) ))
@@ -504,7 +484,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	return M.do_possession(src)
 
 //Used for drawing on walls with blood puddles as a spooky ghost.
-/mob/dead/verb/bloody_doodle()
+/mob/observer/ghost/verb/bloody_doodle()
 
 	set category = "Ghost"
 	set name = "Write in blood"
@@ -673,10 +653,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if (!ghostvision)
 			see_invisible = SEE_INVISIBLE_LIVING;
 	updateghostimages()
-
-/proc/updateallghostimages()
-	for (var/mob/observer/ghost/O in player_list)
-		O.updateghostimages()
 
 /mob/observer/ghost/proc/updateghostimages()
 	if (!client)

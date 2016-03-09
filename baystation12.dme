@@ -1431,6 +1431,7 @@
 #include "code\modules\mob\new_player\skill.dm"
 #include "code\modules\mob\new_player\sprite_accessories.dm"
 #include "code\modules\mob\observer\death.dm"
+#include "code\modules\mob\observer\observer.dm"
 #include "code\modules\mob\observer\freelook\chunk.dm"
 #include "code\modules\mob\observer\freelook\eye.dm"
 #include "code\modules\mob\observer\freelook\life.dm"
