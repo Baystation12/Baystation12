@@ -85,7 +85,7 @@
 	if(..()) return
 
 	/* Ghosts can't use this one because it's a direct selection */
-	if(istype(user, /mob/dead/observer)) return
+	if(isobserver(user)) return
 
 	var/list/L = list()
 	var/list/areaindex = list()

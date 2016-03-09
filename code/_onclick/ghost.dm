@@ -38,7 +38,7 @@
 	A.attack_ghost(src)
 
 // Oh by the way this didn't work with old click code which is why clicking shit didn't spam you
-/atom/proc/attack_ghost(mob/dead/observer/user as mob)
+/atom/proc/attack_ghost(mob/observer/ghost/user as mob)
 	if(user.client && user.client.inquisitive_ghost)
 		user.examinate(src)
 	return

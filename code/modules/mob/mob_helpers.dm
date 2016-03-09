@@ -432,7 +432,7 @@ proc/is_blind(A)
 				if(M.stat != DEAD && M.client.holder)
 					follow = "([admin_jump_link(subject, M.client.holder)]) "
 				var/mob/observer/ghost/DM
-				if(istype(subject, /mob/dead/observer))
+				if(isghost(subject))
 					DM = subject
 				if(M.client.holder) 							// What admins see
 					lname = "[keyname][(DM && DM.anonsay) ? "*" : (DM ? "" : "^")] ([name])"
