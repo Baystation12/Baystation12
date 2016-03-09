@@ -144,7 +144,7 @@
 				continue
 			if(isAI(M))
 				var/mob/living/silicon/ai/A = M
-				if(A.eyeobj.locs[1] in hearturfs)
+				if(A.eyeobj && (A.eyeobj.locs[1] in hearturfs))
 					eye_heard |= M.client
 					listening |= M.client
 					continue
