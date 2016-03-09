@@ -56,11 +56,6 @@
 		. = pref_mob.set_preference(href_list["toggle_off"], FALSE)
 	if(.)
 		return TOPIC_REFRESH
-	if(href_list["interface_lang"])
-		pref.interface_lang = input(usr, "Select a language form list") in interface_languages
-		if(!pref.interface_lang)
-			pref.interface_lang = "main"
-		return TOPIC_REFRESH
 
 	return ..()
 
