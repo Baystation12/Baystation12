@@ -64,12 +64,12 @@ In short:
 		A.updateicon()
 
 /datum/universal_state/hell/OverlayAndAmbientSet()
-	spawn(0)
+/*	spawn(0)
 		for(var/atom/movable/lighting_overlay/L in world)
 			L.update_lumcount(1, 0, 0)
 
 		for(var/turf/space/T in turfs)
-			OnTurfChange(T)
+			OnTurfChange(T)*/
 
 /datum/universal_state/hell/proc/MiscSet()
 	for(var/turf/simulated/floor/T in turfs)

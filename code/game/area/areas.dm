@@ -6,6 +6,7 @@
 /area
 	var/global/global_uid = 0
 	var/uid
+	var/lighting_use_dynamic = 1
 
 /area/New()
 	icon_state = ""

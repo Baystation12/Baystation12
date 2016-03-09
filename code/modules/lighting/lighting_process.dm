@@ -1,40 +1,36 @@
-/datum/controller/process/lighting
-	var/last_light_count = 0
-	var/last_overlay_count = 0
+/var/list/lighting_update_lights    = list()    // List of lighting sources  queued for update.
+/var/list/lighting_update_overlays  = list()    // List of lighting overlays queued for update.
 
 /datum/controller/process/lighting/setup()
 	name = "lighting"
 	schedule_interval = LIGHTING_INTERVAL
-	create_lighting_overlays()
+
+	create_all_lighting_overlays()
+	create_all_lighting_corners()
 
 /datum/controller/process/lighting/doWork()
-	var/list/lighting_update_lights_old = lighting_update_lights //We use a different list so any additions to the update lists during a delay from SCHECK don't cause things to be cut from the list without being updated.
-	last_light_count = lighting_update_lights.len
-	lighting_update_lights = null //Nulling it first because of http://www.byond.com/forum/?post=1854520
-	lighting_update_lights = list()
-
-	for(var/datum/light_source/L in lighting_update_lights_old)
-		if(L.destroyed || L.check() || L.force_update)
+	for(var/light in lighting_update_lights)
+		var/datum/light_source/L = light
+		. = L.check()
+		if(L.destroyed || . || L.force_update)
 			L.remove_lum()
 			if(!L.destroyed)
 				L.apply_lum()
 
-		else if(L.vis_update)	//We smartly update only tiles that became (in) visible to use.
+		else if(L.vis_update)	// We smartly update only tiles that became (in) visible to use.
 			L.smart_vis_update()
 
-		L.vis_update = 0
-		L.force_update = 0
-		L.needs_update = 0
+		L.vis_update   = FALSE
+		L.force_update = FALSE
+		L.needs_update = FALSE
 
-		SCHECK
+	for(var/A in lighting_update_overlays)
+		if(!A)
+			continue
 
-	var/list/lighting_update_overlays_old = lighting_update_overlays //Same as above.
-	last_overlay_count = lighting_update_overlays.len
-	lighting_update_overlays = null //Same as above
-	lighting_update_overlays = list()
+		var/atom/movable/lighting_overlay/L = A // Typecasting this later so BYOND doesn't istype each entry.
+		L.update_overlay()
+		L.needs_update = FALSE
 
-	for(var/atom/movable/lighting_overlay/O in lighting_update_overlays_old)
-		O.update_overlay()
-		O.needs_update = 0
-
-		SCHECK
+	lighting_update_overlays.Cut()
+	lighting_update_lights.Cut()
