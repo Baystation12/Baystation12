@@ -124,17 +124,10 @@ research holder datum.
 
 // A simple helper proc to find the name of a tech with a given ID.
 /proc/CallTechName(var/ID) 
-	var/datum/tech/check_tech
-	var/return_name = null
-	for(var/T in typesof(/datum/tech) - /datum/tech)
-		check_tech = null
-		check_tech = new T()
-		if(check_tech.id == ID)
-			return_name = check_tech.name
-			qdel(check_tech)
-			check_tech = null
-			break
-	return return_name
+	for(var/T in typesof(/datum/tech))
+		var/datum/tech/check_tech = T
+		if(initial(check_tech.id) == ID)
+			return  initial(check_tech.name)
 	
 /***************************************************************
 **						Technology Datums					  **
