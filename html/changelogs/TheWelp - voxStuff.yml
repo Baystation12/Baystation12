@@ -1,0 +1,9 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Adds 2 new Vox hairstyles"
+  - rscadd: "Reworked Vox organs to be more alien."
+  - rscadd: "Vox can now color their hair since apparently it never stopped people before."
+  - tweak: "Modified Gloves now fit Vox."
+  - tweak: "Pariahs again have space-resistance but now have less health (70 max)"
+  - tweak: "Pariah stink now respects whether you breathe or not."

@@ -125,30 +125,32 @@
 		for(var/organ in target.internal_organs_by_name)
 			var/obj/item/organ/I = target.internal_organs_by_name[organ]
 			if(I && !(I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
-				attached_organs |= organ
+				attached_organs.Add(I.name)
+				attached_organs[I.name] = organ
 
 		var/organ_to_remove = input(user, "Which organ do you want to prepare for removal?") as null|anything in attached_organs
 		if(!organ_to_remove)
 			return 0
 
-		target.op_stage.current_organ = organ_to_remove
+		target.op_stage.current_organ = attached_organs[organ_to_remove]
 
 		return ..() && organ_to_remove
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/O = target.internal_organs_by_name[target.op_stage.current_organ]
 
-		user.visible_message("[user] starts to separate [target]'s [target.op_stage.current_organ] with \the [tool].", \
-		"You start to separate [target]'s [target.op_stage.current_organ] with \the [tool]." )
+		user.visible_message("[user] starts to separate [target]'s [O] with \the [tool].", \
+		"You start to separate [target]'s [O] with \the [tool]." )
 		target.custom_pain("The pain in your [affected.name] is living hell!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("<span class='notice'>[user] has separated [target]'s [target.op_stage.current_organ] with \the [tool].</span>" , \
-		"<span class='notice'>You have separated [target]'s [target.op_stage.current_organ] with \the [tool].</span>")
-
 		var/obj/item/organ/I = target.internal_organs_by_name[target.op_stage.current_organ]
+		user.visible_message("<span class='notice'>[user] has separated [target]'s [I] with \the [tool].</span>" , \
+		"<span class='notice'>You have separated [target]'s [I] with \the [tool].</span>")
+
 		if(I && istype(I))
 			I.status |= ORGAN_CUT_AWAY
 
@@ -180,28 +182,30 @@
 		for(var/organ in target.internal_organs_by_name)
 			var/obj/item/organ/I = target.internal_organs_by_name[organ]
 			if((I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
-				removable_organs |= organ
+				removable_organs.Add(I.name)
+				removable_organs[I.name] = organ
 
 		var/organ_to_remove = input(user, "Which organ do you want to remove?") as null|anything in removable_organs
 		if(!organ_to_remove)
 			return 0
 
-		target.op_stage.current_organ = organ_to_remove
+		target.op_stage.current_organ = removable_organs[organ_to_remove]
 		return ..()
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("[user] starts removing [target]'s [target.op_stage.current_organ] with \the [tool].", \
-		"You start removing [target]'s [target.op_stage.current_organ] with \the [tool].")
-		target.custom_pain("Someone's ripping out your [target.op_stage.current_organ]!",1)
+		var/obj/item/organ/O = target.internal_organs_by_name[target.op_stage.current_organ]
+		user.visible_message("[user] starts removing [target]'s [O] with \the [tool].", \
+		"You start removing [target]'s [O] with \the [tool].")
+		target.custom_pain("Someone's ripping out your [O]!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("<span class='notice'>[user] has removed [target]'s [target.op_stage.current_organ] with \the [tool].</span>", \
-		"<span class='notice'>You have removed [target]'s [target.op_stage.current_organ] with \the [tool].</span>")
+		var/obj/item/organ/O = target.internal_organs_by_name[target.op_stage.current_organ]
+		user.visible_message("<span class='notice'>[user] has removed [target]'s [O] with \the [tool].</span>", \
+		"<span class='notice'>You have removed [target]'s [O] with \the [tool].</span>")
 
 		// Extract the organ!
 		if(target.op_stage.current_organ)
-			var/obj/item/organ/O = target.internal_organs_by_name[target.op_stage.current_organ]
 			if(O && istype(O))
 				O.removed(user)
 			target.op_stage.current_organ = null

@@ -252,6 +252,7 @@ BLIND     // can't see anything
 		if("exclude" in species_restricted)
 			species_restricted -= "Unathi"
 			species_restricted -= "Tajara"
+			species_restricted -= "Vox"
 		return
 
 ///////////////////////////////////////////////////////////////////////
