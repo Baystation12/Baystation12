@@ -124,7 +124,6 @@
 	if(prob(5))
 		var/stink_range = rand(3,5)
 		for(var/mob/living/M in range(H,stink_range))
-			world << "Start. [M]"
 			if(M.stat || M == H || issilicon(M) || isbrain(M))
 				continue
 			var/mob/living/carbon/human/target = M
