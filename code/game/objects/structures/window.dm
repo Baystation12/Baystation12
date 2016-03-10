@@ -334,6 +334,7 @@
 	//player-constructed windows
 	if (constructed)
 		anchored = 0
+		update_verbs()
 
 	if (start_dir)
 		set_dir(start_dir)
