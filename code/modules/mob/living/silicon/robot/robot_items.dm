@@ -28,10 +28,9 @@
 				user << "You activate the analyzer's microlaser, analyzing \the [loaded_item] and breaking it down."
 				flick("portable_analyzer_scan", src)
 				playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-				var/list/temp_tech = ConvertReqString2List(loaded_item.origin_tech)
-				for(var/T in temp_tech)
-					files.UpdateTech(T, temp_tech[T])
-					user << "\The [loaded_item] had level [temp_tech[T]] in [T]."
+				for(var/T in loaded_item.origin_tech)
+					files.UpdateTech(T, loaded_item.origin_tech[T])
+					user << "\The [loaded_item] had level [loaded_item.origin_tech[T]] in [CallTechName(T)]."
 				loaded_item = null
 				for(var/obj/I in contents)
 					for(var/mob/M in I.contents)
