@@ -1553,6 +1553,14 @@ area/space/atmosalert()
 	icon_state = "garden"
 
 //rnd (Research and Development
+/area/rnd/conference
+	name = "\improper Research Conference Room"
+	icon_state = "research_conference"
+
+/area/rnd/break_room
+	name = "\improper Research Break Room"
+	icon_state = "research_break"
+
 /area/rnd/research
 	name = "\improper Research and Development"
 	icon_state = "research"

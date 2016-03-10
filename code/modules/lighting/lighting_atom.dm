@@ -7,11 +7,19 @@
 	var/list/light_sources
 
 /atom/proc/set_light(l_range, l_power, l_color)
-	if(l_power != null) light_power = l_power
-	if(l_range != null) light_range = l_range
-	if(l_color != null) light_color = l_color
+	. = 0 //make it less costly if nothing's changed
 
-	update_light()
+	if(l_power != null && l_power != light_power)
+		light_power = l_power
+		. = 1
+	if(l_range != null && l_range != light_range)
+		light_range = l_range
+		. = 1
+	if(l_color != null && l_color != light_color)
+		light_color = l_color
+		. = 1
+
+	if(.) update_light()
 
 /atom/proc/copy_light(atom/A)
 	set_light(A.light_range, A.light_power, A.light_color)
@@ -32,16 +40,10 @@
 		else
 			light = new /datum/light_source(src, .)
 
-// Incase any lighting vars are on in the typepath we turn the light on in New().
 /atom/New()
 	. = ..()
-
 	if(light_power && light_range)
 		update_light()
-
-	if(opacity && isturf(loc))
-		var/turf/T = loc
-		T.has_opaque_atom = TRUE // No need to recalculate it in this case, it's guaranteed to be on afterwards anyways.
 
 /atom/Destroy()
 	if(light)
