@@ -26,6 +26,10 @@
 
 	var/_wifi_id
 	var/datum/wifi/receiver/button/emitter/wifi_receiver
+	
+/obj/machinery/power/emitter/anchored
+	anchored = 1
+	state = 2
 
 /obj/machinery/power/emitter/verb/rotate()
 	set name = "Rotate"
