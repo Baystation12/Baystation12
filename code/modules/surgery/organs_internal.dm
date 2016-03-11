@@ -125,7 +125,6 @@
 		for(var/organ in target.internal_organs_by_name)
 			var/obj/item/organ/I = target.internal_organs_by_name[organ]
 			if(I && !(I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
-				attached_organs.Add(I.name)
 				attached_organs[I.name] = organ
 
 		var/organ_to_remove = input(user, "Which organ do you want to prepare for removal?") as null|anything in attached_organs
@@ -182,7 +181,6 @@
 		for(var/organ in target.internal_organs_by_name)
 			var/obj/item/organ/I = target.internal_organs_by_name[organ]
 			if((I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
-				removable_organs.Add(I.name)
 				removable_organs[I.name] = organ
 
 		var/organ_to_remove = input(user, "Which organ do you want to remove?") as null|anything in removable_organs
