@@ -427,7 +427,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		var/mob/M = old_list[named]
 		if(issilicon(M))
 			AI_list |= M
-		else if(isobserver(M) || M.stat == 2)
+		else if(isghost(M) || M.stat == DEAD)
 			Dead_list |= M
 		else if(M.key && M.client)
 			keyclient_list |= M
@@ -462,7 +462,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		if (M.real_name && M.real_name != M.name)
 			name += " \[[M.real_name]\]"
 		if (M.stat == 2)
-			if(istype(M, /mob/dead/observer/))
+			if(istype(M, /mob/observer/ghost/))
 				name += " \[ghost\]"
 			else
 				name += " \[dead\]"
@@ -474,7 +474,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /proc/sortmobs()
 	var/list/moblist = list()
 	var/list/sortmob = sortAtom(mob_list)
-	for(var/mob/eye/M in sortmob)
+	for(var/mob/observer/eye/M in sortmob)
 		moblist.Add(M)
 	for(var/mob/living/silicon/ai/M in sortmob)
 		moblist.Add(M)
@@ -488,7 +488,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		moblist.Add(M)
 	for(var/mob/living/carbon/alien/M in sortmob)
 		moblist.Add(M)
-	for(var/mob/dead/observer/M in sortmob)
+	for(var/mob/observer/ghost/M in sortmob)
 		moblist.Add(M)
 	for(var/mob/new_player/M in sortmob)
 		moblist.Add(M)
@@ -805,7 +805,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 						if(!istype(O,/obj)) continue
 						O.loc = X
 					for(var/mob/M in T)
-						if(!istype(M,/mob) || istype(M, /mob/eye)) continue // If we need to check for more mobs, I'll add a variable
+						if(!istype(M,/mob) || isEye(M)) continue // If we need to check for more mobs, I'll add a variable
 						M.loc = X
 
 //					var/area/AR = X.loc
@@ -939,7 +939,7 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 
 					for(var/mob/M in T)
 
-						if(!istype(M,/mob) || istype(M, /mob/eye)) continue // If we need to check for more mobs, I'll add a variable
+						if(!istype(M,/mob) || isEye(M)) continue // If we need to check for more mobs, I'll add a variable
 						mobs += M
 
 					for(var/mob/M in mobs)

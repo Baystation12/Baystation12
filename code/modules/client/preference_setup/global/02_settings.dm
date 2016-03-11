@@ -25,11 +25,6 @@
 				continue
 			pref.preferences += client_pref.key
 
-	for(var/preference in pref.preferences)
-		var/datum/client_preference/client_pref = get_client_preference_by_key(preference)
-		if(!client_pref || !client_pref.may_toggle(pref_mob))
-			pref.preferences -= preference
-
 	pref.lastchangelog	= sanitize_text(pref.lastchangelog, initial(pref.lastchangelog))
 	pref.default_slot	= sanitize_integer(pref.default_slot, 1, config.character_slots, initial(pref.default_slot))
 
@@ -51,7 +46,7 @@
 		. += "</tr>"
 
 	. += "</table>"
-	return jointext(., null)
+	return jointext(., "")
 
 /datum/category_item/player_setup_item/player_global/settings/OnTopic(var/href,var/list/href_list, var/mob/user)
 	var/mob/pref_mob = preference_mob()

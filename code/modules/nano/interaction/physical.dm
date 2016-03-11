@@ -8,7 +8,7 @@
 /mob/proc/check_physical_distance(var/src_object)
 	return STATUS_CLOSE
 
-/mob/dead/observer/check_physical_distance(var/src_object)
+/mob/observer/ghost/check_physical_distance(var/src_object)
 	return default_can_use_topic(src_object)
 
 /mob/living/check_physical_distance(var/src_object)

@@ -66,7 +66,7 @@
 		O.color = color
 
 /datum/reagent/paint/touch_mob(var/mob/M)
-	if(istype(M) && !istype(M, /mob/dead)) //painting ghosts: not allowed
+	if(istype(M) && !isobserver(M)) //painting observers: not allowed
 		M.color = color //maybe someday change this to paint only clothes and exposed body parts for human mobs.
 
 /datum/reagent/paint/get_data()
@@ -345,6 +345,10 @@
 	description = "Nitroglycerin is a heavy, colorless, oily, explosive liquid obtained by nitrating glycerol."
 	reagent_state = LIQUID
 	color = "#808080"
+
+/datum/reagent/nitroglycerin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/coolant
 	name = "Coolant"

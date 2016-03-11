@@ -242,7 +242,7 @@
 
 	spell_flags = Z2NOCAST
 	hud_state = "wiz_IPC"
-	var/mob/eye/ipc_eye/vision
+	var/mob/observer/eye/ipc_eye/vision
 
 /spell/camera_connection/New()
 	..()
@@ -268,7 +268,7 @@
 	L.verbs += /mob/living/proc/release_eye
 
 
-/mob/eye/ipc_eye/New() //we dont use the Ai one because it has AI specific procs imbedded in it.
+/mob/observer/eye/ipc_eye/New() //we dont use the Ai one because it has AI specific procs imbedded in it.
 	..()
 	visualnet = cameranet
 

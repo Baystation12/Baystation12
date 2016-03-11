@@ -59,7 +59,7 @@
 
 /obj/machinery/drone_fabricator/examine(mob/user)
 	..(user)
-	if(produce_drones && drone_progress >= 100 && istype(user,/mob/dead) && config.allow_drone_spawn && count_drones() < config.max_maint_drones)
+	if(produce_drones && drone_progress >= 100 && isghost(user) && config.allow_drone_spawn && count_drones() < config.max_maint_drones)
 		user << "<BR><B>A drone is prepared. Select 'Join As Drone' from the Ghost tab to spawn as a maintenance drone.</B>"
 
 /obj/machinery/drone_fabricator/proc/create_drone(var/client/player)
@@ -70,7 +70,7 @@
 	if(!produce_drones || !config.allow_drone_spawn || count_drones() >= config.max_maint_drones)
 		return
 
-	if(!player || !istype(player.mob,/mob/dead))
+	if(!player || !isghost(player.mob))
 		return
 
 	announce_ghost_joinleave(player, 0, "They have taken control over a maintenance drone.")
@@ -85,7 +85,7 @@
 
 	drone_progress = 0
 
-/mob/dead/observer/verb/join_as_drone()
+/mob/observer/ghost/verb/join_as_drone()
 	set category = "Ghost"
 	set name = "Join As Drone"
 	set desc = "If there is a powered, enabled fabricator in the game world with a prepared chassis, join as a maintenance drone."

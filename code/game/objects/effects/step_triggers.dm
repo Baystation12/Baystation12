@@ -13,7 +13,7 @@
 	..()
 	if(!H)
 		return
-	if(istype(H, /mob/dead/observer) && !affect_ghosts)
+	if(isobserver(H) && !(isghost(H) && affect_ghosts))
 		return
 	Trigger(H)
 
