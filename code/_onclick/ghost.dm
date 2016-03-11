@@ -1,5 +1,5 @@
 /client/var/inquisitive_ghost = 1
-/mob/dead/observer/verb/toggle_inquisition() // warning: unexpected inquisition
+/mob/observer/ghost/verb/toggle_inquisition() // warning: unexpected inquisition
 	set name = "Toggle Inquisitiveness"
 	set desc = "Sets whether your ghost examines everything on click by default"
 	set category = "Ghost"
@@ -10,7 +10,7 @@
 	else
 		src << "<span class='notice'>You will no longer examine things you click on.</span>"
 
-/mob/dead/observer/DblClickOn(var/atom/A, var/params)
+/mob/observer/ghost/DblClickOn(var/atom/A, var/params)
 	if(client.buildmode)
 		build_click(src, client.buildmode, params, A)
 		return
@@ -27,7 +27,7 @@
 		stop_following()
 		forceMove(get_turf(A))
 
-/mob/dead/observer/ClickOn(var/atom/A, var/params)
+/mob/observer/ghost/ClickOn(var/atom/A, var/params)
 	if(client.buildmode)
 		build_click(src, client.buildmode, params, A)
 		return
@@ -38,7 +38,7 @@
 	A.attack_ghost(src)
 
 // Oh by the way this didn't work with old click code which is why clicking shit didn't spam you
-/atom/proc/attack_ghost(mob/dead/observer/user as mob)
+/atom/proc/attack_ghost(mob/observer/ghost/user as mob)
 	if(user.client && user.client.inquisitive_ghost)
 		user.examinate(src)
 	return

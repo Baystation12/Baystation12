@@ -59,7 +59,7 @@ var/list/mob_hat_cache = list()
 
 	holder_type = /obj/item/weapon/holder/drone
 
-/mob/living/silicon/robot/drone/can_be_possessed_by(var/mob/dead/observer/possessor)
+/mob/living/silicon/robot/drone/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	if(!istype(possessor) || !possessor.client || !possessor.ckey)
 		return 0
 	if(!config.allow_drone_spawn)
@@ -75,7 +75,7 @@ var/list/mob_hat_cache = list()
 		return 0
 	return 1
 
-/mob/living/silicon/robot/drone/do_possession(var/mob/dead/observer/possessor)
+/mob/living/silicon/robot/drone/do_possession(var/mob/observer/ghost/possessor)
 	if(!(istype(possessor) && possessor.ckey))
 		return 0
 	if(src.ckey || src.client)
