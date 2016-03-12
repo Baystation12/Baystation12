@@ -47,6 +47,10 @@
 	interact(mob/user as mob)					//Called when attack_self is called
 		return
 
+	CanUseTopic(var/mob/M)
+		if(..() && !in_range(loc, usr))
+			return STATUS_CLOSE
+		return STATUS_INTERACTIVE
 
 	process_cooldown()
 		cooldown--
