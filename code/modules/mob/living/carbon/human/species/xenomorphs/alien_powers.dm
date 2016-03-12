@@ -53,7 +53,7 @@
 	return 1
 
 // Free abilities.
-/mob/living/carbon/human/proc/transfer_plasma(mob/living/carbon/human/M as mob in oview())
+/mob/living/carbon/human/proc/transfer_plasma(mob/living/carbon/human/M as mob in oview(1))
 	set name = "Transfer Plasma"
 	set desc = "Transfer Plasma to another alien"
 	set category = "Abilities"
