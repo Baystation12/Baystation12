@@ -58,7 +58,7 @@
 	set desc = "Transfer Plasma to another alien"
 	set category = "Abilities"
 
-	if (get_dist(src,M) <= 1)
+	if (get_dist(src,M) > 1)
 		src << "<span class='alium'>You need to be closer.</span>"
 		return
 
