@@ -30,10 +30,10 @@
 		if(istype(held_item,/obj/item/weapon/grab))
 			var/obj/item/weapon/grab/G = held_item
 			if(G.affecting)
-				G.affecting.electrocute_act(5,src,1.0,"chest")
+				G.affecting.electrocute_act(5,src,1.0,BP_TORSO)
 				var/agony = 60 //The same as a stunbaton.
 				var/stun = 0
-				G.affecting.stun_effect_act(stun, agony, "chest", src)
+				G.affecting.stun_effect_act(stun, agony, BP_TORSO, src)
 
 				msg_admin_attack("[key_name(src)] stunned [key_name(G.affecting)] with the [src].")
 
@@ -112,10 +112,10 @@
 			src << "<span class='warning'>We require more chemicals to electrocute [C]!</span>"
 			return 0
 
-		C.electrocute_act(5,src,1.0,"chest")
+		C.electrocute_act(5,src,1.0,BP_TORSO)
 		var/agony = 60 //The same as a stunbaton.
 		var/stun = 0
-		C.stun_effect_act(stun, agony, "chest", src)
+		C.stun_effect_act(stun, agony, BP_TORSO, src)
 
 		msg_admin_attack("[key_name(user)] stunned [key_name(C)] with the [src].")
 

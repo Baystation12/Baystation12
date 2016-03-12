@@ -18,7 +18,18 @@
 		return 0
 
 	var/mob/living/carbon/human/T = changeling_sting(40, /mob/proc/changeling_extract_dna_sting)
-	if(!T)	return 0
+
+	if(!istype(T) || T.isSynthetic())
+		src << "<span class='warning'>\The [T] is not compatible with our biology.</span>"
+		return 0
+
+	if(T.species.flags & NO_SCAN)
+		src << "<span class='warning'>We do not know how to parse this creature's DNA!</span>"
+		return 0
+
+	if(HUSK in T.mutations)
+		src << "<span class='warning'>This creature's DNA is ruined beyond useability!</span>"
+		return 0
 
 	T.dna.real_name = T.real_name
 	changeling.absorbed_dna |= T.dna
