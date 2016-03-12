@@ -4,7 +4,7 @@
 	if(!client)
 		return
 
-	if(speaker && !speaker.client && istype(src,/mob/dead/observer) && client.prefs.toggles & CHAT_GHOSTEARS && !speaker in view(src))
+	if(speaker && !speaker.client && istype(src,/mob/dead/observer) && is_preference_enabled(/datum/client_preference/ghost_ears) && !(speaker in view(src)))
 			//Does the speaker have a client?  It's either random stuff that observers won't care about (Experiment 97B says, 'EHEHEHEHEHEHEHE')
 			//Or someone snoring.  So we make it where they won't hear it.
 		return
@@ -52,14 +52,14 @@
 	var/track = null
 	var/speaker_info = null
 	if(istype(src, /mob/dead/observer))
-		if(italics && client.prefs.toggles & CHAT_GHOSTRADIO)
+		if(italics && is_preference_enabled(/datum/client_preference/ghost_radio))
 			return
 		if(speaker_name != speaker.real_name && speaker.real_name)
 			speaker_name = "[speaker.real_name] ([speaker_name])"
 		if(ismob(speaker))
 			speaker_info = "(<a href='?src=\ref[src];speakerinfo=\ref[speaker]'>?</a>)"
-		track = "(<a href='byond://?src=\ref[src];track=\ref[speaker]'>follow</a>) "
-		if(client.prefs.toggles & CHAT_GHOSTEARS && speaker in view(src))
+		track = "([ghost_follow_link(speaker, src)]) "
+		if(is_preference_enabled(/datum/client_preference/ghost_ears) && (speaker in view(src)))
 			message = "<b>[message]</b>"
 
 	if(sdisabilities & DEAF || ear_deaf)
@@ -185,7 +185,7 @@
 	if(istype(src, /mob/dead/observer))
 		if(speaker_name != speaker.real_name && !isAI(speaker)) //Announce computer and various stuff that broadcasts doesn't use it's real name but AI's can't pretend to be other mobs.
 			speaker_name = "[speaker.real_name] ([speaker_name])"
-		track = "[speaker_name] (<a href='byond://?src=\ref[src];track=\ref[speaker]'>follow</a>)"
+		track = "[speaker_name] ([ghost_follow_link(speaker, src)])"
 
 	var/formatted
 	if(language)
@@ -202,18 +202,18 @@
 	return "<span class='say_quote'>\[[worldtime2text()]\]</span>"
 
 /mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
-	src << "[part_a][speaker_name][part_b][formatted]</span></span>"
+	src << "[part_a][speaker_name][part_b][formatted]"
 
 /mob/dead/observer/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
-	src << "[part_a][track][part_b][formatted]</span></span>"
+	src << "[part_a][track][part_b][formatted]"
 
 /mob/living/silicon/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 	var/time = say_timestamp()
-	src << "[time][part_a][speaker_name][part_b][formatted]</span></span>"
+	src << "[time][part_a][speaker_name][part_b][formatted]"
 
 /mob/living/silicon/ai/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 	var/time = say_timestamp()
-	src << "[time][part_a][track][part_b][formatted]</span></span>"
+	src << "[time][part_a][track][part_b][formatted]"
 
 /mob/proc/hear_signlang(var/message, var/verb = "gestures", var/datum/language/language, var/mob/speaker = null)
 	if(!client)
@@ -235,7 +235,7 @@
 	var/heard = ""
 	if(prob(15))
 		var/list/punctuation = list(",", "!", ".", ";", "?")
-		var/list/messages = text2list(message, " ")
+		var/list/messages = splittext(message, " ")
 		var/R = rand(1, messages.len)
 		var/heardword = messages[R]
 		if(copytext(heardword,1, 1) in punctuation)

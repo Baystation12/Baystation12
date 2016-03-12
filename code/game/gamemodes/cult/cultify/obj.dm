@@ -59,7 +59,7 @@
 	qdel(src)
 
 /obj/machinery/door/airlock/external/cultify()
-	new /obj/structure/simple_door/wood(loc)
+	new /obj/machinery/door/unpowered/simple/wood(loc)
 	..()
 
 /obj/machinery/door/cultify()
@@ -105,11 +105,11 @@
 /obj/structure/grille/cult/cultify()
 	return
 
-/obj/structure/simple_door/cultify()
-	new /obj/structure/simple_door/wood(loc)
+/obj/machinery/door/unpowered/simple/cultify()
+	new /obj/machinery/door/unpowered/simple/wood(loc)
 	..()
 
-/obj/structure/simple_door/wood/cultify()
+/obj/machinery/door/unpowered/simple/wood/cultify()
 	return
 
 /obj/singularity/cultify()
@@ -125,11 +125,6 @@
 	var/turf/T = get_turf(src)
 	if(T)
 		T.ChangeTurf(/turf/simulated/wall/cult)
-	..()
-
-/obj/structure/stool/cultify()
-	var/obj/structure/bed/chair/wood/wings/I = new(loc)
-	I.dir = dir
 	..()
 
 /obj/structure/table/cultify()

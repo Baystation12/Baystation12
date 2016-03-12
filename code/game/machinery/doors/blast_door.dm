@@ -28,6 +28,19 @@
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
+	var/_wifi_id
+	var/datum/wifi/receiver/button/door/wifi_receiver
+
+/obj/machinery/door/blast/initialize()
+	..()
+	if(_wifi_id)
+		wifi_receiver = new(_wifi_id, src)
+
+/obj/machinery/door/airlock/Destroy()
+	qdel(wifi_receiver)
+	wifi_receiver = null
+	return ..()
+
 // Proc: Bumped()
 // Parameters: 1 (AM - Atom that tried to walk through this object)
 // Description: If we are open returns zero, otherwise returns result of parent function.
@@ -71,7 +84,7 @@
 	src.density = 1
 	update_nearby_tiles()
 	src.update_icon()
-	src.set_opacity(initial(opacity))
+	src.set_opacity(1)
 	sleep(15)
 	src.operating = 0
 
@@ -106,9 +119,9 @@
 			usr << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"
 			return
 		usr << "<span class='notice'>You begin repairing [src]...</span>"
-		if(do_after(usr, 30))
+		if(do_after(usr, 30, src))
 			if(P.use(amt))
-				usr << "<span class='notice'>You have repaired \The [src]</span>"
+				usr << "<span class='notice'>You have repaired \the [src]</span>"
 				src.repair()
 			else
 				usr << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"
@@ -144,7 +157,7 @@
 	if(stat & BROKEN)
 		stat &= ~BROKEN
 
-		
+
 /obj/machinery/door/blast/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group) return 1
 	return ..()
@@ -160,6 +173,12 @@ obj/machinery/door/blast/regular
 	icon_state_closing = "pdoorc1"
 	icon_state = "pdoor1"
 	maxhealth = 600
+	block_air_zones = 1
+
+obj/machinery/door/blast/regular/open
+	icon_state = "pdoor0"
+	density = 0
+	opacity = 0
 
 // SUBTYPE: Shutters
 // Nicer looking, and also weaker, shutters. Found in kitchen and similar areas.

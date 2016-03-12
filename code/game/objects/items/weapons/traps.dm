@@ -12,10 +12,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 18750)
 	var/deployed = 0
 
-/obj/item/weapon/beartrap/suicide_act(mob/user)
-	viewers(user) << "<span class='danger'>[user] is putting the [src.name] on \his head! It looks like \he's trying to commit suicide.</span>"
-	return (BRUTELOSS)
-
 /obj/item/weapon/beartrap/proc/can_use(mob/user)
 	return (user.IsAdvancedToolUser() && !issilicon(user) && !user.stat && !user.restrained())
 
@@ -28,9 +24,9 @@
 			"You hear the slow creaking of a spring."
 			)
 
-		if (do_after(user, 60))
+		if (do_after(user, 60, src))
 			user.visible_message(
-				"<span class='danger'>[user] has deployed \the [src].</span>",
+				"<span class='danger'>\The [user] has deployed \the [src].</span>",
 				"<span class='danger'>You have deployed \the [src]!</span>",
 				"You hear a latch click loudly."
 				)
@@ -46,7 +42,7 @@
 			"<span class='notice'>[user] begins freeing [buckled_mob] from \the [src].</span>",
 			"<span class='notice'>You carefully begin to free [buckled_mob] from \the [src].</span>",
 			)
-		if(do_after(user, 60))
+		if(do_after(user, 60, src))
 			user.visible_message("<span class='notice'>[buckled_mob] has been freed from \the [src] by [user].</span>")
 			unbuckle_mob()
 			anchored = 0
@@ -56,7 +52,7 @@
 			"<span class='notice'>You begin disarming \the [src]!</span>",
 			"You hear a latch click followed by the slow creaking of a spring."
 			)
-		if(do_after(user, 60))
+		if(do_after(user, 60, src))
 			user.visible_message(
 				"<span class='danger'>[user] has disarmed \the [src].</span>",
 				"<span class='notice'>You have disarmed \the [src]!</span>"

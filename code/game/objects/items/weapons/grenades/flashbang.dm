@@ -2,7 +2,7 @@
 	name = "flashbang"
 	icon_state = "flashbang"
 	item_state = "flashbang"
-	origin_tech = "materials=2;combat=1"
+	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
 	var/banglet = 0
 
 	prime()
@@ -21,19 +21,15 @@
 			B.health -= damage
 			B.update_icon()
 
-		new/obj/effect/effect/sparks(src.loc)
+		new/obj/effect/sparks(src.loc)
 		new/obj/effect/effect/smoke/illumination(src.loc, brightness=15)
 		qdel(src)
 		return
 
 	proc/bang(var/turf/T , var/mob/living/carbon/M)					// Added a new proc called 'bang' that takes a location and a person to be banged.
-		if (locate(/obj/item/weapon/cloaking_device, M))			// Called during the loop that bangs people in lockers/containers and when banging
-			for(var/obj/item/weapon/cloaking_device/S in M)			// people in normal view.  Could theroetically be called during other explosions.
-				S.active = 0										// -- Polymorph
-				S.icon_state = "shield0"
-
-		M << "\red <B>BANG</B>"
-		playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, 5)
+		M << "<span class='danger'>BANG</span>"						// Called during the loop that bangs people in lockers/containers and when banging
+		playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, 5)		// people in normal view.  Could theroetically be called during other explosions.
+																	// -- Polymorph
 
 //Checking for protections
 		var/eye_safety = 0
@@ -49,7 +45,7 @@
 					ear_safety += 1
 
 //Flashing everyone
-		if(eye_safety < 1)
+		if(eye_safety < FLASH_PROTECTION_MODERATE)
 			flick("e_flash", M.flash)
 			M.Stun(2)
 			M.Weaken(10)
@@ -86,19 +82,19 @@
 			var/mob/living/carbon/human/H = M
 			var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 			if (E && E.damage >= E.min_bruised_damage)
-				M << "\red Your eyes start to burn badly!"
+				M << "<span class='danger'>Your eyes start to burn badly!</span>"
 				if(!banglet && !(istype(src , /obj/item/weapon/grenade/flashbang/clusterbang)))
 					if (E.damage >= E.min_broken_damage)
-						M << "\red You can't see anything!"
+						M << "<span class='danger'>You can't see anything!</span>"
 		if (M.ear_damage >= 15)
-			M << "\red Your ears start to ring badly!"
+			M << "<span class='danger'>Your ears start to ring badly!</span>"
 			if(!banglet && !(istype(src , /obj/item/weapon/grenade/flashbang/clusterbang)))
 				if (prob(M.ear_damage - 10 + 5))
-					M << "\red You can't hear anything!"
+					M << "<span class='danger'>You can't hear anything!</span>"
 					M.sdisabilities |= DEAF
 		else
 			if (M.ear_damage >= 5)
-				M << "\red Your ears start to ring!"
+				M << "<span class='danger'>Your ears start to ring!</span>"
 		M.update_icons()
 
 /obj/item/weapon/grenade/flashbang/clusterbang//Created by Polymorph, fixed by Sieve

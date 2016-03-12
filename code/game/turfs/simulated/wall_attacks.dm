@@ -6,18 +6,18 @@
 
 	if(density)
 		can_open = WALL_OPENING
-		set_wall_state("[material.icon_base]fwall_open")
 		//flick("[material.icon_base]fwall_opening", src)
 		sleep(15)
 		density = 0
 		opacity = 0
+		update_icon()
 		set_light(0)
 	else
 		can_open = WALL_OPENING
 		//flick("[material.icon_base]fwall_closing", src)
-		set_wall_state("[material.icon_base]0")
 		density = 1
 		opacity = 1
+		update_icon()
 		sleep(15)
 		set_light(1)
 
@@ -48,7 +48,7 @@
 
 	if(!can_open)
 		user << "<span class='notice'>[translation(src, "push")]</span>"
-		playsound(src, 'sound/weapons/Genhit.ogg', 25, 1)
+		playsound(src, hitsound, 25, 1)
 	else
 		toggle_open(user)
 	return 0
@@ -58,6 +58,7 @@
 
 	radiate()
 	add_fingerprint(user)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/rotting = (locate(/obj/effect/overlay/wallrot) in src)
 	if (HULK in user.mutations)
 		if (rotting || !prob(material.hardness))
@@ -71,6 +72,10 @@
 /turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
 
 	radiate()
+	if(!istype(user))
+		return
+
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/rotting = (locate(/obj/effect/overlay/wallrot) in src)
 	if(!damage || !wallbreaker)
 		try_touch(user, rotting)
@@ -88,6 +93,7 @@
 
 /turf/simulated/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if (!user.)
 		user << "<span class='warning'>[translation(src, "no_dex")]</span>"
 		return
@@ -149,7 +155,7 @@
 		if(WT.remove_fuel(0,user))
 			user << "<span class='notice'>[translation(src, "start_repear")]</span>"
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, max(5, damage / 5)) && WT && WT.isOn())
+			if(do_after(user, max(5, damage / 5), src) && WT && WT.isOn())
 				user << "<span class='notice'>[translation(src, "finish_repear")]</span>"
 				take_damage(-damage)
 		else
@@ -193,7 +199,7 @@
 			if(cut_delay<0)
 				cut_delay = 0
 
-			if(!do_after(user,cut_delay))
+			if(!do_after(user,cut_delay,src))
 				return
 
 			user << "<span class='notice'>[translation(src, "remove_plating")]</span>"
@@ -210,16 +216,16 @@
 					construction_stage = 5
 					new /obj/item/stack/rods( src )
 					user << "<span class='notice'>[translation(src, "cut_grille")]</span>"
-					set_wall_state()
+					update_icon()
 					return
 			if(5)
 				if (istype(W, /obj/item/weapon/screwdriver))
 					user << "<span class='notice'>[translation(src, "removing_sup")]</span>"
 					playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
-					if(!do_after(user,40) || !istype(src, /turf/simulated/wall) || construction_stage != 5)
+					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 5)
 						return
 					construction_stage = 4
-					set_wall_state()
+					update_icon()
 					user << "<span class='notice'>[translation(src, "remove_sup")]</span>"
 					return
 				else if( istype(W, /obj/item/stack/rods) )
@@ -227,7 +233,7 @@
 					if(O.get_amount()>0)
 						O.use(1)
 						construction_stage = 6
-						set_wall_state()
+						update_icon()
 						user << "<span class='notice'>[translation(src, "replace_grille")]</span>"
 						return
 			if(4)
@@ -246,30 +252,30 @@
 				if(cut_cover)
 					user << "<span class='notice'>[translation(src, "slicing_cover")]</span>"
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
-					if(!do_after(user, 60) || !istype(src, /turf/simulated/wall) || construction_stage != 4)
+					if(!do_after(user, 60, src) || !istype(src, /turf/simulated/wall) || construction_stage != 4)
 						return
 					construction_stage = 3
-					set_wall_state()
+					update_icon()
 					user << "<span class='notice'>[translation(src, "dislodging")]</span>"
 					return
 			if(3)
 				if (istype(W, /obj/item/weapon/crowbar))
 					user << "<span class='notice'>[translation(src, "struggle_cover")]</span>"
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-					if(!do_after(user,100) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
+					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
 						return
 					construction_stage = 2
-					set_wall_state()
+					update_icon()
 					user << "<span class='notice'>[translation(src, "pry_off_cover")]</span>"
 					return
 			if(2)
 				if (istype(W, /obj/item/weapon/wrench))
 					user << "<span class='notice'>[translation(src, "losening")]</span>"
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
-					if(!do_after(user,40) || !istype(src, /turf/simulated/wall) || construction_stage != 2)
+					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 2)
 						return
 					construction_stage = 1
-					set_wall_state()
+					update_icon()
 					user << "<span class='notice'>[translation(src, "remove_bolts")]</span>"
 					return
 			if(1)
@@ -286,10 +292,10 @@
 				if(cut_cover)
 					user << "<span class='notice'>[translation(src, "slicing_rods")]</span>"
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
-					if(!do_after(user,70) || !istype(src, /turf/simulated/wall) || construction_stage != 1)
+					if(!do_after(user,70,src) || !istype(src, /turf/simulated/wall) || construction_stage != 1)
 						return
 					construction_stage = 0
-					set_wall_state()
+					update_icon()
 					new /obj/item/stack/rods(src)
 					user << "<span class='notice'>[translation(src, "rods_drop")]</span>"
 					return
@@ -310,5 +316,19 @@
 		return
 
 	else if(!istype(W,/obj/item/weapon/rcd) && !istype(W, /obj/item/weapon/reagent_containers))
-		return attack_hand(user)
-
+		if(!W.force)
+			return attack_hand(user)
+		var/dam_threshhold = material.integrity
+		if(reinf_material)
+			dam_threshhold = ceil(max(dam_threshhold,reinf_material.integrity)/2)
+		var/dam_prob = min(100,material.hardness*1.5)
+		if(dam_prob < 100 && W.force > (dam_threshhold/10))
+			playsound(src, hitsound, 80, 1)
+			if(!prob(dam_prob))
+				visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W] and it [material.destruction_desc]!</span>")
+				dismantle_wall(1)
+			else
+				visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W]!</span>")
+		else
+			visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W], but it bounces off!</span>")
+		return

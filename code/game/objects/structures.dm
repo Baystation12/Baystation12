@@ -1,5 +1,6 @@
 /obj/structure
 	icon = 'icons/obj/structures.dmi'
+	w_class = 10
 
 	var/climbable
 	var/breakable
@@ -28,13 +29,6 @@
 
 	return ..()
 
-/obj/structure/blob_act()
-	if(prob(50))
-		qdel(src)
-
-/obj/structure/meteorhit(obj/O as obj)
-	qdel(src)
-
 /obj/structure/attack_tk()
 	return
 
@@ -49,9 +43,6 @@
 				return
 		if(3.0)
 			return
-
-/obj/structure/meteorhit(obj/O as obj)
-	qdel(src)
 
 /obj/structure/New()
 	..()
@@ -108,10 +99,10 @@
 	if (!can_climb(user))
 		return
 
-	usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
+	usr.visible_message("<span class='warning'>\The [user] starts climbing onto \the [src]!</span>")
 	climbers |= user
 
-	if(!do_after(user,50))
+	if(!do_after(user,(issmall(user) ? 30 : 50), src))
 		climbers -= user
 		return
 
@@ -122,7 +113,7 @@
 	usr.forceMove(get_turf(src))
 
 	if (get_turf(user) == get_turf(src))
-		usr.visible_message("<span class='warning'>[user] climbs onto \the [src]!</span>")
+		usr.visible_message("<span class='warning'>\The [user] climbs onto \the [src]!</span>")
 	climbers -= user
 
 /obj/structure/proc/structure_shaken()
@@ -192,6 +183,6 @@
 	if(!breakable || !damage || !wallbreaker)
 		return 0
 	visible_message("<span class='danger'>[user] [attack_verb] the [src] apart!</span>")
-	user.do_attack_animation(src)
+	attack_animation(user)
 	spawn(1) qdel(src)
 	return 1

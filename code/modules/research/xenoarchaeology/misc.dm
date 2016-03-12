@@ -42,6 +42,16 @@
 	P.overlays = list("paper_stamped_rd")
 	src.contents += P
 
+/obj/structure/noticeboard/rnd
+	notices = 1
+	icon_state = "nboard01"
+
+/obj/structure/noticeboard/rnd/New()
+	var/obj/item/weapon/paper/P = new()
+	P.name = "Important Note"
+	P.info = "<br>Stop dancing on that bush, it costs more than you all, idiots!"
+	src.contents += P
+
 //---- Bookcase
 
 /obj/structure/bookcase/manuals/xenoarchaeology
@@ -105,6 +115,7 @@
 		new /obj/item/weapon/pickaxe/hand(src)
 		new /obj/item/weapon/storage/bag/fossils(src)
 		new /obj/item/weapon/hand_labeler(src)
+		new /obj/item/taperoll/research(src)
 		return
 
 //---- Isolation room air alarms

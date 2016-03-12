@@ -79,10 +79,10 @@
 
 		for(var/line in lines)
 			//world << line
-			for(var/beat in text2list(lowertext(line), ","))
+			for(var/beat in splittext(lowertext(line), ","))
 				//world << "beat: [beat]"
-				var/list/notes = text2list(beat, "/")
-				for(var/note in text2list(notes[1], "-"))
+				var/list/notes = splittext(beat, "/")
+				for(var/note in splittext(notes[1], "-"))
 					//world << "note: [note]"
 					if(!playing || shouldStopPlaying())//If the instrument is playing, or special case
 						playing = 0
@@ -154,7 +154,7 @@
 					Notes are played by the names of the note, and optionally, the accidental, and/or the octave number.<br>
 					By default, every note is natural and in octave 3. Defining otherwise is remembered for each note.<br>
 					Example: <i>C,D,E,F,G,A,B</i> will play a C major scale.<br>
-					After a note has an accidental placed, it will be remembered: <i>C,C4,C,C3</i> is C3,C4,C4,C3</i><br>
+					After a note has an accidental placed, it will be remembered: <i>C,C4,C,C3</i> is <i>C3,C4,C4,C3</i><br>
 					Chords can be played simply by seperating each note with a hyphon: <i>A-C#,Cn-E,E-G#,Gn-B</i><br>
 					A pause may be denoted by an empty chord: <i>C,E,,C,G</i><br>
 					To make a chord be a different time, end it with /x, where the chord length will be length<br>
@@ -162,7 +162,7 @@
 					Combined, an example is: <i>E-E4/4,F#/2,G#/8,B/8,E3-E4/4</i>
 					<br>
 					Lines may be up to 50 characters.<br>
-					A song may only contain up to 50 lines.<br>
+					A song may only contain up to 350 lines.<br>
 					"}
 		else
 			dat += "<B><A href='?src=\ref[src];help=2'>Show Help</A></B><BR>"
@@ -193,26 +193,26 @@
 			if(!in_range(instrumentObj, usr))
 				return
 
-			if(lentext(t) >= 3072)
+			if(lentext(t) >= 3072*7)
 				var/cont = input(usr, "Your message is too long! Would you like to continue editing it?", "", "yes") in list("yes", "no")
 				if(cont == "no")
 					break
-		while(lentext(t) > 3072)
+		while(lentext(t) > 3072*7)
 
 		//split into lines
 		spawn()
-			lines = text2list(t, "\n")
+			lines = splittext(t, "\n")
 			if(copytext(lines[1],1,6) == "BPM: ")
 				tempo = 600 / max(1, text2num(copytext(lines[1],6)))
 				lines.Cut(1,2)
 			else
 				tempo = 5 // default 120 BPM
-			if(lines.len > 200)
+			if(lines.len > 350)
 				usr << "Too many lines!"
-				lines.Cut(201)
+				lines.Cut(351)
 			var/linenum = 1
 			for(var/l in lines)
-				if(lentext(l) > 50)
+				if(lentext(l) > 350)
 					usr << "Line [linenum] too long!"
 					lines.Remove(l)
 				else
@@ -250,10 +250,10 @@
 		var/newline = html_encode(input("Enter your line: ", instrumentObj.name) as text|null)
 		if(!newline || !in_range(instrumentObj, usr))
 			return
-		if(lines.len > 50)
+		if(lines.len > 350)
 			return
-		if(lentext(newline) > 50)
-			newline = copytext(newline, 1, 50)
+		if(lentext(newline) > 350)
+			newline = copytext(newline, 1, 350)
 		lines.Add(newline)
 
 	else if(href_list["deleteline"])
@@ -267,8 +267,8 @@
 		var/content = html_encode(input("Enter your line: ", instrumentObj.name, lines[num]) as text|null)
 		if(!content || !in_range(instrumentObj, usr))
 			return
-		if(lentext(content) > 50)
-			content = copytext(content, 1, 50)
+		if(lentext(content) > 350)
+			content = copytext(content, 1, 350)
 		if(num > lines.len || num < 1)
 			return
 		lines[num] = content
@@ -332,26 +332,27 @@
 	user.set_machine(src)
 	song.interact(user)
 
-/obj/structure/piano/attackby(obj/item/O as obj, mob/user as mob, params)
-	if (istype(O, /obj/item/weapon/wrench))
-		if (!anchored && !isinspace())
+/obj/structure/piano/attackby(obj/item/O as obj, mob/user as mob)
+	if(istype(O, /obj/item/weapon/wrench))
+		if(anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			user << "<span class='notice'> You begin to tighten \the [src] to the floor...</span>"
-			if (do_after(user, 20))
-				user.visible_message( \
-					"[user] tightens \the [src]'s casters.", \
-					"<span class='notice'> You have tightened \the [src]'s casters. Now it can be played again.</span>", \
-					"You hear ratchet.")
-				anchored = 1
-		else if(anchored)
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			user << "<span class='notice'> You begin to loosen \the [src]'s casters...</span>"
-			if (do_after(user, 40))
+			user << "<span class='notice'>You begin to loosen \the [src]'s casters...</span>"
+			if (do_after(user, 40, src))
 				user.visible_message( \
 					"[user] loosens \the [src]'s casters.", \
-					"<span class='notice'> You have loosened \the [src]. Now it can be pulled somewhere else.</span>", \
+					"<span class='notice'>You have loosened \the [src]. Now it can be pulled somewhere else.</span>", \
 					"You hear ratchet.")
-				anchored = 0
+				src.anchored = 0
+		else
+			if(!isinspace())
+				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+				user << "<span class='notice'>You begin to tighten \the [src] to the floor...</span>"
+				if (do_after(user, 20, src))
+					user.visible_message( \
+						"[user] tightens \the [src]'s casters.", \
+						"<span class='notice'>You have tightened \the [src]'s casters. Now it can be played again</span>.", \
+						"You hear ratchet.")
+					src.anchored = 1
 	else
 		..()
 

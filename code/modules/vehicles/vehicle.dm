@@ -93,6 +93,7 @@
 			if(health < maxhealth)
 				if(open)
 					health = min(maxhealth, health+10)
+					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 					user.visible_message("\red [user] repairs [src]!","\blue You repair [src]!")
 				else
 					user << "<span class='notice'>Unable to repair with the maintenance panel closed.</span>"
@@ -100,9 +101,8 @@
 				user << "<span class='notice'>[src] does not need a repair.</span>"
 		else
 			user << "<span class='notice'>Unable to repair while [src] is off.</span>"
-	else if(istype(W, /obj/item/weapon/card/emag) && !emagged)
-		Emag(user)
 	else if(hasvar(W,"force") && hasvar(W,"damtype"))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		switch(W.damtype)
 			if("fire")
 				health -= W.force * fire_dam_coeff
@@ -114,19 +114,9 @@
 		..()
 
 /obj/vehicle/bullet_act(var/obj/item/projectile/Proj)
-	if (Proj.damage_type == BRUTE || Proj.damage_type == BURN)
-		health -= Proj.damage
+	health -= Proj.get_structure_damage()
 	..()
 	healthcheck()
-
-/obj/vehicle/meteorhit()
-	explode()
-	return
-
-/obj/vehicle/blob_act()
-	src.health -= rand(20,40)*fire_dam_coeff
-	healthcheck()
-	return
 
 /obj/vehicle/ex_act(severity)
 	switch(severity)
@@ -190,15 +180,16 @@
 	set_light(0)
 	update_icon()
 
-/obj/vehicle/proc/Emag(mob/user as mob)
-	emagged = 1
-
-	if(locked)
-		locked = 0
-		user << "<span class='warning'>You bypass [src]'s controls.</span>"
+/obj/vehicle/emag_act(var/remaining_charges, mob/user as mob)
+	if(!emagged)
+		emagged = 1
+		if(locked)
+			locked = 0
+			user << "<span class='warning'>You bypass [src]'s controls.</span>"
+		return 1
 
 /obj/vehicle/proc/explode()
-	src.visible_message("\red <B>[src] blows apart!</B>", 1)
+	src.visible_message("<span class='danger'>\The [src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
 	PoolOrNew(/obj/item/stack/rods, Tsec)
@@ -361,9 +352,10 @@
 /obj/vehicle/attack_generic(var/mob/user, var/damage, var/attack_message)
 	if(!damage)
 		return
-	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
-	user.do_attack_animation(src)
+	visible_message("<span class='danger'>\The [user] [attack_message] the \the [src]!</span>")
+	if(istype(user))
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked \the [src.name]</font>")
+		user.do_attack_animation(src)
 	src.health -= damage
 	if(prob(10))
 		new /obj/effect/decal/cleanable/blood/oil(src.loc)

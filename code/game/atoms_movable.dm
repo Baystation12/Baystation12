@@ -13,6 +13,7 @@
 	var/throw_range = 7
 	var/moved_recently = 0
 	var/mob/pulledby = null
+	var/item_state = null // Used to specify the item state for the on-mob overlays.
 
 	var/auto_init = 1
 
@@ -45,7 +46,8 @@
 		pulledby = null
 
 /atom/movable/proc/initialize()
-	return
+	if(!isnull(gcDestroyed))
+		crash_with("GC: -- [type] had initialize() called after qdel() --")
 
 /atom/movable/Bump(var/atom/A, yes)
 	if(src.throwing)
@@ -60,12 +62,13 @@
 	..()
 	return
 
-/atom/movable/proc/forceMove(atom/destination)
+/atom/movable/proc/forceMove(atom/destination, var/special_event)
 	if(destination)
-		if(loc)
-			loc.Exited(src)
+		var/atom/old_loc = loc
+		if(old_loc)
+			old_loc.Exited(src)
 		loc = destination
-		loc.Entered(src)
+		loc.Entered(src, old_loc, special_event)
 		return 1
 	return 0
 
@@ -78,7 +81,7 @@
 	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
 		if(!O.anchored)
-			step(O, src.dir)
+			step(O, src.last_move)
 		O.hitby(src,speed)
 
 	else if(isturf(hit_atom))
@@ -86,7 +89,7 @@
 		var/turf/T = hit_atom
 		if(T.density)
 			spawn(2)
-				step(src, turn(src.dir, 180))
+				step(src, turn(src.last_move, 180))
 			if(istype(src,/mob/living))
 				var/mob/living/M = src
 				M.turf_collision(T, speed)
@@ -102,19 +105,6 @@
 			if(isobj(A))
 				if(A.density && !A.throwpass)	// **TODO: Better behaviour for windows which are dense, but shouldn't always stop movement
 					src.throw_impact(A,speed)
-
-/atom/proc/SpinAnimation(speed = 10, loops = -1)
-	var/matrix/m120 = matrix(transform)
-	m120.Turn(120)
-	var/matrix/m240 = matrix(transform)
-	m240.Turn(240)
-	var/matrix/m360 = matrix(transform)
-	speed /= 3      //Gives us 3 equal time segments for our three turns.
-	                //Why not one turn? Because byond will see that the start and finish are the same place and do nothing
-	                //Why not two turns? Because byond will do a flip instead of a turn
-	animate(src, transform = m120, time = speed, loops)
-	animate(transform = m240, time = speed)
-	animate(transform = m360, time = speed)
 
 /atom/movable/proc/throw_at(atom/target, range, speed, thrower)
 	if(!target || !src)	return 0
@@ -226,7 +216,7 @@
 /atom/movable/overlay/New()
 	for(var/x in src.verbs)
 		src.verbs -= x
-	return
+	..()
 
 /atom/movable/overlay/attackby(a, b)
 	if (src.master)
@@ -237,3 +227,51 @@
 	if (src.master)
 		return src.master.attack_hand(a, b, c)
 	return
+
+/atom/movable/proc/touch_map_edge()
+	if(z in config.sealed_levels)
+		return
+
+	if(config.use_overmap)
+		overmap_spacetravel(get_turf(src), src)
+		return
+
+	var/move_to_z = src.get_transit_zlevel()
+	if(move_to_z)
+		z = move_to_z
+
+		if(x <= TRANSITIONEDGE)
+			x = world.maxx - TRANSITIONEDGE - 2
+			y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+
+		else if (x >= (world.maxx - TRANSITIONEDGE + 1))
+			x = TRANSITIONEDGE + 1
+			y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+
+		else if (y <= TRANSITIONEDGE)
+			y = world.maxy - TRANSITIONEDGE -2
+			x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+
+		else if (y >= (world.maxy - TRANSITIONEDGE + 1))
+			y = TRANSITIONEDGE + 1
+			x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+
+		if(ticker && istype(ticker.mode, /datum/game_mode/nuclear)) //only really care if the game mode is nuclear
+			var/datum/game_mode/nuclear/G = ticker.mode
+			G.check_nuke_disks()
+
+		spawn(0)
+			if(loc) loc.Entered(src)
+
+//This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
+var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "6" = 60)
+
+//by default, transition randomly to another zlevel
+/atom/movable/proc/get_transit_zlevel()
+	var/list/candidates = accessible_z_levels.Copy()
+	candidates.Remove("[src.z]")
+
+	if(!candidates.len)
+		return null
+	return text2num(pickweight(candidates))
+

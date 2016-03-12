@@ -105,7 +105,7 @@ datum/hSB
 							hsb.req_access += A
 
 					hsb.loc = usr.loc
-					usr << "<b>Sandbox:  Created an airlock."
+					usr << "<b>Sandbox:  Created an airlock.</b>"
 				if("hsbcanister")
 					var/list/hsbcanisters = typesof(/obj/machinery/portable_atmospherics/canister/) - /obj/machinery/portable_atmospherics/canister/
 					var/hsbcanister = input(usr, "Choose a canister to spawn.", "Sandbox:") in hsbcanisters + "Cancel"
@@ -137,8 +137,6 @@ datum/hSB
 						if(istype(O, /obj/item/assembly))
 							continue
 						if(istype(O, /obj/item/device/camera))
-							continue
-						if(istype(O, /obj/item/weapon/cloaking_device))
 							continue
 						if(istype(O, /obj/item/weapon/dummy))
 							continue

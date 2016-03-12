@@ -2,8 +2,8 @@
 	name = "mousetrap"
 	desc = "A handy little spring-loaded trap for catching pesty rodents."
 	icon_state = "mousetrap"
+	origin_tech = list(TECH_COMBAT = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 100, "waste" = 10)
-	origin_tech = "combat=1"
 	var/armed = 0
 
 
@@ -54,7 +54,7 @@
 		if(!armed)
 			user << "<span class='notice'>You arm [src].</span>"
 		else
-			if(((user.getBrainLoss() >= 60 || (CLUMSY in user.mutations)) && prob(50)))
+			if((CLUMSY in user.mutations) && prob(50))
 				var/which_hand = "l_hand"
 				if(!user.hand)
 					which_hand = "r_hand"
@@ -70,7 +70,7 @@
 
 	attack_hand(mob/living/user as mob)
 		if(armed)
-			if(((user.getBrainLoss() >= 60 || CLUMSY in user.mutations)) && prob(50))
+			if((CLUMSY in user.mutations) && prob(50))
 				var/which_hand = "l_hand"
 				if(!user.hand)
 					which_hand = "r_hand"

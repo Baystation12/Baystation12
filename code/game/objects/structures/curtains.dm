@@ -44,6 +44,14 @@
 	color = "#B8F5E3"
 	alpha = 200
 
+/obj/structure/curtain/open/bed
+	name = "bed curtain"
+	color = "#854636"
+
+/obj/structure/curtain/open/privacy
+	name = "privacy curtain"
+	color = "#B8F5E3"
+
 /obj/structure/curtain/open/shower
 	name = "shower curtain"
 	color = "#ACD1E9"

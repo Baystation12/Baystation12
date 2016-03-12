@@ -6,9 +6,9 @@
 	if(!client) return
 	client.inquisitive_ghost = !client.inquisitive_ghost
 	if(client.inquisitive_ghost)
-		src << "\blue You will now examine everything you click on."
+		src << "<span class='notice'>You will now examine everything you click on.</span>"
 	else
-		src << "\blue You will no longer examine things you click on."
+		src << "<span class='notice'>You will no longer examine things you click on.</span>"
 
 /mob/dead/observer/DblClickOn(var/atom/A, var/params)
 	if(client.buildmode)
@@ -17,23 +17,22 @@
 	if(can_reenter_corpse && mind && mind.current)
 		if(A == mind.current || (mind.current in A)) // double click your corpse or whatever holds it
 			reenter_corpse()						// (cloning scanner, body bag, closet, mech, etc)
-			return									// seems legit.
+			return
 
 	// Things you might plausibly want to follow
-	if((ismob(A) && A != src) || istype(A,/obj/machinery/bot) || istype(A,/obj/singularity))
+	if(istype(A,/atom/movable))
 		ManualFollow(A)
-
 	// Otherwise jump
 	else
-		following = null
-		loc = get_turf(A)
+		stop_following()
+		forceMove(get_turf(A))
 
 /mob/dead/observer/ClickOn(var/atom/A, var/params)
 	if(client.buildmode)
 		build_click(src, client.buildmode, params, A)
 		return
-	if(world.time <= next_move) return
-	next_move = world.time + 8
+	if(!canClick()) return
+	setClickCooldown(4)
 	// You are responsible for checking config.ghost_interaction when you override this function
 	// Not all of them require checking, see below
 	A.attack_ghost(src)

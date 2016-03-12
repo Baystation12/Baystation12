@@ -1,18 +1,3 @@
-/obj/item/weapon/banhammer
-	desc = "banhammer"
-	name = "banhammer"
-	icon = 'icons/obj/items.dmi'
-	icon_state = "toyhammer"
-	slot_flags = SLOT_BELT
-	throwforce = 0
-	w_class = 2.0
-	throw_speed = 7
-	throw_range = 15
-	attack_verb = list("banned")
-
-	suicide_act(mob/user)
-		viewers(user) << "<span class='danger'>[user] is hitting \himself with the [src.name]! It looks like \he's trying to ban \himself from life.</span>"
-		return (BRUTELOSS|FIRELOSS|TOXLOSS|OXYLOSS)
 
 /obj/item/weapon/nullrod
 	name = "null rod"
@@ -26,16 +11,15 @@
 	throwforce = 10
 	w_class = 2
 
-	suicide_act(mob/user)
-		viewers(user) << "<span class='danger'>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>"
-		return (BRUTELOSS|FIRELOSS)
-
 /obj/item/weapon/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
 
 	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
 
 	msg_admin_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.do_attack_animation(M)
 
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		user << "<span class='danger'>You don't have the dexterity to do this!</span>"
@@ -67,27 +51,6 @@
 	if (istype(A, /turf/simulated/floor))
 		user << "<span class='notice'>You hit the floor with the [src].</span>"
 		call(/obj/effect/rune/proc/revealrunes)(src)
-
-/obj/item/weapon/sord
-	name = "\improper SORD"
-	desc = "This thing is so unspeakably shitty you are having a hard time even holding it."
-	icon_state = "sord"
-	item_state = "sord"
-	slot_flags = SLOT_BELT
-	force = 2
-	throwforce = 1
-	sharp = 1
-	edge = 1
-	w_class = 3
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-
-	suicide_act(mob/user)
-		viewers(user) << "<span class='danger'>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>"
-		return(BRUTELOSS)
-
-/obj/item/weapon/sord/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
-	return ..()
 
 /obj/item/weapon/energy_net
 	name = "energy net"
@@ -205,19 +168,11 @@
 	qdel(src)
 
 /obj/effect/energy_net/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.damage
+	health -= Proj.get_structure_damage()
 	healthcheck()
 	return 0
 
 /obj/effect/energy_net/ex_act()
-	health = 0
-	healthcheck()
-
-/obj/effect/energy_net/blob_act()
-	health = 0
-	healthcheck()
-
-/obj/effect/energy_net/meteorhit()
 	health = 0
 	healthcheck()
 

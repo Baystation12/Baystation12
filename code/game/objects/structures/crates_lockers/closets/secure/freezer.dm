@@ -85,9 +85,9 @@
 	New()
 		..()
 		for(var/i = 0, i < 3, i++)
-			new /obj/item/weapon/spacecash/c1000(src)
+			new /obj/item/weapon/spacecash/bundle/c1000(src)
 		for(var/i = 0, i < 5, i++)
-			new /obj/item/weapon/spacecash/c500(src)
+			new /obj/item/weapon/spacecash/bundle/c500(src)
 		for(var/i = 0, i < 6, i++)
-			new /obj/item/weapon/spacecash/c200(src)
+			new /obj/item/weapon/spacecash/bundle/c200(src)
 		return

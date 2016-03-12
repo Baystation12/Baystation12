@@ -5,11 +5,11 @@
 	self-explanatory but the various object types may have their own documentation. ~Z
 
 	PATHS THAT USE DATUMS
-		/turf/simulated/wall
-		/obj/item/weapon/material
-		/obj/structure/barricade
-		/obj/item/stack/material
-		/obj/structure/table
+		turf/simulated/wall
+		obj/item/weapon/material
+		obj/structure/barricade
+		obj/item/stack/material
+		obj/structure/table
 
 	VALID ICONS
 		WALLS
@@ -78,12 +78,11 @@ var/list/name_to_material
 	var/destruction_desc = "breaks apart" // Fancy string for barricades/tables/objects exploding.
 
 	// Icons
-	var/icon_colour                       // Colour applied to products of this material.
-	var/icon_base = "metal"               // Wall and table base icon tag. See header.
-	var/door_icon_base = "metal"          // Door base icon tag. See header.
-	var/icon_reinf = "reinf_metal"        // Overlay used
-	var/stack_origin_tech = "materials=1" // Research level for stacks.
-	var/stack_per_sheet = 2000            // perunit value for stacks.
+	var/icon_colour                                      // Colour applied to products of this material.
+	var/icon_base = "metal"                              // Wall and table base icon tag. See header.
+	var/door_icon_base = "metal"                         // Door base icon tag. See header.
+	var/icon_reinf = "reinf_metal"                       // Overlay used
+	var/list/stack_origin_tech = list(TECH_MATERIAL = 1) // Research level for stacks.
 
 	// Attributes
 	var/cut_delay = 0            // Delay in ticks when cutting through this wall.
@@ -110,6 +109,8 @@ var/list/name_to_material
 	var/tableslam_noise = 'sound/weapons/tablehit1.ogg'
 	// Noise made when a simple door made of this material opens or closes.
 	var/dooropen_noise = 'sound/effects/stonedoor_openclose.ogg'
+	// Noise made when you hit structure made of this material.
+	var/hitsound = 'sound/weapons/genhit.ogg'
 	// Path to resulting stacktype. Todo remove need for this.
 	var/stack_type
 	// Wallrot crumble message.
@@ -168,8 +169,8 @@ var/list/name_to_material
 	if(islist(composite_material))
 		for(var/material_string in composite_material)
 			temp_matter[material_string] = composite_material[material_string]
-	else if(stack_per_sheet)
-		temp_matter[name] = stack_per_sheet
+	else if(SHEET_MATERIAL_AMOUNT)
+		temp_matter[name] = SHEET_MATERIAL_AMOUNT
 	return temp_matter
 
 // As above.
@@ -227,7 +228,7 @@ var/list/name_to_material
 	icon_reinf = "reinf_stone"
 	icon_colour = "#007A00"
 	weight = 22
-	stack_origin_tech = "materials=5"
+	stack_origin_tech = list(TECH_MATERIAL = 5)
 	door_icon_base = "stone"
 
 /material/diamond
@@ -240,8 +241,7 @@ var/list/name_to_material
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 100
-	stack_origin_tech = "materials=6"
-	stack_per_sheet = 3750
+	stack_origin_tech = list(TECH_MATERIAL = 6)
 
 /material/gold
 	name = "gold"
@@ -249,7 +249,7 @@ var/list/name_to_material
 	icon_colour = "#EDD12F"
 	weight = 24
 	hardness = 40
-	stack_origin_tech = "materials=4"
+	stack_origin_tech = list(TECH_MATERIAL = 4)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 
@@ -263,7 +263,7 @@ var/list/name_to_material
 	icon_colour = "#D1E6E3"
 	weight = 22
 	hardness = 50
-	stack_origin_tech = "materials=3"
+	stack_origin_tech = list(TECH_MATERIAL = 3)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 
@@ -275,7 +275,7 @@ var/list/name_to_material
 	icon_colour = "#FC2BC5"
 	shard_type = SHARD_SHARD
 	hardness = 30
-	stack_origin_tech = "phorontech=2;materials=2"
+	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_PHORON = 2)
 	door_icon_base = "stone"
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
@@ -325,6 +325,22 @@ var/list/name_to_material
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
+	hitsound = 'sound/weapons/smash.ogg'
+
+/material/diona
+	name = "biomass"
+	icon_colour = null
+	stack_type = null
+	integrity = 600
+	icon_base = "diona"
+	icon_reinf = "noreinf"
+	hitsound = 'sound/effects/attackblob.ogg'
+
+/material/diona/place_dismantled_product()
+	return
+
+/material/diona/place_dismantled_girder(var/turf/target)
+	spawn_diona_nymph(target)
 
 /material/steel/holographic
 	name = "holo" + DEFAULT_WALL_MATERIAL
@@ -343,8 +359,17 @@ var/list/name_to_material
 	explosion_resistance = 25
 	hardness = 80
 	weight = 23
-	stack_origin_tech = "materials=2"
+	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
+	hitsound = 'sound/effects/blobattack.ogg'
+
+/material/plasteel/titanium
+	name = "titanium"
+	stack_type = null
+	icon_base = "metal"
+	door_icon_base = "metal"
+	icon_colour = "#D1E6E3"
+	icon_reinf = "reinf_metal"
 
 /material/glass
 	name = "glass"
@@ -361,8 +386,8 @@ var/list/name_to_material
 	destruction_desc = "shatters"
 	window_options = list("One Direction" = 1, "Full Window" = 4)
 	created_window = /obj/structure/window/basic
-	wire_product = /obj/item/stack/light_w
 	rod_product = /obj/item/stack/material/glass/reinforced
+	hitsound = 'sound/effects/Glasshit.ogg'
 
 /material/glass/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
 
@@ -455,26 +480,28 @@ var/list/name_to_material
 	rod_product = null
 
 /material/glass/phoron
-	name = "phglass"
-	display_name = "phoron glass"
+	name = "borosilicate glass"
+	display_name = "borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MATERIAL_BRITTLE
-	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE+300
-	integrity = 200 // idk why but phoron windows are strong, so.
+	integrity = 100
 	icon_colour = "#FC2BC5"
-	stack_origin_tech = "materials=3;phorontech=2"
+	stack_origin_tech = list(TECH_MATERIAL = 4)
 	created_window = /obj/structure/window/phoronbasic
 	wire_product = null
 	rod_product = /obj/item/stack/material/glass/phoronrglass
 
 /material/glass/phoron/reinforced
-	name = "rphglass"
-	display_name = "reinforced phoron glass"
+	name = "reinforced borosilicate glass"
+	display_name = "reinforced borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronrglass
-	stack_origin_tech = "materials=4;phorontech=2"
+	stack_origin_tech = list(TECH_MATERIAL = 5)
 	composite_material = list() //todo
 	created_window = /obj/structure/window/phoronreinforced
 	hardness = 40
+	weight = 30
+	stack_origin_tech = list(TECH_MATERIAL = 2)
+	composite_material = list() //todo
 	rod_product = null
 
 /material/plastic
@@ -487,7 +514,7 @@ var/list/name_to_material
 	hardness = 10
 	weight = 12
 	melting_point = T0C+371 //assuming heat resistant plastic
-	stack_origin_tech = "materials=3"
+	stack_origin_tech = list(TECH_MATERIAL = 3)
 
 /material/plastic/holographic
 	name = "holoplastic"
@@ -499,7 +526,7 @@ var/list/name_to_material
 	name = "osmium"
 	stack_type = /obj/item/stack/material/osmium
 	icon_colour = "#9999FF"
-	stack_origin_tech = "materials=5"
+	stack_origin_tech = list(TECH_MATERIAL = 5)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 
@@ -507,7 +534,7 @@ var/list/name_to_material
 	name = "tritium"
 	stack_type = /obj/item/stack/material/tritium
 	icon_colour = "#777777"
-	stack_origin_tech = "materials=5"
+	stack_origin_tech = list(TECH_MATERIAL = 5)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 
@@ -515,14 +542,14 @@ var/list/name_to_material
 	name = "mhydrogen"
 	stack_type = /obj/item/stack/material/mhydrogen
 	icon_colour = "#E6C5DE"
-	stack_origin_tech = "materials=6;powerstorage=5;magnets=5"
+	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 6, TECH_MAGNET = 5)
 
 /material/platinum
 	name = "platinum"
 	stack_type = /obj/item/stack/material/platinum
 	icon_colour = "#9999FF"
 	weight = 27
-	stack_origin_tech = "materials=2"
+	stack_origin_tech = list(TECH_MATERIAL = 2)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 
@@ -531,9 +558,9 @@ var/list/name_to_material
 	stack_type = /obj/item/stack/material/iron
 	icon_colour = "#5C5454"
 	weight = 22
-	stack_per_sheet = 3750
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	hitsound = 'sound/weapons/smash.ogg'
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy
@@ -560,12 +587,13 @@ var/list/name_to_material
 	weight = 18
 	melting_point = T0C+300 //okay, not melting in this case, but hot enough to destroy wood
 	ignition_point = T0C+288
-	stack_origin_tech = "materials=1;biotech=1"
+	stack_origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 	door_icon_base = "wood"
 	destruction_desc = "splinters"
 	sheet_singular_name = "plank"
 	sheet_plural_name = "planks"
+	hitsound = 'sound/effects/woodhit.ogg'
 
 /material/wood/holographic
 	name = "holowood"
@@ -585,13 +613,13 @@ var/list/name_to_material
 	weight = 1
 	ignition_point = T0C+232 //"the temperature at which book-paper catches fire, and burns." close enough
 	melting_point = T0C+232 //temperature at which cardboard walls would be destroyed
-	stack_origin_tech = "materials=1"
+	stack_origin_tech = list(TECH_MATERIAL = 1)
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
 
 /material/cloth //todo
 	name = "cloth"
-	stack_origin_tech = "materials=2"
+	stack_origin_tech = list(TECH_MATERIAL = 2)
 	door_icon_base = "wood"
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -618,7 +646,7 @@ var/list/name_to_material
 	display_name = "human remains"
 
 /material/cult/reinf/place_dismantled_product(var/turf/target)
-	new /obj/effect/decal/remains/human(target)
+	new /obj/item/remains/human(target)
 
 /material/resin
 	name = "resin"
@@ -639,7 +667,7 @@ var/list/name_to_material
 /material/leather
 	name = "leather"
 	icon_colour = "#BA5100"
-	stack_origin_tech = "materials=2"
+	stack_origin_tech = list(TECH_MATERIAL = 2)
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+300
 	melting_point = T0C+300

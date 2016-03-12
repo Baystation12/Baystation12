@@ -1,3 +1,5 @@
+/*
+<<<<<<< HEAD
 /turf/simulated/floor/airless
 	icon_state = "floor"
 	name = "airless floor"
@@ -48,76 +50,14 @@
 		icon_state = "sandstonevault"
 	alienvault
 		icon_state = "alienvault"
+=======
+*/
+/turf/simulated/floor/diona
+	name = "biomass flooring"
+	icon_state = "diona"
 
-/turf/simulated/floor/engine
-	name = "reinforced floor"
-	icon_state = "engine"
-	thermal_conductivity = 0.025
-	heat_capacity = 325000
-	intact = 0
-
-/turf/simulated/floor/engine/nitrogen
-	oxygen = 0
-
-/turf/simulated/floor/engine/attackby(obj/item/weapon/C as obj, mob/user as mob)
-	if(!C)
-		return
-	if(!user)
-		return
-	if(istype(C, /obj/item/weapon/wrench))
-		user << "\blue Removing rods..."
-		playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
-		if(do_after(user, 30))
-			PoolOrNew(/obj/item/stack/rods, list(loc, 2))
-			ChangeTurf(/turf/simulated/floor)
-			var/turf/simulated/floor/F = src
-			F.make_plating()
-			return
-
-/turf/simulated/floor/engine/cult
-	name = "engraved floor"
-	icon_state = "cult"
-
-/turf/simulated/floor/engine/cult/cultify()
+/turf/simulated/floor/diona/attackby()
 	return
-
-/turf/simulated/floor/engine/n20
-	New()
-		. = ..()
-		assume_gas("sleeping_agent", 2000)
-
-/turf/simulated/floor/engine/vacuum
-	name = "vacuum floor"
-	icon_state = "engine"
-	oxygen = 0
-	nitrogen = 0
-	temperature = TCMB
-
-/turf/simulated/floor/plating
-	name = "plating"
-	icon_state = "plating"
-	floor_type = null
-	intact = 0
-
-/turf/simulated/floor/plating/airless
-	icon_state = "plating"
-	name = "airless plating"
-	oxygen = 0
-	nitrogen = 0
-	temperature = TCMB
-
-	New()
-		..()
-		name = "plating"
-
-/turf/simulated/floor/bluegrid
-	icon = 'icons/turf/floors.dmi'
-	icon_state = "bcircuit"
-
-/turf/simulated/floor/greengrid
-	icon = 'icons/turf/floors.dmi'
-	icon_state = "gcircuit"
-
 
 /turf/simulated/shuttle
 	name = "shuttle"
@@ -141,8 +81,12 @@
 	name = "plating"
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "plating"
+	level = 1
 
-/turf/simulated/shuttle/plating/vox	//Skipjack plating
+/turf/simulated/shuttle/plating/is_plating()
+	return 1
+
+/turf/simulated/shuttle/plating/vox //Skipjack plating
 	oxygen = 0
 	nitrogen = MOLES_N2STANDARD + MOLES_O2STANDARD
 
@@ -150,10 +94,12 @@
 	name = "brig floor"        // Also added it into the 2x3 brig area of the shuttle.
 	icon_state = "floor4"
 
-/turf/simulated/shuttle/floor4/vox	//skipjack floors
+/turf/simulated/shuttle/floor4/vox //skipjack floors
 	name = "skipjack floor"
 	oxygen = 0
 	nitrogen = MOLES_N2STANDARD + MOLES_O2STANDARD
+/*
+<<<<<<< HEAD
 
 /turf/simulated/floor/beach
 	name = "beach"
@@ -225,3 +171,6 @@
 
 /turf/simulated/floor/plating/snow/ex_act(severity)
 	return
+=======
+>>>>>>> ed932901a620cef0ec861c81ad7805468662f693
+*/

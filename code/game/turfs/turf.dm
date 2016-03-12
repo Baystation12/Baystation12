@@ -1,11 +1,9 @@
 /turf
 	icon = 'icons/turf/floors.dmi'
-	level = 1.0
+	level = 1
+	var/holy = 0
 
-	//for floors, use is_plating(), is_steel_floor() and is_light_floor()
-	var/intact = 1
-
-	//Properties for open tiles (/floor)
+	// Initial air contents (in moles)
 	var/oxygen = 0
 	var/carbon_dioxide = 0
 	var/nitrogen = 0
@@ -16,24 +14,16 @@
 	var/heat_capacity = 1
 
 	//Properties for both
-	var/temperature = T20C
+	var/temperature = T20C      // Initial turf temperature.
+	var/blocks_air = 0          // Does this turf contain air/let air through?
 
-	var/blocks_air = 0
+	// General properties.
 	var/icon_old = null
-	var/pathweight = 1
+	var/pathweight = 1          // How much does it cost to pathfind over this turf?
+	var/blessed = 0             // Has the turf been blessed?
+	var/dynamic_lighting = 1    // Does the turf use dynamic lighting?
 
-	//Mining resource generation stuff.
-	var/has_resources
-	var/list/resources
-
-	// Flick animation
-	var/atom/movable/overlay/c_animation = null
-
-	// holy water
-	var/holy = 0
-
-	var/dynamic_lighting = 1
-	luminosity = 1
+	var/list/decals
 
 /turf/New()
 	..()
@@ -43,11 +33,25 @@
 			return
 	turfs |= src
 
+	if(dynamic_lighting)
+		luminosity = 0
+	else
+		luminosity = 1
+
+/turf/proc/update_icon()
+	return
+
 /turf/Destroy()
 	turfs -= src
 	..()
 
 /turf/ex_act(severity)
+	return 0
+
+/turf/proc/is_space()
+	return 0
+
+/turf/proc/is_intact()
 	return 0
 
 /turf/attack_hand(mob/user)
@@ -69,11 +73,13 @@
 
 /turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
-		usr << "\red [translation(src,"movement_disabled")]" //This is to identify lag problems
+		usr << "<span class='warning'>[translation(src,"movement_disabled")]</span>" //This is to identify lag problems
 		return
+
+	..()
+
 	if (!mover || !isturf(mover.loc))
 		return 1
-
 
 	//First, check objects to block exit that are not on the border
 	for(var/obj/obstacle in mover.loc)
@@ -109,68 +115,45 @@
 				return 0
 	return 1 //Nothing found to block so return success!
 
-
+var/const/enterloopsanity = 100
 /turf/Entered(atom/atom as mob|obj)
+
 	if(movement_disabled)
-		usr << "\red [translation(src,"movement_disabled")]" //This is to identify lag problems
+		usr << "<span class='warning'>[translation(src,"movement_disabled")]</span>" //This is to identify lag problems
 		return
 	..()
-//vvvvv Infared beam stuff vvvvv
-
-	if ((atom && atom.density && !( istype(atom, /obj/effect/beam) )))
-		for(var/obj/effect/beam/i_beam/I in src)
-			spawn( 0 )
-				if (I)
-					I.hit()
-				break
-
-//^^^^^ Infared beam stuff ^^^^^
 
 	if(!istype(atom, /atom/movable))
 		return
 
 	var/atom/movable/A = atom
 
-	var/loopsanity = 100
 	if(ismob(A))
 		var/mob/M = A
 		if(!M.lastarea)
 			M.lastarea = get_area(M.loc)
 		if(M.lastarea.has_gravity == 0)
 			inertial_drift(M)
-
-		else if(!istype(src, /turf/space))
+		else if(is_space())
 			M.inertia_dir = 0
 			M.make_floating(0)
-	..()
+
 	var/objects = 0
-	for(var/atom/O as mob|obj|turf|area in range(1))
-		if(objects > loopsanity)	break
-		objects++
-		spawn( 0 )
-			if ((O && A))
-				O.HasProximity(A, 1)
-			return
+	if(A && (A.flags & PROXMOVE))
+		for(var/atom/movable/thing in range(1))
+			if(objects > enterloopsanity) break
+			objects++
+			spawn(0)
+				if(A)
+					A.HasProximity(thing, 1)
+					if ((thing && A) && (thing.flags & PROXMOVE))
+						thing.HasProximity(A, 1)
 	return
 
 /turf/proc/adjacent_fire_act(turf/simulated/floor/source, temperature, volume)
 	return
 
 /turf/proc/is_plating()
-	return 0
-/turf/proc/is_asteroid_floor()
-	return 0
-/turf/proc/is_steel_floor()
-	return 0
-/turf/proc/is_light_floor()
-	return 0
-/turf/proc/is_grass_floor()
-	return 0
-/turf/proc/is_wood_floor()
-	return 0
-/turf/proc/is_carpet_floor()
-	return 0
-/turf/proc/return_siding_icon_state()		//used for grass floors, which have siding.
 	return 0
 
 /turf/proc/inertial_drift(atom/movable/A as mob|obj)
@@ -191,178 +174,7 @@
 
 /turf/proc/levelupdate()
 	for(var/obj/O in src)
-		if(O.level == 1)
-			O.hide(src.intact)
-
-// override for space turfs, since they should never hide anything
-/turf/space/levelupdate()
-	for(var/obj/O in src)
-		if(O.level == 1)
-			O.hide(0)
-
-// Removes all signs of lattice on the pos of the turf -Donkieyo
-/turf/proc/RemoveLattice()
-	var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-	if(L)
-		qdel(L)
-
-//Creates a new turf
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
-	if (!N)
-		return
-
-///// Z-Level Stuff ///// This makes sure that turfs are not changed to space when one side is part of a zone
-	if(N == /turf/space)
-		var/turf/controller = locate(1, 1, src.z)
-		for(var/obj/effect/landmark/zcontroller/c in controller)
-			if(c.down)
-				var/turf/below = locate(src.x, src.y, c.down_target)
-				if((air_master.has_valid_zone(below) || air_master.has_valid_zone(src)) && !istype(below, /turf/space)) // dont make open space into space, its pointless and makes people drop out of the station
-					var/turf/W = src.ChangeTurf(/turf/simulated/floor/open)
-					var/list/temp = list()
-					temp += W
-					c.add(temp,3,1) // report the new open space to the zcontroller
-					return W
-///// Z-Level Stuff
-
-	var/obj/fire/old_fire = fire
-	var/old_opacity = opacity
-	var/old_dynamic_lighting = dynamic_lighting
-	var/list/old_affecting_lights = affecting_lights
-	var/old_lighting_overlay = lighting_overlay
-
-	//world << "Replacing [src.type] with [N]"
-
-	if(connections) connections.erase_all()
-
-	if(istype(src,/turf/simulated))
-		//Yeah, we're just going to rebuild the whole thing.
-		//Despite this being called a bunch during explosions,
-		//the zone will only really do heavy lifting once.
-		var/turf/simulated/S = src
-		if(S.zone) S.zone.rebuild()
-
-	if(ispath(N, /turf/simulated/floor))
-		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
-		if(old_fire)
-			fire = old_fire
-
-		if (istype(W,/turf/simulated/floor))
-			W.RemoveLattice()
-
-		if(tell_universe)
-			universe.OnTurfChange(W)
-
-		if(air_master)
-			air_master.mark_for_update(src) //handle the addition of the new turf.
-
-		for(var/turf/space/S in range(W,1))
-			S.update_starlight()
-
-		W.levelupdate()
-		. = W
-
-	else
-
-		var/turf/W = new N( locate(src.x, src.y, src.z) )
-
-		if(old_fire)
-			old_fire.RemoveFire()
-
-		if(tell_universe)
-			universe.OnTurfChange(W)
-
-		if(air_master)
-			air_master.mark_for_update(src)
-
-		for(var/turf/space/S in range(W,1))
-			S.update_starlight()
-
-		W.levelupdate()
-		. =  W
-
-	lighting_overlay = old_lighting_overlay
-	affecting_lights = old_affecting_lights
-	if((old_opacity != opacity) || (dynamic_lighting != old_dynamic_lighting) || force_lighting_update)
-		reconsider_lights()
-	if(dynamic_lighting != old_dynamic_lighting)
-		if(dynamic_lighting)
-			lighting_build_overlays()
-		else
-			lighting_clear_overlays()
-
-
-//Commented out by SkyMarshal 5/10/13 - If you are patching up space, it should be vacuum.
-//  If you are replacing a wall, you have increased the volume of the room without increasing the amount of gas in it.
-//  As such, this will no longer be used.
-
-//////Assimilate Air//////
-/*
-/turf/simulated/proc/Assimilate_Air()
-	var/aoxy = 0//Holders to assimilate air from nearby turfs
-	var/anitro = 0
-	var/aco = 0
-	var/atox = 0
-	var/atemp = 0
-	var/turf_count = 0
-
-	for(var/direction in cardinal)//Only use cardinals to cut down on lag
-		var/turf/T = get_step(src,direction)
-		if(istype(T,/turf/space))//Counted as no air
-			turf_count++//Considered a valid turf for air calcs
-			continue
-		else if(istype(T,/turf/simulated/floor))
-			var/turf/simulated/S = T
-			if(S.air)//Add the air's contents to the holders
-				aoxy += S.air.oxygen
-				anitro += S.air.nitrogen
-				aco += S.air.carbon_dioxide
-				atox += S.air.toxins
-				atemp += S.air.temperature
-			turf_count ++
-	air.oxygen = (aoxy/max(turf_count,1))//Averages contents of the turfs, ignoring walls and the like
-	air.nitrogen = (anitro/max(turf_count,1))
-	air.carbon_dioxide = (aco/max(turf_count,1))
-	air.toxins = (atox/max(turf_count,1))
-	air.temperature = (atemp/max(turf_count,1))//Trace gases can get bant
-	air.update_values()
-
-	//cael - duplicate the averaged values across adjacent turfs to enforce a seamless atmos change
-	for(var/direction in cardinal)//Only use cardinals to cut down on lag
-		var/turf/T = get_step(src,direction)
-		if(istype(T,/turf/space))//Counted as no air
-			continue
-		else if(istype(T,/turf/simulated/floor))
-			var/turf/simulated/S = T
-			if(S.air)//Add the air's contents to the holders
-				S.air.oxygen = air.oxygen
-				S.air.nitrogen = air.nitrogen
-				S.air.carbon_dioxide = air.carbon_dioxide
-				S.air.toxins = air.toxins
-				S.air.temperature = air.temperature
-				S.air.update_values()
-*/
-
-
-/turf/proc/ReplaceWithLattice()
-	src.ChangeTurf(/turf/space)
-	spawn()
-		new /obj/structure/lattice( locate(src.x, src.y, src.z) )
-
-/turf/proc/kill_creatures(mob/U = null)//Will kill people/creatures and damage mechs./N
-//Useful to batch-add creatures to the list.
-	for(var/mob/living/M in src)
-		if(M==U)	continue//Will not harm U. Since null != M, can be excluded to kill everyone.
-		spawn(0)
-			M.gib()
-	for(var/obj/mecha/M in src)//Mecha are not gibbed but are damaged.
-		spawn(0)
-			M.take_damage(100, "brute")
-
-/turf/proc/Bless()
-	if(flags & NOJAUNT)
-		return
-	flags |= NOJAUNT
+		O.hide(O.hides_under_flooring() && !is_plating())
 
 /turf/proc/AdjacentTurfs()
 	var/L[] = new()
@@ -371,6 +183,14 @@
 			if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
 				L.Add(t)
 	return L
+
+/turf/proc/CardinalTurfs()
+	var/L[] = new()
+	for(var/turf/simulated/T in AdjacentTurfs())
+		if(T.x == src.x || T.y == src.y)
+			L.Add(T)
+	return L
+
 /turf/proc/Distance(turf/t)
 	if(get_dist(src,t) == 1)
 		var/cost = (src.x - t.x) * (src.x - t.x) + (src.y - t.y) * (src.y - t.y)
@@ -378,6 +198,7 @@
 		return cost
 	else
 		return get_dist(src,t)
+
 /turf/proc/AdjacentTurfsSpace()
 	var/L[] = new()
 	for(var/turf/t in oview(src,1))
@@ -410,3 +231,6 @@
 	else
 		user << "<span class='warning'>[translation(src,"clean",source)]</span>"
 	source.reagents.trans_to_turf(src, 1, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
+
+/turf/proc/update_blood_overlays()
+	return

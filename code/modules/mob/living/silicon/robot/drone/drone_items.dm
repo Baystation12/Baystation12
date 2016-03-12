@@ -26,8 +26,6 @@
 
 	var/obj/item/wrapped = null // Item currently being held.
 
-	var/force_holder = null //
-
 // VEEEEERY limited version for mining borgs. Basically only for swapping cells and upgrading the drills.
 /obj/item/weapon/gripper/miner
 	name = "drill maintenance gripper"
@@ -36,7 +34,8 @@
 
 	can_hold = list(
 	/obj/item/weapon/cell,
-	/obj/item/weapon/stock_parts
+	/obj/item/weapon/stock_parts,
+	/obj/item/weapon/circuitboard/miningdrill
 	)
 
 /obj/item/weapon/gripper/paperwork
@@ -63,9 +62,9 @@
 		/obj/item/device/mmi,
 		/obj/item/robot_parts,
 		/obj/item/borg/upgrade,
-		/obj/item/device/flash, //to build borgs
-		/obj/item/organ/brain, //to insert into MMIs.
-		/obj/item/stack/cable_coil, //again, for borg building
+		/obj/item/device/flash, //to build borgs,
+		/obj/item/organ/brain, //to insert into MMIs,
+		/obj/item/stack/cable_coil, //again, for borg building,
 		/obj/item/weapon/circuitboard,
 		/obj/item/slime_extract,
 		/obj/item/weapon/reagent_containers/glass,
@@ -99,6 +98,11 @@
 		/obj/item/stack/material
 		)
 
+/obj/item/weapon/gripper/examine(mob/user)
+	..()
+	if(wrapped)
+		user << "It is holding \a [wrapped]."
+
 /obj/item/weapon/gripper/attack_self(mob/user as mob)
 	if(wrapped)
 		return wrapped.attack_self(user)
@@ -126,13 +130,7 @@
 	//update_icon()
 
 /obj/item/weapon/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(wrapped) 	//The force of the wrapped obj gets set to zero during the attack() and afterattack().
-		force_holder = wrapped.force
-		wrapped.force = 0.0
-		wrapped.attack(M,user)
-		if(deleted(wrapped))
-			wrapped = null
-		return 1
+	// Don't fall through and smack people with gripper, instead just no-op
 	return 0
 
 /obj/item/weapon/gripper/afterattack(var/atom/target, var/mob/living/user, proximity, params)
@@ -150,14 +148,17 @@
 		//Temporary put wrapped into user so target's attackby() checks pass.
 		wrapped.loc = user
 
+		//The force of the wrapped obj gets set to zero during the attack() and afterattack().
+		var/force_holder = wrapped.force
+		wrapped.force = 0.0
+
 		//Pass the attack on to the target. This might delete/relocate wrapped.
 		var/resolved = target.attackby(wrapped,user)
 		if(!resolved && wrapped && target)
 			wrapped.afterattack(target,user,1)
 
-		//wrapped's force was set to zero.  This resets it to the value it had before.
 		wrapped.force = force_holder
-		force_holder = null
+
 		//If wrapped was neither deleted nor put into target, put it back into the gripper.
 		if(wrapped && user && (wrapped.loc == user))
 			wrapped.loc = src
@@ -270,7 +271,7 @@
 
 			D << "<span class='danger'>You begin decompiling [M].</span>"
 
-			if(!do_after(D,50))
+			if(!do_after(D,50,M))
 				D << "<span class='danger'>You need to remain still while decompiling such a large object.</span>"
 				return
 
@@ -311,7 +312,7 @@
 					glass.add_charge(250)
 			else
 				continue
-		else if(istype(W,/obj/effect/decal/remains/robot))
+		else if(istype(W,/obj/item/remains/robot))
 			if(metal)
 				metal.add_charge(2000)
 			if(plastic)

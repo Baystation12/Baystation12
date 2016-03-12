@@ -54,7 +54,7 @@
 "bb" = (/obj/machinery/atmospherics/unary/vent_pump{dir = 8; on = 1},/turf/simulated/floor,/area/tcommsat/computer)
 "bc" = (/obj/structure/stool/bed/chair/office/dark{dir = 4},/turf/simulated/floor,/area/tcommsat/computer)
 "bd" = (/obj/machinery/computer/telecomms/server{network = "tcommsat"},/turf/simulated/floor,/area/tcommsat/computer)
-"be" = (/obj/item/weapon/syntiflesh{name = "Cuban Pete-Meat"},/obj/item/weapon/spacecash/c1,/turf/simulated/floor/engine,/area/tcommsat/computer)
+"be" = (/obj/item/weapon/syntiflesh{name = "Cuban Pete-Meat"},/obj/item/weapon/spacecash/bundle/c1,/turf/simulated/floor/engine,/area/tcommsat/computer)
 "bf" = (/obj/machinery/atmospherics/unary/vent_pump{dir = 4; layer = 2.4; on = 1},/turf/simulated/floor,/area/tcommsat/computer)
 "bg" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/turf/simulated/floor,/area/tcommsat/computer)
 "bh" = (/obj/structure/stool/bed/chair{dir = 4},/turf/simulated/floor,/area/tcommsat/computer)

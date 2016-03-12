@@ -58,7 +58,7 @@
 	icon_state = "entry"
 
 /area/ship/scrap/unused1
-	name = "\improper Unused Compartment #1"
+	name = "\improper Atmos Equipment Comparment"
 	icon_state = "green"
 
 /area/ship/scrap/unused2
@@ -80,7 +80,6 @@
 /area/ship/scrap/maintenance/atmos
 	name = "\improper Atmospherics Comparment"
 	icon_state = "atmos"
-	music = list('sound/ambience/ambiatm1.ogg')
 
 /area/ship/scrap/maintenance/power
 	name = "\improper Power Compartment"
@@ -89,12 +88,10 @@
 /area/ship/scrap/maintenance/engine
 	name = "\improper Engine Compartments"
 	icon_state = "engine"
-	music = list('sound/ambience/ambisin1.ogg','sound/ambience/ambisin2.ogg','sound/ambience/ambisin3.ogg')
 
 /area/ship/scrap/command
 	name = "\improper Command Deck"
 	icon_state = "centcom"
-	music = list('sound/ambience/signal.ogg')
 
 /area/ship/scrap/command/captain
 	name = "\improper Captain's Quarters"
@@ -103,7 +100,6 @@
 /area/ship/scrap/comms
 	name = "\improper Communications Relay"
 	icon_state = "tcomsatcham"
-	music = list('sound/ambience/signal.ogg')
 
 /area/ship/scrap/shuttle/
 	requires_power = 0

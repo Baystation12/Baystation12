@@ -12,7 +12,6 @@
 // Takes care of organ related updates, such as broken and missing limbs
 /mob/living/carbon/human/proc/handle_organs()
 
-	number_wounds = 0
 	var/force_process = 0
 	var/damage_this_tick = getBruteLoss() + getFireLoss() + getToxLoss()
 	if(damage_this_tick > last_dam)
@@ -41,9 +40,8 @@
 			continue
 		else
 			E.process()
-			number_wounds += E.number_wounds
 
-			if (!lying && world.time - l_move_time < 15)
+			if (!lying && !buckled && world.time - l_move_time < 15)
 			//Moving around with fractured ribs won't do you any good
 				if (E.is_broken() && E.internal_organs && E.internal_organs.len && prob(15))
 					var/obj/item/organ/I = pick(E.internal_organs)
@@ -173,3 +171,8 @@
 	for(var/datum/reagent/A in reagents.reagent_list)
 		var/obj/item/organ/O = pick(organs)
 		O.trace_chemicals[A.name] = 100
+
+/mob/living/carbon/human/proc/sync_organ_dna()
+	var/list/all_bits = internal_organs|organs
+	for(var/obj/item/organ/O in all_bits)
+		O.set_dna(dna)

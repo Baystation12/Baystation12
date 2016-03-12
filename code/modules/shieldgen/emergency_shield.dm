@@ -59,15 +59,8 @@
 
 	..()
 
-/obj/machinery/shield/meteorhit()
-	src.health -= max_health*0.75 //3/4 health as damage
-	check_failure()
-	opacity = 1
-	spawn(20) if(src) opacity = 0
-	return
-
 /obj/machinery/shield/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.damage
+	health -= Proj.get_structure_damage()
 	..()
 	check_failure()
 	opacity = 1
@@ -93,9 +86,6 @@
 		if(2)
 			if(prob(50))
 				qdel(src)
-
-/obj/machinery/shield/blob_act()
-	qdel(src)
 
 
 /obj/machinery/shield/hitby(AM as mob|obj)
@@ -130,7 +120,6 @@
 	density = 1
 	opacity = 0
 	anchored = 0
-	pressure_resistance = 2*ONE_ATMOSPHERE
 	req_access = list(access_engine)
 	var/const/max_health = 100
 	var/health = max_health
@@ -225,13 +214,6 @@
 	update_icon()
 	return
 
-/obj/machinery/shieldgen/meteorhit(obj/O as obj)
-	src.health -= max_health*0.25 //A quarter of the machine's health
-	if (prob(5))
-		src.malfunction = 1
-	src.checkhp()
-	return
-
 /obj/machinery/shieldgen/ex_act(severity)
 	switch(severity)
 		if(1.0)
@@ -282,12 +264,14 @@
 			user << "The device must first be secured to the floor."
 	return
 
-/obj/machinery/shieldgen/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/card/emag))
+/obj/machinery/shieldgen/emag_act(var/remaining_charges, var/mob/user)
+	if(!malfunction)
 		malfunction = 1
 		update_icon()
+		return 1
 
-	else if(istype(W, /obj/item/weapon/screwdriver))
+/obj/machinery/shieldgen/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/screwdriver))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		if(is_open)
 			user << "\blue You close the panel."
@@ -300,7 +284,7 @@
 		var/obj/item/stack/cable_coil/coil = W
 		user << "<span class='notice'>You begin to replace the wires.</span>"
 		//if(do_after(user, min(60, round( ((maxhealth/health)*10)+(malfunction*10) ))) //Take longer to repair heavier damage
-		if(do_after(user, 30))
+		if(do_after(user, 30,src))
 			if (coil.use(1))
 				health = max_health
 				malfunction = 0

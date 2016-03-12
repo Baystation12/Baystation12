@@ -4,13 +4,13 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "forensic0-old" //GET A BETTER SPRITE.
 	item_state = "electronic"
+	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
-	origin_tech = "magnets=1;engineering=1"
 
 /obj/item/weapon/mining_scanner/attack_self(mob/user as mob)
 	user << "You begin sweeping \the [src] about, scanning for metal deposits."
 
-	if(!do_after(user, 50))
+	if(!do_after(user, 50,src))
 		return
 
 	var/list/metals = list(
@@ -20,7 +20,7 @@
 		"exotic matter" = 0
 		)
 
-	for(var/turf/T in range(2, get_turf(user)))
+	for(var/turf/simulated/T in range(2, get_turf(user)))
 
 		if(!T.has_resources)
 			continue

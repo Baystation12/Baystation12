@@ -2,7 +2,7 @@
 //added different sort of gibs and animations. N
 /mob/proc/gib(anim="gibbed-m",do_gibs)
 	death(1)
-	monkeyizing = 1
+	transforming = 1
 	canmove = 0
 	icon = null
 	invisibility = 101
@@ -16,7 +16,7 @@
 	animation.master = src
 
 	flick(anim, animation)
-	if(do_gibs) gibs(loc, viruses, dna)
+	if(do_gibs) gibs(loc, dna)
 
 	spawn(15)
 		if(animation)	qdel(animation)
@@ -28,7 +28,7 @@
 /mob/proc/dust(anim="dust-m",remains=/obj/effect/decal/cleanable/ash)
 	death(1)
 	var/atom/movable/overlay/animation = null
-	monkeyizing = 1
+	transforming = 1
 	canmove = 0
 	icon = null
 	invisibility = 101
@@ -76,8 +76,14 @@
 	drop_r_hand()
 	drop_l_hand()
 
+	//TODO:  Change death state to health_dead for all these icon files.  This is a stop gap.
+
 	if(healths)
-		healths.icon_state = "health6"
+		if("health7" in icon_states(healths.icon))
+			healths.icon_state = "health7"
+		else
+			healths.icon_state = "health6"
+			log_debug("[src] ([src.type]) died but does not have a valid health7 icon_state (using health6 instead). report this error to Ccomp5950 or your nearest Developer")
 
 	timeofdeath = world.time
 	if(mind) mind.store_memory("Time of death: [worldtime2text()]", 0)

@@ -10,7 +10,7 @@
 	icon_state = "farmbot0"
 	health = 50
 	maxHealth = 50
-	req_access = list(access_hydroponics)
+	req_one_access = list(access_hydroponics, access_robotics)
 
 	var/action = "" // Used to update icon
 	var/waters_trays = 1
@@ -64,13 +64,15 @@
 	onclose(user, "autofarm")
 	return
 
-/mob/living/bot/farmbot/Emag(var/mob/user)
-	..()
-	if(user)
-		user << "<span class='notice'>You short out [src]'s plant identifier circuits.</span>"
-	spawn(rand(30, 50))
-		visible_message("<span class='warning'>[src] buzzes oddly.</span>")
-		emagged = 1
+/mob/living/bot/farmbot/emag_act(var/remaining_charges, var/mob/user)
+	. = ..()
+	if(!emagged)
+		if(user)
+			user << "<span class='notice'>You short out [src]'s plant identifier circuits.</span>"
+		spawn(rand(30, 50))
+			visible_message("<span class='warning'>[src] buzzes oddly.</span>")
+			emagged = 1
+		return 1
 
 /mob/living/bot/farmbot/Topic(href, href_list)
 	if(..())
@@ -173,7 +175,7 @@
 				update_icons()
 				visible_message("<span class='notice'>[src] starts [T.dead? "removing the plant from" : "harvesting"] \the [A].</span>")
 				attacking = 1
-				if(do_after(src, 30))
+				if(do_after(src, 30, A))
 					visible_message("<span class='notice'>[src] [T.dead? "removes the plant from" : "harvests"] \the [A].</span>")
 					T.attack_hand(src)
 			if(FARMBOT_WATER)
@@ -181,7 +183,7 @@
 				update_icons()
 				visible_message("<span class='notice'>[src] starts watering \the [A].</span>")
 				attacking = 1
-				if(do_after(src, 30))
+				if(do_after(src, 30, A))
 					playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 					visible_message("<span class='notice'>[src] waters \the [A].</span>")
 					tank.reagents.trans_to(T, 100 - T.waterlevel)
@@ -190,7 +192,7 @@
 				update_icons()
 				visible_message("<span class='notice'>[src] starts uprooting the weeds in \the [A].</span>")
 				attacking = 1
-				if(do_after(src, 30))
+				if(do_after(src, 30, A))
 					visible_message("<span class='notice'>[src] uproots the weeds in \the [A].</span>")
 					T.weedlevel = 0
 			if(FARMBOT_NUTRIMENT)
@@ -198,7 +200,7 @@
 				update_icons()
 				visible_message("<span class='notice'>[src] starts fertilizing \the [A].</span>")
 				attacking = 1
-				if(do_after(src, 30))
+				if(do_after(src, 30, A))
 					visible_message("<span class='notice'>[src] waters \the [A].</span>")
 					T.reagents.add_reagent("ammonia", 10)
 		attacking = 0

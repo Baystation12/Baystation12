@@ -67,12 +67,6 @@
 
 	if(maxcharge < amount)	return 0
 	var/amount_used = min(maxcharge-charge,amount)
-	if(crit_fail)	return 0
-	if(!prob(reliability))
-		minor_fault++
-		if(prob(minor_fault))
-			crit_fail = 1
-			return 0
 	charge += amount_used
 	return amount_used
 
@@ -85,8 +79,6 @@
 		user << "[desc]\nThe manufacturer's label states this cell has a power rating of [maxcharge], and that you should not swallow it.\nThe charge meter reads [round(src.percent() )]%."
 	else
 		user << "This power cell has an exciting chrome finish, as it is an uber-capacity cell type! It has a power rating of [maxcharge]!\nThe charge meter reads [round(src.percent() )]%."
-	if(crit_fail)
-		user << "\red This power cell seems to be faulty."
 
 /obj/item/weapon/cell/attackby(obj/item/W, mob/user)
 	..()
@@ -144,11 +136,10 @@
 		var/mob/living/silicon/robot/R = loc
 		severity *= R.cell_emp_mult
 
-	charge -= maxcharge / severity
+	// Lose 1/2, 1/4, 1/6 of the current charge per hit or 1/4, 1/8, 1/12 of the max charge per hit, whichever is highest
+	charge -= max(charge / (2 * severity), maxcharge/(4 * severity))
 	if (charge < 0)
 		charge = 0
-	if(reliability != 100 && prob(50/severity))
-		reliability -= 10 / severity
 	..()
 
 /obj/item/weapon/cell/ex_act(severity)
@@ -170,10 +161,6 @@
 			if (prob(25))
 				corrupt()
 	return
-
-/obj/item/weapon/cell/blob_act()
-	if(prob(75))
-		explode()
 
 /obj/item/weapon/cell/proc/get_electrocute_damage()
 	switch (charge)

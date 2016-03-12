@@ -30,18 +30,18 @@
 	if (!istype(M, /mob/living/carbon))
 		return
 	if (user && src.imp)
-		for (var/mob/O in viewers(M, null))
-			O.show_message("\red [user] is attemping to implant [M].", 1)
+		M.visible_message("<span class='warning'>[user] is attemping to implant [M].</span>")
+
+		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+		user.do_attack_animation(M)
 
 		var/turf/T1 = get_turf(M)
-		if (T1 && ((M == user) || do_after(user, 50)))
+		if (T1 && ((M == user) || do_after(user, 50, M)))
 			if(user && M && (get_turf(M) == T1) && src && src.imp)
-				for (var/mob/O in viewers(M, null))
-					O.show_message("\red [M] has been implanted by [user].", 1)
+				M.visible_message("<span class='warning'>[M] has been implanted by [user].</span>")
 
 				admin_attack_log(user, M, "Implanted using \the [src.name] ([src.imp.name])", "Implanted with \the [src.name] ([src.imp.name])", "used an implanter, [src.name] ([src.imp.name]), on")
 
-				user.show_message("\red You implanted the implant into [M].")
 				if(src.imp.implanted(M))
 					src.imp.loc = M
 					src.imp.imp_in = M
@@ -121,7 +121,7 @@
 	if(istype(A,/obj/item) && imp)
 		var/obj/item/weapon/implant/compressed/c = imp
 		if (c.scanned)
-			user << "\red Something is already scanned inside the implant!"
+			user << "<span class='warning'>Something is already scanned inside the implant!</span>"
 			return
 		c.scanned = A
 		if(istype(A.loc,/mob/living/carbon/human))

@@ -53,7 +53,7 @@
 			src << "<span class='danger'>Deadchat is globally muted.</span>"
 			return
 
-	if(client && !(client.prefs.toggles & CHAT_DEAD))
+	if(!is_preference_enabled(/datum/client_preference/show_dsay))
 		usr << "<span class='danger'>You have deadchat muted.</span>"
 		return
 
@@ -146,11 +146,12 @@
 //parses the language code (e.g. :j) from text, such as that supplied to say.
 //returns the language object only if the code corresponds to a language that src can speak, otherwise null.
 /mob/proc/parse_language(var/message)
-	if(length(message) >= 1 && copytext(message,1,2) == "!")
+	var/prefix = copytext(message,1,2)
+	if(length(message) >= 1 && prefix == "!")
 		return all_languages["Noise"]
 
-	if(length(message) >= 2)
-		var/language_prefix = lowertext_alt(copytext(message, 1 ,3))
+	if(length(message) >= 2 && is_language_prefix(prefix))
+		var/language_prefix = lowertext_alt(copytext(message, 2 ,3))
 		var/datum/language/L = language_keys[language_prefix]
 		if (can_speak(L))
 			return L

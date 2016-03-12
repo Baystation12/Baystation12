@@ -17,7 +17,7 @@
 /obj/machinery/power/terminal/New()
 	..()
 	var/turf/T = src.loc
-	if(level==1) hide(T.intact)
+	if(level==1) hide(!T.is_plating())
 	return
 
 /obj/machinery/power/terminal/Destroy()
@@ -27,12 +27,8 @@
 	return ..()
 
 /obj/machinery/power/terminal/hide(var/i)
-	if(i)
-		invisibility = 101
-		icon_state = "term-f"
-	else
-		invisibility = 0
-		icon_state = "term"
+	invisibility = i ? 101 : initial(invisibility)
+	icon_state = i ? "term-f" : "term"
 
 // Needed so terminals are not removed from machines list.
 // Powernet rebuilds need this to work properly.

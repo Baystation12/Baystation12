@@ -22,7 +22,6 @@
 	throw_range = 15
 	matter = list(DEFAULT_WALL_MATERIAL = 10)
 	var/colour = "black"	//what colour the ink is!
-	pressure_resistance = 2
 
 
 /obj/item/weapon/pen/blue
@@ -34,6 +33,24 @@
 	desc = "It's a normal red ink pen."
 	icon_state = "pen_red"
 	colour = "red"
+
+/obj/item/weapon/pen/multi
+	desc = "It's a pen with multiple colors of ink!"
+	var/selectedColor = 1
+	var/colors = list("black","blue","red")
+
+/obj/item/weapon/pen/multi/attack_self(mob/user)
+	if(++selectedColor > 3)
+		selectedColor = 1
+
+	colour = colors[selectedColor]
+
+	if(colour == "black")
+		icon_state = "pen"
+	else
+		icon_state = "pen_[colour]"
+
+	user << "<span class='notice'>Changed color to '[colour].'</span>"
 
 /obj/item/weapon/pen/invisible
 	desc = "It's an invisble pen marker."
@@ -58,6 +75,7 @@
 /obj/item/weapon/pen/reagent
 	flags = OPENCONTAINER
 	slot_flags = SLOT_BELT
+	origin_tech = list(TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
 
 /obj/item/weapon/pen/reagent/New()
 	..()
@@ -82,7 +100,7 @@
  */
 /obj/item/weapon/pen/reagent/sleepy
 	desc = "It's a black ink pen with a sharp point and a carefully engraved \"Waffle Co.\""
-	origin_tech = "materials=2;syndicate=5"
+	origin_tech = list(TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
 
 /obj/item/weapon/pen/reagent/sleepy/New()
 	..()
@@ -92,7 +110,7 @@
 /*
  * Parapens
  */
- /obj/item/weapon/pen/reagent/paralysis
+/obj/item/weapon/pen/reagent/paralysis
 	origin_tech = "materials=2;syndicate=5"
 
 /obj/item/weapon/pen/reagent/paralysis/New()
@@ -138,7 +156,7 @@
 			if("Yellow")
 				colour = COLOR_YELLOW
 			if("Green")
-				colour = COLOR_GREEN
+				colour = COLOR_LIME
 			if("Pink")
 				colour = COLOR_PINK
 			if("Blue")
@@ -172,10 +190,6 @@
 	var/uses = 30 //0 for unlimited uses
 	var/instant = 0
 	var/colourName = "red" //for updateIcon purposes
-
-	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is jamming the [src.name] up \his nose and into \his brain. It looks like \he's trying to commit suicide.</b>"
-		return (BRUTELOSS|OXYLOSS)
 
 	New()
 		name = "[colourName] crayon"

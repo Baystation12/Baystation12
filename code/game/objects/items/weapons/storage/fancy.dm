@@ -69,14 +69,13 @@
 	icon_state = "candlebox5"
 	icon_type = "candle"
 	item_state = "candlebox5"
-	storage_slots = 5
 	throwforce = 2
 	slot_flags = SLOT_BELT
 
 
 /obj/item/weapon/storage/fancy/candle_box/New()
 	..()
-	for(var/i=1; i <= storage_slots; i++)
+	for(var/i=1; i <= 5; i++)
 		new /obj/item/weapon/flame/candle(src)
 	return
 
@@ -90,7 +89,6 @@
 	icon = 'icons/obj/crayons.dmi'
 	icon_state = "crayonbox"
 	w_class = 2.0
-	storage_slots = 6
 	icon_type = "crayon"
 	can_hold = list(
 		/obj/item/weapon/pen/crayon
@@ -136,7 +134,7 @@
 	throwforce = 2
 	slot_flags = SLOT_BELT
 	storage_slots = 6
-	can_hold = list(/obj/item/clothing/mask/smokable/cigarette)
+	can_hold = list(/obj/item/clothing/mask/smokable/cigarette, /obj/item/weapon/flame/lighter)
 	icon_type = "cigarette"
 
 /obj/item/weapon/storage/fancy/cigarettes/New()
@@ -145,27 +143,45 @@
 	for(var/i = 1 to storage_slots)
 		new /obj/item/clothing/mask/smokable/cigarette(src)
 	create_reagents(15 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
+	flags |= OPENCONTAINER
 
 /obj/item/weapon/storage/fancy/cigarettes/update_icon()
 	icon_state = "[initial(icon_state)][contents.len]"
 	return
 
 /obj/item/weapon/storage/fancy/cigarettes/remove_from_storage(obj/item/W as obj, atom/new_location)
+	// Don't try to transfer reagents to lighters
+	if(istype(W, /obj/item/clothing/mask/smokable/cigarette))
 		var/obj/item/clothing/mask/smokable/cigarette/C = W
-		if(!istype(C)) return // what
 		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
-		..()
+	..()
 
 /obj/item/weapon/storage/fancy/cigarettes/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M, /mob))
 		return
-
-	if(M == user && user.zone_sel.selecting == "mouth" && contents.len > 0 && !user.wear_mask)
-		var/obj/item/clothing/mask/smokable/cigarette/W = new /obj/item/clothing/mask/smokable/cigarette(user)
-		reagents.trans_to_obj(W, (reagents.total_volume/contents.len))
-		user.equip_to_slot_if_possible(W, slot_wear_mask)
+		
+	if(M == user && user.zone_sel.selecting == "mouth")
+		// Find ourselves a cig. Note that we could be full of lighters.
+		var/obj/item/clothing/mask/smokable/cigarette/cig = null		
+		for(var/obj/item/clothing/mask/smokable/cigarette/C in contents)
+			cig = C
+			break
+		
+		if(cig == null)
+			user << "<span class='notice'>Looks like the packet is out of cigarettes.</span>"
+			return
+		
+		// Instead of running equip_to_slot_if_possible() we check here first,
+		// to avoid dousing cig with reagents if we're not going to equip it
+		if(!cig.mob_can_equip(user, slot_wear_mask))
+			return 
+			
+		// We call remove_from_storage first to manage the reagent transfer and 
+		// UI updates.
+		remove_from_storage(cig, null)
+		user.equip_to_slot(cig, slot_wear_mask)
+		
 		reagents.maximum_volume = 15 * contents.len
-		contents.len--
 		user << "<span class='notice'>You take a cigarette out of the pack.</span>"
 		update_icon()
 	else
@@ -176,6 +192,16 @@
 	desc = "A packet of six imported DromedaryCo cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\""
 	icon_state = "Dpacket"
 	item_state = "Dpacket"
+
+/obj/item/weapon/storage/fancy/cigarettes/killthroat
+	name = "\improper AcmeCo packet"
+	desc = "A packet of six AcmeCo cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
+	icon_state = "Bpacket"
+	item_state = "Bpacket" //Doesn't have an inhand state, but neither does dromedary, so, ya know..
+
+	New()
+		..()
+		fill_cigarre_package(src,list("fuel" = 15))
 
 /obj/item/weapon/storage/fancy/cigar
 	name = "cigar case"
@@ -205,21 +231,6 @@
 		var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
 		if(!istype(C)) return
 		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
-		..()
-
-/obj/item/weapon/storage/fancy/cigar/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!istype(M, /mob))
-		return
-
-	if(M == user && user.zone_sel.selecting == "mouth" && contents.len > 0 && !user.wear_mask)
-		var/obj/item/clothing/mask/smokable/cigarette/cigar/W = new /obj/item/clothing/mask/smokable/cigarette/cigar(user)
-		reagents.trans_to_obj(W, (reagents.total_volume/contents.len))
-		user.equip_to_slot_if_possible(W, slot_wear_mask)
-		reagents.maximum_volume = 15 * contents.len
-		contents.len--
-		user << "<span class='notice'>You take a cigar out of the case.</span>"
-		update_icon()
-	else
 		..()
 
 /*

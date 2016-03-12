@@ -11,8 +11,10 @@
 	..()
 	if (!prob(spawn_nothing_percentage))
 		spawn_item()
+		
+/obj/random/initialize()
+	..()
 	qdel(src)
-
 
 // this function should return a specific item to spawn
 /obj/random/proc/item_to_spawn()
@@ -161,7 +163,7 @@
 					prob(4);/obj/item/weapon/haircomb,\
 					prob(2);/obj/item/weapon/storage/pill_bottle/happy,\
 					prob(2);/obj/item/weapon/storage/pill_bottle/zoom,\
-					prob(5);/obj/item/weapon/contraband/poster,\
+					prob(5);/obj/item/weapon/poster/contraband,\
 					prob(2);/obj/item/weapon/material/butterfly,\
 					prob(3);/obj/item/weapon/material/butterflyblade,\
 					prob(3);/obj/item/weapon/material/butterflyhandle,\
@@ -277,4 +279,60 @@
 					/obj/item/toy/plushie/mouse,\
 					/obj/item/toy/plushie/kitten,\
 					/obj/item/toy/plushie/lizard)
+
+/obj/random/junk //Broken items, or stuff that could be picked up
+	name = "random junk"
+	desc = "This is some random junk."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "nymphplushie"
+	item_to_spawn()
+		return pick(/obj/item/weapon/material/shard,\
+					/obj/item/weapon/material/shard/shrapnel,\
+					/obj/item/stack/material/cardboard,\
+					/obj/item/weapon/storage/box/lights/mixed,\
+					/obj/item/weapon/storage/box/matches)
+
+
+/obj/random/trash //Mostly remains and cleanable decals. Stuff a janitor could clean up
+	name = "random trash"
+	desc = "This is some random trash."
+	icon = 'icons/obj/cigarettes.dmi'
+	icon_state = "match_burnt"
+	item_to_spawn()
+		return pick(/obj/item/weapon/cigbutt,\
+					/obj/effect/decal/cleanable/blood/gibs/robot/,\
+					/obj/effect/decal/cleanable/blood/oil,\
+					/obj/effect/decal/cleanable/blood/oil/streak,\
+					/obj/effect/decal/cleanable/molten_item,\
+					/obj/effect/decal/cleanable/spiderling_remains,\
+					/obj/effect/decal/cleanable/vomit,\
+					/obj/effect/decal/cleanable/blood/splatter,\
+					/obj/item/remains/robot)
+
+obj/random/closet //A couple of random closets to spice up maint
+	name = "random closet"
+	desc = "This is a random closet."
+	icon = 'icons/obj/closet.dmi'
+	icon_state = "mixed"
+	item_to_spawn()
+		return pick(/obj/structure/closet,\
+					/obj/structure/closet/firecloset,\
+					/obj/structure/closet/firecloset/full,\
+					/obj/structure/closet/emcloset,\
+					/obj/structure/closet/wardrobe/black)
+
+
+obj/random/material //Random materials for building stuff
+	name = "random material"
+	desc = "This is a random material."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "sheet-metal"
+	item_to_spawn()
+		return pick(/obj/item/stack/material/steel{amount = 10},\
+					/obj/item/stack/material/glass{amount = 10},\
+					/obj/item/stack/material/plastic{amount = 10},\
+					/obj/item/stack/material/wood{amount = 10},\
+					/obj/item/stack/material/cardboard{amount = 10},\
+					/obj/item/stack/rods{amount = 10},\
+					/obj/item/stack/material/plasteel{amount = 10})
 

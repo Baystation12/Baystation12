@@ -1,5 +1,5 @@
-/proc/gibs(atom/location, var/list/viruses, var/datum/dna/MobDNA, gibber_type = /obj/effect/gibspawner/generic, var/fleshcolor, var/bloodcolor)
-	new gibber_type(location,viruses,MobDNA,fleshcolor,bloodcolor)
+/proc/gibs(atom/location, var/datum/dna/MobDNA, gibber_type = /obj/effect/gibspawner/generic, var/fleshcolor, var/bloodcolor)
+	new gibber_type(location,MobDNA,fleshcolor,bloodcolor)
 
 /obj/effect/gibspawner
 	var/sparks = 0 //whether sparks spread on Gib()
@@ -10,28 +10,24 @@
 	var/fleshcolor //Used for gibbed humans.
 	var/bloodcolor //Used for gibbed humans.
 
-	New(location, var/list/viruses, var/datum/dna/MobDNA, var/fleshcolor, var/bloodcolor)
+	New(location, var/datum/dna/MobDNA, var/fleshcolor, var/bloodcolor)
 		..()
 
 		if(fleshcolor) src.fleshcolor = fleshcolor
 		if(bloodcolor) src.bloodcolor = bloodcolor
-		Gib(loc,viruses,MobDNA)
+		Gib(loc,MobDNA)
 
-	proc/Gib(atom/location, var/list/viruses = list(), var/datum/dna/MobDNA = null)
+	proc/Gib(atom/location, var/datum/dna/MobDNA = null)
 		if(gibtypes.len != gibamounts.len || gibamounts.len != gibdirections.len)
-			world << "\red Gib list length mismatch!"
+			world << "<span class='warning'>Gib list length mismatch!</span>"
 			return
-
-		var/obj/effect/decal/cleanable/blood/gibs/gib = null
-		for(var/datum/disease/D in viruses)
-			if(D.spread_type == SPECIAL)
-				qdel(D)
 
 		if(sparks)
 			var/datum/effect/effect/system/spark_spread/s = PoolOrNew(/datum/effect/effect/system/spark_spread)
 			s.set_up(2, 1, get_turf(location)) // Not sure if it's safe to pass an arbitrary object to set_up, todo
 			s.start()
 
+		var/obj/effect/decal/cleanable/blood/gibs/gib = null
 		for(var/i = 1, i<= gibtypes.len, i++)
 			if(gibamounts[i])
 				for(var/j = 1, j<= gibamounts[i], j++)
@@ -45,13 +41,6 @@
 						gib.basecolor = bloodcolor
 
 					gib.update_icon()
-
-					if(viruses.len > 0)
-						for(var/datum/disease/D in viruses)
-							if(prob(virusProb))
-								var/datum/disease/viruus = D.Copy(1)
-								gib.viruses += viruus
-								viruus.holder = gib
 
 					gib.blood_DNA = list()
 					if(MobDNA)

@@ -28,13 +28,10 @@
 				user << "You activate the analyzer's microlaser, analyzing \the [loaded_item] and breaking it down."
 				flick("portable_analyzer_scan", src)
 				playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-				if(loaded_item.reliability >= min_reliability)
-					var/list/temp_tech = ConvertReqString2List(loaded_item.origin_tech)
-					for(var/T in temp_tech)
-						files.UpdateTech(T, temp_tech[T])
-						user << "\The [loaded_item] had level [temp_tech[T]] in [T]."
-				else
-					user << "\The [loaded_item] was not reliable enough to advance research."
+				var/list/temp_tech = ConvertReqString2List(loaded_item.origin_tech)
+				for(var/T in temp_tech)
+					files.UpdateTech(T, temp_tech[T])
+					user << "\The [loaded_item] had level [temp_tech[T]] in [T]."
 				loaded_item = null
 				for(var/obj/I in contents)
 					for(var/mob/M in I.contents)
@@ -59,8 +56,6 @@
 	if(response == "Sync")
 		var/success = 0
 		for(var/obj/machinery/r_n_d/server/S in machines)
-			if(S.disabled)
-				continue
 			for(var/datum/tech/T in files.known_tech) //Uploading
 				S.files.AddTech2Known(T)
 			for(var/datum/tech/T in S.files.known_tech) //Downloading
@@ -109,13 +104,6 @@
 	icon_state = "id-robot"
 	desc = "A circuit grafted onto the bottom of an ID card.  It is used to transmit access codes into other robot chassis, \
 	allowing you to lock and unlock other robots' panels."
-
-/obj/item/weapon/card/id/robot/attack_self() //override so borgs can't flash their IDs.
-	return
-
-/obj/item/weapon/card/id/robot/read()
-	usr << "The ID card does not appear to have any writing on it."
-	return
 
 //A harvest item for serviceborgs.
 /obj/item/weapon/robot_harvester
@@ -323,3 +311,97 @@
 	desc = "By retracting limbs and tucking in its head, a combat android can roll at high speeds."
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "shock"
+
+/obj/item/weapon/inflatable_dispenser
+	name = "inflatables dispenser"
+	desc = "Small device which allows rapid deployment and removal of inflatables."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "inf_deployer"
+	w_class = 3
+
+	// By default stores up to 10 walls and 5 doors. May be changed.
+	var/stored_walls = 10
+	var/stored_doors = 5
+	var/max_walls = 10
+	var/max_doors = 5
+	var/mode = 0 // 0 - Walls   1 - Doors
+
+/obj/item/weapon/inflatable_dispenser/examine(var/mob/user)
+	if(!..(user))
+		return
+	user << "It has [stored_walls] wall segment\s and [stored_doors] door segment\s stored."
+	user << "It is set to deploy [mode ? "doors" : "walls"]"
+
+/obj/item/weapon/inflatable_dispenser/attack_self()
+	mode = !mode
+	usr << "You set \the [src] to deploy [mode ? "doors" : "walls"]."
+
+/obj/item/weapon/inflatable_dispenser/afterattack(var/atom/A, var/mob/user)
+	..(A, user)
+	if(!user)
+		return
+	if(!user.Adjacent(A))
+		user << "You can't reach!"
+		return
+	if(istype(A, /turf))
+		try_deploy_inflatable(A, user)
+	if(istype(A, /obj/item/inflatable) || istype(A, /obj/structure/inflatable))
+		pick_up(A, user)
+
+/obj/item/weapon/inflatable_dispenser/proc/try_deploy_inflatable(var/turf/T, var/mob/living/user)
+	if(mode) // Door deployment
+		if(!stored_doors)
+			user << "\The [src] is out of doors!"
+			return
+
+		if(T && istype(T))
+			new /obj/structure/inflatable/door(T)
+			stored_doors--
+
+	else // Wall deployment
+		if(!stored_walls)
+			user << "\The [src] is out of walls!"
+			return
+
+		if(T && istype(T))
+			new /obj/structure/inflatable/wall(T)
+			stored_walls--
+
+	playsound(T, 'sound/items/zip.ogg', 75, 1)
+	user << "You deploy the inflatable [mode ? "door" : "wall"]!"
+
+/obj/item/weapon/inflatable_dispenser/proc/pick_up(var/obj/A, var/mob/living/user)
+	if(istype(A, /obj/structure/inflatable))
+		if(istype(A, /obj/structure/inflatable/wall))
+			if(stored_walls >= max_walls)
+				user << "\The [src] is full."
+				return
+			stored_walls++
+			qdel(A)
+		else
+			if(stored_doors >= max_doors)
+				user << "\The [src] is full."
+				return
+			stored_doors++
+			qdel(A)
+		playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
+		visible_message("\The [user] deflates \the [A] with \the [src]!")
+		return
+	if(istype(A, /obj/item/inflatable))
+		if(istype(A, /obj/item/inflatable/wall))
+			if(stored_walls >= max_walls)
+				user << "\The [src] is full."
+				return
+			stored_walls++
+			qdel(A)
+		else
+			if(stored_doors >= max_doors)
+				usr << "\The [src] is full!"
+				return
+			stored_doors++
+			qdel(A)
+		visible_message("\The [user] picks up \the [A] with \the [src]!")
+		return
+
+	user << "You fail to pick up \the [A] with \the [src]"
+	return

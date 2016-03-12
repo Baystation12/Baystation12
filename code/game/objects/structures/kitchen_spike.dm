@@ -32,7 +32,7 @@
 
 	if(istype(victim, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = victim
-		if(!H.species.is_small)
+		if(!issmall(H))
 			return 0
 		meat_type = H.species.meat_type
 		icon_state = "spikebloody"

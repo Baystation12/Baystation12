@@ -59,10 +59,9 @@
 	var/emergency_color = "#D9D900"
 
 	var/grav_pulling = 0
-	var/pull_radius = 14
 	// Time in ticks between delamination ('exploding') and exploding (as in the actual boom)
-	var/pull_time = 100
-	var/explosion_power = 8
+	var/pull_time = 300
+	var/explosion_power = 6
 
 	var/emergency_issued = 0
 
@@ -97,8 +96,7 @@
 	. = ..()
 
 /obj/machinery/power/supermatter/proc/explode()
-	message_admins("Supermatter exploded at ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
-	log_game("Supermatter exploded at ([x],[y],[z])")
+	log_and_message_admins("Supermatter exploded at [x] [y] [z]")
 	anchored = 1
 	grav_pulling = 1
 	exploded = 1
@@ -112,7 +110,7 @@
 			var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
 			mob.apply_effect(rads, IRRADIATE)
 	spawn(pull_time)
-		explosion(get_turf(src), explosion_power, explosion_power * 2, explosion_power * 3, explosion_power * 4, 1)
+		explosion(get_turf(src), explosion_power, explosion_power * 1.25, explosion_power * 1.5, explosion_power * 1.75, 1)
 		qdel(src)
 		return
 
@@ -121,12 +119,17 @@
 	if(lum != light_range || clr != light_color)
 		set_light(lum, l_color = clr)
 
-/obj/machinery/power/supermatter/proc/announce_warning()
+/obj/machinery/power/supermatter/proc/get_integrity()
 	var/integrity = damage / explosion_point
 	integrity = round(100 - integrity * 100)
 	integrity = integrity < 0 ? 0 : integrity
+	return integrity
+
+
+/obj/machinery/power/supermatter/proc/announce_warning()
+	var/integrity = get_integrity()
 	var/alert_msg = " Integrity at [integrity]%"
-	
+
 	if(damage > emergency_point)
 		alert_msg = emergency_alert + alert_msg
 		lastwarning = world.timeofday - WARNING_DELAY * 4
@@ -149,7 +152,20 @@
 		else if(safe_warned && public_alert)
 			radio.autosay(alert_msg, "Supermatter Monitor")
 			public_alert = 0
-		
+
+
+/obj/machinery/power/supermatter/get_transit_zlevel()
+	//don't send it back to the station -- most of the time
+	if(prob(99))
+		var/list/candidates = accessible_z_levels.Copy()
+		for(var/zlevel in config.station_levels)
+			candidates.Remove("[zlevel]")
+		candidates.Remove("[src.z]")
+
+		if(candidates.len)
+			return text2num(pickweight(candidates))
+
+	return ..()
 
 /obj/machinery/power/supermatter/process()
 
@@ -260,21 +276,22 @@
 				// Then bring it inside to explode instantly upon landing on a valid turf.
 
 
+	var/proj_damage = Proj.get_structure_damage()
 	if(istype(Proj, /obj/item/projectile/beam))
-		power += Proj.damage * config_bullet_energy	* CHARGING_FACTOR / POWER_FACTOR
+		power += proj_damage * config_bullet_energy	* CHARGING_FACTOR / POWER_FACTOR
 	else
-		damage += Proj.damage * config_bullet_energy
+		damage += proj_damage * config_bullet_energy
 	return 0
 
 /obj/machinery/power/supermatter/attack_robot(mob/user as mob)
 	if(Adjacent(user))
 		return attack_hand(user)
 	else
-		user << "<span class = \"warning\">You attempt to interface with the control circuits but find they are not connected to your network.  Maybe in a future firmware update.</span>"
+		ui_interact(user)
 	return
 
 /obj/machinery/power/supermatter/attack_ai(mob/user as mob)
-	user << "<span class = \"warning\">You attempt to interface with the control circuits but find they are not connected to your network.  Maybe in a future firmware update.</span>"
+	ui_interact(user)
 
 /obj/machinery/power/supermatter/attack_hand(mob/user as mob)
 	user.visible_message("<span class=\"warning\">\The [user] reaches out and touches \the [src], inducing a resonance... \his body starts to glow and bursts into flames before flashing into ash.</span>",\
@@ -282,6 +299,32 @@
 		"<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
 
 	Consume(user)
+
+// This is purely informational UI that may be accessed by AIs or robots
+/obj/machinery/power/supermatter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	var/data[0]
+
+	data["integrity_percentage"] = round(get_integrity())
+	var/datum/gas_mixture/env = null
+	if(!istype(src.loc, /turf/space))
+		env = src.loc.return_air()
+
+	if(!env)
+		data["ambient_temp"] = 0
+		data["ambient_pressure"] = 0
+	else
+		data["ambient_temp"] = round(env.temperature)
+		data["ambient_pressure"] = round(env.return_pressure())
+	data["detonating"] = grav_pulling
+	data["energy"] = power
+
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "supermatter_crystal.tmpl", "Supermatter Crystal", 500, 300)
+		ui.set_initial_data(data)
+		ui.open()
+		ui.set_auto_update(1)
+
 
 /*
 /obj/machinery/power/supermatter/proc/transfer_energy()
@@ -339,16 +382,13 @@
 
 
 /obj/machinery/power/supermatter/proc/supermatter_pull()
-	//following is adapted from singulo code
-	if(defer_powernet_rebuild != 2)
-		defer_powernet_rebuild = 1
-	// Let's just make this one loop.
-	for(var/atom/X in orange(pull_radius,src))
-		X.singularity_pull(src, STAGE_FIVE)
-
-	if(defer_powernet_rebuild != 2)
-		defer_powernet_rebuild = 0
-	return
+	for(var/atom/A in range(255, src))
+		A.singularity_pull(src, STAGE_FIVE)
+		if(istype(A, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = A
+			if(!H.lying)
+				H << "<span class='danger'>A strong gravitational force slams you to the ground!</span>"
+				H.Weaken(20)
 
 
 /obj/machinery/power/supermatter/GotoAirflowDest(n) //Supermatter not pushed around by airflow
@@ -369,8 +409,7 @@
 
 	gasefficency = 0.125
 
-	pull_radius = 5
-	pull_time = 45
+	pull_time = 150
 	explosion_power = 3
 
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements

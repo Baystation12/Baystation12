@@ -37,6 +37,8 @@
 /obj/machinery/power/proc/add_avail(var/amount)
 	if(powernet)
 		powernet.newavail += amount
+		return 1
+	return 0
 
 /obj/machinery/power/proc/draw_power(var/amount)
 	if(powernet)
@@ -126,7 +128,7 @@
 
 		var/turf/T = user.loc
 
-		if(T.intact || !istype(T, /turf/simulated/floor))
+		if(!T.is_plating() || !istype(T, /turf/simulated/floor))
 			return
 
 		if(get_dist(src, user) > 1)

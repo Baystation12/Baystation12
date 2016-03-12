@@ -1,4 +1,5 @@
 /mob/living
+	see_in_dark = 2
 	see_invisible = SEE_INVISIBLE_LIVING
 
 	//Health and life related vars
@@ -33,10 +34,22 @@
 	var/mob_push_flags = 0
 	var/mob_always_swap = 0
 
+	var/mob/living/cameraFollow = null
+	var/list/datum/action/actions = list()
+
 	var/tod = null // Time of death
 	var/update_slimes = 1
 	var/silent = null 		// Can't talk. Value goes down every life proc.
-	var/mob_size            // Used by lockers.
 	var/on_fire = 0 //The "Are we on fire?" var
 	var/fire_stacks
 
+	var/failed_last_breath = 0 //This is used to determine if the mob failed a breath. If they did fail a brath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
+	var/possession_candidate // Can be possessed by ghosts if unplayed.
+
+	var/eye_blind = null	//Carbon
+	var/eye_blurry = null	//Carbon
+	var/ear_damage = null	//Carbon
+	var/stuttering = null	//Carbon
+	var/slurring = null		//Carbon
+
+	var/job = null//Living

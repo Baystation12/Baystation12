@@ -1,6 +1,6 @@
 
 /*
-	This should be in code/setup.dm
+	This should be in code/__defines/misc.dm
 
 #define SANITIZE_CHAT 1
 #define SANITIZE_BROWSER 2
@@ -15,9 +15,6 @@
 	And sometimes we need special unique temp letter for input windows whitch allows to edit text.
 	Like in custom event message, admin memo and VV.
 */
-
-var/global/list/localisation = list()
-/*	letters list filling in code/__HELPERS/global_lists.dm in /proc/makeDatumRefLists()		*/
 
 /datum/letter
 	var/letter = ""			//weird letter

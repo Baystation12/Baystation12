@@ -88,7 +88,7 @@
 	M << "Something slimy begins probing at the opening of your ear canal..."
 	src << "You slither up [M] and begin probing at their ear canal..."
 
-	if(!do_after(src,30))
+	if(!do_after(src,30, progress = 0))
 		src << "As [M] moves away, you are dislodged and fall to the ground."
 		return
 
@@ -350,6 +350,6 @@
 	visible_message("<span class='warning'>With a hideous, rattling moan, [src] shudders back to life!</span>")
 
 	rejuvenate()
-	vessel.add_reagent("blood",560-vessel.total_volume)
+	restore_blood()
 	fixblood()
 	update_canmove()

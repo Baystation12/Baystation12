@@ -2,10 +2,9 @@
 	set category = "IC"
 	set name = "Give"
 
-	// TODO :  Change to incapacitated() on merge.
-	if(usr.stat || usr.lying || usr.resting || usr.buckled)
+	if(incapacitated())
 		return
-	if(!istype(target) || target.stat || target.lying || target.resting || target.buckled || target.client == null)
+	if(!istype(target) || target.incapacitated() || target.client == null)
 		return
 
 	var/obj/item/I = usr.get_active_hand()
@@ -15,7 +14,7 @@
 		usr << "<span class='warning'>You don't have anything in your hands to give to \the [target].</span>"
 		return
 
-	if(alert(target,"[usr] wants to give you \a [I]. Will you accept it?",,"No","Yes") == "No")
+	if(alert(target,"[usr] wants to give you \a [I]. Will you accept it?",,"Yes","No") == "No")
 		target.visible_message("<span class='notice'>\The [usr] tried to hand \the [I] to \the [target], \
 		but \the [target] didn't want it.</span>")
 		return

@@ -45,10 +45,15 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		if (autopilot)
 			set_launch_countdown(SHUTTLE_LEAVETIME)	//get ready to return
 
+			var/estimated_time = 0
 			if (evac)
-				emergency_shuttle_docked.Announce("The Emergency Shuttle has docked with the station. You have approximately [round(estimate_launch_time()/60,1)] minutes to board the Emergency Shuttle.")
+				estimated_time = round(emergency_shuttle.estimate_launch_time()/60,1)
+				emergency_shuttle_docked.Announce("The Emergency Shuttle has docked with the station. You have approximately [estimated_time] minute\s to board the Emergency Shuttle.")
 			else
-				priority_announcement.Announce("The scheduled Crew Transfer Shuttle has docked with the station. It will depart in approximately [round(emergency_shuttle.estimate_launch_time()/60,1)] minutes.")
+				estimated_time = round(estimate_launch_time()/60,1)
+				priority_announcement.Announce("The scheduled Crew Transfer Shuttle to [dock_name] has docked with the station. It will depart in approximately [estimated_time] minute\s.")
+			if(config.announce_shuttle_dock_to_irc)
+				send2mainirc("The shuttle has docked with the station. It will depart in approximately [estimated_time] minute\s.")
 
 		//arm the escape pods
 		if (evac)
@@ -94,7 +99,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	//reset the shuttle transit time if we need to
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
 
-	priority_announcement.Announce("A crew transfer has been scheduled. The shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
+	priority_announcement.Announce("A crew transfer to [dock_name] has been scheduled. The shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
 
 //recalls the shuttle
 /datum/emergency_shuttle_controller/proc/recall()

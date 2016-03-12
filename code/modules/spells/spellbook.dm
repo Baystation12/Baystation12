@@ -14,6 +14,10 @@
 /obj/item/weapon/spellbook/attack_self(mob/user = usr)
 	if(!user)
 		return
+	if((user.mind && !wizards.is_antagonist(user.mind)))
+		usr << "<span class='warning'>You stare at the book but cannot make sense of the markings!</span>"
+		return
+
 	user.set_machine(src)
 	var/dat
 	if(temp)
@@ -242,7 +246,7 @@
 								H.sight |= (SEE_MOBS|SEE_OBJS|SEE_TURFS)
 								H.see_in_dark = 8
 								H.see_invisible = SEE_INVISIBLE_LEVEL_TWO
-								H << "span class='notice'>The walls suddenly disappear.</span>"
+								H << "<span class='notice'>The walls suddenly disappear.</span>"
 							temp = "You have purchased a scrying orb, and gained x-ray vision."
 							max_uses--
 		else
@@ -313,10 +317,10 @@
 	icon_state ="booksmoke"
 	desc = "This book is overflowing with the dank arts."
 
-/obj/item/weapon/spellbook/oneuse/smoke/recoil(mob/user as mob)
+/obj/item/weapon/spellbook/oneuse/smoke/recoil(mob/living/carbon/user as mob)
 	..()
 	user <<"<span class='caution'>Your stomach rumbles...</span>"
-	if(user.nutrition)
+	if(istype(user) && user.nutrition)
 		user.nutrition -= 200
 		if(user.nutrition <= 0)
 			user.nutrition = 0
@@ -327,7 +331,7 @@
 	icon_state ="bookblind"
 	desc = "This book looks blurry, no matter how you look at it."
 
-/obj/item/weapon/spellbook/oneuse/blind/recoil(mob/user as mob)
+/obj/item/weapon/spellbook/oneuse/blind/recoil(mob/living/user as mob)
 	..()
 	user <<"<span class='warning'>You go blind!</span>"
 	user.eye_blind = 10

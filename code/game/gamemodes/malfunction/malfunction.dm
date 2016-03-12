@@ -2,7 +2,6 @@
 	name = "AI malfunction"
 	round_description = "The AI is behaving abnormally and must be stopped."
 	extended_round_description = "The AI will attempt to hack the APCs around the station in order to gain as much control as possible."
-	uplink_welcome = "Crazy AI Uplink Console:"
 	config_tag = "malfunction"
 	required_players = 2
 	required_enemies = 1
@@ -10,3 +9,22 @@
 	auto_recall_shuttle = 0
 	antag_tags = list(MODE_MALFUNCTION)
 	disabled_jobs = list("AI")
+
+/datum/game_mode/malfunction/post_setup()
+	. = ..()
+	var/mob/living/silicon/ai/master
+
+	for(var/mob/living/silicon/ai/ai in player_list)
+		if(ai.check_special_role("Rampant AI"))
+			master = ai
+			break
+
+	if(!master)
+		return
+
+	for(var/mob/living/silicon/robot/R in player_list)
+		if(R.connected_ai)
+			continue
+		R.connect_to_ai(master)
+		R.lawupdate = 1
+		R.sync()

@@ -20,12 +20,7 @@
 		if (!ishuman(user) && !istype(user,/mob/living/silicon/robot))
 			return ..(user)
 
-		var/mob/living/carbon/human/H = user
-		if(H.getBrainLoss() >= 60)
-			return
-
 		var/t1 = text("<B>Access control</B><br>\n")
-
 
 		if (last_configurator)
 			t1 += "Operator: [last_configurator]<br>"
@@ -42,7 +37,7 @@
 
 			t1 += "<br>"
 
-			var/list/accesses = get_all_accesses()
+			var/list/accesses = get_all_station_access()
 			for (var/acc in accesses)
 				var/aname = get_access_desc(acc)
 
@@ -114,5 +109,5 @@
 /obj/item/weapon/airlock_electronics/secure
 	name = "secure airlock electronics"
 	desc = "designed to be somewhat more resistant to hacking than standard electronics."
-	origin_tech = "programming=2"
+	origin_tech = list(TECH_DATA = 2)
 	secure = 1

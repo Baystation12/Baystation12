@@ -41,14 +41,9 @@
 		else
 	return
 
-/obj/machinery/optable/blob_act()
-	if(prob(75))
-		qdel(src)
-
 /obj/machinery/optable/attack_hand(mob/user as mob)
 	if (HULK in usr.mutations)
-		usr << text("\blue You destroy the table.")
-		visible_message("\red [usr] destroys the operating table!")
+		visible_message("<span class='danger'>\The [usr] destroys \the [src]!</span>")
 		src.density = 0
 		qdel(src)
 	return
@@ -76,7 +71,7 @@
 		var/mob/living/carbon/human/M = locate(/mob/living/carbon/human, src.loc)
 		if(M.lying)
 			src.victim = M
-			icon_state = M.pulse ? "table2-active" : "table2-idle"
+			icon_state = M.pulse() ? "table2-active" : "table2-idle"
 			return 1
 	src.victim = null
 	icon_state = "table2-idle"
@@ -87,9 +82,9 @@
 
 /obj/machinery/optable/proc/take_victim(mob/living/carbon/C, mob/living/carbon/user as mob)
 	if (C == user)
-		user.visible_message("[user] climbs on the operating table.","You climb on the operating table.")
+		user.visible_message("[user] climbs on \the [src].","You climb on \the [src].")
 	else
-		visible_message("\red [C] has been laid on the operating table by [user].", 3)
+		visible_message("<span class='notice'>\The [C] has been laid on \the [src] by [user].</span>", 3)
 	if (C.client)
 		C.client.perspective = EYE_PERSPECTIVE
 		C.client.eye = src
@@ -101,7 +96,7 @@
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
 		src.victim = H
-		icon_state = H.pulse ? "table2-active" : "table2-idle"
+		icon_state = H.pulse() ? "table2-active" : "table2-idle"
 	else
 		icon_state = "table2-idle"
 
@@ -134,12 +129,11 @@
 			return
 
 /obj/machinery/optable/proc/check_table(mob/living/carbon/patient as mob)
-	if(src.victim)
-		usr << "\blue <B>The table is already occupied!</B>"
+	check_victim()
+	if(src.victim && get_turf(victim) == get_turf(src) && victim.lying)
+		usr << "<span class='warning'>\The [src] is already occupied!</span>"
 		return 0
-
 	if(patient.buckled)
-		usr << "\blue <B>Unbuckle first!</B>"
+		usr << "<span class='notice'>Unbuckle \the [patient] first!</span>"
 		return 0
-
 	return 1

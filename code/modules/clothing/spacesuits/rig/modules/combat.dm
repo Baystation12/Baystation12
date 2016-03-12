@@ -5,14 +5,23 @@
  * /obj/item/rig_module/mounted/taser
  * /obj/item/rig_module/shield
  * /obj/item/rig_module/fabricator
+ * /obj/item/rig_module/device/flash
  */
+
+/obj/item/rig_module/device/flash
+	name = "mounted flash"
+	desc = "You are the law."
+	icon_state = "flash"
+	interface_name = "mounted flash"
+	interface_desc = "Stuns your target by blinding them with a bright light."
+	device_type = /obj/item/device/flash
 
 /obj/item/rig_module/grenade_launcher
 
 	name = "mounted grenade launcher"
 	desc = "A shoulder-mounted micro-explosive dispenser."
 	selectable = 1
-	icon_state = "grenade"
+	icon_state = "grenadelauncher"
 
 	interface_name = "integrated grenade launcher"
 	interface_desc = "Discharges loaded grenades against the wearer's location."
@@ -76,7 +85,7 @@
 
 	charge.charges--
 	var/obj/item/weapon/grenade/new_grenade = new charge.product_type(get_turf(H))
-	H.visible_message("<span class='danger'>[H] launches \a [new_grenade]!")
+	H.visible_message("<span class='danger'>[H] launches \a [new_grenade]!</span>")
 	new_grenade.activate(H)
 	new_grenade.throw_at(target,fire_force,fire_distance)
 
@@ -108,7 +117,7 @@
 
 	if(!target)
 		gun.attack_self(holder.wearer)
-		return 1
+		return
 
 	gun.Fire(target,holder.wearer)
 	return 1
@@ -230,7 +239,7 @@
 		firing.throw_at(target,fire_force,fire_distance)
 	else
 		if(H.l_hand && H.r_hand)
-			H << "<span class='danger'>Your hands are full."
+			H << "<span class='danger'>Your hands are full.</span>"
 		else
 			var/obj/item/new_weapon = new fabrication_type()
 			new_weapon.forceMove(H)

@@ -42,6 +42,7 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Night Shift", 'sound/music/jukebox/mus_industrialist_03.ogg'),
 		new/datum/track("Stayin Alive", 'sound/music/jukebox/Stayin_Alive.ogg'),
 		new/datum/track("Bad Man", 'sound/music/jukebox/One_bad_man.ogg'),
+		new/datum/track("Nightcall", 'sound/music/jukebox/Kavinsky_Nightcall.ogg'),
 	)
 
 
@@ -183,16 +184,15 @@ datum/track/New(var/title_name, var/audio)
 		power_change()
 		update_icon()
 		return
-	if(istype(W, /obj/item/weapon/card/emag))
-		if(!emagged)
-			emagged = 1
-			StopPlaying()
-			visible_message("<span class='danger'>\the [src] makes a fizzling sound.</span>")
-			log_and_message_admins("emagged \the [src]")
-			update_icon()
-			return
-
 	return ..()
+
+/obj/machinery/media/jukebox/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
+		emagged = 1
+		StopPlaying()
+		visible_message("<span class='danger'>\The [src] makes a fizzling sound.</span>")
+		update_icon()
+		return 1
 
 /obj/machinery/media/jukebox/proc/StopPlaying()
 	var/area/main_area = get_area(src)

@@ -9,7 +9,7 @@
 	desc = "A fragment of the legendary treasure known simply as the 'Soul Stone'. The shard still flickers with a fraction of the full artefacts power."
 	w_class = 2
 	slot_flags = SLOT_BELT
-	origin_tech = "bluespace=4;materials=4"
+	origin_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 4)
 	var/imprinted = "empty"
 
 //////////////////////////////Capturing////////////////////////////////////////////////////////
@@ -18,6 +18,9 @@
 	if(!istype(M, /mob/living/carbon/human))//If target is not a human.
 		return ..()
 	if(istype(M, /mob/living/carbon/human/dummy))
+		return..()
+	if(jobban_isbanned(M, "cultist"))
+		user << "<span class='warning'>This person's soul is too corrupt and cannot be captured!</span>"
 		return..()
 
 	if(M.has_brain_worms()) //Borer stuff - RR
@@ -117,7 +120,7 @@
 	for(var/obj/item/W in T)
 		T.drop_from_inventory(W)
 
-	new /obj/effect/decal/remains/human(T.loc) //Spawns a skeleton
+	new /obj/item/remains/human(T.loc) //Spawns a skeleton
 	T.invisibility = 101
 
 	var/atom/movable/overlay/animation = new /atom/movable/overlay( T.loc )

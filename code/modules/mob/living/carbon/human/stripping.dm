@@ -3,8 +3,7 @@
 	if(!slot_to_strip || !istype(user))
 		return
 
-	// TODO :  Change to incapacitated() on merge.
-	if(user.stat || user.lying || user.resting || user.buckled || !user.Adjacent(src))
+	if(user.incapacitated()  || !user.Adjacent(src))
 		user << browse(null, text("window=mob[src.name]"))
 		return
 
@@ -14,22 +13,22 @@
 		// Handle things that are part of this interface but not removing/replacing a given item.
 		if("pockets")
 			visible_message("<span class='danger'>\The [user] is trying to empty \the [src]'s pockets!</span>")
-			if(do_after(user,HUMAN_STRIP_DELAY))
+			if(do_after(user,HUMAN_STRIP_DELAY,progress = 0))
 				empty_pockets(user)
 			return
 		if("splints")
 			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s splints!</span>")
-			if(do_after(user,HUMAN_STRIP_DELAY))
+			if(do_after(user,HUMAN_STRIP_DELAY,progress = 0))
 				remove_splints(user)
 			return
 		if("sensors")
 			visible_message("<span class='danger'>\The [user] is trying to set \the [src]'s sensors!</span>")
-			if(do_after(user,HUMAN_STRIP_DELAY))
+			if(do_after(user,HUMAN_STRIP_DELAY,progress = 0))
 				toggle_sensors(user)
 			return
 		if("internals")
 			visible_message("<span class='danger'>\The [usr] is trying to set \the [src]'s internals!</span>")
-			if(do_after(user,HUMAN_STRIP_DELAY))
+			if(do_after(user,HUMAN_STRIP_DELAY, progress = 0))
 				toggle_internals(user)
 			return
 		if("tie")
@@ -41,7 +40,7 @@
 				return
 			visible_message("<span class='danger'>\The [usr] is trying to remove \the [src]'s [A.name]!</span>")
 
-			if(!do_after(user,HUMAN_STRIP_DELAY))
+			if(!do_after(user,HUMAN_STRIP_DELAY,progress=0))
 				return
 
 			if(!A || suit.loc != src || !(A in suit.accessories))
@@ -72,7 +71,7 @@
 	else
 		visible_message("<span class='danger'>\The [user] is trying to put \a [held] on \the [src]!</span>")
 
-	if(!do_after(user,HUMAN_STRIP_DELAY))
+	if(!do_after(user,HUMAN_STRIP_DELAY,progress = 0))
 		return
 
 	if(!stripping && user.get_active_hand() != held)

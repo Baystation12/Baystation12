@@ -69,14 +69,7 @@
 
 /obj/structure/closet/crate/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(opened)
-		if(isrobot(user))
-			return
-		if(W.loc != user) // This should stop mounted modules ending up outside the module.
-			return
-		if(!istype(W, /obj/item/weapon/grab))
-			user.drop_item()
-			if(W)
-				W.forceMove(src.loc)
+		return ..()
 	else if(istype(W, /obj/item/weapon/packageWrap))
 		return
 	else if(istype(W, /obj/item/stack/cable_coil))
@@ -193,17 +186,10 @@
 /obj/structure/closet/crate/secure/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(is_type_in_list(W, list(/obj/item/weapon/packageWrap, /obj/item/stack/cable_coil, /obj/item/device/radio/electropack, /obj/item/weapon/wirecutters)))
 		return ..()
-	if(locked && (istype(W, /obj/item/weapon/card/emag)||istype(W, /obj/item/weapon/melee/energy/blade)))
-		overlays.Cut()
-		overlays += emag
-		overlays += sparks
-		spawn(6) overlays -= sparks //Tried lots of stuff but nothing works right. so i have to use this *sadface*
-		playsound(src.loc, "sparks", 60, 1)
-		src.locked = 0
-		src.broken = 1
-		user << "<span class='notice'>You unlock \the [src].</span>"
+	if(istype(W, /obj/item/weapon/melee/energy/blade))
+		emag_act(INFINITY, user)
 		return
-	else if(locked && istype(W, /obj/item/device/multitool))
+	if(locked && istype(W, /obj/item/device/multitool))
 		var/obj/item/device/multitool/multi = W
 		if(multi.in_use)
 			user << "<span class='warning'>This multitool is already in use!</span>"
@@ -213,7 +199,7 @@
 		for(i=0, i<6, i++)
 			user.visible_message("<span class='warning'>[user] picks in wires of the [src.name] with a multitool.</span>",
 			"<span class='warning'>Resetting circuitry ([i]/6)...</span>")
-			if(!do_after(user,500)||opened)
+			if(!do_after(user,500) || opened)
 				multi.in_use=0
 				return
 		src.locked=!src.locked
@@ -226,6 +212,18 @@
 		src.togglelock(user)
 		return
 	return ..()
+
+/obj/structure/closet/crate/secure/emag_act(var/remaining_charges, var/mob/user)
+	if(!broken)
+		overlays.Cut()
+		overlays += emag
+		overlays += sparks
+		spawn(6) overlays -= sparks //Tried lots of stuff but nothing works right. so i have to use this *sadface*
+		playsound(src.loc, "sparks", 60, 1)
+		src.locked = 0
+		src.broken = 1
+		user << "<span class='notice'>You unlock \the [src].</span>"
+		return 1
 
 /obj/structure/closet/crate/secure/emp_act(severity)
 	for(var/obj/O in src)
@@ -247,7 +245,7 @@
 			open()
 		else
 			src.req_access = list()
-			src.req_access += pick(get_all_accesses())
+			src.req_access += pick(get_all_station_access())
 	..()
 
 /obj/structure/closet/crate/plastic

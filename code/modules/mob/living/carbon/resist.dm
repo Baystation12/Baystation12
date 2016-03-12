@@ -1,4 +1,3 @@
-
 /mob/living/carbon/process_resist()
 
 	//drop && roll
@@ -17,20 +16,22 @@
 				"<span class='notice'>You extinguish yourself.</span>"
 				)
 			ExtinguishMob()
-		return
+		return TRUE
 
-	..()
-	
+	if(..())
+		return TRUE
+
 	if(handcuffed)
 		spawn() escape_handcuffs()
 	else if(legcuffed)
 		spawn() escape_legcuffs()
 
 /mob/living/carbon/proc/escape_handcuffs()
-	if(!(last_special <= world.time)) return
+	//if(!(last_special <= world.time)) return
 
-	next_move = world.time + 100
-	last_special = world.time + 100
+	//This line represent a significant buff to grabs...
+	// We don't have to check the click cooldown because /mob/living/verb/resist() has done it for us, we can simply set the delay
+	setClickCooldown(100)
 
 	if(can_break_cuffs()) //Don't want to do a lot of logic gating here.
 		break_handcuffs()
@@ -46,25 +47,30 @@
 		breakouttime = HC.breakouttime
 		displaytime = breakouttime / 600 //Minutes
 
+	var/mob/living/carbon/human/H = src
+	if(istype(H) && H.gloves && istype(H.gloves,/obj/item/clothing/gloves/rig))
+		breakouttime /= 2
+		displaytime /= 2
+
 	visible_message(
-		"<span class='danger'>[src] attempts to remove \the [HC]!</span>",
+		"<span class='danger'>\The [src] attempts to remove \the [HC]!</span>",
 		"<span class='warning'>You attempt to remove \the [HC]. (This will take around [displaytime] minutes and you need to stand still)</span>"
 		)
 
-	if(do_after(src, breakouttime))
+	if(do_after(src, breakouttime, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
 		if(!handcuffed || buckled)
 			return
 		visible_message(
-			"<span class='danger'>[src] manages to remove \the [handcuffed]!</span>",
+			"<span class='danger'>\The [src] manages to remove \the [handcuffed]!</span>",
 			"<span class='notice'>You successfully remove \the [handcuffed].</span>"
 			)
 		drop_from_inventory(handcuffed)
 
 /mob/living/carbon/proc/escape_legcuffs()
-	if(!(last_special <= world.time)) return
+	if(!canClick())
+		return
 
-	next_move = world.time + 100
-	last_special = world.time + 100
+	setClickCooldown(100)
 
 	if(can_break_cuffs()) //Don't want to do a lot of logic gating here.
 		break_legcuffs()
@@ -85,7 +91,7 @@
 		"<span class='warning'>You attempt to remove \the [HC]. (This will take around [displaytime] minutes and you need to stand still)</span>"
 		)
 
-	if(do_after(src, breakouttime))
+	if(do_after(src, breakouttime, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
 		if(!legcuffed || buckled)
 			return
 		visible_message(
@@ -107,7 +113,7 @@
 		"<span class='warning'>You attempt to break your [handcuffed.name]. (This will take around 5 seconds and you need to stand still)</span>"
 		)
 
-	if(do_after(src, 50))
+	if(do_after(src, 5 SECONDS, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
 		if(!handcuffed || buckled)
 			return
 
@@ -128,7 +134,7 @@
 	src << "<span class='warning'>You attempt to break your legcuffs. (This will take around 5 seconds and you need to stand still)</span>"
 	visible_message("<span class='danger'>[src] is trying to break the legcuffs!</span>")
 
-	if(do_after(src, 50))
+	if(do_after(src, 5 SECONDS, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
 		if(!legcuffed || buckled)
 			return
 
@@ -149,22 +155,21 @@
 	return ..()
 
 /mob/living/carbon/escape_buckle()
+	setClickCooldown(100)
 	if(!buckled) return
-	if(!(last_special <= world.time)) return
 
 	if(!restrained())
 		..()
 	else
-		next_move = world.time + 100
-		last_special = world.time + 100
 		visible_message(
 			"<span class='danger'>[usr] attempts to unbuckle themself!</span>",
 			"<span class='warning'>You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)</span>"
 			)
 
-		if(do_after(usr, 1200))
+
+		if(do_after(usr, 2 MINUTES, incapacitation_flags = INCAPACITATION_DEFAULT & ~(INCAPACITATION_RESTRAINED | INCAPACITATION_BUCKLED_FULLY)))
 			if(!buckled)
 				return
-			visible_message("<span class='danger'>[usr] manages to unbuckle themself!</span>",
+			visible_message("<span class='danger'>\The [usr] manages to unbuckle themself!</span>",
 							"<span class='notice'>You successfully unbuckle yourself.</span>")
 			buckled.user_unbuckle_mob(src)

@@ -169,7 +169,7 @@ var/global/vs_control/vsc = new
 		vars[ch] = vw
 	if(how == "Toggle")
 		newvar = (newvar?"ON":"OFF")
-	world << "\blue <b>[key_name(user)] changed the setting [display_description] to [newvar].</b>"
+	world << "<span class='notice'><b>[key_name(user)] changed the setting [display_description] to [newvar].</b></span>"
 	if(ch in plc.settings)
 		ChangeSettingsDialog(user,plc.settings)
 	else
@@ -322,7 +322,7 @@ var/global/vs_control/vsc = new
 			plc.N2O_HALLUCINATION 			= initial(plc.N2O_HALLUCINATION)
 
 
-	world << "\blue <b>[key_name(user)] changed the global phoron/ZAS settings to \"[def]\"</b>"
+	world << "<span class='notice'><b>[key_name(user)] changed the global phoron/ZAS settings to \"[def]\"</b></span>"
 
 /pl_control/var/list/settings = list()
 
@@ -348,7 +348,7 @@ var/global/vs_control/vsc = new
 		else if(istext(vars["[V]_RANDOM"]))
 			var/txt = vars["[V]_RANDOM"]
 			if(findtextEx(txt,"PROB"))
-				txt = text2list(txt,"/")
+				txt = splittext(txt,"/")
 				txt[1] = replacetext(txt[1],"PROB","")
 				var/p = text2num(txt[1])
 				var/r = txt[2]
@@ -358,7 +358,7 @@ var/global/vs_control/vsc = new
 					newvalue = vars[V]
 			else if(findtextEx(txt,"PICK"))
 				txt = replacetext(txt,"PICK","")
-				txt = text2list(txt,",")
+				txt = splittext(txt,",")
 				newvalue = pick(txt)
 			else
 				newvalue = roll(txt)

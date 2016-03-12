@@ -72,15 +72,15 @@ var/global/datum/controller/gameticker/ticker
 			for(var/i=0, i<10, i++)
 				sleep(1)
 				vote.process()
-			if(going)
+			if(round_progressing)
 				pregame_timeleft--
-			if(pregame_timeleft == config.vote_autogamemode_timeleft)
+			/*if(pregame_timeleft == config.vote_autogamemode_timeleft)
 				if(!vote.time_remaining)
 					vote.autogamemode()	//Quit calling this over and over and over and over.
 					while(vote.time_remaining)
 						for(var/i=0, i<10, i++)
 							sleep(1)
-							vote.process()
+							vote.process()*/
 			if(pregame_timeleft <= 0)
 				current_state = GAME_STATE_SETTING_UP
 	while (!setup())
@@ -176,8 +176,6 @@ var/global/datum/controller/gameticker/ticker
 	*/
 
 	processScheduler.start()
-
-	for(var/obj/multiz/ladder/L in world) L.connect() //Lazy hackfix for ladders. TODO: move this to an actual controller. ~ Z
 
 	if(config.sql_enabled)
 		statistic_cycle() // Polls population totals regularly and stores them in an SQL DB -- TLE
@@ -349,19 +347,22 @@ var/global/datum/controller/gameticker/ticker
 			spawn(50)
 				for(var/mob/M in player_list)
 					if(!src || !closing_music) return
-					if(M.client && M.client.prefs.toggles & SOUND_LOBBY)
+					if(M.client && M.client.is_preference_enabled(/datum/client_preference/play_lobby_music))
 						M << sound(closing_music, repeat = 0, wait = 0, volume = 85, channel = 1)
 				showcredits()
 				callHook("roundend")
 
-				if (mode.station_was_nuked)
-					feedback_set_details("end_proper","nuke")
+				if (universe_has_ended)
+					if(mode.station_was_nuked)
+						feedback_set_details("end_proper","nuke")
+					else
+						feedback_set_details("end_proper","universe destroyed")
 					if(!delay_end)
-						world << "\blue <B>Rebooting due to destruction of station in [restart_timeout/10] seconds</B>"
+						world << "<span class='notice'><b>Rebooting due to destruction of station in [restart_timeout/10] seconds</b></span>"
 				else
 					feedback_set_details("end_proper","proper completion")
 					if(!delay_end)
-						world << "\blue <B>Restarting in [restart_timeout/10] seconds</B>"
+						world << "<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>"
 
 
 				if(blackbox)
@@ -372,9 +373,9 @@ var/global/datum/controller/gameticker/ticker
 					if(!delay_end)
 						world.Reboot()
 					else
-						world << "\blue <B>An admin has delayed the round end</B>"
+						world << "<span class='notice'><b>An admin has delayed the round end</b></span>"
 				else
-					world << "\blue <B>An admin has delayed the round end</B>"
+					world << "<span class='notice'><b>An admin has delayed the round end</b></span>"
 
 		else if (mode_finished)
 			post_game = 1
@@ -384,7 +385,7 @@ var/global/datum/controller/gameticker/ticker
 			//call a transfer shuttle vote
 			spawn(50)
 				if(!round_end_announced) // Spam Prevention. Now it should announce only once.
-					world << "\red The round has ended!"
+					world << "<span class='danger'>The round has ended!</span>"
 					round_end_announced = 1
 				vote.autotransfer()
 

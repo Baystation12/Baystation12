@@ -1,9 +1,9 @@
 /mob/living/silicon/gib()
 	..("gibbed-r")
-	gibs(loc, viruses, null, /obj/effect/gibspawner/robot)
+	gibs(loc, null, /obj/effect/gibspawner/robot)
 
 /mob/living/silicon/dust()
-	..("dust-r", /obj/effect/decal/remains/robot)
+	..("dust-r", /obj/item/remains/robot)
 
 /mob/living/silicon/death(gibbed,deathmessage)
 	if(in_contents_of(/obj/machinery/recharge_station))//exit the recharge station

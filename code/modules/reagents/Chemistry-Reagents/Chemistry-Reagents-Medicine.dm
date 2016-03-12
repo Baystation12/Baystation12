@@ -14,6 +14,7 @@
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_STABLE)
 		M.add_chemical_effect(CE_PAINKILLER, 25)
+	M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/bicaridine
 	name = "Bicaridine"
@@ -131,6 +132,7 @@
 		M.adjustOxyLoss(-10 * removed)
 		M.heal_organ_damage(10 * removed, 10 * removed)
 		M.adjustToxLoss(-10 * removed)
+		M.add_chemical_effect(CE_PULSE, -2)
 
 /datum/reagent/clonexadone
 	name = "Clonexadone"
@@ -147,6 +149,7 @@
 		M.adjustOxyLoss(-30 * removed)
 		M.heal_organ_damage(30 * removed, 30 * removed)
 		M.adjustToxLoss(-30 * removed)
+		M.add_chemical_effect(CE_PULSE, -2)
 
 /* Painkillers */
 
@@ -312,6 +315,7 @@
 	if(prob(5))
 		M.emote(pick("twitch", "blink_r", "shiver"))
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
+	M.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/ethylredoxrazine
 	name = "Ethylredoxrazine"
@@ -375,19 +379,27 @@
 /datum/reagent/sterilizine
 	name = "Sterilizine"
 	id = "sterilizine"
-	description = "Sterilizes wounds in preparation for surgery."
+	description = "Sterilizes wounds in preparation for surgery and thoroughly removes blood."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
 	touch_met = 5
 
 /datum/reagent/sterilizine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	M.germ_level -= min(removed*20, M.germ_level)
+	for(var/obj/item/I in M.contents)
+		I.was_bloodied = null
+	M.was_bloodied = null
 
 /datum/reagent/sterilizine/touch_obj(var/obj/O)
 	O.germ_level -= min(volume*20, O.germ_level)
+	O.was_bloodied = null
 
 /datum/reagent/sterilizine/touch_turf(var/turf/T)
 	T.germ_level -= min(volume*20, T.germ_level)
+	for(var/obj/item/I in T.contents)
+		I.was_bloodied = null
+	for(var/obj/effect/decal/cleanable/blood/B in T)
+		qdel(B)
 
 /datum/reagent/leporazine
 	name = "Leporazine"

@@ -9,7 +9,6 @@
 	icon_state = "conpipe-s"
 	anchored = 0
 	density = 0
-	pressure_resistance = 5*ONE_ATMOSPHERE
 	matter = list(DEFAULT_WALL_MATERIAL = 1850)
 	level = 2
 	var/sortType = ""
@@ -91,6 +90,9 @@
 
 		if(invisibility)				// if invisible, fade icon
 			alpha = 128
+		else
+			alpha = 255
+			//otherwise burying half-finished pipes under floors causes them to half-fade
 
 	// hide called by levelupdate if turf intact status changes
 	// change visibility status and force update of icon
@@ -219,7 +221,7 @@
 				ispipe = 1
 
 		var/turf/T = src.loc
-		if(T.intact)
+		if(!T.is_plating())
 			user << "You can only attach the [nicetype] if the floor plating is removed."
 			return
 
@@ -269,7 +271,7 @@
 				if(W.remove_fuel(0,user))
 					playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 					user << "Welding the [nicetype] in place."
-					if(do_after(user, 20))
+					if(do_after(user, 20, src))
 						if(!src || !W.isOn()) return
 						user << "The [nicetype] has been welded in place!"
 						update() // TODO: Make this neat
@@ -318,3 +320,9 @@
 			else
 				user << "You need to attach it to the plating first!"
 				return
+
+/obj/structure/disposalconstruct/hides_under_flooring()
+	if(anchored)
+		return 1
+	else
+		return 0

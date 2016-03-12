@@ -1,7 +1,8 @@
 /obj/machinery/computer/HolodeckControl
 	name = "holodeck control console"
 	desc = "A computer used to control a nearby holodeck."
-	icon_state = "holocontrol"
+	icon_keyboard = "tech_key"
+	icon_screen = "holocontrol"
 
 	use_power = 1
 	active_power_usage = 8000 //8kW for the scenery + 500W per holoitem
@@ -42,13 +43,13 @@
 	dat += "<HR>Current Loaded Programs:<BR>"
 
 	if(!linkedholodeck)
-		dat += "</span class='danger'>Warning: Unable to locate holodeck.<br></span>"
+		dat += "<span class='danger'>Warning: Unable to locate holodeck.<br></span>"
 		user << browse(dat, "window=computer;size=400x500")
 		onclose(user, "computer")
 		return
 
 	if(!supported_programs.len)
-		dat += "</span class='danger'>Warning: No supported holo-programs loaded.<br></span>"
+		dat += "<span class='danger'>Warning: No supported holo-programs loaded.<br></span>"
 		user << browse(dat, "window=computer;size=400x500")
 		onclose(user, "computer")
 		return
@@ -126,17 +127,17 @@
 	src.updateUsrDialog()
 	return
 
-/obj/machinery/computer/HolodeckControl/attackby(var/obj/item/weapon/D as obj, var/mob/user as mob)
-	if(istype(D, /obj/item/weapon/card/emag))
-		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
-		last_to_emag = user //emag again to change the owner
-		if (!emagged)
-			emagged = 1
-			safety_disabled = 1
-			update_projections()
-			user << "<span class='notice'>You vastly increase projector power and override the safety and security protocols.</span>"
-			user << "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call Nanotrasen maintenance and do not use the simulator."
-			log_game("[key_name(usr)] emagged the Holodeck Control Computer")
+/obj/machinery/computer/HolodeckControl/emag_act(var/remaining_charges, var/mob/user as mob)
+	playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
+	last_to_emag = user //emag again to change the owner
+	if (!emagged)
+		emagged = 1
+		safety_disabled = 1
+		update_projections()
+		user << "<span class='notice'>You vastly increase projector power and override the safety and security protocols.</span>"
+		user << "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call [company_name] maintenance and do not use the simulator."
+		log_game("[key_name(usr)] emagged the Holodeck Control Computer")
+		return 1
 		src.updateUsrDialog()
 	else
 		..()
@@ -161,22 +162,7 @@
 	emergencyShutdown()
 	..()
 
-/obj/machinery/computer/HolodeckControl/meteorhit(var/obj/O as obj)
-	emergencyShutdown()
-	..()
-
-
-/obj/machinery/computer/HolodeckControl/emp_act(severity)
-	emergencyShutdown()
-	..()
-
-
 /obj/machinery/computer/HolodeckControl/ex_act(severity)
-	emergencyShutdown()
-	..()
-
-
-/obj/machinery/computer/HolodeckControl/blob_act()
 	emergencyShutdown()
 	..()
 
@@ -299,6 +285,8 @@
 	for(var/mob/living/M in mobs_in_area(linkedholodeck))
 		if(M.mind)
 			linkedholodeck.play_ambience(M)
+
+	linkedholodeck.sound_env = A.sound_env
 
 	spawn(30)
 		for(var/obj/effect/landmark/L in linkedholodeck)

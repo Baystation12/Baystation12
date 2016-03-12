@@ -13,8 +13,6 @@
 		client.screen = list()
 	if(mind && mind.current == src)
 		spellremove(src)
-	for(var/infection in viruses)
-		qdel(infection)
 	ghostize()
 	..()
 
@@ -39,7 +37,6 @@
 	pain = null
 	item_use_icon = null
 	gun_move_icon = null
-	gun_run_icon = null
 	gun_setting_icon = null
 	spell_masters = null
 	zone_sel = null
@@ -78,27 +75,14 @@
 		src << msg
 	return
 
-// Show a message to all mobs in sight of this one
+// Show a message to all mobs and objects in sight of this one
 // This would be for visible actions by the src mob
 // message is the message output to anyone who can see e.g. "[src] does something!"
 // self_message (optional) is what the src mob sees  e.g. "You do something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
 
-/mob/visible_message(var/message, var/self_message, var/blind_message, var/translation = null)
-	var/temp_m = null
-	var/temp_sm = null
-	var/temp_bm = null
-	for(var/mob/M in viewers(src))
-		temp_bm = translation && blind_message ? translation(translation["object"],"[translation["name"]]_bm",translation["args"],M.client.prefs.interface_lang) : blind_message
-		if(self_message && M == src)
-			temp_sm = translation && self_message ? translation(translation["object"],"[translation["name"]]_sm",translation["args"],M.client.prefs.interface_lang) : self_message
-			M.show_message("[temp_sm ? temp_sm : self_message]", 1, "[temp_bm ? temp_bm : blind_message]", 2)
-		else if(M.see_invisible < invisibility)  // Cannot view the invisible, but you can hear it.
-			if(blind_message)
-				M.show_message("[temp_bm ? temp_bm : blind_message]", 2)
-		else
-			temp_m = translation && message ? translation(translation["object"],"[translation["name"]]_m",translation["args"],M.client.prefs.interface_lang) : message
-			M.show_message("[temp_m ? temp_m : message]", 1, "[temp_bm ? temp_bm : blind_message]", 2)
+/*
+<<<<<<< HEAD
 
 // Show a message to all mobs in sight of this atom
 // Use for objects performing visible actions
@@ -111,6 +95,31 @@
 		temp_m = translation && message ? translation(translation["object"],"[translation["name"]]_m",translation["args"],M.client.prefs.interface_lang) : message
 		temp_bm = translation && blind_message ? translation(translation["object"],"[translation["name"]]_bm",translation["args"],M.client.prefs.interface_lang) : blind_message
 		M.show_message("[temp_m ? temp_m : message]", 1, "[temp_bm ? temp_bm : blind_message]", 2)
+=======*/
+/mob/visible_message(var/message, var/self_message, var/blind_message, var/translation = null)
+	var/list/see = get_mobs_or_objects_in_view(world.view,src) | viewers(world.view,src)
+
+	var/temp_m = null
+	var/temp_sm = null
+	var/temp_bm = null
+
+	for(var/I in see)
+		if(isobj(I))
+			spawn(0)
+				if(I) //It's possible that it could be deleted in the meantime.
+					var/obj/O = I
+					O.show_message(message, 1, blind_message, 2)
+		else if(ismob(I))
+			var/mob/M = I
+			temp_bm = translation && blind_message ? translation(translation["object"],"[translation["name"]]_bm",translation["args"], M.client.prefs.interface_lang) : blind_message
+			temp_m = translation && message ? translation(translation["object"],"[translation["name"]]_m",translation["args"],M.client.prefs.interface_lang) : message
+			if(self_message && M==src)
+				temp_sm = translation && self_message ? translation(translation["object"],"[translation["name"]]_sm",translation["args"],M.client.prefs.interface_lang) : self_message
+				M.show_message("[temp_sm ? temp_sm : self_message]", 1, "[temp_bm ? temp_bm : blind_message]", 2)
+			else if(M.see_invisible >= invisibility) // Cannot view the invisible
+				M.show_message("[temp_m ? temp_m : message]", 1, "[temp_bm ? temp_bm : blind_message]", 2)
+			else if (blind_message)
+				M.show_message("[temp_bm ? temp_bm : blind_message]", 2)
 
 // Returns an amount of power drawn from the object (-1 if it's not viable).
 // If drain_check is set it will not actually drain power, just return a value.
@@ -119,33 +128,31 @@
 /atom/proc/drain_power(var/drain_check,var/surge, var/amount = 0)
 	return -1
 
-// Show a message to all mobs in earshot of this one
+// Show a message to all mobs and objects in earshot of this one
 // This would be for audible actions by the src mob
 // message is the message output to anyone who can hear.
 // self_message (optional) is what the src mob hears.
 // deaf_message (optional) is what deaf people will see.
 // hearing_distance (optional) is the range, how many tiles away the message can be heard.
 /mob/audible_message(var/message, var/deaf_message, var/hearing_distance, var/self_message)
-	var/range = 7
-	if(hearing_distance)
-		range = hearing_distance
-	var/msg = message
-	for(var/mob/M in get_mobs_in_view(range, src))
-		if(self_message && M==src)
-			msg = self_message
-		M.show_message( msg, 2, deaf_message, 1)
 
-// Show a message to all mobs in earshot of this atom
-// Use for objects performing audible actions
-// message is the message output to anyone who can hear.
-// deaf_message (optional) is what deaf people will see.
-// hearing_distance (optional) is the range, how many tiles away the message can be heard.
-/atom/proc/audible_message(var/message, var/deaf_message, var/hearing_distance)
-	var/range = 7
+	var/range = world.view
 	if(hearing_distance)
 		range = hearing_distance
-	for(var/mob/M in get_mobs_in_view(range, src))
-		M.show_message( message, 2, deaf_message, 1)
+	var/list/hear = get_mobs_or_objects_in_view(range,src)
+
+	for(var/I in hear)
+		if(isobj(I))
+			spawn(0)
+				if(I) //It's possible that it could be deleted in the meantime.
+					var/obj/O = I
+					O.show_message( message, 2, deaf_message, 1)
+		else if(ismob(I))
+			var/mob/M = I
+			var/msg = message
+			if(self_message && M==src)
+				msg = self_message
+			M.show_message( msg, 2, deaf_message, 1)
 
 
 /mob/proc/findname(msg)
@@ -163,6 +170,38 @@
 	//handle_typing_indicator() //You said the typing indicator would be fine. The test determined that was a lie.
 	return
 
+#define UNBUCKLED 0
+#define PARTIALLY_BUCKLED 1
+#define FULLY_BUCKLED 2
+/mob/proc/buckled()
+	// Preliminary work for a future buckle rewrite,
+	// where one might be fully restrained (like an elecrical chair), or merely secured (shuttle chair, keeping you safe but not otherwise restrained from acting)
+	if(!buckled)
+		return UNBUCKLED
+	return restrained() ? FULLY_BUCKLED : PARTIALLY_BUCKLED
+
+/mob/proc/is_physically_disabled()
+	return incapacitated(INCAPACITATION_DISABLED)
+
+/mob/proc/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
+	if ((incapacitation_flags & INCAPACITATION_DISABLED) && (stat || paralysis || stunned || weakened || resting || sleeping || (status_flags & FAKEDEATH)))
+		return 1
+
+	if((incapacitation_flags & INCAPACITATION_RESTRAINED) && restrained())
+		return 1
+
+	if((incapacitation_flags & (INCAPACITATION_BUCKLED_PARTIALLY|INCAPACITATION_BUCKLED_FULLY)))
+		var/buckling = buckled()
+		if(buckling >= PARTIALLY_BUCKLED && (incapacitation_flags & INCAPACITATION_BUCKLED_PARTIALLY))
+			return 1
+		if(buckling == FULLY_BUCKLED && (incapacitation_flags & INCAPACITATION_BUCKLED_FULLY))
+			return 1
+
+	return 0
+
+#undef UNBUCKLED
+#undef PARTIALLY_BUCKLED
+#undef FULLY_BUCKLED
 
 /mob/proc/restrained()
 	return
@@ -181,7 +220,7 @@
 				client.eye = loc
 	return
 
-// This is not needed short of simple_animal and carbon/alien / carbon/human, who reimplement it.
+
 /mob/proc/show_inv(mob/user as mob)
 	return
 
@@ -271,8 +310,6 @@
 		if (W)
 			W.attack_self(src)
 			update_inv_r_hand()
-	if(next_move < world.time)
-		next_move = world.time + 2
 	return
 
 /*
@@ -356,39 +393,20 @@
 	if (!( config.abandon_allowed ))
 		usr << "<span class='notice'>Respawn is disabled.</span>"
 		return
-	if ((stat != 2 || !( ticker )))
+	if ((stat != DEAD || !( ticker )))
 		usr << "<span class='notice'><B>You must be dead to use this!</B></span>"
 		return
 	if (ticker.mode.deny_respawn) //BS12 EDIT
 		usr << "<span class='notice'>Respawn is disabled for this roundtype.</span>"
 		return
-	else
-		var/deathtime = world.time - src.timeofdeath
-		if(istype(src,/mob/dead/observer))
-			var/mob/dead/observer/G = src
-			if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
-				usr << "\blue <B>Upon using the antagHUD you forfeighted the ability to join the round.</B>"
-				return
-		var/deathtimeminutes = round(deathtime / 600)
-		var/pluralcheck = "minute"
-		if(deathtimeminutes == 0)
-			pluralcheck = ""
-		else if(deathtimeminutes == 1)
-			pluralcheck = " [deathtimeminutes] minute and"
-		else if(deathtimeminutes > 1)
-			pluralcheck = " [deathtimeminutes] minutes and"
-		var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
-		usr << "You have been dead for[pluralcheck] [deathtimeseconds] seconds."
+	else if(!MayRespawn(1, config.respawn_delay))
+		return
 
-		if (deathtime < 18000)
-			usr << "You must wait 30 minutes to respawn!"
-			return
-		else
-			usr << "You can respawn now, enjoy your new life!"
+	usr << "You can respawn now, enjoy your new life!"
 
 	log_game("[usr.name]/[usr.key] used abandon mob.")
 
-	usr << "\blue <B>Make sure to play a different character, and please roleplay correctly!</B>"
+	usr << "<span class='notice'><B>Make sure to play a different character, and please roleplay correctly!</B></span>"
 
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
@@ -577,19 +595,43 @@
 			pullin.icon_state = "pull0"
 
 /mob/proc/start_pulling(var/atom/movable/AM)
+
 	if ( !AM || !usr || src==AM || !isturf(src.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
 		return
 
 	if (AM.anchored)
-		usr << "<span class='notice'>It won't budge!</span>"
+		src << "<span class='warning'>It won't budge!</span>"
 		return
 
 	var/mob/M = AM
 	if(ismob(AM))
+
+		if(!can_pull_mobs || !can_pull_size)
+			src << "<span class='warning'>It won't budge!</span>"
+			return
+
+		if((mob_size < M.mob_size) && (can_pull_mobs != MOB_PULL_LARGER))
+			src << "<span class='warning'>It won't budge!</span>"
+			return
+
+		if((mob_size == M.mob_size) && (can_pull_mobs == MOB_PULL_SMALLER))
+			src << "<span class='warning'>It won't budge!</span>"
+			return
+
+		// If your size is larger than theirs and you have some
+		// kind of mob pull value AT ALL, you will be able to pull
+		// them, so don't bother checking that explicitly.
+
 		if(!iscarbon(src))
 			M.LAssailant = null
 		else
 			M.LAssailant = usr
+
+	else if(isobj(AM))
+		var/obj/I = AM
+		if(!can_pull_size || can_pull_size < I.w_class)
+			src << "<span class='warning'>It won't budge!</span>"
+			return
 
 	if(pulling)
 		var/pulling_old = pulling
@@ -655,22 +697,19 @@
 
 		if(client.holder)
 			if(statpanel("Status"))
-				stat("Location:","([x], [y], [z])")
-			if(statpanel("Processes"))
+				stat("Location:", "([x], [y], [z]) [loc]")
 				stat("CPU:","[world.cpu]")
 				stat("Instances:","[world.contents.len]")
-				if(processScheduler && processScheduler.getIsRunning())
-					for(var/datum/controller/process/P in processScheduler.processes)
-						stat(P.getStatName(), P.getTickTime())
-				else
-					stat("processScheduler is not running.")
+			if(statpanel("Processes"))
+				if(processScheduler)
+					processScheduler.statProcesses()
 
 		if(listed_turf && client)
 			if(!TurfAdjacent(listed_turf))
 				listed_turf = null
 			else
 				if(statpanel("Turf"))
-					stat("\icon[listed_turf]", listed_turf.name)
+					stat(listed_turf)
 					for(var/atom/A in listed_turf)
 						if(!A.mouse_opacity)
 							continue
@@ -686,48 +725,60 @@
 	if(!canmove)						return 0
 	if(stat)							return 0
 	if(anchored)						return 0
-	if(monkeyizing)						return 0
+	if(transforming)						return 0
 	return 1
+
+// Not sure what to call this. Used to check if humans are wearing an AI-controlled exosuit and hence don't need to fall over yet.
+/mob/proc/can_stand_overridden()
+	return 0
+
+/mob/proc/cannot_stand()
+	return incapacitated(INCAPACITATION_DEFAULT & (~INCAPACITATION_RESTRAINED))
 
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
 /mob/proc/update_canmove()
-	if(istype(buckled, /obj/vehicle))
-		var/obj/vehicle/V = buckled
-		if(stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
-			lying = 1
-			canmove = 0
-			pixel_y = V.mob_offset_y - 5
-		else
-			if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
-			canmove = 1
-			pixel_y = V.mob_offset_y
-	else if(buckled)
-		anchored = 1
-		canmove = 0
-		if(istype(buckled))
-			if(buckled.buckle_lying != -1)
-				lying = buckled.buckle_lying
-			if(buckled.buckle_movable)
-				anchored = 0
-				canmove = 1
 
-	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
-		lying = 1
-		canmove = 0
-	else if(stunned)
-		canmove = 0
-	else if(captured)
-		anchored = 1
-		canmove = 0
-		lying = 0
-	else
+	if(!resting && cannot_stand() && can_stand_overridden())
 		lying = 0
 		canmove = 1
+	else
+		if(istype(buckled, /obj/vehicle))
+			var/obj/vehicle/V = buckled
+			if(is_physically_disabled())
+				lying = 1
+				canmove = 0
+				pixel_y = V.mob_offset_y - 5
+			else
+				if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
+				canmove = 1
+				pixel_y = V.mob_offset_y
+		else if(buckled)
+			anchored = 1
+			canmove = 0
+			if(istype(buckled))
+				if(buckled.buckle_lying != -1)
+					lying = buckled.buckle_lying
+				if(buckled.buckle_movable)
+					anchored = 0
+					canmove = 1
+
+		else if(cannot_stand())
+			lying = 1
+			canmove = 0
+		else if(stunned)
+			canmove = 0
+		else if(captured)
+			anchored = 1
+			canmove = 0
+			lying = 0
+		else
+			lying = 0
+			canmove = 1
 
 	if(lying)
 		density = 0
-		drop_l_hand()
-		drop_r_hand()
+		if(l_hand) unEquip(l_hand)
+		if(r_hand) unEquip(r_hand)
 	else
 		density = initial(density)
 
@@ -760,22 +811,22 @@
 
 /mob/verb/eastface()
 	set hidden = 1
-	return facedir(EAST)
+	return facedir(client.client_dir(EAST))
 
 
 /mob/verb/westface()
 	set hidden = 1
-	return facedir(WEST)
+	return facedir(client.client_dir(WEST))
 
 
 /mob/verb/northface()
 	set hidden = 1
-	return facedir(NORTH)
+	return facedir(client.client_dir(NORTH))
 
 
 /mob/verb/southface()
 	set hidden = 1
-	return facedir(SOUTH)
+	return facedir(client.client_dir(SOUTH))
 
 
 //This might need a rename but it should replace the can this mob use things check
@@ -881,9 +932,9 @@ mob/proc/yank_out_object()
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
 	set src in view(1)
 
-	if(!isliving(usr) || usr.next_move > world.time)
+	if(!isliving(usr) || !usr.canClick())
 		return
-	usr.next_move = world.time + 20
+	usr.setClickCooldown(20)
 
 	if(usr.stat == 1)
 		usr << "You are unconcious and cannot do that!"
@@ -916,7 +967,7 @@ mob/proc/yank_out_object()
 	else
 		U << "<span class='warning'>You attempt to get a good grip on [selection] in [S]'s body.</span>"
 
-	if(!do_after(U, 30))
+	if(!do_mob(U, S, 30))
 		return
 	if(!selection || !S || !U)
 		return
@@ -950,6 +1001,12 @@ mob/proc/yank_out_object()
 		if (ishuman(U))
 			var/mob/living/carbon/human/human_user = U
 			human_user.bloody_hands(H)
+
+	else if(issilicon(src))
+		var/mob/living/silicon/robot/R = src
+		R.embedded -= selection
+		R.adjustBruteLoss(5)
+		R.adjustFireLoss(10)
 
 	selection.forceMove(get_turf(src))
 	if(!(U.l_hand && U.r_hand))
@@ -1031,7 +1088,7 @@ mob/proc/yank_out_object()
 		usr << "You are now facing [dir2text(facing_dir)]."
 
 /mob/proc/set_face_dir(var/newdir)
-	if(newdir == facing_dir)
+	if(!isnull(facing_dir) && newdir == facing_dir)
 		facing_dir = null
 	else if(newdir)
 		set_dir(newdir)
@@ -1053,19 +1110,25 @@ mob/proc/yank_out_object()
 
 /mob/verb/northfaceperm()
 	set hidden = 1
-	set_face_dir(NORTH)
+	set_face_dir(client.client_dir(NORTH))
 
 /mob/verb/southfaceperm()
 	set hidden = 1
-	set_face_dir(SOUTH)
+	set_face_dir(client.client_dir(SOUTH))
 
 /mob/verb/eastfaceperm()
 	set hidden = 1
-	set_face_dir(EAST)
+	set_face_dir(client.client_dir(EAST))
 
 /mob/verb/westfaceperm()
 	set hidden = 1
-	set_face_dir(WEST)
+	set_face_dir(client.client_dir(WEST))
+
+/mob/proc/adjustEarDamage()
+	return
+
+/mob/proc/setEarDamage()
+	return
 
 //Throwing stuff
 

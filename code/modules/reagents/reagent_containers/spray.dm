@@ -40,6 +40,8 @@
 
 	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
 
+	user.setClickCooldown(4)
+
 	if(reagents.has_reagent("sacid"))
 		message_admins("[key_name_admin(user)] fired sulphuric acid from \a [src].")
 		log_game("[key_name(user)] fired sulphuric acid from \a [src].")
@@ -105,6 +107,14 @@
 	..()
 	reagents.add_reagent("cleaner", volume)
 
+/obj/item/weapon/reagent_containers/spray/sterilizine
+	name = "sterilizine"
+	desc = "Great for hiding incriminating bloodstains and sterilizing scalpels."
+
+/obj/item/weapon/reagent_containers/spray/sterilizine/New()
+	..()
+	reagents.add_reagent("sterilizine", volume)
+
 /obj/item/weapon/reagent_containers/spray/pepper
 	name = "pepperspray"
 	desc = "Manufactured by UhangInc, used to blind and down an opponent quickly."
@@ -157,7 +167,7 @@
 	w_class = 3.0
 	possible_transfer_amounts = null
 	volume = 600
-	origin_tech = "combat=3;materials=3;engineering=3"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
 
 /obj/item/weapon/reagent_containers/spray/chemsprayer/Spray_at(atom/A as mob|obj)
 	var/direction = get_dir(src, A)

@@ -9,7 +9,7 @@
 
 	var/default_type = DEFAULT_WALL_MATERIAL
 	var/material/material
-	var/perunit
+	var/perunit = SHEET_MATERIAL_AMOUNT
 	var/apply_colour //temp pending icon rewrite
 
 /obj/item/stack/material/New()
@@ -26,8 +26,8 @@
 
 	recipes = material.get_recipes()
 	stacktype = material.stack_type
-	origin_tech = material.stack_origin_tech
-	perunit = material.stack_per_sheet
+	if(islist(material.stack_origin_tech))
+		origin_tech = material.stack_origin_tech.Copy()
 
 	if(apply_colour)
 		color = material.icon_colour
@@ -196,12 +196,15 @@
 	default_type = "rglass"
 
 /obj/item/stack/material/glass/phoronglass
-	name = "phoron glass"
-	singular_name = "phoron glass sheet"
+	name = "borosilicate glass"
+	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures"
+	singular_name = "borosilicate glass sheet"
 	icon_state = "sheet-phoronglass"
-	default_type = "phglass"
+	default_type = "borosilicate glass"
 
 /obj/item/stack/material/glass/phoronrglass
-	name = "reinforced phoron glass"
+	name = "reinforced borosilicate glass"
+	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures. It is reinforced with few rods."
+	singular_name = "reinforced borosilicate glass sheet"
 	icon_state = "sheet-phoronrglass"
-	default_type = "rphglass"
+	default_type = "reinforced borosilicate glass"
