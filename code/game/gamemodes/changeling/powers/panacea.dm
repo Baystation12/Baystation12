@@ -16,18 +16,23 @@
 	if(!changeling)
 		return 0
 	src.mind.changeling.chem_charges -= 20
+	feedback_add_details("changeling_powers","AP")
 
 	src << "<span class='notice'>We cleanse impurities from our form.</span>"
 
-	for(var/datum/disease/D in src.viruses)
-		D.cure()
+	radiation = 0
+	var/mob/living/carbon/C = src
+	if(istype(C))
+		C.clear_all_reagents()
 
-	var/mob/living/carbon/human/C = src
+		for(var/virus in C.virus2)
+			var/datum/disease2/disease/D = C.virus2[virus]
+			D.cure(src)
 
-	C.radiation = 0
-	C.sdisabilities = 0
-	C.disabilities = 0
-	C.reagents.clear_reagents()
+		var/mob/living/carbon/human/H = src
+		if(istype(H))
+			H.sdisabilities = 0
+			H.disabilities = 0
 
 	var/heal_amount = 5
 	if(src.mind.changeling.recursive_enhancement)
@@ -35,10 +40,11 @@
 		src << "<span class='notice'>We will heal much faster.</span>"
 		src.mind.changeling.recursive_enhancement = 0
 
-	for(var/i = 0, i<10,i++)
-		if(C)
-			C.adjustToxLoss(-heal_amount)
-			sleep(10)
+	var/mob/living/L = src
+	if(istype(L))
+		for(var/i = 0, i<10,i++)
+			if(L)
+				L.adjustToxLoss(-heal_amount)
+				sleep(10)
 
-	feedback_add_details("changeling_powers","AP")
 	return 1

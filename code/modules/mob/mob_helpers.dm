@@ -598,3 +598,11 @@ proc/is_blind(A)
 		return
 	var/list/hands = list(M.l_hand, M.r_hand)
 	return hands
+
+/mob/living/proc/set_m_intent(var/intent)
+	if (intent != MOVE_INTENT_WALK && intent != MOVE_INTENT_RUN)
+		return 0
+	m_intent = intent
+	if(hud_used)
+		if (hud_used.move_intent)
+			hud_used.move_intent.icon_state = intent == MOVE_INTENT_WALK ? "walking" : "running"

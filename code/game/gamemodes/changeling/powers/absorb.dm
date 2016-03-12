@@ -67,10 +67,11 @@
 
 	T.dna.real_name = T.real_name //Set this again, just to be sure that it's properly set.
 	changeling.absorbed_dna |= T.dna
-	if(src.nutrition < 400)
-		src.nutrition = min((src.nutrition + T.nutrition), 400)
+	var/mob/living/carbon/C = src
+	if(istype(C) && C.nutrition < 400)
+		C.nutrition = min((C.nutrition + T.nutrition), 400)
 	changeling.chem_charges += 10
-//	changeling.geneticpoints += 2
+	changeling.geneticpoints += 2
 	src.verbs += /mob/proc/changeling_respec
 	src << "<span class='notice'>We can now re-adapt, reverting our evolution so that we may start anew, if needed.</span>"
 

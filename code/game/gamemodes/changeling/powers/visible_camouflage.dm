@@ -30,7 +30,7 @@
 		var/old_regen_rate = H.mind.changeling.chem_recharge_rate
 
 		H << "<span class='notice'>We vanish from sight, and will remain hidden, so long as we move carefully.</span>"
-		H.set_m_intent("walk")
+		H.set_m_intent(MOVE_INTENT_WALK)
 		H.mind.changeling.cloaked = 1
 		H.mind.changeling.chem_recharge_rate = 0
 		animate(src,alpha = 255, alpha = 10, time = 10)
@@ -50,7 +50,7 @@
 		H.invisibility = initial(invisibility)
 		visible_message("<span class='warning'>[src] suddenly fades in, seemingly from nowhere!</span>",
 		"<span class='notice'>We revert our camouflage, revealing ourselves.</span>")
-		H.set_m_intent("run")
+		H.set_m_intent(MOVE_INTENT_RUN)
 		H.mind.changeling.cloaked = 0
 		H.mind.changeling.chem_recharge_rate = old_regen_rate
 

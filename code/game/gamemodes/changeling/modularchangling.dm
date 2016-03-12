@@ -102,7 +102,7 @@ var/list/datum/power/changeling/powerinstances = list()
 
 					body += "<font size='2'><b>"+desc+"</b></font> <BR>"
 
-					body += "<font size='2'><font color = 'red'><b>"+helptext+"</b></font> <BR>"
+					body += "<font size='2'><font color = 'red'><b>"+helptext+"</b></font></font> <BR>"
 
 					if(enhancedtext)
 					{
@@ -266,7 +266,7 @@ var/list/datum/power/changeling/powerinstances = list()
 					<a id='link[i]'
 					onmouseover='expand("item[i]","[P.name]","[P.desc]","[P.helptext]","[P.enhancedtext]","[P]",[ownsthis])'
 					>
-					<b id='search[i]'>Evolve [P] - Cost: [ownsthis ? "Purchased" : P.genomecost]</b>
+					<b><span id='search[i]'>Evolve [P] - Cost: [ownsthis ? "Purchased" : P.genomecost]</span></b>
 					</a>
 					<br><span id='item[i]'></span>
 				</td>

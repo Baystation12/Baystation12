@@ -69,7 +69,7 @@
 						cell.charge = cell.maxcharge
 						break
 					var/T = get_turf(src)
-					new /obj/effect/effect/sparks(T)
+					new /obj/effect/sparks(T)
 					held_item.update_icon()
 					i--
 					sleep(10)
@@ -92,7 +92,7 @@
 		"<span class='warning'>We store a charge of electricity in our hand.</span>",
 		"<span class='italics'>You hear crackling electricity!</span>")
 		var/T = get_turf(src)
-		new /obj/effect/effect/sparks(T)
+		new /obj/effect/sparks(T)
 
 /obj/item/weapon/electric_hand/dropped(mob/user)
 	spawn(1)
@@ -160,7 +160,7 @@
 //					if(!Adjacent(T))
 //						break
 					var/Turf = get_turf(src)
-					new /obj/effect/effect/sparks(Turf)
+					new /obj/effect/sparks(Turf)
 					T.update_icon()
 					i--
 					sleep(10)
