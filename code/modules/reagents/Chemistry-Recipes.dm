@@ -1627,8 +1627,8 @@
 	name = "Pan-Galactic Gargle Blaster"
 	id = "gargleblaster"
 	result = "gargleblaster"
-	required_reagents = list("vodka" = 1, "gin" = 1, "whiskey" = 1, "cognac" = 1, "limejuice" = 1)
-	result_amount = 5
+	required_reagents = list("vodka" = 2, "gin" = 1, "whiskey" = 1, "cognac" = 1, "limejuice" = 1)
+	result_amount = 6
 
 /datum/chemical_reaction/brave_bull
 	name = "Brave Bull"
