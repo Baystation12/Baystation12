@@ -12,7 +12,8 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 								/obj/structure/closet/wizard/scrying = 		"SO",
 								/obj/item/weapon/teleportation_scroll = 	"TS",
 								/obj/item/weapon/gun/energy/staff = 		"ST",
-								/obj/item/weapon/gun/energy/staff/animate =	"SA")
+								/obj/item/weapon/gun/energy/staff/animate =	"SA",
+								/obj/item/weapon/dice/d20/cursed = 			"DW")
 
 /obj/item/weapon/spellbook
 	name = "master spell book"

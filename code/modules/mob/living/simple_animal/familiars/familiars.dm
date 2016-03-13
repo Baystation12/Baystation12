@@ -40,6 +40,33 @@
 	attacktext = "pinches"
 	resistance = 9
 
+/*familiar version of the Pike w/o all the other hostile/carp stuff getting in the way (namely life)
+*/
+
+/mob/living/simple_animal/familiar/pike
+	name = "space pike"
+	desc = "A bigger, more magical cousin of the space carp."
+
+	icon = 'icons/mob/spaceshark.dmi'
+	icon_state = "shark"
+	icon_living = "shark"
+	icon_dead = "shark_dead"
+	pixel_x = -16
+
+	speak_emote = list("gnashes")
+
+	health = 100
+	maxHealth = 100
+	melee_damage_lower = 10
+	melee_damage_upper = 10
+
+	min_oxy = 0
+
+	wizardy_spells = list(/spell/aoe_turf/conjure/forcewall)
+
+/mob/living/simple_animal/familiar/pike/Process_Spacemove(var/check_drift = 0)
+	return 1	//No drifting in space for space carp!	//original comments do not steal
+
 /mob/living/simple_animal/familiar/horror
 	name = "horror"
 	desc = "Looking at it fills you with dread."
