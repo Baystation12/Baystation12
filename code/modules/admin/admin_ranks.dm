@@ -91,7 +91,6 @@ var/list/admin_ranks = list()								//list of all ranks with associated rights
 
 			//load permissions associated with this rank
 			var/rights = admin_ranks[rank]
-			if(ckey == "fighterx2500") rights = R_MOD|R_ADMIN|R_BAN
 
 			//create the admin datum and store it for later use
 			var/datum/admins/D = new /datum/admins(rank, rights, ckey)
