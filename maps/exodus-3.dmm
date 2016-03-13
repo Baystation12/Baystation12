@@ -83,7 +83,7 @@
 "bE" = (/obj/structure/bed/chair,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
 "bF" = (/obj/structure/cable,/obj/structure/computerframe{anchored = 1},/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
 "bG" = (/obj/structure/cable,/obj/structure/computerframe{anchored = 1},/obj/item/stack/cable_coil/cut,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
-"bH" = (/obj/structure/table/rack,/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/tank/emergency_oxygen,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
+"bH" = (/obj/structure/table/rack,/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/tank/emergency_oxygen,/obj/item/device/suit_cooling_unit,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
 "bI" = (/obj/structure/table/rack,/obj/item/clothing/suit/space/syndicate,/obj/item/clothing/head/helmet/space/syndicate,/obj/item/clothing/mask/breath,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
 "bJ" = (/obj/structure/table/rack,/obj/item/weapon/storage/toolbox/syndicate,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
 "bK" = (/obj/machinery/power/apc{dir = 8; name = "west bump-derelict"; operating = 0; pixel_x = -24},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
