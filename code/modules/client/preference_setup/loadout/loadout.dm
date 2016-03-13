@@ -53,6 +53,8 @@ var/list/gear_datums = list()
 	return valid_gear_choices
 
 /datum/category_item/player_setup_item/loadout/sanitize_character()
+	if(!islist(pref.gear))
+		pref.gear = list()
 
 	for(var/gear_name in pref.gear)
 		if(!(gear_name in gear_datums))
