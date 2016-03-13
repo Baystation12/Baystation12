@@ -163,6 +163,20 @@
 	use_to_pickup = 1
 	use_sound = null
 
+/obj/item/weapon/storage/pill_bottle/alkysine
+	name = "bottle of Alkysine pills"
+	desc = "Contains pills used to treat brain damage."
+
+	New()
+		..()
+		new /obj/item/weapon/reagent_containers/pill/alkysine( src )
+		new /obj/item/weapon/reagent_containers/pill/alkysine( src )
+		new /obj/item/weapon/reagent_containers/pill/alkysine( src )
+		new /obj/item/weapon/reagent_containers/pill/alkysine( src )
+		new /obj/item/weapon/reagent_containers/pill/alkysine( src )
+		new /obj/item/weapon/reagent_containers/pill/alkysine( src )
+		new /obj/item/weapon/reagent_containers/pill/alkysine( src )
+
 /obj/item/weapon/storage/pill_bottle/antitox
 	name = "bottle of Dylovene pills"
 	desc = "Contains pills used to counter toxins."
