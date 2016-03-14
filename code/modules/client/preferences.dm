@@ -104,6 +104,7 @@ datum/preferences
 	// OOC Metadata:
 	var/metadata = ""
 
+	var/client/client = null
 	var/client_ckey = null
 
 	var/savefile/loaded_preferences
@@ -119,6 +120,7 @@ datum/preferences
 	gear = list()
 
 	if(istype(C))
+		client = C
 		client_ckey = C.ckey
 		if(!IsGuestKey(C.key))
 			load_path(C.ckey)
