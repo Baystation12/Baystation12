@@ -25,6 +25,12 @@
 	//Detective Work, used for the duplicate data points kept in the scanners
 	var/list/original_atom
 
+/atom/Destroy()
+	if(reagents)
+		qdel(reagents)
+		reagents = null
+	. = ..()
+
 /atom/proc/reveal_blood()
 	return
 
