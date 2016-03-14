@@ -95,6 +95,11 @@ var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
 	/client/proc/jobbans
 	)
+var/list/admin_verbs_sounds = list(
+	/client/proc/play_local_sound,
+	/client/proc/play_sound,
+	/client/proc/play_server_sound
+	)
 var/list/admin_verbs_fun = list(
 	/client/proc/object_talk,
 	/client/proc/cmd_admin_dress,
@@ -221,6 +226,9 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/cmd_admin_direct_narrate,
 	/client/proc/cmd_admin_world_narrate,
 	/client/proc/check_words,
+	/client/proc/play_local_sound,
+	/client/proc/play_sound,
+	/client/proc/play_server_sound,
 	/client/proc/object_talk,
 	/client/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
@@ -312,6 +320,7 @@ var/list/admin_verbs_mentor = list(
 		if(holder.rights & R_PERMISSIONS)	verbs += admin_verbs_permissions
 		if(holder.rights & R_STEALTH)		verbs += /client/proc/stealth
 		if(holder.rights & R_REJUVINATE)	verbs += admin_verbs_rejuv
+		if(holder.rights & R_SOUNDS)		verbs += admin_verbs_sounds
 		if(holder.rights & R_SPAWN)			verbs += admin_verbs_spawn
 		if(holder.rights & R_MOD)			verbs += admin_verbs_mod
 		if(holder.rights & R_MENTOR)		verbs += admin_verbs_mentor
@@ -329,6 +338,7 @@ var/list/admin_verbs_mentor = list(
 		admin_verbs_permissions,
 		/client/proc/stealth,
 		admin_verbs_rejuv,
+		admin_verbs_sounds,
 		admin_verbs_spawn,
 		debug_verbs
 		)
