@@ -359,3 +359,221 @@
 	name = "yellow hijab"
 	desc = "A yellow veil that is wrapped to cover the head and chest"
 	icon_state = "hijab_yellow"
+
+//Kippot
+
+/obj/item/clothing/head/kippa
+	name = "black kippa"
+	desc = "A small, brimless cap. It is black."
+	icon_state = "kippa_black"
+	body_parts_covered = 0
+
+/obj/item/clothing/head/kippa/aqua
+	name = "aqua kippa"
+	desc = "A small, brimless cap.  It is aqua."
+	icon_state = "kippa_aqua"
+
+/obj/item/clothing/head/kippa/blue
+	name = "blue kippa"
+	desc = "A small, brimless cap. It is blue."
+	icon_state = "kippa_blue"
+
+/obj/item/clothing/head/kippa/brown
+	name = "brown kippa"
+	desc = "A small, brimless cap.  It is blue."
+	icon_state = "kippa_brown"
+
+/obj/item/clothing/head/kippa/darkblue
+	name = "dark blue kippa"
+	desc = "A small, brimless cap.  It is dark blue."
+	icon_state = "kippa_darkblue"
+
+/obj/item/clothing/head/kippa/darkred
+	name = "dark red kippa"
+	desc = "A small, brimless cap.  It is dark red."
+	icon_state = "kippa_darkred"
+
+/obj/item/clothing/head/kippa/green
+	name = "green kippa"
+	desc = "A small, brimless cap.  It is green."
+	icon_state = "kippa_green"
+
+/obj/item/clothing/head/kippa/grey
+	name = "grey kippa"
+	desc = "A small, brimless cap.  It is grey."
+	icon_state = "kippa_grey"
+
+/obj/item/clothing/head/kippa/lightblue
+	name = "light blue kippa"
+	desc = "A small, brimless cap.  It is light blue."
+	icon_state = "kippa_lightblue"
+
+/obj/item/clothing/head/kippa/lightbrown
+	name = "light brown kippa"
+	desc = "A small, brimless cap.  It is light brown."
+	icon_state = "kippa_lightbrown"
+
+/obj/item/clothing/head/kippa/lightgreen
+	name = "light green kippa"
+	desc = "A small, brimless cap.  It is light green."
+	icon_state = "kippa_lightgreen"
+
+/obj/item/clothing/head/kippa/lightpurple
+	name = "light purple kippa"
+	desc = "A small, brimless cap.  It is light purple."
+	icon_state = "kippa_lightpurple"
+
+/obj/item/clothing/head/kippa/lightred
+	name = "light red kippa"
+	desc = "A small, brimless cap.  It is light red."
+	icon_state = "kippa_lightred"
+
+/obj/item/clothing/head/kippa/maroon
+	name = "maroon kippa"
+	desc = "A small, brimless cap.  It is maroon."
+	icon_state = "kippa_maroon"
+
+/obj/item/clothing/head/kippa/orange
+	name = "orange kippa"
+	desc = "A small, brimless cap.  It is orange."
+	icon_state = "kippa_orange"
+
+/obj/item/clothing/head/kippa/pink
+	name = "pink kippa"
+	desc = "A small, brimless cap.  It is pink."
+	icon_state = "kippa_pink"
+
+/obj/item/clothing/head/kippa/purple
+	name = "purple kippa"
+	desc = "A small, brimless cap.  It is purple."
+	icon_state = "kippa_purple"
+
+/obj/item/clothing/head/kippa/red
+	name = "red kippa"
+	desc = "A small, brimless cap.  It is red."
+	icon_state = "kippa_red"
+
+/obj/item/clothing/head/kippa/white
+	name = "white kippa"
+	desc = "A small, brimless cap.  It is white."
+	icon_state = "kippa_white"
+
+/obj/item/clothing/head/kippa/yellowgreen
+	name = "yellow green kippa"
+	desc = "A small, brimless cap.  It is yellow green."
+	icon_state = "kippa_yellowgreen"
+
+/obj/item/clothing/head/kippa/yellow
+	name = "yellow kippa"
+	desc = "A small, brimless cap.  It is yellow."
+	icon_state = "kippa_yellow"
+
+//Turbans
+
+/obj/item/clothing/head/turban
+	name = "black turban"
+	desc = "A black cloth used to wind around the head"
+	icon_state = "turban_black"
+	body_parts_covered = 0
+	flags_inv = BLOCKHAIR
+
+/obj/item/clothing/head/turban/aqua
+	name = "aqua turban"
+	desc = "An aqua cloth used to wind around the head."
+	icon_state = "turban_aqua"
+
+/obj/item/clothing/head/turban/blue
+	name = "blue turban"
+	desc = "A blue cloth used to wind around the head."
+	icon_state = "turban_blue"
+
+/obj/item/clothing/head/turban/brown
+	name = "brown turban"
+	desc = "A brown cloth used to wind around the head."
+	icon_state = "turban_brown"
+
+/obj/item/clothing/head/turban/darkblue
+	name = "dark blue turban"
+	desc = "A dark blue cloth used to wind around the head."
+	icon_state = "turban_darkblue"
+
+/obj/item/clothing/head/turban/darkred
+	name = "dark red turban"
+	desc = "A dark red cloth used to wind around the head."
+	icon_state = "turban_darkred"
+
+/obj/item/clothing/head/turban/green
+	name = "green turban"
+	desc = "A green cloth used to wind around the head."
+	icon_state = "turban_green"
+
+/obj/item/clothing/head/turban/grey
+	name = "grey turban"
+	desc = "A grey cloth used to wind around the head."
+	icon_state = "turban_grey"
+
+/obj/item/clothing/head/turban/lightblue
+	name = "light blue turban"
+	desc = "A light blue cloth used to wind around the head."
+	icon_state = "turban_lightblue"
+
+/obj/item/clothing/head/turban/lightbrown
+	name = "light brown turban"
+	desc = "A light brown cloth used to wind around the head."
+	icon_state = "turban_lightbrown"
+
+/obj/item/clothing/head/turban/lightgreen
+	name = "light green turban"
+	desc = "A light green cloth used to wind around the head."
+	icon_state = "turban_lightgreen"
+
+/obj/item/clothing/head/turban/lightpurple
+	name = "light purple turban"
+	desc = "A light purple cloth used to wind around the head."
+	icon_state = "turban_lightpurple"
+
+/obj/item/clothing/head/turban/lightred
+	name = "light red turban"
+	desc = "A light red cloth used to wind around the head."
+	icon_state = "turban_lightred"
+
+/obj/item/clothing/head/turban/maroon
+	name = "maroon turban"
+	desc = "A maroon cloth used to wind around the head."
+	icon_state = "turban_maroon"
+
+/obj/item/clothing/head/turban/orange
+	name = "orange turban"
+	desc = "An orange cloth used to wind around the head."
+	icon_state = "turban_orange"
+
+/obj/item/clothing/head/turban/pink
+	name = "pink turban"
+	desc = "A pink cloth used to wind around the head."
+	icon_state = "turban_pink"
+
+/obj/item/clothing/head/turban/purple
+	name = "purple turban"
+	desc = "A purple cloth used to wind around the head."
+	icon_state = "turban_purple"
+
+/obj/item/clothing/head/turban/red
+	name = "red turban"
+	desc = "A red cloth used to wind around the head."
+	icon_state = "turban_red"
+
+/obj/item/clothing/head/turban/white
+	name = "white turban"
+	desc = "A white cloth used to wind around the head."
+	icon_state = "turban_white"
+
+/obj/item/clothing/head/turban/yellowgreen
+	name = "yellow green turban"
+	desc = "A yellow green cloth used to wind around the head."
+	icon_state = "turban_yellowgreen"
+
+/obj/item/clothing/head/turban/yellow
+	name = "yellow turban"
+	desc = "A yellow cloth used to wind around the head."
+	icon_state = "turban_yellow"
+
