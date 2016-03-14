@@ -29,8 +29,6 @@ datum/preferences
 	var/age = 30						//age of character
 	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
-	var/underwear						//underwear type
-	var/undershirt						//undershirt type
 	var/backbag = 2						//backpack type
 	var/h_style = "Bald"				//Hair type
 	var/r_hair = 0						//Hair color
@@ -345,9 +343,11 @@ datum/preferences
 				else if(status == "mechanical")
 					I.robotize()
 
-	character.underwear = underwear
-
-	character.undershirt = undershirt
+	character.all_underwear.Cut()
+	for(var/underwear_category_name in all_underwear)
+		var/underwear_item_name = all_underwear[underwear_category_name]
+		var/datum/category_group/underwear/underwear_category = global_underwear.categories_by_name[underwear_category_name]
+		character.all_underwear[underwear_category_name] = underwear_category.items_by_name[underwear_item_name]
 
 	if(backbag > 4 || backbag < 1)
 		backbag = 1 //Same as above
