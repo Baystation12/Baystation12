@@ -1308,6 +1308,20 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/biogenerator
 	sort_string = "KBAAA"
 
+/datum/design/circuit/miningdrill
+	name = "mining drill head"
+	id = "mining drill head"
+	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/circuitboard/miningdrill
+	sort_string = "KCAAA"
+
+/datum/design/circuit/miningdrillbrace
+	name = "mining drill brace"
+	id = "mining drill brace"
+	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/circuitboard/miningdrillbrace
+	sort_string = "KCAAB"
+
 /datum/design/circuit/comconsole
 	name = "communications console"
 	id = "comconsole"
