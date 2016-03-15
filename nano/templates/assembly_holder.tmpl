@@ -1,0 +1,49 @@
+<!-- 
+	Interface for vending machines 
+	See: code/game/machinery/vending.dm
+-->
+	<div clas='itemLabelWide'>
+    {{:helper.link('Home', 'home', {'home' : 1}, data.state == 'HOME' ? 'disabled' : null, 'fixedLeft')}}
+    {{:helper.link('Logs', 'note', {'logs' : 1}, data.state == 'LOGS' ? 'disabled' : null, 'fixedLeft')}}
+	{{:helper.link('Admin', 'link', {'admin' : 1}, data.state == 'ADMIN' ? 'disabled' : null, 'fixedLeft')}}
+	<br>
+	</div>
+{{if data.state == "HOME"}}
+<h2>Connected items:</h2>
+<div class='item'>
+	{{for data.connected}}
+	{{if index % 2 == 0}}
+		<div class='itemContent'>
+			{{:value}}:
+		</div>
+	{{else}}
+		<br>
+		<div style='itemLabel'>			
+			{{:helper.link('Connect', 'link', { 'connect' : value })}}	
+			{{:helper.link('Settings', 'gear', { 'settings' : value })}}	
+			{{:helper.link('Wires', 'lightbulb', { 'wiring' : value })}}
+			{{if data.connecting}}
+				{{:helper.link('Connect To', 'link', { 'connect_to' : value })}}
+			{{/if}}					
+		</div>		
+	{{/if}}
+	{{empty}}
+		There are no connected devices!
+	{{/for}}
+{{else data.state == "LOGS"}}
+	<br>
+	{{for data.logs}}
+		<b>{{:value}}</b><br>
+	{{/for}}
+{{else data.state == "ADMIN"}}
+	<br>
+	<div style='itemLabelWide'>
+		{{:helper.link('Password', 'gear', { 'password' : 1})}}</div>
+	<div style='itemContentWide'>
+		{{:data.password}}</div><br>
+	<div style='itemLabel'>
+		{{:helper.link('Advanced Settings', 'gear', { 'advsettings' : 1})}}</div>
+		
+	
+{{/if}}	
+</div>

@@ -638,8 +638,8 @@
 		return 0
 
 	if(!drop_gently)
-		if(istype(held_item, /obj/item/weapon/grenade))
-			var/obj/item/weapon/grenade/G = held_item
+		if(istype(held_item, /obj/item/device/assembly_holder/grenade))
+			var/obj/item/device/assembly_holder/grenade/G = held_item
 			G.loc = src.loc
 			G.prime()
 			src << "You let go of the [held_item]!"

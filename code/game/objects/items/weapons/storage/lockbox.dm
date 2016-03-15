@@ -91,4 +91,4 @@
 
 	New()
 		..()
-		new /obj/item/weapon/grenade/flashbang/clusterbang(src)
+		new /obj/item/device/assembly_holder/grenade/flashbang/clusterbang(src)
