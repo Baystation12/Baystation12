@@ -14,11 +14,12 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/isabsorbing = 0
 	var/geneticpoints = 5
 	var/max_geneticpoints = 5
-	var/purchasedpowers = list()
+	var/list/purchased_powers = list()
 	var/mimicing = ""
 	var/cloaked = 0
 	var/armor_deployed = 0 //This is only used for changeling_generic_equip_all_slots() at the moment.
 	var/recursive_enhancement = 0 //Used to power up other abilities from the ling power with the same name.
+	var/list/purchased_powers_history = list() //Used for round-end report, includes respec uses too.
 
 /datum/changeling/New(var/gender=FEMALE)
 	..()
@@ -60,10 +61,10 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	// Code to auto-purchase free powers.
 	for(var/datum/power/changeling/P in powerinstances)
 		if(!P.genomecost) // Is it free?
-			if(!(P in mind.changeling.purchasedpowers)) // Do we not have it already?
+			if(!(P in mind.changeling.purchased_powers)) // Do we not have it already?
 				mind.changeling.purchasePower(mind, P.name, 0)// Purchase it. Don't remake our verbs, we're doing it after this.
 
-	for(var/datum/power/changeling/P in mind.changeling.purchasedpowers)
+	for(var/datum/power/changeling/P in mind.changeling.purchased_powers)
 		if(P.isVerb)
 			if(lesser_form && !P.allowduringlesserform)	continue
 			if(!(P in src.verbs))
@@ -83,7 +84,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 //removes our changeling verbs
 /mob/proc/remove_changeling_powers()
 	if(!mind || !mind.changeling)	return
-	for(var/datum/power/changeling/P in mind.changeling.purchasedpowers)
+	for(var/datum/power/changeling/P in mind.changeling.purchased_powers)
 		if(P.isVerb)
 			verbs -= P.verbpath
 

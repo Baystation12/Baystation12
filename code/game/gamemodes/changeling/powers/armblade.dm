@@ -2,6 +2,7 @@
 	name = "Arm Blade"
 	desc = "We reform one of our arms into a deadly blade."
 	helptext = "We may retract our armblade by dropping it. Cannot be used while in lesser form."
+	enhancedtext = "The blade will have armor peneratration."
 	genomecost = 2
 	verbpath = /mob/proc/changeling_arm_blade
 
@@ -10,9 +11,16 @@
 	set category = "Changeling"
 	set name = "Arm Blade (20)"
 
-	if(changeling_generic_weapon(/obj/item/weapon/melee/arm_blade))
-		return 1
-	return 0
+	if(src.mind.changeling.recursive_enhancement)
+		if(changeling_generic_weapon(/obj/item/weapon/melee/arm_blade/greater))
+			src << "<span class='notice'>We prepare an extra sharp blade.</span>"
+			src.mind.changeling.recursive_enhancement = 0
+			return 1
+
+	else
+		if(changeling_generic_weapon(/obj/item/weapon/melee/arm_blade))
+			return 1
+		return 0
 
 /obj/item/weapon/melee/arm_blade
 	name = "arm blade"
@@ -30,6 +38,11 @@
 	throw_speed = 0
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/mob/living/creator //This is just like ninja swords, needed to make sure dumb shit that removes the sword doesn't make it stay around.
+
+/obj/item/weapon/melee/arm_blade/greater
+	name = "arm greatblade"
+	desc = "A grotesque blade made out of bone and flesh that cleaves through people and armor as a hot knife through butter."
+	armor_penetration = 30
 
 /obj/item/weapon/melee/arm_blade/New(location)
 	..()

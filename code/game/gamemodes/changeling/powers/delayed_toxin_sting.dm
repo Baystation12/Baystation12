@@ -1,7 +1,8 @@
 /datum/power/changeling/delayed_toxic_sting
 	name = "Delayed Toxic Sting"
-	desc = "We silently sting a biological, causing a significant amount of toxins after a few minutes, allowing us to not implicate ourselves."
-	helptext = "The toxin takes effect in about two minutes."
+	desc = "We silently sting a biological, causing a significant amount of toxins after a few minutes, allowing us to not \
+	implicate ourselves."
+	helptext = "The toxin takes effect in about two minutes.  The sting has a three minute cooldown between uses."
 	enhancedtext = "The toxic damage is doubled."
 	genomecost = 1
 	verbpath = /mob/proc/changeling_delayed_toxic_sting
@@ -25,7 +26,7 @@
 			while(i)
 				T.adjustToxLoss(1)
 				i--
-				sleep(20)
+				sleep(2 SECONDS)
 	src.verbs -= /mob/proc/changeling_delayed_toxic_sting
 	spawn(3 MINUTES)
 		src << "<span class='notice'>We are ready to use our delayed toxic string once more.</span>"

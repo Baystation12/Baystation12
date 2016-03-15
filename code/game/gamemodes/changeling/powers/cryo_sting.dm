@@ -1,7 +1,8 @@
 /datum/power/changeling/cryo_sting
 	name = "Cryogenic Sting"
 	desc = "We silently sting a biological with a cocktail of chemicals that freeze them."
-	helptext = "Does not provide a warning to the victim, though they will likely realize they are suddenly freezing."
+	helptext = "Does not provide a warning to the victim, though they will likely realize they are suddenly freezing.  Has \
+	a three minute cooldown between uses."
 	enhancedtext = "Increases the amount of chemicals injected."
 	genomecost = 1
 	verbpath = /mob/proc/changeling_cryo_sting

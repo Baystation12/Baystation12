@@ -33,10 +33,13 @@
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = src
 		H.restore_blood()
+		H.mutations.Remove(HUSK)
+		H.status_flags -= DISFIGURED
+		H.update_body(1)
 	C << "<span class='notice'>We have regenerated.</span>"
 	C.status_flags &= ~(FAKEDEATH)
 	C.update_canmove()
-	C.mind.changeling.purchasedpowers -= C
+	C.mind.changeling.purchased_powers -= C
 	feedback_add_details("changeling_powers","CR")
 	C.stat = CONSCIOUS
 	src.verbs -= /mob/proc/changeling_revive

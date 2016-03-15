@@ -4,6 +4,7 @@
 	On demand, we can attempt to recharge anything in our active hand, or we can touch someone with an electrified hand, shocking them."
 	helptext = "We can shock someone by grabbing them and using this ability, or using the ability with an empty hand and touching them.  \
 	Shocking someone costs ten chemicals per use."
+	enhancedtext = "Shocking biologicals without grabbing only requires five chemicals, and has more disabling power."
 	genomecost = 2
 	verbpath = /mob/proc/changeling_bioelectrogenesis
 
@@ -21,8 +22,14 @@
 		return 0
 
 	if(held_item == null)
-		if(changeling_generic_weapon(/obj/item/weapon/electric_hand,0))  //Chemical cost is handled in the equip proc.
-			return 1
+		if(src.mind.changeling.recursive_enhancement)
+			if(changeling_generic_weapon(/obj/item/weapon/electric_hand/efficent))
+				src << "<span class='notice'>We will shock others more efficently.</span>"
+				src.mind.changeling.recursive_enhancement = 0
+				return 1
+		else
+			if(changeling_generic_weapon(/obj/item/weapon/electric_hand,0))  //Chemical cost is handled in the equip proc.
+				return 1
 		return 0
 
 	else
@@ -30,12 +37,11 @@
 		if(istype(held_item,/obj/item/weapon/grab))
 			var/obj/item/weapon/grab/G = held_item
 			if(G.affecting)
-				G.affecting.electrocute_act(5,src,1.0,BP_TORSO)
-				var/agony = 60 //The same as a stunbaton.
-				var/stun = 0
-				G.affecting.stun_effect_act(stun, agony, BP_TORSO, src)
+				G.affecting.electrocute_act(10,src,1.0,BP_TORSO)
+				var/agony = 80 //Does more than if hit with an electric hand, since grabbing is slower.
+				G.affecting.stun_effect_act(0, agony, BP_TORSO, src)
 
-				msg_admin_attack("[key_name(src)] stunned [key_name(G.affecting)] with the [src].")
+				msg_admin_attack("[key_name(src)] shocked [key_name(G.affecting)] with the [src].")
 
 				visible_message("<span class='warning'>Arcs of electricity strike [G.affecting]!</span>",
 				"<span class='warning'>Our hand channels raw electricity into [G.affecting].</span>",
@@ -72,7 +78,7 @@
 					new /obj/effect/sparks(T)
 					held_item.update_icon()
 					i--
-					sleep(10)
+					sleep(1 SECOND)
 				success = 1
 			if(success == 0) //If we couldn't do anything with the ability, don't deduct the chemicals.
 				src << "<span class='warning'>We are unable to affect \the [held_item].</span>"
@@ -85,6 +91,14 @@
 	desc = "You could probably shock someone badly if you touched them, or recharge something."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "electric_hand"
+	var/shock_cost = 10
+	var/agony_amount = 60
+	var/electrocute_amount = 10
+
+/obj/item/weapon/electric_hand/efficent
+	shock_cost = 5
+	agony_amount = 80
+	electrocute_amount = 20
 
 /obj/item/weapon/electric_hand/New()
 	if(ismob(loc))
@@ -108,22 +122,20 @@
 	if(istype(target,/mob/living/carbon))
 		var/mob/living/carbon/C = target
 
-		if(user.mind.changeling.chem_charges < 10)
+		if(user.mind.changeling.chem_charges < shock_cost)
 			src << "<span class='warning'>We require more chemicals to electrocute [C]!</span>"
 			return 0
 
-		C.electrocute_act(5,src,1.0,BP_TORSO)
-		var/agony = 60 //The same as a stunbaton.
-		var/stun = 0
-		C.stun_effect_act(stun, agony, BP_TORSO, src)
+		C.electrocute_act(electrocute_amount,src,1.0,BP_TORSO)
+		C.stun_effect_act(0, agony_amount, BP_TORSO, src)
 
-		msg_admin_attack("[key_name(user)] stunned [key_name(C)] with the [src].")
+		msg_admin_attack("[key_name(user)] shocked [key_name(C)] with the [src].")
 
 		visible_message("<span class='warning'>Arcs of electricity strike [C]!</span>",
 		"<span class='warning'>Our hand channels raw electricity into [C]</span>",
 		"<span class='italics'>You hear sparks!</span>")
 		//qdel(src)  //Since we're no longer a one hit stun, we need to stick around.
-		user.mind.changeling.chem_charges -= 10
+		user.mind.changeling.chem_charges -= shock_cost
 		return 1
 
 	else if(istype(target,/mob/living/silicon))
@@ -163,7 +175,7 @@
 					new /obj/effect/sparks(Turf)
 					T.update_icon()
 					i--
-					sleep(10)
+					sleep(1 SECOND)
 				success = 1
 				break
 			if(success == 0)

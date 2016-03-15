@@ -1,10 +1,10 @@
 /datum/power/changeling/absorb_dna
 	name = "Absorb DNA"
-	desc = "Permits us to syphon the DNA from a human. They become one with us, and we become stronger."
+	desc = "Permits us to syphon the DNA from a human. They become one with us, and we become stronger if they were of our kind."
 	genomecost = 0
 	verbpath = /mob/proc/changeling_absorb_dna
 
-//Absorbs the victim's DNA making them uncloneable. Requires a strong grip on the victim.
+//Absorbs the victim's DNA. Requires a strong grip on the victim.
 //Doesn't cost anything as it's the most basic ability.
 /mob/proc/changeling_absorb_dna()
 	set category = "Changeling"
@@ -27,9 +27,10 @@
 		src << "<span class='warning'>We do not know how to parse this creature's DNA!</span>"
 		return
 
-	if(HUSK in T.mutations)
-		src << "<span class='warning'>This creature's DNA is ruined beyond useability!</span>"
-		return
+	if(HUSK in T.mutations) //Lings can always absorb other lings, unless someone beat them to it first.
+		if(!T.mind.changeling || T.mind.changeling && T.mind.changeling.geneticpoints < 0)
+			src << "<span class='warning'>This creature's DNA is ruined beyond useability!</span>"
+			return
 
 	if(G.state != GRAB_KILL)
 		src << "<span class='warning'>We must have a tighter grip to absorb this creature.</span>"

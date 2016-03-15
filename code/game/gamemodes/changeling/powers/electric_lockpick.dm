@@ -78,6 +78,7 @@
 		else //Probably broken or no power.
 			user << "<span class='warning'>The door does not respond to the pulse.</span>"
 		door.add_fingerprint(user)
+		log_and_message_admins("finger-lockpicked \an [door].")
 		ling_datum.chem_charges -= 10
 		return 1
 
@@ -86,7 +87,7 @@
 		user << "<span class='notice'>We send an electrical pulse up our finger, and into \the [O].</span>"
 		O.add_fingerprint(user)
 		O.emag_act(1,user,src)
-		log_and_message_admins("emagged \an [O].")
+		log_and_message_admins("finger-lockpicked \an [O].")
 		ling_datum.chem_charges -= 10
 
 		return 1

@@ -37,6 +37,8 @@
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 		H.b_type = "AB+" //For some reason we have two blood types on the mob.
+		for(var/flavor in H.flavor_texts) //Nulls out flavor text, so we don't keep our previous mob's flavor.
+			flavor = null
 	src.real_name = chosen_dna.real_name
 	src.flavor_text = ""
 	src.UpdateAppearance()

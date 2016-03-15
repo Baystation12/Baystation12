@@ -102,7 +102,7 @@ var/list/datum/power/changeling/powerinstances = list()
 
 					body += "<font size='2'><b>"+desc+"</b></font> <BR>"
 
-					body += "<font size='2'><font color = 'red'><b>"+helptext+"</b></font></font> <BR>"
+					body += "<font size='2'><font color = 'red'><b>"+helptext+"</b></font></font><BR>"
 
 					if(enhancedtext)
 					{
@@ -249,7 +249,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	for(var/datum/power/changeling/P in powerinstances)
 		var/ownsthis = 0
 
-		if(P in purchasedpowers)
+		if(P in purchased_powers)
 			ownsthis = 1
 
 
@@ -324,7 +324,7 @@ var/list/datum/power/changeling/powerinstances = list()
 		M.current << "This is awkward.  Changeling power purchase failed, please report this bug to a coder!"
 		return
 
-	if(Thepower in purchasedpowers)
+	if(Thepower in purchased_powers)
 		M.current << "We have already evolved this ability!"
 		return
 
@@ -335,7 +335,10 @@ var/list/datum/power/changeling/powerinstances = list()
 
 	geneticpoints -= Thepower.genomecost
 
-	purchasedpowers += Thepower
+	purchased_powers += Thepower
+
+	if(Thepower.genomecost > 0)
+		purchased_powers_history.Add("[Pname] ([Thepower.genomecost] points)")
 
 	if(!Thepower.isVerb && Thepower.verbpath)
 		call(M.current, Thepower.verbpath)()

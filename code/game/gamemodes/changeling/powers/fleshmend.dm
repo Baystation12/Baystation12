@@ -31,10 +31,10 @@
 				C.adjustBruteLoss(-heal_amount)
 				C.adjustOxyLoss(-heal_amount)
 				C.adjustFireLoss(-heal_amount)
-				sleep(10)
+				sleep(1 SECOND)
 
 	src.verbs -= /mob/proc/changeling_fleshmend
-	spawn(500)
+	spawn(50 SECONDS)
 		src << "<span class='notice'>Our regeneration has slowed to normal levels.</span>"
 		src.verbs += /mob/proc/changeling_fleshmend
 	feedback_add_details("changeling_powers","FM")
