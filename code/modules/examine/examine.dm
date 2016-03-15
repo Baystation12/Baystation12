@@ -66,6 +66,6 @@
 	if(..())
 		return 1
 
-	var/is_antag = ((mind && mind.special_role) || isobserver(src)) //ghosts don't have minds
+	var/is_antag = ((mind && mind.special_role) || isghost(src)) //ghosts don't have minds
 	if(client)
 		client.update_description_holders(A, is_antag)

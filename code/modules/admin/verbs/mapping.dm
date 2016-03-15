@@ -140,7 +140,6 @@ var/list/debug_verbs = list (
         ,/client/proc/ticklag
         ,/client/proc/cmd_admin_grantfullaccess
         ,/client/proc/kaboom
-        ,/client/proc/splash
         ,/client/proc/cmd_admin_areatest
         ,/client/proc/cmd_admin_rejuvenate
         ,/datum/admins/proc/show_traitor_panel

@@ -1,7 +1,7 @@
 /mob/proc/on_mob_jump()
 	return
 
-/mob/dead/observer/on_mob_jump()
+/mob/observer/ghost/on_mob_jump()
 	stop_following()
 
 /client/proc/Jump(var/area/A in return_sorted_areas())

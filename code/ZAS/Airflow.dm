@@ -43,9 +43,6 @@ mob/check_airflow_movable(n)
 		return 0
 	return 1
 
-mob/dead/observer/check_airflow_movable()
-	return 0
-
 mob/living/silicon/check_airflow_movable()
 	return 0
 
@@ -247,6 +244,6 @@ zone/proc/movables()
 	. = list()
 	for(var/turf/T in contents)
 		for(var/atom/movable/A in T)
-			if(!A.simulated || A.anchored || istype(A, /obj/effect) || istype(A, /mob/eye))
+			if(!A.simulated || A.anchored || istype(A, /obj/effect) || isobserver(A))
 				continue
 			. += A

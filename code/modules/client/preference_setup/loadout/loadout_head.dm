@@ -189,19 +189,19 @@
 	path = /obj/item/clothing/head/hijab/lightblue
 
 /datum/gear/head/hijab/lightbrown
-	display_name = "hijab, light brown "
+	display_name = "hijab, light brown"
 	path = /obj/item/clothing/head/hijab/lightbrown
 
 /datum/gear/head/hijab/lightgreen
-	display_name = "hijab, light green "
+	display_name = "hijab, light green"
 	path = /obj/item/clothing/head/hijab/lightgreen
 
 /datum/gear/head/hijab/lightpurple
-	display_name = "hijab, light purple "
+	display_name = "hijab, light purple"
 	path = /obj/item/clothing/head/hijab/lightpurple
 
 /datum/gear/head/hijab/lightred
-	display_name = "hijab, light red "
+	display_name = "hijab, light red"
 	path = /obj/item/clothing/head/hijab/lightred
 
 /datum/gear/head/hijab/maroon
@@ -231,3 +231,171 @@
 /datum/gear/head/hijab/yellow
 	display_name = "hijab, yellow"
 	path = /obj/item/clothing/head/hijab/yellow
+
+/datum/gear/head/kippa
+	display_name = "kippa, black"
+	path = /obj/item/clothing/head/kippa
+
+/datum/gear/head/kippa/white
+	display_name = "kippa, white"
+	path = /obj/item/clothing/head/kippa/white
+
+/datum/gear/head/kippa/aqua
+	display_name = "kippa, aqua"
+	path = /obj/item/clothing/head/kippa/aqua
+
+/datum/gear/head/kippa/blue
+	display_name = "kippa, blue"
+	path = /obj/item/clothing/head/kippa/blue
+
+/datum/gear/head/kippa/brown
+	display_name = "kippa, brown"
+	path = /obj/item/clothing/head/kippa/brown
+
+/datum/gear/head/kippa/darkblue
+	display_name = "kippa, dark blue"
+	path = /obj/item/clothing/head/kippa/darkblue
+
+/datum/gear/head/kippa/darkred
+	display_name = "kippa, dark red"
+	path = /obj/item/clothing/head/kippa/darkred
+
+/datum/gear/head/kippa/green
+	display_name = "kippa, green"
+	path = /obj/item/clothing/head/kippa/green
+
+/datum/gear/head/kippa/grey
+	display_name = "kippa, grey"
+	path = /obj/item/clothing/head/kippa/grey
+
+/datum/gear/head/kippa/lightblue
+	display_name = "kippa, light blue"
+	path = /obj/item/clothing/head/kippa/lightblue
+
+/datum/gear/head/kippa/lightbrown
+	display_name = "kippa, light brown"
+	path = /obj/item/clothing/head/kippa/lightbrown
+
+/datum/gear/head/kippa/lightgreen
+	display_name = "kippa, light green"
+	path = /obj/item/clothing/head/kippa/lightgreen
+
+/datum/gear/head/kippa/lightpurple
+	display_name = "kippa, light purple"
+	path = /obj/item/clothing/head/kippa/lightpurple
+
+/datum/gear/head/kippa/lightred
+	display_name = "kippa, light red"
+	path = /obj/item/clothing/head/kippa/lightred
+
+/datum/gear/head/kippa/maroon
+	display_name = "kippa, maroon"
+	path = /obj/item/clothing/head/kippa/maroon
+
+/datum/gear/head/kippa/orange
+	display_name = "kippa, orange"
+	path = /obj/item/clothing/head/kippa/orange
+
+/datum/gear/head/kippa/pink
+	display_name = "kippa, pink"
+	path = /obj/item/clothing/head/kippa/pink
+
+/datum/gear/head/kippa/purple
+	display_name = "kippa, purple"
+	path = /obj/item/clothing/head/kippa/purple
+
+/datum/gear/head/kippa/red
+	display_name = "kippa, red"
+	path = /obj/item/clothing/head/kippa/red
+
+/datum/gear/head/kippa/yellowgreen
+	display_name = "kippa, yellow green"
+	path = /obj/item/clothing/head/kippa/yellowgreen
+
+/datum/gear/head/kippa/yellow
+	display_name = "kippa, yellow"
+	path = /obj/item/clothing/head/kippa/yellow
+
+/datum/gear/head/turban
+	display_name = "turban, black"
+	path = /obj/item/clothing/head/turban
+
+/datum/gear/head/turban/white
+	display_name = "turban, white"
+	path = /obj/item/clothing/head/turban/white
+
+/datum/gear/head/turban/aqua
+	display_name = "turban, aqua"
+	path = /obj/item/clothing/head/turban/aqua
+
+/datum/gear/head/turban/blue
+	display_name = "turban, blue"
+	path = /obj/item/clothing/head/turban/blue
+
+/datum/gear/head/turban/brown
+	display_name = "turban, brown"
+	path = /obj/item/clothing/head/turban/brown
+
+/datum/gear/head/turban/darkblue
+	display_name = "turban, dark blue"
+	path = /obj/item/clothing/head/turban/darkblue
+
+/datum/gear/head/turban/darkred
+	display_name = "turban, dark red"
+	path = /obj/item/clothing/head/turban/darkred
+
+/datum/gear/head/turban/green
+	display_name = "turban, green"
+	path = /obj/item/clothing/head/turban/green
+
+/datum/gear/head/turban/grey
+	display_name = "turban, grey"
+	path = /obj/item/clothing/head/turban/grey
+
+/datum/gear/head/turban/lightblue
+	display_name = "turban, light blue"
+	path = /obj/item/clothing/head/turban/lightblue
+
+/datum/gear/head/turban/lightbrown
+	display_name = "turban, light brown"
+	path = /obj/item/clothing/head/turban/lightbrown
+
+/datum/gear/head/turban/lightgreen
+	display_name = "turban, light green"
+	path = /obj/item/clothing/head/turban/lightgreen
+
+/datum/gear/head/turban/lightpurple
+	display_name = "turban, light purple"
+	path = /obj/item/clothing/head/turban/lightpurple
+
+/datum/gear/head/turban/lightred
+	display_name = "turban, light red"
+	path = /obj/item/clothing/head/turban/lightred
+
+/datum/gear/head/turban/maroon
+	display_name = "turban, maroon"
+	path = /obj/item/clothing/head/turban/maroon
+
+/datum/gear/head/turban/orange
+	display_name = "turban, orange"
+	path = /obj/item/clothing/head/turban/orange
+
+/datum/gear/head/turban/pink
+	display_name = "turban, pink"
+	path = /obj/item/clothing/head/turban/pink
+
+/datum/gear/head/turban/purple
+	display_name = "turban, purple"
+	path = /obj/item/clothing/head/turban/purple
+
+/datum/gear/head/turban/red
+	display_name = "turban, red"
+	path = /obj/item/clothing/head/turban/red
+
+/datum/gear/head/turban/yellowgreen
+	display_name = "turban, yellow green"
+	path = /obj/item/clothing/head/turban/yellowgreen
+
+/datum/gear/head/turban/yellow
+	display_name = "turban, yellow"
+	path = /obj/item/clothing/head/turban/yellow
