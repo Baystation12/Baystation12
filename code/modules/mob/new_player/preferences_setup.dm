@@ -681,6 +681,8 @@ datum/preferences
 				var/datum/category_group/underwear/underwear_category = global_underwear.categories_by_name[underwear_category_name]
 				var/datum/category_item/underwear/underwear_item = underwear_category.items_by_name[underwear_item_name]
 				underwear_item.apply_to_icon(preview_icon)
+		if(clothes_s)
+			preview_icon.Blend(clothes_s, ICON_OVERLAY)
 
 		preview_icon_front = new(preview_icon, dir = SOUTH)
 		preview_icon_side = new(preview_icon, dir = WEST)
