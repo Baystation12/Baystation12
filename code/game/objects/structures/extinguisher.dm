@@ -28,7 +28,7 @@
 	update_icon()
 
 
-/obj/structure/extinguisher_cabinet/attack_hand(mob/user)
+/obj/structure/extinguisher_cabinet/attack_hand(mob/living/user)
 	if(isrobot(user))
 		return
 	if (ishuman(user))

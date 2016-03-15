@@ -500,9 +500,9 @@
 		if ("handshake")
 			m_type = 1
 			if (!src.restrained() && !src.r_hand)
-				var/mob/M = null
+				var/mob/living/M = null
 				if (param)
-					for (var/mob/A in view(1, null))
+					for (var/mob/living/A in view(1, null))
 						if (param == A.name)
 							M = A
 							break

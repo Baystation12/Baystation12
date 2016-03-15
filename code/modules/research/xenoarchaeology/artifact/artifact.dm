@@ -108,10 +108,9 @@
 	. = ..()
 	if(istype(AM,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = AM
-		if((istype(H.l_hand,/obj/item/weapon/pickaxe)) && (!H.hand))
-			attackby(H.l_hand,H)
-		else if((istype(H.r_hand,/obj/item/weapon/pickaxe)) && H.hand)
-			attackby(H.r_hand,H)
+		var/obj/item/weapon/pickaxe/P = H.get_inactive_hand()
+		if(istype(P))
+			src.attackby(P, H)
 
 	else if(istype(AM,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = AM

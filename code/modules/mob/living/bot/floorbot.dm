@@ -288,7 +288,7 @@
 
 /* Assembly */
 
-/obj/item/weapon/storage/toolbox/mechanical/attackby(var/obj/item/stack/tile/floor/T, mob/user as mob)
+/obj/item/weapon/storage/toolbox/mechanical/attackby(var/obj/item/stack/tile/floor/T, mob/living/user as mob)
 	if(!istype(T, /obj/item/stack/tile/floor))
 		..()
 		return

@@ -203,7 +203,7 @@
 	spawn(1) if(src) qdel(src)
 
 /obj/item/weapon/melee/energy/blade/process()
-	if(!creator || loc != creator || (creator.l_hand != src && creator.r_hand != src))
+	if(!creator || loc != creator || !creator.item_is_in_hands(src))
 		// Tidy up a bit.
 		if(istype(loc,/mob/living))
 			var/mob/living/carbon/human/host = loc

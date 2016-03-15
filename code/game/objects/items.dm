@@ -1,3 +1,4 @@
+
 /obj/item
 	name = "item"
 	icon = 'icons/obj/items.dmi'
@@ -79,8 +80,7 @@
 	if(ismob(loc))
 		var/mob/m = loc
 		m.drop_from_inventory(src)
-		m.update_inv_r_hand()
-		m.update_inv_l_hand()
+		m.update_held_icons()
 		src.loc = null
 	return ..()
 
@@ -89,8 +89,8 @@
 
 //Checks if the item is being held by a mob, and if so, updates the held icons
 /obj/item/proc/update_held_icon()
-	if(ismob(src.loc))
-		var/mob/M = src.loc
+	if(isliving(src.loc))
+		var/mob/living/M = src.loc
 		if(M.l_hand == src)
 			M.update_inv_l_hand()
 		else if(M.r_hand == src)
@@ -141,7 +141,7 @@
 			size = "huge"
 	return ..(user, distance, "", "It is a [size] item.")
 
-/obj/item/attack_hand(mob/user as mob)
+/obj/item/attack_hand(mob/living/user as mob)
 	if (!user) return
 	if (hasorgans(user))
 		var/mob/living/carbon/human/H = user
@@ -250,12 +250,8 @@
 	
 	//Update two-handing status
 	var/mob/M = loc
-	if(!istype(M))
-		return
-	if(M.l_hand)
-		M.l_hand.update_held_icon()
-	if(M.r_hand)
-		M.r_hand.update_held_icon()
+	if(istype(M))
+		M.update_held_icons()
 
 //Defines which slots correspond to which slot flags
 var/list/global/slot_flags_enumeration = list(
@@ -388,17 +384,15 @@ var/list/global/slot_flags_enumeration = list(
 	if((!istype(usr, /mob/living/carbon)) || (istype(usr, /mob/living/carbon/brain)))//Is humanoid, and is not a brain
 		usr << "<span class='warning'>You can't pick things up!</span>"
 		return
+	var/mob/living/carbon/C = usr
 	if( usr.stat || usr.restrained() )//Is not asleep/dead and is not restrained
 		usr << "<span class='warning'>You can't pick things up!</span>"
 		return
 	if(src.anchored) //Object isn't anchored
 		usr << "<span class='warning'>You can't pick that up!</span>"
 		return
-	if(!usr.hand && usr.r_hand) //Right hand is not full
-		usr << "<span class='warning'>Your right hand is full.</span>"
-		return
-	if(usr.hand && usr.l_hand) //Left hand is not full
-		usr << "<span class='warning'>Your left hand is full.</span>"
+	if(C.get_active_hand()) //Hand is not full
+		usr << "<span class='warning'>Your hand is full.</span>"
 		return
 	if(!istype(src.loc, /turf)) //Object is on a turf
 		usr << "<span class='warning'>You can't pick that up!</span>"

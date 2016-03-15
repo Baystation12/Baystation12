@@ -113,10 +113,10 @@
 	name = "holdout signal pistol"
 	magazine_type = /obj/item/ammo_magazine/mc9mm/flash
 
-/obj/item/weapon/gun/projectile/pistol/attack_hand(mob/user as mob)
+/obj/item/weapon/gun/projectile/pistol/attack_hand(mob/living/user as mob)
 	if(user.get_inactive_hand() == src)
 		if(silenced)
-			if(user.l_hand != src && user.r_hand != src)
+			if(!user.item_is_in_hands(src))
 				..()
 				return
 			user << "<span class='notice'>You unscrew [silenced] from [src].</span>"
@@ -127,9 +127,9 @@
 			return
 	..()
 
-/obj/item/weapon/gun/projectile/pistol/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/weapon/gun/projectile/pistol/attackby(obj/item/I as obj, mob/living/user as mob)
 	if(istype(I, /obj/item/weapon/silencer))
-		if(user.l_hand != src && user.r_hand != src)	//if we're not in his hands
+		if(!user.item_is_in_hands(src))	//if we're not in his hands
 			user << "<span class='notice'>You'll need [src] in your hands to do that.</span>"
 			return
 		user.drop_item()

@@ -83,7 +83,7 @@
 		if (3)
 			take_damage(1)
 
-/obj/item/organ/external/attack_self(var/mob/user)
+/obj/item/organ/external/attack_self(var/mob/living/user)
 	if(!contents.len)
 		return ..()
 	var/list/removable_objects = list()
@@ -98,8 +98,7 @@
 		var/obj/item/I = pick(removable_objects)
 		I.loc = get_turf(user) //just in case something was embedded that is not an item
 		if(istype(I))
-			if(!(user.l_hand && user.r_hand))
-				user.put_in_hands(I)
+			user.put_in_hands(I)
 		user.visible_message("<span class='danger'>\The [user] rips \the [I] out of \the [src]!</span>")
 		return //no eating the limb until everything's been removed
 	return ..()
@@ -113,7 +112,7 @@
 			usr << "<span class='danger'>There is \a [I] sticking out of it.</span>"
 	return
 
-/obj/item/organ/external/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/organ/external/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
 	switch(stage)
 		if(0)
 			if(istype(W,/obj/item/weapon/scalpel))
@@ -130,8 +129,7 @@
 				if(contents.len)
 					var/obj/item/removing = pick(contents)
 					removing.loc = get_turf(user.loc)
-					if(!(user.l_hand && user.r_hand))
-						user.put_in_hands(removing)
+					user.put_in_hands(removing)
 					user.visible_message("<span class='danger'><b>[user]</b> extracts [removing] from [src] with [W]!</span>")
 				else
 					user.visible_message("<span class='danger'><b>[user]</b> fishes around fruitlessly in [src] with [W].</span>")

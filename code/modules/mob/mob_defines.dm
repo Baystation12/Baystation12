@@ -56,7 +56,6 @@
 	var/other_mobs = null
 	var/next_move = null
 	var/transforming = null	//Carbon
-	var/hand = null
 	var/real_name = null
 
 	var/bhunger = 0			//Carbon
@@ -92,11 +91,6 @@
 	var/a_intent = I_HELP//Living
 	var/m_intent = "run"//Living
 	var/obj/buckled = null//Living
-	var/obj/item/l_hand = null//Living
-	var/obj/item/r_hand = null//Living
-	var/obj/item/weapon/back = null//Human/Monkey
-	var/obj/item/weapon/storage/s_active = null//Carbon
-	var/obj/item/clothing/mask/wear_mask = null//Carbon
 
 
 	var/datum/hud/hud_used = null

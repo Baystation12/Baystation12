@@ -875,3 +875,64 @@ default behaviour is:
 	src << "<b>You are now \the [src]!</b>"
 	src << "<span class='notice'>Remember to stay in character for a mob of this type!</span>"
 	return 1
+
+/mob/living/update_canmove()
+	if(!resting && cannot_stand() && can_stand_overridden())
+		lying = 0
+		canmove = 1
+	else
+		if(istype(buckled, /obj/vehicle))
+			var/obj/vehicle/V = buckled
+			if(cannot_stand())
+				lying = 0
+				canmove = 1
+				pixel_y = V.mob_offset_y - 5
+			else
+				if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
+				canmove = 1
+				pixel_y = V.mob_offset_y
+		else if(buckled)
+			anchored = 1
+			canmove = 0
+			if(istype(buckled))
+				if(buckled.buckle_lying != -1)
+					lying = buckled.buckle_lying
+				if(buckled.buckle_movable)
+					anchored = 0
+					canmove = 1
+
+		else if(cannot_stand())
+			lying = 1
+			canmove = 0
+		else if(stunned)
+			canmove = 0
+		else if(captured)
+			anchored = 1
+			canmove = 0
+			lying = 0
+		else
+			lying = 0
+			canmove = 1
+
+	if(lying)
+		density = 0
+		if(l_hand) unEquip(l_hand)
+		if(r_hand) unEquip(r_hand)
+	else
+		density = initial(density)
+
+	for(var/obj/item/weapon/grab/G in grabbed_by)
+		if(G.state >= GRAB_AGGRESSIVE)
+			canmove = 0
+			break
+
+	//Temporarily moved here from the various life() procs
+	//I'm fixing stuff incrementally so this will likely find a better home.
+	//It just makes sense for now. ~Carn
+	if( update_icon )	//forces a full overlay update
+		update_icon = 0
+		regenerate_icons()
+	else if( lying != lying_prev )
+		update_icons()
+	return canmove
+

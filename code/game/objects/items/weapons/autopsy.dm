@@ -149,8 +149,7 @@
 			scan_data += chemID
 			scan_data += "<br>"
 
-	for(var/mob/O in viewers(usr))
-		O.show_message("<span class='notice'>\The [src] rattles and prints out a sheet of paper.</span>", 1)
+	src.visible_message("<span class='notice'>\The [src] rattles and prints out a sheet of paper.</span>")
 
 	sleep(10)
 

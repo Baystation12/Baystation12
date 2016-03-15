@@ -15,7 +15,7 @@
 
 	var/mob/living/carbon/human/user = usr
 
-	if (!(user.l_hand == src || user.r_hand == src))
+	if(!user.item_is_in_hands(src))
 		return //bag must be in your hands to use
 
 	if (isturf(I.loc))
@@ -31,10 +31,8 @@
 			var/obj/item/weapon/storage/U = I.loc
 			user.client.screen -= I
 			U.contents.Remove(I)
-		else if(user.l_hand == I)					//in a hand
-			user.drop_l_hand()
-		else if(user.r_hand == I)					//in a hand
-			user.drop_r_hand()
+		else if(user.item_is_in_hands(I))
+			user.drop_from_inventory(I)
 		else
 			return
 

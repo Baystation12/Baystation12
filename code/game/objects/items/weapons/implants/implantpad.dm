@@ -24,8 +24,8 @@
 		return
 
 
-	attack_hand(mob/user as mob)
-		if ((src.case && (user.l_hand == src || user.r_hand == src)))
+	attack_hand(mob/living/user as mob)
+		if ((src.case && user.item_is_in_hands(src)))
 			user.put_in_active_hand(case)
 
 			src.case.add_fingerprint(user)

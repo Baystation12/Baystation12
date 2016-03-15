@@ -12,7 +12,7 @@
 
 	var/code = 2
 
-/obj/item/device/radio/electropack/attack_hand(mob/user as mob)
+/obj/item/device/radio/electropack/attack_hand(mob/living/user as mob)
 	if(src == user.back)
 		user << "<span class='notice'>You need help taking this off!</span>"
 		return
