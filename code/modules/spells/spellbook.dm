@@ -317,10 +317,10 @@
 	icon_state ="booksmoke"
 	desc = "This book is overflowing with the dank arts."
 
-/obj/item/weapon/spellbook/oneuse/smoke/recoil(mob/user as mob)
+/obj/item/weapon/spellbook/oneuse/smoke/recoil(mob/living/carbon/user as mob)
 	..()
 	user <<"<span class='caution'>Your stomach rumbles...</span>"
-	if(user.nutrition)
+	if(istype(user) && user.nutrition)
 		user.nutrition -= 200
 		if(user.nutrition <= 0)
 			user.nutrition = 0
@@ -331,7 +331,7 @@
 	icon_state ="bookblind"
 	desc = "This book looks blurry, no matter how you look at it."
 
-/obj/item/weapon/spellbook/oneuse/blind/recoil(mob/user as mob)
+/obj/item/weapon/spellbook/oneuse/blind/recoil(mob/living/user as mob)
 	..()
 	user <<"<span class='warning'>You go blind!</span>"
 	user.eye_blind = 10

@@ -7,14 +7,17 @@
 	advanced post-scarcity culture on good terms with Skrellian and Human interests."
 
 	num_alternate_languages = 2
-	secondary_langs = list("Resomi")
-	name_language = "Resomi"
+	secondary_langs = list(LANGUAGE_RESOMI)
+	name_language = LANGUAGE_RESOMI
+	min_age = 12
+	max_age = 45
 
 	blood_color = "#D514F7"
 	flesh_color = "#5F7BB0"
 	base_color = "#001144"
 	tail = "resomitail"
 	tail_hair = "feathers"
+	reagent_tag = IS_RESOMI
 
 	icobase = 'icons/mob/human_races/r_resomi.dmi'
 	deform = 'icons/mob/human_races/r_resomi.dmi'
@@ -31,6 +34,8 @@
 	holder_type = /obj/item/weapon/holder/human
 	short_sighted = 1
 	gluttonous = GLUT_TINY
+	blood_volume = 400
+	hunger_factor = 0.2
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR

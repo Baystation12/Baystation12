@@ -1,5 +1,3 @@
-//So much copypasta in this file, supposedly in the name of performance. If you change anything make sure to consider other places where the code may have been copied.
-
 /datum/light_source
 	var/atom/top_atom
 	var/atom/source_atom
@@ -13,10 +11,9 @@
 	var/lum_g
 	var/lum_b
 
-	//hold onto the actual applied lum values so we can undo them when the lighting changes
-	var/tmp/applied_lum_r
-	var/tmp/applied_lum_g
-	var/tmp/applied_lum_b
+	var/tmp/old_lum_r
+	var/tmp/old_lum_g
+	var/tmp/old_lum_b
 
 	var/list/effect_str
 	var/list/effect_turf
@@ -110,6 +107,11 @@
 	if(light_range && light_power && !applied)
 		. = 1
 
+	if(. || source_atom.light_color != light_color)//Save the old lumcounts if we need to update, if the colour changed DO IT BEFORE we parse the colour and LOSE the old lumcounts!
+		old_lum_r = lum_r
+		old_lum_g = lum_g
+		old_lum_b = lum_b
+
 	if(source_atom.light_color != light_color)
 		light_color = source_atom.light_color
 		parse_light_color()
@@ -147,12 +149,6 @@
 
 /datum/light_source/proc/apply_lum()
 	applied = 1
-
-	//Keep track of the last applied lum values so that the lighting can be reversed
-	applied_lum_r = lum_r
-	applied_lum_g = lum_g
-	applied_lum_b = lum_b
-
 	if(istype(source_turf))
 		FOR_DVIEW(var/turf/T, light_range, source_turf, INVISIBILITY_LIGHTING)
 			if(T.lighting_overlay)
@@ -168,9 +164,9 @@
 				effect_str += strength
 
 				T.lighting_overlay.update_lumcount(
-					applied_lum_r * strength,
-					applied_lum_g * strength,
-					applied_lum_b * strength
+					lum_r * strength,
+					lum_g * strength,
+					lum_b * strength
 				)
 
 			else
@@ -192,11 +188,7 @@
 
 		if(T.lighting_overlay)
 			var/str = effect_str[i]
-			T.lighting_overlay.update_lumcount(
-				-str * applied_lum_r, 
-				-str * applied_lum_g, 
-				-str * applied_lum_b
-			)
+			T.lighting_overlay.update_lumcount(-str * old_lum_r, -str * old_lum_g, -str * old_lum_b)
 
 		i++
 
@@ -226,9 +218,9 @@
 			effect_str += .
 
 			T.lighting_overlay.update_lumcount(
-				applied_lum_r * .,
-				applied_lum_g * .,
-				applied_lum_b * .
+				lum_r * .,
+				lum_g * .,
+				lum_b * .
 			)
 
 		else
@@ -249,7 +241,7 @@
 
 		if(T.lighting_overlay)
 			var/str = effect_str[idx]
-			T.lighting_overlay.update_lumcount(-str * applied_lum_r, -str * applied_lum_g, -str * applied_lum_b)
+			T.lighting_overlay.update_lumcount(-str * lum_r, -str * lum_g, -str * lum_b)
 
 		effect_turf.Cut(idx, idx + 1)
 		effect_str.Cut(idx, idx + 1)
@@ -287,12 +279,10 @@
 
 		effect_str[idx] = .
 
-		//Since the applied_lum values are what are (later) removed by remove_lum.
-		//Anything we apply to the lighting overlays HAS to match what remove_lum uses.
 		T.lighting_overlay.update_lumcount(
-			applied_lum_r * .,
-			applied_lum_g * .,
-			applied_lum_b * .
+			lum_r * .,
+			lum_g * .,
+			lum_b * .
 		)
 
 #undef LUM_FALLOFF

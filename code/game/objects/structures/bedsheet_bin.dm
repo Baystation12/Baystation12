@@ -7,8 +7,8 @@ LINEN BINS
 /obj/item/weapon/bedsheet
 	name = "bedsheet"
 	desc = "A surprisingly soft linen bedsheet."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "sheet"
+	icon = 'icons/obj/bedsheets.dmi'
+	icon_state = "sheetwhite"
 	item_state = "bedsheet"
 	layer = 4.0
 	throwforce = 1
@@ -27,50 +27,65 @@ LINEN BINS
 
 /obj/item/weapon/bedsheet/attackby(obj/item/I, mob/user)
 	if(is_sharp(I))
-		user.visible_message("<span class='notice'>\The [user] begins cutting up [src] with [I].</span>", "<span class='notice'>You begin cutting up [src] with [I].</span>")
-		if(do_after(user, 50))
-			user << "<span class='notice'>You cut [src] into pieces!</span>"
+		user.visible_message("<span class='notice'>\The [user] begins cutting up \the [src] with \a [I].</span>", "<span class='notice'>You begin cutting up \the [src] with \the [I].</span>")
+		if(do_after(user, 50, src))
+			user << "<span class='notice'>You cut \the [src] into pieces!</span>"
 			for(var/i in 1 to rand(2,5))
 				new /obj/item/weapon/reagent_containers/glass/rag(get_turf(src))
 			qdel(src)
 		return
 	..()
 
-/obj/item/weapon/bedsheet/blue
-	icon_state = "sheetblue"
-
-/obj/item/weapon/bedsheet/green
-	icon_state = "sheetgreen"
-
-/obj/item/weapon/bedsheet/orange
-	icon_state = "sheetorange"
-
-/obj/item/weapon/bedsheet/purple
-	icon_state = "sheetpurple"
-
-/obj/item/weapon/bedsheet/rainbow
-	icon_state = "sheetrainbow"
+/obj/item/weapon/bedsheet/grey
+	icon_state = "sheetgrey"
 
 /obj/item/weapon/bedsheet/red
 	icon_state = "sheetred"
 
+/obj/item/weapon/bedsheet/orange
+	icon_state = "sheetorange"
+
 /obj/item/weapon/bedsheet/yellow
 	icon_state = "sheetyellow"
 
-/obj/item/weapon/bedsheet/mime
-	icon_state = "sheetmime"
+/obj/item/weapon/bedsheet/green
+	icon_state = "sheetgreen"
+
+/obj/item/weapon/bedsheet/blue
+	icon_state = "sheetblue"
+
+/obj/item/weapon/bedsheet/purple
+	icon_state = "sheetpurple"
+
+/obj/item/weapon/bedsheet/brown
+	icon_state = "sheetbrown"
+
+/obj/item/weapon/bedsheet/black
+	icon_state = "sheetblack"
+
+/obj/item/weapon/bedsheet/rainbow
+	icon_state = "sheetrainbow"
 
 /obj/item/weapon/bedsheet/clown
 	icon_state = "sheetclown"
 
-/obj/item/weapon/bedsheet/captain
-	icon_state = "sheetcaptain"
+/obj/item/weapon/bedsheet/mime
+	icon_state = "sheetmime"
+
+/obj/item/weapon/bedsheet/qm
+	icon_state = "sheetqm"
+
+/obj/item/weapon/bedsheet/medical
+	icon_state = "sheetmedical"
+
+/obj/item/weapon/bedsheet/cmo
+	icon_state = "sheetcmo"
 
 /obj/item/weapon/bedsheet/rd
 	icon_state = "sheetrd"
 
-/obj/item/weapon/bedsheet/medical
-	icon_state = "sheetmedical"
+/obj/item/weapon/bedsheet/ce
+	icon_state = "sheetce"
 
 /obj/item/weapon/bedsheet/hos
 	icon_state = "sheethos"
@@ -78,11 +93,26 @@ LINEN BINS
 /obj/item/weapon/bedsheet/hop
 	icon_state = "sheethop"
 
-/obj/item/weapon/bedsheet/ce
-	icon_state = "sheetce"
+/obj/item/weapon/bedsheet/captain
+	icon_state = "sheetcaptain"
 
-/obj/item/weapon/bedsheet/brown
-	icon_state = "sheetbrown"
+/obj/item/weapon/bedsheet/ian
+	icon_state = "sheetian"
+
+/obj/item/weapon/bedsheet/centcom
+	icon_state = "sheetcentcom"
+
+/obj/item/weapon/bedsheet/syndie
+	icon_state = "sheetsyndie"
+
+/obj/item/weapon/bedsheet/cult
+	icon_state = "sheetcult"
+
+/obj/item/weapon/bedsheet/wizard
+	icon_state = "sheetwiz"
+
+/obj/item/weapon/bedsheet/usa
+	icon_state = "sheetUSA"
 
 
 /obj/structure/bedsheetbin
@@ -122,6 +152,7 @@ LINEN BINS
 		sheets.Add(I)
 		amount++
 		user << "<span class='notice'>You put [I] in [src].</span>"
+		update_icon()
 	else if(amount && !hidden && I.w_class < 4)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
 		user.drop_item()
 		I.loc = src
@@ -149,7 +180,7 @@ LINEN BINS
 			user << "<span class='notice'>[hidden] falls out of [B]!</span>"
 			hidden = null
 
-
+	update_icon()
 	add_fingerprint(user)
 
 /obj/structure/bedsheetbin/attack_tk(mob/user as mob)
@@ -172,5 +203,5 @@ LINEN BINS
 			hidden.loc = loc
 			hidden = null
 
-
+	update_icon()
 	add_fingerprint(user)

@@ -124,6 +124,7 @@
 		new /obj/item/weapon/melee/telebaton(src)
 		new /obj/item/clothing/head/beret/sec/corporate/hos(src)
 		new /obj/item/clothing/accessory/badge/hos(src)
+		new /obj/item/device/flashlight/seclite(src)
 		return
 
 
@@ -164,8 +165,8 @@
 		new /obj/item/weapon/storage/box/holobadge(src)
 		new /obj/item/clothing/head/beret/sec/corporate/warden(src)
 		new /obj/item/clothing/accessory/badge/warden(src)
+		new /obj/item/device/flashlight/seclite(src)
 		return
-
 
 
 /obj/structure/closet/secure_closet/security
@@ -200,6 +201,7 @@
 		new /obj/item/clothing/head/soft/sec/corp(src)
 		new /obj/item/clothing/under/rank/security/corp(src)
 		new /obj/item/weapon/gun/energy/taser(src)
+		new /obj/item/device/flashlight/seclite(src)
 		return
 
 

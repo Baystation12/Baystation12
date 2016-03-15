@@ -1,5 +1,6 @@
 // Macro functions.
 #define RAND_F(LOW, HIGH) (rand()*(HIGH-LOW) + LOW)
+#define ceil(x) (-round(-(x)))
 
 // min is inclusive, max is exclusive
 /proc/Wrap(val, min, max)

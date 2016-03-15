@@ -157,7 +157,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 
 /client/proc/playtitlemusic()
 	if(!ticker || !ticker.login_music)	return
-	if(prefs.toggles & SOUND_LOBBY)
+	if(is_preference_enabled(/datum/client_preference/play_lobby_music))
 		src << sound(ticker.login_music, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS
 
 /proc/get_rand_frequency()

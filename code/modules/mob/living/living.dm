@@ -100,6 +100,14 @@ default behaviour is:
 				if(prob(99))
 					now_pushing = 0
 					return
+			if(tmob.r_hand && istype(tmob.r_hand, /obj/item/weapon/shield/metal))
+				if(prob(99))
+					now_pushing = 0
+					return
+			if(tmob.l_hand && istype(tmob.l_hand, /obj/item/weapon/shield/metal))
+				if(prob(99))
+					now_pushing = 0
+					return
 			if(!(tmob.status_flags & CANPUSH))
 				now_pushing = 0
 				return
@@ -158,9 +166,9 @@ default behaviour is:
 
 /mob/living/verb/succumb()
 	set hidden = 1
-	if ((src.health < 0 && src.health > -95.0))
-		src.adjustOxyLoss(src.health + 200)
-		src.health = 100 - src.getOxyLoss() - src.getToxLoss() - src.getFireLoss() - src.getBruteLoss()
+	if ((src.health < 0 && src.health > (5-src.maxHealth))) // Health below Zero but above 5-away-from-death, as before, but variable
+		src.adjustOxyLoss(src.health + src.maxHealth * 2) // Deal 2x health in OxyLoss damage, as before but variable.
+		src.health = src.maxHealth - src.getOxyLoss() - src.getToxLoss() - src.getFireLoss() - src.getBruteLoss()
 		src << "\blue You have given up life and succumbed to death."
 
 
@@ -428,7 +436,6 @@ default behaviour is:
 
 	// shut down ongoing problems
 	radiation = 0
-	nutrition = 400
 	bodytemperature = T20C
 	sdisabilities = 0
 	disabilities = 0
@@ -604,11 +611,13 @@ default behaviour is:
 	//unbuckling yourself
 	if(buckled)
 		spawn() escape_buckle()
+		return TRUE
 
 	//Breaking out of a locker?
 	if( src.loc && (istype(src.loc, /obj/structure/closet)) )
 		var/obj/structure/closet/C = loc
 		spawn() C.mob_breakout(src)
+		return TRUE
 
 /mob/living/proc/escape_inventory(obj/item/weapon/holder/H)
 	if(H != src.loc) return

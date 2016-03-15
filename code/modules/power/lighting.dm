@@ -47,8 +47,8 @@
 	if (istype(W, /obj/item/weapon/wrench))
 		if (src.stage == 1)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-			usr << "You begin deconstructing [src]."
-			if (!do_after(usr, 30))
+			usr << "You begin deconstructing \a [src]."
+			if (!do_after(usr, 30,src))
 				return
 			new /obj/item/stack/material/steel( get_turf(src.loc), sheets_refunded )
 			user.visible_message("[user.name] deconstructs [src].", \
@@ -160,7 +160,7 @@
 	icon_state = "bulb1"
 	base_state = "bulb"
 	fitting = "bulb"
-	brightness_range = 4
+	brightness_range = 6
 	brightness_power = 2
 	brightness_color = "#a0a080"
 	desc = "A small lighting fixture."
@@ -273,7 +273,7 @@
 	if(!(status == LIGHT_OK||status == LIGHT_BURNED))
 		return
 	visible_message("<span class='danger'>[user] smashes the light!</span>")
-	user.do_attack_animation(src)
+	attack_animation(user)
 	broken()
 	return 1
 

@@ -2,7 +2,6 @@
 	name = "chair"
 	desc = "You sit in this. Either by will or force."
 	icon_state = "chair_preview"
-	color = "#666666"
 	base_icon = "chair"
 	buckle_dir = 0
 	buckle_lying = 0 //force people to sit up in chairs when buckled
@@ -92,32 +91,59 @@
 	desc = "It's a chair. It looks comfy."
 	icon_state = "comfychair_preview"
 
-/obj/structure/bed/chair/comfy/brown/New(var/newloc,var/newmaterial)
-	..(newloc,"steel","leather")
+/obj/structure/bed/chair/comfy/brown
+	color = "#BA5100"
 
-/obj/structure/bed/chair/comfy/red/New(var/newloc,var/newmaterial)
-	..(newloc,"steel","carpet")
+	New(var/newloc,var/newmaterial)
+		..(newloc,"steel","leather")
 
-/obj/structure/bed/chair/comfy/teal/New(var/newloc,var/newmaterial)
-	..(newloc,"steel","teal")
+/obj/structure/bed/chair/comfy/red
+	color = "#DA020A"
 
-/obj/structure/bed/chair/comfy/black/New(var/newloc,var/newmaterial)
-	..(newloc,"steel","black")
+	New(var/newloc,var/newmaterial)
+		..(newloc,"steel","carpet")
 
-/obj/structure/bed/chair/comfy/green/New(var/newloc,var/newmaterial)
-	..(newloc,"steel","green")
+/obj/structure/bed/chair/comfy/teal
+	color = "#00BABA"
 
-/obj/structure/bed/chair/comfy/purp/New(var/newloc,var/newmaterial)
-	..(newloc,"steel","purple")
+	New(var/newloc,var/newmaterial)
+		..(newloc,"steel","teal")
 
-/obj/structure/bed/chair/comfy/blue/New(var/newloc,var/newmaterial)
-	..(newloc,"steel","blue")
+/obj/structure/bed/chair/comfy/black
+	color = "#64625C"
 
-/obj/structure/bed/chair/comfy/beige/New(var/newloc,var/newmaterial)
-	..(newloc,"steel","beige")
+	New(var/newloc,var/newmaterial)
+		..(newloc,"steel","black")
 
-/obj/structure/bed/chair/comfy/lime/New(var/newloc,var/newmaterial)
-	..(newloc,"steel","lime")
+/obj/structure/bed/chair/comfy/green
+	color = "#01C608"
+
+	New(var/newloc,var/newmaterial)
+		..(newloc,"steel","green")
+
+/obj/structure/bed/chair/comfy/purp
+	color = "#9C56C4"
+
+	New(var/newloc,var/newmaterial)
+		..(newloc,"steel","purple")
+
+/obj/structure/bed/chair/comfy/blue
+	color = "#6B6FE3"
+
+	New(var/newloc,var/newmaterial)
+		..(newloc,"steel","blue")
+
+/obj/structure/bed/chair/comfy/beige
+	color = "#C9C699"
+
+	New(var/newloc,var/newmaterial)
+		..(newloc,"steel","beige")
+
+/obj/structure/bed/chair/comfy/lime
+	color = "#BAB700"
+
+	New(var/newloc,var/newmaterial)
+		..(newloc,"steel","lime")
 
 /obj/structure/bed/chair/office
 	anchored = 0
@@ -205,3 +231,21 @@
 
 /obj/structure/bed/chair/wood/wings
 	icon_state = "wooden_chair_wings"
+
+//sofa
+/obj/structure/bed/chair/sofa
+	name = "old ratty sofa"
+	icon_state = "sofamiddle"
+	anchored = 1
+
+/obj/structure/bed/chair/sofa/left
+	icon_state = "sofaend_left"
+/obj/structure/bed/chair/sofa/right
+	icon_state = "sofaend_right"
+/obj/structure/bed/chair/sofa/corner
+	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/New(var/newloc)
+	..(newloc, "steel")
+/obj/structure/bed/chair/sofa/update_icon()
+	return

@@ -9,8 +9,10 @@
 	interests, rampant cyber and bio-augmentation and secretive factions make life on most human \
 	worlds tumultous at best."
 	num_alternate_languages = 2
-	secondary_langs = list("Sol Common")
+	secondary_langs = list(LANGUAGE_SOL_COMMON)
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
+	min_age = 17
+	max_age = 110
 
 	spawn_flags = CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
@@ -32,8 +34,11 @@
 	slowdown = 0.5
 	brute_mod = 0.8
 	num_alternate_languages = 2
-	secondary_langs = list("Sinta'unathi")
-	name_language = "Sinta'unathi"
+	secondary_langs = list(LANGUAGE_UNATHI)
+	name_language = LANGUAGE_UNATHI
+
+	min_age = 18
+	max_age = 60
 
 	blurb = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
@@ -89,8 +94,11 @@
 	burn_mod =  1.15
 	gluttonous = GLUT_TINY
 	num_alternate_languages = 2
-	secondary_langs = list("Siik'tajr")
-	name_language = "Siik'tajr"
+	secondary_langs = list(LANGUAGE_SIIK_MAAS)
+	name_language = LANGUAGE_SIIK_MAAS
+
+	min_age = 17
+	max_age = 80
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
 	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
@@ -113,6 +121,8 @@
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
+
+	reagent_tag = IS_TAJARA
 
 	heat_discomfort_level = 292
 	heat_discomfort_strings = list(
@@ -140,8 +150,11 @@
 	herbivores on the whole and tend to be co-operative with the other species of the galaxy, although they rarely reveal \
 	the secrets of their empire to their allies."
 	num_alternate_languages = 2
-	secondary_langs = list("Skrellian")
+	secondary_langs = list(LANGUAGE_SKRELLIAN)
 	name_language = null
+
+	min_age = 19
+	max_age = 80
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
@@ -157,7 +170,7 @@
 	name_plural = "Dionaea"
 	icobase = 'icons/mob/human_races/r_diona.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
-	language = "Rootspeak"
+	language = LANGUAGE_ROOTSPEAK
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	//primitive_form = "Nymph"
 	slowdown = 7
@@ -167,7 +180,10 @@
 	eyes = "blank_eyes"
 	show_ssd = "completely quiescent"
 	num_alternate_languages = 1
-	name_language = "Rootspeak"
+	name_language = LANGUAGE_ROOTSPEAK
+
+	min_age = 1
+	max_age = 300
 
 	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
 	species hailing from Epsilon Ursae Minoris. Each 'diona' is a cluster of numerous cat-sized organisms called nymphs; \
@@ -258,11 +274,14 @@
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
 
-	language = "Encoded Audio Language"
+	language = LANGUAGE_EAL
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	rarity_value = 2
 	num_alternate_languages = 1 // potentially could be 2?
-	name_language = "Encoded Audio Language"
+	name_language = LANGUAGE_EAL
+
+	min_age = 1
+	max_age = 90
 
 	eyes = "blank_eyes"
 	brute_mod = 1.875 // 100% * 1.875 * 0.8 (robolimbs) ~= 150%
@@ -298,7 +317,8 @@
 	has_organ = list(
 		"brain" = /obj/item/organ/mmi_holder/posibrain,
 		"cell" = /obj/item/organ/cell,
-		"optics" = /obj/item/organ/optical_sensor
+		"optics" = /obj/item/organ/optical_sensor,
+		"cooler" = /obj/item/organ/cooler
 		)
 
 	vision_organ = "optics"
@@ -317,6 +337,9 @@
 		"r_foot" = list("path" = /obj/item/organ/external/foot/right/ipc)
 		)
 
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/toggle_cooler
+		)
 
 	heat_discomfort_level = 373.15
 	heat_discomfort_strings = list(

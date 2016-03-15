@@ -47,6 +47,10 @@
 	interact(mob/user as mob)					//Called when attack_self is called
 		return
 
+	CanUseTopic(var/mob/M)
+		if(..() && !in_range(loc, usr))
+			return STATUS_CLOSE
+		return STATUS_INTERACTIVE
 
 	process_cooldown()
 		cooldown--
@@ -136,6 +140,11 @@
 
 	interact(mob/user as mob)
 		return //HTML MENU FOR WIRES GOES HERE
+
+/obj/item/device/assembly/nano_host()
+    if(istype(loc, /obj/item/device/assembly_holder))
+        return loc.nano_host()
+    return ..()
 
 /*
 	var/small_icon_state = null//If this obj will go inside the assembly use this for icons

@@ -4,6 +4,7 @@
  *		Grass
  *		Wood
  *		Carpet
+ *		Linoleum
  */
 
 /obj/item/stack/tile
@@ -81,12 +82,6 @@
 	throw_range = 20
 	flags = CONDUCT
 
-/obj/item/stack/tile/floor_red
-	name = "red floor tile"
-	singular_name = "red floor tile"
-	color = COLOR_RED_GRAY
-	icon_state = "tile_white"
-
 /obj/item/stack/tile/floor_steel
 	name = "steel floor tile"
 	singular_name = "steel floor tile"
@@ -98,12 +93,6 @@
 	singular_name = "white floor tile"
 	icon_state = "tile_white"
 	matter = list("plastic" = 937.5)
-
-/obj/item/stack/tile/floor_yellow
-	name = "yellow floor tile"
-	singular_name = "yellow floor tile"
-	color = COLOR_BROWN
-	icon_state = "tile_white"
 
 /obj/item/stack/tile/floor_dark
 	name = "dark floor tile"
@@ -126,3 +115,14 @@
 	charge_costs = list(250)
 	stacktype = /obj/item/stack/tile/floor
 	build_type = /obj/item/stack/tile/floor
+
+/obj/item/stack/tile/linoleum
+	name = "linoleum"
+	singular_name = "linoleum"
+	desc = "A piece of linoleum. It is the same size as a normal floor tile!"
+	icon_state = "tile-linoleum"
+	force = 1.0
+	throwforce = 1.0
+	throw_speed = 5
+	throw_range = 20
+	flags = 0

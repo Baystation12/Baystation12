@@ -171,6 +171,12 @@
 		open()
 		return 1
 
+/obj/machinery/door/emp_act(severity)
+	if(prob(20/severity))
+		spawn(0)
+			open()
+	..()
+
 /obj/machinery/door/window/attackby(obj/item/weapon/I as obj, mob/user as mob)
 
 	//If it's in the process of opening/closing, ignore the click
@@ -192,7 +198,7 @@
 	if (src.operating == -1 && istype(I, /obj/item/weapon/crowbar))
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		user.visible_message("[user] removes the electronics from the windoor.", "You start to remove electronics from the windoor.")
-		if (do_after(user,40))
+		if (do_after(user,40,src))
 			user << "<span class='notice'>You removed the windoor electronics!</span>"
 
 			var/obj/structure/windoor_assembly/wa = new/obj/structure/windoor_assembly(src.loc)

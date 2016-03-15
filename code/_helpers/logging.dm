@@ -21,7 +21,7 @@
 	world.log << "## TESTING: [msg][log_end]"
 
 /proc/game_log(category, text)
-	diary << "\[[time_stamp()]] [game_id] [category]: [text][log_end]"
+	diary << "\[[time_stamp()]] [game_id] [category]: [sanitize_local(text, SANITIZE_LOG)][log_end]"
 
 /proc/log_admin(text)
 	admin_log.Add(text)
@@ -33,7 +33,7 @@
 		game_log("DEBUG", text)
 
 	for(var/client/C in admins)
-		if(C.prefs.toggles & CHAT_DEBUGLOGS)
+		if(C.is_preference_enabled(/datum/client_preference/admin/show_debug_logs))
 			C << "DEBUG: [text]"
 
 /proc/log_game(text)
@@ -90,7 +90,7 @@
 
 /proc/log_unit_test(text)
 	world.log << "## UNIT_TEST ##: [text]"
-	
+	log_debug(text)
 
 //pretty print a direction bitflag, can be useful for debugging.
 /proc/print_dir(var/dir)

@@ -138,8 +138,6 @@ datum/hSB
 							continue
 						if(istype(O, /obj/item/device/camera))
 							continue
-						if(istype(O, /obj/item/weapon/cloaking_device))
-							continue
 						if(istype(O, /obj/item/weapon/dummy))
 							continue
 						if(istype(O, /obj/item/weapon/melee/energy/sword))

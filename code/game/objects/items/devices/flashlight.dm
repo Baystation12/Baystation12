@@ -13,6 +13,8 @@
 	action_button_name = "Toggle Flashlight"
 	var/on = 0
 	var/brightness_on = 4 //luminosity when on
+	var/sound_toggleON = 'sound/items/flashlight_on.ogg'
+	var/sound_toggleOFF = 'sound/items/flashlight_off.ogg'
 
 /obj/item/device/flashlight/initialize()
 	..()
@@ -31,6 +33,10 @@
 		user << "You cannot turn the light on while in this [user.loc]." //To prevent some lighting anomalities.
 		return 0
 	on = !on
+	if(on && sound_toggleON)
+		playsound(loc, sound_toggleON, 30, 1, -1)
+	else if(!on && sound_toggleOFF)
+		playsound(loc, sound_toggleOFF, 30, 1, -1)
 	update_icon()
 	user.update_action_buttons()
 	return 1
@@ -40,7 +46,7 @@
 	add_fingerprint(user)
 	if(on && user.zone_sel.selecting == "eyes")
 
-		if(((CLUMSY in user.mutations) || user.getBrainLoss() >= 60) && prob(50))	//too dumb to use flashlight properly
+		if((CLUMSY in user.mutations) && prob(50))	//too dumb to use flashlight properly
 			return ..()	//just hit them in the head
 
 		var/mob/living/carbon/human/H = M	//mob has protective eyewear
@@ -95,6 +101,15 @@
 	brightness_on = 2
 	w_class = 1
 
+/obj/item/device/flashlight/seclite
+	name = "seclite"
+	desc = "A robust flashlight used by security."
+	icon_state = "seclite"
+	item_state = "seclite"
+	force = 9 // Not as good as a stun baton.
+	brightness_on = 5 // A little better than the standard flashlight.
+	hitsound = 'sound/weapons/genhit1.ogg'
+
 /obj/item/device/flashlight/drone
 	name = "low-power flashlight"
 	desc = "A miniature lamp, that might be used by small robots."
@@ -133,7 +148,14 @@
 
 	if(!usr.stat)
 		attack_self(usr)
-
+/* нет спрайта в руке, пожождём пока дорисуют
+//Bananalamp
+obj/item/device/flashlight/lamp/bananalamp
+	name = "banana lamp"
+	desc = "Only a clown would think to make a ghetto banana-shaped lamp. Even has a goofy pullstring."
+	icon_state = "bananalamp"
+	item_state = "bananalamp"
+*/
 // FLARES
 
 /obj/item/device/flashlight/flare
@@ -163,6 +185,7 @@
 		turn_off()
 		if(!fuel)
 			src.icon_state = "[initial(icon_state)]-empty"
+			src.item_state = "[initial(item_state)]"
 		processing_objects -= src
 
 /obj/item/device/flashlight/flare/proc/turn_off()
@@ -172,28 +195,40 @@
 	update_icon()
 
 /obj/item/device/flashlight/flare/attack_self(mob/user)
+	if(turn_on(user))
+		user.visible_message("<span class='notice'>\The [user] activates \the [src].</span>", "<span class='notice'>You pull the cord on the flare, activating it!</span>")
 
-	// Usual checks
-	if(!fuel)
-		user << "<span class='notice'>It's out of fuel.</span>"
-		return
+/obj/item/device/flashlight/flare/proc/turn_on(var/mob/user)
 	if(on)
-		return
+		return FALSE
+	if(!fuel)
+		if(user)
+			user << "<span class='notice'>It's out of fuel.</span>"
+		return FALSE
+	on = TRUE
+	user.visible_message("<span class='notice'>[user] activates the [src].</span>", "<span class='notice'>You pull the cord on the [src], activating it!</span>")
+	force = on_damage
+	damtype = "fire"
+	item_state = "[initial(item_state)]-on"
+	processing_objects += src
+	return 1
 
-	. = ..()
-	// All good, turn it on.
-	if(.)
-		user.visible_message("<span class='notice'>[user] activates the flare.</span>", "<span class='notice'>You pull the cord on the flare, activating it!</span>")
-		src.force = on_damage
-		src.damtype = "fire"
-		processing_objects += src
+/obj/item/device/flashlight/flare/torch
+	name = "torch"
+	desc = "A torch fashioned from some leaves and a log."
+	w_class = 4
+	brightness_on = 4
+	icon_state = "torch"
+	item_state = "torch"
+	on_damage = 10
+	slot_flags = null
 
 /obj/item/device/flashlight/slime
 	gender = PLURAL
 	name = "glowing slime extract"
 	desc = "A glowing ball of what appears to be amber."
 	icon = 'icons/obj/lighting.dmi'
-	icon_state = "floor1" //not a slime extract sprite but... something close enough!
+	icon_state = "slime"
 	item_state = "slime"
 	w_class = 1
 	brightness_on = 6

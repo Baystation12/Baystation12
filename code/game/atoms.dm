@@ -192,6 +192,12 @@ its easier to just keep the beam vertical.
 //All atoms
 /atom/proc/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
+/*	if(isturf(src) || \
+	istype(src, /obj/structure/sign))		//temporatory duct tape
+		user << translation(src,"examine",list("infix"=infix,"suffix"=suffix))
+		user << translation(src,"desc")
+		return distance == -1 || (get_dist(src, user) <= distance)
+*/
 	var/f_name = "\a [src][infix]."
 	if(src.blood_DNA && !istype(src, /obj/effect/decal))
 		if(gender == PLURAL)
@@ -215,8 +221,13 @@ its easier to just keep the beam vertical.
 
 //called to set the atom's dir and used to add behaviour to dir-changes
 /atom/proc/set_dir(new_dir)
-	. = new_dir != dir
+	var/old_dir = dir
+	if(new_dir == old_dir)
+		return FALSE
+
 	dir = new_dir
+	dir_set_event.raise_event(src, old_dir, new_dir)
+	return TRUE
 
 /atom/proc/ex_act()
 	return
@@ -231,7 +242,7 @@ its easier to just keep the beam vertical.
 	return
 
 /atom/proc/hitby(atom/movable/AM as mob|obj)
-	if (density)
+	if(density)
 		AM.throwing = 0
 	return
 
@@ -418,6 +429,7 @@ its easier to just keep the beam vertical.
 	fluorescent = 0
 	src.germ_level = 0
 	if(istype(blood_DNA, /list))
+		blood_DNA.Cut()
 		blood_DNA = null
 		return 1
 
@@ -488,3 +500,12 @@ its easier to just keep the beam vertical.
 		else if(ismob(I))
 			var/mob/M = I
 			M.show_message( message, 2, deaf_message, 1)
+
+/atom/Entered(var/atom/movable/AM, var/atom/old_loc, var/special_event)
+	if(loc && MOVED_DROP == special_event)
+		AM.forceMove(loc, MOVED_DROP)
+		return CANCEL_MOVE_EVENT
+	return ..()
+
+/turf/Entered(var/atom/movable/AM, var/atom/old_loc, var/special_event)
+	return ..(AM, old_loc, 0)

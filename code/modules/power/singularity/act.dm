@@ -14,17 +14,6 @@
 /mob/living/singularity_pull(S)
 	step_towards(src, S)
 
-/mob/living/carbon/human/singularity_act()
-	var/gain = 20
-	if(mind)
-		if((mind.assigned_role == "Station Engineer") || (mind.assigned_role == "Chief Engineer"))
-			gain = 100
-		if(mind.assigned_role == "Assistant")
-			gain = rand(0, 300)
-	investigate_log(I_SINGULO,"has been consumed by a singularity", I_SINGULO)
-	gib()
-	return gain
-
 /mob/living/carbon/human/singularity_pull(S, current_size)
 	if(current_size >= STAGE_THREE)
 		var/list/handlist = list(l_hand, r_hand)
@@ -45,12 +34,8 @@
 		return 2
 
 /obj/singularity_pull(S, current_size)
-	if(simulated)
-		if(anchored)
-			if(current_size >= STAGE_FIVE)
-				step_towards(src, S)
-		else
-			step_towards(src, S)
+	if(simulated && !anchored)
+		step_towards(src, S)
 
 /obj/effect/beam/singularity_pull()
 	return
@@ -109,21 +94,6 @@
 				O.singularity_act(src, current_size)
 	ChangeTurf(get_base_turf_by_area(src))
 	return 2
-
-/turf/simulated/wall/singularity_pull(S, current_size)
-
-	if(!reinf_material)
-		if(current_size >= STAGE_FIVE)
-			if(prob(75))
-				dismantle_wall()
-			return
-		if(current_size == STAGE_FOUR)
-			if(prob(30))
-				dismantle_wall()
-	else
-		if(current_size >= STAGE_FIVE)
-			if(prob(30))
-				dismantle_wall()
 
 /turf/space/singularity_act()
 	return

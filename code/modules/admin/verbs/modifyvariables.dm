@@ -354,16 +354,12 @@ var/list/VVckey_edit = list("key", "ckey")
 			usr << "<span class='danger'>It is forbidden to edit this object's variables.</span>"
 			return
 
-	if(istype(O, /client) && (param_var_name == "ckey" || param_var_name == "key"))
-		usr << "<span class='danger'>You cannot edit ckeys on client objects.</span>"
-		return
-
 	var/class
 	var/variable
 	var/var_value
 
 	if(param_var_name)
-		if(!param_var_name in O.vars)
+		if(!(param_var_name in O.vars))
 			src << "A variable with this name ([param_var_name]) doesn't exist in this atom ([O])"
 			return
 
@@ -586,6 +582,6 @@ var/list/VVckey_edit = list("key", "ckey")
 		if("marked datum")
 			O.vars[variable] = holder.marked_datum
 
-	world.log << "### VarEdit by [src]: [O.type] [variable]=[html_encode("[O.vars[variable]]")]"
+	world.log << "### VarEdit by [src]: [O.type] [variable]=[lhtml_encode("[O.vars[variable]]")]"
 	log_admin("[key_name(src)] modified [original_name]'s [variable] to [O.vars[variable]]")
 	message_admins("[key_name_admin(src)] modified [original_name]'s [variable] to [O.vars[variable]]")

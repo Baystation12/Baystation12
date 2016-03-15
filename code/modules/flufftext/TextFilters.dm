@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
 proc/Intoxicated(phrase)
-	phrase = html_decode(phrase)
+	phrase = lhtml_decode(phrase)
 	var/leng=lentext(phrase)
 	var/counter=lentext(phrase)
 	var/newphrase=""
@@ -24,9 +24,9 @@ proc/Intoxicated(phrase)
 	return newphrase
 
 proc/NewStutter(phrase,stunned)
-	phrase = html_decode(phrase)
+	phrase = lhtml_decode(phrase)
 
-	var/list/split_phrase = text2list(phrase," ") //Split it up into words.
+	var/list/split_phrase = splittext(phrase," ") //Split it up into words.
 
 	var/list/unstuttered_words = split_phrase.Copy()
 	var/i = rand(1,3)
@@ -57,7 +57,7 @@ proc/NewStutter(phrase,stunned)
 
 		split_phrase[index] = word
 
-	return sanitize(list2text(split_phrase," "))
+	return sanitize(jointext(split_phrase," "))
 
 proc/Stagger(mob/M,d) //Technically not a filter, but it relates to drunkenness.
 	step(M, pick(d,turn(d,90),turn(d,-90)))
@@ -67,7 +67,7 @@ proc/Ellipsis(original_msg, chance = 50)
 	if(chance >= 100) return original_msg
 
 	var/list
-		words = text2list(original_msg," ")
+		words = splittext(original_msg," ")
 		new_words = list()
 
 	var/new_msg = ""
@@ -78,6 +78,6 @@ proc/Ellipsis(original_msg, chance = 50)
 		else
 			new_words += w
 
-	new_msg = list2text(new_words," ")
+	new_msg = jointext(new_words," ")
 
 	return new_msg

@@ -5,11 +5,9 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 */
 
 /obj/machinery/r_n_d/circuit_imprinter
-	name = "Circuit Imprinter"
+	name = "\improper Circuit Imprinter"
 	icon_state = "circuit_imprinter"
 	flags = OPENCONTAINER
-
-	var/list/materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, "gold" = 0, "silver" = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0)
 	var/list/datum/design/queue = list()
 	var/progress = 0
 
@@ -22,6 +20,8 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	active_power_usage = 2500
 
 /obj/machinery/r_n_d/circuit_imprinter/New()
+	materials = default_material_composition.Copy()
+
 	..()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/circuit_imprinter(src)
@@ -118,9 +118,11 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 		return 1
 	if(O.is_open_container())
 		return 0
+	if(is_robot_module(O))
+		return 0
 	if(!istype(O, /obj/item/stack/material))
 		user << "<span class='notice'>You cannot insert this item into \the [src]!</span>"
-		return 1
+		return 0
 	if(stat)
 		return 1
 
@@ -144,9 +146,9 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	var/stacktype = stack.type
 	var/t = getMaterialName(stacktype)
 	if(t)
-		if(do_after(usr, 16))
+		if(do_after(usr, 16, src))
 			if(stack.use(amount))
-				user << "<span class='notice'>You add [amount] sheets to \the [src].</span>"
+				user << "<span class='notice'>You add [amount] sheet\s to \the [src].</span>"
 				materials[t] += amount * SHEET_MATERIAL_AMOUNT
 	busy = 0
 	updateUsrDialog()

@@ -82,11 +82,12 @@
 					if(!do_mob(user, M, W.damage/5))
 						user << "<span class='notice'>You must stand still to bandage wounds.</span>"
 						break
+
 					if (W.current_stage <= W.max_bleeding_stage)
 						user.visible_message("<span class='notice'>\The [user] bandages \a [W.desc] on [M]'s [affecting.name].</span>", \
 						                              "<span class='notice'>You bandage \a [W.desc] on [M]'s [affecting.name].</span>" )
 						//H.add_side_effect("Itch")
-					else if (istype(W,/datum/wound/bruise))
+					else if (W.damage_type == BRUISE)
 						user.visible_message("<span class='notice'>\The [user] places a bruise patch over \a [W.desc] on [M]'s [affecting.name].</span>", \
 						                              "<span class='notice'>You place a bruise patch over \a [W.desc] on [M]'s [affecting.name].</span>" )
 					else
@@ -183,8 +184,7 @@
 					if (W.current_stage <= W.max_bleeding_stage)
 						user.visible_message("<span class='notice'>\The [user] cleans \a [W.desc] on [M]'s [affecting.name] and seals the edges with bioglue.</span>", \
 						                     "<span class='notice'>You clean and seal \a [W.desc] on [M]'s [affecting.name].</span>" )
-						//H.add_side_effect("Itch")
-					else if (istype(W,/datum/wound/bruise))
+					else if (W.damage_type == BRUISE)
 						user.visible_message("<span class='notice'>\The [user] places a medical patch over \a [W.desc] on [M]'s [affecting.name].</span>", \
 						                              "<span class='notice'>You place a medical patch over \a [W.desc] on [M]'s [affecting.name].</span>" )
 					else
@@ -275,7 +275,7 @@
 				user << "<span class='danger'>You can't apply a splint to the arm you're using!</span>"
 				return
 			user.visible_message("<span class='danger'>[user] starts to apply \the [src] to their [limb].</span>", "<span class='danger'>You start to apply \the [src] to your [limb].</span>", "<span class='danger'>You hear something being wrapped.</span>")
-		if(do_after(user, 50))
+		if(do_after(user, 50, M))
 			if (M != user)
 				user.visible_message("<span class='danger'>[user] finishes applying \the [src] to [M]'s [limb].</span>", "<span class='danger'>You finish applying \the [src] to [M]'s [limb].</span>", "<span class='danger'>You hear something being wrapped.</span>")
 			else

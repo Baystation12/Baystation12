@@ -81,7 +81,7 @@
 
 /turf/simulated/Entered(atom/A, atom/OL)
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
-		usr << "<span class='danger'>Movement is admin-disabled.</span>" //This is to identify lag problems
+		usr << "<span class='danger'>[translation(src,"movement_disabled")]</span>" //This is to identify lag problems
 		return
 
 	if (istype(A,/mob/living))
@@ -141,7 +141,7 @@
 					floor_type = "icy"
 					slip_stun = 4
 
-			if(M.slip("the [floor_type] floor",slip_stun))
+			if(M.slip("the [floor_type] floor",slip_stun))	//TODO:LANG
 				for(var/i = 0;i<slip_dist;i++)
 					step(M, M.dir)
 					sleep(1)
@@ -173,6 +173,16 @@
 /turf/simulated/proc/add_blood_floor(mob/living/carbon/M as mob)
 	if( istype(M, /mob/living/carbon/alien ))
 		var/obj/effect/decal/cleanable/blood/xeno/this = new /obj/effect/decal/cleanable/blood/xeno(src)
-		this.blood_DNA["UNKNOWN BLOOD"] = "X*"
+		this.blood_DNA["UNKNOWN BLOOD"] = "X*"	//TODO:LANG
 	else if( istype(M, /mob/living/silicon/robot ))
 		new /obj/effect/decal/cleanable/blood/oil(src)
+
+/turf/simulated/proc/can_build_cable(var/mob/user)
+	return 0
+
+/turf/simulated/attackby(var/obj/item/thing, var/mob/user)
+	if(istype(thing, /obj/item/stack/cable_coil) && can_build_cable(user))
+		var/obj/item/stack/cable_coil/coil = thing
+		coil.turf_place(src, user)
+		return
+	return ..()

@@ -92,7 +92,7 @@ proc/get_radio_key_from_channel(var/channel)
 	var/speech_problem_flag = 0
 
 	if((HULK in mutations) && health >= 25 && length(message))
-		message = "[uppertext(message)]!!!"
+		message = "[uppertext_alt(message)]!!!"
 		verb = pick("yells","roars","hollers")
 		speech_problem_flag = 1
 	if(slurring)
@@ -134,6 +134,8 @@ proc/get_radio_key_from_channel(var/channel)
 		if(client.prefs.muted & MUTE_IC)
 			src << "\red You cannot speak in IC (Muted)."
 			return
+
+	message = sanitize_local(message)
 
 	if(stat)
 		if(stat == 2)
@@ -238,7 +240,8 @@ proc/get_radio_key_from_channel(var/channel)
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
-		var/list/hear = get_mobs_or_objects_in_view(message_range,src)
+		//DO NOT FUCKING CHANGE THIS TO GET_OBJ_OR_MOB_AND_BULLSHIT() -- Hugs and Kisses ~Ccomp
+		var/list/hear = hear(message_range,T)
 		var/list/hearturfs = list()
 
 		for(var/I in hear)
@@ -253,7 +256,7 @@ proc/get_radio_key_from_channel(var/channel)
 
 
 		for(var/mob/M in player_list)
-			if(M.stat == DEAD && M.client && (M.client.prefs.toggles & CHAT_GHOSTEARS))
+			if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
 				listening |= M
 				continue
 			if(M.loc && M.locs[1] in hearturfs)

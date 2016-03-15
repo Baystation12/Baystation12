@@ -271,6 +271,11 @@
 	path = /obj/item/device/assembly/signaler
 	category = "Devices and Components"
 
+/datum/autolathe/recipe/voice
+	name = "voice"
+	path = /obj/item/device/assembly/voice
+	category = "Devices and Components"
+
 /datum/autolathe/recipe/sensor_infra
 	name = "infrared sensor"
 	path = /obj/item/device/assembly/infra
@@ -305,6 +310,11 @@
 	name = "camera assembly"
 	path = /obj/item/weapon/camera_assembly
 	category = "Engineering"
+
+/datum/autolathe/recipe/weldinggoggles
+	name = "welding goggles"
+	path = /obj/item/clothing/glasses/welding
+	category = "General"
 
 /datum/autolathe/recipe/flamethrower
 	name = "flamethrower"

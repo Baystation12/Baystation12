@@ -3,6 +3,9 @@
 	if(!C || !user)
 		return 0
 
+	if(istype(C, /obj/item/stack/cable_coil) || (flooring && istype(C, /obj/item/stack/rods)))
+		return ..(C, user)
+
 	if(flooring)
 		if(istype(C, /obj/item/weapon/crowbar))
 			if(broken || burnt)
@@ -40,14 +43,7 @@
 			return
 	else
 
-		if(istype(C, /obj/item/stack/cable_coil))
-			if(broken || burnt)
-				user << "<span class='warning'>This section is too damaged to support anything. Use a welder to fix the damage.</span>"
-				return
-			var/obj/item/stack/cable_coil/coil = C
-			coil.turf_place(src, user)
-			return
-		else if(istype(C, /obj/item/stack))
+		if(istype(C, /obj/item/stack))
 			if(broken || burnt)
 				user << "<span class='warning'>This section is too damaged to support anything. Use a welder to fix the damage.</span>"
 				return
@@ -67,7 +63,7 @@
 				user << "<span class='warning'>You require at least [use_flooring.build_cost] [S.name] to complete the [use_flooring.descriptor].</span>"
 				return
 			// Stay still and focus...
-			if(use_flooring.build_time && !do_after(user, use_flooring.build_time))
+			if(use_flooring.build_time && !do_after(user, use_flooring.build_time, src))
 				return
 			if(flooring || !S || !user || !use_flooring)
 				return
@@ -88,3 +84,15 @@
 						broken = null
 					else
 						user << "<span class='warning'>You need more welding fuel to complete this task.</span>"
+					return
+	return ..()
+
+
+/turf/simulated/floor/can_build_cable(var/mob/user)
+	if(!is_plating() || flooring)
+		user << "<span class='warning'>Removing the tiling first.</span>"
+		return 0
+	if(broken || burnt)
+		user << "<span class='warning'>This section is too damaged to support anything. Use a welder to fix the damage.</span>"
+		return 0
+	return 1

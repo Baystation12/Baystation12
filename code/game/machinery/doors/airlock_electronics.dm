@@ -20,12 +20,7 @@
 		if (!ishuman(user) && !istype(user,/mob/living/silicon/robot))
 			return ..(user)
 
-		var/mob/living/carbon/human/H = user
-		if(H.getBrainLoss() >= 60)
-			return
-
 		var/t1 = text("<B>Access control</B><br>\n")
-
 
 		if (last_configurator)
 			t1 += "Operator: [last_configurator]<br>"

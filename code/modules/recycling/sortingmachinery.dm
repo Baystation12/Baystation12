@@ -248,6 +248,7 @@
 					user.client.screen -= O
 			P.wrapped = O
 			O.forceMove(P)
+			P.w_class = O.w_class
 			var/i = round(O.w_class)
 			if(i in list(1,2,3,4,5))
 				P.icon_state = "deliverycrate[i]"
@@ -444,7 +445,7 @@
 		var/obj/item/weapon/weldingtool/W = I
 		if(W.remove_fuel(1,user))
 			user << "You start slicing the floorweld off the delivery chute."
-			if(do_after(user,20))
+			if(do_after(user,20, src))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				if(!src || !W.isOn()) return
 				user << "You sliced the floorweld off the delivery chute."

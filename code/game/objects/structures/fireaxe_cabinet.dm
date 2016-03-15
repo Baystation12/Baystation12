@@ -12,7 +12,7 @@
 	var/obj/item/weapon/material/twohanded/fireaxe/fireaxe
 
 /obj/structure/fireaxecabinet/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
-	user.do_attack_animation(src)
+	attack_animation(user)
 	playsound(user, 'sound/effects/Glasshit.ogg', 50, 1)
 	visible_message("<span class='danger'>[user] [attack_verb] \the [src]!</span>")
 	if(damage_threshold > damage)
@@ -123,7 +123,7 @@
 		user.setClickCooldown(10)
 		user << "<span class='notice'>You begin [unlocked ? "enabling" : "disabling"] \the [src]'s maglock.</span>"
 
-		if(!do_after(user, 20))
+		if(!do_after(user, 20,src))
 			return
 
 		if(shattered) return

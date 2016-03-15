@@ -15,8 +15,8 @@ mob/var/obj/effect/decal/typing_indicator
 		typing_indicator.icon_state = "typing"
 
 	if(client && !stat)
-		typing_indicator.invisibility  = invisibility
-		if(client.prefs.toggles & SHOW_TYPING)
+		typing_indicator.invisibility = invisibility
+		if(!is_preference_enabled(/datum/client_preference/show_typing_indicator))
 			overlays -= typing_indicator
 		else
 			if(state)
@@ -54,35 +54,20 @@ mob/var/obj/effect/decal/typing_indicator
 		me_verb(message)
 
 /mob/proc/handle_typing_indicator()
-	if(client)
-		if(!(client.prefs.toggles & SHOW_TYPING) && !hud_typing)
-			var/temp = winget(client, "input", "text")
+	if(is_preference_enabled(/datum/client_preference/show_typing_indicator) && !hud_typing)
+		var/temp = winget(client, "input", "text")
 
-			if (temp != last_typed)
-				last_typed = temp
-				last_typed_time = world.time
+		if (temp != last_typed)
+			last_typed = temp
+			last_typed_time = world.time
 
-			if (world.time > last_typed_time + TYPING_INDICATOR_LIFETIME)
-				set_typing_indicator(0)
-				return
-			if(length(temp) > 5 && findtext(temp, "Say \"", 1, 7))
-				set_typing_indicator(1)
-			else if(length(temp) > 3 && findtext(temp, "Me ", 1, 5))
-				set_typing_indicator(1)
+		if (world.time > last_typed_time + TYPING_INDICATOR_LIFETIME)
+			set_typing_indicator(0)
+			return
+		if(length(temp) > 5 && findtext(temp, "Say \"", 1, 7))
+			set_typing_indicator(1)
+		else if(length(temp) > 3 && findtext(temp, "Me ", 1, 5))
+			set_typing_indicator(1)
 
-			else
-				set_typing_indicator(0)
-
-/client/verb/typing_indicator()
-	set name = "Show/Hide Typing Indicator"
-	set category = "Preferences"
-	set desc = "Toggles showing an indicator when you are typing emote or say message."
-	prefs.toggles ^= SHOW_TYPING
-	prefs.save_preferences()
-	src << "You will [(prefs.toggles & SHOW_TYPING) ? "no longer" : "now"] display a typing indicator."
-
-	// Clear out any existing typing indicator.
-	if(prefs.toggles & SHOW_TYPING)
-		if(istype(mob)) mob.set_typing_indicator(0)
-
-	feedback_add_details("admin_verb","TID") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		else
+			set_typing_indicator(0)

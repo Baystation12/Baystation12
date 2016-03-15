@@ -1,6 +1,6 @@
 /obj/structure/closet/secure_closet
 	name = "secure locker"
-	desc = "It's an immobile card-locked storage unit."
+	desc = "It's a card-locked storage unit."
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "secure1"
 	density = 1
@@ -87,6 +87,26 @@
 			spark_system.start()
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			playsound(src.loc, "sparks", 50, 1)
+	else if(istype(W, /obj/item/device/multitool))
+		var/obj/item/device/multitool/multi = W
+		if(multi.in_use)
+			user << "<span class='warning'>This multitool is already in use!</span>"
+			return
+		multi.in_use = 1
+		var/i
+		for(i=0, i<6, i++)
+			user.visible_message("<span class='warning'>[user] picks in wires of the [src.name] with a multitool.</span>",
+			"<span class='warning'>Resetting circuitry ([i]/6)...</span>")
+			if(!do_after(user,500)||opened)
+				multi.in_use=0
+				world << "test"
+				return
+		src.locked=!src.locked
+		src.update_icon()
+		multi.in_use=0
+		user.visible_message("<span class='warning'>[user] [src.locked?"locks":"unlocks"] [name] with a multitool.</span>",
+		"<span class='warning'>You [src.locked?"enable":"disable"] the locking modules.</span>")
+		return
 	else if(istype(W,/obj/item/weapon/packageWrap) || istype(W,/obj/item/weapon/weldingtool))
 		return ..(W,user)
 	else
@@ -131,8 +151,11 @@
 
 /obj/structure/closet/secure_closet/update_icon()//Putting the welded stuff in updateicon() so it's easy to overwrite for special cases (Fridges, cabinets, and whatnot)
 	overlays.Cut()
+
 	if(!opened)
-		if(locked)
+		if(broken)
+			icon_state = icon_off
+		else if(locked)
 			icon_state = icon_locked
 		else
 			icon_state = icon_closed
@@ -141,24 +164,12 @@
 	else
 		icon_state = icon_opened
 
-
 /obj/structure/closet/secure_closet/req_breakout()
 	if(!opened && locked) return 1
 	return ..() //It's a secure closet, but isn't locked.
 
 /obj/structure/closet/secure_closet/break_open()
 	desc += " It appears to be broken."
-	icon_state = icon_off
-	spawn()
-		flick(icon_broken, src)
-		sleep(10)
-		flick(icon_broken, src)
-		sleep(10)
 	broken = 1
 	locked = 0
-	update_icon()
-	//Do this to prevent contents from being opened into nullspace (read: bluespace)
-	if(istype(loc, /obj/structure/bigDelivery))
-		var/obj/structure/bigDelivery/BD = loc
-		BD.unwrap()
-	open()
+	..()

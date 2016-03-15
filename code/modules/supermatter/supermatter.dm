@@ -59,10 +59,9 @@
 	var/emergency_color = "#D9D900"
 
 	var/grav_pulling = 0
-	var/pull_radius = 14
 	// Time in ticks between delamination ('exploding') and exploding (as in the actual boom)
-	var/pull_time = 100
-	var/explosion_power = 8
+	var/pull_time = 300
+	var/explosion_power = 6
 
 	var/emergency_issued = 0
 
@@ -97,8 +96,7 @@
 	. = ..()
 
 /obj/machinery/power/supermatter/proc/explode()
-	message_admins("Supermatter exploded at ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
-	log_game("Supermatter exploded at ([x],[y],[z])")
+	log_and_message_admins("Supermatter exploded at [x] [y] [z]")
 	anchored = 1
 	grav_pulling = 1
 	exploded = 1
@@ -112,7 +110,7 @@
 			var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
 			mob.apply_effect(rads, IRRADIATE)
 	spawn(pull_time)
-		explosion(get_turf(src), explosion_power, explosion_power * 2, explosion_power * 3, explosion_power * 4, 1)
+		explosion(get_turf(src), explosion_power, explosion_power * 1.25, explosion_power * 1.5, explosion_power * 1.75, 1)
 		qdel(src)
 		return
 
@@ -318,6 +316,7 @@
 		data["ambient_temp"] = round(env.temperature)
 		data["ambient_pressure"] = round(env.return_pressure())
 	data["detonating"] = grav_pulling
+	data["energy"] = power
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -383,16 +382,13 @@
 
 
 /obj/machinery/power/supermatter/proc/supermatter_pull()
-	//following is adapted from singulo code
-	if(defer_powernet_rebuild != 2)
-		defer_powernet_rebuild = 1
-	// Let's just make this one loop.
-	for(var/atom/X in orange(pull_radius,src))
-		spawn()	X.singularity_pull(src, STAGE_FIVE)
-
-	if(defer_powernet_rebuild != 2)
-		defer_powernet_rebuild = 0
-	return
+	for(var/atom/A in range(255, src))
+		A.singularity_pull(src, STAGE_FIVE)
+		if(istype(A, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = A
+			if(!H.lying)
+				H << "<span class='danger'>A strong gravitational force slams you to the ground!</span>"
+				H.Weaken(20)
 
 
 /obj/machinery/power/supermatter/GotoAirflowDest(n) //Supermatter not pushed around by airflow
@@ -413,8 +409,7 @@
 
 	gasefficency = 0.125
 
-	pull_radius = 5
-	pull_time = 45
+	pull_time = 150
 	explosion_power = 3
 
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements

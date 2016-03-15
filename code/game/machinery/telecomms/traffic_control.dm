@@ -110,7 +110,7 @@
 					dat += "<a href='?src=\ref[src];operation=togglerun'>NEVER</a>"
 
 
-		user << browse(dat, "window=traffic_control;size=575x400")
+		user << browse(sanitize_local(dat, SANITIZE_BROWSER), "window=traffic_control;size=575x400")
 		onclose(user, "server_control")
 
 		temp = ""
@@ -209,7 +209,7 @@
 	attackby(var/obj/item/weapon/D as obj, var/mob/user as mob)
 		if(istype(D, /obj/item/weapon/screwdriver))
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			if(do_after(user, 20))
+			if(do_after(user, 20, src))
 				if (src.stat & BROKEN)
 					user << "<span class='notice'>The broken glass falls out.</span>"
 					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )

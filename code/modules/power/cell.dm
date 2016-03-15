@@ -136,7 +136,8 @@
 		var/mob/living/silicon/robot/R = loc
 		severity *= R.cell_emp_mult
 
-	charge -= maxcharge / severity
+	// Lose 1/2, 1/4, 1/6 of the current charge per hit or 1/4, 1/8, 1/12 of the max charge per hit, whichever is highest
+	charge -= max(charge / (2 * severity), maxcharge/(4 * severity))
 	if (charge < 0)
 		charge = 0
 	..()

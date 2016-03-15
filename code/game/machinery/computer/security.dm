@@ -204,6 +204,7 @@
 				else
 		else
 			dat += text("<A href='?src=\ref[];choice=Log In'>{Log In}</A>", src)
+	dat = sanitize_local(dat, SANITIZE_BROWSER)
 	user << browse(text("<HEAD><TITLE>Security Records</TITLE></HEAD><TT>[]</TT>", dat), "window=secure_rec;size=600x400")
 	onclose(user, "secure_rec")
 	return
@@ -289,7 +290,7 @@ What a mess.*/
 					return
 				Perp = new/list()
 				t1 = lowertext(t1)
-				var/list/components = text2list(t1, " ")
+				var/list/components = splittext(t1, " ")
 				if(components.len > 5)
 					return //Lets not let them search too greedily.
 				for(var/datum/data/record/R in data_core.general)
@@ -460,31 +461,31 @@ What a mess.*/
 							active1.fields["age"] = t1
 					if("mi_crim")
 						if (istype(active2, /datum/data/record))
-							var/t1 = sanitize(input("Please input minor disabilities list:", "Secure. records", active2.fields["mi_crim"], null)  as text)
+							var/t1 = sanitize(input("Please input minor disabilities list:", "Secure. records", sanitize_local(active2.fields["mi_crim"], SANITIZE_TEMP), null)  as text)
 							if (!t1 || active2 != a2)
 								return
 							active2.fields["mi_crim"] = t1
 					if("mi_crim_d")
 						if (istype(active2, /datum/data/record))
-							var/t1 = sanitize(input("Please summarize minor dis.:", "Secure. records", active2.fields["mi_crim_d"], null)  as message)
+							var/t1 = sanitize(input("Please summarize minor dis.:", "Secure. records", sanitize_local(active2.fields["mi_crim_d"], SANITIZE_TEMP), null)  as message)
 							if (!t1 || active2 != a2)
 								return
 							active2.fields["mi_crim_d"] = t1
 					if("ma_crim")
 						if (istype(active2, /datum/data/record))
-							var/t1 = sanitize(input("Please input major diabilities list:", "Secure. records", active2.fields["ma_crim"], null)  as text)
+							var/t1 = sanitize(input("Please input major diabilities list:", "Secure. records", sanitize_local(active2.fields["ma_crim"], SANITIZE_TEMP), null)  as text)
 							if (!t1 || active2 != a2)
 								return
 							active2.fields["ma_crim"] = t1
 					if("ma_crim_d")
 						if (istype(active2, /datum/data/record))
-							var/t1 = sanitize(input("Please summarize major dis.:", "Secure. records", active2.fields["ma_crim_d"], null)  as message)
+							var/t1 = sanitize(input("Please summarize major dis.:", "Secure. records", sanitize_local(active2.fields["ma_crim_d"], SANITIZE_TEMP), null)  as message)
 							if (!t1 || active2 != a2)
 								return
 							active2.fields["ma_crim_d"] = t1
 					if("notes")
 						if (istype(active2, /datum/data/record))
-							var/t1 = sanitize(input("Please summarize notes:", "Secure. records", html_decode(active2.fields["notes"]), null)  as message, extra = 0)
+							var/t1 = sanitize(input("Please summarize notes:", "Secure. records", lhtml_decode(sanitize_local(active2.fields["notes"], SANITIZE_TEMP)), null)  as message, extra = 0)
 							if (!t1 || active2 != a2)
 								return
 							active2.fields["notes"] = t1
@@ -511,7 +512,7 @@ What a mess.*/
 							alert(usr, "You do not have the required rank to do this!")
 					if("species")
 						if (istype(active1, /datum/data/record))
-							var/t1 = sanitize(input("Please enter race:", "General records", active1.fields["species"], null)  as message)
+							var/t1 = sanitize(input("Please enter race:", "General records", sanitize_local(active1.fields["species"], SANITIZE_TEMP), null)  as message)
 							if (!t1 || active1 != a1)
 								return
 							active1.fields["species"] = t1

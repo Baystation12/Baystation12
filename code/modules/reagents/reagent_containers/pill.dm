@@ -19,7 +19,7 @@
 
 	attack(mob/M as mob, mob/user as mob, def_zone)
 		//TODO: replace with standard_feed_mob() call.
-		
+
 		if(M == user)
 			if(!M.can_eat(src))
 				return
@@ -82,6 +82,15 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 //Pills
+
+/obj/item/weapon/reagent_containers/pill/alkysine
+	name = "Alkysine pill"
+	desc = "Used for treating brain damage."
+	icon_state = "pill17"
+	New()
+		..()
+		reagents.add_reagent("alkysine", 50)
+
 /obj/item/weapon/reagent_containers/pill/antitox
 	name = "Anti-toxins pill"
 	desc = "Neutralizes many common toxins."

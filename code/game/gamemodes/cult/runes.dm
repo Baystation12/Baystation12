@@ -159,7 +159,7 @@ var/list/sacrificed = list()
 							target << "<span class='cult'>Your entire broken soul and being is engulfed in corruption and flames as your mind shatters away into nothing.</span>"
 							target.hallucination += 5000
 							target.apply_effect(15, STUTTER)
-							target.adjustBrainLoss(rand(1,5))
+							target.adjustBrainLoss(1)
 
 				initial_message = 1
 				if (target.species && (target.species.flags & NO_PAIN))

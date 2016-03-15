@@ -5,12 +5,12 @@
 	anchored = 1.0
 	unacidable = 1
 	simulated = 0
+	invisibility = 101
 	var/delete_me = 0
 
 /obj/effect/landmark/New()
 	..()
 	tag = text("landmark*[]", name)
-	invisibility = 101
 
 	switch(name)			//some of these are probably obsolete
 		if("monkey")
@@ -88,12 +88,11 @@
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
 	anchored = 1.0
+	invisibility = 101
 
 /obj/effect/landmark/start/New()
 	..()
 	tag = "start*[name]"
-	invisibility = 101
-
 	return 1
 
 //Costume spawner landmarks

@@ -1,23 +1,36 @@
 /obj/machinery/iv_drip
 	name = "\improper IV drip"
 	icon = 'icons/obj/iv_drip.dmi'
+	icon_state = "iv_drip"
 	anchored = 0
 	density = 1
+	var/mob/living/carbon/human/attached = null
+	var/mode = 1 // 1 is injecting, 0 is taking blood.
+	var/obj/item/weapon/reagent_containers/beaker = null
 
-
-/obj/machinery/iv_drip/var/mob/living/carbon/human/attached = null
-/obj/machinery/iv_drip/var/mode = 1 // 1 is injecting, 0 is taking blood.
-/obj/machinery/iv_drip/var/obj/item/weapon/reagent_containers/beaker = null
+/obj/machinery/iv_drip/New()
+	..()
+	update_icon()
 
 /obj/machinery/iv_drip/update_icon()
-	if(src.attached)
-		icon_state = "hooked"
+	if(attached)
+		if(mode)
+			icon_state = "injecting"
+		else
+			icon_state = "donating"
 	else
-		icon_state = ""
+		if(mode)
+			icon_state = "injectidle"
+		else
+			icon_state = "donateidle"
 
 	overlays = null
 
 	if(beaker)
+		if(attached)
+			overlays += "beakeractive"
+		else
+			overlays += "beakeridle"
 		var/datum/reagents/reagents = beaker.reagents
 		if(reagents.total_volume)
 			var/image/filling = image('icons/obj/iv_drip.dmi', src, "reagent")
@@ -110,7 +123,7 @@
 				return
 
 			// If the human is losing too much blood, beep.
-			if(T.vessel.get_reagent_amount("blood") < BLOOD_VOLUME_SAFE) if(prob(5))
+			if(((T.vessel.get_reagent_amount("blood")/T.species.blood_volume)*100) < BLOOD_VOLUME_SAFE)
 				visible_message("\The [src] beeps loudly.")
 
 			var/datum/reagent/B = T.take_blood(beaker,amount)

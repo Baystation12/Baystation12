@@ -29,9 +29,15 @@ var/global/list/all_languages[0]
 var/global/list/language_keys[0]					// Table of say codes for all languages
 var/global/list/whitelisted_species = list("Human") // Species that require a whitelist check.
 var/global/list/playable_species = list("Human")    // A list of ALL playable species, whitelisted, latejoin or otherwise.
+var/global/list/localisation = list()
 
 // Posters
 var/global/list/poster_designs = list()
+var/global/list/poster_designs_contraband = list()
+var/global/list/poster_designs_legit = list()
+
+// Barsigns
+var/global/list/barsigns = list()
 
 // Uplinks
 var/list/obj/item/device/uplink/world_uplinks = list()
@@ -66,6 +72,37 @@ var/global/list/endgame_exits = list()
 var/global/list/endgame_safespawns = list()
 
 var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
+
+// Strings which corraspond to bodypart covering flags, useful for outputting what something covers.
+var/global/list/string_part_flags = list(
+	"head" = HEAD,
+	"face" = FACE,
+	"eyes" = EYES,
+	"upper body" = UPPER_TORSO,
+	"lower body" = LOWER_TORSO,
+	"legs" = LEGS,
+	"feet" = FEET,
+	"arms" = ARMS,
+	"hands" = HANDS
+)
+
+// Strings which corraspond to slot flags, useful for outputting what slot something is.
+var/global/list/string_slot_flags = list(
+	"back" = SLOT_BACK,
+	"face" = SLOT_MASK,
+	"waist" = SLOT_BELT,
+	"ID slot" = SLOT_ID,
+	"ears" = SLOT_EARS,
+	"eyes" = SLOT_EYES,
+	"hands" = SLOT_GLOVES,
+	"head" = SLOT_HEAD,
+	"feet" = SLOT_FEET,
+	"exo slot" = SLOT_OCLOTHING,
+	"body" = SLOT_ICLOTHING,
+	"uniform" = SLOT_TIE,
+	"holster" = SLOT_HOLSTER
+)
+
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
@@ -120,7 +157,7 @@ var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, 
 	for (var/language_name in all_languages)
 		var/datum/language/L = all_languages[language_name]
 		if(!(L.flags & NONGLOBAL))
-			language_keys[lowertext(L.key)] = L
+			language_keys[lowertext_alt(L.key)] = L
 
 	var/rkey = 0
 	paths = typesof(/datum/species)-/datum/species
@@ -140,6 +177,23 @@ var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, 
 	for(var/T in paths)
 		var/datum/poster/P = new T
 		poster_designs += P
+		if(P.contraband)
+			poster_designs_contraband += P
+		else
+			poster_designs_legit += P
+
+	//local letters. Watch more in modules/l10n/localisation.dm
+	paths = typesof(/datum/letter) - /datum/letter
+	for(var/T in paths)
+		var/datum/letter/L = new T
+		localisation += L
+
+	//Barsigns
+	paths = typesof(/datum/barsign) - /datum/barsign
+	for(var/T in paths)
+		var/datum/barsign/BS = new T
+		if(!BS.hidden)
+			barsigns += BS
 
 	return 1
 

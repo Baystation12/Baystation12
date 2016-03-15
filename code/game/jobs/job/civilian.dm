@@ -181,6 +181,81 @@
 		H.species.equip_survival_gear(H,1)
 		return 1
 
+
+
+/datum/job/artist
+	title = "Artist"
+	flag = MIME
+	department_flag = CIVILIAN
+	faction = "Station"
+	total_positions = 3
+	spawn_positions = 3
+	supervisors = "the head of personnel"
+	selection_color = "#dddddd"
+	access = list(access_theatre, access_maint_tunnels)
+	minimal_access = list(access_theatre, access_maint_tunnels)
+	alt_titles = list("Clown","Mime","Musician","Guitarist","Stand-Up Comic")
+
+	equip(var/mob/living/carbon/human/H)
+		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_service(H), slot_l_ear)
+		if(H.mind.role_alt_title && H.mind.role_alt_title == "Clown")
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/clown(H), slot_back)
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
+		else
+			switch(H.backbag)
+				if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
+				if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
+				if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
+			if(H.backbag == 1)
+				H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
+			else
+				H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
+		if (H.mind.role_alt_title)
+			switch(H.mind.role_alt_title)
+				if("Clown")
+					H.mutations.Add(CLUMSY)
+					H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/clown(H), slot_w_uniform)
+					H.equip_to_slot_or_del(new /obj/item/clothing/shoes/clown_shoes(H), slot_shoes)
+					H.equip_to_slot_or_del(new /obj/item/device/pda/clown(H), slot_belt)
+					H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/clown_hat(H), slot_wear_mask)
+					H.equip_to_slot_or_del(new /obj/item/weapon/bananapeel(H), slot_in_backpack)
+					H.equip_to_slot_or_del(new /obj/item/weapon/bikehorn(H), slot_in_backpack)
+					H.equip_to_slot_or_del(new /obj/item/weapon/stamp/clown(H), slot_in_backpack)
+					H.equip_to_slot_or_del(new /obj/item/weapon/pen/crayon/rainbow(H), slot_in_backpack)
+					H.equip_to_slot_or_del(new /obj/item/weapon/storage/fancy/crayons(H), slot_in_backpack)
+					H.equip_to_slot_or_del(new /obj/item/toy/waterflower(H), slot_in_backpack)
+				if("Mime")
+					H.equip_to_slot_or_del(new /obj/item/clothing/under/mime(H), slot_w_uniform)
+					H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
+					H.equip_to_slot_or_del(new /obj/item/device/pda/mime(H), slot_belt)
+					H.equip_to_slot_or_del(new /obj/item/clothing/gloves/white(H), slot_gloves)
+					H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/mime(H), slot_wear_mask)
+					H.equip_to_slot_or_del(new /obj/item/clothing/head/beret(H), slot_head)
+					H.equip_to_slot_or_del(new /obj/item/clothing/suit/suspenders(H), slot_wear_suit)
+					if(H.backbag == 1)
+						H.equip_to_slot_or_del(new /obj/item/weapon/pen/crayon/mime(H), slot_l_store)
+						H.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing(H), slot_l_hand)
+					else
+						H.equip_to_slot_or_del(new /obj/item/weapon/pen/crayon/mime(H), slot_in_backpack)
+						H.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing(H), slot_in_backpack)
+					H.verbs += /client/proc/mimespeak
+					H.verbs += /client/proc/mimewall
+					H.mind.special_verbs += /client/proc/mimespeak
+					H.mind.special_verbs += /client/proc/mimewall
+					H.miming = 1
+				if("Musician")
+					H.equip_to_slot_or_del(new /obj/item/device/violin(H), slot_l_hand)
+				if("Guitarist")
+					H.equip_to_slot_or_del(new /obj/item/device/guitar(H), slot_l_hand)
+		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
+		if(H.gender == "male")
+			H.equip_to_slot_or_del(new /obj/item/clothing/under/assistantformal(H), slot_w_uniform)
+		else
+			H.equip_to_slot_or_del(new /obj/item/clothing/under/blackjumpskirt(H), slot_w_uniform)
+		return 1
+
+
+
 /datum/job/janitor
 	title = "Janitor"
 	flag = JANITOR

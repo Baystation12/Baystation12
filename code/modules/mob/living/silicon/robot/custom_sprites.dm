@@ -6,7 +6,7 @@ var/list/robot_custom_icons
 
 /hook/startup/proc/load_robot_custom_sprites()
 	var/config_file = file2text("config/custom_sprites.txt")
-	var/list/lines = text2list(config_file, "\n")
+	var/list/lines = splittext(config_file, "\n")
 
 	robot_custom_icons = list()
 	for(var/line in lines)
@@ -26,5 +26,10 @@ var/list/robot_custom_icons
 	if(rname && rname == real_name)
 		custom_sprite = 1
 		icon = CUSTOM_ITEM_SYNTH
+		var/list/valid_states = icon_states(icon)
 		if(icon_state == "robot")
-			icon_state = "[ckey]-Standard"
+			if("[ckey]-Standard" in valid_states)
+				icon_state = "[ckey]-Standard"
+			else
+				src << "<span class='warning'>Could not locate [ckey]-Standard sprite.</span>"
+				icon =  'icons/mob/robots.dmi'

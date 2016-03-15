@@ -517,3 +517,17 @@
 	icon_state = "blue_blazer"
 	item_state = "blue_blazer"
 	worn_state = "blue_blazer"
+
+/obj/item/clothing/under/doakes
+	name = "red polo"
+	desc = "Make surprise for those mutherfuckers!"
+	icon_state = "doakes_polo"
+	item_state = "doakes_polo_s"
+	worn_state = "doakes_polo"
+
+/obj/item/clothing/under/franklin
+	name = "blue pullover"
+	desc = "For real bald niggas."
+	icon_state = "franklin_pullover"
+	item_state = "franklin_pullover_s"
+	worn_state = "franklin_pullover"

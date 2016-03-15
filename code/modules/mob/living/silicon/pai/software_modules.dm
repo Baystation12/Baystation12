@@ -468,13 +468,13 @@
 		// 	Sol Common, Tradeband and Gutter are added with New() and are therefore the current default, always active languages
 		user.translator_on = !user.translator_on
 		if(user.translator_on)
-			user.add_language("Sinta'unathi")
-			user.add_language("Siik'tajr")
-			user.add_language("Skrellian")
+			user.add_language(LANGUAGE_UNATHI)
+			user.add_language(LANGUAGE_SIIK_MAAS)
+			user.add_language(LANGUAGE_SKRELLIAN)
 		else
-			user.remove_language("Sinta'unathi")
-			user.remove_language("Siik'tajr")
-			user.remove_language("Skrellian")
+			user.remove_language(LANGUAGE_UNATHI)
+			user.remove_language(LANGUAGE_SIIK_MAAS)
+			user.remove_language(LANGUAGE_SKRELLIAN)
 
 	is_active(mob/living/silicon/pai/user)
 		return user.translator_on
