@@ -15,6 +15,8 @@
 	smell.<br/><br/>Most humans will never meet a Vox raider, instead learning of this insular species through \
 	dealing with their traders and merchants; those that do rarely enjoy the experience."
 
+	taste_sensitivity = TASTE_DULL
+
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
 
@@ -85,6 +87,8 @@
 	warning_low_pressure = (WARNING_LOW_PRESSURE-20)
 	hazard_low_pressure =  (HAZARD_LOW_PRESSURE-10)
 	total_health = 80
+
+	taste_sensitivity = 3
 
 	cold_level_1 = 130
 	cold_level_2 = 100

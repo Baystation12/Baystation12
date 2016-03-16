@@ -97,30 +97,30 @@
 		return 0
 	if(my_atom.flags & NOREACT) // No reactions here
 		return 0
-	
+
 	var/reaction_occured
 	var/list/effect_reactions = list()
 	var/list/eligible_reactions = list()
 	for(var/i in 1 to PROCESS_REACTION_ITER)
 		reaction_occured = 0
-		
+
 		//need to rebuild this to account for chain reactions
 		for(var/datum/reagent/R in reagent_list)
 			eligible_reactions |= chemical_reactions_list[R.id]
-		
+
 		for(var/datum/chemical_reaction/C in eligible_reactions)
 			if(C.can_happen(src) && C.process(src))
 				effect_reactions |= C
 				reaction_occured = 1
-		
+
 		eligible_reactions.Cut()
-		
+
 		if(!reaction_occured)
 			break
-	
+
 	for(var/datum/chemical_reaction/C in effect_reactions)
 		C.post_reaction(src)
-	
+
 	update_total()
 	return reaction_occured
 
@@ -300,7 +300,7 @@
 		amount -= spill
 	if(spill)
 		splash(target.loc, spill, multiplier, copy, min_spill, max_spill)
-	
+
 	trans_to(target, amount, multiplier, copy)
 
 /datum/reagents/proc/trans_id_to(var/atom/target, var/id, var/amount = 1)
@@ -379,7 +379,7 @@
 			return trans_to_holder(R, amount, multiplier, copy)
 		if(type == CHEM_INGEST)
 			var/datum/reagents/R = C.ingested
-			return trans_to_holder(R, amount, multiplier, copy)
+			return C.ingest(src,R, amount, multiplier, copy)
 		if(type == CHEM_TOUCH)
 			var/datum/reagents/R = C.touching
 			return trans_to_holder(R, amount, multiplier, copy)

@@ -1252,6 +1252,7 @@
 #include "code\modules\mob\living\carbon\give.dm"
 #include "code\modules\mob\living\carbon\resist.dm"
 #include "code\modules\mob\living\carbon\shock.dm"
+#include "code\modules\mob\living\carbon\taste.dm"
 #include "code\modules\mob\living\carbon\viruses.dm"
 #include "code\modules\mob\living\carbon\alien\alien.dm"
 #include "code\modules\mob\living\carbon\alien\alien_attacks.dm"
