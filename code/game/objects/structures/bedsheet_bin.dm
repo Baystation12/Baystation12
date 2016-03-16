@@ -19,7 +19,7 @@ LINEN BINS
 /obj/item/weapon/bedsheet/attack_self(mob/user as mob)
 	user.drop_item()
 	if(layer == initial(layer))
-		layer = 5
+		layer = MOB_LAYER + 0.1
 	else
 		layer = initial(layer)
 	add_fingerprint(user)

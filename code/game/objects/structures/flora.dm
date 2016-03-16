@@ -77,6 +77,7 @@
 	name = "potted plant"
 	icon = 'icons/obj/plants.dmi'
 	icon_state = "plant-26"
+	layer = MOB_LAYER + 0.1
 
 //newbushes
 

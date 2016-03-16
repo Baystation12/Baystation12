@@ -1,5 +1,5 @@
 #define SHOWER_OPEN_LAYER OBJ_LAYER + 0.4
-#define SHOWER_CLOSED_LAYER MOB_LAYER + 0.1
+#define SHOWER_CLOSED_LAYER MOB_LAYER + 0.2
 
 /obj/structure/curtain
 	name = "curtain"
