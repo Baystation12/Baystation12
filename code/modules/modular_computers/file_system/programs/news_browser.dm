@@ -30,6 +30,7 @@
 	if(download_progress >= loaded_article.size)
 		downloading = 0
 		requires_ntnet = 0 // Turn off NTNet requirement as we already loaded the file into local memory.
+	nanomanager.update_uis(NM)
 
 /datum/computer_file/program/newsbrowser/kill_program()
 	..()
@@ -93,16 +94,14 @@
 
 	data["message"] = PRG.message
 	if(PRG.loaded_article && !PRG.downloading) 	// Viewing an article.
-		data["status"] = 3
 		data["title"] = PRG.loaded_article.filename
 		data["article"] = PRG.loaded_article.stored_data
-	else if(PRG.downloading)					// Downloading an article
-		data["status"] = 2
+	else if(PRG.downloading)					// Downloading an article.
+		data["download_running"] = 1
 		data["download_progress"] = PRG.download_progress
 		data["download_maxprogress"] = PRG.loaded_article.size
 		data["download_rate"] = PRG.download_netspeed
 	else										// Viewing list of articles
-		data["status"] = 1
 		var/list/all_articles[0]
 		for(var/datum/computer_file/data/news_article/F in ntnet_global.available_news)
 			all_articles.Add(list(list(

@@ -5,14 +5,13 @@
 </div>
 {{/if}}
 {{if data.article}}
-	Viewing: {{:data.title}}<br><br>
-
-	{{:data.article}}
-
-	<br><br>
+	Viewing: {{:data.title}}<br>
 	{{:helper.link('CLOSE', null, { "PRG_reset" : 1 })}}
 	{{:helper.link('SAVE', null, { "PRG_savearticle" : 1 })}}
-{{else data.download_progress}}
+	<br><br>
+
+	{{:data.article}}
+{{else data.download_running}}
 	Downloading file...<br><br>
 	<div class='item'>
 		<div class='itemLabel'>
@@ -26,7 +25,7 @@
 			Download speed:
 		</div>
 		<div class='itemContent'>
-			{{data.download_rate}} GQ/s
+			{{:data.download_rate}} GQ/s
 		</div>
 		<div class='itemLabel'>
 			Controls:
