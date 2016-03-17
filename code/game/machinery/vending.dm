@@ -709,10 +709,21 @@
 	req_access = list(access_bar)
 
 /obj/machinery/vending/assist
+	name = "Spare Parts machine"
 	products = list(	/obj/item/device/assembly/prox_sensor = 5,/obj/item/device/assembly/igniter = 3,/obj/item/device/assembly/signaler = 4,
-						/obj/item/weapon/wirecutters = 1, /obj/item/weapon/cartridge/signal = 4)
-	contraband = list(/obj/item/device/flashlight = 5,/obj/item/device/assembly/timer = 2)
-	product_ads = "Only the finest!;Have some tools.;The most robust equipment.;The finest gear in space!"
+						/obj/item/weapon/wirecutters = 1, /obj/item/weapon/cartridge/signal = 4, /obj/item/device/assembly/power_bank = 2,
+						/obj/item/device/assembly/timer = 2, /obj/item/device/assembly/button = 2, /obj/item/device/assembly/data_sender = 5,
+						/obj/item/device/assembly/data_receiver = 5, /obj/item/device/assembly/data_relay = 2, /obj/item/device/assembly/logic_circuit = 5,
+						/obj/item/device/assembly/speaker = 3, /obj/item/device/assembly/screen = 3, /obj/item/device/assembly/switch_device = 5,
+						/obj/item/device/assembly/target_finder = 2, /obj/item/device/assembly/voice = 2, /obj/item/device/assembly/card_reader = 2,
+						/obj/item/device/assembly/data_wireless = 2, /obj/item/device/assembly/paper_printer = 2, /obj/item/device/assembly/paper_scanner = 2,
+						/obj/item/device/assembly/keypad = 2, /obj/item/device/assembly/access_checker = 3, /obj/item/device/assembly/disposal_pad = 2,
+						/obj/item/device/assembly/infra = 2, /obj/item/device/assembly/target_control= 2, /obj/item/device/assembly/clamp = 4, /obj/item/device/assembly/pressure_clamp = 2,
+						/obj/item/device/assembly/valve = 2)
+	contraband = list(/obj/item/device/assembly/wire_safety = 2, /obj/item/device/assembly/shocker = 2, /obj/item/device/assembly/flash = 2,
+					  /obj/item/device/assembly/electric_lock = 3, /obj/item/device/assembly/chem_mixer = 2, /obj/item/device/assembly/chute = 1)
+
+	product_ads = "Make your own toaster!;Have some tools.;The most robust equipment.;The finest gear in space!"
 
 /obj/machinery/vending/coffee
 	name = "Hot Drinks machine"
@@ -809,7 +820,7 @@
 	name = "Toximate 3000"
 	desc = "All the fine parts you need in one vending machine!"
 	products = list(/obj/item/clothing/under/rank/scientist = 6,/obj/item/clothing/suit/bio_suit = 6,/obj/item/clothing/head/bio_hood = 6,
-					/obj/item/device/transfer_valve = 6,/obj/item/device/assembly/timer = 6,/obj/item/device/assembly/signaler = 6,
+					/obj/item/device/assembly/transfer_valve = 6,/obj/item/device/assembly/timer = 6,/obj/item/device/assembly/signaler = 6,
 					/obj/item/device/assembly/prox_sensor = 6,/obj/item/device/assembly/igniter = 6)
 
 /obj/machinery/vending/wallmed1
@@ -841,7 +852,7 @@
 	icon_state = "sec"
 	icon_deny = "sec-deny"
 	req_access = list(access_security)
-	products = list(/obj/item/weapon/handcuffs = 8,/obj/item/weapon/grenade/flashbang = 4,/obj/item/weapon/grenade/chem_grenade/teargas = 4,/obj/item/device/flash = 5,
+	products = list(/obj/item/weapon/handcuffs = 8,/obj/item/device/assembly_holder/grenade/flashbang = 4,/obj/item/device/assembly_holder/grenade/chem_grenade/teargas = 4,/obj/item/device/flash = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 12,/obj/item/weapon/storage/box/evidence = 6)
 	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/weapon/storage/box/donut = 2)
 

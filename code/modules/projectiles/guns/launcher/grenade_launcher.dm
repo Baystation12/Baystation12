@@ -12,7 +12,7 @@
 	throw_distance = 7
 	release_force = 5
 
-	var/obj/item/weapon/grenade/chambered
+	var/obj/item/device/assembly_holder/grenade/chambered
 	var/list/grenades = new/list()
 	var/max_grenades = 5 //holds this + one in the chamber
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
@@ -21,7 +21,7 @@
 /obj/item/weapon/gun/launcher/grenade/proc/pump(mob/M as mob)
 	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
 
-	var/obj/item/weapon/grenade/next
+	var/obj/item/device/assembly_holder/grenade/next
 	if(grenades.len)
 		next = grenades[1] //get this first, so that the chambered grenade can still be removed if the grenades list is empty
 	if(chambered)
@@ -42,33 +42,29 @@
 		if(chambered)
 			user << "\A [chambered] is chambered."
 
-/obj/item/weapon/gun/launcher/grenade/proc/load(obj/item/weapon/grenade/G, mob/user)
-	if(G.loadable)
-		user << "<span class='warning'>\The [G] doesn't seem to fit in \the [src]!</span>"
-		return
-
+/obj/item/weapon/gun/launcher/grenade/proc/load(obj/item/device/assembly_holder/grenade/G, mob/user)
 	if(grenades.len >= max_grenades)
-		user << "<span class='warning'>\The [src] is full.</span>"
+		user << "<span class='warning'>[src] is full.</span>"
 		return
 	user.remove_from_mob(G)
-	G.forceMove(src)
+	G.loc = src
 	grenades.Insert(1, G) //add to the head of the list, so that it is loaded on the next pump
-	user.visible_message("\The [user] inserts \a [G] into \the [src].", "<span class='notice'>You insert \a [G] into \the [src].</span>")
+	user.visible_message("[user] inserts \a [G] into [src].", "<span class='notice'>You insert \a [G] into [src].</span>")
 
 /obj/item/weapon/gun/launcher/grenade/proc/unload(mob/user)
 	if(grenades.len)
-		var/obj/item/weapon/grenade/G = grenades[grenades.len]
+		var/obj/item/device/assembly_holder/grenade/G = grenades[grenades.len]
 		grenades.len--
 		user.put_in_hands(G)
-		user.visible_message("\The [user] removes \a [G] from [src].", "<span class='notice'>You remove \a [G] from \the [src].</span>")
+		user.visible_message("[user] removes \a [G] from [src].", "<span class='notice'>You remove \a [G] from [src].</span>")
 	else
-		user << "<span class='warning'>\The [src] is empty.</span>"
+		user << "<span class='warning'>[src] is empty.</span>"
 
 /obj/item/weapon/gun/launcher/grenade/attack_self(mob/user)
 	pump(user)
 
 /obj/item/weapon/gun/launcher/grenade/attackby(obj/item/I, mob/user)
-	if((istype(I, /obj/item/weapon/grenade)))
+	if((istype(I, /obj/item/device/assembly_holder/grenade)))
 		load(I, user)
 	else
 		..()
@@ -81,8 +77,8 @@
 
 /obj/item/weapon/gun/launcher/grenade/consume_next_projectile()
 	if(chambered)
-		chambered.det_time = 10
-		chambered.activate(null)
+		spawn(10)
+			chambered.prime()
 	return chambered
 
 /obj/item/weapon/gun/launcher/grenade/handle_post_fire(mob/user)
@@ -102,23 +98,19 @@
 	return
 
 //load and unload directly into chambered
-/obj/item/weapon/gun/launcher/grenade/underslung/load(obj/item/weapon/grenade/G, mob/user)
-	if(!G.loadable)
-		user << "<span class='warning'>[G] doesn't seem to fit in the [src]!</span>"
-		return
-
+/obj/item/weapon/gun/launcher/grenade/underslung/load(obj/item/device/assembly_holder/grenade/G, mob/user)
 	if(chambered)
-		user << "<span class='warning'>\The [src] is already loaded.</span>"
+		user << "<span class='warning'>[src] is already loaded.</span>"
 		return
 	user.remove_from_mob(G)
-	G.forceMove(src)
+	G.loc = src
 	chambered = G
-	user.visible_message("\The [user] load \a [G] into \the [src].", "<span class='notice'>You load \a [G] into \the [src].</span>")
+	user.visible_message("[user] load \a [G] into [src].", "<span class='notice'>You load \a [G] into [src].</span>")
 
 /obj/item/weapon/gun/launcher/grenade/underslung/unload(mob/user)
 	if(chambered)
 		user.put_in_hands(chambered)
-		user.visible_message("\The [user] removes \a [chambered] from \the[src].", "<span class='notice'>You remove \a [chambered] from \the [src].</span>")
+		user.visible_message("[user] removes \a [chambered] from [src].", "<span class='notice'>You remove \a [chambered] from [src].</span>")
 		chambered = null
 	else
-		user << "<span class='warning'>\The [src] is empty.</span>"
+		user << "<span class='warning'>[src] is empty.</span>"

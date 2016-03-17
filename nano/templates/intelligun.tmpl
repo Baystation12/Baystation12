@@ -1,0 +1,106 @@
+
+{{
+$('body').css("background-color","#8f1414");
+$('body').css("background-image","url('uiBackground-Syndicate.png')");
+$('body').css("background-position","50% 0");
+$('body').css("background-repeat","repeat-x");
+}}
+<div class='item'>
+{{if data.can_open}}	
+	<div class='toxin'><b>Access Granted!</b></div>
+	{{if data.state == "MAIN"}}
+		<div style='float'>
+			<H1><b>Commands:</b></H1>
+		</div>
+		{{for data.commands}}
+			<div style='float'>
+				{{if index % 4 == 0}}
+					<br><br>
+				{{/if}}	
+				{{:helper.link(''+value+'', 'wrench', { 'command' : value })}}
+			</div>
+		{{/for}}
+		<H1><b>Information:</b></H1>
+		<b>Power status:</b>
+		{{if data.powerstate == 0}}
+			<div class='toxin'><b>Nominal</b></div>
+			<div class='itemLabel'><b>Power Use:</b></div>
+			<div class='itemContent'>{{:data.poweruse}}w/sec</div><br>
+			<div class='itemLabelNarrow'><b>Charge:</b></div>
+			<div class='itemContent'>{{:data.powerleft}}w</div><br>
+			<div class='itemLabel'><b>Battery Life:</b></div>			
+			<div class='itemContent'>{{:data.powertime}}m</div>				
+		{{else data.powerstate == 4}}
+			<div class='brute'><b>Backup Power!</b></div>
+			<div class='itemLabel'><b>Power Use:</b></div>
+			<div class='itemContent'><div class='brute'>{{:data.poweruse}}w/sec</div></div><br>
+			<div class='itemLabelNarrow'><b>Charge:</b></div>
+			<div class='itemContent'><div class='brute'>{{:data.powerleft}}w</div></div><br>
+			<div class='itemLabel'><b>Battery Life:</b></div>			
+			<div class='itemContent'><div class='brute'>{{:data.powertime}}m</div></div>	
+		{{else data.powerstate == 3}}
+			<div class='brute'><b>Low Power!</b></div>
+			<div class='itemLabel'><b>Power Use:</b></div>
+			<div class='itemContent'><div class='brute'>{{:data.poweruse}}w/sec</div></div><br>
+			<div class='itemLabelNarrow'><b>Charge:</b></div>
+			<div class='itemContent'><div class='brute'>{{:data.powerleft}}w</div></div><br>
+			<div class='itemLabel'><b>Battery Life:</b></div>			
+			<div class='itemContent'><div class='brute'>{{:data.powertime}}m</div></div>	
+		{{else data.powerstate == 2}}
+			<div class='burn'><b>Low Power!</b></div>
+			<div class='itemLabel'><b>Power Use:</b></div>
+			<div class='itemContent'><div class='burn'>{{:data.poweruse}}w/sec</div></div><br>
+			<div class='itemLabelNarrow'><b>Charge:</b></div>
+			<div class='itemContent'><div class='burn'>{{:data.powerleft}}w</div></div><br>
+			<div class='itemLabel'><b>Battery Life:</b></div>			
+			<div class='itemContent'><div class='burn'>{{:data.powertime}}m</div></div>	
+		{{else data.powerstate == 1}}
+			<div class='oxy'><b>Backup Power Uninstalled!</b></div>
+			<div class='itemLabel'><b>Power Use:</b></div>
+			<div class='itemContent'>{{:data.poweruse}}w/sec</div><br>
+			<div class='itemLabelNarrow'><b>Charge:</b></div>
+			<div class='itemContent'>{{:data.powerleft}}w</div><br>
+			<div class='itemLabel'><b>Battery Life:</b></div>			
+			<div class='itemContent'>{{:data.powertime}}m</div>			
+		{{/if}}		
+		<div class='itemLabelNarrow'><b>Lock:</b></div>
+		<div class='itemContent'>{{:data.locked}}</div><br>
+		<div class='itemLabelNarrow'><b>Owner:</b></div>
+		<div class='itemContentWide'>{{:data.owner}}</div><br>
+		<div class='itemLabelNarrow'><b>Speech:</b></div>
+		<div class='itemContenWidet'>{{:data.speech}}</div>
+		<div class='itemLabelNarrow'><b>Integrity:</b></div>
+		<div class='itemContentWide'>{{:data.integrity}}%</div>
+		<div class='itemLabelWide'><b>AI Name</b></div>
+		<div class='fixedLeft'>{{:helper.link(''+data.ai_name+'', 'wrench', { 'command' : data.ai_name })}}</div>
+		<div class='itemLabelWide'><b>AI:</b></div>
+		<div class='fixedLeft'>{{:data.ai_enabled}}</div><br>		
+		
+		<br><br><div class='fixedLeftWide'>
+			{{:helper.link('Medical Data', 'medical', { 'command' : 'medical' })}}
+			{{:helper.link('Record Data', 'logs', { 'command' : 'data' })}}
+	{{else data.state == "MEDICAL"}}
+		{{for data.medical_data}}
+			{{:value}}<br>			
+		{{empty}}
+			No stored medical data!
+		{{/for}}
+		<br><br><div class='fixedLeft'>
+			{{:helper.link('Return', 'return', { 'command' : 'return' })}}</div>		
+	{{else}}
+		{{for data.recorded_data}}
+			{{:value}}<br>
+		{{empty}}
+			No recorded data!
+		{{/for}}
+		<br><br><div class='fixedLeft'>
+			{{:helper.link('Return', 'return', { 'command' : 'return' })}}</div>		
+	{{/if}}
+{{else}}
+<div style='brute'>
+	<b>Access Denied!</b>
+</div>	
+{{/if}}
+<br><br>{{:helper.link('Refresh', 'wrench', { 'command' : 'refresh' })}}
+</div>			
+
