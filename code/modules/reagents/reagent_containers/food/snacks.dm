@@ -3104,7 +3104,7 @@
 	icon_state = "rawsticks"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=12)
-	nutriment_desc = list("raw potato")
+	nutriment_desc = list("raw potato" = 3)
 	nutriment_amt = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood
@@ -3114,7 +3114,7 @@
 	trash = /obj/item/trash/liquidfood
 	filling_color = "#A8A8A8"
 	center_of_mass = list("x"=16, "y"=15)
-	nutriment_desc = list("chalk")
+	nutriment_desc = list("chalk" = 6)
 	nutriment_amt = 20
 	New()
 		..()
