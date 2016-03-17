@@ -1,0 +1,6 @@
+author: Kelenius
+
+delete-after: True
+
+changes: 
+  - bugfix: "Potassium and nitroglycerin explosive grenades now work."
