@@ -1,0 +1,6 @@
+author: Datraen
+
+delete-after: True
+
+changes: 
+  - bugfix: "Harmbaton no longer causes halloss while inactive."
