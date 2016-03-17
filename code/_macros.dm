@@ -19,6 +19,8 @@
 
 #define ishuman(A) istype(A, /mob/living/carbon/human)
 
+#define islist(A) istype(A, /list)
+
 #define isliving(A) istype(A, /mob/living)
 
 #define ismouse(A) istype(A, /mob/living/simple_animal/mouse)
