@@ -180,6 +180,7 @@
 
 /datum/nano_module/computer_chatclient
 	name = "NTNet Relay Chat Client"
+	adheres_to_NT_standard = FALSE
 
 /datum/nano_module/computer_chatclient/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	if(!ntnet_global || !ntnet_global.chat_channels)

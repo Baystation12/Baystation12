@@ -58,6 +58,7 @@
 
 /datum/nano_module/revelation
 	name = "Revelation Virus"
+	adheres_to_NT_standard = FALSE
 
 /datum/nano_module/revelation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = list()

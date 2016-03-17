@@ -177,6 +177,7 @@
 
 /datum/nano_module/computer_filemanager
 	name = "NTOS File Manager"
+	adheres_to_NT_standard = FALSE
 
 /datum/nano_module/computer_filemanager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 

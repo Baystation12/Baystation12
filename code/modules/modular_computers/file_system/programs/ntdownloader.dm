@@ -102,6 +102,7 @@
 /datum/nano_module/computer_ntnetdownload
 	name = "Network Downloader"
 	var/obj/item/modular_computer/my_computer = null
+	adheres_to_NT_standard = FALSE
 
 /datum/nano_module/computer_ntnetdownload/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	if(program)

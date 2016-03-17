@@ -10,6 +10,7 @@
 
 /datum/nano_module/card_mod
 	name = "ID card modification program"
+	adheres_to_NT_standard = FALSE
 	var/mod_mode = 1
 	var/is_centcom = 0
 	var/show_assignments = 0

@@ -92,6 +92,7 @@ var/global/nttransfer_uid = 0
 
 /datum/nano_module/computer_nttransfer
 	name = "NTNet P2P Transfer Client"
+	adheres_to_NT_standard = FALSE
 
 /datum/nano_module/computer_nttransfer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	if(!program)

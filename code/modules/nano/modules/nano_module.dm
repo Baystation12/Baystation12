@@ -2,6 +2,7 @@
 	var/name
 	var/host
 	var/datum/computer_file/program/program = null	// Program-Based computer program that runs this nano module. Defaults to null.
+	var/adheres_to_NT_standard = TRUE
 
 /datum/nano_module/New(var/host)
 	// Machinery-based computers wouldn't work w/o this as nano will assume they're items inside containers.

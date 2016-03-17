@@ -38,6 +38,7 @@
 
 /datum/nano_module/computer_dos
 	name = "DoS Traffic Generator"
+	adheres_to_NT_standard = FALSE
 
 /datum/nano_module/computer_dos/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	if(!ntnet_global)

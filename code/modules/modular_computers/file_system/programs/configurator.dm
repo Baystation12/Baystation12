@@ -17,6 +17,7 @@
 /datum/nano_module/computer_configurator
 	name = "NTOS Computer Configuration Tool"
 	var/obj/item/modular_computer/movable = null
+	adheres_to_NT_standard = FALSE
 
 /datum/nano_module/computer_configurator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	if(program)
