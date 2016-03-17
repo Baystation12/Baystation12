@@ -1848,7 +1848,7 @@
 	name = "Mead"
 	id = "mead"
 	description = "A Viking's drink, though a cheap one."
-	taste_description = "sweet yet alcoholic"
+	taste_description = "sweet, sweet alcohol"
 	reagent_state = LIQUID
 	color = "#664300"
 	strength = 30
