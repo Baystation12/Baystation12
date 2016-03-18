@@ -70,46 +70,25 @@
 	//  When either origin or destination is a turf and the other is not.
 	var/is_new_area = (is_origin_turf ^ is_destination_turf) || (is_origin_turf && is_destination_turf && loc.loc != destination.loc)
 
-	var/atom/old_loc = loc
-	if(old_loc)
-		// If we're denied exit from a turf then Bump()
-		if(!old_loc.Exit(src, destination) && is_origin_turf)
-			src.Bump(old_loc) // For the Bump() proc the argment, old_loc in this case, is the blocking object (as opposed to the object that's being blocked)
-		if(is_origin_turf) // If we're leaving a turf, uncross all movable atoms
-			for(var/atom/movable/AM in old_loc)
-				if(AM != src)
-					AM.Uncross(src)		// We don't Bump() in the case of failed Uncross()/Cross() as it'll likely lead issues such as mobs switching places across the map.
-			if(is_new_area && is_origin_turf)
-				old_loc.loc.Exit(src, destination)
-
-	if(destination)
-		// If we're denied entry into a turf then Bump()
-		if(!destination.Enter(src, old_loc) && is_destination_turf)
-			src.Bump(destination)
-		if(is_destination_turf) // If we're entering a turf, cross all movable atoms
-			for(var/atom/movable/AM in destination)
-				AM.Cross(src)
-			if(is_new_area && is_destination_turf)
-				destination.loc.Enter(src, old_loc)
-
+	var/atom/origin = loc
 	loc = destination
 
-	if(old_loc)
-		old_loc.Exited(src, destination)
+	if(origin)
+		origin.Exited(src, destination)
 		if(is_origin_turf)
-			for(var/atom/movable/AM in old_loc)
+			for(var/atom/movable/AM in origin)
 				AM.Uncrossed(src)
 			if(is_new_area && is_origin_turf)
-				old_loc.loc.Exited(src, destination)
+				origin.loc.Exited(src, destination)
 
 	if(destination)
-		destination.Entered(src, old_loc, special_event)
+		destination.Entered(src, origin, special_event)
 		if(is_destination_turf) // If we're entering a turf, cross all movable atoms
 			for(var/atom/movable/AM in loc)
 				if(AM != src)
 					AM.Crossed(src)
 			if(is_new_area && is_destination_turf)
-				destination.loc.Entered(src, old_loc)
+				destination.loc.Entered(src, origin)
 	return 1
 
 //called when src is thrown into hit_atom
