@@ -8,7 +8,7 @@
 	silicon_subsystems.Cut()
 	for(var/subtype in subtypesof(/datum/nano_module))
 		var/datum/nano_module/NM = subtype
-		if(initial(NM.adheres_to_NT_standard))
+		if(initial(NM.available_to_ai))
 			silicon_subsystems += NM
 	..()
 
