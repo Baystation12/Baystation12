@@ -1,4 +1,0 @@
-author: TheWelp
-delete-after: True
-changes: 
-  - rscadd: "Added ability for carbon mobs to taste. Species can set specific sensitivity to taste. Default of 1."
