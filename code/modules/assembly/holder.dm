@@ -318,6 +318,7 @@
 			user.visible_message("<span class='danger'>[user] begins stabbing \the [src] into [M]!</span>")
 			if(do_after(user, 60))
 				user.visible_message("<span class='danger'>[user] stabs \the [src] into [M]!</span>", "<span class='warning'>You stab \the [src] into [M]!</span>")
+			else return
 		var/obj/item/organ/external/affected = M.get_organ(user.zone_sel.selecting)
 		implanted(target, affected)
 	else
@@ -768,7 +769,7 @@
 
 	max_connections = 5
 
-/obj/item/device/assembly_holder/box
+/obj/item/device/assembly_holder/box/large
 	name = "large metal box"
 	desc = "A large metal box with fittings for up to seven devices."
 	icon_state = "box"

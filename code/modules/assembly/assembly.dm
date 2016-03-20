@@ -147,21 +147,38 @@
 					new_connects_to.Cut(i, i+1)
 			connects_to = new_connects_to
 	if(href_list["settings"])
-		var/index = href_list["settings"]
-		if(!(index % 2) && holder)
-			add_debug_log("[holder.connected_devices[text2num(index)]]")
-			var/obj/item/device/assembly/opened = holder.connected_devices[text2num(index)]
-			if(opened)
-				add_debug_log("Interacting with [opened.name]")
-				opened.ui_interact(usr, "main", null, 1)
+		if(usr)
+			var/index = href_list["settings"]
+			if(index % 2)
+				add_debug_log("Settings unresponsive! \[[src]\]")
+			else
+				var/failed = 0
+				var/obj/item/device/assembly/opened = holder.connected_devices[text2num(index)]
+				for(var/obj/item/device/assembly/A in holder.connected_devices)
+					if(!A.holder_interface())
+						failed = 1
+						break
+				if(failed)
+					usr << "<span class='warning'>That device's interface is electronically locked!</span>"
+				else if(opened)
+					if(!(opened.active_wires & WIRE_ASSEMBLY_PASSWORD) || holder.admin_access(usr))
+						opened.ui_interact(usr, state = interactive_state)
+					else
+						usr << "<span class='warning'>Access denied!</span>"
 	if(href_list["wiring"])
-		add_debug_log("Settings: [href_list["settings"]]")
 		var/index = href_list["wiring"]
-		if(!(index % 2) && holder)
-			add_debug_log("[holder.connected_devices[text2num(index)]]")
-			var/obj/item/device/assembly/opened = holder.connected_devices[text2num(index)]
+		var/failed = 0
+		var/list/failures = list()
+		for(var/obj/item/device/assembly/A in holder.connected_devices)
+			if(!A.holder_interface())
+				failed = 1
+				failures += A
+		if(index)
+			var/obj/item/device/assembly/opened = connected_devices[text2num(index)]
 			if(opened)
-				if(opened.wire_holder)
+				if(failed && !(opened in failures))
+					usr << "<span class='warning'>There is an electronic lock on the wiring!</span>"
+				else if(opened.wire_holder)
 					usr.set_machine(opened)
 					opened.wire_holder.Interact(usr)
 	if(href_list["activate"])
