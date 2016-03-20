@@ -677,10 +677,14 @@ datum/preferences
 		preview_icon.Blend(eyes_s, ICON_OVERLAY)
 		if(current_species.appearance_flags & HAS_UNDERWEAR)
 			for(var/underwear_category_name in all_underwear)
-				var/underwear_item_name = all_underwear[underwear_category_name]
 				var/datum/category_group/underwear/underwear_category = global_underwear.categories_by_name[underwear_category_name]
-				var/datum/category_item/underwear/underwear_item = underwear_category.items_by_name[underwear_item_name]
-				underwear_item.apply_to_icon(preview_icon)
+				if(underwear_category)
+					var/underwear_item_name = all_underwear[underwear_category_name]
+					var/datum/category_item/underwear/underwear_item = underwear_category.items_by_name[underwear_item_name]
+					underwear_item.apply_to_icon(preview_icon)
+				else
+					all_underwear -= underwear_category_name
+
 		if(clothes_s)
 			preview_icon.Blend(clothes_s, ICON_OVERLAY)
 
