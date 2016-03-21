@@ -166,6 +166,7 @@
 #include "code\datums\recipe.dm"
 #include "code\datums\sun.dm"
 #include "code\datums\supplypacks.dm"
+#include "code\datums\weakref.dm"
 #include "code\datums\ai\ai.dm"
 #include "code\datums\extensions\extensions.dm"
 #include "code\datums\extensions\multitool\_multitool.dm"
