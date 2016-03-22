@@ -388,21 +388,23 @@ var/global/datum/controller/occupations/job_master
 
 		if(!joined_late)
 			var/obj/S = null
+			var/list/loc_list = new()
 			for(var/obj/effect/landmark/start/sloc in landmarks_list)
 				if(sloc.name != rank)	continue
 				if(locate(/mob/living) in sloc.loc)	continue
-				S = sloc
-				break
-			if(!S)
+				loc_list += sloc
+			if(loc_list.len)
+				S = pick(loc_list)
+			else
 				S = locate("start*[rank]") // use old stype
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
-				H.loc = S.loc
+				H.forceMove(S.loc)
 			else
 				LateSpawn(H.client, rank)
 
 			// Moving wheelchair if they have one
 			if(H.buckled && istype(H.buckled, /obj/structure/bed/chair/wheelchair))
-				H.buckled.loc = H.loc
+				H.buckled.forceMove(H.loc)
 				H.buckled.set_dir(H.dir)
 
 		// If they're head, give them the account info for their department
