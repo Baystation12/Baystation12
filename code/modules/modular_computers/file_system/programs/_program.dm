@@ -1,7 +1,7 @@
-/datum/computer_file/program/initial_data()
-	return get_header_data()
+/obj/machinery/modular_computer/initial_data()
+	return cpu ? cpu.get_header_data() : ..()
 
-/datum/computer_file/program/update_layout()
+/obj/machinery/modular_computer/update_layout()
 	return TRUE
 
 /datum/nano_module/program
