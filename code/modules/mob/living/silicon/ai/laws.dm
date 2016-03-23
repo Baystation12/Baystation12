@@ -24,4 +24,4 @@
 /mob/living/silicon/ai/proc/ai_checklaws()
 	set category = "AI Commands"
 	set name = "State Laws"
-	subsystem_law_manager()
+	open_subsystem(/datum/nano_module/law_manager)

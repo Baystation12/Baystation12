@@ -125,7 +125,7 @@
 		add_hiddenprint(user)
 		destroy()
 
-/obj/machinery/camera/attackby(obj/W as obj, mob/living/user as mob)
+/obj/machinery/camera/attackby(obj/item/W as obj, mob/living/user as mob)
 	update_coverage()
 	// DECONSTRUCTION
 	if(isscrewdriver(W))

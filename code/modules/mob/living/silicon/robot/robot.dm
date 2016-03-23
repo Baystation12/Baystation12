@@ -234,7 +234,7 @@
 	if(new_sprites && new_sprites.len)
 		module_sprites = new_sprites.Copy()
 		//Custom_sprite check and entry
-		
+
 		if (custom_sprite == 1)
 			var/list/valid_states = icon_states(CUSTOM_ITEM_SYNTH)
 			if("[ckey]-[modtype]" in valid_states)
@@ -429,7 +429,7 @@
 
 // update the status screen display
 /mob/living/silicon/robot/Stat()
-	..()
+	. = ..()
 	if (statpanel("Status"))
 		show_cell_power()
 		show_jetpack_pressure()
@@ -779,7 +779,7 @@
 		return 1
 
 	if (href_list["showalerts"])
-		subsystem_alarm_monitor()
+		open_subsystem(/datum/nano_module/alarm_monitor/all)
 		return 1
 
 	if (href_list["mod"])
@@ -963,11 +963,9 @@
 
 /mob/living/silicon/robot/proc/add_robot_verbs()
 	src.verbs |= robot_verbs_default
-	src.verbs |= silicon_subsystems
 
 /mob/living/silicon/robot/proc/remove_robot_verbs()
 	src.verbs -= robot_verbs_default
-	src.verbs -= silicon_subsystems
 
 // Uses power from cyborg's cell. Returns 1 on success or 0 on failure.
 // Properly converts using CELLRATE now! Amount is in Joules.

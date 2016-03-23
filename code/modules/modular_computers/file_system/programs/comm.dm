@@ -7,7 +7,7 @@
 	filename = "comm"
 	filedesc = "Command and communications program."
 	program_icon_state = "comm"
-	nanomodule_path = /datum/nano_module/comm
+	nanomodule_path = /datum/nano_module/program/comm
 	extended_desc = "Used to command and control the station. Can relay long-range communications."
 	required_access = access_heads
 	requires_ntnet = 1
@@ -22,7 +22,7 @@
 	temp.message_core.messages = message_core.messages.Copy()
 	return temp
 
-/datum/nano_module/comm
+/datum/nano_module/program/comm
 	name = "Command and communications program"
 	var/current_status = STATE_DEFAULT
 	var/msg_line1 = ""
@@ -33,14 +33,12 @@
 	var/current_viewing_message_id = 0
 	var/current_viewing_message = null
 
-/datum/nano_module/comm/New()
+/datum/nano_module/program/comm/New()
 	..()
 	crew_announcement.newscast = 1
 
-/datum/nano_module/comm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
-	var/list/data = list()
-	if(program)
-		data = program.get_header_data()
+/datum/nano_module/program/comm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+	var/list/data = host.initial_data()
 
 	if(program)
 		data["emagged"] = program.computer_emagged
@@ -92,18 +90,18 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/comm/proc/is_autenthicated(var/mob/user)
+/datum/nano_module/program/comm/proc/is_autenthicated(var/mob/user)
 	if(program)
 		return program.can_run(user)
 	return 1
 
-/datum/nano_module/comm/proc/obtain_message_listener()
+/datum/nano_module/program/comm/proc/obtain_message_listener()
 	if(program)
 		var/datum/computer_file/program/comm/P = program
 		return P.message_core
 	return global_message_listener
 
-/datum/nano_module/comm/Topic(href, href_list)
+/datum/nano_module/program/comm/Topic(href, href_list)
 	if(..())
 		return 1
 	var/mob/user = usr
@@ -240,7 +238,7 @@
 
 	nanomanager.update_uis(src)
 
-/datum/nano_module/comm/proc/post_status(var/command, var/data1, var/data2)
+/datum/nano_module/program/comm/proc/post_status(var/command, var/data1, var/data2)
 
 	var/datum/radio_frequency/frequency = radio_controller.return_frequency(1435)
 

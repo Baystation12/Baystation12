@@ -19,8 +19,6 @@
 	S["preferences_disabled"] << pref.preferences_disabled
 
 /datum/category_item/player_setup_item/player_global/settings/sanitize_preferences()
-	var/mob/pref_mob = preference_mob()
-
 	// Ensure our preferences are lists.
 	if(!istype(pref.preferences_enabled, /list))
 		pref.preferences_enabled = list()
@@ -35,7 +33,7 @@
 		if((client_pref.key in pref.preferences_enabled) || (client_pref.key in pref.preferences_disabled))
 			continue
 
-		if(client_pref.enabled_by_default  && client_pref.may_toggle(pref_mob))
+		if(client_pref.enabled_by_default)
 			pref.preferences_enabled += client_pref.key
 		else
 			pref.preferences_disabled += client_pref.key

@@ -104,7 +104,7 @@
 
 	//play the recieving admin the adminhelp sound (if they have them enabled)
 	//non-admins shouldn't be able to disable this
-	if(is_preference_enabled(/datum/client_preference/holder/play_adminhelp_ping))
+	if(C.is_preference_enabled(/datum/client_preference/holder/play_adminhelp_ping))
 		C << 'sound/effects/adminhelp.ogg'
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
