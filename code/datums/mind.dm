@@ -61,6 +61,9 @@
 	//put this here for easier tracking ingame
 	var/datum/money_account/initial_account
 
+	//used for optional self-objectives that antagonists can give themselves, which are displayed at the end of the round.
+	var/ambitions
+
 /datum/mind/New(var/key)
 	src.key = key
 	..()

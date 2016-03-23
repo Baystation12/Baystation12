@@ -106,6 +106,11 @@
 
 	show_objectives(player)
 
+	player.current << "<span class='notice'>Once you decide on a goal to pursue, you can optionally display it to \
+	everyone at the end of the shift with the <b>Set Ambition</b> verb, located in the IC tab.  You can change this at any time, \
+	and it otherwise has no bearing on your round.</span>"
+	player.current.verbs |= /mob/living/proc/write_ambition
+
 	// Clown clumsiness check, I guess downstream might use it.
 	if (player.current.mind)
 		if (player.current.mind.assigned_role == "Clown")
