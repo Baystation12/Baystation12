@@ -73,8 +73,8 @@
 		breather = C
 		spawn(1)
 		if(!breather.internal && tank)
-		breather.internal = tank
-		breather.internals.icon_state = "internal1"
+			breather.internal = tank
+			breather.internals.icon_state = "internal1"
 		use_power = 2
 
 
