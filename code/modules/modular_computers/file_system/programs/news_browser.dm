@@ -7,7 +7,7 @@
 	requires_ntnet = 1
 	available_on_ntnet = 1
 
-	nanomodule_path = /datum/nano_module/computer_newsbrowser/
+	nanomodule_path = /datum/nano_module/program/computer_newsbrowser/
 	var/datum/computer_file/data/news_article/loaded_article
 	var/download_progress = 0
 	var/download_netspeed = 0
@@ -79,10 +79,10 @@
 		nanomanager.update_uis(NM)
 
 
-/datum/nano_module/computer_newsbrowser
+/datum/nano_module/program/computer_newsbrowser
 	name = "NTNet/ExoNet News Browser"
 
-/datum/nano_module/computer_newsbrowser/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/datum/nano_module/program/computer_newsbrowser/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 
 	var/datum/computer_file/program/newsbrowser/PRG
 	var/list/data = list()
