@@ -7,19 +7,22 @@
     var/obj/item/clothing/mask/gas/contained
     var/mob/living/carbon/breather
 
+    var/spawn_type = /obj/item/weapon/tank/emergency_oxygen/engi
+
     power_channel = ENVIRON
     idle_power_usage = 10
     active_power_usage = 120 // No idea what the realistic amount would be.
 
 /obj/machinery/oxygen_pump/New()
     ..()
-    tank = new /obj/item/weapon/tank/oxygen (src)
+    tank = new spawn_type (src)
     contained = new (src)
 
 /obj/machinery/oxygen_pump/Destroy()
     if(breather)
         breather.internals = null
-    qdel(tank)
+    if(tank)
+    	qdel(tank)
     if(breather)
         breather.remove_from_mob(contained)
     qdel(contained)
@@ -54,7 +57,10 @@
         user.visible_message("<span class='notice'>[user] takes \the [contained] out of \the [src]!</span>", "<span class='notice'>You take \the [contained] out of \the [src]!</span>")
         attach_mask(user)
     else if(user == breather)
-        tank.ui_interact(user)
+    	if(tank)
+       		tank.ui_interact(user)
+       	else
+       		user << "<span class='warning'>There is no tank installed!</span>"
     else
         user << "<span class='notice'>\The [contained] has already been taken out!</span>"
 
@@ -62,10 +68,11 @@
     if(C && istype(C))
         contained.forceMove(get_turf(C))
         C.equip_to_slot(contained, slot_wear_mask)
-        tank.forceMove(C)
+        if(tank)
+        	tank.forceMove(C)
         breather = C
         spawn(1)
-        if(!breather.internal)
+        if(!breather.internal && tank)
             breather.internal = tank
             breather.internals.icon_state = "internal1"
         use_power = 2
@@ -87,7 +94,8 @@
             src.add_fingerprint(user)
     if(I == contained)
         user << "<span class='notice'>You place \the [contained] back into \the [src].</span>"
-        tank.forceMove(src)
+        if(tank)
+        	tank.forceMove(src)
         breather.remove_from_mob(contained)
         contained.forceMove(src)
         src.visible_message("<span class='notice'>\The [contained] rapidly retracts back into \the [src]!</span>")
@@ -96,21 +104,30 @@
 
 /obj/machinery/oxygen_pump/examine(var/mob/user)
     ..()
-    user << "The meter is [round(tank.air_contents.return_pressure() ? tank.air_contents.return_pressure() : 0) ? "<span class='warning'>red!</span>" : "<span class='notice'>green.</span>"]"
+    if(tank)
+    	user << "The meter shows [round(tank.air_contents.return_pressure())]"
+    else
+    	user << "<span class='warning'>It is missing a tank!</span>"
     return
 
 
 /obj/machinery/oxygen_pump/process()
     if(breather)
         if(!Adjacent(breather) || breather.wear_mask != contained)
-            tank.forceMove(src)
+        	if(tank)
+            	tank.forceMove(src)
             breather.remove_from_mob(contained)
             contained.forceMove(src)
             src.visible_message("<span class='notice'>\The [contained] rapidly retracts back into \the [src]!</span>")
             breather = null
             use_power = 1
-        else if(!breather.internal)
+        else if(!breather.internal && tank)
             breather.internal = tank
             breather.internals.icon_state = "internal1"
 
         return
+
+/obj/machinery/oxygen_pump/anesthetic
+	name = "anesthetic pump"
+	spawn_type = /obj/item/weapon/tank/anesthetic
+//	icon_state = "anesthetic_tank" //TODO
