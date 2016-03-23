@@ -427,7 +427,7 @@
 	for (var/obj/item/I in M)
 		if (istype(I, /obj/item/weapon/implant))
 			continue
-		M.drop_from_inventory(I)
+		M.removeItem(I)
 		if(I.loc != M)
 			qdel(I)
 	switch(dresscode)

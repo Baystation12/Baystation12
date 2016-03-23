@@ -38,11 +38,11 @@
 
 //Drops the item in our left hand
 /mob/living/drop_l_hand(var/atom/Target)
-	return drop_from_inventory(l_hand, Target)
+	return removeItem(l_hand, Target)
 
 //Drops the item in our right hand
 /mob/living/drop_r_hand(var/atom/Target)
-	return drop_from_inventory(r_hand, Target)
+	return removeItem(r_hand, Target)
 
 /mob/living/proc/hands_are_full()
 	return (r_hand && l_hand)

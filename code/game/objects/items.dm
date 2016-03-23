@@ -78,10 +78,9 @@
 	qdel(hidden_uplink)
 	hidden_uplink = null
 	if(ismob(loc))
-		var/mob/m = loc
-		m.drop_from_inventory(src)
-		m.update_held_icons()
-		src.loc = null
+		var/mob/M = loc
+		M.removeItem(src, null, force = 1)
+		M.update_held_icons()
 	return ..()
 
 /obj/item/device
@@ -161,7 +160,7 @@
 
 	src.throwing = 0
 	if (src.loc == user)
-		if(!user.unEquip(src))
+		if(!user.removeItem(src))
 			return
 	else
 		if(isliving(src.loc))

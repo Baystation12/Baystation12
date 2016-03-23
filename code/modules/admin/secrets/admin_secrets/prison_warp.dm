@@ -27,7 +27,7 @@
 				if(istype(W, /obj/item/organ/external))
 					continue
 					//don't strip organs
-				H.drop_from_inventory(W)
+				H.removeItem(W)
 			//teleport person to cell
 			H.loc = pick(prisonwarp)
 			H.equip_to_slot_or_del(new /obj/item/clothing/under/color/orange(H), slot_w_uniform)

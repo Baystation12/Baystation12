@@ -32,7 +32,7 @@
 			user.client.screen -= I
 			U.contents.Remove(I)
 		else if(user.item_is_in_hands(I))
-			user.drop_from_inventory(I)
+			user.removeItem(I)
 		else
 			return
 

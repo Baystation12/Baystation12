@@ -75,9 +75,8 @@ var/global/list/stool_cache = list() //haha stool
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(M)
 		
-		user.remove_from_mob(src)
 		dismantle()
-		qdel(src)
+		qdel(src) //will remove the item from user
 		var/mob/living/T = M
 		T.Weaken(10)
 		T.apply_damage(20)
@@ -115,9 +114,7 @@ var/global/list/stool_cache = list() //haha stool
 			user << "\The [src] is already padded."
 			return
 		var/obj/item/stack/C = W
-		if(C.get_amount() < 1) // How??
-			user.drop_from_inventory(C)
-			qdel(C)
+		if(C.get_amount() < 1)
 			return
 		var/padding_type //This is awful but it needs to be like this until tiles are given a material var.
 		if(istype(W,/obj/item/stack/tile/carpet))
@@ -131,8 +128,7 @@ var/global/list/stool_cache = list() //haha stool
 			return
 		C.use(1)
 		if(!istype(src.loc, /turf))
-			user.drop_from_inventory(src)
-			src.loc = get_turf(src)
+			user.removeItem(src, get_turf(src))
 		user << "You add padding to \the [src]."
 		add_padding(padding_type)
 		return

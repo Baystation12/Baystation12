@@ -310,8 +310,7 @@
 
 	user << "You add the robot arm to [src]."
 	loc = A //Place the water tank into the assembly, it will be needed for the finished bot
-	user.drop_from_inventory(S)
-	qdel(S)
+	user.deleteItem(S)
 
 /obj/item/weapon/farmbot_arm_assembly/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -319,22 +318,19 @@
 		build_step++
 		user << "You add the plant analyzer to [src]."
 		name = "farmbot assembly"
-		user.remove_from_mob(W)
-		qdel(W)
+		user.deleteItem(W)
 
 	else if((istype(W, /obj/item/weapon/reagent_containers/glass/bucket)) && (build_step == 1))
 		build_step++
 		user << "You add a bucket to [src]."
 		name = "farmbot assembly with bucket"
-		user.remove_from_mob(W)
-		qdel(W)
+		user.deleteItem(W)
 
 	else if((istype(W, /obj/item/weapon/material/minihoe)) && (build_step == 2))
 		build_step++
 		user << "You add a minihoe to [src]."
 		name = "farmbot assembly with bucket and minihoe"
-		user.remove_from_mob(W)
-		qdel(W)
+		user.deleteItem(W)
 
 	else if((isprox(W)) && (build_step == 3))
 		build_step++
@@ -344,8 +340,7 @@
 			wTank.loc = S
 			S.tank = wTank
 		S.name = created_name
-		user.remove_from_mob(W)
-		qdel(W)
+		user.deleteItem(W)
 		qdel(src)
 
 	else if(istype(W, /obj/item/weapon/pen))

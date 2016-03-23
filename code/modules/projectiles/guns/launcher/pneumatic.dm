@@ -65,7 +65,7 @@
 
 /obj/item/weapon/gun/launcher/pneumatic/attackby(obj/item/W as obj, mob/user as mob)
 	if(!tank && istype(W,/obj/item/weapon/tank))
-		user.drop_from_inventory(W, src)
+		user.removeItem(W, src)
 		tank = W
 		user.visible_message("[user] jams [W] into [src]'s valve and twists it closed.","You jam [W] into [src]'s valve and twist it closed.")
 		update_icon()
@@ -161,8 +161,7 @@
 /obj/item/weapon/cannonframe/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/pipe))
 		if(buildstate == 0)
-			user.drop_from_inventory(W)
-			qdel(W)
+			user.deleteItem(W)
 			user << "<span class='notice'>You secure the piping inside the frame.</span>"
 			buildstate++
 			update_icon()
@@ -179,8 +178,7 @@
 			return
 	else if(istype(W,/obj/item/device/transfer_valve))
 		if(buildstate == 4)
-			user.drop_from_inventory(W)
-			qdel(W)
+			user.deleteItem(W)
 			user << "<span class='notice'>You install the transfer valve and connect it to the piping.</span>"
 			buildstate++
 			update_icon()

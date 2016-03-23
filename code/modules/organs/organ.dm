@@ -348,7 +348,7 @@ var/list/organ_cache = list()
 	var/datum/reagent/blood/B = locate(/datum/reagent/blood) in reagents.reagent_list
 	blood_splatter(src,B,1)
 
-	user.drop_from_inventory(src)
+	user.removeItem(src)
 	var/obj/item/weapon/reagent_containers/food/snacks/organ/O = new(get_turf(src))
 	O.name = name
 	O.icon = icon

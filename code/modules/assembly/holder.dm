@@ -36,8 +36,8 @@
 		if((!isassembly(D))||(!isassembly(D2)))	return 0
 		if((D:secured)||(D2:secured))	return 0
 		if(user)
-			user.remove_from_mob(D)
-			user.remove_from_mob(D2)
+			user.removeItem(D)
+			user.removeItem(D2)
 		D:holder = src
 		D2:holder = src
 		D.loc = src

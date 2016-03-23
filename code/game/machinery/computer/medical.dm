@@ -36,8 +36,7 @@
 	return
 
 /obj/machinery/computer/med_data/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/weapon/card/id) && !scan && user.unEquip(O))
-		O.loc = src
+	if(istype(O, /obj/item/weapon/card/id) && !scan && user.removeItem(O, src))
 		scan = O
 		user << "You insert \the [O]."
 	else

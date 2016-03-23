@@ -306,7 +306,7 @@
 				"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
 
 				if(user.get_inactive_hand() == src)
-					user.drop_from_inventory(src)
+					user.removeItem(src)
 
 				new /obj/effect/decal/cleanable/ash(src.loc)
 				qdel(src)
@@ -414,23 +414,23 @@
 			B.name = name
 		else if (P.name != "paper" && P.name != "photo")
 			B.name = P.name
-		user.drop_from_inventory(P)
+		user.removeItem(P)
 		if (istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/h_user = user
 			if (h_user.r_hand == src)
-				h_user.drop_from_inventory(src)
+				h_user.removeItem(src)
 				h_user.put_in_r_hand(B)
 			else if (h_user.l_hand == src)
-				h_user.drop_from_inventory(src)
+				h_user.removeItem(src)
 				h_user.put_in_l_hand(B)
 			else if (h_user.l_store == src)
-				h_user.drop_from_inventory(src)
+				h_user.removeItem(src)
 				B.loc = h_user
 				B.layer = SCREEN_LAYER+0.01
 				h_user.l_store = B
 				h_user.update_inv_pockets()
 			else if (h_user.r_store == src)
-				h_user.drop_from_inventory(src)
+				h_user.removeItem(src)
 				B.loc = h_user
 				B.layer = SCREEN_LAYER+0.01
 				h_user.r_store = B

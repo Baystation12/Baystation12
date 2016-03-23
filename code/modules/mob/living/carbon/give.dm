@@ -36,6 +36,6 @@
 		src << "<span class='warning'>Their hands are full.</span>"
 		return
 
-	if(src.unEquip(I))
+	if(src.removeItem(I))
 		target.put_in_hands(I) // If this fails it will just end up on the floor, but that's fitting for things like dionaea.
 		target.visible_message("<span class='notice'>\The [src] handed \the [I] to \the [target].</span>")

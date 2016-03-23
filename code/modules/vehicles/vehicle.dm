@@ -239,8 +239,7 @@
 	if(!istype(C))
 		return
 
-	H.drop_from_inventory(C)
-	C.forceMove(src)
+	H.removeItem(C, src)
 	cell = C
 	powercheck()
 	usr << "<span class='notice'>You install [C] in [src].</span>"

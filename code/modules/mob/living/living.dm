@@ -406,11 +406,11 @@ default behaviour is:
 		var/mob/living/carbon/C = src
 
 		if (C.handcuffed && !initial(C.handcuffed))
-			C.drop_from_inventory(C.handcuffed)
+			C.removeItem(C.handcuffed)
 		C.handcuffed = initial(C.handcuffed)
 
 		if (C.legcuffed && !initial(C.legcuffed))
-			C.drop_from_inventory(C.legcuffed)
+			C.removeItem(C.legcuffed)
 		C.legcuffed = initial(C.legcuffed)
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
@@ -622,7 +622,7 @@ default behaviour is:
 	var/mob/M = H.loc //Get our mob holder (if any).
 
 	if(istype(M))
-		M.drop_from_inventory(H)
+		M.removeItem(H)
 		M << "<span class='warning'>\The [H] wriggles out of your grip!</span>"
 		src << "<span class='warning'>You wriggle out of \the [M]'s grip!</span>"
 
@@ -796,10 +796,10 @@ default behaviour is:
 /mob/living/proc/slip(var/slipped_on,stun_duration=8)
 	return 0
 
-/mob/living/carbon/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
-	if(W in internal_organs)
-		return
-	. = ..()
+/mob/living/carbon/removeItem(var/obj/item/I, var/atom/T = loc, var/force = 0)
+	if(I in src.internal_organs)
+		return 0
+	return ..()
 
 /mob/living/touch_map_edge()
 
@@ -916,8 +916,8 @@ default behaviour is:
 
 	if(lying)
 		density = 0
-		if(l_hand) unEquip(l_hand)
-		if(r_hand) unEquip(r_hand)
+		if(l_hand) removeItem(l_hand)
+		if(r_hand) removeItem(r_hand)
 	else
 		density = initial(density)
 

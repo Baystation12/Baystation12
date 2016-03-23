@@ -130,7 +130,7 @@
 
 	var/mob/living/holder_mob = loc
 	if(istype(holder_mob))
-		holder_mob.drop_from_inventory(src)
+		holder_mob.removeItem(src)
 	qdel(src)
 
 /obj/item/organ/mmi_holder/New()

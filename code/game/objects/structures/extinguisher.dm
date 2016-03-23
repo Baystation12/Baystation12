@@ -17,8 +17,7 @@
 		return
 	if(istype(O, /obj/item/weapon/extinguisher))
 		if(!has_extinguisher && opened)
-			user.remove_from_mob(O)
-			contents += O
+			user.removeItem(O, src)
 			has_extinguisher = O
 			user << "<span class='notice'>You place [O] in [src].</span>"
 		else

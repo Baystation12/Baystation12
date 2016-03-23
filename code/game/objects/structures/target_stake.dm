@@ -27,8 +27,7 @@
 		if(istype(W, /obj/item/target))
 			density = 0
 			W.density = 1
-			user.remove_from_mob(W)
-			W.loc = loc
+			user.removeItem(W, loc)
 			W.layer = 3.1
 			pinned_target = W
 			user << "You slide the target into the stake."

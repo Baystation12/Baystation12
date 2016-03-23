@@ -381,8 +381,6 @@
 	jets.holder = null
 	jets.ion_trail.set_up(jets)
 
-/obj/item/rig_module/foam_sprayer
-
 /obj/item/rig_module/device/paperdispenser
 	name = "hardsuit paper dispenser"
 	desc = "Crisp sheets."

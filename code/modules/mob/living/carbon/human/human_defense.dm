@@ -55,7 +55,7 @@ meteor_act
 			if(c_hand && (stun_amount || agony_amount > 10))
 				msg_admin_attack("[src.name] ([src.ckey]) was disarmed by a stun effect")
 
-				drop_from_inventory(c_hand)
+				removeItem(c_hand)
 				if (affected.status & ORGAN_ROBOT)
 					emote("me", 1, "drops what they were holding, their [affected.name] malfunctioning!")
 				else

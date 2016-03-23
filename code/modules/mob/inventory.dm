@@ -50,9 +50,8 @@ var/list/slot_equipment_priority = list( \
 	if(!W.mob_can_equip(src, slot))
 		if(del_on_fail)
 			qdel(W)
-		else
-			if(!disable_warning)
-				src << "\red You are unable to equip that." //Only print if del_on_fail is false
+		else if(!disable_warning)
+			src << "\red You are unable to equip that." //Only print if del_on_fail is false
 		return 0
 
 	equip_to_slot(W, slot, redraw_mob) //This proc should not ever fail.
@@ -122,22 +121,6 @@ var/list/slot_equipment_priority = list( \
 	W.dropped()
 	return 0
 
-// Removes an item from inventory and places it in the target atom.
-// If canremove or other conditions need to be checked then use unEquip instead.
-/mob/proc/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
-	if(W)
-		if(!Target)
-			Target = loc
-
-		remove_from_mob(W)
-		if(!(W && W.loc)) return 1 // self destroying objects (tk, grabs)
-
-		if(W.loc != Target)
-			W.forceMove(Target, MOVED_DROP)
-		update_icons()
-		return 1
-	return 0
-
 //Drops the item in our left hand
 /mob/proc/drop_l_hand(var/atom/Target)
 	return 0
@@ -182,26 +165,30 @@ var/list/slot_equipment_priority = list( \
 			break
 	return slot
 
-//This differs from remove_from_mob() in that it checks if the item can be unequipped first.
-/mob/proc/unEquip(obj/item/I, force = 0) //Force overrides NODROP for things like wizarditis and admin undress.
-	if(!(force || canUnEquip(I)))
-		return
-	drop_from_inventory(I)
+/mob/proc/removeItem(var/obj/item/I, var/atom/T = loc, var/force = 0)
+	if(!force && !src.canUnEquip(I))
+		return 0
+
+	u_equip(I)
+	if(src.client)
+		src.client.screen -= I
+
+	I.layer = initial(I.layer)
+	I.screen_loc = null
+
+	I.forceMove(T, MOVED_DROP)
+	I.dropped(src) //If an item self-deletes, it will happen here
 	return 1
 
-//Attemps to remove an object on a mob.
-/mob/proc/remove_from_mob(var/obj/O)
-	src.u_equip(O)
-	if (src.client)
-		src.client.screen -= O
-	O.layer = initial(O.layer)
-	O.screen_loc = null
-	if(istype(O, /obj/item))
-		var/obj/item/I = O
-		I.forceMove(src.loc, MOVED_DROP)
-		I.dropped(src)
-	return 1
+/mob/proc/deleteItem(var/obj/item/I)
+	u_equip(I)
+	if(src.client)
+		src.client.screen -= I
 
+	I.screen_loc = null
+
+	I.dropped(src)
+	qdel(I)
 
 //Returns the item equipped to the specified slot, if any.
 /mob/proc/get_equipped_item(var/slot)

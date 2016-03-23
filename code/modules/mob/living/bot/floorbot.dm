@@ -301,8 +301,7 @@
 		var/obj/item/weapon/toolbox_tiles/B = new /obj/item/weapon/toolbox_tiles
 		user.put_in_hands(B)
 		user << "<span class='notice'>You add the tiles into the empty toolbox. They protrude from the top.</span>"
-		user.drop_from_inventory(src)
-		qdel(src)
+		user.deleteItem(src)
 	else
 		user << "<span class='warning'>You need 10 floor tiles for a floorbot.</span>"
 	return
@@ -327,8 +326,7 @@
 		B.created_name = created_name
 		user.put_in_hands(B)
 		user << "<span class='notice'>You add the sensor to the toolbox and tiles!</span>"
-		user.drop_from_inventory(src)
-		qdel(src)
+		user.deleteItem(src)
 	else if (istype(W, /obj/item/weapon/pen))
 		var/t = sanitizeSafe(input(user, "Enter new robot name", name, created_name), MAX_NAME_LEN)
 		if(!t)
@@ -357,8 +355,7 @@
 		var/mob/living/bot/floorbot/A = new /mob/living/bot/floorbot(T)
 		A.name = created_name
 		user << "<span class='notice'>You add the robot arm to the odd looking toolbox assembly! Boop beep!</span>"
-		user.drop_from_inventory(src)
-		qdel(src)
+		user.deleteItem(src)
 	else if(istype(W, /obj/item/weapon/pen))
 		var/t = sanitizeSafe(input(user, "Enter new robot name", name, created_name), MAX_NAME_LEN)
 		if(!t)

@@ -53,7 +53,7 @@
 		if (( usr.restrained() ) || ( usr.stat ))
 			return
 
-		if (!usr.unEquip(src))
+		if (!usr.removeItem(src))
 			return
 
 		switch(over_object.name)

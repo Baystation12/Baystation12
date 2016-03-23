@@ -180,7 +180,5 @@
 				user << "<span class='notice'>You complete the ED-209.</span>"
 				var/turf/T = get_turf(src)
 				new /mob/living/bot/secbot/ed209(T,created_name,lasercolor)
-				user.drop_item()
 				qdel(W)
-				user.drop_from_inventory(src)
-				qdel(src)
+				user.deleteItem(src)

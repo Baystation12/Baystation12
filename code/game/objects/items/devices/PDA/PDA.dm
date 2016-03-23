@@ -1148,15 +1148,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			return 1
 		else
 			var/obj/item/I = user.get_active_hand()
-			if (istype(I, /obj/item/weapon/card/id) && user.unEquip(I))
-				I.loc = src
+			if (istype(I, /obj/item/weapon/card/id) && user.removeItem(I, src))
 				id = I
 			return 1
 	else
 		var/obj/item/weapon/card/I = user.get_active_hand()
-		if (istype(I, /obj/item/weapon/card/id) && I:registered_name && user.unEquip(I))
+		if (istype(I, /obj/item/weapon/card/id) && I:registered_name && user.removeItem(I, src))
 			var/obj/old_id = id
-			I.loc = src
 			id = I
 			user.put_in_hands(old_id)
 			return 1

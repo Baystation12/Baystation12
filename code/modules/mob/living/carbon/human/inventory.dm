@@ -3,6 +3,11 @@ Add fingerprints to items when we put them in our hands.
 This saves us from having to call add_fingerprint() any time something is put in a human's hands programmatically.
 */
 
+/mob/living/carbon/human/removeItem(var/obj/item/I, var/atom/T = loc, var/force = 0)
+	if(I in src.organs)
+		return 0
+	return ..()
+
 /mob/living/carbon/human/verb/quick_equip()
 	set name = "quick-equip"
 	set hidden = 1
@@ -86,18 +91,18 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 	if (W == wear_suit)
 		if(s_store)
-			drop_from_inventory(s_store)
+			removeItem(s_store)
 		wear_suit = null
 		update_inv_wear_suit()
 	else if (W == w_uniform)
 		if (r_store)
-			drop_from_inventory(r_store)
+			removeItem(r_store)
 		if (l_store)
-			drop_from_inventory(l_store)
+			removeItem(l_store)
 		if (wear_id)
-			drop_from_inventory(wear_id)
+			removeItem(wear_id)
 		if (belt)
-			drop_from_inventory(belt)
+			removeItem(belt)
 		w_uniform = null
 		update_inv_w_uniform()
 	else if (W == gloves)
@@ -294,7 +299,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			update_inv_s_store(redraw_mob)
 		if(slot_in_backpack)
 			if(src.get_active_hand() == W)
-				src.remove_from_mob(W)
+				src.removeItem(W)
 			W.forceMove(src.back)
 		if(slot_tie)
 			var/obj/item/clothing/under/uniform = src.w_uniform

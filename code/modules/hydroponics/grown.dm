@@ -251,9 +251,7 @@
 		if(!src)
 			return
 		if(prob(35))
-			if(user)
-				user << "<span class='danger'>\The [src] has fallen to bits.</span>"
-				user.drop_from_inventory(src)
+			user << "<span class='danger'>\The [src] has fallen to bits.</span>"
 			qdel(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/attack_self(mob/user as mob)

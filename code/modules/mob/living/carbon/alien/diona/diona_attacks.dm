@@ -20,7 +20,7 @@
 		if(hat)
 			user << "<span class='warning'>\The [src] is already wearing \the [hat].</span>"
 			return
-		user.unEquip(W)
+		user.removeItem(W)
 		wear_hat(W)
 		user.visible_message("<span class='notice'>\The [user] puts \the [W] on \the [src].</span>")
 		return

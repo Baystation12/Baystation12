@@ -282,7 +282,7 @@
 		"<span class='notice'>You have transplanted \the [tool] into [target]'s [affected.name].</span>")
 		var/obj/item/organ/O = tool
 		if(istype(O))
-			user.remove_from_mob(O)
+			user.removeItem(O)
 			O.replaced(target,affected)
 			playsound(target.loc, 'sound/effects/squelch1.ogg', 50, 1)
 

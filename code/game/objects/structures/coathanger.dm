@@ -21,7 +21,7 @@
 	if (can_hang && !coat)
 		user.visible_message("[user] hangs [W] on \the [src].", "You hang [W] on the \the [src]")
 		coat = W
-		user.drop_from_inventory(coat, src)
+		user.removeItem(coat, src)
 		update_icon()
 	else
 		user << "<span class='notice'>You cannot hang [W] on [src]</span>"

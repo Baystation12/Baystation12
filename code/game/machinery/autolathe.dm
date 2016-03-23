@@ -197,8 +197,7 @@
 		var/obj/item/stack/stack = eating
 		stack.use(max(1, round(total_used/mass_per_sheet))) // Always use at least 1 to prevent infinite materials.
 	else
-		user.remove_from_mob(O)
-		qdel(O)
+		user.deleteItem(O)
 
 	updateUsrDialog()
 	return

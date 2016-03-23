@@ -31,8 +31,7 @@
 				user << "<span class='warning'>\The [src] is full; please empty it before you continue.</span>"
 				return
 			paperamount += paper_result
-			user.drop_from_inventory(W)
-			qdel(W)
+			user.deleteItem(W)
 			playsound(src.loc, 'sound/items/pshred.ogg', 75, 1)
 			if(paperamount > max_paper)
 				user <<"<span class='danger'>\The [src] was too full, and shredded paper goes everywhere!</span>"
@@ -119,7 +118,7 @@
 /obj/item/weapon/shreddedp/proc/FireBurn()
 	var/mob/living/M = loc
 	if(istype(M))
-		M.drop_from_inventory(src)
+		M.removeItem(src)
 	PoolOrNew(/obj/effect/decal/cleanable/ash,get_turf(src))
 	qdel(src)
 

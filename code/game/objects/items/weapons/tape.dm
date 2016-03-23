@@ -61,8 +61,7 @@
 		else if(user.zone_sel.selecting == "r_hand" || user.zone_sel.selecting == "l_hand")
 			var/obj/item/weapon/handcuffs/cable/tape/T = new(user)
 			if(!T.place_handcuffs(H, user))
-				user.unEquip(T)
-				qdel(T)
+				user.deleteItem(T)
 		else
 			return ..()
 		return 1
@@ -70,7 +69,7 @@
 /obj/item/weapon/tape_roll/proc/stick(var/obj/item/weapon/W, mob/user)
 	if(!istype(W, /obj/item/weapon/paper))
 		return
-	user.drop_from_inventory(W)
+	user.removeItem(W)
 	var/obj/item/weapon/ducttape/tape = new(get_turf(src))
 	tape.attach(W)
 	user.put_in_hands(tape)
@@ -106,7 +105,7 @@
 
 	user << "You remove \the [initial(name)] from [stuck]."
 
-	user.drop_from_inventory(src)
+	user.removeItem(src)
 	stuck.forceMove(get_turf(src))
 	user.put_in_hands(stuck)
 	stuck = null
@@ -128,8 +127,7 @@
 			user << "You cannot reach that from here."		// can only place stuck papers in cardinal directions, to
 			return											// reduce papers around corners issue.
 
-	user.drop_from_inventory(src)
-	forceMove(source_turf)
+	user.removeItem(src, source_turf)
 
 	if(params)
 		var/list/mouse_control = params2list(params)

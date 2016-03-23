@@ -84,7 +84,7 @@
 	if(dispenser)
 		cuffs = new(get_turf(user))
 	else
-		user.drop_from_inventory(cuffs)
+		user.removeItem(cuffs)
 	cuffs.loc = target
 	target.handcuffed = cuffs
 	target.update_inv_handcuffed()

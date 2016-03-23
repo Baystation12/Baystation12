@@ -49,7 +49,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash(var/newloc, atom/against = null)
 	if(ismob(loc))
 		var/mob/M = loc
-		M.drop_from_inventory(src)
+		M.removeItem(src)
 
 	//Creates a shattering noise and replaces the bottle with a broken_bottle
 	var/obj/item/weapon/broken_bottle/B = new /obj/item/weapon/broken_bottle(newloc)
@@ -90,10 +90,9 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/proc/insert_rag(obj/item/weapon/reagent_containers/glass/rag/R, mob/user)
 	if(!isGlass || rag) return
-	if(user.unEquip(R))
+	if(user.removeItem(R, src))
 		user << "<span class='notice'>You stuff [R] into [src].</span>"
 		rag = R
-		rag.forceMove(src)
 		flags &= ~OPENCONTAINER
 		update_icon()
 

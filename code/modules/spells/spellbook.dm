@@ -1,3 +1,4 @@
+
 #define NOREVERT			1
 #define LOCKED 				2
 #define CAN_MAKE_CONTRACTS	4
