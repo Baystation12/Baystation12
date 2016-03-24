@@ -26,11 +26,11 @@
 	for(var/underwear_category in pref.all_underwear)
 		var/datum/category_group/underwear/UWC = global_underwear.categories_by_name[underwear_category]
 		if(!UWC)
-			pref.all_underwear -= UWC
+			pref.all_underwear -= underwear_category
 		else
 			var/datum/category_item/underwear/UWI = UWC.items_by_name[pref.all_underwear[underwear_category]]
 			if(!UWI)
-				pref.all_underwear -= UWC
+				pref.all_underwear -= underwear_category
 
 	pref.backbag	= sanitize_integer(pref.backbag, 1, backbaglist.len, initial(pref.backbag))
 
