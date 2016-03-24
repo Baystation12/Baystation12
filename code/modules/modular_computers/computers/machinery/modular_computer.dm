@@ -20,7 +20,7 @@
 	var/screen_icon_screensaver = "standby"							// Icon state overlay when the computer is powered, but not 'switched on'.
 	var/max_hardware_size = 0										// Maximal hardware size. Currently, tablets have 1, laptops 2 and consoles 3. Limits what hardware types can be installed.
 	var/steel_sheet_cost = 10										// Amount of steel sheets refunded when disassembling an empty frame of this computer.
-
+	var/light_strength = 0											// Light luminosity when turned on
 	var/base_active_power_usage = 100								// Power usage when the computer is open (screen is active) and can be interacted with. Remember hardware can use power too.
 	var/base_idle_power_usage = 10									// Power usage when the computer is idle and screen is off (currently only applies to laptops)
 
@@ -42,7 +42,9 @@
 	if(!cpu || !cpu.enabled)
 		if (!(stat & NOPOWER) || battery_powered)
 			overlays.Add(screen_icon_screensaver)
+		set_light(0)
 		return
+	set_light(light_strength)
 	if(cpu.active_program)
 		overlays.Add(cpu.active_program.program_icon_state ? cpu.active_program.program_icon_state : screen_icon_state_menu)
 	else
