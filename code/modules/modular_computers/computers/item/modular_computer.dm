@@ -59,6 +59,22 @@
 
 	proc_eject_id(usr)
 
+// Eject ID card from computer, if it has ID slot with card inside.
+/obj/item/modular_computer/verb/eject_usb()
+	set name = "Eject Portable Device"
+	set category = "Object"
+	set src in view(1)
+
+	if(usr.incapacitated() || !istype(usr, /mob/living))
+		usr << "<span class='warning'>You can't do that.</span>"
+		return
+
+	if(!Adjacent(usr))
+		usr << "<span class='warning'>You can't reach it.</span>"
+		return
+
+	proc_eject_usb(usr)
+
 /obj/item/modular_computer/proc/proc_eject_id(mob/user)
 	if(!user)
 		user = usr
@@ -81,6 +97,17 @@
 	card_slot.stored_card = null
 	update_uis()
 	user << "You remove the card from \the [src]"
+
+/obj/item/modular_computer/proc/proc_eject_usb(mob/user)
+	if(!user)
+		user = usr
+
+	if(!portable_drive)
+		user << "There is no portable device connected to \the [src]."
+		return
+
+	uninstall_component(user, portable_drive)
+	update_uis()
 
 /obj/item/modular_computer/attack_ghost(var/mob/observer/ghost/user)
 	if(enabled)

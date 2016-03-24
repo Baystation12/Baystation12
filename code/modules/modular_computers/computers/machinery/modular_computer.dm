@@ -59,6 +59,15 @@
 	if(cpu)
 		cpu.eject_id()
 
+// Eject ID card from computer, if it has ID slot with card inside.
+/obj/machinery/modular_computer/verb/eject_usb()
+	set name = "Eject Portable Device"
+	set category = "Object"
+	set src in view(1)
+
+	if(cpu)
+		cpu.eject_usb()
+
 /obj/machinery/modular_computer/New()
 	..()
 	cpu = new(src)
