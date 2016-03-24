@@ -307,7 +307,7 @@ var/list/ai_verbs_default = list(
 		use_power = 2
 
 /mob/living/silicon/ai/proc/pick_icon()
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set name = "Set AI Core Display"
 	if(stat || aiRestorePowerRoutine)
 		return
@@ -319,13 +319,13 @@ var/list/ai_verbs_default = list(
 
 // this verb lets the ai see the stations manifest
 /mob/living/silicon/ai/proc/ai_roster()
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set name = "Show Crew Manifest"
 	show_station_manifest()
 
 /mob/living/silicon/ai/var/message_cooldown = 0
 /mob/living/silicon/ai/proc/ai_announcement()
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set name = "Make Station Announcement"
 
 	if(check_unable(AI_CHECK_WIRELESS | AI_CHECK_RADIO))
@@ -347,7 +347,7 @@ var/list/ai_verbs_default = list(
 		message_cooldown = 0
 
 /mob/living/silicon/ai/proc/ai_call_shuttle()
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set name = "Call Emergency Shuttle"
 
 	if(check_unable(AI_CHECK_WIRELESS))
@@ -368,7 +368,7 @@ var/list/ai_verbs_default = list(
 			C.post_status("shuttle")
 
 /mob/living/silicon/ai/proc/ai_recall_shuttle()
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set name = "Recall Emergency Shuttle"
 
 	if(check_unable(AI_CHECK_WIRELESS))
@@ -383,7 +383,7 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/var/emergency_message_cooldown = 0
 /mob/living/silicon/ai/proc/ai_emergency_message()
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set name = "Send Emergency Message"
 
 	if(check_unable(AI_CHECK_WIRELESS))
@@ -478,7 +478,7 @@ var/list/ai_verbs_default = list(
 	return 1
 
 /mob/living/silicon/ai/cancel_camera()
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set name = "Cancel Camera View"
 
 	//src.cameraFollow = null
@@ -503,7 +503,7 @@ var/list/ai_verbs_default = list(
 	return cameralist
 
 /mob/living/silicon/ai/proc/ai_network_change(var/network in get_camera_network_list())
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set name = "Jump To Network"
 	unset_machine()
 
@@ -526,7 +526,7 @@ var/list/ai_verbs_default = list(
 //End of code by Mord_Sith
 
 /mob/living/silicon/ai/proc/ai_statuschange()
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set name = "AI Status"
 
 	if(check_unable(AI_CHECK_WIRELESS))
@@ -539,7 +539,7 @@ var/list/ai_verbs_default = list(
 /mob/living/silicon/ai/proc/ai_hologram_change()
 	set name = "Change Hologram"
 	set desc = "Change the default hologram available to AI to something else."
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 
 	if(check_unable())
 		return
@@ -583,7 +583,7 @@ var/list/ai_verbs_default = list(
 /mob/living/silicon/ai/proc/toggle_camera_light()
 	set name = "Toggle Camera Light"
 	set desc = "Toggles the light on the camera the AI is looking through."
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 
 	if(check_unable())
 		return
@@ -653,7 +653,7 @@ var/list/ai_verbs_default = list(
 /mob/living/silicon/ai/proc/control_integrated_radio()
 	set name = "Radio Settings"
 	set desc = "Allows you to change settings of your radio."
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 
 	if(check_unable(AI_CHECK_RADIO))
 		return
@@ -664,13 +664,13 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/sensor_mode()
 	set name = "Set Sensor Augmentation"
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set desc = "Augment visual feed with internal sensor overlays"
 	toggle_sensor_mode()
 
 /mob/living/silicon/ai/proc/toggle_hologram_movement()
 	set name = "Toggle Hologram Movement"
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set desc = "Toggles hologram movement based on moving with your virtual eye."
 
 	hologram_follow = !hologram_follow
@@ -705,7 +705,7 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/multitool_mode()
 	set name = "Toggle Multitool Mode"
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 
 	multitool_mode = !multitool_mode
 	src << "<span class='notice'>Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged</span>"
