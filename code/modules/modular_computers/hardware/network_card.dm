@@ -11,6 +11,18 @@ var/global/ntnet_card_uid = 1
 	var/identification_string = "" 	// Identification string, technically nickname seen in the network. Can be set by user.
 	var/long_range = 0
 	var/ethernet = 0 // Hard-wired, therefore always on, ignores NTNet wireless checks.
+	malfunction_probability = 1
+
+/obj/item/weapon/computer_hardware/network_card/diagnostics(var/mob/user)
+	..()
+	user << "NIX Unique ID: [identification_id]"
+	user << "NIX User Tag: [identification_string]"
+	user << "Supported protocols:"
+	user << "511.m SFS (Subspace) - Standard Frequency Spread"
+	if(long_range)
+		user << "511.n WFS/HB (Subspace) - Wide Frequency Spread/High Bandiwdth"
+	if(ethernet)
+		user << "OpenEth (Physical Connection) - Physical network connection port"
 
 /obj/item/weapon/computer_hardware/network_card/New(var/l)
 	..(l)
@@ -27,7 +39,7 @@ var/global/ntnet_card_uid = 1
 
 /obj/item/weapon/computer_hardware/network_card/wired
 	name = "wired NTNet network card"
-	desc = "An advanced network card for usage with NTNet. This one uses wired connection."
+	desc = "An advanced network card for usage with standard NTNet frequencies. This one also supports wired connection."
 	ethernet = 1
 	power_usage = 100 // Better range but higher power usage.
 	icon_state = "netcard_ethernet"
@@ -49,6 +61,9 @@ var/global/ntnet_card_uid = 1
 		return 0
 
 	if(!enabled)
+		return 0
+
+	if(!check_functionality())
 		return 0
 
 	if(ethernet) // Computer is connected via wired connection.

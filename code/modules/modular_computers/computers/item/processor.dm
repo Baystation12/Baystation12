@@ -11,10 +11,10 @@
 	var/obj/machinery/modular_computer/machinery_computer = null
 
 /obj/item/modular_computer/processor/Destroy()
+	. = ..()
 	if(machinery_computer && (machinery_computer.cpu == src))
 		machinery_computer.cpu = null
 	machinery_computer = null
-	return ..()
 
 // Due to how processes work, we'd receive two process calls - one from machinery type and one from our own type.
 // Since we want this to be in-sync with machinery (as it's hidden type for machinery-based computers) we'll ignore
@@ -24,6 +24,12 @@
 		..()
 	else
 		return
+
+/obj/item/modular_computer/processor/examine(var/mob/user)
+	if(damage > broken_damage)
+		user << "<span class='danger'>It is heavily damaged!</span>"
+	else if(damage)
+		user << "It is damaged."
 
 // Power interaction is handled by our machinery part, due to machinery having APC connection.
 /obj/item/modular_computer/processor/handle_power()
@@ -40,6 +46,8 @@
 	hardware_flag = machinery_computer.hardware_flag
 	max_hardware_size = machinery_computer.max_hardware_size
 	steel_sheet_cost = machinery_computer.steel_sheet_cost
+	max_damage = machinery_computer._max_damage
+	broken_damage = machinery_computer._break_damage
 
 /obj/item/modular_computer/processor/relay_qdel()
 	qdel(machinery_computer)
@@ -110,7 +118,7 @@
 
 /obj/item/modular_computer/processor/get_all_components()
 	var/list/all_components = ..()
-	if(machinery_computer.tesla_link)
+	if(machinery_computer && machinery_computer.tesla_link)
 		all_components.Add(machinery_computer.tesla_link)
 	return all_components
 

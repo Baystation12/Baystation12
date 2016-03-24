@@ -61,6 +61,8 @@
 	base_active_power_usage = 200
 	max_hardware_size = 2
 	light_strength = 3
+	_max_damage = 200
+	_break_damage = 100
 
 /obj/machinery/modular_computer/laptop/buildable/New()
 	..()
