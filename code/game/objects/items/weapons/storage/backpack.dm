@@ -142,6 +142,58 @@
 	desc = "It's an orange backpack which was designed to hold beakers, pill bottles and bottles."
 	icon_state = "chempack"
 
+/obj/item/weapon/storage/backpack/dufflebag
+	name = "dufflebag"
+	desc = "A large dufflebag for holding extra things."
+	icon_state = "duffle"
+	item_state = "duffle"
+	slowdown = 1
+	max_storage_space = 38
+	storage_slots = 12
+
+/obj/item/weapon/storage/backpack/dufflebag/syndie
+	name = "black dufflebag"
+	desc = "A large dufflebag for holding extra tactical supplies."
+	icon_state = "duffle_syndie"
+	item_state = "duffle_syndiemed"
+	slowdown = 0
+
+/obj/item/weapon/storage/backpack/dufflebag/syndie/med
+	name = "medical dufflebag"
+	desc = "A large dufflebag for holding extra tactical medical supplies."
+	icon_state = "duffle_syndiemed"
+	item_state = "duffle_syndiemed"
+
+/obj/item/weapon/storage/backpack/dufflebag/syndie/ammo
+	name = "ammunition dufflebag"
+	desc = "A large dufflebag for holding extra weapons ammunition and supplies."
+	icon_state = "duffle_syndieammo"
+	item_state = "duffle_syndieammo"
+
+/obj/item/weapon/storage/backpack/dufflebag/captain
+	name = "captain's dufflebag"
+	desc = "A large dufflebag for holding extra captainly goods."
+	icon_state = "duffle_captain"
+	item_state = "duffle_captain"
+
+/obj/item/weapon/storage/backpack/dufflebag/med
+	name = "medical dufflebag"
+	desc = "A large dufflebag for holding extra medical supplies."
+	icon_state = "duffle_med"
+	item_state = "duffle_med"
+
+/obj/item/weapon/storage/backpack/dufflebag/sec
+	name = "security dufflebag"
+	desc = "A large dufflebag for holding extra security supplies and ammunition."
+	icon_state = "duffle_sec"
+	item_state = "duffle_sec"
+
+/obj/item/weapon/storage/backpack/dufflebag/eng
+	name = "industrial dufflebag"
+	desc = "A large dufflebag for holding extra tools and supplies."
+	icon_state = "duffle_eng"
+	item_state = "duffle_eng"
+
 /*
  * Satchel Types
  */
