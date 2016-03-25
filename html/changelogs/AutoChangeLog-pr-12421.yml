@@ -1,0 +1,4 @@
+author: atlantiscze
+delete-after: True
+changes: 
+  - rscadd: "Adds a new \"News Browser\" modular computer program, that can be used to download and view news from the NTNet."
