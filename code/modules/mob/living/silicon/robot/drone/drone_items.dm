@@ -112,7 +112,7 @@
 
 	set name = "Drop Item"
 	set desc = "Release an item from your magnetic gripper."
-	set category = "Robot Commands"
+	set category = "Silicon Commands"
 
 	if(!wrapped)
 		//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
