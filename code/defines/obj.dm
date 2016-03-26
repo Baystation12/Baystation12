@@ -62,9 +62,8 @@ using /datum/datacore/proc/manifest_inject( ), or manifest_insert( )
 */
 
 var/global/list/PDA_Manifest = list()
-var/global/ManifestJSON
 
-/datum/datacore/proc/get_manifest_json()
+/datum/datacore/proc/get_manifest_list()
 	if(PDA_Manifest.len)
 		return
 	var/heads[0]
@@ -146,7 +145,6 @@ var/global/ManifestJSON
 		"bot" = bot,\
 		"misc" = misc\
 		)
-	ManifestJSON = json_encode(PDA_Manifest)
 	return
 
 

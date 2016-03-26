@@ -1,0 +1,6 @@
+author: Datraen
+
+delete-after: True
+
+changes: 
+  - tweak: "Removed JSON encoding of the PDA Manifest list."
