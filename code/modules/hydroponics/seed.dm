@@ -294,8 +294,14 @@
 
 	//Handle temperature change.
 	if(get_trait(TRAIT_ALTER_TEMP) != 0 && !check_only)
-		if(environment)
-			environment.temperature = max(0,environment.temperature + get_trait(TRAIT_ALTER_TEMP))
+		var/target_temp = get_trait(TRAIT_ALTER_TEMP) > 0 ? 500 : 80
+		if(environment && abs(environment.temperature-target_temp) > 0.1)
+			var/datum/gas_mixture/removed = environment.remove(0.25 * environment.total_moles)
+			if(removed)
+				var/heat_transfer = abs(removed.get_thermal_energy_change(target_temp))
+				heat_transfer = min(heat_transfer,abs(get_trait(TRAIT_ALTER_TEMP) * 10000))
+				removed.add_thermal_energy((get_trait(TRAIT_ALTER_TEMP) > 0 ? 1 : -1) * heat_transfer)
+			environment.merge(removed)
 
 	// Handle light requirements.
 	if(!light_supplied)
