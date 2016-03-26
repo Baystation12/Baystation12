@@ -292,6 +292,11 @@
 		for(var/gas in exude_gasses)
 			environment.adjust_gas(gas, max(1,round((exude_gasses[gas]*(get_trait(TRAIT_POTENCY)/5))/exude_gasses.len)))
 
+	//Handle temperature change.
+	if(get_trait(TRAIT_ALTER_TEMP) != 0 && !check_only)
+		if(environment)
+			environment.temperature = max(0,environment.temperature + get_trait(TRAIT_ALTER_TEMP))
+
 	// Handle light requirements.
 	if(!light_supplied)
 		var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in current_turf
