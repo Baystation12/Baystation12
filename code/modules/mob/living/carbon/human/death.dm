@@ -33,6 +33,7 @@
 
 	//Handle species-specific deaths.
 	species.handle_death(src)
+
 	animate_tail_stop()
 
 	//Handle brain slugs.
@@ -56,9 +57,6 @@
 
 	callHook("death", list(src, gibbed))
 
-	if(!gibbed && species.death_sound)
-		playsound(loc, species.death_sound, 80, 1, 1)
-
 	if(ticker && ticker.mode)
 		sql_report_death(src)
 		ticker.mode.check_win()
@@ -67,6 +65,10 @@
 		wearing_rig.notify_ai("<span class='danger'>Warning: user death event. Mobility control passed to integrated intelligence system.</span>")
 
 	. = ..(gibbed,species.death_message)
+	if(!gibbed)
+		handle_organs()
+		if(species.death_sound)
+			playsound(loc, species.death_sound, 80, 1, 1)
 	handle_hud_list()
 
 /mob/living/carbon/human/proc/ChangeToHusk()

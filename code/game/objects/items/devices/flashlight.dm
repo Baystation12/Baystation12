@@ -186,6 +186,7 @@
 	force = on_damage
 	damtype = "fire"
 	processing_objects += src
+	update_icon()
 	return 1
 
 /obj/item/device/flashlight/slime

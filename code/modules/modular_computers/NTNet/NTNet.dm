@@ -7,6 +7,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	var/list/logs = list()
 	var/list/available_station_software = list()
 	var/list/available_antag_software = list()
+	var/list/available_news = list()
 	var/list/chat_channels = list()
 	var/list/fileservers = list()
 	// Amount of logs the system tries to keep in memory. Keep below 999 to prevent byond from acting weirdly.
@@ -32,6 +33,7 @@ var/global/datum/ntnet/ntnet_global = new()
 		relays.Add(R)
 		R.NTNet = src
 	build_software_lists()
+	build_news_list()
 	add_log("NTNet logging system activated.")
 
 // Simplified logging: Adds a log. log_string is mandatory parameter, source is optional.
@@ -92,6 +94,15 @@ var/global/datum/ntnet/ntnet_global = new()
 			available_station_software.Add(prog)
 		if(prog.available_on_syndinet)
 			available_antag_software.Add(prog)
+
+// Builds lists that contain downloadable software.
+/datum/ntnet/proc/build_news_list()
+	available_news = list()
+	for(var/F in typesof(/datum/computer_file/data/news_article/))
+		var/datum/computer_file/data/news_article/news = new F(1)
+		if(news.stored_data)
+			available_news.Add(news)
+
 
 // Attempts to find a downloadable file according to filename var
 /datum/ntnet/proc/find_ntnet_file_by_name(var/filename)
