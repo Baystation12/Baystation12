@@ -1,5 +1,0 @@
-author: atlantiscze
-delete-after: True
-changes: 
-  - tweak: "APCs now react to EMPs in a different way. EMPs will temporarily disable the APC, in a same way gridcheck does. That allows the APC to be reset using the button in UI. Duration of EMP timer is based on severity, and a little bit of RNG (8 - 12 minutes on high strength EMP)"
-  - tweak: "APC power cells are now partially shielded from EMPs, resulting in lower charge loss when the power cell is in APC."
