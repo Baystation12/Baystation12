@@ -213,7 +213,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 		"Mining Station" = locate(/area/skipjack_station/mining)
 		)
 
-	VS.announcer = "NDV Icarus"
+	VS.announcer = "NDV Icarus Communications"
 	VS.arrival_message = "Attention, [station_short], we just tracked a small target bypassing our defensive perimeter. Can't fire on it without hitting the station - you've got incoming visitors, like it or not."
 	VS.departure_message = "Your guests are pulling away, [station_short] - moving too fast for us to draw a bead on them. Looks like they're heading out of the system at a rapid clip."
 	VS.interim = locate(/area/skipjack_station/transit)
@@ -244,11 +244,42 @@ var/global/datum/shuttle_controller/shuttle_controller
 		"Arrivals dock" = "nuke_shuttle_dock_airlock",
 		)
 
-	MS.announcer = "NDV Icarus"
+	MS.announcer = "NDV Icarus Communications"
 	MS.arrival_message = "Attention, [station_short], you have a large signature approaching the station - looks unarmed to surface scans. We're too far out to intercept - brace for visitors."
 	MS.departure_message = "Your visitors are on their way out of the system, [station_short], burning delta-v like it's nothing. Good riddance."
 	MS.interim = locate(/area/syndicate_station/transit)
 
 	MS.warmup_time = 0
 	shuttles["Mercenary"] = MS
+
+	//Rescue shuttle.
+	var/datum/shuttle/multi_shuttle/RS = new/datum/shuttle/multi_shuttle()
+	RS.origin = locate(/area/rescue_base/start)
+	RS.start_location = "Response Team Base"
+
+	RS.destinations = list(
+		"Northwest of the station" = locate(/area/rescue_base/northwest),
+		"North of the station" = locate(/area/rescue_base/north),
+		"Northeast of the station" = locate(/area/rescue_base/northeast),
+		"Southwest of the station" = locate(/area/rescue_base/southwest),
+		"South of the station" = locate(/area/rescue_base/south),
+		"Southeast of the station" = locate(/area/rescue_base/southeast),
+		"Telecomms Satellite" = locate(/area/rescue_base/commssat),
+		"Engineering Station" = locate(/area/rescue_base/mining),
+		"Arrivals dock" = locate(/area/rescue_base/arrivals_dock),
+		)
+
+	RS.docking_controller_tag = "rescue_shuttle"
+	RS.destination_dock_targets = list(
+		"Response Team Base" = "rescue_base",
+		"Arrivals dock" = "rescue_shuttle_dock_airlock",
+		)
+
+	RS.announcer = "NDV Icarus Communications"
+	RS.arrival_message = "Attention, [station_short], there's a small patrol craft headed your way, it flashed us Asset Protection codes and we let it pass. You've got guests on the way."
+	RS.departure_message = "[station_short], That Asset Protection vessel is headed back the way it came. Hope they were helpful."
+	RS.interim = locate(/area/rescue_base/transit)
+
+	RS.warmup_time = 0
+	shuttles["Rescue"] = RS
 
