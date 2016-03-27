@@ -69,12 +69,12 @@
 					break
 	return .
 
-/datum/recipe/proc/check_items(var/obj/container as obj)
+/datum/recipe/proc/check_items(var/obj/machinery/microwave/container as obj)
 	. = 1
 	if (items && items.len)
 		var/list/checklist = list()
 		checklist = items.Copy() // You should really trust Copy
-		for(var/obj/O in container)
+		for(var/obj/O in container.ingredient_list)
 			if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown))
 				continue // Fruit is handled in check_fruit().
 			var/found = 0
@@ -100,17 +100,18 @@
 	return result_obj
 
 // food-related
-/datum/recipe/proc/make_food(var/obj/container as obj)
+/datum/recipe/proc/make_food(var/obj/machinery/microwave/container as obj)
 	if(!result)
 		world << "<span class='danger'>Recipe [type] is defined without a result, please bug this.</span>"
 		return
 	var/obj/result_obj = new result(container)
-	for (var/obj/O in (container.contents-result_obj))
+	for (var/obj/O in (container.ingredient_list)) //We no longer need to take result_obj out of the list, since it doesn't exist in the list.
 		if (O.reagents)
 			O.reagents.del_reagent("nutriment")
 			O.reagents.update_total()
 			O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
 		qdel(O)
+	container.ingredient_list.Cut() //Trust in Cut().
 	container.reagents.clear_reagents()
 	return result_obj
 

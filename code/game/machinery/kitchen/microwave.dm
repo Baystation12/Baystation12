@@ -17,6 +17,8 @@
 	var/global/list/acceptable_items // List of the items you can put in
 	var/global/list/acceptable_reagents // List of the reagents you can put in
 	var/global/max_n_of_items = 0
+	
+	var/list/ingredient_list = list()	//MUST BE INTIALIZED OR YOU GET RUNTIME ERRORS
 
 
 // see code/modules/food/recipes_microwave.dm for recipes
@@ -101,12 +103,13 @@
 			user << "<span class='warning'>It's dirty!</span>"
 			return 1
 	else if(is_type_in_list(O,acceptable_items))
-		if (contents.len>=max_n_of_items)
+		if (ingredient_list.len>=max_n_of_items)
 			user << "<span class='warning'>This [src] is full of ingredients, you cannot put more.</span>"
 			return 1
 		if(istype(O, /obj/item/stack) && O:get_amount() > 1) // This is bad, but I can't think of how to change it
 			var/obj/item/stack/S = O
-			new O.type (src)
+			var/obj/item/stack/K = new O.type (src) //Needed for change into ingredient lists, rather than just contents.
+			ingredient_list += K
 			S.use(1)
 			user.visible_message( \
 				"<span class='notice'>\The [user] has added one of [O] to \the [src].</span>", \
@@ -116,6 +119,7 @@
 		//	user.remove_from_mob(O)	//This just causes problems so far as I can tell. -Pete
 			user.drop_item()
 			O.loc = src
+			ingredient_list += O
 			user.visible_message( \
 				"<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", \
 				"<span class='notice'>You add \the [O] to \the [src].</span>")
@@ -178,7 +182,7 @@
 		var/list/items_counts = new
 		var/list/items_measures = new
 		var/list/items_measures_p = new
-		for (var/obj/O in contents)
+		for (var/obj/O in ingredient_list)
 			var/display_name = O.name
 			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/egg))
 				items_measures[display_name] = "egg"
@@ -238,7 +242,7 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	start()
-	if (reagents.total_volume==0 && !(locate(/obj) in contents)) //dry run
+	if (reagents.total_volume==0 && !(locate(/obj) in ingredient_list)) //dry run
 		if (!wzhzhzh(10))
 			abort()
 			return
@@ -300,7 +304,7 @@
 	return 1
 
 /obj/machinery/microwave/proc/has_extra_item()
-	for (var/obj/O in contents)
+	for (var/obj/O in ingredient_list)
 		if ( \
 				!istype(O,/obj/item/weapon/reagent_containers/food) && \
 				!istype(O, /obj/item/weapon/grown) \
@@ -326,8 +330,9 @@
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/proc/dispose()
-	for (var/obj/O in contents)
+	for (var/obj/O in ingredient_list)
 		O.loc = src.loc
+		ingredient_list -= O
 	if (src.reagents.total_volume)
 		src.dirty++
 	src.reagents.clear_reagents()
@@ -361,7 +366,7 @@
 /obj/machinery/microwave/proc/fail()
 	var/obj/item/weapon/reagent_containers/food/snacks/badrecipe/ffuu = new(src)
 	var/amount = 0
-	for (var/obj/O in contents-ffuu)
+	for (var/obj/O in ingredient_list-ffuu)
 		amount++
 		if (O.reagents)
 			var/id = O.reagents.get_master_reagent_id()
