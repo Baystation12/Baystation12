@@ -15,6 +15,8 @@ var/datum/antagonist/deathsquad/deathsquad
 	initial_spawn_req = 4
 	initial_spawn_target = 6
 
+	faction = "deathsquad"
+
 	var/deployed = 0
 
 /datum/antagonist/deathsquad/New(var/no_reference)

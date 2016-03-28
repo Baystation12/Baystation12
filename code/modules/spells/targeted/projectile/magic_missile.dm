@@ -1,13 +1,14 @@
 /spell/targeted/projectile/magic_missile
 	name = "Magic Missile"
 	desc = "This spell fires several, slow moving, magic projectiles at nearby targets."
-
+	feedback = "MM"
 	school = "evocation"
 	charge_max = 150
 	spell_flags = NEEDSCLOTHES
 	invocation = "FORTI GY AMA"
 	invocation_type = SpI_SHOUT
 	range = 7
+	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 3, Sp_POWER = 3)
 	cooldown_min = 90 //15 deciseconds reduction per rank
 
 	max_targets = 0
@@ -28,6 +29,20 @@
 	for(var/mob/living/M in targets)
 		apply_spell_damage(M)
 	return
+
+/spell/targeted/projectile/magic_missile/empower_spell()
+	if(!..())
+		return 0
+
+	if(spell_levels[Sp_POWER] == level_max[Sp_POWER])
+		amt_paralysis += 2
+		amt_stunned += 2
+		return "[src] will now stun people for a longer duration."
+	amt_dam_fire += 5
+
+	return "[src] does more damage now."
+
+
 
 //PROJECTILE
 

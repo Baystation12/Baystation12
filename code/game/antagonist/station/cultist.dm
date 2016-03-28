@@ -34,6 +34,8 @@ var/datum/antagonist/cultist/cult
 	var/list/sacrificed = list()
 	var/list/harvested = list()
 
+	faction = "cult"
+
 /datum/antagonist/cultist/New()
 	..()
 	cult = src
