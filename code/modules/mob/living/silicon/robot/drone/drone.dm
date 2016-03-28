@@ -326,10 +326,10 @@ var/list/mob_hat_cache = list()
 	src << "Use <b>say ;Hello</b> to talk to other drones and <b>say Hello</b> to speak silently to your nearby fellows."
 
 /mob/living/silicon/robot/drone/add_robot_verbs()
-	src.verbs |= silicon_subsystems
+	return
 
 /mob/living/silicon/robot/drone/remove_robot_verbs()
-	src.verbs -= silicon_subsystems
+	return
 
 /mob/living/silicon/robot/drone/construction/welcome_drone()
 	src << "<b>You are a construction drone, an autonomous engineering and fabrication system.</b>."

@@ -83,4 +83,4 @@
 /obj/machinery/modular_computer/console/preset/civilian/install_programs()
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
-
+	cpu.hard_drive.store_file(new/datum/computer_file/program/newsbrowser())

@@ -431,10 +431,9 @@
 	return
 
 /turf/simulated/floor/asteroid/is_plating()
-	return 0
+	return !density
 
 /turf/simulated/floor/asteroid/attackby(obj/item/weapon/W as obj, mob/user as mob)
-
 	if(!W || !user)
 		return 0
 

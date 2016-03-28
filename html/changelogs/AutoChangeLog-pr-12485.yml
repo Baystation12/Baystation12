@@ -1,0 +1,4 @@
+author: atlantiscze
+delete-after: True
+changes: 
+  - rscadd: "Cyborgs and the AI now show on the crew manifest."

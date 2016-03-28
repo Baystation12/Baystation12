@@ -166,7 +166,7 @@
 		show_emergency_shuttle_eta()
 		show_system_integrity()
 		show_malf_ai()
-	..()
+	. = ..()
 
 // this function displays the stations manifest in a separate window
 /mob/living/silicon/proc/show_station_manifest()
