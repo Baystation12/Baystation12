@@ -1,6 +1,0 @@
-author: Datraen
-
-delete-after: True
-
-changes: 
-  - bugfix: "Adds a check to prison breaks that makes sure the APC is on before continuing."
