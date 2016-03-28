@@ -277,13 +277,13 @@
 
 	New()
 		..()
-		new /obj/item/weapon/grenade/flashbang(src)
-		new /obj/item/weapon/grenade/flashbang(src)
-		new /obj/item/weapon/grenade/flashbang(src)
-		new /obj/item/weapon/grenade/flashbang(src)
-		new /obj/item/weapon/grenade/flashbang(src)
-		new /obj/item/weapon/grenade/flashbang(src)
-		new /obj/item/weapon/grenade/flashbang(src)
+		new /obj/item/device/assembly_holder/grenade/flashbang(src)
+		new /obj/item/device/assembly_holder/grenade/flashbang(src)
+		new /obj/item/device/assembly_holder/grenade/flashbang(src)
+		new /obj/item/device/assembly_holder/grenade/flashbang(src)
+		new /obj/item/device/assembly_holder/grenade/flashbang(src)
+		new /obj/item/device/assembly_holder/grenade/flashbang(src)
+		new /obj/item/device/assembly_holder/grenade/flashbang(src)
 
 /obj/item/weapon/storage/box/teargas
 	name = "box of pepperspray grenades"
@@ -292,12 +292,12 @@
 
 	New()
 		..()
-		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
-		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
-		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
-		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
-		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
-		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/device/assembly_holder/grenade/chem_grenade/teargas(src)
+		new /obj/item/device/assembly_holder/grenade/chem_grenade/teargas(src)
+		new /obj/item/device/assembly_holder/grenade/chem_grenade/teargas(src)
+		new /obj/item/device/assembly_holder/grenade/chem_grenade/teargas(src)
+		new /obj/item/device/assembly_holder/grenade/chem_grenade/teargas(src)
+		new /obj/item/device/assembly_holder/grenade/chem_grenade/teargas(src)
 
 
 
@@ -308,11 +308,11 @@
 
 	New()
 		..()
-		new /obj/item/weapon/grenade/empgrenade(src)
-		new /obj/item/weapon/grenade/empgrenade(src)
-		new /obj/item/weapon/grenade/empgrenade(src)
-		new /obj/item/weapon/grenade/empgrenade(src)
-		new /obj/item/weapon/grenade/empgrenade(src)
+		new /obj/item/device/assembly_holder/grenade/empgrenade(src)
+		new /obj/item/device/assembly_holder/grenade/empgrenade(src)
+		new /obj/item/device/assembly_holder/grenade/empgrenade(src)
+		new /obj/item/device/assembly_holder/grenade/empgrenade(src)
+		new /obj/item/device/assembly_holder/grenade/empgrenade(src)
 
 /obj/item/weapon/storage/box/smokes
 	name = "box of smoke bombs"
@@ -321,11 +321,11 @@
 
 /obj/item/weapon/storage/box/smokes/New()
 		..()
-		new /obj/item/weapon/grenade/smokebomb(src)
-		new /obj/item/weapon/grenade/smokebomb(src)
-		new /obj/item/weapon/grenade/smokebomb(src)
-		new /obj/item/weapon/grenade/smokebomb(src)
-		new /obj/item/weapon/grenade/smokebomb(src)
+		new /obj/item/device/assembly_holder/grenade/smokebomb(src)
+		new /obj/item/device/assembly_holder/grenade/smokebomb(src)
+		new /obj/item/device/assembly_holder/grenade/smokebomb(src)
+		new /obj/item/device/assembly_holder/grenade/smokebomb(src)
+		new /obj/item/device/assembly_holder/grenade/smokebomb(src)
 
 /obj/item/weapon/storage/box/anti_photons
 	name = "box of anti-photon grenades"
@@ -334,11 +334,11 @@
 
 /obj/item/weapon/storage/box/anti_photons/New()
 		..()
-		new /obj/item/weapon/grenade/anti_photon(src)
-		new /obj/item/weapon/grenade/anti_photon(src)
-		new /obj/item/weapon/grenade/anti_photon(src)
-		new /obj/item/weapon/grenade/anti_photon(src)
-		new /obj/item/weapon/grenade/anti_photon(src)
+		new /obj/item/device/assembly_holder/grenade/anti_photon(src)
+		new /obj/item/device/assembly_holder/grenade/anti_photon(src)
+		new /obj/item/device/assembly_holder/grenade/anti_photon(src)
+		new /obj/item/device/assembly_holder/grenade/anti_photon(src)
+		new /obj/item/device/assembly_holder/grenade/anti_photon(src)
 
 /obj/item/weapon/storage/box/trackimp
 	name = "boxed tracking implant kit"

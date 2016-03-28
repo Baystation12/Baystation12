@@ -35,6 +35,7 @@
 	var/open_sound_unpowered = 'sound/machines/airlock_creaking.ogg'
 
 	var/_wifi_id
+	var/obj/item/device/assembly_holder/attached_assembly
 	var/datum/wifi/receiver/button/door/wifi_receiver
 
 /obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
@@ -766,6 +767,10 @@ About the new airlock wires panel:
 			src.p_open = 1
 		src.update_icon()
 	else if(istype(C, /obj/item/weapon/wirecutters))
+		if(attached_assembly)
+			user << "<span class='notice'>You remove \the [attached_assembly]!</span>"
+			attached_assembly.detatched_from(src)
+			return
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/device/multitool))
 		return src.attack_hand(user)
@@ -832,6 +837,13 @@ About the new airlock wires panel:
 					spawn(0)	close(1)
 				else
 					user << "<span class='warning'>You need to be wielding \the [C] to do that.</span>"
+	else if(istype(C, /obj/item/device/assembly_holder))
+		if(attached_assembly)
+			user << "<span class='notice'>There is already an assembly attached to \the [src]!</span>"
+		else
+			user << "<span class='notice'>You attach \the [C] to \the [src]!</span>"
+			attached_assembly = C
+			attached_assembly.attached_to(src)
 
 	else
 		..()
@@ -866,6 +878,8 @@ About the new airlock wires panel:
 	//if the door is unpowered then it doesn't make sense to hear the woosh of a pneumatic actuator
 	if(arePowerSystemsOn())
 		playsound(src.loc, open_sound_powered, 100, 1)
+		if(attached_assembly)
+			attached_assembly.door_opened()
 	else
 		playsound(src.loc, open_sound_unpowered, 100, 1)
 

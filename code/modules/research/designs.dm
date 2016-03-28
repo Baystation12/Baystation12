@@ -559,11 +559,19 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/gun/energy/temperature
 	sort_string = "TABAC"
 
+/datum/design/item/weapon/intelligun
+	desc = "An advanced prototype weapon with inbuilt security protocols."
+	id = "intelligun"
+	req_tech = list(TECH_COMBAT = 3, TECH_DATA = 2, TECH_POWER = 3, TECH_BIO = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 6800, "glass" = 1000, "gold" = 500)
+	build_path = /obj/item/weapon/gun/energy/advanced
+	sort_string = "TABAD"
+
 /datum/design/item/weapon/large_grenade
 	id = "large_Grenade"
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 3000)
-	build_path = /obj/item/weapon/grenade/chem_grenade/large
+	build_path = /obj/item/device/assembly_holder/grenade/chem_grenade/large
 	sort_string = "TACAA"
 
 /datum/design/item/weapon/flora_gun
