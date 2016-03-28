@@ -292,6 +292,17 @@
 		for(var/gas in exude_gasses)
 			environment.adjust_gas(gas, max(1,round((exude_gasses[gas]*(get_trait(TRAIT_POTENCY)/5))/exude_gasses.len)))
 
+	//Handle temperature change.
+	if(get_trait(TRAIT_ALTER_TEMP) != 0 && !check_only)
+		var/target_temp = get_trait(TRAIT_ALTER_TEMP) > 0 ? 500 : 80
+		if(environment && abs(environment.temperature-target_temp) > 0.1)
+			var/datum/gas_mixture/removed = environment.remove(0.25 * environment.total_moles)
+			if(removed)
+				var/heat_transfer = abs(removed.get_thermal_energy_change(target_temp))
+				heat_transfer = min(heat_transfer,abs(get_trait(TRAIT_ALTER_TEMP) * 10000))
+				removed.add_thermal_energy((get_trait(TRAIT_ALTER_TEMP) > 0 ? 1 : -1) * heat_transfer)
+			environment.merge(removed)
+
 	// Handle light requirements.
 	if(!light_supplied)
 		var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in current_turf

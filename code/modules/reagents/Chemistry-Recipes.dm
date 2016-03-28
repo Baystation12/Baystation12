@@ -1468,15 +1468,15 @@
 	name = "Iced Tea"
 	id = "icetea"
 	result = "icetea"
-	required_reagents = list("ice" = 1, "tea" = 4)
-	result_amount = 4
+	required_reagents = list("ice" = 1, "tea" = 2)
+	result_amount = 3
 
 /datum/chemical_reaction/icecoffee
 	name = "Iced Coffee"
 	id = "icecoffee"
 	result = "icecoffee"
-	required_reagents = list("ice" = 1, "coffee" = 4)
-	result_amount = 4
+	required_reagents = list("ice" = 1, "coffee" = 2)
+	result_amount = 3
 
 /datum/chemical_reaction/nuka_cola
 	name = "Nuka Cola"
@@ -1625,8 +1625,8 @@
 	name = "Pan-Galactic Gargle Blaster"
 	id = "gargleblaster"
 	result = "gargleblaster"
-	required_reagents = list("vodka" = 1, "gin" = 1, "whiskey" = 1, "cognac" = 1, "limejuice" = 1)
-	result_amount = 5
+	required_reagents = list("vodka" = 2, "gin" = 1, "whiskey" = 1, "cognac" = 1, "limejuice" = 1)
+	result_amount = 6
 
 /datum/chemical_reaction/brave_bull
 	name = "Brave Bull"

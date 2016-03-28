@@ -2,26 +2,28 @@
 //**Cham Jumpsuit**
 //*****************
 
-/obj/item/proc/disguise(var/newtype)
+/obj/item/proc/disguise(var/newtype, var/mob/user)
+	if(!user || user.incapacitated())
+		return
 	//this is necessary, unfortunately, as initial() does not play well with list vars
 	var/obj/item/copy = new newtype(null) //so that it is GCed once we exit
-	
+
 	desc = copy.desc
 	name = copy.name
 	icon_state = copy.icon_state
 	item_state = copy.item_state
 	body_parts_covered = copy.body_parts_covered
-	
+
 	item_icons = copy.item_icons.Copy()
 	item_state_slots = copy.item_state_slots.Copy()
 	sprite_sheets = copy.sprite_sheets.Copy()
 	//copying sprite_sheets_obj should be unnecessary as chameleon items are not refittable.
-	
+
 	return copy //for inheritance
 
 /proc/generate_chameleon_choices(var/basetype, var/blacklist=list())
 	. = list()
-	
+
 	var/i = 1 //in case there is a collision with both name AND icon_state
 	for(var/typepath in typesof(basetype) - blacklist)
 		var/obj/O = typepath
@@ -65,7 +67,7 @@
 	if(!ispath(clothing_choices[picked]))
 		return
 
-	disguise(clothing_choices[picked])
+	disguise(clothing_choices[picked], usr)
 	update_clothing_icon()	//so our overlays update.
 
 //*****************
@@ -100,8 +102,8 @@
 
 	if(!ispath(clothing_choices[picked]))
 		return
-	
-	disguise(clothing_choices[picked])
+
+	disguise(clothing_choices[picked], usr)
 	update_clothing_icon()	//so our overlays update.
 
 //******************
@@ -137,7 +139,7 @@
 	if(!ispath(clothing_choices[picked]))
 		return
 
-	disguise(clothing_choices[picked])
+	disguise(clothing_choices[picked], usr)
 	update_clothing_icon()	//so our overlays update.
 
 //*******************
@@ -173,7 +175,7 @@
 	if(!ispath(clothing_choices[picked]))
 		return
 
-	disguise(clothing_choices[picked])
+	disguise(clothing_choices[picked], usr)
 	update_clothing_icon()	//so our overlays update.
 
 //**********************
@@ -211,7 +213,7 @@
 	if(!ispath(clothing_choices[picked]))
 		return
 
-	disguise(clothing_choices[picked])
+	disguise(clothing_choices[picked], usr)
 
 	//so our overlays update.
 	if (ismob(src.loc))
@@ -250,7 +252,7 @@
 	if(!ispath(clothing_choices[picked]))
 		return
 
-	disguise(clothing_choices[picked])
+	disguise(clothing_choices[picked], usr)
 	update_clothing_icon()	//so our overlays update.
 
 //******************
@@ -285,7 +287,7 @@
 	if(!ispath(clothing_choices[picked]))
 		return
 
-	disguise(clothing_choices[picked])
+	disguise(clothing_choices[picked], usr)
 	update_clothing_icon()	//so our overlays update.
 
 //*********************
@@ -320,7 +322,7 @@
 	if(!ispath(clothing_choices[picked]))
 		return
 
-	disguise(clothing_choices[picked])
+	disguise(clothing_choices[picked], usr)
 	update_clothing_icon()	//so our overlays update.
 
 //*****************
@@ -333,19 +335,19 @@
 	w_class = 3
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	matter = list()
-	
+
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 	projectile_type = /obj/item/projectile/chameleon
 	charge_meter = 0
 	charge_cost = 20 //uses next to no power, since it's just holograms
 	max_shots = 50
-	
+
 	var/obj/item/projectile/copy_projectile
 	var/global/list/gun_choices
 
 /obj/item/weapon/gun/energy/chameleon/New()
 	..()
-	
+
 	if(!gun_choices)
 		gun_choices = list()
 		for(var/gun_type in typesof(/obj/item/weapon/gun/) - src.type)
@@ -400,7 +402,7 @@
 	if(!ispath(gun_choices[picked]))
 		return
 
-	disguise(gun_choices[picked])
+	disguise(gun_choices[picked], usr)
 
 	//so our overlays update.
 	if (ismob(src.loc))

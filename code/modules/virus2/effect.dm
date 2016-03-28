@@ -279,7 +279,7 @@
 		else
 			data = pick("bicaridine", "kelotane", "anti_toxin", "inaprovaline", "space_drugs", "sugar",
 						"tramadol", "dexalin", "cryptobiolin", "impedrezene", "hyperzine", "ethylredoxrazine",
-						"mindbreaker", "nutriment")
+						"mindbreaker", "glucose")
 		var/datum/reagent/R = chemical_reagents_list[data]
 		name = "[initial(name)] ([initial(R.name)])"
 
