@@ -1,6 +1,5 @@
 // The time a datum was destroyed by the GC, or null if it hasn't been
 /datum/var/gcDestroyed
-
 #define GC_COLLECTIONS_PER_RUN 300
 #define GC_COLLECTION_TIMEOUT (30 SECONDS)
 #define GC_FORCE_DEL_PER_RUN 30
@@ -65,6 +64,9 @@ world/loop_checks = 0
 		testing("GC: [refID] old enough to test: GCd_at_time: [GCd_at_time] time_to_kill: [time_to_kill] current: [world.time]")
 		#endif
 		if(A && A.gcDestroyed == GCd_at_time) // So if something else coincidently gets the same ref, it's not deleted by mistake
+			#ifdef GC_FINDREF
+			LocateReferences(A)
+			#endif
 			// Something's still referring to the qdel'd object.  Kill it.
 			testing("GC: -- \ref[A] | [A.type] was unable to be GC'd and was deleted --")
 			logging["[A.type]"]++
@@ -87,29 +89,47 @@ world/loop_checks = 0
 #undef GC_COLLECTIONS_PER_TICK
 
 #ifdef GC_FINDREF
-/datum/controller/process/garbage_collector/proc/LookForRefs(var/datum/D, var/list/targ)
+
+/datum/controller/process/garbage_collector/proc/LocateReferences(var/atom/A)
+	testing("GC: Attempting to locate references to [A] | [A.type]. This is a potentially long-running operation.")
+	if(istype(A))
+		if(A.loc != null)
+			testing("GC: [A] | [A.type] is located in [A.loc] instead of null")
+		if(A.contents.len)
+			testing("GC: [A] | [A.type] has contents: [jointext(A.contents)]")
+	var/ref_count = 0
+	for(var/atom/atom)
+		ref_count += LookForRefs(atom, A)
+	for(var/datum/datum)	// This is strictly /datum, not subtypes.
+		ref_count += LookForRefs(datum, A)
+	for(var/client/client)
+		ref_count += LookForRefs(client, A)
+	var/message = "GC: References found to [A] | [A.type]: [ref_count]."
+	if(!ref_count)
+		message += " Has likely been supplied as an 'in list' argment to a proc."
+	testing(message)
+
+/datum/controller/process/garbage_collector/proc/LookForRefs(var/datum/D, var/datum/A)
 	. = 0
 	for(var/V in D.vars)
 		if(V == "contents")
 			continue
-		if(istype(D.vars[V], /atom))
-			var/atom/A = D.vars[V]
-			if(A in targ)
+		if(!islist(D.vars[V]))
+			if(D.vars[V] == A)
 				testing("GC: [A] | [A.type] referenced by [D] | [D.type], var [V]")
 				. += 1
-		else if(islist(D.vars[V]))
-			. += LookForListRefs(D.vars[V], targ, D, V)
+		else
+			. += LookForListRefs(D.vars[V], A, D, V)
 
-/datum/controller/process/garbage_collector/proc/LookForListRefs(var/list/L, var/list/targ, var/datum/D, var/V)
+/datum/controller/process/garbage_collector/proc/LookForListRefs(var/list/L, var/datum/A, var/datum/D, var/V)
 	. = 0
 	for(var/F in L)
-		if(istype(F, /atom))
-			var/atom/A = F
-			if(A in targ)
+		if(!islist(F))
+			if(F == A || L[F] == A)
 				testing("GC: [A] | [A.type] referenced by [D] | [D.type], list [V]")
 				. += 1
-		if(islist(F))
-			. += LookForListRefs(F, targ, D, "[F] in list [V]")
+		else
+			. += LookForListRefs(F, A, D, "[F] in list [V]")
 #endif
 
 /datum/controller/process/garbage_collector/proc/AddTrash(datum/A)

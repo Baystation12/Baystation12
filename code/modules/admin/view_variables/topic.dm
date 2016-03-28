@@ -223,7 +223,7 @@
 			usr << "This can only be done to instances of type /datum"
 			return
 
-		src.holder.marked_datum = D
+		src.holder.marked_datum_weak = weakref(D)
 		href_list["datumrefresh"] = href_list["mark_object"]
 
 	else if(href_list["rotatedatum"])

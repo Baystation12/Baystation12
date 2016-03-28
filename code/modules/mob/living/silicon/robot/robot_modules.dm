@@ -19,6 +19,7 @@ var/global/list/robot_modules = list(
 	w_class = 100.0
 	item_state = "electronic"
 	flags = CONDUCT
+	var/hide_on_manifest = 0
 	var/channels = list()
 	var/networks = list()
 	var/languages = list(
@@ -608,6 +609,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/syndicate
 	name = "illegal robot module"
+	hide_on_manifest = 1
 	languages = list(
 					LANGUAGE_SOL_COMMON = 1,
 					LANGUAGE_TRADEBAND = 1,
@@ -642,6 +644,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/security/combat
 	name = "combat robot module"
+	hide_on_manifest = 1
 	sprites = list("Combat Android" = "droid-combat")
 
 /obj/item/weapon/robot_module/combat/New()
@@ -656,6 +659,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/drone
 	name = "drone module"
+	hide_on_manifest = 1
 	no_slip = 1
 	networks = list(NETWORK_ENGINEERING)
 
@@ -738,6 +742,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/drone/construction
 	name = "construction drone module"
+	hide_on_manifest = 1
 	channels = list("Engineering" = 1)
 	languages = list()
 

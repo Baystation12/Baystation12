@@ -41,6 +41,13 @@
 	M.nutrition += nutriment_factor * removed // For hunger and fatness
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 
+/datum/reagent/nutriment/glucose
+	name = "Glucose"
+	id = "glucose"
+	color = "#FFFFFF"
+
+	injectable = 1
+
 /datum/reagent/nutriment/protein // Bad for Skrell!
 	name = "animal protein"
 	taste_description = "some sort of protein"

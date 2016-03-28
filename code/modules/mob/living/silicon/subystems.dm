@@ -1,4 +1,5 @@
 /mob/living/silicon
+	var/list/silicon_subsystems_by_name = list()
 	var/list/silicon_subsystems = list(
 		/datum/nano_module/alarm_monitor/all,
 		/datum/nano_module/law_manager
@@ -40,6 +41,7 @@
 	var/ui_state = subsystem_type == /datum/nano_module/law_manager ? conscious_state : self_state
 	var/stat_silicon_subsystem/SSS = new(src, subsystem_type, ui_state)
 	silicon_subsystems[subsystem_type] = SSS
+	silicon_subsystems_by_name[SSS.name] = SSS
 	return TRUE
 
 /mob/living/silicon/proc/remove_subsystem(var/subsystem_type)
@@ -47,8 +49,9 @@
 	if(!istype(SSS))
 		return FALSE
 
-	qdel(SSS)
+	silicon_subsystems_by_name -= SSS.name
 	silicon_subsystems -= subsystem_type
+	qdel(SSS)
 	return TRUE
 
 /mob/living/silicon/proc/open_subsystem(var/subsystem_type)
@@ -57,6 +60,15 @@
 		return FALSE
 	SSS.Click()
 	return TRUE
+
+/mob/living/silicon/verb/activate_subsystem(var/datum/silicon_subsystem_name in silicon_subsystems_by_name)
+	set name = "Subsystems"
+	set desc = "Activates the given subsystem"
+	set category = "Silicon Commands"
+
+	var/stat_silicon_subsystem/SSS = silicon_subsystems_by_name[silicon_subsystem_name]
+	if(istype(SSS))
+		SSS.Click()
 
 /mob/living/silicon/Stat()
 	. = ..()

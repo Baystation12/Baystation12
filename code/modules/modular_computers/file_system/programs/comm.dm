@@ -8,7 +8,7 @@
 	filedesc = "Command and communications program."
 	program_icon_state = "comm"
 	nanomodule_path = /datum/nano_module/program/comm
-	extended_desc = "Used to command and control the station. Can relay long-range communications."
+	extended_desc = "Used to command and control the station. Can relay long-range communications. This program can not be run on tablet computers."
 	required_access = access_heads
 	requires_ntnet = 1
 	size = 12
