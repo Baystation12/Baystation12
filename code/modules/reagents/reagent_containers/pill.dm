@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/weapon/reagent_containers/pill
 	name = "pill"
-	desc = "a pill."
+	desc = "A pill."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = null
 	item_state = "pill"

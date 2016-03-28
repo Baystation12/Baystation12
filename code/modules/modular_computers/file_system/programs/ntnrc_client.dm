@@ -9,7 +9,7 @@
 	network_destination = "NTNRC server"
 	ui_header = "ntnrc_idle.gif"
 	available_on_ntnet = 1
-	nanomodule_path = /datum/nano_module/computer_chatclient/
+	nanomodule_path = /datum/nano_module/program/computer_chatclient/
 	var/last_message = null				// Used to generate the toolbar icon
 	var/username
 	var/datum/ntnet_conversation/channel = null
@@ -178,10 +178,10 @@
 		channel = null
 	..(forced)
 
-/datum/nano_module/computer_chatclient
+/datum/nano_module/program/computer_chatclient
 	name = "NTNet Relay Chat Client"
 
-/datum/nano_module/computer_chatclient/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/datum/nano_module/program/computer_chatclient/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	if(!ntnet_global || !ntnet_global.chat_channels)
 		return
 
