@@ -211,6 +211,10 @@
 	display_name = "scrubs, green"
 	path = /obj/item/clothing/under/rank/medical/green
 
+/datum/gear/uniform/scrubs/navyblue
+	display_name = "scrubs, navy blue"
+	path = /obj/item/clothing/under/rank/medical/navyblue
+
 /datum/gear/uniform/sundress
 	display_name = "sundress"
 	path = /obj/item/clothing/under/sundress
