@@ -119,9 +119,8 @@
 		else
 			H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/det_trench(H), slot_wear_suit)
 			H.equip_to_slot_or_del(new /obj/item/clothing/head/det(H), slot_head)
+		H.equip_to_slot_or_del(new /obj/item/weapon/storage/briefcase/crimekit(H), slot_r_hand)
 		return 1
-
-
 
 /datum/job/officer
 	title = "Security Officer"
