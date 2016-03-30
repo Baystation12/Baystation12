@@ -11,7 +11,7 @@
 "ak" = (/obj/item/device/radio/intercom{dir = 2; pixel_y = 22},/obj/structure/reagent_dispensers/watertank,/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/tiled,/area/outpost/research/chemistry)
 "al" = (/turf/simulated/wall,/area/outpost/research/analysis)
 "am" = (/obj/structure/disposaloutlet{dir = 1},/obj/structure/disposalpipe/trunk,/turf/simulated/floor/asteroid,/area/mine/unexplored)
-"an" = (/obj/structure/closet/crate/hydroponics,/obj/item/weapon/shovel/spade,/obj/item/weapon/reagent_containers/glass/bucket,/obj/item/weedkiller/triclopyr,/obj/item/weapon/reagent_containers/glass/fertilizer/ez,/turf/simulated/floor/plating,/area/outpost/research/chemistry)
+"an" = (/obj/structure/closet/crate/hydroponics,/obj/item/weapon/shovel/spade,/obj/item/weapon/reagent_containers/glass/bucket,/obj/item/weedkiller/triclopyr,/obj/item/weapon/reagent_containers/glass/bottle/eznutrient,/turf/simulated/floor/plating,/area/outpost/research/chemistry)
 "ao" = (/obj/structure/reagent_dispensers/fueltank,/obj/machinery/alarm{pixel_y = 22},/turf/simulated/floor/plating,/area/outpost/research/chemistry)
 "ap" = (/obj/item/device/analyzer/plant_analyzer,/obj/item/weapon/cell,/obj/item/stack/cable_coil/random,/obj/item/stack/cable_coil/random,/obj/machinery/light/small{dir = 1},/obj/structure/table/steel,/turf/simulated/floor/plating,/area/outpost/research/chemistry)
 "aq" = (/obj/structure/closet/hydrant{pixel_x = 0; pixel_y = 32},/turf/simulated/floor/plating,/area/outpost/research/chemistry)

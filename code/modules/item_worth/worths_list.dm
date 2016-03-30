@@ -22,7 +22,6 @@ var/list/worths = list(
 					/obj/item/weapon/reagent_containers/food/drinks/bottle = -11,
 					/obj/item/weapon/reagent_containers/food/drinks = -8,
 					/obj/item/weapon/reagent_containers/glass/rag = -5,
-					/obj/item/weapon/reagent_containers/glass/fertilizer = -25,
 					/obj/item/weapon/reagent_containers/glass = -60,
 					/obj/item/weapon/reagent_containers = -1,
 //GUNS,
