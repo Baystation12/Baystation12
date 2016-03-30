@@ -132,7 +132,6 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		if(uses < spellbook.spells[path])
 			usr << "<span class='notice'>You do not have enough spell slots to purchase this.</span>"
 			return
-		uses -= spellbook.spells[path]
 		send_feedback(path) //feedback stuff
 		if(ispath(path,/datum/spellbook))
 			src.set_spellbook(path)
@@ -141,15 +140,19 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			if(href_list["contract"])
 				if(!(spellbook.book_flags & CAN_MAKE_CONTRACTS))
 					return //no
+				uses -= spellbook.spells[path]
 				spellbook.max_uses -= spellbook.spells[path] //no basksies
 				var/obj/O = new /obj/item/weapon/contract/boon(get_turf(usr),path)
 				temp = "You have purchased \the [O]."
 			else
 				if(ispath(path,/spell))
 					temp = src.add_spell(usr,path)
+					if(temp)
+						uses -= spellbook.spells[path]
 				else
 					var/obj/O = new path(get_turf(usr))
 					temp = "You have purchased \a [O]."
+					uses -= spellbook.spells[path]
 					spellbook.max_uses -= spellbook.spells[path]
 					//finally give it a bit of an oomf
 					playsound(get_turf(usr),'sound/effects/phasein.ogg',50,1)
@@ -181,8 +184,8 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	for(var/spell/S in user.spell_list)
 		if(istype(S,spell_path))
 			if(!S.can_improve())
-				uses += spellbook.spells[spell_path]
-				return "You cannot improve the spell [S] further."
+				//uses += spellbook.spells[spell_path]
+				return //"You cannot improve the spell [S] further."
 			if(S.can_improve(Sp_SPEED) && S.can_improve(Sp_POWER))
 				switch(alert(user, "Do you want to upgrade this spell's speed or power?", "Spell upgrade", "Speed", "Power", "Cancel"))
 					if("Speed")
@@ -190,7 +193,6 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 					if("Power")
 						return S.empower_spell()
 					else
-						uses = min(uses + spellbook.spells[spell_path], spellbook.max_uses)
 						return
 			else if(S.can_improve(Sp_POWER))
 				return S.empower_spell()
