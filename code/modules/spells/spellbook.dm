@@ -190,7 +190,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 					if("Power")
 						return S.empower_spell()
 					else
-						uses += spellbook.spells[spell_path]
+						uses = min(uses + spellbook.spells[spell_path], spellbook.max_uses)
 						return
 			else if(S.can_improve(Sp_POWER))
 				return S.empower_spell()
