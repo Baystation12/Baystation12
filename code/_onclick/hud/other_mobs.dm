@@ -31,13 +31,13 @@
 	blobpwrdisplay.name = "blob power"
 	blobpwrdisplay.icon_state = "block"
 	blobpwrdisplay.screen_loc = ui_health
-	blobpwrdisplay.layer = 20
+	blobpwrdisplay.layer = SCREEN_LAYER
 
 	blobhealthdisplay = new /obj/screen()
 	blobhealthdisplay.name = "blob health"
 	blobhealthdisplay.icon_state = "block"
 	blobhealthdisplay.screen_loc = ui_internal
-	blobhealthdisplay.layer = 20
+	blobhealthdisplay.layer = SCREEN_LAYER
 
 	mymob.client.screen = null
 
@@ -58,7 +58,7 @@
 	using.icon = ui_style
 	using.icon_state = "intent_"+mymob.a_intent
 	using.screen_loc = ui_zonesel
-	using.layer = 20
+	using.layer = SCREEN_LAYER
 	src.adding += using
 	action_intent = using
 

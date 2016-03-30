@@ -141,12 +141,12 @@
 
 	// Remove all callbacks if no specific one is given.
 	if (!proc_call)
-		listeners -= listener
-
-		// Perform some cleanup and return true.
-		if (!listeners.len)
-			event_sources -= event_source
-		return TRUE
+		if(listeners.Remove(listener))
+			// Perform some cleanup and return true.
+			if (!listeners.len)
+				event_sources -= event_source
+			return TRUE
+		return FALSE
 
 	// See if the listener is registered.
 	var/list/callbacks = listeners[listener]

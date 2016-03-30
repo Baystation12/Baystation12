@@ -2,43 +2,44 @@
 //
 // The datum containing all the chunks.
 
+var/datum/visualnet/camera/cameranet_
+/proc/cameranet()
+	if(!cameranet_)
+		cameranet_ = new()
+	return cameranet_
+
 /datum/visualnet/camera
-	// The cameras on the map, no matter if they work or not. Updated in obj/machinery/camera.dm by New() and Destroy().
+	// The cameras on the map, no matter if they work or not.
 	var/list/cameras = list()
-	var/cameras_unsorted = 1
 	chunk_type = /datum/chunk/camera
 
-/datum/visualnet/camera/proc/process_sort()
-	if(cameras_unsorted)
-		cameras = dd_sortedObjectList(cameras)
-		cameras_unsorted = 0
+/datum/visualnet/camera/New()
+	for(var/obj/machinery/camera/c in machines)
+		add_source(c, FALSE)
+	for(var/mob/living/silicon/ai/AI in mob_list)
+		add_source(AI, FALSE)
+	..()
 
-// Removes a camera from a chunk.
+/datum/visualnet/camera/Destroy()
+	cameras.Cut()
+	. = ..()
 
-/datum/visualnet/camera/proc/removeCamera(obj/machinery/camera/c)
-	if(c.can_use())
-		majorChunkChange(c, 0)
+/datum/visualnet/camera/add_source(obj/machinery/camera/c)
+	if(istype(c))
+		if(c in cameras)
+			return
+		var/list/open_networks = c.network - restricted_camera_networks
+		if(!open_networks.len)
+			return
+		dd_insertObjectList(cameras, c)
+		..(c, c.can_use())
+	else if(isAI(c))
+		var/mob/living/silicon/AI = c
+		..(AI, AI.stat != DEAD)
 
 // Add a camera to a chunk.
 
-/datum/visualnet/camera/proc/addCamera(obj/machinery/camera/c)
-	if(c.can_use())
-		majorChunkChange(c, 1)
-
-// Used for Cyborg cameras. Since portable cameras can be in ANY chunk.
-
-/datum/visualnet/camera/proc/updatePortableCamera(obj/machinery/camera/c)
-	if(c.can_use())
-		majorChunkChange(c, 1)
-	//else
-	//	majorChunkChange(c, 0)
-
-/datum/visualnet/camera/onMajorChunkChange(atom/c, var/choice, var/datum/chunk/camera/chunk)
-// Only add actual cameras to the list of cameras
-	if(istype(c, /obj/machinery/camera))
-		if(choice == 0)
-			// Remove the camera.
-			chunk.cameras -= c
-		else if(choice == 1)
-			// You can't have the same camera in the list twice.
-			chunk.cameras |= c
+/datum/visualnet/camera/remove_source(obj/machinery/camera/c)
+	if(!cameras.Remove(c))
+		return
+	..(c, c.can_use())

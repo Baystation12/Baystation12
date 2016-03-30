@@ -425,13 +425,13 @@
 			else if (h_user.l_store == src)
 				h_user.drop_from_inventory(src)
 				B.loc = h_user
-				B.layer = 20
+				B.layer = SCREEN_LAYER+0.01
 				h_user.l_store = B
 				h_user.update_inv_pockets()
 			else if (h_user.r_store == src)
 				h_user.drop_from_inventory(src)
 				B.loc = h_user
-				B.layer = 20
+				B.layer = SCREEN_LAYER+0.01
 				h_user.r_store = B
 				h_user.update_inv_pockets()
 			else if (h_user.head == src)

@@ -242,11 +242,16 @@
 
 	spell_flags = Z2NOCAST
 	hud_state = "wiz_IPC"
-	var/mob/observer/eye/ipc_eye/vision
+	var/mob/observer/eye/wizard_eye/vision
 
 /spell/camera_connection/New()
 	..()
 	vision = new(src)
+
+/spell/camera_connection/Destroy()
+	qdel(vision)
+	vision = null
+	. = ..()
 
 /spell/camera_connection/choose_targets()
 	var/mob/living/L = holder
@@ -257,18 +262,13 @@
 /spell/camera_connection/cast(var/list/targets, mob/user)
 	var/mob/living/L = targets[1]
 
-	vision.owner = L
-	L.eyeobj = vision
-	if(L.client)
-		L.client.eye = vision
-	for(var/datum/chunk/c in vision.visibleChunks)
-		c.remove(vision)
-	vision.setLoc(get_turf(L))
-
+	vision.possess(L)
 	L.verbs += /mob/living/proc/release_eye
 
+/mob/observer/eye/wizard_eye
+	name_sufix = "Wizard Eye"
 
-/mob/observer/eye/ipc_eye/New() //we dont use the Ai one because it has AI specific procs imbedded in it.
+/mob/observer/eye/wizard_eye/New() //we dont use the Ai one because it has AI specific procs imbedded in it.
 	..()
 	visualnet = cameranet
 
@@ -281,6 +281,4 @@
 
 	if(!eyeobj)
 		return
-
-	eyeobj.owner = null
-	eyeobj = null
+	eyeobj.release(src)
