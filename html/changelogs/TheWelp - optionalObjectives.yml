@@ -1,0 +1,4 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Added verb to antagonists to recieve objectives. Located in the OOC tab and gained whenever the person becomes an antagonist."

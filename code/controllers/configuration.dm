@@ -472,7 +472,11 @@ var/list/gamemode_cache = list()
 					config.ninjas_allowed = 1
 
 				if ("objectives_disabled")
-					config.objectives_disabled = 1
+					if(!value)
+						log_misc("Incorrect objective disabled definition: [value]")
+						config.objectives_disabled = 2
+					else
+						config.objectives_disabled = text2num(value)
 
 				if("protect_roles_from_antagonist")
 					config.protect_roles_from_antagonist = 1

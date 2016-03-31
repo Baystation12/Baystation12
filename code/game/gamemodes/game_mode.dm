@@ -568,7 +568,7 @@ proc/get_nt_opposed()
 
 	if(!player || !player.current) return
 
-	if(config.objectives_disabled)
+	if(config.objectives_disabled > 1 || !player.objectives.len)
 		show_generic_antag_text(player)
 		return
 
