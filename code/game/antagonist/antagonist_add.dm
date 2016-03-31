@@ -32,7 +32,7 @@
 	if(faction_verb && player.current)
 		player.current.verbs |= faction_verb
 
-	if(config.objectives_disabled == 1)
+	if(config.objectives_disabled == CONFIG_OBJECTIVE_VERB)
 		player.current.verbs += /mob/proc/add_objectives
 
 	// Handle only adding a mind and not bothering with gear etc.

@@ -473,11 +473,19 @@ var/list/gamemode_cache = list()
 
 				if ("objectives_disabled")
 					if(!value)
-						log_misc("Incorrect objective disabled definition: [value]")
-						config.objectives_disabled = 2
+						log_misc("Could not find value for objectives_disabled in configuration.")
+						config.objectives_disabled = CONFIG_OBJECTIVE_NONE
 					else
-						config.objectives_disabled = text2num(value)
-
+						switch(value)
+							if("none")
+								config.objectives_disabled = CONFIG_OBJECTIVE_NONE
+							if("verb")
+								config.objectives_disabled = CONFIG_OBJECTIVE_VERB
+							if("all")
+								config.objectives_disabled = CONFIG_OBJECTIVE_ALL
+							else
+								log_misc("Incorrect objective disabled definition: [value]")
+								config.objectives_disabled = CONFIG_OBJECTIVE_NONE
 				if("protect_roles_from_antagonist")
 					config.protect_roles_from_antagonist = 1
 
