@@ -46,3 +46,7 @@
 #define isslime(A) istype(A, /mob/living/carbon/slime)
 
 #define attack_animation(A) if(istype(A)) A.do_attack_animation(src)
+
+#define sequential_id uniqueness_repository.Generate(/datum/uniqueness_generator/id_sequential, type)
+
+#define random_id(min_id,max_id) uniqueness_repository.Generate(/datum/uniqueness_generator/id_random, type, min_id, max_id)
