@@ -37,10 +37,6 @@ proc/restore_spells(var/mob/H)
 	if(H.mind && H.mind.learned_spells)
 		for(var/spell/spell_to_add in H.mind.learned_spells)
 			H.add_spell(spell_to_add)
-/*
-/hook/clone/proc/restore_spells(var/mob/H)
-	restore_spells(H)
-*/
 
 /mob/proc/add_spell(var/spell/spell_to_add, var/spell_base = "wiz_spell_ready", var/master_type = /obj/screen/movable/spell_master)
 	if(!spell_masters)

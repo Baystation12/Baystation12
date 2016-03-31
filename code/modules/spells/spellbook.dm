@@ -1,3 +1,4 @@
+#define NOREVERT			1
 #define LOCKED 				2
 #define CAN_MAKE_CONTRACTS	4
 //spells/spellbooks have a variable for this but as artefacts are literal items they do not.
@@ -98,6 +99,8 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 				dat += " <A href='byond://?src=\ref[src];path=[spellbook.spells[i]];contract=1;'>Make Contract</a>"
 			dat += "<br><i>[desc]</i><br>"
 		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spellbook.</a></center>"
+		if(!(spellbook.book_flags & NOREVERT))
+			dat += "<center><A href='byond://?src=\ref[src];book=1'>Choose different spellbook.</a></center>"
 		dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spellbook.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"
 	user << browse(dat,"window=spellbook")
 /obj/item/weapon/spellbook/Topic(href,href_list)
@@ -126,6 +129,13 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 
 	if(href_list["temp"])
 		temp = null
+
+	if(href_list["book"])
+		if(initial(spellbook.max_uses) != spellbook.max_uses || uses != spellbook.max_uses)
+			temp = "You've already purchased things using this spellbook!"
+		else
+			src.set_spellbook(/datum/spellbook)
+			temp = "You have reverted back to the Book of Tomes."
 
 	if(href_list["path"])
 		var/path = text2path(href_list["path"])
@@ -184,8 +194,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	for(var/spell/S in user.spell_list)
 		if(istype(S,spell_path))
 			if(!S.can_improve())
-				//uses += spellbook.spells[spell_path]
-				return //"You cannot improve the spell [S] further."
+				return
 			if(S.can_improve(Sp_SPEED) && S.can_improve(Sp_POWER))
 				switch(alert(user, "Do you want to upgrade this spell's speed or power?", "Spell upgrade", "Speed", "Power", "Cancel"))
 					if("Speed")
@@ -208,7 +217,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	var/desc = "The legendary book of spells of the wizard."
 	var/book_desc = "Holds information on the various tomes available to a wizard"
 	var/feedback = "" //doesn't need one.
-	var/book_flags = 0
+	var/book_flags = NOREVERT
 	var/max_uses = 1
 	var/title = "Book of Tomes"
 	var/title_desc = "This tome marks down all the available tomes for use. Choose wisely, there are no refunds."
