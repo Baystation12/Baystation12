@@ -59,6 +59,12 @@
 	icon_state = "vest_brown"
 	slots = 5
 
+/obj/item/clothing/accessory/storage/white_vest
+	name = "white webbing vest"
+	desc = "Durable white synthcotton vest with lots of pockets to carry essentials."
+	icon_state = "vest_white"
+	slots = 5
+
 /obj/item/clothing/accessory/storage/knifeharness
 	name = "decorated harness"
 	desc = "A heavily decorated harness of sinew and leather with two knife-loops."
