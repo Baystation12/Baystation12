@@ -6,6 +6,7 @@
 	desc = "a cloud of tiny, tiny robots."
 	icon = 'icons/mob/critter.dmi'
 	icon_state = "blobsquiggle_grey"
+	attacktext = "swarmed"
 	health = 10
 	maxHealth = 10
 	var/regen_time = 0
