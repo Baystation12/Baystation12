@@ -26,17 +26,18 @@
 	if(breather)
 		breather.remove_from_mob(contained)
 	qdel(contained)
+	contained = null
 	breather = null
-	..()
+	return ..()
 
 /obj/machinery/oxygen_pump/MouseDrop(over_object, src_location, over_location)
     ..()
     if(in_range(src, usr) && ishuman(over_object) && Adjacent(over_object))
         var/mob/living/carbon/human/target = over_object
         if(target.wear_mask)
-            usr << "<span class='warning'>[target] is already wearing a mask!</span>"
+            usr << "<span class='warning'>\The [target] is already wearing a mask!</span>"
             return
-        usr.visible_message("[usr] begins placing the mask onto [target]..")
+        usr.visible_message("\The [usr] begins placing the mask onto [target]..")
         if(do_after(usr, 50))
             attach_mask(target)
             src.add_fingerprint(usr)
@@ -44,7 +45,7 @@
 /obj/machinery/oxygen_pump/attack_hand(var/mob/living/carbon/user)
 	if(stat & MAINT)
 		if(tank)
-			user.visible_message("<span class='notice'>[user] removes \the [tank] from \the [src].</span>", "<span class='notice'>You remove \the [tank] from \the [src].</span>")
+			user.visible_message("<span class='notice'>\The [user] removes \the [tank] from \the [src].</span>", "<span class='notice'>You remove \the [tank] from \the [src].</span>")
 			user.put_in_hands(tank)
 			src.add_fingerprint(user)
 			tank.add_fingerprint(user)
@@ -54,7 +55,7 @@
 		if(user.wear_mask)
 			user << "<span class='notice'>You're already wearing a mask!</span>"
 			return
-		user.visible_message("<span class='notice'>[user] takes \the [contained] out of \the [src]!</span>", "<span class='notice'>You take \the [contained] out of \the [src]!</span>")
+		user.visible_message("<span class='notice'>\The [user] takes \the [contained] out of \the [src]!</span>", "<span class='notice'>You take \the [contained] out of \the [src]!</span>")
 		attach_mask(user)
 	else if(user == breather)
 		if(tank)
@@ -81,7 +82,7 @@
 /obj/machinery/oxygen_pump/attackby(var/mob/user, var/obj/item/I)
 	if(istype(I, /obj/item/weapon/screwdriver))
 		stat ^= MAINT
-		user.visible_message("<span class='notice'>[user] [stat & MAINT ? "opens" : "closes"] \the [src].</span>", "<span class='notice'>You [stat & MAINT ? "open" : "close"] \the [src].</span>")
+		user.visible_message("<span class='notice'>\The [user] [stat & MAINT ? "opens" : "closes"] \the [src].</span>", "<span class='notice'>You [stat & MAINT ? "open" : "close"] \the [src].</span>")
 		//TO-DO: Open icon
 	if(istype(I, /obj/item/weapon/tank) && (stat & MAINT))
 		if(tank)
@@ -90,7 +91,7 @@
 			user.drop_item()
 			I.forceMove(src)
 			tank = I
-			user.visible_message("<span class='notice'>[user] installs \the [tank] into \the [src].</span>", "<span class='notice'>You install \the [tank] into \the [src].</span>")
+			user.visible_message("<span class='notice'>\The [user] installs \the [tank] into \the [src].</span>", "<span class='notice'>You install \the [tank] into \the [src].</span>")
 			src.add_fingerprint(user)
 	if(I == contained)
 		user << "<span class='notice'>You place \the [contained] back into \the [src].</span>"
