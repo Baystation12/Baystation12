@@ -58,6 +58,9 @@
 			usr << "Invalid mob path in [src]. Contact a coder."
 			return
 
+		if(!(path in monster))
+			return
+
 		var/mob/living/simple_animal/familiar/F = new path(get_turf(src))
 		temp = "You have attempted summoning \the [F]"
 		ghost.request_player(F,"A wizard is requesting a familiar.", 60 SECONDS)
