@@ -19,7 +19,7 @@
 	if(src_object != src)
 		return src_object.ui_status(user, state)
 
-	if(istype(user, /mob/dead/observer)) // Special-case ghosts.
+	if(isghost(user)) // Special-case ghosts.
 		if(user.can_admin_interact())
 			return UI_INTERACTIVE // If they turn it on, admins can interact.
 		if(get_dist(src_object, src) < user.client.view)
