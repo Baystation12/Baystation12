@@ -69,12 +69,9 @@
 				else
 					F.faction = usr.faction
 					F.add_spell(new /spell/contract/return_master(usr), "const_spell_ready")
-					var/newname = input(F, "Please choose a name. Leaving it blank or canceling will choose the default.", "Name",F.name) as null|text
 					F << "<span class='notice'>You are a familiar.</span>"
 					F << "<b>You have been summoned by the wizard [usr] to assist in all matters magical and not.</b>"
 					F << "<b>Do their bidding and help them with their goals.</b>"
-					if(newname)
-						F.name = newname
 					uses--
 	if(Adjacent(usr))
 		src.interact(usr)

@@ -214,6 +214,3 @@ datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silic
 
 /datum/ghosttrap/familiar/welcome_candidate(var/mob/target)
 	return 0
-
-datum/ghosttrap/drone/transfer_personality(var/mob/candidate)
-	return 0
