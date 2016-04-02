@@ -280,10 +280,10 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 
 	src.visible_message("\The [src] begins to pry open \the [A]!")
 
-	if(!do_after(src,80,A))
+	if(!do_after(src,120,A))
 		return
 
-	src.visible_message("\The [src] slices \the [A]'s bolts, ripping it open!")
+	src.visible_message("\The [src] slices \the [A]'s controls, ripping it open!")
 	A.do_animate("spark")
 	sleep(6)
 	A.stat |= BROKEN
