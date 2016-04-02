@@ -52,10 +52,10 @@
 			usr << "This book is out of uses."
 			return
 
-		var/datum/ghosttrap/ghost = get_ghost_trap("familiar")
+		var/datum/ghosttrap/ghost = get_ghost_trap("wizard familiar")
 		var path = text2path(href_list["path"])
 		if(!ispath(path))
-			usr << "Invalid mob path in [src]. Contact a coder."
+			CRASH("Invalid mob path in [src]. Contact a coder.")
 			return
 
 		if(!(path in monster))

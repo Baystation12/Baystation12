@@ -139,6 +139,8 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 
 	if(href_list["path"])
 		var/path = text2path(href_list["path"])
+		if(!(path in spellbook.spells))
+			return
 		if(uses < spellbook.spells[path])
 			usr << "<span class='notice'>You do not have enough spell slots to purchase this.</span>"
 			return
