@@ -262,3 +262,29 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 	M << "<span class='danger'>A hideous lump of alien mass strains your ribcage as it settles within!</span>"
 	var/obj/item/organ/xenos/hivenode/node = new(affecting)
 	node.replaced(M,affecting)
+
+/mob/living/carbon/human/proc/pry_open(obj/machinery/door/A in oview(1))
+	set name = "Pry Open Airlock"
+	set desc = "Pry open an airlock with your claws."
+	set category = "Abilities"
+
+	if(!istype(A))
+		return
+
+	if(!A.Adjacent(src))
+		src << "<span class='warning'>\The [A] is too far away.</span>"
+		return
+
+	if(!A.density)
+		return
+
+	src.visible_message("\The [src] begins to pry open \the [A]!")
+
+	if(!do_after(src,80,A))
+		return
+
+	src.visible_message("\The [src] slices \the [A]'s bolts, ripping it open!")
+	A.do_animate("spark")
+	sleep(6)
+	A.stat |= BROKEN
+	A.open(1)
