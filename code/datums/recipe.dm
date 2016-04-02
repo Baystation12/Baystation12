@@ -69,23 +69,38 @@
 					break
 	return .
 
-/datum/recipe/proc/check_items(var/obj/machinery/microwave/container as obj)
+/datum/recipe/proc/check_items(var/obj/container as obj)
 	. = 1
 	if (items && items.len)
 		var/list/checklist = list()
 		checklist = items.Copy() // You should really trust Copy
-		for(var/obj/O in container.ingredient_list)
-			if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown))
-				continue // Fruit is handled in check_fruit().
-			var/found = 0
-			for(var/i = 1; i < checklist.len+1; i++)
-				var/item_type = checklist[i]
-				if (istype(O,item_type))
-					checklist.Cut(i, i+1)
-					found = 1
-					break
-			if (!found)
-				. = 0
+		if(istype(container, /obj/machinery))
+			var/obj/machinery/machine = container
+			for(var/obj/O in (machine.contents - machine.component_parts))
+				if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown))
+					continue // Fruit is handled in check_fruit().
+				var/found = 0
+				for(var/i = 1; i < checklist.len+1; i++)
+					var/item_type = checklist[i]
+					if (istype(O,item_type))
+						checklist.Cut(i, i+1)
+						found = 1
+						break
+				if (!found)
+					. = 0
+		else
+			for(var/obj/O in container.contents)
+				if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown))
+					continue // Fruit is handled in check_fruit().
+				var/found = 0
+				for(var/i = 1; i < checklist.len+1; i++)
+					var/item_type = checklist[i]
+					if (istype(O,item_type))
+						checklist.Cut(i, i+1)
+						found = 1
+						break
+				if (!found)
+					. = 0
 		if (checklist.len)
 			. = -1
 	return .
@@ -93,25 +108,39 @@
 //general version
 /datum/recipe/proc/make(var/obj/container as obj)
 	var/obj/result_obj = new result(container)
-	for (var/obj/O in (container.contents-result_obj))
-		O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
-		qdel(O)
+	if(istype(container, /obj/machinery))
+		var/obj/machinery/machine = container
+		for (var/obj/O in ((machine.contents-result_obj)-machine.component_parts))
+			O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
+			qdel(O)
+	else
+		for (var/obj/O in (container.contents-result_obj))
+			O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
+			qdel(O)
 	container.reagents.clear_reagents()
 	return result_obj
 
 // food-related
-/datum/recipe/proc/make_food(var/obj/machinery/microwave/container as obj)
+/datum/recipe/proc/make_food(var/obj/container as obj)
 	if(!result)
 		world << "<span class='danger'>Recipe [type] is defined without a result, please bug this.</span>"
 		return
 	var/obj/result_obj = new result(container)
-	for (var/obj/O in (container.ingredient_list)) //We no longer need to take result_obj out of the list, since it doesn't exist in the list.
-		if (O.reagents)
-			O.reagents.del_reagent("nutriment")
-			O.reagents.update_total()
-			O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
-		qdel(O)
-	container.ingredient_list.Cut() //Trust in Cut().
+	if(istype(container, /obj/machinery))
+		var/obj/machinery/machine = container
+		for (var/obj/O in ((machine.contents-result_obj)-machine.component_parts))
+			if (O.reagents)
+				O.reagents.del_reagent("nutriment")
+				O.reagents.update_total()
+				O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
+			qdel(O)
+	else
+		for (var/obj/O in (container.contents-result_obj))
+			if (O.reagents)
+				O.reagents.del_reagent("nutriment")
+				O.reagents.update_total()
+				O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
+			qdel(O)
 	container.reagents.clear_reagents()
 	return result_obj
 
