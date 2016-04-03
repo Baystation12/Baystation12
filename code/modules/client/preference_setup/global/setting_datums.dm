@@ -54,7 +54,7 @@ var/list/_client_preferences_by_type
 
 /datum/client_preference/play_lobby_music/toggled(var/mob/preference_mob, var/enabled)
 	if(enabled)
-		preference_mob << sound(ticker.login_music, repeat = 0, wait = 0, volume = 85, channel = 1)
+		preference_mob << sound(ticker.login_music, repeat = 1, wait = 0, volume = 85, channel = 1)
 	else
 		preference_mob << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1)
 
@@ -131,20 +131,6 @@ var/list/_client_preferences_by_type
 /datum/client_preference/admin/may_toggle(var/mob/preference_mob)
 	return check_rights(R_ADMIN, 0, preference_mob)
 
-/datum/client_preference/admin/show_attack_logs
-	description = "Attack Log Messages"
-	key = "CHAT_ATTACKLOGS"
-	enabled_description = "Show"
-	disabled_description = "Hide"
-	enabled_by_default = FALSE
-
-/datum/client_preference/admin/show_debug_logs
-	description = "Debug Log Messages"
-	key = "CHAT_DEBUGLOGS"
-	enabled_description = "Show"
-	disabled_description = "Hide"
-	enabled_by_default = FALSE
-
 /datum/client_preference/admin/show_chat_prayers
 	description = "Chat Prayers"
 	key = "CHAT_PRAYER"
@@ -159,3 +145,24 @@ var/list/_client_preferences_by_type
 	key = "SOUND_ADMINHELP"
 	enabled_description = "Hear"
 	disabled_description = "Silent"
+
+/datum/client_preference/admin/show_attack_logs
+	description = "Attack Log Messages"
+	key = "CHAT_ATTACKLOGS"
+	enabled_description = "Show"
+	disabled_description = "Hide"
+	enabled_by_default = FALSE
+
+/********************
+* Debug Preferences *
+********************/
+
+/datum/client_preference/debug/may_toggle(var/mob/preference_mob)
+	return check_rights(R_ADMIN|R_DEBUG, 0, preference_mob)
+
+/datum/client_preference/debug/show_debug_logs
+	description = "Debug Log Messages"
+	key = "CHAT_DEBUGLOGS"
+	enabled_description = "Show"
+	disabled_description = "Hide"
+	enabled_by_default = FALSE
