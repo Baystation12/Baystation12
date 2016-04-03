@@ -178,8 +178,19 @@ var/list/gear_datums = list()
 	var/sort_category = "General"
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
 
+/datum/gear_data
+	var/path
+	var/location
+
+/datum/gear_data/New(var/path, var/location)
+	src.path = path
+	src.location = location
+
 /datum/gear/proc/spawn_item(var/location, var/metadata)
-	var/item = new path(location)
+	var/datum/gear_data/gd = new(path, location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.apply_tweak(item, metadata["[gt]"])
+		gt.tweak_gear_data(metadata["[gt]"], gd)
+	var/item = new gd.path(gd.location)
+	for(var/datum/gear_tweak/gt in gear_tweaks)
+		gt.tweak_item(item, metadata["[gt]"])
 	return item
