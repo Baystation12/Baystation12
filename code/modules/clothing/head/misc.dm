@@ -253,7 +253,7 @@
 
 /obj/item/clothing/head/hijab
 	name = "hijab"
-	desc = "A veil that is wrapped to cover the head and chest"
+	desc = "A veil which is wrapped to cover the head and chest."
 	icon_state = "hijab"
 	body_parts_covered = 0
 	flags_inv = BLOCKHAIR
@@ -266,7 +266,8 @@
 
 /obj/item/clothing/head/turban
 	name = "turban"
-	desc = "A cloth used to wind around the head"
+	desc = "A sturdy cloth, worn around the head."
 	icon_state = "turban"
 	body_parts_covered = 0
-	flags_inv = BLOCKHAIR
+	flags_inv = BLOCKHEADHAIR //Shows beards!
+
