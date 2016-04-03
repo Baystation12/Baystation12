@@ -1563,58 +1563,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 		)
 	name = "Random Gygax exosuit modkit"
 
-/datum/supply_packs/engineeringvoidsuits
-	name = "Engineering voidsuits"
-	contains = list(/obj/item/clothing/suit/space/void/engineering,
-					/obj/item/clothing/suit/space/void/engineering,
-					/obj/item/clothing/head/helmet/space/void/engineering,
-					/obj/item/clothing/head/helmet/space/void/engineering,
-					/obj/item/clothing/mask/breath,
-					/obj/item/clothing/mask/breath,
-					/obj/item/clothing/shoes/magboots,
-					/obj/item/clothing/shoes/magboots,
-					/obj/item/weapon/tank/oxygen,
-					/obj/item/weapon/tank/oxygen)
-	cost = 40
-	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Engineering voidsuit crate"
-	access = access_engine_equip
-	group = "Engineering"
-
-/datum/supply_packs/atmosvoidsuits
-	name = "Atmospheric voidsuits"
-	contains = list(/obj/item/clothing/suit/space/void/atmos,
-					/obj/item/clothing/suit/space/void/atmos,
-					/obj/item/clothing/head/helmet/space/void/atmos,
-					/obj/item/clothing/head/helmet/space/void/atmos,
-					/obj/item/clothing/mask/breath,
-					/obj/item/clothing/mask/breath,
-					/obj/item/clothing/shoes/magboots,
-					/obj/item/clothing/shoes/magboots,
-					/obj/item/weapon/tank/oxygen,
-					/obj/item/weapon/tank/oxygen)
-	cost = 45
-	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Atmospheric voidsuit crate"
-	access = access_atmospherics
-	group = "Atmospherics"
-
-/datum/supply_packs/miningvoidsuits
-	name = "Mining voidsuits"
-	contains = list(/obj/item/clothing/suit/space/void/mining,
-					/obj/item/clothing/suit/space/void/mining,
-					/obj/item/clothing/head/helmet/space/void/mining,
-					/obj/item/clothing/head/helmet/space/void/mining,
-					/obj/item/clothing/mask/breath,
-					/obj/item/clothing/mask/breath,
-					/obj/item/weapon/tank/oxygen,
-					/obj/item/weapon/tank/oxygen)
-	cost = 35
-	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Mining voidsuit crate"
-	access = access_mining
-	group = "Supply"
-
 /datum/supply_packs/randomised/webbing
 	name = "Webbing crate"
 	num_contained = 4
@@ -1628,24 +1576,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "\improper Webbing crate"
 	group = "Operations"
 
-/datum/supply_packs/securityvoidsuits
-	name = "Security voidsuits"
-	contains = list(/obj/item/clothing/suit/space/void/security,
-					/obj/item/clothing/suit/space/void/security,
-					/obj/item/clothing/head/helmet/space/void/security,
-					/obj/item/clothing/head/helmet/space/void/security,
-					/obj/item/clothing/mask/breath,
-					/obj/item/clothing/mask/breath,
-					/obj/item/clothing/shoes/magboots,
-					/obj/item/clothing/shoes/magboots,
-					/obj/item/weapon/tank/oxygen,
-					/obj/item/weapon/tank/oxygen)
-	cost = 55
-	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Security voidsuit crate"
-	access = access_security
-	group = "Security"
-
 /datum/supply_packs/randomised/holster
 	name = "Holster crate"
 	num_contained = 4
@@ -1658,24 +1588,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "\improper Holster crate"
 	access = access_security
 	group = "Security"
-
-/datum/supply_packs/medicalvoidsuits
-	name = "Medical voidsuits"
-	contains = list(/obj/item/clothing/suit/space/void/medical,
-					/obj/item/clothing/suit/space/void/medical,
-					/obj/item/clothing/head/helmet/space/void/medical,
-					/obj/item/clothing/head/helmet/space/void/medical,
-					/obj/item/clothing/mask/breath,
-					/obj/item/clothing/mask/breath,
-					/obj/item/clothing/shoes/magboots,
-					/obj/item/clothing/shoes/magboots,
-					/obj/item/weapon/tank/oxygen,
-					/obj/item/weapon/tank/oxygen)
-	cost = 40
-	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Medical voidsuit crate"
-	access = access_medical_equip
-	group = "Medical"
 
 /datum/supply_packs/securityextragear
 	name = "Security surplus equipment"
