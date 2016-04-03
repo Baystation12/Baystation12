@@ -4,6 +4,7 @@
 	var/stored_data = "" 			// Stored data in string format.
 	filetype = "DAT"
 	var/block_size = 250
+	var/do_not_edit = 0				// Whether the user will be reminded that the file probably shouldn't be edited.
 
 /datum/computer_file/data/clone()
 	var/datum/computer_file/data/temp = ..()
