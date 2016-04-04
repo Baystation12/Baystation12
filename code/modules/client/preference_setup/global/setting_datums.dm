@@ -11,6 +11,13 @@ var/list/_client_preferences_by_type
 				_client_preferences += new client_type()
 	return _client_preferences
 
+/proc/get_client_preference(var/datum/client_preference/preference)
+	if(istype(preference))
+		return preference
+	if(ispath(preference))
+		return get_client_preference_by_type(preference)
+	return get_client_preference_by_key(preference)
+    
 /proc/get_client_preference_by_key(var/preference)
 	if(!_client_preferences_by_key)
 		_client_preferences_by_key = list()
