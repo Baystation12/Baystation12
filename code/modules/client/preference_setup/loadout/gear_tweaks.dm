@@ -27,7 +27,7 @@ var/datum/gear_tweak/color/gear_tweak_free_color_choice = new()
 	..()
 
 /datum/gear_tweak/color/get_contents(var/metadata)
-	return "(Color<font color='[metadata]'>&#9899;</font>)"
+	return "Color: <font color='[metadata]'>&#9899;</font>"
 
 /datum/gear_tweak/color/get_default()
 	return valid_colors ? valid_colors[1] : COLOR_GRAY
@@ -54,7 +54,7 @@ var/datum/gear_tweak/color/gear_tweak_free_color_choice = new()
 	..()
 
 /datum/gear_tweak/path/get_contents(var/metadata)
-	return "(Type: [metadata])"
+	return "Type: [metadata]"
 
 /datum/gear_tweak/path/get_default()
 	return valid_paths[1]
@@ -75,20 +75,21 @@ var/datum/gear_tweak/color/gear_tweak_free_color_choice = new()
 	var/list/valid_contents
 
 /datum/gear_tweak/contents/New()
-	valid_contents = args
+	valid_contents = args.Copy()
 	..()
 
 /datum/gear_tweak/contents/get_contents(var/metadata)
-	return "(Contents)"
+	return "Contents: [english_list(metadata, and_text = ", ")]"
 
 /datum/gear_tweak/contents/get_default()
 	. = list()
 	for(var/i = 1 to valid_contents.len)
-		var/list/contents = valid_contents[i]
-		. += contents[1]
+		. += "Random"
 
 /datum/gear_tweak/contents/get_metadata(var/user, var/list/metadata)
 	. = list()
+	for(var/i = metadata.len to (valid_contents.len - 1))
+		metadata += "Random"
 	for(var/i = 1 to valid_contents.len)
 		var/entry = input(user, "Choose an entry.", "Character Preference", metadata[i]) as null|anything in (valid_contents[i] + list("Random", "None"))
 		if(entry)
@@ -100,12 +101,13 @@ var/datum/gear_tweak/color/gear_tweak_free_color_choice = new()
 	if(metadata.len != valid_contents.len)
 		return
 	for(var/i = 1 to valid_contents.len)
+		var/path
 		var/list/contents = valid_contents[i]
-		var/path = contents[metadata[i]]
-		if(path)
-			if(path == "Random")
-				path = pick(contents)
-				path = contents[path]
-			else if(path == "None")
-				continue
-			new path(I)
+		if(metadata[i] == "Random")
+			path = pick(contents)
+			path = contents[path]
+		else if(metadata[i] == "None")
+			continue
+		else
+			path = 	contents[metadata[i]]
+		new path(I)

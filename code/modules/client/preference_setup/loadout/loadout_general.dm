@@ -50,34 +50,17 @@
 	path = /obj/item/weapon/haircomb
 
 /datum/gear/lunchbox
-	display_name = "lunchbox, rainbow"
+	display_name = "lunchbox"
+	description = "A little lunchbox."
 	cost = 2
-	path = /obj/item/weapon/storage/toolbox/lunchbox/filled
+	path = /obj/item/weapon/storage/toolbox/lunchbox
 
-/datum/gear/lunchbox/heartlunchbox
-	display_name = "lunchbox, heart"
-	path = /obj/item/weapon/storage/toolbox/lunchbox/heart/filled
-
-/datum/gear/lunchbox/catlunchbox
-	display_name = "lunchbox, cat"
-	path = /obj/item/weapon/storage/toolbox/lunchbox/cat/filled
-
-/datum/gear/lunchbox/ntlunchbox
-	display_name = "lunchbox, Nanotrasen"
-	path = /obj/item/weapon/storage/toolbox/lunchbox/nt/filled
-
-/datum/gear/lunchbox/marslunchbox
-	display_name = "lunchbox, Mars university"
-	path = /obj/item/weapon/storage/toolbox/lunchbox/mars/filled
-
-/datum/gear/lunchbox/ctilunchbox
-	display_name = "lunchbox, CTI"
-	path = /obj/item/weapon/storage/toolbox/lunchbox/cti/filled
-
-/datum/gear/lunchbox/nymphlunchbox
-	display_name = "lunchbox, Diona nymph"
-	path = /obj/item/weapon/storage/toolbox/lunchbox/nymph/filled
-
-/datum/gear/lunchbox/syndicatelunchbox
-	display_name = "lunchbox, black and red"
-	path = /obj/item/weapon/storage/toolbox/lunchbox/syndicate/filled
+/datum/gear/lunchbox/New()
+	..()
+	var/list/lunchboxes = list()
+	for(var/lunchbox_type in typesof(/obj/item/weapon/storage/toolbox/lunchbox))
+		var/obj/item/weapon/storage/toolbox/lunchbox/lunchbox = lunchbox_type
+		if(!initial(lunchbox.filled))
+			lunchboxes[initial(lunchbox.name)] = lunchbox_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(lunchboxes))
+	gear_tweaks += new/datum/gear_tweak/contents(lunchables_lunches(), lunchables_snacks(), lunchables_drinks())

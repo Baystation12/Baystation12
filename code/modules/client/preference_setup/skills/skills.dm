@@ -57,7 +57,7 @@
 
 	else if(href_list["preconfigured"])
 		var/selected = input(user, "Select a skillset", "Skillset") as null|anything in SKILL_PRE
-		if(!selected && !CanUseTopic(user)) return
+		if(!selected || !CanUseTopic(user)) return
 
 		pref.ZeroSkills(1)
 		for(var/V in SKILL_PRE[selected])

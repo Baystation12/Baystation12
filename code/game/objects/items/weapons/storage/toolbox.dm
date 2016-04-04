@@ -60,7 +60,7 @@
 	if(prob(5))
 		new /obj/item/clothing/gloves/yellow(src)
 	else
-		new /obj/item/stack/cable_coil(src,30,color)
+		new /obj/item/stack/cable_coil/random(src,30)
 
 /obj/item/weapon/storage/toolbox/syndicate
 	name = "black and red toolbox"
@@ -71,11 +71,11 @@
 
 /obj/item/weapon/storage/toolbox/syndicate/New()
 	..()
+	new /obj/item/clothing/gloves/yellow(src)
 	new /obj/item/weapon/screwdriver(src)
 	new /obj/item/weapon/wrench(src)
 	new /obj/item/weapon/weldingtool(src)
 	new /obj/item/weapon/crowbar(src)
-	new /obj/item/stack/cable_coil/random(src,30,color)
 	new /obj/item/weapon/wirecutters(src)
 	new /obj/item/device/multitool(src)
 
@@ -86,41 +86,21 @@
 	item_state = "toolbox_pink"
 	desc = "A little lunchbox. This one is the colors of the rainbow!"
 	var/filled = FALSE
+	attack_verb = list("lunched")
 
 /obj/item/weapon/storage/toolbox/lunchbox/New()
 	..()
 	if(filled)
-		var/lunch = pick(/obj/item/weapon/reagent_containers/food/snacks/sandwich, /obj/item/weapon/reagent_containers/food/snacks/meatbreadslice,
-						/obj/item/weapon/reagent_containers/food/snacks/tofubreadslice, /obj/item/weapon/reagent_containers/food/snacks/creamcheesebreadslice,
-						/obj/item/weapon/reagent_containers/food/snacks/margheritaslice, /obj/item/weapon/reagent_containers/food/snacks/meatpizzaslice,
-						/obj/item/weapon/reagent_containers/food/snacks/mushroompizzaslice, /obj/item/weapon/reagent_containers/food/snacks/vegetablepizzaslice,
-						/obj/item/weapon/reagent_containers/food/snacks/tastybread, /obj/item/weapon/reagent_containers/food/snacks/liquidfood,
-						/obj/item/weapon/reagent_containers/food/snacks/jellysandwich/cherry, /obj/item/weapon/reagent_containers/food/snacks/tossedsalad)
-
-		var/snack = pick(/obj/item/weapon/reagent_containers/food/snacks/donut/jelly, /obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly,
-						/obj/item/weapon/reagent_containers/food/snacks/muffin, /obj/item/weapon/reagent_containers/food/snacks/popcorn,
-						/obj/item/weapon/reagent_containers/food/snacks/sosjerky, /obj/item/weapon/reagent_containers/food/snacks/no_raisin,
-						/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie, /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers,
-						/obj/item/weapon/reagent_containers/food/snacks/poppypretzel, /obj/item/weapon/reagent_containers/food/snacks/carrotfries,
-						/obj/item/weapon/reagent_containers/food/snacks/candiedapple, /obj/item/weapon/reagent_containers/food/snacks/applepie,
-						/obj/item/weapon/reagent_containers/food/snacks/cherrypie, /obj/item/weapon/reagent_containers/food/snacks/plumphelmetbiscuit,
-						/obj/item/weapon/reagent_containers/food/snacks/appletart, /obj/item/weapon/reagent_containers/food/snacks/carrotcakeslice,
-						/obj/item/weapon/reagent_containers/food/snacks/cheesecakeslice, /obj/item/weapon/reagent_containers/food/snacks/plaincakeslice,
-						/obj/item/weapon/reagent_containers/food/snacks/orangecakeslice, /obj/item/weapon/reagent_containers/food/snacks/limecakeslice,
-						/obj/item/weapon/reagent_containers/food/snacks/lemoncakeslice, /obj/item/weapon/reagent_containers/food/snacks/chocolatecakeslice,
-						/obj/item/weapon/reagent_containers/food/snacks/birthdaycakeslice, /obj/item/weapon/reagent_containers/food/snacks/watermelonslice,
-						/obj/item/weapon/reagent_containers/food/snacks/applecakeslice, /obj/item/weapon/reagent_containers/food/snacks/pumpkinpieslice,
-						/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks)
-
-		var/drink = pick(/obj/item/weapon/reagent_containers/food/drinks/cans/cola, /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
-						/obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind, /obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb,
-						/obj/item/weapon/reagent_containers/food/drinks/cans/starkist, /obj/item/weapon/reagent_containers/food/drinks/cans/space_up,
-						/obj/item/weapon/reagent_containers/food/drinks/cans/lemon_lime, /obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea,
-						/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice, /obj/item/weapon/reagent_containers/food/drinks/cans/tonic,
-						/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater)
-
+		var/list/lunches = lunchables_lunches()
+		var/lunch = lunches[pick(lunches)]
 		new lunch(src)
+
+		var/list/snacks = lunchables_snacks()
+		var/snack = snacks[pick(snacks)]
 		new snack(src)
+
+		var/list/drinks = lunchables_drinks()
+		var/drink = drinks[pick(drinks)]
 		new drink(src)
 
 /obj/item/weapon/storage/toolbox/lunchbox/filled
@@ -154,7 +134,7 @@
 	filled = TRUE
 
 /obj/item/weapon/storage/toolbox/lunchbox/mars
-	name = "Mars university lunchbox"
+	name = "\improper Mars university lunchbox"
 	icon_state = "lunchbox_marsuniversity"
 	item_state = "toolbox_red"
 	desc = "A little lunchbox. This one is branded with the Mars university logo!"
@@ -163,7 +143,7 @@
 	filled = TRUE
 
 /obj/item/weapon/storage/toolbox/lunchbox/cti
-	name = "CTI lunchbox"
+	name = "\improper CTI lunchbox"
 	icon_state = "lunchbox_cti"
 	item_state = "toolbox_blue"
 	desc = "A little lunchbox. This one is branded with the CTI logo!"
@@ -172,7 +152,7 @@
 	filled = TRUE
 
 /obj/item/weapon/storage/toolbox/lunchbox/nymph
-	name = "Diona nymph lunchbox"
+	name = "\improper Diona nymph lunchbox"
 	icon_state = "lunchbox_dionanymph"
 	item_state = "toolbox_yellow"
 	desc = "A little lunchbox. This one is an adorable Diona nymph on the side!"
