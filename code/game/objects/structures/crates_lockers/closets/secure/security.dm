@@ -272,7 +272,8 @@
 		new /obj/item/taperoll/police(src)
 		new /obj/item/weapon/gun/projectile/colt/detective(src)
 		new /obj/item/clothing/accessory/holster/armpit(src)
-		return
+		new /obj/item/weapon/reagent_containers/food/drinks/flask/detflask(src)
+		new /obj/item/weapon/storage/briefcase/crimekit(src)
 
 /obj/structure/closet/secure_closet/detective/update_icon()
 	if(broken)
