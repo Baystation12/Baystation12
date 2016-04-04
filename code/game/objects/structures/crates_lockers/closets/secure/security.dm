@@ -14,6 +14,8 @@
 			new /obj/item/weapon/storage/backpack/captain(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_cap(src)
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack/dufflebag/captain(src)
 		new /obj/item/clothing/suit/captunic(src)
 		new /obj/item/clothing/suit/captunic/capjacket(src)
 		new /obj/item/clothing/head/caphat/cap(src)
@@ -145,6 +147,8 @@
 			new /obj/item/weapon/storage/backpack/security(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_sec(src)
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
 		new /obj/item/clothing/suit/armor/vest/security(src)
 		new /obj/item/clothing/suit/storage/vest/warden(src)
 		new /obj/item/clothing/under/rank/warden(src)
@@ -184,6 +188,8 @@
 			new /obj/item/weapon/storage/backpack/security(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_sec(src)
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
 		new /obj/item/clothing/suit/armor/vest/security(src)
 		new /obj/item/clothing/head/helmet(src)
 //		new /obj/item/weapon/cartridge/security(src)
