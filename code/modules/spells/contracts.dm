@@ -71,7 +71,7 @@
 		return 1
 	return 0
 
-/mob/item/weapon/contract/wizard/tk
+/obj/item/weapon/contract/wizard/tk
 	name = "telekinesis contract"
 	desc = "This contract makes your mind buzz. It promises to give you the ability to move things with your mind. At a price."
 	color = "#990033"

@@ -81,6 +81,9 @@
 	current = new_character		//link ourself to our new body
 	new_character.mind = src	//and link our new body to ourself
 
+	if(learned_spells && learned_spells.len)
+		restore_spells(new_character)
+
 	if(changeling)
 		new_character.make_changeling()
 
@@ -143,7 +146,7 @@
 
 	if(href_list["add_antagonist"])
 		var/datum/antagonist/antag = all_antag_types[href_list["add_antagonist"]]
-		if(antag) 
+		if(antag)
 			if(antag.add_antagonist(src, 1, 1, 0, 1, 1)) // Ignore equipment and role type for this.
 				log_admin("[key_name_admin(usr)] made [key_name(src)] into a [antag.role_text].")
 			else
