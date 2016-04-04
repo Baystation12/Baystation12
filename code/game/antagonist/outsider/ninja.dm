@@ -17,6 +17,8 @@ var/datum/antagonist/ninja/ninjas
 
 	id_type = /obj/item/weapon/card/id/syndicate
 
+	faction = "ninja"
+
 /datum/antagonist/ninja/New()
 	..()
 	ninjas = src

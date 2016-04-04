@@ -29,6 +29,8 @@ code\game\dna\genes\goon_powers.dm
 
 /spell/targeted/genetic/blind
 	name = "Blind"
+	desc = "This spell inflicts a target with temporary blindness. Does not require wizard garb."
+	feedback = "BD"
 	disabilities = 1
 	duration = 300
 
@@ -38,6 +40,7 @@ code\game\dna\genes\goon_powers.dm
 	invocation = "STI KALY"
 	invocation_type = SpI_WHISPER
 	message = "<span class='danger'>Your eyes cry out in pain!</span>"
+	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 1, Sp_POWER = 3)
 	cooldown_min = 50
 
 	range = 7
@@ -48,10 +51,17 @@ code\game\dna\genes\goon_powers.dm
 
 	hud_state = "wiz_blind"
 
+/spell/targeted/genetic/blind/empower_spell()
+	if(!..())
+		return 0
+	duration += 100
+
+	return "[src] will now blind for a longer period of time."
+
 /spell/targeted/genetic/mutate
 	name = "Mutate"
 	desc = "This spell causes you to turn into a hulk and gain laser vision for a short while."
-
+	feedback = "MU"
 	school = "transmutation"
 	charge_max = 400
 	spell_flags = Z2NOCAST | NEEDSCLOTHES | INCLUDEUSER
@@ -63,6 +73,8 @@ code\game\dna\genes\goon_powers.dm
 
 	mutations = list(LASER, HULK)
 	duration = 300
-	cooldown_min = 300 //25 deciseconds reduction per rank
+
+	level_max = list(Sp_TOTAL = 1, Sp_SPEED = 1, Sp_POWER = 0)
+	cooldown_min = 300
 
 	hud_state = "wiz_hulk"

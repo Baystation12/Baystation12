@@ -1,0 +1,8 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - tweak: "Cast verb now appears/disappears depending on whether you have spells or not."
+  - tweak: "Corrupt Form now has a longer duration (10 seconds -> 15)"
+  - tweak: "Wizard Mark is now a cleanable entity (so soap/space cleaner destroys it)"
+  - tweak: "Mark/Recall cooldown halved. (120 seconds -> 60 seconds)"
+  - rscadd: "Fixes mind's spell list so that cloning will now properly add all the spells. You will also keep your spells between bodies. (E.G. You are borged, you get to keep your spells)"

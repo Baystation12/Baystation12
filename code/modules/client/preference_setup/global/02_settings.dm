@@ -81,29 +81,33 @@
 	return ..()
 
 /client/proc/is_preference_enabled(var/preference)
-	if(ispath(preference))
-		var/datum/client_preference/cp = get_client_preference_by_type(preference)
-		preference = cp.key
-
-	return (preference in prefs.preferences_enabled)
+	var/datum/client_preference/cp = get_client_preference(preference)
+	return cp && (cp.key in prefs.preferences_enabled)
 
 /client/proc/set_preference(var/preference, var/set_preference)
-	var/datum/client_preference/cp
-	if(ispath(preference))
-		cp = get_client_preference_by_type(preference)
-	else
-		cp = get_client_preference_by_key(preference)
-
+	var/datum/client_preference/cp = get_client_preference(preference)
 	if(!cp)
 		return FALSE
+	preference = cp.key
+
+	if(set_preference && !(preference in prefs.preferences_enabled))
+		return toggle_preference(cp)
+	else if(!set_preference && (preference in prefs.preferences_enabled))
+		return toggle_preference(cp)
+
+/client/proc/toggle_preference(var/preference, var/set_preference)
+	var/datum/client_preference/cp = get_client_preference(preference)
+	if(!cp)
+		return FALSE
+	preference = cp.key
 
 	var/enabled
-	if(set_preference && !(preference in prefs.preferences_enabled))
-		prefs.preferences_enabled  += preference
+	if(preference in prefs.preferences_disabled)
+		prefs.preferences_enabled  |= preference
 		prefs.preferences_disabled -= preference
 		enabled = TRUE
 		. = TRUE
-	else if(!set_preference && (preference in prefs.preferences_enabled))
+	else if(preference in prefs.preferences_enabled)
 		prefs.preferences_enabled  -= preference
 		prefs.preferences_disabled |= preference
 		enabled = FALSE

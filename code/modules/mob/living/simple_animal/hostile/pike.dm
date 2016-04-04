@@ -14,11 +14,11 @@
 
 	pixel_x = -16
 
-	health = 75
-	maxHealth = 75
+	health = 150
+	maxHealth = 150
 
 	harm_intent_damage = 5
 	melee_damage_lower = 20
 	melee_damage_upper = 25
 
-	break_stuff_probability = 25
+	break_stuff_probability = 35

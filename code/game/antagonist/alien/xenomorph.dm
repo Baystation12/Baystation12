@@ -14,6 +14,7 @@ var/datum/antagonist/xenos/xenomorphs
 	faction_descriptor = "Hive"
 	faction_welcome = "Your will is ripped away as your humanity merges with the xenomorph overmind. You are now \
 		a thrall to the queen and her brood. Obey their instructions without question. Serve the hive."
+	faction = "xenomorph"
 
 	hard_cap = 5
 	hard_cap_round = 8

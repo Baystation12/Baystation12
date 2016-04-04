@@ -64,7 +64,7 @@
 			new /obj/item/stack/cable_coil(src,30,color)
 
 /obj/item/weapon/storage/toolbox/syndicate
-	name = "suspicious looking toolbox"
+	name = "black and red toolbox"
 	icon_state = "syndicate"
 	item_state = "toolbox_syndi"
 	origin_tech = list(TECH_COMBAT = 1, TECH_ILLEGAL = 1)
