@@ -27,9 +27,9 @@ var/list/datum/dna/hivemind_bank = list()
 	if(!changeling)	return
 
 	var/list/names = list()
-	for(var/datum/dna/DNA in changeling.absorbed_dna)
+	for(var/datum/absorbed_dna/DNA in changeling.absorbed_dna)
 		if(!(DNA in hivemind_bank))
-			names += DNA.real_name
+			names += DNA.name
 
 	if(names.len <= 0)
 		src << "<span class='notice'>The airwaves already have all of our DNA.</span>"
@@ -38,7 +38,7 @@ var/list/datum/dna/hivemind_bank = list()
 	var/S = input("Select a DNA to channel: ", "Channel DNA", null) as null|anything in names
 	if(!S)	return
 
-	var/datum/dna/chosen_dna = changeling.GetDNA(S)
+	var/datum/absorbed_dna/chosen_dna = changeling.GetDNA(S)
 	if(!chosen_dna)
 		return
 
@@ -57,9 +57,9 @@ var/list/datum/dna/hivemind_bank = list()
 	if(!changeling)	return
 
 	var/list/names = list()
-	for(var/datum/dna/DNA in hivemind_bank)
+	for(var/datum/absorbed_dna/DNA in hivemind_bank)
 		if(!(DNA in changeling.absorbed_dna))
-			names[DNA.real_name] = DNA
+			names[DNA.name] = DNA
 
 	if(names.len <= 0)
 		src << "<span class='notice'>There's no new DNA to absorb from the air.</span>"
@@ -67,12 +67,12 @@ var/list/datum/dna/hivemind_bank = list()
 
 	var/S = input("Select a DNA absorb from the air: ", "Absorb DNA", null) as null|anything in names
 	if(!S)	return
-	var/datum/dna/chosen_dna = names[S]
+	var/datum/absorbed_dna/chosen_dna = names[S]
 	if(!chosen_dna)
 		return
 
 	changeling.chem_charges -= 20
-	changeling.absorbed_dna += chosen_dna
+	absorbDNA(chosen_dna)
 	src << "<span class='notice'>We absorb the DNA of [S] from the air.</span>"
 	feedback_add_details("changeling_powers","HD")
 	return 1
