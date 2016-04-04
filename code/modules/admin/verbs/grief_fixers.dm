@@ -1,11 +1,8 @@
 /client/proc/fixatmos()
 	set category = "Admin"
-	set name = "Fix Atmospheric Issues"
+	set name = "Fix Atmospherics Grief"
 
-	if(!src.holder)
-		src << "Only administrators may use this command."
-		return
-
+	if(!check_rights(R_ADMIN|R_DEBUG)) return
 
 	if(alert("WARNING: Executing this command will perform a full reset of atmosphere. All pipelines will lose any gas that may be in them, and all zones will be reset to contain air mix as on roundstart. The supermatter engine will also be stopped (to prevent overheat due to removal of coolant). Do not use unless the station is suffering serious atmospheric issues due to grief or bug.", "Full Atmosphere Reboot", "No", "Yes") == "No")
 		return
@@ -35,9 +32,13 @@
 
 	usr << "\[3/5\] - All ZAS Zones removed."
 
+	var/list/unsorted_overlays = list()
+	for(var/id in gas_data.tile_overlay)
+		unsorted_overlays |= gas_data.tile_overlay[id]
+
 	for(var/turf/simulated/T in world)
 		T.air = null
-		T.overlays.Remove(gas_data.unsorted_overlays)
+		T.overlays.Remove(unsorted_overlays)
 		T.zone = null
 
 	usr << "\[4/5\] - All turfs reset to roundstart values."
