@@ -47,9 +47,8 @@
 			antagonist.create_objectives(src.mind,1)
 
 	src << "<b><font size=3>These objectives are completely voluntary. You are not required to complete them.</font></b>"
-
-
 	show_objectives(src.mind)
+
 /mob/living/proc/write_ambition()
 	set name = "Set Ambition"
 	set category = "IC"
@@ -57,15 +56,18 @@
 
 	if(!mind)
 		return
-	if(!src.mind.special_role)
+	if(!is_special_character(mind))
 		src << "<span class='warning'>While you may perhaps have goals, this verb's meant to only be visible \
 		to antagonists.  Please make a bug report!</span>"
 		return
 	var/new_ambitions = input(src, "Write a short sentence of what your character hopes to accomplish \
 	today as an antagonist.  Remember that this is purely optional.  It will be shown at the end of the \
 	round for everybody else.", "Ambitions", mind.ambitions) as null|message
+	if(isnull(new_ambitions))
+		return
 	new_ambitions = sanitize(new_ambitions)
+	mind.ambitions = new_ambitions
 	if(new_ambitions)
-		mind.ambitions = new_ambitions
-		src << "<span class='notice'>You've set your goal to be '[new_ambitions]'.<span>"
-
+		src << "<span class='notice'>You've set your goal to be '[new_ambitions]'.</span>"
+	else
+		src << "<span class='notice'>You leave your ambitions behind.</span>"
