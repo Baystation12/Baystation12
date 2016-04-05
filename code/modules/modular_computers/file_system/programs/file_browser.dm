@@ -83,8 +83,12 @@
 		var/datum/computer_file/data/F = HDD.find_file_by_name(open_file)
 		if(!F || !istype(F))
 			return 1
+		if(F.do_not_edit && (alert("WARNING: This file is not compatible with editor. Editing it may result in permanently corrupted formatting or damaged data consistency. Edit anyway?", "Incompatible File", "No", "Yes") == "No"))
+			return 1
 		// 16384 is the limit for file length in characters. Currently, papers have value of 2048 so this is 8 times as long, since we can't edit parts of the file independently.
-		var/newtext = sanitize(html_decode(input(usr, "Editing file [open_file]. You may use most tags used in paper formatting:", "Text Editor", F.stored_data) as message), 16384)
+		var/newtext = sanitize(html_decode(input(usr, "Editing file [open_file]. You may use most tags used in paper formatting:", "Text Editor", F.stored_data) as message|null), 16384)
+		if(!newtext)
+			return
 		if(F)
 			var/datum/computer_file/data/backup = F.clone()
 			HDD.remove_file(F)

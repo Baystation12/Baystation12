@@ -124,7 +124,7 @@
 	invocation_type = SpI_EMOTE
 	spell_flags = INCLUDEUSER
 	range = -1
-	duration = 100
+	duration = 150
 	charge_max = 1200
 	cooldown_min = 600
 
@@ -140,7 +140,7 @@
 
 	switch(spell_levels[Sp_POWER])
 		if(1)
-			duration += 100
+			duration *= 2
 			return "You will now stay corrupted for [duration/10] seconds."
 		if(2)
 			newVars = list("name" = "\proper corruption incarnate",
