@@ -86,20 +86,17 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 			possible_targets += target
 
 		if(spell_flags & SELECTABLE)
-			if(possible_targets.len == 1) //one guy, why are we making him choose?
-				targets += possible_targets[1]
-			else
-				for(var/i = 1; i<=max_targets, i++)
-					if(!possible_targets.len)
-						break
-					var/mob/M = input(user, "Choose the target for the spell.", "Targeting") as null|mob in possible_targets
-					if(!M)
-						break
-					if(range != -2)
-						if(!(M in view_or_range(range, holder, selection_type)))
-							continue
-					targets += M
-					possible_targets -= M
+			for(var/i = 1; i<=max_targets, i++)
+				if(!possible_targets.len)
+					break
+				var/mob/M = input(user, "Choose the target for the spell.", "Targeting") as null|mob in possible_targets
+				if(!M)
+					break
+				if(range != -2)
+					if(!(M in view_or_range(range, holder, selection_type)))
+						continue
+				targets += M
+				possible_targets -= M
 		else
 			for(var/i=1,i<=max_targets,i++)
 				if(!possible_targets.len)

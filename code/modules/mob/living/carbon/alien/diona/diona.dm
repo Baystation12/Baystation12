@@ -15,18 +15,13 @@
 
 	holder_type = /obj/item/weapon/holder/diona
 	possession_candidate = 1
-
-	base_spells = list(/spell/evolve/nymph = /obj/screen/movable/spell_master/genetic,
-						/spell/free/merge = /obj/screen/movable/spell_master/genetic,
-						/spell/free/hide = /obj/screen/movable/spell_master/alien
-						)
-
 	var/obj/item/hat
 
 /mob/living/carbon/alien/diona/New()
 
 	..()
 	species = all_species["Diona"]
+	verbs += /mob/living/carbon/alien/diona/proc/merge
 
 /mob/living/carbon/alien/diona/put_in_hands(var/obj/item/W) // No hands.
 	W.loc = get_turf(src)

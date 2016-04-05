@@ -20,9 +20,6 @@
 		for(var/spell/S in spell_list)
 			if((!S.connected_button) || !statpanel(S.panel))
 				continue //Not showing the noclothes spell
-			if(S.custom_stat)
-				statpanel(S.panel,"[S.get_stat()]",S.connected_button)
-				continue
 			switch(S.charge_type)
 				if(Sp_RECHARGE)
 					statpanel(S.panel,"[S.charge_counter/10.0]/[S.charge_max/10]",S.connected_button)
@@ -56,7 +53,6 @@
 		new_spell_master.icon_state = spell_base
 	spell_masters.Add(new_spell_master)
 	spell_list.Add(spell_to_add)
-	spell_to_add.holder = src
 	if(mind)
 		if(!mind.learned_spells)
 			mind.learned_spells = list()

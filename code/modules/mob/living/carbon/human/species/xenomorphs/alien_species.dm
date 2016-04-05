@@ -162,16 +162,13 @@
 		)
 
 	inherent_verbs = list(
-		/mob/living/proc/ventcrawl
-		)
-
-	inherent_spells = list(
-		/spell/targeted/alien/plasma/evolve = /obj/screen/movable/spell_master/alien,
-		/spell/hand/alien/transfer_plasma = /obj/screen/movable/spell_master/alien,
-		/spell/targeted/alien/plasma/plant = 	/obj/screen/movable/spell_master/alien,
-		/spell/hand/alien/corrosive = 			/obj/screen/movable/spell_master/alien,
-		/spell/targeted/alien/plasma/resin = /obj/screen/movable/spell_master/alien,
-		/spell/targeted/free/regurgitate = /obj/screen/movable/spell_master/alien
+		/mob/living/proc/ventcrawl,
+		/mob/living/carbon/human/proc/regurgitate,
+		/mob/living/carbon/human/proc/plant,
+		/mob/living/carbon/human/proc/transfer_plasma,
+		/mob/living/carbon/human/proc/evolve,
+		/mob/living/carbon/human/proc/resin,
+		/mob/living/carbon/human/proc/corrosive_acid
 		)
 
 /datum/species/xenos/drone/handle_post_spawn(var/mob/living/carbon/human/H)
@@ -203,15 +200,12 @@
 
 	inherent_verbs = list(
 		/mob/living/proc/ventcrawl,
-		/mob/living/carbon/human/proc/pry_open
-		)
-
-	inherent_spells = list(
-		/spell/targeted/free/psychic_whisper = /obj/screen/movable/spell_master/alien,
-		/spell/gut = /obj/screen/movable/spell_master/alien,
-		/spell/targeted/free/regurgitate = /obj/screen/movable/spell_master/alien,
-		/spell/hand/leap = /obj/screen/movable/spell_master/alien
-
+		/mob/living/carbon/human/proc/pry_open,
+		/mob/living/carbon/human/proc/tackle,
+		/mob/living/carbon/human/proc/gut,
+		/mob/living/carbon/human/proc/leap,
+		/mob/living/carbon/human/proc/psychic_whisper,
+		/mob/living/carbon/human/proc/regurgitate
 		)
 
 /datum/species/xenos/sentinel
@@ -233,15 +227,14 @@
 		"hive node" =       /obj/item/organ/xenos/hivenode,
 		"nutrient vessel" = /obj/item/organ/diona/nutrients
 		)
-	inherent_spells = list(
-		/spell/hand/alien/transfer_plasma = /obj/screen/movable/spell_master/alien,
-		/spell/hand/alien/corrosive = 			/obj/screen/movable/spell_master/alien,
-		/spell/targeted/free/regurgitate = /obj/screen/movable/spell_master/alien,
-		/spell/hand/tackle = /obj/screen/movable/spell_master/alien
-		)
 
 	inherent_verbs = list(
-		/mob/living/proc/ventcrawl
+		/mob/living/proc/ventcrawl,
+		/mob/living/carbon/human/proc/tackle,
+		/mob/living/carbon/human/proc/regurgitate,
+		/mob/living/carbon/human/proc/transfer_plasma,
+		/mob/living/carbon/human/proc/corrosive_acid,
+		/mob/living/carbon/human/proc/neurotoxin
 		)
 
 /datum/species/xenos/queen
@@ -270,20 +263,17 @@
 		)
 
 	inherent_verbs = list(
-		/mob/living/proc/ventcrawl
+		/mob/living/proc/ventcrawl,
+		/mob/living/carbon/human/proc/psychic_whisper,
+		/mob/living/carbon/human/proc/regurgitate,
+		/mob/living/carbon/human/proc/lay_egg,
+		/mob/living/carbon/human/proc/plant,
+		/mob/living/carbon/human/proc/transfer_plasma,
+		/mob/living/carbon/human/proc/corrosive_acid,
+		/mob/living/carbon/human/proc/neurotoxin,
+		/mob/living/carbon/human/proc/resin,
+		/mob/living/carbon/human/proc/xeno_infest
 		)
-	inherent_spells = list(
-		/spell/hand/alien/transfer_plasma = /obj/screen/movable/spell_master/alien,
-		/spell/hand/alien/neurotoxin			= /obj/screen/movable/spell_master/alien,
-		/spell/targeted/alien/plasma/lay_egg = 	/obj/screen/movable/spell_master/alien,
-		/spell/targeted/alien/plasma/plant = 	/obj/screen/movable/spell_master/alien,
-		/spell/hand/alien/corrosive = 			/obj/screen/movable/spell_master/alien,
-		/spell/targeted/alien/plasma/xeno_infest = /obj/screen/movable/spell_master/alien,
-		/spell/targeted/alien/plasma/resin = /obj/screen/movable/spell_master/alien,
-		/spell/targeted/free/psychic_whisper = /obj/screen/movable/spell_master/alien,
-		/spell/targeted/free/regurgitate = /obj/screen/movable/spell_master/alien
-		)
-
 
 /datum/species/xenos/queen/handle_login_special(var/mob/living/carbon/human/H)
 	..()

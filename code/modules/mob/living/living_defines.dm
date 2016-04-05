@@ -36,7 +36,6 @@
 
 	var/mob/living/cameraFollow = null
 	var/list/datum/action/actions = list()
-	var/list/base_spells = list() //spells that get added when New() is called. Organized as: (spell path = spell master path)
 
 	var/tod = null // Time of death
 	var/update_slimes = 1

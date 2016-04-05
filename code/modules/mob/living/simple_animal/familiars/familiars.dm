@@ -14,10 +14,13 @@
 	max_co2 = 0
 	unsuitable_atoms_damage = 1
 
+	var/list/wizardy_spells = list()
 
 /mob/living/simple_animal/familiar/New()
 	..()
 	add_language("Galactic Common")
+	for(var/spell in wizardy_spells)
+		src.add_spell(new spell, "const_spell_ready")
 
 /mob/living/simple_animal/familiar/carcinus
 	name = "carcinus"
@@ -59,7 +62,7 @@
 
 	min_oxy = 0
 
-	base_spells = list(/spell/aoe_turf/conjure/forcewall)
+	wizardy_spells = list(/spell/aoe_turf/conjure/forcewall)
 
 /mob/living/simple_animal/familiar/pike/Process_Spacemove(var/check_drift = 0)
 	return 1	//No drifting in space for space carp!	//original comments do not steal
@@ -81,7 +84,7 @@
 	melee_damage_upper = 8
 	attacktext = "touches"
 
-	base_spells = list(/spell/targeted/torment)
+	wizardy_spells = list(/spell/targeted/torment)
 
 /mob/living/simple_animal/familiar/horror/death()
 	..(null,"rapidly deteriorates")
@@ -105,7 +108,7 @@
 	health = 25
 	maxHealth = 25
 
-	base_spells = list(/spell/targeted/heal_target,
+	wizardy_spells = list(/spell/targeted/heal_target,
 						/spell/targeted/heal_target/area)
 
 
@@ -152,7 +155,7 @@
 	melee_damage_upper = 1
 	attacktext = "nibbles"
 
-	base_spells = list(/spell/aoe_turf/smoke)
+	wizardy_spells = list(/spell/aoe_turf/smoke)
 
 /mob/living/simple_animal/familiar/pet/mouse/New()
 	..()
@@ -179,4 +182,4 @@
 	melee_damage_upper = 4
 	attacktext = "claws"
 
-	base_spells = list(/spell/targeted/subjugation)
+	wizardy_spells = list(/spell/targeted/subjugation)

@@ -1,12 +1,3 @@
-/mob/living/New()
-	..()
-	if(base_spells.len)
-		for(var/spell_path in base_spells)
-			var/master_type = /obj/screen/movable/spell_master
-			if(base_spells[spell_path])
-				master_type = base_spells[spell_path]
-			src.add_spell(new spell_path,0, master_type)
-
 //mob verbs are faster than object verbs. See mob/verb/examine.
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"

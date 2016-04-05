@@ -52,7 +52,6 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	var/cast_sound = ""
 
 	var/hud_state = "" //name of the icon used in generating the spell hud object
-	var/custom_stat = 0 //whether to call get_stat() and recieve text, or use the default ones based on charge type.
 	var/override_base = ""
 
 	var/obj/screen/connected_button
@@ -361,26 +360,3 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 		if(!user || (!(spell_flags & (STATALLOWED|GHOSTCAST)) && user.stat != originalstat)  || !(user.loc == Location))
 			return 0
 	return 1
-
-/spell/proc/get_stat()
-	return null
-
-
-
-//MISC STUFF
-
-//Free spells. Used primarly for abilities.
-/spell/free
-	spell_flags = 0
-	charge_max = 0
-	custom_stat = 1
-
-/spell/free/get_stat()
-	return "Free"
-
-/spell/targeted/free
-	spell_flags = 0
-	charge_max = 0
-	custom_stat = 1
-/spell/targeted/free/get_stat()
-	return "Free"
