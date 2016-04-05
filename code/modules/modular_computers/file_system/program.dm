@@ -25,6 +25,13 @@
 	if(comp && istype(comp))
 		computer = comp
 
+/datum/computer_file/program/Destroy()
+	computer = null
+	. = ..()
+
+/datum/computer_file/program/nano_host()
+	return computer.nano_host()
+
 /datum/computer_file/program/clone()
 	var/datum/computer_file/program/temp = ..()
 	temp.required_access = required_access
@@ -96,7 +103,7 @@
 /datum/computer_file/program/proc/run_program(var/mob/living/user)
 	if(can_run(user, 1))
 		if(nanomodule_path)
-			NM = new nanomodule_path(computer, src)	// Computer is passed here as it's (probably!) physical object. Some UI's perform get_turf() and passing program datum wouldn't go well with this.
+			NM = new nanomodule_path(src, new /datum/topic_manager/program(src), src)
 		if(requires_ntnet && network_destination)
 			generate_network_log("Connection opened to [network_destination].")
 		program_state = PROGRAM_STATE_ACTIVE
