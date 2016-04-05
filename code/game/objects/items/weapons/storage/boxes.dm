@@ -60,7 +60,7 @@
 	New()
 		..()
 		new /obj/item/clothing/mask/breath( src )
-		new /obj/item/weapon/tank/emergency_nitrogen( src )
+		new /obj/item/weapon/tank/emergency_phoron( src )
 
 /obj/item/weapon/storage/box/engineer/
 	New()
