@@ -904,22 +904,26 @@ proc/admin_notice(var/message, var/rights)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////ADMIN HELPER PROCS
 
-/proc/is_special_character(mob/M as mob) // returns 1 for specail characters and 2 for heroes of gamemode
+/proc/is_special_character(var/character) // returns 1 for special characters and 2 for heroes of gamemode
 	if(!ticker || !ticker.mode)
 		return 0
-	if (!istype(M))
-		return 0
+	var/datum/mind/M
+	if (ismob(character))
+		var/mob/C = character
+		M = C.mind
+	else if(istype(character, /datum/mind))
+		M = character
 
-	if(M.mind)
+	if(M)
 		if(ticker.mode.antag_templates && ticker.mode.antag_templates.len)
 			for(var/datum/antagonist/antag in ticker.mode.antag_templates)
-				if(antag.is_antagonist(M.mind))
+				if(antag.is_antagonist(M))
 					return 2
-		else if(M.mind.special_role)
+		else if(M.special_role)
 			return 1
 
-	if(isrobot(M))
-		var/mob/living/silicon/robot/R = M
+	if(isrobot(character))
+		var/mob/living/silicon/robot/R = character
 		if(R.emagged)
 			return 1
 
