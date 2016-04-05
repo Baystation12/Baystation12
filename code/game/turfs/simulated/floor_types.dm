@@ -1,5 +1,6 @@
 /turf/simulated/floor/diona
 	name = "biomass flooring"
+	icon = 'icons/turf/floors.dmi'
 	icon_state = "diona"
 
 /turf/simulated/floor/diona/attackby()
@@ -28,7 +29,7 @@
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "plating"
 	level = 1
-    
+
 /turf/simulated/shuttle/plating/is_plating()
 	return 1
 

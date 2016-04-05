@@ -828,10 +828,10 @@ default behaviour is:
 	if(deaf >= 0)
 		ear_deaf = deaf
 
-/mob/proc/can_be_possessed_by(var/mob/dead/observer/possessor)
+/mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client
 
-/mob/living/can_be_possessed_by(var/mob/dead/observer/possessor)
+/mob/living/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	if(!..())
 		return 0
 	if(!possession_candidate)
@@ -844,7 +844,7 @@ default behaviour is:
 		return 0
 	return 1
 
-/mob/living/proc/do_possession(var/mob/dead/observer/possessor)
+/mob/living/proc/do_possession(var/mob/observer/ghost/possessor)
 
 	if(!(istype(possessor) && possessor.ckey))
 		return 0

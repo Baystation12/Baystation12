@@ -241,4 +241,11 @@
 	return TOPIC_NOACTION
 
 /datum/category_item/player_setup_item/proc/preference_mob()
-    return get_mob_by_key(pref.client_ckey)
+	if(!pref.client)
+		for(var/client/C)
+			if(C.ckey == pref.client_ckey)
+				pref.client = C
+				break
+
+	if(pref.client)
+		return pref.client.mob

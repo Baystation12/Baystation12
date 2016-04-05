@@ -13,6 +13,7 @@ var/datum/antagonist/xenos/borer/borers
 	faction_role_text = "Borer Thrall"
 	faction_descriptor = "Unity"
 	faction_welcome = "You are now a thrall to a cortical borer. Please listen to what they have to say; they're in your head."
+	faction = "borer"
 
 	initial_spawn_req = 3
 	initial_spawn_target = 5

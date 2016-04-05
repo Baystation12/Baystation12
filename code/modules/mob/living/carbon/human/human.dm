@@ -861,7 +861,7 @@
 		target.show_message("\blue You hear a voice that seems to echo around the room: [say]")
 	usr.show_message("\blue You project your mind into [target.real_name]: [say]")
 	log_say("[key_name(usr)] sent a telepathic message to [key_name(target)]: [say]")
-	for(var/mob/dead/observer/G in world)
+	for(var/mob/observer/ghost/G in world)
 		G.show_message("<i>Telepathic message from <b>[src]</b> to <b>[target]</b>: [say]</i>")
 
 /mob/living/carbon/human/proc/remoteobserve()
@@ -1002,9 +1002,9 @@
 /mob/living/carbon/human/clean_blood(var/clean_feet)
 	.=..()
 	gunshot_residue = null
-	if(clean_feet && !shoes && istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
+	if(clean_feet && !shoes)
 		feet_blood_color = null
-		qdel(feet_blood_DNA)
+		feet_blood_DNA = null
 		update_inv_shoes(1)
 		return 1
 
@@ -1128,7 +1128,7 @@
 	icon_state = lowertext(species.name)
 
 	species.create_organs(src)
-
+	src.sync_organ_dna()
 	species.handle_post_spawn(src)
 
 	maxHealth = species.total_health
@@ -1136,10 +1136,13 @@
 	spawn(0)
 		regenerate_icons()
 		if(vessel.total_volume < species.blood_volume)
+			vessel.maximum_volume = species.blood_volume
 			vessel.add_reagent("blood", species.blood_volume - vessel.total_volume)
 		else if(vessel.total_volume > species.blood_volume)
 			vessel.remove_reagent("blood", vessel.total_volume - species.blood_volume)
+			vessel.maximum_volume = species.blood_volume
 		fixblood()
+
 
 	// Rebuild the HUD. If they aren't logged in then login() should reinstantiate it for them.
 	if(client && client.screen)

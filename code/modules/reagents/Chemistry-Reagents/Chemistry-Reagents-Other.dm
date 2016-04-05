@@ -4,6 +4,7 @@
 	name = "Crayon dust"
 	id = "crayon_dust"
 	description = "Intensely coloured powder obtained by grinding crayons."
+	taste_description = "the back of class"
 	reagent_state = LIQUID
 	color = "#888888"
 	overdose = 5
@@ -52,6 +53,7 @@
 	name = "Paint"
 	id = "paint"
 	description = "This paint will stick to almost any object."
+	taste_description = "chalk"
 	reagent_state = LIQUID
 	color = "#808080"
 	overdose = REAGENTS_OVERDOSE * 0.5
@@ -66,7 +68,7 @@
 		O.color = color
 
 /datum/reagent/paint/touch_mob(var/mob/M)
-	if(istype(M) && !istype(M, /mob/dead)) //painting ghosts: not allowed
+	if(istype(M) && !isobserver(M)) //painting observers: not allowed
 		M.color = color //maybe someday change this to paint only clothes and exposed body parts for human mobs.
 
 /datum/reagent/paint/get_data()
@@ -108,6 +110,7 @@
 	name = "Adminordrazine"
 	id = "adminordrazine"
 	description = "It's magic. We don't have to explain it."
+	taste_description = "100% abuse"
 	reagent_state = LIQUID
 	color = "#C8A5DC"
 	affects_dead = 1 //This can even heal dead people.
@@ -146,6 +149,7 @@
 	name = "Gold"
 	id = "gold"
 	description = "Gold is a dense, soft, shiny metal and the most malleable and ductile metal known."
+	taste_description = "expensive metal"
 	reagent_state = SOLID
 	color = "#F7C430"
 
@@ -153,6 +157,7 @@
 	name = "Silver"
 	id = "silver"
 	description = "A soft, white, lustrous transition metal, it has the highest electrical conductivity of any element and the highest thermal conductivity of any metal."
+	taste_description = "expensive yet reasonable metal"
 	reagent_state = SOLID
 	color = "#D0D0D0"
 
@@ -160,6 +165,7 @@
 	name ="Uranium"
 	id = "uranium"
 	description = "A silvery-white metallic chemical element in the actinide series, weakly radioactive."
+	taste_description = "the inside of a reactor"
 	reagent_state = SOLID
 	color = "#B8B8C0"
 
@@ -181,6 +187,7 @@
 	name = "Adrenaline"
 	id = "adrenaline"
 	description = "Adrenaline is a hormone used as a drug to treat cardiac arrest and other cardiac dysrhythmias resulting in diminished or absent cardiac output."
+	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#C8A5DC"
 
@@ -216,6 +223,7 @@
 	name = "Diethylamine"
 	id = "diethylamine"
 	description = "A secondary amine, mildly corrosive."
+	taste_description = "iron"
 	reagent_state = LIQUID
 	color = "#604030"
 
@@ -223,6 +231,7 @@
 	name = "Azosurfactant"
 	id = "surfactant"
 	description = "A isocyanate liquid that forms a foam when mixed with water."
+	taste_description = "metal"
 	reagent_state = LIQUID
 	color = "#9E6B38"
 
@@ -230,6 +239,7 @@
 	name = "Foaming agent"
 	id = "foaming_agent"
 	description = "A agent that yields metallic foam when mixed with light metal and a strong acid."
+	taste_description = "metal"
 	reagent_state = SOLID
 	color = "#664B63"
 
@@ -237,6 +247,7 @@
 	name = "Thermite"
 	id = "thermite"
 	description = "Thermite produces an aluminothermic reaction known as a thermite reaction. Can be used to melt walls."
+	taste_description = "sweet tasting metal"
 	reagent_state = SOLID
 	color = "#673910"
 	touch_met = 50
@@ -261,6 +272,7 @@
 	name = "Space cleaner"
 	id = "cleaner"
 	description = "A compound used to clean things. Now with 50% more sodium hypochlorite!"
+	taste_description = "sourness"
 	reagent_state = LIQUID
 	color = "#A5F0EE"
 	touch_met = 50
@@ -309,6 +321,7 @@
 	name = "Space Lube"
 	id = "lube"
 	description = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them. giggity."
+	taste_description = "slime"
 	reagent_state = LIQUID
 	color = "#009CA8"
 
@@ -322,6 +335,7 @@
 	name = "Silicate"
 	id = "silicate"
 	description = "A compound that can be used to reinforce glass."
+	taste_description = "plastic"
 	reagent_state = LIQUID
 	color = "#C7FFFF"
 
@@ -336,6 +350,7 @@
 	name = "Glycerol"
 	id = "glycerol"
 	description = "Glycerol is a simple polyol compound. Glycerol is sweet-tasting and of low toxicity."
+	taste_description = "sweetness"
 	reagent_state = LIQUID
 	color = "#808080"
 
@@ -343,6 +358,7 @@
 	name = "Nitroglycerin"
 	id = "nitroglycerin"
 	description = "Nitroglycerin is a heavy, colorless, oily, explosive liquid obtained by nitrating glycerol."
+	taste_description = "oil"
 	reagent_state = LIQUID
 	color = "#808080"
 
@@ -354,6 +370,8 @@
 	name = "Coolant"
 	id = "coolant"
 	description = "Industrial cooling substance."
+	taste_description = "sourness"
+	taste_mult = 1.1
 	reagent_state = LIQUID
 	color = "#C8A5DC"
 
@@ -361,12 +379,14 @@
 	name = "Ultra Glue"
 	id = "glue"
 	description = "An extremely powerful bonding agent."
+	taste_description = "a special education class"
 	color = "#FFFFCC"
 
 /datum/reagent/woodpulp
 	name = "Wood Pulp"
 	id = "woodpulp"
 	description = "A mass of wood fibers."
+	taste_description = "wood"
 	reagent_state = LIQUID
 	color = "#B97A57"
 
@@ -374,6 +394,7 @@
 	name = "Luminol"
 	id = "luminol"
 	description = "A compound that interacts with blood on the molecular level."
+	taste_description = "metal"
 	reagent_state = LIQUID
 	color = "#F2F3F4"
 

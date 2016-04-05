@@ -8,12 +8,14 @@
 		player.assigned_role = role_text
 	player.special_role = role_text
 
-	if(istype(player.current, /mob/dead))
+	if(isghost(player.current))
 		create_default(player.current)
 	else
 		create_antagonist(player, move_to_spawn, do_not_announce, preserve_appearance)
 		if(!do_not_equip)
 			equip(player.current)
+
+	player.current.faction = faction
 	return 1
 
 /datum/antagonist/proc/add_antagonist_mind(var/datum/mind/player, var/ignore_role, var/nonstandard_role_type, var/nonstandard_role_msg)
@@ -29,6 +31,9 @@
 
 	if(faction_verb && player.current)
 		player.current.verbs |= faction_verb
+
+	if(config.objectives_disabled == CONFIG_OBJECTIVE_VERB)
+		player.current.verbs += /mob/proc/add_objectives
 
 	// Handle only adding a mind and not bothering with gear etc.
 	if(nonstandard_role_type)

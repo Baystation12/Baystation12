@@ -14,6 +14,9 @@
 	base_active_power_usage = 500
 	max_hardware_size = 3
 	steel_sheet_cost = 20
+	light_strength = 4
+	_max_damage = 300
+	_break_damage = 150
 
 /obj/machinery/modular_computer/console/buildable/New()
 	..()

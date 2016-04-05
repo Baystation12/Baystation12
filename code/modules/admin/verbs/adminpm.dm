@@ -19,9 +19,9 @@
 	var/list/client/targets[0]
 	for(var/client/T)
 		if(T.mob)
-			if(istype(T.mob, /mob/new_player))
+			if(isnewplayer(T.mob))
 				targets["(New Player) - [T]"] = T
-			else if(istype(T.mob, /mob/dead/observer))
+			else if(isghost(T.mob))
 				targets["[T.mob.name](Ghost) - [T]"] = T
 			else
 				targets["[T.mob.real_name](as [T.mob.name]) - [T]"] = T
@@ -104,7 +104,7 @@
 
 	//play the recieving admin the adminhelp sound (if they have them enabled)
 	//non-admins shouldn't be able to disable this
-	if(is_preference_enabled(/datum/client_preference/holder/play_adminhelp_ping))
+	if(C.is_preference_enabled(/datum/client_preference/holder/play_adminhelp_ping))
 		C << 'sound/effects/adminhelp.ogg'
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")

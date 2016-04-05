@@ -149,85 +149,25 @@
 	whitelisted = "Tajara"
 
 /datum/gear/head/hijab
-	display_name = "hijab, black"
+	display_name = "hijab"
 	path = /obj/item/clothing/head/hijab
 
-/datum/gear/head/hijab/white
-	display_name = "hijab, white"
-	path = /obj/item/clothing/head/hijab/white
+/datum/gear/head/hijab/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
 
-/datum/gear/head/hijab/aqua
-	display_name = "hijab, aqua"
-	path = /obj/item/clothing/head/hijab/aqua
+/datum/gear/head/kippa
+	display_name = "kippa"
+	path = /obj/item/clothing/head/kippa
 
-/datum/gear/head/hijab/blue
-	display_name = "hijab, blue"
-	path = /obj/item/clothing/head/hijab/blue
+/datum/gear/head/kippa/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
 
-/datum/gear/head/hijab/brown
-	display_name = "hijab, brown"
-	path = /obj/item/clothing/head/hijab/brown
+/datum/gear/head/turban
+	display_name = "turban"
+	path = /obj/item/clothing/head/turban
 
-/datum/gear/head/hijab/darkblue
-	display_name = "hijab, dark blue"
-	path = /obj/item/clothing/head/hijab/darkblue
-
-/datum/gear/head/hijab/darkred
-	display_name = "hijab, dark red"
-	path = /obj/item/clothing/head/hijab/darkred
-
-/datum/gear/head/hijab/green
-	display_name = "hijab, green"
-	path = /obj/item/clothing/head/hijab/green
-
-/datum/gear/head/hijab/grey
-	display_name = "hijab, grey"
-	path = /obj/item/clothing/head/hijab/grey
-
-/datum/gear/head/hijab/lightblue
-	display_name = "hijab, light blue"
-	path = /obj/item/clothing/head/hijab/lightblue
-
-/datum/gear/head/hijab/lightbrown
-	display_name = "hijab, light brown "
-	path = /obj/item/clothing/head/hijab/lightbrown
-
-/datum/gear/head/hijab/lightgreen
-	display_name = "hijab, light green "
-	path = /obj/item/clothing/head/hijab/lightgreen
-
-/datum/gear/head/hijab/lightpurple
-	display_name = "hijab, light purple "
-	path = /obj/item/clothing/head/hijab/lightpurple
-
-/datum/gear/head/hijab/lightred
-	display_name = "hijab, light red "
-	path = /obj/item/clothing/head/hijab/lightred
-
-/datum/gear/head/hijab/maroon
-	display_name = "hijab, maroon"
-	path = /obj/item/clothing/head/hijab/maroon
-
-/datum/gear/head/hijab/orange
-	display_name = "hijab, orange"
-	path = /obj/item/clothing/head/hijab/orange
-
-/datum/gear/head/hijab/pink
-	display_name = "hijab, pink"
-	path = /obj/item/clothing/head/hijab/pink
-
-/datum/gear/head/hijab/purple
-	display_name = "hijab, purple"
-	path = /obj/item/clothing/head/hijab/purple
-
-/datum/gear/head/hijab/red
-	display_name = "hijab, red"
-	path = /obj/item/clothing/head/hijab/red
-
-/datum/gear/head/hijab/yellowgreen
-	display_name = "hijab, yellow green"
-	path = /obj/item/clothing/head/hijab/yellowgreen
-
-/datum/gear/head/hijab/yellow
-	display_name = "hijab, yellow"
-	path = /obj/item/clothing/head/hijab/yellow
+/datum/gear/head/turban/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)

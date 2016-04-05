@@ -382,9 +382,9 @@ var/list/admin_verbs_mentor = list(
 	set category = "Admin"
 	set name = "Aghost"
 	if(!holder)	return
-	if(istype(mob,/mob/dead/observer))
+	if(isghost(mob))
 		//re-enter
-		var/mob/dead/observer/ghost = mob
+		var/mob/observer/ghost/ghost = mob
 		if(!is_mentor(usr.client))
 			ghost.can_reenter_corpse = 1
 		if(ghost.can_reenter_corpse)
@@ -400,7 +400,7 @@ var/list/admin_verbs_mentor = list(
 	else
 		//ghostize
 		var/mob/body = mob
-		var/mob/dead/observer/ghost = body.ghostize(1)
+		var/mob/observer/ghost/ghost = body.ghostize(1)
 		ghost.admin_ghosted = 1
 		if(body)
 			body.teleop = ghost
@@ -942,7 +942,7 @@ var/list/admin_verbs_mentor = list(
 	set desc = "Gives a spell to a mob."
 	var/spell/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in spells
 	if(!S) return
-	T.spell_list += new S
+	T.add_spell(new S)
 	feedback_add_details("admin_verb","GS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] gave [key_name(T)] the spell [S].")
 	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] the spell [S].", 1)

@@ -11,6 +11,18 @@ var/global/ntnet_card_uid = 1
 	var/identification_string = "" 	// Identification string, technically nickname seen in the network. Can be set by user.
 	var/long_range = 0
 	var/ethernet = 0 // Hard-wired, therefore always on, ignores NTNet wireless checks.
+	malfunction_probability = 1
+
+/obj/item/weapon/computer_hardware/network_card/diagnostics(var/mob/user)
+	..()
+	user << "NIX Unique ID: [identification_id]"
+	user << "NIX User Tag: [identification_string]"
+	user << "Supported protocols:"
+	user << "511.m SFS (Subspace) - Standard Frequency Spread"
+	if(long_range)
+		user << "511.n WFS/HB (Subspace) - Wide Frequency Spread/High Bandiwdth"
+	if(ethernet)
+		user << "OpenEth (Physical Connection) - Physical network connection port"
 
 /obj/item/weapon/computer_hardware/network_card/New(var/l)
 	..(l)
@@ -27,7 +39,7 @@ var/global/ntnet_card_uid = 1
 
 /obj/item/weapon/computer_hardware/network_card/wired
 	name = "wired NTNet network card"
-	desc = "An advanced network card for usage with NTNet. This one uses wired connection."
+	desc = "An advanced network card for usage with standard NTNet frequencies. This one also supports wired connection."
 	ethernet = 1
 	power_usage = 100 // Better range but higher power usage.
 	icon_state = "netcard_ethernet"
@@ -51,6 +63,9 @@ var/global/ntnet_card_uid = 1
 	if(!enabled)
 		return 0
 
+	if(!check_functionality())
+		return 0
+
 	if(ethernet) // Computer is connected via wired connection.
 		return 3
 
@@ -60,7 +75,11 @@ var/global/ntnet_card_uid = 1
 	if(holder2)
 		var/turf/T = get_turf(holder2)
 		if((T && istype(T)) && T.z in config.station_levels)
-			return 2
+			// Computer is on station. Low/High signal depending on what type of network card you have
+			if(long_range)
+				return 2
+			else
+				return 1
 
 	if(long_range) // Computer is not on station, but it has upgraded network card. Low signal.
 		return 1

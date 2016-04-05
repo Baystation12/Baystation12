@@ -164,7 +164,7 @@
 		reset_view(null)
 
 /mob/living/proc/update_sight()
-	if(stat == DEAD)
+	if(stat == DEAD || eyeobj)
 		update_dead_sight()
 	else
 		sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)

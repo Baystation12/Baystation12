@@ -53,6 +53,8 @@ var/list/gear_datums = list()
 	return valid_gear_choices
 
 /datum/category_item/player_setup_item/loadout/sanitize_character()
+	if(!islist(pref.gear))
+		pref.gear = list()
 
 	for(var/gear_name in pref.gear)
 		if(!(gear_name in gear_datums))
@@ -82,6 +84,7 @@ var/list/gear_datums = list()
 	var/fcolor =  "#3366CC"
 	if(total_cost < MAX_GEAR_COST)
 		fcolor = "#E67300"
+	. = list()
 	. += "<table align = 'center' width = 100%>"
 	. += "<tr><td colspan=3><center><b><font color = '[fcolor]'>[total_cost]/[MAX_GEAR_COST]</font> loadout points spent.</b> \[<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>\]</center></td></tr>"
 
@@ -115,10 +118,23 @@ var/list/gear_datums = list()
 		var/datum/gear/G = LC.gear[gear_name]
 		var/ticked = (G.display_name in pref.gear)
 		var/obj/item/temp = G.path
-		. += "<tr style='vertical-align:top'><td width=25%><a href='?src=\ref[src];toggle_gear=[G.display_name]'><font color='[ticked ? "#E67300" : "#3366CC"]'>[G.display_name]</font></a></td>"
+		. += "<tr style='vertical-align:top'><td width=25%><a href='?src=\ref[src];toggle_gear=[G.display_name]'><font color='[ticked ? "#E67300" : "#3366CC"]'>[G.display_name]</font></a>"
+		if(ticked)
+			var/metadata = pref.gear[G.display_name]
+			if(!metadata)
+				metadata = list()
+				pref.gear[G.display_name] = metadata
+			for(var/datum/gear_tweak/tweak in G.gear_tweaks)
+				var/tweak_input = metadata["[tweak]"]
+				if(!tweak_input)
+					tweak_input = tweak.get_default()
+					metadata["[tweak]"] = tweak_input
+				. += " <a href='?src=\ref[src];gear=[G.display_name];tweak=\ref[tweak]'>[tweak.get_contents(tweak_input)]</a>"
+		. += "</td>"
 		. += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		. += "<td><font size=2><i>[initial(temp.desc)]</i></font></td></tr>"
 	. += "</table>"
+	. = jointext(.)
 
 /datum/category_item/player_setup_item/loadout/OnTopic(href, href_list, user)
 	if(href_list["toggle_gear"])
@@ -132,6 +148,17 @@ var/list/gear_datums = list()
 				if(istype(G)) total_cost += G.cost
 			if((total_cost+TG.cost) <= MAX_GEAR_COST)
 				pref.gear += TG.display_name
+		return TOPIC_REFRESH
+	if(href_list["gear"] && href_list["tweak"])
+		var/datum/gear/gear = gear_datums[href_list["gear"]]
+		var/datum/gear_tweak/tweak = locate(href_list["tweak"])
+		if(!tweak || !istype(gear) || !(tweak in gear.gear_tweaks))
+			return TOPIC_NOACTION
+		var/metadata = tweak.get_metadata(user)
+		if(!metadata && !CanUseTopic(user))
+			return TOPIC_NOACTION
+		var/gear_metadata = pref.gear[gear.display_name]
+		gear_metadata["[tweak]"] = metadata
 		return TOPIC_REFRESH
 	else if(href_list["select_category"])
 		current_tab = href_list["select_category"]
@@ -151,8 +178,8 @@ var/list/gear_datums = list()
 	var/sort_category = "General"
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
 
-/datum/gear/proc/spawn_item(var/location)
+/datum/gear/proc/spawn_item(var/location, var/metadata)
 	var/item = new path(location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.apply_tweak(item)
+		gt.apply_tweak(item, metadata["[gt]"])
 	return item

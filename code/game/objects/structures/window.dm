@@ -159,8 +159,7 @@
 		tforce = I.throwforce
 	if(reinf) tforce *= 0.25
 	if(health - tforce <= 7 && !reinf)
-		anchored = 0
-		update_nearby_icons()
+		set_anchored(FALSE)
 		step(src, get_dir(AM, src))
 	take_damage(tforce)
 
@@ -244,13 +243,11 @@
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			user << (state == 1 ? "<span class='notice'>You have unfastened the window from the frame.</span>" : "<span class='notice'>You have fastened the window to the frame.</span>")
 		else if(reinf && state == 0)
-			anchored = !anchored
-			update_nearby_icons()
+			set_anchored(!anchored)
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			user << (anchored ? "<span class='notice'>You have fastened the frame to the floor.</span>" : "<span class='notice'>You have unfastened the frame from the floor.</span>")
 		else if(!reinf)
-			anchored = !anchored
-			update_nearby_icons()
+			set_anchored(!anchored)
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			user << (anchored ? "<span class='notice'>You have fastened the window to the floor.</span>" : "<span class='notice'>You have unfastened the window.</span>")
 	else if(istype(W, /obj/item/weapon/crowbar) && reinf && state <= 1)
@@ -261,6 +258,7 @@
 		if(!glasstype)
 			user << "<span class='notice'>You're not sure how to dismantle \the [src] properly.</span>"
 		else
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
 			if(dir == SOUTHWEST)
 				var/obj/item/stack/material/mats = new glasstype(loc)
@@ -274,8 +272,7 @@
 			user.do_attack_animation(src)
 			hit(W.force)
 			if(health <= 7)
-				anchored = 0
-				update_nearby_icons()
+				set_anchored(FALSE)
 				step(src, get_dir(user, src))
 		else
 			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
@@ -288,7 +285,7 @@
 	return
 
 
-/obj/structure/window/verb/rotate()
+/obj/structure/window/proc/rotate()
 	set name = "Rotate Window Counter-Clockwise"
 	set category = "Object"
 	set src in oview(1)
@@ -307,7 +304,7 @@
 	return
 
 
-/obj/structure/window/verb/revrotate()
+/obj/structure/window/proc/revrotate()
 	set name = "Rotate Window Clockwise"
 	set category = "Object"
 	set src in oview(1)
@@ -330,7 +327,7 @@
 
 	//player-constructed windows
 	if (constructed)
-		anchored = 0
+		set_anchored(FALSE)
 
 	if (start_dir)
 		set_dir(start_dir)
@@ -367,11 +364,27 @@
 		return 1
 	return 0
 
+/obj/structure/window/proc/set_anchored(var/new_anchored)
+	if(anchored == new_anchored)
+		return
+	anchored = new_anchored
+	update_verbs()
+	update_nearby_icons()
+
 //This proc is used to update the icons of nearby windows. It should not be confused with update_nearby_tiles(), which is an atmos proc!
 /obj/structure/window/proc/update_nearby_icons()
 	update_icon()
 	for(var/obj/structure/window/W in orange(src, 1))
 		W.update_icon()
+
+//Updates the availabiliy of the rotation verbs
+/obj/structure/window/proc/update_verbs()
+	if(anchored)
+		verbs -= /obj/structure/window/proc/rotate
+		verbs -= /obj/structure/window/proc/revrotate
+	else
+		verbs += /obj/structure/window/proc/rotate
+		verbs += /obj/structure/window/proc/revrotate
 
 //merges adjacent full-tile windows into one (blatant ripoff from game/smoothwall.dm)
 /obj/structure/window/update_icon()

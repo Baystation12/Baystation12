@@ -189,7 +189,7 @@ proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 		M.client.prefs.muted |= mute_type
 		log_admin("SPAM AUTOMUTE: [muteunmute] [key_name(M)] from [mute_string]")
 		message_admins("SPAM AUTOMUTE: [muteunmute] [key_name_admin(M)] from [mute_string].", 1)
-		M << "You have been [muteunmute] from [mute_string] by the SPAM AUTOMUTE system. Contact an admin."
+		M << "<span class='alert'>You have been [muteunmute] from [mute_string] by the SPAM AUTOMUTE system. Contact an admin.</span>"
 		feedback_add_details("admin_verb","AUTOMUTE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 		return
 
@@ -202,7 +202,7 @@ proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 
 	log_admin("[key_name(usr)] has [muteunmute] [key_name(M)] from [mute_string]")
 	message_admins("[key_name_admin(usr)] has [muteunmute] [key_name_admin(M)] from [mute_string].", 1)
-	M << "You have been [muteunmute] from [mute_string]."
+	M << "<span class = 'alert'>You have been [muteunmute] from [mute_string].</span>"
 	feedback_add_details("admin_verb","MUTE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_add_random_ai_law()
@@ -236,7 +236,7 @@ Ccomp's first proc.
 	var/list/ghosts = list()
 	var/list/sortmob = sortAtom(mob_list)                           // get the mob list.
 	var/any=0
-	for(var/mob/dead/observer/M in sortmob)
+	for(var/mob/observer/ghost/M in sortmob)
 		mobs.Add(M)                                             //filter it where it's only ghosts
 		any = 1                                                 //if no ghosts show up, any will just be 0
 	if(!any)
@@ -266,7 +266,7 @@ Ccomp's first proc.
 		src << "Hrm, appears you didn't select a ghost"		// Sanity check, if no ghosts in the list we don't want to edit a null variable and cause a runtime error.
 		return
 
-	var/mob/dead/observer/G = ghosts[target]
+	var/mob/observer/ghost/G = ghosts[target]
 	if(G.has_enabled_antagHUD && config.antag_hud_restricted)
 		var/response = alert(src, "Are you sure you wish to allow this individual to play?","Ghost has used AntagHUD","Yes","No")
 		if(response == "No") return
@@ -291,9 +291,9 @@ Ccomp's first proc.
 		src << "Only administrators may use this command."
 	var/action=""
 	if(config.antag_hud_allowed)
-		for(var/mob/dead/observer/g in get_ghosts())
+		for(var/mob/observer/ghost/g in get_ghosts())
 			if(!g.client.holder)						//Remove the verb from non-admin ghosts
-				g.verbs -= /mob/dead/observer/verb/toggle_antagHUD
+				g.verbs -= /mob/observer/ghost/verb/toggle_antagHUD
 			if(g.antagHUD)
 				g.antagHUD = 0						// Disable it on those that have it enabled
 				g.has_enabled_antagHUD = 2				// We'll allow them to respawn
@@ -302,9 +302,9 @@ Ccomp's first proc.
 		src << "\red <B>AntagHUD usage has been disabled</B>"
 		action = "disabled"
 	else
-		for(var/mob/dead/observer/g in get_ghosts())
+		for(var/mob/observer/ghost/g in get_ghosts())
 			if(!g.client.holder)						// Add the verb back for all non-admin ghosts
-				g.verbs += /mob/dead/observer/verb/toggle_antagHUD
+				g.verbs += /mob/observer/ghost/verb/toggle_antagHUD
 			g << "\blue <B>The Administrator has enabled AntagHUD </B>"	// Notify all observers they can now use AntagHUD
 		config.antag_hud_allowed = 1
 		action = "enabled"
@@ -324,13 +324,13 @@ Ccomp's first proc.
 		src << "Only administrators may use this command."
 	var/action=""
 	if(config.antag_hud_restricted)
-		for(var/mob/dead/observer/g in get_ghosts())
+		for(var/mob/observer/ghost/g in get_ghosts())
 			g << "\blue <B>The administrator has lifted restrictions on joining the round if you use AntagHUD</B>"
 		action = "lifted restrictions"
 		config.antag_hud_restricted = 0
 		src << "\blue <B>AntagHUD restrictions have been lifted</B>"
 	else
-		for(var/mob/dead/observer/g in get_ghosts())
+		for(var/mob/observer/ghost/g in get_ghosts())
 			g << "\red <B>The administrator has placed restrictions on joining the round if you use AntagHUD</B>"
 			g << "\red <B>Your AntagHUD has been disabled, you may choose to re-enabled it but will be under restrictions </B>"
 			g.antagHUD = 0
@@ -358,8 +358,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!input)
 		return
 
-	var/mob/dead/observer/G_found
-	for(var/mob/dead/observer/G in player_list)
+	var/mob/observer/ghost/G_found
+	for(var/mob/observer/ghost/G in player_list)
 		if(G.ckey == input)
 			G_found = G
 			break
@@ -621,7 +621,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	log_admin("[key_name(usr)] has gibbed [key_name(M)]")
 	message_admins("[key_name_admin(usr)] has gibbed [key_name_admin(M)]", 1)
 
-	if(istype(M, /mob/dead/observer))
+	if(isobserver(M))
 		gibs(M.loc)
 		return
 
@@ -634,7 +634,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	var/confirm = alert(src, "You sure?", "Confirm", "Yes", "No")
 	if(confirm == "Yes")
-		if (istype(mob, /mob/dead/observer)) // so they don't spam gibs everywhere
+		if (isobserver(mob)) // so they don't spam gibs everywhere
 			return
 		else
 			mob.gib()

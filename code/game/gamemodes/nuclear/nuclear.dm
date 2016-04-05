@@ -32,7 +32,9 @@ var/list/nuke_disks = list()
 	return 0
 
 /datum/game_mode/nuclear/declare_completion()
-	if(config.objectives_disabled)
+	var/datum/antagonist/merc = all_antag_types[MODE_MERCENARY]
+	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || (merc && !merc.global_objectives.len))
+		..()
 		return
 	var/disk_rescued = 1
 	for(var/obj/item/weapon/disk/nuclear/D in world)

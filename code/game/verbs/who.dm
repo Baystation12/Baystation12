@@ -17,8 +17,8 @@
 				if(UNCONSCIOUS)
 					entry += " - <font color='darkgray'><b>Unconscious</b></font>"
 				if(DEAD)
-					if(isobserver(C.mob))
-						var/mob/dead/observer/O = C.mob
+					if(isghost(C.mob))
+						var/mob/observer/ghost/O = C.mob
 						if(O.started_as_observer)
 							entry += " - <font color='gray'>Observing</font>"
 						else
@@ -41,6 +41,8 @@
 
 			if(is_special_character(C.mob))
 				entry += " - <b><font color='red'>Antagonist</font></b>"
+			if(C.is_afk())
+				entry += " (AFK - [C.inactivity2text()])"
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
 			Lines += entry
 	else

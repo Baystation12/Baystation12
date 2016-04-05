@@ -1,5 +1,6 @@
 /datum/nano_module/appearance_changer
 	name = "Appearance Editor"
+	available_to_ai = FALSE
 	var/flags = APPEARANCE_ALL_HAIR
 	var/mob/living/carbon/human/owner = null
 	var/list/valid_species = list()
@@ -91,12 +92,11 @@
 	return 0
 
 /datum/nano_module/appearance_changer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
-
 	if(!owner || !owner.species)
 		return
 
 	generate_data(check_whitelist, whitelist, blacklist)
-	var/data[0]
+	var/list/data = host.initial_data()
 
 	data["specimen"] = owner.species.name
 	data["gender"] = owner.gender

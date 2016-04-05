@@ -129,7 +129,7 @@
 		return 1
 	return ..()
 
-/obj/machinery/portable_atmospherics/hydroponics/attack_ghost(var/mob/dead/observer/user)
+/obj/machinery/portable_atmospherics/hydroponics/attack_ghost(var/mob/observer/ghost/user)
 
 	if(!(harvest && seed && seed.has_mob_product))
 		return
@@ -152,7 +152,7 @@
 			return
 
 		if(weedlevel > 0)
-			nymph.reagents.add_reagent("nutriment", weedlevel)
+			nymph.reagents.add_reagent("glucose", weedlevel)
 			weedlevel = 0
 			nymph.visible_message("<font color='blue'><b>[nymph]</b> begins rooting through [src], ripping out weeds and eating them noisily.</font>","<font color='blue'>You begin rooting through [src], ripping out weeds and eating them noisily.</font>")
 		else if(nymph.nutrition > 100 && nutrilevel < 10)

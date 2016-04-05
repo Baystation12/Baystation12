@@ -2,7 +2,7 @@
  *
  *  Map Unit Tests.
  *  Zone checks / APC / Scrubber / Vent.
- *  
+ *
  *
  */
 
@@ -19,6 +19,7 @@ datum/unit_test/apc_area_test/start_test()
 	var/list/exempt_areas = typesof(/area/space, \
 					/area/syndicate_station, \
 					/area/skipjack_station,  \
+					/area/rescue_base, \
 					/area/solar, \
 					/area/shuttle, \
 					/area/holodeck, \
@@ -55,13 +56,13 @@ datum/unit_test/apc_area_test/start_test()
 			if(!A.air_vent_info.len && !(A.type in exempt_from_atmos))
 				log_unit_test("[bad_msg] lacks an Air vent.[ascii_reset]")
 				area_good = 0
-		
+
 			if(!area_good)
 				bad_areas.Add(A)
 
 	if(bad_areas.len)
 		fail("\[[bad_areas.len]/[area_test_count]\]Some areas lacked APCs, Air Scrubbers, or Air vents.")
-	else			
+	else
 		pass("All \[[area_test_count]\] areas contained APCs, Air scrubbers, and Air vents.")
 
 	return 1
@@ -103,7 +104,7 @@ datum/unit_test/wire_test/start_test()
 		pass("All \[[wire_test_count]\] wires had no overlapping cables going the same direction.")
 
 	return 1
-				
+
 
 #undef SUCCESS
 #undef FAILURE

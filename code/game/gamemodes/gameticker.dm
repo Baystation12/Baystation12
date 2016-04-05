@@ -383,8 +383,8 @@ var/global/datum/controller/gameticker/ticker
 				else
 					Player << "<font color='blue'><b>You missed the crew transfer after the events on [station_name()] as [Player.real_name].</b></font>"
 			else
-				if(istype(Player,/mob/dead/observer))
-					var/mob/dead/observer/O = Player
+				if(isghost(Player))
+					var/mob/observer/ghost/O = Player
 					if(!O.started_as_observer)
 						Player << "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>"
 				else
@@ -414,9 +414,9 @@ var/global/datum/controller/gameticker/ticker
 
 		if (!robo.connected_ai)
 			if (robo.stat != 2)
-				world << "<b>[robo.name] (Played by: [robo.key]) survived as an AI-less borg! Its laws were:</b>"
+				world << "<b>[robo.name] (Played by: [robo.key]) survived as an AI-less synthetic! Its laws were:</b>"
 			else
-				world << "<b>[robo.name] (Played by: [robo.key]) was unable to survive the rigors of being a cyborg without an AI. Its laws were:</b>"
+				world << "<b>[robo.name] (Played by: [robo.key]) was unable to survive the rigors of being a synthetic without an AI. Its laws were:</b>"
 
 			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
 				robo.laws.show_laws(world)

@@ -886,13 +886,13 @@
 	if (href_list["lock"])
 		coverlocked = !coverlocked
 
-	else if (href_list["breaker"])
-		toggle_breaker()
-
 	else if( href_list["reboot"] )
 		failure_timer = 0
 		update_icon()
 		update()
+
+	else if (href_list["breaker"])
+		toggle_breaker()
 
 	else if (href_list["cmode"])
 		chargemode = !chargemode
@@ -1160,23 +1160,15 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 
 // damage and destruction acts
 /obj/machinery/power/apc/emp_act(severity)
+	// Fail for 8-12 minutes (divided by severity)
+	// Division by 2 is required, because machinery ticks are every two seconds. Without it we would fail for 16-24 minutes.
+	energy_fail(round(rand(240, 360) / severity))
 	if(cell)
-		cell.emp_act(severity)
-
-	lighting = 0
-	equipment = 0
-	environ = 0
-	update()
+		cell.emp_act(severity+1)
 	update_icon()
-
-	spawn(600)
-		update_channels()
-		update()
-		update_icon()
 	..()
 
 /obj/machinery/power/apc/ex_act(severity)
-
 	switch(severity)
 		if(1.0)
 			//set_broken() //now qdel() do what we need

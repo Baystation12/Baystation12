@@ -125,7 +125,7 @@
 							return
 
 			if("marked datum")
-				current = holder.marked_datum
+				current = holder.marked_datum()
 				if(!current)
 					switch(alert("You do not currently have a marked datum; do you want to pass null instead?",, "Yes", "Cancel"))
 						if("Yes")
