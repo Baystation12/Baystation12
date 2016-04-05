@@ -52,221 +52,11 @@
 	P.stored_plasma -= cost
 	return 1
 
-// Free abilities.
-/mob/living/carbon/human/proc/transfer_plasma(mob/living/carbon/human/M as mob in oview(1))
-	set name = "Transfer Plasma"
-	set desc = "Transfer Plasma to another alien"
-	set category = "Abilities"
-
-	if (get_dist(src,M) > 1)
-		src << "<span class='alium'>You need to be closer.</span>"
-		return
-
-	var/obj/item/organ/xenos/plasmavessel/I = M.internal_organs_by_name["plasma vessel"]
-	if(!istype(I))
-		src << "<span class='alium'>Their plasma vessel is missing.</span>"
-		return
-
-	var/amount = input("Amount:", "Transfer Plasma to [M]") as num
-	if (amount)
-		amount = abs(round(amount))
-		if(check_alien_ability(amount,0,"plasma vessel"))
-			M.gain_plasma(amount)
-			M << "<span class='alium'>[src] has transfered [amount] plasma to you.</span>"
-			src << "<span class='alium'>You have transferred [amount] plasma to [M].</span>"
-	return
-
-// Queen verbs.
-/mob/living/carbon/human/proc/lay_egg()
-
-	set name = "Lay Egg (75)"
-	set desc = "Lay an egg to produce huggers to impregnate prey with."
-	set category = "Abilities"
-
-	if(!config.aliens_allowed)
-		src << "You begin to lay an egg, but hesitate. You suspect it isn't allowed."
-		verbs -= /mob/living/carbon/human/proc/lay_egg
-		return
-
-	if(locate(/obj/structure/alien/egg) in get_turf(src))
-		src << "There's already an egg here."
-		return
-
-	if(check_alien_ability(75,1,"egg sac"))
-		visible_message("<span class='alium'><B>[src] has laid an egg!</B></span>")
-		new /obj/structure/alien/egg(loc)
-
-	return
-
-// Drone verbs.
-/mob/living/carbon/human/proc/evolve()
-	set name = "Evolve (500)"
-	set desc = "Produce an interal egg sac capable of spawning children. Only one queen can exist at a time."
-	set category = "Abilities"
-
-	if(alien_queen_exists())
-		src << "<span class='notice'>We already have an active queen.</span>"
-		return
-
-	if(check_alien_ability(500))
-		visible_message("<span class='alium'><B>[src] begins to twist and contort!</B></span>", "<span class='alium'>You begin to evolve!</span>")
-		src.set_species("Xenomorph Queen")
-
-	return
-
-/mob/living/carbon/human/proc/plant()
-	set name = "Plant Weeds (50)"
-	set desc = "Plants some alien weeds"
-	set category = "Abilities"
-
-	if(check_alien_ability(50,1,"resin spinner"))
-		visible_message("<span class='alium'><B>[src] has planted some alien weeds!</B></span>")
-		new /obj/structure/alien/node(loc)
-	return
-
-/mob/living/carbon/human/proc/corrosive_acid(O as obj|turf in oview(1)) //If they right click to corrode, an error will flash if its an invalid target./N
-	set name = "Corrosive Acid (200)"
-	set desc = "Drench an object in acid, destroying it over time."
-	set category = "Abilities"
-
-	if(!O in oview(1))
-		src << "<span class='alium'>[O] is too far away.</span>"
-		return
-
-	// OBJ CHECK
-	var/cannot_melt
-	if(isobj(O))
-		var/obj/I = O
-		if(I.unacidable)
-			cannot_melt = 1
-	else
-		if(istype(O, /turf/simulated/wall))
-			var/turf/simulated/wall/W = O
-			if(W.material.flags & MATERIAL_UNMELTABLE)
-				cannot_melt = 1
-		else if(istype(O, /turf/simulated/floor))
-			var/turf/simulated/floor/F = O
-			if(F.flooring && (F.flooring.flags & TURF_ACID_IMMUNE))
-				cannot_melt = 1
-
-	if(cannot_melt)
-		src << "<span class='alium'>You cannot dissolve this object.</span>"
-		return
-
-	if(check_alien_ability(200,0,"acid gland"))
-		new /obj/effect/acid(get_turf(O), O)
-		visible_message("<span class='alium'><B>[src] vomits globs of vile stuff all over [O]. It begins to sizzle and melt under the bubbling mess of acid!</B></span>")
-
-	return
-
-/mob/living/carbon/human/proc/neurotoxin(mob/target as mob in oview())
-	set name = "Spit Neurotoxin (50)"
-	set desc = "Spits neurotoxin at someone, paralyzing them for a short time if they are not wearing protective gear."
-	set category = "Abilities"
-
-	if(!check_alien_ability(50,0,"acid gland"))
-		return
-
-	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
-		src << "You cannot spit neurotoxin in your current state."
-		return
-
-	visible_message("<span class='warning'>[src] spits neurotoxin at [target]!</span>", "<span class='alium'>You spit neurotoxin at [target].</span>")
-
-	//I'm not motivated enough to revise this. Prjectile code in general needs update.
-	// Maybe change this to use throw_at? ~ Z
-	var/turf/T = loc
-	var/turf/U = (istype(target, /atom/movable) ? target.loc : target)
-
-	if(!U || !T)
-		return
-	while(U && !istype(U,/turf))
-		U = U.loc
-	if(!istype(T, /turf))
-		return
-	if (U == T)
-		usr.bullet_act(new /obj/item/projectile/energy/neurotoxin(usr.loc), get_organ_target())
-		return
-	if(!istype(U, /turf))
-		return
-
-	var/obj/item/projectile/energy/neurotoxin/A = new /obj/item/projectile/energy/neurotoxin(usr.loc)
-	A.current = U
-	A.yo = U.y - T.y
-	A.xo = U.x - T.x
-	A.process()
-	return
-
-/mob/living/carbon/human/proc/resin() // -- TLE
-	set name = "Secrete Resin (75)"
-	set desc = "Secrete tough, malleable resin."
-	set category = "Abilities"
-
-	var/choice = input("Choose what you wish to shape.","Resin building") as null|anything in list("resin door","resin wall","resin membrane","resin nest") //would do it through typesof but then the player choice would have the type path and we don't want the internal workings to be exposed ICly - Urist
-	if(!choice)
-		return
-
-	if(!check_alien_ability(75,1,"resin spinner"))
-		return
-
-	visible_message("<span class='warning'><B>[src] vomits up a thick purple substance and begins to shape it!</B></span>", "<span class='alium'>You shape a [choice].</span>")
-	switch(choice)
-		if("resin door")
-			new /obj/machinery/door/unpowered/simple/resin(loc)
-		if("resin wall")
-			new /obj/structure/alien/resin/wall(loc)
-		if("resin membrane")
-			new /obj/structure/alien/resin/membrane(loc)
-		if("resin nest")
-			new /obj/structure/bed/nest(loc)
-	return
-
-mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in oview())
-	set name = "Infest (500)"
-	set desc = "Link a victim to the hivemind."
-	set category = "Abilities"
-
-	if(!M.Adjacent(src))
-		src << "<span class='warning'>They are too far away.</span>"
-		return
-
-	if(!M.mind)
-		src << "<span class='warning'>This mindless flesh adds nothing to the hive.</span>"
-		return
-
-	if(M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]))
-		src << "<span class='warning'>They are already part of the hive.</span>"
-		return
-
-	var/obj/item/organ/affecting = M.get_organ("chest")
-	if(!affecting || (affecting.status & ORGAN_ROBOT))
-		src << "<span class='warning'>This form is not compatible with our physiology.</span>"
-		return
-
-	src.visible_message("<span class='danger'>\The [src] crouches over \the [M], extending a hideous protuberance from its head!</span>")
-
-	if(!do_mob(src, M, 150))
-		return
-
-	if(!M || !M.Adjacent(src))
-		src << "<span class='warning'>They are too far away.</span>"
-		return
-
-	if(M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]) || !affecting || (affecting.status & ORGAN_ROBOT))
-		return
-
-	if(!check_alien_ability(500,1,"egg sac"))
-		return
-
-	src.visible_message("<span class='danger'>\The [src] regurgitates something into \the [M]'s torso!</span>")
-	M << "<span class='danger'>A hideous lump of alien mass strains your ribcage as it settles within!</span>"
-	var/obj/item/organ/xenos/hivenode/node = new(affecting)
-	node.replaced(M,affecting)
-
+// this is still a verb because its much easier to right click what you want and use the menu.
 /mob/living/carbon/human/proc/pry_open(obj/machinery/door/A in oview(1))
 	set name = "Pry Open Airlock"
 	set desc = "Pry open an airlock with your claws."
-	set category = "Abilities"
+	set category = null
 
 	if(!istype(A))
 		return
@@ -288,3 +78,296 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 	sleep(6)
 	A.stat |= BROKEN
 	A.open(1)
+
+
+/*********************
+* SPELL VERSIONS     *
+*********************/
+
+/spell/targeted/alien
+	name = "alien"
+	panel = "Hive Powers"
+
+/spell/targeted/alien/plasma
+	charge_type = Sp_HOLDVAR
+	holder_var_type = "Plasma"
+	var/requires_turf = 0
+	var/required_organ
+
+/spell/targeted/alien/plasma/take_charge(mob/user = user, var/skipcharge)
+	return 1
+/spell/targeted/alien/plasma/cast_check(skipcharge = 0,mob/user = usr)
+	if(!..(skipcharge,user))
+		return 0
+	if(!skipcharge)
+		if(!istype(user,/mob/living/carbon/human))
+			return 0
+		var/mob/living/carbon/human/H = user
+		if(!H.check_alien_ability(holder_var_amount,requires_turf, required_organ))
+			return 0
+	return 1
+
+
+/spell/targeted/alien/plasma/evolve
+	name = "Evolve"
+	desc = "Produce an internal egg sac capable of spawning children. Only one queen can exist at a time."
+	spell_flags = INCLUDEUSER
+	range = -1
+
+	holder_var_amount = 500
+
+	hud_state = "alien_evolve_drone"
+
+/spell/targeted/alien/plasma/evolve/check_charge(var/skipcharge, mob/user)
+	if(alien_queen_exists() && !skipcharge)
+		src << "<span class='notice'>We already have an active queen.</span>"
+		return 0
+	return 1
+
+/spell/targeted/alien/plasma/evolve/cast(var/list/targets, mob/user)
+	for(var/mob/M in targets)
+		var/mob/living/carbon/human/H = M //we can do this because we check if the target is human in the take_charge proc
+		H.visible_message("<span class='alium'><B>[src] begins to twist and contort!</B></span>", "<span class='alium'>You begin to evolve!</span>")
+		H.set_species("Xenomorph Queen")
+
+/spell/targeted/alien/plasma/resin
+	name = "Secrete Resin"
+	desc = "Secrete tough, malleable resin."
+	holder_var_amount = 75
+	requires_turf = 1
+	required_organ = "resin spinner"
+	spell_flags = INCLUDEUSER
+	range = -1
+
+	hud_state = "alien_resin"
+	var/target_type
+
+/spell/targeted/alien/plasma/resin/cast_check(skipcharge = 0, mob/user = usr)
+	if(!skipcharge)
+		target_type = input("Choose what you wish to shape.","Resin building") as null|anything in list("resin door","resin wall","resin membrane","resin nest") //would do it through typesof but then the player choice would have the type path and we don't want the internal workings to be exposed ICly - Urist
+		if(!target_type)
+			return 0
+	return ..()
+
+/spell/targeted/alien/plasma/resin/cast(var/list/targets, mob/user)
+	if(!target_type)
+		return
+	var/mob/target = targets[1]
+	target.visible_message("<span class='warning'><B>[target] vomits up a thick purple substance and begins to shape it!</B></span>", "<span class='alium'>You shape a [target_type].</span>")
+	switch(target_type)
+		if("resin door")
+			new /obj/machinery/door/unpowered/simple/resin(get_turf(target))
+		if("resin wall")
+			new /obj/structure/alien/resin/wall(get_turf(target))
+		if("resin membrane")
+			new /obj/structure/alien/resin/membrane(get_turf(target))
+		if("resin nest")
+			new /obj/structure/bed/nest(get_turf(target))
+
+/spell/targeted/alien/plasma/xeno_infest
+	name = "Infest"
+	desc = "Link a victim to the hivemind."
+	range = 1
+	spell_flags = SELECTABLE
+
+	holder_var_amount = 500
+	required_organ = "egg sac"
+	requires_turf = 1
+
+	compatible_mobs = list(/mob/living/carbon/human)
+	hud_state = "alien_evolve_praetorian"
+
+/spell/targeted/alien/plasma/xeno_infest/choose_targets(mob/user = usr, var/list/override_targets)
+	var/list/possible
+	if(override_targets.len)
+		possible = override_targets
+	else
+		possible = ..()
+
+	var/target = possible[1]
+	var/mob/living/carbon/human/M = target
+	if(!M.mind)
+		user << "<span class='warning'>This mindless flesh adds nothing to the hive.</span>"
+		return null
+	if(M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]))
+		user << "<span class='warning'>They are already part of the hive.</span>"
+		return null
+	var/obj/item/organ/affecting = M.get_organ("chest")
+	if(!affecting || (affecting.status & ORGAN_ROBOT))
+		user << "<span class='warning'>This form is not compatible with our physiology.</span>"
+		return null
+
+	return list(target)
+
+/spell/targeted/alien/plasma/xeno_infest/cast(var/list/targets, mob/user)
+	var/target = targets[1]
+	var/mob/living/carbon/human/M = target
+	user.visible_message("<span class='danger'>\The [user] crouches over \the [M], extending a hideous protuberance from its head!</span>")
+
+	if(!do_mob(user,M, 150))
+		return
+
+	if(!M || !M.Adjacent(user))
+		user << "<span class='warning'>They are too far away.</span>"
+		return
+
+	var/obj/item/organ/affecting = M.get_organ("chest")
+	if(M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]) || !affecting || (affecting.status & ORGAN_ROBOT)) //BUT WHAT IF THEY MAGICALLY CHANGE INTO ALIEN ROBOT?!?
+		return
+
+	user.visible_message("<span class='danger'>\The [user] regurgitates something into \the [M]'s torso!</span>")
+	M << "<span class='danger'>A hideous lump of alien mass strains your ribcage as it settles within!</span>"
+	var/obj/item/organ/xenos/hivenode/node = new(affecting)
+	node.replaced(M,affecting)
+
+/spell/targeted/alien/plasma/plant
+	name = "Plant"
+	desc = "Plants some alien weeds"
+	holder_var_amount = 50
+	range = -1
+	spell_flags = INCLUDEUSER
+	requires_turf = 1
+	required_organ = "resin spinner"
+	hud_state = "alien_plant"
+
+/spell/targeted/alien/plasma/plant/check_charge(var/skipcharge, mob/user)
+	if(locate(/obj/structure/alien/node) in get_turf(user))
+		user << "There is already a plant node here."
+		return 0
+	return 1
+
+/spell/targeted/alien/plasma/plant/cast(var/list/targets, mob/user)
+	for(var/mob/M in targets)
+		M.visible_message("<span class='alium'><B>[M] has planted some alien weeds!</B></span>")
+		new /obj/structure/alien/node(get_turf(M))
+
+/spell/targeted/alien/plasma/lay_egg
+	name = "Lay Egg"
+	desc = "Lay an egg to produce huggers to impregnate prey with."
+	spell_flags = INCLUDEUSER
+	range = -1
+	holder_var_amount = 75
+	requires_turf = 1
+	required_organ = "egg sac"
+	hud_state = "alien_egg"
+
+/spell/targeted/alien/plasma/lay_egg/check_charge(var/skipcharge, mob/user)
+	if(!config.alien_breeding_allowed && !skipcharge)
+		user << "You begin to lay an egg, but hesitate. You suspect it isn't allowed."
+		user.remove_spell(src)
+		return 0
+
+	if(locate(/obj/structure/alien/egg) in get_turf(user))
+		user << "There's already an egg here."
+		return 0
+	return 1
+
+
+/spell/targeted/alien/plasma/lay_egg/cast(var/list/targets, mob/user)
+	for(var/mob/M in targets)
+		M.visible_message("<span class='alium'><B>[M] has laid an egg!</B></span>")
+		new /obj/structure/alien/egg(get_turf(M))
+
+/spell/hand/alien
+	hand_name = "alien ability"
+	panel = "Hive Powers"
+	spell_delay = 10
+	spell_flags = 0
+	move_delay = 5
+	empty_hand_message = "You must be unarmed! Gripping things distracts you!"
+	custom_stat = 1
+	charge_max = 0
+	var/plasma_cost = 0
+	var/organ_requirement
+	var/turf_requirement = 0
+
+/spell/hand/alien/get_stat()
+	if(!plasma_cost)
+		return "Free"
+	return "[plasma_cost] Plasma per"
+
+/spell/hand/alien/take_hand_charge(var/mob/user, var/obj/item/magic_hand/hand)
+	if(!istype(user,/mob/living/carbon/human))
+		return 0
+	var/mob/living/carbon/human/H = user
+	if(!H.check_alien_ability(plasma_cost,turf_requirement,organ_requirement))
+		return 0
+	return 1
+
+/spell/hand/alien/neurotoxin
+	name = "neurotoxin"
+	compatible_targets = list(/atom)
+	plasma_cost = 50
+	organ_requirement = "acid gland"
+	not_ready_message = "You need more time to regenerate acid!"
+	hud_state = "alien_neurotoxin"
+
+/spell/hand/alien/neurotoxin/cast_hand(var/atom/A, var/mob/living/user, var/obj/item/magic_hand/hand)
+	user.visible_message("<span class='warning'>[user] spits neurotoxin!</span>", "<span class='alium'>You spit neurotoxin.</span>")
+	var/obj/item/projectile/energy/neurotoxin/N = new/obj/item/projectile/energy/neurotoxin(user.loc)
+	N.launch(A,user.get_organ_target())
+	return 1
+
+/spell/hand/alien/corrosive
+	name = "Corrosive Acid"
+	compatible_targets = list(/obj, /turf)
+	plasma_cost = 200
+	organ_requirement = "acid gland"
+	move_delay = 10
+	not_ready_message = "You need more time to regenerate your corrosive acid!"
+	range = 1
+
+	hud_state = "alien_acid"
+
+/spell/hand/alien/corrosive/valid_target(var/atom/a,var/mob/user)
+	if(!..())
+		return 0
+
+	var/can_melt = 1
+	if(istype(a,/obj))
+		var/obj/O = a
+		if(O.unacidable)
+			can_melt = 0
+	else
+		if(istype(a,/turf/simulated/wall))
+			var/turf/simulated/wall/W = a
+			if(W.material.flags & MATERIAL_UNMELTABLE)
+				can_melt = 0
+		else if(istype(a,/turf/simulated/floor))
+			var/turf/simulated/floor/F = a
+			if(F.flooring && (F.flooring.flags & TURF_ACID_IMMUNE))
+				can_melt = 0
+	if(!can_melt)
+		src << "<span class='alium'>You cannot dissolve this object.</span>"
+	return can_melt
+
+/spell/hand/alien/corrosive/cast_hand(var/atom/A, var/mob/living/user, var/obj/item/magic_hand/hand)
+	new /obj/effect/acid(get_turf(A), A)
+	user.visible_message("<span class='alium'><B>[usr] vomits globs of vile stuff all over [A]. It begins to sizzle and melt under the bubbling mess of acid!</B></span>")
+
+/spell/hand/alien/transfer_plasma
+	name = "Transfer Plasma"
+	desc = "Transfer Plasma to another alien."
+
+	plasma_cost = 20
+	range = 1
+	spell_delay = 5
+	move_delay = 5
+	compatible_targets = list(/mob/living/carbon/human)
+	hud_state = "alien_transfer"
+
+/spell/hand/alien/transfer_plasma/valid_target(var/atom/a,var/mob/user)
+	if(!..())
+		return 0
+	var/mob/living/carbon/human/target = a
+	var/obj/item/organ/xenos/plasmavessel/ves = target.internal_organs_by_name["plasma vessel"]
+	if(!istype(ves))
+		user << "<span class='alium'>Their plasma vessel is missing!</span>"
+		return 0
+	return 1
+
+/spell/hand/alien/transfer_plasma/cast_hand(var/atom/A, var/mob/living/user, var/obj/item/magic_hand/hand)
+	var/mob/living/carbon/human/target = A
+	target.gain_plasma(plasma_cost)
+	target << "<span class='alium'>[user] has transfered [plasma_cost] plasma to you.</span>"
+	user << "<span class='alium'>You have transferred [plasma_cost] plasma to [target].</span>"

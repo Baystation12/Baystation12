@@ -43,8 +43,8 @@
 
 	reagent_tag = IS_VOX
 
-	inherent_verbs = list(
-		/mob/living/carbon/human/proc/leap
+	inherent_spells = list(
+		/spell/hand/leap/vox = /obj/screen/movable/spell_master/genetic
 		)
 
 	has_organ = list(
@@ -95,6 +95,11 @@
 	cold_level_3 = 60
 
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick,  /datum/unarmed_attack/claws, /datum/unarmed_attack/bite)
+
+	inherent_spells = list(
+		/spell/hand/leap/vox/pariah = /obj/screen/movable/spell_master/genetic
+		)
+
 
 	// Pariahs have no stack.
 	has_organ = list(

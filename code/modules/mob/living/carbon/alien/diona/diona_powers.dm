@@ -1,33 +1,33 @@
-//Verbs after this point.
-/mob/living/carbon/alien/diona/proc/merge()
+/spell/free/merge
+	name = "Merge with gestalt"
+	desc = "Merge with another diona."
+	hud_state = "alien_merge"
+	spell_flags = 0
 
-	set category = "Abilities"
-	set name = "Merge with gestalt"
-	set desc = "Merge with another diona."
-
-	if(stat == DEAD || paralysis || weakened || stunned || restrained())
-		return
-
-	if(istype(src.loc,/mob/living/carbon))
-		src.verbs -= /mob/living/carbon/alien/diona/proc/merge
-		return
-
+/spell/free/merge/choose_targets()
 	var/list/choices = list()
-	for(var/mob/living/carbon/C in view(1,src))
+	for(var/mob/living/carbon/human/H in view(1,holder))
+		if(!holder.Adjacent(H) || !(H.client))
+			continue
 
-		if(!(src.Adjacent(C)) || !(C.client)) continue
+		if(H.species && H.species.name == "Diona")
+			choices += H
 
-		if(istype(C,/mob/living/carbon/human))
-			var/mob/living/carbon/human/D = C
-			if(D.species && D.species.name == "Diona")
-				choices += C
+	return choices
 
-	var/mob/living/M = input(src,"Who do you wish to merge with?") in null|choices
+/spell/free/merge/cast(var/list/targets, var/mob/user)
+	var/mob/living/M = input(user, "Who do you wish to merge with?") in null|targets
+	if(!istype(user,/mob/living/carbon/alien/diona))
+		return
+	var/mob/living/carbon/alien/diona/D = user
 
 	if(!M)
-		src << "There is nothing nearby to merge with."
-	else if(!do_merge(M))
-		src << "You fail to merge with \the [M]..."
+		user << "There is nothing nearby to merge with."
+	else if(!D.do_merge(M))
+		user << "You fail to merge with \the [M]"
+		return
+	user.remove_spell(src)
+
 
 /mob/living/carbon/alien/diona/proc/do_merge(var/mob/living/carbon/human/H)
 	if(!istype(H) || !src || !(src.Adjacent(H)))
@@ -36,31 +36,32 @@
 	H.status_flags |= PASSEMOTES
 	src << "You feel your being twine with that of \the [H] as you merge with its biomass."
 	loc = H
-	verbs += /mob/living/carbon/alien/diona/proc/split
-	verbs -= /mob/living/carbon/alien/diona/proc/merge
+	add_spell(new /spell/free/split,0, /obj/screen/movable/spell_master/genetic)
 	return 1
 
-/mob/living/carbon/alien/diona/proc/split()
+/spell/free/split
+	name = "Split from gestalt"
+	desc = "Split away from your gestalt as a lone nymph."
+	spell_flags = 0
+	hud_state = "wiz_diona"
 
-	set category = "Abilities"
-	set name = "Split from gestalt"
-	set desc = "Split away from your gestalt as a lone nymph."
+/spell/free/split/choose_targets()
+	if(!istype(holder.loc,/mob/living/carbon))
+		var/mob/M = holder
+		M.remove_spell(src)
+		return null
 
-	if(stat == DEAD || paralysis || weakened || stunned || restrained())
-		return
+	return list(holder)
 
-	if(!(istype(src.loc,/mob/living/carbon)))
-		src.verbs -= /mob/living/carbon/alien/diona/proc/split
-		return
+/spell/free/split/cast(var/list/targets, var/mob/user)
+	var/mob/target = targets[1]
 
-	src.loc << "You feel a pang of loss as [src] splits away from your biomass."
-	src << "You wiggle out of the depths of [src.loc]'s biomass and plop to the ground."
-
-	var/mob/living/M = src.loc
-
-	src.loc = get_turf(src)
-	src.verbs -= /mob/living/carbon/alien/diona/proc/split
-	src.verbs += /mob/living/carbon/alien/diona/proc/merge
+	target.loc << "You feel a pang of loss as [target] splits away from your biomass."
+	target << "You wiggle out of the depths of [target.loc]'s biomass and plop to the ground."
+	var/mob/living/M = target.loc
+	target.loc = get_turf(target)
+	target.remove_spell(src)
+	target.add_spell(new /spell/free/merge, 0, /obj/screen/movable/spell_master/genetic)
 
 	if(istype(M))
 		for(var/atom/A in M.contents)

@@ -8,7 +8,13 @@
 		src << "You are not yet ready for your growth..."
 		return null
 
-	src.split()
+	if(istype(src.loc,/mob/living/carbon))
+		var/mob/living/carbon/C = src.loc
+		if(src in C.stomach_contents)
+			C.gib() //sudden diona growth means bad time for eater
+		var/spell/free/split/S = locate() in spell_list
+		if(S)
+			S.perform(src)
 
 	if(istype(loc,/obj/item/weapon/holder/diona))
 		var/obj/item/weapon/holder/diona/L = loc

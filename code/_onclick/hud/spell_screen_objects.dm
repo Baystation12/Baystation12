@@ -11,6 +11,13 @@
 	screen_loc = ui_spell_master
 
 	var/mob/spell_holder
+	var/spell_base //default icon spell base (Icons in /icons/mob/screen_spells.dmi)
+	var/tab_name //overridden tab name. All spells will be in this tab if this is set.
+
+/obj/screen/movable/spell_master/New()
+	..()
+	overlays.len = 0
+	overlays.Add(closed_state)
 
 /obj/screen/movable/spell_master/Destroy()
 	..()
@@ -100,17 +107,24 @@
 	spell.connected_button = newscreen
 
 	if(!spell.override_base) //if it's not set, we do basic checks
-		if(spell.spell_flags & CONSTRUCT_CHECK)
-			newscreen.spell_base = "const" //construct spells
+		if(spell_base)
+			newscreen.spell_base = spell_base
 		else
-			newscreen.spell_base = "wiz" //wizard spells
+			if(spell.spell_flags & CONSTRUCT_CHECK)
+				newscreen.spell_base = "const" //construct spells
+			else
+				newscreen.spell_base = "wiz" //wizard spells
 	else
 		newscreen.spell_base = spell.override_base
+
+	if(tab_name)
+		spell.panel = tab_name
+
 	newscreen.name = spell.name
 	newscreen.update_charge(1)
 	spell_objects.Add(newscreen)
 	if(spell_holder.client)
-		toggle_open(2) //forces the icons to refresh on screen
+		toggle_open(1) //forces the icons to refresh on screen
 
 /obj/screen/movable/spell_master/proc/remove_spell(var/spell/spell)
 	qdel(spell.connected_button)
@@ -135,15 +149,32 @@
 	for(var/obj/screen/spell/spell in spell_objects)
 		spell.update_charge(forced)
 
+/obj/screen/movable/spell_master/constr
+	spell_base = "const"
+	icon_state = "const_spell_ready"
+
 
 /obj/screen/movable/spell_master/genetic
-	name = "Mutant Powers"
+	name = "Genetic Powers"
 	icon_state = "genetic_spell_ready"
 
 	open_state = "genetics_open"
 	closed_state = "genetics_closed"
 
 	screen_loc = ui_genetic_master
+	spell_base = "genetic"
+	tab_name = "Genetic"
+
+/obj/screen/movable/spell_master/alien
+	name = "Hive Abilities"
+	icon_state = "alien_spell_ready"
+
+	open_state = "alien_open"
+	closed_state = "alien_closed"
+
+	screen_loc = ui_pressure
+	spell_base = "alien"
+	tab_name = "Hive Powers"
 
 //////////////ACTUAL SPELLS//////////////
 //This is what you click to cast things//

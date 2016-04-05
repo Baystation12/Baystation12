@@ -11,44 +11,44 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	icon_state = "spell"
 	var/next_spell_time = 0
 	var/spell/hand/hand_spell
-	var/casts = 0
 
 /obj/item/magic_hand/New(var/spell/hand/S)
 	hand_spell = S
-	name = "[name] ([S.name])"
-	casts = S.casts
+	name = "[S.hand_name] ([S.name])"
+	icon = S.hand_icon
 	icon_state = S.hand_state
 
-/obj/item/magic_hand/attack() //can't be used to actually bludgeon things
+/obj/item/magic_hand/attack(mob/living/M, mob/living/user, var/target_zone) //can't be used to actually bludgeon things
+	afterattack(M,user)
 	return 1
 
 /obj/item/magic_hand/afterattack(atom/A, mob/living/user)
 	if(!hand_spell) //no spell? Die.
 		user.drop_from_inventory(src)
-
+		return
 	if(!hand_spell.valid_target(A,user))
 		return
 	if(world.time < next_spell_time)
-		user << "<span class='warning'>The spell isn't ready yet!</span>"
+		user << "<span class='warning'>[hand_spell.not_ready_message]</span>"
 		return
 	if(user.a_intent == I_HELP)
-		user << "<span class='notice'>You decide against casting this spell as your intent is set to help.</span>"
+		user << "<span class='notice'>[hand_spell.intent_help_message]</span>"
 		return
 
-	if(hand_spell.cast_hand(A,user))
+	if(!hand_spell.take_hand_charge(user, src))
+		user.drop_from_inventory(src)
+		return
+	if(hand_spell.cast_hand(A,user,src))
+		if(!hand_spell) //in case cast_hand deletes it
+			return
 		next_spell_time = world.time + hand_spell.spell_delay
-		casts--
 		if(hand_spell.move_delay)
 			user.setMoveCooldown(hand_spell.move_delay)
 		if(hand_spell.click_delay)
 			user.setClickCooldown(hand_spell.move_delay)
-		if(!casts)
-			user.drop_from_inventory(src)
-			return
-		user << "[casts]/[hand_spell.casts] charges left."
 
-/obj/item/magic_hand/throw_at() //no throwing pls
-	usr.drop_from_inventory(src)
+/obj/item/magic_hand/throw_at(atom/target, range, speed, thrower) //no throwing pls
+	src.afterattack(target,thrower)
 
 /obj/item/magic_hand/dropped() //gets deleted on drop
 	loc = null

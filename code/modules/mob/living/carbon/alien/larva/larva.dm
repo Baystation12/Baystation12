@@ -8,6 +8,11 @@
 	maxHealth = 25
 	health = 25
 
+	base_spells = list(/spell/evolve/larva = /obj/screen/movable/spell_master/alien,
+					/spell/attach_host = /obj/screen/movable/spell_master/alien,
+					/spell/free/hide = /obj/screen/movable/spell_master/alien
+					)
+
 /mob/living/carbon/alien/larva/New()
 	..()
 	add_language("Xenomorph") //Bonus language.

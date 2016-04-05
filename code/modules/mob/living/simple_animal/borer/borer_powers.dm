@@ -168,7 +168,7 @@
 	if(host.stat == 2)
 		H.verbs |= /mob/living/carbon/human/proc/jumpstart
 
-	H.verbs |= /mob/living/carbon/human/proc/psychic_whisper
+//	H.verbs |= /mob/living/carbon/human/proc/psychic_whisper
 	H.verbs |= /mob/living/carbon/human/proc/tackle
 	H.verbs |= /mob/living/carbon/proc/spawn_larvae
 

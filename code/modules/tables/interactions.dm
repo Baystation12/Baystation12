@@ -72,6 +72,9 @@
 
 /obj/structure/table/attackby(obj/item/W as obj, mob/user as mob)
 	if (!W) return
+	if(istype(W,/obj/item/magic_hand))
+		return
+
 
 	// Handle harm intent grabbing/tabling.
 	if(istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)

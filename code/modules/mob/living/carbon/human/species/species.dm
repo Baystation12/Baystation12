@@ -117,6 +117,7 @@
 
 	// Body/form vars.
 	var/list/inherent_verbs 	  // Species-specific verbs.
+	var/list/inherent_spells	  // Species-specific spells. Organized as: (spell path = spell master path)
 	var/has_fine_manipulation = 1 // Can use small items.
 	var/siemens_coefficient = 1   // The lower, the thicker the skin and better the insulation.
 	var/darksight = 2             // Native darksight distance.
@@ -285,8 +286,28 @@
 			H.verbs |= verb_path
 	return
 
+/datum/species/proc/add_inherent_spells(var/mob/living/carbon/human/H)
+	if(inherent_spells)
+		for(var/spell_path in inherent_spells)
+			if(!ispath(spell_path))
+				CRASH("Invalid path in [src] inherent spells.")
+				return
+			H.add_spell(new spell_path, 0, inherent_spells[spell_path])
+
+/datum/species/proc/remove_inherent_spells(var/mob/living/carbon/human/H)
+	if(inherent_spells)
+		for(var/spell_path in inherent_spells)
+			if(!ispath(spell_path))
+				CRASH("Invalid path in [src] inherent spells.")
+				return
+			for(var/spell/S in H.spell_list)
+				if(istype(S,spell_path))
+					H.remove_spell(S)
+					break
+
 /datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
 	add_inherent_verbs(H)
+	add_inherent_spells(H)
 	H.mob_bump_flag = bump_flag
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
