@@ -303,8 +303,7 @@
 				if(istype(W, /obj/item/weapon/crowbar))
 					user << "<span class='notice'>You struggle to pry off the outer sheath.</span>"
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-					sleep(100)
-					if(!istype(src, /turf/simulated/wall) || !user || !W || !T )	return
+					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || !user || !W || !T )	return
 					if(user.loc == T && user.get_active_hand() == W )
 						user << "<span class='notice'>You pry off the outer sheath.</span>"
 						dismantle_wall()
