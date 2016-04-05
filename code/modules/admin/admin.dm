@@ -817,6 +817,16 @@ proc/admin_notice(var/message, var/rights)
 	message_admins("[key_name_admin(usr)] toggled Aliens [config.aliens_allowed ? "on" : "off"].", 1)
 	feedback_add_details("admin_verb","TA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/admins/proc/toggle_alien_eggs()
+	set category = "Server"
+	set desc="Toggle xenomorph egg laying"
+	set name="Toggle Alien Eggs"
+	config.alien_eggs_allowed = !config.alien_eggs_allowed
+	log_admin("[key_name(usr)] toggled Alien Egg Laying to [config.alien_eggs_allowed].")
+	message_admins("[key_name_admin(usr)] toggled Alien Egg Laying [config.alien_eggs_allowed ? "on" : "off"].", 1)
+	feedback_add_details("admin_verb","AEA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+
 /datum/admins/proc/toggle_space_ninja()
 	set category = "Server"
 	set desc="Toggle space ninjas spawning."

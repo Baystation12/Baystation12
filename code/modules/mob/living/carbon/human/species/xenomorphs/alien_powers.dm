@@ -83,7 +83,7 @@
 	set desc = "Lay an egg to produce huggers to impregnate prey with."
 	set category = "Abilities"
 
-	if(!config.aliens_allowed)
+	if(!config.alien_eggs_allowed)
 		src << "You begin to lay an egg, but hesitate. You suspect it isn't allowed."
 		verbs -= /mob/living/carbon/human/proc/lay_egg
 		return
@@ -283,8 +283,11 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 	if(!do_after(src,120,A))
 		return
 
-	src.visible_message("\The [src] slices \the [A]'s controls, ripping it open!")
+	if(!A.density)
+		return
+
 	A.do_animate("spark")
 	sleep(6)
 	A.stat |= BROKEN
-	A.open(1)
+	var/check = A.open(1)
+	src.visible_message("\The [src] slices \the [A]'s controls[check ? ", ripping it open!" : ", breaking it!"]")
