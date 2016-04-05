@@ -2041,3 +2041,10 @@
 	result = "luminol"
 	required_reagents = list("hydrogen" = 2, "carbon" = 2, "ammonia" = 2)
 	result_amount = 6
+
+/datum/chemical_reaction/kriket
+	name = "Krikit"
+	id = "krikit"
+	result = "krikit"
+	required_reagents = list("phoron" = 1, "fuel" = 1, "beer" = 1, "psilocybin" = 1)
+	result_amount = 4

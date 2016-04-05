@@ -567,3 +567,35 @@
 	taste_description = "sludge"
 	reagent_state = LIQUID
 	color = "#535E66"
+
+
+/datum/reagent/toxin/krikit
+	name = "Krikit"
+	id = "krikit"
+	description = "Named after its maker, a disgusting poison that causes a unique high."
+	strength = 5
+	taste_description = "a Vox's shriek"
+	reagent_state = LIQUID
+	color = "#550000"
+	overdose = 5
+	metabolism = REM/2 //0.1
+
+/datum/reagent/toxin/krikit/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(alien == IS_VOX) //vox drink this stuff like nobody's business.
+		removed *= 0.75
+	..(M,alien,removed)
+
+//it basically gets them so high they don't feel pain
+/datum/reagent/toxin/krikit/overdose(var/mob/living/carbon/M, var/alien)
+	if(alien == IS_DIONA)
+		return
+	M.add_chemical_effect(CE_PAINKILLER,200)
+	M.druggy = max(M.druggy,50)
+	if(prob(15))
+		var/message = pick("You feel great!", "This is amazing!", "You feel so warm!", "Nothing can stop you!!")
+		M << "<font color='blue' size='[rand(2,5)]'><b>[message]</b></font>"
+	M.AdjustParalysis(-1)
+	M.AdjustStunned(-1)
+	M.AdjustWeakened(-1)
+	if(alien != IS_VOX)
+		M.hallucination = max(30,M.hallucination)
