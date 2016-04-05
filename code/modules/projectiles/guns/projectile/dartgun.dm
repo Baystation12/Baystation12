@@ -6,7 +6,7 @@
 	embed = 1 //the dart is shot fast enough to pierce space suits, so I guess splintering inside the target can be a thing. Should be rare due to low damage.
 	var/reagent_amount = 15
 	kill_count = 15 //shorter range
-	
+
 	muzzle_type = null
 
 /obj/item/projectile/bullet/chemdart/New()
@@ -63,7 +63,7 @@
 	var/container_type = /obj/item/weapon/reagent_containers/glass/beaker
 	var/list/starting_chems = null
 
-/obj/item/weapon/gun/projectile/dartgun/dartgun/New()
+/obj/item/weapon/gun/projectile/dartgun/New()
 	..()
 	if(starting_chems)
 		for(var/chem in starting_chems)
@@ -198,6 +198,14 @@
 /obj/item/weapon/gun/projectile/dartgun/vox
 	name = "alien dart gun"
 	desc = "A small gas-powered dartgun, fitted for nonhuman hands."
+
+/obj/item/weapon/gun/projectile/dartgun/vox/special_check(user)
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species && H.species.get_bodytype() != "Vox")
+			user << "<span class='warning'>\The [src] does not respond to you!</span>"
+			return 0
+	return ..()
 
 /obj/item/weapon/gun/projectile/dartgun/vox/medical
 	starting_chems = list("kelotane","bicaridine","anti_toxin")

@@ -126,13 +126,17 @@
 // Pariahs are really gross.
 /datum/species/vox/pariah/handle_environment_special(var/mob/living/carbon/human/H)
 	if(prob(5))
+		var/datum/gas_mixture/vox = H.loc.return_air()
 		var/stink_range = rand(3,5)
 		for(var/mob/living/M in range(H,stink_range))
 			if(M.stat || M == H || issilicon(M) || isbrain(M))
 				continue
+			var/datum/gas_mixture/mob_air = M.loc.return_air()
+			if(!vox || !mob_air || vox != mob_air) //basically: is our gasses their gasses? If so, smell. If not, how can smell?
+				continue
 			var/mob/living/carbon/human/target = M
 			if(istype(target))
-				if(target.internals)
+				if(target.internal)
 					continue
 				if(target.head && (target.head.body_parts_covered & FACE) && (target.head.flags & AIRTIGHT))
 					continue

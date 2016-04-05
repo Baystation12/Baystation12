@@ -47,9 +47,7 @@
 	metabolism = REM * 0.5
 
 /datum/reagent/ammonia/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_VOX)
-		M.adjustOxyLoss(-removed * 10)
-	else if(alien != IS_DIONA)
+	if(alien != IS_DIONA)
 		M.adjustToxLoss(removed * 1.5)
 
 /datum/reagent/carbon

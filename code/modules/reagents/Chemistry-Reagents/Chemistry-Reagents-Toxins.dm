@@ -53,6 +53,12 @@
 	strength = 30
 	touch_met = 5
 
+/datum/reagent/toxin/phoron/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_VOX)
+		M.adjustOxyLoss(-removed * 10)
+	else
+		..()
+
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 5)
