@@ -31,6 +31,11 @@
 
 	if(faction_verb && player.current)
 		player.current.verbs |= faction_verb
+		
+	if(config.objectives_disabled == CONFIG_OBJECTIVE_VERB)
+		player.current.verbs += /mob/proc/add_objectives
+
+	player.current.client.verbs += /client/proc/aooc
 
 	spawn(1 SECOND) //Added a delay so that this should pop up at the bottom and not the top of the text flood the new antag gets.
 		player.current << "<span class='notice'>Once you decide on a goal to pursue, you can optionally display it to \
