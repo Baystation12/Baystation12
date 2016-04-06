@@ -1576,6 +1576,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	name = "Random Gygax exosuit modkit"
 
 
+/datum/supply_packs/pressure_pump
 	contains = list(/obj/machinery/atmospherics/binary/pump/high_power/pressure)
 	name = "High pressure engine pump"
 	cost = 30
