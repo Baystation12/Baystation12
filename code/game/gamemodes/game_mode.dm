@@ -564,11 +564,21 @@ proc/get_nt_opposed()
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
 		rules aside from those without explicit exceptions apply to antagonists.</b>"
 
+
+//BASICALLY: Are we an antag template in the round? No? Then assume we are ERT/actor/etc
+/proc/can_show_generic(var/datum/mind/player)
+	for(var/a in ticker.mode.antag_templates)
+		var/datum/antagonist/antag = a
+		if(antag.is_antagonist(player))
+			return 1
+	return 0
+
+
 /proc/show_objectives(var/datum/mind/player)
 
 	if(!player || !player.current) return
 
-	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
+	if((config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len) && can_show_generic(player))
 		show_generic_antag_text(player)
 		return
 
