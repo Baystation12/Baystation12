@@ -193,6 +193,7 @@
 		if(mind)
 			mind.ambitions = sanitize(new_ambition)
 			mind.current << "<span class='warning'>Your ambitions have been changed by higher powers, they are now: [mind.ambitions]</span>"
+		log_and_message_admins("made [key_name(mind.current)]'s ambitions be '[mind.ambitions]'.")
 
 	else if (href_list["obj_edit"] || href_list["obj_add"])
 		var/datum/objective/objective
