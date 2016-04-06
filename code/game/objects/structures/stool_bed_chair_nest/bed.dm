@@ -258,7 +258,7 @@
 	..()
 	move_buckled()
 
-/obj/structure/bed/roller/move_buckled()
+/obj/structure/bed/roller/proc/move_buckled()
 	if(buckled_mob)
 		if(buckled_mob.buckled == src)
 			buckled_mob.forceMove(src.loc)
