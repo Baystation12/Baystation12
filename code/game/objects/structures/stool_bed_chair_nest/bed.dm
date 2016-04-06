@@ -255,7 +255,7 @@
 	move_buckled()
 	
 /obj/structure/bed/roller/forceMove()
- 	..()
+	..()
 	move_buckled()
 
 /obj/structure/bed/roller/move_buckled()
