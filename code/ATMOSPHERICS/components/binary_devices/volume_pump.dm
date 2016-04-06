@@ -17,3 +17,10 @@
 		icon_state = "off"
 	else
 		icon_state = "[use_power ? "on" : "off"]"
+
+
+/obj/machinery/atmospherics/binary/pump/high_power/pressure
+	name = "high pressure gas pump"
+	desc = "A pump with the ability to pump more pressure through it than most pumps."
+
+	max_pressure_setting = 100000 //kPa

@@ -1574,3 +1574,12 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 		/obj/item/device/kit/paint/gygax/recitence
 		)
 	name = "Random Gygax exosuit modkit"
+
+
+	contains = list(/obj/machinery/atmospherics/binary/pump/high_power/pressure)
+	name = "High pressure engine pump"
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper high pressure pump crate"
+	group = "Engineering"
+	access = access_ce
