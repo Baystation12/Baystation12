@@ -43,3 +43,7 @@ var/datum/antagonist/ert/ert
 
 	create_id(role_text, player)
 	return 1
+
+
+/datum/antagonist/ert/show_objectives()
+	return

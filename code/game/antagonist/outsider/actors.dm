@@ -38,6 +38,8 @@ var/datum/antagonist/actor/actor
 
 	return 1
 
+/datum/antagonist/actor/show_objectives()
+	return
 
 /client/verb/join_as_actor()
 	set category = "IC"

@@ -218,3 +218,16 @@
 		player.special_role = null
 	pending_antagonists.Cut()
 	candidates.Cut()
+
+/datum/antagonist/proc/show_objectives(var/datum/mind/player)
+	if(!player || !player.current) return
+
+	if((config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len))
+		show_generic_antag_text(player)
+		return
+
+	var/obj_count = 1
+	player.current << "<span class='notice'>Your current objectives:</span>"
+	for(var/datum/objective/objective in player.objectives)
+		player.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
+		obj_count++
