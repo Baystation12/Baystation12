@@ -821,6 +821,9 @@ proc/admin_notice(var/message, var/rights)
 	set category = "Server"
 	set desc="Toggle xenomorph egg laying"
 	set name="Toggle Alien Eggs"
+
+	if(!check_rights(R_ADMIN))
+		return
 	config.alien_eggs_allowed = !config.alien_eggs_allowed
 	log_admin("[key_name(usr)] toggled Alien Egg Laying to [config.alien_eggs_allowed].")
 	message_admins("[key_name_admin(usr)] toggled Alien Egg Laying [config.alien_eggs_allowed ? "on" : "off"].", 1)
