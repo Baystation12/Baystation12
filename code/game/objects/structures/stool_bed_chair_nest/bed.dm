@@ -220,7 +220,7 @@
 		var/obj/item/roller_holder/RH = W
 		if(!RH.held)
 			user << "<span class='notice'>You collect the roller bed.</span>"
-			src.loc = RH
+			src.forceMove(RH)
 			RH.held = src
 			return
 
@@ -252,9 +252,16 @@
 
 /obj/structure/bed/roller/Move()
 	..()
+	move_buckled()
+	
+/obj/structure/bed/roller/forceMove()
+ 	..()
+	move_buckled()
+
+/obj/structure/bed/roller/move_buckled()
 	if(buckled_mob)
 		if(buckled_mob.buckled == src)
-			buckled_mob.loc = src.loc
+			buckled_mob.forceMove(src.loc)
 		else
 			buckled_mob = null
 
