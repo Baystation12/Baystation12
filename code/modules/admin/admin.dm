@@ -812,6 +812,9 @@ proc/admin_notice(var/message, var/rights)
 	set category = "Server"
 	set desc="Toggle alien mobs"
 	set name="Toggle Aliens"
+	if(!check_rights(R_ADMIN))
+		return
+
 	config.aliens_allowed = !config.aliens_allowed
 	log_admin("[key_name(usr)] toggled Aliens to [config.aliens_allowed].")
 	message_admins("[key_name_admin(usr)] toggled Aliens [config.aliens_allowed ? "on" : "off"].", 1)
@@ -834,6 +837,9 @@ proc/admin_notice(var/message, var/rights)
 	set category = "Server"
 	set desc="Toggle space ninjas spawning."
 	set name="Toggle Space Ninjas"
+	if(!check_rights(R_ADMIN))
+		return
+
 	config.ninjas_allowed = !config.ninjas_allowed
 	log_admin("[key_name(usr)] toggled Space Ninjas to [config.ninjas_allowed].")
 	message_admins("[key_name_admin(usr)] toggled Space Ninjas [config.ninjas_allowed ? "on" : "off"].", 1)
