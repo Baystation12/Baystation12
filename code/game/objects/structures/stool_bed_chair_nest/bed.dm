@@ -274,7 +274,7 @@
 /obj/structure/bed/roller/buckle_mob()
 	. = ..()
 	if(.)
-		moved_event.register(src, src, /obj/structure/bed/proc/move_buckled)
+		moved_event.register(src, src, /obj/structure/bed/roller/proc/move_buckled)
 
 /obj/structure/bed/roller/unbuckle_mob()
 	moved_event.unregister(src, src)
