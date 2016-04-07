@@ -158,6 +158,7 @@
 #include "code\controllers\ProcessScheduler\core\processScheduler.dm"
 #include "code\datums\ai_law_sets.dm"
 #include "code\datums\ai_laws.dm"
+#include "code\datums\alternate_appearance.dm"
 #include "code\datums\browser.dm"
 #include "code\datums\category.dm"
 #include "code\datums\computerfiles.dm"
