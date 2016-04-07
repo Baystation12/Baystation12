@@ -250,14 +250,6 @@
 	held = null
 
 
-/obj/structure/bed/roller/Move()
-	..()
-	move_buckled()
-	
-/obj/structure/bed/roller/forceMove()
-	..()
-	move_buckled()
-
 /obj/structure/bed/roller/proc/move_buckled()
 	if(buckled_mob)
 		if(buckled_mob.buckled == src)
@@ -277,6 +269,15 @@
 		density = 0
 		icon_state = "down"
 
+	return ..()
+
+/obj/structure/bed/roller/buckle_mob()
+	. = ..()
+	if(.)
+		moved_event.register(src, src, /obj/structure/bed/proc/move_buckled)
+
+/obj/structure/bed/roller/unbuckle_mob()
+	moved_event.unregister(src, src)
 	return ..()
 
 /obj/structure/bed/roller/MouseDrop(over_object, src_location, over_location)
