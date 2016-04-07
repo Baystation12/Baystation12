@@ -2,8 +2,8 @@
 "ab" = (/turf/simulated/floor/airless/ceiling,/area/space)
 "ac" = (/turf/simulated/wall,/area/crew_quarters/heads/hos)
 "ad" = (/turf/simulated/wall,/area/hallway/z4/aft)
-"ae" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/bridge)
-"af" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/bridge)
+"ae" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/bridge)
+"af" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/bridge)
 "ag" = (/obj/structure/closet/secure_closet/hos,/turf/simulated/floor/tiled/dark,/area/crew_quarters/heads/hos)
 "ah" = (/obj/structure/filingcabinet,/turf/simulated/floor/tiled/dark,/area/crew_quarters/heads/hos)
 "ai" = (/obj/machinery/computer/secure_data,/turf/simulated/floor/tiled/dark,/area/crew_quarters/heads/hos)
@@ -11,7 +11,7 @@
 "ak" = (/turf/simulated/wall,/area/hallway/z4/waiting)
 "al" = (/obj/structure/ladder,/turf/simulated/floor/tiled/white,/area/hallway/z4/aft)
 "am" = (/turf/simulated/floor/plating,/area/hallway/z4/aft)
-"an" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/bridge)
+"an" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/bridge)
 "ao" = (/turf/simulated/floor/tiled,/area/bridge)
 "ap" = (/obj/structure/table/steel_reinforced,/obj/machinery/recharger,/turf/simulated/floor/tiled/dark,/area/crew_quarters/heads/hos)
 "aq" = (/turf/simulated/floor/tiled/dark,/area/crew_quarters/heads/hos)
@@ -61,7 +61,7 @@
 "bi" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall{icon_state = "swall_c"; dir = 4},/area/space)
 "bj" = (/obj/structure/window/shuttle,/obj/structure/grille,/turf/simulated/shuttle/plating,/area/space)
 "bk" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall{icon_state = "swall_c"; dir = 2; layer = 2},/area/space)
-"bl" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/bridge)
+"bl" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/bridge)
 "bm" = (/obj/structure/table/reinforced,/obj/machinery/recharger,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled,/area/bridge)
 "bn" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/bridge)
 "bo" = (/obj/structure/disposalpipe/segment,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/cable/green{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/tiled,/area/bridge)
@@ -71,9 +71,9 @@
 "bs" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled,/area/hallway/z4/waiting)
 "bt" = (/obj/structure/disposalpipe/segment{dir = 1; icon_state = "pipe-c"},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/hallway/z4/waiting)
 "bu" = (/obj/structure/disposalpipe/segment{dir = 2; icon_state = "pipe-c"},/turf/simulated/floor/tiled,/area/hallway/z4/waiting)
-"bv" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/hallway/z4)
-"bw" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/hallway/z4)
-"bx" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/hallway/z4)
+"bv" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/hallway/z4)
+"bw" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/hallway/z4)
+"bx" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/hallway/z4)
 "by" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled,/area/hallway/z4/aft)
 "bz" = (/turf/simulated/floor/tiled/white,/area/space)
 "bA" = (/obj/structure/cable/green{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/plating,/area/maintenance/aft)
@@ -206,8 +206,8 @@
 "dX" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/turf/simulated/floor/tiled,/area/hallway/z4/aft)
 "dY" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled,/area/hallway/z4/aft)
 "dZ" = (/obj/structure/shuttle/engine/propulsion/burst,/turf/simulated/shuttle/plating,/area/space)
-"ea" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/bridge)
-"eb" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/bridge)
+"ea" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/bridge)
+"eb" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/bridge)
 "ec" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/box/PDAs,/turf/simulated/floor/tiled,/area/bridge)
 "ed" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/tiled,/area/hallway/z4/waiting)
 "ee" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/turf/simulated/floor/tiled,/area/hallway/z4/waiting)
@@ -341,13 +341,13 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababblcwaoaobHbIcx
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababblcPcQcRcScTcUcVcAbIcWbdbzbzbzcXcYcZdadbdcdddedfdgdhdidjdbdkdldmdndndndobBdpbjbEcOctbUbUbUbUbUbUcLdqaGbibDbTcNbUcObTbFbkaGavaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababbldraoaodsbIdtdudvbIdwbdbzbzbzdxceaAakcEcEcEcEdycEcEcEcEcEaddzaCaCdAaCdBaGaGdCdDbUdEbUbUbVbVbVbVcLdFbidGcocvcNbUcOcscodGbkavaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababbldHaoaodIbIdJdKdLbIdMbdbdcdbdbddNdOdPdQdRdRdSdTdUdRdRdRdVdWdXdYbdbdcdbdaGaGaGdCcodGcocqcocococococrcJdZdZbTcNbUcObTdZdZcJavaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababeaebecaodsbIbIbIbIbIbIbIedeeefefegbNakehbPbPbPbPbPbPbPbPeiadejaCbdbzbzbdbRaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGcqbUbUbUcqaGaGaGavaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababebeaecaodsbIbIbIbIbIbIbIedeeefefegbNakehbPbPbPbPbPbPbPbPeiadejaCbdbzbzbdbRaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGcqbUbUbUcqaGaGaGavaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababblekelemaoaoenaoaoaobraAeoaAaAepeqakbvbwbwbwbwbwbwbwbwbxadejaCbdbzbzbdaGaGaGaGaGaGaGaGaGaGeraGaGaGaGaGaGbTesesesbTaGaGaGavaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababeaebeteuevevevevewevexeyezbabaeAakakaaaaaaaaaaaaaaaaaaaaadeBeCbdbdbdbdbebfbfbfbfbgadbhadadadadadadaGaGbieDeEeEeEdCbkaGavavaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababeaebeFaoaoeGeGeHeGeGeGaAaAeIakakabaaaaaaaaaaaaaaaaaaaaadeJeBaMaMaMaMaMaMeKeLaOaOaOeMeNaCaCaCaCadaGaGcJeOePePePeQcJavavaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababeaebaoaoeGeReSeTeUeVaAaBakakababaaaaaaaaaaaaaaaaaaaaadadaCaCaCaCaCaCaCeJeWaCaCaCaCeXaCaCeJaCadaGaGaGaGeraGaGaGavavaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababeaebaoeGeYeZeZfafbaAakakabababaaaaaaaaaaaaaaaaaaaaadadadadadadadauadadadadadadadadauadadadadadadadadadadadadbdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababeaafeGfcfdfeffeGakakababababaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadaladamamamamamamadaladamamamamamamamadadadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababebeaeteuevevevevewevexeyezbabaeAakakaaaaaaaaaaaaaaaaaaaaadeBeCbdbdbdbdbebfbfbfbfbgadbhadadadadadadaGaGbieDeEeEeEdCbkaGavavaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababebeaeFaoaoeGeGeHeGeGeGaAaAeIakakabaaaaaaaaaaaaaaaaaaaaadeJeBaMaMaMaMaMaMeKeLaOaOaOeMeNaCaCaCaCadaGaGcJeOePePePeQcJavavaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababebeaaoaoeGeReSeTeUeVaAaBakakababaaaaaaaaaaaaaaaaaaaaadadaCaCaCaCaCaCaCeJeWaCaCaCaCeXaCaCeJaCadaGaGaGaGeraGaGaGavavaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababebeaaoeGeYeZeZfafbaAakakabababaaaaaaaaaaaaaaaaaaaaadadadadadadadauadadadadadadadadauadadadadadadadadadadadadbdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababebafeGfcfdfeffeGakakababababaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadaladamamamamamamadaladamamamamamamamadadadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababeGeGeGeGeGeGababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadadadadadadadadadadadadadadadadadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -418,3 +418,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 fgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+
