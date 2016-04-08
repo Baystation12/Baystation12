@@ -147,3 +147,27 @@
 	display_name = "Zhan headscarf"
 	path = /obj/item/clothing/head/tajaran/scarf
 	whitelisted = "Tajara"
+
+/datum/gear/head/hijab
+	display_name = "hijab"
+	path = /obj/item/clothing/head/hijab
+
+/datum/gear/head/hijab/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/kippa
+	display_name = "kippa"
+	path = /obj/item/clothing/head/kippa
+
+/datum/gear/head/kippa/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/turban
+	display_name = "turban"
+	path = /obj/item/clothing/head/turban
+
+/datum/gear/head/turban/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)

@@ -1,14 +1,14 @@
 
-/proc/power_failure(var/announce = 1, var/severity = 2)
+/proc/power_failure(var/announce = 1, var/severity = 2, var/list/affected_z_levels)
 	if(announce)
 		command_announcement.Announce("Abnormal activity detected in [station_name()]'s powernet. As a precautionary measure, the station's power will be shut off for an indeterminate duration.", "Critical Power Failure", new_sound = 'sound/AI/poweroff.ogg')
 
-	for(var/obj/machinery/power/smes/buildable/S in world)
+	for(var/obj/machinery/power/smes/buildable/S in machines)
 		S.energy_fail(rand(15 * severity,30 * severity))
 
 
-	for(var/obj/machinery/power/apc/C in world)
-		if(!C.is_critical)
+	for(var/obj/machinery/power/apc/C in machines)
+		if(!C.is_critical && (!affected_z_levels || (C.z in affected_z_levels)))
 			C.energy_fail(rand(30 * severity,60 * severity))
 
 /proc/power_restore(var/announce = 1)
@@ -16,13 +16,15 @@
 
 	if(announce)
 		command_announcement.Announce("Power has been restored to [station_name()]. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
-	for(var/obj/machinery/power/apc/C in world)
-		if(C.cell && (C.z in config.station_levels))
+	for(var/obj/machinery/power/apc/C in machines)
+		C.failure_timer = 0
+		if(C.cell)
 			C.cell.charge = C.cell.maxcharge
-	for(var/obj/machinery/power/smes/S in world)
+	for(var/obj/machinery/power/smes/S in machines)
 		var/area/current_area = get_area(S)
-		if(current_area.type in skipped_areas || isNotStationLevel(S.z))
+		if(current_area.type in skipped_areas)
 			continue
+		S.failure_timer = 0
 		S.charge = S.capacity
 		S.update_icon()
 		S.power_change()
@@ -31,9 +33,8 @@
 
 	if(announce)
 		command_announcement.Announce("All SMESs on [station_name()] have been recharged. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
-	for(var/obj/machinery/power/smes/S in world)
-		if(isNotStationLevel(S.z))
-			continue
+	for(var/obj/machinery/power/smes/S in machines)
+		S.failure_timer = 0
 		S.charge = S.capacity
 		S.output_level = S.output_level_max
 		S.output_attempt = 1

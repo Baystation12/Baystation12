@@ -250,3 +250,24 @@
 	desc = "An orange piece of cloth, worn on the head."
 	icon_state = "orange_bandana"
 	body_parts_covered = 0
+
+/obj/item/clothing/head/hijab
+	name = "hijab"
+	desc = "A veil which is wrapped to cover the head and chest."
+	icon_state = "hijab"
+	body_parts_covered = 0
+	flags_inv = BLOCKHAIR
+
+/obj/item/clothing/head/kippa
+	name = "kippa"
+	desc = "A small, brimless cap."
+	icon_state = "kippa"
+	body_parts_covered = 0
+
+/obj/item/clothing/head/turban
+	name = "turban"
+	desc = "A sturdy cloth, worn around the head."
+	icon_state = "turban"
+	body_parts_covered = 0
+	flags_inv = BLOCKHEADHAIR //Shows beards!
+

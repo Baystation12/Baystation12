@@ -63,7 +63,6 @@
 		if(M.buckled) //wheelchairs, office chairs, rollerbeds
 			return
 		
-		M << "<span class='danger'>You step on \the [src]!</span>"
 		playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1) // not sure how to handle metal shards with sounds
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
@@ -74,6 +73,8 @@
 			if( H.shoes || ( H.wear_suit && (H.wear_suit.body_parts_covered & FEET) ) )
 				return
 			
+			M << "<span class='danger'>You step on \the [src]!</span>"
+
 			var/list/check = list("l_foot", "r_foot")
 			while(check.len)
 				var/picked = pick(check)

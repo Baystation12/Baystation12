@@ -54,7 +54,7 @@
 			src << "<span class='danger'>Deadchat is globally muted.</span>"
 			return
 
-	if(client && !(client.prefs.toggles & CHAT_DEAD))
+	if(!is_preference_enabled(/datum/client_preference/show_dsay))
 		usr << "<span class='danger'>You have deadchat muted.</span>"
 		return
 

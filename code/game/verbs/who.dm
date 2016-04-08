@@ -17,8 +17,8 @@
 				if(UNCONSCIOUS)
 					entry += " - <font color='darkgray'><b>Unconscious</b></font>"
 				if(DEAD)
-					if(isobserver(C.mob))
-						var/mob/dead/observer/O = C.mob
+					if(isghost(C.mob))
+						var/mob/observer/ghost/O = C.mob
 						if(O.started_as_observer)
 							entry += " - <font color='gray'>Observing</font>"
 						else
@@ -41,6 +41,8 @@
 
 			if(is_special_character(C.mob))
 				entry += " - <b><font color='red'>Antagonist</font></b>"
+			if(C.is_afk())
+				entry += " (AFK - [C.inactivity2text()])"
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
 			Lines += entry
 	else
@@ -86,7 +88,7 @@
 					msg += " - Playing"
 
 				if(C.is_afk())
-					msg += " (AFK)"
+					msg += " (AFK - [C.inactivity2text()])"
 				msg += "\n"
 
 				num_admins_online++
@@ -101,7 +103,7 @@
 					modmsg += " - Playing"
 
 				if(C.is_afk())
-					modmsg += " (AFK)"
+					modmsg += " (AFK - [C.inactivity2text()])"
 				modmsg += "\n"
 				num_mods_online++
 
@@ -115,7 +117,7 @@
 					mentmsg += " - Playing"
 
 				if(C.is_afk())
-					mentmsg += " (AFK)"
+					mentmsg += " (AFK - [C.inactivity2text()])"
 				mentmsg += "\n"
 				num_mentors_online++
 

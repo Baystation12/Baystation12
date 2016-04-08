@@ -102,7 +102,7 @@
 	..()
 	if(wrapped)
 		user << "It is holding \a [wrapped]."
-		
+
 /obj/item/weapon/gripper/attack_self(mob/user as mob)
 	if(wrapped)
 		return wrapped.attack_self(user)
@@ -112,7 +112,7 @@
 
 	set name = "Drop Item"
 	set desc = "Release an item from your magnetic gripper."
-	set category = "Robot Commands"
+	set category = "Silicon Commands"
 
 	if(!wrapped)
 		//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
@@ -151,7 +151,7 @@
 		//The force of the wrapped obj gets set to zero during the attack() and afterattack().
 		var/force_holder = wrapped.force
 		wrapped.force = 0.0
-		
+
 		//Pass the attack on to the target. This might delete/relocate wrapped.
 		var/resolved = target.attackby(wrapped,user)
 		if(!resolved && wrapped && target)
@@ -271,7 +271,7 @@
 
 			D << "<span class='danger'>You begin decompiling [M].</span>"
 
-			if(!do_after(D,50))
+			if(!do_after(D,50,M))
 				D << "<span class='danger'>You need to remain still while decompiling such a large object.</span>"
 				return
 

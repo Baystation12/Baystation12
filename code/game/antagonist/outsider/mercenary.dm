@@ -18,6 +18,8 @@ var/datum/antagonist/mercenary/mercs
 	initial_spawn_req = 4
 	initial_spawn_target = 6
 
+	faction = "mercenary"
+
 /datum/antagonist/mercenary/New()
 	..()
 	mercs = src

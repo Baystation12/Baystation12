@@ -18,6 +18,8 @@ var/datum/antagonist/raider/raiders
 
 	id_type = /obj/item/weapon/card/id/syndicate
 
+	faction = "pirate"
+
 	// Heist overrides check_victory() and doesn't need victory or loss strings/tags.
 	var/list/raider_uniforms = list(
 		/obj/item/clothing/under/soviet,
@@ -144,7 +146,7 @@ var/datum/antagonist/raider/raiders
 	var/win_msg = ""
 
 	//No objectives, go straight to the feedback.
-	if(config.objectives_disabled || !global_objectives.len)
+	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !global_objectives.len)
 		return
 
 	var/success = global_objectives.len

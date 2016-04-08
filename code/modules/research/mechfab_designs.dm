@@ -420,6 +420,12 @@
 	name = "Cable layer"
 	id = "mech_cable_layer"
 	build_path = /obj/item/mecha_parts/mecha_equipment/tool/cable_layer
+	
+/datum/design/item/mecha/flaregun
+	name = "Flare launcher"
+	id = "mecha_flare_gun"
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flare
+	materials = list(DEFAULT_WALL_MATERIAL = 12500)
 
 /datum/design/item/mecha/sleeper
 	name = "Sleeper"

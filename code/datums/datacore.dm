@@ -74,11 +74,21 @@
 		if(real_rank in civilian_positions)
 			civ[name] = rank
 			department = 1
-		if(real_rank in nonhuman_positions)
-			bot[name] = rank
-			department = 1
 		if(!department && !(name in heads))
 			misc[name] = rank
+
+	// Synthetics don't have actual records, so we will pull them from here.
+	for(var/mob/living/silicon/ai/ai in mob_list)
+		bot[ai.name] = "Artificial Intelligence"
+
+	for(var/mob/living/silicon/robot/robot in mob_list)
+		// No combat/syndicate cyborgs, no drones.
+		if(robot.module && robot.module.hide_on_manifest)
+			continue
+
+		bot[robot.name] = "[robot.modtype] [robot.braintype]"
+
+
 	if(heads.len > 0)
 		dat += "<tr><th colspan=3>Heads</th></tr>"
 		for(name in heads)

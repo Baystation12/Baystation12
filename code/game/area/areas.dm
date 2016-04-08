@@ -243,7 +243,7 @@ var/list/mob/living/forced_ambiance_list = new
 
 /area/proc/play_ambience(var/mob/living/L)
 	// Ambience goes down here -- make sure to list each area seperately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
-	if(!(L && L.client && (L.client.prefs.toggles & SOUND_AMBIENCE)))	return
+	if(!(L && L.is_preference_enabled(/datum/client_preference/play_ambiance)))	return
 
 	// If we previously were in an area with force-played ambiance, stop it.
 	if(L in forced_ambiance_list)
@@ -292,12 +292,14 @@ var/list/mob/living/forced_ambiance_list = new
 		mob << "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>"
 
 /area/proc/prison_break()
-	for(var/obj/machinery/power/apc/temp_apc in src)
-		temp_apc.overload_lighting(70)
-	for(var/obj/machinery/door/airlock/temp_airlock in src)
-		temp_airlock.prison_open()
-	for(var/obj/machinery/door/window/temp_windoor in src)
-		temp_windoor.open()
+	var/obj/machinery/power/apc/theAPC = get_apc()
+	if(theAPC.operating)
+		for(var/obj/machinery/power/apc/temp_apc in src)
+			temp_apc.overload_lighting(70)
+		for(var/obj/machinery/door/airlock/temp_airlock in src)
+			temp_airlock.prison_open()
+		for(var/obj/machinery/door/window/temp_windoor in src)
+			temp_windoor.open()
 
 /area/proc/has_gravity()
 	return has_gravity

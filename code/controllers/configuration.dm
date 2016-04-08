@@ -267,7 +267,7 @@ var/list/gamemode_cache = list()
 		if(type == "config")
 			switch (name)
 				if ("resource_urls")
-					config.resource_urls = text2list(value, " ")
+					config.resource_urls = splittext(value, " ")
 
 				if ("admin_legacy_system")
 					config.admin_legacy_system = 1
@@ -472,8 +472,20 @@ var/list/gamemode_cache = list()
 					config.ninjas_allowed = 1
 
 				if ("objectives_disabled")
-					config.objectives_disabled = 1
-
+					if(!value)
+						log_misc("Could not find value for objectives_disabled in configuration.")
+						config.objectives_disabled = CONFIG_OBJECTIVE_NONE
+					else
+						switch(value)
+							if("none")
+								config.objectives_disabled = CONFIG_OBJECTIVE_NONE
+							if("verb")
+								config.objectives_disabled = CONFIG_OBJECTIVE_VERB
+							if("all")
+								config.objectives_disabled = CONFIG_OBJECTIVE_ALL
+							else
+								log_misc("Incorrect objective disabled definition: [value]")
+								config.objectives_disabled = CONFIG_OBJECTIVE_NONE
 				if("protect_roles_from_antagonist")
 					config.protect_roles_from_antagonist = 1
 
@@ -694,7 +706,7 @@ var/list/gamemode_cache = list()
 					config.starlight = value >= 0 ? value : 0
 
 				if("ert_species")
-					config.ert_species = text2list(value, ";")
+					config.ert_species = splittext(value, ";")
 					if(!config.ert_species.len)
 						config.ert_species += "Human"
 
@@ -705,12 +717,12 @@ var/list/gamemode_cache = list()
 					config.aggressive_changelog = 1
 
 				if("default_language_prefixes")
-					var/list/values = text2list(value, " ")
+					var/list/values = splittext(value, " ")
 					if(values.len > 0)
 						language_prefixes = values
 
 				if ("lobby_screens")
-					config.lobby_screens = text2list(value, ";")
+					config.lobby_screens = splittext(value, ";")
 
 				if("delist_when_no_admins")
 					config.delist_when_no_admins = TRUE

@@ -1,38 +1,130 @@
+/datum/preferences
+	var/preferences_enabled = null
+	var/preferences_disabled = null
+
 /datum/category_item/player_setup_item/player_global/settings
 	name = "Settings"
 	sort_order = 2
 
 /datum/category_item/player_setup_item/player_global/settings/load_preferences(var/savefile/S)
-	S["lastchangelog"]	>> pref.lastchangelog
-	S["default_slot"]	>> pref.default_slot
-	S["toggles"]		>> pref.toggles
+	S["lastchangelog"]        >> pref.lastchangelog
+	S["default_slot"]	      >> pref.default_slot
+	S["preferences"]          >> pref.preferences_enabled
+	S["preferences_disabled"] >> pref.preferences_disabled
 
 /datum/category_item/player_setup_item/player_global/settings/save_preferences(var/savefile/S)
-	S["lastchangelog"]	<< pref.lastchangelog
-	S["default_slot"]	<< pref.default_slot
-	S["toggles"]		<< pref.toggles
+	S["lastchangelog"]        << pref.lastchangelog
+	S["default_slot"]         << pref.default_slot
+	S["preferences"]          << pref.preferences_enabled
+	S["preferences_disabled"] << pref.preferences_disabled
 
 /datum/category_item/player_setup_item/player_global/settings/sanitize_preferences()
+	// Ensure our preferences are lists.
+	if(!istype(pref.preferences_enabled, /list))
+		pref.preferences_enabled = list()
+	if(!istype(pref.preferences_disabled, /list))
+		pref.preferences_disabled = list()
+
+	// Arrange preferences that have never been enabled/disabled.
+	var/list/client_preference_keys = list()
+	for(var/cp in get_client_preferences())
+		var/datum/client_preference/client_pref = cp
+		client_preference_keys += client_pref.key
+		if((client_pref.key in pref.preferences_enabled) || (client_pref.key in pref.preferences_disabled))
+			continue
+
+		if(client_pref.enabled_by_default)
+			pref.preferences_enabled += client_pref.key
+		else
+			pref.preferences_disabled += client_pref.key
+
+	// Clean out preferences that no longer exist.
+	for(var/key in pref.preferences_enabled)
+		if(!(key in client_preference_keys))
+			pref.preferences_enabled -= key
+	for(var/key in pref.preferences_disabled)
+		if(!(key in client_preference_keys))
+			pref.preferences_disabled -= key
+
 	pref.lastchangelog	= sanitize_text(pref.lastchangelog, initial(pref.lastchangelog))
 	pref.default_slot	= sanitize_integer(pref.default_slot, 1, config.character_slots, initial(pref.default_slot))
-	pref.toggles		= sanitize_integer(pref.toggles, 0, 65535, initial(pref.toggles))
 
 /datum/category_item/player_setup_item/player_global/settings/content(var/mob/user)
-	. += "<b>Play admin midis:</b> <a href='?src=\ref[src];toggle=[SOUND_MIDI]'><b>[(pref.toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
-	. += "<b>Play lobby music:</b> <a href='?src=\ref[src];toggle=[SOUND_LOBBY]'><b>[(pref.toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
-	. += "<b>Ghost ears:</b> <a href='?src=\ref[src];toggle=[CHAT_GHOSTEARS]'><b>[(pref.toggles & CHAT_GHOSTEARS) ? "All Speech" : "Nearest Creatures"]</b></a><br>"
-	. += "<b>Ghost sight:</b> <a href='?src=\ref[src];toggle=[CHAT_GHOSTSIGHT]'><b>[(pref.toggles & CHAT_GHOSTSIGHT) ? "All Emotes" : "Nearest Creatures"]</b></a><br>"
-	. += "<b>Ghost radio:</b> <a href='?src=\ref[src];toggle=[CHAT_GHOSTRADIO]'><b>[(pref.toggles & CHAT_GHOSTRADIO) ? "All Chatter" : "Nearest Speakers"]</b></a><br>"
+	. = list()
+	. += "<b>Preferences</b><br>"
+	. += "<table>"
+	var/mob/pref_mob = preference_mob()
+	for(var/cp in get_client_preferences())
+		var/datum/client_preference/client_pref = cp
+		if(!client_pref.may_toggle(pref_mob))
+			continue
+
+		. += "<tr><td>[client_pref.description]: </td>"
+		if(pref_mob.is_preference_enabled(client_pref.key))
+			. += "<td><b>[client_pref.enabled_description]</b></td> <td><a href='?src=\ref[src];toggle_off=[client_pref.key]'>[client_pref.disabled_description]</a></td>"
+		else
+			. += "<td><a  href='?src=\ref[src];toggle_on=[client_pref.key]'>[client_pref.enabled_description]</a></td> <td><b>[client_pref.disabled_description]</b></td>"
+		. += "</tr>"
+
+	. += "</table>"
+	return jointext(., "")
 
 /datum/category_item/player_setup_item/player_global/settings/OnTopic(var/href,var/list/href_list, var/mob/user)
-	if(href_list["toggle"])
-		var/toggle_flag = text2num(href_list["toggle"])
-		pref.toggles ^= toggle_flag
-		if(toggle_flag == SOUND_LOBBY && isnewplayer(user))
-			if(pref.toggles & SOUND_LOBBY)
-				user << sound(ticker.login_music, repeat = 0, wait = 0, volume = 85, channel = 1)
-			else
-				user << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1)
+	var/mob/pref_mob = preference_mob()
+	if(href_list["toggle_on"])
+		. = pref_mob.set_preference(href_list["toggle_on"], TRUE)
+	else if(href_list["toggle_off"])
+		. = pref_mob.set_preference(href_list["toggle_off"], FALSE)
+	if(.)
 		return TOPIC_REFRESH
 
 	return ..()
+
+/client/proc/is_preference_enabled(var/preference)
+	var/datum/client_preference/cp = get_client_preference(preference)
+	return cp && (cp.key in prefs.preferences_enabled)
+
+/client/proc/set_preference(var/preference, var/set_preference)
+	var/datum/client_preference/cp = get_client_preference(preference)
+	if(!cp)
+		return FALSE
+	preference = cp.key
+
+	if(set_preference && !(preference in prefs.preferences_enabled))
+		return toggle_preference(cp)
+	else if(!set_preference && (preference in prefs.preferences_enabled))
+		return toggle_preference(cp)
+
+/client/proc/toggle_preference(var/preference, var/set_preference)
+	var/datum/client_preference/cp = get_client_preference(preference)
+	if(!cp)
+		return FALSE
+	preference = cp.key
+
+	var/enabled
+	if(preference in prefs.preferences_disabled)
+		prefs.preferences_enabled  |= preference
+		prefs.preferences_disabled -= preference
+		enabled = TRUE
+		. = TRUE
+	else if(preference in prefs.preferences_enabled)
+		prefs.preferences_enabled  -= preference
+		prefs.preferences_disabled |= preference
+		enabled = FALSE
+		. = TRUE
+	if(.)
+		cp.toggled(mob, enabled)
+
+/mob/proc/is_preference_enabled(var/preference)
+	if(!client)
+		return FALSE
+	return client.is_preference_enabled(preference)
+
+/mob/proc/set_preference(var/preference, var/set_preference)
+	if(!client)
+		return FALSE
+	if(!client.prefs)
+		log_debug("Client prefs found to be null for mob [src] and client [ckey], this should be investigated.")
+		return FALSE
+
+	return client.set_preference(preference, set_preference)

@@ -4,6 +4,7 @@
 	name = "engineering voidsuit helmet"
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Has radiation shielding."
 	icon_state = "rig0-engineering"
+	item_state = "eng_helm"
 	item_state_slots = list(
 		slot_l_hand_str = "eng_helm",
 		slot_r_hand_str = "eng_helm",
@@ -24,6 +25,7 @@
 	name = "mining voidsuit helmet"
 	desc = "A special helmet designed for work in a hazardous, low pressure environment. Has reinforced plating."
 	icon_state = "rig0-mining"
+	item_state = "mining_helm"
 	item_state_slots = list(
 		slot_l_hand_str = "mining_helm",
 		slot_r_hand_str = "mining_helm",
@@ -43,6 +45,7 @@
 	name = "medical voidsuit helmet"
 	desc = "A special helmet designed for work in a hazardous, low pressure environment. Has minor radiation shielding."
 	icon_state = "rig0-medical"
+	item_state = "medical_helm"
 	item_state_slots = list(
 		slot_l_hand_str = "medical_helm",
 		slot_r_hand_str = "medical_helm",
@@ -62,6 +65,7 @@
 	name = "security voidsuit helmet"
 	desc = "A special helmet designed for work in a hazardous, low pressure environment. Has an additional layer of armor."
 	icon_state = "rig0-sec"
+	item_state = "sec_helm"
 	item_state_slots = list(
 		slot_l_hand_str = "sec_helm",
 		slot_r_hand_str = "sec_helm",
@@ -84,6 +88,7 @@
 	desc = "A special helmet designed for work in a hazardous, low pressure environments. Has improved thermal protection and minor radiation shielding."
 	name = "atmospherics voidsuit helmet"
 	icon_state = "rig0-atmos"
+	item_state = "atmos_helm"
 	item_state_slots = list(
 		slot_l_hand_str = "atmos_helm",
 		slot_r_hand_str = "atmos_helm",

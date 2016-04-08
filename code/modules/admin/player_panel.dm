@@ -228,7 +228,8 @@
 
 				if(iscarbon(M)) //Carbon stuff
 					if(ishuman(M))
-						M_job = M.job
+						var/mob/living/carbon/human/H = M
+						M_job = H.job
 					else if(isslime(M))
 						M_job = "slime"
 					else if(issmall(M))
@@ -260,8 +261,10 @@
 			else if(istype(M,/mob/new_player))
 				M_job = "New player"
 
-			else if(isobserver(M))
+			else if(isghost(M))
 				M_job = "Ghost"
+			else
+				M_job = "Unknown ([M.type])"
 
 			M_job = replacetext(M_job, "'", "")
 			M_job = replacetext(M_job, "\"", "")
@@ -340,7 +343,7 @@
 			dat += "<td>pAI</td>"
 		else if(istype(M, /mob/new_player))
 			dat += "<td>New Player</td>"
-		else if(isobserver(M))
+		else if(isghost(M))
 			dat += "<td>Ghost</td>"
 		else if(issmall(M))
 			dat += "<td>Monkey</td>"

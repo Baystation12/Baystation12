@@ -7,6 +7,9 @@
 	for(var/datum/mind/P in current_antagonists)
 		text += print_player_full(P)
 		text += get_special_objective_text(P)
+		if(P.ambitions)
+			text += "<br>Their goals for today were..."
+			text += "<br><b>[P.ambitions]</b>"
 		if(!global_objectives.len && P.objectives && P.objectives.len)
 			var/failed
 			var/num = 1

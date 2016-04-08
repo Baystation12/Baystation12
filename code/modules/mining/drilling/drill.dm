@@ -292,15 +292,26 @@
 	icon_state = "mining_brace"
 	var/obj/machinery/mining/drill/connected
 
+/obj/machinery/mining/brace/New()
+	..()
+	
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/miningdrillbrace(src)
+
 /obj/machinery/mining/brace/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(connected && connected.active)
+		user << "<span class='notice'>You can't work with the brace of a running drill!</span>"
+		return
+
+	if(default_deconstruction_screwdriver(user, W))
+		return
+	if(default_deconstruction_crowbar(user, W))
+		return
+
 	if(istype(W,/obj/item/weapon/wrench))
 
 		if(istype(get_turf(src), /turf/space))
 			user << "<span class='notice'>You can't anchor something to empty space. Idiot.</span>"
-			return
-
-		if(connected && connected.active)
-			user << "<span class='notice'>You can't unanchor the brace of a running drill!</span>"
 			return
 
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)

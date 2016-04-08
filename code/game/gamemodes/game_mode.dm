@@ -329,7 +329,7 @@ var/global/list/additional_antag_types = list()
 				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape_pod5/centcom)
 					escaped_on_pod_5++
 
-			if(isobserver(M))
+			if(isghost(M))
 				ghosts++
 
 	var/text = ""
@@ -523,7 +523,7 @@ proc/display_roundstart_logout_report()
 					continue //Dead
 
 			continue //Happy connected client
-		for(var/mob/dead/observer/D in mob_list)
+		for(var/mob/observer/ghost/D in mob_list)
 			if(D.mind && (D.mind.original == L || D.mind.current == L))
 				if(L.stat == DEAD)
 					msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (Dead)\n"
@@ -568,7 +568,7 @@ proc/get_nt_opposed()
 
 	if(!player || !player.current) return
 
-	if(config.objectives_disabled)
+	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
 		show_generic_antag_text(player)
 		return
 

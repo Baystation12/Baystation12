@@ -73,7 +73,7 @@
 
 /datum/category_collection/player_setup_collection/proc/update_setup(var/savefile/preferences, var/savefile/character)
 	for(var/datum/category_group/player_setup_category/PS in categories)
-		. = . || PS.update_setup(preferences, character)
+		. = . && PS.update_setup(preferences, character)
 
 /datum/category_collection/player_setup_collection/proc/header()
 	var/dat = ""
@@ -148,7 +148,7 @@
 
 /datum/category_group/player_setup_category/proc/update_setup(var/savefile/preferences, var/savefile/character)
 	for(var/datum/category_item/player_setup_item/PI in items)
-		. = . || PI.update_setup(preferences, character)
+		. = . && PI.update_setup(preferences, character)
 
 /datum/category_group/player_setup_category/proc/content(var/mob/user)
 	. = "<table style='width:100%'><tr style='vertical-align:top'><td style='width:50%'>"
@@ -226,13 +226,13 @@
 /datum/category_item/player_setup_item/Topic(var/href,var/list/href_list)
 	if(..())
 		return 1
-	var/mob/user = usr
-	if(!user.client)
+	var/mob/pref_mob = preference_mob()
+	if(!pref_mob || !pref_mob.client)
 		return 1
 
-	. = OnTopic(href, href_list, user)
+	. = OnTopic(href, href_list, usr)
 	if(. == TOPIC_REFRESH)
-		user.client.prefs.ShowChoices(user)
+		pref_mob.client.prefs.ShowChoices(usr)
 
 /datum/category_item/player_setup_item/CanUseTopic(var/mob/user)
 	return 1
@@ -241,5 +241,11 @@
 	return TOPIC_NOACTION
 
 /datum/category_item/player_setup_item/proc/preference_mob()
-	if(pref && pref.client && pref.client.mob)
+	if(!pref.client)
+		for(var/client/C)
+			if(C.ckey == pref.client_ckey)
+				pref.client = C
+				break
+
+	if(pref.client)
 		return pref.client.mob
