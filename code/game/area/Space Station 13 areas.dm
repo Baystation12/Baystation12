@@ -132,115 +132,6 @@ area/space/atmosalert()
 	name = "\improper Admin room"
 	icon_state = "start"
 
-//Ship areas//
-/area/hallway/z1
-	name = "\improper Hallway - Lower Deck"
-	icon_state = "hallC1"
-
-/area/hallway/z1/aft
-	name = "\improper Aft"
-	icon_state = "green"
-
-/area/hallway/z1/aftstar
-	name = "\improper Aft Starboard"
-	icon_state = "red"
-
-/area/hallway/z1/aftpor
-	name = "\improper Aft Port"
-	icon_state = "blue"
-
-/area/hallway/z2
-	name = "\improper Hallway - Middle Deck"
-	icon_state = "hallC2"
-
-/area/hallway/z2/aft
-	name = "\improper Aft"
-	icon_state = "green"
-
-/area/hallway/z2/holodeck
-	name = "\improper Holodeck"
-	icon_state = "red"
-
-/area/hallway/z3
-	name = "\improper Hallway - Upper Deck"
-	icon_state = "hallC3"
-
-/area/hallway/z3/aft
-	name = "\improper Aft"
-	icon_state = "green"
-
-/area/hallway/z3/secure_storage
-	name = "\improper Hallway - Secure Storage"
-	icon_state = "red"
-
-/area/hallway/z4
-	name = "\improper Hallway - Command Deck"
-	icon_state = "hallC1"
-
-/area/hallway/z4/waiting
-	name = "\improper Bridge Waiting Room"
-	icon_state = "blue"
-
-/area/hallway/z4/aft
-	name = "\improper Aft"
-	icon_state = "green"
-
-/area/crew_quarters/sleep/dormitory/z1
-	name = "\improper Dormitory - Lower Deck"
-	icon_state = "Sleep"
-
-/area/crew_quarters/sleep/dormitory/z2
-	name = "\improper Dormitory - Middle Deck"
-	icon_state = "Sleep"
-
-/area/crew_quarters/sleep/dormitory/z3
-	name = "\improper Dormitory - Upper Deck"
-	icon_state = "Sleep"
-
-//Pill ship areas//
-/area/smol_ship/
-	name = "\improper Ship"
-
-/area/smol_ship/bridge
-	name = "\improper Bridge"
-	icon_state = "bridge"
-
-/area/smol_ship/hallway
-	name = "\improper Hallway"
-	icon_state = "hall"
-
-/area/smol_ship/engine
-	name = "\improper Engine"
-	icon_state = "engine"
-
-/area/smol_ship/room_ne
-	name = "\improper North Eastern Room"
-	icon_state = "northeast"
-
-/area/smol_ship/room_nw
-	name = "\improper North Western Room"
-	icon_state = "northwest"
-
-/area/smol_ship/room_se
-	name = "\improper South Eastern Room"
-	icon_state = "southeast"
-
-/area/smol_ship/room_sw
-	name = "\improper South Western Room"
-	icon_state = "southwest"
-
-/area/smol_ship/maint/fpmaint
-	name = "\improper Fore-Port Maintenance"
-	icon_state = "fpmaint"
-
-/area/smol_ship/maint/apmaint
-	name = "\improper Aft-Port Maintenance"
-	icon_state = "apmaint"
-
-/area/smol_ship/maint/starboard
-	name = "\improper Starboard Maintenance"
-	icon_state = "smaint"
-
 ////////////
 //SHUTTLES//
 ////////////
@@ -423,6 +314,11 @@ area/space/atmosalert()
 /area/shuttle/thunderdome/redshuttle/station
 	name = "\improper RED Station"
 	icon_state = "shuttlered2"
+
+/area/shuttle/escape_ship
+	name = "\improper Escape Shuttle"
+	icon_state = "shuttle"
+
 // === Trying to remove these areas:
 
 /area/shuttle/research
@@ -434,6 +330,8 @@ area/space/atmosalert()
 /area/shuttle/research/outpost
 	icon_state = "shuttle"
 	base_turf = /turf/simulated/floor/asteroid
+
+
 
 /area/airtunnel1/      // referenced in airtunnel.dm:759
 
