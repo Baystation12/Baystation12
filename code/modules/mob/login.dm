@@ -47,9 +47,3 @@
 
 	//set macro to normal incase it was overriden (like cyborg currently does)
 	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#D3B5B5")
-
-	if(viewing_alternate_appearances && viewing_alternate_appearances.len)
-		for(var/aakey in viewing_alternate_appearances)
-			var/datum/alternate_appearance/AA = viewing_alternate_appearances[aakey]
-			if(AA)
-				AA.display_to(list(src))
