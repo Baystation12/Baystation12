@@ -48,20 +48,20 @@
 		if(prob(100 - fail_chance))
 			if(buckled_mob != user)
 				buckled_mob.visible_message(\
-					"<span class='notice'>[user.name] frees [buckled_mob.name] from \the [src].</span>",\
-					"<span class='notice'>[user.name] frees you from \the [src].</span>",\
+					"<span class='notice'>\The [user.name] frees \the [buckled_mob.name] from \the [src].</span>",\
+					"<span class='notice'>\The [user.name] frees you from \the [src].</span>",\
 					"<span class='warning'>You hear shredding and ripping.</span>")
 			else
 				buckled_mob.visible_message(\
-					"<span class='notice'>[buckled_mob.name] struggles free of \the [src].</span>",\
+					"<span class='notice'>\The [buckled_mob.name] struggles free of \the [src].</span>",\
 					"<span class='notice'>You untangle \the [src] from around yourself.</span>",\
-						"<span class='warning'>You hear shredding and ripping.</span>")
+					"<span class='warning'>You hear shredding and ripping.</span>")
 			unbuckle()
 		else
 			health -= rand(1,5)
 			var/text = pick("rip","tear","pull", "bite", "tug")
 			user.visible_message(\
-				"<span class='warning'>[user.name] [text]s at \the [src].</span>",\
+				"<span class='warning'>\the [user.name] [text]s at \the [src].</span>",\
 				"<span class='warning'>You [text] at \the [src].</span>",\
 				"<span class='warning'>You hear shredding and ripping.</span>")
 	return
