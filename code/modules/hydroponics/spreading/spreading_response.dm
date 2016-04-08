@@ -48,12 +48,12 @@
 		if(prob(100 - fail_chance))
 			if(buckled_mob != user)
 				buckled_mob.visible_message(\
-					"<span class='notice'>\The [user.name] frees \the [buckled_mob.name] from \the [src].</span>",\
-					"<span class='notice'>\The [user.name] frees you from \the [src].</span>",\
+					"<span class='notice'>\The [user] frees \the [buckled_mob] from \the [src].</span>",\
+					"<span class='notice'>\The [user] frees you from \the [src].</span>",\
 					"<span class='warning'>You hear shredding and ripping.</span>")
 			else
 				buckled_mob.visible_message(\
-					"<span class='notice'>\The [buckled_mob.name] struggles free of \the [src].</span>",\
+					"<span class='notice'>\The [buckled_mob] struggles free of \the [src].</span>",\
 					"<span class='notice'>You untangle \the [src] from around yourself.</span>",\
 					"<span class='warning'>You hear shredding and ripping.</span>")
 			unbuckle()
@@ -61,7 +61,7 @@
 			health -= rand(1,5)
 			var/text = pick("rip","tear","pull", "bite", "tug")
 			user.visible_message(\
-				"<span class='warning'>\the [user.name] [text]s at \the [src].</span>",\
+				"<span class='warning'>\the [user] [text]s at \the [src].</span>",\
 				"<span class='warning'>You [text] at \the [src].</span>",\
 				"<span class='warning'>You hear shredding and ripping.</span>")
 	return
@@ -94,7 +94,6 @@
 	//entangling people
 	if(victim.loc == src.loc)
 		victim.Weaken(seed.get_trait(TRAIT_POTENCY))
-		spawn(0)
 		buckle_mob(victim)
 
 		victim.set_dir(pick(cardinal))
