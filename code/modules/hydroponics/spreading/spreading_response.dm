@@ -94,9 +94,6 @@
 		victim.Weaken(seed.get_trait(TRAIT_POTENCY))
 		spawn(0)
 		buckle_mob(victim)
-//		victim.buckled = src
-//		buckled_mob = victim
-//		victim.anchored = 1
 
 		victim.set_dir(pick(cardinal))
 		victim << "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>"
