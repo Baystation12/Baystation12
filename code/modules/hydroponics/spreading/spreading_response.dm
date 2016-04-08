@@ -42,18 +42,20 @@
 
 /obj/effect/plant/proc/manual_unbuckle(mob/user as mob)
 	if(buckled_mob)
-		if((seed && prob(100 - (user == buckled_mob ? seed.get_trait(TRAIT_POTENCY) * 5 : seed.get_trait(TRAIT_POTENCY) * 2)) || (!seed && prob(50))))
-			if(buckled_mob.buckled == src)
-				if(buckled_mob != user)
-					buckled_mob.visible_message(\
-						"<span class='notice'>[user.name] frees [buckled_mob.name] from \the [src].</span>",\
-						"<span class='notice'>[user.name] frees you from \the [src].</span>",\
-						"<span class='warning'>You hear shredding and ripping.</span>")
-				else
-					buckled_mob.visible_message(\
-						"<span class='notice'>[buckled_mob.name] struggles free of \the [src].</span>",\
-						"<span class='notice'>You untangle \the [src] from around yourself.</span>",\
-						"<span class='warning'>You hear shredding and ripping.</span>")
+		var/fail_chance = 50
+		if(seed)
+    		fail_chance = seed.get_trait(TRAIT_POTENCY) * (user == buckled_mob ? 5 : 2)
+		if(prob(100 - fail_chance))
+			if(buckled_mob != user)
+				buckled_mob.visible_message(\
+					"<span class='notice'>[user.name] frees [buckled_mob.name] from \the [src].</span>",\
+					"<span class='notice'>[user.name] frees you from \the [src].</span>",\
+					"<span class='warning'>You hear shredding and ripping.</span>")
+			else
+				buckled_mob.visible_message(\
+					"<span class='notice'>[buckled_mob.name] struggles free of \the [src].</span>",\
+					"<span class='notice'>You untangle \the [src] from around yourself.</span>",\
+					"<span class='warning'>You hear shredding and ripping.</span>")
 			unbuckle()
 		else
 			health -= rand(1,5)
