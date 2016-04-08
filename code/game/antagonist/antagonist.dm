@@ -50,6 +50,7 @@
 	var/minimum_player_age = 7            	// Players need to be at least minimum_player_age days old before they are eligable for auto-spawning
 	var/suspicion_chance = 50               // Prob of being on the initial Command report
 	var/flags = 0                           // Various runtime options.
+	var/show_objectives_on_creation = 1     // Whether or not objectives are shown when a player is added to this antag datum
 
 	// Used for setting appearance.
 	var/list/valid_species =       list("Unathi","Tajara","Skrell","Human")
@@ -218,16 +219,3 @@
 		player.special_role = null
 	pending_antagonists.Cut()
 	candidates.Cut()
-
-/datum/antagonist/proc/show_objectives(var/datum/mind/player)
-	if(!player || !player.current) return
-
-	if((config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len))
-		show_generic_antag_text(player)
-		return
-
-	var/obj_count = 1
-	player.current << "<span class='notice'>Your current objectives:</span>"
-	for(var/datum/objective/objective in player.objectives)
-		player.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-		obj_count++

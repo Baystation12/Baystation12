@@ -17,6 +17,7 @@ var/datum/antagonist/ert/ert
 	hard_cap_round = 7
 	initial_spawn_req = 5
 	initial_spawn_target = 7
+	show_objectives_on_creation = 0 //we are not antagonists, we do not need the antagonist shpiel/objectives
 
 /datum/antagonist/ert/create_default(var/mob/source)
 	var/mob/living/carbon/human/M = ..()
@@ -43,7 +44,3 @@ var/datum/antagonist/ert/ert
 
 	create_id(role_text, player)
 	return 1
-
-
-/datum/antagonist/ert/show_objectives()
-	return
