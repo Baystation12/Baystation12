@@ -52,8 +52,8 @@
 		"liver" =    /obj/item/organ/liver,
 		"kidneys" =  /obj/item/organ/kidneys,
 		"brain" =    /obj/item/organ/brain,
-		"eyes" =     /obj/item/organ/eyes,
-		"stack" =    /obj/item/organ/stack/vox
+		"eyes" =     /obj/item/organ/eyes//,
+		//"stack" =    /obj/item/organ/stack/vox
 		)
 
 /datum/species/vox/get_random_name(var/gender)

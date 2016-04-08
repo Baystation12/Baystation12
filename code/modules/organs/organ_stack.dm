@@ -6,7 +6,7 @@
 
 /obj/item/organ/internal/stack
 	name = "neural lace"
-	parent_organ = BP_HEAD
+	parent_organ = "head"
 	icon_state = "brain-prosthetic"
 	organ_tag = "stack"
 	parent_organ = "head"

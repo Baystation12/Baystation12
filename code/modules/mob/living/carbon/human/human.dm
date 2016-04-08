@@ -1148,7 +1148,7 @@
 			qdel(hud_used)
 		hud_used = new /datum/hud(src)
 
-	if(config && config.use_cortical_stacks && client && client.prefs.has_cortical_stack && should_have_organ("brain"))
+	if(config && config.use_cortical_stacks && client && client.prefs.has_cortical_stack && species.has_organ["brain"])
 		create_stack()
 
 	if(species)
