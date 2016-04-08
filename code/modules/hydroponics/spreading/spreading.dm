@@ -45,6 +45,7 @@
 	layer = 3
 	pass_flags = PASSTABLE
 	mouse_opacity = 2
+	can_buckle = 1
 
 	var/health = 10
 	var/max_health = 100

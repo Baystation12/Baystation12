@@ -85,18 +85,18 @@
 				victim.forceMove(get_turf(src))
 			else if(prob(round(seed.get_trait(TRAIT_POTENCY)/5)))
 				src.visible_message("<span class='danger'>Tendrils lash out from \the [src] and trip \the [victim]!</span>")
-				victim.Weaken(10)
+				victim.Weaken((seed.get_trait(TRAIT_POTENCY) / 2))
 				step_to(victim, src)
 
 
 	//entangling people
 	if(victim.loc == src.loc)
-		victim.Weaken(20)
+		victim.Weaken(seed.get_trait(TRAIT_POTENCY))
 		spawn(0)
 		buckle_mob(victim)
-		victim.buckled = src
-		buckled_mob = victim
-		victim.anchored = 1
+//		victim.buckled = src
+//		buckled_mob = victim
+//		victim.anchored = 1
 
 		victim.set_dir(pick(cardinal))
 		victim << "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>"
