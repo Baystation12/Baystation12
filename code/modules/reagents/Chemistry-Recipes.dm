@@ -1055,7 +1055,7 @@
 	P.loc = get_turf(holder.my_atom)
 	..()
 
-//Gold - removed
+//Gold
 /datum/chemical_reaction/slime/crit
 	name = "Slime Crit"
 	id = "m_tele"
@@ -1063,7 +1063,20 @@
 	required_reagents = list("phoron" = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/gold
-	mix_message = "The slime core fizzles disappointingly."
+	var/list/possible_mobs = list(
+							/mob/living/simple_animal/cat,
+							/mob/living/simple_animal/cat/kitten,
+							/mob/living/simple_naimal/corgi,
+							/mob/living/simple_animal/corgi/puppy,
+							/mob/living/simple_animal/cow,
+							/mob/living/simple_animal/chick,
+							/mob/living/simple_animal/chicken
+							)
+
+/datum/chemical_reaction/slime/crit/on_reaction(var/datum/reagents/holder)
+	var/type = pick(possible_mobs)
+	new type(get_turf(holder.my_atom))
+	..()
 
 //Silver
 /datum/chemical_reaction/slime/bork
@@ -1310,6 +1323,44 @@
 	var/obj/effect/golemrune/Z = new /obj/effect/golemrune
 	Z.loc = get_turf(holder.my_atom)
 	Z.announce_to_ghosts()
+
+//Sepia
+/datum/chemical_reaction/slime/film
+	name = "Slime Film"
+	id = "m_film"
+	result = null
+	required_reagents = list("blood" = 1)
+	result_amount = 2
+	required = /obj/item/slime_extract/sepia
+
+/datum/chemical_reaction/slime/film/on_reaction(var/datum/reagents/holder)
+	for(var/i in 1 to result_amount)
+		new /obj/item/device/camera_film(get_turf(holder.my_atom))
+	..()
+
+/datum/chemical_reaction/slime/camera
+	name = "Slime Camera"
+	id = "m_camera"
+	result = null
+	required_reagents = list("phoron" = 1)
+	result_amount = 1
+	required = /obj/item/slime_extract/sepia
+
+/datum/chemical_reaction/slime/camera/on_reaction(var/datum/reagents/holder)
+	new /obj/item/device/camera(get_turf(holder.my_atom))
+	..()
+
+//Bluespace
+/datum/chemical_reaction/slime/teleport
+	name = "Slime Teleport"
+	id = "m_tele"
+	result = null
+	required_reagents = list("phoron" = 1)
+	required = /obj/item/slime_extract/bluespace
+
+/datum/chemical_reaction/slime/teleport/on_reaction(var/datum/reagents/holder)
+	for(var/atom/movable/a in viewers(holder.my_atom,2))
+
 
 /* Food */
 
