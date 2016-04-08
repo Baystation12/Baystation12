@@ -24,6 +24,8 @@
 	if(!is_mature())
 		return
 	var/mob/living/carbon/human/H = victim
+	if(prob(round(seed.get_trait(TRAIT_POTENCY)/4)))
+		entangle(victim)
 	if(istype(H) && H.shoes)
 		return
 	seed.do_thorns(victim,src)
@@ -40,7 +42,7 @@
 
 /obj/effect/plant/proc/manual_unbuckle(mob/user as mob)
 	if(buckled_mob)
-		if(prob(seed ? min(max(0,100 - seed.get_trait(TRAIT_POTENCY)/2),100) : 50))
+		if((seed && prob(100 - (user == buckled_mob ? seed.get_trait(TRAIT_POTENCY) * 5 : seed.get_trait(TRAIT_POTENCY) * 2)) || (!seed && prob(50))))
 			if(buckled_mob.buckled == src)
 				if(buckled_mob != user)
 					buckled_mob.visible_message(\
@@ -54,10 +56,11 @@
 						"<span class='warning'>You hear shredding and ripping.</span>")
 			unbuckle()
 		else
-			var/text = pick("rip","tear","pull")
+			health -= rand(1,5)
+			var/text = pick("rip","tear","pull", "bite", "tug")
 			user.visible_message(\
-				"<span class='notice'>[user.name] [text]s at \the [src].</span>",\
-				"<span class='notice'>You [text] at \the [src].</span>",\
+				"<span class='warning'>[user.name] [text]s at \the [src].</span>",\
+				"<span class='warning'>You [text] at \the [src].</span>",\
 				"<span class='warning'>You hear shredding and ripping.</span>")
 	return
 
@@ -70,18 +73,30 @@
 		return
 
 	//grabbing people
-	if(!victim.anchored && Adjacent(victim) && victim.loc != get_turf(src))
+	if(!victim.anchored && victim.loc != get_turf(src))
 		var/can_grab = 1
 		if(istype(victim, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = victim
 			if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & NOSLIP))
 				can_grab = 0
 		if(can_grab)
-			src.visible_message("<span class='danger'>Tendrils lash out from \the [src] and drag \the [victim] in!</span>")
-			victim.loc = src.loc
+			if(Adjacent(victim))
+				src.visible_message("<span class='danger'>Tendrils lash out from \the [src] and drag \the [victim] in!</span>")
+				victim.forceMove(get_turf(src))
+			else if(prob(round(seed.get_trait(TRAIT_POTENCY)/5)))
+				src.visible_message("<span class='danger'>Tendrils lash out from \the [src] and trip \the [victim]!</span>")
+				victim.Weaken(10)
+				step_to(victim, src)
+
 
 	//entangling people
 	if(victim.loc == src.loc)
+		victim.Weaken(20)
+		spawn(0)
 		buckle_mob(victim)
+		victim.buckled = src
+		buckled_mob = victim
+		victim.anchored = 1
+
 		victim.set_dir(pick(cardinal))
 		victim << "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>"
