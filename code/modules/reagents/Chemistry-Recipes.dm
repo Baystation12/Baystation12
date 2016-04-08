@@ -1066,7 +1066,7 @@
 	var/list/possible_mobs = list(
 							/mob/living/simple_animal/cat,
 							/mob/living/simple_animal/cat/kitten,
-							/mob/living/simple_naimal/corgi,
+							/mob/living/simple_animal/corgi,
 							/mob/living/simple_animal/corgi/puppy,
 							/mob/living/simple_animal/cow,
 							/mob/living/simple_animal/chick,
@@ -1357,9 +1357,45 @@
 	result = null
 	required_reagents = list("phoron" = 1)
 	required = /obj/item/slime_extract/bluespace
+	reaction_sound = 'sound/effects/teleport.ogg'
 
 /datum/chemical_reaction/slime/teleport/on_reaction(var/datum/reagents/holder)
+	var/list/turfs = list()
+	for(var/turf/T in orange(holder.my_atom,6))
+		turfs += T
 	for(var/atom/movable/a in viewers(holder.my_atom,2))
+		a.forceMove(pick(turfs))
+	..()
+
+//pyrite
+/datum/chemical_reaction/slime/paint
+	name = "Slime Paint"
+	id = "m_paint"
+	result = null
+	required_reagents = list("phoron" = 1)
+	required = /obj/item/slime_extract/pyrite
+
+/datum/chemical_reaction/slime/paint/on_reaction(var/datum/reagents/holder)
+	var/color = pick("red","white","black","yellow","green","blue","purple")
+	var/type = text2path("/obj/item/weapon/reagent_containers/glass/paint/[color]")
+	if(!ispath(type))
+		CRASH("Invalid path in slime paint reaction.")
+		return
+
+	new type(get_turf(holder.my_atom))
+	..()
+
+//cerulean
+/datum/chemical_reaction/slime/extract_enhance
+	name = "Extract Enhancer"
+	id = "m_enhance"
+	result = null
+	required_reagents = list("phoron" = 1)
+	required = /obj/item/slime_extract/cerulean
+
+/datum/chemical_reaction/slime/extract_enhance/on_reaction(var/datum/reagents/holder)
+	new /obj/item/weapon/slimesteroid2(get_turf(holder.my_atom))
+	..()
 
 
 /* Food */

@@ -1,0 +1,4 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Reimplements old xenobiology slimes. Includes Pyrite, Gold, Cerulean, Bluespace and Sepia"
