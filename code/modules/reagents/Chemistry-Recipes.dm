@@ -1353,7 +1353,7 @@
 //Bluespace
 /datum/chemical_reaction/slime/teleport
 	name = "Slime Teleport"
-	id = "m_tele"
+	id = "m_blink"
 	result = null
 	required_reagents = list("phoron" = 1)
 	required = /obj/item/slime_extract/bluespace
@@ -1364,6 +1364,8 @@
 	for(var/turf/T in orange(holder.my_atom,6))
 		turfs += T
 	for(var/atom/movable/a in viewers(holder.my_atom,2))
+		if(!a.simulated)
+			continue
 		a.forceMove(pick(turfs))
 	..()
 
