@@ -1,7 +1,5 @@
 var/datum/controller/vote/vote = new()
 
-var/global/list/round_voters = list() //Keeps track of the individuals voting for a given round, for use in forcedrafting.
-
 datum/controller/vote
 	var/initiator = null
 	var/started_time = null
@@ -12,7 +10,9 @@ datum/controller/vote
 	var/list/gamemode_names = list()
 	var/list/voted = list()
 	var/list/voting = list()
-	var/list/current_votes = list()
+	var/list/current_high_votes = list()
+	var/list/current_med_votes = list()
+	var/list/current_low_votes = list()
 	var/list/additional_text = list()
 	var/auto_muted = 0
 
@@ -64,31 +64,27 @@ datum/controller/vote
 		choices.Cut()
 		voted.Cut()
 		voting.Cut()
-		current_votes.Cut()
+		current_high_votes.Cut()
+		current_med_votes.Cut()
+		current_low_votes.Cut()
 		additional_text.Cut()
 
 	proc/get_result()
 		//get the highest number of votes
 		var/greatest_votes = 0
+		var/second_greatest_votes = 0
+		var/third_greatest_votes = 0
 		var/total_votes = 0
-		for(var/option in choices)
-			var/votes = choices[option]
-			total_votes += votes
-			if(votes > greatest_votes)
-				greatest_votes = votes
+
 		//default-vote for everyone who didn't vote
 		if(!config.vote_no_default && choices.len)
 			var/non_voters = (clients.len - total_votes)
 			if(non_voters > 0)
 				if(mode == "restart")
 					choices["Continue Playing"] += non_voters
-					if(choices["Continue Playing"] >= greatest_votes)
-						greatest_votes = choices["Continue Playing"]
 				else if(mode == "gamemode")
 					if(master_mode in choices)
 						choices[master_mode] += non_voters
-						if(choices[master_mode] >= greatest_votes)
-							greatest_votes = choices[master_mode]
 				else if(mode == "crew_transfer")
 					var/factor = 0.5
 					switch(world.time / (10 * 60)) // minutes
@@ -104,36 +100,73 @@ datum/controller/vote
 							factor = 1.4
 					choices["Initiate Crew Transfer"] = round(choices["Initiate Crew Transfer"] * factor)
 					world << "<font color='purple'>Crew Transfer Factor: [factor]</font>"
-					greatest_votes = max(choices["Initiate Crew Transfer"], choices["Continue The Round"])
 
+		for(var/option in choices)
+			var/votes = choices[option]
+			total_votes += votes
+			if(votes > greatest_votes)
+				third_greatest_votes = second_greatest_votes
+				second_greatest_votes = greatest_votes
+				greatest_votes = votes
+			else if(votes > second_greatest_votes)
+				third_greatest_votes = second_greatest_votes
+				second_greatest_votes = votes
+			else if(votes > third_greatest_votes)
+				third_greatest_votes = votes
 
 		//get all options with that many votes and return them in a list
-		. = list()
-		if(greatest_votes)
-			for(var/option in choices)
-				if(choices[option] == greatest_votes)
-					. += option
-		return .
+		var/first = list()
+		var/second = list()
+		var/third = list()
+		for(var/option in choices)
+			if(choices[option] == greatest_votes && greatest_votes)
+				first += option
+			else if(choices[option] == second_greatest_votes && second_greatest_votes)
+				second += option
+			else if(choices[option] == third_greatest_votes && third_greatest_votes)
+				third += option
+		return list(first, second, third)
 
 	proc/announce_result()
 		var/list/winners = get_result()
 		var/text
-		if(winners.len > 0)
-			if(winners.len > 1)
+		var/firstChoice
+		var/secondChoice
+		var/thirdChoice
+		if(length(winners[1]) > 0)
+			if(length(winners[1]) > 1)
 				if(mode != "gamemode" || ticker.hide_mode == 0) // Here we are making sure we don't announce potential game modes
 					text = "<b>Vote Tied Between:</b>\n"
-					for(var/option in winners)
+					for(var/option in winners[1])
 						text += "\t[option]\n"
-			. = pick(winners)
+			firstChoice = pick(winners[1])
+			winners[1] -= firstChoice
 
-			for(var/key in current_votes)
-				if(choices[current_votes[key]] == .)
-					round_voters += key // Keep track of who voted for the winning round.
-			if((mode == "gamemode" && . == "Extended") || ticker.hide_mode == 0) // Announce Extended gamemode, but not other gamemodes
-				text += "<b>Vote Result: [.]</b>"
+			var/i = 1
+			while(isnull(secondChoice))
+				if(length(winners[i]) > 0)
+					secondChoice = pick(winners[i])
+					winners[i] -= secondChoice
+				else
+					if(i == 3)
+						break
+					else
+						i++
+			while(isnull(thirdChoice))
+				if(length(winners[i]) > 0)
+					thirdChoice = pick(winners[i])
+					winners[i] -= thirdChoice
+				else
+					if(i == 3)
+						break
+					else
+						i++
+
+			if((mode == "gamemode" && firstChoice == "Extended") || ticker.hide_mode == 0) // Announce Extended gamemode, but not other gamemodes
+				text += "<b>Vote Result: [firstChoice]</b>"
 			else
 				if(mode != "gamemode")
-					text += "<b>Vote Result: [.]</b>"
+					text += "<b>Vote Result: [firstChoice]</b>"
 				else
 					text += "<b>The vote has ended.</b>" // What will be shown if it is a gamemode vote that isn't extended
 
@@ -143,7 +176,7 @@ datum/controller/vote
 				antag_add_failed = 1
 		log_vote(text)
 		world << "<font color='purple'>[text]</font>"
-		return .
+		return list(firstChoice, secondChoice, thirdChoice)
 
 	proc/result()
 		. = announce_result()
@@ -151,23 +184,25 @@ datum/controller/vote
 		if(.)
 			switch(mode)
 				if("restart")
-					if(. == "Restart Round")
+					if(.[1] == "Restart Round")
 						restart = 1
 				if("gamemode")
-					if(master_mode != .)
-						world.save_mode(.)
+					if(master_mode != .[1])
+						world.save_mode(.[1])
 						if(ticker && ticker.mode)
 							restart = 1
 						else
-							master_mode = .
+							master_mode = .[1]
+					secondary_mode = .[2]
+					tertiary_mode = .[3]
 				if("crew_transfer")
-					if(. == "Initiate Crew Transfer")
+					if(.[1] == "Initiate Crew Transfer")
 						init_shift_change(null, 1)
 				if("add_antagonist")
-					if(isnull(.) || . == "None")
+					if(isnull(.[1]) || .[1] == "None")
 						antag_add_failed = 1
 					else
-						additional_antag_types |= antag_names_to_ids[.]
+						additional_antag_types |= antag_names_to_ids[.[1]]
 
 		if(mode == "gamemode") //fire this even if the vote fails.
 			if(!round_progressing)
@@ -184,16 +219,31 @@ datum/controller/vote
 
 		return .
 
-	proc/submit_vote(var/ckey, var/vote)
+	proc/submit_vote(var/ckey, var/vote, var/weight)
 		if(mode)
 			if(config.vote_no_dead && usr.stat == DEAD && !usr.client.holder)
 				return 0
 			if(vote && vote >= 1 && vote <= choices.len)
-				if(current_votes[ckey])
-					choices[choices[current_votes[ckey]]]--
+				if(current_high_votes[ckey] && (current_high_votes[ckey] == vote || weight == 3))
+					choices[choices[current_high_votes[ckey]]] -= 3
+					current_high_votes -= ckey
+				if(current_med_votes[ckey] && (current_med_votes[ckey] == vote || weight == 2))
+					choices[choices[current_med_votes[ckey]]] -= 2
+					current_med_votes -= ckey
+				if(current_low_votes[ckey] && (current_low_votes[ckey] == vote || weight == 1))
+					choices[choices[current_low_votes[ckey]]]--
+					current_low_votes -= ckey
 				voted += usr.ckey
-				choices[choices[vote]]++	//check this
-				current_votes[ckey] = vote
+				switch(weight)
+					if(3)
+						current_high_votes[ckey] = vote
+						choices[choices[vote]] += 3
+					if(2)
+						current_med_votes[ckey] = vote
+						choices[choices[vote]] += 2
+					if(1)
+						current_low_votes[ckey] = vote
+						choices[choices[vote]] += 1
 				return vote
 		return 0
 
@@ -288,23 +338,42 @@ datum/controller/vote
 			if(question)	. += "<h2>Vote: '[question]'</h2>"
 			else			. += "<h2>Vote: [capitalize(mode)]</h2>"
 			. += "Time Left: [time_remaining] s<hr>"
-			. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td align = 'center'><b>Votes</b></td>"
+			. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td colspan='3' align = 'center'><b>Vote</b></td><td align = 'center'><b>Votes</b></td>"
 			if(capitalize(mode) == "Gamemode") .+= "<td align = 'center'><b>Minimum Players</b></td></tr>"
+
+			var/totalvotes = 0
+			for(var/i = 1, i <= choices.len, i++)
+				totalvotes += choices[choices[i]]
 
 			for(var/i = 1, i <= choices.len, i++)
 				var/votes = choices[choices[i]]
-				if(!votes)	votes = 0
-				. += "<tr>"
-				if(mode == "gamemode")
-					if(current_votes[C.ckey] == i)
-						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></b></td><td align = 'center'>[votes]</td>"
-					else
-						. += "<td><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></td><td align = 'center'>[votes]</td>"
+				var/votepercent
+				if(totalvotes)
+					votepercent = round((votes/totalvotes)*100)
 				else
-					if(current_votes[C.ckey] == i)
-						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
-					else
-						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></td><td align = 'center'>[votes]</td>"
+					votepercent = 0
+				if(!votes)	votes = 0
+				. += "<tr><td>"
+				if(mode == "gamemode")
+					. += "[gamemode_names[choices[i]]]"
+				else
+					. += "[choices[i]]"
+				. += "</td><td>"
+				if(current_high_votes[C.ckey] == i)
+					. += "<b><a href='?src=\ref[src];high_vote=[i]'>High</a></b>"
+				else
+					. += "<a href='?src=\ref[src];high_vote=[i]'>High</a>"
+				. += "</td><td>"
+				if(current_med_votes[C.ckey] == i)
+					. += "<b><a href='?src=\ref[src];med_vote=[i]'>Medium</a></b>"
+				else
+					. += "<a href='?src=\ref[src];med_vote=[i]'>Medium</a>"
+				. += "</td><td>"
+				if(current_low_votes[C.ckey] == i)
+					. += "<b><a href='?src=\ref[src];low_vote=[i]'>Low</a></b>"
+				else
+					. += "<a href='?src=\ref[src];low_vote=[i]'>Low</a>"
+				. += "</td><td align = 'center'>[votepercent]%</td>"
 				if (additional_text.len >= i)
 					. += additional_text[i]
 				. += "</tr>"
@@ -351,39 +420,49 @@ datum/controller/vote
 
 	Topic(href,href_list[],hsrc)
 		if(!usr || !usr.client)	return	//not necessary but meh...just in-case somebody does something stupid
-		switch(href_list["vote"])
-			if("close")
-				voting -= usr.client
-				usr << browse(null, "window=vote")
-				return
-			if("cancel")
-				if(usr.client.holder)
-					reset()
-			if("toggle_restart")
-				if(usr.client.holder)
-					config.allow_vote_restart = !config.allow_vote_restart
-			if("toggle_gamemode")
-				if(usr.client.holder)
-					config.allow_vote_mode = !config.allow_vote_mode
-			if("restart")
-				if(config.allow_vote_restart || usr.client.holder)
-					initiate_vote("restart",usr.key)
-			if("gamemode")
-				if(config.allow_vote_mode || usr.client.holder)
-					initiate_vote("gamemode",usr.key)
-			if("crew_transfer")
-				if(config.allow_vote_restart || usr.client.holder)
-					initiate_vote("crew_transfer",usr.key)
-			if("add_antagonist")
-				if(config.allow_extra_antags)
-					initiate_vote("add_antagonist",usr.key)
-			if("custom")
-				if(usr.client.holder)
-					initiate_vote("custom",usr.key)
-			else
-				var/t = round(text2num(href_list["vote"]))
-				if(t) // It starts from 1, so there's no problem
-					submit_vote(usr.ckey, t)
+		if(href_list["vote"])
+			switch(href_list["vote"])
+				if("close")
+					voting -= usr.client
+					usr << browse(null, "window=vote")
+					return
+				if("cancel")
+					if(usr.client.holder)
+						reset()
+				if("toggle_restart")
+					if(usr.client.holder)
+						config.allow_vote_restart = !config.allow_vote_restart
+				if("toggle_gamemode")
+					if(usr.client.holder)
+						config.allow_vote_mode = !config.allow_vote_mode
+				if("restart")
+					if(config.allow_vote_restart || usr.client.holder)
+						initiate_vote("restart",usr.key)
+				if("gamemode")
+					if(config.allow_vote_mode || usr.client.holder)
+						initiate_vote("gamemode",usr.key)
+				if("crew_transfer")
+					if(config.allow_vote_restart || usr.client.holder)
+						initiate_vote("crew_transfer",usr.key)
+				if("add_antagonist")
+					if(config.allow_extra_antags)
+						initiate_vote("add_antagonist",usr.key)
+				if("custom")
+					if(usr.client.holder)
+						initiate_vote("custom",usr.key)
+		else
+			var/weight = 1
+			var/t
+			if(href_list["high_vote"])
+				t = round(text2num(href_list["high_vote"]))
+				weight = 3
+			else if(href_list["med_vote"])
+				t = round(text2num(href_list["med_vote"]))
+				weight = 2
+			else if(href_list["low_vote"])
+				t = round(text2num(href_list["low_vote"]))
+			if(t) // it starts from 1, so there's no problem
+				submit_vote(usr.ckey, t, weight)
 		usr.vote()
 
 
