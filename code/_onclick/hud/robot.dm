@@ -163,9 +163,7 @@ var/obj/screen/robot_inventory
 
 	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.fire, mymob.hands, mymob.healths, mymob:cells, mymob.pullin, mymob.blind, mymob.flash, robot_inventory, mymob.gun_setting_icon)
 	mymob.client.screen += src.adding + src.other
-	mymob.client.screen += mymob.client.void
-
-	return
+	common_hud()
 
 
 /datum/hud/proc/toggle_show_robot_modules()

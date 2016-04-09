@@ -42,7 +42,7 @@
 	mymob.client.screen = list()
 
 	mymob.client.screen += list(blobpwrdisplay, blobhealthdisplay)
-	mymob.client.screen += mymob.client.void
+	common_hud()
 
 /mob/living/carbon/slime/instantiate_hud(var/datum/hud/HUD)
 	HUD.slime_hud()
@@ -112,7 +112,7 @@
 
 	mymob.client.screen = list()
 	mymob.client.screen += src.adding
-	mymob.client.screen += mymob.client.void
+	common_hud()
 
 	return
 
@@ -171,4 +171,4 @@
 	mymob.client.screen = list()
 
 	mymob.client.screen += list(mymob.fire, mymob.healths, mymob.pullin, mymob.zone_sel, mymob.purged, mymob.flash)
-	mymob.client.screen += mymob.client.void
+	common_hud()
