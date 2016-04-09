@@ -39,9 +39,10 @@
 	blobhealthdisplay.screen_loc = ui_internal
 	blobhealthdisplay.layer = 20
 
-	mymob.client.screen = null
+	mymob.client.screen = list()
 
 	mymob.client.screen += list(blobpwrdisplay, blobhealthdisplay)
+	mymob.client.screen += mymob.client.void
 
 /mob/living/carbon/slime/instantiate_hud(var/datum/hud/HUD)
 	HUD.slime_hud()
@@ -109,8 +110,9 @@
 	src.adding += using
 	hurt_intent = using
 
-	mymob.client.screen = null
+	mymob.client.screen = list()
 	mymob.client.screen += src.adding
+	mymob.client.screen += mymob.client.void
 
 	return
 
@@ -166,6 +168,7 @@
 		mymob.purged.name = "purged"
 		mymob.purged.screen_loc = ui_construct_purge
 
-	mymob.client.screen = null
+	mymob.client.screen = list()
 
 	mymob.client.screen += list(mymob.fire, mymob.healths, mymob.pullin, mymob.zone_sel, mymob.purged, mymob.flash)
+	mymob.client.screen += mymob.client.void
