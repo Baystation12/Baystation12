@@ -393,9 +393,9 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/seeds/random,
 					/obj/item/seeds/kudzuseed)
 	cost = 15
-	containertype = /obj/structure/closet/crate/hydroponics
+	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Exotic Seeds crate"
-	access = access_hydroponics
+	access = access_xenobiology
 	group = "Hydroponics"
 
 /datum/supply_packs/medical
