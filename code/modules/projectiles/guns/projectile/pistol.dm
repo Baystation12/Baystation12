@@ -90,7 +90,7 @@
 	caliber = "75"
 	fire_sound = 'sound/effects/Explosion1.ogg'
 	origin_tech = list(TECH_COMBAT = 3)
-	ammo_type = "/obj/item/ammo_casing/a75"
+	ammo_type = /obj/item/ammo_casing/a75
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a75
 	auto_eject = 1

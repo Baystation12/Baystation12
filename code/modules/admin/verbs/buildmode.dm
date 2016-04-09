@@ -173,7 +173,7 @@
 				if(1)
 					return 1
 				if(2)
-					objholder = text2path(input(usr,"Enter typepath:" ,"Typepath","/obj/structure/closet"))
+					objholder = text2path(input(usr,"Enter typepath:" ,"Typepath",/obj/structure/closet))
 					if(!ispath(objholder))
 						objholder = /obj/structure/closet
 						alert("That path is not allowed.")

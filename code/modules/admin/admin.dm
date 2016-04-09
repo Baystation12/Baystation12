@@ -812,15 +812,34 @@ proc/admin_notice(var/message, var/rights)
 	set category = "Server"
 	set desc="Toggle alien mobs"
 	set name="Toggle Aliens"
+	if(!check_rights(R_ADMIN))
+		return
+
 	config.aliens_allowed = !config.aliens_allowed
 	log_admin("[key_name(usr)] toggled Aliens to [config.aliens_allowed].")
 	message_admins("[key_name_admin(usr)] toggled Aliens [config.aliens_allowed ? "on" : "off"].", 1)
 	feedback_add_details("admin_verb","TA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/admins/proc/toggle_alien_eggs()
+	set category = "Server"
+	set desc="Toggle xenomorph egg laying"
+	set name="Toggle Alien Eggs"
+
+	if(!check_rights(R_ADMIN))
+		return
+	config.alien_eggs_allowed = !config.alien_eggs_allowed
+	log_admin("[key_name(usr)] toggled Alien Egg Laying to [config.alien_eggs_allowed].")
+	message_admins("[key_name_admin(usr)] toggled Alien Egg Laying [config.alien_eggs_allowed ? "on" : "off"].", 1)
+	feedback_add_details("admin_verb","AEA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+
 /datum/admins/proc/toggle_space_ninja()
 	set category = "Server"
 	set desc="Toggle space ninjas spawning."
 	set name="Toggle Space Ninjas"
+	if(!check_rights(R_ADMIN))
+		return
+
 	config.ninjas_allowed = !config.ninjas_allowed
 	log_admin("[key_name(usr)] toggled Space Ninjas to [config.ninjas_allowed].")
 	message_admins("[key_name_admin(usr)] toggled Space Ninjas [config.ninjas_allowed ? "on" : "off"].", 1)
