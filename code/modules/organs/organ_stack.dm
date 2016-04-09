@@ -40,7 +40,7 @@
 
 /obj/item/organ/internal/stack/replaced()
 	..()
-	if(owner && backup_inviable())
+	if(owner && !backup_inviable())
 		var/current_owner = owner
 		var/response = input("Your neural backup has been placed into a new body. Do you wish to return to life?", "Resleeving") as anything in list("Yes", "No")
 		if(src && response == "Yes" && owner == current_owner)

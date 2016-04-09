@@ -165,7 +165,7 @@
 		return
 
 	if((occupant) && (occupant.loc == src))
-		if((occupant.stat == DEAD) || !occupant.key)  //Autoeject corpses
+		if((occupant.stat == DEAD))  //Autoeject corpses
 			go_out()
 			connected_message("Clone Rejected: Deceased.")
 			return
