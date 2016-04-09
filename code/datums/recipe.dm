@@ -74,33 +74,18 @@
 	if (items && items.len)
 		var/list/checklist = list()
 		checklist = items.Copy() // You should really trust Copy
-		if(istype(container, /obj/machinery))
-			var/obj/machinery/machine = container
-			for(var/obj/O in (machine.contents - machine.component_parts))
-				if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown))
-					continue // Fruit is handled in check_fruit().
-				var/found = 0
-				for(var/i = 1; i < checklist.len+1; i++)
-					var/item_type = checklist[i]
-					if (istype(O,item_type))
-						checklist.Cut(i, i+1)
-						found = 1
-						break
-				if (!found)
-					. = 0
-		else
-			for(var/obj/O in container.contents)
-				if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown))
-					continue // Fruit is handled in check_fruit().
-				var/found = 0
-				for(var/i = 1; i < checklist.len+1; i++)
-					var/item_type = checklist[i]
-					if (istype(O,item_type))
-						checklist.Cut(i, i+1)
-						found = 1
-						break
-				if (!found)
-					. = 0
+		for(var/obj/O in container.InsertedContents())
+			if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown))
+				continue // Fruit is handled in check_fruit().
+			var/found = 0
+			for(var/i = 1; i < checklist.len+1; i++)
+				var/item_type = checklist[i]
+				if (istype(O,item_type))
+					checklist.Cut(i, i+1)
+					found = 1
+					break
+			if (!found)
+				. = 0
 		if (checklist.len)
 			. = -1
 	return .
@@ -108,15 +93,9 @@
 //general version
 /datum/recipe/proc/make(var/obj/container as obj)
 	var/obj/result_obj = new result(container)
-	if(istype(container, /obj/machinery))
-		var/obj/machinery/machine = container
-		for (var/obj/O in ((machine.contents-result_obj)-machine.component_parts))
-			O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
-			qdel(O)
-	else
-		for (var/obj/O in (container.contents-result_obj))
-			O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
-			qdel(O)
+	for (var/obj/O in (container.InsertedContents()-result_obj))
+		O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
+		qdel(O)
 	container.reagents.clear_reagents()
 	return result_obj
 
@@ -126,21 +105,12 @@
 		world << "<span class='danger'>Recipe [type] is defined without a result, please bug this.</span>"
 		return
 	var/obj/result_obj = new result(container)
-	if(istype(container, /obj/machinery))
-		var/obj/machinery/machine = container
-		for (var/obj/O in ((machine.contents-result_obj)-machine.component_parts))
-			if (O.reagents)
-				O.reagents.del_reagent("nutriment")
-				O.reagents.update_total()
-				O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
-			qdel(O)
-	else
-		for (var/obj/O in (container.contents-result_obj))
-			if (O.reagents)
-				O.reagents.del_reagent("nutriment")
-				O.reagents.update_total()
-				O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
-			qdel(O)
+	for (var/obj/O in (container.InsertedContents()-result_obj))
+		if (O.reagents)
+			O.reagents.del_reagent("nutriment")
+			O.reagents.update_total()
+			O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
+		qdel(O)
 	container.reagents.clear_reagents()
 	return result_obj
 

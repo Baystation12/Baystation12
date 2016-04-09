@@ -344,3 +344,6 @@ Class Procs:
 		I.loc = loc
 	qdel(src)
 	return 1
+
+/obj/machinery/InsertedContents()
+	return (contents - component_parts)
