@@ -512,7 +512,7 @@ var/list/admin_verbs_mentor = list(
 		if(holder.fakekey)
 			holder.fakekey = null
 			if(istype(src.mob, /mob/new_player))
-				mob.name = capitalize(ckey)
+				mob.name = key
 		else
 			var/new_key = ckeyEx(input("Enter your desired display name.", "Fake Key", key) as text|null)
 			if(!new_key)	return
