@@ -27,10 +27,6 @@
 	var/cpr_time = 1.0
 	var/nutrition = 400.0//Carbon
 
-
-	var/obj/item/weapon/tank/internal = null//Human/Monkey
-
-
 	//these two help govern taste. The first is the last time a taste message was shown to the plaer.
 	//the second is the message in question.
 	var/last_taste_time = 0

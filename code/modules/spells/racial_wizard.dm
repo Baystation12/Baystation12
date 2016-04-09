@@ -157,10 +157,13 @@
 
 /spell/moghes_blessing/choose_targets(mob/user = usr)
 	var/list/hands = list()
-	if(user.l_hand && !findtext(user.l_hand.name,"Moghes Blessing"))
-		hands += user.l_hand
-	if(user.r_hand && !findtext(user.r_hand.name,"Moghes Blessing"))
-		hands += user.r_hand
+	
+	if(isliving(user))
+		var/mob/living/L = user
+		if(L.l_hand && !findtext(L.l_hand.name,"Moghes Blessing")) //GOD WHY
+			hands += L.l_hand
+		if(L.r_hand && !findtext(L.r_hand.name,"Moghes Blessing"))
+			hands += L.r_hand
 	return hands
 
 /spell/moghes_blessing/cast(var/list/targets, mob/user)
