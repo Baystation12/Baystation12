@@ -47,7 +47,7 @@ var/datum/uplink/uplink = new()
 	if(!can_buy(U))
 		return
 
-	var/cost = cost(U.uses)
+	var/cost = cost(U)
 
 	var/goods = get_goods(U, get_turf(user), user, extra_args)
 	if(!goods)
@@ -83,7 +83,7 @@ var/datum/uplink/uplink = new()
 			return 1
 	return 0
 
-/datum/uplink_item/proc/cost(var/telecrystals)
+/datum/uplink_item/proc/cost(obj/item/device/uplink/U)
 	return item_cost
 
 /datum/uplink_item/proc/description()
