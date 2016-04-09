@@ -79,7 +79,7 @@
 		if(istype(protection) && (protection.body_parts_covered & FACE))
 			protected = 1
 			break
-	
+
 	if(protected)
 		M << "<span class='warning'>You get slammed in the face with the tray, against your mask!</span>"
 		if(prob(33))
@@ -188,28 +188,27 @@
 
 			I.loc = src
 			carrying.Add(I)
-			overlays += image("icon" = I.icon, "icon_state" = I.icon_state, "layer" = 30 + I.layer)
+			overlays += image("icon" = I.icon, "icon_state" = I.icon_state, "layer" = 30 + I.layer, "pixel_x" = I.pixel_x, "pixel_y" = I.pixel_y)
 
 /obj/item/weapon/tray/dropped(mob/user)
+	spawn(1) //why sleep 1? Because forceMove first drops us on the ground.
+		if(!isturf(loc)) //to handle hand switching
+			return
 
-	var/mob/living/M
-	for(M in src.loc) //to handle hand switching
-		return
+		var/foundtable = 0
+		for(var/obj/structure/table/T in loc)
+			foundtable = 1
+			break
 
-	var/foundtable = 0
-	for(var/obj/structure/table/T in loc)
-		foundtable = 1
-		break
+		overlays.Cut()
 
-	overlays.Cut()
-
-	for(var/obj/item/I in carrying)
-		I.loc = loc
-		carrying.Remove(I)
-		if(!foundtable && isturf(loc))
+		for(var/obj/item/I in carrying)
+			I.loc = loc
+			carrying.Remove(I)
+			if(!foundtable && isturf(loc))
 			// if no table, presume that the person just shittily dropped the tray on the ground and made a mess everywhere!
-			spawn()
-				for(var/i = 1, i <= rand(1,2), i++)
-					if(I)
-						step(I, pick(NORTH,SOUTH,EAST,WEST))
-						sleep(rand(2,4))
+				spawn()
+					for(var/i = 1, i <= rand(1,2), i++)
+						if(I)
+							step(I, pick(NORTH,SOUTH,EAST,WEST))
+							sleep(rand(2,4))

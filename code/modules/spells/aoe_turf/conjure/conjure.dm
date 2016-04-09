@@ -10,7 +10,7 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 	school = "conjuration" //funny, that
 
 	var/list/summon_type = list() //determines what exactly will be summoned
-	//should be text, like list("/obj/machinery/bot/ed209")
+	//should NOT be text, like list(/obj/machinery/bot/ed209)
 
 	range = 0		//default values: only spawn on the player tile
 	selection_type = "view"
