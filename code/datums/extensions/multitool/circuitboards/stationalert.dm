@@ -1,4 +1,4 @@
-/datum/extension/multitool/circuitboards/stationalert/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)
+/datum/extension/interactive/multitool/circuitboards/stationalert/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)
 	var/obj/item/weapon/circuitboard/stationalert/SA = holder
 	. += "<b>Alarm Sources</b><br>"
 	. += "<table>"
@@ -12,7 +12,7 @@
 		. += "</tr>"
 	. += "</table>"
 
-/datum/extension/multitool/circuitboards/stationalert/on_topic(href, href_list, user)
+/datum/extension/interactive/multitool/circuitboards/stationalert/on_topic(href, href_list, user)
 	var/obj/item/weapon/circuitboard/stationalert/SA = holder
 	if(href_list["add"])
 		var/datum/alarm_handler/AH = locate(href_list["add"]) in alarm_manager.all_handlers

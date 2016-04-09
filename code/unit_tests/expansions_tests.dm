@@ -20,9 +20,9 @@
 		log_unit_test("[exp]/([exp.type]) was not strictly of the type /datum/extension.")
 		number_of_failures++
 
-	var/datum/extension/multitool/multi = get_extension(expansion_obj, /datum/extension/multitool)
-	if(multi.type != /datum/extension/multitool/cryo)
-		log_unit_test("[exp]/([exp.type]) was not strictly of the type /datum/extension/multitool/cryo.")
+	var/datum/extension/interactive/multitool/multi = get_extension(expansion_obj, /datum/extension/interactive/multitool)
+	if(multi.type != /datum/extension/interactive/multitool/cryo)
+		log_unit_test("[exp]/([exp.type]) was not strictly of the type /datum/extension/interactive/multitool/cryo.")
 		number_of_failures++
 	else
 		if(multi.host_predicates.len != 2)
@@ -45,5 +45,5 @@
 
 /obj/test/extensions/New()
 	set_extension(src, /datum/extension, /datum/extension)
-	set_extension(src, /datum/extension/multitool, /datum/extension/multitool/cryo, list(/proc/is_operable, /proc/is_operable))
+	set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/cryo, list(/proc/is_operable, /proc/is_operable))
 	..()
