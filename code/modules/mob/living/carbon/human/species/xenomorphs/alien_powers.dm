@@ -173,29 +173,8 @@
 
 	visible_message("<span class='warning'>[src] spits neurotoxin at [target]!</span>", "<span class='alium'>You spit neurotoxin at [target].</span>")
 
-	//I'm not motivated enough to revise this. Prjectile code in general needs update.
-	// Maybe change this to use throw_at? ~ Z
-	var/turf/T = loc
-	var/turf/U = (istype(target, /atom/movable) ? target.loc : target)
-
-	if(!U || !T)
-		return
-	while(U && !istype(U,/turf))
-		U = U.loc
-	if(!istype(T, /turf))
-		return
-	if (U == T)
-		usr.bullet_act(new /obj/item/projectile/energy/neurotoxin(usr.loc), get_organ_target())
-		return
-	if(!istype(U, /turf))
-		return
-
 	var/obj/item/projectile/energy/neurotoxin/A = new /obj/item/projectile/energy/neurotoxin(usr.loc)
-	A.current = U
-	A.yo = U.y - T.y
-	A.xo = U.x - T.x
-	A.process()
-	return
+	A.launch(target,get_organ_target())
 
 /mob/living/carbon/human/proc/resin() // -- TLE
 	set name = "Secrete Resin (75)"

@@ -9,12 +9,13 @@ var/datum/antagonist/xenos/xenomorphs
 	flags = ANTAG_OVERRIDE_MOB | ANTAG_RANDSPAWN | ANTAG_OVERRIDE_JOB | ANTAG_VOTABLE
 	welcome_text = "Hiss! You are a larval alien. Hide and bide your time until you are ready to evolve."
 	antaghud_indicator = "hudalien"
-
+	antag_indicator = "alien"
 	faction_role_text = "Xenomorph Thrall"
 	faction_descriptor = "Hive"
 	faction_welcome = "Your will is ripped away as your humanity merges with the xenomorph overmind. You are now \
 		a thrall to the queen and her brood. Obey their instructions without question. Serve the hive."
 	faction = "xenomorph"
+	faction_indicator = "hudalien"
 
 	hard_cap = 5
 	hard_cap_round = 8
