@@ -1,6 +1,3 @@
-#define COMMANDED_STOP 6
-#define COMMANDED_FOLLOW 7
-
 /mob/living/simple_animal/hostile/commanded
 	name = "commanded"
 	stance = COMMANDED_STOP
@@ -143,6 +140,7 @@
 /mob/living/simple_animal/hostile/commanded/proc/stay_command(var/mob/speaker,var/text)
 	target_mob = null
 	stance = COMMANDED_STOP
+	stop_automated_movement = 1
 	walk_to(src,0)
 	return 1
 

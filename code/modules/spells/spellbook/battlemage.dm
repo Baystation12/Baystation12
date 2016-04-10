@@ -4,6 +4,7 @@
 	name = "\improper Battlemage's Bible"
 	feedback = "BM"
 	desc = "Smells like blood."
+	book_desc = "Mix physical with the mystical in head to head combat."
 	title = "The Art of Magical Combat"
 	title_desc = "Buy spells using your available spell slots. Artefacts may also be bought however their cost is permanent."
 	book_flags = 4
