@@ -136,7 +136,10 @@
 //		src << "<span class='notice'>[msg]</span>"
 //		return
 
-	send2adminirc("PlayerPM to [sender] from [key_name(src)]: [html_decode(msg)]")
+	var/rank = "Player"
+	if(holder)
+		rank = holder.rank
+	send2adminirc("[rank]PM to [sender] from [key_name(src)]: [html_decode(msg)]")
 
 	src << "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "", src) + " to <span class='name'>IRC-[sender]</span>: <span class='message'>[msg]</span></span></span>"
 
