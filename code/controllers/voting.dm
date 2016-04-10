@@ -147,20 +147,18 @@ datum/controller/vote
 				if(length(winners[i]) > 0)
 					secondChoice = pick(winners[i])
 					winners[i] -= secondChoice
+				else if(i == 3)
+					break
 				else
-					if(i == 3)
-						break
-					else
-						i++
+					i++
 			while(isnull(thirdChoice))
 				if(length(winners[i]) > 0)
 					thirdChoice = pick(winners[i])
 					winners[i] -= thirdChoice
+				else if(i == 3)
+					break
 				else
-					if(i == 3)
-						break
-					else
-						i++
+					i++
 
 			if((mode == "gamemode" && firstChoice == "Extended") || ticker.hide_mode == 0) // Announce Extended gamemode, but not other gamemodes
 				text += "<b>Vote Result: [firstChoice]</b>"
