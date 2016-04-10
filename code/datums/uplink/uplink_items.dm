@@ -49,7 +49,7 @@ var/datum/uplink/uplink = new()
 	if(!can_buy(U))
 		return
 
-	var/cost = cost(U)
+	var/cost = cost(U.uses, U)
 
 	var/goods = get_goods(U, get_turf(user), user, extra_args)
 	if(!goods)
@@ -65,7 +65,7 @@ var/datum/uplink/uplink = new()
 	return 1
 
 /datum/uplink_item/proc/can_buy(obj/item/device/uplink/U)
-	if(cost(U.uses) > U.uses)
+	if(cost(U.uses, U) > U.uses)
 		return 0
 
 	return can_view(U)
@@ -85,10 +85,10 @@ var/datum/uplink/uplink = new()
 			return 1
 	return 0
 
-/datum/uplink_item/proc/cost(obj/item/device/uplink/U)
+/datum/uplink_item/proc/cost(var/telecrystals, obj/item/device/uplink/U)
 	. = item_cost
 
-	if(U.uplink_owner)
+	if(U && U.uplink_owner)
 		for(var/antag_role in antag_costs)
 			var/datum/antagonist/antag = all_antag_types[antag_role]
 			if(antag.is_antagonist(U.uplink_owner))
@@ -110,7 +110,7 @@ var/datum/uplink/uplink = new()
 	U.purchase_log[src] = U.purchase_log[src] + 1
 
 datum/uplink_item/dd_SortValue()
-	return cost(INFINITY)
+	return cost(INFINITY, null)
 
 /********************************
 *                           	*
@@ -168,6 +168,6 @@ var/image/default_abstract_uplink_icon
 		if(!I)
 			break
 		bought_items += I
-		remaining_TC -= I.cost(remaining_TC)
+		remaining_TC -= I.cost(remaining_TC, U)
 
 	return bought_items
