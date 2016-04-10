@@ -346,12 +346,15 @@ datum/preferences
 					I.robotize()
 
 	character.all_underwear.Cut()
+	character.all_underwear_metadata.Cut()
 
 	for(var/underwear_category_name in all_underwear)
 		var/datum/category_group/underwear/underwear_category = global_underwear.categories_by_name[underwear_category_name]
 		if(underwear_category)
 			var/underwear_item_name = all_underwear[underwear_category_name]
 			character.all_underwear[underwear_category_name] = underwear_category.items_by_name[underwear_item_name]
+			if(all_underwear_metadata[underwear_category_name])
+				character.all_underwear_metadata[underwear_category_name] = all_underwear_metadata[underwear_category_name]
 		else
 			all_underwear -= underwear_category_name
 

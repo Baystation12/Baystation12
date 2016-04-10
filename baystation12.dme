@@ -41,6 +41,7 @@
 #include "code\_compatibility\509\JSON\_JSON.dm"
 #include "code\_compatibility\509\JSON\JSON Reader.dm"
 #include "code\_compatibility\509\JSON\JSON Writer.dm"
+#include "code\_helpers\_global_objects.dm"
 #include "code\_helpers\areas.dm"
 #include "code\_helpers\atmospherics.dm"
 #include "code\_helpers\datum_pool.dm"
