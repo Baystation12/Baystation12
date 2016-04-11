@@ -100,8 +100,6 @@
 
 	total_health = 70
 
-	taste_sensitivity = 3
-
 	cold_level_1 = 130
 	cold_level_2 = 100
 	cold_level_3 = 60
@@ -145,6 +143,7 @@
 				if(target.species.flags & NO_BREATHE) //dont breathe so why do they smell it.
 					continue
 			M << "<span class='danger'>A terrible stench emanates from \the [H].</span>"
-
+	if(prob(1) && prob(50)) //0.5% chance
+		H.vomit()
 /datum/species/vox/pariah/get_bodytype()
 	return "Vox"

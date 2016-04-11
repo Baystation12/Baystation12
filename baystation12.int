@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+DIR: code code\__defines code\defines code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\living\carbon\human\species code\modules\mob\living\carbon\human\species\outsider code\modules\organs code\modules\organs\internal code\modules\organs\subtypes code\modules\xgm icons icons\mob icons\mob\species 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+WINDOW: code\modules\organs\subtypes\vox.dm;code\modules\mob\living\carbon\human\species\outsider\vox.dm;code\__defines\mobs.dm
+FILE: code\modules\mob\living\carbon\human\species\outsider\vox.dm
 */
 // END_INTERNALS
