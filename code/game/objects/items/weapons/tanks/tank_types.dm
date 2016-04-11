@@ -108,12 +108,18 @@
 		src.loc = F
 	return
 
-/obj/item/weapon/tank/phoron/vox
+/obj/item/weapon/tank/vox
 	desc = "Contains dangerous phoron. Has the words \"VOX ONLY\" hastily painted onit."
 	gauge_icon = "indicator_tank"
 	slot_flags = SLOT_BACK
 	icon_state = "oxygen_fr"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
+
+/obj/item/weapon/tank/vox/New()
+	..()
+
+	src.air_contents.adjust_gas("phoron", (5*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
+	return
 
 /*
  * Emergency Phoron
