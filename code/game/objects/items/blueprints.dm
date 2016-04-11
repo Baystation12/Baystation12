@@ -43,6 +43,11 @@
 				interact()
 				return
 			edit_area()
+		if ("delete_area")
+			if (get_area_type()!=AREA_STATION)
+				interact()
+				return
+			delete_area()
 
 /obj/item/blueprints/interact()
 	var/area/A = get_area()
@@ -60,7 +65,7 @@
 			text += {"
 <p>According the blueprints, you are now in <b>\"[A.name]\"</b>.</p>
 <p>You may <a href='?src=\ref[src];action=edit_area'>
-move an amendment</a> to the drawing.</p>
+move an amendment</a> to the drawing or <a href='?src=\ref[src];action=delete_area'>erase a part of it</a>.</p>
 "}
 		if (AREA_SPECIAL)
 			text += {"
@@ -159,6 +164,12 @@ move an amendment</a> to the drawing.</p>
 	A.name = str
 	usr << "<span class='notice'>You set the area '[prevname]' title to '[str]'.</span>"
 	interact()
+	return
+	
+	
+/obj/item/blueprints/proc/delete_area()
+	var/area/A = get_area()
+	del(A)
 	return
 
 
