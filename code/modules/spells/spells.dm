@@ -30,24 +30,28 @@
 
 
 proc/restore_spells(var/mob/H)
-	for(var/spell/spell_to_remove in H.mind.learned_spells) //remove all the spells from other people.
-		if(istype(spell_to_remove.holder,/mob))
-			var/mob/M = spell_to_remove.holder
-			M.remove_spell(spell_to_remove)
 	if(H.mind && H.mind.learned_spells)
-		for(var/spell/spell_to_add in H.mind.learned_spells)
+		var/list/spells = list()
+		for(var/spell/spell_to_remove in H.mind.learned_spells) //remove all the spells from other people.
+			if(istype(spell_to_remove.holder,/mob))
+				var/mob/M = spell_to_remove.holder
+				spells += spell_to_remove
+				M.remove_spell(spell_to_remove)
+
+		for(var/spell/spell_to_add in spells)
 			H.add_spell(spell_to_add)
 
 /mob/proc/add_spell(var/spell/spell_to_add, var/spell_base = "wiz_spell_ready", var/master_type = /obj/screen/movable/spell_master)
 	if(!spell_masters)
 		spell_masters = list()
-
 	if(!spell_list.len)
 		src.verbs += /mob/proc/cast_spell
 	if(mind)
 		if(!mind.learned_spells)
 			mind.learned_spells = list()
-		mind.learned_spells += spell_to_add
+		if(!(spell_to_add in mind.learned_spells))
+			mind.learned_spells += spell_to_add
+	spell_to_add.holder = src
 	if(spell_masters.len)
 		for(var/obj/screen/movable/spell_master/spell_master in spell_masters)
 			if(spell_master.type == master_type)
