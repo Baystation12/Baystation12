@@ -16,7 +16,7 @@
 
 /obj/item/organ/liver/vox
 	name = "waste tract"
-	parent_organ = "chest"
+	parent_organ = "head"
 	color = "#0033cc"
 
 
