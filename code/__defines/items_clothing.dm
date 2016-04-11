@@ -63,6 +63,7 @@
 #define BLOCKHAIR       0x40    // Hides the user's hair, facial and otherwise.
 
 // Slots.
+#define slot_first       1
 #define slot_back        1
 #define slot_wear_mask   2
 #define slot_handcuffed  3
@@ -85,6 +86,7 @@
 #define slot_r_ear       20
 #define slot_legs        21
 #define slot_tie         22
+#define slot_last        22
 
 // Inventory slot strings.
 // since numbers cannot be used as associative list keys.

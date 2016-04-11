@@ -403,7 +403,6 @@ BLIND     // can't see anything
 	var/obj/item/holding
 
 	permeability_coefficient = 0.50
-	slowdown = SHOES_SLOWDOWN
 	force = 2
 	var/overshoes = 0
 	species_restricted = list("exclude","Unathi","Tajara","Vox")
@@ -411,6 +410,10 @@ BLIND     // can't see anything
 		"Vox" = 'icons/mob/species/vox/shoes.dmi',
 		"Resomi" = 'icons/mob/species/resomi/shoes.dmi',
 		)
+
+/obj/item/clothing/shoes/New()
+	..()
+	slowdown_per_slot[slot_shoes] = SHOES_SLOWDOWN
 
 /obj/item/clothing/shoes/proc/draw_knife()
 	set name = "Draw Boot Knife"

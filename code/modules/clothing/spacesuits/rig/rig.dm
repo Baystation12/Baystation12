@@ -73,6 +73,7 @@
 	var/seal_delay = SEAL_DELAY
 	var/sealing                                               // Keeps track of seal status independantly of canremove.
 	var/offline = 1                                           // Should we be applying suit maluses?
+	var/online_slowdown = 0                                   // If the suit is deployed and powered, it sets slowdown to this.
 	var/offline_slowdown = 3                                  // If the suit is deployed and unpowered, it sets slowdown to this.
 	var/vision_restriction
 	var/offline_vision_restriction = 1                        // 0 - none, 1 - welder vision, 2 - blind. Maybe move this to helmets.
@@ -136,7 +137,7 @@
 		chest = new chest_type(src)
 		if(allowed)
 			chest.allowed = allowed
-		chest.slowdown = offline_slowdown
+		set_slowdown(offline_slowdown)
 		verbs |= /obj/item/weapon/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
@@ -154,6 +155,7 @@
 		piece.unacidable = unacidable
 		if(islist(armor)) piece.armor = armor.Copy()
 
+	set_slowdown(online_slowdown)
 	update_icon(1)
 
 /obj/item/weapon/rig/Destroy()
@@ -168,6 +170,9 @@
 	qdel(spark_system)
 	spark_system = null
 	return ..()
+
+/obj/item/weapon/rig/proc/set_slowdown(var/new_slowdown)
+	chest.slowdown_per_slot[slot_wear_suit] = new_slowdown
 
 /obj/item/weapon/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || wearer.back != src)
@@ -349,14 +354,14 @@
 			offline = 0
 			if(istype(wearer) && !wearer.wearing_rig)
 				wearer.wearing_rig = src
-			chest.slowdown = initial(slowdown)
+			set_slowdown(online_slowdown)
 
 	if(offline)
 		if(offline == 1)
 			for(var/obj/item/rig_module/module in installed_modules)
 				module.deactivate()
 			offline = 2
-			chest.slowdown = offline_slowdown
+			set_slowdown(offline_slowdown)
 		return
 
 	if(cell && cell.charge > 0 && electrified > 0)

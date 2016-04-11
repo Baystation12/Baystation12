@@ -19,7 +19,6 @@
 	name = "gem-encrusted voidsuit"
 	desc = "A bizarre gem-encrusted suit that radiates magical energies."
 	item_state = "wiz_voidsuit"
-	slowdown = 1
 	w_class = 3
 	unacidable = 1
 	armor = list(melee = 40, bullet = 20, laser = 20,energy = 20, bomb = 35, bio = 100, rad = 60)
@@ -27,3 +26,7 @@
 	sprite_sheets_refit = null
 	sprite_sheets_obj = null
 	wizard_garb = 1
+
+/obj/item/clothing/suit/space/void/wizard/New()
+	..()
+	slowdown_per_slot[slot_wear_suit] = 1

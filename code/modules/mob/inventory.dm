@@ -206,7 +206,7 @@ var/list/slot_equipment_priority = list( \
 
 /mob/proc/get_inventory_slot(obj/item/I)
 	var/slot = 0
-	for(var/s in slot_back to slot_tie) //kind of worries me
+	for(var/s in slot_first to slot_last) //kind of worries me
 		if(get_equipped_item(s) == I)
 			slot = s
 			break

@@ -30,7 +30,6 @@
 	icon_state = "void"
 	item_state = "void"
 	desc = "A high-tech dark red space suit. Used for AI satellite maintenance."
-	slowdown = 1
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 20)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
@@ -59,6 +58,10 @@
 	var/obj/item/clothing/shoes/magboots/boots = null // Deployable boots, if any.
 	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.
 	var/obj/item/weapon/tank/tank = null              // Deployable tank, if any.
+
+/obj/item/clothing/suit/space/void/New()
+	..()
+	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/space/void/examine(user)
 	..(user)

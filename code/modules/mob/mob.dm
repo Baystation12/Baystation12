@@ -140,7 +140,16 @@
 	return 0
 
 /mob/proc/movement_delay()
-	return 0
+	. = 0
+	if(pulling)
+		if(istype(pulling, /obj))
+			var/obj/O = pulling
+			. += O.w_class / 2
+		else if(istype(pulling, /mob))
+			var/mob/M = pulling
+			. += M.mob_size / 5
+		else
+			. += 1
 
 /mob/proc/Life()
 //	if(organStructure)
