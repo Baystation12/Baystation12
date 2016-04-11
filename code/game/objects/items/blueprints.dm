@@ -169,7 +169,7 @@ move an amendment</a> to the drawing or <a href='?src=\ref[src];action=delete_ar
 	
 /obj/item/blueprints/proc/delete_area()
 	var/area/A = get_area()
-	del(A)
+	qdel(A)
 	return
 
 
