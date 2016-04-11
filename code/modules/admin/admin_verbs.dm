@@ -293,6 +293,7 @@ var/list/admin_verbs_mod = list(
 	/client/proc/check_antagonists,
 	/client/proc/jobbans,
 	/client/proc/cmd_admin_subtle_message, // send an message to somebody as a 'voice in their head',
+	/client/proc/aooc,
 	/datum/admins/proc/paralyze_mob
 )
 
