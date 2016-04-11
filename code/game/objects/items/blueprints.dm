@@ -62,10 +62,18 @@
 <p><a href='?src=\ref[src];action=create_area'>Mark this place as new area.</a></p>
 "}
 		if (AREA_STATION)
-			text += {"
+			if (A.apc)
+				text += {"
 <p>According the blueprints, you are now in <b>\"[A.name]\"</b>.</p>
 <p>You may <a href='?src=\ref[src];action=edit_area'>
-move an amendment</a> to the drawing or <a href='?src=\ref[src];action=delete_area'>erase a part of it</a>.</p>
+move an amendment</a> to the drawing.</p>
+<p>You can't erase this area, because it has an APC.</p>
+"}
+			else
+				text += {"
+<p>According the blueprints, you are now in <b>\"[A.name]\"</b>.</p>
+<p>You may <a href='?src=\ref[src];action=edit_area'>
+move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_area'>erase part of it</a>.</p>
 "}
 		if (AREA_SPECIAL)
 			text += {"
@@ -169,8 +177,13 @@ move an amendment</a> to the drawing or <a href='?src=\ref[src];action=delete_ar
 	
 /obj/item/blueprints/proc/delete_area()
 	var/area/A = get_area()
+	if (get_area_type()!=AREA_STATION || A.apc) //let's just check this one last time, just in case
+		interact()
+		return
+	usr << "<span class='notice'>You scrub [A.name] off the blueprint.</span>"
+	log_and_message_admins("deleted area [A.name] via station blueprints.")
 	qdel(A)
-	return
+	interact()
 
 
 
