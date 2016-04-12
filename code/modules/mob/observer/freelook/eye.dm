@@ -53,7 +53,7 @@
 /mob/observer/eye/proc/possess(var/mob/user)
 	if(owner && owner != user)
 		return
-	if(owner.eyeobj && owner.eyeobj != src)
+	if(owner && owner.eyeobj != src)
 		return
 	owner = user
 	owner.eyeobj = src
