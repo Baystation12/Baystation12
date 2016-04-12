@@ -46,8 +46,6 @@
 		silent = 0
 	else
 		updatehealth()
-		handle_stunned()
-		handle_weakened()
 		if(health <= 0)
 			death()
 			blinded = 1
@@ -55,7 +53,6 @@
 			return 1
 
 		if(paralysis && paralysis > 0)
-			handle_paralysed()
 			blinded = 1
 			stat = UNCONSCIOUS
 			if(halloss > 0)
