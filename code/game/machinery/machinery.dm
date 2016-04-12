@@ -311,8 +311,7 @@ Class Procs:
 		var/obj/item/weapon/circuitboard/CB = locate(/obj/item/weapon/circuitboard) in component_parts
 		var/P
 		for(var/obj/item/weapon/stock_parts/A in component_parts)
-			for(var/D in CB.req_components)
-				var/T = text2path(D)
+			for(var/T in CB.req_components)
 				if(ispath(A.type, T))
 					P = T
 					break
