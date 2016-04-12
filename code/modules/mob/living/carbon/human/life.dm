@@ -696,9 +696,6 @@
 			animate_tail_reset()
 			adjustHalLoss(-3)
 
-		if(paralysis)
-			AdjustParalysis(-1)
-
 		else if(sleeping)
 			speech_problem_flag = 1
 			handle_dreams()
