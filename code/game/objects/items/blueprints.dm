@@ -44,9 +44,7 @@
 				return
 			edit_area()
 		if ("delete_area")
-			if (get_area_type()!=AREA_STATION)
-				interact()
-				return
+			//skip the sanity checking, delete_area() does it anyway
 			delete_area()
 
 /obj/item/blueprints/interact()
@@ -101,7 +99,11 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 		/area/centcom,
 		/area/asteroid,
 		/area/tdome,
+		/area/acting,
+		/area/supply,
 		/area/syndicate_station,
+		/area/skipjack_station,
+		/area/syndicate_mothership,
 		/area/wizard_station,
 		/area/prison
 		// /area/derelict //commented out, all hail derelict-rebuilders!
@@ -177,7 +179,7 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 	
 /obj/item/blueprints/proc/delete_area()
 	var/area/A = get_area()
-	if (get_area_type()!=AREA_STATION || A.apc) //let's just check this one last time, just in case
+	if (get_area_type(A)!=AREA_STATION || A.apc) //let's just check this one last time, just in case
 		interact()
 		return
 	usr << "<span class='notice'>You scrub [A.name] off the blueprint.</span>"
