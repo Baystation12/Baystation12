@@ -60,7 +60,7 @@ var/list/whitelist = list()
 		species = "[species]";
 	if(species == "human" || species == "Human")
 		return 1
-	if(check_rights(R_ADMIN, 0))
+	if(check_rights(R_ADMIN, 0, M))
 		return 1
 	if(!alien_whitelist)
 		return 0

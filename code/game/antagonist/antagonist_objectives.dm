@@ -71,3 +71,10 @@
 		src << "<span class='notice'>You've set your goal to be '[new_ambitions]'.</span>"
 	else
 		src << "<span class='notice'>You leave your ambitions behind.</span>"
+
+//some antagonist datums are not actually antagonists, so we might want to avoid
+//sending them the antagonist meet'n'greet messages.
+//E.G. ERT
+/datum/antagonist/proc/show_objectives_at_creation(var/datum/mind/player)
+	if(src.show_objectives_on_creation)
+		show_objectives(player)
