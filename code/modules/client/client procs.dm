@@ -158,6 +158,10 @@
 	log_client_to_db()
 
 	send_resources()
+	
+	if(!void)
+		void = new()
+	screen += void
 
 	if(prefs.lastchangelog != changelog_hash) //bolds the changelog button on the interface so we know there are updates.
 		src << "<span class='info'>You have unread updates in the changelog.</span>"

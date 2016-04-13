@@ -1,0 +1,6 @@
+author: Datraen
+
+delete-after: True
+
+changes: 
+  - rscadd: "Manually ports /tg/station's dark click code https://github.com/tgstation/-tg-station/pull/10272 by Razharas."
