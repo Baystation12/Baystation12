@@ -3,7 +3,6 @@
 	desc = "An Hesphaistos Industries G40E carbine, designed to kill with concentrated energy blasts."
 	icon_state = "laser"
 	item_state = "laser"
-	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = 3
 	force = 10
@@ -25,7 +24,6 @@ obj/item/weapon/gun/energy/retro
 	icon_state = "retro"
 	item_state = "retro"
 	desc = "An older model of the basic lasergun. Nevertheless, it is still quite deadly and easy to maintain, making it a favorite amongst pirates and other outlaws."
-	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT
 	w_class = 3
 	projectile_type = /obj/item/projectile/beam
@@ -37,7 +35,6 @@ obj/item/weapon/gun/energy/retro
 	item_state = "caplaser"
 	desc = "A rare weapon, handcrafted by a now defunct specialty manufacturer on Luna for a small fortune. It's certainly aged well."
 	force = 5
-	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT
 	w_class = 3
 	projectile_type = /obj/item/projectile/beam
@@ -50,7 +47,6 @@ obj/item/weapon/gun/energy/retro
 	desc = "With the laser cannon, the lasing medium is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core. This incredible technology may help YOU achieve high excitation rates with small laser volumes!"
 	icon_state = "lasercannon"
 	item_state = null
-	fire_sound = 'sound/weapons/lasercannonfire.ogg'
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
 	slot_flags = SLOT_BELT|SLOT_BACK
 	projectile_type = /obj/item/projectile/beam/heavylaser
@@ -69,7 +65,6 @@ obj/item/weapon/gun/energy/retro
 	desc = "A high-power laser gun capable of expelling concentrated xray blasts."
 	icon_state = "xray"
 	item_state = "xray"
-	fire_sound = 'sound/weapons/laser3.ogg'
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	projectile_type = /obj/item/projectile/beam/xray
 	charge_cost = 100
@@ -81,7 +76,6 @@ obj/item/weapon/gun/energy/retro
 	desc = "The HI DMR 9E is an older design of Hesphaistos Industries. A designated marksman rifle capable of shooting powerful ionized beams, this is a weapon to kill from a distance."
 	icon_state = "sniper"
 	item_state = "laser"
-	fire_sound = 'sound/weapons/marauder.ogg'
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 5, TECH_POWER = 4)
 	projectile_type = /obj/item/projectile/beam/sniper
 	slot_flags = SLOT_BACK
@@ -109,7 +103,6 @@ obj/item/weapon/gun/energy/retro
 	origin_tech = list(TECH_COMBAT = 1, TECH_MAGNET = 2)
 	self_recharge = 1
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
-	fire_sound = 'sound/weapons/Laser.ogg'
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest
 

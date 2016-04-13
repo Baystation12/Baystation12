@@ -5,7 +5,6 @@
 	icon_state = "colt"
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
-	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/sec
@@ -15,7 +14,6 @@
 	magazine_type = /obj/item/ammo_magazine/c45m/flash
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
-	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/sec/update_icon()
@@ -81,7 +79,6 @@
 	icon_state = "gyropistol"
 	max_shells = 8
 	caliber = "75"
-	fire_sound = 'sound/effects/Explosion1.ogg'
 	origin_tech = list(TECH_COMBAT = 3)
 	ammo_type = /obj/item/ammo_casing/a75
 	load_method = MAGAZINE
@@ -105,7 +102,6 @@
 	caliber = "9mm"
 	silenced = 0
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 2)
-	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mm
 
