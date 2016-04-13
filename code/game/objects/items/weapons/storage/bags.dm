@@ -34,6 +34,7 @@
 
 	w_class = 4
 	max_w_class = 2
+	max_storage_space = 28
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
 
@@ -58,8 +59,9 @@
 	icon_state = "plasticbag"
 	item_state = "plasticbag"
 
-	w_class = 4
+	w_class = 3
 	max_w_class = 2
+	max_storage_space = 8
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
 
@@ -105,7 +107,7 @@
 	icon_state = "sheetsnatcher"
 	desc = "A patented storage system designed for any kind of mineral sheet."
 
-	var/capacity = 300; //the number of sheets it can carry.
+	var/capacity = 300; //the number of sheets it can carry. // FFS why is this a storage subtype if it has it's own special implementation for storing sheets?
 	w_class = 3
 	storage_slots = 7
 

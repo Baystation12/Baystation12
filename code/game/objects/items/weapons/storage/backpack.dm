@@ -23,7 +23,7 @@
 	w_class = 4
 	slot_flags = SLOT_BACK
 	max_w_class = 4
-	max_storage_space = 28
+	max_storage_space = 28 //TODO: Fix the fact that this exceeds its own storage cost.
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (src.use_sound)

@@ -13,7 +13,9 @@
 	icon_state = "firstaid"
 	throw_speed = 2
 	throw_range = 8
-	var/empty = 0
+	max_w_class = 2
+	max_storage_space = 14
+	//var/empty = 0
 
 
 /obj/item/weapon/storage/firstaid/fire
@@ -157,7 +159,9 @@
 	icon_state = "pill_canister"
 	icon = 'icons/obj/chemical.dmi'
 	item_state = "contsolid"
-	w_class = 2.0
+	w_class = 2
+	max_w_class = 1
+	max_storage_space = 7
 	can_hold = list(/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/dice,/obj/item/weapon/paper)
 	allow_quick_gather = 1
 	use_to_pickup = 1

@@ -4,11 +4,10 @@
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "dnakit"
 	can_hold = list(/obj/item/weapon/forensics/swab)
-	storage_slots = 14
 
 /obj/item/weapon/storage/box/swabs/New()
 	..()
-	for(var/i=0;i<storage_slots,i++) // Fill 'er up.
+	for(var/i=1 to 14) // Fill 'er up.
 		new /obj/item/weapon/forensics/swab(src)
 
 /obj/item/weapon/storage/box/evidence
@@ -27,9 +26,8 @@
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "dnakit"
 	can_hold = list(/obj/item/weapon/sample/print)
-	storage_slots = 14
 
 /obj/item/weapon/storage/box/fingerprints/New()
 	..()
-	for(var/i=0;i<storage_slots,i++)
+	for(var/i=1 to 14)
 		new /obj/item/weapon/sample/print(src)
