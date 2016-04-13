@@ -98,9 +98,6 @@
 	icon_state = "crayonbox"
 	w_class = 2
 	icon_type = "crayon"
-	can_hold = list(
-		/obj/item/weapon/pen/crayon
-	)
 	max_w_class = 1
 	max_storage_space = 6
 
@@ -146,7 +143,6 @@
 	startswith = 6
 	throwforce = 2
 	slot_flags = SLOT_BELT
-	can_hold = list(/obj/item/clothing/mask/smokable/cigarette, /obj/item/weapon/flame/lighter)
 	icon_type = "cigarette"
 
 /obj/item/weapon/storage/fancy/cigarettes/New()
@@ -158,7 +154,8 @@
 	flags |= OPENCONTAINER
 
 /obj/item/weapon/storage/fancy/cigarettes/update_icon()
-	icon_state = "[initial(icon_state)][contents.len]"
+	var/cig_count = count_by_type(contents, /obj/item/clothing/mask/smokable/cigarette)
+	icon_state = "[initial(icon_state)][cig_count]"
 	return
 
 /obj/item/weapon/storage/fancy/cigarettes/remove_from_storage(obj/item/W as obj, atom/new_location)
@@ -228,7 +225,6 @@
 	throwforce = 2
 	slot_flags = SLOT_BELT
 	storage_slots = 7
-	can_hold = list(/obj/item/clothing/mask/smokable/cigarette/cigar)
 	icon_type = "cigar"
 
 /obj/item/weapon/storage/fancy/cigar/New()
@@ -239,7 +235,8 @@
 	create_reagents(15 * storage_slots)
 
 /obj/item/weapon/storage/fancy/cigar/update_icon()
-	icon_state = "[initial(icon_state)][contents.len]"
+	var/cig_count = count_by_type(contents, /obj/item/clothing/mask/smokable/cigarette)
+	icon_state = "[initial(icon_state)][cig_count]"
 	return
 
 /obj/item/weapon/storage/fancy/cigar/remove_from_storage(obj/item/W as obj, atom/new_location)
@@ -257,6 +254,7 @@
 	icon_state = "vialbox6"
 	icon_type = "vial"
 	name = "vial storage box"
+	w_class = 3
 	max_w_class = 2
 	storage_slots = 6
 	startswith = 6
@@ -275,7 +273,9 @@
 	icon = 'icons/obj/vialbox.dmi'
 	icon_state = "vialbox0"
 	item_state = "syringe_kit"
+	w_class = 3
 	max_w_class = 2
+	max_storage_space = null
 	can_hold = list(/obj/item/weapon/reagent_containers/glass/beaker/vial)
 	storage_slots = 6
 	req_access = list(access_virology)
