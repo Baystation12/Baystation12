@@ -28,20 +28,13 @@
 		for(I in src.loc)
 			if(I.density || I.anchored || I == src) continue
 			I.forceMove(src)
-		// adjust locker size to hold all items with 5 units of free store room
-		var/content_size = 0
-		for(I in src.contents)
-			content_size += Ceiling(I.w_class/2)
-		if(content_size > storage_capacity-5)
-			storage_capacity = content_size + 5
-
 
 /obj/structure/closet/examine(mob/user)
 	if(..(user, 1) && !opened)
 		var/content_size = 0
 		for(var/obj/item/I in src.contents)
 			if(!I.anchored)
-				content_size += Ceiling(I.w_class/2)
+				content_size += content_size(I)
 		if(!content_size)
 			user << "It is empty."
 		else if(storage_capacity > content_size*4)
@@ -132,7 +125,7 @@
 /obj/structure/closet/proc/store_items(var/stored_units)
 	var/added_units = 0
 	for(var/obj/item/I in src.loc)
-		var/item_size = Ceiling(I.w_class / 2)
+		var/item_size = content_size(I)
 		if(stored_units + added_units + item_size > storage_capacity)
 			continue
 		if(!I.anchored)
@@ -145,14 +138,24 @@
 	for(var/mob/living/M in src.loc)
 		if(M.buckled || M.pinned.len)
 			continue
-		if(stored_units + added_units + M.mob_size > storage_capacity)
+		var/mob_size = content_size(M)
+		if(stored_units + added_units + mob_size > storage_capacity)
 			break
 		if(M.client)
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 		M.forceMove(src)
-		added_units += M.mob_size
+		added_units += mob_size
 	return added_units
+
+/obj/structure/closet/proc/content_size(atom/movable/AM)
+	if(ismob(AM))
+		var/mob/M = AM
+		return M.mob_size
+	if(istype(AM, /obj/item))
+		var/obj/item/I = AM
+		return Ceiling(I.w_class / 2)
+	return 0
 
 /obj/structure/closet/proc/toggle(mob/user as mob)
 	if(!(src.opened ? src.close() : src.open()))
