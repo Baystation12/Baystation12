@@ -238,11 +238,7 @@
 
 //called after successfully firing
 /obj/item/weapon/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
-	if(silenced)
-		playsound(user, fire_sound, 10, 1)
-	else
-		playsound(user, fire_sound, 50, 1)
-
+	if(!silenced)
 		if(reflex)
 			user.visible_message(
 				"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!</b></span>",
@@ -323,7 +319,16 @@
 			y_offset = rand(-1,1)
 			x_offset = rand(-1,1)
 
-	return !P.launch_from_gun(target, user, src, target_zone, x_offset, y_offset)
+	var/launched = !P.launch_from_gun(target, user, src, target_zone, x_offset, y_offset)
+
+	if(launched)
+		var/shot_sound = P.fire_sound? P.fire_sound : fire_sound
+		if(silenced)
+			playsound(user, shot_sound, 10, 1)
+		else
+			playsound(user, shot_sound, 50, 1)
+
+	return launched
 
 //Suicide handling.
 /obj/item/weapon/gun/var/mouthshoot = 0 //To stop people from suiciding twice... >.>
@@ -341,10 +346,11 @@
 	var/obj/item/projectile/in_chamber = consume_next_projectile()
 	if (istype(in_chamber))
 		user.visible_message("<span class = 'warning'>[user] pulls the trigger.</span>")
+		var/shot_sound = in_chamber.fire_sound? in_chamber.fire_sound : fire_sound
 		if(silenced)
-			playsound(user, fire_sound, 10, 1)
+			playsound(user, shot_sound, 10, 1)
 		else
-			playsound(user, fire_sound, 50, 1)
+			playsound(user, shot_sound, 50, 1)
 		if(istype(in_chamber, /obj/item/projectile/beam/lastertag))
 			user.show_message("<span class = 'warning'>You feel rather silly, trying to commit suicide with a toy.</span>")
 			mouthshoot = 0
