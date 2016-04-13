@@ -7,7 +7,7 @@
 	name = "\improper Druid's Leaflet"
 	feedback = "DL"
 	desc = "It smells like an air freshener."
-
+	book_desc = "Summons, nature, and a bit o' healin."
 	title = "Druidic Guide on how to be smug about nature"
 	title_desc = "Buy spells using your available spell slots. Artefacts may also be bought however their cost is permanent."
 	book_flags = 4

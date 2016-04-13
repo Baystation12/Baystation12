@@ -1,6 +1,3 @@
-#define COMMANDED_STOP 6
-#define COMMANDED_FOLLOW 7
-
 /mob/living/simple_animal/hostile/commanded
 	name = "commanded"
 	stance = COMMANDED_STOP
@@ -11,6 +8,7 @@
 	var/list/known_commands = list("stay", "stop", "attack", "follow")
 	var/mob/master = null //undisputed master. Their commands hold ultimate sway and ultimate power.
 	var/list/allowed_targets = list() //WHO CAN I KILL D:
+	var/retribution = 1 //whether or not they will attack us if we attack them like some kinda dick.
 
 /mob/living/simple_animal/hostile/commanded/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	if((speaker in friends) || speaker == master)
@@ -29,7 +27,7 @@
 		var/mob/speaker = command_buffer[1]
 		var/text = command_buffer[2]
 		var/filtered_name = lowertext(html_decode(name))
-		if(dd_hasprefix(text,filtered_name))
+		if(dd_hasprefix(text,filtered_name) || dd_hasprefix(text,"everyone") || dd_hasprefix(text, "everybody")) //in case somebody wants to command 8 bears at once.
 			var/substring = copytext(text,length(filtered_name)+1) //get rid of the name.
 			listen(speaker,substring)
 		command_buffer.Remove(command_buffer[1],command_buffer[2])
@@ -142,6 +140,7 @@
 /mob/living/simple_animal/hostile/commanded/proc/stay_command(var/mob/speaker,var/text)
 	target_mob = null
 	stance = COMMANDED_STOP
+	stop_automated_movement = 1
 	walk_to(src,0)
 	return 1
 
@@ -175,7 +174,7 @@
 /mob/living/simple_animal/hostile/commanded/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 	//if they attack us, we want to kill them. None of that "you weren't given a command so free kill" bullshit.
 	. = ..()
-	if(!.)
+	if(!. && retribution)
 		stance = HOSTILE_STANCE_ATTACK
 		target_mob = user
 		allowed_targets += user //fuck this guy in particular.
@@ -185,7 +184,7 @@
 
 /mob/living/simple_animal/hostile/commanded/attack_hand(mob/living/carbon/human/M as mob)
 	..()
-	if(M.a_intent == I_HURT) //assume he wants to hurt us.
+	if(M.a_intent == I_HURT && retribution) //assume he wants to hurt us.
 		target_mob = M
 		allowed_targets += M
 		stance = HOSTILE_STANCE_ATTACK
