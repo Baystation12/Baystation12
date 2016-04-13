@@ -1378,13 +1378,7 @@
 	required = /obj/item/slime_extract/pyrite
 
 /datum/chemical_reaction/slime/paint/on_reaction(var/datum/reagents/holder)
-	var/color = pick("red","white","black","yellow","green","blue","purple")
-	var/type = text2path("/obj/item/weapon/reagent_containers/glass/paint/[color]")
-	if(!ispath(type))
-		CRASH("Invalid path in slime paint reaction.")
-		return
-
-	new type(get_turf(holder.my_atom))
+	new /obj/item/weapon/reagent_containers/glass/paint/random(get_turf(holder.my_atom))
 	..()
 
 //cerulean
