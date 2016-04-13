@@ -49,7 +49,7 @@
 /obj/machinery/power/smes/batteryrack/update_icon()
 	overlays.Cut()
 	if(stat & BROKEN)	return
-	
+
 	if(!br_cache)
 		br_cache = list()
 		br_cache.len = 7
@@ -60,7 +60,7 @@
 		br_cache[5] = image('icons/obj/power.dmi', "gsmes_og2")
 		br_cache[6] = image('icons/obj/power.dmi', "gsmes_og3")
 		br_cache[7] = image('icons/obj/power.dmi', "gsmes_og4")
-	
+
 	if (output_attempt)
 		overlays += br_cache[1]
 	if(inputting)
@@ -156,11 +156,11 @@
 		if (0 to (1.2e6-1))
 			if (overcharge_percent >= 125)
 				if (prob(5))
-					ion_act()
+					energy_fail(rand(10, 20))
 		if (1.2e6 to 2.4e6)
 			if (overcharge_percent >= 120)
 				if (prob(6))
-					ion_act()
+					energy_fail(rand(15, 25))
 			else
 				return
 			if (overcharge_percent >= 140)
@@ -169,7 +169,7 @@
 		if ((2.4e6+1) to 3.6e6)
 			if (overcharge_percent >= 115)
 				if (prob(7))
-					ion_act()
+					energy_fail(rand(20, 30))
 			else
 				return
 			if (overcharge_percent >= 130)
@@ -181,7 +181,7 @@
 		if ((3.6e6+1) to INFINITY)
 			if (overcharge_percent >= 115)
 				if (prob(8))
-					ion_act()
+					energy_fail(rand(35, 40))
 			else
 				return
 			if (overcharge_percent >= 125)

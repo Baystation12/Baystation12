@@ -38,6 +38,9 @@
 	var/last_chrg
 	var/last_onln
 
+	var/damage = 0
+	var/maxdamage = 500 // Relatively resilient, given how expensive it is, but once destroyed produces small explosion.
+
 	var/input_cut = 0
 	var/input_pulsed = 0
 	var/output_cut = 0
@@ -284,6 +287,18 @@
 		stat = 0
 		return 0
 
+	if(istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(!WT.isOn())
+			user << "Turn on \the [WT] first!"
+			return 0
+		if(!damage)
+			user << "\The [src] is already fully repaired."
+			return 0
+		if(WT.remove_fuel(0,user) && do_after(user, damage, src))
+			user << "You repair all structural damage to \the [src]"
+			damage = 0
+		return 0
 	else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
 		building_terminal = 1
 		var/turf/tempTDir = terminal.loc
@@ -388,35 +403,6 @@
 /obj/machinery/power/smes/proc/energy_fail(var/duration)
 	failure_timer = max(failure_timer, duration)
 
-/obj/machinery/power/smes/proc/ion_act()
-	if(src.z in config.station_levels)
-		if(prob(1)) //explosion
-			for(var/mob/M in viewers(src))
-				M.show_message("\red The [src.name] is making strange noises!", 3, "\red You hear sizzling electronics.", 2)
-			sleep(10*pick(4,5,6,7,10,14))
-			var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
-			smoke.set_up(3, 0, src.loc)
-			smoke.attach(src)
-			smoke.start()
-			explosion(src.loc, -1, 0, 1, 3, 1, 0)
-			qdel(src)
-			return
-		else if(prob(15)) //Power drain
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(3, 1, src)
-			s.start()
-			if(prob(50))
-				emp_act(1)
-			else
-				emp_act(2)
-		else if(prob(5)) //smoke only
-			var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
-			smoke.set_up(3, 0, src.loc)
-			smoke.attach(src)
-			smoke.start()
-		else
-			energy_fail(rand(0, 30))
-
 /obj/machinery/power/smes/proc/inputting(var/do_input)
 	input_attempt = do_input
 	if(!input_attempt)
@@ -426,6 +412,21 @@
 	output_attempt = do_output
 	if(!output_attempt)
 		outputting = 0
+
+/obj/machinery/power/smes/proc/take_damage(var/amount)
+	amount = max(0, round(amount))
+	damage += amount
+	if(damage > maxdamage)
+		visible_message("<span class='danger'>\The [src] explodes in large rain of sparks and smoke!</span>")
+		// Depending on stored charge percentage cause damage.
+		switch(Percentage())
+			if(75 to INFINITY)
+				explosion(get_turf(src), 1, 2, 4)
+			if(40 to 74)
+				explosion(get_turf(src), 0, 2, 3)
+			if(5 to 39)
+				explosion(get_turf(src), 0, 1, 2)
+		qdel(src) // Either way we want to ensure the SMES is deleted.
 
 /obj/machinery/power/smes/emp_act(severity)
 	if(prob(50))
@@ -443,14 +444,27 @@
 	update_icon()
 	..()
 
+/obj/machinery/power/smes/bullet_act(var/obj/item/projectile/Proj)
+	if(Proj.damage_type == BRUTE || Proj.damage_type == BURN)
+		take_damage(Proj.damage)
 
-/obj/machinery/power/smes/magical
-	name = "quantum power storage unit"
-	desc = "A high-capacity superconducting magnetic energy storage (SMES) unit. Gains energy from quantum entanglement link."
-	capacity = 5000000
-	output_level = 250000
-	should_be_mapped = 1
+/obj/machinery/power/smes/ex_act(var/severity)
+	// Two strong explosions will destroy a SMES.
+	// Given the SMES creates another explosion on it's destruction it sounds fairly reasonable.
+	take_damage(250 / severity)
 
-/obj/machinery/power/smes/magical/process()
-	charge = 5000000
+/obj/machinery/power/smes/examine(var/mob/user)
 	..()
+	user << "The service hatch is [open_hatch ? "open" : "closed"]."
+	if(!damage)
+		return
+	var/damage_percentage = round((damage / maxdamage) * 100)
+	switch(damage_percentage)
+		if(75 to INFINITY)
+			user << "<span class='danger'>It's casing is severely damaged, and sparking circuitry may be seen through the holes!</span>"
+		if(50 to 74)
+			user << "<span class='notice'>It's casing is considerably damaged, and some of the internal circuits appear to be exposed!</span>"
+		if(25 to 49)
+			user << "<span class='notice'>It's casing is quite seriously damaged.</span>"
+		if(0 to 24)
+			user << "It's casing has some minor damage."
