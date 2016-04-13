@@ -1,5 +1,4 @@
 /obj/item/weapon/gun/projectile/colt
-	var/unique_reskin
 	name = "vintage .45 pistol"
 	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 rounds."
 	magazine_type = /obj/item/ammo_magazine/c45m
@@ -8,6 +7,9 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
+
+/obj/item/weapon/gun/projectile/colt/detective
+	var/unique_reskin
 
 /obj/item/weapon/gun/projectile/colt/detective
 	magazine_type = /obj/item/ammo_magazine/c45m/flash
@@ -35,11 +37,13 @@
 		M << "<span class='notice'>You don't feel cool enough to name this gun, chump.</span>"
 		return 0
 
-	var/input = sanitizeSafe(input("What do you want to name the gun?", ,""), MAX_NAME_LEN)
+	var/input = sanitizeSafe(input("What do you want to name the gun?","Rename gun"), MAX_NAME_LEN)
 
-	if(src && input && !M.stat && in_range(M,src))
+	if(src && input && !M.incapacitated() && in_range(M,src))
+		if(!findtext(input, "the", 1, 4))
+			input = "\improper [input]"
 		name = input
-		M << "You name the gun [input]. Say hello to your new friend."
+		M << "You name the gun '[input]'. Say hello to your new friend."
 		return 1
 
 /obj/item/weapon/gun/projectile/colt/detective/verb/reskin_gun()
@@ -56,12 +60,21 @@
 	options["H&K VP"] = "VP78"
 	options["P08 Luger"] = "p08"
 	options["P08 Luger, Brown"] = "p08b"
-	var/choice = input(M,"What do you want to skin the gun to?","Reskin Gun") in options
-	if(src && choice && !M.stat && in_range(M,src))
+	var/choice = input(M,"What do you want to skin the gun to?","Reskin Gun", unique_reskin) as null|anything in options
+	if(src && choice && !M.incapacitated() && in_range(M,src))
 		icon_state = options[choice]
 		unique_reskin = options[choice]
-		M << "Your gun is now skinned as [choice]. Say hello to your new friend."
+		M << "Your gun is now skinned as \a [choice]. Say hello to your new friend."
 		return 1
+
+
+//apart of reskins that have two sprites, touching may result in frustration and breaks
+/obj/item/weapon/gun/projectile/colt/detective/attack_hand(var/mob/living/user)
+	if(!unique_reskin && loc == user)
+		reskin_gun(user)
+		return
+	..()
+
 
 /obj/item/weapon/gun/projectile/sec
 	name = ".45 pistol"
