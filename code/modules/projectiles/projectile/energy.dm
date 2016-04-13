@@ -42,7 +42,7 @@
 /obj/item/projectile/energy/flash/flare
 	damage = 10
 	fire_sound = 'sound/weapons/Gunshot.ogg'
-	flash_range = 1
+	flash_range = 2
 	brightness = 15
 
 /obj/item/projectile/energy/flash/flare/on_impact(var/atom/A)
