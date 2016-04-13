@@ -57,6 +57,10 @@
 		name = "Short Hair"	  // try to capatilize the names please~
 		icon_state = "hair_a" // you do not need to define _s or _l sub-states, game automatically does this for you
 
+	short2
+		name = "Short Hair 2"
+		icon_state = "hair_shorthair2"
+
 	resomi
 		name = "Resomi Plumage"
 		icon_state = "resomi_default"
