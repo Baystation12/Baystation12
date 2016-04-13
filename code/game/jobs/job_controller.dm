@@ -111,7 +111,7 @@ var/global/datum/controller/occupations/job_master
 			if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!
 				continue
 
-			if(job in command_positions) //If you want a command position, select it!
+			if(job.title in command_positions) //If you want a command position, select it!
 				continue
 
 			if(jobban_isbanned(player, job.title))
@@ -342,11 +342,11 @@ var/global/datum/controller/occupations/job_master
 						else
 							permitted = 1
 
-						if(G.whitelisted && !is_alien_whitelisted(H, G.whitelisted))
+						if(G.whitelisted && (G.whitelisted != H.species.name || !is_alien_whitelisted(H, G.whitelisted)))
 							permitted = 0
 
 						if(!permitted)
-							H << "<span class='warning'>Your current job or whitelist status does not permit you to spawn with [thing]!</span>"
+							H << "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>"
 							continue
 
 						if(G.slot && !(G.slot in custom_equip_slots))

@@ -1,8 +1,6 @@
 //Config stuff
 #define SUPPLY_DOCKZ 2          //Z-level of the Dock.
 #define SUPPLY_STATIONZ 1       //Z-level of the Station.
-#define SUPPLY_STATION_AREATYPE "/area/supply/station" //Type of the supply shuttle area for station
-#define SUPPLY_DOCK_AREATYPE "/area/supply/dock"	//Type of the supply shuttle area for dock
 
 //Supply packs are in /code/defines/obj/supplypacks.dm
 //Computers are in /code/game/machinery/computer/supply.dm

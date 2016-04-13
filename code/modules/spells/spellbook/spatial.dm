@@ -7,7 +7,7 @@
 	name = "\improper Spatial Manual"
 	feedback = "SP"
 	desc = "You feel like this might disappear from out of under you."
-
+	book_desc = "Movement and teleportation. Run from your problems!"
 	title = "Manual of Spatial Transportation"
 	title_desc = "Buy spells using your available spell slots. Artefacts may also be bought however their cost is permanent."
 

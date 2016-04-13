@@ -83,7 +83,7 @@
 	set desc = "Lay an egg to produce huggers to impregnate prey with."
 	set category = "Abilities"
 
-	if(!config.aliens_allowed)
+	if(!config.alien_eggs_allowed)
 		src << "You begin to lay an egg, but hesitate. You suspect it isn't allowed."
 		verbs -= /mob/living/carbon/human/proc/lay_egg
 		return
@@ -173,29 +173,8 @@
 
 	visible_message("<span class='warning'>[src] spits neurotoxin at [target]!</span>", "<span class='alium'>You spit neurotoxin at [target].</span>")
 
-	//I'm not motivated enough to revise this. Prjectile code in general needs update.
-	// Maybe change this to use throw_at? ~ Z
-	var/turf/T = loc
-	var/turf/U = (istype(target, /atom/movable) ? target.loc : target)
-
-	if(!U || !T)
-		return
-	while(U && !istype(U,/turf))
-		U = U.loc
-	if(!istype(T, /turf))
-		return
-	if (U == T)
-		usr.bullet_act(new /obj/item/projectile/energy/neurotoxin(usr.loc), get_organ_target())
-		return
-	if(!istype(U, /turf))
-		return
-
 	var/obj/item/projectile/energy/neurotoxin/A = new /obj/item/projectile/energy/neurotoxin(usr.loc)
-	A.current = U
-	A.yo = U.y - T.y
-	A.xo = U.x - T.x
-	A.process()
-	return
+	A.launch(target,get_organ_target())
 
 /mob/living/carbon/human/proc/resin() // -- TLE
 	set name = "Secrete Resin (75)"
@@ -262,3 +241,32 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 	M << "<span class='danger'>A hideous lump of alien mass strains your ribcage as it settles within!</span>"
 	var/obj/item/organ/xenos/hivenode/node = new(affecting)
 	node.replaced(M,affecting)
+
+/mob/living/carbon/human/proc/pry_open(obj/machinery/door/A in oview(1))
+	set name = "Pry Open Airlock"
+	set desc = "Pry open an airlock with your claws."
+	set category = "Abilities"
+
+	if(!istype(A))
+		return
+
+	if(!A.Adjacent(src))
+		src << "<span class='warning'>\The [A] is too far away.</span>"
+		return
+
+	if(!A.density)
+		return
+
+	src.visible_message("\The [src] begins to pry open \the [A]!")
+
+	if(!do_after(src,120,A))
+		return
+
+	if(!A.density)
+		return
+
+	A.do_animate("spark")
+	sleep(6)
+	A.stat |= BROKEN
+	var/check = A.open(1)
+	src.visible_message("\The [src] slices \the [A]'s controls[check ? ", ripping it open!" : ", breaking it!"]")

@@ -256,6 +256,7 @@ var/global/list/robot_modules = list(
 					)
 
 /obj/item/weapon/robot_module/medical/crisis/New()
+	src.modules += new /obj/item/weapon/crowbar(src)
 	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/borg/sight/hud/med(src)
 	src.modules += new /obj/item/device/healthanalyzer(src)

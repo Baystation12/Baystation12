@@ -61,6 +61,9 @@
 	//put this here for easier tracking ingame
 	var/datum/money_account/initial_account
 
+	//used for optional self-objectives that antagonists can give themselves, which are displayed at the end of the round.
+	var/ambitions
+
 /datum/mind/New(var/key)
 	src.key = key
 	..()
@@ -104,7 +107,8 @@
 		for(var/datum/objective/objective in objectives)
 			output += "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
 			obj_count++
-
+	if(ambitions)
+		output += "<HR><B>Ambitions:</B> [ambitions]<br>"
 	recipient << browse(output,"window=memory")
 
 /datum/mind/proc/edit_memory()
@@ -138,7 +142,8 @@
 
 	else
 		out += "None."
-	out += "<br><a href='?src=\ref[src];obj_add=1'>\[add\]</a>"
+	out += "<br><a href='?src=\ref[src];obj_add=1'>\[add\]</a><br><br>"
+	out += "<b>Ambitions:</b> [ambitions ? ambitions : "None"] <a href='?src=\ref[src];amb_edit=\ref[src]'>\[edit\]</a></br>"
 	usr << browse(out, "window=edit_memory[src]")
 
 /datum/mind/Topic(href, href_list)
@@ -177,6 +182,17 @@
 		var/new_memo = sanitize(input("Write new memory", "Memory", memory) as null|message)
 		if (isnull(new_memo)) return
 		memory = new_memo
+
+	else if (href_list["amb_edit"])
+		var/datum/mind/mind = locate(href_list["amb_edit"])
+		if(!mind)
+			return
+		var/new_ambition = input("Enter a new ambition", "Memory", mind.ambitions) as null|message
+		if(isnull(new_ambition))
+			return
+		if(mind)
+			mind.ambitions = sanitize(new_ambition)
+			mind.current << "<span class='warning'>Your ambitions have been changed by higher powers, they are now: [mind.ambitions]</span>"
 
 	else if (href_list["obj_edit"] || href_list["obj_add"])
 		var/datum/objective/objective

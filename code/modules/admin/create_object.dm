@@ -13,12 +13,9 @@
 /datum/admins/proc/quick_create_object(var/mob/user)
 
 	var/quick_create_object_html = null
-	var/pathtext = null
-
-	pathtext = input("Select the path of the object you wish to create.", "Path", "/obj") as null|anything in list("/obj","/obj/structure","/obj/item","/obj/item/weapon","/obj/item/clothing","/obj/machinery","/obj/mecha")
-	if(!pathtext)
+	var/path = input("Select the path of the object you wish to create.", "Path", /obj) as null|anything in list(/obj,/obj/structure,/obj/item,/obj/item/weapon,/obj/item/clothing,/obj/machinery,/obj/mecha)
+	if(!path)
 		return
-	var path = text2path(pathtext)
 
 	if (!quick_create_object_html)
 		var/objectjs = null

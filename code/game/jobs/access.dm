@@ -68,7 +68,7 @@
 		priv_all_access_datums = init_subtypes(/datum/access)
 		priv_all_access_datums = dd_sortedObjectList(priv_all_access_datums)
 
-	return priv_all_access_datums
+	return priv_all_access_datums.Copy()
 
 /var/list/datum/access/priv_all_access_datums_id
 /proc/get_all_access_datums_by_id()
@@ -77,7 +77,7 @@
 		for(var/datum/access/A in get_all_access_datums())
 			priv_all_access_datums_id["[A.id]"] = A
 
-	return priv_all_access_datums_id
+	return priv_all_access_datums_id.Copy()
 
 /var/list/datum/access/priv_all_access_datums_region
 /proc/get_all_access_datums_by_region()
@@ -88,7 +88,7 @@
 				priv_all_access_datums_region[A.region] = list()
 			priv_all_access_datums_region[A.region] += A
 
-	return priv_all_access_datums_region
+	return priv_all_access_datums_region.Copy()
 
 /proc/get_access_ids(var/access_types = ACCESS_TYPE_ALL)
 	var/list/L = new()
@@ -102,28 +102,28 @@
 	if(!priv_all_access)
 		priv_all_access = get_access_ids()
 
-	return priv_all_access
+	return priv_all_access.Copy()
 
 /var/list/priv_station_access
 /proc/get_all_station_access()
 	if(!priv_station_access)
 		priv_station_access = get_access_ids(ACCESS_TYPE_STATION)
 
-	return priv_station_access
+	return priv_station_access.Copy()
 
 /var/list/priv_centcom_access
 /proc/get_all_centcom_access()
 	if(!priv_centcom_access)
 		priv_centcom_access = get_access_ids(ACCESS_TYPE_CENTCOM)
 
-	return priv_centcom_access
+	return priv_centcom_access.Copy()
 
 /var/list/priv_syndicate_access
 /proc/get_all_syndicate_access()
 	if(!priv_syndicate_access)
 		priv_syndicate_access = get_access_ids(ACCESS_TYPE_SYNDICATE)
 
-	return priv_syndicate_access
+	return priv_syndicate_access.Copy()
 
 /var/list/priv_region_access
 /proc/get_region_accesses(var/code)
@@ -137,7 +137,8 @@
 				priv_region_access["[A.region]"] = list()
 			priv_region_access["[A.region]"] += A.id
 
-	return priv_region_access["[code]"]
+	var/list/region = priv_region_access["[code]"]
+	return region.Copy()
 
 /proc/get_region_accesses_name(var/code)
 	switch(code)

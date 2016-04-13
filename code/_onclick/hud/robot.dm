@@ -159,12 +159,11 @@ var/obj/screen/robot_inventory
 	mymob.gun_move_icon = new /obj/screen/gun/move(null)
 	mymob.radio_use_icon = new /obj/screen/gun/radio(null)
 
-	mymob.client.screen = null
+	mymob.client.screen = list()
 
 	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.fire, mymob.hands, mymob.healths, mymob:cells, mymob.pullin, mymob.blind, mymob.flash, robot_inventory, mymob.gun_setting_icon)
 	mymob.client.screen += src.adding + src.other
-
-	return
+	common_hud()
 
 
 /datum/hud/proc/toggle_show_robot_modules()

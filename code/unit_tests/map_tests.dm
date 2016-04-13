@@ -105,6 +105,31 @@ datum/unit_test/wire_test/start_test()
 
 	return 1
 
+//=======================================================================================
+
+datum/unit_test/closet_test
+	name = "MAP: Closet Capacity Test Player Z levels"
+
+datum/unit_test/closet_test/start_test()
+	var/bad_tests = 0
+
+	for(var/obj/structure/closet/C in world)
+		if(!C.opened && isPlayerLevel(C.z))
+			var/total_content_size = 0
+			for(var/atom/movable/AM in C.contents)
+				total_content_size += C.content_size(AM)
+			if(total_content_size > C.storage_capacity)
+				var/bad_msg = "[ascii_red]--------------- [C.name] \[[C.x] / [C.y] / [C.z]\]"
+				log_unit_test("[bad_msg] Contains more objects than able to hold ([total_content_size] / [C.storage_capacity]). [ascii_reset]")
+				bad_tests++
+
+	if(bad_tests)
+		fail("\[[bad_tests]\] Some closets contained more objects than they were able to hold.")
+	else
+		pass("No overflowing closets found.")
+
+	return 1
+
 
 #undef SUCCESS
 #undef FAILURE
