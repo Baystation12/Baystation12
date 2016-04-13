@@ -580,23 +580,40 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/solar_assembly,
 					/obj/item/solar_assembly,
 					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly, // 21 Solar Assemblies. 1 Extra for the controller,
+					/obj/item/solar_assembly, // 11 Solar Assemblies. 1 Extra for the controller,
 					/obj/item/weapon/circuitboard/solar_control,
 					/obj/item/weapon/tracker_electronics,
 					/obj/item/weapon/paper/solar)
-	cost = 20
+	cost = 15
 	containertype = /obj/structure/closet/crate
-	containername = "\improper Solar pack crate"
+	containername = "\improper Solar Pack crate"
+	group = "Engineering"
+
+/datum/supply_packs/solar_assembly
+	name = "Solar Assembly crate"
+	contains  = list(/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly) // 20 Solar Assemblies
+	cost = 10
+	containertype = /obj/structure/closet/crate
+	containername = "\improper Solar Assembly crate"
 	group = "Engineering"
 
 /datum/supply_packs/engine
