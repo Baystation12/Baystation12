@@ -111,7 +111,7 @@
 
 /obj/structure/sign/poster/initialize()
 	if (poster_type)
-		var/path = text2path(poster_type)
+		var/path = ispath(poster_type) ? poster_type : text2path(poster_type)
 		var/datum/poster/design = new path
 		set_poster(design)
 
