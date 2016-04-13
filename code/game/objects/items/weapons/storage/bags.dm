@@ -34,7 +34,7 @@
 
 	w_class = 4
 	max_w_class = 2
-	max_storage_space = 28
+	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
 
@@ -61,7 +61,7 @@
 
 	w_class = 3
 	max_w_class = 2
-	max_storage_space = 8
+	max_storage_space = DEFAULT_BOX_STORAGE
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
 

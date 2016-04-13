@@ -14,7 +14,7 @@
 	throw_speed = 2
 	throw_range = 8
 	max_w_class = 2
-	max_storage_space = 14
+	max_storage_space = DEFAULT_BOX_STORAGE
 	//var/empty = 0
 
 

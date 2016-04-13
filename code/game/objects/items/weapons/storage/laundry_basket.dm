@@ -12,7 +12,7 @@
 
 	w_class = 5
 	max_w_class = 4
-	max_storage_space = 25 //20 for clothes + a bit of additional space for non-clothing items that were worn on body
+	max_storage_space = DEFAULT_BACKPACK_STORAGE //20 for clothes + a bit of additional space for non-clothing items that were worn on body
 	storage_slots = 14
 	use_to_pickup = 1
 	allow_quick_empty = 1

@@ -25,7 +25,7 @@
 	var/open = 0
 	w_class = 3
 	max_w_class = 2
-	max_storage_space = 14
+	max_storage_space = DEFAULT_BOX_STORAGE
 
 	examine(mob/user)
 		if(..(user, 1))
@@ -151,7 +151,7 @@
 	throw_range = 4
 	w_class = 4
 	max_w_class = 3
-	max_storage_space = 28
+	max_storage_space = DEFAULT_BACKPACK_STORAGE
 
 	attack_hand(mob/user as mob)
 		if ((src.loc == user) && (src.locked == 1))

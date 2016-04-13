@@ -23,7 +23,7 @@
 	w_class = 4
 	slot_flags = SLOT_BACK
 	max_w_class = 4
-	max_storage_space = 28 //TODO: Fix the fact that this exceeds its own storage cost.
+	max_storage_space = DEFAULT_BACKPACK_STORAGE
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (src.use_sound)
@@ -155,7 +155,7 @@
 		slot_r_hand_str = "duffle",
 		)
 	slowdown = 1
-	max_storage_space = 38
+	max_storage_space = DEFAULT_BACKPACK_STORAGE + 10
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie
 	name = "black dufflebag"

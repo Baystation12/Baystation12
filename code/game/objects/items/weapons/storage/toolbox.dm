@@ -11,7 +11,7 @@
 	throw_range = 7
 	w_class = 4
 	max_w_class = 3
-	max_storage_space = 28 //enough to hold all starting contents
+	max_storage_space = DEFAULT_BACKPACK_STORAGE //enough to hold all starting contents
 	origin_tech = list(TECH_COMBAT = 1)
 	attack_verb = list("robusted")
 
