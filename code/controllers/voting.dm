@@ -160,13 +160,16 @@ datum/controller/vote
 				else
 					i++
 
-			if((mode == "gamemode" && firstChoice == "Extended") || ticker.hide_mode == 0) // Announce Extended gamemode, but not other gamemodes
+			if(mode == "gamemode" && (firstChoice == "Extended" || ticker.hide_mode == 0)) // Announce Extended gamemode, but not other gamemodes
+				text += "<b>Vote Result: [firstChoice]</b>"
+				if(secondChoice)
+					text += "\nSecond place: [secondChoice]"
+				if(thirdChoice)
+					text += ", third place: [thirdChoice]"
+			else if(mode != "gamemode")
 				text += "<b>Vote Result: [firstChoice]</b>"
 			else
-				if(mode != "gamemode")
-					text += "<b>Vote Result: [firstChoice]</b>"
-				else
-					text += "<b>The vote has ended.</b>" // What will be shown if it is a gamemode vote that isn't extended
+				text += "<b>The vote has ended.</b>" // What will be shown if it is a gamemode vote that isn't extended
 
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"

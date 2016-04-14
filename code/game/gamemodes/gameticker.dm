@@ -53,13 +53,17 @@ var/global/datum/controller/gameticker/ticker
 				master_mode = secondary_mode
 				secondary_mode = null
 				world << "Trying to start the second top game mode..."
+				if(!hide_mode)
+					world << "<b>The game mode is now: [master_mode]</b>"
 			else if(!isnull(tertiary_mode))
 				master_mode = tertiary_mode
 				tertiary_mode = null
 				world << "Trying to start the third top game mode..."
+				if(!hide_mode)
+					world << "<b>The game mode is now: [master_mode]</b>"
 			else
 				master_mode = "extended"
-				world << "Forcing the game mode to extended..."
+				world << "<b>Forcing the game mode to extended...</b>"
 		world << "<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>"
 		world << "Please, setup your character and select ready. Game will start in [pregame_timeleft] seconds"
 		while(current_state == GAME_STATE_PREGAME)
