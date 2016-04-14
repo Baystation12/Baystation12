@@ -13,9 +13,9 @@
 	load_method = SINGLE_CASING
 	max_shells = 1
 	ammo_type = /obj/item/ammo_casing/a145
-	//+2 accuracy over the LWAP because only one shot
-	accuracy = -1
-	scoped_accuracy = 2
+	//increased accuracy over the LWAP because only one shot
+	accuracy = -3
+	scoped_accuracy = 5
 	var/bolt_open = 0
 
 /obj/item/weapon/gun/projectile/heavysniper/update_icon()
