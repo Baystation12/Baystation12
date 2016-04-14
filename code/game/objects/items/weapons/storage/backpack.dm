@@ -154,7 +154,8 @@
 		slot_l_hand_str = "duffle",
 		slot_r_hand_str = "duffle",
 		)
-	slowdown = 1
+	w_class = 5
+	slowdown = 3 //wear it on your back if you must, best to carry it in hands to avoid any slowdown at all.
 	max_storage_space = DEFAULT_BACKPACK_STORAGE + 10
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie
@@ -165,7 +166,7 @@
 		slot_l_hand_str = "duffle_syndiemed",
 		slot_r_hand_str = "duffle_syndiemed",
 		)
-	slowdown = 0
+	slowdown = 1
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie/med
 	name = "medical dufflebag"
