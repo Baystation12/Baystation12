@@ -234,6 +234,8 @@
 
 /obj/item/projectile/bullet/pistol/cap
 	name = "cap"
+	invisibility = 101
+	fire_sound = null
 	damage_type = HALLOSS
 	damage = 0
 	nodamage = 1
