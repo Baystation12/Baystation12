@@ -47,3 +47,20 @@
 	display_name = "handheld mirror"
 	path = /obj/item/weapon/mirror
 	cost = 1
+	path = /obj/item/weapon/haircomb
+
+/datum/gear/lunchbox
+	display_name = "lunchbox"
+	description = "A little lunchbox."
+	cost = 2
+	path = /obj/item/weapon/storage/lunchbox
+
+/datum/gear/lunchbox/New()
+	..()
+	var/list/lunchboxes = list()
+	for(var/lunchbox_type in typesof(/obj/item/weapon/storage/lunchbox))
+		var/obj/item/weapon/storage/lunchbox/lunchbox = lunchbox_type
+		if(!initial(lunchbox.filled))
+			lunchboxes[initial(lunchbox.name)] = lunchbox_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(lunchboxes))
+	gear_tweaks += new/datum/gear_tweak/contents(lunchables_lunches(), lunchables_snacks(), lunchables_drinks())
