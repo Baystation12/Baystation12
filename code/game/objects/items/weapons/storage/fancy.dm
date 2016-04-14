@@ -18,10 +18,9 @@
 	icon_state = "donutbox6"
 	name = "donut box"
 	var/icon_type = "donut"
-	var/startswith //many "fancy" storages start with items in them
 
-/obj/item/weapon/storage/fancy/update_icon(var/itemremoved = 0)
-	var/total_contents = src.contents.len - itemremoved
+/obj/item/weapon/storage/fancy/update_icon()
+	var/total_contents = src.contents.len
 	src.icon_state = "[src.icon_type]box[total_contents]"
 	return
 
@@ -48,7 +47,6 @@
 	icon_type = "egg"
 	name = "egg box"
 	storage_slots = 12
-	startswith = 12
 	max_w_class = 2
 	w_class = 3
 	can_hold = list(
@@ -56,11 +54,7 @@
 		/obj/item/weapon/reagent_containers/food/snacks/boiledegg
 		)
 
-/obj/item/weapon/storage/fancy/egg_box/New()
-	..()
-	for(var/i=1; i <= startswith; i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/egg(src)
-	return
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/egg = 12)
 
 /*
  * Candle Box
@@ -77,15 +71,9 @@
 	w_class = 2
 	max_w_class = 1
 	max_storage_space = 5
-	startswith = 5
 	slot_flags = SLOT_BELT
 
-
-/obj/item/weapon/storage/fancy/candle_box/New()
-	..()
-	for(var/i=1; i <= startswith; i++)
-		new /obj/item/weapon/flame/candle(src)
-	return
+	startswith = list(/obj/item/weapon/flame/candle = 5)
 
 /*
  * Crayon Box
@@ -101,15 +89,14 @@
 	max_w_class = 1
 	max_storage_space = 6
 
-/obj/item/weapon/storage/fancy/crayons/New()
-	..()
-	new /obj/item/weapon/pen/crayon/red(src)
-	new /obj/item/weapon/pen/crayon/orange(src)
-	new /obj/item/weapon/pen/crayon/yellow(src)
-	new /obj/item/weapon/pen/crayon/green(src)
-	new /obj/item/weapon/pen/crayon/blue(src)
-	new /obj/item/weapon/pen/crayon/purple(src)
-	update_icon()
+	startswith = list(
+		/obj/item/weapon/pen/crayon/red,
+		/obj/item/weapon/pen/crayon/orange,
+		/obj/item/weapon/pen/crayon/yellow,
+		/obj/item/weapon/pen/crayon/green,
+		/obj/item/weapon/pen/crayon/blue,
+		/obj/item/weapon/pen/crayon/purple,
+		)
 
 /obj/item/weapon/storage/fancy/crayons/update_icon()
 	overlays = list() //resets list
@@ -145,11 +132,11 @@
 	slot_flags = SLOT_BELT
 	icon_type = "cigarette"
 
+	startswith = list(/obj/item/clothing/mask/smokable/cigarette = 6)
+
 /obj/item/weapon/storage/fancy/cigarettes/New()
 	..()
 	flags |= NOREACT
-	for(var/i = 1 to startswith)
-		new /obj/item/clothing/mask/smokable/cigarette(src)
 	create_reagents(15 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 	flags |= OPENCONTAINER
 
@@ -221,17 +208,16 @@
 	w_class = 2
 	max_w_class = 1
 	max_storage_space = 6
-	startswith = 6
 	throwforce = 2
 	slot_flags = SLOT_BELT
 	storage_slots = 7
 	icon_type = "cigar"
 
+	startswith = list(/obj/item/clothing/mask/smokable/cigarette/cigar = 6)
+
 /obj/item/weapon/storage/fancy/cigar/New()
 	..()
 	flags |= NOREACT
-	for(var/i = 1 to startswith)
-		new /obj/item/clothing/mask/smokable/cigarette/cigar(src)
 	create_reagents(15 * storage_slots)
 
 /obj/item/weapon/storage/fancy/cigar/update_icon()
@@ -257,15 +243,9 @@
 	w_class = 3
 	max_w_class = 2
 	storage_slots = 6
-	startswith = 6
 	can_hold = list(/obj/item/weapon/reagent_containers/glass/beaker/vial)
 
-
-/obj/item/weapon/storage/fancy/vials/New()
-	..()
-	for(var/i=1; i <= startswith; i++)
-		new /obj/item/weapon/reagent_containers/glass/beaker/vial(src)
-	return
+	startswith = list(/obj/item/weapon/reagent_containers/glass/beaker/vial = 6)
 
 /obj/item/weapon/storage/lockbox/vials
 	name = "secure vial storage box"
@@ -284,8 +264,8 @@
 	..()
 	update_icon()
 
-/obj/item/weapon/storage/lockbox/vials/update_icon(var/itemremoved = 0)
-	var/total_contents = src.contents.len - itemremoved
+/obj/item/weapon/storage/lockbox/vials/update_icon()
+	var/total_contents = src.contents.len
 	src.icon_state = "vialbox[total_contents]"
 	src.overlays.Cut()
 	if (!broken)
