@@ -8,7 +8,7 @@ datum/track/New(var/title_name, var/audio)
 	title = title_name
 	sound = audio
 
-/obj/machinery/media/jukebox/
+/obj/machinery/media/jukebox
 	name = "space jukebox"
 	icon = 'icons/obj/jukebox.dmi'
 	icon_state = "jukebox2-nopower"
@@ -35,10 +35,13 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
 	)
 
+/obj/machinery/media/jukebox/New()
+	..()
+	update_icon()
 
 /obj/machinery/media/jukebox/Destroy()
 	StopPlaying()
-	..()
+	. = ..()
 
 /obj/machinery/media/jukebox/power_change()
 	if(!powered(power_channel) || !anchored)
@@ -65,10 +68,7 @@ datum/track/New(var/title_name, var/audio)
 		else
 			overlays += "[state_base]-running"
 
-/obj/machinery/media/jukebox/Topic(href, href_list)
-	if(..() || !(Adjacent(usr) || istype(usr, /mob/living/silicon)))
-		return
-
+/obj/machinery/media/jukebox/interact(mob/user)
 	if(!anchored)
 		usr << "<span class='warning'>You must secure \the [src] first.</span>"
 		return
@@ -77,71 +77,73 @@ datum/track/New(var/title_name, var/audio)
 		usr << "\The [src] doesn't appear to function."
 		return
 
-	if(href_list["change_track"])
-		for(var/datum/track/T in tracks)
-			if(T.title == href_list["title"])
-				current_track = T
-				StartPlaying()
-				break
-	else if(href_list["stop"])
-		StopPlaying()
-	else if(href_list["play"])
-		if(emagged)
-			playsound(src.loc, 'sound/items/AirHorn.ogg', 100, 1)
-			for(var/mob/living/carbon/M in ohearers(6, src))
-				if(istype(M, /mob/living/carbon/human))
-					var/mob/living/carbon/human/H = M
-					if(istype(H.l_ear, /obj/item/clothing/ears/earmuffs) || istype(H.r_ear, /obj/item/clothing/ears/earmuffs))
-						continue
-				M.sleeping = 0
-				M.stuttering += 20
-				M.ear_deaf += 30
-				M.Weaken(3)
-				if(prob(30))
-					M.Stun(10)
-					M.Paralyse(4)
-				else
-					M.make_jittery(500)
-			spawn(15)
-				explode()
-		else if(current_track == null)
-			usr << "No track selected."
-		else
-			StartPlaying()
+	tg_ui_interact(user)
 
-	return 1
+/obj/machinery/media/jukebox/ui_status(mob/user, datum/ui_state/state)
+	if(!anchored || inoperable())
+		return UI_CLOSE
+	return ..()
 
-/obj/machinery/media/jukebox/interact(mob/user)
-	if(stat & (NOPOWER|BROKEN))
-		usr << "\The [src] doesn't appear to function."
-		return
-
-	ui_interact(user)
-
-/obj/machinery/media/jukebox/ui_interact(mob/user, ui_key = "jukebox", var/datum/nanoui/ui = null, var/force_open = 1)
-	var/title = "RetroBox - Space Style"
-	var/data[0]
-
-	if(!(stat & (NOPOWER|BROKEN)))
-		data["current_track"] = current_track != null ? current_track.title : ""
-		data["playing"] = playing
-
-		var/list/nano_tracks = new
-		for(var/datum/track/T in tracks)
-			nano_tracks[++nano_tracks.len] = list("track" = T.title)
-
-		data["tracks"] = nano_tracks
-
-	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if (!ui)
-		// the ui does not exist, so we'll create a new() one
-        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
-		ui = new(user, src, ui_key, "jukebox.tmpl", title, 450, 600)
-		// when the ui is first opened this is the data it will use
-		ui.set_initial_data(data)
-		// open the new ui window
+/obj/machinery/media/jukebox/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = tg_default_state)
+	ui = tgui_process.try_update_ui(user, src, ui_key, ui, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "jukebox", "RetroBox - Space Style", 340, 440, master_ui, state)
 		ui.open()
+
+/obj/machinery/media/jukebox/ui_data()
+	var/list/juke_tracks = new
+	for(var/datum/track/T in tracks)
+		juke_tracks.Add(T.title)
+
+	var/list/data = list(
+		"current_track" = current_track != null ? current_track.title : "No track selected",
+		"playing" = playing,
+		"tracks" = juke_tracks
+	)
+
+	return data
+
+/obj/machinery/media/jukebox/ui_act(action, params)
+	if(..())
+		return TRUE
+	switch(action)
+		if("change_track")
+			for(var/datum/track/T in tracks)
+				if(T.title == params["title"])
+					current_track = T
+					StartPlaying()
+					break
+			. = TRUE
+		if("stop")
+			StopPlaying()
+			. = TRUE
+		if("play")
+			if(emagged)
+				emag_play()
+			else if(!current_track)
+				usr << "No track selected."
+			else
+				StartPlaying()
+			. = TRUE
+
+/obj/machinery/media/jukebox/proc/emag_play()
+	playsound(loc, 'sound/items/AirHorn.ogg', 100, 1)
+	for(var/mob/living/carbon/M in ohearers(6, src))
+		if(istype(M, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			if(istype(H.l_ear, /obj/item/clothing/ears/earmuffs) || istype(H.r_ear, /obj/item/clothing/ears/earmuffs))
+				continue
+		M.sleeping = 0
+		M.stuttering += 20
+		M.ear_deaf += 30
+		M.Weaken(3)
+		if(prob(30))
+			M.Stun(10)
+			M.Paralyse(4)
+		else
+			M.make_jittery(500)
+	spawn(15)
+		explode()
 
 /obj/machinery/media/jukebox/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
@@ -189,7 +191,6 @@ datum/track/New(var/title_name, var/audio)
 	// Always kill the current sound
 	for(var/mob/living/M in mobs_in_area(main_area))
 		M << sound(null, channel = 1)
-
 		main_area.forced_ambience = null
 	playing = 0
 	update_use_power(1)
