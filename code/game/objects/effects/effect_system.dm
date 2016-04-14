@@ -216,10 +216,10 @@ steam.start() -- spawns the effect
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "sparks"
 
-/obj/effect/effect/smoke/illumination/New(var/newloc, var/brightness=15, var/lifetime=10)
+/obj/effect/effect/smoke/illumination/New(var/newloc, var/lifetime=10, var/range=null, var/power=null, var/color=null)
 	time_to_live=lifetime
 	..()
-	set_light(brightness)
+	set_light(range, power, color)
 
 /////////////////////////////////////////////
 // Bad smoke
