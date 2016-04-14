@@ -199,6 +199,7 @@
 #include "code\datums\repositories\cameras.dm"
 #include "code\datums\repositories\crew.dm"
 #include "code\datums\repositories\repository.dm"
+#include "code\datums\repositories\unique.dm"
 #include "code\datums\underwear\bottom.dm"
 #include "code\datums\underwear\socks.dm"
 #include "code\datums\underwear\top.dm"
