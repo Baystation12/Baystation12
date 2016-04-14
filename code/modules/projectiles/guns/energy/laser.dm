@@ -51,7 +51,8 @@ obj/item/weapon/gun/energy/retro
 	slot_flags = SLOT_BELT|SLOT_BACK
 	projectile_type = /obj/item/projectile/beam/heavylaser
 	charge_cost = 400
-	max_shots = 5
+	max_shots = 6
+	accuracy = 2
 	fire_delay = 20
 
 /obj/item/weapon/gun/energy/lasercannon/mounted
@@ -59,6 +60,7 @@ obj/item/weapon/gun/energy/retro
 	self_recharge = 1
 	use_external_power = 1
 	recharge_time = 10
+	accuracy = 0 //mounted laser cannons don't need any help, thanks
 
 /obj/item/weapon/gun/energy/xray
 	name = "xray laser gun"
