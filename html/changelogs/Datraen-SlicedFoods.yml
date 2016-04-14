@@ -22,7 +22,7 @@
 #################################
 
 # Your name.  
-author: Kelenius
+author: Datraen
 
 # Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
 delete-after: True
@@ -33,7 +33,4 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - tweak: "Changelings will now change appearance and species together when transforming."
-  - tweak: "Changelings no longer have gender honorifics in lingchat."
-  - rscadd: "Absorbing the DNA from any source will allow you to use its name, species, and languages."
-  - bugfix: "DNA extract sting won't produce a strange message if there's no target."
+  - bugfix: "If a slice of an item is spawned independently, it will get generic settings."
