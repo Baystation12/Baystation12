@@ -44,6 +44,11 @@
 	return (flags & ANTAG_VOTABLE)
 
 /datum/antagonist/proc/can_late_spawn()
+	if(!(allow_latejoin))
+		return 0
+	update_current_antag_max()
+	if(get_antag_count() >= cur_max)
+		return 0
 	return 1
 
 /datum/antagonist/proc/is_latejoin_template()

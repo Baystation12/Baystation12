@@ -1,8 +1,8 @@
 /datum/game_mode/uprising
-	name = "uprising"
-	config_tag = "uprising"
+	name = "Cult & Revolution"
 	round_description = "Some crewmembers are attempting to start a revolution while a cult plots in the shadows!"
 	extended_round_description = "Cultists and revolutionaries spawn in this round."
+	config_tag = "uprising"
 	required_players = 15
 	required_enemies = 3
 	end_on_antag_death = 1
