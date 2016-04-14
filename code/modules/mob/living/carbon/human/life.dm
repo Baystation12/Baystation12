@@ -642,6 +642,7 @@
 
 	return //TODO: DEFERRED
 
+//DO NOT CALL handle_statuses() from this proc, it's called from living/Life() as long as this returns a true value.
 /mob/living/carbon/human/handle_regular_status_updates()
 	if(!handle_some_updates())
 		return 0
@@ -695,9 +696,6 @@
 			animate_tail_reset()
 			adjustHalLoss(-3)
 
-		if(paralysis)
-			AdjustParalysis(-1)
-
 		else if(sleeping)
 			speech_problem_flag = 1
 			handle_dreams()
@@ -739,9 +737,6 @@
 			dizziness = max(0, dizziness - 3)
 			jitteriness = max(0, jitteriness - 3)
 			adjustHalLoss(-1)
-
-		//Other
-		handle_statuses()
 
 		if (drowsyness)
 			drowsyness--
