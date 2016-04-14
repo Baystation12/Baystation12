@@ -132,8 +132,6 @@ area/space/atmosalert()
 	name = "\improper Admin room"
 	icon_state = "start"
 
-
-
 ////////////
 //SHUTTLES//
 ////////////
@@ -231,7 +229,6 @@ area/space/atmosalert()
 
 /area/shuttle/mining/outpost
 	icon_state = "shuttle"
-	base_turf = /turf/simulated/floor/asteroid
 
 /area/shuttle/transport1/centcom
 	icon_state = "shuttle"
@@ -317,6 +314,11 @@ area/space/atmosalert()
 /area/shuttle/thunderdome/redshuttle/station
 	name = "\improper RED Station"
 	icon_state = "shuttlered2"
+
+/area/shuttle/escape_ship
+	name = "\improper Escape Shuttle"
+	icon_state = "shuttle"
+
 // === Trying to remove these areas:
 
 /area/shuttle/research
@@ -328,6 +330,8 @@ area/space/atmosalert()
 /area/shuttle/research/outpost
 	icon_state = "shuttle"
 	base_turf = /turf/simulated/floor/asteroid
+
+
 
 /area/airtunnel1/      // referenced in airtunnel.dm:759
 
@@ -954,6 +958,10 @@ area/space/atmosalert()
 	ambience = list()
 	sound_env = MEDIUM_SOFTFLOOR
 
+/area/bridge/public
+	name = "\improper Bridge Waiting Room"
+	sound_env = null
+
 /area/crew_quarters/captain
 	name = "\improper Command - Captain's Office"
 	icon_state = "captain"
@@ -962,6 +970,9 @@ area/space/atmosalert()
 /area/crew_quarters/heads/hop
 	name = "\improper Command - HoP's Office"
 	icon_state = "head_quarters"
+
+/area/crew_quarters/heads/hop/public
+	name = "\improper Command - HoP's Public Office"
 
 /area/crew_quarters/heads/hor
 	name = "\improper Research - RD's Office"
@@ -1337,7 +1348,7 @@ area/space/atmosalert()
 //MedBay
 
 /area/medical/medbay
-	name = "\improper Medbay Hallway - Port"
+	name = "\improper Medbay Hallway"
 	icon_state = "medbay"
 	ambience = list('sound/ambience/signal.ogg')
 
@@ -1547,6 +1558,23 @@ area/space/atmosalert()
 	name = "\improper Security - Arrival Checkpoint"
 	icon_state = "security"
 
+/area/security/checkpoint2/processing
+	name = "\improper Security - Arrival Processing"
+	icon_state = "checkpoint_processing"
+
+/area/security/checkpoint2/contraband
+	name = "\improper Security - Arrival Contraband"
+	icon_state = "checkpoint_contraband"
+
+/area/security/checkpoint2/waiting
+	name = "\improper Security - Arrival Waiting Area"
+	icon_state = "checkpoint_waiting"
+
+/area/security/checkpoint2/exit
+	name = "\improper Security - Arrival Exit"
+	icon_state = "checkpoint_exit"
+
+
 /area/security/checkpoint/supply
 	name = "Security Post - Cargo Bay"
 	icon_state = "checkpoint1"
@@ -1682,6 +1710,12 @@ area/space/atmosalert()
 /area/storage/eva
 	name = "EVA Storage"
 	icon_state = "eva"
+
+/area/storage/eva/north
+	name = "EVA Storage - North"
+
+/area/storage/eva/south
+	name = "EVA Storage - South"
 
 /area/storage/secure
 	name = "Secure Storage"

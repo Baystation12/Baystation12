@@ -4,6 +4,7 @@
 
 #define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
 
+
 // Invisibility constants.
 #define INVISIBILITY_LIGHTING             20
 #define INVISIBILITY_LEVEL_ONE            35
