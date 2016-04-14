@@ -1,3 +1,9 @@
+/obj/item/weapon/storage/internal/webbing/New(var/newloc, var/slots)
+	storage_slots = slots
+	max_storage_space = null
+	max_w_class = 2 //pocket sized
+	..()
+
 /obj/item/clothing/accessory/storage
 	name = "load bearing equipment"
 	desc = "Used to hold things when you don't have enough hands."
@@ -5,12 +11,11 @@
 	slot = "utility"
 	var/slots = 3
 	var/obj/item/weapon/storage/internal/hold
-	w_class = 3.0
+	w_class = 3
 
 /obj/item/clothing/accessory/storage/New()
 	..()
-	hold = new/obj/item/weapon/storage/internal(src)
-	hold.storage_slots = slots
+	hold = new/obj/item/weapon/storage/internal/webbing(src, slots)
 
 /obj/item/clothing/accessory/storage/attack_hand(mob/user as mob)
 	if (has_suit)	//if we are part of a suit
@@ -76,3 +81,4 @@
 
 	new /obj/item/weapon/material/hatchet/unathiknife(hold)
 	new /obj/item/weapon/material/hatchet/unathiknife(hold)
+

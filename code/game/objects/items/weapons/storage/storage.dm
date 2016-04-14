@@ -13,7 +13,7 @@
 	var/list/cant_hold = new/list() //List of objects which this item can't store (in effect only if can_hold isn't set)
 	var/list/is_seeing = new/list() //List of mobs which are currently seeing the contents of this item's storage
 	var/max_w_class = 3 //Max size of objects that this object can store (in effect only if can_hold isn't set)
-	var/max_storage_space = 8 //The sum of the storage costs of all the items in this storage item.
+	var/max_storage_space = 8 //Total storage cost of items this can hold. Will be autoset based on storage_slots if null.
 	var/storage_slots = null //The number of storage slots in this container.
 	var/obj/screen/storage/boxes = null
 	var/obj/screen/storage/storage_start = null //storage UI
@@ -512,6 +512,9 @@
 	else
 		verbs -= /obj/item/weapon/storage/verb/toggle_gathering_mode
 
+	if(isnull(max_storage_space) && !isnull(storage_slots))
+		max_storage_space = storage_slots*base_storage_cost(max_w_class)
+
 	spawn(5)
 		var/total_storage_space = 0
 		for(var/obj/item/I in contents)
@@ -624,17 +627,8 @@
 	if (storage_cost)
 		return storage_cost
 	else
-		if(w_class == 1)
-			return 1
-		if(w_class == 2)
-			return 2
-		if(w_class == 3)
-			return 4
-		if(w_class == 4)
-			return 8
-		if(w_class == 5)
-			return 16
-		else
-			return 1000
+		return base_storage_cost(w_class)
 
-		//return 2**(w_class-1) //1,2,4,8,16,...
+/proc/base_storage_cost(var/w_class)
+	//If you want to prevent stuff above a certain w_class from being stored, use max_w_class
+	return 2**(w_class-1) //1,2,4,8,16,...
