@@ -196,6 +196,9 @@ world/loop_checks = 0
 
 /turf/finalize_qdel()
 	del(src)
+	
+/area/finalize_qdel()
+    del(src)
 
 // Default implementation of clean-up code.
 // This should be overridden to remove all references pointing to the object being destroyed.
