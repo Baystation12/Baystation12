@@ -20,4 +20,3 @@
 			O.mode = 1
 			O.emotion = "Neutral"
 	src.view_core()
-	return
