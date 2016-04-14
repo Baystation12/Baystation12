@@ -44,7 +44,7 @@
 	name = "xray beam"
 	icon_state = "xray"
 	fire_sound = 'sound/weapons/laser3.ogg'
-	damage = 25
+	damage = 30
 	armor_penetration = 50
 
 	muzzle_type = /obj/effect/projectile/xray/muzzle

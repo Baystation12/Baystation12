@@ -64,14 +64,13 @@ obj/item/weapon/gun/energy/retro
 
 /obj/item/weapon/gun/energy/xray
 	name = "xray laser gun"
-	desc = "A high-power laser gun capable of expelling concentrated xray blasts."
+	desc = "A high-power laser gun capable of expelling concentrated xray blasts, able to penetrate laser-resistant armor much more readily than standard photonic beams."
 	icon_state = "xray"
 	item_state = "xray"
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	projectile_type = /obj/item/projectile/beam/xray
-	charge_cost = 100
-	max_shots = 20
-	fire_delay = 1
+	charge_cost = 150
+	max_shots = 10
 
 /obj/item/weapon/gun/energy/sniperrifle
 	name = "marksman energy rifle"
