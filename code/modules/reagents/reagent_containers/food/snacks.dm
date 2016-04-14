@@ -13,6 +13,7 @@
 	var/dry = 0
 	var/nutriment_amt = 0
 	var/list/nutriment_desc = list("food" = 1)
+	var/list/default_reagents_if_none = list("nutriment" = 1)
 	center_of_mass = list("x"=16, "y"=16)
 	w_class = 2
 
@@ -20,6 +21,9 @@
 	..()
 	if(nutriment_amt)
 		reagents.add_reagent("nutriment",nutriment_amt,nutriment_desc)
+	if(!(reagents.total_volume))
+		for(var/reagent in default_reagents_if_none)
+			reagents.add_reagent(reagent, default_reagents_if_none[reagent])
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/weapon/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
@@ -2218,12 +2222,7 @@
 	filling_color = "#FF7575"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
-	
-/obj/item/weapon/reagent_containers/food/snacks/meatbreadslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("protein", 4)
-		reagents.add_reagent("nutriment", 2)
+	default_reagents_if_none = list("protein" = 4, "nutriment" = 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/xenomeatbread
 	name = "xenomeatbread loaf"
@@ -2248,12 +2247,7 @@
 	filling_color = "#8AFF75"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
-	
-/obj/item/weapon/reagent_containers/food/snacks/xenomeatbreadslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("protein", 4)
-		reagents.add_reagent("nutriment", 2)
+	default_reagents_if_none = list("protein" = 4, "nutriment" = 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/bananabread
 	name = "Banana-nut bread"
@@ -2278,12 +2272,7 @@
 	filling_color = "#EDE5AD"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=8)
-	
-/obj/item/weapon/reagent_containers/food/snacks/bananabreadslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("banana", 4)
-		reagents.add_reagent("nutriment", 4)
+	default_reagents_if_none = list("nutriment" = 4, "banana" = 4)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/tofubread
 	name = "Tofubread"
@@ -2307,12 +2296,7 @@
 	filling_color = "#F7FFE0"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
-	
-/obj/item/weapon/reagent_containers/food/snacks/tofubreadslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("nutriment", 6)
-
+	default_reagents_if_none = list("nutriment" = 6)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/carrotcake
 	name = "Carrot Cake"
@@ -2337,12 +2321,7 @@
 	filling_color = "#FFD675"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	
-/obj/item/weapon/reagent_containers/food/snacks/carrotcakeslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("imidazoline", 2)
-		reagents.add_reagent("nutriment", 5)
+	default_reagents_if_none = list("imidazoline" = 2, "nutriment" = 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/braincake
 	name = "Brain Cake"
@@ -2368,13 +2347,7 @@
 	filling_color = "#E6AEDB"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=12)
-	
-/obj/item/weapon/reagent_containers/food/snacks/braincakeslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("protein", 5)
-		reagents.add_reagent("nutriment", 1)
-		reagents.add_reagent("alkysine", 2)
+	default_reagents_if_none = list("protein" = 5, "nutriment" = 1, "alkysine" = 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesecake
 	name = "Cheese Cake"
@@ -2399,12 +2372,7 @@
 	filling_color = "#FAF7AF"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	
-/obj/item/weapon/reagent_containers/food/snacks/cheesecakeslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("protein", 3)
-		reagents.add_reagent("nutriment", 2)
+	default_reagents_if_none = list("protein" = 3, "nutriment" = 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/plaincake
 	name = "Vanilla Cake"
@@ -2425,11 +2393,7 @@
 	filling_color = "#F7EDD5"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	
-/obj/item/weapon/reagent_containers/food/snacks/plaincakeslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("nutriment", 4)
+	default_reagents_if_none = list("nutriment" = 4)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/orangecake
 	name = "Orange Cake"
@@ -2450,11 +2414,7 @@
 	filling_color = "#FADA8E"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	
-/obj/item/weapon/reagent_containers/food/snacks/orangecakeslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("nutriment", 4)
+	default_reagents_if_none = list("nutriment" = 4)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/limecake
 	name = "Lime Cake"
@@ -2476,11 +2436,7 @@
 	filling_color = "#CBFA8E"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	
-/obj/item/weapon/reagent_containers/food/snacks/limecakeslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("nutriment", 4)
+	default_reagents_if_none = list("nutriment" = 4)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/lemoncake
 	name = "Lemon Cake"
@@ -2502,11 +2458,7 @@
 	filling_color = "#FAFA8E"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	
-/obj/item/weapon/reagent_containers/food/snacks/lemoncakeslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("nutriment", 4)
+	default_reagents_if_none = list("nutriment" = 4)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/chocolatecake
 	name = "Chocolate Cake"
@@ -2527,11 +2479,7 @@
 	filling_color = "#805930"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	
-/obj/item/weapon/reagent_containers/food/snacks/chocolatecakeslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("nutriment", 4)
+	default_reagents_if_none = list("nutriment" = 4)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesewheel
 	name = "Cheese wheel"
@@ -2579,12 +2527,7 @@
 	filling_color = "#FFD6D6"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	
-/obj/item/weapon/reagent_containers/food/snacks/birthdaycakeslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("nutriment", 4)
-		reagents.add_reagent("sprinkles", 2)
+	default_reagents_if_none = list("nutriment" = 4, "sprinkes" = 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/bread
 	name = "Bread"
@@ -2608,12 +2551,7 @@
 	filling_color = "#D27332"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=4)
-	
-/obj/item/weapon/reagent_containers/food/snacks/breadslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("nutriment", 1)
-
+	default_reagents_if_none = list("nutriment" = 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/creamcheesebread
 	name = "Cream Cheese Bread"
@@ -2638,12 +2576,7 @@
 	filling_color = "#FFF896"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
-	
-/obj/item/weapon/reagent_containers/food/snacks/creamcheesebreadslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("protein", 3)
-		reagents.add_reagent("nutriment", 1)
+	default_reagents_if_none = list("protein" = 3, "nutriment" = 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/watermelonslice
 	name = "Watermelon Slice"
@@ -2652,11 +2585,7 @@
 	filling_color = "#FF3867"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=10)
-	
-/obj/item/weapon/reagent_containers/food/snacks/watermelonslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("watermelonjuice", 1)
+	default_reagents_if_none = list("watermelonjuice" = 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/applecake
 	name = "Apple Cake"
@@ -2677,11 +2606,7 @@
 	filling_color = "#EBF5B8"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	
-/obj/item/weapon/reagent_containers/food/snacks/applecakeslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("nutriment", 3)
+	default_reagents_if_none = list("nutriment" = 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/pumpkinpie
 	name = "Pumpkin Pie"
@@ -2702,11 +2627,7 @@
 	filling_color = "#F5B951"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=12)
-	
-/obj/item/weapon/reagent_containers/food/snacks/pumpkinpieslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("nutriment", 3)
+	default_reagents_if_none = list("nutriment" = 3)
 
 /obj/item/weapon/reagent_containers/food/snacks/cracker
 	name = "Cracker"
@@ -2747,13 +2668,7 @@
 	filling_color = "#BAA14C"
 	bitesize = 2
 	center_of_mass = list("x"=18, "y"=13)
-	
-/obj/item/weapon/reagent_containers/food/snacks/margheritaslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("nutriment", 5)
-		reagents.add_reagent("protein", 1)
-		reagents.add_reagent("tomatojuice", 1)
+	default_reagents_if_none = list("nutriment" = 5, "protein" = 1, "tomatojuice" = 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/meatpizza
 	name = "Meatpizza"
@@ -2777,12 +2692,7 @@
 	filling_color = "#BAA14C"
 	bitesize = 2
 	center_of_mass = list("x"=18, "y"=13)
-	
-/obj/item/weapon/reagent_containers/food/snacks/meatpizzaslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("protein", 7)
-		reagents.add_reagent("tomatojuice", 1)
+	default_reagents_if_none = list("protein" = 7, "tomatojuice" = 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/mushroompizza
 	name = "Mushroompizza"
@@ -2805,12 +2715,7 @@
 	filling_color = "#BAA14C"
 	bitesize = 2
 	center_of_mass = list("x"=18, "y"=13)
-	
-/obj/item/weapon/reagent_containers/food/snacks/mushroompizzaslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("nutriment", 5)
-		reagents.add_reagent("protein", 1)
+	default_reagents_if_none = list("protein" = 1, "nutriment" = 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza
 	name = "Vegetable pizza"
@@ -2835,14 +2740,7 @@
 	filling_color = "#BAA14C"
 	bitesize = 2
 	center_of_mass = list("x"=18, "y"=13)
-	
-/obj/item/weapon/reagent_containers/food/snacks/vegetablepizzaslice/New()
-	..()
-	if(!(reagents.total_volume))
-		reagents.add_reagent("nutriment", 4)
-		reagents.add_reagent("protein", 1)
-		reagents.add_reagent("tomatojuice", 1)
-		reagents.add_reagent("imidazoline", 2)
+	default_reagents_if_none = list("protein" = 4, "nutriment" = 1, "tomatojuice" = 1, "imidazoline" = 2)
 
 /obj/item/pizzabox
 	name = "pizza box"
