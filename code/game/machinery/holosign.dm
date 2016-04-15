@@ -32,7 +32,7 @@
 	use_power = lit ? 2 : 1
 	update_icon()
 
-//TODO maybe ... soft lighting
+//maybe add soft lighting? Maybe, though not everything needs it
 /obj/machinery/holosign/update_icon()
 	if (!lit || (stat & (BROKEN|NOPOWER)))
 		icon_state = "sign_off"

@@ -11,32 +11,28 @@
 	idle_power_usage = 20
 	power_channel = LIGHT
 	var/on = 1
-	var/area/area = null
-	var/otherarea = null
+	var/area/connected_area = null
+	var/other_area = null
 	var/image/overlay
 
-/obj/machinery/light_switch/New()
-	..()
-	spawn(5)
-		src.area = get_area(src)
+/obj/machinery/light_switch/initialize()
+	if(other_area)
+		src.connected_area = locate(other_area)
+	else
+		src.connected_area = get_area(src)
 
-		if(otherarea)
-			src.area = locate(text2path("/area/[otherarea]"))
+	if(!name)
+		name = "light switch ([connected_area.name])"
 
-		if(!name)
-			name = "light switch ([area.name])"
+	src.on = src.connected_area.lightswitch
+	update_icon()
 
-		src.on = src.area.lightswitch
-		updateicon()
-
-
-
-/obj/machinery/light_switch/proc/updateicon()
+/obj/machinery/light_switch/update_icon()
 	if(!overlay)
 		overlay = image(icon, "light1-overlay", LIGHTING_LAYER+0.1)
 
 	overlays.Cut()
-	if(stat & NOPOWER)
+	if(stat & (NOPOWER|BROKEN))
 		icon_state = "light-p"
 		set_light(0)
 	else
@@ -49,28 +45,29 @@
 	if(..(user, 1))
 		user << "A light switch. It is [on? "on" : "off"]."
 
+/obj/machinery/light_switch/proc/set_state(var/newstate)
+	if(on != newstate)
+		on = newstate
+
+		connected_area.lightswitch = on
+		connected_area.updateicon()
+		connected_area.power_change()
+
+		update_icon()
+
 /obj/machinery/light_switch/attack_hand(mob/user)
+	set_state(!on)
 
-	on = !on
-
-	area.lightswitch = on
-	area.updateicon()
-
-	for(var/obj/machinery/light_switch/L in area)
-		L.on = on
-		L.updateicon()
-
-	area.power_change()
+/obj/machinery/light_switch/powered()
+	. = ..(power_channel, connected_area) //tie our powered status to the connected area
 
 /obj/machinery/light_switch/power_change()
-
-	if(!otherarea)
-		if(powered(LIGHT))
-			stat &= ~NOPOWER
-		else
-			stat |= NOPOWER
-
-		updateicon()
+	. = ..()
+	//synch ourselves to the new state
+	if(on != connected_area.lightswitch)
+		on = connected_area.lightswitch
+		update_icon()
+		return 1
 
 /obj/machinery/light_switch/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
