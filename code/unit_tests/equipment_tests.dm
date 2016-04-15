@@ -71,33 +71,37 @@ datum/unit_test/storage_capacity_test/start_test()
 	for(var/storage_type in subtypesof(/obj/item/weapon/storage) - typesof(/obj/item/weapon/storage/internal))
 		var/obj/item/weapon/storage/S = new storage_type(null) //should be fine to put it in nullspace...
 		var/bad_msg = "[ascii_red]--------------- [S.name] \[[S.type]\]"
-
-		if(!isnull(S.storage_slots) && S.contents.len > S.storage_slots)
-			log_unit_test("[bad_msg] Contains more items than it has slots for ([S.contents.len] / [S.storage_slots]). [ascii_reset]")
-			bad_tests++
-
-		var/total_storage_space = 0
-		for(var/obj/item/I in S.contents)
-			if(I.w_class > S.max_w_class)
-				log_unit_test("[bad_msg] Contains an item \[[I.type]\] that is too big to be held ([I.w_class] / [S.max_w_class]). [ascii_reset]")
-				bad_tests++
-			if(istype(I, /obj/item/weapon/storage) && I.w_class >= S.w_class)
-				log_unit_test("[bad_msg] Contains a storage item \[[I.type]\] the same size or larger than its container ([I.w_class] / [S.w_class]). [ascii_reset]")
-				bad_tests++
-			total_storage_space += I.get_storage_cost()
-
-		if(total_storage_space > S.max_storage_space)
-			log_unit_test("[bad_msg] Contains more items than it has storage space for ([total_storage_space] / [S.max_storage_space]). [ascii_reset]")
-			bad_tests++
+		bad_tests += test_storage_capacity(S, bad_msg)
 
 	if(bad_tests)
-		fail("\[[bad_tests]\] Some storage items were not able to hold their initial contents.")
+		fail("\[[bad_tests]\] Some storage item types were not able to hold their default initial contents.")
 	else
-		pass("Some storage items were able to hold their initial contents.")
+		pass("All storage item types were able to hold their default initial contents.")
 
 	return 1
 
+/proc/test_storage_capacity(obj/item/weapon/storage/S, var/bad_msg)
+	var/bad_tests = 0
 
+	if(!isnull(S.storage_slots) && S.contents.len > S.storage_slots)
+		log_unit_test("[bad_msg] Contains more items than it has slots for ([S.contents.len] / [S.storage_slots]). [ascii_reset]")
+		bad_tests++
+
+	var/total_storage_space = 0
+	for(var/obj/item/I in S.contents)
+		if(I.w_class > S.max_w_class)
+			log_unit_test("[bad_msg] Contains an item \[[I.type]\] that is too big to be held ([I.w_class] / [S.max_w_class]). [ascii_reset]")
+			bad_tests++
+		if(istype(I, /obj/item/weapon/storage) && I.w_class >= S.w_class)
+			log_unit_test("[bad_msg] Contains a storage item \[[I.type]\] the same size or larger than its container ([I.w_class] / [S.w_class]). [ascii_reset]")
+			bad_tests++
+		total_storage_space += I.get_storage_cost()
+
+	if(total_storage_space > S.max_storage_space)
+		log_unit_test("[bad_msg] Contains more items than it has storage space for ([total_storage_space] / [S.max_storage_space]). [ascii_reset]")
+		bad_tests++
+
+	return bad_tests
 
 #undef SUCCESS
 #undef FAILURE
