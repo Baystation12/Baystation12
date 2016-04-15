@@ -51,9 +51,8 @@
 	desc = "A backpack that opens into a localized pocket of Blue Space."
 	origin_tech = list(TECH_BLUESPACE = 4)
 	icon_state = "holdingpack"
-	max_w_class = 4
+	max_w_class = 3
 	max_storage_space = 56
-	storage_cost = 29
 
 	New()
 		..()
@@ -74,7 +73,7 @@
 
 /obj/item/weapon/storage/backpack/santabag
 	name = "\improper Santa's gift bag"
-	desc = "Space Santa uses this to deliver toys to all the nice children in space in Christmas! Wow, it's pretty big!"
+	desc = "Space Santa uses this to deliver toys to all the nice children in space for Christmas! Wow, it's pretty big!"
 	icon_state = "giftbag0"
 	item_state = "giftbag"
 	w_class = 4.0

@@ -638,11 +638,5 @@
 	return depth
 
 /obj/item/proc/get_storage_cost()
-	if (storage_cost)
-		return storage_cost
-	else
-		return base_storage_cost(w_class)
-
-/proc/base_storage_cost(var/w_class)
 	//If you want to prevent stuff above a certain w_class from being stored, use max_w_class
-	return 2**(w_class-1) //1,2,4,8,16,...
+	return base_storage_cost(w_class)
