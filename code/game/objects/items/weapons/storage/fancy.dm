@@ -211,12 +211,15 @@
 	icon_state = "vialbox"
 	name = "vial storage box"
 	w_class = 3
-	max_w_class = 2
-	storage_slots = 6
+	max_w_class = 1
+	storage_slots = 12
 
 	key_type = /obj/item/weapon/reagent_containers/glass/beaker/vial
-	can_hold = list(/obj/item/weapon/reagent_containers/glass/beaker/vial)
-	startswith = list(/obj/item/weapon/reagent_containers/glass/beaker/vial = 6)
+	startswith = list(/obj/item/weapon/reagent_containers/glass/beaker/vial = 12)
+
+/obj/item/weapon/storage/fancy/vials/update_icon()
+	var/key_count = count_by_type(contents, key_type)
+	src.icon_state = "[initial(icon_state)][Floor(key_count/2)]"
 
 /*
  * Not actually a "fancy" storage...
@@ -228,10 +231,9 @@
 	icon_state = "vialbox0"
 	item_state = "syringe_kit"
 	w_class = 3
-	max_w_class = 2
+	max_w_class = 1
 	max_storage_space = null
-	can_hold = list(/obj/item/weapon/reagent_containers/glass/beaker/vial)
-	storage_slots = 6
+	storage_slots = 12
 	req_access = list(access_virology)
 
 /obj/item/weapon/storage/lockbox/vials/New()
@@ -239,8 +241,8 @@
 	update_icon()
 
 /obj/item/weapon/storage/lockbox/vials/update_icon()
-	var/total_contents = src.contents.len
-	src.icon_state = "vialbox[total_contents]"
+	var/total_contents = count_by_type(contents, /obj/item/weapon/reagent_containers/glass/beaker/vial)
+	src.icon_state = "vialbox[Floor(total_contents/2)]"
 	src.overlays.Cut()
 	if (!broken)
 		overlays += image(icon, src, "led[locked]")
