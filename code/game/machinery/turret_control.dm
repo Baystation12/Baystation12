@@ -184,9 +184,9 @@
 	update_icon()
 
 /obj/machinery/turretid/power_change()
-	..()
-	updateTurrets()
-	update_icon()
+	. = ..()
+	if(.)
+		updateTurrets()
 
 /obj/machinery/turretid/update_icon()
 	..()

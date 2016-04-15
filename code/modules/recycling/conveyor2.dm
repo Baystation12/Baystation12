@@ -45,9 +45,9 @@
 	else if(operating == -1)
 		movedir = backwards
 	else operating = 0
-	update()
+	update_icon()
 
-/obj/machinery/conveyor/proc/update()
+/obj/machinery/conveyor/update_icon()
 	if(stat & BROKEN)
 		icon_state = "conveyor-broken"
 		operating = 0
@@ -117,7 +117,7 @@
 // also propagate inoperability to any connected conveyor with the same ID
 /obj/machinery/conveyor/proc/broken()
 	stat |= BROKEN
-	update()
+	update_icon()
 
 	var/obj/machinery/conveyor/C = locate() in get_step(src, dir)
 	if(C)
@@ -136,7 +136,7 @@
 		return
 	operable = op
 
-	update()
+	update_icon()
 	var/obj/machinery/conveyor/C = locate() in get_step(src, stepdir)
 	if(C)
 		C.set_operable(stepdir, id, op)
@@ -146,10 +146,6 @@
 	set src in view()
 	src.broken()
 */
-
-/obj/machinery/conveyor/power_change()
-	..()
-	update()
 
 // the conveyor control switch
 //
@@ -176,7 +172,7 @@
 	..(loc)
 	if(!id)
 		id = newid
-	update()
+	update_icon()
 
 	spawn(5)		// allow map load
 		conveyors = list()
@@ -186,7 +182,7 @@
 
 // update the icon depending on the position
 
-/obj/machinery/conveyor_switch/proc/update()
+/obj/machinery/conveyor_switch/update_icon()
 	if(position<0)
 		icon_state = "switch-rev"
 	else if(position>0)
@@ -225,13 +221,13 @@
 		position = 0
 
 	operated = 1
-	update()
+	update_icon()
 
 	// find any switches with same id as this one, and set their positions to match us
 	for(var/obj/machinery/conveyor_switch/S in world)
 		if(S.id == src.id)
 			S.position = position
-			S.update()
+			S.update_icon()
 
 
 /obj/machinery/conveyor_switch/attackby(obj/item/I, mob/user, params)
@@ -254,13 +250,13 @@
 		position = 0
 
 	operated = 1
-	update()
+	update_icon()
 
 	// find any switches with same id as this one, and set their positions to match us
 	for(var/obj/machinery/conveyor_switch/S in world)
 		if(S.id == src.id)
 			S.position = position
-			S.update()
+			S.update_icon()
 
 
 

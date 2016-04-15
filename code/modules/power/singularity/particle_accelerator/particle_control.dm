@@ -138,7 +138,7 @@
 		strength_change()
 
 /obj/machinery/particle_accelerator/control_box/power_change()
-	..()
+	. = ..()
 	if(stat & NOPOWER)
 		active = 0
 		update_use_power(0)

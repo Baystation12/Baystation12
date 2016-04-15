@@ -554,7 +554,7 @@
 				return
 
 /obj/machinery/button/windowtint/power_change()
-	..()
+	. = ..()
 	if(active && !powered(power_channel))
 		toggle_tint()
 

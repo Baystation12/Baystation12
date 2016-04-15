@@ -832,11 +832,6 @@
 
 	return ..()
 
-/obj/machinery/alarm/power_change()
-	..()
-	spawn(rand(0,15))
-		update_icon()
-
 /obj/machinery/alarm/examine(mob/user)
 	..(user)
 	if (buildstage < 2)
@@ -1006,11 +1001,6 @@ FIRE ALARM
 		alarm()
 
 	return
-
-/obj/machinery/firealarm/power_change()
-	..()
-	spawn(rand(0,15))
-		update_icon()
 
 /obj/machinery/firealarm/attack_hand(mob/user as mob)
 	if(user.stat || stat & (NOPOWER|BROKEN))

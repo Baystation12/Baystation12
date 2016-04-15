@@ -1085,12 +1085,10 @@ About the new airlock wires panel:
 	..()
 
 /obj/machinery/door/airlock/power_change() //putting this is obj/machinery/door itself makes non-airlock doors turn invisible for some reason
-	..()
+	. = ..()
 	if(stat & NOPOWER)
 		// If we lost power, disable electrification
-		// Keeping door lights on, runs on internal battery or something.
 		electrified_until = 0
-	update_icon()
 
 /obj/machinery/door/airlock/proc/prison_open()
 	if(arePowerSystemsOn())
