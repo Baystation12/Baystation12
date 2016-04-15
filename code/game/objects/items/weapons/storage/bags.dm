@@ -100,6 +100,7 @@
 // -----------------------------
 // Because it stacks stacks, this doesn't operate normally.
 // However, making it a storage/bag allows us to reuse existing code in some places. -Sayu
+// This is old and terrible
 
 /obj/item/weapon/storage/bag/sheetsnatcher
 	name = "sheet snatcher"
@@ -107,7 +108,7 @@
 	icon_state = "sheetsnatcher"
 	desc = "A patented storage system designed for any kind of mineral sheet."
 
-	var/capacity = 300; //the number of sheets it can carry. // FFS why is this a storage subtype if it has it's own special implementation for storing sheets?
+	var/capacity = 300; //the number of sheets it can carry.
 	w_class = 3
 	storage_slots = 7
 

@@ -1,41 +1,33 @@
 /*
- * The 'fancy' path is for objects like donut boxes that show how many items are in the storage item on the sprite itself
+ * The 'fancy' path is for objects like candle boxes that show how many items are in the storage item on the sprite itself
  * .. Sorry for the shitty path name, I couldnt think of a better one.
  *
- * WARNING: var/icon_type is used for both examine text and sprite name. Please look at the procs below and adjust your sprite names accordingly
- *		TODO: Cigarette boxes should be ported to this standard
  *
  * Contains:
- *		Donut Box
  *		Egg Box
  *		Candle Box
  *		Crayon Box
  *		Cigarette Box
  */
 
-/obj/item/weapon/storage/fancy/
-	icon = 'icons/obj/food.dmi'
-	icon_state = "donutbox6"
-	name = "donut box"
-	var/icon_type = "donut"
+/obj/item/weapon/storage/fancy
+	item_state = "syringe_kit" //placeholder, many of these don't have inhands
+	var/obj/item/key_type //path of the key item that this "fancy" container is meant to store
 
 /obj/item/weapon/storage/fancy/update_icon()
-	var/total_contents = src.contents.len
-	src.icon_state = "[src.icon_type]box[total_contents]"
-	return
+	var/key_count = count_by_type(contents, key_type)
+	src.icon_state = "[initial(icon_state)][key_count]"
 
 /obj/item/weapon/storage/fancy/examine(mob/user)
 	if(!..(user, 1))
 		return
 
-	if(contents.len <= 0)
-		user << "There are no [src.icon_type]s left in the box."
-	else if(contents.len == 1)
-		user << "There is one [src.icon_type] left in the box."
+	var/key_name = initial(key_type.name)
+	if(!contents.len)
+		user << "There are no [key_name]s left in the box."
 	else
-		user << "There are [src.contents.len] [src.icon_type]s in the box."
-
-	return
+		var/key_count = count_by_type(contents, key_type)
+		user << "There [key_count == 1? "is" : "are"] [key_count] [key_name]\s in the box."
 
 /*
  * Egg Box
@@ -44,17 +36,19 @@
 /obj/item/weapon/storage/fancy/egg_box
 	icon = 'icons/obj/food.dmi'
 	icon_state = "eggbox"
-	icon_type = "egg"
 	name = "egg box"
 	storage_slots = 12
 	max_w_class = 2
 	w_class = 3
+
+	key_type = /obj/item/weapon/reagent_containers/food/snacks/egg
 	can_hold = list(
 		/obj/item/weapon/reagent_containers/food/snacks/egg,
 		/obj/item/weapon/reagent_containers/food/snacks/boiledegg
 		)
 
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/egg = 12)
+
 
 /*
  * Candle Box
@@ -64,15 +58,14 @@
 	name = "candle pack"
 	desc = "A pack of red candles."
 	icon = 'icons/obj/candle.dmi'
-	icon_state = "candlebox5"
-	icon_type = "candle"
-	item_state = "candlebox5"
+	icon_state = "candlebox"
 	throwforce = 2
 	w_class = 2
 	max_w_class = 1
 	max_storage_space = 5
 	slot_flags = SLOT_BELT
 
+	key_type = /obj/item/weapon/flame/candle
 	startswith = list(/obj/item/weapon/flame/candle = 5)
 
 /*
@@ -85,10 +78,10 @@
 	icon = 'icons/obj/crayons.dmi'
 	icon_state = "crayonbox"
 	w_class = 2
-	icon_type = "crayon"
 	max_w_class = 1
 	max_storage_space = 6
 
+	key_type = /obj/item/weapon/pen/crayon
 	startswith = list(
 		/obj/item/weapon/pen/crayon/red,
 		/obj/item/weapon/pen/crayon/orange,
@@ -103,17 +96,6 @@
 	overlays += image('icons/obj/crayons.dmi',"crayonbox")
 	for(var/obj/item/weapon/pen/crayon/crayon in contents)
 		overlays += image('icons/obj/crayons.dmi',crayon.colourName)
-
-/obj/item/weapon/storage/fancy/crayons/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/pen/crayon))
-		switch(W:colourName)
-			if("mime")
-				usr << "This crayon is too sad to be contained in this box."
-				return
-			if("rainbow")
-				usr << "This crayon is too powerful to be contained in this box."
-				return
-	..()
 
 ////////////
 //CIG PACK//
@@ -130,8 +112,8 @@
 	startswith = 6
 	throwforce = 2
 	slot_flags = SLOT_BELT
-	icon_type = "cigarette"
 
+	key_type = /obj/item/clothing/mask/smokable/cigarette
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette = 6)
 
 /obj/item/weapon/storage/fancy/cigarettes/New()
@@ -139,11 +121,6 @@
 	flags |= NOREACT
 	create_reagents(15 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 	flags |= OPENCONTAINER
-
-/obj/item/weapon/storage/fancy/cigarettes/update_icon()
-	var/cig_count = count_by_type(contents, /obj/item/clothing/mask/smokable/cigarette)
-	icon_state = "[initial(icon_state)][cig_count]"
-	return
 
 /obj/item/weapon/storage/fancy/cigarettes/remove_from_storage(obj/item/W as obj, atom/new_location)
 	// Don't try to transfer reagents to lighters
@@ -187,23 +164,22 @@
 	name = "\improper DromedaryCo packet"
 	desc = "A packet of six imported DromedaryCo cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\""
 	icon_state = "Dpacket"
-	item_state = "Dpacket"
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat
 	name = "\improper AcmeCo packet"
 	desc = "A packet of six AcmeCo cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
 	icon_state = "Bpacket"
-	item_state = "Bpacket" //Doesn't have an inhand state, but neither does dromedary, so, ya know..
+	//item_state = "Bpacket" //Doesn't have an inhand state, but neither does dromedary, so, ya know.. So don't set one, use the default.
 
-	New()
-		..()
-		fill_cigarre_package(src,list("fuel" = 15))
+/obj/item/weapon/storage/fancy/cigarettes/killthroat/New()
+	..()
+	fill_cigarre_package(src,list("fuel" = 15))
 
 /obj/item/weapon/storage/fancy/cigar
 	name = "cigar case"
 	desc = "A case for holding your cigars when you are not smoking them."
 	icon_state = "cigarcase"
-	item_state = "cigarcase"
+	item_state = "cigpacket"
 	icon = 'icons/obj/cigarettes.dmi'
 	w_class = 2
 	max_w_class = 1
@@ -211,19 +187,14 @@
 	throwforce = 2
 	slot_flags = SLOT_BELT
 	storage_slots = 7
-	icon_type = "cigar"
 
+	key_type = /obj/item/clothing/mask/smokable/cigarette/cigar
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/cigar = 6)
 
 /obj/item/weapon/storage/fancy/cigar/New()
 	..()
 	flags |= NOREACT
 	create_reagents(15 * storage_slots)
-
-/obj/item/weapon/storage/fancy/cigar/update_icon()
-	var/cig_count = count_by_type(contents, /obj/item/clothing/mask/smokable/cigarette)
-	icon_state = "[initial(icon_state)][cig_count]"
-	return
 
 /obj/item/weapon/storage/fancy/cigar/remove_from_storage(obj/item/W as obj, atom/new_location)
 		var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
@@ -237,16 +208,19 @@
 
 /obj/item/weapon/storage/fancy/vials
 	icon = 'icons/obj/vialbox.dmi'
-	icon_state = "vialbox6"
-	icon_type = "vial"
+	icon_state = "vialbox"
 	name = "vial storage box"
 	w_class = 3
 	max_w_class = 2
 	storage_slots = 6
-	can_hold = list(/obj/item/weapon/reagent_containers/glass/beaker/vial)
 
+	key_type = /obj/item/weapon/reagent_containers/glass/beaker/vial
+	can_hold = list(/obj/item/weapon/reagent_containers/glass/beaker/vial)
 	startswith = list(/obj/item/weapon/reagent_containers/glass/beaker/vial = 6)
 
+/*
+ * Not actually a "fancy" storage...
+ */
 /obj/item/weapon/storage/lockbox/vials
 	name = "secure vial storage box"
 	desc = "A locked box for keeping things away from children."
