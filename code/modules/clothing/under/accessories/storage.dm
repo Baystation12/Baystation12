@@ -73,11 +73,12 @@
 
 /obj/item/clothing/accessory/storage/knifeharness/New()
 	..()
-	hold.can_hold = list(/obj/item/weapon/material/hatchet/unathiknife,
-	/obj/item/weapon/material/kitchen/utensil/knife,
-	/obj/item/weapon/material/kitchen/utensil/knife/plastic,
-	/obj/item/weapon/material/knife,
-	/obj/item/weapon/material/knife/ritual)
+	hold.can_hold = list(
+		/obj/item/weapon/material/hatchet,
+		/obj/item/weapon/material/kitchen/utensil/knife,
+		/obj/item/weapon/material/knife,
+		/obj/item/weapon/material/butterfly,
+	)
 
 	new /obj/item/weapon/material/hatchet/unathiknife(hold)
 	new /obj/item/weapon/material/hatchet/unathiknife(hold)
