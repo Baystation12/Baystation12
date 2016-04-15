@@ -4,7 +4,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
                        // It's a conversion constant. power_used*CELLRATE = charge_provided, or charge_used/CELLRATE = power_provided
 
 // Doors!
-#define DOOR_CRUSH_DAMAGE 20
+#define DOOR_CRUSH_DAMAGE 80
 #define ALIEN_SELECT_AFK_BUFFER  1    // How many minutes that a person can be AFK before not being allowed to be an alien.
 
 // Channel numbers for power.
