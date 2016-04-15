@@ -1,7 +1,0 @@
-author: Datraen
-
-delete-after: True
-
-changes: 
-  - rscadd: "Added Three New Mixed Gamemodes: Lizard, Changeling + Wizard; Intrigue, Traitors + Ninja; Visitors, Ninja + Wizard."
-  - tweak: "Created a variable for latespawning antagonist templates, for customization of autospawning antagonists in mixed game modes."
