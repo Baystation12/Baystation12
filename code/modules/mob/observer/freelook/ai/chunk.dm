@@ -37,4 +37,5 @@
 				visible[t] = t
 		else
 			var/datum/S = source
-			log_debug("[visualnet] contained an unhandled source: [S] - [S.type]")
+			log_debug("[visualnet] - [src] ([x]-[y]-[z]) contained an unhandled source: [S] [S ? "- [S.type]" : "" ]")
+			sources -= source

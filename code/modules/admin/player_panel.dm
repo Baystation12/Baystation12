@@ -214,7 +214,10 @@
 
 	var/list/mobs = sortmobs()
 	var/i = 1
-	for(var/mob/M in mobs)
+	for(var/entry in mobs)
+		var/mob/M = entry
+		if(!istype(M))
+			continue
 		if(M.ckey)
 
 			var/color = "#e6e6e6"

@@ -25,11 +25,9 @@
 	var/datum/visualnet/visualnet
 
 /mob/observer/eye/Destroy()
-	visualnet.update_eye_chunks(src, add_eye = FALSE)
-	visualnet = null
-	if(owner.eyeobj == src)
-		owner.eyeobj = null
+	release(owner)
 	owner = null
+	visualnet = null
 	. = ..()
 
 /mob/observer/eye/Move(n, direct)
@@ -64,10 +62,11 @@
 	visualnet.update_eye_chunks(src, TRUE)
 
 /mob/observer/eye/proc/release(var/mob/user)
-	if(owner != user)
+	if(owner != user || !user)
 		return
 	if(owner.eyeobj != src)
 		return
+	visualnet.remove_eye(src)
 	owner.eyeobj = null
 	owner = null
 	name = initial(name)

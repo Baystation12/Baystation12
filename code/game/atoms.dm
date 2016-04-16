@@ -29,6 +29,9 @@
 	if(reagents)
 		qdel(reagents)
 		reagents = null
+	// If there are still things left inside us, qdel those too.
+	for(var/thing in src)
+		qdel(thing)
 	. = ..()
 
 /atom/proc/reveal_blood()
