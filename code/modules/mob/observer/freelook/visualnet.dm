@@ -45,33 +45,38 @@
 
 // Updates what the eye can see. It is recommended you use this when the eye moves or its location is set.
 
-/datum/visualnet/proc/update_eye_chunks(mob/observer/eye/eye, var/full_update = FALSE, var/add_eye = TRUE)
-	// 0xf = 15
-	var/x1 = max(0, eye.x - 16) & ~0xf
-	var/y1 = max(0, eye.y - 16) & ~0xf
-	var/x2 = min(world.maxx, eye.x + 16) & ~0xf
-	var/y2 = min(world.maxy, eye.y + 16) & ~0xf
+/datum/visualnet/proc/update_eye_chunks(mob/observer/eye/eye, var/full_update = FALSE)
+	. = list()
+	var/turf/T = get_turf(eye)
+	if(T)
+		// 0xf = 15
+		var/x1 = max(0, T.x - 16) & ~0xf
+		var/y1 = max(0, T.y - 16) & ~0xf
+		var/x2 = min(world.maxx, T.x + 16) & ~0xf
+		var/y2 = min(world.maxy, T.y + 16) & ~0xf
 
-	var/list/visibleChunks = list()
-
-	for(var/x = x1; x <= x2; x += 16)
-		for(var/y = y1; y <= y2; y += 16)
-			visibleChunks += get_chunk(x, y, eye.z)
+		for(var/x = x1; x <= x2; x += 16)
+			for(var/y = y1; y <= y2; y += 16)
+				. += get_chunk(x, y, T.z)
 
 	if(full_update)
 		eye.visibleChunks.Cut()
 
-	var/list/remove = eye.visibleChunks - visibleChunks
-	var/list/add = visibleChunks - eye.visibleChunks
+	var/list/remove = eye.visibleChunks - .
+	var/list/add = . - eye.visibleChunks
 
 	for(var/chunk in remove)
 		var/datum/chunk/c = chunk
 		c.remove_eye(eye)
 
-	if(add_eye)
-		for(var/chunk in add)
-			var/datum/chunk/c = chunk
-			c.add_eye(eye)
+	for(var/chunk in add)
+		var/datum/chunk/c = chunk
+		c.add_eye(eye)
+
+/datum/visualnet/proc/remove_eye(mob/observer/eye/eye)
+	for(var/chunk in eye.visibleChunks)
+		var/datum/chunk/c = chunk
+		c.remove_eye(eye)
 
 // Updates the chunks that the turf is located in. Use this when obstacles are destroyed or	when doors open.
 

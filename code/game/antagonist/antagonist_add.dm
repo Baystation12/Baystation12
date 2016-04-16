@@ -31,7 +31,7 @@
 
 	if(faction_verb && player.current)
 		player.current.verbs |= faction_verb
-		
+
 	if(config.objectives_disabled == CONFIG_OBJECTIVE_VERB)
 		player.current.verbs += /mob/proc/add_objectives
 
@@ -54,6 +54,8 @@
 	return 1
 
 /datum/antagonist/proc/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
+	if(!istype(player))
+		return 0
 	if(player.current && faction_verb)
 		player.current.verbs -= faction_verb
 	if(player in current_antagonists)

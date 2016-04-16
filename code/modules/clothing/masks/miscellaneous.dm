@@ -133,10 +133,11 @@
 	action_button_name = "Toggle MUI"
 	origin_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 5)
 	var/active = FALSE
-	var/mob/observer/eye/aiEye/eye
+	var/mob/observer/eye/cameranet/eye
 
 /obj/item/clothing/mask/ai/New()
 	eye = new(src)
+	eye.name_sufix = "camera MIU"
 	..()
 
 /obj/item/clothing/mask/ai/Destroy()
