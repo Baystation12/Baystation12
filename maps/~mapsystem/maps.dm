@@ -29,3 +29,9 @@ var/list/all_maps = list()
 	var/list/contact_levels = list() // Z-levels that can be contacted from the station, for eg announcements
 	var/list/player_levels = list()  // Z-levels a character can typically reach
 	var/list/sealed_levels = list()  // Z-levels that don't allow random transit at edge
+
+	// Unit test vars
+	var/list/exempt_areas = list()
+	var/const/NO_APC = 1
+	var/const/NO_VENT = 2
+	var/const/NO_SCRUBBER = 3

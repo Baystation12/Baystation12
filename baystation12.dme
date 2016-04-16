@@ -1978,5 +1978,6 @@
 #include "maps\example\example_define.dm"
 #include "maps\exodus\exodus.dm"
 #include "maps\exodus\exodus_define.dm"
+#include "maps\torch\torch_define.dm"
 #include "maps\~mapsystem\maps.dm"
 // END_INCLUDE

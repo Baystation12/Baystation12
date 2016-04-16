@@ -13,6 +13,7 @@ env:
   matrix:
     - MAP_PATH=example
     - MAP_PATH=exodus
+    - MAP_PATH=torch
 
 cache:
   directories:
