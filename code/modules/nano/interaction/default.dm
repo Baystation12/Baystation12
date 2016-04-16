@@ -40,7 +40,7 @@
 	// Prevents the AI from using Topic on admin levels (by for example viewing through the court/thunderdome cameras)
 	// unless it's on the same level as the object it's interacting with.
 	var/turf/T = get_turf(src_object)
-	if(!T || !(z == T.z || (T.z in config.player_levels)))
+	if(!T || !(z == T.z || (T.z in using_map.player_levels)))
 		return STATUS_CLOSE
 
 	// If an object is in view then we can interact with it
