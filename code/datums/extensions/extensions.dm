@@ -60,6 +60,11 @@
 		. = construct_extension_instance(extension_data[1], extension_data[2], extension_data.Copy(3))
 		source.extensions[base_type] = .
 
+//Fast way to check if it has an extension, also doesn't trigger instantiation of lazy loaded extensions
+/proc/has_extension(var/datum/source, var/base_type)
+	return (source.extensions && source.extensions[base_type])
+
 /proc/construct_extension_instance(var/extension_type, var/datum/source, var/list/arguments)
 	arguments = list(source) + arguments
 	return new extension_type(arglist(arguments))
+
