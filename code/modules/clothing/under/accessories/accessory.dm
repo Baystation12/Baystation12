@@ -12,31 +12,41 @@
 	var/image/mob_overlay = null
 	var/overlay_state = null
 
+	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ties.dmi') // for species where human variants do not fit
+
 /obj/item/clothing/accessory/Destroy()
 	on_removed()
 	return ..()
 
-/obj/item/clothing/accessory/proc/get_inv_overlay()
+/obj/item/clothing/accessory/proc/get_inv_overlay(var/mob/user_mob)
 	if(!inv_overlay)
 		if(!mob_overlay)
-			get_mob_overlay()
+			get_mob_overlay(user_mob)
 
 		var/tmp_icon_state = "[overlay_state? "[overlay_state]" : "[icon_state]"]"
 		if(icon_override)
 			if("[tmp_icon_state]_tie" in icon_states(icon_override))
 				tmp_icon_state = "[tmp_icon_state]_tie"
-		inv_overlay = image(icon = mob_overlay.icon, icon_state = tmp_icon_state, dir = SOUTH)
+		inv_overlay = image(icon = INV_ACCESSORIES_DEF_ICON, icon_state = tmp_icon_state, dir = SOUTH)
 	return inv_overlay
 
-/obj/item/clothing/accessory/proc/get_mob_overlay()
-	if(!mob_overlay)
-		var/tmp_icon_state = "[overlay_state? "[overlay_state]" : "[icon_state]"]"
-		if(icon_override)
-			if("[tmp_icon_state]_mob" in icon_states(icon_override))
-				tmp_icon_state = "[tmp_icon_state]_mob"
-			mob_overlay = image("icon" = icon_override, "icon_state" = "[tmp_icon_state]")
-		else
-			mob_overlay = image("icon" = INV_ACCESSORIES_DEF_ICON, "icon_state" = "[tmp_icon_state]")
+/obj/item/clothing/accessory/proc/get_mob_overlay(var/mob/user_mob)
+	var/tmp_icon_state = "[overlay_state? "[overlay_state]" : "[icon_state]"]"
+	var/use_sprite_sheet = INV_ACCESSORIES_DEF_ICON
+
+	if (user_mob && istype(user_mob, /mob/living/carbon/human))
+		var/mob/living/carbon/human/user_human = user_mob
+		var/user_mob_species = user_human.species.get_bodytype()
+
+		if (sprite_sheets[user_mob_species] && (tmp_icon_state in icon_states(sprite_sheets[user_mob_species])))
+			use_sprite_sheet = sprite_sheets[user_mob_species]
+
+	if(icon_override)
+		if("[tmp_icon_state]_mob" in icon_states(icon_override))
+			tmp_icon_state = "[tmp_icon_state]_mob"
+		mob_overlay = image("icon" = icon_override, "icon_state" = "[tmp_icon_state]")
+	else
+		mob_overlay = image("icon" = use_sprite_sheet, "icon_state" = "[tmp_icon_state]")
 	return mob_overlay
 
 //when user attached an accessory to S
@@ -45,7 +55,7 @@
 		return
 	has_suit = S
 	loc = has_suit
-	has_suit.overlays += get_inv_overlay()
+	has_suit.overlays += get_inv_overlay(user)
 
 	if(user)
 		user << "<span class='notice'>You attach \the [src] to \the [has_suit].</span>"
@@ -54,7 +64,7 @@
 /obj/item/clothing/accessory/proc/on_removed(var/mob/user)
 	if(!has_suit)
 		return
-	has_suit.overlays -= get_inv_overlay()
+	has_suit.overlays -= get_inv_overlay(null)
 	has_suit = null
 	if(user)
 		usr.put_in_hands(src)
