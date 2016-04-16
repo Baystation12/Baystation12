@@ -111,7 +111,7 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 	for (var/type in SPECIALS)
 		if ( istype(A,type) )
 			return AREA_SPECIAL
-	if(A.z in config.admin_levels)
+	if(A.z in using_map.admin_levels)
 		return AREA_SPECIAL
 	return AREA_STATION
 

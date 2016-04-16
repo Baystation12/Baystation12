@@ -183,12 +183,6 @@ var/list/gamemode_cache = list()
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 	var/use_overmap = 0
 
-	var/list/station_levels = list(1)				// Defines which Z-levels the station exists on.
-	var/list/admin_levels= list(2)					// Defines which Z-levels which are for admin functionality, for example including such areas as Central Command and the Syndicate Shuttle
-	var/list/contact_levels = list(1, 5)			// Defines which Z-levels which, for example, a Code Red announcement may affect
-	var/list/player_levels = list(1, 3, 4, 5, 6)	// Defines all Z-levels a character can typically reach
-	var/list/sealed_levels = list() 				// Defines levels that do not allow random transit at the edges.
-
 	// Event settings
 	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
 	// If the first delay has a custom start time
@@ -222,6 +216,10 @@ var/list/gamemode_cache = list()
 
 	var/ghosts_can_possess_animals = 0
 	var/delist_when_no_admins = FALSE
+
+	var/allow_map_switching = 0 // Whether map switching is allowed
+	var/auto_map_vote = 0 // Automatically call a map vote at end of round and switch to the selected map
+	var/wait_for_sigusr1_reboot = 0 // Don't allow reboot unless it was caused by SIGUSR1
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -660,18 +658,6 @@ var/list/gamemode_cache = list()
 				if("use_overmap")
 					config.use_overmap = 1
 
-				if("station_levels")
-					config.station_levels = text2numlist(value, ";")
-
-				if("admin_levels")
-					config.admin_levels = text2numlist(value, ";")
-
-				if("contact_levels")
-					config.contact_levels = text2numlist(value, ";")
-
-				if("player_levels")
-					config.player_levels = text2numlist(value, ";")
-
 				if("expected_round_length")
 					config.expected_round_length = MinutesToTicks(text2num(value))
 
@@ -730,6 +716,15 @@ var/list/gamemode_cache = list()
 
 				if("delist_when_no_admins")
 					config.delist_when_no_admins = TRUE
+
+				if("map_switching")
+					config.allow_map_switching = 1
+
+				if("auto_map_vote")
+					config.auto_map_vote = 1
+
+				if("wait_for_sigusr1")
+					config.wait_for_sigusr1_reboot = 1
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

@@ -56,6 +56,10 @@ datum/controller/vote
 		initiate_vote("gamemode","the server", 1)
 		log_debug("The server has called a gamemode vote")
 
+	proc/automap()
+		initiate_vote("map","the server", 1)
+		log_debug("The server has called a map vote")
+
 	proc/reset()
 		initiator = null
 		time_remaining = 0
@@ -168,6 +172,10 @@ datum/controller/vote
 						antag_add_failed = 1
 					else
 						additional_antag_types |= antag_names_to_ids[.]
+				if("map")
+					var/datum/map/M = all_maps[.]
+					fdel("use_map")
+					text2file(M.path, "use_map")
 
 		if(mode == "gamemode") //fire this even if the vote fails.
 			if(!round_progressing)
@@ -240,6 +248,11 @@ datum/controller/vote
 						if(!(antag.id in additional_antag_types) && antag.is_votable())
 							choices.Add(antag.role_text)
 					choices.Add("None")
+				if("map")
+					if(!config.allow_map_switching)
+						return 0
+					for(var/name in all_maps)
+						choices.Add(name)
 				if("custom")
 					question = sanitizeSafe(input(usr,"What is the vote for?") as text|null)
 					if(!question)	return 0
@@ -258,13 +271,8 @@ datum/controller/vote
 
 			log_vote(text)
 			world << "<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=\ref[src]'>here</a> to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
-			switch(vote_type)
-				if("crew_transfer")
-					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
-				if("gamemode")
-					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
-				if("custom")
-					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
+			if(vote_type in list("crew transfer", "gamemode", "map", "custom"))
+				world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
 			if(mode == "gamemode" && round_progressing)
 				round_progressing = 0
 				world << "<font color='red'><b>Round start has been delayed.</b></font>"
@@ -335,11 +343,17 @@ datum/controller/vote
 			if(trialmin)
 				. += "\t(<a href='?src=\ref[src];vote=toggle_gamemode'>[config.allow_vote_mode?"Allowed":"Disallowed"]</a>)"
 			. += "</li><li>"
+			//map!
+			if(trialmin && config.allow_map_switching)
+				. += "<a href='?src=\ref[src];vote=map'>Map</a>"
+			else
+				. += "<font color='grey'>Map (Disallowed)</font>"
+			. += "</li><li>"
 			//extra antagonists
 			if(!antag_add_failed && config.allow_extra_antags)
 				. += "<a href='?src=\ref[src];vote=add_antagonist'>Add Antagonist Type</a>"
 			else
-				. += "<font color='grey'>Restart (Disallowed)</font>"
+				. += "<font color='grey'>Add Antagonist (Disallowed)</font>"
 			. += "</li>"
 			//custom
 			if(trialmin)
@@ -377,6 +391,9 @@ datum/controller/vote
 			if("add_antagonist")
 				if(config.allow_extra_antags)
 					initiate_vote("add_antagonist",usr.key)
+			if("map")
+				if(config.allow_map_switching && usr.client.holder)
+					initiate_vote("map", usr.key)
 			if("custom")
 				if(usr.client.holder)
 					initiate_vote("custom",usr.key)
