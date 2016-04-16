@@ -108,12 +108,3 @@
 	item_state = "syndicate-orange"
 	desc = "A thin, ungainly softsuit colored in blaze orange for rescuers to easily locate, looks pretty fragile."
 	slowdown = 4
-
-
-/obj/item/clothing/suit/cardborg
-	name = "cardborg suit"
-	desc = "An ordinary cardboard box with holes cut in the sides."
-	icon_state = "cardborg"
-	item_state = "cardborg"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	flags_inv = HIDEJUMPSUIT
