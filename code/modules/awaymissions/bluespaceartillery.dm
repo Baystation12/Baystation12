@@ -16,6 +16,7 @@
 	icon = 'icons/obj/machines/artillery.dmi'
 	anchored = 1
 	density = 1
+	desc = "The ship's old bluespace artillery cannon. Looks inoperative."
 
 /obj/structure/artilleryplaceholder/decorative
 	density = 0
