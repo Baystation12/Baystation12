@@ -28,15 +28,11 @@ datum/unit_test/apc_area_test/start_test()
 
 	var/list/exempt_from_atmos = typesof(   /area/maintenance, \
 						/area/storage, \
-						/area/engineering/atmos/storage, \
 						/area/rnd/test_area, \
-						/area/construction, \
-						/area/server
+						/area/construction
 						)
 
-	var/list/exempt_from_apc = typesof(	/area/construction, \
-						/area/medical/genetics
-						)
+	var/list/exempt_from_apc = typesof( /area/construction )
 
 	for(var/area/A in world)
 		if(A.z == 1 && !(A.type in exempt_areas))
@@ -45,15 +41,15 @@ datum/unit_test/apc_area_test/start_test()
 			var/bad_msg = "[ascii_red]--------------- [A.name]([A.type])"
 
 
-			if(isnull(A.apc) && !(A.type in exempt_from_apc))
+			if(isnull(A.apc) && !(A.type in exempt_from_apc) && !(using_map.exempt_areas[A.type] & using_map.NO_APC))
 				log_unit_test("[bad_msg] lacks an APC.[ascii_reset]")
 				area_good = 0
 
-			if(!A.air_scrub_info.len && !(A.type in exempt_from_atmos))
+			if(!A.air_scrub_info.len && !(A.type in exempt_from_atmos) && !(using_map.exempt_areas[A.type] & using_map.NO_SCRUBBER))
 				log_unit_test("[bad_msg] lacks an Air scrubber.[ascii_reset]")
 				area_good = 0
 
-			if(!A.air_vent_info.len && !(A.type in exempt_from_atmos))
+			if(!A.air_vent_info.len && !(A.type in exempt_from_atmos) && !(using_map.exempt_areas[A.type] & using_map.NO_VENT))
 				log_unit_test("[bad_msg] lacks an Air vent.[ascii_reset]")
 				area_good = 0
 
