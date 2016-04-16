@@ -1,7 +1,6 @@
 // the SMES
 // stores power
 
-#define SMESRATE 0.05
 #define SMESMAXCHARGELEVEL 250000
 #define SMESMAXOUTPUT 250000
 
@@ -138,12 +137,21 @@
 	inputted_power = between(0, inputted_power, target_load)
 	if(terminal && terminal.powernet)
 		inputted_power = terminal.powernet.draw_power(inputted_power)
-		charge += inputted_power * SMESRATE
+		add_charge(inputted_power)
+		input_available = inputted_power
 		if(percentage == 100)
 			inputting = 2
 		else if(percentage)
 			inputting = 1
 		// else inputting = 0, as set in process()
+
+
+// Mostly in place due to child types that may store power in other way (PSUs)
+/obj/machinery/power/smes/proc/add_charge(var/amount)
+	charge += amount*SMESRATE
+
+/obj/machinery/power/smes/proc/remove_charge(var/amount)
+	charge -= amount*SMESRATE
 
 /obj/machinery/power/smes/process()
 	if(stat & BROKEN)	return
@@ -160,6 +168,7 @@
 	last_chrg = inputting
 	last_onln = outputting
 
+	input_available = 0
 	//inputting
 	if(input_attempt && (!input_pulsed && !input_cut))
 		target_load = min((capacity-charge)/SMESRATE, input_level)	// Amount we will request from the powernet.
@@ -170,10 +179,11 @@
 			target_load = 0 // We won't input any power without powernet connection.
 		inputting = 0
 
+	output_used = 0
 	//outputting
 	if(output_attempt && (!output_pulsed && !output_cut) && powernet && charge)
 		output_used = min( charge/SMESRATE, output_level)		//limit output to that stored
-		charge -= output_used*SMESRATE		// reduce the storage (may be recovered in /restore() if excessive)
+		remove_charge(output_used)			// reduce the storage (may be recovered in /restore() if excessive)
 		add_avail(output_used)				// add output to powernet (smes side)
 		outputting = 2
 	else if(!powernet || !charge)
@@ -199,7 +209,7 @@
 
 	var/clev = chargedisplay()
 
-	charge += total_restore * SMESRATE		// restore unused power
+	add_charge(total_restore)				// restore unused power
 	powernet.netexcess -= total_restore		// remove the excess from the powernet, so later SMESes don't try to use it
 
 	output_used -= total_restore
@@ -360,6 +370,8 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/power/smes/proc/Percentage()
+	if(!capacity)
+		return 0
 	return round(100.0*charge/capacity, 0.1)
 
 /obj/machinery/power/smes/Topic(href, href_list)
@@ -369,13 +381,15 @@
 	if( href_list["cmode"] )
 		inputting(!input_attempt)
 		update_icon()
-
+		return 1
 	else if( href_list["online"] )
 		outputting(!output_attempt)
 		update_icon()
+		return 1
 	else if( href_list["reboot"] )
 		failure_timer = 0
 		update_icon()
+		return 1
 	else if( href_list["input"] )
 		switch( href_list["input"] )
 			if("min")
@@ -385,7 +399,7 @@
 			if("set")
 				input_level = input(usr, "Enter new input level (0-[input_level_max])", "SMES Input Power Control", input_level) as num
 		input_level = max(0, min(input_level_max, input_level))	// clamp to range
-
+		return 1
 	else if( href_list["output"] )
 		switch( href_list["output"] )
 			if("min")
@@ -395,10 +409,8 @@
 			if("set")
 				output_level = input(usr, "Enter new output level (0-[output_level_max])", "SMES Output Power Control", output_level) as num
 		output_level = max(0, min(output_level_max, output_level))	// clamp to range
+		return 1
 
-	investigate_log("input/output; <font color='[input_level>output_level?"green":"red"][input_level]/[output_level]</font> | Output-mode: [output_attempt?"<font color='green'>on</font>":"<font color='red'>off</font>"] | Input-mode: [input_attempt?"<font color='green'>auto</font>":"<font color='red'>off</font>"] by [usr.key]","singulo")
-
-	return 1
 
 /obj/machinery/power/smes/proc/energy_fail(var/duration)
 	failure_timer = max(failure_timer, duration)

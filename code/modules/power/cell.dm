@@ -1,6 +1,8 @@
 // the power cell
 // charge from 0 to 100%
 // fits in APC to provide backup power
+var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglier code in nanoUI.
+
 /obj/item/weapon/cell
 	name = "power cell"
 	desc = "A rechargable electrochemical power cell."
@@ -13,6 +15,7 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = 3.0
+	var/c_uid
 	var/charge = 0	// note %age conveted to actual charge in New
 	var/maxcharge = 1000
 	var/rigged = 0		// true if rigged to explode
@@ -139,6 +142,7 @@
 /obj/item/weapon/cell/New()
 	..()
 	charge = maxcharge
+	c_uid = cell_uid++
 
 /obj/item/weapon/cell/initialize()
 	..()
