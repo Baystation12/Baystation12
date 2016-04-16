@@ -336,7 +336,7 @@
 		else		direction = WEST
 	if(direction != dir)
 		facedir(direction)
-		
+
 /obj/screen/click_catcher
 	icon = 'icons/mob/screen1_full.dmi'
 	icon_state = "passage0"
@@ -352,4 +352,4 @@
 	else
 		var/turf/T = screen_loc2turf(modifiers["screen-loc"], get_turf(usr))
 		T.Click(location, control, params)
-	return 1 
+	return 1
