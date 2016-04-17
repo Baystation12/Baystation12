@@ -101,5 +101,5 @@
 
 	mutations.Add(SKELETON)
 	status_flags |= DISFIGURED
-	update_body(0)
+	update_body(1)
 	return
