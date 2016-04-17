@@ -284,11 +284,11 @@ var/list/mob/living/forced_ambiance_list = new
 			return
 
 		if(H.m_intent == "run")
-			H.AdjustStunned(2)
-			H.AdjustWeakened(2)
+			H.AdjustStunned(6)
+			H.AdjustWeakened(6)
 		else
-			H.AdjustStunned(1)
-			H.AdjustWeakened(1)
+			H.AdjustStunned(3)
+			H.AdjustWeakened(3)
 		mob << "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>"
 
 /area/proc/prison_break()
