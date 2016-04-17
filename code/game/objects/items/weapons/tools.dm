@@ -344,7 +344,7 @@
 				if(E.damage > 10)
 					E.damage += rand(4,10)
 			if(FLASH_PROTECTION_REDUCED)
-				H << "<span class='danger'>Your equipment intensify the welder's glow. Your eyes itch and burn severely.</span>"
+				H << "<span class='danger'>Your equipment intensifies the welder's glow. Your eyes itch and burn severely.</span>"
 				H.eye_blurry += rand(12,20)
 				E.damage += rand(12, 16)
 		if(safety<FLASH_PROTECTION_MAJOR)
