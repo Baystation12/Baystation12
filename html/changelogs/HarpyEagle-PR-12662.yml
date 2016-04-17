@@ -1,0 +1,6 @@
+author: HarpyEagle
+
+delete-after: True
+
+changes: 
+  - bugfix: "Fixes people not going unconscious when they should."
