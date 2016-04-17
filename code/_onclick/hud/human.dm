@@ -82,7 +82,7 @@
 		using.icon = ico
 		using.screen_loc = ui_acti
 		using.alpha = ui_alpha
-		using.layer = 21
+		using.layer = SCREEN_LAYER + 1
 		src.adding += using
 		help_intent = using
 
@@ -94,7 +94,7 @@
 		using.icon = ico
 		using.screen_loc = ui_acti
 		using.alpha = ui_alpha
-		using.layer = 21
+		using.layer = SCREEN_LAYER + 1
 		src.adding += using
 		disarm_intent = using
 
@@ -106,7 +106,7 @@
 		using.icon = ico
 		using.screen_loc = ui_acti
 		using.alpha = ui_alpha
-		using.layer = 21
+		using.layer = SCREEN_LAYER + 1
 		src.adding += using
 		grab_intent = using
 
@@ -118,7 +118,7 @@
 		using.icon = ico
 		using.screen_loc = ui_acti
 		using.alpha = ui_alpha
-		using.layer = 21
+		using.layer = SCREEN_LAYER + 1
 		src.adding += using
 		hurt_intent = using
 		//end intent small hud objects
