@@ -237,7 +237,7 @@
 		return
 
 	for(var/mob/living/L in range(3,src))
-		L.apply_effect(total_radiation, IRRADIATE,0)
+		L.apply_effect(total_radiation, IRRADIATE, blocked = L.getarmor(null, "rad"))
 	return total_radiation
 
 /turf/simulated/wall/proc/burn(temperature)
