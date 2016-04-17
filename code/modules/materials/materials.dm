@@ -480,7 +480,7 @@ var/list/name_to_material
 	rod_product = null
 
 /material/glass/phoron
-	name = "borosilicate glass"
+	name = "phglass"
 	display_name = "borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MATERIAL_BRITTLE
@@ -492,7 +492,7 @@ var/list/name_to_material
 	rod_product = /obj/item/stack/material/glass/phoronrglass
 
 /material/glass/phoron/reinforced
-	name = "reinforced borosilicate glass"
+	name = "rphglass"
 	display_name = "reinforced borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronrglass
 	stack_origin_tech = list(TECH_MATERIAL = 5)
