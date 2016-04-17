@@ -45,7 +45,7 @@
 			edit_area()
 		if ("delete_area")
 			//skip the sanity checking, delete_area() does it anyway
-			delete_area()
+			//delete_area() THIS IS BROKEN SOMEHOW, REMOVED FOR SAFETY
 
 /obj/item/blueprints/interact()
 	var/area/A = get_area()
@@ -60,19 +60,24 @@
 <p><a href='?src=\ref[src];action=create_area'>Mark this place as new area.</a></p>
 "}
 		if (AREA_STATION)
-			if (A.apc)
-				text += {"
+			text += {"
 <p>According the blueprints, you are now in <b>\"[A.name]\"</b>.</p>
 <p>You may <a href='?src=\ref[src];action=edit_area'>
 move an amendment</a> to the drawing.</p>
-<p>You can't erase this area, because it has an APC.</p>
 "}
-			else
-				text += {"
-<p>According the blueprints, you are now in <b>\"[A.name]\"</b>.</p>
-<p>You may <a href='?src=\ref[src];action=edit_area'>
-move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_area'>erase part of it</a>.</p>
-"}
+//			if (A.apc)
+//				text += {"
+//<p>According the blueprints, you are now in <b>\"[A.name]\"</b>.</p>
+//<p>You may <a href='?src=\ref[src];action=edit_area'>
+//move an amendment</a> to the drawing.</p>
+//<p>You can't erase this area, because it has an APC.</p>
+//"}
+//			else
+//				text += {"
+//<p>According the blueprints, you are now in <b>\"[A.name]\"</b>.</p>
+//<p>You may <a href='?src=\ref[src];action=edit_area'>
+//move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_area'>erase part of it</a>.</p>
+//"}
 		if (AREA_SPECIAL)
 			text += {"
 <p>This place isn't noted on the blueprint.</p>
