@@ -20,7 +20,7 @@
 		return 0 //effective_armor is going to be 0, fullblock is going to be 0, blocked is going to 0, let's save ourselves the trouble
 
 	var/effective_armor = (armor - armour_pen)/100
-	var/fullblock = effective_armor*effective_armor
+	var/fullblock = (effective_armor*effective_armor) * ARMOR_BLOCK_CHANCE_MULT
 
 	if(fullblock >= 1 || prob(fullblock*100))
 		if(absorb_text)
