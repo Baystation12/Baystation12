@@ -204,32 +204,33 @@ meteor_act
 					apply_effect(6, WEAKEN, blocked)
 
 		//Apply blood
-		if(!(I.flags & NOBLOODY))
-			I.add_blood(src)
+		if(I.damtype == BRUTE)
+			if(!(I.flags & NOBLOODY))
+				I.add_blood(src)
 
-		if(prob(33 + I.sharp*10))
-			var/turf/location = loc
-			if(istype(location, /turf/simulated))
-				location.add_blood(src)
-			if(ishuman(user))
-				var/mob/living/carbon/human/H = user
-				if(get_dist(H, src) <= 1) //people with TK won't get smeared with blood
-					H.bloody_body(src)
-					H.bloody_hands(src)
+			if(prob(33 + I.sharp*10))
+				var/turf/location = loc
+				if(istype(location, /turf/simulated))
+					location.add_blood(src)
+				if(ishuman(user))
+					var/mob/living/carbon/human/H = user
+					if(get_dist(H, src) <= 1) //people with TK won't get smeared with blood
+						H.bloody_body(src)
+						H.bloody_hands(src)
 
-			switch(hit_zone)
-				if("head")
-					if(wear_mask)
-						wear_mask.add_blood(src)
-						update_inv_wear_mask(0)
-					if(head)
-						head.add_blood(src)
-						update_inv_head(0)
-					if(glasses && prob(33))
-						glasses.add_blood(src)
-						update_inv_glasses(0)
-				if("chest")
-					bloody_body(src)
+				switch(hit_zone)
+					if("head")
+						if(wear_mask)
+							wear_mask.add_blood(src)
+							update_inv_wear_mask(0)
+						if(head)
+							head.add_blood(src)
+							update_inv_head(0)
+						if(glasses && prob(33))
+							glasses.add_blood(src)
+							update_inv_glasses(0)
+					if("chest")
+						bloody_body(src)
 
 	return 1
 
