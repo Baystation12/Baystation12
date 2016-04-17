@@ -152,6 +152,8 @@
 			var/mob/living/carbon/human/H = target
 			H.forcesay(hit_appends)
 
+	return 0
+
 /obj/item/weapon/melee/baton/emp_act(severity)
 	if(bcell)
 		bcell.emp_act(severity)	//let's not duplicate code everywhere if we don't have to please.
