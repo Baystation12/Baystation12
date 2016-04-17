@@ -112,7 +112,7 @@
 
 /obj/item/ammo_magazine/a10mm
 	name = "magazine (10mm)"
-	icon_state = "12mm"
+	icon_state = "10mm"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = "10mm"
