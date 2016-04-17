@@ -1,0 +1,6 @@
+author: HarpyEagle
+
+delete-after: True
+
+changes: 
+  - tweak: "Armor now has a chance to either block an attack or absorb a fixed portion of damage, instead of randomly blocking either nothing, half, or full damage."
