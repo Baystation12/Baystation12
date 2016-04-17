@@ -179,7 +179,8 @@
 	damage = 25
 
 /obj/item/projectile/bullet/rifle/a556
-	damage = 35
+	damage = 30
+	armor_penetration = 25
 
 /obj/item/projectile/bullet/rifle/a145
 	damage = 80
