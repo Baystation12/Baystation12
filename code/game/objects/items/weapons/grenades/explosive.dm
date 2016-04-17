@@ -28,7 +28,7 @@
 	//The radius of the circle used to launch projectiles. Lower values mean less projectiles are used but if set too low gaps may appear in the spread pattern
 	var/spread_range = 7
 
-/obj/item/weapon/grenade/explosive/prime()
+/obj/item/weapon/grenade/explosive/detonate()
 	set waitfor = 0
 	..()
 

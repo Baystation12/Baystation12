@@ -284,7 +284,7 @@
 	..()
 	var/obj/item/weapon/grenade/flashbang/F = AM
 	spawn(det_time)
-		F.prime()
+		F.detonate()
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang/clusterbang//Because I am a heartless bastard -Sieve
 	name = "\improper SOP-6 grenade launcher"
