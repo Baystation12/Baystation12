@@ -6,6 +6,7 @@ GIT=false # true, false, or any valid command; return value decides whether git 
 REPO=upstream # Repo to fetch and pull from when updating
 BRANCH=dev # Branch to pull when updating
 GITDIR=. # Directory of code or git repo
+EXTRA_DM_SH_ARGS=""
 
 cd ../ # serverdir/
 
@@ -14,6 +15,8 @@ exec 5>&1 # duplicate fd 5 to fd 1 (stdout); this allows us to echo the log duri
 [[ -e stopserver ]] && rm stopserver
 while [[ ! -e stopserver ]]; do
 	MAP="$(cat use_map || echo "exodus")"
+
+	[[ -e _preupdate.sh && -x _preupdate.sh ]] && eval "$(cat _preupdate.sh)" # Pull hook, in THIS ENVIRONMENT
 
 	# Update
 	cd "$GITDIR"
@@ -24,15 +27,24 @@ while [[ ! -e stopserver ]]; do
 
 	# Compile
 	echo "Compiling..."
-	DMoutput="$(./scripts/dm.sh -M$MAP $DME.dme | tee /dev/fd/5)" # duplicate output to fd 5 (which is redirected to stdout at the top of this script)
+	DMoutput="$(./scripts/dm.sh $EXTRA_DM_SH_ARGS -M$MAP $DME.dme | tee /dev/fd/5)" # duplicate output to fd 5 (which is redirected to stdout at the top of this script)
 	DMret=$?
 	cd - # from $GITDIR
 	if [[ $DMret != 0 ]]; then
 		d="$(date '+%X %x')"
 		echo "Compilation failed; saving log to 'data/logs/compile_failure_$d.txt'!"
-		echo $DMoutput > "data/logs/compile_failure_$d.txt"
+		echo $DMoutput >> "data/logs/compile_failure_$d.txt"
 	else
-		echo "Compilation successful."
+		echo "Compilation successful; running gulp..."
+		cd "$GITDIR/tgui"
+		Goutput="$(gulp | tee /dev/fd/5)"
+		Gret=$?
+		cd - # from $GITDIR/tgui
+		if [[ $Gret != 0 ]]; then
+			d="$(date '+%X %x')"
+			echo "Gulp failed; saving log to 'data/logs/compile_failure_$d.txt'!"
+			echo $Goutput >> "data/logs/compile_failure_$d.txt"
+		fi
 	fi
 
 	# Retrieve compile files
@@ -41,7 +53,11 @@ while [[ ! -e stopserver ]]; do
 		cp "$GITDIR/$DME.rsc" .
 		cp -r "$GITDIR/nano" .
 		[[ ! -e btime.so && -e "$GITDIR/btime.so" ]] && cp "$GITDIR/btime.so" .
+		[[ ! -e tgui/assets ]] && mkdir -p tgui/assets
+		cp -r "$GITDIR/tgui/assets" ./tgui
 	fi
+
+	[[ -e _postupdate.sh && -x _postupdate.sh ]] && eval "$(cat _postupdate.sh)" # Copy hook, in THIS ENVIRONMENT
 
 	# Reboot or start server
 	if ! ps -p $pid 2> /dev/null > /dev/null; then
