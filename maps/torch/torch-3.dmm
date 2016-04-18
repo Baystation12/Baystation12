@@ -2107,7 +2107,7 @@
 "OA" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "Biohazard"; name = "Biohazard Shutter"; opacity = 0},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/disposalpipe/segment,/turf/simulated/floor/tiled/white,/area/rnd/xenobiology/entry)
 "OB" = (/obj/structure/sign/biohazard,/turf/simulated/wall,/area/maintenance/firstdeck/aftport)
 "OC" = (/obj/structure/closet/crate/freezer,/obj/random/medical,/obj/random/medical,/obj/random/medical,/obj/random/firstaid,/turf/simulated/floor/plating,/area/maintenance/firstdeck/aftport)
-"OD" = (/obj/structure/largecrate,/obj/item/weapon/storage/box/mechabeacons,/turf/simulated/floor/plating,/area/maintenance/firstdeck/aftport)
+"OD" = (/obj/structure/closet/crate/mechabeacons,/turf/simulated/floor/plating,/area/maintenance/firstdeck/aftport)
 "OE" = (/obj/machinery/portable_atmospherics/canister/air,/turf/simulated/floor/plating,/area/maintenance/firstdeck/aftport)
 "OF" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/plating,/area/maintenance/firstdeck/aftport)
 "OG" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/plating,/area/maintenance/firstdeck/aftport)

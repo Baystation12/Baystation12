@@ -486,7 +486,7 @@
 "jr" = (/obj/machinery/door/firedoor/border_only,/obj/effect/floor_decal/corner/lime{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/tiled/dark,/area/hallway/primary/thirddeck/center)
 "js" = (/turf/simulated/wall/r_wall,/area/security/checkpoint2)
 "jt" = (/obj/structure/closet,/turf/simulated/floor/plating,/area/maintenance/thirddeck/starboard)
-"ju" = (/obj/item/weapon/storage/box/excavation,/obj/item/device/measuring_tape,/obj/structure/table/steel,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/quartermaster/expedition)
+"ju" = (/obj/item/weapon/storage/excavation,/obj/item/device/measuring_tape,/obj/structure/table/steel,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/quartermaster/expedition)
 "jv" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/turf/simulated/floor/tiled,/area/quartermaster/expedition)
 "jw" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/quartermaster/expedition)
 "jx" = (/obj/structure/closet/secure_closet/xenoarchaeologist{req_access = list(47)},/obj/item/clothing/glasses/science,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled,/area/quartermaster/expedition)
