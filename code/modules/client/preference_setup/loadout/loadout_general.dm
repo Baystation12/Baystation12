@@ -30,9 +30,17 @@
 	display_name = "flask"
 	path = /obj/item/weapon/reagent_containers/food/drinks/flask/barflask
 
+/datum/gear/flask/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/reagents(lunchables_ethanol_reagents())
+
 /datum/gear/vacflask
 	display_name = "vacuum-flask"
 	path = /obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask
+
+/datum/gear/vacflask/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/reagents(lunchables_drink_reagents())
 
 /datum/gear/comb
 	display_name = "purple comb"

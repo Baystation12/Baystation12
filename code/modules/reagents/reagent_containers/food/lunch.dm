@@ -51,6 +51,28 @@ var/list/lunchables_drinks_ = list(/obj/item/weapon/reagent_containers/food/drin
                                    /obj/item/weapon/reagent_containers/food/drinks/cans/tonic,
                                    /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater)
 
+// This default list is a bit different, it contains items we don't want
+var/list/lunchables_drink_reagents_ = list(/datum/reagent/drink/nothing,
+                                           /datum/reagent/drink/doctor_delight,
+                                           /datum/reagent/drink/dry_ramen,
+                                           /datum/reagent/drink/hell_ramen,
+                                           /datum/reagent/drink/hot_ramen,
+                                           /datum/reagent/drink/nuka_cola,)
+
+// This default list is a bit different, it contains items we don't want
+var/list/lunchables_ethanol_reagents_ = list(/datum/reagent/ethanol/acid_spit,
+                                             /datum/reagent/ethanol/atomicbomb,
+                                             /datum/reagent/ethanol/beepsky_smash,
+                                             /datum/reagent/ethanol/coffee,
+                                             /datum/reagent/ethanol/hippies_delight,
+                                             /datum/reagent/ethanol/hooch,
+                                             /datum/reagent/ethanol/thirteenloko,
+                                             /datum/reagent/ethanol/manhattan_proj,
+                                             /datum/reagent/ethanol/neurotoxin,
+                                             /datum/reagent/ethanol/pwine,
+                                             /datum/reagent/ethanol/threemileisland,
+                                             /datum/reagent/ethanol/toxins_special)
+
 /proc/lunchables_lunches()
 	if(!(lunchables_lunches_[lunchables_lunches_[1]]))
 		lunchables_lunches_ = init_lunchable_list(lunchables_lunches_)
@@ -66,9 +88,28 @@ var/list/lunchables_drinks_ = list(/obj/item/weapon/reagent_containers/food/drin
 		lunchables_drinks_ = init_lunchable_list(lunchables_drinks_)
 	return lunchables_drinks_
 
+/proc/lunchables_drink_reagents()
+	if(!(lunchables_drink_reagents_[lunchables_drink_reagents_[1]]))
+		lunchables_drink_reagents_ = init_lunchable_reagent_list(lunchables_drink_reagents_, /datum/reagent/drink)
+	return lunchables_drink_reagents_
+
+/proc/lunchables_ethanol_reagents()
+	if(!(lunchables_ethanol_reagents_[lunchables_ethanol_reagents_[1]]))
+		lunchables_ethanol_reagents_ = init_lunchable_reagent_list(lunchables_ethanol_reagents_, /datum/reagent/ethanol)
+	return lunchables_ethanol_reagents_
+
 /proc/init_lunchable_list(var/list/lunches)
-	var/list/unsorted_lunches = list()
+	. = list()
 	for(var/lunch in lunches)
 		var/obj/O = lunch
-		unsorted_lunches[initial(O.name)] = lunch
-	return sortAssoc(unsorted_lunches)
+		.[initial(O.name)] = lunch
+	return sortAssoc(.)
+
+/proc/init_lunchable_reagent_list(var/list/banned_reagents, var/reagent_types)
+	. = list()
+	for(var/reagent_type in subtypesof(reagent_types))
+		if(reagent_type in banned_reagents)
+			continue
+		var/datum/reagent/reagent = reagent_type
+		.[initial(reagent.name)] = initial(reagent.id)
+	return sortAssoc(.)
