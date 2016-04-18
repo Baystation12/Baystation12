@@ -34,7 +34,7 @@
 
 /atom/movable/Destroy()
 	. = ..()
-	for(var/atom/movable/AM in contents)
+	for(var/atom/movable/AM in src)
 		qdel(AM)
 	forceMove(null)
 	if (pulledby)
