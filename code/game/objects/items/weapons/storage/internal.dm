@@ -87,3 +87,9 @@
 
 /obj/item/weapon/storage/internal/Adjacent(var/atom/neighbor)
 	return master_item.Adjacent(neighbor)
+
+// Used by webbings, coat pockets, etc
+/obj/item/weapon/storage/internal/pockets/New(var/newloc, var/slots, var/slot_size)
+	storage_slots = slots
+	max_w_class = slot_size
+	..()

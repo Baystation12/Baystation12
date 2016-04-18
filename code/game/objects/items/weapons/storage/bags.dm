@@ -34,6 +34,7 @@
 
 	w_class = 4
 	max_w_class = 2
+	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
 
@@ -58,8 +59,9 @@
 	icon_state = "plasticbag"
 	item_state = "plasticbag"
 
-	w_class = 4
+	w_class = 3
 	max_w_class = 2
+	max_storage_space = DEFAULT_BOX_STORAGE
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
 
@@ -98,6 +100,7 @@
 // -----------------------------
 // Because it stacks stacks, this doesn't operate normally.
 // However, making it a storage/bag allows us to reuse existing code in some places. -Sayu
+// This is old and terrible
 
 /obj/item/weapon/storage/bag/sheetsnatcher
 	name = "sheet snatcher"

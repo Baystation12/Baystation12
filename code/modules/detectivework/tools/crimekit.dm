@@ -5,7 +5,6 @@
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "case"
 	item_state = "case"
-	storage_slots = 14
 
 /obj/item/weapon/storage/briefcase/crimekit/New()
 	..()

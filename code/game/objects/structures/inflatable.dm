@@ -255,7 +255,7 @@
 	icon_state = "inf_box"
 	item_state = "syringe_kit"
 	w_class = 3
-	max_storage_space = 28
+	max_storage_space = DEFAULT_BOX_STORAGE
 	can_hold = list(/obj/item/inflatable)
 
 	New()

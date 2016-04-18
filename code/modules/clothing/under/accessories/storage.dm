@@ -1,21 +1,16 @@
-/obj/item/weapon/storage/internal/webbing/New(var/newloc, var/slots)
-	storage_slots = slots
-	max_storage_space = null
-	max_w_class = 2 //pocket sized
-	..()
-
 /obj/item/clothing/accessory/storage
 	name = "load bearing equipment"
 	desc = "Used to hold things when you don't have enough hands."
 	icon_state = "webbing"
 	slot = "utility"
 	var/slots = 3
-	var/obj/item/weapon/storage/internal/hold
+	var/max_w_class = 2 //pocket sized
+	var/obj/item/weapon/storage/internal/pockets/hold
 	w_class = 3
 
 /obj/item/clothing/accessory/storage/New()
 	..()
-	hold = new/obj/item/weapon/storage/internal/webbing(src, slots)
+	hold = new/obj/item/weapon/storage/internal/pockets(src, slots, max_w_class)
 
 /obj/item/clothing/accessory/storage/attack_hand(mob/user as mob)
 	if (has_suit)	//if we are part of a suit
@@ -75,15 +70,16 @@
 	desc = "A heavily decorated harness of sinew and leather with two knife-loops."
 	icon_state = "unathiharness2"
 	slots = 2
+	max_w_class = 3 //for knives
 
 /obj/item/clothing/accessory/storage/knifeharness/New()
 	..()
-	hold.max_storage_space = 4
-	hold.can_hold = list(/obj/item/weapon/material/hatchet/unathiknife,\
-	/obj/item/weapon/material/kitchen/utensil/knife,\
-	/obj/item/weapon/material/kitchen/utensil/knife/plastic,\
-	/obj/item/weapon/material/knife,\
-	/obj/item/weapon/material/knife/ritual)
+	hold.can_hold = list(
+		/obj/item/weapon/material/hatchet,
+		/obj/item/weapon/material/kitchen/utensil/knife,
+		/obj/item/weapon/material/knife,
+		/obj/item/weapon/material/butterfly,
+	)
 
 	new /obj/item/weapon/material/hatchet/unathiknife(hold)
 	new /obj/item/weapon/material/hatchet/unathiknife(hold)
