@@ -62,6 +62,8 @@
 	var/weeds_heal_rate = 1     // Health regen on weeds.
 	var/weeds_plasma_rate = 5   // Plasma regen on weeds.
 
+	genders = list(NEUTER)
+
 /datum/species/xenos/get_bodytype()
 	return "Xenomorph"
 
@@ -274,6 +276,8 @@
 		/mob/living/carbon/human/proc/resin,
 		/mob/living/carbon/human/proc/xeno_infest
 		)
+
+	genders = list(FEMALE)
 
 /datum/species/xenos/queen/handle_login_special(var/mob/living/carbon/human/H)
 	..()

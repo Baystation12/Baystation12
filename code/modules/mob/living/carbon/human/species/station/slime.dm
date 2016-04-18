@@ -43,6 +43,7 @@
 		"l_foot" = list("path" = /obj/item/organ/external/foot/unbreakable),
 		"r_foot" = list("path" = /obj/item/organ/external/foot/right/unbreakable)
 		)
+	genders = list(NEUTER)
 
 /datum/species/slime/handle_death(var/mob/living/carbon/human/H)
 	spawn(1)
