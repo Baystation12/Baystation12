@@ -90,6 +90,23 @@
 	log_game("[key_name_admin(user)] used a grenade ([chambered.name]).")
 	chambered = null
 
+// For uplink purchase, comes loaded with a random assortment of grenades
+/obj/item/weapon/gun/launcher/grenade/loaded/New()
+	..()
+
+	var/list/grenade_types = list(
+		/obj/item/weapon/grenade/anti_photon = 2,
+		/obj/item/weapon/grenade/smokebomb = 2,
+		/obj/item/weapon/grenade/chem_grenade/teargas = 2,
+		/obj/item/weapon/grenade/flashbang = 3,
+		/obj/item/weapon/grenade/empgrenade = 3,
+		/obj/item/weapon/grenade/frag/shell = 1,
+		)
+
+	for(var/i in 1 to max_grenades)
+		var/grenade_type = pickweight(grenade_types)
+		load(new grenade_type(src), null)
+
 //Underslung grenade launcher to be used with the Z8
 /obj/item/weapon/gun/launcher/grenade/underslung
 	name = "underslung grenade launcher"
