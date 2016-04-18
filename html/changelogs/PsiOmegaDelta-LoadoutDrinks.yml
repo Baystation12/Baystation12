@@ -1,4 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes:
-  - rscadd: "Can now prefill the loadout flask and vacuum-flask with a relevant liquid of your choice."
