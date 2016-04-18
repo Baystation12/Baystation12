@@ -49,6 +49,9 @@ var/datum/uplink/uplink = new()
 	if(!can_buy(U))
 		return
 
+	if(U.CanUseTopic(user, inventory_state) != STATUS_INTERACTIVE)
+		return
+
 	var/cost = cost(U.uses, U)
 
 	var/goods = get_goods(U, get_turf(user), user, extra_args)
@@ -151,7 +154,9 @@ datum/uplink_item/dd_SortValue()
 *	Abstract Uplink Entries		*
 *                           	*
 ********************************/
-var/image/default_abstract_uplink_icon
+/datum/uplink_item/abstract
+	var/static/image/default_abstract_uplink_icon
+
 /datum/uplink_item/abstract/log_icon()
 	if(!default_abstract_uplink_icon)
 		default_abstract_uplink_icon = image('icons/obj/pda.dmi', "pda-syn")
