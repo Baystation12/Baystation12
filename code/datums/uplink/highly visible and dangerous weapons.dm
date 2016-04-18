@@ -20,7 +20,7 @@
 	path = /obj/item/weapon/melee/energy/sword
 
 /datum/uplink_item/item/visible_weapons/g9mm
-	name = "Silenced 9mm"
+	name = "Silenced Holdout Pistol"
 	item_cost = 7
 	path = /obj/item/weapon/storage/box/syndie_kit/g9mm
 

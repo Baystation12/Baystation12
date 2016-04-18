@@ -15,7 +15,7 @@
 
 /obj/item/weapon/grenade/frag
 	name = "fragmentation grenade"
-	desc = "A military fragmentation grenade, designed to explode in a shower of fragments while avoiding massive structural damage."
+	desc = "A military fragmentation grenade, designed to explode in a deadly shower of fragments, while avoiding massive structural damage."
 	icon_state = "frggrenade"
 	loadable = FALSE
 
@@ -64,8 +64,8 @@
 		explosion(O, -1, -1, explosion_size, round(explosion_size/2), 0)
 
 /obj/item/weapon/grenade/frag/shell
-	name = "fragmentation shell"
-	desc = "A light fragmentation grenade. Though designed to be fired from a launcher, it can still be activated and thrown by hand if necessary."
+	name = "fragmentation grenade"
+	desc = "A light fragmentation grenade, designed to be fired from a launcher. It can still be activated and thrown by hand if necessary."
 	icon_state = "fragshell"
 	loadable = TRUE
 
@@ -73,7 +73,7 @@
 
 /obj/item/weapon/grenade/frag/high_yield
 	name = "fragmentation bomb"
-	desc = "Larger and heavier than a standard grenade, this device is extremely deadly. It cannot be thrown as far because of its weight, however."
+	desc = "Larger and heavier than a standard fragmentation grenade, this device is extremely dangerous. It cannot be thrown as far because of its weight."
 	icon_state = "frag"
 	loadable = FALSE
 
