@@ -24,7 +24,7 @@
 	verbs += /mob/living/carbon/alien/diona/proc/merge
 
 /mob/living/carbon/alien/diona/put_in_hands(var/obj/item/W) // No hands.
-	W.loc = get_turf(src)
+	W.forceMove(get_turf(src))
 	return 1
 
 /mob/living/carbon/alien/diona/proc/wear_hat(var/obj/item/new_hat)

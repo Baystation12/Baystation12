@@ -58,12 +58,12 @@
 
 /obj/machinery/computer/guestpass/New()
 	..()
-	uid = "[rand(100,999)]-G[rand(10,99)]"
+	uid = "[random_id("guestpass_serial_number",100,999)]-G[rand(10,99)]"
 
 /obj/machinery/computer/guestpass/attackby(obj/O, mob/user)
 	if(istype(O, /obj/item/weapon/card/id))
 		if(!giver && user.unEquip(O))
-			O.loc = src
+			O.forceMove(src)
 			giver = O
 			updateUsrDialog()
 		else if(giver)
@@ -110,9 +110,10 @@
 /obj/machinery/computer/guestpass/Topic(href, href_list)
 	if(..())
 		return 1
-	usr.set_machine(src)
+
 	if (href_list["mode"])
 		mode = text2num(href_list["mode"])
+		. = 1
 
 	if (href_list["choice"])
 		switch(href_list["choice"])
@@ -135,28 +136,24 @@
 				var/A = text2num(href_list["access"])
 				if (A in accesses)
 					accesses.Remove(A)
-				else
+				else if(giver && (A in giver.access))
 					accesses.Add(A)
+		. = 1
 	if (href_list["action"])
 		switch(href_list["action"])
 			if ("id")
 				if (giver)
+					giver.forceMove(usr.loc)
 					if(ishuman(usr))
-						giver.loc = usr.loc
-						if(!usr.get_active_hand())
-							usr.put_in_hands(giver)
-						giver = null
-					else
-						giver.loc = src.loc
-						giver = null
+						usr.put_in_hands(giver)
+					giver = null
 					accesses.Cut()
 				else
 					var/obj/item/I = usr.get_active_hand()
 					if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
-						I.loc = src
+						I.forceMove(src)
 						giver = I
-				updateUsrDialog()
-
+				. = 1
 			if ("print")
 				var/dat = "<h3>Activity log of guest pass terminal #[uid]</h3><br>"
 				for (var/entry in internal_log)
@@ -166,26 +163,32 @@
 				var/obj/item/weapon/paper/P = new/obj/item/weapon/paper( loc )
 				P.name = "activity log"
 				P.info = dat
+				. = 1
 
 			if ("issue")
-				if (giver)
-					var/number = add_zero("[rand(0,9999)]", 4)
-					var/entry = "\[[worldtime2text()]\] Pass #[number] issued by [giver.registered_name] ([giver.assignment]) to [giv_name]. Reason: [reason]. Grants access to following areas: "
-					for (var/i=1 to accesses.len)
-						var/A = accesses[i]
-						if (A)
-							var/area = get_access_desc(A)
-							entry += "[i > 1 ? ", [area]" : "[area]"]"
-					entry += ". Expires at [worldtime2text(world.time + duration*10*60)]."
+				if (giver && accesses.len)
+					var/number = add_zero(random_id("guestpass_id_number",0,9999), 4)
+					var/entry = "\[[worldtime2text()]\] Pass #[number] issued by [giver.registered_name] ([giver.assignment]) to [giv_name]. Reason: [reason]. Granted access to following areas: "
+					var/list/access_descriptors = list()
+					for (var/A in accesses)
+						if (A in giver.access)
+							access_descriptors += get_access_desc(A)
+					entry += english_list(access_descriptors, and_text = ", ")
+					entry += ". Expires at [worldtime2text(world.time + duration MINUTES)]."
 					internal_log.Add(entry)
 
 					var/obj/item/weapon/card/id/guest/pass = new(src.loc)
 					pass.temp_access = accesses.Copy()
 					pass.registered_name = giv_name
-					pass.expiration_time = world.time + duration*10*60
+					pass.expiration_time = world.time + duration MINUTES
 					pass.reason = reason
 					pass.name = "guest pass #[number]"
-				else
+					pass.assignment = "Guest"
+					playsound(src.loc, 'sound/machines/ping.ogg', 25, 0)
+					. = 1
+				else if(!giver)
 					usr << "<span class='warning'>Cannot issue pass without issuing ID.</span>"
-	updateUsrDialog()
-	return
+				else if(!accesses.len)
+					usr << "<span class='warning'>Cannot issue pass without at least one granted access permission.</span>"
+	if(.)
+		updateUsrDialog()
