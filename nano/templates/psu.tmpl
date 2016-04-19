@@ -34,7 +34,7 @@
 		{{:helper.link('IN', null, { "enable" : 2 }, (data.mode == 2) ? 'disabled' : null)}}
 		{{:helper.link('IN/OUT', null, { "enable" : 3 }, (data.mode == 3) ? 'disabled' : null)}}
 		{{if data.equalise}}
-			{{:helper.link('EQ', null, { "equaliseoff" : 1 }, data.blink_tick ? 'yellowButton' : 'redButton')}}
+			{{:helper.link('EQ', null, { "equaliseoff" : 1 }, null, data.blink_tick ? 'yellowButton' : 'redButton')}}
 		{{else}}
 			{{:helper.link('EQ', null, { "equaliseon" : 1 })}}
 		{{/if}}

@@ -46,7 +46,6 @@
 	var/output_pulsed = 0
 	var/failure_timer = 0			// Set by gridcheck event, temporarily disables the SMES.
 	var/target_load = 0
-	var/open_hatch = 0
 	var/name_tag = null
 	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
 	var/obj/machinery/power/terminal/terminal = null
@@ -264,17 +263,11 @@
 
 
 /obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(istype(W, /obj/item/weapon/screwdriver))
-		if(!open_hatch)
-			open_hatch = 1
-			user << "<span class='notice'>You open the maintenance hatch of [src].</span>"
-			return 0
-		else
-			open_hatch = 0
-			user << "<span class='notice'>You close the maintenance hatch of [src].</span>"
-			return 0
 
-	if (!open_hatch)
+	if(default_deconstruction_screwdriver(user, W))
+		return
+
+	if (!panel_open)
 		user << "<span class='warning'>You need to open access hatch on [src] first!</span>"
 		return 0
 
@@ -467,7 +460,7 @@
 
 /obj/machinery/power/smes/examine(var/mob/user)
 	..()
-	user << "The service hatch is [open_hatch ? "open" : "closed"]."
+	user << "The service hatch is [panel_open ? "open" : "closed"]."
 	if(!damage)
 		return
 	var/damage_percentage = round((damage / maxdamage) * 100)

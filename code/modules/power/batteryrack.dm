@@ -244,10 +244,19 @@
 		ui.open()
 		ui.set_auto_update(1)
 
+/obj/machinery/power/smes/batteryrack/dismantle()
+	for(var/obj/item/weapon/cell/C in internal_cells)
+		C.forceMove(get_turf(src))
+		internal_cells -= C
+	return ..()
 
 /obj/machinery/power/smes/batteryrack/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(!..())
 		return 0
+	if(default_deconstruction_crowbar(user, W))
+		return
+	if(default_part_replacement(user, W))
+		return
 	if(istype(W, /obj/item/weapon/cell)) // ID Card, try to insert it.
 		if(insert_cell(W, user))
 			user << "You insert \the [W] into \the [src]."
@@ -272,7 +281,6 @@
 
 	if(..())
 		return 1
-
 	if( href_list["disable"] )
 		update_io(0)
 	else if( href_list["enable"] )
