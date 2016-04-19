@@ -135,7 +135,7 @@
 	worn_state = "johnny"
 	item_state = "johnny"
 
-/obj/item/clothing/under/rainbow
+/obj/item/clothing/under/color/rainbow
 	name = "rainbow"
 	icon_state = "rainbow"
 	item_state = "rainbow"

@@ -6,13 +6,13 @@ datum/unit_test/loadout_test_shall_have_name_cost_path/start_test()
 	for(var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
 
-		if(G.display_name)
+		if(!G.display_name)
 			log_unit_test("[G]: Missing display name.")
 			failed = 1
-		else if(G.cost)
-			log_unit_test("[G]: Missing cost.")
+		else if(G.cost <= 0)
+			log_unit_test("[G]: Invalid cost.")
 			failed = 1
-		else if(G.path)
+		else if(!G.path)
 			log_unit_test("[G]: Missing path definition.")
 			failed = 1
 
