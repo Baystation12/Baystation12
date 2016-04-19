@@ -3,8 +3,17 @@
 // A mob that the AI controls to look around the station with.
 // It streams chunks as it moves around, which will show it what the AI can and cannot see.
 
+/mob/observer/eye/cameranet
+	name = "Inactive Camera Eye"
+	name_sufix = "Camera Eye"
+
+/mob/observer/eye/cameranet/New()
+	..()
+	visualnet = cameranet
+
 /mob/observer/eye/aiEye
 	name = "Inactive AI Eye"
+	name_sufix = "AI Eye"
 	icon_state = "AI-eye"
 
 /mob/observer/eye/aiEye/New()
@@ -12,7 +21,7 @@
 	visualnet = cameranet
 
 /mob/observer/eye/aiEye/setLoc(var/T, var/cancel_tracking = 1)
-	if(..())
+	if(..() && isAI(owner))
 		var/mob/living/silicon/ai/ai = owner
 		if(cancel_tracking)
 			ai.ai_cancel_tracking()
@@ -33,7 +42,6 @@
 	if(!eyeobj) return
 	if(!new_eye)
 		new_eye = src
-	eyeobj.owner = null
 	qdel(eyeobj) // No AI, no Eye
 	eyeobj = null
 	if(client)
@@ -41,24 +49,18 @@
 
 /mob/living/silicon/ai/proc/create_eyeobj(var/newloc)
 	if(eyeobj) destroy_eyeobj()
-	if(!newloc) newloc = src.loc
+	if(!newloc) newloc = get_turf(src)
 	eyeobj = PoolOrNew(/mob/observer/eye/aiEye, newloc)
-	eyeobj.owner = src
-	eyeobj.name = "[src.name] (AI Eye)" // Give it a name
-	if(client) client.eye = eyeobj
-	SetName(src.name)
+	eyeobj.possess(src)
 
 // Intiliaze the eye by assigning it's "ai" variable to us. Then set it's loc to us.
 /mob/living/silicon/ai/New()
 	..()
 	create_eyeobj()
-	spawn(5)
-		if(eyeobj)
-			eyeobj.forceMove(src.loc)
 
 /mob/living/silicon/ai/Destroy()
 	destroy_eyeobj()
-	..()
+	. = ..()
 
 /atom/proc/move_camera_by_click()
 	if(istype(usr, /mob/living/silicon/ai))
@@ -80,11 +82,7 @@
 	if(!src.eyeobj)
 		return
 
-	if(client && client.eye)
-		client.eye = src
-	for(var/datum/chunk/c in eyeobj.visibleChunks)
-		c.remove(eyeobj)
-	src.eyeobj.setLoc(src)
+	eyeobj.possess(src)
 
 /mob/living/silicon/ai/proc/toggle_acceleration()
 	set category = "Silicon Commands"

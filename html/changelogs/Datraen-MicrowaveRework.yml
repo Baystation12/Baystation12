@@ -1,6 +1,0 @@
-author: Datraen
-
-delete-after: True
-
-changes: 
-  - bugfix: "Microwaves no longer try cooking their components while cooking."

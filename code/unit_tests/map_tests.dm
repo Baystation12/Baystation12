@@ -130,6 +130,25 @@ datum/unit_test/closet_test/start_test()
 
 	return 1
 
+//=======================================================================================
+
+datum/unit_test/storage_map_test
+	name = "MAP: On Map Storage Item Capacity Test Player Z levels"
+
+datum/unit_test/storage_map_test/start_test()
+	var/bad_tests = 0
+
+	for(var/obj/item/weapon/storage/S in world)
+		if(isPlayerLevel(S.z))
+			var/bad_msg = "[ascii_red]--------------- [S.name] \[[S.type]\] \[[S.x] / [S.y] / [S.z]\]"
+			bad_tests += test_storage_capacity(S, bad_msg)
+
+	if(bad_tests)
+		fail("\[[bad_tests]\] Some on-map storage items were not able to hold their initial contents.")
+	else
+		pass("All on-map storage items were able to hold their initial contents.")
+
+	return 1
 
 #undef SUCCESS
 #undef FAILURE

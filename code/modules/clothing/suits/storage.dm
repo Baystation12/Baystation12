@@ -1,12 +1,9 @@
 /obj/item/clothing/suit/storage
-	var/obj/item/weapon/storage/internal/pockets
+	var/obj/item/weapon/storage/internal/pockets/pockets
 
 /obj/item/clothing/suit/storage/New()
 	..()
-	pockets = new/obj/item/weapon/storage/internal(src)
-	pockets.storage_slots = 2	//two slots
-	pockets.max_w_class = 2		//fit only pocket sized items
-	pockets.max_storage_space = 4
+	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots = 2, slot_size = 2) //two slots, fit only pocket sized items
 
 /obj/item/clothing/suit/storage/Destroy()
 	qdel(pockets)
@@ -54,8 +51,5 @@
 
 /obj/item/clothing/suit/storage/vest/merc/New()
 	..()
-	pockets = new/obj/item/weapon/storage/internal(src)
-	pockets.storage_slots = 4
-	pockets.max_w_class = 2
-	pockets.max_storage_space = 8
+	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots = 4, slot_size = 2)
 

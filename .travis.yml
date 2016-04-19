@@ -2,12 +2,15 @@ language: generic
 sudo: false
 
 env:
-  BYOND_MAJOR="509"
-  BYOND_MINOR="1318"
-  MACRO_COUNT=984
+  global:
+    BYOND_MAJOR="509"
+    BYOND_MINOR="1318"
+    MACRO_COUNT=984
+    NODE_VERSION="4"
   
 cache:
   directories:
+    - tgui/node_modules
     - $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
   
 addons:
@@ -18,10 +21,13 @@ addons:
       - libstdc++6:i386
   
 install:
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $NODE_VERSION
+  - npm install -g gulp-cli
   - pip install --user PyYaml -q
   - pip install --user beautifulsoup4 -q
 
 before_script:
+  - cd tgui && npm install && cd ..
   - chmod +x ./install-byond.sh
   - ./install-byond.sh
 
@@ -44,6 +50,8 @@ script:
   - md5sum -c - <<< "88490b460c26947f5ec1ab1bb9fa9f17 *html/changelogs/example.yml"
   - python tools/TagMatcher/tag-matcher.py ../..
   - python tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs
+  - cd tgui && gulp
+  - cd ..
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
   - cp config/example/* config/
   - scripts/dm.sh -DUNIT_TEST baystation12.dme

@@ -1,4 +1,5 @@
-/obj/item/weapon/storage/box/syndicate/
+//Not currently used anywhere as far as I can tell...
+/obj/item/weapon/storage/backpack/dufflebag/traitor_kit
 	New()
 		..()
 		switch (pickweight(list("bloodyspai" = 1, "stealth" = 1, "screwed" = 1, "guns" = 1, "murder" = 1, "freedom" = 1, "hacker" = 1, "lordsingulo" = 1, "smoothoperator" = 1)))
@@ -77,6 +78,18 @@
 	desc = "A sleek, sturdy box"
 	icon_state = "box_of_doom"
 
+//For uplink kits that provide bulkier items
+/obj/item/weapon/storage/backpack/satchel/syndie_kit
+	desc = "A sleek, sturdy satchel"
+	icon_state = "satchel-norm"
+
+//In case an uplink kit provides a lot of gear
+/obj/item/weapon/storage/backpack/dufflebag/syndie_kit
+	name = "black dufflebag"
+	desc = "A sleek, sturdy dufflebag"
+	icon_state = "duffle_syndie"
+
+
 /obj/item/weapon/storage/box/syndie_kit/imp_freedom
 	name = "boxed freedom implant (with injector)"
 
@@ -113,44 +126,57 @@
 	O.update()
 	return
 
-/obj/item/weapon/storage/box/syndie_kit/space
-	name = "boxed space suit and helmet"
+// Space suit uplink kit
+/obj/item/weapon/storage/backpack/satchel/syndie_kit/space
+	//name = "\improper EVA gear pack"
 
-/obj/item/weapon/storage/box/syndie_kit/space/New()
-	..()
-	new /obj/item/clothing/suit/space/syndicate(src)
-	new /obj/item/clothing/head/helmet/space/syndicate(src)
-	new /obj/item/clothing/mask/gas/syndicate(src)
-	new /obj/item/weapon/tank/emergency_oxygen/double(src)
-	return
+	startswith = list(
+		/obj/item/clothing/suit/space/syndicate,
+		/obj/item/clothing/head/helmet/space/syndicate,
+		/obj/item/clothing/mask/gas/syndicate,
+		/obj/item/weapon/tank/emergency_oxygen/double,
+		)
+
+// Chameleon uplink kit
+/obj/item/weapon/storage/backpack/chameleon/sydie_kit
+	startswith = list(
+		/obj/item/clothing/under/chameleon,
+		/obj/item/clothing/suit/chameleon,
+		/obj/item/clothing/shoes/chameleon,
+		/obj/item/clothing/mask/chameleon,
+		/obj/item/weapon/storage/box/syndie_kit/chameleon,
+		/obj/item/weapon/gun/energy/chameleon,
+		)
 
 /obj/item/weapon/storage/box/syndie_kit/chameleon
 	name = "chameleon kit"
 	desc = "Comes with all the clothes you need to impersonate most people.  Acting lessons sold seperately."
+	startswith = list(
+		/obj/item/clothing/gloves/chameleon,
+		/obj/item/clothing/glasses/chameleon,
+		/obj/item/clothing/head/chameleon,
+		)
 
-/obj/item/weapon/storage/box/syndie_kit/chameleon/New()
-	..()
-	new /obj/item/clothing/under/chameleon(src)
-	new /obj/item/clothing/head/chameleon(src)
-	new /obj/item/clothing/suit/chameleon(src)
-	new /obj/item/clothing/shoes/chameleon(src)
-	new /obj/item/weapon/storage/backpack/chameleon(src)
-	new /obj/item/clothing/gloves/chameleon(src)
-	new /obj/item/clothing/mask/chameleon(src)
-	new /obj/item/clothing/glasses/chameleon(src)
-	new /obj/item/weapon/gun/energy/chameleon(src)
+// Clerical uplink kit
+/obj/item/weapon/storage/backpack/satchel/syndie_kit
+	startswith = list(
+		/obj/item/weapon/storage/box/syndie_kit/clerical,
+		/obj/item/weapon/packageWrap,
+		/obj/item/weapon/hand_labeler,
+		)
 
 /obj/item/weapon/storage/box/syndie_kit/clerical
 	name = "clerical kit"
 	desc = "Comes with all you need to fake paperwork. Assumes you have passed basic writing lessons."
 
+	startswith = list(
+		/obj/item/weapon/stamp/chameleon,
+		/obj/item/weapon/pen/chameleon,
+		/obj/item/device/destTagger,
+		)
+
 /obj/item/weapon/storage/box/syndie_kit/clerical/New()
 	..()
-	new /obj/item/weapon/stamp/chameleon(src)
-	new /obj/item/weapon/pen/chameleon(src)
-	new /obj/item/device/destTagger(src)
-	new /obj/item/weapon/packageWrap(src)
-	new /obj/item/weapon/hand_labeler(src)
 
 /obj/item/weapon/storage/box/syndie_kit/spy
 	name = "spy kit"
@@ -225,34 +251,19 @@
 	for(var/reagent in reagents)
 		C.reagents.add_reagent(reagent, reagents[reagent] * C.storage_slots)
 
-/obj/item/weapon/storage/box/syndie_kit/ewar_voice
-	name = "Electrowarfare and Voice Synthesiser kit"
-	desc = "Kit for confounding organic and synthetic entities alike."
-
-/obj/item/weapon/storage/box/syndie_kit/ewar_voice/New()
-	..()
-	new /obj/item/rig_module/electrowarfare_suite(src)
-	new /obj/item/rig_module/voice(src)
+//Rig Electrowarfare and Voice Synthesiser kit
+/obj/item/weapon/storage/backpack/satchel/syndie_kit/ewar_voice
+	//name = "\improper Electrowarfare and Voice Synthesiser pack"
+	//desc = "Kit for confounding organic and synthetic entities alike."
+	startswith = list(
+		/obj/item/rig_module/electrowarfare_suite,
+		/obj/item/rig_module/voice,
+		)
 
 
 /obj/item/weapon/storage/secure/briefcase/money
 	name = "suspicious briefcase"
-	desc = "An ominous briefcase that has the unmistakeable smell of old, stale, cigarette smoke, and gives those who look at it a bad feeling."
+	desc = "An ominous briefcase that has the unmistakeable smell of old stale cigarette smoke, and gives those who look at it a bad feeling."
 
-
-
-
-/obj/item/weapon/storage/secure/briefcase/money/New()
-	..()
-	new /obj/item/weapon/spacecash/bundle/c1000(src)
-	new /obj/item/weapon/spacecash/bundle/c1000(src)
-	new /obj/item/weapon/spacecash/bundle/c1000(src)
-	new /obj/item/weapon/spacecash/bundle/c1000(src)
-	new /obj/item/weapon/spacecash/bundle/c1000(src)
-	new /obj/item/weapon/spacecash/bundle/c1000(src)
-	new /obj/item/weapon/spacecash/bundle/c1000(src)
-	new /obj/item/weapon/spacecash/bundle/c1000(src)
-	new /obj/item/weapon/spacecash/bundle/c1000(src)
-	new /obj/item/weapon/spacecash/bundle/c1000(src)
-
+	startswith = list(/obj/item/weapon/spacecash/bundle/c1000 = 10)
 

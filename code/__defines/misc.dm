@@ -119,6 +119,7 @@
 #define HUD_LAYER 20			//Above lighting, but below obfuscation. For in-game HUD effects (whereas SCREEN_LAYER is for abstract/OOC things like inventory slots)
 #define OBFUSCATION_LAYER 21	//Where images covering the view for eyes are put
 #define SCREEN_LAYER 22			//Mob HUD/effects layer
+#define CINEMA_LAYER 23			//Cinematic, fullscreen effects
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.

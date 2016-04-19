@@ -1,6 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - rscadd: "Can now customize the color of select set of underwear, similar to some loadout equipment."
-  - rscdel: "Due to new underwear names some selections may have been unset. Double-check your character setup settings."
-

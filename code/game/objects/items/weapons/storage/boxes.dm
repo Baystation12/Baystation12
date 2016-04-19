@@ -24,6 +24,7 @@
 	desc = "It's just an ordinary box."
 	icon_state = "box"
 	item_state = "syringe_kit"
+	max_storage_space = DEFAULT_BOX_STORAGE
 	var/foldable = /obj/item/stack/material/cardboard	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
 
 // BubbleWrap - A box can be folded up to make card
@@ -49,6 +50,10 @@
 	user << "<span class='notice'>You fold [src] flat.</span>"
 	new src.foldable(get_turf(src))
 	qdel(src)
+
+/obj/item/weapon/storage/box/make_exact_fit()
+	..()
+	foldable = null //special form fitted boxes should not be foldable.
 
 /obj/item/weapon/storage/box/survival/
 	New()
@@ -675,6 +680,7 @@
 	item_state = "medicalpack"
 	foldable = null
 	max_w_class = 3
+	w_class = 4
 	can_hold = list(/obj/item/organ, /obj/item/weapon/reagent_containers/food, /obj/item/weapon/reagent_containers/glass)
-	max_storage_space = 21
+	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try

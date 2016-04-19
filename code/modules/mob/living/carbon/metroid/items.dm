@@ -217,18 +217,19 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle17"
 
-	/*afterattack(obj/target, mob/user , flag)
-		if(istype(target, /obj/item/slime_extract))
-			if(target.enhanced == 1)
-				user << "<span class='warning'> This extract has already been enhanced!</span>"
-				return ..()
-			if(target.Uses == 0)
-				user << "<span class='warning'> You can't enhance a used extract!</span>"
-				return ..()
-			user <<"You apply the enhancer. It now has triple the amount of uses."
-			target.Uses = 3
-			target.enahnced = 1
-			qdel(src)*/
+/obj/item/weapon/slimesteroid2/afterattack(obj/target, mob/user , flag)
+	if(istype(target, /obj/item/slime_extract))
+		var/obj/item/slime_extract/extract = target
+		if(extract.enhanced == 1)
+			user << "<span class='warning'> This extract has already been enhanced!</span>"
+			return ..()
+		if(extract.Uses == 0)
+			user << "<span class='warning'> You can't enhance a used extract!</span>"
+			return ..()
+		user <<"You apply the enhancer. It now has triple the amount of uses."
+		extract.Uses = 3
+		extract.enhanced = 1
+		qdel(src)
 
 /obj/effect/golemrune
 	anchored = 1
@@ -239,45 +240,45 @@
 	unacidable = 1
 	layer = TURF_LAYER
 
-	New()
-		..()
-		processing_objects.Add(src)
+/obj/effect/golemrune/New()
+	..()
+	processing_objects.Add(src)
 
-	process()
-		var/mob/observer/ghost/ghost
-		for(var/mob/observer/ghost/O in src.loc)
-			if(!O.client)	continue
-			if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
-			ghost = O
-			break
-		if(ghost)
-			icon_state = "golem2"
-		else
-			icon_state = "golem"
+/obj/effect/golemrune/process()
+	var/mob/observer/ghost/ghost
+	for(var/mob/observer/ghost/O in src.loc)
+		if(!O.client)	continue
+		if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
+		ghost = O
+		break
+	if(ghost)
+		icon_state = "golem2"
+	else
+		icon_state = "golem"
 
-	attack_hand(mob/living/user as mob)
-		var/mob/observer/ghost/ghost
-		for(var/mob/observer/ghost/O in src.loc)
-			if(!O.client)	continue
-			if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
-			ghost = O
-			break
-		if(!ghost)
-			user << "The rune fizzles uselessly. There is no spirit nearby."
-			return
-		var/mob/living/carbon/human/G = new(src.loc)
-		G.set_species("Golem")
-		G.key = ghost.key
-		G << "You are an adamantine golem. You move slowly, but are highly resistant to heat and cold as well as blunt trauma. You are unable to wear clothes, but can still use most tools. Serve [user], and assist them in completing their goals at any cost."
-		qdel(src)
+/obj/effect/golemrune/attack_hand(mob/living/user as mob)
+	var/mob/observer/ghost/ghost
+	for(var/mob/observer/ghost/O in src.loc)
+		if(!O.client)	continue
+		if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
+		ghost = O
+		break
+	if(!ghost)
+		user << "The rune fizzles uselessly. There is no spirit nearby."
+		return
+	var/mob/living/carbon/human/G = new(src.loc)
+	G.set_species("Golem")
+	G.key = ghost.key
+	G << "You are an adamantine golem. You move slowly, but are highly resistant to heat and cold as well as blunt trauma. You are unable to wear clothes, but can still use most tools. Serve [user], and assist them in completing their goals at any cost."
+	qdel(src)
 
 
-	proc/announce_to_ghosts()
-		for(var/mob/observer/ghost/G in player_list)
-			if(G.client)
-				var/area/A = get_area(src)
-				if(A)
-					G << "Golem rune created in [A.name]."
+/obj/effect/golemrune/proc/announce_to_ghosts()
+	for(var/mob/observer/ghost/G in player_list)
+		if(G.client)
+			var/area/A = get_area(src)
+			if(A)
+				G << "Golem rune created in [A.name]."
 
 /mob/living/carbon/slime/has_eyes()
 	return 0

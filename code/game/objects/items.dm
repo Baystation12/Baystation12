@@ -10,7 +10,6 @@
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = null
-	var/storage_cost = null
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
 	pass_flags = PASSTABLE
@@ -253,7 +252,7 @@
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
-	layer = 20
+	layer = SCREEN_LAYER+0.01
 	if(user.client)	user.client.screen |= src
 	if(user.pulling == src) user.stop_pulling()
 	return

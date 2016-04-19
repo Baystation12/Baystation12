@@ -21,6 +21,8 @@
 	flags = NO_BLOOD | NO_SCAN | NO_SLIP | NO_POISON | NO_MINOR_CUT
 	spawn_flags = IS_RESTRICTED
 
+	genders = list(NEUTER)
+
 /datum/species/shadow/handle_death(var/mob/living/carbon/human/H)
 	spawn(1)
 		new /obj/effect/decal/cleanable/ash(H.loc)

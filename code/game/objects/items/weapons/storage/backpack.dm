@@ -23,7 +23,7 @@
 	w_class = 4
 	slot_flags = SLOT_BACK
 	max_w_class = 4
-	max_storage_space = 28
+	max_storage_space = DEFAULT_BACKPACK_STORAGE
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (src.use_sound)
@@ -51,9 +51,8 @@
 	desc = "A backpack that opens into a localized pocket of Blue Space."
 	origin_tech = list(TECH_BLUESPACE = 4)
 	icon_state = "holdingpack"
-	max_w_class = 4
+	max_w_class = 3
 	max_storage_space = 56
-	storage_cost = 29
 
 	New()
 		..()
@@ -74,7 +73,7 @@
 
 /obj/item/weapon/storage/backpack/santabag
 	name = "\improper Santa's gift bag"
-	desc = "Space Santa uses this to deliver toys to all the nice children in space in Christmas! Wow, it's pretty big!"
+	desc = "Space Santa uses this to deliver toys to all the nice children in space for Christmas! Wow, it's pretty big!"
 	icon_state = "giftbag0"
 	item_state = "giftbag"
 	w_class = 4.0
@@ -150,77 +149,46 @@
 	name = "dufflebag"
 	desc = "A large dufflebag for holding extra things."
 	icon_state = "duffle"
-	item_state_slots = list(
-		slot_l_hand_str = "duffle",
-		slot_r_hand_str = "duffle",
-		)
-	slowdown = 1
-	max_storage_space = 38
-	storage_slots = 12
+	item_state_slots = null
+	w_class = 5
+	slowdown = 3 //wear it on your back if you must, best to carry it in hands to avoid any slowdown at all.
+	max_storage_space = 32
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie
 	name = "black dufflebag"
 	desc = "A large dufflebag for holding extra tactical supplies."
+	slowdown = 1
 	icon_state = "duffle_syndie"
-	item_state_slots = list(
-		slot_l_hand_str = "duffle_syndiemed",
-		slot_r_hand_str = "duffle_syndiemed",
-		)
-	slowdown = 0
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie/med
 	name = "medical dufflebag"
 	desc = "A large dufflebag for holding extra tactical medical supplies."
 	icon_state = "duffle_syndiemed"
-	item_state_slots = list(
-		slot_l_hand_str = "duffle_syndiemed",
-		slot_r_hand_str = "duffle_syndiemed",
-		)
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie/ammo
 	name = "ammunition dufflebag"
 	desc = "A large dufflebag for holding extra weapons ammunition and supplies."
 	icon_state = "duffle_syndieammo"
-	item_state_slots = list(
-		slot_l_hand_str = "duffle_syndieammo",
-		slot_r_hand_str = "duffle_syndieammo",
-		)
 
 /obj/item/weapon/storage/backpack/dufflebag/captain
 	name = "captain's dufflebag"
 	desc = "A large dufflebag for holding extra captainly goods."
 	icon_state = "duffle_captain"
-	item_state_slots = list(
-		slot_l_hand_str = "duffle_captain",
-		slot_r_hand_str = "duffle_captain",
-		)
 
 /obj/item/weapon/storage/backpack/dufflebag/med
 	name = "medical dufflebag"
 	desc = "A large dufflebag for holding extra medical supplies."
 	icon_state = "duffle_med"
-	item_state_slots = list(
-		slot_l_hand_str = "duffle_med",
-		slot_r_hand_str = "duffle_med",
-		)
 
 /obj/item/weapon/storage/backpack/dufflebag/sec
 	name = "security dufflebag"
 	desc = "A large dufflebag for holding extra security supplies and ammunition."
 	icon_state = "duffle_sec"
-	item_state_slots = list(
-		slot_l_hand_str = "duffle_sec",
-		slot_r_hand_str = "duffle_sec",
-		)
 
 /obj/item/weapon/storage/backpack/dufflebag/eng
 	name = "industrial dufflebag"
 	desc = "A large dufflebag for holding extra tools and supplies."
 	icon_state = "duffle_eng"
-	item_state_slots = list(
-		slot_l_hand_str = "duffle_eng",
-		slot_r_hand_str = "duffle_eng",
-		)
 
 /*
  * Satchel Types

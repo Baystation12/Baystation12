@@ -710,7 +710,7 @@ other types of metals and chemistry for reagents).
 	id = "chameleon"
 	req_tech = list(TECH_ILLEGAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 500)
-	build_path = /obj/item/weapon/storage/box/syndie_kit/chameleon
+	build_path = /obj/item/weapon/storage/backpack/chameleon/sydie_kit
 	sort_string = "VASBA"
 
 // Modular computer components

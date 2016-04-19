@@ -26,6 +26,7 @@ var/global/datum/controller/gameticker/ticker
 	var/list/availablefactions = list()	  // list of factions with openings
 
 	var/pregame_timeleft = 0
+	var/gamemode_voted = 0
 
 	var/delay_end = 0	//if set to nonzero, the round will not restart on it's own
 
@@ -44,7 +45,25 @@ var/global/datum/controller/gameticker/ticker
 	'sound/music/clouds.s3m',\
 	'sound/music/space_oddity.ogg') //Ground Control to Major Tom, this song is cool, what's going on?
 	do
-		pregame_timeleft = 180
+		if(!gamemode_voted)
+			pregame_timeleft = 180
+		else
+			pregame_timeleft = 15
+			if(!isnull(secondary_mode))
+				master_mode = secondary_mode
+				secondary_mode = null
+				world << "Trying to start the second top game mode..."
+				if(!hide_mode)
+					world << "<b>The game mode is now: [master_mode]</b>"
+			else if(!isnull(tertiary_mode))
+				master_mode = tertiary_mode
+				tertiary_mode = null
+				world << "Trying to start the third top game mode..."
+				if(!hide_mode)
+					world << "<b>The game mode is now: [master_mode]</b>"
+			else
+				master_mode = "extended"
+				world << "<b>Forcing the game mode to extended...</b>"
 		world << "<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>"
 		world << "Please, setup your character and select ready. Game will start in [pregame_timeleft] seconds"
 		while(current_state == GAME_STATE_PREGAME)
@@ -53,7 +72,8 @@ var/global/datum/controller/gameticker/ticker
 				vote.process()
 			if(round_progressing)
 				pregame_timeleft--
-			if(pregame_timeleft == config.vote_autogamemode_timeleft)
+			if(pregame_timeleft == config.vote_autogamemode_timeleft && !gamemode_voted)
+				gamemode_voted = 1
 				if(!vote.time_remaining)
 					vote.autogamemode()	//Quit calling this over and over and over and over.
 					while(vote.time_remaining)
@@ -174,7 +194,7 @@ var/global/datum/controller/gameticker/ticker
 		cinematic = new(src)
 		cinematic.icon = 'icons/effects/station_explosion.dmi'
 		cinematic.icon_state = "station_intact"
-		cinematic.layer = 20
+		cinematic.layer = CINEMA_LAYER
 		cinematic.mouse_opacity = 0
 		cinematic.screen_loc = "1,0"
 

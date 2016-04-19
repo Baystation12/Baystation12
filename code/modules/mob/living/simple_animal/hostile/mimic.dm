@@ -152,12 +152,8 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 /mob/living/simple_animal/hostile/mimic/copy/proc/CopyObject(var/obj/O, var/mob/living/creator)
 
 	if((istype(O, /obj/item) || istype(O, /obj/structure)) && !is_type_in_list(O, protected_objects))
-
-		O.loc = src
-		name = O.name
-		desc = O.desc
-		icon = O.icon
-		icon_state = O.icon_state
+		O.forceMove(src)
+		appearance = O
 		icon_living = icon_state
 
 		if(istype(O, /obj/structure))

@@ -13,6 +13,7 @@
 	var/on = 1
 	var/area/area = null
 	var/otherarea = null
+	var/image/overlay
 
 /obj/machinery/light_switch/New()
 	..()
@@ -31,14 +32,18 @@
 
 
 /obj/machinery/light_switch/proc/updateicon()
+	if(!overlay)
+		overlay = image(icon, "light1-overlay", LIGHTING_LAYER+0.1)
+
+	overlays.Cut()
 	if(stat & NOPOWER)
 		icon_state = "light-p"
 		set_light(0)
-		layer = OBJ_LAYER
 	else
 		icon_state = "light[on]"
-		set_light(2, 1.5, on ? "#82FF4C" : "#F86060")
-		layer = LIGHTING_LAYER+0.1
+		overlay.icon_state = "light[on]-overlay"
+		overlays += overlay
+		set_light(2, 0.1, on ? "#82FF4C" : "#F86060")
 
 /obj/machinery/light_switch/examine(mob/user)
 	if(..(user, 1))

@@ -142,8 +142,13 @@
 						continue
 					drop_from_inventory(r_hand)
 
-			var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
-			emote("me", 1, "[(species.flags & NO_PAIN) ? "" : emote_scream ]drops what they were holding in their [E.name]!")
+			var/emote_scream = pick("screams in pain and", "lets out a sharp cry and", "cries out and")
+			var/grasp_name = E.name
+			if((E.body_part in list(ARM_LEFT, ARM_RIGHT)) && E.children.len)
+				var/obj/item/organ/external/hand = pick(E.children)
+				grasp_name = hand.name
+
+			emote("me", 1, "[(species.flags & NO_PAIN) ? "" : emote_scream] drops what they were holding in their [grasp_name]!")
 
 		else if(E.is_malfunctioning())
 			switch(E.body_part)

@@ -1,5 +1,5 @@
 /datum/game_mode/infestation
-	name = "infestation"
+	name = "Borer, Changeling & Xenomorph"
 	round_description = "There's something in the walls!"
 	extended_round_description = "Two alien antagonists (Xenomorphs, Cortical Borers or Changelings) may spawn during this round."
 	config_tag = "infestation"

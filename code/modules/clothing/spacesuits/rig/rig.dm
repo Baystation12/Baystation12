@@ -66,6 +66,7 @@
 	var/malfunction_delay = 0
 	var/electrified = 0
 	var/locked_down = 0
+	var/aimove_power_usage = 200							  // Power usage per tile traveled when suit is moved by AI in IIS. In joules.
 
 	var/seal_delay = SEAL_DELAY
 	var/sealing                                               // Keeps track of seal status independantly of canremove.
@@ -805,6 +806,9 @@
 		return 0
 	return 1
 
+/obj/item/weapon/rig/check_access(obj/item/I)
+	return TRUE
+
 /obj/item/weapon/rig/proc/force_rest(var/mob/user)
 	if(!ai_can_move_suit(user, check_user_module = 1))
 		return
@@ -890,7 +894,7 @@
 			wearer_move_delay += 2
 			return wearer.buckled.relaymove(wearer,direction)
 
-	cell.use(200) //Arbitrary, TODO
+	cell.use(aimove_power_usage * CELLRATE)
 	wearer.Move(get_step(get_turf(wearer),direction),direction)
 
 // This returns the rig if you are contained inside one, but not if you are wearing it

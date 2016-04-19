@@ -201,6 +201,12 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		"pda_status.png"		= 'icons/pda_icons/pda_status.png'
 	)
 
+/datum/asset/simple/tgui
+	assets = list(
+		"tgui.css"	= 'tgui/assets/tgui.css',
+		"tgui.js"	= 'tgui/assets/tgui.js'
+	)
+
 /datum/asset/nanoui
 	var/list/common = list()
 

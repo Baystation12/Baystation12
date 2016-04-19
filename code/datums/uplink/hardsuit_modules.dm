@@ -17,7 +17,7 @@
 /datum/uplink_item/item/ewar_voice
 	name = "Electrowarfare Suite and Voice Synthesiser"
 	item_cost = 6
-	path = /obj/item/weapon/storage/box/syndie_kit/ewar_voice
+	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/ewar_voice
 
 /datum/uplink_item/item/hardsuit_modules/maneuvering_jets
 	name = "Maneuvering Jets"

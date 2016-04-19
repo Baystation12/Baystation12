@@ -111,7 +111,7 @@
 
 /obj/machinery/camera/proc/setViewRange(var/num = 7)
 	src.view_range = num
-	cameranet.updateVisibility(src, 0)
+	cameranet.update_visibility(src, 0)
 
 /obj/machinery/camera/attack_hand(mob/living/carbon/human/user as mob)
 	if(!istype(user))
@@ -157,6 +157,7 @@
 					new /obj/item/stack/cable_coil(src.loc, length=2)
 				assembly = null //so qdel doesn't eat it.
 			qdel(src)
+			return
 
 	// OTHER
 	else if (can_use() && (istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/device/pda)) && isliving(user))
@@ -444,20 +445,6 @@
 	cam["y"] = y
 	cam["z"] = z
 	return cam
-
-/obj/machinery/camera/proc/update_coverage(var/network_change = 0)
-	if(network_change)
-		var/list/open_networks = difflist(network, restricted_camera_networks)
-		// Add or remove camera from the camera net as necessary
-		if(on_open_network && !open_networks.len)
-			cameranet.removeCamera(src)
-		else if(!on_open_network && open_networks.len)
-			on_open_network = 1
-			cameranet.addCamera(src)
-	else
-		cameranet.updateVisibility(src, 0)
-
-	invalidateCameraCache()
 
 // Resets the camera's wires to fully operational state. Used by one of Malfunction abilities.
 /obj/machinery/camera/proc/reset_wires()

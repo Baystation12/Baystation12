@@ -121,11 +121,11 @@
 	toggle = 0
 
 	on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui=null, force_open=1)
-		data_core.get_manifest_json()
+		data_core.get_manifest_list()
 
 		var/data[0]
 		// This is dumb, but NanoUI breaks if it has no data to send
-		data["manifest"] = list("__json_cache" = ManifestJSON)
+		data["manifest"] = PDA_Manifest
 
 		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)

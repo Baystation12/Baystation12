@@ -79,6 +79,7 @@
 	armor = list(melee = 50, bullet = 15, laser = 30, energy = 10, bomb = 25, bio = 100, rad = 30)
 	emp_protection = 40 //change this to 30 if too high.
 	slowdown = 0
+	aimove_power_usage = 50
 
 	chest_type = /obj/item/clothing/suit/space/rig/light/ninja
 	glove_type = /obj/item/clothing/gloves/rig/light/ninja

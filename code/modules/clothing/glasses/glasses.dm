@@ -15,7 +15,7 @@
 	var/obj/item/clothing/glasses/hud/hud = null	// Hud glasses, if any
 
 /obj/item/clothing/glasses/attack_self(mob/user)
-	if(toggleable)
+	if(toggleable && !user.incapacitated())
 		if(active)
 			active = 0
 			icon_state = off_state
@@ -164,7 +164,7 @@
 	set name = "Adjust welding goggles"
 	set src in usr
 
-	if(usr.canmove && !usr.stat && !usr.restrained())
+	if(usr.canmove && !usr.incapacitated())
 		if(src.up)
 			src.up = !src.up
 			flags_inv |= HIDEEYES
