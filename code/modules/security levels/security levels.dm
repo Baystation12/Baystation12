@@ -47,7 +47,7 @@
 
 		var/newlevel = get_security_level()
 		for(var/obj/machinery/firealarm/FA in machines)
-			if(FA.z in config.contact_levels)
+			if(FA.z in using_map.contact_levels)
 				FA.set_security_level(newlevel)
 
 
