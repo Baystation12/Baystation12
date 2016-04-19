@@ -209,7 +209,7 @@ datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silic
 	object = "wizard familiar"
 	pref_check = MODE_WIZARD
 	ghost_trap_message = "They are occupying a familiar now."
-	ghost_trap_role = "familiar"
+	ghost_trap_role = "Wizard Familiar"
 	ban_checks = list(MODE_WIZARD)
 
 /datum/ghosttrap/familiar/welcome_candidate(var/mob/target)
