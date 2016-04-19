@@ -48,7 +48,10 @@
 	var/list/valid_paths
 
 /datum/gear_tweak/path/New(var/list/valid_paths)
-	src.valid_paths = valid_paths
+	if(istype(valid_paths))
+		src.valid_paths = valid_paths
+	else	// If it wasn't a list, attempt to treat it as a type
+		src.valid_paths = atomtype2nameassoclist(valid_paths)
 	..()
 
 /datum/gear_tweak/path/get_contents(var/metadata)

@@ -221,3 +221,10 @@
 
 /proc/isLeap(y)
 	return ((y) % 4 == 0 && ((y) % 100 != 0 || (y) % 400 == 0))
+
+/proc/atomtype2nameassoclist(var/atom_types)
+	. = list()
+	for(var/atom_type in typesof(atom_types))
+		var/atom/A = atom_type
+		.[initial(A.name)] = atom_type
+	. = sortAssoc(.)
