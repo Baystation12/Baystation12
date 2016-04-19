@@ -76,6 +76,11 @@
 	icon = 'icons/obj/doors/Doormed.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_med
 
+/obj/machinery/door/airlock/virology
+	name = "Airlock"
+	icon = 'icons/obj/doors/Doorviro.dmi'
+	assembly_type = /obj/structure/door_assembly/door_assembly_viro
+
 /obj/machinery/door/airlock/maintenance
 	name = "Maintenance Access"
 	icon = 'icons/obj/doors/Doormaint.dmi'
@@ -171,6 +176,16 @@
 	explosion_resistance = 5
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_med
+	glass = 1
+
+/obj/machinery/door/airlock/glass_virology
+	name = "Maintenance Hatch"
+	icon = 'icons/obj/doors/Doorviroglass.dmi'
+	hitsound = 'sound/effects/Glasshit.ogg'
+	maxhealth = 300
+	explosion_resistance = 5
+	opacity = 0
+	assembly_type = /obj/structure/door_assembly/door_assembly_viro
 	glass = 1
 
 /obj/machinery/door/airlock/mining
