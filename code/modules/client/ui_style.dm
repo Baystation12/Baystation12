@@ -5,7 +5,8 @@
 	"Orange"       = 'icons/mob/screen/orange.dmi',
 	"old"          = 'icons/mob/screen/old.dmi',
 	"White"        = 'icons/mob/screen/white.dmi',
-	"old-noborder" = 'icons/mob/screen/old-noborder.dmi'
+	"old-noborder" = 'icons/mob/screen/old-noborder.dmi',
+	"minimalist"   = 'icons/mob/screen/minimalist.dmi'
 	)
 
 /proc/ui_style2icon(ui_style)
