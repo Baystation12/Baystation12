@@ -61,7 +61,6 @@ script:
   - cd tgui && gulp
   - cd ..
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
-  - scripts/dm.sh -M$MAP_PATH baystation12.dme
   - cp config/example/* config/
   - scripts/dm.sh -DUNIT_TEST -M$MAP_PATH baystation12.dme
   - grep "0 warnings" build_log.txt
