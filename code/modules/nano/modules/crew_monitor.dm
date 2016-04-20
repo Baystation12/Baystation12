@@ -3,10 +3,7 @@
 
 /datum/nano_module/crew_monitor/Topic(href, href_list)
 	if(..()) return 1
-	var/turf/T = get_turf(nano_host())	// TODO: Allow setting any using_map.contact_levels from the interface.
-	if (!T || !(T.z in using_map.player_levels))
-		usr << "<span class='warning'>Unable to establish a connection</span>: You're too far away from the station!"
-		return 0
+
 	if(href_list["track"])
 		if(isAI(usr))
 			var/mob/living/silicon/ai/AI = usr
@@ -17,10 +14,11 @@
 
 /datum/nano_module/crew_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = host.initial_data()
-	var/turf/T = get_turf(nano_host())
 
 	data["isAI"] = isAI(user)
-	data["crewmembers"] = crew_repository.health_data(T)
+	data["crewmembers"] = list()
+	for(var/z_level in using_map.map_levels)
+		data["crewmembers"] += crew_repository.health_data(z_level)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
