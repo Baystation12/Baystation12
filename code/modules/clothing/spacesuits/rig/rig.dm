@@ -2,10 +2,6 @@
 #define ONLY_RETRACT 2
 #define SEAL_DELAY 30
 
-#define UPDATE_CHESTPIECE \
-if (chest && hides_uniform)
-
-
 /*
  * Defines the behavior of hardsuits/rigs/power armour.
  */
