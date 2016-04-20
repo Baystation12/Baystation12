@@ -1,7 +1,0 @@
-author: Neerti
-
-delete-after: True
-
-changes: 
-  - tweak: "The toggle to shoot if the target talks on the radio defaults to off."
-  - bugfix: "The aim intent icon now updates when clicked."
