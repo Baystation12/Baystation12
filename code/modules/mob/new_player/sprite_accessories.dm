@@ -59,7 +59,7 @@
 
 	short2
 		name = "Short Hair 2"
-		icon_state = "hair_shorthair2"
+		icon_state = "hair_shorthair3_s"
 
 	resomi
 		name = "Resomi Plumage"
