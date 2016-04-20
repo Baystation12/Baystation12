@@ -23,7 +23,7 @@
 				dat += " <a href='?src=\ref[src];underwear=[UWC.name];tweak=\ref[gt]'>[gt.get_contents(get_metadata(H, UWC.name, gt))]</a>"
 		dat += " <a href='?src=\ref[src];remove_underwear=[UWC.name]'>(Remove)</a><br>"
 
-	dat = jointext(dat)
+	dat = jointext(dat,null)
 	H << browse(dat, "window=wardrobe;size=400x200")
 
 /obj/structure/undies_wardrobe/proc/get_metadata(var/mob/living/carbon/human/H, var/underwear_category, var/datum/gear_tweak/gt)
