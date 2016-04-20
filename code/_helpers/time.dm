@@ -34,6 +34,7 @@ var/round_start_time = 0
 
 /hook/roundstart/proc/start_timer()
 	round_start_time = world.time
+	return 1
 
 #define round_duration_in_ticks (round_start_time ? world.time - round_start_time : 0)
 
