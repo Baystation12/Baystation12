@@ -56,7 +56,7 @@
 	var/move_delay = 1
 	var/fire_sound = 'sound/weapons/Gunshot.ogg'
 	var/fire_sound_text = "gunshot"
-	var/recoil = 0		//screen shake
+	var/screen_shake = 0 //shouldn't be greater than 2 unless zoomed
 	var/silenced = 0
 	var/muzzle_flash = 3
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
@@ -255,9 +255,9 @@
 		if(muzzle_flash)
 			set_light(muzzle_flash)
 
-	if(recoil)
+	if(screen_shake)
 		spawn()
-			shake_camera(user, recoil+1, recoil)
+			shake_camera(user, screen_shake+1, screen_shake)
 	update_icon()
 
 
@@ -382,15 +382,15 @@
 	zoom(zoom_offset, view_size)
 	if(zoom)
 		accuracy = scoped_accuracy + scoped_accuracy_mod
-		if(recoil)
-			recoil = round(recoil*zoom_amount+1) //recoil is worse when looking through a scope
+		if(screen_shake)
+			screen_shake = round(screen_shake*zoom_amount+1) //screen shake is worse when looking through a scope
 
-//make sure accuracy and recoil are reset regardless of how the item is unzoomed.
+//make sure accuracy and screen_shake are reset regardless of how the item is unzoomed.
 /obj/item/weapon/gun/zoom()
 	..()
 	if(!zoom)
 		accuracy = initial(accuracy)
-		recoil = initial(recoil)
+		screen_shake = initial(screen_shake)
 
 /obj/item/weapon/gun/examine(mob/user)
 	..()
