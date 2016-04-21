@@ -109,17 +109,18 @@
 
 
 /obj/machinery/suit_storage_unit/power_change()
-	..()
-	if( !(stat & NOPOWER) )
-		src.ispowered = 1
-		src.update_icon()
-	else
-		spawn(rand(0, 15))
-			src.ispowered = 0
-			src.islocked = 0
-			src.isopen = 1
-			src.dump_everything()
+	. = ..()
+	if(.)
+		if( !(stat & NOPOWER) )
+			src.ispowered = 1
 			src.update_icon()
+		else
+			spawn(rand(0, 15))
+				src.ispowered = 0
+				src.islocked = 0
+				src.isopen = 1
+				src.dump_everything()
+				src.update_icon()
 
 
 /obj/machinery/suit_storage_unit/ex_act(severity)

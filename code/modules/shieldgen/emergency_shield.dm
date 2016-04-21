@@ -173,13 +173,12 @@
 		qdel(shield_tile)
 
 /obj/machinery/shieldgen/power_change()
-	..()
-	if(!active) return
+	. = ..()
+	if(!. || !active) return
 	if (stat & NOPOWER)
 		collapse_shields()
 	else
 		create_shields()
-	update_icon()
 
 /obj/machinery/shieldgen/process()
 	if (!active || (stat & NOPOWER))

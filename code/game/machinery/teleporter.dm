@@ -377,8 +377,7 @@
 	src.add_fingerprint(usr)
 	return
 
-/obj/machinery/teleport/station/power_change()
-	..()
+/obj/machinery/teleport/station/update_icon()
 	if(stat & NOPOWER)
 		icon_state = "controller-p"
 

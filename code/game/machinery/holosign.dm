@@ -7,7 +7,7 @@
 	layer = 4
 	use_power = 1
 	idle_power_usage = 2
-	active_power_usage = 4
+	active_power_usage = 70
 	anchored = 1
 	var/lit = 0
 	var/id = null
@@ -32,17 +32,12 @@
 	use_power = lit ? 2 : 1
 	update_icon()
 
+//maybe add soft lighting? Maybe, though not everything needs it
 /obj/machinery/holosign/update_icon()
-	if (!lit)
+	if (!lit || (stat & (BROKEN|NOPOWER)))
 		icon_state = "sign_off"
 	else
 		icon_state = on_icon
-
-/obj/machinery/holosign/power_change()
-	if (stat & NOPOWER)
-		lit = 0
-		use_power = 0
-	update_icon()
 
 /obj/machinery/holosign/surgery
 	name = "surgery holosign"

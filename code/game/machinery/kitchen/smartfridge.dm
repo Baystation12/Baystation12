@@ -177,12 +177,6 @@
 	if(src.shoot_inventory && prob(2))
 		src.throw_item()
 
-/obj/machinery/smartfridge/power_change()
-	var/old_stat = stat
-	..()
-	if(old_stat != stat)
-		update_icon()
-
 /obj/machinery/smartfridge/update_icon()
 	if(stat & (BROKEN|NOPOWER))
 		icon_state = icon_off
