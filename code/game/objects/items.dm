@@ -96,6 +96,10 @@
 		else if(M.r_hand == src)
 			M.update_inv_r_hand()
 
+/obj/item/proc/is_held_twohanded(mob/living/M)
+	return ((M.l_hand == src && !M.r_hand) || (M.r_hand == src && !M.l_hand))
+
+
 /obj/item/ex_act(severity)
 	switch(severity)
 		if(1.0)

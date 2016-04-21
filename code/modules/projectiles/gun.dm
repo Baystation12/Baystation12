@@ -92,7 +92,7 @@
 	if(requires_two_hands)
 		var/mob/living/M = loc
 		if(istype(M))
-			if((M.l_hand == src && !M.r_hand) || (M.r_hand == src && !M.l_hand))
+			if(src.is_held_twohanded(M))
 				name = "[initial(name)] (wielded)"
 				if(wielded_item_state)
 					item_state = wielded_item_state
@@ -179,7 +179,7 @@
 	var/held_acc_mod = 0
 	var/held_disp_mod = 0
 	if(requires_two_hands)
-		if((user.l_hand == src && user.r_hand) || (user.r_hand == src && user.l_hand))
+		if(!src.is_held_twohanded(user))
 			held_acc_mod = -requires_two_hands
 			held_disp_mod = requires_two_hands*0.25 //dispersion per point of two-handedness
 
@@ -255,6 +255,19 @@
 
 		if(muzzle_flash)
 			set_light(muzzle_flash)
+
+	if(requires_two_hands && !src.is_held_twohanded(user))
+		switch(requires_two_hands)
+			if(1)
+				if(prob(25)) //don't need to tell them every single time
+					user << "<span class='warning'>Your aim wavers slightly.</span>"
+			if(2)
+				user << "<span class='warning'>Your aim wavers as you fire \the [src] with just one hand.</span>"
+			if(3)
+				user << "<span class='warning'>You have trouble keeping \the [src] on target with just one hand.</span>"
+			if(4 to INFINITY)
+				user << "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>"
+
 
 	if(screen_shake)
 		spawn()
