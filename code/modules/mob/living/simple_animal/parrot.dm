@@ -109,7 +109,7 @@
 	..()
 
 /mob/living/simple_animal/parrot/Stat()
-	..()
+	. = ..()
 	stat("Held Item", held_item)
 
 /*

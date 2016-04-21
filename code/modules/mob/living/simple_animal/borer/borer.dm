@@ -89,7 +89,7 @@
 					host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp"))]")
 
 /mob/living/simple_animal/borer/Stat()
-	..()
+	. = ..()
 	statpanel("Status")
 
 	if(emergency_shuttle)

@@ -143,7 +143,7 @@
 	return 2
 
 /mob/living/carbon/slime/Stat()
-	..()
+	. = ..()
 
 	statpanel("Status")
 	stat(null, "Health: [round((health / maxHealth) * 100)]%")
