@@ -43,14 +43,13 @@
 			user << "\A [chambered] is chambered."
 
 /obj/item/weapon/gun/launcher/grenade/proc/load(obj/item/weapon/grenade/G, mob/user)
-	if(G.loadable)
+	if(!G.loadable)
 		user << "<span class='warning'>\The [G] doesn't seem to fit in \the [src]!</span>"
 		return
 
 	if(grenades.len >= max_grenades)
 		user << "<span class='warning'>\The [src] is full.</span>"
 		return
-	user.remove_from_mob(G)
 	G.forceMove(src)
 	grenades.Insert(1, G) //add to the head of the list, so that it is loaded on the next pump
 	user.visible_message("\The [user] inserts \a [G] into \the [src].", "<span class='notice'>You insert \a [G] into \the [src].</span>")
@@ -89,6 +88,7 @@
 	message_admins("[key_name_admin(user)] fired a grenade ([chambered.name]) from a grenade launcher ([src.name]).")
 	log_game("[key_name_admin(user)] used a grenade ([chambered.name]).")
 	chambered = null
+	..()
 
 // For uplink purchase, comes loaded with a random assortment of grenades
 /obj/item/weapon/gun/launcher/grenade/loaded/New()
@@ -105,7 +105,7 @@
 
 	for(var/i in 1 to max_grenades)
 		var/grenade_type = pickweight(grenade_types)
-		load(new grenade_type(src), null)
+		grenades += new grenade_type(src)
 
 //Underslung grenade launcher to be used with the Z8
 /obj/item/weapon/gun/launcher/grenade/underslung
