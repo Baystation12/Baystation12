@@ -5,7 +5,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define SMESRATE 0.05  // Same for SMESes. A different number for some reason.
 
 // Doors!
-#define DOOR_CRUSH_DAMAGE 20
+#define DOOR_CRUSH_DAMAGE 80
 #define ALIEN_SELECT_AFK_BUFFER  1    // How many minutes that a person can be AFK before not being allowed to be an alien.
 
 // Channel numbers for power.
@@ -37,6 +37,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define NETWORK_ENGINEERING_OUTPOST "Engineering Outpost"
 #define NETWORK_ERT "ZeEmergencyResponseTeam"
 #define NETWORK_EXODUS "Exodus"
+#define NETWORK_FIRST_DECK "First Deck"
 #define NETWORK_MEDICAL "Medical"
 #define NETWORK_MERCENARY "MercurialNet"
 #define NETWORK_MINE "MINE"
@@ -44,8 +45,10 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define NETWORK_RESEARCH_OUTPOST "Research Outpost"
 #define NETWORK_ROBOTS "Robots"
 #define NETWORK_PRISON "Prison"
+#define NETWORK_SECOND_DECK "Second Deck"
 #define NETWORK_SECURITY "Security"
 #define NETWORK_TELECOM "Tcomsat"
+#define NETWORK_THIRD_DECK "Third Deck"
 #define NETWORK_THUNDER "Thunderdome"
 
 // Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.

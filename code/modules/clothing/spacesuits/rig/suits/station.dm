@@ -39,6 +39,8 @@
 	helm_type = null
 	boot_type = null
 
+	hides_uniform = 0
+
 /obj/item/weapon/rig/internalaffairs/equipped
 
 	req_access = list(access_lawyer)

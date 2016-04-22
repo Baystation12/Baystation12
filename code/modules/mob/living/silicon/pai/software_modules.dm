@@ -463,18 +463,17 @@
 	name = "Universal Translator"
 	ram_cost = 35
 	id = "translator"
+	var/list/languages = list(LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_RESOMI)
 
 	toggle(mob/living/silicon/pai/user)
 		// 	Sol Common, Tradeband and Gutter are added with New() and are therefore the current default, always active languages
 		user.translator_on = !user.translator_on
 		if(user.translator_on)
-			user.add_language(LANGUAGE_UNATHI)
-			user.add_language(LANGUAGE_SIIK_MAAS)
-			user.add_language(LANGUAGE_SKRELLIAN)
+			for(var/language in languages)
+				user.add_language(language)
 		else
-			user.remove_language(LANGUAGE_UNATHI)
-			user.remove_language(LANGUAGE_SIIK_MAAS)
-			user.remove_language(LANGUAGE_SKRELLIAN)
+			for(var/language in languages)
+				user.remove_language(language)
 
 	is_active(mob/living/silicon/pai/user)
 		return user.translator_on

@@ -44,14 +44,14 @@ datum/track/New(var/title_name, var/audio)
 	. = ..()
 
 /obj/machinery/media/jukebox/power_change()
-	if(!powered(power_channel) || !anchored)
+	. = ..()
+	if(!anchored)
 		stat |= NOPOWER
 	else
 		stat &= ~NOPOWER
 
 	if(stat & (NOPOWER|BROKEN) && playing)
 		StopPlaying()
-	update_icon()
 
 /obj/machinery/media/jukebox/update_icon()
 	overlays.Cut()

@@ -136,11 +136,9 @@
 
 	updateDialog()
 
-/obj/machinery/shield_capacitor/power_change()
+/obj/machinery/shield_capacitor/update_icon()
 	if(stat & BROKEN)
 		icon_state = "broke"
-	else
-		..()
 
 /obj/machinery/shield_capacitor/verb/rotate()
 	set name = "Rotate capacitor clockwise"

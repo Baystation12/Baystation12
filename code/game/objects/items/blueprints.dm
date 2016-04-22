@@ -43,6 +43,9 @@
 				interact()
 				return
 			edit_area()
+		if ("delete_area")
+			//skip the sanity checking, delete_area() does it anyway
+			delete_area()
 
 /obj/item/blueprints/interact()
 	var/area/A = get_area()
@@ -57,10 +60,18 @@
 <p><a href='?src=\ref[src];action=create_area'>Mark this place as new area.</a></p>
 "}
 		if (AREA_STATION)
-			text += {"
+			if (A.apc)
+				text += {"
 <p>According the blueprints, you are now in <b>\"[A.name]\"</b>.</p>
 <p>You may <a href='?src=\ref[src];action=edit_area'>
 move an amendment</a> to the drawing.</p>
+<p>You can't erase this area, because it has an APC.</p>
+"}
+			else
+				text += {"
+<p>According the blueprints, you are now in <b>\"[A.name]\"</b>.</p>
+<p>You may <a href='?src=\ref[src];action=edit_area'>
+move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_area'>erase part of it</a>.</p>
 "}
 		if (AREA_SPECIAL)
 			text += {"
@@ -88,7 +99,11 @@ move an amendment</a> to the drawing.</p>
 		/area/centcom,
 		/area/asteroid,
 		/area/tdome,
+		/area/acting,
+		/area/supply,
 		/area/syndicate_station,
+		/area/skipjack_station,
+		/area/syndicate_mothership,
 		/area/wizard_station,
 		/area/prison
 		// /area/derelict //commented out, all hail derelict-rebuilders!
@@ -96,6 +111,8 @@ move an amendment</a> to the drawing.</p>
 	for (var/type in SPECIALS)
 		if ( istype(A,type) )
 			return AREA_SPECIAL
+	if(A.z in using_map.admin_levels)
+		return AREA_SPECIAL
 	return AREA_STATION
 
 /obj/item/blueprints/proc/create_area()
@@ -160,6 +177,17 @@ move an amendment</a> to the drawing.</p>
 	usr << "<span class='notice'>You set the area '[prevname]' title to '[str]'.</span>"
 	interact()
 	return
+
+
+/obj/item/blueprints/proc/delete_area()
+	var/area/A = get_area()
+	if (get_area_type(A)!=AREA_STATION || A.apc) //let's just check this one last time, just in case
+		interact()
+		return
+	usr << "<span class='notice'>You scrub [A.name] off the blueprint.</span>"
+	log_and_message_admins("deleted area [A.name] via station blueprints.")
+	qdel(A)
+	interact()
 
 
 

@@ -175,7 +175,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
 		s["players"] = 0
 		s["stationtime"] = worldtime2text()
-		s["roundduration"] = round_duration()
+		s["roundduration"] = round_duration_as_text()
 
 		if(input["status"] == "2")
 			var/list/players = list()
@@ -431,9 +431,14 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	processScheduler.stop()
 
-	for(var/client/C in clients)
-		if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
+	if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
+		for(var/client/C in clients)
 			C << link("byond://[config.server]")
+
+	if(config.wait_for_sigusr1_reboot && reason != 3)
+		text2file("foo", "reboot_called")
+		world << "<span class=danger>World reboot waiting for external scripts. Please be patient.</span>"
+		return
 
 	..(reason)
 

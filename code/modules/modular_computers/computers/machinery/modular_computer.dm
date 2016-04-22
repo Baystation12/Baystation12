@@ -162,9 +162,7 @@
 /obj/machinery/modular_computer/power_change()
 	if(battery_powered)
 		return
-	else
-		..()
-		update_icon()
+	..()
 
 /obj/machinery/modular_computer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(cpu)

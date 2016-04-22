@@ -1,6 +1,4 @@
 /mob/Logout()
-	if(eyeobj)
-		eyeobj.release(src)
 	nanomanager.user_logout(src) // this is used to clean up (remove) this user's Nano UIs
 	tgui_process.on_logout(src)
 	player_list -= src

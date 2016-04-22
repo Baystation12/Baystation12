@@ -283,12 +283,16 @@
 		return 1
 	if( href_list["disable"] )
 		update_io(0)
+		return 1
 	else if( href_list["enable"] )
 		update_io(between(1, text2num(href_list["enable"]), 3))
+		return 1
 	else if( href_list["equaliseon"] )
 		equalise = 1
+		return 1
 	else if( href_list["equaliseoff"] )
 		equalise = 0
+		return 1
 	else if( href_list["ejectcell"] )
 		var/obj/item/weapon/cell/C
 		for(var/obj/item/weapon/cell/CL in internal_cells)
@@ -297,10 +301,11 @@
 				break
 
 		if(!istype(C))
-			return
+			return 1
 
 		C.forceMove(get_turf(src))
 		internal_cells -= C
 		update_icon()
 		RefreshParts()
 		update_maxcharge()
+		return 1

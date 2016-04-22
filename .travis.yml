@@ -7,19 +7,26 @@ env:
     BYOND_MINOR="1318"
     MACRO_COUNT=984
     NODE_VERSION="4"
-  
+
+# ALL MAPS MUST BE PRESENT HERE
+# IF THEY ARE NOT, YOUR BUILD WILL FAIL
+  matrix:
+    - MAP_PATH=example
+    - MAP_PATH=exodus
+    - MAP_PATH=torch
+
 cache:
   directories:
     - tgui/node_modules
     - $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
-  
+
 addons:
   apt:
     packages:
       - libc6-i386
       - libgcc1:i386
       - libstdc++6:i386
-  
+
 install:
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $NODE_VERSION
   - npm install -g gulp-cli
@@ -33,6 +40,7 @@ before_script:
 
 script:
   - shopt -s globstar
+  - scripts/validateTravisContainsAllMaps.sh
   - (! grep 'step_[xy]' maps/**/*.dmm)
   - (! find nano/templates/ -type f -exec md5sum {} + | sort | uniq -D -w 32 | grep nano)
   - (! grep -En "<\s*span\s+class\s*=\s*('[^'>]+|[^'>]+')\s*>" **/*.dm)
@@ -45,7 +53,7 @@ script:
   - (num=`grep -E '"/obj' **/*.dm | wc -l`; echo "$num /obj text paths (expecting 13 or less)"; [ $num -le 13 ])
   - (num=`grep -E '"/turf' **/*.dm | wc -l`; echo "$num /turf text paths (expecting 8 or less)"; [ $num -le 8 ])
   - awk -f tools/indentation.awk **/*.dm
-  - md5sum -c - <<< "2eab2bb83b8fef79c218d437e96b30df *.gitignore"
+  - md5sum -c - <<< "a7534ef155ebb32ae7249c48a87abf0d *.gitignore"
   - md5sum -c - <<< "0af969f671fba6cf9696c78cd175a14a *baystation12.int"
   - md5sum -c - <<< "88490b460c26947f5ec1ab1bb9fa9f17 *html/changelogs/example.yml"
   - python tools/TagMatcher/tag-matcher.py ../..
@@ -54,7 +62,7 @@ script:
   - cd ..
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
   - cp config/example/* config/
-  - scripts/dm.sh -DUNIT_TEST baystation12.dme
+  - scripts/dm.sh -DUNIT_TEST -M$MAP_PATH baystation12.dme
   - grep "0 warnings" build_log.txt
   - DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt
   - grep "All Unit Tests Passed" log.txt

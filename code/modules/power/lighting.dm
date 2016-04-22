@@ -198,7 +198,7 @@
 	..()
 
 	spawn(2)
-		on = has_power()
+		on = powered()
 
 		switch(fitting)
 			if("tube")
@@ -325,7 +325,7 @@
 				brightness_range = L.brightness_range
 				brightness_power = L.brightness_power
 				brightness_color = L.brightness_color
-				on = has_power()
+				on = powered()
 				update()
 
 				user.drop_item()	//drop the item to update overlays and such
@@ -387,7 +387,7 @@
 			return
 
 		user << "You stick \the [W] into the light socket!"
-		if(has_power() && (W.flags & CONDUCT))
+		if(powered() && (W.flags & CONDUCT))
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
@@ -398,7 +398,7 @@
 
 // returns whether this light has power
 // true if area has power and lightswitch is on
-/obj/machinery/light/proc/has_power()
+/obj/machinery/light/powered()
 	var/area/A = get_area(src)
 	return A && A.lightswitch && (!A.requires_power || A.power_light)
 
@@ -568,7 +568,7 @@
 // called when area power state changes
 /obj/machinery/light/power_change()
 	spawn(10)
-		seton(has_power())
+		seton(powered())
 
 // called when on fire
 

@@ -1,0 +1,8 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - tweak: "SMESes can now be damaged by gunfire/explosions/emitters, and repaired by welding tool. SMES that is too damaged will explode with strength dependent on remaining charge. Damage can be seen by examining the SMES."
+  - rscdel: "Old cell rack PSUs have been removed (and replaced)."
+  - rscadd: "New cell rack PSUs have been added. Comes with set of simple sprites (I'm horrible spriter!), a new nanoUI that shows status of each power cell, and support for upgrades. Better capacitors increase charging/discharging rate, better matter bin increases max amount of cells that can be held inside the PSU (3/6/9 cells). PSUs do not allow precise setting of input/output levels. These new PSUs act as bridge between power cells and cables, allowing you to charge/discharge the cells into the grid."

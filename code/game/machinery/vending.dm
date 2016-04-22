@@ -613,16 +613,14 @@
 		O.show_message("<span class='game say'><span class='name'>\The [src]</span> beeps, \"[message]\"</span>",2)
 	return
 
-/obj/machinery/vending/power_change()
-	..()
+/obj/machinery/vending/update_icon()
 	if(stat & BROKEN)
 		icon_state = "[initial(icon_state)]-broken"
+	else if( !(stat & NOPOWER) )
+		icon_state = initial(icon_state)
 	else
-		if( !(stat & NOPOWER) )
-			icon_state = initial(icon_state)
-		else
-			spawn(rand(0, 15))
-				src.icon_state = "[initial(icon_state)]-off"
+		spawn(rand(0, 15))
+			src.icon_state = "[initial(icon_state)]-off"
 
 //Oh no we're malfunctioning!  Dump out some product and break.
 /obj/machinery/vending/proc/malfunction()

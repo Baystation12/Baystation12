@@ -1,0 +1,6 @@
+author: Irrationalist
+
+delete-after: True
+
+changes: 
+  - bugfix: "Fixed clothing (gloves and jumpsuits) hidden from description on examination, but are still being displayed on character anyway."

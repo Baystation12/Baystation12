@@ -20,6 +20,7 @@
 /datum/game_mode/traitor/auto
 	name = "autotraitor"
 	config_tag = "autotraitor"
-	antag_tags = list(MODE_AUTOTRAITOR)
 	round_autoantag = 1
 	antag_scaling_coeff = 5
+	end_on_antag_death = 0
+	latejoin_antags = list(MODE_TRAITOR)

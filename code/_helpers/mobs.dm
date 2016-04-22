@@ -75,7 +75,7 @@ proc/random_name(gender, species = "Human")
 	if(species)
 		current_species = all_species[species]
 
-	if(!current_species || current_species.name_language == null)
+	if(!current_species)
 		if(gender==FEMALE)
 			return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
 		else

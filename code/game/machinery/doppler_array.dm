@@ -39,13 +39,10 @@ var/list/doppler_arrays = list()
 	for(var/mob/O in hearers(src, null))
 		O.show_message("<span class='game say'><span class='name'>[src]</span> states coldly, \"[message]\"</span>",2)
 
-
-/obj/machinery/doppler_array/power_change()
-	..()
+/obj/machinery/doppler_array/update_icon()
 	if(stat & BROKEN)
 		icon_state = "[initial(icon_state)]-broken"
+	else if( !(stat & NOPOWER) )
+		icon_state = initial(icon_state)
 	else
-		if( !(stat & NOPOWER) )
-			icon_state = initial(icon_state)
-		else
-			icon_state = "[initial(icon_state)]-off"
+		icon_state = "[initial(icon_state)]-off"

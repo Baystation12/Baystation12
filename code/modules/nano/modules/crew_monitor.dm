@@ -3,8 +3,8 @@
 
 /datum/nano_module/crew_monitor/Topic(href, href_list)
 	if(..()) return 1
-	var/turf/T = get_turf(nano_host())	// TODO: Allow setting any config.contact_levels from the interface.
-	if (!T || !(T.z in config.player_levels))
+	var/turf/T = get_turf(nano_host())	// TODO: Allow setting any using_map.contact_levels from the interface.
+	if (!T || !(T.z in using_map.player_levels))
 		usr << "<span class='warning'>Unable to establish a connection</span>: You're too far away from the station!"
 		return 0
 	if(href_list["track"])

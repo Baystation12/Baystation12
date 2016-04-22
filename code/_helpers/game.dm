@@ -12,17 +12,17 @@
 /proc/is_on_same_plane_or_station(var/z1, var/z2)
 	if(z1 == z2)
 		return 1
-	if((z1 in config.station_levels) &&	(z2 in config.station_levels))
+	if((z1 in using_map.station_levels) &&	(z2 in using_map.station_levels))
 		return 1
 	return 0
 
 /proc/max_default_z_level()
 	var/max_z = 0
-	for(var/z in config.station_levels)
+	for(var/z in using_map.station_levels)
 		max_z = max(z, max_z)
-	for(var/z in config.admin_levels)
+	for(var/z in using_map.admin_levels)
 		max_z = max(z, max_z)
-	for(var/z in config.player_levels)
+	for(var/z in using_map.player_levels)
 		max_z = max(z, max_z)
 	return max_z
 
@@ -62,16 +62,16 @@
 	return heard
 
 /proc/isStationLevel(var/level)
-	return level in config.station_levels
+	return level in using_map.station_levels
 
 /proc/isNotStationLevel(var/level)
 	return !isStationLevel(level)
 
 /proc/isPlayerLevel(var/level)
-	return level in config.player_levels
+	return level in using_map.player_levels
 
 /proc/isAdminLevel(var/level)
-	return level in config.admin_levels
+	return level in using_map.admin_levels
 
 /proc/isNotAdminLevel(var/level)
 	return !isAdminLevel(level)
