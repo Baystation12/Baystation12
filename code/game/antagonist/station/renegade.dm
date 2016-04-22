@@ -24,19 +24,32 @@ var/datum/antagonist/renegade/renegades
 	initial_spawn_target = 6
 
 	var/list/spawn_guns = list(
-		/obj/item/weapon/gun/energy/gun,
 		/obj/item/weapon/gun/energy/laser,
-		/obj/item/weapon/gun/projectile,
-		/obj/item/weapon/gun/projectile/revolver/detective,
-		/obj/item/weapon/gun/projectile/automatic/c20r,
-		/obj/item/weapon/gun/projectile/deagle/camo,
-		/obj/item/weapon/gun/projectile/pistol,
-		/obj/item/weapon/silencer,
-		/obj/item/weapon/gun/projectile/shotgun/pump,
-		/obj/item/weapon/gun/projectile/shotgun/pump/combat,
+		/obj/item/weapon/gun/energy/captain,
+		/obj/item/weapon/gun/energy/lasercannon,
+		/obj/item/weapon/gun/energy/xray,
+		/obj/item/weapon/gun/energy/gun,
+		/obj/item/weapon/gun/energy/gun/burst,
+		/obj/item/weapon/gun/energy/gun/nuclear,
+		/obj/item/weapon/gun/energy/crossbow,
+		/obj/item/weapon/gun/energy/crossbow/largecrossbow,
 		/obj/item/weapon/gun/projectile/automatic,
 		/obj/item/weapon/gun/projectile/automatic/mini_uzi,
-		/obj/item/weapon/gun/energy/crossbow
+		/obj/item/weapon/gun/projectile/automatic/c20r,
+		/obj/item/weapon/gun/projectile/automatic/sts35,
+		/obj/item/weapon/gun/projectile/automatic/wt550,
+		/obj/item/weapon/gun/projectile/automatic/z8,
+		/obj/item/weapon/gun/projectile/automatic/as24,
+		/obj/item/weapon/gun/projectile/colt/detective,
+		/obj/item/weapon/gun/projectile/sec/wood,
+		/obj/item/weapon/gun/projectile/silenced,
+		/obj/item/weapon/gun/projectile/pistol,
+		/obj/item/weapon/gun/projectile/revolver,
+		/obj/item/weapon/gun/projectile/shotgun/pump,
+		/obj/item/weapon/gun/projectile/shotgun/pump/combat,
+		list(/obj/item/weapon/gun/projectile/shotgun/doublebarrel, /obj/item/weapon/gun/projectile/shotgun/doublebarrel/pellet, /obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn),
+		list(/obj/item/weapon/gun/projectile/deagle, /obj/item/weapon/gun/projectile/deagle/gold, /obj/item/weapon/gun/projectile/deagle/camo),
+		list(/obj/item/weapon/gun/projectile/revolver/detective, /obj/item/weapon/gun/projectile/revolver/deckard)
 		)
 
 /datum/antagonist/renegade/New()
@@ -58,10 +71,22 @@ var/datum/antagonist/renegade/renegades
 		return
 
 	var/gun_type = pick(spawn_guns)
-	var/obj/item/gun = new gun_type(get_turf(player))
-	if(!(player.l_hand && player.r_hand))
-		player.put_in_hands(gun)
+	if(islist(gun_type))
+		gun_type = pick(gun_type)
 
+	var/obj/item/gun = new gun_type(get_turf(player))
+	var/list/slots = list (
+		"backpack" = slot_in_backpack,
+		"left hand" = slot_l_hand,
+		"right hand" = slot_r_hand,
+		)
+	for(var/slot in slots)
+		player.equip_to_slot(gun, slot)
+		if(gun.loc == player)
+			break
+	var/obj/item/weapon/storage/S = locate() in player.contents
+	if(S && istype(S))
+		gun.loc = S
 
 /proc/rightandwrong()
 	usr << "<B>You summoned guns!</B>"
