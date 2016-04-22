@@ -447,6 +447,9 @@ var/world_topic_spam_protect_time = world.timeofday
 	return 1
 
 /world/proc/load_mode()
+	if(!fexists("data/mode.txt"))
+		return
+
 	var/list/Lines = file2list("data/mode.txt")
 	if(Lines.len)
 		if(Lines[1])
