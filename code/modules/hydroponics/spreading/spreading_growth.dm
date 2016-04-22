@@ -49,7 +49,7 @@
 		refresh_icon()
 	if(health > max_health)
 		health = max_health
-	else if(health == max_health && !plant)
+	if(health == max_health && !plant)
 		plant = new(T,seed)
 		plant.dir = src.dir
 		plant.transform = src.transform
