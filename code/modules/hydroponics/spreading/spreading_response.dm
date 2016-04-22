@@ -61,7 +61,7 @@
 			health -= rand(1,5)
 			var/text = pick("rip","tear","pull", "bite", "tug")
 			user.visible_message(\
-				"<span class='warning'>\the [user] [text]s at \the [src].</span>",\
+				"<span class='warning'>\The [user] [text]s at \the [src].</span>",\
 				"<span class='warning'>You [text] at \the [src].</span>",\
 				"<span class='warning'>You hear shredding and ripping.</span>")
 	return
