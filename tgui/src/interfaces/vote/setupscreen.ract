@@ -1,0 +1,8 @@
+<link rel='ractive' href='./back.ract'/>
+
+<ui-display title='Vote' button>
+  {{#partial button}}
+    <back/>
+  {{/partial}}
+  {{data.description}} - {{data.status}}
+</ui-display>

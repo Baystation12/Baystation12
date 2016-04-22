@@ -669,14 +669,19 @@ proc/admin_notice(var/message, var/rights)
 
 	if(!check_rights(R_ADMIN))
 		return
+	toggle_ooc()
+	log_and_message_admins("toggled OOC.")
+	feedback_add_details("admin_verb","TOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-	config.ooc_allowed = !(config.ooc_allowed)
+/proc/is_ooc_enabled()
+	return config.ooc_allowed
+
+/proc/toggle_ooc()
+	config.ooc_allowed = !config.ooc_allowed
 	if (config.ooc_allowed)
 		world << "<B>The OOC channel has been globally enabled!</B>"
 	else
 		world << "<B>The OOC channel has been globally disabled!</B>"
-	log_and_message_admins("toggled OOC.")
-	feedback_add_details("admin_verb","TOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/togglelooc()
 	set category = "Server"

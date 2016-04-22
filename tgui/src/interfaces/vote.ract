@@ -1,0 +1,11 @@
+<link rel='ractive' href='./vote/mainscreen.ract'/>
+<link rel='ractive' href='./vote/votescreen.ract'/>
+<link rel='ractive' href='./vote/setupscreen.ract'/>
+
+{{#if data.screen == "main_screen"}}
+	<mainscreen/>
+{{elseif data.screen == "vote_screen"}}
+	<votescreen/>
+{{elseif data.screen == "setup_screen"}}
+	<setupscreen/>
+{{/if}}
