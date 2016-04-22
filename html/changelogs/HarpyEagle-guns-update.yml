@@ -1,0 +1,36 @@
+################################
+# Example Changelog File
+#
+# Note: This file, and files beginning with ".", and files that don't end in ".yml" will not be read. If you change this file, you will look really dumb.
+#
+# Your changelog will be merged with a master changelog. (New stuff added only, and only on the date entry for the day it was merged.)
+# When it is, any changes listed below will disappear.
+#
+# Valid Prefixes: 
+#   bugfix
+#   wip (For works in progress)
+#   tweak
+#   soundadd
+#   sounddel
+#   rscadd (general adding of nice things)
+#   rscdel (general deleting of nice things)
+#   imageadd
+#   imagedel
+#   maptweak
+#   spellcheck (typo fixes)
+#   experiment
+#################################
+
+author: HarpyEagle
+
+delete-after: True
+
+changes: 
+  - rscadd: "Mercenaries can now purchase several types of frag grenades for TC."
+  - rscadd: "Mercenaries can now purchase grenade launchers for TC, comes pre-loaded with random grenades."
+  - rscadd: "Many guns now have an accuracy and dispersion penalty for firing with only one hand, that roughly corresponds to the size and weight of the gun. You will see a message upon shooting with a compromised aim. The penalty is also affected by rapid-fire modes in the case of bullet throwers. To fire two-handed simply ensure that your other hand is empty when shooting."
+  - tweak: "Laser cannons now slightly increased shot capacity and have increased accuracy (better for fighting at longer ranges), can no longer fit in backpacks."
+  - tweak: "X-ray laser gun now fires at the same pace as the laser carbine, has the same shot capacity, but does much more damage against armoured targets, and is slightly easier to one-hand with."
+  - tweak: "Shotgun flares now blind over a larger area and illuminate for longer."
+  - tweak: "Z8 does slightly less damage, has a larger magazine size, and slightly more armour piercing."
+  - bugfix: "Shooting a shotgun stun shell now makes the appropriate sound."
