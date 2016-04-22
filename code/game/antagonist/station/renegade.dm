@@ -39,7 +39,6 @@ var/datum/antagonist/renegade/renegades
 		/obj/item/weapon/gun/projectile/automatic/sts35,
 		/obj/item/weapon/gun/projectile/automatic/wt550,
 		/obj/item/weapon/gun/projectile/automatic/z8,
-		/obj/item/weapon/gun/projectile/automatic/as24,
 		/obj/item/weapon/gun/projectile/colt/detective,
 		/obj/item/weapon/gun/projectile/sec/wood,
 		/obj/item/weapon/gun/projectile/silenced,
