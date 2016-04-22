@@ -3,7 +3,16 @@ var/datum/antagonist/renegade/renegades
 /datum/antagonist/renegade
 	role_text = "Renegade"
 	role_text_plural = "Renegades"
-	welcome_text = "Your own safety matters above all else, trust no one and kill anyone who gets in your way. However, armed as you are, now would be the perfect time to settle that score or grab that pair of yellow gloves you've been eyeing..."
+	welcome_text = "Something's going to go wrong today, you can just feel it. Your paranoid, you've got a gun, and you're going to survive."
+	antag_text = "You are a <b>minor</b> antagonist! Within the rules, \
+		try to protect yourself and what's important to you. You aren't here to cause trouble, \
+		you're just more willing (and equipped) to go to extremes to stop it than others are. \
+		Your job is to somewhat oppose the other antagonists, should they threaten you, in ways that aren't quite legal themselves. \
+		Try to make sure other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, \
+		and before taking extreme actions, please try to also contact the administration! \
+		Think through your actions and make the roleplay immersive! <b>Please remember all \
+		rules aside from those without explicit exceptions apply to antagonists.</b>"
+
 	id = MODE_RENEGADE
 	flags = ANTAG_SUSPICIOUS | ANTAG_IMPLANT_IMMUNE | ANTAG_RANDSPAWN | ANTAG_VOTABLE
 	hard_cap = 5

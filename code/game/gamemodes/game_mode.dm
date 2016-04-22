@@ -561,17 +561,6 @@ proc/get_nt_opposed()
 	if(dudes.len == 0) return null
 	return pick(dudes)
 
-//Announces objectives/generic antag text.
-/proc/show_generic_antag_text(var/datum/mind/player)
-	if(player.current)
-		player.current << \
-		"You are an antagonist! <font color=blue>Within the rules,</font> \
-		try to act as an opposing force to the crew. Further RP and try to make sure \
-		other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, \
-		and before taking extreme actions, please try to also contact the administration! \
-		Think through your actions and make the roleplay immersive! <b>Please remember all \
-		rules aside from those without explicit exceptions apply to antagonists.</b>"
-
 /proc/show_objectives(var/datum/mind/player)
 
 	if(!player || !player.current) return
