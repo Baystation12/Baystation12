@@ -50,8 +50,10 @@
 /datum/gear_tweak/path/New(var/list/valid_paths)
 	if(istype(valid_paths))
 		src.valid_paths = valid_paths
-	else	// If it wasn't a list, attempt to treat it as a type
+	else if(ispath(valid_paths))
 		src.valid_paths = atomtype2nameassoclist(valid_paths)
+	else
+		CRASH("[valid_paths] is of an unhandled type.")
 	..()
 
 /datum/gear_tweak/path/get_contents(var/metadata)
