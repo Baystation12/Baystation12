@@ -154,7 +154,6 @@
 	icon_state = "scrubsnavyblue"
 	item_state = "b_suit"
 	worn_state = "scrubsnavyblue"
-	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/psych
 	desc = "A basic white jumpsuit. It has turqouise markings that denote the wearer as a psychiatrist."
