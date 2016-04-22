@@ -154,7 +154,7 @@
 	name_language = null
 
 	min_age = 19
-	max_age = 80
+	max_age = 90
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
