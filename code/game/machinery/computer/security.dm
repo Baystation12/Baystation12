@@ -2,7 +2,7 @@
 
 /obj/machinery/computer/secure_data//TODO:SANITY
 	name = "security records console"
-	desc = "Used to view, edit and maintain security records"
+	desc = "Used to view, edit and maintain security records."
 	icon_keyboard = "security_key"
 	icon_screen = "security"
 	light_color = "#a91515"

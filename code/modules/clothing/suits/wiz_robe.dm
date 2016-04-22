@@ -31,7 +31,7 @@
 
 /obj/item/clothing/head/wizard/magus
 	name = "Magus Helm"
-	desc = "A mysterious helmet that hums with an unearthly power"
+	desc = "A mysterious helmet that hums with an unearthly power."
 	icon_state = "magus"
 	item_state = "magus"
 	item_state_slots = list(
@@ -89,14 +89,14 @@
 
 /obj/item/clothing/suit/wizrobe/magusblue
 	name = "Magus Robe"
-	desc = "A set of armoured robes that seem to radiate a dark power"
+	desc = "A set of armoured robes that seem to radiate a dark power."
 	icon_state = "magusblue"
 	item_state = "magusblue"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
 
 /obj/item/clothing/suit/wizrobe/magusred
 	name = "Magus Robe"
-	desc = "A set of armoured robes that seem to radiate a dark power"
+	desc = "A set of armoured robes that seem to radiate a dark power."
 	icon_state = "magusred"
 	item_state = "magusred"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET

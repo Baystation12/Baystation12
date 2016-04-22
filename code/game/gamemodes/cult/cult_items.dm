@@ -1,6 +1,6 @@
 /obj/item/weapon/melee/cultblade
 	name = "cult blade"
-	desc = "An arcane weapon wielded by the followers of Nar-Sie"
+	desc = "An arcane weapon wielded by the followers of Nar-Sie."
 	icon_state = "cultblade"
 	item_state = "cultblade"
 	w_class = 4
@@ -68,7 +68,7 @@
 
 /obj/item/clothing/suit/cultrobes
 	name = "cult robes"
-	desc = "A set of armored robes worn by the followers of Nar-Sie"
+	desc = "A set of armored robes worn by the followers of Nar-Sie."
 	icon_state = "cultrobes"
 	item_state = "cultrobes"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
@@ -86,7 +86,7 @@
 
 /obj/item/clothing/suit/cultrobes/magusred
 	name = "magus robes"
-	desc = "A set of armored robes worn by the followers of Nar-Sie"
+	desc = "A set of armored robes worn by the followers of Nar-Sie."
 	icon_state = "magusred"
 	item_state = "magusred"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
@@ -94,7 +94,7 @@
 
 /obj/item/clothing/head/helmet/space/cult
 	name = "cult helmet"
-	desc = "A space worthy helmet used by the followers of Nar-Sie"
+	desc = "A space worthy helmet used by the followers of Nar-Sie."
 	icon_state = "cult_helmet"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0

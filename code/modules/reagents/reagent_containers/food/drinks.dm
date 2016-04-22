@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/weapon/reagent_containers/food/drinks
 	name = "drink"
-	desc = "yummy"
+	desc = "Yummy!"
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = null
 	flags = OPENCONTAINER
@@ -84,7 +84,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /obj/item/weapon/reagent_containers/food/drinks/golden_cup
-	desc = "A golden cup"
+	desc = "A golden cup."
 	name = "golden cup"
 	icon_state = "golden_cup"
 	item_state = "" //nope :(
@@ -209,7 +209,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/flask
 	name = "Captain's Flask"
-	desc = "A metal flask belonging to the captain"
+	desc = "A metal flask belonging to the captain."
 	icon_state = "flask"
 	volume = 60
 	center_of_mass = list("x"=17, "y"=7)

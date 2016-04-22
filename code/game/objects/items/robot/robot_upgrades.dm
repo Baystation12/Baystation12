@@ -184,7 +184,7 @@
 
 /obj/item/borg/upgrade/syndicate/
 	name = "illegal equipment module"
-	desc = "Unlocks the hidden, deadlier functions of a robot"
+	desc = "Unlocks the hidden, deadlier functions of a robot."
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
 

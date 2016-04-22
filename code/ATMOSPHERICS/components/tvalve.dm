@@ -3,7 +3,7 @@
 	icon_state = "map_tvalve0"
 
 	name = "manual switching valve"
-	desc = "A pipe valve"
+	desc = "A pipe valve."
 
 	level = 1
 	dir = SOUTH

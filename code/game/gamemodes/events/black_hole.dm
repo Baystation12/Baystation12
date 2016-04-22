@@ -1,7 +1,7 @@
 /obj/effect/bhole
 	name = "black hole"
 	icon = 'icons/obj/objects.dmi'
-	desc = "FUCK FUCK FUCK AAAHHH"
+	desc = "FUCK FUCK FUCK AAAHHH!"
 	icon_state = "bhole3"
 	opacity = 1
 	unacidable = 1

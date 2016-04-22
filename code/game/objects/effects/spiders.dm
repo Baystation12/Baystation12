@@ -1,7 +1,7 @@
 //generic procs copied from obj/effect/alien
 /obj/effect/spider
 	name = "web"
-	desc = "it's stringy and sticky"
+	desc = "It's stringy and sticky."
 	icon = 'icons/effects/effects.dmi'
 	anchored = 1
 	density = 0
@@ -74,7 +74,7 @@
 
 /obj/effect/spider/eggcluster
 	name = "egg cluster"
-	desc = "They seem to pulse slightly with an inner life"
+	desc = "They seem to pulse slightly with an inner life."
 	icon_state = "eggs"
 	var/amount_grown = 0
 	New()
@@ -242,7 +242,7 @@
 
 /obj/effect/spider/cocoon
 	name = "cocoon"
-	desc = "Something wrapped in silky spider web"
+	desc = "Something wrapped in silky spider web."
 	icon_state = "cocoon1"
 	health = 60
 

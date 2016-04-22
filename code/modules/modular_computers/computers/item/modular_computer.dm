@@ -3,7 +3,7 @@
 // consoles and laptops use "procssor" item that is held inside machinery piece
 /obj/item/modular_computer
 	name = "Modular Microcomputer"
-	desc = "A small portable microcomputer"
+	desc = "A small portable microcomputer."
 
 	var/enabled = 0											// Whether the computer is turned on.
 	var/screen_on = 1										// Whether the computer is active/opened/it's screen is on.

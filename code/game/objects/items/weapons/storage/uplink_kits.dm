@@ -75,18 +75,18 @@
 
 /obj/item/weapon/storage/box/syndie_kit
 	name = "box"
-	desc = "A sleek, sturdy box"
+	desc = "A sleek, sturdy box."
 	icon_state = "box_of_doom"
 
 //For uplink kits that provide bulkier items
 /obj/item/weapon/storage/backpack/satchel/syndie_kit
-	desc = "A sleek, sturdy satchel"
+	desc = "A sleek, sturdy satchel."
 	icon_state = "satchel-norm"
 
 //In case an uplink kit provides a lot of gear
 /obj/item/weapon/storage/backpack/dufflebag/syndie_kit
 	name = "black dufflebag"
-	desc = "A sleek, sturdy dufflebag"
+	desc = "A sleek, sturdy dufflebag."
 	icon_state = "duffle_syndie"
 
 

@@ -57,6 +57,7 @@ script:
   - md5sum -c - <<< "0af969f671fba6cf9696c78cd175a14a *baystation12.int"
   - md5sum -c - <<< "88490b460c26947f5ec1ab1bb9fa9f17 *html/changelogs/example.yml"
   - python tools/TagMatcher/tag-matcher.py ../..
+  - python tools/PunctuationChecker/punctuation-checker.py ../..
   - python tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs
   - cd tgui && gulp
   - cd ..
