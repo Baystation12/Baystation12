@@ -513,6 +513,8 @@
 		return 1
 
 	if(istype(user))
+		if(!canremove)
+			return 1
 		if(malfunction_check(user))
 			return 0
 		if(user.back != src)
