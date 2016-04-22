@@ -28,7 +28,7 @@ delete-after: True
 changes: 
   - rscadd: "Mercenaries can now purchase several types of frag grenades for TC."
   - rscadd: "Mercenaries can now purchase grenade launchers for TC, comes pre-loaded with random grenades."
-  - rscadd: "Many guns now have an accuracy and dispersion penalty for firing with only one hand, that roughly corresponds to the size and weight of the gun. You will see a message upon shooting with a compromised aim. The penalty is also affected by rapid-fire modes in the case of bullet throwers. To fire two-handed simply ensure that your other hand is empty when shooting."
+  - rscadd: "Many guns now have an accuracy and dispersion penalty for firing with only one hand, that roughly corresponds to the size and weight of the gun. You will see a message upon shooting with a compromised aim. The penalty is also affected by rapid-fire modes in the case of bullet throwers. To fire two-handed simply ensure that your other hand is empty and usable when shooting."
   - tweak: "Laser cannons now slightly increased shot capacity and have increased accuracy (better for fighting at longer ranges), can no longer fit in backpacks."
   - tweak: "X-ray laser gun now fires at the same pace as the laser carbine, has the same shot capacity, but does much more damage against armoured targets, and is slightly easier to one-hand with."
   - tweak: "Shotgun flares now blind over a larger area and illuminate for longer."
