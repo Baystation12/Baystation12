@@ -380,7 +380,7 @@
 			T.amount = "[currently_vending.price]"
 		T.source_terminal = src.name
 		T.date = current_date_string
-		T.time = worldtime2text()
+		T.time = stationtime2text()
 		customer_account.transaction_log.Add(T)
 
 		// Give the vendor the money. We use the account owner name, which means
@@ -403,7 +403,7 @@
 	T.amount = "[currently_vending.price]"
 	T.source_terminal = src.name
 	T.date = current_date_string
-	T.time = worldtime2text()
+	T.time = stationtime2text()
 	vendor_account.transaction_log.Add(T)
 
 /obj/machinery/vending/attack_ai(mob/user as mob)

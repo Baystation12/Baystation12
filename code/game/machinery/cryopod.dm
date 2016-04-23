@@ -366,8 +366,8 @@
 
 
 	//Make an announcement and log the person entering storage.
-	control_computer.frozen_crew += "[occupant.real_name], [occupant.mind.role_alt_title] - [worldtime2text()]"
-	control_computer._admin_logs += "[key_name(occupant)] ([occupant.mind.role_alt_title]) at [worldtime2text()]"
+	control_computer.frozen_crew += "[occupant.real_name], [occupant.mind.role_alt_title] - [stationtime2text()]"
+	control_computer._admin_logs += "[key_name(occupant)] ([occupant.mind.role_alt_title]) at [stationtime2text()]"
 	log_and_message_admins("[key_name(occupant)] ([occupant.mind.role_alt_title]) entered cryostorage.")
 
 	announce.autosay("[occupant.real_name], [occupant.mind.role_alt_title], [on_store_message]", "[on_store_name]")

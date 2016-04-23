@@ -16,7 +16,7 @@
 			T.purpose = "Winner!"
 			T.amount = winner_sum
 			T.date = current_date_string
-			T.time = worldtime2text()
+			T.time = stationtime2text()
 			T.source_terminal = "Biesel TCD Terminal #[rand(111,333)]"
 			D.transaction_log.Add(T)
 

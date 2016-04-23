@@ -4,16 +4,36 @@
 #define MINUTE *600
 #define MINUTES *600
 
+#define HOUR *36000
+#define HOURS *36000
+
+#define DAY *864000
+#define DAYS *864000
+
 var/roundstart_hour = 0
-//Returns the world time in english
-proc/worldtime2text(time = world.time, timeshift = 1)
+var/station_date = ""
+var/next_station_date_change = 1 DAY
+
+#define round_adjusted_time(time) time2text(time + round_duration_in_ticks, "hh:mm")
+#define round_duration_in_ticks (round_start_time ? world.time - round_start_time : 0)
+#define station_time_in_ticks (roundstart_hour HOURS + round_duration_in_ticks)
+
+/proc/stationtime2text()
 	if(!roundstart_hour) roundstart_hour = pick(2,7,12,17)
-	return timeshift ? time2text(time+(36000*roundstart_hour), "hh:mm") : time2text(time, "hh:mm")
+	return time2text(station_time_in_ticks, "hh:mm")
 
-proc/worlddate2text()
-	return num2text((text2num(time2text(world.timeofday, "YYYY"))+544)) + "-" + time2text(world.timeofday, "MM-DD")
+/proc/stationdate2text()
+	var/update_time = FALSE
+	if(station_time_in_ticks > next_station_date_change)
+		next_station_date_change += 1 DAY
+		update_time = TRUE
+	if(!station_date || update_time)
+		var/extra_days = round(station_time_in_ticks / (1 DAY)) DAYS
+		var/timeofday = world.timeofday + extra_days
+		station_date = num2text((text2num(time2text(timeofday, "YYYY"))+544)) + "-" + time2text(timeofday, "MM-DD")
+	return station_date
 
-proc/time_stamp()
+/proc/time_stamp()
 	return time2text(world.timeofday, "hh:mm:ss")
 
 /* Returns 1 if it is the selected month and day */
@@ -36,9 +56,7 @@ var/round_start_time = 0
 	round_start_time = world.time
 	return 1
 
-#define round_duration_in_ticks (round_start_time ? world.time - round_start_time : 0)
-
-/proc/round_duration_as_text()
+/proc/roundduration2text()
 	if(!round_start_time)
 		return "00:00"
 	if(last_round_duration && world.time < next_duration_update)
