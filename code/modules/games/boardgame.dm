@@ -9,13 +9,6 @@
 	var/board = list()
 	var/selected = -1
 
-/obj/item/weapon/board/New()
-	..()
-	var i
-	for(i = 0; i < 12; i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/checker(src.loc)
-		new /obj/item/weapon/reagent_containers/food/snacks/checker/red(src.loc)
-
 /obj/item/weapon/board/examine(mob/user, var/distance = -1)
 	if(in_range(user,src))
 		user.set_machine(src)
@@ -174,8 +167,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 	icon = 'icons/obj/pieces.dmi'
 	icon_state = "checker_black"
 	w_class = 1
-	bitesize = 2
-	center_of_mass = list("x"=16, "y"=15)
+	center_of_mass = list("x"=16, "y"=16)
 	nutriment_desc = list("a choking hazard" = 4)
 	nutriment_amt = 4
 
