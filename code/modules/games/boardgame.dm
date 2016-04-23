@@ -13,8 +13,8 @@
 	..()
 	var i
 	for(i = 0; i < 12; i++)
-		new /obj/item/weapon/checker(src.loc)
-		new /obj/item/weapon/checker/red(src.loc)
+		new /obj/item/weapon/reagent_containers/food/snacks/checker(src.loc)
+		new /obj/item/weapon/reagent_containers/food/snacks/checker/red(src.loc)
 
 /obj/item/weapon/board/examine(mob/user, var/distance = -1)
 	if(in_range(user,src))
@@ -167,13 +167,18 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 			board_icons -= null
 	src.updateDialog()
 
-/obj/item/weapon/checker/
-	name = "black checker"
+
+/obj/item/weapon/reagent_containers/food/snacks/checker
+	name = "checker"
 	desc = "It is plastic and shiny."
 	icon = 'icons/obj/pieces.dmi'
 	icon_state = "checker_black"
 	w_class = 1
+	bitesize = 2
+	center_of_mass = list("x"=16, "y"=15)
+	nutriment_desc = list("a choking hazard" = 4)
+	nutriment_amt = 4
 
-/obj/item/weapon/checker/red
+/obj/item/weapon/reagent_containers/food/snacks/checker/red
 	name = "red checker"
 	icon_state = "checker_red"
