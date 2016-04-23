@@ -271,15 +271,13 @@
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/stack/medical))
 		if(stat != DEAD)
-			var/heal_mult = 1
-			if(istype(O, /obj/item/stack/medical/advanced))
-				heal_mult = 2
-			else if(istype(O, /obj/item/stack/medical/splint))
-				heal_mult = 1.5
 			var/obj/item/stack/medical/MED = O
+			if(!MED.animal_heal)
+				user << "<span class='notice'>That [MED] won't help \the [src] at all!</span>"
+				return
 			if(health < maxHealth)
 				if(MED.amount >= 1)
-					adjustBruteLoss(-5 * heal_mult)
+					adjustBruteLoss(-MED.animal_heal)
 					MED.amount -= 1
 					if(MED.amount <= 0)
 						qdel(MED)
