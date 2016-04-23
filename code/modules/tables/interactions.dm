@@ -137,9 +137,19 @@
 		//Center the icon where the user clicked.
 		if(!click_data || !click_data["icon-x"] || !click_data["icon-y"])
 			return
+
+		//Food is special, apparently
+		var/center_x = 16
+		var/center_y = 16
+		if(istype(W, /obj/item/weapon/reagent_containers/food))
+			var/obj/item/weapon/reagent_containers/food/F = W
+			if(F.center_of_mass.len)
+				center_x = F.center_of_mass["x"]
+				center_y = F.center_of_mass["y"]
+
 		//Clamp it so that the icon never moves more than 16 pixels in either direction (thus leaving the table turf)
-		W.pixel_x = Clamp(text2num(click_data["icon-x"]) - 16, -(world.icon_size/2), world.icon_size/2)
-		W.pixel_z = Clamp(text2num(click_data["icon-y"]) - 16, -(world.icon_size/2), world.icon_size/2)
+		W.pixel_x = Clamp(text2num(click_data["icon-x"]) - center_x, -(world.icon_size/2), world.icon_size/2)
+		W.pixel_z = Clamp(text2num(click_data["icon-y"]) - center_y, -(world.icon_size/2), world.icon_size/2)
 	return
 
 /obj/structure/table/attack_tk() // no telehulk sorry
