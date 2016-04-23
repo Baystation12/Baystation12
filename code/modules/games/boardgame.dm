@@ -9,13 +9,6 @@
 	var/board = list()
 	var/selected = -1
 
-/obj/item/weapon/board/New()
-	..()
-	var i
-	for(i = 0; i < 12; i++)
-		new /obj/item/weapon/checker(src.loc)
-		new /obj/item/weapon/checker/red(src.loc)
-
 /obj/item/weapon/board/examine(mob/user, var/distance = -1)
 	if(in_range(user,src))
 		user.set_machine(src)
@@ -167,13 +160,17 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 			board_icons -= null
 	src.updateDialog()
 
-/obj/item/weapon/checker/
-	name = "black checker"
+
+/obj/item/weapon/reagent_containers/food/snacks/checker
+	name = "checker"
 	desc = "It is plastic and shiny."
 	icon = 'icons/obj/pieces.dmi'
 	icon_state = "checker_black"
 	w_class = 1
+	center_of_mass = list("x"=16, "y"=16)
+	nutriment_desc = list("a choking hazard" = 4)
+	nutriment_amt = 1
 
-/obj/item/weapon/checker/red
+/obj/item/weapon/reagent_containers/food/snacks/checker/red
 	name = "red checker"
 	icon_state = "checker_red"
