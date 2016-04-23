@@ -271,10 +271,15 @@
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/stack/medical))
 		if(stat != DEAD)
+			var/heal_mult = 1
+			if(istype(O, /obj/item/stack/medical/advanced))
+				heal_mult = 2
+			else if(istype(O, /obj/item/stack/medical/splint))
+				heal_mult = 1.5
 			var/obj/item/stack/medical/MED = O
 			if(health < maxHealth)
 				if(MED.amount >= 1)
-					adjustBruteLoss(-MED.heal_brute)
+					adjustBruteLoss(-5 * heal_mult)
 					MED.amount -= 1
 					if(MED.amount <= 0)
 						qdel(MED)
@@ -283,6 +288,7 @@
 							M.show_message("<span class='notice'>[user] applies the [MED] on [src].</span>")
 		else
 			user << "<span class='notice'>\The [src] is dead, medical items won't bring \him back to life.</span>"
+		return
 	if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
 		if(istype(O, /obj/item/weapon/material/knife) || istype(O, /obj/item/weapon/material/knife/butch))
 			harvest(user)
