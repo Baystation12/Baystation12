@@ -1,0 +1,48 @@
+//Revive from revival stasis
+/mob/proc/changeling_revive()
+	set category = "Changeling"
+	set name = "Revive"
+	set desc = "We are ready to revive ourselves on command."
+
+	var/datum/changeling/changeling = changeling_power(0,0,100,DEAD)
+	if(!changeling)
+		return 0
+
+	if(changeling.max_geneticpoints < 0) //Absorbed by another ling
+		src << "<span class='danger'>You have no genomes, not even your own, and cannot revive.</span>"
+		return 0
+
+	if(src.stat == DEAD)
+		dead_mob_list -= src
+		living_mob_list += src
+	var/mob/living/carbon/C = src
+
+	C.tod = null
+	C.setToxLoss(0)
+	C.setOxyLoss(0)
+	C.setCloneLoss(0)
+	C.SetParalysis(0)
+	C.SetStunned(0)
+	C.SetWeakened(0)
+	C.radiation = 0
+	C.halloss = 0
+	C.shock_stage = 0 //Pain
+	C.heal_overall_damage(C.getBruteLoss(), C.getFireLoss())
+	C.reagents.clear_reagents()
+	C.restore_all_organs(ignore_prosthetic_prefs=1) //Covers things like fractures and other things not covered by the above.
+	if(ishuman(C))
+		var/mob/living/carbon/human/H = src
+		H.restore_blood()
+		H.mutations.Remove(HUSK)
+		H.status_flags -= DISFIGURED
+		H.update_body(1)
+	C << "<span class='notice'>We have regenerated.</span>"
+	C.status_flags &= ~(FAKEDEATH)
+	C.update_canmove()
+	C.mind.changeling.purchased_powers -= C
+	feedback_add_details("changeling_powers","CR")
+	C.stat = CONSCIOUS
+	src.verbs -= /mob/proc/changeling_revive
+	// re-add our changeling powers
+	C.make_changeling()
+	return 1

@@ -16,6 +16,7 @@
 	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.7
 	w_class = 3
+	ear_protection = 1
 
 /obj/item/clothing/head/helmet/riot
 	name = "riot helmet"
