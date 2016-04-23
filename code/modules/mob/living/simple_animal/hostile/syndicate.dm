@@ -99,9 +99,6 @@
 	corpse = /obj/effect/landmark/mobcorpse/syndicatecommando
 	speed = 0
 
-/mob/living/simple_animal/hostile/syndicate/melee/space/Allow_Spacemove(var/check_drift = 0)
-	return
-
 /mob/living/simple_animal/hostile/syndicate/ranged
 	ranged = 1
 	rapid = 1
@@ -128,11 +125,6 @@
 	minbodytemp = 0
 	corpse = /obj/effect/landmark/mobcorpse/syndicatecommando
 	speed = 0
-
-/mob/living/simple_animal/hostile/syndicate/ranged/space/Allow_Spacemove(var/check_drift = 0)
-	return
-
-
 
 /mob/living/simple_animal/hostile/viscerator
 	name = "viscerator"

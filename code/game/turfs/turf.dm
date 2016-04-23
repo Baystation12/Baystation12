@@ -130,13 +130,14 @@ var/const/enterloopsanity = 100
 
 	if(ismob(A))
 		var/mob/M = A
-		if(!M.lastarea)
-			M.lastarea = get_area(M.loc)
-		if(M.lastarea.has_gravity == 0)
+		if(!M.check_solid_ground())
 			inertial_drift(M)
-		else if(!is_space())
+			//we'll end up checking solid ground again but we still need to check the other things. 
+			//Ususally most people aren't in space anyways so hopefully this is acceptable.
+			M.update_floating()
+		else
 			M.inertia_dir = 0
-			M.make_floating(0)
+			M.make_floating(0) //we know we're not on solid ground so skip the checks to save a bit of processing
 
 	var/objects = 0
 	if(A && (A.flags & PROXMOVE))
@@ -156,19 +157,17 @@ var/const/enterloopsanity = 100
 /turf/proc/is_plating()
 	return 0
 
-/turf/proc/inertial_drift(atom/movable/A as mob|obj)
+/turf/proc/inertial_drift(atom/movable/A)
 	if(!(A.last_move))	return
 	if((istype(A, /mob/) && src.x > 2 && src.x < (world.maxx - 1) && src.y > 2 && src.y < (world.maxy-1)))
 		var/mob/M = A
-		if(M.Allow_Spacemove(1)) //if this mob can control their own movement in space then they shouldn't drift
+		if(M.Allow_Spacemove(1)) //if this mob can control their own movement in space then they shouldn't be drifting
 			M.inertia_dir  = 0
 			return
 		spawn(5)
-			if((M && !(M.anchored) && !(M.pulledby) && (M.loc == src)))
-				if(M.inertia_dir)
-					step(M, M.inertia_dir)
-					return
-				M.inertia_dir = M.last_move
+			if(M && !(M.anchored) && !(M.pulledby) && (M.loc == src))
+				if(!M.inertia_dir)
+					M.inertia_dir = M.last_move
 				step(M, M.inertia_dir)
 	return
 

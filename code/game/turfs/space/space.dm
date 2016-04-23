@@ -62,15 +62,8 @@
 // Ported from unstable r355
 
 /turf/space/Entered(atom/movable/A as mob|obj)
-	if(movement_disabled)
-		usr << "<span class='warning'>Movement is admin-disabled.</span>" //This is to identify lag problems
-		return
 	..()
-	if ((!(A) || src != A.loc))	return
-
-	inertial_drift(A)
-
-	if(ticker && ticker.mode)
+	if(A && A.loc == src && ticker && ticker.mode)
 
 		// Okay, so let's make it so that people can travel z levels but not nuke disks!
 		// if(ticker.mode.name == "mercenary")	return

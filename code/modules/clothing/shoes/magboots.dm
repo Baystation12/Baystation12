@@ -34,7 +34,7 @@
 		user << "You enable the mag-pulse traction system."
 	user.update_inv_shoes()	//so our mob-overlays update
 	user.update_action_buttons()
-	user.update_floating() //kind of yuck
+	user.update_floating()
 
 /obj/item/clothing/shoes/magboots/mob_can_equip(mob/user)
 	var/mob/living/carbon/human/H = user
@@ -64,7 +64,7 @@
 	..()
 	var/mob/M = src.loc
 	if(istype(M))
-		M.update_floating( M.Check_Dense_Object() ) //yuck
+		M.update_floating()
 
 /obj/item/clothing/shoes/magboots/dropped()
 	..()
@@ -73,7 +73,7 @@
 		if(!H.equip_to_slot_if_possible(shoes, slot_shoes))
 			shoes.forceMove(get_turf(src))
 		src.shoes = null
-	wearer.update_floating( wearer.Check_Dense_Object() ) //yuck
+	wearer.update_floating()
 	wearer = null
 
 /obj/item/clothing/shoes/magboots/examine(mob/user)
