@@ -210,11 +210,6 @@
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
-/obj/machinery/power/generator/power_change()
-	..()
-	updateicon()
-
-
 /obj/machinery/power/generator/verb/rotate_clock()
 	set category = "Object"
 	set name = "Rotate Generator (Clockwise)"

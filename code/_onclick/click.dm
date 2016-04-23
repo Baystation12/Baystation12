@@ -87,6 +87,7 @@
 	if(in_throw_mode)
 		if(isturf(A) || isturf(A.loc))
 			throw_item(A)
+			trigger_aiming(TARGET_CAN_CLICK)
 			return 1
 		throw_mode_off()
 
@@ -94,6 +95,7 @@
 
 	if(W == A) // Handle attack_self
 		W.attack_self(src)
+		trigger_aiming(TARGET_CAN_CLICK)
 		if(hand)
 			update_inv_l_hand(0)
 		else
@@ -116,6 +118,8 @@
 			if(ismob(A)) // No instant mob attacking
 				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			UnarmedAttack(A, 1)
+
+		trigger_aiming(TARGET_CAN_CLICK)
 		return 1
 
 	if(!isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
@@ -137,12 +141,16 @@
 				if(ismob(A)) // No instant mob attacking
 					setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				UnarmedAttack(A, 1)
+
+			trigger_aiming(TARGET_CAN_CLICK)
 			return
 		else // non-adjacent click
 			if(W)
 				W.afterattack(A, src, 0, params) // 0: not Adjacent
 			else
 				RangedAttack(A, params)
+
+			trigger_aiming(TARGET_CAN_CLICK)
 	return 1
 
 /mob/proc/setClickCooldown(var/timeout)
@@ -328,7 +336,7 @@
 		else		direction = WEST
 	if(direction != dir)
 		facedir(direction)
-		
+
 /obj/screen/click_catcher
 	icon = 'icons/mob/screen1_full.dmi'
 	icon_state = "passage0"
@@ -344,4 +352,4 @@
 	else
 		var/turf/T = screen_loc2turf(modifiers["screen-loc"], get_turf(usr))
 		T.Click(location, control, params)
-	return 1 
+	return 1

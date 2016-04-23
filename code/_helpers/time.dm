@@ -30,11 +30,21 @@ proc/isDay(var/month, var/day)
 
 var/next_duration_update = 0
 var/last_round_duration = 0
-proc/round_duration()
+var/round_start_time = 0
+
+/hook/roundstart/proc/start_timer()
+	round_start_time = world.time
+	return 1
+
+#define round_duration_in_ticks (round_start_time ? world.time - round_start_time : 0)
+
+/proc/round_duration_as_text()
+	if(!round_start_time)
+		return "00:00"
 	if(last_round_duration && world.time < next_duration_update)
 		return last_round_duration
 
-	var/mills = world.time // 1/10 of a second, not real milliseconds but whatever
+	var/mills = round_duration_in_ticks // 1/10 of a second, not real milliseconds but whatever
 	//var/secs = ((mills % 36000) % 600) / 10 //Not really needed, but I'll leave it here for refrence.. or something
 	var/mins = round((mills % 36000) / 600)
 	var/hours = round(mills / 36000)

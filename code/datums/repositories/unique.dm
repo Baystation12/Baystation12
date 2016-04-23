@@ -21,37 +21,37 @@ var/datum/repository/unique/uniqueness_repository = new()
 	return
 
 /datum/uniqueness_generator/id_sequential
-	var/list/ids_by_type
+	var/list/ids_by_key
 
 /datum/uniqueness_generator/id_sequential/New()
 	..()
-	ids_by_type = list()
+	ids_by_key = list()
 
-/datum/uniqueness_generator/id_sequential/Generate(var/type, var/default_id = 100)
-	var/id = ids_by_type[type]
+/datum/uniqueness_generator/id_sequential/Generate(var/key, var/default_id = 100)
+	var/id = ids_by_key[key]
 	if(id)
 		id++
 	else
 		id = default_id
 
-	ids_by_type[type] = id
+	ids_by_key[key] = id
 	. = id
 
 /datum/uniqueness_generator/id_random
-	var/list/ids_by_type
+	var/list/ids_by_key
 
 /datum/uniqueness_generator/id_random/New()
 	..()
-	ids_by_type = list()
+	ids_by_key = list()
 
-/datum/uniqueness_generator/id_random/Generate(var/type, var/min, var/max)
-	var/list/ids = ids_by_type[type]
+/datum/uniqueness_generator/id_random/Generate(var/key, var/min, var/max)
+	var/list/ids = ids_by_key[key]
 	if(!ids)
 		ids = list()
-		ids_by_type[type] = ids
+		ids_by_key[key] = ids
 
 	if(ids.len >= (max - min) + 1)
-		error("Random ID limit reached for type [type].")
+		error("Random ID limit reached for key [key].")
 		ids.Cut()
 
 	if(ids.len >= 0.6 * ((max-min) + 1)) // if more than 60% of possible ids used

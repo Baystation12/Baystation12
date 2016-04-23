@@ -10,7 +10,6 @@
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = null
-	var/storage_cost = null
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
 	pass_flags = PASSTABLE
@@ -85,6 +84,8 @@
 		M.r_hand.update_held_icon()
 
 /obj/item/Destroy()
+	qdel(hidden_uplink)
+	hidden_uplink = null
 	if(ismob(loc))
 		var/mob/m = loc
 		m.drop_from_inventory(src)

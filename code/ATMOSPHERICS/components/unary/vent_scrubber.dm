@@ -246,12 +246,6 @@
 	update_icon()
 	return
 
-/obj/machinery/atmospherics/unary/vent_scrubber/power_change()
-	var/old_stat = stat
-	..()
-	if(old_stat != stat)
-		update_icon()
-
 /obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()

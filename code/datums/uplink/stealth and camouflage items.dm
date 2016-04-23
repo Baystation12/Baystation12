@@ -22,7 +22,7 @@
 /datum/uplink_item/item/stealth_items/chameleon_kit
 	name = "Chameleon Kit"
 	item_cost = 5
-	path = /obj/item/weapon/storage/box/syndie_kit/chameleon
+	path = /obj/item/weapon/storage/backpack/chameleon/sydie_kit
 
 /datum/uplink_item/item/stealth_items/voice
 	name = "Voice Changer"

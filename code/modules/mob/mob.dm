@@ -186,6 +186,7 @@
 
 /mob/proc/reset_view(atom/A)
 	if (client)
+		A = A ? A : eyeobj
 		if (istype(A, /atom/movable))
 			client.perspective = EYE_PERSPECTIVE
 			client.eye = A
@@ -671,7 +672,7 @@
 	if(.)
 		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
 			stat("Station Time", worldtime2text())
-			stat("Round Duration", round_duration())
+			stat("Round Duration", round_duration_as_text())
 
 		if(client.holder)
 			if(statpanel("Status"))

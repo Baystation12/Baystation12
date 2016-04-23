@@ -78,5 +78,5 @@
 	..()
 
 /obj/item/device/mmi/digital/posibrain/PickName()
-	src.brainmob.name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[random_id(100,999)]"
+	src.brainmob.name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[random_id(type,100,999)]"
 	src.brainmob.real_name = src.brainmob.name

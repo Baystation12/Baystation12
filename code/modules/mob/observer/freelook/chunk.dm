@@ -9,6 +9,8 @@
 	var/icon = 'icons/effects/cameravis.dmi'
 	var/icon_state = "black"
 	var/list/obfuscation_images = list()
+	var/static/icon/obfuscation_underlay
+	// There is an exploit were clients can memory-edit their local version of the static images, allowing them to see everything. This is a minor attempt to make that more difficult.
 
 /datum/obfuscation/Destroy()
 	obfuscation_images.Cut()
@@ -21,6 +23,12 @@
 	var/image/obfuscation = obfuscation_images[T]
 	if(!obfuscation)
 		obfuscation = image(icon, T, icon_state, OBFUSCATION_LAYER)
+		if(!obfuscation_underlay)
+			// Creating a new icon of a fairly common icon state, adding some random color to prevent address searching, and hoping being static kills memory locality
+			var/turf/floor = /turf/simulated/floor/tiled
+			obfuscation_underlay = icon(initial(floor.icon), initial(floor.icon_state))
+			obfuscation_underlay.Blend(rgb(rand(0,255),rand(0,255),rand(0,255)))
+		obfuscation.underlays += obfuscation_underlay
 		obfuscation_images[T] = obfuscation
 	return obfuscation
 
@@ -93,8 +101,6 @@
 	eye.visibleChunks += src
 	if(eye.owner && eye.owner.client)
 		eye.owner.client.images += obscured
-	if(dirty)	// Only need to force-update dirty chunks
-		visibility_changed(TRUE)
 
 /datum/chunk/proc/remove_eye(mob/observer/eye/eye)
 	seenby -= eye

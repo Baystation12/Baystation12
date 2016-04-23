@@ -209,12 +209,6 @@ Thus, the two variables affect pump operation are set in New():
 
 	src.update_icon()
 
-/obj/machinery/atmospherics/binary/pump/power_change()
-	var/old_stat = stat
-	..()
-	if(old_stat != stat)
-		update_icon()
-
 /obj/machinery/atmospherics/binary/pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()

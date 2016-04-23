@@ -12,6 +12,6 @@ datum/controller/transfer_controller/Destroy()
 
 datum/controller/transfer_controller/proc/process()
 	currenttick = currenttick + 1
-	if (world.time >= timerbuffer - 600)
+	if (round_duration_in_ticks >= timerbuffer - 1 MINUTE)
 		vote.autotransfer()
 		timerbuffer = timerbuffer + config.vote_autotransfer_interval

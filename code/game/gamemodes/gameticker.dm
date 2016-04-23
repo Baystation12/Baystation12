@@ -214,7 +214,7 @@ var/global/datum/controller/gameticker/ticker
 				switch(M.z)
 					if(0)	//inside a crate or something
 						var/turf/T = get_turf(M)
-						if(T && T.z in config.station_levels)				//we don't use M.death(0) because it calls a for(/mob) loop and
+						if(T && T.z in using_map.station_levels)				//we don't use M.death(0) because it calls a for(/mob) loop and
 							M.health = 0
 							M.stat = DEAD
 					if(1)	//on a z-level 1 turf.
@@ -274,7 +274,7 @@ var/global/datum/controller/gameticker/ticker
 						world << sound('sound/effects/explosionfar.ogg')
 						cinematic.icon_state = "summary_selfdes"
 				for(var/mob/living/M in living_mob_list)
-					if(M.loc.z in config.station_levels)
+					if(M.loc.z in using_map.station_levels)
 						M.death()//No mercy
 		//If its actually the end of the round, wait for it to end.
 		//Otherwise if its a verb it will continue on afterwards.
@@ -343,9 +343,14 @@ var/global/datum/controller/gameticker/ticker
 			spawn
 				declare_completion()
 
-			spawn(50)
-				callHook("roundend")
 
+			spawn(50)
+				if(config.allow_map_switching && config.auto_map_vote && all_maps.len > 1)
+					vote.automap()
+					while(vote.time_remaining)
+						sleep(50)
+
+				callHook("roundend")
 				if (universe_has_ended)
 					if(mode.station_was_nuked)
 						feedback_set_details("end_proper","nuke")

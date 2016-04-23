@@ -24,6 +24,8 @@
 	permeability_coefficient = 0.1
 	unacidable = 1
 
+	var/hides_uniform = 1 	//used to determinate if uniform should be visible whenever the suit is sealed or not
+
 	var/interface_path = "hardsuit.tmpl"
 	var/ai_interface_path = "hardsuit.tmpl"
 	var/interface_title = "Hardsuit Controller"
@@ -300,12 +302,18 @@
 		update_component_sealed()
 	update_icon(1)
 
+
 /obj/item/weapon/rig/proc/update_component_sealed()
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(canremove)
 			piece.item_flags &= ~(STOPPRESSUREDAMAGE|AIRTIGHT)
 		else
 			piece.item_flags |=  (STOPPRESSUREDAMAGE|AIRTIGHT)
+	if (hides_uniform && chest)
+		if(canremove)
+			chest.flags_inv &= ~(HIDEJUMPSUIT)
+		else
+			chest.flags_inv |= HIDEJUMPSUIT
 	update_icon(1)
 
 /obj/item/weapon/rig/process()
@@ -495,6 +503,7 @@
 		wearer.update_inv_gloves()
 		wearer.update_inv_head()
 		wearer.update_inv_wear_suit()
+		wearer.update_inv_w_uniform()
 		wearer.update_inv_back()
 	return
 

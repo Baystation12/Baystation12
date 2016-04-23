@@ -34,7 +34,7 @@
 
 /atom/movable/Destroy()
 	. = ..()
-	for(var/atom/movable/AM in contents)
+	for(var/atom/movable/AM in src)
 		qdel(AM)
 	forceMove(null)
 	if (pulledby)
@@ -245,7 +245,7 @@
 	return
 
 /atom/movable/proc/touch_map_edge()
-	if(z in config.sealed_levels)
+	if(z in using_map.sealed_levels)
 		return
 
 	if(config.use_overmap)

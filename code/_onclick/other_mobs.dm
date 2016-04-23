@@ -55,6 +55,7 @@
 	if(!..())
 		return 0
 
+	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	A.attack_generic(src,rand(5,6),"bitten")
 
 /*
@@ -75,6 +76,9 @@
 		if (Victim == A)
 			Feedstop()
 		return
+
+	//should have already been set if we are attacking a mob, but it doesn't hurt and will cover attacking non-mobs too
+	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	var/mob/living/M = A
 	if (istype(M))
@@ -144,6 +148,7 @@
 		custom_emote(1,"[friendly] [A]!")
 		return
 
+	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/damage = rand(melee_damage_lower, melee_damage_upper)
 	if(A.attack_generic(src,damage,attacktext,environment_smash) && loc && attack_sound)
 		playsound(loc, attack_sound, 50, 1, 1)

@@ -63,6 +63,7 @@
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/mc9mm/flash
+	name = "magazine (9mm flash)"
 	ammo_type = /obj/item/ammo_casing/c9mmf
 
 /obj/item/ammo_magazine/c9mm
@@ -112,7 +113,7 @@
 
 /obj/item/ammo_magazine/a10mm
 	name = "magazine (10mm)"
-	icon_state = "12mm"
+	icon_state = "10mm"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = "10mm"

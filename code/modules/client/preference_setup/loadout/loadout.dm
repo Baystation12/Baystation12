@@ -126,7 +126,7 @@ var/list/gear_datums = list()
 				. += " <a href='?src=\ref[src];gear=[G.display_name];tweak=\ref[tweak]'>[tweak.get_contents(get_tweak_metadata(G, tweak))]</a>"
 			. += "</td></tr>"
 	. += "</table>"
-	. = jointext(.)
+	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/loadout/proc/get_gear_metadata(var/datum/gear/G)
 	. = pref.gear[G.display_name]

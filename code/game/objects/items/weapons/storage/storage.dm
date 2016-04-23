@@ -12,8 +12,8 @@
 	var/list/can_hold = new/list() //List of objects which this item can store (if set, it can't store anything else)
 	var/list/cant_hold = new/list() //List of objects which this item can't store (in effect only if can_hold isn't set)
 	var/list/is_seeing = new/list() //List of mobs which are currently seeing the contents of this item's storage
-	var/max_w_class = 3 //Max size of objects that this object can store (in effect only if can_hold isn't set)
-	var/max_storage_space = 8 //Total storage cost of items this can hold. Will be autoset based on storage_slots if null.
+	var/max_w_class = 2 //Max size of objects that this object can store (in effect only if can_hold isn't set)
+	var/max_storage_space = null //Total storage cost of items this can hold. Will be autoset based on storage_slots if left null.
 	var/storage_slots = null //The number of storage slots in this container.
 	var/obj/screen/storage/boxes = null
 	var/obj/screen/storage/storage_start = null //storage UI
@@ -29,6 +29,10 @@
 	var/allow_quick_gather	//Set this variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
 	var/collection_mode = 1;  //0 = pick one at a time, 1 = pick all on tile
 	var/use_sound = "rustle"	//sound played when used. null for no sound.
+	
+	//initializes the contents of the storage with some items based on an assoc list. The assoc key must be an item path, 
+	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
+	var/list/startswith
 
 /obj/item/weapon/storage/Destroy()
 	close_all()
@@ -206,7 +210,7 @@
 
 /obj/item/weapon/storage/proc/space_orient_objs(var/list/obj/item/display_contents)
 
-	var/baseline_max_storage_space = 16 //should be equal to default backpack capacity
+	var/baseline_max_storage_space = DEFAULT_BOX_STORAGE //storage size corresponding to 224 pixels
 	var/storage_cap_width = 2 //length of sprite for start and end of the box representing total storage space
 	var/stored_cap_width = 4 //length of sprite for start and end of the box representing the stored item
 	var/storage_width = min( round( 224 * max_storage_space/baseline_max_storage_space ,1) ,284) //length of sprite for the box representing total storage space
@@ -379,10 +383,6 @@
 //Call this proc to handle the removal of an item from the storage item. The item will be moved to the atom sent as new_target
 /obj/item/weapon/storage/proc/remove_from_storage(obj/item/W as obj, atom/new_location)
 	if(!istype(W)) return 0
-
-	if(istype(src, /obj/item/weapon/storage/fancy))
-		var/obj/item/weapon/storage/fancy/F = src
-		F.update_icon(1)
 
 	for(var/mob/M in range(1, src.loc))
 		if (M.s_active == src)
@@ -563,6 +563,20 @@
 	src.closer.layer = SCREEN_LAYER
 	orient2hud()
 
+	if(startswith)
+		for(var/item_path in startswith)
+			var/list/data = startswith[item_path]
+			if(islist(data))
+				var/qty = data[1]
+				var/list/argsl = data.Copy()
+				argsl[1] = src
+				for(var/i in 1 to qty)
+					new item_path(arglist(argsl))
+			else
+				for(var/i in 1 to (isnull(data)? 1 : data))
+					new item_path(src)
+		update_icon()
+
 /obj/item/weapon/storage/emp_act(severity)
 	if(!istype(src.loc, /mob/living))
 		for(var/obj/O in contents)
@@ -624,11 +638,5 @@
 	return depth
 
 /obj/item/proc/get_storage_cost()
-	if (storage_cost)
-		return storage_cost
-	else
-		return base_storage_cost(w_class)
-
-/proc/base_storage_cost(var/w_class)
 	//If you want to prevent stuff above a certain w_class from being stored, use max_w_class
-	return 2**(w_class-1) //1,2,4,8,16,...
+	return base_storage_cost(w_class)

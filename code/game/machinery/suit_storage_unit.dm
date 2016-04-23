@@ -10,6 +10,7 @@
 	icon_state = "suitstorage000000100" //order is: [has helmet][has suit][has human][is open][is locked][is UV cycling][is powered][is dirty/broken] [is superUVcycling]
 	anchored = 1
 	density = 1
+	req_access = list(access_captain,access_heads)
 	var/mob/living/carbon/human/OCCUPANT = null
 	var/obj/item/clothing/suit/space/SUIT = null
 	var/SUIT_TYPE = null
@@ -33,6 +34,56 @@
 	SUIT_TYPE = /obj/item/clothing/suit/space
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space
 	MASK_TYPE = /obj/item/clothing/mask/breath
+	req_access = list(access_eva)
+
+/obj/machinery/suit_storage_unit/atmos
+	name = "Atmospherics Voidsuit Storage Unit"
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/atmos
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/atmos
+	MASK_TYPE = /obj/item/clothing/mask/breath
+	req_access = list(access_atmospherics)
+	islocked = 1
+
+/obj/machinery/suit_storage_unit/engineering
+	name = "Engineering Voidsuit Storage Unit"
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/engineering
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/engineering
+	MASK_TYPE = /obj/item/clothing/mask/breath
+	req_access = list(access_engine)
+	islocked = 1
+
+/obj/machinery/suit_storage_unit/medical
+	name = "Medical Voidsuit Storage Unit"
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/medical
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/medical
+	MASK_TYPE = /obj/item/clothing/mask/breath
+	req_access = list(access_medical)
+	islocked = 1
+
+/obj/machinery/suit_storage_unit/mining
+	name = "Mining Voidsuit Storage Unit"
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/mining
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/mining
+	MASK_TYPE = /obj/item/clothing/mask/breath
+	req_access = list(access_mining)
+	islocked = 1
+
+/obj/machinery/suit_storage_unit/security
+	name = "Security Voidsuit Storage Unit"
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/security
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/security
+	MASK_TYPE = /obj/item/clothing/mask/breath
+	req_access = list(access_security)
+	islocked = 1
+
+/obj/machinery/suit_storage_unit/merc
+	name = "Nonstandard Voidsuit Storage Unit"
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/merc
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/merc
+	MASK_TYPE = /obj/item/clothing/mask/breath
+	req_access = list(access_syndicate)
+	islocked = 1
+
 
 
 /obj/machinery/suit_storage_unit/New()
@@ -58,17 +109,18 @@
 
 
 /obj/machinery/suit_storage_unit/power_change()
-	..()
-	if( !(stat & NOPOWER) )
-		src.ispowered = 1
-		src.update_icon()
-	else
-		spawn(rand(0, 15))
-			src.ispowered = 0
-			src.islocked = 0
-			src.isopen = 1
-			src.dump_everything()
+	. = ..()
+	if(.)
+		if( !(stat & NOPOWER) )
+			src.ispowered = 1
 			src.update_icon()
+		else
+			spawn(rand(0, 15))
+				src.ispowered = 0
+				src.islocked = 0
+				src.isopen = 1
+				src.dump_everything()
+				src.update_icon()
 
 
 /obj/machinery/suit_storage_unit/ex_act(severity)

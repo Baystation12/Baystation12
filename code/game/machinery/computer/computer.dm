@@ -78,15 +78,6 @@
 	if(icon_keyboard)
 		overlays += image(icon, icon_keyboard, overlay_layer)
 
-/obj/machinery/computer/power_change()
-	..()
-	update_icon()
-	if(stat & NOPOWER)
-		set_light(0)
-	else
-		set_light(light_range_on, light_power_on)
-
-
 /obj/machinery/computer/proc/set_broken()
 	stat |= BROKEN
 	update_icon()

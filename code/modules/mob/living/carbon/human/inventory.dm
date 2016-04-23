@@ -270,6 +270,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 			src.wear_suit = W
 			if(wear_suit.flags_inv & HIDESHOES)
 				update_inv_shoes(0)
+			if(wear_suit.flags_inv & HIDEGLOVES)
+				update_inv_gloves(0)
+			if(wear_suit.flags_inv & HIDEJUMPSUIT)
+				update_inv_w_uniform(0)
 			W.equipped(src, slot)
 			update_inv_wear_suit(redraw_mob)
 		if(slot_w_uniform)

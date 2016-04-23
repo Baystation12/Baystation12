@@ -66,8 +66,6 @@
 	var/list/global_objectives =   list()   // Universal objectives if any.
 	var/list/candidates =          list()   // Potential candidates.
 	var/list/faction_members =     list()   // Semi-antags (in-round revs, borer thralls)
-	
-	var/allow_latejoin = 0					//Determines whether or not the game mode will allow for the template to spawn try_latespawn
 
 	// ID card stuff.
 	var/default_access = list()

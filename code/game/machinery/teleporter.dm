@@ -94,7 +94,7 @@
 		var/turf/T = get_turf(R)
 		if (!T)
 			continue
-		if(!(T.z in config.player_levels))
+		if(!(T.z in using_map.player_levels))
 			continue
 		var/tmpname = T.loc.name
 		if(areaindex[tmpname])
@@ -377,8 +377,7 @@
 	src.add_fingerprint(usr)
 	return
 
-/obj/machinery/teleport/station/power_change()
-	..()
+/obj/machinery/teleport/station/update_icon()
 	if(stat & NOPOWER)
 		icon_state = "controller-p"
 
