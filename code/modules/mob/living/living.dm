@@ -799,7 +799,7 @@ default behaviour is:
 /mob/living/carbon/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in internal_organs)
 		return
-	..()
+	. = ..()
 
 /mob/living/touch_map_edge()
 
