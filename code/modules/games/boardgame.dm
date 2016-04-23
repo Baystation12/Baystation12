@@ -169,7 +169,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 	w_class = 1
 	center_of_mass = list("x"=16, "y"=16)
 	nutriment_desc = list("a choking hazard" = 4)
-	nutriment_amt = 4
+	nutriment_amt = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/checker/red
 	name = "red checker"
