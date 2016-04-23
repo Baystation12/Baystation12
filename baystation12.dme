@@ -1145,6 +1145,7 @@
 #include "code\modules\flufftext\Hallucination.dm"
 #include "code\modules\flufftext\TextFilters.dm"
 #include "code\modules\food\recipes_microwave.dm"
+#include "code\modules\food\replicator.dm"
 #include "code\modules\games\boardgame.dm"
 #include "code\modules\games\cardemon.dm"
 #include "code\modules\games\cards.dm"
