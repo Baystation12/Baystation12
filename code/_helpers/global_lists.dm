@@ -97,6 +97,18 @@ var/global/list/string_slot_flags = list(
 /////Initial Building/////
 //////////////////////////
 
+/proc/populateGlobalLists()
+    possible_cable_coil_colours = sortAssoc(list(
+		"Yellow" = COLOR_YELLOW,
+		"Green" = COLOR_LIME,
+		"Pink" = COLOR_PINK,
+		"Blue" = COLOR_BLUE,
+		"Orange" = COLOR_ORANGE,
+		"Cyan" = COLOR_CYAN,
+		"Red" = COLOR_RED,
+		"White" = COLOR_WHITE
+	))
+
 /proc/makeDatumRefLists()
 	var/list/paths
 
@@ -169,6 +181,7 @@ var/global/list/string_slot_flags = list(
 		poster_designs += P
 
 	return 1
+
 
 /* // Uncomment to debug chemical reaction list.
 /client/verb/debug_chemical_list()

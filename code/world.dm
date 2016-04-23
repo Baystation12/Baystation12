@@ -18,6 +18,7 @@ var/global/datum/global_init/init = new ()
 	generate_gameid()
 
 	makeDatumRefLists()
+	populateGlobalLists()
 	load_configuration()
 
 	initialize_chemical_reagents()
