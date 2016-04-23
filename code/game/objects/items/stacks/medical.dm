@@ -9,6 +9,7 @@
 	throw_range = 20
 	var/heal_brute = 0
 	var/heal_burn = 0
+	var/animal_heal = 3
 
 /obj/item/stack/medical/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if (!istype(M))
@@ -55,6 +56,7 @@
 	desc = "Some sterile gauze to wrap around bloody stumps."
 	icon_state = "brutepack"
 	origin_tech = list(TECH_BIO = 1)
+	animal_heal = 5
 
 /obj/item/stack/medical/bruise_pack/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(..())
@@ -117,6 +119,7 @@
 	icon_state = "ointment"
 	heal_burn = 1
 	origin_tech = list(TECH_BIO = 1)
+	animal_heal = 4
 
 /obj/item/stack/medical/ointment/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(..())
@@ -154,6 +157,7 @@
 	icon_state = "traumakit"
 	heal_brute = 0
 	origin_tech = list(TECH_BIO = 1)
+	animal_heal = 12
 
 /obj/item/stack/medical/advanced/bruise_pack/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(..())
@@ -215,6 +219,7 @@
 	icon_state = "burnkit"
 	heal_burn = 0
 	origin_tech = list(TECH_BIO = 1)
+	animal_heal = 7
 
 
 /obj/item/stack/medical/advanced/ointment/attack(mob/living/carbon/M as mob, mob/user as mob)
@@ -253,6 +258,7 @@
 	icon_state = "splint"
 	amount = 5
 	max_amount = 5
+	animal_heal = 0
 
 /obj/item/stack/medical/splint/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(..())
