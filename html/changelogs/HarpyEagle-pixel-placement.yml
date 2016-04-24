@@ -1,6 +1,0 @@
-author: HarpyEagle
-
-delete-after: True
-
-changes: 
-  - rscadd: "Items can now be positioned on tables by clicking."
