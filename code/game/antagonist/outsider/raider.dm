@@ -28,7 +28,7 @@ var/datum/antagonist/raider/raiders
 		/obj/item/clothing/under/serviceoveralls,
 		/obj/item/clothing/under/captain_fly,
 		/obj/item/clothing/under/det,
-		/obj/item/clothing/under/brown,
+		/obj/item/clothing/under/color/brown,
 		)
 
 	var/list/raider_shoes = list(
