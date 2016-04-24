@@ -845,9 +845,14 @@
 	if(!wearer.lastarea)
 		wearer.lastarea = get_area(wearer.loc)
 
-	if((istype(wearer.loc, /turf/space)) || (wearer.lastarea.has_gravity == 0))
-		if(!wearer.Process_Spacemove(0))
+	if(!wearer.check_solid_ground())
+		var/allowmove = wearer.Allow_Spacemove(0)
+		if(!allowmove)
 			return 0
+		else if(allowmove == -1 && wearer.handle_spaceslipping()) //Check to see if we slipped
+			return 0
+		else
+			wearer.inertia_dir = 0 //If not then we can reset inertia and move
 
 	if(malfunctioning)
 		direction = pick(cardinal)

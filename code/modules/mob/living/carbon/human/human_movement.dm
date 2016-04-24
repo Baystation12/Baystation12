@@ -68,7 +68,7 @@
 
 	return (tally+config.human_delay)
 
-/mob/living/carbon/human/Process_Spacemove(var/check_drift = 0)
+/mob/living/carbon/human/Allow_Spacemove(var/check_drift = 0)
 	//Can we act?
 	if(restrained())	return 0
 
@@ -89,9 +89,7 @@
 			return 1
 
 	//If no working jetpack then use the other checks
-	if(..())
-		return 1
-	return 0
+	. = ..()
 
 
 /mob/living/carbon/human/slip_chance(var/prob_slip = 5)

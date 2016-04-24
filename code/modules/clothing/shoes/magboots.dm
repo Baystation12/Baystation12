@@ -1,3 +1,4 @@
+//Note that despite the use of the NOSLIP flag, magboots are still hardcoded to prevent spaceslipping in Check_Shoegrip().
 /obj/item/clothing/shoes/magboots
 	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle. They're large enough to be worn over other footwear."
 	name = "magboots"
@@ -8,8 +9,15 @@
 	var/magpulse = 0
 	var/icon_base = "magboots"
 	action_button_name = "Toggle Magboots"
-	var/obj/item/clothing/shoes/shoes = null	//Undershoes
-	var/mob/living/carbon/human/wearer = null	//For shoe procs
+
+	//For covering shoes when worn
+	var/obj/item/clothing/shoes/shoes = null
+	var/mob/wearer = null
+
+/obj/item/clothing/shoes/magboots/Destroy()
+	shoes = null
+	wearer = null
+	. = ..()
 
 /obj/item/clothing/shoes/magboots/proc/set_slowdown()
 	slowdown = shoes? max(SHOES_SLOWDOWN, shoes.slowdown): SHOES_SLOWDOWN	//So you can't put on magboots to make you walk faster.
@@ -33,39 +41,51 @@
 		user << "You enable the mag-pulse traction system."
 	user.update_inv_shoes()	//so our mob-overlays update
 	user.update_action_buttons()
+	user.update_floating()
 
 /obj/item/clothing/shoes/magboots/mob_can_equip(mob/user)
-	var/mob/living/carbon/human/H = user
-
-	if(H.shoes)
-		shoes = H.shoes
-		if(shoes.overshoes)
-			user << "You are unable to wear \the [src] as \the [H.shoes] are in the way."
-			shoes = null
-			return 0
-		H.drop_from_inventory(shoes)	//Remove the old shoes so you can put on the magboots.
-		shoes.forceMove(src)
-
 	if(!..())
 		if(shoes) 	//Put the old shoes back on if the check fails.
-			if(H.equip_to_slot_if_possible(shoes, slot_shoes))
-				src.shoes = null
+			if(user.equip_to_slot_if_possible(shoes, slot_shoes, disable_warning = 1))
+				shoes.forceMove(get_turf(user)) //well if that fails then drop them on the floor
+			shoes = null
 		return 0
+
+/obj/item/clothing/shoes/magboots/proc/cover_shoes(obj/item/clothing/shoes/S, mob/user)
+	if(S.overshoes)
+		user << "You are unable to wear \the [src] as \the [S] are in the way."
+		return 0
+
+	shoes = S
+	user.drop_from_inventory(shoes)	//Remove the old shoes so you can put on the magboots.
+	shoes.forceMove(src)
 
 	if (shoes)
 		user << "You slip \the [src] on over \the [shoes]."
 	set_slowdown()
-	wearer = H
+	wearer = user
 	return 1
+
+//This gets called only if the item is successfully equipped, luckily for us
+/obj/item/clothing/shoes/magboots/equipped()
+	..()
+	var/mob/M = src.loc
+	if(istype(M))
+		M.update_floating()
+
+		var/obj/item/clothing/shoes/S = M.get_equipped_item(slot_shoes)
+		if(istype(S))
+			cover_shoes(S, M)
 
 /obj/item/clothing/shoes/magboots/dropped()
 	..()
-	var/mob/living/carbon/human/H = wearer
 	if(shoes)
-		if(!H.equip_to_slot_if_possible(shoes, slot_shoes))
+		if(!wearer || !wearer.equip_to_slot_if_possible(shoes, slot_shoes))
 			shoes.forceMove(get_turf(src))
 		src.shoes = null
-	wearer = null
+	if(wearer)
+		wearer.update_floating()
+		wearer = null
 
 /obj/item/clothing/shoes/magboots/examine(mob/user)
 	..(user)

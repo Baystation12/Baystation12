@@ -81,26 +81,13 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/var/is_floating = 0
 /mob/var/floatiness = 0
 
-/mob/proc/update_floating(var/dense_object=0)
+/mob/proc/update_floating()
 
-	if(anchored||buckled)
+	if(anchored || buckled || check_solid_ground())
 		make_floating(0)
 		return
 
-	var/turf/turf = get_turf(src)
-	if(!istype(turf,/turf/space))
-		var/area/A = turf.loc
-		if(istype(A) && A.has_gravity)
-			make_floating(0)
-			return
-		else if (Check_Shoegrip())
-			make_floating(0)
-			return
-		else
-			make_floating(1)
-			return
-
-	if(dense_object && Check_Shoegrip())
+	if(Check_Shoegrip() && Check_Dense_Object())
 		make_floating(0)
 		return
 
@@ -108,10 +95,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 	return
 
 /mob/proc/make_floating(var/n)
-	if(buckled)
-		if(is_floating)
-			stop_floating()
-		return
 	floatiness = n
 
 	if(floatiness && !is_floating)

@@ -73,16 +73,6 @@
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
 
-/obj/item/equipped()
-	..()
-	var/mob/M = loc
-	if(!istype(M))
-		return
-	if(M.l_hand)
-		M.l_hand.update_held_icon()
-	if(M.r_hand)
-		M.r_hand.update_held_icon()
-
 /obj/item/Destroy()
 	qdel(hidden_uplink)
 	hidden_uplink = null
@@ -257,7 +247,15 @@
 	layer = SCREEN_LAYER+0.01
 	if(user.client)	user.client.screen |= src
 	if(user.pulling == src) user.stop_pulling()
-	return
+	
+	//Update two-handing status
+	var/mob/M = loc
+	if(!istype(M))
+		return
+	if(M.l_hand)
+		M.l_hand.update_held_icon()
+	if(M.r_hand)
+		M.r_hand.update_held_icon()
 
 //Defines which slots correspond to which slot flags
 var/list/global/slot_flags_enumeration = list(
