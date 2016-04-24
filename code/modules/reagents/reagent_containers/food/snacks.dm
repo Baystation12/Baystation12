@@ -1,7 +1,7 @@
 //Food items that are eaten normally and don't leave anything behind.
 /obj/item/weapon/reagent_containers/food/snacks
 	name = "snack"
-	desc = "yummy"
+	desc = "Yummy!"
 	icon = 'icons/obj/food.dmi'
 	icon_state = null
 	var/bitesize = 1
@@ -300,7 +300,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/chips
 	name = "chips"
-	desc = "Commander Riker's What-The-Crisps"
+	desc = "Commander Riker's What-The-Crisps."
 	icon_state = "chips"
 	trash = /obj/item/trash/chips
 	filling_color = "#E8C31E"
@@ -614,7 +614,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/carpmeat
 	name = "carp fillet"
-	desc = "A fillet of spess carp meat"
+	desc = "A fillet of spess carp meat."
 	icon_state = "fishfillet"
 	filling_color = "#FFDEFE"
 	center_of_mass = list("x"=17, "y"=13)
@@ -653,7 +653,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/tomatomeat
 	name = "tomato slice"
-	desc = "A slice from a huge tomato"
+	desc = "A slice from a huge tomato."
 	icon_state = "tomatomeat"
 	filling_color = "#DB0000"
 	center_of_mass = list("x"=17, "y"=16)
@@ -930,7 +930,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/muffin
 	name = "Muffin"
-	desc = "A delicious and spongy little cake"
+	desc = "A delicious and spongy little cake."
 	icon_state = "muffin"
 	filling_color = "#E0CF9B"
 	center_of_mass = list("x"=17, "y"=4)
@@ -976,7 +976,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/waffles
 	name = "waffles"
-	desc = "Mmm, waffles"
+	desc = "Mmm, waffles."
 	icon_state = "waffles"
 	trash = /obj/item/trash/waffles
 	filling_color = "#E6DEB5"
@@ -1225,7 +1225,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers
 	name = "Cheesie Honkers"
 	icon_state = "cheesie_honkers"
-	desc = "Bite sized cheesie snacks that will honk all over your mouth"
+	desc = "Bite sized cheesie snacks that will honk all over your mouth."
 	trash = /obj/item/trash/cheesie
 	filling_color = "#FFA305"
 	center_of_mass = list("x"=15, "y"=9)
@@ -1356,7 +1356,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/spacylibertyduff
 	name = "Spacy Liberty Duff"
-	desc = "Jello gelatin, from Alfred Hubbard's cookbook"
+	desc = "Jello gelatin, from Alfred Hubbard's cookbook."
 	icon_state = "spacylibertyduff"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#42B873"
@@ -1370,7 +1370,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/amanitajelly
 	name = "Amanita Jelly"
-	desc = "Looks curiously toxic"
+	desc = "Looks curiously toxic."
 	icon_state = "amanitajelly"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#ED0758"
@@ -1453,7 +1453,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/vegetablesoup
 	name = "Vegetable soup"
-	desc = "A true vegan meal" //TODO
+	desc = "A true vegan meal." //TODO
 	icon_state = "vegetablesoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#AFC4B5"
@@ -1958,7 +1958,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/spesslaw
 	name = "Spesslaw"
-	desc = "A lawyers favourite"
+	desc = "A lawyers favourite."
 	icon_state = "spesslaw"
 	filling_color = "#DE4545"
 	center_of_mass = list("x"=16, "y"=10)
@@ -2357,7 +2357,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/cheesecakeslice
 	name = "Cheese Cake slice"
-	desc = "Slice of pure cheestisfaction"
+	desc = "Slice of pure cheestisfaction."
 	icon_state = "cheesecake_slice"
 	trash = /obj/item/trash/plate
 	filling_color = "#FAF7AF"
@@ -2448,7 +2448,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/chocolatecake
 	name = "Chocolate Cake"
-	desc = "A cake with added chocolate"
+	desc = "A cake with added chocolate."
 	icon_state = "chocolatecake"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/chocolatecakeslice
 	slices_num = 5
@@ -2573,7 +2573,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/applecake
 	name = "Apple Cake"
-	desc = "A cake centred with Apple"
+	desc = "A cake centred with apples."
 	icon_state = "applecake"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/applecakeslice
 	slices_num = 5
@@ -2676,7 +2676,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/mushroompizza
 	name = "Mushroompizza"
-	desc = "Very special pizza"
+	desc = "Very special pizza."
 	icon_state = "mushroompizza"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/mushroompizzaslice
 	slices_num = 6
@@ -2698,7 +2698,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza
 	name = "Vegetable pizza"
-	desc = "No one of Tomato Sapiens were harmed during making this pizza"
+	desc = "No one of Tomato Sapiens were harmed during making this pizza."
 	icon_state = "vegetablepizza"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/vegetablepizzaslice
 	slices_num = 6
@@ -2714,7 +2714,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/vegetablepizzaslice
 	name = "Vegetable pizza slice"
-	desc = "A slice of the most green pizza of all pizzas not containing green ingredients "
+	desc = "A slice of the most green pizza of all pizzas not containing green ingredients."
 	icon_state = "vegetablepizzaslice"
 	filling_color = "#BAA14C"
 	bitesize = 2

@@ -1,5 +1,5 @@
 #ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it! 
+#error T_BOARD macro is not defined but we need it!
 #endif
 
 /obj/item/weapon/circuitboard/smes
@@ -18,7 +18,7 @@
 
 /obj/item/weapon/circuitboard/ghettosmes
 	name = T_BOARD("makeshift PSU")
-	desc = "An APC circuit repurposed into some power storage device controller"
+	desc = "An APC circuit repurposed into some power storage device controller."
 	build_path = /obj/machinery/power/smes/batteryrack/makeshift
 	board_type = "machine"
 	req_components = list(/obj/item/weapon/cell = 3)

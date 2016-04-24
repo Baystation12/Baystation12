@@ -53,7 +53,7 @@
 
 /obj/item/weapon/gun/projectile/deagle
 	name = "desert eagle"
-	desc = "A robust handgun that uses .50 AE ammo"
+	desc = "A robust handgun that uses .50 AE ammo."
 	icon_state = "deagle"
 	item_state = "deagle"
 	force = 14.0
@@ -77,7 +77,7 @@
 
 /obj/item/weapon/gun/projectile/gyropistol
 	name = "gyrojet pistol"
-	desc = "A bulky pistol designed to fire self propelled rounds"
+	desc = "A bulky pistol designed to fire self propelled rounds."
 	icon_state = "gyropistol"
 	max_shells = 8
 	caliber = "75"
@@ -150,7 +150,7 @@
 
 /obj/item/weapon/silencer
 	name = "silencer"
-	desc = "a silencer"
+	desc = "A silencer."
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "silencer"
 	w_class = 2

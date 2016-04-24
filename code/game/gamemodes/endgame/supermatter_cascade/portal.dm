@@ -2,7 +2,7 @@
 
 /obj/singularity/narsie/large/exit
 	name = "Bluespace Rift"
-	desc = "NO TIME TO EXPLAIN, JUMP IN"
+	desc = "NO TIME TO EXPLAIN, JUMP IN!"
 	icon = 'icons/obj/rift.dmi'
 	icon_state = "rift"
 

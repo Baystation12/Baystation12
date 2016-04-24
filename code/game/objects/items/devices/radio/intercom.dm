@@ -68,7 +68,7 @@
 
 /obj/item/device/radio/intercom/syndicate
 	name = "illicit intercom"
-	desc = "Talk through this. Evilly"
+	desc = "Talk through this. Evilly."
 	frequency = SYND_FREQ
 	subspace_transmission = 1
 	syndie = 1

@@ -71,77 +71,77 @@
 
 /obj/item/clothing/under/lightblue
 	name = "lightblue jumpsuit"
-	desc = "lightblue"
+	desc = "A lightblue jumpsuit."
 	icon_state = "lightblue"
 	item_state = "b_suit"
 	worn_state = "lightblue"
 
 /obj/item/clothing/under/aqua
 	name = "aqua jumpsuit"
-	desc = "aqua"
+	desc = "An aqua jumpsuit."
 	icon_state = "aqua"
 	item_state = "b_suit"
 	worn_state = "aqua"
 
 /obj/item/clothing/under/purple
 	name = "purple jumpsuit"
-	desc = "purple"
+	desc = "A purple jumpsuit."
 	icon_state = "purple"
 	item_state = "p_suit"
 	worn_state = "purple"
 
 /obj/item/clothing/under/lightpurple
 	name = "lightpurple jumpsuit"
-	desc = "lightpurple"
+	desc = "A lightpurple jumpsuit."
 	icon_state = "lightpurple"
 	item_state = "p_suit"
 	worn_state = "lightpurple"
 
 /obj/item/clothing/under/lightgreen
 	name = "lightgreen jumpsuit"
-	desc = "lightgreen"
+	desc = "A lightgreen jumpsuit."
 	icon_state = "lightgreen"
 	item_state = "g_suit"
 	worn_state = "lightgreen"
 
 /obj/item/clothing/under/lightbrown
 	name = "lightbrown jumpsuit"
-	desc = "lightbrown"
+	desc = "A lightbrown jumpsuit."
 	icon_state = "lightbrown"
 	item_state = "lb_suit"
 	worn_state = "lightbrown"
 
 /obj/item/clothing/under/brown
 	name = "brown jumpsuit"
-	desc = "brown"
+	desc = "A brown jumpsuit."
 	icon_state = "brown"
 	item_state = "lb_suit"
 	worn_state = "brown"
 
 /obj/item/clothing/under/yellowgreen
 	name = "yellowgreen jumpsuit"
-	desc = "yellowgreen"
+	desc = "A yellowgreen jumpsuit."
 	icon_state = "yellowgreen"
 	item_state = "y_suit"
 	worn_state = "yellowgreen"
 
 /obj/item/clothing/under/darkblue
 	name = "darkblue jumpsuit"
-	desc = "darkblue"
+	desc = "A darkblue jumpsuit."
 	icon_state = "darkblue"
 	item_state = "b_suit"
 	worn_state = "darkblue"
 
 /obj/item/clothing/under/lightred
 	name = "lightred jumpsuit"
-	desc = "lightred"
+	desc = "Alightred jumpsuit."
 	icon_state = "lightred"
 	item_state = "r_suit"
 	worn_state = "lightred"
 
 /obj/item/clothing/under/darkred
 	name = "darkred jumpsuit"
-	desc = "darkred"
+	desc = "A darkred jumpsuit."
 	icon_state = "darkred"
 	item_state = "r_suit"
 	worn_state = "darkred"

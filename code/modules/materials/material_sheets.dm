@@ -197,7 +197,7 @@
 
 /obj/item/stack/material/glass/phoronglass
 	name = "borosilicate glass"
-	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures"
+	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures."
 	singular_name = "borosilicate glass sheet"
 	icon_state = "sheet-phoronglass"
 	default_type = "phglass"
