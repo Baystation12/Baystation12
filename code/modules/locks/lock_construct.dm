@@ -1,6 +1,6 @@
 /obj/item/weapon/material/lock_construct
 	name = "lock"
-	desc = "a crude but useful lock and bolt"
+	desc = "a crude but useful lock and bolt."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "largebinemag"
 	w_class = 1
