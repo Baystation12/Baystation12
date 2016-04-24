@@ -72,9 +72,6 @@
 	return 1
 
 /turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
-	if(movement_disabled && usr.ckey != movement_disabled_exception)
-		usr << "<span class='warning'>Movement is admin-disabled.</span>" //This is to identify lag problems
-		return
 
 	..()
 
@@ -118,9 +115,6 @@
 var/const/enterloopsanity = 100
 /turf/Entered(atom/atom as mob|obj)
 
-	if(movement_disabled)
-		usr << "<span class='warning'>Movement is admin-disabled.</span>" //This is to identify lag problems
-		return
 	..()
 
 	if(!istype(atom, /atom/movable))
