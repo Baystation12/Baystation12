@@ -55,7 +55,7 @@
 	display_name = "handheld mirror"
 	path = /obj/item/weapon/mirror
 	cost = 1
-	path = /obj/item/weapon/haircomb
+	path = /obj/item/weapon/mirror
 
 /datum/gear/lunchbox
 	display_name = "lunchbox"
