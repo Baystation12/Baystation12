@@ -11,8 +11,9 @@
 	var/biomass_max = 100
 	var/biomass_per = 10
 	var/deconstruct_eff = 0.5
-	var/dispensing_type
-	var/dispensing_time = 0
+	var/list/queued_dishes = list()
+	var/make_time = 0
+	var/start_making = 0
 	var/list/menu = list("nutrition slab" = /obj/item/weapon/reagent_containers/food/snacks/tofu,
 					 "turkey substitute" = /obj/item/weapon/reagent_containers/food/snacks/tofurkey,
 					 "waffle substitute" = /obj/item/weapon/reagent_containers/food/snacks/soylenviridians,
@@ -61,8 +62,7 @@
 			var/true_text = lowertext(html_decode(text))
 			for(var/menu_item in menu)
 				if(findtext(true_text, menu_item))
-					dispense_food(menu_item)
-					return
+					queue_dish(menu_item)
 			if(findtext(true_text, "status"))
 				state_status()
 			else if(findtext(true_text, "menu"))
@@ -90,22 +90,20 @@
 	var/type = menu[text]
 	if(!type)
 		src.audible_message("<b>\The [src]</b> states, \"Error! I cannot find the recipe for that item.\"")
-		return
+		return 0
 
 	if(biomass < biomass_per)
-		src.audible_message("<b>\The [src]</b> states, \"Error! I do not have enough biomass to serve any dishes.\"")
-		return
+		src.audible_message("<b>\The [src]</b> states, \"Error! I do not have enough biomass to serve any more dishes.\"")
+		queued_dishes.Cut()
+		return 0
 	biomass -= biomass_per
-
-	src.audible_message("<b>\The [src]</b> rumbles and vibrates.")
-	playsound(src.loc, 'sound/machines/juicer.ogg', 50, 1)
-	spawn(rand(30,60))
-		src.audible_message("<b>\The [src]</b> states, \"Your [text] is ready!\"")
-		playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
-		var/atom/A = new type(src.loc)
-		A.name = text
-		A.desc = "Looks... actually pretty good."
-		use_power(200)
+	src.audible_message("<b>\The [src]</b> states, \"Your [text] is ready!\"")
+	playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
+	var/atom/A = new type(src.loc)
+	A.name = text
+	A.desc = "Looks... actually pretty good."
+	use_power(75000)
+	return 1
 
 /obj/machinery/food_replicator/RefreshParts()
 	deconstruct_eff = 0
@@ -119,3 +117,28 @@
 		if(istype(P, /obj/item/weapon/stock_parts/micro_laser))
 			deconstruct_eff += 0.5 * P.rating
 	biomass = min(biomass,biomass_max)
+
+/obj/machinery/food_replicator/proc/queue_dish(var/text)
+	if(!(text in menu))
+		return
+
+	if(!queued_dishes)
+		queued_dishes = list()
+
+	queued_dishes += text
+	if(world.time > make_time)
+		start_making = 1
+
+/obj/machinery/food_replicator/process()
+	if(queued_dishes && queued_dishes.len)
+		if(start_making) //want to do this first so that the first dish won't instantly come out
+			src.audible_message("<b>\The [src]</b> rumbles and vibrates.")
+			playsound(src.loc, 'sound/machines/juicer.ogg', 50, 1)
+			make_time = world.time + rand(100, 300)
+			start_making = 0
+		if(world.time > make_time)
+			dispense_food(queued_dishes[1])
+			if(queued_dishes && queued_dishes.len) //more to come
+				queued_dishes -= queued_dishes[1]
+				start_making = 1
+	..()
