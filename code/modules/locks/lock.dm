@@ -71,7 +71,7 @@
 		user << "<span class='notice'>You pick open \the [holder]'s lock!</span>"
 		unlock(lock_data)
 		return 1
-	else if(prob(5 * unlock_power))
+	else if(prob(5 * (unlock_power/getComplexity())))
 		user << "<span class='warning'>You accidently break \the [holder]'s lock with your [I]!</span>"
 		status |= BROKEN
 	else
