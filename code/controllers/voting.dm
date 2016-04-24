@@ -203,8 +203,8 @@ datum/controller/vote
 					if(.[1] == "Initiate Crew Transfer")
 						init_shift_change(null, 1)
 					else if(.[1] == "Add Antagonist")
-						initiate_vote("add_antagonist", "the server", 1)
-						antag_add_finished = 1
+						spawn(10)
+							initiate_vote("add_antagonist", "the server", 1)
 				if("add_antagonist")
 					if(isnull(.[1]) || .[1] == "None")
 						antag_add_finished = 1
@@ -293,6 +293,8 @@ datum/controller/vote
 					if(check_rights(R_ADMIN|R_MOD, 0))
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
+						if (config.allow_extra_antags)
+							choices.Add("Add Antagonist")
 					else
 						if (get_security_level() == "red" || get_security_level() == "delta")
 							initiator_key << "The current alert status is too high to call for a crew transfer!"
