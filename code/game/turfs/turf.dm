@@ -43,6 +43,7 @@
 
 /turf/Destroy()
 	turfs -= src
+	remove_cleanables()
 	..()
 
 /turf/ex_act(severity)
@@ -219,18 +220,18 @@ var/const/enterloopsanity = 100
 	return 0
 
 //expects an atom containing the reagents used to clean the turf
-/turf/proc/clean(atom/source, mob/user)
+/turf/proc/clean(atom/source, mob/user = null)
 	if(source.reagents.has_reagent("water", 1) || source.reagents.has_reagent("cleaner", 1))
 		clean_blood()
-		if(istype(src, /turf/simulated))
-			var/turf/simulated/T = src
-			T.dirt = 0
-		for(var/obj/effect/O in src)
-			if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
-				qdel(O)
+		remove_cleanables()
 	else
 		user << "<span class='warning'>\The [source] is too dry to wash that.</span>"
 	source.reagents.trans_to_turf(src, 1, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
+
+/turf/proc/remove_cleanables()
+	for(var/obj/effect/O in src)
+		if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
+			qdel(O)
 
 /turf/proc/update_blood_overlays()
 	return
