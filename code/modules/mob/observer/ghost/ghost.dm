@@ -61,7 +61,10 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 					name = capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
 
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
-
+	else
+		spawn(10) // wait for the observer mob to receive the client's key
+			mind = new /datum/mind(key)
+			mind.current = src
 	if(!T)	T = pick(latejoin | latejoin_cryo | latejoin_gateway)			//Safety in case we cannot find the body's position
 	forceMove(T)
 

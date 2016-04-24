@@ -489,12 +489,12 @@ var/global/datum/controller/gameticker/ticker
 			sleep(300)
 			looking_for_antags = 0
 			for(var/datum/mind/candidate in antag.candidates)
-				if(!candidate in antag_pool)
+				if(!(candidate in antag_pool))
 					antag.candidates -= candidate
 					log_debug("[candidate.key] was not in the antag pool and could not be selected.")
 		else
 			for(var/datum/mind/candidate in antag.candidates)
-				if(isghost(candidate))
+				if(isghost(candidate.current))
 					antag.candidates -= candidate
 					log_debug("[candidate.key] is a ghost and can not be selected.")
 		if(length(antag.candidates) >= antag.initial_spawn_req)
