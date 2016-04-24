@@ -48,9 +48,6 @@
 /turf/ex_act(severity)
 	return 0
 
-/turf/proc/is_space()
-	return 0
-
 /turf/proc/is_intact()
 	return 0
 

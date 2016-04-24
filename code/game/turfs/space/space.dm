@@ -14,9 +14,6 @@
 	update_starlight()
 	..()
 
-/turf/space/is_space()
-	return 1
-
 // override for space turfs, since they should never hide anything
 /turf/space/levelupdate()
 	for(var/obj/O in src)
