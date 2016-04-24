@@ -34,6 +34,9 @@ var/global/datum/controller/gameticker/ticker
 
 	var/round_end_announced = 0 // Spam Prevention. Announce round end only once.
 
+	var/list/antag_pool = list()
+	var/looking_for_antags = 0
+
 /datum/controller/gameticker/proc/pregame()
 	login_music = pick(\
 	/*'sound/music/halloween/skeletons.ogg',\
@@ -472,3 +475,41 @@ var/global/datum/controller/gameticker/ticker
 		log_game("[i]s[total_antagonists[i]].")
 
 	return 1
+
+// there's probably already some list of procs for latespawning antags like this that I can't figure out
+/datum/controller/gameticker/proc/attempt_late_antag_spawn(var/list/antag_choices)
+	var/datum/antagonist/antag = antag_choices[1]
+	while(antag_choices.len)
+		var/list/candidates = list()
+		var/move_to_spawn = 0
+		var/preserve_appearence = 1
+		if (antag.flags & (ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB))
+			looking_for_antags = 1
+			move_to_spawn = 1
+			preserve_appearence = 0
+			antag_pool.Cut()
+			world << "<b>A ghost is needed to spawn \a [antag.role_text].</b>\nGhosts may enter the antag pool by using the toggle-add-antag-candidacy verb. You have 15 seconds to enter the pool."
+			spawn(150)
+				looking_for_antags = 0
+				for(var/mob/observer/ghost/player in antag_pool)
+					if(antag.role_type in player.client.prefs.be_special_role && antag.can_become_antag(player.mind))
+						candidates += player.mind
+		else
+			for(var/mob/living/player in player_list)
+				if(antag.role_type in player.client.prefs.be_special_role && antag.can_become_antag(player.mind))
+					candidates += player.mind
+		var/lucky_guy = pick(candidates)
+		while(!antag.add_antagonist(lucky_guy, 0, 0, move_to_spawn, 0, preserve_appearence) && candidates.len)
+			candidates -= lucky_guy // not so lucky
+			lucky_guy = pick(candidates)
+		if(!candidates.len) // couldn't add any one :(
+			world << "Could not add \a [antag.role_text]."
+			antag_choices -= antag
+			if(antag_choices.len)
+				antag = antag_choices[1]
+				world << "Attempting to spawn \a [antag.role_text]."
+			else
+				return 0
+		else
+			return 1
+	return 0
