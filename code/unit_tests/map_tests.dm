@@ -146,5 +146,25 @@ datum/unit_test/storage_map_test/start_test()
 
 	return 1
 
+datum/unit_test/map_image_map_test
+	name = "MAP: All map levels shall have a corresponding map image."
+
+datum/unit_test/map_image_map_test/start_test()
+	var/failed = FALSE
+
+	for(var/z in using_map.map_levels)
+		var/file_name = map_image_file_name(z)
+		var/file_path = MAP_IMAGE_PATH + file_name
+		if(!fexists(file_path))
+			failed = TRUE
+			log_unit_test("[using_map.path]-[z] is missing its map image [file_name].")
+
+	if(failed)
+		fail("One or more map levels were missing a corresponding map image.")
+	else
+		pass("All map levels had a corresponding image.")
+
+	return 1
+
 #undef SUCCESS
 #undef FAILURE

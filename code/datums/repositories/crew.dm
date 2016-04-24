@@ -7,16 +7,15 @@ var/global/datum/repository/crew/crew_repository = new()
 	cache_data = list()
 	..()
 
-/datum/repository/crew/proc/health_data(var/turf/T)
+/datum/repository/crew/proc/health_data(var/z_level)
 	var/list/crewmembers = list()
-	if(!T)
+	if(!z_level)
 		return crewmembers
 
-	var/z_level = "[T.z]"
-	var/datum/cache_entry/cache_entry = cache_data[z_level]
+	var/datum/cache_entry/cache_entry = cache_data[num2text(z_level)]
 	if(!cache_entry)
 		cache_entry = new/datum/cache_entry
-		cache_data[z_level] = cache_entry
+		cache_data[num2text(z_level)] = cache_entry
 
 	if(world.time < cache_entry.timestamp)
 		return cache_entry.data
@@ -24,13 +23,13 @@ var/global/datum/repository/crew/crew_repository = new()
 	var/tracked = scan()
 	for(var/obj/item/clothing/under/C in tracked)
 		var/turf/pos = get_turf(C)
-		if((C) && (C.has_sensor) && (pos) && (T && pos.z == T.z) && (C.sensor_mode != SUIT_SENSOR_OFF))
+		if((C) && (C.has_sensor) && (pos) && (pos.z == z_level) && (C.sensor_mode != SUIT_SENSOR_OFF))
 			if(istype(C.loc, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = C.loc
 				if(H.w_uniform != C)
 					continue
 
-				var/list/crewmemberData = list("dead"=0, "oxy"=-1, "tox"=-1, "fire"=-1, "brute"=-1, "area"="", "x"=-1, "y"=-1, "ref" = "\ref[H]")
+				var/list/crewmemberData = list("dead"=0, "oxy"=-1, "tox"=-1, "fire"=-1, "brute"=-1, "area"="", "x"=-1, "y"=-1, "z"=-1, "ref" = "\ref[H]")
 
 				crewmemberData["sensor_type"] = C.sensor_mode
 				crewmemberData["name"] = H.get_authentification_name(if_no_id="Unknown")
@@ -51,6 +50,7 @@ var/global/datum/repository/crew/crew_repository = new()
 					crewmemberData["area"] = sanitize(A.name)
 					crewmemberData["x"] = pos.x
 					crewmemberData["y"] = pos.y
+					crewmemberData["z"] = pos.z
 
 				crewmembers[++crewmembers.len] = crewmemberData
 
