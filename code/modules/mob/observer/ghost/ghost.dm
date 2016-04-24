@@ -178,7 +178,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/is_active()		return 0
 
 /mob/observer/ghost/Stat()
-	..()
+	. = ..()
 	if(statpanel("Status"))
 		if(emergency_shuttle)
 			var/eta_status = emergency_shuttle.get_status_panel_eta()

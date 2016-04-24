@@ -39,7 +39,7 @@
 	return
 
 /mob/living/carbon/alien/Stat()
-	..()
+	. = ..()
 	stat(null, "Progress: [amount_grown]/[max_grown]")
 
 /mob/living/carbon/alien/restrained()
