@@ -7,6 +7,9 @@
 	pass_flags = 1
 	mob_size = MOB_SMALL
 
+	can_pull_size = 2
+	can_pull_mobs = MOB_PULL_SMALLER
+
 	idcard_type = /obj/item/weapon/card/id
 
 	var/network = "SS13"
