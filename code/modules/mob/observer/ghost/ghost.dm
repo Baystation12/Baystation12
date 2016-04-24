@@ -703,11 +703,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set desc = "Toggles whether or not you will be considered a candidate by an add-antag vote."
 	set category = "Ghost"
 	if(ticker.looking_for_antags)
-		if(src in ticker.antag_pool)
-			ticker.antag_pool -= src
+		if(src.mind in ticker.antag_pool)
+			ticker.antag_pool -= src.mind
 			usr << "You have left the antag pool."
 		else
-			ticker.antag_pool += src
+			ticker.antag_pool += src.mind
 			usr << "You have joined the antag pool."
 	else
-		usr << "The game is no currently looking for antags."
+		usr << "The game is not currently looking for antags."
