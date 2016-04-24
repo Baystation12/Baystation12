@@ -214,7 +214,8 @@ datum/controller/vote
 							var/datum/antagonist/antag = all_antag_types[antag_type]
 							var/datum/antagonist/antag2 = all_antag_types[antag_names_to_ids[.[2]]]
 							var/datum/antagonist/antag3 = all_antag_types[antag_names_to_ids[.[3]]]
-							if(!ticker.attempt_late_antag_spawn(antag, antag2, antag3))
+							var/list/antag_choices = list(antag, antag2, antag3)
+							if(!ticker.attempt_late_antag_spawn(antag_choices))
 								world << "No antags were added."
 						else
 							additional_antag_types |= antag_type
