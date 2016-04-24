@@ -40,9 +40,9 @@
 
 /datum/lock/proc/toggle(var/key = "", var/mob/user)
 	if(status & LOCKED)
-		return unlock(key)
+		return unlock(key, user)
 	else
-		return lock(key)
+		return lock(key, user)
 
 /datum/lock/proc/getComplexity()
 	return length(lock_data)
@@ -59,7 +59,7 @@
 	return status & LOCKED
 
 /datum/lock/proc/pick_lock(var/obj/item/I, var/mob/user)
-	if(!istype(I) && (status ^ LOCKED))
+	if(!istype(I) || (status ^ LOCKED))
 		return 0
 	var/unlock_power = I.lock_picking_level
 	if(!unlock_power)
@@ -74,4 +74,6 @@
 	else if(prob(5 * unlock_power))
 		user << "<span class='warning'>You accidently break \the [holder]'s lock with your [I]!</span>"
 		status |= BROKEN
+	else
+		user << "<span class='warning'>You fail to pick open \the [holder].</span>"
 	return 0

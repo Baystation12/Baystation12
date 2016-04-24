@@ -125,6 +125,14 @@
 	if(lock && lock.pick_lock(I,user))
 		return
 
+	if(istype(I,/obj/item/weapon/material/lock_construct))
+		if(lock)
+			user << "<span class='warning'>\The [src] already has a lock.</span>"
+		else
+			var/obj/item/weapon/material/lock_construct/L = I
+			lock = L.create_lock(src,user)
+		return
+
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
 		if(stat & BROKEN)
 			user << "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>"
@@ -162,6 +170,9 @@
 
 	if(src.operating) return
 
+	if(lock && lock.isLocked())
+		user << "\The [src] is locked!"
+
 	if(operable())
 		if(src.density)
 			open()
@@ -169,14 +180,11 @@
 			close()
 		return
 
-	if(lock && lock.isLocked())
-		user << "\The [src] is locked!"
-
 	return
 
 /obj/machinery/door/unpowered/simple/examine(mob/user)
 	if(..(user,1) && lock)
-		user << "It appears to have a lock."
+		user << "<span class='notice'>It appears to have a lock.</span>"
 
 /obj/machinery/door/unpowered/simple/can_open()
 	if(!..() || (lock && lock.isLocked()))
