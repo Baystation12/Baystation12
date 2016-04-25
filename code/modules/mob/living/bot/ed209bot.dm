@@ -181,4 +181,4 @@
 				var/turf/T = get_turf(src)
 				new /mob/living/bot/secbot/ed209(T,created_name,lasercolor)
 				qdel(W)
-				user.deleteItem(src)
+				qdel(src)

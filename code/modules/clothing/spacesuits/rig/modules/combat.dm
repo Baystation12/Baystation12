@@ -55,7 +55,7 @@
 		return 0
 
 	user << "<font color='blue'><b>You slot \the [input_device] into the suit module.</b></font>"
-	user.deleteItem(input_device)
+	qdel(input_device)
 	accepted_item.charges++
 	return 1
 
@@ -203,7 +203,7 @@
 		return
 
 	for(var/obj/item/weapon/melee/energy/blade/blade in M.contents)
-		M.deleteItem(blade)
+		qdel(blade)
 
 /obj/item/rig_module/fabricator
 

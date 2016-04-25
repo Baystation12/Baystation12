@@ -137,7 +137,7 @@
 		for(var/datum/playingcard/P in cards)
 			H.cards += P
 		H.concealed = src.concealed
-		user.deleteItem(src)
+		qdel(src)
 		H.update_icon()
 		return
 	..()

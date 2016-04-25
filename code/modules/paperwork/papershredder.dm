@@ -31,7 +31,7 @@
 				user << "<span class='warning'>\The [src] is full; please empty it before you continue.</span>"
 				return
 			paperamount += paper_result
-			user.deleteItem(W)
+			qdel(W)
 			playsound(src.loc, 'sound/items/pshred.ogg', 75, 1)
 			if(paperamount > max_paper)
 				user <<"<span class='danger'>\The [src] was too full, and shredded paper goes everywhere!</span>"

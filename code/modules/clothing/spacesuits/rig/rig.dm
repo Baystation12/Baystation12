@@ -667,25 +667,8 @@
 		return
 
 	if(sealed)
-		if(H.head)
-			var/obj/item/garbage = H.head
-			H.deleteItem(garbage)
-			H.head = null
-
-		if(H.gloves)
-			var/obj/item/garbage = H.gloves
-			H.deleteItem(garbage)
-			H.gloves = null
-
-		if(H.shoes)
-			var/obj/item/garbage = H.shoes
-			H.deleteItem(garbage)
-			H.shoes = null
-
-		if(H.wear_suit)
-			var/obj/item/garbage = H.wear_suit
-			H.deleteItem(garbage)
-			H.wear_suit = null
+		for(var/garbage in list(H.head, H.gloves, H.shoes, H.wear_suit))
+			qdel(garbage)
 
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, H, ONLY_DEPLOY)

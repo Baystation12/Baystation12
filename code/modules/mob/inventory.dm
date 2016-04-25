@@ -180,14 +180,22 @@ var/list/slot_equipment_priority = list( \
 	I.dropped(src) //If an item self-deletes, it will happen here
 	return 1
 
+//Make sure that a qdeled item properly removes itself from inventory
+/obj/item/Destroy()
+	if(ismob(loc))
+		var/mob/M = loc
+
+		//similar to removeItem, but without the unnecesary checks and forceMove
+		M.u_equip(src)
+		if(M.client)
+			M.client.screen -= src
+		screen_loc = null
+		dropped(M)
+
+		M.update_held_icons()
+	return ..()
+
 /mob/proc/deleteItem(var/obj/item/I)
-	u_equip(I)
-	if(src.client)
-		src.client.screen -= I
-
-	I.screen_loc = null
-
-	I.dropped(src)
 	qdel(I)
 
 //Returns the item equipped to the specified slot, if any.

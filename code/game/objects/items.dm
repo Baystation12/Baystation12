@@ -77,10 +77,6 @@
 /obj/item/Destroy()
 	qdel(hidden_uplink)
 	hidden_uplink = null
-	if(ismob(loc))
-		var/mob/M = loc
-		M.removeItem(src, null, force = 1)
-		M.update_held_icons()
 	return ..()
 
 /obj/item/device

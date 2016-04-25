@@ -62,7 +62,7 @@
 		finished = new /obj/item/weapon/melee/baton/cattleprod(get_turf(user))
 		user << "<span class='notice'>You fasten the wirecutters to the top of the rod with the cable, prongs outward.</span>"
 	if(finished)
-		user.deleteItem(src)
-		user.deleteItem(I)
+		qdel(src)
+		qdel(I)
 		user.put_in_hands(finished)
 	update_icon(user)

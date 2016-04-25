@@ -61,7 +61,7 @@
 		else if(user.zone_sel.selecting == "r_hand" || user.zone_sel.selecting == "l_hand")
 			var/obj/item/weapon/handcuffs/cable/tape/T = new(user)
 			if(!T.place_handcuffs(H, user))
-				user.deleteItem(T)
+				qdel(T)
 		else
 			return ..()
 		return 1

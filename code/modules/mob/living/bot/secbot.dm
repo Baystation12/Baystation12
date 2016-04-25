@@ -491,7 +491,7 @@
 		var/obj/item/weapon/secbot_assembly/A = new /obj/item/weapon/secbot_assembly
 		user.put_in_hands(A)
 		user << "You add the signaler to the helmet."
-		user.deleteItem(src)
+		qdel(src)
 	else
 		return
 

@@ -204,7 +204,7 @@
 		O.loc = usr.loc
 		O.layer = initial(O.layer)
 		O.add_fingerprint(usr)
-	usr.deleteItem(src)
+	qdel(src)
 	return
 
 

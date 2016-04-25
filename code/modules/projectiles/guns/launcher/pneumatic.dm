@@ -161,7 +161,7 @@
 /obj/item/weapon/cannonframe/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/pipe))
 		if(buildstate == 0)
-			user.deleteItem(W)
+			qdel(W)
 			user << "<span class='notice'>You secure the piping inside the frame.</span>"
 			buildstate++
 			update_icon()
@@ -178,7 +178,7 @@
 			return
 	else if(istype(W,/obj/item/device/transfer_valve))
 		if(buildstate == 4)
-			user.deleteItem(W)
+			qdel(W)
 			user << "<span class='notice'>You install the transfer valve and connect it to the piping.</span>"
 			buildstate++
 			update_icon()

@@ -38,7 +38,7 @@
 			for(var/obj/item/to_remove in summoned_items)
 				if(istype(to_remove.loc, /mob))
 					var/mob/M = to_remove.loc
-					M.deleteItem(to_remove)
+					qdel(to_remove)
 				else
 					qdel(to_remove)
 
