@@ -266,20 +266,26 @@
 	if(!blinded)
 		flick("flash", flash)
 
+	var/brute
+	var/burn
 	switch(severity)
 		if(1.0)
-			if (stat != 2)
-				adjustBruteLoss(100)
-				adjustFireLoss(100)
-				if(!anchored)
-					gib()
+			brute = 400
+			burn = 100
+			if(!anchored && !prob(getarmor(null, "bomb")))
+				gib()
 		if(2.0)
-			if (stat != 2)
-				adjustBruteLoss(60)
-				adjustFireLoss(60)
+			brute = 60
+			burn = 60
 		if(3.0)
-			if (stat != 2)
-				adjustBruteLoss(30)
+			brute = 30
+
+	var/protection = blocked_mult(getarmor(null, "bomb"))
+	brute *= protection
+	burn *= protection
+
+	adjustBruteLoss(brute)
+	adjustFireLoss(burn)
 
 	updatehealth()
 
