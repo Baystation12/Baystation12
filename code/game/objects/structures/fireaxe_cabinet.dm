@@ -86,8 +86,7 @@
 		if(open)
 			if(fireaxe)
 				user << "<span class='warning'>There is already \a [fireaxe] inside \the [src].</span>"
-			else if(user.unEquip(O))
-				O.forceMove(src)
+			else if(user.removeItem(O, src))
 				fireaxe = O
 				user << "<span class='notice'>You place \the [fireaxe] into \the [src].</span>"
 				update_icon()

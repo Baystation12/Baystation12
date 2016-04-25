@@ -14,21 +14,23 @@
 	for(var/mob/living/L in targets)
 		for(var/slot_id in equipped_summons)
 			var/to_create = equipped_summons[slot_id]
+			
+			//This is terrible.
 			if(cmptext(slot_id,"active hand"))
 				slot_id = (L.hand ? slot_l_hand : slot_r_hand)
 			else if(cmptext(slot_id, "off hand"))
 				slot_id = (L.hand ? slot_r_hand : slot_l_hand)
 			else
 				slot_id = text2num(slot_id) //because the index is text, we access this instead
+			
 			var/obj/item/new_item = summon_item(to_create)
 			var/obj/item/old_item = L.get_equipped_item(slot_id)
 			L.equip_to_slot(new_item, slot_id)
 			if(old_item)
-				L.removeItem(old_item)
 				if(delete_old)
 					qdel(old_item)
 				else
-					old_item.loc = L.loc
+					L.removeItem(old_item, L.loc)
 
 			if(duration)
 				summoned_items += new_item //we store it in a list to remove later
@@ -36,11 +38,7 @@
 	if(duration)
 		spawn(duration)
 			for(var/obj/item/to_remove in summoned_items)
-				if(istype(to_remove.loc, /mob))
-					var/mob/M = to_remove.loc
-					qdel(to_remove)
-				else
-					qdel(to_remove)
+				qdel(to_remove)
 
 /spell/targeted/equip_item/proc/summon_item(var/newtype)
 	return new newtype

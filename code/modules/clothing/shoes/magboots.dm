@@ -46,7 +46,7 @@
 /obj/item/clothing/shoes/magboots/mob_can_equip(mob/user)
 	. = ..()
 	if(.)
-		var/obj/item/clothing/shoes/S = M.get_equipped_item(slot_shoes)
+		var/obj/item/clothing/shoes/S = user.get_equipped_item(slot_shoes)
 		if(istype(S) && S.overshoes)
 			user << "You are unable to wear \the [src] as \the [S] are in the way."
 			return 0

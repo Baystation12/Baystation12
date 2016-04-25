@@ -23,7 +23,6 @@
 		var/obj/item/weapon/spacecash/bundle/bundle
 		if(!istype(W, /obj/item/weapon/spacecash/bundle))
 			var/obj/item/weapon/spacecash/cash = W
-			user.drop_from_inventory(cash)
 			bundle = new (src.loc)
 			bundle.worth += cash.worth
 			qdel(cash)

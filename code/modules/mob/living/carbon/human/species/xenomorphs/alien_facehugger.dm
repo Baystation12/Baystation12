@@ -34,9 +34,9 @@ var/const/MAX_ACTIVE_TIME = 400
 
 /obj/item/clothing/mask/facehugger/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
-	user.drop_from_inventory(src)
-	if(hit_zone == "head")
-		Attach(target)
+	if(user.removeItem(src))
+		if(hit_zone == "head")
+			Attach(target)
 
 /obj/item/clothing/mask/facehugger/New()
 	if(config.aliens_allowed)
@@ -134,10 +134,8 @@ var/const/MAX_ACTIVE_TIME = 400
 		if(target.wear_mask)
 			if(prob(20))	return
 			var/obj/item/clothing/W = target.wear_mask
-			if(!W.canremove)	return
-			target.drop_from_inventory(W)
-
-			target.visible_message("\red \b [src] tears [W] off of [target]'s face!")
+			if(target.removeItem(W))
+				target.visible_message("\red \b [src] tears [W] off of [target]'s face!")
 
 		target.equip_to_slot(src, slot_wear_mask)
 		target.contents += src // Monkey sanity check - Snapshot

@@ -30,7 +30,6 @@
 			for(var/spell_type in contract_spells)
 				M.add_spell(new spell_type(user), "const_spell_ready")
 		log_and_message_admins("signed their soul over to \the [contract_master] using \the [src].", user)
-		user.drop_from_inventory(src)
 		qdel(src)
 
 /obj/item/weapon/contract/proc/contract_effect(mob/user as mob)

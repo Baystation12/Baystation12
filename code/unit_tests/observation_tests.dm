@@ -205,7 +205,7 @@
 	mech.occupant = holding_mob
 
 	moved_event.register(held_item, src, /datum/unit_test/observation/proc/receive_move)
-	holding_mob.drop_from_inventory(held_item)
+	holding_mob.removeItem(held_item, force=1)
 
 	if(received_moves.len != 1)
 		fail("Expected 1 raised moved event, were [received_moves.len].")

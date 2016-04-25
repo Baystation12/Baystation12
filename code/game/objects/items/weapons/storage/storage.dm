@@ -452,7 +452,7 @@
 	return handle_item_insertion(W)
 
 /obj/item/weapon/storage/dropped(mob/user as mob)
-	return
+	return ..()
 
 /obj/item/weapon/storage/attack_hand(mob/user as mob)
 	if(ishuman(user))

@@ -574,7 +574,7 @@
  * calling. W is the item being inserted, R is the associated vending_product entry.
  */
 /obj/machinery/vending/proc/stock(obj/item/weapon/W, var/datum/data/vending_product/R, var/mob/user)
-	if(!user.unEquip(W))
+	if(!user.removeItem(W))
 		return
 
 	user << "<span class='notice'>You insert \the [W] in the product receptor.</span>"

@@ -139,7 +139,7 @@ var/list/slot_equipment_priority = list( \
 
 	DO NOT CALL THIS PROC DIRECTLY. It is meant to be called only by other inventory procs.
 	It's probably okay to use it if you are transferring the item between slots on the same mob,
-	but chances are you're safer calling remove_from_mob() or drop_from_inventory() anyways.
+	but chances are you're safer just using removeItem() anyways.
 
 	As far as I can tell the proc exists so that mobs with different inventory slots can override
 	the search through all the slots, without having to duplicate the rest of the item dropping.
@@ -192,7 +192,6 @@ var/list/slot_equipment_priority = list( \
 		screen_loc = null
 		dropped(M)
 
-		M.update_held_icons()
 	return ..()
 
 /mob/proc/deleteItem(var/obj/item/I)

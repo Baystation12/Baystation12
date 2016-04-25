@@ -217,6 +217,11 @@
 	..()
 	if(zoom) zoom() //binoculars, scope, etc
 
+	//Update two-handing status
+	var/mob/living/L = user
+	if(istype(L))
+		L.update_held_icons()
+
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
 	return
@@ -244,9 +249,9 @@
 	if(user.pulling == src) user.stop_pulling()
 	
 	//Update two-handing status
-	var/mob/M = loc
-	if(istype(M))
-		M.update_held_icons()
+	var/mob/living/L = loc
+	if(istype(L))
+		L.update_held_icons()
 
 //Defines which slots correspond to which slot flags
 var/list/global/slot_flags_enumeration = list(

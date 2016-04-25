@@ -26,7 +26,7 @@
 		if(istype(S,reward))
 			user << "\The [src] can do no more for you."
 			return
-	user.drop_from_inventory(src)
+	user.removeItem(src)
 	var/a = new reward()
 	if(ispath(reward,/spell))
 		H.add_spell(a)

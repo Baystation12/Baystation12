@@ -387,7 +387,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	qdel(animation)
 
 	for(var/obj/item/W in src)
-		C.drop_from_inventory(W)
+		C.removeItem(W)
 
 	var/mob/living/carbon/human/O = new /mob/living/carbon/human( src )
 	if (C.dna.GetUIState(DNA_UI_GENDER))
