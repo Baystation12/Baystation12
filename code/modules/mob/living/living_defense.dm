@@ -48,8 +48,11 @@
 //Adds two armor values together. 
 //If armor_a and armor_b are between 0-100 the result will always also be between 0-100.
 /proc/add_armor(var/armor_a, var/armor_b)
-	var/protection_a = 1/(armor_a/100) - 1
-	var/protection_b = 1/(armor_a/100) - 1
+	if(armor_a >= 100 || armor_b >= 100)
+		return 100 //adding to infinite protection doesn't make it any bigger
+
+	var/protection_a = 1/(blocked_mult(armor_a)) - 1
+	var/protection_b = 1/(blocked_mult(armor_b)) - 1
 	return 1/(protection_a + protection_b + 1)*100
 
 //if null is passed for def_zone, then this should return something appropriate for all zones (e.g. area effect damage)

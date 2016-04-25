@@ -82,7 +82,7 @@ meteor_act
 			var/obj/item/organ/external/organ = organs_by_name[organ_name]
 			if(organ)
 				var/weight = organ_rel_size[organ_name]
-				armorval += getarmor_organ(organ, type) * weight
+				armorval += getarmor_organ(organ, type) * weight //use plain addition here because we are calculating an average
 				total += weight
 	return (armorval/max(total, 1))
 
@@ -109,7 +109,7 @@ meteor_act
 		if(gear && istype(gear ,/obj/item/clothing))
 			var/obj/item/clothing/C = gear
 			if(istype(C) && C.body_parts_covered & def_zone.body_part)
-				protection += C.armor[type]
+				protection = add_armor(protection, C.armor[type]) 
 	return protection
 
 /mob/living/carbon/human/proc/check_head_coverage()
