@@ -1,5 +1,5 @@
 /obj/item/weapon/rig/ert
-	name = "Asset Protection Command hardsuit control module"
+	name = "asset protection command hardsuit control module"
 	desc = "A hardsuit used by many corporate and private asset protection forces. Has blue highlights. Armoured and space ready."
 	suit_type = "Asset Protection command"
 	icon_state = "ert_commander_rig"
@@ -40,7 +40,7 @@
 
 
 /obj/item/weapon/rig/ert/engineer
-	name = "Asset Protection Engineering hardsuit control module"
+	name = "asset protection engineering hardsuit control module"
 	desc = "A hardsuit used by many corporate and private asset protection forces. Has orange highlights. Armoured and space ready."
 	suit_type = "Asset Protection engineer"
 	icon_state = "ert_engineer_rig"
@@ -55,7 +55,7 @@
 		)
 
 /obj/item/weapon/rig/ert/janitor
-	name = "Asset Protection Sanitation hardsuit control module"
+	name = "asset protection sanitation hardsuit control module"
 	desc = "A hardsuit used by many corporate and private asset protection forces. Has purple highlights. Armoured and space ready."
 	suit_type = "Asset Protection sanitation"
 	icon_state = "ert_janitor_rig"
@@ -67,7 +67,7 @@
 		)
 
 /obj/item/weapon/rig/ert/medical
-	name = "Asset Protection Medical hardsuit control module"
+	name = "asset protection medical hardsuit control module"
 	desc = "A hardsuit used by many corporate and private asset protection forces. Has white highlights. Armoured and space ready."
 	suit_type = "Asset Protection medic"
 	icon_state = "ert_medical_rig"
@@ -80,7 +80,7 @@
 		)
 
 /obj/item/weapon/rig/ert/security
-	name = "Asset Protection Security hardsuit control module"
+	name = "asset protection security hardsuit control module"
 	desc = "A hardsuit used by many corporate and private asset protection forces. Has red highlights. Armoured and space ready."
 	suit_type = "Asset Protection security"
 	icon_state = "ert_security_rig"
@@ -93,7 +93,7 @@
 		)
 
 /obj/item/weapon/rig/ert/assetprotection
-	name = "Heavy Asset Protection suit control module"
+	name = "heavy asset protection suit control module"
 	desc = "A heavy, modified version of a common asset protection hardsuit. Has blood red highlights.  Armoured and space ready."
 	suit_type = "heavy asset protection"
 	icon_state = "asset_protection_rig"
