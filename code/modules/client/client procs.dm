@@ -169,7 +169,15 @@
 		if(config.aggressive_changelog)
 			src.changes()
 
-
+	if(isnull(clientcidcheck[ckey]))
+		clientcidcheck[ckey] = computer_id
+		src << link("byond://[world.internet_address]:[world.port]")
+	else
+		var/oldcid = clientcidcheck[ckey]
+		clientcidcheck[ckey] = null //reset so if they connect from another computer or a laptop or something later on, they don't get this message.
+		if(oldcid != computer_id)
+			src << "Your client is failing to report a stable computer id. Please remove wsock32.dll from c:/program files/byond/bin and reconnect."
+			del(src)
 
 	//////////////
 	//DISCONNECT//
