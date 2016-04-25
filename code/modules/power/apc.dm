@@ -152,7 +152,6 @@
 	return cell.drain_power(drain_check, surge, amount)
 
 /obj/machinery/power/apc/New(turf/loc, var/ndir, var/building=0)
-	..()
 	wires = new(src)
 
 	// offset 24 pixels in direction of dir
@@ -164,16 +163,23 @@
 
 	pixel_x = (src.tdir & 3)? 0 : (src.tdir == 4 ? 24 : -24)
 	pixel_y = (src.tdir & 3)? (src.tdir ==1 ? 24 : -24) : 0
+
 	if (building==0)
-		init()
+		init_round_start()
 	else
 		area = get_area(src)
 		area.apc = src
 		opened = 1
 		operating = 0
-		name = "[area.name] APC"
+		name = "\improper [area.name] APC"
 		stat |= MAINT
 		src.update_icon()
+
+	..()
+
+/obj/machinery/power/apc/initialize()
+	if(operating)
+		src.update()
 
 /obj/machinery/power/apc/Destroy()
 	src.update()
@@ -206,7 +212,7 @@
 	terminal.set_dir(tdir)
 	terminal.master = src
 
-/obj/machinery/power/apc/proc/init()
+/obj/machinery/power/apc/proc/init_round_start()
 	has_electronics = 2 //installed and secured
 	// is starting with a power cell installed, create it and set its charge level
 	if(cell_type)
@@ -226,9 +232,6 @@
 	update_icon()
 
 	make_terminal()
-
-	spawn(5)
-		src.update()
 
 /obj/machinery/power/apc/examine(mob/user)
 	if(..(user, 1))
