@@ -24,6 +24,8 @@
 
 /obj/item/clothing/head/helmet/space/rig/unathi
 	species_restricted = list("Unathi")
+	force = 5
+	sharp = 1 //poking people with the horn
 
 /obj/item/clothing/suit/space/rig/unathi
 	species_restricted = list("Unathi")

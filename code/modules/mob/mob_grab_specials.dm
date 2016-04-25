@@ -86,15 +86,21 @@
 		return
 	if(target.lying)
 		return
-	attacker.visible_message("<span class='danger'>[attacker] thrusts \his head into [target]'s skull!</span>")
 
 	var/damage = 20
 	var/obj/item/clothing/hat = attacker.head
+	var/is_sharp = 0
 	if(istype(hat))
 		damage += hat.force * 3
+		is_sharp = hat.sharp
+
+	if(is_sharp)
+		attacker.visible_message("<span class='danger'>[attacker] gores [target][istype(hat)? " with \the [hat]" : ""]!</span>")
+	else
+		attacker.visible_message("<span class='danger'>[attacker] thrusts \his head into [target]'s skull!</span>")
 
 	var/armor = target.run_armor_check("head", "melee")
-	target.apply_damage(damage, BRUTE, "head", armor)
+	target.apply_damage(damage, BRUTE, "head", armor, sharp=is_sharp)
 	attacker.apply_damage(10, BRUTE, "head", attacker.run_armor_check("head", "melee"))
 
 	if(!armor && target.headcheck("head") && prob(damage))
