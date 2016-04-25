@@ -91,6 +91,8 @@ var/list/IClog     = list()
 var/list/OOClog    = list()
 var/list/adminlog  = list()
 
+var/list/client/clientcidcheck = list()
+
 var/list/powernets = list()
 
 var/Debug2 = 0
