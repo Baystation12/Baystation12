@@ -99,6 +99,8 @@
 	var/datum/client_preference/cp = get_client_preference(preference)
 	if(!cp)
 		return FALSE
+	if(!cp.may_toggle(mob))
+		return FALSE
 	preference = cp.key
 
 	var/enabled
@@ -128,3 +130,8 @@
 		return FALSE
 
 	return client.set_preference(preference, set_preference)
+
+/mob/proc/toggle_preference(var/preference)
+	if(!client)
+		return FALSE
+	return client.toggle_preference(preference)

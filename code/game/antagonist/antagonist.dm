@@ -71,6 +71,12 @@
 	var/default_access = list()
 	var/id_type = /obj/item/weapon/card/id
 
+	var/antag_text = "You are an antagonist! Within the rules, \
+		try to act as an opposing force to the crew. Further RP and try to make sure \
+		other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, \
+		and before taking extreme actions, please try to also contact the administration! \
+		Think through your actions and make the roleplay immersive! <b>Please remember all \
+		rules aside from those without explicit exceptions apply to antagonists.</b>"
 
 /datum/antagonist/New()
 	..()

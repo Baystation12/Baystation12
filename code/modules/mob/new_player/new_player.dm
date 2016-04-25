@@ -64,7 +64,7 @@
 	return
 
 /mob/new_player/Stat()
-	..()
+	. = ..()
 
 	if(statpanel("Lobby") && ticker)
 		if(ticker.hide_mode)

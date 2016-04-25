@@ -11,8 +11,6 @@
 /datum/visualnet/New()
 	..()
 	visual_nets += src
-	spawn(1)
-		moved_event.register_global(src, /datum/visualnet/proc/update_visibility)
 
 /datum/visualnet/Destroy()
 	visual_nets -= src
@@ -22,7 +20,6 @@
 	for(var/chunk in chunks)
 		qdel(chunk)
 	chunks.Cut()
-	moved_event.unregister_global(src, /datum/visualnet/proc/update_visibility)
 	. = ..()
 
 // Checks if a chunk has been Generated in x, y, z.

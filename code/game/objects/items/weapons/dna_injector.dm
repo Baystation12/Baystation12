@@ -503,7 +503,7 @@
 
 /obj/item/weapon/dnainjector/stuttmut
 	name = "\improper DNA injector (Stutt.)"
-	desc = "Makes you s-s-stuttterrr"
+	desc = "Makes you s-s-stuttterrr."
 	datatype = DNA2_BUF_SE
 	value = 0xFFF
 	//block = 9

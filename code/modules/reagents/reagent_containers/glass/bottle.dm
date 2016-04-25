@@ -157,7 +157,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/pacid
 	name = "Polytrinic Acid Bottle"
-	desc = "A small bottle. Contains a small amount of Polytrinic Acid"
+	desc = "A small bottle. Contains a small amount of Polytrinic Acid."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 	New()

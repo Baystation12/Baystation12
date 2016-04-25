@@ -3,17 +3,17 @@ datum/unit_test/loadout_test_shall_have_name_cost_path
 
 datum/unit_test/loadout_test_shall_have_name_cost_path/start_test()
 	var/failed = 0
-	for(var/geartype in subtypesof(/datum/gear))
-		var/datum/gear/G = geartype
+	for(var/gear_name in gear_datums)
+		var/datum/gear/G = gear_datums[gear_name]
 
-		if(!initial(G.display_name))
-			log_unit_test("[G]: Loadout - Missing display name.")
+		if(!G.display_name)
+			log_unit_test("[G]: Missing display name.")
 			failed = 1
-		else if(!initial(G.cost))
-			log_unit_test("[G]: Loadout - Missing cost.")
+		else if(G.cost <= 0)
+			log_unit_test("[G]: Invalid cost.")
 			failed = 1
-		else if(!initial(G.path))
-			log_unit_test("[G]: Loadout - Missing path definition.")
+		else if(!G.path)
+			log_unit_test("[G]: Missing path definition.")
 			failed = 1
 
 	if(failed)
@@ -21,3 +21,30 @@ datum/unit_test/loadout_test_shall_have_name_cost_path/start_test()
 	else
 		pass("All /datum/gear definitions had correct settings.")
 	return  1
+
+datum/unit_test/loadout_test_shall_have_valid_icon_states
+	name = "LOADOUT: Entries shall have valid icon states"
+
+datum/unit_test/loadout_test_shall_have_valid_icon_states/start_test()
+	var/failed = FALSE
+	for(var/gear_name in gear_datums)
+		var/datum/gear/G = gear_datums[gear_name]
+		if(!type_has_valid_icon_state(G.path))
+			log_unit_test("[G]: [G.path] has a missing icon state.")
+			failed = TRUE
+		for(var/datum/gear_tweak/path/p in G.gear_tweaks)
+			for(var/path_name in p.valid_paths)
+				var/path_type = p.valid_paths[path_name]
+				if(!type_has_valid_icon_state(path_type))
+					log_unit_test("[G]: [path_type] has a missing icon state.")
+					failed = TRUE
+
+	if(failed)
+		fail("One or more /datum/gear definitions had paths with invalid icon states.")
+	else
+		pass("All /datum/gear definitions had correct icon states.")
+	return  1
+
+/proc/type_has_valid_icon_state(var/atom/type)
+	var/atom/A = type
+	return (initial(A.icon_state) in icon_states(initial(A.icon)))

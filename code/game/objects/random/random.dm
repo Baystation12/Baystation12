@@ -1,6 +1,6 @@
 /obj/random
 	name = "random object"
-	desc = "This item type is used to spawn random objects at round-start"
+	desc = "This item type is used to spawn random objects at round-start."
 	icon = 'icons/misc/mark.dmi'
 	icon_state = "rup"
 	var/spawn_nothing_percentage = 0 // this variable determines the likelyhood that this random object will not spawn anything
@@ -11,7 +11,7 @@
 	..()
 	if (!prob(spawn_nothing_percentage))
 		spawn_item()
-		
+
 /obj/random/initialize()
 	..()
 	qdel(src)
@@ -29,7 +29,7 @@
 
 /obj/random/single
 	name = "randomly spawned object"
-	desc = "This item type is used to randomly spawn a given object at round-start"
+	desc = "This item type is used to randomly spawn a given object at round-start."
 	icon_state = "x3"
 	var/spawn_object = null
 	item_to_spawn()
@@ -38,7 +38,7 @@
 
 /obj/random/tool
 	name = "random tool"
-	desc = "This is a random tool"
+	desc = "This is a random tool."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "welder"
 	item_to_spawn()

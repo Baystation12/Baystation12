@@ -2116,7 +2116,7 @@
 "OJ" = (/obj/effect/landmark{name = "endgame_exit"},/turf/unsimulated/beach/sand,/area/beach)
 "OK" = (/obj/machinery/chem_master,/turf/unsimulated/floor{icon_state = "vault"; dir = 1},/area/rescue_base/base)
 "OL" = (/obj/structure/bed/chair/office/light{dir = 4},/turf/unsimulated/floor{icon_state = "dark"},/area/rescue_base/base)
-"OM" = (/obj/structure/table/standard,/obj/item/clothing/under/rainbow,/obj/item/clothing/glasses/sunglasses,/obj/item/clothing/head/collectable/petehat{pixel_y = 5},/turf/unsimulated/beach/sand,/area/beach)
+"OM" = (/obj/structure/table/standard,/obj/item/clothing/under/color/rainbow,/obj/item/clothing/glasses/sunglasses,/obj/item/clothing/head/collectable/petehat{pixel_y = 5},/turf/unsimulated/beach/sand,/area/beach)
 "ON" = (/obj/structure/table/reinforced,/obj/item/weapon/board,/turf/unsimulated/floor{icon_state = "dark"},/area/rescue_base/base)
 "OO" = (/obj/structure/table/reinforced,/obj/item/weapon/stamp/centcomm,/obj/item/weapon/pen,/turf/unsimulated/floor{icon_state = "dark"},/area/rescue_base/base)
 "OP" = (/obj/structure/bed/chair/office/light{dir = 8},/turf/unsimulated/floor{icon_state = "dark"},/area/rescue_base/base)

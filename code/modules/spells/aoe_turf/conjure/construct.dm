@@ -2,7 +2,7 @@
 
 /spell/aoe_turf/conjure/construct
 	name = "Artificer"
-	desc = "This spell conjures a construct which may be controlled by Shades"
+	desc = "This spell conjures a construct which may be controlled by Shades."
 
 	school = "conjuration"
 	charge_max = 600
@@ -126,7 +126,7 @@
 
 //Code for the Juggernaut construct's forcefield, that seemed like a good place to put it.
 /obj/effect/forcefield/cult
-	desc = "That eerie looking obstacle seems to have been pulled from another dimension through sheer force"
+	desc = "That eerie looking obstacle seems to have been pulled from another dimension through sheer force."
 	name = "Juggerwall"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "m_shield_cult"

@@ -1,0 +1,9 @@
+author: HarpyEagle
+
+delete-after: True
+
+changes: 
+  - bugfix: "Rewrote how the floating animation is updated, the animation now correctly updates when leaving space, activating/deactivating magboots, and buckling/unbuckling."
+  - bugfix: "Examining people in crit now again indicates that they are not breathing."
+  - bugfix: "Fixed spears giving slashing cuts and not puncture wounds."
+  - bugfix: "Fixed wounds not bleeding when they are supposed to."

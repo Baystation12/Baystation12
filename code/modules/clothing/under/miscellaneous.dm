@@ -21,7 +21,7 @@
 
 /obj/item/clothing/under/scratch
 	name = "white suit"
-	desc = "A white suit, suitable for an excellent host"
+	desc = "A white suit, suitable for an excellent host."
 	icon_state = "scratch"
 	item_state = "scratch"
 	worn_state = "scratch"
@@ -64,7 +64,7 @@
 
 //This set of uniforms looks fairly fancy and is generally used for high-ranking NT personnel from what I've seen, so lets give them appropriate ranks.
 /obj/item/clothing/under/rank/centcom
-	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Captain.\""
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Captain.\"."
 	name = "\improper Officer's Dress Uniform"
 	icon_state = "officer"
 	item_state = "lawyer_black"
@@ -72,7 +72,7 @@
 	displays_id = 0
 
 /obj/item/clothing/under/rank/centcom_officer
-	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral.\""
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral.\"."
 	name = "\improper Officer's Dress Uniform"
 	icon_state = "officer"
 	item_state = "lawyer_black"
@@ -80,7 +80,7 @@
 	displays_id = 0
 
 /obj/item/clothing/under/rank/centcom_captain
-	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral-Executive.\""
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral-Executive.\"."
 	name = "\improper Officer's Dress Uniform"
 	icon_state = "centcom"
 	item_state = "lawyer_black"
@@ -135,16 +135,14 @@
 	worn_state = "johnny"
 	item_state = "johnny"
 
-/obj/item/clothing/under/rainbow
+/obj/item/clothing/under/color/rainbow
 	name = "rainbow"
-	desc = "rainbow"
 	icon_state = "rainbow"
 	item_state = "rainbow"
 	worn_state = "rainbow"
 
 /obj/item/clothing/under/cloud
 	name = "cloud"
-	desc = "cloud"
 	icon_state = "cloud"
 	worn_state = "cloud"
 
@@ -252,7 +250,7 @@
 
 /obj/item/clothing/under/kilt
 	name = "kilt"
-	desc = "Includes shoes and plaid"
+	desc = "Includes shoes and plaid."
 	icon_state = "kilt"
 	item_state = "kilt"
 	worn_state = "kilt"

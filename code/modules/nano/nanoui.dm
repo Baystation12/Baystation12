@@ -185,7 +185,9 @@ nanoui is used to open and update nano browser uis
 			"autoUpdateLayout" = auto_update_layout,
 			"autoUpdateContent" = auto_update_content,
 			"showMap" = show_map,
+			"mapName" = using_map.path,
 			"mapZLevel" = map_z_level,
+			"mapZLevels" = using_map.map_levels,
 			"user" = list("name" = user.name)
 		)
 	return config_data
@@ -487,8 +489,12 @@ nanoui is used to open and update nano browser uis
 		map_update = 1
 
 	if(href_list["mapZLevel"])
-		set_map_z_level(text2num(href_list["mapZLevel"]))
-		map_update = 1
+		var/map_z = text2num(href_list["mapZLevel"])
+		if(map_z in using_map.map_levels)
+			set_map_z_level(map_z)
+			map_update = 1
+		else
+			return
 
 	if ((src_object && src_object.Topic(href, href_list, state)) || map_update)
 		nanomanager.update_uis(src_object) // update all UIs attached to src_object

@@ -1,5 +1,5 @@
 /datum/game_mode/changeling
-	name = "changeling"
+	name = "Changeling"
 	round_description = "There are alien changelings on the station. Do not let the changelings succeed!"
 	extended_round_description = "Life always finds a way. However, life can sometimes take a more disturbing route. \
 		Humanity's extensive knowledge of xeno-biological specimens has made them confident and arrogant. Yet \
