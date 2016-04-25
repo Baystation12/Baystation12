@@ -4,6 +4,7 @@
 	icon_state = "energystun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	max_shots = 10
+	fire_delay = 10 // To balance for the fact that it is a pistol and can be used one-handed without penalty
 
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
@@ -28,6 +29,7 @@
 	force = 8 //looks heavier than a pistol
 	self_recharge = 1
 	modifystate = null
+	requires_two_hands = 1 //bulkier than an e-gun
 	
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),

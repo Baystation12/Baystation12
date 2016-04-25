@@ -64,7 +64,7 @@
 	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
 	var/list/dispersion = list(0)
 	var/requires_two_hands
-	var/wielded_icon = "gun_wielded"
+	var/wielded_item_state
 
 	var/next_fire_time = 0
 
@@ -94,7 +94,8 @@
 		if(istype(M))
 			if((M.l_hand == src && !M.r_hand) || (M.r_hand == src && !M.l_hand))
 				name = "[initial(name)] (wielded)"
-				item_state = wielded_icon
+				if(wielded_item_state)
+					item_state = wielded_item_state
 			else
 				name = initial(name)
 				item_state = initial(item_state)
@@ -179,8 +180,8 @@
 	var/held_disp_mod = 0
 	if(requires_two_hands)
 		if((user.l_hand == src && user.r_hand) || (user.r_hand == src && user.l_hand))
-			held_acc_mod = -3
-			held_disp_mod = 3
+			held_acc_mod = -requires_two_hands
+			held_disp_mod = requires_two_hands*0.25 //dispersion per point of two-handedness
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.

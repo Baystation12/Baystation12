@@ -8,6 +8,7 @@
 	force = 10
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
+	requires_two_hands = 4
 	charge_cost = 300
 	max_shots = 10
 	projectile_type = /obj/item/projectile/ion
