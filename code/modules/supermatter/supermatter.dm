@@ -361,16 +361,21 @@
 	Consume(AM)
 
 
-/obj/machinery/power/supermatter/proc/Consume(var/mob/living/user)
-	if(istype(user))
-		user.dust()
+/obj/machinery/power/supermatter/proc/Consume(var/atom/movable/AM)
+	if(istype(AM, /obj/effect/decal/cleanable/ash))
+		return
+
+	if(isliving(AM))
+		var/mob/living/L = AM
+		L.dust()
 		power += 200
 	else
-		qdel(user)
+		new /obj/effect/decal/cleanable/ash(get_turf(AM.loc))
+		qdel(AM)
 
 	power += 200
 
-		//Some poor sod got eaten, go ahead and irradiate people nearby.
+	//Some poor sod got eaten, go ahead and irradiate people nearby.
 	for(var/mob/living/l in range(10))
 		if(l in view())
 			l.show_message("<span class=\"warning\">As \the [src] slowly stops resonating, you find your skin covered in new radiation burns.</span>", 1,\

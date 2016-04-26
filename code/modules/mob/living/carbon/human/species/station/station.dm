@@ -16,6 +16,7 @@
 
 	spawn_flags = CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	remains_type = /obj/item/remains/human
 
 /datum/species/human/get_bodytype()
 	return "Human"
@@ -292,6 +293,7 @@
 	knockout_message = "encounters a hardware fault and suddenly reboots!"
 	halloss_message = "encounters a hardware fault and suddenly reboots."
 	halloss_message_self = "ERROR: Unrecoverable machine check exception.<BR>System halted, rebooting..."
+	remains_type = /obj/item/remains/robot
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1

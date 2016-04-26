@@ -16,7 +16,6 @@
 	blood_color = "#05FF9B"
 	flesh_color = "#05FFFB"
 
-	remains_type = /obj/effect/decal/cleanable/ash
 	death_message = "rapidly loses cohesion, splattering across the ground..."
 
 	has_organ = list(
