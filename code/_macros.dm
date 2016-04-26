@@ -53,7 +53,7 @@
 
 #define to_chat(target, message) target << message
 
-#define MAP_IMAGE_PATH "maps/[using_map.path]/"
+#define MAP_IMAGE_PATH "nano/images/[using_map.path]/"
 
 #define map_image_file_name(z_level) "[using_map.path]-[z_level].png"
 
