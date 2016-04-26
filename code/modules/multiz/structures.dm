@@ -11,7 +11,7 @@
 	opacity = 0
 	anchored = 1
 
-	var/allowed_directions = SOUTH //south - down north - up
+	var/allowed_directions = DOWN
 	var/obj/structure/ladder/target_up
 	var/obj/structure/ladder/target_down
 
@@ -19,7 +19,7 @@
 	// the upper will connect to the lower
 	if(allowed_directions && SOUTH) //we only want to do the top one, as it will initialize the ones before it.
 		for(var/obj/structure/ladder/L in GetBelow(src))
-			if(L.allowed_directions && NORTH)
+			if(L.allowed_directions && UP)
 				target_down = L
 				L.target_up = src
 				return
@@ -76,13 +76,13 @@
 	moveOccupant(M)
 
 /obj/structure/ladder/update_icon()
-	icon_state = "ladder[allowed_directions & NORTH][allowed_directions & SOUTH]"
+	icon_state = "ladder[allowed_directions & UP][allowed_directions & DOWN]"
 
 /obj/structure/ladder/up
-	allowed_directions = NORTH
+	allowed_directions = UP
 
 /obj/structure/ladder/updown
-	allowed_directions = 3 //NORTH + SOUTH
+	allowed_directions = UP|DOWN
 
 
 /obj/structure/stairs
