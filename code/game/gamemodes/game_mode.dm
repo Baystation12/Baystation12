@@ -195,6 +195,8 @@ var/global/list/additional_antag_types = list()
 ///post_setup()
 /datum/game_mode/proc/post_setup()
 
+	next_spawn = world.time + rand(min_autotraitor_delay, max_autotraitor_delay)
+
 	refresh_event_modifiers()
 
 	spawn (ROUNDSTART_LOGOUT_REPORT_TIME)
