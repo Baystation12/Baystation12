@@ -181,5 +181,5 @@
 // Storage
 #define base_storage_cost(w_class) (2**(w_class-1)) //1,2,4,8,16,...
 
-#define DEFAULT_BACKPACK_STORAGE 22
+#define DEFAULT_BACKPACK_STORAGE 28
 #define DEFAULT_BOX_STORAGE 14

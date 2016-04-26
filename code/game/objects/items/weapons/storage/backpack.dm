@@ -152,7 +152,7 @@
 	item_state_slots = null
 	w_class = 5
 	slowdown = 3 //wear it on your back if you must, best to carry it in hands to avoid any slowdown at all.
-	max_storage_space = 32
+	max_storage_space = DEFAULT_BACKPACK_STORAGE + 10
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie
 	name = "black dufflebag"
