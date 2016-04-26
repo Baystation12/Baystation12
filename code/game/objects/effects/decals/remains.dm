@@ -22,7 +22,7 @@
 	icon_state = "mouse"
 
 /obj/item/remains/lizard
-	desc = "They look like the remains of a small rodent."
+	desc = "They look like the remains of a small lizard."
 	icon_state = "lizard"
 
 /obj/item/remains/attack_hand(mob/user as mob)

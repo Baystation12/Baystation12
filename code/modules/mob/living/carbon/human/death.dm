@@ -18,8 +18,10 @@
 	gibs(loc, dna, null, species.flesh_color, species.blood_color)
 
 /mob/living/carbon/human/dust()
+	if(shoes)
+		unEquip(shoes)
 	if(species)
-		..(species.dusted_anim, species.remains_type)
+		..(species.dusted_anim)
 	else
 		..()
 
