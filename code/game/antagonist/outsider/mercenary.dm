@@ -3,7 +3,6 @@ var/datum/antagonist/mercenary/mercs
 /datum/antagonist/mercenary
 	id = MODE_MERCENARY
 	role_text = "Mercenary"
-	bantype = "operative"
 	antag_indicator = "synd"
 	role_text_plural = "Mercenaries"
 	landmark_id = "Syndicate-Spawn"

@@ -29,7 +29,7 @@
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		. += "<tr><td>[antag.role_text]: </td><td>"
-		if(jobban_isbanned(preference_mob(), antag.bantype))
+		if(jobban_isbanned(preference_mob(), antag.id) || (antag.id == MODE_MALFUNCTION && jobban_isbanned(preference_mob(), "AI")))
 			. += "<span class='danger'>\[BANNED\]</span><br>"
 		else if(antag.role_type in pref.be_special_role)
 			. += "<b>High</b> / <a href='?src=\ref[src];del_special=[antag.role_type]'>Low</a> / <a href='?src=\ref[src];add_never=[antag.role_type]'>Never</a></br>"
