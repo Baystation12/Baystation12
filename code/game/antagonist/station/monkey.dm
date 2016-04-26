@@ -1,6 +1,7 @@
 // Notes towards a monkey mode to reduce snowflakes for downstream. Will not compile.
 
 /datum/antagonist/monkey
+	bantype = "monkey"
 	role_text = "Rabid Monkey"
 	role_text_plural = "Rabid Monkeys"
 	mob_type = /mob/living/carbon/monkey

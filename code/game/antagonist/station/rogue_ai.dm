@@ -1,6 +1,7 @@
 var/datum/antagonist/rogue_ai/malf
 
 /datum/antagonist/rogue_ai
+	bantype = "malf"
 	id = MODE_MALFUNCTION
 	role_text = "Rampant AI"
 	role_text_plural = "Rampant AIs"

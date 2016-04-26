@@ -2,6 +2,7 @@ var/datum/antagonist/deathsquad/deathsquad
 
 /datum/antagonist/deathsquad
 	id = MODE_DEATHSQUAD
+	bantype = "deathsquad"
 	role_text = "Death Commando"
 	role_text_plural = "Death Commandos"
 	welcome_text = "You work in the service of corporate Asset Protection, answering directly to the Board of Directors."

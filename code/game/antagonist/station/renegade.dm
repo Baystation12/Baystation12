@@ -1,6 +1,7 @@
 var/datum/antagonist/renegade/renegades
 
 /datum/antagonist/renegade
+	bantype = "renegade"
 	role_text = "Renegade"
 	role_text_plural = "Renegades"
 	welcome_text = "Something's going to go wrong today, you can just feel it. You're paranoid, you've got a gun, and you're going to survive."

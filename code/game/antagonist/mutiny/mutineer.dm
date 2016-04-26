@@ -3,6 +3,7 @@ var/datum/antagonist/mutineer/mutineers
 /datum/antagonist/mutineer
 	role_type = BE_MUTINEER
 	role_text = "Mutineer"
+	bantype = "revolutionary"
 	role_text_plural = "Mutineers"
 	id = MODE_MUTINEER
 	antag_indicator = "mutineer"
