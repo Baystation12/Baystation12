@@ -1,7 +1,6 @@
 var/datum/antagonist/highlander/highlanders
 
 /datum/antagonist/highlander
-	bantype = "highlander"
 	role_text = "Highlander"
 	role_text_plural = "Highlanders"
 	welcome_text = "There can be only one."

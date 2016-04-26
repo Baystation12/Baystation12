@@ -1,7 +1,6 @@
 var/datum/antagonist/rogue_ai/malf
 
 /datum/antagonist/rogue_ai
-	bantype = "malf"
 	id = MODE_MALFUNCTION
 	role_text = "Rampant AI"
 	role_text_plural = "Rampant AIs"
@@ -21,6 +20,11 @@ var/datum/antagonist/rogue_ai/malf
 	..()
 	malf = src
 
+/datum/antagonist/rogue_ai/can_become_antag(var/datum/mind/player, var/ignore_role)
+	. = ..(player, ignore_role)
+	if(jobban_isbanned(player.current, "AI"))
+		return 0
+	return .
 
 /datum/antagonist/rogue_ai/build_candidate_list()
 	..()

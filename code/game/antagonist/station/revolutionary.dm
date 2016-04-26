@@ -4,7 +4,6 @@ var/datum/antagonist/revolutionary/revs
 	id = MODE_REVOLUTIONARY
 	role_text = "Head Revolutionary"
 	role_text_plural = "Revolutionaries"
-	bantype = "revolutionary"
 	feedback_tag = "rev_objective"
 	antag_indicator = "rev_head"
 	welcome_text = "Down with the capitalists! Down with the Bourgeoise!"
