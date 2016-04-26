@@ -112,8 +112,8 @@
 	Consume(AM)
 
 
-/turf/unsimulated/wall/supermatter/proc/Consume(var/mob/living/user)
-	if(isobserver(user))
+/turf/unsimulated/wall/supermatter/proc/Consume(var/atom/movable/thing)
+	if(isobserver(thing))
 		return
 
-	qdel(user)
+	qdel(thing)
