@@ -51,7 +51,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 				emergency_shuttle_docked.Announce(replacetext(using_map.emergency_shuttle_docked_message, "%ETD%", "[estimated_time] minute\s"))
 			else
 				estimated_time = round(estimate_launch_time()/60,1)
-				priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_docked_message, "%Dock_name%", "[dock_name]"),  "%ETD%", "[estimated_time] minute\s"))
+				priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_docked_message, "%dock_name%", "[dock_name]"),  "%ETD%", "[estimated_time] minute\s"))
 			if(config.announce_shuttle_dock_to_irc)
 				send2mainirc("The shuttle has docked with the station. It will depart in approximately [estimated_time] minute\s.")
 
@@ -100,7 +100,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	//reset the shuttle transit time if we need to
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
 
-	priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_called_message, "%Dock_name%", "[dock_name]"),  "%ETA%", "[round(estimate_arrival_time()/60)] minute\s"))
+	priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_called_message, "%dock_name%", "[dock_name]"),  "%ETA%", "[round(estimate_arrival_time()/60)] minute\s"))
 //recalls the shuttle
 /datum/emergency_shuttle_controller/proc/recall()
 	if (!can_recall()) return
