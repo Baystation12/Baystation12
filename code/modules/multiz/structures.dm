@@ -11,21 +11,22 @@
 	opacity = 0
 	anchored = 1
 
+	var/allowed_directions = SOUTH //south - down north - up
 	var/obj/structure/ladder/target_up
 	var/obj/structure/ladder/target_down
 
 /obj/structure/ladder/initialize()
 	// the upper will connect to the lower
-	if(icon_state == "ladderup")
-		return
+	if(allowed_directions && SOUTH) //we only want to do the top one, as it will initialize the ones before it.
 		for(var/obj/structure/ladder/L in GetBelow(src))
-			if(L.icon_state != "ladderdown")
+			if(L.allowed_directions && NORTH)
 				target_down = L
 				L.target_up = src
 				return
+	update_icon()
 
 /obj/structure/ladder/Destroy()
-	if(target_down && icon_state == "ladderdown")
+	if(target_down)
 		target_down.target_up = null
 		qdel(target_down)
 	return ..()
@@ -73,6 +74,16 @@
 
 /obj/structure/ladder/attack_ghost(var/mob/M)
 	moveOccupant(M)
+
+/obj/structure/ladder/update_icon()
+	icon_state = "ladder[allowed_directions & NORTH][allowed_directions & SOUTH]"
+
+/obj/structure/ladder/up
+	allowed_directions = NORTH
+
+/obj/structure/ladder/updown
+	allowed_directions = 3 //NORTH + SOUTH
+
 
 /obj/structure/stairs
 	name = "Stairs"
