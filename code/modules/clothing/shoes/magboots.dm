@@ -44,24 +44,18 @@
 	user.update_floating()
 
 /obj/item/clothing/shoes/magboots/mob_can_equip(mob/user)
-	if(!..())
-		if(shoes) 	//Put the old shoes back on if the check fails.
-			if(user.equip_to_slot_if_possible(shoes, slot_shoes, disable_warning = 1))
-				shoes.forceMove(get_turf(user)) //well if that fails then drop them on the floor
-			shoes = null
-		return 0
+	. = ..()
+	if(.)
+		var/obj/item/clothing/shoes/S = user.get_equipped_item(slot_shoes)
+		if(istype(S) && S.overshoes)
+			user << "You are unable to wear \the [src] as \the [S] are in the way."
+			return 0
 
 /obj/item/clothing/shoes/magboots/proc/cover_shoes(obj/item/clothing/shoes/S, mob/user)
-	if(S.overshoes)
-		user << "You are unable to wear \the [src] as \the [S] are in the way."
+	if(!user.removeItem(S, src))	//Remove the old shoes so you can put on the magboots.
 		return 0
-
 	shoes = S
-	user.drop_from_inventory(shoes)	//Remove the old shoes so you can put on the magboots.
-	shoes.forceMove(src)
-
-	if (shoes)
-		user << "You slip \the [src] on over \the [shoes]."
+	user << "You slip \the [src] on over \the [shoes]."
 	set_slowdown()
 	wearer = user
 	return 1

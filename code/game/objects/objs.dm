@@ -100,11 +100,12 @@
 		// check for TK users
 
 		if (istype(usr, /mob/living/carbon/human))
-			if(istype(usr.l_hand, /obj/item/tk_grab) || istype(usr.r_hand, /obj/item/tk_grab/))
-				if(!(usr in nearby))
-					if(usr.client && usr.machine==src)
+			var/mob/living/carbon/human/H = usr
+			if(H.get_type_in_hands(/obj/item/tk_grab))
+				if(!(H in nearby))
+					if(H.client && H.machine==src)
 						is_in_use = 1
-						src.attack_hand(usr)
+						src.attack_hand(H)
 		in_use = is_in_use
 
 /obj/proc/updateDialog()

@@ -104,8 +104,7 @@
 				if(ammo_magazine)
 					user << "<span class='warning'>[src] already has a magazine loaded.</span>" //already a magazine here
 					return
-				user.remove_from_mob(AM)
-				AM.loc = src
+				user.removeItem(AM, src)
 				ammo_magazine = AM
 				user.visible_message("[user] inserts [AM] into [src].", "<span class='notice'>You insert [AM] into [src].</span>")
 				playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
@@ -134,8 +133,7 @@
 			user << "<span class='warning'>[src] is full.</span>"
 			return
 
-		user.remove_from_mob(C)
-		C.loc = src
+		user.removeItem(C, src)
 		loaded.Insert(1, C) //add to the head of the list
 		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
 		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)

@@ -208,8 +208,7 @@
 				else
 					return 0
 			else
-				user.drop_from_inventory(ai)
-				ai.forceMove(src)
+				user.removeItem(ai, src)
 				ai_card = ai
 				ai_mob << "<font color='blue'>You have been transferred to \the [holder]'s [src].</font>"
 				user << "<font color='blue'>You load [ai_mob] into \the [holder]'s [src].</font>"

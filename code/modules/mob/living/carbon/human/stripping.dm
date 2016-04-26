@@ -79,8 +79,8 @@
 
 	if(stripping)
 		admin_attack_log(user, src, "Attempted to remove \a [target_slot]", "Target of an attempt to remove \a [target_slot].", "attempted to remove \a [target_slot] from")
-		unEquip(target_slot)
-	else if(user.unEquip(held))
+		removeItem(target_slot)
+	else if(user.removeItem(held))
 		equip_to_slot_if_possible(held, text2num(slot_to_strip), 0, 1, 1)
 		if(held.loc != src)
 			user.put_in_hands(held)
@@ -91,9 +91,9 @@
 		user << "<span class='warning'>\The [src] has nothing in their pockets.</span>"
 		return
 	if(r_store)
-		unEquip(r_store)
+		removeItem(r_store)
 	if(l_store)
-		unEquip(l_store)
+		removeItem(l_store)
 	visible_message("<span class='danger'>\The [user] empties \the [src]'s pockets!</span>")
 
 // Modify the current target sensor level.

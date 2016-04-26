@@ -18,8 +18,7 @@
 
 	if(istype(W, /obj/item/weapon/forensics/swab)|| istype(W, /obj/item/weapon/sample/fibers) || istype(W, /obj/item/weapon/sample/print))
 		user << "<span class='notice'>You insert \the [W] into the microscope.</span>"
-		user.unEquip(W)
-		W.forceMove(src)
+		user.removeItem(W, src)
 		sample = W
 		update_icon()
 		return

@@ -24,7 +24,8 @@ Basically: I can use it to target things where I click. I can then pass these ta
 
 /obj/item/magic_hand/afterattack(atom/A, mob/living/user)
 	if(!hand_spell) //no spell? Die.
-		user.drop_from_inventory(src)
+		qdel(src)
+		return
 
 	if(!hand_spell.valid_target(A,user))
 		return
@@ -43,15 +44,15 @@ Basically: I can use it to target things where I click. I can then pass these ta
 		if(hand_spell.click_delay)
 			user.setClickCooldown(hand_spell.move_delay)
 		if(!casts)
-			user.drop_from_inventory(src)
+			user.forceRemoveItem(src)
 			return
 		user << "[casts]/[hand_spell.casts] charges left."
 
 /obj/item/magic_hand/throw_at() //no throwing pls
-	usr.drop_from_inventory(src)
+	qdel(src)
 
 /obj/item/magic_hand/dropped() //gets deleted on drop
-	loc = null
+	. = ..()
 	qdel(src)
 
 /obj/item/magic_hand/Destroy() //better save than sorry.

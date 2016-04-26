@@ -64,7 +64,7 @@
 			"<span class='danger'>\The [src] manages to remove \the [handcuffed]!</span>",
 			"<span class='notice'>You successfully remove \the [handcuffed].</span>"
 			)
-		drop_from_inventory(handcuffed)
+		removeItem(handcuffed)
 
 /mob/living/carbon/proc/escape_legcuffs()
 	if(!canClick())
@@ -99,7 +99,7 @@
 			"<span class='notice'>You successfully remove \the [legcuffed].</span>"
 			)
 
-		drop_from_inventory(legcuffed)
+		removeItem(legcuffed)
 		legcuffed = null
 		update_inv_legcuffed()
 

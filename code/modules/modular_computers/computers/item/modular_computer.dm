@@ -481,9 +481,11 @@
 		if(card_slot.stored_card)
 			user << "You try to insert \the [I] into \the [src], but it's ID card slot is occupied."
 			return
-		user.drop_from_inventory(I)
+		
+		if(!user.removeItem(I, src))
+			return
+
 		card_slot.stored_card = I
-		I.forceMove(src)
 		update_uis()
 		user << "You insert \the [I] into \the [src]."
 		return
@@ -601,10 +603,9 @@
 		found = 1
 		processor_unit = H
 	if(found)
-		user << "You install \the [H] into \the [src]"
-		H.holder2 = src
-		user.drop_from_inventory(H)
-		H.forceMove(src)
+		if(user.removeItem(H, src))
+			user << "You install \the [H] into \the [src]"
+			H.holder2 = src
 
 // Uninstalls component. Found and Critical vars may be passed by parent types, if they have additional hardware.
 /obj/item/modular_computer/proc/uninstall_component(var/mob/living/user, var/obj/item/weapon/computer_hardware/H, var/found = 0, var/critical = 0)

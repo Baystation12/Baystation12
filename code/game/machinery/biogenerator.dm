@@ -52,8 +52,7 @@
 		if(beaker)
 			user << "<span class='notice'>]The [src] is already loaded.</span>"
 		else
-			user.remove_from_mob(O)
-			O.loc = src
+			user.removeItem(O, src)
 			beaker = O
 			updateUsrDialog()
 	else if(processing)
@@ -84,8 +83,7 @@
 		if(i >= 10)
 			user << "<span class='notice'>\The [src] is full! Activate it.</span>"
 		else
-			user.remove_from_mob(O)
-			O.loc = src
+			user.removeItem(O, src)
 			user << "<span class='notice'>You put \the [O] in \the [src]</span>"
 	update_icon()
 	return

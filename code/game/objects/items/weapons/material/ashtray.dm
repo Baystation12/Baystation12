@@ -50,8 +50,7 @@ var/global/list/ashtray_cache = list()
 		if (contents.len >= max_butts)
 			user << "\The [src] is full."
 			return
-		user.remove_from_mob(W)
-		W.loc = src
+		user.removeItem(W, src)
 
 		if (istype(W,/obj/item/clothing/mask/smokable/cigarette))
 			var/obj/item/clothing/mask/smokable/cigarette/cig = W

@@ -4,7 +4,7 @@
 	icon_state = "emerg"
 
 	var/obj/item/weapon/tank/tank
-	var/obj/item/clothing/mask/gas/contained
+	var/obj/item/clothing/mask/gas/attached_mask
 	var/mob/living/carbon/breather
 
 	var/spawn_type = /obj/item/weapon/tank/emergency_oxygen/engi
@@ -16,17 +16,15 @@
 /obj/machinery/oxygen_pump/New()
 	..()
 	tank = new spawn_type (src)
-	contained = new (src)
+	attached_mask = new (src)
 
 /obj/machinery/oxygen_pump/Destroy()
 	if(breather)
 		breather.internals = null
 	if(tank)
 		qdel(tank)
-	if(breather)
-		breather.remove_from_mob(contained)
-	qdel(contained)
-	contained = null
+	qdel(attached_mask)
+	attached_mask = null
 	breather = null
 	return ..()
 
@@ -51,11 +49,11 @@
 			tank.add_fingerprint(user)
 			tank = null
 		else user << "<span class='warning'>There is no tank in \the [src]!</span>"
-	else if(contained.loc == src && !breather)
+	else if(attached_mask.loc == src && !breather)
 		if(user.wear_mask)
 			user << "<span class='notice'>You're already wearing a mask!</span>"
 			return
-		user.visible_message("<span class='notice'>\The [user] takes \the [contained] out of \the [src]!</span>", "<span class='notice'>You take \the [contained] out of \the [src]!</span>")
+		user.visible_message("<span class='notice'>\The [user] takes \the [attached_mask] out of \the [src]!</span>", "<span class='notice'>You take \the [attached_mask] out of \the [src]!</span>")
 		attach_mask(user)
 	else if(user == breather)
 		if(tank)
@@ -63,14 +61,14 @@
 		else
 			user << "<span class='warning'>There is no tank installed!</span>"
 	else
-		user << "<span class='notice'>\The [contained] has already been taken out!</span>"
+		user << "<span class='notice'>\The [attached_mask] has already been taken out!</span>"
 
 /obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/carbon/C)
 	if(C && istype(C))
-		contained.forceMove(get_turf(C))
-		C.equip_to_slot(contained, slot_wear_mask)
+		attached_mask.forceMove(get_turf(C))
+		C.equip_to_slot(attached_mask, slot_wear_mask)
 		if(tank)
-			tank.forceMove(C)
+			tank.forceMove(C) //Awful
 		breather = C
 		spawn(1)
 		if(!breather.internal && tank)
@@ -78,6 +76,13 @@
 			breather.internals.icon_state = "internal1"
 		use_power = 2
 
+/obj/machinery/oxygen_pump/proc/detach_mask()
+	if(tank)
+		tank.forceMove(src)
+	if(breather.removeItem(attached_mask, src))
+		src.visible_message("<span class='notice'>\The [attached_mask] rapidly retracts back into \the [src]!</span>")
+		breather = null
+		use_power = 1
 
 /obj/machinery/oxygen_pump/attackby(var/mob/user, var/obj/item/I)
 	if(istype(I, /obj/item/weapon/screwdriver))
@@ -93,15 +98,10 @@
 			tank = I
 			user.visible_message("<span class='notice'>\The [user] installs \the [tank] into \the [src].</span>", "<span class='notice'>You install \the [tank] into \the [src].</span>")
 			src.add_fingerprint(user)
-	if(I == contained)
-		user << "<span class='notice'>You place \the [contained] back into \the [src].</span>"
-		if(tank)
-			tank.forceMove(src)
-		breather.remove_from_mob(contained)
-		contained.forceMove(src)
-		src.visible_message("<span class='notice'>\The [contained] rapidly retracts back into \the [src]!</span>")
-		breather = null
-		use_power = 1
+	if(I == attached_mask)
+		user << "<span class='notice'>You place \the [attached_mask] back into \the [src].</span>"
+		detach_mask()
+
 
 /obj/machinery/oxygen_pump/examine(var/mob/user)
 	..()
@@ -111,17 +111,11 @@
 		user << "<span class='warning'>It is missing a tank!</span>"
 	return
 
-
+//TODO listen for move events instead of Adjacent()
 /obj/machinery/oxygen_pump/process()
 	if(breather)
-		if(!Adjacent(breather) || breather.wear_mask != contained)
-			if(tank)
-				tank.forceMove(src)
-			breather.remove_from_mob(contained)
-			contained.forceMove(src)
-			src.visible_message("<span class='notice'>\The [contained] rapidly retracts back into \the [src]!</span>")
-			breather = null
-			use_power = 1
+		if(!Adjacent(breather) || breather.wear_mask != attached_mask)
+			detach_mask()
 		else if(!breather.internal && tank)
 			breather.internal = tank
 			breather.internals.icon_state = "internal1"

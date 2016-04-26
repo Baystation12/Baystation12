@@ -1,6 +1,6 @@
-/obj/item/weapon/rig/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/weapon/rig/attackby(obj/item/W as obj, mob/living/user as mob)
 
-	if(!istype(user,/mob/living)) return 0
+	if(!istype(user)) return 0
 
 	if(electrified != 0)
 		if(shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
@@ -56,7 +56,7 @@
 				user << "\The [src] already has a tank installed."
 				return
 
-			if(!user.unEquip(W)) return
+			if(!user.removeItem(W)) return
 			air_supply = W
 			W.forceMove(src)
 			user << "You slot [W] into [src] and tighten the connecting valve."
@@ -84,7 +84,7 @@
 				return
 			if(!user || !W)
 				return
-			if(!user.unEquip(mod)) return
+			if(!user.removeItem(mod)) return
 			user << "You install \the [mod] into \the [src]."
 			installed_modules |= mod
 			mod.forceMove(src)
@@ -94,7 +94,7 @@
 
 		else if(!cell && istype(W,/obj/item/weapon/cell))
 
-			if(!user.unEquip(W)) return
+			if(!user.removeItem(W)) return
 			user << "You jack \the [W] into \the [src]'s battery mount."
 			W.forceMove(src)
 			src.cell = W

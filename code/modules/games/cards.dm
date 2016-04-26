@@ -80,12 +80,8 @@
 		usr << "There are no cards in the deck."
 		return
 
-	var/obj/item/weapon/hand/H
-	if(user.l_hand && istype(user.l_hand,/obj/item/weapon/hand))
-		H = user.l_hand
-	else if(user.r_hand && istype(user.r_hand,/obj/item/weapon/hand))
-		H = user.r_hand
-	else
+	var/obj/item/weapon/hand/H = user.get_type_in_hands(/obj/item/weapon/hand)
+	if(!H)
 		H = new(get_turf(src))
 		user.put_in_hands(H)
 
@@ -141,7 +137,6 @@
 		for(var/datum/playingcard/P in cards)
 			H.cards += P
 		H.concealed = src.concealed
-		user.drop_from_inventory(src,user.loc)
 		qdel(src)
 		H.update_icon()
 		return
@@ -301,6 +296,7 @@
 		src.update_icon(user.dir)
 	else
 		update_icon()
+	return ..()
 
 /obj/item/weapon/hand/pickup(mob/user as mob)
 	src.update_icon()

@@ -39,8 +39,9 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 	if(!user.Adjacent(src))
 		return 0
 
-	user.drop_from_inventory(I)
-	I.forceMove(src)
+	if(!user.removeItem(I, src))
+		return 0
+
 	num++
 
 

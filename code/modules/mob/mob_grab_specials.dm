@@ -106,8 +106,6 @@
 	target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Headbutted by [attacker.name] ([attacker.ckey])</font>")
 	msg_admin_attack("[key_name(attacker)] has headbutted [key_name(target)]")
 
-	attacker.drop_from_inventory(src)
-	src.loc = null
 	qdel(src)
 	return
 

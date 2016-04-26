@@ -752,7 +752,7 @@ var/global/list/damage_icon_parts = list()
 		standing.color = wear_suit.color
 
 		if( istype(wear_suit, /obj/item/clothing/suit/straight_jacket) )
-			drop_from_inventory(handcuffed)
+			forceRemoveItem(handcuffed)
 			drop_l_hand()
 			drop_r_hand()
 

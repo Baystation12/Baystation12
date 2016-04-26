@@ -132,7 +132,7 @@
 		return
 
 	// Placing stuff on tables
-	if(user.drop_from_inventory(W, src.loc))
+	if(user.removeItem(W, src.loc))
 		var/list/click_data = params2list(click_params)
 		//Center the icon where the user clicked.
 		if(!click_data || !click_data["icon-x"] || !click_data["icon-y"])

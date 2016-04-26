@@ -92,7 +92,7 @@
 	if(requires_two_hands)
 		var/mob/living/M = loc
 		if(istype(M))
-			if((M.l_hand == src && !M.r_hand) || (M.r_hand == src && !M.l_hand))
+			if(M.item_is_in_hands(src) && !M.hands_are_full())
 				name = "[initial(name)] (wielded)"
 				item_state = wielded_icon
 			else
@@ -178,7 +178,7 @@
 	var/held_acc_mod = 0
 	var/held_disp_mod = 0
 	if(requires_two_hands)
-		if((user.l_hand == src && user.r_hand) || (user.r_hand == src && user.l_hand))
+		if(user.item_is_in_hands(src) && user.hands_are_full())
 			held_acc_mod = -3
 			held_disp_mod = 3
 

@@ -150,7 +150,7 @@
 		var/body_coverage = HEAD|FACE|EYES|UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 
 		for(var/obj/item/clothing/clothes in target)
-			if(target.l_hand == clothes|| target.r_hand == clothes)
+			if(target.item_is_in_hands(clothes))
 				continue
 			body_coverage &= ~(clothes.body_parts_covered)
 
@@ -182,7 +182,7 @@
 				continue
 			var/body_coverage = HEAD|FACE|EYES|UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 			for(var/obj/item/clothing/clothes in M)
-				if(M.l_hand == clothes || M.r_hand == clothes)
+				if(M.item_is_in_hands(clothes))
 					continue
 				body_coverage &= ~(clothes.body_parts_covered)
 			if(!body_coverage)

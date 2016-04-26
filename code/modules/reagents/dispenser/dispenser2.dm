@@ -51,7 +51,7 @@
 		return
 
 	if(user)
-		user.drop_from_inventory(C)
+		user.removeItem(C)
 		user << "<span class='notice'>You add \the [C] to \the [src].</span>"
 
 	C.loc = src
@@ -104,8 +104,7 @@
 			return
 
 		container =  RC
-		user.drop_from_inventory(RC)
-		RC.loc = src
+		user.removeItem(RC, src)
 		user << "<span class='notice'>You set \the [RC] on \the [src].</span>"
 		nanomanager.update_uis(src) // update all UIs attached to src
 

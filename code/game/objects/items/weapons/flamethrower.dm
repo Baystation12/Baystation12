@@ -39,8 +39,8 @@
 		return null
 	var/turf/location = loc
 	if(istype(location, /mob/))
-		var/mob/M = location
-		if(M.l_hand == src || M.r_hand == src)
+		var/mob/living/M = location
+		if(M.item_is_in_hands(src))
 			location = M.loc
 	if(isturf(location)) //start a fire if possible
 		location.hotspot_expose(700, 2)

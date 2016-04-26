@@ -62,8 +62,7 @@
 
 /obj/machinery/computer/guestpass/attackby(obj/O, mob/user)
 	if(istype(O, /obj/item/weapon/card/id))
-		if(!giver && user.unEquip(O))
-			O.forceMove(src)
+		if(!giver && user.removeItem(O, src))
 			giver = O
 			updateUsrDialog()
 		else if(giver)
@@ -150,8 +149,7 @@
 					accesses.Cut()
 				else
 					var/obj/item/I = usr.get_active_hand()
-					if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
-						I.forceMove(src)
+					if (istype(I, /obj/item/weapon/card/id) && usr.removeItem(I, src))
 						giver = I
 				. = 1
 			if ("print")

@@ -17,8 +17,7 @@
 		return
 	if(istype(O, /obj/item/weapon/extinguisher))
 		if(!has_extinguisher && opened)
-			user.remove_from_mob(O)
-			contents += O
+			user.removeItem(O, src)
 			has_extinguisher = O
 			user << "<span class='notice'>You place [O] in [src].</span>"
 		else
@@ -28,7 +27,7 @@
 	update_icon()
 
 
-/obj/structure/extinguisher_cabinet/attack_hand(mob/user)
+/obj/structure/extinguisher_cabinet/attack_hand(mob/living/user)
 	if(isrobot(user))
 		return
 	if (ishuman(user))

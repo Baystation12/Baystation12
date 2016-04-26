@@ -22,8 +22,7 @@
 	if(istype(I, /obj/item/weapon/reagent_containers/syringe))
 		syringe = I
 		user << "<span class='notice'>You carefully insert [syringe] into [src].</span>"
-		user.remove_from_mob(syringe)
-		syringe.loc = src
+		user.removeItem(syringe, src)
 		sharp = 1
 		name = "syringe dart"
 		update_icon()
@@ -123,8 +122,7 @@
 		if(darts.len >= max_darts)
 			user << "<span class='warning'>[src] is full!</span>"
 			return
-		user.remove_from_mob(C)
-		C.loc = src
+		user.removeItem(C, src)
 		darts += C //add to the end
 		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
 	else

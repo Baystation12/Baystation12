@@ -815,11 +815,11 @@ var/list/sacrificed = list()
 					return
 				cultist.buckled = null
 				if (cultist.handcuffed)
-					cultist.drop_from_inventory(cultist.handcuffed)
+					cultist.forceRemoveItem(cultist.handcuffed)
 				if (cultist.legcuffed)
-					cultist.drop_from_inventory(cultist.legcuffed)
+					cultist.forceRemoveItem(cultist.legcuffed)
 				if (istype(cultist.wear_mask, /obj/item/clothing/mask/muzzle))
-					cultist.drop_from_inventory(cultist.wear_mask)
+					cultist.forceRemoveItem(cultist.wear_mask)
 				if(istype(cultist.loc, /obj/structure/closet)&&cultist.loc:welded)
 					cultist.loc:welded = 0
 				if(istype(cultist.loc, /obj/structure/closet/secure_closet)&&cultist.loc:locked)
