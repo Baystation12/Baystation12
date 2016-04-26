@@ -366,7 +366,7 @@ var/list/global/slot_flags_enumeration = list(
 	if(!slot) return 0
 	if(!M) return 0
 
-	if(!canremove)
+	if(!(slot == slot_l_hand || slot == slot_r_hand) && !canremove)
 		return 0
 	if(!M.slot_is_accessible(slot, src, disable_warning? null : M))
 		return 0

@@ -165,12 +165,12 @@ var/list/slot_equipment_priority = list( \
 			break
 	return slot
 
-/mob/proc/removeItem(var/obj/item/I, var/atom/T = loc)
+/mob/proc/removeItem(var/obj/item/I, var/atom/target = loc)
 	if(!src.canUnEquip(I))
 		return 0
-	return forceRemoveItem(I, T)
+	return forceRemoveItem(I, target)
 
-/mob/proc/forceRemoveItem(var/obj/item/I, var/atom/T = loc)
+/mob/proc/forceRemoveItem(var/obj/item/I, var/atom/target = loc)
 	u_equip(I)
 	if(src.client)
 		src.client.screen -= I
@@ -178,7 +178,7 @@ var/list/slot_equipment_priority = list( \
 	I.layer = initial(I.layer)
 	I.screen_loc = null
 
-	I.forceMove(T, MOVED_DROP)
+	I.forceMove(target, MOVED_DROP)
 	I.dropped(src) //If an item self-deletes, it will happen here
 	return 1
 
