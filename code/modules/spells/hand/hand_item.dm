@@ -44,7 +44,7 @@ Basically: I can use it to target things where I click. I can then pass these ta
 		if(hand_spell.click_delay)
 			user.setClickCooldown(hand_spell.move_delay)
 		if(!casts)
-			user.removeItem(src, force = 1)
+			user.forceRemoveItem(src)
 			return
 		user << "[casts]/[hand_spell.casts] charges left."
 

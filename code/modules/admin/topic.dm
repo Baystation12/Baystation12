@@ -1009,7 +1009,7 @@
 			return
 
 		for(var/obj/item/I in M)
-			M.removeItem(I, force = 1)
+			M.forceRemoveItem(I)
 
 		M.Paralyse(5)
 		sleep(5)
@@ -1034,7 +1034,7 @@
 			return
 
 		for(var/obj/item/I in M)
-			M.removeItem(I, force = 1)
+			M.forceRemoveItem(I)
 
 		M.Paralyse(5)
 		sleep(5)
@@ -1081,7 +1081,7 @@
 			return
 
 		for(var/obj/item/I in M)
-			M.removeItem(I, force = 1)
+			M.forceRemoveItem(I)
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/observer = M

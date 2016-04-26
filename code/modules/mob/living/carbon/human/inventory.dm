@@ -3,9 +3,9 @@ Add fingerprints to items when we put them in our hands.
 This saves us from having to call add_fingerprint() any time something is put in a human's hands programmatically.
 */
 
-/mob/living/carbon/human/removeItem(var/obj/item/I, var/atom/T = loc, var/force = 0)
+/mob/living/carbon/human/forceRemoveItem(var/obj/item/I, var/atom/T = loc)
 	if(I in src.organs)
-		return 0
+		return 0 //nope
 	return ..()
 
 /mob/living/carbon/human/verb/quick_equip()

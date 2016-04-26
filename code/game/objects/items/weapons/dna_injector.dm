@@ -93,7 +93,7 @@
 
 	spawn(0)//this prevents the collapse of space-time continuum
 		if (user)
-			user.removeItem(src, force = 1)
+			user.forceRemoveItem(src)
 		qdel(src)
 	return uses
 

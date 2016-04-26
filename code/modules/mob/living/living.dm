@@ -796,7 +796,7 @@ default behaviour is:
 /mob/living/proc/slip(var/slipped_on,stun_duration=8)
 	return 0
 
-/mob/living/carbon/removeItem(var/obj/item/I, var/atom/T = loc, var/force = 0)
+/mob/living/carbon/forceRemoveItem(var/obj/item/I, var/atom/T = loc)
 	if(I in src.internal_organs)
 		return 0
 	return ..()

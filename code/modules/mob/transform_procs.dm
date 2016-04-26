@@ -4,7 +4,7 @@
 	for(var/obj/item/W in src)
 		if (W==w_uniform) // will be torn
 			continue
-		removeItem(W, force = 1)
+		forceRemoveItem(W)
 	regenerate_icons()
 	transforming = 1
 	canmove = 0
@@ -31,7 +31,7 @@
 		return
 
 	for(var/obj/item/W in src)
-		removeItem(W, force = 1)
+		forceRemoveItem(W)
 	set_species(species.primitive_form)
 	dna.SetSEState(MONKEYBLOCK,1)
 	dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
@@ -57,7 +57,7 @@
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
-		removeItem(W, force = 1)
+		forceRemoveItem(W)
 	transforming = 1
 	canmove = 0
 	icon = null
@@ -113,7 +113,7 @@
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
-		removeItem(W, force = 1)
+		forceRemoveItem(W)
 	regenerate_icons()
 	transforming = 1
 	canmove = 0
@@ -165,7 +165,7 @@
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
-		removeItem(W, force = 1)
+		forceRemoveItem(W)
 	regenerate_icons()
 	transforming = 1
 	canmove = 0
@@ -199,7 +199,7 @@
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
-		removeItem(W, force = 1)
+		forceRemoveItem(W)
 	regenerate_icons()
 	transforming = 1
 	canmove = 0
@@ -228,7 +228,7 @@
 	if(transforming)
 		return
 	for(var/obj/item/W in src)
-		removeItem(W, force = 1)
+		forceRemoveItem(W)
 
 	regenerate_icons()
 	transforming = 1

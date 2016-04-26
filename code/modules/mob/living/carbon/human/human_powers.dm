@@ -253,7 +253,7 @@
 			M.set_dir(pick(NORTH, SOUTH, EAST, WEST))
 
 	for(var/obj/item/W in src)
-		removeItem(W, force = 1)
+		forceRemoveItem(W)
 
 	visible_message("<span class='warning'>\The [src] quivers slightly, then splits apart with a wet slithering noise.</span>")
 	qdel(src)

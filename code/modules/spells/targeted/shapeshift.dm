@@ -35,7 +35,7 @@
 		trans.name = "[trans.name] ([M])"
 		if(istype(M,/mob/living/carbon/human) && drop_items)
 			for(var/obj/item/I in M.contents)
-				M.removeItem(I, force=1)
+				M.forceRemoveItem(I)
 		if(M.mind)
 			M.mind.transfer_to(trans)
 		else

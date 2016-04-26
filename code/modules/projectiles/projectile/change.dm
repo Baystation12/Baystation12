@@ -25,7 +25,7 @@
 				if(istype(W, /obj/item/weapon/implant))	//TODO: Carn. give implants a dropped() or something
 					qdel(W)
 					continue
-				M.removeItem(W, force = 1)
+				M.forceRemoveItem(W)
 
 		var/mob/living/new_mob
 

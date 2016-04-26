@@ -165,10 +165,12 @@ var/list/slot_equipment_priority = list( \
 			break
 	return slot
 
-/mob/proc/removeItem(var/obj/item/I, var/atom/T = loc, var/force = 0)
-	if(!force && !src.canUnEquip(I))
+/mob/proc/removeItem(var/obj/item/I, var/atom/T = loc)
+	if(!src.canUnEquip(I))
 		return 0
+	return forceRemoveItem(I, T)
 
+/mob/proc/forceRemoveItem(var/obj/item/I, var/atom/T = loc)
 	u_equip(I)
 	if(src.client)
 		src.client.screen -= I
