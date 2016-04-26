@@ -91,18 +91,18 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 	if (W == wear_suit)
 		if(s_store)
-			removeItem(s_store)
+			forceRemoveItem(s_store)
 		wear_suit = null
 		update_inv_wear_suit()
 	else if (W == w_uniform)
 		if (r_store)
-			removeItem(r_store)
+			forceRemoveItem(r_store)
 		if (l_store)
-			removeItem(l_store)
+			forceRemoveItem(l_store)
 		if (wear_id)
-			removeItem(wear_id)
+			forceRemoveItem(wear_id)
 		if (belt)
-			removeItem(belt)
+			forceRemoveItem(belt)
 		w_uniform = null
 		update_inv_w_uniform()
 	else if (W == gloves)
