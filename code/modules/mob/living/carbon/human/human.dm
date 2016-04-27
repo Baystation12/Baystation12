@@ -1473,3 +1473,14 @@
 		return PULSE_NONE
 	else
 		return H.pulse
+		
+/mob/living/carbon/human/can_devour(mob/victim)		
+	if(src.species.gluttonous && (iscarbon(victim) || isanimal(victim)))
+		if(src.species.gluttonous == GLUT_TINY && (victim.mob_size <= MOB_TINY) && !ishuman(victim)) // Anything MOB_TINY or smaller
+			return DEVOUR_SLOW
+		else if(src.species.gluttonous == GLUT_SMALLER && (src.mob_size > victim.mob_size)) // Anything we're larger than
+			return DEVOUR_SLOW
+		else if(src.species.gluttonous == GLUT_ANYTHING) // Eat anything ever
+			return DEVOUR_FAST
+	
+	..()

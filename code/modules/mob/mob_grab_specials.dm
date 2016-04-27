@@ -145,30 +145,3 @@
 	step_to(attacker, target)
 	attacker.set_dir(EAST) //face the victim
 	target.set_dir(SOUTH) //face up
-
-/obj/item/weapon/grab/proc/devour(mob/target, mob/user)
-	var/can_eat
-	if((FAT in user.mutations) && issmall(target))
-		can_eat = 1
-	else
-		var/mob/living/carbon/human/H = user
-		if(istype(H) && H.species.gluttonous && (iscarbon(target) || isanimal(target)))
-			if(H.species.gluttonous == GLUT_TINY && (target.mob_size <= MOB_TINY) && !ishuman(target)) // Anything MOB_TINY or smaller
-				can_eat = 1
-			else if(H.species.gluttonous == GLUT_SMALLER && (H.mob_size > target.mob_size)) // Anything we're larger than
-				can_eat = 1
-			else if(H.species.gluttonous == GLUT_ANYTHING) // Eat anything ever
-				can_eat = 2
-
-	if(can_eat)
-		var/mob/living/carbon/attacker = user
-		user.visible_message("<span class='danger'>[user] is attempting to devour [target]!</span>")
-		if(can_eat == 2)
-			if(!do_mob(user, target, 30)) return
-		else
-			if(!do_mob(user, target, 100)) return
-		user.visible_message("<span class='danger'>[user] devours [target]!</span>")
-		admin_attack_log(attacker, target, "Devoured.", "Was devoured by.", "devoured")
-		target.loc = user
-		attacker.stomach_contents.Add(target)
-		qdel(src)
