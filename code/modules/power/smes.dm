@@ -1,7 +1,6 @@
 // the SMES
 // stores power
 
-#define SMESRATE 0.05
 #define SMESMAXCHARGELEVEL 250000
 #define SMESMAXOUTPUT 250000
 
@@ -38,13 +37,15 @@
 	var/last_chrg
 	var/last_onln
 
+	var/damage = 0
+	var/maxdamage = 500 // Relatively resilient, given how expensive it is, but once destroyed produces small explosion.
+
 	var/input_cut = 0
 	var/input_pulsed = 0
 	var/output_cut = 0
 	var/output_pulsed = 0
 	var/failure_timer = 0			// Set by gridcheck event, temporarily disables the SMES.
 	var/target_load = 0
-	var/open_hatch = 0
 	var/name_tag = null
 	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
 	var/obj/machinery/power/terminal/terminal = null
@@ -135,12 +136,21 @@
 	inputted_power = between(0, inputted_power, target_load)
 	if(terminal && terminal.powernet)
 		inputted_power = terminal.powernet.draw_power(inputted_power)
-		charge += inputted_power * SMESRATE
+		add_charge(inputted_power)
+		input_available = inputted_power
 		if(percentage == 100)
 			inputting = 2
 		else if(percentage)
 			inputting = 1
 		// else inputting = 0, as set in process()
+
+
+// Mostly in place due to child types that may store power in other way (PSUs)
+/obj/machinery/power/smes/proc/add_charge(var/amount)
+	charge += amount*SMESRATE
+
+/obj/machinery/power/smes/proc/remove_charge(var/amount)
+	charge -= amount*SMESRATE
 
 /obj/machinery/power/smes/process()
 	if(stat & BROKEN)	return
@@ -157,6 +167,7 @@
 	last_chrg = inputting
 	last_onln = outputting
 
+	input_available = 0
 	//inputting
 	if(input_attempt && (!input_pulsed && !input_cut))
 		target_load = min((capacity-charge)/SMESRATE, input_level)	// Amount we will request from the powernet.
@@ -167,10 +178,11 @@
 			target_load = 0 // We won't input any power without powernet connection.
 		inputting = 0
 
+	output_used = 0
 	//outputting
 	if(output_attempt && (!output_pulsed && !output_cut) && powernet && charge)
 		output_used = min( charge/SMESRATE, output_level)		//limit output to that stored
-		charge -= output_used*SMESRATE		// reduce the storage (may be recovered in /restore() if excessive)
+		remove_charge(output_used)			// reduce the storage (may be recovered in /restore() if excessive)
 		add_avail(output_used)				// add output to powernet (smes side)
 		outputting = 2
 	else if(!powernet || !charge)
@@ -196,7 +208,7 @@
 
 	var/clev = chargedisplay()
 
-	charge += total_restore * SMESRATE		// restore unused power
+	add_charge(total_restore)				// restore unused power
 	powernet.netexcess -= total_restore		// remove the excess from the powernet, so later SMESes don't try to use it
 
 	output_used -= total_restore
@@ -251,17 +263,11 @@
 
 
 /obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(istype(W, /obj/item/weapon/screwdriver))
-		if(!open_hatch)
-			open_hatch = 1
-			user << "<span class='notice'>You open the maintenance hatch of [src].</span>"
-			return 0
-		else
-			open_hatch = 0
-			user << "<span class='notice'>You close the maintenance hatch of [src].</span>"
-			return 0
 
-	if (!open_hatch)
+	if(default_deconstruction_screwdriver(user, W))
+		return
+
+	if (!panel_open)
 		user << "<span class='warning'>You need to open access hatch on [src] first!</span>"
 		return 0
 
@@ -284,6 +290,18 @@
 		stat = 0
 		return 0
 
+	if(istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(!WT.isOn())
+			user << "Turn on \the [WT] first!"
+			return 0
+		if(!damage)
+			user << "\The [src] is already fully repaired."
+			return 0
+		if(WT.remove_fuel(0,user) && do_after(user, damage, src))
+			user << "You repair all structural damage to \the [src]"
+			damage = 0
+		return 0
 	else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
 		building_terminal = 1
 		var/turf/tempTDir = terminal.loc
@@ -345,6 +363,8 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/power/smes/proc/Percentage()
+	if(!capacity)
+		return 0
 	return round(100.0*charge/capacity, 0.1)
 
 /obj/machinery/power/smes/Topic(href, href_list)
@@ -354,13 +374,15 @@
 	if( href_list["cmode"] )
 		inputting(!input_attempt)
 		update_icon()
-
+		return 1
 	else if( href_list["online"] )
 		outputting(!output_attempt)
 		update_icon()
+		return 1
 	else if( href_list["reboot"] )
 		failure_timer = 0
 		update_icon()
+		return 1
 	else if( href_list["input"] )
 		switch( href_list["input"] )
 			if("min")
@@ -370,7 +392,7 @@
 			if("set")
 				input_level = input(usr, "Enter new input level (0-[input_level_max])", "SMES Input Power Control", input_level) as num
 		input_level = max(0, min(input_level_max, input_level))	// clamp to range
-
+		return 1
 	else if( href_list["output"] )
 		switch( href_list["output"] )
 			if("min")
@@ -380,42 +402,11 @@
 			if("set")
 				output_level = input(usr, "Enter new output level (0-[output_level_max])", "SMES Output Power Control", output_level) as num
 		output_level = max(0, min(output_level_max, output_level))	// clamp to range
+		return 1
 
-	investigate_log("input/output; <font color='[input_level>output_level?"green":"red"][input_level]/[output_level]</font> | Output-mode: [output_attempt?"<font color='green'>on</font>":"<font color='red'>off</font>"] | Input-mode: [input_attempt?"<font color='green'>auto</font>":"<font color='red'>off</font>"] by [usr.key]","singulo")
-
-	return 1
 
 /obj/machinery/power/smes/proc/energy_fail(var/duration)
 	failure_timer = max(failure_timer, duration)
-
-/obj/machinery/power/smes/proc/ion_act()
-	if(src.z in using_map.station_levels)
-		if(prob(1)) //explosion
-			for(var/mob/M in viewers(src))
-				M.show_message("\red The [src.name] is making strange noises!", 3, "\red You hear sizzling electronics.", 2)
-			sleep(10*pick(4,5,6,7,10,14))
-			var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
-			smoke.set_up(3, 0, src.loc)
-			smoke.attach(src)
-			smoke.start()
-			explosion(src.loc, -1, 0, 1, 3, 1, 0)
-			qdel(src)
-			return
-		else if(prob(15)) //Power drain
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(3, 1, src)
-			s.start()
-			if(prob(50))
-				emp_act(1)
-			else
-				emp_act(2)
-		else if(prob(5)) //smoke only
-			var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
-			smoke.set_up(3, 0, src.loc)
-			smoke.attach(src)
-			smoke.start()
-		else
-			energy_fail(rand(0, 30))
 
 /obj/machinery/power/smes/proc/inputting(var/do_input)
 	input_attempt = do_input
@@ -426,6 +417,21 @@
 	output_attempt = do_output
 	if(!output_attempt)
 		outputting = 0
+
+/obj/machinery/power/smes/proc/take_damage(var/amount)
+	amount = max(0, round(amount))
+	damage += amount
+	if(damage > maxdamage)
+		visible_message("<span class='danger'>\The [src] explodes in large rain of sparks and smoke!</span>")
+		// Depending on stored charge percentage cause damage.
+		switch(Percentage())
+			if(75 to INFINITY)
+				explosion(get_turf(src), 1, 2, 4)
+			if(40 to 74)
+				explosion(get_turf(src), 0, 2, 3)
+			if(5 to 39)
+				explosion(get_turf(src), 0, 1, 2)
+		qdel(src) // Either way we want to ensure the SMES is deleted.
 
 /obj/machinery/power/smes/emp_act(severity)
 	if(prob(50))
@@ -443,14 +449,27 @@
 	update_icon()
 	..()
 
+/obj/machinery/power/smes/bullet_act(var/obj/item/projectile/Proj)
+	if(Proj.damage_type == BRUTE || Proj.damage_type == BURN)
+		take_damage(Proj.damage)
 
-/obj/machinery/power/smes/magical
-	name = "quantum power storage unit"
-	desc = "A high-capacity superconducting magnetic energy storage (SMES) unit. Gains energy from quantum entanglement link."
-	capacity = 5000000
-	output_level = 250000
-	should_be_mapped = 1
+/obj/machinery/power/smes/ex_act(var/severity)
+	// Two strong explosions will destroy a SMES.
+	// Given the SMES creates another explosion on it's destruction it sounds fairly reasonable.
+	take_damage(250 / severity)
 
-/obj/machinery/power/smes/magical/process()
-	charge = 5000000
+/obj/machinery/power/smes/examine(var/mob/user)
 	..()
+	user << "The service hatch is [panel_open ? "open" : "closed"]."
+	if(!damage)
+		return
+	var/damage_percentage = round((damage / maxdamage) * 100)
+	switch(damage_percentage)
+		if(75 to INFINITY)
+			user << "<span class='danger'>It's casing is severely damaged, and sparking circuitry may be seen through the holes!</span>"
+		if(50 to 74)
+			user << "<span class='notice'>It's casing is considerably damaged, and some of the internal circuits appear to be exposed!</span>"
+		if(25 to 49)
+			user << "<span class='notice'>It's casing is quite seriously damaged.</span>"
+		if(0 to 24)
+			user << "It's casing has some minor damage."
