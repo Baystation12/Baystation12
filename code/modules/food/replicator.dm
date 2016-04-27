@@ -39,9 +39,12 @@
 			biomass = max(biomass + min(1,round(N.volume*deconstruct_eff)), biomass_max)
 		qdel(O)
 	else if(istype(O, /obj/item/weapon/storage/bag/plants))
+		if(!O.contents || !O.contents.len)
+			return
+		user << "You empty \the [O] into \the [src]"
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in O.contents)
-			user << "You empty \the [O] into \the [src]"
-			G.loc = null
+			var/obj/item/weapon/storage/S = O
+			S.remove_from_storage(G, null)
 			for(var/datum/reagent/nutriment/N in G.reagentlist())
 				biomass = max(biomass + min(1,round(N.volume*deconstruct_eff)), biomass_max)
 			qdel(G)
