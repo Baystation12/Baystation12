@@ -23,7 +23,7 @@ var/global/list/additional_antag_types = list()
 
 	var/list/antag_tags = list()             // Core antag templates to spawn.
 	var/list/antag_templates                 // Extra antagonist types to include.
-	var/list/latejoin_antags = list()        // Antags that may auto-spawn, latejoin or otherwise come in midround.
+	var/list/latejoin_antag_tags = list()        // Antags that may auto-spawn, latejoin or otherwise come in midround.
 	var/round_autoantag = 0                  // Will this round attempt to periodically spawn more antagonists?
 	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count.
 	var/require_all_templates = 0            // Will only start if all templates are checked and can spawn.
@@ -42,6 +42,11 @@ var/global/list/additional_antag_types = list()
 	// This will probably break something.
 	name = capitalize(lowertext(name))
 	config_tag = lowertext(config_tag)
+
+	if(round_autoantag && !latejoin_antag_tags.len)
+		latejoin_antag_tags = antag_tags.Copy()
+	else if(!round_autoantag && latejoin_antag_tags.len)
+		round_autoantag = TRUE
 
 /datum/game_mode/Topic(href, href_list[])
 	if(..())
