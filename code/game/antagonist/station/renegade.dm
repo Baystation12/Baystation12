@@ -72,20 +72,19 @@ var/datum/antagonist/renegade/renegades
 	var/gun_type = pick(spawn_guns)
 	if(islist(gun_type))
 		gun_type = pick(gun_type)
-
 	var/obj/item/gun = new gun_type(get_turf(player))
-	var/list/slots = list (
-		"backpack" = slot_in_backpack,
-		"left hand" = slot_l_hand,
-		"right hand" = slot_r_hand,
-		)
-	for(var/slot in slots)
-		player.equip_to_slot(gun, slot)
-		if(gun.loc == player)
-			break
-	var/obj/item/weapon/storage/S = locate() in player.contents
-	if(S && istype(S))
-		gun.loc = S
+
+	// Attempt to put into a container.
+	if(player.equip_to_storage(gun))
+		return
+
+	// If that failed, attempt to put into any valid non-handslot
+	if(player.equip_to_appropriate_slot(gun))
+		return
+
+	// If that failed, then finally attempt to at least let the player carry the weapon
+	player.put_in_hands(gun)
+
 
 /proc/rightandwrong()
 	usr << "<B>You summoned guns!</B>"
