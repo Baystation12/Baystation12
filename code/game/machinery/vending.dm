@@ -910,8 +910,26 @@
 	desc = "A kitchen and restaurant equipment vendor."
 	product_ads = "Mm, food stuffs!;Food and food accessories.;Get your plates!;You like forks?;I like forks.;Woo, utensils.;You don't really need these..."
 	icon_state = "dinnerware"
-	products = list(/obj/item/weapon/tray = 8,/obj/item/weapon/material/kitchen/utensil/fork = 6, /obj/item/weapon/material/kitchen/utensil/knife = 6, /obj/item/weapon/material/kitchen/utensil/spoon = 6, /obj/item/weapon/material/knife = 3,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,/obj/item/clothing/suit/chef/classic = 2)
-	contraband = list(/obj/item/weapon/material/kitchen/rollingpin = 2, /obj/item/weapon/material/knife/butch = 2)
+	products = list(
+	/obj/item/weapon/tray = 8,
+	/obj/item/weapon/material/kitchen/utensil/fork = 6,
+	/obj/item/weapon/material/kitchen/utensil/knife = 6,
+	/obj/item/weapon/material/kitchen/utensil/spoon = 6,
+	/obj/item/weapon/material/knife = 3,
+	/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,
+	/obj/item/clothing/suit/chef/classic = 2,
+	/obj/item/weapon/storage/toolbox/lunchbox = 3,
+	/obj/item/weapon/storage/toolbox/lunchbox/heart = 3,
+	/obj/item/weapon/storage/toolbox/lunchbox/cat = 3,
+	/obj/item/weapon/storage/toolbox/lunchbox/nt = 3,
+	/obj/item/weapon/storage/toolbox/lunchbox/mars = 3,
+	/obj/item/weapon/storage/toolbox/lunchbox/cti = 3,
+	/obj/item/weapon/storage/toolbox/lunchbox/nymph = 3,
+	/obj/item/weapon/storage/toolbox/lunchbox/syndicate = 3)
+
+
+	contraband = list(/obj/item/weapon/material/kitchen/rollingpin = 2,
+	/obj/item/weapon/material/knife/butch = 2)
 
 /obj/machinery/vending/sovietsoda
 	name = "BODA"
