@@ -1,4 +1,4 @@
-var/global/antag_add_failed // Used in antag type voting.
+var/global/antag_add_finished // Used in antag type voting.
 var/global/list/additional_antag_types = list()
 
 /datum/game_mode
@@ -441,7 +441,7 @@ var/global/list/additional_antag_types = list()
 				continue
 			if(!role || (role in player.client.prefs.be_special_role))
 				log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
-				candidates |= player.mind
+				candidates += player.mind
 	else
 		// Assemble a list of active players without jobbans.
 		for(var/mob/new_player/player in player_list)

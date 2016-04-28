@@ -61,7 +61,10 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 					name = capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
 
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
-
+	else
+		spawn(10) // wait for the observer mob to receive the client's key
+			mind = new /datum/mind(key)
+			mind.current = src
 	if(!T)	T = pick(latejoin | latejoin_cryo | latejoin_gateway)			//Safety in case we cannot find the body's position
 	forceMove(T)
 
@@ -697,3 +700,17 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if((!target) || (!ghost)) return
 	. = "<a href='byond://?src=\ref[ghost];track=\ref[target]'>follow</a>"
 	. += target.extra_ghost_link(ghost)
+
+/mob/observer/ghost/verb/toggle_antag_pool()
+	set name = "Toggle Add-Antag Candidacy"
+	set desc = "Toggles whether or not you will be considered a candidate by an add-antag vote."
+	set category = "Ghost"
+	if(ticker.looking_for_antags)
+		if(src.mind in ticker.antag_pool)
+			ticker.antag_pool -= src.mind
+			usr << "You have left the antag pool."
+		else
+			ticker.antag_pool += src.mind
+			usr << "You have joined the antag pool."
+	else
+		usr << "The game is not currently looking for antags."

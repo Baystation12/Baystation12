@@ -51,6 +51,7 @@ datum/controller/vote
 	proc/autotransfer()
 		initiate_vote("crew_transfer","the server", 1)
 		log_debug("The server has called a crew transfer vote")
+		antag_add_finished = 0 // reset this so that players can vote in another antag
 
 	proc/autogamemode()
 		initiate_vote("gamemode","the server", 1)
@@ -164,21 +165,19 @@ datum/controller/vote
 				else
 					i++
 
-			if(mode == "gamemode" && (firstChoice == "Extended" || ticker.hide_mode == 0)) // Announce Extended gamemode, but not other gamemodes
+			if(mode != "gamemode" || (firstChoice == "Extended" || ticker.hide_mode == 0)) // Announce unhidden gamemodes or other results, but not other gamemodes
 				text += "<b>Vote Result: [firstChoice]</b>"
 				if(secondChoice)
 					text += "\nSecond place: [secondChoice]"
 				if(thirdChoice)
 					text += ", third place: [thirdChoice]"
-			else if(mode != "gamemode")
-				text += "<b>Vote Result: [firstChoice]</b>"
 			else
-				text += "<b>The vote has ended.</b>" // What will be shown if it is a gamemode vote that isn't extended
+				text += "<b>The vote has ended.</b>" // What will be shown if it is a gamemode vote that was hidden
 
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
 			if(mode == "add_antagonist")
-				antag_add_failed = 1
+				antag_add_finished = 1
 		log_vote(text)
 		world << "<font color='purple'>[text]</font>"
 		return list(firstChoice, secondChoice, thirdChoice)
@@ -203,11 +202,20 @@ datum/controller/vote
 				if("crew_transfer")
 					if(.[1] == "Initiate Crew Transfer")
 						init_shift_change(null, 1)
+					else if(.[1] == "Add Antagonist")
+						spawn(10)
+							initiate_vote("add_antagonist", "the server", 1)
 				if("add_antagonist")
 					if(isnull(.[1]) || .[1] == "None")
-						antag_add_failed = 1
+						antag_add_finished = 1
 					else
-						additional_antag_types |= antag_names_to_ids[.[1]]
+						var/antag_type = antag_names_to_ids[.[1]]
+						if(ticker.current_state >= 2)
+							var/list/antag_choices = list(all_antag_types[antag_type], all_antag_types[antag_names_to_ids[.[2]]], all_antag_types[antag_names_to_ids[.[3]]])
+							if(!ticker.attempt_late_antag_spawn(antag_choices))
+								world << "No antags were added."
+						else
+							additional_antag_types |= antag_type
 				if("map")
 					var/datum/map/M = all_maps[.[1]]
 					fdel("use_map")
@@ -282,6 +290,8 @@ datum/controller/vote
 					if(check_rights(R_ADMIN|R_MOD, 0))
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
+						if (config.allow_extra_antags)
+							choices.Add("Add Antagonist")
 					else
 						if (get_security_level() == "red" || get_security_level() == "delta")
 							initiator_key << "The current alert status is too high to call for a crew transfer!"
@@ -291,8 +301,10 @@ datum/controller/vote
 							initiator_key << "The crew transfer button has been disabled!"
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
+						if (config.allow_extra_antags)
+							choices.Add("Add Antagonist")
 				if("add_antagonist")
-					if(!config.allow_extra_antags || ticker.current_state >= 2)
+					if(!config.allow_extra_antags)
 						return 0
 					for(var/antag_type in all_antag_types)
 						var/datum/antagonist/antag = all_antag_types[antag_type]
@@ -420,7 +432,7 @@ datum/controller/vote
 				. += "<font color='grey'>Map (Disallowed)</font>"
 			. += "</li><li>"
 			//extra antagonists
-			if(!antag_add_failed && config.allow_extra_antags)
+			if(!antag_add_finished && config.allow_extra_antags)
 				. += "<a href='?src=\ref[src];vote=add_antagonist'>Add Antagonist Type</a>"
 			else
 				. += "<font color='grey'>Add Antagonist (Disallowed)</font>"
