@@ -325,4 +325,11 @@ proc/TextPreview(var/string,var/len=40)
 				return 1
 	return 0
 
+/proc/generateRandomString(var/length)
+	var/text = ""
+	for(var/a in 1 to length)
+		var/letter = rand(33,126)
+		text += ascii2text(letter)
+	return text
+
 #define gender2text(gender) capitalize(gender)
