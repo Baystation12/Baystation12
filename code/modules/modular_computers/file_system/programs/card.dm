@@ -150,7 +150,7 @@
 									<br>
 									[data_core ? data_core.get_manifest(0) : ""]
 									"}
-					if(!computer.nano_printer.print_text(contents,text("crew manifest ([])", worldtime2text())))
+					if(!computer.nano_printer.print_text(contents,text("crew manifest ([])", stationtime2text())))
 						usr << "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>"
 						return
 					else

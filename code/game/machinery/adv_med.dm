@@ -252,7 +252,7 @@
 		return
 	var/mob/living/carbon/human/H = occupant
 	var/list/occupant_data = list(
-		"stationtime" = worldtime2text(),
+		"stationtime" = stationtime2text(),
 		"stat" = H.stat,
 		"health" = round(H.health/H.maxHealth)*100,
 		"virus_present" = H.virus2.len,
