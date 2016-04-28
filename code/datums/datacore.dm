@@ -186,7 +186,7 @@
 		G.fields["fingerprint"]	= md5(H.dna.uni_identity)
 		G.fields["p_stat"]		= "Active"
 		G.fields["m_stat"]		= "Stable"
-		G.fields["sex"]			= H.gender
+		G.fields["sex"]			= gender2text(H.gender)
 		G.fields["species"]		= H.get_species()
 		G.fields["home_system"]	= H.home_system
 		G.fields["citizenship"]	= H.citizenship
@@ -214,7 +214,7 @@
 		L.fields["rank"] 		= H.mind.assigned_role
 		L.fields["age"]			= H.age
 		L.fields["fingerprint"]	= md5(H.dna.uni_identity)
-		L.fields["sex"]			= H.gender
+		L.fields["sex"]			= gender2text(H.gender)
 		L.fields["b_type"]		= H.b_type
 		L.fields["b_dna"]		= H.dna.unique_enzymes
 		L.fields["enzymes"]		= H.dna.SE // Used in respawning
@@ -415,7 +415,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H, var/assigned_role)
 	G.fields["id"] = id
 	G.fields["rank"] = "Unassigned"
 	G.fields["real_rank"] = "Unassigned"
-	G.fields["sex"] = "Male"
+	G.fields["sex"] = "Unknown"
 	G.fields["age"] = "Unknown"
 	G.fields["fingerprint"] = "Unknown"
 	G.fields["p_stat"] = "Active"
@@ -457,6 +457,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H, var/assigned_role)
 	M.fields["name"]		= name
 	M.fields["b_type"]		= "AB+"
 	M.fields["b_dna"]		= md5(name)
+	M.fields["id_gender"]	= "Unknown"
 	M.fields["mi_dis"]		= "None"
 	M.fields["mi_dis_d"]	= "No minor disabilities have been declared."
 	M.fields["ma_dis"]		= "None"
