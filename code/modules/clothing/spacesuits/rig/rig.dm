@@ -24,6 +24,8 @@
 	permeability_coefficient = 0.1
 	unacidable = 1
 
+	var/hides_uniform = 1 	//used to determinate if uniform should be visible whenever the suit is sealed or not
+
 	var/interface_path = "hardsuit.tmpl"
 	var/ai_interface_path = "hardsuit.tmpl"
 	var/interface_title = "Hardsuit Controller"
@@ -66,6 +68,7 @@
 	var/malfunction_delay = 0
 	var/electrified = 0
 	var/locked_down = 0
+	var/aimove_power_usage = 200							  // Power usage per tile traveled when suit is moved by AI in IIS. In joules.
 
 	var/seal_delay = SEAL_DELAY
 	var/sealing                                               // Keeps track of seal status independantly of canremove.
@@ -299,12 +302,18 @@
 		update_component_sealed()
 	update_icon(1)
 
+
 /obj/item/weapon/rig/proc/update_component_sealed()
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(canremove)
 			piece.item_flags &= ~(STOPPRESSUREDAMAGE|AIRTIGHT)
 		else
 			piece.item_flags |=  (STOPPRESSUREDAMAGE|AIRTIGHT)
+	if (hides_uniform && chest)
+		if(canremove)
+			chest.flags_inv &= ~(HIDEJUMPSUIT)
+		else
+			chest.flags_inv |= HIDEJUMPSUIT
 	update_icon(1)
 
 /obj/item/weapon/rig/process()
@@ -494,6 +503,7 @@
 		wearer.update_inv_gloves()
 		wearer.update_inv_head()
 		wearer.update_inv_wear_suit()
+		wearer.update_inv_w_uniform()
 		wearer.update_inv_back()
 	return
 
@@ -503,6 +513,8 @@
 		return 1
 
 	if(istype(user))
+		if(!canremove)
+			return 1
 		if(malfunction_check(user))
 			return 0
 		if(user.back != src)
@@ -805,6 +817,9 @@
 		return 0
 	return 1
 
+/obj/item/weapon/rig/check_access(obj/item/I)
+	return TRUE
+
 /obj/item/weapon/rig/proc/force_rest(var/mob/user)
 	if(!ai_can_move_suit(user, check_user_module = 1))
 		return
@@ -832,9 +847,14 @@
 	if(!wearer.lastarea)
 		wearer.lastarea = get_area(wearer.loc)
 
-	if((istype(wearer.loc, /turf/space)) || (wearer.lastarea.has_gravity == 0))
-		if(!wearer.Process_Spacemove(0))
+	if(!wearer.check_solid_ground())
+		var/allowmove = wearer.Allow_Spacemove(0)
+		if(!allowmove)
 			return 0
+		else if(allowmove == -1 && wearer.handle_spaceslipping()) //Check to see if we slipped
+			return 0
+		else
+			wearer.inertia_dir = 0 //If not then we can reset inertia and move
 
 	if(malfunctioning)
 		direction = pick(cardinal)
@@ -890,7 +910,7 @@
 			wearer_move_delay += 2
 			return wearer.buckled.relaymove(wearer,direction)
 
-	cell.use(200) //Arbitrary, TODO
+	cell.use(aimove_power_usage * CELLRATE)
 	wearer.Move(get_step(get_turf(wearer),direction),direction)
 
 // This returns the rig if you are contained inside one, but not if you are wearing it

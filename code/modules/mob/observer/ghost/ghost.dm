@@ -62,7 +62,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
 
-	if(!T)	T = pick(latejoin)			//Safety in case we cannot find the body's position
+	if(!T)	T = pick(latejoin | latejoin_cryo | latejoin_gateway)			//Safety in case we cannot find the body's position
 	forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts
@@ -178,7 +178,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/is_active()		return 0
 
 /mob/observer/ghost/Stat()
-	..()
+	. = ..()
 	if(statpanel("Status"))
 		if(emergency_shuttle)
 			var/eta_status = emergency_shuttle.get_status_panel_eta()
@@ -417,7 +417,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 
 	var/turf/T = get_turf(src)
-	if(!T || (T.z in config.admin_levels))
+	if(!T || (T.z in using_map.admin_levels))
 		src << "<span class='warning'>You may not spawn as a mouse on this Z-level.</span>"
 		return
 

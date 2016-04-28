@@ -54,7 +54,7 @@
 	return ..()
 
 /mob/living/carbon/human/Stat()
-	..()
+	. = ..()
 	if(statpanel("Status"))
 		stat("Intent:", "[a_intent]")
 		stat("Move Mode:", "[m_intent]")
@@ -1125,6 +1125,10 @@
 	if(species.holder_type)
 		holder_type = species.holder_type
 
+
+	if(!(gender in species.genders))
+		gender = species.genders[1]
+
 	icon_state = lowertext(species.name)
 
 	species.create_organs(src)
@@ -1367,7 +1371,7 @@
 /mob/living/carbon/human/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in organs)
 		return
-	..()
+	. = ..()
 
 /mob/living/carbon/human/reset_view(atom/A, update_hud = 1)
 	..()

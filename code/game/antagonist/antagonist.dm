@@ -46,7 +46,6 @@
 	var/landmark_id                         // Spawn point identifier.
 	var/mob_path = /mob/living/carbon/human // Mobtype this antag will use if none is provided.
 	var/feedback_tag = "traitor_objective"  // End of round
-	var/bantype = "Syndicate"               // Ban to check when spawning this antag.
 	var/minimum_player_age = 7            	// Players need to be at least minimum_player_age days old before they are eligable for auto-spawning
 	var/suspicion_chance = 50               // Prob of being on the initial Command report
 	var/flags = 0                           // Various runtime options.
@@ -71,6 +70,12 @@
 	var/default_access = list()
 	var/id_type = /obj/item/weapon/card/id
 
+	var/antag_text = "You are an antagonist! Within the rules, \
+		try to act as an opposing force to the crew. Further RP and try to make sure \
+		other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, \
+		and before taking extreme actions, please try to also contact the administration! \
+		Think through your actions and make the roleplay immersive! <b>Please remember all \
+		rules aside from those without explicit exceptions apply to antagonists.</b>"
 
 /datum/antagonist/New()
 	..()

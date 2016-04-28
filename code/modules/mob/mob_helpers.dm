@@ -586,3 +586,9 @@ proc/is_blind(A)
 
 /mob/living/silicon/ai/get_multitool()
 	return ..(aiMulti)
+
+/proc/get_both_hands(mob/living/carbon/M)
+	if(!istype(M))
+		return
+	var/list/hands = list(M.l_hand, M.r_hand)
+	return hands

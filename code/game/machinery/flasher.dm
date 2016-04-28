@@ -37,9 +37,8 @@
 	wifi_receiver = null
 	return ..()
 
-/obj/machinery/flasher/power_change()
-	..()
-	if ( !(stat & NOPOWER) )
+/obj/machinery/flasher/update_icon()
+	if ( !(stat & (BROKEN|NOPOWER)) )
 		icon_state = "[base_state]1"
 //		src.sd_SetLuminosity(2)
 	else

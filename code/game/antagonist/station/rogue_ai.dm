@@ -20,6 +20,11 @@ var/datum/antagonist/rogue_ai/malf
 	..()
 	malf = src
 
+/datum/antagonist/rogue_ai/can_become_antag(var/datum/mind/player, var/ignore_role)
+	. = ..(player, ignore_role)
+	if(jobban_isbanned(player.current, "AI"))
+		return 0
+	return .
 
 /datum/antagonist/rogue_ai/build_candidate_list()
 	..()

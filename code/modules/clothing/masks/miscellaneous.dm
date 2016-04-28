@@ -122,33 +122,61 @@
     say_messages = list("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
     say_verbs = list("whinnies", "neighs", "says")
 
+
 /obj/item/clothing/mask/ai
 	name = "camera MIU"
 	desc = "Allows for direct mental connection to accessible camera networks."
 	icon_state = "s-ninja"
 	item_state = "s-ninja"
 	flags_inv = HIDEFACE
-	body_parts_covered = 0
-	var/mob/observer/eye/aiEye/eye
+	body_parts_covered = FACE|EYES
+	action_button_name = "Toggle MUI"
+	origin_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 5)
+	var/active = FALSE
+	var/mob/observer/eye/cameranet/eye
 
 /obj/item/clothing/mask/ai/New()
 	eye = new(src)
+	eye.name_sufix = "camera MIU"
+	..()
+
+/obj/item/clothing/mask/ai/Destroy()
+	if(eye)
+		if(active)
+			disengage_mask(eye.owner)
+		qdel(eye)
+		eye = null
+	..()
+
+/obj/item/clothing/mask/ai/attack_self(var/mob/user)
+	if(user.incapacitated())
+		return
+	active = !active
+	user << "<span class='notice'>You [active ? "" : "dis"]engage \the [src].</span>"
+	if(active)
+		engage_mask(user)
+	else
+		disengage_mask(user)
 
 /obj/item/clothing/mask/ai/equipped(var/mob/user, var/slot)
 	..(user, slot)
-	if(slot == slot_wear_mask)
-		eye.owner = user
-		user.eyeobj = eye
-
-		for(var/datum/chunk/c in eye.visibleChunks)
-			c.remove(eye)
-		eye.setLoc(user)
+	engage_mask(user)
 
 /obj/item/clothing/mask/ai/dropped(var/mob/user)
 	..()
-	if(eye.owner == user)
-		for(var/datum/chunk/c in eye.visibleChunks)
-			c.remove(eye)
+	disengage_mask(user)
 
-		eye.owner.eyeobj = null
-		eye.owner = null
+/obj/item/clothing/mask/ai/proc/engage_mask(var/mob/user)
+	if(!active)
+		return
+	if(user.get_equipped_item(slot_wear_mask) != src)
+		return
+
+	eye.possess(user)
+	eye.owner << "<span class='notice'>You feel disorented for a moment as your mind connects to the camera network.</span>"
+
+/obj/item/clothing/mask/ai/proc/disengage_mask(var/mob/user)
+	if(user == eye.owner)
+		eye.owner << "<span class='notice'>You feel disorented for a moment as your mind disconnects from the camera network.</span>"
+		eye.release(eye.owner)
+		eye.forceMove(src)

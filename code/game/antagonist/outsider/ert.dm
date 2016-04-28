@@ -2,10 +2,15 @@ var/datum/antagonist/ert/ert
 
 /datum/antagonist/ert
 	id = MODE_ERT
-	bantype = "Emergency Response Team"
 	role_text = "Emergency Responder"
 	role_text_plural = "Emergency Responders"
 	welcome_text = "As member of the Emergency Response Team, you answer only to your leader and company officials."
+	antag_text = "You are an <b>anti</b> antagonist! Within the rules, \
+		try to save the station and its inhabitants from the ongoing crisis. \
+		Try to make sure other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, \
+		and before taking extreme actions, please try to also contact the administration! \
+		Think through your actions and make the roleplay immersive! <b>Please remember all \
+		rules aside from those without explicit exceptions apply to the ERT.</b>"
 	leader_welcome_text = "As leader of the Emergency Response Team, you answer only to the Company, and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
 	landmark_id = "Response Team"
 	id_type = /obj/item/weapon/card/id/centcom/ERT

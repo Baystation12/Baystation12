@@ -47,9 +47,9 @@
 	if(health < max_health)
 		health += rand(3,5)
 		refresh_icon()
-		if(health > max_health)
-			health = max_health
-	else if(health == max_health && !plant)
+	if(health > max_health)
+		health = max_health
+	if(health == max_health && !plant)
 		plant = new(T,seed)
 		plant.dir = src.dir
 		plant.transform = src.transform
@@ -78,7 +78,7 @@
 	if(is_mature() && neighbors.len && prob(spread_chance))
 		//spread to 1-3 adjacent turfs depending on yield trait.
 		var/max_spread = between(1, round(seed.get_trait(TRAIT_YIELD)*3/14), 3)
-		
+
 		for(var/i in 1 to max_spread)
 			if(prob(spread_chance))
 				sleep(rand(3,5))

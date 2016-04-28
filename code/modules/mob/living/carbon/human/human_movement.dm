@@ -25,6 +25,11 @@
 	if(wear_suit)
 		tally += wear_suit.slowdown
 
+	//equipment slots that may give slowdown, shoes are handled separately below
+	for(var/obj/item/I in list(wear_suit, back, belt, w_uniform))
+		if(istype(I))
+			tally += I.slowdown
+
 	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
 		for(var/organ_name in list("l_hand","r_hand","l_arm","r_arm"))
 			var/obj/item/organ/external/E = get_organ(organ_name)
@@ -63,7 +68,7 @@
 
 	return (tally+config.human_delay)
 
-/mob/living/carbon/human/Process_Spacemove(var/check_drift = 0)
+/mob/living/carbon/human/Allow_Spacemove(var/check_drift = 0)
 	//Can we act?
 	if(restrained())	return 0
 
@@ -84,9 +89,7 @@
 			return 1
 
 	//If no working jetpack then use the other checks
-	if(..())
-		return 1
-	return 0
+	. = ..()
 
 
 /mob/living/carbon/human/slip_chance(var/prob_slip = 5)

@@ -84,7 +84,7 @@
 /obj/item/clothing/head/radiation
 	name = "Radiation Hood"
 	icon_state = "rad"
-	desc = "A hood with radiation protective properties. Label: Made with lead, do not eat insulation"
+	desc = "A hood with radiation protective properties. Label: Made with lead, do not eat insulation."
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 100)

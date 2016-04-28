@@ -140,8 +140,6 @@
 				listening_obj |= O
 
 		for(var/mob/M in player_list)
-			if(!M.is_preference_enabled(/datum/client_preference/show_looc))
-				continue
 			if(isAI(M))
 				var/mob/living/silicon/ai/A = M
 				if(A.eyeobj && (A.eyeobj.locs[1] in hearturfs))
@@ -154,6 +152,8 @@
 
 
 	for(var/client/t in listening)
+		if(!t.is_preference_enabled(/datum/client_preference/show_looc))
+			continue
 		var/admin_stuff = ""
 		var/prefix = ""
 		if(t in admins)
@@ -169,7 +169,7 @@
 
 
 	for(var/client/adm in admins)	//Now send to all admins that weren't in range.
-		if(!(adm in listening))
+		if(!(adm in listening) && adm.is_preference_enabled(/datum/client_preference/show_looc))
 			var/admin_stuff = "/([key])([admin_jump_link(mob, adm.holder)])"
 			var/prefix = "(R)"
 

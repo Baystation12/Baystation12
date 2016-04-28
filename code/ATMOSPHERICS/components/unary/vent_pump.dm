@@ -12,7 +12,7 @@
 	icon_state = "map_vent"
 
 	name = "Air Vent"
-	desc = "Has a valve and pump attached to it"
+	desc = "Has a valve and pump attached to it."
 	use_power = 0
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 7500			//7500 W ~ 10 HP
@@ -379,12 +379,6 @@
 		user << "You are too far away to read the gauge."
 	if(welded)
 		user << "It seems welded shut."
-
-/obj/machinery/atmospherics/unary/vent_pump/power_change()
-	var/old_stat = stat
-	..()
-	if(old_stat != stat)
-		update_icon()
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))

@@ -324,3 +324,5 @@ proc/TextPreview(var/string,var/len=40)
 			if(48 to 57)			//Numbers
 				return 1
 	return 0
+
+#define gender2text(gender) capitalize(gender)

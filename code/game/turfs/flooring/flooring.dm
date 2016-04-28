@@ -167,3 +167,10 @@ var/list/flooring_types
 	has_damage_range = 6
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK
 	can_paint = null
+
+/decl/flooring/diona
+	name = "biomass"
+	desc = "a mass of small intertwined aliens forming a floor... Creepy."
+	icon = 'icons/turf/floors.dmi'
+	icon_base = "diona"
+	flags = TURF_ACID_IMMUNE | TURF_REMOVE_SHOVEL

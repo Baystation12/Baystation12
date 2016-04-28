@@ -77,7 +77,6 @@
 				src.brainmob.emp_damage += rand(0,10)
 	..()
 
-/obj/item/device/mmi/digital/posibrain/New()
-	..()
-	src.brainmob.name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
+/obj/item/device/mmi/digital/posibrain/PickName()
+	src.brainmob.name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[random_id(type,100,999)]"
 	src.brainmob.real_name = src.brainmob.name

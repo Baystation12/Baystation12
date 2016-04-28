@@ -8,27 +8,6 @@
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 
-/obj/item/weapon/gun/projectile/colt/detective
-	magazine_type = /obj/item/ammo_magazine/c45m/flash
-
-/obj/item/weapon/gun/projectile/colt/detective/verb/rename_gun()
-	set name = "Name Gun"
-	set category = "Object"
-	set desc = "Rename your gun. If you're the detective."
-
-	var/mob/M = usr
-	if(!M.mind)	return 0
-	if(!M.mind.assigned_role == "Detective")
-		M << "<span class='notice'>You don't feel cool enough to name this gun, chump.</span>"
-		return 0
-
-	var/input = sanitizeSafe(input("What do you want to name the gun?", ,""), MAX_NAME_LEN)
-
-	if(src && input && !M.stat && in_range(M,src))
-		name = input
-		M << "You name the gun [input]. Say hello to your new friend."
-		return 1
-
 /obj/item/weapon/gun/projectile/sec
 	name = ".45 pistol"
 	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Found pretty much everywhere humans are. Uses .45 rounds."
@@ -39,6 +18,13 @@
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 
+/obj/item/weapon/gun/projectile/sec/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "secguncomp"
+	else
+		icon_state = "secguncomp-e"
+
 /obj/item/weapon/gun/projectile/sec/flash
 	name = ".45 signal pistol"
 
@@ -46,6 +32,13 @@
 	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. This one has a sweet wooden grip. Uses .45 rounds."
 	name = "custom .45 Pistol"
 	icon_state = "secgundark"
+
+/obj/item/weapon/gun/projectile/sec/wood/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "secgundark"
+	else
+		icon_state = "secgundark-e"
 
 /obj/item/weapon/gun/projectile/silenced
 	name = "silenced pistol"
@@ -60,7 +53,7 @@
 
 /obj/item/weapon/gun/projectile/deagle
 	name = "desert eagle"
-	desc = "A robust handgun that uses .50 AE ammo"
+	desc = "A robust handgun that uses .50 AE ammo."
 	icon_state = "deagle"
 	item_state = "deagle"
 	force = 14.0
@@ -84,7 +77,7 @@
 
 /obj/item/weapon/gun/projectile/gyropistol
 	name = "gyrojet pistol"
-	desc = "A bulky pistol designed to fire self propelled rounds"
+	desc = "A bulky pistol designed to fire self propelled rounds."
 	icon_state = "gyropistol"
 	max_shells = 8
 	caliber = "75"
@@ -157,7 +150,7 @@
 
 /obj/item/weapon/silencer
 	name = "silencer"
-	desc = "a silencer"
+	desc = "A silencer."
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "silencer"
 	w_class = 2

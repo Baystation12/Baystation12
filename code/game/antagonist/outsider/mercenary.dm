@@ -3,7 +3,6 @@ var/datum/antagonist/mercenary/mercs
 /datum/antagonist/mercenary
 	id = MODE_MERCENARY
 	role_text = "Mercenary"
-	bantype = "operative"
 	antag_indicator = "synd"
 	role_text_plural = "Mercenaries"
 	landmark_id = "Syndicate-Spawn"
@@ -44,7 +43,7 @@ var/datum/antagonist/mercenary/mercs
 	player.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(player.back), slot_in_backpack)
 	player.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/pill/cyanide(player), slot_in_backpack)
 
-	var/obj/item/device/radio/uplink/U = new(player.loc, player.mind, DEFAULT_TELECRYSTAL_AMOUNT)
+	var/obj/item/device/radio/uplink/U = new(get_turf(player), player.mind, DEFAULT_TELECRYSTAL_AMOUNT)
 	player.put_in_hands(U)
 
 	player.update_icons()

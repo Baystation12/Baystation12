@@ -26,6 +26,7 @@ var/global/datum/controller/gameticker/ticker
 	var/list/availablefactions = list()	  // list of factions with openings
 
 	var/pregame_timeleft = 0
+	var/gamemode_voted = 0
 
 	var/delay_end = 0	//if set to nonzero, the round will not restart on it's own
 
@@ -44,7 +45,25 @@ var/global/datum/controller/gameticker/ticker
 	'sound/music/clouds.s3m',\
 	'sound/music/space_oddity.ogg') //Ground Control to Major Tom, this song is cool, what's going on?
 	do
-		pregame_timeleft = 180
+		if(!gamemode_voted)
+			pregame_timeleft = 180
+		else
+			pregame_timeleft = 15
+			if(!isnull(secondary_mode))
+				master_mode = secondary_mode
+				secondary_mode = null
+				world << "Trying to start the second top game mode..."
+				if(!hide_mode)
+					world << "<b>The game mode is now: [master_mode]</b>"
+			else if(!isnull(tertiary_mode))
+				master_mode = tertiary_mode
+				tertiary_mode = null
+				world << "Trying to start the third top game mode..."
+				if(!hide_mode)
+					world << "<b>The game mode is now: [master_mode]</b>"
+			else
+				master_mode = "extended"
+				world << "<b>Forcing the game mode to extended...</b>"
 		world << "<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>"
 		world << "Please, setup your character and select ready. Game will start in [pregame_timeleft] seconds"
 		while(current_state == GAME_STATE_PREGAME)
@@ -53,7 +72,8 @@ var/global/datum/controller/gameticker/ticker
 				vote.process()
 			if(round_progressing)
 				pregame_timeleft--
-			if(pregame_timeleft == config.vote_autogamemode_timeleft)
+			if(pregame_timeleft == config.vote_autogamemode_timeleft && !gamemode_voted)
+				gamemode_voted = 1
 				if(!vote.time_remaining)
 					vote.autogamemode()	//Quit calling this over and over and over and over.
 					while(vote.time_remaining)
@@ -174,7 +194,7 @@ var/global/datum/controller/gameticker/ticker
 		cinematic = new(src)
 		cinematic.icon = 'icons/effects/station_explosion.dmi'
 		cinematic.icon_state = "station_intact"
-		cinematic.layer = 20
+		cinematic.layer = CINEMA_LAYER
 		cinematic.mouse_opacity = 0
 		cinematic.screen_loc = "1,0"
 
@@ -194,7 +214,7 @@ var/global/datum/controller/gameticker/ticker
 				switch(M.z)
 					if(0)	//inside a crate or something
 						var/turf/T = get_turf(M)
-						if(T && T.z in config.station_levels)				//we don't use M.death(0) because it calls a for(/mob) loop and
+						if(T && T.z in using_map.station_levels)				//we don't use M.death(0) because it calls a for(/mob) loop and
 							M.health = 0
 							M.stat = DEAD
 					if(1)	//on a z-level 1 turf.
@@ -254,7 +274,7 @@ var/global/datum/controller/gameticker/ticker
 						world << sound('sound/effects/explosionfar.ogg')
 						cinematic.icon_state = "summary_selfdes"
 				for(var/mob/living/M in living_mob_list)
-					if(M.loc.z in config.station_levels)
+					if(M.loc.z in using_map.station_levels)
 						M.death()//No mercy
 		//If its actually the end of the round, wait for it to end.
 		//Otherwise if its a verb it will continue on afterwards.
@@ -323,9 +343,14 @@ var/global/datum/controller/gameticker/ticker
 			spawn
 				declare_completion()
 
-			spawn(50)
-				callHook("roundend")
 
+			spawn(50)
+				if(config.allow_map_switching && config.auto_map_vote && all_maps.len > 1)
+					vote.automap()
+					while(vote.time_remaining)
+						sleep(50)
+
+				callHook("roundend")
 				if (universe_has_ended)
 					if(mode.station_was_nuked)
 						feedback_set_details("end_proper","nuke")

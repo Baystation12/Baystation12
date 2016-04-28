@@ -84,7 +84,7 @@
 	return ..(FEMALE,1,6)
 
 /datum/language/cultcommon
-	name = "Cult"
+	name = LANGUAGE_CULT
 	desc = "The chants of the occult, the incomprehensible."
 	speech_verb = "intones"
 	ask_verb = "intones"

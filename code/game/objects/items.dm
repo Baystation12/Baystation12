@@ -10,7 +10,6 @@
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = null
-	var/storage_cost = null
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
 	pass_flags = PASSTABLE
@@ -74,17 +73,9 @@
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
 
-/obj/item/equipped()
-	..()
-	var/mob/M = loc
-	if(!istype(M))
-		return
-	if(M.l_hand)
-		M.l_hand.update_held_icon()
-	if(M.r_hand)
-		M.r_hand.update_held_icon()
-
 /obj/item/Destroy()
+	qdel(hidden_uplink)
+	hidden_uplink = null
 	if(ismob(loc))
 		var/mob/m = loc
 		m.drop_from_inventory(src)
@@ -253,10 +244,18 @@
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
-	layer = 20
+	layer = SCREEN_LAYER+0.01
 	if(user.client)	user.client.screen |= src
 	if(user.pulling == src) user.stop_pulling()
-	return
+	
+	//Update two-handing status
+	var/mob/M = loc
+	if(!istype(M))
+		return
+	if(M.l_hand)
+		M.l_hand.update_held_icon()
+	if(M.r_hand)
+		M.r_hand.update_held_icon()
 
 //Defines which slots correspond to which slot flags
 var/list/global/slot_flags_enumeration = list(

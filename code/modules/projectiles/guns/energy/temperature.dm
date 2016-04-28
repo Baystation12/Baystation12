@@ -2,7 +2,7 @@
 	name = "temperature gun"
 	icon_state = "freezegun"
 	fire_sound = 'sound/weapons/pulse3.ogg'
-	desc = "A gun that changes temperatures. It has a small label on the side, 'More extreme temperatures will cost more charge!'"
+	desc = "A gun that changes temperatures. It has a small label on the side, 'More extreme temperatures will cost more charge!'."
 	var/temperature = T20C
 	var/current_temperature = T20C
 	charge_cost = 100

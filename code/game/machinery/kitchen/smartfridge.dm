@@ -58,7 +58,7 @@
 
 /obj/machinery/smartfridge/secure/extract
 	name = "\improper Slime Extract Storage"
-	desc = "A refrigerated storage unit for slime extracts"
+	desc = "A refrigerated storage unit for slime extracts."
 	req_access = list(access_research)
 
 /obj/machinery/smartfridge/secure/extract/accept_check(var/obj/item/O as obj)
@@ -176,12 +176,6 @@
 		src.seconds_electrified--
 	if(src.shoot_inventory && prob(2))
 		src.throw_item()
-
-/obj/machinery/smartfridge/power_change()
-	var/old_stat = stat
-	..()
-	if(old_stat != stat)
-		update_icon()
 
 /obj/machinery/smartfridge/update_icon()
 	if(stat & (BROKEN|NOPOWER))

@@ -335,12 +335,13 @@ Class Procs:
 
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(loc)
+	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(get_turf(src))
 	M.set_dir(src.dir)
 	M.state = 2
 	M.icon_state = "box_1"
 	for(var/obj/I in component_parts)
-		I.loc = loc
+		I.forceMove(get_turf(src))
+
 	qdel(src)
 	return 1
 

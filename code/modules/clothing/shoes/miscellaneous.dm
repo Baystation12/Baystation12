@@ -25,7 +25,7 @@
 
 /obj/item/clothing/shoes/combat //Basically SWAT shoes combined with galoshes.
 	name = "combat boots"
-	desc = "When you REALLY want to turn up the heat"
+	desc = "When you REALLY want to turn up the heat."
 	icon_state = "swat"
 	force = 5
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
@@ -91,7 +91,7 @@
 
 /obj/item/clothing/shoes/cyborg
 	name = "cyborg boots"
-	desc = "Shoes for a cyborg costume"
+	desc = "Shoes for a cyborg costume."
 	icon_state = "boots"
 
 /obj/item/clothing/shoes/slippers

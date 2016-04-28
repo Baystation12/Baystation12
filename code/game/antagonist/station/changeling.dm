@@ -2,7 +2,6 @@
 	id = MODE_CHANGELING
 	role_text = "Changeling"
 	role_text_plural = "Changelings"
-	bantype = "changeling"
 	feedback_tag = "changeling_objective"
 	restricted_jobs = list("AI", "Cyborg")
 	protected_jobs = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain")

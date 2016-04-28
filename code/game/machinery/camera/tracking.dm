@@ -6,13 +6,11 @@
 /mob/living/silicon/ai/var/stored_locations[0]
 
 /proc/InvalidPlayerTurf(turf/T as turf)
-	return !(T && T.z in config.player_levels)
+	return !(T && T.z in using_map.player_levels)
 
 /mob/living/silicon/ai/proc/get_camera_list()
 	if(src.stat == 2)
 		return
-
-	cameranet.process_sort()
 
 	var/list/T = list()
 	for (var/obj/machinery/camera/C in cameranet.cameras)
@@ -216,7 +214,7 @@
 mob/living/proc/near_camera()
 	if (!isturf(loc))
 		return 0
-	else if(!cameranet.checkVis(src))
+	else if(!cameranet.is_visible(src))
 		return 0
 	return 1
 
@@ -256,7 +254,7 @@ mob/living/proc/near_camera()
 
 	if(. == TRACKING_NO_COVERAGE)
 		var/turf/T = get_turf(src)
-		if(T && (T.z in config.station_levels) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
+		if(T && (T.z in using_map.station_levels) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
 			return TRACKING_POSSIBLE
 
 mob/living/proc/tracking_initiated()

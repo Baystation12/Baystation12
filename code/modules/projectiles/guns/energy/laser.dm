@@ -105,7 +105,7 @@ obj/item/weapon/gun/energy/retro
 /obj/item/weapon/gun/energy/lasertag
 	name = "laser tag gun"
 	item_state = "laser"
-	desc = "Standard issue weapon of the Imperial Guard"
+	desc = "Standard issue weapon of the Imperial Guard."
 	origin_tech = list(TECH_COMBAT = 1, TECH_MAGNET = 2)
 	self_recharge = 1
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)

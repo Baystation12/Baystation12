@@ -455,7 +455,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				data["convo_job"] = sanitize(c["job"])
 				break
 	if(mode==41)
-		data_core.get_manifest_json()
+		data_core.get_manifest_list()
 
 
 	if(mode==3)
@@ -524,7 +524,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		data["feed"] = feed
 
-	data["manifest"] = list("__json_cache" = ManifestJSON)
+	data["manifest"] = PDA_Manifest
 
 	nanoUI = data
 	// update the ui if it exists, returns null if no ui is passed/found

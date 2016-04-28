@@ -6,7 +6,6 @@
 	item_state = "utility"
 	storage_slots = 7
 	max_w_class = 3
-	max_storage_space = 28
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/belt.dmi')
@@ -140,7 +139,7 @@
 
 /obj/item/weapon/storage/belt/soulstone
 	name = "soul stone belt"
-	desc = "Designed for ease of access to the shards during a fight, as to not let a single enemy spirit slip away"
+	desc = "Designed for ease of access to the shards during a fight, as to not let a single enemy spirit slip away."
 	icon_state = "soulstonebelt"
 	item_state = "soulstonebelt"
 	storage_slots = 6

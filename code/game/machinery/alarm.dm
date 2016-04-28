@@ -832,11 +832,6 @@
 
 	return ..()
 
-/obj/machinery/alarm/power_change()
-	..()
-	spawn(rand(0,15))
-		update_icon()
-
 /obj/machinery/alarm/examine(mob/user)
 	..(user)
 	if (buildstage < 2)
@@ -1007,11 +1002,6 @@ FIRE ALARM
 
 	return
 
-/obj/machinery/firealarm/power_change()
-	..()
-	spawn(rand(0,15))
-		update_icon()
-
 /obj/machinery/firealarm/attack_hand(mob/user as mob)
 	if(user.stat || stat & (NOPOWER|BROKEN))
 		return
@@ -1129,7 +1119,7 @@ FIRE ALARM
 		update_icon()
 
 /obj/machinery/firealarm/initialize()
-	if(z in config.contact_levels)
+	if(z in using_map.contact_levels)
 		set_security_level(security_level? get_security_level() : "green")
 
 /*
@@ -1140,7 +1130,7 @@ Just a object used in constructing fire alarms
 	name = "fire alarm electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"
-	desc = "A circuit. It has a label on it, it says \"Can handle heat levels up to 40 degrees celsius!\""
+	desc = "A circuit. It has a label on it, it says \"Can handle heat levels up to 40 degrees celsius!\"."
 	w_class = 2.0
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 

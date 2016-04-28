@@ -6,44 +6,36 @@
 /datum/chunk/camera
 	var/list/cameras = list()
 
-/datum/chunk/camera/acquireVisibleTurfs(var/list/visible)
-	for(var/camera in cameras)
-		var/obj/machinery/camera/c = camera
+/datum/chunk/camera/Destroy()
+	cameras.Cut()
+	. = ..()
 
-		if(!istype(c))
-			cameras -= c
-			continue
-
-		if(!c.can_use())
-			continue
-
-		var/turf/point = locate(src.x + 8, src.y + 8, src.z)
-		if(get_dist(point, c) > 24)
-			cameras -= c
-
-		for(var/turf/t in c.can_see())
-			visible[t] = t
-
-	for(var/mob/living/silicon/ai/AI in living_mob_list)
-		for(var/turf/t in AI.seen_camera_turfs())
-			visible[t] = t
-
-// Create a new camera chunk, since the chunks are made as they are needed.
-
-/datum/chunk/camera/New(loc, x, y, z)
-	for(var/obj/machinery/camera/c in range(16, locate(x + 8, y + 8, z)))
-		if(c.can_use())
-			cameras += c
+/datum/chunk/camera/add_source(var/atom/source)
 	..()
+	if(istype(source, /obj/machinery/camera))
+		cameras += source
 
-/mob/living/silicon/proc/provides_camera_vision()
-	return 0
+/datum/chunk/camera/remove_source(var/atom/source)
+	..()
+	if(istype(source, /obj/machinery/camera))
+		cameras -= source
 
-/mob/living/silicon/ai/provides_camera_vision()
-	return stat != DEAD
+/datum/chunk/camera/acquire_visible_turfs(var/list/visible)
+	for(var/source in sources)
+		if(istype(source,/obj/machinery/camera))
+			var/obj/machinery/camera/c = source
+			if(!c.can_use())
+				continue
 
-/mob/living/silicon/robot/provides_camera_vision()
-	return src.camera && src.camera.network.len
-
-/mob/living/silicon/ai/proc/seen_camera_turfs()
-	return seen_turfs_in_range(src, world.view)
+			for(var/turf/t in c.can_see())
+				visible[t] = t
+		else if(isAI(source))
+			var/mob/living/silicon/ai/AI = source
+			if(AI.stat == DEAD)
+				continue
+			for(var/turf/t in seen_turfs_in_range(AI, world.view))
+				visible[t] = t
+		else
+			var/datum/S = source
+			log_debug("[visualnet] - [src] ([x]-[y]-[z]) contained an unhandled source: [S] [S ? "- [S.type]" : "" ]")
+			sources -= source

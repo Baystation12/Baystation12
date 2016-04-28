@@ -105,6 +105,11 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 /obj/item/device/uplink/hidden/interact(mob/user)
 	ui_interact(user)
 
+/obj/item/device/uplink/hidden/CanUseTopic()
+	if(!active)
+		return STATUS_CLOSE
+	return ..()
+
 // The purchasing code.
 /obj/item/device/uplink/hidden/Topic(href, href_list)
 	if(..())
@@ -192,16 +197,18 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 // Includes normal radio uplink, multitool uplink,
 // implant uplink (not the implant tool) and a preset headset uplink.
 
-/obj/item/device/radio/uplink/New()
-	hidden_uplink = new(src)
+/obj/item/device/radio/uplink/New(var/loc, var/owner)
+	..()
+	hidden_uplink = new(src, owner)
 	icon_state = "radio"
 
 /obj/item/device/radio/uplink/attack_self(mob/user as mob)
 	if(hidden_uplink)
 		hidden_uplink.trigger(user)
 
-/obj/item/device/multitool/uplink/New()
-	hidden_uplink = new(src)
+/obj/item/device/multitool/uplink/New(var/loc, var/owner)
+	..()
+	hidden_uplink = new(src, owner)
 
 /obj/item/device/multitool/uplink/attack_self(mob/user as mob)
 	if(hidden_uplink)

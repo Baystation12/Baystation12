@@ -148,6 +148,13 @@
 	item_state = "bl_suit"
 	worn_state = "scrubsblack"
 
+/obj/item/clothing/under/rank/medical/navyblue
+	name = "medical scrubs"
+	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in navy blue."
+	icon_state = "scrubsnavyblue"
+	item_state = "b_suit"
+	worn_state = "scrubsnavyblue"
+
 /obj/item/clothing/under/rank/psych
 	desc = "A basic white jumpsuit. It has turqouise markings that denote the wearer as a psychiatrist."
 	name = "psychiatrist's jumpsuit"

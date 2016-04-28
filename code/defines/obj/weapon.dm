@@ -293,13 +293,6 @@
 	desc = "Heavy-duty switching circuits for power control."
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 
-/obj/item/weapon/module/power_control/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (istype(W, /obj/item/device/multitool))
-		var/obj/item/weapon/circuitboard/ghettosmes/newcircuit = new/obj/item/weapon/circuitboard/ghettosmes(user.loc)
-		qdel(src)
-		user.put_in_hands(newcircuit)
-
-
 /obj/item/weapon/module/id_auth
 	name = "\improper ID authentication module"
 	icon_state = "id_mod"
@@ -396,7 +389,7 @@
 	icon = 'icons/obj/stock_parts.dmi'
 	w_class = 2.0
 	var/rating = 1
-	
+
 /obj/item/weapon/stock_parts/New()
 	src.pixel_x = rand(-5.0, 5)
 	src.pixel_y = rand(-5.0, 5)
@@ -580,7 +573,7 @@
 
 /obj/item/weapon/ectoplasm
 	name = "ectoplasm"
-	desc = "spooky"
+	desc = "Spooky."
 	gender = PLURAL
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "ectoplasm"

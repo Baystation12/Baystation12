@@ -19,7 +19,7 @@
 ///////////////////////////////
 
 /proc/pick_meteor_start(var/startSide = pick(cardinal))
-	var/startLevel = pick(config.station_levels)
+	var/startLevel = pick(using_map.station_levels)
 	var/pickedstart = spaceDebrisStartLoc(startSide, startLevel)
 
 	return list(startLevel, pickedstart)
@@ -243,7 +243,7 @@
 /obj/effect/meteor/tunguska
 	name = "tunguska meteor"
 	icon_state = "flaming"
-	desc = "Your life briefly passes before your eyes the moment you lay them on this monstruosity"
+	desc = "Your life briefly passes before your eyes the moment you lay them on this monstruosity."
 	hits = 30
 	hitpwr = 1
 	heavy = 1

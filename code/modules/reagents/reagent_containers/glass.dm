@@ -5,7 +5,7 @@
 /obj/item/weapon/reagent_containers/glass
 	name = " "
 	var/base_name = " "
-	desc = " "
+	desc = ""
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "null"
 	item_state = "null"
@@ -190,6 +190,7 @@
 	icon_state = "vial"
 	matter = list("glass" = 250)
 	volume = 30
+	w_class = 1 //half the volume of a bottle, half the size
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,25)
 	flags = OPENCONTAINER

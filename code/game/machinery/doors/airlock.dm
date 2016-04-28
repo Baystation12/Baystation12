@@ -1,3 +1,5 @@
+#define AIRLOCK_CRUSH_DIVISOR 8 // Damage caused by airlock crushing a mob is split into multiple smaller hits. Prevents things like cut off limbs, etc, while still having quite dangerous injury.
+#define CYBORG_AIRLOCKCRUSH_RESISTANCE 4 // Damage caused to silicon mobs (usually cyborgs) from being crushed by airlocks is divided by this number. Unlike organics cyborgs don't have passive regeneration, so even one hit can be devastating for them.
 /obj/machinery/door/airlock
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorint.dmi'
@@ -75,6 +77,11 @@
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doormed.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_med
+
+/obj/machinery/door/airlock/virology
+	name = "Airlock"
+	icon = 'icons/obj/doors/Doorviro.dmi'
+	assembly_type = /obj/structure/door_assembly/door_assembly_viro
 
 /obj/machinery/door/airlock/maintenance
 	name = "Maintenance Access"
@@ -171,6 +178,16 @@
 	explosion_resistance = 5
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_med
+	glass = 1
+
+/obj/machinery/door/airlock/glass_virology
+	name = "Maintenance Hatch"
+	icon = 'icons/obj/doors/Doorviroglass.dmi'
+	hitsound = 'sound/effects/Glasshit.ogg'
+	maxhealth = 300
+	explosion_resistance = 5
+	opacity = 0
+	assembly_type = /obj/structure/door_assembly/door_assembly_viro
 	glass = 1
 
 /obj/machinery/door/airlock/mining
@@ -931,11 +948,24 @@ About the new airlock wires panel:
 
 /mob/living/airlock_crush(var/crush_damage)
 	. = ..()
-	adjustBruteLoss(crush_damage)
+	for(var/i = 1, i <= AIRLOCK_CRUSH_DIVISOR, i++)
+		adjustBruteLoss(round(crush_damage / AIRLOCK_CRUSH_DIVISOR))
 	SetStunned(5)
 	SetWeakened(5)
 	var/turf/T = get_turf(src)
 	T.add_blood(src)
+	var/list/valid_turfs = list()
+	for(var/dir_to_test in cardinal)
+		var/turf/new_turf = get_step(T, dir_to_test)
+		if(!new_turf.contains_dense_objects())
+			valid_turfs |= new_turf
+
+	while(valid_turfs.len)
+		T = pick(valid_turfs)
+		valid_turfs -= T
+		// Try to move us to the turf. If all turfs fail for some reason we will stay on this tile.
+		if(src.Move(T))
+			return
 
 /mob/living/carbon/airlock_crush(var/crush_damage)
 	. = ..()
@@ -943,8 +973,7 @@ About the new airlock wires panel:
 		emote("scream")
 
 /mob/living/silicon/robot/airlock_crush(var/crush_damage)
-	adjustBruteLoss(crush_damage)
-	return 0
+	return ..(round(crush_damage / CYBORG_AIRLOCKCRUSH_RESISTANCE))
 
 /obj/machinery/door/airlock/close(var/forced=0)
 	if(!can_close(forced))
@@ -964,6 +993,7 @@ About the new airlock wires panel:
 		for(var/atom/movable/AM in turf)
 			if(AM.airlock_crush(DOOR_CRUSH_DAMAGE))
 				take_damage(DOOR_CRUSH_DAMAGE)
+				use_power(DOOR_CRUSH_DAMAGE * 100)		// Uses bunch extra power for crushing the target.
 
 	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(arePowerSystemsOn())
@@ -1033,7 +1063,7 @@ About the new airlock wires panel:
 
 	//wires
 	var/turf/T = get_turf(newloc)
-	if(T && (T.z in config.admin_levels))
+	if(T && (T.z in using_map.admin_levels))
 		secured_wires = 1
 	if (secured_wires)
 		wires = new/datum/wires/airlock/secure(src)
@@ -1085,12 +1115,10 @@ About the new airlock wires panel:
 	..()
 
 /obj/machinery/door/airlock/power_change() //putting this is obj/machinery/door itself makes non-airlock doors turn invisible for some reason
-	..()
+	. = ..()
 	if(stat & NOPOWER)
 		// If we lost power, disable electrification
-		// Keeping door lights on, runs on internal battery or something.
 		electrified_until = 0
-	update_icon()
 
 /obj/machinery/door/airlock/proc/prison_open()
 	if(arePowerSystemsOn())
