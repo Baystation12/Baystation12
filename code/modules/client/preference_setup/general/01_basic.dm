@@ -1,5 +1,5 @@
 datum/preferences
-	var/gender = MALE					//gender of character (well duh)
+	var/sex = MALE					//gender of character (well duh)
 
 /datum/category_item/player_setup_item/general/basic
 	name = "Basic"
@@ -8,6 +8,7 @@ datum/preferences
 /datum/category_item/player_setup_item/general/basic/load_character(var/savefile/S)
 	S["real_name"]				>> pref.real_name
 	S["name_is_always_random"]	>> pref.be_random_name
+	S["sex"]					>> pref.sex
 	S["gender"]					>> pref.gender
 	S["age"]					>> pref.age
 	S["spawnpoint"]				>> pref.spawnpoint
@@ -16,6 +17,7 @@ datum/preferences
 /datum/category_item/player_setup_item/general/basic/save_character(var/savefile/S)
 	S["real_name"]				<< pref.real_name
 	S["name_is_always_random"]	<< pref.be_random_name
+	S["sex"]					<< pref.sex
 	S["gender"]					<< pref.gender
 	S["age"]					<< pref.age
 	S["spawnpoint"]				<< pref.spawnpoint
@@ -24,20 +26,26 @@ datum/preferences
 /datum/category_item/player_setup_item/general/basic/sanitize_character()
 	var/datum/species/S = all_species[pref.species ? pref.species : "Human"]
 	pref.age                = sanitize_integer(pref.age, S.min_age, S.max_age, initial(pref.age))
-	pref.gender             = sanitize_inlist(pref.gender, S.genders, pick(S.genders))
+	pref.sex             = sanitize_inlist(pref.sex, S.sexes, pick(S.sexes))
+	pref.gender			= sanitize_inlist(pref.gender, S.genders, S.genders[1])
 	pref.real_name          = sanitize_name(pref.real_name, pref.species)
 	if(!pref.real_name)
-		pref.real_name      = random_name(pref.gender, pref.species)
+		if (S.allow_genders)
+			pref.real_name      = random_name(pick_gender(pref.gender, pref.sex), pref.species)
+		else
+			pref.real_name = random_name(pref.sex, pref.species)
 	pref.spawnpoint         = sanitize_inlist(pref.spawnpoint, spawntypes, initial(pref.spawnpoint))
 	pref.be_random_name     = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
 
 /datum/category_item/player_setup_item/general/basic/content()
+	var/datum/species/S = all_species[pref.species ? pref.species : "Human"]
 	. = "<b>Name:</b> "
 	. += "<a href='?src=\ref[src];rename=1'><b>[pref.real_name]</b></a><br>"
 	. += "(<a href='?src=\ref[src];random_name=1'>Random Name</A>) "
 	. += "(<a href='?src=\ref[src];always_random_name=1'>Always Random Name: [pref.be_random_name ? "Yes" : "No"]</a>)"
 	. += "<br>"
-	. += "<b>Gender:</b> <a href='?src=\ref[src];gender=1'><b>[gender2text(pref.gender)]</b></a><br>"
+	. += "<b>Sex:</b> <a href='?src=\ref[src];sex=1'><b>[sex2text(pref.sex)]</b></a><br>"
+	. += "<b>Gender:</b> [S.allow_genders ? "<a href='?src=\ref[src];gender=1'><b>[gender2text(pref.gender, pref.sex)]</b></a>" : "N/A"]<br>"
 	. += "<b>Age:</b> <a href='?src=\ref[src];age=1'>[pref.age]</a><br>"
 	. += "<b>Spawn Point</b>: <a href='?src=\ref[src];spawnpoint=1'>[pref.spawnpoint]</a><br>"
 	if(config.allow_Metadata)
@@ -57,17 +65,28 @@ datum/preferences
 				return TOPIC_NOACTION
 
 	else if(href_list["random_name"])
-		pref.real_name = random_name(pref.gender, pref.species)
+		if (pref.gender == "Opposite" || istype(pref.gender, /datum/gender))
+			pref.real_name = random_name(pick_gender(pref.gender, pref.sex), pref.species)
+		else
+			pref.real_name = random_name(pref.sex, pref.species)
 		return TOPIC_REFRESH
 
 	else if(href_list["always_random_name"])
 		pref.be_random_name = !pref.be_random_name
 		return TOPIC_REFRESH
 
+	else if(href_list["sex"])
+		var/new_sex = input(user, "Choose your character's biological gender:", "Character Preference", pref.sex) as null|anything in S.sexes
+		if(new_sex && CanUseTopic(user))
+			pref.sex = new_sex
+		return TOPIC_REFRESH
+
 	else if(href_list["gender"])
-		var/new_gender = input(user, "Choose your character's gender:", "Character Preference", pref.gender) as null|anything in S.genders
-		if(new_gender && CanUseTopic(user))
+		var/new_gender = input(user, "Choose your character's identity gender:", "Character Preference", pref.gender) as null|anything in S.genders
+		if(new_gender && S.allow_genders && CanUseTopic(user))
 			pref.gender = new_gender
+		else
+			pref.gender = gender2text(-1)
 		return TOPIC_REFRESH
 
 	else if(href_list["age"])

@@ -332,4 +332,4 @@ proc/TextPreview(var/string,var/len=40)
 		text += ascii2text(letter)
 	return text
 
-#define gender2text(gender) capitalize(gender)
+#define sex2text(sex) capitalize(sex)

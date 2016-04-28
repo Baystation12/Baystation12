@@ -27,6 +27,7 @@ datum/preferences
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we are a random name every round
 	var/age = 30						//age of character
+	var/gender = 0					//identity gender of character
 	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/backbag = 2						//backpack type
@@ -253,7 +254,7 @@ datum/preferences
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
 	if(be_random_name)
-		real_name = random_name(gender,species)
+		real_name = random_name(pick_gender(gender,sex),species)
 
 	if(config.humans_need_surnames)
 		var/firstspace = findtext(real_name, " ")
@@ -262,6 +263,8 @@ datum/preferences
 			real_name += " [pick(last_names)]"
 		else if(firstspace == name_length)
 			real_name += "[pick(last_names)]"
+
+	var/datum/species/S = all_species[species]
 
 	character.real_name = real_name
 	character.name = character.real_name
@@ -283,7 +286,11 @@ datum/preferences
 	character.gen_record = gen_record
 	character.exploit_record = exploit_record
 
-	character.gender = gender
+	character.sex = sex
+	if (S.allow_genders && gender)
+		character.gender = pick_gender(gender, sex)
+	else character.gender = character.sex
+
 	character.age = age
 	character.b_type = b_type
 

@@ -165,3 +165,5 @@
 
 	var/memory = ""
 	var/flavor_text = ""
+
+	var/sex = 0 // for all your transvestite needs

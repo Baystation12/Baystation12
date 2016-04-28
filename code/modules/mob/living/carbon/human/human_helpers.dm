@@ -82,5 +82,8 @@
 	if(O.visor && O.visor.active && O.visor.vision && O.visor.vision.glasses && (!O.helmet || (head && O.helmet == head)))
 		process_glasses(O.visor.vision.glasses)
 
+/mob/living/carbon/human/get_sex()
+	return sex
+
 /mob/living/carbon/human/get_gender()
 	return gender

@@ -2,7 +2,7 @@ datum/preferences
 	//The mob should have a gender you want before running this proc. Will run fine without H
 	proc/randomize_appearance_for(var/mob/living/carbon/human/H)
 		var/datum/species/current_species = all_species[species ? species : "Human"]
-		gender = pick(current_species.genders)
+		sex = pick(current_species.sexes)
 
 		if(current_species)
 			if(current_species.appearance_flags & HAS_SKIN_TONE)
@@ -12,8 +12,8 @@ datum/preferences
 			if(current_species.appearance_flags & HAS_SKIN_COLOR)
 				randomize_skin_color()
 
-		h_style = random_hair_style(gender, species)
-		f_style = random_facial_hair_style(gender, species)
+		h_style = random_hair_style(sex, species)
+		f_style = random_facial_hair_style(sex, species)
 		randomize_hair_color("hair")
 		randomize_hair_color("facial")
 
@@ -187,7 +187,7 @@ datum/preferences
 		var/list/overlays = list()
 
 		var/g = "m"
-		if(gender == FEMALE)	g = "f"
+		if(sex == FEMALE)	g = "f"
 
 		var/icon/icobase
 		var/datum/species/current_species = all_species[species]

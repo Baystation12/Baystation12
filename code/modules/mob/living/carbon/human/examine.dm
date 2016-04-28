@@ -7,6 +7,7 @@
 	var/skipears = 0
 	var/skipeyes = 0
 	var/skipface = 0
+	var/skipgender = 0
 
 	//exosuits and helmets obscure our view and stuff.
 	if(wear_suit)
@@ -24,10 +25,15 @@
 	if(wear_mask)
 		skipface |= wear_mask.flags_inv & HIDEFACE
 
+	skipgender = (skipjumpsuit && skipface)
+
 	var/msg = "<span class='info'>*---------*\nThis is "
 
 	var/datum/gender/T = gender_datums[get_gender()]
-	if(skipjumpsuit && skipface) //big suits/masks/helmets make it hard to tell their gender
+	var/datum/gender/T_real = gender_datums[get_sex()]
+	var/has_mundane_gender = (istype(T_real, /datum/gender/male) || istype(T_real, /datum/gender/female))
+
+	if(skipgender) //big suits/masks/helmets make it hard to tell their gender ! see row 28
 		T = gender_datums[PLURAL]
 	else
 		if(icon)
@@ -35,11 +41,15 @@
 
 	if(!T)
 		// Just in case someone VVs the gender to something strange. It'll runtime anyway when it hits usages, better to CRASH() now with a helpful message.
-		CRASH("Gender datum was null; key was '[(skipjumpsuit && skipface) ? PLURAL : gender]'")
+		CRASH("Gender datum was null; key was '[(skipgender) ? PLURAL : gender]'")
 
 	msg += "<EM>[src.name]</EM>"
-	if(species.name != "Human")
-		msg += ", a <b><font color='[species.flesh_color]'>[species.name]</font></b>"
+	if(species.name != "Human" || has_mundane_gender)
+		msg += ", a"
+		if(has_mundane_gender)
+			msg += " [T_real.key]"
+		if(species.name != "Human")
+			msg += " <b><font color='[species.flesh_color]'>[species.name]</font></b>"
 	msg += "!\n"
 
 	//uniform

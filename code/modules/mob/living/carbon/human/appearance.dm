@@ -17,15 +17,31 @@
 	reset_hair()
 	return 1
 
-/mob/living/carbon/human/proc/change_gender(var/gender)
-	if(src.gender == gender)
+/mob/living/carbon/human/proc/change_sex(var/sex)
+	if(src.sex == sex)
 		return
 
-	src.gender = gender
+	src.sex = sex
 	reset_hair()
 	update_body()
 	update_dna()
 	return 1
+
+/mob/living/carbon/human/proc/change_gender(var/gender)
+	var/new_gender = pick_gender(gender, src.sex)
+	if(src.gender == new_gender)
+		return
+
+	src.gender = new_gender
+	return 1
+
+/mob/living/carbon/human/proc/change_sex_and_update_gender(var/sex)
+	var/old_gender = determinate_gender(src.gender, src.sex)
+
+	if (change_sex(sex))
+		change_gender(old_gender)
+		return 1
+	return
 
 /mob/living/carbon/human/proc/change_hair(var/hair_style)
 	if(!hair_style)
