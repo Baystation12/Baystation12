@@ -10,6 +10,7 @@
 /obj/item/projectile/energy/flash
 	name = "chemical shell"
 	icon_state = "bullet"
+	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	damage = 5
 	agony = 10
 	kill_count = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
@@ -37,10 +38,11 @@
 	new /obj/effect/decal/cleanable/ash(src.loc) //always use src.loc so that ash doesn't end up inside windows
 	new /obj/effect/effect/smoke/illumination(T, 5, brightness, brightness, light_colour)
 
-//blinds people like the flash round, but can also be used for temporary illumination
+//blinds people like the flash round, but in a small area and can also be used for temporary illumination
 /obj/item/projectile/energy/flash/flare
 	damage = 10
-	flash_range = 1
+	fire_sound = 'sound/weapons/Gunshot.ogg'
+	flash_range = 2
 	brightness = 15
 
 /obj/item/projectile/energy/flash/flare/on_impact(var/atom/A)
@@ -54,6 +56,7 @@
 /obj/item/projectile/energy/electrode
 	name = "electrode"
 	icon_state = "spark"
+	fire_sound = 'sound/weapons/Taser.ogg'
 	nodamage = 1
 	taser_effect = 1
 	agony = 40
@@ -69,6 +72,7 @@
 /obj/item/projectile/energy/declone
 	name = "declone"
 	icon_state = "declone"
+	fire_sound = 'sound/weapons/pulse3.ogg'
 	nodamage = 1
 	damage_type = CLONE
 	irradiate = 40
@@ -107,6 +111,7 @@
 /obj/item/projectile/energy/phoron
 	name = "phoron bolt"
 	icon_state = "energy"
+	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 20
 	damage_type = TOX
 	irradiate = 20

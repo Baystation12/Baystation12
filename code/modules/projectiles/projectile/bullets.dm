@@ -1,6 +1,7 @@
 /obj/item/projectile/bullet
 	name = "bullet"
 	icon_state = "bullet"
+	fire_sound = 'sound/weapons/Gunshot.ogg'
 	damage = 60
 	damage_type = BRUTE
 	nodamage = 0
@@ -126,12 +127,14 @@
 /* short-casing projectiles, like the kind used in pistols or SMGs */
 
 /obj/item/projectile/bullet/pistol
+	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	damage = 20
 
 /obj/item/projectile/bullet/pistol/medium
 	damage = 25
 
 /obj/item/projectile/bullet/pistol/strong //revolvers and matebas
+	fire_sound = 'sound/weapons/Gunshot.ogg'
 	damage = 60
 
 /obj/item/projectile/bullet/pistol/rubber //"rubber" bullets
@@ -176,7 +179,8 @@
 	damage = 25
 
 /obj/item/projectile/bullet/rifle/a556
-	damage = 35
+	damage = 30
+	armor_penetration = 25
 
 /obj/item/projectile/bullet/rifle/a145
 	damage = 80
@@ -204,6 +208,9 @@
 	embed = 0
 	edge = 1
 
+/obj/item/projectile/bullet/gyro
+	fire_sound = 'sound/effects/Explosion1.ogg'
+
 /obj/item/projectile/bullet/gyro/on_hit(var/atom/target, var/blocked = 0)
 	if(isturf(target))
 		explosion(target, -1, 0, 2)
@@ -228,6 +235,8 @@
 
 /obj/item/projectile/bullet/pistol/cap
 	name = "cap"
+	invisibility = 101
+	fire_sound = null
 	damage_type = HALLOSS
 	damage = 0
 	nodamage = 1

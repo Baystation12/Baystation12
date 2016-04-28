@@ -20,7 +20,7 @@
 	path = /obj/item/weapon/melee/energy/sword
 
 /datum/uplink_item/item/visible_weapons/g9mm
-	name = "Silenced 9mm"
+	name = "Silenced Holdout Pistol"
 	item_cost = 7
 	path = /obj/item/weapon/storage/box/syndie_kit/g9mm
 
@@ -34,6 +34,12 @@
 	item_cost = 11
 	antag_costs = list(MODE_MERCENARY = 6)
 	path = /obj/item/weapon/gun/projectile/revolver
+
+/datum/uplink_item/item/visible_weapons/grenade_launcher
+	name = "Grenade Launcher"
+	item_cost = 12
+	antag_roles = list(MODE_MERCENARY)
+	path = /obj/item/weapon/gun/launcher/grenade/loaded
 
 //These are for traitors (or other antags, perhaps) to have the option of purchasing some merc gear.
 /datum/uplink_item/item/visible_weapons/submachinegun

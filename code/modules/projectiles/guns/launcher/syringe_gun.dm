@@ -73,7 +73,7 @@
 
 	fire_sound = 'sound/weapons/empty.ogg'
 	fire_sound_text = "a metallic thunk"
-	recoil = 0
+	screen_shake = 0
 	release_force = 10
 	throw_distance = 10
 
