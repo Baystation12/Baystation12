@@ -57,10 +57,8 @@
 		new /obj/item/weapon/tank/emergency_oxygen( src )
 
 /obj/item/weapon/storage/box/vox/
-	New()
-		..()
-		new /obj/item/clothing/mask/breath( src )
-		new /obj/item/weapon/tank/emergency_phoron( src )
+	startswith = list(/obj/item/clothing/mask/breath = 1,
+					/obj/item/weapon/tank/emergency_phoron = 1)
 
 /obj/item/weapon/storage/box/engineer/
 	New()
