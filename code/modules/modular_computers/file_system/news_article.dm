@@ -19,3 +19,7 @@
 /datum/computer_file/data/news_article/space/vol_one
 	filename = "SPACE Magazine vol. 1"
 	server_file_path = 'news_articles/space_magazine_1.html'
+
+/datum/computer_file/data/news_article/space/vol_two
+	filename = "SPACE Magazine vol. 2"
+	server_file_path = 'news_articles/space_magazine_2.html'
