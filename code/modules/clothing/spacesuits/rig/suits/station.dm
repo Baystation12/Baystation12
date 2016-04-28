@@ -26,7 +26,7 @@
 	icon_state = "internalaffairs_rig"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
-	slowdown = 0
+	online_slowdown = 0
 	offline_slowdown = 0
 	offline_vision_restriction = 0
 
@@ -63,7 +63,7 @@
 	desc = "A heavy, powerful rig used by construction crews and mining corporations."
 	icon_state = "engineering_rig"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 100, rad = 50)
-	slowdown = 3
+	online_slowdown = 3
 	offline_slowdown = 10
 	offline_vision_restriction = 2
 	emp_protection = -20
@@ -92,7 +92,7 @@
 	desc = "A light rig for repairs and maintenance to the outside of habitats and vessels."
 	icon_state = "eva_rig"
 	armor = list(melee = 30, bullet = 10, laser = 20,energy = 25, bomb = 20, bio = 100, rad = 100)
-	slowdown = 0
+	online_slowdown = 0
 	offline_slowdown = 1
 	offline_vision_restriction = 1
 
@@ -120,7 +120,7 @@
 	desc = "An advanced voidsuit that protects against hazardous, low pressure environments. Shines with a high polish."
 	icon_state = "ce_rig"
 	armor = list(melee = 40, bullet = 10, laser = 30,energy = 25, bomb = 40, bio = 100, rad = 100)
-	slowdown = 0
+	online_slowdown = 0
 	offline_slowdown = 0
 	offline_vision_restriction = 0
 
@@ -162,7 +162,7 @@
 	desc = "An Anomalous Material Interaction hardsuit that protects against the strangest energies the universe can throw at it."
 	icon_state = "science_rig"
 	armor = list(melee = 45, bullet = 5, laser = 45, energy = 80, bomb = 60, bio = 100, rad = 100)
-	slowdown = 1
+	online_slowdown = 1
 	offline_vision_restriction = 1
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/hazmat
@@ -191,7 +191,7 @@
 	desc = "A durable suit designed for medical rescue in high risk areas."
 	icon_state = "medical_rig"
 	armor = list(melee = 30, bullet = 15, laser = 20, energy = 60, bomb = 30, bio = 100, rad = 100)
-	slowdown = 1
+	online_slowdown = 1
 	offline_vision_restriction = 1
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/medical
@@ -216,7 +216,7 @@
 	desc = "A Security hardsuit designed for prolonged EVA in dangerous environments."
 	icon_state = "hazard_rig"
 	armor = list(melee = 60, bullet = 40, laser = 30, energy = 15, bomb = 60, bio = 100, rad = 30)
-	slowdown = 1
+	online_slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = 1
 

@@ -1,0 +1,6 @@
+author: PsiOmegaDelta
+
+delete-after: True
+
+changes: 
+  - tweak: "Pulling items now carries a slowdown penalty, based on weight or size."

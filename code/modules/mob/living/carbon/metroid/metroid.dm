@@ -79,7 +79,7 @@
 	if (bodytemperature >= 330.23) // 135 F
 		return -1	// slimes become supercharged at high temperatures
 
-	var/tally = 0
+	var/tally = ..()
 
 	var/health_deficiency = (maxHealth - health)
 	if(health_deficiency >= 30) tally += (health_deficiency / 25)

@@ -13,9 +13,9 @@
 	var/mob/living/carbon/human/wearer = null	//For shoe procs
 
 /obj/item/clothing/shoes/magboots/proc/set_slowdown()
-	slowdown = shoes? max(SHOES_SLOWDOWN, shoes.slowdown): SHOES_SLOWDOWN	//So you can't put on magboots to make you walk faster.
+	slowdown_per_slot[slot_shoes] = shoes? max(SHOES_SLOWDOWN, shoes.slowdown_per_slot[slot_shoes]): SHOES_SLOWDOWN	//So you can't put on magboots to make you walk faster.
 	if (magpulse)
-		slowdown += 3
+		slowdown_per_slot[slot_shoes] += 3
 
 /obj/item/clothing/shoes/magboots/attack_self(mob/user)
 	if(magpulse)

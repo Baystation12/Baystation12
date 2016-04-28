@@ -39,11 +39,13 @@
 	icon_state = "riot"
 	item_state = "swat_suit"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	slowdown = 1
 	armor = list(melee = 80, bullet = 10, laser = 10, energy = 10, bomb = 0, bio = 0, rad = 0)
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.5
 
+/obj/item/clothing/suit/armor/riot/New()
+	..()
+	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/armor/bulletproof
 	name = "Bulletproof Vest"
@@ -93,13 +95,15 @@
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen)
-	slowdown = 1
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 100, rad = 100)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.6
 
+/obj/item/clothing/suit/armor/swat/New()
+	..()
+	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/armor/swat/officer
 	name = "officer jacket"
@@ -130,8 +134,11 @@
 	icon_state = "reactiveoff"
 	item_state = "reactiveoff"
 	blood_overlay_type = "armor"
-	slowdown = 1
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/armor/reactive/New()
+	..()
+	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/armor/reactive/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(prob(50))
@@ -182,7 +189,6 @@
 	item_state = "armor"
 	var/obj/item/weapon/gun/holstered = null
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	slowdown = 1
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 20, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 	var/obj/item/clothing/accessory/holster/holster
@@ -190,6 +196,7 @@
 /obj/item/clothing/suit/armor/tactical/New()
 	..()
 	holster = new(src)
+	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/armor/tactical/attackby(obj/item/W as obj, mob/user as mob)
 	..()
@@ -330,9 +337,12 @@
 	w_class = 4//bulky item
 	gas_transfer_coefficient = 0.90
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	slowdown = 3
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	siemens_coefficient = 0
+
+/obj/item/clothing/suit/armor/heavy/New()
+	..()
+	slowdown_per_slot[slot_wear_suit] = 3
 
 /obj/item/clothing/suit/armor/tdome
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
