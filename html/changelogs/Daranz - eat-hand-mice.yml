@@ -1,0 +1,4 @@
+author: Daranz
+delete-after: True
+changes: 
+  - rscadd: "Mice and other small critters can now be eaten from hand. As a member of species eligible to eat mice, scoop a mouse and click on your character with the hand holding the mouse. The old method of eating from grab remains available both for unscoopable and scoopable creatures."

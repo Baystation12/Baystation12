@@ -69,6 +69,18 @@ var/list/holder_mob_icon_cache = list()
 /obj/item/weapon/holder/attack_self()
 	for(var/mob/M in contents)
 		M.show_inv(usr)
+		
+/obj/item/weapon/holder/attack(mob/target, mob/user)
+	// Devour on click on self with holder
+	if(target == user && istype(user,/mob/living/carbon))
+		var/mob/living/carbon/M = user
+		
+		for(var/mob/victim in src.contents)
+			M.devour(victim)
+
+		update_state()
+
+	..()
 
 /obj/item/weapon/holder/proc/sync(var/mob/living/M)
 	dir = 2
