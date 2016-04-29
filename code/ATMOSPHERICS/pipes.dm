@@ -1206,6 +1206,20 @@
 	..()
 	icon_state = "n2o"
 
+/obj/machinery/atmospherics/pipe/tank/fluorine
+	name = "Pressure Tank (Fluorine)"
+	icon_state = "fluorine_map"
+
+/obj/machinery/atmospherics/pipe/tank/fluorine/New()
+	air_temporary = new
+	air_temporary.volume = volume
+	air_temporary.temperature = T0C
+
+	air_temporary.adjust_gas("fluorine", (start_pressure)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
+
+	..()
+	icon_state = "fluorine"
+
 /obj/machinery/atmospherics/pipe/vent
 	icon = 'icons/obj/atmospherics/pipe_vent.dmi'
 	icon_state = "intact"

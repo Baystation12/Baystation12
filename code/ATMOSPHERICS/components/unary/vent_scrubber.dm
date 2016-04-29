@@ -19,7 +19,7 @@
 
 	var/hibernate = 0 //Do we even process?
 	var/scrubbing = 1 //0 = siphoning, 1 = scrubbing
-	var/list/scrubbing_gas = list("carbon_dioxide")
+	var/list/scrubbing_gas = list("carbon_dioxide", "fluorine")
 
 	var/panic = 0 //is this scrubber panicked?
 
@@ -105,6 +105,7 @@
 		"filter_co2" = ("carbon_dioxide" in scrubbing_gas),
 		"filter_phoron" = ("phoron" in scrubbing_gas),
 		"filter_n2o" = ("sleeping_agent" in scrubbing_gas),
+		"filter_f" = ("fluorine" in scrubbing_gas),
 		"sigtype" = "status"
 	)
 	if(!initial_loc.air_scrub_names[id_tag])
@@ -228,6 +229,11 @@
 		toggle += "sleeping_agent"
 	else if(signal.data["toggle_n2o_scrub"])
 		toggle += "sleeping_agent"
+
+	if(!isnull(signal.data["f_scrub"]) && text2num(signal.data["f_scrub"]) != ("fluorine" in scrubbing_gas))
+		toggle += "fluorine"
+	else if(signal.data["toggle_f_scrub"])
+		toggle += "fluorine"
 
 	scrubbing_gas ^= toggle
 

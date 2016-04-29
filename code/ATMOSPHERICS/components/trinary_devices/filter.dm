@@ -49,6 +49,8 @@
 			filtered_out = list("carbon_dioxide")
 		if(4)//removing N2O
 			filtered_out = list("sleeping_agent")
+		if(5) //removing fluorine
+			filtered_out = list("fluorine")
 
 	air1.volume = ATMOS_DEFAULT_VOLUME_FILTER
 	air2.volume = ATMOS_DEFAULT_VOLUME_FILTER
@@ -163,6 +165,8 @@
 			current_filter_type = "Carbon Dioxide"
 		if(4)
 			current_filter_type = "Nitrous Oxide"
+		if(5)
+			current_filter_type = "Fluorine"
 		if(-1)
 			current_filter_type = "Nothing"
 		else
@@ -208,6 +212,8 @@
 				filtered_out += "carbon_dioxide"
 			if(4)//removing N2O
 				filtered_out += "sleeping_agent"
+			if(5)//removing fluorine
+				filtered_out += "flourine"
 
 	if (href_list["temp"])
 		src.temp = null

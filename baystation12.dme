@@ -1757,6 +1757,7 @@
 #include "code\modules\research\xenoarchaeology\artifact\effects\unknown_effect_emp.dm"
 #include "code\modules\research\xenoarchaeology\artifact\effects\unknown_effect_forcefield.dm"
 #include "code\modules\research\xenoarchaeology\artifact\effects\unknown_effect_gasco2.dm"
+#include "code\modules\research\xenoarchaeology\artifact\effects\unknown_effect_gasfluorine.dm"
 #include "code\modules\research\xenoarchaeology\artifact\effects\unknown_effect_gasnitro.dm"
 #include "code\modules\research\xenoarchaeology\artifact\effects\unknown_effect_gasoxy.dm"
 #include "code\modules\research\xenoarchaeology\artifact\effects\unknown_effect_gasplasma.dm"

@@ -57,6 +57,20 @@
 	return
 
 /*
+ * Fluorine
+ */
+/obj/item/weapon/tank/fluorine
+	name = "fluorine tank"
+	desc = "A tank filled with fluorine."
+	icon_state = "oxygen_fr"
+
+/obj/item/weapon/tank/fluorine/New()
+	..()
+	src.air_contents.adjust_gas("fluorine", (5*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
+
+	return
+
+/*
  * Air
  */
 /obj/item/weapon/tank/air
@@ -108,23 +122,10 @@
 		src.loc = F
 	return
 
-/obj/item/weapon/tank/vox
-	desc = "Contains dangerous phoron. Has the words \"VOX ONLY\" hastily painted onit."
-	gauge_icon = "indicator_tank"
-	slot_flags = SLOT_BACK
-	icon_state = "oxygen_fr"
-	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-
-/obj/item/weapon/tank/vox/New()
-	..()
-
-	src.air_contents.adjust_gas("phoron", (5*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
-	return
-
 /*
- * Emergency Phoron
+ * Emergency Fluorine
  */
-/obj/item/weapon/tank/emergency_phoron
+/obj/item/weapon/tank/emergency_fluorine
 	name = "emergency phoron tank"
 	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
 	icon_state = "emergency_nitro"
@@ -139,13 +140,13 @@
 
 	New()
 		..()
-		src.air_contents.adjust_gas("phoron", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
+		src.air_contents.adjust_gas("fluorine", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 
 		return
 
 
 	examine(mob/user)
-		if(..(user, 0) && air_contents.gas["phoron"] < 0.2 && loc==user)
+		if(..(user, 0) && air_contents.gas["fluorine"] < 0.2 && loc==user)
 			user << text("<span class='danger'>The meter on \the [src] indicates you are almost out of air!</span>")
 /*
  * Emergency Oxygen

@@ -43,3 +43,13 @@
 
 	tile_overlay = "sleeping_agent"
 	overlay_limit = 1
+
+/decl/xgm_gas/fluorine
+	id = "fluorine"
+	name = "Fluorine"
+	specific_heat =  20 // J/(mol*K)
+	molar_mass = 0.038 //kg/mol
+
+	flags = XGM_GAS_OXIDIZER
+	overlay_limit = 3
+	tile_overlay = "fluorine"

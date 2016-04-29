@@ -6,7 +6,7 @@
 	parent_organ = "chest"
 
 	var/breath_type
-	var/poison_type
+	var/list/poison_type
 	var/exhale_type
 
 	var/min_breath_pressure
@@ -20,7 +20,7 @@
 	..()
 	min_breath_pressure = species.breath_pressure
 	breath_type = species.breath_type ? species.breath_type : "oxygen"
-	poison_type = species.poison_type ? species.poison_type : "phoron"
+	poison_type = species.poison_type ? species.poison_type : list("phoron", "fluorine")
 	exhale_type = species.exhale_type ? species.exhale_type : 0
 
 /obj/item/organ/lungs/process()
@@ -66,7 +66,9 @@
 	var/failed_exhale = 0
 
 	var/inhaling = breath.gas[breath_type]
-	var/poison = breath.gas[poison_type]
+	var/poison = 0
+	for(var/gas in poison_type)
+		poison += breath.gas[gas]
 	var/exhaling = exhale_type ? breath.gas[exhale_type] : 0
 
 	var/inhale_pp = (inhaling/breath.total_moles)*breath_pressure
@@ -123,7 +125,8 @@
 	if(toxins_pp > safe_toxins_max)
 		var/ratio = (poison/safe_toxins_max) * 10
 		owner.reagents.add_reagent("toxin", Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
-		breath.adjust_gas(poison_type, -poison/6, update = 0) //update after
+		for(var/gas in poison_type)
+			breath.adjust_gas(gas, -breath.gas[gas]/6, update = 0) //update after
 		owner.phoron_alert = 1
 	else
 		owner.phoron_alert = 0

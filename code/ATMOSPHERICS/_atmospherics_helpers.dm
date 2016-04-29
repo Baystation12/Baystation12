@@ -480,11 +480,13 @@
     var/phoron = 0
     var/carbondioxide = 0
     var/nitrousoxide = 0
+    var/fluorine = 0
     if(atmosphere.total_moles) // Division by zero prevention
         oxygen = (atmosphere.gas["oxygen"] / atmosphere.total_moles) * 100 // Percentage of the gas
         phoron = (atmosphere.gas["phoron"] / atmosphere.total_moles) * 100
         carbondioxide = (atmosphere.gas["carbon_dioxide"] / atmosphere.total_moles) * 100
         nitrousoxide = (atmosphere.gas["sleeping_agent"] / atmosphere.total_moles) * 100
+        fluorine = (atmosphere.gas["fluorine"] / atmosphere.total_moles) * 100
 
     if(!oxygen)
         status.Add("No oxygen.")
@@ -499,7 +501,8 @@
         status.Add("N2O contamination.")
     if(carbondioxide > 5)    // Not as dangerous until very large amount is present.
         status.Add("CO2 concentration high.")
-
+    if(fluorine > 0.1)
+        status.Add("Fluorine contamination.")
 
     if(returntext)
         return jointext(status, " ")

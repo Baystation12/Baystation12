@@ -164,6 +164,7 @@
 
 		if(Environment)
 
+			var/total_tox = Environment.gas["phoron"] + Environment["fluorine"]
 			if( abs(Environment.temperature - bodytemperature) > 40 )
 				bodytemperature += ((Environment.temperature - bodytemperature) / 5)
 
@@ -174,10 +175,10 @@
 				if(Environment.gas["oxygen"] > max_oxy)
 					atmos_suitable = 0
 			if(min_tox)
-				if(Environment.gas["phoron"] < min_tox)
+				if(total_tox < min_tox)
 					atmos_suitable = 0
 			if(max_tox)
-				if(Environment.gas["phoron"] > max_tox)
+				if(total_tox > max_tox)
 					atmos_suitable = 0
 			if(min_n2)
 				if(Environment.gas["nitrogen"] < min_n2)

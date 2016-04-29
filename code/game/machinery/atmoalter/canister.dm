@@ -69,6 +69,12 @@
 /obj/machinery/portable_atmospherics/canister/air/airlock
 	start_pressure = 3 * ONE_ATMOSPHERE
 
+/obj/machinery/portable_atmospherics/canister/fluorine
+	name = "Canister \[F2\]"
+	icon_state = "yellowf"
+	canister_color = "yellowf"
+	can_label = 0
+
 /obj/machinery/portable_atmospherics/canister/empty/
 	start_pressure = 0
 	can_label = 1
@@ -93,7 +99,10 @@
 	name = "Canister \[N2O\]"
 	icon_state = "redws"
 	canister_color = "redws"
-
+/obj/machinery/portable_atmospherics/canister/empty/sleeping_agent
+	name = "Canister \[F2\]"
+	icon_state = "yellowf"
+	canister_color = "yellowf"
 
 
 
@@ -353,6 +362,7 @@ update_flag
 				"\[Phoron\]" = "orange", \
 				"\[CO2\]" = "black", \
 				"\[Air\]" = "grey", \
+				"\[F2\]" = "fyellow",\
 				"\[CAUTION\]" = "yellow", \
 			)
 			var/label = input("Choose canister label", "Gas canister") as null|anything in colors
@@ -404,6 +414,12 @@ update_flag
 				sleep(10)
 			location.assume_air(air_contents)
 			air_contents = new
+	return 1
+
+/obj/machinery/portable_atmospherics/canister/fluorine/New()
+	..()
+	src.air_contents.adjust_gas("fluorine", MolesForPressure())
+	src.update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/nitrogen/New()

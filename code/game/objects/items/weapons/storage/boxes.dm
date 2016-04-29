@@ -61,7 +61,7 @@
 
 /obj/item/weapon/storage/box/vox/
 	startswith = list(/obj/item/clothing/mask/breath = 1,
-					/obj/item/weapon/tank/emergency_phoron = 1)
+					/obj/item/weapon/tank/emergency_fluorine = 1)
 
 /obj/item/weapon/storage/box/engineer/
 	startswith = list(/obj/item/clothing/mask/breath = 1,
