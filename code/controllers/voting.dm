@@ -290,7 +290,7 @@ datum/controller/vote
 					if(check_rights(R_ADMIN|R_MOD, 0))
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
-						if (config.allow_extra_antags)
+						if (config.allow_extra_antags && !antag_add_finished)
 							choices.Add("Add Antagonist")
 					else
 						if (get_security_level() == "red" || get_security_level() == "delta")
@@ -301,7 +301,7 @@ datum/controller/vote
 							initiator_key << "The crew transfer button has been disabled!"
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
-						if (config.allow_extra_antags)
+						if (config.allow_extra_antags && !antag_add_finished)
 							choices.Add("Add Antagonist")
 				if("add_antagonist")
 					if(!config.allow_extra_antags)
