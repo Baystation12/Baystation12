@@ -480,19 +480,21 @@ var/global/datum/controller/gameticker/ticker
 	var/datum/antagonist/antag = antag_choices[1]
 	while(antag_choices.len)
 		var/needs_ghost = antag.flags & (ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB)
-		antag.update_current_antag_max()
-		antag.build_candidate_list(needs_ghost)
 		if (needs_ghost)
 			looking_for_antags = 1
 			antag_pool.Cut()
-			world << "<b>A ghost is needed to spawn \a [antag.role_text].</b>\nGhosts may enter the antag pool by using the toggle-add-antag-candidacy verb. You have 30 seconds to enter the pool."
+			world << "<b>A ghost is needed to spawn \a [antag.role_text].</b>\nGhosts may enter the antag pool by making sure their [antag.role_text] preference is set to high, then using the toggle-add-antag-candidacy verb. You have 30 seconds to enter the pool."
 			sleep(300)
 			looking_for_antags = 0
+			antag.update_current_antag_max()
+			antag.build_candidate_list(needs_ghost)
 			for(var/datum/mind/candidate in antag.candidates)
 				if(!(candidate in antag_pool))
 					antag.candidates -= candidate
 					log_debug("[candidate.key] was not in the antag pool and could not be selected.")
 		else
+			antag.update_current_antag_max()
+			antag.build_candidate_list(needs_ghost)
 			for(var/datum/mind/candidate in antag.candidates)
 				if(isghost(candidate.current))
 					antag.candidates -= candidate
@@ -502,7 +504,10 @@ var/global/datum/controller/gameticker/ticker
 			antag.finalize_spawn()
 			return 1
 		else
-			world << "Failed to find enough [antag.role_text_plural]."
+			if(antag.initial_spawn_req > 1)
+				world << "Failed to find enough [antag.role_text_plural]."
+			else
+				world << "Failed to find a [antag.role_text]."
 			antag_choices -= antag
 			if(length(antag_choices))
 				antag = antag_choices[1]

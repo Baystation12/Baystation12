@@ -711,6 +711,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			usr << "You have left the antag pool."
 		else
 			ticker.antag_pool += src.mind
-			usr << "You have joined the antag pool."
+			usr << "You have joined the antag pool. Make sure you have the needed role set to high!"
 	else
 		usr << "The game is not currently looking for antags."
