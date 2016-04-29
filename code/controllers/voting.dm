@@ -381,19 +381,19 @@ datum/controller/vote
 					. += "[choices[i]]"
 				. += "</td><td>"
 				if(current_high_votes[C.ckey] == i)
-					. += "<b><a href='?src=\ref[src];high_vote=[i]'>High</a></b>"
+					. += "<b><a href='?src=\ref[src];high_vote=[i]'>First</a></b>"
 				else
-					. += "<a href='?src=\ref[src];high_vote=[i]'>High</a>"
+					. += "<a href='?src=\ref[src];high_vote=[i]'>First</a>"
 				. += "</td><td>"
 				if(current_med_votes[C.ckey] == i)
-					. += "<b><a href='?src=\ref[src];med_vote=[i]'>Medium</a></b>"
+					. += "<b><a href='?src=\ref[src];med_vote=[i]'>Second</a></b>"
 				else
-					. += "<a href='?src=\ref[src];med_vote=[i]'>Medium</a>"
+					. += "<a href='?src=\ref[src];med_vote=[i]'>Second</a>"
 				. += "</td><td>"
 				if(current_low_votes[C.ckey] == i)
-					. += "<b><a href='?src=\ref[src];low_vote=[i]'>Low</a></b>"
+					. += "<b><a href='?src=\ref[src];low_vote=[i]'>Third</a></b>"
 				else
-					. += "<a href='?src=\ref[src];low_vote=[i]'>Low</a>"
+					. += "<a href='?src=\ref[src];low_vote=[i]'>Third</a>"
 				. += "</td><td align = 'center'>[votepercent]%</td>"
 				if (additional_text.len >= i)
 					. += additional_text[i]
