@@ -190,6 +190,9 @@
 	if(!(flags & ANTAG_OVERRIDE_JOB) && (!player.current || istype(player.current, /mob/new_player)))
 		log_debug("[player.key] was selected for [role_text] by lottery, but they have not joined the game.")
 		return 0
+	if(isghost(player.current) && !(player in ticker.antag_pool))
+		log_debug("[player.key] was selected for [role_text] by lottery, but they are a ghost not in the antag pool.")
+		return 0
 
 	pending_antagonists |= player
 	log_debug("[player.key] has been selected for [role_text] by lottery.")
