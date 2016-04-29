@@ -51,7 +51,6 @@ datum/controller/vote
 	proc/autotransfer()
 		initiate_vote("crew_transfer","the server", 1)
 		log_debug("The server has called a crew transfer vote")
-		antag_add_finished = 0 // reset this so that players can vote in another antag
 
 	proc/autogamemode()
 		initiate_vote("gamemode","the server", 1)
@@ -205,6 +204,7 @@ datum/controller/vote
 					else if(.[1] == "Add Antagonist")
 						spawn(10)
 							initiate_vote("add_antagonist", "the server", 1)
+							antag_add_finished = 1 // only one round end add antag per round
 				if("add_antagonist")
 					if(isnull(.[1]) || .[1] == "None")
 						antag_add_finished = 1
