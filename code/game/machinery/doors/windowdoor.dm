@@ -114,8 +114,8 @@
 		return 0
 	if (!ticker)
 		return 0
-
-	operating = 1
+	if(!operating )
+		operating = 1
 	flick(text("[]opening", src.base_state), src)
 	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
 	density = 0
@@ -128,8 +128,9 @@
 	return 1
 
 /obj/machinery/door/window/close()
-	if (src.operating)
+	if (operating)
 		return 0
+
 	operating = 1
 	flick(text("[]closing", src.base_state), src)
 	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
@@ -139,7 +140,8 @@
 	update_nearby_tiles()
 
 	sleep(10)
-	src.operating = 0
+	operating = 0
+
 	return 1
 
 /obj/machinery/door/window/take_damage(var/damage)

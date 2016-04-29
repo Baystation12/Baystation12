@@ -410,12 +410,11 @@
 
 	close_door_at = 0
 	do_animate("closing")
-	sleep(3)
-	src.density = 1
+	density = 1
 	explosion_resistance = initial(explosion_resistance)
-	src.layer = closed_layer
+	layer = closed_layer
 	update_nearby_tiles()
-	sleep(7)
+	sleep(10)
 	update_icon()
 	if(visible && !glass)
 		set_opacity(1)	//caaaaarn!
