@@ -1443,6 +1443,15 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Atmospherics"
 	contains = list(/obj/machinery/portable_atmospherics/canister/carbon_dioxide)
 
+/datum/supply_packs/canister_fluorine
+	name = "Fluorine gas canister"
+	cost = 40
+	containername = "\improper Fluorine canister crate"
+	containertype = /obj/structure/closet/crate/secure/large
+	access = access_atmospherics
+	group = "Atmospherics"
+	contains = list(/obj/machinery/portable_atmospherics/canister/fluorine)
+
 /datum/supply_packs/pacman_parts
 	name = "P.A.C.M.A.N. portable generator parts"
 	cost = 45

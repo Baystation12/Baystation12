@@ -553,7 +553,7 @@
 "kG" = (/obj/machinery/atmospherics/portables_connector{dir = 4},/turf/simulated/floor/tiled,/area/outpost/research/isolation_monitoring)
 "kH" = (/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9},/obj/structure/cable/blue{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/plating,/area/outpost/research/power)
 "kI" = (/obj/machinery/atmospherics/pipe/manifold/visible/yellow{tag = "icon-map (NORTH)"; icon_state = "map"; dir = 1},/obj/machinery/meter,/turf/simulated/floor/tiled,/area/outpost/research/isolation_monitoring)
-"kJ" = (/obj/machinery/atmospherics/binary/pump{dir = 4},/turf/simulated/floor/tiled,/area/outpost/research/isolation_monitoring)
+"kJ" = (/obj/machinery/atmospherics/binary/pump{dir = 4},/obj/machinery/portable_atmospherics/canister/fluorine,/turf/simulated/floor/tiled,/area/outpost/research/isolation_monitoring)
 "kK" = (/obj/machinery/atmospherics/pipe/simple/visible/universal{dir = 4},/turf/simulated/floor/tiled,/area/outpost/research/isolation_monitoring)
 "kL" = (/obj/machinery/atmospherics/binary/pump{dir = 8},/obj/structure/cable/blue{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/outpost/research/isolation_monitoring)
 "kM" = (/obj/structure/table/standard,/obj/item/device/flashlight/lamp,/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/tiled,/area/outpost/research/isolation_monitoring)
