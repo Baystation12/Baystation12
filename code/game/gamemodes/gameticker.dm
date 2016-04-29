@@ -502,6 +502,8 @@ var/global/datum/controller/gameticker/ticker
 		if(length(antag.candidates) >= antag.initial_spawn_req)
 			antag.attempt_spawn()
 			antag.finalize_spawn()
+			// the buffer will already have an hour added to it, so we'll give it one more
+			transfer_controller.timerbuffer = transfer_controller.timerbuffer + config.vote_autotransfer_interval
 			return 1
 		else
 			if(antag.initial_spawn_req > 1)

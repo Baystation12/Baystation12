@@ -15,6 +15,7 @@ datum/controller/vote
 	var/list/current_low_votes = list()
 	var/list/additional_text = list()
 	var/auto_muted = 0
+	var/disallow_none = 0
 
 	New()
 		if(vote != src)
@@ -59,6 +60,11 @@ datum/controller/vote
 	proc/automap()
 		initiate_vote("map","the server", 1)
 		log_debug("The server has called a map vote")
+
+	proc/autoaddantag()
+		disallow_none = 1
+		initiate_vote("addantag","the server", 1)
+		log_debug("The server has called an add antag vote.")
 
 	proc/reset()
 		initiator = null
@@ -203,17 +209,26 @@ datum/controller/vote
 						init_shift_change(null, 1)
 					else if(.[1] == "Add Antagonist")
 						spawn(10)
-							initiate_vote("add_antagonist", "the server", 1)
-							antag_add_finished = 1 // only one round end add antag per round
+							autoaddantag()
 				if("add_antagonist")
 					if(isnull(.[1]) || .[1] == "None")
 						antag_add_finished = 1
 					else
+						for(var/i = 1, i <= length(.), i++)
+							var/option = .[i]
+							if(option == "Random")
+								var/datum/antagonist/randomChoice = all_antag_types[pick(all_antag_types)]
+								while(!(randomChoice.id in additional_antag_types) && randomChoice.is_votable())
+									randomChoice = all_antag_types[pick(all_antag_types)]
+								.[i] = randomChoice.role_text
+								world << "The random antag choice is [randomChoice.role_text]."
 						var/antag_type = antag_names_to_ids[.[1]]
 						if(ticker.current_state >= 2)
 							var/list/antag_choices = list(all_antag_types[antag_type], all_antag_types[antag_names_to_ids[.[2]]], all_antag_types[antag_names_to_ids[.[3]]])
 							if(!ticker.attempt_late_antag_spawn(antag_choices))
-								world << "No antags were added."
+								world << "<b>No antags were added.</b>"
+								antag_add_finished = 1
+								autotransfer();
 						else
 							additional_antag_types |= antag_type
 				if("map")
@@ -310,7 +325,10 @@ datum/controller/vote
 						var/datum/antagonist/antag = all_antag_types[antag_type]
 						if(!(antag.id in additional_antag_types) && antag.is_votable())
 							choices.Add(antag.role_text)
-					choices.Add("None")
+					choices.Add("Random")
+					if(!disallow_none)
+						choices.Add("None")
+					disallow_none = 0
 				if("map")
 					if(!config.allow_map_switching)
 						return 0
