@@ -63,7 +63,7 @@ datum/controller/vote
 
 	proc/autoaddantag()
 		disallow_none = 1
-		initiate_vote("addantag","the server", 1)
+		initiate_vote("add_antagonist","the server", 1)
 		log_debug("The server has called an add antag vote.")
 
 	proc/reset()
