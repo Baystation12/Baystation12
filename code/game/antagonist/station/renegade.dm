@@ -25,12 +25,7 @@ var/datum/antagonist/renegade/renegades
 
 	var/list/spawn_guns = list(
 		/obj/item/weapon/gun/energy/laser,
-		/obj/item/weapon/gun/energy/captain,
-		/obj/item/weapon/gun/energy/lasercannon,
-		/obj/item/weapon/gun/energy/xray,
 		/obj/item/weapon/gun/energy/gun,
-		/obj/item/weapon/gun/energy/gun/burst,
-		/obj/item/weapon/gun/energy/gun/nuclear,
 		/obj/item/weapon/gun/energy/crossbow,
 		/obj/item/weapon/gun/energy/crossbow/largecrossbow,
 		/obj/item/weapon/gun/projectile/automatic,
