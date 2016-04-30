@@ -827,9 +827,17 @@
 	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female")
 	if (new_gender)
 		if(new_gender == "Male")
-			gender = MALE
+			sex = MALE
 		else
-			gender = FEMALE
+			sex = FEMALE
+
+	var/hide_gender = alert(usr, "Would you like to hide your gender?", "Character Generation","Yes", "No")
+	if (hide_gender)
+		if(hide_gender == "Yes")
+			gender = PLURAL
+		else
+			gender = sex
+
 	regenerate_icons()
 	check_dna()
 
@@ -1126,8 +1134,8 @@
 		holder_type = species.holder_type
 
 
-	if(!(gender in species.genders))
-		gender = species.genders[1]
+	if(!(get_gender() in species.genders))
+		sex = species.genders[1]
 
 	icon_state = lowertext(species.name)
 

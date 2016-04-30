@@ -31,6 +31,7 @@
 
 	var/age = 30		//Player's age (pure fluff)
 	var/b_type = "A+"	//Player's bloodtype
+	var/sex = MALE		//To store the actual gender when "gender" goes PLURAL
 
 	var/list/all_underwear = list()
 	var/list/all_underwear_metadata = list()

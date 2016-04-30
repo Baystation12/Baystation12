@@ -234,7 +234,7 @@ var/global/list/damage_icon_parts = list()
 	stand_icon = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi',"blank")
 
 	var/g = "male"
-	if(gender == FEMALE)
+	if(get_gender() == FEMALE)
 		g = "female"
 
 	var/icon_key = "[species.race_key][g][s_tone][r_skin][g_skin][b_skin]"
@@ -387,7 +387,7 @@ var/global/list/damage_icon_parts = list()
 	var/image/standing	= image("icon" = 'icons/effects/genetics.dmi')
 	var/add_image = 0
 	var/g = "m"
-	if(gender == FEMALE)	g = "f"
+	if(get_gender() == FEMALE)	g = "f"
 	// DNA2 - Drawing underlays.
 	for(var/datum/dna/gene/gene in dna_genes)
 		if(!gene.block)
