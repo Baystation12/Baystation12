@@ -11,6 +11,19 @@
     </div>
 {{/if}}
 
+{{if data.change_sex}}
+	<div class="item">
+        <div class="itemLabelNarrow">
+            Sex:
+        </div>
+        <div class="itemContentWide">
+            {{for data.sexes}}
+                {{:helper.link(value.sex_name, null, { 'sex' : value.sex_key}, null, data.sex == value.sex_key ? 'selected' : null)}}
+            {{/for}}
+        </div>
+    </div>
+{{/if}}
+	
 {{if data.change_gender}}
     <div class="item">
         <div class="itemLabelNarrow">

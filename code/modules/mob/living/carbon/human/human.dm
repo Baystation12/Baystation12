@@ -24,6 +24,7 @@
 	if(species)
 		real_name = species.get_random_name(gender)
 		name = real_name
+		sex = gender
 		if(mind)
 			mind.name = real_name
 
@@ -824,12 +825,13 @@
 	if(new_style)
 		f_style = new_style
 
-	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female")
-	if (new_gender)
-		if(new_gender == "Male")
-			gender = MALE
+	var/new_sex = alert(usr, "Please select sex.", "Character Generation", "Male", "Female")
+	if (new_sex)
+		if(new_sex == "Male")
+			sex = MALE
 		else
-			gender = FEMALE
+			sex = FEMALE
+		gender = sex
 	regenerate_icons()
 	check_dna()
 
@@ -1126,8 +1128,14 @@
 		holder_type = species.holder_type
 
 
-	if(!(gender in species.genders))
-		gender = species.genders[1]
+	if(!(sex in species.sexes))
+		sex = species.sexes[1]
+		gender = sex
+
+	if(!(determinate_gender(gender, sex) in species.genders))
+		gender = pick_gender(species.genders[1], sex)
+		if (gender != sex)
+			gender = sex
 
 	icon_state = lowertext(species.name)
 

@@ -186,7 +186,7 @@
 		G.fields["fingerprint"]	= md5(H.dna.uni_identity)
 		G.fields["p_stat"]		= "Active"
 		G.fields["m_stat"]		= "Stable"
-		G.fields["sex"]			= gender2text(H.gender)
+		G.fields["sex"]			= sex2text(H.sex)
 		G.fields["species"]		= H.get_species()
 		G.fields["home_system"]	= H.home_system
 		G.fields["citizenship"]	= H.citizenship
@@ -214,7 +214,7 @@
 		L.fields["rank"] 		= H.mind.assigned_role
 		L.fields["age"]			= H.age
 		L.fields["fingerprint"]	= md5(H.dna.uni_identity)
-		L.fields["sex"]			= gender2text(H.gender)
+		L.fields["sex"]			= sex2text(H.sex)
 		L.fields["b_type"]		= H.b_type
 		L.fields["b_dna"]		= H.dna.unique_enzymes
 		L.fields["enzymes"]		= H.dna.SE // Used in respawning

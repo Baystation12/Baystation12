@@ -155,7 +155,9 @@
 		"r_foot" = list("path" = /obj/item/organ/external/foot/right)
 		)
 
-	var/list/genders = list(MALE, FEMALE)
+	var/list/sexes = list(MALE, FEMALE)
+	var/list/genders = all_genders_define_list
+	var/allow_genders = 1
 
 	// Bump vars
 	var/bump_flag = HUMAN	// What are we considered to be when bumped?

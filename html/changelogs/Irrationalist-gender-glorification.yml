@@ -1,0 +1,6 @@
+author: Irrationalist
+
+delete-after: True
+
+changes: 
+  - tweak: "Now it is possible to specify your biological sex and your social gender: 'Normal' for hetero-, 'Opposite' for trans-, 'Neutral' for bi- and 'None' for asexual"
