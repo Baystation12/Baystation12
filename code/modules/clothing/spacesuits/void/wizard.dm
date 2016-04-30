@@ -26,6 +26,7 @@
 	sprite_sheets_refit = null
 	sprite_sheets_obj = null
 	wizard_garb = 1
+	flags_inv = HIDESHOES|HIDEJUMPSUIT|HIDETAIL //For gloves.
 
 /obj/item/clothing/suit/space/void/wizard/New()
 	..()
