@@ -1500,6 +1500,13 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/ntnet_relay
 	sort_string = "WAAAA"
 
+/datum/design/circuit/replicator
+	name = "food replicator"
+	id = "freplicator"
+	req_tech = list(TECH_BIO = 3, TECH_DATA = 3)
+	build_path = /obj/item/weapon/circuitboard/replicator
+	sort_string = "WAAAR"
+
 /datum/design/circuit/aicore
 	name = "AI core"
 	id = "aicore"
