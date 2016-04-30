@@ -15,7 +15,7 @@ datum/controller/vote
 	var/list/current_low_votes = list()
 	var/list/additional_text = list()
 	var/auto_muted = 0
-	var/disallow_none = 0
+	var/auto_add_antag = 0
 
 	New()
 		if(vote != src)
@@ -62,7 +62,7 @@ datum/controller/vote
 		log_debug("The server has called a map vote")
 
 	proc/autoaddantag()
-		disallow_none = 1
+		auto_add_antag = 1
 		initiate_vote("add_antagonist","the server", 1)
 		log_debug("The server has called an add antag vote.")
 
@@ -214,21 +214,26 @@ datum/controller/vote
 					if(isnull(.[1]) || .[1] == "None")
 						antag_add_finished = 1
 					else
+						choices -= "Random"
+						if(!auto_add_antag)
+							choices -= "None"
 						for(var/i = 1, i <= length(.), i++)
-							var/option = .[i]
-							if(option == "Random")
-								var/datum/antagonist/randomChoice = all_antag_types[pick(all_antag_types)]
-								while(!(randomChoice.id in additional_antag_types) && randomChoice.is_votable())
-									randomChoice = all_antag_types[pick(all_antag_types)]
-								.[i] = randomChoice.role_text
-								world << "The random antag choice is [randomChoice.role_text]."
+							if(.[i] == "Random")
+								.[i] = pick(choices)
+								world << "The random antag in [i]\th place is [.[i]]."
 						var/antag_type = antag_names_to_ids[.[1]]
 						if(ticker.current_state >= 2)
 							var/list/antag_choices = list(all_antag_types[antag_type], all_antag_types[antag_names_to_ids[.[2]]], all_antag_types[antag_names_to_ids[.[3]]])
 							if(!ticker.attempt_late_antag_spawn(antag_choices))
 								world << "<b>No antags were added.</b>"
 								antag_add_finished = 1
-								autotransfer();
+								if(auto_add_antag)
+									auto_add_antag = 0
+									autotransfer();
+							else if(auto_add_antag)
+								auto_add_antag = 0
+								// the buffer will already have an hour added to it, so we'll give it one more
+								transfer_controller.timerbuffer = transfer_controller.timerbuffer + config.vote_autotransfer_interval
 						else
 							additional_antag_types |= antag_type
 				if("map")
@@ -326,9 +331,8 @@ datum/controller/vote
 						if(!(antag.id in additional_antag_types) && antag.is_votable())
 							choices.Add(antag.role_text)
 					choices.Add("Random")
-					if(!disallow_none)
+					if(!auto_add_antag)
 						choices.Add("None")
-					disallow_none = 0
 				if("map")
 					if(!config.allow_map_switching)
 						return 0
