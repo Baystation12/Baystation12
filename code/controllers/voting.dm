@@ -223,18 +223,19 @@ datum/controller/vote
 								world << "The random antag in [i]\th place is [.[i]]."
 						var/antag_type = antag_names_to_ids[.[1]]
 						if(ticker.current_state >= 2)
-							var/list/antag_choices = list(all_antag_types[antag_type], all_antag_types[antag_names_to_ids[.[2]]], all_antag_types[antag_names_to_ids[.[3]]])
-							if(!ticker.attempt_late_antag_spawn(antag_choices))
-								world << "<b>No antags were added.</b>"
-								antag_add_finished = 1
-								if(auto_add_antag)
+							spawn(0) // break off so we don't hang the vote process
+								var/list/antag_choices = list(all_antag_types[antag_type], all_antag_types[antag_names_to_ids[.[2]]], all_antag_types[antag_names_to_ids[.[3]]])
+								if(!ticker.attempt_late_antag_spawn(antag_choices))
+									world << "<b>No antags were added.</b>"
+									antag_add_finished = 1
+									if(auto_add_antag)
+										auto_add_antag = 0
+										spawn(10)
+											autotransfer();
+								else if(auto_add_antag)
 									auto_add_antag = 0
-									spawn(10)
-										autotransfer();
-							else if(auto_add_antag)
-								auto_add_antag = 0
-								// the buffer will already have an hour added to it, so we'll give it one more
-								transfer_controller.timerbuffer = transfer_controller.timerbuffer + config.vote_autotransfer_interval
+									// the buffer will already have an hour added to it, so we'll give it one more
+									transfer_controller.timerbuffer = transfer_controller.timerbuffer + config.vote_autotransfer_interval
 						else
 							additional_antag_types |= antag_type
 				if("map")
