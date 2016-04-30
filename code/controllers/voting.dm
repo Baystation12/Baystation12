@@ -229,7 +229,8 @@ datum/controller/vote
 								antag_add_finished = 1
 								if(auto_add_antag)
 									auto_add_antag = 0
-									autotransfer();
+									spawn(10)
+										autotransfer();
 							else if(auto_add_antag)
 								auto_add_antag = 0
 								// the buffer will already have an hour added to it, so we'll give it one more

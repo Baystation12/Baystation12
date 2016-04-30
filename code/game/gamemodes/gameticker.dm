@@ -478,7 +478,7 @@ var/global/datum/controller/gameticker/ticker
 
 /datum/controller/gameticker/proc/attempt_late_antag_spawn(var/list/antag_choices)
 	var/datum/antagonist/antag = antag_choices[1]
-	while(antag_choices.len && antag && antag in all_antag_types)
+	while(antag_choices.len && antag)
 		var/needs_ghost = antag.flags & (ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB)
 		if (needs_ghost)
 			looking_for_antags = 1
@@ -511,6 +511,6 @@ var/global/datum/controller/gameticker/ticker
 			antag_choices -= antag
 			if(length(antag_choices))
 				antag = antag_choices[1]
-				if(antag && antag in all_antag_types)
+				if(antag)
 					world << "Attempting to spawn [antag.role_text_plural]."
 	return 0
