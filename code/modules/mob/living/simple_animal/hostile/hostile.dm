@@ -9,6 +9,7 @@
 	var/projectilesound
 	var/casingtype
 	var/move_to_delay = 4 //delay for the automated movement.
+	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
 	var/list/friends = list()
 	var/break_stuff_probability = 10
 	stop_automated_movement_when_pulled = 0
@@ -85,11 +86,14 @@
 	if(!(target_mob in ListTargets(10)))
 		LostTarget()
 		return 0
+	if(next_move >= world.time)
+		return 0
 	if(get_dist(src, target_mob) <= 1)	//Attacking
 		AttackingTarget()
 		return 1
 
 /mob/living/simple_animal/hostile/proc/AttackingTarget()
+	setClickCooldown(attack_delay)
 	if(!Adjacent(target_mob))
 		return
 	if(isliving(target_mob))
