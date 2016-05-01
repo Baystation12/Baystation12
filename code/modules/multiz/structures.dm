@@ -64,12 +64,12 @@
 
 	var/turf/T = target.loc
 	for(var/atom/A in T)
-		if(A.density)
+		if(!A.CanPass(M))
 			M << "<span class='notice'>\The [A] is blocking \the [src].</span>"
 			return 0
-	M.Move(T)
-
-	return target == target_up ? UP : DOWN
+	if(M.Move(T))
+		return target == target_up ? UP : DOWN
+	return 0
 
 /obj/structure/ladder/CanPass(obj/mover, turf/source, height, airflow)
 	return airflow || !density
