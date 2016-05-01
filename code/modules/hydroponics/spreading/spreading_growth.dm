@@ -76,7 +76,7 @@
 			sampled = 0
 
 	if(is_mature() && !buckled_mob)
-		for(var/mob/living/carbon/human/M in range(2))
+		for(var/mob/living/carbon/human/M in range(1))
 			if(!M.buckled && !M.anchored && (issmall(M) || M.lying || prob(round(seed.get_trait(TRAIT_POTENCY)/6))))
 				entangle(M)
 

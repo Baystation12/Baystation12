@@ -81,15 +81,9 @@
 			var/mob/living/carbon/human/H = victim
 			if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & NOSLIP))
 				can_grab = 0
-		if(can_grab)
-			if(Adjacent(victim))
-				src.visible_message("<span class='danger'>Tendrils lash out from \the [src] and drag \the [victim] in!</span>")
-				victim.forceMove(get_turf(src))
-			else if(prob(round(seed.get_trait(TRAIT_POTENCY)/5)))
-				src.visible_message("<span class='danger'>Tendrils lash out from \the [src] and trip \the [victim]!</span>")
-				victim.Weaken((seed.get_trait(TRAIT_POTENCY) / 2))
-				step_to(victim, src)
-
+		if(can_grab && Adjacent(victim))
+			src.visible_message("<span class='danger'>Tendrils lash out from \the [src] and drag \the [victim] in!</span>")
+			victim.forceMove(get_turf(src))
 
 	//entangling people
 	if(victim.loc == src.loc)
