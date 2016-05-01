@@ -13,10 +13,10 @@
 	item_state = "ygloves"
 	siemens_coefficient = 1			//Set to a default of 1, gets overridden in New()
 	permeability_coefficient = 0.05
-
+	species_restricted = list("exclude","Unathi","Tajara")
 	New()
 		//average of 0.5, somewhat better than regular gloves' 0.75
-		siemens_coefficient = pick(0,0.1,0.3,0.5,0.5,0.75,1.35) 
+		siemens_coefficient = pick(0,0.1,0.3,0.5,0.5,0.75,1.35)
 
 /obj/item/clothing/gloves/black
 	desc = "These work gloves are thick and fire-resistant."
