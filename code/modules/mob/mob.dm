@@ -144,10 +144,10 @@
 	if(pulling)
 		if(istype(pulling, /obj))
 			var/obj/O = pulling
-			. += O.w_class / 2
+			. += O.w_class / 5
 		else if(istype(pulling, /mob))
 			var/mob/M = pulling
-			. += M.mob_size / 5
+			. += M.mob_size / MOB_MEDIUM
 		else
 			. += 1
 
