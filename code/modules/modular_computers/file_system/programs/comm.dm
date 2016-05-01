@@ -238,28 +238,6 @@
 
 	nanomanager.update_uis(src)
 
-/datum/nano_module/program/comm/proc/post_status(var/command, var/data1, var/data2)
-
-	var/datum/radio_frequency/frequency = radio_controller.return_frequency(1435)
-
-	if(!frequency) return
-
-
-	var/datum/signal/status_signal = new
-	status_signal.source = src
-	status_signal.transmission_method = 1
-	status_signal.data["command"] = command
-
-	switch(command)
-		if("message")
-			status_signal.data["msg1"] = data1
-			status_signal.data["msg2"] = data2
-			log_admin("STATUS: [key_name(usr)] set status screen message with [src]: [data1] [data2]")
-		if("alert")
-			status_signal.data["picture_state"] = data1
-
-	frequency.post_signal(src, status_signal)
-
 #undef STATE_DEFAULT
 #undef STATE_MESSAGELIST
 #undef STATE_VIEWMESSAGE
@@ -309,3 +287,25 @@ proc/post_comm_message(var/message_title, var/message_text)
 
 /datum/comm_message_listener/proc/Remove(var/list/message)
 	messages -= list(message)
+
+proc/post_status(var/command, var/data1, var/data2)
+
+	var/datum/radio_frequency/frequency = radio_controller.return_frequency(1435)
+
+	if(!frequency) return
+
+
+	var/datum/signal/status_signal = new
+	status_signal.source = src
+	status_signal.transmission_method = 1
+	status_signal.data["command"] = command
+
+	switch(command)
+		if("message")
+			status_signal.data["msg1"] = data1
+			status_signal.data["msg2"] = data2
+			log_admin("STATUS: [key_name(usr)] set status screen message with [src]: [data1] [data2]")
+		if("alert")
+			status_signal.data["picture_state"] = data1
+
+	frequency.post_signal(src, status_signal)
