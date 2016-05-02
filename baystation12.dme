@@ -452,7 +452,6 @@
 #include "code\game\machinery\computer\buildandrepair.dm"
 #include "code\game\machinery\computer\camera.dm"
 #include "code\game\machinery\computer\cloning.dm"
-#include "code\game\machinery\computer\communications.dm"
 #include "code\game\machinery\computer\computer.dm"
 #include "code\game\machinery\computer\crew.dm"
 #include "code\game\machinery\computer\guestpass.dm"
