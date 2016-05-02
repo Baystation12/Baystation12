@@ -31,6 +31,9 @@
 			bundle = W
 		bundle.worth += src.worth
 		bundle.update_icon()
+		if(istype(src.loc, /obj/item/weapon/storage))
+			var/obj/item/weapon/storage/S = src.loc
+			S.remove_from_storage(src)
 		if(istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/h_user = user
 			h_user.drop_from_inventory(src)

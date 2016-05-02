@@ -70,6 +70,9 @@
 		H.Paralyse(20)
 		H.adjustBrainLoss(10)
 
+/obj/item/weapon/storage/bag/cash/infinite
+	startswith = list(/obj/item/weapon/spacecash/bundle/c1000 = 1)
+
 
 //HUMAN
 /obj/item/weapon/storage/bag/cash/infinite/remove_from_storage(obj/item/W as obj, atom/new_location)
