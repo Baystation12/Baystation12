@@ -319,6 +319,11 @@
 			chest.flags_inv &= ~(HIDEJUMPSUIT)
 		else
 			chest.flags_inv |= HIDEJUMPSUIT
+	if (helmet)
+		if (canremove)
+			helmet.flags_inv &= ~(HIDEMASK)
+		else
+			helmet.flags_inv |= HIDEMASK
 	update_icon(1)
 
 /obj/item/weapon/rig/process()
@@ -507,6 +512,7 @@
 		wearer.update_inv_shoes()
 		wearer.update_inv_gloves()
 		wearer.update_inv_head()
+		wearer.update_inv_wear_mask()
 		wearer.update_inv_wear_suit()
 		wearer.update_inv_w_uniform()
 		wearer.update_inv_back()
