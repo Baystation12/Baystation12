@@ -41,5 +41,5 @@
 	new_player_panel()
 	spawn(40)
 		if(client)
-			handle_privacy_poll()
+//			handle_privacy_poll() //Removing this because no one uses it
 			client.playtitlemusic()

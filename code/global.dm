@@ -110,7 +110,7 @@ var/list/awaydestinations = list() // Away missions. A list of landmarks that th
 // MySQL configuration
 var/sqladdress = "localhost"
 var/sqlport    = "3306"
-var/sqldb      = "tgstation"
+var/sqldb      = "baystation"
 var/sqllogin   = "root"
 var/sqlpass    = ""
 
@@ -124,7 +124,7 @@ var/sqllogging   = 0 // Should we log deaths, population stats, etc.?
 // These are all default values that will load should the forumdbconfig.txt file fail to read for whatever reason.
 var/forumsqladdress = "localhost"
 var/forumsqlport    = "3306"
-var/forumsqldb      = "tgstation"
+var/forumsqldb      = "baystation"
 var/forumsqllogin   = "root"
 var/forumsqlpass    = ""
 var/forum_activated_group     = "2"

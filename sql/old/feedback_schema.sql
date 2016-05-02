@@ -1,4 +1,4 @@
-CREATE TABLE `admin` (
+CREATE TABLE `erro_admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ckey` varchar(32) NOT NULL,
   `rank` varchar(32) NOT NULL DEFAULT 'Administrator',
@@ -7,7 +7,7 @@ CREATE TABLE `admin` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
 
-CREATE TABLE `admin_log` (
+CREATE TABLE `erro_admin_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `datetime` datetime NOT NULL,
   `adminckey` varchar(32) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE `admin_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
 
-CREATE TABLE `ban` (
+CREATE TABLE `erro_ban` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `bantime` datetime NOT NULL,
   `serverip` varchar(32) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `ban` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
 
-CREATE TABLE `feedback` (
+CREATE TABLE `erro_feedback` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `time` datetime NOT NULL,
   `round_id` int(8) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE `feedback` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
 
-CREATE TABLE `player` (
+CREATE TABLE `erro_player` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ckey` varchar(32) NOT NULL,
   `firstseen` datetime NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE `player` (
   UNIQUE KEY `ckey` (`ckey`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
 
-CREATE TABLE `poll_option` (
+CREATE TABLE `erro_poll_option` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pollid` int(11) NOT NULL,
   `text` varchar(255) NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE `poll_option` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
 
-CREATE TABLE `poll_question` (
+CREATE TABLE `erro_poll_question` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `polltype` varchar(16) NOT NULL DEFAULT 'OPTION',
   `starttime` datetime NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE `poll_question` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
 
-CREATE TABLE `poll_textreply` (
+CREATE TABLE `erro_poll_textreply` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `datetime` datetime NOT NULL,
   `pollid` int(11) NOT NULL,
@@ -99,7 +99,7 @@ CREATE TABLE `poll_textreply` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
 
-CREATE TABLE `poll_vote` (
+CREATE TABLE `erro_poll_vote` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `datetime` datetime NOT NULL,
   `pollid` int(11) NOT NULL,
@@ -108,5 +108,13 @@ CREATE TABLE `poll_vote` (
   `ip` varchar(16) NOT NULL,
   `adminrank` varchar(32) NOT NULL,
   `rating` int(2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
+
+CREATE TABLE `erro_privacy` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `datetime` datetime NOT NULL,
+  `ckey` varchar(32) NOT NULL,
+  `option` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
