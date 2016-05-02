@@ -21,6 +21,8 @@
 	siemens_coefficient = 0.6
 	species_restricted = list("Human", "Skrell")
 
+	flags_inv = HIDESHOES|HIDEJUMPSUIT|HIDETAIL
+
 /obj/item/clothing/suit/space/void/merc/New()
 	..()
 	slowdown_per_slot[slot_wear_suit] = 1
