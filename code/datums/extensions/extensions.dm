@@ -3,6 +3,7 @@
 	var/list/host_predicates
 	var/list/user_predicates
 	var/expected_type = /datum
+	var/flags = EXTENSION_FLAG_NONE
 
 /datum/extension/New(var/datum/holder, var/host_predicates = list(), var/user_predicates = list(), var/additional_arguments = list())
 	if(!istype(holder, expected_type))
@@ -58,10 +59,16 @@
 	..(exclude)
 	//extensions = list()
 
-/proc/set_extension(var/datum/source, var/base_type, var/expansion_type, var/host_predicates, var/user_predicates, var/list/additional_argments)
+/proc/set_extension(var/datum/source, var/datum/extension/base_type, var/expansion_type, var/host_predicates, var/user_predicates, var/list/additional_argments)
 	if(!source.extensions)
 		source.extensions = list()
-	source.extensions[base_type] = list(expansion_type, host_predicates, user_predicates, additional_argments)
+	var/datum/extension/existing_extension = source.extensions[base_type]
+	if(istype(existing_extension))
+		qdel(existing_extension)
+	if(initial(base_type.flags) & EXTENSION_FLAG_IMMEDIATE)
+		source.extensions[base_type] = new expansion_type(source, host_predicates, user_predicates, additional_argments)
+	else
+		source.extensions[base_type] = list(expansion_type, host_predicates, user_predicates, additional_argments)
 
 /proc/get_extension(var/datum/source, var/base_type)
 	if(!source.extensions)

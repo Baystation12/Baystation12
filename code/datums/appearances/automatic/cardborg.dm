@@ -1,9 +1,4 @@
-/decl/appearance_handler/cardborg/New()
-	..()
-	equipped_event.register_global(src, /decl/appearance_handler/cardborg/proc/item_equipped)
-	unequipped_event.register_global(src, /decl/appearance_handler/cardborg/proc/item_removed)
-
-/decl/appearance_handler/cardborg/proc/item_equipped(var/mob/user, var/obj/item/item, var/slot)
+/decl/appearance_handler/cardborg/proc/item_equipped(var/obj/item/item, var/mob/user, var/slot)
 	if(!(slot == slot_head || slot == slot_wear_suit))
 		return
 	if(!ishuman(user))
@@ -23,7 +18,7 @@
 	AddAltAppearance(user, I, silicon_mob_list+H) //you look like a robot to robots! (including yourself because you're totally a robot)
 	logged_in_event.register_global(src, /decl/appearance_handler/cardborg/proc/mob_joined)	// Duplicate registration request are handled for us
 
-/decl/appearance_handler/cardborg/proc/item_removed(var/mob/user, var/obj/item/item)
+/decl/appearance_handler/cardborg/proc/item_removed(var/obj/item/item, var/mob/user)
 	if((istype(item, /obj/item/clothing/suit/cardborg) || istype(item, /obj/item/clothing/head/cardborg)))
 		RemoveAltAppearance(user)
 		if(!appearance_sources.len)

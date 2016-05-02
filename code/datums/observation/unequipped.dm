@@ -7,11 +7,26 @@
 //			/mob/equipped:  The mob that unequipped/dropped the item.
 //			/obj/item/item: The unequipped item.
 
-var/decl/observ/unequipped/unequipped_event = new()
+var/decl/observ/mob_unequipped/mob_unequipped_event = new()
 
-/decl/observ/unequipped
-	name = "Logged In"
+/decl/observ/mob_unequipped
+	name = "Mob Unequipped"
 	expected_type = /mob
+
+//	Observer Pattern Implementation: Unequipped (dropped)
+//		Registration type: /obj/item
+//
+//		Raised when: A mob unequips/drops an item.
+//
+//		Arguments that the called proc should expect:
+//			/obj/item/item: The unequipped item.
+//			/mob/equipped:  The mob that unequipped/dropped the item.
+
+var/decl/observ/item_unequipped/item_unequipped_event = new()
+
+/decl/observ/item_unequipped
+	name = "Item Unequipped"
+	expected_type = /obj/item
 
 /**********************
 * Unequipped Handling *
@@ -19,4 +34,5 @@ var/decl/observ/unequipped/unequipped_event = new()
 
 /obj/item/dropped(var/mob/user)
 	..()
-	unequipped_event.raise_event(user, src)
+	mob_unequipped_event.raise_event(user, src)
+	item_unequipped_event.raise_event(src, user)
