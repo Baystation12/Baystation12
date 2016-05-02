@@ -203,6 +203,8 @@
 
 /obj/item/weapon/rig/medical/equipped
 
+	req_access = list(access_medical_equip)
+
 	initial_modules = list(
 		/obj/item/rig_module/chem_dispenser/injector,
 		/obj/item/rig_module/maneuvering_jets,
