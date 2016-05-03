@@ -484,7 +484,7 @@
 		coin.forceMove(src.loc)
 		if(!usr.get_active_hand())
 			usr.put_in_hands(coin)
-		usr << "<span class='notice'>You remove \the [coin] from the \[src]</span>"
+		usr << "<span class='notice'>You remove \the [coin] from \the [src]</span>"
 		coin = null
 		categories &= ~CAT_COIN
 
