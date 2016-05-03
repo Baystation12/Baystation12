@@ -1927,7 +1927,7 @@ mob/living/silicon/ai/can_centcom_reply()
 		return "|<A HREF='?[source];adminplayerobservejump=\ref[eyeobj]'>EYE</A>"
 
 /mob/observer/ghost/extra_admin_link(var/source)
-	if(mind && mind.current)
+	if(mind && (mind.current && !isghost(mind.current)))
 		return "|<A HREF='?[source];adminplayerobservejump=\ref[mind.current]'>BDY</A>"
 
 /proc/admin_jump_link(var/atom/target, var/source)
