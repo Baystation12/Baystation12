@@ -51,6 +51,8 @@
 
 	for(var/client/target in clients)
 		if(target.is_preference_enabled(/datum/client_preference/show_ooc))
+			if(target.is_key_ignored(key)) // If we're ignored by this person, then do nothing.
+				continue
 			var/display_name = src.key
 			if(holder)
 				if(holder.fakekey)

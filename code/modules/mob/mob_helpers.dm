@@ -427,6 +427,8 @@ proc/is_blind(A)
 			var/follow
 			var/lname
 			if(subject)
+				if(M.is_key_ignored(subject.client.key)) // If we're ignored, do nothing.
+					continue
 				if(subject != M)
 					follow = "([ghost_follow_link(subject, M)]) "
 				if(M.stat != DEAD && M.client.holder)
