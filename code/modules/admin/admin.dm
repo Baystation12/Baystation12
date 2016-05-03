@@ -938,7 +938,7 @@ proc/admin_notice(var/message, var/rights)
 			for(var/datum/antagonist/antag in ticker.mode.antag_templates)
 				if(antag.is_antagonist(M))
 					return 2
-		else if(M.special_role)
+		if(M.special_role)
 			return 1
 
 	if(isrobot(character))
