@@ -177,6 +177,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		s["players"] = 0
 		s["stationtime"] = stationtime2text()
 		s["roundduration"] = roundduration2text()
+		s["map"] = using_map.full_name
 
 		if(input["status"] == "2")
 			var/list/players = list()

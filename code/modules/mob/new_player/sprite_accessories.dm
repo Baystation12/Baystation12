@@ -719,6 +719,15 @@
 		icon_state = "vox_shortquills"
 		species_allowed = list("Vox")
 
+	vox_quills_kingly
+		name = "Kingly Vox Quills"
+		icon_state = "vox_kingly"
+		species_allowed = list("Vox")
+
+	vox_quills_mohawk
+		name = "Quill Mohawk"
+		icon_state = "vox_mohawk"
+		species_allowed = list("Vox")
 /datum/sprite_accessory/facial_hair
 
 	taj_sideburns
