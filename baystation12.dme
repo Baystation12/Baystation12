@@ -1561,6 +1561,7 @@
 #include "code\modules\organs\subtypes\resomi.dm"
 #include "code\modules\organs\subtypes\standard.dm"
 #include "code\modules\organs\subtypes\unbreakable.dm"
+#include "code\modules\organs\subtypes\vox.dm"
 #include "code\modules\organs\subtypes\xenos.dm"
 #include "code\modules\overmap\_defines.dm"
 #include "code\modules\overmap\sectors.dm"
