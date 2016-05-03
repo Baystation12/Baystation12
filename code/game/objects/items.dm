@@ -77,6 +77,11 @@
 /obj/item/Destroy()
 	qdel(hidden_uplink)
 	hidden_uplink = null
+
+	if(istype(src.loc, /obj/item/weapon/storage))
+		var/obj/item/weapon/storage/S = src.loc
+		S.remove_from_storage(src)
+
 	return ..()
 
 /obj/item/device
