@@ -208,7 +208,10 @@
 					return alert("Communications circuits remain uninitialized.")
 
 				var/target = locate(href_list["target"])
-				P.pda.create_message(P, target, 1)
+				if(target)
+					P.pda.create_message(P, target, 1)
+				else
+					return alert("Failed to send message: the recipient could not be reached.")
 				return 1
 
 /datum/pai_software/med_records
