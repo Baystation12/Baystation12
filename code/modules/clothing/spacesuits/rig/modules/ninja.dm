@@ -67,7 +67,7 @@
 	name = "teleportation module"
 	desc = "A complex, sleek-looking, hardsuit-integrated teleportation module."
 	icon_state = "teleporter"
-	use_power_cost = 40
+	use_power_cost = 200
 	redundant = 1
 	usable = 1
 	selectable = 1
@@ -97,8 +97,6 @@
 
 /obj/item/rig_module/teleporter/engage(var/atom/target, var/notify_ai)
 
-	if(!..()) return 0
-
 	var/mob/living/carbon/human/H = holder.wearer
 
 	if(!istype(H.loc, /turf))
@@ -109,9 +107,13 @@
 	if(target)
 		T = get_turf(target)
 	else
-		T = get_teleport_loc(get_turf(H), H, rand(5, 9))
+		T = get_teleport_loc(get_turf(H), H, 6, 1, 1, 1)
 
-	if(!T || T.density)
+	if(!T)
+		H << "<span class='warning'>No valid teleport target found.</span>"
+		return 0
+
+	if(T.density)
 		H << "<span class='warning'>You cannot teleport into solid walls.</span>"
 		return 0
 
@@ -126,6 +128,8 @@
 	if(T.z != H.z || get_dist(T, get_turf(H)) > world.view)
 		H << "<span class='warning'>You cannot teleport to such a distant object.</span>"
 		return 0
+
+	if(!..()) return 0
 
 	phase_out(H,get_turf(H))
 	H.forceMove(T)
