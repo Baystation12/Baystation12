@@ -52,7 +52,9 @@
 			AP.overload_lighting()
 		if(prob(1) && prob(1)) // Very very small chance to actually destroy the APC.
 			AP.set_broken()
-
+	user.hacking = 1
+	spawn(150)
+		user.hacking = 0
 
 /datum/game_mode/malfunction/verb/hack_camera(var/obj/machinery/camera/target in cameranet.cameras)
 	set name = "Hack Camera"
