@@ -85,9 +85,9 @@
 		return success_smash(user)
 
 	if(reinf_material)
-		if((wallbreaker == 2) || (damage >= max(material.hardness,reinf_material.hardness)))
+		if(damage >= max(material.hardness,reinf_material.hardness))
 			return success_smash(user)
-	else if(damage >= material.hardness)
+	else if(wallbreaker == 2 || damage >= material.hardness)
 		return success_smash(user)
 	return fail_smash(user)
 

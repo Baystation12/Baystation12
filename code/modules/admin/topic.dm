@@ -823,7 +823,7 @@
 				log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 				message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 
-				qdel(M.client)
+				del(M.client)
 				//qdel(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 			if("No")
 				if(!check_rights(R_BAN))   return
@@ -1927,7 +1927,7 @@ mob/living/silicon/ai/can_centcom_reply()
 		return "|<A HREF='?[source];adminplayerobservejump=\ref[eyeobj]'>EYE</A>"
 
 /mob/observer/ghost/extra_admin_link(var/source)
-	if(mind && mind.current)
+	if(mind && (mind.current && !isghost(mind.current)))
 		return "|<A HREF='?[source];adminplayerobservejump=\ref[mind.current]'>BDY</A>"
 
 /proc/admin_jump_link(var/atom/target, var/source)

@@ -46,7 +46,7 @@
 /datum/antagonist/proc/can_late_spawn()
 	if(!ticker)
 		return 0
-	if(!(id in ticker.mode.latejoin_antags))
+	if(!(id in ticker.mode.latejoin_antag_tags))
 		return 0
 	update_current_antag_max()
 	if(get_antag_count() >= cur_max)

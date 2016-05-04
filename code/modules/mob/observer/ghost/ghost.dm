@@ -693,7 +693,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return "|<a href='byond://?src=\ref[ghost];track=\ref[eyeobj]'>eye</a>"
 
 /mob/observer/ghost/extra_ghost_link(var/atom/ghost)
-	if(mind && mind.current)
+	if(mind && (mind.current && !isghost(mind.current)))
 		return "|<a href='byond://?src=\ref[ghost];track=\ref[mind.current]'>body</a>"
 
 /proc/ghost_follow_link(var/atom/target, var/atom/ghost)
@@ -711,6 +711,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			usr << "You have left the antag pool."
 		else
 			ticker.antag_pool += src.mind
-			usr << "You have joined the antag pool."
+			usr << "You have joined the antag pool. Make sure you have the needed role set to high!"
 	else
 		usr << "The game is not currently looking for antags."
