@@ -147,3 +147,6 @@
 			M << "<span class='danger'>A terrible stench emanates from \the [H].</span>"
 	if(prob(1) && prob(50)) //0.5% chance
 		H.vomit()
+
+/datum/species/vox/pariah/get_bodytype()
+	return "Vox"
