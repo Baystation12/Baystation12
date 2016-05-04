@@ -35,7 +35,7 @@
 	siemens_coefficient = 0.2
 
 	flags = NO_SCAN
-	spawn_flags = IS_WHITELISTED
+	spawn_flags = SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
 	blood_color = "#2299FC"
@@ -121,11 +121,11 @@
 		BP_BRAIN =    /obj/item/organ/internal/pariah_brain,
 		BP_EYES =     /obj/item/organ/internal/eyes
 		)
-	spawn_flags = IS_WHITELISTED | CAN_JOIN
+	spawn_flags = SPECIES_IS_WHITELISTED | SPECIES_CAN_JOIN
 	flags = NO_SCAN
 	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
-/datum/species/vox/pariah/get_bodytype()
+/datum/species/vox/pariah/get_bodytype(var/mob/living/carbon/human/H)
 	return "Vox"
 
 // No combat skills for you.

@@ -70,9 +70,9 @@ var/list/whitelist = list()
 
 	if(istype(species,/datum/species))
 		var/datum/species/S = species
-		if(!(S.spawn_flags & (IS_WHITELISTED|IS_RESTRICTED)))
+		if(!(S.spawn_flags & (SPECIES_IS_WHITELISTED|SPECIES_IS_RESTRICTED)))
 			return 1
-		return whitelist_lookup(S.get_bodytype(), M.ckey)
+		return whitelist_lookup(S.get_bodytype(S), M.ckey)
 
 	return 0
 

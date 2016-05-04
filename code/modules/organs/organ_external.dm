@@ -26,6 +26,7 @@
 	var/last_dam = -1                  // used in healing/processing calculations.
 
 	// Appearance vars.
+	var/nonsolid                       // Snowflake warning, reee. Used for slime limbs.
 	var/icon_name = null               // Icon state base.
 	var/body_part = null               // Part flag
 	var/icon_position = 0              // Used in mob overlay layering calculations.
@@ -825,6 +826,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(cannot_amputate || !owner)
 		return
 
+	if(disintegrate == DROPLIMB_EDGE && nonsolid)
+		disintegrate = DROPLIMB_BLUNT //splut
+
 	switch(disintegrate)
 		if(DROPLIMB_EDGE)
 			if(!clean)
@@ -849,6 +853,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	var/mob/living/carbon/human/victim = owner //Keep a reference for post-removed().
 	var/obj/item/organ/external/parent_organ = parent
+
+	var/use_flesh_colour = species.get_flesh_colour(owner)
+	var/use_blood_colour = species.get_blood_colour(owner)
+
 	removed(null, ignore_children)
 	victim.traumatic_shock += 60
 
@@ -897,10 +905,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 			else
 				gore = new /obj/effect/decal/cleanable/blood/gibs(get_turf(victim))
 				if(species)
-					if(species.get_flesh_colour())
-						gore.fleshcolor = species.get_flesh_colour()
-					if(species.get_blood_colour())
-						gore.basecolor = species.get_blood_colour()
+					gore.fleshcolor = use_flesh_colour
+					gore.basecolor =  use_blood_colour
 					gore.update_icon()
 
 			gore.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)

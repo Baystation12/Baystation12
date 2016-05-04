@@ -119,7 +119,7 @@
 	var/list/species = list()
 	for(var/S in typesof(/datum/species))
 		var/datum/species/specimen = S
-		if(initial(specimen.spawn_flags) & CAN_JOIN)
+		if(initial(specimen.spawn_flags) & SPECIES_CAN_JOIN)
 			species += initial(specimen.name_plural)
 
 	if(species.len)

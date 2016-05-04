@@ -261,7 +261,7 @@
 	if (H.gender == FEMALE)
 		g = "f"
 
-	var/icon/icobase = H.species.icobase
+	var/icon/icobase = H.species.get_icobase(H)
 
 	preview_icon = new /icon(icobase, "torso_[g]")
 	var/icon/temp
