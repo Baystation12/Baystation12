@@ -44,6 +44,11 @@ default behaviour is:
 			return 1
 		return 0
 
+/mob/living/canface()
+	if(stat)
+		return 0
+	return ..()
+
 /mob/living/Bump(atom/movable/AM, yes)
 	spawn(0)
 		if ((!( yes ) || now_pushing) || !loc)
