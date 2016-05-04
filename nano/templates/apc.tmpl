@@ -172,18 +172,7 @@
 		</div>
 	</div>
 
-	{{if data.siliconUser}}
-		<h3>System Overrides</h3>
 
-		<div class="item">
-			{{:helper.link('Overload Lighting Circuit', 'lightbulb', {'overload' : 1})}}
-			{{if data.malfStatus == 1}}
-				{{:helper.link('Override Programming', 'script', {'malfhack' : 1})}}
-			{{else data.malfStatus > 1}}
-				<div class='notice'>APC Hacked</div>
-			{{/if}}
-		</div>
-	{{/if}}
 
 </div>
 {{/if}}

@@ -921,9 +921,6 @@
 		update_icon()
 		update()
 
-	else if (href_list["overload"])
-		if(istype(usr, /mob/living/silicon))
-			src.overload_lighting()
 
 	else if (href_list["toggleaccess"])
 		if(istype(usr, /mob/living/silicon))
