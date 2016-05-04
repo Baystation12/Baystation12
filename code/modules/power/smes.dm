@@ -337,8 +337,8 @@
 	var/data[0]
 	data["nameTag"] = name_tag
 	data["storedCapacity"] = round(100.0*charge/capacity, 0.1)
-	data["storedCapacityAbs"] = round(charge/(1000*60), 0.1)
-	data["storedCapacityMax"] = round(capacity/(1000*60))
+	data["storedCapacityAbs"] = round(smes_charge_to_kwh(charge), 0.1)
+	data["storedCapacityMax"] = round(smes_charge_to_kwh(capacity), 0.1)
 	data["charging"] = inputting
 	data["chargeMode"] = input_attempt
 	data["chargeLevel"] = round(input_level/1000, 0.1)
@@ -476,3 +476,7 @@
 			user << "<span class='notice'>It's casing is quite seriously damaged.</span>"
 		if(0 to 24)
 			user << "It's casing has some minor damage."
+
+//unit conversion helper
+/proc/smes_charge_to_kwh(var/charge)
+	return ((charge/SMESRATE)/((1 HOUR)/process_schedule_interval("machinery")))/1000 //((watt-ticks)/(ticks-per-hour))/(W-per-kW)
