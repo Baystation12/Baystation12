@@ -314,13 +314,13 @@ var/last_message_id = 0
 
 
 /proc/is_relay_online()
-    for(var/obj/machinery/bluespacerelay/M in world)
+    for(var/obj/machinery/bluespacerelay/M in machines)
         if(M.stat == 0)
             return 1
     return 0
 
 /proc/enable_prison_shuttle(var/mob/user)
-	for(var/obj/machinery/computer/prison_shuttle/PS in world)
+	for(var/obj/machinery/computer/prison_shuttle/PS in machines)
 		PS.allowedtocall = !(PS.allowedtocall)
 
 /proc/call_shuttle_proc(var/mob/user)
@@ -351,7 +351,7 @@ var/last_message_id = 0
 		user << "The emergency shuttle is already on its way."
 		return
 
-	if(ticker.mode.name == "blob")
+	if(ticker.mode.name == "blob" || ticker.mode.name == "epidemic")
 		user << "Under directive 7-10, [station_name()] is quarantined until further notice."
 		return
 
@@ -400,8 +400,8 @@ var/last_message_id = 0
 
 	//delay events in case of an autotransfer
 	if (isnull(user))
-		event_manager.delay_events(EVENT_LEVEL_MODERATE, 9000) //15 minutes
-		event_manager.delay_events(EVENT_LEVEL_MAJOR, 9000)
+		event_manager.delay_events(EVENT_LEVEL_MODERATE, 10200) //17 minutes
+		event_manager.delay_events(EVENT_LEVEL_MAJOR, 10200)
 
 	log_game("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
 	message_admins("[user? key_name_admin(user) : "Autotransfer"] has called the shuttle.", 1)
