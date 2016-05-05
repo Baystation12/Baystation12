@@ -322,7 +322,8 @@
 
 	//clicking on yourself while grabbing them
 	if(M == assailant && state >= GRAB_AGGRESSIVE)
-		devour(affecting, assailant)
+		if(assailant.devour(affecting))
+			qdel(src)
 
 /obj/item/weapon/grab/dropped()
 	loc = null
