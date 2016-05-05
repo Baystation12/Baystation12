@@ -2,6 +2,7 @@
 	name = "Construct"
 	real_name = "Construct"
 	desc = ""
+	speak = list("Hsssssssszsht.", "Hsssssssss...", "Tcshsssssssszht!")
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")
 	response_help  = "thinks better of touching"
@@ -94,6 +95,7 @@
 	icon_living = "behemoth"
 	maxHealth = 250
 	health = 250
+	speak_emote = list("rumbles")
 	response_harm   = "harmlessly punches"
 	harm_intent_damage = 0
 	melee_damage_lower = 30

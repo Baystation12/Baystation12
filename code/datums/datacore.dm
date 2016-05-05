@@ -235,7 +235,7 @@
 /proc/generate_record_id()
 	return add_zero(num2hex(rand(1, 65535)), 4)	//no point generating higher numbers because of the limitations of num2hex
 
-proc/get_id_photo(var/mob/living/carbon/human/H, var/assigned_role)
+/proc/get_id_photo(var/mob/living/carbon/human/H, var/assigned_role)
 	var/icon/preview_icon = null
 
 	var/g = "m"
@@ -289,7 +289,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H, var/assigned_role)
 		eyes_s.Blend(facial_s, ICON_OVERLAY)
 
 	var/icon/clothes_s = null
-	if(!assigned_role) assigned_role = H.mind.assigned_role
+	if(!assigned_role && H.mind) assigned_role = H.mind.assigned_role
 	switch(assigned_role)
 		if("Head of Personnel")
 			clothes_s = new /icon('icons/mob/uniform.dmi', "hop_s")
