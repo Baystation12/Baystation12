@@ -78,22 +78,15 @@
 	interface_desc = "An advanced teleportation system. It is capable of pinpoint precision or random leaps forward."
 
 /obj/item/rig_module/teleporter/proc/phase_in(var/mob/M,var/turf/T)
-
 	if(!M || !T)
 		return
-
 	holder.spark_system.start()
-	playsound(T, 'sound/effects/phasein.ogg', 25, 1)
-	playsound(T, 'sound/effects/sparks2.ogg', 50, 1)
-	anim(T,M,'icons/mob/mob.dmi',,"phasein",,M.dir)
+	M.phase_in(T)
 
 /obj/item/rig_module/teleporter/proc/phase_out(var/mob/M,var/turf/T)
-
 	if(!M || !T)
 		return
-
-	playsound(T, "sparks", 50, 1)
-	anim(T,M,'icons/mob/mob.dmi',,"phaseout",,M.dir)
+	M.phase_out(T)
 
 /obj/item/rig_module/teleporter/engage(var/atom/target, var/notify_ai)
 
