@@ -107,7 +107,7 @@
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
 	force = 10
-	w_class = 4.0
+	w_class = 5 //too long even for a dufflebag
 	slot_flags = SLOT_BACK
 	force_wielded = 0.75           // 22 when wielded with hardness 15 (glass)
 	unwielded_force_divisor = 0.65 // 14 when unwielded based on above

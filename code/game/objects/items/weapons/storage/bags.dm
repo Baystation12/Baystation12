@@ -91,7 +91,7 @@
 	icon_state = "plantbag"
 	max_storage_space = 100
 	max_w_class = 3
-	w_class = 2
+	w_class = 3
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/grown,/obj/item/seeds,/obj/item/weapon/grown)
 
 
