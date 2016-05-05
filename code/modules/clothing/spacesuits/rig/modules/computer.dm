@@ -211,8 +211,8 @@
 				user.drop_from_inventory(ai)
 				ai.forceMove(src)
 				ai_card = ai
-				ai_mob << "<font color='blue'>You have been transferred to \the [holder]'s [src].</font>"
-				user << "<font color='blue'>You load [ai_mob] into \the [holder]'s [src].</font>"
+				ai_mob << "<span class='notice'>You have been transferred to \the [holder]'s [src.name].</span>"
+				user << "<span class='notice'>You load \the [ai_mob] into \the [holder]'s [src.name].</span>"
 
 			integrated_ai = ai_mob
 
@@ -451,7 +451,7 @@
 
 	// Attempts to drain up to 12.5*cell-capacity kW, determines this value from remaining cell capacity to ensure we don't drain too much.
 	// 1Ws/(12.5*CELLRATE) = 40s to charge
-	var/to_drain = min(12.5*holder.cell.maxcharge, ((holder.cell.maxcharge - holder.cell.charge) / CELLRATE))
+	var/to_drain = max(min(12.5*holder.cell.maxcharge, ((holder.cell.maxcharge - holder.cell.charge) / CELLRATE)), 200000)
 	var/target_drained = interfaced_with.drain_power(0,0,to_drain)
 	if(target_drained <= 0)
 		H << "<span class = 'danger'>Your power sink flashes a red light; there is no power left in [interfaced_with].</span>"
