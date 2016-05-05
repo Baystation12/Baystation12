@@ -70,7 +70,6 @@
 	permeability_coefficient = 0.01
 	armor = list(melee = 30, bullet = 20, laser = 20,energy = 20, bomb = 20, bio = 20, rad = 20)
 	allowed = list(/obj/item/weapon/teleportation_scroll)
-	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.8
 	wizard_garb = 1
 
