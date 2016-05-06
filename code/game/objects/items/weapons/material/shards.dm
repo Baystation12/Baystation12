@@ -5,6 +5,7 @@
 	icon = 'icons/obj/shards.dmi'
 	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
 	icon_state = "large"
+	randpixel = 8
 	sharp = 1
 	edge = 1
 	w_class = 2
@@ -22,8 +23,6 @@
 		return
 
 	icon_state = "[material.shard_icon][pick("large", "medium", "small")]"
-	pixel_x = rand(-8, 8)
-	pixel_y = rand(-8, 8)
 	update_icon()
 
 	if(material.shard_type)

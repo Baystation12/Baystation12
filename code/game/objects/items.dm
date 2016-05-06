@@ -4,6 +4,7 @@
 	w_class = 3.0
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
+	var/randpixel = 6
 	var/abstract = 0
 	var/r_speed = 1.0
 	var/health = null
@@ -74,6 +75,12 @@
 	// Species-specific sprite sheets for inventory sprites
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
+
+/obj/item/New()
+	..()
+	if(randpixel && (!pixel_x && !pixel_y)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
+		pixel_x = rand(-randpixel, randpixel)
+		pixel_y = rand(-randpixel, randpixel)
 
 /obj/item/Destroy()
 	qdel(hidden_uplink)
@@ -186,7 +193,13 @@
 	else
 		if(isliving(src.loc))
 			return
-	user.put_in_active_hand(src)
+	if(user.put_in_active_hand(src))
+		if(randpixel)
+			pixel_x = rand(-randpixel, randpixel)
+			pixel_y = rand(-randpixel, 0) //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character's feet
+		else if(randpixel == 0)
+			pixel_x = 0
+			pixel_y = 0
 	return
 
 /obj/item/attack_ai(mob/user as mob)

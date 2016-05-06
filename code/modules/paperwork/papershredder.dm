@@ -127,6 +127,7 @@
 	name = "shredded paper"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "shredp"
+	randpixel = 5
 	throwforce = 0
 	w_class = 1
 	throw_range = 3
@@ -134,6 +135,4 @@
 
 /obj/item/weapon/shreddedp/New()
 	..()
-	pixel_x = rand(-5,5)
-	pixel_y = rand(-5,5)
 	if(prob(65)) color = pick("#BABABA","#7F7F7F")

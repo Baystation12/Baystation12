@@ -61,6 +61,7 @@ Buildable meters
 	force = 7
 	icon = 'icons/obj/pipe-item.dmi'
 	icon_state = "simple"
+	randpixel = 5
 	item_state = "buildpipe"
 	w_class = 3
 	level = 2
@@ -200,8 +201,6 @@ Buildable meters
 			connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
 	//src.pipe_dir = get_pipe_dir()
 	update()
-	src.pixel_x = rand(-5, 5)
-	src.pixel_y = rand(-5, 5)
 
 //update the name and icon of the pipe item depending on the type
 
