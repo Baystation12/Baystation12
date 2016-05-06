@@ -47,7 +47,7 @@
 		if(istype(H))
 			for(var/obj/item/clothing/C in list(H.head,H.wear_mask,H.glasses))
 				if(istype(C) && (C.body_parts_covered & EYES))
-					user << "<span class='warning'>You're going to need to remove [C.name] first.</span>"
+					user << "<span class='warning'>You're going to need to remove [C] first.</span>"
 					return
 
 			var/obj/item/organ/vision
@@ -83,7 +83,7 @@
 			user << "<span class='warning'>\The [H]'s pupils do not react to the light!</span>"
 			return
 		if(XRAY in H.mutations)
-			user << "<span class='notice'>\The [H] pupils give an eerie glow!</span>"
+			user << "<span class='notice'>\The [H]'s pupils give an eerie glow!</span>"
 		if(vision.damage)
 			user << "<span class='warning'>There's visible damage to [H]'s [vision.name]!</span>"
 		else if(H.eye_blurry)
