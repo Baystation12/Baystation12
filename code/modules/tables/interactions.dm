@@ -150,7 +150,7 @@
 
 		//Clamp it so that the icon never moves more than 16 pixels in either direction (thus leaving the table turf)
 		W.pixel_x = Clamp(text2num(click_data["icon-x"]) - center_x, -(world.icon_size/2), world.icon_size/2)
-		W.pixel_z = Clamp(text2num(click_data["icon-y"]) - center_y, -(world.icon_size/2), world.icon_size/2)
+		W.pixel_y = Clamp(text2num(click_data["icon-y"]) - center_y, -(world.icon_size/2), world.icon_size/2)
 	return
 
 /obj/structure/table/attack_tk() // no telehulk sorry
