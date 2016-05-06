@@ -21,7 +21,8 @@
 	visualnet = cameranet
 
 /mob/observer/eye/aiEye/setLoc(var/T, var/cancel_tracking = 1)
-	if(..() && isAI(owner))
+	. = ..()
+	if(. && isAI(owner))
 		var/mob/living/silicon/ai/ai = owner
 		if(cancel_tracking)
 			ai.ai_cancel_tracking()
@@ -29,6 +30,16 @@
 		//Holopad
 		if(ai.holo && ai.hologram_follow)
 			ai.holo.move_hologram(ai)
+		return 1
+
+/mob/observer/eye/aiEye/set_dir(new_dir)
+	. = ..()
+	if(. && isAI(owner))
+		var/mob/living/silicon/ai/ai = owner
+
+		//Holopad
+		if(ai.holo && ai.hologram_follow)
+			ai.holo.set_dir_hologram(new_dir, ai)
 		return 1
 
 // AI MOVEMENT

@@ -179,6 +179,13 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 				clear_holo(user)
 	return 1
 
+/obj/machinery/hologram/holopad/proc/set_dir_hologram(new_dir, mob/living/silicon/ai/user)
+	if(masters[user])
+		var/obj/effect/overlay/hologram = masters[user]
+		hologram.dir = new_dir
+
+
+
 /*
  * Hologram
  */
