@@ -1,0 +1,8 @@
+author: HarpyEagle
+
+delete-after: True
+
+changes: 
+  - tweak: "Armor now has a chance to either block an attack or absorb a fixed portion of damage, instead of randomly blocking either nothing, half, or full damage."
+  - tweak: "Armor protection against explosions is similarily less random now."
+  - tweak: "Riot, ablative, and ballistic armor is less hyper-specialized. They provide moderate protection against other damage types now, while their protection against their main damage type is reduced but still very good."

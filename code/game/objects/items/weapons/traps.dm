@@ -79,20 +79,19 @@
 	//armour
 	var/blocked = L.run_armor_check(target_zone, "melee")
 
-	if(blocked >= 2)
+	if(blocked >= 100)
 		return
 
 	if(!L.apply_damage(30, BRUTE, target_zone, blocked, used_weapon=src))
 		return 0
 
 	//trap the victim in place
-	if(!blocked)
-		set_dir(L.dir)
-		can_buckle = 1
-		buckle_mob(L)
-		L << "<span class='danger'>The steel jaws of \the [src] bite into you, trapping you in place!</span>"
-		deployed = 0
-		can_buckle = initial(can_buckle)
+	set_dir(L.dir)
+	can_buckle = 1
+	buckle_mob(L)
+	L << "<span class='danger'>The steel jaws of \the [src] bite into you, trapping you in place!</span>"
+	deployed = 0
+	can_buckle = initial(can_buckle)
 
 /obj/item/weapon/beartrap/Crossed(AM as mob|obj)
 	if(deployed && isliving(AM))

@@ -21,8 +21,8 @@ meteor_act
 		if(shield_check < 0)
 			return shield_check
 		else
-			P.on_hit(src, 2, def_zone)
-			return 2
+			P.on_hit(src, 100, def_zone)
+			return 100
 
 	//Shrapnel
 	if(P.can_embed())
@@ -82,7 +82,7 @@ meteor_act
 			var/obj/item/organ/external/organ = organs_by_name[organ_name]
 			if(organ)
 				var/weight = organ_rel_size[organ_name]
-				armorval += getarmor_organ(organ, type) * weight
+				armorval += getarmor_organ(organ, type) * weight //use plain addition here because we are calculating an average
 				total += weight
 	return (armorval/max(total, 1))
 
@@ -109,7 +109,7 @@ meteor_act
 		if(gear && istype(gear ,/obj/item/clothing))
 			var/obj/item/clothing/C = gear
 			if(istype(C) && C.body_parts_covered & def_zone.body_part)
-				protection += C.armor[type]
+				protection = add_armor(protection, C.armor[type]) 
 	return protection
 
 /mob/living/carbon/human/proc/check_head_coverage()
@@ -245,11 +245,11 @@ meteor_act
 				bloody_body(src)
 
 /mob/living/carbon/human/proc/attack_joint(var/obj/item/organ/external/organ, var/obj/item/W, var/blocked)
-	if(!organ || (organ.dislocated == 2) || (organ.dislocated == -1) || blocked >= 2)
+	if(!organ || (organ.dislocated == 2) || (organ.dislocated == -1) || blocked >= 100)
 		return 0
 	if(W.damtype != BRUTE)
 		return 0
-	if(prob(W.force / (blocked+1)))
+	if(prob(W.force * blocked_mult(blocked)))
 		visible_message("<span class='danger'>[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
 		organ.dislocate(1)
 		return 1
@@ -315,8 +315,7 @@ meteor_act
 
 		src.visible_message("\red [src] has been hit in the [hit_area] by [O].")
 		var/armor = run_armor_check(affecting, "melee", O.armor_penetration, "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].") //I guess "melee" is the best fit here
-
-		if(armor < 2)
+		if(armor < 100)
 			apply_damage(throw_damage, dtype, zone, armor, is_sharp(O), has_edge(O), O)
 
 		if(ismob(O.thrower))
@@ -333,9 +332,9 @@ meteor_act
 			var/obj/item/I = O
 			if (!is_robot_module(I))
 				var/sharp = is_sharp(I)
-				var/damage = throw_damage
+				var/damage = throw_damage //the effective damage used for embedding purposes, no actual damage is dealt here
 				if (armor)
-					damage /= armor+1
+					damage *= blocked_mult(armor)
 
 				//blunt objects should really not be embedding in things unless a huge amount of force is involved
 				var/embed_chance = sharp? damage/I.w_class : damage/(I.w_class*3)

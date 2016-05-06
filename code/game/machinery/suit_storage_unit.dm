@@ -382,7 +382,7 @@
 	for(i=0,i<4,i++)
 		sleep(50)
 		if(src.OCCUPANT)
-			OCCUPANT.apply_effect(50, IRRADIATE)
+			OCCUPANT.apply_effect(50, IRRADIATE, blocked = OCCUPANT.getarmor(null, "rad"))
 			var/obj/item/organ/diona/nutrients/rad_organ = locate() in OCCUPANT.internal_organs
 			if (!rad_organ)
 				if(src.issuperUV)
@@ -974,7 +974,7 @@
 			occupant.take_organ_damage(0,radiation_level*2 + rand(1,3))
 		if(radiation_level > 1)
 			occupant.take_organ_damage(0,radiation_level + rand(1,3))
-		occupant.apply_effect(radiation_level*10, IRRADIATE)
+		occupant.apply_effect(radiation_level*10, IRRADIATE, blocked = occupant.getarmor(null, "rad"))
 
 /obj/machinery/suit_cycler/proc/finished_job()
 	var/turf/T = get_turf(src)

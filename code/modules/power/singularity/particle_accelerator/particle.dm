@@ -60,7 +60,7 @@
 
 /obj/effect/accelerated_particle/proc/toxmob(var/mob/living/M)
 	var/radiation = (energy*2)
-	M.apply_effect((radiation*3),IRRADIATE,0)
+	M.apply_effect((radiation*3),IRRADIATE,blocked = M.getarmor(null, "rad"))
 	M.updatehealth()
 	//M << "\red You feel odd."
 	return

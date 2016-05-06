@@ -321,18 +321,21 @@
 /mob/living/simple_animal/ex_act(severity)
 	if(!blinded)
 		flick("flash", flash)
+
+	var/damage
 	switch (severity)
 		if (1.0)
-			adjustBruteLoss(500)
-			gib()
-			return
+			damage = 500
+			if(!prob(getarmor(null, "bomb")))
+				gib()
 
 		if (2.0)
-			adjustBruteLoss(60)
-
+			damage = 120
 
 		if(3.0)
-			adjustBruteLoss(30)
+			damage = 30
+
+	adjustBruteLoss(damage * blocked_mult(getarmor(null, "bomb")))
 
 /mob/living/simple_animal/adjustBruteLoss(damage)
 	health = Clamp(health - damage, 0, maxHealth)
