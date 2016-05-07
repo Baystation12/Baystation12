@@ -334,6 +334,9 @@
 		return 0
 
 	var/total_storage_space = W.get_storage_cost()
+	if(total_storage_space == DO_NOT_STORE)
+		usr << "<span class='notice'>\The [W] cannot be placed in [src].</span>" //TODO replace usr
+		return 0
 	for(var/obj/item/I in contents)
 		total_storage_space += I.get_storage_cost() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
 

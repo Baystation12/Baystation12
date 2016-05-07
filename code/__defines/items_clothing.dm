@@ -183,5 +183,7 @@
 // Storage
 #define base_storage_cost(w_class) (2**(w_class-1)) //1,2,4,8,16,...
 
+#define DO_NOT_STORE INFINITY //A special storage "cost" that indicates an item should not be storable
+
 #define DEFAULT_BACKPACK_STORAGE 28
 #define DEFAULT_BOX_STORAGE 14

@@ -279,6 +279,11 @@
 /obj/item/weapon/weldingtool/proc/isOn()
 	return src.welding
 
+/obj/item/weapon/weldingtool/get_storage_cost()
+	if(isOn())
+		return DO_NOT_STORE
+	return ..()
+
 /obj/item/weapon/weldingtool/update_icon()
 	..()
 	icon_state = welding ? "welder1" : "welder"
@@ -302,7 +307,7 @@
 				T.visible_message("<span class='danger'>\The [src] turns on.</span>")
 			src.force = 15
 			src.damtype = "fire"
-			src.w_class = 4
+			src.slot_flags |= SLOT_DENYPOCKET //could also make it just set you on fire, but lets disable putting lit welders in pockets for now
 			welding = 1
 			update_icon()
 			processing_objects |= src
@@ -319,7 +324,7 @@
 			T.visible_message("<span class='warning'>\The [src] turns off.</span>")
 		src.force = 3
 		src.damtype = "brute"
-		src.w_class = initial(src.w_class)
+		src.slot_flags = initial(src.slot_flags)
 		src.welding = 0
 		update_icon()
 
