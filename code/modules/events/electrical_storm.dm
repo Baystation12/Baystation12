@@ -14,10 +14,13 @@
 		if(EVENT_LEVEL_MAJOR)
 			command_announcement.Announce("Alert. A strong electrical storm has been detected in proximity of the station. It is reccomended to immediately secure sensitive electrical equipment until the storm passes.", "Electrical Storm Alert")
 
-/datum/event/electrical_storm/end()
+/datum/event/electrical_storm/start()
 	..()
-	command_announcement.Announce("The station has cleared the electrical storm. Please repair any electrical overloads.", "Electrical Storm Alert")
-
+	valid_apcs = list()
+	for(var/obj/machinery/power/apc/A in machines)
+		if(A.z in using_map.station_levels)
+			valid_apcs.Add(A)
+	endWhen = (severity * 60) + startWhen
 
 /datum/event/electrical_storm/tick()
 	..()
@@ -29,9 +32,6 @@
 		picked_apcs |= pick(valid_apcs)
 
 	for(var/obj/machinery/power/apc/T in picked_apcs)
-		if(!istype(T))
-			continue
-
 		// Main breaker is turned off. Consider this APC protected.
 		if(!T.operating)
 			continue
@@ -45,18 +45,16 @@
 			T.emagged = 1
 			T.update_icon()
 
+		if(T.is_critical)
+			continue
+
 		// Very tiny chance to completely break the APC. Has a check to ensure we don't break critical APCs such as the Engine room, or AI core. Does not occur on Mundane severity.
-		if(prob((0.2 * severity) - 0.2) && !T.is_critical)
+		if(prob((0.2 * severity) - 0.2))
 			T.set_broken()
 
 		// At all times, assuming the APC is not protected, turn it off briefly (as gridcheck does, just considerably shorter duration)
-		if(!T.is_critical)
-			T.energy_fail(10)
+		T.energy_fail(10)
 
-/datum/event/electrical_storm/start()
+/datum/event/electrical_storm/end()
 	..()
-	valid_apcs = list()
-	for(var/obj/machinery/power/apc/A in machines)
-		if(A.z in using_map.station_levels)
-			valid_apcs.Add(A)
-	endWhen = (severity * 60) + startWhen
+	command_announcement.Announce("The station has cleared the electrical storm. Please repair any electrical overloads.", "Electrical Storm Alert")
