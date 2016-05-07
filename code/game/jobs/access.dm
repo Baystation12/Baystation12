@@ -8,6 +8,8 @@
 	//check if it doesn't require any access at all
 	if(src.check_access(null))
 		return 1
+	if(!istype(M))
+		return 0
 
 	var/id = M.GetIdCard()
 	if(id)
