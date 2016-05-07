@@ -2,10 +2,6 @@
 /mob/living/carbon/human/whisper(message as text)
 	var/alt_name = ""
 
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "\red Speech is currently admin-disabled."
-		return
-
 	message = sanitize(message)
 	log_whisper("[src.name]/[src.key] : [message]")
 
