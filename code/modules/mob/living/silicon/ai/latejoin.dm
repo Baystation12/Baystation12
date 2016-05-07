@@ -31,15 +31,4 @@ var/global/list/empty_playable_ai_cores = list()
 	global_announcer.autosay("[src] has been moved to intelligence storage.", "Artificial Intelligence Oversight")
 
 	//Handle job slot/tater cleanup.
-	var/job = mind.assigned_role
-
-	job_master.FreeRole(job)
-
-	if(mind.objectives.len)
-		qdel(mind.objectives)
-		mind.special_role = null
-
-	clear_antag_roles(mind)
-
-	ghostize(0)
-	qdel(src)
+	clear_client()
