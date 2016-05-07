@@ -302,7 +302,7 @@
 				T.visible_message("<span class='danger'>\The [src] turns on.</span>")
 			src.force = 15
 			src.damtype = "fire"
-			src.w_class = 4
+			src.w_class = 5 //need a better way to indicate that something should not be stored ever.
 			welding = 1
 			update_icon()
 			processing_objects |= src

@@ -22,7 +22,7 @@
 		)
 	w_class = 4
 	slot_flags = SLOT_BACK
-	max_w_class = 4
+	max_w_class = 3
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -51,7 +51,6 @@
 	desc = "A backpack that opens into a localized pocket of Blue Space."
 	origin_tech = list(TECH_BLUESPACE = 4)
 	icon_state = "holdingpack"
-	max_w_class = 3
 	max_storage_space = 56
 
 	New()
@@ -76,7 +75,7 @@
 	desc = "Space Santa uses this to deliver toys to all the nice children in space for Christmas! Wow, it's pretty big!"
 	icon_state = "giftbag0"
 	item_state = "giftbag"
-	w_class = 4.0
+	w_class = 5
 	max_w_class = 3
 	max_storage_space = 400 // can store a ton of shit!
 	item_state_slots = null
@@ -151,8 +150,10 @@
 	icon_state = "duffle"
 	item_state_slots = null
 	w_class = 5
+	max_w_class = 4
 	slowdown_general = 1
-	max_storage_space = DEFAULT_BACKPACK_STORAGE + 10
+	//reduced somewhat to account for the fact that you can put backpacks in them, now fits 3 backpacks instead of 4
+	max_storage_space = DEFAULT_BACKPACK_STORAGE + 6
 
 /obj/item/weapon/storage/backpack/dufflebag/New()
 	..()

@@ -60,7 +60,7 @@
 	//active_force = 150 //holy...
 	active_force = 60
 	active_throwforce = 35
-	active_w_class = 5
+	active_w_class = 6
 	//force = 40
 	//throwforce = 25
 	force = 20
@@ -94,7 +94,7 @@
 	icon_state = "sword0"
 	active_force = 30
 	active_throwforce = 20
-	active_w_class = 4
+	active_w_class = 5
 	force = 3
 	throwforce = 5
 	throw_speed = 1
