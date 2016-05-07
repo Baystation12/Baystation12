@@ -39,7 +39,7 @@
 	var/result_amount = 0
 
 	//how far the reaction proceeds each time it is processed. Used with either REACTION_RATE or HALF_LIFE macros.
-	var/reaction_rate = HALF_LIFE(0)
+	var/reaction_rate = HALF_LIFE(1)
 
 	//if less than 1, the reaction will be inhibited if the ratio of products/reagents is too high.
 	//0.5 = 50% yield -> reaction will only proceed halfway until products are removed.
@@ -53,6 +53,7 @@
 	var/reaction_sound = 'sound/effects/bubbles.ogg'
 
 	var/log_is_important = 0 // If this reaction should be considered important for logging. Important recipes message admins when mixed, non-important ones just log to file.
+
 /datum/chemical_reaction/proc/can_happen(var/datum/reagents/holder)
 	//check that all the required reagents are present
 	if(!holder.has_all_reagents(required_reagents))
