@@ -454,7 +454,7 @@
 						//Sender isn't faking as someone who exists
 						if(isnull(PDARec))
 							src.linkedServer.send_pda_message("[customrecepient.owner]", "[customsender]","[custommessage]")
-							customrecepient.new_message(customsender, customsender, customjob, custommessage)
+							customrecepient.new_message(customsender, customsender, customjob, custommessage, null) //TODO allow setting a custom reply-to
 						//Sender is faking as someone who exists
 						else
 
@@ -464,7 +464,7 @@
 							if(!customrecepient.conversations.Find("\ref[PDARec]"))
 								customrecepient.conversations.Add("\ref[PDARec]")
 
-							customrecepient.new_message(PDARec, custommessage)
+							customrecepient.new_message_from_pda(PDARec, custommessage)
 						//Finally..
 						ResetMessage()
 

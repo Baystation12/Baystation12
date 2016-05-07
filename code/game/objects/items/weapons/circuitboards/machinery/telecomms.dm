@@ -73,3 +73,14 @@
 							/obj/item/weapon/stock_parts/subspace/filter = 1,
 							/obj/item/weapon/stock_parts/subspace/crystal = 1,
 							/obj/item/weapon/stock_parts/micro_laser/high = 2)
+
+/obj/item/weapon/circuitboard/telecomms/pda_multicaster
+	name = T_BOARD("pda multicaster")
+	build_path = "/obj/machinery/pda_multicaster"
+	origin_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2, TECH_BLUESPACE = 2)
+	req_components = list(
+							/obj/item/weapon/stock_parts/subspace/ansible = 1,
+							/obj/item/weapon/stock_parts/subspace/filter = 1,
+							/obj/item/weapon/stock_parts/manipulator = 1,
+							/obj/item/weapon/stock_parts/subspace/treatment = 1,
+							/obj/item/stack/cable_coil = 2)

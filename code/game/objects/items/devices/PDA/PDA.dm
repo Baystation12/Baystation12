@@ -163,6 +163,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 /obj/item/device/pda/shaftminer
 	icon_state = "pda-miner"
+	default_cartridge = /obj/item/weapon/cartridge/miner
 
 /obj/item/device/pda/syndicate
 	default_cartridge = /obj/item/weapon/cartridge/syndicate
@@ -172,6 +173,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	hidden = 1
 
 /obj/item/device/pda/chaplain
+	default_cartridge = /obj/item/weapon/cartridge/service
 	icon_state = "pda-holy"
 	ttone = "holy"
 
@@ -181,13 +183,15 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	ttone = "..."
 
 /obj/item/device/pda/botanist
-	//default_cartridge = /obj/item/weapon/cartridge/botanist
+	default_cartridge = /obj/item/weapon/cartridge/service
 	icon_state = "pda-hydro"
 
 /obj/item/device/pda/roboticist
+	default_cartridge = /obj/item/weapon/cartridge/signal/science
 	icon_state = "pda-robot"
 
 /obj/item/device/pda/librarian
+	default_cartridge = /obj/item/weapon/cartridge/service
 	icon_state = "pda-libb"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. This is model is a WGW-11 series e-reader."
 	note = "Congratulations, your station has chosen the Thinktronic 5290 WGW-11 Series E-reader and Personal Data Assistant!"
@@ -200,9 +204,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	note = "Congratulations, you have chosen the Thinktronic 5230 Personal Data Assistant Deluxe Special Max Turbo Limited Edition!"
 
 /obj/item/device/pda/chef
+	default_cartridge = /obj/item/weapon/cartridge/service
 	icon_state = "pda-chef"
 
 /obj/item/device/pda/bar
+	default_cartridge = /obj/item/weapon/cartridge/service
 	icon_state = "pda-bar"
 
 /obj/item/device/pda/atmos
@@ -306,6 +312,99 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/ai/pai
 	ttone = "assist"
 
+
+// Used for the PDA multicaster, which mirrors messages sent to it to a specific department,
+/obj/item/device/pda/multicaster
+	ownjob = "Relay"
+	icon_state = "NONE"
+	ttone = "data"
+	detonate = 0
+	news_silent = 1
+	var/list/cartridges_to_send_to = list()
+
+// This is what actually mirrors the message,
+/obj/item/device/pda/multicaster/new_message(var/sending_unit, var/sender, var/sender_job, var/message)
+	if(sender)
+		var/list/targets = list()
+		for(var/obj/item/device/pda/pda in PDAs)
+			if(pda.cartridge && pda.owner && is_type_in_list(pda.cartridge, cartridges_to_send_to))
+				targets |= pda
+		if(targets.len)
+			for(var/obj/item/device/pda/target in targets)
+				create_message(target, sender, sender_job, message)
+
+// This has so much copypasta,
+/obj/item/device/pda/multicaster/create_message(var/obj/item/device/pda/P, var/original_sender, var/original_job, var/t)
+	t = sanitize(t, MAX_MESSAGE_LEN, 0)
+	t = replace_characters(t, list("&#34;" = "\""))
+	if (!t || !istype(P))
+		return
+
+	if (isnull(P)||P.toff || toff)
+		return
+
+	last_text = world.time
+	var/datum/reception/reception = get_reception(src, P, t)
+	t = reception.message
+
+	if(reception.message_server && (reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER)) // only send the message if it's stable,
+		if(reception.telecomms_reception & TELECOMMS_RECEPTION_RECEIVER == 0) // Does our recipient have a broadcaster on their level?,
+			return
+		var/send_result = reception.message_server.send_pda_message("[P.owner]","[owner]","[t]")
+		if (send_result)
+			return
+
+		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))
+
+		if(!P.conversations.Find("\ref[src]"))
+			P.conversations.Add("\ref[src]")
+
+		P.new_message(src, "[original_sender] \[Relayed\]", original_job, t, null)
+
+	else
+		return
+
+/obj/item/device/pda/multicaster/command/New()
+	..()
+	owner = "Command Department"
+	name = "Command Department (Relay)"
+	cartridges_to_send_to = command_cartridges
+
+/obj/item/device/pda/multicaster/security/New()
+	..()
+	owner = "Security Department"
+	name = "Security Department (Relay)"
+	cartridges_to_send_to = security_cartridges
+
+/obj/item/device/pda/multicaster/engineering/New()
+	..()
+	owner = "Engineering Department"
+	name = "Engineering Department (Relay)"
+	cartridges_to_send_to = engineering_cartridges
+
+/obj/item/device/pda/multicaster/medical/New()
+	..()
+	owner = "Medical Department"
+	name = "Medical Department (Relay)"
+	cartridges_to_send_to = medical_cartridges
+
+/obj/item/device/pda/multicaster/research/New()
+	..()
+	owner = "Research Department"
+	name = "Research Department (Relay)"
+	cartridges_to_send_to = research_cartridges
+
+/obj/item/device/pda/multicaster/cargo/New()
+	..()
+	owner = "Cargo Department"
+	name = "Cargo Department (Relay)"
+	cartridges_to_send_to = cargo_cartridges
+
+/obj/item/device/pda/multicaster/civilian/New()
+	..()
+	owner = "Civilian Services Department"
+	name = "Civilian Services Department (Relay)"
+	cartridges_to_send_to = civilian_cartridges
 
 /*
  *	The Actual PDA
@@ -929,7 +1028,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		message += "Your [P] bleeps loudly."
 		j = prob(10)
 
-	if(j) //This kills the PDA
+	if(j && detonate) //This kills the PDA
 		qdel(P)
 		if(message)
 			message += "It melts in a puddle of plastic."
@@ -1041,22 +1140,24 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	// Do nothing
 
 /obj/item/device/pda/proc/new_message_from_pda(var/obj/item/device/pda/sending_device, var/message)
-	new_message(sending_device, sending_device.owner, sending_device.ownjob, message)
+	new_message(sending_device, sending_device.owner, sending_device.ownjob, message, sending_device)
 
-/obj/item/device/pda/proc/new_message(var/sending_unit, var/sender, var/sender_job, var/message)
-	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;skiprefresh=1;target=\ref[sending_unit]'>Reply</a>)"
+/obj/item/device/pda/proc/new_message(var/sending_unit, var/sender, var/sender_job, var/message, obj/item/device/pda/reply_to)
+	var/reply_link = reply_to? "<a href='byond://?src=\ref[src];choice=Message;skiprefresh=1;target=\ref[sending_unit]'>Reply</a>" : "Unable to Reply"
+	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" ([reply_link])"
 	new_info(message_silent, ttone, reception_message)
 
 	log_pda("[usr] (PDA: [sending_unit]) sent \"[message]\" to [name]")
 	new_message = 1
 	update_icon()
 
-/obj/item/device/pda/ai/new_message(var/atom/movable/sending_unit, var/sender, var/sender_job, var/message)
+/obj/item/device/pda/ai/new_message(var/atom/movable/sending_unit, var/sender, var/sender_job, var/message, obj/item/device/pda/reply_to)
 	var/track = ""
 	if(ismob(sending_unit.loc) && isAI(loc))
 		track = "(<a href='byond://?src=\ref[loc];track=\ref[sending_unit.loc];trackname=[html_encode(sender)]'>Follow</a>)"
 
-	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;skiprefresh=1;target=\ref[sending_unit]'>Reply</a>) [track]"
+	var/reply_link = reply_to? "<a href='byond://?src=\ref[src];choice=Message;skiprefresh=1;target=\ref[sending_unit]'>Reply</a>" : "Unable to Reply"
+	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" ([reply_link]) [track]"
 	new_info(message_silent, newstone, reception_message)
 
 	log_pda("[usr] (PDA: [sending_unit]) sent \"[message]\" to [name]")
