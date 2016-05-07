@@ -9,6 +9,9 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	canmove = 0
 	blinded = 0
 	anchored = 1	//  don't get pushed around
+	universal_speak = 1
+	var/is_manifest = FALSE
+	var/next_visibility_toggle = 0
 	var/can_reenter_corpse
 	var/datum/hud/living/carbon/hud = null // hud
 	var/bootime = 0
@@ -18,7 +21,6 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	var/has_enabled_antagHUD = 0
 	var/medHUD = 0
 	var/antagHUD = 0
-	universal_speak = 1
 	var/atom/movable/following = null
 	var/admin_ghosted = 0
 	var/anonsay = 0
@@ -27,6 +29,8 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 	var/obj/item/device/multitool/ghost_multitool
 	incorporeal_move = 1
+
+	var/list/hud_images // A list of hud images
 
 /mob/observer/ghost/New(mob/body)
 	see_in_dark = 100
@@ -79,6 +83,10 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	stop_following()
 	qdel(ghost_multitool)
 	ghost_multitool = null
+	if(hud_images)
+		for(var/image/I in hud_images)
+			show_hud_icon(I.icon_state, FALSE)
+		hud_images = null
 	return ..()
 
 /mob/observer/ghost/Topic(href, href_list)
@@ -95,7 +103,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 /mob/observer/ghost/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/weapon/book/tome))
 		var/mob/observer/ghost/M = src
-		M.manifest(user)
+		M.manifest()
 
 /*
 Transfer_mind is there to check if mob is being deleted/not going to have a body.
@@ -561,57 +569,48 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	usr.visible_message("<span class='deadsay'><b>[src]</b> points to [A]</span>")
 	return 1
 
-/mob/observer/ghost/proc/manifest(mob/user)
-	var/is_manifest = 0
+/mob/observer/ghost/proc/manifest()
 	if(!is_manifest)
-		is_manifest = 1
+		is_manifest = TRUE
 		verbs += /mob/observer/ghost/proc/toggle_visibility
 
-	if(src.invisibility != 0)
-		user.visible_message( \
-			"<span class='warning'>\The [user] drags ghost, [src], to our plane of reality!</span>", \
-			"<span class='warning'>You drag [src] to our plane of reality!</span>" \
-		)
+	if(src.invisibility > SEE_INVISIBLE_LIVING)
 		toggle_visibility(1)
+		return TRUE
 	else
-		user.visible_message ( \
-			"<span class='warning'>\The [user] just tried to smash \his book into that ghost!  It's not very effective.</span>", \
-			"<span class='warning'>You get the feeling that the ghost can't become any more visible.</span>" \
-		)
+		return FALSE
 
-/mob/observer/ghost/proc/toggle_icon(var/icon)
-	if(!client)
-		return
+/mob/observer/ghost/proc/show_hud_icon(var/icon_state, var/make_visible)
+	if(!hud_images)
+		hud_images = list()
+	var/image/hud_image = hud_images[icon_state]
+	if(!hud_image)
+		hud_image = image('icons/mob/mob.dmi', loc = src, icon_state = icon_state)
+		hud_images[icon_state] = hud_image
 
-	var/iconRemoved = 0
-	for(var/image/I in client.images)
-		if(I.icon_state == icon)
-			iconRemoved = 1
-			qdel(I)
+	if(make_visible)
+		add_client_image(hud_image)
+	else
+		remove_client_image(hud_image)
 
-	if(!iconRemoved)
-		var/image/J = image('icons/mob/mob.dmi', loc = src, icon_state = icon)
-		client.images += J
-
-/mob/observer/ghost/proc/toggle_visibility(var/forced = 0)
+/mob/observer/ghost/proc/toggle_visibility()
 	set category = "Ghost"
 	set name = "Toggle Visibility"
 	set desc = "Allows you to turn (in)visible (almost) at will."
 
-	var/toggled_invisible
-	if(!forced && invisibility && world.time < toggled_invisible + 600)
+	if(invisibility && !(args.len && args[1]) && world.time < next_visibility_toggle)
 		src << "You must gather strength before you can turn visible again..."
 		return
 
 	if(invisibility == 0)
-		toggled_invisible = world.time
+		next_visibility_toggle = world.time + 1 MINUTE
 		visible_message("<span class='emote'>It fades from sight...</span>", "<span class='info'>You are now invisible.</span>")
+		invisibility = INVISIBILITY_OBSERVER
+		show_hud_icon("cult", FALSE)
 	else
 		src << "<span class='info'>You are now visible!</span>"
-
-	invisibility = invisibility == INVISIBILITY_OBSERVER ? 0 : INVISIBILITY_OBSERVER
-	// Give the ghost a cult icon which should be visible only to itself
-	toggle_icon("cult")
+		invisibility = 0
+		show_hud_icon("cult", TRUE) // Give the ghost a cult icon which should be visible only to itself
 
 /mob/observer/ghost/verb/toggle_anonsay()
 	set category = "Ghost"

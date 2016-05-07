@@ -592,3 +592,23 @@ proc/is_blind(A)
 		return
 	var/list/hands = list(M.l_hand, M.r_hand)
 	return hands
+
+/mob/proc/refresh_client_images()
+	if(client)
+		client.images |= client_images
+
+/mob/proc/hide_client_images()
+	if(client)
+		client.images -= client_images
+
+/mob/proc/add_client_image(var/image)
+	if(image in client_images)
+		return
+	client_images += image
+	if(client)
+		client.images += image
+
+/mob/proc/remove_client_image(var/image)
+	client_images -= image
+	if(client)
+		client.images -= image
