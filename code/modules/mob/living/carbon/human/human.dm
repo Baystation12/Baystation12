@@ -1212,14 +1212,11 @@
 		W.message = message
 		W.add_fingerprint(src)
 
-/mob/living/carbon/human/can_inject(var/mob/user, var/error_msg, var/target_zone)
-	if(!target_zone)
-		if(!user)
-			target_zone = ran_zone()
-		else
-			target_zone = user.zone_sel.selecting
-
+#define CAN_INJECT 1
+#define INJECTION_PORT 2
+/mob/living/carbon/human/can_inject(var/mob/user, var/target_zone)
 	var/obj/item/organ/external/affecting = get_organ(target_zone)
+
 	if(!affecting)
 		user << "<span class='warning'>They are missing that limb.</span>"
 		return 0
@@ -1228,12 +1225,15 @@
 		user << "<span class='warning'>That limb is robotic.</span>"
 		return 0
 
+	. = CAN_INJECT
 	for(var/obj/item/clothing/C in list(head, wear_mask, wear_suit, w_uniform, gloves, shoes))
 		if(C && (C.body_parts_covered & affecting.body_part) && (C.item_flags & THICKMATERIAL))
-			user << "<span class='warning'>There is no exposed flesh or thin material on \his [affecting.name] to inject into.</span>"
-			return 0
+			if(istype(C, /obj/item/clothing/suit/space))
+				. = INJECTION_PORT //it was going to block us, but it's a space suit so it doesn't because it has some kind of port
+			else
+				user << "<span class='warning'>There is no exposed flesh or thin material on [src]'s [affecting.name] to inject into.</span>"
+				return 0
 
-	return 1
 
 /mob/living/carbon/human/print_flavor_text(var/shrink = 1)
 	var/list/equipment = list(src.head,src.wear_mask,src.glasses,src.w_uniform,src.wear_suit,src.gloves,src.shoes)

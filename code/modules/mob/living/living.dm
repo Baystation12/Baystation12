@@ -360,7 +360,7 @@ default behaviour is:
 	return 0
 
 
-/mob/living/proc/can_inject()
+/mob/living/proc/can_inject(var/mob/user, var/target_zone)
 	return 1
 
 /mob/living/proc/get_organ_target()
