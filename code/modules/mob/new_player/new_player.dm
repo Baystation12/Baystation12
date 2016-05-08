@@ -24,7 +24,7 @@
 
 
 /mob/new_player/proc/new_player_panel_proc()
-	var/output = "<div align='center'><B>New Player Options</B>"
+	var/output = "<div align='center'>"
 	output +="<hr>"
 	output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
@@ -60,7 +60,10 @@
 
 	output += "</div>"
 
-	src << browse(output,"window=playersetup;size=210x280;can_close=0")
+	var/datum/browser/popup = new(src, "New Player","New Player", 210, 280, src)
+	popup.set_window_options("can_close=0")
+	popup.set_content(output)
+	popup.open()
 	return
 
 /mob/new_player/Stat()

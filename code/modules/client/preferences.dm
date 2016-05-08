@@ -211,7 +211,9 @@ datum/preferences
 	dat += player_setup.content(user)
 
 	dat += "</html></body>"
-	user << browse(dat, "window=preferences;size=635x736")
+	var/datum/browser/popup = new(user, "Character Setup","Character Setup", 635, 736, src)
+	popup.set_content(dat)
+	popup.open()
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
 	if(!user)	return

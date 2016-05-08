@@ -97,15 +97,9 @@ var/list/gear_datums = list()
 		else
 			. += " |"
 		if(category == current_tab)
-			. += " [category] "
+			. += " <span class='linkOff'>[category]</span> "
 		else
-			var/datum/loadout_category/LC = loadout_categories[category]
-			var/tcolor =  "#3366CC"
-			for(var/thing in LC.gear)
-				if(thing in pref.gear)
-					tcolor = "#E67300"
-					break
-			. += " <a href='?src=\ref[src];select_category=[category]'><font color = '[tcolor]'>[category]</font></a> "
+			. += " <a href='?src=\ref[src];select_category=[category]'>[category]</a> "
 	. += "</b></center></td></tr>"
 
 	var/datum/loadout_category/LC = loadout_categories[current_tab]
@@ -117,7 +111,7 @@ var/list/gear_datums = list()
 			continue
 		var/datum/gear/G = LC.gear[gear_name]
 		var/ticked = (G.display_name in pref.gear)
-		. += "<tr style='vertical-align:top'><td width=25%><a href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'><font color='[ticked ? "#E67300" : "#3366CC"]'>[G.display_name]</font></a></td>"
+		. += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOff' " : ""]href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'>[G.display_name]</a></td>"
 		. += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		. += "<td><font size=2><i>[G.description]</i></font></td></tr>"
 		if(ticked)

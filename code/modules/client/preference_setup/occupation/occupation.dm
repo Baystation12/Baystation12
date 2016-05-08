@@ -60,8 +60,8 @@
 
 	. += "<tt><center>"
 	. += "<b>Choose occupation chances</b><br>Unavailable occupations are crossed out.<br>"
-	. += "<table width='100%' cellpadding='1' cellspacing='0'><tr><td width='20%'>" // Table within a table for alignment, also allows you to easily add more colomns.
-	. += "<table width='100%' cellpadding='1' cellspacing='0'>"
+	. += "<table width='100%' cellpadding='1' cellspacing='0'><tr><td width='20%'>" // Table within a table for alignment, also allows you to easily add more columns.
+	. += "<table width='100%' cellpadding='1' cellspacing='0' style='color:black;'>"
 	var/index = -1
 
 	//The job before the current job. I only use this to get the previous jobs color when I'm filling in blank rows.
@@ -76,7 +76,7 @@
 				//the last job's selection color. Creating a rather nice effect.
 				for(var/i = 0, i < (limit - index), i += 1)
 					. += "<tr bgcolor='[lastJob.selection_color]'><td width='60%' align='right'><a>&nbsp</a></td><td><a>&nbsp</a></td></tr>"
-			. += "</table></td><td width='20%'><table width='100%' cellpadding='1' cellspacing='0'>"
+			. += "</table></td><td width='20%'><table width='100%' cellpadding='1' cellspacing='0' style='color:black;'>"
 			index = 0
 
 		. += "<tr bgcolor='[job.selection_color]'><td width='60%' align='right'>"
@@ -93,7 +93,7 @@
 			. += "<del>[rank]</del></td><td> \[MINIMUM CHARACTER AGE: [job.minimum_character_age]]</td></tr>"
 			continue
 		if((pref.job_civilian_low & ASSISTANT) && (rank != "Assistant"))
-			. += "<font color=orange>[rank]</font></td><td></td></tr>"
+			. += "<font color=grey>[rank]</font></td><td></td></tr>"
 			continue
 		if((rank in command_positions) || (rank == "AI"))//Bold head jobs
 			. += "<b>[rank]</b>"
@@ -132,11 +132,11 @@
 
 	switch(pref.alternate_option)
 		if(GET_RANDOM_JOB)
-			. += "<center><br><u><a href='?src=\ref[src];job_alternative=1'><font color=green>Get random job if preferences unavailable</font></a></u></center><br>"
+			. += "<center><br><u><a href='?src=\ref[src];job_alternative=1'>Get random job if preferences unavailable</a></u></center><br>"
 		if(BE_ASSISTANT)
-			. += "<center><br><u><a href='?src=\ref[src];job_alternative=1'><font color=red>Be assistant if preference unavailable</font></a></u></center><br>"
+			. += "<center><br><u><a href='?src=\ref[src];job_alternative=1'>Be assistant if preference unavailable</a></u></center><br>"
 		if(RETURN_TO_LOBBY)
-			. += "<center><br><u><a href='?src=\ref[src];job_alternative=1'><font color=purple>Return to lobby if preference unavailable</font></a></u></center><br>"
+			. += "<center><br><u><a href='?src=\ref[src];job_alternative=1'>Return to lobby if preference unavailable</a></u></center><br>"
 
 	. += "<center><a href='?src=\ref[src];reset_jobs=1'>\[Reset\]</a></center>"
 	. += "</tt>"
