@@ -562,6 +562,9 @@
 		flick(src.icon_vend,src)
 	spawn(src.vend_delay)
 		R.get_product(get_turf(src))
+		if(prob(1) && R.get_product(get_turf(src)))
+			src.visible_message("<span class='notice'>\The [src] clunks as it vends an additional item.</span>")
+
 		src.status_message = ""
 		src.status_error = 0
 		src.vend_ready = 1
