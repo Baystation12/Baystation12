@@ -354,5 +354,6 @@
 					var/mob/living/bot/medbot/S = new /mob/living/bot/medbot(T)
 					S.skin = skin
 					S.name = created_name
+					S.update_icons() // apply the skin
 					user.drop_from_inventory(src)
 					qdel(src)
