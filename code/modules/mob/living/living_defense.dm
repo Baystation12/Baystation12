@@ -53,7 +53,7 @@
 
 	var/protection_a = 1/(blocked_mult(armor_a)) - 1
 	var/protection_b = 1/(blocked_mult(armor_b)) - 1
-	return 1/(protection_a + protection_b + 1)*100
+	return 100 - 1/(protection_a + protection_b + 1)*100
 
 //if null is passed for def_zone, then this should return something appropriate for all zones (e.g. area effect damage)
 /mob/living/proc/getarmor(var/def_zone, var/type)
