@@ -14,7 +14,7 @@
 
 /obj/machinery/shield/malfai
 	name = "emergency forcefield"
-	desc = "A weak forcefield which seems to be projected by the station's emergency atmosphere containment field"
+	desc = "A weak forcefield which seems to be projected by the station's emergency atmosphere containment field."
 	health = max_health/2 // Half health, it's not suposed to resist much.
 
 /obj/machinery/shield/malfai/process()
@@ -173,13 +173,12 @@
 		qdel(shield_tile)
 
 /obj/machinery/shieldgen/power_change()
-	..()
-	if(!active) return
+	. = ..()
+	if(!. || !active) return
 	if (stat & NOPOWER)
 		collapse_shields()
 	else
 		create_shields()
-	update_icon()
 
 /obj/machinery/shieldgen/process()
 	if (!active || (stat & NOPOWER))

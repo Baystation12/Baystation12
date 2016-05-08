@@ -11,7 +11,7 @@
 	throwforce = 1.0
 	throw_speed = 1
 	throw_range = 2
-	w_class = 2.0
+	w_class = 1
 	var/access = list()
 	access = access_crate_cash
 	var/worth = 0
@@ -72,6 +72,11 @@
 		src.name = "[worth] Thaler"
 	else
 		src.name = "pile of thalers"
+
+	if(overlays.len <= 2)
+		w_class = 1
+	else
+		w_class = 2
 
 /obj/item/weapon/spacecash/bundle/attack_self()
 	var/amount = input(usr, "How many Thalers do you want to take? (0 to [src.worth])", "Take Money", 20) as num

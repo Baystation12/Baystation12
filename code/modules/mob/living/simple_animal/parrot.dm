@@ -109,7 +109,7 @@
 	..()
 
 /mob/living/simple_animal/parrot/Stat()
-	..()
+	. = ..()
 	stat("Held Item", held_item)
 
 /*
@@ -641,7 +641,7 @@
 		if(istype(held_item, /obj/item/weapon/grenade))
 			var/obj/item/weapon/grenade/G = held_item
 			G.loc = src.loc
-			G.prime()
+			G.detonate()
 			src << "You let go of the [held_item]!"
 			held_item = null
 			return 1

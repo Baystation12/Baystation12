@@ -214,7 +214,10 @@
 
 	var/list/mobs = sortmobs()
 	var/i = 1
-	for(var/mob/M in mobs)
+	for(var/entry in mobs)
+		var/mob/M = entry
+		if(!istype(M))
+			continue
 		if(M.ckey)
 
 			var/color = "#e6e6e6"
@@ -395,7 +398,7 @@
 	if (ticker && ticker.current_state >= GAME_STATE_PLAYING)
 		var/dat = "<html><head><title>Round Status</title></head><body><h1><B>Round Status</B></h1>"
 		dat += "Current Game Mode: <B>[ticker.mode.name]</B><BR>"
-		dat += "Round Duration: <B>[round(world.time / 36000)]:[add_zero(world.time / 600 % 60, 2)]:[world.time / 100 % 6][world.time / 100 % 10]</B><BR>"
+		dat += "Round Duration: <B>[roundduration2text()]</B><BR>"
 		dat += "<B>Emergency shuttle</B><BR>"
 		if (!emergency_shuttle.online())
 			dat += "<a href='?src=\ref[src];call_shuttle=1'>Call Shuttle</a><br>"

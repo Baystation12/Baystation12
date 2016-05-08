@@ -1,7 +1,7 @@
 //generic procs copied from obj/effect/alien
 /obj/effect/spider
 	name = "web"
-	desc = "it's stringy and sticky"
+	desc = "It's stringy and sticky."
 	icon = 'icons/effects/effects.dmi'
 	anchored = 1
 	density = 0
@@ -21,6 +21,8 @@
 	return
 
 /obj/effect/spider/attackby(var/obj/item/weapon/W, var/mob/user)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+
 	if(W.attack_verb.len)
 		visible_message("<span class='warning'>\The [src] have been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]</span>")
 	else
@@ -72,7 +74,7 @@
 
 /obj/effect/spider/eggcluster
 	name = "egg cluster"
-	desc = "They seem to pulse slightly with an inner life"
+	desc = "They seem to pulse slightly with an inner life."
 	icon_state = "eggs"
 	var/amount_grown = 0
 	New()
@@ -229,7 +231,7 @@
 	else if(prob(1))
 		src.visible_message("<span class='notice'>\The [src] skitters.</span>")
 
-	if(amount_grown)
+	if(amount_grown > 0)
 		amount_grown += rand(0,2)
 
 /obj/effect/decal/cleanable/spiderling_remains
@@ -237,10 +239,11 @@
 	desc = "Green squishy mess."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "greenshatter"
+	anchored = 1
 
 /obj/effect/spider/cocoon
 	name = "cocoon"
-	desc = "Something wrapped in silky spider web"
+	desc = "Something wrapped in silky spider web."
 	icon_state = "cocoon1"
 	health = 60
 

@@ -105,7 +105,7 @@
 
 
 /proc/make_view_variables_var_list(datum/D)
-	. = ""
+	. = list()
 	var/list/variables = list()
 	for(var/x in D.vars)
 		if(x in view_variables_hide_vars)
@@ -114,6 +114,7 @@
 	variables = sortList(variables)
 	for(var/x in variables)
 		. += make_view_variables_var_entry(D, x, D.vars[x])
+	return jointext(., null)
 
 /proc/make_view_variables_value(value, varname = "*")
 	var/vtext = ""

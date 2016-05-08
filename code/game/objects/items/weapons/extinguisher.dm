@@ -15,8 +15,8 @@
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 
 	var/spray_particles = 3
-	var/spray_amount = 10	//units of liquid per particle
-	var/max_water = 300
+	var/spray_amount = 120	//units of liquid per spray - 120 -> same as splashing them with a bucket per spray
+	var/max_water = 500
 	var/last_use = 1.0
 	var/safety = 1
 	var/sprite_name = "fire_extinguisher"
@@ -30,8 +30,8 @@
 	throwforce = 2
 	w_class = 2.0
 	force = 3.0
-	max_water = 150
-	spray_particles = 3
+	spray_amount = 80
+	max_water = 200
 	sprite_name = "miniFE"
 
 /obj/item/weapon/extinguisher/New()
@@ -103,6 +103,7 @@
 
 		var/list/the_targets = list(T,T1,T2)
 
+		var/per_particle = min(spray_amount, reagents.total_volume)/spray_particles
 		for(var/a = 1 to spray_particles)
 			spawn(0)
 				if(!src || !reagents.total_volume) return
@@ -113,8 +114,8 @@
 					my_target = the_targets[a]
 				else
 					my_target = pick(the_targets)
-				W.create_reagents(spray_amount)
-				reagents.trans_to_obj(W, spray_amount)
+				W.create_reagents(per_particle)
+				reagents.trans_to_obj(W, per_particle)
 				W.set_color()
 				W.set_up(my_target)
 

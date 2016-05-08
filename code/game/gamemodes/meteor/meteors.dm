@@ -19,7 +19,7 @@
 ///////////////////////////////
 
 /proc/pick_meteor_start(var/startSide = pick(cardinal))
-	var/startLevel = pick(config.station_levels)
+	var/startLevel = pick(using_map.station_levels)
 	var/pickedstart = spaceDebrisStartLoc(startSide, startLevel)
 
 	return list(startLevel, pickedstart)
@@ -237,13 +237,13 @@
 	explosion(src.loc, 0, 0, 4, 3, 0)
 	new /obj/effect/decal/cleanable/greenglow(get_turf(src))
 	for(var/mob/living/L in view(5, src))
-		L.apply_effect(40, IRRADIATE)
+		L.apply_effect(40, IRRADIATE, blocked = L.getarmor(null, "rad"))
 
 //Station buster Tunguska
 /obj/effect/meteor/tunguska
 	name = "tunguska meteor"
 	icon_state = "flaming"
-	desc = "Your life briefly passes before your eyes the moment you lay them on this monstruosity"
+	desc = "Your life briefly passes before your eyes the moment you lay them on this monstruosity."
 	hits = 30
 	hitpwr = 1
 	heavy = 1

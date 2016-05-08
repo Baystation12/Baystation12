@@ -380,3 +380,6 @@ var/global/datum/controller/processScheduler/processScheduler
 	stat(null, "[round(cpuAverage, 0.1)] CPU, [round(timeAllowance, 0.1)/10] TA")
 	for(var/datum/controller/process/p in processes)
 		p.statProcess()
+
+/datum/controller/processScheduler/proc/getProcess(var/process_name)
+	return nameToProcessMap[process_name]

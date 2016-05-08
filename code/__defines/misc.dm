@@ -119,6 +119,7 @@
 #define HUD_LAYER 20			//Above lighting, but below obfuscation. For in-game HUD effects (whereas SCREEN_LAYER is for abstract/OOC things like inventory slots)
 #define OBFUSCATION_LAYER 21	//Where images covering the view for eyes are put
 #define SCREEN_LAYER 22			//Mob HUD/effects layer
+#define CINEMA_LAYER 23			//Cinematic, fullscreen effects
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
@@ -179,6 +180,10 @@
 #define MAX_NTNET_LOGS 500
 #define MIN_NTNET_LOGS 10
 
+//Affects the chance that armour will block an attack. Should be between 0 and 1.
+//If set to 0, then armor will always prevent the same amount of damage, always, with no randomness whatsoever.
+//Of course, this will affect code that checks for blocked < 100, as blocked will be less likely to actually be 100.
+#define ARMOR_BLOCK_CHANCE_MULT 1.0
 
 // Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
 #define PROJECTILE_CONTINUE   -1 //if the projectile should continue flying after calling bullet_act()

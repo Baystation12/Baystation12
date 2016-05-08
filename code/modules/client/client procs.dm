@@ -158,6 +158,10 @@
 	log_client_to_db()
 
 	send_resources()
+	
+	if(!void)
+		void = new()
+	screen += void
 
 	if(prefs.lastchangelog != changelog_hash) //bolds the changelog button on the interface so we know there are updates.
 		src << "<span class='info'>You have unread updates in the changelog.</span>"
@@ -305,6 +309,6 @@ client/proc/MayRespawn()
 
 client/verb/character_setup()
 	set name = "Character Setup"
-	set category = "Preferences"
+	set category = "OOC"
 	if(prefs)
 		prefs.ShowChoices(usr)

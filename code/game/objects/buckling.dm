@@ -29,6 +29,7 @@
 	M.facing_dir = null
 	M.set_dir(buckle_dir ? buckle_dir : dir)
 	M.update_canmove()
+	M.update_floating()
 	buckled_mob = M
 	post_buckle_mob(M)
 	return 1
@@ -39,6 +40,7 @@
 		buckled_mob.buckled = null
 		buckled_mob.anchored = initial(buckled_mob.anchored)
 		buckled_mob.update_canmove()
+		buckled_mob.update_floating()
 		buckled_mob = null
 
 		post_buckle_mob(.)

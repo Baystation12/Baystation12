@@ -1281,7 +1281,7 @@
 
 /datum/reagent/ethanol/vodka/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	M.apply_effect(max(M.radiation - 1 * removed, 0), IRRADIATE, check_protection = 0)
+	M.apply_effect(max(M.radiation - 1 * removed, 0), IRRADIATE, blocked = 0)
 
 /datum/reagent/ethanol/whiskey
 	name = "Whiskey"

@@ -17,6 +17,7 @@ datum/preferences
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 	var/ooccolor = "#010000"			//Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
+	var/list/never_be_special_role = list()
 	var/list/be_special_role = list()		//Special role selection
 	var/UI_style = "Midnight"
 	var/UI_style_color = "#ffffff"
@@ -25,7 +26,6 @@ datum/preferences
 	//character preferences
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we are a random name every round
-	var/gender = MALE					//gender of character (well duh)
 	var/age = 30						//age of character
 	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
@@ -346,12 +346,15 @@ datum/preferences
 					I.robotize()
 
 	character.all_underwear.Cut()
+	character.all_underwear_metadata.Cut()
 
 	for(var/underwear_category_name in all_underwear)
 		var/datum/category_group/underwear/underwear_category = global_underwear.categories_by_name[underwear_category_name]
 		if(underwear_category)
 			var/underwear_item_name = all_underwear[underwear_category_name]
 			character.all_underwear[underwear_category_name] = underwear_category.items_by_name[underwear_item_name]
+			if(all_underwear_metadata[underwear_category_name])
+				character.all_underwear_metadata[underwear_category_name] = all_underwear_metadata[underwear_category_name]
 		else
 			all_underwear -= underwear_category_name
 

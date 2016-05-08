@@ -37,17 +37,14 @@
 				else
 					security_announcement_down.Announce("[config.alert_desc_red_downto]", "Attention! Code red!")
 				security_level = SEC_LEVEL_RED
-				/*	- At the time of commit, setting status displays didn't work properly
-				var/obj/machinery/computer/communications/CC = locate(/obj/machinery/computer/communications,world)
-				if(CC)
-					CC.post_status("alert", "redalert")*/
+				post_status("alert", "redalert")
 			if(SEC_LEVEL_DELTA)
 				security_announcement_up.Announce("[config.alert_desc_delta]", "Attention! Delta security level reached!", new_sound = 'sound/effects/siren.ogg')
 				security_level = SEC_LEVEL_DELTA
 
 		var/newlevel = get_security_level()
 		for(var/obj/machinery/firealarm/FA in machines)
-			if(FA.z in config.contact_levels)
+			if(FA.z in using_map.contact_levels)
 				FA.set_security_level(newlevel)
 
 

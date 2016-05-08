@@ -34,16 +34,16 @@
 		var/area/A = get_area(C)
 		if(!A)
 			continue
-		if(!(A.z in config.station_levels))
+		if(!(A.z in using_map.station_levels))
 			continue
 		if(A.flags & RAD_SHIELDED)
 			continue
 
 		if(istype(C,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = C
-			H.apply_effect((rand(15,35)),IRRADIATE,0)
+			H.apply_effect((rand(15,35)),IRRADIATE,blocked = H.getarmor(null, "rad"))
 			if(prob(5))
-				H.apply_effect((rand(40,70)),IRRADIATE,0)
+				H.apply_effect((rand(40,70)),IRRADIATE,blocked = H.getarmor(null, "rad"))
 				if (prob(75))
 					randmutb(H) // Applies bad mutation
 					domutcheck(H,null,MUTCHK_FORCED)

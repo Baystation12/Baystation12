@@ -2,7 +2,6 @@ var/datum/antagonist/actor/actor
 
 /datum/antagonist/actor
 	id = MODE_ACTOR
-	bantype = "actor"
 	role_text = "NanoTrasen Actor"
 	role_text_plural = "NanoTrasen Actors"
 	welcome_text = "You've been hired to entertain people through the power of television!"
@@ -15,6 +14,7 @@ var/datum/antagonist/actor/actor
 	hard_cap_round = 10
 	initial_spawn_req = 1
 	initial_spawn_target = 1
+	show_objectives_on_creation = 0 //actors are not antagonists and do not need the antagonist greet text
 
 /datum/antagonist/actor/New()
 	..()
@@ -37,7 +37,6 @@ var/datum/antagonist/actor/actor
 	player.equip_to_slot_or_del(C,slot_wear_id)
 
 	return 1
-
 
 /client/verb/join_as_actor()
 	set category = "IC"

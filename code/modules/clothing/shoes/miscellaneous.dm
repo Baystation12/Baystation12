@@ -25,7 +25,7 @@
 
 /obj/item/clothing/shoes/combat //Basically SWAT shoes combined with galoshes.
 	name = "combat boots"
-	desc = "When you REALLY want to turn up the heat"
+	desc = "When you REALLY want to turn up the heat."
 	icon_state = "swat"
 	force = 5
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
@@ -57,10 +57,13 @@
 	name = "clown shoes"
 	icon_state = "clown"
 	item_state = "clown_shoes"
-	slowdown = SHOES_SLOWDOWN+1
 	force = 0
 	var/footstep = 1	//used for squeeks whilst walking
 	species_restricted = null
+
+/obj/item/clothing/shoes/clown_shoes/New()
+	..()
+	slowdown_per_slot[slot_shoes]  = SHOES_SLOWDOWN+1
 
 /obj/item/clothing/shoes/clown_shoes/handle_movement(var/turf/walking, var/running)
 	if(running)
@@ -91,7 +94,7 @@
 
 /obj/item/clothing/shoes/cyborg
 	name = "cyborg boots"
-	desc = "Shoes for a cyborg costume"
+	desc = "Shoes for a cyborg costume."
 	icon_state = "boots"
 
 /obj/item/clothing/shoes/slippers
@@ -121,5 +124,8 @@
 	name = "swimming fins"
 	icon_state = "flippers"
 	item_flags = NOSLIP
-	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null
+
+/obj/item/clothing/shoes/swimmingfins/New()
+	..()
+	slowdown_per_slot[slot_shoes] = SHOES_SLOWDOWN+1

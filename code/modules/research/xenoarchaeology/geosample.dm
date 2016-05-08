@@ -22,7 +22,6 @@
 	w_class = 1
 	sharp = 1
 	//item_state = "electronic"
-	var/source_rock = "/turf/simulated/mineral/"
 	var/datum/geosample/geological_data
 
 /obj/item/weapon/rocksliver/New()

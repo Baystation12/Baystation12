@@ -76,7 +76,7 @@
 	var/datum/feed_message/newMsg = new /datum/feed_message
 	newMsg.author = author
 	newMsg.body = msg
-	newMsg.time_stamp = "[worldtime2text()]"
+	newMsg.time_stamp = "[stationtime2text()]"
 	newMsg.is_admin_message = adminMessage
 	if(message_type)
 		newMsg.message_type = message_type
@@ -212,14 +212,11 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 /obj/machinery/newscaster/power_change()
 	if(isbroken) //Broken shit can't be powered.
 		return
-	..()
+	. = ..()
 	if( !(stat & NOPOWER) )
 		src.ispowered = 1
-		src.update_icon()
 	else
-		spawn(rand(0, 15))
-			src.ispowered = 0
-			src.update_icon()
+		src.ispowered = 0
 
 
 /obj/machinery/newscaster/ex_act(severity)

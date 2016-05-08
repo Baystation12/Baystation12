@@ -66,7 +66,7 @@
 	verbs += /mob/living/proc/hide
 
 	if(name == initial(name))
-		name = "[name] ([rand(1, 1000)])"
+		name = "[name] ([sequential_id(/mob/living/simple_animal/mouse)])"
 	real_name = name
 
 	if(!body_color)
@@ -131,6 +131,7 @@
 	..()
 	// Change my name back, don't want to be named Tom (666)
 	name = initial(name)
+	real_name = name
 
 /mob/living/simple_animal/mouse/cannot_use_vents()
 	return

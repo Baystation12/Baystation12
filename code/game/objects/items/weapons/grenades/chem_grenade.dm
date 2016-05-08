@@ -86,7 +86,7 @@
 			else if(stage == 2)
 				if(active && prob(95))
 					user << "<span class='warning'>You trigger the assembly!</span>"
-					prime()
+					detonate()
 					return
 				else
 					user << "<span class='notice'>You unlock the assembly.</span>"
@@ -138,7 +138,7 @@
 		if(active)
 			icon_state = initial(icon_state) + (primed?"_primed":"_active")
 
-	prime()
+	detonate()
 		if(!stage || stage<2) return
 
 		var/has_reagents = 0

@@ -29,7 +29,7 @@
 
 /obj/item/weapon/material/twohanded/update_held_icon()
 	var/mob/living/M = loc
-	if(istype(M) && !issmall(M) && ((M.r_hand == src && !M.l_hand) || (M.l_hand == src && !M.r_hand)))
+	if(istype(M) && !issmall(M) && is_held_twohanded(M))
 		wielded = 1
 		force = force_wielded
 		name = "[base_name] (wielded)"
@@ -113,7 +113,7 @@
 	unwielded_force_divisor = 0.65 // 14 when unwielded based on above
 	thrown_force_divisor = 1.5 // 20 when thrown with weight 15 (glass)
 	throw_speed = 3
-	edge = 1
+	edge = 0
 	sharp = 1
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")

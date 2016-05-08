@@ -4,13 +4,13 @@
 	icon_state = "webbing"
 	slot = "utility"
 	var/slots = 3
-	var/obj/item/weapon/storage/internal/hold
-	w_class = 3.0
+	var/max_w_class = 2 //pocket sized
+	var/obj/item/weapon/storage/internal/pockets/hold
+	w_class = 3
 
 /obj/item/clothing/accessory/storage/New()
 	..()
-	hold = new/obj/item/weapon/storage/internal(src)
-	hold.storage_slots = slots
+	hold = new/obj/item/weapon/storage/internal/pockets(src, slots, max_w_class)
 
 /obj/item/clothing/accessory/storage/attack_hand(mob/user as mob)
 	if (has_suit)	//if we are part of a suit
@@ -59,20 +59,28 @@
 	icon_state = "vest_brown"
 	slots = 5
 
+/obj/item/clothing/accessory/storage/white_vest
+	name = "white webbing vest"
+	desc = "Durable white synthcotton vest with lots of pockets to carry essentials."
+	icon_state = "vest_white"
+	slots = 5
+
 /obj/item/clothing/accessory/storage/knifeharness
 	name = "decorated harness"
 	desc = "A heavily decorated harness of sinew and leather with two knife-loops."
 	icon_state = "unathiharness2"
 	slots = 2
+	max_w_class = 3 //for knives
 
 /obj/item/clothing/accessory/storage/knifeharness/New()
 	..()
-	hold.max_storage_space = 4
-	hold.can_hold = list(/obj/item/weapon/material/hatchet/unathiknife,\
-	/obj/item/weapon/material/kitchen/utensil/knife,\
-	/obj/item/weapon/material/kitchen/utensil/knife/plastic,\
-	/obj/item/weapon/material/knife,\
-	/obj/item/weapon/material/knife/ritual)
+	hold.can_hold = list(
+		/obj/item/weapon/material/hatchet,
+		/obj/item/weapon/material/kitchen/utensil/knife,
+		/obj/item/weapon/material/knife,
+		/obj/item/weapon/material/butterfly,
+	)
 
 	new /obj/item/weapon/material/hatchet/unathiknife(hold)
 	new /obj/item/weapon/material/hatchet/unathiknife(hold)
+

@@ -238,7 +238,47 @@
 
 	nanomanager.update_uis(src)
 
-/datum/nano_module/program/comm/proc/post_status(var/command, var/data1, var/data2)
+#undef STATE_DEFAULT
+#undef STATE_MESSAGELIST
+#undef STATE_VIEWMESSAGE
+#undef STATE_STATUSDISPLAY
+#undef STATE_ALERT_LEVEL
+
+/*
+General message handling stuff
+*/
+var/list/comm_message_listeners = list() //We first have to initialize list then we can use it.
+var/datum/comm_message_listener/global_message_listener = new //May be used by admins
+var/last_message_id = 0
+
+/proc/get_comm_message_id()
+	last_message_id = last_message_id + 1
+	return last_message_id
+
+/proc/post_comm_message(var/message_title, var/message_text)
+	var/list/message = list()
+	message["id"] = get_comm_message_id()
+	message["title"] = message_title
+	message["contents"] = message_text
+
+	for (var/datum/comm_message_listener/l in comm_message_listeners)
+		l.Add(message)
+
+/datum/comm_message_listener
+	var/list/messages
+
+/datum/comm_message_listener/New()
+	..()
+	messages = list()
+	comm_message_listeners.Add(src)
+
+/datum/comm_message_listener/proc/Add(var/list/message)
+	messages[++messages.len] = message
+
+/datum/comm_message_listener/proc/Remove(var/list/message)
+	messages -= list(message)
+
+/proc/post_status(var/command, var/data1, var/data2)
 
 	var/datum/radio_frequency/frequency = radio_controller.return_frequency(1435)
 
@@ -260,52 +300,110 @@
 
 	frequency.post_signal(src, status_signal)
 
-#undef STATE_DEFAULT
-#undef STATE_MESSAGELIST
-#undef STATE_VIEWMESSAGE
-#undef STATE_STATUSDISPLAY
-#undef STATE_ALERT_LEVEL
+/proc/cancel_call_proc(var/mob/user)
+	if (!( ticker ) || !emergency_shuttle.can_recall())
+		return
+	if((ticker.mode.name == "blob")||(ticker.mode.name == "Meteor"))
+		return
 
-/*
-General message handling stuff
-*/
-var/list/comm_message_listeners = list() //We first have to initialize list then we can use it.
-var/datum/comm_message_listener/global_message_listener = new //May be used by admins
-var/last_message_id = 0
+	if(!emergency_shuttle.going_to_centcom()) //check that shuttle isn't already heading to centcomm
+		emergency_shuttle.recall()
+		log_game("[key_name(user)] has recalled the shuttle.")
+		message_admins("[key_name_admin(user)] has recalled the shuttle.", 1)
+	return
 
-proc/get_comm_message_id()
-	last_message_id = last_message_id + 1
-	return last_message_id
 
-proc/post_comm_message(var/message_title, var/message_text)
-	var/list/message = list()
-	message["id"] = get_comm_message_id()
-	message["title"] = message_title
-	message["contents"] = message_text
+/proc/is_relay_online()
+    for(var/obj/machinery/bluespacerelay/M in machines)
+        if(M.stat == 0)
+            return 1
+    return 0
 
-	for (var/datum/comm_message_listener/l in comm_message_listeners)
-		l.Add(message)
+/proc/enable_prison_shuttle(var/mob/user)
+	for(var/obj/machinery/computer/prison_shuttle/PS in machines)
+		PS.allowedtocall = !(PS.allowedtocall)
 
-	//Old console support
-	for (var/obj/machinery/computer/communications/comm in machines)
-		if (!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)
-			var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper( comm.loc )
-			intercept.name = message_title
-			intercept.info = message_text
+/proc/call_shuttle_proc(var/mob/user)
+	if ((!( ticker ) || !emergency_shuttle.location()))
+		return
 
-			comm.messagetitle.Add(message_title)
-			comm.messagetext.Add(message_text)
+	if(!universe.OnShuttleCall(usr))
+		user << "<span class='notice'>Cannot establish a bluespace connection.</span>"
+		return
 
-/datum/comm_message_listener
-	var/list/messages
+	if(deathsquad.deployed)
+		user << "[boss_short] will not allow the shuttle to be called. Consider all contracts terminated."
+		return
 
-/datum/comm_message_listener/New()
-	..()
-	messages = list()
-	comm_message_listeners.Add(src)
+	if(emergency_shuttle.deny_shuttle)
+		user << "The emergency shuttle may not be sent at this time. Please try again later."
+		return
 
-/datum/comm_message_listener/proc/Add(var/list/message)
-	messages[++messages.len] = message
+	if(world.time < 6000) // Ten minute grace period to let the game get going without lolmetagaming. -- TLE
+		user << "The emergency shuttle is refueling. Please wait another [round((6000-world.time)/600)] minute\s before trying again."
+		return
 
-/datum/comm_message_listener/proc/Remove(var/list/message)
-	messages -= list(message)
+	if(emergency_shuttle.going_to_centcom())
+		user << "The emergency shuttle may not be called while returning to [boss_short]."
+		return
+
+	if(emergency_shuttle.online())
+		user << "The emergency shuttle is already on its way."
+		return
+
+	if(ticker.mode.name == "blob" || ticker.mode.name == "epidemic")
+		user << "Under directive 7-10, [station_name()] is quarantined until further notice."
+		return
+
+	emergency_shuttle.call_evac()
+	log_game("[key_name(user)] has called the shuttle.")
+	message_admins("[key_name_admin(user)] has called the shuttle.", 1)
+
+
+	return
+
+/proc/init_shift_change(var/mob/user, var/force = 0)
+	if ((!( ticker ) || !emergency_shuttle.location()))
+		return
+
+	if(emergency_shuttle.going_to_centcom())
+		user << "The shuttle may not be called while returning to [boss_short]."
+		return
+
+	if(emergency_shuttle.online())
+		user << "The shuttle is already on its way."
+		return
+
+	// if force is 0, some things may stop the shuttle call
+	if(!force)
+		if(emergency_shuttle.deny_shuttle)
+			user << "[boss_short] does not currently have a shuttle available in your sector. Please try again later."
+			return
+
+		if(deathsquad.deployed == 1)
+			user << "[boss_short] will not allow the shuttle to be called. Consider all contracts terminated."
+			return
+
+		if(world.time < 54000) // 30 minute grace period to let the game get going
+			user << "The shuttle is refueling. Please wait another [round((54000-world.time)/60)] minutes before trying again."
+			return
+
+		if(ticker.mode.auto_recall_shuttle)
+			//New version pretends to call the shuttle but cause the shuttle to return after a random duration.
+			emergency_shuttle.auto_recall = 1
+
+		if(ticker.mode.name == "blob" || ticker.mode.name == "epidemic")
+			user << "Under directive 7-10, [station_name()] is quarantined until further notice."
+			return
+
+	emergency_shuttle.call_transfer()
+
+	//delay events in case of an autotransfer
+	if (isnull(user))
+		event_manager.delay_events(EVENT_LEVEL_MODERATE, 10200) //17 minutes
+		event_manager.delay_events(EVENT_LEVEL_MAJOR, 10200)
+
+	log_game("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
+	message_admins("[user? key_name_admin(user) : "Autotransfer"] has called the shuttle.", 1)
+
+	return

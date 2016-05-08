@@ -44,6 +44,11 @@ default behaviour is:
 			return 1
 		return 0
 
+/mob/living/canface()
+	if(stat)
+		return 0
+	return ..()
+
 /mob/living/Bump(atom/movable/AM, yes)
 	spawn(0)
 		if ((!( yes ) || now_pushing) || !loc)
@@ -109,22 +114,26 @@ default behaviour is:
 		now_pushing = 0
 		spawn(0)
 			..()
-			if (!istype(AM, /atom/movable))
+			if (!istype(AM, /atom/movable) || AM.anchored)
+				if(confused && prob(50) && m_intent=="run")
+					Weaken(2)
+					playsound(loc, "punch", 25, 1, -1)
+					visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [AM]!</span>")
+					src.apply_damage(5, BRUTE)
 				return
 			if (!now_pushing)
 				now_pushing = 1
 
-				if (!AM.anchored)
-					var/t = get_dir(src, AM)
-					if (istype(AM, /obj/structure/window))
-						for(var/obj/structure/window/win in get_step(AM,t))
-							now_pushing = 0
-							return
-					step(AM, t)
-					if(ishuman(AM) && AM:grabbed_by)
-						for(var/obj/item/weapon/grab/G in AM:grabbed_by)
-							step(G:assailant, get_dir(G:assailant, AM))
-							G.adjust_position()
+				var/t = get_dir(src, AM)
+				if (istype(AM, /obj/structure/window))
+					for(var/obj/structure/window/win in get_step(AM,t))
+						now_pushing = 0
+						return
+				step(AM, t)
+				if(ishuman(AM) && AM:grabbed_by)
+					for(var/obj/item/weapon/grab/G in AM:grabbed_by)
+						step(G:assailant, get_dir(G:assailant, AM))
+						G.adjust_position()
 				now_pushing = 0
 			return
 	return
@@ -415,7 +424,8 @@ default behaviour is:
 	fire_stacks = 0
 
 /mob/living/proc/rejuvenate()
-	reagents.clear_reagents()
+	if(reagents)
+		reagents.clear_reagents()
 
 	// shut down various types of badness
 	setToxLoss(0)
@@ -588,7 +598,7 @@ default behaviour is:
 	set name = "Resist"
 	set category = "IC"
 
-	if(!stat && canClick())
+	if(!incapacitated(INCAPACITATION_KNOCKOUT) && canClick())
 		setClickCooldown(20)
 		resist_grab()
 		if(!weakened)
@@ -653,7 +663,9 @@ default behaviour is:
 			if(GRAB_PASSIVE)
 				qdel(G)
 			if(GRAB_AGGRESSIVE)
-				if(prob(60)) //same chance of breaking the grab as disarm
+				//Not standing up makes it much harder to break, so it is easier to cuff someone who is down without forcing them into unconsciousness.
+				//Otherwise, it's the same chance of breaking the grab as disarm.
+				if(incapacitated(INCAPACITATION_KNOCKDOWN)? prob(15) : prob(60))
 					visible_message("<span class='warning'>[src] has broken free of [G.assailant]'s grip!</span>")
 					qdel(G)
 			if(GRAB_NECK)
@@ -672,7 +684,7 @@ default behaviour is:
 	src << "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>"
 
 /mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	return isnull(get_inventory_slot(carried_item))
+	return get_inventory_slot(carried_item) == 0
 
 /mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	if(carried_item == held_item)
@@ -794,7 +806,7 @@ default behaviour is:
 /mob/living/carbon/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in internal_organs)
 		return
-	..()
+	. = ..()
 
 /mob/living/touch_map_edge()
 

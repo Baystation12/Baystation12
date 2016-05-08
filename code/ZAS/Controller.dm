@@ -341,6 +341,13 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	if(!E.sleeping) return
 	active_edges.Add(E)
 	E.sleeping = 0
+	#ifdef ZASDBG
+	if(istype(E, /connection_edge/zone/))
+		var/connection_edge/zone/ZE = E
+		world << "ZASDBG: Active edge! Areas: [get_area(pick(ZE.A.contents))] / [get_area(pick(ZE.B.contents))]"
+	else
+		world << "ZASDBG: Active edge! Area: [get_area(pick(E.A.contents))]"
+	#endif
 
 /datum/controller/air_system/proc/equivalent_pressure(zone/A, zone/B)
 	return A.air.compare(B.air)

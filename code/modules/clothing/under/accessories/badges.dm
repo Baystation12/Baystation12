@@ -102,14 +102,14 @@
 
 /obj/item/clothing/accessory/badge/warden
 	name = "warden's badge"
-	desc = "A silver corporate security badge. Stamped with the words 'Brig Officer.'"
+	desc = "A silver corporate security badge. Stamped with the words 'Brig Officer.'."
 	icon_state = "silverbadge"
 	slot_flags = SLOT_TIE
 
 
 /obj/item/clothing/accessory/badge/hos
 	name = "commander's badge"
-	desc = "An immaculately polished gold security badge. Labeled 'Commander.'"
+	desc = "An immaculately polished gold security badge. Labeled 'Commander.'."
 	icon_state = "goldbadge"
 	slot_flags = SLOT_TIE
 

@@ -12,8 +12,8 @@
 	var/perunit = SHEET_MATERIAL_AMOUNT
 	var/apply_colour //temp pending icon rewrite
 
-/obj/item/stack/material/New()
-	..()
+/obj/item/stack/material/New(atom/newloc, var/amount=null)
+	..(newloc, amount)
 	pixel_x = rand(0,4)-4
 	pixel_y = rand(0,4)-4
 
@@ -197,14 +197,14 @@
 
 /obj/item/stack/material/glass/phoronglass
 	name = "borosilicate glass"
-	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures"
+	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures."
 	singular_name = "borosilicate glass sheet"
 	icon_state = "sheet-phoronglass"
-	default_type = "borosilicate glass"
+	default_type = "phglass"
 
 /obj/item/stack/material/glass/phoronrglass
 	name = "reinforced borosilicate glass"
 	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures. It is reinforced with few rods."
 	singular_name = "reinforced borosilicate glass sheet"
 	icon_state = "sheet-phoronrglass"
-	default_type = "reinforced borosilicate glass"
+	default_type = "rphglass"

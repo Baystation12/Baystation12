@@ -3,17 +3,23 @@
 	set name = "AOOC"
 	set desc = "Antagonist OOC"
 
-	if(!check_rights(R_ADMIN))	return
+	//if(!check_rights(R_ADMIN))	return
+
+
+	if(isghost(src.mob) && !check_rights(R_ADMIN|R_MOD, 0))
+		src << "<span class='warning'>You cannot use AOOC while ghosting/observing!</span>"
+		return
 
 	msg = sanitize(msg)
 	if(!msg)	return
-
 	var/display_name = src.key
-	if(holder && holder.fakekey)
-		display_name = holder.fakekey
-
+	if(holder)
+		if(holder.fakekey)
+			display_name = usr.client.holder.fakekey
+	var/player_display = holder ? "[display_name]([usr.client.holder.rank])" : display_name
 	for(var/mob/M in mob_list)
-		if((M.mind && M.mind.special_role && M.client) || check_rights(R_ADMIN, 0, M))
-			M << "<font color='#960018'><span class='ooc'>" + create_text_tag("aooc", "Antag-OOC:", M.client) + " <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
-
+		if(check_rights(R_ADMIN|R_MOD, 0, M)) // What staff see
+			M << "<span class='ooc'><span class='aooc'>[create_text_tag("aooc", "Antag-OOC:", M.client)] <EM>[get_options_bar(src, 0, 1, 1)]([admin_jump_link(usr, M.client.holder)]):</EM> <span class='message'>[msg]</span></span></span>"
+		else if(M.mind && M.mind.special_role && M.client) // What players see
+			M << "<span class='ooc'><span class='aooc'>[create_text_tag("aooc", "Antag-OOC:", M.client)] <EM>[player_display]:</EM> <span class='message'>[msg]</span></span></span>"
 	log_ooc("(ANTAG) [key] : [msg]")

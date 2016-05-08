@@ -5,7 +5,7 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
 	var/banglet = 0
 
-	prime()
+	detonate()
 		..()
 		for(var/obj/structure/closet/L in hear(7, get_turf(src)))
 			if(locate(/mob/living/carbon/, L))
@@ -22,13 +22,13 @@
 			B.update_icon()
 
 		new/obj/effect/sparks(src.loc)
-		new/obj/effect/effect/smoke/illumination(src.loc, brightness=15)
+		new/obj/effect/effect/smoke/illumination(src.loc, 5, range=30, power=30, color="#FFFFFF")
 		qdel(src)
 		return
 
 	proc/bang(var/turf/T , var/mob/living/carbon/M)					// Added a new proc called 'bang' that takes a location and a person to be banged.
 		M << "<span class='danger'>BANG</span>"						// Called during the loop that bangs people in lockers/containers and when banging
-		playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, 5)		// people in normal view.  Could theroetically be called during other explosions.
+		playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, 30)		// people in normal view.  Could theroetically be called during other explosions.
 																	// -- Polymorph
 
 //Checking for protections
@@ -102,8 +102,9 @@
 	name = "clusterbang"
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "clusterbang"
+	loadable = FALSE
 
-/obj/item/weapon/grenade/flashbang/clusterbang/prime()
+/obj/item/weapon/grenade/flashbang/clusterbang/detonate()
 	var/numspawned = rand(4,8)
 	var/again = 0
 	for(var/more = numspawned,more > 0,more--)
@@ -138,10 +139,10 @@
 	walk_away(src,temploc,stepdist)//I must go, my people need me
 	var/dettime = rand(15,60)
 	spawn(dettime)
-		prime()
+		detonate()
 	..()
 
-/obj/item/weapon/grenade/flashbang/clusterbang/segment/prime()
+/obj/item/weapon/grenade/flashbang/clusterbang/segment/detonate()
 	var/numspawned = rand(4,8)
 	for(var/more = numspawned,more > 0,more--)
 		if(prob(35))
@@ -164,5 +165,5 @@
 		walk_away(src,temploc,stepdist)
 		var/dettime = rand(15,60)
 		spawn(dettime)
-		prime()
+		detonate()
 	..()

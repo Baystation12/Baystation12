@@ -2,7 +2,7 @@
 
 //NOTE: Breathing happens once per FOUR TICKS, unless the last breath fails. In which case it happens once per ONE TICK! So oxyloss healing is done once per 4 ticks while oxyloss damage is applied once per tick!
 #define HUMAN_MAX_OXYLOSS 1 //Defines how much oxyloss humans can get per tick. A tile with no air at all (such as space) applies this value, otherwise it's a percentage of it.
-#define HUMAN_CRIT_MAX_OXYLOSS ( 2.0 / 6) //The amount of damage you'll get when in critical condition. We want this to be a 5 minute deal = 300s. There are 50HP to get through, so (1/6)*last_tick_duration per second. Breaths however only happen every 4 ticks. last_tick_duration = ~2.0 on average
+#define HUMAN_CRIT_MAX_OXYLOSS ( (process_schedule_interval("mob")/(1 SECOND)) / 6) //The amount of damage you'll get when in critical condition. We want this to be a 5 minute deal = 300s. There are 50HP to get through, so (1/6)*last_tick_duration per second. Breaths however only happen every 4 ticks. last_tick_duration = ~2.0 on average
 
 #define HEAT_DAMAGE_LEVEL_1 2 //Amount of damage applied when your body temperature just passes the 360.15k safety point
 #define HEAT_DAMAGE_LEVEL_2 4 //Amount of damage applied when your body temperature passes the 400K point
@@ -448,13 +448,10 @@
 	else if(adjusted_pressure >= species.hazard_low_pressure)
 		pressure_alert = -1
 	else
-		if( !(COLD_RESISTANCE in mutations))
-			take_overall_damage(brute=LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
-			if(getOxyLoss() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
-				adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
-			pressure_alert = -2
-		else
-			pressure_alert = -1
+		take_overall_damage(brute=LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
+		if(getOxyLoss() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
+			adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
+		pressure_alert = -2
 
 	return
 
@@ -642,6 +639,7 @@
 
 	return //TODO: DEFERRED
 
+//DO NOT CALL handle_statuses() from this proc, it's called from living/Life() as long as this returns a true value.
 /mob/living/carbon/human/handle_regular_status_updates()
 	if(!handle_some_updates())
 		return 0
@@ -695,19 +693,16 @@
 			animate_tail_reset()
 			adjustHalLoss(-3)
 
-		if(paralysis)
-			AdjustParalysis(-1)
-
-		else if(sleeping)
-			speech_problem_flag = 1
-			handle_dreams()
-			if (mind)
-				//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
-				if(client || sleeping > 3)
-					AdjustSleeping(-1)
-			if( prob(2) && health && !hal_crit )
-				spawn(0)
-					emote("snore")
+			if(sleeping)
+				speech_problem_flag = 1
+				handle_dreams()
+				if (mind)
+					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
+					if(client || sleeping > 3)
+						AdjustSleeping(-1)
+				if( prob(2) && health && !hal_crit )
+					spawn(0)
+						emote("snore")
 		//CONSCIOUS
 		else
 			stat = CONSCIOUS
@@ -740,11 +735,8 @@
 			jitteriness = max(0, jitteriness - 3)
 			adjustHalLoss(-1)
 
-		//Other
-		handle_statuses()
-
-		if (drowsyness)
-			drowsyness--
+		if (drowsyness > 0)
+			drowsyness = max(0, drowsyness-1)
 			eye_blurry = max(2, eye_blurry)
 			if (prob(5))
 				sleeping += 1

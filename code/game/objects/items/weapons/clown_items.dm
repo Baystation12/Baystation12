@@ -17,9 +17,9 @@
  */
 /obj/item/weapon/soap/New()
 	..()
-	create_reagents(5)
+	create_reagents(10)
 	wet()
- 
+
 /obj/item/weapon/soap/proc/wet()
 	reagents.add_reagent("cleaner", 5)
 

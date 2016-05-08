@@ -3,7 +3,7 @@
 // consoles and laptops use "procssor" item that is held inside machinery piece
 /obj/item/modular_computer
 	name = "Modular Microcomputer"
-	desc = "A small portable microcomputer"
+	desc = "A small portable microcomputer."
 
 	var/enabled = 0											// Whether the computer is turned on.
 	var/screen_on = 1										// Whether the computer is active/opened/it's screen is on.
@@ -332,7 +332,7 @@
 
 		data["PC_programheaders"] = program_headers
 
-	data["PC_stationtime"] = worldtime2text()
+	data["PC_stationtime"] = stationtime2text()
 	data["PC_hasheader"] = 1
 	data["PC_showexitprogram"] = active_program ? 1 : 0 // Hides "Exit Program" button on mainscreen
 	return data
@@ -696,8 +696,8 @@
 			ui_update_needed = 1
 			last_battery_percent = batery_percent
 
-	if(worldtime2text() != last_world_time)
-		last_world_time = worldtime2text()
+	if(stationtime2text() != last_world_time)
+		last_world_time = stationtime2text()
 		ui_update_needed = 1
 
 	if(idle_threads.len)

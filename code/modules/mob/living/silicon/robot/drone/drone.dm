@@ -141,7 +141,7 @@ var/list/mob_hat_cache = list()
 	name = real_name
 
 /mob/living/silicon/robot/drone/updatename()
-	real_name = "maintenance drone ([rand(100,999)])"
+	real_name = "maintenance drone ([random_id(type,100,999)])"
 	name = real_name
 
 /mob/living/silicon/robot/drone/updateicon()
@@ -342,7 +342,7 @@ var/list/mob_hat_cache = list()
 	flavor_text = "It's a bulky construction drone stamped with a Sol Central glyph."
 
 /mob/living/silicon/robot/drone/construction/updatename()
-	real_name = "construction drone ([rand(100,999)])"
+	real_name = "construction drone ([random_id(type,100,999)])"
 	name = real_name
 
 /proc/too_many_active_drones()

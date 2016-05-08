@@ -1,6 +1,6 @@
 /obj/structure/closet/wizard
 	name = "artifact closet"
-	desc = "a special lead lined closet used to hold artifacts of immense power"
+	desc = "a special lead lined closet used to hold artifacts of immense power."
 	icon = 'icons/obj/storage.dmi'
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "acloset"
@@ -22,7 +22,7 @@
 /obj/structure/closet/wizard/armor/New()
 	..()
 	new /obj/item/clothing/shoes/sandal(src) //In case they've lost them.
-	new /obj/item/clothing/gloves/purple(src)//To complete the outfit
+	new /obj/item/clothing/gloves/purple/wizard(src)//To complete the outfit
 	new /obj/item/clothing/suit/space/void/wizard(src)
 	new /obj/item/clothing/head/helmet/space/void/wizard(src)
 

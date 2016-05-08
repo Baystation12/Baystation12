@@ -173,8 +173,8 @@
 /obj/item/clothing/suit/armor/hos/jensen
 	name = "armored trenchcoat"
 	desc = "A trenchcoat augmented with a special alloy for some protection and style."
-	icon_state = "jensencoat"
-	item_state = "jensencoat"
+	icon_state = "hostrench"
+	item_state = "hostrench"
 	flags_inv = 0
 	siemens_coefficient = 0.6
 	body_parts_covered = UPPER_TORSO|ARMS

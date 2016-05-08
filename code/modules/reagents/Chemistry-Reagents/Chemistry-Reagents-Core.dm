@@ -139,7 +139,7 @@
 /datum/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(istype(M, /mob/living/carbon/slime))
 		var/mob/living/carbon/slime/S = M
-		S.adjustToxLoss(8 * removed) // Babies have 150 health, adults have 200; So, 10 units and 13.5
+		S.adjustToxLoss(5 * removed) // Babies have 150 health, adults have 200; So, 30 units and 40
 		if(!S.client)
 			if(S.Target) // Like cats
 				S.Target = null

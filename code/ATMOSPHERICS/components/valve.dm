@@ -3,7 +3,7 @@
 	icon_state = "map_valve0"
 
 	name = "manual valve"
-	desc = "A pipe valve"
+	desc = "A pipe valve."
 
 	level = 1
 	dir = SOUTH
@@ -248,12 +248,6 @@
 /obj/machinery/atmospherics/valve/digital/open
 	open = 1
 	icon_state = "map_valve1"
-
-/obj/machinery/atmospherics/valve/digital/power_change()
-	var/old_stat = stat
-	..()
-	if(old_stat != stat)
-		update_icon()
 
 /obj/machinery/atmospherics/valve/digital/update_icon()
 	..()

@@ -4,7 +4,7 @@
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blob"
 	light_range = 3
-	desc = "Some blob creature thingy"
+	desc = "Some blob creature thingy."
 	density = 1
 	opacity = 0
 	anchored = 1
@@ -188,7 +188,7 @@
 	name = "strong blob"
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blob_idle"
-	desc = "Some blob creature thingy"
+	desc = "Some blob creature thingy."
 	maxHealth = 60
 	brute_resist = 1
 	fire_resist = 2

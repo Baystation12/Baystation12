@@ -2,7 +2,7 @@
 // DO NOT SPAWN THIS TYPE. Use /laptop/ or /console/ instead.
 /obj/machinery/modular_computer/
 	name = "modular computer"
-	desc = "An advanced computer"
+	desc = "An advanced computer."
 
 	var/battery_powered = 0											// Whether computer should be battery powered. It is set automatically
 	use_power = 0
@@ -162,9 +162,7 @@
 /obj/machinery/modular_computer/power_change()
 	if(battery_powered)
 		return
-	else
-		..()
-		update_icon()
+	..()
 
 /obj/machinery/modular_computer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(cpu)

@@ -11,6 +11,9 @@
 		received_moves = list()
 	received_moves.Cut()
 
+	for(var/global_listener in moved_event.global_listeners)
+		moved_event.unregister_global(global_listener)
+
 	sanity_check_events("Pre-Test")
 	. = conduct_test()
 	sanity_check_events("Post-Test")

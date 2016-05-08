@@ -6,6 +6,9 @@
 	var/material/material
 	var/icon_base
 	hitsound = 'sound/weapons/genhit.ogg'
+	var/datum/lock/lock
+	var/initial_lock_value //for mapping purposes. Basically if this value is set, it sets the lock to this value.
+
 
 /obj/machinery/door/unpowered/simple/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	TemperatureAct(exposed_temperature)
@@ -13,7 +16,7 @@
 /obj/machinery/door/unpowered/simple/proc/TemperatureAct(temperature)
 	take_damage(100*material.combustion_effect(get_turf(src),temperature, 0.3))
 
-/obj/machinery/door/unpowered/simple/New(var/newloc, var/material_name)
+/obj/machinery/door/unpowered/simple/New(var/newloc, var/material_name, var/locked)
 	..()
 	if(!material_name)
 		material_name = DEFAULT_WALL_MATERIAL
@@ -28,6 +31,11 @@
 	hitsound = material.hitsound
 	name = "[material.display_name] door"
 	color = material.icon_colour
+	if(initial_lock_value)
+		locked = initial_lock_value
+	if(locked)
+		lock = new(src,locked)
+
 	if(material.opacity < 0.5)
 		set_opacity(0)
 	else
@@ -109,6 +117,21 @@
 
 /obj/machinery/door/unpowered/simple/attackby(obj/item/I as obj, mob/user as mob)
 	src.add_fingerprint(user)
+	if(istype(I, /obj/item/weapon/key) && lock)
+		var/obj/item/weapon/key/K = I
+		if(!lock.toggle(I))
+			user << "<span class='warning'>\The [K] does not fit in the lock!</span>"
+		return
+	if(lock && lock.pick_lock(I,user))
+		return
+
+	if(istype(I,/obj/item/weapon/material/lock_construct))
+		if(lock)
+			user << "<span class='warning'>\The [src] already has a lock.</span>"
+		else
+			var/obj/item/weapon/material/lock_construct/L = I
+			lock = L.create_lock(src,user)
+		return
 
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
 		if(stat & BROKEN)
@@ -147,6 +170,9 @@
 
 	if(src.operating) return
 
+	if(lock && lock.isLocked())
+		user << "\The [src] is locked!"
+
 	if(operable())
 		if(src.density)
 			open()
@@ -156,41 +182,57 @@
 
 	return
 
+/obj/machinery/door/unpowered/simple/examine(mob/user)
+	if(..(user,1) && lock)
+		user << "<span class='notice'>It appears to have a lock.</span>"
 
-/obj/machinery/door/unpowered/simple/iron/New(var/newloc,var/material_name)
-	..(newloc, "iron")
+/obj/machinery/door/unpowered/simple/can_open()
+	if(!..() || (lock && lock.isLocked()))
+		return 0
+	return 1
 
-/obj/machinery/door/unpowered/simple/silver/New(var/newloc,var/material_name)
-	..(newloc, "silver")
+/obj/machinery/door/unpowered/simple/Destroy()
+	qdel(lock)
+	lock = null
+	..()
 
-/obj/machinery/door/unpowered/simple/gold/New(var/newloc,var/material_name)
-	..(newloc, "gold")
+/obj/machinery/door/unpowered/simple/iron/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, "iron", complexity)
 
-/obj/machinery/door/unpowered/simple/uranium/New(var/newloc,var/material_name)
-	..(newloc, "uranium")
+/obj/machinery/door/unpowered/simple/silver/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, "silver", complexity)
 
-/obj/machinery/door/unpowered/simple/sandstone/New(var/newloc,var/material_name)
-	..(newloc, "sandstone")
+/obj/machinery/door/unpowered/simple/gold/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, "gold", complexity)
 
-/obj/machinery/door/unpowered/simple/diamond/New(var/newloc,var/material_name)
-	..(newloc, "diamond")
+/obj/machinery/door/unpowered/simple/uranium/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, "uranium", complexity)
+
+/obj/machinery/door/unpowered/simple/sandstone/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, "sandstone", complexity)
+
+/obj/machinery/door/unpowered/simple/diamond/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, "diamond", complexity)
 
 /obj/machinery/door/unpowered/simple/wood
 	icon_state = "wood"
 	color = "#824B28"
 
-/obj/machinery/door/unpowered/simple/wood/New(var/newloc,var/material_name)
-	..(newloc, "wood")
+/obj/machinery/door/unpowered/simple/wood/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, "wood", complexity)
 
 /obj/machinery/door/unpowered/simple/wood/saloon
 	icon_base = "saloon"
 	autoclose = 1
 	normalspeed = 0
 
-/obj/machinery/door/unpowered/simple/wood/saloon/New(var/newloc,var/material_name)
-	..(newloc, "wood")
+/obj/machinery/door/unpowered/simple/wood/saloon/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, "wood", complexity)
 	glass = 1
 	set_opacity(0)
 
-/obj/machinery/door/unpowered/simple/resin/New(var/newloc,var/material_name)
-	..(newloc, "resin")
+/obj/machinery/door/unpowered/simple/resin/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, "resin", complexity)
+
+/obj/machinery/door/unpowered/simple/cult/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, "cult", complexity)

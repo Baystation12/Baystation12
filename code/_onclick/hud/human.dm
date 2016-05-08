@@ -25,7 +25,7 @@
 
 		inv_box = new /obj/screen/inventory()
 		inv_box.icon = ui_style
-		inv_box.layer = 19
+		inv_box.layer = SCREEN_LAYER
 		inv_box.color = ui_color
 		inv_box.alpha = ui_alpha
 
@@ -50,7 +50,7 @@
 		using.icon = ui_style
 		using.icon_state = "other"
 		using.screen_loc = ui_inventory
-		using.layer = 20
+		using.layer = SCREEN_LAYER
 		using.color = ui_color
 		using.alpha = ui_alpha
 		src.adding += using
@@ -65,7 +65,7 @@
 		using.screen_loc = ui_acti
 		using.color = ui_color
 		using.alpha = ui_alpha
-		using.layer = 20
+		using.layer = SCREEN_LAYER
 		src.adding += using
 		action_intent = using
 
@@ -82,7 +82,7 @@
 		using.icon = ico
 		using.screen_loc = ui_acti
 		using.alpha = ui_alpha
-		using.layer = 21
+		using.layer = SCREEN_LAYER + 0.1
 		src.adding += using
 		help_intent = using
 
@@ -94,7 +94,7 @@
 		using.icon = ico
 		using.screen_loc = ui_acti
 		using.alpha = ui_alpha
-		using.layer = 21
+		using.layer = SCREEN_LAYER + 0.1
 		src.adding += using
 		disarm_intent = using
 
@@ -106,7 +106,7 @@
 		using.icon = ico
 		using.screen_loc = ui_acti
 		using.alpha = ui_alpha
-		using.layer = 21
+		using.layer = SCREEN_LAYER + 0.1
 		src.adding += using
 		grab_intent = using
 
@@ -118,7 +118,7 @@
 		using.icon = ico
 		using.screen_loc = ui_acti
 		using.alpha = ui_alpha
-		using.layer = 21
+		using.layer = SCREEN_LAYER + 0.1
 		src.adding += using
 		hurt_intent = using
 		//end intent small hud objects
@@ -129,7 +129,7 @@
 		using.icon = ui_style
 		using.icon_state = (mymob.m_intent == "run" ? "running" : "walking")
 		using.screen_loc = ui_movi
-		using.layer = 20
+		using.layer = SCREEN_LAYER
 		using.color = ui_color
 		using.alpha = ui_alpha
 		src.adding += using
@@ -141,7 +141,7 @@
 		using.icon = ui_style
 		using.icon_state = "act_drop"
 		using.screen_loc = ui_drop_throw
-		using.layer = 19
+		using.layer = SCREEN_LAYER
 		using.color = ui_color
 		using.alpha = ui_alpha
 		src.hotkeybuttons += using
@@ -153,7 +153,7 @@
 		using.icon = ui_style
 		using.icon_state = "act_equip"
 		using.screen_loc = ui_equip
-		using.layer = 20
+		using.layer = SCREEN_LAYER
 		using.color = ui_color
 		using.alpha = ui_alpha
 		src.adding += using
@@ -166,7 +166,7 @@
 			inv_box.icon_state = "r_hand_active"
 		inv_box.screen_loc = ui_rhand
 		inv_box.slot_id = slot_r_hand
-		inv_box.layer = 19
+		inv_box.layer = SCREEN_LAYER
 		inv_box.color = ui_color
 		inv_box.alpha = ui_alpha
 
@@ -181,7 +181,7 @@
 			inv_box.icon_state = "l_hand_active"
 		inv_box.screen_loc = ui_lhand
 		inv_box.slot_id = slot_l_hand
-		inv_box.layer = 19
+		inv_box.layer = SCREEN_LAYER
 		inv_box.color = ui_color
 		inv_box.alpha = ui_alpha
 		src.l_hand_hud_object = inv_box
@@ -192,7 +192,7 @@
 		using.icon = ui_style
 		using.icon_state = "hand1"
 		using.screen_loc = ui_swaphand1
-		using.layer = 19
+		using.layer = SCREEN_LAYER
 		using.color = ui_color
 		using.alpha = ui_alpha
 		src.adding += using
@@ -202,7 +202,7 @@
 		using.icon = ui_style
 		using.icon_state = "hand2"
 		using.screen_loc = ui_swaphand2
-		using.layer = 19
+		using.layer = SCREEN_LAYER
 		using.color = ui_color
 		using.alpha = ui_alpha
 		src.adding += using
@@ -213,7 +213,7 @@
 		using.icon = ui_style
 		using.icon_state = "act_resist"
 		using.screen_loc = ui_pull_resist
-		using.layer = 19
+		using.layer = SCREEN_LAYER
 		using.color = ui_color
 		using.alpha = ui_alpha
 		src.hotkeybuttons += using
@@ -356,14 +356,13 @@
 	mymob.radio_use_icon.color = ui_color
 	mymob.radio_use_icon.alpha = ui_alpha
 
-	mymob.client.screen = null
+	mymob.client.screen = list()
 
 	mymob.client.screen += hud_elements
 	mymob.client.screen += src.adding + src.hotkeybuttons
 	inventory_shown = 0;
 
-	return
-
+	common_hud()
 
 /mob/living/carbon/human/verb/toggle_hotkey_verbs()
 	set category = "OOC"

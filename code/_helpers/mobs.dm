@@ -14,6 +14,9 @@
 /mob/get_mob()
 	return src
 
+//helper for inverting armor blocked values into a multiplier
+#define blocked_mult(blocked) max(1 - (blocked/100), 0)
+
 /proc/mobs_in_view(var/range, var/source)
 	var/list/mobs = list()
 	for(var/atom/movable/AM in view(range, source))
@@ -75,7 +78,7 @@ proc/random_name(gender, species = "Human")
 	if(species)
 		current_species = all_species[species]
 
-	if(!current_species || current_species.name_language == null)
+	if(!current_species)
 		if(gender==FEMALE)
 			return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
 		else
@@ -249,3 +252,10 @@ Proc for attack log creation, because really why not
 
 	if (progbar)
 		qdel(progbar)
+
+/proc/able_mobs_in_oview(var/origin)
+	var/list/mobs = list()
+	for(var/mob/living/M in oview(origin)) // Only living mobs are considered able.
+		if(!M.is_physically_disabled())
+			mobs += M
+	return mobs

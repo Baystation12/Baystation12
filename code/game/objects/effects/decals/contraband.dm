@@ -78,7 +78,7 @@
 
 /obj/structure/sign/poster
 	name = "poster"
-	desc = "A large piece of space-resistant printed paper. "
+	desc = "A large piece of space-resistant printed paper."
 	icon = 'icons/obj/contraband.dmi'
 	anchored = 1
 	var/serial_number	//Will hold the value of src.loc if nobody initialises it
@@ -111,7 +111,7 @@
 
 /obj/structure/sign/poster/initialize()
 	if (poster_type)
-		var/path = text2path(poster_type)
+		var/path = ispath(poster_type) ? poster_type : text2path(poster_type)
 		var/datum/poster/design = new path
 		set_poster(design)
 

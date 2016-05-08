@@ -15,15 +15,15 @@
 		kill()
 
 /datum/event/money_hacker/announce()
-	var/message = "A brute force hack has been detected (in progress since [worldtime2text()]). The target of the attack is: Financial account #[affected_account.account_number], \
+	var/message = "A brute force hack has been detected (in progress since [stationtime2text()]). The target of the attack is: Financial account #[affected_account.account_number], \
 	without intervention this attack will succeed in approximately 10 minutes. Required intervention: temporary suspension of affected accounts until the attack has ceased. \
 	Notifications will be sent as updates occur.<br>"
 	var/my_department = "[station_name()] firewall subroutines"
-	
+
 	for(var/obj/machinery/message_server/MS in world)
 		if(!MS.active) continue
 		MS.send_rc_message("Head of Personnel's Desk", my_department, message, "", "", 2)
-		
+
 
 /datum/event/money_hacker/tick()
 	if(world.time >= end_time)
@@ -51,7 +51,7 @@
 		T.date = pick("", current_date_string, date1, date2)
 		var/time1 = rand(0, 99999999)
 		var/time2 = "[round(time1 / 36000)+12]:[(time1 / 600 % 60) < 10 ? add_zero(time1 / 600 % 60, 1) : time1 / 600 % 60]"
-		T.time = pick("", worldtime2text(), time2)
+		T.time = pick("", stationtime2text(), time2)
 		T.source_terminal = pick("","[pick("Biesel","New Gibson")] GalaxyNet Terminal #[rand(111,999)]","your mums place","nantrasen high CommanD")
 
 		affected_account.transaction_log.Add(T)

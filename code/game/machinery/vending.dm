@@ -188,7 +188,7 @@
 	coin = null
 	for(var/datum/data/vending_product/R in product_records)
 		qdel(R)
-	product_records.Cut()
+	product_records = null
 	return ..()
 
 /obj/machinery/vending/ex_act(severity)
@@ -260,7 +260,7 @@
 		return
 	else if(istype(W, /obj/item/weapon/coin) && premium.len > 0)
 		user.drop_item()
-		W.loc = src
+		W.forceMove(src)
 		coin = W
 		categories |= CAT_COIN
 		user << "<span class='notice'>You insert \the [W] into \the [src].</span>"
@@ -380,7 +380,7 @@
 			T.amount = "[currently_vending.price]"
 		T.source_terminal = src.name
 		T.date = current_date_string
-		T.time = worldtime2text()
+		T.time = stationtime2text()
 		customer_account.transaction_log.Add(T)
 
 		// Give the vendor the money. We use the account owner name, which means
@@ -403,7 +403,7 @@
 	T.amount = "[currently_vending.price]"
 	T.source_terminal = src.name
 	T.date = current_date_string
-	T.time = worldtime2text()
+	T.time = stationtime2text()
 	vendor_account.transaction_log.Add(T)
 
 /obj/machinery/vending/attack_ai(mob/user as mob)
@@ -481,10 +481,10 @@
 			usr << "There is no coin in this machine."
 			return
 
-		coin.loc = src.loc
+		coin.forceMove(src.loc)
 		if(!usr.get_active_hand())
 			usr.put_in_hands(coin)
-		usr << "<span class='notice'>You remove the [coin] from the [src]</span>"
+		usr << "<span class='notice'>You remove \the [coin] from \the [src]</span>"
 		coin = null
 		categories &= ~CAT_COIN
 
@@ -545,9 +545,11 @@
 			else
 				user << "<span class='notice'>You weren't able to pull the coin out fast enough, the machine ate it, string and all.</span>"
 				qdel(coin)
+				coin = null
 				categories &= ~CAT_COIN
 		else
 			qdel(coin)
+			coin = null
 			categories &= ~CAT_COIN
 
 	if(((src.last_reply + (src.vend_delay + 200)) <= world.time) && src.vend_reply)
@@ -613,16 +615,14 @@
 		O.show_message("<span class='game say'><span class='name'>\The [src]</span> beeps, \"[message]\"</span>",2)
 	return
 
-/obj/machinery/vending/power_change()
-	..()
+/obj/machinery/vending/update_icon()
 	if(stat & BROKEN)
 		icon_state = "[initial(icon_state)]-broken"
+	else if( !(stat & NOPOWER) )
+		icon_state = initial(icon_state)
 	else
-		if( !(stat & NOPOWER) )
-			icon_state = initial(icon_state)
-		else
-			spawn(rand(0, 15))
-				src.icon_state = "[initial(icon_state)]-off"
+		spawn(rand(0, 15))
+			src.icon_state = "[initial(icon_state)]-off"
 
 //Oh no we're malfunctioning!  Dump out some product and break.
 /obj/machinery/vending/proc/malfunction()
@@ -670,17 +670,6 @@
 	contraband = list()
 	premium = list()
 
-*/
-
-/*
-/obj/machinery/vending/atmospherics //Commenting this out until someone ponies up some actual working, broken, and unpowered sprites - Quarxink
-	name = "Tank Vendor"
-	desc = "A vendor with a wide variety of masks and gas tanks."
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "dispenser"
-	product_paths = "/obj/item/weapon/tank/oxygen;/obj/item/weapon/tank/phoron;/obj/item/weapon/tank/emergency_oxygen;/obj/item/weapon/tank/emergency_oxygen/engi;/obj/item/clothing/mask/breath"
-	productamounts = "10;10;10;5;25"
-	vend_delay = 0
 */
 
 /obj/machinery/vending/boozeomat

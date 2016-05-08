@@ -4,7 +4,6 @@ var/datum/antagonist/raider/raiders
 	id = MODE_RAIDER
 	role_text = "Raider"
 	role_text_plural = "Raiders"
-	bantype = "raider"
 	antag_indicator = "mutineer"
 	landmark_id = "voxstart"
 	welcome_text = "Use :H to talk on your encrypted channel."
@@ -28,7 +27,7 @@ var/datum/antagonist/raider/raiders
 		/obj/item/clothing/under/serviceoveralls,
 		/obj/item/clothing/under/captain_fly,
 		/obj/item/clothing/under/det,
-		/obj/item/clothing/under/brown,
+		/obj/item/clothing/under/color/brown,
 		)
 
 	var/list/raider_shoes = list(

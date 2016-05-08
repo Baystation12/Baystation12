@@ -46,6 +46,7 @@
 	throw_range = 5
 	matter = list(DEFAULT_WALL_MATERIAL = 75)
 	attack_verb = list("stabbed")
+	lock_picking_level = 5
 
 /obj/item/weapon/screwdriver/New()
 	switch(pick("red","blue","purple","brown","green","cyan","yellow"))
@@ -278,6 +279,11 @@
 /obj/item/weapon/weldingtool/proc/isOn()
 	return src.welding
 
+/obj/item/weapon/weldingtool/get_storage_cost()
+	if(isOn())
+		return DO_NOT_STORE
+	return ..()
+
 /obj/item/weapon/weldingtool/update_icon()
 	..()
 	icon_state = welding ? "welder1" : "welder"
@@ -301,7 +307,7 @@
 				T.visible_message("<span class='danger'>\The [src] turns on.</span>")
 			src.force = 15
 			src.damtype = "fire"
-			src.w_class = 4
+			src.slot_flags |= SLOT_DENYPOCKET //could also make it just set you on fire, but lets disable putting lit welders in pockets for now
 			welding = 1
 			update_icon()
 			processing_objects |= src
@@ -318,7 +324,7 @@
 			T.visible_message("<span class='warning'>\The [src] turns off.</span>")
 		src.force = 3
 		src.damtype = "brute"
-		src.w_class = initial(src.w_class)
+		src.slot_flags = initial(src.slot_flags)
 		src.welding = 0
 		update_icon()
 
@@ -344,7 +350,7 @@
 				if(E.damage > 10)
 					E.damage += rand(4,10)
 			if(FLASH_PROTECTION_REDUCED)
-				H << "<span class='danger'>Your equipment intensify the welder's glow. Your eyes itch and burn severely.</span>"
+				H << "<span class='danger'>Your equipment intensifies the welder's glow. Your eyes itch and burn severely.</span>"
 				H.eye_blurry += rand(12,20)
 				E.damage += rand(12, 16)
 		if(safety<FLASH_PROTECTION_MAJOR)

@@ -31,17 +31,18 @@
 	blobpwrdisplay.name = "blob power"
 	blobpwrdisplay.icon_state = "block"
 	blobpwrdisplay.screen_loc = ui_health
-	blobpwrdisplay.layer = 20
+	blobpwrdisplay.layer = SCREEN_LAYER
 
 	blobhealthdisplay = new /obj/screen()
 	blobhealthdisplay.name = "blob health"
 	blobhealthdisplay.icon_state = "block"
 	blobhealthdisplay.screen_loc = ui_internal
-	blobhealthdisplay.layer = 20
+	blobhealthdisplay.layer = SCREEN_LAYER
 
-	mymob.client.screen = null
+	mymob.client.screen = list()
 
 	mymob.client.screen += list(blobpwrdisplay, blobhealthdisplay)
+	common_hud()
 
 /mob/living/carbon/slime/instantiate_hud(var/datum/hud/HUD)
 	HUD.slime_hud()
@@ -58,7 +59,7 @@
 	using.icon = ui_style
 	using.icon_state = "intent_"+mymob.a_intent
 	using.screen_loc = ui_zonesel
-	using.layer = 20
+	using.layer = SCREEN_LAYER
 	src.adding += using
 	action_intent = using
 
@@ -109,8 +110,9 @@
 	src.adding += using
 	hurt_intent = using
 
-	mymob.client.screen = null
+	mymob.client.screen = list()
 	mymob.client.screen += src.adding
+	common_hud()
 
 	return
 
@@ -166,6 +168,7 @@
 		mymob.purged.name = "purged"
 		mymob.purged.screen_loc = ui_construct_purge
 
-	mymob.client.screen = null
+	mymob.client.screen = list()
 
 	mymob.client.screen += list(mymob.fire, mymob.healths, mymob.pullin, mymob.zone_sel, mymob.purged, mymob.flash)
+	common_hud()

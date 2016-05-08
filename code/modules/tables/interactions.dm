@@ -70,7 +70,7 @@
 	return
 
 
-/obj/structure/table/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/table/attackby(obj/item/W, mob/user, var/click_params)
 	if (!W) return
 
 	// Handle harm intent grabbing/tabling.
@@ -82,10 +82,12 @@
 			if(occupied)
 				user << "<span class='danger'>There's \a [occupied] in the way.</span>"
 				return
-			if (G.state < 2)
+			if (G.state >= GRAB_AGGRESSIVE)
 				if(user.a_intent == I_HURT)
-					if (prob(15))	M.Weaken(5)
-					M.apply_damage(8,def_zone = "head")
+					var/blocked = M.run_armor_check("head", "melee")
+					if (prob(30 * blocked_mult(blocked)))
+						M.Weaken(5)
+					M.apply_damage(8, BRUTE, "head", blocked)
 					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
 					if(material)
 						playsound(loc, material.tableslam_noise, 50, 1)
@@ -97,9 +99,8 @@
 						if(prob(50))
 							M.visible_message("<span class='danger'>\The [S] slices [M]'s face messily!</span>",
 							                   "<span class='danger'>\The [S] slices your face messily!</span>")
-							M.apply_damage(10, def_zone = "head")
-							if(prob(2))
-								M.embed(S, def_zone = "head")
+							M.apply_damage(10, BRUTE, "head", blocked)
+							M.standard_weapon_hit_effects(S, G.assailant, 10, blocked, "head")
 				else
 					user << "<span class='danger'>You need a better grip to do that!</span>"
 					return
@@ -131,7 +132,25 @@
 		user << "<span class='warning'>There's nothing to put \the [W] on! Try adding plating to \the [src] first.</span>"
 		return
 
-	user.drop_item(src.loc)
+	// Placing stuff on tables
+	if(user.drop_from_inventory(W, src.loc))
+		var/list/click_data = params2list(click_params)
+		//Center the icon where the user clicked.
+		if(!click_data || !click_data["icon-x"] || !click_data["icon-y"])
+			return
+
+		//Food is special, apparently
+		var/center_x = 16
+		var/center_y = 16
+		if(istype(W, /obj/item/weapon/reagent_containers/food))
+			var/obj/item/weapon/reagent_containers/food/F = W
+			if(F.center_of_mass.len)
+				center_x = F.center_of_mass["x"]
+				center_y = F.center_of_mass["y"]
+
+		//Clamp it so that the icon never moves more than 16 pixels in either direction (thus leaving the table turf)
+		W.pixel_x = Clamp(text2num(click_data["icon-x"]) - center_x, -(world.icon_size/2), world.icon_size/2)
+		W.pixel_y = Clamp(text2num(click_data["icon-y"]) - center_y, -(world.icon_size/2), world.icon_size/2)
 	return
 
 /obj/structure/table/attack_tk() // no telehulk sorry

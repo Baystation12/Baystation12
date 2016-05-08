@@ -74,7 +74,7 @@ var/global/ntnet_card_uid = 1
 
 	if(holder2)
 		var/turf/T = get_turf(holder2)
-		if((T && istype(T)) && T.z in config.station_levels)
+		if((T && istype(T)) && T.z in using_map.station_levels)
 			// Computer is on station. Low/High signal depending on what type of network card you have
 			if(long_range)
 				return 2

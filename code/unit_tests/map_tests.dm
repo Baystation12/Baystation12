@@ -28,15 +28,11 @@ datum/unit_test/apc_area_test/start_test()
 
 	var/list/exempt_from_atmos = typesof(   /area/maintenance, \
 						/area/storage, \
-						/area/engineering/atmos/storage, \
 						/area/rnd/test_area, \
-						/area/construction, \
-						/area/server
+						/area/construction
 						)
 
-	var/list/exempt_from_apc = typesof(	/area/construction, \
-						/area/medical/genetics
-						)
+	var/list/exempt_from_apc = typesof( /area/construction )
 
 	for(var/area/A in world)
 		if(A.z == 1 && !(A.type in exempt_areas))
@@ -45,15 +41,15 @@ datum/unit_test/apc_area_test/start_test()
 			var/bad_msg = "[ascii_red]--------------- [A.name]([A.type])"
 
 
-			if(isnull(A.apc) && !(A.type in exempt_from_apc))
+			if(isnull(A.apc) && !(A.type in exempt_from_apc) && !(using_map.exempt_areas[A.type] & using_map.NO_APC))
 				log_unit_test("[bad_msg] lacks an APC.[ascii_reset]")
 				area_good = 0
 
-			if(!A.air_scrub_info.len && !(A.type in exempt_from_atmos))
+			if(!A.air_scrub_info.len && !(A.type in exempt_from_atmos) && !(using_map.exempt_areas[A.type] & using_map.NO_SCRUBBER))
 				log_unit_test("[bad_msg] lacks an Air scrubber.[ascii_reset]")
 				area_good = 0
 
-			if(!A.air_vent_info.len && !(A.type in exempt_from_atmos))
+			if(!A.air_vent_info.len && !(A.type in exempt_from_atmos) && !(using_map.exempt_areas[A.type] & using_map.NO_VENT))
 				log_unit_test("[bad_msg] lacks an Air vent.[ascii_reset]")
 				area_good = 0
 
@@ -105,6 +101,70 @@ datum/unit_test/wire_test/start_test()
 
 	return 1
 
+//=======================================================================================
+
+datum/unit_test/closet_test
+	name = "MAP: Closet Capacity Test Player Z levels"
+
+datum/unit_test/closet_test/start_test()
+	var/bad_tests = 0
+
+	for(var/obj/structure/closet/C in world)
+		if(!C.opened && isPlayerLevel(C.z))
+			var/total_content_size = 0
+			for(var/atom/movable/AM in C.contents)
+				total_content_size += C.content_size(AM)
+			if(total_content_size > C.storage_capacity)
+				var/bad_msg = "[ascii_red]--------------- [C.name] \[[C.x] / [C.y] / [C.z]\]"
+				log_unit_test("[bad_msg] Contains more objects than able to hold ([total_content_size] / [C.storage_capacity]). [ascii_reset]")
+				bad_tests++
+
+	if(bad_tests)
+		fail("\[[bad_tests]\] Some closets contained more objects than they were able to hold.")
+	else
+		pass("No overflowing closets found.")
+
+	return 1
+
+//=======================================================================================
+
+datum/unit_test/storage_map_test
+	name = "MAP: On Map Storage Item Capacity Test Player Z levels"
+
+datum/unit_test/storage_map_test/start_test()
+	var/bad_tests = 0
+
+	for(var/obj/item/weapon/storage/S in world)
+		if(isPlayerLevel(S.z))
+			var/bad_msg = "[ascii_red]--------------- [S.name] \[[S.type]\] \[[S.x] / [S.y] / [S.z]\]"
+			bad_tests += test_storage_capacity(S, bad_msg)
+
+	if(bad_tests)
+		fail("\[[bad_tests]\] Some on-map storage items were not able to hold their initial contents.")
+	else
+		pass("All on-map storage items were able to hold their initial contents.")
+
+	return 1
+
+datum/unit_test/map_image_map_test
+	name = "MAP: All map levels shall have a corresponding map image."
+
+datum/unit_test/map_image_map_test/start_test()
+	var/failed = FALSE
+
+	for(var/z in using_map.map_levels)
+		var/file_name = map_image_file_name(z)
+		var/file_path = MAP_IMAGE_PATH + file_name
+		if(!fexists(file_path))
+			failed = TRUE
+			log_unit_test("[using_map.path]-[z] is missing its map image [file_name].")
+
+	if(failed)
+		fail("One or more map levels were missing a corresponding map image.")
+	else
+		pass("All map levels had a corresponding image.")
+
+	return 1
 
 #undef SUCCESS
 #undef FAILURE

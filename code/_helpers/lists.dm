@@ -207,6 +207,8 @@ proc/listclearnulls(list/list)
 /proc/sortAtom(var/list/atom/L, var/order = 1)
 	if(isnull(L) || L.len < 2)
 		return L
+	if(null in L)	// Cannot sort lists containing null entries.
+		return L
 	var/middle = L.len / 2 + 1
 	return mergeAtoms(sortAtom(L.Copy(0,middle)), sortAtom(L.Copy(middle)), order)
 
@@ -215,6 +217,7 @@ proc/listclearnulls(list/list)
 	var/Li=1
 	var/Ri=1
 	var/list/result = new()
+
 	while(Li <= L.len && Ri <= R.len)
 		var/atom/rL = L[Li]
 		var/atom/rR = R[Ri]

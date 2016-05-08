@@ -63,6 +63,7 @@
 #define BLOCKHAIR       0x40    // Hides the user's hair, facial and otherwise.
 
 // Slots.
+#define slot_first       1
 #define slot_back        1
 #define slot_wear_mask   2
 #define slot_handcuffed  3
@@ -85,6 +86,7 @@
 #define slot_r_ear       20
 #define slot_legs        21
 #define slot_tie         22
+#define slot_last        22
 
 // Inventory slot strings.
 // since numbers cannot be used as associative list keys.
@@ -177,3 +179,11 @@
 #define SUIT_SENSOR_BINARY   1
 #define SUIT_SENSOR_VITAL    2
 #define SUIT_SENSOR_TRACKING 3
+
+// Storage
+#define base_storage_cost(w_class) (2**(w_class-1)) //1,2,4,8,16,...
+
+#define DO_NOT_STORE INFINITY //A special storage "cost" that indicates an item should not be storable
+
+#define DEFAULT_BACKPACK_STORAGE 28
+#define DEFAULT_BOX_STORAGE 14

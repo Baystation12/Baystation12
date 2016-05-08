@@ -2,7 +2,7 @@
 
 /obj/effect/lobby_image
 	name = "Baystation12"
-	desc = "This shouldn't be read"
+	desc = "This shouldn't be read."
 	icon = 'icons/misc/title.dmi'
 	screen_loc = "WEST,SOUTH"
 

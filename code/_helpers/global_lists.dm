@@ -23,6 +23,9 @@ var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
 
 var/global/list/turfs = list()						//list of all turfs
 
+#define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)
+#define all_genders_text_list list("Male","Female","Plural","Neuter")
+
 //Languages/species/whitelist.
 var/global/list/all_species[0]
 var/global/list/all_languages[0]
@@ -54,7 +57,6 @@ var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
 // Visual nets
 var/list/datum/visualnet/visual_nets = list()
 var/datum/visualnet/camera/cameranet = new()
-var/datum/visualnet/cult/cultnet = new()
 
 // Runes
 var/global/list/rune_list = new()
@@ -97,6 +99,18 @@ var/global/list/string_slot_flags = list(
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
+
+/proc/populateGlobalLists()
+    possible_cable_coil_colours = sortAssoc(list(
+		"Yellow" = COLOR_YELLOW,
+		"Green" = COLOR_LIME,
+		"Pink" = COLOR_PINK,
+		"Blue" = COLOR_BLUE,
+		"Orange" = COLOR_ORANGE,
+		"Cyan" = COLOR_CYAN,
+		"Red" = COLOR_RED,
+		"White" = COLOR_WHITE
+	))
 
 /proc/makeDatumRefLists()
 	var/list/paths
@@ -170,6 +184,7 @@ var/global/list/string_slot_flags = list(
 		poster_designs += P
 
 	return 1
+
 
 /* // Uncomment to debug chemical reaction list.
 /client/verb/debug_chemical_list()

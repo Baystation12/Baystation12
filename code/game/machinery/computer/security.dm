@@ -2,7 +2,7 @@
 
 /obj/machinery/computer/secure_data//TODO:SANITY
 	name = "security records console"
-	desc = "Used to view, edit and maintain security records"
+	desc = "Used to view, edit and maintain security records."
 	icon_keyboard = "security_key"
 	icon_screen = "security"
 	light_color = "#a91515"
@@ -394,7 +394,7 @@ What a mess.*/
 				var/counter = 1
 				while(active2.fields[text("com_[]", counter)])
 					counter++
-				active2.fields[text("com_[counter]")] = text("Made by [authenticated] ([rank]) on [time2text(world.realtime, "DDD MMM DD")] [worldtime2text()], [game_year]<BR>[t1]")
+				active2.fields[text("com_[counter]")] = text("Made by [authenticated] ([rank]) on [time2text(world.realtime, "DDD MMM DD")] [stationtime2text()], [game_year]<BR>[t1]")
 
 			if ("Delete Record (ALL)")
 				if (active1)

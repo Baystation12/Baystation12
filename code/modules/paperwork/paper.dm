@@ -231,8 +231,8 @@
 	t = replacetext(t, "\[/i\]", "</I>")
 	t = replacetext(t, "\[u\]", "<U>")
 	t = replacetext(t, "\[/u\]", "</U>")
-	t = replacetext(t, "\[time\]", "[worldtime2text()]")
-	t = replacetext(t, "\[date\]", "[worlddate2text()]")
+	t = replacetext(t, "\[time\]", "[stationtime2text()]")
+	t = replacetext(t, "\[date\]", "[stationdate2text()]")
 	t = replacetext(t, "\[large\]", "<font size=\"4\">")
 	t = replacetext(t, "\[/large\]", "</font>")
 	t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[get_signature(P, user)]</i></font>")
@@ -425,13 +425,13 @@
 			else if (h_user.l_store == src)
 				h_user.drop_from_inventory(src)
 				B.loc = h_user
-				B.layer = 20
+				B.layer = SCREEN_LAYER+0.01
 				h_user.l_store = B
 				h_user.update_inv_pockets()
 			else if (h_user.r_store == src)
 				h_user.drop_from_inventory(src)
 				B.loc = h_user
-				B.layer = 20
+				B.layer = SCREEN_LAYER+0.01
 				h_user.r_store = B
 				h_user.update_inv_pockets()
 			else if (h_user.head == src)

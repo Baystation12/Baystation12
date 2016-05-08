@@ -10,7 +10,6 @@
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = null
-	var/storage_cost = null
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
 	pass_flags = PASSTABLE
@@ -18,6 +17,7 @@
 	var/obj/item/master = null
 	var/list/origin_tech = null	//Used by R&D to determine what research bonuses it grants.
 	var/list/attack_verb = list() //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
+	var/lock_picking_level = 0 //used to determine whether something can pick a lock, and how well.
 	var/force = 0
 
 	var/heat_protection = 0 //flags which determine which body parts are protected from heat. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
@@ -40,7 +40,8 @@
 	var/gas_transfer_coefficient = 1 // for leaking gas from turf to mask and vice-versa (for masks right now, but at some point, i'd like to include space helmets)
 	var/permeability_coefficient = 1 // for chemicals/diseases
 	var/siemens_coefficient = 1 // for electrical admittance/conductance (electrocution checks and shit)
-	var/slowdown = 0 // How much clothing is slowing you down. Negative values speeds you up
+	var/slowdown_general = 0 // How much clothing is slowing you down. Negative values speeds you up. This is a genera##l slowdown, no matter equipment slot.
+	var/slowdown_per_slot[slot_last] // How much clothing is slowing you down. Negative values speeds you up. This is an associative list: item slot - slowdown
 	var/canremove = 1 //Mostly for Ninja code at this point but basically will not allow the item to be removed if set to 0. /N
 	var/list/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	var/list/allowed = null //suit storage stuff.
@@ -74,17 +75,9 @@
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
 
-/obj/item/equipped()
-	..()
-	var/mob/M = loc
-	if(!istype(M))
-		return
-	if(M.l_hand)
-		M.l_hand.update_held_icon()
-	if(M.r_hand)
-		M.r_hand.update_held_icon()
-
 /obj/item/Destroy()
+	qdel(hidden_uplink)
+	hidden_uplink = null
 	if(ismob(loc))
 		var/mob/m = loc
 		m.drop_from_inventory(src)
@@ -104,6 +97,24 @@
 			M.update_inv_l_hand()
 		else if(M.r_hand == src)
 			M.update_inv_r_hand()
+
+/obj/item/proc/is_held_twohanded(mob/living/M)
+	var/check_hand
+	if(M.l_hand == src && !M.r_hand) 
+		check_hand = "r_hand" //item in left hand, check right hand
+	else if(M.r_hand == src && !M.l_hand)
+		check_hand = "l_hand" //item in right hand, check left hand
+	else
+		return FALSE
+
+	//would check is_broken() and is_malfunctioning() here too but is_malfunctioning()
+	//is probabilistic so we can't do that and it would be unfair to just check one.
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/external/hand = H.organs_by_name[check_hand]
+		if(istype(hand) && hand.is_usable())
+			return TRUE
+	return FALSE
 
 /obj/item/ex_act(severity)
 	switch(severity)
@@ -253,10 +264,18 @@
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
-	layer = 20
+	layer = SCREEN_LAYER+0.01
 	if(user.client)	user.client.screen |= src
 	if(user.pulling == src) user.stop_pulling()
-	return
+	
+	//Update two-handing status
+	var/mob/M = loc
+	if(!istype(M))
+		return
+	if(M.l_hand)
+		M.l_hand.update_held_icon()
+	if(M.r_hand)
+		M.r_hand.update_held_icon()
 
 //Defines which slots correspond to which slot flags
 var/list/global/slot_flags_enumeration = list(

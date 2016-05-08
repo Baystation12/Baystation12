@@ -10,12 +10,13 @@
 /obj/item/projectile/energy/flash
 	name = "chemical shell"
 	icon_state = "bullet"
+	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	damage = 5
 	agony = 10
 	kill_count = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
 	var/flash_range = 0
 	var/brightness = 7
-	var/light_duration = 5
+	var/light_colour = "#ffffff"
 
 /obj/item/projectile/energy/flash/on_impact(var/atom/A)
 	var/turf/T = flash_range? src.loc : get_turf(A)
@@ -30,20 +31,32 @@
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
 	src.visible_message("<span class='warning'>\The [src] explodes in a bright flash!</span>")
 
-	new /obj/effect/decal/cleanable/ash(src.loc) //always use src.loc so that ash doesn't end up inside windows
-	new /obj/effect/sparks(T)
-	new /obj/effect/effect/smoke/illumination(T, brightness=max(flash_range*2, brightness), lifetime=light_duration)
+	var/datum/effect/effect/system/spark_spread/sparks = PoolOrNew(/datum/effect/effect/system/spark_spread)
+	sparks.set_up(2, 1, T)
+	sparks.start()
 
-//blinds people like the flash round, but can also be used for temporary illumination
+	new /obj/effect/decal/cleanable/ash(src.loc) //always use src.loc so that ash doesn't end up inside windows
+	new /obj/effect/effect/smoke/illumination(T, 5, brightness, brightness, light_colour)
+
+//blinds people like the flash round, but in a small area and can also be used for temporary illumination
 /obj/item/projectile/energy/flash/flare
 	damage = 10
-	flash_range = 1
-	brightness = 9 //similar to a flare
-	light_duration = 200
+	fire_sound = 'sound/weapons/Gunshot.ogg'
+	flash_range = 2
+	brightness = 15
+
+/obj/item/projectile/energy/flash/flare/on_impact(var/atom/A)
+	light_colour = pick("#e58775", "#ffffff", "#90ff90", "#a09030")
+
+	..() //initial flash
+	
+	//residual illumination
+	new /obj/effect/effect/smoke/illumination(src.loc, rand(190,240) SECONDS, range=8, power=3, color=light_colour) //same lighting power as flare
 
 /obj/item/projectile/energy/electrode
 	name = "electrode"
 	icon_state = "spark"
+	fire_sound = 'sound/weapons/Taser.ogg'
 	nodamage = 1
 	taser_effect = 1
 	agony = 40
@@ -59,6 +72,7 @@
 /obj/item/projectile/energy/declone
 	name = "declone"
 	icon_state = "declone"
+	fire_sound = 'sound/weapons/pulse3.ogg'
 	nodamage = 1
 	damage_type = CLONE
 	irradiate = 40
@@ -97,6 +111,7 @@
 /obj/item/projectile/energy/phoron
 	name = "phoron bolt"
 	icon_state = "energy"
+	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 20
 	damage_type = TOX
 	irradiate = 20

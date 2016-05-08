@@ -30,10 +30,27 @@
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "soap"
+	flags = OPENCONTAINER
 	w_class = 2.0
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
+	var/key_data
+
+/obj/item/weapon/soap/attackby(var/obj/item/I, var/mob/user)
+	if(istype(I, /obj/item/weapon/key))
+		if(!key_data)
+			user << "<span class='notice'>You imprint \the [I] into \the [src].</span>"
+			var/obj/item/weapon/key/K = I
+			key_data = K.key_data
+			update_icon()
+		return
+	..()
+
+/obj/item/weapon/soap/update_icon()
+	overlays.Cut()
+	if(key_data)
+		overlays += image('icons/obj/items.dmi', icon_state = "soap_key_overlay")
 
 /obj/item/weapon/soap/nanotrasen
 	desc = "A NanoTrasen-brand bar of soap. Smells of phoron."
@@ -293,13 +310,6 @@
 	desc = "Heavy-duty switching circuits for power control."
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 
-/obj/item/weapon/module/power_control/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (istype(W, /obj/item/device/multitool))
-		var/obj/item/weapon/circuitboard/ghettosmes/newcircuit = new/obj/item/weapon/circuitboard/ghettosmes(user.loc)
-		qdel(src)
-		user.put_in_hands(newcircuit)
-
-
 /obj/item/weapon/module/id_auth
 	name = "\improper ID authentication module"
 	icon_state = "id_mod"
@@ -396,7 +406,7 @@
 	icon = 'icons/obj/stock_parts.dmi'
 	w_class = 2.0
 	var/rating = 1
-	
+
 /obj/item/weapon/stock_parts/New()
 	src.pixel_x = rand(-5.0, 5)
 	src.pixel_y = rand(-5.0, 5)
@@ -580,7 +590,7 @@
 
 /obj/item/weapon/ectoplasm
 	name = "ectoplasm"
-	desc = "spooky"
+	desc = "Spooky."
 	gender = PLURAL
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "ectoplasm"

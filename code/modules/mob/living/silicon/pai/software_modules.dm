@@ -121,11 +121,11 @@
 	toggle = 0
 
 	on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui=null, force_open=1)
-		data_core.get_manifest_json()
+		data_core.get_manifest_list()
 
 		var/data[0]
 		// This is dumb, but NanoUI breaks if it has no data to send
-		data["manifest"] = list("__json_cache" = ManifestJSON)
+		data["manifest"] = PDA_Manifest
 
 		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
@@ -208,7 +208,10 @@
 					return alert("Communications circuits remain uninitialized.")
 
 				var/target = locate(href_list["target"])
-				P.pda.create_message(P, target, 1)
+				if(target)
+					P.pda.create_message(P, target, 1)
+				else
+					return alert("Failed to send message: the recipient could not be reached.")
 				return 1
 
 /datum/pai_software/med_records
@@ -463,18 +466,17 @@
 	name = "Universal Translator"
 	ram_cost = 35
 	id = "translator"
+	var/list/languages = list(LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_RESOMI)
 
 	toggle(mob/living/silicon/pai/user)
 		// 	Sol Common, Tradeband and Gutter are added with New() and are therefore the current default, always active languages
 		user.translator_on = !user.translator_on
 		if(user.translator_on)
-			user.add_language(LANGUAGE_UNATHI)
-			user.add_language(LANGUAGE_SIIK_MAAS)
-			user.add_language(LANGUAGE_SKRELLIAN)
+			for(var/language in languages)
+				user.add_language(language)
 		else
-			user.remove_language(LANGUAGE_UNATHI)
-			user.remove_language(LANGUAGE_SIIK_MAAS)
-			user.remove_language(LANGUAGE_SKRELLIAN)
+			for(var/language in languages)
+				user.remove_language(language)
 
 	is_active(mob/living/silicon/pai/user)
 		return user.translator_on

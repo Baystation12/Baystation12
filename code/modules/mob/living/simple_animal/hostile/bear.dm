@@ -112,9 +112,6 @@
 		target_mob = M
 	..()
 
-/mob/living/simple_animal/hostile/bear/Process_Spacemove(var/check_drift = 0)
-	return	//No drifting in space for space bears!
-
 /mob/living/simple_animal/hostile/bear/FindTarget()
 	. = ..()
 	if(.)
