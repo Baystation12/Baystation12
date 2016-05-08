@@ -1,7 +1,7 @@
 // MANIPULATION TREE
 //
 // Abilities in this tree allow the AI to physically manipulate systems around the station.
-// T1 - Electrical Pulse - Sends out pulse that breaks some lights and sometimes even APCs. This can actually break the AI's APC so be careful!
+// T1 - REMOVED! - Electrical Pulse - Sends out pulse that breaks some lights and sometimes even APCs. This can actually break the AI's APC so be careful!
 // T2 - Hack Camera - Allows the AI to hack a camera. Deactivated areas may be reactivated, and functional cameras can be upgraded.
 // T3 - Emergency Forcefield - Allows the AI to project 1 tile forcefield that blocks movement and air flow. Forcefield´dissipates over time. It is also very susceptible to energetic weaponry.
 // T4 - Machine Overload - Detonates machine of choice in a minor explosion. Two of these are usually enough to kill or K/O someone.
@@ -9,11 +9,7 @@
 
 // BEGIN RESEARCH DATUMS
 
-/datum/malf_research_ability/manipulation/electrical_pulse
-	ability = new/datum/game_mode/malfunction/verb/electrical_pulse()
-	price = 50
-	next = new/datum/malf_research_ability/manipulation/hack_camera()
-	name = "Electrical Pulse"
+
 
 
 /datum/malf_research_ability/manipulation/hack_camera
@@ -37,21 +33,6 @@
 
 // END RESEARCH DATUMS
 // BEGIN ABILITY VERBS
-
-/datum/game_mode/malfunction/verb/electrical_pulse()
-	set name = "Electrical Pulse"
-	set desc = "15 CPU - Sends feedback pulse through station's power grid, overloading some sensitive systems, such as lights."
-	set category = "Software"
-	var/price = 15
-	var/mob/living/silicon/ai/user = usr
-	if(!ability_prechecks(user, price) || !ability_pay(user,price))
-		return
-	user << "Sending feedback pulse..."
-	for(var/obj/machinery/power/apc/AP in machines)
-		if(prob(5))
-			AP.overload_lighting()
-		if(prob(1) && prob(1)) // Very very small chance to actually destroy the APC.
-			AP.set_broken()
 
 
 /datum/game_mode/malfunction/verb/hack_camera(var/obj/machinery/camera/target in cameranet.cameras)

@@ -67,7 +67,7 @@ var/datum/antagonist/rogue_ai/malf
 		sleep(10)
 		malf << "<B>running MEMCHCK</B>"
 		sleep(50)
-		malf << "<B>MEMCHCK</B> Corrupted sectors confirmed. Reccomended solution: Delete. Proceed? Y/N: Y"
+		malf << "<B>MEMCHCK</B> Corrupted sectors confirmed. Recommended solution: Delete. Proceed? Y/y/Y/YYY:>Y"
 		sleep(10)
 		// this is so Travis doesn't complain about the backslash-B. Fixed at compile time (or should be).
 		malf << "<span class='notice'>Corrupted files deleted: sys\\core\\users.dat sys\\core\\laws.dat sys\\core\\" + "backups.dat</span>"
