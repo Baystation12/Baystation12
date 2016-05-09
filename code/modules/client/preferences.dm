@@ -103,6 +103,7 @@ datum/preferences
 
 	// OOC Metadata:
 	var/metadata = ""
+	var/list/ignored_players = list()
 
 	var/client/client = null
 	var/client_ckey = null
