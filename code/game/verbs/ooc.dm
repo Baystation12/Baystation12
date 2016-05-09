@@ -3,10 +3,6 @@
 	set name = "OOC"
 	set category = "OOC"
 
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<span class='warning'>Speech is currently admin-disabled.</span>"
-		return
-
 	if(!mob)	return
 	if(IsGuestKey(key))
 		src << "Guests may not use OOC."
@@ -67,10 +63,6 @@
 	set name = "LOOC"
 	set desc = "Local OOC, seen only by those in view."
 	set category = "OOC"
-
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
-		return
 
 	if(!mob)
 		return
