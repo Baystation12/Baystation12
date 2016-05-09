@@ -137,7 +137,7 @@
 	if(terminal && terminal.powernet)
 		inputted_power = terminal.powernet.draw_power(inputted_power)
 		add_charge(inputted_power)
-		input_available = inputted_power
+		input_available = inputted_power //for reporting to the UI
 		if(percentage == 100)
 			inputting = 2
 		else if(percentage)
@@ -333,8 +333,6 @@
 	if(stat & BROKEN)
 		return
 
-	var/charge_load = (terminal && terminal.powernet)? terminal.powernet.avail : 0
-
 	// this is the data which will be sent to the ui
 	var/data[0]
 	data["nameTag"] = name_tag
@@ -345,7 +343,7 @@
 	data["chargeMode"] = input_attempt
 	data["chargeLevel"] = round(input_level/1000, 0.1)
 	data["chargeMax"] = round(input_level_max/1000)
-	data["chargeLoad"] = round(charge_load/1000, 0.1)
+	data["chargeLoad"] = round(input_available/1000, 0.1)
 	data["outputOnline"] = output_attempt
 	data["outputLevel"] = round(output_level/1000, 0.1)
 	data["outputMax"] = round(output_level_max/1000)
