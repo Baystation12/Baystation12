@@ -173,6 +173,10 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	flags_inv = HIDEJUMPSUIT
 
+/obj/item/clothing/suit/cardborg/initialize()
+	..()
+	set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
+
 /*
  * Misc
  */

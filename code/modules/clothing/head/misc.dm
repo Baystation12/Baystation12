@@ -102,6 +102,10 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
 
+/obj/item/clothing/head/cardborg/initialize()
+	..()
+	set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
+
 /obj/item/clothing/head/justice
 	name = "justice hat"
 	desc = "fight for what's righteous!"
