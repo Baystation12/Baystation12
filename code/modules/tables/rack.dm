@@ -15,11 +15,8 @@
 /obj/structure/table/rack/initialize()
 	..()
 	//arrange everything on our turf, similar to how closets store everything on theirs
-	var/index = 1
 	for(var/obj/item/I in src.loc)
-		if(I.anchored) //prevent arranging intercoms, among other possible things
-			continue
-		arrange_item(I, index++)
+		place_item(I, null) //inefficient, but saves us some copypasta
 
 /obj/structure/table/rack/update_connections()
 	return
