@@ -13,6 +13,7 @@
 	icon_state = "cloak"
 
 	toggleable = 1
+	usable = 1
 	disruptable = 1
 	disruptive = 0
 
@@ -21,6 +22,7 @@
 	passive_power_cost = 0
 	module_cooldown = 30
 
+	engage_string = "Quick Charge Cloak"
 	activate_string = "Enable Cloak"
 	deactivate_string = "Disable Cloak"
 
@@ -30,37 +32,40 @@
 	suit_overlay_active =   "stealth_active"
 	suit_overlay_inactive = "stealth_inactive"
 
+	var/datum/cloaking/cloak
+
+/obj/item/rig_module/stealth_field/New()
+	cloak = new()
+	..()
+
+/obj/item/rig_module/stealth_field/Destroy()
+	qdel(cloak)
+	cloak = null
+	. = ..()
+
 /obj/item/rig_module/stealth_field/activate()
-
-	if(!..())
+	if(!..(FALSE))
 		return 0
-
-	var/mob/living/carbon/human/H = holder.wearer
-
-	H << "<font color='blue'><b>You are now invisible to normal detection.</b></font>"
-	H.invisibility = INVISIBILITY_LEVEL_TWO
-
-	anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
-
-	H.visible_message("[H.name] vanishes into thin air!",1)
+	cloak.register_target(holder.wearer)
+	return 1
 
 /obj/item/rig_module/stealth_field/deactivate()
-
 	if(!..())
 		return 0
+	cloak.unregister_target(holder.wearer)
+	return 1
 
-	var/mob/living/carbon/human/H = holder.wearer
+/obj/item/rig_module/stealth_field/engage()
+	if(!active)
+		if(holder && holder.wearer)
+			holder.wearer << "<span class='warning'>Stealth system inactive. Unable to quick charge.</span>"
+		return 0
 
-	H << "<span class='danger'>You are now visible.</span>"
-	H.invisibility = 0
-
-	anim(get_turf(H), H,'icons/mob/mob.dmi',,"uncloak",,H.dir)
-	anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
-
-	for(var/mob/O in oviewers(H))
-		O.show_message("[H.name] appears from thin air!",1)
-	playsound(get_turf(H), 'sound/effects/stealthoff.ogg', 75, 1)
-
+	if(..())
+		cloak.current_alpha_reduction = cloak.max_alpha_reduction
+		cloak.update_alpha()
+		return 1
+	return 0
 
 /obj/item/rig_module/teleporter
 
