@@ -2,7 +2,7 @@
 /datum/room_theme
 	var/wall_type
 	var/floor_type
-	var/door_type
+	var/door_type = /obj/machinery/door/unpowered/simple/iron
 	var/xorigin = 1
 	var/yorigin = 1
 	var/zorigin = 1
@@ -46,8 +46,11 @@
 	for(var/i = -1; i <= 1; i++)
 		for(var/j = -1; j <= 1; j++)
 			var/turf/check = locate(T.x + i, T.y + j, T.z)
+			if(!check)
+				continue
 			for(var/atom/movable/M in check.contents)
-				return 0
+				if(!istype(M, /atom/movable/lighting_overlay) && M.density)
+					return 0
 	if(!T)
 		return 0
 	if(ispath(door_type,/obj/machinery/door/unpowered/simple))
@@ -63,7 +66,6 @@
 /datum/room_theme/metal
 	wall_type = /turf/simulated/wall
 	floor_type = /turf/simulated/floor/plating
-	door_type = /obj/machinery/door/unpowered/simple/iron
 	lock_complexity_max = 2
 	layout_chance = 30
 	room_layouts = list(/datum/random_room/mimic = 1, /datum/random_room/tomb = 1)

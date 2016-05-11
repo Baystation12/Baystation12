@@ -43,7 +43,7 @@ If its complexity is lower than our theme's then
 				var/truey = yorigin + y + j - 1
 				var/cell = map.get_map_cell(x+i,y+j)
 				room_theme.apply_room_theme(truex,truey,map.map[cell])
-				if(generate_doors && !(map.map[cell] == WALL_CHAR || map.map[cell] == ARTIFACT_TURF_CHAR) && (i == 0 || i == width-1 || j == 0 || j == height-1))
+				if(generate_doors && room_theme.door_type && !(map.map[cell] == WALL_CHAR || map.map[cell] == ARTIFACT_TURF_CHAR) && (i == 0 || i == width-1 || j == 0 || j == height-1))
 					var/isGood = 1
 					if(j == 0 || j == height-1) //check horizontally
 						var/curCell = map.map[map.get_map_cell(x+i-1,y+j)]
