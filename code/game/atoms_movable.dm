@@ -62,7 +62,6 @@
 /atom/movable/proc/forceMove(atom/destination, var/special_event)
 	if(loc == destination)
 		return 0
-
 	var/is_origin_turf = isturf(loc)
 	var/is_destination_turf = isturf(destination)
 	// It is a new area if:
@@ -257,7 +256,7 @@
 		return
 
 	var/new_x
-	var/new_y	
+	var/new_y
 	var/new_z = src.get_transit_zlevel()
 	if(new_z)
 		if(x <= TRANSITIONEDGE)
@@ -276,10 +275,9 @@
 			new_y = TRANSITIONEDGE + 1
 			new_x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
-		spawn(0)
-			var/turf/T = locate(new_x, new_y, new_z)
-			if(T)
-				forceMove(T)
+		var/turf/T = locate(new_x, new_y, new_z)
+		if(T)
+			forceMove(T)
 
 //This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
 var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "6" = 60)

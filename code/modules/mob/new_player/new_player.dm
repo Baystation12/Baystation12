@@ -522,3 +522,6 @@
 
 mob/new_player/MayRespawn()
 	return 1
+
+/mob/new_player/touch_map_edge()
+	return

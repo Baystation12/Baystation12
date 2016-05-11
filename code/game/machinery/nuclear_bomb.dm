@@ -431,6 +431,3 @@ if(!N.lighthack)
 		else
 			log_and_message_admins("[src], the last authentication disk, has been destroyed. Failed to respawn disc!")
 	return ..()
-
-/obj/item/weapon/disk/nuclear/touch_map_edge()
-	qdel(src)
