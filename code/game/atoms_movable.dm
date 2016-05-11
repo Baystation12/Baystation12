@@ -256,30 +256,32 @@
 		overmap_spacetravel(get_turf(src), src)
 		return
 
-	var/new_x
-	var/new_y	
-	var/new_z = src.get_transit_zlevel()
-	if(new_z)
+	var/move_to_z = src.get_transit_zlevel()
+	if(move_to_z)
+		z = move_to_z
+
 		if(x <= TRANSITIONEDGE)
-			new_x = world.maxx - TRANSITIONEDGE - 2
-			new_y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+			x = world.maxx - TRANSITIONEDGE - 2
+			y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
 
 		else if (x >= (world.maxx - TRANSITIONEDGE + 1))
-			new_x = TRANSITIONEDGE + 1
-			new_y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+			x = TRANSITIONEDGE + 1
+			y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
 
 		else if (y <= TRANSITIONEDGE)
-			new_y = world.maxy - TRANSITIONEDGE -2
-			new_x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+			y = world.maxy - TRANSITIONEDGE -2
+			x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
 		else if (y >= (world.maxy - TRANSITIONEDGE + 1))
-			new_y = TRANSITIONEDGE + 1
-			new_x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+			y = TRANSITIONEDGE + 1
+			x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+
+		if(ticker && istype(ticker.mode, /datum/game_mode/nuclear)) //only really care if the game mode is nuclear
+			var/datum/game_mode/nuclear/G = ticker.mode
+			G.check_nuke_disks()
 
 		spawn(0)
-			var/turf/T = locate(new_x, new_y, new_z)
-			if(T)
-				forceMove(T)
+			if(loc) loc.Entered(src)
 
 //This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
 var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "6" = 60)
