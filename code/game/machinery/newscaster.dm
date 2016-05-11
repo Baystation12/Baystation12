@@ -128,8 +128,6 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	desc = "A standard newsfeed handler for use on commercial space stations. All the news you absolutely have no use for, in one place!"
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "newscaster_normal"
-	var/isbroken = 0  //1 if someone banged it with something heavy
-	var/ispowered = 1 //starts powered, changes with power_change()
 	//var/list/datum/feed_channel/channel_list = list() //This list will contain the names of the feed channels. Each name will refer to a data region where the messages of the feed channels are stored.
 	//OBSOLETE: We're now using a global news network
 	var/screen = 0                  //Or maybe I'll make it into a list within a list afterwards... whichever I prefer, go fuck yourselves :3
@@ -187,11 +185,11 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	..()
 
 /obj/machinery/newscaster/update_icon()
-	if(!ispowered || isbroken)
+	if(inoperable())
 		icon_state = "newscaster_off"
-		if(isbroken) //If the thing is smashed, add crack overlay on top of the unpowered sprite.
-			src.overlays.Cut()
-			src.overlays += image(src.icon, "crack3")
+		if(stat & BROKEN) //If the thing is smashed, add crack overlay on top of the unpowered sprite.
+			overlays.Cut()
+			overlays += image(src.icon, "crack3")
 		return
 
 	src.overlays.Cut() //reset overlays
@@ -209,41 +207,12 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	icon_state = "newscaster_normal"
 	return
 
-/obj/machinery/newscaster/power_change()
-	if(isbroken) //Broken shit can't be powered.
-		return
-	. = ..()
-	if( !(stat & NOPOWER) )
-		src.ispowered = 1
-	else
-		src.ispowered = 0
-
-
-/obj/machinery/newscaster/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			src.isbroken=1
-			if(prob(50))
-				qdel(src)
-			else
-				src.update_icon() //can't place it above the return and outside the if-else. or we might get runtimes of null.update_icon() if(prob(50)) goes in.
-			return
-		else
-			if(prob(50))
-				src.isbroken=1
-			src.update_icon()
-			return
-	return
-
 /obj/machinery/newscaster/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 
 /obj/machinery/newscaster/attack_hand(mob/user as mob)            //########### THE MAIN BEEF IS HERE! And in the proc below this...############
 
-	if(!src.ispowered || src.isbroken)
+	if(inoperable())
 		return
 
 	if(!user.IsAdvancedToolUser())
@@ -741,7 +710,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 
 /obj/machinery/newscaster/attackby(obj/item/I as obj, mob/user as mob)
-	if (src.isbroken)
+	if (stat & BROKEN)
 		playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 100, 1)
 		for (var/mob/O in hearers(5, src.loc))
 			O.show_message("<EM>[user.name]</EM> further abuses the shattered [src.name].")
@@ -755,10 +724,10 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 					playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
 			else
 				src.hitstaken++
-				if(src.hitstaken==3)
+				if(hitstaken==3)
 					for (var/mob/O in hearers(5, src.loc))
 						O.show_message("[user.name] smashes the [src.name]!" )
-					src.isbroken=1
+					stat |= BROKEN
 					playsound(src.loc, 'sound/effects/Glassbr3.ogg', 100, 1)
 				else
 					for (var/mob/O in hearers(5, src.loc))
@@ -766,7 +735,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 					playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
 		else
 			user << "<span class='notice'>This does nothing.</span>"
-	src.update_icon()
+	update_icon()
 
 /obj/machinery/newscaster/attack_ai(mob/user as mob)
 	return src.attack_hand(user) //or maybe it'll have some special functions? No idea.

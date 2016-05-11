@@ -37,9 +37,9 @@
 		lock = new(src,locked)
 
 	if(material.opacity < 0.5)
+		glass = 1
 		set_opacity(0)
 	else
-		glass = 1
 		set_opacity(1)
 	update_icon()
 
