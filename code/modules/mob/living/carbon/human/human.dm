@@ -1212,35 +1212,28 @@
 		W.message = message
 		W.add_fingerprint(src)
 
-/mob/living/carbon/human/can_inject(var/mob/user, var/error_msg, var/target_zone)
-	. = 1
-
-	if(!target_zone)
-		if(!user)
-			target_zone = pick("chest","chest","chest","left leg","right leg","left arm", "right arm", "head")
-		else
-			target_zone = user.zone_sel.selecting
-
+#define CAN_INJECT 1
+#define INJECTION_PORT 2
+/mob/living/carbon/human/can_inject(var/mob/user, var/target_zone)
 	var/obj/item/organ/external/affecting = get_organ(target_zone)
-	var/fail_msg
+
 	if(!affecting)
-		. = 0
-		fail_msg = "They are missing that limb."
-	else if (affecting.status & ORGAN_ROBOT)
-		. = 0
-		fail_msg = "That limb is robotic."
-	else
-		switch(target_zone)
-			if("head")
-				if(head && head.item_flags & THICKMATERIAL)
-					. = 0
+		user << "<span class='warning'>They are missing that limb.</span>"
+		return 0
+
+	if(affecting.status & ORGAN_ROBOT)
+		user << "<span class='warning'>That limb is robotic.</span>"
+		return 0
+
+	. = CAN_INJECT
+	for(var/obj/item/clothing/C in list(head, wear_mask, wear_suit, w_uniform, gloves, shoes))
+		if(C && (C.body_parts_covered & affecting.body_part) && (C.item_flags & THICKMATERIAL))
+			if(istype(C, /obj/item/clothing/suit/space))
+				. = INJECTION_PORT //it was going to block us, but it's a space suit so it doesn't because it has some kind of port
 			else
-				if(wear_suit && wear_suit.item_flags & THICKMATERIAL)
-					. = 0
-	if(!. && error_msg && user)
-		if(!fail_msg)
-			fail_msg = "There is no exposed flesh or thin material [target_zone == "head" ? "on their head" : "on their body"] to inject into."
-		user << "<span class='alert'>[fail_msg]</span>"
+				user << "<span class='warning'>There is no exposed flesh or thin material on [src]'s [affecting.name] to inject into.</span>"
+				return 0
+
 
 /mob/living/carbon/human/print_flavor_text(var/shrink = 1)
 	var/list/equipment = list(src.head,src.wear_mask,src.glasses,src.w_uniform,src.wear_suit,src.gloves,src.shoes)
