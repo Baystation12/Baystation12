@@ -1,24 +1,3 @@
-/obj/item/clothing/head/helmet/space/rig/industrial
-	camera_networks = list(NETWORK_MINE)
-
-/obj/item/clothing/head/helmet/space/rig/ce
-	camera_networks = list(NETWORK_ENGINEERING)
-
-/obj/item/clothing/head/helmet/space/rig/eva
-	light_overlay = "helmet_light_dual"
-	camera_networks = list(NETWORK_ENGINEERING)
-
-/obj/item/clothing/head/helmet/space/rig/hazmat
-	light_overlay = "hardhat_light"
-	camera_networks = list(NETWORK_RESEARCH)
-
-/obj/item/clothing/head/helmet/space/rig/medical
-	camera_networks = list(NETWORK_MEDICAL)
-
-/obj/item/clothing/head/helmet/space/rig/hazard
-	light_overlay = "helmet_light_dual"
-	camera_networks = list(NETWORK_SECURITY)
-
 /obj/item/weapon/rig/internalaffairs
 	name = "augmented tie"
 	suit_type = "augmented suit"
@@ -68,13 +47,28 @@
 	offline_vision_restriction = 2
 	emp_protection = -20
 
+	chest_type = /obj/item/clothing/suit/space/rig/industrial
 	helm_type = /obj/item/clothing/head/helmet/space/rig/industrial
+	boot_type = /obj/item/clothing/shoes/magboots/rig/industrial
+	glove_type = /obj/item/clothing/gloves/rig/industrial
 
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
 
 	req_access = list()
 	req_one_access = list()
 
+/obj/item/clothing/head/helmet/space/rig/industrial
+	camera_networks = list(NETWORK_MINE)
+	species_restricted = list("Human")
+
+/obj/item/clothing/suit/space/rig/industrial
+	species_restricted = list("Human","Skrell")
+
+/obj/item/clothing/shoes/magboots/rig/industrial
+	species_restricted = list("Human","Skrell")
+
+/obj/item/clothing/gloves/rig/industrial
+	species_restricted = list("Human","Skrell")
 
 /obj/item/weapon/rig/industrial/equipped
 
@@ -96,12 +90,29 @@
 	offline_slowdown = 1
 	offline_vision_restriction = 1
 
+	chest_type = /obj/item/clothing/suit/space/rig/eva
 	helm_type = /obj/item/clothing/head/helmet/space/rig/eva
+	boot_type = /obj/item/clothing/shoes/magboots/rig/eva
+	glove_type = /obj/item/clothing/gloves/rig/eva
 
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/weapon/rcd)
 
 	req_access = list()
 	req_one_access = list()
+	
+/obj/item/clothing/head/helmet/space/rig/eva
+	light_overlay = "helmet_light_dual"
+	camera_networks = list(NETWORK_ENGINEERING)
+	species_restricted = list("Human")
+
+/obj/item/clothing/suit/space/rig/eva
+	species_restricted = list("Human","Skrell")
+
+/obj/item/clothing/shoes/magboots/rig/eva
+	species_restricted = list("Human","Skrell")
+
+/obj/item/clothing/gloves/rig/eva
+	species_restricted = list("Human","Skrell")
 
 /obj/item/weapon/rig/eva/equipped
 
@@ -124,16 +135,15 @@
 	offline_slowdown = 0
 	offline_vision_restriction = 0
 
+	chest_type = /obj/item/clothing/suit/space/rig/ce
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ce
+	boot_type = null
+	glove_type = null
 
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
 
-
 	req_access = list()
 	req_one_access = list()
-
-	boot_type =  null
-	glove_type = null
 
 /obj/item/weapon/rig/ce/equipped
 
@@ -147,10 +157,9 @@
 		/obj/item/rig_module/vision/meson
 		)
 
-	chest_type = /obj/item/clothing/suit/space/rig/ce
-	boot_type =  null
-	glove_type = null
-
+/obj/item/clothing/head/helmet/space/rig/ce
+	camera_networks = list(NETWORK_ENGINEERING)
+	
 /obj/item/clothing/suit/space/rig/ce
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
@@ -165,14 +174,29 @@
 	online_slowdown = 1
 	offline_vision_restriction = 1
 
+	chest_type = /obj/item/clothing/suit/space/rig/hazmat
 	helm_type = /obj/item/clothing/head/helmet/space/rig/hazmat
-
-	helm_type = /obj/item/clothing/head/helmet/space/rig/ert
+	boot_type = /obj/item/clothing/shoes/magboots/rig/hazmat
+	glove_type = /obj/item/clothing/gloves/rig/hazmat
 
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/weapon/storage/excavation,/obj/item/weapon/pickaxe,/obj/item/device/healthanalyzer,/obj/item/device/measuring_tape,/obj/item/device/ano_scanner,/obj/item/device/depth_scanner,/obj/item/device/core_sampler,/obj/item/device/gps,/obj/item/device/beacon_locator,/obj/item/device/radio/beacon,/obj/item/weapon/pickaxe/hand,/obj/item/weapon/storage/bag/fossils)
 
 	req_access = list()
 	req_one_access = list()
+	
+/obj/item/clothing/head/helmet/space/rig/hazmat
+	light_overlay = "helmet_light_dual"
+	camera_networks = list(NETWORK_RESEARCH)
+	species_restricted = list("Human")
+
+/obj/item/clothing/suit/space/rig/hazmat
+	species_restricted = list("Human","Skrell")
+
+/obj/item/clothing/shoes/magboots/rig/hazmat
+	species_restricted = list("Human","Skrell")
+
+/obj/item/clothing/gloves/rig/hazmat
+	species_restricted = list("Human","Skrell")
 
 /obj/item/weapon/rig/hazmat/equipped
 
@@ -194,12 +218,28 @@
 	online_slowdown = 1
 	offline_vision_restriction = 1
 
+	chest_type = /obj/item/clothing/suit/space/rig/medical
 	helm_type = /obj/item/clothing/head/helmet/space/rig/medical
+	boot_type = /obj/item/clothing/shoes/magboots/rig/medical
+	glove_type = /obj/item/clothing/gloves/rig/medical
 
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/stack/medical,/obj/item/roller )
 
 	req_access = list()
 	req_one_access = list()
+	
+/obj/item/clothing/head/helmet/space/rig/medical
+	camera_networks = list(NETWORK_MEDICAL)
+	species_restricted = list("Human")
+
+/obj/item/clothing/suit/space/rig/medical
+	species_restricted = list("Human","Skrell")
+
+/obj/item/clothing/shoes/magboots/rig/medical
+	species_restricted = list("Human","Skrell")
+
+/obj/item/clothing/gloves/rig/medical
+	species_restricted = list("Human","Skrell")
 
 /obj/item/weapon/rig/medical/equipped
 
@@ -222,13 +262,29 @@
 	offline_slowdown = 3
 	offline_vision_restriction = 1
 
+	chest_type = /obj/item/clothing/suit/space/rig/hazard
 	helm_type = /obj/item/clothing/head/helmet/space/rig/hazard
+	boot_type = /obj/item/clothing/shoes/magboots/rig/hazard
+	glove_type = /obj/item/clothing/gloves/rig/hazard
 
-	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/melee/baton)
+	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/melee/baton)
 
 	req_access = list()
 	req_one_access = list()
+	
+/obj/item/clothing/head/helmet/space/rig/hazard
+	light_overlay = "helmet_light_dual"
+	camera_networks = list(NETWORK_SECURITY)
+	species_restricted = list("Human")
 
+/obj/item/clothing/suit/space/rig/hazard
+	species_restricted = list("Human","Skrell")
+
+/obj/item/clothing/shoes/magboots/rig/hazard
+	species_restricted = list("Human","Skrell")
+
+/obj/item/clothing/gloves/rig/hazard
+	species_restricted = list("Human","Skrell")
 
 /obj/item/weapon/rig/hazard/equipped
 
