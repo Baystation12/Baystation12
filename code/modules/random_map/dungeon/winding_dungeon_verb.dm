@@ -57,7 +57,7 @@
 			if("room_theme")
 				total_types = typesof(/datum/room_theme)
 			if("monsters")
-				total_types = subtypesof(/mob/living/simple_animal/hostile)
+				total_types = subtypesof(/mob/living)
 			if("loot")
 				total_types = subtypesof(/obj/item)
 		while(1)

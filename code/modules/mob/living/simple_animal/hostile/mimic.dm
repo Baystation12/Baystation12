@@ -38,8 +38,8 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 	faction = "mimic"
 	move_to_delay = 8
 
-	var/atom/movable/copy_of = null
-	var/mob/living/creator = null // the creator
+	var/datum/weakref/copy_of
+	var/datum/weakref/creator // the creator
 	var/destroy_objects = 0
 	var/knockdown_people = 0
 
@@ -59,17 +59,13 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 	// Return a list of targets that isn't the creator
 	. = ..()
 	if(creator)
-		return . - creator
-
-/mob/living/simple_animal/hostile/mimic/death()
-	..()
-	qdel(src)
+		return . - creator.resolve()
 
 /mob/living/simple_animal/hostile/mimic/proc/CopyObject(var/obj/O, var/mob/living/creator)
 
 	if((istype(O, /obj/item) || istype(O, /obj/structure)) && !is_type_in_list(O, protected_objects))
 		O.forceMove(src)
-		copy_of = O
+		copy_of = weakref(O)
 		appearance = O
 		icon_living = icon_state
 
@@ -89,21 +85,22 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 
 		maxHealth = health
 		if(creator)
-			src.creator = creator
+			src.creator = weakref(creator)
 			faction = "\ref[creator]" // very unique
 		return 1
 	return
 
 /mob/living/simple_animal/hostile/mimic/death()
-	copy_of.forceMove(src.loc)
+	var/atom/movable/C = copy_of.resolve()
+	C.forceMove(src.loc)
 
-	if(istype(copy_of,/obj/structure/closet))
+	if(istype(C,/obj/structure/closet))
 		for(var/atom/movable/M in src)
-			M.forceMove(copy_of)
+			M.forceMove(C)
 		return
 
-	if(istype(copy_of,/obj/item/weapon/storage))
-		var/obj/item/weapon/storage/S = copy_of
+	if(istype(C,/obj/item/weapon/storage))
+		var/obj/item/weapon/storage/S = C
 		for(var/atom/movable/M in src)
 			if(S.can_be_inserted(M,1))
 				S.handle_item_insertion(M)
@@ -114,6 +111,7 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 	for(var/atom/movable/M in src)
 		M.loc = get_turf(src)
 	..()
+	qdel(src)
 
 /mob/living/simple_animal/hostile/mimic/DestroySurroundings()
 	if(destroy_objects)
@@ -127,6 +125,11 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 			if(prob(15))
 				L.Weaken(1)
 				L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
+
+/mob/living/simple_animal/hostile/mimic/Destroy()
+	copy_of = null
+	creator = null
+	..()
 
 /mob/living/simple_animal/hostile/mimic/sleeping
 	wander = 0
