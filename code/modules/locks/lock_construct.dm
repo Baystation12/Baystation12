@@ -22,7 +22,7 @@
 			user << "<span class='warning'>\The [I] already unlocks something...</span>"
 		return
 	if(istype(I,/obj/item/weapon/material/lock_construct))
-		var/obj/item/weapon/material/lock_contruct/L = I
+		var/obj/item/weapon/material/lock_construct/L = I
 		src.lock_data = L.lock_data
 		user << "<span class='notice'>You copy the lock from \the [L] to \the [src], making them identical.</span>"
 		return
