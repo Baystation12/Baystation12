@@ -479,10 +479,12 @@
 	return new_character
 
 /mob/new_player/proc/ViewManifest()
-	var/dat = "<html><body>"
-	dat += "<h4>Show Crew Manifest</h4>"
+	var/dat = "<div align='center'>"
 	dat += data_core.get_manifest(OOC = 1)
-	src << browse(dat, "window=manifest;size=370x420;can_close=1")
+	//src << browse(dat, "window=manifest;size=370x420;can_close=1")
+	var/datum/browser/popup = new(src, "Crew Manifest", "Crew Manifest", 370, 420, src)
+	popup.set_content(dat)
+	popup.open()
 
 /mob/new_player/Move()
 	return 0
