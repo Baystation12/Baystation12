@@ -5,7 +5,7 @@
 	density = 1
 	var/health = 100.0
 	flags = CONDUCT
-	w_class = 5
+	w_class = 6
 
 	var/valve_open = 0
 	var/release_pressure = ONE_ATMOSPHERE

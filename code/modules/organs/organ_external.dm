@@ -1128,7 +1128,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	icon_name = "torso"
 	max_damage = 100
 	min_broken_damage = 35
-	w_class = 5
+	w_class = 5 //Used for dismembering thresholds, in addition to storage. Humans are w_class 6, so it makes sense that chest is w_class 5.
 	body_part = UPPER_TORSO
 	vital = 1
 	amputation_point = "spine"
@@ -1145,7 +1145,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	icon_name = "groin"
 	max_damage = 100
 	min_broken_damage = 35
-	w_class = 5
+	w_class = 4
 	body_part = LOWER_TORSO
 	vital = 1
 	parent_organ = "chest"

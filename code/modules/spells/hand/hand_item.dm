@@ -7,7 +7,7 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	icon = 'icons/mob/screen1.dmi'
 	flags = 0
 	abstract = 1
-	w_class = 5.0
+	w_class = DO_NOT_STORE
 	icon_state = "spell"
 	var/next_spell_time = 0
 	var/spell/hand/hand_spell

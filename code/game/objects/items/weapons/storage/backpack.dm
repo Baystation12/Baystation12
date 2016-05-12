@@ -150,7 +150,7 @@
 	desc = "A large dufflebag for holding extra things."
 	icon_state = "duffle"
 	item_state_slots = null
-	w_class = 5
+	w_class = 6
 	slowdown_general = 1
 	max_storage_space = DEFAULT_BACKPACK_STORAGE + 10
 

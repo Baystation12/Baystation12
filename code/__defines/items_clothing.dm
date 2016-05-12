@@ -181,6 +181,21 @@
 #define SUIT_SENSOR_TRACKING 3
 
 // Storage
+
+/*
+	A note on w_classes - this is an attempt to describe the w_classes currently in use
+	with an attempt at providing examples of the kinds of things that fit each w_class
+
+	1 - tiny items - things like screwdrivers and pens, sheets of paper
+	2 - small items - things that can fit in a pocket
+	3 - normal items
+	4 - large items - the largest things you can fit in a backpack
+	5 - bulky items - backpacks are this size, for reference
+	6 - human sized objects
+	7 - things that are large enough to contain humans, like closets, but smaller than entire turfs
+	8 - things that take up an entire turf, like wall girders or door assemblies
+*/
+
 #define base_storage_cost(w_class) (2**(w_class-1)) //1,2,4,8,16,...
 
 #define DO_NOT_STORE INFINITY //A special storage "cost" that indicates an item should not be storable
