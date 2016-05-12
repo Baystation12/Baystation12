@@ -27,7 +27,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 		..()
 
 /obj/item/weapon/board/proc/addPiece(obj/item/I as obj, mob/user as mob, var/tile = 0)
-	if(I.w_class != 1) //only small stuff
+	if(I.w_class != TINY_ITEM) //only small stuff
 		user.show_message("<span class='warning'>\The [I] is too big to be used as a board piece.</span>")
 		return 0
 	if(num == 64)

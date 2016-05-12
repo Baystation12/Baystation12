@@ -45,7 +45,7 @@
 		user << "<span class='notice'>You find putting an evidence bag in another evidence bag to be slightly absurd.</span>"
 		return
 
-	if(I.w_class > 3)
+	if(I.w_class > NORMAL_ITEM)
 		user << "<span class='notice'>[I] won't fit in [src].</span>"
 		return
 
