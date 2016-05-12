@@ -329,9 +329,13 @@
 	if(status_flags & GODMODE)
 		return
 
-	//check if we actually need to process breath
-	if(!breath || (breath.total_moles == 0))
+	var/obj/item/organ/lungs/L = internal_organs_by_name["lungs"]
+	if(!L && species.has_organ["lungs"])
 		failed_last_breath = 1
+	else
+		failed_last_breath = L.handle_breath(breath) //if breath is null or vacuum, the lungs will handle it for us
+
+	if(failed_last_breath)
 		if(prob(20))
 			emote("gasp")
 		if(health > config.health_threshold_crit)
@@ -341,11 +345,6 @@
 
 		oxygen_alert = max(oxygen_alert, 1)
 		return 0
-	var/obj/item/organ/lungs/L = internal_organs_by_name["lungs"]
-	if(L && L.handle_breath(breath))
-		failed_last_breath = 0
-	else
-		failed_last_breath = 1
 	return 1
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)

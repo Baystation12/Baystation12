@@ -41,17 +41,23 @@
 			spawn owner.emote("me", 1, "gasps for air!")
 			owner.losebreath += 15
 
+/obj/item/organ/lungs/proc/rupture()
+	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
+	if(istype(parent))
+		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 1)
+	bruise()
 
 /obj/item/organ/lungs/proc/handle_breath(datum/gas_mixture/breath)
 	if(!owner)
-		return 0
+		return 1
 	if(!breath)
-		return 0
+		return 1
 	//exposure to extreme pressures can rupture lungs
 	if(breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5)
-		if(is_bruised() && prob(5))
-			owner.custom_pain("You feel a stabbing pain in your chest!", 1)
-			bruise()
+		if(!is_bruised() && prob(5)) //only rupture if NOT already ruptured
+			rupture()
+	if(breath.total_moles == 0)
+		return 1
 
 	var/safe_pressure_min = min_breath_pressure // Minimum safe partial pressure of breathable gas in kPa
 	// Lung damage increases the minimum safe pressure.
@@ -149,7 +155,7 @@
 	handle_temperature_effects(breath)
 
 	breath.update_values()
-	return !failed_breath
+	return failed_breath
 
 /obj/item/organ/lungs/proc/handle_temperature_effects(datum/gas_mixture/breath)
 	// Hot air hurts :(

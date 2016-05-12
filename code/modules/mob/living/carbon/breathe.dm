@@ -24,6 +24,8 @@
 		breath = get_breath_from_internal() //First, check for air from internals
 		if(!breath)
 			breath = get_breath_from_environment() //No breath from internals so let's try to get air from our location
+		if(!breath)
+			breath = new //still nothing? must be vacuum
 
 	handle_breath(breath)
 	handle_post_breath(breath)
