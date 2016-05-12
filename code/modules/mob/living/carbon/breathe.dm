@@ -25,7 +25,10 @@
 		if(!breath)
 			breath = get_breath_from_environment() //No breath from internals so let's try to get air from our location
 		if(!breath)
-			breath = new //still nothing? must be vacuum
+			var/static/datum/gas_mixture/vacuum //avoid having to create a new gas mixture for each breath in space
+			if(!vacuum) vacuum = new
+
+			breath = vacuum //still nothing? must be vacuum
 
 	handle_breath(breath)
 	handle_post_breath(breath)
