@@ -90,7 +90,7 @@
 	icon = 'icons/obj/device.dmi'
 
 //Checks if the item is being held by a mob, and if so, updates the held icons
-/obj/item/proc/update_held_icon()
+/obj/item/proc/update_twohanding()
 	if(ismob(src.loc))
 		var/mob/M = src.loc
 		if(M.l_hand == src)
@@ -273,9 +273,9 @@
 	if(!istype(M))
 		return
 	if(M.l_hand)
-		M.l_hand.update_held_icon()
+		M.l_hand.update_twohanding()
 	if(M.r_hand)
-		M.r_hand.update_held_icon()
+		M.r_hand.update_twohanding()
 
 //Defines which slots correspond to which slot flags
 var/list/global/slot_flags_enumeration = list(

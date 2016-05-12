@@ -27,13 +27,12 @@
 	var/base_name
 	var/unwielded_force_divisor = 0.25
 
-/obj/item/weapon/material/twohanded/update_held_icon()
+/obj/item/weapon/material/twohanded/update_twohanding()
 	var/mob/living/M = loc
 	if(istype(M) && !issmall(M) && is_held_twohanded(M))
 		wielded = 1
 		force = force_wielded
 		name = "[base_name] (wielded)"
-		update_icon()
 	else
 		wielded = 0
 		force = force_unwielded
