@@ -312,3 +312,12 @@ div.notice
 	width: 100%;
 	clear: both;
 }
+
+.statusDisplay
+{
+	background: #000000;
+	color: #ffffff;
+	border: 1px solid #40628a;
+	padding: 4px;
+	margin: 3px 0;
+}
