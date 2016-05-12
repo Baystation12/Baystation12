@@ -347,6 +347,7 @@
 	put_mob(usr)
 	return
 
+//This proc literally only exists for cryo cells.
 /atom/proc/return_air_for_internal_lifeform()
 	return return_air()
 
