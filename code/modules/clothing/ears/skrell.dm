@@ -70,6 +70,18 @@
 	icon_state = "skrell_band_ebony"
 	item_state = "skrell_band_ebony"
 
+/obj/item/clothing/ears/skrell/colored/band
+	name = "Colored headtail bands"
+	desc = "Metallic bands worn by male skrell to adorn their head tails."
+	icon_state = "skrell_band_sil"
+	item_state = "skrell_band_sil"
+	
+/obj/item/clothing/ears/skrell/colored/chain
+	name = "Colored headtail chains"
+	desc = "A delicate chain worn by female skrell to decorate their head tails."
+	icon_state = "skrell_chain_sil"
+	item_state = "skrell_chain_sil"
+	
 /obj/item/clothing/ears/skrell/cloth_female
 	name = "red headtail cloth"
 	desc = "A cloth shawl worn by female skrell draped around their head tails."

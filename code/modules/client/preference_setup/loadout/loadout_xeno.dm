@@ -68,6 +68,26 @@
 		clothtypes[initial(cloth.name)] = cloth
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(clothtypes))
 
+/datum/gear/ears/skrell/colored/band
+	display_name = "Colored bands (Skrell)"
+	path = /obj/item/clothing/ears/skrell/colored/band
+	sort_category = "Xenowear"
+	whitelisted = "Skrell"
+	
+/datum/gear/ears/skrell/colored/band/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+	
+/datum/gear/ears/skrell/colored/chain
+	display_name = "Colored chain (Skrell)"
+	path = /obj/item/clothing/ears/skrell/colored/chain
+	sort_category = "Xenowear"
+	whitelisted = "Skrell"
+	
+/datum/gear/ears/skrell/colored/chain/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
 /datum/gear/uniform/resomi
 	display_name = "smock, grey (Resomi)"
 	path = /obj/item/clothing/under/resomi
