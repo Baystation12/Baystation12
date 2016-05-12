@@ -195,6 +195,12 @@
 	7 - things that are large enough to contain humans, like closets, but smaller than entire turfs
 	8 - things that take up an entire turf, like wall girders or door assemblies
 */
+#define TINY_ITEM   1
+#define SMALL_ITEM  2
+#define NORMAL_ITEM 3
+#define LARGE_ITEM  4
+#define BULKY_ITEM  5
+
 
 #define base_storage_cost(w_class) (2**(w_class-1)) //1,2,4,8,16,...
 
