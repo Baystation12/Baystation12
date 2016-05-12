@@ -91,7 +91,11 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 	return
 
 /mob/living/simple_animal/hostile/mimic/death()
+	if(!copy_of)
+		return
 	var/atom/movable/C = copy_of.resolve()
+	if(!C)
+		return
 	C.forceMove(src.loc)
 
 	if(istype(C,/obj/structure/closet))
