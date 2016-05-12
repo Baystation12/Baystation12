@@ -296,6 +296,11 @@
 		if(!amount)
 			break
 
+/obj/item/stack/get_storage_cost()	//Scales storage cost to stack size
+	. = ..()
+	if (amount < max_amount)
+		. = ceil(. * amount / max_amount)
+
 /obj/item/stack/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)
 		var/obj/item/stack/F = src.split(1)

@@ -13,7 +13,7 @@
 	desc = "A non-descript floor tile."
 	randpixel = 7
 	w_class = 3
-	max_amount = 60
+	max_amount = 100
 
 /*
  * Grass
