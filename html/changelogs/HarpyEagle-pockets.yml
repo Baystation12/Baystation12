@@ -1,0 +1,7 @@
+author: HarpyEagle
+
+delete-after: True
+
+changes: 
+  - rscadd: "Items can now be placed in pockets using the strip UI."
+  - rscadd: "Lit welders can now be placed in pockets. Having a lit welder in your pocket sets you on fire."

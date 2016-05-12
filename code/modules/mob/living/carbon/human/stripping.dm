@@ -1,20 +1,32 @@
-/mob/living/carbon/human/proc/handle_strip(var/slot_to_strip,var/mob/living/user)
+/mob/living/carbon/human/proc/handle_strip(var/slot_to_strip_text,var/mob/living/user)
 
-	if(!slot_to_strip || !istype(user))
+	if(!slot_to_strip_text || !istype(user))
 		return
 
 	if(user.incapacitated()  || !user.Adjacent(src))
 		user << browse(null, text("window=mob[src.name]"))
 		return
 
-	var/obj/item/target_slot = get_equipped_item(text2num(slot_to_strip))
+	var/obj/item/target_slot = get_equipped_item(text2num(slot_to_strip_text))
 
-	switch(slot_to_strip)
+	// Are we placing or stripping?
+	var/stripping
+	var/obj/item/held = user.get_active_hand()
+	if(!istype(held) || is_robot_module(held))
+		stripping = 1
+
+	switch(slot_to_strip_text)
 		// Handle things that are part of this interface but not removing/replacing a given item.
 		if("pockets")
-			visible_message("<span class='danger'>\The [user] is trying to empty \the [src]'s pockets!</span>")
-			if(do_after(user,HUMAN_STRIP_DELAY,progress = 0))
-				empty_pockets(user)
+			if(stripping)
+				visible_message("<span class='danger'>\The [user] is trying to empty [src]'s pockets!</span>")
+				if(do_after(user,HUMAN_STRIP_DELAY,progress = 0))
+					empty_pockets(user)
+			else
+				//should it be possible to discreetly slip something into someone's pockets?
+				visible_message("<span class='danger'>\The [user] is trying to stuff \a [held] into [src]'s pocket!</span>")
+				if(do_after(user,HUMAN_STRIP_DELAY,progress = 0))
+					place_in_pockets(held, user)
 			return
 		if("splints")
 			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s splints!</span>")
@@ -55,18 +67,13 @@
 			update_inv_w_uniform()
 			return
 
-	// Are we placing or stripping?
-	var/stripping
-	var/obj/item/held = user.get_active_hand()
-	if(!istype(held) || is_robot_module(held))
+	if(stripping)
 		if(!istype(target_slot))  // They aren't holding anything valid and there's nothing to remove, why are we even here?
 			return
-		if(!target_slot.canremove)
+		if(!target_slot.mob_can_unequip(src, text2num(slot_to_strip_text), disable_warning=1))
 			user << "<span class='warning'>You cannot remove \the [src]'s [target_slot.name].</span>"
 			return
-		stripping = 1
 
-	if(stripping)
 		visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s [target_slot.name]!</span>")
 	else
 		visible_message("<span class='danger'>\The [user] is trying to put \a [held] on \the [src]!</span>")
@@ -81,9 +88,8 @@
 		admin_attack_log(user, src, "Attempted to remove \a [target_slot]", "Target of an attempt to remove \a [target_slot].", "attempted to remove \a [target_slot] from")
 		unEquip(target_slot)
 	else if(user.unEquip(held))
-		equip_to_slot_if_possible(held, text2num(slot_to_strip), 0, 1, 1)
-		if(held.loc != src)
-			user.put_in_hands(held)
+		if(!equip_to_slot_if_possible(held, text2num(slot_to_strip_text), del_on_fail=0, disable_warning=1, redraw_mob=1))
+			user.put_in_active_hand(held)
 
 // Empty out everything in the target's pockets.
 /mob/living/carbon/human/proc/empty_pockets(var/mob/living/user)
@@ -94,7 +100,19 @@
 		unEquip(r_store)
 	if(l_store)
 		unEquip(l_store)
-	visible_message("<span class='danger'>\The [user] empties \the [src]'s pockets!</span>")
+	visible_message("<span class='danger'>\The [user] empties [src]'s pockets!</span>")
+
+/mob/living/carbon/human/proc/place_in_pockets(obj/item/I, var/mob/living/user)
+	if(!user.unEquip(I))
+		return
+	if(!r_store)
+		if(equip_to_slot_if_possible(I, slot_r_store, del_on_fail=0, disable_warning=1, redraw_mob=1))
+			return
+	if(!l_store)
+		if(equip_to_slot_if_possible(I, slot_l_store, del_on_fail=0, disable_warning=1, redraw_mob=1))
+			return
+	user << "<span class='warning'>You are unable to place [I] in [src]'s pockets.</span>"
+	user.put_in_active_hand(I)
 
 // Modify the current target sensor level.
 /mob/living/carbon/human/proc/toggle_sensors(var/mob/living/user)

@@ -210,22 +210,8 @@
 
 /obj/item/weapon/weldingtool/process()
 	if(welding)
-		if(prob(5))
-			remove_fuel(1)
-
-		if(get_fuel() < 1)
+		if(!remove_fuel(0.05))
 			setWelding(0)
-
-	//I'm not sure what this does. I assume it has to do with starting fires...
-	//...but it doesnt check to see if the welder is on or not.
-	var/turf/location = src.loc
-	if(istype(location, /mob/))
-		var/mob/M = location
-		if(M.l_hand == src || M.r_hand == src)
-			location = get_turf(M)
-	if (istype(location, /turf))
-		location.hotspot_expose(700, 5)
-
 
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
@@ -266,7 +252,7 @@
 	if(!welding)
 		return 0
 	if(get_fuel() >= amount)
-		reagents.remove_reagent("fuel", amount)
+		burn_fuel(amount)
 		if(M)
 			eyecheck(M)
 		return 1
@@ -274,6 +260,26 @@
 		if(M)
 			M << "<span class='notice'>You need more welding fuel to complete this task.</span>"
 		return 0
+
+/obj/item/weapon/weldingtool/proc/burn_fuel(var/amount)
+	var/mob/living/in_mob = null
+
+	//consider ourselves in a mob if we are in the mob's contents and not in their hands
+	if(isliving(src.loc))
+		var/mob/living/L = src.loc
+		if(!(L.l_hand == src || L.r_hand == src))
+			in_mob = L
+
+	if(in_mob)
+		amount = max(amount, 2)
+		reagents.trans_id_to(in_mob, "fuel", amount)
+		in_mob.IgniteMob()
+
+	else
+		reagents.remove_reagent("fuel", amount)
+		var/turf/location = get_turf(src.loc)
+		if(location)
+			location.hotspot_expose(700, 5)
 
 //Returns whether or not the welding tool is currently on.
 /obj/item/weapon/weldingtool/proc/isOn()
@@ -307,7 +313,6 @@
 				T.visible_message("<span class='danger'>\The [src] turns on.</span>")
 			src.force = 15
 			src.damtype = "fire"
-			src.slot_flags |= SLOT_DENYPOCKET //could also make it just set you on fire, but lets disable putting lit welders in pockets for now
 			welding = 1
 			update_icon()
 			processing_objects |= src
@@ -324,7 +329,6 @@
 			T.visible_message("<span class='warning'>\The [src] turns off.</span>")
 		src.force = 3
 		src.damtype = "brute"
-		src.slot_flags = initial(src.slot_flags)
 		src.welding = 0
 		update_icon()
 
