@@ -141,7 +141,7 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 
 /mob/living/simple_animal/hostile/mimic/sleeping/proc/trigger()
 	if(!awake)
-		src.visible_message("<b>\The [src]<b> starts to move!")
+		src.visible_message("<b>\The [src]</b> starts to move!")
 		awake = 1
 
 /mob/living/simple_animal/hostile/mimic/sleeping/adjustBruteLoss(var/damage)
