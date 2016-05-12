@@ -12,36 +12,74 @@
 	whitelisted = "Unathi"
 	sort_category = "Xenowear"
 
-/datum/gear/ears/skrell
-	display_name = "headtail-wear, female, chain (Skrell)"
+/datum/gear/ears/skrell/chains	//Chains
+	display_name = "headtail chain selection (Skrell)"
 	path = /obj/item/clothing/ears/skrell/chain
 	sort_category = "Xenowear"
 	whitelisted = "Skrell"
 
-/datum/gear/ears/skrell/plate
-	display_name = "headtail-wear, male, bands (Skrell)"
+/datum/gear/ears/skrell/chains/New()
+	..()
+	var/list/chaintypes = list()
+	for(var/chain_style in typesof(/obj/item/clothing/ears/skrell/chain))
+		var/obj/item/clothing/ears/skrell/chain/chain = chain_style
+		chaintypes[initial(chain.name)] = chain
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(chaintypes))
+	
+/datum/gear/ears/skrell/bands
+	display_name = "headtail band selection (Skrell)"
 	path = /obj/item/clothing/ears/skrell/band
+	sort_category = "Xenowear"
+	whitelisted = "Skrell"
 
-/datum/gear/ears/skrell/cloth_male
-	display_name = "headtail-wear, male, cloth (Skrell)"
+/datum/gear/ears/skrell/bands/New()
+	..()
+	var/list/bandtypes = list()
+	for(var/band_style in typesof(/obj/item/clothing/ears/skrell/band))
+		var/obj/item/clothing/ears/skrell/band/band = band_style
+		bandtypes[initial(band.name)] = band
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(bandtypes))
+	
+/datum/gear/ears/skrell/cloth/male
+	display_name = "male headtail cloth selection (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_male
+	sort_category = "Xenowear"
+	whitelisted = "Skrell"
 
-/datum/gear/ears/skrell/cloth_female
-	display_name = "headtail-wear, female, cloth (Skrell)"
+/datum/gear/ears/skrell/cloth/male/New()
+	..()
+	var/list/clothtypes = list()
+	for(var/cloth_style in typesof(/obj/item/clothing/ears/skrell/cloth_male))
+		var/obj/item/clothing/ears/skrell/cloth_male/cloth = cloth_style
+		clothtypes[initial(cloth.name)] = cloth
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(clothtypes))
+
+/datum/gear/ears/skrell/cloth/female
+	display_name = "female headtail cloth selection (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_female
+	sort_category = "Xenowear"
+	whitelisted = "Skrell"
+
+/datum/gear/ears/skrell/cloth/female/New()
+	..()
+	var/list/clothtypes = list()
+	for(var/cloth_style in typesof(/obj/item/clothing/ears/skrell/cloth_female))
+		var/obj/item/clothing/ears/skrell/cloth_female/cloth = cloth_style
+		clothtypes[initial(cloth.name)] = cloth
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(clothtypes))
 
 /datum/gear/uniform/resomi
-	display_name = "uniform, grey (Resomi)"
+	display_name = "smock, grey (Resomi)"
 	path = /obj/item/clothing/under/resomi
 	sort_category = "Xenowear"
 	whitelisted = "Resomi"
 
 /datum/gear/uniform/resomi/rainbow
-	display_name = "uniform, rainbow (Resomi)"
+	display_name = "smock, rainbow (Resomi)"
 	path = /obj/item/clothing/under/resomi/rainbow
 
 /datum/gear/uniform/resomi/white
-	display_name = "uniform, white (Resomi)"
+	display_name = "smock, white (Resomi)"
 	path = /obj/item/clothing/under/resomi/white
 
 /datum/gear/uniform/resomi/eng
