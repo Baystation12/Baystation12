@@ -330,7 +330,7 @@
 
 	if (max_w_class != null && W.w_class > max_w_class)
 		if(!stop_messages)
-			usr << "<span class='notice'>[W] is too large for this [src].</span>"
+			usr << "<span class='notice'>[W] is too big for this [src.name].</span>"
 		return 0
 
 	var/total_storage_space = W.get_storage_cost()

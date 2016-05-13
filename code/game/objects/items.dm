@@ -160,11 +160,13 @@
 			size = "tiny"
 		if(SMALL_ITEM)
 			size = "small"
-		if(3.0)
+		if(NORMAL_ITEM)
 			size = "normal-sized"
-		if(4.0)
+		if(LARGE_ITEM)
+			size = "large"
+		if(BULKY_ITEM)
 			size = "bulky"
-		if(5.0)
+		if(BULKY_ITEM + 1 to INFINITY)
 			size = "huge"
 	return ..(user, distance, "", "It is a [size] item.")
 
