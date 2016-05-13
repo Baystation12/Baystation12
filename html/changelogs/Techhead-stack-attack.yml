@@ -1,0 +1,8 @@
+author: Techhead
+
+delete-after: True
+
+changes: 
+  - rscadd: "Stack items now take up storage space proportional to the size of the stack."
+  - tweak: "Materials, rods, and tiles have had their weight class and max stack size adjusted."
+  - rscadd: "Stacks now let you split them in any amount instead of one at a time."
