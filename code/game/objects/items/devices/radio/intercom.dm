@@ -4,11 +4,14 @@
 	icon_state = "intercom"
 	randpixel = 0
 	anchored = 1
-	w_class = DO_NOT_STORE //it's supposed to be embedded in a wall.
+	w_class = 5
 	canhear_range = 2
 	flags = CONDUCT | NOBLOODY
 	var/number = 0
 	var/last_tick //used to delay the powercheck
+
+/obj/item/device/radio/intercom/get_storage_cost()
+	return DO_NOT_STORE
 
 /obj/item/device/radio/intercom/custom
 	name = "station intercom (Custom)"
