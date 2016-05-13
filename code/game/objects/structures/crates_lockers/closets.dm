@@ -154,7 +154,7 @@
 		return M.mob_size
 	if(istype(AM, /obj/item))
 		var/obj/item/I = AM
-		return Ceiling(I.w_class / 2)
+		return (I.w_class / 2)
 	return 0
 
 /obj/structure/closet/proc/toggle(mob/user as mob)

@@ -19,7 +19,7 @@
 			if("screwed")
 				new /obj/effect/spawner/newbomb/timer/syndicate(src)
 				new /obj/effect/spawner/newbomb/timer/syndicate(src)
-				new /obj/item/device/powersink(src)
+				//new /obj/item/device/powersink(src) //too big for backpacks, for now anyways
 				new /obj/item/clothing/suit/space/syndicate(src)
 				new /obj/item/clothing/head/helmet/space/syndicate(src)
 				new /obj/item/clothing/mask/gas/syndicate(src)
