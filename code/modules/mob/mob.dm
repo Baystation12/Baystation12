@@ -14,7 +14,7 @@
 	if(mind && mind.current == src)
 		spellremove(src)
 	ghostize()
-	..()
+	. = ..()
 
 /mob/proc/remove_screen_obj_references()
 	flash = null
