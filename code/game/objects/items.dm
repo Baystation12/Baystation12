@@ -364,6 +364,8 @@ var/list/global/slot_flags_enumeration = list(
 				return 0
 			if( w_class > SMALL_ITEM && !(slot_flags & SLOT_POCKET) )
 				return 0
+			if(get_storage_cost() == DO_NOT_STORE)
+				return 0 //pockets act like storage and should respect DO_NOT_STORE. Suit storage might be fine as is
 		if(slot_s_store)
 			if(!H.wear_suit && (slot_wear_suit in mob_equip))
 				if(!disable_warning)
