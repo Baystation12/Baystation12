@@ -46,7 +46,7 @@ var/list/gear_datums = list()
 	var/mob/preference_mob = preference_mob()
 	for(var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
-		if(G.whitelisted && !is_alien_whitelisted(preference_mob, G.whitelisted))
+		if(G.whitelisted && preference_mob && !is_alien_whitelisted(preference_mob, G.whitelisted))
 			continue
 		if(max_cost && G.cost > max_cost)
 			continue
@@ -96,19 +96,22 @@ var/list/gear_datums = list()
 			firstcat = 0
 		else
 			. += " |"
+
+		var/datum/loadout_category/LC = loadout_categories[category]
+		var/category_cost = 0
+		for(var/gear in LC.gear)
+			if(gear in pref.gear)
+				var/datum/gear/G = LC.gear[gear]
+				category_cost += G.cost
+
 		if(category == current_tab)
-			. += " <span class='linkOn'>[category]</span> "
+			. += " <span class='linkOn'>[category] - [category_cost]</span> "
 		else
-			var/datum/loadout_category/LC = loadout_categories[category]
-			var/make_orange = FALSE
-			for(var/thing in LC.gear)
-				if(thing in pref.gear)
-					make_orange = TRUE
-					break
-			if(make_orange)
-				. += " <a href='?src=\ref[src];select_category=[category]'><font color = '#E67300'>[category]</font></a> "
+			if(category_cost)
+				. += " <a href='?src=\ref[src];select_category=[category]'><font color = '#E67300'>[category] - [category_cost]</font></a> "
 			else
-				. += " <a href='?src=\ref[src];select_category=[category]'>[category]</a> "
+				. += " <a href='?src=\ref[src];select_category=[category]'>[category] - 0</a> "
+
 	. += "</b></center></td></tr>"
 
 	var/datum/loadout_category/LC = loadout_categories[current_tab]
