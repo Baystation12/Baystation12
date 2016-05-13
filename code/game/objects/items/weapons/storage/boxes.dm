@@ -377,6 +377,7 @@
 	desc = "This box holds a nifty portion of checkers. Foam-shaped on the inside so that only checkers may fit."
 	icon_state = "checkers"
 	max_storage_space = 24
+	foldable = null
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/checker)
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/checker = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/checker/red = 12)
