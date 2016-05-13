@@ -12,6 +12,12 @@
 /obj/item/device/mmi/digital/proc/PickName()
 	return
 
+/obj/item/device/mmi/digital/attackby()
+	return
+
+/obj/item/device/mmi/digital/attack_self()
+	return
+
 /obj/item/device/mmi/digital/transfer_identity(var/mob/living/carbon/H)
 	brainmob.dna = H.dna
 	brainmob.timeofhostdeath = H.timeofdeath
