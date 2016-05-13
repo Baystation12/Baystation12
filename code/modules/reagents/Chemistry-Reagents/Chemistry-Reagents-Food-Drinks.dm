@@ -36,6 +36,8 @@
 	affect_ingest(M, alien, removed)
 
 /datum/reagent/nutriment/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	switch(alien)
+		if(IS_UNATHI) removed *= 0.5
 	if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
 	M.heal_organ_damage(0.5 * removed, 0)
 	M.nutrition += nutriment_factor * removed // For hunger and fatness
@@ -62,6 +64,8 @@
 		if(IS_RESOMI)
 			..(M, alien, removed*1.2) // Resomi get a bit more nutrition from meat.
 			return
+		if(IS_UNATHI)
+			..(M, alien, removed*2.25) //Unathi get most of their nutrition from meat.
 	..()
 
 /datum/reagent/nutriment/protein/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -83,6 +87,27 @@
 	taste_description = "sweetness"
 	nutriment_factor = 10
 	color = "#FFFF00"
+
+/datum/reagent/honey/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+
+	var/effective_dose = dose
+	if(issmall(M))
+		effective_dose *= 2
+
+	if(alien == IS_UNATHI)
+		if(effective_dose < 2)
+			if(effective_dose == metabolism * 2 || prob(5))
+				M.emote("yawn")
+		else if(effective_dose < 5)
+			M.eye_blurry = max(M.eye_blurry, 10)
+		else if(effective_dose < 20)
+			if(prob(50))
+				M.Weaken(2)
+			M.drowsyness = max(M.drowsyness, 20)
+		else
+			M.sleeping = max(M.sleeping, 20)
+			M.drowsyness = max(M.drowsyness, 60)
 
 /datum/reagent/nutriment/flour
 	name = "flour"
@@ -400,8 +425,28 @@
 		M.bodytemperature = min(310, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 // Juices
+/datum/reagent/drink/juice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
 
-/datum/reagent/drink/banana
+	var/effective_dose = dose/2
+	if(issmall(M))
+		effective_dose *= 2
+
+	if(alien == IS_UNATHI)
+		if(effective_dose < 2)
+			if(effective_dose == metabolism * 2 || prob(5))
+				M.emote("yawn")
+		else if(effective_dose < 5)
+			M.eye_blurry = max(M.eye_blurry, 10)
+		else if(effective_dose < 20)
+			if(prob(50))
+				M.Weaken(2)
+			M.drowsyness = max(M.drowsyness, 20)
+		else
+			M.sleeping = max(M.sleeping, 20)
+			M.drowsyness = max(M.drowsyness, 60)
+
+/datum/reagent/drink/juice/banana
 	name = "Banana Juice"
 	id = "banana"
 	description = "The raw essence of a banana."
@@ -412,7 +457,7 @@
 	glass_name = "glass of banana juice"
 	glass_desc = "The raw essence of a banana. HONK!"
 
-/datum/reagent/drink/berryjuice
+/datum/reagent/drink/juice/berry
 	name = "Berry Juice"
 	id = "berryjuice"
 	description = "A delicious blend of several different kinds of berries."
@@ -423,7 +468,7 @@
 	glass_name = "glass of berry juice"
 	glass_desc = "Berry juice. Or maybe it's jam. Who cares?"
 
-/datum/reagent/drink/carrotjuice
+/datum/reagent/drink/juice/carrot
 	name = "Carrot juice"
 	id = "carrotjuice"
 	description = "It is just like a carrot but without crunching."
@@ -434,11 +479,11 @@
 	glass_name = "glass of carrot juice"
 	glass_desc = "It is just like a carrot but without crunching."
 
-/datum/reagent/drink/carrotjuice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/juice/carrot/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.reagents.add_reagent("imidazoline", removed * 0.2)
 
-/datum/reagent/drink/grapejuice
+/datum/reagent/drink/juice/grape
 	name = "Grape Juice"
 	id = "grapejuice"
 	description = "It's grrrrrape!"
@@ -449,7 +494,7 @@
 	glass_name = "glass of grape juice"
 	glass_desc = "It's grrrrrape!"
 
-/datum/reagent/drink/lemonjuice
+/datum/reagent/drink/juice/lemon
 	name = "Lemon Juice"
 	id = "lemonjuice"
 	description = "This juice is VERY sour."
@@ -461,7 +506,7 @@
 	glass_name = "glass of lemon juice"
 	glass_desc = "Sour..."
 
-/datum/reagent/drink/limejuice
+/datum/reagent/drink/juice/lime
 	name = "Lime Juice"
 	id = "limejuice"
 	description = "The sweet-sour juice of limes."
@@ -473,13 +518,13 @@
 	glass_name = "glass of lime juice"
 	glass_desc = "A glass of sweet-sour lime juice"
 
-/datum/reagent/drink/limejuice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/juice/lime/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_DIONA)
 		return
 	M.adjustToxLoss(-0.5 * removed)
 
-/datum/reagent/drink/orangejuice
+/datum/reagent/drink/juice/orange
 	name = "Orange juice"
 	id = "orangejuice"
 	description = "Both delicious AND rich in Vitamin C, what more do you need?"
@@ -490,7 +535,7 @@
 	glass_name = "glass of orange juice"
 	glass_desc = "Vitamins! Yay!"
 
-/datum/reagent/drink/orangejuice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/juice/orange/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_DIONA)
 		return
@@ -508,7 +553,12 @@
 	glass_name = "glass of poison berry juice"
 	glass_desc = "A glass of deadly juice."
 
-/datum/reagent/drink/potato_juice
+/datum/reagent/toxin/poisonberryjuice/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_UNATHI)
+		return //unathi are immune!
+	return ..()
+
+/datum/reagent/drink/juice/potato
 	name = "Potato Juice"
 	id = "potato"
 	description = "Juice of the potato. Bleh."
@@ -520,7 +570,7 @@
 	glass_name = "glass of potato juice"
 	glass_desc = "Juice from a potato. Bleh."
 
-/datum/reagent/drink/tomatojuice
+/datum/reagent/drink/juice/tomato
 	name = "Tomato Juice"
 	id = "tomatojuice"
 	description = "Tomatoes made into juice. What a waste of big, juicy tomatoes, huh?"
@@ -531,13 +581,13 @@
 	glass_name = "glass of tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
 
-/datum/reagent/drink/tomatojuice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/juice/tomato/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_DIONA)
 		return
 	M.heal_organ_damage(0, 0.5 * removed)
 
-/datum/reagent/drink/watermelonjuice
+/datum/reagent/drink/juice/watermelon
 	name = "Watermelon Juice"
 	id = "watermelonjuice"
 	description = "Delicious juice made from watermelon."
@@ -818,6 +868,27 @@
 	glass_name = "glass of milkshake"
 	glass_desc = "Glorious brainfreezing mixture."
 	glass_center_of_mass = list("x"=16, "y"=7)
+
+/datum/reagent/milkshake/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+
+	var/effective_dose = dose/2
+	if(issmall(M))
+		effective_dose *= 2
+
+	if(alien == IS_UNATHI)
+		if(effective_dose < 2)
+			if(effective_dose == metabolism * 2 || prob(5))
+				M.emote("yawn")
+		else if(effective_dose < 5)
+			M.eye_blurry = max(M.eye_blurry, 10)
+		else if(effective_dose < 20)
+			if(prob(50))
+				M.Weaken(2)
+			M.drowsyness = max(M.drowsyness, 20)
+		else
+			M.sleeping = max(M.sleeping, 20)
+			M.drowsyness = max(M.drowsyness, 60)
 
 /datum/reagent/drink/rewriter
 	name = "Rewriter"

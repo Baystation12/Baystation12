@@ -414,6 +414,24 @@
 /datum/reagent/sugar/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.nutrition += removed * 3
 
+	var/effective_dose = dose
+	if(issmall(M))
+		effective_dose *= 2
+
+	if(alien == IS_UNATHI)
+		if(effective_dose < 2)
+			if(effective_dose == metabolism * 2 || prob(5))
+				M.emote("yawn")
+		else if(effective_dose < 5)
+			M.eye_blurry = max(M.eye_blurry, 10)
+		else if(effective_dose < 20)
+			if(prob(50))
+				M.Weaken(2)
+			M.drowsyness = max(M.drowsyness, 20)
+		else
+			M.sleeping = max(M.sleeping, 20)
+			M.drowsyness = max(M.drowsyness, 60)
+
 /datum/reagent/sulfur
 	name = "Sulfur"
 	id = "sulfur"
