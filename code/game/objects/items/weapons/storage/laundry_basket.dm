@@ -11,7 +11,7 @@
 	desc = "The peak of thousands of years of laundry evolution."
 
 	w_class = 6
-	max_w_class = 4
+	max_w_class = 5
 	max_storage_space = DEFAULT_BACKPACK_STORAGE //20 for clothes + a bit of additional space for non-clothing items that were worn on body
 	storage_slots = 14
 	use_to_pickup = 1

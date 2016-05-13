@@ -4,7 +4,7 @@
 	icon_state = "intercom"
 	randpixel = 0
 	anchored = 1
-	w_class = 4.0
+	w_class = DO_NOT_STORE //it's supposed to be embedded in a wall.
 	canhear_range = 2
 	flags = CONDUCT | NOBLOODY
 	var/number = 0

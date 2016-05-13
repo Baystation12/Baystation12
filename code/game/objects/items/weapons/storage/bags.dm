@@ -32,7 +32,7 @@
 	icon_state = "trashbag0"
 	item_state = "trashbag"
 
-	w_class = 4
+	w_class = 5
 	max_w_class = 2
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	can_hold = list() // any

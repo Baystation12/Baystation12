@@ -20,7 +20,7 @@
 	sprite_sheets = list(
 		"Resomi" = 'icons/mob/species/resomi/back.dmi'
 		)
-	w_class = 4
+	w_class = 5
 	slot_flags = SLOT_BACK
 	max_w_class = 4
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
@@ -76,7 +76,7 @@
 	desc = "Space Santa uses this to deliver toys to all the nice children in space for Christmas! Wow, it's pretty big!"
 	icon_state = "giftbag0"
 	item_state = "giftbag"
-	w_class = 4.0
+	w_class = 5
 	max_w_class = 3
 	max_storage_space = 400 // can store a ton of shit!
 	item_state_slots = null

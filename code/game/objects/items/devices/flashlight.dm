@@ -129,7 +129,7 @@
 	icon_state = "lamp"
 	item_state = "lamp"
 	brightness_on = 5
-	w_class = 4
+	w_class = 5
 	flags = CONDUCT
 
 	on = 1
