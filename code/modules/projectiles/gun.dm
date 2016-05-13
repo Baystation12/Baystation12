@@ -160,6 +160,7 @@
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
+	if(target.z != user.z) return
 
 	add_fingerprint(user)
 
