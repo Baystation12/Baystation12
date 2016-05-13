@@ -425,18 +425,21 @@
 	icon_state = "red_crowbar"
 	item_state = "crowbar_red"
 
-/obj/item/weapon/weldingtool/afterattack(var/mob/M, var/mob/user)
+/obj/item/weapon/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
 
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/S = H.organs_by_name[user.zone_sel.selecting]
+		var/obj/item/organ/external/S = H.organs_by_name[target_zone]
 
-		if (!S) return
-		if(!(S.status & ORGAN_ROBOT) || user.a_intent != I_HELP)
+		if(!S || !(S.status & ORGAN_ROBOT) || user.a_intent != I_HELP)
 			return ..()
 
 		if(S.brute_dam)
 			if(S.brute_dam < ROBOLIMB_SELF_REPAIR_CAP)
+				if(!welding)
+					user << "<span class='warning'>You'll need to turn \the [src] on to patch the damage on \the [M]'s [S.name]!</span>"
+					return 1
+
 				S.heal_damage(15,0,0,1)
 				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				user.visible_message("<span class='notice'>\The [user] patches some dents on \the [M]'s [S.name] with \the [src].</span>")
@@ -445,6 +448,7 @@
 			return 1
 		else if(S.open != 2)
 			user << "<span class='notice'>Nothing to fix!</span>"
+			return 1
 
 	else
 		return ..()
