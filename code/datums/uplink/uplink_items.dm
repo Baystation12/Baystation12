@@ -89,7 +89,7 @@ var/datum/uplink/uplink = new()
 	return 0
 
 /datum/uplink_item/proc/cost(var/telecrystals, obj/item/device/uplink/U)
-	. = item_cost
+	return U ?  U.get_item_cost(src, item_cost) : item_cost
 
 	if(U && U.uplink_owner)
 		for(var/antag_role in antag_costs)

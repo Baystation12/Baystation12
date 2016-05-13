@@ -1,11 +1,3 @@
-//This could either be split into the proper DM files or placed somewhere else all together, but it'll do for now -Nodrak
-
-/*
-
-A list of items and costs is stored under the datum of every game mode, alongside the number of crystals, and the welcoming message.
-
-*/
-
 /obj/item/device/uplink
 	var/welcome = "Welcome, Operative"	// Welcoming menu message
 	var/uses 							// Numbers of crystals
@@ -18,6 +10,10 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	var/list/purchase_log = new
 	var/datum/mind/uplink_owner = null
 	var/used_TC = 0
+	var/offer_time = 15 MINUTES			//The time increment per discount offered
+	var/next_offer_time					//The time a discount will next be offered
+	var/datum/uplink_item/discount_item	//The item to be discounted
+	var/discount_amount					//The amount as a percent the item will be discounted by
 
 /obj/item/device/uplink/nano_host()
 	return loc
@@ -28,10 +24,22 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	purchase_log = list()
 	world_uplinks += src
 	uses = telecrystals
+	processing_objects += src
 
 /obj/item/device/uplink/Destroy()
 	world_uplinks -= src
+	processing_objects -= src
 	return ..()
+
+/obj/item/device/uplink/process()
+	if(world.time > next_offer_time)
+		discount_item = default_uplink_selection.get_random_item(INFINITY)
+		discount_amount = pick(90;0.9, 80;0.8, 70;0.7, 60;0.6, 50;0.5, 40;0.4, 30;0.3, 20;0.2, 10;0.1)
+		next_offer_time = world.time + offer_time
+		nanomanager.update_uis(src)
+
+/obj/item/device/uplink/get_item_cost(var/item_type, var/item_cost)
+	return (discount_item && (item_type == discount_item)) ? max(1, round(item_cost*discount_amount)) : item_cost
 
 // HIDDEN UPLINK - Can be stored in anything but the host item has to have a trigger for it.
 /* How to create an uplink in 3 easy steps!
@@ -142,11 +150,14 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			if(category.can_view(src))
 				categories[++categories.len] = list("name" = category.name, "ref" = "\ref[category]")
 		nanoui_data["categories"] = categories
+		nanoui_data["discount_name"] = discount_item ? discount_item.name : ""
+		nanoui_data["discount_amount"] = (1-discount_amount)*100
+		nanoui_data["offer_expiry"] = worldtime2text(next_offer_time - world.time)
 	else if(nanoui_menu == 1)
 		var/items[0]
 		for(var/datum/uplink_item/item in category.items)
 			if(item.can_view(src))
-				var/cost = item.cost(uses)
+				var/cost = item.cost(uses, src)
 				if(!cost) cost = "???"
 				items[++items.len] = list("name" = item.name, "description" = replacetext(item.description(), "\n", "<br>"), "can_buy" = item.can_buy(src), "cost" = cost, "ref" = "\ref[item]")
 		nanoui_data["items"] = items

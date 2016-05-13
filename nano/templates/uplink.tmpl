@@ -29,6 +29,17 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
 </div>
 
 {{if data.menu == 0}}
+	{{if data.discount_amount < 100}}
+		<div class="item">
+			<div class="itemLabel">
+				<b>Currently discounted</b>:
+			</div>
+			<div class="itemContent">
+				{{:data.discount_name}} - {{:data.discount_amount}}% off. Offer will expire at: {{:data.offer_expiry}}
+			</div>
+		</div>
+	{{/if}}
+
 	<H2>Categories:</H2>
 	{{for data.categories}}
 		<div class="item">
