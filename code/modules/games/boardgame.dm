@@ -115,19 +115,19 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 			if(selected >= 0)
 				//check to see if clicked on tile is currently selected one
 				if(text2num(s) == selected)
-					selected = 0 //deselect it
-					return
+					selected = -1 //deselect it
+				else
 
-				if(I) //cant put items on other items.
-					return
+					if(I) //cant put items on other items.
+						return
 
-			//put item in new spot.
-				I = board["[selected]"]
-				board["[selected]"] = null
-				board -= "[selected]"
-				board -= null
-				board["[s]"] = I
-				selected = -1
+				//put item in new spot.
+					I = board["[selected]"]
+					board["[selected]"] = null
+					board -= "[selected]"
+					board -= null
+					board["[s]"] = I
+					selected = -1
 			else
 				if(I)
 					selected = text2num(s)
@@ -160,6 +160,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 			board_icons -= null
 	src.updateDialog()
 
+//Checkers
 
 /obj/item/weapon/reagent_containers/food/snacks/checker
 	name = "checker"
@@ -170,7 +171,56 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 	center_of_mass = list("x"=16, "y"=16)
 	nutriment_desc = list("a choking hazard" = 4)
 	nutriment_amt = 1
+	var/piece_color ="black"
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/New()
+	..()
+	icon_state = "[name]_[piece_color]"
+	name = "[piece_color] [name]"
 
 /obj/item/weapon/reagent_containers/food/snacks/checker/red
-	name = "red checker"
-	icon_state = "checker_red"
+	piece_color ="red"
+
+//Chess
+
+/obj/item/weapon.reagent_containers/food/snacks/checker/pawn
+	name = "pawn"
+	desc = "How many pawns will die in your war?"
+
+/obj/item/weapon.reagent_containers/food/snacks/checker/pawn/red
+	piece_color ="red"
+
+/obj/item/weapon.reagent_containers/food/snacks/checker/knight
+	name = "knight"
+	desc = "The piece chess deserves, and needs to actually play."
+
+/obj/item/weapon.reagent_containers/food/snacks/checker/knight/red
+	piece_color ="red"
+
+/obj/item/weapon.reagent_containers/food/snacks/checker/bishop
+	name = "bishop"
+	desc = "What corruption occured, urging holy men to fight?"
+
+/obj/item/weapon.reagent_containers/food/snacks/checker/bishop/red
+	piece_color ="red"
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/rook
+	name = "rook"
+	desc = "Representing ancient moving towers. So powerful and fast they were banned from wars, forever."
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/rook/red
+	piece_color ="red"
+
+/obj/item/weapon.reagent_containers/food/snacks/checker/queen
+	name = "queen"
+	desc = "A queen of battle and pain. She dances across the battlefield."
+
+/obj/item/weapon.reagent_containers/food/snacks/checker/queen/red
+	piece_color ="red"
+
+/obj/item/weapon.reagent_containers/food/snacks/checker/king
+	name = "king"
+	desc = "Why does a chess game end when the king dies?"
+
+/obj/item/weapon.reagent_containers/food/snacks/checker/king/red
+	piece_color ="red"
