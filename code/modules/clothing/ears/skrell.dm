@@ -3,8 +3,8 @@
 */
 
 /obj/item/clothing/ears/skrell
-	name = "skrell tentacle wear"
-	desc = "Some stuff worn by skrell to adorn their head tentacles."
+	name = "skrell headtail wear"
+	desc = "Some stuff worn by skrell to adorn their headtails."
 	icon = 'icons/obj/clothing/ears.dmi'
 	w_class = 1
 	slot_flags = SLOT_EARS
@@ -60,63 +60,62 @@
 	desc = "Ebony bands worn by male skrell to adorn their head tails."
 	icon_state = "skrell_band_ebony"
 
+//Colourizable, for loadout
 /obj/item/clothing/ears/skrell/colored/band
 	name = "Colored headtail bands"
 	desc = "Metallic bands worn by male skrell to adorn their head tails."
 	icon_state = "skrell_band_sil"
 
+//Colourizable, for loadout
 /obj/item/clothing/ears/skrell/colored/chain
 	name = "Colored headtail chains"
 	desc = "A delicate chain worn by female skrell to decorate their head tails."
 	icon_state = "skrell_chain_sil"
 
 /obj/item/clothing/ears/skrell/cloth_female
-	name = "red headtail cloth"
+	name = "headtail cloth"
 	desc = "A cloth shawl worn by female skrell draped around their head tails."
 	icon_state = "skrell_cloth_female"
 
-/obj/item/clothing/ears/skrell/cloth_female/black
-	name = "black headtail cloth"
-	icon_state = "skrell_cloth_black_female"
+//spawnable presets
+/obj/item/clothing/ears/skrell/cloth_female/red
+	color = "#c20c00"
 
 /obj/item/clothing/ears/skrell/cloth_female/blue
-	name = "blue headtail cloth"
-	icon_state = "skrell_cloth_blue_female"
+	color = "#0227f7"
+
+/obj/item/clothing/ears/skrell/cloth_female/lblue
+	color = "#6262ff"
+
+/obj/item/clothing/ears/skrell/cloth_female/black
+	color = "#454545"
 
 /obj/item/clothing/ears/skrell/cloth_female/green
-	name = "green headtail cloth"
-	icon_state = "skrell_cloth_green_female"
+	color = "#009900"
 
 /obj/item/clothing/ears/skrell/cloth_female/pink
-	name = "pink headtail cloth"
-	icon_state = "skrell_cloth_pink_female"
-
-/obj/item/clothing/ears/skrell/cloth_female/lightblue
-	name = "light blue headtail cloth"
-	icon_state = "skrell_cloth_lblue_female"
+	color = "#e17291"
 
 /obj/item/clothing/ears/skrell/cloth_male
-	name = "red headtail cloth"
+	name = "headtail cloth"
 	desc = "A cloth band worn by male skrell around their head tails."
 	icon_state = "skrell_cloth_male"
 
-/obj/item/clothing/ears/skrell/cloth_male/black
-	name = "black headtail cloth"
-	icon_state = "skrell_cloth_black_male"
+//spawnable presets
+/obj/item/clothing/ears/skrell/cloth_male/red
+	color = "#c20c00"
 
 /obj/item/clothing/ears/skrell/cloth_male/blue
-	name = "blue headtail cloth"
-	icon_state = "skrell_cloth_blue_male"
+	color = "#0227f7"
+
+/obj/item/clothing/ears/skrell/cloth_male/lblue
+	color = "#6262ff"
+
+/obj/item/clothing/ears/skrell/cloth_male/black
+	color = "#454545"
 
 /obj/item/clothing/ears/skrell/cloth_male/green
-	name = "green headtail cloth"
-	icon_state = "skrell_cloth_green_male"
+	color = "#009900"
 
 /obj/item/clothing/ears/skrell/cloth_male/pink
-	name = "pink headtail cloth"
-	icon_state = "skrell_cloth_pink_male"
-
-/obj/item/clothing/ears/skrell/cloth_male/lightblue
-	name = "light blue headtail cloth"
-	icon_state = "skrell_cloth_lblue_male"
-
+	color = "#e17291"
