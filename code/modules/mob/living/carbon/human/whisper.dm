@@ -43,13 +43,14 @@
 	var/italics = 1
 
 	var/not_heard //the message displayed to people who could not hear the whispering
+	var/adverb
 	if (speaking)
 		if (speaking.whisper_verb)
 			verb = speaking.whisper_verb
 			not_heard = "[verb] something"
 		else
-			var/adverb = pick("quietly", "softly")
-			verb = "[speaking.speech_verb] [adverb]"
+			adverb = pick("quietly", "softly")
+			verb = speaking.speech_verb
 			not_heard = "[speaking.speech_verb] something [adverb]"
 	else
 		not_heard = "[verb] something" //TODO get rid of the null language and just prevent speech if language is null
@@ -65,9 +66,12 @@
 			if(!message_data[3]) //if a speech problem like hulk forces someone to yell then everyone hears it
 				verb = message_data[2] //assume that if they are going to force not-whispering then they will set an appropriate verb too
 				message_range = world.view
-			else
-				var/adverb = pick("quietly", "softly")
-				verb = "[message_data[2]] [adverb]"
+			else if(verb != message_data[2])
+				adverb = pick("quietly", "softly") //new verb given, so 'whisperize' it with an adverb
+				verb = message_data[2]
+
+	//consoldiate the adverb if we have one
+	if(adverb) verb = "[verb] [adverb]"
 
 	if(!message || message=="")
 		return
