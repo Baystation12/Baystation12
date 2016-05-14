@@ -72,40 +72,6 @@
 	if(!message || message=="")
 		return
 
-	//looks like this only appears in whisper. Should it be elsewhere as well? Maybe handle_speech_problems?
-	var/voice_sub
-	if(istype(back,/obj/item/weapon/rig))
-		var/obj/item/weapon/rig/rig = back
-		// todo: fix this shit
-		if(rig.speech && rig.speech.voice_holder && rig.speech.voice_holder.active && rig.speech.voice_holder.voice)
-			voice_sub = rig.speech.voice_holder.voice
-	else
-		for(var/obj/item/gear in list(wear_mask,wear_suit,head))
-			if(!gear)
-				continue
-			var/obj/item/voice_changer/changer = locate() in gear
-			if(changer && changer.active && changer.voice)
-				voice_sub = changer.voice
-
-	if(voice_sub == "Unknown")
-		if(copytext(message, 1, 2) != "*")
-			var/list/temp_message = splittext(message, " ")
-			var/list/pick_list = list()
-			for(var/i = 1, i <= temp_message.len, i++)
-				pick_list += i
-			for(var/i=1, i <= abs(temp_message.len/3), i++)
-				var/H = pick(pick_list)
-				if(findtext(temp_message[H], "*") || findtext(temp_message[H], ";") || findtext(temp_message[H], ":")) continue
-				temp_message[H] = ninjaspeak(temp_message[H])
-				pick_list -= H
-			message = jointext(temp_message, " ")
-			message = replacetext(message, "o", "¤")
-			message = replacetext(message, "p", "þ")
-			message = replacetext(message, "l", "£")
-			message = replacetext(message, "s", "§")
-			message = replacetext(message, "u", "µ")
-			message = replacetext(message, "b", "ß")
-
 	var/list/listening = hearers(message_range, src)
 	listening |= src
 
