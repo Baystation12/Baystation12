@@ -387,7 +387,6 @@
 	allow_quick_gather = 1
 	allow_quick_empty = 1
 	collection_mode = 1
-	display_contents_with_number = 1
 	max_w_class = 3
 	max_storage_space = 100
 
