@@ -166,7 +166,7 @@
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie/New()
 	..()
-	slowdown_per_slot = list(slot_last)
+	slowdown_per_slot[slot_back] = 1
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie/med
 	name = "medical dufflebag"
