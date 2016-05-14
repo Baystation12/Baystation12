@@ -21,9 +21,9 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(M)
 	//if(user != M)
-	if(user.spell_list.len)
-		user.silence_spells(300) //30 seconds
-		user << "<span class='danger'>You've been silenced!</span>"
+	if(M.spell_list.len)
+		M.silence_spells(300) //30 seconds
+		M << "<span class='danger'>You've been silenced!</span>"
 		return
 
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
