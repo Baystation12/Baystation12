@@ -56,17 +56,18 @@
 
 	message = capitalize(trim(message))
 
-	if(speech_problem_flag)
-		var/list/handle_r = handle_speech_problems(message)
-		message = handle_r[1]
-		verb = handle_r[2]
-		if(verb == "yells loudly")
-			verb = "slurs emphatically"
-		else
-			var/adverb = pick("quietly", "softly")
-			verb = "[verb] [adverb]"
+	//speech problems
+	if(!(speaking && (speaking.flags & NO_STUTTER)))
+		var/list/message_data = list(message, verb, 1)
+		if(handle_speech_problems(message_data))
+			message = message_data[1]
 
-		speech_problem_flag = handle_r[3]
+			if(!message_data[3]) //if a speech problem like hulk forces someone to yell then everyone hears it
+				verb = message_data[2] //assume that if they are going to force not-whispering then they will set an appropriate verb too
+				message_range = world.view
+			else
+				var/adverb = pick("quietly", "softly")
+				verb = "[message_data[2]] [adverb]"
 
 	if(!message || message=="")
 		return
