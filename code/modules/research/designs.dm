@@ -1594,7 +1594,7 @@ CIRCUITS BELOW
 /datum/design/aimodule/core/freeformcore
 	name = "Freeform"
 	id = "freeformcore"
-	build_path = /obj/item/weapon/aiModule/freeformcore
+	build_path = /obj/item/weapon/aiModule/freeform/core
 	sort_string = "XACAA"
 
 /datum/design/aimodule/core/asimov

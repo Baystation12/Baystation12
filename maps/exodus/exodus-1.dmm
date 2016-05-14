@@ -3668,7 +3668,7 @@
 "bsB" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/bluegrid,/area/turret_protected/ai_upload)
 "bsC" = (/turf/simulated/floor/tiled,/area/rnd/lab)
 "bsD" = (/obj/machinery/hologram/holopad,/turf/simulated/floor/tiled/white,/area/rnd/lab)
-"bsE" = (/obj/structure/table/standard,/obj/item/weapon/aiModule/asimov,/obj/item/weapon/aiModule/freeformcore,/obj/machinery/door/window{base_state = "right"; dir = 4; icon_state = "right"; name = "Core Modules"; req_access = list(20)},/obj/structure/window/reinforced,/obj/item/weapon/aiModule/corp,/obj/item/weapon/aiModule/paladin,/obj/item/weapon/aiModule/robocop,/turf/simulated/floor/bluegrid,/area/turret_protected/ai_upload)
+"bsE" = (/obj/structure/table/standard,/obj/item/weapon/aiModule/asimov,/obj/item/weapon/aiModule/freeform/core,/obj/machinery/door/window{base_state = "right"; dir = 4; icon_state = "right"; name = "Core Modules"; req_access = list(20)},/obj/structure/window/reinforced,/obj/item/weapon/aiModule/corp,/obj/item/weapon/aiModule/paladin,/obj/item/weapon/aiModule/robocop,/turf/simulated/floor/bluegrid,/area/turret_protected/ai_upload)
 "bsF" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/effect/floor_decal/industrial/warning{dir = 8},/turf/simulated/floor/tiled/white,/area/rnd/lab)
 "bsG" = (/obj/machinery/computer/med_data/laptop,/obj/item/device/radio/intercom{dir = 1; pixel_y = -22},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/obj/structure/table/standard{name = "plastic table frame"},/turf/simulated/floor/tiled/white,/area/medical/exam_room)
 "bsH" = (/obj/machinery/alarm{pixel_y = 23},/obj/machinery/porta_turret,/turf/simulated/floor/bluegrid,/area/turret_protected/ai_upload)

@@ -64,12 +64,11 @@ var/global/const/base_law_type = /datum/ai_laws/nanotrasen
 	var/index = 1
 	for(var/datum/ai_law/inherent_law in inherent_laws)
 		inherent_law.index = index++
-		if(supplied_laws.len < inherent_law.index || !istype(supplied_laws[inherent_law.index], /datum/ai_law))
-			sorted_laws += inherent_law
+		sorted_laws += inherent_law
 
-	for(var/datum/ai_law/AL in supplied_laws)
-		if(istype(AL))
-			sorted_laws += AL
+	for(var/datum/ai_law/supplied_law in supplied_laws)
+		supplied_law.index = index++
+		sorted_laws += supplied_law
 
 /datum/ai_laws/proc/sync(var/mob/living/silicon/S, var/full_sync = 1)
 	// Add directly to laws to avoid log-spam
@@ -146,25 +145,16 @@ var/global/const/base_law_type = /datum/ai_laws/nanotrasen
 
 	sorted_laws.Cut()
 
-/datum/ai_laws/proc/add_supplied_law(var/number, var/law)
+/datum/ai_laws/proc/add_supplied_law(var/law)
 	if(!law)
 		return
 
-	if(supplied_laws.len >= number)
-		var/datum/ai_law/existing_law = supplied_laws[number]
-		if(existing_law && existing_law.law == law)
+	for(var/datum/ai_law/AL in supplied_laws)
+		if(AL.law == law)
 			return
 
-	if(supplied_laws.len >= number && supplied_laws[number])
-		delete_law(supplied_laws[number])
-
-	while (src.supplied_laws.len < number)
-		src.supplied_laws += ""
-		if(state_supplied.len < supplied_laws.len)
-			state_supplied += 1
-
-	var/new_law = new/datum/ai_law/supplied(law, number)
-	supplied_laws[number] = new_law
+	var/new_law = new/datum/ai_law/supplied(law)
+	supplied_laws += new_law
 	if(state_supplied.len < supplied_laws.len)
 		state_supplied += 1
 
@@ -189,10 +179,7 @@ var/global/const/base_law_type = /datum/ai_laws/nanotrasen
 	laws.internal_delete_law(laws.inherent_laws, laws.state_inherent, src)
 
 /datum/ai_law/supplied/delete_law(var/datum/ai_laws/laws)
-	var/index = laws.supplied_laws.Find(src)
-	if(index)
-		laws.supplied_laws[index] = ""
-		laws.state_supplied[index] = 1
+	laws.internal_delete_law(laws.supplied_laws, laws.state_supplied, src)
 
 /datum/ai_laws/proc/internal_delete_law(var/list/datum/ai_law/laws, var/list/state, var/list/datum/ai_law/law)
 	var/index = laws.Find(law)
