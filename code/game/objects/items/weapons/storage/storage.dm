@@ -283,7 +283,7 @@
 		return 0 //Means the item is already in the storage item
 	if(storage_slots != null && contents.len >= storage_slots)
 		if(!stop_messages)
-			usr << "<span class='notice'>[src] is full, make some space.</span>"
+			usr << "<span class='notice'>\The [src] is full, make some space.</span>"
 		return 0 //Storage item is full
 
 	if(W.anchored)
@@ -292,22 +292,22 @@
 	if(can_hold.len)
 		if(!is_type_in_list(W, can_hold))
 			if(!stop_messages && ! istype(W, /obj/item/weapon/hand_labeler))
-				usr << "<span class='notice'>[src] cannot hold \the [W].</span>"
+				usr << "<span class='notice'>\The [src] cannot hold [W].</span>"
 			return 0
 		var/max_instances = can_hold[W.type]
 		if(max_instances && instances_of_type_in_list(W, contents) >= max_instances)
 			if(!stop_messages && !istype(W, /obj/item/weapon/hand_labeler))
-				usr << "<span class='notice'>[src] has no more space specifically for \the [W].</span>"
+				usr << "<span class='notice'>\The [src] has no more space specifically for [W].</span>"
 			return 0
 
 	if(cant_hold.len && is_type_in_list(W, cant_hold))
 		if(!stop_messages)
-			usr << "<span class='notice'>[src] cannot hold [W].</span>"
+			usr << "<span class='notice'>\The [src] cannot hold [W].</span>"
 		return 0
 
 	if (max_w_class != null && W.w_class > max_w_class)
 		if(!stop_messages)
-			usr << "<span class='notice'>[W] is too big for this [src.name].</span>"
+			usr << "<span class='notice'>\The [W] is too big for this [src.name].</span>"
 		return 0
 
 	var/total_storage_space = W.get_storage_cost()
@@ -319,13 +319,15 @@
 
 	if(total_storage_space > max_storage_space)
 		if(!stop_messages)
-			usr << "<span class='notice'>[src] is too full, make some space.</span>"
+			usr << "<span class='notice'>\The [src] is too full, make some space.</span>"
 		return 0
 
-	if(W.w_class >= src.w_class && (istype(W, /obj/item/weapon/storage)))
-		if(!stop_messages)
-			usr << "<span class='notice'>[src] cannot hold [W] as it's a storage item of the same size.</span>"
-		return 0 //To prevent the stacking of same sized storage items.
+	if(istype(W, /obj/item/weapon/storage))
+		var/obj/item/weapon/storage/other = W
+		if(other.w_class > src.w_class || other.max_w_class >= src.w_class)
+			if(!stop_messages)
+				usr << "<span class='notice'>\The [src] cannot hold [W].</span>"
+		return 0 //To prevent infinite storage exploits
 
 	return 1
 
