@@ -44,7 +44,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/detonate = 1 // Can the PDA be blown up?
 	var/hidden = 0 // Is the PDA hidden from the PDA list?
 	var/active_conversation = null // New variable that allows us to only view a single conversation.
-	var/list/conversations = list()    // For keeping up with who we have PDA messsages from.
+	var/list/conversations = list()    // For keeping up with who we have PDA messsages from. Assoc list: \ref[conversation PDA] => \ref[reply-to PDA]
 	var/new_message = 0			//To remove hackish overlay check
 	var/new_news = 0
 
@@ -356,8 +356,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))
 
-		if(!P.conversations.Find("\ref[src]"))
-			P.conversations.Add("\ref[src]")
+		P.conversations["\ref[src]"] = "\ref[src]"
 
 		P.new_message(src, "[original_sender] \[Relayed\]", original_job, t, null)
 
@@ -531,7 +530,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		var/count = 0
 		for (var/obj/item/device/pda/P in PDAs)
 			if (!P.owner||P.toff||P == src||P.hidden)       continue
-			if(conversations.Find("\ref[P]"))
+			if("\ref[P]" in conversations)
 				convopdas.Add(list(list("Name" = "[P]", "Reference" = "\ref[P]", "Detonate" = "[P.detonate]", "inconvo" = "1")))
 			else
 				pdas.Add(list(list("Name" = "[P]", "Reference" = "\ref[P]", "Detonate" = "[P.detonate]", "inconvo" = "0")))
@@ -823,7 +822,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				return 0
 		if("Message")
 
-			var/obj/item/device/pda/P = locate(href_list["target"])
+			var/obj/item/device/pda/P = locate(conversations[href_list["target"]])
 			var/tap = istype(U, /mob/living/carbon)
 			src.create_message(U, P, tap)
 			if(mode == 2)
@@ -833,10 +832,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		if("Select Conversation")
 			var/P = href_list["convo"]
-			for(var/n in conversations)
-				if(P == n)
-					active_conversation=P
-					mode=21
+			if(P in conversations)
+				active_conversation=P
+				mode=21
 		if("Select Feed")
 			var/n = href_list["name"]
 			for(var/f in feeds)
@@ -1091,10 +1089,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					continue
 				M.show_message("<span class='game say'>PDA Message - <span class='name'>[owner]</span> -> <span class='name'>[P.owner]</span>: <span class='message'>[t]</span></span>")
 
-		if(!conversations.Find("\ref[P]"))
-			conversations.Add("\ref[P]")
-		if(!P.conversations.Find("\ref[src]"))
-			P.conversations.Add("\ref[src]")
+		src.conversations["\ref[P]"] = "\ref[P]"
+		P.conversations["\ref[src]"] = "\ref[src]"
 
 
 		if (prob(15)) //Give the AI a chance of intercepting the message
