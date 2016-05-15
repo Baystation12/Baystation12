@@ -37,15 +37,19 @@
 			else
 				return 1					//But only from one side
 		if(prob(chance))
-			health -= P.damage/2
-			if (health > 0)
-				visible_message("<span class='warning'>[P] hits \the [src]!</span>")
-				return 0
-			else
-				visible_message("<span class='warning'>[src] breaks down!</span>")
-				break_to_parts()
-				return 1
+			return 0 //blocked
 	return 1
+
+/obj/structure/table/bullet_act(obj/item/projectile/P)
+	if(!(P.damage_type == BRUTE || P.damage_type == BURN))
+		return 0
+
+	if(take_damage(P.damage/2))
+		//prevent tables with 1 health left from stopping bullets outright
+		return PROJECTILE_CONTINUE //the projectile destroyed the table, so it gets to keep going
+
+	visible_message("<span class='warning'>\The [P] hits [src]!</span>")
+	return 0
 
 /obj/structure/table/CheckExit(atom/movable/O as mob|obj, target as turf)
 	if(istype(O) && O.checkpass(PASSTABLE))
