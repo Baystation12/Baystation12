@@ -304,7 +304,7 @@
 	return
 
 /mob/living/LaserEyes(atom/A)
-	setClickCooldown(4)
+	setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	var/turf/T = get_turf(src)
 
 	var/obj/item/projectile/beam/LE = new (T)

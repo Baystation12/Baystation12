@@ -825,6 +825,7 @@
 	else
 		src.log_message("Attacked by [W]. Attacker - [user]")
 
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(deflect_hit(is_melee=1))
 			user << "<span class='danger'>\The [W] bounces off [src.name].</span>"
 			src.log_append_to_last("Armor saved.")
