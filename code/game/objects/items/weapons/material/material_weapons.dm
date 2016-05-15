@@ -58,6 +58,10 @@
 			color = material.icon_colour
 		if(material.products_need_process())
 			processing_objects |= src
+		if(material.conductive)
+			flags |= CONDUCT
+		else
+			flags &= (~CONDUCT)
 		update_force()
 
 /obj/item/weapon/material/Destroy()
