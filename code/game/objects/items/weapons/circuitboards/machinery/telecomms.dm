@@ -76,7 +76,7 @@
 
 /obj/item/weapon/circuitboard/telecomms/pda_multicaster
 	name = T_BOARD("pda multicaster")
-	build_path = "/obj/machinery/pda_multicaster"
+	build_path = /obj/machinery/pda_multicaster
 	origin_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2, TECH_BLUESPACE = 2)
 	req_components = list(
 							/obj/item/weapon/stock_parts/subspace/ansible = 1,
