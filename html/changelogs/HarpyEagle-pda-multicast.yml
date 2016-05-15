@@ -1,0 +1,6 @@
+author: HarpyEagle
+
+delete-after: True
+
+changes: 
+  - rscadd: "Allows replies to fake PDA messages to be re-routed to a PDA of your choosing."
