@@ -1,5 +1,5 @@
-#define LOCKED 1
-#define BROKEN 2
+#define LOCK_LOCKED 1
+#define LOCK_BROKEN 2
 
 
 /datum/lock
@@ -19,27 +19,27 @@
 	..()
 
 /datum/lock/proc/unlock(var/key = "", var/mob/user)
-	if(status ^ LOCKED)
+	if(status ^ LOCK_LOCKED)
 		user << "<span class='warning'>Its already unlocked!</span>"
 		return 2
 	key = get_key_data(key, user)
-	if(cmptext(lock_data,key) && (status ^ BROKEN))
-		status &= ~LOCKED
+	if(cmptext(lock_data,key) && (status ^ LOCK_BROKEN))
+		status &= ~LOCK_LOCKED
 		return 1
 	return 0
 
 /datum/lock/proc/lock(var/key = "", var/mob/user)
-	if(status & LOCKED)
+	if(status & LOCK_LOCKED)
 		user << "<span class='warning'>Its already locked!</span>"
 		return 2
 	key = get_key_data(key, user)
-	if(cmptext(lock_data,key) && (status ^ BROKEN))
-		status |= LOCKED
+	if(cmptext(lock_data,key) && (status ^ LOCK_BROKEN))
+		status |= LOCK_LOCKED
 		return 1
 	return 0
 
 /datum/lock/proc/toggle(var/key = "", var/mob/user)
-	if(status & LOCKED)
+	if(status & LOCK_LOCKED)
 		return unlock(key, user)
 	else
 		return lock(key, user)
@@ -56,10 +56,10 @@
 	return null
 
 /datum/lock/proc/isLocked()
-	return status & LOCKED
+	return status & LOCK_LOCKED
 
 /datum/lock/proc/pick_lock(var/obj/item/I, var/mob/user)
-	if(!istype(I) || (status ^ LOCKED))
+	if(!istype(I) || (status ^ LOCK_LOCKED))
 		return 0
 	var/unlock_power = I.lock_picking_level
 	if(!unlock_power)
@@ -73,7 +73,7 @@
 		return 1
 	else if(prob(5 * unlock_power))
 		user << "<span class='warning'>You accidently break \the [holder]'s lock with your [I]!</span>"
-		status |= BROKEN
+		status |= LOCK_BROKEN
 	else
 		user << "<span class='warning'>You fail to pick open \the [holder].</span>"
 	return 0
