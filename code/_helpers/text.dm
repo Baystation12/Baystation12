@@ -333,3 +333,10 @@ proc/TextPreview(var/string,var/len=40)
 	return text
 
 #define gender2text(gender) capitalize(gender)
+
+/**
+ * Strip out the special beyond characters for \proper and \improper
+ * from text that will be sent to the browser.
+ */
+/proc/strip_improper(var/text)
+	return replacetext(replacetext(text, "\proper", ""), "\improper", "")
