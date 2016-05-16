@@ -33,6 +33,8 @@
 
 	if(material.conductive)
 		flags |= CONDUCT
+	else
+		flags &= (~CONDUCT)
 
 	matter = material.get_matter()
 	update_strings()
