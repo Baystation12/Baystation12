@@ -143,19 +143,19 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/party
 	name = "Party equipment"
-	contains = list(/obj/item/weapon/storage/box/drinkingglasses,
-					/obj/item/weapon/reagent_containers/food/drinks/shaker,
-					/obj/item/weapon/reagent_containers/food/drinks/flask/barflask,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/patron,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager,
-					/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
-					/obj/item/weapon/lipstick/random,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer)
+	contains = list(
+			/obj/item/weapon/storage/box/drinkingglasses,
+			/obj/item/weapon/reagent_containers/food/drinks/shaker,
+			/obj/item/weapon/reagent_containers/food/drinks/flask/barflask,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/patron,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey,
+			/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
+			/obj/item/weapon/lipstick/random,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale = 2,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer = 4,
+			/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass = 4,
+			)
 	cost = 20
 	containertype = /obj/structure/closet/crate
 	containername = "\improper Party equipment"
