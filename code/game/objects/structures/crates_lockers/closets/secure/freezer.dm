@@ -80,12 +80,17 @@
 	icon_off = "fridge1"
 	req_access = list(access_heads_vault)
 
-
 /obj/structure/closet/secure_closet/freezer/money/New()
 	..()
-	for(var/i = 1 to 3)
-		new /obj/item/weapon/spacecash/c1000(src)
-	for(var/i = 1 to 4)
-		new /obj/item/weapon/spacecash/c500(src)
-	for(var/i = 1 to 5)
-		new /obj/item/weapon/spacecash/c200(src)
+	//let's make hold a substantial amount.
+	var/created_size = 0
+	for(var/i = 1 to 200) //sanity loop limit
+		var/bundletype = pick(3; /obj/item/weapon/spacecash/bundle/c1000, 4; /obj/item/weapon/spacecash/bundle/c500, 5; /obj/item/weapon/spacecash/bundle/c200)
+		var/obj/item/cash = new bundletype(null)
+		var/bundle_size = content_size(cash)
+		if(created_size + bundle_size <= storage_capacity)
+			cash.forceMove(src)
+			created_size += bundle_size
+		else
+			qdel(cash)
+			break
