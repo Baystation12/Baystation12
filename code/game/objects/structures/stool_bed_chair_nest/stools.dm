@@ -6,6 +6,7 @@ var/global/list/stool_cache = list() //haha stool
 	desc = "Apply butt."
 	icon = 'icons/obj/furniture.dmi'
 	icon_state = "stool_preview" //set for the map
+	randpixel = 0
 	force = 10
 	throwforce = 10
 	w_class = 5

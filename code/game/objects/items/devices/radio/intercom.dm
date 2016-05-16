@@ -2,6 +2,7 @@
 	name = "station intercom (General)"
 	desc = "Talk through this."
 	icon_state = "intercom"
+	randpixel = 0
 	anchored = 1
 	w_class = 4.0
 	canhear_range = 2
