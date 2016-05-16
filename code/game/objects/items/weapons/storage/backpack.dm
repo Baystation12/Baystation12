@@ -98,6 +98,12 @@
 	icon_state = "medicalpack"
 	item_state_slots = null
 
+/obj/item/weapon/storage/backpack/emt
+	name = "emergency medical backpack"
+	desc = "It's a tough backpack used by first responders."
+	icon_state = "emtpack"
+	item_state_slots = null
+
 /obj/item/weapon/storage/backpack/security
 	name = "security backpack"
 	desc = "It's a very robust backpack."
@@ -234,6 +240,11 @@
 		slot_l_hand_str = "medicalpack",
 		slot_r_hand_str = "medicalpack",
 		)
+
+/obj/item/weapon/storage/backpack/satchel_emt
+	name = "emergency medical satchel"
+	desc = "It's a tough satchel used by first responders."
+	icon_state = "satchel-emt"
 
 /obj/item/weapon/storage/backpack/satchel_vir
 	name = "virologist satchel"
