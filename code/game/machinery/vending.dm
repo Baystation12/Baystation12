@@ -935,14 +935,14 @@
 	/obj/item/weapon/material/knife = 3,
 	/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,
 	/obj/item/clothing/suit/chef/classic = 2,
-	/obj/item/weapon/storage/toolbox/lunchbox = 3,
-	/obj/item/weapon/storage/toolbox/lunchbox/heart = 3,
-	/obj/item/weapon/storage/toolbox/lunchbox/cat = 3,
-	/obj/item/weapon/storage/toolbox/lunchbox/nt = 3,
-	/obj/item/weapon/storage/toolbox/lunchbox/mars = 3,
-	/obj/item/weapon/storage/toolbox/lunchbox/cti = 3,
-	/obj/item/weapon/storage/toolbox/lunchbox/nymph = 3,
-	/obj/item/weapon/storage/toolbox/lunchbox/syndicate = 3)
+	/obj/item/weapon/storage/lunchbox = 3,
+	/obj/item/weapon/storage/lunchbox/heart = 3,
+	/obj/item/weapon/storage/lunchbox/cat = 3,
+	/obj/item/weapon/storage/lunchbox/nt = 3,
+	/obj/item/weapon/storage/lunchbox/mars = 3,
+	/obj/item/weapon/storage/lunchbox/cti = 3,
+	/obj/item/weapon/storage/lunchbox/nymph = 3,
+	/obj/item/weapon/storage/lunchbox/syndicate = 3)
 
 
 	contraband = list(/obj/item/weapon/material/kitchen/rollingpin = 2,
