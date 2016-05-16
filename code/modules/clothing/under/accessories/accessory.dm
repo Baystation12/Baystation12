@@ -18,19 +18,18 @@
 	on_removed()
 	return ..()
 
-/obj/item/clothing/accessory/proc/get_inv_overlay(var/mob/user_mob)
+/obj/item/clothing/accessory/proc/get_inv_overlay()
 	if(!inv_overlay)
-		if(!mob_overlay)
-			get_mob_overlay(user_mob)
-
 		var/tmp_icon_state = "[overlay_state? "[overlay_state]" : "[icon_state]"]"
-		if(icon_override)
-			if("[tmp_icon_state]_tie" in icon_states(icon_override))
-				tmp_icon_state = "[tmp_icon_state]_tie"
-		inv_overlay = image(icon = INV_ACCESSORIES_DEF_ICON, icon_state = tmp_icon_state, dir = SOUTH)
+		if(icon_override && ("[tmp_icon_state]_tie" in icon_states(icon_override)))
+			inv_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
+		else
+			inv_overlay = image(icon = INV_ACCESSORIES_DEF_ICON, icon_state = tmp_icon_state, dir = SOUTH)
 	return inv_overlay
 
 /obj/item/clothing/accessory/proc/get_mob_overlay(var/mob/user_mob)
+	
+
 	var/tmp_icon_state = "[overlay_state? "[overlay_state]" : "[icon_state]"]"
 	var/use_sprite_sheet = INV_ACCESSORIES_DEF_ICON
 
@@ -41,12 +40,10 @@
 		if (sprite_sheets[user_mob_species] && (tmp_icon_state in icon_states(sprite_sheets[user_mob_species])))
 			use_sprite_sheet = sprite_sheets[user_mob_species]
 
-	if(icon_override)
-		if("[tmp_icon_state]_mob" in icon_states(icon_override))
-			tmp_icon_state = "[tmp_icon_state]_mob"
-		mob_overlay = image("icon" = icon_override, "icon_state" = "[tmp_icon_state]")
+	if(icon_override && ("[tmp_icon_state]_mob" in icon_states(icon_override)))
+		mob_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_mob")
 	else
-		mob_overlay = image("icon" = use_sprite_sheet, "icon_state" = "[tmp_icon_state]")
+		mob_overlay = image(icon = use_sprite_sheet, icon_state = "[tmp_icon_state]")
 	return mob_overlay
 
 //when user attached an accessory to S
@@ -55,7 +52,7 @@
 		return
 	has_suit = S
 	loc = has_suit
-	has_suit.overlays += get_inv_overlay(user)
+	has_suit.overlays += get_inv_overlay()
 
 	if(user)
 		user << "<span class='notice'>You attach \the [src] to \the [has_suit].</span>"
@@ -64,7 +61,7 @@
 /obj/item/clothing/accessory/proc/on_removed(var/mob/user)
 	if(!has_suit)
 		return
-	has_suit.overlays -= get_inv_overlay(null)
+	has_suit.overlays -= get_inv_overlay()
 	has_suit = null
 	if(user)
 		usr.put_in_hands(src)
