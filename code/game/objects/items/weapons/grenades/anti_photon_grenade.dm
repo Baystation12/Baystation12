@@ -7,7 +7,7 @@
 	det_time = 20
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 4)
 
-/obj/item/weapon/grenade/anti_photon/prime()
+/obj/item/weapon/grenade/anti_photon/detonate()
 	playsound(src.loc, 'sound/effects/phasein.ogg', 50, 1, 5)
 	set_light(10, -10, "#FFFFFF")
 

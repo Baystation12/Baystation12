@@ -146,7 +146,7 @@
 
 /obj/item/weapon/storage/box/flashbangs
 	name = "box of flashbangs"
-	desc = "A box containing 7 antipersonnel flashbang grenades.<br> WARNING: These devices are extremely dangerous and can cause blindness or deafness in repeated use."
+	desc = "A box containing 7 antipersonnel flashbang grenades.<br> WARNING: These devices are extremely dangerous and can cause blindness or deafness from repeated use."
 	icon_state = "flashbang"
 	startswith = list(/obj/item/weapon/grenade/flashbang = 7)
 
@@ -154,15 +154,25 @@
 	name = "box of pepperspray grenades"
 	desc = "A box containing 7 tear gas grenades. A gas mask is printed on the label.<br> WARNING: Exposure carries risk of serious injury or death. Keep away from persons with lung conditions."
 	icon_state = "flashbang"
-	startswith = list(/obj/item/weapon/grenade/chem_grenade/teargas = 6)
-
-
+	startswith = list(/obj/item/weapon/grenade/chem_grenade/teargas = 7)
 
 /obj/item/weapon/storage/box/emps
 	name = "box of emp grenades"
 	desc = "A box containing 5 military grade EMP grenades.<br> WARNING: Do not use near unshielded electronics or biomechanical augmentations, death or permanent paralysis may occur."
 	icon_state = "flashbang"
 	startswith = list(/obj/item/weapon/grenade/empgrenade = 5)
+
+/obj/item/weapon/storage/box/frags
+	name = "box of frag grenades"
+	desc = "A box containing 5 military grade fragmentation grenades.<br> WARNING: Live explosives. Misuse may result in serious injury or death."
+	icon_state = "flashbang"
+	startswith = list(/obj/item/weapon/grenade/frag = 5)
+
+/obj/item/weapon/storage/box/fragshells
+	name = "box of frag shells"
+	desc = "A box containing 5 military grade fragmentation shells.<br> WARNING: Live explosive munitions. Misuse may result in serious injury or death."
+	icon_state = "flashbang"
+	startswith = list(/obj/item/weapon/grenade/frag/shell = 5)
 
 /obj/item/weapon/storage/box/smokes
 	name = "box of smoke bombs"
@@ -364,8 +374,9 @@
 
 /obj/item/weapon/storage/box/checkers
 	name = "checkers box"
-	desc = "this box holds a nifty portion of checkers."
+	desc = "This box holds a nifty portion of checkers. Foam-shaped on the inside so that only checkers may fit."
 	icon_state = "checkers"
+	foldable = null //specially shaped boxes generally should not be foldable.
 	max_storage_space = 24
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/checker)
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/checker = 12,

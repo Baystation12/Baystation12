@@ -107,7 +107,7 @@
 		usr << "<span class='warning'>Connection error: Destination Unreachable.</span>"
 
 	// Cyborgs standing next to the SMES can play with the wiring.
-	if(istype(usr, /mob/living/silicon/robot) && Adjacent(usr) && open_hatch)
+	if(istype(usr, /mob/living/silicon/robot) && Adjacent(usr) && panel_open)
 		wires.Interact(usr)
 
 // Proc: New()
@@ -131,7 +131,7 @@
 // Description: Opens the UI as usual, and if cover is removed opens the wiring panel.
 /obj/machinery/power/smes/buildable/attack_hand()
 	..()
-	if(open_hatch)
+	if(panel_open)
 		wires.Interact(usr)
 
 // Proc: recalc_coils()

@@ -1,11 +1,11 @@
 /obj/item/projectile/ion
 	name = "ion bolt"
 	icon_state = "ion"
+	fire_sound = 'sound/weapons/Laser.ogg'
 	damage = 0
 	damage_type = BURN
 	nodamage = 1
 	check_armour = "energy"
-
 
 	on_hit(var/atom/target, var/blocked = 0)
 		empulse(target, 1, 1)
@@ -27,6 +27,7 @@
 /obj/item/projectile/temp
 	name = "freeze beam"
 	icon_state = "ice_2"
+	fire_sound = 'sound/weapons/pulse3.ogg'
 	damage = 0
 	damage_type = BURN
 	nodamage = 1
@@ -73,6 +74,7 @@
 /obj/item/projectile/energy/floramut
 	name = "alpha somatoray"
 	icon_state = "energy"
+	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
 	damage_type = TOX
 	nodamage = 1
@@ -84,7 +86,7 @@
 			var/mob/living/carbon/human/H = M
 			if((H.species.flags & IS_PLANT) && (H.nutrition < 500))
 				if(prob(15))
-					H.apply_effect((rand(30,80)),IRRADIATE)
+					H.apply_effect((rand(30,80)),IRRADIATE,blocked = H.getarmor(null, "rad"))
 					H.Weaken(5)
 					for (var/mob/V in viewers(src))
 						V.show_message("\red [M] writhes in pain as \his vacuoles boil.", 3, "\red You hear the crunching of leaves.", 2)
@@ -106,6 +108,7 @@
 /obj/item/projectile/energy/florayield
 	name = "beta somatoray"
 	icon_state = "energy2"
+	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
 	damage_type = TOX
 	nodamage = 1

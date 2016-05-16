@@ -15,6 +15,7 @@ datum/controller/vote
 	var/list/current_low_votes = list()
 	var/list/additional_text = list()
 	var/auto_muted = 0
+	var/auto_add_antag = 0
 
 	New()
 		if(vote != src)
@@ -59,6 +60,11 @@ datum/controller/vote
 	proc/automap()
 		initiate_vote("map","the server", 1)
 		log_debug("The server has called a map vote")
+
+	proc/autoaddantag()
+		auto_add_antag = 1
+		initiate_vote("add_antagonist","the server", 1)
+		log_debug("The server has called an add antag vote.")
 
 	proc/reset()
 		initiator = null
@@ -164,21 +170,19 @@ datum/controller/vote
 				else
 					i++
 
-			if(mode == "gamemode" && (firstChoice == "Extended" || ticker.hide_mode == 0)) // Announce Extended gamemode, but not other gamemodes
+			if(mode != "gamemode" || (firstChoice == "Extended" || ticker.hide_mode == 0)) // Announce unhidden gamemodes or other results, but not other gamemodes
 				text += "<b>Vote Result: [firstChoice]</b>"
 				if(secondChoice)
 					text += "\nSecond place: [secondChoice]"
 				if(thirdChoice)
 					text += ", third place: [thirdChoice]"
-			else if(mode != "gamemode")
-				text += "<b>Vote Result: [firstChoice]</b>"
 			else
-				text += "<b>The vote has ended.</b>" // What will be shown if it is a gamemode vote that isn't extended
+				text += "<b>The vote has ended.</b>" // What will be shown if it is a gamemode vote that was hidden
 
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
 			if(mode == "add_antagonist")
-				antag_add_failed = 1
+				antag_add_finished = 1
 		log_vote(text)
 		world << "<font color='purple'>[text]</font>"
 		return list(firstChoice, secondChoice, thirdChoice)
@@ -203,11 +207,37 @@ datum/controller/vote
 				if("crew_transfer")
 					if(.[1] == "Initiate Crew Transfer")
 						init_shift_change(null, 1)
+					else if(.[1] == "Add Antagonist")
+						spawn(10)
+							autoaddantag()
 				if("add_antagonist")
 					if(isnull(.[1]) || .[1] == "None")
-						antag_add_failed = 1
+						antag_add_finished = 1
 					else
-						additional_antag_types |= antag_names_to_ids[.[1]]
+						choices -= "Random"
+						if(!auto_add_antag)
+							choices -= "None"
+						for(var/i = 1, i <= length(.), i++)
+							if(.[i] == "Random")
+								.[i] = pick(choices)
+								world << "The random antag in [i]\th place is [.[i]]."
+						var/antag_type = antag_names_to_ids[.[1]]
+						if(ticker.current_state >= 2)
+							spawn(0) // break off so we don't hang the vote process
+								var/list/antag_choices = list(all_antag_types[antag_type], all_antag_types[antag_names_to_ids[.[2]]], all_antag_types[antag_names_to_ids[.[3]]])
+								if(!ticker.attempt_late_antag_spawn(antag_choices))
+									world << "<b>No antags were added.</b>"
+									antag_add_finished = 1
+									if(auto_add_antag)
+										auto_add_antag = 0
+										spawn(10)
+											autotransfer();
+								else if(auto_add_antag)
+									auto_add_antag = 0
+									// the buffer will already have an hour added to it, so we'll give it one more
+									transfer_controller.timerbuffer = transfer_controller.timerbuffer + config.vote_autotransfer_interval
+						else
+							additional_antag_types |= antag_type
 				if("map")
 					var/datum/map/M = all_maps[.[1]]
 					fdel("use_map")
@@ -282,6 +312,8 @@ datum/controller/vote
 					if(check_rights(R_ADMIN|R_MOD, 0))
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
+						if (config.allow_extra_antags && !antag_add_finished)
+							choices.Add("Add Antagonist")
 					else
 						if (get_security_level() == "red" || get_security_level() == "delta")
 							initiator_key << "The current alert status is too high to call for a crew transfer!"
@@ -291,14 +323,18 @@ datum/controller/vote
 							initiator_key << "The crew transfer button has been disabled!"
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
+						if (config.allow_extra_antags && !antag_add_finished)
+							choices.Add("Add Antagonist")
 				if("add_antagonist")
-					if(!config.allow_extra_antags || ticker.current_state >= 2)
+					if(!config.allow_extra_antags)
 						return 0
 					for(var/antag_type in all_antag_types)
 						var/datum/antagonist/antag = all_antag_types[antag_type]
 						if(!(antag.id in additional_antag_types) && antag.is_votable())
 							choices.Add(antag.role_text)
-					choices.Add("None")
+					choices.Add("Random")
+					if(!auto_add_antag)
+						choices.Add("None")
 				if("map")
 					if(!config.allow_map_switching)
 						return 0
@@ -369,19 +405,19 @@ datum/controller/vote
 					. += "[choices[i]]"
 				. += "</td><td>"
 				if(current_high_votes[C.ckey] == i)
-					. += "<b><a href='?src=\ref[src];high_vote=[i]'>High</a></b>"
+					. += "<b><a href='?src=\ref[src];high_vote=[i]'>First</a></b>"
 				else
-					. += "<a href='?src=\ref[src];high_vote=[i]'>High</a>"
+					. += "<a href='?src=\ref[src];high_vote=[i]'>First</a>"
 				. += "</td><td>"
 				if(current_med_votes[C.ckey] == i)
-					. += "<b><a href='?src=\ref[src];med_vote=[i]'>Medium</a></b>"
+					. += "<b><a href='?src=\ref[src];med_vote=[i]'>Second</a></b>"
 				else
-					. += "<a href='?src=\ref[src];med_vote=[i]'>Medium</a>"
+					. += "<a href='?src=\ref[src];med_vote=[i]'>Second</a>"
 				. += "</td><td>"
 				if(current_low_votes[C.ckey] == i)
-					. += "<b><a href='?src=\ref[src];low_vote=[i]'>Low</a></b>"
+					. += "<b><a href='?src=\ref[src];low_vote=[i]'>Third</a></b>"
 				else
-					. += "<a href='?src=\ref[src];low_vote=[i]'>Low</a>"
+					. += "<a href='?src=\ref[src];low_vote=[i]'>Third</a>"
 				. += "</td><td align = 'center'>[votepercent]%</td>"
 				if (additional_text.len >= i)
 					. += additional_text[i]
@@ -420,7 +456,7 @@ datum/controller/vote
 				. += "<font color='grey'>Map (Disallowed)</font>"
 			. += "</li><li>"
 			//extra antagonists
-			if(!antag_add_failed && config.allow_extra_antags)
+			if(!antag_add_finished && config.allow_extra_antags)
 				. += "<a href='?src=\ref[src];vote=add_antagonist'>Add Antagonist Type</a>"
 			else
 				. += "<font color='grey'>Add Antagonist (Disallowed)</font>"

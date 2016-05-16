@@ -2,7 +2,6 @@ var/datum/antagonist/ert/ert
 
 /datum/antagonist/ert
 	id = MODE_ERT
-	bantype = "Emergency Response Team"
 	role_text = "Emergency Responder"
 	role_text_plural = "Emergency Responders"
 	welcome_text = "As member of the Emergency Response Team, you answer only to your leader and company officials."

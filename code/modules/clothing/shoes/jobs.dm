@@ -4,8 +4,11 @@
 	icon_state = "galoshes"
 	permeability_coefficient = 0.05
 	item_flags = NOSLIP
-	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null
+
+/obj/item/clothing/shoes/galoshes/New()
+	..()
+	slowdown_per_slot[slot_shoes] = SHOES_SLOWDOWN+1
 
 /obj/item/clothing/shoes/jackboots
 	name = "jackboots"

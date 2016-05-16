@@ -25,7 +25,8 @@
 	W.name = "\improper Dyrnwyn"
 	W.damtype = BURN
 	W.hitsound = 'sound/items/welder2.ogg'
-	W.slowdown = 1
+	W.slowdown_per_slot[slot_l_hand] = 1
+	W.slowdown_per_slot[slot_r_hand] = 1
 	return W
 
 /spell/targeted/equip_item/dyrnwyn/empower_spell()

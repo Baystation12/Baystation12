@@ -4,7 +4,7 @@
 	item_state = "empgrenade"
 	origin_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 3)
 
-	prime()
+	detonate()
 		..()
 		if(empulse(src, 4, 10))
 			qdel(src)
@@ -17,7 +17,7 @@
 	item_state = "lyempgrenade"
 	origin_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 3)
 
-	prime()
+	detonate()
 		..()
 		if(empulse(src, 4, 1))
 			qdel(src)

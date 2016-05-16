@@ -37,6 +37,15 @@ var/list/all_maps = list()
 	var/const/NO_VENT = 2
 	var/const/NO_SCRUBBER = 3
 
+	var/shuttle_docked_message
+	var/shuttle_leaving_dock
+	var/shuttle_called_message
+	var/shuttle_recall_message
+	var/emergency_shuttle_docked_message
+	var/emergency_shuttle_leaving_dock
+	var/emergency_shuttle_called_message
+	var/emergency_shuttle_recall_message
+	
 /datum/map/New()
 	..()
 	if(!map_levels)

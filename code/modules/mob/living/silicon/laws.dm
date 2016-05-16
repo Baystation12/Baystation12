@@ -109,4 +109,4 @@
 
 /mob/living/silicon/proc/log_law(var/law_message)
 	log_and_message_admins(law_message)
-	lawchanges += "[worldtime2text()] - [usr ? "[key_name(usr)]" : "EVENT"] [law_message]"
+	lawchanges += "[stationtime2text()] - [usr ? "[key_name(usr)]" : "EVENT"] [law_message]"

@@ -151,14 +151,22 @@
 	icon_state = "duffle"
 	item_state_slots = null
 	w_class = 5
-	slowdown = 3 //wear it on your back if you must, best to carry it in hands to avoid any slowdown at all.
-	max_storage_space = 32
+	slowdown_general = 1
+	max_storage_space = DEFAULT_BACKPACK_STORAGE + 10
+
+/obj/item/weapon/storage/backpack/dufflebag/New()
+	..()
+	slowdown_per_slot[slot_back] = 2
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie
 	name = "black dufflebag"
 	desc = "A large dufflebag for holding extra tactical supplies."
-	slowdown = 1
+	slowdown_general = 0
 	icon_state = "duffle_syndie"
+
+/obj/item/weapon/storage/backpack/dufflebag/syndie/New()
+	..()
+	slowdown_per_slot = list(slot_last)
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie/med
 	name = "medical dufflebag"

@@ -26,7 +26,7 @@
 
 	var/msg = "<span class='info'>*---------*\nThis is "
 
-	var/datum/gender/T = gender_datums[gender]
+	var/datum/gender/T = gender_datums[get_gender()]
 	if(skipjumpsuit && skipface) //big suits/masks/helmets make it hard to tell their gender
 		T = gender_datums[PLURAL]
 	else

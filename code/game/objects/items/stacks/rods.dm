@@ -12,6 +12,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 1875)
 	max_amount = 60
 	attack_verb = list("hit", "bludgeoned", "whacked")
+	lock_picking_level = 3
 
 /obj/item/stack/rods/cyborg
 	name = "metal rod synthesizer"

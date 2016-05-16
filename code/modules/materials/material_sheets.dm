@@ -12,8 +12,8 @@
 	var/perunit = SHEET_MATERIAL_AMOUNT
 	var/apply_colour //temp pending icon rewrite
 
-/obj/item/stack/material/New()
-	..()
+/obj/item/stack/material/New(atom/newloc, var/amount=null)
+	..(newloc, amount)
 	pixel_x = rand(0,4)-4
 	pixel_y = rand(0,4)-4
 

@@ -1322,12 +1322,6 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/miningdrillbrace
 	sort_string = "KCAAB"
 
-/datum/design/circuit/comconsole
-	name = "communications console"
-	id = "comconsole"
-	build_path = /obj/item/weapon/circuitboard/communications
-	sort_string = "LAAAA"
-
 /datum/design/circuit/emp_data
 	name = "employment records console"
 	id = "emp_data"
@@ -1499,6 +1493,13 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 4)
 	build_path = /obj/item/weapon/circuitboard/ntnet_relay
 	sort_string = "WAAAA"
+
+/datum/design/circuit/replicator
+	name = "food replicator"
+	id = "freplicator"
+	req_tech = list(TECH_BIO = 3, TECH_DATA = 3)
+	build_path = /obj/item/weapon/circuitboard/replicator
+	sort_string = "WAAAR"
 
 /datum/design/circuit/aicore
 	name = "AI core"

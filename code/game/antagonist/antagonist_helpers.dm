@@ -1,5 +1,5 @@
 /datum/antagonist/proc/can_become_antag(var/datum/mind/player, var/ignore_role)
-	if(player.current && jobban_isbanned(player.current, bantype))
+	if(player.current && jobban_isbanned(player.current, id))
 		return 0
 	if(!ignore_role)
 		if(player.assigned_role in restricted_jobs)
@@ -46,7 +46,7 @@
 /datum/antagonist/proc/can_late_spawn()
 	if(!ticker)
 		return 0
-	if(!(id in ticker.mode.latejoin_antags))
+	if(!(id in ticker.mode.latejoin_antag_tags))
 		return 0
 	update_current_antag_max()
 	if(get_antag_count() >= cur_max)

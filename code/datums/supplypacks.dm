@@ -764,7 +764,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Security"
 
 /datum/supply_packs/eweapons
-	name = "Experimental weapons crate"
+	name = "Advanced Energy Weapons crate"
 	contains = list(/obj/item/weapon/gun/energy/xray,
 					/obj/item/weapon/gun/energy/xray,
 					/obj/item/weapon/shield/energy,
@@ -773,7 +773,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/suit/armor/laserproof)
 	cost = 125
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "\improper Experimental weapons crate"
+	containername = "\improper Advanced Energy Weapons crate"
 	access = access_heads
 	group = "Security"
 

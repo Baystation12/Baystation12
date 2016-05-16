@@ -18,6 +18,7 @@ var/global/datum/global_init/init = new ()
 	generate_gameid()
 
 	makeDatumRefLists()
+	populateGlobalLists()
 	load_configuration()
 
 	initialize_chemical_reagents()
@@ -174,8 +175,9 @@ var/world_topic_spam_protect_time = world.timeofday
 
 		// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
 		s["players"] = 0
-		s["stationtime"] = worldtime2text()
-		s["roundduration"] = round_duration_as_text()
+		s["stationtime"] = stationtime2text()
+		s["roundduration"] = roundduration2text()
+		s["map"] = using_map.full_name
 
 		if(input["status"] == "2")
 			var/list/players = list()
@@ -246,9 +248,9 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	else if(T == "revision")
 		if(revdata.revision)
-			return list2params(list(branch = revdata.branch, date = revdata.date, revision = revdata.revision))
+			return list2params(list(branch = revdata.branch, date = revdata.date, revision = revdata.revision, gameid = game_id))
 		else
-			return "unknown"
+			return list2params(list(revision = "unknown", gameid = game_id))
 
 	else if(copytext(T,1,5) == "info")
 		var/input[] = params2list(T)

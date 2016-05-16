@@ -345,18 +345,15 @@ This function restores all organs.
 
 
 /mob/living/carbon/human/proc/get_organ(var/zone)
-	if(!zone)	zone = "chest"
-	if (zone in list( "eyes", "mouth" ))
-		zone = "head"
-	return organs_by_name[zone]
+	return organs_by_name[check_zone(zone)]
 
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/edge = 0, var/obj/used_weapon = null)
 
 	//visible_message("Hit debug. [damage] | [damagetype] | [def_zone] | [blocked] | [sharp] | [used_weapon]")
 
 	//Handle other types of damage
-	if(!stat && damagetype != BRUTE && damagetype != BURN)
-		if(damagetype == HALLOSS && !(species && (species.flags & NO_PAIN)))
+	if(damagetype != BRUTE && damagetype != BURN)
+		if(!stat && damagetype == HALLOSS && !(species && (species.flags & NO_PAIN)))
 			if ((damage > 25 && prob(20)) || (damage > 50 && prob(60)))
 				emote("scream")
 
@@ -366,7 +363,7 @@ This function restores all organs.
 	//Handle BRUTE and BURN damage
 	handle_suit_punctures(damagetype, damage, def_zone)
 
-	if(blocked >= 2)	return 0
+	if(blocked >= 100)	return 0
 
 	var/obj/item/organ/external/organ = null
 	if(isorgan(def_zone))
@@ -377,7 +374,7 @@ This function restores all organs.
 	if(!organ)	return 0
 
 	if(blocked)
-		damage = (damage/(blocked+1))
+		damage *= blocked_mult(blocked)
 
 	switch(damagetype)
 		if(BRUTE)

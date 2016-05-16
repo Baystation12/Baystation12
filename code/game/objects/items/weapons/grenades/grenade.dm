@@ -20,7 +20,7 @@
 		activate(user)
 		add_fingerprint(user)
 		spawn(5)
-			prime()
+			detonate()
 		return 0
 	return 1
 
@@ -34,7 +34,7 @@
 		icon_state = initial(icon_state) + "_active"
 		playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 		spawn(det_time)
-			prime()
+			detonate()
 			return
 		user.set_dir(get_dir(user, target))
 		user.drop_item()
@@ -78,11 +78,11 @@
 	playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 
 	spawn(det_time)
-		prime()
+		detonate()
 		return
 
 
-/obj/item/weapon/grenade/proc/prime()
+/obj/item/weapon/grenade/proc/detonate()
 //	playsound(loc, 'sound/items/Welder2.ogg', 25, 1)
 	var/turf/T = get_turf(src)
 	if(T)

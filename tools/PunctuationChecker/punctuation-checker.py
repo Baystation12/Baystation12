@@ -10,7 +10,7 @@ if(not path.isdir(args.dir)):
     sys.exit(1)
 
 exceptions = [('code/modules/hydroponics/grown.dm', 'desc = "A"')]
-end_desc_exceptions = ['."', '?"', '!"', ')"', ']"', '.</I>"', '!</I>"', '.</i>"', '?</i>"', '!\'</i>"', '.\'</i>"', '~"', '.</b>"']
+end_desc_exceptions = ['."', '?"', '!"', ')"', ']"', '.</I>"', '!</I>"', '.</i>"', '?</i>"', '!\'</i>"', '.\'</i>"', '~"', '.</b>"', '"', '\"']
 found_bad_descriptions = False
 
 for index, exception in enumerate(exceptions, 0):

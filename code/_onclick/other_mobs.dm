@@ -143,11 +143,12 @@
 
 	if(!..())
 		return
-
-	if(melee_damage_upper == 0 && istype(A,/mob/living))
-		custom_emote(1,"[friendly] [A]!")
-		return
-
+	if(istype(A,/mob/living))
+		if(melee_damage_upper == 0)
+			custom_emote(1,"[friendly] [A]!")
+			return
+		if(ckey)
+			add_logs(src, A, attacktext)
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/damage = rand(melee_damage_lower, melee_damage_upper)
 	if(A.attack_generic(src,damage,attacktext,environment_smash) && loc && attack_sound)
