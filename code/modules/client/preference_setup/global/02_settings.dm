@@ -61,9 +61,9 @@
 
 		. += "<tr><td>[client_pref.description]: </td>"
 		if(pref_mob.is_preference_enabled(client_pref.key))
-			. += "<td><b>[client_pref.enabled_description]</b></td> <td><a href='?src=\ref[src];toggle_off=[client_pref.key]'>[client_pref.disabled_description]</a></td>"
+			. += "<td><span class='linkOn'><b>[client_pref.enabled_description]</b></span></td> <td><a href='?src=\ref[src];toggle_off=[client_pref.key]'>[client_pref.disabled_description]</a></td>"
 		else
-			. += "<td><a  href='?src=\ref[src];toggle_on=[client_pref.key]'>[client_pref.enabled_description]</a></td> <td><b>[client_pref.disabled_description]</b></td>"
+			. += "<td><a  href='?src=\ref[src];toggle_on=[client_pref.key]'>[client_pref.enabled_description]</a></td> <td><span class='linkOn'><b>[client_pref.disabled_description]</b></span></td>"
 		. += "</tr>"
 
 	. += "</table>"

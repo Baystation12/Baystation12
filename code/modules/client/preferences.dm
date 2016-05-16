@@ -111,6 +111,7 @@ datum/preferences
 	var/savefile/loaded_preferences
 	var/savefile/loaded_character
 	var/datum/category_collection/player_setup_collection/player_setup
+	var/datum/browser/panel
 
 /datum/preferences/New(client/C)
 	player_setup = new(src)
@@ -211,7 +212,9 @@ datum/preferences
 	dat += player_setup.content(user)
 
 	dat += "</html></body>"
-	user << browse(dat, "window=preferences;size=635x736")
+	var/datum/browser/popup = new(user, "Character Setup","Character Setup", 635, 736, src)
+	popup.set_content(dat)
+	popup.open()
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
 	if(!user)	return
@@ -370,7 +373,8 @@ datum/preferences
 			character.gender = MALE
 
 /datum/preferences/proc/open_load_dialog(mob/user)
-	var/dat = "<body>"
+	var/dat  = list()
+	dat += "<body>"
 	dat += "<tt><center>"
 
 	var/savefile/S = new /savefile(path)
@@ -387,7 +391,10 @@ datum/preferences
 
 	dat += "<hr>"
 	dat += "</center></tt>"
-	user << browse(dat, "window=saves;size=300x390")
+	panel = new(user, "Character Slots", "Character Slots", 300, 390, src)
+	panel.set_content(jointext(dat,null))
+	panel.open()
 
 /datum/preferences/proc/close_load_dialog(mob/user)
 	user << browse(null, "window=saves")
+	panel.close()
