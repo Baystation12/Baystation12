@@ -50,3 +50,26 @@ mob/observer/check_airflow_movable()
 /proc/updateallghostimages()
 	for (var/mob/observer/ghost/O in player_list)
 		O.updateghostimages()
+
+/mob/observer/touch_map_edge()
+	if(z in using_map.sealed_levels)
+		return
+
+	var/new_x = x
+	var/new_y = y
+
+	if(x <= TRANSITIONEDGE)
+		new_x = TRANSITIONEDGE + 1
+	else if (x >= (world.maxx - TRANSITIONEDGE + 1))
+		new_x = world.maxx - TRANSITIONEDGE
+	else if (y <= TRANSITIONEDGE)
+		new_y = TRANSITIONEDGE + 1
+	else if (y >= (world.maxy - TRANSITIONEDGE + 1))
+		new_y = world.maxy - TRANSITIONEDGE
+
+	var/turf/T = locate(new_x, new_y, z)
+	if(T)
+		forceMove(T)
+		inertia_dir = 0
+		throwing = 0
+		src << "<span class='notice'>You cannot move further in this direction.</span>"
