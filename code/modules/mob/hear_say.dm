@@ -81,7 +81,7 @@
 	var/time = say_timestamp()
 	src << "[time] [message]"
 
-/mob/proc/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="")
+/mob/proc/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="")
 
 	if(!client)
 		return
@@ -191,24 +191,24 @@
 		if(prob(20))
 			src << "<span class='warning'>You feel your headset vibrate but can hear nothing from it!</span>"
 	else
-		on_hear_radio(part_a, speaker_name, track, part_b, formatted)
+		on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
 
 /proc/say_timestamp()
 	return "<span class='say_quote'>\[[stationtime2text()]\]</span>"
 
-/mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
-	src << "[part_a][speaker_name][part_b][formatted]"
+/mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
+	src << "[part_a][speaker_name][part_b][formatted][part_c]"
 
-/mob/observer/ghost/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
-	src << "[part_a][track][part_b][formatted]"
+/mob/observer/ghost/on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
+	src << "[part_a][track][part_b][formatted][part_c]"
 
-/mob/living/silicon/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
+/mob/living/silicon/on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
 	var/time = say_timestamp()
-	src << "[time][part_a][speaker_name][part_b][formatted]"
+	src << "[time][part_a][speaker_name][part_b][formatted][part_c]"
 
-/mob/living/silicon/ai/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
+/mob/living/silicon/ai/on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
 	var/time = say_timestamp()
-	src << "[time][part_a][track][part_b][formatted]"
+	src << "[time][part_a][track][part_b][formatted][part_c]"
 
 /mob/proc/hear_signlang(var/message, var/verb = "gestures", var/datum/language/language, var/mob/speaker = null)
 	if(!client)
