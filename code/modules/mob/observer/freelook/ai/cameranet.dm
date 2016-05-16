@@ -28,18 +28,21 @@ var/datum/visualnet/camera/cameranet_
 	if(istype(c))
 		if(c in cameras)
 			return
-		var/list/open_networks = c.network - restricted_camera_networks
-		if(!open_networks.len)
-			return
-		dd_insertObjectList(cameras, c)
-		..(c, c.can_use())
+		. = ..(c, c.can_use())
+		if(.)
+			var/list/open_networks = c.network - restricted_camera_networks
+			if(!open_networks.len)
+				return
+			dd_insertObjectList(cameras, c)
 	else if(isAI(c))
 		var/mob/living/silicon/AI = c
-		..(AI, AI.stat != DEAD)
+		return ..(AI, AI.stat != DEAD)
 
 // Add a camera to a chunk.
 
 /datum/visualnet/camera/remove_source(obj/machinery/camera/c)
-	if(!cameras.Remove(c))
-		return
-	..(c, c.can_use())
+	if(istype(c) && cameras.Remove(c))
+		. = ..(c, c.can_use())
+	if(isAI(c))
+		var/mob/living/silicon/AI = c
+		return ..(AI, AI.stat != DEAD)
