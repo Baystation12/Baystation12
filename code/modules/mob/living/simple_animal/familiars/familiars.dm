@@ -163,6 +163,9 @@
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
+/mob/living/simple_animal/familiar/pet/mouse/cannot_use_vents()
+	return
+
 /mob/living/simple_animal/familiar/pet/cat
 	name = "black cat"
 	desc = "A pitch black cat. Said to be especially unlucky."
