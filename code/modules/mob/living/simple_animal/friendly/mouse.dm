@@ -132,6 +132,3 @@
 	// Change my name back, don't want to be named Tom (666)
 	name = initial(name)
 	real_name = name
-
-/mob/living/simple_animal/mouse/cannot_use_vents()
-	return

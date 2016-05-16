@@ -279,9 +279,5 @@
 	..(user)
 	if(src.held_item)
 		user << "It is carrying \icon[src.held_item] \a [src.held_item]."
-
-/mob/living/simple_animal/spiderbot/cannot_use_vents()
-	return
-
 /mob/living/simple_animal/spiderbot/binarycheck()
 	return positronic

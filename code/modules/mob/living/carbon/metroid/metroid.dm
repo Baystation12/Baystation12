@@ -385,4 +385,4 @@
 /mob/living/carbon/slime/cannot_use_vents()
 	if(Victim)
 		return "You cannot ventcrawl while feeding."
-	..()
+	return null

@@ -792,7 +792,9 @@ default behaviour is:
 			new_area.Entered(src)
 
 /mob/living/proc/cannot_use_vents()
-	return "You can't fit into that vent."
+	if(mob_size > MOB_SMALL)
+		return "You can't fit into that vent."
+	return null
 
 /mob/living/proc/has_brain()
 	return 1
