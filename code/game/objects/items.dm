@@ -196,7 +196,7 @@
 	if(user.put_in_active_hand(src))
 		if(randpixel)
 			pixel_x = rand(-randpixel, randpixel)
-			pixel_y = rand(-randpixel, 0) //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character's feet
+			pixel_y = rand(-randpixel, 0) - randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character's feet
 		else if(randpixel == 0)
 			pixel_x = 0
 			pixel_y = 0
