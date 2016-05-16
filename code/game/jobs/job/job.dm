@@ -53,9 +53,10 @@
 			if(COMPANY_OPPOSED)		loyalty = 0.70
 
 	//give them an account in the station database
-	var/species_modifier = (H.species ? economic_species_modifier[H.species.type] : 2)
-	if(!species_modifier)
-		species_modifier = economic_species_modifier[/datum/species/human]
+	if(!(H.species && (H.species.type in economic_species_modifier)))
+		return //some bizarre species like shadow, slime, or monkey? You don't get an account.
+
+	var/species_modifier = economic_species_modifier[H.species.type]
 
 	var/money_amount = (rand(5,50) + rand(5, 50)) * loyalty * economic_modifier * species_modifier
 	var/datum/money_account/M = create_account(H.real_name, money_amount, null)
