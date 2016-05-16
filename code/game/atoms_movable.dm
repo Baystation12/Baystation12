@@ -126,14 +126,14 @@
 					src.throw_impact(A,speed)
 
 /atom/movable/proc/throw_at(atom/target, range, speed, thrower)
-	if(!target || !src)	return 0
-	if(!target.z != src.z) return 0
+	if(!target || !src)
+		return 0
+	if(target.z != src.z)
+		return 0
 	//use a modified version of Bresenham's algorithm to get from the atom's current position to that of the target
-
 	src.throwing = 1
 	src.thrower = thrower
 	src.throw_source = get_turf(src)	//store the origin turf
-
 	if(usr)
 		if(HULK in usr.mutations)
 			src.throwing = 2 // really strong throw!
