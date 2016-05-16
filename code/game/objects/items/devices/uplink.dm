@@ -31,13 +31,6 @@
 	processing_objects -= src
 	return ..()
 
-/obj/item/device/uplink/process()
-	if(world.time > next_offer_time)
-		discount_item = default_uplink_selection.get_random_item(INFINITY)
-		discount_amount = pick(90;0.9, 80;0.8, 70;0.7, 60;0.6, 50;0.5, 40;0.4, 30;0.3, 20;0.2, 10;0.1)
-		next_offer_time = world.time + offer_time
-		nanomanager.update_uis(src)
-
 /obj/item/device/uplink/get_item_cost(var/item_type, var/item_cost)
 	return (discount_item && (item_type == discount_item)) ? max(1, round(item_cost*discount_amount)) : item_cost
 
@@ -60,7 +53,6 @@
 	var/datum/uplink_category/category 	= 0		// The current category we are in
 	var/exploit_id								// Id of the current exploit record we are viewing
 
-
 // The hidden uplink MUST be inside an obj/item's contents.
 /obj/item/device/uplink/hidden/New()
 	spawn(2)
@@ -69,6 +61,14 @@
 	..()
 	nanoui_data = list()
 	update_nano_data()
+
+/obj/item/device/uplink/hidden/process()
+	if(world.time > next_offer_time)
+		discount_item = default_uplink_selection.get_random_item(INFINITY)
+		discount_amount = pick(90;0.9, 80;0.8, 70;0.7, 60;0.6, 50;0.5, 40;0.4, 30;0.3, 20;0.2, 10;0.1)
+		next_offer_time = world.time + offer_time
+		update_nano_data()
+		nanomanager.update_uis(src)
 
 // Toggles the uplink on and off. Normally this will bypass the item's normal functions and go to the uplink menu, if activated.
 /obj/item/device/uplink/hidden/proc/toggle()
@@ -152,7 +152,7 @@
 		nanoui_data["categories"] = categories
 		nanoui_data["discount_name"] = discount_item ? discount_item.name : ""
 		nanoui_data["discount_amount"] = (1-discount_amount)*100
-		nanoui_data["offer_expiry"] = worldtime2text(next_offer_time - world.time)
+		nanoui_data["offer_expiry"] = worldtime2text(next_offer_time)
 	else if(nanoui_menu == 1)
 		var/items[0]
 		for(var/datum/uplink_item/item in category.items)
