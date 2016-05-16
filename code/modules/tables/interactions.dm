@@ -17,35 +17,40 @@
 //checks if projectile 'P' from turf 'from' can hit whatever is behind the table. Returns 1 if it can, 0 if bullet stops.
 /obj/structure/table/proc/check_cover(obj/item/projectile/P, turf/from)
 	var/turf/cover
-	if(flipped==1)
+	if(flipped)
 		cover = get_turf(src)
-	else if(flipped==0)
+	else
 		cover = get_step(loc, get_dir(from, loc))
 	if(!cover)
 		return 1
 	if (get_dist(P.starting, loc) <= 1) //Tables won't help you if people are THIS close
 		return 1
-	if (get_turf(P.original) == cover)
-		var/chance = 20
-		if (ismob(P.original))
-			var/mob/M = P.original
-			if (M.lying)
-				chance += 20				//Lying down lets you catch less bullets
-		if(flipped==1)
-			if(get_dir(loc, from) == dir)	//Flipped tables catch mroe bullets
-				chance += 20
-			else
-				return 1					//But only from one side
-		if(prob(chance))
-			health -= P.damage/2
-			if (health > 0)
-				visible_message("<span class='warning'>[P] hits \the [src]!</span>")
-				return 0
-			else
-				visible_message("<span class='warning'>[src] breaks down!</span>")
-				break_to_parts()
-				return 1
+
+	var/chance = 20
+	if(ismob(P.original) && get_turf(P.original) == cover)
+		var/mob/M = P.original
+		if (M.lying)
+			chance += 20				//Lying down lets you catch less bullets
+	if(flipped)
+		if(get_dir(loc, from) == dir)	//Flipped tables catch mroe bullets
+			chance += 30
+		else
+			return 1					//But only from one side
+
+	if(prob(chance))
+		return 0 //blocked
 	return 1
+
+/obj/structure/table/bullet_act(obj/item/projectile/P)
+	if(!(P.damage_type == BRUTE || P.damage_type == BURN))
+		return 0
+
+	if(take_damage(P.damage/2))
+		//prevent tables with 1 health left from stopping bullets outright
+		return PROJECTILE_CONTINUE //the projectile destroyed the table, so it gets to keep going
+
+	visible_message("<span class='warning'>\The [P] hits [src]!</span>")
+	return 0
 
 /obj/structure/table/CheckExit(atom/movable/O as mob|obj, target as turf)
 	if(istype(O) && O.checkpass(PASSTABLE))
