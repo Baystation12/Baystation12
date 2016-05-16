@@ -3,6 +3,7 @@
 	desc = "Should anything ever go wrong..."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "red_phone"
+	randpixel = 0
 	flags = CONDUCT
 	force = 3.0
 	throwforce = 2.0

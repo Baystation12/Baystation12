@@ -16,6 +16,7 @@
 /obj/item/mecha_parts/chassis
 	name="Mecha Chassis"
 	icon_state = "backbone"
+	randpixel = 0
 	var/datum/construction/construct
 	flags = CONDUCT
 
