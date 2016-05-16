@@ -177,7 +177,6 @@
 				emote("cough")
 				return
 	if (disabilities & TOURETTES)
-		speech_problem_flag = 1
 		if ((prob(10) && paralysis <= 1))
 			Stun(10)
 			spawn( 0 )
@@ -189,7 +188,6 @@
 				make_jittery(100)
 				return
 	if (disabilities & NERVOUS)
-		speech_problem_flag = 1
 		if (prob(10))
 			stuttering = max(10, stuttering)
 
@@ -231,7 +229,6 @@
 		if(!gene.block)
 			continue
 		if(gene.is_active(src))
-			speech_problem_flag = 1
 			gene.OnMobLife(src)
 
 	radiation = Clamp(radiation,0,100)
@@ -693,7 +690,6 @@
 			adjustHalLoss(-3)
 
 			if(sleeping)
-				speech_problem_flag = 1
 				handle_dreams()
 				if (mind)
 					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
@@ -1172,28 +1168,11 @@
 			hud_list[SPECIALROLE_HUD] = holder
 	hud_updateflag = 0
 
-/mob/living/carbon/human/handle_silent()
-	if(..())
-		speech_problem_flag = 1
-	return silent
-
-/mob/living/carbon/human/handle_slurring()
-	if(..())
-		speech_problem_flag = 1
-	return slurring
-
 /mob/living/carbon/human/handle_stunned()
-	if(species.flags & NO_PAIN)
+	if(species.flags & NO_PAIN) //This should be it's own flag, not NO_PAIN
 		stunned = 0
 		return 0
-	if(..())
-		speech_problem_flag = 1
-	return stunned
-
-/mob/living/carbon/human/handle_stuttering()
-	if(..())
-		speech_problem_flag = 1
-	return stuttering
+	return ..()
 
 /mob/living/carbon/human/handle_fire()
 	if(..())

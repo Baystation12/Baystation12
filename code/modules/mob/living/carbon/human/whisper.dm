@@ -43,67 +43,38 @@
 	var/italics = 1
 
 	var/not_heard //the message displayed to people who could not hear the whispering
+	var/adverb
 	if (speaking)
 		if (speaking.whisper_verb)
 			verb = speaking.whisper_verb
 			not_heard = "[verb] something"
 		else
-			var/adverb = pick("quietly", "softly")
-			verb = "[speaking.speech_verb] [adverb]"
+			adverb = pick("quietly", "softly")
+			verb = speaking.speech_verb
 			not_heard = "[speaking.speech_verb] something [adverb]"
 	else
 		not_heard = "[verb] something" //TODO get rid of the null language and just prevent speech if language is null
 
 	message = capitalize(trim(message))
 
-	if(speech_problem_flag)
-		var/list/handle_r = handle_speech_problems(message)
-		message = handle_r[1]
-		verb = handle_r[2]
-		if(verb == "yells loudly")
-			verb = "slurs emphatically"
-		else
-			var/adverb = pick("quietly", "softly")
-			verb = "[verb] [adverb]"
+	//speech problems
+	if(!(speaking && (speaking.flags & NO_STUTTER)))
+		var/list/message_data = list(message, verb, 1)
+		if(handle_speech_problems(message_data))
+			message = message_data[1]
 
-		speech_problem_flag = handle_r[3]
+			if(!message_data[3]) //if a speech problem like hulk forces someone to yell then everyone hears it
+				verb = message_data[2] //assume that if they are going to force not-whispering then they will set an appropriate verb too
+				message_range = world.view
+			else if(verb != message_data[2])
+				adverb = pick("quietly", "softly") //new verb given, so 'whisperize' it with an adverb
+				verb = message_data[2]
+
+	//consoldiate the adverb if we have one
+	if(adverb) verb = "[verb] [adverb]"
 
 	if(!message || message=="")
 		return
-
-	//looks like this only appears in whisper. Should it be elsewhere as well? Maybe handle_speech_problems?
-	var/voice_sub
-	if(istype(back,/obj/item/weapon/rig))
-		var/obj/item/weapon/rig/rig = back
-		// todo: fix this shit
-		if(rig.speech && rig.speech.voice_holder && rig.speech.voice_holder.active && rig.speech.voice_holder.voice)
-			voice_sub = rig.speech.voice_holder.voice
-	else
-		for(var/obj/item/gear in list(wear_mask,wear_suit,head))
-			if(!gear)
-				continue
-			var/obj/item/voice_changer/changer = locate() in gear
-			if(changer && changer.active && changer.voice)
-				voice_sub = changer.voice
-
-	if(voice_sub == "Unknown")
-		if(copytext(message, 1, 2) != "*")
-			var/list/temp_message = splittext(message, " ")
-			var/list/pick_list = list()
-			for(var/i = 1, i <= temp_message.len, i++)
-				pick_list += i
-			for(var/i=1, i <= abs(temp_message.len/3), i++)
-				var/H = pick(pick_list)
-				if(findtext(temp_message[H], "*") || findtext(temp_message[H], ";") || findtext(temp_message[H], ":")) continue
-				temp_message[H] = ninjaspeak(temp_message[H])
-				pick_list -= H
-			message = jointext(temp_message, " ")
-			message = replacetext(message, "o", "¤")
-			message = replacetext(message, "p", "þ")
-			message = replacetext(message, "l", "£")
-			message = replacetext(message, "s", "§")
-			message = replacetext(message, "u", "µ")
-			message = replacetext(message, "b", "ß")
 
 	var/list/listening = hearers(message_range, src)
 	listening |= src
