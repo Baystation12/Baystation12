@@ -89,10 +89,9 @@
 		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=6,    requires_two_hands=6, burst_accuracy=list(0,-1,-2,-3,-3), dispersion=list(0.6, 1.0, 1.2, 1.2, 1.5)),
 		)
 
-/obj/item/weapon/gun/projectile/automatic/sts35/update_icon(var/ignore_inhands)
+/obj/item/weapon/gun/projectile/automatic/sts35/update_icon()
 	..()
 	icon_state = (ammo_magazine)? "arifle" : "arifle-empty"
-	if(!ignore_inhands) update_held_icon()
 
 /obj/item/weapon/gun/projectile/automatic/wt550
 	name = "machine pistol"
