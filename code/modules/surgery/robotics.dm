@@ -370,7 +370,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
-		if(target_zone != "head")
+		if(target_zone != "chest")
 			return
 
 		var/obj/item/device/mmi/M = tool
@@ -386,7 +386,7 @@
 			return SURGERY_FAILURE
 
 		if(!(affected.status & ORGAN_ROBOT))
-			user << "<span class='danger'>You cannot install a computer brain into a meat skull.</span>"
+			user << "<span class='danger'>You cannot install a computer brain into a meat torso.</span>"
 			return SURGERY_FAILURE
 
 		if(!target.species)
@@ -418,7 +418,7 @@
 		var/obj/item/organ/mmi_holder/holder = new(target, 1)
 		target.internal_organs_by_name["brain"] = holder
 		user.drop_from_inventory(tool)
-		tool.loc = holder
+		tool.forceMove(holder)
 		holder.stored_mmi = tool
 		holder.update_from_mmi()
 
