@@ -1,9 +1,11 @@
 /datum/appearance_data
+	var/priority
 	var/list/images
 	var/list/viewers
 
-/datum/appearance_data/New(var/images, var/viewers)
+/datum/appearance_data/New(var/images, var/viewers, var/priority)
 	..()
+	src.priority = priority
 	src.images = images
 	src.viewers = list()
 	for(var/viewer in viewers)
@@ -22,21 +24,12 @@
 	if(!istype(viewer))
 		return FALSE
 	viewers |= viewer
-	logged_in_event.register(viewer, src, /datum/appearance_data/proc/apply_images)
-	destroyed_event.register(viewer, src, /datum/appearance_data/proc/RemoveViewer)
-	apply_images(viewer)
+	appearance_manager.add_appearance(viewer, src)
 	return TRUE
 
-/datum/appearance_data/proc/RemoveViewer(var/mob/viewer)
+/datum/appearance_data/proc/RemoveViewer(var/mob/viewer, var/refresh_images = TRUE)
 	if(!(viewer in viewers))
 		return FALSE
-	if(viewer.client)
-		viewer.client.images -= images
 	viewers -= viewer
-	logged_in_event.unregister(viewer, src)
-	destroyed_event.unregister(viewer, src)
+	appearance_manager.remove_appearance(viewer, src, refresh_images)
 	return TRUE
-
-/datum/appearance_data/proc/apply_images(var/mob/viewer)
-	if(viewer.client)
-		viewer.client.images |= images

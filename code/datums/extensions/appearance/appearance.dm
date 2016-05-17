@@ -6,7 +6,7 @@
 	var/item_removal_proc
 
 /datum/extension/appearance/New(var/holder)
-	var/appearance_handler = appearance_manager.get_appearance_hander(appearance_handler_type)
+	var/appearance_handler = appearance_manager.get_appearance_handler(appearance_handler_type)
 	if(!appearance_handler)
 		CRASH("Unable to acquire the [appearance_handler_type] appearance handler.")
 
@@ -15,7 +15,7 @@
 	..()
 
 /datum/extension/appearance/Destroy()
-	var/appearance_handler = appearance_manager.get_appearance_hander(appearance_handler_type)
+	var/appearance_handler = appearance_manager.get_appearance_handler(appearance_handler_type)
 	item_equipped_event.unregister(holder, appearance_handler, item_equipment_proc)
 	item_unequipped_event.unregister(holder, appearance_handler, item_removal_proc)
 	. = ..()
