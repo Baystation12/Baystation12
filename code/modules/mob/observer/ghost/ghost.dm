@@ -707,16 +707,5 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	. = "<a href='byond://?src=\ref[ghost];track=\ref[target]'>follow</a>"
 	. += target.extra_ghost_link(ghost)
 
-/mob/observer/ghost/verb/toggle_antag_pool()
-	set name = "Toggle Add-Antag Candidacy"
-	set desc = "Toggles whether or not you will be considered a candidate by an add-antag vote."
-	set category = "Ghost"
-	if(ticker.looking_for_antags)
-		if(src.mind in ticker.antag_pool)
-			ticker.antag_pool -= src.mind
-			usr << "You have left the antag pool."
-		else
-			ticker.antag_pool += src.mind
-			usr << "You have joined the antag pool. Make sure you have the needed role set to high!"
-	else
-		usr << "The game is not currently looking for antags."
+/proc/isghostmind(var/datum/mind/player)
+	return player && !player.current || istype(player.current, /mob/observer/ghost) || player.current.stat == DEAD || !player.current.client && !isnewplayer(player.current)
