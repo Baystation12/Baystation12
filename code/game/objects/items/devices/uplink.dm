@@ -1,4 +1,22 @@
+// HIDDEN UPLINK - Can be stored in anything but the host item has to have a trigger for it.
+/* How to create an uplink in 3 easy steps!
+
+ 1. All obj/item 's have a hidden_uplink var. By default it's null. Give the item one with "new(src)", it must be in it's contents. Feel free to add "uses".
+
+ 2. Code in the triggers. Use check_trigger for this, I recommend closing the item's menu with "usr << browse(null, "window=windowname") if it returns true.
+ The var/value is the value that will be compared with the var/target. If they are equal it will activate the menu.
+
+ 3. If you want the menu to stay until the users locks his uplink, add an active_uplink_check(mob/user as mob) in your interact/attack_hand proc.
+ Then check if it's true, if true return. This will stop the normal menu appearing and will instead show the uplink menu.
+*/
+
 /obj/item/device/uplink
+	name = "hidden uplink"
+	desc = "There is something wrong if you're examining this."
+	var/active = 0
+	var/datum/uplink_category/category 	= 0		// The current category we are in
+	var/exploit_id								// Id of the current exploit record we are viewing
+
 	var/welcome = "Welcome, Operative"	// Welcoming menu message
 	var/uses 							// Numbers of crystals
 	var/list/ItemsCategory				// List of categories with lists of items
@@ -18,8 +36,14 @@
 /obj/item/device/uplink/nano_host()
 	return loc
 
-/obj/item/device/uplink/New(var/location, var/datum/mind/owner, var/telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
+/obj/item/device/uplink/New(var/atom/location, var/datum/mind/owner, var/telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
+	if(!istype(location, /obj/item))
+		CRASH("Invalid spawn location. Expected /obj/item, was [location ? location.type : "NULL"]")
+
 	..()
+	nanoui_data = list()
+	update_nano_data()
+
 	src.uplink_owner = owner
 	purchase_log = list()
 	world_uplinks += src
@@ -31,51 +55,31 @@
 	processing_objects -= src
 	return ..()
 
-/obj/item/device/uplink/get_item_cost(var/item_type, var/item_cost)
-	return (discount_item && (item_type == discount_item)) ? max(1, round(item_cost*discount_amount)) : item_cost
-
-// HIDDEN UPLINK - Can be stored in anything but the host item has to have a trigger for it.
-/* How to create an uplink in 3 easy steps!
-
- 1. All obj/item 's have a hidden_uplink var. By default it's null. Give the item one with "new(src)", it must be in it's contents. Feel free to add "uses".
-
- 2. Code in the triggers. Use check_trigger for this, I recommend closing the item's menu with "usr << browse(null, "window=windowname") if it returns true.
- The var/value is the value that will be compared with the var/target. If they are equal it will activate the menu.
-
- 3. If you want the menu to stay until the users locks his uplink, add an active_uplink_check(mob/user as mob) in your interact/attack_hand proc.
- Then check if it's true, if true return. This will stop the normal menu appearing and will instead show the uplink menu.
-*/
-
-/obj/item/device/uplink/hidden
-	name = "hidden uplink"
-	desc = "There is something wrong if you're examining this."
-	var/active = 0
-	var/datum/uplink_category/category 	= 0		// The current category we are in
-	var/exploit_id								// Id of the current exploit record we are viewing
-
-// The hidden uplink MUST be inside an obj/item's contents.
-/obj/item/device/uplink/hidden/New()
-	spawn(2)
-		if(!istype(src.loc, /obj/item))
-			qdel(src)
-	..()
-	nanoui_data = list()
-	update_nano_data()
-
-/obj/item/device/uplink/hidden/process()
+/obj/item/device/uplink/process()
 	if(world.time > next_offer_time)
-		discount_item = default_uplink_selection.get_random_item(INFINITY)
-		discount_amount = pick(90;0.9, 80;0.8, 70;0.7, 60;0.6, 50;0.5, 40;0.4, 30;0.3, 20;0.2, 10;0.1)
 		next_offer_time = world.time + offer_time
+		discount_amount = pick(90;0.9, 80;0.8, 70;0.7, 60;0.6, 50;0.5, 40;0.4, 30;0.3, 20;0.2, 10;0.1)
+
+		do
+			discount_item = default_uplink_selection.get_random_item(INFINITY)
+		// Ensures we only only get items for which we get an actual discount and that this particular uplink can actually view (can buy would risk near-infinite loops).
+		while(discount_item && (discount_item.cost(uses) == discount_item.cost(uses) * discount_amount) || !discount_item.can_view(src))
+
+		if(!discount_item)
+			discount_amount = 0
+
 		update_nano_data()
 		nanomanager.update_uis(src)
 
+/obj/item/device/uplink/proc/get_item_cost(var/item_type, var/item_cost)
+	return item_type == discount_item ? max(1, round(item_cost*discount_amount)) : item_cost
+
 // Toggles the uplink on and off. Normally this will bypass the item's normal functions and go to the uplink menu, if activated.
-/obj/item/device/uplink/hidden/proc/toggle()
+/obj/item/device/uplink/proc/toggle()
 	active = !active
 
 // Directly trigger the uplink. Turn on if it isn't already.
-/obj/item/device/uplink/hidden/proc/trigger(mob/user as mob)
+/obj/item/device/uplink/proc/trigger(mob/user as mob)
 	if(!active)
 		toggle()
 	interact(user)
@@ -83,7 +87,7 @@
 // Checks to see if the value meets the target. Like a frequency being a traitor_frequency, in order to unlock a headset.
 // If true, it accesses trigger() and returns 1. If it fails, it returns false. Use this to see if you need to close the
 // current item's menu.
-/obj/item/device/uplink/hidden/proc/check_trigger(mob/user as mob, var/value, var/target)
+/obj/item/device/uplink/proc/check_trigger(mob/user as mob, var/value, var/target)
 	if(value == target)
 		trigger(user)
 		return 1
@@ -92,13 +96,18 @@
 /*
 	NANO UI FOR UPLINK WOOP WOOP
 */
-/obj/item/device/uplink/hidden/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/item/device/uplink/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/title = "Remote Uplink"
 	var/data[0]
 
 	data["welcome"] = welcome
 	data["crystals"] = uses
 	data["menu"] = nanoui_menu
+	data["discount_category"] = discount_item ? discount_item.category.name : ""
+	data["discount_name"] = discount_item ? discount_item.name : ""
+	data["discount_amount"] = (1-discount_amount)*100
+	data["offer_expiry"] = station_adjusted_time(next_offer_time)
+
 	data += nanoui_data
 
 	// update the ui if it exists, returns null if no ui is passed/found
@@ -110,16 +119,16 @@
 
 
 // Interaction code. Gathers a list of items purchasable from the paren't uplink and displays it. It also adds a lock button.
-/obj/item/device/uplink/hidden/interact(mob/user)
+/obj/item/device/uplink/interact(mob/user)
 	ui_interact(user)
 
-/obj/item/device/uplink/hidden/CanUseTopic()
+/obj/item/device/uplink/CanUseTopic()
 	if(!active)
 		return STATUS_CLOSE
 	return ..()
 
 // The purchasing code.
-/obj/item/device/uplink/hidden/Topic(href, href_list)
+/obj/item/device/uplink/Topic(href, href_list)
 	if(..())
 		return 1
 
@@ -143,16 +152,13 @@
 	update_nano_data()
 	return 1
 
-/obj/item/device/uplink/hidden/proc/update_nano_data()
+/obj/item/device/uplink/proc/update_nano_data()
 	if(nanoui_menu == 0)
 		var/categories[0]
 		for(var/datum/uplink_category/category in uplink.categories)
 			if(category.can_view(src))
 				categories[++categories.len] = list("name" = category.name, "ref" = "\ref[category]")
 		nanoui_data["categories"] = categories
-		nanoui_data["discount_name"] = discount_item ? discount_item.name : ""
-		nanoui_data["discount_amount"] = (1-discount_amount)*100
-		nanoui_data["offer_expiry"] = worldtime2text(next_offer_time)
 	else if(nanoui_menu == 1)
 		var/items[0]
 		for(var/datum/uplink_item/item in category.items)

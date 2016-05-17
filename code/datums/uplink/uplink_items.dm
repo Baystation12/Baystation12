@@ -21,6 +21,7 @@ var/datum/uplink/uplink = new()
 		for(var/datum/uplink_category/category in categories)
 			if(item.category == category.type)
 				category.items += item
+				item.category = category
 
 	for(var/datum/uplink_category/category in categories)
 		category.items = dd_sortedObjectList(category.items)
@@ -89,13 +90,13 @@ var/datum/uplink/uplink = new()
 	return 0
 
 /datum/uplink_item/proc/cost(var/telecrystals, obj/item/device/uplink/U)
-	return U ?  U.get_item_cost(src, item_cost) : item_cost
-
+	. = item_cost
 	if(U && U.uplink_owner)
 		for(var/antag_role in antag_costs)
 			var/datum/antagonist/antag = all_antag_types[antag_role]
 			if(antag.is_antagonist(U.uplink_owner))
-				. = min(antag_costs[antag_role], . )
+				. = min(antag_costs[antag_role], .)
+	return U ?  U.get_item_cost(src, .) : .
 
 /datum/uplink_item/proc/description()
 	return desc
