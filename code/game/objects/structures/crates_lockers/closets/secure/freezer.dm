@@ -37,7 +37,7 @@
 	icon_locked = "fridge1"
 	icon_opened = "fridgeopen"
 	icon_broken = "fridgebroken"
-	icon_off = "fridge1"
+	icon_off = "fridgebroken"
 
 
 	New()
@@ -55,7 +55,7 @@
 	icon_locked = "fridge1"
 	icon_opened = "fridgeopen"
 	icon_broken = "fridgebroken"
-	icon_off = "fridge1"
+	icon_off = "fridgebroken"
 
 
 	New()
@@ -77,7 +77,7 @@
 	icon_locked = "fridge1"
 	icon_opened = "fridgeopen"
 	icon_broken = "fridgebroken"
-	icon_off = "fridge1"
+	icon_off = "fridgebroken"
 	req_access = list(access_heads_vault)
 
 /obj/structure/closet/secure_closet/freezer/money/New()
