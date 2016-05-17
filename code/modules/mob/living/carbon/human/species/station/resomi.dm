@@ -4,7 +4,7 @@
 	blurb = "A race of feathered raptors who developed on a cold world, almost \
 	outside of the Goldilocks zone. Extremely fragile, they developed hunting skills \
 	that emphasized taking out their prey without themselves getting hit. They are an \
-	advanced post-scarcity culture on good terms with Skrellian and Human interests."
+	advanced culture on good terms with Skrellian and Human interests."
 
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_RESOMI)

@@ -116,6 +116,7 @@
 	..(trigger_time, procedure, arguments, task_after_process, task_after_process_args)
 
 /datum/scheduled_task/source/Destroy()
+	destroyed_event.unregister(src.source, src, /datum/scheduled_task/source/proc/source_destroyed)
 	source = null
 	return ..()
 

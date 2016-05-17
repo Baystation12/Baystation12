@@ -169,6 +169,8 @@
 //Updating pixelshift, position and direction
 //Gets called on process, when the grab gets upgraded or the assailant moves
 /obj/item/weapon/grab/proc/adjust_position()
+	if(!affecting)
+		return
 	if(affecting.buckled)
 		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
 		return
@@ -320,7 +322,8 @@
 
 	//clicking on yourself while grabbing them
 	if(M == assailant && state >= GRAB_AGGRESSIVE)
-		devour(affecting, assailant)
+		if(assailant.devour(affecting))
+			qdel(src)
 
 /obj/item/weapon/grab/dropped()
 	loc = null

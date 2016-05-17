@@ -6,7 +6,7 @@
 	set desc = "Begin or stop aiming."
 	set category = "IC"
 
-	if(isliving(src))
+	if(isliving(src)) //Needs to be a mob verb to prevent error messages when using hotkeys
 		var/mob/living/M = src
 		if(!M.aiming)
 			M.aiming = new(src)

@@ -88,19 +88,26 @@
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
 
-/obj/item/weapon/gun/update_held_icon()
+/obj/item/weapon/gun/update_twohanding()
 	if(requires_two_hands)
 		var/mob/living/M = loc
 		if(istype(M))
 			if(src.is_held_twohanded(M))
 				name = "[initial(name)] (wielded)"
-				if(wielded_item_state)
-					item_state = wielded_item_state
 			else
 				name = initial(name)
 				item_state = initial(item_state)
-				update_icon(ignore_inhands=1) // In case item_state is set somewhere else.
+		update_icon() // In case item_state is set somewhere else.
 	..()
+
+/obj/item/weapon/gun/update_icon()
+	if(wielded_item_state)
+		var/mob/living/M = loc
+		if(istype(M))
+			if(src.is_held_twohanded())
+				item_state = wielded_item_state
+			else
+				item_state = initial(item_state)
 
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
@@ -160,6 +167,7 @@
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
+	if(target.z != user.z) return
 
 	add_fingerprint(user)
 

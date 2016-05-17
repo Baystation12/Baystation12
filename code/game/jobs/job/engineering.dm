@@ -8,7 +8,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
-	selection_color = "#ffeeaa"
+	selection_color = "#7f6e2c"
 	idtype = /obj/item/weapon/card/id/silver
 	req_admin_notify = 1
 	economic_modifier = 10
@@ -24,7 +24,7 @@
 			            access_teleporter, access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva,
 			            access_heads, access_construction, access_sec_doors,
 			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
-	minimal_player_age = 7
+	minimal_player_age = 10
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -57,8 +57,9 @@
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the chief engineer"
-	selection_color = "#fff5cc"
+	selection_color = "#5b4d20"
 	economic_modifier = 5
+	minimal_player_age = 3
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics)
 	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction)
 	alt_titles = list("Maintenance Technician","Engine Technician","Electrician")
@@ -94,8 +95,9 @@
 	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the chief engineer"
-	selection_color = "#fff5cc"
+	selection_color = "#5b4d20"
 	economic_modifier = 5
+	minimal_player_age = 3
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_external_airlocks)
 	minimal_access = list(access_eva, access_engine, access_atmospherics, access_maint_tunnels, access_emergency_storage, access_construction, access_external_airlocks)
 

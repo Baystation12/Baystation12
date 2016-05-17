@@ -15,6 +15,7 @@ datum/controller/vote
 	var/list/current_low_votes = list()
 	var/list/additional_text = list()
 	var/auto_muted = 0
+	var/auto_add_antag = 0
 
 	New()
 		if(vote != src)
@@ -51,7 +52,6 @@ datum/controller/vote
 	proc/autotransfer()
 		initiate_vote("crew_transfer","the server", 1)
 		log_debug("The server has called a crew transfer vote")
-		antag_add_finished = 0 // reset this so that players can vote in another antag
 
 	proc/autogamemode()
 		initiate_vote("gamemode","the server", 1)
@@ -60,6 +60,11 @@ datum/controller/vote
 	proc/automap()
 		initiate_vote("map","the server", 1)
 		log_debug("The server has called a map vote")
+
+	proc/autoaddantag()
+		auto_add_antag = 1
+		initiate_vote("add_antagonist","the server", 1)
+		log_debug("The server has called an add antag vote.")
 
 	proc/reset()
 		initiator = null
@@ -204,16 +209,33 @@ datum/controller/vote
 						init_shift_change(null, 1)
 					else if(.[1] == "Add Antagonist")
 						spawn(10)
-							initiate_vote("add_antagonist", "the server", 1)
+							autoaddantag()
 				if("add_antagonist")
 					if(isnull(.[1]) || .[1] == "None")
 						antag_add_finished = 1
 					else
+						choices -= "Random"
+						if(!auto_add_antag)
+							choices -= "None"
+						for(var/i = 1, i <= length(.), i++)
+							if(.[i] == "Random")
+								.[i] = pick(choices)
+								world << "The random antag in [i]\th place is [.[i]]."
 						var/antag_type = antag_names_to_ids[.[1]]
 						if(ticker.current_state >= 2)
-							var/list/antag_choices = list(all_antag_types[antag_type], all_antag_types[antag_names_to_ids[.[2]]], all_antag_types[antag_names_to_ids[.[3]]])
-							if(!ticker.attempt_late_antag_spawn(antag_choices))
-								world << "No antags were added."
+							spawn(0) // break off so we don't hang the vote process
+								var/list/antag_choices = list(all_antag_types[antag_type], all_antag_types[antag_names_to_ids[.[2]]], all_antag_types[antag_names_to_ids[.[3]]])
+								if(!ticker.attempt_late_antag_spawn(antag_choices))
+									world << "<b>No antags were added.</b>"
+									antag_add_finished = 1
+									if(auto_add_antag)
+										auto_add_antag = 0
+										spawn(10)
+											autotransfer();
+								else if(auto_add_antag)
+									auto_add_antag = 0
+									// the buffer will already have an hour added to it, so we'll give it one more
+									transfer_controller.timerbuffer = transfer_controller.timerbuffer + config.vote_autotransfer_interval
 						else
 							additional_antag_types |= antag_type
 				if("map")
@@ -290,7 +312,7 @@ datum/controller/vote
 					if(check_rights(R_ADMIN|R_MOD, 0))
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
-						if (config.allow_extra_antags)
+						if (config.allow_extra_antags && !antag_add_finished)
 							choices.Add("Add Antagonist")
 					else
 						if (get_security_level() == "red" || get_security_level() == "delta")
@@ -301,7 +323,7 @@ datum/controller/vote
 							initiator_key << "The crew transfer button has been disabled!"
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
-						if (config.allow_extra_antags)
+						if (config.allow_extra_antags && !antag_add_finished)
 							choices.Add("Add Antagonist")
 				if("add_antagonist")
 					if(!config.allow_extra_antags)
@@ -310,7 +332,9 @@ datum/controller/vote
 						var/datum/antagonist/antag = all_antag_types[antag_type]
 						if(!(antag.id in additional_antag_types) && antag.is_votable())
 							choices.Add(antag.role_text)
-					choices.Add("None")
+					choices.Add("Random")
+					if(!auto_add_antag)
+						choices.Add("None")
 				if("map")
 					if(!config.allow_map_switching)
 						return 0
@@ -381,19 +405,19 @@ datum/controller/vote
 					. += "[choices[i]]"
 				. += "</td><td>"
 				if(current_high_votes[C.ckey] == i)
-					. += "<b><a href='?src=\ref[src];high_vote=[i]'>High</a></b>"
+					. += "<b><a href='?src=\ref[src];high_vote=[i]'>First</a></b>"
 				else
-					. += "<a href='?src=\ref[src];high_vote=[i]'>High</a>"
+					. += "<a href='?src=\ref[src];high_vote=[i]'>First</a>"
 				. += "</td><td>"
 				if(current_med_votes[C.ckey] == i)
-					. += "<b><a href='?src=\ref[src];med_vote=[i]'>Medium</a></b>"
+					. += "<b><a href='?src=\ref[src];med_vote=[i]'>Second</a></b>"
 				else
-					. += "<a href='?src=\ref[src];med_vote=[i]'>Medium</a>"
+					. += "<a href='?src=\ref[src];med_vote=[i]'>Second</a>"
 				. += "</td><td>"
 				if(current_low_votes[C.ckey] == i)
-					. += "<b><a href='?src=\ref[src];low_vote=[i]'>Low</a></b>"
+					. += "<b><a href='?src=\ref[src];low_vote=[i]'>Third</a></b>"
 				else
-					. += "<a href='?src=\ref[src];low_vote=[i]'>Low</a>"
+					. += "<a href='?src=\ref[src];low_vote=[i]'>Third</a>"
 				. += "</td><td align = 'center'>[votepercent]%</td>"
 				if (additional_text.len >= i)
 					. += additional_text[i]

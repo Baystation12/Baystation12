@@ -89,6 +89,7 @@
 	desc = "A small glass bottle. Can hold up to 10 units."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle16"
+	randpixel = 5
 	flags = OPENCONTAINER
 	possible_transfer_amounts = null
 	w_class = 2.0
@@ -101,9 +102,6 @@
 
 /obj/item/weapon/reagent_containers/glass/fertilizer/New()
 	..()
-
-	src.pixel_x = rand(-5.0, 5)
-	src.pixel_y = rand(-5.0, 5)
 
 	if(fertilizer)
 		reagents.add_reagent(fertilizer,10)

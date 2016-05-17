@@ -304,7 +304,7 @@
 	return
 
 /mob/living/LaserEyes(atom/A)
-	setClickCooldown(4)
+	setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	var/turf/T = get_turf(src)
 
 	var/obj/item/projectile/beam/LE = new (T)
@@ -351,5 +351,6 @@
 		C.swap_hand()
 	else
 		var/turf/T = screen_loc2turf(modifiers["screen-loc"], get_turf(usr))
-		T.Click(location, control, params)
+		if(T)
+			T.Click(location, control, params)
 	return 1

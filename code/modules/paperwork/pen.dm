@@ -81,14 +81,14 @@
 	..()
 	create_reagents(30)
 
-/obj/item/weapon/pen/reagent/attack(mob/living/M as mob, mob/user as mob)
+/obj/item/weapon/pen/reagent/attack(mob/living/M, mob/user, var/target_zone)
 
 	if(!istype(M))
 		return
 
 	. = ..()
 
-	if(M.can_inject(user,1))
+	if(M.can_inject(user, target_zone))
 		if(reagents.total_volume)
 			if(M.reagents)
 				var/contained_reagents = reagents.get_reagents()
