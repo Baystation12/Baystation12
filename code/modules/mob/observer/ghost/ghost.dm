@@ -708,4 +708,4 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	. += target.extra_ghost_link(ghost)
 
 /proc/isghostmind(var/datum/mind/player)
-	return player && !player.current || istype(player.current, /mob/observer/ghost) || player.current.stat == DEAD || !player.current.client && !isnewplayer(player.current)
+	return player && (!player.current || isghost(player.current) || player.current.stat == DEAD || !player.current.client) && !isnewplayer(player.current)
