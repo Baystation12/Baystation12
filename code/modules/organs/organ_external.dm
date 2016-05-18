@@ -1066,26 +1066,28 @@ Note that amputating the affected organ does in fact remove the infection from t
 	disfigured = 1
 
 /obj/item/organ/external/proc/get_wounds_desc()
-	. = ""
-	if(status & ORGAN_DESTROYED && !is_stump())
-		. += "tear at [amputation_point] so severe that it hangs by a scrap of flesh"
-
 	if(status & ORGAN_ROBOT)
+		var/list/descriptors = list()
 		if(brute_dam)
 			switch(brute_dam)
 				if(0 to 20)
-					. += " some dents"
+					descriptors += "some dents"
 				if(21 to INFINITY)
-					. += pick(" a lot of dents"," severe denting")
-		if(brute_dam && burn_dam)
-			. += " and"
+					descriptors += pick("a lot of dents","severe denting")
 		if(burn_dam)
 			switch(burn_dam)
 				if(0 to 20)
-					. += " some burns"
+					descriptors += "some burns"
 				if(21 to INFINITY)
-					. += pick(" a lot of burns"," severe melting")
-		return
+					descriptors += pick("a lot of burns","severe melting")
+		if(open)
+			descriptors += "an open panel"
+
+		return english_list(descriptors)
+
+	var/list/flavor_text = list()
+	if((status & ORGAN_DESTROYED) && !is_stump())
+		flavor_text += "a tear at the [amputation_point] so severe that it hangs by a scrap of flesh"
 
 	var/list/wound_descriptors = list()
 	if(open > 1)
@@ -1105,21 +1107,18 @@ Note that amputating the affected organ does in fact remove the infection from t
 		else
 			wound_descriptors[this_wound_desc] = W.amount
 
-	if(wound_descriptors.len)
-		var/list/flavor_text = list()
-		var/list/no_exclude = list("gaping wound", "big gaping wound", "massive wound", "large bruise",\
-		"huge bruise", "massive bruise", "severe burn", "large burn", "deep burn", "carbonised area") //note to self make this more robust
-		for(var/wound in wound_descriptors)
-			switch(wound_descriptors[wound])
-				if(1)
-					flavor_text += "[prob(10) && !(wound in no_exclude) ? "what might be " : ""]a [wound]"
-				if(2)
-					flavor_text += "[prob(10) && !(wound in no_exclude) ? "what might be " : ""]a pair of [wound]s"
-				if(3 to 5)
-					flavor_text += "several [wound]s"
-				if(6 to INFINITY)
-					flavor_text += "a ton of [wound]\s"
-		return english_list(flavor_text)
+	for(var/wound in wound_descriptors)
+		switch(wound_descriptors[wound])
+			if(1)
+				flavor_text += "a [wound]"
+			if(2)
+				flavor_text += "a pair of [wound]s"
+			if(3 to 5)
+				flavor_text += "several [wound]s"
+			if(6 to INFINITY)
+				flavor_text += "a ton of [wound]\s"
+
+	return english_list(flavor_text)
 
 /****************************************************
 			   ORGAN DEFINES
