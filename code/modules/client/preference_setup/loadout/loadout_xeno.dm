@@ -28,7 +28,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(chaintypes))
 
 /datum/gear/ears/skrell/colored/chain
-	display_name = "Colored chain (Skrell)"
+	display_name = "colored headtail chain (Skrell)"
 	path = /obj/item/clothing/ears/skrell/colored/chain
 	sort_category = "Xenowear"
 	whitelisted = "Skrell"
@@ -53,7 +53,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(bandtypes))
 	
 /datum/gear/ears/skrell/colored/band
-	display_name = "Colored bands (Skrell)"
+	display_name = "colored headtail bands (Skrell)"
 	path = /obj/item/clothing/ears/skrell/colored/band
 	sort_category = "Xenowear"
 	whitelisted = "Skrell"
