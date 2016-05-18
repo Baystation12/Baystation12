@@ -66,5 +66,9 @@
 	{{/if}}
 	<br><br>
 {{/for}}
+
+<h2>Security</h2>
+	{{:helper.link('SET', null, { "setpassword" : value.name })}}
+	{{:helper.link('REMOVE', null, { "rempassword" : value.name })}}
 <hr><hr>
 <i>NTOS v2.0.4b Copyright NanoTrasen 2557 - 2559</i>

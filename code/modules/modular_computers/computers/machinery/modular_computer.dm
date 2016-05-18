@@ -23,6 +23,7 @@
 	var/light_strength = 0											// Light luminosity when turned on
 	var/base_active_power_usage = 100								// Power usage when the computer is open (screen is active) and can be interacted with. Remember hardware can use power too.
 	var/base_idle_power_usage = 10									// Power usage when the computer is idle and screen is off (currently only applies to laptops)
+	var/password = null												// The computer's current password. Can be changed by the user.
 
 	var/_max_damage = 100
 	var/_break_damage = 50

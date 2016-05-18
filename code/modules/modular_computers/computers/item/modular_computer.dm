@@ -14,6 +14,8 @@
 	var/last_world_time = "00:00"
 	var/list/last_header_icons
 	var/computer_emagged = 0								// Whether the computer is emagged.
+	var/password = "test"
+	var/hacking = 0
 
 	var/base_active_power_usage = 50						// Power usage when the computer is open (screen is active) and can be interacted with. Remember hardware can use power too.
 	var/base_idle_power_usage = 5							// Power usage when the computer is idle and screen is off (currently only applies to laptops)
@@ -230,6 +232,8 @@
 
 /obj/item/modular_computer/proc/turn_on(var/mob/user)
 	var/issynth = issilicon(user) // Robots and AIs get different activation messages.
+	if(hacking)
+		return
 	if(damage > broken_damage)
 		if(issynth)
 			user << "You send an activation signal to \the [src], but it responds with an error code. It must be damaged."
@@ -241,6 +245,31 @@
 			user << "You send an activation signal to \the [src], turning it on"
 		else
 			user << "You press the power button and start up \the [src]"
+		if(password)
+			var/response = alert(user, "Device locked. Please select an option.", "Device Locked", "Enter password", "Attempt manual override", "Cancel")
+			if(response == "Cancel")
+				return
+			if(response == "Attempt manual override")
+				var/over_response = alert(user, "Attempting a manual override will take time, and trigger the Intrusion Detection System. Confirm?", "Manual Override", "Yes", "No")
+				if(over_response == "No")
+					return
+				if((ntnet_global.intrusion_detection_enabled) && (network_card))
+					ntnet_global.add_log("IDS WARNING - Manual override attempt of device [network_card.get_network_tag()] detected.")
+					ntnet_global.intrusion_detection_alarm = 1
+				src.visible_message("<span class='notice'> Manual override initiated. Processing...</span>")
+				hacking = 1
+				sleep(300)
+				src.visible_message("<span class='notice'> Manual override successful. Device unlocked.</span>")
+				ntnet_global.intrusion_detection_alarm = 0
+				password = null
+			if(response == "Enter password")
+				var/pass_entered = sanitize(input(user, "Please enter the password.", "Enter Password"), 16)
+				if(!pass_entered)
+					return
+				if(!(pass_entered == password))
+					user << "<span class='warning'> Incorrect password. Access Denied.</span>"
+					return
+				user << "<span class='notice'> Correct password. Access granted.</span>"
 		enabled = 1
 		update_icon()
 		ui_interact(user)
