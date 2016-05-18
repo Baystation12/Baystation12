@@ -31,17 +31,22 @@
 
 /datum/reagent/nutriment/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!injectable)
-		M.adjustToxLoss(0.1 * removed)
+		M.adjustToxLoss(0.2 * removed)
 		return
 	affect_ingest(M, alien, removed)
 
 /datum/reagent/nutriment/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	switch(alien)
-		if(IS_UNATHI) removed *= 0.5
+	M.heal_organ_damage(0.5 * removed, 0) //what
+
 	if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
-	M.heal_organ_damage(0.5 * removed, 0)
-	M.nutrition += nutriment_factor * removed // For hunger and fatness
+	adjust_nutrition(M, alien, removed)
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
+
+/datum/reagent/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
+	switch(alien)
+		if(IS_RESOMI) removed *= 0.8 // Resomi get a bit more nutrition from meat, a bit less from other stuff to compensate
+		if(IS_UNATHI) removed *= 0.1 // Unathi get most of their nutrition from meat.
+	M.nutrition += nutriment_factor * removed // For hunger and fatness
 
 /datum/reagent/nutriment/glucose
 	name = "Glucose"
@@ -61,12 +66,13 @@
 		if(IS_SKRELL)
 			M.adjustToxLoss(0.5 * removed)
 			return
-		if(IS_RESOMI)
-			..(M, alien, removed*1.2) // Resomi get a bit more nutrition from meat.
-			return
-		if(IS_UNATHI)
-			..(M, alien, removed*2.25) //Unathi get most of their nutrition from meat.
 	..()
+
+/datum/reagent/nutriment/protein/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
+	switch(alien)
+		if(IS_RESOMI) removed *= 1.25
+		if(IS_UNATHI) removed *= 2.25
+	M.nutrition += nutriment_factor * removed // For hunger and fatness
 
 /datum/reagent/nutriment/protein/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien && alien == IS_SKRELL)
