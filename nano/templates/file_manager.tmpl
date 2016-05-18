@@ -28,6 +28,7 @@
 					{{:helper.link('DELETE', null, { "PRG_deletefile" : value.name }, value.undeletable ? 'disabled' : null)}}
 					{{:helper.link('RENAME', null, { "PRG_rename" : value.name }, value.undeletable ? 'disabled' : null)}}
 					{{:helper.link('CLONE', null, { "PRG_clone" : value.name }, value.undeletable ? 'disabled' : null)}}
+					{{:helper.link('LOCK', null, { "PRG_lock" : value.name })}}
 					{{if data.usbconnected}}
 						{{:helper.link('EXPORT', null, { "PRG_copytousb" : value.name }, value.undeletable ? 'disabled' : null)}}
 					{{/if}}
