@@ -13,6 +13,8 @@
 	available_on_ntnet = 0
 	requires_ntnet = 0
 	nanomodule_path = /datum/nano_module/program/computer_configurator/
+	var/obj/item/modular_computer/C = computer
+
 
 /datum/nano_module/program/computer_configurator
 	name = "NTOS Computer Configuration Tool"
