@@ -581,11 +581,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/update_wounds()
 
 	if((status & ORGAN_ROBOT)) //Robotic limbs don't heal or get worse.
+		for(var/datum/wound/W in wounds) //Repaired wounds disappear though
+			if(W.damage <= 0)  //and they disappear right away
+				wounds -= W    //TODO: robot wounds for robot limbs
 		return
 
 	for(var/datum/wound/W in wounds)
 		// wounds can disappear after 10 minutes at the earliest
-		if(W.damage <= 0 && W.created + 10 * 10 * 60 <= world.time)
+		if(W.damage <= 0 && W.created + (10 MINUTES) <= world.time)
 			wounds -= W
 			continue
 			// let the GC handle the deletion of the wound
