@@ -117,7 +117,7 @@
 /datum/poster/bay_24
 	icon_state="bsposter24"
 	name = "Responsible medbay habits, No #259"
-	desc = "A poster with a nervous looking geneticist on it states; \"Friends Don't Tell Friends They're Clones. It can cause severe and irreparable emotional trauma. Always do the right thing and never tell them that they were dead.\""
+	desc = "A poster with a nervous looking geneticist on it states; \"Friends Tell Friends They're Clones. It can cause severe and irreparable emotional trauma if a person is not properly informed of their recent demise. Always follow your contractual obligation and inform them of their recent rejuvenation.\""
 
 /datum/poster/bay_25
 	icon_state="bsposter25"

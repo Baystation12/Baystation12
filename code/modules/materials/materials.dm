@@ -242,6 +242,7 @@ var/list/name_to_material
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 100
 	stack_origin_tech = list(TECH_MATERIAL = 6)
+	conductive = 0
 
 /material/gold
 	name = "gold"
@@ -309,6 +310,7 @@ var/list/name_to_material
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
+	conductive = 0
 
 /material/stone/marble
 	name = "marble"
@@ -335,6 +337,7 @@ var/list/name_to_material
 	icon_base = "diona"
 	icon_reinf = "noreinf"
 	hitsound = 'sound/effects/attackblob.ogg'
+	conductive = 0
 
 /material/diona/place_dismantled_product()
 	return
@@ -347,6 +350,7 @@ var/list/name_to_material
 	display_name = DEFAULT_WALL_MATERIAL
 	stack_type = null
 	shard_type = SHARD_NONE
+	conductive = 0
 
 /material/plasteel
 	name = "plasteel"
@@ -388,6 +392,7 @@ var/list/name_to_material
 	created_window = /obj/structure/window/basic
 	rod_product = /obj/item/stack/material/glass/reinforced
 	hitsound = 'sound/effects/Glasshit.ogg'
+	conductive = 0
 
 /material/glass/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
 
@@ -515,6 +520,7 @@ var/list/name_to_material
 	weight = 12
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = list(TECH_MATERIAL = 3)
+	conductive = 0
 
 /material/plastic/holographic
 	name = "holoplastic"
@@ -594,6 +600,7 @@ var/list/name_to_material
 	sheet_singular_name = "plank"
 	sheet_plural_name = "planks"
 	hitsound = 'sound/effects/woodhit.ogg'
+	conductive = 0
 
 /material/wood/holographic
 	name = "holowood"
@@ -616,6 +623,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 1)
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
+	conductive = 0
 
 /material/cloth //todo
 	name = "cloth"
@@ -624,6 +632,7 @@ var/list/name_to_material
 	ignition_point = T0C+232
 	melting_point = T0C+300
 	flags = MATERIAL_PADDING
+	conductive = 0
 
 /material/cult
 	name = "cult"
@@ -634,6 +643,7 @@ var/list/name_to_material
 	shard_type = SHARD_STONE_PIECE
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
+	conductive = 0
 
 /material/cult/place_dismantled_girder(var/turf/target)
 	new /obj/structure/girder/cult(target)
@@ -656,6 +666,7 @@ var/list/name_to_material
 	melting_point = T0C+300
 	sheet_singular_name = "blob"
 	sheet_plural_name = "blobs"
+	conductive = 0
 
 /material/resin/can_open_material_door(var/mob/living/user)
 	var/mob/living/carbon/M = user
@@ -671,6 +682,7 @@ var/list/name_to_material
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+300
 	melting_point = T0C+300
+	conductive = 0
 
 /material/carpet
 	name = "carpet"
@@ -682,6 +694,7 @@ var/list/name_to_material
 	melting_point = T0C+300
 	sheet_singular_name = "tile"
 	sheet_plural_name = "tiles"
+	conductive = 0
 
 /material/cotton
 	name = "cotton"
@@ -690,6 +703,7 @@ var/list/name_to_material
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
+	conductive = 0
 
 /material/cloth_teal
 	name = "teal"
@@ -699,6 +713,7 @@ var/list/name_to_material
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
+	conductive = 0
 
 /material/cloth_black
 	name = "black"
@@ -708,6 +723,7 @@ var/list/name_to_material
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
+	conductive = 0
 
 /material/cloth_green
 	name = "green"
@@ -717,6 +733,7 @@ var/list/name_to_material
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
+	conductive = 0
 
 /material/cloth_puple
 	name = "purple"
@@ -726,6 +743,7 @@ var/list/name_to_material
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
+	conductive = 0
 
 /material/cloth_blue
 	name = "blue"
@@ -735,6 +753,7 @@ var/list/name_to_material
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
+	conductive = 0
 
 /material/cloth_beige
 	name = "beige"
@@ -744,6 +763,7 @@ var/list/name_to_material
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
+	conductive = 0
 
 /material/cloth_lime
 	name = "lime"
@@ -753,3 +773,4 @@ var/list/name_to_material
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
+	conductive = 0

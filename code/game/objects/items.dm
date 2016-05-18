@@ -4,6 +4,7 @@
 	w_class = 3.0
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
+	var/randpixel = 6
 	var/abstract = 0
 	var/r_speed = 1.0
 	var/health = null
@@ -75,6 +76,12 @@
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
 
+/obj/item/New()
+	..()
+	if(randpixel && (!pixel_x && !pixel_y)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
+		pixel_x = rand(-randpixel, randpixel)
+		pixel_y = rand(-randpixel, randpixel)
+
 /obj/item/Destroy()
 	qdel(hidden_uplink)
 	hidden_uplink = null
@@ -90,7 +97,7 @@
 	icon = 'icons/obj/device.dmi'
 
 //Checks if the item is being held by a mob, and if so, updates the held icons
-/obj/item/proc/update_held_icon()
+/obj/item/proc/update_twohanding()
 	if(ismob(src.loc))
 		var/mob/M = src.loc
 		if(M.l_hand == src)
@@ -186,7 +193,13 @@
 	else
 		if(isliving(src.loc))
 			return
-	user.put_in_active_hand(src)
+	if(user.put_in_active_hand(src))
+		if(randpixel)
+			pixel_x = rand(-randpixel, randpixel)
+			pixel_y = rand(-randpixel, 0) - randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character's feet
+		else if(randpixel == 0)
+			pixel_x = 0
+			pixel_y = 0
 	return
 
 /obj/item/attack_ai(mob/user as mob)
@@ -273,9 +286,9 @@
 	if(!istype(M))
 		return
 	if(M.l_hand)
-		M.l_hand.update_held_icon()
+		M.l_hand.update_twohanding()
 	if(M.r_hand)
-		M.r_hand.update_held_icon()
+		M.r_hand.update_twohanding()
 
 //Defines which slots correspond to which slot flags
 var/list/global/slot_flags_enumeration = list(

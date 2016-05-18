@@ -11,13 +11,13 @@
 	. = ..()
 
 /datum/chunk/camera/add_source(var/atom/source)
-	..()
-	if(istype(source, /obj/machinery/camera))
+	. = ..()
+	if(. && istype(source, /obj/machinery/camera))
 		cameras += source
 
 /datum/chunk/camera/remove_source(var/atom/source)
-	..()
-	if(istype(source, /obj/machinery/camera))
+	. = ..()
+	if(. && istype(source, /obj/machinery/camera))
 		cameras -= source
 
 /datum/chunk/camera/acquire_visible_turfs(var/list/visible)

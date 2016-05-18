@@ -944,10 +944,8 @@
 
 /mob/living/carbon/human/proc/rupture_lung()
 	var/obj/item/organ/lungs/L = internal_organs_by_name["lungs"]
-
-	if(L && !L.is_bruised())
-		src.custom_pain("You feel a stabbing pain in your chest!", 1)
-		L.bruise()
+	if(L)
+		L.rupture()
 
 /*
 /mob/living/carbon/human/verb/simulate()

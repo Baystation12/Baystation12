@@ -296,16 +296,23 @@
 		if(!amount)
 			break
 
+/obj/item/stack/get_storage_cost()	//Scales storage cost to stack size
+	. = ..()
+	if (amount < max_amount)
+		. = ceil(. * amount / max_amount)
+
 /obj/item/stack/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)
-		var/obj/item/stack/F = src.split(1)
-		if (F)
-			user.put_in_hands(F)
-			src.add_fingerprint(user)
-			F.add_fingerprint(user)
-			spawn(0)
-				if (src && usr.machine==src)
-					src.interact(usr)
+		var/N = input("How many stacks of [src] would you like to split off?", "Split stacks", 1) as num|null
+		if(N)
+			var/obj/item/stack/F = src.split(N)
+			if (F)
+				user.put_in_hands(F)
+				src.add_fingerprint(user)
+				F.add_fingerprint(user)
+				spawn(0)
+					if (src && usr.machine==src)
+						src.interact(usr)
 	else
 		..()
 	return
@@ -313,10 +320,7 @@
 /obj/item/stack/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/stack))
 		var/obj/item/stack/S = W
-		if (user.get_inactive_hand()==src)
-			src.transfer_to(S, 1)
-		else
-			src.transfer_to(S)
+		src.transfer_to(S)
 
 		spawn(0) //give the stacks a chance to delete themselves if necessary
 			if (S && usr.machine==S)

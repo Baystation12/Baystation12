@@ -13,11 +13,10 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "gift1"
 	item_state = "gift1"
+	randpixel = 10
 
 /obj/item/weapon/a_gift/New()
 	..()
-	pixel_x = rand(-10,10)
-	pixel_y = rand(-10,10)
 	if(w_class > 0 && w_class < 4)
 		icon_state = "gift[w_class]"
 	else

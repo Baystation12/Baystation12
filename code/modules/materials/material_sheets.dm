@@ -2,10 +2,11 @@
 /obj/item/stack/material
 	force = 5.0
 	throwforce = 5
-	w_class = 3.0
+	w_class = 4
 	throw_speed = 3
 	throw_range = 3
-	max_amount = 50
+	max_amount = 60
+	randpixel = 3
 
 	var/default_type = DEFAULT_WALL_MATERIAL
 	var/material/material
@@ -14,8 +15,6 @@
 
 /obj/item/stack/material/New(atom/newloc, var/amount=null)
 	..(newloc, amount)
-	pixel_x = rand(0,4)-4
-	pixel_y = rand(0,4)-4
 
 	if(!default_type)
 		default_type = DEFAULT_WALL_MATERIAL
@@ -34,6 +33,8 @@
 
 	if(material.conductive)
 		flags |= CONDUCT
+	else
+		flags &= (~CONDUCT)
 
 	matter = material.get_matter()
 	update_strings()
