@@ -434,7 +434,8 @@
 	if(additional_chems)
 		var/list/banned_chems = list(
 			"adminordrazine",
-			"nutriment"
+			"nutriment",
+			"nanites"
 			)
 
 		for(var/x=1;x<=additional_chems;x++)
