@@ -13,7 +13,6 @@
 	available_on_ntnet = 0
 	requires_ntnet = 0
 	nanomodule_path = /datum/nano_module/program/computer_configurator/
-	var/obj/item/modular_computer/C = computer
 
 
 /datum/nano_module/program/computer_configurator
@@ -64,10 +63,12 @@
 		ui.open()
 
 /datum/nano_module/program/computer_configurator/proc/check_password(user)
+	if(program)
+		movable = program.computer
 	var/pass_entered = sanitize(input(usr, "Access Denied: Enter Password", "Enter Password"), 16)
 	if(!pass_entered)
 		return 0
-	if(pass_entered != C.password)
+	if(pass_entered != movable.password)
 		user << "<span class='warning'>Incorrect Password.</span>"
 		return 0
 	return 1
@@ -75,31 +76,33 @@
 /datum/nano_module/program/computer_configurator/Topic(href, href_list)
 	if(..())
 		return 1
+	if(program)
+		movable = program.computer
 	var/mob/user = usr
 	switch(href_list["action"])
 		if("setpassword")
 			. = 1
-			if(!C.password)
+			if(!movable.password)
 				var/new_pass = sanitize(input(user, "Please enter the new password:", "New Password"), 16)
 				if(!new_pass)
 					return 1
-				C.password = new_pass
+				movable.password = new_pass
 			else
 				if(!check_password(user))
 					return 1
 				var/new_pass = sanitize(input(user, "Please enter the new password:", "New Password"), 16)
 				if(!new_pass)
 					return 1
-				C.password = new_pass
+				movable.password = new_pass
 			user << "<span class='notice'>Password Set.</span>"
 		if("rempassword")
 			. = 1
-			if(!C.password)
+			if(!movable.password)
 				user << "<span class='warning'>No password set.</span>"
 				return 1
 			if(!check_password(user))
 				return 1
-			C.password = null
+			movable.password = null
 			user << "<span class='notice'>Password Deleted.</span>"
 	if(.)
 		nanomanager.update_uis(src)
