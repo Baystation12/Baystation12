@@ -17,10 +17,10 @@
 		smeslist.Add(list(list(
 		"charge" = round(SMES.Percentage()),
 		"input_set" = SMES.input_attempt,
-		"input_val" = round(SMES.input_level),
+		"input_val" = round(SMES.input_level/1000, 0.1),
 		"output_set" = SMES.output_attempt,
-		"output_val" = round(SMES.output_level),
-		"output_load" = round(SMES.output_used),
+		"output_val" = round(SMES.output_level/1000, 0.1),
+		"output_load" = round(SMES.output_used/1000, 0.1),
 		"RCON_tag" = SMES.RCon_tag
 		)))
 
@@ -65,12 +65,12 @@
 	if(href_list["smes_in_set"])
 		var/obj/machinery/power/smes/buildable/SMES = GetSMESByTag(href_list["smes_in_set"])
 		if(SMES)
-			var/inputset = input(usr, "Enter new input level (0-[SMES.input_level_max])", "SMES Input Power Control") as num
+			var/inputset = (input(usr, "Enter new input level (0-[SMES.input_level_max/1000] kW)", "SMES Input Power Control", SMES.input_level/1000) as num) * 1000
 			SMES.set_input(inputset)
 	if(href_list["smes_out_set"])
 		var/obj/machinery/power/smes/buildable/SMES = GetSMESByTag(href_list["smes_out_set"])
 		if(SMES)
-			var/outputset = input(usr, "Enter new output level (0-[SMES.output_level_max])", "SMES Input Power Control") as num
+			var/outputset = (input(usr, "Enter new output level (0-[SMES.output_level_max/1000] kW)", "SMES Input Power Control", SMES.output_level/1000) as num) * 1000
 			SMES.set_output(outputset)
 
 	if(href_list["toggle_breaker"])

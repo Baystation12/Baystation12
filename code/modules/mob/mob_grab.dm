@@ -27,7 +27,7 @@
 	layer = 21
 	abstract = 1
 	item_state = "nothing"
-	w_class = 5.0
+	simulated = 0
 
 
 /obj/item/weapon/grab/New(mob/user, mob/victim)
@@ -56,6 +56,9 @@
 				G.adjust_position()
 				dancing = 1
 	adjust_position()
+
+/obj/item/weapon/grab/get_storage_cost()
+	return DO_NOT_STORE
 
 //Used by throw code to hand over the mob, instead of throwing the grab. The grab is then deleted by the throw code.
 /obj/item/weapon/grab/proc/throw_held()
@@ -169,6 +172,8 @@
 //Updating pixelshift, position and direction
 //Gets called on process, when the grab gets upgraded or the assailant moves
 /obj/item/weapon/grab/proc/adjust_position()
+	if(!affecting)
+		return
 	if(affecting.buckled)
 		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
 		return
@@ -320,7 +325,8 @@
 
 	//clicking on yourself while grabbing them
 	if(M == assailant && state >= GRAB_AGGRESSIVE)
-		devour(affecting, assailant)
+		if(assailant.devour(affecting))
+			qdel(src)
 
 /obj/item/weapon/grab/dropped()
 	loc = null

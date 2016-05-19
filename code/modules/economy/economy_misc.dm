@@ -46,15 +46,19 @@
 
 #define GEAR_EVA 15
 
-
+//Note that you have to specify each subspecies individually. Shouldn't be a big deal.
 /var/list/economic_species_modifier = list(
-												/datum/species/human	= 10,
-												/datum/species/skrell	= 12,
-												/datum/species/tajaran	= 7,
-												/datum/species/unathi	= 7,
-												/datum/species/diona	= 5,
-												/datum/species/resomi	= 5,
-												/datum/species/vox		= 1
+												/datum/species/human             = 10,
+												/datum/species/human/gravworlder = 10,
+												/datum/species/human/spacer      = 10,
+												/datum/species/human/vatgrown    = 5, //if it weren't for the fact that they were humans I would have given them less,
+												/datum/species/skrell            = 12,
+												/datum/species/tajaran           = 7,
+												/datum/species/unathi            = 7,
+												/datum/species/machine           = 7,
+												/datum/species/diona             = 5,
+												/datum/species/resomi            = 5,
+												/datum/species/vox/pariah        = 1
 											)
 
 //---- The following corporations are friendly with NanoTrasen and loosely enable trade and travel:

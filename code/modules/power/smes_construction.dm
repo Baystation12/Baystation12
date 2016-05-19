@@ -11,7 +11,7 @@
 	desc = "Standard superconductive magnetic coil with average capacity and I/O rating."
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "smes_coil"			// Just few icons patched together. If someone wants to make better icon, feel free to do so!
-	w_class = 4.0 						// It's LARGE (backpack size)
+	w_class = 5 						// It's LARGE (backpack size)
 	var/ChargeCapacity = 5000000
 	var/IOCapacity = 250000
 

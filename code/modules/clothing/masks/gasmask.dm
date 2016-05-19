@@ -44,7 +44,7 @@
 	body_parts_covered = FACE|EYES
 
 /obj/item/clothing/mask/gas/swat/vox
-	name = "\improper alien mask"
+	name = "alien mask"
 	desc = "Clearly not designed for a human face."
 	body_parts_covered = 0 //Hack to allow vox to eat while wearing this mask.
 	species_restricted = list("Vox")
@@ -102,3 +102,12 @@
 	desc = "Twoooo!"
 	icon_state = "owl"
 	body_parts_covered = HEAD|FACE|EYES
+
+/obj/item/clothing/mask/gas/vox
+	name = "vox breathing mask"
+	desc = "A small oxygen filter for use by Vox"
+	icon_state = "respirator"
+	flags_inv = 0
+	body_parts_covered = 0
+	species_restricted = list("Vox")
+	filtered_gases = list("phoron", "sleeping_agent", "oxygen")

@@ -115,7 +115,7 @@
 	H.real_name = R.dna.real_name
 
 	//Get the clone body ready
-	H.adjustCloneLoss(150) // New damage var so you can't eject a clone early then stab them to abuse the current damage system --NeoFite
+	H.setCloneLoss(H.maxHealth - config.health_threshold_crit) // New damage var so you can't eject a clone early then stab them to abuse the current damage system --NeoFite
 	H.Paralyse(4)
 
 	//Here let's calculate their health so the pod doesn't immediately eject them!!!

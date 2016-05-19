@@ -262,7 +262,7 @@
 				randmutg(M)
 			domutcheck(M, null)
 			M.UpdateAppearance()
-	M.apply_effect(10 * removed, IRRADIATE, 0)
+	M.apply_effect(10 * removed, IRRADIATE, blocked = 0)
 
 /datum/reagent/slimejelly
 	name = "Slime Jelly"

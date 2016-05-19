@@ -4,6 +4,7 @@
 	w_class = 3.0
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
+	var/randpixel = 6
 	var/abstract = 0
 	var/r_speed = 1.0
 	var/health = null
@@ -75,6 +76,12 @@
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
 
+/obj/item/New()
+	..()
+	if(randpixel && (!pixel_x && !pixel_y)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
+		pixel_x = rand(-randpixel, randpixel)
+		pixel_y = rand(-randpixel, randpixel)
+
 /obj/item/Destroy()
 	qdel(hidden_uplink)
 	hidden_uplink = null
@@ -90,7 +97,7 @@
 	icon = 'icons/obj/device.dmi'
 
 //Checks if the item is being held by a mob, and if so, updates the held icons
-/obj/item/proc/update_held_icon()
+/obj/item/proc/update_twohanding()
 	if(ismob(src.loc))
 		var/mob/M = src.loc
 		if(M.l_hand == src)
@@ -149,15 +156,17 @@
 /obj/item/examine(mob/user, var/distance = -1)
 	var/size
 	switch(src.w_class)
-		if(1.0)
+		if(TINY_ITEM)
 			size = "tiny"
-		if(2.0)
+		if(SMALL_ITEM)
 			size = "small"
-		if(3.0)
+		if(NORMAL_ITEM)
 			size = "normal-sized"
-		if(4.0)
+		if(LARGE_ITEM)
+			size = "large"
+		if(BULKY_ITEM)
 			size = "bulky"
-		if(5.0)
+		if(BULKY_ITEM + 1 to INFINITY)
 			size = "huge"
 	return ..(user, distance, "", "It is a [size] item.")
 
@@ -186,7 +195,13 @@
 	else
 		if(isliving(src.loc))
 			return
-	user.put_in_active_hand(src)
+	if(user.put_in_active_hand(src))
+		if(randpixel)
+			pixel_x = rand(-randpixel, randpixel)
+			pixel_y = rand(-randpixel, 0) - randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character's feet
+		else if(randpixel == 0)
+			pixel_x = 0
+			pixel_y = 0
 	return
 
 /obj/item/attack_ai(mob/user as mob)
@@ -273,9 +288,9 @@
 	if(!istype(M))
 		return
 	if(M.l_hand)
-		M.l_hand.update_held_icon()
+		M.l_hand.update_twohanding()
 	if(M.r_hand)
-		M.r_hand.update_held_icon()
+		M.r_hand.update_twohanding()
 
 //Defines which slots correspond to which slot flags
 var/list/global/slot_flags_enumeration = list(
@@ -331,7 +346,7 @@ var/list/global/slot_flags_enumeration = list(
 	switch(slot)
 		if(slot_l_ear, slot_r_ear)
 			var/slot_other_ear = (slot == slot_l_ear)? slot_r_ear : slot_l_ear
-			if( (w_class > 1) && !(slot_flags & SLOT_EARS) )
+			if( (w_class > TINY_ITEM) && !(slot_flags & SLOT_EARS) )
 				return 0
 			if( (slot_flags & SLOT_TWOEARS) && H.get_equipped_item(slot_other_ear) )
 				return 0
@@ -347,8 +362,10 @@ var/list/global/slot_flags_enumeration = list(
 				return 0
 			if(slot_flags & SLOT_DENYPOCKET)
 				return 0
-			if( w_class > 2 && !(slot_flags & SLOT_POCKET) )
+			if( w_class > SMALL_ITEM && !(slot_flags & SLOT_POCKET) )
 				return 0
+			if(get_storage_cost() == DO_NOT_STORE)
+				return 0 //pockets act like storage and should respect DO_NOT_STORE. Suit storage might be fine as is
 		if(slot_s_store)
 			if(!H.wear_suit && (slot_wear_suit in mob_equip))
 				if(!disable_warning)

@@ -58,6 +58,10 @@
 			color = material.icon_colour
 		if(material.products_need_process())
 			processing_objects |= src
+		if(material.conductive)
+			flags |= CONDUCT
+		else
+			flags &= (~CONDUCT)
 		update_force()
 
 /obj/item/weapon/material/Destroy()
@@ -65,7 +69,7 @@
 	..()
 
 /obj/item/weapon/material/apply_hit_effect()
-	..()
+	. = ..()
 	if(!unbreakable)
 		if(material.is_brittle())
 			health = 0
@@ -92,7 +96,7 @@ Commenting this out pending rebalancing of radiation based on small objects.
 	if(!material.radioactivity)
 		return
 	for(var/mob/living/L in range(1,src))
-		L.apply_effect(round(material.radioactivity/30),IRRADIATE,0)
+		L.apply_effect(round(material.radioactivity/30),IRRADIATE, blocked = L.getarmor(null, "rad"))
 */
 
 /*

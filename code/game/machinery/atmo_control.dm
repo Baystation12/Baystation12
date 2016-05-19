@@ -155,7 +155,7 @@ obj/machinery/computer/general_air_control/Destroy()
 
 /obj/machinery/computer/general_air_control/initialize()
 	set_frequency(frequency)
-
+	..()
 
 /obj/machinery/computer/general_air_control/large_tank_control
 	icon = 'icons/obj/computer.dmi'

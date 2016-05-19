@@ -127,7 +127,7 @@
 
 	// You are going to knock someone out for longer if they are not wearing a helmet.
 	var/weaken_duration = 0
-	if(blocked < 2)
+	if(blocked < 100)
 		weaken_duration = smash_duration + min(0, force - target.getarmor(hit_zone, "melee") + 10)
 
 	var/mob/living/carbon/human/H = target
@@ -147,6 +147,8 @@
 	//Finally, smash the bottle. This kills (qdel) the bottle.
 	var/obj/item/weapon/broken_bottle/B = smash(target.loc, target)
 	user.put_in_active_hand(B)
+
+	return blocked
 
 //Keeping this here for now, I'll ask if I should keep it here.
 /obj/item/weapon/broken_bottle
@@ -187,6 +189,15 @@
 	New()
 		..()
 		reagents.add_reagent("whiskey", 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey
+	name = "Special Blend Whiskey"
+	desc = "Just when you thought regular station whiskey was good... This silky, amber goodness has to come along and ruin everything."
+	icon_state = "whiskeybottle2"
+	center_of_mass = list("x"=16, "y"=3)
+	New()
+		..()
+		reagents.add_reagent("specialwhiskey", 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/vodka
 	name = "Tunguska Triple Distilled"

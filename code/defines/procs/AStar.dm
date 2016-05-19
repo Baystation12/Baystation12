@@ -36,69 +36,6 @@ length to avoid portals or something i guess?? Not that they're counted right no
 
 // Also added 'exclude' turf to avoid travelling over; defaults to null
 
-
-PriorityQueue
-	var/list/queue
-	var/proc/comparison_function
-
-	New(compare)
-		queue = list()
-		comparison_function = compare
-
-	proc/IsEmpty()
-		return !queue.len
-
-	proc/Enqueue(var/data)
-		queue.Add(data)
-		var/index = queue.len
-
-		//From what I can tell, this automagically sorts the added data into the correct location.
-		while(index > 2 && call(comparison_function)(queue[index / 2], queue[index]) > 0)
-			queue.Swap(index, index / 2)
-			index /= 2
-
-	proc/Dequeue()
-		if(!queue.len)
-			return 0
-		return Remove(1)
-
-	proc/Remove(var/index)
-		if(index > queue.len)
-			return 0
-
-		var/thing = queue[index]
-		queue.Swap(index, queue.len)
-		queue.Cut(queue.len)
-		if(index < queue.len)
-			FixQueue(index)
-		return thing
-
-	proc/FixQueue(var/index)
-		var/child = 2 * index
-		var/item = queue[index]
-
-		while(child <= queue.len)
-			if(child < queue.len && call(comparison_function)(queue[child], queue[child + 1]) > 0)
-				child++
-			if(call(comparison_function)(item, queue[child]) > 0)
-				queue[index] = queue[child]
-				index = child
-			else
-				break
-			child = 2 * index
-		queue[index] = item
-
-	proc/List()
-		return queue.Copy()
-
-	proc/Length()
-		return queue.len
-
-	proc/RemoveItem(data)
-		var/index = queue.Find(data)
-		if(index)
-			return Remove(index)
-
 PathNode
 	var/datum/position
 	var/PathNode/previous_node
@@ -167,7 +104,7 @@ proc/AStar(var/start, var/end, var/proc/adjacent, var/proc/dist, var/max_nodes, 
 				var/PathNode/target = path_node_by_position[datum]
 				if(target.best_estimated_cost)
 					if(best_estimated_cost + call(datum, dist)(end) < target.best_estimated_cost)
-						open.RemoveItem(target)
+						open.Remove(target)
 					else
 						continue
 

@@ -8,7 +8,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
-	selection_color = "#ffddf0"
+	selection_color = "#026865"
 	idtype = /obj/item/weapon/card/id/silver
 	req_admin_notify = 1
 	economic_modifier = 10
@@ -46,7 +46,7 @@
 	total_positions = 5
 	spawn_positions = 3
 	supervisors = "the chief medical officer"
-	selection_color = "#ffeef0"
+	selection_color = "#013d3b"
 	economic_modifier = 7
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_virology)
@@ -56,7 +56,6 @@
 		if(!H)	return 0
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_med(H), slot_l_ear)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/adv(H), slot_l_hand)
 		switch(H.backbag)
 			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/medic(H), slot_back)
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_med(H), slot_back)
@@ -93,6 +92,7 @@
 		else
 			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical(H), slot_w_uniform)
 			H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat(H), slot_wear_suit)
+		H.equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/adv(H), slot_l_hand)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/medical(H), slot_belt)
 		H.equip_to_slot_or_del(new /obj/item/device/flashlight/pen(H), slot_s_store)
 		return 1
@@ -109,7 +109,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the chief medical officer"
-	selection_color = "#ffeef0"
+	selection_color = "#013d3b"
 	economic_modifier = 5
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_medical_equip, access_chemistry)
@@ -140,7 +140,7 @@
 	total_positions = 0
 	spawn_positions = 0
 	supervisors = "the chief medical officer and research director"
-	selection_color = "#ffeef0"
+	selection_color = "#013d3b"
 	economic_modifier = 7
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_research)
 	minimal_access = list(access_medical, access_morgue, access_genetics, access_research)
@@ -170,7 +170,7 @@
 	spawn_positions = 1
 	economic_modifier = 5
 	supervisors = "the chief medical officer"
-	selection_color = "#ffeef0"
+	selection_color = "#013d3b"
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_psychiatrist)
 	alt_titles = list("Psychologist")
@@ -204,7 +204,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the chief medical officer"
-	selection_color = "#ffeef0"
+	selection_color = "#013d3b"
 	economic_modifier = 4
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
@@ -214,7 +214,7 @@
 		if(!H)	return 0
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_med(H), slot_l_ear)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/adv(H), slot_l_hand)
+
 		switch(H.backbag)
 			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/medic(H), slot_back)
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_med(H), slot_back)
@@ -229,6 +229,7 @@
 					H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/fr_jacket(H), slot_wear_suit)
 		else
 			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical(H), slot_w_uniform)
+		H.equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/adv(H), slot_l_hand)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/medical/emt(H), slot_belt)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/medical(H), slot_l_store)
 		return 1

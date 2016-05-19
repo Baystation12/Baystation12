@@ -5,6 +5,7 @@
 	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
 	var/totalPlayers = 0		 //Player counts for the Lobby tab
 	var/totalPlayersReady = 0
+	var/datum/browser/panel
 	universal_speak = 1
 
 	invisibility = 101
@@ -24,15 +25,15 @@
 
 
 /mob/new_player/proc/new_player_panel_proc()
-	var/output = "<div align='center'><B>New Player Options</B>"
+	var/output = "<div align='center'>"
 	output +="<hr>"
 	output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
 	if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
 		if(ready)
-			output += "<p>\[ <b>Ready</b> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]</p>"
+			output += "<p>\[ <span class='linkOn'><b>Ready</b></span> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]</p>"
 		else
-			output += "<p>\[ <a href='byond://?src=\ref[src];ready=1'>Ready</a> | <b>Not Ready</b> \]</p>"
+			output += "<p>\[ <a href='byond://?src=\ref[src];ready=1'>Ready</a> | <span class='linkOn'><b>Not Ready</b></span> \]</p>"
 
 	else
 		output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A><br><br>"
@@ -60,7 +61,10 @@
 
 	output += "</div>"
 
-	src << browse(output,"window=playersetup;size=210x280;can_close=0")
+	panel = new(src, "Welcome","Welcome", 210, 280, src)
+	panel.set_window_options("can_close=0")
+	panel.set_content(output)
+	panel.open()
 	return
 
 /mob/new_player/Stat()
@@ -97,12 +101,12 @@
 			ready = 0
 
 	if(href_list["refresh"])
-		src << browse(null, "window=playersetup") //closes the player setup window
+		panel.close()
 		new_player_panel_proc()
 
 	if(href_list["observe"])
 
-		if(alert(src,"Are you sure you wish to observe? You will have to wait 30 minutes before being able to respawn!","Player Setup","Yes","No") == "Yes")
+		if(!config.respawn_delay || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
 			if(!client)	return 1
 			var/mob/observer/ghost/observer = new()
 
@@ -475,17 +479,19 @@
 	return new_character
 
 /mob/new_player/proc/ViewManifest()
-	var/dat = "<html><body>"
-	dat += "<h4>Show Crew Manifest</h4>"
+	var/dat = "<div align='center'>"
 	dat += data_core.get_manifest(OOC = 1)
-	src << browse(dat, "window=manifest;size=370x420;can_close=1")
+	//src << browse(dat, "window=manifest;size=370x420;can_close=1")
+	var/datum/browser/popup = new(src, "Crew Manifest", "Crew Manifest", 370, 420, src)
+	popup.set_content(dat)
+	popup.open()
 
 /mob/new_player/Move()
 	return 0
 
 /mob/new_player/proc/close_spawn_windows()
 	src << browse(null, "window=latechoices") //closes late choices window
-	src << browse(null, "window=playersetup") //closes the player setup window
+	panel.close()
 
 /mob/new_player/proc/has_admin_rights()
 	return check_rights(R_ADMIN, 0, src)
@@ -517,8 +523,11 @@
 /mob/new_player/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
 	return
 
-/mob/new_player/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/mob/speaker = null, var/hard_to_hear = 0)
+/mob/new_player/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
 	return
 
 mob/new_player/MayRespawn()
 	return 1
+
+/mob/new_player/touch_map_edge()
+	return
