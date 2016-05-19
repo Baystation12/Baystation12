@@ -91,6 +91,8 @@
 		var/datum/computer_file/file = RHDD.find_file_by_name(href_list["PRG_usbdeletefile"])
 		if(!file || file.undeletable)
 			return 1
+		if(!check_password(usr, file))
+			return 1
 		RHDD.remove_file(file)
 	if(href_list["PRG_closefile"])
 		. = 1
