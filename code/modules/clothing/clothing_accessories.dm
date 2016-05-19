@@ -8,14 +8,6 @@
 			if (AC.slot == A.slot)
 				return 0
 
-/obj/item/clothing/proc/attach_accessory(var/obj/item/clothing/accessory/A, var/user)
-	accessories += A
-	A.on_attached(src, user)
-	src.verbs |= /obj/item/clothing/proc/removetie_verb
-	if(istype(loc, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = loc
-		H.update_inv_w_uniform()
-
 /obj/item/clothing/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/clothing/accessory))
 
