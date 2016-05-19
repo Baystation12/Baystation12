@@ -462,17 +462,24 @@ its easier to just keep the beam vertical.
 // message is output to anyone who can see, e.g. "The [src] does something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
 /atom/proc/visible_message(var/message, var/blind_message)
-
-	var/list/see = get_mobs_or_objects_in_view(world.view,src) | viewers(get_turf(src), null)
+	var/list/see = hear(world.view,get_turf(src))
+	var/list/seeturfs = list()
 
 	for(var/I in see)
-		if(isobj(I))
-			spawn(0)
-				if(I) //It's possible that it could be deleted in the meantime.
-					var/obj/O = I
-					O.show_message( message, 1, blind_message, 2)
-		else if(ismob(I))
+		if(ismob(I))
 			var/mob/M = I
+			seeturfs += M.locs[1]
+			if(M.see_invisible >= invisibility) // Cannot view the invisible
+				M.show_message( message, 1, blind_message, 2)
+			else if (blind_message)
+				M.show_message(blind_message, 2)
+		else if(isobj(I))
+			var/obj/O = I
+			seeturfs += O.locs[1]
+			O.show_message( message, 1, blind_message, 2)
+
+	for(var/mob/M in player_list)
+		if(M.loc && M.locs[1] in seeturfs)
 			if(M.see_invisible >= invisibility) // Cannot view the invisible
 				M.show_message( message, 1, blind_message, 2)
 			else if (blind_message)
