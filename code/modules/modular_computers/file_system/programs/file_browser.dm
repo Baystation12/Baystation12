@@ -77,13 +77,11 @@
 			if(!pass_entered)
 				return 1
 			F.password = null
-			F.undeletable = 0
 		else
 			var/pass_entered = sanitize(input(usr, "File [open_file] is not currently password protected. Enter the new password or leave blank to cancel. (Max length is 16 characters)", "Enter Password"), 16)
 			if(!pass_entered)
 				return 1
 			F.password = pass_entered
-			F.undeletable = 1
 
 	if(href_list["PRG_usbdeletefile"])
 		. = 1
