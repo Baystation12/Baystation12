@@ -15,11 +15,11 @@
 	if(!F || !istype(F, /datum/computer_file/data))
 		return 1
 	if(F.password)
-		var/pass_entered = sanitize(input(usr, "File [F.filename] is password protected. Please enter the password or leave blank to cancel:", "Enter Password"), 16)
+		var/pass_entered = sanitize(input(usr, "Access Denied. Enter password or leave blank to cancel:", "Enter Password"), 16)
 		if(!pass_entered)
 			return 0
 		if(pass_entered != F.password)
-			error = "Access error: Incorrect password."
+			error = "Incorrect password."
 			return 0
 	return 1
 
@@ -72,7 +72,7 @@
 		if(F.password)
 			var/pass_entered = sanitize(input(usr, "File [open_file] is password protected. To remove the password, enter the current password or leave blank to cancel", "Enter Password"), 16)
 			if(pass_entered != F.password)
-				error = "Access error: Incorrect password."
+				error = "Incorrect password."
 				return 1
 			if(!pass_entered)
 				return 1
