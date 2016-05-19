@@ -17,7 +17,7 @@
  * Twohanded
  */
 /obj/item/weapon/material/twohanded
-	w_class = 4
+	w_class = 5
 	var/wielded = 0
 	var/force_wielded = 0
 	var/force_unwielded
@@ -80,7 +80,7 @@
 	force_divisor = 0.7 // 10/42 with hardness 60 (steel) and 0.25 unwielded divisor
 	sharp = 1
 	edge = 1
-	w_class = 4.0
+	w_class = 5
 	slot_flags = SLOT_BACK
 	force_wielded = 30
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
@@ -106,7 +106,7 @@
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
 	force = 10
-	w_class = 4.0
+	w_class = 5
 	slot_flags = SLOT_BACK
 	force_wielded = 0.75           // 22 when wielded with hardness 15 (glass)
 	unwielded_force_divisor = 0.65 // 14 when unwielded based on above

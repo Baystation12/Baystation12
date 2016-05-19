@@ -4,7 +4,7 @@
 	icon_state = "ionrifle"
 	item_state = "ionrifle"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 4)
-	w_class = 4
+	w_class = 5
 	force = 10
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
@@ -63,7 +63,7 @@
 	icon_state = "riotgun"
 	item_state = "c20r"
 	slot_flags = SLOT_BELT|SLOT_BACK
-	w_class = 4
+	w_class = 5
 	projectile_type = /obj/item/projectile/meteor
 	cell_type = /obj/item/weapon/cell/potato
 	self_recharge = 1
@@ -106,7 +106,7 @@
 	fire_sound = 'sound/weapons/emitter.ogg'
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
-	w_class = 4.0
+	w_class = 5
 	max_shots = 5
 	projectile_type = /obj/item/projectile/change
 	origin_tech = null
