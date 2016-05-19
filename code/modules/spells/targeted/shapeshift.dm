@@ -66,7 +66,7 @@
 				if(share_damage)
 					var/damage = M.maxHealth - round(M.maxHealth*(trans.health/trans.maxHealth))
 					for(var/i in 1 to ceil(damage/10))
-						M.adjustBruteLoss(round(damage/10)) //Spreads the damage out, rather than putting it on one limb only.
+						M.adjustBruteLoss(10) //Spreads the damage out, rather than putting it on one limb only.
 				if(trans.mind)
 					trans.mind.transfer_to(M)
 				else
