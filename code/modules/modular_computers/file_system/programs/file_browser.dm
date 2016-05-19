@@ -12,7 +12,7 @@
 	var/error
 
 /datum/computer_file/program/filemanager/proc/check_password(var/mob/usr, var/datum/computer_file/data/F)
-	if(!F || !istype(F, /datum/computer_file/data))
+	if(!F)
 		return 1
 	if(F.password)
 		var/pass_entered = sanitize(input(usr, "Access Denied. Enter password or leave blank to cancel:", "Enter Password"), 16)
