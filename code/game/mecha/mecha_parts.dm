@@ -8,7 +8,7 @@
 	name = "mecha part"
 	icon = 'icons/mecha/mech_construct.dmi'
 	icon_state = "blank"
-	w_class = 5
+	w_class = 6
 	flags = CONDUCT
 	origin_tech = list(TECH_DATA = 2, TECH_MATERIAL = 2)
 
@@ -16,6 +16,7 @@
 /obj/item/mecha_parts/chassis
 	name="Mecha Chassis"
 	icon_state = "backbone"
+	randpixel = 0
 	var/datum/construction/construct
 	flags = CONDUCT
 

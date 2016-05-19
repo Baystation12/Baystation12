@@ -35,6 +35,12 @@
 		return EyeMove(n, direct)
 	return 0
 
+/mob/observer/eye/facedir(var/ndir)
+	if(!canface())
+		return 0
+	set_dir(ndir)
+	return 1
+
 /mob/observer/eye/examinate()
 	set popup_menu = 0
 	set src = usr.contents

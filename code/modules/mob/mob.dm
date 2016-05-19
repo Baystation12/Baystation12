@@ -14,7 +14,7 @@
 	if(mind && mind.current == src)
 		spellremove(src)
 	ghostize()
-	..()
+	. = ..()
 
 /mob/proc/remove_screen_obj_references()
 	flash = null
@@ -144,10 +144,10 @@
 	if(pulling)
 		if(istype(pulling, /obj))
 			var/obj/O = pulling
-			. += O.w_class / 2
+			. += O.w_class / 5
 		else if(istype(pulling, /mob))
 			var/mob/M = pulling
-			. += M.mob_size / 5
+			. += M.mob_size / MOB_MEDIUM
 		else
 			. += 1
 
@@ -721,9 +721,8 @@
 // facing verbs
 /mob/proc/canface()
 	if(!canmove)						return 0
-	if(stat)							return 0
 	if(anchored)						return 0
-	if(transforming)						return 0
+	if(transforming)					return 0
 	return 1
 
 // Not sure what to call this. Used to check if humans are wearing an AI-controlled exosuit and hence don't need to fall over yet.
@@ -756,10 +755,6 @@
 				if(buckled.buckle_movable)
 					anchored = 0
 					canmove = 1
-		else if(captured)
-			anchored = 1
-			canmove = 0
-			lying = 0
 		else
 			lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 			canmove = !incapacitated(INCAPACITATION_DISABLED)

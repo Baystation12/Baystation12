@@ -345,7 +345,16 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 
 		if(isghost(M))
 			var/mob/observer/ghost/D = M
-			D.manifest(user)
+			if(D.manifest())
+				user.visible_message( \
+					"<span class='warning'>\The [user] drags a ghost, \the [src], to our plane of reality!</span>", \
+					"<span class='warning'>You drag \the [src] to our plane of reality!</span>" \
+				)
+			else
+				user.visible_message ( \
+					"<span class='warning'>\The [user] just tried to smash \his book into that ghost!  It's not very effective.</span>", \
+					"<span class='warning'>You get the feeling that the ghost can't become any more visible.</span>" \
+				)
 			return
 		if(!istype(M))
 			return

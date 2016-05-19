@@ -26,7 +26,25 @@
 	sprite_sheets_refit = null
 	sprite_sheets_obj = null
 	wizard_garb = 1
+	flags_inv = HIDESHOES|HIDEJUMPSUIT|HIDETAIL //For gloves.
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
+	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS
 
 /obj/item/clothing/suit/space/void/wizard/New()
 	..()
 	slowdown_per_slot[slot_wear_suit] = 1
+
+/obj/item/clothing/gloves/purple/wizard
+	name = "mystical gloves"
+	desc = "These look like they go along with a matching suit."
+	item_flags = THICKMATERIAL
+	body_parts_covered = HANDS
+	cold_protection =    HANDS
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	species_restricted = null
+	gender = PLURAL
+	gas_transfer_coefficient = 0.01
+	permeability_coefficient = 0.02
+	unacidable = 1
+	armor = list(melee = 40, bullet = 20, laser = 20,energy = 20, bomb = 35, bio = 100, rad = 60)
+	siemens_coefficient = 0.7

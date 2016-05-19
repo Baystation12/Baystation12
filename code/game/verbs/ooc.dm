@@ -3,10 +3,6 @@
 	set name = "OOC"
 	set category = "OOC"
 
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<span class='warning'>Speech is currently admin-disabled.</span>"
-		return
-
 	if(!mob)	return
 	if(IsGuestKey(key))
 		src << "Guests may not use OOC."
@@ -51,6 +47,8 @@
 
 	for(var/client/target in clients)
 		if(target.is_preference_enabled(/datum/client_preference/show_ooc))
+			if(target.is_key_ignored(key)) // If we're ignored by this person, then do nothing.
+				continue
 			var/display_name = src.key
 			if(holder)
 				if(holder.fakekey)
@@ -67,10 +65,6 @@
 	set name = "LOOC"
 	set desc = "Local OOC, seen only by those in view."
 	set category = "OOC"
-
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
-		return
 
 	if(!mob)
 		return

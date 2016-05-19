@@ -248,6 +248,9 @@
 	else if(cards.len > 1)
 		name = "hand of cards"
 		desc = "Some playing cards."
+	else if(concealed)
+		name = "single playing card"
+		desc = "An unknown playing card, concealed."
 	else
 		var/datum/playingcard/P = cards[1]
 		name = "[P.name]"

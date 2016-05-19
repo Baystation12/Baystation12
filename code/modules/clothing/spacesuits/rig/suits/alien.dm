@@ -10,9 +10,10 @@
 	vision_restriction = 1
 	offline_vision_restriction = 2
 
-	chest_type = /obj/item/clothing/suit/space/rig
+	chest_type = /obj/item/clothing/suit/space/rig/unathi
 	helm_type = /obj/item/clothing/head/helmet/space/rig/unathi
 	boot_type = /obj/item/clothing/shoes/magboots/rig/unathi
+	glove_type = /obj/item/clothing/gloves/rig/unathi
 
 /obj/item/weapon/rig/unathi/fancy
 	name = "breacher chassis control module"
@@ -31,4 +32,7 @@
 	species_restricted = list("Unathi")
 
 /obj/item/clothing/shoes/magboots/rig/unathi
+	species_restricted = list("Unathi")
+	
+/obj/item/clothing/gloves/rig/unathi
 	species_restricted = list("Unathi")

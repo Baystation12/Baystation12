@@ -137,7 +137,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 			//Now to find a box from center location and make that our destination.
 			for(var/turf/T in block(locate(center.x+b1xerror,center.y+b1yerror,location.z), locate(center.x+b2xerror,center.y+b2yerror,location.z) ))
-				if(density&&T.density)	continue//If density was specified.
+				if(density && T.contains_dense_objects())	continue//If density was specified.
 				if(T.x>world.maxx || T.x<1)	continue//Don't want them to teleport off the map.
 				if(T.y>world.maxy || T.y<1)	continue
 				destination_list += T
@@ -146,7 +146,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			else	return
 
 		else//Same deal here.
-			if(density&&destination.density)	return
+			if(density && destination.contains_dense_objects())	return
 			if(destination.x>world.maxx || destination.x<1)	return
 			if(destination.y>world.maxy || destination.y<1)	return
 	else	return
@@ -1295,8 +1295,10 @@ var/mob/dview/dview_mob = new
 // call to generate a stack trace and print to runtime logs
 /proc/crash_with(msg)
 	CRASH(msg)
-	
+
 /proc/screen_loc2turf(scr_loc, turf/origin)
+	if(!origin)
+		return
 	var/tX = splittext(scr_loc, ",")
 	var/tY = splittext(tX[2], ":")
 	var/tZ = origin.z
@@ -1306,4 +1308,4 @@ var/mob/dview/dview_mob = new
 	tX = max(1, min(world.maxx, origin.x + (text2num(tX) - (world.view + 1))))
 	tY = max(1, min(world.maxy, origin.y + (text2num(tY) - (world.view + 1))))
 	return locate(tX, tY, tZ)
-	
+

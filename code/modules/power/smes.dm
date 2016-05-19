@@ -137,7 +137,7 @@
 	if(terminal && terminal.powernet)
 		inputted_power = terminal.powernet.draw_power(inputted_power)
 		add_charge(inputted_power)
-		input_available = inputted_power
+		input_available = inputted_power //for reporting to the UI
 		if(percentage == 100)
 			inputting = 2
 		else if(percentage)
@@ -337,14 +337,17 @@
 	var/data[0]
 	data["nameTag"] = name_tag
 	data["storedCapacity"] = round(100.0*charge/capacity, 0.1)
+	data["storedCapacityAbs"] = round(smes_charge_to_kwh(charge), 0.1)
+	data["storedCapacityMax"] = round(smes_charge_to_kwh(capacity), 0.1)
 	data["charging"] = inputting
 	data["chargeMode"] = input_attempt
-	data["chargeLevel"] = input_level
-	data["chargeMax"] = input_level_max
+	data["chargeLevel"] = round(input_level/1000, 0.1)
+	data["chargeMax"] = round(input_level_max/1000)
+	data["chargeLoad"] = round(input_available/1000, 0.1)
 	data["outputOnline"] = output_attempt
-	data["outputLevel"] = output_level
-	data["outputMax"] = output_level_max
-	data["outputLoad"] = round(output_used)
+	data["outputLevel"] = round(output_level/1000, 0.1)
+	data["outputMax"] = round(output_level_max/1000)
+	data["outputLoad"] = round(output_used/1000, 0.1)
 	data["failTime"] = failure_timer * 2
 	data["outputting"] = outputting
 
@@ -390,7 +393,7 @@
 			if("max")
 				input_level = input_level_max
 			if("set")
-				input_level = input(usr, "Enter new input level (0-[input_level_max])", "SMES Input Power Control", input_level) as num
+				input_level = (input(usr, "Enter new input level (0-[input_level_max/1000] kW)", "SMES Input Power Control", input_level/1000) as num) * 1000
 		input_level = max(0, min(input_level_max, input_level))	// clamp to range
 		return 1
 	else if( href_list["output"] )
@@ -400,7 +403,7 @@
 			if("max")
 				output_level = output_level_max
 			if("set")
-				output_level = input(usr, "Enter new output level (0-[output_level_max])", "SMES Output Power Control", output_level) as num
+				output_level = (input(usr, "Enter new output level (0-[output_level_max/1000] kW)", "SMES Output Power Control", output_level/1000) as num) * 1000
 		output_level = max(0, min(output_level_max, output_level))	// clamp to range
 		return 1
 
@@ -473,3 +476,7 @@
 			user << "<span class='notice'>It's casing is quite seriously damaged.</span>"
 		if(0 to 24)
 			user << "It's casing has some minor damage."
+
+//unit conversion helper
+/proc/smes_charge_to_kwh(var/charge)
+	return ((charge/SMESRATE)/((1 HOUR)/process_schedule_interval("machinery")))/1000 //((watt-ticks)/(ticks-per-hour))/(W-per-kW)

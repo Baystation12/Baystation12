@@ -3,6 +3,7 @@
 	desc = "Should anything ever go wrong..."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "red_phone"
+	randpixel = 0
 	flags = CONDUCT
 	force = 3.0
 	throwforce = 2.0
@@ -150,6 +151,7 @@
 /obj/item/weapon/disk
 	name = "disk"
 	icon = 'icons/obj/items.dmi'
+	randpixel = 5
 
 /*
 /obj/item/weapon/game_kit
@@ -161,18 +163,8 @@
 	var/data = ""
 	var/base_url = "http://svn.slurm.us/public/spacestation13/misc/game_kit"
 	item_state = "sheet-metal"
-	w_class = 5.0
+	w_class = 6
 */
-
-/obj/item/weapon/gift
-	name = "gift"
-	desc = "A wrapped item."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "gift3"
-	var/size = 3.0
-	var/obj/item/gift = null
-	item_state = "gift"
-	w_class = 4.0
 
 /obj/item/weapon/legcuffs
 	name = "legcuffs"
@@ -395,7 +387,6 @@
 	allow_quick_gather = 1
 	allow_quick_empty = 1
 	collection_mode = 1
-	display_contents_with_number = 1
 	max_w_class = 3
 	max_storage_space = 100
 
@@ -404,13 +395,9 @@
 	desc = "What?"
 	gender = PLURAL
 	icon = 'icons/obj/stock_parts.dmi'
+	randpixel = 5
 	w_class = 2.0
 	var/rating = 1
-
-/obj/item/weapon/stock_parts/New()
-	src.pixel_x = rand(-5.0, 5)
-	src.pixel_y = rand(-5.0, 5)
-	..()
 
 //Rank 1
 

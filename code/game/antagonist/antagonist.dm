@@ -104,7 +104,7 @@
 	// Prune restricted status. Broke it up for readability.
 	// Note that this is done before jobs are handed out.
 	for(var/datum/mind/player in ticker.mode.get_players_for_role(role_type, id))
-		if(ghosts_only && !isghost(player.current))
+		if(ghosts_only && !(!player.current || isghost(player.current) || player.current.stat == DEAD || !player.current.client))
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: Only ghosts may join as this role!")
 		else if(config.use_age_restriction_for_antags && player.current.client.player_age < minimum_player_age)
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: Is only [player.current.client.player_age] day\s old, has to be [minimum_player_age] day\s!")
@@ -189,6 +189,9 @@
 		return 0
 	if(!(flags & ANTAG_OVERRIDE_JOB) && (!player.current || istype(player.current, /mob/new_player)))
 		log_debug("[player.key] was selected for [role_text] by lottery, but they have not joined the game.")
+		return 0
+	if(ticker.current_state >= GAME_STATE_PLAYING && (isghost(player.current) || player.current.stat == DEAD || !player.current.client) && !(player in ticker.antag_pool))
+		log_debug("[player.key] was selected for [role_text] by lottery, but they are a ghost not in the antag pool.")
 		return 0
 
 	pending_antagonists |= player

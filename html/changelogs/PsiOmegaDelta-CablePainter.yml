@@ -1,6 +1,0 @@
-author: PsiOmegaDelta
-
-delete-after: True
-
-changes: 
-  - rscadd: "Adds a cable painter for recoloring both coils and laid down cables."

@@ -393,6 +393,9 @@ area/space/atmosalert()
 /area/syndicate_mothership/elite_squad
 	name = "\improper Elite Mercenary Squad"
 	icon_state = "syndie-elite"
+	
+/area/syndicate_mothership/ninja
+	name = "\improper Ninja Base"
 
 //EXTRA
 

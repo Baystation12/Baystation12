@@ -1,48 +1,59 @@
 
 /*
-	run_armor_check(a,b)
-	args
-	a:def_zone - What part is getting hit, if null will check entire body
-	b:attack_flag - What type of attack, bullet, laser, energy, melee
+	run_armor_check() args
+	def_zone - What part is getting hit, if null will check entire body
+	attack_flag - The type of armour to be checked
+	armour_pen - reduces the effectiveness of armour
+	absorb_text - shown if the armor check is 100% successful
+	soften_text - shown if the armor check is more than 0% successful and less than 100%
 
 	Returns
-	0 - no block
-	1 - halfblock
-	2 - fullblock
+	a blocked amount between 0 - 100, representing the success of the armor check.
 */
 /mob/living/proc/run_armor_check(var/def_zone = null, var/attack_flag = "melee", var/armour_pen = 0, var/absorb_text = null, var/soften_text = null)
 	if(armour_pen >= 100)
 		return 0 //might as well just skip the processing
 
 	var/armor = getarmor(def_zone, attack_flag)
-	var/absorb = 0
 
-	//Roll armour
-	if(prob(armor))
-		absorb += 1
-	if(prob(armor))
-		absorb += 1
+	if(armour_pen >= armor)
+		return 0 //effective_armor is going to be 0, fullblock is going to be 0, blocked is going to 0, let's save ourselves the trouble
 
-	//Roll penetration
-	if(prob(armour_pen))
-		absorb -= 1
-	if(prob(armour_pen))
-		absorb -= 1
+	var/effective_armor = (armor - armour_pen)/100
+	var/fullblock = (effective_armor*effective_armor) * ARMOR_BLOCK_CHANCE_MULT
 
-	if(absorb >= 2)
+	if(fullblock >= 1 || prob(fullblock*100))
 		if(absorb_text)
-			show_message("[absorb_text]")
+			show_message("<span class='warning'>[absorb_text]</span>")
 		else
 			show_message("<span class='warning'>Your armor absorbs the blow!</span>")
-		return 2
-	if(absorb == 1)
-		if(absorb_text)
-			show_message("[soften_text]",4)
+		return 100
+
+	//this makes it so that X armour blocks X% damage, when including the chance of hard block.
+	//I double checked and this formula will also ensure that a higher effective_armor 
+	//will always result in higher (non-fullblock) damage absorption too, which is also a nice property
+	//In particular, blocked will increase from 0 to 50 as effective_armor increases from 0 to 0.999 (if it is 1 then we never get here because ofc)
+	//and the average damage absorption = (blocked/100)*(1-fullblock) + 1.0*(fullblock) = effective_armor
+	var/blocked = (effective_armor - fullblock)/(1 - fullblock)*100
+	
+	if(blocked > 20)
+		//Should we show this every single time?
+		if(soften_text)
+			show_message("<span class='warning'>[soften_text]</span>")
 		else
 			show_message("<span class='warning'>Your armor softens the blow!</span>")
-		return 1
-	return 0
 
+	return round(blocked, 1)
+
+//Adds two armor values together. 
+//If armor_a and armor_b are between 0-100 the result will always also be between 0-100.
+/proc/add_armor(var/armor_a, var/armor_b)
+	if(armor_a >= 100 || armor_b >= 100)
+		return 100 //adding to infinite protection doesn't make it any bigger
+
+	var/protection_a = 1/(blocked_mult(armor_a)) - 1
+	var/protection_b = 1/(blocked_mult(armor_b)) - 1
+	return 100 - 1/(protection_a + protection_b + 1)*100
 
 //if null is passed for def_zone, then this should return something appropriate for all zones (e.g. area effect damage)
 /mob/living/proc/getarmor(var/def_zone, var/type)
@@ -70,13 +81,14 @@
 	var/absorb = run_armor_check(def_zone, P.check_armour, P.armor_penetration)
 	var/proj_sharp = is_sharp(P)
 	var/proj_edge = has_edge(P)
-	if ((proj_sharp || proj_edge) && prob(getarmor(def_zone, P.check_armour)))
+	if ((proj_sharp || proj_edge) && prob(absorb))
 		proj_sharp = 0
 		proj_edge = 0
 
 	if(!P.nodamage)
 		apply_damage(P.damage, P.damage_type, def_zone, absorb, 0, P, sharp=proj_sharp, edge=proj_edge)
 	P.on_hit(src, absorb, def_zone)
+
 	return absorb
 
 //Handles the effects of "stun" weapons
@@ -121,7 +133,7 @@
 
 //returns 0 if the effects failed to apply for some reason, 1 otherwise.
 /mob/living/proc/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/blocked, var/hit_zone)
-	if(!effective_force || blocked >= 2)
+	if(!effective_force || blocked >= 100)
 		return 0
 
 	//Hulk modifier
@@ -131,7 +143,7 @@
 	//Apply weapon damage
 	var/weapon_sharp = is_sharp(I)
 	var/weapon_edge = has_edge(I)
-	if(prob(max(getarmor(hit_zone, "melee") - I.armor_penetration, 0))) //melee armour provides a chance to turn sharp/edge weapon attacks into blunt ones
+	if(prob(blocked)) //armour provides a chance to turn sharp/edge weapon attacks into blunt ones
 		weapon_sharp = 0
 		weapon_edge = 0
 
@@ -157,9 +169,7 @@
 
 		src.visible_message("\red [src] has been hit by [O].")
 		var/armor = run_armor_check(null, "melee")
-
-		if(armor < 2)
-			apply_damage(throw_damage, dtype, null, armor, is_sharp(O), has_edge(O), O)
+		apply_damage(throw_damage, dtype, null, armor, is_sharp(O), has_edge(O), O)
 
 		O.throwing = 0		//it hit, so stop moving
 

@@ -53,7 +53,7 @@ obj/item/weapon/gun/energy/retro
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
 	slot_flags = SLOT_BELT|SLOT_BACK
 	requires_two_hands = 6 //large and heavy
-	w_class = 4
+	w_class = 5
 	projectile_type = /obj/item/projectile/beam/heavylaser
 	charge_cost = 400
 	max_shots = 6
@@ -92,7 +92,7 @@ obj/item/weapon/gun/energy/retro
 	max_shots = 4
 	fire_delay = 35
 	force = 10
-	w_class = 4
+	w_class = 5
 	accuracy = -3 //shooting at the hip
 	scoped_accuracy = 0
 
