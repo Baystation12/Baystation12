@@ -28,13 +28,6 @@
 	..()
 	gunshot_residue = null
 
-/obj/item/clothing/New()
-	..()
-	if(starting_accessories)
-		for(var/T in starting_accessories)
-			var/obj/item/clothing/accessory/tie = new T(src)
-			src.attach_accessory(tie)
-
 //BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M as mob, slot)
 

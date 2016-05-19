@@ -64,6 +64,12 @@
 		for(var/obj/item/clothing/accessory/A in accessories)
 			user << "\A [A] is attached to it."
 
+/obj/item/clothing/New()
+	..()
+	if(starting_accessories)
+		for(var/T in starting_accessories)
+			var/obj/item/clothing/accessory/tie = new T(src)
+			src.attach_accessory(null, tie)
 /**
  *  Attach accessory A to src
  *
