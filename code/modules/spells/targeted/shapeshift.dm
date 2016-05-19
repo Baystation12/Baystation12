@@ -87,7 +87,7 @@
 	spell_flags = NEEDSCLOTHES | SELECTABLE
 	range = 3
 	duration = 150 //15 seconds.
-	cooldown_min = 300 //30 seconds
+	cooldown_min = 200 //20 seconds
 
 	level_max = list(Sp_TOTAL = 2, Sp_SPEED = 2, Sp_POWER = 2)
 

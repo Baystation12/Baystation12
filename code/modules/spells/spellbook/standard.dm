@@ -36,3 +36,6 @@
 							/obj/item/weapon/magic_rock = 						1,
 							/obj/item/weapon/contract/apprentice = 				1
 							)
+
+	sacrifice_objects = list(/obj/item/stack/material/gold,
+							/obj/item/stack/material/silver)

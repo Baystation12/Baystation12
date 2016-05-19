@@ -29,3 +29,5 @@
 				/obj/item/weapon/contract/apprentice = 				1
 					)
 
+	sacrifice_objects = list(/obj/item/weapon/material/sword,
+							/obj/item/weapon/material/twohanded/fireaxe)

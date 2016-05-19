@@ -29,3 +29,7 @@
 				/obj/item/weapon/gun/energy/staff/focus = 			2,
 				/obj/item/weapon/contract/apprentice = 				1
 				)
+
+	sacrifice_reagents = list("peridaxon",
+							"adminordrazine")
+	sacrifice_objects = list(/obj/item/weapon/storage/bible)

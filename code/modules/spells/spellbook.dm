@@ -58,13 +58,17 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 
 	interact(user)
 
-/obj/item/weapon/spellbook/proc/make_sacrifice(obj/item/I as obj, mob/user as mob)
+/obj/item/weapon/spellbook/proc/make_sacrifice(obj/item/I as obj, mob/user as mob, var/reagent)
 	if(has_sacrificed)
 		return
 	src.visible_message("<b>\The [src]</b> glows briefly, absorbing \the [I].")
 	user << "<span class='notice'>Your sacrifice was accepted!</span>"
-	user.remove_from_mob(I)
-	qdel(I)
+	if(reagent)
+		var/datum/reagents/R = I.reagents
+		R.remove_reagent(reagent,5)
+	else
+		user.remove_from_mob(I)
+		qdel(I)
 	has_sacrificed = 1
 	investing_time = max(investing_time - 6000,1) //subtract 10 minutes. Make sure it doesn't act funky at the beginning of the game.
 
@@ -83,7 +87,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			if(reagent_list && reagent_list.len)
 				for(var/id in reagent_list)
 					if(R.has_reagent(id,5))
-						make_sacrifice(I,user)
+						make_sacrifice(I,user, id)
 						return
 	..()
 
@@ -222,16 +226,18 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	if(uses < 1)
 		return "You don't have enough slots to invest!"
 	if(investing_time)
-		return "You have already started investing a point."
+		return "You can only invest one spell slot at a time."
 	uses--
 	processing_objects += src
 	investing_time = world.time + 18000 //30 minutes
-	return "You invest a spellpoint and will recieve 2 in thirty minutes."
+	return "You invest a spellslot and will recieve two in return in thirty minutes."
 
 /obj/item/weapon/spellbook/process()
 	if(investing_time && investing_time <= world.time)
-		src.visible_message("<b>\The [src]</b> lights up briefly.")
+		src.visible_message("<b>\The [src]</b> chims.")
 		uses += 2
+		if(uses > spellbook.max_uses)
+			spellbook.max_uses = uses
 		investing_time = 0
 		processing_objects -= src
 	return 1

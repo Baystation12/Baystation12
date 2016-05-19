@@ -31,3 +31,6 @@
 				/obj/item/weapon/magic_rock = 					1,
 				/obj/item/weapon/contract/apprentice = 			1
 				)
+
+	sacrifice_reagents = list("hyperzine")
+	sacrifice_objects = list(/obj/item/stack/telecrystal)
