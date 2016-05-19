@@ -298,7 +298,7 @@
 	name = "Condensed Capsaicin"
 	id = "condensedcapsaicin"
 	description = "A chemical agent used for self-defense and in police work."
-	taste_description = "satan's piss"
+	taste_description = "scorching agony"
 	taste_mult = 10
 	reagent_state = LIQUID
 	touch_met = 50 // Get rid of it quickly
@@ -2156,8 +2156,8 @@
 	name = "Special Blend Whiskey"
 	id = "specialwhiskey"
 	description = "Just when you thought regular station whiskey was good... This silky, amber goodness has to come along and ruin everything."
-	taste_description = "the whiskey gods pissed in your mouth"
-	color = "#664300"
+	taste_description = "liquid fire"
+	color = "#523600"
 	strength = 25
 
 	glass_icon_state = "whiskeyglass"
