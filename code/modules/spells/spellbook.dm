@@ -61,14 +61,18 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 /obj/item/weapon/spellbook/proc/make_sacrifice(obj/item/I as obj, mob/user as mob, var/reagent)
 	if(has_sacrificed)
 		return
-	src.visible_message("<b>\The [src]</b> glows briefly, absorbing \the [I].")
-	user << "<span class='notice'>Your sacrifice was accepted!</span>"
 	if(reagent)
 		var/datum/reagents/R = I.reagents
 		R.remove_reagent(reagent,5)
 	else
+		if(istype(I,/obj/item/stack))
+			var/obj/item/stack/S = I
+			if(S.amount < S.max_amount)
+				usr << "<span class='warning'>You must sacrifice [S.max_amount] stacks of [S]!</span>"
+				return
 		user.remove_from_mob(I)
 		qdel(I)
+	user << "<span class='notice'>Your sacrifice was accepted!</span>"
 	has_sacrificed = 1
 	investing_time = max(investing_time - 6000,1) //subtract 10 minutes. Make sure it doesn't act funky at the beginning of the game.
 
@@ -136,7 +140,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			dat += "<br><i>[desc]</i><br>"
 		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spellbook.</a></center>"
 		if(spellbook.book_flags & INVESTABLE)
-			dat += "<center><A href='byond://?src=\ref[src];invest=1'>Invest a Spell Slot</a><br><i>Investing a spellpoint will return two spellpoints back in 30 minutes.<br>Some say a sacrifice could even shorten the time...</i>"
+			dat += "<center><A href='byond://?src=\ref[src];invest=1'>Invest a Spell Slot</a><br><i>Investing a spellpoint will return two spellpoints back in 30 minutes.<br>Some say a sacrifice could even shorten the time...</i></center>"
 		if(!(spellbook.book_flags & NOREVERT))
 			dat += "<center><A href='byond://?src=\ref[src];book=1'>Choose different spellbook.</a></center>"
 		dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spellbook.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"

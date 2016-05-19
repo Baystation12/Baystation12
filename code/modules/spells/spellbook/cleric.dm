@@ -32,4 +32,4 @@
 
 	sacrifice_reagents = list("peridaxon",
 							"adminordrazine")
-	sacrifice_objects = list(/obj/item/weapon/storage/bible)
+	sacrifice_objects = list(/obj/item/seeds/mtearseed)
