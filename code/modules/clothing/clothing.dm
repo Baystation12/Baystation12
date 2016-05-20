@@ -718,7 +718,7 @@ BLIND     // can't see anything
 
 	rolled_sleeves = !rolled_sleeves
 	if(rolled_sleeves)
-		body_parts_covered &= ~(ARMS)
+		body_parts_covered &= ~(ARMS|HANDS)
 		item_state_slots[slot_w_uniform_str] = "[worn_state]_r"
 		usr << "<span class='notice'>You roll up your [src]'s sleeves.</span>"
 	else
