@@ -529,6 +529,7 @@ BLIND     // can't see anything
 		*/
 	var/displays_id = 1
 	var/rolled_down = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
+	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/uniform.dmi',
 		"Resomi" = 'icons/mob/species/resomi/uniform.dmi'
@@ -567,6 +568,7 @@ BLIND     // can't see anything
 	if(istype(src.loc, /mob/living/carbon/human))
 		H = src.loc
 
+
 	var/icon/under_icon
 	if(icon_override)
 		under_icon = icon_override
@@ -585,6 +587,29 @@ BLIND     // can't see anything
 		rolled_down = -1
 	if(H) update_clothing_icon()
 
+/obj/item/clothing/under/proc/update_rollsleeves_status()
+	var/mob/living/carbon/human/H
+	if(istype(src.loc, /mob/living/carbon/human))
+		H = src.loc
+
+	var/icon/under_icon
+	if(icon_override)
+		under_icon = icon_override
+	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
+		under_icon = sprite_sheets[H.species.get_bodytype(H)]
+	else if(item_icons && item_icons[slot_w_uniform_str])
+		under_icon = item_icons[slot_w_uniform_str]
+	else
+		under_icon = INV_W_UNIFORM_DEF_ICON
+
+	// The _s is because the icon update procs append it.
+	if(("[worn_state]_r_s") in icon_states(under_icon))
+		if(rolled_sleeves != 1)
+			rolled_sleeves = 0
+	else
+		rolled_sleeves = -1
+	if(H) update_clothing_icon()
+	
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
@@ -663,6 +688,8 @@ BLIND     // can't see anything
 	update_rolldown_status()
 	if(rolled_down == -1)
 		usr << "<span class='notice'>You cannot roll down [src]!</span>"
+	if((rolled_sleeves == 1) && !(rolled_down))
+		rolled_sleeves = 0
 		return
 
 	rolled_down = !rolled_down
@@ -674,6 +701,31 @@ BLIND     // can't see anything
 		item_state_slots[slot_w_uniform_str] = "[worn_state]"
 	update_clothing_icon()
 
+/obj/item/clothing/under/verb/rollsleeves()
+	set name = "Roll Up Sleeves"
+	set category = "Object"
+	set src in usr
+	if(!istype(usr, /mob/living)) return
+	if(usr.stat) return
+
+	update_rollsleeves_status()
+	if(rolled_sleeves == -1)
+		usr << "<span class='notice'>You cannot roll up your [src]'s sleeves!</span>"
+		return
+	if(rolled_down == 1)
+		usr << "<span class='notice'>You must roll up your [src] first!</span>"
+		return
+
+	rolled_sleeves = !rolled_sleeves
+	if(rolled_sleeves)
+		body_parts_covered &= ~(ARMS|HANDS)
+		item_state_slots[slot_w_uniform_str] = "[worn_state]_r"
+		usr << "<span class='notice'>You roll up your [src]'s sleeves.</span>"
+	else
+		body_parts_covered = initial(body_parts_covered)
+		item_state_slots[slot_w_uniform_str] = "[worn_state]"
+		usr << "<span class='notice'>You roll down your [src]'s sleeves.</span>"
+	update_clothing_icon()
 
 /obj/item/clothing/under/rank/New()
 	sensor_mode = pick(0,1,2,3)
