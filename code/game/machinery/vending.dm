@@ -933,6 +933,7 @@
 	/obj/item/weapon/material/kitchen/utensil/knife = 6,
 	/obj/item/weapon/material/kitchen/utensil/spoon = 6,
 	/obj/item/weapon/material/knife = 3,
+	/obj/item/weapon/material/kitchen/rollingpin = 2,
 	/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,
 	/obj/item/clothing/suit/chef/classic = 2,
 	/obj/item/weapon/storage/lunchbox = 3,
@@ -945,8 +946,7 @@
 	/obj/item/weapon/storage/lunchbox/syndicate = 3)
 
 
-	contraband = list(/obj/item/weapon/material/kitchen/rollingpin = 2,
-	/obj/item/weapon/material/knife/butch = 2)
+	contraband = list(/obj/item/weapon/material/knife/butch = 2)
 
 /obj/machinery/vending/sovietsoda
 	name = "BODA"
