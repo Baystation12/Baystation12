@@ -144,6 +144,12 @@ var/list/_client_preferences_by_type
 	enabled_description = "Primary"
 	disabled_description = "All"
 
+/datum/client_preference/browser_style
+	description = "Fake NanoUI Browser Style"
+	key = "BROWSER_STYLED"
+	enabled_description = "Fancy"
+	disabled_description = "Plain"
+
 /********************
 * Admin Preferences *
 ********************/
