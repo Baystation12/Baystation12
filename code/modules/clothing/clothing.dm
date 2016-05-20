@@ -9,6 +9,7 @@
 	var/list/accessories = list()
 	var/list/valid_accessory_slots
 	var/list/restricted_accessory_slots
+	var/list/starting_accessories
 
 	/*
 		Sprites used when the clothing item is refit. This is done by setting icon_override.
