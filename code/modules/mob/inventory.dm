@@ -220,6 +220,8 @@ var/list/slot_equipment_priority = list( \
 
 //Attemps to remove an object on a mob.
 /mob/proc/remove_from_mob(var/obj/O)
+	if(!O) // Nothing to remove, so we succeed.
+		return 1
 	src.u_equip(O)
 	if (src.client)
 		src.client.screen -= O
