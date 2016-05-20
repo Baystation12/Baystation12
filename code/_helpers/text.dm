@@ -338,5 +338,4 @@ proc/TextPreview(var/string,var/len=40)
  * Strip out the special beyond characters for \proper and \improper
  * from text that will be sent to the browser.
  */
-/proc/strip_improper(var/text)
-	return replacetext(replacetext(text, "\proper", ""), "\improper", "")
+#define strip_improper(input_text) replacetext(replacetext(input_text, "\proper", ""), "\improper", "")
