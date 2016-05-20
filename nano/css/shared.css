@@ -320,6 +320,19 @@ div.notice {
     overflow-y: auto;
 }
 
+.statusDisplayComm {
+	width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+	padding-bottom: 4px;
+	border-top: 0 none;
+	border-left: 0 none;
+	border-right: 0 none;
+	border-bottom: 2px inset #40628a;
+    margin: 3px 0;
+	overflow: hidden;
+}
+
 .statusLabel {
     width: 138px;
     float: left;
