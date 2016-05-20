@@ -156,15 +156,17 @@
 /obj/item/examine(mob/user, var/distance = -1)
 	var/size
 	switch(src.w_class)
-		if(1.0)
+		if(TINY_ITEM)
 			size = "tiny"
-		if(2.0)
+		if(SMALL_ITEM)
 			size = "small"
-		if(3.0)
+		if(NORMAL_ITEM)
 			size = "normal-sized"
-		if(4.0)
+		if(LARGE_ITEM)
+			size = "large"
+		if(BULKY_ITEM)
 			size = "bulky"
-		if(5.0)
+		if(BULKY_ITEM + 1 to INFINITY)
 			size = "huge"
 	return ..(user, distance, "", "It is a [size] item.")
 
@@ -344,7 +346,7 @@ var/list/global/slot_flags_enumeration = list(
 	switch(slot)
 		if(slot_l_ear, slot_r_ear)
 			var/slot_other_ear = (slot == slot_l_ear)? slot_r_ear : slot_l_ear
-			if( (w_class > 1) && !(slot_flags & SLOT_EARS) )
+			if( (w_class > TINY_ITEM) && !(slot_flags & SLOT_EARS) )
 				return 0
 			if( (slot_flags & SLOT_TWOEARS) && H.get_equipped_item(slot_other_ear) )
 				return 0
@@ -360,8 +362,10 @@ var/list/global/slot_flags_enumeration = list(
 				return 0
 			if(slot_flags & SLOT_DENYPOCKET)
 				return 0
-			if( w_class > 2 && !(slot_flags & SLOT_POCKET) )
+			if( w_class > SMALL_ITEM && !(slot_flags & SLOT_POCKET) )
 				return 0
+			if(get_storage_cost() == DO_NOT_STORE)
+				return 0 //pockets act like storage and should respect DO_NOT_STORE. Suit storage might be fine as is
 		if(slot_s_store)
 			if(!H.wear_suit && (slot_wear_suit in mob_equip))
 				if(!disable_warning)

@@ -406,8 +406,22 @@ if(!N.lighthack)
 /obj/item/weapon/disk/nuclear/New()
 	..()
 	nuke_disks |= src
+	
+/obj/item/weapon/disk/nuclear/initialize()
+	..()
+	// Can never be quite sure that a game mode has been properly initiated or not at this point, so always register
+	moved_event.register(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level)
+	
+/obj/item/weapon/disk/nuclear/proc/check_z_level()
+	if(!(ticker && istype(ticker.mode, /datum/game_mode/nuclear)))
+		moved_event.unregister(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level) // However, when we are certain unregister if necessary
+		return
+	var/turf/T = get_turf(src)
+	if(!T || isNotStationLevel(T.z))
+		qdel(src)
 
 /obj/item/weapon/disk/nuclear/Destroy()
+	moved_event.unregister(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level)
 	nuke_disks -= src
 	if(!nuke_disks.len)
 		var/turf/T = pick_area_turf(/area/maintenance, list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))
@@ -417,6 +431,3 @@ if(!N.lighthack)
 		else
 			log_and_message_admins("[src], the last authentication disk, has been destroyed. Failed to respawn disc!")
 	return ..()
-
-/obj/item/weapon/disk/nuclear/touch_map_edge()
-	qdel(src)

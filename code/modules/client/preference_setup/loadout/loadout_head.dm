@@ -102,6 +102,18 @@
 	display_name = "hair flower pin, red"
 	path = /obj/item/clothing/head/hairflower
 
+/datum/gear/head/hairflower/yellow
+	display_name = "hair flower pin, yellow"
+	path = /obj/item/clothing/head/hairflower/yellow
+
+/datum/gear/head/hairflower/pink
+	display_name = "hair flower pin, pink"
+	path = /obj/item/clothing/head/hairflower/pink
+
+/datum/gear/head/hairflower/blue
+	display_name = "hair flower pin, blue"
+	path = /obj/item/clothing/head/hairflower/blue
+
 /datum/gear/head/hardhat
 	display_name = "hardhat, yellow"
 	path = /obj/item/clothing/head/hardhat

@@ -402,9 +402,6 @@
 	if(istype(AM, /mob/living/carbon) && prob(10))
 		src.spread_disease_to(AM, "Contact")
 
-/mob/living/carbon/cannot_use_vents()
-	return
-
 /mob/living/carbon/slip(var/slipped_on,stun_duration=8)
 	if(buckled)
 		return 0
@@ -446,12 +443,12 @@
 	user << browse(dat, text("window=mob[];size=325x500", name))
 	onclose(user, "mob[name]")
 	return
-	
+
 /**
  *  Return FALSE if victim can't be devoured, DEVOUR_FAST if they can be devoured quickly, DEVOUR_SLOW for slow devour
  */
 /mob/living/carbon/proc/can_devour(mob/victim)
 	if((FAT in mutations) && issmall(victim))
 		return DEVOUR_FAST
-	
+
 	return FALSE

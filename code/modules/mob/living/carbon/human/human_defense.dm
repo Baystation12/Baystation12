@@ -34,7 +34,11 @@ meteor_act
 			SP.loc = organ
 			organ.embed(SP)
 
-	return (..(P , def_zone))
+	var/blocked = ..(P , def_zone)
+
+	projectile_hit_bloody(P, P.damage*blocked_mult(blocked), def_zone)
+
+	return blocked
 
 /mob/living/carbon/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone)
 	var/obj/item/organ/external/affected = get_organ(check_zone(def_zone))
@@ -229,6 +233,30 @@ meteor_act
 			if(get_dist(H, src) <= 1) //people with TK won't get smeared with blood
 				H.bloody_body(src)
 				H.bloody_hands(src)
+
+		switch(hit_zone)
+			if("head")
+				if(wear_mask)
+					wear_mask.add_blood(src)
+					update_inv_wear_mask(0)
+				if(head)
+					head.add_blood(src)
+					update_inv_head(0)
+				if(glasses && prob(33))
+					glasses.add_blood(src)
+					update_inv_glasses(0)
+			if("chest")
+				bloody_body(src)
+
+/mob/living/carbon/human/proc/projectile_hit_bloody(obj/item/projectile/P, var/effective_force, var/hit_zone)
+	if(P.damage_type != BRUTE || P.nodamage)
+		return
+	if(!(P.sharp || prob(effective_force*4)))
+		return
+	if(prob(effective_force))
+		var/turf/location = loc
+		if(istype(location, /turf/simulated))
+			location.add_blood(src)
 
 		switch(hit_zone)
 			if("head")

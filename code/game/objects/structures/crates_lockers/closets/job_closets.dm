@@ -21,6 +21,9 @@
 	new /obj/item/device/radio/headset/headset_service(src)
 	new /obj/item/device/radio/headset/headset_service(src)
 	new /obj/item/clothing/head/hairflower
+	new /obj/item/clothing/head/hairflower/pink
+	new /obj/item/clothing/head/hairflower/yellow
+	new /obj/item/clothing/head/hairflower/blue
 	new /obj/item/clothing/under/sl_suit(src)
 	new /obj/item/clothing/under/sl_suit(src)
 	new /obj/item/clothing/under/rank/bartender(src)

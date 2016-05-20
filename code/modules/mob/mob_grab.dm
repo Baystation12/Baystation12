@@ -27,7 +27,7 @@
 	layer = 21
 	abstract = 1
 	item_state = "nothing"
-	w_class = 5.0
+	simulated = 0
 
 
 /obj/item/weapon/grab/New(mob/user, mob/victim)
@@ -56,6 +56,9 @@
 				G.adjust_position()
 				dancing = 1
 	adjust_position()
+
+/obj/item/weapon/grab/get_storage_cost()
+	return DO_NOT_STORE
 
 //Used by throw code to hand over the mob, instead of throwing the grab. The grab is then deleted by the throw code.
 /obj/item/weapon/grab/proc/throw_held()

@@ -1,4 +1,5 @@
 /decl/appearance_handler
+	var/priority = 15
 	var/list/appearance_sources
 
 /decl/appearance_handler/New()
@@ -8,7 +9,7 @@
 /decl/appearance_handler/proc/AddAltAppearance(var/source, var/list/images, var/list/viewers = list())
 	if(source in appearance_sources)
 		return FALSE
-	appearance_sources[source] = new/datum/appearance_data(images, viewers)
+	appearance_sources[source] = new/datum/appearance_data(images, viewers, priority)
 	destroyed_event.register(source, src, /decl/appearance_handler/proc/RemoveAltAppearance)
 
 /decl/appearance_handler/proc/RemoveAltAppearance(var/source)
