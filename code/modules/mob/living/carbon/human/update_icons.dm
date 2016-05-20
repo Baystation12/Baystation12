@@ -581,8 +581,9 @@ var/global/list/damage_icon_parts = list()
 		return
 
 	if(l_ear || r_ear)
-		var/image/both = image("icon" = null)
-		
+		// Blank image upon which to layer left & right overlays.
+		var/image/both = image("icon" = 'icons/effects/effects.dmi', "icon_state" = "nothing")
+
 		if(l_ear)
 			var/image/standing
 			var/t_type = l_ear.icon_state
