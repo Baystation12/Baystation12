@@ -9,6 +9,7 @@
 	var/list/accessories = list()
 	var/list/valid_accessory_slots
 	var/list/restricted_accessory_slots
+	var/list/starting_accessories
 
 	/*
 		Sprites used when the clothing item is refit. This is done by setting icon_override.
@@ -26,6 +27,13 @@
 /obj/item/clothing/clean_blood()
 	..()
 	gunshot_residue = null
+
+/obj/item/clothing/New()
+	..()
+	if(starting_accessories)
+		for(var/T in starting_accessories)
+			var/obj/item/clothing/accessory/tie = new T(src)
+			src.attach_accessory(null, tie)
 
 //BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M as mob, slot)

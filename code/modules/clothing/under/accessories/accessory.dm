@@ -80,6 +80,18 @@
 	name = "red tie"
 	icon_state = "redtie"
 
+/obj/item/clothing/accessory/blue_clip
+	name = "blue tie with a clip"
+	icon_state = "bluecliptie"
+
+/obj/item/clothing/accessory/red_long
+	name = "red long tie"
+	icon_state = "redlongtie"
+
+/obj/item/clothing/accessory/black
+	name = "black tie"
+	icon_state = "blacktie"
+
 /obj/item/clothing/accessory/horrible
 	name = "horrible tie"
 	desc = "A neosilk clip-on tie. This one is disgusting."
