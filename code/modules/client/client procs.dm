@@ -4,6 +4,9 @@
 #define UPLOAD_LIMIT		10485760	//Restricts client uploads to the server to 10MB //Boosted this thing. What's the worst that can happen?
 #define MIN_CLIENT_VERSION	0		//Just an ambiguously low version for now, I don't want to suddenly stop people playing.
 									//I would just like the code ready should it ever need to be used.
+
+//#define TOPIC_DEBUGGING 1
+
 	/*
 	When somebody clicks a link in game, this Topic is called first.
 	It does the stuff in this proc and  then is redirected to the Topic() proc for the src=[0xWhatever]
@@ -22,6 +25,14 @@
 /client/Topic(href, href_list, hsrc)
 	if(!usr || usr != mob)	//stops us calling Topic for somebody else's client. Also helps prevent usr=null
 		return
+
+	#if defined(TOPIC_DEBUGGING)
+	world << "[src]'s Topic: [href] destined for [hsrc]."
+
+	if(href_list["nano_err"]) //nano throwing errors
+		world << "## NanoUI, Subject [src]: " + html_decode(href_list["nano_err"]) //NANO DEBUG HOOK
+
+	#endif
 
 	//search the href for script injection
 	if( findtext(href,"<script",1,0) )
@@ -158,7 +169,7 @@
 	log_client_to_db()
 
 	send_resources()
-	
+
 	if(!void)
 		void = new()
 	screen += void
