@@ -605,6 +605,17 @@
 	glass_name = "milk"
 	glass_desc = "White and nutritious goodness!"
 
+/datum/reagent/drink/milk/chocolate
+	name =  "Chocolate Milk"
+	id = "chocolate_milk"
+	description = "A delicious mixture of perfectly healthy mix and terrible chocolate."
+	taste_description = "chocolate milk"
+	color = "#74533b"
+
+	glass_icon_state = "glass_brown"
+	glass_name = "glass of chocolate milk"
+	glass_desc = "Deliciously fattening!"
+
 /datum/reagent/drink/milk/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_DIONA)

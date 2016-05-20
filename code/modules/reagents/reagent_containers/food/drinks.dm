@@ -121,6 +121,23 @@
 		..()
 		reagents.add_reagent("soymilk", 50)
 
+/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton
+	name = "Small Carton of Milk"
+	volume = 30
+	icon_state = "mini-milk"
+/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/New()
+	..()
+	reagents.add_reagent("milk", 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/chocolate
+	name = "Small Carton of Chocolate Milk"
+	desc = "It's milk! This one is in delicious chocolate flavour."
+
+/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/chocolate/New()
+	..()
+	reagents.add_reagent("chocolate_milk", 30)
+
+
 /obj/item/weapon/reagent_containers/food/drinks/coffee
 	name = "Robust Coffee"
 	desc = "Careful, the beverage you're about to enjoy is extremely hot."
