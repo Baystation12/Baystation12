@@ -29,6 +29,7 @@
 /datum/job/ai/equip_preview(mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/suit/straight_jacket(H), slot_wear_suit)
 	H.equip_to_slot_or_del(new /obj/item/clothing/head/cardborg(H), slot_head)
+	return 1
 
 /datum/job/cyborg
 	title = "Cyborg"
@@ -60,3 +61,4 @@
 /datum/job/cyborg/equip_preview(mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/suit/cardborg(H), slot_wear_suit)
 	H.equip_to_slot_or_del(new /obj/item/clothing/head/cardborg(H), slot_head)
+	return 1

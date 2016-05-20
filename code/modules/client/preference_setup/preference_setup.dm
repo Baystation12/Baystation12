@@ -1,7 +1,8 @@
-// These are not flags, binary operations not intended
 #define TOPIC_NOACTION 0
 #define TOPIC_HANDLED 1
 #define TOPIC_REFRESH 2
+#define TOPIC_UPDATE_PREVIEW 4
+#define TOPIC_REFRESH_UPDATE_PREVIEW (TOPIC_REFRESH|TOPIC_UPDATE_PREVIEW)
 
 /datum/category_group/player_setup_category/general_preferences
 	name = "General"
@@ -231,7 +232,9 @@
 		return 1
 
 	. = OnTopic(href, href_list, usr)
-	if(. == TOPIC_REFRESH)
+	if(. & TOPIC_UPDATE_PREVIEW)
+		pref_mob.client.prefs.update_preview_icon()
+	if(. & TOPIC_REFRESH)
 		pref_mob.client.prefs.ShowChoices(usr)
 
 /datum/category_item/player_setup_item/CanUseTopic(var/mob/user)
