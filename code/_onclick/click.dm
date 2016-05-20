@@ -211,6 +211,7 @@
 				setMoveCooldown(10)
 			else
 				return
+		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		A.attack_tk(src)
 /*
 	Restrained ClickOn

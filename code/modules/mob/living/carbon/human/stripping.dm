@@ -20,27 +20,27 @@
 		if("pockets")
 			if(stripping)
 				visible_message("<span class='danger'>\The [user] is trying to empty [src]'s pockets!</span>")
-				if(do_after(user,HUMAN_STRIP_DELAY,progress = 0))
+				if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 					empty_pockets(user)
 			else
 				//should it be possible to discreetly slip something into someone's pockets?
 				visible_message("<span class='danger'>\The [user] is trying to stuff \a [held] into [src]'s pocket!</span>")
-				if(do_after(user,HUMAN_STRIP_DELAY,progress = 0))
+				if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 					place_in_pockets(held, user)
 			return
 		if("splints")
 			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s splints!</span>")
-			if(do_after(user,HUMAN_STRIP_DELAY,progress = 0))
+			if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 				remove_splints(user)
 			return
 		if("sensors")
 			visible_message("<span class='danger'>\The [user] is trying to set \the [src]'s sensors!</span>")
-			if(do_after(user,HUMAN_STRIP_DELAY,progress = 0))
+			if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 				toggle_sensors(user)
 			return
 		if("internals")
 			visible_message("<span class='danger'>\The [usr] is trying to set \the [src]'s internals!</span>")
-			if(do_after(user,HUMAN_STRIP_DELAY, progress = 0))
+			if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 				toggle_internals(user)
 			return
 		if("tie")
@@ -52,7 +52,7 @@
 				return
 			visible_message("<span class='danger'>\The [usr] is trying to remove \the [src]'s [A.name]!</span>")
 
-			if(!do_after(user,HUMAN_STRIP_DELAY,progress=0))
+			if(!do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 				return
 
 			if(!A || suit.loc != src || !(A in suit.accessories))
@@ -78,7 +78,7 @@
 	else
 		visible_message("<span class='danger'>\The [user] is trying to put \a [held] on \the [src]!</span>")
 
-	if(!do_after(user,HUMAN_STRIP_DELAY,progress = 0))
+	if(!do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 		return
 
 	if(!stripping && user.get_active_hand() != held)
