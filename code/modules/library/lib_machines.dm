@@ -196,7 +196,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			else
 				dat += {"<A href='?src=\ref[src];orderbyid=1'>(Order book by SS<sup>13</sup>BN)</A><BR><BR>
 				<table>
-				<tr><td><A href='?src=\ref[src];sort=author>AUTHOR</A></td><td><A href='?src=\ref[src];sort=title>TITLE</A></td><td><A href='?src=\ref[src];sort=category>CATEGORY</A></td><td></td></tr>"}
+				<tr><td><A href='?src=\ref[src];sort=author'>AUTHOR</A></td><td><A href='?src=\ref[src];sort=title'>TITLE</A></td><td><A href='?src=\ref[src];sort=category'>CATEGORY</A></td><td></td></tr>"}
 				var/DBQuery/query = dbcon_old.NewQuery("SELECT id, author, title, category FROM library ORDER BY [sortby]")
 				query.Execute()
 
