@@ -218,8 +218,10 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		var/area/wizard_station/A = locate()
 		if(usr in A.contents)
 			uses = spellbook.max_uses
+			investing_time = 0
+			has_sacrificed = 0
 			H.spellremove()
-			temp = "All spells have been removed. You may now memorize a new set of spells."
+			temp = "All spells and investments have been removed. You may now memorize a new set of spells."
 			feedback_add_details("wizard_spell_learned","UM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 		else
 			usr << "<span class='warning'>You must be in the wizard academy to re-memorize your spells.</span>"
