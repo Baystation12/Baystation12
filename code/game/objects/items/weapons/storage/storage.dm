@@ -327,7 +327,7 @@
 		if(other.w_class > src.w_class || other.max_w_class >= src.w_class)
 			if(!stop_messages)
 				usr << "<span class='notice'>\The [src] cannot hold [W].</span>"
-		return 0 //To prevent infinite storage exploits
+			return 0 //To prevent infinite storage exploits
 
 	return 1
 
