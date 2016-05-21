@@ -53,6 +53,8 @@
 	var/list/loot_uncommon = list()
 	var/list/loot_rare = list()
 
+	var/list/monster_available = list()//turfs that monsters can spawn on. Pregenerated to guard against lag.
+
 	var/list/rooms = list()
 	var/log = 0 //if set will log information to dd
 	limit_x = 50
@@ -117,34 +119,15 @@
 	var/num_of_monsters = round(limit_x * limit_y * monster_multiplier)
 	logging("Attempting to add [num_of_monsters] # of monsters")
 
-	var/list/monster_turfs = list() //basically: we want to randomly select places where there are open turf to put things into.
-									//But doing a random selection doesn't garuntee we get one. So instead we bite the bullet
-									//and go through the entire dungeon and check it.
-									//It means there is a base inefficiency here, but we are garunteed to only need N loops, where N is num_of_monsters + limit_x * limit_y
-
-	for(var/i in 0 to limit_x - 1)
-		for(var/j in 0 to limit_y - 1)
-			var/turf/T = locate(origin_x + i, origin_y + j, origin_z)
-			if(T.density)
-				continue
-			if(T.contents && T.contents.len)
-				var/can = 1
-				for(var/atom/movable/M in T)
-					if(istype(M,/mob/living) || M.density)
-						can = 0
-						break
-				if(!can)
-					continue
-			monster_turfs += T
-
 	while(num_of_monsters > 0)
 		if(!priority_process)
 			sleep(-1)
-		if(!monster_turfs || !monster_turfs.len)
+		if(!monster_available || !monster_available.len)
 			logging("There are no available turfs left.")
-			return
-		var/turf/T = pick(monster_turfs)
-		monster_turfs -= T
+			num_of_monsters = 0
+			continue
+		var/turf/T = pick(monster_available)
+		monster_available -= T
 		var/list/monster_list = get_appropriate_list(monsters_common, monsters_uncommon, monsters_rare, T.x, T.y)
 		if(monster_list && monster_list.len)
 			var/type = pickweight(monster_list)
@@ -155,6 +138,20 @@
 		else
 			logging("The monster list is empty.")
 		num_of_monsters--
+
+	monster_available = null //Get rid of all the references
+
+/datum/random_map/winding_dungeon/apply_to_turf(var/x, var/y)
+	. = ..()
+	var/turf/T = locate((origin_x-1)+x,(origin_y-1)+y,origin_z)
+	if(T && !T.density)
+		var/can = 1
+		for(var/atom/movable/M in T)
+			if(istype(M,/mob/living) || M.density)
+				can = 0
+				break
+		if(can)
+			monster_available += T
 
 /datum/random_map/winding_dungeon/generate_map()
 	logging("Winding Dungeon Generation Start")
