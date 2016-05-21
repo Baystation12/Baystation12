@@ -332,14 +332,10 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		return
 
 	changeling.chem_charges--
-	H.remove_changeling_powers()
 	H.visible_message("<span class='warning'>[H] transforms!</span>")
 	changeling.geneticdamage = 30
 	H << "<span class='warning'>Our genes cry out!</span>"
-	var/list/implants = list() //Try to preserve implants.
-	for(var/obj/item/weapon/implant/W in H)
-		implants += W
-	H.monkeyize()
+	H = H.monkeyize()
 	feedback_add_details("changeling_powers","LF")
 	return 1
 
