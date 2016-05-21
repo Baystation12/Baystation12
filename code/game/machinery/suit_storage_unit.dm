@@ -1075,7 +1075,7 @@
 				helmet.item_state = "excavation_helm"
 			if(suit)
 				suit.name = "excavation voidsuit"
-				suit.icon_state = "excavation-mining"
+				suit.icon_state = "rig-excavation"
 				suit.item_state = "excavation_voidsuit"
 		if("Medical")
 			if(helmet)
