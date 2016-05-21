@@ -26,7 +26,7 @@
 				possible_gen.owned_capacitor = src
 				break
 	..()
-	
+
 /obj/machinery/shield_capacitor/emag_act(var/remaining_charges, var/mob/user)
 	if(prob(75))
 		src.locked = !src.locked
@@ -137,8 +137,7 @@
 	updateDialog()
 
 /obj/machinery/shield_capacitor/update_icon()
-	if(stat & BROKEN)
-		icon_state = "broke"
+	icon_state = "capacitor"
 
 /obj/machinery/shield_capacitor/verb/rotate()
 	set name = "Rotate capacitor clockwise"

@@ -246,6 +246,7 @@ div.notice {
     width: 100%;
     margin: 4px 0 0 0;
     clear: both;
+	overflow: auto;
 }
 
 .itemContentNarrow, .itemContent {
@@ -306,6 +307,7 @@ div.notice {
     border: 1px solid #40628a;
     padding: 4px;
     margin: 3px 0;
+	overflow: hidden;
 }
 
 .statusDisplayRecords {
@@ -316,6 +318,19 @@ div.notice {
     margin: 3px 0;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.statusDisplayComm {
+	width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+	padding-bottom: 4px;
+	border-top: 0 none;
+	border-left: 0 none;
+	border-right: 0 none;
+	border-bottom: 2px inset #40628a;
+    margin: 3px 0;
+	overflow: hidden;
 }
 
 .statusLabel {
@@ -444,6 +459,10 @@ div.notice {
 
 .floatRight {
     float: right;
+}
+
+.floatLeft {
+	float: left;
 }
 
 /* Used in PDA */

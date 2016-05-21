@@ -32,7 +32,7 @@
 	mob_size = MOB_MINISCULE
 	possession_candidate = 1
 
-	can_pull_size = 1
+	can_pull_size = TINY_ITEM
 	can_pull_mobs = MOB_PULL_NONE
 
 /mob/living/simple_animal/mouse/Life()
@@ -132,6 +132,3 @@
 	// Change my name back, don't want to be named Tom (666)
 	name = initial(name)
 	real_name = name
-
-/mob/living/simple_animal/mouse/cannot_use_vents()
-	return

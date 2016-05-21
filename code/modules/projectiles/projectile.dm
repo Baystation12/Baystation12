@@ -72,11 +72,16 @@
 
 //TODO: make it so this is called more reliably, instead of sometimes by bullet_act() and sometimes not
 /obj/item/projectile/proc/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
-	if(blocked >= 2)		return 0//Full block
+	if(blocked >= 100)		return 0//Full block
 	if(!isliving(target))	return 0
 	if(isanimal(target))	return 0
+
 	var/mob/living/L = target
-	L.apply_effects(stun, weaken, paralyze, irradiate, stutter, eyeblur, drowsy, agony, blocked) // add in AGONY!
+
+	L.apply_effects(stun, weaken, paralyze, 0, stutter, eyeblur, drowsy, agony, blocked) // add in AGONY!
+	//radiation protection is handled separately from other armour types.
+	L.apply_effect(irradiate, IRRADIATE, L.getarmor(null, "rad"))
+
 	return 1
 
 //called when the projectile stops flying because it collided with something
@@ -180,14 +185,14 @@
 
 	if(result == PROJECTILE_FORCE_MISS)
 		if(!silenced)
-			visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
+			target_mob.visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
 		return 0
 
 	//hit messages
 	if(silenced)
 		target_mob << "<span class='danger'>You've been hit in the [parse_zone(def_zone)] by \the [src]!</span>"
 	else
-		visible_message("<span class='danger'>\The [target_mob] is hit by \the [src] in the [parse_zone(def_zone)]!</span>")//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
+		target_mob.visible_message("<span class='danger'>\The [target_mob] is hit by \the [src] in the [parse_zone(def_zone)]!</span>")//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
 
 	//admin logs
 	if(!no_attack_log)

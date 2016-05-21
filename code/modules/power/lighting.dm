@@ -214,6 +214,9 @@
 
 /obj/machinery/light/Destroy()
 	var/area/A = get_area(src)
+	if(s)
+		qdel(s)
+		s = null
 	if(A)
 		on = 0
 //		A.update_lights()

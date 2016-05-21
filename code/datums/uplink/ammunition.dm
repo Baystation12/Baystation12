@@ -2,22 +2,23 @@
 * Ammunition *
 *************/
 /datum/uplink_item/item/ammo
-	item_cost = 4
+	item_cost = 1
 	category = /datum/uplink_category/ammunition
+
+/datum/uplink_item/item/ammo/c45m
+	name = ".45"
+	path = /obj/item/ammo_magazine/c45m
 
 /datum/uplink_item/item/ammo/mc9mm
 	name = "9mm"
-	item_cost = 1
 	path = /obj/item/ammo_magazine/mc9mm
 
 /datum/uplink_item/item/ammo/a10mm
 	name = "10mm"
-	item_cost = 1
 	path = /obj/item/ammo_magazine/a10mm
 
 /datum/uplink_item/item/ammo/darts
 	name = "Darts"
-	item_cost = 1
 	path = /obj/item/ammo_magazine/chemdart
 
 /datum/uplink_item/item/ammo/a357

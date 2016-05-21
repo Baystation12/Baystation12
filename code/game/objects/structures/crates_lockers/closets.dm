@@ -4,7 +4,7 @@
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "closed"
 	density = 1
-	w_class = 5
+	w_class = 7
 	var/icon_closed = "closed"
 	var/icon_opened = "open"
 	var/opened = 0
@@ -154,7 +154,7 @@
 		return M.mob_size
 	if(istype(AM, /obj/item))
 		var/obj/item/I = AM
-		return Ceiling(I.w_class / 2)
+		return (I.w_class / 2)
 	return 0
 
 /obj/structure/closet/proc/toggle(mob/user as mob)

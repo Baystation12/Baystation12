@@ -173,10 +173,12 @@
 		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
 /obj/structure/bed/chair/office/light
-	icon_state = "officechair_white"
+	base_icon = "officechair_white"
+	icon_state = "officechair_white_preview"
 
 /obj/structure/bed/chair/office/dark
-	icon_state = "officechair_dark"
+	base_icon = "officechair_dark"
+	icon_state = "officechair_dark_preview"
 
 /obj/structure/bed/chair/office/New()
 	..()
@@ -188,9 +190,11 @@
 /obj/structure/bed/chair/wood
 	name = "wooden chair"
 	desc = "Old is never too old to not be in fashion."
-	icon_state = "wooden_chair"
+	base_icon = "wooden_chair"
+	icon_state = "wooden_chair_preview"
 
 /obj/structure/bed/chair/wood/update_icon()
+	icon_state = base_icon
 	return
 
 /obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -205,4 +209,5 @@
 	overlays += I
 
 /obj/structure/bed/chair/wood/wings
-	icon_state = "wooden_chair_wings"
+	base_icon = "wooden_chair_wings"
+	icon_state = "wooden_chair_wings_preview"

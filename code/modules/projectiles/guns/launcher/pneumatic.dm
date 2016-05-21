@@ -4,7 +4,7 @@
 	icon_state = "pneumatic"
 	item_state = "pneumatic"
 	slot_flags = SLOT_BELT
-	w_class = 5.0
+	w_class = 5
 	flags =  CONDUCT
 	fire_sound_text = "a loud whoosh of moving air"
 	fire_delay = 50

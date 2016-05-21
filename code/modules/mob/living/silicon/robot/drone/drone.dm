@@ -38,7 +38,7 @@ var/list/mob_hat_cache = list()
 	local_transmit = 1
 	possession_candidate = 1
 
-	can_pull_size = 3
+	can_pull_size = NORMAL_ITEM
 	can_pull_mobs = MOB_PULL_SMALLER
 
 	mob_bump_flag = SIMPLE_ANIMAL

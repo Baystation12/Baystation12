@@ -20,3 +20,12 @@
 			nanomanager.update_uis(I.hidden_uplink)
 			use(amount)
 			user << "<span class='notice'>You slot \the [src] into \the [I] and charge its internal uplink.</span>"
+
+/obj/item/stack/telecrystal/attack_self(var/mob/user)
+	if(use(1))
+		user.visible_message("<span class='warning'>\The [user] crushes a crystal!</span>", "<span class='warning'>You crush \a [src]!</span>", "You hear the sound of a crystal breaking just before a sudden crack of electricity.")
+		var/turf/T = get_random_turf_in_range(user, 7, 3)
+		if(T)
+			user.phase_out(T, get_turf(user))
+			user.forceMove(T)
+			user.phase_in(T, get_turf(user))

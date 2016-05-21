@@ -14,7 +14,7 @@
 	slot_flags = SLOT_BACK
 	req_one_access = list()
 	req_access = list()
-	w_class = 4
+	w_class = 5
 
 	// These values are passed on to all component pieces.
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 20)
@@ -546,8 +546,6 @@
 		return 0
 
 	if(href_list["toggle_piece"])
-		if(ishuman(usr) && (usr.stat || usr.stunned || usr.lying))
-			return 0
 		toggle_piece(href_list["toggle_piece"], usr)
 	else if(href_list["toggle_seals"])
 		toggle_seals(usr)
@@ -610,7 +608,7 @@
 	if(!istype(wearer) || !wearer.back == src)
 		return
 
-	if(initiator == wearer && (usr.stat||usr.paralysis||usr.stunned)) // If the initiator isn't wearing the suit it's probably an AI.
+	if(initiator == wearer && wearer.incapacitated(INCAPACITATION_DISABLED)) // If the initiator isn't wearing the suit it's probably an AI.
 		return
 
 	var/obj/item/check_slot
@@ -651,7 +649,7 @@
 						use_obj.canremove = 1
 						holder.drop_from_inventory(use_obj)
 						use_obj.forceMove(get_turf(src))
-						use_obj.dropped()
+						use_obj.dropped(wearer)
 						use_obj.canremove = 0
 						use_obj.forceMove(src)
 

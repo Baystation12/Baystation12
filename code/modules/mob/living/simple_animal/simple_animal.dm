@@ -14,7 +14,7 @@
 	var/icon_dead = ""
 	var/icon_gib = null	//We only try to show a gibbing animation if this exists.
 
-	var/list/speak = list()
+	var/list/speak = list("...")
 	var/speak_chance = 0
 	var/list/emote_hear = list()	//Hearable emotes
 	var/list/emote_see = list()		//Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
@@ -120,37 +120,19 @@
 	//Speaking
 	if(!client && speak_chance)
 		if(rand(0,200) < speak_chance)
-			if(speak && speak.len)
-				if((emote_hear && emote_hear.len) || (emote_see && emote_see.len))
-					var/length = speak.len
-					if(emote_hear && emote_hear.len)
-						length += emote_hear.len
-					if(emote_see && emote_see.len)
-						length += emote_see.len
-					var/randomValue = rand(1,length)
-					if(randomValue <= speak.len)
-						say(pick(speak))
-					else
-						randomValue -= speak.len
-						if(emote_see && randomValue <= emote_see.len)
-							visible_emote("[pick(emote_see)].")
-						else
-							audible_emote("[pick(emote_hear)].")
-				else
-					say(pick(speak))
-			else
-				if(!(emote_hear && emote_hear.len) && (emote_see && emote_see.len))
-					visible_emote("[pick(emote_see)].")
-				if((emote_hear && emote_hear.len) && !(emote_see && emote_see.len))
-					audible_emote("[pick(emote_hear)].")
-				if((emote_hear && emote_hear.len) && (emote_see && emote_see.len))
-					var/length = emote_hear.len + emote_see.len
-					var/pick = rand(1,length)
-					if(pick <= emote_see.len)
-						visible_emote("[pick(emote_see)].")
-					else
-						audible_emote("[pick(emote_hear)].")
+			var/action = pick(
+				speak.len;      "speak", 
+				emote_hear.len; "emote_hear", 
+				emote_see.len;  "emote_see"
+				)
 
+			switch(action)
+				if("speak")
+					say(pick(speak))
+				if("emote_hear")
+					audible_emote("[pick(emote_hear)].")
+				if("emote_see")
+					visible_emote("[pick(emote_see)].")
 
 	//Atmos
 	var/atmos_suitable = 1
@@ -339,18 +321,21 @@
 /mob/living/simple_animal/ex_act(severity)
 	if(!blinded)
 		flick("flash", flash)
+
+	var/damage
 	switch (severity)
 		if (1.0)
-			adjustBruteLoss(500)
-			gib()
-			return
+			damage = 500
+			if(!prob(getarmor(null, "bomb")))
+				gib()
 
 		if (2.0)
-			adjustBruteLoss(60)
-
+			damage = 120
 
 		if(3.0)
-			adjustBruteLoss(30)
+			damage = 30
+
+	adjustBruteLoss(damage * blocked_mult(getarmor(null, "bomb")))
 
 /mob/living/simple_animal/adjustBruteLoss(damage)
 	health = Clamp(health - damage, 0, maxHealth)

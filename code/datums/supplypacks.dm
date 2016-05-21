@@ -62,11 +62,22 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/reagent_containers/food/condiment/flour,
 					/obj/item/weapon/reagent_containers/food/condiment/flour,
 					/obj/item/weapon/reagent_containers/food/condiment/flour,
+					/obj/item/weapon/reagent_containers/food/condiment/flour,
+					/obj/item/weapon/reagent_containers/food/condiment/flour,
 					/obj/item/weapon/reagent_containers/food/drinks/milk,
 					/obj/item/weapon/reagent_containers/food/drinks/milk,
+					/obj/item/weapon/reagent_containers/food/drinks/milk,
+					/obj/item/weapon/reagent_containers/food/drinks/milk,
+					/obj/item/weapon/reagent_containers/food/drinks/soymilk,
+					/obj/item/weapon/reagent_containers/food/drinks/soymilk,
+					/obj/item/weapon/storage/fancy/egg_box,
 					/obj/item/weapon/storage/fancy/egg_box,
 					/obj/item/weapon/reagent_containers/food/snacks/tofu,
 					/obj/item/weapon/reagent_containers/food/snacks/tofu,
+					/obj/item/weapon/reagent_containers/food/snacks/tofu,
+					/obj/item/weapon/reagent_containers/food/snacks/tofu,
+					/obj/item/weapon/reagent_containers/food/snacks/meat,
+					/obj/item/weapon/reagent_containers/food/snacks/meat,
 					/obj/item/weapon/reagent_containers/food/snacks/meat,
 					/obj/item/weapon/reagent_containers/food/snacks/meat
 					)
@@ -132,19 +143,19 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/party
 	name = "Party equipment"
-	contains = list(/obj/item/weapon/storage/box/drinkingglasses,
-					/obj/item/weapon/reagent_containers/food/drinks/shaker,
-					/obj/item/weapon/reagent_containers/food/drinks/flask/barflask,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/patron,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager,
-					/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
-					/obj/item/weapon/lipstick/random,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer)
+	contains = list(
+			/obj/item/weapon/storage/box/drinkingglasses,
+			/obj/item/weapon/reagent_containers/food/drinks/shaker,
+			/obj/item/weapon/reagent_containers/food/drinks/flask/barflask,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/patron,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey,
+			/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
+			/obj/item/weapon/lipstick/random,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale = 2,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer = 4,
+			/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass = 4,
+			)
 	cost = 20
 	containertype = /obj/structure/closet/crate
 	containername = "\improper Party equipment"
@@ -580,10 +591,14 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/solar_assembly,
 					/obj/item/solar_assembly,
 					/obj/item/solar_assembly,
-					/obj/item/solar_assembly, // 11 Solar Assemblies. 1 Extra for the controller,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly, 
 					/obj/item/weapon/circuitboard/solar_control,
 					/obj/item/weapon/tracker_electronics,
-					/obj/item/weapon/paper/solar)
+					/obj/item/weapon/paper/solar,
+					) // 14 Solar Assemblies
 	cost = 15
 	containertype = /obj/structure/closet/crate
 	containername = "\improper Solar Pack crate"
@@ -607,10 +622,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/solar_assembly,
 					/obj/item/solar_assembly,
 					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly) // 20 Solar Assemblies
+					) // 16 Solar Assemblies
 	cost = 10
 	containertype = /obj/structure/closet/crate
 	containername = "\improper Solar Assembly crate"
@@ -1491,6 +1503,9 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/head/hasturhood,
 					/obj/item/clothing/head/powdered_wig,
 					/obj/item/clothing/head/hairflower,
+					/obj/item/clothing/head/hairflower/yellow,
+					/obj/item/clothing/head/hairflower/blue,
+					/obj/item/clothing/head/hairflower/pink,
 					/obj/item/clothing/mask/gas/owl_mask,
 					/obj/item/clothing/mask/gas/monkeymask,
 					/obj/item/clothing/head/helmet/gladiator,

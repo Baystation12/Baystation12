@@ -9,6 +9,7 @@
 	var/list/accessories = list()
 	var/list/valid_accessory_slots
 	var/list/restricted_accessory_slots
+	var/list/starting_accessories
 
 	/*
 		Sprites used when the clothing item is refit. This is done by setting icon_override.
@@ -26,6 +27,13 @@
 /obj/item/clothing/clean_blood()
 	..()
 	gunshot_residue = null
+
+/obj/item/clothing/New()
+	..()
+	if(starting_accessories)
+		for(var/T in starting_accessories)
+			var/obj/item/clothing/accessory/tie = new T(src)
+			src.attach_accessory(null, tie)
 
 //BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M as mob, slot)
@@ -150,10 +158,13 @@
 
 /obj/item/clothing/ears/offear
 	name = "Other ear"
-	w_class = 5.0
+	simulated = 0
 	icon = 'icons/mob/screen1_Midnight.dmi'
 	icon_state = "block"
 	slot_flags = SLOT_EARS | SLOT_TWOEARS
+
+	get_storage_cost()
+		return DO_NOT_STORE
 
 	New(var/obj/O)
 		name = O.name
@@ -518,6 +529,7 @@ BLIND     // can't see anything
 		*/
 	var/displays_id = 1
 	var/rolled_down = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
+	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/uniform.dmi',
 		"Resomi" = 'icons/mob/species/resomi/uniform.dmi'
@@ -556,6 +568,7 @@ BLIND     // can't see anything
 	if(istype(src.loc, /mob/living/carbon/human))
 		H = src.loc
 
+
 	var/icon/under_icon
 	if(icon_override)
 		under_icon = icon_override
@@ -574,6 +587,29 @@ BLIND     // can't see anything
 		rolled_down = -1
 	if(H) update_clothing_icon()
 
+/obj/item/clothing/under/proc/update_rollsleeves_status()
+	var/mob/living/carbon/human/H
+	if(istype(src.loc, /mob/living/carbon/human))
+		H = src.loc
+
+	var/icon/under_icon
+	if(icon_override)
+		under_icon = icon_override
+	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
+		under_icon = sprite_sheets[H.species.get_bodytype(H)]
+	else if(item_icons && item_icons[slot_w_uniform_str])
+		under_icon = item_icons[slot_w_uniform_str]
+	else
+		under_icon = INV_W_UNIFORM_DEF_ICON
+
+	// The _s is because the icon update procs append it.
+	if(("[worn_state]_r_s") in icon_states(under_icon))
+		if(rolled_sleeves != 1)
+			rolled_sleeves = 0
+	else
+		rolled_sleeves = -1
+	if(H) update_clothing_icon()
+	
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
@@ -652,6 +688,8 @@ BLIND     // can't see anything
 	update_rolldown_status()
 	if(rolled_down == -1)
 		usr << "<span class='notice'>You cannot roll down [src]!</span>"
+	if((rolled_sleeves == 1) && !(rolled_down))
+		rolled_sleeves = 0
 		return
 
 	rolled_down = !rolled_down
@@ -663,6 +701,31 @@ BLIND     // can't see anything
 		item_state_slots[slot_w_uniform_str] = "[worn_state]"
 	update_clothing_icon()
 
+/obj/item/clothing/under/verb/rollsleeves()
+	set name = "Roll Up Sleeves"
+	set category = "Object"
+	set src in usr
+	if(!istype(usr, /mob/living)) return
+	if(usr.stat) return
+
+	update_rollsleeves_status()
+	if(rolled_sleeves == -1)
+		usr << "<span class='notice'>You cannot roll up your [src]'s sleeves!</span>"
+		return
+	if(rolled_down == 1)
+		usr << "<span class='notice'>You must roll up your [src] first!</span>"
+		return
+
+	rolled_sleeves = !rolled_sleeves
+	if(rolled_sleeves)
+		body_parts_covered &= ~(ARMS|HANDS)
+		item_state_slots[slot_w_uniform_str] = "[worn_state]_r"
+		usr << "<span class='notice'>You roll up your [src]'s sleeves.</span>"
+	else
+		body_parts_covered = initial(body_parts_covered)
+		item_state_slots[slot_w_uniform_str] = "[worn_state]"
+		usr << "<span class='notice'>You roll down your [src]'s sleeves.</span>"
+	update_clothing_icon()
 
 /obj/item/clothing/under/rank/New()
 	sensor_mode = pick(0,1,2,3)

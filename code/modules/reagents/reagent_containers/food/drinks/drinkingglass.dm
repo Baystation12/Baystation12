@@ -58,3 +58,28 @@
 		..()
 		reagents.add_reagent("cola", 50)
 		on_reagent_change()
+
+/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass
+	name = "shot glass"
+	desc = "No glasses were shot in the making of this glass."
+	icon_state = "shotglass"
+	amount_per_transfer_from_this = 10
+	volume = 10
+	matter = list("glass" = 175)
+
+/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass/on_reagent_change()
+	overlays.Cut()
+
+	if(reagents.total_volume)
+		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]1")
+
+		switch(reagents.total_volume)
+			if(0 to 3)			filling.icon_state = "[icon_state]1"
+			if(4 to 7) 			filling.icon_state = "[icon_state]5"
+			if(8 to INFINITY)	filling.icon_state = "[icon_state]12"
+
+		filling.color += reagents.get_color()
+		overlays += filling
+		name = "shot glass of " + reagents.get_master_reagent_name() //No matter what, the glass will tell you the reagent's name. Might be too abusable in the future.
+	else
+		name = "shot glass"

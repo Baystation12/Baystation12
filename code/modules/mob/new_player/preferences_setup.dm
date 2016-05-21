@@ -4,6 +4,8 @@ datum/preferences
 		var/datum/species/current_species = all_species[species ? species : "Human"]
 		gender = pick(current_species.genders)
 
+		h_style = random_hair_style(gender, species)
+		f_style = random_facial_hair_style(gender, species)
 		if(current_species)
 			if(current_species.appearance_flags & HAS_SKIN_TONE)
 				s_tone = random_skin_tone()
@@ -11,11 +13,9 @@ datum/preferences
 				randomize_eyes_color()
 			if(current_species.appearance_flags & HAS_SKIN_COLOR)
 				randomize_skin_color()
-
-		h_style = random_hair_style(gender, species)
-		f_style = random_facial_hair_style(gender, species)
-		randomize_hair_color("hair")
-		randomize_hair_color("facial")
+			if(current_species.appearance_flags & HAS_HAIR_COLOR)
+				randomize_hair_color("hair")
+				randomize_hair_color("facial")
 
 		backbag = 2
 		age = rand(current_species.min_age, current_species.max_age)

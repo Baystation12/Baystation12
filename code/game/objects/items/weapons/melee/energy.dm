@@ -2,7 +2,6 @@
 	var/active = 0
 	var/active_force
 	var/active_throwforce
-	var/active_w_class
 	sharp = 0
 	edge = 0
 	armor_penetration = 50
@@ -17,7 +16,7 @@
 	throwforce = active_throwforce
 	sharp = 1
 	edge = 1
-	w_class = active_w_class
+	slot_flags |= SLOT_DENYPOCKET
 	playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 
 /obj/item/weapon/melee/energy/proc/deactivate(mob/living/user)
@@ -30,7 +29,7 @@
 	throwforce = initial(throwforce)
 	sharp = initial(sharp)
 	edge = initial(edge)
-	w_class = initial(w_class)
+	slot_flags = initial(slot_flags)
 
 /obj/item/weapon/melee/energy/attack_self(mob/living/user as mob)
 	if (active)
@@ -50,6 +49,11 @@
 	add_fingerprint(user)
 	return
 
+/obj/item/weapon/melee/energy/get_storage_cost()
+	if(active)
+		return DO_NOT_STORE
+	return ..()
+
 /*
  * Energy Axe
  */
@@ -60,7 +64,6 @@
 	//active_force = 150 //holy...
 	active_force = 60
 	active_throwforce = 35
-	active_w_class = 5
 	//force = 40
 	//throwforce = 25
 	force = 20
@@ -94,7 +97,6 @@
 	icon_state = "sword0"
 	active_force = 30
 	active_throwforce = 20
-	active_w_class = 4
 	force = 3
 	throwforce = 5
 	throw_speed = 1
@@ -177,7 +179,7 @@
 	throwforce = 1  //Throwing or dropping the item deletes it.
 	throw_speed = 1
 	throw_range = 1
-	w_class = 4.0//So you can't hide it in your pocket or some such.
+	w_class = 1 //technically it's just energy or something, I dunno
 	flags = NOBLOODY
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/mob/living/creator
@@ -194,6 +196,9 @@
 /obj/item/weapon/melee/energy/blade/Destroy()
 	processing_objects -= src
 	..()
+
+/obj/item/weapon/melee/energy/blade/get_storage_cost()
+	return DO_NOT_STORE
 
 /obj/item/weapon/melee/energy/blade/attack_self(mob/user as mob)
 	user.drop_from_inventory(src)

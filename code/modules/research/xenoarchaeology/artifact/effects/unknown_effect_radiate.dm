@@ -10,7 +10,7 @@
 
 /datum/artifact_effect/radiate/DoEffectTouch(var/mob/living/user)
 	if(user)
-		user.apply_effect(radiation_amount * 5,IRRADIATE,0)
+		user.apply_effect(radiation_amount * 5,IRRADIATE,blocked = user.getarmor(null, "rad"))
 		user.updatehealth()
 		return 1
 
@@ -18,7 +18,7 @@
 	if(holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/M in range(src.effectrange,T))
-			M.apply_effect(radiation_amount,IRRADIATE,0)
+			M.apply_effect(radiation_amount,IRRADIATE,blocked = M.getarmor(null, "rad"))
 			M.updatehealth()
 		return 1
 
@@ -26,6 +26,6 @@
 	if(holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/M in range(src.effectrange,T))
-			M.apply_effect(radiation_amount * 25,IRRADIATE,0)
+			M.apply_effect(radiation_amount * 25,IRRADIATE,blocked = M.getarmor(null, "rad"))
 			M.updatehealth()
 		return 1

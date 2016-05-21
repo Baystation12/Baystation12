@@ -149,8 +149,9 @@
 	var/list/parts = list("head", "chest", "l_leg", "r_leg", "l_arm", "r_arm")
 
 	H.apply_effects(5, 5)
-	for(var/i = 0, i < rand(1,3), i++)
-		H.apply_damage(rand(1,5), BRUTE, pick(parts))
+	for(var/i = 0, i < rand(1,5), i++)
+		var/def_zone = pick(parts)
+		H.apply_damage(rand(5,10), BRUTE, def_zone, H.run_armor_check(def_zone, "melee"))
 
 /obj/vehicle/train/cargo/trolley/RunOver(var/mob/living/carbon/human/H)
 	..()

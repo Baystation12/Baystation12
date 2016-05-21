@@ -248,9 +248,9 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	else if(T == "revision")
 		if(revdata.revision)
-			return list2params(list(branch = revdata.branch, date = revdata.date, revision = revdata.revision))
+			return list2params(list(branch = revdata.branch, date = revdata.date, revision = revdata.revision, gameid = game_id))
 		else
-			return "unknown"
+			return list2params(list(revision = "unknown", gameid = game_id))
 
 	else if(copytext(T,1,5) == "info")
 		var/input[] = params2list(T)

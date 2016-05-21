@@ -46,7 +46,7 @@ var/list/gear_datums = list()
 	var/mob/preference_mob = preference_mob()
 	for(var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
-		if(G.whitelisted && !is_alien_whitelisted(preference_mob, G.whitelisted))
+		if(G.whitelisted && preference_mob && !is_alien_whitelisted(preference_mob, G.whitelisted))
 			continue
 		if(max_cost && G.cost > max_cost)
 			continue
@@ -74,6 +74,7 @@ var/list/gear_datums = list()
 				total_cost += G.cost
 
 /datum/category_item/player_setup_item/loadout/content()
+	. = list()
 	var/total_cost = 0
 	if(pref.gear && pref.gear.len)
 		for(var/i = 1; i <= pref.gear.len; i++)
@@ -84,7 +85,6 @@ var/list/gear_datums = list()
 	var/fcolor =  "#3366CC"
 	if(total_cost < MAX_GEAR_COST)
 		fcolor = "#E67300"
-	. = list()
 	. += "<table align = 'center' width = 100%>"
 	. += "<tr><td colspan=3><center><b><font color = '[fcolor]'>[total_cost]/[MAX_GEAR_COST]</font> loadout points spent.</b> \[<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>\]</center></td></tr>"
 
@@ -96,16 +96,22 @@ var/list/gear_datums = list()
 			firstcat = 0
 		else
 			. += " |"
+
+		var/datum/loadout_category/LC = loadout_categories[category]
+		var/category_cost = 0
+		for(var/gear in LC.gear)
+			if(gear in pref.gear)
+				var/datum/gear/G = LC.gear[gear]
+				category_cost += G.cost
+
 		if(category == current_tab)
-			. += " [category] "
+			. += " <span class='linkOn'>[category] - [category_cost]</span> "
 		else
-			var/datum/loadout_category/LC = loadout_categories[category]
-			var/tcolor =  "#3366CC"
-			for(var/thing in LC.gear)
-				if(thing in pref.gear)
-					tcolor = "#E67300"
-					break
-			. += " <a href='?src=\ref[src];select_category=[category]'><font color = '[tcolor]'>[category]</font></a> "
+			if(category_cost)
+				. += " <a href='?src=\ref[src];select_category=[category]'><font color = '#E67300'>[category] - [category_cost]</font></a> "
+			else
+				. += " <a href='?src=\ref[src];select_category=[category]'>[category] - 0</a> "
+
 	. += "</b></center></td></tr>"
 
 	var/datum/loadout_category/LC = loadout_categories[current_tab]
@@ -117,7 +123,7 @@ var/list/gear_datums = list()
 			continue
 		var/datum/gear/G = LC.gear[gear_name]
 		var/ticked = (G.display_name in pref.gear)
-		. += "<tr style='vertical-align:top'><td width=25%><a href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'><font color='[ticked ? "#E67300" : "#3366CC"]'>[G.display_name]</font></a></td>"
+		. += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'>[G.display_name]</a></td>"
 		. += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		. += "<td><font size=2><i>[G.description]</i></font></td></tr>"
 		if(ticked)

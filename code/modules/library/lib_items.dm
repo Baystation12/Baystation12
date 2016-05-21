@@ -45,8 +45,7 @@
 		user << "<span class='notice'>You begin dismantling \the [src].</span>"
 		if(do_after(user,25,src))
 			user << "<span class='notice'>You dismantle \the [src].</span>"
-			var/obj/item/stack/material/wood/planks = new(get_turf(src))
-			planks.amount = 5
+			new/obj/item/stack/material/wood(get_turf(src), 5)
 			for(var/obj/item/weapon/book/b in contents)
 				b.loc = (get_turf(src))
 			qdel(src)
@@ -171,7 +170,7 @@
 /obj/item/weapon/book/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(carved)
 		if(!store)
-			if(W.w_class < 3)
+			if(W.w_class < NORMAL_ITEM)
 				user.drop_item()
 				W.loc = src
 				store = W

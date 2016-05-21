@@ -10,6 +10,7 @@
 	w_class = 3.0
 	sharp = 1
 	edge = 0
+	lock_picking_level = 3
 
 /obj/item/weapon/arrow/proc/removed() //Helper for metal rods falling apart.
 	return
