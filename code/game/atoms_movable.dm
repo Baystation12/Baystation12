@@ -59,7 +59,7 @@
 	..()
 	return
 
-/atom/movable/proc/forceMove(atom/destination, var/special_event)
+/atom/movable/proc/forceMove(atom/destination)
 	if(loc == destination)
 		return 0
 	var/is_origin_turf = isturf(loc)
@@ -81,7 +81,7 @@
 				origin.loc.Exited(src, destination)
 
 	if(destination)
-		destination.Entered(src, origin, special_event)
+		destination.Entered(src, origin)
 		if(is_destination_turf) // If we're entering a turf, cross all movable atoms
 			for(var/atom/movable/AM in loc)
 				if(AM != src)
