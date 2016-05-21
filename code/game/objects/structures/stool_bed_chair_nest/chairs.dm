@@ -182,7 +182,7 @@
 
 /obj/structure/bed/chair/office/New()
 	..()
-	var/image/I = image(icon, "[icon_state]_over")
+	var/image/I = image(icon, "[base_icon]_over")
 	I.layer = FLY_LAYER
 	overlays += I
 
@@ -193,10 +193,6 @@
 	base_icon = "wooden_chair"
 	icon_state = "wooden_chair_preview"
 
-/obj/structure/bed/chair/wood/update_icon()
-	icon_state = base_icon
-	return
-
 /obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
 		return
@@ -204,7 +200,7 @@
 
 /obj/structure/bed/chair/wood/New(var/newloc)
 	..(newloc, "wood")
-	var/image/I = image(icon, "[icon_state]_over")
+	var/image/I = image(icon, "[base_icon]_over")
 	I.layer = FLY_LAYER
 	overlays += I
 
