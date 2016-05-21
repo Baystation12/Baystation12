@@ -76,8 +76,8 @@
 	H << "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>"
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/del()
-/datum/job/proc/equip_preview(mob/living/carbon/human/H)
-	return equip(H)
+/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title)
+	. = equip(H, alt_title)
 
 /datum/job/proc/get_access()
 	if(!config || config.jobs_have_minimal_access)
@@ -109,3 +109,6 @@
 
 /datum/job/proc/is_position_available()
 	return (current_positions < total_positions) || (total_positions == -1)
+
+/datum/job/proc/has_alt_title(var/mob/H, var/supplied_title, var/desired_title)
+	return (supplied_title == desired_title) || (H.mind && H.mind.role_alt_title == desired_title)

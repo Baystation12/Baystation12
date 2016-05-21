@@ -14,7 +14,7 @@
 	alt_titles = list("Counselor")
 
 
-	equip(var/mob/living/carbon/human/H)
+	equip(var/mob/living/carbon/human/H, var/alt_title, var/ask_questions = TRUE)
 		if(!H)	return 0
 
 		var/obj/item/weapon/storage/bible/B = new /obj/item/weapon/storage/bible(H) //BS12 EDIT
@@ -22,6 +22,9 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chaplain(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/chaplain(H), slot_belt)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
+		if(!ask_questions)
+			return 1
+
 		spawn(0)
 			var/religion_name = "Christianity"
 			var/new_religion = sanitize(input(H, "You are the crew services officer. Would you like to change your religion? Default is Christianity, in SPACE.", "Name change", religion_name), MAX_NAME_LEN)
@@ -150,3 +153,6 @@
 			feedback_set_details("religion_deity","[new_deity]")
 			feedback_set_details("religion_book","[new_book_style]")
 		return 1
+
+/datum/job/chaplain/equip_preview(var/mob/living/carbon/human/H, var/alt_title)
+	return equip(H, alt_title, FALSE)
