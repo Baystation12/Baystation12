@@ -1,5 +1,3 @@
-#define AIRLOCK_CRUSH_DIVISOR 8 // Damage caused by airlock crushing a mob is split into multiple smaller hits. Prevents things like cut off limbs, etc, while still having quite dangerous injury.
-#define CYBORG_AIRLOCKCRUSH_RESISTANCE 4 // Damage caused to silicon mobs (usually cyborgs) from being crushed by airlocks is divided by this number. Unlike organics cyborgs don't have passive regeneration, so even one hit can be devastating for them.
 /obj/machinery/door/airlock
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorint.dmi'
@@ -35,6 +33,8 @@
 
 	var/open_sound_powered = 'sound/machines/airlock.ogg'
 	var/open_sound_unpowered = 'sound/machines/airlock_creaking.ogg'
+
+	var/door_crush_damage = DOOR_CRUSH_DAMAGE
 
 	var/_wifi_id
 	var/datum/wifi/receiver/button/door/wifi_receiver
@@ -98,6 +98,7 @@
 	icon = 'icons/obj/doors/Doorglass.dmi'
 	hitsound = 'sound/effects/Glasshit.ogg'
 	open_sound_powered = 'sound/machines/windowdoor.ogg'
+	door_crush_damage = DOOR_CRUSH_DAMAGE*0.75
 	maxhealth = 300
 	explosion_resistance = 5
 	opacity = 0
@@ -918,71 +919,6 @@ About the new airlock wires panel:
 
 	return ..()
 
-/atom/movable/proc/blocks_airlock()
-	return density
-
-/obj/machinery/door/blocks_airlock()
-	return 0
-
-/obj/structure/window/blocks_airlock()
-	return 0
-
-/obj/machinery/mech_sensor/blocks_airlock()
-	return 0
-
-/mob/living/blocks_airlock()
-	return 1
-
-/atom/movable/proc/airlock_crush(var/crush_damage)
-	return 0
-
-/obj/structure/window/airlock_crush(var/crush_damage)
-	ex_act(2)//Smashin windows
-
-/obj/machinery/portable_atmospherics/canister/airlock_crush(var/crush_damage)
-	. = ..()
-	health -= crush_damage
-	healthcheck()
-
-/obj/effect/energy_field/airlock_crush(var/crush_damage)
-	Stress(crush_damage)
-
-/obj/structure/closet/airlock_crush(var/crush_damage)
-	..()
-	damage(crush_damage)
-	for(var/atom/movable/AM in src)
-		AM.airlock_crush()
-	return 1
-
-/mob/living/airlock_crush(var/crush_damage)
-	. = ..()
-	for(var/i = 1, i <= AIRLOCK_CRUSH_DIVISOR, i++)
-		adjustBruteLoss(round(crush_damage / AIRLOCK_CRUSH_DIVISOR))
-	SetStunned(5)
-	SetWeakened(5)
-	var/turf/T = get_turf(src)
-	T.add_blood(src)
-	var/list/valid_turfs = list()
-	for(var/dir_to_test in cardinal)
-		var/turf/new_turf = get_step(T, dir_to_test)
-		if(!new_turf.contains_dense_objects())
-			valid_turfs |= new_turf
-
-	while(valid_turfs.len)
-		T = pick(valid_turfs)
-		valid_turfs -= T
-		// Try to move us to the turf. If all turfs fail for some reason we will stay on this tile.
-		if(src.Move(T))
-			return
-
-/mob/living/carbon/airlock_crush(var/crush_damage)
-	. = ..()
-	if (!(species && (species.flags & NO_PAIN)))
-		emote("scream")
-
-/mob/living/silicon/robot/airlock_crush(var/crush_damage)
-	return ..(round(crush_damage / CYBORG_AIRLOCKCRUSH_RESISTANCE))
-
 /obj/machinery/door/airlock/close(var/forced=0)
 	if(!can_close(forced))
 		return 0
@@ -999,9 +935,9 @@ About the new airlock wires panel:
 
 	for(var/turf/turf in locs)
 		for(var/atom/movable/AM in turf)
-			if(AM.airlock_crush(DOOR_CRUSH_DAMAGE))
-				take_damage(DOOR_CRUSH_DAMAGE)
-				use_power(DOOR_CRUSH_DAMAGE * 100)		// Uses bunch extra power for crushing the target.
+			if(AM.airlock_crush(door_crush_damage))
+				take_damage(door_crush_damage)
+				use_power(door_crush_damage * 100)		// Uses bunch extra power for crushing the target.
 
 	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(arePowerSystemsOn())

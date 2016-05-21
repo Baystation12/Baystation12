@@ -1,0 +1,8 @@
+author: atlantiscze
+delete-after: True
+
+changes: 
+  - bugfix: "Breaking a lot of lights at once will no longer cause massive lag spikes. This also applies to other sources of sparks."
+  - tweak: "Malf AI Electrical Pulse ability now has a 15s cooldown to prevent spam."
+  - tweak: "Door crush damage reduced by 25% according to feedback."
+  - rscadd: "Electrical Storm event overhauled. It now occurs in three severities and simulates actual storm. A warning will be broadcasted shortly before it begins, and once it's over. Duration is severity-dependent. Possible effects include: Broken lights (as it's now), Hacked APCs (same as when emagged), or outright broken APCs with more severe event variants. Each affected APC will also shut down briefly, this causes station-wide power outages until the storm passes. Stronger storms last for longer and affect more APCs at once."

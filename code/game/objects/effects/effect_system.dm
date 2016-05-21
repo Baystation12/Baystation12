@@ -97,6 +97,7 @@ steam.start() -- spawns the effect
 /obj/effect/sparks
 	name = "sparks"
 	icon_state = "sparks"
+	icon = 'icons/effects/effects.dmi'
 	var/amount = 6.0
 	anchored = 1.0
 	mouse_opacity = 0
@@ -107,10 +108,14 @@ steam.start() -- spawns the effect
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
-		
+
 /obj/effect/sparks/initialize()
 	..()
-	schedule_task_in(10 SECONDS, /proc/qdel, list(src))
+	// Scheduled tasks caused serious performance issues when being qdel()ed.
+	// Replaced with spawn() until performance of scheduled tasks is improved.
+	//schedule_task_in(5 SECONDS, /proc/qdel, list(src))
+	spawn(50)
+		qdel(src)
 
 /obj/effect/sparks/Destroy()
 	var/turf/T = src.loc
@@ -125,7 +130,6 @@ steam.start() -- spawns the effect
 		T.hotspot_expose(1000,100)
 
 /datum/effect/effect/system/spark_spread
-	var/total_sparks = 0 // To stop it being spammed and lagging!
 
 	set_up(n = 3, c = 0, loca)
 		if(n > 10)
@@ -140,13 +144,10 @@ steam.start() -- spawns the effect
 	start()
 		var/i = 0
 		for(i=0, i<src.number, i++)
-			if(src.total_sparks > 20)
-				return
 			spawn(0)
 				if(holder)
 					src.location = get_turf(holder)
 				var/obj/effect/sparks/sparks = PoolOrNew(/obj/effect/sparks, src.location)
-				src.total_sparks++
 				var/direction
 				if(src.cardinals)
 					direction = pick(cardinal)
@@ -155,10 +156,6 @@ steam.start() -- spawns the effect
 				for(i=0, i<pick(1,2,3), i++)
 					sleep(5)
 					step(sparks,direction)
-				spawn(20)
-					if(sparks)
-						qdel(sparks)
-					src.total_sparks--
 
 
 
@@ -508,9 +505,9 @@ steam.start() -- spawns the effect
 				M << "<span class='warning'>The solution violently explodes.</span>"
 
 			explosion(
-				location, 
-				round(min(devst, BOMBCAP_DVSTN_RADIUS)), 
-				round(min(heavy, BOMBCAP_HEAVY_RADIUS)), 
-				round(min(light, BOMBCAP_LIGHT_RADIUS)), 
+				location,
+				round(min(devst, BOMBCAP_DVSTN_RADIUS)),
+				round(min(heavy, BOMBCAP_HEAVY_RADIUS)),
+				round(min(light, BOMBCAP_LIGHT_RADIUS)),
 				round(min(flash, BOMBCAP_FLASH_RADIUS))
 				)

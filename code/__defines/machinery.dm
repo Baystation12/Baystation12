@@ -5,7 +5,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define SMESRATE 0.05  // Same for SMESes. A different number for some reason.
 
 // Doors!
-#define DOOR_CRUSH_DAMAGE 80
+#define DOOR_CRUSH_DAMAGE 40
 #define ALIEN_SELECT_AFK_BUFFER  1    // How many minutes that a person can be AFK before not being allowed to be an alien.
 
 // Channel numbers for power.
