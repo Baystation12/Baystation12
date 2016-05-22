@@ -595,7 +595,6 @@
 
 	New()
 		..()
-		reagents.add_reagent("stoxin", 3)
 		bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/stuffing
@@ -620,7 +619,7 @@
 	New()
 		..()
 		reagents.add_reagent("protein", 3)
-		reagents.add_reagent("carpotoxin", 3)
+		reagents.add_reagent("carpotoxin", 6)
 		src.bitesize = 6
 
 /obj/item/weapon/reagent_containers/food/snacks/fishfingers
@@ -633,7 +632,6 @@
 	New()
 		..()
 		reagents.add_reagent("protein", 4)
-		reagents.add_reagent("carpotoxin", 3)
 		bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/hugemushroomslice
@@ -834,7 +832,6 @@
 	New()
 		..()
 		reagents.add_reagent("protein", 6)
-		reagents.add_reagent("carpotoxin", 3)
 		bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/tofuburger
@@ -1160,7 +1157,6 @@
 	New()
 		..()
 		reagents.add_reagent("protein", 3)
-		reagents.add_reagent("carpotoxin", 3)
 		reagents.add_reagent("capsaicin", 3)
 		bitesize = 3
 
@@ -1728,7 +1724,6 @@
 	New()
 		..()
 		reagents.add_reagent("protein", 3)
-		reagents.add_reagent("carpotoxin", 3)
 		bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/sandwich
