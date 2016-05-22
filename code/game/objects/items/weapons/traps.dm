@@ -8,7 +8,7 @@
 	desc = "A mechanically activated leg trap. Low-tech, but reliable. Looks like it could really hurt if you set it off."
 	throwforce = 0
 	w_class = 3
-	origin_tech = "materials=1"
+	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 18750)
 	can_buckle = 0 //disallow manual un/buckling
 	var/deployed = 0
