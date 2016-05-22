@@ -426,3 +426,23 @@
 	new /obj/item/clothing/under/suit_jacket/really_black(src)
 	new /obj/item/clothing/under/suit_jacket/red(src)
 	new /obj/item/clothing/under/scratch(src)
+
+
+/obj/structure/closet/wardrobe/lawyer_black
+	name = "internal affairs wardrobe"
+	icon_state = "black"
+	icon_closed = "black"
+
+/obj/structure/closet/wardrobe/lawyer_black/New()
+	..()
+	new /obj/item/clothing/under/rank/internalaffairs(src)
+	new /obj/item/clothing/under/rank/internalaffairs(src)
+	new /obj/item/clothing/suit/storage/toggle/internalaffairs(src)
+	new /obj/item/clothing/suit/storage/toggle/internalaffairs(src)
+	new /obj/item/clothing/shoes/brown(src)
+	new /obj/item/clothing/shoes/brown(src)
+	new /obj/item/clothing/glasses/sunglasses/big(src)
+	new /obj/item/clothing/glasses/sunglasses/big(src)
+	new /obj/item/weapon/storage/briefcase(src)
+	new /obj/item/weapon/storage/briefcase(src)
+	return

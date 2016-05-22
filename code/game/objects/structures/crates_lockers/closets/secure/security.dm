@@ -355,3 +355,22 @@
 				icon_state = icon_closed
 		else
 			icon_state = icon_opened
+
+
+/obj/structure/closet/secure_closet/lawyer
+	name = "internal affairs secure closet"
+	req_access = list(access_lawyer)
+
+	New()
+		..()
+		new /obj/item/device/flash(src)
+		new /obj/item/device/flash(src)
+		new /obj/item/device/camera(src)
+		new /obj/item/device/camera(src)
+		new /obj/item/device/camera_film(src)
+		new /obj/item/device/camera_film(src)
+		new /obj/item/device/taperecorder(src)
+		new /obj/item/device/taperecorder(src)
+		new /obj/item/weapon/storage/secure/briefcase(src)
+		new /obj/item/weapon/storage/secure/briefcase(src)
+		return
