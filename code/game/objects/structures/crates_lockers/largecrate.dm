@@ -5,6 +5,13 @@
 	icon_state = "densecrate"
 	density = 1
 
+/obj/structure/largecrate/initialize()
+	..()
+	for(var/obj/I in src.loc)
+		if(I.density || I.anchored || I == src || !I.simulated)
+			continue
+		I.forceMove(src)
+
 /obj/structure/largecrate/attack_hand(mob/user as mob)
 	user << "<span class='notice'>You need a crowbar to pry this open!</span>"
 	return
