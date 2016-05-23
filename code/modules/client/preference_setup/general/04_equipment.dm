@@ -82,7 +82,7 @@
 		var/new_backbag = input(user, "Choose your character's style of bag:", "Character Preference", backbaglist[pref.backbag]) as null|anything in backbaglist
 		if(!isnull(new_backbag) && CanUseTopic(user))
 			pref.backbag = backbaglist.Find(new_backbag)
-			return TOPIC_REFRESH
+			return TOPIC_REFRESH_UPDATE_PREVIEW
 	else if(href_list["change_underwear"])
 		var/datum/category_group/underwear/UWC = global_underwear.categories_by_name[href_list["change_underwear"]]
 		if(!UWC)
@@ -90,7 +90,7 @@
 		var/datum/category_item/underwear/selected_underwear = input(user, "Choose underwear:", "Character Preference", pref.all_underwear[UWC.name]) as null|anything in UWC.items
 		if(selected_underwear && CanUseTopic(user))
 			pref.all_underwear[UWC.name] = selected_underwear.name
-		return TOPIC_REFRESH
+		return TOPIC_REFRESH_UPDATE_PREVIEW
 	else if(href_list["underwear"] && href_list["tweak"])
 		var/underwear = href_list["underwear"]
 		if(!(underwear in pref.all_underwear))
@@ -101,6 +101,6 @@
 		var/new_metadata = gt.get_metadata(usr, get_metadata(underwear, gt))
 		if(new_metadata)
 			set_metadata(underwear, gt, new_metadata)
-			return TOPIC_REFRESH
+			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	return ..()
