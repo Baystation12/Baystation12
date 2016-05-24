@@ -484,18 +484,6 @@
 		if(prob(15))
 			M.emote(pick("twitch", "giggle"))
 
-/datum/reagent/nicotine
-	name = "Nicotine"
-	id = "nicotine"
-	description = "A highly addictive stimulant extracted from the tobacco plant."
-	taste_description = "bitterness"
-	reagent_state = LIQUID
-	color = "#181818"
-
-/datum/reagent/nicotine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	M.add_chemical_effect(CE_PULSE, 1)
-
 /* Transformations */
 
 /datum/reagent/slimetoxin

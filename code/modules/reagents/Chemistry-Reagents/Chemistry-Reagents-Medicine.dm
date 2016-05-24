@@ -458,8 +458,8 @@
 /datum/reagent/methylphenidate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	if(volume <= 0.1 && data != -1)
-		data = -1
+	if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+		data = world.time
 		M << "<span class='warning'>You lose focus...</span>"
 	else
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
@@ -479,8 +479,8 @@
 /datum/reagent/citalopram/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	if(volume <= 0.1 && data != -1)
-		data = -1
+	if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+		data = world.time
 		M << "<span class='warning'>Your mind feels a little less stable...</span>"
 	else
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
@@ -499,8 +499,8 @@
 /datum/reagent/paroxetine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	if(volume <= 0.1 && data != -1)
-		data = -1
+	if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+		data = world.time
 		M << "<span class='warning'>Your mind feels much less stable...</span>"
 	else
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
@@ -510,6 +510,30 @@
 			else
 				M << "<span class='warning'>Your mind breaks apart...</span>"
 				M.hallucination += 200
+				
+/datum/reagent/nicotine
+	name = "Nicotine"
+	id = "nicotine"
+	description = "Stimulates and relaxes the mind and body."
+	taste_description = "smoke"
+	reagent_state = LIQUID
+	color = "#181818"
+	metabolism = REM * 0.002
+	overdose = REAGENTS_OVERDOSE * 0.5
+	scannable = 1	
+	data = 0
+
+/datum/reagent/nicotine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+	M.add_chemical_effect(CE_PULSE, 1)
+	if(volume <= 0.02 && dose >= 0.05 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
+		data = world.time
+		M << "<span class='warning'>You feel antsy, your concentration wavers...</span>"
+	else
+		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
+			data = world.time
+			M << "<span class='notice'>You feel invigorated and calm.</span>"					
 
 /datum/reagent/rezadone
 	name = "Rezadone"
