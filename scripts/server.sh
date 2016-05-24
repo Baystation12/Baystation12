@@ -10,6 +10,18 @@ EXTRA_DM_SH_ARGS=""
 
 cd ../ # serverdir/
 
+cleanup() { # $1: server pid
+	rm server_running
+	[[ $1 != "" ]] && kill -s SIGTERM $1
+}
+
+if [[ -e server_running ]]; then
+	echo "Server already running!"
+	exit 1
+fi
+touch server_running
+trap "cleanup" EXIT
+
 exec 5>&1 # duplicate fd 5 to fd 1 (stdout); this allows us to echo the log during compilation, but also capture it for saving to logs in the case of a failure
 
 [[ -e stopserver ]] && rm stopserver
@@ -63,7 +75,7 @@ while [[ ! -e stopserver ]]; do
 	if ! ps -p $pid 2> /dev/null > /dev/null; then
 		DreamDaemon $DME $PORT -trusted &
 		pid=$!
-		trap "kill -s SIGTERM $pid" EXIT
+		trap "cleanup $pid" EXIT
 	else
 		kill -s SIGUSR1 $pid # Reboot DD
 	fi
@@ -74,6 +86,8 @@ while [[ ! -e stopserver ]]; do
 	done
 	[[ -e reboot_called ]] && rm reboot_called
 
+	[[ -e stopserver ]] && exit 0
+
 	# Execute at-update commands
 	if [[ -e atupdate && -x atupdate ]]; then
 		eval "$(cat atupdate)" # in THIS ENVIRONMENT, i.e. branch changes can be done by `echo 'BRANCH=dev-freeze' > atupdate`
@@ -81,4 +95,4 @@ while [[ ! -e stopserver ]]; do
 	fi
 done
 
-kill -s SIGTERM $pid
+cleanup $pid
