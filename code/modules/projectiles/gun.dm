@@ -184,12 +184,7 @@
 	user.setMoveCooldown(shoot_time) //no moving while shooting either
 	next_fire_time = world.time + shoot_time
 
-	var/held_acc_mod = 0
-	var/held_disp_mod = 0
-	if(requires_two_hands)
-		if(!src.is_held_twohanded(user))
-			held_acc_mod = -requires_two_hands
-			held_disp_mod = requires_two_hands*0.25 //dispersion per point of two-handedness
+	var/held_twohanded = src.is_held_twohanded(user)
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
@@ -199,9 +194,7 @@
 			handle_click_empty(user)
 			break
 
-		var/acc = burst_accuracy[min(i, burst_accuracy.len)] + held_acc_mod
-		var/disp = dispersion[min(i, dispersion.len)] + held_disp_mod
-		process_accuracy(projectile, user, target, acc, disp)
+		process_accuracy(projectile, user, target, i, held_twohanded)
 
 		if(pointblank)
 			process_point_blank(projectile, user, target)
@@ -267,7 +260,7 @@
 	if(requires_two_hands && !src.is_held_twohanded(user))
 		switch(requires_two_hands)
 			if(1)
-				if(prob(25)) //don't need to tell them every single time
+				if(prob(50)) //don't need to tell them every single time
 					user << "<span class='warning'>Your aim wavers slightly.</span>"
 			if(2)
 				user << "<span class='warning'>Your aim wavers as you fire \the [src] with just one hand.</span>"
@@ -304,14 +297,22 @@
 				damage_mult = 1.5
 	P.damage *= damage_mult
 
-/obj/item/weapon/gun/proc/process_accuracy(obj/projectile, mob/user, atom/target, acc_mod, dispersion)
+/obj/item/weapon/gun/proc/process_accuracy(obj/projectile, mob/user, atom/target, var/burst, var/held_twohanded)
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
 		return //default behaviour only applies to true projectiles
 
+	var/acc_mod = burst_accuracy[min(burst, burst_accuracy.len)]
+	var/disp_mod = dispersion[min(burst, dispersion.len)]
+
+	if(requires_two_hands)
+		if(!held_twohanded)
+			acc_mod += -ceil(requires_two_hands/2)
+			disp_mod += requires_two_hands*0.5 //dispersion per point of two-handedness
+
 	//Accuracy modifiers
 	P.accuracy = accuracy + acc_mod
-	P.dispersion = dispersion
+	P.dispersion = disp_mod
 
 	//accuracy bonus from aiming
 	if (aim_targets && (target in aim_targets))
