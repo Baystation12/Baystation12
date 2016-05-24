@@ -1,0 +1,7 @@
+author: HarpyEagle
+
+delete-after: True
+
+changes: 
+  - bugfix: "Fixes disarm-attack dislocation chances being so low that you were very likely to break the targeted limb before it would dislocate."
+  - bugfix: "It is now possible to disarm-attack with stunbatons like with other melee weapons. Note that this means that using a stunbaton on disarm intent will hurt people."
