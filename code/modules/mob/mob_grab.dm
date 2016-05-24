@@ -346,6 +346,40 @@
 		hud.icon_state = "kill"
 		state = GRAB_NECK
 
+/obj/item/weapon/grab/proc/handle_resist()
+	var/grab_name
+	var/break_strength = 1
+	var/list/break_chance_table = list(100)
+	switch(state)
+		//if(GRAB_PASSIVE)
+
+		if(GRAB_AGGRESSIVE)
+			grab_name = "grip"
+			//Being knocked down makes it harder to break a grab, so it is easier to cuff someone who is down without forcing them into unconsciousness.
+			if(!affecting.incapacitated(INCAPACITATION_KNOCKDOWN))
+				break_strength++
+			break_chance_table = list(15, 60, 100)
+
+		if(GRAB_NECK)
+			grab_name = "headlock"
+			//If the you move when grabbing someone then it's easier for them to break free. Same if the affected mob is immune to stun.
+			if(world.time - assailant.l_move_time < 30 || !affecting.stunned)
+				break_strength++
+			break_chance_table = list(3, 18, 45, 100)
+
+	//It's easier to break out of a grab by a smaller mob
+	break_strength += max(size_difference(affecting, assailant), 0)
+
+	var/break_chance = break_chance_table[Clamp(break_strength, 1, break_chance_table.len)]
+	if(prob(break_chance))
+		if(grab_name)
+			affecting.visible_message("<span class='warning'>[affecting] has broken free of [assailant]'s [grab_name]!</span>")
+		qdel(src)
+
+//returns the number of size categories between affecting and assailant, rounded. Positive means A is larger than B
+/obj/item/weapon/grab/proc/size_difference(mob/A, mob/B)
+	return round(log(2, A.mob_size/B.mob_size), 1)
+
 /obj/item/weapon/grab
 	var/destroying = 0
 
