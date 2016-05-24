@@ -277,7 +277,10 @@ meteor_act
 		return 0
 	if(W.damtype != BRUTE)
 		return 0
-	if(prob(W.force * blocked_mult(blocked)))
+
+	//want the dislocation chance to be such that the limb is expected to dislocate after dealing a fraction of the damage needed to break the limb
+	var/dislocate_chance = (W.force/2)/(0.5 * organ.min_broken_damage * config.organ_health_multiplier)*100
+	if(prob(dislocate_chance * blocked_mult(blocked)))
 		visible_message("<span class='danger'>[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
 		organ.dislocate(1)
 		return 1
