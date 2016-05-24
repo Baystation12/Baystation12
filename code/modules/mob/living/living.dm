@@ -653,10 +653,6 @@ default behaviour is:
 
 /mob/living/proc/resist_grab()
 	var/resisting = 0
-	for(var/obj/O in requests)
-		requests.Remove(O)
-		qdel(O)
-		resisting++
 	for(var/obj/item/weapon/grab/G in grabbed_by)
 		resisting++
 		switch(G.state)
