@@ -15,19 +15,22 @@
 	var/protection_percent = 60
 
 	var/land_speed = 10 //if 0 it can't go on turf
-	var/space_speed = 1
+	var/space_speed = 2
 	var/bike_icon = "bike"
 
-	var/datum/effect/effect/system/ion_trail_follow/ion
+	var/datum/effect/effect/system/trail/trail
 	var/kickstand = 1
+	var/obj/item/weapon/engine/engine = null
+	var/engine_type
+	var/prefilled = 0
 
 /obj/vehicle/bike/New()
 	..()
-	ion = new /datum/effect/effect/system/ion_trail_follow()
-	ion.set_up(src)
+	if(engine_type)
+		load_engine(new engine(src.loc))
+		if(prefilled)
+			engine.prefill()
 	turn_off()
-	overlays += image('icons/obj/bike.dmi', "[icon_state]_off_overlay", MOB_LAYER + 1)
-	icon_state = "[bike_icon]_off"
 
 /obj/vehicle/bike/verb/toggle()
 	set name = "Toggle Engine"
@@ -35,13 +38,14 @@
 	set src in view(0)
 
 	if(usr.incapacitated()) return
+	if(!engine)
+		usr << "<span class='warning'>\The [src] does not have an engine block installed...</span>"
+		return
 
 	if(!on)
 		turn_on()
-		src.visible_message("\The [src] rumbles to life.", "You hear something rumble deeply.")
 	else
 		turn_off()
-		src.visible_message("\The [src] putters before turning off.", "You hear something putter slowly.")
 
 /obj/vehicle/bike/verb/kickstand()
 	set name = "Toggle Kickstand"
@@ -51,17 +55,37 @@
 	if(usr.incapacitated()) return
 
 	if(kickstand)
-		src.visible_message("You put up \the [src]'s kickstand.")
+		usr.visible_message("\The [usr] puts up \the [src]'s kickstand.")
 	else
 		if(istype(src.loc,/turf/space))
 			usr << "<span class='warning'> You don't think kickstands work in space...</span>"
 			return
-		src.visible_message("You put down \the [src]'s kickstand.")
+		usr.visible_message("\The [usr] puts down \the [src]'s kickstand.")
 		if(pulledby)
 			pulledby.stop_pulling()
 
 	kickstand = !kickstand
 	anchored = (kickstand || on)
+
+/obj/vehicle/bike/proc/load_engine(var/obj/item/weapon/engine/E)
+	if(engine)
+		return
+	engine = E
+	engine.forceMove(src)
+	if(trail)
+		qdel(trail)
+	trail = engine.get_trail()
+	if(trail)
+		trail.set_up()
+
+/obj/vehicle/bike/proc/unload_engine()
+	if(!engine)
+		return
+	engine.forceMove(get_turf(src))
+	if(trail)
+		trail.stop()
+		qdel(trail)
+	trail = null
 
 /obj/vehicle/bike/load(var/atom/movable/C)
 	var/mob/living/M = C
@@ -69,6 +93,26 @@
 	if(M.buckled || M.restrained() || !Adjacent(M) || !M.Adjacent(src))
 		return 0
 	return ..(M)
+
+/obj/vehicle/bike/insert_cell(var/obj/item/weapon/cell/C, var/mob/living/carbon/human/H)
+	return
+
+/obj/vehicle/bike/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(open)
+		if(istype(W, /obj/item/weapon/engine))
+			if(engine)
+				user << "<span class='warning'>There is already an engine block in \the [src].</span>"
+				return
+			user.visible_message("<span class='warning'>\The [user] installs \the [W] into \the [src].</span>")
+			load_engine(W)
+			return
+		else if(engine && engine.attackby(W,user))
+			return
+		else if(istype(W, /obj/item/weapon/crowbar) && engine)
+			user << "You pop out \the [engine] from \the [src]."
+			unload_engine()
+			return
+	..()
 
 /obj/vehicle/bike/MouseDrop_T(var/atom/movable/C, mob/user as mob)
 	if(!load(C))
@@ -87,8 +131,6 @@
 
 /obj/vehicle/bike/Move(var/turf/destination)
 	if(kickstand) return
-
-
 	//these things like space, not turf. Dragging shouldn't weigh you down.
 	if(istype(destination,/turf/space) || pulledby)
 		if(!space_speed)
@@ -98,10 +140,18 @@
 		if(!land_speed)
 			return 0
 		move_delay = land_speed
+	if(!engine || !engine.use_power())
+		turn_off()
+		return 0
 	return ..()
 
 /obj/vehicle/bike/turn_on()
-	ion.start()
+	if(!engine || on)
+		return
+
+	engine.rev_engine(src)
+	if(trail)
+		trail.start()
 	anchored = 1
 
 	update_icon()
@@ -109,8 +159,16 @@
 	if(pulledby)
 		pulledby.stop_pulling()
 	..()
+
 /obj/vehicle/bike/turn_off()
-	ion.stop()
+	if(!on)
+		return
+	if(engine)
+		engine.putter(src)
+
+	if(trail)
+		trail.stop()
+
 	anchored = kickstand
 
 	update_icon()
@@ -127,16 +185,24 @@
 	overlays.Cut()
 
 	if(on)
-		overlays += image('icons/obj/bike.dmi', "[bike_icon]_on_overlay", MOB_LAYER + 1)
 		icon_state = "[bike_icon]_on"
 	else
-		overlays += image('icons/obj/bike.dmi', "[bike_icon]_off_overlay", MOB_LAYER + 1)
-		icon_state = "[bike_icon]_off"
 
+		icon_state = "[bike_icon]_off"
+	overlays += image('icons/obj/bike.dmi', "[icon_state]_overlay", MOB_LAYER + 1)
 	..()
 
 
 /obj/vehicle/bike/Destroy()
-	qdel(ion)
+	qdel(trail)
 
 	..()
+
+
+
+
+/obj/vehicle/bike/thermal
+	engine_type = /obj/item/weapon/engine/thermal
+
+/obj/vehicle/bike/electric
+	engine_type = /obj/item/weapon/engine/electric
