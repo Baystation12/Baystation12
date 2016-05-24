@@ -137,6 +137,10 @@
 		return
 	if(force_down)
 		attacker << "<span class='warning'>You are already pinning [target] to the ground.</span>"
+		return
+	if(size_difference(affecting, assailant) > 0)
+		attacker << "<span class='warning'>You are too small to do that!</span>"
+		return
 
 	attacker.visible_message("<span class='danger'>[attacker] starts forcing [target] to the ground!</span>")
 	if(do_after(attacker, 20, progress=0) && target)

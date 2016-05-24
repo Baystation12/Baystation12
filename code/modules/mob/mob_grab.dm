@@ -136,7 +136,7 @@
 			handle_eye_mouth_covering(affecting, assailant, assailant.zone_sel.selecting)
 
 		if(force_down)
-			if(affecting.loc != assailant.loc)
+			if(affecting.loc != assailant.loc || size_difference(affecting, assailant) > 0)
 				force_down = 0
 			else
 				affecting.Weaken(2)
@@ -240,7 +240,7 @@
 	if(state < GRAB_AGGRESSIVE)
 		if(!allow_upgrade)
 			return
-		if(!affecting.lying)
+		if(!affecting.lying || size_difference(affecting, assailant) > 0)
 			assailant.visible_message("<span class='warning'>[assailant] has grabbed [affecting] aggressively (now hands)!</span>")
 		else
 			assailant.visible_message("<span class='warning'>[assailant] pins [affecting] down to the ground (now hands)!</span>")
