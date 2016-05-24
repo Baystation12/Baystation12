@@ -40,6 +40,7 @@
 	breakouttime = 300 //30 seconds
 
 /obj/item/weapon/handcuffs/wizard/dropped(var/mob/user)
+	..()
 	qdel(src)
 
 /obj/item/projectile/spell_projectile/stuncuff

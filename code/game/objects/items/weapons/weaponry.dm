@@ -67,6 +67,7 @@
 	var/net_type = /obj/effect/energy_net
 
 /obj/item/weapon/energy_net/dropped()
+	..()
 	spawn(10)
 		if(src) qdel(src)
 

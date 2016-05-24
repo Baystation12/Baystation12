@@ -131,5 +131,6 @@
 
 /obj/item/device/t_scanner/dropped(mob/user)
 	set_user_client(null)
+	..()
 
 #undef OVERLAY_CACHE_LEN

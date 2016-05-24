@@ -329,6 +329,7 @@
 			qdel(src)
 
 /obj/item/weapon/grab/dropped()
+	..()
 	loc = null
 	if(!destroying)
 		qdel(src)
