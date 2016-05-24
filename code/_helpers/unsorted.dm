@@ -1026,7 +1026,7 @@ proc/get_mob_with_client_list()
 //returns null if the atom is not in a turf.
 /proc/get_turf(atom/movable/A)
 	if(isturf(A)) return A
-	if(A.locs.len) return A.locs[1]
+	if(A && A.locs.len) return A.locs[1]
 
 /proc/get(atom/loc, type)
 	while(loc)
