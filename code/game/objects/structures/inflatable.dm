@@ -1,6 +1,6 @@
 /obj/item/inflatable
 	name = "inflatable"
-	w_class = 2
+	w_class = 3
 	icon = 'icons/obj/inflatable.dmi'
 	var/deploy_path = null
 
@@ -254,16 +254,7 @@
 	desc = "Contains inflatable walls and doors."
 	icon_state = "inf_box"
 	item_state = "syringe_kit"
-	w_class = 3
-	max_storage_space = DEFAULT_BOX_STORAGE
+	w_class = 4
+	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 	can_hold = list(/obj/item/inflatable)
-
-	New()
-		..()
-		new /obj/item/inflatable/door(src)
-		new /obj/item/inflatable/door(src)
-		new /obj/item/inflatable/door(src)
-		new /obj/item/inflatable/wall(src)
-		new /obj/item/inflatable/wall(src)
-		new /obj/item/inflatable/wall(src)
-		new /obj/item/inflatable/wall(src)
+	startswith = list(/obj/item/inflatable/door = 2, /obj/item/inflatable/wall = 3)
