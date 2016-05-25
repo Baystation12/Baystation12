@@ -13,10 +13,21 @@
 /obj/item/weapon/storage/fancy
 	item_state = "syringe_kit" //placeholder, many of these don't have inhands
 	var/obj/item/key_type //path of the key item that this "fancy" container is meant to store
+	var/opened = 0 //if an item has been removed from this container
+
+/obj/item/weapon/storage/fancy/remove_from_storage()
+	. = ..()
+	if(!opened && .)
+		opened = 1
+		update_icon()
+
 
 /obj/item/weapon/storage/fancy/update_icon()
-	var/key_count = count_by_type(contents, key_type)
-	src.icon_state = "[initial(icon_state)][key_count]"
+	if(!opened)
+		src.icon_state = initial(icon_state)
+	else
+		var/key_count = count_by_type(contents, key_type)
+		src.icon_state = "[initial(icon_state)][key_count]"
 
 /obj/item/weapon/storage/fancy/examine(mob/user)
 	if(!..(user, 1))
