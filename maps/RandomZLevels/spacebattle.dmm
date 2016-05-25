@@ -296,7 +296,7 @@
 "fJ" = (/obj/structure/artilleryplaceholder{tag = "icon-10"; icon_state = "10"},/turf/simulated/floor/plating/airless,/area/awaymission/spacebattle/cruiser)
 "fK" = (/obj/structure/artilleryplaceholder{tag = "icon-11"; icon_state = "11"},/turf/simulated/floor/plating/airless,/area/awaymission/spacebattle/cruiser)
 "fL" = (/obj/structure/artilleryplaceholder{tag = "icon-12"; icon_state = "12"},/turf/simulated/floor/plating/airless,/area/awaymission/spacebattle/cruiser)
-"fM" = (/obj/structure/closet/crate/internals,/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/storage/firstaid/o2,/turf/simulated/floor/plating,/area/awaymission/spacebattle/cruiser)
+"fM" = (/obj/structure/closet/crate/internals,/obj/item/weapon/tank/emergency/oxygen,/obj/item/weapon/storage/firstaid/o2,/turf/simulated/floor/plating,/area/awaymission/spacebattle/cruiser)
 "fN" = (/turf/simulated/floor{dir = 0; icon_state = "blue"},/area/awaymission/spacebattle/cruiser)
 "fO" = (/obj/item/ammo_casing/a10mm,/obj/item/ammo_casing/a10mm,/turf/simulated/floor{dir = 0; icon_state = "blue"},/area/awaymission/spacebattle/cruiser)
 "fP" = (/obj/item/ammo_casing/shotgun,/obj/item/ammo_casing/a10mm,/obj/item/ammo_casing/a10mm,/turf/simulated/floor{dir = 0; icon_state = "blue"},/area/awaymission/spacebattle/cruiser)

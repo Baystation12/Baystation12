@@ -62,7 +62,7 @@
 "bj" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/derelict/ship)
 "bk" = (/obj/machinery/light_switch{pixel_x = 27},/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled,/area/derelict/ship)
 "bl" = (/obj/structure/bed/chair,/turf/simulated/floor/tiled,/area/derelict/ship)
-"bm" = (/obj/structure/table/rack,/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/tank/emergency_oxygen,/turf/simulated/floor/tiled,/area/derelict/ship)
+"bm" = (/obj/structure/table/rack,/obj/item/weapon/tank/emergency/oxygen,/obj/item/weapon/tank/emergency/oxygen,/obj/item/weapon/tank/emergency/oxygen,/obj/item/weapon/tank/emergency/oxygen,/turf/simulated/floor/tiled,/area/derelict/ship)
 "bn" = (/obj/structure/table/rack,/obj/item/weapon/storage/toolbox/syndicate,/turf/simulated/floor/tiled,/area/derelict/ship)
 "bo" = (/obj/structure/table/rack,/obj/item/clothing/suit/space/syndicate,/obj/item/clothing/head/helmet/space/syndicate,/obj/item/clothing/mask/breath,/obj/item/weapon/cell,/turf/simulated/floor/tiled,/area/derelict/ship)
 "bp" = (/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/shuttle/plating,/area/derelict/ship)
