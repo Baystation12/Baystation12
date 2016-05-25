@@ -183,25 +183,25 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 
 //Chess
 
-/obj/item/weapon.reagent_containers/food/snacks/checker/pawn
+/obj/item/weapon/reagent_containers/food/snacks/checker/pawn
 	name = "pawn"
 	desc = "How many pawns will die in your war?"
 
-/obj/item/weapon.reagent_containers/food/snacks/checker/pawn/red
+/obj/item/weapon/reagent_containers/food/snacks/checker/pawn/red
 	piece_color ="red"
 
-/obj/item/weapon.reagent_containers/food/snacks/checker/knight
+/obj/item/weapon/reagent_containers/food/snacks/checker/knight
 	name = "knight"
 	desc = "The piece chess deserves, and needs to actually play."
 
-/obj/item/weapon.reagent_containers/food/snacks/checker/knight/red
+/obj/item/weapon/reagent_containers/food/snacks/checker/knight/red
 	piece_color ="red"
 
-/obj/item/weapon.reagent_containers/food/snacks/checker/bishop
+/obj/item/weapon/reagent_containers/food/snacks/checker/bishop
 	name = "bishop"
 	desc = "What corruption occured, urging holy men to fight?"
 
-/obj/item/weapon.reagent_containers/food/snacks/checker/bishop/red
+/obj/item/weapon/reagent_containers/food/snacks/checker/bishop/red
 	piece_color ="red"
 
 /obj/item/weapon/reagent_containers/food/snacks/checker/rook
@@ -211,16 +211,16 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 /obj/item/weapon/reagent_containers/food/snacks/checker/rook/red
 	piece_color ="red"
 
-/obj/item/weapon.reagent_containers/food/snacks/checker/queen
+/obj/item/weapon/reagent_containers/food/snacks/checker/queen
 	name = "queen"
 	desc = "A queen of battle and pain. She dances across the battlefield."
 
-/obj/item/weapon.reagent_containers/food/snacks/checker/queen/red
+/obj/item/weapon/reagent_containers/food/snacks/checker/queen/red
 	piece_color ="red"
 
-/obj/item/weapon.reagent_containers/food/snacks/checker/king
+/obj/item/weapon/reagent_containers/food/snacks/checker/king
 	name = "king"
 	desc = "Why does a chess game end when the king dies?"
 
-/obj/item/weapon.reagent_containers/food/snacks/checker/king/red
+/obj/item/weapon/reagent_containers/food/snacks/checker/king/red
 	piece_color ="red"
