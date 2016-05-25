@@ -67,39 +67,39 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 		user.unset_machine()
 		return
 
-	var/dat = "<HTML>"
-	dat += "<table border='0'>"
+	var/dat = {"
+	<html><head><style type='text/css'>
+	td,td a{height:50px;width:50px}table{border-spacing:0;border:none;border-collapse:collapse}td{text-align:center;padding:0;background-repeat:no-repeat;background-position:center center}td.light{background-color:#6cf}td.dark{background-color:#544b50}td.selected{background-color:#c8dbc3}td a{display:table-cell;text-decoration:none;position:relative;line-height:50px;height:50px;width:50 px;vertical-align:middle}
+	</style></head><body><table>
+	"}
 	var i, stagger
 	stagger = 0 //so we can have the checkerboard effect
 	for(i=0, i<64, i++)
 		if(i%8 == 0)
 			dat += "<tr>"
 			stagger = !stagger
-		dat += "<td align='center' height='50' width='50' bgcolor="
 		if(selected == i)
-			dat += "'#FF8566'>"
+			dat += "<td class='selected'"
 		else if((i + stagger)%2 == 0)
-			dat += "'#66CCFF'>"
+			dat += "<td class='dark'"
 		else
-			dat += "'#252536'>"
-		if(!isobserver(user))
-			dat += "<A href='?src=\ref[src];select=[i];person=\ref[user]' style='display:block;text-decoration:none;'>"
+			dat += "<td class='light'"
+			
 		if(board["[i]"])
 			var/obj/item/I = board["[i]"]
 			user << browse_rsc(board_icons["[I.icon] [I.icon_state]"],"[I.icon_state].png")
-			dat += "<image src='[I.icon_state].png' style='border-style: none'>"
+			dat += " style='background-image:url([I.icon_state].png)'>"
 		else
-			dat += "&nbsp;"
-
+			dat+= ">"
 		if(!isobserver(user))
-			dat += "</A>"
+			dat += "<a href='?src=\ref[src];select=[i];person=\ref[user]'></a>"
 		dat += "</td>"
 
-	dat += "</table><br>"
+	dat += "</table>"
 
 	if(selected >= 0 && !isobserver(user))
 		dat += "<br><A href='?src=\ref[src];remove=0'>Remove Selected Piece</A>"
-	user << browse(dat,"window=boardgame;size=500x500")
+	user << browse(dat,"window=boardgame;size=430x500") // 50px * 8 squares + 30 margin
 	onclose(usr, "boardgame")
 
 /obj/item/weapon/board/Topic(href, href_list)
