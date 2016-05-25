@@ -71,11 +71,19 @@
 
 	New()
 		..()
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack/toxins(src)
+		else
+			new /obj/item/weapon/storage/backpack/satchel_tox(src) 		
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack/dufflebag(src)
 		new /obj/item/clothing/under/rank/scientist(src)
 		new /obj/item/clothing/suit/storage/toggle/labcoat(src)
 		new /obj/item/clothing/shoes/white(src)
 		new /obj/item/clothing/glasses/science(src)
 		new /obj/item/device/radio/headset/headset_sci(src)
+		new /obj/item/clothing/mask/gas(src) 		
+		new /obj/item/weapon/clipboard(src)
 		new /obj/item/weapon/storage/belt/archaeology(src)
 		new /obj/item/weapon/storage/excavation(src)
 		return
