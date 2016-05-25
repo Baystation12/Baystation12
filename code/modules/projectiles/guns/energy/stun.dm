@@ -39,13 +39,14 @@
 	silenced = 1
 	fire_sound = 'sound/weapons/Genhit.ogg'
 	projectile_type = /obj/item/projectile/energy/bolt
-	max_shots = 5
+	max_shots = 8
 	self_recharge = 1
 	charge_meter = 0
 
 /obj/item/weapon/gun/energy/crossbow/ninja
 	name = "energy dart thrower"
 	projectile_type = /obj/item/projectile/energy/dart
+	max_shots = 5
 
 /obj/item/weapon/gun/energy/crossbow/largecrossbow
 	name = "energy crossbow"
