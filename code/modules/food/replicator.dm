@@ -35,8 +35,8 @@
 	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/S = O
 		user.drop_item(O)
-		for(var/datum/reagent/nutriment/N in S.reagentlist())
-			biomass = max(biomass + min(1,round(N.volume*deconstruct_eff)), biomass_max)
+		for(var/datum/reagent/nutriment/N in S.reagents.reagent_list)
+			biomass = Clamp(biomass + round(N.volume*deconstruct_eff),1,biomass_max)
 		qdel(O)
 	else if(istype(O, /obj/item/weapon/storage/bag/plants))
 		if(!O.contents || !O.contents.len)
@@ -45,8 +45,8 @@
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in O.contents)
 			var/obj/item/weapon/storage/S = O
 			S.remove_from_storage(G, null)
-			for(var/datum/reagent/nutriment/N in G.reagentlist())
-				biomass = max(biomass + min(1,round(N.volume*deconstruct_eff)), biomass_max)
+			for(var/datum/reagent/nutriment/N in G.reagents.reagent_list)
+				biomass = Clamp(biomass + round(N.volume*deconstruct_eff),1,biomass_max)
 			qdel(G)
 	else
 		..()
