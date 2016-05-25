@@ -129,7 +129,7 @@
 	icon_state = "lamp"
 	item_state = "lamp"
 	brightness_on = 5
-	w_class = 5
+	w_class = 4
 	flags = CONDUCT
 
 	on = 1
@@ -140,7 +140,7 @@
 	desc = "A classic green-shaded desk lamp."
 	icon_state = "lampgreen"
 	item_state = "lampgreen"
-	brightness_on = 5
+	brightness_on = 4
 	light_color = "#FFC58F"
 
 /obj/item/device/flashlight/lamp/verb/toggle_light()
