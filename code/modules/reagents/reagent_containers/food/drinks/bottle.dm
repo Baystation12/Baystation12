@@ -40,7 +40,7 @@
 	if(!isGlass || !smash_duration)
 		return 0
 
-	var/list/chance_table = list(90, 90, 85, 85, 60, 35, 15) //starting from distance 0
+	var/list/chance_table = list(95, 95, 90, 85, 75, 55, 35) //starting from distance 0
 	var/idx = max(distance + 1, 1) //since list indices start at 1
 	if(idx > chance_table.len)
 		return 0
