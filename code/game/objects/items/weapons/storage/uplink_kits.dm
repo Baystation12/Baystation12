@@ -59,7 +59,7 @@
 		/obj/item/clothing/suit/space/syndicate,
 		/obj/item/clothing/head/helmet/space/syndicate,
 		/obj/item/clothing/mask/gas/syndicate,
-		/obj/item/weapon/tank/emergency_oxygen/double,
+		/obj/item/weapon/tank/emergency/oxygen/double,
 		)
 
 // Chameleon uplink kit
