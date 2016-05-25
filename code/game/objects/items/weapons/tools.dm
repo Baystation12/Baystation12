@@ -438,7 +438,8 @@
 			user << "<span class='warning'>You'll need to turn [src] on to patch the damage on [M]'s [S.name]!</span>"
 			return 1
 
-		S.robo_repair(15, BRUTE, "some dents", src, user)
+		if(S.robo_repair(15, BRUTE, "some dents", src, user))
+			remove_fuel(1, user)
 
 	else
 		return ..()
