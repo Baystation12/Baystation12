@@ -379,28 +379,28 @@ steam.start() -- spawns the effect
 	if(!src.on)
 		src.on = 1
 		src.processing = 1
-		if(src.processing)
-			src.processing = 0
-			spawn(0)
-				var/turf/T = get_turf(src.holder)
-				if(T != src.oldposition)
-					if(is_type_in_list(T, specific_turfs) && (!max_number || number < max_number))
-						var/obj/effect/effect/trail = PoolOrNew(trail_type, src.oldposition)
-						src.oldposition = T
-						effect(trail)
-						number++
-						spawn( duration_of_effect )
-							number--
-							qdel(trail)
-					spawn(2)
-						if(src.on)
-							src.processing = 1
-							src.start()
-				else
-					spawn(2)
-						if(src.on)
-							src.processing = 1
-							src.start()
+	if(src.processing)
+		src.processing = 0
+		spawn(0)
+			var/turf/T = get_turf(src.holder)
+			if(T != src.oldposition)
+				if(is_type_in_list(T, specific_turfs) && (!max_number || number < max_number))
+					var/obj/effect/effect/trail = PoolOrNew(trail_type, src.oldposition)
+					src.oldposition = T
+					effect(trail)
+					number++
+					spawn( duration_of_effect )
+						number--
+						qdel(trail)
+				spawn(2)
+					if(src.on)
+						src.processing = 1
+						src.start()
+			else
+				spawn(2)
+					if(src.on)
+						src.processing = 1
+						src.start()
 
 /datum/effect/effect/system/trail/proc/stop()
 	src.processing = 0

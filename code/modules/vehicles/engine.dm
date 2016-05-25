@@ -5,6 +5,7 @@
 	w_class = 5
 	var/stat = 0
 	var/trail_type
+	var/cost_per_move = 5
 
 /obj/item/weapon/engine/proc/get_trail()
 	if(trail_type)
@@ -53,13 +54,18 @@
 /obj/item/weapon/engine/electric/use_power()
 	if(!cell)
 		return 0
-	return cell.use(10)
+	return cell.use(cost_per_move)
 
 /obj/item/weapon/engine/electric/rev_engine(var/atom/movable/M)
 	M.visible_message("\The [M] beeps, turning up.")
 
 /obj/item/weapon/engine/electric/putter(var/atom/movable/M)
 	M.visible_message("\The [M] makes one depressed beep before turning off.")
+
+/obj/item/weapon/engine/electric/emp_act(var/severity)
+	if(cell)
+		cell.emp_act(severity)
+	..()
 
 /obj/item/weapon/engine/thermal
 	name = "thermal engine"
@@ -70,6 +76,9 @@
 	var/obj/temp_reagents_holder
 	var/fuel_points = 0
 	//fuel points are determined by differing reagents
+
+/obj/item/weapon/engine/thermal/prefill()
+	fuel_points = 1000
 
 /obj/item/weapon/engine/thermal/New()
 	..()
@@ -88,10 +97,10 @@
 	..()
 
 /obj/item/weapon/engine/thermal/use_power()
-	if(fuel_points >= 5)
-		fuel_points -= 5
+	if(fuel_points >= cost_per_move)
+		fuel_points -= cost_per_move
 		return 1
-	if(!reagents || !reagents.total_volume <= 0 || stat)
+	if(!reagents || reagents.total_volume <= 0 || stat)
 		return 0
 
 	reagents.trans_to(temp_reagents_holder,min(reagents.total_volume,15))
@@ -122,7 +131,7 @@
 		multiplier = (multiplier + new_multiplier)/2
 	if(!actually_flameable)
 		return 0
-	fuel_points = multiplier * temp_reagents_holder.reagents.total_volume
+	fuel_points += 5 * multiplier * temp_reagents_holder.reagents.total_volume
 	temp_reagents_holder.reagents.clear_reagents()
 	return use_power()
 

@@ -10,6 +10,7 @@
 	health = 100
 	maxhealth = 100
 
+	locked = 0
 	fire_dam_coeff = 0.6
 	brute_dam_coeff = 0.5
 	var/protection_percent = 60
@@ -27,10 +28,10 @@
 /obj/vehicle/bike/New()
 	..()
 	if(engine_type)
-		load_engine(new engine(src.loc))
+		load_engine(new engine_type(src.loc))
 		if(prefilled)
 			engine.prefill()
-	turn_off()
+	update_icon()
 
 /obj/vehicle/bike/verb/toggle()
 	set name = "Toggle Engine"
@@ -67,16 +68,18 @@
 	kickstand = !kickstand
 	anchored = (kickstand || on)
 
-/obj/vehicle/bike/proc/load_engine(var/obj/item/weapon/engine/E)
+/obj/vehicle/bike/proc/load_engine(var/obj/item/weapon/engine/E, var/mob/user)
 	if(engine)
 		return
+	if(user)
+		user.drop_from_inventory(E)
 	engine = E
 	engine.forceMove(src)
 	if(trail)
 		qdel(trail)
 	trail = engine.get_trail()
 	if(trail)
-		trail.set_up()
+		trail.set_up(src)
 
 /obj/vehicle/bike/proc/unload_engine()
 	if(!engine)
@@ -94,25 +97,30 @@
 		return 0
 	return ..(M)
 
+/obj/vehicle/bike/emp_act(var/severity)
+	if(engine)
+		engine.emp_act(severity)
+	..()
+
 /obj/vehicle/bike/insert_cell(var/obj/item/weapon/cell/C, var/mob/living/carbon/human/H)
 	return
 
-/obj/vehicle/bike/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/vehicle/bike/attackby(obj/item/W as obj, mob/user as mob)
 	if(open)
 		if(istype(W, /obj/item/weapon/engine))
 			if(engine)
 				user << "<span class='warning'>There is already an engine block in \the [src].</span>"
-				return
+				return 1
 			user.visible_message("<span class='warning'>\The [user] installs \the [W] into \the [src].</span>")
 			load_engine(W)
 			return
 		else if(engine && engine.attackby(W,user))
-			return
+			return 1
 		else if(istype(W, /obj/item/weapon/crowbar) && engine)
 			user << "You pop out \the [engine] from \the [src]."
 			unload_engine()
-			return
-	..()
+			return 1
+	return ..()
 
 /obj/vehicle/bike/MouseDrop_T(var/atom/movable/C, mob/user as mob)
 	if(!load(C))
@@ -130,19 +138,20 @@
 	return Move(get_step(src, direction))
 
 /obj/vehicle/bike/Move(var/turf/destination)
-	if(kickstand) return
+	if(kickstand || (world.time <= l_move_time + move_delay)) return
 	//these things like space, not turf. Dragging shouldn't weigh you down.
-	if(istype(destination,/turf/space) || pulledby)
-		if(!space_speed)
+	if(!pulledby)
+		if(istype(destination,/turf/space) || pulledby)
+			if(!space_speed)
+				return 0
+			move_delay = space_speed
+		else
+			if(!land_speed)
+				return 0
+			move_delay = land_speed
+		if(!engine || !engine.use_power())
+			turn_off()
 			return 0
-		move_delay = space_speed
-	else
-		if(!land_speed)
-			return 0
-		move_delay = land_speed
-	if(!engine || !engine.use_power())
-		turn_off()
-		return 0
 	return ..()
 
 /obj/vehicle/bike/turn_on()
@@ -187,7 +196,6 @@
 	if(on)
 		icon_state = "[bike_icon]_on"
 	else
-
 		icon_state = "[bike_icon]_off"
 	overlays += image('icons/obj/bike.dmi', "[icon_state]_overlay", MOB_LAYER + 1)
 	..()
@@ -195,7 +203,7 @@
 
 /obj/vehicle/bike/Destroy()
 	qdel(trail)
-
+	qdel(engine)
 	..()
 
 
@@ -203,6 +211,8 @@
 
 /obj/vehicle/bike/thermal
 	engine_type = /obj/item/weapon/engine/thermal
+	prefilled = 1
 
 /obj/vehicle/bike/electric
 	engine_type = /obj/item/weapon/engine/electric
+	prefilled = 1
