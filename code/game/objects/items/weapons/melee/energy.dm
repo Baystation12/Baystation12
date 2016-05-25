@@ -205,6 +205,7 @@
 	spawn(1) if(src) qdel(src)
 
 /obj/item/weapon/melee/energy/blade/dropped()
+	..()
 	spawn(1) if(src) qdel(src)
 
 /obj/item/weapon/melee/energy/blade/process()

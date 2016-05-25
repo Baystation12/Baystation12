@@ -54,6 +54,7 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	usr.drop_from_inventory(src)
 
 /obj/item/magic_hand/dropped() //gets deleted on drop
+	..()
 	loc = null
 	qdel(src)
 

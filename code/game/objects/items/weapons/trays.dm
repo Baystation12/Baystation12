@@ -176,6 +176,7 @@
 			overlays += image("icon" = I.icon, "icon_state" = I.icon_state, "layer" = 30 + I.layer, "pixel_x" = I.pixel_x, "pixel_y" = I.pixel_y)
 
 /obj/item/weapon/tray/dropped(mob/user)
+	..()
 	spawn(1) //why sleep 1? Because forceMove first drops us on the ground.
 		if(!isturf(loc)) //to handle hand switching
 			return

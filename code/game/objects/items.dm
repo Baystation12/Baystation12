@@ -198,7 +198,8 @@
 	if(user.put_in_active_hand(src))
 		if(randpixel)
 			pixel_x = rand(-randpixel, randpixel)
-			pixel_y = rand(-randpixel, 0) - randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character's feet
+			pixel_y = rand(-randpixel/2, randpixel/2)
+			pixel_z = 0
 		else if(randpixel == 0)
 			pixel_x = 0
 			pixel_y = 0
@@ -254,7 +255,8 @@
 
 // apparently called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(mob/user as mob)
-	..()
+	if(randpixel)
+		pixel_z = randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character
 	if(zoom) zoom() //binoculars, scope, etc
 
 // called just as an item is picked up (loc is not yet changed)
