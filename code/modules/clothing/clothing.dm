@@ -649,27 +649,16 @@ BLIND     // can't see anything
 	if (src.loc == usr)
 		switch(sensor_mode)
 			if(0)
-				usr << "You disable your suit's remote sensing equipment."
+				usr.visible_message("[usr] adjusts their sensors.", "You disable your suit's remote sensing equipment.")
 			if(1)
-				usr << "Your suit will now report whether you are live or dead."
+				usr.visible_message("[usr] adjusts their sensors.", "Your suit will now report whether you are live or dead.")
 			if(2)
-				usr << "Your suit will now report your vital lifesigns."
+				usr.visible_message("[usr] adjusts their sensors.", "Your suit will now report your vital lifesigns.")
 			if(3)
-				usr << "Your suit will now report your vital lifesigns as well as your coordinate position."
+				usr.visible_message("[usr] adjusts their sensors.", "Your suit will now report your vital lifesigns as well as your coordinate position.")
+
 	else if (istype(src.loc, /mob))
-		switch(sensor_mode)
-			if(0)
-				for(var/mob/V in viewers(usr, 1))
-					V.show_message("\red [usr] disables [src.loc]'s remote sensing equipment.", 1)
-			if(1)
-				for(var/mob/V in viewers(usr, 1))
-					V.show_message("[usr] turns [src.loc]'s remote sensors to binary.", 1)
-			if(2)
-				for(var/mob/V in viewers(usr, 1))
-					V.show_message("[usr] sets [src.loc]'s sensors to track vitals.", 1)
-			if(3)
-				for(var/mob/V in viewers(usr, 1))
-					V.show_message("[usr] sets [src.loc]'s sensors to maximum.", 1)
+		usr.visible_message("[usr] adjusts [src.loc]'s sensors.", "You adjust [src.loc]'s sensors.")
 
 /obj/item/clothing/under/verb/toggle()
 	set name = "Toggle Suit Sensors"
