@@ -1,6 +1,0 @@
-author: Daranz
-
-delete-after: True
-
-changes: 
-  - bugfix: "Food slices spawned in lunchboxes can now be actually eaten."
