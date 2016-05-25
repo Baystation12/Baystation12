@@ -112,3 +112,7 @@
 /datum/gear/uniform/resomi/med
 	display_name = "uniform, Medical (Resomi)"
 	path = /obj/item/clothing/under/resomi/medical
+	
+/datum/gear/uniform/resomi/science
+	display_name = "uniform, Science (Resomi)"
+	path = /obj/item/clothing/under/resomi/science
