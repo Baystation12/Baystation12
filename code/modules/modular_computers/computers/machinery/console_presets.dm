@@ -65,6 +65,11 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/card_mod())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/comm())
 
+/obj/machinery/modular_computer/console/preset/command/main
+	 console_department = "Command"
+	 desc = "A stationary computer. This one comes preloaded with essential command programs."
+	 _has_id_slot = 1
+	 _has_printer = 1
 
 // ===== SECURITY CONSOLE =====
 /obj/machinery/modular_computer/console/preset/security

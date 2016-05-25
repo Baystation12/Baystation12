@@ -2390,7 +2390,7 @@
 "aTX" = (/obj/machinery/computer/security,/obj/effect/floor_decal/corner/red/three_quarters{dir = 1},/turf/simulated/floor/tiled,/area/bridge)
 "aTY" = (/obj/structure/table/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/item/weapon/storage/secure/briefcase,/obj/effect/floor_decal/corner/blue{dir = 6},/turf/simulated/floor/tiled,/area/bridge)
 "aTZ" = (/obj/structure/table/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/item/weapon/storage/box/PDAs{pixel_x = 4; pixel_y = 4},/obj/item/weapon/storage/box/ids,/turf/simulated/floor/tiled,/area/bridge)
-"aUa" = (/obj/machinery/modular_computer/console/preset/command,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/bridge)
+"aUa" = (/obj/machinery/modular_computer/console/preset/command/main,/turf/simulated/floor/tiled,/area/bridge)
 "aUb" = (/obj/machinery/computer/secure_data,/obj/effect/floor_decal/corner/red/three_quarters{dir = 8},/turf/simulated/floor/tiled,/area/bridge)
 "aUc" = (/obj/structure/table/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/machinery/recharger{pixel_y = 0},/obj/effect/floor_decal/corner/blue{dir = 9},/turf/simulated/floor/tiled,/area/bridge)
 "aUd" = (/obj/effect/floor_decal/corner/blue/three_quarters{dir = 8},/obj/machinery/modular_computer/console/preset/command,/turf/simulated/floor/tiled,/area/bridge)
