@@ -5,12 +5,11 @@
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "case"
 	item_state = "case"
-
-/obj/item/weapon/storage/briefcase/crimekit/New()
-	..()
-	new /obj/item/weapon/storage/box/swabs(src)
-	new /obj/item/weapon/storage/box/fingerprints(src)
-	new /obj/item/weapon/reagent_containers/spray/luminol(src)
-	new /obj/item/device/uv_light(src)
-	new /obj/item/weapon/forensics/sample_kit(src)
-	new /obj/item/weapon/forensics/sample_kit/powder(src)
+	startswith = list(
+		/obj/item/weapon/storage/box/swabs,
+		/obj/item/weapon/storage/box/fingerprints,
+		/obj/item/weapon/reagent_containers/spray/luminol,
+		/obj/item/device/uv_light,
+		/obj/item/weapon/forensics/sample_kit,
+		/obj/item/weapon/forensics/sample_kit/powder,
+		)

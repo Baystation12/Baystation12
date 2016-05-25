@@ -1652,8 +1652,11 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/device/camera_film,
 					/obj/item/device/camera_film,
 					/obj/item/weapon/storage/photo_album,
-					/obj/item/device/reagent_scanner)
-	cost = 35
+					/obj/item/device/reagent_scanner,
+					/obj/item/weapon/storage/briefcase/crimekit,
+					/obj/item/weapon/storage/briefcase/crimekit,
+					)
+	cost = 50
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Forensic equipment"
 	access = access_forensics_lockers
