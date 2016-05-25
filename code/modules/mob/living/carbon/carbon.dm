@@ -335,7 +335,7 @@
 		return
 
 	//actually throw it!
-	src.visible_message("\red [src] has thrown [item].")
+	src.visible_message("<span class='warning'>[src] has thrown [item].</span>")
 
 	if(!src.lastarea)
 		src.lastarea = get_area(src.loc)
