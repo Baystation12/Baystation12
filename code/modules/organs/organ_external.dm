@@ -351,6 +351,53 @@
 
 	return update_damstate()
 
+//Helper proc used by various tools for repairing robot limbs
+/obj/item/organ/external/proc/robo_repair(var/repair_amount, var/damage_type, var/damage_desc, obj/item/tool, mob/living/user)
+	if(!(src.status & ORGAN_ROBOT))
+		return 0
+
+	var/damage_amount
+	switch(damage_type)
+		if(BRUTE) damage_amount = brute_dam
+		if(BURN)  damage_amount = burn_dam
+		else return 0
+
+	if(!damage_amount)
+		if(src.open != 2)
+			user << "<span class='notice'>Nothing to fix!</span>"
+		return 0
+
+	if(damage_amount >= ROBOLIMB_SELF_REPAIR_CAP)
+		user << "<span class='danger'>The damage is far too severe to patch over externally.</span>"
+		return 0
+
+	if(user == src.owner)
+		var/grasp
+		if(user.l_hand == tool && (src.body_part & (ARM_LEFT|HAND_LEFT)))
+			grasp = "l_hand"
+		else if(user.r_hand == tool && (src.body_part & (ARM_RIGHT|HAND_RIGHT)))
+			grasp = "r_hand"
+
+		if(grasp)
+			user << "<span class='warning'>You can't reach your [src.name] while holding [tool] in your [owner.get_bodypart_name(grasp)].</span>"
+			return 0
+
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	if(!do_mob(user, owner, 10))
+		user << "<span class='warning'>You must stand still to do that.</span>"
+		return 0
+
+	switch(damage_type)
+		if(BRUTE) src.heal_damage(repair_amount, 0, 0, 1)
+		if(BURN)  src.heal_damage(0, repair_amount, 0, 1)
+	if(user == src.owner)
+		user.visible_message("<span class='notice'>\The [user] patches [damage_desc] on \his [src.name] with [tool].</span>")
+	else
+		user.visible_message("<span class='notice'>\The [user] patches [damage_desc] on [owner]'s [src.name] with [tool].</span>")
+
+	return 1
+
+
 /*
 This function completely restores a damaged organ to perfect condition.
 */
