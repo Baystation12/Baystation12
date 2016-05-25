@@ -206,4 +206,5 @@
 #define DO_NOT_STORE INFINITY //A special storage "cost" that indicates an item should not be storable
 
 #define DEFAULT_BACKPACK_STORAGE 28
+#define DEFAULT_LARGEBOX_STORAGE 21
 #define DEFAULT_BOX_STORAGE 14
