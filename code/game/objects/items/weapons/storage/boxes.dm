@@ -211,11 +211,6 @@
 	icon_state = "glasses"
 	startswith = list(/obj/item/clothing/glasses/regular = 7)
 
-/obj/item/weapon/storage/box/drinkingglasses
-	name = "box of drinking glasses"
-	desc = "It has a picture of drinking glasses on it."
-	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 6)
-
 /obj/item/weapon/storage/box/cdeathalarm_kit
 	name = "death alarm kit"
 	desc = "Box of stuff used to implant death alarms."

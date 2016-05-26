@@ -115,8 +115,7 @@
 	color = "#C8A5DC"
 	affects_dead = 1 //This can even heal dead people.
 
-	glass_icon_state = "golden_cup"
-	glass_name = "golden cup"
+	glass_name = "liquid gold"
 	glass_desc = "It's magic. We don't have to explain it."
 
 /datum/reagent/adminordrazine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
@@ -204,8 +203,7 @@
 	description = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
 	color = "#E0E8EF"
 
-	glass_icon_state = "glass_clear"
-	glass_name = "glass of holy water"
+	glass_name = "holy water"
 	glass_desc = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
 
 /datum/reagent/water/holywater/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)

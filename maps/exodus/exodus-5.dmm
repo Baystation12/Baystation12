@@ -228,7 +228,7 @@
 "et" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/white,/area/outpost/research/hallway)
 "eu" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/obj/structure/cable/blue{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/blue{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/effect/floor_decal/corner/purple{dir = 9},/turf/simulated/floor/tiled/white,/area/outpost/research/hallway)
 "ev" = (/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/wood,/area/outpost/research/hallway)
-"ew" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/drinkingglasses{pixel_x = 1; pixel_y = 4},/turf/simulated/floor/wood,/area/outpost/research/hallway)
+"ew" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/glasses/square{pixel_x = 1; pixel_y = 4},/turf/simulated/floor/wood,/area/outpost/research/hallway)
 "ex" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/machinery/door/firedoor/border_only,/turf/simulated/floor/plating,/area/outpost/research/hallway)
 "ey" = (/obj/structure/table/standard,/turf/simulated/floor/wood,/area/outpost/research/hallway)
 "ez" = (/turf/simulated/floor/wood,/area/outpost/research/hallway)
