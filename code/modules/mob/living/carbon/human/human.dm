@@ -63,7 +63,7 @@
 			if(eta_status)
 				stat(null, eta_status)
 
-		if (internal)
+		if (istype(internal))
 			if (!internal.air_contents)
 				qdel(internal)
 			else
