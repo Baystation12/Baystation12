@@ -184,11 +184,13 @@ meteor_act
 
 	// Handle striking to cripple.
 	if(user.a_intent == I_DISARM)
-		effective_force /= 2 //half the effective force
+		effective_force *= 0.66 //reduced effective force...
 		if(!..(I, user, effective_force, blocked, hit_zone))
 			return 0
 
-		attack_joint(affecting, I, blocked) //but can dislocate joints
+		//set the dislocate mult less than the effective force mult so that 
+		//dislocating limbs on disarm is a bit easier than breaking limbs on harm
+		attack_joint(affecting, I, effective_force, 0.5, blocked) //...but can dislocate joints
 	else if(!..())
 		return 0
 
@@ -272,14 +274,14 @@ meteor_act
 			if("chest")
 				bloody_body(src)
 
-/mob/living/carbon/human/proc/attack_joint(var/obj/item/organ/external/organ, var/obj/item/W, var/blocked)
+/mob/living/carbon/human/proc/attack_joint(var/obj/item/organ/external/organ, var/obj/item/W, var/effective_force, var/dislocate_mult, var/blocked)
 	if(!organ || (organ.dislocated == 2) || (organ.dislocated == -1) || blocked >= 100)
 		return 0
 	if(W.damtype != BRUTE)
 		return 0
 
 	//want the dislocation chance to be such that the limb is expected to dislocate after dealing a fraction of the damage needed to break the limb
-	var/dislocate_chance = (W.force/2)/(0.5 * organ.min_broken_damage * config.organ_health_multiplier)*100
+	var/dislocate_chance = effective_force/(dislocate_mult * organ.min_broken_damage * config.organ_health_multiplier)*100
 	if(prob(dislocate_chance * blocked_mult(blocked)))
 		visible_message("<span class='danger'>[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
 		organ.dislocate(1)
