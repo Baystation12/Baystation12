@@ -91,7 +91,7 @@
 
 /datum/poster/bay_19
 	icon_state="bsposter19"
-	name = "Respect a Unathi"
+	name = "Respect an Unathi"
 	desc = "This poster depicts a well dressed looking Unathi receiving a prestigious award. It appears to espouse greater co-operation and harmony between the two races."
 
 /datum/poster/bay_20
