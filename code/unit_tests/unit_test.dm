@@ -95,6 +95,15 @@ proc/load_unit_test_changes()
 
 
 proc/initialize_unit_tests()
+	#ifndef UNIT_TEST_COLOURED
+	if(world.system_type != UNIX) // Not a Unix/Linux/etc system, we probably don't want to print color escapes (unless UNIT_TEST_COLOURED was defined to force escapes)
+		ascii_esc = ""
+		ascii_red = ""
+		ascii_green = ""
+		ascii_yellow = ""
+		ascii_reset = ""
+	#endif
+
 	log_unit_test("Initializing Unit Testing")
 
 	//
