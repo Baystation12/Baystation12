@@ -62,21 +62,21 @@
 		return
 
 	var/list/choices = list()
-	for(var/mob/living/M in view(6,src))
+	for(var/mob/living/M in oview(6,src))
 		if(!istype(M,/mob/living/silicon))
 			choices += M
 	choices -= src
 
 	var/mob/living/T = input(src,"Who do you wish to leap at?") as null|anything in choices
 
-	if(!T || !src || src.stat) return
+	if(!T || !isturf(T.loc) || !src || !isturf(loc) || src.stat) return
 
 	if(get_dist(get_turf(T), get_turf(src)) > 4) return
 
 	if(last_special > world.time)
 		return
 
-	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
+	if(incapacitated() || buckled)
 		src << "You cannot leap in your current state."
 		return
 
