@@ -83,7 +83,7 @@
 		var/mob/living/carbon/human/H = target
 		if(prob(poison_per_bite))
 			var/obj/item/organ/external/O = pick(H.organs)
-			if(!(O.status & ORGAN_ROBOT))
+			if(!(O.robotic >= ORGAN_ROBOT))
 				var/eggs = PoolOrNew(/obj/effect/spider/eggcluster/, list(O, src))
 				O.implants += eggs
 

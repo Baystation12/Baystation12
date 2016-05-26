@@ -17,7 +17,7 @@
 	..()
 
 /obj/item/organ/heart/proc/handle_pulse()
-	if(owner.stat == DEAD || status & ORGAN_ROBOT)
+	if(owner.stat == DEAD || robotic >= ORGAN_ROBOT)
 		pulse = PULSE_NONE	//that's it, you're dead (or your metal heart is), nothing can influence your pulse
 		return
 	if(owner.life_tick % 5 == 0)//update pulse every 5 life ticks (~1 tick/sec, depending on server load)

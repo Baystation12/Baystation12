@@ -87,7 +87,7 @@ var/list/organ_cache = list()
 		species = all_species[new_dna.species]
 
 /obj/item/organ/proc/die()
-	if(status & ORGAN_ROBOT)
+	if(robotic >= ORGAN_ROBOT)
 		return
 	damage = max_damage
 	status |= ORGAN_DEAD
@@ -111,7 +111,7 @@ var/list/organ_cache = list()
 	if(istype(loc,/obj/structure/closet/body_bag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer) || istype(loc,/obj/item/weapon/storage/box/freezer))
 		return
 	//Process infections
-	if ((status & ORGAN_ROBOT) || (owner && owner.species && (owner.species.flags & IS_PLANT)))
+	if ((robotic >= ORGAN_ROBOT) || (owner && owner.species && (owner.species.flags & IS_PLANT)))
 		germ_level = 0
 		return
 
@@ -235,7 +235,7 @@ var/list/organ_cache = list()
 
 //Note: external organs have their own version of this proc
 /obj/item/organ/proc/take_damage(amount, var/silent=0)
-	if(src.status & ORGAN_ROBOT)
+	if(src.robotic >= ORGAN_ROBOT)
 		src.damage = between(0, src.damage + (amount * 0.8), max_damage)
 	else
 		src.damage = between(0, src.damage + amount, max_damage)
@@ -250,23 +250,20 @@ var/list/organ_cache = list()
 	damage = max(damage, min_bruised_damage)
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
-	robotic = 2
+	robotic = ORGAN_ROBOT
 	src.status &= ~ORGAN_BROKEN
 	src.status &= ~ORGAN_BLEEDING
 	src.status &= ~ORGAN_SPLINTED
 	src.status &= ~ORGAN_CUT_AWAY
-	src.status |= ORGAN_ROBOT
-	src.status |= ORGAN_ASSISTED
 
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
 	robotize()
-	src.status &= ~ORGAN_ROBOT
-	robotic = 1
+	robotic = ORGAN_ASSISTED
 	min_bruised_damage = 15
 	min_broken_damage = 35
 
 /obj/item/organ/emp_act(severity)
-	if(!(status & ORGAN_ROBOT))
+	if(!(robotic >= ORGAN_ROBOT))
 		return
 	switch (severity)
 		if (1)
@@ -326,8 +323,6 @@ var/list/organ_cache = list()
 	target.internal_organs |= src
 	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src
-	if(robotic)
-		status |= ORGAN_ROBOT
 
 /obj/item/organ/eyes/replaced(var/mob/living/carbon/human/target)
 

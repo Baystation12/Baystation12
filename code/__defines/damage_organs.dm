@@ -29,11 +29,9 @@
 #define ORGAN_BLEEDING   (1<<1)
 #define ORGAN_BROKEN     (1<<2)
 #define ORGAN_DESTROYED  (1<<3)
-#define ORGAN_ROBOT      (1<<4)
-#define ORGAN_SPLINTED   (1<<5)
-#define ORGAN_DEAD       (1<<6)
-#define ORGAN_MUTATED    (1<<7)
-#define ORGAN_ASSISTED   (1<<8)
+#define ORGAN_SPLINTED   (1<<4)
+#define ORGAN_DEAD       (1<<5)
+#define ORGAN_MUTATED    (1<<6)
 
 #define DROPLIMB_EDGE 0
 #define DROPLIMB_BLUNT 1
@@ -41,6 +39,9 @@
 
 // Damage above this value must be repaired with surgery.
 #define ROBOLIMB_SELF_REPAIR_CAP 30
+
+#define ORGAN_ASSISTED 1
+#define ORGAN_ROBOT    2
 
 //Germs and infections.
 #define GERM_LEVEL_AMBIENT  110 // Maximum germ level you can reach by standing still.

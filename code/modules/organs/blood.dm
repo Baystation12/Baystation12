@@ -50,7 +50,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 	//Bleeding out
 	var/blood_max = 0
 	for(var/obj/item/organ/external/temp in organs)
-		if(!(temp.status & ORGAN_BLEEDING) || (temp.status & ORGAN_ROBOT))
+		if(!(temp.status & ORGAN_BLEEDING) || (temp.robotic >= ORGAN_ROBOT))
 			continue
 		for(var/datum/wound/W in temp.wounds) if(W.bleeding())
 			blood_max += W.damage / 40

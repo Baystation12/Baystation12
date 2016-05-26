@@ -497,7 +497,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		var/obj/item/organ/external/S = H.organs_by_name[user.zone_sel.selecting]
 
 		if (!S) return
-		if(!(S.status & ORGAN_ROBOT) || user.a_intent != I_HELP)
+		if(S.robotic < ORGAN_ROBOT || user.a_intent != I_HELP)
 			return ..()
 
 		var/use_amt = min(src.amount, ceil(S.burn_dam/3), 5)

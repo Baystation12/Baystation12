@@ -349,8 +349,9 @@
 			bled = "Bleeding:"
 		if(e.status & ORGAN_BROKEN)
 			AN = "[e.broken_description]:"
-		if(e.status & ORGAN_ROBOT)
-			robot = "Prosthetic:"
+		switch(e.robotic)
+			if(ORGAN_ROBOT) robot = "Prosthetic:"
+			if(ORGAN_ASSISTED) robot = "Augmented:"
 		if(e.open)
 			open = "Open:"
 
