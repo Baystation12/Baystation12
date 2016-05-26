@@ -116,7 +116,7 @@
 
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
-		if(!(affected && !(affected.status & ORGAN_ROBOT)))
+		if(!(affected && !(affected.robotic >= ORGAN_ROBOT)))
 			return 0
 
 		target.op_stage.current_organ = null
@@ -232,7 +232,7 @@
 		if(!istype(O))
 			return 0
 
-		if((affected.status & ORGAN_ROBOT) && !(O.status & ORGAN_ROBOT))
+		if((affected.robotic >= ORGAN_ROBOT) && !(O.robotic >= ORGAN_ROBOT))
 			user << "<span class='danger'>You cannot install a naked organ into a robotic body.</span>"
 			return SURGERY_FAILURE
 
@@ -312,7 +312,7 @@
 		var/list/removable_organs = list()
 		for(var/organ in target.internal_organs_by_name)
 			var/obj/item/organ/I = target.internal_organs_by_name[organ]
-			if(I && (I.status & ORGAN_CUT_AWAY) && !(I.status & ORGAN_ROBOT) && I.parent_organ == target_zone)
+			if(I && (I.status & ORGAN_CUT_AWAY) && !(I.robotic >= ORGAN_ROBOT) && I.parent_organ == target_zone)
 				removable_organs |= organ
 
 		var/organ_to_replace = input(user, "Which organ do you want to reattach?") as null|anything in removable_organs

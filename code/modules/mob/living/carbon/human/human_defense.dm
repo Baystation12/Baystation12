@@ -60,7 +60,7 @@ meteor_act
 				msg_admin_attack("[src.name] ([src.ckey]) was disarmed by a stun effect")
 
 				drop_from_inventory(c_hand)
-				if (affected.status & ORGAN_ROBOT)
+				if (affected.robotic >= ORGAN_ROBOT)
 					emote("me", 1, "drops what they were holding, their [affected.name] malfunctioning!")
 				else
 					var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
@@ -285,7 +285,7 @@ meteor_act
 
 /mob/living/carbon/human/emag_act(var/remaining_charges, mob/user, var/emag_source)
 	var/obj/item/organ/external/affecting = get_organ(user.zone_sel.selecting)
-	if(!affecting || !(affecting.status & ORGAN_ROBOT))
+	if(!affecting || !(affecting.robotic >= ORGAN_ROBOT))
 		user << "<span class='warning'>That limb isn't robotic.</span>"
 		return -1
 	if(affecting.sabotaged)

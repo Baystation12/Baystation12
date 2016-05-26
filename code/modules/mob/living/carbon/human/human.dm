@@ -1040,7 +1040,7 @@
 					src << msg
 
 				organ.take_damage(rand(1,3), 0, 0)
-				if(!(organ.status & ORGAN_ROBOT) && !(species.flags & NO_BLOOD)) //There is no blood in protheses.
+				if(!(organ.robotic >= ORGAN_ROBOT) && !(species.flags & NO_BLOOD)) //There is no blood in protheses.
 					organ.status |= ORGAN_BLEEDING
 					src.adjustToxLoss(rand(1,3))
 
@@ -1221,7 +1221,7 @@
 		user << "<span class='warning'>They are missing that limb.</span>"
 		return 0
 
-	if(affecting.status & ORGAN_ROBOT)
+	if(affecting.robotic >= ORGAN_ROBOT)
 		user << "<span class='warning'>That limb is robotic.</span>"
 		return 0
 

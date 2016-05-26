@@ -129,7 +129,7 @@
 
 		user.visible_message("\blue [user] puts \the [tool] inside [target]'s [get_cavity(affected)] cavity.", \
 		"\blue You put \the [tool] inside [target]'s [get_cavity(affected)] cavity." )
-		if (tool.w_class > get_max_wclass(affected)/2 && prob(50) && !(affected.status & ORGAN_ROBOT))
+		if (tool.w_class > get_max_wclass(affected)/2 && prob(50) && !(affected.robotic >= ORGAN_ROBOT))
 			user << "\red You tear some blood vessels trying to fit such a big object in this cavity."
 			var/datum/wound/internal_bleeding/I = new (10)
 			affected.wounds += I

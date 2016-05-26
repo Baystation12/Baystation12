@@ -16,7 +16,7 @@ var/global/list/limb_icon_cache = list()
 	s_tone = null
 	s_col = null
 	h_col = null
-	if(status & ORGAN_ROBOT)
+	if(robotic >= ORGAN_ROBOT)
 		return
 	if(species && human.species && species.name != human.species.name)
 		return
@@ -30,7 +30,7 @@ var/global/list/limb_icon_cache = list()
 	s_tone = null
 	s_col = null
 	h_col = null
-	if(status & ORGAN_ROBOT)
+	if(robotic >= ORGAN_ROBOT)
 		return
 	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (species.appearance_flags & HAS_SKIN_TONE))
 		s_tone = dna.GetUIValue(DNA_UI_SKIN_TONE)
@@ -101,7 +101,7 @@ var/global/list/limb_icon_cache = list()
 		icon = force_icon
 	else if (!dna)
 		icon = 'icons/mob/human_races/r_human.dmi'
-	else if (status & ORGAN_ROBOT)
+	else if (robotic >= ORGAN_ROBOT)
 		icon = 'icons/mob/human_races/robotic.dmi'
 	else if (status & ORGAN_MUTATED)
 		icon = species.deform

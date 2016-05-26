@@ -17,7 +17,7 @@
 /mob/living/carbon/human/isSynthetic()
 	// If they are 100% robotic, they count as synthetic.
 	for(var/obj/item/organ/external/E in organs)
-		if(!(E.status & ORGAN_ROBOT))
+		if(!(E.robotic >= ORGAN_ROBOT))
 			return 0
 	return 1
 
