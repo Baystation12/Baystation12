@@ -67,11 +67,11 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 		user.unset_machine()
 		return
 
-	var/dat = {"
+	var/list/dat = list({"
 	<html><head><style type='text/css'>
 	td,td a{height:50px;width:50px}table{border-spacing:0;border:none;border-collapse:collapse}td{text-align:center;padding:0;background-repeat:no-repeat;background-position:center center}td.light{background-color:#6cf}td.dark{background-color:#544b50}td.selected{background-color:#c8dbc3}td a{display:table-cell;text-decoration:none;position:relative;line-height:50px;height:50px;width:50 px;vertical-align:middle}
 	</style></head><body><table>
-	"}
+	"})
 	var i, stagger
 	stagger = 0 //so we can have the checkerboard effect
 	for(i=0, i<64, i++)
@@ -99,7 +99,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 
 	if(selected >= 0 && !isobserver(user))
 		dat += "<br><A href='?src=\ref[src];remove=0'>Remove Selected Piece</A>"
-	user << browse(dat,"window=boardgame;size=430x500") // 50px * 8 squares + 30 margin
+	user << browse(jointext(dat, null),"window=boardgame;size=430x500") // 50px * 8 squares + 30 margin
 	onclose(usr, "boardgame")
 
 /obj/item/weapon/board/Topic(href, href_list)
