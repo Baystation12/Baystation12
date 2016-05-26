@@ -297,8 +297,8 @@ var/global/datum/controller/gameticker/ticker
 				else if(!player.mind.assigned_role)
 					continue
 				else
-					player.create_character()
-					qdel(player)
+					if(player.create_character())
+						qdel(player)
 
 
 	proc/collect_minds()

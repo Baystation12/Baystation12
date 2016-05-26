@@ -342,7 +342,7 @@ var/global/datum/controller/occupations/job_master
 						else
 							permitted = 1
 
-						if(G.whitelisted && (G.whitelisted != H.species.name || !is_alien_whitelisted(H, G.whitelisted)))
+						if(G.whitelisted && (G.whitelisted != H.species.name || !is_species_whitelisted(H, G.whitelisted)))
 							permitted = 0
 
 						if(!permitted)

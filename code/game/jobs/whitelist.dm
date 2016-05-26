@@ -49,6 +49,9 @@ var/list/whitelist = list()
 				alien_whitelist[row["ckey"]] = list(row["race"])
 	return 1
 
+/proc/is_species_whitelisted(mob/M, var/species_name)
+	var/datum/species/S = all_species[species_name]
+	return is_alien_whitelisted(M, S)
 
 //todo: admin aliens
 /proc/is_alien_whitelisted(mob/M, var/species)
@@ -56,29 +59,41 @@ var/list/whitelist = list()
 		return 0
 	if(!config.usealienwhitelist)
 		return 1
-	if(istype(species,/datum/species) || istype(species,/datum/language))
-		species = "[species]";
-	if(species == "human" || species == "Human")
-		return 1
 	if(check_rights(R_ADMIN, 0, M))
 		return 1
+
+	if(istype(species,/datum/language))
+		var/datum/language/L = species
+		if(!(L.flags & (WHITELISTED|RESTRICTED)))
+			return 1
+		return whitelist_lookup(L.name, M.ckey)
+
+	if(istype(species,/datum/species))
+		var/datum/species/S = species
+		if(!(S.spawn_flags & (IS_WHITELISTED|IS_RESTRICTED)))
+			return 1
+		return whitelist_lookup(S.get_bodytype(), M.ckey)
+
+	return 0
+
+/proc/whitelist_lookup(var/item, var/ckey)
 	if(!alien_whitelist)
 		return 0
+
 	if(config.usealienwhitelistSQL)
-		var race = lowertext(species)
-		if(!(M.ckey in alien_whitelist))
+		//SQL Whitelist
+		if(!(ckey in alien_whitelist))
 			return 0;
-		var/list/whitelisted = alien_whitelist[M.ckey]
-		if(race in whitelisted)
+		var/list/whitelisted = alien_whitelist[ckey]
+		if(lowertext(item) in whitelisted)
 			return 1
-		return 0
 	else
-		if(M && species)
-			for (var/s in alien_whitelist)
-				if(findtext(s,"[M.ckey] - [species]"))
-					return 1
-				if(findtext(s,"[M.ckey] - All"))
-					return 1
+		//Config File Whitelist
+		for(var/s in alien_whitelist)
+			if(findtext(s,"[ckey] - [item]"))
+				return 1
+			if(findtext(s,"[ckey] - All"))
+				return 1
 	return 0
 
 #undef WHITELISTFILE
