@@ -34,6 +34,9 @@
 	//So this is a workaround. This also makes more sense from an IC standpoint. ~Carn
 	if(user.client && (target in user.client.screen))
 		user << "<span class='notice'>You need to take that [target.name] off before cleaning it.</span>"
+	else if(istype(target,/obj/effect/decal/cleanable/blood))
+		user << "<span class='notice'>You scrub \the [target.name] out.</span>"
+		target.clean_blood() //Blood is a cleanable decal, therefore needs to be accounted for before all cleanable decals.
 	else if(istype(target,/obj/effect/decal/cleanable))
 		user << "<span class='notice'>You scrub \the [target.name] out.</span>"
 		qdel(target)
@@ -46,7 +49,7 @@
 		wet()
 	else
 		user << "<span class='notice'>You clean \the [target.name].</span>"
-		target.clean_blood()
+		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
 	return
 
 //attack_as_weapon
