@@ -33,7 +33,7 @@
 		game_log("DEBUG", text)
 
 	for(var/client/C in admins)
-		if(C.is_preference_enabled(/datum/client_preference/admin/show_debug_logs))
+		if(C.is_preference_enabled(/datum/client_preference/debug/show_debug_logs))
 			C << "DEBUG: [text]"
 
 /proc/log_game(text)
@@ -93,7 +93,7 @@
 	log_debug(text)
 
 //pretty print a direction bitflag, can be useful for debugging.
-/proc/print_dir(var/dir)
+/proc/dir_text(var/dir)
 	var/list/comps = list()
 	if(dir & NORTH) comps += "NORTH"
 	if(dir & SOUTH) comps += "SOUTH"

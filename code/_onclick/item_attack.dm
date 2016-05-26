@@ -24,12 +24,12 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	return
 
 //I would prefer to rename this to attack(), but that would involve touching hundreds of files.
-/obj/item/proc/resolve_attackby(atom/A, mob/user)
+/obj/item/proc/resolve_attackby(atom/A, mob/user, var/click_params)
 	add_fingerprint(user)
-	return A.attackby(src, user)
+	return A.attackby(src, user, click_params)
 
 // No comment
-/atom/proc/attackby(obj/item/W, mob/user)
+/atom/proc/attackby(obj/item/W, mob/user, var/click_params)
 	return
 
 /atom/movable/attackby(obj/item/W, mob/user)

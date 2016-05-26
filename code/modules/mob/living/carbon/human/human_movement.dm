@@ -1,9 +1,8 @@
 /mob/living/carbon/human/movement_delay()
-
-	var/tally = 0
+	var/tally = ..()
 
 	if(species.slowdown)
-		tally = species.slowdown
+		tally += species.slowdown
 
 	if (istype(loc, /turf/space)) return -1 // It's hard to be slowed down in space by... anything
 
@@ -22,9 +21,6 @@
 	var/hungry = (500 - nutrition)/5 // So overeat would be 100 and default level would be 80
 	if (hungry >= 70) tally += hungry/50
 
-	if(wear_suit)
-		tally += wear_suit.slowdown
-
 	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
 		for(var/organ_name in list("l_hand","r_hand","l_arm","r_arm"))
 			var/obj/item/organ/external/E = get_organ(organ_name)
@@ -35,8 +31,11 @@
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
 	else
-		if(shoes)
-			tally += shoes.slowdown
+		for(var/slot = slot_first to slot_last)
+			var/obj/item/I = get_equipped_item(slot)
+			if(I)
+				tally += I.slowdown_general
+				tally += I.slowdown_per_slot[slot]
 
 		for(var/organ_name in list("l_foot","r_foot","l_leg","r_leg"))
 			var/obj/item/organ/external/E = get_organ(organ_name)
@@ -63,7 +62,7 @@
 
 	return (tally+config.human_delay)
 
-/mob/living/carbon/human/Process_Spacemove(var/check_drift = 0)
+/mob/living/carbon/human/Allow_Spacemove(var/check_drift = 0)
 	//Can we act?
 	if(restrained())	return 0
 
@@ -84,9 +83,7 @@
 			return 1
 
 	//If no working jetpack then use the other checks
-	if(..())
-		return 1
-	return 0
+	. = ..()
 
 
 /mob/living/carbon/human/slip_chance(var/prob_slip = 5)
@@ -95,9 +92,9 @@
 
 	//Check hands and mod slip
 	if(!l_hand)	prob_slip -= 2
-	else if(l_hand.w_class <= 2)	prob_slip -= 1
+	else if(l_hand.w_class <= SMALL_ITEM)	prob_slip -= 1
 	if (!r_hand)	prob_slip -= 2
-	else if(r_hand.w_class <= 2)	prob_slip -= 1
+	else if(r_hand.w_class <= SMALL_ITEM)	prob_slip -= 1
 
 	return prob_slip
 

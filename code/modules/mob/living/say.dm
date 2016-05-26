@@ -87,27 +87,30 @@ proc/get_radio_key_from_channel(var/channel)
 /mob/living/proc/is_muzzled()
 	return 0
 
-/mob/living/proc/handle_speech_problems(var/message, var/verb)
-	var/list/returns[3]
-	var/speech_problem_flag = 0
+//Takes a list of the form list(message, verb, whispering) and modifies it as needed
+//Returns 1 if a speech problem was applied, 0 otherwise
+/mob/living/proc/handle_speech_problems(var/list/message_data)
+	var/message = message_data[1]
+	var/verb = message_data[2]
+
+	. = 0
 
 	if((HULK in mutations) && health >= 25 && length(message))
 		message = "[uppertext(message)]!!!"
 		verb = pick("yells","roars","hollers")
-		speech_problem_flag = 1
+		message_data[3] = 0
+		. = 1
 	if(slurring)
 		message = slur(message)
 		verb = pick("slobbers","slurs")
-		speech_problem_flag = 1
+		. = 1
 	if(stuttering)
 		message = stutter(message)
 		verb = pick("stammers","stutters")
-		speech_problem_flag = 1
+		. = 1
 
-	returns[1] = message
-	returns[2] = verb
-	returns[3] = speech_problem_flag
-	return returns
+	message_data[1] = message
+	message_data[2] = verb
 
 /mob/living/proc/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	if(message_mode == "intercom")
@@ -177,12 +180,13 @@ proc/get_radio_key_from_channel(var/channel)
 
 	message = trim_left(message)
 
-	if(!(speaking && (speaking.flags & NO_STUTTER)))
-		message = handle_autohiss(message, speaking)
+	message = handle_autohiss(message, speaking)
 
-		var/list/handle_s = handle_speech_problems(message, verb)
-		message = handle_s[1]
-		verb = handle_s[2]
+	if(!(speaking && (speaking.flags & NO_STUTTER)))
+		var/list/message_data = list(message, verb, 0)
+		if(handle_speech_problems(message_data))
+			message = message_data[1]
+			verb = message_data[2]
 
 	if(!message || message == "")
 		return 0
@@ -238,27 +242,10 @@ proc/get_radio_key_from_channel(var/channel)
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
-		//DO NOT FUCKING CHANGE THIS TO GET_OBJ_OR_MOB_AND_BULLSHIT() -- Hugs and Kisses ~Ccomp
-		var/list/hear = hear(message_range,T)
-		var/list/hearturfs = list()
+		var/list/results = get_mobs_and_objs_in_view_fast(T, message_range)
+		listening = results["mobs"]
+		listening_obj = results["objs"]
 
-		for(var/I in hear)
-			if(ismob(I))
-				var/mob/M = I
-				listening += M
-				hearturfs += M.locs[1]
-			else if(isobj(I))
-				var/obj/O = I
-				hearturfs += O.locs[1]
-				listening_obj |= O
-
-
-		for(var/mob/M in player_list)
-			if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
-				listening |= M
-				continue
-			if(M.loc && M.locs[1] in hearturfs)
-				listening |= M
 
 	var/speech_bubble_test = say_test(message)
 	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")

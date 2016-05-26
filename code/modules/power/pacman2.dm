@@ -7,7 +7,7 @@
 	desc = "P.A.C.M.A.N. type II portable generator. Uses liquid phoron as a fuel source."
 	power_gen = 4500
 	var/obj/item/weapon/tank/phoron/P = null
-	var/board_path = "/obj/item/weapon/circuitboard/pacman2"
+	var/board_path = /obj/item/weapon/circuitboard/pacman2
 	var/emagged = 0
 	var/heat = 0
 /*

@@ -62,11 +62,22 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/reagent_containers/food/condiment/flour,
 					/obj/item/weapon/reagent_containers/food/condiment/flour,
 					/obj/item/weapon/reagent_containers/food/condiment/flour,
+					/obj/item/weapon/reagent_containers/food/condiment/flour,
+					/obj/item/weapon/reagent_containers/food/condiment/flour,
 					/obj/item/weapon/reagent_containers/food/drinks/milk,
 					/obj/item/weapon/reagent_containers/food/drinks/milk,
+					/obj/item/weapon/reagent_containers/food/drinks/milk,
+					/obj/item/weapon/reagent_containers/food/drinks/milk,
+					/obj/item/weapon/reagent_containers/food/drinks/soymilk,
+					/obj/item/weapon/reagent_containers/food/drinks/soymilk,
+					/obj/item/weapon/storage/fancy/egg_box,
 					/obj/item/weapon/storage/fancy/egg_box,
 					/obj/item/weapon/reagent_containers/food/snacks/tofu,
 					/obj/item/weapon/reagent_containers/food/snacks/tofu,
+					/obj/item/weapon/reagent_containers/food/snacks/tofu,
+					/obj/item/weapon/reagent_containers/food/snacks/tofu,
+					/obj/item/weapon/reagent_containers/food/snacks/meat,
+					/obj/item/weapon/reagent_containers/food/snacks/meat,
 					/obj/item/weapon/reagent_containers/food/snacks/meat,
 					/obj/item/weapon/reagent_containers/food/snacks/meat
 					)
@@ -132,19 +143,19 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/party
 	name = "Party equipment"
-	contains = list(/obj/item/weapon/storage/box/drinkingglasses,
-					/obj/item/weapon/reagent_containers/food/drinks/shaker,
-					/obj/item/weapon/reagent_containers/food/drinks/flask/barflask,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/patron,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager,
-					/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
-					/obj/item/weapon/lipstick/random,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer)
+	contains = list(
+			/obj/item/weapon/storage/box/drinkingglasses,
+			/obj/item/weapon/reagent_containers/food/drinks/shaker,
+			/obj/item/weapon/reagent_containers/food/drinks/flask/barflask,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/patron,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey,
+			/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
+			/obj/item/weapon/lipstick/random,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale = 2,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer = 4,
+			/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass = 4,
+			)
 	cost = 20
 	containertype = /obj/structure/closet/crate
 	containername = "\improper Party equipment"
@@ -393,9 +404,9 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/seeds/random,
 					/obj/item/seeds/kudzuseed)
 	cost = 15
-	containertype = /obj/structure/closet/crate/hydroponics
+	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Exotic Seeds crate"
-	access = access_hydroponics
+	access = access_xenobiology
 	group = "Hydroponics"
 
 /datum/supply_packs/medical
@@ -464,7 +475,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/virusdish/random,
 					/obj/item/weapon/virusdish/random)
 	cost = 25
-	containertype = "/obj/structure/closet/crate/secure"
+	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Virus sample crate"
 	access = access_cmo
 	group = "Science"
@@ -583,20 +594,38 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/solar_assembly,
 					/obj/item/solar_assembly,
 					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly, // 21 Solar Assemblies. 1 Extra for the controller,
+					/obj/item/solar_assembly, 
 					/obj/item/weapon/circuitboard/solar_control,
 					/obj/item/weapon/tracker_electronics,
-					/obj/item/weapon/paper/solar)
-	cost = 20
+					/obj/item/weapon/paper/solar,
+					) // 14 Solar Assemblies
+	cost = 15
 	containertype = /obj/structure/closet/crate
-	containername = "\improper Solar pack crate"
+	containername = "\improper Solar Pack crate"
+	group = "Engineering"
+
+/datum/supply_packs/solar_assembly
+	name = "Solar Assembly crate"
+	contains  = list(/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					/obj/item/solar_assembly,
+					) // 16 Solar Assemblies
+	cost = 10
+	containertype = /obj/structure/closet/crate
+	containername = "\improper Solar Assembly crate"
 	group = "Engineering"
 
 /datum/supply_packs/engine
@@ -747,7 +776,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Security"
 
 /datum/supply_packs/eweapons
-	name = "Experimental weapons crate"
+	name = "Advanced Energy Weapons crate"
 	contains = list(/obj/item/weapon/gun/energy/xray,
 					/obj/item/weapon/gun/energy/xray,
 					/obj/item/weapon/shield/energy,
@@ -756,7 +785,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/suit/armor/laserproof)
 	cost = 125
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "\improper Experimental weapons crate"
+	containername = "\improper Advanced Energy Weapons crate"
 	access = access_heads
 	group = "Security"
 
@@ -999,7 +1028,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	/obj/item/weapon/wrapping_paper,
 	/obj/item/weapon/wrapping_paper)
 	cost = 10
-	containertype = "/obj/structure/closet/crate"
+	containertype = /obj/structure/closet/crate
 	containername = "\improper Arts and Crafts crate"
 	group = "Operations"
 
@@ -1031,7 +1060,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	/obj/item/weapon/storage/box,
 	/obj/item/weapon/storage/box)
 	cost = 10
-	containertype = "/obj/structure/closet/crate"
+	containertype = /obj/structure/closet/crate
 	containername = "\improper Empty box crate"
 	group = "Supply"
 
@@ -1049,7 +1078,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/bonesetter,
 					/obj/item/weapon/circular_saw)
 	cost = 25
-	containertype = "/obj/structure/closet/crate/secure"
+	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Surgery crate"
 	access = access_medical
 	group = "Medical"
@@ -1066,7 +1095,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/storage/belt/medical,
 					/obj/item/weapon/storage/belt/medical)
 	cost = 15
-	containertype = "/obj/structure/closet/crate"
+	containertype = /obj/structure/closet/crate
 	containername = "\improper Sterile equipment crate"
 	group = "Medical"
 
@@ -1474,23 +1503,14 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/head/hasturhood,
 					/obj/item/clothing/head/powdered_wig,
 					/obj/item/clothing/head/hairflower,
+					/obj/item/clothing/head/hairflower/yellow,
+					/obj/item/clothing/head/hairflower/blue,
+					/obj/item/clothing/head/hairflower/pink,
 					/obj/item/clothing/mask/gas/owl_mask,
 					/obj/item/clothing/mask/gas/monkeymask,
 					/obj/item/clothing/head/helmet/gladiator,
 					/obj/item/clothing/head/ushanka)
 	group = "Miscellaneous"
-
-/datum/supply_packs/randomised/webbing
-	name = "Webbing crate"
-	num_contained = 1
-	contains = list(/obj/item/clothing/accessory/holster,
-					/obj/item/clothing/accessory/storage/brown_vest,
-					/obj/item/clothing/accessory/storage/webbing,
-					/obj/item/clothing/accessory/storage)
-	cost = 15
-	containertype = /obj/structure/closet/crate
-	containername = "\improper Webbing crate"
-	group = "Operations"
 
 /datum/supply_packs/spare_pda
 	name = "Spare PDAs"
@@ -1574,3 +1594,605 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 		/obj/item/device/kit/paint/gygax/recitence
 		)
 	name = "Random Gygax exosuit modkit"
+
+/datum/supply_packs/randomised/webbing
+	name = "Webbing crate"
+	num_contained = 4
+	contains = list(/obj/item/clothing/accessory/holster,
+					/obj/item/clothing/accessory/storage/black_vest,
+					/obj/item/clothing/accessory/storage/brown_vest,
+					/obj/item/clothing/accessory/storage/white_vest,
+					/obj/item/clothing/accessory/storage/webbing)
+	cost = 15
+	containertype = /obj/structure/closet/crate
+	containername = "\improper Webbing crate"
+	group = "Operations"
+
+/datum/supply_packs/randomised/holster
+	name = "Holster crate"
+	num_contained = 4
+	contains = list(/obj/item/clothing/accessory/holster,
+					/obj/item/clothing/accessory/holster/armpit,
+					/obj/item/clothing/accessory/holster/waist,
+					/obj/item/clothing/accessory/holster/hip)
+	cost = 15
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Holster crate"
+	access = access_security
+	group = "Security"
+
+/datum/supply_packs/securityextragear
+	name = "Security surplus equipment"
+	contains = list(/obj/item/weapon/storage/belt/security,
+					/obj/item/weapon/storage/belt/security,
+					/obj/item/weapon/storage/belt/security,
+					/obj/item/clothing/glasses/sunglasses/sechud,
+					/obj/item/clothing/glasses/sunglasses/sechud,
+					/obj/item/clothing/glasses/sunglasses/sechud)
+	cost = 25
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Security surplus equipment"
+	access = access_security
+	group = "Security"
+
+/datum/supply_packs/detectivegear
+	name = "Forensic investigation equipment"
+	contains = list(/obj/item/weapon/storage/box/evidence,
+					/obj/item/weapon/storage/box/evidence,
+					/obj/item/weapon/cartridge/detective,
+					/obj/item/device/radio/headset/headset_sec,
+					/obj/item/taperoll/police,
+					/obj/item/clothing/glasses/sunglasses,
+					/obj/item/device/camera,
+					/obj/item/weapon/folder/red,
+					/obj/item/weapon/folder/blue,
+					/obj/item/clothing/gloves/black,
+					/obj/item/device/taperecorder,
+					/obj/item/device/mass_spectrometer,
+					/obj/item/device/camera_film,
+					/obj/item/device/camera_film,
+					/obj/item/weapon/storage/photo_album,
+					/obj/item/device/reagent_scanner,
+					/obj/item/weapon/storage/briefcase/crimekit,
+					/obj/item/weapon/storage/briefcase/crimekit,
+					)
+	cost = 50
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Forensic equipment"
+	access = access_forensics_lockers
+	group = "Security"
+
+/datum/supply_packs/detectiveclothes
+	name = "Investigation apparel"
+	contains = list(/obj/item/clothing/under/det/black,
+					/obj/item/clothing/under/det/black,
+					/obj/item/clothing/under/det/grey,
+					/obj/item/clothing/under/det/grey,
+					/obj/item/clothing/head/det/grey,
+					/obj/item/clothing/head/det/grey,
+					/obj/item/clothing/under/det,
+					/obj/item/clothing/under/det,
+					/obj/item/clothing/head/det,
+					/obj/item/clothing/head/det,
+					/obj/item/clothing/suit/storage/det_trench,
+					/obj/item/clothing/suit/storage/det_trench/grey,
+					/obj/item/clothing/suit/storage/forensics/red,
+					/obj/item/clothing/suit/storage/forensics/blue,
+					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/gloves/black)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Investigation clothing"
+	access = access_forensics_lockers
+	group = "Security"
+
+/datum/supply_packs/officergear
+	name = "Officer equipment"
+	contains = list(/obj/item/clothing/suit/storage/vest/officer,
+					/obj/item/clothing/head/helmet,
+					/obj/item/weapon/cartridge/security,
+					/obj/item/clothing/accessory/badge/holo,
+					/obj/item/clothing/accessory/badge/holo/cord,
+					/obj/item/device/radio/headset/headset_sec,
+					/obj/item/weapon/storage/belt/security,
+					/obj/item/device/flash,
+					/obj/item/weapon/reagent_containers/spray/pepper,
+					/obj/item/weapon/grenade/flashbang,
+					/obj/item/weapon/melee/baton/loaded,
+					/obj/item/clothing/glasses/sunglasses/sechud,
+					/obj/item/taperoll/police,
+					/obj/item/clothing/gloves/black,
+					/obj/item/device/hailer,
+					/obj/item/device/flashlight/flare,
+					/obj/item/clothing/accessory/storage/black_vest,
+					/obj/item/clothing/head/soft/sec/corp,
+					/obj/item/clothing/under/rank/security/corp,
+					/obj/item/weapon/gun/energy/taser)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Officer equipment"
+	access = access_brig
+	group = "Security"
+
+/datum/supply_packs/wardengear
+	name = "Warden equipment"
+	contains = list(/obj/item/clothing/suit/storage/vest/warden,
+					/obj/item/clothing/under/rank/warden,
+					/obj/item/clothing/under/rank/warden/corp,
+					/obj/item/clothing/suit/armor/vest/warden,
+					/obj/item/weapon/cartridge/security,
+					/obj/item/device/radio/headset/headset_sec,
+					/obj/item/clothing/glasses/sunglasses/sechud,
+					/obj/item/taperoll/police,
+					/obj/item/device/hailer,
+					/obj/item/weapon/storage/box/flashbangs,
+					/obj/item/weapon/storage/belt/security,
+					/obj/item/weapon/reagent_containers/spray/pepper,
+					/obj/item/weapon/melee/baton/loaded,
+					/obj/item/weapon/storage/box/holobadge,
+					/obj/item/clothing/head/beret/sec/corporate/warden)
+	cost = 45
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Warden equipment"
+	access = access_armory
+	group = "Security"
+
+/datum/supply_packs/headofsecgear
+	name = "Head of security equipment"
+	contains = list(/obj/item/clothing/suit/storage/vest/hos,
+					/obj/item/clothing/under/rank/head_of_security/corp,
+					/obj/item/clothing/suit/armor/hos,
+					/obj/item/weapon/cartridge/hos,
+					/obj/item/device/radio/headset/heads/hos,
+					/obj/item/clothing/glasses/sunglasses/sechud,
+					/obj/item/weapon/storage/belt/security,
+					/obj/item/device/flash,
+					/obj/item/device/hailer,
+					/obj/item/clothing/accessory/holster/waist,
+					/obj/item/weapon/melee/telebaton,
+					/obj/item/clothing/head/beret/sec/corporate/hos)
+	cost = 65
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Head of security equipment"
+	access = access_hos
+	group = "Security"
+
+/datum/supply_packs/securityclothing
+	name = "Security uniform crate"
+	contains = list(/obj/item/weapon/storage/backpack/satchel_sec,
+					/obj/item/weapon/storage/backpack/satchel_sec,
+					/obj/item/weapon/storage/backpack/security,
+					/obj/item/weapon/storage/backpack/security,
+					/obj/item/clothing/accessory/armband,
+					/obj/item/clothing/accessory/armband,
+					/obj/item/clothing/accessory/armband,
+					/obj/item/clothing/accessory/armband,
+					/obj/item/clothing/under/rank/security,
+					/obj/item/clothing/under/rank/security,
+					/obj/item/clothing/under/rank/security,
+					/obj/item/clothing/under/rank/security,
+					/obj/item/clothing/under/rank/security2,
+					/obj/item/clothing/under/rank/security2,
+					/obj/item/clothing/under/rank/security2,
+					/obj/item/clothing/under/rank/security2,
+					/obj/item/clothing/under/rank/warden,
+					/obj/item/clothing/under/rank/head_of_security,
+					/obj/item/clothing/suit/armor/hos/jensen,
+					/obj/item/clothing/head/soft/sec,
+					/obj/item/clothing/head/soft/sec,
+					/obj/item/clothing/head/soft/sec,
+					/obj/item/clothing/head/soft/sec,
+					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/gloves/black,
+					/obj/item/weapon/storage/box/holobadge)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Security uniform crate"
+	access = access_security
+	group = "Security"
+
+/datum/supply_packs/navybluesecurityclothing
+	name = "Navy blue security uniform crate"
+	contains = list(/obj/item/weapon/storage/backpack/satchel_sec,
+					/obj/item/weapon/storage/backpack/satchel_sec,
+					/obj/item/weapon/storage/backpack/security,
+					/obj/item/weapon/storage/backpack/security,
+					/obj/item/clothing/under/rank/security/navyblue,
+					/obj/item/clothing/under/rank/security/navyblue,
+					/obj/item/clothing/under/rank/security/navyblue,
+					/obj/item/clothing/under/rank/security/navyblue,
+					/obj/item/clothing/suit/security/navyofficer,
+					/obj/item/clothing/suit/security/navyofficer,
+					/obj/item/clothing/suit/security/navyofficer,
+					/obj/item/clothing/suit/security/navyofficer,
+					/obj/item/clothing/under/rank/warden/navyblue,
+					/obj/item/clothing/suit/security/navywarden,
+					/obj/item/clothing/under/rank/head_of_security/navyblue,
+					/obj/item/clothing/suit/security/navyhos,
+					/obj/item/clothing/head/beret/sec/navy/officer,
+					/obj/item/clothing/head/beret/sec/navy/officer,
+					/obj/item/clothing/head/beret/sec/navy/officer,
+					/obj/item/clothing/head/beret/sec/navy/officer,
+					/obj/item/clothing/head/beret/sec/navy/warden,
+					/obj/item/clothing/head/beret/sec/navy/hos,
+					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/gloves/black,
+					/obj/item/weapon/storage/box/holobadge)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Navy blue security uniform crate"
+	access = access_security
+	group = "Security"
+
+/datum/supply_packs/corporatesecurityclothing
+	name = "Corporate security uniform crate"
+	contains = list(/obj/item/weapon/storage/backpack/satchel_sec,
+					/obj/item/weapon/storage/backpack/satchel_sec,
+					/obj/item/weapon/storage/backpack/security,
+					/obj/item/weapon/storage/backpack/security,
+					/obj/item/clothing/under/rank/security/corp,
+					/obj/item/clothing/under/rank/security/corp,
+					/obj/item/clothing/under/rank/security/corp,
+					/obj/item/clothing/under/rank/security/corp,
+					/obj/item/clothing/head/soft/sec/corp,
+					/obj/item/clothing/head/soft/sec/corp,
+					/obj/item/clothing/head/soft/sec/corp,
+					/obj/item/clothing/head/soft/sec/corp,
+					/obj/item/clothing/under/rank/warden/corp,
+					/obj/item/clothing/under/rank/head_of_security/corp,
+					/obj/item/clothing/head/beret/sec,
+					/obj/item/clothing/head/beret/sec,
+					/obj/item/clothing/head/beret/sec,
+					/obj/item/clothing/head/beret/sec,
+					/obj/item/clothing/head/beret/sec/corporate/warden,
+					/obj/item/clothing/head/beret/sec/corporate/hos,
+					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/gloves/black,
+					/obj/item/weapon/storage/box/holobadge)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Corporate security uniform crate"
+	access = access_security
+	group = "Security"
+
+/datum/supply_packs/securitybiosuit
+	name = "Security biohazard gear"
+	contains = list(/obj/item/clothing/head/bio_hood/security,
+					/obj/item/clothing/under/rank/security,
+					/obj/item/clothing/suit/bio_suit/security,
+					/obj/item/clothing/shoes/white,
+					/obj/item/clothing/mask/gas,
+					/obj/item/weapon/tank/oxygen,
+					/obj/item/clothing/gloves/latex)
+	cost = 35
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Security biohazard gear"
+	access = access_security
+	group = "Security"
+
+/datum/supply_packs/medicalextragear
+	name = "Medical surplus equipment"
+	contains = list(/obj/item/weapon/storage/belt/medical,
+					/obj/item/weapon/storage/belt/medical,
+					/obj/item/weapon/storage/belt/medical,
+					/obj/item/clothing/glasses/hud/health,
+					/obj/item/clothing/glasses/hud/health,
+					/obj/item/clothing/glasses/hud/health)
+	cost = 15
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Medical surplus equipment"
+	access = access_medical
+	group = "Medical"
+
+/datum/supply_packs/cmogear
+	name = "Chief medical officer equipment"
+	contains = list(/obj/item/weapon/storage/belt/medical,
+					/obj/item/device/radio/headset/heads/cmo,
+					/obj/item/clothing/under/rank/chief_medical_officer,
+					/obj/item/weapon/reagent_containers/hypospray,
+					/obj/item/clothing/accessory/stethoscope,
+					/obj/item/clothing/glasses/hud/health,
+					/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
+					/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
+					/obj/item/clothing/mask/surgical,
+					/obj/item/clothing/shoes/white,
+					/obj/item/weapon/cartridge/cmo,
+					/obj/item/clothing/gloves/latex,
+					/obj/item/device/healthanalyzer,
+					/obj/item/device/flashlight/pen,
+					/obj/item/weapon/reagent_containers/syringe)
+	cost = 60
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Chief medical officer equipment"
+	access = access_cmo
+	group = "Medical"
+
+/datum/supply_packs/doctorgear
+	name = "Medical Doctor equipment"
+	contains = list(/obj/item/weapon/storage/belt/medical,
+					/obj/item/device/radio/headset/headset_med,
+					/obj/item/clothing/under/rank/medical,
+					/obj/item/clothing/accessory/stethoscope,
+					/obj/item/clothing/glasses/hud/health,
+					/obj/item/clothing/suit/storage/toggle/labcoat,
+					/obj/item/clothing/mask/surgical,
+					/obj/item/weapon/storage/firstaid/adv,
+					/obj/item/clothing/shoes/white,
+					/obj/item/weapon/cartridge/medical,
+					/obj/item/clothing/gloves/latex,
+					/obj/item/device/healthanalyzer,
+					/obj/item/device/flashlight/pen,
+					/obj/item/weapon/reagent_containers/syringe)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Medical Doctor equipment"
+	access = access_medical_equip
+	group = "Medical"
+
+/datum/supply_packs/chemistgear
+	name = "Chemist equipment"
+	contains = list(/obj/item/weapon/storage/box/beakers,
+					/obj/item/device/radio/headset/headset_med,
+					/obj/item/weapon/storage/box/autoinjectors,
+					/obj/item/clothing/under/rank/chemist,
+					/obj/item/clothing/glasses/science,
+					/obj/item/clothing/suit/storage/toggle/labcoat/chemist,
+					/obj/item/clothing/mask/surgical,
+					/obj/item/clothing/shoes/white,
+					/obj/item/weapon/cartridge/chemistry,
+					/obj/item/clothing/gloves/latex,
+					/obj/item/weapon/reagent_containers/dropper,
+					/obj/item/device/healthanalyzer,
+					/obj/item/weapon/storage/box/pillbottles,
+					/obj/item/weapon/reagent_containers/syringe)
+	cost = 15
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Chemist equipment"
+	access = access_chemistry
+	group = "Medical"
+
+/datum/supply_packs/paramedicgear
+	name = "Paramedic equipment"
+	contains = list(/obj/item/weapon/storage/belt/medical/emt,
+					/obj/item/device/radio/headset/headset_med,
+					/obj/item/clothing/under/rank/medical/black,
+					/obj/item/clothing/accessory/armband/medgreen,
+					/obj/item/clothing/glasses/hud/health,
+					/obj/item/clothing/suit/storage/toggle/labcoat,
+					/obj/item/clothing/under/rank/medical/paramedic,
+					/obj/item/clothing/suit/storage/toggle/fr_jacket,
+					/obj/item/clothing/mask/gas,
+					/obj/item/clothing/under/rank/medical/paramedic,
+					/obj/item/clothing/accessory/stethoscope,
+					/obj/item/weapon/storage/firstaid/adv,
+					/obj/item/clothing/shoes/jackboots,
+					/obj/item/clothing/gloves/latex,
+					/obj/item/device/healthanalyzer,
+					/obj/item/weapon/cartridge/medical,
+					/obj/item/device/flashlight/pen,
+					/obj/item/weapon/reagent_containers/syringe,
+					/obj/item/clothing/accessory/storage/white_vest)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Paramedic equipment"
+	access = access_medical_equip
+	group = "Medical"
+
+/datum/supply_packs/psychiatristgear
+	name = "Psychiatrist equipment"
+	contains = list(/obj/item/clothing/under/rank/psych,
+					/obj/item/device/radio/headset/headset_med,
+					/obj/item/clothing/under/rank/psych/turtleneck,
+					/obj/item/clothing/shoes/laceup,
+					/obj/item/clothing/suit/storage/toggle/labcoat,
+					/obj/item/clothing/shoes/white,
+					/obj/item/weapon/clipboard,
+					/obj/item/weapon/folder/white,
+					/obj/item/weapon/pen,
+					/obj/item/weapon/cartridge/medical)
+	cost = 15
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Psychiatrist equipment"
+	access = access_psychiatrist
+	group = "Medical"
+
+/*
+/datum/supply_packs/geneticistgear
+	name = "Geneticist equipment"
+	contains = list(/obj/item/weapon/storage/belt/medical,
+					/obj/item/device/radio/headset/headset_medsci,
+					/obj/item/clothing/under/rank/geneticist,
+					/obj/item/clothing/accessory/stethoscope,
+					/obj/item/clothing/suit/storage/toggle/labcoat/genetics,
+					/obj/item/clothing/mask/surgical,
+					/obj/item/clothing/shoes/white,
+					/obj/item/clothing/gloves/latex,
+					/obj/item/weapon/cartridge/medical,
+					/obj/item/device/healthanalyzer,
+					/obj/item/device/flashlight/pen,
+					/obj/item/weapon/reagent_containers/syringe)
+	cost = 15
+	containertype = /obj/structure/closet/crate/secure"
+	containername = "\improper Geneticist equipment"
+	access = access_genetics
+	group = "Medical"
+*/
+
+/datum/supply_packs/medicalscrubs
+	name = "Medical scrubs"
+	contains = list(/obj/item/clothing/shoes/white,
+					/obj/item/clothing/shoes/white,
+					/obj/item/clothing/shoes/white,
+					/obj/item/clothing/under/rank/medical/blue,
+					/obj/item/clothing/under/rank/medical/blue,
+					/obj/item/clothing/under/rank/medical/blue,
+					/obj/item/clothing/under/rank/medical/green,
+					/obj/item/clothing/under/rank/medical/green,
+					/obj/item/clothing/under/rank/medical/green,
+					/obj/item/clothing/under/rank/medical/purple,
+					/obj/item/clothing/under/rank/medical/purple,
+					/obj/item/clothing/under/rank/medical/purple,
+					/obj/item/clothing/under/rank/medical/black,
+					/obj/item/clothing/under/rank/medical/black,
+					/obj/item/clothing/under/rank/medical/black,
+					/obj/item/clothing/head/surgery,
+					/obj/item/clothing/head/surgery,
+					/obj/item/clothing/head/surgery,
+					/obj/item/clothing/head/surgery/purple,
+					/obj/item/clothing/head/surgery/purple,
+					/obj/item/clothing/head/surgery/purple,
+					/obj/item/clothing/head/surgery/blue,
+					/obj/item/clothing/head/surgery/blue,
+					/obj/item/clothing/head/surgery/blue,
+					/obj/item/clothing/head/surgery/green,
+					/obj/item/clothing/head/surgery/green,
+					/obj/item/clothing/head/surgery/green,
+					/obj/item/weapon/storage/box/masks,
+					/obj/item/weapon/storage/box/gloves)
+	cost = 15
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Medical scrubs crate"
+	access = access_medical_equip
+	group = "Medical"
+
+/datum/supply_packs/autopsy
+	name = "Autopsy equipment"
+	contains = list(/obj/item/weapon/folder/white,
+					/obj/item/device/camera,
+					/obj/item/device/camera_film,
+					/obj/item/device/camera_film,
+					/obj/item/weapon/autopsy_scanner,
+					/obj/item/weapon/scalpel,
+					/obj/item/weapon/storage/box/masks,
+					/obj/item/weapon/storage/box/gloves,
+					/obj/item/weapon/pen)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Autopsy equipment crate"
+	access = access_morgue
+	group = "Medical"
+
+/datum/supply_packs/medicaluniforms
+	name = "Medical uniforms"
+	contains = list(/obj/item/clothing/shoes/white,
+					/obj/item/clothing/shoes/white,
+					/obj/item/clothing/shoes/white,
+					/obj/item/clothing/under/rank/chief_medical_officer,
+					/obj/item/clothing/under/rank/geneticist,
+					/obj/item/clothing/under/rank/virologist,
+					/obj/item/clothing/under/rank/nursesuit,
+					/obj/item/clothing/under/rank/nurse,
+					/obj/item/clothing/under/rank/orderly,
+					/obj/item/clothing/under/rank/medical,
+					/obj/item/clothing/under/rank/medical,
+					/obj/item/clothing/under/rank/medical,
+					/obj/item/clothing/under/rank/medical/paramedic,
+					/obj/item/clothing/under/rank/medical/paramedic,
+					/obj/item/clothing/under/rank/medical/paramedic,
+					/obj/item/clothing/suit/storage/toggle/labcoat,
+					/obj/item/clothing/suit/storage/toggle/labcoat,
+					/obj/item/clothing/suit/storage/toggle/labcoat,
+					/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
+					/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
+					/obj/item/clothing/suit/storage/toggle/labcoat/genetics,
+					/obj/item/clothing/suit/storage/toggle/labcoat/virologist,
+					/obj/item/clothing/suit/storage/toggle/labcoat/chemist,
+					/obj/item/weapon/storage/box/masks,
+					/obj/item/weapon/storage/box/gloves)
+	cost = 15
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Medical uniform crate"
+	access = access_medical_equip
+	group = "Medical"
+
+/datum/supply_packs/medicalbiosuits
+	name = "Medical biohazard gear"
+	contains = list(/obj/item/clothing/head/bio_hood,
+					/obj/item/clothing/head/bio_hood,
+					/obj/item/clothing/head/bio_hood,
+					/obj/item/clothing/suit/bio_suit,
+					/obj/item/clothing/suit/bio_suit,
+					/obj/item/clothing/suit/bio_suit,
+					/obj/item/clothing/head/bio_hood/virology,
+					/obj/item/clothing/suit/bio_suit/virology,
+					/obj/item/clothing/suit/bio_suit/cmo,
+					/obj/item/clothing/head/bio_hood/cmo,
+					/obj/item/clothing/mask/gas,
+					/obj/item/clothing/mask/gas,
+					/obj/item/clothing/mask/gas,
+					/obj/item/clothing/mask/gas,
+					/obj/item/clothing/mask/gas,
+					/obj/item/weapon/tank/oxygen,
+					/obj/item/weapon/tank/oxygen,
+					/obj/item/weapon/tank/oxygen,
+					/obj/item/weapon/tank/oxygen,
+					/obj/item/weapon/tank/oxygen,
+					/obj/item/weapon/storage/box/masks,
+					/obj/item/weapon/storage/box/gloves)
+	cost = 50
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Medical biohazard equipment"
+	access = access_medical_equip
+	group = "Medical"
+
+/datum/supply_packs/portablefreezers
+	name = "Portable freezers crate"
+	contains = list(/obj/item/weapon/storage/box/freezer,
+					/obj/item/weapon/storage/box/freezer,
+					/obj/item/weapon/storage/box/freezer,
+					/obj/item/weapon/storage/box/freezer,
+					/obj/item/weapon/storage/box/freezer,
+					/obj/item/weapon/storage/box/freezer,
+					/obj/item/weapon/storage/box/freezer)
+	cost = 25
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Portable freezers"
+	access = access_medical_equip
+	group = "Medical"
+
+/datum/supply_packs/minergear
+	name = "Shaft miner equipment"
+	contains = list(/obj/item/weapon/storage/backpack/industrial,
+					/obj/item/weapon/storage/backpack/satchel_eng,
+					/obj/item/device/radio/headset/headset_cargo,
+					/obj/item/clothing/under/rank/miner,
+					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/shoes/black,
+					/obj/item/device/analyzer,
+					/obj/item/weapon/storage/bag/ore,
+					/obj/item/device/flashlight/lantern,
+					/obj/item/weapon/shovel,
+					/obj/item/weapon/pickaxe,
+					/obj/item/weapon/mining_scanner,
+					/obj/item/clothing/glasses/material,
+					/obj/item/clothing/glasses/meson)
+	cost = 15
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Shaft miner equipment"
+	access = access_mining
+	group = "Supply"
+
+/datum/supply_packs/chaplaingear
+	name = "Chaplain equipment"
+	contains = list(/obj/item/clothing/under/rank/chaplain,
+					/obj/item/clothing/shoes/black,
+					/obj/item/clothing/suit/nun,
+					/obj/item/clothing/head/nun_hood,
+					/obj/item/clothing/suit/chaplain_hoodie,
+					/obj/item/clothing/head/chaplain_hood,
+					/obj/item/clothing/suit/holidaypriest,
+					/obj/item/clothing/under/wedding/bride_white,
+					/obj/item/weapon/storage/backpack/cultpack,
+					/obj/item/weapon/storage/fancy/candle_box,
+					/obj/item/weapon/storage/fancy/candle_box,
+					/obj/item/weapon/storage/fancy/candle_box)
+	cost = 10
+	containertype = /obj/structure/closet/crate
+	containername = "\improper Chaplain equipment crate"
+	group = "Miscellaneous"

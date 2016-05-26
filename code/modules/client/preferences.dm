@@ -17,6 +17,7 @@ datum/preferences
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 	var/ooccolor = "#010000"			//Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
+	var/list/never_be_special_role = list()
 	var/list/be_special_role = list()		//Special role selection
 	var/UI_style = "Midnight"
 	var/UI_style_color = "#ffffff"
@@ -25,12 +26,9 @@ datum/preferences
 	//character preferences
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we are a random name every round
-	var/gender = MALE					//gender of character (well duh)
 	var/age = 30						//age of character
 	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
-	var/underwear						//underwear type
-	var/undershirt						//undershirt type
 	var/backbag = 2						//backpack type
 	var/h_style = "Bald"				//Hair type
 	var/r_hair = 0						//Hair color
@@ -61,8 +59,6 @@ datum/preferences
 
 		//Mob preview
 	var/icon/preview_icon = null
-	var/icon/preview_icon_front = null
-	var/icon/preview_icon_side = null
 
 		//Jobs, uses bitflags
 	var/job_civilian_high = 0
@@ -105,23 +101,27 @@ datum/preferences
 
 	// OOC Metadata:
 	var/metadata = ""
+	var/list/ignored_players = list()
 
+	var/client/client = null
 	var/client_ckey = null
 
 	var/savefile/loaded_preferences
 	var/savefile/loaded_character
 	var/datum/category_collection/player_setup_collection/player_setup
 	var/has_cortical_stack = 1
+	var/datum/browser/panel
 
 /datum/preferences/New(client/C)
 	player_setup = new(src)
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender,species)
-	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
+	b_type = RANDOM_BLOOD_TYPE
 
 	gear = list()
 
 	if(istype(C))
+		client = C
 		client_ckey = C.ckey
 		if(!IsGuestKey(C.key))
 			load_path(C.ckey)
@@ -211,7 +211,9 @@ datum/preferences
 	dat += player_setup.content(user)
 
 	dat += "</html></body>"
-	user << browse(dat, "window=preferences;size=635x736")
+	var/datum/browser/popup = new(user, "Character Setup","Character Setup", 800, 800, src)
+	popup.set_content(dat)
+	popup.open()
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
 
@@ -250,9 +252,10 @@ datum/preferences
 	ShowChoices(usr)
 	return 1
 
-/datum/preferences/proc/copy_to(mob/living/carbon/human/character, safety = 0)
+/datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = 1)
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
+	character.set_species(species)
 	if(be_random_name)
 		real_name = random_name(gender,species)
 
@@ -292,10 +295,12 @@ datum/preferences
 	character.g_eyes = g_eyes
 	character.b_eyes = b_eyes
 
+	character.h_style = h_style
 	character.r_hair = r_hair
 	character.g_hair = g_hair
 	character.b_hair = b_hair
 
+	character.f_style = f_style
 	character.r_facial = r_facial
 	character.g_facial = g_facial
 	character.b_facial = b_facial
@@ -346,22 +351,34 @@ datum/preferences
 				else if(status == "mechanical")
 					I.robotize()
 
-	character.underwear = underwear
+	character.all_underwear.Cut()
+	character.all_underwear_metadata.Cut()
 
-	character.undershirt = undershirt
+	for(var/underwear_category_name in all_underwear)
+		var/datum/category_group/underwear/underwear_category = global_underwear.categories_by_name[underwear_category_name]
+		if(underwear_category)
+			var/underwear_item_name = all_underwear[underwear_category_name]
+			character.all_underwear[underwear_category_name] = underwear_category.items_by_name[underwear_item_name]
+			if(all_underwear_metadata[underwear_category_name])
+				character.all_underwear_metadata[underwear_category_name] = all_underwear_metadata[underwear_category_name]
+		else
+			all_underwear -= underwear_category_name
 
 	if(backbag > 4 || backbag < 1)
 		backbag = 1 //Same as above
 	character.backbag = backbag
 
-	//Debugging report to track down a bug, which randomly assigned the plural gender to people.
-	if(character.gender in list(PLURAL, NEUTER))
-		if(isliving(src)) //Ghosts get neuter by default
-			message_admins("[character] ([character.ckey]) has spawned with their gender as plural or neuter. Please notify coders.")
-			character.gender = MALE
+	if(icon_updates)
+		character.force_update_limbs()
+		character.update_mutations(0)
+		character.update_body(0)
+		character.update_underwear(0)
+		character.update_hair(0)
+		character.update_icons()
 
 /datum/preferences/proc/open_load_dialog(mob/user)
-	var/dat = "<body>"
+	var/dat  = list()
+	dat += "<body>"
 	dat += "<tt><center>"
 
 	var/savefile/S = new /savefile(path)
@@ -378,7 +395,10 @@ datum/preferences
 
 	dat += "<hr>"
 	dat += "</center></tt>"
-	user << browse(dat, "window=saves;size=300x390")
+	panel = new(user, "Character Slots", "Character Slots", 300, 390, src)
+	panel.set_content(jointext(dat,null))
+	panel.open()
 
 /datum/preferences/proc/close_load_dialog(mob/user)
 	user << browse(null, "window=saves")
+	panel.close()

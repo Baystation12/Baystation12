@@ -48,10 +48,10 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 			var/estimated_time = 0
 			if (evac)
 				estimated_time = round(emergency_shuttle.estimate_launch_time()/60,1)
-				emergency_shuttle_docked.Announce("The Emergency Shuttle has docked with the station. You have approximately [estimated_time] minute\s to board the Emergency Shuttle.")
+				emergency_shuttle_docked.Announce(replacetext(using_map.emergency_shuttle_docked_message, "%ETD%", "[estimated_time] minute\s"))
 			else
 				estimated_time = round(estimate_launch_time()/60,1)
-				priority_announcement.Announce("The scheduled Crew Transfer Shuttle to [dock_name] has docked with the station. It will depart in approximately [estimated_time] minute\s.")
+				priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_docked_message, "%dock_name%", "[dock_name]"),  "%ETD%", "[estimated_time] minute\s"))
 			if(config.announce_shuttle_dock_to_irc)
 				send2mainirc("The shuttle has docked with the station. It will depart in approximately [estimated_time] minute\s.")
 
@@ -82,7 +82,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
 
 	evac = 1
-	emergency_shuttle_called.Announce("An emergency evacuation shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
+	emergency_shuttle_called.Announce(replacetext(using_map.emergency_shuttle_called_message, "%ETA%", "[round(estimate_arrival_time()/60)] minute\s."))
+
 	for(var/area/A in world)
 		if(istype(A, /area/hallway))
 			A.readyalert()
@@ -99,8 +100,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	//reset the shuttle transit time if we need to
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
 
-	priority_announcement.Announce("A crew transfer to [dock_name] has been scheduled. The shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
-
+	priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_called_message, "%dock_name%", "[dock_name]"),  "%ETA%", "[round(estimate_arrival_time()/60)] minute\s"))
 //recalls the shuttle
 /datum/emergency_shuttle_controller/proc/recall()
 	if (!can_recall()) return
@@ -109,14 +109,14 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	shuttle.cancel_launch(src)
 
 	if (evac)
-		emergency_shuttle_recalled.Announce("The emergency shuttle has been recalled.")
+		emergency_shuttle_recalled.Announce(using_map.emergency_shuttle_recall_message)
 
 		for(var/area/A in world)
 			if(istype(A, /area/hallway))
 				A.readyreset()
 		evac = 0
 	else
-		priority_announcement.Announce("The scheduled crew transfer has been cancelled.")
+		priority_announcement.Announce(using_map.shuttle_recall_message)
 
 /datum/emergency_shuttle_controller/proc/can_call()
 	if (!universe.OnShuttleCall(null))

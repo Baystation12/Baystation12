@@ -4,7 +4,6 @@ var/datum/antagonist/wizard/wizards
 	id = MODE_WIZARD
 	role_text = "Space Wizard"
 	role_text_plural = "Space Wizards"
-	bantype = "wizard"
 	landmark_id = "wizard"
 	welcome_text = "You will find a list of available spells in your spell book. Choose your magic arsenal carefully.<br>In your pockets you will find a teleport scroll. Use it as needed."
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
@@ -14,6 +13,8 @@ var/datum/antagonist/wizard/wizards
 	hard_cap_round = 3
 	initial_spawn_req = 1
 	initial_spawn_target = 1
+
+	faction = "wizard"
 
 
 /datum/antagonist/wizard/New()
@@ -75,7 +76,7 @@ var/datum/antagonist/wizard/wizards
 		return 0
 
 	wizard_mob.equip_to_slot_or_del(new /obj/item/device/radio/headset(wizard_mob), slot_l_ear)
-	wizard_mob.equip_to_slot_or_del(new /obj/item/clothing/under/lightpurple(wizard_mob), slot_w_uniform)
+	wizard_mob.equip_to_slot_or_del(new /obj/item/clothing/under/color/lightpurple(wizard_mob), slot_w_uniform)
 	wizard_mob.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(wizard_mob), slot_shoes)
 	wizard_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/wizrobe(wizard_mob), slot_wear_suit)
 	wizard_mob.equip_to_slot_or_del(new /obj/item/clothing/head/wizard(wizard_mob), slot_head)
@@ -84,7 +85,8 @@ var/datum/antagonist/wizard/wizards
 	if(wizard_mob.backbag == 4) wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(wizard_mob), slot_back)
 	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/box(wizard_mob), slot_in_backpack)
 	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/teleportation_scroll(wizard_mob), slot_r_store)
-	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/spellbook(wizard_mob), slot_r_hand)
+	var/obj/item/I = new /obj/item/weapon/spellbook(get_turf(wizard_mob))
+	wizard_mob.put_in_hands(I) //makes sure to at least have it on the ground for the wizard, considering how important it is.
 	wizard_mob.update_icons()
 	return 1
 
@@ -119,13 +121,13 @@ Made a proc so this is not repeated 14 (or more) times.*/
 
 // Humans can wear clothes.
 /mob/living/carbon/human/wearing_wiz_garb()
-	if(!is_wiz_garb(src.wear_suit))
+	if(!is_wiz_garb(src.wear_suit) && (!src.species.hud || (slot_wear_suit in src.species.hud.equip_slots)))
 		src << "<span class='warning'>I don't feel strong enough without my robe.</span>"
 		return 0
-	if(!is_wiz_garb(src.shoes))
+	if(!is_wiz_garb(src.shoes) && (!species.hud || (slot_shoes in src.species.hud.equip_slots)))
 		src << "<span class='warning'>I don't feel strong enough without my sandals.</span>"
 		return 0
-	if(!is_wiz_garb(src.head))
+	if(!is_wiz_garb(src.head) && (!species.hud || (slot_head in src.species.hud.equip_slots)))
 		src << "<span class='warning'>I don't feel strong enough without my hat.</span>"
 		return 0
 	return 1

@@ -40,8 +40,8 @@
 				event_triggered_by = usr
 				broadcast_request() //This is the device making the initial event request. It needs to broadcast to other devices
 
-/obj/machinery/keycard_auth/power_change()
-	..()
+//icon_state gets set everwhere besides here, that needs to be fixed sometime
+/obj/machinery/keycard_auth/update_icon()
 	if(stat &NOPOWER)
 		icon_state = "auth_off"
 

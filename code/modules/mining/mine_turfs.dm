@@ -284,7 +284,7 @@
 				flick("flash",M.flash)
 				if(prob(50))
 					M.Stun(5)
-			M.apply_effect(25, IRRADIATE)
+			M.apply_effect(25, IRRADIATE, blocked = M.getarmor(null, "rad"))
 
 
 	var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)
@@ -431,10 +431,9 @@
 	return
 
 /turf/simulated/floor/asteroid/is_plating()
-	return 0
+	return !density
 
 /turf/simulated/floor/asteroid/attackby(obj/item/weapon/W as obj, mob/user as mob)
-
 	if(!W || !user)
 		return 0
 

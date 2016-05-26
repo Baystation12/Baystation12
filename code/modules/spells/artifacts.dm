@@ -19,7 +19,20 @@
 
 	user << "<span class='info'>You can see... everything!</span>"
 	visible_message("<span class='danger'>[user] stares into [src], their eyes glazing over.</span>")
-	
+
 	user.teleop = user.ghostize(1)
 	announce_ghost_joinleave(user.teleop, 1, "You feel that they used a powerful artifact to [pick("invade","disturb","disrupt","infest","taint","spoil","blight")] this place with their presence.")
 	return
+
+
+
+/////////////////////////Cursed Dice///////////////////////////
+/obj/item/weapon/dice/d20/cursed
+	desc = "A dice with twenty sides said to have an ill effect on those that are unlucky..."
+
+/obj/item/weapon/dice/d20/cursed/attack_self(mob/living/user)
+	..()
+	if(icon_state == "[name][sides]")
+		user.adjustBruteLoss(-30)
+	else if(icon_state == "[name]1")
+		user.adjustBruteLoss(30)

@@ -5,6 +5,7 @@
 	icon = 'icons/obj/shards.dmi'
 	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
 	icon_state = "large"
+	randpixel = 8
 	sharp = 1
 	edge = 1
 	w_class = 2
@@ -22,8 +23,6 @@
 		return
 
 	icon_state = "[material.shard_icon][pick("large", "medium", "small")]"
-	pixel_x = rand(-8, 8)
-	pixel_y = rand(-8, 8)
 	update_icon()
 
 	if(material.shard_type)
@@ -63,7 +62,6 @@
 		if(M.buckled) //wheelchairs, office chairs, rollerbeds
 			return
 		
-		M << "<span class='danger'>You step on \the [src]!</span>"
 		playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1) // not sure how to handle metal shards with sounds
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
@@ -74,12 +72,14 @@
 			if( H.shoes || ( H.wear_suit && (H.wear_suit.body_parts_covered & FEET) ) )
 				return
 			
+			M << "<span class='danger'>You step on \the [src]!</span>"
+
 			var/list/check = list("l_foot", "r_foot")
 			while(check.len)
 				var/picked = pick(check)
 				var/obj/item/organ/external/affecting = H.get_organ(picked)
 				if(affecting)
-					if(affecting.status & ORGAN_ROBOT)
+					if(affecting.robotic >= ORGAN_ROBOT)
 						return
 					if(affecting.take_damage(5, 0))
 						H.UpdateDamageIcon()

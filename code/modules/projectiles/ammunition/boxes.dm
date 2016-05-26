@@ -46,7 +46,7 @@
 
 /obj/item/ammo_magazine/c45m/flash
 	name = "magazine (.45 flash)"
-	ammo_type = "/obj/item/ammo_casing/c45f"
+	ammo_type = /obj/item/ammo_casing/c45f
 
 /obj/item/ammo_magazine/mc9mm
 	name = "magazine (9mm)"
@@ -63,6 +63,7 @@
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/mc9mm/flash
+	name = "magazine (9mm flash)"
 	ammo_type = /obj/item/ammo_casing/c9mmf
 
 /obj/item/ammo_magazine/c9mm
@@ -112,7 +113,7 @@
 
 /obj/item/ammo_magazine/a10mm
 	name = "magazine (10mm)"
-	icon_state = "12mm"
+	icon_state = "10mm"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = "10mm"
@@ -132,7 +133,7 @@
 	caliber = "a556"
 	matter = list(DEFAULT_WALL_MATERIAL = 1800)
 	ammo_type = /obj/item/ammo_casing/a556
-	max_ammo = 10
+	max_ammo = 15 //if we lived in a world where normal mags had 30 rounds, this would be a 20 round mag
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/a556/empty

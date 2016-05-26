@@ -89,18 +89,13 @@
 		clonemind = locate(R.mind)
 		if(!istype(clonemind, /datum/mind))	//not a mind
 			return 0
-		if(clonemind.current && clonemind.current.stat != DEAD)	//mind is associated with a non-dead body
-			return 0
-		if(clonemind.active)	//somebody is using that mind
-			if(ckey(clonemind.key) != R.ckey)
-				return 0
-		else
-			for(var/mob/dead/observer/G in player_list)
-				if(G.ckey == R.ckey)
-					if(G.can_reenter_corpse)
-						break
-					else
-						return 0
+	else
+		for(var/mob/observer/ghost/G in player_list)
+			if(G.ckey == R.ckey)
+				if(G.can_reenter_corpse)
+					break
+				else
+					return 0
 
 	attempting = 1 //One at a time!!
 	locked = 1
@@ -117,7 +112,7 @@
 	H.real_name = R.dna.real_name
 
 	//Get the clone body ready
-	H.adjustCloneLoss(150) // New damage var so you can't eject a clone early then stab them to abuse the current damage system --NeoFite
+	H.setCloneLoss(H.maxHealth - config.health_threshold_crit) // New damage var so you can't eject a clone early then stab them to abuse the current damage system --NeoFite
 	H.Paralyse(4)
 
 	//Here let's calculate their health so the pod doesn't immediately eject them!!!

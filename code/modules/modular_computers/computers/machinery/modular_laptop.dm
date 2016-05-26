@@ -51,7 +51,7 @@
 // The actual laptop
 /obj/machinery/modular_computer/laptop
 	name = "laptop computer"
-	desc = "A portable computer"
+	desc = "A portable computer."
 	var/obj/item/laptop/portable = null						// Portable version of this computer, dropped on alt-click to allow transport. Used by laptops.
 	hardware_flag = PROGRAM_LAPTOP
 	icon_state_unpowered = "laptop-open"					// Icon state when the computer is turned off
@@ -60,6 +60,9 @@
 	base_idle_power_usage = 25
 	base_active_power_usage = 200
 	max_hardware_size = 2
+	light_strength = 3
+	_max_damage = 200
+	_break_damage = 100
 
 /obj/machinery/modular_computer/laptop/buildable/New()
 	..()

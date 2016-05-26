@@ -7,7 +7,7 @@
 	requires_ntnet = 1
 	available_on_ntnet = 0
 	available_on_syndinet = 1
-	nanomodule_path = /datum/nano_module/computer_dos/
+	nanomodule_path = /datum/nano_module/program/computer_dos/
 	var/obj/machinery/ntnet_relay/target = null
 	var/dos_speed = 0
 	var/error = ""
@@ -36,10 +36,10 @@
 
 	..(forced)
 
-/datum/nano_module/computer_dos
+/datum/nano_module/program/computer_dos
 	name = "DoS Traffic Generator"
 
-/datum/nano_module/computer_dos/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/datum/nano_module/program/computer_dos/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	if(!ntnet_global)
 		return
 	var/datum/computer_file/program/ntnet_dos/PRG = program

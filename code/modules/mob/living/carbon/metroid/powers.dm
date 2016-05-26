@@ -16,11 +16,18 @@
 
 /mob/living/carbon/slime/proc/invalidFeedTarget(var/mob/living/M)
 	if (!M || !istype(M))
-		return "This subject is incomparable..."
+		return "This subject is incompatible..."
 	if (istype(M, /mob/living/carbon/slime)) // No cannibalism... yet
 		return "I cannot feed on other slimes..."
 	if (!Adjacent(M))
 		return "This subject is too far away..."
+	if (issilicon(M))
+		return "This subject does not have an edible life energy..."
+	if (ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(H.species.flags & (NO_POISON|NO_SCAN))
+			//they can't take clone or tox damage, then for the most part they aren't affected by being fed on - and presumably feeding on them would not affect the slime either
+			return "This subject does not have an edible life energy..."
 	if (istype(M, /mob/living/carbon) && M.getCloneLoss() >= M.maxHealth * 1.5 || istype(M, /mob/living/simple_animal) && M.stat == DEAD)
 		return "This subject does not have an edible life energy..."
 	for(var/mob/living/carbon/slime/met in view())

@@ -21,8 +21,8 @@ meteor_act
 		if(shield_check < 0)
 			return shield_check
 		else
-			P.on_hit(src, 2, def_zone)
-			return 2
+			P.on_hit(src, 100, def_zone)
+			return 100
 
 	//Shrapnel
 	if(P.can_embed())
@@ -34,7 +34,11 @@ meteor_act
 			SP.loc = organ
 			organ.embed(SP)
 
-	return (..(P , def_zone))
+	var/blocked = ..(P , def_zone)
+
+	projectile_hit_bloody(P, P.damage*blocked_mult(blocked), def_zone)
+
+	return blocked
 
 /mob/living/carbon/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone)
 	var/obj/item/organ/external/affected = get_organ(check_zone(def_zone))
@@ -56,7 +60,7 @@ meteor_act
 				msg_admin_attack("[src.name] ([src.ckey]) was disarmed by a stun effect")
 
 				drop_from_inventory(c_hand)
-				if (affected.status & ORGAN_ROBOT)
+				if (affected.robotic >= ORGAN_ROBOT)
 					emote("me", 1, "drops what they were holding, their [affected.name] malfunctioning!")
 				else
 					var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
@@ -82,7 +86,7 @@ meteor_act
 			var/obj/item/organ/external/organ = organs_by_name[organ_name]
 			if(organ)
 				var/weight = organ_rel_size[organ_name]
-				armorval += getarmor_organ(organ, type) * weight
+				armorval += getarmor_organ(organ, type) * weight //use plain addition here because we are calculating an average
 				total += weight
 	return (armorval/max(total, 1))
 
@@ -109,7 +113,7 @@ meteor_act
 		if(gear && istype(gear ,/obj/item/clothing))
 			var/obj/item/clothing/C = gear
 			if(istype(C) && C.body_parts_covered & def_zone.body_part)
-				protection += C.armor[type]
+				protection = add_armor(protection, C.armor[type]) 
 	return protection
 
 /mob/living/carbon/human/proc/check_head_coverage()
@@ -181,7 +185,7 @@ meteor_act
 	// Handle striking to cripple.
 	if(user.a_intent == I_DISARM)
 		effective_force /= 2 //half the effective force
-		if(!..(I, effective_force, blocked, hit_zone))
+		if(!..(I, user, effective_force, blocked, hit_zone))
 			return 0
 
 		attack_joint(affecting, I, blocked) //but can dislocate joints
@@ -204,39 +208,76 @@ meteor_act
 					apply_effect(6, WEAKEN, blocked)
 
 		//Apply blood
-		if(!(I.flags & NOBLOODY))
-			I.add_blood(src)
-
-		if(prob(33 + I.sharp*10))
-			var/turf/location = loc
-			if(istype(location, /turf/simulated))
-				location.add_blood(src)
-			if(ishuman(user))
-				var/mob/living/carbon/human/H = user
-				if(get_dist(H, src) <= 1) //people with TK won't get smeared with blood
-					H.bloody_body(src)
-					H.bloody_hands(src)
-
-			switch(hit_zone)
-				if("head")
-					if(wear_mask)
-						wear_mask.add_blood(src)
-						update_inv_wear_mask(0)
-					if(head)
-						head.add_blood(src)
-						update_inv_head(0)
-					if(glasses && prob(33))
-						glasses.add_blood(src)
-						update_inv_glasses(0)
-				if("chest")
-					bloody_body(src)
+		attack_bloody(I, user, effective_force, hit_zone)
 
 	return 1
 
+/mob/living/carbon/human/proc/attack_bloody(obj/item/W, mob/living/attacker, var/effective_force, var/hit_zone)
+	if(W.damtype != BRUTE) 
+		return
+
+	//make non-sharp low-force weapons less likely to be bloodied
+	if(W.sharp || prob(effective_force*4))
+		if(!(W.flags & NOBLOODY))
+			W.add_blood(src)
+	else
+		return //if the weapon itself didn't get bloodied than it makes little sense for the target to be bloodied either
+
+	//getting the weapon bloodied is easier than getting the target covered in blood, so run prob() again
+	if(prob(33 + W.sharp*10))
+		var/turf/location = loc
+		if(istype(location, /turf/simulated))
+			location.add_blood(src)
+		if(ishuman(attacker))
+			var/mob/living/carbon/human/H = attacker
+			if(get_dist(H, src) <= 1) //people with TK won't get smeared with blood
+				H.bloody_body(src)
+				H.bloody_hands(src)
+
+		switch(hit_zone)
+			if("head")
+				if(wear_mask)
+					wear_mask.add_blood(src)
+					update_inv_wear_mask(0)
+				if(head)
+					head.add_blood(src)
+					update_inv_head(0)
+				if(glasses && prob(33))
+					glasses.add_blood(src)
+					update_inv_glasses(0)
+			if("chest")
+				bloody_body(src)
+
+/mob/living/carbon/human/proc/projectile_hit_bloody(obj/item/projectile/P, var/effective_force, var/hit_zone)
+	if(P.damage_type != BRUTE || P.nodamage)
+		return
+	if(!(P.sharp || prob(effective_force*4)))
+		return
+	if(prob(effective_force))
+		var/turf/location = loc
+		if(istype(location, /turf/simulated))
+			location.add_blood(src)
+
+		switch(hit_zone)
+			if("head")
+				if(wear_mask)
+					wear_mask.add_blood(src)
+					update_inv_wear_mask(0)
+				if(head)
+					head.add_blood(src)
+					update_inv_head(0)
+				if(glasses && prob(33))
+					glasses.add_blood(src)
+					update_inv_glasses(0)
+			if("chest")
+				bloody_body(src)
+
 /mob/living/carbon/human/proc/attack_joint(var/obj/item/organ/external/organ, var/obj/item/W, var/blocked)
-	if(!organ || (organ.dislocated == 2) || (organ.dislocated == -1) || blocked >= 2)
+	if(!organ || (organ.dislocated == 2) || (organ.dislocated == -1) || blocked >= 100)
 		return 0
-	if(prob(W.force / (blocked+1)))
+	if(W.damtype != BRUTE)
+		return 0
+	if(prob(W.force * blocked_mult(blocked)))
 		visible_message("<span class='danger'>[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
 		organ.dislocate(1)
 		return 1
@@ -244,7 +285,7 @@ meteor_act
 
 /mob/living/carbon/human/emag_act(var/remaining_charges, mob/user, var/emag_source)
 	var/obj/item/organ/external/affecting = get_organ(user.zone_sel.selecting)
-	if(!affecting || !(affecting.status & ORGAN_ROBOT))
+	if(!affecting || !(affecting.robotic >= ORGAN_ROBOT))
 		user << "<span class='warning'>That limb isn't robotic.</span>"
 		return -1
 	if(affecting.sabotaged)
@@ -302,8 +343,7 @@ meteor_act
 
 		src.visible_message("\red [src] has been hit in the [hit_area] by [O].")
 		var/armor = run_armor_check(affecting, "melee", O.armor_penetration, "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].") //I guess "melee" is the best fit here
-
-		if(armor < 2)
+		if(armor < 100)
 			apply_damage(throw_damage, dtype, zone, armor, is_sharp(O), has_edge(O), O)
 
 		if(ismob(O.thrower))
@@ -320,9 +360,9 @@ meteor_act
 			var/obj/item/I = O
 			if (!is_robot_module(I))
 				var/sharp = is_sharp(I)
-				var/damage = throw_damage
+				var/damage = throw_damage //the effective damage used for embedding purposes, no actual damage is dealt here
 				if (armor)
-					damage /= armor+1
+					damage *= blocked_mult(armor)
 
 				//blunt objects should really not be embedding in things unless a huge amount of force is involved
 				var/embed_chance = sharp? damage/I.w_class : damage/(I.w_class*3)

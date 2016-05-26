@@ -181,7 +181,7 @@
 
 	var/mob/M = targets[target]
 
-	if(istype(M, /mob/dead/observer) || M.stat == DEAD)
+	if(isghost(M) || M.stat == DEAD)
 		src << "Not even a [src.species.name] can speak to the dead."
 		return
 
@@ -204,7 +204,7 @@
 		for(var/mob/M in src)
 			if(M in stomach_contents)
 				stomach_contents.Remove(M)
-				M.loc = loc
+				M.forceMove(loc)
 		src.visible_message("\red <B>[src] hurls out the contents of their stomach!</B>")
 	return
 

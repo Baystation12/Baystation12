@@ -25,6 +25,12 @@
 	//Detective Work, used for the duplicate data points kept in the scanners
 	var/list/original_atom
 
+/atom/Destroy()
+	if(reagents)
+		qdel(reagents)
+		reagents = null
+	. = ..()
+
 /atom/proc/reveal_blood()
 	return
 
@@ -494,11 +500,19 @@ its easier to just keep the beam vertical.
 			var/mob/M = I
 			M.show_message( message, 2, deaf_message, 1)
 
-/atom/Entered(var/atom/movable/AM, var/atom/old_loc, var/special_event)
-	if(loc && MOVED_DROP == special_event)
-		AM.forceMove(loc, MOVED_DROP)
-		return CANCEL_MOVE_EVENT
-	return ..()
+/atom/movable/proc/dropInto(var/atom/destination)
+	while(istype(destination))
+		var/atom/drop_destination = destination.onDropInto(src)
+		if(!istype(drop_destination) || drop_destination == destination)
+			return forceMove(destination)
+		destination = drop_destination
+	return forceMove(null)
 
-/turf/Entered(var/atom/movable/AM, var/atom/old_loc, var/special_event)
-	return ..(AM, old_loc, 0)
+/atom/proc/onDropInto(var/atom/movable/AM)
+	return // If onDropInto returns null, then dropInto will forceMove AM into us.
+
+/atom/movable/onDropInto(var/atom/movable/AM)
+	return loc // If onDropInto returns something, then dropInto will attempt to drop AM there.
+
+/atom/proc/InsertedContents()
+	return contents

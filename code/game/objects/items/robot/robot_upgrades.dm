@@ -84,7 +84,7 @@
 		return 0
 
 	if(!R.key)
-		for(var/mob/dead/observer/ghost in player_list)
+		for(var/mob/observer/ghost/ghost in player_list)
 			if(ghost.mind && ghost.mind.current == R)
 				R.key = ghost.key
 
@@ -184,7 +184,7 @@
 
 /obj/item/borg/upgrade/syndicate/
 	name = "illegal equipment module"
-	desc = "Unlocks the hidden, deadlier functions of a robot"
+	desc = "Unlocks the hidden, deadlier functions of a robot."
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
 

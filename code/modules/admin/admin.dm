@@ -812,15 +812,34 @@ proc/admin_notice(var/message, var/rights)
 	set category = "Server"
 	set desc="Toggle alien mobs"
 	set name="Toggle Aliens"
+	if(!check_rights(R_ADMIN))
+		return
+
 	config.aliens_allowed = !config.aliens_allowed
 	log_admin("[key_name(usr)] toggled Aliens to [config.aliens_allowed].")
 	message_admins("[key_name_admin(usr)] toggled Aliens [config.aliens_allowed ? "on" : "off"].", 1)
 	feedback_add_details("admin_verb","TA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/admins/proc/toggle_alien_eggs()
+	set category = "Server"
+	set desc="Toggle xenomorph egg laying"
+	set name="Toggle Alien Eggs"
+
+	if(!check_rights(R_ADMIN))
+		return
+	config.alien_eggs_allowed = !config.alien_eggs_allowed
+	log_admin("[key_name(usr)] toggled Alien Egg Laying to [config.alien_eggs_allowed].")
+	message_admins("[key_name_admin(usr)] toggled Alien Egg Laying [config.alien_eggs_allowed ? "on" : "off"].", 1)
+	feedback_add_details("admin_verb","AEA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+
 /datum/admins/proc/toggle_space_ninja()
 	set category = "Server"
 	set desc="Toggle space ninjas spawning."
 	set name="Toggle Space Ninjas"
+	if(!check_rights(R_ADMIN))
+		return
+
 	config.ninjas_allowed = !config.ninjas_allowed
 	log_admin("[key_name(usr)] toggled Space Ninjas to [config.ninjas_allowed].")
 	message_admins("[key_name_admin(usr)] toggled Space Ninjas [config.ninjas_allowed ? "on" : "off"].", 1)
@@ -904,22 +923,26 @@ proc/admin_notice(var/message, var/rights)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////ADMIN HELPER PROCS
 
-/proc/is_special_character(mob/M as mob) // returns 1 for specail characters and 2 for heroes of gamemode
+/proc/is_special_character(var/character) // returns 1 for special characters and 2 for heroes of gamemode
 	if(!ticker || !ticker.mode)
 		return 0
-	if (!istype(M))
-		return 0
+	var/datum/mind/M
+	if (ismob(character))
+		var/mob/C = character
+		M = C.mind
+	else if(istype(character, /datum/mind))
+		M = character
 
-	if(M.mind)
+	if(M)
 		if(ticker.mode.antag_templates && ticker.mode.antag_templates.len)
 			for(var/datum/antagonist/antag in ticker.mode.antag_templates)
-				if(antag.is_antagonist(M.mind))
+				if(antag.is_antagonist(M))
 					return 2
-		else if(M.mind.special_role)
+		if(M.special_role)
 			return 1
 
-	if(isrobot(M))
-		var/mob/living/silicon/robot/R = M
+	if(isrobot(character))
+		var/mob/living/silicon/robot/R = character
 		if(R.emagged)
 			return 1
 
@@ -1260,7 +1283,7 @@ proc/admin_notice(var/message, var/rights)
 
 //Returns 1 to let the dragdrop code know we are trapping this event
 //Returns 0 if we don't plan to trap the event
-/datum/admins/proc/cmd_ghost_drag(var/mob/dead/observer/frommob, var/mob/living/tomob)
+/datum/admins/proc/cmd_ghost_drag(var/mob/observer/ghost/frommob, var/mob/living/tomob)
 	if(!istype(frommob))
 		return //Extra sanity check to make sure only observers are shoved into things
 

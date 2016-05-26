@@ -27,20 +27,20 @@ var/list/VVckey_edit = list("key", "ckey")
 		src.modify_variables(ticker)
 		feedback_add_details("admin_verb","ETV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/mod_list_add_ass() //haha
-
+/client/proc/mod_list_add_ass()
 	var/class = "text"
-	if(src.holder && src.holder.marked_datum)
-		class = input("What kind of variable?","Variable Type") as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default","marked datum ([holder.marked_datum.type])")
-	else
-		class = input("What kind of variable?","Variable Type") as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+	if(src.holder)
+		var/datum/marked_datum = holder.marked_datum()
+		if(marked_datum)
+			class_input += "marked datum ([marked_datum.type])"
 
+	class = input("What kind of variable?","Variable Type") as null|anything in class_input
 	if(!class)
 		return
 
-	if(holder.marked_datum && class == "marked datum ([holder.marked_datum.type])")
+	var/datum/marked_datum = holder.marked_datum()
+	if(marked_datum && class == "marked datum ([marked_datum.type])")
 		class = "marked datum"
 
 	var/var_value = null
@@ -69,7 +69,7 @@ var/list/VVckey_edit = list("key", "ckey")
 			var_value = input("Pick icon:","Icon") as null|icon
 
 		if("marked datum")
-			var_value = holder.marked_datum
+			var_value = holder.marked_datum()
 
 	if(!var_value) return
 
@@ -79,17 +79,18 @@ var/list/VVckey_edit = list("key", "ckey")
 /client/proc/mod_list_add(var/list/L, atom/O, original_name, objectvar)
 
 	var/class = "text"
-	if(src.holder && src.holder.marked_datum)
-		class = input("What kind of variable?","Variable Type") as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default","marked datum ([holder.marked_datum.type])")
-	else
-		class = input("What kind of variable?","Variable Type") as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+	if(src.holder)
+		var/datum/marked_datum = holder.marked_datum()
+		if(marked_datum)
+			class_input += "marked datum ([marked_datum.type])"
 
+	class = input("What kind of variable?","Variable Type") as null|anything in class_input
 	if(!class)
 		return
 
-	if(holder.marked_datum && class == "marked datum ([holder.marked_datum.type])")
+	var/datum/marked_datum = holder.marked_datum()
+	if(marked_datum && class == "marked datum ([marked_datum.type])")
 		class = "marked datum"
 
 	var/var_value = null
@@ -118,7 +119,7 @@ var/list/VVckey_edit = list("key", "ckey")
 			var_value = input("Pick icon:","Icon") as icon
 
 		if("marked datum")
-			var_value = holder.marked_datum
+			var_value = holder.marked_datum()
 
 	if(!var_value) return
 
@@ -244,17 +245,21 @@ var/list/VVckey_edit = list("key", "ckey")
 			usr << "If a direction, direction is: [dir]"
 
 	var/class = "text"
-	if(src.holder && src.holder.marked_datum)
-		class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default","marked datum ([holder.marked_datum.type])", "DELETE FROM LIST")
-	else
-		class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default", "DELETE FROM LIST")
+	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+
+	if(src.holder)
+		var/datum/marked_datum = holder.marked_datum()
+		if(marked_datum)
+			class_input += "marked datum ([marked_datum.type])"
+
+	class_input += "DELETE FROM LIST"
+	class = input("What kind of variable?","Variable Type",default) as null|anything in class_input
 
 	if(!class)
 		return
 
-	if(holder.marked_datum && class == "marked datum ([holder.marked_datum.type])")
+	var/datum/marked_datum = holder.marked_datum()
+	if(marked_datum && class == "marked datum ([marked_datum.type])")
 		class = "marked datum"
 
 	var/original_var
@@ -336,7 +341,9 @@ var/list/VVckey_edit = list("key", "ckey")
 				L[L.Find(variable)] = new_var
 
 		if("marked datum")
-			new_var = holder.marked_datum
+			new_var = holder.marked_datum()
+			if(!new_var)
+				return
 			if(assoc)
 				L[assoc_key] = new_var
 			else
@@ -497,12 +504,12 @@ var/list/VVckey_edit = list("key", "ckey")
 			if(dir)
 				usr << "If a direction, direction is: [dir]"
 
-		if(src.holder && src.holder.marked_datum)
-			class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-				"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default","marked datum ([holder.marked_datum.type])")
-		else
-			class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-				"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+		var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+		if(src.holder)
+			var/datum/marked_datum = holder.marked_datum()
+			if(marked_datum)
+				class_input += "marked datum ([marked_datum.type])"
+		class = input("What kind of variable?","Variable Type",default) as null|anything in class_input
 
 		if(!class)
 			return
@@ -514,7 +521,8 @@ var/list/VVckey_edit = list("key", "ckey")
 	else
 		original_name = O:name
 
-	if(holder.marked_datum && class == "marked datum ([holder.marked_datum.type])")
+	var/datum/marked_datum = holder.marked_datum()
+	if(marked_datum && class == "marked datum ([marked_datum.type])")
 		class = "marked datum"
 
 	switch(class)
@@ -580,7 +588,7 @@ var/list/VVckey_edit = list("key", "ckey")
 			O.vars[variable] = var_new
 
 		if("marked datum")
-			O.vars[variable] = holder.marked_datum
+			O.vars[variable] = holder.marked_datum()
 
 	world.log << "### VarEdit by [src]: [O.type] [variable]=[html_encode("[O.vars[variable]]")]"
 	log_admin("[key_name(src)] modified [original_name]'s [variable] to [O.vars[variable]]")

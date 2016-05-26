@@ -35,6 +35,7 @@
 	var/short_sighted                                    // Permanent weldervision.
 	var/blood_volume = 560                               // Initial blood volume.
 	var/hunger_factor = DEFAULT_HUNGER_FACTOR            // Multiplier for hunger.
+	var/taste_sensitivity = TASTE_NORMAL                 // How sensitive the species is to minute tastes.
 
 	var/min_age = 17
 	var/max_age = 70
@@ -155,6 +156,8 @@
 		"r_foot" = list("path" = /obj/item/organ/external/foot/right)
 		)
 
+	var/list/genders = list(MALE, FEMALE)
+
 	// Bump vars
 	var/bump_flag = HUMAN	// What are we considered to be when bumped?
 	var/push_flags = ~HEAVY	// What can we push?
@@ -179,8 +182,6 @@
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
 
-/datum/species/proc/get_station_variant()
-	return name
 
 /datum/species/proc/get_bodytype()
 	return name

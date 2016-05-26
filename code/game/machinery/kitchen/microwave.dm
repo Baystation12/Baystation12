@@ -101,7 +101,7 @@
 			user << "<span class='warning'>It's dirty!</span>"
 			return 1
 	else if(is_type_in_list(O,acceptable_items))
-		if (contents.len>=max_n_of_items)
+		if (length(InsertedContents())>=(max_n_of_items))
 			user << "<span class='warning'>This [src] is full of ingredients, you cannot put more.</span>"
 			return 1
 		if(istype(O, /obj/item/stack) && O:get_amount() > 1) // This is bad, but I can't think of how to change it
@@ -178,7 +178,7 @@
 		var/list/items_counts = new
 		var/list/items_measures = new
 		var/list/items_measures_p = new
-		for (var/obj/O in contents)
+		for (var/obj/O in InsertedContents())
 			var/display_name = O.name
 			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/egg))
 				items_measures[display_name] = "egg"
@@ -238,7 +238,7 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	start()
-	if (reagents.total_volume==0 && !(locate(/obj) in contents)) //dry run
+	if (reagents.total_volume==0 && !(locate(/obj) in InsertedContents())) //dry run
 		if (!wzhzhzh(10))
 			abort()
 			return
@@ -300,7 +300,7 @@
 	return 1
 
 /obj/machinery/microwave/proc/has_extra_item()
-	for (var/obj/O in contents)
+	for (var/obj/O in InsertedContents())
 		if ( \
 				!istype(O,/obj/item/weapon/reagent_containers/food) && \
 				!istype(O, /obj/item/weapon/grown) \
@@ -326,7 +326,7 @@
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/proc/dispose()
-	for (var/obj/O in contents)
+	for (var/obj/O in InsertedContents())
 		O.loc = src.loc
 	if (src.reagents.total_volume)
 		src.dirty++
@@ -361,7 +361,7 @@
 /obj/machinery/microwave/proc/fail()
 	var/obj/item/weapon/reagent_containers/food/snacks/badrecipe/ffuu = new(src)
 	var/amount = 0
-	for (var/obj/O in contents-ffuu)
+	for (var/obj/O in (InsertedContents()-ffuu))
 		amount++
 		if (O.reagents)
 			var/id = O.reagents.get_master_reagent_id()

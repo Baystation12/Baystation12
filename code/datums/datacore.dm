@@ -25,11 +25,11 @@
 	var/dat = {"
 	<head><style>
 		.manifest {border-collapse:collapse;}
-		.manifest td, th {border:1px solid [monochrome?"black":"#DEF; background-color:white; color:black"]; padding:.25em}
-		.manifest th {height: 2em; [monochrome?"border-top-width: 3px":"background-color: #48C; color:white"]}
-		.manifest tr.head th { [monochrome?"border-top-width: 1px":"background-color: #488;"] }
+		.manifest td, th {border:1px solid [monochrome?"black":"[OOC?"black; background-color:#272727; color:white":"#DEF; background-color:white; color:black"]"]; padding:.25em}
+		.manifest th {height: 2em; [monochrome?"border-top-width: 3px":"background-color: [OOC?"#40628A":"#48C"]; color:white"]}
+		.manifest tr.head th { [monochrome?"border-top-width: 1px":"background-color: [OOC?"#013D3B;":"#488;"]"] }
 		.manifest td:first-child {text-align:right}
-		.manifest tr.alt td {[monochrome?"border-top-width: 2px":"background-color: #DEF"]}
+		.manifest tr.alt td {[monochrome?"border-top-width: 2px":"background-color: [OOC?"#373737; color:white":"#DEF"]"]}
 	</style></head>
 	<table class="manifest" width='350px'>
 	<tr class='head'><th>Name</th><th>Rank</th><th>Activity</th></tr>
@@ -74,11 +74,21 @@
 		if(real_rank in civilian_positions)
 			civ[name] = rank
 			department = 1
-		if(real_rank in nonhuman_positions)
-			bot[name] = rank
-			department = 1
 		if(!department && !(name in heads))
 			misc[name] = rank
+
+	// Synthetics don't have actual records, so we will pull them from here.
+	for(var/mob/living/silicon/ai/ai in mob_list)
+		bot[ai.name] = "Artificial Intelligence"
+
+	for(var/mob/living/silicon/robot/robot in mob_list)
+		// No combat/syndicate cyborgs, no drones.
+		if(robot.module && robot.module.hide_on_manifest)
+			continue
+
+		bot[robot.name] = "[robot.modtype] [robot.braintype]"
+
+
 	if(heads.len > 0)
 		dat += "<tr><th colspan=3>Heads</th></tr>"
 		for(name in heads)
@@ -176,7 +186,7 @@
 		G.fields["fingerprint"]	= md5(H.dna.uni_identity)
 		G.fields["p_stat"]		= "Active"
 		G.fields["m_stat"]		= "Stable"
-		G.fields["sex"]			= H.gender
+		G.fields["sex"]			= gender2text(H.gender)
 		G.fields["species"]		= H.get_species()
 		G.fields["home_system"]	= H.home_system
 		G.fields["citizenship"]	= H.citizenship
@@ -204,7 +214,7 @@
 		L.fields["rank"] 		= H.mind.assigned_role
 		L.fields["age"]			= H.age
 		L.fields["fingerprint"]	= md5(H.dna.uni_identity)
-		L.fields["sex"]			= H.gender
+		L.fields["sex"]			= gender2text(H.gender)
 		L.fields["b_type"]		= H.b_type
 		L.fields["b_dna"]		= H.dna.unique_enzymes
 		L.fields["enzymes"]		= H.dna.SE // Used in respawning
@@ -225,7 +235,7 @@
 /proc/generate_record_id()
 	return add_zero(num2hex(rand(1, 65535)), 4)	//no point generating higher numbers because of the limitations of num2hex
 
-proc/get_id_photo(var/mob/living/carbon/human/H, var/assigned_role)
+/proc/get_id_photo(var/mob/living/carbon/human/H, var/assigned_role)
 	var/icon/preview_icon = null
 
 	var/g = "m"
@@ -279,7 +289,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H, var/assigned_role)
 		eyes_s.Blend(facial_s, ICON_OVERLAY)
 
 	var/icon/clothes_s = null
-	if(!assigned_role) assigned_role = H.mind.assigned_role
+	if(!assigned_role && H.mind) assigned_role = H.mind.assigned_role
 	switch(assigned_role)
 		if("Head of Personnel")
 			clothes_s = new /icon('icons/mob/uniform.dmi', "hop_s")
@@ -405,7 +415,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H, var/assigned_role)
 	G.fields["id"] = id
 	G.fields["rank"] = "Unassigned"
 	G.fields["real_rank"] = "Unassigned"
-	G.fields["sex"] = "Male"
+	G.fields["sex"] = "Unknown"
 	G.fields["age"] = "Unknown"
 	G.fields["fingerprint"] = "Unknown"
 	G.fields["p_stat"] = "Active"
@@ -447,6 +457,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H, var/assigned_role)
 	M.fields["name"]		= name
 	M.fields["b_type"]		= "AB+"
 	M.fields["b_dna"]		= md5(name)
+	M.fields["id_gender"]	= "Unknown"
 	M.fields["mi_dis"]		= "None"
 	M.fields["mi_dis_d"]	= "No minor disabilities have been declared."
 	M.fields["ma_dis"]		= "None"

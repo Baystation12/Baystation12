@@ -48,10 +48,6 @@
 			location.hotspot_expose(1000,500,1)
 	return 1
 
-/obj/machinery/igniter/power_change()
-	..()
-	update_icon()
-
 /obj/machinery/igniter/proc/ignite()
 	use_power(50)
 	on = !on
@@ -96,10 +92,6 @@
 	else
 		icon_state = "migniter-p"
 //		src.sd_SetLuminosity(0)
-
-/obj/machinery/sparker/power_change()
-	..()
-	update_icon()
 
 /obj/machinery/sparker/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/screwdriver))

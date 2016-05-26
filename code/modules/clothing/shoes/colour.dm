@@ -64,7 +64,7 @@
 	user.drop_item()
 	cuffs.loc = src
 	src.chained = cuffs
-	src.slowdown = 15
+	src.slowdown_per_slot[slot_shoes] += 15
 	src.icon_state = "orange1"
 
 /obj/item/clothing/shoes/orange/proc/remove_cuffs(mob/user as mob)
@@ -73,7 +73,7 @@
 	user.put_in_hands(src.chained)
 	src.chained.add_fingerprint(user)
 
-	src.slowdown = initial(slowdown)
+	src.slowdown_per_slot[slot_shoes] -= 15
 	src.icon_state = "orange"
 	src.chained = null
 

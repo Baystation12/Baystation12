@@ -18,6 +18,15 @@
 	slot_flags = SLOT_HEAD | SLOT_EARS
 	body_parts_covered = 0
 
+/obj/item/clothing/head/hairflower/blue
+	icon_state = "hairflower_blue"
+
+/obj/item/clothing/head/hairflower/pink
+	icon_state = "hairflower_pink"
+
+/obj/item/clothing/head/hairflower/yellow
+	icon_state = "hairflower_yellow"
+
 /obj/item/clothing/head/powdered_wig
 	name = "powdered wig"
 	desc = "A powdered wig."
@@ -54,7 +63,7 @@
 
 /obj/item/clothing/head/hasturhood
 	name = "hastur's hood"
-	desc = "It's unspeakably stylish"
+	desc = "It's unspeakably stylish."
 	icon_state = "hasturhood"
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
@@ -101,6 +110,10 @@
 	item_state = "cardborg_h"
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
+
+/obj/item/clothing/head/cardborg/initialize()
+	..()
+	set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
 
 /obj/item/clothing/head/justice
 	name = "justice hat"
@@ -251,111 +264,23 @@
 	icon_state = "orange_bandana"
 	body_parts_covered = 0
 
-//Hijabs
-
 /obj/item/clothing/head/hijab
-	name = "black hijab"
-	desc = "A black veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_black"
+	name = "hijab"
+	desc = "A veil which is wrapped to cover the head and chest."
+	icon_state = "hijab"
 	body_parts_covered = 0
 	flags_inv = BLOCKHAIR
 
-/obj/item/clothing/head/hijab/white
-	name = "white hijab"
-	desc = "A white veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_white"
+/obj/item/clothing/head/kippa
+	name = "kippa"
+	desc = "A small, brimless cap."
+	icon_state = "kippa"
+	body_parts_covered = 0
 
-/obj/item/clothing/head/hijab/aqua
-	name = "aqua hijab"
-	desc = "An aqua veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_aqua"
+/obj/item/clothing/head/turban
+	name = "turban"
+	desc = "A sturdy cloth, worn around the head."
+	icon_state = "turban"
+	body_parts_covered = 0
+	flags_inv = BLOCKHEADHAIR //Shows beards!
 
-/obj/item/clothing/head/hijab/blue
-	name = "blue hijab"
-	desc = "A blue veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_blue"
-
-/obj/item/clothing/head/hijab/brown
-	name = "brown hijab"
-	desc = "A brown veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_brown"
-
-/obj/item/clothing/head/hijab/darkblue
-	name = "bark blue hijab"
-	desc = "A dark blue veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_darkblue"
-
-/obj/item/clothing/head/hijab/darkred
-	name = "dark red hijab"
-	desc = "A dark red veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_darkred"
-
-/obj/item/clothing/head/hijab/green
-	name = "green hijab"
-	desc = "A green veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_green"
-
-/obj/item/clothing/head/hijab/grey
-	name = "grey hijab"
-	desc = "A grey veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_grey"
-
-/obj/item/clothing/head/hijab/lightblue
-	name = "light blue hijab"
-	desc = "A light blue veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_lightblue"
-
-/obj/item/clothing/head/hijab/lightbrown
-	name = "light brown hijab"
-	desc = "A light brown veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_lightbrown"
-
-/obj/item/clothing/head/hijab/lightgreen
-	name = "light green hijab"
-	desc = "A light green veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_lightgreen"
-
-/obj/item/clothing/head/hijab/lightpurple
-	name = "light purple hijab"
-	desc = "A light purple veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_lightpurple"
-
-/obj/item/clothing/head/hijab/lightred
-	name = "light red hijab"
-	desc = "A light red veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_lightred"
-
-/obj/item/clothing/head/hijab/maroon
-	name = "maroon hijab"
-	desc = "A maroon veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_maroon"
-
-/obj/item/clothing/head/hijab/orange
-	name = "orange hijab"
-	desc = "An orange veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_orange"
-
-/obj/item/clothing/head/hijab/pink
-	name = "pink hijab"
-	desc = "A pink veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_pink"
-
-/obj/item/clothing/head/hijab/purple
-	name = "purple hijab"
-	desc = "A purple veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_purple"
-
-/obj/item/clothing/head/hijab/red
-	name = "red hijab"
-	desc = "A red veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_red"
-
-/obj/item/clothing/head/hijab/yellowgreen
-	name = "yellow green hijab"
-	desc = "A yellow green veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_yellowgreen"
-
-/obj/item/clothing/head/hijab/yellow
-	name = "yellow hijab"
-	desc = "A yellow veil that is wrapped to cover the head and chest"
-	icon_state = "hijab_yellow"

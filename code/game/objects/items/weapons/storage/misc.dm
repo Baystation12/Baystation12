@@ -15,16 +15,10 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "donutbox"
 	name = "donut box"
-	var/startswith = 6
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/donut)
 	foldable = /obj/item/stack/material/cardboard
 
-/obj/item/weapon/storage/box/donut/New()
-	..()
-	for(var/i=1; i <= startswith; i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/donut/normal(src)
-	update_icon()
-	return
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 6)
 
 /obj/item/weapon/storage/box/donut/update_icon()
 	overlays.Cut()
@@ -34,4 +28,4 @@
 		i++
 
 /obj/item/weapon/storage/box/donut/empty
-	startswith = 0
+	startswith = null

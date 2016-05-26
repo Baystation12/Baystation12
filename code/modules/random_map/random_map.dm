@@ -68,13 +68,11 @@ var/global/list/map_count = list()
 	if(!do_not_announce) admin_notice("<span class='danger'>[capitalize(name)] failed to generate ([round(0.1*(world.timeofday-start_time),0.1)] seconds): could not produce sane map.</span>", R_DEBUG)
 
 /datum/random_map/proc/get_map_cell(var/x,var/y)
-	if(!islist(map))
+	if(!map)
 		set_map_size()
-	var/cell = ((y-1)*limit_x)+x
-	if((cell < 1) || (cell > map.len))
+	. = ((y-1)*limit_x)+x
+	if((. < 1) || (. > map.len))
 		return null
-	else
-		return cell
 
 /datum/random_map/proc/get_map_char(var/value)
 	switch(value)

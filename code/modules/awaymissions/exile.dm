@@ -13,7 +13,7 @@
 
 /obj/item/weapon/implant/exile
 	name = "exile"
-	desc = "Prevents you from returning from away missions"
+	desc = "Prevents you from returning from away missions."
 
 	get_data()
 		var/dat = {"

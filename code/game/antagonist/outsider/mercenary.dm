@@ -3,13 +3,12 @@ var/datum/antagonist/mercenary/mercs
 /datum/antagonist/mercenary
 	id = MODE_MERCENARY
 	role_text = "Mercenary"
-	bantype = "operative"
 	antag_indicator = "synd"
 	role_text_plural = "Mercenaries"
 	landmark_id = "Syndicate-Spawn"
 	leader_welcome_text = "You are the leader of the mercenary strikeforce; hail to the chief. Use :t to speak to your underlings."
 	welcome_text = "To speak on the strike team's private channel use :t."
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_HAS_NUKE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
+	flags = ANTAG_VOTABLE | ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_HAS_NUKE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
 	id_type = /obj/item/weapon/card/id/syndicate
 	antaghud_indicator = "hudoperative"
 
@@ -17,6 +16,8 @@ var/datum/antagonist/mercenary/mercs
 	hard_cap_round = 8
 	initial_spawn_req = 4
 	initial_spawn_target = 6
+
+	faction = "mercenary"
 
 /datum/antagonist/mercenary/New()
 	..()
@@ -42,7 +43,7 @@ var/datum/antagonist/mercenary/mercs
 	player.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(player.back), slot_in_backpack)
 	player.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/pill/cyanide(player), slot_in_backpack)
 
-	var/obj/item/device/radio/uplink/U = new(player.loc, player.mind, DEFAULT_TELECRYSTAL_AMOUNT)
+	var/obj/item/device/radio/uplink/U = new(get_turf(player), player.mind, DEFAULT_TELECRYSTAL_AMOUNT)
 	player.put_in_hands(U)
 
 	player.update_icons()

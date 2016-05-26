@@ -4,18 +4,22 @@
 	w_class = 3.0
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
+	var/randpixel = 6
 	var/abstract = 0
 	var/r_speed = 1.0
 	var/health = null
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = null
-	var/storage_cost = null
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
 	pass_flags = PASSTABLE
 //	causeerrorheresoifixthis
 	var/obj/item/master = null
+	var/list/origin_tech = null	//Used by R&D to determine what research bonuses it grants.
+	var/list/attack_verb = list() //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
+	var/lock_picking_level = 0 //used to determine whether something can pick a lock, and how well.
+	var/force = 0
 
 	var/heat_protection = 0 //flags which determine which body parts are protected from heat. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
 	var/cold_protection = 0 //flags which determine which body parts are protected from cold. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
@@ -37,11 +41,12 @@
 	var/gas_transfer_coefficient = 1 // for leaking gas from turf to mask and vice-versa (for masks right now, but at some point, i'd like to include space helmets)
 	var/permeability_coefficient = 1 // for chemicals/diseases
 	var/siemens_coefficient = 1 // for electrical admittance/conductance (electrocution checks and shit)
-	var/slowdown = 0 // How much clothing is slowing you down. Negative values speeds you up
+	var/slowdown_general = 0 // How much clothing is slowing you down. Negative values speeds you up. This is a genera##l slowdown, no matter equipment slot.
+	var/slowdown_per_slot[slot_last] // How much clothing is slowing you down. Negative values speeds you up. This is an associative list: item slot - slowdown
 	var/canremove = 1 //Mostly for Ninja code at this point but basically will not allow the item to be removed if set to 0. /N
 	var/list/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	var/list/allowed = null //suit storage stuff.
-	var/obj/item/device/uplink/hidden/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
+	var/obj/item/device/uplink/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
 	var/zoomdevicename = null //name used for message when binoculars/scope is used
 	var/zoom = 0 //1 if item is actively being used to zoom. For scoped guns and binoculars.
 
@@ -71,17 +76,15 @@
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
 
-/obj/item/equipped()
+/obj/item/New()
 	..()
-	var/mob/M = loc
-	if(!istype(M))
-		return
-	if(M.l_hand)
-		M.l_hand.update_held_icon()
-	if(M.r_hand)
-		M.r_hand.update_held_icon()
+	if(randpixel && (!pixel_x && !pixel_y)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
+		pixel_x = rand(-randpixel, randpixel)
+		pixel_y = rand(-randpixel, randpixel)
 
 /obj/item/Destroy()
+	qdel(hidden_uplink)
+	hidden_uplink = null
 	if(ismob(loc))
 		var/mob/m = loc
 		m.drop_from_inventory(src)
@@ -94,13 +97,31 @@
 	icon = 'icons/obj/device.dmi'
 
 //Checks if the item is being held by a mob, and if so, updates the held icons
-/obj/item/proc/update_held_icon()
+/obj/item/proc/update_twohanding()
 	if(ismob(src.loc))
 		var/mob/M = src.loc
 		if(M.l_hand == src)
 			M.update_inv_l_hand()
 		else if(M.r_hand == src)
 			M.update_inv_r_hand()
+
+/obj/item/proc/is_held_twohanded(mob/living/M)
+	var/check_hand
+	if(M.l_hand == src && !M.r_hand) 
+		check_hand = "r_hand" //item in left hand, check right hand
+	else if(M.r_hand == src && !M.l_hand)
+		check_hand = "l_hand" //item in right hand, check left hand
+	else
+		return FALSE
+
+	//would check is_broken() and is_malfunctioning() here too but is_malfunctioning()
+	//is probabilistic so we can't do that and it would be unfair to just check one.
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/external/hand = H.organs_by_name[check_hand]
+		if(istype(hand) && hand.is_usable())
+			return TRUE
+	return FALSE
 
 /obj/item/ex_act(severity)
 	switch(severity)
@@ -135,15 +156,17 @@
 /obj/item/examine(mob/user, var/distance = -1)
 	var/size
 	switch(src.w_class)
-		if(1.0)
+		if(TINY_ITEM)
 			size = "tiny"
-		if(2.0)
+		if(SMALL_ITEM)
 			size = "small"
-		if(3.0)
+		if(NORMAL_ITEM)
 			size = "normal-sized"
-		if(4.0)
+		if(LARGE_ITEM)
+			size = "large"
+		if(BULKY_ITEM)
 			size = "bulky"
-		if(5.0)
+		if(BULKY_ITEM + 1 to INFINITY)
 			size = "huge"
 	return ..(user, distance, "", "It is a [size] item.")
 
@@ -172,7 +195,14 @@
 	else
 		if(isliving(src.loc))
 			return
-	user.put_in_active_hand(src)
+	if(user.put_in_active_hand(src))
+		if(randpixel)
+			pixel_x = rand(-randpixel, randpixel)
+			pixel_y = rand(-randpixel/2, randpixel/2)
+			pixel_z = 0
+		else if(randpixel == 0)
+			pixel_x = 0
+			pixel_y = 0
 	return
 
 /obj/item/attack_ai(mob/user as mob)
@@ -225,7 +255,8 @@
 
 // apparently called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(mob/user as mob)
-	..()
+	if(randpixel)
+		pixel_z = randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character
 	if(zoom) zoom() //binoculars, scope, etc
 
 // called just as an item is picked up (loc is not yet changed)
@@ -250,10 +281,18 @@
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
-	layer = 20
+	layer = SCREEN_LAYER+0.01
 	if(user.client)	user.client.screen |= src
 	if(user.pulling == src) user.stop_pulling()
-	return
+	
+	//Update two-handing status
+	var/mob/M = loc
+	if(!istype(M))
+		return
+	if(M.l_hand)
+		M.l_hand.update_twohanding()
+	if(M.r_hand)
+		M.r_hand.update_twohanding()
 
 //Defines which slots correspond to which slot flags
 var/list/global/slot_flags_enumeration = list(
@@ -309,7 +348,7 @@ var/list/global/slot_flags_enumeration = list(
 	switch(slot)
 		if(slot_l_ear, slot_r_ear)
 			var/slot_other_ear = (slot == slot_l_ear)? slot_r_ear : slot_l_ear
-			if( (w_class > 1) && !(slot_flags & SLOT_EARS) )
+			if( (w_class > TINY_ITEM) && !(slot_flags & SLOT_EARS) )
 				return 0
 			if( (slot_flags & SLOT_TWOEARS) && H.get_equipped_item(slot_other_ear) )
 				return 0
@@ -325,8 +364,10 @@ var/list/global/slot_flags_enumeration = list(
 				return 0
 			if(slot_flags & SLOT_DENYPOCKET)
 				return 0
-			if( w_class > 2 && !(slot_flags & SLOT_POCKET) )
+			if( w_class > SMALL_ITEM && !(slot_flags & SLOT_POCKET) )
 				return 0
+			if(get_storage_cost() == DO_NOT_STORE)
+				return 0 //pockets act like storage and should respect DO_NOT_STORE. Suit storage might be fine as is
 		if(slot_s_store)
 			if(!H.wear_suit && (slot_wear_suit in mob_equip))
 				if(!disable_warning)

@@ -31,7 +31,7 @@
 	name = "Random Items"
 	desc = "Buys you as many random items you can afford. Convenient packaging NOT included."
 
-/datum/uplink_item/item/badassery/random_many/cost(var/telecrystals)
+/datum/uplink_item/item/badassery/random_many/cost(var/telecrystals, obj/item/device/uplink/U)
 	return max(1, telecrystals)
 
 /datum/uplink_item/item/badassery/random_many/get_goods(var/obj/item/device/uplink/U, var/loc)

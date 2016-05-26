@@ -137,7 +137,7 @@
 		list("dexalin plus",  "dexalinp",      0, 80),
 		list("antibiotics",   "spaceacillin",  0, 80),
 		list("antitoxins",    "anti_toxin",    0, 80),
-		list("nutrients",     "nutriment",     0, 80),
+		list("nutrients",     "glucose",     0, 80),
 		list("hyronalin",     "hyronalin",     0, 80),
 		list("radium",        "radium",        0, 80)
 		)
@@ -154,7 +154,7 @@
 		list("dexalin plus",  "dexalinp",      0, 20),
 		list("antibiotics",   "spaceacillin",  0, 20),
 		list("antitoxins",    "anti_toxin",    0, 20),
-		list("nutrients",     "nutriment",     0, 80),
+		list("nutrients",     "glucose",     0, 80),
 		list("hyronalin",     "hyronalin",     0, 20),
 		list("radium",        "radium",        0, 20)
 		)
@@ -243,7 +243,7 @@
 		list("synaptizine",   "synaptizine",   0, 30),
 		list("hyperzine",     "hyperzine",     0, 30),
 		list("oxycodone",     "oxycodone",     0, 30),
-		list("nutrients",     "nutriment",     0, 80),
+		list("nutrients",     "glucose",     0, 80),
 		)
 
 	interface_name = "combat chem dispenser"

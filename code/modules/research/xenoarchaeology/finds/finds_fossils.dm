@@ -10,8 +10,8 @@
 	var/animal = 1
 
 /obj/item/weapon/fossil/base/New()
-	var/list/l = list("/obj/item/weapon/fossil/bone"=9,"/obj/item/weapon/fossil/skull"=3,
-	"/obj/item/weapon/fossil/skull/horned"=2)
+	var/list/l = list(/obj/item/weapon/fossil/bone=9,/obj/item/weapon/fossil/skull=3,
+	/obj/item/weapon/fossil/skull/horned=2)
 	var/t = pickweight(l)
 	var/obj/item/weapon/W = new t(src.loc)
 	var/turf/T = get_turf(src)

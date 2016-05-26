@@ -17,7 +17,7 @@
 /mob/living/carbon/human/isSynthetic()
 	// If they are 100% robotic, they count as synthetic.
 	for(var/obj/item/organ/external/E in organs)
-		if(!(E.status & ORGAN_ROBOT))
+		if(!(E.robotic >= ORGAN_ROBOT))
 			return 0
 	return 1
 
@@ -298,7 +298,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 		var/atom/oldeye=M.client.eye
 		var/aiEyeFlag = 0
-		if(istype(oldeye, /mob/eye/aiEye))
+		if(istype(oldeye, /mob/observer/eye/aiEye))
 			aiEyeFlag = 1
 
 		var/x
@@ -427,12 +427,14 @@ proc/is_blind(A)
 			var/follow
 			var/lname
 			if(subject)
+				if(M.is_key_ignored(subject.client.key)) // If we're ignored, do nothing.
+					continue
 				if(subject != M)
 					follow = "([ghost_follow_link(subject, M)]) "
 				if(M.stat != DEAD && M.client.holder)
 					follow = "([admin_jump_link(subject, M.client.holder)]) "
-				var/mob/dead/observer/DM
-				if(istype(subject, /mob/dead/observer))
+				var/mob/observer/ghost/DM
+				if(isghost(subject))
 					DM = subject
 				if(M.client.holder) 							// What admins see
 					lname = "[keyname][(DM && DM.anonsay) ? "*" : (DM ? "" : "^")] ([name])"
@@ -575,7 +577,7 @@ proc/is_blind(A)
 	if(istype(P))
 		return P
 
-mob/dead/observer/get_multitool()
+/mob/observer/ghost/get_multitool()
 	return can_admin_interact() && ..(ghost_multitool)
 
 /mob/living/carbon/human/get_multitool()
@@ -586,3 +588,29 @@ mob/dead/observer/get_multitool()
 
 /mob/living/silicon/ai/get_multitool()
 	return ..(aiMulti)
+
+/proc/get_both_hands(mob/living/carbon/M)
+	if(!istype(M))
+		return
+	var/list/hands = list(M.l_hand, M.r_hand)
+	return hands
+
+/mob/proc/refresh_client_images()
+	if(client)
+		client.images |= client_images
+
+/mob/proc/hide_client_images()
+	if(client)
+		client.images -= client_images
+
+/mob/proc/add_client_image(var/image)
+	if(image in client_images)
+		return
+	client_images += image
+	if(client)
+		client.images += image
+
+/mob/proc/remove_client_image(var/image)
+	client_images -= image
+	if(client)
+		client.images -= image

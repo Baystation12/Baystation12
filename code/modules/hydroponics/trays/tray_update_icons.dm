@@ -3,7 +3,7 @@
 	// Update name.
 	if(seed)
 		if(mechanical)
-			name = "[base_name] (#[seed.uid])"
+			name = "[base_name] ([seed.seed_name])"
 		else
 			name = "[seed.seed_name]"
 	else

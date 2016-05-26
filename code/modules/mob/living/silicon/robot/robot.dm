@@ -106,7 +106,7 @@
 
 	robot_modules_background = new()
 	robot_modules_background.icon_state = "block"
-	robot_modules_background.layer = 19 //Objects that appear on screen are on layer 20, UI should be just below it.
+	robot_modules_background.layer = SCREEN_LAYER
 	ident = rand(1, 999)
 	module_sprites["Basic"] = "robot"
 	icontype = "Basic"
@@ -234,7 +234,7 @@
 	if(new_sprites && new_sprites.len)
 		module_sprites = new_sprites.Copy()
 		//Custom_sprite check and entry
-		
+
 		if (custom_sprite == 1)
 			var/list/valid_states = icon_states(CUSTOM_ITEM_SYNTH)
 			if("[ckey]-[modtype]" in valid_states)
@@ -316,7 +316,7 @@
 			flavor_text = client.prefs.flavour_texts_robot["Default"]
 
 /mob/living/silicon/robot/verb/Namepick()
-	set category = "Robot Commands"
+	set category = "Silicon Commands"
 	if(custom_name)
 		return 0
 
@@ -331,7 +331,7 @@
 
 // this verb lets cyborgs see the stations manifest
 /mob/living/silicon/robot/verb/cmd_station_manifest()
-	set category = "Robot Commands"
+	set category = "Silicon Commands"
 	set name = "Show Crew Manifest"
 	show_station_manifest()
 
@@ -347,7 +347,7 @@
 	return dat
 
 /mob/living/silicon/robot/verb/toggle_lights()
-	set category = "Robot Commands"
+	set category = "Silicon Commands"
 	set name = "Toggle Lights"
 
 	lights_on = !lights_on
@@ -355,7 +355,7 @@
 	update_robot_light()
 
 /mob/living/silicon/robot/verb/self_diagnosis_verb()
-	set category = "Robot Commands"
+	set category = "Silicon Commands"
 	set name = "Self Diagnosis"
 
 	if(!is_component_functioning("diagnosis unit"))
@@ -369,7 +369,7 @@
 
 
 /mob/living/silicon/robot/verb/toggle_component()
-	set category = "Robot Commands"
+	set category = "Silicon Commands"
 	set name = "Toggle Component"
 	set desc = "Toggle a component, conserving power."
 
@@ -429,7 +429,7 @@
 
 // update the status screen display
 /mob/living/silicon/robot/Stat()
-	..()
+	. = ..()
 	if (statpanel("Status"))
 		show_cell_power()
 		show_jetpack_pressure()
@@ -574,8 +574,8 @@
 			user << "Close the panel first."
 		else if(cell)
 			user << "There is a power cell already installed."
-		else if(W.w_class != 3)
-			user << "\The [W] is too [W.w_class < 3? "small" : "large"] to fit here."
+		else if(W.w_class != NORMAL_ITEM)
+			user << "\The [W] is too [W.w_class < NORMAL_ITEM? "small" : "large"] to fit here."
 		else
 			user.drop_item()
 			W.loc = src
@@ -779,7 +779,7 @@
 		return 1
 
 	if (href_list["showalerts"])
-		subsystem_alarm_monitor()
+		open_subsystem(/datum/nano_module/alarm_monitor/all)
 		return 1
 
 	if (href_list["mod"])
@@ -801,19 +801,19 @@
 			return 1
 		if(!module_state_1)
 			module_state_1 = O
-			O.layer = 20
+			O.layer = SCREEN_LAYER
 			contents += O
 			if(istype(module_state_1,/obj/item/borg/sight))
 				sight_mode |= module_state_1:sight_mode
 		else if(!module_state_2)
 			module_state_2 = O
-			O.layer = 20
+			O.layer = SCREEN_LAYER
 			contents += O
 			if(istype(module_state_2,/obj/item/borg/sight))
 				sight_mode |= module_state_2:sight_mode
 		else if(!module_state_3)
 			module_state_3 = O
-			O.layer = 20
+			O.layer = SCREEN_LAYER
 			contents += O
 			if(istype(module_state_3,/obj/item/borg/sight))
 				sight_mode |= module_state_3:sight_mode
@@ -900,7 +900,7 @@
 
 
 /mob/living/silicon/robot/proc/ResetSecurityCodes()
-	set category = "Robot Commands"
+	set category = "Silicon Commands"
 	set name = "Reset Identity Codes"
 	set desc = "Scrambles your security and identification codes and resets your current buffers.  Unlocks you and but permenantly severs you from your AI and the robotics console and will deactivate your camera system."
 
@@ -957,17 +957,15 @@
 
 /mob/living/silicon/robot/proc/sensor_mode() //Medical/Security HUD controller for borgs
 	set name = "Set Sensor Augmentation"
-	set category = "Robot Commands"
+	set category = "Silicon Commands"
 	set desc = "Augment visual feed with internal sensor overlays."
 	toggle_sensor_mode()
 
 /mob/living/silicon/robot/proc/add_robot_verbs()
 	src.verbs |= robot_verbs_default
-	src.verbs |= silicon_subsystems
 
 /mob/living/silicon/robot/proc/remove_robot_verbs()
 	src.verbs -= robot_verbs_default
-	src.verbs -= silicon_subsystems
 
 // Uses power from cyborg's cell. Returns 1 on success or 0 on failure.
 // Properly converts using CELLRATE now! Amount is in Joules.

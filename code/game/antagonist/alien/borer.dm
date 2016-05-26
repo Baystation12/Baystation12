@@ -5,7 +5,6 @@ var/datum/antagonist/xenos/borer/borers
 	role_text = "Cortical Borer"
 	role_text_plural = "Cortical Borers"
 	mob_path = /mob/living/simple_animal/borer
-	bantype = "Borer"
 	welcome_text = "Use your Infest power to crawl into the ear of a host and fuse with their brain. You can only take control temporarily, and at risk of hurting your host, so be clever and careful; your host is encouraged to help you however they can. Talk to your fellow borers with :x."
 	antag_indicator = "brainworm"
 	antaghud_indicator = "hudborer"
@@ -13,6 +12,7 @@ var/datum/antagonist/xenos/borer/borers
 	faction_role_text = "Borer Thrall"
 	faction_descriptor = "Unity"
 	faction_welcome = "You are now a thrall to a cortical borer. Please listen to what they have to say; they're in your head."
+	faction = "borer"
 
 	initial_spawn_req = 3
 	initial_spawn_target = 5
@@ -38,7 +38,7 @@ var/datum/antagonist/xenos/borer/borers
 		for(var/mob/living/carbon/human/H in mob_list)
 			if(H.stat != DEAD && !H.has_brain_worms())
 				var/obj/item/organ/external/head = H.get_organ("head")
-				if(head && !(head.status & ORGAN_ROBOT))
+				if(head && !(head.robotic >= ORGAN_ROBOT))
 					host = H
 					break
 		if(istype(host))

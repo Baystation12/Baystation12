@@ -1,6 +1,6 @@
 /mob/living/carbon/alien/diona/confirm_evolution()
 
-	if(!is_alien_whitelisted(src, "Diona") && config.usealienwhitelist)
+	if(!is_species_whitelisted(src, "Diona"))
 		src << alert("You are currently not whitelisted to play as a full diona.")
 		return null
 

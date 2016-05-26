@@ -1,0 +1,11 @@
+<ui-display title='Current track: {{data.current_track}}'>
+    <ui-section>
+        <ui-button style='{{data.playing ? "selected" : null}}' action='play'>Play</ui-button>
+        <ui-button style='{{data.playing ? null : "selected"}}' action='stop'>Stop</ui-button>
+    </ui-section>
+</ui-display>
+<ui-display title='Available tracks:'>
+    {{#each data.tracks}}
+        <ui-button action='change_track' params='{"title" : {{.}}}'>{{.}}</ui-button><br>
+    {{/each}}
+</ui-display>

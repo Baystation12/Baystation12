@@ -85,9 +85,9 @@
 		return success_smash(user)
 
 	if(reinf_material)
-		if((wallbreaker == 2) || (damage >= max(material.hardness,reinf_material.hardness)))
+		if(damage >= max(material.hardness,reinf_material.hardness))
 			return success_smash(user)
-	else if(damage >= material.hardness)
+	else if(wallbreaker == 2 || damage >= material.hardness)
 		return success_smash(user)
 	return fail_smash(user)
 
@@ -303,8 +303,7 @@
 				if(istype(W, /obj/item/weapon/crowbar))
 					user << "<span class='notice'>You struggle to pry off the outer sheath.</span>"
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-					sleep(100)
-					if(!istype(src, /turf/simulated/wall) || !user || !W || !T )	return
+					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || !user || !W || !T )	return
 					if(user.loc == T && user.get_active_hand() == W )
 						user << "<span class='notice'>You pry off the outer sheath.</span>"
 						dismantle_wall()

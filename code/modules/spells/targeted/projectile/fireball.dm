@@ -1,7 +1,7 @@
 /spell/targeted/projectile/dumbfire/fireball
 	name = "Fireball"
 	desc = "This spell fires a fireball at a target and does not require wizard garb."
-
+	feedback = "FB"
 	proj_type = /obj/item/projectile/spell_projectile/fireball
 
 	school = "evocation"
@@ -10,7 +10,8 @@
 	invocation = "ONI SOMA"
 	invocation_type = SpI_SHOUT
 	range = 20
-	cooldown_min = 20 //10 deciseconds reduction per rank
+
+	level_max = list(Sp_TOTAL = 5, Sp_SPEED = 0, Sp_POWER = 5)
 
 	spell_flags = 0
 
@@ -31,6 +32,18 @@
 	for(var/mob/living/M in targets)
 		apply_spell_damage(M)
 	explosion(get_turf(spell_holder), ex_severe, ex_heavy, ex_light, ex_flash)
+
+/spell/targeted/projectile/dumbfire/fireball/empower_spell()
+	if(!..())
+		return 0
+
+	if(spell_levels[Sp_POWER]%2 == 1)
+		ex_severe++
+	ex_heavy++
+	ex_light++
+	ex_flash++
+
+	return "The spell [src] now has a larger explosion."
 
 //PROJECTILE
 

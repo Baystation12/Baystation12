@@ -3,12 +3,12 @@
 	desc = "The NT Mk60 EW Halicon is a man portable anti-armor weapon designed to disable mechanical threats, produced by NT. Not the best of its type."
 	icon_state = "ionrifle"
 	item_state = "ionrifle"
-	fire_sound = 'sound/weapons/Laser.ogg'
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 4)
-	w_class = 4
+	w_class = 5
 	force = 10
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
+	requires_two_hands = 4
 	charge_cost = 300
 	max_shots = 10
 	projectile_type = /obj/item/projectile/ion
@@ -28,7 +28,6 @@
 	desc = "A gun that discharges high amounts of controlled radiation to slowly break a target into component elements."
 	icon_state = "decloner"
 	item_state = "decloner"
-	fire_sound = 'sound/weapons/pulse3.ogg'
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_POWER = 3)
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/declone
@@ -38,7 +37,6 @@
 	desc = "A tool that discharges controlled radiation which induces mutation in plant cells."
 	icon_state = "floramut100"
 	item_state = "floramut"
-	fire_sound = 'sound/effects/stealthoff.ogg'
 	charge_cost = 100
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/floramut
@@ -65,7 +63,7 @@
 	icon_state = "riotgun"
 	item_state = "c20r"
 	slot_flags = SLOT_BELT|SLOT_BACK
-	w_class = 4
+	w_class = 5
 	projectile_type = /obj/item/projectile/meteor
 	cell_type = /obj/item/weapon/cell/potato
 	self_recharge = 1
@@ -87,13 +85,11 @@
 	desc = "A custom-built weapon of some kind."
 	icon_state = "xray"
 	projectile_type = /obj/item/projectile/beam/mindflayer
-	fire_sound = 'sound/weapons/Laser.ogg'
 
 /obj/item/weapon/gun/energy/toxgun
 	name = "phoron pistol"
 	desc = "A specialized firearm designed to fire lethal bolts of phoron."
 	icon_state = "toxgun"
-	fire_sound = 'sound/effects/stealthoff.ogg'
 	w_class = 3.0
 	origin_tech = list(TECH_COMBAT = 5, TECH_PHORON = 4)
 	projectile_type = /obj/item/projectile/energy/phoron
@@ -102,7 +98,7 @@
 
 /obj/item/weapon/gun/energy/staff
 	name = "staff of change"
-	desc = "An artefact that spits bolts of coruscating energy which cause the target's very form to reshape itself"
+	desc = "An artefact that spits bolts of coruscating energy which cause the target's very form to reshape itself."
 	icon = 'icons/obj/gun.dmi'
 	item_icons = null
 	icon_state = "staffofchange"
@@ -110,7 +106,7 @@
 	fire_sound = 'sound/weapons/emitter.ogg'
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
-	w_class = 4.0
+	w_class = 5
 	max_shots = 5
 	projectile_type = /obj/item/projectile/change
 	origin_tech = null
@@ -147,12 +143,12 @@ obj/item/weapon/gun/energy/staff/focus
 	projectile_type = /obj/item/projectile/forcebolt
 	/*
 	attack_self(mob/living/user as mob)
-		if(projectile_type == "/obj/item/projectile/forcebolt")
+		if(projectile_type == /obj/item/projectile/forcebolt)
 			charge_cost = 400
 			user << "<span class='warning'>The [src.name] will now strike a small area.</span>"
-			projectile_type = "/obj/item/projectile/forcebolt/strong"
+			projectile_type = /obj/item/projectile/forcebolt/strong
 		else
 			charge_cost = 200
 			user << "<span class='warning'>The [src.name] will now strike only a single person.</span>"
-			projectile_type = "/obj/item/projectile/forcebolt"
+			projectile_type = /obj/item/projectile/forcebolt"
 	*/

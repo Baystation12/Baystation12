@@ -60,12 +60,19 @@ datum/unit_test/human_breath/check_result()
 //#define CLONE     "clone"
 //#define HALLOSS   "halloss"
 
+/var/default_mobloc = null
 
 proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living/carbon/human)
 	var/list/test_result = list("result" = FAILURE, "msg"    = "", "mobref" = null)	
 
 	if(isnull(mobloc))
-		mobloc = pick(tdome1)
+		if(!default_mobloc)
+			for(var/turf/simulated/floor/tiled/T in world)
+				var/pressure = T.zone.air.return_pressure()
+				if(90 < pressure && pressure < 120) // Find a turf between 90 and 120
+					default_mobloc = T
+					break
+		mobloc = default_mobloc
 	if(!mobloc)
 		test_result["msg"] = "Unable to find a location to create test mob"
 		return test_result

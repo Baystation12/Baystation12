@@ -42,7 +42,7 @@
 /obj/machinery/shield_gen/Destroy()
 	for(var/obj/effect/energy_field/D in field)
 		field.Remove(D)
-		D.loc = null
+		qdel(D)
 	..()
 	
 /obj/machinery/shield_gen/emag_act(var/remaining_charges, var/mob/user)
@@ -222,7 +222,7 @@
 	else
 		for(var/obj/effect/energy_field/D in field)
 			field.Remove(D)
-			D.loc = null
+			qdel(D)
 
 		for(var/mob/M in view(5,src))
 			M << "\icon[src] You hear heavy droning fade out."

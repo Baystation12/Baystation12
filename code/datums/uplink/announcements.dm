@@ -15,8 +15,17 @@
 	item_cost = round(DEFAULT_TELECRYSTAL_AMOUNT / 2)
 	desc = "Causes a falsified [command_name()] Update. Triggers immediately after supplying additional data."
 
+/datum/uplink_item/abstract/announcements/fake_centcom/extra_args(var/mob/user)
+	var/title = sanitize(input("Enter your announcement title.", "Announcement Title") as null|text)
+	if(!title)
+		return
+	var/message = sanitize(input("Enter your announcement message.", "Announcement Title") as null|text)
+	if(!message)
+		return
+	return list("title" = title, "message" = message)
+
 /datum/uplink_item/abstract/announcements/fake_centcom/get_goods(var/obj/item/device/uplink/U, var/loc, var/mob/user, var/list/args)
-	command_announcement.Announce(args.["message"], args.["title"])
+	command_announcement.Announce(args["message"], args["title"])
 	return 1
 
 /datum/uplink_item/abstract/announcements/fake_crew_arrival

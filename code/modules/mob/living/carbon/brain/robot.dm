@@ -6,9 +6,8 @@
 	w_class = 3
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 3, TECH_DATA = 4)
 
-/obj/item/device/mmi/digital/robot/New()
-	..()
-	src.brainmob.name = "[pick(list("ADA","DOS","GNU","MAC","WIN"))]-[rand(1000, 9999)]"
+/obj/item/device/mmi/digital/robot/PickName()
+	src.brainmob.name = "[pick(list("ADA","DOS","GNU","MAC","WIN"))]-[random_id(type,1000,9999)]"
 	src.brainmob.real_name = src.brainmob.name
 
 /obj/item/device/mmi/digital/robot/transfer_identity(var/mob/living/carbon/H)

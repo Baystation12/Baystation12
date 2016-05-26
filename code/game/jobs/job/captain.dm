@@ -10,7 +10,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "company officials and Corporate Regulations"
-	selection_color = "#ccccff"
+	selection_color = "#1d1d4f"
 	idtype = /obj/item/weapon/card/id/gold
 	req_admin_notify = 1
 	access = list() 			//See get_access()
@@ -28,10 +28,17 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/captain(H), slot_back)
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_cap(H), slot_back)
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		var/obj/item/clothing/under/U = new /obj/item/clothing/under/rank/captain(H)
+		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/captain(H), slot_w_uniform)
 		if(H.age>49)
-			U.accessories += new /obj/item/clothing/accessory/medal/gold/captain(U)
-		H.equip_to_slot_or_del(U, slot_w_uniform)
+			// Since we can have something other than the default uniform at this
+			// point, check if we can actually attach the medal
+			var/obj/item/clothing/uniform = H.w_uniform
+			var/obj/item/clothing/accessory/medal/gold/captain/medal = new()
+
+			if(uniform && uniform.can_attach_accessory(medal))
+				uniform.attach_accessory(null, medal)
+			else
+				qdel(medal)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/captain(H), slot_belt)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/clothing/head/caphat(H), slot_head)
@@ -61,7 +68,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
-	selection_color = "#ddddff"
+	selection_color = "#2f2f7f"
 	idtype = /obj/item/weapon/card/id/silver
 	req_admin_notify = 1
 	minimal_player_age = 10

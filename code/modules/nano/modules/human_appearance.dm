@@ -1,5 +1,6 @@
 /datum/nano_module/appearance_changer
 	name = "Appearance Editor"
+	available_to_ai = FALSE
 	var/flags = APPEARANCE_ALL_HAIR
 	var/mob/living/carbon/human/owner = null
 	var/list/valid_species = list()
@@ -27,7 +28,7 @@
 				cut_and_generate_data()
 				return 1
 	if(href_list["gender"])
-		if(can_change(APPEARANCE_GENDER))
+		if(can_change(APPEARANCE_GENDER) && (href_list["gender"] in owner.species.genders))
 			if(owner.change_gender(href_list["gender"]))
 				cut_and_generate_data()
 				return 1
@@ -91,12 +92,11 @@
 	return 0
 
 /datum/nano_module/appearance_changer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
-
 	if(!owner || !owner.species)
 		return
 
 	generate_data(check_whitelist, whitelist, blacklist)
-	var/data[0]
+	var/list/data = host.initial_data()
 
 	data["specimen"] = owner.species.name
 	data["gender"] = owner.gender
@@ -108,6 +108,11 @@
 		data["species"] = species
 
 	data["change_gender"] = can_change(APPEARANCE_GENDER)
+	if(data["change_gender"])
+		var/genders[0]
+		for(var/gender in owner.species.genders)
+			genders[++genders.len] =  list("gender_name" = gender2text(gender), "gender_key" = gender)
+		data["genders"] = genders
 	data["change_skin_tone"] = can_change_skin_tone()
 	data["change_skin_color"] = can_change_skin_color()
 	data["change_eye_color"] = can_change(APPEARANCE_EYE_COLOR)

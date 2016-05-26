@@ -1,4 +1,8 @@
-/mob/living/proc/trigger_aiming(var/trigger_type)
+//as core click exists at the mob level
+/mob/proc/trigger_aiming(var/trigger_type)
+	return
+
+/mob/living/trigger_aiming(var/trigger_type)
 	if(!aimed.len)
 		return
 	for(var/obj/aiming_overlay/AO in aimed)
@@ -15,7 +19,7 @@
 		return
 	if(!owner.canClick())
 		return
-	owner.setClickCooldown(5) // Spam prevention, essentially.
+	owner.setClickCooldown(DEFAULT_QUICK_COOLDOWN) // Spam prevention, essentially.
 	if(owner.a_intent == I_HELP)
 		owner << "<span class='warning'>You refrain from firing \the [aiming_with] as your intent is set to help.</span>"
 		return
@@ -23,7 +27,3 @@
 	var/obj/item/weapon/gun/G = aiming_with
 	if(istype(G))
 		G.Fire(aiming_at, owner)
-
-/mob/living/ClickOn(var/atom/A, var/params)
-	. = ..()
-	trigger_aiming(TARGET_CAN_CLICK)

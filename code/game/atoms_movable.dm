@@ -34,12 +34,9 @@
 
 /atom/movable/Destroy()
 	. = ..()
-	if(reagents)
-		qdel(reagents)
-		reagents = null
-	for(var/atom/movable/AM in contents)
+	for(var/atom/movable/AM in src)
 		qdel(AM)
-	loc = null
+	forceMove(null)
 	if (pulledby)
 		if (pulledby.pulling == src)
 			pulledby.pulling = null
@@ -55,22 +52,43 @@
 		src.throwing = 0
 
 	spawn(0)
-		if ((A && yes))
+		if (A && yes)
 			A.last_bumped = world.time
 			A.Bumped(src)
 		return
 	..()
 	return
 
-/atom/movable/proc/forceMove(atom/destination, var/special_event)
+/atom/movable/proc/forceMove(atom/destination)
+	if(loc == destination)
+		return 0
+	var/is_origin_turf = isturf(loc)
+	var/is_destination_turf = isturf(destination)
+	// It is a new area if:
+	//  Both the origin and destination are turfs with different areas.
+	//  When either origin or destination is a turf and the other is not.
+	var/is_new_area = (is_origin_turf ^ is_destination_turf) || (is_origin_turf && is_destination_turf && loc.loc != destination.loc)
+
+	var/atom/origin = loc
+	loc = destination
+
+	if(origin)
+		origin.Exited(src, destination)
+		if(is_origin_turf)
+			for(var/atom/movable/AM in origin)
+				AM.Uncrossed(src)
+			if(is_new_area && is_origin_turf)
+				origin.loc.Exited(src, destination)
+
 	if(destination)
-		var/atom/old_loc = loc
-		if(old_loc)
-			old_loc.Exited(src)
-		loc = destination
-		loc.Entered(src, old_loc, special_event)
-		return 1
-	return 0
+		destination.Entered(src, origin)
+		if(is_destination_turf) // If we're entering a turf, cross all movable atoms
+			for(var/atom/movable/AM in loc)
+				if(AM != src)
+					AM.Crossed(src)
+			if(is_new_area && is_destination_turf)
+				destination.loc.Entered(src, origin)
+	return 1
 
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, var/speed)
@@ -107,13 +125,15 @@
 					src.throw_impact(A,speed)
 
 /atom/movable/proc/throw_at(atom/target, range, speed, thrower)
-	if(!target || !src)	return 0
+	if(!target || !src)
+		return 0
+	if(target.z != src.z)
+		return 0
 	//use a modified version of Bresenham's algorithm to get from the atom's current position to that of the target
-
 	src.throwing = 1
 	src.thrower = thrower
 	src.throw_source = get_turf(src)	//store the origin turf
-
+	src.pixel_z = 0
 	if(usr)
 		if(HULK in usr.mutations)
 			src.throwing = 2 // really strong throw!
@@ -215,6 +235,10 @@
 		src.verbs -= x
 	..()
 
+/atom/movable/overlay/Destroy()
+	master = null
+	. = ..()
+
 /atom/movable/overlay/attackby(a, b)
 	if (src.master)
 		return src.master.attackby(a, b)
@@ -226,39 +250,36 @@
 	return
 
 /atom/movable/proc/touch_map_edge()
-	if(z in config.sealed_levels)
+	if(z in using_map.sealed_levels)
 		return
 
 	if(config.use_overmap)
 		overmap_spacetravel(get_turf(src), src)
 		return
 
-	var/move_to_z = src.get_transit_zlevel()
-	if(move_to_z)
-		z = move_to_z
-
+	var/new_x
+	var/new_y
+	var/new_z = src.get_transit_zlevel()
+	if(new_z)
 		if(x <= TRANSITIONEDGE)
-			x = world.maxx - TRANSITIONEDGE - 2
-			y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+			new_x = world.maxx - TRANSITIONEDGE - 2
+			new_y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
 
 		else if (x >= (world.maxx - TRANSITIONEDGE + 1))
-			x = TRANSITIONEDGE + 1
-			y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+			new_x = TRANSITIONEDGE + 1
+			new_y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
 
 		else if (y <= TRANSITIONEDGE)
-			y = world.maxy - TRANSITIONEDGE -2
-			x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+			new_y = world.maxy - TRANSITIONEDGE -2
+			new_x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
 		else if (y >= (world.maxy - TRANSITIONEDGE + 1))
-			y = TRANSITIONEDGE + 1
-			x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+			new_y = TRANSITIONEDGE + 1
+			new_x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
-		if(ticker && istype(ticker.mode, /datum/game_mode/nuclear)) //only really care if the game mode is nuclear
-			var/datum/game_mode/nuclear/G = ticker.mode
-			G.check_nuke_disks()
-
-		spawn(0)
-			if(loc) loc.Entered(src)
+		var/turf/T = locate(new_x, new_y, new_z)
+		if(T)
+			forceMove(T)
 
 //This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
 var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "6" = 60)

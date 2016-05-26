@@ -16,7 +16,7 @@
 
 
 /obj/structure/janitorialcart/New()
-	create_reagents(100)
+	create_reagents(180)
 
 
 /obj/structure/janitorialcart/examine(mob/user)
@@ -39,7 +39,7 @@
 			if(reagents.total_volume < 1)
 				user << "<span class='warning'>[src] is out of water!</span>"
 			else
-				reagents.trans_to_obj(I, 5)	//
+				reagents.trans_to_obj(I, I.reagents.maximum_volume)
 				user << "<span class='notice'>You wet [I] in [src].</span>"
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 				return

@@ -3,6 +3,7 @@
 	layer = 4.0
 	animate_movement = 2
 	flags = PROXMOVE
+	var/list/client_images = list() // List of images applied to/removed from the client on login/logout
 	var/datum/mind/mind
 
 	var/lastKnownIP = null
@@ -123,8 +124,6 @@
 	var/voice_name = "unidentifiable voice"
 
 	var/faction = "neutral" //Used for checking whether hostile simple animals will attack you, possibly more stuff later
-	var/captured = 0 //Functionally, should give the same effect as being buckled into a chair when true.
-
 	var/blinded = null
 	var/ear_deaf = null		//Carbon
 

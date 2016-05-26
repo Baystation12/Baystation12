@@ -311,8 +311,7 @@ Class Procs:
 		var/obj/item/weapon/circuitboard/CB = locate(/obj/item/weapon/circuitboard) in component_parts
 		var/P
 		for(var/obj/item/weapon/stock_parts/A in component_parts)
-			for(var/D in CB.req_components)
-				var/T = text2path(D)
+			for(var/T in CB.req_components)
 				if(ispath(A.type, T))
 					P = T
 					break
@@ -336,11 +335,15 @@ Class Procs:
 
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(loc)
+	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(get_turf(src))
 	M.set_dir(src.dir)
 	M.state = 2
 	M.icon_state = "box_1"
 	for(var/obj/I in component_parts)
-		I.loc = loc
+		I.forceMove(get_turf(src))
+
 	qdel(src)
 	return 1
+
+/obj/machinery/InsertedContents()
+	return (contents - component_parts)

@@ -24,7 +24,6 @@ var/global/datum/repository/cameras/camera_repository = new()
 		return
 	invalidated = 0
 
-	cameranet.process_sort()
 	for(var/obj/machinery/camera/C in cameranet.cameras)
 		var/cam = C.nano_structure()
 		for(var/network in C.network)

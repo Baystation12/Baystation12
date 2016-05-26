@@ -1,0 +1,6 @@
+author: Haswell
+
+delete-after: True
+
+changes: 
+  - rscadd: "Added resomi science uniform to custom loadout, xenowear section."

@@ -15,6 +15,8 @@ var/datum/antagonist/deathsquad/deathsquad
 	initial_spawn_req = 4
 	initial_spawn_target = 6
 
+	faction = "deathsquad"
+
 	var/deployed = 0
 
 /datum/antagonist/deathsquad/New(var/no_reference)
@@ -69,7 +71,7 @@ var/datum/antagonist/deathsquad/deathsquad
 	var/syndicate_commando_name = pick(last_names)
 
 	var/datum/preferences/A = new() //Randomize appearance for the commando.
-	A.randomize_appearance_for(player.current)
+	A.randomize_appearance_and_body_for(player.current)
 
 	player.name = "[syndicate_commando_rank] [syndicate_commando_name]"
 	player.current.name = player.name

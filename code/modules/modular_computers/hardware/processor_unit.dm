@@ -8,6 +8,7 @@
 	hardware_size = 2
 	power_usage = 50
 	critical = 1
+	malfunction_probability = 1
 
 	var/max_idle_programs = 2 // 2 idle, + 1 active = 3 as said in description.
 

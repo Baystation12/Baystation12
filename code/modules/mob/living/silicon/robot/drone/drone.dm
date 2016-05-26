@@ -38,7 +38,7 @@ var/list/mob_hat_cache = list()
 	local_transmit = 1
 	possession_candidate = 1
 
-	can_pull_size = 3
+	can_pull_size = NORMAL_ITEM
 	can_pull_mobs = MOB_PULL_SMALLER
 
 	mob_bump_flag = SIMPLE_ANIMAL
@@ -59,7 +59,7 @@ var/list/mob_hat_cache = list()
 
 	holder_type = /obj/item/weapon/holder/drone
 
-/mob/living/silicon/robot/drone/can_be_possessed_by(var/mob/dead/observer/possessor)
+/mob/living/silicon/robot/drone/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	if(!istype(possessor) || !possessor.client || !possessor.ckey)
 		return 0
 	if(!config.allow_drone_spawn)
@@ -75,7 +75,7 @@ var/list/mob_hat_cache = list()
 		return 0
 	return 1
 
-/mob/living/silicon/robot/drone/do_possession(var/mob/dead/observer/possessor)
+/mob/living/silicon/robot/drone/do_possession(var/mob/observer/ghost/possessor)
 	if(!(istype(possessor) && possessor.ckey))
 		return 0
 	if(src.ckey || src.client)
@@ -141,7 +141,7 @@ var/list/mob_hat_cache = list()
 	name = real_name
 
 /mob/living/silicon/robot/drone/updatename()
-	real_name = "maintenance drone ([rand(100,999)])"
+	real_name = "maintenance drone ([random_id(type,100,999)])"
 	name = real_name
 
 /mob/living/silicon/robot/drone/updateicon()
@@ -326,10 +326,10 @@ var/list/mob_hat_cache = list()
 	src << "Use <b>say ;Hello</b> to talk to other drones and <b>say Hello</b> to speak silently to your nearby fellows."
 
 /mob/living/silicon/robot/drone/add_robot_verbs()
-	src.verbs |= silicon_subsystems
+	return
 
 /mob/living/silicon/robot/drone/remove_robot_verbs()
-	src.verbs -= silicon_subsystems
+	return
 
 /mob/living/silicon/robot/drone/construction/welcome_drone()
 	src << "<b>You are a construction drone, an autonomous engineering and fabrication system.</b>."
@@ -342,7 +342,7 @@ var/list/mob_hat_cache = list()
 	flavor_text = "It's a bulky construction drone stamped with a Sol Central glyph."
 
 /mob/living/silicon/robot/drone/construction/updatename()
-	real_name = "construction drone ([rand(100,999)])"
+	real_name = "construction drone ([random_id(type,100,999)])"
 	name = real_name
 
 /proc/too_many_active_drones()

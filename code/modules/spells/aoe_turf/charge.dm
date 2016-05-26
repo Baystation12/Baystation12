@@ -44,15 +44,6 @@
 			var/mob/M = G.affecting
 			charged_item = mob_charge(M)
 
-	if(istype(target, /obj/item/weapon/spellbook/oneuse))
-		var/obj/item/weapon/spellbook/oneuse/I = target
-		if(prob(50))
-			I.visible_message("<span class='warning'>[I] catches fire!</span>")
-			qdel(I)
-		else
-			I.used = 0
-			charged_item = I
-
 	if(istype(target, /obj/item/weapon/cell/))
 		var/obj/item/weapon/cell/C = target
 		if(prob(80))
@@ -67,3 +58,12 @@
 	else
 		charged_item.visible_message("<span class='notice'>[charged_item] suddenly sparks with energy!</span>")
 		return 1
+
+
+/spell/aoe_turf/charge/blood
+	name = "blood charge"
+	desc = "This spell charges things around it using the lifeforce gained by sacrificed blood."
+
+	charge_type = Sp_HOLDVAR
+	holder_var_type = "bruteloss"
+	holder_var_amount = 30

@@ -5,7 +5,7 @@
 	desc = "A standard power cell, commonly seen in high-end portable microcomputers or low-end laptops. It's rating is 750."
 	icon_state = "battery_normal"
 	critical = 1
-
+	malfunction_probability = 1
 	var/battery_rating = 750
 	var/obj/item/weapon/cell/battery = null
 
@@ -50,7 +50,9 @@
 	hardware_size = 1
 	battery_rating = 1000000
 
-
+/obj/item/weapon/computer_hardware/battery_module/diagnostics(var/mob/user)
+	..()
+	user << "Internal battery charge: [battery.charge]/[battery.maxcharge] CU"
 
 /obj/item/weapon/computer_hardware/battery_module/New()
 	battery = new/obj/item/weapon/cell(src)

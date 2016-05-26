@@ -98,7 +98,7 @@
 	maxm = 3
 	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob.apply_effect(2*multiplier, IRRADIATE, check_protection = 0)
+		mob.apply_effect(2*multiplier, IRRADIATE, blocked = 0)
 
 /datum/disease2/effect/deaf
 	name = "Dead Ear Syndrome"
@@ -279,7 +279,7 @@
 		else
 			data = pick("bicaridine", "kelotane", "anti_toxin", "inaprovaline", "space_drugs", "sugar",
 						"tramadol", "dexalin", "cryptobiolin", "impedrezene", "hyperzine", "ethylredoxrazine",
-						"mindbreaker", "nutriment")
+						"mindbreaker", "glucose")
 		var/datum/reagent/R = chemical_reagents_list[data]
 		name = "[initial(name)] ([initial(R.name)])"
 

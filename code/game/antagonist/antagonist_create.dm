@@ -25,8 +25,6 @@
 		M = new mob_path(get_turf(source))
 	else
 		M = new /mob/living/carbon/human(get_turf(source))
-	M.real_name = source.real_name
-	M.name = M.real_name
 	M.ckey = source.ckey
 	add_antagonist(M.mind, 1, 0, 1) // Equip them and move them to spawn.
 	return M
@@ -100,17 +98,13 @@
 		player.current << "<span class='notice'>[leader_welcome_text]</span>"
 	else
 		player.current << "<span class='notice'>[welcome_text]</span>"
+	if (config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
+		player.current << "<span class='notice'>[antag_text]</span>"
 
 	if((flags & ANTAG_HAS_NUKE) && !spawned_nuke)
 		create_nuke()
 
-	show_objectives(player)
-
-	// Clown clumsiness check, I guess downstream might use it.
-	if (player.current.mind)
-		if (player.current.mind.assigned_role == "Clown")
-			player.current << "You have evolved beyond your clownish nature, allowing you to wield weapons without harming yourself."
-			player.current.mutations.Remove(CLUMSY)
+	src.show_objectives_at_creation(player)
 	return 1
 
 /datum/antagonist/proc/set_antag_name(var/mob/living/player)

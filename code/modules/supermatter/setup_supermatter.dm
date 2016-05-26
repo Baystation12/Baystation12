@@ -106,7 +106,7 @@
 	anchored = 1
 	density = 0
 	icon = 'icons/mob/screen1.dmi'
-	icon_state = "x2"
+	icon_state = "x3"
 
 /obj/effect/engine_setup/proc/activate(var/last = 0)
 	return 1

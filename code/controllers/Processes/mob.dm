@@ -14,7 +14,7 @@
 /datum/controller/process/mob/doWork()
 	for(last_object in mob_list)
 		var/mob/M = last_object
-		if(isnull(M.gcDestroyed))
+		if(istype(M) && isnull(M.gcDestroyed))
 			try
 				M.Life()
 			catch(var/exception/e)

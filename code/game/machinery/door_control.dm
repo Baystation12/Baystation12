@@ -56,10 +56,6 @@
 /obj/machinery/button/remote/proc/trigger()
 	return
 
-/obj/machinery/button/remote/power_change()
-	..()
-	update_icon()
-
 /obj/machinery/button/remote/update_icon()
 	if(stat & NOPOWER)
 		icon_state = "doorctrl-p"

@@ -14,7 +14,7 @@
 	if(mind && mind.current == src)
 		spellremove(src)
 	ghostize()
-	..()
+	. = ..()
 
 /mob/proc/remove_screen_obj_references()
 	flash = null
@@ -140,7 +140,16 @@
 	return 0
 
 /mob/proc/movement_delay()
-	return 0
+	. = 0
+	if(pulling)
+		if(istype(pulling, /obj))
+			var/obj/O = pulling
+			. += O.w_class / 5
+		else if(istype(pulling, /mob))
+			var/mob/M = pulling
+			. += M.mob_size / MOB_MEDIUM
+		else
+			. += 1
 
 /mob/proc/Life()
 //	if(organStructure)
@@ -161,8 +170,18 @@
 /mob/proc/is_physically_disabled()
 	return incapacitated(INCAPACITATION_DISABLED)
 
+/mob/proc/cannot_stand()
+	return incapacitated(INCAPACITATION_KNOCKDOWN)
+
 /mob/proc/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
-	if ((incapacitation_flags & INCAPACITATION_DISABLED) && (stat || paralysis || stunned || weakened || resting || sleeping || (status_flags & FAKEDEATH)))
+
+	if ((incapacitation_flags & INCAPACITATION_STUNNED) && stunned)
+		return 1
+
+	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (weakened || resting))
+		return 1
+
+	if ((incapacitation_flags & INCAPACITATION_KNOCKOUT) && (stat || paralysis || sleeping || (status_flags & FAKEDEATH)))
 		return 1
 
 	if((incapacitation_flags & INCAPACITATION_RESTRAINED) && restrained())
@@ -186,6 +205,7 @@
 
 /mob/proc/reset_view(atom/A)
 	if (client)
+		A = A ? A : eyeobj
 		if (istype(A, /atom/movable))
 			client.perspective = EYE_PERSPECTIVE
 			client.eye = A
@@ -373,7 +393,7 @@
 	if ((stat != DEAD || !( ticker )))
 		usr << "<span class='notice'><B>You must be dead to use this!</B></span>"
 		return
-	if (ticker.mode.deny_respawn) //BS12 EDIT
+	if (ticker.mode && ticker.mode.deny_respawn)
 		usr << "<span class='notice'>Respawn is disabled for this roundtype.</span>"
 		return
 	else if(!MayRespawn(1, config.respawn_delay))
@@ -389,6 +409,7 @@
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
 	client.screen.Cut()
+	client.screen += client.void
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
@@ -669,8 +690,8 @@
 
 	if(.)
 		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
-			stat("Station Time", worldtime2text())
-			stat("Round Duration", round_duration())
+			stat("Station Time", stationtime2text())
+			stat("Round Duration", roundduration2text())
 
 		if(client.holder)
 			if(statpanel("Status"))
@@ -700,17 +721,13 @@
 // facing verbs
 /mob/proc/canface()
 	if(!canmove)						return 0
-	if(stat)							return 0
 	if(anchored)						return 0
-	if(transforming)						return 0
+	if(transforming)					return 0
 	return 1
 
 // Not sure what to call this. Used to check if humans are wearing an AI-controlled exosuit and hence don't need to fall over yet.
 /mob/proc/can_stand_overridden()
 	return 0
-
-/mob/proc/cannot_stand()
-	return incapacitated(INCAPACITATION_DEFAULT & (~INCAPACITATION_RESTRAINED))
 
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
 /mob/proc/update_canmove()
@@ -738,19 +755,9 @@
 				if(buckled.buckle_movable)
 					anchored = 0
 					canmove = 1
-
-		else if(cannot_stand())
-			lying = 1
-			canmove = 0
-		else if(stunned)
-			canmove = 0
-		else if(captured)
-			anchored = 1
-			canmove = 0
-			lying = 0
 		else
-			lying = 0
-			canmove = 1
+			lying = incapacitated(INCAPACITATION_KNOCKDOWN)
+			canmove = !incapacitated(INCAPACITATION_DISABLED)
 
 	if(lying)
 		density = 0
@@ -995,49 +1002,6 @@ mob/proc/yank_out_object()
 		if(!pinned.len)
 			anchored = 0
 	return 1
-
-/mob/living/proc/handle_statuses()
-	handle_stunned()
-	handle_weakened()
-	handle_stuttering()
-	handle_silent()
-	handle_drugged()
-	handle_slurring()
-
-/mob/living/proc/handle_stunned()
-	if(stunned)
-		AdjustStunned(-1)
-	return stunned
-
-/mob/living/proc/handle_weakened()
-	if(weakened)
-		weakened = max(weakened-1,0)	//before you get mad Rockdtben: I done this so update_canmove isn't called multiple times
-	return weakened
-
-/mob/living/proc/handle_stuttering()
-	if(stuttering)
-		stuttering = max(stuttering-1, 0)
-	return stuttering
-
-/mob/living/proc/handle_silent()
-	if(silent)
-		silent = max(silent-1, 0)
-	return silent
-
-/mob/living/proc/handle_drugged()
-	if(druggy)
-		druggy = max(druggy-1, 0)
-	return druggy
-
-/mob/living/proc/handle_slurring()
-	if(slurring)
-		slurring = max(slurring-1, 0)
-	return slurring
-
-/mob/living/proc/handle_paralysed() // Currently only used by simple_animal.dm, treated as a special case in other mobs
-	if(paralysis)
-		AdjustParalysis(-1)
-	return paralysis
 
 //Check for brain worms in head.
 /mob/proc/has_brain_worms()

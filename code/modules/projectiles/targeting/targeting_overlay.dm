@@ -23,6 +23,7 @@
 	owner = newowner
 	loc = null
 	verbs.Cut()
+	toggle_permission(TARGET_CAN_RADIO)
 
 /obj/aiming_overlay/proc/toggle_permission(var/perm)
 
@@ -201,6 +202,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 		else
 			owner << "<span class='notice'>You will no longer aim rather than fire.</span>"
 			owner.client.remove_gun_icons()
+		owner.gun_setting_icon.icon_state = "gun[active]"
 
 /obj/aiming_overlay/proc/cancel_aiming(var/no_message = 0)
 	if(!aiming_with || !aiming_at)

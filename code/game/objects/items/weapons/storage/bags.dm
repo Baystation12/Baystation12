@@ -18,7 +18,6 @@
 /obj/item/weapon/storage/bag
 	allow_quick_gather = 1
 	allow_quick_empty = 1
-	display_contents_with_number = 0 // UNStABLE AS FuCK, turn on when it stops crashing clients
 	use_to_pickup = 1
 	slot_flags = SLOT_BELT
 
@@ -32,8 +31,9 @@
 	icon_state = "trashbag0"
 	item_state = "trashbag"
 
-	w_class = 4
+	w_class = 5
 	max_w_class = 2
+	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
 
@@ -58,8 +58,9 @@
 	icon_state = "plasticbag"
 	item_state = "plasticbag"
 
-	w_class = 4
+	w_class = 3
 	max_w_class = 2
+	max_storage_space = DEFAULT_BOX_STORAGE
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
 
@@ -98,6 +99,7 @@
 // -----------------------------
 // Because it stacks stacks, this doesn't operate normally.
 // However, making it a storage/bag allows us to reuse existing code in some places. -Sayu
+// This is old and terrible
 
 /obj/item/weapon/storage/bag/sheetsnatcher
 	name = "sheet snatcher"
@@ -175,22 +177,11 @@
 	orient2hud(mob/user as mob)
 		var/adjusted_contents = contents.len
 
-		//Numbered contents display
-		var/list/datum/numbered_display/numbered_contents
-		if(display_contents_with_number)
-			numbered_contents = list()
-			adjusted_contents = 0
-			for(var/obj/item/stack/material/I in contents)
-				adjusted_contents++
-				var/datum/numbered_display/D = new/datum/numbered_display(I)
-				D.number = I.amount
-				numbered_contents.Add( D )
-
 		var/row_num = 0
 		var/col_count = min(7,storage_slots) -1
 		if (adjusted_contents > 7)
 			row_num = round((adjusted_contents-1) / 7) // 7 is the maximum allowed width.
-		src.slot_orient_objs(row_num, col_count, numbered_contents)
+		src.arrange_item_slots(row_num, col_count)
 		return
 
 

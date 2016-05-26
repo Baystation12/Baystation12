@@ -74,7 +74,7 @@
 	if (items && items.len)
 		var/list/checklist = list()
 		checklist = items.Copy() // You should really trust Copy
-		for(var/obj/O in container)
+		for(var/obj/O in container.InsertedContents())
 			if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown))
 				continue // Fruit is handled in check_fruit().
 			var/found = 0
@@ -93,7 +93,7 @@
 //general version
 /datum/recipe/proc/make(var/obj/container as obj)
 	var/obj/result_obj = new result(container)
-	for (var/obj/O in (container.contents-result_obj))
+	for (var/obj/O in (container.InsertedContents()-result_obj))
 		O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
 		qdel(O)
 	container.reagents.clear_reagents()
@@ -105,7 +105,7 @@
 		world << "<span class='danger'>Recipe [type] is defined without a result, please bug this.</span>"
 		return
 	var/obj/result_obj = new result(container)
-	for (var/obj/O in (container.contents-result_obj))
+	for (var/obj/O in (container.InsertedContents()-result_obj))
 		if (O.reagents)
 			O.reagents.del_reagent("nutriment")
 			O.reagents.update_total()

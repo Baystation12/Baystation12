@@ -18,7 +18,7 @@ Thus, the two variables affect pump operation are set in New():
 	level = 1
 
 	name = "gas pump"
-	desc = "A pump"
+	desc = "A pump."
 
 	var/target_pressure = ONE_ATMOSPHERE
 
@@ -208,12 +208,6 @@ Thus, the two variables affect pump operation are set in New():
 	src.add_fingerprint(usr)
 
 	src.update_icon()
-
-/obj/machinery/atmospherics/binary/pump/power_change()
-	var/old_stat = stat
-	..()
-	if(old_stat != stat)
-		update_icon()
 
 /obj/machinery/atmospherics/binary/pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))

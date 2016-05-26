@@ -9,7 +9,7 @@
 /mob/proc/default_can_use_topic(var/src_object)
 	return STATUS_CLOSE // By default no mob can do anything with NanoUI
 
-/mob/dead/observer/default_can_use_topic(var/src_object)
+/mob/observer/ghost/default_can_use_topic(var/src_object)
 	if(can_admin_interact())
 		return STATUS_INTERACTIVE							// Admins are more equal
 	if(!client || get_dist(src_object, src)	> client.view)	// Preventing ghosts from having a million windows open by limiting to objects in range
@@ -40,7 +40,7 @@
 	// Prevents the AI from using Topic on admin levels (by for example viewing through the court/thunderdome cameras)
 	// unless it's on the same level as the object it's interacting with.
 	var/turf/T = get_turf(src_object)
-	if(!T || !(z == T.z || (T.z in config.player_levels)))
+	if(!T || !(z == T.z || (T.z in using_map.player_levels)))
 		return STATUS_CLOSE
 
 	// If an object is in view then we can interact with it
@@ -50,7 +50,7 @@
 	// If we're installed in a chassi, rather than transfered to an inteliCard or other container, then check if we have camera view
 	if(is_in_chassis())
 		//stop AIs from leaving windows open and using then after they lose vision
-		if(cameranet && !cameranet.checkTurfVis(get_turf(src_object)))
+		if(cameranet && !cameranet.is_turf_visible(get_turf(src_object)))
 			return STATUS_CLOSE
 		return STATUS_INTERACTIVE
 	else if(get_dist(src_object, src) <= client.view)	// View does not return what one would expect while installed in an inteliCard

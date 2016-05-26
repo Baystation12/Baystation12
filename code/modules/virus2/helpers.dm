@@ -159,12 +159,24 @@ proc/airborne_can_reach(turf/source, turf/target)
 
 		if (ishuman(victim))
 			var/mob/living/carbon/human/H = victim
-			var/obj/item/organ/external/select_area = H.get_organ(src.zone_sel.selecting)
-			var/list/clothes = list(H.head, H.wear_mask, H.wear_suit, H.w_uniform, H.gloves, H.shoes)
-			for(var/obj/item/clothing/C in clothes)
-				if(C && istype(C))
-					if(C.body_parts_covered & select_area.body_part)
-						nudity = 0
+
+			//Allow for small chance of touching other zones. 
+			//This is proc is also used for passive spreading so just because they are targeting
+			//that zone doesn't mean that's necessarily where they will touch.
+			var/touch_zone = ran_zone(src.zone_sel.selecting, 80)
+			var/obj/item/organ/external/select_area = H.get_organ(touch_zone)
+			if(!select_area)
+				//give it one more chance, since this is also called for passive spreading
+				select_area = H.get_organ(ran_zone())
+
+			if(!select_area)
+				nudity = 0 //cant contact a missing body part
+			else
+				var/list/clothes = list(H.head, H.wear_mask, H.wear_suit, H.w_uniform, H.gloves, H.shoes)
+				for(var/obj/item/clothing/C in clothes)
+					if(C && istype(C))
+						if(C.body_parts_covered & select_area.body_part)
+							nudity = 0
 		if (nudity)
 			for (var/ID in victim.virus2)
 				var/datum/disease2/disease/V = victim.virus2[ID]

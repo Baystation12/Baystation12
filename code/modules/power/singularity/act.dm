@@ -21,7 +21,7 @@
 			if(prob(current_size*5) && hand.w_class >= ((11-current_size)/2) && u_equip(hand))
 				step_towards(hand, src)
 				src << "<span class = 'warning'>The [S] pulls \the [hand] from your grip!</span>"
-	apply_effect(current_size * 3, IRRADIATE)
+	apply_effect(current_size * 3, IRRADIATE, blocked = getarmor(null, "rad"))
 	if(shoes)
 		if(shoes.item_flags & NOSLIP) return 0
 	..()
@@ -44,15 +44,18 @@
 	return
 
 /obj/item/singularity_pull(S, current_size)
-	spawn(0) //this is needed or multiple items will be thrown sequentially and not simultaneously
-		if(current_size >= STAGE_FOUR)
-			//throw_at(S, 14, 3)
-			step_towards(src,S)
-			sleep(1)
-			step_towards(src,S)
-		else if(current_size > STAGE_ONE)
-			step_towards(src,S)
-		else ..()
+	set waitfor = 0
+	if(anchored)
+		return
+	sleep(0) //this is needed or multiple items will be thrown sequentially and not simultaneously
+	if(current_size >= STAGE_FOUR)
+		//throw_at(S, 14, 3)
+		step_towards(src,S)
+		sleep(1)
+		step_towards(src,S)
+	else if(current_size > STAGE_ONE)
+		step_towards(src,S)
+	else ..()
 
 /obj/machinery/atmospherics/pipe/singularity_pull()
 	return
@@ -104,10 +107,7 @@
 /atom/proc/singuloCanEat()
 	return 1
 
-/mob/dead/singuloCanEat()
-	return 0
-
-/mob/eye/singuloCanEat()
+/mob/observer/singuloCanEat()
 	return 0
 
 /mob/new_player/singuloCanEat()

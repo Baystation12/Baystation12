@@ -298,7 +298,7 @@ var/global/list/narsie_list = list()
 		acquire(pick(cultists))
 		return
 		//no living cultists, pick a living human instead.
-	for(var/mob/dead/observer/ghost in player_list)
+	for(var/mob/observer/ghost/ghost in player_list)
 		if(!ghost.client)
 			continue
 		var/turf/pos = get_turf(ghost)

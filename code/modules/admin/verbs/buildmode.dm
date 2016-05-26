@@ -37,7 +37,7 @@
 /obj/effect/bmode//Cleaning up the tree a bit
 	density = 1
 	anchored = 1
-	layer = 20
+	layer = SCREEN_LAYER
 	dir = NORTH
 	icon = 'icons/misc/buildmode.dmi'
 	var/obj/effect/bmode/buildholder/master = null
@@ -173,7 +173,7 @@
 				if(1)
 					return 1
 				if(2)
-					objholder = text2path(input(usr,"Enter typepath:" ,"Typepath","/obj/structure/closet"))
+					objholder = text2path(input(usr,"Enter typepath:" ,"Typepath",/obj/structure/closet))
 					if(!ispath(objholder))
 						objholder = /obj/structure/closet
 						alert("That path is not allowed.")

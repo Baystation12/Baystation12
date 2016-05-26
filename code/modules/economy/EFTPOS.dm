@@ -140,7 +140,7 @@
 						T.amount = transaction_amount
 						T.source_terminal = machine_id
 						T.date = current_date_string
-						T.time = worldtime2text()
+						T.time = stationtime2text()
 						linked_account.transaction_log.Add(T)
 					else
 						usr << "\icon[src]<span class='warning'>\The [O] doesn't have that much money!</span>"
@@ -264,7 +264,7 @@
 									T.amount = "[transaction_amount]"
 								T.source_terminal = machine_id
 								T.date = current_date_string
-								T.time = worldtime2text()
+								T.time = stationtime2text()
 								D.transaction_log.Add(T)
 								//
 								T = new()
@@ -273,7 +273,7 @@
 								T.amount = "[transaction_amount]"
 								T.source_terminal = machine_id
 								T.date = current_date_string
-								T.time = worldtime2text()
+								T.time = stationtime2text()
 								linked_account.transaction_log.Add(T)
 							else
 								usr << "\icon[src]<span class='warning'>You don't have that much money!</span>"

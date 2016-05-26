@@ -54,7 +54,7 @@
 	return ..()
 
 /mob/living/carbon/human/Stat()
-	..()
+	. = ..()
 	if(statpanel("Status"))
 		stat("Intent:", "[a_intent]")
 		stat("Move Mode:", "[m_intent]")
@@ -63,7 +63,7 @@
 			if(eta_status)
 				stat(null, eta_status)
 
-		if (internal)
+		if (istype(internal))
 			if (!internal.air_contents)
 				qdel(internal)
 			else
@@ -90,12 +90,12 @@
 	if(!blinded)
 		flick("flash", flash)
 
-	var/shielded = 0
 	var/b_loss = null
 	var/f_loss = null
 	switch (severity)
 		if (1.0)
-			b_loss += 500
+			b_loss = 400
+			f_loss = 100
 			if (!prob(getarmor(null, "bomb")))
 				gib()
 				return
@@ -107,40 +107,37 @@
 				//user.throw_at(target, 200, 4)
 
 		if (2.0)
-			if (!shielded)
-				b_loss += 60
-
-			f_loss += 60
-
-			if (prob(getarmor(null, "bomb")))
-				b_loss = b_loss/1.5
-				f_loss = f_loss/1.5
+			b_loss = 60
+			f_loss = 60
 
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
 				ear_damage += 30
 				ear_deaf += 120
-			if (prob(70) && !shielded)
+			if (prob(70))
 				Paralyse(10)
 
 		if(3.0)
-			b_loss += 30
-			if (prob(getarmor(null, "bomb")))
-				b_loss = b_loss/2
+			b_loss = 30
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
 				ear_damage += 15
 				ear_deaf += 60
-			if (prob(50) && !shielded)
+			if (prob(50))
 				Paralyse(10)
+
+	// factor in armour
+	var/protection = blocked_mult(getarmor(null, "bomb"))
+	b_loss *= protection
+	f_loss *= protection
 
 	var/update = 0
 
 	// focus most of the blast on one organ
 	var/obj/item/organ/external/take_blast = pick(organs)
-	update |= take_blast.take_damage(b_loss * 0.9, f_loss * 0.9, used_weapon = "Explosive blast")
+	update |= take_blast.take_damage(b_loss * 0.7, f_loss * 0.7, used_weapon = "Explosive blast")
 
-	// distribute the remaining 10% on all limbs equally
-	b_loss *= 0.1
-	f_loss *= 0.1
+	// distribute the remaining 30% on all limbs equally (including the one already dealt damage)
+	b_loss *= 0.3
+	f_loss *= 0.3
 
 	var/weapon_message = "Explosive Blast"
 
@@ -222,6 +219,9 @@
 		dat += "<BR><b>Left hand:</b> <A href='?src=\ref[src];item=[slot_l_hand]'>[istype(l_hand) ? l_hand : "nothing"]</A>"
 		dat += "<BR><b>Right hand:</b> <A href='?src=\ref[src];item=[slot_r_hand]'>[istype(r_hand) ? r_hand : "nothing"]</A>"
 
+	if(suit)
+		dat += "<BR><b>Pockets:</b> <A href='?src=\ref[src];item=pockets'>Empty or Place Item</A>"
+
 	// Do they get an option to set internals?
 	if(istype(wear_mask, /obj/item/clothing/mask) || istype(head, /obj/item/clothing/head/helmet/space))
 		if(istype(back, /obj/item/weapon/tank) || istype(belt, /obj/item/weapon/tank) || istype(s_store, /obj/item/weapon/tank))
@@ -238,8 +238,7 @@
 	if(suit && suit.accessories.len)
 		dat += "<BR><A href='?src=\ref[src];item=tie'>Remove accessory</A>"
 	dat += "<BR><A href='?src=\ref[src];item=splints'>Remove splints</A>"
-	dat += "<BR><A href='?src=\ref[src];item=pockets'>Empty pockets</A>"
-	dat += "<BR><A href='?src=\ref[user];refresh=1'>Refresh</A>"
+	dat += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>"
 
 	user << browse(dat, text("window=mob[name];size=340x540"))
@@ -358,8 +357,8 @@
 /mob/living/carbon/human/Topic(href, href_list)
 
 	if (href_list["refresh"])
-		if((machine)&&(in_range(src, usr)))
-			show_inv(machine)
+		if(Adjacent(src, usr))
+			show_inv(usr)
 
 	if (href_list["mach_close"])
 		var/t1 = text("window=[]", href_list["mach_close"])
@@ -861,7 +860,7 @@
 		target.show_message("\blue You hear a voice that seems to echo around the room: [say]")
 	usr.show_message("\blue You project your mind into [target.real_name]: [say]")
 	log_say("[key_name(usr)] sent a telepathic message to [key_name(target)]: [say]")
-	for(var/mob/dead/observer/G in world)
+	for(var/mob/observer/ghost/G in world)
 		G.show_message("<i>Telepathic message from <b>[src]</b> to <b>[target]</b>: [say]</i>")
 
 /mob/living/carbon/human/proc/remoteobserve()
@@ -945,10 +944,8 @@
 
 /mob/living/carbon/human/proc/rupture_lung()
 	var/obj/item/organ/lungs/L = internal_organs_by_name["lungs"]
-
-	if(L && !L.is_bruised())
-		src.custom_pain("You feel a stabbing pain in your chest!", 1)
-		L.bruise()
+	if(L)
+		L.rupture()
 
 /*
 /mob/living/carbon/human/verb/simulate()
@@ -1002,9 +999,9 @@
 /mob/living/carbon/human/clean_blood(var/clean_feet)
 	.=..()
 	gunshot_residue = null
-	if(clean_feet && !shoes && istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
+	if(clean_feet && !shoes)
 		feet_blood_color = null
-		qdel(feet_blood_DNA)
+		feet_blood_DNA = null
 		update_inv_shoes(1)
 		return 1
 
@@ -1043,7 +1040,7 @@
 					src << msg
 
 				organ.take_damage(rand(1,3), 0, 0)
-				if(!(organ.status & ORGAN_ROBOT) && !(species.flags & NO_BLOOD)) //There is no blood in protheses.
+				if(!(organ.robotic >= ORGAN_ROBOT) && !(species.flags & NO_BLOOD)) //There is no blood in protheses.
 					organ.status |= ORGAN_BLEEDING
 					src.adjustToxLoss(rand(1,3))
 
@@ -1125,10 +1122,14 @@
 	if(species.holder_type)
 		holder_type = species.holder_type
 
+
+	if(!(gender in species.genders))
+		gender = species.genders[1]
+
 	icon_state = lowertext(species.name)
 
 	species.create_organs(src)
-
+	src.sync_organ_dna()
 	species.handle_post_spawn(src)
 
 	maxHealth = species.total_health
@@ -1136,10 +1137,13 @@
 	spawn(0)
 		regenerate_icons()
 		if(vessel.total_volume < species.blood_volume)
+			vessel.maximum_volume = species.blood_volume
 			vessel.add_reagent("blood", species.blood_volume - vessel.total_volume)
 		else if(vessel.total_volume > species.blood_volume)
 			vessel.remove_reagent("blood", vessel.total_volume - species.blood_volume)
+			vessel.maximum_volume = species.blood_volume
 		fixblood()
+
 
 	// Rebuild the HUD. If they aren't logged in then login() should reinstantiate it for them.
 	if(client && client.screen)
@@ -1211,35 +1215,28 @@
 		W.message = message
 		W.add_fingerprint(src)
 
-/mob/living/carbon/human/can_inject(var/mob/user, var/error_msg, var/target_zone)
-	. = 1
-
-	if(!target_zone)
-		if(!user)
-			target_zone = pick("chest","chest","chest","left leg","right leg","left arm", "right arm", "head")
-		else
-			target_zone = user.zone_sel.selecting
-
+#define CAN_INJECT 1
+#define INJECTION_PORT 2
+/mob/living/carbon/human/can_inject(var/mob/user, var/target_zone)
 	var/obj/item/organ/external/affecting = get_organ(target_zone)
-	var/fail_msg
+
 	if(!affecting)
-		. = 0
-		fail_msg = "They are missing that limb."
-	else if (affecting.status & ORGAN_ROBOT)
-		. = 0
-		fail_msg = "That limb is robotic."
-	else
-		switch(target_zone)
-			if("head")
-				if(head && head.item_flags & THICKMATERIAL)
-					. = 0
+		user << "<span class='warning'>They are missing that limb.</span>"
+		return 0
+
+	if(affecting.robotic >= ORGAN_ROBOT)
+		user << "<span class='warning'>That limb is robotic.</span>"
+		return 0
+
+	. = CAN_INJECT
+	for(var/obj/item/clothing/C in list(head, wear_mask, wear_suit, w_uniform, gloves, shoes))
+		if(C && (C.body_parts_covered & affecting.body_part) && (C.item_flags & THICKMATERIAL))
+			if(istype(C, /obj/item/clothing/suit/space))
+				. = INJECTION_PORT //it was going to block us, but it's a space suit so it doesn't because it has some kind of port
 			else
-				if(wear_suit && wear_suit.item_flags & THICKMATERIAL)
-					. = 0
-	if(!. && error_msg && user)
-		if(!fail_msg)
-			fail_msg = "There is no exposed flesh or thin material [target_zone == "head" ? "on their head" : "on their body"] to inject into."
-		user << "<span class='alert'>[fail_msg]</span>"
+				user << "<span class='warning'>There is no exposed flesh or thin material on [src]'s [affecting.name] to inject into.</span>"
+				return 0
+
 
 /mob/living/carbon/human/print_flavor_text(var/shrink = 1)
 	var/list/equipment = list(src.head,src.wear_mask,src.glasses,src.w_uniform,src.wear_suit,src.gloves,src.shoes)
@@ -1367,7 +1364,7 @@
 /mob/living/carbon/human/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in organs)
 		return
-	..()
+	. = ..()
 
 /mob/living/carbon/human/reset_view(atom/A, update_hud = 1)
 	..()
@@ -1469,3 +1466,14 @@
 		return PULSE_NONE
 	else
 		return H.pulse
+		
+/mob/living/carbon/human/can_devour(mob/victim)		
+	if(src.species.gluttonous && (iscarbon(victim) || isanimal(victim)))
+		if(src.species.gluttonous == GLUT_TINY && (victim.mob_size <= MOB_TINY) && !ishuman(victim)) // Anything MOB_TINY or smaller
+			return DEVOUR_SLOW
+		else if(src.species.gluttonous == GLUT_SMALLER && (src.mob_size > victim.mob_size)) // Anything we're larger than
+			return DEVOUR_SLOW
+		else if(src.species.gluttonous == GLUT_ANYTHING) // Eat anything ever
+			return DEVOUR_FAST
+	
+	..()

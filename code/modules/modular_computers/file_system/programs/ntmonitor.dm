@@ -11,15 +11,12 @@
 
 /datum/nano_module/computer_ntnetmonitor
 	name = "NTNet Diagnostics and Monitoring"
+	available_to_ai = TRUE
 
 /datum/nano_module/computer_ntnetmonitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	if(!ntnet_global)
 		return
-
-	var/list/data = list()
-	if(program)
-		data = program.get_header_data()
-
+	var/list/data = host.initial_data()
 
 	data["ntnetstatus"] = ntnet_global.check_function()
 	data["ntnetrelays"] = ntnet_global.relays.len
@@ -38,7 +35,8 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "ntnet_monitor.tmpl", "NTNet Diagnostics and Monitoring Tool", 575, 700, state = state)
-		ui.auto_update_layout = 1
+		if(host.update_layout())
+			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

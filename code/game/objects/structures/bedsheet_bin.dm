@@ -10,6 +10,8 @@ LINEN BINS
 	icon = 'icons/obj/items.dmi'
 	icon_state = "sheet"
 	item_state = "bedsheet"
+	randpixel = 0
+	slot_flags = SLOT_BACK
 	layer = 4.0
 	throwforce = 1
 	throw_speed = 1
@@ -19,7 +21,7 @@ LINEN BINS
 /obj/item/weapon/bedsheet/attack_self(mob/user as mob)
 	user.drop_item()
 	if(layer == initial(layer))
-		layer = 5
+		layer = MOB_LAYER + 0.1
 	else
 		layer = initial(layer)
 	add_fingerprint(user)
@@ -38,51 +40,67 @@ LINEN BINS
 
 /obj/item/weapon/bedsheet/blue
 	icon_state = "sheetblue"
+	item_state = "sheetblue"
 
 /obj/item/weapon/bedsheet/green
 	icon_state = "sheetgreen"
+	item_state = "sheetgreen"
 
 /obj/item/weapon/bedsheet/orange
 	icon_state = "sheetorange"
+	item_state = "sheetorange"
 
 /obj/item/weapon/bedsheet/purple
 	icon_state = "sheetpurple"
+	item_state = "sheetpurple"
 
 /obj/item/weapon/bedsheet/rainbow
 	icon_state = "sheetrainbow"
+	item_state = "sheetrainbow"
 
 /obj/item/weapon/bedsheet/red
 	icon_state = "sheetred"
+	item_state = "sheetred"
 
 /obj/item/weapon/bedsheet/yellow
 	icon_state = "sheetyellow"
+	item_state = "sheetyellow"
 
 /obj/item/weapon/bedsheet/mime
 	icon_state = "sheetmime"
+	item_state = "sheetmime"
 
 /obj/item/weapon/bedsheet/clown
 	icon_state = "sheetclown"
+	item_state = "sheetclown"
 
 /obj/item/weapon/bedsheet/captain
 	icon_state = "sheetcaptain"
+	item_state = "sheetcaptain"
 
 /obj/item/weapon/bedsheet/rd
 	icon_state = "sheetrd"
+	item_state = "sheetrd"
 
 /obj/item/weapon/bedsheet/medical
 	icon_state = "sheetmedical"
+	item_state = "sheetmedical"
 
 /obj/item/weapon/bedsheet/hos
 	icon_state = "sheethos"
+	item_state = "sheethos"
 
 /obj/item/weapon/bedsheet/hop
 	icon_state = "sheethop"
+	item_state = "sheethop"
 
 /obj/item/weapon/bedsheet/ce
 	icon_state = "sheetce"
+	item_state = "sheetce"
 
 /obj/item/weapon/bedsheet/brown
 	icon_state = "sheetbrown"
+	item_state = "sheetbrown"
 
 
 /obj/structure/bedsheetbin
@@ -122,7 +140,7 @@ LINEN BINS
 		sheets.Add(I)
 		amount++
 		user << "<span class='notice'>You put [I] in [src].</span>"
-	else if(amount && !hidden && I.w_class < 4)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
+	else if(amount && !hidden && I.w_class < BULKY_ITEM)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
 		user.drop_item()
 		I.loc = src
 		hidden = I

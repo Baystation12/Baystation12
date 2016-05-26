@@ -1,4 +1,4 @@
-var/global/antag_add_failed // Used in antag type voting.
+var/global/antag_add_finished // Used in antag type voting.
 var/global/list/additional_antag_types = list()
 
 /datum/game_mode
@@ -23,6 +23,7 @@ var/global/list/additional_antag_types = list()
 
 	var/list/antag_tags = list()             // Core antag templates to spawn.
 	var/list/antag_templates                 // Extra antagonist types to include.
+	var/list/latejoin_antag_tags = list()        // Antags that may auto-spawn, latejoin or otherwise come in midround.
 	var/round_autoantag = 0                  // Will this round attempt to periodically spawn more antagonists?
 	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count.
 	var/require_all_templates = 0            // Will only start if all templates are checked and can spawn.
@@ -41,6 +42,11 @@ var/global/list/additional_antag_types = list()
 	// This will probably break something.
 	name = capitalize(lowertext(name))
 	config_tag = lowertext(config_tag)
+
+	if(round_autoantag && !latejoin_antag_tags.len)
+		latejoin_antag_tags = antag_tags.Copy()
+	else if(!round_autoantag && latejoin_antag_tags.len)
+		round_autoantag = TRUE
 
 /datum/game_mode/Topic(href, href_list[])
 	if(..())
@@ -194,6 +200,8 @@ var/global/list/additional_antag_types = list()
 ///post_setup()
 /datum/game_mode/proc/post_setup()
 
+	next_spawn = world.time + rand(min_autotraitor_delay, max_autotraitor_delay)
+
 	refresh_event_modifiers()
 
 	spawn (ROUNDSTART_LOGOUT_REPORT_TIME)
@@ -278,17 +286,23 @@ var/global/list/additional_antag_types = list()
 	return
 
 /datum/game_mode/proc/declare_completion()
+	set waitfor = FALSE
 
-	var/is_antag_mode = (antag_templates && antag_templates.len)
 	check_victory()
-	if(is_antag_mode)
-		sleep(10)
-		for(var/datum/antagonist/antag in antag_templates)
-			sleep(10)
-			antag.check_victory()
-			antag.print_player_summary()
-		sleep(10)
-		print_ownerless_uplinks()
+	sleep(2)
+	for(var/datum/antagonist/antag in antag_templates)
+		antag.check_victory()
+		antag.print_player_summary()
+		sleep(2)
+	for(var/antag_type in all_antag_types)
+		var/datum/antagonist/antag = all_antag_types[antag_type]
+		if(!antag.current_antagonists.len || (antag in antag_templates))
+			continue
+		sleep(2)
+		antag.print_player_summary()
+	sleep(2)
+
+	print_ownerless_uplinks()
 
 	var/clients = 0
 	var/surviving_humans = 0
@@ -329,7 +343,7 @@ var/global/list/additional_antag_types = list()
 				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape_pod5/centcom)
 					escaped_on_pod_5++
 
-			if(isobserver(M))
+			if(isghost(M))
 				ghosts++
 
 	var/text = ""
@@ -432,7 +446,7 @@ var/global/list/additional_antag_types = list()
 				continue
 			if(!role || (role in player.client.prefs.be_special_role))
 				log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
-				candidates |= player.mind
+				candidates += player.mind
 	else
 		// Assemble a list of active players without jobbans.
 		for(var/mob/new_player/player in player_list)
@@ -449,11 +463,12 @@ var/global/list/additional_antag_types = list()
 		// If we don't have enough antags, draft people who voted for the round.
 		if(candidates.len < required_enemies)
 			for(var/mob/new_player/player in players)
-				if(player.ckey in round_voters)
-					log_debug("[player.key] voted for this round, so we are drafting them.")
+				if(!role || !(role in player.client.prefs.never_be_special_role))
+					log_debug("[player.key] has not selected never for this role, so we are drafting them.")
 					candidates += player.mind
 					players -= player
-					break
+					if(candidates.len == required_enemies || players.len == 0)
+						break
 
 	return candidates		// Returns: The number of people who had the antagonist role set to yes, regardless of recomended_enemies, if that number is greater than required_enemies
 							//			required_enemies if the number of people with that role set to yes is less than recomended_enemies,
@@ -523,7 +538,7 @@ proc/display_roundstart_logout_report()
 					continue //Dead
 
 			continue //Happy connected client
-		for(var/mob/dead/observer/D in mob_list)
+		for(var/mob/observer/ghost/D in mob_list)
 			if(D.mind && (D.mind.original == L || D.mind.current == L))
 				if(L.stat == DEAD)
 					msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (Dead)\n"
@@ -553,23 +568,11 @@ proc/get_nt_opposed()
 	if(dudes.len == 0) return null
 	return pick(dudes)
 
-//Announces objectives/generic antag text.
-/proc/show_generic_antag_text(var/datum/mind/player)
-	if(player.current)
-		player.current << \
-		"You are an antagonist! <font color=blue>Within the rules,</font> \
-		try to act as an opposing force to the crew. Further RP and try to make sure \
-		other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, \
-		and before taking extreme actions, please try to also contact the administration! \
-		Think through your actions and make the roleplay immersive! <b>Please remember all \
-		rules aside from those without explicit exceptions apply to antagonists.</b>"
-
 /proc/show_objectives(var/datum/mind/player)
 
 	if(!player || !player.current) return
 
-	if(config.objectives_disabled)
-		show_generic_antag_text(player)
+	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
 		return
 
 	var/obj_count = 1

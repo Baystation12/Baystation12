@@ -3,10 +3,6 @@
 	set name = "OOC"
 	set category = "OOC"
 
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<span class='warning'>Speech is currently admin-disabled.</span>"
-		return
-
 	if(!mob)	return
 	if(IsGuestKey(key))
 		src << "Guests may not use OOC."
@@ -51,6 +47,8 @@
 
 	for(var/client/target in clients)
 		if(target.is_preference_enabled(/datum/client_preference/show_ooc))
+			if(target.is_key_ignored(key)) // If we're ignored by this person, then do nothing.
+				continue
 			var/display_name = src.key
 			if(holder)
 				if(holder.fakekey)
@@ -67,10 +65,6 @@
 	set name = "LOOC"
 	set desc = "Local OOC, seen only by those in view."
 	set category = "OOC"
-
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
-		return
 
 	if(!mob)
 		return
@@ -140,8 +134,6 @@
 				listening_obj |= O
 
 		for(var/mob/M in player_list)
-			if(!M.is_preference_enabled(/datum/client_preference/show_looc))
-				continue
 			if(isAI(M))
 				var/mob/living/silicon/ai/A = M
 				if(A.eyeobj && (A.eyeobj.locs[1] in hearturfs))
@@ -154,6 +146,8 @@
 
 
 	for(var/client/t in listening)
+		if(!t.is_preference_enabled(/datum/client_preference/show_looc))
+			continue
 		var/admin_stuff = ""
 		var/prefix = ""
 		if(t in admins)
@@ -169,7 +163,7 @@
 
 
 	for(var/client/adm in admins)	//Now send to all admins that weren't in range.
-		if(!(adm in listening))
+		if(!(adm in listening) && adm.is_preference_enabled(/datum/client_preference/show_looc))
 			var/admin_stuff = "/([key])([admin_jump_link(mob, adm.holder)])"
 			var/prefix = "(R)"
 

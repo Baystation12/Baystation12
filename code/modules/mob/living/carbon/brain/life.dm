@@ -157,8 +157,6 @@
 					src << "\red All systems restored."
 					emp_damage -= 1
 
-		//Other
-		handle_statuses()
 	return 1
 
 /mob/living/carbon/brain/handle_regular_hud_updates()

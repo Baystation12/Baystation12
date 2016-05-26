@@ -79,7 +79,7 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 	sleep(1)
 	while (immrod)
 		if (isNotStationLevel(immrod.z))
-			immrod.z = pick(config.station_levels)
+			immrod.z = pick(using_map.station_levels)
 		if(immrod.loc == end)
 			qdel(immrod)
 		sleep(10)

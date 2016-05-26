@@ -27,15 +27,26 @@
 
 var/all_unit_tests_passed = 1
 var/failed_unit_tests = 0
+var/skipped_unit_tests = 0
 var/total_unit_tests = 0
 var/currently_running_tests = 0
 
 // For console out put in Linux/Bash makes the output green or red.
 // Should probably only be used for unit tests/Travis since some special folks use winders to host servers.
+// if you want plain output, use dm.sh -DUNIT_TEST -DUNIT_TEST_PLAIN baystation12.dme
+#ifdef UNIT_TEST_PLAIN
+var/ascii_esc = ""
+var/ascii_red = ""
+var/ascii_green = ""
+var/ascii_yellow = ""
+var/ascii_reset = ""
+#else
 var/ascii_esc = ascii2text(27)
 var/ascii_red = "[ascii_esc]\[31m"
 var/ascii_green = "[ascii_esc]\[32m"
+var/ascii_yellow = "[ascii_esc]\[33m"
 var/ascii_reset = "[ascii_esc]\[0m"
+#endif
 
 
 // We list these here so we can remove them from the for loop running this.
@@ -59,6 +70,11 @@ datum/unit_test/proc/pass(var/message)
 	reported = 1
 	log_unit_test("[ascii_green]*** SUCCESS *** \[[name]\]: [message][ascii_reset]")
 
+datum/unit_test/proc/skip(var/message)
+	skipped_unit_tests++
+	reported = 1
+	log_unit_test("[ascii_yellow]--- SKIPPED --- \[[name]\]: [message][ascii_reset]")
+
 datum/unit_test/proc/start_test()
 	fail("No test proc.")
 
@@ -79,6 +95,15 @@ proc/load_unit_test_changes()
 
 
 proc/initialize_unit_tests()
+	#ifndef UNIT_TEST_COLOURED
+	if(world.system_type != UNIX) // Not a Unix/Linux/etc system, we probably don't want to print color escapes (unless UNIT_TEST_COLOURED was defined to force escapes)
+		ascii_esc = ""
+		ascii_red = ""
+		ascii_green = ""
+		ascii_yellow = ""
+		ascii_reset = ""
+	#endif
+
 	log_unit_test("Initializing Unit Testing")
 
 	//
@@ -159,10 +184,14 @@ proc/initialize_unit_tests()
 		if(!test.reported)
 			test.fail("Test failed to report a result.")
 
+	var/skipped_message = ""
+	if(skipped_unit_tests)
+		skipped_message = "| \[[skipped_unit_tests]\\[total_unit_tests]\] Unit Tests Skipped "
+
 	if(all_unit_tests_passed)
-		log_unit_test("[ascii_green]**** All Unit Tests Passed \[[total_unit_tests]\] ****[ascii_reset]")
+		log_unit_test("[ascii_green]**** All Unit Tests Passed \[[total_unit_tests]\] [skipped_message]****[ascii_reset]")
 	else
-		log_unit_test("[ascii_red]**** \[[failed_unit_tests]\\[total_unit_tests]\] Unit Tests Failed ****[ascii_reset]")
+		log_unit_test("[ascii_red]**** \[[failed_unit_tests]\\[total_unit_tests]\] Unit Tests Failed [skipped_message]****[ascii_reset]")
 	currently_running_tests = 0
 
 /proc/get_test_datums()

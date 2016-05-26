@@ -7,13 +7,16 @@ var/global/list/station_networks = list(
 										NETWORK_ENGINEERING,
 										NETWORK_ENGINEERING_OUTPOST,
 										NETWORK_EXODUS,
+										NETWORK_FIRST_DECK,
 										NETWORK_MEDICAL,
 										NETWORK_MINE,
 										NETWORK_RESEARCH,
 										NETWORK_RESEARCH_OUTPOST,
 										NETWORK_ROBOTS,
 										NETWORK_PRISON,
-										NETWORK_SECURITY
+										NETWORK_SECOND_DECK,
+										NETWORK_SECURITY,
+										NETWORK_THIRD_DECK
 										)
 var/global/list/engineering_networks = list(
 										NETWORK_ENGINE,
@@ -49,6 +52,9 @@ var/global/list/engineering_networks = list(
 /obj/machinery/camera/network/exodus
 	network = list(NETWORK_EXODUS)
 
+/obj/machinery/camera/network/first_deck
+	network = list(NETWORK_FIRST_DECK)
+
 /obj/machinery/camera/network/mining
 	network = list(NETWORK_MINE)
 
@@ -64,11 +70,17 @@ var/global/list/engineering_networks = list(
 /obj/machinery/camera/network/research_outpost
 	network = list(NETWORK_RESEARCH_OUTPOST)
 
+/obj/machinery/camera/network/second_deck
+	network = list(NETWORK_SECOND_DECK)
+
 /obj/machinery/camera/network/security
 	network = list(NETWORK_SECURITY)
 
 /obj/machinery/camera/network/telecom
 	network = list(NETWORK_TELECOM)
+
+/obj/machinery/camera/network/third_deck
+	network = list(NETWORK_THIRD_DECK)
 
 /obj/machinery/camera/network/thunder
 	network = list(NETWORK_THUNDER)

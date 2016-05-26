@@ -9,14 +9,24 @@
 /mob/living/carbon/human/var/list/organs_by_name = list() // map organ names to organs
 /mob/living/carbon/human/var/list/internal_organs_by_name = list() // so internal organs have less ickiness too
 
+/mob/living/carbon/human/proc/get_bodypart_name(var/zone)
+	var/obj/item/organ/external/E = get_organ(zone)
+	if(E) . = E.name
+
+/mob/living/carbon/human/proc/recheck_bad_external_organs()
+	var/damage_this_tick = getToxLoss()
+	for(var/obj/item/organ/external/O in organs)
+		damage_this_tick += O.burn_dam + O.brute_dam
+	
+	if(damage_this_tick > last_dam)
+		. = TRUE
+	last_dam = damage_this_tick
+
 // Takes care of organ related updates, such as broken and missing limbs
 /mob/living/carbon/human/proc/handle_organs()
 
-	var/force_process = 0
-	var/damage_this_tick = getBruteLoss() + getFireLoss() + getToxLoss()
-	if(damage_this_tick > last_dam)
-		force_process = 1
-	last_dam = damage_this_tick
+	var/force_process = recheck_bad_external_organs()
+
 	if(force_process)
 		bad_external_organs.Cut()
 		for(var/obj/item/organ/external/Ex in organs)
@@ -142,8 +152,13 @@
 						continue
 					drop_from_inventory(r_hand)
 
-			var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
-			emote("me", 1, "[(species.flags & NO_PAIN) ? "" : emote_scream ]drops what they were holding in their [E.name]!")
+			var/emote_scream = pick("screams in pain and", "lets out a sharp cry and", "cries out and")
+			var/grasp_name = E.name
+			if((E.body_part in list(ARM_LEFT, ARM_RIGHT)) && E.children.len)
+				var/obj/item/organ/external/hand = pick(E.children)
+				grasp_name = hand.name
+
+			emote("me", 1, "[(species.flags & NO_PAIN) ? "" : emote_scream] drops what they were holding in their [grasp_name]!")
 
 		else if(E.is_malfunctioning())
 			switch(E.body_part)

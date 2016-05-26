@@ -60,7 +60,7 @@
 			handle_movement_target()
 
 	if(prob(2)) //spooky
-		var/mob/dead/observer/spook = locate() in range(src,5)
+		var/mob/observer/ghost/spook = locate() in range(src,5)
 		if(spook)
 			var/turf/T = spook.loc
 			var/list/visible = list()

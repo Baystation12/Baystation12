@@ -12,6 +12,7 @@
 
 #define FAILURE 0
 #define SUCCESS 1
+#define SKIP 2
 
 //
 // Generic check for an area.
@@ -28,10 +29,10 @@ datum/unit_test/zas_area_test/start_test()
 	if(isnull(test))
 		fail("Check Runtimed")
 
-	if(test["result"] == SUCCESS)
-		pass(test["msg"])
-	else
-		fail(test["msg"])
+	switch(test["result"])
+		if(SUCCESS) pass(test["msg"])
+		if(SKIP)    skip(test["msg"])
+		else        fail(test["msg"])
 	return 1
 
 // ==================================================================================================
@@ -44,8 +45,10 @@ proc/test_air_in_area(var/test_area, var/expectation = UT_NORMAL)
 
 	var/area/A = locate(test_area)
 
-	if(!istype(A, test_area))
+	// BYOND creates an instance of every area, so this can't be !A or !istype(A, test_area)
+	if(!(A.x || A.y || A.z))
 		test_result["msg"] = "Unable to get [test_area]"
+		test_result["result"] = SKIP
 		return test_result
 
 	var/list/GM_checked = list()
@@ -206,17 +209,16 @@ datum/unit_test/zas_supply_shuttle_moved/check_result()
 
 	if(world.time < testtime)
 		return 0
-		
 
 	var/list/test = test_air_in_area(/area/supply/station)
 	if(isnull(test))
 		fail("Check Runtimed")
 		return 1
 
-	if(test["result"] == SUCCESS)
-		pass(test["msg"])
-	else
-		fail(test["msg"])
+	switch(test["result"])
+		if(SUCCESS) pass(test["msg"])
+		if(SKIP)    skip(test["msg"])
+		else        fail(test["msg"])
 	return 1
 
 #undef UT_NORMAL

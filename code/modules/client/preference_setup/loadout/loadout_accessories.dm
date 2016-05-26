@@ -63,6 +63,11 @@
 	path = /obj/item/clothing/accessory/storage/black_vest
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
+/datum/gear/accessory/white_vest
+	display_name = "webbing, medical"
+	path = /obj/item/clothing/accessory/storage/white_vest
+	allowed_roles = list("Paramedic","Chief Medical Officer","Medical Doctor")
+
 /datum/gear/accessory/webbing
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/accessory/storage/webbing

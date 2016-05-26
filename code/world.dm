@@ -18,6 +18,7 @@ var/global/datum/global_init/init = new ()
 	generate_gameid()
 
 	makeDatumRefLists()
+	populateGlobalLists()
 	load_configuration()
 
 	initialize_chemical_reagents()
@@ -174,8 +175,9 @@ var/world_topic_spam_protect_time = world.timeofday
 
 		// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
 		s["players"] = 0
-		s["stationtime"] = worldtime2text()
-		s["roundduration"] = round_duration()
+		s["stationtime"] = stationtime2text()
+		s["roundduration"] = roundduration2text()
+		s["map"] = using_map.full_name
 
 		if(input["status"] == "2")
 			var/list/players = list()
@@ -246,9 +248,9 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	else if(T == "revision")
 		if(revdata.revision)
-			return list2params(list(branch = revdata.branch, date = revdata.date, revision = revdata.revision))
+			return list2params(list(branch = revdata.branch, date = revdata.date, revision = revdata.revision, gameid = game_id))
 		else
-			return "unknown"
+			return list2params(list(revision = "unknown", gameid = game_id))
 
 	else if(copytext(T,1,5) == "info")
 		var/input[] = params2list(T)
@@ -431,9 +433,14 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	processScheduler.stop()
 
-	for(var/client/C in clients)
-		if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
+	if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
+		for(var/client/C in clients)
 			C << link("byond://[config.server]")
+
+	if(config.wait_for_sigusr1_reboot && reason != 3)
+		text2file("foo", "reboot_called")
+		world << "<span class=danger>World reboot waiting for external scripts. Please be patient.</span>"
+		return
 
 	..(reason)
 
@@ -442,6 +449,9 @@ var/world_topic_spam_protect_time = world.timeofday
 	return 1
 
 /world/proc/load_mode()
+	if(!fexists("data/mode.txt"))
+		return
+
 	var/list/Lines = file2list("data/mode.txt")
 	if(Lines.len)
 		if(Lines[1])

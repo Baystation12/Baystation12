@@ -27,7 +27,7 @@
 	icon_state = "capjacket"
 	item_state = "capjacket"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	flags_inv = HIDEJUMPSUIT
+	flags_inv = 0
 
 //Chaplain
 /obj/item/clothing/suit/chaplain_hoodie

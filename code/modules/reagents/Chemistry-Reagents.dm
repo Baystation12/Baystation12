@@ -14,6 +14,8 @@
 	var/name = "Reagent"
 	var/id = "reagent"
 	var/description = "A non-descript chemical."
+	var/taste_description = "old rotten bandaids"
+	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
 	var/datum/reagents/holder = null
 	var/reagent_state = SOLID
 	var/list/data = null
@@ -51,7 +53,7 @@
 		return
 	if(!affects_dead && M.stat == DEAD)
 		return
-	if(overdose && (dose > overdose) && (location != CHEM_TOUCH))
+	if(overdose && (volume > overdose) && (location != CHEM_TOUCH))
 		overdose(M, alien)
 	var/removed = metabolism
 	if(ingest_met && (location == CHEM_INGEST))

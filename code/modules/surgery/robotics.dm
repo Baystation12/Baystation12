@@ -17,7 +17,7 @@
 			return 0
 		if (affected.status & ORGAN_DESTROYED)
 			return 0
-		if (!(affected.status & ORGAN_ROBOT))
+		if (!(affected.robotic >= ORGAN_ROBOT))
 			return 0
 		return 1
 
@@ -274,7 +274,7 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		if(!(affected && (affected.status & ORGAN_ROBOT)))
+		if(!(affected && (affected.robotic >= ORGAN_ROBOT)))
 			return 0
 		if(affected.open != 2)
 			return 0
@@ -323,7 +323,7 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		if(!(affected && (affected.status & ORGAN_ROBOT)))
+		if(!(affected && (affected.robotic >= ORGAN_ROBOT)))
 			return 0
 		if(affected.open != 2)
 			return 0
@@ -333,7 +333,7 @@
 		var/list/removable_organs = list()
 		for(var/organ in target.internal_organs_by_name)
 			var/obj/item/organ/I = target.internal_organs_by_name[organ]
-			if(I && (I.status & ORGAN_CUT_AWAY) && (I.status & ORGAN_ROBOT) && I.parent_organ == target_zone)
+			if(I && (I.status & ORGAN_CUT_AWAY) && (I.robotic >= ORGAN_ROBOT) && I.parent_organ == target_zone)
 				removable_organs |= organ
 
 		var/organ_to_replace = input(user, "Which organ do you want to reattach?") as null|anything in removable_organs
@@ -370,7 +370,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
-		if(target_zone != "head")
+		if(target_zone != "chest")
 			return
 
 		var/obj/item/device/mmi/M = tool
@@ -385,8 +385,8 @@
 			user << "<span class='danger'>That brain is not usable.</span>"
 			return SURGERY_FAILURE
 
-		if(!(affected.status & ORGAN_ROBOT))
-			user << "<span class='danger'>You cannot install a computer brain into a meat skull.</span>"
+		if(!(affected.robotic >= ORGAN_ROBOT))
+			user << "<span class='danger'>You cannot install a computer brain into a meat torso.</span>"
 			return SURGERY_FAILURE
 
 		if(!target.species)
@@ -418,7 +418,7 @@
 		var/obj/item/organ/mmi_holder/holder = new(target, 1)
 		target.internal_organs_by_name["brain"] = holder
 		user.drop_from_inventory(tool)
-		tool.loc = holder
+		tool.forceMove(holder)
 		holder.stored_mmi = tool
 		holder.update_from_mmi()
 

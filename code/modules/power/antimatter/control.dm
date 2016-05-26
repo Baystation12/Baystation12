@@ -120,8 +120,8 @@
 
 
 /obj/machinery/power/am_control_unit/power_change()
-	..()
-	if(stat & NOPOWER && active)
+	. = ..()
+	if((stat & NOPOWER) && active)
 		toggle_power()
 	return
 

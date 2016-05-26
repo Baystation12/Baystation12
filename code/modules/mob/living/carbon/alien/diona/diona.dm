@@ -10,7 +10,7 @@
 	universal_understand = 1
 	universal_speak = 0      // Dionaea do not need to speak to people other than other dionaea.
 
-	can_pull_size = 2
+	can_pull_size = SMALL_ITEM
 	can_pull_mobs = MOB_PULL_SMALLER
 
 	holder_type = /obj/item/weapon/holder/diona
@@ -24,7 +24,7 @@
 	verbs += /mob/living/carbon/alien/diona/proc/merge
 
 /mob/living/carbon/alien/diona/put_in_hands(var/obj/item/W) // No hands.
-	W.loc = get_turf(src)
+	W.forceMove(get_turf(src))
 	return 1
 
 /mob/living/carbon/alien/diona/proc/wear_hat(var/obj/item/new_hat)

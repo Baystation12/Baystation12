@@ -4,7 +4,7 @@
 
 /obj/machinery/atmospherics/binary/passive_gate
 	icon = 'icons/atmos/passive_gate.dmi'
-	icon_state = "map"
+	icon_state = "map_off"
 	level = 1
 
 	name = "pressure regulator"
@@ -23,6 +23,10 @@
 	var/frequency = 0
 	var/id = null
 	var/datum/radio_frequency/radio_connection
+    
+/obj/machinery/atmospherics/binary/passive_gate/on
+    unlocked = 1
+    icon_state = "map_on"
 
 /obj/machinery/atmospherics/binary/passive_gate/New()
 	..()

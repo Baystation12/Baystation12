@@ -12,6 +12,7 @@
 	..()
 
 /obj/item/organ/external/chest/ipc
+	gendered_icon = 0
 	dislocated = -1
 	encased = null
 /obj/item/organ/external/chest/ipc/New()
@@ -19,6 +20,7 @@
 	..()
 
 /obj/item/organ/external/groin/ipc
+	gendered_icon = 0
 	dislocated = -1
 /obj/item/organ/external/groin/ipc/New()
 	robotize("Morpheus Cyberkinetics")

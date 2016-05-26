@@ -19,14 +19,27 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
 </div>
 <br>
 
-<div class="item">
-	<div class="itemLabel">
-		<b>Tele-Crystals</b>:
+{{if data.menu == 0 || data.menu == 1}}
+	<div class="item">
+		<div class="itemLabel">
+			<b>Tele-Crystals</b>:
+		</div>
+		<div class="itemContent">
+			{{:data.crystals}}
+		</div>
 	</div>
-	<div class="itemContent">
-		{{:data.crystals}}
-	</div>
-</div>
+
+	{{if data.discount_amount < 100}}
+		<div class="item">
+			<div class="itemLabel">
+				<b>Currently discounted</b>:
+			</div>
+			<div class="itemContent">
+				{{:data.discount_category}}<br>{{:data.discount_name}}<br>{{:data.discount_amount}}% off. Offer will expire at: {{:data.offer_expiry}}
+			</div>
+		</div>
+	{{/if}}
+{{/if}}
 
 {{if data.menu == 0}}
 	<H2>Categories:</H2>

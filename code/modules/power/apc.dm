@@ -152,7 +152,6 @@
 	return cell.drain_power(drain_check, surge, amount)
 
 /obj/machinery/power/apc/New(turf/loc, var/ndir, var/building=0)
-	..()
 	wires = new(src)
 
 	// offset 24 pixels in direction of dir
@@ -164,16 +163,23 @@
 
 	pixel_x = (src.tdir & 3)? 0 : (src.tdir == 4 ? 24 : -24)
 	pixel_y = (src.tdir & 3)? (src.tdir ==1 ? 24 : -24) : 0
+
 	if (building==0)
-		init()
+		init_round_start()
 	else
 		area = get_area(src)
 		area.apc = src
 		opened = 1
 		operating = 0
-		name = "[area.name] APC"
+		name = "\improper [area.name] APC"
 		stat |= MAINT
 		src.update_icon()
+
+	..()
+
+/obj/machinery/power/apc/initialize()
+	if(operating)
+		src.update()
 
 /obj/machinery/power/apc/Destroy()
 	src.update()
@@ -206,7 +212,7 @@
 	terminal.set_dir(tdir)
 	terminal.master = src
 
-/obj/machinery/power/apc/proc/init()
+/obj/machinery/power/apc/proc/init_round_start()
 	has_electronics = 2 //installed and secured
 	// is starting with a power cell installed, create it and set its charge level
 	if(cell_type)
@@ -226,9 +232,6 @@
 	update_icon()
 
 	make_terminal()
-
-	spawn(5)
-		src.update()
 
 /obj/machinery/power/apc/examine(mob/user)
 	if(..(user, 1))
@@ -476,8 +479,8 @@
 		if (stat & MAINT)
 			user << "<span class='warning'>There is no connector for your power cell.</span>"
 			return
-		if(W.w_class != 3)
-			user << "\The [W] is too [W.w_class < 3? "small" : "large"] to fit here."
+		if(W.w_class != NORMAL_ITEM)
+			user << "\The [W] is too [W.w_class < NORMAL_ITEM? "small" : "large"] to fit here."
 			return
 
 		user.drop_item()
@@ -886,13 +889,13 @@
 	if (href_list["lock"])
 		coverlocked = !coverlocked
 
-	else if (href_list["breaker"])
-		toggle_breaker()
-
 	else if( href_list["reboot"] )
 		failure_timer = 0
 		update_icon()
 		update()
+
+	else if (href_list["breaker"])
+		toggle_breaker()
 
 	else if (href_list["cmode"])
 		chargemode = !chargemode
@@ -1160,23 +1163,15 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 
 // damage and destruction acts
 /obj/machinery/power/apc/emp_act(severity)
+	// Fail for 8-12 minutes (divided by severity)
+	// Division by 2 is required, because machinery ticks are every two seconds. Without it we would fail for 16-24 minutes.
+	energy_fail(round(rand(240, 360) / severity))
 	if(cell)
-		cell.emp_act(severity)
-
-	lighting = 0
-	equipment = 0
-	environ = 0
-	update()
+		cell.emp_act(severity+1)
 	update_icon()
-
-	spawn(600)
-		update_channels()
-		update()
-		update_icon()
 	..()
 
 /obj/machinery/power/apc/ex_act(severity)
-
 	switch(severity)
 		if(1.0)
 			//set_broken() //now qdel() do what we need

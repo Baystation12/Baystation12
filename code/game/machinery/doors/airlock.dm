@@ -34,6 +34,8 @@
 	var/open_sound_powered = 'sound/machines/airlock.ogg'
 	var/open_sound_unpowered = 'sound/machines/airlock_creaking.ogg'
 
+	var/door_crush_damage = DOOR_CRUSH_DAMAGE
+
 	var/_wifi_id
 	var/datum/wifi/receiver/button/door/wifi_receiver
 
@@ -76,6 +78,11 @@
 	icon = 'icons/obj/doors/Doormed.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_med
 
+/obj/machinery/door/airlock/virology
+	name = "Airlock"
+	icon = 'icons/obj/doors/Doorviro.dmi'
+	assembly_type = /obj/structure/door_assembly/door_assembly_viro
+
 /obj/machinery/door/airlock/maintenance
 	name = "Maintenance Access"
 	icon = 'icons/obj/doors/Doormaint.dmi'
@@ -91,6 +98,7 @@
 	icon = 'icons/obj/doors/Doorglass.dmi'
 	hitsound = 'sound/effects/Glasshit.ogg'
 	open_sound_powered = 'sound/machines/windowdoor.ogg'
+	door_crush_damage = DOOR_CRUSH_DAMAGE*0.75
 	maxhealth = 300
 	explosion_resistance = 5
 	opacity = 0
@@ -171,6 +179,16 @@
 	explosion_resistance = 5
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_med
+	glass = 1
+
+/obj/machinery/door/airlock/glass_virology
+	name = "Maintenance Hatch"
+	icon = 'icons/obj/doors/Doorviroglass.dmi'
+	hitsound = 'sound/effects/Glasshit.ogg'
+	maxhealth = 300
+	explosion_resistance = 5
+	opacity = 0
+	assembly_type = /obj/structure/door_assembly/door_assembly_viro
 	glass = 1
 
 /obj/machinery/door/airlock/mining
@@ -263,7 +281,7 @@
 
 /obj/machinery/door/airlock/uranium/proc/radiate()
 	for(var/mob/living/L in range (3,src))
-		L.apply_effect(15,IRRADIATE,0)
+		L.apply_effect(15,IRRADIATE, blocked = L.getarmor(null, "rad"))
 	return
 
 /obj/machinery/door/airlock/phoron
@@ -399,12 +417,16 @@ About the new airlock wires panel:
 	if(electrified_until && isAllPowerLoss())
 		electrify(0)
 
+	update_icon()
+
 /obj/machinery/door/airlock/proc/loseBackupPower()
 	backup_power_lost_until = backupPowerCablesCut() ? -1 : world.time + SecondsToTicks(60)
 
 	// Disable electricity if required
 	if(electrified_until && isAllPowerLoss())
 		electrify(0)
+
+	update_icon()
 
 /obj/machinery/door/airlock/proc/regainMainPower()
 	if(!mainPowerCablesCut())
@@ -413,10 +435,14 @@ About the new airlock wires panel:
 		if(!backup_power_lost_until)
 			backup_power_lost_until = -1
 
+	update_icon()
+
 /obj/machinery/door/airlock/proc/regainBackupPower()
 	if(!backupPowerCablesCut())
 		// Restore backup power only if main power is offline, otherwise permanently disable
 		backup_power_lost_until = main_power_lost_until == 0 ? -1 : 0
+
+	update_icon()
 
 /obj/machinery/door/airlock/proc/electrify(var/duration, var/feedback = 0)
 	var/message = ""
@@ -893,59 +919,6 @@ About the new airlock wires panel:
 
 	return ..()
 
-/atom/movable/proc/blocks_airlock()
-	return density
-
-/obj/machinery/door/blocks_airlock()
-	return 0
-
-/obj/structure/window/blocks_airlock()
-	return 0
-
-/obj/machinery/mech_sensor/blocks_airlock()
-	return 0
-
-/mob/living/blocks_airlock()
-	return 1
-
-/atom/movable/proc/airlock_crush(var/crush_damage)
-	return 0
-
-/obj/structure/window/airlock_crush(var/crush_damage)
-	ex_act(2)//Smashin windows
-
-/obj/machinery/portable_atmospherics/canister/airlock_crush(var/crush_damage)
-	. = ..()
-	health -= crush_damage
-	healthcheck()
-
-/obj/effect/energy_field/airlock_crush(var/crush_damage)
-	Stress(crush_damage)
-
-/obj/structure/closet/airlock_crush(var/crush_damage)
-	..()
-	damage(crush_damage)
-	for(var/atom/movable/AM in src)
-		AM.airlock_crush()
-	return 1
-
-/mob/living/airlock_crush(var/crush_damage)
-	. = ..()
-	adjustBruteLoss(crush_damage)
-	SetStunned(5)
-	SetWeakened(5)
-	var/turf/T = get_turf(src)
-	T.add_blood(src)
-
-/mob/living/carbon/airlock_crush(var/crush_damage)
-	. = ..()
-	if (!(species && (species.flags & NO_PAIN)))
-		emote("scream")
-
-/mob/living/silicon/robot/airlock_crush(var/crush_damage)
-	adjustBruteLoss(crush_damage)
-	return 0
-
 /obj/machinery/door/airlock/close(var/forced=0)
 	if(!can_close(forced))
 		return 0
@@ -962,8 +935,9 @@ About the new airlock wires panel:
 
 	for(var/turf/turf in locs)
 		for(var/atom/movable/AM in turf)
-			if(AM.airlock_crush(DOOR_CRUSH_DAMAGE))
-				take_damage(DOOR_CRUSH_DAMAGE)
+			if(AM.airlock_crush(door_crush_damage))
+				take_damage(door_crush_damage)
+				use_power(door_crush_damage * 100)		// Uses bunch extra power for crushing the target.
 
 	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(arePowerSystemsOn())
@@ -1033,7 +1007,7 @@ About the new airlock wires panel:
 
 	//wires
 	var/turf/T = get_turf(newloc)
-	if(T && (T.z in config.admin_levels))
+	if(T && (T.z in using_map.admin_levels))
 		secured_wires = 1
 	if (secured_wires)
 		wires = new/datum/wires/airlock/secure(src)
@@ -1085,12 +1059,10 @@ About the new airlock wires panel:
 	..()
 
 /obj/machinery/door/airlock/power_change() //putting this is obj/machinery/door itself makes non-airlock doors turn invisible for some reason
-	..()
+	. = ..()
 	if(stat & NOPOWER)
 		// If we lost power, disable electrification
-		// Keeping door lights on, runs on internal battery or something.
 		electrified_until = 0
-	update_icon()
 
 /obj/machinery/door/airlock/proc/prison_open()
 	if(arePowerSystemsOn())

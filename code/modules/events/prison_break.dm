@@ -4,7 +4,7 @@
 
 	var/releaseWhen = 60
 	var/list/area/areas = list()		//List of areas to affect. Filled by start()
-	
+
 	var/eventDept = "Security"			//Department name in announcement
 	var/list/areaName = list("Brig")	//Names of areas mentioned in AI and Engineering announcements
 	var/list/areaType = list(/area/security/prison, /area/security/brig)	//Area types to include.
@@ -47,7 +47,7 @@
 
 	if(areas && areas.len > 0)
 		var/my_department = "[station_name()] firewall subroutines"
-		var/rc_message = "An unknown malicious program has been detected in the [english_list(areaName)] lighting and airlock control systems at [worldtime2text()]. Systems will be fully compromised within approximately three minutes. Direct intervention is required immediately.<br>"
+		var/rc_message = "An unknown malicious program has been detected in the [english_list(areaName)] lighting and airlock control systems at [stationtime2text()]. Systems will be fully compromised within approximately three minutes. Direct intervention is required immediately.<br>"
 		for(var/obj/machinery/message_server/MS in world)
 			MS.send_rc_message("Engineering", my_department, rc_message, "", "", 2)
 		for(var/mob/living/silicon/ai/A in player_list)
@@ -61,9 +61,12 @@
 /datum/event/prison_break/tick()
 	if(activeFor == releaseWhen)
 		if(areas && areas.len > 0)
+			var/obj/machinery/power/apc/theAPC = null
 			for(var/area/A in areas)
-				for(var/obj/machinery/light/L in A)
-					L.flicker(10)
+				theAPC = A.get_apc()
+				if(theAPC.operating)	//If the apc's off, it's a little hard to overload the lights.
+					for(var/obj/machinery/light/L in A)
+						L.flicker(10)
 
 
 /datum/event/prison_break/end()

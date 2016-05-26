@@ -1,7 +1,14 @@
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
 	status_flags = GODMODE|CANPUSH
-    
+	
+/mob/living/carbon/human/dummy/mannequin/New()
+	..()
+	mob_list -= src	
+	living_mob_list -= src
+	dead_mob_list -= src
+	delete_inventory()
+
 /mob/living/carbon/human/resomi/New(var/new_loc)
 	h_style = "Resomi Plumage"
 	..(new_loc, "Resomi")

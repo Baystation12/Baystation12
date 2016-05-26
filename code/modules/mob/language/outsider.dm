@@ -8,6 +8,7 @@
 	key = "4"
 	flags = RESTRICTED
 	syllables = list("sss","sSs","SSS")
+	machine_understands = 0
 
 /datum/language/xenos
 	name = "Hivemind"
@@ -79,12 +80,13 @@
 	flags = WHITELISTED
 	syllables = list("ti","ti","ti","hi","hi","ki","ki","ki","ki","ya","ta","ha","ka","ya","chi","cha","kah", \
 	"SKRE","AHK","EHK","RAWK","KRA","AAA","EEE","KI","II","KRI","KA")
+	machine_understands = 0
 
 /datum/language/vox/get_random_name()
 	return ..(FEMALE,1,6)
 
 /datum/language/cultcommon
-	name = "Cult"
+	name = LANGUAGE_CULT
 	desc = "The chants of the occult, the incomprehensible."
 	speech_verb = "intones"
 	ask_verb = "intones"
@@ -100,6 +102,7 @@
 		"sektath", "mal'zua", "zasan", "therium", "viortia", "kla'atu", "barada", "nikt'o", "fwe'sh", "mah", "erl", "nyag", "r'ya", \
 		"gal'h'rfikk", "harfrandid", "mud'gib", "fuu", "ma'jin", "dedo", "ol'btoh", "n'ath", "reth", "sh'yro", "eth", \
 		"d'rekkathnor", "khari'd", "gual'te", "nikka", "nikt'o", "barada", "kla'atu", "barhah", "hra" ,"zar'garis")
+	machine_understands = 0
 
 /datum/language/cult
 	name = "Occult"

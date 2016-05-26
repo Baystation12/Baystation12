@@ -4,7 +4,6 @@ var/datum/antagonist/revolutionary/revs
 	id = MODE_REVOLUTIONARY
 	role_text = "Head Revolutionary"
 	role_text_plural = "Revolutionaries"
-	bantype = "revolutionary"
 	feedback_tag = "rev_objective"
 	antag_indicator = "rev_head"
 	welcome_text = "Down with the capitalists! Down with the Bourgeoise!"
@@ -27,9 +26,11 @@ var/datum/antagonist/revolutionary/revs
 	faction_welcome = "Help the cause overturn the ruling class. Do not harm your fellow freedom fighters."
 	faction_indicator = "rev"
 	faction_invisible = 1
+	faction = "revolutionary"
 
 	restricted_jobs = list("Internal Affairs Agent", "AI", "Cyborg","Captain", "Head of Personnel", "Head of Security", "Chief Engineer", "Research Director", "Chief Medical Officer")
 	protected_jobs = list("Security Officer", "Warden", "Detective")
+
 
 /datum/antagonist/revolutionary/New()
 	..()

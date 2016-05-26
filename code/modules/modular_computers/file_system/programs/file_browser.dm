@@ -7,7 +7,7 @@
 	requires_ntnet = 0
 	available_on_ntnet = 0
 	undeletable = 1
-	nanomodule_path = /datum/nano_module/computer_filemanager/
+	nanomodule_path = /datum/nano_module/program/computer_filemanager/
 	var/open_file
 	var/error
 
@@ -83,8 +83,12 @@
 		var/datum/computer_file/data/F = HDD.find_file_by_name(open_file)
 		if(!F || !istype(F))
 			return 1
+		if(F.do_not_edit && (alert("WARNING: This file is not compatible with editor. Editing it may result in permanently corrupted formatting or damaged data consistency. Edit anyway?", "Incompatible File", "No", "Yes") == "No"))
+			return 1
 		// 16384 is the limit for file length in characters. Currently, papers have value of 2048 so this is 8 times as long, since we can't edit parts of the file independently.
-		var/newtext = sanitize(html_decode(input(usr, "Editing file [open_file]. You may use most tags used in paper formatting:", "Text Editor", F.stored_data) as message), 16384)
+		var/newtext = sanitize(html_decode(input(usr, "Editing file [open_file]. You may use most tags used in paper formatting:", "Text Editor", F.stored_data) as message|null), 16384)
+		if(!newtext)
+			return
 		if(F)
 			var/datum/computer_file/data/backup = F.clone()
 			HDD.remove_file(F)
@@ -147,8 +151,8 @@
 	t = replacetext(t, "\[/i\]", "</I>")
 	t = replacetext(t, "\[u\]", "<U>")
 	t = replacetext(t, "\[/u\]", "</U>")
-	t = replacetext(t, "\[time\]", "[worldtime2text()]")
-	t = replacetext(t, "\[date\]", "[worlddate2text()]")
+	t = replacetext(t, "\[time\]", "[stationtime2text()]")
+	t = replacetext(t, "\[date\]", "[stationdate2text()]")
 	t = replacetext(t, "\[large\]", "<font size=\"4\">")
 	t = replacetext(t, "\[/large\]", "</font>")
 	t = replacetext(t, "\[h1\]", "<H1>")
@@ -175,18 +179,13 @@
 	return t
 
 
-/datum/nano_module/computer_filemanager
+/datum/nano_module/program/computer_filemanager
 	name = "NTOS File Manager"
 
-/datum/nano_module/computer_filemanager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
-
+/datum/nano_module/program/computer_filemanager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+	var/list/data = host.initial_data()
 	var/datum/computer_file/program/filemanager/PRG
-	var/list/data = list()
-	if(program)
-		data = program.get_header_data()
-		PRG = program
-	else
-		return
+	PRG = program
 
 	var/obj/item/weapon/computer_hardware/hard_drive/HDD
 	var/obj/item/weapon/computer_hardware/hard_drive/portable/RHDD

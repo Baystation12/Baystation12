@@ -73,7 +73,7 @@
 			var/organ_found
 			if(H.internal_organs.len)
 				for(var/obj/item/organ/external/E in H.organs)
-					if(!(E.status & ORGAN_ROBOT))
+					if(!(E.robotic >= ORGAN_ROBOT))
 						continue
 					organ_found = 1
 					user << "[E.name]: <font color='red'>[E.brute_dam]</font> <font color='#FFA500'>[E.burn_dam]</font>"
@@ -84,7 +84,7 @@
 			organ_found = null
 			if(H.internal_organs.len)
 				for(var/obj/item/organ/O in H.internal_organs)
-					if(!(O.status & ORGAN_ROBOT))
+					if(!(O.robotic >= ORGAN_ROBOT))
 						continue
 					organ_found = 1
 					user << "[O.name]: <font color='red'>[O.damage]</font>"

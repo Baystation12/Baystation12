@@ -17,7 +17,7 @@ var/obj/screen/robot_inventory
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "radio"
 	using.screen_loc = ui_movi
-	using.layer = 20
+	using.layer = SCREEN_LAYER
 	src.adding += using
 
 //Module select
@@ -28,7 +28,7 @@ var/obj/screen/robot_inventory
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "inv1"
 	using.screen_loc = ui_inv1
-	using.layer = 20
+	using.layer = SCREEN_LAYER
 	src.adding += using
 	mymob:inv1 = using
 
@@ -38,7 +38,7 @@ var/obj/screen/robot_inventory
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "inv2"
 	using.screen_loc = ui_inv2
-	using.layer = 20
+	using.layer = SCREEN_LAYER
 	src.adding += using
 	mymob:inv2 = using
 
@@ -48,7 +48,7 @@ var/obj/screen/robot_inventory
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "inv3"
 	using.screen_loc = ui_inv3
-	using.layer = 20
+	using.layer = SCREEN_LAYER
 	src.adding += using
 	mymob:inv3 = using
 
@@ -61,7 +61,7 @@ var/obj/screen/robot_inventory
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = mymob.a_intent
 	using.screen_loc = ui_acti
-	using.layer = 20
+	using.layer = SCREEN_LAYER
 	src.adding += using
 	action_intent = using
 
@@ -92,7 +92,7 @@ var/obj/screen/robot_inventory
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "panel"
 	using.screen_loc = ui_borg_panel
-	using.layer = 19
+	using.layer = SCREEN_LAYER
 	src.adding += using
 
 //Store
@@ -159,12 +159,11 @@ var/obj/screen/robot_inventory
 	mymob.gun_move_icon = new /obj/screen/gun/move(null)
 	mymob.radio_use_icon = new /obj/screen/gun/radio(null)
 
-	mymob.client.screen = null
+	mymob.client.screen = list()
 
 	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.fire, mymob.hands, mymob.healths, mymob:cells, mymob.pullin, mymob.blind, mymob.flash, robot_inventory, mymob.gun_setting_icon)
 	mymob.client.screen += src.adding + src.other
-
-	return
+	common_hud()
 
 
 /datum/hud/proc/toggle_show_robot_modules()
@@ -223,7 +222,7 @@ var/obj/screen/robot_inventory
 					A.screen_loc = "CENTER[x]:16,SOUTH+[y]:7"
 				else
 					A.screen_loc = "CENTER+[x]:16,SOUTH+[y]:7"
-				A.layer = 20
+				A.layer = SCREEN_LAYER
 
 				x++
 				if(x == 4)

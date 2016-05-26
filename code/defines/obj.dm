@@ -62,9 +62,8 @@ using /datum/datacore/proc/manifest_inject( ), or manifest_insert( )
 */
 
 var/global/list/PDA_Manifest = list()
-var/global/ManifestJSON
 
-/datum/datacore/proc/get_manifest_json()
+/datum/datacore/proc/get_manifest_list()
 	if(PDA_Manifest.len)
 		return
 	var/heads[0]
@@ -146,7 +145,6 @@ var/global/ManifestJSON
 		"bot" = bot,\
 		"misc" = misc\
 		)
-	ManifestJSON = json_encode(PDA_Manifest)
 	return
 
 
@@ -197,7 +195,7 @@ var/global/ManifestJSON
 	item_state = "beachball"
 	density = 0
 	anchored = 0
-	w_class = 4
+	w_class = 5
 	force = 0.0
 	throwforce = 0.0
 	throw_speed = 1

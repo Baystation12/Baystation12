@@ -64,8 +64,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/obj/item/device/paicard/pai = null	// A slot for a personal AI device
 
 /obj/item/device/pda/examine(mob/user)
-	if(..(user, 1))
-		user << "The time [worldtime2text()] is displayed in the corner of the screen."
+	. = ..(user, 1)
+	if(.)
+		user << "The time [stationtime2text()] is displayed in the corner of the screen."
 
 /obj/item/device/pda/medical
 	default_cartridge = /obj/item/weapon/cartridge/medical
@@ -417,7 +418,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			cartdata["charges"] = cartridge.charges ? cartridge.charges : 0
 		data["cartridge"] = cartdata
 
-	data["stationTime"] = worldtime2text()
+	data["stationTime"] = stationtime2text()
 	data["new_Message"] = new_message
 	data["new_News"] = new_news
 
@@ -455,7 +456,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				data["convo_job"] = sanitize(c["job"])
 				break
 	if(mode==41)
-		data_core.get_manifest_json()
+		data_core.get_manifest_list()
 
 
 	if(mode==3)
@@ -524,7 +525,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		data["feed"] = feed
 
-	data["manifest"] = list("__json_cache" = ManifestJSON)
+	data["manifest"] = PDA_Manifest
 
 	nanoUI = data
 	// update the ui if it exists, returns null if no ui is passed/found
@@ -913,11 +914,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		message += "Large clouds of noxious smoke billow forth from your [P]!"
 	if(i>=65 && i<=75) //Weaken
 		if(M && isliving(M))
-			M.apply_effects(0,1)
+			M.apply_effects(weaken = 1)
 		message += "Your [P] flashes with a blinding white light! You feel weaker."
 	if(i>=75 && i<=85) //Stun and stutter
 		if(M && isliving(M))
-			M.apply_effects(1,0,0,0,1)
+			M.apply_effects(stun = 1, stutter = 1)
 		message += "Your [P] flashes with a blinding white light! You feel weaker."
 	if(i>=85) //Sparks
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread

@@ -5,7 +5,8 @@
 	reagent_state = LIQUID
 	metabolism = REM * 5
 	color = "#C80000"
-
+	taste_description = "iron"
+	taste_mult = 1.3
 	glass_icon_state = "glass_red"
 	glass_name = "glass of tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
@@ -71,6 +72,7 @@
 /datum/reagent/antibodies
 	data = list("antibodies"=list())
 	name = "Antibodies"
+	taste_description = "slime"
 	id = "antibodies"
 	reagent_state = LIQUID
 	color = "#0050F0"
@@ -88,7 +90,7 @@
 	reagent_state = LIQUID
 	color = "#0064C877"
 	metabolism = REM * 10
-
+	taste_description = "water"
 	glass_icon_state = "glass_clear"
 	glass_name = "glass of water"
 	glass_desc = "The father of all refreshments."
@@ -137,7 +139,7 @@
 /datum/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(istype(M, /mob/living/carbon/slime))
 		var/mob/living/carbon/slime/S = M
-		S.adjustToxLoss(8 * removed) // Babies have 150 health, adults have 200; So, 10 units and 13.5
+		S.adjustToxLoss(5 * removed) // Babies have 150 health, adults have 200; So, 30 units and 40
 		if(!S.client)
 			if(S.Target) // Like cats
 				S.Target = null
@@ -149,6 +151,7 @@
 	name = "Welding fuel"
 	id = "fuel"
 	description = "Required for welders. Flamable."
+	taste_description = "gross metal"
 	reagent_state = LIQUID
 	color = "#660000"
 	touch_met = 5

@@ -36,16 +36,17 @@
 			overlays += filling
 
 /obj/machinery/iv_drip/MouseDrop(over_object, src_location, over_location)
-	..()
+	if(!CanMouseDrop(over_object))
+		return
 
 	if(attached)
-		visible_message("[src.attached] is detached from \the [src]")
+		visible_message("\The [attached] is detached from \the [src]")
 		src.attached = null
 		src.update_icon()
 		return
 
-	if(in_range(src, usr) && ishuman(over_object) && get_dist(over_object, src) <= 1)
-		visible_message("[usr] attaches \the [src] to \the [over_object].")
+	if(ishuman(over_object))
+		visible_message("\The [usr] attaches \the [src] to \the [over_object].")
 		src.attached = over_object
 		src.update_icon()
 

@@ -14,6 +14,14 @@ Used In File(s): \code\game\machinery\computer\camera.dm
         {{/if}}
     </div>
 </div>
+
+<div style="float: right; width: 240px;">
+	<span style="float: left;">Z Level:&nbsp;</span>
+	{{for config.mapZLevels :zValue:zIndex}}
+		{{:helper.link(zValue, 'close', {'mapZLevel' : zValue}, null, config.mapZLevel == zValue ? 'selected' : null)}}
+	{{/for}}
+</div>
+
 <div style="float: right; width: 240px;">
     <span style="float: left;">Zoom Level:&nbsp;</span>
     <div unselectable="on" class="link zoomLink" data-zoom-level="4">x1.0</div>

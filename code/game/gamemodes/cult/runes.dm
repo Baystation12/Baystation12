@@ -170,7 +170,7 @@ var/list/sacrificed = list()
 				if(!waiting_for_input[target]) //so we don't spam them with dialogs if they hesitate
 					waiting_for_input[target] = 1
 
-					if(!cult.can_become_antag(target.mind) || jobban_isbanned(target, "cultist"))//putting jobban check here because is_convertable uses mind as argument
+					if(!cult.can_become_antag(target.mind) || jobban_isbanned(target, MODE_CULTIST))//putting jobban check here because is_convertable uses mind as argument
 						//waiting_for_input ensures this is only shown once, so they basically auto-resist from here on out. They still need to find a way to get off the freaking rune if they don't want to burn to death, though.
 						target << "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>"
 						target << "<span class='danger'>And you were able to force it out of your mind. You now know the truth, there's something horrible out there, stop it and its minions at all costs.</span>"
@@ -328,8 +328,8 @@ var/list/sacrificed = list()
 					usr << "<span class='warning'>The sacrifical corpse is not dead. You must free it from this world of illusions before it may be used.</span>"
 				return fizzle()
 
-			var/mob/dead/observer/ghost
-			for(var/mob/dead/observer/O in loc)
+			var/mob/observer/ghost/ghost
+			for(var/mob/observer/ghost/O in loc)
 				if(!O.client)	continue
 				if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
 				ghost = O
@@ -423,8 +423,8 @@ var/list/sacrificed = list()
 			src = null
 			if(usr.loc!=this_rune.loc)
 				return this_rune.fizzle()
-			var/mob/dead/observer/ghost
-			for(var/mob/dead/observer/O in this_rune.loc)
+			var/mob/observer/ghost/ghost
+			for(var/mob/observer/ghost/O in this_rune.loc)
 				if(!O.client)	continue
 				if(!O.MayRespawn()) continue
 				if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
@@ -432,7 +432,7 @@ var/list/sacrificed = list()
 				break
 			if(!ghost)
 				return this_rune.fizzle()
-			if(jobban_isbanned(ghost, "cultist"))
+			if(jobban_isbanned(ghost, MODE_CULTIST))
 				return this_rune.fizzle()
 
 			usr.say("Gal'h'rfikk harfrandid mud[pick("'","`")]gib!")
@@ -454,7 +454,7 @@ var/list/sacrificed = list()
 			D.r_eyes = 200
 			D.g_eyes = 200
 			D.update_eyes()
-			D.underwear = 0
+			D.all_underwear.Cut()
 			D.key = ghost.key
 			cult.add_antagonist(D.mind)
 

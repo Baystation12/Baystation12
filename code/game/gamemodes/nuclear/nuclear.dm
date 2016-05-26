@@ -19,11 +19,6 @@ var/list/nuke_disks = list()
 	var/syndies_didnt_escape = 0 //Used for tracking if the syndies got the shuttle off of the z-level
 	antag_tags = list(MODE_MERCENARY)
 
-//delete all nuke disks not on a station zlevel
-/datum/game_mode/nuclear/proc/check_nuke_disks()
-	for(var/obj/item/weapon/disk/nuclear/N in nuke_disks)
-		if(isNotStationLevel(N.z)) qdel(N)
-
 //checks if L has a nuke disk on their person
 /datum/game_mode/nuclear/proc/check_mob(mob/living/L)
 	for(var/obj/item/weapon/disk/nuclear/N in nuke_disks)
@@ -32,7 +27,9 @@ var/list/nuke_disks = list()
 	return 0
 
 /datum/game_mode/nuclear/declare_completion()
-	if(config.objectives_disabled)
+	var/datum/antagonist/merc = all_antag_types[MODE_MERCENARY]
+	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || (merc && !merc.global_objectives.len))
+		..()
 		return
 	var/disk_rescued = 1
 	for(var/obj/item/weapon/disk/nuclear/D in world)

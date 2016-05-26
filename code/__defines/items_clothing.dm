@@ -63,6 +63,7 @@
 #define BLOCKHAIR       0x40    // Hides the user's hair, facial and otherwise.
 
 // Slots.
+#define slot_first       1
 #define slot_back        1
 #define slot_wear_mask   2
 #define slot_handcuffed  3
@@ -85,6 +86,7 @@
 #define slot_r_ear       20
 #define slot_legs        21
 #define slot_tie         22
+#define slot_last        22
 
 // Inventory slot strings.
 // since numbers cannot be used as associative list keys.
@@ -177,3 +179,31 @@
 #define SUIT_SENSOR_BINARY   1
 #define SUIT_SENSOR_VITAL    2
 #define SUIT_SENSOR_TRACKING 3
+
+// Storage
+
+/*
+	A note on w_classes - this is an attempt to describe the w_classes currently in use
+	with an attempt at providing examples of the kinds of things that fit each w_class
+
+	1 - tiny items - things like screwdrivers and pens, sheets of paper
+	2 - small items - things that can fit in a pocket
+	3 - normal items
+	4 - large items - the largest things you can fit in a backpack
+	5 - bulky items - backpacks are this size, for reference
+	6 - human sized objects
+	7 - things that are large enough to contain humans, like closets, but smaller than entire turfs
+	8 - things that take up an entire turf, like wall girders or door assemblies
+*/
+#define TINY_ITEM   1
+#define SMALL_ITEM  2
+#define NORMAL_ITEM 3
+#define LARGE_ITEM  4
+#define BULKY_ITEM  5
+
+#define base_storage_cost(w_class) (2**(w_class-1)) //1,2,4,8,16,...
+
+#define DO_NOT_STORE INFINITY //A special storage "cost" that indicates an item should not be storable
+
+#define DEFAULT_BACKPACK_STORAGE 28
+#define DEFAULT_BOX_STORAGE 14

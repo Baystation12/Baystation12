@@ -32,10 +32,11 @@
 		unwet_task = schedule_task_in(8 SECONDS)
 		task_triggered_event.register(unwet_task, src, /turf/simulated/proc/task_unwet_floor)
 
-/turf/simulated/proc/task_unwet_floor(var/triggered_task)
+/turf/simulated/proc/task_unwet_floor(var/triggered_task, var/check_very_wet = TRUE)
 	if(triggered_task == unwet_task)
+		task_triggered_event.unregister(unwet_task, src, /turf/simulated/proc/task_unwet_floor)
 		unwet_task = null
-		unwet_floor(TRUE)
+		unwet_floor(check_very_wet)
 
 /turf/simulated/proc/unwet_floor(var/check_very_wet)
 	if(check_very_wet && wet >= 2)
@@ -58,8 +59,7 @@
 	levelupdate()
 
 /turf/simulated/Destroy()
-	qdel(unwet_task)
-	unwet_task = null
+	task_unwet_floor(unwet_task, FALSE)
 	return ..()
 
 /turf/simulated/proc/initialize()
@@ -79,11 +79,11 @@
 			dirtoverlay = new/obj/effect/decal/cleanable/dirt(src)
 		dirtoverlay.alpha = min((dirt - 50) * 5, 255)
 
-/turf/simulated/Entered(atom/A, atom/OL)
-	if(movement_disabled && usr.ckey != movement_disabled_exception)
-		usr << "<span class='danger'>Movement is admin-disabled.</span>" //This is to identify lag problems
-		return
+/turf/simulated/remove_cleanables()
+	dirt = 0
+	. = ..()
 
+/turf/simulated/Entered(atom/A, atom/OL)
 	if (istype(A,/mob/living))
 		var/mob/living/M = A
 		if(M.lying)

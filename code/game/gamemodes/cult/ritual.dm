@@ -343,9 +343,18 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used [name] on [M.name] ([M.ckey])</font>")
 		msg_admin_attack("[user.name] ([user.ckey]) used [name] on [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
-		if(istype(M,/mob/dead))
-			var/mob/dead/D = M
-			D.manifest(user)
+		if(isghost(M))
+			var/mob/observer/ghost/D = M
+			if(D.manifest())
+				user.visible_message( \
+					"<span class='warning'>\The [user] drags a ghost, \the [src], to our plane of reality!</span>", \
+					"<span class='warning'>You drag \the [src] to our plane of reality!</span>" \
+				)
+			else
+				user.visible_message ( \
+					"<span class='warning'>\The [user] just tried to smash \his book into that ghost!  It's not very effective.</span>", \
+					"<span class='warning'>You get the feeling that the ghost can't become any more visible.</span>" \
+				)
 			return
 		if(!istype(M))
 			return

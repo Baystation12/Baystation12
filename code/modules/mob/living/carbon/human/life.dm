@@ -2,7 +2,7 @@
 
 //NOTE: Breathing happens once per FOUR TICKS, unless the last breath fails. In which case it happens once per ONE TICK! So oxyloss healing is done once per 4 ticks while oxyloss damage is applied once per tick!
 #define HUMAN_MAX_OXYLOSS 1 //Defines how much oxyloss humans can get per tick. A tile with no air at all (such as space) applies this value, otherwise it's a percentage of it.
-#define HUMAN_CRIT_MAX_OXYLOSS ( 2.0 / 6) //The amount of damage you'll get when in critical condition. We want this to be a 5 minute deal = 300s. There are 50HP to get through, so (1/6)*last_tick_duration per second. Breaths however only happen every 4 ticks. last_tick_duration = ~2.0 on average
+#define HUMAN_CRIT_MAX_OXYLOSS ( (process_schedule_interval("mob")/(1 SECOND)) / 6) //The amount of damage you'll get when in critical condition. We want this to be a 5 minute deal = 300s. There are 50HP to get through, so (1/6)*last_tick_duration per second. Breaths however only happen every 4 ticks. last_tick_duration = ~2.0 on average
 
 #define HEAT_DAMAGE_LEVEL_1 2 //Amount of damage applied when your body temperature just passes the 360.15k safety point
 #define HEAT_DAMAGE_LEVEL_2 4 //Amount of damage applied when your body temperature passes the 400K point
@@ -177,7 +177,6 @@
 				emote("cough")
 				return
 	if (disabilities & TOURETTES)
-		speech_problem_flag = 1
 		if ((prob(10) && paralysis <= 1))
 			Stun(10)
 			spawn( 0 )
@@ -189,7 +188,6 @@
 				make_jittery(100)
 				return
 	if (disabilities & NERVOUS)
-		speech_problem_flag = 1
 		if (prob(10))
 			stuttering = max(10, stuttering)
 
@@ -231,7 +229,6 @@
 		if(!gene.block)
 			continue
 		if(gene.is_active(src))
-			speech_problem_flag = 1
 			gene.OnMobLife(src)
 
 	radiation = Clamp(radiation,0,100)
@@ -329,9 +326,13 @@
 	if(status_flags & GODMODE)
 		return
 
-	//check if we actually need to process breath
-	if(!breath || (breath.total_moles == 0))
+	var/obj/item/organ/lungs/L = internal_organs_by_name["lungs"]
+	if(!L && species.has_organ["lungs"])
 		failed_last_breath = 1
+	else
+		failed_last_breath = L.handle_breath(breath) //if breath is null or vacuum, the lungs will handle it for us
+
+	if(failed_last_breath)
 		if(prob(20))
 			emote("gasp")
 		if(health > config.health_threshold_crit)
@@ -341,11 +342,6 @@
 
 		oxygen_alert = max(oxygen_alert, 1)
 		return 0
-	var/obj/item/organ/lungs/L = internal_organs_by_name["lungs"]
-	if(L && L.handle_breath(breath))
-		failed_last_breath = 0
-	else
-		failed_last_breath = 1
 	return 1
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
@@ -448,13 +444,10 @@
 	else if(adjusted_pressure >= species.hazard_low_pressure)
 		pressure_alert = -1
 	else
-		if( !(COLD_RESISTANCE in mutations))
-			take_overall_damage(brute=LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
-			if(getOxyLoss() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
-				adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
-			pressure_alert = -2
-		else
-			pressure_alert = -1
+		take_overall_damage(brute=LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
+		if(getOxyLoss() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
+			adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
+		pressure_alert = -2
 
 	return
 
@@ -596,9 +589,9 @@
 			var/turf/T = loc
 			var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in T
 			if(L)
-				light_amount = min(10,L.lum_r + L.lum_g + L.lum_b) - 5 //hardcapped so it's not abused by having a ton of flashlights
+				light_amount = min(10,L.lum_r + L.lum_g + L.lum_b) - 2 //hardcapped so it's not abused by having a ton of flashlights
 			else
-				light_amount =  5
+				light_amount =  1
 		nutrition += light_amount
 		traumatic_shock -= light_amount
 
@@ -642,6 +635,7 @@
 
 	return //TODO: DEFERRED
 
+//DO NOT CALL handle_statuses() from this proc, it's called from living/Life() as long as this returns a true value.
 /mob/living/carbon/human/handle_regular_status_updates()
 	if(!handle_some_updates())
 		return 0
@@ -695,19 +689,15 @@
 			animate_tail_reset()
 			adjustHalLoss(-3)
 
-		if(paralysis)
-			AdjustParalysis(-1)
-
-		else if(sleeping)
-			speech_problem_flag = 1
-			handle_dreams()
-			if (mind)
-				//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
-				if(client || sleeping > 3)
-					AdjustSleeping(-1)
-			if( prob(2) && health && !hal_crit )
-				spawn(0)
-					emote("snore")
+			if(sleeping)
+				handle_dreams()
+				if (mind)
+					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
+					if(client || sleeping > 3)
+						AdjustSleeping(-1)
+				if( prob(2) && health && !hal_crit )
+					spawn(0)
+						emote("snore")
 		//CONSCIOUS
 		else
 			stat = CONSCIOUS
@@ -740,11 +730,8 @@
 			jitteriness = max(0, jitteriness - 3)
 			adjustHalLoss(-1)
 
-		//Other
-		handle_statuses()
-
-		if (drowsyness)
-			drowsyness--
+		if (drowsyness > 0)
+			drowsyness = max(0, drowsyness-1)
 			eye_blurry = max(2, eye_blurry)
 			if (prob(5))
 				sleeping += 1
@@ -994,7 +981,9 @@
 /mob/living/carbon/human/handle_shock()
 	..()
 	if(status_flags & GODMODE)	return 0	//godmode
-	if(species && species.flags & NO_PAIN) return
+	if(species && species.flags & NO_PAIN) 
+		shock_stage = 0
+		return
 
 	if(health < config.health_threshold_softcrit)// health 0 makes you immediately collapse
 		shock_stage = max(shock_stage, 61)
@@ -1181,28 +1170,11 @@
 			hud_list[SPECIALROLE_HUD] = holder
 	hud_updateflag = 0
 
-/mob/living/carbon/human/handle_silent()
-	if(..())
-		speech_problem_flag = 1
-	return silent
-
-/mob/living/carbon/human/handle_slurring()
-	if(..())
-		speech_problem_flag = 1
-	return slurring
-
 /mob/living/carbon/human/handle_stunned()
-	if(species.flags & NO_PAIN)
+	if(species.flags & NO_PAIN) //This should be it's own flag, not NO_PAIN
 		stunned = 0
 		return 0
-	if(..())
-		speech_problem_flag = 1
-	return stunned
-
-/mob/living/carbon/human/handle_stuttering()
-	if(..())
-		speech_problem_flag = 1
-	return stuttering
+	return ..()
 
 /mob/living/carbon/human/handle_fire()
 	if(..())

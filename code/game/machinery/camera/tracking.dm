@@ -6,13 +6,11 @@
 /mob/living/silicon/ai/var/stored_locations[0]
 
 /proc/InvalidPlayerTurf(turf/T as turf)
-	return !(T && T.z in config.player_levels)
+	return !(T && T.z in using_map.player_levels)
 
 /mob/living/silicon/ai/proc/get_camera_list()
 	if(src.stat == 2)
 		return
-
-	cameranet.process_sort()
 
 	var/list/T = list()
 	for (var/obj/machinery/camera/C in cameranet.cameras)
@@ -26,7 +24,7 @@
 
 
 /mob/living/silicon/ai/proc/ai_camera_list(var/camera in get_camera_list())
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set name = "Show Camera List"
 
 	if(check_unable())
@@ -41,7 +39,7 @@
 	return
 
 /mob/living/silicon/ai/proc/ai_store_location(loc as text)
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set name = "Store Camera Location"
 	set desc = "Stores your current camera location by the given name"
 
@@ -70,7 +68,7 @@
 	return sortList(stored_locations)
 
 /mob/living/silicon/ai/proc/ai_goto_location(loc in sorted_stored_locations())
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set name = "Goto Camera Location"
 	set desc = "Returns to the selected camera location"
 
@@ -82,7 +80,7 @@
 	src.eyeobj.setLoc(L)
 
 /mob/living/silicon/ai/proc/ai_remove_location(loc in sorted_stored_locations())
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set name = "Delete Camera Location"
 	set desc = "Deletes the selected camera location"
 
@@ -129,7 +127,7 @@
 	return targets
 
 /mob/living/silicon/ai/proc/ai_camera_track(var/target_name in trackable_mobs())
-	set category = "AI Commands"
+	set category = "Silicon Commands"
 	set name = "Follow With Camera"
 	set desc = "Select who you would like to track."
 
@@ -216,7 +214,7 @@
 mob/living/proc/near_camera()
 	if (!isturf(loc))
 		return 0
-	else if(!cameranet.checkVis(src))
+	else if(!cameranet.is_visible(src))
 		return 0
 	return 1
 
@@ -256,7 +254,7 @@ mob/living/proc/near_camera()
 
 	if(. == TRACKING_NO_COVERAGE)
 		var/turf/T = get_turf(src)
-		if(T && (T.z in config.station_levels) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
+		if(T && (T.z in using_map.station_levels) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
 			return TRACKING_POSSIBLE
 
 mob/living/proc/tracking_initiated()

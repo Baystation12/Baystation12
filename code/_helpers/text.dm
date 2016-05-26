@@ -324,3 +324,18 @@ proc/TextPreview(var/string,var/len=40)
 			if(48 to 57)			//Numbers
 				return 1
 	return 0
+
+/proc/generateRandomString(var/length)
+	var/text = ""
+	for(var/a in 1 to length)
+		var/letter = rand(33,126)
+		text += ascii2text(letter)
+	return text
+
+#define gender2text(gender) capitalize(gender)
+
+/**
+ * Strip out the special beyond characters for \proper and \improper
+ * from text that will be sent to the browser.
+ */
+#define strip_improper(input_text) replacetext(replacetext(input_text, "\proper", ""), "\improper", "")

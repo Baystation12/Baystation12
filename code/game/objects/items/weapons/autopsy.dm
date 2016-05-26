@@ -86,7 +86,7 @@
 	var/scan_data = ""
 
 	if(timeofdeath)
-		scan_data += "<b>Time of death:</b> [worldtime2text(timeofdeath)]<br><br>"
+		scan_data += "<b>Time of death:</b> [station_adjusted_time(timeofdeath)]<br><br>"
 
 	var/n = 1
 	for(var/wdata_idx in wdata)
@@ -133,7 +133,7 @@
 		if(damaging_weapon)
 			scan_data += "Severity: [damage_desc]<br>"
 			scan_data += "Hits by weapon: [total_hits]<br>"
-		scan_data += "Approximate time of wound infliction: [worldtime2text(age)]<br>"
+		scan_data += "Approximate time of wound infliction: [station_adjusted_time(age)]<br>"
 		scan_data += "Affected limbs: [D.organ_names]<br>"
 		scan_data += "Possible weapons:<br>"
 		for(var/weapon_name in weapon_chances)
@@ -161,19 +161,7 @@
 
 	if(istype(usr,/mob/living/carbon))
 		// place the item in the usr's hand if possible
-		if(!usr.r_hand)
-			P.loc = usr
-			usr.r_hand = P
-			P.layer = 20
-		else if(!usr.l_hand)
-			P.loc = usr
-			usr.l_hand = P
-			P.layer = 20
-
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_l_hand()
-		M.update_inv_r_hand()
+		usr.put_in_hands(P)
 
 /obj/item/weapon/autopsy_scanner/attack(mob/living/carbon/human/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M))
