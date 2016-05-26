@@ -112,10 +112,13 @@ var/global/list/sparring_attack_cache = list()
 
 /datum/unarmed_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 
-	if (user.wear_mask && istype(user.wear_mask, /obj/item/clothing/mask/muzzle))
+	if(istype(user.wear_mask, /obj/item/clothing/mask/muzzle))
 		return 0
+	for(var/obj/item/clothing/C in list(user.wear_mask, user.head, user.wear_suit))
+		if(C && (C.body_parts_covered & FACE) && (C.item_flags & THICKMATERIAL))
+			return 0 //prevent biting through a space helmet or similar
 	if (user == target && (zone == "head" || zone == "eyes" || zone == "mouth"))
-		return 0
+		return 0 //how do you bite yourself in the head?
 	return 1
 
 /datum/unarmed_attack/punch
