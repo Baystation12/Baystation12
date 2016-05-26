@@ -6,7 +6,7 @@
 	force = 3.0
 	w_class = 3.0
 	attack_verb = list("whipped")
-	hitsound = "towelwhip"
+	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "A soft cotton towel."
 
 /obj/item/weapon/towel/attack_self(mob/living/user as mob)
