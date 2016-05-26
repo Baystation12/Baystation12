@@ -247,3 +247,11 @@
 	New()
 		..()
 		reagents.add_reagent("spaceacillin", 15)
+
+/obj/item/weapon/reagent_containers/pill/diet
+	name = "diet pill"
+	desc = "Guaranteed to get you slim!"
+	icon_state = "pill9"
+	New()
+		..()
+		reagents.add_reagent("lipozine", 2)
