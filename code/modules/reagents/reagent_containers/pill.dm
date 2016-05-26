@@ -20,7 +20,7 @@
 
 	attack(mob/M as mob, mob/user as mob, def_zone)
 		//TODO: replace with standard_feed_mob() call.
-		
+
 		if(M == user)
 			if(!M.can_eat(src))
 				return
@@ -244,6 +244,17 @@
 	name = "Spaceacillin pill"
 	desc = "Contains antiviral agents."
 	icon_state = "pill19"
+
 	New()
 		..()
 		reagents.add_reagent("spaceacillin", 15)
+
+/obj/item/weapon/reagent_containers/pill/diet
+	name = "diet pill"
+	desc = "Guaranteed to get you slim!"
+	icon_state = "pill9"
+
+/obj/item/weapon/reagent_containers/pill/diet/New()
+	..()
+	reagents.add_reagent("lipozine", 2)
+
