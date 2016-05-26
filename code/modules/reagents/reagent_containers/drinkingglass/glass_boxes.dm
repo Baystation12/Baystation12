@@ -4,7 +4,6 @@
 	can_hold = list(/obj/item/weapon/reagent_containers/food/drinks/glass2)
 	New()
 		..()
-		// you know how you can never get everything back in the box it came in? Yeah, this is like that. 8 items in a 7-item box.
 		new /obj/item/weapon/reagent_containers/food/drinks/glass2/square(src)
 		new /obj/item/weapon/reagent_containers/food/drinks/glass2/rocks(src)
 		new /obj/item/weapon/reagent_containers/food/drinks/glass2/shake(src)
@@ -13,6 +12,7 @@
 		new /obj/item/weapon/reagent_containers/food/drinks/glass2/pint(src)
 		new /obj/item/weapon/reagent_containers/food/drinks/glass2/mug(src)
 		new /obj/item/weapon/reagent_containers/food/drinks/glass2/wine(src)
+		make_exact_fit()
 
 /obj/item/weapon/storage/box/glasses
 	name = "box of glasses"
@@ -23,6 +23,7 @@
 
 		for(var/i = 1 to 7)
 			new glass_type(src)
+		make_exact_fit()
 
 /obj/item/weapon/storage/box/glasses/square
 	name = "box of half-pint glasses"

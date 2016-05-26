@@ -718,7 +718,9 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/tea = 15)
+					/obj/item/weapon/reagent_containers/food/drinks/tea = 15,
+					/obj/item/weapon/glass_extra/stick = 15,
+					/obj/item/weapon/glass_extra/straw = 15)
 	contraband = list()
 	vend_delay = 15
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.

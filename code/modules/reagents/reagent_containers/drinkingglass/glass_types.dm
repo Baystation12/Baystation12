@@ -4,7 +4,6 @@
 	base_icon = "square"
 	desc = "Your standard drinking glass."
 	filling_states = list(20, 40, 60, 80, 100)
-	fill_descriptions = list("almost empty", "half-full", "half-full", "almost full", "full")
 	volume = 30
 	possible_transfer_amounts = list(5,10,15,30)
 	rim_pos = list(23,13,20) // y, x0, x1
@@ -14,7 +13,6 @@
 	base_name = "glass"
 	base_icon = "rocks"
 	filling_states = list(25, 50, 75, 100)
-	fill_descriptions = list("almost empty", "half-full", "almost full", "full")
 	volume = 20
 	possible_transfer_amounts = list(5,10,20)
 	rim_pos = list(21, 10, 23)
@@ -24,7 +22,6 @@
 	base_name = "glass"
 	base_icon = "shake"
 	filling_states = list(25, 50, 75, 100)
-	fill_descriptions = list("almost empty", "half-full", "almost full", "full")
 	volume = 30
 	possible_transfer_amounts = list(5,10,15,30)
 	rim_pos = list(25, 13, 21)
@@ -34,7 +31,6 @@
 	base_name = "glass"
 	base_icon = "cocktail"
 	filling_states = list(33, 66, 100)
-	fill_descriptions = list("almost empty", "half-full", "full")
 	volume = 15
 	possible_transfer_amounts = list(5,10,15)
 	rim_pos = list(22, 13, 21)
@@ -44,9 +40,8 @@
 	base_name = "shot"
 	base_icon = "shot"
 	filling_states = list(33, 66, 100)
-	fill_descriptions = list("almost empty", "half-full", "full")
-	volume = 15
-	possible_transfer_amounts = list(5, 10)
+	volume = 5
+	possible_transfer_amounts = list(1,2,5)
 	rim_pos = list(17, 13, 21)
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/pint
@@ -54,7 +49,6 @@
 	base_name = "pint"
 	base_icon = "pint"
 	filling_states = list(16, 33, 50, 66, 83, 100)
-	fill_descriptions = list("almost empty", "half-full", "half-full", "almost full", "almost full", "full")
 	volume = 60
 	possible_transfer_amounts = list(5,10,15,30,60)
 	rim_pos = list(25, 12, 21)
@@ -64,7 +58,6 @@
 	base_name = "mug"
 	base_icon = "mug"
 	filling_states = list(25, 50, 75, 100)
-	fill_descriptions = list("almost empty", "half-full", "almost full", "full")
 	volume = 40
 	possible_transfer_amounts = list(5,10,20,40)
 	rim_pos = list(22, 12, 20)
@@ -74,7 +67,6 @@
 	base_name = "glass"
 	base_icon = "wine"
 	filling_states = list(20, 40, 60, 80, 100)
-	fill_descriptions = list("almost empty", "half-full", "half-full", "almost full", "full")
 	volume = 25
 	possible_transfer_amounts = list(5, 10, 15, 25)
 	rim_pos = list(25, 12, 21)

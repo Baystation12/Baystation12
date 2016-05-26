@@ -162,6 +162,26 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "\improper Party equipment"
 	group = "Hospitality"
 
+/datum/supply_packs/barsupplies
+	name = "Bar supplies"
+	contains = list(
+			/obj/item/weapon/storage/box/glasses/cocktail,
+			/obj/item/weapon/storage/box/glasses/rocks,
+			/obj/item/weapon/storage/box/glasses/square,
+			/obj/item/weapon/storage/box/glasses/pint,
+			/obj/item/weapon/storage/box/glasses/wine,
+			/obj/item/weapon/storage/box/glasses/shake,
+			/obj/item/weapon/storage/box/glasses/shot,
+			/obj/item/weapon/storage/box/glasses/mug,
+			/obj/item/weapon/reagent_containers/food/drinks/shaker,
+			/obj/item/weapon/storage/box/glass_extras/straws,
+			/obj/item/weapon/storage/box/glass_extras/sticks
+			)
+	cost = 10
+	containertype = /obj/structure/closet/crate
+	containername = "crate of bar supplies"
+	group = "Hospitality"
+
 /datum/supply_packs/lasertag
 	name = "Lasertag equipment"
 	contains = list(/obj/item/weapon/gun/energy/lasertag/red,

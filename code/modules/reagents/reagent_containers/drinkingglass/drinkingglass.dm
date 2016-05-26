@@ -12,14 +12,12 @@
 	icon = DRINK_ICON_FILE
 	var/base_icon = "square" // Base icon name
 	volume = 30
-	var/gulp_size = 5
 
-	var/list/filling_states
-	var/list/fill_descriptions
+	var/list/filling_states // List of percentages full that have icons
 
-	var/list/extras = list()
+	var/list/extras = list() // List of extras. Two extras maximum
 
-	var/rim_pos
+	var/rim_pos // Position of the rim for fruit slices. list(y, x_left, x_right)
 
 	center_of_mass = list("x"=16, "y"=10)
 
@@ -43,15 +41,6 @@
 
 	if(has_fizz())
 		M << "It is fizzing slightly."
-
-	var/stage = filling_states.len
-	var/percent = round((reagents.total_volume / volume) * 100)
-	for(var/i = 1 to filling_states.len)
-		if(percent <= filling_states[i])
-			stage = i
-			break
-
-//	M << "It is [fill_descriptions[stage]]."
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/proc/has_ice()
 	if(reagents.reagent_list.len > 0)
