@@ -242,27 +242,10 @@ proc/get_radio_key_from_channel(var/channel)
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
-		//DO NOT FUCKING CHANGE THIS TO GET_OBJ_OR_MOB_AND_BULLSHIT() -- Hugs and Kisses ~Ccomp
-		var/list/hear = hear(message_range,T)
-		var/list/hearturfs = list()
+		var/list/results = get_mobs_and_objs_in_view_fast(T, message_range)
+		listening = results["mobs"]
+		listening_obj = results["objs"]
 
-		for(var/I in hear)
-			if(ismob(I))
-				var/mob/M = I
-				listening += M
-				hearturfs += M.locs[1]
-			else if(isobj(I))
-				var/obj/O = I
-				hearturfs += O.locs[1]
-				listening_obj |= O
-
-
-		for(var/mob/M in player_list)
-			if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
-				listening |= M
-				continue
-			if(M.loc && M.locs[1] in hearturfs)
-				listening |= M
 
 	var/speech_bubble_test = say_test(message)
 	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
