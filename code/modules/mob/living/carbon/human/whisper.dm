@@ -10,8 +10,6 @@
 			src << "\red You cannot whisper (muted)."
 			return
 
-		if (src.client.handle_spam_prevention(message,MUTE_IC))
-			return
 
 	if (src.stat == 2)
 		return src.say_dead(message)

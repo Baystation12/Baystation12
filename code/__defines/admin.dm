@@ -8,10 +8,6 @@
 #define MUTE_DEADCHAT  0x10
 #define MUTE_ALL       0xFFFF
 
-// Number of identical messages required to get the spam-prevention auto-mute thing to trigger warnings and automutes.
-#define SPAM_TRIGGER_WARNING  5
-#define SPAM_TRIGGER_AUTOMUTE 10
-
 // Some constants for DB_Ban
 #define BANTYPE_PERMA       1
 #define BANTYPE_TEMP        2
