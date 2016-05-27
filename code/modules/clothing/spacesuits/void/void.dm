@@ -133,7 +133,11 @@
 
 	if(tank)
 		tank.canremove = 1
-		tank.forceMove(src)
+		H = tank.loc
+		if(istype(H))
+			if(tank && H.s_store == tank)
+				H.drop_from_inventory(tank)
+				tank.forceMove(src)
 
 /obj/item/clothing/suit/space/void/verb/toggle_helmet()
 
