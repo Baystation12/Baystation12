@@ -123,7 +123,7 @@
     new /obj/item/device/radio/headset/headset_med(src)
     new /obj/item/weapon/cartridge/medical(src)
     new /obj/item/device/flashlight(src)
-    new /obj/item/weapon/tank/emergency_oxygen/engi(src)
+    new /obj/item/weapon/tank/emergency/oxygen/engi(src)
     new /obj/item/clothing/glasses/hud/health(src)
     new /obj/item/device/healthanalyzer(src)
     new /obj/item/device/radio/off(src)

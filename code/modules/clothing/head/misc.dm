@@ -284,3 +284,10 @@
 	body_parts_covered = 0
 	flags_inv = BLOCKHEADHAIR //Shows beards!
 
+/obj/item/clothing/head/beret/deathsquad
+	name = "officer's beret"
+	desc = "An armored beret commonly used by special operations officers."
+	icon_state = "beret_badge"
+	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
+	flags_inv = BLOCKHAIR
+	siemens_coefficient = 0.9
