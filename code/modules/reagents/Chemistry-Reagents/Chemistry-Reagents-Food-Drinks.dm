@@ -608,7 +608,7 @@
 /datum/reagent/drink/milk/chocolate
 	name =  "Chocolate Milk"
 	id = "chocolate_milk"
-	description = "A delicious mixture of perfectly healthy mix and terrible chocolate."
+	description = "A mixture of perfectly healthy milk and delicious chocolate."
 	taste_description = "chocolate milk"
 	color = "#74533b"
 
