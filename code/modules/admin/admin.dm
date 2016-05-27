@@ -600,25 +600,32 @@ proc/admin_notice(var/message, var/rights)
 	usr << browse(dat, "window=admin2;size=210x280")
 	return
 
-/datum/admins/proc/Secrets()
+/datum/admins/proc/Secrets(var/datum/admin_secret_category/active_category = null)
 	if(!check_rights(0))	return
 
+	// Print the header with category selection buttons.
 	var/dat = "<B>The first rule of adminbuse is: you don't talk about the adminbuse.</B><HR>"
 	for(var/datum/admin_secret_category/category in admin_secrets.categories)
 		if(!category.can_view(usr))
 			continue
-		dat += "<B>[category.name]</B><br>"
-		if(category.desc)
-			dat += "<I>[category.desc]</I><BR>"
-		for(var/datum/admin_secret_item/item in category.items)
+		dat += "<A href='?src=\ref[src];admin_secrets_panel=\ref[category]'>[category.name]</A> "
+	dat += "<HR>"
+
+	// If a category is selected, print its description and then options
+	if(istype(active_category) && active_category.can_view(usr))
+		dat += "<B>[active_category.name]</B><BR>"
+		if(active_category.desc)
+			dat += "<I>[active_category.desc]</I><BR>"
+		for(var/datum/admin_secret_item/item in active_category.items)
 			if(!item.can_view(usr))
 				continue
 			dat += "<A href='?src=\ref[src];admin_secrets=\ref[item]'>[item.name()]</A><BR>"
 		dat += "<BR>"
-	usr << browse(dat, "window=secrets")
+
+	var/datum/browser/popup = new(usr, "secrets", "Secrets", 500, 500)
+	popup.set_content(dat)
+	popup.open()
 	return
-
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////admins2.dm merge
 //i.e. buttons/verbs
