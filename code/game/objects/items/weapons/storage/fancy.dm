@@ -70,6 +70,7 @@
 	desc = "A pack of red candles."
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candlebox"
+	opened = 1 //no closed state
 	throwforce = 2
 	w_class = 2
 	max_w_class = 1
@@ -180,7 +181,6 @@
 	name = "\improper AcmeCo packet"
 	desc = "A packet of six AcmeCo cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
 	icon_state = "Bpacket"
-	//item_state = "Bpacket" //Doesn't have an inhand state, but neither does dromedary, so, ya know.. So don't set one, use the default.
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat/New()
 	..()
