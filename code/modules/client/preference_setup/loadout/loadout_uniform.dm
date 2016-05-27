@@ -25,22 +25,6 @@
 	..()
 	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/under/color)
 
-/datum/gear/uniform/skirt
-	display_name = "plaid skirt, blue"
-	path = /obj/item/clothing/under/dress/plaid_blue
-
-/datum/gear/uniform/skirt/purple
-	display_name = "plaid skirt, purple"
-	path = /obj/item/clothing/under/dress/plaid_purple
-
-/datum/gear/uniform/skirt/red
-	display_name = "plaid skirt, red"
-	path = /obj/item/clothing/under/dress/plaid_red
-
-/datum/gear/uniform/skirt/black
-	display_name = "skirt, black"
-	path = /obj/item/clothing/under/blackskirt
-
 /datum/gear/uniform/roboticist_skirt
 	display_name = "skirt, roboticist"
 	path = /obj/item/clothing/under/rank/roboticist/skirt
@@ -176,3 +160,39 @@
 	display_name = "uniform, navyblue (Security)"
 	path = /obj/item/clothing/under/rank/security/navyblue
 	allowed_roles = list("Security Officer","Head of Security","Warden")
+
+/datum/gear/uniform/skirt
+	display_name = "skirt selection"
+	path = /obj/item/clothing/under/skirt
+
+/datum/gear/uniform/skirt/New()
+	..()
+	var/list/skirts = list()
+	for(var/skirt in (typesof(/obj/item/clothing/under/skirt)))
+		var/obj/item/clothing/under/skirt/skirt_type = skirt
+		skirts[initial(skirt_type.name)] = skirt_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(skirts))
+
+/datum/gear/uniform/pants
+	display_name = "pants selection"
+	path = /obj/item/clothing/under/pants/white
+
+/datum/gear/uniform/pants/New()
+	..()
+	var/list/pants = list()
+	for(var/pant in typesof(/obj/item/clothing/under/pants))
+		var/obj/item/clothing/under/pants/pant_type = pant
+		pants[initial(pant_type.name)] = pant_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(pants))
+
+/datum/gear/uniform/shorts
+	display_name = "shorts selection"
+	path = /obj/item/clothing/under/shorts/jeans
+
+/datum/gear/uniform/shorts/New()
+	..()
+	var/list/shorts = list()
+	for(var/short in typesof(/obj/item/clothing/under/shorts))
+		var/obj/item/clothing/under/pants/short_type = short
+		shorts[initial(short_type.name)] = short_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(shorts))
