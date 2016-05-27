@@ -1,5 +1,6 @@
 /obj/item/clothing/under/shorts
 	name = "athletic shorts"
+	icon_state = "redshorts"
 	desc = "95% Polyester, 5% Spandex!"
 	gender = PLURAL
 	body_parts_covered = LOWER_TORSO
