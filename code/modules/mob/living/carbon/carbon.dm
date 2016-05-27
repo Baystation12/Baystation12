@@ -195,7 +195,7 @@
 					status += "hurts when touched"
 				if(org.status & ORGAN_DEAD)
 					status += "is bruised and necrotic"
-				if(!org.is_usable())
+				if(!org.is_usable() || org.is_dislocated())
 					status += "dangling uselessly"
 				if(status.len)
 					src.show_message("My [org.name] is <span class='warning'> [english_list(status)].</span>",1)
