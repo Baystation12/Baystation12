@@ -135,6 +135,11 @@ var/list/holder_mob_icon_cache = list()
 	if(!holder_type || buckled || pinned.len)
 		return
 
+	if(self_grab)
+		if(src.incapacitated()) return
+	else
+		if(grabber.incapacitated()) return
+
 	var/obj/item/weapon/holder/H = new holder_type(get_turf(src))
 
 	if(self_grab)

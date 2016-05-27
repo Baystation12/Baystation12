@@ -1,0 +1,9 @@
+author: HarpyEagle
+
+delete-after: True
+
+changes: 
+  - rscadd: "Trying to move while being grabbed will now automatically resist."
+  - tweak: "Small mobs are no longer able to pin larger mobs."
+  - tweak: "Resisting a smaller mob's grab is more likely to be successful."
+  - bugfix: "Fixed being able to climb onto a larger mob while restrained, weakened, unconscious, or dead."
