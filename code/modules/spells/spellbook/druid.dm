@@ -10,7 +10,7 @@
 	book_desc = "Summons, nature, and a bit o' healin."
 	title = "Druidic Guide on how to be smug about nature"
 	title_desc = "Buy spells using your available spell slots. Artefacts may also be bought however their cost is permanent."
-	book_flags = 4
+	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE
 	max_uses = 5
 
 	spells = list(/spell/targeted/heal_target = 					1,
@@ -29,4 +29,5 @@
 				/obj/item/weapon/monster_manual = 					1,
 				/obj/item/weapon/contract/apprentice = 				1
 				)
-
+	sacrifice_objects = list(/obj/item/seeds/ambrosiavulgarisseed,
+							/obj/item/seeds/ambrosiadeusseed)

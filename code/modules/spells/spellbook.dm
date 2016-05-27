@@ -1,6 +1,7 @@
 #define NOREVERT			1
 #define LOCKED 				2
 #define CAN_MAKE_CONTRACTS	4
+#define INVESTABLE			8
 //spells/spellbooks have a variable for this but as artefacts are literal items they do not.
 //so we do this instead.
 var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
@@ -28,6 +29,8 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	var/temp = null
 	var/datum/spellbook/spellbook
 	var/spellbook_type = /datum/spellbook/ //for spawning specific spellbooks.
+	var/investing_time = 0 //what time we target forr a return on our spell investment.
+	var/has_sacrificed = 0 //whether we have already got our sacrifice bonus for the current investment.
 
 /obj/item/weapon/spellbook/New()
 	..()
@@ -54,6 +57,43 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 				user << "You notice the apprentice proof lock is on. Luckily you are beyond such things and can open it anyways."
 
 	interact(user)
+
+/obj/item/weapon/spellbook/proc/make_sacrifice(obj/item/I as obj, mob/user as mob, var/reagent)
+	if(has_sacrificed)
+		return
+	if(reagent)
+		var/datum/reagents/R = I.reagents
+		R.remove_reagent(reagent,5)
+	else
+		if(istype(I,/obj/item/stack))
+			var/obj/item/stack/S = I
+			if(S.amount < S.max_amount)
+				usr << "<span class='warning'>You must sacrifice [S.max_amount] stacks of [S]!</span>"
+				return
+		user.remove_from_mob(I)
+		qdel(I)
+	user << "<span class='notice'>Your sacrifice was accepted!</span>"
+	has_sacrificed = 1
+	investing_time = max(investing_time - 6000,1) //subtract 10 minutes. Make sure it doesn't act funky at the beginning of the game.
+
+
+/obj/item/weapon/spellbook/attackby(obj/item/I as obj, mob/user as mob)
+	if(investing_time && !has_sacrificed)
+		var/list/objects = spellbook.sacrifice_objects
+		if(objects && objects.len)
+			for(var/type in objects)
+				if(istype(I,type))
+					make_sacrifice(I,user)
+					return
+		if(I.reagents)
+			var/datum/reagents/R = I.reagents
+			var/list/reagent_list = spellbook.sacrifice_reagents
+			if(reagent_list && reagent_list.len)
+				for(var/id in reagent_list)
+					if(R.has_reagent(id,5))
+						make_sacrifice(I,user, id)
+						return
+	..()
 
 /obj/item/weapon/spellbook/interact(mob/user as mob)
 	var/dat = null
@@ -99,10 +139,13 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 				dat += " <A href='byond://?src=\ref[src];path=[spellbook.spells[i]];contract=1;'>Make Contract</a>"
 			dat += "<br><i>[desc]</i><br>"
 		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spellbook.</a></center>"
+		if(spellbook.book_flags & INVESTABLE)
+			dat += "<center><A href='byond://?src=\ref[src];invest=1'>Invest a Spell Slot</a><br><i>Investing a spellpoint will return two spellpoints back in 30 minutes.<br>Some say a sacrifice could even shorten the time...</i></center>"
 		if(!(spellbook.book_flags & NOREVERT))
 			dat += "<center><A href='byond://?src=\ref[src];book=1'>Choose different spellbook.</a></center>"
 		dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spellbook.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"
 	user << browse(dat,"window=spellbook")
+
 /obj/item/weapon/spellbook/Topic(href,href_list)
 	..()
 
@@ -136,6 +179,9 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		else
 			src.set_spellbook(/datum/spellbook)
 			temp = "You have reverted back to the Book of Tomes."
+
+	if(href_list["invest"])
+		temp = invest()
 
 	if(href_list["path"])
 		var/path = text2path(href_list["path"])
@@ -172,14 +218,39 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		var/area/wizard_station/A = locate()
 		if(usr in A.contents)
 			uses = spellbook.max_uses
+			investing_time = 0
+			has_sacrificed = 0
 			H.spellremove()
-			temp = "All spells have been removed. You may now memorize a new set of spells."
+			temp = "All spells and investments have been removed. You may now memorize a new set of spells."
 			feedback_add_details("wizard_spell_learned","UM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 		else
 			usr << "<span class='warning'>You must be in the wizard academy to re-memorize your spells.</span>"
 
 	src.interact(usr)
 
+/obj/item/weapon/spellbook/proc/invest()
+	if(uses < 1)
+		return "You don't have enough slots to invest!"
+	if(investing_time)
+		return "You can only invest one spell slot at a time."
+	uses--
+	processing_objects += src
+	investing_time = world.time + 18000 //30 minutes
+	return "You invest a spellslot and will recieve two in return in thirty minutes."
+
+/obj/item/weapon/spellbook/process()
+	if(investing_time && investing_time <= world.time)
+		src.visible_message("<b>\The [src]</b> chims.")
+		uses += 2
+		if(uses > spellbook.max_uses)
+			spellbook.max_uses = uses
+		investing_time = 0
+		processing_objects -= src
+	return 1
+
+/obj/item/weapon/spellbook/Destroy()
+	processing_objects -= src
+	..()
 
 /obj/item/weapon/spellbook/proc/send_feedback(var/path)
 	if(ispath(path,/datum/spellbook))
@@ -230,3 +301,6 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 				/datum/spellbook/druid = 1,
 				/datum/spellbook/student = 1
 				) //spell's path = cost of spell
+
+	var/list/sacrifice_reagents
+	var/list/sacrifice_objects
