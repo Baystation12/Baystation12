@@ -67,7 +67,7 @@
 	layer = MOB_LAYER
 
 	if(blind && client)
-		blind.layer = 0
+		blind.invisibility = 101
 
 	sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
 	see_in_dark = 8
