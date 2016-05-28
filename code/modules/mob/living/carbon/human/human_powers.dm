@@ -9,8 +9,8 @@
 	if(last_special > world.time)
 		return
 
-	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
-		src << "You cannot tackle someone in your current state."
+	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len)
+		src << "<span class='warning'>You cannot tackle in your current state.</span>"
 		return
 
 	var/list/choices = list()
@@ -25,29 +25,23 @@
 
 	if(!Adjacent(T)) return
 
+	//check again because we waited for user input
 	if(last_special > world.time)
 		return
 
-	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
-		src << "You cannot tackle in your current state."
+	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len)
+		src << "<span class='warning'>You cannot tackle in your current state.</span>"
 		return
 
 	last_special = world.time + 50
 
-	var/failed
-	if(prob(75))
-		T.Weaken(rand(0.5,3))
-	else
-		src.Weaken(rand(2,4))
-		failed = 1
-
 	playsound(loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
-	if(failed)
-		src.Weaken(rand(2,4))
-
-	for(var/mob/O in viewers(src, null))
-		if ((O.client && !( O.blinded )))
-			O.show_message(text("\red <B>[] [failed ? "tried to tackle" : "has tackled"] down []!</B>", src, T), 1)
+	T.Weaken(rand(1,3))
+	if(prob(75))
+		visible_message("<span class='danger'>\The [src] has tackled down [T]!</span>")
+	else
+		visible_message("<span class='danger'>\The [src] tried to tackle down [T]!</span>")
+		src.Weaken(rand(2,4)) //failure, you both get knocked down
 
 /mob/living/carbon/human/proc/leap()
 	set category = "Abilities"
@@ -57,27 +51,28 @@
 	if(last_special > world.time)
 		return
 
-	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
-		src << "You cannot leap in your current state."
+	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len)
+		src << "<span class='warning'>You cannot leap in your current state.</span>"
 		return
 
 	var/list/choices = list()
-	for(var/mob/living/M in view(6,src))
+	for(var/mob/living/M in oview(6,src))
 		if(!istype(M,/mob/living/silicon))
 			choices += M
 	choices -= src
 
 	var/mob/living/T = input(src,"Who do you wish to leap at?") as null|anything in choices
 
-	if(!T || !src || src.stat) return
+	if(!T || !isturf(T.loc) || !src || !isturf(loc)) return
 
 	if(get_dist(get_turf(T), get_turf(src)) > 4) return
 
+	//check again because we waited for user input
 	if(last_special > world.time)
 		return
 
-	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
-		src << "You cannot leap in your current state."
+	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len)
+		src << "<span class='warning'>You cannot leap in your current state.</span>"
 		return
 
 	last_special = world.time + 75
@@ -130,22 +125,22 @@
 	if(last_special > world.time)
 		return
 
-	if(stat || paralysis || stunned || weakened || lying)
-		src << "\red You cannot do that in your current state."
+	if(incapacitated())
+		src << "<span class='warning'>You cannot do that in your current state.</span>"
 		return
 
 	var/obj/item/weapon/grab/G = locate() in src
 	if(!G || !istype(G))
-		src << "\red You are not grabbing anyone."
+		src << "<span class='warning'>You are not grabbing anyone.</span>"
 		return
 
 	if(G.state < GRAB_AGGRESSIVE)
-		src << "\red You must have an aggressive grab to gut your prey!"
+		src << "<span class='warning'>You must have an aggressive grab to gut your prey!</span>"
 		return
 
 	last_special = world.time + 50
 
-	visible_message("<span class='warning'><b>\The [src]</b> rips viciously at \the [G.affecting]'s body with its claws!</span>")
+	visible_message("<span class='danger'>\The [src] rips viciously at [G.affecting]'s body with its claws!</span>")
 
 	if(istype(G.affecting,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = G.affecting
@@ -182,18 +177,19 @@
 	var/mob/M = targets[target]
 
 	if(isghost(M) || M.stat == DEAD)
-		src << "Not even a [src.species.name] can speak to the dead."
+		src << "<span class='warning'>Not even a [src.species.name] can speak to the dead.</span>"
 		return
 
 	log_say("[key_name(src)] communed to [key_name(M)]: [text]")
 
-	M << "\blue Like lead slabs crashing into the ocean, alien thoughts drop into your mind: [text]"
+	M << "<span class='notice'>Like lead slabs crashing into the ocean, alien thoughts drop into your mind: <i>[text]</i></span>"
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		if(H.species.name == src.species.name)
 			return
-		H << "\red Your nose begins to bleed..."
-		H.drip(1)
+		if(prob(75))
+			H << "<span class='warning'>Your nose begins to bleed...</span>"
+			H.drip(1)
 
 /mob/living/carbon/human/proc/regurgitate()
 	set name = "Regurgitate"
@@ -205,7 +201,7 @@
 			if(M in stomach_contents)
 				stomach_contents.Remove(M)
 				M.forceMove(loc)
-		src.visible_message("\red <B>[src] hurls out the contents of their stomach!</B>")
+		src.visible_message("<span class='danger'>[src] hurls out the contents of their stomach!</span>")
 	return
 
 /mob/living/carbon/human/proc/psychic_whisper(mob/M as mob in oview())
@@ -216,8 +212,8 @@
 	var/msg = sanitize(input("Message:", "Psychic Whisper") as text|null)
 	if(msg)
 		log_say("PsychicWhisper: [key_name(src)]->[M.key] : [msg]")
-		M << "\green You hear a strange, alien voice in your head... \italic [msg]"
-		src << "\green You said: \"[msg]\" to [M]"
+		M << "<span class='alium'>You hear a strange, alien voice in your head... <i>[msg]</i></span>"
+		src << "<span class='alium'>You channel a message: \"[msg]\" to [M]</span>"
 	return
 
 /mob/living/carbon/human/proc/diona_split_nymph()
