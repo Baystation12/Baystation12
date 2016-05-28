@@ -27,6 +27,8 @@
 	var/radio_filter_out
 	var/radio_filter_in
 
+	item_worth = 2300
+
 /obj/machinery/atmospherics/unary/vent_scrubber/on
 	use_power = 1
 	icon_state = "map_scrubber_on"

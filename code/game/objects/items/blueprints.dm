@@ -19,6 +19,8 @@
 	var/const/ROOM_ERR_SPACE = -1
 	var/const/ROOM_ERR_TOOLARGE = -2
 
+	item_worth = 4000 //Information is valuable
+
 /obj/item/blueprints/attack_self(mob/M as mob)
 	if (!istype(M,/mob/living/carbon/human))
 		M << "This stack of blue paper means nothing to you." //monkeys cannot into projecting

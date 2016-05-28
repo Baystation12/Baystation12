@@ -6,6 +6,7 @@
 	icon = 'icons/obj/trash.dmi'
 	w_class = 2.0
 	desc = "This is rubbish."
+	item_worth = 0
 
 /obj/item/trash/raisins
 	name = "\improper 4no raisins"

@@ -38,6 +38,7 @@
 
 	var/_wifi_id
 	var/datum/wifi/receiver/button/door/wifi_receiver
+	item_worth = 800
 
 /obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
 	if(stat & (BROKEN|NOPOWER))

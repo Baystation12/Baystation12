@@ -26,6 +26,8 @@ var/list/organ_cache = list()
 	var/datum/dna/dna
 	var/datum/species/species
 
+	item_worth = 400
+
 /obj/item/organ/Destroy()
 	if(!owner)
 		return ..()

@@ -159,6 +159,7 @@
 	density = 1
 	anchored = 1.0
 	var/lockeddown = 0
+	item_worth = 15000
 
 
 /obj/machinery/teleport/hub

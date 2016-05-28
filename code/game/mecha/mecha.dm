@@ -78,6 +78,8 @@
 	var/max_equip = 3
 	var/datum/events/events
 
+	item_worth = 20000
+
 /obj/mecha/drain_power(var/drain_check)
 
 	if(drain_check)

@@ -291,10 +291,11 @@
 	desc = "A machinery brace for an industrial drill. It looks easily two feet thick."
 	icon_state = "mining_brace"
 	var/obj/machinery/mining/drill/connected
+	item_worth = 300
 
 /obj/machinery/mining/brace/New()
 	..()
-	
+
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/miningdrillbrace(src)
 

@@ -2,6 +2,7 @@
 	density = 1
 	anchored = 1
 	icon = 'icons/obj/cult.dmi'
+	item_worth = 160
 
 /obj/structure/cult/cultify()
 	return
@@ -25,6 +26,7 @@
 	light_range = 5
 	light_color = "#3e0000"
 	var/obj/item/wepon = null
+	item_worth = 700
 
 /obj/structure/cult/pylon/attack_hand(mob/M as mob)
 	attackpylon(M, 5)

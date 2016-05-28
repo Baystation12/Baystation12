@@ -66,6 +66,8 @@
 	var/supernatural = 0
 	var/purge = 0
 
+	item_worth = 500
+
 /mob/living/simple_animal/New()
 	..()
 	verbs -= /mob/verb/observe
@@ -121,8 +123,8 @@
 	if(!client && speak_chance)
 		if(rand(0,200) < speak_chance)
 			var/action = pick(
-				speak.len;      "speak", 
-				emote_hear.len; "emote_hear", 
+				speak.len;      "speak",
+				emote_hear.len; "emote_hear",
 				emote_see.len;  "emote_see"
 				)
 

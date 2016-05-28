@@ -25,6 +25,8 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 
+	item_worth = 500
+
 /obj/item/clothing/suit/fire/New()
 	..()
 	slowdown_per_slot[slot_wear_suit] = 1.0
@@ -40,6 +42,8 @@
 	//icon_state = "thermal"
 	item_state = "ro_suit"
 	w_class = 5//bulky item
+
+	item_worth = 600
 
 /obj/item/clothing/suit/fire/heavy/New()
 	..()
@@ -57,6 +61,8 @@
 	body_parts_covered = HEAD|FACE|EYES
 	siemens_coefficient = 0
 
+	item_worth = 200
+
 
 /obj/item/clothing/suit/bomb_suit
 	name = "bomb suit"
@@ -71,6 +77,8 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
+
+	item_worth = 300
 
 /obj/item/clothing/suit/bomb_suit/New()
 	..()
@@ -96,6 +104,8 @@
 	body_parts_covered = HEAD|FACE|EYES
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 100)
 
+	item_worth = 250
+
 
 /obj/item/clothing/suit/radiation
 	name = "Radiation suit"
@@ -109,6 +119,8 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency_oxygen,/obj/item/clothing/head/radiation,/obj/item/clothing/mask/gas)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 100)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL
+
+	item_worth = 450
 
 /obj/item/clothing/suit/radiation/New()
 	..()

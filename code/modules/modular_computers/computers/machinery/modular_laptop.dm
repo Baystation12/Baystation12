@@ -9,6 +9,8 @@
 	w_class		= 3
 	var/obj/machinery/modular_computer/laptop/stored_computer = null
 
+	item_worth = 300
+
 /obj/item/laptop/verb/open_computer()
 	set name = "Open Laptop"
 	set category = "Object"

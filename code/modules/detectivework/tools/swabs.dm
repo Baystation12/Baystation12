@@ -6,6 +6,7 @@
 	var/list/dna
 	var/used
 
+
 /obj/item/weapon/forensics/swab/proc/is_used()
 	return used
 

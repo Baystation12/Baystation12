@@ -6,6 +6,8 @@
 	icon_state = "case"
 	item_state = "case"
 
+	item_worth = 50
+
 /obj/item/weapon/storage/briefcase/crimekit/New()
 	..()
 	new /obj/item/weapon/storage/box/swabs(src)

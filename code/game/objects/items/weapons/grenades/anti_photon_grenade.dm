@@ -6,6 +6,7 @@
 	item_state = "emp"
 	det_time = 20
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 4)
+	item_worth = 200
 
 /obj/item/weapon/grenade/anti_photon/detonate()
 	playsound(src.loc, 'sound/effects/phasein.ogg', 50, 1, 5)

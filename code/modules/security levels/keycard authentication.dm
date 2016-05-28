@@ -19,6 +19,7 @@
 	idle_power_usage = 2
 	active_power_usage = 6
 	power_channel = ENVIRON
+	item_worth = 100
 
 /obj/machinery/keycard_auth/attack_ai(mob/user as mob)
 	user << "The station AI is not to interact with these devices."

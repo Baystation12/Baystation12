@@ -15,6 +15,8 @@ var/global/list/narsie_list = list()
 	grav_pull = 10 //How many tiles out do we pull?
 	consume_range = 3 //How many tiles out do we eat
 
+	item_worth = 3000000
+
 
 /obj/singularity/narsie/New()
 	..()

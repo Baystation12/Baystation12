@@ -11,6 +11,7 @@
 	var/tag_airlock_mech_sensor
 	var/tag_shuttle_mech_sensor
 	var/tag_secure = 0
+	item_worth = 600
 
 /obj/machinery/embedded_controller/radio/airlock/initialize()
 	..()

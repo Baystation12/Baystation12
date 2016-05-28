@@ -15,6 +15,8 @@
 	active_power_usage = 2000
 	idle_power_usage = 1000
 
+	item_worth = 3000
+
 /obj/machinery/auto_cloner/New()
 	..()
 

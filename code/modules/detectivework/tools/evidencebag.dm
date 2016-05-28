@@ -9,6 +9,8 @@
 	w_class = 2
 	var/obj/item/stored_item = null
 
+	item_worth = 5
+
 /obj/item/weapon/evidencebag/MouseDrop(var/obj/item/I as obj)
 	if (!ishuman(usr))
 		return

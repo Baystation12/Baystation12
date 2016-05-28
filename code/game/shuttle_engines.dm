@@ -2,6 +2,8 @@
 	name = "shuttle"
 	icon = 'icons/turf/shuttle.dmi'
 
+	item_worth = 150
+
 /obj/structure/shuttle/window
 	name = "shuttle window"
 	icon = 'icons/obj/podwindows.dmi'

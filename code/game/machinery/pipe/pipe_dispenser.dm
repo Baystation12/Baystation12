@@ -6,6 +6,7 @@
 	anchored = 1
 	var/unwrenched = 0
 	var/wait = 0
+	item_worth = 100
 
 /obj/machinery/pipedispenser/attack_hand(user as mob)
 	if(..())

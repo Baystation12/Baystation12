@@ -14,6 +14,7 @@
 	var/list/req_components = null
 	var/list/req_component_names = null
 	var/state = 1
+	item_worth = 500
 
 	proc/update_desc()
 		var/D

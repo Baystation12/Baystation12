@@ -55,6 +55,8 @@
 
 	var/bloodiness = 0		// count of bloodiness
 
+	item_worth = 3000
+
 /obj/machinery/bot/mulebot/New()
 	..()
 	wires = new(src)

@@ -13,6 +13,7 @@
 	var/activation_sound = 'sound/items/goggles_charge.ogg'
 	var/obj/screen/overlay = null
 	var/obj/item/clothing/glasses/hud/hud = null	// Hud glasses, if any
+	item_worth = 150
 
 /obj/item/clothing/glasses/attack_self(mob/user)
 	if(toggleable && !user.incapacitated())
@@ -44,6 +45,7 @@
 	toggleable = 1
 	vision_flags = SEE_TURFS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
+	item_worth = 800
 
 /obj/item/clothing/glasses/meson/New()
 	..()
@@ -53,6 +55,7 @@
 	name = "prescription mesons"
 	desc = "Optical Meson Scanner with prescription lenses."
 	prescription = 1
+	item_worth = 880
 
 /obj/item/clothing/glasses/science
 	name = "Science Goggles"
@@ -60,6 +63,7 @@
 	icon_state = "purple"
 	item_state = "glasses"
 	toggleable = 1
+	item_worth = 400
 
 /obj/item/clothing/glasses/science/New()
 	..()
@@ -75,6 +79,7 @@
 	toggleable = 1
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	off_state = "denight"
+	item_worth = 1000
 
 /obj/item/clothing/glasses/night/New()
 	..()
@@ -110,6 +115,7 @@
 	item_state = "glasses"
 	prescription = 1
 	body_parts_covered = 0
+	item_worth = 300
 
 /obj/item/clothing/glasses/regular/scanners
 	name = "Scanning Goggles"
@@ -121,6 +127,7 @@
 	desc = "Made by Uncool. Co."
 	icon_state = "hipster_glasses"
 	item_state = "hipster_glasses"
+	item_worth = 400 //Hipstering is an expensive lifestyle yo
 
 /obj/item/clothing/glasses/threedglasses
 	desc = "A long time ago, people used these glasses to makes images from screens threedimensional."
@@ -154,6 +161,7 @@
 	var/up = 0
 	flash_protection = FLASH_PROTECTION_MAJOR
 	tint = TINT_HEAVY
+	item_worth = 250
 
 /obj/item/clothing/glasses/welding/attack_self()
 	toggle()
@@ -190,6 +198,7 @@
 	icon_state = "rwelding-g"
 	item_state = "rwelding-g"
 	tint = TINT_MODERATE
+	item_worth = 450
 
 /obj/item/clothing/glasses/sunglasses/blindfold
 	name = "blindfold"
@@ -209,6 +218,7 @@
 /obj/item/clothing/glasses/sunglasses/prescription
 	name = "prescription sunglasses"
 	prescription = 1
+	item_worth = 230
 
 /obj/item/clothing/glasses/sunglasses/big
 	desc = "Strangely ancient technology used to help provide rudimentary eye cover. Larger than average enhanced shielding blocks many flashes."
@@ -219,7 +229,7 @@
 	name = "HUDSunglasses"
 	desc = "Sunglasses with a HUD."
 	icon_state = "sunhud"
-
+	item_worth = 330
 	New()
 		..()
 		src.hud = new/obj/item/clothing/glasses/hud/security(src)
@@ -229,6 +239,7 @@
 	name = "tactical HUD"
 	desc = "Flash-resistant goggles with inbuilt combat and security information."
 	icon_state = "swatgoggles"
+	item_worth = 350
 
 /obj/item/clothing/glasses/thermal
 	name = "Optical Thermal Scanner"
@@ -241,6 +252,7 @@
 	vision_flags = SEE_MOBS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	flash_protection = FLASH_PROTECTION_REDUCED
+	item_worth = 990
 
 	emp_act(severity)
 		if(istype(src.loc, /mob/living/carbon/human))

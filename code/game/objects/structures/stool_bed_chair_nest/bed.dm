@@ -19,6 +19,7 @@
 	var/material/material
 	var/material/padding_material
 	var/base_icon = "bed"
+	item_worth = 7
 
 /obj/structure/bed/New(var/newloc, var/new_material, var/new_padding_material)
 	..(newloc)
@@ -31,6 +32,7 @@
 		return
 	if(new_padding_material)
 		padding_material = get_material_by_name(new_padding_material)
+	item_worth = initial(item_worth) * material.material_worth
 	update_icon()
 
 /obj/structure/bed/get_material()
@@ -208,6 +210,8 @@
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "folded"
 	w_class = 5 // Can't be put in backpacks. Oh well. For now.
+
+	item_worth = 80
 
 /obj/item/roller/attack_self(mob/user)
 		var/obj/structure/bed/roller/R = new /obj/structure/bed/roller(user.loc)

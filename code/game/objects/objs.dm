@@ -13,6 +13,7 @@
 
 /obj/Destroy()
 	processing_objects -= src
+	station_damage_score += src.item_worth //probably picks up a few weird qdels here and there, but should be roughly what the accurate number is.
 	return ..()
 
 /obj/Topic(href, href_list, var/datum/topic_state/state = default_state)

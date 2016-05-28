@@ -23,6 +23,8 @@
 		/obj/item/rig_module/datajack,
 		)
 
+	item_worth = 20000
+
 /obj/item/clothing/head/helmet/space/rig/ert
 	light_overlay = "helmet_light_dual"
 	camera_networks = list(NETWORK_ERT)
@@ -36,7 +38,7 @@
 
 /obj/item/clothing/gloves/rig/ert
 	species_restricted = list("Human","Skrell","Unathi")
-	
+
 
 /obj/item/weapon/rig/ert/engineer
 	name = "asset protection engineering hardsuit control module"

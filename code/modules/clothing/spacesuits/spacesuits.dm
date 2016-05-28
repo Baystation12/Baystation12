@@ -30,6 +30,8 @@
 	brightness_on = 4
 	on = 0
 
+	item_worth = 450
+
 /obj/item/clothing/head/helmet/space/initialize()
 	..()
 	if(camera_networks && camera_networks.len)
@@ -76,6 +78,8 @@
 	species_restricted = list("exclude","Diona", "Xenomorph")
 
 	var/list/supporting_limbs //If not-null, automatically splints breaks. Checked when removing the suit.
+
+	item_worth = 730
 
 /obj/item/clothing/suit/space/New()
 	..()

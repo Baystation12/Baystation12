@@ -9,6 +9,7 @@
 	power_usage = 50
 	critical = 1
 	malfunction_probability = 1
+	item_worth = 200
 
 	var/max_idle_programs = 2 // 2 idle, + 1 active = 3 as said in description.
 
@@ -19,6 +20,7 @@
 	hardware_size = 1
 	power_usage = 25
 	max_idle_programs = 1
+	item_worth = 80
 
 /obj/item/weapon/computer_hardware/processor_unit/photonic
 	name = "photonic processor"
@@ -27,6 +29,7 @@
 	hardware_size = 2
 	power_usage = 250
 	max_idle_programs = 4
+	item_worth = 400
 
 /obj/item/weapon/computer_hardware/processor_unit/photonic/small
 	name = "photonic microprocessor"
@@ -35,3 +38,4 @@
 	hardware_size = 1
 	power_usage = 75
 	max_idle_programs = 2
+	item_worth = 120

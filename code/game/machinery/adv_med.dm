@@ -13,6 +13,7 @@
 	use_power = 1
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
+	item_worth = 6000
 
 /obj/machinery/bodyscanner/relaymove(mob/user as mob)
 	if (user.stat)
@@ -163,6 +164,7 @@
 	icon_state = "body_scannerconsole"
 	density = 1
 	anchored = 1
+	item_worth = 1500
 
 
 /obj/machinery/body_scanconsole/New()

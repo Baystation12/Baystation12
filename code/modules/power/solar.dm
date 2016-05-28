@@ -212,6 +212,8 @@ var/list/solars_list = list()
 	var/tracker = 0
 	var/glass_type = null
 
+	item_worth = 680
+
 /obj/item/solar_assembly/attack_hand(var/mob/user)
 	if(!anchored && isturf(loc)) // You can't pick it up
 		..()

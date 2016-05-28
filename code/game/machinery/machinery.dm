@@ -112,6 +112,7 @@ Class Procs:
 	var/panel_open = 0
 	var/global/gl_uid = 1
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
+	item_worth = 1000 //Typically most machinery is expensive
 
 /obj/machinery/New(l, d=0)
 	..(l)

@@ -9,6 +9,7 @@
 	var/on = 0
 	var/set_temperature = T0C + 50	//K
 	var/heating_power = 40000
+	item_worth = 500
 
 
 /obj/machinery/space_heater/New()

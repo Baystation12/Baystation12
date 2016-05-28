@@ -14,6 +14,8 @@
 	var/list/filtered_gases = list("phoron", "sleeping_agent")
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 75, rad = 0)
 
+	item_worth = 160
+
 /obj/item/clothing/mask/gas/filter_air(datum/gas_mixture/air)
 	var/datum/gas_mixture/filtered = new
 
@@ -36,12 +38,16 @@
 	armor = list(melee = 0, bullet = 0, laser = 2,energy = 2, bomb = 0, bio = 90, rad = 0)
 	body_parts_covered = HEAD|FACE|EYES
 
+	item_worth = 100
+
 /obj/item/clothing/mask/gas/swat
 	name = "\improper SWAT mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."
 	icon_state = "swat"
 	siemens_coefficient = 0.7
 	body_parts_covered = FACE|EYES
+
+	item_worth = 200
 
 /obj/item/clothing/mask/gas/swat/vox
 	name = "alien mask"
@@ -111,3 +117,5 @@
 	body_parts_covered = 0
 	species_restricted = list("Vox")
 	filtered_gases = list("phoron", "sleeping_agent", "oxygen")
+
+	item_worth = 400

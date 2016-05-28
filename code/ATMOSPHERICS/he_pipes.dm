@@ -16,6 +16,8 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 
 	buckle_lying = 1
 
+	item_worth = 1000
+
 	// BubbleWrap
 	New()
 		..()

@@ -15,6 +15,8 @@
 	fire_sound_text = "a strange noise"
 	fire_sound = 'sound/weapons/bladeslice.ogg'
 
+	item_worth = 1500
+
 /obj/item/weapon/gun/launcher/spikethrower/New()
 	..()
 	processing_objects.Add(src)

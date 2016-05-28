@@ -17,6 +17,8 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/combat
 	glove_type = /obj/item/clothing/gloves/rig/combat
 
+	item_worth = 25000
+
 /obj/item/clothing/head/helmet/space/rig/combat
 	light_overlay = "helmet_light_dual_green"
 	species_restricted = list("Human")

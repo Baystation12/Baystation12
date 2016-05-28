@@ -7,6 +7,8 @@
 	icon_state = "bodybag_folded"
 	w_class = 2.0
 
+	item_worth = 20
+
 	attack_self(mob/user)
 		var/obj/structure/closet/body_bag/R = new /obj/structure/closet/body_bag(user.loc)
 		R.add_fingerprint(user)
@@ -17,6 +19,9 @@
 	name = "body bags"
 	desc = "This box contains body bags."
 	icon_state = "bodybags"
+
+	item_worth = 5
+
 	New()
 		..()
 		new /obj/item/bodybag(src)
@@ -103,6 +108,7 @@
 	icon = 'icons/obj/cryobag.dmi'
 	icon_state = "bodybag_folded"
 	origin_tech = list(TECH_BIO = 4)
+	item_worth = 600
 
 /obj/item/bodybag/cryobag/attack_self(mob/user)
 	var/obj/structure/closet/body_bag/cryobag/R = new /obj/structure/closet/body_bag/cryobag(user.loc)

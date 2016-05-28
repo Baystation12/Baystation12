@@ -13,10 +13,11 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 18750)
 	can_buckle = 0 //disallow manual un/buckling
 	var/deployed = 0
+	item_worth = 35
 
 /obj/item/weapon/beartrap/proc/can_use(mob/user)
 	return (user.IsAdvancedToolUser() && !issilicon(user) && !user.stat && !user.restrained())
-	
+
 /obj/item/weapon/beartrap/user_unbuckle_mob(mob/user as mob)
 	if(buckled_mob && can_use(user))
 		user.visible_message(

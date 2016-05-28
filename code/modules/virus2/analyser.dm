@@ -9,6 +9,7 @@
 	var/pause = 0
 
 	var/obj/item/weapon/virusdish/dish = null
+	item_worth = 3000
 
 /obj/machinery/disease2/diseaseanalyser/attackby(var/obj/O as obj, var/mob/user as mob)
 	if(!istype(O,/obj/item/weapon/virusdish)) return

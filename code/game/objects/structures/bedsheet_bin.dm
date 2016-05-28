@@ -112,6 +112,7 @@ LINEN BINS
 	var/amount = 20
 	var/list/sheets = list()
 	var/obj/item/hidden = null
+	item_worth = 25
 
 
 /obj/structure/bedsheetbin/examine(mob/user)

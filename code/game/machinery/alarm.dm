@@ -54,6 +54,7 @@
 	var/wiresexposed = 0 // If it's been screwdrivered open.
 	var/aidisabled = 0
 	var/shorted = 0
+	item_worth = 800
 
 	var/datum/wires/alarm/wires
 
@@ -849,6 +850,7 @@ Just a object used in constructing air alarms
 	desc = "Looks like a circuit. Probably is."
 	w_class = 2.0
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
+	item_worth = 400
 
 /*
 FIRE ALARM
@@ -1133,6 +1135,7 @@ Just a object used in constructing fire alarms
 	desc = "A circuit. It has a label on it, it says \"Can handle heat levels up to 40 degrees celsius!\"."
 	w_class = 2.0
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
+	item_worth = 30
 
 /obj/machinery/partyalarm
 	name = "\improper PARTY BUTTON"

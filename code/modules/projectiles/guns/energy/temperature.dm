@@ -12,6 +12,7 @@
 
 	projectile_type = /obj/item/projectile/temp
 	cell_type = /obj/item/weapon/cell/high
+	item_worth = 1000
 
 
 /obj/item/weapon/gun/energy/temperature/New()

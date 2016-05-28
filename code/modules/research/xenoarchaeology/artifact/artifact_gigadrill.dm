@@ -9,6 +9,7 @@
 	var/turf/drilling_turf
 	density = 1
 	layer = 3.1		//to go over ores
+	item_worth = 900
 
 /obj/machinery/giga_drill/attack_hand(mob/user as mob)
 	if(active)

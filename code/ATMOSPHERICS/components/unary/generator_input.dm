@@ -8,6 +8,8 @@
 
 	var/update_cycle
 
+	item_worth = 2500
+
 	update_icon()
 		if(node)
 			icon_state = "intact"

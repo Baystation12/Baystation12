@@ -4,7 +4,7 @@
 	icon_state = "igniter"
 	origin_tech = list(TECH_MAGNET = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 500, "glass" = 50, "waste" = 10)
-
+	item_worth = 15
 	secured = 1
 	wires = WIRE_RECEIVE
 

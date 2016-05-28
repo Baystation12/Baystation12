@@ -53,6 +53,7 @@
 	var/eat_interval = 100
 	var/wight_check_index = 1
 	var/list/shadow_wights = list()
+	item_worth = 666
 
 /obj/item/weapon/vampiric/New()
 	..()

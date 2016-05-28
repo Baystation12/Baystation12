@@ -10,6 +10,8 @@
 	var/screen = 0
 	var/stored_data
 
+	item_worth = 1000
+
 	attack_ai(var/mob/user as mob)
 		return src.attack_hand(user)
 
@@ -70,6 +72,8 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "motion2"
 	origin_tech = list(TECH_DATA = 2, TECH_MAGNET = 2)
+
+	item_worth = 400
 
 	proc/get_mecha_info()
 		if(!in_mecha())

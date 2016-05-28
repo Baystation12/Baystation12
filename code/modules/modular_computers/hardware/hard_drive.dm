@@ -8,6 +8,8 @@
 	var/used_capacity = 0
 	var/list/stored_files = list()		// List of stored files on this drive. DO NOT MODIFY DIRECTLY!
 
+	item_worth = 125
+
 /obj/item/weapon/computer_hardware/hard_drive/advanced
 	name = "advanced hard drive"
 	desc = "A small hybrid hard drive with 256GQ of storage capacity for use in higher grade computers where balance between power efficiency and capacity is desired."
@@ -15,6 +17,8 @@
 	power_usage = 50 					// Hybrid, medium capacity and medium power storage
 	icon_state = "hdd_advanced"
 	hardware_size = 2
+
+	item_worth = 160
 
 /obj/item/weapon/computer_hardware/hard_drive/super
 	name = "super hard drive"
@@ -24,6 +28,8 @@
 	icon_state = "hdd_super"
 	hardware_size = 2
 
+	item_worth = 250
+
 /obj/item/weapon/computer_hardware/hard_drive/cluster
 	name = "cluster hard drive"
 	desc = "A large storage cluster consisting of multiple hard drives for usage in high capacity storage systems. Has capacity of 2048 GQ."
@@ -31,6 +37,8 @@
 	max_capacity = 2048
 	icon_state = "hdd_cluster"
 	hardware_size = 3
+
+	item_worth = 500
 
 // For tablets, etc. - highly power efficient.
 /obj/item/weapon/computer_hardware/hard_drive/small
@@ -41,6 +49,8 @@
 	icon_state = "hdd_small"
 	hardware_size = 1
 
+	item_worth = 100
+
 /obj/item/weapon/computer_hardware/hard_drive/micro
 	name = "micro hard drive"
 	desc = "A small micro hard drive for portable devices."
@@ -48,6 +58,8 @@
 	max_capacity = 32
 	icon_state = "hdd_micro"
 	hardware_size = 1
+
+	item_worth = 60
 
 /obj/item/weapon/computer_hardware/hard_drive/diagnostics(var/mob/user)
 	..()

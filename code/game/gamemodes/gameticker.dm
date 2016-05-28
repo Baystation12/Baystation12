@@ -432,6 +432,14 @@ var/global/datum/controller/gameticker/ticker
 				robolist += "[robo.name][robo.stat?" (Deactivated) (Played by: [robo.key]), ":" (Played by: [robo.key]), "]"
 			world << "[robolist]"
 
+	var/total_damage = station_damage_score
+	for(var/A in machines)
+		var/obj/machinery/M = A
+		if(M && (M.stat & BROKEN))
+			total_damage += M.item_worth/2
+	if(total_damage)
+		world << "<br><br><b>[station_name()] has taken over [round(total_damage)] thalers in damage.</b><br>"
+
 	var/dronecount = 0
 
 	for (var/mob/living/silicon/robot/robo in mob_list)

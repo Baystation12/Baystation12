@@ -7,6 +7,8 @@
 	hardware_size = 1
 	max_capacity = 16
 
+	item_worth = 30
+
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/advanced
 	name = "advanced data crystal"
@@ -15,6 +17,7 @@
 	icon_state = "flashdrive_advanced"
 	hardware_size = 1
 	max_capacity = 64
+	item_worth = 60
 
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/super
@@ -24,6 +27,7 @@
 	icon_state = "flashdrive_super"
 	hardware_size = 1
 	max_capacity = 256
+	item_worth = 125
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/New()
 	..()

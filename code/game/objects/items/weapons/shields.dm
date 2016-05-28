@@ -64,6 +64,7 @@
 	matter = list("glass" = 7500, DEFAULT_WALL_MATERIAL = 1000)
 	attack_verb = list("shoved", "bashed")
 	var/cooldown = 0 //shield bash cooldown. based on world.time
+	item_worth = 150
 
 /obj/item/weapon/shield/riot/handle_shield(mob/user)
 	. = ..()
@@ -104,6 +105,7 @@
 	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 	attack_verb = list("shoved", "bashed")
 	var/active = 0
+	item_worth = 1200
 
 /obj/item/weapon/shield/energy/handle_shield(mob/user)
 	if(!active)

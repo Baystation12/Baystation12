@@ -6,3 +6,5 @@
 	icon_state = "tele0"
 	anchored = 1
 	density = 0
+
+	item_worth = 800

@@ -12,6 +12,7 @@
 	active_power_usage = 4
 	var/_wifi_id
 	var/datum/wifi/sender/wifi_sender
+	item_worth = 100
 
 /obj/machinery/button/initialize()
 	..()

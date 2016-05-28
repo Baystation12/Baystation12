@@ -29,6 +29,7 @@
 	var/time_since_fail = 100
 	var/energy_conversion_rate = 0.0002	//how many renwicks per watt?
 	use_power = 0	//doesn't use APC power
+	item_worth = 5000
 
 /obj/machinery/shield_gen/New()
 	spawn(10)
@@ -44,7 +45,7 @@
 		field.Remove(D)
 		qdel(D)
 	..()
-	
+
 /obj/machinery/shield_gen/emag_act(var/remaining_charges, var/mob/user)
 	if(prob(75))
 		src.locked = !src.locked

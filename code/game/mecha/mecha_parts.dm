@@ -11,6 +11,7 @@
 	w_class = 6
 	flags = CONDUCT
 	origin_tech = list(TECH_DATA = 2, TECH_MATERIAL = 2)
+	item_worth = 500
 
 
 /obj/item/mecha_parts/chassis
@@ -19,6 +20,8 @@
 	randpixel = 0
 	var/datum/construction/construct
 	flags = CONDUCT
+
+	item_worth = 1200
 
 	attackby(obj/item/W as obj, mob/user as mob)
 		if(!construct || !construct.action(W, user))

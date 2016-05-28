@@ -9,6 +9,7 @@
 	throw_range = 15
 	sharp = 1
 	edge =  1
+	worth_multiplier = 0.9
 
 /obj/item/weapon/material/star/New()
 	..()

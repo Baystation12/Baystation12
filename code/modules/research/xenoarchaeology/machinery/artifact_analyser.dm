@@ -15,6 +15,8 @@
 	var/obj/scanned_object
 	var/report_num = 0
 
+	item_worth = 1900
+
 /obj/machinery/artifact_analyser/New()
 	..()
 	reconnect_scanner()

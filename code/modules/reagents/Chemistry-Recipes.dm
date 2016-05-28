@@ -999,6 +999,7 @@
 		T.visible_message("\icon[T]<span class='notice'>\The [T]'s power is consumed in the reaction.</span>")
 		T.name = "used slime extract"
 		T.desc = "This extract has been used up."
+		T.item_worth = 10
 
 //Grey
 /datum/chemical_reaction/slime/spawn

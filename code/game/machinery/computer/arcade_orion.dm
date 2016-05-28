@@ -475,6 +475,8 @@
 	icon_state = "ship"
 	w_class = 2
 	var/active = 0 //if the ship is on
+	item_worth = 100
+
 /obj/item/weapon/orion_ship/examine(mob/user)
 	..()
 	if(!(in_range(user, src)))

@@ -13,6 +13,7 @@
 	var/atom/target = null
 	var/open_panel = 0
 	var/image_overlay = null
+	item_worth = 200
 
 /obj/item/weapon/plastique/New()
 	wires = new(src)

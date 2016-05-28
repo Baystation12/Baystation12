@@ -29,6 +29,8 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	flags_inv = 0
 
+	item_worth = 100
+
 //Chaplain
 /obj/item/clothing/suit/chaplain_hoodie
 	name = "chaplain hoodie"
@@ -88,6 +90,8 @@
 	item_state = "hosbluejacket"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
+	item_worth = 80
+
 //Detective
 /obj/item/clothing/suit/storage/det_trench
 	name = "brown trenchcoat"
@@ -133,6 +137,8 @@
 	/obj/item/weapon/crowbar, /obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/weapon/tank/emergency_oxygen, \
 	/obj/item/clothing/mask/gas, /obj/item/taperoll/engineering)
 	body_parts_covered = UPPER_TORSO
+
+	item_worth = 60
 
 //Lawyer
 /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket

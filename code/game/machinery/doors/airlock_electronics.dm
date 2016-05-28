@@ -7,6 +7,7 @@
 	w_class = 2.0 //It should be tiny! -Agouri
 
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
+	item_worth = 300
 
 	req_access = list(access_engine)
 

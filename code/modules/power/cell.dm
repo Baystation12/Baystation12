@@ -21,6 +21,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	var/rigged = 0		// true if rigged to explode
 	var/minor_fault = 0 //If not 100% reliable, it will build up faults.
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
+	item_worth = 60
 
 //currently only used by energy-type guns, that may change in the future.
 /obj/item/weapon/cell/device
@@ -33,6 +34,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	throw_range = 7
 	maxcharge = 1000
 	matter = list("metal" = 350, "glass" = 50)
+	item_worth = 100
 
 /obj/item/weapon/cell/device/variable/New(newloc, charge_amount)
 	..(newloc)
@@ -45,6 +47,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	origin_tech = list(TECH_POWER = 0)
 	maxcharge = 500
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 40)
+	item_worth = 30
 
 /obj/item/weapon/cell/crap/empty/New()
 	..()
@@ -65,6 +68,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	origin_tech = list(TECH_POWER = 1)
 	maxcharge = 5000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
+	item_worth = 130
 
 /obj/item/weapon/cell/high
 	name = "high-capacity power cell"
@@ -72,6 +76,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	icon_state = "hcell"
 	maxcharge = 10000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 60)
+	item_worth = 160
 
 /obj/item/weapon/cell/mecha
 	name = "exosuit-grade power cell"
@@ -79,6 +84,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	icon_state = "hcell"
 	maxcharge = 15000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
+	item_worth = 220
 
 /obj/item/weapon/cell/high/empty/New()
 	..()
@@ -90,6 +96,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	icon_state = "scell"
 	maxcharge = 20000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
+	item_worth = 280
 
 /obj/item/weapon/cell/super/empty/New()
 	..()
@@ -101,6 +108,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	icon_state = "hpcell"
 	maxcharge = 30000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 80)
+	item_worth = 310
 
 /obj/item/weapon/cell/hyper/empty/New()
 	..()
@@ -112,6 +120,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	origin_tech =  null
 	maxcharge = 30000 //determines how badly mobs get shocked
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 80)
+	item_worth = 5000
 
 	check_charge()
 		return 1
@@ -127,6 +136,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	charge = 100
 	maxcharge = 300
 	minor_fault = 1
+	item_worth = 1
 
 
 /obj/item/weapon/cell/slime
@@ -137,6 +147,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	icon_state = "yellow slime extract" //"potato_battery"
 	maxcharge = 10000
 	matter = null
+	item_worth = 100
 
 
 /obj/item/weapon/cell/New()

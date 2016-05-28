@@ -5,6 +5,7 @@
 	density = 0
 	layer = 3.5
 	w_class = 3
+	item_worth = 25
 
 /obj/structure/sign/ex_act(severity)
 	switch(severity)

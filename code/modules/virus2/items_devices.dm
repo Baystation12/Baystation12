@@ -44,6 +44,7 @@
 	var/basic_info = null
 	var/info = 0
 	var/analysed = 0
+	item_worth = 65
 
 /obj/item/weapon/virusdish/random
 	name = "virus sample"
@@ -104,6 +105,7 @@
 	var/list/species = null
 	var/stage = 1
 	var/analysed = 1
+	item_worth = 100
 
 /obj/item/weapon/diseasedisk/premade/New()
 	name = "blank GNA disk (stage: [stage])"

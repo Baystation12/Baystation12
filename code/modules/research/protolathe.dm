@@ -14,6 +14,7 @@
 
 	var/mat_efficiency = 1
 	var/speed = 1
+	item_worth = 3000
 
 /obj/machinery/r_n_d/protolathe/New()
 	materials = default_material_composition.Copy()

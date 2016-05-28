@@ -17,6 +17,7 @@
 	var/status = 0		//whether the thing is on or not
 	var/obj/item/weapon/cell/bcell = null
 	var/hitcost = 1000	//oh god why do power cells carry so much charge? We probably need to make a distinction between "industrial" sized power cells for APCs and power cells for everything else.
+	item_worth = 80
 
 /obj/item/weapon/melee/baton/New()
 	..()
@@ -183,3 +184,4 @@
 	hitcost = 2500
 	attack_verb = list("poked")
 	slot_flags = null
+	item_worth = 30

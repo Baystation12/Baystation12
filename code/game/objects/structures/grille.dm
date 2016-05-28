@@ -10,6 +10,7 @@
 	explosion_resistance = 1
 	var/health = 10
 	var/destroyed = 0
+	item_worth = 5
 
 
 /obj/structure/grille/ex_act(severity)

@@ -17,6 +17,7 @@
 	idle_power_usage = 100
 	density = 1
 	anchored = 1
+	item_worth = 5000
 
 /obj/machinery/chemical_dispenser/New()
 	..()

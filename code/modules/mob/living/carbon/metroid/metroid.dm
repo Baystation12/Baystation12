@@ -59,6 +59,7 @@
 	var/list/slime_mutation[4]
 
 	var/core_removal_stage = 0 //For removing cores.
+	item_worth = 5000
 
 /mob/living/carbon/slime/New(var/location, var/colour="grey")
 

@@ -787,6 +787,7 @@
 	var/hname = ""
 	var/job = null
 	filling_color = "#D63C3C"
+	item_worth = 300
 
 /obj/item/weapon/reagent_containers/food/snacks/human/burger
 	name = "-burger"
@@ -2187,23 +2188,23 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable
 	w_class = 3 //Whole pizzas and cakes shouldn't fit in a pocket, you can slice them if you want to do that.
-	
+
 /**
  *  A food item slice
  *
- *  This path contains some extra code for spawning slices pre-filled with 
- *  reagents. 
+ *  This path contains some extra code for spawning slices pre-filled with
+ *  reagents.
  */
 /obj/item/weapon/reagent_containers/food/snacks/slice
 	name = "slice of... something"
 	var/whole_path  // path for the item from which this slice comes
 	var/filled = FALSE  // should the slice spawn with any reagents
-	
+
 /**
  *  Spawn a new slice of food
  *
  *  If the slice's filled is TRUE, this will also fill the slice with the
- *  appropriate amount of reagents. Note that this is done by spawning a new 
+ *  appropriate amount of reagents. Note that this is done by spawning a new
  *  whole item, transferring the reagents and deleting the whole item, which may
  *  have performance implications.
  */
@@ -2214,7 +2215,7 @@
 		if(whole && whole.slices_num)
 			var/reagent_amount = whole.reagents.total_volume/whole.slices_num
 			whole.reagents.trans_to_obj(src, reagent_amount)
-		
+
 		qdel(whole)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/meatbread
@@ -2241,10 +2242,10 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/meatbread
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/meatbread/filled
 	filled = TRUE
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/xenomeatbread
 	name = "xenomeatbread loaf"
 	desc = "The culinary base of every self-respecting eloquent gentleman. Extra Heretical."
@@ -2269,8 +2270,8 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/xenomeatbread
-	
-	
+
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/xenomeatbread/filled
 	filled = TRUE
 
@@ -2298,7 +2299,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=8)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/bananabread
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/bananabread/filled
 	filled = TRUE
 
@@ -2325,7 +2326,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/tofubread
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/tofubread/filled
 	filled = TRUE
 
@@ -2354,7 +2355,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/carrotcake
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/carrotcake/filled
 	filled = TRUE
 
@@ -2411,11 +2412,11 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesecake
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/cheesecake/filled
 	filled = TRUE
-	
-	
+
+
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/plaincake
 	name = "Vanilla Cake"
@@ -2440,7 +2441,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/slice/plaincake/filled
 	filled = TRUE
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/orangecake
 	name = "Orange Cake"
 	desc = "A cake with added orange."
@@ -2461,10 +2462,10 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/orangecake
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/orangecake/filled
 	filled = TRUE
-	
+
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/limecake
 	name = "Lime Cake"
@@ -2487,7 +2488,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/limecake
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/limecake/filled
 	filled = TRUE
 
@@ -2512,7 +2513,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/lemoncake
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/lemoncake/filled
 	filled = TRUE
 
@@ -2587,7 +2588,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/birthdaycake
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/birthdaycake/filled
 	filled = TRUE
 
@@ -2614,7 +2615,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=4)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/bread
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/bread/filled
 	filled = TRUE
 
@@ -2643,9 +2644,9 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/creamcheesebread
-	
-	
-/obj/item/weapon/reagent_containers/food/snacks/slice/creamcheesebread/filled 
+
+
+/obj/item/weapon/reagent_containers/food/snacks/slice/creamcheesebread/filled
 	filled = TRUE
 
 
@@ -2678,7 +2679,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/applecake
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/applecake/filled
 	filled = TRUE
 
@@ -2702,7 +2703,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=12)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pumpkinpie
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/pumpkinpie/filled
 	filled = TRUE
 
@@ -2746,7 +2747,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=18, "y"=13)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/margherita
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/margherita/filled
 	filled = TRUE
 
@@ -2773,7 +2774,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=18, "y"=13)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/meatpizza
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/meatpizza/filled
 	filled = TRUE
 
@@ -2799,7 +2800,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=18, "y"=13)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/mushroompizza
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/mushroompizza/filled
 	filled = TRUE
 
@@ -2827,7 +2828,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=18, "y"=13)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/vegetablepizza/filled
 	filled = TRUE
 

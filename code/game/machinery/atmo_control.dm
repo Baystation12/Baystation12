@@ -21,6 +21,7 @@
 	// 32 for carbon dioxide concentration
 
 	var/datum/radio_frequency/radio_connection
+	item_worth = 600
 
 /obj/machinery/air_sensor/update_icon()
 	icon_state = "gsensor[on]"

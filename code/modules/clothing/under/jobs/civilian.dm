@@ -15,6 +15,8 @@
 	item_state = "b_suit"
 	worn_state = "captain"
 
+	item_worth = 100
+
 
 /obj/item/clothing/under/rank/cargo
 	name = "quartermaster's jumpsuit"
@@ -64,12 +66,16 @@
 	item_state = "b_suit"
 	worn_state = "hop"
 
+	item_worth = 60
+
 /obj/item/clothing/under/rank/head_of_personnel_whimsy
 	desc = "A blue jacket and red tie, with matching red cuffs! Snazzy. Wearing this makes you feel more important than your job title does."
 	name = "head of personnel's suit"
 	icon_state = "hopwhimsy"
 	item_state = "b_suit"
 	worn_state = "hopwhimsy"
+
+	item_worth = 80
 
 
 /obj/item/clothing/under/rank/hydroponics

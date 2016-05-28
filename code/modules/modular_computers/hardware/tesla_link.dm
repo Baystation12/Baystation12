@@ -7,6 +7,8 @@
 	hardware_size = 2		// Can't be installed into tablets
 	var/obj/machinery/modular_computer/holder
 
+	item_worth = 350
+
 /obj/item/weapon/computer_hardware/tesla_link/New(var/obj/L)
 	if(istype(L, /obj/machinery/modular_computer))
 		holder = L

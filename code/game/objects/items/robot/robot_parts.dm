@@ -10,6 +10,8 @@
 	var/model_info
 	dir = SOUTH
 
+	item_worth = 30
+
 /obj/item/robot_parts/set_dir()
 	return
 

@@ -18,6 +18,7 @@
 	anchored = 1
 	density = 1
 	opacity = 1
+	item_worth = 50
 
 /obj/structure/bookcase/initialize()
 	for(var/obj/item/I in loc)
@@ -150,6 +151,8 @@
 	var/carved = 0	 // Has the book been hollowed out for use as a secret storage item?
 	var/obj/item/store	//What's in the book?
 
+	item_worth = 15
+
 /obj/item/weapon/book/attack_self(var/mob/user as mob)
 	if(carved)
 		if(store)
@@ -272,7 +275,7 @@
 	var/obj/machinery/librarycomp/computer // Associated computer - Modes 1 to 3 use this
 	var/obj/item/weapon/book/book	 //  Currently scanned book
 	var/mode = 0 					// 0 - Scan only, 1 - Scan and Set Buffer, 2 - Scan and Attempt to Check In, 3 - Scan and Attempt to Add to Inventory
-
+	item_worth = 130
 	attack_self(mob/user as mob)
 		mode += 1
 		if(mode > 3)

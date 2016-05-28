@@ -15,6 +15,7 @@ RSF
 	var/stored_matter = 30
 	var/mode = 1
 	w_class = 3.0
+	item_worth = 300
 
 /obj/item/weapon/rsf/examine(mob/user)
 	if(..(user, 0))

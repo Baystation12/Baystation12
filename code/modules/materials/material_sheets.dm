@@ -7,11 +7,13 @@
 	throw_range = 3
 	max_amount = 60
 	randpixel = 3
+	item_worth = 5
 
 	var/default_type = DEFAULT_WALL_MATERIAL
 	var/material/material
 	var/perunit = SHEET_MATERIAL_AMOUNT
 	var/apply_colour //temp pending icon rewrite
+
 
 /obj/item/stack/material/New(atom/newloc, var/amount=null)
 	..(newloc, amount)
@@ -37,6 +39,7 @@
 		flags &= (~CONDUCT)
 
 	matter = material.get_matter()
+	item_worth = material.material_worth * amount
 	update_strings()
 	return 1
 
@@ -58,6 +61,7 @@
 
 /obj/item/stack/material/use(var/used)
 	. = ..()
+	item_worth = material.material_worth * amount
 	update_strings()
 	return
 
@@ -66,7 +70,9 @@
 	if(!istype(M) || material.name != M.material.name)
 		return 0
 	var/transfer = ..(S,tamount,1)
-	if(src) update_strings()
+	if(src)
+		item_worth = material.material_worth * amount
+		update_strings()
 	if(M) M.update_strings()
 	return transfer
 

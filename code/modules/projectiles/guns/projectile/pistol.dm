@@ -151,6 +151,7 @@
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "silencer"
 	w_class = 2
+	item_worth = 60
 
 /obj/item/weapon/gun/projectile/pirate
 	name = "zip gun"

@@ -43,6 +43,7 @@
 	var/attempting = 0 //One clone attempt at a time thanks
 	var/eject_wait = 0 //Don't eject them as soon as they are created fuckkk
 	var/biomass = CLONE_BIOMASS * 3
+	item_worth = 9000
 
 /obj/machinery/clonepod/New()
 	set_extension(src, /datum/extension/multitool, /datum/extension/multitool/store)

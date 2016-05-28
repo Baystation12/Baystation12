@@ -31,6 +31,8 @@
 	flash_protection = FLASH_PROTECTION_MAJOR
 	tint = TINT_HEAVY
 
+	item_worth = 150
+
 /obj/item/clothing/head/welding/attack_self()
 	if(!base_state)
 		base_state = icon_state

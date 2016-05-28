@@ -23,6 +23,7 @@
 	var/on = 1
 	var/list/localareas = list()
 	var/effectiverange = 25
+	item_worth = 5000
 
 	// Borrows code from cloning computer
 /obj/machinery/computer/gravity_control_computer/New()

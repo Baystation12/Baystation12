@@ -154,6 +154,7 @@
 
 	var/rigged = 0				// true if rigged to explode
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	item_worth = 50
 
 // the smaller bulb light fixture
 

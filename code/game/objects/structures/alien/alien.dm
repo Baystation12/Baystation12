@@ -3,6 +3,7 @@
 	desc = "There's something alien about this."
 	icon = 'icons/mob/alien.dmi'
 	var/health = 50
+	item_worth = 300
 
 /obj/structure/alien/proc/healthcheck()
 	if(health <=0)

@@ -35,6 +35,7 @@
 	response_help  = "pets"
 	response_disarm = "bops"
 	response_harm   = "kicks"
+	item_worth = 1000 //Ian is valuable
 
 /mob/living/simple_animal/corgi/Ian/Life()
 	..()

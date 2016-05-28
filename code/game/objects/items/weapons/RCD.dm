@@ -22,6 +22,7 @@
 	var/list/modes = list("Floor & Walls","Airlock","Deconstruct")
 	var/canRwall = 0
 	var/disabled = 0
+	item_worth = 1000
 
 /obj/item/weapon/rcd/attack()
 	return 0
@@ -158,6 +159,7 @@
 	w_class = 2
 	origin_tech = list(TECH_MATERIAL = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 30000,"glass" = 15000)
+	item_worth = 50
 
 /obj/item/weapon/rcd/borg
 	canRwall = 1

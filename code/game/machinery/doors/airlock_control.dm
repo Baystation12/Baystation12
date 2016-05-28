@@ -155,6 +155,7 @@ obj/machinery/airlock_sensor
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "airlock_sensor_off"
 	name = "airlock sensor"
+	item_worth = 800
 
 	anchored = 1
 	power_channel = ENVIRON

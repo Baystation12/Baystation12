@@ -13,6 +13,7 @@ var/global/list/active_diseases          = list()
 var/global/list/med_hud_users            = list() // List of all entities using a medical HUD.
 var/global/list/sec_hud_users            = list() // List of all entities using a security HUD.
 var/global/list/hud_icon_reference       = list()
+var/global/list/traders                  = list() //List of traders used by the trade module
 
 
 var/global/list/global_mutations  = list() // List of hidden mutation things.
@@ -181,3 +182,5 @@ var/max_explosion_range = 14
 var/global/obj/item/device/radio/intercom/global_announcer = new(null)
 
 var/list/station_departments = list("Command", "Medical", "Engineering", "Science", "Security", "Cargo", "Civilian")
+
+var/station_damage_score = 0 //How much damage is done by the end of the round

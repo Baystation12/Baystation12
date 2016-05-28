@@ -17,6 +17,7 @@
 	accuracy = -3
 	scoped_accuracy = 5 //increased accuracy over the LWAP because only one shot
 	var/bolt_open = 0
+	item_worth = 10000
 
 /obj/item/weapon/gun/projectile/heavysniper/update_icon()
 	if(bolt_open)

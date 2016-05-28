@@ -22,6 +22,7 @@ var/bomb_set
 	unacidable = 1
 	var/previous_level = ""
 	var/datum/wires/nuclearbomb/wires = null
+	item_worth = 10000
 
 /obj/machinery/nuclearbomb/New()
 	..()
@@ -402,16 +403,17 @@ if(!N.lighthack)
 	icon_state = "nucleardisk"
 	item_state = "card-id"
 	w_class = 1.0
+	item_worth = 120
 
 /obj/item/weapon/disk/nuclear/New()
 	..()
 	nuke_disks |= src
-	
+
 /obj/item/weapon/disk/nuclear/initialize()
 	..()
 	// Can never be quite sure that a game mode has been properly initiated or not at this point, so always register
 	moved_event.register(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level)
-	
+
 /obj/item/weapon/disk/nuclear/proc/check_z_level()
 	if(!(ticker && istype(ticker.mode, /datum/game_mode/nuclear)))
 		moved_event.unregister(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level) // However, when we are certain unregister if necessary
