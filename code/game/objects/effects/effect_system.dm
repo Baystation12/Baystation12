@@ -360,97 +360,88 @@ steam.start() -- spawns the effect
 /// Then do start() to start it and stop() to stop it, obviously
 /// and don't call start() in a loop that will be repeated otherwise it'll get spammed!
 /////////////////////////////////////////////
+/datum/effect/effect/system/trail
+	var/turf/oldposition
+	var/processing = 1
+	var/on = 1
+	var/max_number = 0
+	number = 0
+	var/list/specific_turfs = list()
+	var/trail_type
+	var/duration_of_effect = 10
+
+/datum/effect/effect/system/trail/set_up(var/atom/atom)
+	attach(atom)
+	oldposition = get_turf(atom)
+
+
+/datum/effect/effect/system/trail/start()
+	if(!src.on)
+		src.on = 1
+		src.processing = 1
+	if(src.processing)
+		src.processing = 0
+		spawn(0)
+			var/turf/T = get_turf(src.holder)
+			if(T != src.oldposition)
+				if(is_type_in_list(T, specific_turfs) && (!max_number || number < max_number))
+					var/obj/effect/effect/trail = PoolOrNew(trail_type, src.oldposition)
+					src.oldposition = T
+					effect(trail)
+					number++
+					spawn( duration_of_effect )
+						number--
+						qdel(trail)
+				spawn(2)
+					if(src.on)
+						src.processing = 1
+						src.start()
+			else
+				spawn(2)
+					if(src.on)
+						src.processing = 1
+						src.start()
+
+/datum/effect/effect/system/trail/proc/stop()
+	src.processing = 0
+	src.on = 0
+
+/datum/effect/effect/system/trail/proc/effect(var/obj/effect/effect/T)
+	T.set_dir(src.holder.dir)
+	return
 
 /obj/effect/effect/ion_trails
 	name = "ion trails"
 	icon_state = "ion_trails"
 	anchored = 1.0
 
-/datum/effect/effect/system/ion_trail_follow
-	var/turf/oldposition
-	var/processing = 1
-	var/on = 1
+/datum/effect/effect/system/trail/ion
+	trail_type = /obj/effect/effect/ion_trails
+	specific_turfs = list(/turf/space)
+	duration_of_effect = 20
 
-	set_up(atom/atom)
-		attach(atom)
-		oldposition = get_turf(atom)
+/datum/effect/effect/system/trail/ion/effect(var/obj/effect/effect/T)
+	..()
+	flick("ion_fade", T)
+	T.icon_state = "blank"
 
-	start()
-		if(!src.on)
-			src.on = 1
-			src.processing = 1
-		if(src.processing)
-			src.processing = 0
-			spawn(0)
-				var/turf/T = get_turf(src.holder)
-				if(T != src.oldposition)
-					if(istype(T, /turf/space))
-						var/obj/effect/effect/ion_trails/I = PoolOrNew(/obj/effect/effect/ion_trails, src.oldposition)
-						src.oldposition = T
-						I.set_dir(src.holder.dir)
-						flick("ion_fade", I)
-						I.icon_state = "blank"
-						spawn( 20 )
-							qdel(I)
-					spawn(2)
-						if(src.on)
-							src.processing = 1
-							src.start()
-				else
-					spawn(2)
-						if(src.on)
-							src.processing = 1
-							src.start()
+/obj/effect/effect/thermal_trail
+	name = "therman trail"
+	icon_state = "explosion_particle"
+	anchored = 1
 
-	proc/stop()
-		src.processing = 0
-		src.on = 0
-
-
-
+/datum/effect/effect/system/trail/thermal
+	trail_type = /obj/effect/effect/thermal_trail
+	specific_turfs = list(/turf/space)
 
 /////////////////////////////////////////////
 //////// Attach a steam trail to an object (eg. a reacting beaker) that will follow it
 // even if it's carried of thrown.
 /////////////////////////////////////////////
 
-/datum/effect/effect/system/steam_trail_follow
-	var/turf/oldposition
-	var/processing = 1
-	var/on = 1
-
-	set_up(atom/atom)
-		attach(atom)
-		oldposition = get_turf(atom)
-
-	start()
-		if(!src.on)
-			src.on = 1
-			src.processing = 1
-		if(src.processing)
-			src.processing = 0
-			spawn(0)
-				if(src.number < 3)
-					var/obj/effect/effect/steam/I = PoolOrNew(/obj/effect/effect/steam, src.oldposition)
-					src.number++
-					src.oldposition = get_turf(holder)
-					I.set_dir(src.holder.dir)
-					spawn(10)
-						qdel(I)
-						src.number--
-					spawn(2)
-						if(src.on)
-							src.processing = 1
-							src.start()
-				else
-					spawn(2)
-						if(src.on)
-							src.processing = 1
-							src.start()
-
-	proc/stop()
-		src.processing = 0
-		src.on = 0
+/datum/effect/effect/system/trail/steam
+	max_number = 3
+	trail_type = /obj/effect/effect/steam
 
 /datum/effect/effect/system/reagents_explosion
 	var/amount 						// TNT equivalent

@@ -1,0 +1,5 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Fully implements space-bikes. They are available to heist and mercenaries."
+  - tweak: "Reworks the effect trail system (so we don't repeat the code over and over again.)"
