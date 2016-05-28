@@ -144,7 +144,9 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/party
 	name = "Party equipment"
 	contains = list(
-			/obj/item/weapon/storage/box/drinkingglasses,
+			/obj/item/weapon/storage/box/mixedglasses,
+			/obj/item/weapon/storage/box/mixedglasses,
+			/obj/item/weapon/storage/box/glasses/square,
 			/obj/item/weapon/reagent_containers/food/drinks/shaker,
 			/obj/item/weapon/reagent_containers/food/drinks/flask/barflask,
 			/obj/item/weapon/reagent_containers/food/drinks/bottle/patron,
@@ -153,12 +155,31 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 			/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
 			/obj/item/weapon/lipstick/random,
 			/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale = 2,
-			/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer = 4,
-			/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass = 4,
+			/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer = 4
 			)
 	cost = 20
 	containertype = /obj/structure/closet/crate
 	containername = "\improper Party equipment"
+	group = "Hospitality"
+
+/datum/supply_packs/barsupplies
+	name = "Bar supplies"
+	contains = list(
+			/obj/item/weapon/storage/box/glasses/cocktail,
+			/obj/item/weapon/storage/box/glasses/rocks,
+			/obj/item/weapon/storage/box/glasses/square,
+			/obj/item/weapon/storage/box/glasses/pint,
+			/obj/item/weapon/storage/box/glasses/wine,
+			/obj/item/weapon/storage/box/glasses/shake,
+			/obj/item/weapon/storage/box/glasses/shot,
+			/obj/item/weapon/storage/box/glasses/mug,
+			/obj/item/weapon/reagent_containers/food/drinks/shaker,
+			/obj/item/weapon/storage/box/glass_extras/straws,
+			/obj/item/weapon/storage/box/glass_extras/sticks
+			)
+	cost = 10
+	containertype = /obj/structure/closet/crate
+	containername = "crate of bar supplies"
 	group = "Hospitality"
 
 /datum/supply_packs/lasertag
@@ -594,7 +615,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/solar_assembly,
 					/obj/item/solar_assembly,
 					/obj/item/solar_assembly,
-					/obj/item/solar_assembly, 
+					/obj/item/solar_assembly,
 					/obj/item/weapon/circuitboard/solar_control,
 					/obj/item/weapon/tracker_electronics,
 					/obj/item/weapon/paper/solar,

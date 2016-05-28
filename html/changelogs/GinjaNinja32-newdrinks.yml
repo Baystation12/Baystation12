@@ -1,0 +1,6 @@
+author: GinjaNinja32
+delete-after: True
+changes:
+  - rscadd: "Rewrote drinking glasses. There are now eight types of glass, and drink appearance is based on color and the type of glass you put it in."
+  - rscadd: "There are now 'glass extras' you can add to drinks. Straws, drink sticks, and fruit slices (yes, all of them) all work. You can add up to two extras per glass. Add extras by clicking the glass with the extra, remove by clicking the glass with an empty hand while it's in your other hand."
+  - rscadd: "Adding 'fizzy' things (soda water, cola, etc) or ice to a drink will make it be fizzy or have ice floating in it."

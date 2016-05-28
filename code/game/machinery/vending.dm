@@ -704,15 +704,23 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/barflask = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 30,
-					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass = 30,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/square = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/rocks = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/shake = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/cocktail = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/shot = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/pint = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/mug = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/wine = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/ice = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/tea = 15)
+					/obj/item/weapon/reagent_containers/food/drinks/tea = 15,
+					/obj/item/weapon/glass_extra/stick = 15,
+					/obj/item/weapon/glass_extra/straw = 15)
 	contraband = list()
 	vend_delay = 15
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
@@ -934,7 +942,7 @@
 	/obj/item/weapon/material/kitchen/utensil/spoon = 6,
 	/obj/item/weapon/material/knife = 3,
 	/obj/item/weapon/material/kitchen/rollingpin = 2,
-	/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,
+	/obj/item/weapon/reagent_containers/food/drinks/glass2/square = 8,
 	/obj/item/clothing/suit/chef/classic = 2,
 	/obj/item/weapon/storage/lunchbox = 3,
 	/obj/item/weapon/storage/lunchbox/heart = 3,
@@ -953,8 +961,8 @@
 	desc = "An old sweet water vending machine,how did this end up here?"
 	icon_state = "sovietsoda"
 	product_ads = "For Tsar and Country.;Have you fulfilled your nutrition quota today?;Very nice!;We are simple people, for this is all we eat.;If there is a person, there is a problem. If there is no person, then there is no problem."
-	products = list(/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/soda = 30)
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/cola = 20)
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/space_up = 30) // TODO Russian soda can
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/cola = 20) // TODO Russian cola can
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/tool
