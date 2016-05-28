@@ -57,10 +57,10 @@
 	return cell.use(cost_per_move)
 
 /obj/item/weapon/engine/electric/rev_engine(var/atom/movable/M)
-	M.visible_message("\The [M] beeps, turning up.")
+	M.audible_message("\The [M] beeps, turning up.")
 
 /obj/item/weapon/engine/electric/putter(var/atom/movable/M)
-	M.visible_message("\The [M] makes one depressed beep before turning off.")
+	M.audible_message("\The [M] makes one depressed beep before turning off.")
 
 /obj/item/weapon/engine/electric/emp_act(var/severity)
 	if(cell)
@@ -136,7 +136,7 @@
 	return use_power()
 
 /obj/item/weapon/engine/thermal/rev_engine(var/atom/movable/M)
-	M.visible_message("\The [M] rumbles to life.")
+	M.audible_message("\The [M] rumbles to life.")
 
 /obj/item/weapon/engine/electric/putter(var/atom/movable/M)
-	M.visible_message("\The [M] putters before turning off.")
+	M.audible_message("\The [M] putters before turning off.")
