@@ -402,3 +402,7 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/solarpanel
 	icon_state = "solarpanel"
 
+/obj/effect/floor_decal/snow
+	icon = 'icons/turf/overlays.dmi'
+	icon_state = "snowfloor"
+
