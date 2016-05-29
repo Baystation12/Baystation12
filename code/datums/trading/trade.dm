@@ -7,11 +7,11 @@
 	var/language                                                //If this is set to a language name this will generate a name from the language
 	var/icon/portrait                                           //The icon that shows up in the menu @TODO
 
-	var/list/wanted_items                                       //What items they enjoy trading for.
+	var/list/wanted_items = list()                              //What items they enjoy trading for.
 	var/list/possible_wanted_items                              //List of all possible wanted items. Structure is (type = mode)
 	var/list/possible_trading_items                             //List of all possible trading items. Structure is (type = mode)
-	var/list/trading_items                                      //What items they are currently trading away. Structure is (type = value I want for it)
-	var/list/trade_proposals                                    //A log of what they will (current) trade something for
+	var/list/trading_items = list()                             //What items they are currently trading away. Structure is (type = value I want for it)
+	var/list/trade_proposals = list()                           //A log of what they will (current) trade something for
 	var/list/blacklisted_trade_items = list(/mob/living/carbon/human)
 	                                                            //Things they will automatically refuse
 
@@ -52,7 +52,7 @@
 /datum/trader/proc/get_possible_item(var/list/trading_pool)
 	if(!trading_pool || !trading_pool.len)
 		return
-	var/i = rand(trading_pool.len)
+	var/i = rand(1,trading_pool.len)
 	var/list/possible = list()
 	switch(trading_pool[trading_pool[i]])
 		if(TRADER_THIS_TYPE)
@@ -67,28 +67,41 @@
 			possible -= subtypesof(trading_pool[i])
 		if(TRADER_BLACKLIST_ALL)
 			possible -= typesof(trading_pool[i])
-	var/picked = pick(possible)
-	var/atom/A = picked
-	if(initial(A.name) in list("object", "item","weapon", "structure", "machinery", "Mecha", "organ", "snack")) //weed out a few of the common bad types. Reason we don't check types specifically is that (hopefully) further bad subtypes don't set their name up and are similar.
-		return
-	return pick(possible)
+	if(possible.len)
+		var/picked = pick(possible)
+		var/atom/A = picked
+		if(initial(A.name) in list("object", "item","weapon", "structure", "machinery", "Mecha", "organ", "snack")) //weed out a few of the common bad types. Reason we don't check types specifically is that (hopefully) further bad subtypes don't set their name up and are similar.
+			return
+		return picked
 
 /datum/trader/proc/get_response(var/key, var/default)
 	var/text
 	if(speech && speech[key])
 		text = speech[key]
-	else text = default
+	else
+		text = default
 	text = replacetext(text, "MERCHANT", name)
 	return replacetext(text, "ORIGIN", origin)
 
+/datum/trader/proc/print_trade(var/num)
+	if(trade_proposals && trade_proposals.len)
+		num = Clamp(num,1,trade_proposals.len)
+		var/text
+		var/atom/movable/A = trade_proposals[num]
+		text = initial(A.name)
+		A = trade_proposals[trade_proposals[A]]
+		return "<b>[text]</b> for <b>[initial(A.name)]</b>"
+
 /datum/trader/proc/hail(var/mob/user)
-	var/specific = "generic"
+	var/specific
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species)
 			specific = H.species.name
 	else if(istype(user, /mob/living/silicon))
 		specific = "silicon"
+	if(!speech["hail_[specific]"])
+		specific = "generic"
 	var/text = get_response("hail_[specific]", "Greetings, MOB!")
 	return replacetext(text, "MOB", user.name)
 
@@ -210,6 +223,7 @@
 	var/turf/T = get_turf(offer)
 	new type(T)
 	if(istype(offer,/mob))
-		offer << mob_transfer_message
+		var/text = mob_transfer_message
+		offer << replacetext(text, "ORIGIN", origin)
 	qdel(offer)
 	return 1

@@ -81,20 +81,20 @@
 //probably could stick soem Howl references in here but like, eh. Haven't seen it in years.
 /datum/trader/ship/unique/wizard
 	name = "Wizard"
-	origin = "A Moving Castle
+	origin = "A Moving Castle"
 	language = "Common"
 
 	trade_wanted_only = 1
 	trade_goods = 100
-	possible_wanted_items = list(/mob/living/simple_animal/construct            = TRADER_SUBTYPE_ONLY,
+	possible_wanted_items = list(/mob/living/simple_animal/construct            = TRADER_SUBTYPES_ONLY,
 								/obj/item/weapon/melee/cultblade                = TRADER_THIS_TYPE,
-								/obj/item/clothing/head/culthood                = TRADER_ALL
+								/obj/item/clothing/head/culthood                = TRADER_ALL,
 								/obj/item/clothing/suit/space/cult              = TRADER_ALL,
 								/obj/item/clothing/suit/cultrobes               = TRADER_ALL,
 								/obj/item/clothing/head/helmet/space/cult       = TRADER_ALL,
-								/obj/structure/cult                             = TRADER_SUBTYPE_ONLY,
+								/obj/structure/cult                             = TRADER_SUBTYPES_ONLY,
 								/obj/structure/constructshell                   = TRADER_ALL,
-								/mob/living/simple_animal/familiar              = TRADER_SUBTYPE_ONLY,
+								/mob/living/simple_animal/familiar              = TRADER_SUBTYPES_ONLY,
 								/mob/living/simple_animal/familiar/pet          = TRADER_BLACKLIST,
 								/mob/living/simple_animal/hostile/mimic         = TRADER_ALL)
 

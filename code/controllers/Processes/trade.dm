@@ -14,7 +14,7 @@
 
 /datum/controller/process/trade/proc/generateTrader(var/stations = 0)
 	var/list/possible = list()
-	if(station)
+	if(stations)
 		possible += subtypesof(/datum/trader) - typesof(/datum/trader/ship)
 	else
 		if(prob(0.5))

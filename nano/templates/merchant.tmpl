@@ -1,0 +1,41 @@
+{{if data.temp }}
+	<center>
+	<table>
+	<tr><td>{{:data.temp }}</td>
+	<tr><td>{{:helper.link('Continue', null, {'PRG_continue' : 1})}}</td>
+	</table>
+	</center>
+{{else}}
+	{{if data.mode}}
+		<center><h3>{{:data.traderName}}</h3><br>
+		Signal Origin: {{:data.origin}}<br>
+		{{if data.last_comms}}
+			<i>{{:data.last_comms}}</i>
+		{{/if}}
+		<br>
+		
+		<table style="text-align:center">
+		{{if data.hailed}}
+			<tr><td>MORE SHIT HERE</td>
+		{{else}}
+			<tr><td>{{:helper.link('Hail',null,{'PRG_hail': 1})}}</td>
+		{{/if}}
+		</table>
+		</center>
+	{{else}}
+		<center>
+		<h2>Main Menu</h2>
+		<table style="text-align:center">
+		<tr><td>{{:helper.link('Open Communications', null, {'PRG_merchant_list' : 1})}}</td>
+		<tr><td>{{:helper.link('Test Fire Transporter', null, {'PRG_test_fire': 1 })}}</td>
+		<tr><td>{{:helper.link('Connect Pad', null, {'PRG_connect_pad' : 1})}}
+		{{if data.pad}}
+			<font color="green">Connected</font>
+		{{else}}
+			<font color="red">DISCONNECTED</font>
+		{{/if}}
+		</td>
+		</table>
+		</center>
+	{{/if}}
+{{/if}}

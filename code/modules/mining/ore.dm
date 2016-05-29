@@ -10,8 +10,8 @@
 
 /obj/item/weapon/ore/New()
 	..()
-	if(material)
-		var/datum/material/mat = get_material_by_name(material)
+	var/material/mat = get_material_by_name(material)
+	if(mat)
 		item_worth = mat.material_worth
 
 /obj/item/weapon/ore/uranium

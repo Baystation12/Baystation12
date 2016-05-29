@@ -89,3 +89,10 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/newsbrowser())
+
+/obj/machinery/modular_computer/console/preset/civilian/merchant
+	desc = "A stationary computer. This one comes preloaded with merchantile programs."
+
+/obj/machinery/modular_computer/console/preset/civilian/merchant/install_programs()
+	..()
+	cpu.hard_drive.store_file(new/datum/computer_file/program/merchant())
