@@ -25,8 +25,6 @@
 	C.SetStunned(0)
 	C.SetWeakened(0)
 	C.radiation = 0
-	C.halloss = 0
-	C.shock_stage = 0 //Pain
 	C.heal_overall_damage(C.getBruteLoss(), C.getFireLoss())
 	C.reagents.clear_reagents()
 	C.restore_all_organs(ignore_prosthetic_prefs=1) //Covers things like fractures and other things not covered by the above.
@@ -36,8 +34,13 @@
 		H.mutations.Remove(HUSK)
 		H.status_flags -= DISFIGURED
 		H.update_body(1)
+		for(var/limb in H.organs_by_name)
+			var/obj/item/organ/external/current_limb = H.organs_by_name[limb]
+			current_limb.undislocate()
+
+	C.halloss = 0
+	C.shock_stage = 0 //Pain
 	C << "<span class='notice'>We have regenerated.</span>"
-	C.status_flags &= ~(FAKEDEATH)
 	C.update_canmove()
 	C.mind.changeling.purchased_powers -= C
 	feedback_add_details("changeling_powers","CR")
