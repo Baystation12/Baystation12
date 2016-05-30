@@ -286,7 +286,8 @@ datum/preferences
 	character.gen_record = gen_record
 	character.exploit_record = exploit_record
 
-	character.gender = gender
+	character.sex = gender
+	character.gender = gender_show ? gender : PLURAL
 	character.age = age
 	character.b_type = b_type
 

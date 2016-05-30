@@ -18,13 +18,23 @@
 	return 1
 
 /mob/living/carbon/human/proc/change_gender(var/gender)
-	if(src.gender == gender)
+	if(src.get_gender() == gender)
 		return
 
-	src.gender = gender
+	src.sex = gender
+	if (!src.is_hiding_gender())
+		src.gender = gender
+
 	reset_hair()
 	update_body()
 	update_dna()
+	return 1
+
+/mob/living/carbon/human/proc/update_gender(var/show_gender)
+	if (show_gender)
+		src.gender = src.sex
+	else
+		src.gender = PLURAL
 	return 1
 
 /mob/living/carbon/human/proc/change_hair(var/hair_style)
@@ -161,9 +171,9 @@
 	for(var/hairstyle in hair_styles_list)
 		var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
 
-		if(check_gender && gender == MALE && S.gender == FEMALE)
+		if(check_gender && get_gender() == MALE && S.gender == FEMALE)
 			continue
-		if(check_gender && gender == FEMALE && S.gender == MALE)
+		if(check_gender && get_gender() == FEMALE && S.gender == MALE)
 			continue
 		if(!(species.get_bodytype() in S.species_allowed))
 			continue
@@ -176,9 +186,9 @@
 	for(var/facialhairstyle in facial_hair_styles_list)
 		var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
 
-		if(gender == MALE && S.gender == FEMALE)
+		if(get_gender() == MALE && S.gender == FEMALE)
 			continue
-		if(gender == FEMALE && S.gender == MALE)
+		if(get_gender() == FEMALE && S.gender == MALE)
 			continue
 		if(!(species.get_bodytype() in S.species_allowed))
 			continue

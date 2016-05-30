@@ -674,6 +674,9 @@
 /mob/proc/get_gender()
 	return gender
 
+/mob/proc/is_hiding_gender()
+	return gender == PLURAL
+
 /mob/proc/see(message)
 	if(!is_active())
 		return 0

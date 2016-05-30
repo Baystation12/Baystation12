@@ -83,4 +83,4 @@
 		process_glasses(O.visor.vision.glasses)
 
 /mob/living/carbon/human/get_gender()
-	return gender
+	return gender == PLURAL && gender != sex ? sex : gender

@@ -7,6 +7,8 @@
 	var/list/valid_hairstyles = list()
 	var/list/valid_facial_hairstyles = list()
 
+	var/list/gender_display_opts = list(list("opt_name" = "Yes", "opt_key" = 1),list("opt_name" = "No", "opt_key" = 0))
+
 	var/check_whitelist
 	var/list/whitelist
 	var/list/blacklist
@@ -30,6 +32,12 @@
 	if(href_list["gender"])
 		if(can_change(APPEARANCE_GENDER) && (href_list["gender"] in owner.species.genders))
 			if(owner.change_gender(href_list["gender"]))
+				cut_and_generate_data()
+				return 1
+	if(href_list["gender_display"])
+		var/val = text2num(href_list["gender_display"]) // BYOND likes to convert integers to strings for some reason
+		if(can_change(APPEARANCE_GENDER) && (val in list(0,1)))
+			if(owner.update_gender(val))
 				cut_and_generate_data()
 				return 1
 	if(href_list["skin_tone"])
@@ -99,7 +107,8 @@
 	var/list/data = host.initial_data()
 
 	data["specimen"] = owner.species.name
-	data["gender"] = owner.gender
+	data["gender"] = owner.sex
+	data["gender_display"] = !owner.is_hiding_gender()
 	data["change_race"] = can_change(APPEARANCE_RACE)
 	if(data["change_race"])
 		var/species[0]
@@ -113,6 +122,9 @@
 		for(var/gender in owner.species.genders)
 			genders[++genders.len] =  list("gender_name" = gender2text(gender), "gender_key" = gender)
 		data["genders"] = genders
+	data["change_gender_display"] = can_change(APPEARANCE_GENDER)
+	if(data["change_gender_display"])
+		data["gender_display_opts"] = gender_display_opts
 	data["change_skin_tone"] = can_change_skin_tone()
 	data["change_skin_color"] = can_change_skin_color()
 	data["change_eye_color"] = can_change(APPEARANCE_EYE_COLOR)

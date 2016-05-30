@@ -24,6 +24,19 @@
     </div>
 {{/if}}
 
+{{if data.change_gender_display}}
+    <div class="item">
+        <div class="itemLabelNarrow">
+            Display Gender?
+        </div>
+        <div class="itemContentWide">
+            {{for data.gender_display_opts}}
+                {{:helper.link(value.opt_name, null, { 'gender_display' : value.opt_key}, null, data.gender_display == value.opt_key ? 'selected' : null)}}
+            {{/for}}
+        </div>
+    </div>
+{{/if}}
+
 {{if data.change_eye_color || data.change_skin_tone || data.change_skin_color || data.change_hair_color || data.change_facial_hair_color}}
     <div class="item">
         <div class="itemLabelNarrow">

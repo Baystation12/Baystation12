@@ -1,5 +1,6 @@
 datum/preferences
 	var/gender = MALE					//gender of character (well duh)
+	var/gender_show = 1
 
 /datum/category_item/player_setup_item/general/basic
 	name = "Basic"
@@ -9,6 +10,7 @@ datum/preferences
 	S["real_name"]				>> pref.real_name
 	S["name_is_always_random"]	>> pref.be_random_name
 	S["gender"]					>> pref.gender
+	S["gender_show"]			>> pref.gender_show
 	S["age"]					>> pref.age
 	S["spawnpoint"]				>> pref.spawnpoint
 	S["OOC_Notes"]				>> pref.metadata
@@ -17,6 +19,7 @@ datum/preferences
 	S["real_name"]				<< pref.real_name
 	S["name_is_always_random"]	<< pref.be_random_name
 	S["gender"]					<< pref.gender
+	S["gender_show"]			<< pref.gender_show
 	S["age"]					<< pref.age
 	S["spawnpoint"]				<< pref.spawnpoint
 	S["OOC_Notes"]				<< pref.metadata
@@ -25,6 +28,7 @@ datum/preferences
 	var/datum/species/S = all_species[pref.species ? pref.species : "Human"]
 	pref.age                = sanitize_integer(pref.age, S.min_age, S.max_age, initial(pref.age))
 	pref.gender             = sanitize_inlist(pref.gender, S.genders, pick(S.genders))
+	pref.gender_show		= sanitize_integer(pref.gender_show, 0, 1, initial(pref.gender_show))
 	pref.real_name          = sanitize_name(pref.real_name, pref.species)
 	if(!pref.real_name)
 		pref.real_name      = random_name(pref.gender, pref.species)
@@ -39,6 +43,7 @@ datum/preferences
 	. += "<a href='?src=\ref[src];always_random_name=1'>Always Random Name: [pref.be_random_name ? "Yes" : "No"]</a>"
 	. += "<br>"
 	. += "<b>Gender:</b> <a href='?src=\ref[src];gender=1'><b>[gender2text(pref.gender)]</b></a><br>"
+	. += "(<a href='?src=\ref[src];gender_show=1'>Display gender? [pref.gender_show ? "Yes" : "No"]</a>)<br>"
 	. += "<b>Age:</b> <a href='?src=\ref[src];age=1'>[pref.age]</a><br>"
 	. += "<b>Spawn Point</b>: <a href='?src=\ref[src];spawnpoint=1'>[pref.spawnpoint]</a><br>"
 	if(config.allow_Metadata)
@@ -71,6 +76,10 @@ datum/preferences
 		if(new_gender && CanUseTopic(user))
 			pref.gender = new_gender
 		return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if(href_list["gender_show"])
+		pref.gender_show = !pref.gender_show
+		return TOPIC_REFRESH
 
 	else if(href_list["age"])
 		var/new_age = input(user, "Choose your character's age:\n([S.min_age]-[S.max_age])", "Character Preference", pref.age) as num|null
