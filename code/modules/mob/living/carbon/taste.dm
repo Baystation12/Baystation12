@@ -51,7 +51,7 @@ calculate text size per text.
 					continue
 				out.Add("[size][tastes[i]]")
 	var/text_output = english_list(out, "something indescribable")
-	if(text_output != last_taste_text || last_taste_time + 500 < world.time) //We dont want to spam the same message over and over again at the person. Give it a bit of a buffer.
+	if(text_output != last_taste_text || last_taste_time + 100 < world.time) //We dont want to spam the same message over and over again at the person. Give it a bit of a buffer.
 		src << "<span class='notice'>You can taste [text_output]</span>" //no taste means there are too many tastes and not enough flavor.
 		last_taste_time = world.time
 		last_taste_text = text_output
