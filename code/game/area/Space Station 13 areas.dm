@@ -1349,7 +1349,7 @@ area/space/atmosalert()
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/office/sgr
-	name = "\improper Command - SGCR's Office"
+	name = "\improper Command - SCGR's Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/courtroom
