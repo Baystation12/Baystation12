@@ -15,6 +15,9 @@
 		build_click(src, client.buildmode, params, A)
 		return
 
+	if(stat || lockcharge || weakened || stunned || paralysis)
+		return
+
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
@@ -30,9 +33,6 @@
 		return
 	if(modifiers["ctrl"])
 		CtrlClickOn(A)
-		return
-
-	if(stat || lockcharge || weakened || stunned || paralysis)
 		return
 
 	if(!canClick())
