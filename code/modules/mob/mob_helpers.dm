@@ -614,3 +614,13 @@ proc/is_blind(A)
 	client_images -= image
 	if(client)
 		client.images -= image
+
+/mob/proc/fully_replace_character_name(var/new_name, var/in_depth = TRUE)
+	if(!new_name || new_name == real_name)	return 0
+	real_name = new_name
+	name = new_name
+	if(mind)
+		mind.name = new_name
+	if(dna)
+		dna.real_name = real_name
+	return 1

@@ -177,7 +177,7 @@
 
 	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
-/mob/living/silicon/robot/SetName(pickedName as text)
+/mob/living/silicon/robot/fully_replace_character_name(pickedName as text)
 	custom_name = pickedName
 	updatename()
 

@@ -8,6 +8,9 @@
 	living_mob_list -= src
 	dead_mob_list -= src
 	delete_inventory()
+	
+/mob/living/carbon/human/dummy/mannequin/fully_replace_character_name(new_name)
+	..("[new_name] (mannequin)", FALSE)
 
 /mob/living/carbon/human/resomi/New(var/new_loc)
 	h_style = "Resomi Plumage"
