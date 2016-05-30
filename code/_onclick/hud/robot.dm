@@ -139,7 +139,7 @@ var/obj/screen/robot_inventory
 	mymob.blind.icon_state = "blackimageoverlay"
 	mymob.blind.name = " "
 	mymob.blind.screen_loc = "1,1"
-	mymob.blind.layer = 0
+	mymob.blind.invisibility = 101
 
 	mymob.flash = new /obj/screen()
 	mymob.flash.icon = 'icons/mob/screen1_robot.dmi'
