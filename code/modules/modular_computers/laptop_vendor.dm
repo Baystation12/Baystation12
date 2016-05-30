@@ -229,7 +229,7 @@
 	data["hw_nanoprint"] = dev_nanoprint
 	data["hw_card"] = dev_card
 	data["hw_cpu"] = dev_cpu
-	data["totalprice"] = "[total_price]$"
+	data["totalprice"] = "[total_price]þ"
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

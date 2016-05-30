@@ -415,7 +415,7 @@ var/global/datum/controller/occupations/job_master
 			if(department_account)
 				remembered_info += "<b>Your department's account number is:</b> #[department_account.account_number]<br>"
 				remembered_info += "<b>Your department's account pin is:</b> [department_account.remote_access_pin]<br>"
-				remembered_info += "<b>Your department's account funds are:</b> $[department_account.money]<br>"
+				remembered_info += "<b>Your department's account funds are:</b> þ[department_account.money]<br>"
 
 			H.mind.store_memory(remembered_info)
 
