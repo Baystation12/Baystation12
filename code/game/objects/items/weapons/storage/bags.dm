@@ -1,25 +1,39 @@
 /*
- *	These absorb the functionality of the plant bag, ore satchel, etc.
- *	They use the use_to_pickup, quick_gather, and quick_empty functions
- *	that were already defined in weapon/storage, but which had been
- *	re-implemented in other classes.
- *
- *	Contains:
- *		Trash Bag
- *		Mining Satchel
- *		Plant Bag
- *		Sheet Snatcher
- *		Cash Bag
- *
- *	-Sayu
- */
-
-//  Generic non-item
+	Represents flexible bags that expand based on the size of their contents.
+*/
 /obj/item/weapon/storage/bag
 	allow_quick_gather = 1
 	allow_quick_empty = 1
 	use_to_pickup = 1
 	slot_flags = SLOT_BELT
+
+/obj/item/weapon/storage/bag/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
+	. = ..()
+	if(.) update_w_class()
+
+/obj/item/weapon/storage/bag/remove_from_storage(obj/item/W as obj, atom/new_location)
+	. = ..()
+	if(.) update_w_class()
+
+/obj/item/weapon/storage/bag/can_be_inserted(obj/item/W as obj, stop_messages = 0)
+	if(istype(src.loc, /obj/item/weapon/storage))
+		if(!stop_messages)
+			usr << "<span class='notice'>Take [src] out of [src.loc] first.</span>" //need to get rid of usr here.
+		return 0 //causes problems
+	. = ..()
+
+/obj/item/weapon/storage/bag/proc/update_w_class()
+	w_class = initial(w_class)
+	for(var/obj/item/I in contents)
+		w_class = max(w_class, I.w_class)
+
+	var/cur_storage_space = storage_space_used()
+	while(base_storage_capacity(w_class) < cur_storage_space)
+		w_class++
+
+/obj/item/weapon/storage/bag/get_storage_cost()
+	var/used_ratio = storage_space_used()/max_storage_space
+	return max(base_storage_cost(w_class), round(used_ratio*base_storage_cost(max_w_class), 1))
 
 // -----------------------------
 //          Trash bag
@@ -31,21 +45,22 @@
 	icon_state = "trashbag0"
 	item_state = "trashbag"
 
-	w_class = 5
-	max_w_class = 2
+	w_class = 2
+	max_w_class = 5 //can fit a backpack inside a trash bag, seems right
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
 
-/obj/item/weapon/storage/bag/trash/update_icon()
-	if(contents.len == 0)
-		icon_state = "trashbag0"
-	else if(contents.len < 12)
-		icon_state = "trashbag1"
-	else if(contents.len < 21)
-		icon_state = "trashbag2"
-	else icon_state = "trashbag3"
+/obj/item/weapon/storage/bag/trash/update_w_class()
+	..()
+	update_icon()
 
+/obj/item/weapon/storage/bag/trash/update_icon()
+	switch(w_class)
+		if(2) icon_state = "trashbag0"
+		if(3) icon_state = "trashbag1"
+		if(4) icon_state = "trashbag2"
+		if(5 to INFINITY) icon_state = "trashbag3"
 
 // -----------------------------
 //        Plastic Bag
@@ -58,12 +73,11 @@
 	icon_state = "plasticbag"
 	item_state = "plasticbag"
 
-	w_class = 3
-	max_w_class = 2
+	w_class = 1
+	max_w_class = 3
 	max_storage_space = DEFAULT_BOX_STORAGE
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
-
 
 
 // -----------------------------
@@ -76,6 +90,6 @@
 	icon_state = "cashbag"
 	desc = "A bag for carrying lots of cash. It's got a big dollar sign printed on the front."
 	max_storage_space = 100
-	max_w_class = 3
+	max_w_class = 5
 	w_class = 2
 	can_hold = list(/obj/item/weapon/coin,/obj/item/weapon/spacecash)

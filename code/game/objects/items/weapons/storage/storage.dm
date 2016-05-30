@@ -271,6 +271,11 @@
 		src.slot_orient_objs()
 	return
 
+/obj/item/weapon/storage/proc/storage_space_used()
+	. = 0
+	for(var/obj/item/I in contents)
+		. += I.get_storage_cost()
+
 //This proc return 1 if the item can be picked up and 0 if it can't.
 //Set the stop_messages to stop it from printing messages
 /obj/item/weapon/storage/proc/can_be_inserted(obj/item/W as obj, stop_messages = 0)
@@ -314,20 +319,25 @@
 	if(total_storage_space == DO_NOT_STORE)
 		usr << "<span class='notice'>\The [W] cannot be placed in [src].</span>" //TODO replace usr
 		return 0
-	for(var/obj/item/I in contents)
-		total_storage_space += I.get_storage_cost() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
 
+	total_storage_space += storage_space_used() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
 	if(total_storage_space > max_storage_space)
 		if(!stop_messages)
 			usr << "<span class='notice'>\The [src] is too full, make some space.</span>"
 		return 0
 
+
+//Commented out so that trash bags can fit in backpacks and hold storage items. 
+//This means that storage items with max_w_class greater than their own w_class
+//can now be exploited for infinite storage, so don't let players have those okay?
+/*
 	if(istype(W, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/other = W
 		if(other.w_class > src.w_class || other.max_w_class >= src.w_class)
 			if(!stop_messages)
 				usr << "<span class='notice'>\The [src] cannot hold [W].</span>"
 			return 0 //To prevent infinite storage exploits
+*/
 
 	return 1
 
