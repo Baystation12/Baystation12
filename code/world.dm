@@ -278,6 +278,10 @@ var/world_topic_spam_protect_time = world.timeofday
 			if(M.mind)
 				strings += M.mind.assigned_role
 				strings += M.mind.special_role
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				if(H.species)
+					strings += H.species.name
 			for(var/text in strings)
 				if(ckey(text) in ckeysearch)
 					match[M] += 10 // an exact match is far better than a partial one
@@ -319,8 +323,14 @@ var/world_topic_spam_protect_time = world.timeofday
 							clone = L.getCloneLoss(),
 							brain = L.getBrainLoss()
 						))
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					info["species"] = H.species.name
+				else
+					info["species"] = "non-human"
 			else
 				info["damage"] = "non-living"
+				info["species"] = "non-human"
 			info["gender"] = M.gender
 			return list2params(info)
 		else
