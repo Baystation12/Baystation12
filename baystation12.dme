@@ -756,6 +756,7 @@
 #include "code\game\objects\items\weapons\storage\lunchbox.dm"
 #include "code\game\objects\items\weapons\storage\misc.dm"
 #include "code\game\objects\items\weapons\storage\secure.dm"
+#include "code\game\objects\items\weapons\storage\specialized.dm"
 #include "code\game\objects\items\weapons\storage\storage.dm"
 #include "code\game\objects\items\weapons\storage\toolbox.dm"
 #include "code\game\objects\items\weapons\storage\uplink_kits.dm"
