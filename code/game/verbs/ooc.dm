@@ -158,7 +158,7 @@
 		t << "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", t) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[msg]</span></span></span>"
 
 	for(var/client/adm in admins)	//Now send to all admins that weren't in range.
-		if(!(adm in listening) && adm.is_preference_enabled(/datum/client_preference/show_rlooc))
+		if(!(adm in listening) && adm.is_preference_enabled(/datum/client_preference/show_looc) && adm.is_preference_enabled(/datum/client_preference/holder/show_rlooc))
 			var/admin_stuff = "/([key])([admin_jump_link(mob, adm.holder)])"
 			var/prefix = "(R)"
 
