@@ -1334,12 +1334,10 @@
 		var/obj/item/organ/external/current_limb = organs_by_name[limb]
 		if(current_limb && current_limb.dislocated > 0 && !current_limb.is_parent_dislocated()) //if the parent is also dislocated you will have to relocate that first
 			limbs |= current_limb
-	var/choice = input(usr,"Which joint do you wish to relocate?") as null|anything in limbs
+	var/obj/item/organ/external/current_limb = input(usr,"Which joint do you wish to relocate?") as null|anything in limbs
 
-	if(!choice)
+	if(!current_limb)
 		return
-
-	var/obj/item/organ/external/current_limb = organs_by_name[choice]
 
 	if(self)
 		src << "<span class='warning'>You brace yourself to relocate your [current_limb.joint]...</span>"
@@ -1348,7 +1346,7 @@
 
 	if(!do_after(U, 30, src))
 		return
-	if(!choice || !current_limb || !S || !U)
+	if(!current_limb || !S || !U)
 		return
 
 	if(self)
@@ -1463,8 +1461,8 @@
 		return PULSE_NONE
 	else
 		return H.pulse
-		
-/mob/living/carbon/human/can_devour(mob/victim)		
+
+/mob/living/carbon/human/can_devour(mob/victim)
 	if(src.species.gluttonous && (iscarbon(victim) || isanimal(victim)))
 		if(src.species.gluttonous == GLUT_TINY && (victim.mob_size <= MOB_TINY) && !ishuman(victim)) // Anything MOB_TINY or smaller
 			return DEVOUR_SLOW
@@ -1472,5 +1470,5 @@
 			return DEVOUR_SLOW
 		else if(src.species.gluttonous == GLUT_ANYTHING) // Eat anything ever
 			return DEVOUR_FAST
-	
+
 	..()
