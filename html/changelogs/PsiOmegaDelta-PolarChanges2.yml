@@ -1,0 +1,6 @@
+author: Yoshax
+delete-after: True
+
+changes: 
+  - rscadd: "Admins can now toggle being able to hear remote LOOC."
+ 
