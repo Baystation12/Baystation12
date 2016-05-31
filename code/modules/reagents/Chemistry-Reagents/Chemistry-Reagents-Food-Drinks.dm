@@ -612,8 +612,7 @@
 	taste_description = "chocolate milk"
 	color = "#74533b"
 
-	glass_icon_state = "glass_brown"
-	glass_name = "glass of chocolate milk"
+	glass_name = "chocolate milk"
 	glass_desc = "Deliciously fattening!"
 
 /datum/reagent/drink/milk/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)

@@ -1748,6 +1748,7 @@
 #include "code\modules\reagents\reagent_containers\drinkingglass\extras.dm"
 #include "code\modules\reagents\reagent_containers\drinkingglass\glass_boxes.dm"
 #include "code\modules\reagents\reagent_containers\drinkingglass\glass_types.dm"
+#include "code\modules\reagents\reagent_containers\drinkingglass\shaker.dm"
 #include "code\modules\reagents\reagent_containers\food\cans.dm"
 #include "code\modules\reagents\reagent_containers\food\condiment.dm"
 #include "code\modules\reagents\reagent_containers\food\drinks.dm"
