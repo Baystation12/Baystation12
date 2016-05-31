@@ -4,23 +4,32 @@
 //Potential replacement for genetics revives or something I dunno (?)
 
 //Find a dead mob with a brain and client.
-/proc/find_dead_player(var/find_key)
+/proc/find_dead_player(var/find_key, var/include_observers = 0)
 	if(isnull(find_key))
 		return
 
 	var/mob/selected = null
-	for(var/mob/living/M in player_list)
-		//Dead people only thanks!
-		if((M.stat != 2) || (!M.client))
-			continue
-		//They need a brain!
-		if(istype(M, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.species.has_organ["brain"] && !H.has_brain())
+
+	if(include_observers)
+		for(var/mob/M in player_list)
+			if((M.stat != 2) || (!M.client))
 				continue
-		if(M.ckey == find_key)
-			selected = M
-			break
+			if(M.ckey == find_key)
+				selected = M
+				break
+	else
+		for(var/mob/living/M in player_list)
+			//Dead people only thanks!
+			if((M.stat != 2) || (!M.client))
+				continue
+			//They need a brain!
+			if(istype(M, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = M
+				if(H.species.has_organ["brain"] && !H.has_brain())
+					continue
+			if(M.ckey == find_key)
+				selected = M
+				break
 	return selected
 
 #define CLONE_BIOMASS 150
@@ -107,7 +116,7 @@
 	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src, R.dna.species)
 	occupant = H
 
-	if(!R.dna.real_name || config.use_cortical_stacks)	//to prevent null names
+	if(!R.dna.real_name /*|| config.use_cortical_stacks*/)	//to prevent null names
 		R.dna.real_name = "clone ([rand(0,999)])"
 	H.real_name = R.dna.real_name
 

@@ -4,6 +4,7 @@
 	internal_organs_by_name["stack"] = new /obj/item/organ/internal/stack(src,1)
 	src << "<span class='notice'>You feel a faint sense of vertigo as your neural lace boots.</span>"
 
+
 /obj/item/organ/internal/stack
 	name = "neural lace"
 	parent_organ = "head"
@@ -13,6 +14,7 @@
 	status = ORGAN_ROBOT
 	vital = 1
 
+	var/ownerckey
 	var/invasive
 	var/default_language
 	var/list/languages = list()
@@ -30,6 +32,8 @@
 		languages = owner.languages.Copy()
 		backup = owner.mind
 		default_language = owner.default_language
+		if(owner.ckey)
+			ownerckey = owner.ckey
 
 /obj/item/organ/internal/stack/process()
 	do_backup()
@@ -42,7 +46,7 @@
 	..()
 	if(owner && !backup_inviable())
 		var/current_owner = owner
-		var/response = input("Your neural backup has been placed into a new body. Do you wish to return to life?", "Resleeving") as anything in list("Yes", "No")
+		var/response = input(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life?", "Resleeving") as anything in list("Yes", "No")
 		if(src && response == "Yes" && owner == current_owner)
 			overwrite()
 	sleep(-1)
@@ -64,9 +68,10 @@
 			owner << "<span class='danger'>You fight off the invading tendrils of another mind, holding onto your own body!</span>"
 			return
 		owner.ghostize() // Remove the previous owner to avoid their client getting reset.
-	owner.dna.real_name = backup.name
-	owner.real_name = owner.dna.real_name
-	owner.name = owner.real_name
+	//owner.dna.real_name = backup.name
+	//owner.real_name = owner.dna.real_name
+	//owner.name = owner.real_name
+	//The above three lines were commented out for
 	backup.active = 1
 	backup.transfer_to(owner)
 	if(default_language) owner.default_language = default_language
