@@ -78,7 +78,7 @@
 	//fuel points are determined by differing reagents
 
 /obj/item/weapon/engine/thermal/prefill()
-	fuel_points = 1000
+	fuel_points = 5000
 
 /obj/item/weapon/engine/thermal/New()
 	..()
@@ -131,7 +131,7 @@
 		multiplier = (multiplier + new_multiplier)/2
 	if(!actually_flameable)
 		return 0
-	fuel_points += 5 * multiplier * temp_reagents_holder.reagents.total_volume
+	fuel_points += 20 * multiplier * temp_reagents_holder.reagents.total_volume
 	temp_reagents_holder.reagents.clear_reagents()
 	return use_power()
 
