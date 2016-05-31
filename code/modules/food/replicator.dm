@@ -60,7 +60,7 @@
 		src.icon_state = "[initial(icon_state)]-off"
 
 /obj/machinery/food_replicator/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
-	if(speaking.machine_understands)
+	if(!speaking || speaking.machine_understands)
 		spawn(20)
 			var/true_text = lowertext(html_decode(text))
 			for(var/menu_item in menu)
