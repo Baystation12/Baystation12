@@ -13,6 +13,7 @@ mob/var/obj/effect/decal/typing_indicator
 		typing_indicator = new
 		typing_indicator.icon = 'icons/mob/talk.dmi'
 		typing_indicator.icon_state = "typing"
+		typing_indicator.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 
 	if(client && !stat)
 		typing_indicator.invisibility = invisibility
