@@ -266,10 +266,7 @@ datum/preferences
 		else if(firstspace == name_length)
 			real_name += "[pick(last_names)]"
 
-	character.real_name = real_name
-	character.name = character.real_name
-	if(character.dna)
-		character.dna.real_name = character.real_name
+	character.fully_replace_character_name(real_name)
 
 	character.gender = gender
 	character.age = age

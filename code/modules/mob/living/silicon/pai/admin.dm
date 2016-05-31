@@ -18,4 +18,4 @@
 	card.setPersonality(pai)
 
 	if(name)
-		pai.SetName(name)
+		pai.fully_replace_character_name(name)

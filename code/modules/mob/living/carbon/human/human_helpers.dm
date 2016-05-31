@@ -84,3 +84,35 @@
 
 /mob/living/carbon/human/get_gender()
 	return gender
+
+/mob/living/carbon/human/fully_replace_character_name(var/new_name, var/in_depth = TRUE)
+	var/old_name = real_name
+	. = ..()
+	if(!. || !in_depth)
+		return
+
+	//update the datacore records! This is goig to be a bit costly.
+	for(var/list/L in list(data_core.general,data_core.medical,data_core.security,data_core.locked))
+		for(var/datum/data/record/R in L)
+			if(R.fields["name"] == old_name)
+				R.fields["name"] = new_name
+				break
+
+	//update our pda and id if we have them on our person
+	var/list/searching = GetAllContents(searchDepth = 3)
+	var/search_id = 1
+	var/search_pda = 1
+
+	for(var/A in searching)
+		if(search_id && istype(A,/obj/item/weapon/card/id))
+			var/obj/item/weapon/card/id/ID = A
+			if(ID.registered_name == old_name)
+				ID.registered_name = new_name
+				ID.update_name()
+				search_id = 0
+		else if(search_pda && istype(A,/obj/item/device/pda))
+			var/obj/item/device/pda/PDA = A
+			if(PDA.owner == old_name)
+				PDA.owner = new_name
+				PDA.name = "PDA-[new_name] ([PDA.ownjob])"
+				search_pda = 0
