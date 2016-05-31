@@ -58,7 +58,7 @@
 
 	if(multitool_mode && isobj(A))
 		var/obj/O = A
-		var/datum/extension/multitool/MT = get_extension(O, /datum/extension/multitool)
+		var/datum/extension/interactive/multitool/MT = get_extension(O, /datum/extension/interactive/multitool)
 		if(MT)
 			MT.interact(aiMulti, src)
 			return

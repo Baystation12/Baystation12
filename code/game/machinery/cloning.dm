@@ -45,7 +45,7 @@
 	var/biomass = CLONE_BIOMASS * 3
 
 /obj/machinery/clonepod/New()
-	set_extension(src, /datum/extension/multitool, /datum/extension/multitool/store)
+	set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/store)
 	..()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/clonepod(src)
