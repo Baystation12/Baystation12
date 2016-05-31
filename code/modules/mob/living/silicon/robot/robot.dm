@@ -24,6 +24,7 @@
 
 //Icon stuff
 
+	var/static/list/eye_overlays
 	var/icontype 				//Persistent icontype tracking allows for cleaner icon updates
 	var/module_sprites[0] 		//Used to store the associations between sprite names and sprite index.
 	var/icon_selected = 1		//If icon selection has been completed yet
@@ -714,7 +715,15 @@
 /mob/living/silicon/robot/updateicon()
 	overlays.Cut()
 	if(stat == CONSCIOUS)
-		overlays += "eyes-[module_sprites[icontype]]"
+		var/eye_icon_state = "eyes-[module_sprites[icontype]]"
+		if(eye_icon_state in icon_states(icon))
+			if(!eye_overlays)
+				eye_overlays = list()
+			var/image/eye_overlay = eye_overlays[eye_icon_state]
+			if(!eye_overlay)
+				eye_overlay = image(icon, eye_icon_state, LIGHTING_LAYER+0.1)
+				eye_overlays[eye_icon_state] = eye_overlay
+			overlays += eye_overlay
 
 	if(opened)
 		var/panelprefix = custom_sprite ? src.ckey : "ov"

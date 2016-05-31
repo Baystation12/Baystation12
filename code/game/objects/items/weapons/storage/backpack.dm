@@ -24,6 +24,11 @@
 	slot_flags = SLOT_BACK
 	max_w_class = 4
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
+	
+/obj/item/weapon/storage/backpack/equipped()
+	if(!has_extension(src, /datum/extension/appearance))
+		set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
+	..()
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (src.use_sound)
