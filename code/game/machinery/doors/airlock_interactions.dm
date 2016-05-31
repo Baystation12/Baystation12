@@ -16,6 +16,12 @@
 /obj/machinery/mech_sensor/blocks_airlock()
 	return 0
 
+/obj/effect/energy_field/blocks_airlock()
+	return 0
+
+/obj/machinery/shield/blocks_airlock()
+	return 0
+
 /mob/living/blocks_airlock()
 	return 1
 
