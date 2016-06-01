@@ -94,28 +94,26 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 	if(!copy_of)
 		return
 	var/atom/movable/C = copy_of.resolve()
-	if(!C)
-		return
-	C.forceMove(src.loc)
+	..(null, "dies!")
+	if(C)
+		C.forceMove(src.loc)
 
-	if(istype(C,/obj/structure/closet))
+		if(istype(C,/obj/structure/closet))
+			for(var/atom/movable/M in src)
+				M.forceMove(C)
+
+		if(istype(C,/obj/item/weapon/storage))
+			var/obj/item/weapon/storage/S = C
+			for(var/atom/movable/M in src)
+				if(S.can_be_inserted(M,1))
+					S.handle_item_insertion(M)
+				else
+					M.forceMove(src.loc)
+
 		for(var/atom/movable/M in src)
-			M.forceMove(C)
-		return
+			M.forceMove(get_turf(src))
+		qdel(src)
 
-	if(istype(C,/obj/item/weapon/storage))
-		var/obj/item/weapon/storage/S = C
-		for(var/atom/movable/M in src)
-			if(S.can_be_inserted(M,1))
-				S.handle_item_insertion(M)
-			else
-				M.forceMove(src.loc)
-		return
-
-	for(var/atom/movable/M in src)
-		M.loc = get_turf(src)
-	..()
-	qdel(src)
 
 /mob/living/simple_animal/hostile/mimic/DestroySurroundings()
 	if(destroy_objects)
