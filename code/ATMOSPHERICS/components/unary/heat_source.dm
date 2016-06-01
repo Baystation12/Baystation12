@@ -33,7 +33,7 @@
 
 	RefreshParts()
 
-/obj/machinery/atmospherics/unary/heater/initialize()
+/obj/machinery/atmospherics/unary/heater/atmos_initialize()
 	if(node)
 		return
 

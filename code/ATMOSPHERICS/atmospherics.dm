@@ -10,9 +10,6 @@ Pipelines + Other Objects -> Pipe network
 
 */
 /obj/machinery/atmospherics
-
-	auto_init = 0
-
 	anchored = 1
 	idle_power_usage = 0
 	active_power_usage = 0
@@ -41,6 +38,9 @@ Pipelines + Other Objects -> Pipe network
 	if(!pipe_color_check(pipe_color))
 		pipe_color = null
 	..()
+	
+/obj/machinery/atmospherics/proc/atmos_initialize()
+	return
 
 /obj/machinery/atmospherics/attackby(atom/A, mob/user as mob)
 	if(istype(A, /obj/item/device/pipe_painter))
