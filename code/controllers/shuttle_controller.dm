@@ -105,6 +105,179 @@ var/global/datum/shuttle_controller/shuttle_controller
 	process_shuttles += shuttle
 	shuttles["Escape Pod 5"] = shuttle
 
+	//Torch Large Pods
+
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod6/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod6/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod6/transit)
+	shuttle.docking_controller_tag = "escape_pod_6"
+	shuttle.dock_target_station = "escape_pod_6_berth"
+	shuttle.dock_target_offsite = "escape_pod_6_recovery"
+	shuttle.transit_direction = NORTH
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 6"] = shuttle
+
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod7/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod7/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod7/transit)
+	shuttle.docking_controller_tag = "escape_pod_7"
+	shuttle.dock_target_station = "escape_pod_7_berth"
+	shuttle.dock_target_offsite = "escape_pod_7_recovery"
+	shuttle.transit_direction = NORTH
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 7"] = shuttle
+
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod8/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod8/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod8/transit)
+	shuttle.docking_controller_tag = "escape_pod_8"
+	shuttle.dock_target_station = "escape_pod_8_berth"
+	shuttle.dock_target_offsite = "escape_pod_8_recovery"
+	shuttle.transit_direction = SOUTH
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 8"] = shuttle
+
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod9/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod9/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod9/transit)
+	shuttle.docking_controller_tag = "escape_pod_9"
+	shuttle.dock_target_station = "escape_pod_9_berth"
+	shuttle.dock_target_offsite = "escape_pod_9_recovery"
+	shuttle.transit_direction = SOUTH
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 9"] = shuttle
+
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod10/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod10/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod10/transit)
+	shuttle.docking_controller_tag = "escape_pod_10"
+	shuttle.dock_target_station = "escape_pod_10_berth"
+	shuttle.dock_target_offsite = "escape_pod_10_recovery"
+	shuttle.transit_direction = WEST
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 10"] = shuttle
+
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod11/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod11/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod11/transit)
+	shuttle.docking_controller_tag = "escape_pod_11"
+	shuttle.dock_target_station = "escape_pod_11_berth"
+	shuttle.dock_target_offsite = "escape_pod_11_recovery"
+	shuttle.transit_direction = WEST
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 11"] = shuttle
+
+	//Torch Small Pods
+
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod12/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod12/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod12/transit)
+	shuttle.docking_controller_tag = "escape_pod_12"
+	shuttle.dock_target_station = "escape_pod_12_berth"
+	shuttle.dock_target_offsite = "escape_pod_12_recovery"
+	shuttle.transit_direction = NORTH
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 12"] = shuttle
+
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod13/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod13/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod13/transit)
+	shuttle.docking_controller_tag = "escape_pod_13"
+	shuttle.dock_target_station = "escape_pod_13_berth"
+	shuttle.dock_target_offsite = "escape_pod_13_recovery"
+	shuttle.transit_direction = NORTH
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 13"] = shuttle
+
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod14/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod14/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod14/transit)
+	shuttle.docking_controller_tag = "escape_pod_14"
+	shuttle.dock_target_station = "escape_pod_14_berth"
+	shuttle.dock_target_offsite = "escape_pod_14_recovery"
+	shuttle.transit_direction = NORTH
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 14"] = shuttle
+
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod15/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod15/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod15/transit)
+	shuttle.docking_controller_tag = "escape_pod_15"
+	shuttle.dock_target_station = "escape_pod_15_berth"
+	shuttle.dock_target_offsite = "escape_pod_15_recovery"
+	shuttle.transit_direction = SOUTH
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 15"] = shuttle
+
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod16/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod16/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod16/transit)
+	shuttle.docking_controller_tag = "escape_pod_16"
+	shuttle.dock_target_station = "escape_pod_16_berth"
+	shuttle.dock_target_offsite = "escape_pod_16_recovery"
+	shuttle.transit_direction = SOUTH
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 16"] = shuttle
+
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod17/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod17/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod17/transit)
+	shuttle.docking_controller_tag = "escape_pod_17"
+	shuttle.dock_target_station = "escape_pod_17_berth"
+	shuttle.dock_target_offsite = "escape_pod_17_recovery"
+	shuttle.transit_direction = SOUTH
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 17"] = shuttle
+
+
 	//give the emergency shuttle controller it's shuttles
 	emergency_shuttle.shuttle = shuttles["Escape"]
 	emergency_shuttle.escape_pods = list(
@@ -112,6 +285,18 @@ var/global/datum/shuttle_controller/shuttle_controller
 		shuttles["Escape Pod 2"],
 		shuttles["Escape Pod 3"],
 		shuttles["Escape Pod 5"],
+		shuttles["Escape Pod 6"],
+		shuttles["Escape Pod 7"],
+		shuttles["Escape Pod 8"],
+		shuttles["Escape Pod 9"],
+		shuttles["Escape Pod 10"],
+		shuttles["Escape Pod 11"],
+		shuttles["Escape Pod 12"],
+		shuttles["Escape Pod 13"],
+		shuttles["Escape Pod 14"],
+		shuttles["Escape Pod 15"],
+		shuttles["Escape Pod 16"],
+		shuttles["Escape Pod 17"],
 	)
 
 	// Supply shuttle
@@ -283,4 +468,93 @@ var/global/datum/shuttle_controller/shuttle_controller
 	RS.warmup_time = 0
 	shuttles["Rescue"] = RS
 
+	//Calypso.
+	var/datum/shuttle/multi_shuttle/CS = new/datum/shuttle/multi_shuttle()
+	CS.origin = locate(/area/calypso_hangar/start)
+	CS.start_location = "SEV Torch Hangar Deck"
 
+	CS.destinations = list(
+		"North of First Deck" = locate(/area/calypso_hangar/firstdeck),
+		"South of Second Deck" = locate(/area/calypso_hangar/seconddeck),
+		"West of Third Deck" = locate(/area/calypso_hangar/thirddeck),
+		"East of Fourth Deck" = locate(/area/calypso_hangar/fourthdeck),
+		"Debris Field" = locate(/area/calypso_hangar/salvage),
+		"Asteroid" = locate(/area/calypso_hangar/mining),
+		"Away Site" = locate(/area/calypso_hangar/away),
+		)
+
+	CS.announcer = "SEV Torch Docking Computer"
+	CS.arrival_message = "Attention, shuttle Calypso returning. Clear the Hangar Deck."
+	CS.departure_message = "Attention, shuttle Calypso departing. Clear the Hangar Deck."
+	CS.interim = locate(/area/calypso_hangar/transit)
+
+	CS.warmup_time = 0
+	shuttles["Calypso"] = CS
+
+
+		//General Utility Pod.
+	var/datum/shuttle/multi_shuttle/GS = new/datum/shuttle/multi_shuttle()
+	GS.origin = locate(/area/guppy_hangar/start)
+	GS.start_location = "SEV Torch Hangar Deck"
+
+	GS.destinations = list(
+		"East of First Deck" = locate(/area/guppy_hangar/firstdeck),
+		"West of Second Deck" = locate(/area/guppy_hangar/seconddeck),
+		"South of Third Deck" = locate(/area/guppy_hangar/thirddeck),
+		"North of Fourth Deck" = locate(/area/guppy_hangar/fourthdeck),
+		"Debris Field" = locate(/area/guppy_hangar/salvage),
+		"Asteroid" = locate(/area/guppy_hangar/mining),
+		)
+
+	GS.announcer = "SEV Torch Docking Computer"
+	GS.arrival_message = "Attention, General Utility Pod returning. Clear the Hangar Deck."
+	GS.departure_message = "Attention, General Utility Pod departing. Clear the Hangar Deck."
+	GS.interim = locate(/area/guppy_hangar/transit)
+
+	GS.warmup_time = 0
+	shuttles["GUP"] = GS
+
+	//Ninja Shuttle.
+	var/datum/shuttle/multi_shuttle/NS = new/datum/shuttle/multi_shuttle()
+	NS.origin = locate(/area/ninja_dojo/start)
+	NS.start_location = "Clan Dojo"
+
+	NS.destinations = list(
+		"South of First Deck" = locate(/area/ninja_dojo/firstdeck),
+		"North of Second Deck" = locate(/area/ninja_dojo/seconddeck),
+		"East of Third Deck" = locate(/area/ninja_dojo/thirddeck),
+		"West of Fourth Deck" = locate(/area/ninja_dojo/fourthdeck),
+		"Debris Field" = locate(/area/ninja_dojo/salvage),
+		"Asteroid" = locate(/area/ninja_dojo/mining),
+		"Away Site" = locate(/area/ninja_dojo/away),
+		)
+
+	NS.announcer = "SEV Torch Sensor Array"
+	NS.arrival_message = "Attention, anomalous sensor reading detected entering vessel proximity."
+	NS.departure_message = "Attention, anomalous sensor reading detected leaving vessel proximity."
+	NS.interim = locate(/area/ninja_dojo/transit)
+
+	NS.warmup_time = 0
+	shuttles["Ninja"] = NS
+
+		//Failed attempt at a working turbolift, maybe someone else can get it to work
+/*	var/datum/shuttle/multi_shuttle/TS = new/datum/shuttle/multi_shuttle()
+
+	TS.destinations = list(
+		"First Deck" = locate(/area/turbolift/firstdeck),
+		"Second Deck" = locate(/area/turbolift/seconddeck),
+		"Third Deck" = locate(/area/turbolift/thirddeck),
+		"Fourth Deck" = locate(/area/turbolift/fourthdeck),
+		)
+
+	TS.docking_controller_tag = "lift_interior"
+	TS.destination_dock_targets = list(
+		"First Deck" = "lift_first",
+		"Second Deck" = "lift_second",
+		"Third Deck" = "lift_third",
+		"Fourth Deck" = "lift_fourth",
+		)
+
+	TS.warmup_time = 0
+	shuttles["turbolift"] = TS
+*/

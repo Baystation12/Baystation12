@@ -249,6 +249,24 @@
 		network = engineering_networks.Copy()
 	..()
 
+/obj/machinery/computer/security/research
+	name = "research camera monitor"
+	desc = "Used to access the various cameras in the Research Wing."
+	icon_keyboard = "telesci_key"
+	icon_screen = "mining"
+	network = list("POD","CALYPSO","EXPEDITION","RESEARCH")
+	circuit = /obj/item/weapon/circuitboard/security/research
+	light_color = "#F9BBFC"
+
+/obj/machinery/computer/security/supply
+	name = "supply camera monitor"
+	desc = "Used to access the various cameras around the Hangar Deck."
+	icon_keyboard = "mining_key"
+	icon_screen = "mining"
+	network = list("SUPPLY","POD","CALYPSO")
+	circuit = /obj/item/weapon/circuitboard/security/supply
+	light_color = "#F9BBFC"
+
 /obj/machinery/computer/security/nuclear
 	name = "head mounted camera monitor"
 	desc = "Used to access the built-in cameras in helmets."
