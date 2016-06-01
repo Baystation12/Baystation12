@@ -84,12 +84,10 @@
 /obj/structure/inflatable/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(!istype(W) || istype(W, /obj/item/weapon/inflatable_dispenser)) return
 
-	if (can_puncture(W))
-		visible_message("<span class='danger'>[user] pierces [src] with [W]!</span>")
-		deflate(1)
-	if(W.damtype == BRUTE || W.damtype == BURN)
-		hit(W.force)
+	if((W.damtype == BRUTE || W.damtype == BURN) && can_puncture(W))
 		..()
+		if(hit(W.force))
+			visible_message("<span class='danger'>[user] pierces [src] with [W]!</span>")
 	return
 
 /obj/structure/inflatable/proc/hit(var/damage, var/sound_effect = 1)
@@ -98,6 +96,8 @@
 		playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 	if(health <= 0)
 		deflate(1)
+		return 1
+	return 0
 
 /obj/structure/inflatable/CtrlClick()
 	hand_deflate()
