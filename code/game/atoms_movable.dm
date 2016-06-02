@@ -17,8 +17,8 @@
 
 /atom/movable/New()
 	..()
-	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
-		initialize()
+	if(master_controller && master_controller.initialization_begun)
+		queue_for_initialization(src)
 
 /atom/movable/Del()
 	if(isnull(gcDestroyed) && loc)
@@ -31,6 +31,7 @@
 	..()
 
 /atom/movable/Destroy()
+	dequeue_for_initialization(src)
 	. = ..()
 	for(var/atom/movable/AM in src)
 		qdel(AM)
@@ -40,7 +41,7 @@
 			pulledby.pulling = null
 		pulledby = null
 
-/atom/movable/proc/initialize_()
+/atom/movable/proc/initialize()
 	if(!isnull(gcDestroyed))
 		crash_with("GC: -- [type] had initialize() called after qdel() --")
 
