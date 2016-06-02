@@ -292,7 +292,7 @@
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/head/cowboy_hat
-	name = "\improper cowboy hat"
+	name = "cowboy hat"
 	desc = "Also known as the ten-gallon hat, this headwear is a faithful throwback to the days of American frontier expansion. By SolGov law you are required to wear this hat before watching True Grit."
 	icon_state = "cowboyhat"
 	item_state = "cowboy_hat"
