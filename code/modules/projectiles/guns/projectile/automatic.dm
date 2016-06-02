@@ -205,7 +205,7 @@
 	slot_flags = SLOT_BACK
 	ammo_type = /obj/item/ammo_casing/a762
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/a762
+	magazine_type = /obj/item/ammo_magazine/box/a762
 	requires_two_hands = 6
 
 	//LMG, better sustained fire accuracy than assault rifles (comparable to SMG), higer move delay and one-handing penalty

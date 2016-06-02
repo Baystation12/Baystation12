@@ -105,6 +105,9 @@
 	var/list/icon_keys = list()		//keys
 	var/list/ammo_states = list()	//values
 
+/obj/item/ammo_magazine/box
+	w_class = 3
+
 /obj/item/ammo_magazine/New()
 	..()
 	if(multiple_sprites)
