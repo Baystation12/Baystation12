@@ -16,7 +16,7 @@
 
 	New()
 		if(!network)
-			network = station_networks.Copy()
+			network = using_map.station_networks.Copy()
 		..()
 		if(network.len)
 			current_network = network[1]

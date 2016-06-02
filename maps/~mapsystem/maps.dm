@@ -45,6 +45,7 @@ var/list/all_maps = list()
 	var/emergency_shuttle_leaving_dock
 	var/emergency_shuttle_called_message
 	var/emergency_shuttle_recall_message
+	var/list/station_networks = list() 		// Camera networks that will show up on the console.
 
 /datum/map/New()
 	..()

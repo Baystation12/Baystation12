@@ -1,24 +1,26 @@
-<!--
-Title: Security Camera Console (Main content)
-Used In File(s): \code\game\machinery\computer\camera.dm
- -->
-{{:helper.link('Show Map', 'pin-s', {'showMap' : 1})}}
-{{:helper.link('Reset', 'refresh', {'reset' : 1})}}
-<div style="float:left;">
-    <div class='item'>
-        <div class='itemLabel'>Current Camera:&nbsp;</div>
-        {{if data.current_camera}}
-            <div class='itemContent'><b>{{:data.current_camera.name}}</b></div>
-        {{else}}
-            <div class='itemContent'>None</div>
-        {{/if}}
-    </div>
+<div class='item'>
+    {{:helper.link('Show Map', 'pin-s', {'showMap' : 1})}}
+    {{:helper.link('Reset', 'refresh', {'reset' : 1})}}
 </div>
+
+<div class='item'>
+    <div class='itemLabel'>Current Camera:</div>
+    {{if data.current_camera}}
+        <div class='itemContentWide'><b>{{:data.current_camera.name}}</b></div>
+    {{else}}
+        <div class='itemContentWide'>None</div>
+    {{/if}}
+</div>
+
 <div class='item'>
 	<div class='itemLabel'>Networks:</div>
 </div>
 {{for data.networks}}
-	{{:helper.link(value, '', {'switch_network' : value}, null, data.current_network == value ? 'selected' : null)}}
+	{{if value.has_access}}
+		{{:helper.link(value.tag, '', {'switch_network' : value.tag}, null, data.current_network == value.tag ? 'selected' : null)}}
+	{{else}}
+		{{:helper.link(value.tag, '', {}, null, data.current_network == value.tag ? 'selected' : 'redButton')}}
+	{{/if}}
 {{/for}}
 <div class='item'>
 	<div class='itemLabel'>Cameras:</div>

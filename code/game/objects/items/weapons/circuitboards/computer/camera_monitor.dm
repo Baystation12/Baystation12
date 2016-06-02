@@ -12,7 +12,7 @@
 
 /obj/item/weapon/circuitboard/security/New()
 	..()
-	network = station_networks
+	network = using_map.station_networks
 
 /obj/item/weapon/circuitboard/security/engineering
 	name = T_BOARD("engineering camera monitor")

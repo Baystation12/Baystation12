@@ -1549,6 +1549,7 @@
 #include "code\modules\modular_computers\file_system\programs\_engineering.dm"
 #include "code\modules\modular_computers\file_system\programs\_medical.dm"
 #include "code\modules\modular_computers\file_system\programs\_program.dm"
+#include "code\modules\modular_computers\file_system\programs\camera.dm"
 #include "code\modules\modular_computers\file_system\programs\card.dm"
 #include "code\modules\modular_computers\file_system\programs\comm.dm"
 #include "code\modules\modular_computers\file_system\programs\configurator.dm"

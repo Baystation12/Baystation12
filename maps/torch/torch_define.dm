@@ -17,3 +17,15 @@
 	emergency_shuttle_leaving_dock = "Emergency escape pods are launched, arriving at rendezvous point in %ETA%."
 	emergency_shuttle_called_message = "Emergency escape pods are being prepped. ETA %ETA%"
 	emergency_shuttle_recall_message = "Emergency escape sequence aborted, please return to your duties."
+
+	station_networks = list(
+							NETWORK_CALYPSO,
+							NETWORK_ENGINE,
+							NETWORK_EXPEDITION,
+							NETWORK_FIRST_DECK,
+							NETWORK_FOURTH_DECK,
+							NETWORK_ROBOTS,
+							NETWORK_POD,
+							NETWORK_SECOND_DECK,
+							NETWORK_THIRD_DECK
+							)

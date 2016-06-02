@@ -15,6 +15,9 @@
 /datum/nano_module/proc/can_still_topic(var/datum/topic_state/state = default_state)
 	return CanUseTopic(usr, state) == STATUS_INTERACTIVE
 
+/datum/nano_module/proc/check_eye(var/mob/user)
+	return -1
+
 /datum/nano_module/Topic(href, href_list)
 	if(topic_manager && topic_manager.Topic(href, href_list))
 		return TRUE
