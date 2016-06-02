@@ -1948,6 +1948,10 @@ area/space/atmosalert()
 	name = "\improper Security Office"
 	icon_state = "security"
 
+/area/security/meeting
+	name = "\improper Security Meeting Room"
+	icon_state = "security"
+
 /area/security/lobby
 	name = "\improper Security Lobby"
 	icon_state = "security"
