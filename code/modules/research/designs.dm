@@ -996,12 +996,6 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/arcade/orion_trail
 	sort_string = "MABAA"
 
-/datum/design/circuit/seccamera
-	name = "security camera monitor"
-	id = "seccamera"
-	build_path = /obj/item/weapon/circuitboard/security
-	sort_string = "DAAAA"
-
 /datum/design/circuit/secdata
 	name = "security records console"
 	id = "sec_data"

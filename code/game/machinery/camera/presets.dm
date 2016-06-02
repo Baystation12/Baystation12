@@ -1,11 +1,3 @@
-// PRESETS
-var/global/list/engineering_networks = list(
-										NETWORK_ENGINE,
-										NETWORK_ENGINEERING,
-										NETWORK_ENGINEERING_OUTPOST,
-										"Atmosphere Alarms",
-										"Fire Alarms",
-										"Power Alarms")
 /obj/machinery/camera/network/calypso
 	network = list(NETWORK_CALYPSO)
 
