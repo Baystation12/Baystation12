@@ -255,7 +255,6 @@
 		slot_r_hand_str = "pwig",
 		)
 	flags_inv = BLOCKHAIR
-	siemens_coefficient = 2.0 //why is it so conductive?!
 	body_parts_covered = 0
 
 /obj/item/clothing/head/orangebandana //themij: Taryn Kifer
@@ -291,3 +290,10 @@
 	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
 	flags_inv = BLOCKHAIR
 	siemens_coefficient = 0.9
+
+/obj/item/clothing/head/cowboy_hat
+	name = "\improper cowboy hat"
+	desc = "Also known as the ten-gallon hat, this headwear is a faithful throwback to the days of American frontier expansion. By SolGov law you are required to wear this hat before watching True Grit."
+	icon_state = "cowboyhat"
+	item_state = "cowboy_hat"
+	body_parts_covered = 0
