@@ -97,8 +97,3 @@
 	flick("intro_nuke",cinematic)
 	sleep(30)
 
-/client/verb/test_nuclear_explosion()
-	SetUniversalState(/datum/universal_state/nuclear_explosion, args=list(usr))
-
-/client/verb/test_nuclear_explosion_malf()
-	SetUniversalState(/datum/universal_state/nuclear_explosion/malf, args=list(usr))
