@@ -278,17 +278,17 @@
 
 //This proc return 1 if the item can be picked up and 0 if it can't.
 //Set the stop_messages to stop it from printing messages
-/obj/item/weapon/storage/proc/can_be_inserted(obj/item/W as obj, stop_messages = 0)
+/obj/item/weapon/storage/proc/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 	if(!istype(W)) return //Not an item
 
-	if(usr && usr.isEquipped(W) && !usr.canUnEquip(W))
+	if(user && user.isEquipped(W) && !user.canUnEquip(W))
 		return 0
 
 	if(src.loc == W)
 		return 0 //Means the item is already in the storage item
 	if(storage_slots != null && contents.len >= storage_slots)
 		if(!stop_messages)
-			usr << "<span class='notice'>\The [src] is full, make some space.</span>"
+			user << "<span class='notice'>\The [src] is full, make some space.</span>"
 		return 0 //Storage item is full
 
 	if(W.anchored)
@@ -297,33 +297,34 @@
 	if(can_hold.len)
 		if(!is_type_in_list(W, can_hold))
 			if(!stop_messages && ! istype(W, /obj/item/weapon/hand_labeler))
-				usr << "<span class='notice'>\The [src] cannot hold [W].</span>"
+				user << "<span class='notice'>\The [src] cannot hold [W].</span>"
 			return 0
 		var/max_instances = can_hold[W.type]
 		if(max_instances && instances_of_type_in_list(W, contents) >= max_instances)
 			if(!stop_messages && !istype(W, /obj/item/weapon/hand_labeler))
-				usr << "<span class='notice'>\The [src] has no more space specifically for [W].</span>"
+				user << "<span class='notice'>\The [src] has no more space specifically for [W].</span>"
 			return 0
 
 	if(cant_hold.len && is_type_in_list(W, cant_hold))
 		if(!stop_messages)
-			usr << "<span class='notice'>\The [src] cannot hold [W].</span>"
+			user << "<span class='notice'>\The [src] cannot hold [W].</span>"
 		return 0
 
 	if (max_w_class != null && W.w_class > max_w_class)
 		if(!stop_messages)
-			usr << "<span class='notice'>\The [W] is too big for this [src.name].</span>"
+			user << "<span class='notice'>\The [W] is too big for this [src.name].</span>"
 		return 0
 
 	var/total_storage_space = W.get_storage_cost()
 	if(total_storage_space == DO_NOT_STORE)
-		usr << "<span class='notice'>\The [W] cannot be placed in [src].</span>" //TODO replace usr
+		if(!stop_messages)
+			user << "<span class='notice'>\The [W] cannot be placed in [src].</span>"
 		return 0
 
 	total_storage_space += storage_space_used() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
 	if(total_storage_space > max_storage_space)
 		if(!stop_messages)
-			usr << "<span class='notice'>\The [src] is too full, make some space.</span>"
+			user << "<span class='notice'>\The [src] is too full, make some space.</span>"
 		return 0
 
 
@@ -424,7 +425,7 @@
 			user << "You inserted [amt_inserted] light\s into \the [LP.name]. You have [LP.uses] light\s remaining."
 			return
 
-	if(!can_be_inserted(W))
+	if(!can_be_inserted(W, user))
 		return
 
 	if(istype(W, /obj/item/weapon/tray))

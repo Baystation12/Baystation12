@@ -66,17 +66,17 @@
 		//verbs -= /obj/item/weapon/storage/verb/quick_empty
 		//verbs += /obj/item/weapon/storage/sheetsnatcher/quick_empty
 
-	can_be_inserted(obj/item/W as obj, stop_messages = 0)
+	can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 		if(!istype(W,/obj/item/stack/material))
 			if(!stop_messages)
-				usr << "The snatcher does not accept [W]."
+				user << "The snatcher does not accept [W]."
 			return 0
 		var/current = 0
 		for(var/obj/item/stack/material/S in contents)
 			current += S.amount
 		if(capacity == current)//If it's full, you're done
 			if(!stop_messages)
-				usr << "<span class='warning'>The snatcher is full.</span>"
+				user << "<span class='warning'>The snatcher is full.</span>"
 			return 0
 		return 1
 
