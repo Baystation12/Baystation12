@@ -25,7 +25,26 @@
 	. = BB
 	BB = null
 	set_dir(pick(cardinal)) //spin spent casings
+
+	// Aurora forensics port, gunpowder residue.
+	if(leaves_residue)
+		leave_residue()
+
 	update_icon()
+
+/obj/item/ammo_casing/proc/leave_residue()
+	var/mob/living/carbon/human/H
+	if(ishuman(loc))
+		H = loc //in a human, somehow
+	else if(loc && ishuman(loc.loc))
+		H = loc.loc //more likely, we're in a gun being held by a human
+
+	if(H)
+		if(H.gloves && (H.l_hand == loc || H.r_hand == loc))
+			var/obj/item/clothing/G = H.gloves
+			G.gunshot_residue = caliber
+		else
+			H.gunshot_residue = caliber
 
 /obj/item/ammo_casing/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/screwdriver))
