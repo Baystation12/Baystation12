@@ -117,9 +117,6 @@ Class Procs:
 	..(l)
 	if(d)
 		set_dir(d)
-
-/obj/machinery/initialize()
-	..()
 	if(!machinery_sort_required && ticker)
 		dd_insertObjectList(machines, src)
 	else

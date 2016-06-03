@@ -251,7 +251,7 @@
 	return 1
 
 
-/obj/machinery/atmospherics/unary/vent_pump/atmos_initialize()
+/obj/machinery/atmospherics/unary/vent_pump/initialize()
 	..()
 
 	//some vents work his own special way

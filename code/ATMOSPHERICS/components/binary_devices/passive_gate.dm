@@ -23,7 +23,7 @@
 	var/frequency = 0
 	var/id = null
 	var/datum/radio_frequency/radio_connection
-
+    
 /obj/machinery/atmospherics/binary/passive_gate/on
     unlocked = 1
     icon_state = "map_on"
@@ -127,7 +127,7 @@
 
 	return 1
 
-/obj/machinery/atmospherics/binary/passive_gate/atmos_initialize()
+/obj/machinery/atmospherics/binary/passive_gate/initialize()
 	..()
 	if(frequency)
 		set_frequency(frequency)

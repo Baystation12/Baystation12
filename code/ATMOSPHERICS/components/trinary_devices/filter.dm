@@ -118,7 +118,7 @@
 
 	return 1
 
-/obj/machinery/atmospherics/trinary/filter/atmos_initialize()
+/obj/machinery/atmospherics/trinary/filter/initialize()
 	set_frequency(frequency)
 	..()
 
@@ -243,7 +243,7 @@ obj/machinery/atmospherics/trinary/filter/m_filter/New()
 		if(WEST)
 			initialize_directions = WEST|SOUTH|EAST
 
-/obj/machinery/atmospherics/trinary/filter/m_filter/atmos_initialize()
+/obj/machinery/atmospherics/trinary/filter/m_filter/initialize()
 	set_frequency(frequency)
 
 	if(node1 && node2 && node3) return

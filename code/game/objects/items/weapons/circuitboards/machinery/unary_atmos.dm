@@ -1,5 +1,5 @@
 #ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it!
+#error T_BOARD macro is not defined but we need it! 
 #endif
 
 /obj/item/weapon/circuitboard/unary_atmos
@@ -7,10 +7,10 @@
 
 /obj/item/weapon/circuitboard/unary_atmos/construct(var/obj/machinery/atmospherics/unary/U)
 	//TODO: Move this stuff into the relevant constructor when pipe/construction.dm is cleaned up.
-	U.atmos_initialize()
+	U.initialize()
 	U.build_network()
 	if (U.node)
-		U.node.atmos_initialize()
+		U.node.initialize()
 		U.node.build_network()
 
 /obj/item/weapon/circuitboard/unary_atmos/heater

@@ -32,7 +32,7 @@
 	component_parts += new /obj/item/stack/cable_coil(src, 2)
 	RefreshParts()
 
-/obj/machinery/atmospherics/unary/freezer/atmos_initialize()
+/obj/machinery/atmospherics/unary/freezer/initialize()
 	if(node)
 		return
 

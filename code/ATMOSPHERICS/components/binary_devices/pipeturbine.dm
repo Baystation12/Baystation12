@@ -99,13 +99,13 @@
 				else if(dir & (EAST|WEST))
 					initialize_directions = NORTH|SOUTH
 
-				atmos_initialize()
+				initialize()
 				build_network()
 				if (node1)
-					node1.atmos_initialize()
+					node1.initialize()
 					node1.build_network()
 				if (node2)
-					node2.atmos_initialize()
+					node2.initialize()
 					node2.build_network()
 			else
 				if(node1)
@@ -157,7 +157,7 @@
 
 		return null
 
-	atmos_initialize()
+	initialize()
 		if(node1 && node2) return
 
 		var/node2_connect = turn(dir, -90)

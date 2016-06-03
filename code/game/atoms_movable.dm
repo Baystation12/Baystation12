@@ -15,10 +15,12 @@
 	var/mob/pulledby = null
 	var/item_state = null // Used to specify the item state for the on-mob overlays.
 
+	var/auto_init = 1
+
 /atom/movable/New()
 	..()
-	if(master_controller && master_controller.initialization_begun)
-		queue_for_initialization(src)
+	if(auto_init && ticker && ticker.current_state == GAME_STATE_PLAYING)
+		initialize()
 
 /atom/movable/Del()
 	if(isnull(gcDestroyed) && loc)
@@ -31,7 +33,6 @@
 	..()
 
 /atom/movable/Destroy()
-	dequeue_for_initialization(src)
 	. = ..()
 	for(var/atom/movable/AM in src)
 		qdel(AM)

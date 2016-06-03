@@ -18,7 +18,7 @@
 
 		return
 
-	atmos_initialize()
+	initialize()
 		if(!partner)
 			var/partner_connect = turn(dir,180)
 
