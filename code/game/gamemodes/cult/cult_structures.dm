@@ -22,7 +22,8 @@
 	desc = "A floating crystal that hums with an unearthly energy."
 	icon_state = "pylon"
 	var/isbroken = 0
-	light_range = 5
+	light_power = 2
+	light_range = 13
 	light_color = "#3e0000"
 	var/obj/item/wepon = null
 
