@@ -34,3 +34,4 @@ delete-after: True
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
   - tweak: "Changes to round-ending deathsquad and syndicate commando load-outs to maximize speed and minimize drag."
+  - tweak: "Upped the pulse rifle family's general capacity, for better asset protection."
