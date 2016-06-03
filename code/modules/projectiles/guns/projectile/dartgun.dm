@@ -25,6 +25,7 @@
 	icon_state = "dart"
 	caliber = "dart"
 	projectile_type = /obj/item/projectile/bullet/chemdart
+	leaves_residue = 0
 
 /obj/item/ammo_casing/chemdart/expend()
 	qdel(src)
@@ -55,6 +56,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/chemdart
 	auto_eject = 0
+	handle_casings = HOLD_CASING //delete casings instead of dropping them
 
 	var/list/beakers = list() //All containers inside the gun.
 	var/list/mixing = list() //Containers being used for mixing.
@@ -86,10 +88,18 @@
 	return 1
 
 /obj/item/weapon/gun/projectile/dartgun/consume_next_projectile()
-	. = ..()
-	var/obj/item/projectile/bullet/chemdart/dart = .
-	if(istype(dart))
-		fill_dart(dart)
+	if(ammo_magazine && ammo_magazine.stored_ammo.len)
+		chambered = ammo_magazine.stored_ammo[1]
+		ammo_magazine.stored_ammo -= chambered
+
+	if (chambered)
+		if(istype(chambered.BB, /obj/item/projectile/bullet/chemdart))
+			fill_dart(chambered.BB)
+		return chambered.BB
+	return null
+
+/obj/item/weapon/gun/projectile/dartgun/process_chambered()
+	chambered = null //darts qdel themselves when expended, so we just need to null this so it can qdel
 
 /obj/item/weapon/gun/projectile/dartgun/examine(mob/user)
 	//update_icon()
@@ -180,7 +190,7 @@
 	else if (href_list["mix"])
 		var/index = text2num(href_list["mix"])
 		if(index <= beakers.len)
-			mixing += beakers[index]
+			mixing |= beakers[index]
 	else if (href_list["eject"])
 		var/index = text2num(href_list["eject"])
 		if(index <= beakers.len)
