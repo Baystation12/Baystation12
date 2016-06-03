@@ -165,6 +165,7 @@ proc/initialize_unit_tests()
 			continue
 
 		total_unit_tests++
+		started_tests.Add(d)
 
 		if(world.time > end_unit_tests)
 			d.fail("Unit Tests Ran out of time")   // This should never happen, and if it does either fix your unit tests to be faster or if you can make them async checks.
