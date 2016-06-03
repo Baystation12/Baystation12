@@ -101,13 +101,13 @@
 			else if(dir & (EAST|WEST))
 				initialize_directions = EAST|WEST
 
-			initialize()
+			atmos_initialize()
 			build_network()
 			if (node1)
-				node1.initialize()
+				node1.atmos_initialize()
 				node1.build_network()
 			if (node2)
-				node2.initialize()
+				node2.atmos_initialize()
 				node2.build_network()
 		else
 			if(node1)
