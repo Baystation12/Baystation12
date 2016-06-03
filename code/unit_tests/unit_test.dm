@@ -62,6 +62,9 @@ datum/unit_test
 	var/why_disabled = "No reason set."   // If we disable a unit test we will display why so it reminds us to check back on it later.
 
 
+datum/unit_test/proc/log_bad(var/message)
+	log_unit_test("[ascii_red]\[[name]\]: [message][ascii_reset]")
+
 datum/unit_test/proc/fail(var/message)
 	all_unit_tests_passed = 0
 	failed_unit_tests++
@@ -182,7 +185,7 @@ proc/initialize_unit_tests()
 	//
 
 	while(async_test.len)
-		
+
 		for(var/datum/unit_test/test  in async_test)
 
 			if(world.time > end_unit_tests)
@@ -190,7 +193,7 @@ proc/initialize_unit_tests()
 				async_test.Remove(test)
 				continue
 
-			var/result = test.check_result()	// Run the async check and store the return	
+			var/result = test.check_result()	// Run the async check and store the return
 
 			if(isnull(result))
 				test.fail("Test Runtimed")

@@ -45,7 +45,7 @@ var/list/all_maps = list()
 	var/emergency_shuttle_leaving_dock
 	var/emergency_shuttle_called_message
 	var/emergency_shuttle_recall_message
-	
+
 /datum/map/New()
 	..()
 	if(!map_levels)

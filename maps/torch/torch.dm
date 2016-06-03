@@ -1,5 +1,9 @@
 #if !defined(USING_MAP_DATUM)
 
+	#include "torch_areas.dm"
+	#include "torch_shuttles.dm"
+	#include "torch_unit_testing.dm"
+
 	#include "torch-1.dmm"
 	#include "torch-2.dmm"
 	#include "torch-3.dmm"
@@ -10,7 +14,6 @@
 	#include "torch-8.dmm"
 	#include "torch-9.dmm"
 	#include "torch-10.dmm"
-
 
 	#define USING_MAP_DATUM /datum/map/torch
 
