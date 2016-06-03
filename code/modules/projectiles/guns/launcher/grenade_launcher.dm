@@ -103,8 +103,10 @@
 		/obj/item/weapon/grenade/frag/shell = 1,
 		)
 
+	var/grenade_type = pickweight(grenade_types)
+	chambered = new grenade_type(src)
 	for(var/i in 1 to max_grenades)
-		var/grenade_type = pickweight(grenade_types)
+		grenade_type = pickweight(grenade_types)
 		grenades += new grenade_type(src)
 
 //Underslung grenade launcher to be used with the Z8
