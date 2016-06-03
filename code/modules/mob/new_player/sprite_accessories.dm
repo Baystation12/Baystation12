@@ -455,8 +455,12 @@
 		icon_state = "hair_halfshaved"
 
 	bun
-		name = "Bun"
+		name = "Low Bun"
 		icon_state = "hair_bun"
+		
+	bun2
+		name = "High Bun"
+		icon_state = "hair_bun2"
 
 	doublebun
 		name = "Double-Bun"

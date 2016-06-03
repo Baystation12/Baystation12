@@ -1,4 +1,3 @@
-
 ################################
 # Example Changelog File
 #
@@ -23,7 +22,7 @@
 #################################
 
 # Your name.  
-author: Haswell
+author: Cirra
 
 # Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
 delete-after: True
@@ -34,5 +33,4 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-- maptweak: "Reworked one of the break rooms on the research outpost into a work area."
-- maptweak: "Separated xenobiology biohazard shutters from the other research division blast doors, added controls in both xenobiology access and RD's office."
+  - bugfix: "Cyborgs can no longer toggle their lights while dead."
