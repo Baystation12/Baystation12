@@ -125,8 +125,6 @@
 	// Need due to, for example, the 01_basic module relying on species having been loaded to sanitize correctly but that isn't loaded until module 03_body.
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.load_character(S)
-	for(var/datum/category_item/player_setup_item/PI in items)
-		PI.sanitize_character()
 
 /datum/category_group/player_setup_category/proc/save_character(var/savefile/S)
 	// Sanitize all data, then save it
@@ -138,8 +136,6 @@
 /datum/category_group/player_setup_category/proc/load_preferences(var/savefile/S)
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.load_preferences(S)
-	for(var/datum/category_item/player_setup_item/PI in items)
-		PI.sanitize_preferences()
 
 /datum/category_group/player_setup_category/proc/save_preferences(var/savefile/S)
 	for(var/datum/category_item/player_setup_item/PI in items)
