@@ -12,7 +12,6 @@ var/global/pipe_processing_killed = 0
 
 datum/controller/game_controller
 	var/list/shuttle_list	                    // For debugging and VV
-	var/initialization_begun = FALSE
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -43,38 +42,26 @@ datum/controller/game_controller/proc/setup()
 
 	transfer_controller = new
 
-#ifdef UNIT_TEST
-#define CHECK_SLEEP_MASTER // For unit tests we don't care about a smooth lobby screen experience. We care about speed.
-#else
-#define CHECK_SLEEP_MASTER if(++initialized_objects > 500) { initialized_objects=0;sleep(world.tick_lag); }
-#endif
 
 datum/controller/game_controller/proc/setup_objects()
-#ifndef UNIT_TEST
-	var/initialized_objects = 0
-#endif
-	initialization_begun = TRUE
-
 	admin_notice("<span class='danger'>Initializing objects</span>", R_DEBUG)
+	sleep(-1)
 	for(var/atom/movable/object in world)
-		if(!deleted(object))
+		if(isnull(object.gcDestroyed))
 			object.initialize()
-			CHECK_SLEEP_MASTER
 
 	admin_notice("<span class='danger'>Initializing areas</span>", R_DEBUG)
+	sleep(-1)
 	for(var/area/area in all_areas)
 		area.initialize()
-		CHECK_SLEEP_MASTER
 
 	admin_notice("<span class='danger'>Initializing pipe networks</span>", R_DEBUG)
-	for(var/obj/machinery/atmospherics/machine in machines)
-		machine.atmos_initialize()	// Simulate the previous pre-round-only initialization call. Atmospherics is such a giant mess.
-		CHECK_SLEEP_MASTER
+	sleep(-1)
 	for(var/obj/machinery/atmospherics/machine in machines)
 		machine.build_network()
-		CHECK_SLEEP_MASTER
 
 	admin_notice("<span class='danger'>Initializing atmos machinery.</span>", R_DEBUG)
+	sleep(-1)
 	for(var/obj/machinery/atmospherics/unary/U in machines)
 		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
 			var/obj/machinery/atmospherics/unary/vent_pump/T = U
@@ -82,7 +69,6 @@ datum/controller/game_controller/proc/setup_objects()
 		else if(istype(U, /obj/machinery/atmospherics/unary/vent_scrubber))
 			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
 			T.broadcast_status()
-		CHECK_SLEEP_MASTER
 
 	// Set up antagonists.
 	populate_antag_type_list()
@@ -91,5 +77,4 @@ datum/controller/game_controller/proc/setup_objects()
 	populate_spawn_points()
 
 	admin_notice("<span class='danger'>Initializations complete.</span>", R_DEBUG)
-
-#undef CHECK_SLEEP_MASTER
+	sleep(-1)

@@ -121,7 +121,7 @@ obj/machinery/atmospherics/pipe/zpipe/up
 		name = "upwards pipe"
 		desc = "A pipe segment to connect upwards."
 
-obj/machinery/atmospherics/pipe/zpipe/up/atmos_initialize()
+obj/machinery/atmospherics/pipe/zpipe/up/initialize()
 	normalize_dir()
 	var/node1_dir
 
@@ -159,7 +159,7 @@ obj/machinery/atmospherics/pipe/zpipe/down
 		name = "downwards pipe"
 		desc = "A pipe segment to connect downwards."
 
-obj/machinery/atmospherics/pipe/zpipe/down/atmos_initialize()
+obj/machinery/atmospherics/pipe/zpipe/down/initialize()
 	normalize_dir()
 	var/node1_dir
 
