@@ -114,6 +114,7 @@
 	icon_state = "stunshell"
 	spent_icon = "stunshell-spent"
 	projectile_type = /obj/item/projectile/energy/electrode/stunshot
+	leaves_residue = 0
 	matter = list(DEFAULT_WALL_MATERIAL = 360, "glass" = 720)
 
 /obj/item/ammo_casing/shotgun/stunshell/emp_act(severity)
