@@ -2,6 +2,7 @@
 	name = "Securitron"
 	desc = "A little security robot.  He looks less than thrilled."
 	icon_state = "secbot0"
+	var/attack_state = "secbot-c"
 	maxHealth = 50
 	health = 50
 	req_one_access = list(access_security, access_forensics_lockers)
@@ -12,7 +13,6 @@
 	var/idcheck = 0 // If true, arrests for having weapons without authorization.
 	var/check_records = 0 // If true, arrests people without a record.
 	var/check_arrest = 1 // If true, arrests people who are set to arrest.
-	var/arrest_type = 0 // If true, doesn't handcuff. You monster.
 	var/declare_arrests = 0 // If true, announces arrests over sechuds.
 	var/auto_patrol = 0 // If true, patrols on its own
 
@@ -20,13 +20,15 @@
 #define SECBOT_IDLE 		0		// idle
 #define SECBOT_HUNT 		1		// found target, hunting
 #define SECBOT_ARREST		2		// arresting target
-#define SECBOT_START_PATROL	3		// start patrol
-#define SECBOT_WAIT_PATROL	4		// waiting for signals
-#define SECBOT_PATROL		5		// patrolling
-#define SECBOT_SUMMON		6		// summoned by PDA
-	var/is_attacking = 0
+#define SECBOT_START_PATROL	4		// start patrol
+#define SECBOT_WAIT_PATROL	5		// waiting for signals
+#define SECBOT_PATROL		6		// patrolling
+#define SECBOT_SUMMON		7		// summoned by PDA
 	var/is_ranged = 0
 	var/awaiting_surrender = 0
+#define SECBOT_WAIT_TIME	5		//number of in-game seconds to wait for someone to surrender
+#define SECBOT_THREAT_ARREST 4		//threat level at which we decide to arrest someone
+#define SECBOT_THREAT_ATTACK 8		//threat level at which was assume immediate danger and attack right away
 
 	var/obj/secbot_listener/listener = null
 	var/beacon_freq = 1445			// Navigation beacon frequency
@@ -39,9 +41,13 @@
 	var/next_destination = "__nearest__"	// This is the next beacon's ID
 	var/nearest_beacon				// Tag of the beakon that we assume to be the closest one
 
-	var/bot_version = 1.3
-	var/list/threat_found_sounds = new('sound/voice/bcriminal.ogg', 'sound/voice/bjustice.ogg', 'sound/voice/bfreeze.ogg')
-	var/list/preparing_arrest_sounds = new('sound/voice/bgod.ogg', 'sound/voice/biamthelaw.ogg', 'sound/voice/bsecureday.ogg', 'sound/voice/bradio.ogg', 'sound/voice/binsult.ogg', 'sound/voice/bcreep.ogg')
+	var/obj/item/weapon/melee/baton/stun_baton
+	var/obj/item/weapon/handcuffs/cyborg/handcuffs
+
+	var/bot_version = 1.4
+	var/list/threat_found_sounds = list('sound/voice/bcriminal.ogg', 'sound/voice/bjustice.ogg', 'sound/voice/bfreeze.ogg')
+	var/list/preparing_arrest_sounds = list('sound/voice/bfreeze.ogg')
+	light_strength = 0 //stunbaton makes it's own light
 
 /mob/living/bot/secbot/beepsky
 	name = "Officer Beepsky"
@@ -53,31 +59,41 @@
 	listener = new /obj/secbot_listener(src)
 	listener.secbot = src
 
-	spawn(5) // Since beepsky is made on the start... this delay is necessary
-		if(radio_controller)
-			radio_controller.add_object(listener, control_freq, filter = RADIO_SECBOT)
-			radio_controller.add_object(listener, beacon_freq, filter = RADIO_NAVBEACONS)
+	stun_baton = new(src)
+	stun_baton.bcell = new /obj/item/weapon/cell/infinite(stun_baton)
+	stun_baton.set_status(1, null)
+
+	handcuffs = new(src)
+
+/mob/living/bot/secbot/Destroy()
+	qdel(listener)
+	qdel(stun_baton)
+	qdel(handcuffs)
+	listener = null
+	stun_baton = null
+	handcuffs = null
+	return ..()
+
+/mob/living/bot/secbot/initialize()
+	if(radio_controller)
+		radio_controller.add_object(listener, control_freq, filter = RADIO_SECBOT)
+		radio_controller.add_object(listener, beacon_freq, filter = RADIO_NAVBEACONS)
+
+/mob/living/bot/secbot/turn_on()
+	..()
+	stun_baton.set_status(on, null)
 
 /mob/living/bot/secbot/turn_off()
 	..()
-	target = null
-	frustration = 0
-	mode = SECBOT_IDLE
+	reset_arrest()
+	stun_baton.set_status(on, null)
 
 /mob/living/bot/secbot/update_icons()
-	if(on && is_attacking)
-		icon_state = "secbot-c"
-	else
-		icon_state = "secbot[on]"
-
-	if(on)
-		set_light(2, 1, "#FF6A00")
-	else
-		set_light(0)
+	icon_state = "secbot[on]"
 
 /mob/living/bot/secbot/attack_hand(var/mob/user)
 	user.set_machine(src)
-	var/dat
+	var/list/dat = list()
 	dat += "<TT><B>Automatic Security Unit v[bot_version]</B></TT><BR><BR>"
 	dat += "Status: <A href='?src=\ref[src];power=1'>[on ? "On" : "Off"]</A><BR>"
 	dat += "Behaviour controls are [locked ? "locked" : "unlocked"]<BR>"
@@ -86,12 +102,11 @@
 		dat += "<BR>Check for Weapon Authorization: <A href='?src=\ref[src];operation=idcheck'>[idcheck ? "Yes" : "No"]</A><BR>"
 		dat += "Check Security Records: <A href='?src=\ref[src];operation=ignorerec'>[check_records ? "Yes" : "No"]</A><BR>"
 		dat += "Check Arrest Status: <A href='?src=\ref[src];operation=ignorearr'>[check_arrest ? "Yes" : "No"]</A><BR>"
-		dat += "Operating Mode: <A href='?src=\ref[src];operation=switchmode'>[arrest_type ? "Detain" : "Arrest"]</A><BR>"
 		dat += "Report Arrests: <A href='?src=\ref[src];operation=declarearrests'>[declare_arrests ? "Yes" : "No"]</A><BR>"
 		dat += "Auto Patrol: <A href='?src=\ref[src];operation=patrol'>[auto_patrol ? "On" : "Off"]</A>"
-	user << browse("<HEAD><TITLE>Securitron v[bot_version] controls</TITLE></HEAD>[dat]", "window=autosec")
-	onclose(user, "autosec")
-	return
+	var/datum/browser/popup = new(user, "autosec", "Securitron v[bot_version] controls")
+	popup.set_content(jointext(dat,null))
+	popup.open()
 
 /mob/living/bot/secbot/Topic(href, href_list)
 	if(..())
@@ -114,8 +129,6 @@
 			check_records = !check_records
 		if("ignorearr")
 			check_arrest = !check_arrest
-		if("switchmode")
-			arrest_type = !arrest_type
 		if("patrol")
 			auto_patrol = !auto_patrol
 			mode = SECBOT_IDLE
@@ -125,11 +138,46 @@
 
 /mob/living/bot/secbot/attackby(var/obj/item/O, var/mob/user)
 	var/curhealth = health
-	..()
+	. = ..()
 	if(health < curhealth)
-		target = user
-		awaiting_surrender = 5
-		mode = SECBOT_HUNT
+		react_to_attack(user)
+
+/mob/living/bot/secbot/bullet_act(var/obj/item/projectile/P)
+	var/curhealth = health
+	var/mob/shooter = P.firer
+	. = ..()
+	//if we already have a target just ignore to avoid lots of checking
+	if(!target && health < curhealth && shooter && (shooter in view(world.view, src)))
+		react_to_attack(shooter)
+
+
+/mob/living/bot/secbot/proc/begin_arrest(mob/target, var/threat)
+	var/suspect_name = target_name(target)
+	if(declare_arrests)
+		broadcast_security_hud_message("[src] is arresting a level [threat] suspect <b>[suspect_name]</b> in <b>[get_area(src)]</b>.", src)
+	say("Down on the floor, [suspect_name]! You have [SECBOT_WAIT_TIME] seconds to comply.")
+	playsound(src.loc, pick(preparing_arrest_sounds), 50)
+	moved_event.register(target, src, /mob/living/bot/secbot/proc/target_moved)
+
+/mob/living/bot/secbot/proc/target_moved(atom/movable/moving_instance, atom/old_loc, atom/new_loc)
+	mode = SECBOT_ARREST // I'm done playing nice
+	awaiting_surrender = INFINITY
+	moved_event.unregister(moving_instance, src)
+
+/mob/living/bot/secbot/proc/react_to_attack(mob/attacker)
+	if(!target)
+		playsound(src.loc, pick(threat_found_sounds), 50)
+		broadcast_security_hud_message("[src] was attacked by a hostile <b>[target_name(attacker)]</b> in <b>[get_area(src)]</b>.", src)
+	target = attacker
+	mode = SECBOT_ARREST
+
+/mob/living/bot/secbot/proc/reset_arrest()
+	moved_event.unregister(target, src)
+	target = null
+	awaiting_surrender = 0
+	frustration = 0
+	mode = SECBOT_IDLE
+	walk_to(src, 0)
 
 /mob/living/bot/secbot/Life()
 	..()
@@ -144,6 +192,15 @@
 	if(!locked && (mode == SECBOT_START_PATROL || mode == SECBOT_PATROL)) // Stop running away when we set you up
 		mode = SECBOT_IDLE
 
+	var/can_see_target
+	if(target)
+		can_see_target = (target in view(world.view, src))
+		if(!can_see_target)
+			frustration++
+			walk_to(src, 0) //don't know where they are
+		else
+			walk_to(src, target, 1, 4)
+
 	switch(mode)
 		if(SECBOT_IDLE)
 			if(auto_patrol && locked)
@@ -151,60 +208,30 @@
 			return
 
 		if(SECBOT_HUNT) // Target is in the view or has been recently - chase it
-			if(frustration > 7)
-				target = null
-				frustration = 0
-				awaiting_surrender = 0
-				mode = SECBOT_IDLE
-				return
-			if(target)
-				var/threat = check_threat(target)
-				if(threat < 4) // Re-evaluate in case they dropped the weapon or something
-					target = null
-					frustration = 0
-					awaiting_surrender = 0
-					mode = SECBOT_IDLE
-					return
-				if(!(target in view(7, src)))
-					++frustration
-				if(Adjacent(target))
-					mode = SECBOT_ARREST
-					return
+			var/threat = check_threat(target) // Re-evaluate in case arrest status cleared or something
+			if(!target || threat < SECBOT_THREAT_ARREST || frustration > 7)
+				reset_arrest()
+			else if(can_see_target && Adjacent(target))
+				if(!awaiting_surrender)
+					begin_arrest(target, threat)
+				if(!(threat >= SECBOT_THREAT_ATTACK || awaiting_surrender >= SECBOT_WAIT_TIME) && ishuman(target) && !target.lying)
+					++awaiting_surrender
 				else
-					if(is_ranged)
-						RangedAttack(target)
-					else
-						step_towards(src, target) // Melee bots chase a bit faster
-					spawn(8)
-						if(!Adjacent(target))
-							step_towards(src, target)
-					spawn(16)
-						if(!Adjacent(target))
-							step_towards(src, target)
+					mode = SECBOT_ARREST
+			return
 
-		if(SECBOT_ARREST) // Target is next to us - attack it
+		if(SECBOT_ARREST) // attack
 			if(!target)
-				mode = SECBOT_IDLE
-			if(!Adjacent(target))
-				awaiting_surrender = 5 // I'm done playing nice
-				mode = SECBOT_HUNT
-				return
-			var/threat = check_threat(target)
-			if(threat < 4)
-				target = null
-				awaiting_surrender = 0
-				frustration = 0
-				mode = SECBOT_IDLE
-				return
-			if(awaiting_surrender < 5 && ishuman(target) && !target.lying)
-				if(awaiting_surrender == 0)
-					say("Down on the floor, [target]! You have five seconds to comply.")
-				++awaiting_surrender
-			else
-				UnarmedAttack(target)
-			if(ishuman(target) && declare_arrests)
-				var/area/location = get_area(src)
-				broadcast_security_hud_message("[src] is [arrest_type ? "detaining" : "arresting"] a level [check_threat(target)] suspect <b>[target]</b> in <b>[location]</b>.", src)
+				reset_arrest()
+			else if(can_see_target)
+				if(target.lying)
+					if(Adjacent(target))
+						cuff_target(target)
+				else
+					if(Adjacent(target))
+						UnarmedAttack(target)
+					else if(is_ranged)
+						RangedAttack(target)
 			return
 
 		if(SECBOT_START_PATROL)
@@ -245,11 +272,16 @@
 
 		if(SECBOT_SUMMON)
 			patrol_step()
+			spawn(4)
+				patrol_step()
 			spawn(8)
 				patrol_step()
-			spawn(16)
-				patrol_step()
 			return
+
+/mob/living/bot/secbot/proc/cuff_target(var/mob/living/carbon/C)
+	if(istype(C) && !C.handcuffed)
+		handcuffs.place_handcuffs(C, src)
+	reset_arrest() //we're done, failed or not. Don't want to get stuck if C is not
 
 /mob/living/bot/secbot/UnarmedAttack(var/mob/M, var/proximity)
 	if(!..())
@@ -258,46 +290,13 @@
 	if(!istype(M))
 		return
 
-	if(istype(M, /mob/living/carbon))
-		var/mob/living/carbon/C = M
-		var/cuff = 1
-		if(istype(C, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = C
-			if(istype(H.back, /obj/item/weapon/rig) && istype(H.gloves,/obj/item/clothing/gloves/rig))
-				cuff = 0
-		if(!C.lying || C.handcuffed || arrest_type)
-			cuff = 0
-		if(!cuff)
-			C.stun_effect_act(0, 60, null)
-			playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
-			do_attack_animation(C)
-			is_attacking = 1
-			update_icons()
-			spawn(2)
-				is_attacking = 0
-				update_icons()
-			visible_message("<span class='warning'>[C] was prodded by [src] with a stun baton!</span>")
-		else
-			playsound(loc, 'sound/weapons/handcuffs.ogg', 30, 1, -2)
-			visible_message("<span class='warning'>[src] is trying to put handcuffs on [C]!</span>")
-			if(do_mob(src, C, 60))
-				if(!C.handcuffed)
-					C.handcuffed = new /obj/item/weapon/handcuffs(C)
-					C.update_inv_handcuffed()
-				if(preparing_arrest_sounds.len)
-					playsound(loc, pick(preparing_arrest_sounds), 50, 0)
-	else if(istype(M, /mob/living/simple_animal))
-		var/mob/living/simple_animal/S = M
-		S.AdjustStunned(10)
-		S.adjustBruteLoss(15)
-		do_attack_animation(M)
-		playsound(loc, "swing_hit", 50, 1, -1)
-		is_attacking = 1
-		update_icons()
-		spawn(2)
-			is_attacking = 0
-			update_icons()
-		visible_message("<span class='warning'>[M] was beaten by [src] with a stun baton!</span>")
+	if(istype(M, /mob/living/simple_animal))
+		a_intent = I_HURT
+	else
+		a_intent = I_GRAB
+
+	stun_baton.attack(M, src, "chest") //robots and turrets aim for center of mass
+	flick(attack_state, src)
 
 /mob/living/bot/secbot/explode()
 	visible_message("<span class='warning'>[src] blows apart!</span>")
@@ -319,6 +318,12 @@
 	new /obj/effect/decal/cleanable/blood/oil(Tsec)
 	qdel(src)
 
+/mob/living/bot/secbot/proc/target_name(mob/living/T)
+	if(ishuman(T))
+		var/mob/living/carbon/human/H = T
+		return H.get_id_name("unidentified person")
+	return "unidentified lifeform"
+
 /mob/living/bot/secbot/proc/scan_view()
 	for(var/mob/living/M in view(7, src))
 		if(M.invisibility >= INVISIBILITY_LEVEL_ONE)
@@ -326,12 +331,18 @@
 		if(M.stat)
 			continue
 
-		var/threat = check_threat(M)
+		var/threat = check_threat(M) //does this on every living mob in view every tick we aren't targeting anyone :(
 
+		//no prioritization, just goes for the first threat found :(
 		if(threat >= 4)
+			if(declare_arrests && target != M)
+				broadcast_security_hud_message("[src] detected a level [threat] suspect <b>[target_name(target)]</b> in <b>[get_area(src)]</b>.", src)
 			target = M
 			say("Level [threat] infraction alert!")
 			custom_emote(1, "points at [M.name]!")
+
+			playsound(src.loc, pick(threat_found_sounds), 50)
+			
 			mode = SECBOT_HUNT
 			break
 	return
@@ -345,7 +356,7 @@
 	if(!M || !istype(M) || M.stat || src == M)
 		return 0
 
-	if(emagged)
+	if(emagged && !M.incapacitated()) //check incapacitated so emagged secbots don't keep attacking the same target forever
 		return 10
 
 	return M.assess_perp(access_scanner, 0, idcheck, check_records, check_arrest)
