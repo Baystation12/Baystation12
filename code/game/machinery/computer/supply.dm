@@ -10,7 +10,11 @@
 	var/reqtime = 0 //Cooldown for requisitions - Quarxink
 	var/hacked = 0
 	var/can_order_contraband = 0
-	var/last_viewed_group = "categories"
+	var/decl/hierarchy/supply_pack/current_category
+
+/obj/machinery/computer/supplycomp/initialize()
+	..()
+	current_category = cargo_supply_pack_root
 
 /obj/machinery/computer/ordercomp
 	name = "supply ordering console"
@@ -19,7 +23,11 @@
 	circuit = /obj/item/weapon/circuitboard/ordercomp
 	var/temp = null
 	var/reqtime = 0 //Cooldown for requisitions - Quarxink
-	var/last_viewed_group = "categories"
+	var/decl/hierarchy/supply_pack/current_category
+
+/obj/machinery/computer/ordercomp/initialize()
+	..()
+	current_category = cargo_supply_pack_root
 
 /obj/machinery/computer/ordercomp/attack_ai(var/mob/user as mob)
 	return attack_hand(user)
@@ -58,23 +66,29 @@
 
 	if(href_list["order"])
 		if(href_list["order"] == "categories")
-			//all_supply_groups
-			//Request what?
-			last_viewed_group = "categories"
-			temp = "<b>Supply points: [supply_controller.points]</b><BR>"
+			current_category = cargo_supply_pack_root
+		else
+			var/decl/hierarchy/supply_pack/requested_category = locate(href_list["order"]) in current_category.children
+			if(!requested_category || !requested_category.is_category())
+				return
+			current_category = requested_category
+
+		temp = list()
+		temp += "<b>Supply points: [supply_controller.points]</b><BR>"
+		if(current_category == cargo_supply_pack_root)
 			temp += "<A href='?src=\ref[src];mainmenu=1'>Main Menu</A><HR><BR><BR>"
 			temp += "<b>Select a category</b><BR><BR>"
-			for(var/supply_group_name in all_supply_groups )
-				temp += "<A href='?src=\ref[src];order=[supply_group_name]'>[supply_group_name]</A><BR>"
+			for(var/decl/hierarchy/supply_pack/sp in current_category.children)
+				if(!sp.is_category()) continue
+				temp += "<A href='?src=\ref[src];order=\ref[sp]'>[sp.name]</A><BR>"
 		else
-			last_viewed_group = href_list["order"]
-			temp = "<b>Supply points: [supply_controller.points]</b><BR>"
 			temp += "<A href='?src=\ref[src];order=categories'>Back to all categories</A><HR><BR><BR>"
-			temp += "<b>Request from: [last_viewed_group]</b><BR><BR>"
-			for(var/supply_name in supply_controller.supply_packs )
-				var/datum/supply_packs/N = supply_controller.supply_packs[supply_name]
-				if(N.hidden || N.contraband || N.group != last_viewed_group) continue								//Have to send the type instead of a reference to
-				temp += "<A href='?src=\ref[src];doorder=[supply_name]'>[supply_name]</A> Cost: [N.cost]<BR>"		//the obj because it would get caught by the garbage
+			temp += "<b>Request from: [current_category.name]</b><BR><BR>"
+			for(var/decl/hierarchy/supply_pack/sp in current_category.children)
+				if(sp.hidden || sp.contraband || sp.is_category()) continue
+				temp += "<A href='?src=\ref[src];doorder=\ref[sp]'>[sp.name]</A> Cost: [sp.cost]<BR>"
+
+		temp = jointext(temp,null)
 
 	else if (href_list["doorder"])
 		if(world.time < reqtime)
@@ -83,10 +97,10 @@
 			return
 
 		//Find the correct supply_pack datum
-		var/datum/supply_packs/P = supply_controller.supply_packs[href_list["doorder"]]
-		if(!istype(P))	return
+		var/decl/hierarchy/supply_pack/P = locate(href_list["doorder"]) in current_category.children
+		if(!istype(P) || P.is_category())	return
 
-		var/timeout = world.time + 600
+		var/timeout = world.time + 1 MINUTE
 		var/reason = sanitize(input(usr,"Reason:","Why do you require this item?","") as null|text)
 		if(world.time > timeout)	return
 		if(!reason)	return
@@ -126,7 +140,7 @@
 		supply_controller.requestlist += O
 
 		temp = "Thanks for your request. The cargo team will process it as soon as possible.<BR>"
-		temp += "<BR><A href='?src=\ref[src];order=[last_viewed_group]'>Back</A> <A href='?src=\ref[src];mainmenu=1'>Main Menu</A>"
+		temp += "<BR><A href='?src=\ref[src];order=\ref[current_category]'>Back</A> <A href='?src=\ref[src];mainmenu=1'>Main Menu</A>"
 
 	else if (href_list["vieworders"])
 		temp = "Current approved orders: <BR><BR>"
@@ -247,35 +261,31 @@
 	if (href_list["cancel_send"])
 		shuttle.cancel_launch(src)
 
-	else if (href_list["order"])
-		//if(!shuttle.idle()) return	//this shouldn't be necessary it seems
+	else if(href_list["order"])
 		if(href_list["order"] == "categories")
-			//all_supply_groups
-			//Request what?
-			last_viewed_group = "categories"
-			temp = "<b>Supply points: [supply_controller.points]</b><BR>"
+			current_category = cargo_supply_pack_root
+		else
+			var/decl/hierarchy/supply_pack/requested_category = locate(href_list["order"]) in current_category.children
+			if(!requested_category || !requested_category.is_category())
+				return
+			current_category = requested_category
+
+		temp = list()
+		temp += "<b>Supply points: [supply_controller.points]</b><BR>"
+		if(current_category == cargo_supply_pack_root)
 			temp += "<A href='?src=\ref[src];mainmenu=1'>Main Menu</A><HR><BR><BR>"
 			temp += "<b>Select a category</b><BR><BR>"
-			for(var/supply_group_name in all_supply_groups )
-				temp += "<A href='?src=\ref[src];order=[supply_group_name]'>[supply_group_name]</A><BR>"
+			for(var/decl/hierarchy/supply_pack/sp in current_category.children)
+				if(!sp.is_category()) continue
+				temp += "<A href='?src=\ref[src];order=\ref[sp]'>[sp.name]</A><BR>"
 		else
-			last_viewed_group = href_list["order"]
-			temp = "<b>Supply points: [supply_controller.points]</b><BR>"
 			temp += "<A href='?src=\ref[src];order=categories'>Back to all categories</A><HR><BR><BR>"
-			temp += "<b>Request from: [last_viewed_group]</b><BR><BR>"
-			for(var/supply_name in supply_controller.supply_packs )
-				var/datum/supply_packs/N = supply_controller.supply_packs[supply_name]
-				if((N.hidden && !hacked) || (N.contraband && !can_order_contraband) || N.group != last_viewed_group) continue								//Have to send the type instead of a reference to
-				temp += "<A href='?src=\ref[src];doorder=[supply_name]'>[supply_name]</A> Cost: [N.cost]<BR>"		//the obj because it would get caught by the garbage
+			temp += "<b>Request from: [current_category.name]</b><BR><BR>"
+			for(var/decl/hierarchy/supply_pack/sp in current_category.children)
+				if((sp.hidden && !hacked) || (sp.contraband && !can_order_contraband) || sp.is_category()) continue
+				temp += "<A href='?src=\ref[src];doorder=\ref[sp]'>[sp.name]</A> Cost: [sp.cost]<BR>"
 
-		/*temp = "Supply points: [supply_controller.points]<BR><HR><BR>Request what?<BR><BR>"
-
-		for(var/supply_name in supply_controller.supply_packs )
-			var/datum/supply_packs/N = supply_controller.supply_packs[supply_name]
-			if(N.hidden && !hacked) continue
-			if(N.contraband && !can_order_contraband) continue
-			temp += "<A href='?src=\ref[src];doorder=[supply_name]'>[supply_name]</A> Cost: [N.cost]<BR>"    //the obj because it would get caught by the garbage
-		temp += "<BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"*/
+		temp = jointext(temp,null)
 
 	else if (href_list["doorder"])
 		if(world.time < reqtime)
@@ -284,8 +294,9 @@
 			return
 
 		//Find the correct supply_pack datum
-		var/datum/supply_packs/P = supply_controller.supply_packs[href_list["doorder"]]
-		if(!istype(P))	return
+		var/decl/hierarchy/supply_pack/P = locate(href_list["doorder"]) in current_category.children
+		if(!P || P.is_category())
+			return
 
 		var/timeout = world.time + 600
 		var/reason = sanitize(input(usr,"Reason:","Why do you require this item?","") as null|text)
@@ -327,13 +338,13 @@
 		supply_controller.requestlist += O
 
 		temp = "Order request placed.<BR>"
-		temp += "<BR><A href='?src=\ref[src];order=[last_viewed_group]'>Back</A> | <A href='?src=\ref[src];mainmenu=1'>Main Menu</A> | <A href='?src=\ref[src];confirmorder=[O.ordernum]'>Authorize Order</A>"
+		temp += "<BR><A href='?src=\ref[src];order=\ref[current_category]'>Back</A> | <A href='?src=\ref[src];mainmenu=1'>Main Menu</A> | <A href='?src=\ref[src];confirmorder=[O.ordernum]'>Authorize Order</A>"
 
 	else if(href_list["confirmorder"])
 		//Find the correct supply_order datum
 		var/ordernum = text2num(href_list["confirmorder"])
 		var/datum/supply_order/O
-		var/datum/supply_packs/P
+		var/decl/hierarchy/supply_pack/P
 		temp = "Invalid Request"
 		for(var/i=1, i<=supply_controller.requestlist.len, i++)
 			var/datum/supply_order/SO = supply_controller.requestlist[i]
