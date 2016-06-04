@@ -124,9 +124,6 @@
 	anchored = 0
 	buckle_movable = 1
 
-/obj/structure/bed/chair/office/update_icon()
-	return
-
 /obj/structure/bed/chair/office/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
 		return
@@ -180,15 +177,8 @@
 	base_icon = "officechair_dark"
 	icon_state = "officechair_dark_preview"
 
-/obj/structure/bed/chair/office/New()
-	..()
-	var/image/I = image(icon, "[base_icon]_over")
-	I.layer = FLY_LAYER
-	overlays += I
-
 // Chair types
 /obj/structure/bed/chair/wood
-	name = "wooden chair"
 	desc = "Old is never too old to not be in fashion."
 	base_icon = "wooden_chair"
 	icon_state = "wooden_chair_preview"
@@ -200,9 +190,6 @@
 
 /obj/structure/bed/chair/wood/New(var/newloc)
 	..(newloc, "wood")
-	var/image/I = image(icon, "[base_icon]_over")
-	I.layer = FLY_LAYER
-	overlays += I
 
 /obj/structure/bed/chair/wood/wings
 	base_icon = "wooden_chair_wings"
