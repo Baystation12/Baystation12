@@ -128,10 +128,10 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	infos.Remove(item)
 	info << infos
 
-	message_admins("\blue [key_name_admin(usr)] deleted one of [key]'s notes.")
+	message_admins("<span class='notice'>[key_name_admin(usr)] deleted one of [key]'s notes.</span>")
 	log_admin("[key_name(usr)] deleted one of [key]'s notes.")
 
-	qdel(info)
+	del(info) // savefile, so NOT qdel
 
 /proc/show_player_info_irc(var/key as text)
 	var/dat = "          Info on [key]\n"

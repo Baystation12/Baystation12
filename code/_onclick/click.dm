@@ -211,6 +211,7 @@
 				setMoveCooldown(10)
 			else
 				return
+		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		A.attack_tk(src)
 /*
 	Restrained ClickOn
@@ -304,7 +305,7 @@
 	return
 
 /mob/living/LaserEyes(atom/A)
-	setClickCooldown(4)
+	setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	var/turf/T = get_turf(src)
 
 	var/obj/item/projectile/beam/LE = new (T)

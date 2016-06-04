@@ -165,13 +165,13 @@ This saves us from having to call add_fingerprint() any time something is put in
 	else if (W == r_hand)
 		r_hand = null
 		if(l_hand)
-			l_hand.update_held_icon()
+			l_hand.update_twohanding()
 			update_inv_l_hand()
 		update_inv_r_hand()
 	else if (W == l_hand)
 		l_hand = null
 		if(r_hand)
-			r_hand.update_held_icon()
+			r_hand.update_twohanding()
 			update_inv_l_hand()
 		update_inv_l_hand()
 	else
@@ -361,28 +361,21 @@ This saves us from having to call add_fingerprint() any time something is put in
 	return ..()
 
 /mob/living/carbon/human/get_equipped_items(var/include_carried = 0)
-	var/list/items = new/list()
-
-	if(back) items += back
-	if(belt) items += belt
-	if(l_ear) items += l_ear
-	if(r_ear) items += r_ear
-	if(glasses) items += glasses
-	if(gloves) items += gloves
-	if(head) items += head
-	if(shoes) items += shoes
-	if(wear_id) items += wear_id
-	if(wear_mask) items += wear_mask
-	if(wear_suit) items += wear_suit
-	if(w_uniform) items += w_uniform
+	. = ..()
+	if(belt) . += belt
+	if(l_ear) . += l_ear
+	if(r_ear) . += r_ear
+	if(glasses) . += glasses
+	if(gloves) . += gloves
+	if(head) . += head
+	if(shoes) . += shoes
+	if(wear_id) . += wear_id
+	if(wear_suit) . += wear_suit
+	if(w_uniform) . += w_uniform
 
 	if(include_carried)
-		if(slot_l_hand)     items += l_hand
-		if(slot_r_hand)     items += r_hand
-		if(slot_l_store)    items += l_store
-		if(slot_r_store)    items += r_store
-		if(slot_legcuffed)  items += legcuffed
-		if(slot_handcuffed) items += handcuffed
-		if(slot_s_store)    items += s_store
-
-	return items
+		if(slot_l_store)    . += l_store
+		if(slot_r_store)    . += r_store
+		if(slot_legcuffed)  . += legcuffed
+		if(slot_handcuffed) . += handcuffed
+		if(slot_s_store)    . += s_store

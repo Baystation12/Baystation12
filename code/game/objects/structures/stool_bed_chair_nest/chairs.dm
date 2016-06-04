@@ -124,9 +124,6 @@
 	anchored = 0
 	buckle_movable = 1
 
-/obj/structure/bed/chair/office/update_icon()
-	return
-
 /obj/structure/bed/chair/office/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
 		return
@@ -173,25 +170,18 @@
 		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
 /obj/structure/bed/chair/office/light
-	icon_state = "officechair_white"
+	base_icon = "officechair_white"
+	icon_state = "officechair_white_preview"
 
 /obj/structure/bed/chair/office/dark
-	icon_state = "officechair_dark"
-
-/obj/structure/bed/chair/office/New()
-	..()
-	var/image/I = image(icon, "[icon_state]_over")
-	I.layer = FLY_LAYER
-	overlays += I
+	base_icon = "officechair_dark"
+	icon_state = "officechair_dark_preview"
 
 // Chair types
 /obj/structure/bed/chair/wood
-	name = "wooden chair"
 	desc = "Old is never too old to not be in fashion."
-	icon_state = "wooden_chair"
-
-/obj/structure/bed/chair/wood/update_icon()
-	return
+	base_icon = "wooden_chair"
+	icon_state = "wooden_chair_preview"
 
 /obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
@@ -200,9 +190,7 @@
 
 /obj/structure/bed/chair/wood/New(var/newloc)
 	..(newloc, "wood")
-	var/image/I = image(icon, "[icon_state]_over")
-	I.layer = FLY_LAYER
-	overlays += I
 
 /obj/structure/bed/chair/wood/wings
-	icon_state = "wooden_chair_wings"
+	base_icon = "wooden_chair_wings"
+	icon_state = "wooden_chair_wings_preview"

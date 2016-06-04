@@ -3,8 +3,15 @@
 
 ///Process_Grab()
 ///Called by client/Move()
-///Checks to see if you are grabbing anything and if moving will affect your grab.
+///Checks to see if you are grabbing or being grabbed by anything and if moving will affect your grab.
 /client/proc/Process_Grab()
+	//if we are being grabbed
+	if(isliving(mob))
+		var/mob/living/L = mob
+		if(!L.canmove && L.grabbed_by.len)
+			L.resist() //shortcut for resisting grabs
+
+	//if we are grabbing someone
 	for(var/obj/item/weapon/grab/G in list(mob.l_hand, mob.r_hand))
 		G.reset_kill_state() //no wandering across the station/asteroid while choking someone
 
@@ -27,7 +34,7 @@
 	layer = 21
 	abstract = 1
 	item_state = "nothing"
-	w_class = 5.0
+	simulated = 0
 
 
 /obj/item/weapon/grab/New(mob/user, mob/victim)
@@ -56,6 +63,9 @@
 				G.adjust_position()
 				dancing = 1
 	adjust_position()
+
+/obj/item/weapon/grab/get_storage_cost()
+	return DO_NOT_STORE
 
 //Used by throw code to hand over the mob, instead of throwing the grab. The grab is then deleted by the throw code.
 /obj/item/weapon/grab/proc/throw_held()
@@ -126,7 +136,7 @@
 			handle_eye_mouth_covering(affecting, assailant, assailant.zone_sel.selecting)
 
 		if(force_down)
-			if(affecting.loc != assailant.loc)
+			if(affecting.loc != assailant.loc || size_difference(affecting, assailant) > 0)
 				force_down = 0
 			else
 				affecting.Weaken(2)
@@ -230,7 +240,7 @@
 	if(state < GRAB_AGGRESSIVE)
 		if(!allow_upgrade)
 			return
-		if(!affecting.lying)
+		if(!affecting.lying || size_difference(affecting, assailant) > 0)
 			assailant.visible_message("<span class='warning'>[assailant] has grabbed [affecting] aggressively (now hands)!</span>")
 		else
 			assailant.visible_message("<span class='warning'>[assailant] pins [affecting] down to the ground (now hands)!</span>")
@@ -326,6 +336,7 @@
 			qdel(src)
 
 /obj/item/weapon/grab/dropped()
+	..()
 	loc = null
 	if(!destroying)
 		qdel(src)
@@ -335,6 +346,40 @@
 		assailant.visible_message("<span class='warning'>[assailant] lost \his tight grip on [affecting]'s neck!</span>")
 		hud.icon_state = "kill"
 		state = GRAB_NECK
+
+/obj/item/weapon/grab/proc/handle_resist()
+	var/grab_name
+	var/break_strength = 1
+	var/list/break_chance_table = list(100)
+	switch(state)
+		//if(GRAB_PASSIVE)
+
+		if(GRAB_AGGRESSIVE)
+			grab_name = "grip"
+			//Being knocked down makes it harder to break a grab, so it is easier to cuff someone who is down without forcing them into unconsciousness.
+			if(!affecting.incapacitated(INCAPACITATION_KNOCKDOWN))
+				break_strength++
+			break_chance_table = list(15, 60, 100)
+
+		if(GRAB_NECK)
+			grab_name = "headlock"
+			//If the you move when grabbing someone then it's easier for them to break free. Same if the affected mob is immune to stun.
+			if(world.time - assailant.l_move_time < 30 || !affecting.stunned)
+				break_strength++
+			break_chance_table = list(3, 18, 45, 100)
+
+	//It's easier to break out of a grab by a smaller mob
+	break_strength += max(size_difference(affecting, assailant), 0)
+
+	var/break_chance = break_chance_table[Clamp(break_strength, 1, break_chance_table.len)]
+	if(prob(break_chance))
+		if(grab_name)
+			affecting.visible_message("<span class='warning'>[affecting] has broken free of [assailant]'s [grab_name]!</span>")
+		qdel(src)
+
+//returns the number of size categories between affecting and assailant, rounded. Positive means A is larger than B
+/obj/item/weapon/grab/proc/size_difference(mob/A, mob/B)
+	return round(log(2, A.mob_size/B.mob_size), 1)
 
 /obj/item/weapon/grab
 	var/destroying = 0

@@ -23,7 +23,7 @@
 				new /obj/item/clothing/suit/space/syndicate(src)
 				new /obj/item/clothing/head/helmet/space/syndicate(src)
 				new /obj/item/clothing/mask/gas/syndicate(src)
-				new /obj/item/weapon/tank/emergency_oxygen/double(src)
+				new /obj/item/weapon/tank/emergency/oxygen/double(src)
 				return
 
 			if("guns")
@@ -60,7 +60,7 @@
 				new /obj/item/clothing/suit/space/syndicate(src)
 				new /obj/item/clothing/head/helmet/space/syndicate(src)
 				new /obj/item/clothing/mask/gas/syndicate(src)
-				new /obj/item/weapon/tank/emergency_oxygen/double(src)
+				new /obj/item/weapon/tank/emergency/oxygen/double(src)
 				new /obj/item/weapon/card/emag(src)
 				return
 
@@ -134,7 +134,7 @@
 		/obj/item/clothing/suit/space/syndicate,
 		/obj/item/clothing/head/helmet/space/syndicate,
 		/obj/item/clothing/mask/gas/syndicate,
-		/obj/item/weapon/tank/emergency_oxygen/double,
+		/obj/item/weapon/tank/emergency/oxygen/double,
 		)
 
 // Chameleon uplink kit
@@ -218,31 +218,30 @@
 	..()
 	var/obj/item/weapon/storage/fancy/cigarettes/pack
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list("aluminum" = 5, "potassium" = 5, "sulfur" = 5))
+	fill_cigarre_package(pack, list("aluminum" = 1, "potassium" = 1, "sulfur" = 1))
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list("aluminum" = 5, "potassium" = 5, "sulfur" = 5))
+	fill_cigarre_package(pack, list("aluminum" = 1, "potassium" = 1, "sulfur" = 1))
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list("potassium" = 5, "sugar" = 5, "phosphorus" = 5))
+	fill_cigarre_package(pack, list("potassium" = 1, "sugar" = 1, "phosphorus" = 1))
 	pack.desc += " 'S' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list("potassium" = 5, "sugar" = 5, "phosphorus" = 5))
+	fill_cigarre_package(pack, list("potassium" = 1, "sugar" = 1, "phosphorus" = 1))
 	pack.desc += " 'S' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	// Dylovene. Going with 1.5 rather than 1.6666666...
-	fill_cigarre_package(pack, list("potassium" = 1.5, "nitrogen" = 1.5, "silicon" = 1.5))
+	fill_cigarre_package(pack, list("potassium" = 1, "nitrogen" = 1, "silicon" = 1))
 	// Mindbreaker
-	fill_cigarre_package(pack, list("silicon" = 4.5, "hydrogen" = 4.5))
+	fill_cigarre_package(pack, list("silicon" = 1.5, "hydrogen" = 1.5))
 
 	pack.desc += " 'MB' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	pack.reagents.add_reagent("tricordrazine", 15 * pack.storage_slots)
+	fill_cigarre_package(pack, list("tricordrazine" = 4))
 	pack.desc += " 'T' has been scribbled on it."
 
 	new /obj/item/weapon/flame/lighter/zippo(src)

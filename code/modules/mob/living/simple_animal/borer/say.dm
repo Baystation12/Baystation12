@@ -16,8 +16,6 @@
 		if(client.prefs.muted & MUTE_IC)
 			src << "\red You cannot speak in IC (muted)."
 			return
-		if (src.client.handle_spam_prevention(message,MUTE_IC))
-			return
 
 	if (copytext(message, 1, 2) == "*")
 		return emote(copytext(message, 2))

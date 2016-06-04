@@ -13,4 +13,8 @@
 	req_access = list(access_cent_specops)
 	shuttle_tag = "Rescue"
 
+/obj/machinery/computer/shuttle_control/multi/ninja
+	name = "stealth shuttle control console"
+	req_access = list(access_syndicate)
+	shuttle_tag = "Ninja"
 

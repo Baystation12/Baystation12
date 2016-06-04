@@ -14,7 +14,7 @@
 	if(mind && mind.current == src)
 		spellremove(src)
 	ghostize()
-	..()
+	. = ..()
 
 /mob/proc/remove_screen_obj_references()
 	flash = null
@@ -755,10 +755,6 @@
 				if(buckled.buckle_movable)
 					anchored = 0
 					canmove = 1
-		else if(captured)
-			anchored = 1
-			canmove = 0
-			lying = 0
 		else
 			lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 			canmove = !incapacitated(INCAPACITATION_DISABLED)

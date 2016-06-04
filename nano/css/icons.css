@@ -181,6 +181,7 @@
 .uiIcon16.icon-radio-off { background-position: -112px -144px; }
 .uiIcon16.icon-pin-w { background-position: -128px -144px; }
 .uiIcon16.icon-pin-s { background-position: -144px -144px; }
+.uiIcon16.icon-syringe { background-position: -192px -144px; }
 .uiIcon16.icon-play { background-position: 0 -160px; }
 .uiIcon16.icon-pause { background-position: -16px -160px; }
 .uiIcon16.icon-seek-next { background-position: -32px -160px; }
@@ -229,6 +230,7 @@
 .uiIcon16.icon-batt_full { background-image: url(c_max.gif); background-position: 0px 0px }
 .uiIcon16.icon-batt_disc { background-image: url(c_discharging.gif); background-position: 0px 0px }
 .uiIcon16.icon-batt_chrg { background-image: url(c_charging.gif); background-position: 0px 0px }
+.uiIcon16.icon-close64 { background-image: url(uiIcons64.png); background-position: -128px -64px; width: 64px; height: 64px; }
 
 .mapIcon16 {
     position: absolute;

@@ -34,7 +34,7 @@ FLOOR SAFES
 	for(var/obj/item/I in loc)
 		if(space >= maxspace)
 			return
-		if(I.w_class + space <= maxspace)
+		if(I.w_class + space <= maxspace) //todo replace with internal storage or something
 			space += I.w_class
 			I.loc = src
 

@@ -35,7 +35,7 @@
 	siemens_coefficient = 0.2
 
 	flags = NO_SCAN | NO_MINOR_CUT
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = IS_WHITELISTED
 	appearance_flags = HAS_EYE_COLOR
 
 	blood_color = "#2299FC"
@@ -90,12 +90,10 @@
 	H.internals.icon_state = "internal1"
 
 
-/datum/species/vox/get_station_variant()
-	return "Vox Pariah"
 
-// Joining as a station vox will give you this template, hence IS_RESTRICTED flag.
 /datum/species/vox/pariah
 	name = "Vox Pariah"
+	//blurb = "TODO Vox Pariah specific blurb."
 	rarity_value = 0.1
 	speech_chance = 60        // No volume control.
 	siemens_coefficient = 0.5 // Ragged scaleless patches.
@@ -117,8 +115,12 @@
 		"brain" =    /obj/item/organ/pariah_brain,
 		"eyes" =     /obj/item/organ/eyes
 		)
-	flags = IS_RESTRICTED | NO_SCAN
-	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
+	spawn_flags = IS_WHITELISTED | CAN_JOIN
+	flags = NO_SCAN
+	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR //so pariah can change their hair colour but regular vox can't?
+
+/datum/species/vox/pariah/get_bodytype()
+	return "Vox"
 
 // No combat skills for you.
 /datum/species/vox/pariah/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
@@ -148,6 +150,3 @@
 			M << "<span class='danger'>A terrible stench emanates from \the [H].</span>"
 	if(prob(1) && prob(50)) //0.5% chance
 		H.vomit()
-
-/datum/species/vox/pariah/get_bodytype()
-	return "Vox"

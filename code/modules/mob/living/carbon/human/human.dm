@@ -63,7 +63,7 @@
 			if(eta_status)
 				stat(null, eta_status)
 
-		if (internal)
+		if (istype(internal))
 			if (!internal.air_contents)
 				qdel(internal)
 			else
@@ -944,10 +944,8 @@
 
 /mob/living/carbon/human/proc/rupture_lung()
 	var/obj/item/organ/lungs/L = internal_organs_by_name["lungs"]
-
-	if(L && !L.is_bruised())
-		src.custom_pain("You feel a stabbing pain in your chest!", 1)
-		L.bruise()
+	if(L)
+		L.rupture()
 
 /*
 /mob/living/carbon/human/verb/simulate()
@@ -1042,7 +1040,7 @@
 					src << msg
 
 				organ.take_damage(rand(1,3), 0, 0)
-				if(!(organ.status & ORGAN_ROBOT) && !(species.flags & NO_BLOOD)) //There is no blood in protheses.
+				if(!(organ.robotic >= ORGAN_ROBOT) && !(species.flags & NO_BLOOD)) //There is no blood in protheses.
 					organ.status |= ORGAN_BLEEDING
 					src.adjustToxLoss(rand(1,3))
 
@@ -1223,7 +1221,7 @@
 		user << "<span class='warning'>They are missing that limb.</span>"
 		return 0
 
-	if(affecting.status & ORGAN_ROBOT)
+	if(affecting.robotic >= ORGAN_ROBOT)
 		user << "<span class='warning'>That limb is robotic.</span>"
 		return 0
 
@@ -1334,14 +1332,12 @@
 	var/list/limbs = list()
 	for(var/limb in organs_by_name)
 		var/obj/item/organ/external/current_limb = organs_by_name[limb]
-		if(current_limb && current_limb.dislocated == 2)
-			limbs |= limb
-	var/choice = input(usr,"Which joint do you wish to relocate?") as null|anything in limbs
+		if(current_limb && current_limb.dislocated > 0 && !current_limb.is_parent_dislocated()) //if the parent is also dislocated you will have to relocate that first
+			limbs |= current_limb
+	var/obj/item/organ/external/current_limb = input(usr,"Which joint do you wish to relocate?") as null|anything in limbs
 
-	if(!choice)
+	if(!current_limb)
 		return
-
-	var/obj/item/organ/external/current_limb = organs_by_name[choice]
 
 	if(self)
 		src << "<span class='warning'>You brace yourself to relocate your [current_limb.joint]...</span>"
@@ -1350,7 +1346,7 @@
 
 	if(!do_after(U, 30, src))
 		return
-	if(!choice || !current_limb || !S || !U)
+	if(!current_limb || !S || !U)
 		return
 
 	if(self)
@@ -1465,8 +1461,8 @@
 		return PULSE_NONE
 	else
 		return H.pulse
-		
-/mob/living/carbon/human/can_devour(mob/victim)		
+
+/mob/living/carbon/human/can_devour(mob/victim)
 	if(src.species.gluttonous && (iscarbon(victim) || isanimal(victim)))
 		if(src.species.gluttonous == GLUT_TINY && (victim.mob_size <= MOB_TINY) && !ishuman(victim)) // Anything MOB_TINY or smaller
 			return DEVOUR_SLOW
@@ -1474,5 +1470,5 @@
 			return DEVOUR_SLOW
 		else if(src.species.gluttonous == GLUT_ANYTHING) // Eat anything ever
 			return DEVOUR_FAST
-	
+
 	..()

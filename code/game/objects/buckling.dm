@@ -22,7 +22,9 @@
 
 
 /obj/proc/buckle_mob(mob/living/M)
-	if(!can_buckle || !istype(M) || (M.loc != loc) || M.buckled || M.pinned.len || (buckle_require_restraints && !M.restrained()))
+	if(buckled_mob) //unless buckled_mob becomes a list this can cause problems
+		return 0
+	if(!istype(M) || (M.loc != loc) || M.buckled || M.pinned.len || (buckle_require_restraints && !M.restrained()))
 		return 0
 
 	M.buckled = src
@@ -49,20 +51,26 @@
 	return
 
 /obj/proc/user_buckle_mob(mob/living/M, mob/user)
-	if(!ticker)
+	if(!ticker) //why do we need to check this?
 		user << "<span class='warning'>You can't buckle anyone in before the game starts.</span>"
+		return 0
 	if(!user.Adjacent(M) || user.restrained() || user.lying || user.stat || istype(user, /mob/living/silicon/pai))
-		return
+		return 0
 	if(M == buckled_mob)
-		return
+		return 0
 	if(istype(M, /mob/living/carbon/slime))
 		user << "<span class='warning'>The [M] is too squishy to buckle in.</span>"
-		return
+		return 0
 
 	add_fingerprint(user)
 	unbuckle_mob()
 
-	if(buckle_mob(M))
+	//can't buckle unless you share locs so try to move M to the obj.
+	if(M.loc != src.loc)
+		step_towards(M, src)
+
+	. = buckle_mob(M)
+	if(.)
 		if(M == user)
 			M.visible_message(\
 				"<span class='notice'>[M.name] buckles themselves to [src].</span>",\

@@ -40,7 +40,7 @@
 	if(!isGlass || !smash_duration)
 		return 0
 
-	var/list/chance_table = list(90, 90, 85, 85, 60, 35, 15) //starting from distance 0
+	var/list/chance_table = list(95, 95, 90, 85, 75, 55, 35) //starting from distance 0
 	var/idx = max(distance + 1, 1) //since list indices start at 1
 	if(idx > chance_table.len)
 		return 0
@@ -189,6 +189,15 @@
 	New()
 		..()
 		reagents.add_reagent("whiskey", 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey
+	name = "Special Blend Whiskey"
+	desc = "Just when you thought regular station whiskey was good... This silky, amber goodness has to come along and ruin everything."
+	icon_state = "whiskeybottle2"
+	center_of_mass = list("x"=16, "y"=3)
+	New()
+		..()
+		reagents.add_reagent("specialwhiskey", 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/vodka
 	name = "Tunguska Triple Distilled"

@@ -13,10 +13,21 @@
 /obj/item/weapon/storage/fancy
 	item_state = "syringe_kit" //placeholder, many of these don't have inhands
 	var/obj/item/key_type //path of the key item that this "fancy" container is meant to store
+	var/opened = 0 //if an item has been removed from this container
+
+/obj/item/weapon/storage/fancy/remove_from_storage()
+	. = ..()
+	if(!opened && .)
+		opened = 1
+		update_icon()
+
 
 /obj/item/weapon/storage/fancy/update_icon()
-	var/key_count = count_by_type(contents, key_type)
-	src.icon_state = "[initial(icon_state)][key_count]"
+	if(!opened)
+		src.icon_state = initial(icon_state)
+	else
+		var/key_count = count_by_type(contents, key_type)
+		src.icon_state = "[initial(icon_state)][key_count]"
 
 /obj/item/weapon/storage/fancy/examine(mob/user)
 	if(!..(user, 1))
@@ -59,6 +70,7 @@
 	desc = "A pack of red candles."
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candlebox"
+	opened = 1 //no closed state
 	throwforce = 2
 	w_class = 2
 	max_w_class = 1
@@ -119,7 +131,7 @@
 /obj/item/weapon/storage/fancy/cigarettes/New()
 	..()
 	flags |= NOREACT
-	create_reagents(15 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
+	create_reagents(5 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 	flags |= OPENCONTAINER
 
 /obj/item/weapon/storage/fancy/cigarettes/remove_from_storage(obj/item/W as obj, atom/new_location)
@@ -154,7 +166,7 @@
 		remove_from_storage(cig, null)
 		user.equip_to_slot(cig, slot_wear_mask)
 
-		reagents.maximum_volume = 15 * contents.len
+		reagents.maximum_volume = 5 * contents.len
 		user << "<span class='notice'>You take a cigarette out of the pack.</span>"
 		update_icon()
 	else
@@ -169,11 +181,10 @@
 	name = "\improper AcmeCo packet"
 	desc = "A packet of six AcmeCo cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
 	icon_state = "Bpacket"
-	//item_state = "Bpacket" //Doesn't have an inhand state, but neither does dromedary, so, ya know.. So don't set one, use the default.
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat/New()
 	..()
-	fill_cigarre_package(src,list("fuel" = 15))
+	fill_cigarre_package(src,list("fuel" = 4))
 
 /obj/item/weapon/storage/fancy/cigar
 	name = "cigar case"
@@ -194,7 +205,7 @@
 /obj/item/weapon/storage/fancy/cigar/New()
 	..()
 	flags |= NOREACT
-	create_reagents(15 * storage_slots)
+	create_reagents(10 * storage_slots)
 
 /obj/item/weapon/storage/fancy/cigar/remove_from_storage(obj/item/W as obj, atom/new_location)
 		var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W

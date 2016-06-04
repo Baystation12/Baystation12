@@ -77,7 +77,7 @@
 	if(H == user)	//can't look into your own eyes buster
 		return
 
-	if(!(vision.robotic == 2 || (vision.status & ORGAN_ROBOT))) //why the hell are there two ways of specifying this?
+	if(vision.robotic < ORGAN_ROBOT )
 
 		if(vision.owner.stat == DEAD || H.blinded)	//mob is dead or fully blind
 			user << "<span class='warning'>\The [H]'s pupils do not react to the light!</span>"
@@ -129,7 +129,7 @@
 	icon_state = "lamp"
 	item_state = "lamp"
 	brightness_on = 5
-	w_class = 4
+	w_class = 5
 	flags = CONDUCT
 
 	on = 1

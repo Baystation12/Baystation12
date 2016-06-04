@@ -25,6 +25,8 @@
 		if(M.stat == DEAD)
 			user << "[name] can only transform living targets."
 			continue
+		if(M.buckled)
+			M.buckled.unbuckle_mob()
 		var/new_mob = pick(possible_transformations)
 
 		var/mob/living/trans = new new_mob(get_turf(M))
@@ -62,7 +64,9 @@
 					qdel(M)
 					return
 				if(share_damage)
-					M.adjustBruteLoss(M.maxHealth - round(M.maxHealth*(trans.health/trans.maxHealth))) //basically I want the % hp to be the same afterwards
+					var/damage = M.maxHealth - round(M.maxHealth*(trans.health/trans.maxHealth))
+					for(var/i in 1 to ceil(damage/10))
+						M.adjustBruteLoss(10) //Spreads the damage out, rather than putting it on one limb only.
 				if(trans.mind)
 					trans.mind.transfer_to(M)
 				else
@@ -77,15 +81,17 @@
 	feedback = "BP"
 	possible_transformations = list(/mob/living/simple_animal/lizard,/mob/living/simple_animal/mouse,/mob/living/simple_animal/corgi)
 
-
+	share_damage = 0
 	invocation = "Yo'balada!"
 	invocation_type = SpI_SHOUT
 	spell_flags = NEEDSCLOTHES | SELECTABLE
 	range = 3
 	duration = 150 //15 seconds.
-	cooldown_min = 300 //30 seconds
+	cooldown_min = 200 //20 seconds
 
 	level_max = list(Sp_TOTAL = 2, Sp_SPEED = 2, Sp_POWER = 2)
+
+	newVars = list("health" = 50, "maxHealth" = 50)
 
 	hud_state = "wiz_poly"
 
@@ -99,11 +105,13 @@
 	return "Your target will now stay in their polymorphed form for [duration/10] seconds."
 
 /spell/targeted/shapeshift/avian
-	name = "Avian Form"
+	name = "Polymorph"
 	desc = "This spell transforms the wizard into the common parrot."
 	feedback = "AV"
 	possible_transformations = list(/mob/living/simple_animal/parrot)
 
+	drop_items = 0
+	share_damage = 0
 	invocation = "Poli'crakata!"
 	invocation_type = SpI_SHOUT
 	spell_flags = INCLUDEUSER
@@ -128,6 +136,8 @@
 	charge_max = 1200
 	cooldown_min = 600
 
+	drop_items = 0
+	share_damage = 0
 	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 2, Sp_POWER = 2)
 
 	newVars = list("name" = "corrupted soul")

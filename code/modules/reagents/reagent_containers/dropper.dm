@@ -50,7 +50,7 @@
 							safe_thing = victim.glasses
 
 					if(safe_thing)
-						trans = reagents.trans_to_obj(safe_thing, amount_per_transfer_from_this)
+						trans = reagents.splash(safe_thing, amount_per_transfer_from_this, max_spill=30)
 						user.visible_message("<span class='warning'>[user] tries to squirt something into [target]'s eyes, but fails!</span>", "<span class='notice'>You transfer [trans] units of the solution.</span>")
 						return
 
@@ -60,14 +60,15 @@
 				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to squirt [M.name] ([M.key]). Reagents: [contained]</font>")
 				msg_admin_attack("[user.name] ([user.ckey]) squirted [M.name] ([M.key]) with [name]. Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
-				trans = reagents.trans_to_mob(target, reagents.total_volume, CHEM_INGEST)
+				trans += reagents.splash(target, reagents.total_volume/2, max_spill=30)
+				trans += reagents.trans_to_mob(target, reagents.total_volume/2, CHEM_BLOOD) //I guess it gets into the bloodstream through the eyes or something
 				user.visible_message("<span class='warning'>[user] squirts something into [target]'s eyes!</span>", "<span class='notice'>You transfer [trans] units of the solution.</span>")
 
 
 				return
 
 			else
-				trans = reagents.trans_to(target, amount_per_transfer_from_this) //sprinkling reagents on generic non-mobs
+				trans = reagents.splash(target, amount_per_transfer_from_this, max_spill=30) //sprinkling reagents on generic non-mobs
 				user << "<span class='notice'>You transfer [trans] units of the solution.</span>"
 
 		else // Taking from something

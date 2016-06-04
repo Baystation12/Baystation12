@@ -825,6 +825,7 @@
 	else
 		src.log_message("Attacked by [W]. Attacker - [user]")
 
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(deflect_hit(is_melee=1))
 			user << "<span class='danger'>\The [W] bounces off [src.name].</span>"
 			src.log_append_to_last("Armor saved.")
@@ -1724,11 +1725,8 @@
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
 	return 1
 
-/obj/mecha/Entered(var/atom/movable/AM, var/atom/old_loc, var/special_event)
-	if(MOVED_DROP == special_event)
-		dropped_items |= AM
-		return ..(AM, old_loc, 0)
-	return ..()
+/obj/mecha/onDropInto(var/atom/movable/AM)
+	dropped_items |= AM
 
 //////////////////////////////////////////
 ////////  Mecha global iterators  ////////

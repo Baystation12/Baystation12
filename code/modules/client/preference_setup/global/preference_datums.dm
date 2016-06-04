@@ -144,6 +144,12 @@ var/list/_client_preferences_by_type
 	enabled_description = "Primary"
 	disabled_description = "All"
 
+/datum/client_preference/browser_style
+	description = "Fake NanoUI Browser Style"
+	key = "BROWSER_STYLED"
+	enabled_description = "Fancy"
+	disabled_description = "Plain"
+
 /********************
 * Admin Preferences *
 ********************/
@@ -171,6 +177,12 @@ var/list/_client_preferences_by_type
 	enabled_description = "Show"
 	disabled_description = "Hide"
 	enabled_by_default = FALSE
+
+/datum/client_preference/holder/show_rlooc
+	description ="Remote LOOC chat"
+	key = "CHAT_RLOOC"
+	enabled_description = "Show"
+	disabled_description = "Hide"
 
 /********************
 * Debug Preferences *

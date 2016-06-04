@@ -50,7 +50,7 @@
 /obj/item/weapon/gun/energy/crossbow/largecrossbow
 	name = "energy crossbow"
 	desc = "A weapon favored by mercenary infiltration teams."
-	w_class = 4
+	w_class = 5
 	force = 10
 	requires_two_hands = 1
 	matter = list(DEFAULT_WALL_MATERIAL = 200000)

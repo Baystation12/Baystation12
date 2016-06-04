@@ -17,7 +17,7 @@
 			return 0
 		if (affected.is_stump())
 			return 0
-		if (affected.status & ORGAN_ROBOT)
+		if (affected.robotic >= ORGAN_ROBOT)
 			return 0
 		return 1
 

@@ -25,6 +25,8 @@
  */
 
 
+#define MAX_UNIT_TEST_RUN_TIME 2 MINUTES
+
 var/all_unit_tests_passed = 1
 var/failed_unit_tests = 0
 var/skipped_unit_tests = 0
@@ -33,11 +35,20 @@ var/currently_running_tests = 0
 
 // For console out put in Linux/Bash makes the output green or red.
 // Should probably only be used for unit tests/Travis since some special folks use winders to host servers.
+// if you want plain output, use dm.sh -DUNIT_TEST -DUNIT_TEST_PLAIN baystation12.dme
+#ifdef UNIT_TEST_PLAIN
+var/ascii_esc = ""
+var/ascii_red = ""
+var/ascii_green = ""
+var/ascii_yellow = ""
+var/ascii_reset = ""
+#else
 var/ascii_esc = ascii2text(27)
 var/ascii_red = "[ascii_esc]\[31m"
 var/ascii_green = "[ascii_esc]\[32m"
 var/ascii_yellow = "[ascii_esc]\[33m"
 var/ascii_reset = "[ascii_esc]\[0m"
+#endif
 
 
 // We list these here so we can remove them from the for loop running this.
@@ -86,6 +97,15 @@ proc/load_unit_test_changes()
 
 
 proc/initialize_unit_tests()
+	#ifndef UNIT_TEST_COLOURED
+	if(world.system_type != UNIX) // Not a Unix/Linux/etc system, we probably don't want to print color escapes (unless UNIT_TEST_COLOURED was defined to force escapes)
+		ascii_esc = ""
+		ascii_red = ""
+		ascii_green = ""
+		ascii_yellow = ""
+		ascii_reset = ""
+	#endif
+
 	log_unit_test("Initializing Unit Testing")
 
 	//
@@ -135,6 +155,8 @@ proc/initialize_unit_tests()
 
 	log_unit_test("Testing Started.")
 
+	var/end_unit_tests = world.time + MAX_UNIT_TEST_RUN_TIME
+
 	for (var/test in test_datums)
 		var/datum/unit_test/d = new test()
 
@@ -142,19 +164,39 @@ proc/initialize_unit_tests()
 			d.pass("[ascii_red]Check Disabled: [d.why_disabled]")
 			continue
 
+		total_unit_tests++
+		started_tests.Add(d)
+
+		if(world.time > end_unit_tests)
+			d.fail("Unit Tests Ran out of time")   // This should never happen, and if it does either fix your unit tests to be faster or if you can make them async checks.
+			continue
+
 		if(isnull(d.start_test()))		// Start the test.
 			d.fail("Test Runtimed")
+			continue
 		if(d.async)				// If it's async then we'll need to check back on it later.
 			async_test.Add(d)
-		total_unit_tests++
 
 	//
 	// Check the async tests to see if they are finished.
 	//
 
 	while(async_test.len)
+		
 		for(var/datum/unit_test/test  in async_test)
-			if(test.check_result())
+
+			if(world.time > end_unit_tests)
+				test.fail("Unit Tests Ran out of Time")  // If we're going to run out of time, most likely it's here.  If you can't speed up your unit tests then add time to the timeout at the top.
+				async_test.Remove(test)
+				continue
+
+			var/result = test.check_result()	// Run the async check and store the return	
+
+			if(isnull(result))
+				test.fail("Test Runtimed")
+				async_test.Remove(test)
+				continue
+			if(result)				// 0 Means come back, 1 means we got results so move on.
 				async_test.Remove(test)
 		sleep(1)
 
@@ -197,3 +239,5 @@ proc/initialize_unit_tests()
 
 	log_and_message_admins("has started the unit test '[initial(unit_test_type.name)]'")
 	run_unit_tests(list(unit_test_type), FALSE)
+
+#undef MAX_UNIT_TEST_RUN_TIME

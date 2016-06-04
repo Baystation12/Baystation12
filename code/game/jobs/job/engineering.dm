@@ -8,7 +8,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
-	selection_color = "#ffeeaa"
+	selection_color = "#7f6e2c"
 	idtype = /obj/item/weapon/card/id/silver
 	req_admin_notify = 1
 	economic_modifier = 10
@@ -57,7 +57,7 @@
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the chief engineer"
-	selection_color = "#fff5cc"
+	selection_color = "#5b4d20"
 	economic_modifier = 5
 	minimal_player_age = 3
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics)
@@ -95,7 +95,7 @@
 	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the chief engineer"
-	selection_color = "#fff5cc"
+	selection_color = "#5b4d20"
 	economic_modifier = 5
 	minimal_player_age = 3
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_external_airlocks)

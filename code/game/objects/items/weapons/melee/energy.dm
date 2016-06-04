@@ -179,7 +179,7 @@
 	throwforce = 1  //Throwing or dropping the item deletes it.
 	throw_speed = 1
 	throw_range = 1
-	w_class = 4.0//So you can't hide it in your pocket or some such.
+	w_class = 1 //technically it's just energy or something, I dunno
 	flags = NOBLOODY
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/mob/living/creator
@@ -197,11 +197,15 @@
 	processing_objects -= src
 	..()
 
+/obj/item/weapon/melee/energy/blade/get_storage_cost()
+	return DO_NOT_STORE
+
 /obj/item/weapon/melee/energy/blade/attack_self(mob/user as mob)
 	user.drop_from_inventory(src)
 	spawn(1) if(src) qdel(src)
 
 /obj/item/weapon/melee/energy/blade/dropped()
+	..()
 	spawn(1) if(src) qdel(src)
 
 /obj/item/weapon/melee/energy/blade/process()

@@ -181,8 +181,6 @@
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
 
-/datum/species/proc/get_station_variant()
-	return name
 
 /datum/species/proc/get_bodytype()
 	return name

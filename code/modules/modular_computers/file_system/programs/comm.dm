@@ -24,6 +24,7 @@
 
 /datum/nano_module/program/comm
 	name = "Command and communications program"
+	available_to_ai = TRUE
 	var/current_status = STATE_DEFAULT
 	var/msg_line1 = ""
 	var/msg_line2 = ""
@@ -105,13 +106,15 @@
 	if(..())
 		return 1
 	var/mob/user = usr
-	var/ntn_comm = !!program.get_signal(NTNET_COMMUNICATION)
-	var/ntn_cont = !!program.get_signal(NTNET_SYSTEMCONTROL)
+	var/ntn_comm = program ? !!program.get_signal(NTNET_COMMUNICATION) : 1
+	var/ntn_cont = program ? !!program.get_signal(NTNET_SYSTEMCONTROL) : 1
 	var/datum/comm_message_listener/l = obtain_message_listener()
 	switch(href_list["action"])
 		if("sw_menu")
+			. = 1
 			current_status = text2num(href_list["target"])
 		if("announce")
+			. = 1
 			if(is_autenthicated(user) && !issilicon(usr) && ntn_comm)
 				if(user)
 					var/obj/item/weapon/card/id/id_card = user.GetIdCard()
@@ -120,17 +123,16 @@
 					crew_announcement.announcer = "Unknown"
 				if(announcment_cooldown)
 					usr << "Please allow at least one minute to pass between announcements"
-					nanomanager.update_uis(src)
-					return
+					return TRUE
 				var/input = input(usr, "Please write a message to announce to the station crew.", "Priority Announcement") as null|text
 				if(!input || !can_still_topic())
-					nanomanager.update_uis(src)
-					return
+					return 1
 				crew_announcement.Announce(input)
 				announcment_cooldown = 1
 				spawn(600)//One minute cooldown
 					announcment_cooldown = 0
 		if("message")
+			. = 1
 			if(href_list["target"] == "emagged")
 				if(program)
 					if(is_autenthicated(user) && program.computer_emagged && !issilicon(usr) && ntn_comm)
@@ -140,8 +142,7 @@
 							return
 						var/input = sanitize(input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
 						if(!input || !can_still_topic())
-							nanomanager.update_uis(src)
-							return
+							return 1
 						Syndicate_announce(input, usr)
 						usr << "<span class='notice'>Message transmitted.</span>"
 						log_say("[key_name(usr)] has made an illegal announcement: [input]")
@@ -156,12 +157,10 @@
 						return
 					if(!is_relay_online())//Contact Centcom has a check, Syndie doesn't to allow for Traitor funs.
 						usr <<"<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>"
-						nanomanager.update_uis(src)
-						return
+						return 1
 					var/input = sanitize(input("Please choose a message to transmit to [boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
 					if(!input || !can_still_topic())
-						nanomanager.update_uis(src)
-						return
+						return 1
 					Centcomm_announce(input, usr)
 					usr << "<span class='notice'>Message transmitted.</span>"
 					log_say("[key_name(usr)] has made an IA [boss_short] announcement: [input]")
@@ -169,6 +168,7 @@
 					spawn(300) //30 second cooldown
 						centcomm_message_cooldown = 0
 		if("shuttle")
+			. = 1
 			if(is_autenthicated(user) && ntn_cont)
 				if(href_list["target"] == "call")
 					var/confirm = alert("Are you sure you want to call the shuttle?", name, "No", "Yes")
@@ -179,6 +179,7 @@
 					if(confirm == "Yes" && can_still_topic())
 						cancel_call_proc(usr)
 		if("setstatus")
+			. = 1
 			if(is_autenthicated(user) && ntn_cont)
 				switch(href_list["target"])
 					if("line1")
@@ -195,8 +196,8 @@
 						post_status("alert", href_list["alert"])
 					else
 						post_status(href_list["target"])
-
 		if("setalert")
+			. = 1
 			if(is_autenthicated(user) && !issilicon(usr) && ntn_cont && ntn_comm)
 				var/current_level = text2num(href_list["target"])
 				var/confirm = alert("Are you sure you want to change alert level to [num2seclevel(current_level)]?", name, "No", "Yes")
@@ -218,6 +219,7 @@
 				usr << "You press button, but red light flashes and nothing happens." //This should never happen
 			current_status = STATE_DEFAULT
 		if("viewmessage")
+			. = 1
 			if(is_autenthicated(user) && ntn_comm)
 				current_viewing_message_id = text2num(href_list["target"])
 				for(var/list/m in l.messages)
@@ -225,18 +227,18 @@
 						current_viewing_message = m
 				current_status = STATE_VIEWMESSAGE
 		if("delmessage")
+			. = 1
 			if(is_autenthicated(user) && ntn_comm && l != global_message_listener)
 				l.Remove(current_viewing_message)
 			current_status = STATE_MESSAGELIST
 		if("printmessage")
+			. = 1
 			if(is_autenthicated(user) && ntn_comm)
 				if(program && program.computer && program.computer.nano_printer)
 					if(!program.computer.nano_printer.print_text(current_viewing_message["contents"],current_viewing_message["title"]))
 						usr << "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>"
 					else
 						program.computer.visible_message("<span class='notice'>\The [program.computer] prints out paper.</span>")
-
-	nanomanager.update_uis(src)
 
 #undef STATE_DEFAULT
 #undef STATE_MESSAGELIST
@@ -263,6 +265,15 @@ var/last_message_id = 0
 
 	for (var/datum/comm_message_listener/l in comm_message_listeners)
 		l.Add(message)
+
+	for (var/obj/machinery/modular_computer/console/preset/command/main/computer in global_modular_computers)
+		if(!(computer.stat & (BROKEN | NOPOWER)) && computer.cpu)
+			if(computer.cpu.hard_drive)
+				var/datum/computer_file/program/comm/C = locate(/datum/computer_file/program/comm) in computer.cpu.hard_drive.stored_files
+				if(C)
+					var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper(computer.loc)
+					intercept.name = message_title
+					intercept.info = message_text
 
 /datum/comm_message_listener
 	var/list/messages

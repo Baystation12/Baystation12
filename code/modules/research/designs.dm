@@ -851,7 +851,7 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/computer_hardware/nano_printer
 	sort_string = "VBAAN"
 
-// Card slot
+// Tesla Link
 /datum/design/item/modularcomponent/teslalink
 	name = "tesla link"
 	id = "teslalink"
@@ -916,6 +916,7 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/computer_hardware/battery_module/micro
 	sort_string = "VBAAU"
 
+// Processor unit
 /datum/design/item/modularcomponent/cpu/
 	name = "computer processor unit"
 	id = "cpu_normal"

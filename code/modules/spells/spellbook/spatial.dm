@@ -10,8 +10,7 @@
 	book_desc = "Movement and teleportation. Run from your problems!"
 	title = "Manual of Spatial Transportation"
 	title_desc = "Buy spells using your available spell slots. Artefacts may also be bought however their cost is permanent."
-
-	book_flags = 4
+	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE
 	max_uses = 10
 
 	spells = list(/spell/targeted/ethereal_jaunt = 				1,
@@ -32,3 +31,6 @@
 				/obj/item/weapon/magic_rock = 					1,
 				/obj/item/weapon/contract/apprentice = 			1
 				)
+
+	sacrifice_reagents = list("hyperzine")
+	sacrifice_objects = list(/obj/item/stack/telecrystal)

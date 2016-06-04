@@ -4,13 +4,13 @@
 	singular_name = "metal rod"
 	icon_state = "rods"
 	flags = CONDUCT
-	w_class = 3.0
+	w_class = 4
 	force = 9.0
 	throwforce = 15.0
 	throw_speed = 5
 	throw_range = 20
 	matter = list(DEFAULT_WALL_MATERIAL = 1875)
-	max_amount = 60
+	max_amount = 100
 	attack_verb = list("hit", "bludgeoned", "whacked")
 	lock_picking_level = 3
 

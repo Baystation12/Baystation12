@@ -200,6 +200,9 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/sunflowerseed
 	seed_type = "sunflowers"
 
+/obj/item/seeds/lavenderseed
+	seed_type = "lavender"
+
 /obj/item/seeds/brownmold
 	seed_type = "mold"
 

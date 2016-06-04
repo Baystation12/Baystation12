@@ -215,6 +215,7 @@
 			try
 				call(listener, proc_call)(arglist(args))
 			catch (var/exception/e)
+				error("[e.name] - [e.file] - [e.line]")
 				error(e.desc)
 				unregister_global(listener, proc_call)
 
@@ -230,6 +231,7 @@
 				try
 					call(listener, proc_call)(arglist(args))
 				catch (var/exception/e)
+					error("[e.name] - [e.file] - [e.line]")
 					error(e.desc)
 					unregister(source, listener, proc_call)
 

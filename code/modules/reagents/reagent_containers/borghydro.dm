@@ -65,7 +65,7 @@
 		if(!affected)
 			user << "<span class='danger'>\The [H] is missing that limb!</span>"
 			return
-		else if(affected.status & ORGAN_ROBOT)
+		else if(affected.robotic >= ORGAN_ROBOT)
 			user << "<span class='danger'>You cannot inject a robotic limb.</span>"
 			return
 

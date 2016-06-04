@@ -27,7 +27,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 		..()
 
 /obj/item/weapon/board/proc/addPiece(obj/item/I as obj, mob/user as mob, var/tile = 0)
-	if(I.w_class != 1) //only small stuff
+	if(I.w_class != TINY_ITEM) //only small stuff
 		user.show_message("<span class='warning'>\The [I] is too big to be used as a board piece.</span>")
 		return 0
 	if(num == 64)
@@ -67,39 +67,39 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 		user.unset_machine()
 		return
 
-	var/dat = "<HTML>"
-	dat += "<table border='0'>"
+	var/list/dat = list({"
+	<html><head><style type='text/css'>
+	td,td a{height:50px;width:50px}table{border-spacing:0;border:none;border-collapse:collapse}td{text-align:center;padding:0;background-repeat:no-repeat;background-position:center center}td.light{background-color:#6cf}td.dark{background-color:#544b50}td.selected{background-color:#c8dbc3}td a{display:table-cell;text-decoration:none;position:relative;line-height:50px;height:50px;width:50 px;vertical-align:middle}
+	</style></head><body><table>
+	"})
 	var i, stagger
 	stagger = 0 //so we can have the checkerboard effect
 	for(i=0, i<64, i++)
 		if(i%8 == 0)
 			dat += "<tr>"
 			stagger = !stagger
-		dat += "<td align='center' height='50' width='50' bgcolor="
 		if(selected == i)
-			dat += "'#FF8566'>"
+			dat += "<td class='selected'"
 		else if((i + stagger)%2 == 0)
-			dat += "'#66CCFF'>"
+			dat += "<td class='dark'"
 		else
-			dat += "'#252536'>"
-		if(!isobserver(user))
-			dat += "<A href='?src=\ref[src];select=[i];person=\ref[user]' style='display:block;text-decoration:none;'>"
+			dat += "<td class='light'"
+			
 		if(board["[i]"])
 			var/obj/item/I = board["[i]"]
 			user << browse_rsc(board_icons["[I.icon] [I.icon_state]"],"[I.icon_state].png")
-			dat += "<image src='[I.icon_state].png' style='border-style: none'>"
+			dat += " style='background-image:url([I.icon_state].png)'>"
 		else
-			dat += "&nbsp;"
-
+			dat+= ">"
 		if(!isobserver(user))
-			dat += "</A>"
+			dat += "<a href='?src=\ref[src];select=[i];person=\ref[user]'></a>"
 		dat += "</td>"
 
-	dat += "</table><br>"
+	dat += "</table>"
 
 	if(selected >= 0 && !isobserver(user))
 		dat += "<br><A href='?src=\ref[src];remove=0'>Remove Selected Piece</A>"
-	user << browse(dat,"window=boardgame;size=500x500")
+	user << browse(jointext(dat, null),"window=boardgame;size=430x500") // 50px * 8 squares + 30 margin
 	onclose(usr, "boardgame")
 
 /obj/item/weapon/board/Topic(href, href_list)
@@ -115,19 +115,19 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 			if(selected >= 0)
 				//check to see if clicked on tile is currently selected one
 				if(text2num(s) == selected)
-					selected = 0 //deselect it
-					return
+					selected = -1 //deselect it
+				else
 
-				if(I) //cant put items on other items.
-					return
+					if(I) //cant put items on other items.
+						return
 
-			//put item in new spot.
-				I = board["[selected]"]
-				board["[selected]"] = null
-				board -= "[selected]"
-				board -= null
-				board["[s]"] = I
-				selected = -1
+				//put item in new spot.
+					I = board["[selected]"]
+					board["[selected]"] = null
+					board -= "[selected]"
+					board -= null
+					board["[s]"] = I
+					selected = -1
 			else
 				if(I)
 					selected = text2num(s)
@@ -160,6 +160,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 			board_icons -= null
 	src.updateDialog()
 
+//Checkers
 
 /obj/item/weapon/reagent_containers/food/snacks/checker
 	name = "checker"
@@ -170,7 +171,56 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 	center_of_mass = list("x"=16, "y"=16)
 	nutriment_desc = list("a choking hazard" = 4)
 	nutriment_amt = 1
+	var/piece_color ="black"
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/New()
+	..()
+	icon_state = "[name]_[piece_color]"
+	name = "[piece_color] [name]"
 
 /obj/item/weapon/reagent_containers/food/snacks/checker/red
-	name = "red checker"
-	icon_state = "checker_red"
+	piece_color ="red"
+
+//Chess
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/pawn
+	name = "pawn"
+	desc = "How many pawns will die in your war?"
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/pawn/red
+	piece_color ="red"
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/knight
+	name = "knight"
+	desc = "The piece chess deserves, and needs to actually play."
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/knight/red
+	piece_color ="red"
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/bishop
+	name = "bishop"
+	desc = "What corruption occured, urging holy men to fight?"
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/bishop/red
+	piece_color ="red"
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/rook
+	name = "rook"
+	desc = "Representing ancient moving towers. So powerful and fast they were banned from wars, forever."
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/rook/red
+	piece_color ="red"
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/queen
+	name = "queen"
+	desc = "A queen of battle and pain. She dances across the battlefield."
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/queen/red
+	piece_color ="red"
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/king
+	name = "king"
+	desc = "Why does a chess game end when the king dies?"
+
+/obj/item/weapon/reagent_containers/food/snacks/checker/king/red
+	piece_color ="red"

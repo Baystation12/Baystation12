@@ -46,7 +46,7 @@ var/list/holder_mob_icon_cache = list()
 	if(istype(loc,/turf) || !(contents.len))
 		for(var/mob/M in contents)
 			var/atom/movable/mob_container = M
-			mob_container.forceMove(loc, MOVED_DROP)
+			mob_container.dropInto(loc)
 			M.reset_view()
 		qdel(src)
 	else if(last_holder != loc)
@@ -54,6 +54,11 @@ var/list/holder_mob_icon_cache = list()
 			register_all_movement(loc, M)
 
 	last_holder = loc
+	
+/obj/item/weapon/holder/onDropInto(var/atom/movable/AM)
+	if(ismob(loc))   // Bypass our holding mob and drop directly to its loc
+		return loc.loc
+	return ..()
 
 /obj/item/weapon/holder/GetID()
 	for(var/mob/M in contents)
@@ -129,6 +134,11 @@ var/list/holder_mob_icon_cache = list()
 
 	if(!holder_type || buckled || pinned.len)
 		return
+
+	if(self_grab)
+		if(src.incapacitated()) return
+	else
+		if(grabber.incapacitated()) return
 
 	var/obj/item/weapon/holder/H = new holder_type(get_turf(src))
 

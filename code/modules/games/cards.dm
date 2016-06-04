@@ -141,7 +141,7 @@
 		for(var/datum/playingcard/P in cards)
 			H.cards += P
 		H.concealed = src.concealed
-		user.drop_from_inventory(src,user.loc)
+		user.drop_from_inventory(src)
 		qdel(src)
 		H.update_icon()
 		return
@@ -248,6 +248,9 @@
 	else if(cards.len > 1)
 		name = "hand of cards"
 		desc = "Some playing cards."
+	else if(concealed)
+		name = "single playing card"
+		desc = "An unknown playing card, concealed."
 	else
 		var/datum/playingcard/P = cards[1]
 		name = "[P.name]"
@@ -297,6 +300,7 @@
 		i++
 
 /obj/item/weapon/hand/dropped(mob/user as mob)
+	..()
 	if(locate(/obj/structure/table, loc))
 		src.update_icon(user.dir)
 	else
