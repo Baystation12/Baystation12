@@ -637,137 +637,125 @@ proc/GaussRandRound(var/sigma,var/roundto)
 				atoms += A
 	return atoms
 
-/datum/coords //Simple datum for storing coordinates.
-	var/x_pos = null
-	var/y_pos = null
-	var/z_pos = null
-
-/area/proc/move_contents_to(var/area/A, var/turftoleave=null, var/direction = null)
+/area/proc/move_contents_to(var/area/A, var/turftoleave=null, var/direction = null, var/ignore_turf = null)
 	//Takes: Area. Optional: turf type to leave behind.
 	//Returns: Nothing.
 	//Notes: Attempts to move the contents of one area to another area.
 	//       Movement based on lower left corner. Tiles that do not fit
-	//		 into the new area will not be moved.
+	//       into the new area will not be moved.
 
 	if(!A || !src) return 0
 
 	var/list/turfs_src = get_area_turfs(src.type)
 	var/list/turfs_trg = get_area_turfs(A.type)
 
+	if(!turfs_src.len || !turfs_trg.len) return 0
+
+	//figure out a suitable origin - this assumes the shuttle areas are the exact same size and shape
+	//might be worth doing this with a shuttle core object instead of areas, in the future
 	var/src_min_x = 0
 	var/src_min_y = 0
 	for (var/turf/T in turfs_src)
 		if(T.x < src_min_x || !src_min_x) src_min_x	= T.x
 		if(T.y < src_min_y || !src_min_y) src_min_y	= T.y
 
+	var/trg_z = 0 //multilevel shuttles are not supported, unfortunately
 	var/trg_min_x = 0
 	var/trg_min_y = 0
 	for (var/turf/T in turfs_trg)
+		if(!trg_z) trg_z = T.z
 		if(T.x < trg_min_x || !trg_min_x) trg_min_x	= T.x
 		if(T.y < trg_min_y || !trg_min_y) trg_min_y	= T.y
 
-	var/list/refined_src = new/list()
-	for(var/turf/T in turfs_src)
-		refined_src += T
-		refined_src[T] = new/datum/coords
-		var/datum/coords/C = refined_src[T]
-		C.x_pos = (T.x - src_min_x)
-		C.y_pos = (T.y - src_min_y)
+	//obtain all the source turfs and their relative coords,
+	//then use that to find corresponding targets
+	for(var/turf/source in turfs_src)
+		//var/datum/coords/C = new/datum/coords
 
-	var/list/refined_trg = new/list()
-	for(var/turf/T in turfs_trg)
-		refined_trg += T
-		refined_trg[T] = new/datum/coords
-		var/datum/coords/C = refined_trg[T]
-		C.x_pos = (T.x - trg_min_x)
-		C.y_pos = (T.y - trg_min_y)
+		var/x_pos = (source.x - src_min_x)
+		var/y_pos = (source.y - src_min_y)
+		
+		var/turf/target = locate(trg_min_x + x_pos, trg_min_y + y_pos, trg_z)
+		if(!target || target.loc != A)
+			continue
 
-	var/list/fromupdate = new/list()
-	var/list/toupdate = new/list()
+		transport_turf_contents(source, target, direction)
 
-	moving:
-		for (var/turf/T in refined_src)
-			var/datum/coords/C_src = refined_src[T]
-			for (var/turf/B in refined_trg)
-				var/datum/coords/C_trg = refined_trg[B]
-				if(C_src.x_pos == C_trg.x_pos && C_src.y_pos == C_trg.y_pos)
+	//change the old turfs
+	for(var/turf/source in turfs_src)
+		if(turftoleave)
+			source.ChangeTurf(turftoleave)
+		else
+			source.ChangeTurf(get_base_turf_by_area(source))
 
-					var/old_dir1 = T.dir
-					var/old_icon_state1 = T.icon_state
-					var/old_icon1 = T.icon
-					var/old_overlays = T.overlays.Copy()
-					var/old_underlays = T.underlays.Copy()
+/turf/proc/transport_properties_from(turf/other)
+	if(!istype(other, src.type))
+		return 0
 
-					var/turf/X = B.ChangeTurf(T.type)
-					X.set_dir(old_dir1)
-					X.icon_state = old_icon_state1
-					X.icon = old_icon1 //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
-					X.overlays = old_overlays
-					X.underlays = old_underlays
+	src.set_dir(other.dir)
+	src.icon_state = other.icon_state
+	src.icon = other.icon
+	src.overlays = other.overlays.Copy()
+	src.underlays = other.underlays.Copy()
+	return 1
 
-					var/turf/simulated/ST = T
-					if(istype(ST) && ST.zone)
-						var/turf/simulated/SX = X
-						if(!SX.air)
-							SX.make_air()
-						SX.air.copy_from(ST.zone.air)
-						ST.zone.remove(ST)
+//I would name this copy_from() but we remove the other turf from their air zone for some reason
+/turf/simulated/transport_properties_from(turf/simulated/other)
+	if(!..())
+		return 0
 
-					/* Quick visual fix for some weird shuttle corner artefacts when on transit space tiles */
-					if(direction && findtext(X.icon_state, "swall_s"))
+	if(other.zone)
+		if(!src.air)
+			src.make_air()
+		src.air.copy_from(other.zone.air)
+		other.zone.remove(other)
+	return 1
 
-						// Spawn a new shuttle corner object
-						var/obj/corner = new()
-						corner.loc = X
-						corner.density = 1
-						corner.anchored = 1
-						corner.icon = X.icon
-						corner.icon_state = replacetext(X.icon_state, "_s", "_f")
-						corner.tag = "delete me"
-						corner.name = "wall"
+/proc/transport_turf_contents(turf/source, turf/target, var/direction)
 
-						// Find a new turf to take on the property of
-						var/turf/nextturf = get_step(corner, direction)
-						if(!nextturf || !istype(nextturf, /turf/space))
-							nextturf = get_step(corner, turn(direction, 180))
+	var/turf/new_turf = target.ChangeTurf(source.type)
+	new_turf.transport_properties_from(source)
 
+	/* Quick visual fix for some weird shuttle corner artefacts when on transit space tiles */
+	if(direction && findtext(new_turf.icon_state, "swall_s"))
 
-						// Take on the icon of a neighboring scrolling space icon
-						X.icon = nextturf.icon
-						X.icon_state = nextturf.icon_state
+		//TODO make shuttle corners take the appearance of the area base_turf and then apply a corner overlay, then remove the direction argument from this proc
+		// Spawn a new shuttle corner object
+		var/obj/corner = new()
+		corner.loc = new_turf
+		corner.density = 1
+		corner.anchored = 1
+		corner.icon = new_turf.icon
+		corner.icon_state = replacetext(new_turf.icon_state, "_s", "_f")
+		corner.tag = "delete me"
+		corner.name = "wall"
+
+		// Find a new turf to take on the property of
+		var/turf/nextturf = get_step(corner, direction)
+		if(!nextturf || !istype(nextturf, /turf/space))
+			nextturf = get_step(corner, turn(direction, 180))
 
 
-					for(var/obj/O in T)
+		// Take on the icon of a neighboring scrolling space icon
+		new_turf.icon = nextturf.icon
+		new_turf.icon_state = nextturf.icon_state
 
-						// Reset the shuttle corners
-						if(O.tag == "delete me")
-							X.icon = 'icons/turf/shuttle.dmi'
-							X.icon_state = replacetext(O.icon_state, "_f", "_s") // revert the turf to the old icon_state
-							X.name = "wall"
-							qdel(O) // prevents multiple shuttle corners from stacking
-							continue
-						if(!istype(O,/obj)) continue
-						O.loc = X
-					for(var/mob/M in T)
-						if(!istype(M,/mob) || isEye(M)) continue // If we need to check for more mobs, I'll add a variable
-						M.loc = X
 
-//					var/area/AR = X.loc
+	for(var/obj/O in source)
+		// Reset the shuttle corners
+		if(O.tag == "delete me")
+			new_turf.icon = 'icons/turf/shuttle.dmi'
+			new_turf.icon_state = replacetext(O.icon_state, "_f", "_s") // revert the turf to the old icon_state
+			new_turf.name = "wall"
+			qdel(O) // prevents multiple shuttle corners from stacking
+			continue
+		O.forceMove(new_turf)
 
-//					if(AR.lighting_use_dynamic)							//TODO: rewrite this code so it's not messed by lighting ~Carn
-//						X.opacity = !X.opacity
-//						X.SetOpacity(!X.opacity)
+	for(var/mob/M in source)
+		if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable
+		M.forceMove(new_turf)
 
-					toupdate += X
-
-					if(turftoleave)
-						fromupdate += T.ChangeTurf(turftoleave)
-					else
-						T.ChangeTurf(get_base_turf_by_area(T))
-
-					refined_src -= T
-					refined_trg -= B
-					continue moving
+	return new_turf
 
 
 proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
@@ -788,6 +776,12 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 					O.vars[V] = original.vars[V]
 	return O
 
+
+
+/datum/coords //Simple datum for storing coordinates.
+	var/x_pos = null
+	var/y_pos = null
+	var/z_pos = null
 
 /area/proc/copy_contents_to(var/area/A , var/platingRequired = 0 )
 	//Takes: Area. Optional: If it should copy to areas that don't have plating
