@@ -295,12 +295,15 @@ datum/objective/escape
 		if(!location)
 			return 0
 
-		if(istype(location, /turf/simulated/shuttle/floor4)) // Fails traitors if they are in the shuttle brig -- Polymorph
+/*
+		//shuttle/floor4 no longer exists, this is a really terrible way to do this anyways
+		if(istype(location, /turf/simulated/floor/shuttle/red)) // Fails traitors if they are in the shuttle brig -- Polymorph
 			if(istype(owner.current, /mob/living/carbon))
 				var/mob/living/carbon/C = owner.current
 				if (!C.handcuffed)
 					return 1
 			return 0
+*/
 
 		var/area/check_area = location.loc
 		if(istype(check_area, /area/shuttle/escape/centcom))
