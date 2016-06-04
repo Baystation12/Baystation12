@@ -149,7 +149,7 @@ var/global/list/sparring_attack_cache = list()
 						user.visible_message(pick(
 							80; "<span class='danger'>[user] [pick(attack_verb)] [target] in the head!</span>",
 							20; "<span class='danger'>[user] struck [target] in the head[pick("", " with a closed fist")]!</span>",
-							30; "<span class='danger'>[user] threw a hook against [target]'s head!</span>"
+							50; "<span class='danger'>[user] threw a hook against [target]'s head!</span>"
 							))
 					if(5)
 						user.visible_message(pick(

@@ -39,8 +39,8 @@
 				if(1 to 2) user.visible_message("<span class='danger'>[user] scratched [target] across \his cheek!</span>")
 				if(3 to 4)
 					user.visible_message(pick(
-						80; user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target]'s [pick(affecting.name, "neck")]!</span>"),
-						20; user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [pick("[target] in the [affecting.name]", "[target] across \his [affecting.name]")]!</span>"),
+						80; user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target]'s [pick("face", "neck", affecting.name)]!</span>"),
+						20; user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [pick("[target] in the [affecting.name]", "[target] across \his [pick("face", "neck", affecting.name)]")]!</span>"),
 						))
 				if(5)
 					user.visible_message(pick(
