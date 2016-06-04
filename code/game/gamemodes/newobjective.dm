@@ -274,7 +274,7 @@ datum
 				var/turf/location = get_turf(target.current.loc)
 				if(!location)
 					return 0
-				if(!target.current:handcuffed && !istype(location, /turf/simulated/shuttle/floor4))
+				if(!target.current.incapacitated(INCAPACITATION_RESTRAINED)) //might also need to check if they are in the shuttle brig, perhaps
 					return 0
 
 				if(location in locate(/area/shuttle/escape/centcom))
@@ -522,7 +522,7 @@ datum
 				if(!location)
 					return 0
 
-				if(owner.current:handcuffed || istype(location, /turf/simulated/shuttle/floor4))
+				if(target.current.incapacitated(INCAPACITATION_RESTRAINED)) //might also need to check if they are in the shuttle brig, perhaps
 					return 0
 
 				if(location in locate(/area/shuttle/escape/centcom))
