@@ -148,6 +148,7 @@
 	processing_objects.Remove(src)
 	for(var/obj/item/weapon/computer_hardware/CH in src.get_all_components())
 		uninstall_component(null, CH)
+		qdel(CH)
 	return ..()
 
 /obj/item/modular_computer/update_icon()
