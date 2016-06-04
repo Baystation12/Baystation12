@@ -417,6 +417,7 @@
 			return
 
 		P.kill_program(1)
+		update_uis()
 		user << "<span class='notice'>Program [P.filename].[P.filetype] with PID [rand(100,999)] has been killed.</span>"
 
 	if( href_list["PC_runprogram"] )
