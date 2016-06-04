@@ -80,7 +80,7 @@
 /datum/uplink_item/item/tools/ai_module
 	name = "Hacked AI Upload Module"
 	item_cost = 14
-	path = /obj/item/weapon/aiModule/syndicate
+	path = /obj/item/weapon/aiModule/freeform/hacked
 
 /datum/uplink_item/item/tools/supply_beacon
 	name = "Hacked Supply Beacon (DANGER!)"
