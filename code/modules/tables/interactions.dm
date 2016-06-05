@@ -87,7 +87,7 @@
 			if(occupied)
 				user << "<span class='danger'>There's \a [occupied] in the way.</span>"
 				return
-			if (G.state >= GRAB_AGGRESSIVE)
+			if (G.state < GRAB_AGGRESSIVE)
 				if(user.a_intent == I_HURT)
 					var/blocked = M.run_armor_check("head", "melee")
 					if (prob(30 * blocked_mult(blocked)))
