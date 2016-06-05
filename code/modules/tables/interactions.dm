@@ -106,8 +106,7 @@
 						if(prob(50))
 							M.visible_message("<span class='danger'>\The [S]'s face is cut by [M]!</span>",
 							                  "<span class='danger'>\The [S] slices into your face!</span>")
-							M.apply_damage(S.force*2, BRUTE, "head", blocked)
-							M.standard_weapon_hit_effects(S, G.assailant, 10, blocked, "head")
+							M.standard_weapon_hit_effects(S, G.assailant, S.force*2, blocked, "head") //standard weapon hit effects include damage
 				else
 					G.affecting.forceMove(src.loc)
 					G.affecting.Weaken(5)
