@@ -264,7 +264,7 @@
 	return
 
 /mob/living/proc/adjust_fire_stacks(add_fire_stacks) //Adjusting the amount of fire_stacks we have on person
-    fire_stacks = Clamp(fire_stacks + add_fire_stacks, FIRE_MIN_STACKS, FIRE_MAX_STACKS)
+	fire_stacks = Clamp(fire_stacks + add_fire_stacks, FIRE_MIN_STACKS, FIRE_MAX_STACKS)
 
 /mob/living/proc/handle_fire()
 	if(fire_stacks < 0)
@@ -284,8 +284,11 @@
 	var/turf/location = get_turf(src)
 	location.hotspot_expose(fire_burn_temperature(), 50, 1)
 
-/mob/living/fire_act()
-	adjust_fire_stacks(2)
+/mob/living/fire_act(datum/gas_mixture/air, temperature, volume)
+	//once our fire_burn_temperature has reached the temperature of the fire that's giving fire_stacks, stop adding them.
+	//allow fire_stacks to go up to 4 for fires cooler than 700 K, since are being immersed in flame after all.
+	if(fire_stacks <= 4 || fire_burn_temperature() < temperature)
+		adjust_fire_stacks(2)
 	IgniteMob()
 
 /mob/living/proc/get_cold_protection()

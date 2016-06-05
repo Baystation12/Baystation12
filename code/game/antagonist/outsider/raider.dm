@@ -74,7 +74,7 @@ var/datum/antagonist/raider/raiders
 		/obj/item/weapon/gun/energy/taser,
 		/obj/item/weapon/gun/energy/crossbow/largecrossbow,
 		/obj/item/weapon/gun/launcher/crossbow,
-		/obj/item/weapon/gun/launcher/grenade,
+		/obj/item/weapon/gun/launcher/grenade/loaded,
 		/obj/item/weapon/gun/launcher/pneumatic,
 		/obj/item/weapon/gun/projectile/automatic/mini_uzi,
 		/obj/item/weapon/gun/projectile/automatic/c20r,
@@ -283,17 +283,6 @@ var/datum/antagonist/raider/raiders
 				new bullet_thrower.ammo_type(ammobox)
 			player.put_in_any_hand_if_possible(ammobox)
 		return
-	if(istype(gun, /obj/item/weapon/gun/launcher/grenade))
-		var/list/grenades = list(
-			/obj/item/weapon/grenade/empgrenade,
-			/obj/item/weapon/grenade/smokebomb,
-			/obj/item/weapon/grenade/flashbang
-			)
-		var/obj/item/weapon/storage/box/ammobox = new(get_turf(player.loc))
-		for(var/i in 1 to 7)
-			var/grenade_type = pick(grenades)
-			new grenade_type(ammobox)
-		player.put_in_any_hand_if_possible(ammobox)
 
 /datum/antagonist/raider/proc/equip_vox(var/mob/living/carbon/human/player)
 

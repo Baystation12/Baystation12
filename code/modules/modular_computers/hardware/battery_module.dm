@@ -6,6 +6,7 @@
 	icon_state = "battery_normal"
 	critical = 1
 	malfunction_probability = 1
+	origin_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	var/battery_rating = 750
 	var/obj/item/weapon/cell/battery = null
 
@@ -13,6 +14,7 @@
 	name = "advanced battery"
 	desc = "An advanced power cell, often used in most laptops. It is too large to be fitted into smaller devices. It's rating is 1100."
 	icon_state = "battery_advanced"
+	origin_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
 	hardware_size = 2
 	battery_rating = 1100
 
@@ -20,6 +22,7 @@
 	name = "super battery"
 	desc = "A very advanced power cell, often used in high-end devices, or as uninterruptable power supply for important consoles or servers. It's rating is 1500."
 	icon_state = "battery_super"
+	origin_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 3)
 	hardware_size = 2
 	battery_rating = 1500
 
@@ -27,6 +30,7 @@
 	name = "ultra battery"
 	desc = "A very advanced large power cell. It's often used as uninterruptable power supply for critical consoles or servers. It's rating is 2000."
 	icon_state = "battery_ultra"
+	origin_tech = list(TECH_POWER = 5, TECH_ENGINEERING = 4)
 	hardware_size = 3
 	battery_rating = 2000
 
@@ -34,12 +38,14 @@
 	name = "micro battery"
 	desc = "A small power cell, commonly seen in most portable microcomputers. It's rating is 500."
 	icon_state = "battery_micro"
+	origin_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
 	battery_rating = 500
 
 /obj/item/weapon/computer_hardware/battery_module/nano
 	name = "nano battery"
 	desc = "A tiny power cell, commonly seen in low-end portable microcomputers. It's rating is 300."
 	icon_state = "battery_nano"
+	origin_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	battery_rating = 300
 
 // This is not intended to be obtainable in-game. Intended for adminbus and debugging purposes.
