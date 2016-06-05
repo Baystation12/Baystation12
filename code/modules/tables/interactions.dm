@@ -103,10 +103,10 @@
 					var/list/L = take_damage(rand(1,5))
 					// Shards. Extra damage, plus potentially the fact YOU LITERALLY HAVE A PIECE OF GLASS/METAL/WHATEVER IN YOUR FACE
 					for(var/obj/item/weapon/material/shard/S in L)
-						if(prob(50))
-							M.visible_message("<span class='danger'>\The [S]'s face is cut by [M]!</span>",
+						if(S.sharp && prob(50))
+							M.visible_message("<span class='danger'>\The [S] slices into [M]'s face!</span>",
 							                  "<span class='danger'>\The [S] slices into your face!</span>")
-							M.standard_weapon_hit_effects(S, G.assailant, S.force*2, blocked, "head") //standard weapon hit effects include damage
+							M.standard_weapon_hit_effects(S, G.assailant, S.force*2, blocked, "head") //standard weapon hit effects include damage and embedding
 				else
 					G.affecting.forceMove(src.loc)
 					G.affecting.Weaken(5)
