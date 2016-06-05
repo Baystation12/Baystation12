@@ -123,6 +123,7 @@
 /obj/structure/bed/chair/office
 	anchored = 0
 	buckle_movable = 1
+	name = "office chair"
 
 /obj/structure/bed/chair/office/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
