@@ -24,7 +24,7 @@
 	..()
 	listening_objects += src
 
-/obj/item/device/taperecorder/Del()
+/obj/item/device/taperecorder/Destroy()
 	..()
 	listening_objects -= src
 
