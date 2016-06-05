@@ -1074,15 +1074,17 @@ mob/proc/yank_out_object()
 //Throwing stuff
 
 //people have to see it
-/obj/thrower
-	icon = 'icons/effects/thrower.dmi'
-	layer = 10
+/mob
+	var/image/THROWER
 
 /mob/proc/check_throw()
-	var/obj/thrower/T = new()
-	overlays -= T
+	if(!THROWER)
+		THROWER = image('icons/effects/thrower.dmi')
+
 	if(in_throw_mode == 1)
-		overlays += T
+		overlays += THROWER
+	else
+		overlays -= THROWER
 
 /mob/proc/toggle_throw_mode()
 	if (src.in_throw_mode)
