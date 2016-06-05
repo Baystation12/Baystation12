@@ -44,5 +44,5 @@
 	return
 
 /obj/item/latexballon/attackby(obj/item/W as obj, mob/user as mob)
-	if (can_puncture(W))
+	if (W.can_puncture())
 		burst()
