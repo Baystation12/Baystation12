@@ -481,17 +481,14 @@ its easier to just keep the beam vertical.
 	var/range = world.view
 	if(hearing_distance)
 		range = hearing_distance
-	var/list/hear = get_mobs_or_objects_in_view(range,src)
+	var/turf/T = get_turf(src)
+	var/list/results = get_mobs_and_objs_in_view_fast(T,range, ONLY_GHOSTS_IN_VIEW)
 
-	for(var/I in hear)
-		if(isobj(I))
-			spawn(0)
-				if(I) //It's possible that it could be deleted in the meantime.
-					var/obj/O = I
-					O.show_message( message, 2, deaf_message, 1)
-		else if(ismob(I))
-			var/mob/M = I
-			M.show_message( message, 2, deaf_message, 1)
+	for(var/mob/M in results["mobs"])
+		M.show_message( message, 2, deaf_message, 1)
+
+	for(var/obj/O in results["objs"])
+		O.show_message(message,2,deaf_message,1)
 
 /atom/movable/proc/dropInto(var/atom/destination)
 	while(istype(destination))
