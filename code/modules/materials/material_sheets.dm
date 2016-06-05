@@ -118,6 +118,9 @@
 	name = "plastic"
 	icon_state = "sheet-plastic"
 	default_type = "plastic"
+	
+/obj/item/stack/material/plastic/fifty
+	amount = 50
 
 /obj/item/stack/material/gold
 	name = "gold"
@@ -158,17 +161,26 @@
 	name = DEFAULT_WALL_MATERIAL
 	icon_state = "sheet-metal"
 	default_type = DEFAULT_WALL_MATERIAL
+	
+/obj/item/stack/material/steel/fifty
+	amount = 50
 
-/obj/item/stack/material/plasteel
+/obj/item/stack/material/plasteel/fifty
 	name = "plasteel"
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
 	default_type = "plasteel"
+	
+/obj/item/stack/material/plasteel/fifty
+	amount = 50
 
 /obj/item/stack/material/wood
 	name = "wooden plank"
 	icon_state = "sheet-wood"
 	default_type = "wood"
+	
+/obj/item/stack/material/wood/fifty
+	amount = 50
 
 /obj/item/stack/material/cloth
 	name = "cloth"
@@ -179,6 +191,9 @@
 	name = "cardboard"
 	icon_state = "sheet-card"
 	default_type = "cardboard"
+	
+/obj/item/stack/material/cardboard/fifty
+	amount = 50
 
 /obj/item/stack/material/leather
 	name = "leather"
@@ -190,6 +205,8 @@
 	name = "glass"
 	icon_state = "sheet-glass"
 	default_type = "glass"
+	
+/obj/item/stack/material/glass/fifty
 
 /obj/item/stack/material/glass/reinforced
 	name = "reinforced glass"

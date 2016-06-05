@@ -10,29 +10,25 @@
 
 /decl/hierarchy/supply_pack/engineering/metal50
 	name = "50 metal sheets"
-	contains = list(/obj/item/stack/material/steel)
-	amount = 50
+	contains = list(/obj/item/stack/material/steel/fifty)
 	cost = 10
 	containername = "\improper Metal sheets crate"
 
 /decl/hierarchy/supply_pack/engineering/glass50
 	name = "50 glass sheets"
-	contains = list(/obj/item/stack/material/glass)
-	amount = 50
+	contains = list(/obj/item/stack/material/glass/fifty)
 	cost = 10
 	containername = "\improper Glass sheets crate"
 
 /decl/hierarchy/supply_pack/engineering/wood50
 	name = "50 wooden planks"
-	contains = list(/obj/item/stack/material/wood)
-	amount = 50
+	contains = list(/obj/item/stack/material/wood/fifty)
 	cost = 10
 	containername = "\improper Wooden planks crate"
 
 /decl/hierarchy/supply_pack/engineering/plastic50
 	name = "50 plastic sheets"
-	contains = list(/obj/item/stack/material/plastic)
-	amount = 50
+	contains = list(/obj/item/stack/material/plastic/fifty)
 	cost = 10
 	containername = "\improper Plastic sheets crate"
 
