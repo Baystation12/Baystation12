@@ -183,11 +183,10 @@
 
 // Chair types
 /obj/structure/bed/chair/wood
-	name = "wooden chair"
 	desc = "Old is never too old to not be in fashion."
 	base_icon = "wooden_chair"
 	icon_state = "wooden_chair_preview"
-	material_alteration = MATERIAL_ALTERATION_NONE
+	material_alteration = MATERIAL_ALTERATION_NAME
 
 /obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
