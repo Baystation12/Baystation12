@@ -234,6 +234,7 @@ area/space/atmosalert()
 /area/shuttle/escape/transit // the area to pass through for 3 minute transit
 	name = "\improper Emergency Shuttle Transit"
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod1
 	name = "\improper Escape Pod One"
@@ -247,6 +248,7 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod1/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod2
 	name = "\improper Escape Pod Two"
@@ -260,6 +262,7 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod2/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod3
 	name = "\improper Escape Pod Three"
@@ -273,6 +276,7 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod3/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/east/shuttlespace_ew1
 
 /area/shuttle/escape_pod5 //Pod 4 was lost to meteors
 	name = "\improper Escape Pod Five"
@@ -286,6 +290,7 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod5/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/east/shuttlespace_ew1
 
 // === Trying to remove these areas:
 
@@ -461,6 +466,7 @@ area/space/atmosalert()
 /area/rescue_base/start
 	name = "\improper Response Team Base"
 	icon_state = "shuttlered"
+	base_turf = /turf/unsimulated/floor/rescue_base
 
 /area/rescue_base/southwest
 	name = "\improper south-west of SS13"
@@ -502,6 +508,7 @@ area/space/atmosalert()
 /area/rescue_base/transit
 	name = "\improper bluespace"
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 //ENEMY
 
@@ -560,6 +567,7 @@ area/space/atmosalert()
 /area/syndicate_station/transit
 	name = "\improper bluespace"
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/wizard_station
 	name = "\improper Wizard's Den"
@@ -579,6 +587,7 @@ area/space/atmosalert()
 /area/skipjack_station/transit
 	name = "\improper bluespace"
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/skipjack_station/southwest_solars
 	name = "\improper aft port solars"
