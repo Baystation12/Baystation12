@@ -21,4 +21,5 @@
 		M.adjustToxLoss(rand(20,40))
 
 /obj/item/weapon/material/star/ninja
+	name = "uranium shuriken"
 	default_material = "uranium"

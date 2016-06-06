@@ -10,35 +10,45 @@ They sell generic supplies and ask for generic supplies.
 	name = "AI"
 	origin = "Trading Beacon"
 	language = LANGUAGE_EAL
-
-	trade_goods = 25
+	trade_flags = TRADER_MONEY|TRADER_GOODS
 	speech = list("hail_generic"    = "Greetings, I am MERCHANT, Artifical Intelligence onboard ORIGIN, tasked with trading goods in return for thalers and supplies.",
 				"hail_resomi"       = "Greetings, I am MERCHANT, Artifical Intelligence onboard ORIGIN. We wish to trade with you, no more.",
 				"hail_deny"         = "We are sorry, your connection has been blacklisted. Have a nice day.",
 
-				"trade"             = "We have calculated the following trade offer: PROPOSAL for ITEM. Will that suffice?",
-				"trade_wanted"      = "Our priority trade database shows need of ITEM, will PROPOSAL be sufficient payment?",
-				"trade_known"       = "ITEM for PROPOSAL has already been logged in our systems.",
 				"trade_complete"    = "Thank you for your patronage.",
-				"trade_refuse"      = "I'm sorry, I do not recognize that as a trade item.",
-				"trade_out"         = "I'm sorry, we are out of suitable trading options.",
+				"trade_refuse"      = "I'm sorry, I cannot not accept this trade.",
+				"how_much"          = "ITEM will cost you roughly VALUE thalers, or something of equal worth.",
 
-				"offer_change"      = "This is within our established parameters. Trade changed.",
-				"offer_reject"      = "I am sorry, my trading algorithms indicate that changing this trade is a bad idea.",
-
-				"complement_deny"   = "I'm sorry, I am not allowed to let complements affect the trade.",
-				"complement_accept" = "Thank you, but that will not not change our business interactions.",
+				"compliment_deny"   = "I'm sorry, I am not allowed to let compliments affect the trade.",
+				"compliment_accept" = "Thank you, but that will not not change our business interactions.",
 				"insult_good"       = "I do not understand, are we not on good terms?",
 				"insult_bad"        = "I do not understand, are you insulting me?",
-
-				"want"              = "My database shows need for",
-				"want_deny"         = "I'm sorry, but security protocal dictate I cannot tell you that."
 				)
-	possible_wanted_items = list(/obj/item/weapon/         = TRADER_SUBTYPES_ONLY)
-	possible_trading_items = list(/obj/item/weapon/        = TRADER_SUBTYPES_ONLY)
+	possible_wanted_items = list(/obj/item/device/                       = TRADER_SUBTYPES_ONLY,
+								/obj/item/device/assembly                = TRADER_BLACKLIST_ALL,
+								/obj/item/device/assembly_holder         = TRADER_BLACKLIST_ALL,
+								/obj/item/device/encryptionkey/syndicate = TRADER_BLACKLIST,
+								/obj/item/device/onetankbomb             = TRADER_BLACKLIST,
+								/obj/item/device/radio/intercom          = TRADER_BLACKLIST_ALL,
+								/obj/item/device/uplink                  = TRADER_BLACKLIST)
+	possible_trading_items = list(/obj/item/weapon/storage                           = TRADER_SUBTYPES_ONLY,
+								/obj/item/weapon/storage/bag                         = TRADER_BLACKLIST,
+								/obj/item/weapon/storage/bag/cash/infinite           = TRADER_BLACKLIST,
+								/obj/item/weapon/storage/bible                       = TRADER_BLACKLIST_ALL,
+								/obj/item/weapon/storage/box                         = TRADER_BLACKLIST_ALL,
+								/obj/item/weapon/storage/fancy                       = TRADER_BLACKLIST,
+								/obj/item/weapon/storage/internal                    = TRADER_BLACKLIST_ALL,
+								/obj/item/weapon/storage/secure                      = TRADER_BLACKLIST,
+								/obj/item/weapon/storage/secure/safe                 = TRADER_BLACKLIST,
+								/obj/item/weapon/storage/lockbox                     = TRADER_BLACKLIST_ALL,
+								/obj/item/weapon/storage/pill_bottle                 = TRADER_BLACKLIST_SUB,
+								/obj/item/clothing/glasses                           = TRADER_SUBTYPES_ONLY,
+								/obj/item/clothing/glasses/hud                       = TRADER_BLACKLIST_ALL,
+								/obj/item/clothing/glasses/sunglasses/blindfold/tape = TRADER_BLACKLIST,
+								)
 
 	insult_drop = 0
-	complement_increase = 0
+	compliment_increase = 0
 
 /datum/trader/trading_beacon/New()
 	..()
@@ -62,9 +72,18 @@ They sell generic supplies and ask for generic supplies.
 	origin = "Manifacturing Beacon"
 
 	possible_trading_items = list(/obj/structure/AIcore             = TRADER_THIS_TYPE,
-								/obj/structure/bed                  = TRADER_ALL,
-								/obj/structure/bed/chair/e_chair    = TRADER_BLACKLIST,
-								/obj/structure/bed/nest             = TRADER_BLACKLIST,
+								/obj/structure/girder               = TRADER_THIS_TYPE,
+								/obj/structure/grille               = TRADER_THIS_TYPE,
+								/obj/structure/mopbucket            = TRADER_THIS_TYPE,
+								/obj/structure/ore_box              = TRADER_THIS_TYPE,
+								/obj/structure/coatrack             = TRADER_THIS_TYPE,
+								/obj/structure/bookcase             = TRADER_THIS_TYPE,
+								/obj/item/bee_pack                  = TRADER_THIS_TYPE,
+								/obj/item/bee_smoker                = TRADER_THIS_TYPE,
+								/obj/item/beehive_assembly          = TRADER_THIS_TYPE,
+								/obj/item/glass_jar                 = TRADER_THIS_TYPE,
+								/obj/item/honey_frame               = TRADER_THIS_TYPE,
+								/obj/item/target                    = TRADER_ALL,
 								/obj/structure/dispenser            = TRADER_SUBTYPES_ONLY,
 								/obj/structure/filingcabinet        = TRADER_THIS_TYPE,
 								/obj/structure/showcase             = TRADER_THIS_TYPE,
@@ -72,5 +91,5 @@ They sell generic supplies and ask for generic supplies.
 								/obj/structure/plushie              = TRADER_SUBTYPES_ONLY,
 								/obj/structure/sign                 = TRADER_SUBTYPES_ONLY,
 								/obj/structure/sign/double          = TRADER_BLACKLIST_ALL,
-								/obj/structure/sign/poster           = TRADER_BLACKLIST
+								/obj/structure/sign/poster          = TRADER_BLACKLIST
 								)

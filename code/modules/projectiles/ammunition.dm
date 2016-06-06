@@ -89,7 +89,7 @@
 	var/list/icon_keys = list()		//keys
 	var/list/ammo_states = list()	//values
 
-	item_worth = 5
+	item_worth = 30
 
 /obj/item/ammo_magazine/New()
 	..()
@@ -139,8 +139,6 @@
 				new_state = ammo_states[idx]
 				break
 		icon_state = (new_state)? new_state : initial(icon_state)
-
-	item_worth = initial(item_worth) * stored_ammo.len //not exactly icon updating, but is related
 
 /obj/item/ammo_magazine/examine(mob/user)
 	..()

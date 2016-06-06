@@ -28,6 +28,7 @@
 		S.name = name
 		S.desc = desc
 		S.icon_state = icon_state
+		S.item_worth = item_worth
 		//var/icon/I = icon('icons/obj/decals.dmi', icon_state)
 		//S.icon = I.Scale(24, 24)
 		S.sign_state = icon_state
@@ -59,6 +60,7 @@
 		S.name = name
 		S.desc = desc
 		S.icon_state = sign_state
+		S.item_worth = item_worth
 		user << "You fasten \the [S] with your [tool]."
 		qdel(src)
 	else ..()

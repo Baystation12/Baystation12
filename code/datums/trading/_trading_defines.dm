@@ -4,7 +4,8 @@
 #define TRADER_BLACKLIST     3
 #define TRADER_BLACKLIST_SUB 4
 #define TRADER_BLACKLIST_ALL 5
-#define TRADER_OFFER_REJECT  0
-#define TRADER_OFFER_ACCEPT  1
-#define TRADER_OFFER_MATCH   2
-#define TRADER_OFFER_CHANGE  3
+
+#define TRADER_WANTED_ONLY   1 //Do they only trade for wanted goods?
+#define TRADER_MONEY         2 //Do they only accept money in return for goods.
+#define TRADER_GOODS         4 //Do they accept goods in return for other goods.
+#define TRADER_SHOW_TRADING  8 //Do we show what we are trading or keep it hidden?

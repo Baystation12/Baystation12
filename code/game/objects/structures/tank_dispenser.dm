@@ -10,7 +10,7 @@
 	var/phorontanks = 10
 	var/list/oxytanks = list()	//sorry for the similar var names
 	var/list/platanks = list()
-	item_worth = 25
+	item_worth = 500
 
 
 /obj/structure/dispenser/oxygen

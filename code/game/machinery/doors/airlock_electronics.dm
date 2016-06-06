@@ -112,3 +112,4 @@
 	desc = "designed to be somewhat more resistant to hacking than standard electronics."
 	origin_tech = list(TECH_DATA = 2)
 	secure = 1
+	item_worth = 600

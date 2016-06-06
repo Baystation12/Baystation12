@@ -1,23 +1,38 @@
 /datum/trader
 	var/name = "unsuspicious trader"                            //The name of the trader in question
 	var/origin = "some place"                                   //The place that they are trading from
+	var/list/possible_origins                                   //Possible names of the trader origin
 	var/disposition = 0                                         //The current disposition of them to us.
-	var/trade_wanted_only = 0                                   //Whether they will only trade for wanted items.
-	var/trade_goods = 50                                        //Probability they will trade money or valuables
+	var/trade_flags = TRADER_MONEY                              //Flags
 	var/language                                                //If this is set to a language name this will generate a name from the language
 	var/icon/portrait                                           //The icon that shows up in the menu @TODO
 
-	var/list/wanted_items = list()                              //What items they enjoy trading for.
+	var/list/wanted_items = list()                              //What items they enjoy trading for. Structure is (type = known/unknown)
 	var/list/possible_wanted_items                              //List of all possible wanted items. Structure is (type = mode)
 	var/list/possible_trading_items                             //List of all possible trading items. Structure is (type = mode)
-	var/list/trading_items = list()                             //What items they are currently trading away. Structure is (type = value I want for it)
-	var/list/trade_proposals = list()                           //A log of what they will (current) trade something for
+	var/list/trading_items = list()                             //What items they are currently trading away.
 	var/list/blacklisted_trade_items = list(/mob/living/carbon/human)
 	                                                            //Things they will automatically refuse
 
 	var/list/speech = list()                                    //The list of all their replies and messages. Structure is (id = talk)
+	/*SPEECH IDS:
+	hail_generic		When merchants hail a person
+	hail_[race]			Race specific hails
+	hail_deny			When merchant denies a hail
+
+	insult_good			When the player insults a merchant while they are on good disposition
+	insult_bad			When a player insults a merchatn when they are not on good disposition
+	complement_accept	When the merchant accepts a complement
+	complement_deny		When the merchant refuses a complement
+
+	how_much			When a merchant tells the player how much something is.
+	trade_complete		When a trade is made
+	trade_refuse		When a trade is refused
+
+	*/
+	var/want_multiplier = 2                                     //How much wanted items are multiplied by when traded for
 	var/insult_drop = 5                                         //How far disposition drops on insult
-	var/complement_increase = 5                                 //How far complements increase disposition
+	var/compliment_increase = 5                                 //How far compliments increase disposition
 	var/refuse_comms = 0                                        //Whether they refuse further communication
 
 	var/mob_transfer_message = "You are transported to ORIGIN." //What message gets sent to mobs that get sold.
@@ -28,17 +43,26 @@
 		var/datum/language/L = all_languages[language]
 		if(L)
 			name = L.get_random_name(pick(MALE,FEMALE))
+	if(possible_origins && possible_origins.len)
+		origin = pick(possible_origins)
 
-	for(var/i in 1 to 3)
+	for(var/i in 3 to 6)
 		add_to_pool(trading_items, possible_trading_items, force = 1)
 		add_to_pool(wanted_items, possible_wanted_items, force = 1)
 
 //If this hits 0 then they decide to up and leave.
 /datum/trader/proc/tick()
 	spawn(0)
-		add_to_pool(trading_items, possible_trading_items)
+		add_to_pool(trading_items, possible_trading_items, 200)
 		add_to_pool(wanted_items, possible_wanted_items, 50)
+		remove_from_pool(possible_trading_items, 9) //We want the stock to change every so often, so we make it so that they have roughly 10~11 ish items max
 	return 1
+
+/datum/trader/proc/remove_from_pool(var/list/pool, var/chance_per_item)
+	if(pool && prob(chance_per_item * pool.len))
+		var/i = rand(1,pool.len)
+		pool[pool[i]] = null
+		pool -= pool[i]
 
 /datum/trader/proc/add_to_pool(var/list/pool, var/list/possible, var/base_chance = 100, var/force = 0)
 	var/divisor = 1
@@ -52,21 +76,22 @@
 /datum/trader/proc/get_possible_item(var/list/trading_pool)
 	if(!trading_pool || !trading_pool.len)
 		return
-	var/i = rand(1,trading_pool.len)
 	var/list/possible = list()
-	switch(trading_pool[trading_pool[i]])
-		if(TRADER_THIS_TYPE)
-			possible += trading_pool[i]
-		if(TRADER_SUBTYPES_ONLY)
-			possible += subtypesof(trading_pool[i])
-		if(TRADER_ALL)
-			possible += typesof(trading_pool[i])
-		if(TRADER_BLACKLIST)
-			possible -= trading_pool[i]
-		if(TRADER_BLACKLIST_SUB)
-			possible -= subtypesof(trading_pool[i])
-		if(TRADER_BLACKLIST_ALL)
-			possible -= typesof(trading_pool[i])
+	for(var/type in trading_pool)
+		switch(trading_pool[type])
+			if(TRADER_THIS_TYPE)
+				possible += type
+			if(TRADER_SUBTYPES_ONLY)
+				possible += subtypesof(type)
+			if(TRADER_ALL)
+				possible += typesof(type)
+			if(TRADER_BLACKLIST)
+				possible -= type
+			if(TRADER_BLACKLIST_SUB)
+				possible -= subtypesof(type)
+			if(TRADER_BLACKLIST_ALL)
+				possible -= typesof(type)
+
 	if(possible.len)
 		var/picked = pick(possible)
 		var/atom/A = picked
@@ -83,14 +108,45 @@
 	text = replacetext(text, "MERCHANT", name)
 	return replacetext(text, "ORIGIN", origin)
 
-/datum/trader/proc/print_trade(var/num)
-	if(trade_proposals && trade_proposals.len)
-		num = Clamp(num,1,trade_proposals.len)
-		var/text
-		var/atom/movable/A = trade_proposals[num]
-		text = initial(A.name)
-		A = trade_proposals[trade_proposals[A]]
-		return "<b>[text]</b> for <b>[initial(A.name)]</b>"
+/datum/trader/proc/print_trading_items(var/num)
+	num = Clamp(num,1,trading_items.len)
+	if(trading_items[num])
+		var/atom/movable/M = trading_items[num]
+		return "<b>[initial(M.name)]</b>"
+
+/datum/trader/proc/get_item_value(var/trading_num)
+	if(!trading_items[trading_items[trading_num]])
+		var/atom/movable/M = trading_items[trading_num]
+		var/value = initial(M.item_worth)
+		value = max(1, round(value * rand(90,110)/100)) //Rand doesn't like decimals and rounds them.
+		trading_items[trading_items[trading_num]] = value
+	return trading_items[trading_items[trading_num]]
+
+/datum/trader/proc/offer_item_for_trade(var/atom/movable/offer, var/num)
+	if(!offer)
+		return 0
+	num = Clamp(num,1, trading_items.len)
+	var/is_wanted = 0
+	if(is_type_in_list(offer,wanted_items))
+		is_wanted = 1
+
+	if(is_type_in_list(offer,blacklisted_trade_items))
+		return 0
+
+	if(istype(offer,/obj/item/weapon/spacecash))
+		if(!(trade_flags & TRADER_MONEY))
+			return 0
+	else
+		if(!(trade_flags & TRADER_GOODS) || ((trade_flags & TRADER_WANTED_ONLY) && !is_wanted))
+			return 0
+
+	var/trading_worth = get_item_value(num)
+	if(is_wanted)
+		trading_worth *= want_multiplier
+	var/percent = offer.item_worth/trading_worth
+	if(percent > max(0.9,0.9-disposition/100))
+		return trade(offer, num)
+	return 0
 
 /datum/trader/proc/hail(var/mob/user)
 	var/specific
@@ -102,128 +158,46 @@
 		specific = "silicon"
 	if(!speech["hail_[specific]"])
 		specific = "generic"
-	var/text = get_response("hail_[specific]", "Greetings, MOB!")
-	return replacetext(text, "MOB", user.name)
+	. = get_response("hail_[specific]", "Greetings, MOB!")
+	. = replacetext(., "MOB", user.name)
 
 /datum/trader/proc/can_hail()
-	return refuse_comms || prob(-disposition)
-
-/datum/trader/proc/what_do_you_want()
-	if(prob(100+disposition) && wanted_items && wanted_items.len)
-		var/tell_num_of_items = 1
-		while(prob(50+disposition-tell_num_of_items*10) && tell_num_of_items < wanted_items.len)
-			tell_num_of_items++
-		var/list/output = list()
-		var/list/possible = list()
-		possible += wanted_items
-		for(var/i in 1 to tell_num_of_items)
-			var/picked = pick(possible)
-			var/atom/A = picked
-			output += initial(A.name)
-			possible -= picked
-
-		return "[get_response("want","I want")] [english_list(output)]"
-
-	disposition -= rand(insult_drop, insult_drop*2)
-	return get_response("want_deny","Why should I tell you? You're the trader!")
+	if(!refuse_comms && prob(-disposition))
+		refuse_comms = 1
+	return !refuse_comms
 
 /datum/trader/proc/insult()
 	disposition -= rand(insult_drop, insult_drop * 2)
+	if(prob(-disposition/10))
+		refuse_comms = 1
 	if(disposition > 50)
 		return get_response("insult_good","What? I thought we were cool!")
-	else if(disposition < 0)
+	else
 		return get_response("insult_bad", "Right back at you asshole!")
 
-/datum/trader/proc/complement()
+/datum/trader/proc/compliment()
 	if(prob(-disposition))
-		return get_response("complement_deny", "Fuck you!")
+		return get_response("compliment_deny", "Fuck you!")
 	if(prob(100-disposition))
-		disposition += rand(complement_increase, complement_increase * 2)
-	return get_response("complement_accept", "Thank you!")
+		disposition += rand(compliment_increase, compliment_increase * 2)
+	return get_response("compliment_accept", "Thank you!")
 
-/datum/trader/proc/get_item_near_value(var/value)
-	if(!trading_items || !trading_items.len)
-		return
-	var/list/possible = list()
-	for(var/a in trading_items)
-		var/percent = trading_items[a]/value
-		if(percent > 0.9 && percent < 1.1)
-			possible |= a
-	if(possible.len)
-		return pick(possible)
-	return null
-
-/datum/trader/proc/judge_item(var/atom/movable/A)
-	var/text
-	var/value
-	if(trade_proposals[A.type]) //if we already know what we want to give for this
-		text = get_response("trade_known", "I already said I'd give you PROPOSAL for that ITEM!")
-		value = trade_proposals[A.type]
-		if(isnum(value))
-			value = "[value] thalers"
-		else
-			var/atom/movable/M = trade_proposals[A.type]
-			value = initial(M.name)
-	else //otherwise we generate a log of it, and tell them.
-		var/multiplier = 1
-		if(is_type_in_list(A,wanted_items))
-			multiplier = 2
-			text = get_response("trade_wanted", "Oh wow! I really want that ITEM! I'll give you PROPOSAL for it!")
-		else if(trade_wanted_only || (blacklisted_trade_items && is_type_in_list(A,blacklisted_trade_items)))
-			return get_response("trade_refuse", "I don't want that. At all.")
-		else
-			text = get_response("trade", "Hmm.... I'll give you PROPOSAL for the ITEM")
-		value = round(A.item_worth * multiplier * rand(0.9, 1.1))
-		if(prob(trade_goods))
-			var/type = get_item_near_value(value)
-			var/atom/movable/M = type
-			if(M)
-				trade_proposals[type] = value
-				value = initial(M.name)
-			else
-				text = get_response("trade_out", "I'm sorry, I don't have anything to trade for that.")
-		else
-			trade_proposals[A.type] = value
-			value = "[value] thalers"
-	text = replacetext(text,"ITEM","[A.name]")
-	return replacetext(text, "PROPOSAL","[value]")
-
-/datum/trader/proc/trade_you_this_for_that(var/atom/movable/offer, var/target_trade)
-	if(trade_proposals[target_trade])
-		if(isnum(trade_proposals[target_trade]) && istype(offer,/obj/item/weapon/spacecash)) //money
-			if(offer.item_worth == trade_proposals[target_trade])
-				return TRADER_OFFER_MATCH
-		else
-			if(prob(10+disposition))
-				var/atom/movable/M = trade_proposals[target_trade]
-				var/percent = initial(M.item_worth)/offer.item_worth
-				if(percent > 0.95)
-					trade_proposals[target_trade] = M.type
-					disposition -= insult_drop //We don't like changing our offer.
-					return TRADER_OFFER_CHANGE //offer changed.
-	else
-		if(!ispath(trade_proposals[target_trade], /obj/item/weapon/spacecash) || prob(trade_goods) && (!blacklisted_trade_items || !is_type_in_list(offer,blacklisted_trade_items)))
-			var/atom/movable/M = trade_proposals[target_trade]
-			var/percent = initial(M.item_worth)/offer.item_worth
-			var/min_perc = min(0.9, 0.9+disposition/100)
-			if(percent > min_perc)
-				trade_proposals[target_trade] = M.type
-				return TRADER_OFFER_ACCEPT
-	disposition -= insult_drop
-	return TRADER_OFFER_REJECT
-
-/datum/trader/proc/trade(var/atom/movable/offer)
-	var/type
-	for(var/a in trade_proposals)
-		if(istype(offer,trade_proposals[a]))
-			type = a
-			break
-	if(!type)
-		return 0
+/datum/trader/proc/trade(var/atom/movable/offer, var/num)
+	var/type = trading_items[num]
 	var/turf/T = get_turf(offer)
-	new type(T)
 	if(istype(offer,/mob))
 		var/text = mob_transfer_message
 		offer << replacetext(text, "ORIGIN", origin)
 	qdel(offer)
-	return 1
+	var/atom/movable/M = new type(T)
+	playsound(T, 'sound/effects/teleport.ogg', 50, 1)
+
+	disposition += rand(compliment_increase,compliment_increase*3) //Traders like it when you trade with them
+
+	return M
+
+/datum/trader/proc/how_much_do_you_want(var/num)
+	var/atom/movable/M = trading_items[num]
+	. = get_response("how_much", "Hmm.... how about VALUE thalers?")
+	. = replacetext(.,"VALUE",get_item_value(num))
+	. = replacetext(.,"ITEM", initial(M.name))

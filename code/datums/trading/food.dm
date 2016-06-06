@@ -1,43 +1,40 @@
 /datum/trader/pizzaria
 	name = "Pizza Shop Employee"
-	language = "Common"
+	language = "Noise"
 	origin = "Pizzeria"
-	trade_goods = 0
+	possible_origins = list("Papa Joes", "Pizza Ship", "Dominator Pizza", "Little Kaezars", "Pizza Planet", "Cheese Louise")
+	trade_flags = TRADER_MONEY
 	possible_wanted_items = list() //They are a pizza shop, not a bargainer.
-	possible_trading_items = list(/obj/item/pizzabox/   = TRADER_SUBTYPES_ONLY)
+	possible_trading_items = list(/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza   = TRADER_SUBTYPES_ONLY)
 
 	speech = list("hail_generic"    = "Hello! Welcome to ORIGIN, may I take your order?",
 				"hail_deny"         = "Beeeep... I'm sorry, your connection has been severed.",
 
-				"trade"             = "Alright, the PROPOSAL will cost you ITEM. Will that be all?",
-				"trade_wanted"      = "My manager says I'm allowed to give you PROPOSAL for ITEM, is that alright?",
-				"trade_known"       = "Yeah, thats correct.",
 				"trade_complete"    = "Thank you for choosing ORIGIN!",
 				"trade_refuse"      = "Uhh... I don't think we can do that.",
-				"trade_out"         = "Uuuh... My manager says we're out of pizza...",
+				"how_much"          = "That pizza will cost you VALUE thalers.",
 
-				"offer_change"      = "Yeah sure, my manager says we can do that.",
-				"offer_reject"      = "Sorry sir, I'm not allowed to accept that change.",
-
-				"complement_deny"   = "That's a bit forward, don't you think?",
-				"complement_accept" = "Thanks, sir! You're very nice!",
+				"compliment_deny"   = "That's a bit forward, don't you think?",
+				"compliment_accept" = "Thanks, sir! You're very nice!",
 				"insult_good"       = "Please stop that, sir.",
 				"insult_bad"        = "Sir, just because I'm contractually obligated to keep you on the line for a minute doesn't mean I have to take this.",
-
-				"want"              = "My manager says we need",
-				"want_deny"         = "My manager says not to tell you that."
 				)
 
-
-/datum/trader/pizzaria/New()
-	..()
-	origin = pick("Papa Joes", "Pizza Ship", "Dominator Pizza", "Little Kaezars", "Pizza Planet")
+/datum/trader/pizzaria/trade(var/atom/movable/offer)
+	var/turf/T = get_turf(offer)
+	. = ..()
+	if(.)
+		var/atom/movable/M = .
+		var/obj/item/pizzabox/box = new(T)
+		M.loc = box
+		box.pizza = M
+		box.boxtag = "A special order from [origin]"
 
 /datum/trader/ship/chinese
 	name = "Chinese Restaurant"
-	language = "Common"
+	language = "Noise"
 	origin = "Captain Panda Bistro"
-	trade_goods = 0
+	trade_flags = TRADER_MONEY
 	possible_wanted_items = list()
 	possible_trading_items = list(/obj/item/weapon/reagent_containers/food/snacks/monkeykabob          = TRADER_THIS_TYPE,
 							/obj/item/weapon/reagent_containers/food/snacks/monkeysdelight             = TRADER_THIS_TYPE,
@@ -63,24 +60,14 @@
 	speech = list("hail_generic"     = "There are two things constant in life, death and Chinese food. How may I help you?",
 				"hail_deny"          = "We do not take orders from rude customers.",
 
-				"trade"              = "Yes, PROPOSAL will cost you ITEM, is that all you want?",
-				"trade_wanted"       = "Aaaah! I always wanted ITEM. I will give you PROPOSAL for it.",
-				"trade_known"        = "Yes, as we agreed previously.",
 				"trade_complete"     = "Thank you sir for your patronage.",
 				"trade_refuse"       = "No, I am sorry that is not possible.",
-				"trade_out"          = "Hmm... I'm sorry, I don't know what to give you for that.",
+				"how_much"           = "I give you ITEM for VALUE thalers. No more, no less.",
 
-
-				"offer_change"       = "Hmmmm... yes, I'll allow that.",
-				"offer_deny"         = "You are not the only one who needs to eat, I cannot accept that.",
-
-				"complement_deny"    = "That was an odd thing to say, you are very odd.",
-				"complement_accept"  = "Good philosophy, see good in bad, I like.",
+				"compliment_deny"    = "That was an odd thing to say, you are very odd.",
+				"compliment_accept"  = "Good philosophy, see good in bad, I like.",
 				"insult_good"        = "As a man said long ago, \"When anger rises, think of the consequences.\" Think on that.",
 				"insult_bad"         = "I do not need to take this from you.",
-
-				"want"               = "I require",
-				"want_deny"          = "I'm sorry, but that is not your business."
 				)
 
 /datum/trader/ship/chinese/trade(var/atom/movable/offer)
@@ -95,9 +82,9 @@
 
 /datum/trader/grocery
 	name = "Grocer"
-	origin = "Grocery Store"
-	language = "Common"
-	trade_goods = 0
+	language = "Noise"
+	possible_origins = list("HyTee", "Kreugars", "Spaceway", "Privaxs", "FutureValue")
+	trade_flags = TRADER_MONEY
 
 	possible_trading_items = list(/obj/item/weapon/reagent_containers/food/snacks                      = TRADER_SUBTYPES_ONLY,
 							/obj/item/weapon/reagent_containers/food/drinks/cans                       = TRADER_SUBTYPES_ONLY,
@@ -106,6 +93,7 @@
 							/obj/item/weapon/reagent_containers/food/snacks/boiledslimecore            = TRADER_BLACKLIST,
 							/obj/item/weapon/reagent_containers/food/snacks/checker                    = TRADER_BLACKLIST_ALL,
 							/obj/item/weapon/reagent_containers/food/snacks/fruit_slice                = TRADER_BLACKLIST,
+							/obj/item/weapon/reagent_containers/food/snacks/slice                      = TRADER_BLACKLIST_ALL,
 							/obj/item/weapon/reagent_containers/food/snacks/grown                      = TRADER_BLACKLIST_ALL,
 							/obj/item/weapon/reagent_containers/food/snacks/human                      = TRADER_BLACKLIST_ALL
 							)
@@ -113,26 +101,48 @@
 	speech = list("hail_generic"     = "Hello, welcome to ORIGIN, grocery store of the future!",
 				"hail_deny"          = "I'm sorry, we've blacklisted your communications due to rude behavior.",
 
-				"trade"              = "PROPOSAL will cost you a total of ITEM, is that all?",
-				"trade_wanted"       = "Well, we at ORIGIN do need ITEM. We'll give you PROPOSAL for it.",
-				"trade_known"        = "Mhm!",
 				"trade_complete"     = "Thank you for shopping at ORIGIN!",
-				"trade_refuse"       = "I'm sorry, ORIGIN doesn't take that as payment.",
-				"trade_out"          = "I'm very sorry, we currently don't have anything to trade for that.",
+				"trade_refuse"       = "I'm sorry, ORIGIN doesn't think this trade is a good idea.",
+				"how_much"           = "Sir, that'll cost you VALUE thalers. Will that be all?",
 
-
-				"offer_change"       = "Very well!",
-				"offer_deny"         = "I'm afraid I'm going to have to deny that.",
-
-				"complement_deny"    = "Sir, this is a professional environment. Please don't make me get my manager.",
-				"complement_accept"  = "Thank you, sir!",
+				"compliment_deny"    = "Sir, this is a professional environment. Please don't make me get my manager.",
+				"compliment_accept"  = "Thank you, sir!",
 				"insult_good"        = "Sir, please do not make a scene.",
 				"insult_bad"         = "Sir, I WILL get my manager if you don't calm down.",
-
-				"want"               = "ORIGIN needs",
-				"want_deny"          = "I'm sorry, but its company policy to not tell you that."
 				)
 
-/datum/trader/grocery/New()
-	..()
-	origin = pick("HyTee", "Kreugars", "Spaceway", "Privaxs", "FutureValue")
+/datum/trader/bakery
+	name = "Pastry Chef"
+	language = "Noise"
+	origin = "Bakery"
+	possible_origins = list("Cakes By Design", "Corner Bakery Local", "My Favorite Cake & Pastry Cafe", "Mama Joes Bakery", "Sprinkles and Fun")
+
+	speech = list("hail_generic"     = "Hello, welcome to ORIGIN, we serve baked goods, including pies and cakes and anything sweet!",
+				"hail_deny"          = "Our food is a privelege, not a right. Goodbye.",
+
+				"trade_complete"     = "Thank you for your purchase! Come again if you're hungry for more!",
+				"trade_refuse"       = "Oh no, I'm afraid I can't make that trade.",
+				"how_much"           = "That lovely dish will cost you VALUE thalers.",
+
+				"compliment_deny"    = "Oh wow, how nice of you...",
+				"compliment_accept"  = "You're almost as sweet as my pies!",
+				"insult_good"        = "My pie are NOT knockoffs!",
+				"insult_bad"         = "Well, aren't you a sour apple?",
+				)
+	possible_trading_items = list(/obj/item/weapon/reagent_containers/food/snacks/slice/birthdaycake/filled     = TRADER_THIS_TYPE,
+								/obj/item/weapon/reagent_containers/food/snacks/slice/carrotcake/filled         = TRADER_THIS_TYPE,
+								/obj/item/weapon/reagent_containers/food/snacks/slice/cheesecake/filled         = TRADER_THIS_TYPE,
+								/obj/item/weapon/reagent_containers/food/snacks/slice/chocolatecake/filled      = TRADER_THIS_TYPE,
+								/obj/item/weapon/reagent_containers/food/snacks/slice/lemoncake/filled          = TRADER_THIS_TYPE,
+								/obj/item/weapon/reagent_containers/food/snacks/slice/limecake/filled           = TRADER_THIS_TYPE,
+								/obj/item/weapon/reagent_containers/food/snacks/slice/orangecake/filled         = TRADER_THIS_TYPE,
+								/obj/item/weapon/reagent_containers/food/snacks/slice/plaincake/filled          = TRADER_THIS_TYPE,
+								/obj/item/weapon/reagent_containers/food/snacks/slice/pumpkinpie/filled         = TRADER_THIS_TYPE,
+								/obj/item/weapon/reagent_containers/food/snacks/slice/bananabread/filled        = TRADER_THIS_TYPE,
+								/obj/item/weapon/reagent_containers/food/snacks/sliceable                       = TRADER_SUBTYPES_ONLY,
+								/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza                 = TRADER_BLACKLIST_ALL,
+								/obj/item/weapon/reagent_containers/food/snacks/sliceable/xenomeatbread         = TRADER_BLACKLIST,
+								/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough             = TRADER_BLACKLIST,
+								/obj/item/weapon/reagent_containers/food/snacks/sliceable/braincake             = TRADER_BLACKLIST,
+								/obj/item/weapon/reagent_containers/food/snacks/pie                             = TRADER_THIS_TYPE,
+								/obj/item/weapon/reagent_containers/food/snacks/applepie                        = TRADER_THIS_TYPE)

@@ -2188,6 +2188,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable
 	w_class = 3 //Whole pizzas and cakes shouldn't fit in a pocket, you can slice them if you want to do that.
+	item_worth = 15
 
 /**
  *  A food item slice
@@ -2199,6 +2200,7 @@
 	name = "slice of... something"
 	var/whole_path  // path for the item from which this slice comes
 	var/filled = FALSE  // should the slice spawn with any reagents
+	item_worth = 3
 
 /**
  *  Spawn a new slice of food
@@ -2848,10 +2850,12 @@
 
 	overlays = list()
 
+	name = initial(name)
 	// Set appropriate description
 	if( open && pizza )
 		desc = "A box suited for pizzas. It appears to have a [pizza.name] inside."
 	else if( boxes.len > 0 )
+		name = "pile of pizza boxes"
 		desc = "A pile of boxes suited for pizzas. There appears to be [boxes.len + 1] boxes in the pile."
 
 		var/obj/item/pizzabox/topbox = boxes[boxes.len]

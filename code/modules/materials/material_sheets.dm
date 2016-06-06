@@ -7,7 +7,8 @@
 	throw_range = 3
 	max_amount = 60
 	randpixel = 3
-	item_worth = 5
+	item_worth = 5 //while this is calculated for actual objects, we need to set up values for the stacks themselves
+	               //So that we can sell them via NPCs
 
 	var/default_type = DEFAULT_WALL_MATERIAL
 	var/material/material
@@ -104,16 +105,19 @@
 	name = "marble brick"
 	icon_state = "sheet-marble"
 	default_type = "marble"
+	item_worth = 20
 
 /obj/item/stack/material/diamond
 	name = "diamond"
 	icon_state = "sheet-diamond"
 	default_type = "diamond"
+	item_worth = 60
 
 /obj/item/stack/material/uranium
 	name = "uranium"
 	icon_state = "sheet-uranium"
 	default_type = "uranium"
+	item_worth = 120
 
 /obj/item/stack/material/phoron
 	name = "solid phoron"
@@ -124,28 +128,33 @@
 	name = "plastic"
 	icon_state = "sheet-plastic"
 	default_type = "plastic"
+	item_worth = 15
 
 /obj/item/stack/material/gold
 	name = "gold"
 	icon_state = "sheet-gold"
 	default_type = "gold"
+	item_worth = 55
 
 /obj/item/stack/material/silver
 	name = "silver"
 	icon_state = "sheet-silver"
 	default_type = "silver"
+	item_worth = 45
 
 //Valuable resource, cargo can sell it.
 /obj/item/stack/material/platinum
 	name = "platinum"
 	icon_state = "sheet-adamantine"
 	default_type = "platinum"
+	item_worth = 95
 
 //Extremely valuable to Research.
 /obj/item/stack/material/mhydrogen
 	name = "metallic hydrogen"
 	icon_state = "sheet-mythril"
 	default_type = "mhydrogen"
+	item_worth = 110
 
 //Fuel for MRSPACMAN generator.
 /obj/item/stack/material/tritium
@@ -153,6 +162,7 @@
 	icon_state = "sheet-silver"
 	default_type = "tritium"
 	apply_colour = 1
+	item_worth = 100
 
 /obj/item/stack/material/osmium
 	name = "osmium"
@@ -170,21 +180,25 @@
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
 	default_type = "plasteel"
+	item_worth = 40
 
 /obj/item/stack/material/wood
 	name = "wooden plank"
 	icon_state = "sheet-wood"
 	default_type = "wood"
+	item_worth = 2
 
 /obj/item/stack/material/cloth
 	name = "cloth"
 	icon_state = "sheet-cloth"
 	default_type = "cloth"
+	item_worth = 3
 
 /obj/item/stack/material/cardboard
 	name = "cardboard"
 	icon_state = "sheet-card"
 	default_type = "cardboard"
+	item_worth = 1
 
 /obj/item/stack/material/leather
 	name = "leather"
@@ -201,6 +215,7 @@
 	name = "reinforced glass"
 	icon_state = "sheet-rglass"
 	default_type = "rglass"
+	item_worth = 12
 
 /obj/item/stack/material/glass/phoronglass
 	name = "borosilicate glass"
@@ -208,6 +223,7 @@
 	singular_name = "borosilicate glass sheet"
 	icon_state = "sheet-phoronglass"
 	default_type = "phglass"
+	item_worth = 35
 
 /obj/item/stack/material/glass/phoronrglass
 	name = "reinforced borosilicate glass"
@@ -215,3 +231,4 @@
 	singular_name = "reinforced borosilicate glass sheet"
 	icon_state = "sheet-phoronrglass"
 	default_type = "rphglass"
+	item_worth = 65

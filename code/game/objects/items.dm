@@ -2,6 +2,7 @@
 	name = "item"
 	icon = 'icons/obj/items.dmi'
 	w_class = 3.0
+	item_worth = 5
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
@@ -107,7 +108,7 @@
 
 /obj/item/proc/is_held_twohanded(mob/living/M)
 	var/check_hand
-	if(M.l_hand == src && !M.r_hand) 
+	if(M.l_hand == src && !M.r_hand)
 		check_hand = "r_hand" //item in left hand, check right hand
 	else if(M.r_hand == src && !M.l_hand)
 		check_hand = "l_hand" //item in right hand, check left hand
@@ -284,7 +285,7 @@
 	layer = SCREEN_LAYER+0.01
 	if(user.client)	user.client.screen |= src
 	if(user.pulling == src) user.stop_pulling()
-	
+
 	//Update two-handing status
 	var/mob/M = loc
 	if(!istype(M))

@@ -26,10 +26,14 @@
 	var/obj/item/ammo_magazine/ammo_magazine = null //stored magazine
 	var/auto_eject = 0			//if the magazine should automatically eject itself when empty.
 	var/auto_eject_sound = null
+	var/jammed = 0              //whether the gun is jammed or not
+	var/jam_chance = 0          //chance the gun jams per shot
 	//TODO generalize ammo icon states for guns
 	//var/magazine_states = 0
 	//var/list/icon_keys = list()		//keys
 	//var/list/ammo_states = list()	//values
+
+	item_worth = 1500
 
 /obj/item/weapon/gun/projectile/New()
 	..()
@@ -39,6 +43,18 @@
 	if(ispath(magazine_type) && (load_method & MAGAZINE))
 		ammo_magazine = new magazine_type(src)
 	update_icon()
+
+/obj/item/weapon/gun/projectile/special_check(var/mob/user)
+	if(!..())
+		return 0
+	if(!jammed && prob(jam_chance))
+		src.visible_message("\The [src] jams!")
+		jammed = 1
+		return 0
+	if(jammed)
+		user << "<span class='warning'>\The [src] is jammed!</span>"
+		return 0
+	return 1
 
 /obj/item/weapon/gun/projectile/consume_next_projectile()
 	//get the next casing
@@ -175,7 +191,12 @@
 	load_ammo(A, user)
 
 /obj/item/weapon/gun/projectile/attack_self(mob/user as mob)
-	if(firemodes.len > 1)
+	if(jammed)
+		user.visible_message("<b>\The [user]</b> unjams \the [src].")
+		jammed = 0
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
+	else if(firemodes.len > 1)
 		..()
 	else
 		unload_ammo(user)

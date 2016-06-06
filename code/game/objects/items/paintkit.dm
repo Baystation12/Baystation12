@@ -6,6 +6,7 @@
 	var/new_icon = "ripley"  //What base icon will the new mech use?
 	var/new_icon_file
 	var/uses = 1        // Uses before the kit deletes itself.
+	item_worth = 100
 
 /obj/item/device/kit/examine()
 	..()
@@ -72,6 +73,7 @@
 	desc = "A kit containing all the needed tools and parts to repaint a mech."
 	var/removable = null
 	var/list/allowed_types = list()
+	item_worth = 500
 
 /obj/item/device/kit/paint/examine()
 	..()

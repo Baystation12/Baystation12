@@ -1,7 +1,7 @@
 /datum/controller/process/trade/setup()
 	name = "trade"
 	schedule_interval = 600 //1 minute
-	for(var/i in 1 to rand(2,5))
+	for(var/i in 1 to rand(3,5))
 		generateTrader(1)
 
 /datum/controller/process/trade/doWork()
@@ -9,7 +9,7 @@
 		var/datum/trader/T = a
 		if(!T.tick())
 			traders -= T
-	if(prob(25/traders.len))
+	if(prob(50/traders.len))
 		generateTrader()
 
 /datum/controller/process/trade/proc/generateTrader(var/stations = 0)
