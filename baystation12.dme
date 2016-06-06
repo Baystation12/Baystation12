@@ -2036,4 +2036,5 @@
 #include "maps\exodus\exodus_define.dm"
 #include "maps\torch\torch_define.dm"
 #include "maps\~mapsystem\maps.dm"
+#include "~code\global_init.dm"
 // END_INCLUDE
