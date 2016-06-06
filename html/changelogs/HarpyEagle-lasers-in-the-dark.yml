@@ -1,0 +1,6 @@
+author: HarpyEagle
+
+delete-after: True
+
+changes:
+  - rscadd: "Makes laser beams and muzzle flashes stand out in the dark."
