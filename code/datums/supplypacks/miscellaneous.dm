@@ -13,38 +13,33 @@
 
 /decl/hierarchy/supply_pack/miscellaneous/carpet
 	name = "Imported carpet"
-	contains = list(/obj/item/stack/tile/carpet)
+	contains = list(/obj/item/stack/tile/carpet/fifty)
 	cost = 15
 	containername = "\improper Imported carpet crate"
-	amount = 50
 
 /decl/hierarchy/supply_pack/miscellaneous/linoleum
 	name = "Linoleum"
-	contains = list(/obj/item/stack/tile/linoleum)
+	contains = list(/obj/item/stack/tile/linoleum/fifty)
 	cost = 15
 	containername = "\improper Linoleum crate"
-	amount = 50
 
 /decl/hierarchy/supply_pack/miscellaneous/white_tiles
 	name = "White floor tiles"
-	contains = list(/obj/item/stack/tile/floor_white)
+	contains = list(/obj/item/stack/tile/floor_white/fifty)
 	cost = 15
 	containername = "\improper White floor tile crate"
-	amount = 50
 
 /decl/hierarchy/supply_pack/miscellaneous/dark_tiles
 	name = "Dark floor tiles"
-	contains = list(/obj/item/stack/tile/floor_dark)
+	contains = list(/obj/item/stack/tile/floor_dark/fifty)
 	cost = 15
 	containername = "\improper Dark floor tile crate"
-	amount = 50
 
 /decl/hierarchy/supply_pack/miscellaneous/freezer_tiles
 	name = "Freezer floor tiles"
-	contains = list(/obj/item/stack/tile/floor_freezer)
+	contains = list(/obj/item/stack/tile/floor_freezer/fifty)
 	cost = 15
 	containername = "\improper Freezer floor tile crate"
-	amount = 50
 
 /decl/hierarchy/supply_pack/miscellaneous/costume
 	num_contained = 2
@@ -145,10 +140,9 @@
 
 /decl/hierarchy/supply_pack/miscellaneous/cardboard_sheets
 	name = "50 cardboard sheets"
-	contains = list(/obj/item/stack/material/cardboard)
+	contains = list(/obj/item/stack/material/cardboard/fifty)
 	cost = 10
 	containername = "\improper Cardboard sheets crate"
-	amount = 50
 
 /decl/hierarchy/supply_pack/miscellaneous/witch
 	name = "Witch costume"

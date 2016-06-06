@@ -6,7 +6,6 @@ var/decl/hierarchy/supply_pack/cargo_supply_packs	// Non-category supply packs
 	hierarchy_type = /decl/hierarchy/supply_pack
 	var/list/contains = list()
 	var/manifest = ""
-	var/amount = null
 	var/cost = null
 	var/containertype = /obj/structure/closet/crate
 	var/containername = null
