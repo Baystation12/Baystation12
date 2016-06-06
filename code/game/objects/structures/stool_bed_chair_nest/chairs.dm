@@ -41,7 +41,8 @@
 	var/cache_key = "[base_icon]-[material.name]-over"
 	if(isnull(stool_cache[cache_key]))
 		var/image/I = image('icons/obj/furniture.dmi', "[base_icon]_over")
-		I.color = material.icon_colour
+		if(material_alteration & MATERIAL_ALTERATION_COLOR)
+			I.color = material.icon_colour
 		I.layer = FLY_LAYER
 		stool_cache[cache_key] = I
 	overlays |= stool_cache[cache_key]
@@ -50,7 +51,8 @@
 		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]-over"
 		if(isnull(stool_cache[padding_cache_key]))
 			var/image/I =  image(icon, "[base_icon]_padding_over")
-			I.color = padding_material.icon_colour
+			if(material_alteration & MATERIAL_ALTERATION_COLOR)
+				I.color = padding_material.icon_colour
 			I.layer = FLY_LAYER
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]
@@ -60,7 +62,8 @@
 		if(isnull(stool_cache[cache_key]))
 			var/image/I = image(icon, "[base_icon]_armrest")
 			I.layer = MOB_LAYER + 0.1
-			I.color = padding_material.icon_colour
+			if(material_alteration & MATERIAL_ALTERATION_COLOR)
+				I.color = padding_material.icon_colour
 			stool_cache[cache_key] = I
 		overlays |= stool_cache[cache_key]
 
@@ -123,6 +126,7 @@
 /obj/structure/bed/chair/office
 	anchored = 0
 	buckle_movable = 1
+	material_alteration = MATERIAL_ALTERATION_NONE
 
 /obj/structure/bed/chair/office/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
@@ -182,6 +186,7 @@
 	desc = "Old is never too old to not be in fashion."
 	base_icon = "wooden_chair"
 	icon_state = "wooden_chair_preview"
+	material_alteration = MATERIAL_ALTERATION_NAME
 
 /obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))

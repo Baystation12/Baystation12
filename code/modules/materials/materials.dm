@@ -65,6 +65,7 @@ var/list/name_to_material
 /material
 	var/name	                          // Unique name for use in indexing the list.
 	var/display_name                      // Prettier name for display.
+	var/adjective_name
 	var/use_name
 	var/flags = 0                         // Various status modifiers.
 	var/sheet_singular_name = "sheet"
@@ -152,6 +153,8 @@ var/list/name_to_material
 		display_name = name
 	if(!use_name)
 		use_name = display_name
+	if(!adjective_name)
+		adjective_name = display_name
 	if(!shard_icon)
 		shard_icon = shard_type
 
@@ -582,6 +585,7 @@ var/list/name_to_material
 
 /material/wood
 	name = "wood"
+	adjective_name = "wooden"
 	stack_type = /obj/item/stack/material/wood
 	icon_colour = "#824B28"
 	integrity = 50
