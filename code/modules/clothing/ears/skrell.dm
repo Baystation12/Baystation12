@@ -6,6 +6,7 @@
 	name = "skrell headtail wear"
 	desc = "Some stuff worn by skrell to adorn their headtails."
 	icon = 'icons/obj/clothing/ears.dmi'
+	gender = PLURAL
 	w_class = 1
 	slot_flags = SLOT_EARS
 	species_restricted = list("Skrell")
