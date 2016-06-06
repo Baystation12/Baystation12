@@ -30,6 +30,8 @@
 	var/frequency = 0
 	var/datum/radio_frequency/radio_connection
 
+	item_worth = 3300
+
 /obj/machinery/atmospherics/trinary/filter/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency

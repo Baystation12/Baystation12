@@ -85,6 +85,8 @@
 	var/datum/wires/rig/wires
 	var/datum/effect/effect/system/spark_spread/spark_system
 
+	item_worth = 15000
+
 /obj/item/weapon/rig/examine()
 	usr << "This is \icon[src][src.name]."
 	usr << "[src.desc]"

@@ -31,6 +31,8 @@
 	maptext_height = 26
 	maptext_width = 32
 
+	item_worth = 300
+
 /obj/machinery/door_timer/New()
 	..()
 

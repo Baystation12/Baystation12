@@ -17,6 +17,7 @@
 	var/subtype = 0
 	var/dpdir = 0	// directions as disposalpipe
 	var/base_state = "pipe-s"
+	item_worth = 0
 
 	// update iconstate and dpdir due to dir and type
 	proc/update()

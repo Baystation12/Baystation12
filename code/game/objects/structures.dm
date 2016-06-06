@@ -1,6 +1,7 @@
 /obj/structure
 	icon = 'icons/obj/structures.dmi'
 	w_class = 10
+	item_worth = 30
 
 	var/climbable
 	var/breakable

@@ -10,7 +10,7 @@
 	throw_speed = 3
 	throw_range = 10
 	origin_tech = list(TECH_MAGNET = 1)
-
+	item_worth = 50
 	var/secured = 1
 	var/list/attached_overlays = null
 	var/obj/item/device/assembly_holder/holder = null

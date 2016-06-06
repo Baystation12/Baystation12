@@ -19,6 +19,7 @@
 	density = 1
 	var/obj/structure/m_tray/connected = null
 	anchored = 1.0
+	item_worth = 100
 
 /obj/structure/morgue/Destroy()
 	if(connected)
@@ -188,6 +189,7 @@
 	var/locked = 0
 	var/_wifi_id
 	var/datum/wifi/receiver/button/crematorium/wifi_receiver
+	item_worth = 600
 
 /obj/structure/crematorium/initialize()
 	..()

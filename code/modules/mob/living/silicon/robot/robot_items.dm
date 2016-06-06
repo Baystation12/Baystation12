@@ -4,6 +4,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "portable_analyzer"
 	desc = "Similar to the stationary version, this rather unwieldy device allows you to break down objects in the name of science."
+	item_worth = 780
 
 	var/min_reliability = 90 //Can't upgrade, call it laziness or a drawback
 
@@ -311,6 +312,7 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "inf_deployer"
 	w_class = 3
+	item_worth = 300
 
 	// By default stores up to 10 walls and 5 doors. May be changed.
 	var/stored_walls = 10

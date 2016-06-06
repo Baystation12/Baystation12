@@ -9,6 +9,7 @@
 	layer = TURF_LAYER + 0.1
 	var/deploying
 	var/deployed
+	item_worth = 65
 
 /obj/structure/droppod_door/New(var/newloc, var/autoopen)
 	..(newloc)

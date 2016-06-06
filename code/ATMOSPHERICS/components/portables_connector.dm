@@ -18,6 +18,8 @@
 	use_power = 0
 	level = 1
 
+	item_worth = 500
+
 
 /obj/machinery/atmospherics/portables_connector/New()
 	initialize_directions = dir

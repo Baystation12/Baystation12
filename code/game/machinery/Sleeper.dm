@@ -13,6 +13,7 @@
 	use_power = 1
 	idle_power_usage = 15
 	active_power_usage = 200 //builtin health analyzer, dialysis machine, injectors.
+	item_worth = 4000
 
 /obj/machinery/sleeper/New()
 	..()

@@ -16,6 +16,7 @@
 	var/help = 0
 	var/edit = 1
 	var/repeat = 0
+	item_worth = 1200 //pianos are expensive
 
 /obj/structure/device/piano/New()
 	if(prob(50))

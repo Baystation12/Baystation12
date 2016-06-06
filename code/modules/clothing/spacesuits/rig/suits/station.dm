@@ -19,6 +19,7 @@
 	boot_type = null
 
 	hides_uniform = 0
+	item_worth = 9000
 
 /obj/item/weapon/rig/internalaffairs/equipped
 
@@ -99,7 +100,7 @@
 
 	req_access = list()
 	req_one_access = list()
-	
+
 /obj/item/clothing/head/helmet/space/rig/eva
 	light_overlay = "helmet_light_dual"
 	camera_networks = list(NETWORK_ENGINEERING)
@@ -159,7 +160,7 @@
 
 /obj/item/clothing/head/helmet/space/rig/ce
 	camera_networks = list(NETWORK_ENGINEERING)
-	
+
 /obj/item/clothing/suit/space/rig/ce
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
@@ -183,7 +184,7 @@
 
 	req_access = list()
 	req_one_access = list()
-	
+
 /obj/item/clothing/head/helmet/space/rig/hazmat
 	light_overlay = "helmet_light_dual"
 	camera_networks = list(NETWORK_RESEARCH)
@@ -227,7 +228,7 @@
 
 	req_access = list()
 	req_one_access = list()
-	
+
 /obj/item/clothing/head/helmet/space/rig/medical
 	camera_networks = list(NETWORK_MEDICAL)
 	species_restricted = list("Human")
@@ -271,7 +272,7 @@
 
 	req_access = list()
 	req_one_access = list()
-	
+
 /obj/item/clothing/head/helmet/space/rig/hazard
 	light_overlay = "helmet_light_dual"
 	camera_networks = list(NETWORK_SECURITY)

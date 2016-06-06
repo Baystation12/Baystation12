@@ -7,6 +7,7 @@
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 	voicechange = 1
+	item_worth = 100
 
 /obj/item/clothing/mask/muzzle/tape
 	name = "length of tape"
@@ -15,6 +16,7 @@
 	icon_state = "tape_cross"
 	item_state = null
 	w_class = 1
+	item_worth = 2
 
 /obj/item/clothing/mask/muzzle/New()
     ..()
@@ -39,6 +41,8 @@
 	permeability_coefficient = 0.01
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 0)
 
+	item_worth = 20
+
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
 	desc = "Warning: moustache is fake."
@@ -46,12 +50,16 @@
 	flags_inv = HIDEFACE
 	body_parts_covered = 0
 
+	item_worth = 5
+
 /obj/item/clothing/mask/snorkel
 	name = "Snorkel"
 	desc = "For the Swimming Savant."
 	icon_state = "snorkel"
 	flags_inv = HIDEFACE
 	body_parts_covered = 0
+
+	item_worth = 5
 
 //scarves (fit in in mask slot)
 //None of these actually have on-mob sprites...
@@ -65,6 +73,8 @@
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 
+	item_worth = 10
+
 /obj/item/clothing/mask/redscarf
 	name = "red scarf"
 	desc = "A red and white checkered neck scarf."
@@ -74,6 +84,7 @@
 	item_flags = FLEXIBLEMATERIAL
 	w_class = 2
 	gas_transfer_coefficient = 0.90
+	item_worth = 15
 
 /obj/item/clothing/mask/greenscarf
 	name = "green scarf"
@@ -84,6 +95,7 @@
 	item_flags = FLEXIBLEMATERIAL
 	w_class = 2
 	gas_transfer_coefficient = 0.90
+	item_worth = 15
 
 /obj/item/clothing/mask/ninjascarf
 	name = "ninja scarf"
@@ -95,6 +107,7 @@
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 	siemens_coefficient = 0
+	item_worth = 15
 
 /obj/item/clothing/mask/pig
 	name = "pig mask"
@@ -134,6 +147,8 @@
 	origin_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 5)
 	var/active = FALSE
 	var/mob/observer/eye/cameranet/eye
+
+	item_worth = 3000
 
 /obj/item/clothing/mask/ai/New()
 	eye = new(src)

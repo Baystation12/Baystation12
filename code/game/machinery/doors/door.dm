@@ -36,6 +36,7 @@
 
 	// turf animation
 	var/atom/movable/overlay/c_animation = null
+	item_worth = 100
 
 /obj/machinery/door/attack_generic(var/mob/user, var/damage)
 	if(damage >= 10)

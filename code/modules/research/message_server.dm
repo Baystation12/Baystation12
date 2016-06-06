@@ -246,7 +246,7 @@ var/obj/machinery/blackbox_recorder/blackbox
 	var/list/msg_service = list()
 
 	var/list/datum/feedback_variable/feedback = new()
-
+	item_worth = 9500
 	//Only one can exist in the world!
 /obj/machinery/blackbox_recorder/New()
 	if(blackbox)

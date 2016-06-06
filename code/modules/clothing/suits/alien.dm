@@ -14,6 +14,8 @@
 	item_state = "mantle-unathi"
 	body_parts_covered = UPPER_TORSO
 
+	item_worth = 80
+
 //Taj clothing.
 
 /obj/item/clothing/suit/tajaran/furs
@@ -23,8 +25,12 @@
 	item_state = "zhan_furs"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 
+	item_worth = 90
+
 /obj/item/clothing/head/tajaran/scarf
 	name = "headscarf"
 	desc = "A scarf of coarse fabric. Seems to have ear-holes."
 	icon_state = "zhan_scarf"
 	body_parts_covered = HEAD|FACE
+
+	item_worth = 30

@@ -29,6 +29,8 @@
 
 	var/chained = 0//Adminbus chain-grab
 
+	item_worth = 200000
+
 /obj/singularity/New(loc, var/starting_energy = 50, var/temp = 0)
 	//CARN: admin-alert for chuckle-fuckery.
 	admin_investigate_setup()

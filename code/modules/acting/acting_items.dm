@@ -23,6 +23,7 @@
 	icon_state = "bioprinter"
 	anchored = 1
 	density = 1
+	item_worth = 3000
 
 /obj/machinery/acting/changer/attack_hand(var/mob/user as mob)
 	if(ishuman(user))

@@ -18,6 +18,7 @@
 	var/default_material = DEFAULT_WALL_MATERIAL
 	var/material/material
 	var/drops_debris = 1
+	var/worth_multiplier = 1
 
 /obj/item/weapon/material/New(var/newloc, var/material_key)
 	..(newloc)
@@ -62,7 +63,9 @@
 			flags |= CONDUCT
 		else
 			flags &= (~CONDUCT)
+		item_worth = material.material_worth * worth_multiplier
 		update_force()
+
 
 /obj/item/weapon/material/Destroy()
 	processing_objects -= src

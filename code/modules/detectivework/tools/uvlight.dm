@@ -17,6 +17,8 @@
 	var/on = 0
 	var/step_alpha = 50
 
+	item_worth = 150
+
 /obj/item/device/uv_light/attack_self(var/mob/user)
 	on = !on
 	if(on)

@@ -24,6 +24,8 @@
 	icon = 'icons/obj/machines/drone_fab.dmi'
 	icon_state = "drone_fab_idle"
 
+	item_worth = 3000
+
 /obj/machinery/drone_fabricator/derelict
 	name = "construction drone fabricator"
 	fabricator_tag = "Derelict"

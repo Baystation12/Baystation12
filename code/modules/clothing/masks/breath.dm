@@ -10,6 +10,8 @@
 	permeability_coefficient = 0.50
 	var/hanging = 0
 
+	item_worth = 80
+
 /obj/item/clothing/mask/breath/proc/adjust_mask(mob/user)
 	if(user.canmove && !user.stat)
 		src.hanging = !src.hanging
@@ -43,3 +45,5 @@
 	icon_state = "medical"
 	item_state = "medical"
 	permeability_coefficient = 0.01
+
+	item_worth = 180

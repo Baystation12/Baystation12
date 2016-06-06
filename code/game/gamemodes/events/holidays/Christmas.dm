@@ -22,6 +22,7 @@
 	icon_state = "cracker"
 	desc = "Directions for use: Requires two people, one to pull each end."
 	var/cracked = 0
+	item_worth = 20
 
 /obj/item/weapon/toy/xmas_cracker/New()
 	..()

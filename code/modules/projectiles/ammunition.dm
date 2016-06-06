@@ -15,6 +15,8 @@
 	var/obj/item/projectile/BB = null	//The loaded bullet - make it so that the projectiles are created only when needed?
 	var/spent_icon = null
 
+	item_worth = 5
+
 /obj/item/ammo_casing/New()
 	..()
 	if(ispath(projectile_type))
@@ -24,6 +26,7 @@
 /obj/item/ammo_casing/proc/expend()
 	. = BB
 	BB = null
+	item_worth = 1
 	set_dir(pick(cardinal)) //spin spent casings
 
 	// Aurora forensics port, gunpowder residue.
@@ -104,6 +107,8 @@
 	//because BYOND doesn't support numbers as keys in associative lists
 	var/list/icon_keys = list()		//keys
 	var/list/ammo_states = list()	//values
+
+	item_worth = 30
 
 /obj/item/ammo_magazine/New()
 	..()

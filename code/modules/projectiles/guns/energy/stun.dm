@@ -6,6 +6,8 @@
 	max_shots = 5
 	projectile_type = /obj/item/projectile/beam/stun
 
+	item_worth = 200
+
 /obj/item/weapon/gun/energy/taser/mounted
 	name = "mounted taser gun"
 	self_recharge = 1
@@ -42,6 +44,7 @@
 	max_shots = 5
 	self_recharge = 1
 	charge_meter = 0
+	item_worth = 250
 
 /obj/item/weapon/gun/energy/crossbow/ninja
 	name = "energy dart thrower"
@@ -55,3 +58,4 @@
 	requires_two_hands = 1
 	matter = list(DEFAULT_WALL_MATERIAL = 200000)
 	projectile_type = /obj/item/projectile/energy/bolt/large
+	item_worth = 300

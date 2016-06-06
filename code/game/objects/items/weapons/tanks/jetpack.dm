@@ -14,6 +14,8 @@
 	var/volume_rate = 500              //Needed for borg jetpack transfer
 	action_button_name = "Toggle Jetpack"
 
+	item_worth = 390
+
 /obj/item/weapon/tank/jetpack/New()
 	..()
 	src.ion_trail = new /datum/effect/effect/system/trail/ion()

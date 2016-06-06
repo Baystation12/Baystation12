@@ -18,6 +18,8 @@
 	hardware_size = 2
 	battery_rating = 1100
 
+	item_worth = 110
+
 /obj/item/weapon/computer_hardware/battery_module/super
 	name = "super battery"
 	desc = "A very advanced power cell, often used in high-end devices, or as uninterruptable power supply for important consoles or servers. It's rating is 1500."
@@ -25,6 +27,8 @@
 	origin_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 3)
 	hardware_size = 2
 	battery_rating = 1500
+
+	item_worth = 150
 
 /obj/item/weapon/computer_hardware/battery_module/ultra
 	name = "ultra battery"
@@ -34,12 +38,16 @@
 	hardware_size = 3
 	battery_rating = 2000
 
+	item_worth = 190
+
 /obj/item/weapon/computer_hardware/battery_module/micro
 	name = "micro battery"
 	desc = "A small power cell, commonly seen in most portable microcomputers. It's rating is 500."
 	icon_state = "battery_micro"
 	origin_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
 	battery_rating = 500
+
+	item_worth = 80
 
 /obj/item/weapon/computer_hardware/battery_module/nano
 	name = "nano battery"
@@ -48,6 +56,8 @@
 	origin_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	battery_rating = 300
 
+	item_worth = 60
+
 // This is not intended to be obtainable in-game. Intended for adminbus and debugging purposes.
 /obj/item/weapon/computer_hardware/battery_module/lambda
 	name = "lambda coil"
@@ -55,6 +65,8 @@
 	icon_state = "battery_lambda"
 	hardware_size = 1
 	battery_rating = 1000000
+
+	item_worth = 10000
 
 /obj/item/weapon/computer_hardware/battery_module/diagnostics(var/mob/user)
 	..()

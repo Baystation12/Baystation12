@@ -11,6 +11,7 @@
 	active_power_usage = 4
 	var/_wifi_id
 	var/datum/wifi/receiver/button/igniter/wifi_receiver
+	item_worth = 300
 
 /obj/machinery/igniter/New()
 	..()
@@ -71,6 +72,7 @@
 	active_power_usage = 4
 	var/_wifi_id
 	var/datum/wifi/receiver/button/sparker/wifi_receiver
+	item_worth = 500
 
 /obj/machinery/sparker/initialize()
 	..()

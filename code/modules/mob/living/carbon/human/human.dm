@@ -8,6 +8,7 @@
 	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/obj/item/weapon/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
+	item_worth = 10000
 
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
 
@@ -1131,6 +1132,7 @@
 	species.create_organs(src)
 	src.sync_organ_dna()
 	species.handle_post_spawn(src)
+	item_worth = species.rarity_value * initial(item_worth)
 
 	maxHealth = species.total_health
 

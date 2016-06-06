@@ -14,6 +14,7 @@
 	var/power_use = 25
 	var/obj/effect/suspension_field/suspension_field
 	var/list/secured_mobs = list()
+	item_worth = 3000
 
 /obj/machinery/suspension_gen/New()
 	src.cell = new/obj/item/weapon/cell/high(src)

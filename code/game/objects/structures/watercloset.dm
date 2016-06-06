@@ -11,6 +11,7 @@
 	var/cistern = 0			//if the cistern bit is open
 	var/w_items = 0			//the combined w_class of all the items in the cistern
 	var/mob/living/swirlie = null	//the mob being given a swirlie
+	item_worth = 50
 
 /obj/structure/toilet/New()
 	open = round(rand(0, 1))
@@ -128,6 +129,7 @@
 	var/watertemp = "normal"	//freezing, normal, or boiling
 	var/is_washing = 0
 	var/list/temperature_settings = list("normal" = 310, "boiling" = T0C+100, "freezing" = T0C)
+	item_worth = 300
 
 /obj/machinery/shower/New()
 	..()

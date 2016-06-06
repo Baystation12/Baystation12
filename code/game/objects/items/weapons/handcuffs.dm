@@ -18,6 +18,7 @@
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/handcuffs.dmi')
+	item_worth = 35
 
 /obj/item/weapon/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
 
@@ -123,6 +124,7 @@ var/last_chew = 0
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"
 	elastic = 1
+	item_worth = 5
 
 /obj/item/weapon/handcuffs/cable/red
 	color = "#DD0000"

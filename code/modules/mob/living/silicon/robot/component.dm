@@ -214,12 +214,16 @@
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "broken"
 
+	item_worth = 10
+
 /obj/item/robot_parts/robot_component
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "working"
 	var/brute = 0
 	var/burn = 0
 	var/icon_state_broken = "broken"
+
+	item_worth = 250
 
 /obj/item/robot_parts/robot_component/binary_communication_device
 	name = "binary communication device"

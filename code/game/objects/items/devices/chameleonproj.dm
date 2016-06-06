@@ -16,6 +16,8 @@
 	var/saved_icon_state = "cigbutt"
 	var/saved_overlays
 
+	item_worth = 4000
+
 /obj/item/device/chameleon/dropped()
 	disrupt()
 	..()

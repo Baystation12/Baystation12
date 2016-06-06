@@ -10,6 +10,8 @@
 	var/looking_for_personality = 0
 	var/mob/living/silicon/pai/pai
 
+	item_worth = 120
+
 /obj/item/device/paicard/relaymove(var/mob/user, var/direction)
 	if(user.stat || user.stunned)
 		return

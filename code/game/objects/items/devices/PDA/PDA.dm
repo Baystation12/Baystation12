@@ -63,6 +63,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	var/obj/item/device/paicard/pai = null	// A slot for a personal AI device
 
+	item_worth = 60
+
 /obj/item/device/pda/examine(mob/user)
 	. = ..(user, 1)
 	if(.)

@@ -9,6 +9,7 @@
 	throw_range = 15
 	sharp = 1
 	edge =  1
+	worth_multiplier = 0.9
 
 /obj/item/weapon/material/star/New()
 	..()
@@ -20,4 +21,5 @@
 		M.adjustToxLoss(rand(20,40))
 
 /obj/item/weapon/material/star/ninja
+	name = "uranium shuriken"
 	default_material = "uranium"

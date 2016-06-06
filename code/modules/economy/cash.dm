@@ -15,6 +15,7 @@
 	var/access = list()
 	access = access_crate_cash
 	var/worth = 0
+	item_worth = 0
 
 /obj/item/weapon/spacecash/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/spacecash))
@@ -26,10 +27,12 @@
 			user.drop_from_inventory(cash)
 			bundle = new (src.loc)
 			bundle.worth += cash.worth
+			bundle.item_worth = worth
 			qdel(cash)
 		else //is bundle
 			bundle = W
 		bundle.worth += src.worth
+		bundle.item_worth = worth
 		bundle.update_icon()
 		if(istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/h_user = user
@@ -84,6 +87,7 @@
 	if(amount==0) return 0
 
 	src.worth -= amount
+	src.item_worth = worth
 	src.update_icon()
 	if(!worth)
 		usr.drop_from_inventory(src)
@@ -94,6 +98,7 @@
 	else
 		var/obj/item/weapon/spacecash/bundle/bundle = new (usr.loc)
 		bundle.worth = amount
+		bundle.item_worth = amount
 		bundle.update_icon()
 		usr.put_in_hands(bundle)
 	if(!worth)
@@ -104,30 +109,35 @@
 	icon_state = "spacecash1"
 	desc = "It's worth 1 credit."
 	worth = 1
+	item_worth = 1
 
 /obj/item/weapon/spacecash/bundle/c10
 	name = "10 Thaler"
 	icon_state = "spacecash10"
 	desc = "It's worth 10 Thalers."
 	worth = 10
+	item_worth = 10
 
 /obj/item/weapon/spacecash/bundle/c20
 	name = "20 Thaler"
 	icon_state = "spacecash20"
 	desc = "It's worth 20 Thalers."
 	worth = 20
+	item_worth = 20
 
 /obj/item/weapon/spacecash/bundle/c50
 	name = "50 Thaler"
 	icon_state = "spacecash50"
 	desc = "It's worth 50 Thalers."
 	worth = 50
+	item_worth = 50
 
 /obj/item/weapon/spacecash/bundle/c100
 	name = "100 Thaler"
 	icon_state = "spacecash100"
 	desc = "It's worth 100 Thalers."
 	worth = 100
+	item_worth = 100
 
 /obj/item/weapon/spacecash/bundle/c200
 	name = "200 Thaler"
@@ -140,12 +150,14 @@
 	icon_state = "spacecash500"
 	desc = "It's worth 500 Thalers."
 	worth = 500
+	item_worth = 500
 
 /obj/item/weapon/spacecash/bundle/c1000
 	name = "1000 Thaler"
 	icon_state = "spacecash1000"
 	desc = "It's worth 1000 Thalers."
 	worth = 1000
+	item_worth = 1000
 
 proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 	if(sum in list(1000,500,200,100,50,20,10,1))
@@ -156,6 +168,7 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 	else
 		var/obj/item/weapon/spacecash/bundle/bundle = new (spawnloc)
 		bundle.worth = sum
+		bundle.item_worth = sum
 		bundle.update_icon()
 		if (ishuman(human_user) && !human_user.get_active_hand())
 			human_user.put_in_hands(bundle)

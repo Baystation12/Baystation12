@@ -9,6 +9,8 @@
 	var/obj/item/stack/tile/T
 	var/list/mode = list("dismantle"=0,"laying"=0,"collect"=0)
 
+	item_worth = 1500
+
 /obj/machinery/floorlayer/New()
 	T = new/obj/item/stack/tile/floor(src)
 	..()

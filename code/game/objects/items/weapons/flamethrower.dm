@@ -20,6 +20,7 @@
 	var/obj/item/weapon/weldingtool/weldtool = null
 	var/obj/item/device/assembly/igniter/igniter = null
 	var/obj/item/weapon/tank/phoron/ptank = null
+	item_worth = 40
 
 
 /obj/item/weapon/flamethrower/Destroy()

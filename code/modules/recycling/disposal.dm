@@ -26,6 +26,7 @@
 	var/last_sound = 0
 	active_power_usage = 2200	//the pneumatic pump power. 3 HP ~ 2200W
 	idle_power_usage = 100
+	item_worth = 500
 
 // create a new disposal
 // find the attached trunk (if present) and init gas resvr.
@@ -657,6 +658,7 @@
 	var/base_icon_state	// initial icon state on map
 	var/sortType = ""
 	var/subtype = 0
+	item_worth = 35
 	// new pipe, set the icon_state as on map
 	New()
 		..()
@@ -1126,6 +1128,7 @@
 /obj/structure/disposalpipe/tagger
 	name = "package tagger"
 	icon_state = "pipe-tagger"
+	item_worth = 70
 	var/sort_tag = ""
 	var/partial = 0
 
@@ -1180,7 +1183,7 @@
 	name = "sorting junction"
 	icon_state = "pipe-j1s"
 	desc = "An underfloor disposal pipe with a package sorting mechanism."
-
+	item_worth = 65
 	var/posdir = 0
 	var/negdir = 0
 	var/sortdir = 0
@@ -1427,6 +1430,7 @@
 	var/active = 0
 	var/turf/target	// this will be where the output objects are 'thrown' to.
 	var/mode = 0
+	item_worth = 65
 
 	New()
 		..()

@@ -7,6 +7,8 @@
 	var/deploy_path = /obj/machinery/power/supply_beacon
 	var/deploy_time = 30
 
+	item_worth = 5000
+
 /obj/item/supply_beacon/supermatter
 	name = "inactive supermatter supply beacon"
 	deploy_path = /obj/machinery/power/supply_beacon/supermatter

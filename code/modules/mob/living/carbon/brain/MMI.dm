@@ -36,6 +36,8 @@
 
 	req_access = list(access_robotics)
 
+	item_worth = 1200
+
 	//Revised. Brainmob is now contained directly within object of transfer. MMI in this case.
 
 	var/locked = 0

@@ -17,6 +17,8 @@
 		)
 	body_parts_covered = 0
 
+	item_worth = 200
+
 /obj/item/clothing/head/caphat/cap
 	name = "captain's cap"
 	desc = "You fear to wear it for the negligence it brings."
@@ -32,6 +34,8 @@
 	name = "crew resource's hat"
 	desc = "A stylish hat that both protects you from enraged former-crewmembers and gives you a false sense of authority."
 	icon_state = "hopcap"
+
+	item_worth = 100
 
 //Chaplain
 /obj/item/clothing/head/chaplain_hood

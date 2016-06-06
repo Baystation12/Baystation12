@@ -19,6 +19,8 @@
 	*/
 	var/list/sprite_sheets_refit = null
 
+	item_worth = 50
+
 //Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
 	return
@@ -609,7 +611,7 @@ BLIND     // can't see anything
 	else
 		rolled_sleeves = -1
 	if(H) update_clothing_icon()
-	
+
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc

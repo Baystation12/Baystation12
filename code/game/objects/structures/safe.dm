@@ -20,6 +20,7 @@ FLOOR SAFES
 	var/dial = 0		//where is the dial pointing?
 	var/space = 0		//the combined w_class of everything in the safe
 	var/maxspace = 24	//the maximum combined w_class of stuff in the safe
+	item_worth = 200
 
 
 /obj/structure/safe/New()
@@ -170,6 +171,7 @@ obj/structure/safe/ex_act(severity)
 	density = 0
 	level = 1	//underfloor
 	layer = 2.5
+	item_worth = 180
 
 /obj/structure/safe/floor/initialize()
 	..()

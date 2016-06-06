@@ -20,6 +20,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	var/sendcooldown = 0 // to avoid spamming fax messages
 	var/department = "Unknown" // our department
 	var/destination = null // the department we're sending to
+	item_worth = 200
 
 /obj/machinery/photocopier/faxmachine/New()
 	..()

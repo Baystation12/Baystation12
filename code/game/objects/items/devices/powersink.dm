@@ -25,6 +25,8 @@
 	var/datum/powernet/PN			// Our powernet
 	var/obj/structure/cable/attached		// the attached cable
 
+	item_worth = 800
+
 /obj/item/device/powersink/Destroy()
 	processing_objects.Remove(src)
 	processing_power_items.Remove(src)

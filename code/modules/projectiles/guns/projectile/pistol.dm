@@ -6,6 +6,7 @@
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
+	item_worth = 1700
 
 /obj/item/weapon/gun/projectile/sec
 	name = ".45 pistol"
@@ -15,6 +16,7 @@
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
+	item_worth = 1650
 
 /obj/item/weapon/gun/projectile/sec/update_icon()
 	..()
@@ -59,6 +61,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a50
 	auto_eject = 1
+	item_worth = 2000
 
 /obj/item/weapon/gun/projectile/deagle/gold
 	desc = "A gold plated gun folded over a million times by superior martian gunsmiths. Uses .50 AE ammo."
@@ -85,6 +88,7 @@
 	magazine_type = /obj/item/ammo_magazine/a75
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
+	item_worth = 5500
 
 /obj/item/weapon/gun/projectile/gyropistol/update_icon()
 	..()
@@ -105,6 +109,7 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 2)
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mm
+	item_worth = 1600
 
 /obj/item/weapon/gun/projectile/pistol/flash
 	name = "holdout signal pistol"
@@ -151,6 +156,7 @@
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "silencer"
 	w_class = 2
+	item_worth = 60
 
 /obj/item/weapon/gun/projectile/pirate
 	name = "zip gun"

@@ -14,6 +14,8 @@
 	var/obj/machinery/artifact_scanpad/owned_scanner = null
 	var/last_process = 0
 
+	item_worth = 2300
+
 /obj/machinery/artifact_harvester/New()
 	..()
 	//connect to a nearby scanner pad

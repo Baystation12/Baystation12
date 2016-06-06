@@ -18,6 +18,8 @@
 
 	var/list/filtering_outputs = list()	//maps gasids to gas_mixtures
 
+	item_worth = 4000
+
 /obj/machinery/atmospherics/omni/filter/New()
 	..()
 	rebuild_filtering_list()

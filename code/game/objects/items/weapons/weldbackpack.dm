@@ -6,6 +6,7 @@
 	icon_state = "welderpack"
 	w_class = 5
 	var/max_fuel = 350
+	item_worth = 300
 
 /obj/item/weapon/weldpack/New()
 	var/datum/reagents/R = new/datum/reagents(max_fuel) //Lotsa refills

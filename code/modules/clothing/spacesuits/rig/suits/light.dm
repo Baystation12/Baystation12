@@ -17,6 +17,8 @@
 	boot_type =  /obj/item/clothing/shoes/magboots/rig/light
 	glove_type = /obj/item/clothing/gloves/rig/light
 
+	item_worth = 14000
+
 /obj/item/clothing/suit/space/rig/light
 	name = "suit"
 	breach_threshold = 18 //comparable to voidsuits
@@ -54,6 +56,7 @@
 		/obj/item/rig_module/voice,
 		/obj/item/rig_module/vision,
 		)
+	item_worth = 13000
 
 //The cybersuit is not space-proof. It does however, have good siemens_coefficient values
 /obj/item/clothing/head/lightrig/hacker
@@ -101,7 +104,7 @@
 		/obj/item/rig_module/datajack,
 		/obj/item/rig_module/self_destruct
 		)
-
+	item_worth = 16000
 	..()
 
 /obj/item/clothing/gloves/rig/light/ninja
@@ -123,3 +126,4 @@
 		/obj/item/rig_module/stealth_field,
 		/obj/item/rig_module/vision
 		)
+	item_worth = 11000

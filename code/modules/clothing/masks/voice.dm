@@ -10,6 +10,8 @@
 	var/obj/item/voice_changer/changer
 	origin_tech = list(TECH_ILLEGAL = 4)
 
+	item_worth = 600
+
 /obj/item/clothing/mask/gas/voice/verb/Toggle_Voice_Changer()
 	set category = "Object"
 	set src in usr

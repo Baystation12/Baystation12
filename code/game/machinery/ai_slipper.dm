@@ -14,6 +14,7 @@
 	var/cooldown_timeleft = 0
 	var/cooldown_on = 0
 	req_access = list(access_ai_upload)
+	item_worth = 500
 
 
 /obj/machinery/ai_slipper/New()

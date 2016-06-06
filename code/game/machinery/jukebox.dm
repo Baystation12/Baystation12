@@ -35,6 +35,8 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
 	)
 
+	item_worth = 700
+
 /obj/machinery/media/jukebox/New()
 	..()
 	update_icon()

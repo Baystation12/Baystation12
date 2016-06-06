@@ -8,3 +8,5 @@
 	max_hardware_size = 1
 	w_class = 2
 	light_strength = 2					// Same as PDAs
+
+	item_worth = 1300

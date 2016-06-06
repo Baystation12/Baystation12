@@ -7,6 +7,7 @@
 	var/capacity = 300
 	var/stored_charge = 0
 	var/effect_id = ""
+	item_worth = 800
 
 /obj/item/weapon/anobattery/New()
 	battery_effect = new()
@@ -32,6 +33,7 @@
 	var/obj/item/weapon/anobattery/inserted_battery
 	var/turf/archived_loc
 	var/energy_consumed_on_touch = 100
+	item_worth = 1300
 
 /obj/item/weapon/anodevice/New()
 	..()

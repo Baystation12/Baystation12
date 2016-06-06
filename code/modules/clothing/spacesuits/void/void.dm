@@ -26,6 +26,8 @@
 
 	light_overlay = "helmet_light"
 
+	item_worth = 1900
+
 /obj/item/clothing/suit/space/void
 	name = "voidsuit"
 	icon_state = "void"
@@ -50,6 +52,8 @@
 		"Skrell" = 'icons/obj/clothing/species/skrell/suits.dmi',
 		"Resomi" = 'icons/obj/clothing/species/resomi/suits.dmi',
 		)
+
+	item_worth = 2800
 
 	//Breach thresholds, should ideally be inherited by most (if not all) voidsuits.
 	//With 0.2 resiliance, will reach 10 breach damage after 3 laser carbine blasts or 8 smg hits.

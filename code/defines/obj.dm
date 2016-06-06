@@ -185,6 +185,16 @@ var/global/list/PDA_Manifest = list()
 	density = 1
 	anchored = 1
 	unacidable = 1//temporary until I decide whether the borg can be removed. -veyveyr
+	item_worth = 400
+
+
+/obj/structure/showcase/attackby(obj/item/P as obj, mob/user as mob)
+	if(istype(P, /obj/item/weapon/wrench))
+		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+		anchored = !anchored
+		user << "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>"
+	else
+		..()
 
 /obj/item/mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 

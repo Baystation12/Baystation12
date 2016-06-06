@@ -50,6 +50,7 @@ var/list/mechtoys = list(
 		/mob/living/simple_animal/mouse,
 		/mob/living/silicon/robot/drone
 		)
+	item_worth = 15
 
 /obj/structure/plasticflaps/CanPass(atom/A, turf/T)
 	if(istype(A) && A.checkpass(PASSGLASS))

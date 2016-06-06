@@ -13,6 +13,8 @@
 	body_parts_covered = HEAD|FACE|EYES
 	siemens_coefficient = 0.9
 
+	item_worth = 100
+
 /obj/item/clothing/suit/bio_suit
 	name = "bio suit"
 	desc = "A suit that protects against biological contamination."
@@ -26,6 +28,8 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 20)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	siemens_coefficient = 0.9
+
+	item_worth = 150
 
 /obj/item/clothing/suit/bio_suit/New()
 	..()

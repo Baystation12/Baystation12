@@ -358,6 +358,8 @@
 	energy_drain = 1000
 	range = RANGED
 
+	item_worth = 3050
+
 	action(atom/target)
 		if(!action_checks(target) || src.loc.z == 2) return
 		var/turf/T = get_turf(target)
@@ -375,7 +377,7 @@
 	icon_state = "mecha_wholegen"
 	origin_tech = list(TECH_BLUESPACE = 3)
 	equip_cooldown = 50
-	energy_drain = 300
+	energy_drain = 3000
 	range = RANGED
 
 
@@ -432,6 +434,8 @@
 
 	var/last_fired = 0  //Concept stolen from guns.
 	var/fire_delay = 10 //Used to prevent spam-brute against humans.
+
+	item_worth = 3000
 
 	action(atom/movable/target)
 
@@ -505,6 +509,8 @@
 	var/deflect_coeff = 1
 	var/damage_coeff = 1
 	var/melee
+
+	item_worth = 1100
 
 	attach(obj/mecha/M as obj)
 		..()
@@ -596,6 +602,8 @@
 	var/datum/global_iterator/pr_repair_droid
 	var/icon/droid_overlay
 	var/list/repairable_damage = list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH)
+
+	item_worth = 1500
 
 	New()
 		..()
@@ -690,6 +698,8 @@
 	var/coeff = 100
 	var/list/use_channels = list(EQUIP,ENVIRON,LIGHT)
 
+	item_worth = 1300
+
 	New()
 		..()
 		pr_energy_relay = new /datum/global_iterator/mecha_energy_relay(list(src),0)
@@ -778,6 +788,8 @@
 	var/fuel_per_cycle_idle = 100
 	var/fuel_per_cycle_active = 500
 	var/power_per_cycle = 20
+
+	item_worth = 1200
 
 	New()
 		..()
@@ -910,6 +922,8 @@
 	fuel_per_cycle_active = 30
 	power_per_cycle = 50
 	var/rad_per_cycle = 0.3
+
+	item_worth = 1700
 
 	init()
 		fuel = new /obj/item/stack/material/uranium(src)

@@ -14,6 +14,8 @@
 
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ties.dmi') // for species where human variants do not fit
 
+	item_worth = 15
+
 /obj/item/clothing/accessory/Destroy()
 	on_removed()
 	return ..()
@@ -117,6 +119,8 @@
 	desc = "An outdated medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing."
 	icon_state = "stethoscope"
 
+	item_worth = 70
+
 /obj/item/clothing/accessory/stethoscope/attack(mob/living/carbon/human/M, mob/living/user)
 	if(ishuman(M) && isliving(user))
 		if(user.a_intent == I_HELP)
@@ -174,6 +178,8 @@
 	name = "bronze medal"
 	desc = "A bronze medal."
 	icon_state = "bronze"
+
+	item_worth = 100
 
 /obj/item/clothing/accessory/medal/conduct
 	name = "distinguished conduct medal"

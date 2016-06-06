@@ -10,6 +10,8 @@
 	camera_networks = list(NETWORK_MERCENARY)
 	light_overlay = "helmet_light_green" //todo: species-specific light overlays
 
+	item_worth = 2000
+
 /obj/item/clothing/suit/space/void/merc
 	icon_state = "rig-syndie"
 	name = "blood-red voidsuit"
@@ -20,6 +22,8 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
 	siemens_coefficient = 0.6
 	species_restricted = list("Human", "Skrell")
+
+	item_worth = 3000
 
 	flags_inv = HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 

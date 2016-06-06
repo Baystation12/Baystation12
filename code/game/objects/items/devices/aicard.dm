@@ -10,6 +10,8 @@
 
 	var/mob/living/silicon/ai/carded_ai
 
+	item_worth = 6000
+
 /obj/item/device/aicard/attack(mob/living/silicon/decoy/M as mob, mob/user as mob)
 	if (!istype (M, /mob/living/silicon/decoy))
 		return ..()

@@ -9,6 +9,8 @@
 	var/max_cable = 100
 	var/on = 0
 
+	item_worth = 1700
+
 /obj/machinery/cablelayer/New()
 	cable = new(src)
 	cable.amount = 100
@@ -74,7 +76,7 @@
 		visible_message("A red light flashes on \the [src].")
 		return
 	cable.use(amount)
-	if(deleted(cable)) 
+	if(deleted(cable))
 		cable = null
 	return 1
 

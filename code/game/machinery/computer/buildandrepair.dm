@@ -8,6 +8,7 @@
 	icon_state = "0"
 	var/state = 0
 	var/obj/item/weapon/circuitboard/circuit = null
+	item_worth = 50
 //	weight = 1.0E8
 
 /obj/structure/computerframe/attackby(obj/item/P as obj, mob/user as mob)

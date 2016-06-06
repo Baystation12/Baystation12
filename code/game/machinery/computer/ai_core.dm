@@ -9,6 +9,8 @@
 	var/obj/item/weapon/circuitboard/circuit = null
 	var/obj/item/device/mmi/brain = null
 
+	item_worth = 6000
+
 
 /obj/structure/AIcore/attackby(obj/item/P as obj, mob/user as mob)
 
@@ -186,6 +188,8 @@
 	icon_state = "ai-empty"
 	anchored = 1
 	state = 20//So it doesn't interact based on the above. Not really necessary.
+
+	item_worth = 7000
 
 /obj/structure/AIcore/deactivated/Destroy()
 	if(src in empty_playable_ai_cores)

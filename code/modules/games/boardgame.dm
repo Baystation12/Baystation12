@@ -9,6 +9,8 @@
 	var/board = list()
 	var/selected = -1
 
+	item_worth = 15
+
 /obj/item/weapon/board/examine(mob/user, var/distance = -1)
 	if(in_range(user,src))
 		user.set_machine(src)

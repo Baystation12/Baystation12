@@ -41,6 +41,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	origin_tech = list(TECH_MATERIAL = 1)
 	slot_flags = SLOT_EARS
 	attack_verb = list("burnt", "singed")
+	item_worth = 1
 
 /obj/item/weapon/flame/match/process()
 	if(isliving(loc))
@@ -222,7 +223,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
 	weldermes = "<span class='notice'>USER casually lights the NAME with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME.</span>"
-	
+
 	New()
 		..()
 		reagents.add_reagent("nicotine", 1)
@@ -276,7 +277,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
 	weldermes = "<span class='notice'>USER insults NAME by lighting it with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME with the power of science.</span>"
-	
+
 	New()
 		..()
 		reagents.add_reagent("nicotine", 5)
@@ -296,7 +297,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_off = "cigar2off"
 	smoketime = 3000
 	chem_volume = 20
-	
+
 	New()
 		..()
 		reagents.add_reagent("nicotine", 10)
@@ -447,6 +448,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	desc = "The zippo."
 	icon_state = "zippo"
 	item_state = "zippo"
+	item_worth = 10
 
 /obj/item/weapon/flame/lighter/random
 	New()

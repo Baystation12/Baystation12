@@ -56,6 +56,7 @@
 	var/drill_sound = 'sound/weapons/Genhit.ogg'
 	var/drill_verb = "drilling"
 	sharp = 1
+	item_worth = 30
 
 	var/excavation_amount = 100
 
@@ -71,6 +72,7 @@
 	digspeed = 30
 	origin_tech = list(TECH_MATERIAL = 3)
 	desc = "This makes no metallurgic sense."
+	item_worth = 300
 
 /obj/item/weapon/pickaxe/drill
 	name = "advanced mining drill" // Can dig sand as well!
@@ -80,6 +82,7 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
 	desc = "Yours is the drill that will pierce through the rock walls."
 	drill_verb = "drilling"
+	item_worth = 100
 
 /obj/item/weapon/pickaxe/jackhammer
 	name = "sonic jackhammer"
@@ -89,6 +92,7 @@
 	origin_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2, TECH_ENGINEERING = 2)
 	desc = "Cracks rocks with sonic blasts, perfect for killing cave lizards."
 	drill_verb = "hammering"
+	item_worth = 90
 
 /obj/item/weapon/pickaxe/gold
 	name = "golden pickaxe"
@@ -98,6 +102,7 @@
 	origin_tech = list(TECH_MATERIAL = 4)
 	desc = "This makes no metallurgic sense."
 	drill_verb = "picking"
+	item_worth = 400
 
 /obj/item/weapon/pickaxe/plasmacutter
 	name = "plasma cutter"
@@ -112,6 +117,7 @@
 	drill_sound = 'sound/items/Welder.ogg'
 	sharp = 1
 	edge = 1
+	item_worth = 100
 
 /obj/item/weapon/pickaxe/diamond
 	name = "diamond pickaxe"
@@ -121,6 +127,7 @@
 	origin_tech = list(TECH_MATERIAL = 6, TECH_ENGINEERING = 4)
 	desc = "A pickaxe with a diamond pick head."
 	drill_verb = "picking"
+	item_worth = 600
 
 /obj/item/weapon/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
 	name = "diamond mining drill"
@@ -130,6 +137,7 @@
 	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 5)
 	desc = "Yours is the drill that will pierce the heavens!"
 	drill_verb = "drilling"
+	item_worth = 700
 
 /obj/item/weapon/pickaxe/borgdrill
 	name = "cyborg mining drill"

@@ -23,6 +23,8 @@
 
 	var/datum/wires/autolathe/wires = null
 
+	item_worth = 2300
+
 
 /obj/machinery/autolathe/New()
 
@@ -37,7 +39,7 @@
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
 	RefreshParts()
-	
+
 /obj/machinery/autolathe/Destroy()
 	qdel(wires)
 	wires = null

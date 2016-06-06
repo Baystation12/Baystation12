@@ -6,6 +6,7 @@
 	icon_state = "tube"
 	origin_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
 	amount = 10
+	item_worth = 30
 
 
 /obj/item/stack/nanopaste/attack(mob/living/M as mob, mob/user as mob)

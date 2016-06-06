@@ -17,6 +17,8 @@
 	siemens_coefficient = 0.7
 	w_class = 3
 
+	item_worth = 250
+
 /obj/item/clothing/head/helmet/riot
 	name = "riot helmet"
 	desc = "It's a helmet specifically designed to protect against close range attacks."
@@ -36,6 +38,8 @@
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.5
 
+	item_worth = 400
+
 /obj/item/clothing/head/helmet/thunderdome
 	name = "\improper Thunderdome helmet"
 	desc = "<i>'Let the battle commence!'</i>"
@@ -53,6 +57,8 @@
 	body_parts_covered = HEAD|FACE
 	siemens_coefficient = 1
 
+	item_worth = 280
+
 /obj/item/clothing/head/helmet/tactical
 	name = "tactical helmet"
 	desc = "An armored helmet capable of being fitted with a multitude of attachments."
@@ -66,6 +72,8 @@
 	flags_inv = HIDEEARS
 	siemens_coefficient = 0.7
 
+	item_worth = 300
+
 /obj/item/clothing/head/helmet/augment
 	name = "Augment Array"
 	desc = "A helmet with optical and cranial augments coupled to it."
@@ -76,6 +84,8 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.5
+
+	item_worth = 600
 
 //Non-hardsuit ERT helmets.
 //Commander
@@ -88,6 +98,8 @@
 		slot_r_hand_str = "syndicate-helm-green",
 		)
 	armor = list(melee = 62, bullet = 50, laser = 50,energy = 35, bomb = 10, bio = 2, rad = 0)
+
+	item_worth = 1000
 
 //Security
 /obj/item/clothing/head/helmet/ert/security
