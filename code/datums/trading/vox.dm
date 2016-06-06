@@ -53,6 +53,8 @@
 								/obj/item/robot_parts                                   = TRADER_SUBTYPES_ONLY
 								)
 
+	mob_transfer_message = "<span class='danger'>You are transported to the ORIGIN, when the transportation dizziness wears off, you find you are surrounded by cackling Vox...</span>"
+
 
 /datum/trader/ship/vox/hail(var/mob/user)
 	if(istype(user, /mob/living/carbon/human))
