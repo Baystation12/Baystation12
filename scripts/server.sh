@@ -36,7 +36,7 @@ while [[ ! -e stopserver ]]; do
 
 	[[ -e _preupdate.sh && -x _preupdate.sh ]] && eval "$(cat _preupdate.sh)" # Pull hook, in THIS ENVIRONMENT
 
-	[[ $UPDATE_FAIL != 0 ]] && exit 0
+	[[ $UPDATE_FAIL != 0 ]] && exit $UPDATE_FAIL
 
 	# Update
 	cd "$GITDIR"
@@ -68,7 +68,7 @@ while [[ ! -e stopserver ]]; do
 		fi
 	fi
 
-	[[ $UPDATE_FAIL != 0 ]] && exit 0
+	[[ $UPDATE_FAIL != 0 ]] && exit $UPDATE_FAIL
 
 	# Retrieve compile files
 	if [[ "$GITDIR" != "." ]]; then
@@ -85,7 +85,7 @@ while [[ ! -e stopserver ]]; do
 
 	[[ -e _postupdate.sh && -x _postupdate.sh ]] && eval "$(cat _postupdate.sh)" # Copy hook, in THIS ENVIRONMENT
 
-	[[ $UPDATE_FAIL != 0 ]] && exit 0
+	[[ $UPDATE_FAIL != 0 ]] && exit $UPDATE_FAIL
 
 	# Reboot or start server
 	if ! ps -p $pid 2> /dev/null > /dev/null; then
