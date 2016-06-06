@@ -155,6 +155,7 @@
 
 	if(istype(source_turf))
 		FOR_DVIEW(var/turf/T, light_range, source_turf, INVISIBILITY_LIGHTING)
+			//any changes here should be copied to smart_vis_update()
 			if(T.lighting_overlay)
 				var/strength
 				LUM_FALLOFF(strength, T, source_turf)
@@ -187,6 +188,7 @@
 	applied = 0
 	var/i = 1
 	for(var/turf/T in effect_turf)
+		//any changes here should be copied to smart_vis_update()
 		if(T.affecting_lights)
 			T.affecting_lights -= src
 
@@ -214,6 +216,7 @@
 	//This is the part where we calculate new turfs (if any)
 	var/list/new_turfs = view - effect_turf //This will result with all the tiles that are added.
 	for(var/turf/T in new_turfs)
+		//copied from apply_lum(), any changes here should be made there as well.
 		if(T.lighting_overlay)
 			LUM_FALLOFF(., T, source_turf)
 			. *= light_power
@@ -242,7 +245,7 @@
 
 	var/list/old_turfs = effect_turf - view
 	for(var/turf/T in old_turfs)
-		//Insert not-so-huge copy paste from remove_lum().
+		//Insert not-so-huge copy paste from remove_lum(). Any changes here should be made there as well.
 		var/idx = effect_turf.Find(T) //Get the index, luckily Find() is cheap in small lists like this. (with small I mean under a couple thousand len)
 		if(T.affecting_lights)
 			T.affecting_lights -= src
