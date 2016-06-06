@@ -45,6 +45,7 @@
 Please check whatever applies. More checkboxes checked increase your chances of the issue being looked at sooner.
 
 <!-- Check these by writing an x inside the [ ] (like this: [x])-->
+<!-- Don't forget to remove the space between the brackets, or it won't work! -->
 - [ ] Issue could be reproduced at least once
 - [ ] Issue could be reproduced by different players
 - [ ] Issue could be reproduced in multiple rounds
