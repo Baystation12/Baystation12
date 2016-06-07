@@ -1,0 +1,6 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - rscadd: "Placed cryo pods on the escape shuttle (3 for humans, 1 for robots). Take care of SSD personnel!"
