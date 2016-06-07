@@ -47,7 +47,7 @@
 /obj/item/organ/heart/proc/handle_blood()
 	if(!owner)
 		return
-	if(owner.stat == DEAD && owner.bodytemperature >= 170)	//Dead or cryosleep people do not pump the blood.
+	if(owner.stat == DEAD || owner.bodytemperature < 170)	//Dead or cryosleep people do not pump the blood.
 		return
 
 	var/blood_volume_raw = owner.vessel.get_reagent_amount("blood")
