@@ -20,7 +20,7 @@
 		//Chemicals in the body
 		handle_chemicals_in_body()
 
-		//Blood
+		//Blood - do this after chemicals so that dexplus doesn't keep people awake with no heart
 		handle_blood()
 
 		//Random events (vomiting etc)

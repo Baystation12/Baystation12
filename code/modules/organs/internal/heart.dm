@@ -84,7 +84,8 @@
 			if(prob(15))
 				owner << "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>"
 		else if(blood_volume < BLOOD_VOLUME_SURVIVE)
-			owner.death()
+			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth))
+			owner.adjustOxyLoss(10)
 
 	//Blood regeneration if there is some space
 	if(blood_volume_raw < species.blood_volume)
