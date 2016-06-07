@@ -25,7 +25,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 //This proc sends the asset to the client, but only if it needs it.
 //This proc blocks(sleeps) unless verify is set to false
-/proc/send_asset(var/client/client, var/asset_name, var/verify = TRUE)
+/proc/send_asset(var/client/client, var/asset_name, var/verify = TRUE, var/check_cache = TRUE)
 	if(!istype(client))
 		if(ismob(client))
 			var/mob/M = client
@@ -38,7 +38,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		else
 			return 0
 
-	if(client.cache.Find(asset_name) || client.sending.Find(asset_name))
+	if(check_cache && (client.cache.Find(asset_name) || client.sending.Find(asset_name)))
 		return 0
 
 	client << browse_rsc(asset_cache.cache[asset_name], asset_name)

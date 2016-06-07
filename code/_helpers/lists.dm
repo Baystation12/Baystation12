@@ -601,8 +601,7 @@ proc/dd_sortedTextList(list/incoming)
 /datum/alarm/dd_SortValue()
 	return "[sanitize_old(last_name)]"
 
-/proc/subtypesof(prototype)
-	return (typesof(prototype) - prototype)
+#define subtypesof(prototype) (typesof(prototype) - prototype)
 
 //creates every subtype of prototype (excluding prototype) and adds it to list L.
 //if no list/L is provided, one is created.

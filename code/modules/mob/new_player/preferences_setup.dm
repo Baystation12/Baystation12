@@ -220,10 +220,11 @@ datum/preferences
 			var/datum/gear/G = gear_datums[thing]
 			if(G)
 				var/permitted = 0
-				if(G.allowed_roles)
-					for(var/job_name in G.allowed_roles)
-						if(previewJob.title == job_name)
-							permitted = 1
+				if(G.allowed_roles && G.allowed_roles.len)
+					if(previewJob)
+						for(var/job_name in G.allowed_roles)
+							if(previewJob.title == job_name)
+								permitted = 1
 				else
 					permitted = 1
 

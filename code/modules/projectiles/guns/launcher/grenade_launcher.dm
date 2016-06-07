@@ -50,7 +50,7 @@
 	if(grenades.len >= max_grenades)
 		user << "<span class='warning'>\The [src] is full.</span>"
 		return
-	G.forceMove(src)
+	user.drop_from_inventory(G, src)
 	grenades.Insert(1, G) //add to the head of the list, so that it is loaded on the next pump
 	user.visible_message("\The [user] inserts \a [G] into \the [src].", "<span class='notice'>You insert \a [G] into \the [src].</span>")
 
@@ -103,8 +103,10 @@
 		/obj/item/weapon/grenade/frag/shell = 1,
 		)
 
+	var/grenade_type = pickweight(grenade_types)
+	chambered = new grenade_type(src)
 	for(var/i in 1 to max_grenades)
-		var/grenade_type = pickweight(grenade_types)
+		grenade_type = pickweight(grenade_types)
 		grenades += new grenade_type(src)
 
 //Underslung grenade launcher to be used with the Z8
@@ -127,8 +129,7 @@
 	if(chambered)
 		user << "<span class='warning'>\The [src] is already loaded.</span>"
 		return
-	user.remove_from_mob(G)
-	G.forceMove(src)
+	user.drop_from_inventory(G, src)
 	chambered = G
 	user.visible_message("\The [user] load \a [G] into \the [src].", "<span class='notice'>You load \a [G] into \the [src].</span>")
 

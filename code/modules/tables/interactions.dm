@@ -87,7 +87,9 @@
 			if(occupied)
 				user << "<span class='danger'>There's \a [occupied] in the way.</span>"
 				return
-			if (G.state >= GRAB_AGGRESSIVE)
+			if (G.state < GRAB_AGGRESSIVE)
+				user << "<span class='danger'>You need a better grip to do that!</span>"
+			else
 				if(user.a_intent == I_HURT)
 					var/blocked = M.run_armor_check("head", "melee")
 					if (prob(30 * blocked_mult(blocked)))
@@ -101,19 +103,15 @@
 					var/list/L = take_damage(rand(1,5))
 					// Shards. Extra damage, plus potentially the fact YOU LITERALLY HAVE A PIECE OF GLASS/METAL/WHATEVER IN YOUR FACE
 					for(var/obj/item/weapon/material/shard/S in L)
-						if(prob(50))
-							M.visible_message("<span class='danger'>\The [S] slices [M]'s face messily!</span>",
-							                   "<span class='danger'>\The [S] slices your face messily!</span>")
-							M.apply_damage(10, BRUTE, "head", blocked)
-							M.standard_weapon_hit_effects(S, G.assailant, 10, blocked, "head")
+						if(S.sharp && prob(50))
+							M.visible_message("<span class='danger'>\The [S] slices into [M]'s face!</span>",
+							                  "<span class='danger'>\The [S] slices into your face!</span>")
+							M.standard_weapon_hit_effects(S, G.assailant, S.force*2, blocked, "head") //standard weapon hit effects include damage and embedding
 				else
-					user << "<span class='danger'>You need a better grip to do that!</span>"
-					return
-			else
-				G.affecting.loc = src.loc
-				G.affecting.Weaken(5)
-				visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
-			qdel(W)
+					G.affecting.forceMove(src.loc)
+					G.affecting.Weaken(5)
+					visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
+				qdel(W)
 			return
 
 	// Handle dismantling or placing things on the table from here on.

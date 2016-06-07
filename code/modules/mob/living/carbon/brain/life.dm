@@ -208,22 +208,15 @@
 	if (client)
 		client.screen.Remove(global_hud.blurry,global_hud.druggy,global_hud.vimpaired)
 
-	if ((blind && stat != 2))
-		if ((blinded))
-			blind.layer = 18
+
+	if(stat != DEAD)
+		if(blinded)
+			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 		else
-			blind.layer = 0
-
-			if (disabilities & NEARSIGHTED)
-				client.screen += global_hud.vimpaired
-
-			if (eye_blurry)
-				client.screen += global_hud.blurry
-
-			if (druggy)
-				client.screen += global_hud.druggy
-
-	if (stat != 2)
+			clear_fullscreen("blind")
+			set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
+			set_fullscreen(eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
+			set_fullscreen(druggy, "high", /obj/screen/fullscreen/high)
 		if (machine)
 			if (!( machine.check_eye(src) ))
 				reset_view(null)
@@ -240,16 +233,3 @@
 		else
 			if(client && !client.adminobs)
 				reset_view(null)
-
-/*/mob/living/carbon/brain/emp_act(severity)
-	if(!(container && istype(container, /obj/item/device/mmi)))
-		return
-	else
-		switch(severity)
-			if(1)
-				emp_damage += rand(20,30)
-			if(2)
-				emp_damage += rand(10,20)
-			if(3)
-				emp_damage += rand(0,10)
-	..()*/

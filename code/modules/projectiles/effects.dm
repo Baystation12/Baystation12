@@ -1,7 +1,7 @@
 /obj/effect/projectile
 	icon = 'icons/effects/projectiles.dmi'
 	icon_state = "bolt"
-	layer = FLY_LAYER
+	layer = LIGHTING_LAYER+0.1
 
 /obj/effect/projectile/New(var/turf/location)
 	if(istype(location))
