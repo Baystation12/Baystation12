@@ -67,7 +67,7 @@
 			inspect_vision(vision, user)
 
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //can be used offensively
-			M.flash_eyes()
+			flick("flash", M.flash)
 	else
 		return ..()
 

@@ -9,7 +9,15 @@
 	return
 
 /mob/living/carbon/brain/instantiate_hud(var/datum/hud/HUD)
-	return
+	HUD.brain_hud()
+
+/datum/hud/proc/brain_hud(ui_style = 'icons/mob/screen1_Midnight.dmi')
+	mymob.blind = new /obj/screen()
+	mymob.blind.icon = 'icons/mob/screen1_full.dmi'
+	mymob.blind.icon_state = "blackimageoverlay"
+	mymob.blind.name = " "
+	mymob.blind.screen_loc = "1,1"
+	mymob.blind.layer = 0
 
 /mob/living/silicon/ai/instantiate_hud(var/datum/hud/HUD)
 	HUD.ai_hud()
@@ -123,6 +131,13 @@
 	else if(istype(mymob,/mob/living/simple_animal/construct/harvester))
 		constructtype = "harvester"
 
+	mymob.flash = new /obj/screen()
+	mymob.flash.icon = 'icons/mob/screen1.dmi'
+	mymob.flash.icon_state = "blank"
+	mymob.flash.name = "flash"
+	mymob.flash.screen_loc = ui_entire_screen
+	mymob.flash.layer = 17
+
 	if(constructtype)
 		mymob.fire = new /obj/screen()
 		mymob.fire.icon = 'icons/mob/screen1_construct.dmi'
@@ -155,5 +170,5 @@
 
 	mymob.client.screen = list()
 
-	mymob.client.screen += list(mymob.fire, mymob.healths, mymob.pullin, mymob.zone_sel, mymob.purged)
+	mymob.client.screen += list(mymob.fire, mymob.healths, mymob.pullin, mymob.zone_sel, mymob.purged, mymob.flash)
 	common_hud()
