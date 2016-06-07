@@ -46,7 +46,7 @@
 
 //Flashing everyone
 		if(eye_safety < FLASH_PROTECTION_MODERATE)
-			M.flash_eyes()
+			flick("e_flash", M.flash)
 			M.Stun(2)
 			M.Weaken(10)
 

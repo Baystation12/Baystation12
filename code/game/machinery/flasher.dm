@@ -88,12 +88,11 @@
 			if(!E)
 				return
 			if(E.is_bruised() && prob(E.damage + 50))
-				H.flash_eyes()
+				flick("e_flash", O:flash)
 				E.damage += rand(1, 5)
 		else
-			if(!O.blinded && isliving(O))
-				var/mob/living/L = O
-				L.flash_eyes()
+			if(!O.blinded)
+				flick("flash", O:flash)
 		O.Weaken(flash_time)
 
 /obj/machinery/flasher/emp_act(severity)

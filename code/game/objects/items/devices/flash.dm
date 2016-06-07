@@ -78,7 +78,7 @@
 					flash_strength *= H.species.flash_mod
 				if(flash_strength > 0)
 					M.Weaken(flash_strength)
-					M.flash_eyes()
+					flick("e_flash", M.flash)
 			else
 				flashfail = 1
 
@@ -155,7 +155,7 @@
 		var/safety = M.eyecheck()
 		if(safety < FLASH_PROTECTION_MODERATE)
 			if(!M.blinded)
-				M.flash_eyes()
+				flick("flash", M.flash)
 
 	return
 
@@ -174,7 +174,7 @@
 				var/safety = M.eyecheck()
 				if(safety < FLASH_PROTECTION_MODERATE)
 					M.Weaken(10)
-					M.flash_eyes()
+					flick("e_flash", M.flash)
 					for(var/mob/O in viewers(M, null))
 						O.show_message("<span class='disarm'>[M] is blinded by the flash!</span>")
 	..()

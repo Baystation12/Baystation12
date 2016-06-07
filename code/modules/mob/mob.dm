@@ -17,6 +17,8 @@
 	. = ..()
 
 /mob/proc/remove_screen_obj_references()
+	flash = null
+	blind = null
 	hands = null
 	pullin = null
 	purged = null

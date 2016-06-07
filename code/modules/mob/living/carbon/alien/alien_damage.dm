@@ -1,7 +1,7 @@
 /mob/living/carbon/alien/ex_act(severity)
 
 	if(!blinded)
-		flash_eyes()
+		flick("flash", flash)
 
 	var/b_loss = null
 	var/f_loss = null
