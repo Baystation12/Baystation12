@@ -281,7 +281,7 @@
 				if(prob(50))
 					M.adjustBruteLoss(5)
 			else
-				flick("flash",M.flash)
+				M.flash_eyes()
 				if(prob(50))
 					M.Stun(5)
 			M.apply_effect(25, IRRADIATE, blocked = M.getarmor(null, "rad"))

@@ -121,8 +121,8 @@
 	if(!client && speak_chance)
 		if(rand(0,200) < speak_chance)
 			var/action = pick(
-				speak.len;      "speak", 
-				emote_hear.len; "emote_hear", 
+				speak.len;      "speak",
+				emote_hear.len; "emote_hear",
 				emote_see.len;  "emote_see"
 				)
 
@@ -320,7 +320,7 @@
 
 /mob/living/simple_animal/ex_act(severity)
 	if(!blinded)
-		flick("flash", flash)
+		flash_eyes()
 
 	var/damage
 	switch (severity)

@@ -63,7 +63,7 @@
 		if(2)
 			src.take_organ_damage(0,10,emp=1)
 			confused = (min(confused + 2, 30))
-	flick("noise", src.flash)
+	flash_eyes(affect_silicon = 1)
 	src << "<span class='danger'><B>*BZZZT*</B></span>"
 	src << "<span class='danger'>Warning: Electromagnetic pulse detected.</span>"
 	..()
@@ -259,7 +259,7 @@
 
 /mob/living/silicon/ex_act(severity)
 	if(!blinded)
-		flick("flash", flash)
+		flash_eyes()
 
 	var/brute
 	var/burn
@@ -362,7 +362,7 @@
 	..()
 	if(cameraFollow)
 		cameraFollow = null
-		
+
 /mob/living/silicon/proc/clear_client()
 	//Handle job slot/tater cleanup.
 	var/job = mind.assigned_role
@@ -374,6 +374,10 @@
 		mind.special_role = null
 
 	clear_antag_roles(mind)
-			
+
 	ghostize(0)
 	qdel(src)
+
+/mob/living/silicon/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	if(affect_silicon)
+		return ..()
