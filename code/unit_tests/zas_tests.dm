@@ -175,6 +175,8 @@ datum/unit_test/zas_area_test/
 datum/unit_test/zas_supply_shuttle_moved
 	name = "ZAS: Supply Shuttle (When Moved)"
 	async=1				// We're moving the shuttle using built in procs.
+	disabled = 1
+	why_disabled = "Torch Z7 and Z10 currently suffer mapmerge issues - torch's cargo shuttle has nowhere to move to. See PR #13300"
 
 	var/datum/shuttle/ferry/supply/shuttle = null
 
