@@ -132,6 +132,7 @@
 	if(!canremove)
 		return
 
+	//TODO fix this garbage
 	var/obj/item/clothing/ears/O
 	if(slot_flags & SLOT_TWOEARS )
 		O = (H.l_ear == src ? H.r_ear : H.l_ear)

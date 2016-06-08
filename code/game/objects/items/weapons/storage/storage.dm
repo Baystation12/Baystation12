@@ -63,16 +63,15 @@
 		//makes sure that the storage is equipped, so that we can't drag it into our hand from miles away.
 		if (!usr.contains(src))
 			return
-	
-		if (!usr.unEquip(src))
-			return
 
-		switch(over_object.name)
-			if("r_hand")
-				usr.put_in_r_hand(src)
-			if("l_hand")
-				usr.put_in_l_hand(src)
 		src.add_fingerprint(usr)
+		if(usr.unEquip(src))
+			switch(over_object.name)
+				if("r_hand")
+					usr.put_in_r_hand(src)
+				if("l_hand")
+					usr.put_in_l_hand(src)
+
 
 /obj/item/weapon/storage/proc/return_inv()
 
