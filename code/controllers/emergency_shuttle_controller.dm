@@ -22,6 +22,10 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	var/datum/announcement/priority/emergency_shuttle_called = new(0, new_sound = sound('sound/AI/shuttlecalled.ogg'))
 	var/datum/announcement/priority/emergency_shuttle_recalled = new(0, new_sound = sound('sound/AI/shuttlerecalled.ogg'))
 
+/datum/emergency_shuttle_controller/New()
+	escape_pods = list()
+	..()
+
 /datum/emergency_shuttle_controller/proc/process()
 	if (wait_for_launch)
 		if (evac && auto_recall && world.time >= auto_recall_time)
