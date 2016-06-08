@@ -462,14 +462,21 @@ its easier to just keep the beam vertical.
 // message is output to anyone who can see, e.g. "The [src] does something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
 /atom/proc/visible_message(var/message, var/blind_message, var/range = world.view)
-	var/list/witness = get_mobs_and_objs_in_view_fast(src, range, 0)
-	for(var/mob/M in witness["mobs"])
-		if(M.see_invisible >= invisibility) // Cannot view the invisible
-			M.show_message(message, 1, blind_message, 2)
-		else if (blind_message)
-			M.show_message(blind_message, 2)
-	for(var/obj/O in witness["objs"])
-		O.show_message( message, 1, blind_message, 2)
+	var/turf/T = get_turf(src)
+	var/list/mobs = list()
+	var/list/objs = list()
+	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, ONLY_GHOSTS_IN_VIEW)
+
+	for(var/I in mobs + objs)
+		if(isobj(I))
+			var/obj/O = I
+			O.show_message(message,1,blind_message,2)
+		if(ismob(I))
+			var/mob/M = I
+			if(M.see_invisible >= invisibility)
+				M.show_message(message,1,blind_message,2)
+			else if(blind_message)
+				M.show_message(blind_message, 2)
 
 // Show a message to all mobs and objects in earshot of this atom
 // Use for objects performing audible actions
@@ -482,13 +489,17 @@ its easier to just keep the beam vertical.
 	if(hearing_distance)
 		range = hearing_distance
 	var/turf/T = get_turf(src)
-	var/list/results = get_mobs_and_objs_in_view_fast(T,range, ONLY_GHOSTS_IN_VIEW)
+	var/list/mobs = list()
+	var/list/objs = list()
+	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, ONLY_GHOSTS_IN_VIEW)
 
-	for(var/mob/M in results["mobs"])
-		M.show_message( message, 2, deaf_message, 1)
-
-	for(var/obj/O in results["objs"])
-		O.show_message(message,2,deaf_message,1)
+	for(var/I in mobs + objs)
+		if(isobj(I))
+			var/obj/O = I
+			O.show_message(message,2,deaf_message,1)
+		if(ismob(I))
+			var/mob/M = I
+			M.show_message(message,2,deaf_message,1)
 
 /atom/movable/proc/dropInto(var/atom/destination)
 	while(istype(destination))
