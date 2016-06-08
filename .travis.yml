@@ -47,7 +47,7 @@ script:
   - (num=`grep -E '\\\\(red|blue|green|black|b|i[^mc])' **/*.dm | wc -l`; echo "$num escapes (expecting ${MACRO_COUNT} or less)"; [ $num -le ${MACRO_COUNT} ])
   - (num=`grep -E '\WDel\(' **/*.dm | wc -l`; echo "$num Del()s (expecting 4 or less)"; [ $num -le 4 ])
   - (num=`grep -E '"/atom' **/*.dm | wc -l`; echo "$num /atom text paths (expecting 2 or less)"; [ $num -le 2 ])
-  - (num=`grep -E '"/area' **/*.dm | wc -l`; echo "$num /area text paths (expecting 3 or less)"; [ $num -le 3 ])
+  - (num=`grep -E '"/area' **/*.dm | wc -l`; echo "$num /area text paths (expecting 2 or less)"; [ $num -le 2 ])
   - (num=`grep -E '"/datum' **/*.dm | wc -l`; echo "$num /datum text paths (expecting 2 or less)"; [ $num -le 2 ])
   - (num=`grep -E '"/mob' **/*.dm | wc -l`; echo "$num /mob text paths (expecting 2 or less)"; [ $num -le 2 ])
   - (num=`grep -E '"/obj' **/*.dm | wc -l`; echo "$num /obj text paths (expecting 13 or less)"; [ $num -le 13 ])
