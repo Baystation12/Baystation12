@@ -147,8 +147,6 @@ area/space/atmosalert()
 /area/supply/station
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
-	requires_power = 0
-	base_turf = /turf/simulated/floor/plating
 
 /area/shuttle/mining
 	name = "\improper Mining Shuttle"
