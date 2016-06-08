@@ -1,0 +1,6 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - tweak: "The PDA messaging server now reboots automatically after a power outage. This reboot takes about twenty seconds."
