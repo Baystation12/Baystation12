@@ -132,9 +132,7 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/put_in_hands(var/obj/item/W)
 	if(!W)
 		return 0
-	W.forceMove(get_turf(src))
-	W.layer = initial(W.layer)
-	W.dropped(src)
+	drop_from_inventory(W)
 	return 0
 
 // Removes an item from inventory and places it in the target atom.
