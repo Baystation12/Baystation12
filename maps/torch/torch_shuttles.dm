@@ -1,116 +1,3 @@
-// Escape shuttle and pods
-/datum/shuttle/ferry/emergency/centcom
-	name = "Escape"
-	location = 1
-	warmup_time = 10
-	area_offsite = /area/shuttle/escape/centcom
-	area_station = /area/shuttle/escape/station
-	area_transition = /area/shuttle/escape/transit
-	docking_controller_tag = "escape_shuttle"
-	dock_target_station = "escape_dock"
-	dock_target_offsite = "centcom_dock"
-	transit_direction = NORTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
-
-/datum/shuttle/ferry/escape_pod/escape_pod_one
-	name = "Escape Pod 1"
-	location = 0
-	warmup_time = 0
-	area_station = /area/shuttle/escape_pod1/station
-	area_offsite = /area/shuttle/escape_pod1/centcom
-	area_transition = /area/shuttle/escape_pod1/transit
-	docking_controller_tag = "escape_pod_1"
-	dock_target_station = "escape_pod_1_berth"
-	dock_target_offsite = "escape_pod_1_recovery"
-	transit_direction = NORTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
-
-/datum/shuttle/ferry/escape_pod/escape_pod_two
-	name = "Escape Pod 2"
-	location = 0
-	warmup_time = 0
-	area_station = /area/shuttle/escape_pod2/station
-	area_offsite = /area/shuttle/escape_pod2/centcom
-	area_transition = /area/shuttle/escape_pod2/transit
-	docking_controller_tag = "escape_pod_2"
-	dock_target_station = "escape_pod_2_berth"
-	dock_target_offsite = "escape_pod_2_recovery"
-	transit_direction = NORTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
-
-/datum/shuttle/ferry/escape_pod/escape_pod_three
-	name = "Escape Pod 3"
-	location = 0
-	warmup_time = 0
-	area_station = /area/shuttle/escape_pod3/station
-	area_offsite = /area/shuttle/escape_pod3/centcom
-	area_transition = /area/shuttle/escape_pod3/transit
-	docking_controller_tag = "escape_pod_3"
-	dock_target_station = "escape_pod_3_berth"
-	dock_target_offsite = "escape_pod_3_recovery"
-	transit_direction = EAST
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
-
-/datum/shuttle/ferry/escape_pod/escape_pod_four
-	name = "Escape Pod 4"
-	location = 0
-	warmup_time = 0
-	area_station = /area/shuttle/escape_pod5/station
-	area_offsite = /area/shuttle/escape_pod5/centcom
-	area_transition = /area/shuttle/escape_pod5/transit
-	docking_controller_tag = "escape_pod_5"
-	dock_target_station = "escape_pod_5_berth"
-	dock_target_offsite = "escape_pod_5_recovery"
-	transit_direction = EAST //should this be WEST? I have no idea.
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
-
-/datum/shuttle/ferry/supply/cargo
-	name = "Supply"
-	location = 1
-	warmup_time = 10
-	area_offsite = /area/supply/dock
-	area_station = /area/supply/station
-	docking_controller_tag = "supply_shuttle"
-	dock_target_station = "cargo_bay"
-	flags = SHUTTLE_FLAGS_PROCESS|SHUTTLE_FLAGS_SUPPLY
-
-/datum/shuttle/ferry/engineering
-	name = "Engineering"
-	warmup_time = 10
-	area_offsite = /area/shuttle/constructionsite/site
-	area_station = /area/shuttle/constructionsite/station
-	docking_controller_tag = "engineering_shuttle"
-	dock_target_station = "engineering_dock_airlock"
-	dock_target_offsite = "edock_airlock"
-
-/datum/shuttle/ferry/mining
-	name = "Mining"
-	warmup_time = 10
-	area_offsite = /area/shuttle/mining/outpost
-	area_station = /area/shuttle/mining/station
-	docking_controller_tag = "mining_shuttle"
-	dock_target_station = "mining_dock_airlock"
-	dock_target_offsite = "mining_outpost_airlock"
-
-/datum/shuttle/ferry/research
-	name = "Research"
-	warmup_time = 10
-	area_offsite = /area/shuttle/research/outpost
-	area_station = /area/shuttle/research/station
-	docking_controller_tag = "research_shuttle"
-	dock_target_station = "research_dock_airlock"
-	dock_target_offsite = "research_outpost_dock"
-
-/datum/shuttle/ferry/centcom
-	name = "Centcom"
-	location = 1
-	warmup_time = 10
-	area_offsite = /area/shuttle/transport1/centcom
-	area_station = /area/shuttle/transport1/station
-	docking_controller_tag = "centcom_shuttle"
-	dock_target_station = "centcom_shuttle_dock_airlock"
-	dock_target_offsite = "centcom_shuttle_bay"
-
 /datum/shuttle/ferry/administration
 	name = "Administration"
 	location = 1
@@ -120,12 +7,6 @@
 	docking_controller_tag = "admin_shuttle"
 	dock_target_station = "admin_shuttle_dock_airlock"
 	dock_target_offsite = "admin_shuttle_bay"
-
-/datum/shuttle/ferry/alien
-	name = "Alien"
-	area_offsite = /area/shuttle/alien/base
-	area_station = /area/shuttle/alien/mine
-	flags = SHUTTLE_FLAGS_NONE
 
 /datum/shuttle/multi_shuttle/mercenary
 	name = "Mercenary"
@@ -218,10 +99,11 @@
 
 
 //Torch Large Pods
-/datum/shuttle/ferry/escape_pod/escape_pod_six
+
+/datum/shuttle/ferry/emergency/escape_pod_six
 	name = "Escape Pod 6"
 	location = 0
-	warmup_time = 0
+	warmup_time = 10
 	area_station = /area/shuttle/escape_pod6/station
 	area_offsite = /area/shuttle/escape_pod6/centcom
 	area_transition = /area/shuttle/escape_pod6/transit
@@ -384,13 +266,13 @@
 	interim = /area/calypso_hangar/transit
 	start_location = "SEV Torch Hangar Deck"
 	destinations = list(
-		"North of First Deck" = /area/calypso_hangar/firstdeck),
-		"South of Second Deck" = /area/calypso_hangar/seconddeck),
-		"West of Third Deck" = /area/calypso_hangar/thirddeck),
-		"East of Fourth Deck" = /area/calypso_hangar/fourthdeck),
-		"Debris Field" = /area/calypso_hangar/salvage),
-		"Asteroid" = /area/calypso_hangar/mining),
-		"Away Site" = /area/calypso_hangar/away),
+		"North of First Deck" = /area/calypso_hangar/firstdeck,
+		"South of Second Deck" = /area/calypso_hangar/seconddeck,
+		"West of Third Deck" = /area/calypso_hangar/thirddeck,
+		"East of Fourth Deck" = /area/calypso_hangar/fourthdeck,
+		"Debris Field" = /area/calypso_hangar/salvage,
+		"Asteroid" = /area/calypso_hangar/mining,
+		"Away Site" = /area/calypso_hangar/away,
 		)
 	announcer = "SEV Torch Docking Computer"
 	arrival_message = "Attention, shuttle Calypso returning. Clear the Hangar Deck."
@@ -405,12 +287,12 @@
 	start_location = "SEV Torch Hangar Deck"
 
 	destinations = list(
-		"East of First Deck" = locate(/area/guppy_hangar/firstdeck),
-		"West of Second Deck" = locate(/area/guppy_hangar/seconddeck),
-		"South of Third Deck" = locate(/area/guppy_hangar/thirddeck),
-		"North of Fourth Deck" = locate(/area/guppy_hangar/fourthdeck),
-		"Debris Field" = locate(/area/guppy_hangar/salvage),
-		"Asteroid" = locate(/area/guppy_hangar/mining),
+		"East of First Deck" = /area/guppy_hangar/firstdeck,
+		"West of Second Deck" = /area/guppy_hangar/seconddeck,
+		"South of Third Deck" = /area/guppy_hangar/thirddeck,
+		"North of Fourth Deck" = /area/guppy_hangar/fourthdeck,
+		"Debris Field" = /area/guppy_hangar/salvage,
+		"Asteroid" = /area/guppy_hangar/mining,
 		)
 
 	announcer = "SEV Torch Docking Computer"
@@ -436,12 +318,3 @@
 	announcer = "SEV Torch Sensor Array"
 	arrival_message = "Attention, anomalous sensor reading detected entering vessel proximity."
 	departure_message = "Attention, anomalous sensor reading detected leaving vessel proximity."
-
-// Supply shuttle
-/datum/shuttle/ferry/supply/cargo()
-	location = 1
-	warmup_time = 10
-	area_offsite = /area/supply/dock
-	area_station = /area/supply/station
-	docking_controller_tag = "supply_shuttle"
-	dock_target_station = "cargo_bay"
