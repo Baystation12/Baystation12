@@ -10,6 +10,7 @@
 	processing_objects.Add(src)
 	spawning_id = pick("blood","holywater","lube","stoxin","ethanol","ice","glycerol","fuel","cleaner")
 
+
 /obj/item/weapon/reagent_containers/glass/replenishing/process()
 	reagents.add_reagent(spawning_id, 0.3)
 
@@ -23,6 +24,12 @@
 
 /obj/item/clothing/mask/gas/poltergeist/New()
 	processing_objects.Add(src)
+	listening_objects += src
+
+/obj/item/clothing/mask/gas/poltergeist/Destroy()
+	..()
+	processing_objects.Remove(src)
+	listening_objects += src
 
 /obj/item/clothing/mask/gas/poltergeist/process()
 	if(heard_talk.len && istype(src.loc, /mob/living) && prob(10))
@@ -57,6 +64,11 @@
 /obj/item/weapon/vampiric/New()
 	..()
 	processing_objects.Add(src)
+	listening_objects += src
+
+/obj/item/weapon/vampiric/Destroy()
+	..()
+	listening_objects -= src
 
 /obj/item/weapon/vampiric/process()
 	//see if we've identified anyone nearby
