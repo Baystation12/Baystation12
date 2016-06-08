@@ -2,6 +2,8 @@
 			   ORGAN DEFINES
 ****************************************************/
 
+//Make sure that w_class is set as if the parent mob was medium sized! This is because w_class is adjusted automatically for mob_size in New()
+
 /obj/item/organ/external/chest
 	name = "upper body"
 	limb_name = "chest"
