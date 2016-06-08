@@ -4,6 +4,7 @@
 	living_mob_list -= src
 	unset_machine()
 	qdel(hud_used)
+	clear_fullscreen()
 	if(client)
 		for(var/obj/screen/movable/spell_master/spell_master in spell_masters)
 			qdel(spell_master)
@@ -17,8 +18,6 @@
 	. = ..()
 
 /mob/proc/remove_screen_obj_references()
-	flash = null
-	blind = null
 	hands = null
 	pullin = null
 	purged = null
@@ -33,7 +32,6 @@
 	throw_icon = null
 	nutrition_icon = null
 	pressure = null
-	damageoverlay = null
 	pain = null
 	item_use_icon = null
 	gun_move_icon = null

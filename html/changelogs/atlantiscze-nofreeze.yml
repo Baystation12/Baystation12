@@ -1,0 +1,7 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "Added functioning tiny atmospherics to telecommunications."
+  - tweak: "Various server rooms and telecommunications central compartment no longer contain supercooled atmosphere. Instead they are cooled down to 10 celsius by an air alarm, and have normal ventillation. This air alarm will trigger a warning at 30C, and alarm at 40C, which is also the point at which machines begin taking damage."

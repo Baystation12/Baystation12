@@ -32,7 +32,6 @@
 	var/temperature_alert = 0
 	var/in_stasis = 0
 	var/heartbeat = 0
-	var/global/list/overlays_cache = null
 
 /mob/living/carbon/human/Life()
 	set invisibility = 0
@@ -626,9 +625,9 @@
 	if(species.flags & IS_PLANT && (!light_organ || light_organ.is_broken()))
 		if(nutrition < 200)
 			take_overall_damage(2,0)
-			
-			//traumatic_shock is updated every tick, incrementing that is pointless - shock_stage is the counter. 
-			//Not that it matters much for diona, who have NO_PAIN. 
+
+			//traumatic_shock is updated every tick, incrementing that is pointless - shock_stage is the counter.
+			//Not that it matters much for diona, who have NO_PAIN.
 			shock_stage++
 
 	// TODO: stomach and bloodstream organ.
@@ -749,33 +748,6 @@
 	return 1
 
 /mob/living/carbon/human/handle_regular_hud_updates()
-	if(!overlays_cache)
-		overlays_cache = list()
-		overlays_cache.len = 23
-		overlays_cache[1] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage1")
-		overlays_cache[2] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage2")
-		overlays_cache[3] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage3")
-		overlays_cache[4] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage4")
-		overlays_cache[5] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage5")
-		overlays_cache[6] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage6")
-		overlays_cache[7] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage7")
-		overlays_cache[8] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage8")
-		overlays_cache[9] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage9")
-		overlays_cache[10] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage10")
-		overlays_cache[11] = image('icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay1")
-		overlays_cache[12] = image('icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay2")
-		overlays_cache[13] = image('icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay3")
-		overlays_cache[14] = image('icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay4")
-		overlays_cache[15] = image('icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay5")
-		overlays_cache[16] = image('icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay6")
-		overlays_cache[17] = image('icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay7")
-		overlays_cache[18] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay1")
-		overlays_cache[19] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay2")
-		overlays_cache[20] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay3")
-		overlays_cache[21] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay4")
-		overlays_cache[22] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay5")
-		overlays_cache[23] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay6")
-
 	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
 		handle_hud_list()
 
@@ -784,75 +756,53 @@
 	if(!..())
 		return
 
-	if(damageoverlay.overlays)
-		damageoverlay.overlays = list()
-
-	if(stat == UNCONSCIOUS)
+	if(stat == UNCONSCIOUS && health <= 0)
 		//Critical damage passage overlay
-		if(health <= 0)
-			var/image/I
-			switch(health)
-				if(-20 to -10)
-					I = overlays_cache[1]
-				if(-30 to -20)
-					I = overlays_cache[2]
-				if(-40 to -30)
-					I = overlays_cache[3]
-				if(-50 to -40)
-					I = overlays_cache[4]
-				if(-60 to -50)
-					I = overlays_cache[5]
-				if(-70 to -60)
-					I = overlays_cache[6]
-				if(-80 to -70)
-					I = overlays_cache[7]
-				if(-90 to -80)
-					I = overlays_cache[8]
-				if(-95 to -90)
-					I = overlays_cache[9]
-				if(-INFINITY to -95)
-					I = overlays_cache[10]
-			damageoverlay.overlays += I
+		var/severity = 0
+		switch(health)
+			if(-20 to -10)			severity = 1
+			if(-30 to -20)			severity = 2
+			if(-40 to -30)			severity = 3
+			if(-50 to -40)			severity = 4
+			if(-60 to -50)			severity = 5
+			if(-70 to -60)			severity = 6
+			if(-80 to -70)			severity = 7
+			if(-90 to -80)			severity = 8
+			if(-95 to -90)			severity = 9
+			if(-INFINITY to -95)	severity = 10
+		overlay_fullscreen("crit", /obj/screen/fullscreen/crit, severity)
 	else
+		clear_fullscreen("crit")
 		//Oxygen damage overlay
 		if(oxyloss)
-			var/image/I
+			var/severity = 0
 			switch(oxyloss)
-				if(10 to 20)
-					I = overlays_cache[11]
-				if(20 to 25)
-					I = overlays_cache[12]
-				if(25 to 30)
-					I = overlays_cache[13]
-				if(30 to 35)
-					I = overlays_cache[14]
-				if(35 to 40)
-					I = overlays_cache[15]
-				if(40 to 45)
-					I = overlays_cache[16]
-				if(45 to INFINITY)
-					I = overlays_cache[17]
-			damageoverlay.overlays += I
+				if(10 to 20)		severity = 1
+				if(20 to 25)		severity = 2
+				if(25 to 30)		severity = 3
+				if(30 to 35)		severity = 4
+				if(35 to 40)		severity = 5
+				if(40 to 45)		severity = 6
+				if(45 to INFINITY)	severity = 7
+			overlay_fullscreen("oxy", /obj/screen/fullscreen/oxy, severity)
+		else
+			clear_fullscreen("oxy")
 
 		//Fire and Brute damage overlay (BSSR)
 		var/hurtdamage = src.getBruteLoss() + src.getFireLoss() + damageoverlaytemp
 		damageoverlaytemp = 0 // We do this so we can detect if someone hits us or not.
 		if(hurtdamage)
-			var/image/I
+			var/severity = 0
 			switch(hurtdamage)
-				if(10 to 25)
-					I = overlays_cache[18]
-				if(25 to 40)
-					I = overlays_cache[19]
-				if(40 to 55)
-					I = overlays_cache[20]
-				if(55 to 70)
-					I = overlays_cache[21]
-				if(70 to 85)
-					I = overlays_cache[22]
-				if(85 to INFINITY)
-					I = overlays_cache[23]
-			damageoverlay.overlays += I
+				if(10 to 25)		severity = 1
+				if(25 to 40)		severity = 2
+				if(40 to 55)		severity = 3
+				if(55 to 70)		severity = 4
+				if(70 to 85)		severity = 5
+				if(85 to INFINITY)	severity = 6
+			overlay_fullscreen("brute", /obj/screen/fullscreen/brute, severity)
+		else
+			clear_fullscreen("brute")
 
 		if(healths  && stat != DEAD) // They are dead, let death() handle their hud update on this.
 			if (analgesic > 100)
@@ -882,10 +832,6 @@
 
 		if(pressure)
 			pressure.icon_state = "pressure[pressure_alert]"
-
-//			if(rest)	//Not used with new UI
-//				if(resting || lying || sleeping)		rest.icon_state = "rest1"
-//				else									rest.icon_state = "rest0"
 		if(toxin)
 			if(hal_screwyhud == 4 || phoron_alert)	toxin.icon_state = "tox1"
 			else									toxin.icon_state = "tox0"
@@ -984,7 +930,7 @@
 /mob/living/carbon/human/handle_shock()
 	..()
 	if(status_flags & GODMODE)	return 0	//godmode
-	if(species && species.flags & NO_PAIN) 
+	if(species && species.flags & NO_PAIN)
 		shock_stage = 0
 		return
 

@@ -238,12 +238,14 @@ datum/preferences
 	else if(href_list["reload"])
 		load_preferences()
 		load_character()
+		sanitize_preferences()
 	else if(href_list["load"])
 		if(!IsGuestKey(usr.key))
 			open_load_dialog(usr)
 			return 1
 	else if(href_list["changeslot"])
 		load_character(text2num(href_list["changeslot"]))
+		sanitize_preferences()
 		close_load_dialog(usr)
 	else
 		return 0

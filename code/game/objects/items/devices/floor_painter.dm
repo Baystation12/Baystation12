@@ -13,7 +13,7 @@
 		"hazard stripes" =    list("path" = /obj/effect/floor_decal/industrial/warning),
 		"corner, hazard" =    list("path" = /obj/effect/floor_decal/industrial/warning/corner),
 		"hatched marking" =   list("path" = /obj/effect/floor_decal/industrial/hatch, "coloured" = 1),
-		"dotted outline" =    list("path" = /obj/effect/floor_decal/industrial/outline, "coloured" = 1),
+		"dashed outline" =    list("path" = /obj/effect/floor_decal/industrial/outline, "coloured" = 1),
 		"loading sign" =      list("path" = /obj/effect/floor_decal/industrial/loading),
 		"mosaic, large" =     list("path" = /obj/effect/floor_decal/chapel),
 		"1" =                 list("path" = /obj/effect/floor_decal/sign),
