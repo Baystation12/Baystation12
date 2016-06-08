@@ -216,8 +216,8 @@
 	listening_objects += src
 
 /obj/item/device/assembly_holder/Destroy()
-	..()
 	listening_objects -= src
+	return ..()
 	
 
 /obj/item/device/assembly_holder/hear_talk(mob/living/M as mob, msg, verb, datum/language/speaking)

@@ -50,7 +50,7 @@
 	Destroy()
 		if(part)
 			part.implants.Remove(src)
-		..()
+		return ..()
 
 /obj/item/weapon/implant/tracking
 	name = "tracking implant"
@@ -258,8 +258,8 @@ Implant Specifics:<BR>"}
 	listening_objects += src
 
 /obj/item/weapon/implant/explosive/Destroy()
-	..()
 	listening_objects -= src
+	return ..()
 
 
 /obj/item/weapon/implant/chem

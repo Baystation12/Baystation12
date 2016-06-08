@@ -26,8 +26,8 @@
 	listening_objects += src
 
 /obj/item/device/spy_bug/Destroy()
-	..()
 	listening_objects -= src
+	return ..()
 
 /obj/item/device/spy_bug/examine(mob/user)
 	. = ..(user, 0)
@@ -70,8 +70,8 @@
 	listening_objects += src
 
 /obj/item/device/spy_monitor/Destroy()
-	..()
 	listening_objects -= src
+	return ..()
 
 /obj/item/device/spy_monitor/examine(mob/user)
 	. = ..(user, 1)

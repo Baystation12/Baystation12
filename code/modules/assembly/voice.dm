@@ -12,8 +12,8 @@
 	listening_objects += src
 
 /obj/item/device/assembly/voice/Destroy()
-	..()
 	listening_objects -= src
+	return ..()
 
 /obj/item/device/assembly/voice/hear_talk(mob/living/M as mob, msg)
 	if(listening)

@@ -120,10 +120,13 @@
 
 	var/turf/T = get_turf(src)
 
-	var/list/results = get_mobs_or_objects_in_view(T,range, ONLY_GHOSTS_IN_VIEW)
+	var/list/mobs = list()
+	var/list/objs = list()
+	get_mobs_and_objs_in_view_fast(T, range, mobs, objs)
 
 
-	for(var/mob/M in results["mobs"])
+	for(var/m in mobs)
+		var/mob/M = m
 		if(self_message && M==src)
 			M.show_message(self_message,2,deaf_message,1)
 			continue
@@ -131,7 +134,8 @@
 		M.show_message(message,2,deaf_message,1)
 
 
-	for(var/obj/O in results["objs"])
+	for(var/o in objs)
+		var/obj/O = o
 		O.show_message(message,2,deaf_message,1)
 
 /mob/proc/findname(msg)

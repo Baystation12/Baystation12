@@ -467,16 +467,16 @@ its easier to just keep the beam vertical.
 	var/list/objs = list()
 	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, ONLY_GHOSTS_IN_VIEW)
 
-	for(var/I in mobs + objs)
-		if(isobj(I))
-			var/obj/O = I
-			O.show_message(message,1,blind_message,2)
-		if(ismob(I))
-			var/mob/M = I
-			if(M.see_invisible >= invisibility)
-				M.show_message(message,1,blind_message,2)
-			else if(blind_message)
-				M.show_message(blind_message, 2)
+	for(var/o in objs)
+		var/obj/O = o
+		O.show_message(message,1,blind_message,2)
+
+	for(var/m in mobs)
+		var/mob/M = m
+		if(M.see_invisible >= invisibility)
+			M.show_message(message,1,blind_message,2)
+		else if(blind_message)
+			M.show_message(blind_message, 2)
 
 // Show a message to all mobs and objects in earshot of this atom
 // Use for objects performing audible actions
@@ -493,13 +493,12 @@ its easier to just keep the beam vertical.
 	var/list/objs = list()
 	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, ONLY_GHOSTS_IN_VIEW)
 
-	for(var/I in mobs + objs)
-		if(isobj(I))
-			var/obj/O = I
-			O.show_message(message,2,deaf_message,1)
-		if(ismob(I))
-			var/mob/M = I
-			M.show_message(message,2,deaf_message,1)
+	for(var/m in mobs)
+		var/mob/M = m
+		M.show_message(message,2,deaf_message,1)
+	for(var/o in objs)
+		var/mob/O = o
+		O.show_message(message,2,deaf_message,1)
 
 /atom/movable/proc/dropInto(var/atom/destination)
 	while(istype(destination))
