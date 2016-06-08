@@ -102,7 +102,7 @@
 //	Formatting is the same as food.
 
 /obj/item/weapon/reagent_containers/food/drinks/milk
-	name = "Space Milk"
+	name = "milk carton"
 	desc = "It's milk. White and nutritious goodness!"
 	icon_state = "milk"
 	item_state = "carton"
@@ -112,7 +112,7 @@
 		reagents.add_reagent("milk", 50)
 
 /obj/item/weapon/reagent_containers/food/drinks/soymilk
-	name = "SoyMilk"
+	name = "soymilk carton"
 	desc = "It's soy milk. White and nutritious goodness!"
 	icon_state = "soymilk"
 	item_state = "carton"
@@ -121,8 +121,25 @@
 		..()
 		reagents.add_reagent("soymilk", 50)
 
+/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton
+	name = "small milk carton"
+	volume = 30
+	icon_state = "mini-milk"
+/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/New()
+	..()
+	reagents.add_reagent("milk", 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/chocolate
+	name = "small chocolate milk carton"
+	desc = "It's milk! This one is in delicious chocolate flavour."
+
+/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/chocolate/New()
+	..()
+	reagents.add_reagent("chocolate_milk", 30)
+
+
 /obj/item/weapon/reagent_containers/food/drinks/coffee
-	name = "Robust Coffee"
+	name = "\improper Robust Coffee"
 	desc = "Careful, the beverage you're about to enjoy is extremely hot."
 	icon_state = "coffee"
 	center_of_mass = list("x"=15, "y"=10)
@@ -131,7 +148,7 @@
 		reagents.add_reagent("coffee", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/tea
-	name = "Duke Purple Tea"
+	name = "cup of Duke Purple Tea"
 	desc = "An insult to Duke Purple is an insult to the Space Queen! Any proper gentleman will fight you, if you sully this tea."
 	icon_state = "teacup"
 	item_state = "coffee"
@@ -141,7 +158,7 @@
 		reagents.add_reagent("tea", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/ice
-	name = "Ice Cup"
+	name = "cup of ice"
 	desc = "Careful, cold ice, do not chew."
 	icon_state = "coffee"
 	center_of_mass = list("x"=15, "y"=10)
@@ -150,7 +167,7 @@
 		reagents.add_reagent("ice", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/h_chocolate
-	name = "Dutch Hot Coco"
+	name = "cup of Dutch hot coco"
 	desc = "Made in Space South America."
 	icon_state = "hot_coco"
 	item_state = "coffee"
@@ -160,7 +177,8 @@
 		reagents.add_reagent("hot_coco", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/dry_ramen
-	name = "Cup Ramen"
+	name = "cup ramen"
+	gender = PLURAL
 	desc = "Just add 10ml water, self heats! A taste that reminds you of your school years."
 	icon_state = "ramen"
 	center_of_mass = list("x"=16, "y"=11)
@@ -170,7 +188,7 @@
 
 
 /obj/item/weapon/reagent_containers/food/drinks/sillycup
-	name = "Paper Cup"
+	name = "paper cup"
 	desc = "A paper water cup."
 	icon_state = "water_cup_e"
 	possible_transfer_amounts = null
@@ -191,7 +209,7 @@
 //	icon states.
 
 /obj/item/weapon/reagent_containers/food/drinks/shaker
-	name = "Shaker"
+	name = "shaker"
 	desc = "A metal shaker to mix drinks in."
 	icon_state = "shaker"
 	amount_per_transfer_from_this = 10
@@ -208,7 +226,7 @@
 	center_of_mass = list("x"=17, "y"=7)
 
 /obj/item/weapon/reagent_containers/food/drinks/flask
-	name = "Captain's Flask"
+	name = "\improper Captain's flask"
 	desc = "A metal flask belonging to the captain."
 	icon_state = "flask"
 	volume = 60
@@ -225,7 +243,7 @@
 	icon_state = "lithiumflask"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/detflask
-	name = "Detective's Flask"
+	name = "\improper Detective's flask"
 	desc = "A metal flask with a leather band and golden badge belonging to the detective."
 	icon_state = "detflask"
 	volume = 60
