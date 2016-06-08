@@ -108,8 +108,10 @@
 	force = 10
 	w_class = 5
 	slot_flags = SLOT_BACK
-	force_wielded = 0.75           // 22 when wielded with hardness 15 (glass)
-	unwielded_force_divisor = 0.65 // 14 when unwielded based on above
+
+	// 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
+	force_divisor = 0.33
+	unwielded_force_divisor = 0.20
 	thrown_force_divisor = 1.5 // 20 when thrown with weight 15 (glass)
 	throw_speed = 3
 	edge = 0
