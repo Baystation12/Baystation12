@@ -17,7 +17,7 @@
 			playsound(T, 'sound/effects/phasein.ogg', 100, 1)
 			for(var/mob/living/carbon/human/M in viewers(T, null))
 				if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
-					flick("e_flash", M.flash)
+					M.flash_eyes()
 
 			for(var/i=1, i<=deliveryamt, i++)
 				var/atom/movable/x = new spawner_type

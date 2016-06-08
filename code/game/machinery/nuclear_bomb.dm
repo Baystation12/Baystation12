@@ -338,41 +338,9 @@ var/bomb_set
 	src.yes_code = 0
 	src.safety = 1
 	update_icon()
-	playsound(src,'sound/machines/Alarm.ogg',100,0,5)
-	if (ticker && ticker.mode)
-		ticker.mode.explosion_in_progress = 1
-	sleep(100)
+	
+	SetUniversalState(/datum/universal_state/nuclear_explosion, args=list(src))
 
-	var/off_station = 0
-	var/turf/bomb_location = get_turf(src)
-	if(bomb_location && (bomb_location.z in using_map.station_levels))
-		if( (bomb_location.x < (128-NUKERANGE)) || (bomb_location.x > (128+NUKERANGE)) || (bomb_location.y < (128-NUKERANGE)) || (bomb_location.y > (128+NUKERANGE)) )
-			off_station = 1
-	else
-		off_station = 2
-
-	if(ticker)
-		if(ticker.mode && ticker.mode.name == "Mercenary")
-			var/obj/machinery/computer/shuttle_control/multi/syndicate/syndie_location = locate(/obj/machinery/computer/shuttle_control/multi/syndicate)
-			if(syndie_location)
-				ticker.mode:syndies_didnt_escape = (syndie_location.z > 1 ? 0 : 1)	//muskets will make me change this, but it will do for now
-			ticker.mode:nuke_off_station = off_station
-		ticker.station_explosion_cinematic(off_station,null)
-		if(ticker.mode)
-			ticker.mode.explosion_in_progress = 0
-			if(off_station == 1)
-				world << "<b>A nuclear device was set off, but the explosion was out of reach of the station!</b>"
-			else if(off_station == 2)
-				world << "<b>A nuclear device was set off, but the device was not on the station!</b>"
-			else
-				world << "<b>The station was destoyed by the nuclear blast!</b>"
-
-			ticker.mode.station_was_nuked = (off_station<2)	//offstation==1 is a draw. the station becomes irradiated and needs to be evacuated.
-															//kinda shit but I couldn't  get permission to do what I wanted to do.
-
-			if(!ticker.mode.check_finished())//If the mode does not deal with the nuke going off so just reboot because everyone is stuck as is
-				universe_has_ended = 1
-				return
 	return
 
 /obj/machinery/nuclearbomb/update_icon()

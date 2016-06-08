@@ -1,34 +1,4 @@
 
-/*
-	The initialization of the game happens roughly like this:
-
-	1. All global variables are initialized (including the global_init instance).
-	2. The map is initialized, and map objects are created.
-	3. world/New() runs, creating the process scheduler (and the old master controller) and spawning their setup.
-	4. processScheduler/setup() runs, creating all the processes. game_controller/setup() runs, calling initialize() on all movable atoms in the world.
-	5. The gameticker is created.
-
-*/
-var/global/datum/global_init/init = new ()
-
-/*
-	Pre-map initialization stuff should go here.
-*/
-/datum/global_init/New()
-	generate_gameid()
-
-	makeDatumRefLists()
-	populateGlobalLists()
-	load_configuration()
-
-	initialize_chemical_reagents()
-	initialize_chemical_reactions()
-
-	qdel(src) //we're done
-
-/datum/global_init/Destroy()
-	return 1
-
 /var/game_id = null
 /proc/generate_gameid()
 	if(game_id != null)
@@ -76,7 +46,7 @@ var/global/datum/global_init/init = new ()
 		config.server_name += " #[(world.port % 1000) / 100]"
 
 	if(config && config.log_runtime)
-		log = file("data/logs/runtime/[time2text(world.realtime,"YYYY-MM-DD-(hh-mm-ss)")]-runtime.log")
+		log = file("data/logs/runtime/[date_string]-runtime.log")
 
 	callHook("startup")
 	//Emergency Fix
@@ -166,7 +136,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/input[] = params2list(T)
 		var/list/s = list()
 		s["version"] = game_version
-		s["mode"] = master_mode
+		s["mode"] = PUBLIC_GAME_MODE
 		s["respawn"] = config.abandon_allowed
 		s["enter"] = config.enter_allowed
 		s["vote"] = config.allow_vote_mode

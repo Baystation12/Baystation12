@@ -62,6 +62,10 @@
 	desc = "A suit that protects against low pressure environments. \"NSS EXODUS\" is written in large block letters on the back."
 	icon_state = "space"
 	item_state = "s_suit"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_spacesuits.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_spacesuits.dmi',
+		)
 	w_class = 5//bulky item
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02

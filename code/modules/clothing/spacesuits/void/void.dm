@@ -29,7 +29,7 @@
 /obj/item/clothing/suit/space/void
 	name = "voidsuit"
 	icon_state = "void"
-	item_state = "void"
+	item_state = "syndie_hardsuit"
 	desc = "A high-tech dark red space suit. Used for AI satellite maintenance."
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 20)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)

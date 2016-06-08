@@ -68,8 +68,8 @@
 		/obj/item/weapon/circuitboard,
 		/obj/item/slime_extract,
 		/obj/item/weapon/reagent_containers/glass,
-		/obj/item/weapon/reagent_containers/food/snacks/monkeycube
-
+		/obj/item/weapon/reagent_containers/food/snacks/monkeycube,
+		/obj/item/mecha_parts
 		)
 
 /obj/item/weapon/gripper/service //Used to handle food, drinks, and seeds.

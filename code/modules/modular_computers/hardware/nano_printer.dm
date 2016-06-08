@@ -2,6 +2,7 @@
 	name = "nano printer"
 	desc = "Small integrated printer with paper recycling module."
 	power_usage = 50
+	origin_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	critical = 0
 	icon_state = "printer"
 	hardware_size = 1

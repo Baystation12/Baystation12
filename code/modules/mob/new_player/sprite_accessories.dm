@@ -142,6 +142,11 @@
 		icon_state = "hair_ponytail4"
 		gender = FEMALE
 
+	ponytail5
+		name = "Ponytail 5"
+		icon_state = "hair_ponytail5"
+		gender = FEMALE
+
 	fringetail
 		name = "Fringetail"
 		icon_state = "hair_fringetail"
@@ -450,8 +455,12 @@
 		icon_state = "hair_halfshaved"
 
 	bun
-		name = "Bun"
+		name = "Low Bun"
 		icon_state = "hair_bun"
+		
+	bun2
+		name = "High Bun"
+		icon_state = "hair_bun2"
 
 	doublebun
 		name = "Double-Bun"

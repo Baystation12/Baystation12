@@ -28,6 +28,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define AI_CAMERA_LUMINOSITY 6
 
 // Camera networks
+#define NETWORK_CALYPSO "Calypso"
 #define NETWORK_CRESCENT "Crescent"
 #define NETWORK_CIVILIAN_EAST "Civilian East"
 #define NETWORK_CIVILIAN_WEST "Civilian West"
@@ -37,16 +38,20 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define NETWORK_ENGINEERING_OUTPOST "Engineering Outpost"
 #define NETWORK_ERT "ZeEmergencyResponseTeam"
 #define NETWORK_EXODUS "Exodus"
+#define NETWORK_EXPEDITION "Expedition"
 #define NETWORK_FIRST_DECK "First Deck"
+#define NETWORK_FOURTH_DECK "Fourth Deck"
 #define NETWORK_MEDICAL "Medical"
 #define NETWORK_MERCENARY "MercurialNet"
 #define NETWORK_MINE "MINE"
 #define NETWORK_RESEARCH "Research"
 #define NETWORK_RESEARCH_OUTPOST "Research Outpost"
 #define NETWORK_ROBOTS "Robots"
+#define NETWORK_POD "General Utility Pod"
 #define NETWORK_PRISON "Prison"
 #define NETWORK_SECOND_DECK "Second Deck"
 #define NETWORK_SECURITY "Security"
+#define NETWORK_SUPPLY "Supply"
 #define NETWORK_TELECOM "Tcomsat"
 #define NETWORK_THIRD_DECK "Third Deck"
 #define NETWORK_THUNDER "Thunderdome"

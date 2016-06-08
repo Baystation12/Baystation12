@@ -177,7 +177,7 @@
 
 	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
-/mob/living/silicon/robot/SetName(pickedName as text)
+/mob/living/silicon/robot/fully_replace_character_name(pickedName as text)
 	custom_name = pickedName
 	updatename()
 
@@ -349,6 +349,9 @@
 /mob/living/silicon/robot/verb/toggle_lights()
 	set category = "Silicon Commands"
 	set name = "Toggle Lights"
+
+	if(stat == DEAD)
+		return
 
 	lights_on = !lights_on
 	usr << "You [lights_on ? "enable" : "disable"] your integrated light."
