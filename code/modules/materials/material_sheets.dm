@@ -165,7 +165,7 @@
 /obj/item/stack/material/steel/fifty
 	amount = 50
 
-/obj/item/stack/material/plasteel/fifty
+/obj/item/stack/material/plasteel
 	name = "plasteel"
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
