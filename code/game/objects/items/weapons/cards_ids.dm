@@ -113,6 +113,9 @@ var/const/NO_EMAG_ACT = -50
 	var/icon/front
 	var/icon/side
 
+	var/primary_color = rgb(0,0,0) // Obtained by eyedroppering the stripe in the middle of the card
+	var/secondary_color = rgb(0,0,0) // Likewise for the oval in the top-left corner
+
 	//alt titles are handled a bit weirdly in order to unobtrusively integrate into existing ID system
 	var/assignment = null	//can be alt title or the actual job
 	var/rank = null			//actual job
@@ -276,3 +279,88 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/id/all_access/New()
 	access = get_access_ids()
 	..()
+
+// Department-flavor IDs
+/obj/item/weapon/card/id/medical
+	name = "identification card"
+	desc = "A card issued to station medical staff."
+	icon_state = "med"
+	primary_color = rgb(189,237,237)
+	secondary_color = rgb(223,255,255)
+
+/obj/item/weapon/card/id/medical/head
+	name = "identification card"
+	desc = "A card which represents care and compassion."
+	icon_state = "medGold"
+	primary_color = rgb(189,237,237)
+	secondary_color = rgb(255,223,127)
+
+/obj/item/weapon/card/id/security
+	name = "identification card"
+	desc = "A card issued to station security staff."
+	icon_state = "sec"
+	primary_color = rgb(189,47,0)
+	secondary_color = rgb(223,127,95)
+
+/obj/item/weapon/card/id/security/head
+	name = "identification card"
+	desc = "A card which represents honor and protection."
+	icon_state = "secGold"
+	primary_color = rgb(189,47,0)
+	secondary_color = rgb(255,223,127)
+
+/obj/item/weapon/card/id/engineering
+	name = "identification card"
+	desc = "A card issued to station engineering staff."
+	icon_state = "eng"
+	primary_color = rgb(189,94,0)
+	secondary_color = rgb(223,159,95)
+
+/obj/item/weapon/card/id/engineering/head
+	name = "identification card"
+	desc = "A card which represents creativity and ingenuity."
+	icon_state = "engGold"
+	primary_color = rgb(189,94,0)
+	secondary_color = rgb(255,223,127)
+
+/obj/item/weapon/card/id/science
+	name = "identification card"
+	desc = "A card issued to station science staff."
+	icon_state = "sci"
+	primary_color = rgb(142,47,142)
+	secondary_color = rgb(191,127,191)
+
+/obj/item/weapon/card/id/science/head
+	name = "identification card"
+	desc = "A card which represents knowledge and reasoning."
+	icon_state = "sciGold"
+	primary_color = rgb(142,47,142)
+	secondary_color = rgb(255,223,127)
+
+/obj/item/weapon/card/id/cargo
+	name = "identification card"
+	desc = "A card issued to station cargo staff."
+	icon_state = "car"
+	primary_color = rgb(142,94,0)
+	secondary_color = rgb(191,159,95)
+
+/obj/item/weapon/card/id/cargo/head
+	name = "identification card"
+	desc = "A card which represents service and planning."
+	icon_state = "carGold"
+	primary_color = rgb(142,94,0)
+	secondary_color = rgb(255,223,127)
+
+/obj/item/weapon/card/id/civilian
+	name = "identification card"
+	desc = "A card issued to station civilian staff."
+	icon_state = "civ"
+	primary_color = rgb(0,94,142)
+	secondary_color = rgb(95,159,191)
+
+/obj/item/weapon/card/id/civilian/head //This is not the HoP. There's no position that uses this right now.
+	name = "identification card"
+	desc = "A card which represents common sense and responsibility."
+	icon_state = "civGold"
+	primary_color = rgb(0,94,142)
+	secondary_color = rgb(255,223,127)

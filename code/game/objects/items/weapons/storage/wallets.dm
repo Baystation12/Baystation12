@@ -1,6 +1,7 @@
 /obj/item/weapon/storage/wallet
 	name = "wallet"
 	desc = "It can hold a few small and personal things."
+	icon = 'icons/obj/wallet.dmi'
 	icon_state = "wallet"
 	w_class = 2
 	max_w_class = 1
@@ -46,23 +47,59 @@
 			update_icon()
 
 /obj/item/weapon/storage/wallet/update_icon()
-
 	if(front_id)
 		switch(front_id.icon_state)
-			if("id")
-				icon_state = "walletid"
+			if("id") //The plain assistant ID
+				var/icon/new_wallet = new/icon("icon" = initial(icon), "icon_state" = initial(icon_state))
+				var/icon/id_overlay = new/icon("icon" = initial(icon), "icon_state" = "wallet_id")
+				new_wallet.Blend(id_overlay, ICON_OVERLAY)
+				del id_overlay
+				icon = new_wallet
 				return
-			if("silver")
-				icon_state = "walletid_silver"
-				return
-			if("gold")
-				icon_state = "walletid_gold"
-				return
-			if("centcom")
-				icon_state = "walletid_centcom"
-				return
-	icon_state = "wallet"
+			if("silver") //HoP's ID has a special overlay.
+				var/icon/new_wallet = new/icon("icon" = initial(icon), "icon_state" = initial(icon_state))
+				var/icon/id_overlay = new/icon("icon" = initial(icon), "icon_state" = "wallet_idsilver")
+				new_wallet.Blend(id_overlay, ICON_OVERLAY)
+				del id_overlay
+				icon = new_wallet
+			if("gold") //Captain's ID has a special overlay.
+				var/icon/new_wallet = new/icon("icon" = initial(icon), "icon_state" = initial(icon_state))
+				var/icon/id_overlay = new/icon("icon" = initial(icon), "icon_state" = "wallet_idgold")
+				new_wallet.Blend(id_overlay, ICON_OVERLAY)
+				del id_overlay
+				icon = new_wallet
+			if("centcom") //Centcom ID has a special overlay.
+				var/icon/new_wallet = new/icon("icon" = initial(icon), "icon_state" = initial(icon_state))
+				var/icon/id_overlay = new/icon("icon" = initial(icon), "icon_state" = "wallet_idcentcom")
+				new_wallet.Blend(id_overlay, ICON_OVERLAY)
+				del id_overlay
+				icon = new_wallet
+			else //Doesn't match a special overlay type.
+				if(front_id.primary_color && front_id.secondary_color) //Colored ID with stripe and oval colors (pri/sec).
+					var/icon/new_wallet = new/icon("icon" = initial(icon), "icon_state" = initial(icon_state))
+					var/icon/id_icon = new/icon("icon" = initial(icon), "icon_state" = "wallet_id")
+					var/icon/pri_overlay = new/icon("icon" = initial(icon), "icon_state" = "wallet_idprimary")
+					var/icon/sec_overlay = new/icon("icon" = initial(icon), "icon_state" = "wallet_idsecondary")
 
+					pri_overlay.Blend(front_id.primary_color, ICON_ADD)
+					sec_overlay.Blend(front_id.secondary_color, ICON_ADD)
+
+					new_wallet.Blend(id_icon, ICON_OVERLAY)
+					del id_icon
+					new_wallet.Blend(pri_overlay, ICON_OVERLAY)
+					del pri_overlay
+					new_wallet.Blend(sec_overlay, ICON_OVERLAY)
+					del sec_overlay
+
+					icon = new_wallet
+					return
+
+				else //Dunno what to do. Resort to plain assistant ID.
+					icon_state = initial(icon_state) + "id"
+					return
+	else
+		icon = initial(icon)
+		icon_state = initial(icon_state)
 
 /obj/item/weapon/storage/wallet/GetID()
 	return front_id
@@ -89,3 +126,23 @@
 			new item2_type(src)
 		if(item3_type)
 			new item3_type(src)
+
+	SC.update_icon()
+
+/obj/item/weapon/storage/wallet/grey
+	icon_state = "greywallet"
+
+/obj/item/weapon/storage/wallet/green
+	icon_state = "greenwallet"
+
+/obj/item/weapon/storage/wallet/purple
+	icon_state = "purplewallet"
+
+/obj/item/weapon/storage/wallet/red
+	icon_state = "redwallet"
+
+/obj/item/weapon/storage/wallet/blue
+	icon_state = "bluewallet"
+
+/obj/item/weapon/storage/wallet/white
+	icon_state = "whitewallet"

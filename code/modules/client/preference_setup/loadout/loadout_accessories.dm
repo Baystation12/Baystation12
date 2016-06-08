@@ -28,6 +28,30 @@
 	display_name = "armband, science"
 	path = /obj/item/clothing/accessory/armband/science
 
+/datum/gear/accessory/wallet_grey
+	display_name = "wallet, grey"
+	path = /obj/item/weapon/storage/wallet/grey
+
+/datum/gear/accessory/wallet_green
+	display_name = "wallet, green"
+	path = /obj/item/weapon/storage/wallet/green
+
+/datum/gear/accessory/wallet_purple
+	display_name = "wallet, purple"
+	path = /obj/item/weapon/storage/wallet/purple
+
+/datum/gear/accessory/wallet_red
+	display_name = "wallet, red"
+	path = /obj/item/weapon/storage/wallet/red
+
+/datum/gear/accessory/wallet_blue
+	display_name = "wallet, blue"
+	path = /obj/item/weapon/storage/wallet/blue
+
+/datum/gear/accessory/wallet_white
+	display_name = "wallet, white"
+	path = /obj/item/weapon/storage/wallet/white
+
 /datum/gear/accessory/holster
 	display_name = "holster, armpit"
 	path = /obj/item/clothing/accessory/holster/armpit

@@ -8,6 +8,7 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_bar)
 
@@ -35,6 +36,7 @@
 	spawn_positions = 2
 	supervisors = "the head of personnel"
 	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_kitchen)
 	alt_titles = list("Cook")
@@ -61,6 +63,7 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_hydroponics)
 	alt_titles = list("Hydroponicist")
@@ -93,6 +96,7 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/cargo/head
 	economic_modifier = 5
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
@@ -122,6 +126,7 @@
 	spawn_positions = 2
 	supervisors = "the quartermaster and the head of personnel"
 	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/cargo
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
 
@@ -146,6 +151,7 @@
 	spawn_positions = 3
 	supervisors = "the quartermaster and the head of personnel"
 	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/cargo
 	economic_modifier = 5
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_mining, access_mining_station, access_mailsorting)
@@ -208,6 +214,7 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_library, access_maint_tunnels)
 	minimal_access = list(access_library)
 	alt_titles = list("Journalist")
@@ -233,6 +240,7 @@
 	spawn_positions = 2
 	supervisors = "company officials and Corporate Regulations"
 	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/civilian
 	economic_modifier = 7
 	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
