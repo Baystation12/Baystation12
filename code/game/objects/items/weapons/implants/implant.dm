@@ -162,7 +162,6 @@ Implant Specifics:<BR>"}
 		if (malfunction == MALFUNCTION_PERMANENT)
 			return
 
-		listening_objects -= src
 
 		var/need_gib = null
 		if(istype(imp_in, /mob/))
@@ -212,7 +211,6 @@ Implant Specifics:<BR>"}
 		phrase = replace_characters(phrase, replacechars)
 		usr.mind.store_memory("Explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate.", 0, 0)
 		usr << "The implanted explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate."
-		listening_objects += src // Adds item to list of objects that need to be able to hear chat inside other objects.
 		return 1
 
 	emp_act(severity)
@@ -254,6 +252,15 @@ Implant Specifics:<BR>"}
 						part.droplimb(0,DROPLIMB_BLUNT)
 				explosion(get_turf(imp_in), -1, -1, 2, 3)
 				qdel(src)
+
+/obj/item/weapon/implant/explosive/New()
+	..()
+	listening_objects += src
+
+/obj/item/weapon/implant/explosive/Destroy()
+	..()
+	listening_objects -= src
+
 
 /obj/item/weapon/implant/chem
 	name = "chemical implant"
