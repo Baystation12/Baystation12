@@ -90,7 +90,6 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	return newKey
 
 /obj/machinery/message_server/process()
-	..()
 	if(active && (stat & (BROKEN|NOPOWER)))
 		active = 0
 		power_failure = 10
@@ -99,8 +98,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	else if(stat & (BROKEN|NOPOWER))
 		return
 	else if(power_failure > 0)
-		power_failure--
-		if(!power_failure)
+		if(!(--power_failure))
 			active = 1
 			update_icon()
 
