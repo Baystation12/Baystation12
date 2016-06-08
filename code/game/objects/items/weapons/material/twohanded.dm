@@ -119,3 +119,8 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	default_material = "glass"
+
+/obj/item/weapon/material/twohanded/spear/shatter(var/consumed)
+	if(!consumed)
+		new /obj/item/weapon/material/wirerod(get_turf(src)) //give back the wired rod
+	..()
