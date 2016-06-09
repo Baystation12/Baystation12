@@ -1,6 +1,0 @@
-author: atlantiscze
-
-delete-after: True
-
-changes: 
-  - tweak: "Minor mapping changes to wiring and areas on the station. Brig has few sub-areas to even out the load. Research Dock is now on the research subgrid. Master grid has few extra power lines to make it a little bit more robust against physical damage."
