@@ -525,7 +525,7 @@ other types of metals and chemistry for reagents).
 	id = "ammo_9mm"
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 3750, "silver" = 100)
-	build_path = /obj/item/ammo_magazine/c9mm
+	build_path = /obj/item/ammo_magazine/box/c9mm
 	sort_string = "TAACA"
 
 /datum/design/item/weapon/stunshell

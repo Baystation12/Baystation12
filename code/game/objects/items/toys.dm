@@ -298,7 +298,7 @@
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 5
 	throwforce = 5
-	w_class = 3
+	w_class = 4
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
 
 /*
@@ -699,19 +699,6 @@
 	name = "Emergency Response Team Commander action figure"
 	desc = "A \"Space Life\" brand Emergency Response Team Commander action figure."
 	icon_state = "ert"
-
-/obj/item/toy/katana
-	name = "replica katana"
-	desc = "Woefully underpowered in D20."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "katana"
-	item_state = "katana"
-	flags = CONDUCT
-	slot_flags = SLOT_BELT | SLOT_BACK
-	force = 5
-	throwforce = 5
-	w_class = 3
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
 
 /obj/item/toy/therapy_red
 	name = "red therapy doll"

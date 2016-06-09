@@ -31,7 +31,7 @@
 	name = "mini energy-crossbow"
 	desc = "A weapon favored by many mercenary stealth specialists."
 	icon_state = "crossbow"
-	w_class = 2.0
+	w_class = 3
 	item_state = "crossbow"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2, TECH_ILLEGAL = 5)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
@@ -39,18 +39,19 @@
 	silenced = 1
 	fire_sound = 'sound/weapons/Genhit.ogg'
 	projectile_type = /obj/item/projectile/energy/bolt
-	max_shots = 5
+	max_shots = 8
 	self_recharge = 1
 	charge_meter = 0
 
 /obj/item/weapon/gun/energy/crossbow/ninja
 	name = "energy dart thrower"
 	projectile_type = /obj/item/projectile/energy/dart
+	max_shots = 5
 
 /obj/item/weapon/gun/energy/crossbow/largecrossbow
 	name = "energy crossbow"
 	desc = "A weapon favored by mercenary infiltration teams."
-	w_class = 5
+	w_class = 4
 	force = 10
 	requires_two_hands = 1
 	matter = list(DEFAULT_WALL_MATERIAL = 200000)

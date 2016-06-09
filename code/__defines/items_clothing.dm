@@ -205,5 +205,10 @@
 
 #define DO_NOT_STORE INFINITY //A special storage "cost" that indicates an item should not be storable
 
-#define DEFAULT_BACKPACK_STORAGE 28
-#define DEFAULT_BOX_STORAGE 14
+//linear increase. Using many small storage containers is more space-efficient than using large ones,
+//in exchange for being limited in the w_class of items that will fit
+#define base_storage_capacity(w_class) (7*(w_class-1))
+
+#define DEFAULT_BACKPACK_STORAGE base_storage_capacity(5)
+#define DEFAULT_LARGEBOX_STORAGE base_storage_capacity(4)
+#define DEFAULT_BOX_STORAGE      base_storage_capacity(3)

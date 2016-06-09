@@ -35,6 +35,8 @@
 	icon_state = "warden_jacket"
 	item_state = "armor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+	heat_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 
 
 /obj/item/clothing/suit/armor/riot
@@ -42,6 +44,7 @@
 	desc = "A suit of armor with heavy padding to protect against melee attacks. Looks like it might impair movement."
 	icon_state = "riot"
 	item_state = "swat_suit"
+	w_class = 4
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 75, bullet = 33, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 	flags_inv = HIDEJUMPSUIT
@@ -95,8 +98,9 @@
 	icon_state = "detective"
 	item_state = "det_suit"
 	blood_overlay_type = "coat"
-	flags_inv = 0
-	body_parts_covered = UPPER_TORSO|ARMS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+	heat_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 
 
 /obj/item/clothing/suit/armor/det_suit
@@ -172,6 +176,7 @@
 	icon_state = "swatarmor"
 	item_state = "armor"
 	var/obj/item/weapon/gun/holstered = null
+	w_class = 4
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 20, bio = 0, rad = 0)
 	siemens_coefficient = 0.7

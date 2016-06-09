@@ -208,10 +208,10 @@
 	create_reagents(10 * storage_slots)
 
 /obj/item/weapon/storage/fancy/cigar/remove_from_storage(obj/item/W as obj, atom/new_location)
-		var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
-		if(!istype(C)) return
-		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
-		..()
+	var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
+	if(!istype(C)) return
+	reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
+	..()
 
 /*
  * Vial Box

@@ -1083,20 +1083,32 @@ proc/is_hot(obj/item/W as obj)
 	if (O.edge) return 1
 	return 0
 
+
+//For items that can puncture e.g. thick plastic but aren't necessarily sharp
 //Returns 1 if the given item is capable of popping things like balloons, inflatable barriers, or cutting police tape.
-/proc/can_puncture(obj/item/W as obj)		// For the record, WHAT THE HELL IS THIS METHOD OF DOING IT?
-	if(!W) return 0
-	if(W.sharp) return 1
-	return ( \
-		W.sharp													  || \
-		istype(W, /obj/item/weapon/screwdriver)                   || \
-		istype(W, /obj/item/weapon/pen)                           || \
-		istype(W, /obj/item/weapon/weldingtool)					  || \
-		istype(W, /obj/item/weapon/flame/lighter/zippo)			  || \
-		istype(W, /obj/item/weapon/flame/match)            		  || \
-		istype(W, /obj/item/clothing/mask/smokable/cigarette) 		      || \
-		istype(W, /obj/item/weapon/shovel) \
-	)
+/obj/item/proc/can_puncture()
+	return src.sharp
+
+/obj/item/weapon/screwdriver/can_puncture()
+	return 1
+
+/obj/item/weapon/pen/can_puncture()
+	return 1
+
+/obj/item/weapon/weldingtool/can_puncture()
+	return 1
+
+/obj/item/weapon/screwdriver/can_puncture()
+	return 1
+
+/obj/item/weapon/shovel/can_puncture() //includes spades
+	return 1
+
+/obj/item/weapon/flame/can_puncture()
+	return src.lit
+
+/obj/item/clothing/mask/smokable/cigarette/can_puncture()
+	return src.lit
 
 /proc/is_surgery_tool(obj/item/W as obj)
 	return (	\

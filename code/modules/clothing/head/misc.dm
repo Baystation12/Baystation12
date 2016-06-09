@@ -242,6 +242,7 @@
 		slot_r_hand_str = "xenos_helm",
 		)
 	desc = "A helmet made out of chitinous alien hide."
+	w_class = 3
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	siemens_coefficient = 2.0
 	body_parts_covered = HEAD|FACE|EYES

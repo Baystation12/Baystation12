@@ -4,7 +4,7 @@
 	icon_state = "laser"
 	item_state = "laser"
 	slot_flags = SLOT_BELT|SLOT_BACK
-	w_class = 3
+	w_class = 4
 	force = 10
 	requires_two_hands = 2
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
@@ -76,6 +76,7 @@ obj/item/weapon/gun/energy/retro
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	projectile_type = /obj/item/projectile/beam/xray
 	requires_two_hands = 1
+	w_class = 4
 	charge_cost = 150
 	max_shots = 10
 

@@ -164,7 +164,7 @@
 	icon_state = "chemsprayer"
 	item_state = "chemsprayer"
 	throwforce = 3
-	w_class = 3.0
+	w_class = 4
 	possible_transfer_amounts = null
 	volume = 600
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)

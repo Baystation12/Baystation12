@@ -64,10 +64,10 @@
 	//Damage will be handled on the MOB side, to prevent window shattering.
 
 /obj/item/projectile/energy/electrode/stunshot
-	name = "stunshot"
-	damage = 5
-	taser_effect = 1
+	nodamage = 0
+	damage = 10
 	agony = 80
+	damage_type = BURN
 
 /obj/item/projectile/energy/declone
 	name = "declone"
@@ -99,6 +99,7 @@
 /obj/item/projectile/energy/bolt/large
 	name = "largebolt"
 	damage = 20
+	agony = 60
 
 
 /obj/item/projectile/energy/neurotoxin
