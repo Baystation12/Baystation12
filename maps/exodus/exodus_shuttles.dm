@@ -72,7 +72,6 @@
 	area_station = /area/supply/station
 	docking_controller_tag = "supply_shuttle"
 	dock_target_station = "cargo_bay"
-	flags = SHUTTLE_FLAGS_PROCESS|SHUTTLE_FLAGS_SUPPLY
 
 /datum/shuttle/ferry/engineering
 	name = "Engineering"

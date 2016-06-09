@@ -166,5 +166,16 @@ datum/unit_test/map_image_map_test/start_test()
 
 	return 1
 
+
+datum/unit_test/map_check
+	name = "MAP: Map Check"
+
+datum/unit_test/map_check/start_test()
+	if(world.maxx < 1 || world.maxy < 1 || world.maxz < 1)
+		fail("Unexpected map size. Was a map properly included?")
+	else
+		pass("Map size met minimum requirements.")
+	return 1
+
 #undef SUCCESS
 #undef FAILURE
