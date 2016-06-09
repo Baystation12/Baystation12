@@ -141,7 +141,7 @@
 
 /obj/item/ammo_magazine/a556/practice
 	name = "magazine (5.56mm practice)"
-	ammo_type = /obj/item/ammo_casing/a556p
+	ammo_type = /obj/item/ammo_casing/a556/practice
 
 /obj/item/ammo_magazine/a50
 	name = "magazine (.50)"
