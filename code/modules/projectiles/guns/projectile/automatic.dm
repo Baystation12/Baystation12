@@ -49,6 +49,7 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a10mm
+	allowed_magazines = /obj/item/ammo_magazine/a10mm
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 	requires_two_hands = 1
@@ -80,6 +81,7 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c762
+	allowed_magazines = /obj/item/ammo_magazine/c762
 	requires_two_hands = 3
 
 	//Assault rifle, burst fire degrades quicker than SMG, worse one-handing penalty, slightly increased move delay
@@ -105,6 +107,7 @@
 	ammo_type = /obj/item/ammo_casing/c9mmr
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mmt/rubber
+	allowed_magazines = /obj/item/ammo_magazine/mc9mmt
 
 	//machine pistol, like SMG but easier to one-hand with
 	firemodes = list(
@@ -134,6 +137,7 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a556
+	allowed_magazines = /obj/item/ammo_magazine/a556
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 	requires_two_hands = 5
@@ -206,6 +210,7 @@
 	ammo_type = /obj/item/ammo_casing/a762
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/box/a762
+	allowed_magazines = list(/obj/item/ammo_magazine/box/a762)
 	requires_two_hands = 6
 
 	//LMG, better sustained fire accuracy than assault rifles (comparable to SMG), higer move delay and one-handing penalty
