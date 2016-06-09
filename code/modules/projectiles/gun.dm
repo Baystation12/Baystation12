@@ -92,7 +92,7 @@
 	if(requires_two_hands)
 		var/mob/living/M = loc
 		if(istype(M))
-			if(src.is_held_twohanded(M))
+			if(M.can_wield_item(src) && src.is_held_twohanded(M))
 				name = "[initial(name)] (wielded)"
 			else
 				name = initial(name)
@@ -104,7 +104,7 @@
 	if(wielded_item_state)
 		var/mob/living/M = loc
 		if(istype(M))
-			if(src.is_held_twohanded())
+			if(M.can_wield_item(src) && src.is_held_twohanded(M))
 				item_state = wielded_item_state
 			else
 				item_state = initial(item_state)
@@ -184,7 +184,7 @@
 	user.setMoveCooldown(shoot_time) //no moving while shooting either
 	next_fire_time = world.time + shoot_time
 
-	var/held_twohanded = src.is_held_twohanded(user)
+	var/held_twohanded = (user.can_wield_item(src) && src.is_held_twohanded(user))
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
@@ -257,18 +257,29 @@
 		if(muzzle_flash)
 			set_light(muzzle_flash)
 
-	if(requires_two_hands && !src.is_held_twohanded(user))
-		switch(requires_two_hands)
-			if(1)
-				if(prob(50)) //don't need to tell them every single time
-					user << "<span class='warning'>Your aim wavers slightly.</span>"
-			if(2)
-				user << "<span class='warning'>Your aim wavers as you fire \the [src] with just one hand.</span>"
-			if(3)
-				user << "<span class='warning'>You have trouble keeping \the [src] on target with just one hand.</span>"
-			if(4 to INFINITY)
-				user << "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>"
-
+	if(requires_two_hands)
+		if(!src.is_held_twohanded(user))
+			switch(requires_two_hands)
+				if(1)
+					if(prob(50)) //don't need to tell them every single time
+						user << "<span class='warning'>Your aim wavers slightly.</span>"
+				if(2)
+					user << "<span class='warning'>Your aim wavers as you fire \the [src] with just one hand.</span>"
+				if(3)
+					user << "<span class='warning'>You have trouble keeping \the [src] on target with just one hand.</span>"
+				if(4 to INFINITY)
+					user << "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>"
+		else if(!user.can_wield_item(src))
+			switch(requires_two_hands)
+				if(1)
+					if(prob(50)) //don't need to tell them every single time
+						user << "<span class='warning'>Your aim wavers slightly.</span>"
+				if(2)
+					user << "<span class='warning'>Your aim wavers as you try to hold \the [src] steady.</span>"
+				if(3)
+					user << "<span class='warning'>You have trouble holding \the [src] steady.</span>"
+				if(4 to INFINITY)
+					user << "<span class='warning'>You struggle to hold \the [src] steady!</span>"
 
 	if(screen_shake)
 		spawn()

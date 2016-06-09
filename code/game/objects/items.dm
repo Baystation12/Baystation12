@@ -106,9 +106,6 @@
 			M.update_inv_r_hand()
 
 /obj/item/proc/is_held_twohanded(mob/living/M)
-	if(w_class >= LARGE_ITEM && issmall(M))
-		return FALSE //M is too small to wield this
-
 	var/check_hand
 	if(M.l_hand == src && !M.r_hand) 
 		check_hand = "r_hand" //item in left hand, check right hand
