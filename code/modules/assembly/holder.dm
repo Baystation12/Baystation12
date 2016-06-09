@@ -211,6 +211,15 @@
 		return 1
 
 
+/obj/item/device/assembly_holder/New()
+	..()
+	listening_objects += src
+
+/obj/item/device/assembly_holder/Destroy()
+	listening_objects -= src
+	return ..()
+	
+
 /obj/item/device/assembly_holder/hear_talk(mob/living/M as mob, msg, verb, datum/language/speaking)
 	if(a_right)
 		a_right.hear_talk(M,msg,verb,speaking)

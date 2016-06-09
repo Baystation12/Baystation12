@@ -109,6 +109,10 @@
 
 #define COMPANY_ALIGNMENTS		list(COMPANY_LOYAL,COMPANY_SUPPORTATIVE,COMPANY_NEUTRAL,COMPANY_SKEPTICAL,COMPANY_OPPOSED)
 
+// Defines the argument used for get_mobs_and_objs_in_view_fast
+#define GHOSTS_ALL_HEAR 1
+#define ONLY_GHOSTS_IN_VIEW 0
+
 
 // Defines mob sizes, used by lockers and to determine what is considered a small sized mob, etc.
 #define MOB_LARGE  		40
