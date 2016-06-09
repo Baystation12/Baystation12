@@ -1,6 +1,0 @@
-author: Aticius
-
-delete-after: True
-
-changes: 
-  - rscdel: "Removes resomi hallucinations due to loneliness."
