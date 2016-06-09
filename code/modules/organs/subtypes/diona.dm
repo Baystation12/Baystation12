@@ -132,6 +132,7 @@
 	body_part = HEAD
 	parent_organ = "chest"
 	var/can_intake_reagents = 0 // Because it doesn't inherit regular head stuff because it's a subtype of diona for some inexplicable reason.
+	slot_flags = SLOT_BELT
 
 /obj/item/organ/external/diona/head/removed()
 	if(owner)

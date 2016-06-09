@@ -138,6 +138,7 @@
 	limb_name = "head"
 	icon_name = "head"
 	name = "head"
+	slot_flags = SLOT_BELT
 	max_damage = 75
 	min_broken_damage = 35
 	w_class = 3
