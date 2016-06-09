@@ -1,0 +1,20 @@
+{{#if data.may_start_vote}}
+	<ui-display title='New Vote'>
+		<ui-button action='vote' params='{"new_vote": "{{ref}}"}'>New Vote</ui-button>
+		<ui-subdisplay title='Presets'>
+			{{#each data.presets}}
+				<ui-section label='{{description}}' candystripe right>
+			  	<ui-button action='vote' params='{"new_vote_preset": "{{ref}}"}'>New Vote</ui-button>
+				</ui-section>
+			{{/each}}
+		</ui-subdisplay>
+	</ui-display>
+{{/if}}
+
+<ui-display title='Votes'>
+	{{#each data.votes}}
+		<ui-section>
+			<ui-button action='vote' params='{"open_vote": "{{ref}}"}'>{{description}} - {{status}}</ui-button>
+		</ui-section>
+	{{/each}}
+</ui-display>
