@@ -340,14 +340,14 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/id/cargo
 	name = "identification card"
 	desc = "A card issued to station cargo staff."
-	icon_state = "car"
+	icon_state = "cargo"
 	primary_color = rgb(142,94,0)
 	secondary_color = rgb(191,159,95)
 
 /obj/item/weapon/card/id/cargo/head
 	name = "identification card"
 	desc = "A card which represents service and planning."
-	icon_state = "carGold"
+	icon_state = "cargoGold"
 	primary_color = rgb(142,94,0)
 	secondary_color = rgb(255,223,127)
 
