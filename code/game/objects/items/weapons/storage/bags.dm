@@ -79,7 +79,6 @@
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
 
-
 // -----------------------------
 //           Cash Bag
 // -----------------------------

@@ -104,15 +104,10 @@
 				break
 
 		if(!inserted || !S.amount)
-			usr.remove_from_mob(S)
-			usr.update_icons()	//update our overlays
-			if (usr.client && usr.s_active != src)
-				usr.client.screen -= S
-			S.dropped(usr)
+			usr.drop_from_inventory(S, src)
 			if(!S.amount)
 				qdel(S)
-			else
-				S.loc = src
+			usr.update_icons()	//update our overlays
 
 		orient2hud(usr)
 		if(usr.s_active)

@@ -14,44 +14,25 @@
 		..()
 		return
 
-
 	trigger(emote, mob/living/carbon/source as mob)
 		if (src.uses < 1)	return 0
 		if (emote == src.activation_emote)
-			src.uses--
-			source << "You feel a faint click."
-			if (source.handcuffed)
-				var/obj/item/weapon/W = source.handcuffed
-				source.handcuffed = null
-				if(source.buckled && source.buckled.buckle_require_restraints)
-					source.buckled.unbuckle_mob()
-				source.update_inv_handcuffed()
-				if (source.client)
-					source.client.screen -= W
-				if (W)
-					W.loc = source.loc
-					dropped(source)
-					if (W)
-						W.layer = initial(W.layer)
-			if (source.legcuffed)
-				var/obj/item/weapon/W = source.legcuffed
-				source.legcuffed = null
-				source.update_inv_legcuffed()
-				if (source.client)
-					source.client.screen -= W
-				if (W)
-					W.loc = source.loc
-					dropped(source)
-					if (W)
-						W.layer = initial(W.layer)
-		return
+			if(remove_cuffs_and_unbuckle(source))
+				src.uses--
+				source << "You feel a faint click."
 
+	proc/remove_cuffs_and_unbuckle(mob/living/carbon/user)
+		if(!user.handcuffed)
+			return 0
+		. = user.unEquip(user.handcuffed)
+		if(. && user.buckled && user.buckled.buckle_require_restraints)
+			user.buckled.unbuckle_mob()
+		return
 
 	implanted(mob/living/carbon/source)
 		source.mind.store_memory("Freedom implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", 0, 0)
 		source << "The implanted freedom implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate."
 		return 1
-
 
 	get_data()
 		var/dat = {"

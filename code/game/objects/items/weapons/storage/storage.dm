@@ -341,19 +341,16 @@
 	if(usr)
 		usr.remove_from_mob(W)
 		usr.update_icons()	//update our overlays
-	W.loc = src
+	W.forceMove(src)
 	W.on_enter_storage(src)
 	if(usr)
-		if (usr.client && usr.s_active != src)
-			usr.client.screen -= W
-		W.dropped(usr)
 		add_fingerprint(usr)
 
 		if(!prevent_warning)
 			for(var/mob/M in viewers(usr, null))
 				if (M == usr)
 					usr << "<span class='notice'>You put \the [W] into [src].</span>"
-				else if (M in range(1)) //If someone is standing close enough, they can tell what it is...
+				else if (M in range(1)) //If someone is standing close enough, they can tell what it is... TODO replace with distance check
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
 				else if (W && W.w_class >= NORMAL_ITEM) //Otherwise they can only see large or normal items from a distance...
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
@@ -426,11 +423,8 @@
 				user << "<span class='warning'>The tray won't fit in [src].</span>"
 				return
 			else
-				W.loc = user.loc
-				if ((user.client && user.s_active != src))
-					user.client.screen -= W
-				W.dropped(user)
-				user << "<span class='warning'>God damnit!</span>"
+				if(user.unEquip(W))
+					user << "<span class='warning'>God damnit!</span>"
 
 	W.add_fingerprint(user)
 	return handle_item_insertion(W)

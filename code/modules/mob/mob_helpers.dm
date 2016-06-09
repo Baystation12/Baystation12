@@ -11,6 +11,11 @@
 		return L.mob_size <= MOB_SMALL
 	return 0
 
+/mob/proc/can_wield_item(obj/item/W)
+	if(W.w_class >= LARGE_ITEM && issmall(src))
+		return FALSE //M is too small to wield this
+	return TRUE
+
 /mob/living/proc/isSynthetic()
 	return 0
 
