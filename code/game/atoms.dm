@@ -497,7 +497,7 @@ its easier to just keep the beam vertical.
 		var/mob/M = m
 		M.show_message(message,2,deaf_message,1)
 	for(var/o in objs)
-		var/mob/O = o
+		var/obj/O = o
 		O.show_message(message,2,deaf_message,1)
 
 /atom/movable/proc/dropInto(var/atom/destination)
