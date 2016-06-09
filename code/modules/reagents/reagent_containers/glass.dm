@@ -68,9 +68,15 @@
 			flags |= OPENCONTAINER
 		update_icon()
 
-	afterattack(var/obj/target, var/mob/user, var/flag)
+	do_surgery(mob/living/carbon/M, mob/living/user)
+		if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
+			return ..()
+		afterattack(M, user, 1)
+		return 1
 
-		if(!is_open_container() || !flag)
+	afterattack(var/obj/target, var/mob/user, var/proximity)
+
+		if(!is_open_container() || !proximity)
 			return
 
 		for(var/type in can_be_placed_into)

@@ -167,14 +167,16 @@
 			var/obj/item/stack/cable_coil/C = tool
 			var/obj/item/organ/external/affected = target.get_organ(target_zone)
 			var/limb_can_operate = (affected && affected.open == 2 && affected.burn_dam > 0 && target_zone != "mouth")
-			if(limb_can_operate)
-				if(istype(C))
-					if(!C.get_amount() >= 3)
-						user << "<span class='danger'>You need three or more cable pieces to repair this damage.</span>"
-						return SURGERY_FAILURE
-					C.use(3)
-				return 1
-			return 0
+
+			if(!limb_can_operate)
+				return 0
+
+			if(istype(C))
+				if(!C.can_use(10))
+					user << "<span class='danger'>You need ten or more cable pieces to repair this damage.</span>" //usage amount made more consistent with regular cable repair
+					return SURGERY_FAILURE
+				C.use(10)
+			return 1
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
