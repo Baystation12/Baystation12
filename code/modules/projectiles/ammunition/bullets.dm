@@ -18,9 +18,8 @@
 	caliber = "38"
 	projectile_type = /obj/item/projectile/bullet/pistol
 
-/obj/item/ammo_casing/c38r
+/obj/item/ammo_casing/c38/rubber
 	desc = "A .38 rubber bullet casing."
-	caliber = "38"
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
 	icon_state = "r-casing"
 	spent_icon = "r-casing-spent"
@@ -30,21 +29,18 @@
 	caliber = "9mm"
 	projectile_type = /obj/item/projectile/bullet/pistol
 
-/obj/item/ammo_casing/c9mmf
+/obj/item/ammo_casing/c9mm/flash
 	desc = "A 9mm flash shell casing."
-	caliber = "9mm"
 	projectile_type = /obj/item/projectile/energy/flash
 
-/obj/item/ammo_casing/c9mmr
+/obj/item/ammo_casing/c9mm/rubber
 	desc = "A 9mm rubber bullet casing."
-	caliber = "9mm"
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
 	icon_state = "r-casing"
 	spent_icon = "r-casing-spent"
 
-/obj/item/ammo_casing/c9mmp
+/obj/item/ammo_casing/c9mm/practice
 	desc = "A 9mm practice bullet casing."
-	caliber = "9mm"
 	projectile_type = /obj/item/projectile/bullet/pistol/practice
 
 
@@ -53,21 +49,18 @@
 	caliber = ".45"
 	projectile_type = /obj/item/projectile/bullet/pistol/medium
 
-/obj/item/ammo_casing/c45p
+/obj/item/ammo_casing/c45/practice
 	desc = "A .45 practice bullet casing."
-	caliber = ".45"
 	projectile_type = /obj/item/projectile/bullet/pistol/practice
 
-/obj/item/ammo_casing/c45r
+/obj/item/ammo_casing/c45/rubber
 	desc = "A .45 rubber bullet casing."
-	caliber = ".45"
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
 	icon_state = "r-casing"
 	spent_icon = "r-casing-spent"
 
-/obj/item/ammo_casing/c45f
+/obj/item/ammo_casing/c45/flash
 	desc = "A .45 flash shell casing."
-	caliber = ".45"
 	projectile_type = /obj/item/projectile/energy/flash
 
 /obj/item/ammo_casing/a10mm

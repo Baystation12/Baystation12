@@ -104,7 +104,7 @@
 	caliber = "9mm"
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
 	slot_flags = SLOT_BELT
-	ammo_type = /obj/item/ammo_casing/c9mmr
+	ammo_type = /obj/item/ammo_casing/c9mm/rubber
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mmt/rubber
 	allowed_magazines = /obj/item/ammo_magazine/mc9mmt
