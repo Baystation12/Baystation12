@@ -45,7 +45,6 @@ var/global/list/GlobalPool = list()
 
 	var/datum/D = pick_n_take(GlobalPool[get_type])
 	if(D)
-		D.ResetVars()
 		D.Prepare(second_arg)
 		return D
 	return 0

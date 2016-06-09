@@ -5,15 +5,29 @@
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "beartrap0"
+	randpixel = 0
 	desc = "A mechanically activated leg trap. Low-tech, but reliable. Looks like it could really hurt if you set it off."
 	throwforce = 0
 	w_class = 3
-	origin_tech = "materials=1"
+	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 18750)
+	can_buckle = 0 //disallow manual un/buckling
 	var/deployed = 0
 
 /obj/item/weapon/beartrap/proc/can_use(mob/user)
 	return (user.IsAdvancedToolUser() && !issilicon(user) && !user.stat && !user.restrained())
+	
+/obj/item/weapon/beartrap/user_unbuckle_mob(mob/user as mob)
+	if(buckled_mob && can_use(user))
+		user.visible_message(
+			"<span class='notice'>\The [user] begins freeing \the [buckled_mob] from \the [src].</span>",
+			"<span class='notice'>You carefully begin to free \the [buckled_mob] from \the [src].</span>",
+			"<span class='notice'>You hear metal creaking.</span>"
+			)
+		if(do_after(user, 60, src))
+			user.visible_message("<span class='notice'>\The [buckled_mob] has been freed from \the [src] by \the [user].</span>")
+			unbuckle_mob()
+			anchored = 0
 
 /obj/item/weapon/beartrap/attack_self(mob/user as mob)
 	..()
@@ -37,15 +51,8 @@
 			anchored = 1
 
 /obj/item/weapon/beartrap/attack_hand(mob/user as mob)
-	if(buckled_mob && can_use(user))
-		user.visible_message(
-			"<span class='notice'>[user] begins freeing [buckled_mob] from \the [src].</span>",
-			"<span class='notice'>You carefully begin to free [buckled_mob] from \the [src].</span>",
-			)
-		if(do_after(user, 60, src))
-			user.visible_message("<span class='notice'>[buckled_mob] has been freed from \the [src] by [user].</span>")
-			unbuckle_mob()
-			anchored = 0
+	if(buckled_mob)
+		user_unbuckle_mob(user)
 	else if(deployed && can_use(user))
 		user.visible_message(
 			"<span class='danger'>[user] starts to disarm \the [src].</span>",
@@ -74,20 +81,17 @@
 	//armour
 	var/blocked = L.run_armor_check(target_zone, "melee")
 
-	if(blocked >= 2)
+	if(blocked >= 100)
 		return
 
 	if(!L.apply_damage(30, BRUTE, target_zone, blocked, used_weapon=src))
 		return 0
 
 	//trap the victim in place
-	if(!blocked)
-		set_dir(L.dir)
-		can_buckle = 1
-		buckle_mob(L)
-		L << "<span class='danger'>The steel jaws of \the [src] bite into you, trapping you in place!</span>"
-		deployed = 0
-		can_buckle = initial(can_buckle)
+	set_dir(L.dir)
+	buckle_mob(L)
+	L << "<span class='danger'>The steel jaws of \the [src] bite into you, trapping you in place!</span>"
+	deployed = 0
 
 /obj/item/weapon/beartrap/Crossed(AM as mob|obj)
 	if(deployed && isliving(AM))

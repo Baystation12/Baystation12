@@ -7,6 +7,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = null
 	item_state = "pill"
+	randpixel = 7
 	possible_transfer_amounts = null
 	w_class = 1
 	slot_flags = SLOT_EARS
@@ -246,3 +247,11 @@
 	New()
 		..()
 		reagents.add_reagent("spaceacillin", 15)
+
+/obj/item/weapon/reagent_containers/pill/diet
+	name = "diet pill"
+	desc = "Guaranteed to get you slim!"
+	icon_state = "pill9"
+	New()
+		..()
+		reagents.add_reagent("lipozine", 2)

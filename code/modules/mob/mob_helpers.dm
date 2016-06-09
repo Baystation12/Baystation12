@@ -17,7 +17,7 @@
 /mob/living/carbon/human/isSynthetic()
 	// If they are 100% robotic, they count as synthetic.
 	for(var/obj/item/organ/external/E in organs)
-		if(!(E.status & ORGAN_ROBOT))
+		if(!(E.robotic >= ORGAN_ROBOT))
 			return 0
 	return 1
 
@@ -433,6 +433,8 @@ proc/is_blind(A)
 			var/follow
 			var/lname
 			if(subject)
+				if(M.is_key_ignored(subject.client.key)) // If we're ignored, do nothing.
+					continue
 				if(subject != M)
 					follow = "([ghost_follow_link(subject, M)]) "
 				if(M.stat != DEAD && M.client.holder)
@@ -606,3 +608,36 @@ proc/is_blind(A)
 	if(hud_used)
 		if (hud_used.move_intent)
 			hud_used.move_intent.icon_state = intent == MOVE_INTENT_WALK ? "walking" : "running"
+
+/mob/proc/refresh_client_images()
+	if(client)
+		client.images |= client_images
+
+/mob/proc/hide_client_images()
+	if(client)
+		client.images -= client_images
+
+/mob/proc/add_client_image(var/image)
+	if(image in client_images)
+		return
+	client_images += image
+	if(client)
+		client.images += image
+
+/mob/proc/remove_client_image(var/image)
+	client_images -= image
+	if(client)
+		client.images -= image
+
+/mob/proc/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	return
+
+/mob/proc/fully_replace_character_name(var/new_name, var/in_depth = TRUE)
+	if(!new_name || new_name == real_name)	return 0
+	real_name = new_name
+	name = new_name
+	if(mind)
+		mind.name = new_name
+	if(dna)
+		dna.real_name = real_name
+	return 1

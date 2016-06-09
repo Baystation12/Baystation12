@@ -66,9 +66,6 @@
 
 	layer = MOB_LAYER
 
-	if(blind && client)
-		blind.layer = 0
-
 	sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
 	see_in_dark = 8
 	see_invisible = SEE_INVISIBLE_LEVEL_TWO
@@ -86,7 +83,7 @@
 			log_debug("[src] ([src.type]) died but does not have a valid health7 icon_state (using health6 instead). report this error to Ccomp5950 or your nearest Developer")
 
 	timeofdeath = world.time
-	if(mind) mind.store_memory("Time of death: [worldtime2text()]", 0)
+	if(mind) mind.store_memory("Time of death: [stationtime2text()]", 0)
 	living_mob_list -= src
 	dead_mob_list |= src
 

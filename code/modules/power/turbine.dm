@@ -27,7 +27,7 @@
 
 /obj/machinery/computer/turbine_computer
 	name = "Gas turbine control computer"
-	desc = "A computer to remotely control a gas turbine"
+	desc = "A computer to remotely control a gas turbine."
 	icon = 'icons/obj/computer.dmi'
 	icon_keyboard = "tech_key"
 	icon_screen = "turbinecomp"

@@ -50,7 +50,7 @@
 		if(speed >= 10 && isliving(hit_atom))
 			var/mob/living/L = hit_atom
 			//unfortuately we don't know where the dart will actually hit, since that's done by the parent.
-			if(L.can_inject() && syringe.reagents)
+			if(L.can_inject(null, ran_zone()) && syringe.reagents)
 				var/reagent_log = syringe.reagents.get_reagents()
 				syringe.reagents.trans_to_mob(L, 15, CHEM_BLOOD)
 				admin_inject_log(thrower, L, src, reagent_log, 15, violent=1)
@@ -66,14 +66,14 @@
 	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance."
 	icon_state = "syringegun"
 	item_state = "syringegun"
-	w_class = 3
+	w_class = 4
 	force = 7
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	slot_flags = SLOT_BELT
 
 	fire_sound = 'sound/weapons/empty.ogg'
 	fire_sound_text = "a metallic thunk"
-	recoil = 0
+	screen_shake = 0
 	release_force = 10
 	throw_distance = 10
 

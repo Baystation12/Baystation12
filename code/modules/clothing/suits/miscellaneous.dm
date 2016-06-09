@@ -60,7 +60,7 @@
 
 /obj/item/clothing/suit/greatcoat
 	name = "great coat"
-	desc = "A heavy great coat"
+	desc = "A heavy great coat."
 	icon_state = "nazi"
 	item_state = "nazi"
 
@@ -114,13 +114,13 @@
 	item_state = "space_suit_syndicate"
 	desc = "A plastic replica of the syndicate space suit, you'll look just like a real murderous syndicate agent in this! This is a toy, it is not made for use in space!"
 	w_class = 3
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency_oxygen,/obj/item/toy)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/toy)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
 
 /obj/item/clothing/suit/hastur
 	name = "Hastur's Robes"
-	desc = "Robes not meant to be worn by man"
+	desc = "Robes not meant to be worn by man."
 	icon_state = "hastur"
 	item_state = "hastur"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
@@ -148,7 +148,7 @@
 
 /obj/item/clothing/suit/monkeysuit
 	name = "Monkey Suit"
-	desc = "A suit that looks like a primate"
+	desc = "A suit that looks like a primate."
 	icon_state = "monkeysuit"
 	item_state = "monkeysuit"
 	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS|FEET|HANDS
@@ -172,6 +172,10 @@
 	item_state = "cardborg"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	flags_inv = HIDEJUMPSUIT
+
+/obj/item/clothing/suit/cardborg/initialize()
+	..()
+	set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
 
 /*
  * Misc
@@ -260,7 +264,7 @@
 
 /obj/item/clothing/under/stripper/mankini
 	name = "mankini"
-	desc = "No honest man would wear this abomination"
+	desc = "No honest man would wear this abomination."
 	icon_state = "mankini"
 	siemens_coefficient = 1
 

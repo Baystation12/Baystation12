@@ -3,10 +3,6 @@
 	set name = "OOC"
 	set category = "OOC"
 
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<span class='warning'>Speech is currently admin-disabled.</span>"
-		return
-
 	if(!mob)	return
 	if(IsGuestKey(key))
 		src << "Guests may not use OOC."
@@ -29,8 +25,6 @@
 		if(prefs.muted & MUTE_OOC)
 			src << "<span class='danger'>You cannot use OOC (muted).</span>"
 			return
-		if(handle_spam_prevention(msg,MUTE_OOC))
-			return
 		if(findtext(msg, "byond://"))
 			src << "<B>Advertising other servers is not allowed.</B>"
 			log_admin("[key_name(src)] has attempted to advertise in OOC: [msg]")
@@ -51,6 +45,8 @@
 
 	for(var/client/target in clients)
 		if(target.is_preference_enabled(/datum/client_preference/show_ooc))
+			if(target.is_key_ignored(key)) // If we're ignored by this person, then do nothing.
+				continue
 			var/display_name = src.key
 			if(holder)
 				if(holder.fakekey)
@@ -67,10 +63,6 @@
 	set name = "LOOC"
 	set desc = "Local OOC, seen only by those in view."
 	set category = "OOC"
-
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
-		return
 
 	if(!mob)
 		return
@@ -96,8 +88,6 @@
 			return
 		if(prefs.muted & MUTE_OOC)
 			src << "<span class='danger'>You cannot use OOC (muted).</span>"
-			return
-		if(handle_spam_prevention(msg, MUTE_OOC))
 			return
 		if(findtext(msg, "byond://"))
 			src << "<B>Advertising other servers is not allowed.</B>"
@@ -167,9 +157,8 @@
 				prefix = "(Core) "
 		t << "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", t) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[msg]</span></span></span>"
 
-
 	for(var/client/adm in admins)	//Now send to all admins that weren't in range.
-		if(!(adm in listening) && adm.is_preference_enabled(/datum/client_preference/show_looc))
+		if(!(adm in listening) && adm.is_preference_enabled(/datum/client_preference/show_looc) && adm.is_preference_enabled(/datum/client_preference/holder/show_rlooc))
 			var/admin_stuff = "/([key])([admin_jump_link(mob, adm.holder)])"
 			var/prefix = "(R)"
 

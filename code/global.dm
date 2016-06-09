@@ -1,5 +1,5 @@
 //#define TESTING
-#if DM_VERSION < 506
+#if DM_VERSION < 509
 #warn This compiler is out of date. You may experience issues with projectile animations.
 #endif
 
@@ -64,7 +64,6 @@ var/list/latejoin_cryo    = list()
 var/list/latejoin_cyborg  = list()
 
 var/list/prisonwarp         = list() // Prisoners go to these
-var/list/holdingfacility    = list() // Captured people go here
 var/list/xeno_spawn         = list() // Aliens spawn at at these.
 var/list/tdome1             = list()
 var/list/tdome2             = list()

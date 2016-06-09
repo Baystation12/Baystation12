@@ -11,8 +11,6 @@
 /datum/visualnet/New()
 	..()
 	visual_nets += src
-	spawn(1)
-		moved_event.register_global(src, /datum/visualnet/proc/update_visibility)
 
 /datum/visualnet/Destroy()
 	visual_nets -= src
@@ -22,7 +20,6 @@
 	for(var/chunk in chunks)
 		qdel(chunk)
 	chunks.Cut()
-	moved_event.unregister_global(src, /datum/visualnet/proc/update_visibility)
 	. = ..()
 
 // Checks if a chunk has been Generated in x, y, z.
@@ -107,21 +104,25 @@
 
 /datum/visualnet/proc/add_source(var/atom/source, var/update_visibility = TRUE, var/opacity_check = FALSE)
 	if(source in sources)
-		return
+		return FALSE
 	sources += source
 	moved_event.register(source, src, /datum/visualnet/proc/source_moved)
 	destroyed_event.register(source, src, /datum/visualnet/proc/remove_source)
 	for_all_chunks_in_range(source, /datum/chunk/proc/add_source, list(source))
 	if(update_visibility)
 		update_visibility(source, opacity_check)
+	return TRUE
 
 /datum/visualnet/proc/remove_source(var/atom/source, var/update_visibility = TRUE, var/opacity_check = FALSE)
-	if(sources.Remove(source))
-		moved_event.unregister(source, src)
-		destroyed_event.unregister(source, src)
-		for_all_chunks_in_range(source, /datum/chunk/proc/remove_source, list(source))
-		if(update_visibility)
-			update_visibility(source, opacity_check)
+	if(!sources.Remove(source))
+		return FALSE
+
+	moved_event.unregister(source, src, /datum/visualnet/proc/source_moved)
+	destroyed_event.unregister(source, src, /datum/visualnet/proc/remove_source)
+	for_all_chunks_in_range(source, /datum/chunk/proc/remove_source, list(source))
+	if(update_visibility)
+		update_visibility(source, opacity_check)
+	return TRUE
 
 /datum/visualnet/proc/source_moved(var/atom/movable/source, var/old_loc, var/new_loc)
 	var/turf/old_turf = get_turf(old_loc)

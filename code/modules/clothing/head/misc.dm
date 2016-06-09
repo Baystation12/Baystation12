@@ -18,6 +18,15 @@
 	slot_flags = SLOT_HEAD | SLOT_EARS
 	body_parts_covered = 0
 
+/obj/item/clothing/head/hairflower/blue
+	icon_state = "hairflower_blue"
+
+/obj/item/clothing/head/hairflower/pink
+	icon_state = "hairflower_pink"
+
+/obj/item/clothing/head/hairflower/yellow
+	icon_state = "hairflower_yellow"
+
 /obj/item/clothing/head/powdered_wig
 	name = "powdered wig"
 	desc = "A powdered wig."
@@ -54,7 +63,7 @@
 
 /obj/item/clothing/head/hasturhood
 	name = "hastur's hood"
-	desc = "It's unspeakably stylish"
+	desc = "It's unspeakably stylish."
 	icon_state = "hasturhood"
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
@@ -101,6 +110,10 @@
 	item_state = "cardborg_h"
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
+
+/obj/item/clothing/head/cardborg/initialize()
+	..()
+	set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
 
 /obj/item/clothing/head/justice
 	name = "justice hat"
@@ -229,6 +242,7 @@
 		slot_r_hand_str = "xenos_helm",
 		)
 	desc = "A helmet made out of chitinous alien hide."
+	w_class = 3
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	siemens_coefficient = 2.0
 	body_parts_covered = HEAD|FACE|EYES
@@ -271,3 +285,10 @@
 	body_parts_covered = 0
 	flags_inv = BLOCKHEADHAIR //Shows beards!
 
+/obj/item/clothing/head/beret/deathsquad
+	name = "officer's beret"
+	desc = "An armored beret commonly used by special operations officers."
+	icon_state = "beret_badge"
+	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
+	flags_inv = BLOCKHAIR
+	siemens_coefficient = 0.9

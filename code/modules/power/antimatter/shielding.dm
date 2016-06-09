@@ -191,7 +191,7 @@ proc/cardinalrange(var/center)
 	icon = 'icons/obj/machines/antimatter.dmi'
 	icon_state = "box"
 	item_state = "electronic"
-	w_class = 4.0
+	w_class = 5
 	flags = CONDUCT
 	throwforce = 5
 	throw_speed = 1

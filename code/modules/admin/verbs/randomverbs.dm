@@ -156,19 +156,16 @@
 	feedback_add_details("admin_verb","GOD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
-proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
-	if(automute)
-		if(!config.automute_on)	return
-	else
-		if(!usr || !usr.client)
-			return
-		if(!usr.client.holder)
-			usr << "<font color='red'>Error: cmd_admin_mute: You don't have permission to do this.</font>"
-			return
-		if(!M.client)
-			usr << "<font color='red'>Error: cmd_admin_mute: This mob doesn't have a client tied to it.</font>"
-		if(M.client.holder)
-			usr << "<font color='red'>Error: cmd_admin_mute: You cannot mute an admin/mod.</font>"
+proc/cmd_admin_mute(mob/M as mob, mute_type)
+	if(!usr || !usr.client)
+		return
+	if(!usr.client.holder)
+		usr << "<font color='red'>Error: cmd_admin_mute: You don't have permission to do this.</font>"
+		return
+	if(!M.client)
+		usr << "<font color='red'>Error: cmd_admin_mute: This mob doesn't have a client tied to it.</font>"
+	if(M.client.holder)
+		usr << "<font color='red'>Error: cmd_admin_mute: You cannot mute an admin/mod.</font>"
 	if(!M.client)		return
 	if(M.client.holder)	return
 
@@ -184,14 +181,6 @@ proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 		if(MUTE_ALL)		mute_string = "everything"
 		else				return
 
-	if(automute)
-		muteunmute = "auto-muted"
-		M.client.prefs.muted |= mute_type
-		log_admin("SPAM AUTOMUTE: [muteunmute] [key_name(M)] from [mute_string]")
-		message_admins("SPAM AUTOMUTE: [muteunmute] [key_name_admin(M)] from [mute_string].", 1)
-		M << "<span class='alert'>You have been [muteunmute] from [mute_string] by the SPAM AUTOMUTE system. Contact an admin.</span>"
-		feedback_add_details("admin_verb","AUTOMUTE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-		return
 
 	if(M.client.prefs.muted & mute_type)
 		muteunmute = "unmuted"
@@ -388,7 +377,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	else
 		new_character.gender = pick(MALE,FEMALE)
 		var/datum/preferences/A = new()
-		A.randomize_appearance_for(new_character)
+		A.randomize_appearance_and_body_for(new_character)
 		new_character.real_name = G_found.real_name
 
 	if(!new_character.real_name)

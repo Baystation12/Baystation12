@@ -4,7 +4,7 @@
 	icon_state = "shotgun"
 	item_state = "shotgun"
 	max_shells = 4
-	w_class = 4.0
+	w_class = 5
 	force = 10
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
@@ -13,6 +13,7 @@
 	load_method = SINGLE_CASING
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	handle_casings = HOLD_CASINGS
+	requires_two_hands = 2
 	var/recentpump = 0 // to prevent spammage
 
 /obj/item/weapon/gun/projectile/shotgun/pump/consume_next_projectile()
@@ -47,6 +48,7 @@
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
 	max_shells = 7 //match the ammo box capacity, also it can hold a round in the chamber anyways, for a total of 8.
 	ammo_type = /obj/item/ammo_casing/shotgun
+	requires_two_hands = 3 //a little heavier than the regular shotgun
 
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel
 	name = "double-barreled shotgun"
@@ -58,7 +60,7 @@
 	load_method = SINGLE_CASING|SPEEDLOADER
 	handle_casings = CYCLE_CASINGS
 	max_shells = 2
-	w_class = 4
+	w_class = 5
 	force = 10
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
@@ -98,6 +100,7 @@
 			item_state = "sawnshotgun"
 			w_class = 3
 			force = 5
+			requires_two_hands = 0
 			slot_flags &= ~SLOT_BACK	//you can't sling it on your back
 			slot_flags |= (SLOT_BELT|SLOT_HOLSTER) //but you can wear it on your belt (poorly concealed under a trenchcoat, ideally) - or in a holster, why not.
 			name = "sawn-off shotgun"
@@ -115,3 +118,4 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 	w_class = 3
 	force = 5
+	requires_two_hands = 0

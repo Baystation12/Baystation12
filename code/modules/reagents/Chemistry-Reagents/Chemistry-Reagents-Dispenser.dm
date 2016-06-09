@@ -105,8 +105,7 @@
 	var/targ_temp = 310
 	var/halluci = 0
 
-	glass_icon_state = "glass_clear"
-	glass_name = "glass of ethanol"
+	glass_name = "ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
 
 /datum/reagent/ethanol/touch_mob(var/mob/living/L, var/amount)
@@ -264,14 +263,14 @@
 
 /datum/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(issmall(M)) removed *= 2
-	M.apply_effect(10 * removed, IRRADIATE, 0) // Radium may increase your chances to cure a disease
+	M.apply_effect(10 * removed, IRRADIATE, blocked = 0) // Radium may increase your chances to cure a disease
 	if(M.virus2.len)
 		for(var/ID in M.virus2)
 			var/datum/disease2/disease/V = M.virus2[ID]
 			if(prob(5))
 				M.antibodies |= V.antigen
 				if(prob(50))
-					M.apply_effect(50, IRRADIATE, check_protection = 0) // curing it that way may kill you instead
+					M.apply_effect(50, IRRADIATE, blocked = 0) // curing it that way may kill you instead
 					var/absorbed = 0
 					var/obj/item/organ/diona/nutrients/rad_organ = locate() in M.internal_organs
 					if(rad_organ && !rad_organ.is_broken())
@@ -407,12 +406,31 @@
 	taste_mult = 1.8
 	reagent_state = SOLID
 	color = "#FFFFFF"
-	glass_icon_state = "iceglass"
-	glass_name = "glass of sugar"
+
+	glass_name = "sugar"
 	glass_desc = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
+	glass_icon = DRINK_ICON_NOISY
 
 /datum/reagent/sugar/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.nutrition += removed * 3
+
+	var/effective_dose = dose
+	if(issmall(M))
+		effective_dose *= 2
+
+	if(alien == IS_UNATHI)
+		if(effective_dose < 2)
+			if(effective_dose == metabolism * 2 || prob(5))
+				M.emote("yawn")
+		else if(effective_dose < 5)
+			M.eye_blurry = max(M.eye_blurry, 10)
+		else if(effective_dose < 20)
+			if(prob(50))
+				M.Weaken(2)
+			M.drowsyness = max(M.drowsyness, 20)
+		else
+			M.sleeping = max(M.sleeping, 20)
+			M.drowsyness = max(M.drowsyness, 60)
 
 /datum/reagent/sulfur
 	name = "Sulfur"

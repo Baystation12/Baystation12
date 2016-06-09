@@ -1,3 +1,4 @@
+//Note that despite the use of the NOSLIP flag, magboots are still hardcoded to prevent spaceslipping in Check_Shoegrip().
 /obj/item/clothing/shoes/magboots
 	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle. They're large enough to be worn over other footwear."
 	name = "magboots"
@@ -12,9 +13,9 @@
 	var/mob/living/carbon/human/wearer = null	//For shoe procs
 
 /obj/item/clothing/shoes/magboots/proc/set_slowdown()
-	slowdown = shoes? max(SHOES_SLOWDOWN, shoes.slowdown): SHOES_SLOWDOWN	//So you can't put on magboots to make you walk faster.
+	slowdown_per_slot[slot_shoes] = shoes? max(SHOES_SLOWDOWN, shoes.slowdown_per_slot[slot_shoes]): SHOES_SLOWDOWN	//So you can't put on magboots to make you walk faster.
 	if (magpulse)
-		slowdown += 3
+		slowdown_per_slot[slot_shoes] += 3
 
 /obj/item/clothing/shoes/magboots/attack_self(mob/user)
 	if(magpulse)
@@ -33,6 +34,7 @@
 		user << "You enable the mag-pulse traction system."
 	user.update_inv_shoes()	//so our mob-overlays update
 	user.update_action_buttons()
+	user.update_floating()
 
 /obj/item/clothing/shoes/magboots/mob_can_equip(mob/user)
 	var/mob/living/carbon/human/H = user
@@ -55,16 +57,26 @@
 	if (shoes)
 		user << "You slip \the [src] on over \the [shoes]."
 	set_slowdown()
-	wearer = H
+	wearer = H //TODO clean this up
 	return 1
+
+/obj/item/clothing/shoes/magboots/equipped()
+	..()
+	var/mob/M = src.loc
+	if(istype(M))
+		M.update_floating()
 
 /obj/item/clothing/shoes/magboots/dropped()
 	..()
+	if(!wearer)
+		return
+
 	var/mob/living/carbon/human/H = wearer
-	if(shoes)
+	if(shoes && istype(H))
 		if(!H.equip_to_slot_if_possible(shoes, slot_shoes))
 			shoes.forceMove(get_turf(src))
 		src.shoes = null
+	wearer.update_floating()
 	wearer = null
 
 /obj/item/clothing/shoes/magboots/examine(mob/user)

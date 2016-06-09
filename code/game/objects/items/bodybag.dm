@@ -121,7 +121,7 @@
 	var/obj/item/weapon/tank/tank = null
 
 /obj/structure/closet/body_bag/cryobag/New()
-	tank = new /obj/item/weapon/tank/emergency_oxygen(null) //It's in nullspace to prevent ejection when the bag is opened.
+	tank = new /obj/item/weapon/tank/emergency/oxygen(null) //It's in nullspace to prevent ejection when the bag is opened.
 	..()
 
 /obj/structure/closet/body_bag/cryobag/Destroy()

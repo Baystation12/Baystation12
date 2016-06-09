@@ -342,7 +342,7 @@ var/global/datum/controller/occupations/job_master
 						else
 							permitted = 1
 
-						if(G.whitelisted && (G.whitelisted != H.species.name || !is_alien_whitelisted(H, G.whitelisted)))
+						if(G.whitelisted && (G.whitelisted != H.species.name || !is_species_whitelisted(H, G.whitelisted)))
 							permitted = 0
 
 						if(!permitted)
@@ -415,7 +415,7 @@ var/global/datum/controller/occupations/job_master
 			if(department_account)
 				remembered_info += "<b>Your department's account number is:</b> #[department_account.account_number]<br>"
 				remembered_info += "<b>Your department's account pin is:</b> [department_account.remote_access_pin]<br>"
-				remembered_info += "<b>Your department's account funds are:</b> $[department_account.money]<br>"
+				remembered_info += "<b>Your department's account funds are:</b> þ[department_account.money]<br>"
 
 			H.mind.store_memory(remembered_info)
 
@@ -434,20 +434,23 @@ var/global/datum/controller/occupations/job_master
 					captain_announcement.Announce("All hands, Captain [H.real_name] on deck!", new_sound=announce_sound)
 
 			//Deferred item spawning.
-			if(spawn_in_storage && spawn_in_storage.len)
-				var/obj/item/weapon/storage/B
-				for(var/obj/item/weapon/storage/S in H.contents)
-					B = S
-					break
+			for(var/thing in spawn_in_storage)
+				var/datum/gear/G = gear_datums[thing]
+				var/metadata = H.client.prefs.gear[G.display_name]
+				var/item = G.spawn_item(null, metadata)
 
-				if(!isnull(B))
-					for(var/thing in spawn_in_storage)
-						H << "<span class='notice'>Placing \the [thing] in your [B.name]!</span>"
-						var/datum/gear/G = gear_datums[thing]
-						var/metadata = H.client.prefs.gear[G.display_name]
-						G.spawn_item(B, metadata)
-				else
-					H << "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>"
+				var/atom/placed_in = H.equip_to_storage(item)
+				if(placed_in)
+					H << "<span class='notice'>Placing \the [item] in your [placed_in.name]!</span>"
+					continue
+				if(H.equip_to_appropriate_slot(item))
+					H << "<span class='notice'>Placing \the [item] in your inventory!</span>"
+					continue
+				if(H.put_in_hands(item))
+					H << "<span class='notice'>Placing \the [item] in your hands!</span>"
+					continue
+				H << "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>"
+				qdel(item)
 
 		if(istype(H)) //give humans wheelchairs, if they need them.
 			var/obj/item/organ/external/l_foot = H.get_organ("l_foot")

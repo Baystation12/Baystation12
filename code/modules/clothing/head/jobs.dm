@@ -120,3 +120,11 @@
 /obj/item/clothing/head/surgery/green
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is dark green."
 	icon_state = "surgcap_green"
+
+/obj/item/clothing/head/surgery/black
+	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is black."
+	icon_state = "surgcap_black"
+
+/obj/item/clothing/head/surgery/navyblue
+	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is navy blue."
+	icon_state = "surgcap_navyblue"

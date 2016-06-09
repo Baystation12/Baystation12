@@ -10,7 +10,6 @@ var/datum/antagonist/cultist/cult
 	id = MODE_CULTIST
 	role_text = "Cultist"
 	role_text_plural = "Cultists"
-	bantype = "cultist"
 	restricted_jobs = list("Chaplain","AI", "Cyborg", "Internal Affairs Agent", "Head of Security", "Captain")
 	protected_jobs = list("Security Officer", "Warden", "Detective")
 	feedback_tag = "cult_objective"
@@ -111,6 +110,13 @@ var/datum/antagonist/cultist/cult
 	. = ..()
 	if(.)
 		player << "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back."
+		if(player.current && !istype(player.current, /mob/living/simple_animal/construct))
+			player.current.add_language(LANGUAGE_CULT)
+
+/datum/antagonist/cultist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
+	. = ..()
+	if(. && player.current && !istype(player.current, /mob/living/simple_animal/construct))
+		player.current.remove_language(LANGUAGE_CULT)
 
 /datum/antagonist/cultist/can_become_antag(var/datum/mind/player)
 	if(!..())

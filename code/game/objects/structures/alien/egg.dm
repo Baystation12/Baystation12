@@ -55,7 +55,7 @@
 		return
 
 	// Check for bans properly.
-	if(jobban_isbanned(user, "Xenomorph"))
+	if(jobban_isbanned(user, MODE_XENOMORPH))
 		user << "<span class='danger'>You are banned from playing a Xenomorph.</span>"
 		return
 

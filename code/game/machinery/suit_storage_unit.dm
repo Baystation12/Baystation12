@@ -68,6 +68,14 @@
 	req_access = list(access_mining)
 	islocked = 1
 
+/obj/machinery/suit_storage_unit/science
+	name = "Excavation Voidsuit Storage Unit"
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/excavation
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/excavation
+	MASK_TYPE = /obj/item/clothing/mask/breath
+	req_access = list(access_xenoarch)
+	islocked = 1
+
 /obj/machinery/suit_storage_unit/security
 	name = "Security Voidsuit Storage Unit"
 	SUIT_TYPE = /obj/item/clothing/suit/space/void/security
@@ -382,7 +390,7 @@
 	for(i=0,i<4,i++)
 		sleep(50)
 		if(src.OCCUPANT)
-			OCCUPANT.apply_effect(50, IRRADIATE)
+			OCCUPANT.apply_effect(50, IRRADIATE, blocked = OCCUPANT.getarmor(null, "rad"))
 			var/obj/item/organ/diona/nutrients/rad_organ = locate() in OCCUPANT.internal_organs
 			if (!rad_organ)
 				if(src.issuperUV)
@@ -645,7 +653,7 @@
 	var/electrified = 0
 
 	//Departments that the cycler can paint suits to look like.
-	var/list/departments = list("Engineering","Mining","Medical","Security","Atmos")
+	var/list/departments = list("Engineering","Mining","Medical","Security","Atmos","Science")
 	//Species that the suits can be configured to fit.
 	var/list/species = list("Human","Skrell","Unathi","Tajara","Resomi")
 
@@ -683,6 +691,13 @@
 	model_text = "Mining"
 	req_access = list(access_mining)
 	departments = list("Mining")
+	species = list("Human","Tajara","Skrell","Unathi","Resomi")
+
+/obj/machinery/suit_cycler/science
+	name = "Excavation suit cycler"
+	model_text = "Excavation"
+	req_access = list(access_xenoarch)
+	departments = list("Science")
 	species = list("Human","Tajara","Skrell","Unathi","Resomi")
 
 /obj/machinery/suit_cycler/security
@@ -974,7 +989,7 @@
 			occupant.take_organ_damage(0,radiation_level*2 + rand(1,3))
 		if(radiation_level > 1)
 			occupant.take_organ_damage(0,radiation_level + rand(1,3))
-		occupant.apply_effect(radiation_level*10, IRRADIATE)
+		occupant.apply_effect(radiation_level*10, IRRADIATE, blocked = occupant.getarmor(null, "rad"))
 
 /obj/machinery/suit_cycler/proc/finished_job()
 	var/turf/T = get_turf(src)
@@ -1053,6 +1068,15 @@
 				suit.name = "mining voidsuit"
 				suit.icon_state = "rig-mining"
 				suit.item_state = "mining_voidsuit"
+		if("Science")
+			if(helmet)
+				helmet.name = "excavation voidsuit helmet"
+				helmet.icon_state = "rig0-excavation"
+				helmet.item_state = "excavation_helm"
+			if(suit)
+				suit.name = "excavation voidsuit"
+				suit.icon_state = "rig-excavation"
+				suit.item_state = "excavation_voidsuit"
 		if("Medical")
 			if(helmet)
 				helmet.name = "medical voidsuit helmet"

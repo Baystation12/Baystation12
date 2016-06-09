@@ -13,10 +13,21 @@
 /obj/item/weapon/storage/fancy
 	item_state = "syringe_kit" //placeholder, many of these don't have inhands
 	var/obj/item/key_type //path of the key item that this "fancy" container is meant to store
+	var/opened = 0 //if an item has been removed from this container
+
+/obj/item/weapon/storage/fancy/remove_from_storage()
+	. = ..()
+	if(!opened && .)
+		opened = 1
+		update_icon()
+
 
 /obj/item/weapon/storage/fancy/update_icon()
-	var/key_count = count_by_type(contents, key_type)
-	src.icon_state = "[initial(icon_state)][key_count]"
+	if(!opened)
+		src.icon_state = initial(icon_state)
+	else
+		var/key_count = count_by_type(contents, key_type)
+		src.icon_state = "[initial(icon_state)][key_count]"
 
 /obj/item/weapon/storage/fancy/examine(mob/user)
 	if(!..(user, 1))
@@ -59,6 +70,7 @@
 	desc = "A pack of red candles."
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candlebox"
+	opened = 1 //no closed state
 	throwforce = 2
 	w_class = 2
 	max_w_class = 1
@@ -119,7 +131,7 @@
 /obj/item/weapon/storage/fancy/cigarettes/New()
 	..()
 	flags |= NOREACT
-	create_reagents(15 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
+	create_reagents(5 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 	flags |= OPENCONTAINER
 
 /obj/item/weapon/storage/fancy/cigarettes/remove_from_storage(obj/item/W as obj, atom/new_location)
@@ -132,29 +144,29 @@
 /obj/item/weapon/storage/fancy/cigarettes/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M, /mob))
 		return
-		
+
 	if(M == user && user.zone_sel.selecting == "mouth")
 		// Find ourselves a cig. Note that we could be full of lighters.
-		var/obj/item/clothing/mask/smokable/cigarette/cig = null		
+		var/obj/item/clothing/mask/smokable/cigarette/cig = null
 		for(var/obj/item/clothing/mask/smokable/cigarette/C in contents)
 			cig = C
 			break
-		
+
 		if(cig == null)
 			user << "<span class='notice'>Looks like the packet is out of cigarettes.</span>"
 			return
-		
+
 		// Instead of running equip_to_slot_if_possible() we check here first,
 		// to avoid dousing cig with reagents if we're not going to equip it
 		if(!cig.mob_can_equip(user, slot_wear_mask))
-			return 
-			
-		// We call remove_from_storage first to manage the reagent transfer and 
+			return
+
+		// We call remove_from_storage first to manage the reagent transfer and
 		// UI updates.
 		remove_from_storage(cig, null)
 		user.equip_to_slot(cig, slot_wear_mask)
-		
-		reagents.maximum_volume = 15 * contents.len
+
+		reagents.maximum_volume = 5 * contents.len
 		user << "<span class='notice'>You take a cigarette out of the pack.</span>"
 		update_icon()
 	else
@@ -162,18 +174,17 @@
 
 /obj/item/weapon/storage/fancy/cigarettes/dromedaryco
 	name = "\improper DromedaryCo packet"
-	desc = "A packet of six imported DromedaryCo cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\""
+	desc = "A packet of six imported DromedaryCo cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\"."
 	icon_state = "Dpacket"
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat
 	name = "\improper AcmeCo packet"
 	desc = "A packet of six AcmeCo cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
 	icon_state = "Bpacket"
-	//item_state = "Bpacket" //Doesn't have an inhand state, but neither does dromedary, so, ya know.. So don't set one, use the default.
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat/New()
 	..()
-	fill_cigarre_package(src,list("fuel" = 15))
+	fill_cigarre_package(src,list("fuel" = 4))
 
 /obj/item/weapon/storage/fancy/cigar
 	name = "cigar case"
@@ -194,13 +205,13 @@
 /obj/item/weapon/storage/fancy/cigar/New()
 	..()
 	flags |= NOREACT
-	create_reagents(15 * storage_slots)
+	create_reagents(10 * storage_slots)
 
 /obj/item/weapon/storage/fancy/cigar/remove_from_storage(obj/item/W as obj, atom/new_location)
-		var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
-		if(!istype(C)) return
-		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
-		..()
+	var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
+	if(!istype(C)) return
+	reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
+	..()
 
 /*
  * Vial Box

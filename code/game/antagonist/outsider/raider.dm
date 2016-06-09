@@ -4,7 +4,6 @@ var/datum/antagonist/raider/raiders
 	id = MODE_RAIDER
 	role_text = "Raider"
 	role_text_plural = "Raiders"
-	bantype = "raider"
 	antag_indicator = "mutineer"
 	landmark_id = "voxstart"
 	welcome_text = "Use :H to talk on your encrypted channel."
@@ -28,7 +27,7 @@ var/datum/antagonist/raider/raiders
 		/obj/item/clothing/under/serviceoveralls,
 		/obj/item/clothing/under/captain_fly,
 		/obj/item/clothing/under/det,
-		/obj/item/clothing/under/brown,
+		/obj/item/clothing/under/color/brown,
 		)
 
 	var/list/raider_shoes = list(
@@ -75,7 +74,7 @@ var/datum/antagonist/raider/raiders
 		/obj/item/weapon/gun/energy/taser,
 		/obj/item/weapon/gun/energy/crossbow/largecrossbow,
 		/obj/item/weapon/gun/launcher/crossbow,
-		/obj/item/weapon/gun/launcher/grenade,
+		/obj/item/weapon/gun/launcher/grenade/loaded,
 		/obj/item/weapon/gun/launcher/pneumatic,
 		/obj/item/weapon/gun/projectile/automatic/mini_uzi,
 		/obj/item/weapon/gun/projectile/automatic/c20r,
@@ -284,17 +283,6 @@ var/datum/antagonist/raider/raiders
 				new bullet_thrower.ammo_type(ammobox)
 			player.put_in_any_hand_if_possible(ammobox)
 		return
-	if(istype(gun, /obj/item/weapon/gun/launcher/grenade))
-		var/list/grenades = list(
-			/obj/item/weapon/grenade/empgrenade,
-			/obj/item/weapon/grenade/smokebomb,
-			/obj/item/weapon/grenade/flashbang
-			)
-		var/obj/item/weapon/storage/box/ammobox = new(get_turf(player.loc))
-		for(var/i in 1 to 7)
-			var/grenade_type = pick(grenades)
-			new grenade_type(ammobox)
-		player.put_in_any_hand_if_possible(ammobox)
 
 /datum/antagonist/raider/proc/equip_vox(var/mob/living/carbon/human/player)
 

@@ -9,7 +9,7 @@
 	var/spawner_type = null // must be an object path
 	var/deliveryamt = 1 // amount of type to deliver
 
-	prime()													// Prime now just handles the two loops that query for people in lockers and people who can see it.
+	detonate()												// Prime now just handles the two loops that query for people in lockers and people who can see it.
 
 		if(spawner_type && deliveryamt)
 			// Make a quick flash
@@ -17,7 +17,7 @@
 			playsound(T, 'sound/effects/phasein.ogg', 100, 1)
 			for(var/mob/living/carbon/human/M in viewers(T, null))
 				if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
-					flick("e_flash", M.flash)
+					M.flash_eyes()
 
 			for(var/i=1, i<=deliveryamt, i++)
 				var/atom/movable/x = new spawner_type

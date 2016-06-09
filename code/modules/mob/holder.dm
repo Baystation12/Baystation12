@@ -46,7 +46,7 @@ var/list/holder_mob_icon_cache = list()
 	if(istype(loc,/turf) || !(contents.len))
 		for(var/mob/M in contents)
 			var/atom/movable/mob_container = M
-			mob_container.forceMove(loc, MOVED_DROP)
+			mob_container.dropInto(loc)
 			M.reset_view()
 		qdel(src)
 	else if(last_holder != loc)
@@ -54,6 +54,11 @@ var/list/holder_mob_icon_cache = list()
 			register_all_movement(loc, M)
 
 	last_holder = loc
+	
+/obj/item/weapon/holder/onDropInto(var/atom/movable/AM)
+	if(ismob(loc))   // Bypass our holding mob and drop directly to its loc
+		return loc.loc
+	return ..()
 
 /obj/item/weapon/holder/GetID()
 	for(var/mob/M in contents)
@@ -69,6 +74,18 @@ var/list/holder_mob_icon_cache = list()
 /obj/item/weapon/holder/attack_self()
 	for(var/mob/M in contents)
 		M.show_inv(usr)
+		
+/obj/item/weapon/holder/attack(mob/target, mob/user)
+	// Devour on click on self with holder
+	if(target == user && istype(user,/mob/living/carbon))
+		var/mob/living/carbon/M = user
+		
+		for(var/mob/victim in src.contents)
+			M.devour(victim)
+
+		update_state()
+
+	..()
 
 /obj/item/weapon/holder/proc/sync(var/mob/living/M)
 	dir = 2
@@ -118,17 +135,29 @@ var/list/holder_mob_icon_cache = list()
 	if(!holder_type || buckled || pinned.len)
 		return
 
+	if(self_grab)
+		if(src.incapacitated()) return
+	else
+		if(grabber.incapacitated()) return
+
 	var/obj/item/weapon/holder/H = new holder_type(get_turf(src))
-	src.forceMove(H)
-	grabber.put_in_hands(H)
 
 	if(self_grab)
+		if(!grabber.equip_to_slot_if_possible(H, slot_back, del_on_fail=0, disable_warning=1))
+			src << "<span class='warning'>You can't climb onto [grabber]!</span>"
+			return
+
 		grabber << "<span class='notice'>\The [src] clambers onto you!</span>"
 		src << "<span class='notice'>You climb up onto \the [grabber]!</span>"
-		grabber.equip_to_slot_if_possible(H, slot_back, 0, 1)
 	else
+		if(!grabber.put_in_hands(H))
+			grabber << "<span class='warning'>Your hands are full!</span>"
+			return
+
 		grabber << "<span class='notice'>You scoop up \the [src]!</span>"
 		src << "<span class='notice'>\The [grabber] scoops you up!</span>"
+
+	src.forceMove(H)
 
 	grabber.status_flags |= PASSEMOTES
 	H.sync(src)

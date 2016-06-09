@@ -5,7 +5,7 @@
 /obj/item/weapon/reagent_containers/glass
 	name = " "
 	var/base_name = " "
-	desc = " "
+	desc = ""
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "null"
 	item_state = "null"
@@ -272,7 +272,7 @@
 	item_state = "canister"
 	m_amt = 300
 	g_amt = 0
-	w_class = 4.0
+	w_class = 5
 
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = list(10,20,30,60)

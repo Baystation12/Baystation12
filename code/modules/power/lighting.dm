@@ -153,6 +153,7 @@
 								// this is used to calc the probability the light burns out
 
 	var/rigged = 0				// true if rigged to explode
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 
 // the smaller bulb light fixture
 
@@ -196,6 +197,7 @@
 // create a new lighting fixture
 /obj/machinery/light/New()
 	..()
+	s.set_up(1, 1, src)
 
 	spawn(2)
 		on = powered()
@@ -212,6 +214,9 @@
 
 /obj/machinery/light/Destroy()
 	var/area/A = get_area(src)
+	if(s)
+		qdel(s)
+		s = null
 	if(A)
 		on = 0
 //		A.update_lights()
@@ -522,8 +527,6 @@
 		if(status == LIGHT_OK || status == LIGHT_BURNED)
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		if(on)
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(3, 1, src)
 			s.start()
 	status = LIGHT_BROKEN
 	update()

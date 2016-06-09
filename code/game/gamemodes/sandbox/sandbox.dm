@@ -1,5 +1,5 @@
 /datum/game_mode/sandbox
-	name = "sandbox"
+	name = "Sandbox"
 	config_tag = "sandbox"
 	required_players = 0
 	votable = 0

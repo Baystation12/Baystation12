@@ -37,10 +37,10 @@
 		T.time = "[rand(0,24)]:[rand(11,59)]"
 		T.source_terminal = "NTGalaxyNet Terminal #[rand(111,1111)]"
 
-		M.account_number = rand(111111, 999999)
+		M.account_number = random_id("station_account_number", 111111, 999999)
 	else
 		T.date = current_date_string
-		T.time = worldtime2text()
+		T.time = stationtime2text()
 		T.source_terminal = source_db.machine_id
 
 		M.account_number = next_account_number
@@ -56,8 +56,8 @@
 		R.info += "<i>Account holder:</i> [M.owner_name]<br>"
 		R.info += "<i>Account number:</i> [M.account_number]<br>"
 		R.info += "<i>Account pin:</i> [M.remote_access_pin]<br>"
-		R.info += "<i>Starting balance:</i> $[M.money]<br>"
-		R.info += "<i>Date and time:</i> [worldtime2text()], [current_date_string]<br><br>"
+		R.info += "<i>Starting balance:</i> þ[M.money]<br>"
+		R.info += "<i>Date and time:</i> [stationtime2text()], [current_date_string]<br><br>"
 		R.info += "<i>Creation terminal ID:</i> [source_db.machine_id]<br>"
 		R.info += "<i>Authorised NT officer overseeing creation:</i> [source_db.held_card.registered_name]<br>"
 
@@ -80,7 +80,7 @@
 	for(var/datum/money_account/D in all_money_accounts)
 		if(D.account_number == attempt_account_number && !D.suspended)
 			D.money += amount
-			
+
 			//create a transaction log entry
 			var/datum/transaction/T = new()
 			T.target_name = source_name
@@ -90,12 +90,12 @@
 			else
 				T.amount = "[amount]"
 			T.date = current_date_string
-			T.time = worldtime2text()
+			T.time = stationtime2text()
 			T.source_terminal = terminal_id
 			D.transaction_log.Add(T)
-			
+
 			return 1
-	
+
 	return 0
 
 //this returns the first account datum that matches the supplied accnum/pin combination, it returns null if the combination did not match any account

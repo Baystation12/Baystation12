@@ -1,8 +1,11 @@
+// Global var to track modular computers
+var/list/global_modular_computers = list()
+
 // Modular Computer - device that runs various programs and operates with hardware
 // DO NOT SPAWN THIS TYPE. Use /laptop/ or /console/ instead.
 /obj/machinery/modular_computer/
 	name = "modular computer"
-	desc = "An advanced computer"
+	desc = "An advanced computer."
 
 	var/battery_powered = 0											// Whether computer should be battery powered. It is set automatically
 	use_power = 0
@@ -74,6 +77,7 @@
 /obj/machinery/modular_computer/New()
 	..()
 	cpu = new(src)
+	global_modular_computers.Add(src)
 
 /obj/machinery/modular_computer/Destroy()
 	if(cpu)

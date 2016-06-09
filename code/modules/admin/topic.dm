@@ -545,19 +545,18 @@
 		jobs += "</tr></table>"
 
 	//Antagonist (Orange)
-		var/isbanned_dept = jobban_isbanned(M, "Syndicate")
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr bgcolor='ffeeaa'><th colspan='10'><a href='?src=\ref[src];jobban3=Syndicate;jobban4=\ref[M]'>Antagonist Positions</a></th></tr><tr align='center'>"
 
 		// Antagonists.
 		for(var/antag_type in all_antag_types)
 			var/datum/antagonist/antag = all_antag_types[antag_type]
-			if(!antag || !antag.bantype)
+			if(!antag || !antag.id)
 				continue
-			if(jobban_isbanned(M, "[antag.bantype]") || isbanned_dept)
-				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[antag.bantype];jobban4=\ref[M]'><font color=red>[replacetext("[antag.role_text]", " ", "&nbsp")]</font></a></td>"
+			if(jobban_isbanned(M, "[antag.id]"))
+				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[antag.id];jobban4=\ref[M]'><font color=red>[replacetext("[antag.role_text]", " ", "&nbsp")]</font></a></td>"
 			else
-				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[antag.bantype];jobban4=\ref[M]'>[replacetext("[antag.role_text]", " ", "&nbsp")]</a></td>"
+				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[antag.id];jobban4=\ref[M]'>[replacetext("[antag.role_text]", " ", "&nbsp")]</a></td>"
 
 		jobs += "</tr></table>"
 
@@ -645,6 +644,12 @@
 					var/datum/job/temp = job_master.GetJob(jobPos)
 					if(!temp) continue
 					joblist += temp.title
+			if("Syndicate")
+				for(var/antagPos in all_antag_types)
+					if(!antagPos) continue
+					var/datum/antagonist/temp = all_antag_types[antagPos]
+					if(!temp) continue
+					joblist += temp.id
 			else
 				joblist += href_list["jobban3"]
 
@@ -818,7 +823,7 @@
 				log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 				message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 
-				qdel(M.client)
+				del(M.client)
 				//qdel(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 			if("No")
 				if(!check_rights(R_BAN))   return
@@ -1648,6 +1653,10 @@
 		log_and_message_admins("created [number] [english_list(paths)]")
 		return
 
+	else if(href_list["admin_secrets_panel"])
+		var/datum/admin_secret_category/AC = locate(href_list["admin_secrets_panel"]) in admin_secrets.categories
+		src.Secrets(AC)
+
 	else if(href_list["admin_secrets"])
 		var/datum/admin_secret_item/item = locate(href_list["admin_secrets"]) in admin_secrets.items
 		item.execute(usr)
@@ -1922,7 +1931,7 @@ mob/living/silicon/ai/can_centcom_reply()
 		return "|<A HREF='?[source];adminplayerobservejump=\ref[eyeobj]'>EYE</A>"
 
 /mob/observer/ghost/extra_admin_link(var/source)
-	if(mind && mind.current)
+	if(mind && (mind.current && !isghost(mind.current)))
 		return "|<A HREF='?[source];adminplayerobservejump=\ref[mind.current]'>BDY</A>"
 
 /proc/admin_jump_link(var/atom/target, var/source)

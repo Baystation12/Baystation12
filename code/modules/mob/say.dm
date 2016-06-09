@@ -9,21 +9,6 @@
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "\red Speech is currently admin-disabled."
-		return
-	//Let's try to make users fix their errors - we try to detect single, out-of-place letters and 'unintended' words
-	/*
-	var/first_letter = copytext(message,1,2)
-	if((copytext(message,2,3) == " " && first_letter != "I" && first_letter != "A" && first_letter != ";") || cmptext(copytext(message,1,5), "say ") || cmptext(copytext(message,1,4), "me ") || cmptext(copytext(message,1,6), "looc ") || cmptext(copytext(message,1,5), "ooc ") || cmptext(copytext(message,2,6), "say "))
-		var/response = alert(usr, "Do you really want to say this using the *say* verb?\n\n[message]\n", "Confirm your message", "Yes", "Edit message", "No")
-		if(response == "Edit message")
-			message = input(usr, "Please edit your message carefully:", "Edit message", message)
-			if(!message)
-				return
-		else if(response == "No")
-			return
-	*/
 
 	set_typing_indicator(0)
 	usr.say(message)
@@ -31,10 +16,6 @@
 /mob/verb/me_verb(message as text)
 	set name = "Me"
 	set category = "IC"
-
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "\red Speech is currently admin-disabled."
-		return
 
 	message = sanitize(message)
 
@@ -45,10 +26,6 @@
 		usr.emote(message)
 
 /mob/proc/say_dead(var/message)
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
-		return
-
 	if(!src.client.holder)
 		if(!config.dsay_allowed)
 			src << "<span class='danger'>Deadchat is globally muted.</span>"
@@ -91,25 +68,18 @@
 
 	return 0
 
-/*
-   ***Deprecated***
-   let this be handled at the hear_say or hear_radio proc
-   This is left in for robot speaking when humans gain binary channel access until I get around to rewriting
-   robot_talk() proc.
-   There is no language handling build into it however there is at the /mob level so we accept the call
-   for it but just ignore it.
-*/
-
 /mob/proc/say_quote(var/message, var/datum/language/speaking = null)
-        var/verb = "says"
-        var/ending = copytext(message, length(message))
-        if(ending=="!")
-                verb=pick("exclaims","shouts","yells")
-        else if(ending=="?")
-                verb="asks"
+	var/ending = copytext(message, length(message))
+	if(speaking)
+		return speaking.get_spoken_verb(ending)
 
-        return verb
-
+	var/verb = pick(speak_emote)
+	if(verb == "says") //a little bit of a hack, but we can't let speak_emote default to an empty list without breaking other things
+		if(ending == "!")
+			verb = pick("exclaims","shouts","yells")
+		else if(ending == "?")
+			verb ="asks"
+	return verb
 
 /mob/proc/emote(var/act, var/type, var/message)
 	if(act == "me")

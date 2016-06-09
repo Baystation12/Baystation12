@@ -19,6 +19,7 @@
 	var/material/material
 	var/material/padding_material
 	var/base_icon = "bed"
+	var/material_alteration = MATERIAL_ALTERATION_ALL
 
 /obj/structure/bed/New(var/newloc, var/new_material, var/new_padding_material)
 	..(newloc)
@@ -45,7 +46,8 @@
 	var/cache_key = "[base_icon]-[material.name]"
 	if(isnull(stool_cache[cache_key]))
 		var/image/I = image('icons/obj/furniture.dmi', base_icon)
-		I.color = material.icon_colour
+		if(material_alteration & MATERIAL_ALTERATION_COLOR)
+			I.color = material.icon_colour
 		stool_cache[cache_key] = I
 	overlays |= stool_cache[cache_key]
 	// Padding overlay.
@@ -53,18 +55,18 @@
 		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]"
 		if(isnull(stool_cache[padding_cache_key]))
 			var/image/I =  image(icon, "[base_icon]_padding")
-			I.color = padding_material.icon_colour
+			if(material_alteration & MATERIAL_ALTERATION_COLOR)
+				I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]
 
 	// Strings.
-	desc = initial(desc)
-	if(padding_material)
-		name = "[padding_material.display_name] [initial(name)]" //this is not perfect but it will do for now.
-		desc += " It's made of [material.use_name] and covered with [padding_material.use_name]."
-	else
-		name = "[material.display_name] [initial(name)]"
-		desc += " It's made of [material.use_name]."
+	if(material_alteration & MATERIAL_ALTERATION_NAME)
+		name = padding_material ? "[padding_material.adjective_name] [initial(name)]" : "[material.adjective_name] [initial(name)]" //this is not perfect but it will do for now.
+
+	if(material_alteration & MATERIAL_ALTERATION_DESC)
+		desc = initial(desc)
+		desc += padding_material ? " It's made of [material.use_name] and covered with [padding_material.use_name]." : " It's made of [material.use_name]."
 
 /obj/structure/bed/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASSTABLE))
@@ -131,14 +133,8 @@
 		var/mob/living/affecting = G.affecting
 		user.visible_message("<span class='notice'>[user] attempts to buckle [affecting] into \the [src]!</span>")
 		if(do_after(user, 20, src))
-			affecting.loc = loc
-			spawn(0)
-				if(buckle_mob(affecting))
-					affecting.visible_message(\
-						"<span class='danger'>[affecting.name] is buckled to [src] by [user.name]!</span>",\
-						"<span class='danger'>You are buckled to [src] by [user.name]!</span>",\
-						"<span class='notice'>You hear metal clanking.</span>")
-			qdel(W)
+			if(user_buckle_mob(affecting, user))
+				qdel(W)
 	else
 		..()
 
@@ -207,7 +203,7 @@
 	desc = "A collapsed roller bed that can be carried around."
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "folded"
-	w_class = 4.0 // Can't be put in backpacks. Oh well.
+	w_class = 5 // Can't be put in backpacks. Oh well. For now.
 
 /obj/item/roller/attack_self(mob/user)
 		var/obj/structure/bed/roller/R = new /obj/structure/bed/roller(user.loc)

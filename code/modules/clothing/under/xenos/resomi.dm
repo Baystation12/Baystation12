@@ -30,3 +30,8 @@
 	name = "small rainbow smock"
 	icon_state = "resomi_rainbow"
 	worn_state = "resomi_rainbow"
+
+/obj/item/clothing/under/resomi/science
+	name = "small science uniform"
+	icon_state = "resomi_science"
+	worn_state = "resomi_science"

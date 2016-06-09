@@ -3,6 +3,7 @@
 	layer = 4.0
 	animate_movement = 2
 	flags = PROXMOVE
+	var/list/client_images = list() // List of images applied to/removed from the client on login/logout
 	var/datum/mind/mind
 
 	var/lastKnownIP = null
@@ -10,8 +11,6 @@
 
 	var/stat = 0 //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
 
-	var/obj/screen/flash = null
-	var/obj/screen/blind = null
 	var/obj/screen/hands = null
 	var/obj/screen/pullin = null
 	var/obj/screen/purged = null
@@ -26,7 +25,6 @@
 	var/obj/screen/throw_icon = null
 	var/obj/screen/nutrition_icon = null
 	var/obj/screen/pressure = null
-	var/obj/screen/damageoverlay = null
 	var/obj/screen/pain = null
 	var/obj/screen/gun/item/item_use_icon = null
 	var/obj/screen/gun/radio/radio_use_icon = null
@@ -103,7 +101,6 @@
 	var/datum/hud/hud_used = null
 
 	var/list/grabbed_by = list(  )
-	var/list/requests = list(  )
 
 	var/in_throw_mode = 0
 
@@ -124,8 +121,6 @@
 	var/voice_name = "unidentifiable voice"
 
 	var/faction = "neutral" //Used for checking whether hostile simple animals will attack you, possibly more stuff later
-	var/captured = 0 //Functionally, should give the same effect as being buckled into a chair when true.
-
 	var/blinded = null
 	var/ear_deaf = null		//Carbon
 

@@ -1,4 +1,8 @@
-/datum/supply_packs/chemistry_dispenser
+/decl/hierarchy/supply_pack/reagents
+	name = "Reagents"
+	hierarchy_type = /decl/hierarchy/supply_pack/reagents
+
+/decl/hierarchy/supply_pack/reagents/chemistry_dispenser
 	name = "Reagent dispenser"
 	contains = list(
 			/obj/machinery/chemical_dispenser{anchored = 0}
@@ -6,9 +10,8 @@
 	cost = 25
 	containertype = /obj/structure/largecrate
 	containername = "reagent dispenser crate"
-	group = "Reagents"
 
-/datum/supply_packs/beer_dispenser
+/decl/hierarchy/supply_pack/reagents/beer_dispenser
 	name = "Booze dispenser"
 	contains = list(
 			/obj/machinery/chemical_dispenser/bar_alc{anchored = 0}
@@ -16,9 +19,8 @@
 	cost = 25
 	containertype = /obj/structure/largecrate
 	containername = "booze dispenser crate"
-	group = "Reagents"
 
-/datum/supply_packs/soda_dispenser
+/decl/hierarchy/supply_pack/reagents/soda_dispenser
 	name = "Soda dispenser"
 	contains = list(
 			/obj/machinery/chemical_dispenser/bar_soft{anchored = 0}
@@ -26,9 +28,8 @@
 	cost = 25
 	containertype = /obj/structure/largecrate
 	containername = "soda dispenser crate"
-	group = "Reagents"
 
-/datum/supply_packs/reagents
+/decl/hierarchy/supply_pack/reagents/reagents
 	name = "Chemistry dispenser refill"
 	contains = list(
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/hydrazine,
@@ -57,9 +58,8 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "chemical crate"
 	access = list(access_chemistry)
-	group = "Reagents"
 
-/datum/supply_packs/alcohol_reagents
+/decl/hierarchy/supply_pack/reagents/alcohol_reagents
 	name = "Bar alcoholic dispenser refill"
 	contains = list(
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/beer,
@@ -79,9 +79,8 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "alcoholic drinks crate"
 	access = list(access_bar)
-	group = "Reagents"
 
-/datum/supply_packs/softdrink_reagents
+/decl/hierarchy/supply_pack/reagents/softdrink_reagents
 	name = "Bar soft drink dispenser refill"
 	contains = list(
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/water,
@@ -105,9 +104,8 @@
 	cost = 50
 	containertype = /obj/structure/closet/crate
 	containername = "soft drinks crate"
-	group = "Reagents"
 
-/datum/supply_packs/dispenser_cartridges
+/decl/hierarchy/supply_pack/reagents/dispenser_cartridges
 	name = "Empty dispenser cartridges"
 	contains = list(
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge,
@@ -124,10 +122,13 @@
 	cost = 15
 	containertype = /obj/structure/closet/crate
 	containername = "dispenser cartridge crate"
-	group = "Reagents"
+
+/decl/hierarchy/supply_pack/dispenser_cartridges
+	name = "Dispenser Cartridges"
+	hierarchy_type = /decl/hierarchy/supply_pack/dispenser_cartridges
 
 #define SEC_PACK(_tname, _type, _name, _cname, _cost, _access)\
-	datum/supply_packs/dispenser_cartridges{\
+	decl/hierarchy/supply_pack/dispenser_cartridges{\
 		_tname {\
 			name = _name ;\
 			containername = _cname ;\
@@ -135,18 +136,16 @@
 			access = list( _access );\
 			cost = _cost ;\
 			contains = list( _type , _type );\
-			group = "Reagent Cartridges"\
 		}\
 	}
 #define PACK(_tname, _type, _name, _cname, _cost)\
-	datum/supply_packs/dispenser_cartridges{\
+	decl/hierarchy/supply_pack/dispenser_cartridges{\
 		_tname {\
 			name = _name ;\
 			containername = _cname ;\
 			containertype = /obj/structure/closet/crate;\
 			cost = _cost ;\
 			contains = list( _type , _type );\
-			group = "Reagent Cartridges"\
 		}\
 	}
 

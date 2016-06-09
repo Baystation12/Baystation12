@@ -1,6 +1,6 @@
 /obj/structure/closet/secure_closet/scientist
 	name = "scientist's locker"
-	req_access = list(access_tox_storage)
+	req_one_access = list(access_tox,access_tox_storage)
 	icon_state = "secureres1"
 	icon_closed = "secureres"
 	icon_locked = "secureres1"
@@ -10,16 +10,46 @@
 
 	New()
 		..()
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack/toxins(src)
+		else
+			new /obj/item/weapon/storage/backpack/satchel_tox(src)
 		new /obj/item/clothing/under/rank/scientist(src)
 		//new /obj/item/clothing/suit/labcoat/science(src)
 		new /obj/item/clothing/suit/storage/toggle/labcoat(src)
 		new /obj/item/clothing/shoes/white(src)
-//		new /obj/item/weapon/cartridge/signal/science(src)
+		//new /obj/item/weapon/cartridge/signal/science(src)
 		new /obj/item/device/radio/headset/headset_sci(src)
-		new /obj/item/weapon/tank/air(src)
 		new /obj/item/clothing/mask/gas(src)
+		new /obj/item/weapon/clipboard(src)
 		return
+		
+/obj/structure/closet/secure_closet/xenobio
+	name = "xenobiologist's locker"
+	req_access = list(access_xenobiology)
+	icon_state = "secureres1"
+	icon_closed = "secureres"
+	icon_locked = "secureres1"
+	icon_opened = "secureresopen"
+	icon_broken = "secureresbroken"
+	icon_off = "secureresoff"
 
+	New()
+		..()
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack/toxins(src)
+		else
+			new /obj/item/weapon/storage/backpack/satchel_tox(src)		
+		new /obj/item/clothing/under/rank/scientist(src)
+		//new /obj/item/clothing/suit/labcoat/science(src)
+		new /obj/item/clothing/suit/storage/toggle/labcoat(src)
+		new /obj/item/clothing/shoes/white(src)
+		//new /obj/item/weapon/cartridge/signal/science(src)
+		new /obj/item/device/radio/headset/headset_sci(src)
+		new /obj/item/clothing/mask/gas(src)		
+		new /obj/item/clothing/gloves/latex(src)
+		new /obj/item/weapon/clipboard(src)
+		return
 
 
 /obj/structure/closet/secure_closet/RD
@@ -45,7 +75,7 @@
 		new /obj/item/clothing/shoes/leather(src)
 		new /obj/item/clothing/gloves/latex(src)
 		new /obj/item/device/radio/headset/heads/rd(src)
-		new /obj/item/weapon/tank/air(src)
 		new /obj/item/clothing/mask/gas(src)
 		new /obj/item/device/flash(src)
+		new /obj/item/weapon/clipboard(src)
 		return

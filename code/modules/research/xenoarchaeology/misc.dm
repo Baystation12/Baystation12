@@ -61,7 +61,7 @@
 
 /obj/structure/closet/secure_closet/xenoarchaeologist
 	name = "Xenoarchaeologist Locker"
-	req_access = list(access_tox_storage)
+	req_access = list(access_xenoarch)
 	icon_state = "secureres1"
 	icon_closed = "secureres"
 	icon_locked = "secureres1"
@@ -71,12 +71,19 @@
 
 	New()
 		..()
-		sleep(2)
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack/toxins(src)
+		else
+			new /obj/item/weapon/storage/backpack/satchel_tox(src) 		
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack/dufflebag(src)
 		new /obj/item/clothing/under/rank/scientist(src)
 		new /obj/item/clothing/suit/storage/toggle/labcoat(src)
 		new /obj/item/clothing/shoes/white(src)
 		new /obj/item/clothing/glasses/science(src)
 		new /obj/item/device/radio/headset/headset_sci(src)
+		new /obj/item/clothing/mask/gas(src) 		
+		new /obj/item/weapon/clipboard(src)
 		new /obj/item/weapon/storage/belt/archaeology(src)
 		new /obj/item/weapon/storage/excavation(src)
 		return
@@ -89,7 +96,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/weapon/storage/belt/archaeology(src)
 		new /obj/item/weapon/storage/excavation(src)
 		new /obj/item/device/flashlight/lantern(src)

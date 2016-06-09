@@ -51,10 +51,16 @@
 		return
 
 	attacker.visible_message("<span class='danger'>[attacker] [pick("bent", "twisted")] [target]'s [organ.name] into a jointlock!</span>")
+
+	if(target.species.flags & NO_PAIN)
+		return
+
 	var/armor = target.run_armor_check(target, "melee")
-	if(armor < 2)
+	if(armor < 100)
 		target << "<span class='danger'>You feel extreme pain!</span>"
-		affecting.adjustHalLoss(Clamp(0, 60-affecting.halloss, 30)) //up to 60 halloss
+
+		var/max_halloss = round(target.species.total_health * 0.8) //up to 80% of passing out
+		affecting.adjustHalLoss(Clamp(0, max_halloss - affecting.halloss, 30))
 
 /obj/item/weapon/grab/proc/attack_eye(mob/living/carbon/human/target, mob/living/carbon/human/attacker)
 	if(!istype(attacker))
@@ -86,18 +92,24 @@
 		return
 	if(target.lying)
 		return
-	attacker.visible_message("<span class='danger'>[attacker] thrusts \his head into [target]'s skull!</span>")
 
 	var/damage = 20
 	var/obj/item/clothing/hat = attacker.head
+	var/is_sharp = 0
 	if(istype(hat))
 		damage += hat.force * 3
+		is_sharp = hat.sharp
+
+	if(is_sharp)
+		attacker.visible_message("<span class='danger'>[attacker] gores [target][istype(hat)? " with \the [hat]" : ""]!</span>")
+	else
+		attacker.visible_message("<span class='danger'>[attacker] thrusts \his head into [target]'s skull!</span>")
 
 	var/armor = target.run_armor_check("head", "melee")
-	target.apply_damage(damage, BRUTE, "head", armor)
+	target.apply_damage(damage, BRUTE, "head", armor, sharp=is_sharp)
 	attacker.apply_damage(10, BRUTE, "head", attacker.run_armor_check("head", "melee"))
 
-	if(!armor && target.headcheck("head") && prob(damage))
+	if(armor < 50 && target.headcheck("head") && prob(damage))
 		target.apply_effect(20, PARALYZE)
 		target.visible_message("<span class='danger'>[target] [target.species.knockout_message]</span>")
 
@@ -125,6 +137,10 @@
 		return
 	if(force_down)
 		attacker << "<span class='warning'>You are already pinning [target] to the ground.</span>"
+		return
+	if(size_difference(affecting, assailant) > 0)
+		attacker << "<span class='warning'>You are too small to do that!</span>"
+		return
 
 	attacker.visible_message("<span class='danger'>[attacker] starts forcing [target] to the ground!</span>")
 	if(do_after(attacker, 20, progress=0) && target)
@@ -139,30 +155,3 @@
 	step_to(attacker, target)
 	attacker.set_dir(EAST) //face the victim
 	target.set_dir(SOUTH) //face up
-
-/obj/item/weapon/grab/proc/devour(mob/target, mob/user)
-	var/can_eat
-	if((FAT in user.mutations) && issmall(target))
-		can_eat = 1
-	else
-		var/mob/living/carbon/human/H = user
-		if(istype(H) && H.species.gluttonous && (iscarbon(target) || isanimal(target)))
-			if(H.species.gluttonous == GLUT_TINY && (target.mob_size <= MOB_TINY) && !ishuman(target)) // Anything MOB_TINY or smaller
-				can_eat = 1
-			else if(H.species.gluttonous == GLUT_SMALLER && (H.mob_size > target.mob_size)) // Anything we're larger than
-				can_eat = 1
-			else if(H.species.gluttonous == GLUT_ANYTHING) // Eat anything ever
-				can_eat = 2
-
-	if(can_eat)
-		var/mob/living/carbon/attacker = user
-		user.visible_message("<span class='danger'>[user] is attempting to devour [target]!</span>")
-		if(can_eat == 2)
-			if(!do_mob(user, target, 30)) return
-		else
-			if(!do_mob(user, target, 100)) return
-		user.visible_message("<span class='danger'>[user] devours [target]!</span>")
-		admin_attack_log(attacker, target, "Devoured.", "Was devoured by.", "devoured")
-		target.loc = user
-		attacker.stomach_contents.Add(target)
-		qdel(src)

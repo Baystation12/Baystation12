@@ -281,13 +281,13 @@
 
 /obj/item/clothing/glasses/thermal/plain/eyepatch
 	name = "Optical Thermal Eyepatch"
-	desc = "An eyepatch with built-in thermal optics"
+	desc = "An eyepatch with built-in thermal optics."
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
 	body_parts_covered = 0
 
 /obj/item/clothing/glasses/thermal/plain/jensen
 	name = "Optical Thermal Implants"
-	desc = "A set of implantable lenses designed to augment your vision"
+	desc = "A set of implantable lenses designed to augment your vision."
 	icon_state = "thermalimplants"
 	item_state = "syringe_kit"

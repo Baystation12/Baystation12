@@ -198,7 +198,7 @@
 					status += "hurts when touched"
 				if(org.status & ORGAN_DEAD)
 					status += "is bruised and necrotic"
-				if(!org.is_usable())
+				if(!org.is_usable() || org.is_dislocated())
 					status += "dangling uselessly"
 				if(status.len)
 					src.show_message("My [org.name] is <span class='warning'> [english_list(status)].</span>",1)
@@ -273,6 +273,10 @@
 /mob/living/carbon/proc/eyecheck()
 	return 0
 
+/mob/living/carbon/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	if(eyecheck() < intensity || override_blindness_check)
+		return ..()
+
 // ++++ROCKDTBEN++++ MOB PROCS -- Ask me before touching.
 // Stop! ... Hammertime! ~Carn
 
@@ -313,14 +317,19 @@
 
 	if(!item) return
 
+	var/throw_range = item.throw_range
 	if (istype(item, /obj/item/weapon/grab))
 		var/obj/item/weapon/grab/G = item
 		item = G.throw_held() //throw the person instead of the grab
 		if(ismob(item))
+			var/mob/M = item
+
+			//limit throw range by relative mob size
+			throw_range = round(M.throw_range * min(src.mob_size/M.mob_size, 1))
+
 			var/turf/start_T = get_turf(loc) //Get the start and target tile for the descriptors
 			var/turf/end_T = get_turf(target)
 			if(start_T && end_T)
-				var/mob/M = item
 				var/start_T_descriptor = "<font color='#6b5d00'>tile at [start_T.x], [start_T.y], [start_T.z] in area [get_area(start_T)]</font>"
 				var/end_T_descriptor = "<font color='#6b4400'>tile at [end_T.x], [end_T.y], [end_T.z] in area [get_area(end_T)]</font>"
 
@@ -328,31 +337,29 @@
 				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Has thrown [M.name] ([M.ckey]) from [start_T_descriptor] with the target [end_T_descriptor]</font>")
 				msg_admin_attack("[usr.name] ([usr.ckey]) has thrown [M.name] ([M.ckey]) from [start_T_descriptor] with the target [end_T_descriptor] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>)")
 
-	if(!item) return //Grab processing has a chance of returning null
-
-
-	src.remove_from_mob(item)
-	item.loc = src.loc
+	src.drop_from_inventory(item)
+	if(!item || !isturf(item.loc))
+		return
 
 	//actually throw it!
 	if (item)
 		src.visible_message("<span class='warning'>\The [src] has thrown \the [item].</span>")
 
-		if(!src.lastarea)
-			src.lastarea = get_area(src.loc)
-		if((istype(src.loc, /turf/space)) || (src.lastarea.has_gravity == 0))
-			src.inertia_dir = get_dir(target, src)
-			step(src, inertia_dir)
+	if(!src.lastarea)
+		src.lastarea = get_area(src.loc)
+	if((istype(src.loc, /turf/space)) || (src.lastarea.has_gravity == 0))
+		src.inertia_dir = get_dir(target, src)
+		step(src, inertia_dir)
 
 
 /*
-		if(istype(src.loc, /turf/space) || (src.flags & NOGRAV)) //they're in space, move em one space in the opposite direction
-			src.inertia_dir = get_dir(target, src)
-			step(src, inertia_dir)
+	if(istype(src.loc, /turf/space) || (src.flags & NOGRAV)) //they're in space, move em one space in the opposite direction
+		src.inertia_dir = get_dir(target, src)
+		step(src, inertia_dir)
 */
 
 
-		item.throw_at(target, item.throw_range, item.throw_speed, src)
+	item.throw_at(target, throw_range, item.throw_speed, src)
 
 /mob/living/carbon/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	..()
@@ -405,9 +412,6 @@
 	if(istype(AM, /mob/living/carbon) && prob(10))
 		src.spread_disease_to(AM, "Contact")
 
-/mob/living/carbon/cannot_use_vents()
-	return
-
 /mob/living/carbon/slip(var/slipped_on,stun_duration=8)
 	if(buckled)
 		return 0
@@ -449,3 +453,12 @@
 	user << browse(dat, text("window=mob[];size=325x500", name))
 	onclose(user, "mob[name]")
 	return
+
+/**
+ *  Return FALSE if victim can't be devoured, DEVOUR_FAST if they can be devoured quickly, DEVOUR_SLOW for slow devour
+ */
+/mob/living/carbon/proc/can_devour(mob/victim)
+	if((FAT in mutations) && issmall(victim))
+		return DEVOUR_FAST
+
+	return FALSE

@@ -12,12 +12,12 @@
 	wreckage = /obj/effect/decal/mecha_wreckage/hoverpod
 	cargo_capacity = 5
 	max_equip = 3
-	var/datum/effect/effect/system/ion_trail_follow/ion_trail
+	var/datum/effect/effect/system/trail/ion_trail
 	var/stabilization_enabled = 1
 
 /obj/mecha/working/hoverpod/New()
 	..()
-	ion_trail = new /datum/effect/effect/system/ion_trail_follow()
+	ion_trail = new /datum/effect/effect/system/trail/ion()
 	ion_trail.set_up(src)
 	ion_trail.start()
 
@@ -51,7 +51,7 @@
 			ion_trail.start()
 		if (stabilization_enabled)
 			return 1
-	
+
 	return ..()
 
 //these three procs overriden to play different sounds

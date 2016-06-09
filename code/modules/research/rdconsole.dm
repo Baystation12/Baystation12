@@ -115,6 +115,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 /obj/machinery/computer/rdconsole/initialize()
 	SyncRDevices()
+	..()
 
 /obj/machinery/computer/rdconsole/attackby(var/obj/item/weapon/D as obj, var/mob/user as mob)
 	//Loading a disk into it.
@@ -389,7 +390,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			PR.name = "list of researched technologies"
 			PR.info = "<center><b>[station_name()] Science Laboratories</b>"
 			PR.info += "<h2>[ (text2num(href_list["print"]) == 2) ? "Detailed" : ] Research Progress Report</h2>"
-			PR.info += "<i>report prepared at [worldtime2text()] station time</i></center><br>"
+			PR.info += "<i>report prepared at [stationtime2text()] station time</i></center><br>"
 			if(text2num(href_list["print"]) == 2)
 				PR.info += GetResearchListInfo()
 			else

@@ -7,7 +7,7 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	icon = 'icons/mob/screen1.dmi'
 	flags = 0
 	abstract = 1
-	w_class = 5.0
+	simulated = 0
 	icon_state = "spell"
 	var/next_spell_time = 0
 	var/spell/hand/hand_spell
@@ -18,6 +18,9 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	name = "[name] ([S.name])"
 	casts = S.casts
 	icon_state = S.hand_state
+
+/obj/item/magic_hand/get_storage_cost()
+	return DO_NOT_STORE
 
 /obj/item/magic_hand/attack() //can't be used to actually bludgeon things
 	return 1
@@ -51,6 +54,7 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	usr.drop_from_inventory(src)
 
 /obj/item/magic_hand/dropped() //gets deleted on drop
+	..()
 	loc = null
 	qdel(src)
 

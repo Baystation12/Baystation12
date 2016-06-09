@@ -53,9 +53,10 @@
 			if(COMPANY_OPPOSED)		loyalty = 0.70
 
 	//give them an account in the station database
-	var/species_modifier = (H.species ? economic_species_modifier[H.species.type] : 2)
-	if(!species_modifier)
-		species_modifier = economic_species_modifier[/datum/species/human]
+	if(!(H.species && (H.species.type in economic_species_modifier)))
+		return //some bizarre species like shadow, slime, or monkey? You don't get an account.
+
+	var/species_modifier = economic_species_modifier[H.species.type]
 
 	var/money_amount = (rand(5,50) + rand(5, 50)) * loyalty * economic_modifier * species_modifier
 	var/datum/money_account/M = create_account(H.real_name, money_amount, null)
@@ -63,7 +64,7 @@
 		var/remembered_info = ""
 		remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"
 		remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
-		remembered_info += "<b>Your account funds are:</b> $[M.money]<br>"
+		remembered_info += "<b>Your account funds are:</b> þ[M.money]<br>"
 
 		if(M.transaction_log.len)
 			var/datum/transaction/T = M.transaction_log[1]
@@ -75,8 +76,8 @@
 	H << "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>"
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/del()
-/datum/job/proc/equip_preview(mob/living/carbon/human/H)
-	return equip(H)
+/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title)
+	. = equip(H, alt_title)
 
 /datum/job/proc/get_access()
 	if(!config || config.jobs_have_minimal_access)
@@ -108,3 +109,6 @@
 
 /datum/job/proc/is_position_available()
 	return (current_positions < total_positions) || (total_positions == -1)
+
+/datum/job/proc/has_alt_title(var/mob/H, var/supplied_title, var/desired_title)
+	return (supplied_title == desired_title) || (H.mind && H.mind.role_alt_title == desired_title)

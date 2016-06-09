@@ -100,11 +100,11 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "syndballoon"
 	item_state = "syndballoon"
-	w_class = 4.0
+	w_class = 5
 
 /obj/item/toy/nanotrasenballoon
 	name = "criminal balloon"
-	desc = "Across the balloon the following is printed: \"Man, I love NanoTrasen soooo much. I use only NT products. You have NO idea.\""
+	desc = "Across the balloon the following is printed: \"Man, I love NanoTrasen soooo much. I use only NT products. You have NO idea.\"."
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
@@ -112,7 +112,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "ntballoon"
 	item_state = "ntballoon"
-	w_class = 4.0
+	w_class = 5
 
 /*
  * Fake telebeacon
@@ -272,7 +272,7 @@
 			playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 			src.icon_state = "swordblue"
 			src.item_state = "swordblue"
-			src.w_class = 4
+			src.w_class = 5
 		else
 			user << "<span class='notice'>You push the plastic blade back down into the handle.</span>"
 			playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
@@ -298,7 +298,7 @@
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 5
 	throwforce = 5
-	w_class = 3
+	w_class = 4
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
 
 /*
@@ -700,19 +700,6 @@
 	desc = "A \"Space Life\" brand Emergency Response Team Commander action figure."
 	icon_state = "ert"
 
-/obj/item/toy/katana
-	name = "replica katana"
-	desc = "Woefully underpowered in D20."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "katana"
-	item_state = "katana"
-	flags = CONDUCT
-	slot_flags = SLOT_BELT | SLOT_BACK
-	force = 5
-	throwforce = 5
-	w_class = 3
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
-
 /obj/item/toy/therapy_red
 	name = "red therapy doll"
 	desc = "A toy for therapeutic and recreational purposes. This one is red."
@@ -864,7 +851,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "cultblade"
 	item_state = "cultblade"
-	w_class = 4
+	w_class = 5
 	attack_verb = list("attacked", "slashed", "stabbed", "poked")
 
 /* NYET.
@@ -873,7 +860,7 @@
 	name = "toddler"
 	desc = "This baby looks almost real. Wait, did it just burp?"
 	force = 5
-	w_class = 4.0
+	w_class = 5
 	slot_flags = SLOT_BACK
 */
 

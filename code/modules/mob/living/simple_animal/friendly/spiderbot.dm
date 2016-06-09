@@ -227,7 +227,7 @@
 			"You hear a skittering noise and a thump!")
 		var/obj/item/weapon/grenade/G = held_item
 		G.loc = src.loc
-		G.prime()
+		G.detonate()
 		held_item = null
 		return 1
 
@@ -255,7 +255,7 @@
 
 	var/list/items = list()
 	for(var/obj/item/I in view(1,src))
-		if(I.loc != src && I.w_class <= 2 && I.Adjacent(src) )
+		if(I.loc != src && I.w_class <= SMALL_ITEM && I.Adjacent(src) )
 			items.Add(I)
 
 	var/obj/selection = input("Select an item.", "Pickup") in items
@@ -279,9 +279,5 @@
 	..(user)
 	if(src.held_item)
 		user << "It is carrying \icon[src.held_item] \a [src.held_item]."
-
-/mob/living/simple_animal/spiderbot/cannot_use_vents()
-	return
-
 /mob/living/simple_animal/spiderbot/binarycheck()
 	return positronic

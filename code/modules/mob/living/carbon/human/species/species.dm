@@ -155,7 +155,7 @@
 		"r_foot" = list("path" = /obj/item/organ/external/foot/right)
 		)
 
-	var/list/genders = list(MALE, FEMALE, PLURAL)
+	var/list/genders = list(MALE, FEMALE)
 
 	// Bump vars
 	var/bump_flag = HUMAN	// What are we considered to be when bumped?
@@ -180,9 +180,6 @@
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
-
-/datum/species/proc/get_station_variant()
-	return name
 
 /datum/species/proc/get_bodytype()
 	return name
@@ -359,19 +356,21 @@
 	if(H.equipment_tint_total >= TINT_BLIND)
 		H.eye_blind = max(H.eye_blind, 1)
 
-	if(H.blind)
-		H.blind.layer = (H.eye_blind ? 18 : 0)
-
 	if(!H.client)//no client, no screen to update
 		return 1
 
+	H.set_fullscreen(H.eye_blind && !H.equipment_prescription, "blind", /obj/screen/fullscreen/blind)
+
 	if(config.welder_vision)
 		if(short_sighted || (H.equipment_tint_total >= TINT_HEAVY))
-			H.client.screen += global_hud.darkMask
+			H.overlay_fullscreen("impaired", /obj/screen/fullscreen/impaired, 2)
 		else if((!H.equipment_prescription && (H.disabilities & NEARSIGHTED)) || H.equipment_tint_total == TINT_MODERATE)
-			H.client.screen += global_hud.vimpaired
-	if(H.eye_blurry)	H.client.screen += global_hud.blurry
-	if(H.druggy)		H.client.screen += global_hud.druggy
+			H.overlay_fullscreen("impaired", /obj/screen/fullscreen/impaired, 1)
+		else
+			H.clear_fullscreen("impaired")
+
+	H.set_fullscreen(H.eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
+	H.set_fullscreen(H.druggy, "high", /obj/screen/fullscreen/high)
 
 	for(var/overlay in H.equipment_overlays)
 		H.client.screen |= overlay

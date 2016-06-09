@@ -28,12 +28,13 @@
 	var/overdose = 0
 	var/scannable = 0 // Shows up on health analyzers.
 	var/affects_dead = 0
-	var/glass_icon_state = null
-	var/glass_name = null
-	var/glass_desc = null
-	var/glass_center_of_mass = null
 	var/color = "#000000"
 	var/color_weight = 1
+
+	var/glass_icon = DRINK_ICON_DEFAULT
+	var/glass_name = "something"
+	var/glass_desc = "It's a glass of... what, exactly?"
+	var/list/glass_special = null // null equivalent to list()
 
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
 	holder.remove_reagent(id, amount)

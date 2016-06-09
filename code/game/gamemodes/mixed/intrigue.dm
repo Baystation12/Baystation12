@@ -6,9 +6,8 @@
 	required_enemies = 4
 	end_on_antag_death = 0
 	antag_tags = list(MODE_NINJA, MODE_TRAITOR)
-	round_autoantag = 1
 	require_all_templates = 1
-	latejoin_antags = list(MODE_TRAITOR)
+	latejoin_antag_tags = list(MODE_TRAITOR)
 
 /datum/game_mode/intrigue/New()
 	..()

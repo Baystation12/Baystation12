@@ -18,6 +18,8 @@
 "r" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{tag = "icon-map_scrubber_on (NORTH)"; icon_state = "map_scrubber_on"; dir = 1},/turf/simulated/floor/tiled,/area/constructionsite)
 "s" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/tiled,/area/constructionsite)
 "t" = (/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/tiled,/area/constructionsite)
+"u" = (/obj/machinery/light_switch{pixel_x = -25},/turf/simulated/floor/tiled,/area/constructionsite)
+"v" = (/obj/machinery/light_switch{pixel_x = 25},/turf/simulated/floor/tiled,/area/constructionsite)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -32,13 +34,13 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaabbbbbbbbbbbbbbbaaaaaaaa
 aaaaaaaaabcccdcccccdcccbaaaaaaaa
 aaaaaaaaabclllcccccccccbaaaaaaaa
-aaaaaaaaabclllcccccccccbaaaaaaaa
+aaaaaaaaabclllccccccccvbaaaaaaaa
 aaaaaaaaabelllccccccccfbaaaaaaaa
 aaaaaaaaabccccccccccsccbaaaaaaaa
 aaaaaaaaabccccccccccmonbaaaaaaaa
 aaaaaaaaabccccccgccccccbaaaaaaaa
 aaaaaaaaabccccccccccpoqbaaaaaaaa
-aaaaaaaaabccccccccccrccbaaaaaaaa
+aaaaaaaaabucccccccccrccbaaaaaaaa
 aaaaaaaaabectttcccccccfbaaaaaaaa
 aaaaaaaaabhctttccccccccbaaaaaaaa
 aaaaaaaaabictttccccccccbaaaaaaaa

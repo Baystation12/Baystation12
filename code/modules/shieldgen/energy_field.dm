@@ -18,6 +18,7 @@
 	update_nearby_tiles()
 
 /obj/effect/energy_field/Destroy()
+	density = 0
 	update_nearby_tiles()
 	..()
 

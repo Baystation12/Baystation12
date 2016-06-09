@@ -49,10 +49,6 @@
 	idcard = new idcard_type(src)
 	set_id_info(idcard)
 
-/mob/living/silicon/proc/SetName(pickedName as text)
-	real_name = pickedName
-	name = real_name
-
 /mob/living/silicon/proc/show_laws()
 	return
 
@@ -67,7 +63,7 @@
 		if(2)
 			src.take_organ_damage(0,10,emp=1)
 			confused = (min(confused + 2, 30))
-	flick("noise", src.flash)
+	flash_eyes(affect_silicon = 1)
 	src << "<span class='danger'><B>*BZZZT*</B></span>"
 	src << "<span class='danger'>Warning: Electromagnetic pulse detected.</span>"
 	..()
@@ -106,9 +102,9 @@
 			if(BURN)
 				adjustFireLoss(Proj.damage)
 
-	Proj.on_hit(src,2)
+	Proj.on_hit(src,100) //wow this is a terrible hack
 	updatehealth()
-	return 2
+	return 100
 
 /mob/living/silicon/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
 	return 0//The only effect that can hit them atm is flashes and they still directly edit so this works for now
@@ -179,9 +175,8 @@
 	onclose(src, "airoster")
 
 //can't inject synths
-/mob/living/silicon/can_inject(var/mob/user, var/error_msg)
-	if(error_msg)
-		user << "<span class='alert'>The armoured plating is too tough.</span>"
+/mob/living/silicon/can_inject(var/mob/user, var/target_zone)
+	user << "<span class='warning'>The armoured plating is too tough.</span>"
 	return 0
 
 
@@ -264,22 +259,28 @@
 
 /mob/living/silicon/ex_act(severity)
 	if(!blinded)
-		flick("flash", flash)
+		flash_eyes()
 
+	var/brute
+	var/burn
 	switch(severity)
 		if(1.0)
-			if (stat != 2)
-				adjustBruteLoss(100)
-				adjustFireLoss(100)
-				if(!anchored)
-					gib()
+			brute = 400
+			burn = 100
+			if(!anchored && !prob(getarmor(null, "bomb")))
+				gib()
 		if(2.0)
-			if (stat != 2)
-				adjustBruteLoss(60)
-				adjustFireLoss(60)
+			brute = 60
+			burn = 60
 		if(3.0)
-			if (stat != 2)
-				adjustBruteLoss(30)
+			brute = 30
+
+	var/protection = blocked_mult(getarmor(null, "bomb"))
+	brute *= protection
+	burn *= protection
+
+	adjustBruteLoss(brute)
+	adjustFireLoss(burn)
 
 	updatehealth()
 
@@ -361,3 +362,22 @@
 	..()
 	if(cameraFollow)
 		cameraFollow = null
+
+/mob/living/silicon/proc/clear_client()
+	//Handle job slot/tater cleanup.
+	var/job = mind.assigned_role
+
+	job_master.FreeRole(job)
+
+	if(mind.objectives.len)
+		qdel(mind.objectives)
+		mind.special_role = null
+
+	clear_antag_roles(mind)
+
+	ghostize(0)
+	qdel(src)
+
+/mob/living/silicon/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	if(affect_silicon)
+		return ..()

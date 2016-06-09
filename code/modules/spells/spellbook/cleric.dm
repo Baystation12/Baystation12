@@ -9,7 +9,7 @@
 	book_desc = "All about healing. Mobility and offense comes at a higher price but not impossible."
 	title = "Cleric's Tome of Healing"
 	title_desc = "Buy spells using your available spell slots. Artefacts may also be bought however their cost is permanent."
-	book_flags = 4
+	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE
 	max_uses = 6
 
 	spells = list(/spell/targeted/heal_target = 					1,
@@ -29,3 +29,7 @@
 				/obj/item/weapon/gun/energy/staff/focus = 			2,
 				/obj/item/weapon/contract/apprentice = 				1
 				)
+
+	sacrifice_reagents = list("peridaxon",
+							"adminordrazine")
+	sacrifice_objects = list(/obj/item/seeds/mtearseed)

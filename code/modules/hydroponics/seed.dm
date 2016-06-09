@@ -329,31 +329,62 @@
 		var/outer_teleport_radius = get_trait(TRAIT_POTENCY)/5
 		var/inner_teleport_radius = get_trait(TRAIT_POTENCY)/15
 
-		var/list/turfs = list()
-		if(inner_teleport_radius > 0)
-			for(var/turf/T in orange(target,outer_teleport_radius))
-				if(get_dist(target,T) >= inner_teleport_radius)
-					turfs |= T
-
-		if(turfs.len)
-			// Moves the mob, causes sparks.
+		var/turf/T = get_random_turf_in_range(target, outer_teleport_radius, inner_teleport_radius)
+		if(T)
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, get_turf(target))
 			s.start()
 			var/turf/picked = get_turf(pick(turfs))                      // Just in case...
 			new/obj/effect/decal/cleanable/molten_item(get_turf(target)) // Leave a pile of goo behind for dramatic effect...
-			target.loc = picked                                          // And teleport them to the chosen location.
-
+			target.forceMove(picked)                                     // And teleport them to the chosen location.
 			impact = 1
 
 	return impact
+
+/datum/seed/proc/generate_name()
+	var/prefix = ""
+	var/name = ""
+	if(prob(50)) //start with a prefix.
+		//These are various plant/mushroom genuses.
+		//I realize these might not be entirely accurate, but it could facilitate RP.
+		var/list/possible_prefixes
+		if(seed_noun == "cuttings" || seed_noun == "seeds" || (seed_noun == "nodes" && prob(50)))
+			possible_prefixes = list("amelanchier", "saskatoon",
+										"magnolia", "angiosperma", "osmunda", "scabiosa", "spigelia", "psydrax", "chastetree",
+										"strychnos", "treebine", "caper", "justica", "ragwortus", "everlasting", "combretum",
+										"loganiaceae", "gelsemium", "logania", "sabadilla", "neuburgia", "canthium", "rytigynia",
+										"chaste", "vitex", "cissus", "capparis", "senecio", "curry", "cycad", "liverwort", "charophyta",
+										"glaucophyte", "pinidae", "vascular", "embryophyte", "lillopsida")
+		else
+			possible_prefixes = list("bisporus", "bitorquis", "campestris", "crocodilinus", "agaricus",
+									"armillaria", "matsutake", "mellea", "ponderosa", "auricularia", "auricala",
+									"polytricha", "boletus", "badius", "edulis", "mirabilis", "zelleri",
+									"calvatia", "gigantea", "clitopilis", "prumulus", "entoloma", "abortivum",
+									"suillus", "tuber", "aestivum", "volvacea", "delica", "russula", "rozites")
+
+		possible_prefixes |= list("butter", "shad", "sugar", "june", "wild", "rigus", "curry", "hard", "soft", "dark", "brick", "stone", "red", "brown",
+								"black", "white", "paper", "slippery", "honey", "bitter")
+		prefix = pick(possible_prefixes)
+
+	var/num = rand(2,5)
+	var/list/possible_name = list("rhon", "cus", "quam", "met", "eget", "was", "reg", "zor", "fra", "rat", "sho", "ghen", "pa",
+								"eir", "lip", "sum", "lor", "em", "tem", "por", "invi", "dunt", "ut", "la", "bore", "mag", "na",
+								"al", "i", "qu", "yam", "er", "at", "sed", "di", "am", "vol", "up", "tua", "at", "ve", "ro", "eos",
+								"et", "ac", "cus")
+	for(var/i in 1 to num)
+		var/syl = pick(possible_name)
+		possible_name -= syl
+		name += syl
+
+	if(prefix)
+		name = "[prefix] [name]"
+	seed_name = name
+	display_name = name
 
 //Creates a random seed. MAKE SURE THE LINE HAS DIVERGED BEFORE THIS IS CALLED.
 /datum/seed/proc/randomize()
 
 	roundstart = 0
-	seed_name = "strange plant"     // TODO: name generator.
-	display_name = "strange plants" // TODO: name generator.
 	mysterious = 1
 	seed_noun = pick("spores","nodes","cuttings","seeds")
 
@@ -401,51 +432,17 @@
 	var/additional_chems = rand(0,5)
 
 	if(additional_chems)
-		var/list/possible_chems = list(
-			"woodpulp",
-			"bicaridine",
-			"hyperzine",
-			"cryoxadone",
-			"blood",
-			"water",
-			"potassium",
-			"plasticide",
-			"mutationtoxin",
-			"amutationtoxin",
-			"inaprovaline",
-			"space_drugs",
-			"paroxetine",
-			"mercury",
-			"sugar",
-			"radium",
-			"ryetalyn",
-			"alkysine",
-			"thermite",
-			"tramadol",
-			"cryptobiolin",
-			"dermaline",
-			"dexalin",
-			"phoron",
-			"synaptizine",
-			"impedrezene",
-			"hyronalin",
-			"peridaxon",
-			"toxin",
-			"rezadone",
-			"ethylredoxrazine",
-			"slimejelly",
-			"cyanide",
-			"mindbreaker",
-			"stoxin",
-			"acetone",
-			"hydrazine"
+		var/list/banned_chems = list(
+			"adminordrazine",
+			"nutriment",
+			"nanites"
 			)
 
 		for(var/x=1;x<=additional_chems;x++)
-			if(!possible_chems.len)
-				break
-			var/new_chem = pick(possible_chems)
-			possible_chems -= new_chem
+			var/new_chem = pick(chemical_reagents_list)
+			if(new_chem in banned_chems)
+				continue
+			banned_chems += new_chem
 			chems[new_chem] = list(rand(1,10),rand(10,20))
 
 	if(prob(90))
@@ -499,6 +496,8 @@
 	set_trait(TRAIT_YIELD,rand(3,15))
 	set_trait(TRAIT_MATURATION,rand(5,15))
 	set_trait(TRAIT_PRODUCTION,get_trait(TRAIT_MATURATION)+rand(2,5))
+
+	generate_name()
 
 //Returns a key corresponding to an entry in the global seed list.
 /datum/seed/proc/get_mutant_variant()

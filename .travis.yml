@@ -5,7 +5,7 @@ env:
   global:
     BYOND_MAJOR="509"
     BYOND_MINOR="1318"
-    MACRO_COUNT=984
+    MACRO_COUNT=938
     NODE_VERSION="4"
 
 # ALL MAPS MUST BE PRESENT HERE
@@ -47,7 +47,7 @@ script:
   - (num=`grep -E '\\\\(red|blue|green|black|b|i[^mc])' **/*.dm | wc -l`; echo "$num escapes (expecting ${MACRO_COUNT} or less)"; [ $num -le ${MACRO_COUNT} ])
   - (num=`grep -E '\WDel\(' **/*.dm | wc -l`; echo "$num Del()s (expecting 4 or less)"; [ $num -le 4 ])
   - (num=`grep -E '"/atom' **/*.dm | wc -l`; echo "$num /atom text paths (expecting 2 or less)"; [ $num -le 2 ])
-  - (num=`grep -E '"/area' **/*.dm | wc -l`; echo "$num /area text paths (expecting 3 or less)"; [ $num -le 3 ])
+  - (num=`grep -E '"/area' **/*.dm | wc -l`; echo "$num /area text paths (expecting 2 or less)"; [ $num -le 2 ])
   - (num=`grep -E '"/datum' **/*.dm | wc -l`; echo "$num /datum text paths (expecting 2 or less)"; [ $num -le 2 ])
   - (num=`grep -E '"/mob' **/*.dm | wc -l`; echo "$num /mob text paths (expecting 2 or less)"; [ $num -le 2 ])
   - (num=`grep -E '"/obj' **/*.dm | wc -l`; echo "$num /obj text paths (expecting 13 or less)"; [ $num -le 13 ])
@@ -57,6 +57,7 @@ script:
   - md5sum -c - <<< "0af969f671fba6cf9696c78cd175a14a *baystation12.int"
   - md5sum -c - <<< "88490b460c26947f5ec1ab1bb9fa9f17 *html/changelogs/example.yml"
   - python tools/TagMatcher/tag-matcher.py ../..
+  - python tools/PunctuationChecker/punctuation-checker.py ../..
   - python tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs
   - cd tgui && gulp
   - cd ..
@@ -68,3 +69,5 @@ script:
   - grep "All Unit Tests Passed" log.txt
   - (! grep "runtime error:" log.txt)
   - (! grep 'Process scheduler caught exception processing' log.txt)
+  - (! grep "WARNING:" log.txt)
+  - (! grep "ERROR:" log.txt)

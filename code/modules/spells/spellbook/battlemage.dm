@@ -7,7 +7,7 @@
 	book_desc = "Mix physical with the mystical in head to head combat."
 	title = "The Art of Magical Combat"
 	title_desc = "Buy spells using your available spell slots. Artefacts may also be bought however their cost is permanent."
-	book_flags = 4
+	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE
 	max_uses = 5
 
 	spells = list(/spell/targeted/projectile/dumbfire/passage = 	1,
@@ -29,3 +29,5 @@
 				/obj/item/weapon/contract/apprentice = 				1
 					)
 
+	sacrifice_objects = list(/obj/item/weapon/material/sword,
+							/obj/item/weapon/material/twohanded/fireaxe)

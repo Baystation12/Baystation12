@@ -151,13 +151,7 @@
 
 
 			if( I != src && !I.anchored && !istype(I, /obj/item/clothing/under) && !istype(I, /obj/item/clothing/suit) && !istype(I, /obj/item/projectile) )
-				var/add = 0
-				if(I.w_class == 1.0)
-					add = 1
-				else if(I.w_class == 2.0)
-					add = 3
-				else
-					add = 5
+				var/add = I.get_storage_cost()
 				if(calc_carry() + add >= max_carry)
 					break
 
@@ -313,17 +307,23 @@
 
 /obj/item/weapon/inflatable_dispenser
 	name = "inflatables dispenser"
-	desc = "Small device which allows rapid deployment and removal of inflatables."
+	desc = "Hand-held device which allows rapid deployment and removal of inflatables."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "inf_deployer"
-	w_class = 3
+	w_class = 4
 
-	// By default stores up to 10 walls and 5 doors. May be changed.
-	var/stored_walls = 10
-	var/stored_doors = 5
-	var/max_walls = 10
-	var/max_doors = 5
+	var/stored_walls = 5
+	var/stored_doors = 2
+	var/max_walls = 5
+	var/max_doors = 2
 	var/mode = 0 // 0 - Walls   1 - Doors
+
+/obj/item/weapon/inflatable_dispenser/robot
+	w_class = 5
+	stored_walls = 10
+	stored_doors = 5
+	max_walls = 10
+	max_doors = 5
 
 /obj/item/weapon/inflatable_dispenser/examine(var/mob/user)
 	if(!..(user))

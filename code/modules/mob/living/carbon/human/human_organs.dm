@@ -9,14 +9,24 @@
 /mob/living/carbon/human/var/list/organs_by_name = list() // map organ names to organs
 /mob/living/carbon/human/var/list/internal_organs_by_name = list() // so internal organs have less ickiness too
 
+/mob/living/carbon/human/proc/get_bodypart_name(var/zone)
+	var/obj/item/organ/external/E = get_organ(zone)
+	if(E) . = E.name
+
+/mob/living/carbon/human/proc/recheck_bad_external_organs()
+	var/damage_this_tick = getToxLoss()
+	for(var/obj/item/organ/external/O in organs)
+		damage_this_tick += O.burn_dam + O.brute_dam
+	
+	if(damage_this_tick > last_dam)
+		. = TRUE
+	last_dam = damage_this_tick
+
 // Takes care of organ related updates, such as broken and missing limbs
 /mob/living/carbon/human/proc/handle_organs()
 
-	var/force_process = 0
-	var/damage_this_tick = getBruteLoss() + getFireLoss() + getToxLoss()
-	if(damage_this_tick > last_dam)
-		force_process = 1
-	last_dam = damage_this_tick
+	var/force_process = recheck_bad_external_organs()
+
 	if(force_process)
 		bad_external_organs.Cut()
 		for(var/obj/item/organ/external/Ex in organs)
@@ -57,7 +67,7 @@
 /mob/living/carbon/human/proc/handle_stance()
 	// Don't need to process any of this if they aren't standing anyways
 	// unless their stance is damaged, and we want to check if they should stay down
-	if (!stance_damage && (lying || resting) && (life_tick % 4) == 0)
+	if (!stance_damage && (lying || resting) && (life_tick % 4) != 0)
 		return
 
 	stance_damage = 0
@@ -68,7 +78,7 @@
 
 	for(var/limb_tag in list("l_leg","r_leg","l_foot","r_foot"))
 		var/obj/item/organ/external/E = organs_by_name[limb_tag]
-		if(!E || (E.status & (ORGAN_MUTATED|ORGAN_DEAD)) || E.is_stump()) //should just be !E.is_usable() here but dislocation screws that up.
+		if(!E || !E.is_usable())
 			stance_damage += 2 // let it fail even if just foot&leg
 		else if (E.is_malfunctioning())
 			//malfunctioning only happens intermittently so treat it as a missing limb when it procs
@@ -81,7 +91,7 @@
 				spark_system.start()
 				spawn(10)
 					qdel(spark_system)
-		else if (E.is_broken() || !E.is_usable())
+		else if (E.is_broken())
 			stance_damage += 1
 		else if (E.is_dislocated())
 			stance_damage += 0.5

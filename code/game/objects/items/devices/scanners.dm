@@ -75,7 +75,7 @@ REAGENT SCANNER
 			for(var/obj/item/organ/external/org in damaged)
 				user.show_message(text("<span class='notice'>     [][]: [][] - []</span>",
 				capitalize(org.name),
-				(org.status & ORGAN_ROBOT) ? "(Cybernetic)" : "",
+				(org.robotic >= ORGAN_ROBOT) ? "(Cybernetic)" : "",
 				(org.brute_dam > 0) ? "<span class='warning'>[org.brute_dam]</span>" : 0,
 				(org.status & ORGAN_BLEEDING)?"<span class='danger'>\[Bleeding\]</span>":"",
 				(org.burn_dam > 0) ? "<font color='#FFA500'>[org.burn_dam]</font>" : 0),1)

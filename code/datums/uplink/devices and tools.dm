@@ -86,3 +86,9 @@
 	name = "Hacked Supply Beacon (DANGER!)"
 	item_cost = 14
 	path = /obj/item/supply_beacon
+
+/datum/uplink_item/item/tools/camera_mask
+	name = "Camera MIU"
+	item_cost = 15
+	antag_costs = list(MODE_MERCENARY = 30)
+	path = /obj/item/clothing/mask/ai

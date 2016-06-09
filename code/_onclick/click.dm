@@ -111,7 +111,7 @@
 			setMoveCooldown(10) //getting something out of a backpack
 
 		if(W)
-			var/resolved = W.resolve_attackby(A, src)
+			var/resolved = W.resolve_attackby(A, src, params)
 			if(!resolved && A && W)
 				W.afterattack(A, src, 1, params) // 1 indicates adjacency
 		else
@@ -134,7 +134,7 @@
 
 			if(W)
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
-				var/resolved = W.resolve_attackby(A,src)
+				var/resolved = W.resolve_attackby(A,src, params)
 				if(!resolved && A && W)
 					W.afterattack(A, src, 1, params) // 1: clicking something Adjacent
 			else
@@ -211,6 +211,7 @@
 				setMoveCooldown(10)
 			else
 				return
+		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		A.attack_tk(src)
 /*
 	Restrained ClickOn
@@ -304,7 +305,7 @@
 	return
 
 /mob/living/LaserEyes(atom/A)
-	setClickCooldown(4)
+	setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	var/turf/T = get_turf(src)
 
 	var/obj/item/projectile/beam/LE = new (T)
@@ -338,11 +339,19 @@
 		facedir(direction)
 
 /obj/screen/click_catcher
-	icon = 'icons/mob/screen1_full.dmi'
-	icon_state = "passage0"
-	layer = 0
+	icon = 'icons/mob/screen_gen.dmi'
+	icon_state = "click_catcher"
+	plane = CLICKCATCHER_PLANE
 	mouse_opacity = 2
-	screen_loc = "1,1"
+	screen_loc = "CENTER-7,CENTER-7"
+
+/obj/screen/click_catcher/proc/MakeGreed()
+	. = list()
+	for(var/i = 0, i<15, i++)
+		for(var/j = 0, j<15, j++)
+			var/obj/screen/click_catcher/CC = new()
+			CC.screen_loc = "NORTH-[i],EAST-[j]"
+			. += CC
 
 /obj/screen/click_catcher/Click(location, control, params)
 	var/list/modifiers = params2list(params)
@@ -350,6 +359,7 @@
 		var/mob/living/carbon/C = usr
 		C.swap_hand()
 	else
-		var/turf/T = screen_loc2turf(modifiers["screen-loc"], get_turf(usr))
-		T.Click(location, control, params)
-	return 1
+		var/turf/T = screen_loc2turf(screen_loc, get_turf(usr))
+		if(T)
+			T.Click(location, control, params)
+	. = 1

@@ -4,7 +4,7 @@
 	blurb = "A race of feathered raptors who developed on a cold world, almost \
 	outside of the Goldilocks zone. Extremely fragile, they developed hunting skills \
 	that emphasized taking out their prey without themselves getting hit. They are an \
-	advanced post-scarcity culture on good terms with Skrellian and Human interests."
+	advanced culture on good terms with Skrellian and Human interests."
 
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_RESOMI)
@@ -84,33 +84,6 @@
 		/datum/unarmed_attack/claws,
 		/datum/unarmed_attack/stomp/weak
 		)
-
-	var/shock_cap = 30
-	var/hallucination_cap = 25
-
-// I'm... so... ronrery, so ronery...
-/datum/species/resomi/handle_environment_special(var/mob/living/carbon/human/H)
-
-	// If they're dead or unconcious they're a bit beyond this kind of thing.
-	if(H.stat)
-		return
-
-	// No point processing if we're already stressing the hell out.
-	if(H.hallucination >= hallucination_cap && H.shock_stage >= shock_cap)
-		return
-
-	// Check for company.
-	for(var/mob/living/M in viewers(H))
-		if(M == H || M.stat == DEAD || M.invisibility > H.see_invisible)
-			continue
-		if(M.faction == "neutral" || M.faction == H.faction)
-			return
-
-	// No company? Suffer :(
-	if(H.shock_stage < shock_cap)
-		H.shock_stage += 1
-	if(H.shock_stage >= shock_cap && H.hallucination < hallucination_cap)
-		H.hallucination += 2.5
 
 /datum/species/resomi/get_vision_flags(var/mob/living/carbon/human/H)
 	if(!(H.sdisabilities & DEAF) && !H.ear_deaf)

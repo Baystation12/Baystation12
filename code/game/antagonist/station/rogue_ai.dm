@@ -20,6 +20,11 @@ var/datum/antagonist/rogue_ai/malf
 	..()
 	malf = src
 
+/datum/antagonist/rogue_ai/can_become_antag(var/datum/mind/player, var/ignore_role)
+	. = ..(player, ignore_role)
+	if(jobban_isbanned(player.current, "AI"))
+		return 0
+	return .
 
 /datum/antagonist/rogue_ai/build_candidate_list()
 	..()
@@ -95,6 +100,6 @@ var/datum/antagonist/rogue_ai/malf
 	// Choose a name, if any.
 	var/newname = sanitize(input(player, "You are a [role_text]. Would you like to change your name to something else?", "Name change") as null|text, MAX_NAME_LEN)
 	if (newname)
-		player.SetName(newname)
+		player.fully_replace_character_name(newname)
 	if(player.mind) player.mind.name = player.name
 

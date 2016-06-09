@@ -14,7 +14,7 @@
 	flags = CONDUCT
 	matter = list(DEFAULT_WALL_MATERIAL = 3000)
 	var/list/carrying = list() // List of things on the tray. - Doohl
-	var/max_carry = 10
+	var/max_carry = 2*base_storage_cost(NORMAL_ITEM)
 
 /obj/item/weapon/tray/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 
@@ -156,18 +156,9 @@
 ===============~~~~~================================~~~~~====================
 */
 /obj/item/weapon/tray/proc/calc_carry()
-	// calculate the weight of the items on the tray
-	var/val = 0 // value to return
-
+	. = 0
 	for(var/obj/item/I in carrying)
-		if(I.w_class == 1.0)
-			val ++
-		else if(I.w_class == 2.0)
-			val += 3
-		else
-			val += 5
-
-	return val
+		. += I.get_storage_cost()
 
 /obj/item/weapon/tray/pickup(mob/user)
 
@@ -176,13 +167,7 @@
 
 	for(var/obj/item/I in loc)
 		if( I != src && !I.anchored && !istype(I, /obj/item/clothing/under) && !istype(I, /obj/item/clothing/suit) && !istype(I, /obj/item/projectile) )
-			var/add = 0
-			if(I.w_class == 1.0)
-				add = 1
-			else if(I.w_class == 2.0)
-				add = 3
-			else
-				add = 5
+			var/add = I.get_storage_cost()
 			if(calc_carry() + add >= max_carry)
 				break
 
@@ -191,6 +176,7 @@
 			overlays += image("icon" = I.icon, "icon_state" = I.icon_state, "layer" = 30 + I.layer, "pixel_x" = I.pixel_x, "pixel_y" = I.pixel_y)
 
 /obj/item/weapon/tray/dropped(mob/user)
+	..()
 	spawn(1) //why sleep 1? Because forceMove first drops us on the ground.
 		if(!isturf(loc)) //to handle hand switching
 			return

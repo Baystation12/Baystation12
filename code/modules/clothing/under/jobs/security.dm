@@ -75,12 +75,13 @@
  */
 /obj/item/clothing/under/det
 	name = "detective's suit"
-	desc = "A rumpled white dress shirt paired with well-worn grey slacks, complete with a blue striped tie and a faux-gold tie clip."
+	desc = "A rumpled white dress shirt paired with well-worn grey slacks."
 	icon_state = "detective"
 	item_state = "det"
 	worn_state = "detective"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	starting_accessories = list(/obj/item/clothing/accessory/blue_clip)
 
 /obj/item/clothing/under/det/verb/rollup()
 	set name = "Roll Suit Sleeves"
@@ -95,13 +96,15 @@
 /obj/item/clothing/under/det/grey
 	icon_state = "detective2"
 	worn_state = "detective2"
-	desc = "A serious-looking tan dress shirt paired with freshly-pressed black slacks, complete with a red striped tie."
+	desc = "A serious-looking tan dress shirt paired with freshly-pressed black slacks."
+	starting_accessories = list(/obj/item/clothing/accessory/red_long)
 
 /obj/item/clothing/under/det/black
 	icon_state = "detective3"
 	worn_state = "detective3"
 	item_state = "sl_suit"
 	desc = "An immaculate white dress shirt, paired with a pair of dark grey dress pants, a red tie, and a charcoal vest."
+	starting_accessories = list(/obj/item/clothing/accessory/red_long, /obj/item/clothing/accessory/vest)
 
 /obj/item/clothing/head/det
 	name = "fedora"

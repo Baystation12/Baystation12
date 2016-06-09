@@ -165,7 +165,7 @@
 /obj/machinery/mining/drill/attack_hand(mob/user as mob)
 	check_supports()
 
-	if (panel_open && cell)
+	if (panel_open && cell && user.Adjacent(src))
 		user << "You take out \the [cell]."
 		cell.loc = get_turf(user)
 		component_parts -= cell

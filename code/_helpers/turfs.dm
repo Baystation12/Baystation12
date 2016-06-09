@@ -10,7 +10,7 @@
 	return (istype(T, /turf/simulated/wall) || istype(T, /turf/unsimulated/wall) || istype(T, /turf/simulated/shuttle/wall))
 
 /proc/isfloor(turf/T)
-	return (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor) || istype(T, /turf/simulated/shuttle/floor))
+	return (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
 
 /proc/turf_clear(turf/T)
 	for(var/atom/A in T)
@@ -41,3 +41,14 @@
 
 /proc/is_station_turf(var/turf/T)
 	return T && isStationLevel(T.z)
+
+/proc/get_random_turf_in_range(var/atom/origin, var/outer_range, var/inner_range)
+	origin = get_turf(origin)
+	if(!origin)
+		return
+	var/list/turfs = list()
+	for(var/turf/T in orange(origin, outer_range))
+		if(get_dist(origin, T) >= inner_range)
+			turfs += T
+	if(turfs.len)
+		return pick(turfs)

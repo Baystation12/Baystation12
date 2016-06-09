@@ -4,7 +4,7 @@
 	icon_state = "pneumatic"
 	item_state = "pneumatic"
 	slot_flags = SLOT_BELT
-	w_class = 5.0
+	w_class = 5
 	flags =  CONDUCT
 	fire_sound_text = "a loud whoosh of moving air"
 	fire_delay = 50
@@ -69,7 +69,7 @@
 		tank = W
 		user.visible_message("[user] jams [W] into [src]'s valve and twists it closed.","You jam [W] into [src]'s valve and twist it closed.")
 		update_icon()
-	else if(istype(W) && item_storage.can_be_inserted(W))
+	else if(istype(W) && item_storage.can_be_inserted(W, user))
 		item_storage.handle_item_insertion(W)
 
 /obj/item/weapon/gun/launcher/pneumatic/attack_self(mob/user as mob)

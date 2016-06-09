@@ -48,7 +48,12 @@
 	var/list/valid_paths
 
 /datum/gear_tweak/path/New(var/list/valid_paths)
-	src.valid_paths = valid_paths
+	if(istype(valid_paths))
+		src.valid_paths = valid_paths
+	else if(ispath(valid_paths))
+		src.valid_paths = atomtype2nameassoclist(valid_paths)
+	else
+		CRASH("[valid_paths] is of an unhandled type.")
 	..()
 
 /datum/gear_tweak/path/get_contents(var/metadata)

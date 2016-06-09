@@ -252,7 +252,7 @@
 		return
 	var/mob/living/carbon/human/H = occupant
 	var/list/occupant_data = list(
-		"stationtime" = worldtime2text(),
+		"stationtime" = stationtime2text(),
 		"stat" = H.stat,
 		"health" = round(H.health/H.maxHealth)*100,
 		"virus_present" = H.virus2.len,
@@ -349,8 +349,9 @@
 			bled = "Bleeding:"
 		if(e.status & ORGAN_BROKEN)
 			AN = "[e.broken_description]:"
-		if(e.status & ORGAN_ROBOT)
-			robot = "Prosthetic:"
+		switch(e.robotic)
+			if(ORGAN_ROBOT) robot = "Prosthetic:"
+			if(ORGAN_ASSISTED) robot = "Augmented:"
 		if(e.open)
 			open = "Open:"
 

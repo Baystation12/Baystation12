@@ -6,10 +6,6 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	set category = "Admin"
 	set name = "Adminhelp"
 
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "\red Speech is currently admin-disabled."
-		return
-
 	//handle muting and automuting
 	if(prefs.muted & MUTE_ADMINHELP)
 		src << "<font color='red'>Error: Admin-PM: You cannot send adminhelps (Muted).</font>"
@@ -17,8 +13,6 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 
 	adminhelped = 1 //Determines if they get the message to reply by clicking the name.
 
-	if(src.handle_spam_prevention(msg,MUTE_ADMINHELP))
-		return
 
 	//clean the input msg
 	if(!msg)

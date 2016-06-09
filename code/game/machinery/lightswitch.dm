@@ -24,8 +24,7 @@
 	if(!name)
 		name = "light switch ([connected_area.name])"
 
-	src.on = src.connected_area.lightswitch
-	update_icon()
+	sync_state()
 
 /obj/machinery/light_switch/update_icon()
 	if(!overlay)
@@ -55,6 +54,12 @@
 
 		update_icon()
 
+/obj/machinery/light_switch/proc/sync_state()
+	if(on != connected_area.lightswitch)
+		on = connected_area.lightswitch
+		update_icon()
+		return 1
+
 /obj/machinery/light_switch/attack_hand(mob/user)
 	set_state(!on)
 
@@ -64,10 +69,8 @@
 /obj/machinery/light_switch/power_change()
 	. = ..()
 	//synch ourselves to the new state
-	if(on != connected_area.lightswitch)
-		on = connected_area.lightswitch
-		update_icon()
-		return 1
+	if(connected_area) //If an APC initializes before we do it will force a power_change() before we can get our connected area
+		sync_state()
 
 /obj/machinery/light_switch/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))

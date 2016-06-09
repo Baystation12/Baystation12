@@ -35,7 +35,7 @@ for var; do
         sed -i 's!// BEGIN_INCLUDE!// BEGIN_INCLUDE\n#include "'$arg'"!' $dmepath.mdme
     elif [[ $var == -M* ]]; then
         sed -i '1s/^/#define MAP_OVERRIDE\n/' $dmepath.mdme
-        sed -i 's!// BEGIN_INCLUDE!// BEGIN_INCLUDE\n#include "maps\\'$arg'\\'$arg'.dm"!' $dmepath.mdme
+        sed -i 's!#include "code\\__defines\\~unit_testing.dm"!#include include "code\\__defines\\~unit_testing.dm"\n#include "maps\\'$arg'\\'$arg'.dm"!' $dmepath.mdme
     fi
 done
 

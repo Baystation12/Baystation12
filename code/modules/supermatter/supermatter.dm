@@ -212,7 +212,8 @@
 	else
 		damage_archived = damage
 
-		damage = max( damage + min( ( (removed.temperature - CRITICAL_TEMPERATURE) / 150 ), damage_inc_limit ) , 0 )
+		damage = max(0, damage + between(-DAMAGE_RATE_LIMIT, (removed.temperature - CRITICAL_TEMPERATURE) / 150, damage_inc_limit))
+
 		//Ok, 100% oxygen atmosphere = best reaction
 		//Maxes out at 100% oxygen pressure
 		oxygen = max(min((removed.gas["oxygen"] - (removed.gas["nitrogen"] * NITROGEN_RETARDATION_FACTOR)) / removed.total_moles, 1), 0)
@@ -262,7 +263,7 @@
 	for(var/mob/living/l in range(src, round(sqrt(power / 2))))
 		var/radius = max(get_dist(l, src), 1)
 		var/rads = (power / 10) * ( 1 / (radius**2) )
-		l.apply_effect(rads, IRRADIATE)
+		l.apply_effect(rads, IRRADIATE, blocked = l.getarmor(null, "rad"))
 
 	power -= (power/DECAY_FACTOR)**3		//energy losses due to radiation
 
@@ -344,7 +345,7 @@
 	user.drop_from_inventory(W)
 	Consume(W)
 
-	user.apply_effect(150, IRRADIATE)
+	user.apply_effect(150, IRRADIATE, blocked = user.getarmor(null, "rad"))
 
 
 /obj/machinery/power/supermatter/Bumped(atom/AM as mob|obj)
@@ -378,7 +379,7 @@
 		else
 			l.show_message("<span class=\"warning\">You hear an uneartly ringing and notice your skin is covered in fresh radiation burns.</span>", 2)
 		var/rads = 500 * sqrt( 1 / (get_dist(l, src) + 1) )
-		l.apply_effect(rads, IRRADIATE)
+		l.apply_effect(rads, IRRADIATE, blocked = l.getarmor(null, "rad"))
 
 
 /obj/machinery/power/supermatter/proc/supermatter_pull()

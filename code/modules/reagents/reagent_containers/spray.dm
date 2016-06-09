@@ -40,7 +40,7 @@
 
 	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
 
-	user.setClickCooldown(4)
+	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 
 	if(reagents.has_reagent("sacid"))
 		message_admins("[key_name_admin(user)] fired sulphuric acid from \a [src].")
@@ -164,7 +164,7 @@
 	icon_state = "chemsprayer"
 	item_state = "chemsprayer"
 	throwforce = 3
-	w_class = 3.0
+	w_class = 4
 	possible_transfer_amounts = null
 	volume = 600
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)

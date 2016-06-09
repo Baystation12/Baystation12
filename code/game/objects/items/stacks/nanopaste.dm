@@ -29,7 +29,7 @@
 		var/obj/item/organ/external/S = H.get_organ(user.zone_sel.selecting)
 
 		if(S.open == 1)
-			if (S && (S.status & ORGAN_ROBOT))
+			if (S && (S.robotic >= ORGAN_ROBOT))
 				if(S.get_damage())
 					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 					S.heal_damage(15, 15, robo_repair = 1)

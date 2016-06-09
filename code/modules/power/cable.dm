@@ -22,22 +22,14 @@ If d1 = dir1 and d2 = dir2, it's a full X-X cable, getting from dir1 to dir2
 By design, d1 is the smallest direction and d2 is the highest
 */
 
-var/list/possible_cable_coil_colours = list(
-		"Yellow" = COLOR_YELLOW,
-		"Green" = COLOR_LIME,
-		"Pink" = COLOR_PINK,
-		"Blue" = COLOR_BLUE,
-		"Orange" = COLOR_ORANGE,
-		"Cyan" = COLOR_CYAN,
-		"Red" = COLOR_RED
-	)
+var/list/possible_cable_coil_colours
 
 /obj/structure/cable
 	level = 1
 	anchored =1
 	var/datum/powernet/powernet
 	name = "power cable"
-	desc = "A flexible superconducting cable for heavy-duty power transfer"
+	desc = "A flexible superconducting cable for heavy-duty power transfer."
 	icon = 'icons/obj/power_cond_white.dmi'
 	icon_state = "0-1"
 	var/d1 = 0
@@ -461,6 +453,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	name = "cable coil"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "coil"
+	randpixel = 2
 	amount = MAXCOIL
 	max_amount = MAXCOIL
 	color = COLOR_RED
@@ -489,8 +482,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	src.amount = length
 	if (param_color) // It should be red by default, so only recolor it if parameter was specified.
 		color = param_color
-	pixel_x = rand(-2,2)
-	pixel_y = rand(-2,2)
 	update_icon()
 	update_wclass()
 
@@ -506,19 +497,13 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		var/obj/item/organ/external/S = H.organs_by_name[user.zone_sel.selecting]
 
 		if (!S) return
-		if(!(S.status & ORGAN_ROBOT) || user.a_intent != I_HELP)
+		if(S.robotic < ORGAN_ROBOT || user.a_intent != I_HELP)
 			return ..()
 
-		if(S.burn_dam)
-			if(S.burn_dam < ROBOLIMB_SELF_REPAIR_CAP)
-				S.heal_damage(0,15,0,1)
-				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-				user.visible_message("<span class='danger'>\The [user] patches some damaged wiring on \the [M]'s [S.name] with \the [src].</span>")
-			else if(S.open != 2)
-				user << "<span class='danger'>The damage is far too severe to patch over externally.</span>"
-			return 1
-		else if(S.open != 2)
-			user << "<span class='notice'>Nothing to fix!</span>"
+		var/use_amt = min(src.amount, ceil(S.burn_dam/3), 5)
+		if(can_use(use_amt))
+			if(S.robo_repair(3*use_amt, BURN, "some damaged wiring", src, user))
+				src.use(use_amt)
 
 	else
 		return ..()
@@ -526,7 +511,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 /obj/item/stack/cable_coil/update_icon()
 	if (!color)
-		color = pick(COLOR_RED, COLOR_BLUE, COLOR_LIME, COLOR_ORANGE, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
+		color = possible_cable_coil_colours[pick(possible_cable_coil_colours)]
 	if(amount == 1)
 		icon_state = "coil1"
 		name = "cable piece"
@@ -543,8 +528,8 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 	var/final_color = possible_cable_coil_colours[selected_color]
 	if(!final_color)
-		final_color = possible_cable_coil_colours["Red"]
-		selected_color = "red"
+		selected_color = "Red"
+		final_color = possible_cable_coil_colours[selected_color]
 	color = final_color
 	user << "<span class='notice'>You change \the [src]'s color to [lowertext(selected_color)].</span>"
 
@@ -845,8 +830,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/item/stack/cable_coil/cut/New(loc)
 	..()
 	src.amount = rand(1,2)
-	pixel_x = rand(-2,2)
-	pixel_y = rand(-2,2)
 	update_icon()
 	update_wclass()
 
@@ -872,5 +855,5 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	color = COLOR_WHITE
 
 /obj/item/stack/cable_coil/random/New()
-	color = pick(COLOR_RED, COLOR_BLUE, COLOR_LIME, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
+	color = possible_cable_coil_colours[pick(possible_cable_coil_colours)]
 	..()

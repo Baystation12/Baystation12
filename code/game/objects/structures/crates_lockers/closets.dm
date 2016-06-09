@@ -4,7 +4,7 @@
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "closed"
 	density = 1
-	w_class = 5
+	w_class = 7
 	var/icon_closed = "closed"
 	var/icon_opened = "open"
 	var/opened = 0
@@ -154,7 +154,7 @@
 		return M.mob_size
 	if(istype(AM, /obj/item))
 		var/obj/item/I = AM
-		return Ceiling(I.w_class / 2)
+		return (I.w_class / 2)
 	return 0
 
 /obj/structure/closet/proc/toggle(mob/user as mob)
@@ -237,6 +237,7 @@
 		usr.drop_item()
 		if(W)
 			W.forceMove(src.loc)
+			W.pixel_z = 0
 	else if(istype(W, /obj/item/weapon/packageWrap))
 		return
 	else if(istype(W, /obj/item/weapon/weldingtool))
@@ -388,3 +389,6 @@
 	var/shake_dir = pick(-1, 1)
 	animate(src, transform=turn(matrix(), 8*shake_dir), pixel_x=init_px + 2*shake_dir, time=1)
 	animate(transform=null, pixel_x=init_px, time=6, easing=ELASTIC_EASING)
+
+/obj/structure/closet/onDropInto(var/atom/movable/AM)
+	return

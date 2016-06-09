@@ -3,6 +3,7 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper_bin1"
 	item_state = "sheet-metal"
+	randpixel = 0
 	throwforce = 1
 	w_class = 3
 	throw_speed = 3

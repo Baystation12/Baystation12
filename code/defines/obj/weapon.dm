@@ -3,6 +3,7 @@
 	desc = "Should anything ever go wrong..."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "red_phone"
+	randpixel = 0
 	flags = CONDUCT
 	force = 3.0
 	throwforce = 2.0
@@ -30,10 +31,27 @@
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "soap"
+	flags = OPENCONTAINER
 	w_class = 2.0
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
+	var/key_data
+
+/obj/item/weapon/soap/attackby(var/obj/item/I, var/mob/user)
+	if(istype(I, /obj/item/weapon/key))
+		if(!key_data)
+			user << "<span class='notice'>You imprint \the [I] into \the [src].</span>"
+			var/obj/item/weapon/key/K = I
+			key_data = K.key_data
+			update_icon()
+		return
+	..()
+
+/obj/item/weapon/soap/update_icon()
+	overlays.Cut()
+	if(key_data)
+		overlays += image('icons/obj/items.dmi', icon_state = "soap_key_overlay")
 
 /obj/item/weapon/soap/nanotrasen
 	desc = "A NanoTrasen-brand bar of soap. Smells of phoron."
@@ -133,6 +151,7 @@
 /obj/item/weapon/disk
 	name = "disk"
 	icon = 'icons/obj/items.dmi'
+	randpixel = 5
 
 /*
 /obj/item/weapon/game_kit
@@ -144,18 +163,8 @@
 	var/data = ""
 	var/base_url = "http://svn.slurm.us/public/spacestation13/misc/game_kit"
 	item_state = "sheet-metal"
-	w_class = 5.0
+	w_class = 6
 */
-
-/obj/item/weapon/gift
-	name = "gift"
-	desc = "A wrapped item."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "gift3"
-	var/size = 3.0
-	var/obj/item/gift = null
-	item_state = "gift"
-	w_class = 4.0
 
 /obj/item/weapon/legcuffs
 	name = "legcuffs"
@@ -293,13 +302,6 @@
 	desc = "Heavy-duty switching circuits for power control."
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 
-/obj/item/weapon/module/power_control/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (istype(W, /obj/item/device/multitool))
-		var/obj/item/weapon/circuitboard/ghettosmes/newcircuit = new/obj/item/weapon/circuitboard/ghettosmes(user.loc)
-		qdel(src)
-		user.put_in_hands(newcircuit)
-
-
 /obj/item/weapon/module/id_auth
 	name = "\improper ID authentication module"
 	icon_state = "id_mod"
@@ -385,7 +387,6 @@
 	allow_quick_gather = 1
 	allow_quick_empty = 1
 	collection_mode = 1
-	display_contents_with_number = 1
 	max_w_class = 3
 	max_storage_space = 100
 
@@ -394,13 +395,9 @@
 	desc = "What?"
 	gender = PLURAL
 	icon = 'icons/obj/stock_parts.dmi'
+	randpixel = 5
 	w_class = 2.0
 	var/rating = 1
-	
-/obj/item/weapon/stock_parts/New()
-	src.pixel_x = rand(-5.0, 5)
-	src.pixel_y = rand(-5.0, 5)
-	..()
 
 //Rank 1
 
@@ -580,7 +577,7 @@
 
 /obj/item/weapon/ectoplasm
 	name = "ectoplasm"
-	desc = "spooky"
+	desc = "Spooky."
 	gender = PLURAL
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "ectoplasm"

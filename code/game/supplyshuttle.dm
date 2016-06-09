@@ -25,11 +25,6 @@ var/list/mechtoys = list(
 	name = "supply manifest"
 	var/is_copy = 1
 
-/area/supply/station
-	name = "Supply Shuttle"
-	icon_state = "shuttle3"
-	requires_power = 0
-
 /area/supply/dock
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
@@ -112,7 +107,7 @@ var/list/mechtoys = list(
 
 /datum/supply_order
 	var/ordernum
-	var/datum/supply_packs/object = null
+	var/decl/hierarchy/supply_pack/object = null
 	var/orderedby = null
 	var/comment = null
 
@@ -128,17 +123,12 @@ var/list/mechtoys = list(
 	var/ordernum
 	var/list/shoppinglist = list()
 	var/list/requestlist = list()
-	var/list/supply_packs = list()
 	//shuttle movement
 	var/movetime = 1200
 	var/datum/shuttle/ferry/supply/shuttle
 
 	New()
 		ordernum = rand(1,9000)
-
-		for(var/typepath in (typesof(/datum/supply_packs) - /datum/supply_packs))
-			var/datum/supply_packs/P = new typepath()
-			supply_packs[P.name] = P
 
 	// Supply shuttle ticker - handles supply point regeneration
 	// This is called by the process scheduler every thirty seconds
@@ -230,7 +220,7 @@ var/list/mechtoys = list(
 			clear_turfs.Cut(i,i+1)
 
 			var/datum/supply_order/SO = S
-			var/datum/supply_packs/SP = SO.object
+			var/decl/hierarchy/supply_pack/SP = SO.object
 
 			var/obj/A = new SP.containertype(pickedloc)
 			A.name = "[SP.containername][SO.comment ? " ([SO.comment])":"" ]"
@@ -257,24 +247,10 @@ var/list/mechtoys = list(
 				else
 					world << "<span class='danger'>Supply pack with invalid access restriction [SP.access] encountered!</span>"
 
-			var/list/contains
-			if(istype(SP,/datum/supply_packs/randomised))
-				var/datum/supply_packs/randomised/SPR = SP
-				contains = list()
-				if(SPR.contains.len)
-					for(var/j=1,j<=SPR.num_contained,j++)
-						contains += pick(SPR.contains)
-			else
-				contains = SP.contains
-
-			for(var/typepath in contains)
-				if(!typepath)	continue
-				var/atom/B2 = new typepath(A)
-				if(SP.amount && B2:amount) B2:amount = SP.amount
-				if(slip) slip.info += "<li>[B2.name]</li>" //add the item to the manifest
-
-			//manifest finalisation
+			var/list/spawned = SP.spawn_contents(A)
 			if(slip)
+				for(var/atom/content in spawned)
+					slip.info += "<li>[content.name]</li>" //add the item to the manifest
 				slip.info += "</ul><br>"
 				slip.info += "CHECK CONTENTS AND STAMP BELOW THE LINE TO CONFIRM RECEIPT OF GOODS<hr>"
 

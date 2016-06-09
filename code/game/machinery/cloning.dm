@@ -45,7 +45,7 @@
 	var/biomass = CLONE_BIOMASS * 3
 
 /obj/machinery/clonepod/New()
-	set_extension(src, /datum/extension/multitool, /datum/extension/multitool/store)
+	set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/store)
 	..()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/clonepod(src)
@@ -115,7 +115,7 @@
 	H.real_name = R.dna.real_name
 
 	//Get the clone body ready
-	H.adjustCloneLoss(150) // New damage var so you can't eject a clone early then stab them to abuse the current damage system --NeoFite
+	H.setCloneLoss(H.maxHealth - config.health_threshold_crit) // New damage var so you can't eject a clone early then stab them to abuse the current damage system --NeoFite
 	H.Paralyse(4)
 
 	//Here let's calculate their health so the pod doesn't immediately eject them!!!

@@ -4,7 +4,7 @@
 	density = 1
 
 	name = "Generator Input"
-	desc = "Placeholder"
+	desc = "Placeholder."
 
 	var/update_cycle
 

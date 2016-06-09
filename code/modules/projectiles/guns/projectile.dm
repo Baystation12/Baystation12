@@ -9,7 +9,7 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	w_class = 3
 	matter = list(DEFAULT_WALL_MATERIAL = 1000)
-	recoil = 1
+	screen_shake = 1
 
 	var/caliber = "357"		//determines which casings will fit
 	var/handle_casings = EJECT_CASINGS	//determines how spent casings should be handled
@@ -67,16 +67,6 @@
 
 /obj/item/weapon/gun/projectile/proc/process_chambered()
 	if (!chambered) return
-
-	// Aurora forensics port, gunpowder residue.
-	if(chambered.leaves_residue)
-		var/mob/living/carbon/human/H = loc
-		if(istype(H))
-			if(!H.gloves)
-				H.gunshot_residue = chambered.caliber
-			else
-				var/obj/item/clothing/G = H.gloves
-				G.gunshot_residue = chambered.caliber
 
 	switch(handle_casings)
 		if(EJECT_CASINGS) //eject casing onto ground.

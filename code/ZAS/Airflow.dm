@@ -26,15 +26,16 @@ mob/living/carbon/slime/airflow_stun()
 	return
 
 mob/living/carbon/human/airflow_stun()
-	if(shoes)
-		if(shoes.item_flags & NOSLIP) return 0
+	if(shoes && (shoes.item_flags & NOSLIP))
+		src << "<span class='notice'>Air suddenly rushes past you!</span>"
+		return 0
 	..()
 
 atom/movable/proc/check_airflow_movable(n)
 
 	if(anchored && !ismob(src)) return 0
 
-	if(!istype(src,/obj/item) && n < vsc.airflow_dense_pressure) return 0
+	if(!isobj(src) && n < vsc.airflow_dense_pressure) return 0
 
 	return 1
 
@@ -47,15 +48,23 @@ mob/living/silicon/check_airflow_movable()
 	return 0
 
 
-obj/item/check_airflow_movable(n)
-	. = ..()
-	switch(w_class)
-		if(2)
-			if(n < vsc.airflow_lightest_pressure) return 0
-		if(3)
-			if(n < vsc.airflow_light_pressure) return 0
-		if(4,5)
-			if(n < vsc.airflow_medium_pressure) return 0
+obj/check_airflow_movable(n)
+	if(isnull(w_class))
+		if(n < vsc.airflow_dense_pressure) return 0 //most non-item objs don't have a w_class yet
+	else
+		switch(w_class)
+			if(1,2)
+				if(n < vsc.airflow_lightest_pressure) return 0
+			if(3)
+				if(n < vsc.airflow_light_pressure) return 0
+			if(4,5)
+				if(n < vsc.airflow_medium_pressure) return 0
+			if(6)
+				if(n < vsc.airflow_heavy_pressure) return 0
+			if(7 to INFINITY)
+				if(n < vsc.airflow_dense_pressure) return 0
+	return ..()
+
 
 /atom/movable/var/tmp/turf/airflow_dest
 /atom/movable/var/tmp/airflow_speed = 0

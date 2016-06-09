@@ -5,7 +5,6 @@
 	icon_state = "colt"
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
-	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/sec
@@ -15,7 +14,6 @@
 	magazine_type = /obj/item/ammo_magazine/c45m/flash
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
-	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/sec/update_icon()
@@ -53,7 +51,7 @@
 
 /obj/item/weapon/gun/projectile/deagle
 	name = "desert eagle"
-	desc = "A robust handgun that uses .50 AE ammo"
+	desc = "A robust handgun that uses .50 AE ammo."
 	icon_state = "deagle"
 	item_state = "deagle"
 	force = 14.0
@@ -77,11 +75,10 @@
 
 /obj/item/weapon/gun/projectile/gyropistol
 	name = "gyrojet pistol"
-	desc = "A bulky pistol designed to fire self propelled rounds"
+	desc = "A bulky pistol designed to fire self propelled rounds."
 	icon_state = "gyropistol"
 	max_shells = 8
 	caliber = "75"
-	fire_sound = 'sound/effects/Explosion1.ogg'
 	origin_tech = list(TECH_COMBAT = 3)
 	ammo_type = /obj/item/ammo_casing/a75
 	load_method = MAGAZINE
@@ -104,8 +101,8 @@
 	w_class = 2
 	caliber = "9mm"
 	silenced = 0
+	fire_delay = 1
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 2)
-	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mm
 
@@ -150,7 +147,7 @@
 
 /obj/item/weapon/silencer
 	name = "silencer"
-	desc = "a silencer"
+	desc = "A silencer."
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "silencer"
 	w_class = 2
@@ -166,9 +163,6 @@
 
 	var/global/list/ammo_types = list(
 		/obj/item/ammo_casing/a357              = ".357",
-		/obj/item/ammo_casing/c9mmf             = "9mm",
-		/obj/item/ammo_casing/c45f              = ".45",
-		/obj/item/ammo_casing/a10mm             = "10mm",
 		/obj/item/ammo_casing/shotgun           = "12 gauge",
 		/obj/item/ammo_casing/shotgun           = "12 gauge",
 		/obj/item/ammo_casing/shotgun/pellet    = "12 gauge",

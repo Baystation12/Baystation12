@@ -46,7 +46,6 @@
 	var/landmark_id                         // Spawn point identifier.
 	var/mob_path = /mob/living/carbon/human // Mobtype this antag will use if none is provided.
 	var/feedback_tag = "traitor_objective"  // End of round
-	var/bantype = "Syndicate"               // Ban to check when spawning this antag.
 	var/minimum_player_age = 7            	// Players need to be at least minimum_player_age days old before they are eligable for auto-spawning
 	var/suspicion_chance = 50               // Prob of being on the initial Command report
 	var/flags = 0                           // Various runtime options.
@@ -71,6 +70,12 @@
 	var/default_access = list()
 	var/id_type = /obj/item/weapon/card/id
 
+	var/antag_text = "You are an antagonist! Within the rules, \
+		try to act as an opposing force to the crew. Further RP and try to make sure \
+		other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, \
+		and before taking extreme actions, please try to also contact the administration! \
+		Think through your actions and make the roleplay immersive! <b>Please remember all \
+		rules aside from those without explicit exceptions apply to antagonists.</b>"
 
 /datum/antagonist/New()
 	..()
@@ -99,7 +104,7 @@
 	// Prune restricted status. Broke it up for readability.
 	// Note that this is done before jobs are handed out.
 	for(var/datum/mind/player in ticker.mode.get_players_for_role(role_type, id))
-		if(ghosts_only && !isghost(player.current))
+		if(ghosts_only && !(!player.current || isghost(player.current) || player.current.stat == DEAD || !player.current.client))
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: Only ghosts may join as this role!")
 		else if(config.use_age_restriction_for_antags && player.current.client.player_age < minimum_player_age)
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: Is only [player.current.client.player_age] day\s old, has to be [minimum_player_age] day\s!")
@@ -184,6 +189,9 @@
 		return 0
 	if(!(flags & ANTAG_OVERRIDE_JOB) && (!player.current || istype(player.current, /mob/new_player)))
 		log_debug("[player.key] was selected for [role_text] by lottery, but they have not joined the game.")
+		return 0
+	if(ticker.current_state >= GAME_STATE_PLAYING && (isghost(player.current) || player.current.stat == DEAD || !player.current.client) && !(player in ticker.antag_pool))
+		log_debug("[player.key] was selected for [role_text] by lottery, but they are a ghost not in the antag pool.")
 		return 0
 
 	pending_antagonists |= player

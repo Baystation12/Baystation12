@@ -55,7 +55,7 @@
 	display_name = "handheld mirror"
 	path = /obj/item/weapon/mirror
 	cost = 1
-	path = /obj/item/weapon/haircomb
+	path = /obj/item/weapon/mirror
 
 /datum/gear/lunchbox
 	display_name = "lunchbox"
@@ -72,3 +72,11 @@
 			lunchboxes[initial(lunchbox.name)] = lunchbox_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(lunchboxes))
 	gear_tweaks += new/datum/gear_tweak/contents(lunchables_lunches(), lunchables_snacks(), lunchables_drinks())
+
+/datum/gear/towel
+	display_name = "towel"
+	path = /obj/item/weapon/towel
+
+/datum/gear/towel/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice())

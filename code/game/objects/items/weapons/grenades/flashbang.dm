@@ -5,7 +5,7 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
 	var/banglet = 0
 
-	prime()
+	detonate()
 		..()
 		for(var/obj/structure/closet/L in hear(7, get_turf(src)))
 			if(locate(/mob/living/carbon/, L))
@@ -40,7 +40,7 @@
 
 //Flashing everyone
 		if(eye_safety < FLASH_PROTECTION_MODERATE)
-			flick("e_flash", M.flash)
+			M.flash_eyes()
 			M.Stun(2)
 			M.Weaken(10)
 
@@ -96,8 +96,9 @@
 	name = "clusterbang"
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "clusterbang"
+	loadable = FALSE
 
-/obj/item/weapon/grenade/flashbang/clusterbang/prime()
+/obj/item/weapon/grenade/flashbang/clusterbang/detonate()
 	var/numspawned = rand(4,8)
 	var/again = 0
 	for(var/more = numspawned,more > 0,more--)
@@ -132,10 +133,10 @@
 	walk_away(src,temploc,stepdist)//I must go, my people need me
 	var/dettime = rand(15,60)
 	spawn(dettime)
-		prime()
+		detonate()
 	..()
 
-/obj/item/weapon/grenade/flashbang/clusterbang/segment/prime()
+/obj/item/weapon/grenade/flashbang/clusterbang/segment/detonate()
 	var/numspawned = rand(4,8)
 	for(var/more = numspawned,more > 0,more--)
 		if(prob(35))
@@ -158,5 +159,5 @@
 		walk_away(src,temploc,stepdist)
 		var/dettime = rand(15,60)
 		spawn(dettime)
-		prime()
+		detonate()
 	..()

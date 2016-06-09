@@ -1,7 +1,6 @@
 /datum/unit_test/movement
 	name = "MOVEMENT template"
 	async = 0
-	disabled = 0
 
 /datum/unit_test/movement/force_move_shall_trigger_crossed_when_entering_turf
 	name = "MOVEMENT - Force Move Shall Trigger Crossed When Entering Turf"

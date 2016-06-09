@@ -24,6 +24,30 @@
 				message = "is strumming the air and headbanging like a safari chimp."
 				m_type = 1
 
+		if ("beep")
+			if (src.isSynthetic())
+				message = "<B>[src]</B> beeps."
+				playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
+				m_type = 1
+			else
+				return
+
+		if ("ping")
+			if (src.isSynthetic())
+				message = "<B>[src]</B> pings."
+				playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
+				m_type = 1
+			else
+				return
+
+		if ("buzz")
+			if (src.isSynthetic())
+				message = "<B>[src]</B> buzzes."
+				playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+				m_type = 1
+			else
+				return
+
 		if ("blink")
 			message = "blinks."
 			m_type = 1
@@ -73,8 +97,6 @@
 			if (src.client)
 				if (client.prefs.muted & MUTE_IC)
 					src << "\red You cannot send IC messages (muted)."
-					return
-				if (src.client.handle_spam_prevention(message,MUTE_IC))
 					return
 			if (stat)
 				return

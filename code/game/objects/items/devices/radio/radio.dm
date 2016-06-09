@@ -244,7 +244,7 @@ var/global/list/default_medbay_channels = list(
 		return
 
 	var/mob/living/silicon/ai/A = new /mob/living/silicon/ai(src, null, null, 1)
-	A.SetName(from)
+	A.fully_replace_character_name(from)
 	Broadcast_Message(connection, A,
 						0, "*garbled automated announcement*", src,
 						message, from, "Automated Announcement", from, "synthesized voice",
@@ -746,6 +746,7 @@ var/global/list/default_medbay_channels = list(
 	broadcasting = 0
 	icon = 'icons/obj/items.dmi'
 	icon_state = "red_phone"
+	randpixel = 0
 	listening = 1
 	name = "phone"
 

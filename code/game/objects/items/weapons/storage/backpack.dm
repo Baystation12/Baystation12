@@ -20,10 +20,15 @@
 	sprite_sheets = list(
 		"Resomi" = 'icons/mob/species/resomi/back.dmi'
 		)
-	w_class = 4
+	w_class = 5
 	slot_flags = SLOT_BACK
 	max_w_class = 4
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
+	
+/obj/item/weapon/storage/backpack/equipped()
+	if(!has_extension(src, /datum/extension/appearance))
+		set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
+	..()
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (src.use_sound)
@@ -34,13 +39,6 @@
 	if (slot == slot_back && src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 1, -5)
 	..(user, slot)
-
-/*
-/obj/item/weapon/storage/backpack/dropped(mob/user as mob)
-	if (loc == user && src.use_sound)
-		playsound(src.loc, src.use_sound, 50, 1, -5)
-	..(user)
-*/
 
 /*
  * Backpack Types
@@ -76,7 +74,7 @@
 	desc = "Space Santa uses this to deliver toys to all the nice children in space for Christmas! Wow, it's pretty big!"
 	icon_state = "giftbag0"
 	item_state = "giftbag"
-	w_class = 4.0
+	w_class = 5
 	max_w_class = 3
 	max_storage_space = 400 // can store a ton of shit!
 	item_state_slots = null
@@ -151,14 +149,22 @@
 	icon_state = "duffle"
 	item_state_slots = null
 	w_class = 5
-	slowdown = 3 //wear it on your back if you must, best to carry it in hands to avoid any slowdown at all.
-	max_storage_space = 32
+	slowdown_general = 1
+	max_storage_space = DEFAULT_BACKPACK_STORAGE + 10
+
+/obj/item/weapon/storage/backpack/dufflebag/New()
+	..()
+	slowdown_per_slot[slot_back] = 2
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie
 	name = "black dufflebag"
 	desc = "A large dufflebag for holding extra tactical supplies."
-	slowdown = 1
+	slowdown_general = 0
 	icon_state = "duffle_syndie"
+
+/obj/item/weapon/storage/backpack/dufflebag/syndie/New()
+	..()
+	slowdown_per_slot[slot_back] = 1
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie/med
 	name = "medical dufflebag"

@@ -44,7 +44,6 @@
 	// HIDEJUMPSUIT no longer needed, see "hides_uniform" and "update_component_sealed()" in rig.dm
 	flags_inv =          HIDETAIL
 	item_flags =              STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
-	slowdown = 0
 	//will reach 10 breach damage after 25 laser carbine blasts, 3 revolver hits, or ~1 PTR hit. Completely immune to smg or sts hits.
 	breach_threshold = 38
 	resilience = 0.2

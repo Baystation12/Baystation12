@@ -24,6 +24,7 @@
 
 //Icon stuff
 
+	var/static/list/eye_overlays
 	var/icontype 				//Persistent icontype tracking allows for cleaner icon updates
 	var/module_sprites[0] 		//Used to store the associations between sprite names and sprite index.
 	var/icon_selected = 1		//If icon selection has been completed yet
@@ -177,7 +178,7 @@
 
 	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
-/mob/living/silicon/robot/SetName(pickedName as text)
+/mob/living/silicon/robot/fully_replace_character_name(pickedName as text)
 	custom_name = pickedName
 	updatename()
 
@@ -349,6 +350,9 @@
 /mob/living/silicon/robot/verb/toggle_lights()
 	set category = "Silicon Commands"
 	set name = "Toggle Lights"
+
+	if(stat == DEAD)
+		return
 
 	lights_on = !lights_on
 	usr << "You [lights_on ? "enable" : "disable"] your integrated light."
@@ -574,8 +578,8 @@
 			user << "Close the panel first."
 		else if(cell)
 			user << "There is a power cell already installed."
-		else if(W.w_class != 3)
-			user << "\The [W] is too [W.w_class < 3? "small" : "large"] to fit here."
+		else if(W.w_class != NORMAL_ITEM)
+			user << "\The [W] is too [W.w_class < NORMAL_ITEM? "small" : "large"] to fit here."
 		else
 			user.drop_item()
 			W.loc = src
@@ -711,7 +715,15 @@
 /mob/living/silicon/robot/updateicon()
 	overlays.Cut()
 	if(stat == CONSCIOUS)
-		overlays += "eyes-[module_sprites[icontype]]"
+		var/eye_icon_state = "eyes-[module_sprites[icontype]]"
+		if(eye_icon_state in icon_states(icon))
+			if(!eye_overlays)
+				eye_overlays = list()
+			var/image/eye_overlay = eye_overlays[eye_icon_state]
+			if(!eye_overlay)
+				eye_overlay = image(icon, eye_icon_state, LIGHTING_LAYER+0.1)
+				eye_overlays[eye_icon_state] = eye_overlay
+			overlays += eye_overlay
 
 	if(opened)
 		var/panelprefix = custom_sprite ? src.ckey : "ov"

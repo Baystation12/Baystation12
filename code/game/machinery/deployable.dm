@@ -142,7 +142,7 @@ for reference:
 //Actual Deployable machinery stuff
 /obj/machinery/deployable
 	name = "deployable"
-	desc = "deployable"
+	desc = "Deployable."
 	icon = 'icons/obj/objects.dmi'
 	req_access = list(access_security)//I'm changing this until these are properly tested./N
 

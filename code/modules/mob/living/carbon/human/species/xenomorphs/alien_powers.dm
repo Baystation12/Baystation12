@@ -218,7 +218,7 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 		return
 
 	var/obj/item/organ/affecting = M.get_organ("chest")
-	if(!affecting || (affecting.status & ORGAN_ROBOT))
+	if(!affecting || (affecting.robotic >= ORGAN_ROBOT))
 		src << "<span class='warning'>This form is not compatible with our physiology.</span>"
 		return
 
@@ -231,7 +231,7 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 		src << "<span class='warning'>They are too far away.</span>"
 		return
 
-	if(M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]) || !affecting || (affecting.status & ORGAN_ROBOT))
+	if(M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]) || !affecting || (affecting.robotic >= ORGAN_ROBOT))
 		return
 
 	if(!check_alien_ability(500,1,"egg sac"))
