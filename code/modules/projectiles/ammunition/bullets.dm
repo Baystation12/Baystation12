@@ -66,7 +66,7 @@
 /obj/item/ammo_casing/a10mm
 	desc = "A 10mm bullet casing."
 	caliber = "10mm"
-	projectile_type = /obj/item/projectile/bullet/pistol/medium
+	projectile_type = /obj/item/projectile/bullet/pistol/medium/smg
 
 
 /obj/item/ammo_casing/shotgun

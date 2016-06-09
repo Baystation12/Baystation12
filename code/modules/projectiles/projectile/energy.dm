@@ -10,7 +10,7 @@
 /obj/item/projectile/energy/flash
 	name = "chemical shell"
 	icon_state = "bullet"
-	fire_sound = 'sound/weapons/Gunshot_light.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	damage = 5
 	agony = 10
 	kill_count = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
@@ -41,7 +41,7 @@
 //blinds people like the flash round, but in a small area and can also be used for temporary illumination
 /obj/item/projectile/energy/flash/flare
 	damage = 10
-	fire_sound = 'sound/weapons/Gunshot.ogg'
+	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	flash_range = 2
 	brightness = 15
 

@@ -197,7 +197,7 @@
 	icon_state = "mecha_scatter"
 	equip_cooldown = 20
 	projectile = /obj/item/projectile/bullet/pistol/medium
-	fire_sound = 'sound/weapons/Gunshot.ogg'
+	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	fire_volume = 80
 	projectiles = 40
 	projectiles_per_shot = 4
@@ -209,7 +209,7 @@
 	icon_state = "mecha_uac2"
 	equip_cooldown = 10
 	projectile = /obj/item/projectile/bullet/pistol/medium
-	fire_sound = 'sound/weapons/Gunshot.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
 	projectiles = 300
 	projectiles_per_shot = 3
 	deviation = 0.3
