@@ -160,9 +160,10 @@
 	moved_event.register(target, src, /mob/living/bot/secbot/proc/target_moved)
 
 /mob/living/bot/secbot/proc/target_moved(atom/movable/moving_instance, atom/old_loc, atom/new_loc)
-	mode = SECBOT_ARREST // I'm done playing nice
-	awaiting_surrender = INFINITY
-	moved_event.unregister(moving_instance, src)
+	if(get_dist(get_turf(src), get_turf(target)) >= 3)
+		mode = SECBOT_ARREST // I'm done playing nice
+		awaiting_surrender = INFINITY
+		moved_event.unregister(moving_instance, src)
 
 /mob/living/bot/secbot/proc/react_to_attack(mob/attacker)
 	if(!target)
