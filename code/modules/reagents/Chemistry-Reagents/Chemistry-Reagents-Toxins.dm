@@ -519,9 +519,7 @@
 		if(istype(W, /obj/item/weapon/implant)) //TODO: Carn. give implants a dropped() or something
 			qdel(W)
 			continue
-		W.layer = initial(W.layer)
-		W.loc = M.loc
-		W.dropped(M)
+		M.drop_from_inventory(W)
 	var/mob/living/carbon/slime/new_mob = new /mob/living/carbon/slime(M.loc)
 	new_mob.a_intent = "hurt"
 	new_mob.universal_speak = 1

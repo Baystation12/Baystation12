@@ -11,6 +11,11 @@
 		return L.mob_size <= MOB_SMALL
 	return 0
 
+/mob/proc/can_wield_item(obj/item/W)
+	if(W.w_class >= LARGE_ITEM && issmall(src))
+		return FALSE //M is too small to wield this
+	return TRUE
+
 /mob/living/proc/isSynthetic()
 	return 0
 
@@ -615,6 +620,9 @@ proc/is_blind(A)
 	if(client)
 		client.images -= image
 
+/mob/proc/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	return
+
 /mob/proc/fully_replace_character_name(var/new_name, var/in_depth = TRUE)
 	if(!new_name || new_name == real_name)	return 0
 	real_name = new_name
@@ -624,3 +632,4 @@ proc/is_blind(A)
 	if(dna)
 		dna.real_name = real_name
 	return 1
+

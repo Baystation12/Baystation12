@@ -1,16 +1,24 @@
 /datum/shuttle/ferry/escape_pod
 	var/datum/computer/file/embedded_program/docking/simple/escape_pod/arming_controller
+	category = /datum/shuttle/ferry/escape_pod
+
+/datum/shuttle/ferry/escape_pod/New()
+	move_time = move_time + rand(-30, 60)
+	if(name in emergency_shuttle.escape_pods)
+		CRASH("An escape pod with the name '[name]' has already been defined.")
+	emergency_shuttle.escape_pods[name] = src
+	..()
 
 /datum/shuttle/ferry/escape_pod/init_docking_controllers()
 	..()
 	arming_controller = locate(dock_target_station)
 	if(!istype(arming_controller))
-		world << "<span class='danger'>warning: escape pod with station dock tag [dock_target_station] could not find it's dock target!</span>"
-	
+		warning("Escape pod with station dock tag [dock_target_station] could not find it's dock target!")
+
 	if(docking_controller)
 		var/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/controller_master = docking_controller.master
 		if(!istype(controller_master))
-			world << "<span class='danger'>warning: escape pod with docking tag [docking_controller_tag] could not find it's controller master!</span>"
+			warning("Escape pod with docking tag [docking_controller_tag] could not find it's controller master!")
 		else
 			controller_master.pod = src
 
@@ -29,7 +37,7 @@
 /datum/shuttle/ferry/escape_pod/can_cancel()
 	return 0
 
-	
+
 //This controller goes on the escape pod itself
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod
 	name = "escape pod controller"
@@ -58,7 +66,7 @@
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/Topic(href, href_list)
 	if(..())
 		return 1
-	
+
 	if("manual_arm")
 		pod.arming_controller.arm()
 	if("force_launch")
@@ -87,7 +95,7 @@
 	if (istype(docking_program, /datum/computer/file/embedded_program/docking/simple/escape_pod))
 		var/datum/computer/file/embedded_program/docking/simple/escape_pod/P = docking_program
 		armed = P.armed
-	
+
 	data = list(
 		"docking_status" = docking_program.get_docking_status(),
 		"override_enabled" = docking_program.override_enabled,

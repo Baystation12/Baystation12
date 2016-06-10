@@ -25,12 +25,6 @@ var/list/mechtoys = list(
 	name = "supply manifest"
 	var/is_copy = 1
 
-/area/supply/station
-	name = "Supply Shuttle"
-	icon_state = "shuttle3"
-	requires_power = 0
-	base_turf = /turf/simulated/floor/plating
-
 /area/supply/dock
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"

@@ -160,8 +160,7 @@
 				return
 
 			user << "<span class='warning'>You slip \the [W] inside \the [src].</span>"
-			user.remove_from_mob(W)
-			W.dropped(user)
+			user.drop_from_inventory(W, src)
 			add_fingerprint(user)
 			contents += W
 			return
@@ -270,6 +269,19 @@
 		..()
 		reagents.add_reagent("sugar", 3)
 		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar
+	name = "protein bar"
+	desc = "SwoleMAX brand protein bars, guaranteed to get you feeling perfectly overconfident."
+	icon_state = "proteinbar"
+	trash = /obj/item/trash/candy/proteinbar
+
+/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar/New()
+	..()
+	reagents.add_reagent("nutriment", 9)
+	reagents.add_reagent("protein", 4)
+	reagents.add_reagent("sugar", 4)
+	bitesize = 6
 
 /obj/item/weapon/reagent_containers/food/snacks/candy/donor
 	name = "Donor Candy"

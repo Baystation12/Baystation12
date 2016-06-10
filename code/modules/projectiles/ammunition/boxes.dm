@@ -66,8 +66,8 @@
 	name = "magazine (9mm flash)"
 	ammo_type = /obj/item/ammo_casing/c9mmf
 
-/obj/item/ammo_magazine/c9mm
-	name = "ammunition Box (9mm)"
+/obj/item/ammo_magazine/box/c9mm
+	name = "ammunition box (9mm)"
 	icon_state = "9mm"
 	origin_tech = list(TECH_COMBAT = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 1800)
@@ -75,7 +75,7 @@
 	ammo_type = /obj/item/ammo_casing/c9mm
 	max_ammo = 30
 
-/obj/item/ammo_magazine/c9mm/empty
+/obj/item/ammo_magazine/box/c9mm/empty
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/mc9mmt
@@ -99,8 +99,8 @@
 	name = "top mounted magazine (9mm practice)"
 	ammo_type = /obj/item/ammo_casing/c9mmp
 
-/obj/item/ammo_magazine/c45
-	name = "ammunition Box (.45)"
+/obj/item/ammo_magazine/box/c45
+	name = "ammunition box (.45)"
 	icon_state = "9mm"
 	origin_tech = list(TECH_COMBAT = 2)
 	caliber = ".45"
@@ -108,7 +108,7 @@
 	ammo_type = /obj/item/ammo_casing/c45
 	max_ammo = 30
 
-/obj/item/ammo_magazine/c9mm/empty
+/obj/item/ammo_magazine/box/c45/empty
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/a10mm
@@ -169,7 +169,7 @@
 /obj/item/ammo_magazine/a75/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/a762
+/obj/item/ammo_magazine/box/a762
 	name = "magazine box (7.62mm)"
 	icon_state = "a762"
 	origin_tech = list(TECH_COMBAT = 2)
@@ -180,7 +180,7 @@
 	max_ammo = 50
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/a762/empty
+/obj/item/ammo_magazine/box/a762/empty
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/c762

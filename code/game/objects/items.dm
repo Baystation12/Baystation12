@@ -229,7 +229,7 @@
 					for(var/obj/item/I in src.loc)
 						if(I.type in rejections) // To limit bag spamming: any given type only complains once
 							continue
-						if(!S.can_be_inserted(I))	// Note can_be_inserted still makes noise when the answer is no
+						if(!S.can_be_inserted(I, user))	// Note can_be_inserted still makes noise when the answer is no
 							rejections += I.type	// therefore full bags are still a little spammy
 							failure = 1
 							continue
@@ -242,7 +242,7 @@
 					else
 						user << "<span class='notice'>You fail to pick anything up with \the [S].</span>"
 
-			else if(S.can_be_inserted(src))
+			else if(S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
 
 	return
@@ -257,7 +257,15 @@
 /obj/item/proc/dropped(mob/user as mob)
 	if(randpixel)
 		pixel_z = randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character
-	if(zoom) zoom() //binoculars, scope, etc
+	if(zoom)
+		zoom() //binoculars, scope, etc
+
+	update_twohanding()
+	if(user)
+		if(user.l_hand)
+			user.l_hand.update_twohanding()
+		if(user.r_hand)
+			user.r_hand.update_twohanding()
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
@@ -389,7 +397,7 @@ var/list/global/slot_flags_enumeration = list(
 			var/allow = 0
 			if(H.back && istype(H.back, /obj/item/weapon/storage/backpack))
 				var/obj/item/weapon/storage/backpack/B = H.back
-				if(B.can_be_inserted(src,1))
+				if(B.can_be_inserted(src,M,1))
 					allow = 1
 			if(!allow)
 				return 0

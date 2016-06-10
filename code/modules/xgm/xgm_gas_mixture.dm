@@ -290,6 +290,9 @@
 			return 0
 		marked[g] = 1
 
+	if(abs(return_pressure() - sample.return_pressure()) > MINIMUM_PRESSURE_DIFFERENCE_TO_SUSPEND)
+		return 0
+
 	for(var/g in sample.gas)
 		if(!marked[g])
 			if((abs(gas[g] - sample.gas[g]) > MINIMUM_AIR_TO_SUSPEND) && \

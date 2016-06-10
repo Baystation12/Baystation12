@@ -2,7 +2,7 @@
  *
  *  Zas Unit Tests.
  *  Shuttle Pressurized.
- *  
+ *
  *
  */
 
@@ -80,7 +80,7 @@ proc/test_air_in_area(var/test_area, var/expectation = UT_NORMAL)
 					return test_result
 
 				if(expectation == UT_NORMAL)
-	
+
 					if(abs(temp - T20C) > 10)
 						test_result["msg"] = "Temperature out of bounds: [temp] | [t_msg]"
 						return test_result
@@ -126,7 +126,7 @@ datum/unit_test/zas_area_test/mining_shuttle_at_station
 
 datum/unit_test/zas_area_test/
 	name = "ZAS: Cargo Maintenance"
-	area_path = /area/maintenance/cargo 
+	area_path = /area/maintenance/cargo
 
 datum/unit_test/zas_area_test/eng_shuttle
 	name = "ZAS: Construction Site Shuttle (Station)"
@@ -134,8 +134,8 @@ datum/unit_test/zas_area_test/eng_shuttle
 
 datum/unit_test/zas_area_test/incinerator
 	name = "ZAS: Incinerator"
-	area_path = /area/maintenance/incinerator 
-	disabled = 1		
+	area_path = /area/maintenance/incinerator
+	disabled = 1
 	why_disabled = "Scrubber pulls air, this area cannot be tested."
 
 datum/unit_test/zas_area_test/virology
@@ -144,7 +144,7 @@ datum/unit_test/zas_area_test/virology
 
 datum/unit_test/zas_area_test/xenobio
 	name = "ZAS: Xenobiology"
-	area_path = /area/rnd/xenobiology 
+	area_path = /area/rnd/xenobiology
 
 datum/unit_test/zas_area_test/research_maint_starboard
 	name = "ZAS: Research Starboard Maintenance"
@@ -176,32 +176,39 @@ datum/unit_test/zas_supply_shuttle_moved
 	name = "ZAS: Supply Shuttle (When Moved)"
 	async=1				// We're moving the shuttle using built in procs.
 
-	var/datum/shuttle/ferry/supply/Shuttle = null
+	var/datum/shuttle/ferry/supply/shuttle = null
 
 	var/testtime = 0	//Used as a timer.
 
 datum/unit_test/zas_supply_shuttle_moved/start_test()
 
-	if(!shuttle_controller || !shuttle_controller.shuttles.len)
+	if(!shuttle_controller)
 		fail("Shuttle Controller not setup at time of test.")
-	
-	Shuttle = shuttle_controller.shuttles["Supply"]
-	supply_controller.movetime = 5 // Speed up the shuttle movement.
+		return 1
+	if(!shuttle_controller.shuttles.len)
+		skip("No shuttles have been setup for this map.")
+		return 1
 
-	if(isnull(Shuttle))
-		fail("Unable to locate the supply shuttle")
+	shuttle = supply_controller.shuttle
+	if(isnull(shuttle))
+		return 1
 
 	// Initiate the Move.
-	Shuttle.short_jump(Shuttle.area_offsite, Shuttle.area_station)
+	supply_controller.movetime = 5 // Speed up the shuttle movement.
+	shuttle.short_jump(shuttle.area_offsite, shuttle.area_station)
 
 	return 1
 
 datum/unit_test/zas_supply_shuttle_moved/check_result()
-	if(Shuttle.moving_status == SHUTTLE_IDLE && !Shuttle.at_station())
+	if(!shuttle)
+		skip("This map has no supply shuttle.")
+		return 1
+
+	if(shuttle.moving_status == SHUTTLE_IDLE && !shuttle.at_station())
 		fail("Shuttle Did not Move")
 		return 1
 
-	if(!Shuttle.at_station())
+	if(!shuttle.at_station())
 		return 0
 
 	if(!testtime)

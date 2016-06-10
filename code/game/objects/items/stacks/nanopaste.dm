@@ -19,7 +19,7 @@
 			R.adjustFireLoss(-15)
 			R.updatehealth()
 			use(1)
-			user.visible_message("<span class='notice'>\The [user] applied some [src] at [R]'s damaged areas.</span>",\
+			user.visible_message("<span class='notice'>\The [user] applied some [src] on [R]'s damaged areas.</span>",\
 				"<span class='notice'>You apply some [src] at [R]'s damaged areas.</span>")
 		else
 			user << "<span class='notice'>All [R]'s systems are nominal.</span>"
@@ -28,20 +28,14 @@
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/S = H.get_organ(user.zone_sel.selecting)
 
-		if(S.open == 1)
+		if(S.open >= 2)
 			if (S && (S.robotic >= ORGAN_ROBOT))
-				if(S.get_damage())
+				if(!S.get_damage())
+					user << "<span class='notice'>Nothing to fix here.</span>"
+				else if(can_use(1))
 					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 					S.heal_damage(15, 15, robo_repair = 1)
 					H.updatehealth()
 					use(1)
-					user.visible_message("<span class='notice'>\The [user] applies some nanite paste at[user != M ? " \the [M]'s" : " \the"][S.name] with \the [src].</span>",\
-					"<span class='notice'>You apply some nanite paste at [user == M ? "your" : "[M]'s"] [S.name].</span>")
-				else
-					user << "<span class='notice'>Nothing to fix here.</span>"
-		else
-			if (can_operate(H))
-				if (do_surgery(H,user,src))
-					return
-			else
-				user << "<span class='notice'>Nothing to fix in here.</span>"
+					user.visible_message("<span class='notice'>\The [user] applies some nanite paste on [user != M ? "[M]'s [S.name]" : "[S]"] with [src].</span>",\
+					"<span class='notice'>You apply some nanite paste on [user == M ? "your" : "[M]'s"] [S.name].</span>")

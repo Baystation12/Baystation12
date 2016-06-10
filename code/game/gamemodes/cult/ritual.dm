@@ -183,7 +183,6 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 	icon_state ="tome"
 	throw_speed = 1
 	throw_range = 5
-	w_class = 2.0
 	unique = 1
 	var/notedat = ""
 	var/tomedat = ""

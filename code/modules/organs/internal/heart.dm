@@ -47,7 +47,7 @@
 /obj/item/organ/heart/proc/handle_blood()
 	if(!owner)
 		return
-	if(owner.stat == DEAD && owner.bodytemperature >= 170)	//Dead or cryosleep people do not pump the blood.
+	if(owner.stat == DEAD || owner.bodytemperature < 170)	//Dead or cryosleep people do not pump the blood.
 		return
 
 	var/blood_volume_raw = owner.vessel.get_reagent_amount("blood")
@@ -84,7 +84,8 @@
 			if(prob(15))
 				owner << "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>"
 		else if(blood_volume < BLOOD_VOLUME_SURVIVE)
-			owner.death()
+			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth))
+			owner.adjustOxyLoss(10)
 
 	//Blood regeneration if there is some space
 	if(blood_volume_raw < species.blood_volume)

@@ -25,7 +25,7 @@
 	//blind adjacent people
 	for (var/mob/living/carbon/M in viewers(T, flash_range))
 		if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
-			flick("e_flash", M.flash)
+			M.flash_eyes()
 
 	//snap pop
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
@@ -64,10 +64,10 @@
 	//Damage will be handled on the MOB side, to prevent window shattering.
 
 /obj/item/projectile/energy/electrode/stunshot
-	name = "stunshot"
-	damage = 5
-	taser_effect = 1
+	nodamage = 0
+	damage = 10
 	agony = 80
+	damage_type = BURN
 
 /obj/item/projectile/energy/declone
 	name = "declone"
@@ -99,6 +99,7 @@
 /obj/item/projectile/energy/bolt/large
 	name = "largebolt"
 	damage = 20
+	agony = 60
 
 
 /obj/item/projectile/energy/neurotoxin

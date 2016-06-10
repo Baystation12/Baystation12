@@ -1,5 +1,5 @@
 //#define TESTING
-#if DM_VERSION < 506
+#if DM_VERSION < 509
 #warn This compiler is out of date. You may experience issues with projectile animations.
 #endif
 
@@ -14,6 +14,8 @@ var/global/list/med_hud_users            = list() // List of all entities using 
 var/global/list/sec_hud_users            = list() // List of all entities using a security HUD.
 var/global/list/hud_icon_reference       = list()
 var/global/list/traders                  = list() //List of traders used by the trade module
+
+var/global/list/listening_objects         = list() // List of objects that need to be able to hear, used to avoid recursive searching through contents.
 
 
 var/global/list/global_mutations  = list() // List of hidden mutation things.

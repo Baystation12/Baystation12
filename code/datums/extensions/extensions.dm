@@ -7,11 +7,9 @@
 	if(!istype(holder, expected_type))
 		CRASH("Invalid holder type. Expected [expected_type], was [holder.type]")
 	src.holder = holder
-	..()
 
 /datum/extension/Destroy()
 	holder = null
-	return ..()
 
 /datum
 	var/list/datum/extension/extensions
@@ -19,21 +17,20 @@
 /datum/Destroy()
 	if(extensions)
 		for(var/expansion_key in extensions)
-			var/list/expansion = extensions[expansion_key]
-			if(islist(expansion))
-				expansion.Cut()
+			var/list/extension = extensions[expansion_key]
+			if(islist(extension))
+				extension.Cut()
 			else
-				qdel(expansion)
-		extensions.Cut()
+				qdel(extension)
+		extensions = null
 	return ..()
 
 /datum/ResetVars(var/list/exclude = list())
 	exclude += "extensions"
 	..(exclude)
-	//extensions = list()
 
 //Variadic - Additional positional arguments can be given. Named arguments might not work so well
-/proc/set_extension(var/datum/source, var/datum/extension/base_type, var/expansion_type)
+/proc/set_extension(var/datum/source, var/datum/extension/base_type, var/extension_type)
 	if(!source.extensions)
 		source.extensions = list()
 	var/datum/extension/existing_extension = source.extensions[base_type]
@@ -41,10 +38,10 @@
 		qdel(existing_extension)
 
 	if(initial(base_type.flags) & EXTENSION_FLAG_IMMEDIATE)
-		. = construct_extension_instance(expansion_type, source, args.Copy(4))
+		. = construct_extension_instance(extension_type, source, args.Copy(4))
 		source.extensions[base_type] = .
 	else
-		var/list/extension_data = list(expansion_type, source)
+		var/list/extension_data = list(extension_type, source)
 		if(args.len > 3)
 			extension_data += args.Copy(4)
 		source.extensions[base_type] = extension_data
@@ -67,4 +64,3 @@
 /proc/construct_extension_instance(var/extension_type, var/datum/source, var/list/arguments)
 	arguments = list(source) + arguments
 	return new extension_type(arglist(arguments))
-

@@ -12,6 +12,9 @@
 		else
 			user << "<span class=warning>There's no space to put \the [GE] on \the [src]!</span>"
 	else if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/fruit_slice))
+		if(!rim_pos)
+			user << "<span class=warning>There's no space to put \the [I] on \the [src]!</span>"
+			return
 		var/obj/item/weapon/reagent_containers/food/snacks/fruit_slice/FS = I
 		extras += FS
 		user.remove_from_mob(FS)

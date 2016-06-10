@@ -4,6 +4,7 @@
 	icon_state = "metalbat0"
 	base_icon = "metalbat"
 	item_state = "metalbat"
+	w_class = 4
 	throwforce = 7
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'

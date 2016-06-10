@@ -525,7 +525,7 @@ other types of metals and chemistry for reagents).
 	id = "ammo_9mm"
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 3750, "silver" = 100)
-	build_path = /obj/item/ammo_magazine/c9mm
+	build_path = /obj/item/ammo_magazine/box/c9mm
 	sort_string = "TAACA"
 
 /datum/design/item/weapon/stunshell
@@ -868,7 +868,6 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 400)
-	chemicals = list("sacid" = 10)
 	build_path = /obj/item/weapon/computer_hardware/battery_module
 	sort_string = "VBAAP"
 
@@ -878,7 +877,6 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 800)
-	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/advanced
 	sort_string = "VBAAQ"
 
@@ -888,7 +886,6 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 3)
 	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 1600)
-	chemicals = list("sacid" = 40)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/super
 	sort_string = "VBAAR"
 
@@ -898,7 +895,6 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_POWER = 5, TECH_ENGINEERING = 4)
 	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 3200)
-	chemicals = list("sacid" = 80)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/ultra
 	sort_string = "VBAAS"
 
@@ -908,7 +904,6 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 200)
-	chemicals = list("sacid" = 5)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/nano
 	sort_string = "VBAAT"
 
@@ -918,7 +913,6 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 400)
-	chemicals = list("sacid" = 10)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/micro
 	sort_string = "VBAAU"
 
