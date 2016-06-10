@@ -44,7 +44,7 @@
 		field.Remove(D)
 		qdel(D)
 	..()
-	
+
 /obj/machinery/shield_gen/emag_act(var/remaining_charges, var/mob/user)
 	if(prob(75))
 		src.locked = !src.locked

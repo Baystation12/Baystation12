@@ -95,6 +95,7 @@ var/list/name_to_material
 	var/explosion_resistance = 5 // Only used by walls currently.
 	var/conductive = 1           // Objects with this var add CONDUCTS to flags on spawn.
 	var/list/composite_material  // If set, object matter var will be a list containing these values.
+	var/material_worth = 1      // How expensive each stack of this is worth
 
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
 	var/created_window
@@ -233,6 +234,7 @@ var/list/name_to_material
 	weight = 22
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	door_icon_base = "stone"
+	material_worth = 100
 
 /material/diamond
 	name = "diamond"
@@ -246,6 +248,7 @@ var/list/name_to_material
 	hardness = 100
 	stack_origin_tech = list(TECH_MATERIAL = 6)
 	conductive = 0
+	material_worth = 70
 
 /material/gold
 	name = "gold"
@@ -256,6 +259,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 4)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	material_worth = 40
 
 /material/gold/bronze //placeholder for ashtrays
 	name = "bronze"
@@ -270,6 +274,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	material_worth = 35
 
 /material/phoron
 	name = "phoron"
@@ -283,6 +288,7 @@ var/list/name_to_material
 	door_icon_base = "stone"
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
+	material_worth = 200
 
 /*
 // Commenting this out while fires are so spectacularly lethal, as I can't seem to get this balanced appropriately.
@@ -322,6 +328,7 @@ var/list/name_to_material
 	hardness = 100
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	stack_type = /obj/item/stack/material/marble
+	material_worth = 4
 
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
@@ -331,6 +338,7 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
 	hitsound = 'sound/weapons/smash.ogg'
+	material_worth = 4
 
 /material/diona
 	name = "biomass"
@@ -369,6 +377,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
 	hitsound = 'sound/effects/blobattack.ogg'
+	material_worth = 12
 
 /material/plasteel/titanium
 	name = "titanium"
@@ -377,6 +386,7 @@ var/list/name_to_material
 	door_icon_base = "metal"
 	icon_colour = "#D1E6E3"
 	icon_reinf = "reinf_metal"
+	material_worth = 10
 
 /material/glass
 	name = "glass"
@@ -486,6 +496,7 @@ var/list/name_to_material
 	created_window = /obj/structure/window/reinforced
 	wire_product = null
 	rod_product = null
+	material_worth = 2
 
 /material/glass/phoron
 	name = "phglass"
@@ -498,6 +509,7 @@ var/list/name_to_material
 	created_window = /obj/structure/window/phoronbasic
 	wire_product = null
 	rod_product = /obj/item/stack/material/glass/phoronrglass
+	material_worth = 30
 
 /material/glass/phoron/reinforced
 	name = "rphglass"
@@ -511,6 +523,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list() //todo
 	rod_product = null
+	material_worth = 40
 
 /material/plastic
 	name = "plastic"
@@ -538,6 +551,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	material_worth = 30
 
 /material/tritium
 	name = "tritium"
@@ -546,12 +560,15 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	material_worth
+	material_worth = 300
 
 /material/mhydrogen
 	name = "mhydrogen"
 	stack_type = /obj/item/stack/material/mhydrogen
 	icon_colour = "#E6C5DE"
 	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 6, TECH_MAGNET = 5)
+	material_worth = 100
 
 /material/platinum
 	name = "platinum"
@@ -561,6 +578,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	material_worth = 80
 
 /material/iron
 	name = "iron"
@@ -570,6 +588,7 @@ var/list/name_to_material
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	hitsound = 'sound/weapons/smash.ogg'
+	material_worth = 5
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy
@@ -582,6 +601,7 @@ var/list/name_to_material
 	explosion_resistance = 200 // Hull plating.
 	hardness = 500
 	weight = 500
+	material_worth = 100
 
 /material/wood
 	name = "wood"
@@ -605,6 +625,7 @@ var/list/name_to_material
 	sheet_plural_name = "planks"
 	hitsound = 'sound/effects/woodhit.ogg'
 	conductive = 0
+	material_worth = 3
 
 /material/wood/holographic
 	name = "holowood"
@@ -628,6 +649,7 @@ var/list/name_to_material
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
 	conductive = 0
+	material_worth = 0
 
 /material/cloth //todo
 	name = "cloth"
@@ -637,6 +659,7 @@ var/list/name_to_material
 	melting_point = T0C+300
 	flags = MATERIAL_PADDING
 	conductive = 0
+	material_worth = 1
 
 /material/cult
 	name = "cult"
@@ -687,6 +710,7 @@ var/list/name_to_material
 	ignition_point = T0C+300
 	melting_point = T0C+300
 	conductive = 0
+	material_worth = 3
 
 /material/carpet
 	name = "carpet"
@@ -699,6 +723,7 @@ var/list/name_to_material
 	sheet_singular_name = "tile"
 	sheet_plural_name = "tiles"
 	conductive = 0
+	material_worth = 1
 
 /material/cotton
 	name = "cotton"
@@ -708,6 +733,7 @@ var/list/name_to_material
 	ignition_point = T0C+232
 	melting_point = T0C+300
 	conductive = 0
+	material_worth = 1
 
 /material/cloth_teal
 	name = "teal"

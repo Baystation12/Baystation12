@@ -6,7 +6,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 100, "waste" = 10)
 	var/armed = 0
 
-
 	examine(mob/user)
 		..(user)
 		if(armed)

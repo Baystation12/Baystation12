@@ -432,6 +432,15 @@ var/global/datum/controller/gameticker/ticker
 				robolist += "[robo.name][robo.stat?" (Deactivated) (Played by: [robo.key]), ":" (Played by: [robo.key]), "]"
 			world << "[robolist]"
 
+	var/total_damage = station_damage_score
+	for(var/a in machines)
+		var/obj/machinery/M = a
+		if(M.stat & BROKEN) //Hate having to check this but the destroyed ones will send their data already and the living ones don't technically cost anything unless broken
+			total_damage += M.get_worth()
+
+	if(total_damage)
+		world << "<br><br><b>[station_name()] has taken over [round(total_damage)] thalers in damage.</b><br>"
+
 	var/dronecount = 0
 
 	for (var/mob/living/silicon/robot/robo in mob_list)

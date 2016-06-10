@@ -609,7 +609,7 @@ BLIND     // can't see anything
 	else
 		rolled_sleeves = -1
 	if(H) update_clothing_icon()
-	
+
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc

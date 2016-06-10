@@ -57,7 +57,6 @@
 	body_parts_covered = HEAD|FACE|EYES
 	siemens_coefficient = 0
 
-
 /obj/item/clothing/suit/bomb_suit
 	name = "bomb suit"
 	desc = "A suit designed for safety when handling explosives."

@@ -8,7 +8,6 @@
 	wires = WIRE_RECEIVE | WIRE_PULSE | WIRE_RADIO_PULSE | WIRE_RADIO_RECEIVE
 
 	secured = 1
-
 	var/code = 30
 	var/frequency = 1457
 	var/delay = 0

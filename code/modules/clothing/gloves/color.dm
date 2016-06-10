@@ -6,6 +6,7 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 
+
 /obj/item/clothing/gloves/fyellow                             //Cheap Chinese Crap
 	desc = "These gloves are cheap copies of the coveted gloves, no way this can end badly."
 	name = "budget insulated gloves"

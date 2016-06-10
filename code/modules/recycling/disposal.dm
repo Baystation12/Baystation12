@@ -1180,7 +1180,6 @@
 	name = "sorting junction"
 	icon_state = "pipe-j1s"
 	desc = "An underfloor disposal pipe with a package sorting mechanism."
-
 	var/posdir = 0
 	var/negdir = 0
 	var/sortdir = 0

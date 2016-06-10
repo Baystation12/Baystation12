@@ -9,6 +9,7 @@ var/global/list/ashtray_cache = list()
 	randpixel = 5
 	var/image/base_image
 	var/max_butts = 10
+	worth_multiplier = 0.5
 
 /obj/item/weapon/material/ashtray/New(var/newloc, var/material_name)
 	..(newloc, material_name)

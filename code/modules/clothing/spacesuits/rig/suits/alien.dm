@@ -33,6 +33,6 @@
 
 /obj/item/clothing/shoes/magboots/rig/unathi
 	species_restricted = list("Unathi")
-	
+
 /obj/item/clothing/gloves/rig/unathi
 	species_restricted = list("Unathi")

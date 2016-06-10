@@ -266,3 +266,31 @@
 
 
 		return 1
+
+
+/datum/job/merchant
+	title = "Merchant"
+	flag = MERCHANT
+	department = "Civilian"
+	department_flag = CIVILIAN
+	faction = "Station"
+	idtype = null
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "yourself"
+	selection_color = "#515151"
+	economic_modifier = 10
+	access = list()
+	minimal_access = list()
+	alt_titles = list("Clerk", "Trader")
+	create_record = 0
+
+/datum/job/merchant/equip(var/mob/living/carbon/human/H)
+	if(!H) return 0
+	H.equip_to_slot_or_del(new /obj/item/clothing/under/color/black(H), slot_w_uniform)
+	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
+	switch(H.backbag)
+		if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
+		if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
+		if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
+	return 1

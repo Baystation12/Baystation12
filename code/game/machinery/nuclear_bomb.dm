@@ -338,7 +338,7 @@ var/bomb_set
 	src.yes_code = 0
 	src.safety = 1
 	update_icon()
-	
+
 	SetUniversalState(/datum/universal_state/nuclear_explosion, args=list(src))
 
 	return
@@ -374,12 +374,12 @@ if(!N.lighthack)
 /obj/item/weapon/disk/nuclear/New()
 	..()
 	nuke_disks |= src
-	
+
 /obj/item/weapon/disk/nuclear/initialize()
 	..()
 	// Can never be quite sure that a game mode has been properly initiated or not at this point, so always register
 	moved_event.register(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level)
-	
+
 /obj/item/weapon/disk/nuclear/proc/check_z_level()
 	if(!(ticker && istype(ticker.mode, /datum/game_mode/nuclear)))
 		moved_event.unregister(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level) // However, when we are certain unregister if necessary

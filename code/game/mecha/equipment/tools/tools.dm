@@ -375,7 +375,7 @@
 	icon_state = "mecha_wholegen"
 	origin_tech = list(TECH_BLUESPACE = 3)
 	equip_cooldown = 50
-	energy_drain = 300
+	energy_drain = 3000
 	range = RANGED
 
 

@@ -36,7 +36,7 @@
 
 /obj/item/clothing/gloves/rig/ert
 	species_restricted = list("Human","Skrell","Unathi")
-	
+
 
 /obj/item/weapon/rig/ert/engineer
 	name = "asset protection engineering hardsuit control module"

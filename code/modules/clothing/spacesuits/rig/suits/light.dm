@@ -101,7 +101,6 @@
 		/obj/item/rig_module/datajack,
 		/obj/item/rig_module/self_destruct
 		)
-
 	..()
 
 /obj/item/clothing/gloves/rig/light/ninja

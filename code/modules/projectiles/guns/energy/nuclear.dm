@@ -31,12 +31,12 @@
 	self_recharge = 1
 	modifystate = null
 	requires_two_hands = 1 //bulkier than an e-gun
-	
+
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
 		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam),
 		)
-	
+
 	var/lightfail = 0
 
 //override for failcheck behaviour

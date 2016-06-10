@@ -25,7 +25,6 @@
 	. = BB
 	BB = null
 	set_dir(pick(cardinal)) //spin spent casings
-
 	// Aurora forensics port, gunpowder residue.
 	if(leaves_residue)
 		leave_residue()

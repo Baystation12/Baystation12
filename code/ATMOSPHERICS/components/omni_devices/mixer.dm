@@ -75,7 +75,7 @@
 	if(output)
 		output.air.volume = ATMOS_DEFAULT_VOLUME_MIXER * 0.75 * inputs.len
 		output.concentration = 1
-	
+
 	rebuild_mixing_inputs()
 
 /obj/machinery/atmospherics/omni/mixer/proc/mapper_set()

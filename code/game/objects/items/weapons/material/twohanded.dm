@@ -26,6 +26,7 @@
 	var/base_icon
 	var/base_name
 	var/unwielded_force_divisor = 0.25
+	worth_multiplier = 1.1
 
 /obj/item/weapon/material/twohanded/update_twohanding()
 	var/mob/living/M = loc

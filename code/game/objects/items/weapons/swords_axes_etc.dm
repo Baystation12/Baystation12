@@ -15,7 +15,6 @@
 	item_state = "classic_baton"
 	slot_flags = SLOT_BELT
 	force = 10
-
 /obj/item/weapon/melee/classic_baton/attack(mob/M as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
 		user << "<span class='warning'>You club yourself over the head.</span>"

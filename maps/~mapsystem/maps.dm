@@ -35,7 +35,7 @@ var/list/all_maps = list()
 	var/list/exempt_areas = list()
 	var/const/NO_APC = 1
 	var/const/NO_VENT = 2
-	var/const/NO_SCRUBBER = 4
+	var/const/NO_SCRUBBER = 3
 
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock
@@ -45,7 +45,7 @@ var/list/all_maps = list()
 	var/emergency_shuttle_leaving_dock
 	var/emergency_shuttle_called_message
 	var/emergency_shuttle_recall_message
-
+	
 /datum/map/New()
 	..()
 	if(!map_levels)

@@ -13,7 +13,6 @@
 	projectile_type = /obj/item/projectile/temp
 	cell_type = /obj/item/weapon/cell/high
 
-
 /obj/item/weapon/gun/energy/temperature/New()
 	..()
 	processing_objects.Add(src)

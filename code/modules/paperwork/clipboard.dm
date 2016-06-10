@@ -43,7 +43,7 @@
 	return
 
 /obj/item/weapon/clipboard/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	
+
 	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/photo))
 		user.drop_item()
 		W.loc = src
@@ -106,20 +106,20 @@
 
 		else if(href_list["write"])
 			var/obj/item/weapon/P = locate(href_list["write"])
-			
+
 			if(P && (P.loc == src) && istype(P, /obj/item/weapon/paper) && (P == toppaper) )
-				
+
 				var/obj/item/I = usr.get_active_hand()
-				
+
 				if(istype(I, /obj/item/weapon/pen))
-				
+
 					P.attackby(I, usr)
 
 		else if(href_list["remove"])
 			var/obj/item/P = locate(href_list["remove"])
-			
+
 			if(P && (P.loc == src) && (istype(P, /obj/item/weapon/paper) || istype(P, /obj/item/weapon/photo)) )
-			
+
 				P.loc = usr.loc
 				usr.put_in_hands(P)
 				if(P == toppaper)
@@ -129,24 +129,24 @@
 						toppaper = newtop
 					else
 						toppaper = null
-						
+
 		else if(href_list["rename"])
 			var/obj/item/weapon/O = locate(href_list["rename"])
-			
+
 			if(O && (O.loc == src))
 				if(istype(O, /obj/item/weapon/paper))
 					var/obj/item/weapon/paper/to_rename = O
 					to_rename.rename()
-					
+
 				else if(istype(O, /obj/item/weapon/photo))
 					var/obj/item/weapon/photo/to_rename = O
 					to_rename.rename()
 
 		else if(href_list["read"])
 			var/obj/item/weapon/paper/P = locate(href_list["read"])
-			
+
 			if(P && (P.loc == src) && istype(P, /obj/item/weapon/paper) )
-			
+
 				if(!(istype(usr, /mob/living/carbon/human) || isghost(usr) || istype(usr, /mob/living/silicon)))
 					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
 					onclose(usr, "[P.name]")

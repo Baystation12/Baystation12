@@ -138,7 +138,6 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	maxcharge = 10000
 	matter = null
 
-
 /obj/item/weapon/cell/New()
 	..()
 	charge = maxcharge

@@ -160,7 +160,6 @@
 	anchored = 1.0
 	var/lockeddown = 0
 
-
 /obj/machinery/teleport/hub
 	name = "teleporter hub"
 	desc = "It's the hub of a teleporting machine."

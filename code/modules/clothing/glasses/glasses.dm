@@ -219,7 +219,6 @@
 	name = "HUDSunglasses"
 	desc = "Sunglasses with a HUD."
 	icon_state = "sunhud"
-
 	New()
 		..()
 		src.hud = new/obj/item/clothing/glasses/hud/security(src)

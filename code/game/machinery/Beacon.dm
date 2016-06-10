@@ -10,7 +10,6 @@
 	use_power = 1
 	idle_power_usage = 0
 	var/obj/item/device/radio/beacon/Beacon
-
 	New()
 		..()
 		var/turf/T = loc

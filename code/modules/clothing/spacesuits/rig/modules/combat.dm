@@ -28,7 +28,6 @@
 
 	var/fire_force = 30
 	var/fire_distance = 10
-
 	charges = list(
 		list("flashbang",   "flashbang",   /obj/item/weapon/grenade/flashbang,  3),
 		list("smoke bomb",  "smoke bomb",  /obj/item/weapon/grenade/smokebomb,  3),

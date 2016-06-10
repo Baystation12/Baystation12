@@ -877,3 +877,14 @@
 		log_admin("[key_name(src)] has toggled [M.key]'s [blockname] block [state]!")
 	else
 		alert("Invalid mob")
+
+/client/proc/get_current_traders()
+	set category = "Debug"
+	set name = "List Current Traders"
+	set desc = "For debugging purposes"
+
+	if(traders && traders.len)
+		for(var/a in traders)
+			var/datum/trader/T = a
+			world << "<b>[T.name]</b> of the [T.origin]"
+			world << "<a href='?_src_=vars;Vars=\ref[T]'>\ref[T]</a> - [T.type]"

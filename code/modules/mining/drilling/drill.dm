@@ -294,7 +294,7 @@
 
 /obj/machinery/mining/brace/New()
 	..()
-	
+
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/miningdrillbrace(src)
 
