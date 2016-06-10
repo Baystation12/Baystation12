@@ -287,7 +287,7 @@ var/global/list/narsie_list = list()
 		acquire(pick(cultists))
 		return
 		//If there was living cultists, it picks one to follow.
-	for(var/mob/living/carbon/human/food in living_mob_list)
+	for(var/mob/living/carbon/human/food in living_mob_list_)
 		if(food.stat)
 			continue
 		var/turf/pos = get_turf(food)

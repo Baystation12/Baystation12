@@ -335,7 +335,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //When a borg is activated, it can choose which AI it wants to be slaved to
 /proc/active_ais()
 	. = list()
-	for(var/mob/living/silicon/ai/A in living_mob_list)
+	for(var/mob/living/silicon/ai/A in living_mob_list_)
 		if(A.stat == DEAD)
 			continue
 		if(A.control_disabled == 1)
@@ -1242,10 +1242,12 @@ var/mob/dview/dview_mob = new
 	..()
 	// We don't want to be in any mob lists; we're a dummy not a mob.
 	mob_list -= src
-	if(stat == DEAD)
-		dead_mob_list -= src
-	else
-		living_mob_list -= src
+
+/mob/dview/add_to_living_mob_list()
+	return
+
+/mob/dview/add_to_dead_mob_list()
+	return
 
 // call to generate a stack trace and print to runtime logs
 /proc/crash_with(msg)

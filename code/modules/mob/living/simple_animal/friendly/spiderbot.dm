@@ -194,9 +194,7 @@
 	..()
 
 /mob/living/simple_animal/spiderbot/death()
-
-	living_mob_list -= src
-	dead_mob_list += src
+	switch_from_living_to_dead_mob_list()
 
 	if(camera)
 		camera.status = 0
