@@ -250,7 +250,7 @@
 "eP" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/grille,/turf/simulated/floor/plating,/area/maintenance/seconddeck/aftstarboard)
 "eQ" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 6},/turf/simulated/floor/plating,/area/engineering/engine_room)
 "eR" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/obj/effect/wingrille_spawn/reinforced_phoron,/obj/structure/window/phoronreinforced{dir = 10},/turf/simulated/floor/plating,/area/engineering/engine_room)
-"eS" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 4},/turf/simulated/floor/reinforced{name = "engine floor"; oxygen = 0},/area/space)
+"eS" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 4},/turf/simulated/floor/reinforced{name = "engine floor"; oxygen = 0},/area/engineering/engine_room)
 "eT" = (/obj/machinery/alarm{pixel_y = 24},/turf/simulated/floor/plating,/area/maintenance/seconddeck/forestarboard)
 "eU" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/plating,/area/maintenance/seconddeck/forestarboard)
 "eV" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22; pixel_y = 0},/turf/simulated/floor/plating,/area/vacant/chapel)

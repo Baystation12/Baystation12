@@ -1,3 +1,6 @@
+/area/supply/station
+	base_turf = /turf/simulated/floor/plating
+
 //Fourth Deck (Z-1)
 /area/hallway/primary/fourthdeck/fore
 	name = "\improper Fourth Deck Fore Hallway"
