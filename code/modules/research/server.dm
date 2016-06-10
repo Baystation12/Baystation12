@@ -13,7 +13,6 @@
 	idle_power_usage = 800
 	var/delay = 10
 	req_access = list(access_rd) //Only the R&D can change server settings.
-	item_worth = 2000
 
 /obj/machinery/r_n_d/server/New()
 	..()

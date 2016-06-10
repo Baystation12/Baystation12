@@ -16,7 +16,6 @@
 
 	var/list/affecting	// the list of all items that will be moved this ptick
 	var/id = ""			// the control ID	- must match controller ID
-	item_worth = 200
 
 /obj/machinery/conveyor/centcom_auto
 	id = "round_end_belt"
@@ -166,7 +165,6 @@
 
 	var/list/conveyors		// the list of converyors that are controlled by this switch
 	anchored = 1
-	item_worth = 100
 
 
 
@@ -274,8 +272,6 @@
 	w_class = 5
 	var/id = "" //inherited by the belt
 
-	item_worth = 100
-
 /obj/item/conveyor_construct/attackby(obj/item/I, mob/user, params)
 	..()
 	if(istype(I, /obj/item/conveyor_switch_construct))
@@ -306,8 +302,6 @@
 	icon_state = "switch-off"
 	w_class = 5
 	var/id = "" //inherited by the switch
-
-	item_worth = 30
 
 /obj/item/conveyor_switch_construct/New()
 	..()

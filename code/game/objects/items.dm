@@ -2,7 +2,6 @@
 	name = "item"
 	icon = 'icons/obj/items.dmi'
 	w_class = 3.0
-	item_worth = 5
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6

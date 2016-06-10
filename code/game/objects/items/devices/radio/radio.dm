@@ -50,8 +50,6 @@ var/global/list/default_medbay_channels = list(
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
 
-	item_worth = 150
-
 /obj/item/device/radio
 	var/datum/radio_frequency/radio_connection
 	var/list/datum/radio_frequency/secure_radio_connections = new

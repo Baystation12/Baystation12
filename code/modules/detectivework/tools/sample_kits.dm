@@ -4,8 +4,6 @@
 	w_class = 1
 	var/list/evidence = list()
 
-	item_worth = 15
-
 /obj/item/weapon/sample/New(var/newloc, var/atom/supplied)
 	..(newloc)
 	if(supplied)

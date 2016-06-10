@@ -14,8 +14,6 @@
 	var/stored_name
 	var/badge_string = "Corporate Security"
 
-	item_worth = 60
-
 /obj/item/clothing/accessory/badge/old
 	name = "faded badge"
 	desc = "A faded badge, backed with leather. It bears the emblem of the Forensic division."

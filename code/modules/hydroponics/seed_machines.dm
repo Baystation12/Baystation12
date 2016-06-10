@@ -45,8 +45,6 @@
 	var/failed_task = 0
 	var/disk_needs_genes = 0
 
-	item_worth = 9050
-
 /obj/machinery/botany/process()
 
 	..()
@@ -263,8 +261,6 @@
 	name = "bioballistic delivery system"
 	icon_state = "traitgun"
 	disk_needs_genes = 1
-
-	item_worth = 16000
 
 /obj/machinery/botany/editor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 

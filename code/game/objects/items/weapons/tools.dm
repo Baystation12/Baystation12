@@ -27,7 +27,6 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
-	item_worth = 30
 
 
 /*
@@ -48,7 +47,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 75)
 	attack_verb = list("stabbed")
 	lock_picking_level = 5
-	item_worth = 15
 
 /obj/item/weapon/screwdriver/New()
 	switch(pick("red","blue","purple","brown","green","cyan","yellow"))
@@ -106,7 +104,6 @@
 	attack_verb = list("pinched", "nipped")
 	sharp = 1
 	edge = 1
-	item_worth = 25
 
 /obj/item/weapon/wirecutters/New()
 	if(prob(50))
@@ -154,7 +151,6 @@
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
 	var/status = 1 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
 	var/max_fuel = 20 	//The max amount of fuel the welder can hold
-	item_worth = 100
 
 /obj/item/weapon/weldingtool/New()
 //	var/random_fuel = min(rand(10,20),max_fuel)
@@ -381,7 +377,6 @@
 	max_fuel = 40
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 60)
-	item_worth = 150
 
 /obj/item/weapon/weldingtool/hugetank
 	name = "upgraded welding tool"
@@ -389,7 +384,6 @@
 	w_class = 3.0
 	origin_tech = list(TECH_ENGINEERING = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
-	item_worth = 300
 
 /obj/item/weapon/weldingtool/experimental
 	name = "experimental welding tool"
@@ -398,7 +392,6 @@
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 	var/last_gen = 0
-	item_worth = 600
 
 
 
@@ -426,7 +419,6 @@
 	origin_tech = list(TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
-	item_worth = 10
 
 /obj/item/weapon/crowbar/red
 	icon = 'icons/obj/items.dmi'

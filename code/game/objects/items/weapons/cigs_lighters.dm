@@ -41,7 +41,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	origin_tech = list(TECH_MATERIAL = 1)
 	slot_flags = SLOT_EARS
 	attack_verb = list("burnt", "singed")
-	item_worth = 1
 
 /obj/item/weapon/flame/match/process()
 	if(isliving(loc))
@@ -448,7 +447,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	desc = "The zippo."
 	icon_state = "zippo"
 	item_state = "zippo"
-	item_worth = 10
 
 /obj/item/weapon/flame/lighter/random
 	New()

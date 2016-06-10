@@ -14,7 +14,6 @@
 	var/on = 0
 	var/visible = 0
 	var/obj/effect/beam/i_beam/first = null
-	item_worth = 10
 
 	proc
 		trigger_beam()

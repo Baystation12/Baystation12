@@ -14,8 +14,6 @@
 	var/creating_new_account = 0
 	var/const/fund_cap = 1000000
 
-	item_worth = 3000
-
 	proc/get_access_level()
 		if (!held_card)
 			return 0

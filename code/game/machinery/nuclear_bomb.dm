@@ -22,7 +22,6 @@ var/bomb_set
 	unacidable = 1
 	var/previous_level = ""
 	var/datum/wires/nuclearbomb/wires = null
-	item_worth = 10000
 
 /obj/machinery/nuclearbomb/New()
 	..()
@@ -339,7 +338,7 @@ var/bomb_set
 	src.yes_code = 0
 	src.safety = 1
 	update_icon()
-	
+
 	SetUniversalState(/datum/universal_state/nuclear_explosion, args=list(src))
 
 	return
@@ -371,7 +370,6 @@ if(!N.lighthack)
 	icon_state = "nucleardisk"
 	item_state = "card-id"
 	w_class = 1.0
-	item_worth = 120
 
 /obj/item/weapon/disk/nuclear/New()
 	..()

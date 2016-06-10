@@ -8,8 +8,6 @@
 
 	power_rating = 15000	//15000 W ~ 20 HP
 
-	item_worth = 2500
-
 /obj/machinery/atmospherics/binary/pump/high_power/on
 	use_power = 1
 	icon_state = "map_on"

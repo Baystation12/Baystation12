@@ -5,7 +5,6 @@
 	icon_state = "tele0"
 	anchored = 1
 	density = 0
-	item_worth = 2000
 
 /obj/machinery/merchant_pad/proc/get_target()
 	var/turf/T = get_turf(src)

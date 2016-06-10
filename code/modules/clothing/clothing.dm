@@ -19,8 +19,6 @@
 	*/
 	var/list/sprite_sheets_refit = null
 
-	item_worth = 50
-
 //Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
 	return

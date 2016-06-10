@@ -15,8 +15,6 @@
 	attack_verb = list("attacked", "slapped", "whacked")
 	var/mob/living/carbon/brain/brainmob = null
 
-	item_worth = 1200
-
 /obj/item/organ/pariah_brain
 	name = "brain remnants"
 	desc = "Did someone tread on this? It looks useless for cloning or cyborgification."
@@ -25,8 +23,6 @@
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "chitin"
 	vital = 1
-
-	item_worth = 5
 
 /obj/item/organ/brain/xeno
 	name = "thinkpan"

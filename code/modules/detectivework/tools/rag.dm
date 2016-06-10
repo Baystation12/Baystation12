@@ -25,7 +25,6 @@
 	can_be_placed_into = null
 	flags = OPENCONTAINER | NOBLUDGEON
 	unacidable = 0
-	item_worth = 5
 
 	var/on_fire = 0
 	var/burn_time = 20 //if the rag burns for too long it turns to ashes

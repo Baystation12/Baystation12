@@ -28,7 +28,6 @@
 
 	var/fire_force = 30
 	var/fire_distance = 10
-	item_worth = 1500
 	charges = list(
 		list("flashbang",   "flashbang",   /obj/item/weapon/grenade/flashbang,  3),
 		list("smoke bomb",  "smoke bomb",  /obj/item/weapon/grenade/smokebomb,  3),
@@ -105,7 +104,6 @@
 
 	var/gun_type = /obj/item/weapon/gun/energy/lasercannon/mounted
 	var/obj/item/weapon/gun/gun
-	item_worth = 2000
 
 /obj/item/rig_module/mounted/New()
 	..()
@@ -133,7 +131,6 @@
 	interface_desc = "A forearm-mounted suit-powered energy gun."
 
 	gun_type = /obj/item/weapon/gun/energy/gun/mounted
-	item_worth = 1900
 
 /obj/item/rig_module/mounted/taser
 
@@ -171,8 +168,6 @@
 	passive_power_cost = 0
 
 	gun_type = /obj/item/weapon/gun/energy/crossbow/ninja
-
-	item_worth = 2200
 
 /obj/item/rig_module/mounted/energy_blade/process()
 
@@ -228,8 +223,6 @@
 	var/fabrication_type = /obj/item/weapon/material/star/ninja
 	var/fire_force = 30
 	var/fire_distance = 10
-
-	item_worth = 1800
 
 /obj/item/rig_module/fabricator/engage(atom/target)
 

@@ -23,7 +23,6 @@
 	var/id = 1.0
 	dir = 1
 	explosion_resistance = 25
-	item_worth = 1000
 
 	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways,
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
@@ -189,5 +188,3 @@ obj/machinery/door/blast/regular/open
 	icon_state_closed = "shutter1"
 	icon_state_closing = "shutterc1"
 	icon_state = "shutter1"
-
-	item_worth = 300

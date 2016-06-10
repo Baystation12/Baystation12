@@ -8,8 +8,6 @@
 	origin_tech = list(TECH_DATA = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
 	var/obj/machinery/modular_computer/holder
 
-	item_worth = 350
-
 /obj/item/weapon/computer_hardware/tesla_link/New(var/obj/L)
 	if(istype(L, /obj/machinery/modular_computer))
 		holder = L

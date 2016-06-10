@@ -63,7 +63,6 @@
 			flags |= CONDUCT
 		else
 			flags &= (~CONDUCT)
-		item_worth = material.material_worth * worth_multiplier
 		update_force()
 
 

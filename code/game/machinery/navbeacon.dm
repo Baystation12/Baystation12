@@ -20,7 +20,6 @@ var/global/list/navbeacons			// no I don't like putting this in, but it will do 
 	var/location = ""	// location response text
 	var/list/codes		// assoc. list of transponder codes
 	var/codes_txt = ""	// codes as set on map: "tag1;tag2" or "tag1=value;tag2=value"
-	item_worth = 400
 	req_access = list(access_engine)
 
 	New()

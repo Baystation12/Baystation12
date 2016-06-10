@@ -30,8 +30,6 @@
 	suit_overlay_active =   "stealth_active"
 	suit_overlay_inactive = "stealth_inactive"
 
-	item_worth = 1500
-
 /obj/item/rig_module/stealth_field/activate()
 
 	if(!..())
@@ -78,8 +76,6 @@
 
 	interface_name = "VOID-shift phase projector"
 	interface_desc = "An advanced teleportation system. It is capable of pinpoint precision or random leaps forward."
-
-	item_worth = 3000
 
 /obj/item/rig_module/teleporter/proc/phase_in(var/mob/M,var/turf/T)
 	if(!M || !T)
@@ -153,8 +149,6 @@
 
 	fabrication_type = /obj/item/weapon/energy_net
 	use_power_cost = 70
-
-	item_worth = 1200
 
 /obj/item/rig_module/fabricator/energy_net/engage(atom/target)
 

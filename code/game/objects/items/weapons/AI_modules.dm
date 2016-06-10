@@ -20,7 +20,6 @@ AI MODULES
 	throw_range = 15
 	origin_tech = list(TECH_DATA = 3)
 	var/datum/ai_laws/laws = null
-	item_worth = 3000
 
 /obj/item/weapon/aiModule/proc/install(var/obj/machinery/computer/C)
 	if (istype(C, /obj/machinery/computer/aiupload))

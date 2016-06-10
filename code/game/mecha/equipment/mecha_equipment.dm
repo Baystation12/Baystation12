@@ -15,8 +15,6 @@
 	var/salvageable = 1
 	var/required_type = /obj/mecha //may be either a type or a list of allowed types
 
-	item_worth = 1000
-
 
 /obj/item/mecha_parts/mecha_equipment/proc/do_after_cooldown(target=1)
 	sleep(equip_cooldown)

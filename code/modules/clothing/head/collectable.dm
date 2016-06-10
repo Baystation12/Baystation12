@@ -5,14 +5,10 @@
 	name = "collectable hat"
 	desc = "A rare collectable hat."
 
-	item_worth = 80
-
 /obj/item/clothing/head/collectable/petehat
 	name = "ultra rare hat"
 	desc = "an ultra rare hat. It commands a certain respect."
 	icon_state = "petehat"
-
-	item_worth = 350
 
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/head.dmi',

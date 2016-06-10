@@ -54,8 +54,6 @@
 
 	var/list/stat_rig_module/stat_modules = new()
 
-	item_worth = 1000
-
 /obj/item/rig_module/examine()
 	..()
 	switch(damage)

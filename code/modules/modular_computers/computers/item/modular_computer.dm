@@ -47,7 +47,6 @@
 
 	var/list/idle_threads = list()							// Idle programs on background. They still receive process calls but can't be interacted with.
 
-	item_worth = 4000
 
 
 // Eject ID card from computer, if it has ID slot with card inside.

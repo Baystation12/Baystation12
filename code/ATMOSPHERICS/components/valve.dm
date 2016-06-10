@@ -18,8 +18,6 @@
 	var/datum/pipe_network/network_node1
 	var/datum/pipe_network/network_node2
 
-	item_worth = 120
-
 /obj/machinery/atmospherics/valve/open
 	open = 1
 	icon_state = "map_valve1"

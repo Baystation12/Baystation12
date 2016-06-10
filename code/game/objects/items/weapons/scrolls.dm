@@ -9,7 +9,6 @@
 	throw_speed = 4
 	throw_range = 20
 	origin_tech = list(TECH_BLUESPACE = 4)
-	item_worth = 1000
 
 /obj/item/weapon/teleportation_scroll/attack_self(mob/user as mob)
 	if((user.mind && !wizards.is_antagonist(user.mind)))

@@ -16,7 +16,6 @@
 	var/item_state = null // Used to specify the item state for the on-mob overlays.
 
 	var/auto_init = 1
-	var/item_worth = 0 //How much they are worth, respectively, in thalers.
 
 /atom/movable/New()
 	..()

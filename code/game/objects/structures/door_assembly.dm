@@ -13,7 +13,6 @@
 	var/glass_type = "/glass"
 	var/glass = 0 // 0 = glass can be installed. -1 = glass can't be installed. 1 = glass is already installed. Text = mineral plating is installed instead.
 	var/created_name = null
-	item_worth = 35
 
 	New()
 		update_state()

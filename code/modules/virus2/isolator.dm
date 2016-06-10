@@ -14,7 +14,6 @@
 	var/datum/disease2/disease/virus2 = null
 	var/datum/data/record/entry = null
 	var/obj/item/weapon/reagent_containers/syringe/sample = null
-	item_worth = 5000
 
 /obj/machinery/disease2/isolator/update_icon()
 	if (stat & (BROKEN|NOPOWER))

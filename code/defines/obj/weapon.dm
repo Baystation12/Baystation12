@@ -12,7 +12,6 @@
 	w_class = 2
 	attack_verb = list("called", "rang")
 	hitsound = 'sound/weapons/ring.ogg'
-	item_worth = 10
 
 /obj/item/weapon/rsp
 	name = "\improper Rapid-Seed-Producer (RSP)"
@@ -25,7 +24,6 @@
 	var/stored_matter = 0
 	var/mode = 1
 	w_class = 3.0
-	item_worth = 300
 
 /obj/item/weapon/soap
 	name = "soap"
@@ -61,7 +59,6 @@
 
 /obj/item/weapon/soap/deluxe
 	icon_state = "soapdeluxe"
-	item_worth = 15
 
 /obj/item/weapon/soap/deluxe/New()
 	desc = "A deluxe Waffle Co. brand bar of soap. Smells of [pick("lavender", "vanilla", "strawberry", "chocolate" ,"space")]."
@@ -107,11 +104,9 @@
 	w_class = 2.0
 	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
-	item_worth = 40
 
 /obj/item/weapon/cane/concealed
 	var/concealed_blade
-	item_worth = 150
 
 /obj/item/weapon/cane/concealed/New()
 	..()
@@ -157,7 +152,6 @@
 	name = "disk"
 	icon = 'icons/obj/items.dmi'
 	randpixel = 5
-	item_worth = 90
 
 /*
 /obj/item/weapon/game_kit
@@ -184,7 +178,6 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	var/breakouttime = 300	//Deciseconds = 30s = 0.5 minute
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/handcuffs.dmi')
-	item_worth = 35
 
 /obj/item/weapon/caution
 	desc = "Caution! Wet Floor!"
@@ -197,7 +190,6 @@
 	throw_range = 5
 	w_class = 2.0
 	attack_verb = list("warned", "cautioned", "smashed")
-	item_worth = 15
 
 /obj/item/weapon/caution/cone
 	desc = "This cone is trying to warn you of something!"
@@ -242,7 +234,6 @@
 	throw_range = 20
 	matter = list(DEFAULT_WALL_MATERIAL = 100)
 	origin_tech = list(TECH_MAGNET = 1)
-	item_worth = 300
 
 /obj/item/weapon/staff
 	name = "wizards staff"
@@ -299,7 +290,6 @@
 	item_state = "electronic"
 	flags = CONDUCT
 	var/mtype = 1						// 1=electronic 2=hardware
-	item_worth = 100
 
 /obj/item/weapon/module/card_reader
 	name = "card reader module"
@@ -408,7 +398,6 @@
 	randpixel = 5
 	w_class = 2.0
 	var/rating = 1
-	item_worth = 80
 
 //Rank 1
 
@@ -462,7 +451,6 @@
 	origin_tech = list(TECH_POWER = 3)
 	rating = 2
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
-	item_worth = 160
 
 /obj/item/weapon/stock_parts/scanning_module/adv
 	name = "advanced scanning module"
@@ -471,7 +459,6 @@
 	origin_tech = list(TECH_MAGNET = 3)
 	rating = 2
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 20)
-	item_worth = 160
 
 /obj/item/weapon/stock_parts/manipulator/nano
 	name = "nano-manipulator"
@@ -480,7 +467,6 @@
 	origin_tech = list(TECH_MATERIAL = 3, TECH_DATA = 2)
 	rating = 2
 	matter = list(DEFAULT_WALL_MATERIAL = 30)
-	item_worth = 160
 
 /obj/item/weapon/stock_parts/micro_laser/high
 	name = "high-power micro-laser"
@@ -489,7 +475,6 @@
 	origin_tech = list(TECH_MAGNET = 3)
 	rating = 2
 	matter = list(DEFAULT_WALL_MATERIAL = 10,"glass" = 20)
-	item_worth = 160
 
 /obj/item/weapon/stock_parts/matter_bin/adv
 	name = "advanced matter bin"
@@ -498,7 +483,6 @@
 	origin_tech = list(TECH_MATERIAL = 3)
 	rating = 2
 	matter = list(DEFAULT_WALL_MATERIAL = 80)
-	item_worth = 160
 
 //Rating 3
 
@@ -508,7 +492,6 @@
 	origin_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4)
 	rating = 3
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
-	item_worth = 300
 
 /obj/item/weapon/stock_parts/scanning_module/phasic
 	name = "phasic scanning module"
@@ -516,7 +499,6 @@
 	origin_tech = list(TECH_MAGNET = 5)
 	rating = 3
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 20)
-	item_worth = 300
 
 /obj/item/weapon/stock_parts/manipulator/pico
 	name = "pico-manipulator"
@@ -525,7 +507,6 @@
 	origin_tech = list(TECH_MATERIAL = 5, TECH_DATA = 2)
 	rating = 3
 	matter = list(DEFAULT_WALL_MATERIAL = 30)
-	item_worth = 250
 
 /obj/item/weapon/stock_parts/micro_laser/ultra
 	name = "ultra-high-power micro-laser"
@@ -534,7 +515,6 @@
 	origin_tech = list(TECH_MAGNET = 5)
 	rating = 3
 	matter = list(DEFAULT_WALL_MATERIAL = 10,"glass" = 20)
-	item_worth = 290
 
 /obj/item/weapon/stock_parts/matter_bin/super
 	name = "super matter bin"
@@ -543,7 +523,6 @@
 	origin_tech = list(TECH_MATERIAL = 5)
 	rating = 3
 	matter = list(DEFAULT_WALL_MATERIAL = 80)
-	item_worth = 310
 
 // Subspace stock parts
 
@@ -553,7 +532,6 @@
 	desc = "A compact module capable of sensing extradimensional activity."
 	origin_tech = list(TECH_DATA = 3, TECH_MAGNET = 5 ,TECH_MATERIAL = 4, TECH_BLUESPACE = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
-	item_worth = 500
 
 /obj/item/weapon/stock_parts/subspace/filter
 	name = "hyperwave filter"
@@ -561,7 +539,6 @@
 	desc = "A tiny device capable of filtering and converting super-intense radiowaves."
 	origin_tech = list(TECH_DATA = 4, TECH_MAGNET = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
-	item_worth = 560
 
 /obj/item/weapon/stock_parts/subspace/amplifier
 	name = "subspace amplifier"
@@ -569,7 +546,6 @@
 	desc = "A compact micro-machine capable of amplifying weak subspace transmissions."
 	origin_tech = list(TECH_DATA = 3, TECH_MAGNET = 4, TECH_MATERIAL = 4, TECH_BLUESPACE = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
-	item_worth = 540
 
 /obj/item/weapon/stock_parts/subspace/treatment
 	name = "subspace treatment disk"
@@ -577,7 +553,6 @@
 	desc = "A compact micro-machine capable of stretching out hyper-compressed radio waves."
 	origin_tech = list(TECH_DATA = 3, TECH_MAGNET = 2, TECH_MATERIAL = 5, TECH_BLUESPACE = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
-	item_worth = 570
 
 /obj/item/weapon/stock_parts/subspace/analyzer
 	name = "subspace wavelength analyzer"
@@ -585,7 +560,6 @@
 	desc = "A sophisticated analyzer capable of analyzing cryptic subspace wavelengths."
 	origin_tech = list(TECH_DATA = 3, TECH_MAGNETS = 4, TECH_MATERIAL = 4, TECH_BLUESPACE = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
-	item_worth = 630
 
 /obj/item/weapon/stock_parts/subspace/crystal
 	name = "ansible crystal"
@@ -593,7 +567,6 @@
 	desc = "A crystal made from pure glass used to transmit laser databursts to subspace."
 	origin_tech = list(TECH_MAGNET = 4, TECH_MATERIAL = 4, TECH_BLUESPACE = 2)
 	matter = list("glass" = 50)
-	item_worth = 530
 
 /obj/item/weapon/stock_parts/subspace/transmitter
 	name = "subspace transmitter"
@@ -601,7 +574,6 @@
 	desc = "A large piece of equipment used to open a window into the subspace dimension."
 	origin_tech = list(TECH_MAGNET = 5, TECH_MATERIAL = 5, TECH_BLUESPACE = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 50)
-	item_worth = 620
 
 /obj/item/weapon/ectoplasm
 	name = "ectoplasm"
@@ -609,7 +581,6 @@
 	gender = PLURAL
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "ectoplasm"
-	item_worth = 10
 
 /obj/item/weapon/research
 	name = "research debugging device"

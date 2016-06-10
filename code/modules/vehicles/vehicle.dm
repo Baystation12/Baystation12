@@ -38,7 +38,6 @@
 	var/load_offset_x = 0		//pixel_x offset for item overlay
 	var/load_offset_y = 0		//pixel_y offset for item overlay
 	var/mob_offset_y = 0		//pixel_y offset for mob overlay
-	item_worth = 1200
 
 //-------------------------------------------
 // Standard procs

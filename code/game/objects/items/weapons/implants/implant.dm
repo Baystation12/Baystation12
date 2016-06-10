@@ -13,7 +13,6 @@
 	var/implant_color = "b"
 	var/allow_reagents = 0
 	var/malfunction = 0
-	item_worth = 100
 
 	proc/trigger(emote, source as mob)
 		return

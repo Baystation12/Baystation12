@@ -8,8 +8,6 @@
 	var/obj/item/weapon/storage/internal/pockets/hold
 	w_class = 3
 
-	item_worth = 55
-
 /obj/item/clothing/accessory/storage/New()
 	..()
 	hold = new/obj/item/weapon/storage/internal/pockets(src, slots, max_w_class)

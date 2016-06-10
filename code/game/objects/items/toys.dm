@@ -774,7 +774,6 @@
 	anchored = 0
 	density = 1
 	var/phrase = "I don't want to exist anymore!"
-	item_worth = 7
 
 /obj/structure/plushie/attack_hand(mob/user)
 	if(user.a_intent == I_HELP)

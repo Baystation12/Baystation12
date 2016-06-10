@@ -20,8 +20,6 @@
 	var/set_temperature = T20C		// Thermostat
 	var/cooling = 0
 
-	item_worth = 6000
-
 /obj/machinery/atmospherics/unary/freezer/New()
 	..()
 	initialize_directions = dir

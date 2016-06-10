@@ -4,7 +4,6 @@
 	icon_state = "boxing"
 	item_state = "boxing"
 
-	item_worth = 60
 
 /obj/item/clothing/gloves/boxing/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
@@ -29,5 +28,3 @@
 	desc = "These look pretty fancy."
 	icon_state = "latex"
 	item_state = "lgloves"
-
-	item_worth = 20

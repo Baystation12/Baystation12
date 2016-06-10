@@ -8,7 +8,6 @@
 	w_class = 3
 	layer = 2.3 //under pipes
 	//	flags = CONDUCT
-	item_worth = 1
 
 /obj/structure/lattice/initialize()
 	..()

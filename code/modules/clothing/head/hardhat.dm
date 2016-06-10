@@ -9,8 +9,6 @@
 	flags_inv = 0
 	siemens_coefficient = 0.9
 
-	item_worth = 180
-
 /obj/item/clothing/head/hardhat/orange
 	icon_state = "hardhat0_orange"
 

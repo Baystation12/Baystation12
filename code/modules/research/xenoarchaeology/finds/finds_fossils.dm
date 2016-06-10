@@ -8,7 +8,6 @@
 	icon_state = "bone"
 	desc = "It's a fossil."
 	var/animal = 1
-	item_worth = 100
 
 /obj/item/weapon/fossil/base/New()
 	var/list/l = list(/obj/item/weapon/fossil/bone=9,/obj/item/weapon/fossil/skull=3,

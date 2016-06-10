@@ -8,7 +8,6 @@
 	var/banglet = 0
 	var/spawner_type = null // must be an object path
 	var/deliveryamt = 1 // amount of type to deliver
-	item_worth = 300
 
 	detonate()												// Prime now just handles the two loops that query for people in lockers and people who can see it.
 

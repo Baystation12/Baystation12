@@ -10,11 +10,9 @@
 	var/in_use = 0 // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
 	var/damtype = "brute"
 	var/armor_penetration = 0
-	item_worth = 0
 
 /obj/Destroy()
 	processing_objects -= src
-	station_damage_score += src.item_worth //probably picks up a few weird qdels here and there, but should be roughly what the accurate number is.
 	return ..()
 
 /obj/Topic(href, href_list, var/datum/topic_state/state = default_state)

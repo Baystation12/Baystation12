@@ -23,8 +23,6 @@
 		/obj/item/rig_module/datajack,
 		)
 
-	item_worth = 20000
-
 /obj/item/clothing/head/helmet/space/rig/ert
 	light_overlay = "helmet_light_dual"
 	camera_networks = list(NETWORK_ERT)

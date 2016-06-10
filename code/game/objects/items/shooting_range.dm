@@ -8,7 +8,6 @@
 	var/hp = 1800
 	var/icon/virtualIcon
 	var/list/bulletholes = list()
-	item_worth = 15
 
 	Destroy()
 		// if a target is deleted and associated with a stake, force stake to forget

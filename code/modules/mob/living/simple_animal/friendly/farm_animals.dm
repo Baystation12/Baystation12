@@ -105,7 +105,6 @@
 	attacktext = "kicked"
 	health = 50
 	var/datum/reagents/udder = null
-	item_worth = 800
 
 /mob/living/simple_animal/cow/New()
 	udder = new(50)

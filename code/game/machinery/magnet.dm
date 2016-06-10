@@ -28,7 +28,6 @@
 	var/center_x = 0
 	var/center_y = 0
 	var/max_dist = 20 // absolute value of center_x,y cannot exceed this integer
-	item_worth = 50
 
 	New()
 		..()
@@ -219,7 +218,6 @@
 	var/looping = 0 // 1 if looping
 
 	var/datum/radio_frequency/radio_connection
-	item_worth = 50
 
 
 	New()

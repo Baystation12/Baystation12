@@ -34,8 +34,6 @@ log transactions
 	var/view_screen = NO_SCREEN
 	var/datum/effect/effect/system/spark_spread/spark_system
 
-	item_worth = 4500
-
 /obj/machinery/atm/New()
 	..()
 	machine_id = "[station_name()] RT #[num_financial_terminals++]"

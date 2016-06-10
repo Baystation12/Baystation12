@@ -15,7 +15,6 @@
 	w_class = 2
 	flags = OPENCONTAINER
 	unacidable = 1 //glass doesn't dissolve in acid
-	item_worth = 60
 
 	var/label_text = ""
 

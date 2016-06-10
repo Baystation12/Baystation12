@@ -15,8 +15,6 @@
 	var/last_process_worldtime = 0
 	var/report_num = 0
 
-	item_worth = 1200
-
 /obj/machinery/dnaforensics/attackby(var/obj/item/W, mob/user as mob)
 
 	if(bloodsamp)

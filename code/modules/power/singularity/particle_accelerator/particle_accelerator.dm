@@ -71,7 +71,6 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	var/powered = 0
 	var/strength = null
 	var/desc_holder = null
-	item_worth = 2000
 
 /obj/structure/particle_accelerator/Destroy()
 	construction_state = 0

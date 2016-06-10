@@ -15,8 +15,6 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/unathi
 	glove_type = /obj/item/clothing/gloves/rig/unathi
 
-	item_worth = 17000
-
 /obj/item/weapon/rig/unathi/fancy
 	name = "breacher chassis control module"
 	desc = "An authentic Unathi breacher chassis. Huge, bulky and absurdly heavy. It must be like wearing a tank."
@@ -24,8 +22,6 @@
 	icon_state = "breacher_rig"
 	armor = list(melee = 90, bullet = 90, laser = 90, energy = 90, bomb = 90, bio = 100, rad = 80) //Takes TEN TIMES as much damage to stop someone in a breacher. In exchange, it's slow.
 	vision_restriction = 0
-
-	item_worth = 30000
 
 /obj/item/clothing/head/helmet/space/rig/unathi
 	species_restricted = list("Unathi")

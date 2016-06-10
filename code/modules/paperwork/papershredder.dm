@@ -15,7 +15,6 @@
 		/obj/item/weapon/card/id = 3,
 		/obj/item/weapon/paper_bundle = 3,
 		)
-	item_worth = 300
 
 /obj/machinery/papershredder/attackby(var/obj/item/W, var/mob/user)
 

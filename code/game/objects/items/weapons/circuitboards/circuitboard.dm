@@ -23,8 +23,6 @@
 	var/list/req_components = null
 	var/contain_parts = 1
 
-	item_worth = 1000
-
 //Called when the circuitboard is used to contruct a new machine.
 /obj/item/weapon/circuitboard/proc/construct(var/obj/machinery/M)
 	if (istype(M, build_path))

@@ -4,8 +4,6 @@
 	icon = 'icons/obj/inflatable.dmi'
 	var/deploy_path = null
 
-	item_worth = 30
-
 /obj/item/inflatable/attack_self(mob/user)
 	if(!deploy_path)
 		return
@@ -37,7 +35,6 @@
 	opacity = 0
 	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "wall"
-	item_worth = 1
 
 	var/undeploy_path = null
 	var/health = 50.0

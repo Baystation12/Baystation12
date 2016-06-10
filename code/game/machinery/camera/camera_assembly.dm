@@ -6,8 +6,6 @@
 	w_class = 2
 	anchored = 0
 
-	item_worth = 35
-
 	matter = list(DEFAULT_WALL_MATERIAL = 700,"glass" = 300)
 
 	//	Motion, EMP-Proof, X-Ray

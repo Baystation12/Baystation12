@@ -86,8 +86,6 @@
 
 	var/debug = 0
 
-	item_worth = 500000
-
 /obj/machinery/power/supermatter/New()
 	. = ..()
 	radio = new /obj/item/device/radio{channels=list("Engineering")}(src)
@@ -413,7 +411,6 @@
 
 	pull_time = 150
 	explosion_power = 3
-	item_worth = 100000
 
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return

@@ -69,7 +69,6 @@
 	item_state = "card-id"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	var/uses = 10
-	item_worth = 300
 
 var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/emag/resolve_attackby(atom/A, mob/user)
@@ -96,8 +95,6 @@ var/const/NO_EMAG_ACT = -50
 	desc = "A card used to provide ID and determine access across the station."
 	icon_state = "id"
 	item_state = "card-id"
-
-	item_worth = 30
 
 	sprite_sheets = list(
 		"Resomi" = 'icons/mob/species/resomi/id.dmi'
@@ -207,14 +204,12 @@ var/const/NO_EMAG_ACT = -50
 	desc = "A silver card which shows honour and dedication."
 	icon_state = "silver"
 	item_state = "silver_id"
-	item_worth = 200
 
 /obj/item/weapon/card/id/gold
 	name = "identification card"
 	desc = "A golden card which shows power and might."
 	icon_state = "gold"
 	item_state = "gold_id"
-	item_worth = 300
 
 /obj/item/weapon/card/id/syndicate_command
 	name = "syndicate ID card"
@@ -230,7 +225,7 @@ var/const/NO_EMAG_ACT = -50
 	item_state = "gold_id"
 	registered_name = "Captain"
 	assignment = "Captain"
-	item_worth = 300
+
 /obj/item/weapon/card/id/captains_spare/New()
 	access = get_all_station_access()
 	..()

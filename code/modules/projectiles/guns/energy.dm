@@ -19,7 +19,6 @@
 	var/recharge_time = 4
 	var/charge_tick = 0
 
-	item_worth = 700
 
 /obj/item/weapon/gun/energy/switch_firemodes()
 	. = ..()

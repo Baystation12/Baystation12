@@ -18,8 +18,6 @@
 	allowed = list (/obj/item/weapon/gun/energy/lasertag/blue)
 	siemens_coefficient = 3.0
 
-	item_worth = 20
-
 /obj/item/clothing/suit/redtag
 	name = "red laser tag armour"
 	desc = "Reputed to go faster."
@@ -29,7 +27,6 @@
 	body_parts_covered = UPPER_TORSO
 	allowed = list (/obj/item/weapon/gun/energy/lasertag/red)
 	siemens_coefficient = 3.0
-	item_worth = 20
 
 /*
  * Costume

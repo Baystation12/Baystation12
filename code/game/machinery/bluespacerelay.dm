@@ -12,8 +12,6 @@
 	idle_power_usage = 15000
 	active_power_usage = 15000
 
-	item_worth = 4000
-
 /obj/machinery/bluespacerelay/process()
 
 	update_power()

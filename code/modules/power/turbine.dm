@@ -13,7 +13,6 @@
 	var/rpmtarget = 0
 	var/capacity = 1e6
 	var/comp_id = 0
-	item_worth = 4000
 
 /obj/machinery/power/turbine
 	name = "gas turbine generator"
@@ -25,7 +24,6 @@
 	var/obj/machinery/compressor/compressor
 	var/turf/simulated/outturf
 	var/lastgen
-	item_worth = 6000
 
 /obj/machinery/computer/turbine_computer
 	name = "Gas turbine control computer"
@@ -40,7 +38,6 @@
 	var/list/obj/machinery/door/blast/doors
 	var/id = 0
 	var/door_status = 0
-	item_worth = 2000
 
 // the inlet stage of the gas turbine electricity generator
 

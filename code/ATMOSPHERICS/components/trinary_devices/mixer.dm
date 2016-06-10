@@ -19,8 +19,6 @@
 
 	//node 3 is the outlet, nodes 1 & 2 are intakes
 
-	item_worth = 3000
-
 /obj/machinery/atmospherics/trinary/mixer/update_icon(var/safety = 0)
 	if(istype(src, /obj/machinery/atmospherics/trinary/mixer/m_mixer))
 		icon_state = "m"

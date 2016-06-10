@@ -48,8 +48,6 @@
 	var/radio_filter_out
 	var/radio_filter_in
 
-	item_worth = 2000
-
 /obj/machinery/atmospherics/unary/vent_pump/on
 	use_power = 1
 	icon_state = "map_vent_out"

@@ -19,7 +19,6 @@
 	boot_type = null
 
 	hides_uniform = 0
-	item_worth = 9000
 
 /obj/item/weapon/rig/internalaffairs/equipped
 

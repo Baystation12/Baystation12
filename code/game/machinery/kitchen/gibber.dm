@@ -17,7 +17,6 @@
 	use_power = 1
 	idle_power_usage = 2
 	active_power_usage = 500
-	item_worth = 600
 
 //auto-gibs anything that bumps into it
 /obj/machinery/gibber/autogibber

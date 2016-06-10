@@ -9,8 +9,6 @@
 	var/beat_sound = 'sound/effects/singlebeat.ogg'
 	var/efficiency = 1
 
-	item_worth = 1200
-
 /obj/item/organ/heart/process()
 	if(owner)
 		handle_pulse()

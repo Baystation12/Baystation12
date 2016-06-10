@@ -24,8 +24,6 @@
 
 	level = 1
 
-	item_worth = 2300
-
 /obj/machinery/atmospherics/unary/outlet_injector/New()
 	..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500	//Give it a small reservoir for injecting. Also allows it to have a higher flow rate limit than vent pumps, to differentiate injectors a bit more.

@@ -8,7 +8,6 @@
 	throwforce = 10
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	item_worth = 500
 
 /obj/item/weapon/melee/cultblade/cultify()
 	return
@@ -53,7 +52,6 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
-	item_worth = 150
 
 /obj/item/clothing/head/culthood/cultify()
 	return
@@ -78,7 +76,6 @@
 	armor = list(melee = 50, bullet = 30, laser = 50,energy = 20, bomb = 25, bio = 10, rad = 0)
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0
-	item_worth = 200
 
 /obj/item/clothing/suit/cultrobes/cultify()
 	return
@@ -101,7 +98,6 @@
 	icon_state = "cult_helmet"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0
-	item_worth = 200
 
 /obj/item/clothing/head/helmet/space/cult/cultify()
 	return
@@ -115,7 +111,6 @@
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
-	item_worth = 250
 
 /obj/item/clothing/suit/space/cult/New()
 	..()

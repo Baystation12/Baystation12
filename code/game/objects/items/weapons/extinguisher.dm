@@ -13,7 +13,6 @@
 	force = 10.0
 	matter = list(DEFAULT_WALL_MATERIAL = 90)
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
-	item_worth = 60
 	var/spray_particles = 3
 	var/spray_amount = 120	//units of liquid per spray - 120 -> same as splashing them with a bucket per spray
 	var/max_water = 500
@@ -33,7 +32,6 @@
 	spray_amount = 80
 	max_water = 200
 	sprite_name = "miniFE"
-	item_worth = 30
 
 /obj/item/weapon/extinguisher/New()
 	create_reagents(max_water)

@@ -49,8 +49,6 @@
 		"cold"
 	)
 
-	item_worth = 600
-
 /obj/machinery/door/firedoor/New()
 	. = ..()
 	for(var/obj/machinery/door/firedoor/F in loc)

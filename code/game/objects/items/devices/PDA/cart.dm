@@ -5,7 +5,6 @@
 	icon_state = "cart"
 	item_state = "electronic"
 	w_class = 1
-	item_worth = 50
 
 	var/obj/item/radio/integrated/radio = null
 	var/access_security = 0

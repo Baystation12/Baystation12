@@ -24,7 +24,6 @@
 	var/obj/item/weapon/engine/engine = null
 	var/engine_type
 	var/prefilled = 0
-	item_worth = 5300
 
 /obj/vehicle/bike/New()
 	..()

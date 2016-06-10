@@ -32,8 +32,6 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	var/author
 	var/SQLquery
 
-	item_worth = 600
-
 /obj/machinery/librarypubliccomp/attack_hand(var/mob/user as mob)
 	usr.set_machine(src)
 	var/dat = "<HEAD><TITLE>Library Visitor</TITLE></HEAD><BODY>\n" // <META HTTP-EQUIV='Refresh' CONTENT='10'>
@@ -132,8 +130,6 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	var/list/inventory = list()
 	var/checkoutperiod = 5 // In minutes
 	var/obj/machinery/libraryscanner/scanner // Book scanner that will be used when uploading books to the Archive
-
-	item_worth = 1000
 
 	var/bibledelay = 0 // LOL NO SPAM (1 minute delay) -- Doohl
 
@@ -411,8 +407,6 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	density = 1
 	var/obj/item/weapon/book/cache		// Last scanned book
 
-	item_worth = 1000
-
 /obj/machinery/libraryscanner/attackby(var/obj/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/weapon/book))
 		user.drop_item()
@@ -462,8 +456,6 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	icon_state = "binder"
 	anchored = 1
 	density = 1
-
-	item_worth = 1200
 
 /obj/machinery/bookbinder/attackby(var/obj/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/weapon/paper))

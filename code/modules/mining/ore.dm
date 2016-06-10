@@ -6,13 +6,6 @@
 	w_class = 2
 	var/datum/geosample/geologic_data
 	var/material
-	item_worth = 10
-
-/obj/item/weapon/ore/New()
-	..()
-	var/material/mat = get_material_by_name(material)
-	if(mat)
-		item_worth = mat.material_worth
 
 /obj/item/weapon/ore/uranium
 	name = "pitchblende"

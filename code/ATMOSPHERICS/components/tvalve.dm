@@ -20,8 +20,6 @@
 	var/datum/pipe_network/network_node2
 	var/datum/pipe_network/network_node3
 
-	item_worth = 150
-
 /obj/machinery/atmospherics/tvalve/bypass
 	icon_state = "map_tvalve1"
 	state = 1

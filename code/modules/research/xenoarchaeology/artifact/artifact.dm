@@ -39,7 +39,6 @@
 	var/datum/geosample/geological_data
 	var/datum/artifact_find/artifact_find
 	var/last_act = 0
-	item_worth = 0
 
 /obj/structure/boulder/New()
 	icon_state = "boulder[rand(1,4)]"

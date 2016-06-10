@@ -9,8 +9,6 @@
 	var/list/accept_mobs = list(/mob/living/simple_animal/lizard, /mob/living/simple_animal/mouse)
 	var/contains = 0 // 0 = nothing, 1 = money, 2 = animal, 3 = spiderling
 
-	item_worth = 10
-
 /obj/item/glass_jar/New()
 	..()
 	update_icon()

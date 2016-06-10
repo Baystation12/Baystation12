@@ -148,7 +148,6 @@
 	icon_state = "cryo_rear"
 	anchored = 1
 	dir = WEST
-	item_worth = 450
 
 //Cryopods themselves.
 /obj/machinery/cryopod
@@ -159,7 +158,6 @@
 	density = 1
 	anchored = 1
 	dir = WEST
-	item_worth = 3000
 
 	var/base_icon_state = "body_scanner_0"
 	var/occupied_icon_state = "body_scanner_1"

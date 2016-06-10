@@ -229,7 +229,6 @@
 	desc = "Eating trash, bits of glass, or other debris will replenish your stores."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "decompiler"
-	item_worth = 400
 
 	//Metal, glass, wood, plastic.
 	var/datum/matter_synth/metal = null

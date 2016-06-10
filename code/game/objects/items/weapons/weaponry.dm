@@ -10,7 +10,6 @@
 	throw_range = 4
 	throwforce = 10
 	w_class = 2
-	item_worth = 30
 
 /obj/item/weapon/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
 

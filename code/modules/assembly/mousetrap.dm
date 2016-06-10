@@ -5,7 +5,6 @@
 	origin_tech = list(TECH_COMBAT = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 100, "waste" = 10)
 	var/armed = 0
-	item_worth = 5
 
 	examine(mob/user)
 		..(user)

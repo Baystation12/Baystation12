@@ -14,7 +14,6 @@
 	var/list/datum/autopsy_data_scanner/chemtraces = list()
 	var/target_name = null
 	var/timeofdeath = null
-	item_worth = 180
 
 /datum/autopsy_data_scanner
 	var/weapon = null // this is the DEFINITE weapon type that was used

@@ -7,7 +7,6 @@
 	w_class = 2.0 //It should be tiny! -Agouri
 
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
-	item_worth = 300
 
 	req_access = list(access_engine)
 
@@ -112,4 +111,3 @@
 	desc = "designed to be somewhat more resistant to hacking than standard electronics."
 	origin_tech = list(TECH_DATA = 2)
 	secure = 1
-	item_worth = 600

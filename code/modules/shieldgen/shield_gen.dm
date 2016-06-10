@@ -29,7 +29,6 @@
 	var/time_since_fail = 100
 	var/energy_conversion_rate = 0.0002	//how many renwicks per watt?
 	use_power = 0	//doesn't use APC power
-	item_worth = 5000
 
 /obj/machinery/shield_gen/New()
 	spawn(10)

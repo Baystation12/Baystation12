@@ -78,7 +78,6 @@ for reference:
 	color = material.icon_colour
 	maxhealth = material.integrity
 	health = maxhealth
-	item_worth = initial(item_worth) * material.material_worth
 
 /obj/structure/barricade/get_material()
 	return material
@@ -157,7 +156,6 @@ for reference:
 	var/health = 100.0
 	var/maxhealth = 100.0
 	var/locked = 0.0
-	item_worth = 500
 //	req_access = list(access_maint_tunnels)
 
 	New()

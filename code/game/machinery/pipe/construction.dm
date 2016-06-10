@@ -66,8 +66,6 @@ Buildable meters
 	w_class = 3
 	level = 2
 
-	item_worth = 100
-
 /obj/item/pipe/New(var/loc, var/pipe_type as num, var/dir as num, var/obj/machinery/atmospherics/make_from = null)
 	..()
 	if (make_from)
@@ -1162,8 +1160,6 @@ Buildable meters
 	icon_state = "meter"
 	item_state = "buildpipe"
 	w_class = 5
-
-	item_worth = 300
 
 /obj/item/pipe_meter/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	..()

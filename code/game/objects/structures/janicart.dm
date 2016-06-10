@@ -13,7 +13,6 @@
 	var/obj/item/weapon/reagent_containers/spray/myspray = null
 	var/obj/item/device/lightreplacer/myreplacer = null
 	var/signs = 0	//maximum capacity hardcoded below
-	item_worth = 90
 
 
 /obj/structure/janitorialcart/New()

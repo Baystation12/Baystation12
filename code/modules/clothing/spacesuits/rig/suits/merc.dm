@@ -26,8 +26,6 @@
 		/obj/item/rig_module/fabricator/energy_net
 		)
 
-	item_worth = 25000
-
 //Has most of the modules removed
 /obj/item/weapon/rig/merc/empty
 	initial_modules = list(

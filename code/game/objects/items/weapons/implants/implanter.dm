@@ -7,7 +7,6 @@
 	throw_range = 5
 	w_class = 2.0
 	var/obj/item/weapon/implant/imp = null
-	item_worth = 80
 
 /obj/item/weapon/implanter/attack_self(var/mob/user)
 	if(!imp)

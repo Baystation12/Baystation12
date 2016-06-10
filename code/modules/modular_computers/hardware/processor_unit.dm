@@ -10,8 +10,6 @@
 	critical = 1
 	malfunction_probability = 1
 	origin_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
-	item_worth = 200
-
 	var/max_idle_programs = 2 // 2 idle, + 1 active = 3 as said in description.
 
 /obj/item/weapon/computer_hardware/processor_unit/small
@@ -22,7 +20,6 @@
 	power_usage = 25
 	max_idle_programs = 1
 	origin_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
-	item_worth = 80
 
 /obj/item/weapon/computer_hardware/processor_unit/photonic
 	name = "photonic processor"
@@ -32,7 +29,6 @@
 	power_usage = 250
 	max_idle_programs = 4
 	origin_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 4)
-	item_worth = 400
 
 /obj/item/weapon/computer_hardware/processor_unit/photonic/small
 	name = "photonic microprocessor"
@@ -42,4 +38,3 @@
 	power_usage = 75
 	max_idle_programs = 2
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
-	item_worth = 120

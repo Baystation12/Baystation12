@@ -11,7 +11,6 @@
 	force = 3
 	w_class = 1
 	var/obj/item/weapon/reagent_containers/syringe/syringe
-	item_worth = 10
 
 /obj/item/weapon/syringe_cartridge/update_icon()
 	underlays.Cut()
@@ -81,7 +80,6 @@
 	var/list/darts = list()
 	var/max_darts = 1
 	var/obj/item/weapon/syringe_cartridge/next
-	item_worth = 50
 
 /obj/item/weapon/gun/launcher/syringe/consume_next_projectile()
 	if(next)

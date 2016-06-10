@@ -11,7 +11,6 @@
 	var/honeycombs = 0 // Percent
 	var/frames = 0
 	var/maxFrames = 5
-	item_worth = 500
 
 /obj/machinery/beehive/update_icon()
 	overlays.Cut()
@@ -201,8 +200,6 @@
 	icon_state = "battererburnt"
 	w_class = 2
 
-	item_worth = 60
-
 /obj/item/honey_frame
 	name = "beehive frame"
 	desc = "A frame for the beehive that the bees will fill with honeycombs."
@@ -211,8 +208,6 @@
 	w_class = 2
 
 	var/honey = 0
-
-	item_worth = 15
 
 /obj/item/honey_frame/filled
 	name = "filled beehive frame"
@@ -228,8 +223,6 @@
 	desc = "Contains everything you need to build a beehive."
 	icon = 'icons/obj/apiary_bees_etc.dmi'
 	icon_state = "apiary"
-
-	item_worth = 100
 
 /obj/item/beehive_assembly/attack_self(var/mob/user)
 	user << "<span class='notice'>You start assembling \the [src]...</span>"
@@ -247,8 +240,6 @@
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "wax"
 
-	item_worth = 5
-
 /obj/item/stack/wax/New()
 	..()
 	recipes = wax_recipes
@@ -263,8 +254,6 @@ var/global/list/datum/stack_recipe/wax_recipes = list( \
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "beepack"
 	var/full = 1
-
-	item_worth = 200
 
 /obj/item/bee_pack/New()
 	..()

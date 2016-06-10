@@ -4,8 +4,6 @@
 	icon_state = "captain"
 	item_state = "egloves"
 
-	item_worth = 100
-
 /obj/item/clothing/gloves/cyborg
 	desc = "Beep boop borp!"
 	name = "cyborg gloves"
@@ -26,8 +24,6 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
-	item_worth = 125
-
 /obj/item/clothing/gloves/combat //Combined effect of SWAT gloves and insulated gloves
 	desc = "These tactical gloves are somewhat fire and impact resistant."
 	name = "combat gloves"
@@ -40,8 +36,6 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
-	item_worth = 200
-
 /obj/item/clothing/gloves/latex
 	name = "latex gloves"
 	desc = "Sterile latex gloves."
@@ -51,8 +45,6 @@
 	permeability_coefficient = 0.01
 	germ_level = 0
 
-	item_worth = 5
-
 /obj/item/clothing/gloves/botanic_leather
 	desc = "These leather work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
 	name = "botanist's leather gloves"
@@ -60,5 +52,3 @@
 	item_state = "ggloves"
 	permeability_coefficient = 0.05
 	siemens_coefficient = 0.50 //thick work gloves
-
-	item_worth = 25

@@ -14,7 +14,6 @@
 	w_class = 5 						// It's LARGE (backpack size)
 	var/ChargeCapacity = 5000000
 	var/IOCapacity = 250000
-	item_worth = 2000
 
 // 20% Charge Capacity, 60% I/O Capacity. Used for substation/outpost SMESs.
 /obj/item/weapon/smes_coil/weak
@@ -22,7 +21,6 @@
 	desc = "Cheaper model of standard superconductive magnetic coil. It's capacity and I/O rating are considerably lower."
 	ChargeCapacity = 1000000
 	IOCapacity = 150000
-	item_worth = 1000
 
 // 1000% Charge Capacity, 20% I/O Capacity
 /obj/item/weapon/smes_coil/super_capacity
@@ -30,7 +28,6 @@
 	desc = "Specialised version of standard superconductive magnetic coil. This one has significantly stronger containment field, allowing for significantly larger power storage. It's IO rating is much lower, however."
 	ChargeCapacity = 50000000
 	IOCapacity = 50000
-	item_worth = 5000
 
 // 10% Charge Capacity, 400% I/O Capacity. Technically turns SMES into large super capacitor.Ideal for shields.
 /obj/item/weapon/smes_coil/super_io
@@ -38,7 +35,6 @@
 	desc = "Specialised version of standard superconductive magnetic coil. While this one won't store almost any power, it rapidly transfers power, making it useful in systems which require large throughput."
 	ChargeCapacity = 500000
 	IOCapacity = 1000000
-	item_worth = 4500
 
 
 // SMES SUBTYPES - THESE ARE MAPPED IN AND CONTAIN DIFFERENT TYPES OF COILS
@@ -78,7 +74,6 @@
 	var/RCon_tag = "NO_TAG"		// RCON tag, change to show it on SMES Remote control console.
 	charge = 0
 	should_be_mapped = 1
-	item_worth = 15000
 
 /obj/machinery/power/smes/buildable/Destroy()
 	qdel(wires)

@@ -12,8 +12,6 @@
 	var/access_code = 0
 	var/datum/money_account/linked_account
 
-	item_worth = 300
-
 /obj/item/device/eftpos/New()
 	..()
 	machine_id = "[station_name()] EFTPOS #[num_financial_terminals++]"

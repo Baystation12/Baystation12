@@ -433,10 +433,11 @@ var/global/datum/controller/gameticker/ticker
 			world << "[robolist]"
 
 	var/total_damage = station_damage_score
-	for(var/A in machines)
-		var/obj/machinery/M = A
-		if(M && (M.stat & BROKEN))
-			total_damage += M.item_worth/2
+	for(var/a in machines)
+		var/obj/machinery/M = a
+		if(M.stat & BROKEN) //Hate having to check this but the destroyed ones will send their data already and the living ones don't technically cost anything unless broken
+			total_damage += M.get_worth()
+
 	if(total_damage)
 		world << "<br><br><b>[station_name()] has taken over [round(total_damage)] thalers in damage.</b><br>"
 

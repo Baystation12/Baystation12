@@ -9,8 +9,6 @@
 	var/max_cable = 100
 	var/on = 0
 
-	item_worth = 1700
-
 /obj/machinery/cablelayer/New()
 	cable = new(src)
 	cable.amount = 100

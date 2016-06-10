@@ -9,7 +9,6 @@
 	var/health = 30
 	var/occupied = 1
 	var/destroyed = 0
-	item_worth = 86
 
 /obj/structure/displaycase/ex_act(severity)
 	switch(severity)

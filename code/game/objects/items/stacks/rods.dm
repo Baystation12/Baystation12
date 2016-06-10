@@ -13,7 +13,6 @@
 	max_amount = 100
 	attack_verb = list("hit", "bludgeoned", "whacked")
 	lock_picking_level = 3
-	item_worth = 5
 
 /obj/item/stack/rods/cyborg
 	name = "metal rod synthesizer"

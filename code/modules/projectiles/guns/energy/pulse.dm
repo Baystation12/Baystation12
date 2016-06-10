@@ -9,8 +9,6 @@
 	sel_mode = 2
 	max_shots = 10
 
-	item_worth = 1200
-
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, fire_delay=null, charge_cost=null),
 		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, fire_delay=null, charge_cost=null),
@@ -28,8 +26,6 @@
 	fire_delay = 25
 	projectile_type=/obj/item/projectile/beam/pulse
 	charge_cost=400
-
-	item_worth = 1500
 
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
 	user << "<span class='warning'>[src.name] has three settings, and they are all DESTROY.</span>"

@@ -32,8 +32,6 @@
 	var/list/starting_seeds = list()
 	var/list/scanner = list() // What properties we can view
 
-	item_worth = 1000
-
 /obj/machinery/seed_storage/random // This is mostly for testing, but I guess admins could spawn it
 	name = "Random seed storage"
 	scanner = list("stats", "produce", "soil", "temperature", "light")

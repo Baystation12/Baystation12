@@ -11,8 +11,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	projectile_type = /obj/item/projectile/beam/midlaser
 
-	item_worth = 800
-
 /obj/item/weapon/gun/energy/laser/mounted
 	self_recharge = 1
 	use_external_power = 1
@@ -33,8 +31,6 @@ obj/item/weapon/gun/energy/retro
 	projectile_type = /obj/item/projectile/beam
 	fire_delay = 15 //old technology, and a pistol
 
-	item_worth = 400
-
 /obj/item/weapon/gun/energy/captain
 	name = "antique laser gun"
 	icon_state = "caplaser"
@@ -48,8 +44,6 @@ obj/item/weapon/gun/energy/retro
 	max_shots = 5 //to compensate a bit for self-recharging
 	requires_two_hands = 1 //a little bulky
 	self_recharge = 1
-
-	item_worth = 1200
 
 /obj/item/weapon/gun/energy/lasercannon
 	name = "laser cannon"
@@ -65,7 +59,6 @@ obj/item/weapon/gun/energy/retro
 	max_shots = 6
 	accuracy = 2
 	fire_delay = 20
-	item_worth = 1100
 
 /obj/item/weapon/gun/energy/lasercannon/mounted
 	name = "mounted laser cannon"
@@ -86,8 +79,6 @@ obj/item/weapon/gun/energy/retro
 	charge_cost = 150
 	max_shots = 10
 
-	item_worth = 900
-
 /obj/item/weapon/gun/energy/sniperrifle
 	name = "marksman energy rifle"
 	desc = "The HI DMR 9E is an older design of Hesphaistos Industries. A designated marksman rifle capable of shooting powerful ionized beams, this is a weapon to kill from a distance."
@@ -104,8 +95,6 @@ obj/item/weapon/gun/energy/retro
 	w_class = 5
 	accuracy = -3 //shooting at the hip
 	scoped_accuracy = 0
-
-	item_worth = 2400
 
 /obj/item/weapon/gun/energy/sniperrifle/verb/scope()
 	set category = "Object"
@@ -125,8 +114,6 @@ obj/item/weapon/gun/energy/retro
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest
-
-	item_worth = 10
 
 /obj/item/weapon/gun/energy/lasertag/special_check(var/mob/living/carbon/human/M)
 	if(ishuman(M))

@@ -21,8 +21,6 @@
 					 "liquid nutrition" = /obj/item/weapon/reagent_containers/food/snacks/soydope,
 					 "pudding substitute" = /obj/item/weapon/reagent_containers/food/snacks/ricepudding)
 
-	item_worth = 10000
-
 /obj/machinery/food_replicator/New()
 	..()
 	component_parts = list()

@@ -24,8 +24,6 @@
 
 	density = 1
 
-	item_worth = 2500
-
 /obj/machinery/atmospherics/binary/circulator/New()
 	..()
 	desc = initial(desc) + " Its outlet port is to the [dir2text(dir)]."

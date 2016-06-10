@@ -11,7 +11,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 500)
 	var/obj/item/weapon/disk/nuclear/the_disk = null
 	var/active = 0
-	item_worth = 80
 
 
 	attack_self()
@@ -60,7 +59,6 @@
 	var/mode = 0  // Mode 0 locates disk, mode 1 locates coordinates.
 	var/turf/location = null
 	var/obj/target = null
-	item_worth = 130
 
 	attack_self()
 		if(!active)

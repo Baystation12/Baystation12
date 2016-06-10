@@ -16,7 +16,6 @@
 	var/spray_size = 3
 	var/list/spray_sizes = list(1,3)
 	volume = 250
-	item_worth = 23
 
 /obj/item/weapon/reagent_containers/spray/New()
 	..()

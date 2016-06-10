@@ -33,8 +33,6 @@
 	var/has_reproduced
 	var/roundstart
 
-	item_worth = 10000
-
 /mob/living/simple_animal/borer/roundstart
 	roundstart = 1
 

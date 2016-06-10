@@ -21,7 +21,6 @@
 	var/uses_charge = 0
 	var/list/charge_costs = null
 	var/list/datum/matter_synth/synths = null
-	item_worth = 5
 
 /obj/item/stack/New(var/loc, var/amount=null)
 	..()
@@ -186,7 +185,6 @@
 		return 0
 	if(!uses_charge)
 		amount -= used
-		item_worth = initial(item_worth) * amount
 		if (amount <= 0)
 			if(usr)
 				usr.remove_from_mob(src)
@@ -207,7 +205,6 @@
 			return 0
 		else
 			amount += extra
-			item_worth = initial(item_worth) * amount
 		return 1
 	else if(!synths || synths.len < uses_charge)
 		return 0

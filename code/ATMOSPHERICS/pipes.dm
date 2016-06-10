@@ -14,8 +14,6 @@
 	buckle_require_restraints = 1
 	buckle_lying = -1
 
-	item_worth = 100
-
 /obj/machinery/atmospherics/pipe/drain_power()
 	return -1
 

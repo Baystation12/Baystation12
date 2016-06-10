@@ -23,8 +23,6 @@
 	var/datum/pipe_network/network1
 	var/datum/pipe_network/network2
 
-	item_worth = 3000
-
 	New()
 		..()
 		air_in.volume = 200

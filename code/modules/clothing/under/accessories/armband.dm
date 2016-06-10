@@ -4,8 +4,6 @@
 	icon_state = "red"
 	slot = "armband"
 
-	item_worth = 30
-
 /obj/item/clothing/accessory/armband/cargo
 	name = "cargo armband"
 	desc = "An armband, worn by the crew to display which department they're assigned to. This one is brown."

@@ -41,8 +41,6 @@
 	//2: Do not pass input_pressure_min
 	//4: Do not pass output_pressure_max
 
-	item_worth = 850
-
 /obj/machinery/atmospherics/binary/dp_vent_pump/New()
 	..()
 	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP

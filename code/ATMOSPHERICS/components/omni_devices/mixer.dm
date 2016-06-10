@@ -23,8 +23,6 @@
 
 	var/list/mixing_inputs = list()
 
-	item_worth = 3600
-
 /obj/machinery/atmospherics/omni/mixer/New()
 	..()
 	if(mapper_set())

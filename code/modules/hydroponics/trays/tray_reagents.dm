@@ -58,7 +58,6 @@
 	icon_state = "bottle16"
 	var/toxicity = 0
 	var/weed_kill_str = 0
-	item_worth = 30
 
 /obj/item/weedkiller/triclopyr
 	name = "bottle of glyphosate"
@@ -94,7 +93,6 @@
 	flags = OPENCONTAINER
 	possible_transfer_amounts = null
 	w_class = 2.0
-	item_worth = 25
 
 	var/fertilizer //Reagent contained, if any.
 

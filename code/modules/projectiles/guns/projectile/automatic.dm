@@ -12,8 +12,6 @@
 	multi_aim = 1
 	burst_delay = 2
 
-	item_worth = 2000
-
 	//machine pistol, easier to one-hand with
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, requires_two_hands=0, burst_accuracy=null, dispersion=null),
@@ -54,7 +52,6 @@
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 	requires_two_hands = 1
-	item_worth = 1250
 
 	//SMG
 	firemodes = list(
@@ -84,7 +81,6 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c762
 	requires_two_hands = 3
-	item_worth = 3800
 
 	//Assault rifle, burst fire degrades quicker than SMG, worse one-handing penalty, slightly increased move delay
 	firemodes = list(
@@ -142,7 +138,6 @@
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 	requires_two_hands = 5
 	burst_delay = 4
-	item_worth = 2100
 
 	//would have requires_two_hands=4,5 but the added weight of a grenade launcher makes one-handing even harder
 	firemodes = list(
@@ -212,7 +207,6 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a762
 	requires_two_hands = 6
-	item_worth = 13400
 
 	//LMG, better sustained fire accuracy than assault rifles (comparable to SMG), higer move delay and one-handing penalty
 	//No single-shot or 3-round-burst modes since using this weapon should come at a cost to flexibility.

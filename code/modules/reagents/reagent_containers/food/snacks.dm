@@ -787,7 +787,6 @@
 	var/hname = ""
 	var/job = null
 	filling_color = "#D63C3C"
-	item_worth = 300
 
 /obj/item/weapon/reagent_containers/food/snacks/human/burger
 	name = "-burger"
@@ -2188,7 +2187,6 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable
 	w_class = 3 //Whole pizzas and cakes shouldn't fit in a pocket, you can slice them if you want to do that.
-	item_worth = 15
 
 /**
  *  A food item slice
@@ -2200,7 +2198,6 @@
 	name = "slice of... something"
 	var/whole_path  // path for the item from which this slice comes
 	var/filled = FALSE  // should the slice spawn with any reagents
-	item_worth = 3
 
 /**
  *  Spawn a new slice of food

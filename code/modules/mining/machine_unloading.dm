@@ -9,7 +9,6 @@
 	anchored = 1.0
 	var/obj/machinery/mineral/input = null
 	var/obj/machinery/mineral/output = null
-	item_worth = 500
 
 
 /obj/machinery/mineral/unloading_machine/New()

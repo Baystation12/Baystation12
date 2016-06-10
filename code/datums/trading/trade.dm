@@ -116,8 +116,23 @@
 
 /datum/trader/proc/get_item_value(var/trading_num)
 	if(!trading_items[trading_items[trading_num]])
-		var/atom/movable/M = trading_items[trading_num]
-		var/value = initial(M.item_worth)
+		var/type = trading_items[trading_num]
+		var/value
+		if(ispath(type,/obj/item))
+			var/obj/item/I = type
+			value = initial(I.item_worth)
+		else if(ispath(type, /obj/machinery))
+			var/obj/machinery/M = type
+			value = initial(M.item_worth)
+		else if(ispath(type, /obj/structure))
+			var/obj/structure/S = type
+			value = initial(S.item_worth)
+		else if(ispath(type, /obj/mecha))
+			var/obj/mecha/M = type
+			value = initial(M.item_worth)
+		else if(ispath(type, /mob/living))
+			var/mob/living/L = type
+			value = initial(L.item_worth)
 		value = max(1, round(value * rand(90,110)/100)) //Rand doesn't like decimals and rounds them.
 		trading_items[trading_items[trading_num]] = value
 	return trading_items[trading_items[trading_num]]
@@ -130,7 +145,7 @@
 	if(is_type_in_list(offer,wanted_items))
 		is_wanted = 1
 
-	if(is_type_in_list(offer,blacklisted_trade_items))
+	if(blacklisted_trade_items && blacklisted_trade_items.len && is_type_in_list(offer,blacklisted_trade_items))
 		return 0
 
 	if(istype(offer,/obj/item/weapon/spacecash))
@@ -141,9 +156,27 @@
 			return 0
 
 	var/trading_worth = get_item_value(num)
+	var/offer_worth = 0
+	if(istype(offer,/obj/item))
+		var/obj/item/I = offer
+		offer_worth = I.get_worth()
+	else if(istype(offer,/obj/machinery))
+		var/obj/machinery/M = offer
+		offer_worth = M.get_worth()
+	else if(istype(offer,/obj/structure))
+		var/obj/structure/S = offer
+		offer_worth = S.get_worth()
+	else if(istype(offer,/obj/mecha))
+		var/obj/mecha/M = offer
+		offer_worth = M.get_worth()
+	else if(istype(offer,/mob/living))
+		var/mob/living/M = offer
+		offer_worth = M.get_worth()
 	if(is_wanted)
-		trading_worth *= want_multiplier
-	var/percent = offer.item_worth/trading_worth
+		offer_worth *= 2
+	if(!offer_worth)
+		return 0
+	var/percent = offer_worth/trading_worth
 	if(percent > max(0.9,0.9-disposition/100))
 		return trade(offer, num)
 	return 0
@@ -188,6 +221,9 @@
 	if(istype(offer,/mob))
 		var/text = mob_transfer_message
 		offer << replacetext(text, "ORIGIN", origin)
+	if(istype(offer, /obj/mecha))
+		var/obj/mecha/M = offer
+		M.wreckage = null //So they don't ruin the illusion
 	qdel(offer)
 	var/atom/movable/M = new type(T)
 	playsound(T, 'sound/effects/teleport.ogg', 50, 1)

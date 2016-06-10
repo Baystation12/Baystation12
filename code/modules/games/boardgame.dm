@@ -9,8 +9,6 @@
 	var/board = list()
 	var/selected = -1
 
-	item_worth = 15
-
 /obj/item/weapon/board/examine(mob/user, var/distance = -1)
 	if(in_range(user,src))
 		user.set_machine(src)
@@ -86,7 +84,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 			dat += "<td class='dark'"
 		else
 			dat += "<td class='light'"
-			
+
 		if(board["[i]"])
 			var/obj/item/I = board["[i]"]
 			user << browse_rsc(board_icons["[I.icon] [I.icon_state]"],"[I.icon_state].png")

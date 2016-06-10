@@ -13,7 +13,6 @@
 	var/fuel = 10000
 	var/fuel_max = 10000//Lets try this for now
 	var/stability = 100//TODO: add all the stability things to this so its not very safe if you keep hitting in on things
-	item_worth = 800
 
 
 /obj/item/weapon/am_containment/ex_act(severity)

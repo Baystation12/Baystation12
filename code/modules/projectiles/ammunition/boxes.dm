@@ -35,7 +35,6 @@
 
 /obj/item/ammo_magazine/c45m/empty
 	initial_ammo = 0
-	item_worth = 5
 
 /obj/item/ammo_magazine/c45m/rubber
 	name = "magazine (.45 rubber)"
@@ -62,7 +61,6 @@
 
 /obj/item/ammo_magazine/mc9mm/empty
 	initial_ammo = 0
-	item_worth = 5
 
 /obj/item/ammo_magazine/mc9mm/flash
 	name = "magazine (9mm flash)"
@@ -79,7 +77,6 @@
 
 /obj/item/ammo_magazine/c9mm/empty
 	initial_ammo = 0
-	item_worth = 5
 
 /obj/item/ammo_magazine/mc9mmt
 	name = "top mounted magazine (9mm)"
@@ -93,7 +90,6 @@
 
 /obj/item/ammo_magazine/mc9mmt/empty
 	initial_ammo = 0
-	item_worth = 5
 
 /obj/item/ammo_magazine/mc9mmt/rubber
 	name = "top mounted magazine (9mm rubber)"
@@ -160,7 +156,6 @@
 
 /obj/item/ammo_magazine/a50/empty
 	initial_ammo = 0
-	item_worth = 5
 
 /obj/item/ammo_magazine/a75
 	name = "ammo magazine (20mm)"
@@ -173,7 +168,6 @@
 
 /obj/item/ammo_magazine/a75/empty
 	initial_ammo = 0
-	item_worth = 5
 
 /obj/item/ammo_magazine/a762
 	name = "magazine box (7.62mm)"
@@ -188,7 +182,6 @@
 
 /obj/item/ammo_magazine/a762/empty
 	initial_ammo = 0
-	item_worth = 5
 
 /obj/item/ammo_magazine/c762
 	name = "magazine (7.62mm)"

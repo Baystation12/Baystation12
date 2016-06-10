@@ -29,7 +29,6 @@
 	var/datum/artifact_effect/my_effect
 	var/datum/artifact_effect/secondary_effect
 	var/being_used = 0
-	item_worth = 3500
 
 /obj/machinery/artifact/New()
 	..()

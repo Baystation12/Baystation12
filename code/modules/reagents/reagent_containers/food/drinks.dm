@@ -9,7 +9,6 @@
 	flags = OPENCONTAINER
 	amount_per_transfer_from_this = 5
 	volume = 50
-	item_worth = 8
 
 	on_reagent_change()
 		return

@@ -229,8 +229,6 @@ REAGENT SCANNER
 	throw_speed = 4
 	throw_range = 20
 
-	item_worth = 300
-
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
@@ -281,8 +279,6 @@ REAGENT SCANNER
 	details = 1
 	origin_tech = list(TECH_MAGNET = 4, TECH_BIO = 2)
 
-	item_worth = 400
-
 /obj/item/device/reagent_scanner
 	name = "reagent scanner"
 	desc = "A hand-held reagent scanner which identifies chemical agents."
@@ -299,8 +295,6 @@ REAGENT SCANNER
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	var/details = 0
 	var/recent_fail = 0
-
-	item_worth = 500
 
 /obj/item/device/reagent_scanner/afterattack(obj/O, mob/user as mob, proximity)
 	if(!proximity)
@@ -334,8 +328,6 @@ REAGENT SCANNER
 	details = 1
 	origin_tech = list(TECH_MAGNET = 4, TECH_BIO = 2)
 
-	item_worth = 600
-
 /obj/item/device/slime_scanner
 	name = "slime scanner"
 	icon_state = "adv_spectrometer"
@@ -347,8 +339,6 @@ REAGENT SCANNER
 	throw_speed = 3
 	throw_range = 7
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
-
-	item_worth = 300
 
 /obj/item/device/slime_scanner/attack(mob/living/M as mob, mob/living/user as mob)
 	if (!isslime(M))

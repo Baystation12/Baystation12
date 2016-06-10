@@ -7,7 +7,6 @@
 	hardware_size = 1
 	max_capacity = 16
 	origin_tech = list(TECH_DATA = 1)
-	item_worth = 30
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/advanced
 	name = "advanced data crystal"
@@ -17,7 +16,6 @@
 	hardware_size = 1
 	max_capacity = 64
 	origin_tech = list(TECH_DATA = 2)
-	item_worth = 60
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/super
 	name = "super data crystal"
@@ -27,7 +25,6 @@
 	hardware_size = 1
 	max_capacity = 256
 	origin_tech = list(TECH_DATA = 4)
-	item_worth = 125
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/New()
 	..()

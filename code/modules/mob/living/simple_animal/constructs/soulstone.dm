@@ -86,7 +86,6 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "construct"
 	desc = "A wicked machine used by those skilled in magical arts. It is inactive."
-	item_worth = 100
 
 /obj/structure/constructshell/cultify()
 	return

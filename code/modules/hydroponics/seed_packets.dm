@@ -11,8 +11,6 @@ var/global/list/plant_seed_sprites = list()
 	var/datum/seed/seed
 	var/modified = 0
 
-	item_worth = 10
-
 /obj/item/seeds/New()
 	while(!plant_controller)
 		sleep(30)

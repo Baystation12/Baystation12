@@ -33,8 +33,6 @@
 	//var/list/icon_keys = list()		//keys
 	//var/list/ammo_states = list()	//values
 
-	item_worth = 1500
-
 /obj/item/weapon/gun/projectile/New()
 	..()
 	if(ispath(ammo_type) && (load_method & (SINGLE_CASING|SPEEDLOADER)))

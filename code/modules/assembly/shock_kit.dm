@@ -8,8 +8,6 @@
 	w_class = 5.0
 	flags = CONDUCT
 
-	item_worth = 15
-
 /obj/item/assembly/shock_kit/Destroy()
 	qdel(part1)
 	qdel(part2)

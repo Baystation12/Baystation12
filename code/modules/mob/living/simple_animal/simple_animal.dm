@@ -66,8 +66,6 @@
 	var/supernatural = 0
 	var/purge = 0
 
-	item_worth = 500
-
 /mob/living/simple_animal/New()
 	..()
 	verbs -= /mob/verb/observe

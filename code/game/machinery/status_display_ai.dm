@@ -59,7 +59,6 @@ var/list/ai_status_emotions = list(
 	name = "AI display"
 	anchored = 1
 	density = 0
-	item_worth = 600
 
 	var/mode = 0	// 0 = Blank
 					// 1 = AI emoticon

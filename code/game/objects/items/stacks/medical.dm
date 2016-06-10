@@ -11,8 +11,6 @@
 	var/heal_burn = 0
 	var/animal_heal = 3
 
-	item_worth = 15
-
 /obj/item/stack/medical/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if (!istype(M))
 		user << "<span class='warning'>\The [src] cannot be applied to [M]!</span>"
@@ -161,8 +159,6 @@
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 12
 
-	item_worth = 30
-
 /obj/item/stack/medical/advanced/bruise_pack/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(..())
 		return 1
@@ -225,8 +221,6 @@
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 7
 
-	item_worth = 40
-
 
 /obj/item/stack/medical/advanced/ointment/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(..())
@@ -265,7 +259,6 @@
 	amount = 5
 	max_amount = 5
 	animal_heal = 0
-	item_worth = 25
 
 /obj/item/stack/medical/splint/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(..())

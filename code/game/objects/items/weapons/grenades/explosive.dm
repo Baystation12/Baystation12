@@ -18,7 +18,6 @@
 	desc = "A military fragmentation grenade, designed to explode in a deadly shower of fragments, while avoiding massive structural damage."
 	icon_state = "frggrenade"
 	loadable = FALSE
-	item_worth = 300
 
 	var/fragment_type = /obj/item/projectile/bullet/pellet/fragment
 	var/num_fragments = 72  //total number of fragments produced by the grenade

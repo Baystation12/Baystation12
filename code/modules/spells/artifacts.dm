@@ -11,7 +11,6 @@
 	damtype = BURN
 	force = 10
 	hitsound = 'sound/items/welder2.ogg'
-	item_worth = 1000
 
 /obj/item/weapon/scrying/attack_self(mob/user as mob)
 	if((user.mind && !wizards.is_antagonist(user.mind)))

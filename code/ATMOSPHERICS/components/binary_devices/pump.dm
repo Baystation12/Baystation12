@@ -34,8 +34,6 @@ Thus, the two variables affect pump operation are set in New():
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
-	item_worth = 1900
-
 /obj/machinery/atmospherics/binary/pump/New()
 	..()
 	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP

@@ -11,8 +11,6 @@
 	var/obj/item/weapon/toppaper	//The topmost piece of paper.
 	slot_flags = SLOT_BELT
 
-	item_worth = 15
-
 /obj/item/weapon/clipboard/New()
 	update_icon()
 

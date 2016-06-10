@@ -66,8 +66,6 @@
 	projectile = /obj/item/projectile/beam
 	fire_sound = 'sound/weapons/Laser.ogg'
 
-	item_worth = 2000
-
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser
 	equip_cooldown = 30
 	name = "jury-rigged welder-laser"
@@ -78,8 +76,6 @@
 	fire_sound = 'sound/weapons/Laser.ogg'
 	required_type = list(/obj/mecha/combat, /obj/mecha/working)
 
-	item_worth = 1200
-
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy
 	equip_cooldown = 15
 	name = "\improper CH-LC \"Solaris\" laser cannon"
@@ -87,7 +83,6 @@
 	energy_drain = 60
 	projectile = /obj/item/projectile/beam/heavylaser
 	fire_sound = 'sound/weapons/lasercannonfire.ogg'
-	item_worth = 3000
 
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/ion
 	equip_cooldown = 40
@@ -97,8 +92,6 @@
 	projectile = /obj/item/projectile/ion
 	fire_sound = 'sound/weapons/Laser.ogg'
 
-	item_worth = 1050
-
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/pulse
 	equip_cooldown = 30
 	name = "eZ-13 mk2 heavy pulse rifle"
@@ -107,7 +100,6 @@
 	origin_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 6, TECH_POWER = 4)
 	projectile = /obj/item/projectile/beam/pulse/heavy
 	fire_sound = 'sound/weapons/marauder.ogg'
-	item_worth = 5000
 
 /obj/item/projectile/beam/pulse/heavy
 	name = "heavy pulse laser"
@@ -212,8 +204,6 @@
 	deviation = 0.7
 	projectile_energy_cost = 25
 
-	item_worth = 1750
-
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg
 	name = "\improper Ultra AC 2"
 	icon_state = "mecha_uac2"
@@ -225,7 +215,6 @@
 	deviation = 0.3
 	projectile_energy_cost = 20
 	fire_cooldown = 2
-	item_worth = 1800
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack
 	var/missile_speed = 2
@@ -260,7 +249,6 @@
 	projectiles = 8
 	projectile_energy_cost = 1000
 	equip_cooldown = 60
-	item_worth = 2500
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive/Fire(atom/movable/AM, atom/target)
 	var/obj/item/missile/M = AM
@@ -272,8 +260,6 @@
 	icon_state = "missile"
 	var/primed = null
 	throwforce = 15
-
-	item_worth = 1200
 
 	throw_impact(atom/hit_atom)
 		if(primed)

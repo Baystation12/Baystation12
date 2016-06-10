@@ -13,7 +13,6 @@
 	name = "card box"
 	desc = "A small leather case to show how classy you are compared to everyone else."
 	icon_state = "card_holder"
-	item_worth = 10
 
 /obj/item/weapon/deck/cards
 	name = "deck of cards"
@@ -178,8 +177,6 @@
 	icon = 'icons/obj/playing_cards.dmi'
 	w_class = 1
 	var/list/cards = list()
-
-	item_worth = 6
 
 
 /obj/item/weapon/pack/attack_self(var/mob/user as mob)

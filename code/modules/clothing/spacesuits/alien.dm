@@ -5,7 +5,6 @@
 	armor = list(melee = 20, bullet = 20, laser = 50,energy = 50, bomb = 50, bio = 100, rad = 100)
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	species_restricted = list("Skrell","Human")
-	item_worth = 1200
 
 /obj/item/clothing/head/helmet/space/skrell/white
 	icon_state = "skrell_helmet_white"
@@ -21,7 +20,6 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	species_restricted = list("Skrell","Human")
-	item_worth = 1500
 
 /obj/item/clothing/suit/space/skrell/white
 	icon_state = "skrell_suit_white"
@@ -39,7 +37,6 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	species_restricted = list("Vox")
-	item_worth = 1000
 
 /obj/item/clothing/suit/space/vox/New()
 	..()
@@ -51,7 +48,6 @@
 	item_flags = STOPPRESSUREDAMAGE
 	flags_inv = 0
 	species_restricted = list("Vox")
-	item_worth = 1200
 
 /obj/item/clothing/head/helmet/space/vox/pressure
 	name = "alien helmet"

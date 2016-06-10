@@ -115,7 +115,6 @@
 	icon = 'icons/obj/furniture.dmi'
 	icon_state = "stool_padded_preview"
 	anchored = 1.0
-	item_worth = 0
 
 /obj/item/clothing/gloves/boxing/hologlove
 	name = "boxing gloves"
@@ -289,7 +288,6 @@
 	anchored = 1
 	density = 1
 	throwpass = 1
-	item_worth = 0
 
 /obj/structure/holohoop/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)

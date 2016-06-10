@@ -19,8 +19,6 @@
 	var/datatype=0
 	var/value=0
 
-	item_worth = 70
-
 /obj/item/weapon/dnainjector/New()
 	if(datatype && block)
 		buf=new

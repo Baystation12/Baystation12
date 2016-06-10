@@ -13,4 +13,3 @@
 		/obj/item/weapon/forensics/sample_kit,
 		/obj/item/weapon/forensics/sample_kit/powder,
 		)
-	item_worth = 50

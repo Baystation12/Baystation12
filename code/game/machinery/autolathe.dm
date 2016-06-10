@@ -23,8 +23,6 @@
 
 	var/datum/wires/autolathe/wires = null
 
-	item_worth = 2300
-
 
 /obj/machinery/autolathe/New()
 

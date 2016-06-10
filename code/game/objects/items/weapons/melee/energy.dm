@@ -6,7 +6,6 @@
 	edge = 0
 	armor_penetration = 50
 	flags = NOBLOODY
-	item_worth = 200
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
 	anchored = 1
@@ -77,7 +76,6 @@
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	sharp = 1
 	edge = 1
-	item_worth = 400
 
 /obj/item/weapon/melee/energy/axe/activate(mob/living/user)
 	..()

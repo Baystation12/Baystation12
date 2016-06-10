@@ -18,8 +18,6 @@
 	//  copied here so that, in the unlikely case that alldirs is changed,
 	//  this continues to work.
 	var/global/list/tube_dir_list = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
-	item_worth = 80
-
 
 // A place where tube pods stop, and people can get in or out.
 // Mappers: use "Generate Instances from Directions" for this
@@ -45,7 +43,6 @@
 	density = 1
 	var/moving = 0
 	var/datum/gas_mixture/air_contents = new()
-	item_worth = 100
 
 
 

@@ -32,7 +32,6 @@
 	//initializes the contents of the storage with some items based on an assoc list. The assoc key must be an item path,
 	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
 	var/list/startswith
-	item_worth = 30
 
 /obj/item/weapon/storage/Destroy()
 	close_all()

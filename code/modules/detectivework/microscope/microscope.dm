@@ -10,8 +10,6 @@
 	var/obj/item/weapon/sample = null
 	var/report_num = 0
 
-	item_worth = 550
-
 /obj/machinery/microscope/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	if(sample)

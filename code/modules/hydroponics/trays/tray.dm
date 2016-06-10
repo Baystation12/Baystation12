@@ -123,8 +123,6 @@
 		"mutagen" = 15
 		)
 
-	item_worth = 2300
-
 /obj/machinery/portable_atmospherics/hydroponics/AltClick()
 	if(mechanical && !usr.incapacitated() && Adjacent(usr))
 		close_lid(usr)

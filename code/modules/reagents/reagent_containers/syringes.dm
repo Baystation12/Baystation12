@@ -23,7 +23,6 @@
 	var/image/filling //holds a reference to the current filling overlay
 	var/visible_name = "a syringe"
 	var/time = 30
-	item_worth = 1
 
 	on_reagent_change()
 		update_icon()

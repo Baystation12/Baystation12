@@ -9,7 +9,6 @@
 	density = 1
 	var/last_update = 0
 	var/list/stored_ore = list()
-	item_worth = 12
 
 /obj/structure/ore_box/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/ore))

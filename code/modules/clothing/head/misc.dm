@@ -11,16 +11,12 @@
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
-	item_worth = 600
-
 /obj/item/clothing/head/hairflower
 	name = "hair flower pin"
 	icon_state = "hairflower"
 	desc = "Smells nice."
 	slot_flags = SLOT_HEAD | SLOT_EARS
 	body_parts_covered = 0
-
-	item_worth = 5
 
 /obj/item/clothing/head/hairflower/blue
 	icon_state = "hairflower_blue"
@@ -36,8 +32,6 @@
 	desc = "A powdered wig."
 	icon_state = "pwig"
 	item_state = "pwig"
-
-	item_worth = 80
 
 /obj/item/clothing/head/that
 	name = "top-hat"
@@ -127,8 +121,6 @@
 	icon_state = "justicered"
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|EYES
-
-	item_worth = 30
 
 /obj/item/clothing/head/justice/blue
 	icon_state = "justiceblue"
@@ -265,8 +257,6 @@
 	flags_inv = BLOCKHAIR
 	siemens_coefficient = 2.0 //why is it so conductive?!
 	body_parts_covered = 0
-
-	item_worth = 70
 
 /obj/item/clothing/head/orangebandana //themij: Taryn Kifer
 	name = "orange bandana"

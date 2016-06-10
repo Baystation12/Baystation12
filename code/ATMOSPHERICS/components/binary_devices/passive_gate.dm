@@ -24,8 +24,6 @@
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
-	item_worth = 1600
-
 /obj/machinery/atmospherics/binary/passive_gate/on
     unlocked = 1
     icon_state = "map_on"
