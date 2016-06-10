@@ -292,3 +292,10 @@
 	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
 	flags_inv = BLOCKHAIR
 	siemens_coefficient = 0.9
+
+/obj/item/clothing/head/cowboy_hat
+	name = "cowboy hat"
+	desc = "A wide-brimmed hat, in the prevalent style of America's frontier period. By SolGov law, you are required to wear this hat while watching True Grit."
+	icon_state = "cowboyhat"
+	item_state = "cowboy_hat"
+	body_parts_covered = 0
