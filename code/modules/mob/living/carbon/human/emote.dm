@@ -26,7 +26,7 @@
 
 		if ("beep")
 			if (src.isSynthetic())
-				message = "<B>[src]</B> beeps."
+				message = "beeps."
 				playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 				m_type = 1
 			else
@@ -34,7 +34,7 @@
 
 		if ("ping")
 			if (src.isSynthetic())
-				message = "<B>[src]</B> pings."
+				message = "pings."
 				playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
 				m_type = 1
 			else
@@ -42,7 +42,7 @@
 
 		if ("buzz")
 			if (src.isSynthetic())
-				message = "<B>[src]</B> buzzes."
+				message = "buzzes."
 				playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 				m_type = 1
 			else
