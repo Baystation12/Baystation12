@@ -70,7 +70,11 @@
 
 /datum/computer_file/program/merchant/proc/offer_item(var/datum/trader/T, var/num)
 	if(pad)
-		if(T.offer_item_for_trade(pad.get_target(),num))
+		var/target = pad.get_target()
+		if(!computer_emagged && istype(target,/mob/living))
+			last_comms = "SAFETY LOCK ENABLED: LIVING MATTER UNTRANSMITTABLE"
+			return
+		if(T.offer_item_for_trade(target,num))
 			last_comms = T.get_response("trade_complete","Thanks for your business!")
 		else
 			last_comms = T.get_response("trade_refuse","No, a million times no.")
