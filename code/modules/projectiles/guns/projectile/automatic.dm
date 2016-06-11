@@ -261,13 +261,13 @@
 	..()
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/load_ammo(var/obj/item/A, mob/user)
-	if(istype(A, /obj/item/ammo_magazine/box) && !cover_open)
+	if(!cover_open)
 		user << "<span class='warning'>You need to open the cover to load that into [src].</span>"
 		return
 	..()
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/unload_ammo(mob/user, var/allow_dump=1)
-	if(istype(ammo_magazine, /obj/item/ammo_magazine/box) && !cover_open)
+	if(!cover_open)
 		user << "<span class='warning'>You need to open the cover to unload [src].</span>"
 		return
 	..()
