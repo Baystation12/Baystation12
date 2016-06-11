@@ -216,6 +216,7 @@
 		/obj/item/device/kit/paint/durand/seraph,
 		/obj/item/device/kit/paint/durand/phazon
 		)
+	cost = 200
 	containername = "heavy crate"
 	supply_method = /decl/supply_method/randomized
 
@@ -227,6 +228,7 @@
 		/obj/item/device/kit/paint/gygax/darkgygax,
 		/obj/item/device/kit/paint/gygax/recitence
 		)
+	cost = 200
 	containername = "heavy crate"
 	supply_method = /decl/supply_method/randomized
 
