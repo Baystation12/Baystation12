@@ -196,8 +196,8 @@
 	if((LASER in mutations) && a_intent == I_HURT)
 		LaserEyes(A) // moved into a proc below
 	else if(TK in mutations)
+		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		A.attack_tk(src)
-	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 /*
 	Restrained ClickOn
 
