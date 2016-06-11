@@ -684,18 +684,21 @@ proc/GaussRandRound(var/sigma,var/roundto)
 	//change the old turfs
 	for(var/turf/source in turfs_src)
 		if(turftoleave)
-			source.ChangeTurf(turftoleave)
+			source.ChangeTurf(turftoleave, 1, 1)
 		else
-			source.ChangeTurf(get_base_turf_by_area(source))
+			source.ChangeTurf(get_base_turf_by_area(source), 1, 1)
+
+	//fixes lighting issue caused by turf
 
 //Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
 /proc/transport_turf_contents(turf/source, turf/target, var/direction)
 
-	var/turf/new_turf = target.ChangeTurf(source.type)
+	var/turf/new_turf = target.ChangeTurf(source.type, 1, 1)
 	new_turf.transport_properties_from(source)
 
 	for(var/obj/O in source)
-		O.forceMove(new_turf)
+		if(O.simulated)
+			O.forceMove(new_turf)
 
 	for(var/mob/M in source)
 		if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable

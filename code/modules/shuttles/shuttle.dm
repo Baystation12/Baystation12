@@ -124,10 +124,9 @@
 
 	for(var/turf/T in dstturfs)
 		var/turf/D = locate(T.x, throwy - 1, 1)
-		for(var/atom/movable/AM as mob|obj in T)
-			AM.Move(D)
-		if(istype(T, /turf/simulated))
-			qdel(T)
+		for(var/atom/movable/AM in T)
+			if(AM.simulated)
+				AM.Move(D)
 
 	for(var/mob/living/carbon/bug in destination)
 		bug.gib()
