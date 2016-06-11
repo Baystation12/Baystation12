@@ -14,6 +14,7 @@
 	damage = 5
 	agony = 10
 	kill_count = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
+	muzzle_type = /obj/effect/projectile/bullet/muzzle
 	var/flash_range = 0
 	var/brightness = 7
 	var/light_colour = "#ffffff"
