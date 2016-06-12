@@ -15,7 +15,8 @@
 	name = "card"
 	desc = "Does card things."
 	icon = 'icons/obj/card.dmi'
-	w_class = 1.0
+	w_class = 1
+	slot_flags = SLOT_EARS
 	var/associated_account_number = 0
 
 	var/list/files = list(  )
