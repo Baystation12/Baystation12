@@ -143,12 +143,19 @@
 	if(..())
 		return 1
 
+
 	if(href_list["command"] && href_list["value"])
+		var/log_action = null
+
+		var/list/toggle = list("disabled","enabled")
+
 		var/value = text2num(href_list["value"])
 		if(href_list["command"] == "enable")
 			enabled = value
+			log_action = "[toggle[enabled+1]] the turrets"
 		else if(href_list["command"] == "lethal")
 			lethal = value
+			log_action = "[toggle[lethal+1]] the turrets lethal mode."
 		else if(href_list["command"] == "check_synth")
 			check_synth = value
 		else if(href_list["command"] == "check_weapons")
@@ -161,6 +168,10 @@
 			check_access = value
 		else if(href_list["command"] == "check_anomalies")
 			check_anomalies = value
+
+		if(!isnull(log_action))
+			log_admin("[key_name(usr)] has [log_action]")
+			message_admins("[key_name_admin(usr)] has [log_action]", 1)
 
 		updateTurrets()
 		return 1
