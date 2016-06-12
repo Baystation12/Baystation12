@@ -357,7 +357,7 @@
 							M.animate_movement = 2
 							return
 
-		else 
+		else
 			if(mob.confused)
 				switch(mob.m_intent)
 					if("run")
@@ -407,7 +407,7 @@
 	return
 
 // Checks whether this mob is allowed to move in space
-// Return 1 for movement, 0 for none, 
+// Return 1 for movement, 0 for none,
 // -1 to allow movement but with a chance of slipping
 /mob/proc/Allow_Spacemove(var/check_drift = 0)
 	if(!Check_Dense_Object()) //Nothing to push off of so end here

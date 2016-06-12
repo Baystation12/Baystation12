@@ -1076,6 +1076,16 @@ mob/proc/yank_out_object()
 
 //Throwing stuff
 
+//people have to see it
+var/static/image/_throw = image('icons/effects/thrower.dmi')
+
+/mob/proc/check_throw()
+
+	if(in_throw_mode == 1)
+		overlays += _throw
+	else
+		overlays -= _throw
+
 /mob/proc/toggle_throw_mode()
 	if (src.in_throw_mode)
 		throw_mode_off()
@@ -1086,8 +1096,11 @@ mob/proc/yank_out_object()
 	src.in_throw_mode = 0
 	if(src.throw_icon) //in case we don't have the HUD and we use the hotkey
 		src.throw_icon.icon_state = "act_throw_off"
+	check_throw()
+
 
 /mob/proc/throw_mode_on()
 	src.in_throw_mode = 1
 	if(src.throw_icon)
 		src.throw_icon.icon_state = "act_throw_on"
+	check_throw()
