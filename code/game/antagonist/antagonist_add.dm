@@ -8,7 +8,7 @@
 		player.assigned_role = role_text
 	player.special_role = role_text
 
-	if(isghost(player.current))
+	if(isghostmind(player))
 		create_default(player.current)
 	else
 		create_antagonist(player, move_to_spawn, do_not_announce, preserve_appearance)

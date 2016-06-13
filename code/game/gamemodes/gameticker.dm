@@ -496,7 +496,7 @@ var/global/datum/controller/gameticker/ticker
 			antag.update_current_antag_max()
 			antag.build_candidate_list(needs_ghost)
 			for(var/datum/mind/candidate in antag.candidates)
-				if(isghost(candidate.current))
+				if(isghostmind(candidate))
 					antag.candidates -= candidate
 					log_debug("[candidate.key] is a ghost and can not be selected.")
 		if(length(antag.candidates) >= antag.initial_spawn_req)

@@ -1091,3 +1091,20 @@ mob/proc/yank_out_object()
 	src.in_throw_mode = 1
 	if(src.throw_icon)
 		src.throw_icon.icon_state = "act_throw_on"
+
+/mob/verb/toggle_antag_pool()
+	set name = "Toggle Add-Antag Candidacy"
+	set desc = "Toggles whether or not you will be considered a candidate by an add-antag vote."
+	set category = "OOC"
+	if(isghostmind(src.mind) || isnewplayer(src))
+		if(ticker && ticker.looking_for_antags)
+			if(src.mind in ticker.antag_pool)
+				ticker.antag_pool -= src.mind
+				usr << "You have left the antag pool."
+			else
+				ticker.antag_pool += src.mind
+				usr << "You have joined the antag pool. Make sure you have the needed role set to high!"
+		else
+			usr << "The game is not currently looking for antags."
+	else
+		usr << "You must be observing or in the lobby to join the antag pool."
