@@ -990,6 +990,7 @@
 /* Slime cores */
 
 /datum/chemical_reaction/slime
+	reaction_rate = HALF_LIFE(0)
 	var/required = null
 
 /datum/chemical_reaction/slime/can_happen(var/datum/reagents/holder)
