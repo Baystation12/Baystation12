@@ -185,6 +185,40 @@
 			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 			m_type = 1
 
+		if("confirm")
+			var/M = null
+			if(param)
+				for (var/mob/A in view(null, null))
+					if (param == A.name)
+						M = A
+						break
+			if(!M)
+				param = null
+
+			if (param)
+				message = "emits an affirmative blip at [param]."
+			else
+				message = "emits an affirmative blip."
+			playsound(src.loc, 'sound/machines/synth_yes.ogg', 50, 0)
+			m_type = 1
+
+		if("deny")
+			var/M = null
+			if(param)
+				for (var/mob/A in view(null, null))
+					if (param == A.name)
+						M = A
+						break
+			if(!M)
+				param = null
+
+			if (param)
+				message = "emits a negative blip at [param]."
+			else
+				message = "emits a negative blip."
+			playsound(src.loc, 'sound/machines/synth_no.ogg', 50, 0)
+			m_type = 1
+
 		if("law")
 			if (istype(module,/obj/item/weapon/robot_module/security))
 				message = "shows its legal authorization barcode."
