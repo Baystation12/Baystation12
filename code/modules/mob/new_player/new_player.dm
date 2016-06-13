@@ -18,6 +18,7 @@
 
 /mob/new_player/New()
 	mob_list += src
+	verbs += /mob/proc/toggle_antag_pool
 
 /mob/new_player/verb/new_player_panel()
 	set src = usr
