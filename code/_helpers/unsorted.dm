@@ -688,67 +688,13 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		else
 			source.ChangeTurf(get_base_turf_by_area(source))
 
-/turf/proc/transport_properties_from(turf/other)
-	if(!istype(other, src.type))
-		return 0
-
-	src.set_dir(other.dir)
-	src.icon_state = other.icon_state
-	src.icon = other.icon
-	src.overlays = other.overlays.Copy()
-	src.underlays = other.underlays.Copy()
-	return 1
-
-//I would name this copy_from() but we remove the other turf from their air zone for some reason
-/turf/simulated/transport_properties_from(turf/simulated/other)
-	if(!..())
-		return 0
-
-	if(other.zone)
-		if(!src.air)
-			src.make_air()
-		src.air.copy_from(other.zone.air)
-		other.zone.remove(other)
-	return 1
-
+//Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
 /proc/transport_turf_contents(turf/source, turf/target, var/direction)
 
 	var/turf/new_turf = target.ChangeTurf(source.type)
 	new_turf.transport_properties_from(source)
 
-	/* Quick visual fix for some weird shuttle corner artefacts when on transit space tiles */
-	if(direction && findtext(new_turf.icon_state, "swall_s"))
-
-		//TODO make shuttle corners take the appearance of the area base_turf and then apply a corner overlay, then remove the direction argument from this proc
-		// Spawn a new shuttle corner object
-		var/obj/corner = new()
-		corner.loc = new_turf
-		corner.density = 1
-		corner.anchored = 1
-		corner.icon = new_turf.icon
-		corner.icon_state = replacetext(new_turf.icon_state, "_s", "_f")
-		corner.tag = "delete me"
-		corner.name = "wall"
-
-		// Find a new turf to take on the property of
-		var/turf/nextturf = get_step(corner, direction)
-		if(!nextturf || !istype(nextturf, /turf/space))
-			nextturf = get_step(corner, turn(direction, 180))
-
-
-		// Take on the icon of a neighboring scrolling space icon
-		new_turf.icon = nextturf.icon
-		new_turf.icon_state = nextturf.icon_state
-
-
 	for(var/obj/O in source)
-		// Reset the shuttle corners
-		if(O.tag == "delete me")
-			new_turf.icon = 'icons/turf/shuttle.dmi'
-			new_turf.icon_state = replacetext(O.icon_state, "_f", "_s") // revert the turf to the old icon_state
-			new_turf.name = "wall"
-			qdel(O) // prevents multiple shuttle corners from stacking
-			continue
 		O.forceMove(new_turf)
 
 	for(var/mob/M in source)
@@ -756,7 +702,6 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		M.forceMove(new_turf)
 
 	return new_turf
-
 
 proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 	if(!original)
