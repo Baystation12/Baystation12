@@ -23,6 +23,11 @@
 	update_icon()
 	return
 
+/obj/item/weapon/melee/baton/Destroy()
+	qdel(bcell)
+	bcell = null
+	return ..()
+
 /obj/item/weapon/melee/baton/loaded/New() //this one starts with a cell pre-installed.
 	..()
 	bcell = new/obj/item/weapon/cell/high(src)
@@ -48,7 +53,7 @@
 		icon_state = "[initial(name)]"
 
 	if(icon_state == "[initial(name)]_active")
-		set_light(1.5, 1, "#FF6A00")
+		set_light(1.5, 2, "#FF6A00")
 	else
 		set_light(0)
 
@@ -85,18 +90,22 @@
 	return
 
 /obj/item/weapon/melee/baton/attack_self(mob/user)
+	set_status(!status, user)
+	add_fingerprint(user)
+
+/obj/item/weapon/melee/baton/proc/set_status(var/newstatus, mob/user)
 	if(bcell && bcell.charge > hitcost)
-		status = !status
-		user << "<span class='notice'>[src] is now [status ? "on" : "off"].</span>"
-		playsound(loc, "sparks", 75, 1, -1)
-		update_icon()
+		if(status != newstatus)
+			status = newstatus
+			user << "<span class='notice'>[src] is now [status ? "on" : "off"].</span>"
+			playsound(loc, "sparks", 75, 1, -1)
+			update_icon()
 	else
 		status = 0
 		if(!bcell)
 			user << "<span class='warning'>[src] does not have a power source!</span>"
 		else
 			user << "<span class='warning'>[src] is out of charge.</span>"
-	add_fingerprint(user)
 
 /obj/item/weapon/melee/baton/attack(mob/M, mob/user)
 	if(status && (CLUMSY in user.mutations) && prob(50))
