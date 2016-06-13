@@ -16,60 +16,29 @@
 /datum/event/infestation
 	announceWhen = 10
 	endWhen = 11
-	var/location
-	var/locstring
+	var/area/location
 	var/vermin
 	var/vermstring
 
 /datum/event/infestation/start()
+	var/list/vermin_turfs
+	var/attempts = 3
+	do
+		vermin_turfs = set_location_get_infestation_turfs()
+		if(!location)
+			return
+	while(!vermin_turfs && --attempts > 0)
 
-	location = rand(0,9)
-	var/list/turf/simulated/floor/turfs = list()
-	var/spawn_area_type
-	switch(location)
-		if(LOC_KITCHEN)
-			spawn_area_type = /area/crew_quarters/kitchen
-			locstring = "the kitchen"
-		if(LOC_ATMOS)
-			spawn_area_type = /area/engineering/atmos
-			locstring = "atmospherics"
-		if(LOC_INCIN)
-			spawn_area_type = /area/maintenance/incinerator
-			locstring = "the incinerator"
-		if(LOC_CHAPEL)
-			spawn_area_type = /area/chapel/main
-			locstring = "the chapel"
-		if(LOC_LIBRARY)
-			spawn_area_type = /area/library
-			locstring = "the library"
-		if(LOC_HYDRO)
-			spawn_area_type = /area/hydroponics
-			locstring = "hydroponics"
-		if(LOC_VAULT)
-			spawn_area_type = /area/security/nuke_storage
-			locstring = "the vault"
-		if(LOC_CONSTR)
-			spawn_area_type = /area/construction
-			locstring = "the construction area"
-		if(LOC_TECH)
-			spawn_area_type = /area/storage/tech
-			locstring = "technical storage"
-		if(LOC_TACTICAL)
-			spawn_area_type = /area/security/tactical
-			locstring = "tactical equipment storage"
-
-	for(var/areapath in typesof(spawn_area_type))
-		var/area/A = locate(areapath)
-		for(var/turf/simulated/floor/F in A.contents)
-			if(turf_clear(F))
-				turfs += F
+	if(!vermin_turfs)
+		log_debug("Vermin infestation failed to find a viable spawn after 3 attempts. Aborting.")
+		kill()
 
 	var/list/spawn_types = list()
 	var/max_number
 	vermin = rand(0,2)
 	switch(vermin)
 		if(VERM_MICE)
-			spawn_types = list(/mob/living/simple_animal/mouse/gray, /mob/living/simple_animal/mouse/brown, /mob/living/simple_animal/mouse/white)
+			spawn_types = list(/mob/living/simple_animal/mouse) // The base mouse type selects a random color for us
 			max_number = 12
 			vermstring = "mice"
 		if(VERM_LIZARDS)
@@ -82,22 +51,35 @@
 			vermstring = "spiders"
 
 	spawn(0)
-		var/num = rand(2,max_number)
+		var/num = 0
+		for(var/i = 1 to severity)
+			num += rand(2,max_number)
+		log_and_message_admins("Vermin infestation spawned ([vermstring] x[num]) in \the [location]", location = pick_area_turf(location))
 		while(turfs.len > 0 && num > 0)
-			var/turf/simulated/floor/T = pick(turfs)
-			turfs.Remove(T)
+			var/turf/simulated/floor/T = pick(vermin_turfs)
+			vermin_turfs.Remove(T)
 			num--
 
-			if(vermin == VERM_SPIDERS)
-				var/obj/effect/spider/spiderling/S = new(T)
+			var/spawn_type = pick(spawn_types)
+			var/obj/effect/spider/spiderling/S = new spawn_type(T)
+			if(istype(S))
 				S.amount_grown = -1
-			else
-				var/spawn_type = pick(spawn_types)
-				new spawn_type(T)
-
 
 /datum/event/infestation/announce()
-	command_announcement.Announce("Bioscans indicate that [vermstring] have been breeding in [locstring]. Clear them out, before this starts to affect productivity.", "Vermin infestation")
+	command_announcement.Announce("Bioscans indicate that [vermstring] have been breeding in \the [location]. Clear them out, before this starts to affect productivity.", "Vermin infestation")
+
+/datum/event/infestation/proc/set_location_get_infestation_turfs()
+	location = pick_area(list(/proc/is_not_space, /proc/is_station_area))
+	if(!location)
+		log_debug("Vermin infestation failed to find a viable area. Aborting.")
+		kill()
+		return
+
+	var/list/vermin_turfs = get_area_turfs(location, list(/proc/not_turf_contains_dense_objects, /proc/IsTurfAtmosSafe))
+	if(!vermin_turfs.len)
+		log_debug("Vermin infestation failed to find viable turfs in \the [location].")
+		return
+	return vermin_turfs
 
 #undef LOC_KITCHEN
 #undef LOC_ATMOS

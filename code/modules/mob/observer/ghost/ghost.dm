@@ -289,13 +289,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/holyblock = 0
 
 	if(usr.invisibility <= SEE_INVISIBLE_LIVING || (usr.mind in cult.current_antagonists))
-		for(var/turf/T in get_area_turfs(thearea.type))
+		for(var/turf/T in get_area_turfs(thearea))
 			if(!T.holy)
 				L+=T
 			else
 				holyblock = 1
 	else
-		for(var/turf/T in get_area_turfs(thearea.type))
+		for(var/turf/T in get_area_turfs(thearea))
 			L+=T
 
 	if(!L || !L.len)
