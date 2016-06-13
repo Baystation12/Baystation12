@@ -135,8 +135,9 @@
 
 /obj/item/organ/external/diona/head/removed()
 	if(owner)
-		owner.u_equip(owner.head)
-		owner.u_equip(owner.l_ear)
+		owner.drop_from_inventory(owner.head)
+		owner.drop_from_inventory(owner.l_ear)
+		owner.drop_from_inventory(owner.r_ear)
 	..()
 
 //DIONA ORGANS.

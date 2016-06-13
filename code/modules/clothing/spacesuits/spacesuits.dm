@@ -83,7 +83,7 @@
 
 /obj/item/clothing/suit/space/New()
 	..()
-	slowdown_per_slot[slot_wear_suit] = 3
+	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/space/equipped(mob/M)
 	check_limb_support()
