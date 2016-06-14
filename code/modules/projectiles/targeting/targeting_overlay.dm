@@ -16,14 +16,13 @@
 	var/locked =    0          // Have we locked on?
 	var/lock_time = 0          // When -will- we lock on?
 	var/active =    0          // Is our owner intending to take hostages?
-	var/target_permissions = 0 // Permission bitflags.
+	var/target_permissions = TARGET_CAN_RADIO // Permission bitflags.
 
 /obj/aiming_overlay/New(var/newowner)
 	..()
 	owner = newowner
 	loc = null
 	verbs.Cut()
-	toggle_permission(TARGET_CAN_RADIO)
 
 /obj/aiming_overlay/proc/toggle_permission(var/perm)
 
