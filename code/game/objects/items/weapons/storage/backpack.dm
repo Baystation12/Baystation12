@@ -149,17 +149,15 @@
 	icon_state = "duffle"
 	item_state_slots = null
 	w_class = 5
-	slowdown_general = 1
 	max_storage_space = DEFAULT_BACKPACK_STORAGE + 10
 
 /obj/item/weapon/storage/backpack/dufflebag/New()
 	..()
-	slowdown_per_slot[slot_back] = 2
+	slowdown_per_slot[slot_back] = 3
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie
 	name = "black dufflebag"
 	desc = "A large dufflebag for holding extra tactical supplies."
-	slowdown_general = 0
 	icon_state = "duffle_syndie"
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie/New()
