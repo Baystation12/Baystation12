@@ -348,14 +348,18 @@
 		state = GRAB_NECK
 
 /obj/item/weapon/grab/proc/handle_resist()
-	var/grab_name
+	var/grab_name = "grip"
 	var/break_strength = 1
 	var/list/break_chance_table = list(100)
 	switch(state)
-		//if(GRAB_PASSIVE)
+		if(GRAB_PASSIVE)
+			//Being knocked down makes it harder to break a grab, so it is easier to cuff someone who is down without forcing them into unconsciousness.
+			//use same chance_table as aggressive but give +2 for not-weakened so that resomi grabs don't become auto-success for weakened either, that's lame
+			if(!affecting.incapacitated(INCAPACITATION_KNOCKDOWN))
+				break_strength += 2
+			break_chance_table = list(15, 60, 100)
 
 		if(GRAB_AGGRESSIVE)
-			grab_name = "grip"
 			//Being knocked down makes it harder to break a grab, so it is easier to cuff someone who is down without forcing them into unconsciousness.
 			if(!affecting.incapacitated(INCAPACITATION_KNOCKDOWN))
 				break_strength++
