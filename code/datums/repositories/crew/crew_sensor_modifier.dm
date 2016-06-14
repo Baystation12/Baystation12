@@ -1,5 +1,5 @@
 /crew_sensor_modifier
-	var/priority = 15
+	var/priority = 1
 	var/atom/holder
 	var/may_process_proc
 

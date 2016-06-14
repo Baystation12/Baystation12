@@ -53,11 +53,8 @@ var/global/datum/repository/crew/crew_repository = new()
 				if(H.w_uniform != C)
 					continue
 				var/list/crewmemberData = list("sensor_type" = C.sensor_mode, "dead"=0, "oxy"=-1, "tox"=-1, "fire"=-1, "brute"=-1, "area"="", "x"=-1, "y"=-1, "z"=-1, "ref" = "\ref[H]")
-				for(var/modifier_queue in modifier_queues)
-					var/suit_level = modifier_queues[modifier_queue]
-					if(crewmemberData["sensor_type"] >= suit_level && (process_crew_data(modifier_queue, H, C, pos, crewmemberData) & MOD_SUIT_SENSORS_REJECTED))
-						continue
-				crewmembers[++crewmembers.len] = crewmemberData
+				if(!(run_queues(H, C, pos, crewmemberData) & MOD_SUIT_SENSORS_REJECTED))
+					crewmembers[++crewmembers.len] = crewmemberData
 
 	crewmembers = sortByKey(crewmembers, "name")
 	cache_entry.timestamp = world.time + 5 SECONDS
@@ -74,12 +71,20 @@ var/global/datum/repository/crew/crew_repository = new()
 				tracked |= C
 	return tracked
 
+
+/datum/repository/crew/proc/run_queues(H, C, pos, crewmemberData)
+	for(var/modifier_queue in modifier_queues)
+		if(crewmemberData["sensor_type"] >= modifier_queues[modifier_queue])
+			. = process_crew_data(modifier_queue, H, C, pos, crewmemberData)
+			if(. & MOD_SUIT_SENSORS_REJECTED)
+				return
+
 /datum/repository/crew/proc/process_crew_data(var/PriorityQueue/modifiers, var/mob/living/carbon/human/H, var/obj/item/clothing/under/C, var/turf/pos, var/list/crew_data)
-	var/current_priority = 0
+	var/current_priority = INFINITY
 	var/list/modifiers_of_this_priority = list()
 
 	for(var/crew_sensor_modifier/csm in modifiers.L)
-		if(csm.priority > current_priority)
+		if(csm.priority < current_priority)
 			. = check_queue(modifiers_of_this_priority, H, C, pos, crew_data)
 			if(. != MOD_SUIT_SENSORS_NONE)
 				return

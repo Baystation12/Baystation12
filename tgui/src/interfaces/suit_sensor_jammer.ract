@@ -19,4 +19,4 @@
 	<ui-display title='Charge: {{data.current_charge}}/{{data.max_charge}}'>
 	<ui-bar min='0' max='1' value='{{data.current_charge/data.max_charge}}' state='{{data.current_charge/data.max_charge}}'>{{Math.fixed(data.current_charge*100/data.max_charge)}}%</ui-bar>
 </ui-section>
-<ui-display title='Energy Consumption: ~{{Math.pow(data.range, 2) * data.current_cost}}W'>
+<ui-display title='Energy Consumption: ~{{data.total_cost}}W'>

@@ -1,6 +1,7 @@
 author: PsiOmegaDelta
 delete-after: True
 changes: 
-  - tweak: "EMPs now randomly set suit sensors, with strength affecting probability."
+  - tweak: "EMPs now randomly set suit sensors, with strength affecting the probability of which mode is selected."
   - rscadd: "Because suit sensors can be affected externally a multitool can now be used to (un)lock the controls, to for example allow re-adjusting prisoner uniforms."
-  - rscadd: "Because suit sensors can be locked, antags are now given a tool which is able to jam suit sensors in various ways."
+  - rscadd: "Because suit sensors can be locked the antag uplink now offers tools and services which are able to jam suit sensors in various ways."
+  - rscadd: "Adds random events which will garble suit sensor data."

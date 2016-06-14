@@ -1,4 +1,5 @@
 #define JAMMER_MAX_RANGE world.view*2
+#define JAMMER_POWER_CONSUMPTION ((max(0.75, range)**2 * jammer_method.energy_cost * process_schedule_interval("obj")) / 10)
 
 /obj/item/device/suit_sensor_jammer
 	name = "small device"
@@ -7,7 +8,6 @@
 	w_class = 2
 	var/active = FALSE
 	var/range = 2 // This is a radius, thus a range of 7 covers the entire visible screen
-	var/last_tick
 	var/obj/item/weapon/cell/bcell = /obj/item/weapon/cell/high
 	var/suit_sensor_jammer_method/jammer_method
 	var/list/suit_sensor_jammer_methods_by_type
@@ -21,7 +21,7 @@
 	suit_sensor_jammer_methods_by_type = list()
 	for(var/jammer_method_type in subtypesof(/suit_sensor_jammer_method))
 		var/new_method = new jammer_method_type(src, /obj/item/device/suit_sensor_jammer/proc/may_process_crew_data)
-		suit_sensor_jammer_methods += new_method
+		dd_insertObjectList(suit_sensor_jammer_methods, new_method)
 		suit_sensor_jammer_methods_by_type[jammer_method_type] = new_method
 	jammer_method = suit_sensor_jammer_methods[1]
 	update_icon()
@@ -117,7 +117,7 @@ obj/item/device/suit_sensor_jammer/ui_status(mob/user, datum/ui_state/state)
 obj/item/device/suit_sensor_jammer/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = tg_default_state)
 	ui = tgui_process.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, ui_key, "suit_sensor_jammer", "Sensor Jammer", 350, 600, master_ui, state)
+		ui = new(user, src, ui_key, "suit_sensor_jammer", "Sensor Jammer", 350, 610, master_ui, state)
 		ui.open()
 
 obj/item/device/suit_sensor_jammer/ui_data()
@@ -134,6 +134,7 @@ obj/item/device/suit_sensor_jammer/ui_data()
 		"methods" = methods,
 		"current_method" = "\ref[jammer_method]",
 		"current_cost" = jammer_method.energy_cost,
+		"total_cost" = "[ceil(JAMMER_POWER_CONSUMPTION)]"
 	)
 
 	return data
@@ -162,12 +163,9 @@ obj/item/device/suit_sensor_jammer/ui_act(action, params)
 
 /obj/item/device/suit_sensor_jammer/process()
 	if(bcell)
-		var/ticks_since_last = world.time - last_tick
-		last_tick = world.time
-
 		// With a range of 2 and jammer cost of 3 the default (high capacity) cell will last for almost 14 minutes, give or take
 		// 10000 / (2^2 * 3 / 10) ~= 8333 ticks ~= 13.8 minutes
-		var/deduction = (max(0.5, range)**2 * jammer_method.energy_cost / 10) * ticks_since_last
+		var/deduction = JAMMER_POWER_CONSUMPTION
 		if(!bcell.use(deduction))
 			disable()
 	else
@@ -178,7 +176,6 @@ obj/item/device/suit_sensor_jammer/ui_act(action, params)
 	if(active)
 		return FALSE
 	active = TRUE
-	last_tick = world.time
 	processing_objects += src
 	jammer_method.enable()
 	update_icon()
@@ -212,3 +209,4 @@ obj/item/device/suit_sensor_jammer/ui_act(action, params)
 	return T && T.z == pos.z && get_dist(T, pos) <= range
 
 #undef JAMMER_MAX_RANGE
+#undef JAMMER_POWER_CONSUMPTION

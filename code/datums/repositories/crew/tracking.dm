@@ -16,21 +16,30 @@
 **********/
 
 /crew_sensor_modifier/tracking/jamming
-	priority = 10
+	priority = 5
 
 /crew_sensor_modifier/tracking/jamming/localize/process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/under/C, var/turf/pos, var/list/crew_data)
 	return ..(H, C, get_turf(holder), crew_data)
 
 /crew_sensor_modifier/tracking/jamming/random
+	var/shift_range = 7
 	var/x_shift
 	var/y_shift
 	var/next_shift_change
 
+/crew_sensor_modifier/tracking/jamming/random/moderate
+	shift_range = 14
+
+/crew_sensor_modifier/tracking/jamming/random/major
+	shift_range = 21
+
 /crew_sensor_modifier/tracking/jamming/random/process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/under/C, var/turf/pos, var/list/crew_data)
 	if(world.time > next_shift_change)
-		next_shift_change = world.time + rand(1 MINUTE, 3 MINUTES)
-		x_shift = rand(-world.view, world.view)
-		y_shift = rand(-world.view, world.view)
+		next_shift_change = world.time + rand(30 SECONDS, 2 MINUTES)
+		x_shift = rand(-shift_range, shift_range)
+		y_shift = rand(-shift_range, shift_range)
 	if(pos)
-		pos = locate(Clamp(pos.x + x_shift, 1, world.maxx), Clamp(pos.y + y_shift, 1, world.maxy), pos.z)
-	return ..(H, C, get_turf(holder), crew_data)
+		var/new_x = Clamp(pos.x + x_shift, 1, world.maxx)
+		var/new_y = Clamp(pos.y + y_shift, 1, world.maxy)
+		pos = locate(new_x, new_y, pos.z)
+	return ..(H, C, pos, crew_data)
