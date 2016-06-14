@@ -637,7 +637,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 				atoms += A
 	return atoms
 
-/area/proc/move_contents_to(var/area/A, var/turftoleave=null, var/direction = null, var/ignore_turf = null)
+/area/proc/move_contents_to(var/area/A, var/turftoleave=null, var/direction = null, var/check_solid = 0)
 	//Takes: Area. Optional: turf type to leave behind.
 	//Returns: Nothing.
 	//Notes: Attempts to move the contents of one area to another area.
@@ -653,24 +653,18 @@ proc/GaussRandRound(var/sigma,var/roundto)
 
 	//figure out a suitable origin - this assumes the shuttle areas are the exact same size and shape
 	//might be worth doing this with a shuttle core object instead of areas, in the future
-	var/src_min_x = 0
-	var/src_min_y = 0
-	for (var/turf/T in turfs_src)
-		if(T.x < src_min_x || !src_min_x) src_min_x	= T.x
-		if(T.y < src_min_y || !src_min_y) src_min_y	= T.y
+	var/src_min_x = src.x
+	var/src_min_y = src.y
 
-	var/trg_z = 0 //multilevel shuttles are not supported, unfortunately
-	var/trg_min_x = 0
-	var/trg_min_y = 0
-	for (var/turf/T in turfs_trg)
-		if(!trg_z) trg_z = T.z
-		if(T.x < trg_min_x || !trg_min_x) trg_min_x	= T.x
-		if(T.y < trg_min_y || !trg_min_y) trg_min_y	= T.y
+	var/trg_z = A.z //multilevel shuttles are not supported, unfortunately
+	var/trg_min_x = A.x
+	var/trg_min_y = A.y
 
 	//obtain all the source turfs and their relative coords,
 	//then use that to find corresponding targets
 	for(var/turf/source in turfs_src)
-		//var/datum/coords/C = new/datum/coords
+		if(check_solid && !source.is_solid_structure())
+			continue
 
 		var/x_pos = (source.x - src_min_x)
 		var/y_pos = (source.y - src_min_y)

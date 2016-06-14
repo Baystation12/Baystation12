@@ -128,11 +128,11 @@
 			if(AM.simulated)
 				AM.Move(D)
 
-	for(var/mob/living/carbon/bug in destination)
-		bug.gib()
-
-	for(var/mob/living/simple_animal/pest in destination)
-		pest.gib()
+	var/turf/T
+	for(var/mob/living/bug in destination)
+		T = get_turf(bug)
+		if(!T || T.is_solid_structure())
+			bug.gib()
 
 	origin.move_contents_to(destination, direction=direction)
 
