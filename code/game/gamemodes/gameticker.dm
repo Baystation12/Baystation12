@@ -483,8 +483,8 @@ var/global/datum/controller/gameticker/ticker
 		if (needs_ghost)
 			looking_for_antags = 1
 			antag_pool.Cut()
-			world << "<b>A ghost is needed to spawn \a [antag.role_text].</b>\nGhosts may enter the antag pool by making sure their [antag.role_text] preference is set to high, then using the toggle-add-antag-candidacy verb. You have 30 seconds to enter the pool."
-			sleep(300)
+			world << "<b>A ghost is needed to spawn \a [antag.role_text].</b>\nGhosts may enter the antag pool by making sure their [antag.role_text] preference is set to high, then using the toggle-add-antag-candidacy verb. You have 3 minutes to enter the pool."
+			sleep(3 MINUTES)
 			looking_for_antags = 0
 			antag.update_current_antag_max()
 			antag.build_candidate_list(needs_ghost)
