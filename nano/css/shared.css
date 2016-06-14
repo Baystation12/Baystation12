@@ -633,6 +633,11 @@ th.misc {
     font-weight: bold;
     color: #ffffff;
 }
+th.bot {
+    background: #414249;
+    font-weight: bold;
+    color: #ffffff;
+}
 
 /* Damage colors for crew monitoring computer */
 
