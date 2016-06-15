@@ -1,8 +1,0 @@
-author: HarpyEagle
-
-delete-after: True
-
-changes: 
-  - soundadd: "Adds new gunshot sounds for most bullet using guns."
-  - imageadd: "Adds new bullet casing icons. All bullet casings now have distinct icon states for spent and unspent casings."
-  - rscadd: "Adds a new energy weapon, the x-ray laser carbine. The advanced energy weapon crate now comes with two x-ray carbines and one x-ray pistol."

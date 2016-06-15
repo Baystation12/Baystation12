@@ -1,6 +1,0 @@
-author: HarpyEagle
-
-delete-after: True
-
-changes: 
-  - bugfix: "Beepsky and other securitrons now react quicker when attacked or their perp tries to run, and move at closer to a running pace. Beepsky should no longer be so easy to outrun."
