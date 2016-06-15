@@ -23,6 +23,10 @@
 	charge_costs = list(500)
 	stacktype = /obj/item/stack/rods
 
+/obj/item/stack/rods/New()
+	..()
+	update_icon()
+
 /obj/item/stack/rods/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if (istype(W, /obj/item/weapon/weldingtool))
@@ -78,3 +82,19 @@
 		F.add_fingerprint(usr)
 		use(2)
 	return
+
+/obj/item/stack/rods/update_icon()
+	if(amount == 1)
+		icon = 'icons/obj/weapons.dmi'
+		icon_state = "metal-rod"
+	else
+		icon = initial(icon)
+		icon_state = initial(icon_state)
+
+/obj/item/stack/rods/use()
+	. = ..()
+	update_icon()
+
+/obj/item/stack/rods/add()
+	. = ..()
+	update_icon()
