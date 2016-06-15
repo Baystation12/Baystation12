@@ -96,7 +96,6 @@
 				name = "[initial(name)] (wielded)"
 			else
 				name = initial(name)
-				item_state = initial(item_state)
 		update_icon() // In case item_state is set somewhere else.
 	..()
 
@@ -105,9 +104,11 @@
 		var/mob/living/M = loc
 		if(istype(M))
 			if(M.can_wield_item(src) && src.is_held_twohanded(M))
-				item_state = wielded_item_state
+				item_state_slots[slot_l_hand_str] = wielded_item_state
+				item_state_slots[slot_r_hand_str] = wielded_item_state
 			else
-				item_state = initial(item_state)
+				item_state_slots[slot_l_hand_str] = initial(item_state)
+				item_state_slots[slot_r_hand_str] = initial(item_state)
 
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
