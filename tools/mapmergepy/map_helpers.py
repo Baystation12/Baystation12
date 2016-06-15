@@ -305,7 +305,7 @@ def parse_map(map_file):
                             continue
 
                         if char == ";":
-                            skip_whitespace = True
+                            skip_whitespace = False
                             curr_datum = curr_datum + char
                             continue
 
