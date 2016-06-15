@@ -216,6 +216,7 @@
 #include "code\datums\repositories\crew.dm"
 #include "code\datums\repositories\repository.dm"
 #include "code\datums\repositories\unique.dm"
+#include "code\datums\repositories\uplink_purchases.dm"
 #include "code\datums\supplypacks\atmospherics.dm"
 #include "code\datums\supplypacks\engineering.dm"
 #include "code\datums\supplypacks\hospitality.dm"
