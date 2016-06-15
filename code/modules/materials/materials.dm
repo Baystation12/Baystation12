@@ -251,8 +251,9 @@ var/list/name_to_material
 	name = "gold"
 	stack_type = /obj/item/stack/material/gold
 	icon_colour = "#EDD12F"
-	weight = 24
-	hardness = 40
+	weight = 25
+	hardness = 25
+	integrity = 100
 	stack_origin_tech = list(TECH_MATERIAL = 4)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
@@ -384,11 +385,11 @@ var/list/name_to_material
 	flags = MATERIAL_BRITTLE
 	icon_colour = "#00E1FF"
 	opacity = 0.3
-	integrity = 100
+	integrity = 50
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	hardness = 30
-	weight = 15
+	hardness = 50
+	weight = 14
 	door_icon_base = "stone"
 	destruction_desc = "shatters"
 	window_options = list("One Direction" = 1, "Full Window" = 4)
@@ -466,7 +467,10 @@ var/list/name_to_material
 	return 1
 
 /material/glass/proc/is_reinforced()
-	return (hardness > 35) //todo
+	return (integrity > 75) //todo
+
+/material/glass/is_brittle()
+	return ..() && !is_reinforced()
 
 /material/glass/reinforced
 	name = "rglass"
@@ -478,8 +482,7 @@ var/list/name_to_material
 	integrity = 100
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	hardness = 40
-	weight = 30
+	weight = 17
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = 1875,"glass" = 3750)
 	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
@@ -492,7 +495,7 @@ var/list/name_to_material
 	display_name = "borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MATERIAL_BRITTLE
-	integrity = 100
+	integrity = 70
 	icon_colour = "#FC2BC5"
 	stack_origin_tech = list(TECH_MATERIAL = 4)
 	created_window = /obj/structure/window/phoronbasic
@@ -506,11 +509,11 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	composite_material = list() //todo
 	created_window = /obj/structure/window/phoronreinforced
-	hardness = 40
-	weight = 30
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list() //todo
 	rod_product = null
+	integrity = 100
+
 
 /material/plastic
 	name = "plastic"
@@ -520,7 +523,7 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	icon_colour = "#CCCCCC"
 	hardness = 10
-	weight = 12
+	weight = 5
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 	conductive = 0

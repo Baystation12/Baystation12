@@ -186,7 +186,7 @@
 	return 1
 
 /obj/structure/girder/proc/reinforce_girder()
-	cover = reinf_material.hardness
+	cover = 75
 	health = 500
 	state = 2
 	icon_state = "reinforced"
