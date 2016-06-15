@@ -1,8 +1,0 @@
-author: HarpyEagle
-
-delete-after: True
-
-changes:
-  - bugfix: "Fixed spear damage being set to a default value."
-  - tweak: "Adjused spear damage, fixes steel spears now do somewhat less damage than steel baseball bats, but are sharp."
-  - tweak: "Steel fire axes now do somewhat less damage when wielded, unwieled damage unaffected."
