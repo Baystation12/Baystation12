@@ -569,7 +569,7 @@
 			if(L)
 				light_amount = min(10,L.lum_r + L.lum_g + L.lum_b) - 2 //hardcapped so it's not abused by having a ton of flashlights
 			else
-				light_amount =  1
+				light_amount =  10
 		nutrition += light_amount
 		traumatic_shock -= light_amount
 
