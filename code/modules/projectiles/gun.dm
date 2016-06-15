@@ -58,7 +58,6 @@
 	var/fire_sound_text = "gunshot"
 	var/screen_shake = 0 //shouldn't be greater than 2 unless zoomed
 	var/silenced = 0
-	var/muzzle_flash = 3
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/scoped_accuracy = null
 	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
@@ -215,9 +214,6 @@
 	user.setMoveCooldown(move_delay)
 	next_fire_time = world.time + fire_delay
 
-	if(muzzle_flash)
-		set_light(0)
-
 //obtains the next projectile to fire
 /obj/item/weapon/gun/proc/consume_next_projectile()
 	return null
@@ -253,9 +249,6 @@
 				"<span class='warning'>You fire \the [src]!</span>",
 				"You hear a [fire_sound_text]!"
 				)
-
-		if(muzzle_flash)
-			set_light(muzzle_flash)
 
 	if(requires_two_hands)
 		if(!src.is_held_twohanded(user))
