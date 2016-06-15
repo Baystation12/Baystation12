@@ -19,9 +19,11 @@
 /obj/item/weapon/gun/energy/ionrifle/update_icon()
 	..()
 	if(power_supply.charge < charge_cost)
-		item_state = "ionrifle-empty"
+		item_state_slots[slot_l_hand_str] = "ionrifle-empty"
+		item_state_slots[slot_r_hand_str] = "ionrifle-empty"
 	else
-		item_state = initial(item_state)
+		item_state_slots[slot_l_hand_str] = initial(item_state)
+		item_state_slots[slot_r_hand_str] = initial(item_state)
 
 /obj/item/weapon/gun/energy/decloner
 	name = "biological demolecularisor"
