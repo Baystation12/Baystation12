@@ -56,8 +56,9 @@
 	silenced = 1
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/chemdart
+	allowed_magazines = /obj/item/ammo_magazine/chemdart
 	auto_eject = 0
-	handle_casings = HOLD_CASINGS //delete casings instead of dropping them
+	handle_casings = CLEAR_CASINGS //delete casings instead of dropping them
 
 	var/list/beakers = list() //All containers inside the gun.
 	var/list/mixing = list() //Containers being used for mixing.
@@ -89,18 +90,10 @@
 	return 1
 
 /obj/item/weapon/gun/projectile/dartgun/consume_next_projectile()
-	if(ammo_magazine && ammo_magazine.stored_ammo.len)
-		chambered = ammo_magazine.stored_ammo[1]
-		ammo_magazine.stored_ammo -= chambered
-
-	if (chambered)
-		if(istype(chambered.BB, /obj/item/projectile/bullet/chemdart))
-			fill_dart(chambered.BB)
-		return chambered.BB
-	return null
-
-/obj/item/weapon/gun/projectile/dartgun/process_chambered()
-	chambered = null //darts qdel themselves when expended, just need to null this so that they can qdel properly
+	. = ..()
+	var/obj/item/projectile/bullet/chemdart/dart = .
+	if(istype(dart))
+		fill_dart(dart)
 
 /obj/item/weapon/gun/projectile/dartgun/examine(mob/user)
 	..()
