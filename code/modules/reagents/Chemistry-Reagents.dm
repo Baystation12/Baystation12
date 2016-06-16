@@ -27,7 +27,6 @@
 	var/max_dose = 0
 	var/overdose = 0
 	var/scannable = 0 // Shows up on health analyzers.
-	var/affects_dead = 0
 	var/color = "#000000"
 	var/color_weight = 1
 	var/flags = 0
@@ -53,7 +52,7 @@
 /datum/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(!istype(M))
 		return
-	if(!affects_dead && M.stat == DEAD)
+	if(!(flags & AFFECTS_DEAD) && M.stat == DEAD)
 		return
 	if(overdose && (location != CHEM_TOUCH))
 		var/overdose_threshold = overdose * (flags & IGNORE_MOB_SIZE? 1 : MOB_MEDIUM/M.mob_size)
