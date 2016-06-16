@@ -71,9 +71,14 @@
 
 	if(sampled)
 		//Should be between 2-7 for given the default range of values for TRAIT_PRODUCTION
-		var/chance = max(1, round(30/seed.get_trait(TRAIT_PRODUCTION)))
+		var/chance = max(1, round(15/seed.get_trait(TRAIT_PRODUCTION)))
 		if(prob(chance))
 			sampled = 0
+
+	if(is_mature() && !buckled_mob)
+		for(var/mob/living/carbon/human/M in range(1))
+			if(!M.buckled && !M.anchored && (issmall(M) || M.lying || prob(round(seed.get_trait(TRAIT_POTENCY)/6))))
+				entangle(M)
 
 	if(is_mature() && neighbors.len && prob(spread_chance))
 		//spread to 1-3 adjacent turfs depending on yield trait.
