@@ -1,5 +1,6 @@
 /obj/item/device/onetankbomb
-	name = "bomb"
+	name = "single tank assembly"
+	desc = "This looks like a bomb if I ever saw one."
 	icon = 'icons/obj/tank.dmi'
 	item_state = "assembly"
 	throwforce = 5
@@ -100,14 +101,14 @@
 	return
 
 /obj/item/weapon/tank/proc/ignite()	//This happens when a bomb is told to explode
-	var/fuel_moles = air_contents.gas["phoron"] + air_contents.gas["oxygen"] / 6
+	var/fuel_moles = air_contents.gas["phoron"] + air_contents.gas["oxygen"] // /6 removed because of a check later.
 	var/strength = 1
 
 	var/turf/ground_zero = get_turf(loc)
 	loc = null
 
 	if(air_contents.temperature > (T0C + 400))
-		strength = (fuel_moles/15)
+		strength = (fuel_moles/12)
 
 		if(strength >=1)
 			explosion(ground_zero, round(strength,1), round(strength*2,1), round(strength*3,1), round(strength*4,1))
