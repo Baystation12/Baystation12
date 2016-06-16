@@ -92,11 +92,12 @@
 				var/turf/target_turf = pick(neighbors)
 				var/obj/effect/plant/child = new(get_turf(src),seed,parent)
 				spawn(1) // This should do a little bit of animation.
-					child.loc = target_turf
+					child.forceMove(target_turf)
 					child.update_icon()
 				// Update neighboring squares.
 				for(var/obj/effect/plant/neighbor in range(1,target_turf))
-					neighbor.neighbors -= target_turf
+					if(seed == neighbor.seed) //neighbors of different seeds will continue to try to overrun each other
+						neighbor.neighbors -= target_turf
 
 	// We shouldn't have spawned if the controller doesn't exist.
 	check_health()

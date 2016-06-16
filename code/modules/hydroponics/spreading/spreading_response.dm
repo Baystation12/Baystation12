@@ -20,6 +20,10 @@
 	if(istype(user))
 		manual_unbuckle(user)
 
+/obj/effect/plant/Crossed(atom/movable/O)
+	if(isliving(O))
+		trodden_on(O)
+
 /obj/effect/plant/proc/trodden_on(var/mob/living/victim)
 	if(!is_mature())
 		return
