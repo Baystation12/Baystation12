@@ -131,68 +131,68 @@ def merge_map(newfile, backupfile, tgm):
         originalDict = sorted_dict
 
     if tgm:
-        write_dictionary_tgm(newfile, originalDict)
-        write_grid_coord_small(newfile, mergeGrid)
+        with open(newfile, "w") as output:
+            write_dictionary_tgm(output, originalDict)
+            write_grid_coord_small(output, mergeGrid)
     else:
-        write_dictionary(newfile, originalDict)
-        write_grid(newfile, mergeGrid)
+        with open(newfile, "wt", encoding='cp1252', newline='\n') as output:
+            write_dictionary_dmm(output, originalDict)
+            write_grid_dmm(output, mergeGrid)
     return 1
 
 #write dictionary in tgm format
-def write_dictionary_tgm(filename, dictionary): 
-    with open(filename, "w") as output:
-        output.write("//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE \n")
-        for key, list_ in dictionary.items():
-            output.write("\"{}\" = (\n".format(key))
+def write_dictionary_tgm(output, dictionary): 
+    output.write("//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE \n")
+    for key, list_ in dictionary.items():
+        output.write("\"{}\" = (\n".format(key))
 
-            for thing in list_:
-                buffer = ""
-                in_quote_block = False
-                in_varedit_block = False
-                for char in thing:
-                    
-                    if in_quote_block:
-                        if char == "\"":
-                            in_quote_block = False
-                        buffer = buffer + char
-                        continue
-                    elif char == "\"":
-                        in_quote_block = True
-                        buffer = buffer + char
-                        continue
-
-                    if not in_varedit_block:
-                        if char == "{":
-                            in_varedit_block = True
-                            buffer = buffer + "{\n\t"
-                            continue
-                    else:
-                        if char == ";":
-                            buffer = buffer + ";\n\t"
-                            continue
-                        elif char == "}":
-                            buffer = buffer + "\n\t}"
-                            in_varedit_block = False
-                            continue
-
-                    buffer = buffer + char
+        for thing in list_:
+            buffer = ""
+            in_quote_block = False
+            in_varedit_block = False
+            for char in thing:
                 
-                if list_.index(thing) != len(list_) - 1:
-                    buffer = buffer + ",\n"
-                output.write(buffer)
-                        
-            output.write(")\n")
+                if in_quote_block:
+                    if char == "\"":
+                        in_quote_block = False
+                    buffer = buffer + char
+                    continue
+                elif char == "\"":
+                    in_quote_block = True
+                    buffer = buffer + char
+                    continue
+
+                if not in_varedit_block:
+                    if char == "{":
+                        in_varedit_block = True
+                        buffer = buffer + "{\n\t"
+                        continue
+                else:
+                    if char == ";":
+                        buffer = buffer + ";\n\t"
+                        continue
+                    elif char == "}":
+                        buffer = buffer + "\n\t}"
+                        in_varedit_block = False
+                        continue
+
+                buffer = buffer + char
+            
+            if list_.index(thing) != len(list_) - 1:
+                buffer = buffer + ",\n"
+            output.write(buffer)
+                    
+        output.write(")\n")
 
 #thanks to YotaXP for finding out about this one
-def write_grid_coord_small(filename, grid):
-    with open(filename, "a") as output:
-        output.write("\n")
+def write_grid_coord_small(output, grid):
+    output.write("\n")
 
-        for x in range(1, maxx+1):
-            output.write("({},{},1) = {{\"\n".format(x, 1, 1))
-            for y in range(1, maxy):
-                output.write("{}\n".format(grid[x,y]))
-            output.write("{}\n\"}}\n".format(grid[x,maxy]))
+    for x in range(1, maxx+1):
+        output.write("({},{},1) = {{\"\n".format(x, 1, 1))
+        for y in range(1, maxy):
+            output.write("{}\n".format(grid[x,y]))
+        output.write("{}\n\"}}\n".format(grid[x,maxy]))
 
 def search_key(dictionary, data):
     for key, value in dictionary.items():
@@ -469,26 +469,24 @@ def string_to_num(s):
         return -1
 
 #writes a tile data dictionary the same way Dreammaker does
-def write_dictionary(filename, dictionary):
-    with open(filename, "w") as output:
-        for key, value in dictionary.items():
-            output.write("\"{}\" = ({})\n".format(key, ",".join(value)))
+def write_dictionary_dmm(output, dictionary):
+    for key, value in dictionary.items():
+        output.write("\"{}\" = ({})\n".format(key, ",".join(value)))
 
 #writes a map grid the same way Dreammaker does
-def write_grid(filename, grid):
-    with open(filename, "a") as output:
-        output.write("\n")
-        output.write("(1,1,1) = {\"\n")
+def write_grid_dmm(output, grid):
+    output.write("\n")
+    output.write("(1,1,1) = {\"\n")
 
-        for y in range(1, maxy+1):
-            for x in range(1, maxx+1):
-                try:
-                    output.write(grid[x,y])
-                except KeyError:
-                    print("Key error: ({},{})".format(x,y))
-            output.write("\n")
-        output.write("\"}")
+    for y in range(1, maxy+1):
+        for x in range(1, maxx+1):
+            try:
+                output.write(grid[x,y])
+            except KeyError:
+                print("Key error: ({},{})".format(x,y))
         output.write("\n")
+    output.write("\"}")
+    output.write("\n")
 
 #inflated map grid; unused
 def write_grid_coord(filename, grid):
