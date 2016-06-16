@@ -86,8 +86,8 @@
 
 /turf/simulated/update_air_properties()
 
-	if(zone && zone.invalid)
-		c_copy_air()
+	if(zone && zone.invalid) //this turf's zone is in the process of being rebuilt
+		c_copy_air() //not very efficient :(
 		zone = null //Easier than iterating through the list at the zone.
 
 	var/s_block = c_airblock(src)
@@ -98,8 +98,9 @@
 		#endif
 		if(zone)
 			var/zone/z = zone
-			
+
 			if(can_safely_remove_from_zone()) //Helps normal airlocks avoid rebuilding zones all the time
+				c_copy_air() //we aren't rebuilding, but hold onto the old air so it can be readded
 				z.remove(src)
 			else
 				z.rebuild()
