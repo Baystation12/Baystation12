@@ -107,6 +107,10 @@ obj/item/weapon/gun/energy/retro
 	accuracy = -3 //shooting at the hip
 	scoped_accuracy = 0
 
+/obj/item/weapon/gun/energy/sniperrifle/update_icon()
+	..()
+	item_state_slots[slot_back_str] = icon_state //so that the on-back overlay uses the different charged states
+
 /obj/item/weapon/gun/energy/sniperrifle/verb/scope()
 	set category = "Object"
 	set name = "Use Scope"
