@@ -471,7 +471,7 @@ default behaviour is:
 	BITSET(hud_updateflag, LIFE_HUD)
 
 	failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
-
+	reload_fullscreen()
 	return
 
 /mob/living/proc/UpdateDamageIcon()
