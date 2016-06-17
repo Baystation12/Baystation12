@@ -30,6 +30,8 @@
 
 	if(connections) connections.erase_all()
 
+	overlays.Cut()
+	underlays.Cut()
 	if(istype(src,/turf/simulated))
 		//Yeah, we're just going to rebuild the whole thing.
 		//Despite this being called a bunch during explosions,
