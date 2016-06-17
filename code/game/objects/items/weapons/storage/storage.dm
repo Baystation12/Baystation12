@@ -28,8 +28,8 @@
 	var/allow_quick_gather	//Set this variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
 	var/collection_mode = 1;  //0 = pick one at a time, 1 = pick all on tile
 	var/use_sound = "rustle"	//sound played when used. null for no sound.
-	
-	//initializes the contents of the storage with some items based on an assoc list. The assoc key must be an item path, 
+
+	//initializes the contents of the storage with some items based on an assoc list. The assoc key must be an item path,
 	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
 	var/list/startswith
 
@@ -59,7 +59,7 @@
 
 		if (usr.incapacitated())
 			return
-			
+
 		//makes sure that the storage is equipped, so that we can't drag it into our hand from miles away.
 		if (!usr.contains(src))
 			return
@@ -318,7 +318,7 @@
 		return 0
 
 
-//Commented out so that trash bags can fit in backpacks and hold storage items. 
+//Commented out so that trash bags can fit in backpacks and hold storage items.
 //This means that storage items with max_w_class greater than their own w_class
 //can now be exploited for infinite storage, so don't let players have those okay?
 /*
