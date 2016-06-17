@@ -1,7 +1,0 @@
-author: HarpyEagle
-
-delete-after: True
-
-changes: 
-  - bugfix: "Fixed shuttles causing lighting to break and leave shadowy rectangles behind."
-  - bugfix: "Fixed shuttle corner appearance on the asteroid."
