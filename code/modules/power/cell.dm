@@ -20,6 +20,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	var/maxcharge = 1000
 	var/rigged = 0		// true if rigged to explode
 	var/minor_fault = 0 //If not 100% reliable, it will build up faults.
+	var/overlay_state
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 
 //currently only used by energy-type guns, that may change in the future.
@@ -38,6 +39,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	..(newloc)
 	maxcharge = charge_amount
 	charge = maxcharge
+	update_icon()
 
 /obj/item/weapon/cell/crap
 	name = "\improper rechargable AA battery"
@@ -161,14 +163,18 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	return use(cell_amt) / CELLRATE
 
 /obj/item/weapon/cell/update_icon()
-	overlays.Cut()
 
-	if(charge < 0.01)
-		return
-	else if(charge/maxcharge >=0.995)
-		overlays += image('icons/obj/power.dmi', "cell-o2")
-	else
-		overlays += image('icons/obj/power.dmi', "cell-o1")
+	var/new_overlay_state = null
+	if(charge/maxcharge >= 0.95)
+		new_overlay_state = "cell-o2"
+	else if(charge >= 0.05)
+		new_overlay_state = "cell-o1"
+
+	if(new_overlay_state != overlay_state)
+		overlay_state = new_overlay_state
+		overlays.Cut()
+		if(overlay_state)
+			overlays += image('icons/obj/power.dmi', overlay_state)
 
 /obj/item/weapon/cell/proc/percent()		// return % charge of cell
 	return 100.0*charge/maxcharge
@@ -187,6 +193,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 		return 0
 	var/used = min(charge, amount)
 	charge -= used
+	update_icon()
 	return used
 
 // Checks if the specified amount can be provided. If it can, it removes the amount
@@ -206,6 +213,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	if(maxcharge < amount)	return 0
 	var/amount_used = min(maxcharge-charge,amount)
 	charge += amount_used
+	update_icon()
 	return amount_used
 
 
