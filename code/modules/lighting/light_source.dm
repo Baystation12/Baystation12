@@ -268,22 +268,7 @@
 		return	//WHY.
 
 	if(T.lighting_overlay)
-	  #if LIGHTING_FALLOFF == 1 // circular
-		. = (T.lighting_overlay.x - source_turf.x)**2 + (T.lighting_overlay.y - source_turf.y)**2 + LIGHTING_HEIGHT
-	   #if LIGHTING_LAMBERTIAN == 1
-		. = CLAMP01((1 - CLAMP01(sqrt(.) / light_range)) * (1 / (sqrt(. + 1))))
-	   #else
-		. = 1 - CLAMP01(sqrt(.) / light_range)
-	   #endif
-
-	  #elif LIGHTING_FALLOFF == 2 // square
-		. = abs(T.lighting_overlay.x - source_turf.x) + abs(T.lighting_overlay.y - source_turf.y) + LIGHTING_HEIGHT
-	   #if LIGHTING_LAMBERTIAN == 1
-		. = CLAMP01((1 - CLAMP01(. / light_range)) * (1 / (sqrt(.)**2 + )))
-	   #else
-		. = 1 - CLAMP01(. / light_range)
-	   #endif
-	  #endif
+		LUM_FALLOFF(., T, source_turf)
 		. *= light_power
 
 		. = round(., LIGHTING_ROUND_VALUE)
