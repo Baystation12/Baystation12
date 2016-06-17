@@ -9,6 +9,7 @@
 			seed.set_trait(TRAIT_SPREAD,2)             // So it will function properly as vines.
 			seed.set_trait(TRAIT_POTENCY,rand(potency_min, potency_max)) // 70-100 potency will help guarantee a wide spread and powerful effects.
 			seed.set_trait(TRAIT_MATURATION,rand(maturation_min, maturation_max))
+			seed.display_name = "strange plants" //more thematic for the vine infestation event
 
 			//make vine zero start off fully matured
 			var/obj/effect/plant/vine = new(T,seed)
@@ -81,7 +82,7 @@
 		parent = newparent
 
 	if(!plant_controller)
-		sleep(250) // ugly hack, should mean roundstart plants are fine.
+		sleep(250) // ugly hack, should mean roundstart plants are fine. TODO initialize perhaps?
 	if(!plant_controller)
 		world << "<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>"
 		qdel(src)
@@ -92,6 +93,12 @@
 	seed = newseed
 	if(!seed)
 		qdel(src)
+		return
+	var/obj/effect/plant/other = locate() in loc
+	if(other)
+		if(other.seed != src.seed) 
+			other.vine_overrun(src.seed, newparent) //vine fight
+		qdel(src) //no more having dozens of vines on a single turf please
 		return
 
 	name = seed.display_name
@@ -253,6 +260,32 @@
 		if(W.force)
 			health -= W.force
 	check_health()
+
+//handles being overrun by vines - note that attacker_parent may be null in some cases
+/obj/effect/plant/proc/vine_overrun(datum/seed/attacker_seed, obj/effect/plant/attacker_parent)
+	var/aggression = 0
+	aggression += (attacker_seed.get_trait(TRAIT_CARNIVOROUS) - seed.get_trait(TRAIT_CARNIVOROUS))
+	aggression += (attacker_seed.get_trait(TRAIT_SPREAD) - seed.get_trait(TRAIT_SPREAD))
+	
+	var/resiliance
+	if(is_mature())
+		resiliance = 0
+		switch(seed.get_trait(TRAIT_ENDURANCE))
+			if(30 to 70)
+				resiliance = 1
+			if(70 to 95)
+				resiliance = 2
+			if(95 to INFINITY)
+				resiliance = 3
+	else
+		resiliance = -2
+		if(seed.get_trait(TRAIT_ENDURANCE) >= 50)
+			resiliance = -1
+	aggression -= resiliance
+
+	if(aggression > 0)
+		health -= aggression*5
+		check_health()
 
 /obj/effect/plant/ex_act(severity)
 	switch(severity)

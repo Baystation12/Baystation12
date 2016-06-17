@@ -89,10 +89,6 @@
 		if(M.lying)
 			return ..()
 
-		// Ugly hack :( Should never have multiple plants in the same tile.
-		var/obj/effect/plant/plant = locate() in contents
-		if(plant) plant.trodden_on(M)
-
 		// Dirt overlays.
 		update_dirt()
 
