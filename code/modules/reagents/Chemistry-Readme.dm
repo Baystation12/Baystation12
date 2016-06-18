@@ -179,9 +179,6 @@ About Reagents:
 		scannable
 			If set to 1, will show up on health analyzers by name.
 
-		affects_dead
-			If set to 1, will affect dead players. Used by Adminordrazine.
-
 		glass_icon_state
 			Used by drinks. icon_state of the glass when this reagent is the master reagent.
 

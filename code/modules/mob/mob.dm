@@ -115,21 +115,26 @@
 	var/range = world.view
 	if(hearing_distance)
 		range = hearing_distance
-	var/list/hear = get_mobs_or_objects_in_view(range,src)
 
-	for(var/I in hear)
-		if(isobj(I))
-			spawn(0)
-				if(I) //It's possible that it could be deleted in the meantime.
-					var/obj/O = I
-					O.show_message( message, 2, deaf_message, 1)
-		else if(ismob(I))
-			var/mob/M = I
-			var/msg = message
-			if(self_message && M==src)
-				msg = self_message
-			M.show_message( msg, 2, deaf_message, 1)
+	var/turf/T = get_turf(src)
 
+	var/list/mobs = list()
+	var/list/objs = list()
+	get_mobs_and_objs_in_view_fast(T, range, mobs, objs)
+
+
+	for(var/m in mobs)
+		var/mob/M = m
+		if(self_message && M==src)
+			M.show_message(self_message,2,deaf_message,1)
+			continue
+
+		M.show_message(message,2,deaf_message,1)
+
+
+	for(var/o in objs)
+		var/obj/O = o
+		O.show_message(message,2,deaf_message,1)
 
 /mob/proc/findname(msg)
 	for(var/mob/M in mob_list)
@@ -1086,3 +1091,20 @@ mob/proc/yank_out_object()
 	src.in_throw_mode = 1
 	if(src.throw_icon)
 		src.throw_icon.icon_state = "act_throw_on"
+
+/mob/proc/toggle_antag_pool()
+	set name = "Toggle Add-Antag Candidacy"
+	set desc = "Toggles whether or not you will be considered a candidate by an add-antag vote."
+	set category = "OOC"
+	if(isghostmind(src.mind) || isnewplayer(src))
+		if(ticker && ticker.looking_for_antags)
+			if(src.mind in ticker.antag_pool)
+				ticker.antag_pool -= src.mind
+				usr << "You have left the antag pool."
+			else
+				ticker.antag_pool += src.mind
+				usr << "You have joined the antag pool. Make sure you have the needed role set to high!"
+		else
+			usr << "The game is not currently looking for antags."
+	else
+		usr << "You must be observing or in the lobby to join the antag pool."

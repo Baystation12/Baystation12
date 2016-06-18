@@ -63,5 +63,9 @@
 /obj/item/weapon/computer_hardware/battery_module/New()
 	battery = new/obj/item/weapon/cell(src)
 	battery.maxcharge = battery_rating
-	battery.charge = battery_rating
+	battery.charge = 0
 	..()
+
+/obj/item/weapon/computer_hardware/battery_module/proc/charge_to_full()
+	if(battery)
+		battery.charge = battery.maxcharge

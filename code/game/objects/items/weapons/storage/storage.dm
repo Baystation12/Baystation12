@@ -28,8 +28,8 @@
 	var/allow_quick_gather	//Set this variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
 	var/collection_mode = 1;  //0 = pick one at a time, 1 = pick all on tile
 	var/use_sound = "rustle"	//sound played when used. null for no sound.
-	
-	//initializes the contents of the storage with some items based on an assoc list. The assoc key must be an item path, 
+
+	//initializes the contents of the storage with some items based on an assoc list. The assoc key must be an item path,
 	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
 	var/list/startswith
 
@@ -59,20 +59,19 @@
 
 		if (usr.incapacitated())
 			return
-			
+
 		//makes sure that the storage is equipped, so that we can't drag it into our hand from miles away.
 		if (!usr.contains(src))
 			return
-	
-		if (!usr.unEquip(src))
-			return
 
-		switch(over_object.name)
-			if("r_hand")
-				usr.put_in_r_hand(src)
-			if("l_hand")
-				usr.put_in_l_hand(src)
 		src.add_fingerprint(usr)
+		if(usr.unEquip(src))
+			switch(over_object.name)
+				if("r_hand")
+					usr.put_in_r_hand(src)
+				if("l_hand")
+					usr.put_in_l_hand(src)
+
 
 /obj/item/weapon/storage/proc/return_inv()
 
@@ -319,7 +318,7 @@
 		return 0
 
 
-//Commented out so that trash bags can fit in backpacks and hold storage items. 
+//Commented out so that trash bags can fit in backpacks and hold storage items.
 //This means that storage items with max_w_class greater than their own w_class
 //can now be exploited for infinite storage, so don't let players have those okay?
 /*
@@ -341,19 +340,16 @@
 	if(usr)
 		usr.remove_from_mob(W)
 		usr.update_icons()	//update our overlays
-	W.loc = src
+	W.forceMove(src)
 	W.on_enter_storage(src)
 	if(usr)
-		if (usr.client && usr.s_active != src)
-			usr.client.screen -= W
-		W.dropped(usr)
 		add_fingerprint(usr)
 
 		if(!prevent_warning)
 			for(var/mob/M in viewers(usr, null))
 				if (M == usr)
 					usr << "<span class='notice'>You put \the [W] into [src].</span>"
-				else if (M in range(1)) //If someone is standing close enough, they can tell what it is...
+				else if (M in range(1)) //If someone is standing close enough, they can tell what it is... TODO replace with distance check
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
 				else if (W && W.w_class >= NORMAL_ITEM) //Otherwise they can only see large or normal items from a distance...
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
@@ -426,11 +422,8 @@
 				user << "<span class='warning'>The tray won't fit in [src].</span>"
 				return
 			else
-				W.loc = user.loc
-				if ((user.client && user.s_active != src))
-					user.client.screen -= W
-				W.dropped(user)
-				user << "<span class='warning'>God damnit!</span>"
+				if(user.unEquip(W))
+					user << "<span class='warning'>God damnit!</span>"
 
 	W.add_fingerprint(user)
 	return handle_item_insertion(W)

@@ -446,7 +446,7 @@ proc/listclearnulls(list/list)
 // Insert an object into a sorted list, preserving sortedness
 /proc/dd_insertObjectList(var/list/L, var/O)
 	var/min = 1
-	var/max = L.len
+	var/max = L.len + 1
 	var/Oval = O:dd_SortValue()
 
 	while(1)

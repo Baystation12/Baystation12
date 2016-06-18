@@ -368,7 +368,8 @@
 	var/job = mind.assigned_role
 
 	job_master.FreeRole(job)
-
+	data_core.ResetPDAManifest()
+	
 	if(mind.objectives.len)
 		qdel(mind.objectives)
 		mind.special_role = null

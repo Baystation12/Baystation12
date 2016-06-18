@@ -11,57 +11,60 @@
 
 
 datum/unit_test/apc_area_test
-	name = "MAP: Area Test APC / Scrubbers / Vents Z level 1"
+	name = "MAP: Area Test APC / Scrubbers / Vents"
+
 
 datum/unit_test/apc_area_test/start_test()
 	var/list/bad_areas = list()
 	var/area_test_count = 0
-	var/list/exempt_areas = typesof(/area/space, \
-					/area/syndicate_station, \
-					/area/skipjack_station,  \
-					/area/rescue_base, \
-					/area/solar, \
-					/area/shuttle, \
-					/area/holodeck, \
-					/area/supply/station \
-					)
-
-	var/list/exempt_from_atmos = typesof(   /area/maintenance, \
-						/area/storage, \
-						/area/rnd/test_area, \
-						/area/construction
-						)
-
-	var/list/exempt_from_apc = typesof( /area/construction )
 
 	for(var/area/A in world)
-		if(A.z == 1 && !(A.type in exempt_areas))
-			area_test_count++
-			var/area_good = 1
-			var/bad_msg = "[ascii_red]--------------- [A.name]([A.type])"
+		if(!A.z)
+			continue
+		if(!isPlayerLevel(A.z))
+			continue
+		area_test_count++
+		var/area_good = 1
+		var/bad_msg = "[ascii_red]--------------- [A.name]([A.type])"
 
+		var/exemptions = get_exemptions(A)
+		if(!A.apc && !(exemptions & using_map.NO_APC))
+			log_unit_test("[bad_msg] lacks an APC.[ascii_reset]")
+			area_good = 0
+		else if(A.apc && (exemptions & using_map.NO_APC))
+			log_unit_test("[bad_msg] is not supposed to have an APC.[ascii_reset]")
+			area_good = 0
 
-			if(isnull(A.apc) && !(A.type in exempt_from_apc) && !(using_map.exempt_areas[A.type] & using_map.NO_APC))
-				log_unit_test("[bad_msg] lacks an APC.[ascii_reset]")
-				area_good = 0
+		if(!A.air_scrub_info.len && !(exemptions & using_map.NO_SCRUBBER))
+			log_unit_test("[bad_msg] lacks an air scrubber.[ascii_reset]")
+			area_good = 0
+		else if(A.air_scrub_info.len && (exemptions & using_map.NO_SCRUBBER))
+			log_unit_test("[bad_msg] is not supposed to have an air scrubber.[ascii_reset]")
+			area_good = 0
 
-			if(!A.air_scrub_info.len && !(A.type in exempt_from_atmos) && !(using_map.exempt_areas[A.type] & using_map.NO_SCRUBBER))
-				log_unit_test("[bad_msg] lacks an Air scrubber.[ascii_reset]")
-				area_good = 0
+		if(!A.air_vent_info.len && !(exemptions & using_map.NO_VENT))
+			log_unit_test("[bad_msg] lacks an air vent.[ascii_reset]")
+			area_good = 0
+		else if(A.air_vent_info.len && (exemptions & using_map.NO_VENT))
+			log_unit_test("[bad_msg] is not supposed to have an air vent.[ascii_reset]")
+			area_good = 0
 
-			if(!A.air_vent_info.len && !(A.type in exempt_from_atmos) && !(using_map.exempt_areas[A.type] & using_map.NO_VENT))
-				log_unit_test("[bad_msg] lacks an Air vent.[ascii_reset]")
-				area_good = 0
-
-			if(!area_good)
-				bad_areas.Add(A)
+		if(!area_good)
+			bad_areas.Add(A)
 
 	if(bad_areas.len)
-		fail("\[[bad_areas.len]/[area_test_count]\]Some areas lacked APCs, Air Scrubbers, or Air vents.")
+		fail("\[[bad_areas.len]/[area_test_count]\]Some areas lacked APCs, air Scrubbers, or air vents.")
 	else
-		pass("All \[[area_test_count]\] areas contained APCs, Air scrubbers, and Air vents.")
+		pass("All \[[area_test_count]\] areas contained APCs, air scrubbers, and air vents.")
 
 	return 1
+
+datum/unit_test/apc_area_test/proc/get_exemptions(var/area)
+	// We assume deeper types come last
+	for(var/i = using_map.exempt_areas.len; i>0; i--)
+		var/exempt_type = using_map.exempt_areas[i]
+		if(istype(area, exempt_type))
+			return using_map.exempt_areas[exempt_type]
 
 //=======================================================================================
 
@@ -164,6 +167,17 @@ datum/unit_test/map_image_map_test/start_test()
 	else
 		pass("All map levels had a corresponding image.")
 
+	return 1
+
+
+datum/unit_test/map_check
+	name = "MAP: Map Check"
+
+datum/unit_test/map_check/start_test()
+	if(world.maxx < 1 || world.maxy < 1 || world.maxz < 1)
+		fail("Unexpected map size. Was a map properly included?")
+	else
+		pass("Map size met minimum requirements.")
 	return 1
 
 #undef SUCCESS

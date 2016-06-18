@@ -217,6 +217,8 @@ proc/get_radio_key_from_channel(var/channel)
 			if (speech_sound)
 				sound_vol *= 0.5
 
+	var/list/listening = list()
+	var/list/listening_obj = list()
 	var/turf/T = get_turf(src)
 
 	//handle nonverbal and sign languages here
@@ -227,9 +229,6 @@ proc/get_radio_key_from_channel(var/channel)
 
 		if (speaking.flags & SIGNLANG)
 			return say_signlang(message, pick(speaking.signlang_verb), speaking)
-
-	var/list/listening = list()
-	var/list/listening_obj = list()
 
 	if(T)
 		//make sure the air can transmit speech - speaker's side
@@ -242,9 +241,7 @@ proc/get_radio_key_from_channel(var/channel)
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
-		var/list/results = get_mobs_and_objs_in_view_fast(T, message_range)
-		listening = results["mobs"]
-		listening_obj = results["objs"]
+		get_mobs_and_objs_in_view_fast(T, message_range, listening, listening_obj)
 
 
 	var/speech_bubble_test = say_test(message)

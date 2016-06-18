@@ -246,10 +246,12 @@ obj/machinery/lapvend/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(process_payment(I,W))
 			fabricate_and_recalc_price(1)
 			if((devtype == 1) && fabricated_laptop)
+				fabricated_laptop.cpu.battery_module.charge_to_full()
 				fabricated_laptop.forceMove(src.loc)
 				fabricated_laptop.close_laptop()
 				fabricated_laptop = null
 			else if((devtype == 2) && fabricated_tablet)
+				fabricated_tablet.battery_module.charge_to_full()
 				fabricated_tablet.forceMove(src.loc)
 				fabricated_tablet = null
 			ping("Enjoy your new product!")

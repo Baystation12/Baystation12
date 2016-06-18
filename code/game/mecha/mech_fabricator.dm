@@ -158,28 +158,18 @@
 	if(default_part_replacement(user, I))
 		return
 
-	var/material
-	switch(I.type)
-		if(/obj/item/stack/material/gold)
-			material = "gold"
-		if(/obj/item/stack/material/silver)
-			material = "silver"
-		if(/obj/item/stack/material/diamond)
-			material = "diamond"
-		if(/obj/item/stack/material/phoron)
-			material = "phoron"
-		if(/obj/item/stack/material/steel)
-			material = DEFAULT_WALL_MATERIAL
-		if(/obj/item/stack/material/glass)
-			material = "glass"
-		if(/obj/item/stack/material/uranium)
-			material = "uranium"
-		else
-			return ..()
+	if(!istype(I, /obj/item/stack/material))
+		return ..()
 
 	var/obj/item/stack/material/stack = I
-	var/sname = "[stack.name]"
+	var/material = stack.material.name
+	var/stack_singular = "[stack.material.use_name] [stack.material.sheet_singular_name]" // eg "steel sheet", "wood plank"
+	var/stack_plural = "[stack.material.use_name] [stack.material.sheet_plural_name]" // eg "steel sheets", "wood planks"
 	var/amnt = stack.perunit
+
+	if(!(material in materials))
+		user << "<span class=warning>\The [src] does not accept [stack_plural]!</span>"
+		return
 
 	if(materials[material] + amnt <= res_max_amount)
 		if(stack && stack.amount >= 1)
@@ -191,10 +181,10 @@
 				materials[material] += amnt
 				stack.use(1)
 				count++
-			user << "You insert [count] [sname] into the fabricator."
+			user << "You insert [count] [count==1 ? stack_singular : stack_plural] into the fabricator." // 0 steel sheets, 1 steel sheet, 2 steel sheets, etc
 			update_busy()
 	else
-		user << "The fabricator cannot hold more [sname]."
+		user << "The fabricator cannot hold more [stack_plural]." // use the plural form even if the given sheet is singular
 
 /obj/machinery/mecha_part_fabricator/emag_act(var/remaining_charges, var/mob/user)
 	switch(emagged)

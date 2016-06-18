@@ -147,8 +147,6 @@ area/space/atmosalert()
 /area/supply/station
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
-	requires_power = 0
-	base_turf = /turf/simulated/floor/plating
 
 /area/shuttle/mining
 	name = "\improper Mining Shuttle"
@@ -236,6 +234,7 @@ area/space/atmosalert()
 /area/shuttle/escape/transit // the area to pass through for 3 minute transit
 	name = "\improper Emergency Shuttle Transit"
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod1
 	name = "\improper Escape Pod One"
@@ -249,6 +248,7 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod1/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod2
 	name = "\improper Escape Pod Two"
@@ -262,6 +262,7 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod2/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod3
 	name = "\improper Escape Pod Three"
@@ -275,6 +276,7 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod3/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/east/shuttlespace_ew1
 
 /area/shuttle/escape_pod5 //Pod 4 was lost to meteors
 	name = "\improper Escape Pod Five"
@@ -288,6 +290,7 @@ area/space/atmosalert()
 
 /area/shuttle/escape_pod5/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/east/shuttlespace_ew1
 
 // === Trying to remove these areas:
 
@@ -463,6 +466,7 @@ area/space/atmosalert()
 /area/rescue_base/start
 	name = "\improper Response Team Base"
 	icon_state = "shuttlered"
+	base_turf = /turf/unsimulated/floor/rescue_base
 
 /area/rescue_base/southwest
 	name = "\improper south-west of SS13"
@@ -504,6 +508,7 @@ area/space/atmosalert()
 /area/rescue_base/transit
 	name = "\improper bluespace"
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 //ENEMY
 
@@ -562,6 +567,7 @@ area/space/atmosalert()
 /area/syndicate_station/transit
 	name = "\improper bluespace"
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/wizard_station
 	name = "\improper Wizard's Den"
@@ -581,6 +587,7 @@ area/space/atmosalert()
 /area/skipjack_station/transit
 	name = "\improper bluespace"
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/skipjack_station/southwest_solars
 	name = "\improper aft port solars"
@@ -1599,6 +1606,10 @@ area/space/atmosalert()
 	name = "\improper Security Office"
 	icon_state = "security"
 
+/area/security/meeting
+	name = "\improper Security Meeting Room"
+	icon_state = "security"
+
 /area/security/lobby
 	name = "\improper Security Lobby"
 	icon_state = "security"
@@ -1631,6 +1642,22 @@ area/space/atmosalert()
 	name = "\improper Security - Brig"
 	icon_state = "brig"
 
+/area/security/brig/processing
+	name = "\improper Security - Processing"
+	icon_state = "brig"
+
+/area/security/brig/interrogation
+	name = "\improper Security - Interrogation"
+	icon_state = "brig"
+
+/area/security/brig/solitaryA
+	name = "\improper Security - Solitary 1"
+	icon_state = "sec_prison"
+
+/area/security/brig/solitaryB
+	name = "\improper Security - Solitary 2"
+	icon_state = "sec_prison"
+
 /area/security/brig/prison_break()
 	for(var/obj/structure/closet/secure_closet/brig/temp_closet in src)
 		temp_closet.locked = 0
@@ -1641,6 +1668,14 @@ area/space/atmosalert()
 
 /area/security/prison
 	name = "\improper Security - Prison Wing"
+	icon_state = "sec_prison"
+
+/area/security/prison/restroom
+	name = "\improper Security - Prison Wing Restroom"
+	icon_state = "sec_prison"
+
+/area/security/prison/dorm
+	name = "\improper Security - Prison Wing Dormitory"
 	icon_state = "sec_prison"
 
 /area/security/prison/prison_break()

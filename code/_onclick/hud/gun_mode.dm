@@ -52,8 +52,8 @@
 	return 0
 
 /obj/screen/gun/radio
-	name = "Allow Radio Use"
-	icon_state = "no_radio0"
+	name = "Disallow Radio Use"
+	icon_state = "no_radio1"
 	screen_loc = ui_gun4
 
 /obj/screen/gun/radio/Click(location, control, params)

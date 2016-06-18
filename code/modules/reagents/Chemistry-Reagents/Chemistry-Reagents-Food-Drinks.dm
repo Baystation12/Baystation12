@@ -40,7 +40,6 @@
 /datum/reagent/nutriment/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	M.heal_organ_damage(0.5 * removed, 0) //what
 
-	if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
 	adjust_nutrition(M, alien, removed)
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 
@@ -99,17 +98,13 @@
 /datum/reagent/honey/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 
-	var/effective_dose = dose
-	if(issmall(M))
-		effective_dose *= 2
-
 	if(alien == IS_UNATHI)
-		if(effective_dose < 2)
-			if(effective_dose == metabolism * 2 || prob(5))
+		if(dose < 2)
+			if(dose == metabolism * 2 || prob(5))
 				M.emote("yawn")
-		else if(effective_dose < 5)
+		else if(dose < 5)
 			M.eye_blurry = max(M.eye_blurry, 10)
-		else if(effective_dose < 20)
+		else if(dose < 20)
 			if(prob(50))
 				M.Weaken(2)
 			M.drowsyness = max(M.drowsyness, 20)
@@ -437,9 +432,6 @@
 	..()
 
 	var/effective_dose = dose/2
-	if(issmall(M))
-		effective_dose *= 2
-
 	if(alien == IS_UNATHI)
 		if(effective_dose < 2)
 			if(effective_dose == metabolism * 2 || prob(5))
@@ -864,9 +856,6 @@
 	..()
 
 	var/effective_dose = dose/2
-	if(issmall(M))
-		effective_dose *= 2
-
 	if(alien == IS_UNATHI)
 		if(effective_dose < 2)
 			if(effective_dose == metabolism * 2 || prob(5))

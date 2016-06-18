@@ -145,7 +145,7 @@
 
 /mob/living/simple_animal/cat/fluff/handle_movement_target()
 	if (friend)
-		var/follow_dist = 5
+		var/follow_dist = 4
 		if (friend.stat >= DEAD || friend.health <= config.health_threshold_softcrit) //danger
 			follow_dist = 1
 		else if (friend.stat || friend.health <= 50) //danger or just sleeping
@@ -195,27 +195,28 @@
 			var/verb = pick("meows", "mews", "mrowls")
 			audible_emote("[verb] anxiously.")
 
-/mob/living/simple_animal/cat/fluff/verb/friend()
+/mob/living/simple_animal/cat/fluff/verb/become_friends()
 	set name = "Become Friends"
 	set category = "IC"
 	set src in view(1)
 
-	if(friend && usr == friend)
-		set_dir(get_dir(src, friend))
-		say("Meow!")
-		return
-
-	if (ishuman(usr))
+	if(!friend)
 		var/mob/living/carbon/human/H = usr
-		if(H.job == befriend_job)
+		if(istype(H) && (!befriend_job || H.job == befriend_job))
 			friend = usr
-			set_dir(get_dir(src, friend))
-			say("Meow!")
-			return
+			. = 1
+	else if(usr == friend)
+		. = 1 //already friends, but show success anyways
 
-	usr << "<span class='notice'>[src] ignores you.</span>"
+	if(.)
+		set_dir(get_dir(src, friend))
+		visible_emote(pick("nuzzles [friend].",
+						   "brushes against [friend].",
+						   "rubs against [friend].",
+						   "purrs."))
+	else
+		usr << "<span class='notice'>[src] ignores you.</span>"
 	return
-
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
 /mob/living/simple_animal/cat/fluff/Runtime
@@ -226,7 +227,6 @@
 	item_state = "cat"
 	icon_living = "cat"
 	icon_dead = "cat_dead"
-	befriend_job = "Chief Medical Officer"
 
 /mob/living/simple_animal/cat/kitten
 	name = "kitten"

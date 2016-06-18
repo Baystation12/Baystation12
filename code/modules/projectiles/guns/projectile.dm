@@ -1,6 +1,7 @@
 #define HOLD_CASINGS	0 //do not do anything after firing. Manual action, like pump shotguns, or guns that want to define custom behaviour
-#define EJECT_CASINGS	1 //drop spent casings on the ground after firing
-#define CYCLE_CASINGS 	2 //experimental: cycle casings, like a revolver. Also works for multibarrelled guns
+#define CLEAR_CASINGS	1 //clear chambered so that the next round will be automatically loaded and fired, but don't drop anything on the floor
+#define EJECT_CASINGS	2 //drop spent casings on the ground after firing
+#define CYCLE_CASINGS	3 //cycle casings, like a revolver. Also works for multibarrelled guns
 
 /obj/item/weapon/gun/projectile
 	name = "gun"
@@ -24,6 +25,7 @@
 	//For MAGAZINE guns
 	var/magazine_type = null	//the type of magazine that the gun comes preloaded with
 	var/obj/item/ammo_magazine/ammo_magazine = null //stored magazine
+	var/allowed_magazines		//magazine types that may be loaded. Can be a list or single path
 	var/auto_eject = 0			//if the magazine should automatically eject itself when empty.
 	var/auto_eject_sound = null
 	//TODO generalize ammo icon states for guns
@@ -91,6 +93,9 @@
 
 		switch(AM.mag_type)
 			if(MAGAZINE)
+				if((ispath(allowed_magazines) && !istype(A, allowed_magazines)) || (islist(allowed_magazines) && !is_type_in_list(A, allowed_magazines)))
+					user << "<span class='warning'>\The [A] won't fit into [src].</span>"
+					return
 				if(ammo_magazine)
 					user << "<span class='warning'>[src] already has a magazine loaded.</span>" //already a magazine here
 					return

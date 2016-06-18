@@ -53,6 +53,14 @@
 	attackby(obj/item/I as obj, mob/user as mob)
 		return
 
+	do_surgery(mob/living/carbon/M, mob/living/user)
+		if(user.a_intent == I_HURT)
+			return 0
+		if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
+			return ..()
+		afterattack(M, user, 1)
+		return 1
+
 	afterattack(obj/target, mob/user, proximity)
 		if(!proximity || !target.reagents)
 			return

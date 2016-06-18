@@ -54,11 +54,10 @@
 	var/fire_delay = 6 	//delay after shooting before the gun can be used again
 	var/burst_delay = 2	//delay between shots, if firing in bursts
 	var/move_delay = 1
-	var/fire_sound = 'sound/weapons/Gunshot.ogg'
+	var/fire_sound = 'sound/weapons/gunshot/gunshot.ogg'
 	var/fire_sound_text = "gunshot"
 	var/screen_shake = 0 //shouldn't be greater than 2 unless zoomed
 	var/silenced = 0
-	var/muzzle_flash = 3
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/scoped_accuracy = null
 	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
@@ -92,11 +91,10 @@
 	if(requires_two_hands)
 		var/mob/living/M = loc
 		if(istype(M))
-			if(src.is_held_twohanded(M))
+			if(M.can_wield_item(src) && src.is_held_twohanded(M))
 				name = "[initial(name)] (wielded)"
 			else
 				name = initial(name)
-				item_state = initial(item_state)
 		update_icon() // In case item_state is set somewhere else.
 	..()
 
@@ -104,10 +102,12 @@
 	if(wielded_item_state)
 		var/mob/living/M = loc
 		if(istype(M))
-			if(src.is_held_twohanded())
-				item_state = wielded_item_state
+			if(M.can_wield_item(src) && src.is_held_twohanded(M))
+				item_state_slots[slot_l_hand_str] = wielded_item_state
+				item_state_slots[slot_r_hand_str] = wielded_item_state
 			else
-				item_state = initial(item_state)
+				item_state_slots[slot_l_hand_str] = initial(item_state)
+				item_state_slots[slot_r_hand_str] = initial(item_state)
 
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
@@ -184,7 +184,7 @@
 	user.setMoveCooldown(shoot_time) //no moving while shooting either
 	next_fire_time = world.time + shoot_time
 
-	var/held_twohanded = src.is_held_twohanded(user)
+	var/held_twohanded = (user.can_wield_item(src) && src.is_held_twohanded(user))
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
@@ -214,9 +214,6 @@
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.setMoveCooldown(move_delay)
 	next_fire_time = world.time + fire_delay
-
-	if(muzzle_flash)
-		set_light(0)
 
 //obtains the next projectile to fire
 /obj/item/weapon/gun/proc/consume_next_projectile()
@@ -254,21 +251,29 @@
 				"You hear a [fire_sound_text]!"
 				)
 
-		if(muzzle_flash)
-			set_light(muzzle_flash)
-
-	if(requires_two_hands && !src.is_held_twohanded(user))
-		switch(requires_two_hands)
-			if(1)
-				if(prob(50)) //don't need to tell them every single time
-					user << "<span class='warning'>Your aim wavers slightly.</span>"
-			if(2)
-				user << "<span class='warning'>Your aim wavers as you fire \the [src] with just one hand.</span>"
-			if(3)
-				user << "<span class='warning'>You have trouble keeping \the [src] on target with just one hand.</span>"
-			if(4 to INFINITY)
-				user << "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>"
-
+	if(requires_two_hands)
+		if(!src.is_held_twohanded(user))
+			switch(requires_two_hands)
+				if(1)
+					if(prob(50)) //don't need to tell them every single time
+						user << "<span class='warning'>Your aim wavers slightly.</span>"
+				if(2)
+					user << "<span class='warning'>Your aim wavers as you fire \the [src] with just one hand.</span>"
+				if(3)
+					user << "<span class='warning'>You have trouble keeping \the [src] on target with just one hand.</span>"
+				if(4 to INFINITY)
+					user << "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>"
+		else if(!user.can_wield_item(src))
+			switch(requires_two_hands)
+				if(1)
+					if(prob(50)) //don't need to tell them every single time
+						user << "<span class='warning'>Your aim wavers slightly.</span>"
+				if(2)
+					user << "<span class='warning'>Your aim wavers as you try to hold \the [src] steady.</span>"
+				if(3)
+					user << "<span class='warning'>You have trouble holding \the [src] steady.</span>"
+				if(4 to INFINITY)
+					user << "<span class='warning'>You struggle to hold \the [src] steady!</span>"
 
 	if(screen_shake)
 		spawn()

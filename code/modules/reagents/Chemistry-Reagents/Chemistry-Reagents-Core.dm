@@ -35,12 +35,9 @@
 
 /datum/reagent/blood/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 
-	var/effective_dose = dose
-	if(issmall(M)) effective_dose *= 2
-
-	if(effective_dose > 5)
+	if(dose > 5)
 		M.adjustToxLoss(removed)
-	if(effective_dose > 15)
+	if(dose > 15)
 		M.adjustToxLoss(removed)
 	if(data && data["virus2"])
 		var/list/vlist = data["virus2"]
@@ -163,7 +160,6 @@
 	return
 
 /datum/reagent/fuel/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(issmall(M)) removed *= 2
 	M.adjustToxLoss(2 * removed)
 
 /datum/reagent/fuel/touch_mob(var/mob/living/L, var/amount)

@@ -67,6 +67,7 @@ var/datum/antagonist/raider/raiders
 		/obj/item/weapon/gun/energy/laser,
 		/obj/item/weapon/gun/energy/retro,
 		/obj/item/weapon/gun/energy/xray,
+		/obj/item/weapon/gun/energy/xray/pistol,
 		/obj/item/weapon/gun/energy/mindflayer,
 		/obj/item/weapon/gun/energy/toxgun,
 		/obj/item/weapon/gun/energy/stunrevolver,

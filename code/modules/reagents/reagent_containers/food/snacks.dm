@@ -160,8 +160,7 @@
 				return
 
 			user << "<span class='warning'>You slip \the [W] inside \the [src].</span>"
-			user.remove_from_mob(W)
-			W.dropped(user)
+			user.drop_from_inventory(W, src)
 			add_fingerprint(user)
 			contents += W
 			return

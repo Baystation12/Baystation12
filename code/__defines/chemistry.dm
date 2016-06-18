@@ -24,7 +24,7 @@
 #define IS_TAJARA  5
 #define IS_XENOS   6
 #define IS_MACHINE 7
-#define IS_RESOMI 8
+#define IS_RESOMI  8
 
 #define CE_STABLE "stable" // Inaprovaline
 #define CE_ANTIBIOTIC "antibiotic" // Spaceacilin
@@ -35,3 +35,7 @@
 #define CE_SPEEDBOOST "gofast" // Hyperzine
 #define CE_PULSE      "xcardic" // increases or decreases heart rate
 #define CE_NOPULSE    "heartstop" // stops heartbeat
+
+//reagent flags
+#define IGNORE_MOB_SIZE 0x1
+#define AFFECTS_DEAD    0x2

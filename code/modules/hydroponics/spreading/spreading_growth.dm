@@ -71,9 +71,14 @@
 
 	if(sampled)
 		//Should be between 2-7 for given the default range of values for TRAIT_PRODUCTION
-		var/chance = max(1, round(30/seed.get_trait(TRAIT_PRODUCTION)))
+		var/chance = max(1, round(15/seed.get_trait(TRAIT_PRODUCTION)))
 		if(prob(chance))
 			sampled = 0
+
+	if(is_mature() && !buckled_mob)
+		for(var/mob/living/carbon/human/M in range(1))
+			if(!M.buckled && !M.anchored && (issmall(M) || M.lying || prob(round(seed.get_trait(TRAIT_POTENCY)/6))))
+				entangle(M)
 
 	if(is_mature() && neighbors.len && prob(spread_chance))
 		//spread to 1-3 adjacent turfs depending on yield trait.
@@ -87,11 +92,12 @@
 				var/turf/target_turf = pick(neighbors)
 				var/obj/effect/plant/child = new(get_turf(src),seed,parent)
 				spawn(1) // This should do a little bit of animation.
-					child.loc = target_turf
+					child.forceMove(target_turf)
 					child.update_icon()
 				// Update neighboring squares.
 				for(var/obj/effect/plant/neighbor in range(1,target_turf))
-					neighbor.neighbors -= target_turf
+					if(seed == neighbor.seed) //neighbors of different seeds will continue to try to overrun each other
+						neighbor.neighbors -= target_turf
 
 	// We shouldn't have spawned if the controller doesn't exist.
 	check_health()

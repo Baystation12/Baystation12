@@ -25,7 +25,6 @@
 	var/nanoui_menu = 0					// The current menu we are in
 	var/list/nanoui_data = new 			// Additional data for NanoUI use
 
-	var/list/purchase_log = new
 	var/datum/mind/uplink_owner = null
 	var/used_TC = 0
 	var/offer_time = 15 MINUTES			//The time increment per discount offered
@@ -45,12 +44,12 @@
 	update_nano_data()
 
 	src.uplink_owner = owner
-	purchase_log = list()
 	world_uplinks += src
 	uses = telecrystals
 	processing_objects += src
 
 /obj/item/device/uplink/Destroy()
+	uplink_owner = null
 	world_uplinks -= src
 	processing_objects -= src
 	return ..()

@@ -936,7 +936,7 @@ var/global/list/damage_icon_parts = list()
 
 		//apply color
 		var/image/standing = image(icon = t_icon, icon_state = t_state)
-		standing.color = r_hand.color
+		standing.appearance_flags = RESET_ALPHA|RESET_COLOR
 
 		overlays_standing[R_HAND_LAYER] = standing
 
@@ -972,7 +972,7 @@ var/global/list/damage_icon_parts = list()
 
 		//apply color
 		var/image/standing = image(icon = t_icon, icon_state = t_state)
-		standing.color = l_hand.color
+		standing.appearance_flags = RESET_ALPHA|RESET_COLOR
 
 		overlays_standing[L_HAND_LAYER] = standing
 

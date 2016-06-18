@@ -50,7 +50,7 @@
 	Destroy()
 		if(part)
 			part.implants.Remove(src)
-		..()
+		return ..()
 
 /obj/item/weapon/implant/tracking
 	name = "tracking implant"
@@ -162,6 +162,7 @@ Implant Specifics:<BR>"}
 		if (malfunction == MALFUNCTION_PERMANENT)
 			return
 
+
 		var/need_gib = null
 		if(istype(imp_in, /mob/))
 			var/mob/T = imp_in
@@ -251,6 +252,15 @@ Implant Specifics:<BR>"}
 						part.droplimb(0,DROPLIMB_BLUNT)
 				explosion(get_turf(imp_in), -1, -1, 2, 3)
 				qdel(src)
+
+/obj/item/weapon/implant/explosive/New()
+	..()
+	listening_objects += src
+
+/obj/item/weapon/implant/explosive/Destroy()
+	listening_objects -= src
+	return ..()
+
 
 /obj/item/weapon/implant/chem
 	name = "chemical implant"

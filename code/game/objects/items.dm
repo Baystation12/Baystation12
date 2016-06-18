@@ -257,7 +257,15 @@
 /obj/item/proc/dropped(mob/user as mob)
 	if(randpixel)
 		pixel_z = randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character
-	if(zoom) zoom() //binoculars, scope, etc
+	if(zoom)
+		zoom() //binoculars, scope, etc
+
+	update_twohanding()
+	if(user)
+		if(user.l_hand)
+			user.l_hand.update_twohanding()
+		if(user.r_hand)
+			user.r_hand.update_twohanding()
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)

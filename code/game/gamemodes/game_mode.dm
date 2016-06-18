@@ -302,7 +302,7 @@ var/global/list/additional_antag_types = list()
 		antag.print_player_summary()
 	sleep(2)
 
-	print_ownerless_uplinks()
+	uplink_purchase_repository.print_entries()
 
 	var/clients = 0
 	var/surviving_humans = 0
