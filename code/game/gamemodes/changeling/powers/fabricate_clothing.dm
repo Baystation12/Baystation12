@@ -20,6 +20,15 @@ var/global/list/changeling_fabricated_clothing = list(
 	genomecost = 2
 	verbpath = /mob/proc/changeling_fabricate_clothing
 
+/obj/item/proc/changeling_shred_item(mob/living/user)
+	if(!istype(user) || loc != user)
+		return
+
+	playsound(src, 'sound/effects/splat.ogg', 30, 1)
+	visible_message("<span class='warning'>[user] tears off [src]!</span>", "<span class='notice'>We remove [src].</span>")
+	qdel(src)
+	user.update_icons()
+
 //Grows biological versions of chameleon clothes.
 /mob/proc/changeling_fabricate_clothing()
 	set category = "Changeling"
@@ -45,13 +54,7 @@ var/global/list/changeling_fabricated_clothing = list(
 /obj/item/clothing/under/chameleon/changeling/verb/shred() //Remove individual pieces if needed.
 	set name = "Shred Jumpsuit"
 	set category = "Chameleon Items"
-	if(ishuman(loc))
-		var/mob/living/carbon/human/H = loc
-		playsound(src, 'sound/effects/splat.ogg', 30, 1)
-		visible_message("<span class='warning'>[H] tears off [src]!</span>",
-		"<span class='notice'>We remove [src].</span>")
-		qdel(src)
-		H.update_icons()
+	changeling_shred_item(usr)
 
 /obj/item/clothing/head/chameleon/changeling
 	name = "metamorphic flesh"
@@ -67,13 +70,7 @@ var/global/list/changeling_fabricated_clothing = list(
 /obj/item/clothing/head/chameleon/changeling/verb/shred() //The copypasta is real.
 	set name = "Shred Helmet"
 	set category = "Chameleon Items"
-	if(ishuman(loc))
-		var/mob/living/carbon/human/H = loc
-		playsound(src, 'sound/effects/splat.ogg', 30, 1)
-		visible_message("<span class='warning'>[H] tears off [src]!</span>",
-		"<span class='notice'>We remove [src].</span>")
-		qdel(src)
-		H.update_icons()
+	changeling_shred_item(usr)
 
 /obj/item/clothing/suit/chameleon/changeling
 	name = "chitinous chest"
@@ -89,13 +86,7 @@ var/global/list/changeling_fabricated_clothing = list(
 /obj/item/clothing/suit/chameleon/changeling/verb/shred()
 	set name = "Shred Suit"
 	set category = "Chameleon Items"
-	if(ishuman(loc))
-		var/mob/living/carbon/human/H = loc
-		playsound(src, 'sound/effects/splat.ogg', 30, 1)
-		visible_message("<span class='warning'>[H] tears off [src]!</span>",
-		"<span class='notice'>We remove [src].</span>")
-		qdel(src)
-		H.update_icons()
+	changeling_shred_item(usr)
 
 /obj/item/clothing/shoes/chameleon/changeling
 	name = "malformed feet"
@@ -111,13 +102,7 @@ var/global/list/changeling_fabricated_clothing = list(
 /obj/item/clothing/shoes/chameleon/changeling/verb/shred()
 	set name = "Shred Shoes"
 	set category = "Chameleon Items"
-	if(ishuman(loc))
-		var/mob/living/carbon/human/H = loc
-		playsound(src, 'sound/effects/splat.ogg', 30, 1)
-		visible_message("<span class='warning'>[H] tears off [src]!</span>",
-		"<span class='notice'>We remove [src].</span>")
-		qdel(src)
-		H.update_icons()
+	changeling_shred_item(usr)
 
 /obj/item/weapon/storage/backpack/chameleon/changeling
 	name = "backpack"
@@ -133,15 +118,7 @@ var/global/list/changeling_fabricated_clothing = list(
 /obj/item/weapon/storage/backpack/chameleon/changeling/verb/shred()
 	set name = "Shred Backpack"
 	set category = "Chameleon Items"
-	if(ishuman(loc))
-		var/mob/living/carbon/human/H = loc
-		playsound(src, 'sound/effects/splat.ogg', 30, 1)
-		visible_message("<span class='warning'>[H] tears off [src]!</span>",
-		"<span class='notice'>We remove [src].</span>")
-		for(var/atom/movable/AM in src.contents) //Dump whatever's in the bag before deleting.
-			AM.forceMove(get_turf(loc))
-		qdel(src)
-		H.update_icons()
+	changeling_shred_item(usr)
 
 /obj/item/clothing/gloves/chameleon/changeling
 	name = "malformed hands"
@@ -158,13 +135,7 @@ var/global/list/changeling_fabricated_clothing = list(
 /obj/item/clothing/gloves/chameleon/changeling/verb/shred()
 	set name = "Shred Gloves"
 	set category = "Chameleon Items"
-	if(ishuman(loc))
-		var/mob/living/carbon/human/H = loc
-		playsound(src, 'sound/effects/splat.ogg', 30, 1)
-		visible_message("<span class='warning'>[H] tears off [src]!</span>",
-		"<span class='notice'>We remove [src].</span>")
-		qdel(src)
-		H.update_icons()
+	changeling_shred_item(usr)
 
 
 /obj/item/clothing/mask/chameleon/changeling
@@ -182,13 +153,7 @@ var/global/list/changeling_fabricated_clothing = list(
 /obj/item/clothing/mask/chameleon/changeling/verb/shred()
 	set name = "Shred Mask"
 	set category = "Chameleon Items"
-	if(ishuman(loc))
-		var/mob/living/carbon/human/H = loc
-		playsound(src, 'sound/effects/splat.ogg', 30, 1)
-		visible_message("<span class='warning'>[H] tears off [src]!</span>",
-		"<span class='notice'>We remove [src].</span>")
-		qdel(src)
-		H.update_icons()
+	changeling_shred_item(usr)
 
 /obj/item/clothing/glasses/chameleon/changeling
 	name = "chitin goggles"
@@ -204,13 +169,7 @@ var/global/list/changeling_fabricated_clothing = list(
 /obj/item/clothing/glasses/chameleon/changeling/verb/shred()
 	set name = "Shred Glasses"
 	set category = "Chameleon Items"
-	if(ishuman(loc))
-		var/mob/living/carbon/human/H = loc
-		playsound(src, 'sound/effects/splat.ogg', 30, 1)
-		visible_message("<span class='warning'>[H] tears off [src]!</span>",
-		"<span class='notice'>We remove [src].</span>")
-		qdel(src)
-		H.update_icons()
+	changeling_shred_item(usr)
 
 /obj/item/weapon/storage/belt/chameleon/changeling
 	name = "waist pouch"
@@ -226,13 +185,7 @@ var/global/list/changeling_fabricated_clothing = list(
 /obj/item/weapon/storage/belt/chameleon/changeling/verb/shred()
 	set name = "Shred Belt"
 	set category = "Chameleon Items"
-	if(ishuman(loc))
-		var/mob/living/carbon/human/H = loc
-		playsound(src, 'sound/effects/splat.ogg', 30, 1)
-		visible_message("<span class='warning'>[H] tears off [src]!</span>",
-		"<span class='notice'>We remove [src].</span>")
-		qdel(src)
-		H.update_icons()
+	changeling_shred_item(usr)
 
 /obj/item/weapon/card/id/syndicate/changeling
 	name = "chitinous card"
@@ -253,14 +206,7 @@ var/global/list/changeling_fabricated_clothing = list(
 /obj/item/weapon/card/id/syndicate/changeling/verb/shred()
 	set name = "Shred ID Card"
 	set category = "Chameleon Items"
-	if(ishuman(loc))
-		var/mob/living/carbon/human/H = loc
-		playsound(src, 'sound/effects/splat.ogg', 30, 1)
-		visible_message("<span class='warning'>[H] tears off [src]!</span>",
-		"<span class='notice'>We remove [src].</span>")
-		qdel(src)
-		H.update_icons()
-
+	changeling_shred_item(usr)
 
 /obj/item/weapon/card/id/syndicate/changeling/Click() //Since we can't hold it in our hands, and attack_hand() doesn't work if it in inventory...
 	if(!registered_user)
