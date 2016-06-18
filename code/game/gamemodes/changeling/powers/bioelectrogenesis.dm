@@ -8,6 +8,46 @@
 	genomecost = 2
 	verbpath = /mob/living/carbon/human/proc/changeling_bioelectrogenesis
 
+/obj/proc/changeling_recharge(mob/living/user)
+	. = 0
+	for(var/obj/item/weapon/cell/cell in src.contents)
+		. += cell.changeling_recharge(user, src)
+	update_icon()
+
+/obj/item/weapon/cell/changeling_recharge(mob/living/user, var/obj/affected = null)
+	. = 0
+
+	if(!affected) affected = src
+
+	// Handle glove conductivity.
+	var/siemens = 1
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		var/obj/item/clothing/gloves/gloves = user.gloves
+		if(gloves)
+			siemens = gloves.siemens_coefficient
+
+	for(var/i in 1 to 10)
+		var/given = src.give(100 * siemens) //This should be a nice compromise between recharging guns and other batteries. TODO update this once gun cell capacities have been reworked
+		if(!given)
+			break //well, it didn't work
+		
+		var/T = get_turf(src)
+		new /obj/effect/effect/sparks(T)
+		playsound(T, "sparks", 50, 1)
+
+		if(show_message)
+			user.visible_message(
+				"<span class='warning'>A shower of sparks erupts from [affected]!</span>",
+				"<span class='warning'>Our hand channels raw electricity into [affected].</span>",
+				"<span class='italics'>You hear electrical arcing!</span>"
+				)
+
+		update_icon()
+		. += given
+		sleep(1 SECOND)
+
+
 //Recharge whatever's in our hand, or shock people.
 /mob/living/carbon/human/proc/changeling_bioelectrogenesis()
 	set category = "Changeling"
@@ -32,70 +72,22 @@
 				return 1
 		return 0
 
-	else
-		// Handle glove conductivity.
-		var/obj/item/clothing/gloves/gloves = src.gloves
-		var/siemens = 1
-		if(gloves)
-			siemens = gloves.siemens_coefficient
+	//If we're grabbing someone, electrocute them.
+	if(istype(held_item,/obj/item/weapon/grab))
+		var/obj/item/weapon/grab/G = held_item
+		if(G.affecting)
+			var/obj/item/weapon/electric_hand/grab/direct = new(src)
+			direct.shock_mob(G.affecting, src)
+			qdel(direct)
+		return 1
 
-		//If we're grabbing someone, electrocute them.
-		if(istype(held_item,/obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = held_item
-			if(G.affecting)
-				G.affecting.electrocute_act(10 * siemens,src,1.0,BP_TORSO)
-				var/agony = 80 * siemens //Does more than if hit with an electric hand, since grabbing is slower.
-				G.affecting.stun_effect_act(0, agony, BP_TORSO, src)
+	//Otherwise, charge up whatever's in their hand.
+	if(isobj(held_item))
+		var/obj/item/weapon/electric_hand/grab/direct = new(src)
+		var/success = direct.charge_obj(held_item, src)
+		qdel(direct)
+		return success
 
-				msg_admin_attack("[key_name(src)] shocked [key_name(G.affecting)] with the [src].")
-
-				if(siemens)
-					visible_message("<span class='warning'>Arcs of electricity strike [G.affecting]!</span>",
-					"<span class='warning'>Our hand channels raw electricity into [G.affecting].</span>",
-					"<span class='italics'>You hear sparks!</span>")
-				else
-					src << "<span class='warning'>Our gloves block us from shocking \the [G.affecting].</span>"
-				src.mind.changeling.chem_charges -= 10
-				return 1
-
-		//Otherwise, charge up whatever's in their hand.
-		else
-			//This checks both the active hand, and the contents of the active hand's held item.
-			var/success = 0
-			var/list/L = new() //We make a new list to avoid copypasta.
-
-			//Check our hand.
-			if(istype(held_item,/obj/item/weapon/cell))
-				L.Add(held_item)
-
-			//Now check our hand's item's contents, so we can recharge guns and other stuff.
-			for(var/obj/item/weapon/cell/cell in held_item.contents)
-				L.Add(cell)
-
-			//Now for the actual recharging.
-			for(var/obj/item/weapon/cell/cell in L)
-				visible_message("<span class='warning'>Some sparks fall out from \the [src.name]\'s [held_item]!</span>",
-				"<span class='warning'>Our hand channels raw electricity into \the [held_item].</span>",
-				"<span class='italics'>You hear sparks!</span>")
-				var/i = 10
-				if(siemens)
-					while(i)
-						cell.charge += 100 * siemens //This should be a nice compromise between recharging guns and other batteries.
-						if(cell.charge > cell.maxcharge)
-							cell.charge = cell.maxcharge
-							break
-						if(siemens)
-							var/T = get_turf(src)
-							new /obj/effect/effect/sparks(T)
-							held_item.update_icon()
-						i--
-						sleep(1 SECOND)
-					success = 1
-			if(success == 0) //If we couldn't do anything with the ability, don't deduct the chemicals.
-				src << "<span class='warning'>We are unable to affect \the [held_item].</span>"
-			else
-				src.mind.changeling.chem_charges -= 10
-			return success
 
 /obj/item/weapon/electric_hand
 	name = "electrified hand"
@@ -105,6 +97,9 @@
 	var/shock_cost = 10
 	var/agony_amount = 60
 	var/electrocute_amount = 10
+
+/obj/item/weapon/electric_hand/grab
+	agony_amount = 80 //Does more than if hit with an electric hand, since grabbing is slower.
 
 /obj/item/weapon/electric_hand/efficent
 	shock_cost = 5
@@ -118,6 +113,7 @@
 		"<span class='italics'>You hear crackling electricity!</span>")
 		var/T = get_turf(src)
 		new /obj/effect/sparks(T)
+		playsound(T, "sparks", 50, 1)
 
 /obj/item/weapon/electric_hand/dropped(mob/user)
 	spawn(1)
@@ -137,73 +133,48 @@
 		siemens = gloves.siemens_coefficient
 
 	//Excuse the copypasta.
-	if(istype(target,/mob/living/carbon))
-		var/mob/living/carbon/C = target
-
+	if(istype(target,/mob/living))
 		if(user.mind.changeling.chem_charges < shock_cost)
 			src << "<span class='warning'>We require more chemicals to electrocute [C]!</span>"
 			return 0
 
-		C.electrocute_act(electrocute_amount * siemens,src,1.0,BP_TORSO)
-		C.stun_effect_act(0, agony_amount * siemens, BP_TORSO, src)
+		shock_mob(target, user)
+		return 1
 
-		msg_admin_attack("[key_name(user)] shocked [key_name(C)] with the [src].")
+	if(isobj(target))
+		recharge_obj(target, user)
+		return 1
 
-		if(siemens)
-			visible_message("<span class='warning'>Arcs of electricity strike [C]!</span>",
-			"<span class='warning'>Our hand channels raw electricity into [C]</span>",
-			"<span class='italics'>You hear sparks!</span>")
-		else
-			src << "<span class='warning'>Our gloves block us from shocking \the [C].</span>"
-		//qdel(src)  //Since we're no longer a one hit stun, we need to stick around.
+/obj/item/weapon/electric_hand/proc/shock_mob(mob/living/target, mob/living/user)
+	// Handle glove conductivity.
+	var/siemens = 1
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		var/obj/item/clothing/gloves/gloves = user.gloves
+		if(gloves)
+			siemens = gloves.siemens_coefficient
+
+	target.electrocute_act(electrocute_amount * siemens,src,1.0,BP_TORSO)
+	target.stun_effect_act(0, agony_amount * siemens, BP_TORSO, src)
+
+	msg_admin_attack("[key_name(user)] shocked [key_name(target)] with [src].")
+
+	if(siemens)
+		var/T = get_turf(target)
+		new /obj/effect/effect/sparks(T)
+		playsound(T, "sparks", 50, 1)
+		visible_message("<span class='warning'>Arcs of electricity strike [target]!</span>",
+		"<span class='warning'>Our hand channels raw electricity into [target]</span>",
+		"<span class='italics'>You hear sparks!</span>")
 		user.mind.changeling.chem_charges -= shock_cost
-		return 1
-
-	else if(istype(target,/mob/living/silicon))
-		var/mob/living/silicon/S = target
-
-		if(user.mind.changeling.chem_charges < 10)
-			src << "<span class='warning'>We require more chemicals to electrocute [S]!</span>"
-			return 0
-
-		S.electrocute_act(60 * siemens,src,1.0) //If only they had surge protectors.
-		if(siemens)
-			visible_message("<span class='warning'>Arcs of electricity strike [S]!</span>",
-			"<span class='warning'>Our hand channels raw electricity into [S]</span>",
-			"<span class='italics'>You hear sparks!</span>")
-			S << "<span class='danger'>Warning: Electrical surge detected!</span>"
-		//qdel(src)
-		user.mind.changeling.chem_charges -= 10
-		return 1
-
 	else
-		if(istype(target,/obj/))
-			var/success = 0
-			var/obj/T = target
-			//We can also recharge things we touch, such as APCs or hardsuits.
-			for(var/obj/item/weapon/cell/cell in T.contents)
-				visible_message("<span class='warning'>Some sparks fall out from \the [target]!</span>",
-				"<span class='warning'>Our hand channels raw electricity into \the [target].</span>",
-				"<span class='italics'>You hear sparks!</span>")
-				var/i = 10
-				if(siemens)
-					while(i)
-						cell.charge += 100 * siemens //This should be a nice compromise between recharging guns and other batteries.
-						if(cell.charge > cell.maxcharge)
-							cell.charge = cell.maxcharge
-							break //No point making sparks if the cell's full.
-	//					if(!Adjacent(T))
-	//						break
-						if(siemens)
-							var/Turf = get_turf(src)
-							new /obj/effect/effect/sparks(Turf)
-							T.update_icon()
-						i--
-						sleep(1 SECOND)
-					success = 1
-					break
-			if(success == 0)
-				src << "<span class='warning'>We are unable to affect \the [target].</span>"
-			else
-				qdel(src)
-			return 1
+		src << "<span class='warning'>Our gloves block us from shocking \the [target].</span>"
+
+/obj/item/weapon/electric_hand/proc/recharge_obj(obj/target, mob/living/user)
+	var/success = O.changeling_recharge(user)
+	if(success) //If we couldn't do anything with the ability, don't deduct the chemicals.
+		user.mind.changeling.chem_charges -= shock_cost
+		qdel(src)
+	else
+		src << "<span class='warning'>We are unable to affect \the [O].</span>"
+	return success
