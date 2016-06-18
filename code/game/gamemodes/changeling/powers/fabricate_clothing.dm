@@ -30,7 +30,7 @@ var/global/list/changeling_fabricated_clothing = list(
 	return 0
 
 /obj/item/clothing/under/chameleon/changeling
-	name = "malformed flesh"
+	name = "metamorphic flesh"
 	icon_state = "lingchameleon"
 	item_state = "lingchameleon"
 	worn_state = "lingchameleon"
@@ -54,10 +54,10 @@ var/global/list/changeling_fabricated_clothing = list(
 		H.update_icons()
 
 /obj/item/clothing/head/chameleon/changeling
-	name = "malformed head"
+	name = "metamorphic flesh"
 	icon_state = "lingchameleon"
 	desc = "Our head is swelled with a large quanity of rapidly shifting skin cells.  We can reform our head to resemble various hats and \
-	helmets that biologicals are so fond of wearing."
+	helmets that biologicals are so fond of wearing." //not biological wtf?
 	origin_tech = list()
 	canremove = 0
 
