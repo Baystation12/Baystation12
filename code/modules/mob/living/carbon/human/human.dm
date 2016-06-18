@@ -117,15 +117,10 @@
 				Paralyse(10)
 
 		if(3.0)
-<<<<<<< HEAD
 			b_loss += 30
 			if (prob(getarmor(null, "bomb")))
 				b_loss = b_loss/2
 			if (!get_ear_protection() >= 2)
-=======
-			b_loss = 30
-			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
->>>>>>> a3f784154cd9e63c4df959f2d2d7ea0004fc02ac
 				ear_damage += 15
 				ear_deaf += 60
 			if (prob(50))
