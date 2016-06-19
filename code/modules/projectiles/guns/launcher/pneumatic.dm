@@ -131,10 +131,7 @@
 		icon_state = "pneumatic"
 		item_state = "pneumatic"
 
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_r_hand()
-		M.update_inv_l_hand()
+	update_held_icon()
 
 //Constructable pneumatic cannon.
 

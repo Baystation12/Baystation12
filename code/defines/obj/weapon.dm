@@ -122,10 +122,10 @@
 		user.drop_from_inventory(src)
 		user.put_in_hands(concealed_blade)
 		user.put_in_hands(src)
-		user.update_inv_l_hand(0)
-		user.update_inv_r_hand()
 		concealed_blade = null
 		update_icon()
+		user.update_inv_l_hand()
+		user.update_inv_r_hand()
 	else
 		..()
 
@@ -136,6 +136,8 @@
 		W.loc = src
 		src.concealed_blade = W
 		update_icon()
+		user.update_inv_l_hand()
+		user.update_inv_r_hand()
 	else
 		..()
 
