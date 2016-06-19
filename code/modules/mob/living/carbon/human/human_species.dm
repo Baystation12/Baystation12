@@ -1,14 +1,18 @@
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
 	status_flags = GODMODE|CANPUSH
-	
+
 /mob/living/carbon/human/dummy/mannequin/New()
 	..()
-	mob_list -= src	
-	living_mob_list -= src
-	dead_mob_list -= src
+	mob_list -= src
 	delete_inventory()
-	
+
+/mob/living/carbon/human/dummy/mannequin/add_to_living_mob_list()
+	return
+
+/mob/living/carbon/human/dummy/mannequin/add_to_dead_mob_list()
+	return
+
 /mob/living/carbon/human/dummy/mannequin/fully_replace_character_name(new_name)
 	..("[new_name] (mannequin)", FALSE)
 

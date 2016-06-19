@@ -881,9 +881,9 @@
 		if("Mobs")
 			usr << jointext(mob_list,",")
 		if("Living Mobs")
-			usr << jointext(living_mob_list,",")
+			usr << jointext(living_mob_list_,",")
 		if("Dead Mobs")
-			usr << jointext(dead_mob_list,",")
+			usr << jointext(dead_mob_list_,",")
 		if("Clients")
 			usr << jointext(clients,",")
 

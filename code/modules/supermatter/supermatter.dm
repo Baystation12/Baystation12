@@ -100,7 +100,7 @@
 	anchored = 1
 	grav_pulling = 1
 	exploded = 1
-	for(var/mob/living/mob in living_mob_list)
+	for(var/mob/living/mob in living_mob_list_)
 		var/turf/T = get_turf(mob)
 		if(T && (loc.z == T.z))
 			if(istype(mob, /mob/living/carbon/human))
