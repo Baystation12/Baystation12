@@ -54,6 +54,7 @@
 /decl/hierarchy/supply_pack/security/eweapons
 	name = "Advanced Energy Weapons crate"
 	contains = list(/obj/item/weapon/gun/energy/xray = 2,
+					/obj/item/weapon/gun/energy/xray/pistol = 1,
 					/obj/item/weapon/shield/energy = 2,
 					/obj/item/clothing/suit/armor/laserproof = 2)
 	cost = 125

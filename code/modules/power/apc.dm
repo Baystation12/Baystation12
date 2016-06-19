@@ -339,7 +339,9 @@
 				overlays += status_overlays_environ[environ+1]
 
 	if(update & 3)
-		if(update_state & UPDATE_BLUESCREEN)
+		if(update_state & (UPDATE_OPENED1|UPDATE_OPENED2|UPDATE_BROKE))
+			set_light(0)
+		else if(update_state & UPDATE_BLUESCREEN)
 			set_light(l_range = 2, l_power = 0.5, l_color = "#0000FF")
 		else if(!(stat & (BROKEN|MAINT)) && update_state & UPDATE_ALLGOOD)
 			var/color
@@ -587,6 +589,7 @@
 		if(do_after(user, 10, src))
 			if(has_electronics==0)
 				has_electronics = 1
+				reboot() //completely new electronics
 				user << "<span class='notice'>You place the power control board inside the frame.</span>"
 				qdel(W)
 	else if (istype(W, /obj/item/weapon/module/power_control) && opened && has_electronics==0 && ((stat & BROKEN)))
@@ -1174,7 +1177,6 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 /obj/machinery/power/apc/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			//set_broken() //now qdel() do what we need
 			if (cell)
 				cell.ex_act(1.0) // more lags woohoo
 			qdel(src)
@@ -1199,6 +1201,7 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 /obj/machinery/power/apc/proc/set_broken()
 	// Aesthetically much better!
 	src.visible_message("<span class='notice'>[src]'s screen flickers with warnings briefly!</span>")
+	power_alarm.triggerAlarm(loc, src)
 	spawn(rand(2,5))
 		src.visible_message("<span class='notice'>[src]'s screen suddenly explodes in rain of sparks and small debris!</span>")
 		stat |= BROKEN
@@ -1206,8 +1209,27 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 		update_icon()
 		update()
 
-// overload the lights in this APC area
+/obj/machinery/power/apc/proc/reboot()
+	//reset various counters so that process() will start fresh
+	charging = initial(charging)
+	chargecount = initial(chargecount)
+	autoflag = initial(autoflag)
+	longtermpower = initial(longtermpower)
+	failure_timer = initial(failure_timer)
 
+	//start with main breaker off, chargemode in the default state and all channels on auto upon reboot
+	operating = 0
+	chargemode = initial(chargemode)
+	power_alarm.clearAlarm(loc, src)
+
+	lighting = 3
+	equipment = 3
+	environ = 3
+
+	update_icon()
+	update()
+
+// overload the lights in this APC area
 /obj/machinery/power/apc/proc/overload_lighting(var/chance = 100)
 	if(/* !get_connection() || */ !operating || shorted)
 		return
