@@ -128,6 +128,3 @@
 			return L
 
 	return null
-
-/mob/proc/is_muzzled()
-	return 0

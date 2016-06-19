@@ -2,11 +2,11 @@
 	name = "Absorb DNA"
 	desc = "Permits us to syphon the DNA from a human. They become one with us, and we become stronger if they were of our kind."
 	genomecost = 0
-	verbpath = /mob/proc/changeling_absorb_dna
+	verbpath = /mob/living/carbon/proc/changeling_absorb_dna
 
 //Absorbs the victim's DNA. Requires a strong grip on the victim.
 //Doesn't cost anything as it's the most basic ability.
-/mob/proc/changeling_absorb_dna()
+/mob/living/carbon/proc/changeling_absorb_dna()
 	set category = "Changeling"
 	set name = "Absorb DNA"
 

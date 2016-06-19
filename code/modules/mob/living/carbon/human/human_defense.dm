@@ -91,7 +91,7 @@ meteor_act
 	return (armorval/max(total, 1))
 
 //this proc returns the Siemens coefficient of electrical resistivity for a particular external organ.
-/mob/living/carbon/human/proc/get_siemens_coefficient_organ(var/obj/item/organ/external/def_zone)
+/mob/living/carbon/human/get_siemens_coefficient_organ(var/obj/item/organ/external/def_zone)
 	if (!def_zone)
 		return 1.0
 

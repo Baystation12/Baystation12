@@ -34,16 +34,16 @@
 	name = "flesh mass"
 	icon_state = "lingspacesuit"
 	item_state = "lingspacehelmet"
-	item_icons[slot_wear_suit_str] = 'icons/mob/items/changeling.dmi'
 	desc = "A huge, bulky mass of pressure and temperature-resistant organic tissue, evolved to facilitate space travel."
 	flags = STOPPRESSUREDAMAGE			 //Not THICKMATERIAL because it's organic tissue, so if somebody tries to inject something into it,
 										//it still ends up in your blood. (also balance but muh fluff)
-	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank/emergency_oxygen, /obj/item/weapon/tank/oxygen)
+	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0) //No armor at all.
 	canremove = 0
 
 /obj/item/clothing/suit/space/changeling/New()
 	..()
+	item_icons[slot_wear_suit_str] = 'icons/mob/items/changeling.dmi'
 	if(ismob(loc))
 		loc.visible_message("<span class='warning'>[loc.name]\'s flesh rapidly inflates, forming a bloated mass around their body!</span>",
 		"<span class='warning'>We inflate our flesh, creating a spaceproof suit!</span>",
@@ -56,12 +56,16 @@
 	name = "flesh mass"
 	icon_state = "lingspacehelmet"
 	item_state = "lingspacehelmet"
-	item_icons[slot_head_str] = 'icons/mob/items/changeling.dmi'
 	desc = "A covering of pressure and temperature-resistant organic tissue with a glass-like chitin front."
 	flags = BLOCKHAIR | STOPPRESSUREDAMAGE //Again, no THICKMATERIAL.
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	body_parts_covered = HEAD|FACE|EYES
 	canremove = 0
+
+/obj/item/clothing/head/helmet/space/changeling/New()
+	..()
+	item_icons[slot_head_str] = 'icons/mob/items/changeling.dmi'
+
 
 /obj/item/clothing/head/helmet/space/changeling/dropped()
 	qdel(src)
@@ -73,15 +77,15 @@
 	desc = "A tough, hard covering of black chitin."
 	icon_state = "lingarmor"
 	item_state = "lingarmor"
-	item_icons[slot_wear_suit_str] = 'icons/mob/items/changeling.dmi'
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	armor = list(melee = 75, bullet = 60, laser = 60, energy = 60, bomb = 60, bio = 0, rad = 0) //It costs 3 points, so it should be very protective.
 	siemens_coefficient = 0.3
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	slowdown = 3
 
 /obj/item/clothing/suit/space/changeling/armored/New()
 	..()
+	slowdown_per_slot[slot_wear_suit] = 3
+	item_icons[slot_wear_suit_str] = 'icons/mob/items/changeling.dmi'
 	if(ismob(loc))
 		loc.visible_message("<span class='warning'>[loc.name]\'s flesh turns black, quickly transforming into a hard, chitinous mass!</span>",
 		"<span class='warning'>We harden our flesh, creating a suit of armor!</span>",
@@ -95,10 +99,13 @@
 	desc = "A tough, hard covering of black chitin with transparent chitin in front."
 	icon_state = "lingarmorhelmet"
 	item_state = "lingarmorhelmet"
-	item_icons[slot_head_str] = 'icons/mob/items/changeling.dmi'
 	armor = list(melee = 75, bullet = 60, laser = 60,energy = 60, bomb = 60, bio = 0, rad = 0)
 	siemens_coefficient = 0.3
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+
+/obj/item/clothing/head/helmet/space/changeling/armored/New()
+	item_icons[slot_head_str] = 'icons/mob/items/changeling.dmi'
+	..()
 
 /obj/item/clothing/head/helmet/space/changeling/armored/dropped()
 	qdel(src)

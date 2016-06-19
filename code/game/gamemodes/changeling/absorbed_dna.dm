@@ -13,4 +13,4 @@
 	dna = persona.dna
 	speciesName = persona.species.name
 	languages = persona.languages.Copy()
-	flavour_texts = persona.flavour_texts.Copy()
+	flavour_texts = persona.flavor_texts.Copy()

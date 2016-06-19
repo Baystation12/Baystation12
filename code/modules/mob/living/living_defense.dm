@@ -294,6 +294,9 @@
 /mob/living/proc/get_heat_protection()
 	return 0
 
+/mob/living/proc/get_siemens_coefficient_organ(var/obj/item/organ/external/def_zone)
+	return 1.0
+
 //Finds the effective temperature that the mob is burning at.
 /mob/living/proc/fire_burn_temperature()
 	if (fire_stacks <= 0)
