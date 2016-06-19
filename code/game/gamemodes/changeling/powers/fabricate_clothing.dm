@@ -118,6 +118,8 @@ var/global/list/changeling_fabricated_clothing = list(
 /obj/item/weapon/storage/backpack/chameleon/changeling/verb/shred()
 	set name = "Shred Backpack"
 	set category = "Chameleon Items"
+	for(var/atom/movable/AM in src.contents) //Dump whatevers in the bag before deleting.
+		AM.dropInto(src.loc)
 	changeling_shred_item(usr)
 
 /obj/item/clothing/gloves/chameleon/changeling
