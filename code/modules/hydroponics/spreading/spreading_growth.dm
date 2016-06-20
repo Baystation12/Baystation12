@@ -89,20 +89,43 @@
 				sleep(rand(3,5))
 				if(!neighbors.len)
 					break
-				var/turf/target_turf = pick(neighbors)
-				var/obj/effect/plant/child = new(get_turf(src),seed,parent)
-				spawn(1) // This should do a little bit of animation.
-					child.forceMove(target_turf)
-					child.update_icon()
-				// Update neighboring squares.
-				for(var/obj/effect/plant/neighbor in range(1,target_turf))
-					if(seed == neighbor.seed) //neighbors of different seeds will continue to try to overrun each other
-						neighbor.neighbors -= target_turf
+				spread_to(pick(neighbors))
 
 	// We shouldn't have spawned if the controller doesn't exist.
 	check_health()
 	if(neighbors.len || health != max_health)
 		plant_controller.add_plant(src)
+
+//spreading vines aren't created on their final turf. 
+//Instead, they are created at their parent and then move to their destination.
+/obj/effect/plant/proc/spread_to(turf/target_turf)
+	var/obj/effect/plant/child = new(get_turf(src),seed,parent)
+
+	spawn(1) // This should do a little bit of animation.
+		if(deleted(child))
+			return
+
+		//move out to the destination
+		child.anchored = 0
+		step_to(child, target_turf)
+		child.anchored = 1
+		child.update_icon()
+
+		//see if anything is there
+		for(var/obj/effect/plant/other in child.loc)
+			if(other != child)
+				if(other.seed != child.seed)
+					other.vine_overrun(child.seed, src) //vine fight
+				qdel(child)
+				return
+
+		// Update neighboring squares.
+		for(var/obj/effect/plant/neighbor in range(1, child.loc)) //can use the actual final child loc now
+			if(seed == neighbor.seed) //neighbors of different seeds will continue to try to overrun each other
+				neighbor.neighbors -= target_turf
+
+		child.finish_spreading()
+
 
 /obj/effect/plant/proc/die_off()
 	// Kill off our plant.
