@@ -1,6 +1,6 @@
 /datum/trader/pizzaria
 	name = "Pizza Shop Employee"
-	language = "Noise"
+	name_language = TRADER_DEFAULT_NAME
 	origin = "Pizzeria"
 	possible_origins = list("Papa Joes", "Pizza Ship", "Dominator Pizza", "Little Kaezars", "Pizza Planet", "Cheese Louise")
 	trade_flags = TRADER_MONEY
@@ -32,7 +32,7 @@
 
 /datum/trader/ship/chinese
 	name = "Chinese Restaurant"
-	language = "Noise"
+	name_language = TRADER_DEFAULT_NAME
 	origin = "Captain Panda Bistro"
 	trade_flags = TRADER_MONEY
 	possible_wanted_items = list()
@@ -82,7 +82,7 @@
 
 /datum/trader/grocery
 	name = "Grocer"
-	language = "Noise"
+	name_language = TRADER_DEFAULT_NAME
 	possible_origins = list("HyTee", "Kreugars", "Spaceway", "Privaxs", "FutureValue")
 	trade_flags = TRADER_MONEY
 
@@ -113,7 +113,7 @@
 
 /datum/trader/bakery
 	name = "Pastry Chef"
-	language = "Noise"
+	name_language = TRADER_DEFAULT_NAME
 	origin = "Bakery"
 	possible_origins = list("Cakes By Design", "Corner Bakery Local", "My Favorite Cake & Pastry Cafe", "Mama Joes Bakery", "Sprinkles and Fun")
 

@@ -9,7 +9,7 @@ They sell generic supplies and ask for generic supplies.
 /datum/trader/trading_beacon
 	name = "AI"
 	origin = "Trading Beacon"
-	language = LANGUAGE_EAL
+	name_language = LANGUAGE_EAL
 	trade_flags = TRADER_MONEY|TRADER_GOODS
 	speech = list("hail_generic"    = "Greetings, I am MERCHANT, Artifical Intelligence onboard ORIGIN, tasked with trading goods in return for thalers and supplies.",
 				"hail_resomi"       = "Greetings, I am MERCHANT, Artifical Intelligence onboard ORIGIN. We wish to trade with you, no more.",

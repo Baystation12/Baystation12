@@ -4,7 +4,7 @@
 	var/list/possible_origins                                   //Possible names of the trader origin
 	var/disposition = 0                                         //The current disposition of them to us.
 	var/trade_flags = TRADER_MONEY                              //Flags
-	var/language                                                //If this is set to a language name this will generate a name from the language
+	var/name_language                                                //If this is set to a language name this will generate a name from the language
 	var/icon/portrait                                           //The icon that shows up in the menu @TODO
 
 	var/list/wanted_items = list()                              //What items they enjoy trading for. Structure is (type = known/unknown)
@@ -39,10 +39,13 @@
 
 /datum/trader/New()
 	..()
-	if(language)
-		var/datum/language/L = all_languages[language]
-		if(L)
-			name = L.get_random_name(pick(MALE,FEMALE))
+	if(name_language)
+		if(name_language == TRADER_DEFAULT_NAME)
+			name = capitalize(pick(first_names_female + first_names_male)) + " " + capitalize(pick(last_names))
+		else
+			var/datum/language/L = all_languages[name_language]
+			if(L)
+				name = L.get_random_name(pick(MALE,FEMALE))
 	if(possible_origins && possible_origins.len)
 		origin = pick(possible_origins)
 
@@ -78,19 +81,15 @@
 		return
 	var/list/possible = list()
 	for(var/type in trading_pool)
-		switch(trading_pool[type])
-			if(TRADER_THIS_TYPE)
-				possible += type
-			if(TRADER_SUBTYPES_ONLY)
-				possible += subtypesof(type)
-			if(TRADER_ALL)
-				possible += typesof(type)
-			if(TRADER_BLACKLIST)
-				possible -= type
-			if(TRADER_BLACKLIST_SUB)
-				possible -= subtypesof(type)
-			if(TRADER_BLACKLIST_ALL)
-				possible -= typesof(type)
+		var/status = trading_pool[type]
+		if(status & TRADER_THIS_TYPE)
+			possible += type
+		if(status & TRADER_SUBTYPES_ONLY)
+			possible += subtypesof(type)
+		if(status & TRADER_BLACKLIST)
+			possible -= type
+		if(status & TRADER_BLACKLIST_SUB)
+			possible -= subtypesof(type)
 
 	if(possible.len)
 		var/picked = pick(possible)
@@ -119,7 +118,7 @@
 		var/type = trading_items[trading_num]
 		var/value = 0
 		//<INSERT CALCULATED COST HERE>
-		trading_items[trading_items[trading_num]] = value
+		trading_items[type] = value
 	return trading_items[trading_items[trading_num]]
 
 /datum/trader/proc/offer_item_for_trade(var/atom/movable/offer, var/num)

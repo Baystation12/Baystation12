@@ -1,6 +1,6 @@
 /datum/trader/ship/gunshop
 	name = "Gun Shop Employee"
-	language = "Noise"
+	name_language = TRADER_DEFAULT_NAME
 	origin = "Gun Shop"
 	possible_origins = list("Rooty Tootie's Point-n-Shooties", "Bang-Bang Shop", "Wild-Wild-West Shop", "Jacobs", "Vladof", "Keleshnikov", "Hunting Depot", "Big Game Hunters")
 	speech = list("hail_generic"    = "Hello hello! I hope you have your permit, oh who are we kidding, you're welcome anyways!",
@@ -31,7 +31,7 @@
 
 /datum/trader/ship/egunshop
 	name = "Energy Gun Shop Employee"
-	language = "Noise"
+	name_language = TRADER_DEFAULT_NAME
 	origin = "EGun Shop"
 	possible_origins = list("The Emperor's Lasgun Shop", "Hypireon", "Milawan", "Future-Guns", "Solar-Army")
 	speech = list("hail_generic"    = "Welcome to the future of warfare! ORIGIN, your one-stop-shop for energy weaponry.",
@@ -78,8 +78,5 @@
 	insult_drop = 0
 
 	possible_trading_items = list(/obj/item/weapon/gun/projectile/pirate                = TRADER_THIS_TYPE,
-/*								/obj/item/weapon/gun/projectile/automatic/mini_uzi/usi  = TRADER_THIS_TYPE,
-								/obj/item/weapon/gun/projectile/heavysniper/ant         = TRADER_THIS_TYPE,
-								/obj/item/weapon/gun/projectile/sec/Mc                  = TRADER_THIS_TYPE,
-								/obj/item/weapon/gun/projectile/silenced/cheap          = TRADER_THIS_TYPE,*/
 								/obj/item/clothing/accessory/holster                    = TRADER_ALL)
+								//Will readd stuff later

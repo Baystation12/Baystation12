@@ -59,7 +59,7 @@
 /datum/trader/ship/unique/wizard
 	name = "Wizard"
 	origin = "A Moving Castle"
-	language = "Common"
+	name_language = TRADER_DEFAULT_NAME
 
 	possible_wanted_items = list(/mob/living/simple_animal/construct            = TRADER_SUBTYPES_ONLY,
 								/obj/item/weapon/melee/cultblade                = TRADER_THIS_TYPE,

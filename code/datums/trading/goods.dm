@@ -1,6 +1,6 @@
 /datum/trader/ship/toyshop
 	name = "Toy Shop Employee"
-	language = "Noise"
+	name_language = TRADER_DEFAULT_NAME
 	origin = "Toy Shop"
 	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY
 	possible_origins = list("Toys R Ours", "LEGS GO", "Kay-Cee Toys", "Build-a-Cat", "Magic Box", "The Positronic's Dungeon and Baseball Card Shop")
@@ -38,7 +38,7 @@
 
 /datum/trader/ship/electronics
 	name = "Electronic Shop Employee"
-	language = "Noise"
+	name_language = TRADER_DEFAULT_NAME
 	origin = "Electronic Shop"
 	possible_origins = list("Best Sale", "Overstore", "Oldegg", "Circuit Citadel")
 
@@ -76,7 +76,7 @@
 
 /datum/trader/ship/clothingshop
 	name = "Clothing Store Employee"
-	language = "Noise"
+	name_language = TRADER_DEFAULT_NAME
 	origin = "Clothing Store"
 	possible_origins = list("Space Eagle", "Banana Democracy", "Forever 22", "Textiles Factory Warehouse Outlet", "Blocks Brothers")
 	speech = list("hail_generic"    = "Hello sir! Welcome to ORIGIN!",
@@ -161,7 +161,7 @@ Sells devices, odds and ends, and medical stuff
 */
 /datum/trader/devices
 	name = "Drugstore Employee"
-	language = "Noise"
+	name_language = TRADER_DEFAULT_NAME
 	origin = "Drugstore"
 	possible_origins = list("Buy 'n Save", "Drug Carnival", "C&B", "Fentles", "Dr. Goods", "Beevees")
 	possible_trading_items = list(/obj/item/device                         = TRADER_SUBTYPES_ONLY,
