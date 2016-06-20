@@ -33,6 +33,9 @@
 
 		neighbors |= floor
 
+	if(neighbors.len)
+		plant_controller.add_plant(src) //if we have neighbours again, start processing
+
 	// Update all of our friends.
 	var/turf/T = get_turf(src)
 	for(var/obj/effect/plant/neighbor in range(1,src))
@@ -104,7 +107,7 @@
 
 	// We shouldn't have spawned if the controller doesn't exist.
 	check_health()
-	if(neighbors.len || health != max_health)
+	if(neighbors.len)
 		plant_controller.add_plant(src)
 
 //spreading vines aren't created on their final turf. 
