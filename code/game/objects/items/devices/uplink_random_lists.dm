@@ -89,6 +89,14 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/power_sink, reselect_propbability = 15)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/laser_canon, reselect_propbability = 5)
 
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/thermal, reselect_propbability = 15)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/thermal, reselect_propbability = 15)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/thermal, reselect_propbability = 15)
+
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/jamming/suit_sensor_mobile)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/jamming/suit_sensor_shutdown, 75, 0)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/jamming/suit_sensor_garble, 75, 0)
+
 #ifdef DEBUG
 /proc/debug_uplink_purchage_log()
 	for(var/antag_type in all_antag_types)
