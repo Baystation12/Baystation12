@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - rscadd: "MedHUD overlays now have more stages, both for 'normal' and critical stages of injury, for improved quick-diagnosis."
