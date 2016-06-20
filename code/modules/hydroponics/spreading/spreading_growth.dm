@@ -90,9 +90,10 @@
 			sampled = 0
 
 	if(is_mature() && !buckled_mob)
-		for(var/mob/living/carbon/human/M in range(1))
-			if(!M.buckled && !M.anchored && (issmall(M) || M.lying || prob(round(seed.get_trait(TRAIT_POTENCY)/6))))
-				entangle(M)
+		for(var/turf/neighbor in neighbors)
+			for(var/mob/living/M in neighbor)
+				if(seed.get_trait(TRAIT_SPREAD) >= 2 && (M.lying || prob(round(seed.get_trait(TRAIT_POTENCY)))))
+					entangle(M)
 
 	if(is_mature() && neighbors.len && prob(spread_chance))
 		//spread to 1-3 adjacent turfs depending on yield trait.
@@ -126,18 +127,21 @@
 		child.update_icon()
 
 		//see if anything is there
-		for(var/obj/effect/plant/other in child.loc)
-			if(other != child)
+		for(var/thing in child.loc)
+			if(thing != child && istype(thing, /obj/effect/plant))
+				var/obj/effect/plant/other = thing
 				if(other.seed != child.seed)
 					other.vine_overrun(child.seed, src) //vine fight
 				qdel(child)
 				return
-
-		var/obj/effect/dead_plant/dead = locate() in child.loc
-		if(dead)
-			qdel(dead)
-			qdel(child)
-			return
+			if(istype(thing, /obj/effect/dead_plant))
+				qdel(thing)
+				qdel(child)
+				return
+			if(isliving(thing) && (seed.get_trait(TRAIT_CARNIVOROUS) || (seed.get_trait(TRAIT_SPREAD) >= 2 && prob(round(seed.get_trait(TRAIT_POTENCY))))))
+				entangle(thing)
+				qdel(child)
+				return
 
 		// Update neighboring squares.
 		for(var/obj/effect/plant/neighbor in range(1, child.loc)) //can use the actual final child loc now

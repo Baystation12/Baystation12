@@ -62,12 +62,14 @@
 					"<span class='warning'>You hear shredding and ripping.</span>")
 			unbuckle()
 		else
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			health -= rand(1,5)
 			var/text = pick("rip","tear","pull", "bite", "tug")
 			user.visible_message(\
 				"<span class='warning'>\The [user] [text]s at \the [src].</span>",\
 				"<span class='warning'>You [text] at \the [src].</span>",\
 				"<span class='warning'>You hear shredding and ripping.</span>")
+			check_health()
 	return
 
 /obj/effect/plant/proc/entangle(var/mob/living/victim)
@@ -75,11 +77,11 @@
 	if(buckled_mob)
 		return
 
-	if(victim.buckled)
+	if(victim.buckled || victim.anchored)
 		return
 
 	//grabbing people
-	if(!victim.anchored && Adjacent(victim) && victim.loc != get_turf(src))
+	if(!victim.anchored && Adjacent(victim) && victim.loc != src.loc)
 		var/can_grab = 1
 		if(istype(victim, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = victim
