@@ -14,19 +14,30 @@
 	for(var/turf/simulated/floor in get_cardinal_neighbors())
 		if(get_dist(parent, floor) > spread_distance)
 			continue
-		if((locate(/obj/effect/plant) in floor.contents) || (locate(/obj/effect/dead_plant) in floor.contents) )
+
+		var/blocked = 0
+		for(var/obj/effect/plant/other in floor.contents)
+			if(other.seed == src.seed)
+				blocked = 1
+				break
+		if(blocked)
 			continue
+
 		if(floor.density)
 			if(!isnull(seed.chems["pacid"]))
 				spawn(rand(5,25)) floor.ex_act(3)
 			continue
+
 		if(!Adjacent(floor) || !floor.Enter(src))
 			continue
+
 		neighbors |= floor
+
 	// Update all of our friends.
 	var/turf/T = get_turf(src)
 	for(var/obj/effect/plant/neighbor in range(1,src))
-		neighbor.neighbors -= T
+		if(neighbor.seed == src.seed)
+			neighbor.neighbors -= T
 
 /obj/effect/plant/process()
 
@@ -119,9 +130,15 @@
 				qdel(child)
 				return
 
+		var/obj/effect/dead_plant/dead = locate() in child.loc
+		if(dead)
+			qdel(dead)
+			qdel(child)
+			return
+
 		// Update neighboring squares.
 		for(var/obj/effect/plant/neighbor in range(1, child.loc)) //can use the actual final child loc now
-			if(seed == neighbor.seed) //neighbors of different seeds will continue to try to overrun each other
+			if(child.seed == neighbor.seed) //neighbors of different seeds will continue to try to overrun each other
 				neighbor.neighbors -= target_turf
 
 		child.finish_spreading()
