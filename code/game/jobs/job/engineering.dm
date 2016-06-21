@@ -3,7 +3,7 @@
 	flag = CHIEF
 	head_position = 1
 	department = "Engineering"
-	department_flag = ENGSEC
+	department_flag = ENG|COM
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -52,7 +52,7 @@
 	title = "Station Engineer"
 	flag = ENGINEER
 	department = "Engineering"
-	department_flag = ENGSEC
+	department_flag = ENG
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 5
@@ -90,7 +90,7 @@
 	title = "Atmospheric Technician"
 	flag = ATMOSTECH
 	department = "Engineering"
-	department_flag = ENGSEC
+	department_flag = ENG
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2

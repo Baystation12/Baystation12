@@ -54,7 +54,7 @@
 		if(alt_title && !(alt_title in job.alt_titles))
 			pref.player_alt_titles -= job.title
 
-/datum/category_item/player_setup_item/occupation/content(mob/user, limit = 16, list/splitJobs = list("Chief Medical Officer"))
+/datum/category_item/player_setup_item/occupation/content(mob/user, limit = 16, list/splitJobs, splitLimit = 1)
 	if(!job_master)
 		return
 
@@ -64,6 +64,8 @@
 	. += "<table width='100%' cellpadding='1' cellspacing='0'><tr><td width='20%'>" // Table within a table for alignment, also allows you to easily add more columns.
 	. += "<table width='100%' cellpadding='1' cellspacing='0'>"
 	var/index = -1
+	if(splitLimit)
+		limit = round((job_master.occupations.len+1)/2)
 
 	//The job before the current job. I only use this to get the previous jobs color when I'm filling in blank rows.
 	var/datum/job/lastJob
@@ -177,6 +179,7 @@
 /datum/category_item/player_setup_item/occupation/proc/SetJob(mob/user, role)
 	var/datum/job/job = job_master.GetJob(role)
 	if(!job)
+		world << "Nope"
 		return 0
 
 	if(role == "Assistant")
@@ -213,37 +216,36 @@
 			pref.job_medsci_high = 0
 			pref.job_engsec_high = 0
 
-	switch(job.department_flag)
-		if(CIVILIAN)
-			switch(level)
-				if(2)
-					pref.job_civilian_high = job.flag
-					pref.job_civilian_med &= ~job.flag
-				if(3)
-					pref.job_civilian_med |= job.flag
-					pref.job_civilian_low &= ~job.flag
-				else
-					pref.job_civilian_low |= job.flag
-		if(MEDSCI)
-			switch(level)
-				if(2)
-					pref.job_medsci_high = job.flag
-					pref.job_medsci_med &= ~job.flag
-				if(3)
-					pref.job_medsci_med |= job.flag
-					pref.job_medsci_low &= ~job.flag
-				else
-					pref.job_medsci_low |= job.flag
-		if(ENGSEC)
-			switch(level)
-				if(2)
-					pref.job_engsec_high = job.flag
-					pref.job_engsec_med &= ~job.flag
-				if(3)
-					pref.job_engsec_med |= job.flag
-					pref.job_engsec_low &= ~job.flag
-				else
-					pref.job_engsec_low |= job.flag
+	if((job.department_flag & CIV) || (job.department_flag & CRG))
+		switch(level)
+			if(2)
+				pref.job_civilian_high = job.flag
+				pref.job_civilian_med &= ~job.flag
+			if(3)
+				pref.job_civilian_med |= job.flag
+				pref.job_civilian_low &= ~job.flag
+			else
+				pref.job_civilian_low |= job.flag
+	else if((job.department_flag & MED) || (job.department_flag & SCI))
+		switch(level)
+			if(2)
+				pref.job_medsci_high = job.flag
+				pref.job_medsci_med &= ~job.flag
+			if(3)
+				pref.job_medsci_med |= job.flag
+				pref.job_medsci_low &= ~job.flag
+			else
+				pref.job_medsci_low |= job.flag
+	else if((job.department_flag & ENG) || (job.department_flag & SEC) || (job.department_flag & COM) || (job.department_flag & MSC))
+		switch(level)
+			if(2)
+				pref.job_engsec_high = job.flag
+				pref.job_engsec_med &= ~job.flag
+			if(3)
+				pref.job_engsec_med |= job.flag
+				pref.job_engsec_low &= ~job.flag
+			else
+				pref.job_engsec_low |= job.flag
 	return 1
 
 /datum/category_item/player_setup_item/occupation/proc/ResetJobs()
@@ -266,29 +268,29 @@
 
 /datum/preferences/proc/GetJobDepartment(var/datum/job/job, var/level)
 	if(!job || !level)	return 0
-	switch(job.department_flag)
-		if(CIVILIAN)
-			switch(level)
-				if(1)
-					return job_civilian_high
-				if(2)
-					return job_civilian_med
-				if(3)
-					return job_civilian_low
-		if(MEDSCI)
-			switch(level)
-				if(1)
-					return job_medsci_high
-				if(2)
-					return job_medsci_med
-				if(3)
-					return job_medsci_low
-		if(ENGSEC)
-			switch(level)
-				if(1)
-					return job_engsec_high
-				if(2)
-					return job_engsec_med
-				if(3)
-					return job_engsec_low
+
+	if((job.department_flag & CIV) || (job.department_flag & CRG))
+		switch(level)
+			if(1)
+				return job_civilian_high
+			if(2)
+				return job_civilian_med
+			if(3)
+				return job_civilian_low
+	if((job.department_flag & MED) || (job.department_flag & SCI))
+		switch(level)
+			if(1)
+				return job_medsci_high
+			if(2)
+				return job_medsci_med
+			if(3)
+				return job_medsci_low
+	if((job.department_flag & ENG) || (job.department_flag & SEC) || (job.department_flag & COM) || (job.department_flag & MSC))
+		switch(level)
+			if(1)
+				return job_engsec_high
+			if(2)
+				return job_engsec_med
+			if(3)
+				return job_engsec_low
 	return 0

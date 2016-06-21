@@ -3,7 +3,7 @@
 	title = "Bartender"
 	flag = BARTENDER
 	department = "Civilian"
-	department_flag = CIVILIAN
+	department_flag = CIV
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -31,7 +31,7 @@
 	title = "Chef"
 	flag = CHEF
 	department = "Civilian"
-	department_flag = CIVILIAN
+	department_flag = CIV
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
@@ -58,7 +58,7 @@
 	title = "Gardener"
 	flag = BOTANIST
 	department = "Civilian"
-	department_flag = CIVILIAN
+	department_flag = CIV
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 1
@@ -91,7 +91,7 @@
 	title = "Quartermaster"
 	flag = QUARTERMASTER
 	department = "Cargo"
-	department_flag = CIVILIAN
+	department_flag = CIV|CRG
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -121,7 +121,7 @@
 	title = "Cargo Technician"
 	flag = CARGOTECH
 	department = "Cargo"
-	department_flag = CIVILIAN
+	department_flag = CIV|CRG
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
@@ -146,7 +146,7 @@
 	title = "Shaft Miner"
 	flag = MINER
 	department = "Cargo"
-	department_flag = CIVILIAN
+	department_flag = CIV
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 3
@@ -185,7 +185,7 @@
 	title = "Janitor"
 	flag = JANITOR
 	department = "Civilian"
-	department_flag = CIVILIAN
+	department_flag = CIV
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -210,7 +210,7 @@
 	title = "Librarian"
 	flag = LIBRARIAN
 	department = "Civilian"
-	department_flag = CIVILIAN
+	department_flag = CIV
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -236,7 +236,7 @@
 	title = "Internal Affairs Agent"
 	flag = LAWYER
 	department = "Civilian"
-	department_flag = CIVILIAN
+	department_flag = CIV
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2

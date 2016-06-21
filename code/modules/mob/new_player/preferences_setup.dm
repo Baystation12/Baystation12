@@ -201,13 +201,12 @@ datum/preferences
 		else
 			for(var/datum/job/job in job_master.occupations)
 				var/job_flag
-				switch(job.department_flag)
-					if(CIVILIAN)
-						job_flag = job_civilian_high
-					if(MEDSCI)
-						job_flag = job_medsci_high
-					if(ENGSEC)
-						job_flag = job_engsec_high
+				if((job.department_flag & CIV) || (job.department_flag & CRG))
+					job_flag = job_civilian_high
+				else if((job.department_flag & MED) || (job.department_flag & SCI))
+					job_flag = job_medsci_high
+				else if((job.department_flag & ENG) || (job.department_flag & SEC) || (job.department_flag & COM) || (job.department_flag & MSC))
+					job_flag = job_engsec_high
 				if(job.flag == job_flag)
 					previewJob = job
 					break

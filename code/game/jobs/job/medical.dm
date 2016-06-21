@@ -3,7 +3,7 @@
 	flag = CMO
 	head_position = 1
 	department = "Medical"
-	department_flag = MEDSCI
+	department_flag = MED|COM
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -41,7 +41,7 @@
 	title = "Medical Doctor"
 	flag = DOCTOR
 	department = "Medical"
-	department_flag = MEDSCI
+	department_flag = MED
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 3
@@ -104,7 +104,7 @@
 	title = "Chemist"
 	flag = CHEMIST
 	department = "Medical"
-	department_flag = MEDSCI
+	department_flag = MED
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
@@ -135,7 +135,7 @@
 	title = "Geneticist"
 	flag = GENETICIST
 	department = "Medical"
-	department_flag = MEDSCI
+	department_flag = MED
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
@@ -164,7 +164,7 @@
 	title = "Psychiatrist"
 	flag = PSYCHIATRIST
 	department = "Medical"
-	department_flag = MEDSCI
+	department_flag = MED
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -197,7 +197,7 @@
 	title = "Paramedic"
 	flag = PARAMEDIC
 	department = "Medical"
-	department_flag = MEDSCI
+	department_flag = MED
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2

@@ -1,5 +1,11 @@
-
-var/const/ENGSEC			=(1<<0)
+var/const/ENG				=(1<<0)
+var/const/SEC				=(1<<1)
+var/const/MED				=(1<<2)
+var/const/SCI				=(1<<3)
+var/const/CIV				=(1<<4)
+var/const/COM				=(1<<5)
+var/const/CRG				=(1<<6)
+var/const/MSC				=(1<<7)
 
 var/const/CAPTAIN			=(1<<0)
 var/const/HOS				=(1<<1)
@@ -12,9 +18,6 @@ var/const/ATMOSTECH			=(1<<7)
 var/const/AI				=(1<<8)
 var/const/CYBORG			=(1<<9)
 
-
-var/const/MEDSCI			=(1<<1)
-
 var/const/RD				=(1<<0)
 var/const/SCIENTIST			=(1<<1)
 var/const/CHEMIST			=(1<<2)
@@ -26,9 +29,6 @@ var/const/PSYCHIATRIST		=(1<<7)
 var/const/ROBOTICIST		=(1<<8)
 var/const/XENOBIOLOGIST		=(1<<9)
 var/const/PARAMEDIC			=(1<<10)
-
-
-var/const/CIVILIAN			=(1<<2)
 
 var/const/HOP				=(1<<0)
 var/const/BARTENDER			=(1<<1)
@@ -49,73 +49,30 @@ var/const/ASSISTANT			=(1<<13)
 var/list/assistant_occupations = list(
 )
 
-
 var/list/command_positions = list(
-	"Captain",
-	"Head of Personnel",
-	"Head of Security",
-	"Chief Engineer",
-	"Research Director",
-	"Chief Medical Officer"
 )
-
 
 var/list/engineering_positions = list(
-	"Chief Engineer",
-	"Station Engineer",
-	"Atmospheric Technician",
 )
-
 
 var/list/medical_positions = list(
-	"Chief Medical Officer",
-	"Medical Doctor",
-	"Geneticist",
-	"Psychiatrist",
-	"Chemist",
-	"Paramedic"
 )
-
 
 var/list/science_positions = list(
-	"Research Director",
-	"Scientist",
-	"Geneticist",	//Part of both medical and science
-	"Roboticist",
-	"Xenobiologist"
 )
 
-//BS12 EDIT
 var/list/cargo_positions = list(
-	"Quartermaster",
-	"Cargo Technician",
-	"Shaft Miner"
 )
 
 var/list/civilian_positions = list(
-	"Head of Personnel",
-	"Internal Affairs Agent",
-	"Bartender",
-	"Gardener",
-	"Chef",
-	"Janitor",
-	"Librarian",
-	"Chaplain",
-	"Assistant"
 )
 
 
 var/list/security_positions = list(
-	"Head of Security",
-	"Warden",
-	"Detective",
-	"Security Officer"
 )
 
 
 var/list/nonhuman_positions = list(
-	"AI",
-	"Cyborg",
 	"pAI"
 )
 

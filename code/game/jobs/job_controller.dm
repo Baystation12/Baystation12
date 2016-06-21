@@ -15,7 +15,7 @@ var/global/datum/controller/occupations/job_master
 
 	proc/SetupOccupations(var/faction = "Station")
 		occupations = list()
-		var/list/all_jobs = typesof(/datum/job)
+		var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
 		if(!all_jobs.len)
 			world << "<span class='warning'>Error setting up jobs, no job datums found!</span>"
 			return 0
@@ -24,6 +24,20 @@ var/global/datum/controller/occupations/job_master
 			if(!job)	continue
 			if(job.faction != faction)	continue
 			occupations += job
+			if(job.department_flag & COM)
+				command_positions += job.title
+			if(job.department_flag & ENG)
+				engineering_positions += job.title
+			if(job.department_flag & MED)
+				medical_positions += job.title
+			if(job.department_flag & SCI)
+				science_positions += job.title
+			if(job.department_flag & CRG)
+				cargo_positions += job.title
+			if(job.department_flag & CIV)
+				civilian_positions += job.title
+			if(job.department_flag & MSC)
+				nonhuman_positions += job.title
 
 
 		return 1
