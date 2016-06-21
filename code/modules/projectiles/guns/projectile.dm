@@ -48,8 +48,9 @@
 /obj/item/weapon/gun/projectile/consume_next_projectile()
 	if(!is_jammed && prob(jam_chance))
 		src.visible_message("<span class='danger'>\The [src] jams!</span>")
+		is_jammed = 1
 	if(is_jammed)
-		return 0
+		return null
 	//get the next casing
 	if(loaded.len)
 		chambered = loaded[1] //load next casing.
@@ -146,7 +147,12 @@
 
 //attempts to unload src. If allow_dump is set to 0, the speedloader unloading method will be disabled
 /obj/item/weapon/gun/projectile/proc/unload_ammo(mob/user, var/allow_dump=1)
-	is_jammed = 0
+	if(is_jammed)
+		user.visible_message("\The [user] begins to unjam [src].", "You clear the jam and unload [src]")
+		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
+		if(!do_after(user, 4, src))
+			return
+		is_jammed = 0
 	if(ammo_magazine)
 		user.put_in_hands(ammo_magazine)
 		user.visible_message("[user] removes [ammo_magazine] from [src].", "<span class='notice'>You remove [ammo_magazine] from [src].</span>")
