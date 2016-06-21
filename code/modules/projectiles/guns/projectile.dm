@@ -46,6 +46,8 @@
 	update_icon()
 
 /obj/item/weapon/gun/projectile/consume_next_projectile()
+	if(!is_jammed && prob(jam_chance))
+		src.visible_message("<span class='danger'>\The [src] jams!</span>")
 	if(is_jammed)
 		return 0
 	//get the next casing
@@ -71,15 +73,6 @@
 /obj/item/weapon/gun/projectile/handle_click_empty()
 	..()
 	process_chambered()
-
-/obj/item/weapon/gun/projectile/special_check(var/mob/user)
-	if(!..())
-		return 0
-	if(!is_jammed && jam_chance)
-		if(prob(jam_chance))
-			user << "<span class='danger'>\The [src] jams!</span>"
-			is_jammed = 1
-	return 1
 
 /obj/item/weapon/gun/projectile/proc/process_chambered()
 	if (!chambered) return
@@ -153,6 +146,7 @@
 
 //attempts to unload src. If allow_dump is set to 0, the speedloader unloading method will be disabled
 /obj/item/weapon/gun/projectile/proc/unload_ammo(mob/user, var/allow_dump=1)
+	is_jammed = 0
 	if(ammo_magazine)
 		user.put_in_hands(ammo_magazine)
 		user.visible_message("[user] removes [ammo_magazine] from [src].", "<span class='notice'>You remove [ammo_magazine] from [src].</span>")
@@ -184,12 +178,7 @@
 	load_ammo(A, user)
 
 /obj/item/weapon/gun/projectile/attack_self(mob/user as mob)
-	if(is_jammed)
-		user.visible_message("\The [user] unjams \the [src]!")
-		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-		playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
-		is_jammed = 0
-	else if(firemodes.len > 1)
+	if(firemodes.len > 1)
 		..()
 	else
 		unload_ammo(user)

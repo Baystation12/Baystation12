@@ -40,10 +40,6 @@
 	else
 		icon_state = "secgundark-e"
 
-/obj/item/weapon/gun/projectile/sec/MK
-	desc = "Similar in both appearance and use of the NT Mk58, the MK pistol is an cheap knock off that preys on the unsuspecting."
-	jam_chance = 45
-
 /obj/item/weapon/gun/projectile/silenced
 	name = "silenced pistol"
 	desc = "A handgun with an integral silencer. Uses .45 rounds."
@@ -55,13 +51,6 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c45m
 	allowed_magazines = /obj/item/ammo_magazine/c45m
-
-/obj/item/weapon/gun/projectile/silenced/cheap
-	desc = "A handgun with an integrated silencer(?). Uses .45 rounds."
-
-/obj/item/weapon/gun/projectile/silenced/cheap/handle_post_fire()
-	silenced = prob(50)
-	return ..()
 
 /obj/item/weapon/gun/projectile/deagle
 	name = "desert eagle"
