@@ -108,7 +108,7 @@
 
 	// We shouldn't have spawned if the controller doesn't exist.
 	check_health()
-	if(neighbors.len)
+	if(buckled_mob || neighbors.len)
 		plant_controller.add_plant(src)
 
 //spreading vines aren't created on their final turf. 
