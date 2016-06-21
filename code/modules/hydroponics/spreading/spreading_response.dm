@@ -46,10 +46,10 @@
 
 /obj/effect/plant/proc/manual_unbuckle(mob/user as mob)
 	if(buckled_mob)
-		var/fail_chance = 50
+		var/chance = 20
 		if(seed)
-			fail_chance = seed.get_trait(TRAIT_POTENCY) * (user == buckled_mob ? 5 : 2)
-		if(prob(100 - fail_chance))
+			chance = round(100/(20*seed.get_trait(TRAIT_POTENCY)/100))
+		if(prob(chance))
 			if(buckled_mob != user)
 				buckled_mob.visible_message(\
 					"<span class='notice'>\The [user] frees \the [buckled_mob] from \the [src].</span>",\
