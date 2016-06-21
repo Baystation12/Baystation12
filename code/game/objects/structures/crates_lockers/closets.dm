@@ -192,11 +192,16 @@
 
 /obj/structure/closet/bullet_act(var/obj/item/projectile/Proj)
 	var/proj_damage = Proj.get_structure_damage()
-	if(!proj_damage)
-		return
+	if(proj_damage)
+		..()
+		damage(proj_damage)
 
-	..()
-	damage(proj_damage)
+	if(Proj.penetrating)
+		var/distance = get_dist(Proj.starting, get_turf(loc))
+		for(var/mob/living/L in contents)
+			Proj.attack_mob(L, distance)
+			if(!(--Proj.penetrating))
+				break
 
 	return
 
