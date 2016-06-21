@@ -37,6 +37,11 @@
 		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    requires_two_hands=3, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
 		)
 
+/obj/item/weapon/gun/projectile/automatic/mini_uzi/usi
+	name = "\improper Usi"
+	desc = "The USI is a replica of the UZI made from scrapped together pistol parts. Does the same thing an UZI does, except cheaper."
+	jam_chance = 55
+
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "submachine gun"
 	desc = "The C-20r is a lightweight and rapid firing SMG, for when you REALLY need someone dead. Uses 10mm rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp."

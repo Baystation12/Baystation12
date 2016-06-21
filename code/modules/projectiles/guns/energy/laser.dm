@@ -11,6 +11,13 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	projectile_type = /obj/item/projectile/beam/midlaser
 
+/obj/item/weapon/gun/energy/laser/dogan
+	desc = "Crafted from the best materials Dogan could find, this carbine works just as well as a normal carbine. Most of the time."
+
+/obj/item/weapon/gun/energy/laser/dogan/consume_next_projectile()
+	projectile_type = pick(/obj/item/projectile/beam/midlaser, /obj/item/projectile/beam/lastertag/red, /obj/item/projectile/beam)
+	return ..()
+
 /obj/item/weapon/gun/energy/laser/mounted
 	self_recharge = 1
 	use_external_power = 1
