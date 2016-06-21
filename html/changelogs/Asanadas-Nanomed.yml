@@ -1,0 +1,6 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - tweak: "Wall mounted Nanomed dispensers no longer require access to use."
