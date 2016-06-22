@@ -1,5 +1,0 @@
-author: TheWelp
-delete-after: True
-changes: 
-  - rscadd: "Adds support for projectile guns to jam."
-  - rscadd: "Adds cheap/crappy gun variants."
