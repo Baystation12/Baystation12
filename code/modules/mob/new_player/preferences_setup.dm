@@ -196,18 +196,11 @@ datum/preferences
 	var/datum/job/previewJob
 	if(equip_preview_mob)
 		// Determine what job is marked as 'High' priority, and dress them up as such.
-		if(job_civilian_low & ASSISTANT)
+		if("Assistant" in job_low)
 			previewJob = job_master.GetJob("Assistant")
 		else
 			for(var/datum/job/job in job_master.occupations)
-				var/job_flag
-				if(job.department_flag & (CIV|CRG))
-					job_flag = job_civilian_high
-				else if(job.department_flag & (MED|SCI))
-					job_flag = job_medsci_high
-				else if(job.department_flag & (ENG|SEC|COM|MSC))
-					job_flag = job_engsec_high
-				if(job.flag == job_flag)
+				if(job.title == job_high)
 					previewJob = job
 					break
 	else

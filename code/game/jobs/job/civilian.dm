@@ -1,7 +1,6 @@
 //Food
 /datum/job/bartender
 	title = "Bartender"
-	flag = BARTENDER
 	department = "Civilian"
 	department_flag = CIV
 	faction = "Station"
@@ -29,7 +28,6 @@
 
 /datum/job/chef
 	title = "Chef"
-	flag = CHEF
 	department = "Civilian"
 	department_flag = CIV
 	faction = "Station"
@@ -56,7 +54,6 @@
 
 /datum/job/hydro
 	title = "Gardener"
-	flag = BOTANIST
 	department = "Civilian"
 	department_flag = CIV
 	faction = "Station"
@@ -89,7 +86,6 @@
 //Cargo
 /datum/job/qm
 	title = "Quartermaster"
-	flag = QUARTERMASTER
 	department = "Cargo"
 	department_flag = CIV|CRG
 	faction = "Station"
@@ -119,7 +115,6 @@
 
 /datum/job/cargo_tech
 	title = "Cargo Technician"
-	flag = CARGOTECH
 	department = "Cargo"
 	department_flag = CIV|CRG
 	faction = "Station"
@@ -144,7 +139,6 @@
 
 /datum/job/mining
 	title = "Shaft Miner"
-	flag = MINER
 	department = "Cargo"
 	department_flag = CIV
 	faction = "Station"
@@ -183,7 +177,6 @@
 
 /datum/job/janitor
 	title = "Janitor"
-	flag = JANITOR
 	department = "Civilian"
 	department_flag = CIV
 	faction = "Station"
@@ -208,7 +201,6 @@
 //More or less assistants
 /datum/job/librarian
 	title = "Librarian"
-	flag = LIBRARIAN
 	department = "Civilian"
 	department_flag = CIV
 	faction = "Station"
@@ -234,7 +226,6 @@
 //var/global/lawyer = 0//Checks for another lawyer //This changed clothes on 2nd lawyer, both IA get the same dreds.
 /datum/job/lawyer
 	title = "Internal Affairs Agent"
-	flag = LAWYER
 	department = "Civilian"
 	department_flag = CIV
 	faction = "Station"

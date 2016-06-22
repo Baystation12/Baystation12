@@ -1,6 +1,5 @@
 /datum/job/hos
 	title = "Head of Security"
-	flag = HOS
 	head_position = 1
 	department = "Security"
 	department_flag = SEC|COM
@@ -47,7 +46,6 @@
 
 /datum/job/warden
 	title = "Warden"
-	flag = WARDEN
 	department = "Security"
 	department_flag = SEC
 	faction = "Station"
@@ -82,7 +80,6 @@
 
 /datum/job/detective
 	title = "Detective"
-	flag = DETECTIVE
 	department = "Security"
 	department_flag = SEC
 	faction = "Station"
@@ -122,7 +119,6 @@
 
 /datum/job/officer
 	title = "Security Officer"
-	flag = OFFICER
 	department = "Security"
 	department_flag = SEC
 	faction = "Station"

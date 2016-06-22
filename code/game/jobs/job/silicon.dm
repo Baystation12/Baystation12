@@ -1,6 +1,5 @@
 /datum/job/ai
 	title = "AI"
-	flag = AI
 	department_flag = MSC
 	faction = "Station"
 	total_positions = 0 // Not used for AI, see is_position_available below and modules/mob/living/silicon/ai/latejoin.dm
@@ -33,7 +32,6 @@
 
 /datum/job/cyborg
 	title = "Cyborg"
-	flag = CYBORG
 	department_flag = MSC
 	faction = "Station"
 	total_positions = 2
