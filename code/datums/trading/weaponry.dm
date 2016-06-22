@@ -78,5 +78,9 @@
 	insult_drop = 0
 
 	possible_trading_items = list(/obj/item/weapon/gun/projectile/pirate                = TRADER_THIS_TYPE,
+								/obj/item/weapon/gun/projectile/sec/MK                  = TRADER_THIS_TYPE,
+								/obj/item/weapon/gun/projectile/silenced/cheap          = TRADER_THIS_TYPE,
+								/obj/item/weapon/gun/projectile/heavysniper/ant         = TRADER_THIS_TYPE,
+								/obj/item/weapon/gun/energy/laser/dogan                 = TRADER_THIS_TYPE,
+								/obj/item/weapon/gun/projectile/automatic/mini_uzi/usi  = TRADER_THIS_TYPE,
 								/obj/item/clothing/accessory/holster                    = TRADER_ALL)
-								//Will readd stuff later
