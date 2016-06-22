@@ -46,10 +46,10 @@
 
 /obj/effect/plant/proc/manual_unbuckle(mob/user as mob)
 	if(buckled_mob)
-		var/fail_chance = 50
+		var/chance = 20
 		if(seed)
-			fail_chance = seed.get_trait(TRAIT_POTENCY) * (user == buckled_mob ? 5 : 2)
-		if(prob(100 - fail_chance))
+			chance = round(100/(20*seed.get_trait(TRAIT_POTENCY)/100))
+		if(prob(chance))
 			if(buckled_mob != user)
 				buckled_mob.visible_message(\
 					"<span class='notice'>\The [user] frees \the [buckled_mob] from \the [src].</span>",\
@@ -62,12 +62,14 @@
 					"<span class='warning'>You hear shredding and ripping.</span>")
 			unbuckle()
 		else
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			health -= rand(1,5)
 			var/text = pick("rip","tear","pull", "bite", "tug")
 			user.visible_message(\
 				"<span class='warning'>\The [user] [text]s at \the [src].</span>",\
 				"<span class='warning'>You [text] at \the [src].</span>",\
 				"<span class='warning'>You hear shredding and ripping.</span>")
+			check_health()
 	return
 
 /obj/effect/plant/proc/entangle(var/mob/living/victim)
@@ -75,11 +77,11 @@
 	if(buckled_mob)
 		return
 
-	if(victim.buckled)
+	if(victim.buckled || victim.anchored)
 		return
 
 	//grabbing people
-	if(!victim.anchored && Adjacent(victim) && victim.loc != get_turf(src))
+	if(!victim.anchored && Adjacent(victim) && victim.loc != src.loc)
 		var/can_grab = 1
 		if(istype(victim, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = victim
@@ -94,3 +96,7 @@
 		buckle_mob(victim)
 		victim.set_dir(pick(cardinal))
 		victim << "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>"
+
+/obj/effect/plant/buckle_mob()
+	. = ..()
+	if(.) plant_controller.add_plant(src)

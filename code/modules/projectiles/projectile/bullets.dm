@@ -22,7 +22,10 @@
 		mob_passthrough_check = 1
 	else
 		mob_passthrough_check = 0
-	return ..()
+	. = ..()
+
+	if(. == 1 && iscarbon(target_mob))
+		damage *= 0.7 //squishy mobs absorb KE
 
 /obj/item/projectile/bullet/can_embed()
 	//prevent embedding if the projectile is passing through the mob
@@ -39,8 +42,6 @@
 	if(ismob(A))
 		if(!mob_passthrough_check)
 			return 0
-		if(iscarbon(A))
-			damage *= 0.7 //squishy mobs absorb KE
 		return 1
 
 	var/chance = damage
