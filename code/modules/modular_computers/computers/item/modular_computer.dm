@@ -777,3 +777,10 @@
 			take_damage(Proj.damage, Proj.damage / 3, 0)
 		if(BURN)
 			take_damage(Proj.damage, Proj.damage / 1.5)
+
+// Used by camera monitor program
+/obj/item/modular_computer/check_eye(var/mob/user)
+	if(active_program)
+		return active_program.check_eye(user)
+	else
+		return ..()

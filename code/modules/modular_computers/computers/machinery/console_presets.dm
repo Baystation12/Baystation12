@@ -17,7 +17,6 @@
 		cpu.battery_module = new/obj/item/weapon/computer_hardware/battery_module/super(cpu)
 	install_programs()
 
-// Override in child types to install preset-specific programs.
 /obj/machinery/modular_computer/console/preset/proc/install_programs()
 	return
 
@@ -31,6 +30,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/atmos_control())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/rcon_console())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 
 
 // ===== MEDICAL CONSOLE =====
@@ -40,6 +40,7 @@
 
 /obj/machinery/modular_computer/console/preset/medical/install_programs()
 	cpu.hard_drive.store_file(new/datum/computer_file/program/suit_sensors())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 
 
 // ===== RESEARCH CONSOLE =====
@@ -51,6 +52,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/ntnetmonitor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 
 
 // ===== COMMAND CONSOLE =====
@@ -64,6 +66,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/card_mod())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/comm())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 
 /obj/machinery/modular_computer/console/preset/command/main
 	 console_department = "Command"
@@ -77,7 +80,7 @@
 	 desc = "A stationary computer. This one comes preloaded with security programs."
 
 /obj/machinery/modular_computer/console/preset/security/install_programs()
-	return // No security programs exist, yet, but the preset is ready so it may be mapped in.
+	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 
 
 // ===== CIVILIAN CONSOLE =====
@@ -89,3 +92,27 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/newsbrowser())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor()) // Mainly for the entertainment channel, won't allow connection to other channels without access anyway
+
+// ===== ERT CONSOLE =====
+/obj/machinery/modular_computer/console/preset/ert
+	 console_department = "Crescent"
+	 desc = "A stationary computer. This one comes preloaded with various programs used by Nanotrasen response teams."
+
+/obj/machinery/modular_computer/console/preset/ert/install_programs()
+	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor/ert())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/comm())
+
+// ===== MERCENARY CONSOLE =====
+/obj/machinery/modular_computer/console/preset/mercenary
+	 console_department = "Unset"
+	 desc = "A stationary computer. This one comes preloaded with various programs used by shady organizations."
+	 _has_printer = 1
+	 _has_id_slot = 1
+	 emagged = 1		// Allows download of other antag programs for free.
+
+/obj/machinery/modular_computer/console/preset/ert/install_programs()
+	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor/hacked())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
