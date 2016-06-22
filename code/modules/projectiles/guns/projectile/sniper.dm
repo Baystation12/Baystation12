@@ -63,4 +63,3 @@
 	set popup_menu = 1
 
 	toggle_scope(2.0)
-
