@@ -1147,11 +1147,23 @@ Note that amputating the affected organ does in fact remove the infection from t
 	for(var/datum/wound/W in wounds)
 		if(W.internal && !open) continue // can't see internal wounds
 		var/this_wound_desc = W.desc
-		if(W.damage_type == BURN && W.salved) this_wound_desc = "salved [this_wound_desc]"
-		if(W.bleeding()) this_wound_desc = "bleeding [this_wound_desc]"
-		else if(W.bandaged) this_wound_desc = "bandaged [this_wound_desc]"
-		if(W.germ_level > 600) this_wound_desc = "badly infected [this_wound_desc]"
-		else if(W.germ_level > 330) this_wound_desc = "lightly infected [this_wound_desc]"
+
+		if(W.damage_type == BURN && W.salved) 
+			this_wound_desc = "salved [this_wound_desc]"
+
+		if(W.bleeding())
+			if(W.wound_damage() > W.bleed_threshold)
+				this_wound_desc = "<b>bleeding</b> [this_wound_desc]"
+			else
+				this_wound_desc = "bleeding [this_wound_desc]"
+		else if(W.bandaged) 
+			this_wound_desc = "bandaged [this_wound_desc]"
+
+		if(W.germ_level > 600) 
+			this_wound_desc = "badly infected [this_wound_desc]"
+		else if(W.germ_level > 330) 
+			this_wound_desc = "lightly infected [this_wound_desc]"
+
 		if(wound_descriptors[this_wound_desc])
 			wound_descriptors[this_wound_desc] += W.amount
 		else

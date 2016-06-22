@@ -24,7 +24,7 @@
 	if(wear_mask)
 		skipface |= wear_mask.flags_inv & HIDEFACE
 
-	var/msg = "<span class='info'>*---------*\nThis is "
+	var/list/msg = list("<span class='info'>*---------*\nThis is ")
 
 	var/datum/gender/T = gender_datums[get_gender()]
 	if(skipjumpsuit && skipface) //big suits/masks/helmets make it hard to tell their gender
@@ -232,6 +232,7 @@
 
 	var/list/wound_flavor_text = list()
 	var/list/is_bleeding = list()
+	var/applying_pressure = ""
 
 	for(var/organ_tag in species.has_limbs)
 
@@ -260,14 +261,18 @@
 					wound_flavor_text["[temp.name]"] = "<span class='warning'>[T.He] [T.has] [temp.get_wounds_desc()] on [T.his] [parent.name].</span><br>"
 				else
 					wound_flavor_text["[temp.name]"] = "<span class='warning'>[T.He] [T.has] [temp.get_wounds_desc()] on [T.his] [temp.name].</span><br>"
-				if(temp.status & ORGAN_BLEEDING)
-					is_bleeding["[temp.name]"] = "<span class='danger'>[T.His] [temp.name] is bleeding!</span><br>"
 			else
 				wound_flavor_text["[temp.name]"] = ""
 			if(temp.dislocated == 2)
 				wound_flavor_text["[temp.name]"] += "<span class='warning'>[T.His] [temp.joint] is dislocated!</span><br>"
 			if(((temp.status & ORGAN_BROKEN) && temp.brute_dam > temp.min_broken_damage) || (temp.status & ORGAN_MUTATED))
 				wound_flavor_text["[temp.name]"] += "<span class='warning'>[T.His] [temp.name] is dented and swollen!</span><br>"
+
+			if(!wound_flavor_text["[temp.name]"] && (temp.status & ORGAN_BLEEDING))
+				is_bleeding["[temp.name]"] = "<span class='danger'>[T.His] [temp.name] is bleeding!</span><br>"
+
+			if(temp.applied_pressure == src)
+				applying_pressure = "<span class='info'>[T.He] is applying pressure to [T.his] [temp.name].</span><br>"
 
 	//Handles the text strings being added to the actual description.
 	//If they have something that covers the limb, and it is not missing, put flavortext.  If it is covered but bleeding, add other flavortext.
@@ -344,7 +349,6 @@
 
 	for(var/limb in wound_flavor_text)
 		msg += wound_flavor_text[limb]
-		is_bleeding[limb] = null
 	for(var/limb in is_bleeding)
 		msg += is_bleeding[limb]
 	for(var/implant in get_visible_implants(0))
@@ -400,13 +404,15 @@
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
 
-	msg += "*---------*</span>"
+	msg += "*---------*</span><br>"
+	msg += applying_pressure
+
 	if (pose)
 		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
-		msg += "\n[T.He] [T.is] [pose]"
+		msg += "[T.He] [T.is] [pose]"
 
-	user << msg
+	user << jointext(msg, null)
 
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M as mob, hudtype)

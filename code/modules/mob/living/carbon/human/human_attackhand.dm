@@ -364,11 +364,11 @@
 		return 0
 
 	if(organ.applied_pressure)
-		user << "<span class='warning'>Someone is already applying pressure to [user == src? "your [organ]" : "[src]'s [organ.name]"].</span>"
+		user << "<span class='warning'>Someone is already applying pressure to [user == src? "your [organ.name]" : "[src]'s [organ.name]"].</span>"
 		return 0
 
 	if(user == src)
-		user.visible_message("\The [user] starts applying pressure to \his [organ]!", "You start applying pressure to your [organ]!")
+		user.visible_message("\The [user] starts applying pressure to \his [organ.name]!", "You start applying pressure to your [organ.name]!")
 	else
 		user.visible_message("\The [user] starts applying pressure to [src]'s [organ.name]!", "You start applying pressure to [src]'s [organ.name]!")
 	spawn(0)
@@ -380,7 +380,7 @@
 		organ.applied_pressure = null
 
 		if(user == src)
-			user.visible_message("\The [user] stops applying pressure to \his [organ]!", "You stop applying pressure to your [organ]!")
+			user.visible_message("\The [user] stops applying pressure to \his [organ.name]!", "You stop applying pressure to your [organ.name]!")
 		else
 			user.visible_message("\The [user] stops applying pressure to [src]'s [organ.name]!", "You stop applying pressure to [src]'s [organ.name]!")
 
