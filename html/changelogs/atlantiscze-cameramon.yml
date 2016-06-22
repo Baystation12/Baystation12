@@ -1,0 +1,8 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "Added camera monitoring program to modular computers, that can be run on consoles, laptops and tablets. Most mapped in consoles come with this program preinstalled."
+  - tweak: "Due to removal of old consoles (telescreens were part of these consoles), entertainment monitors were replaced with civilian modular console where applicable. This console can be used to access the entertainment channels."
+  - rscdel: "Removed old camera consoles, including circuit boards and other related things."

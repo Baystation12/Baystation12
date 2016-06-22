@@ -80,6 +80,9 @@
 	if(!access_to_check) // No required_access, allow it.
 		return 1
 
+	if(!istype(user))
+		return 0
+
 	var/obj/item/weapon/card/id/I = user.GetIdCard()
 	if(!I)
 		if(loud)
@@ -143,3 +146,10 @@
 		return 1
 	if(computer)
 		return computer.Topic(href, href_list)
+
+// Relays the call to nano module, if we have one
+/datum/computer_file/program/proc/check_eye(var/mob/user)
+	if(NM)
+		return NM.check_eye(user)
+	else
+		return -1
