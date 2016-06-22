@@ -76,12 +76,12 @@
 	total_positions = 4
 	spawn_positions = 4
 
-var/const/CONTRACTOR =(1<<14)
+
 /datum/job/contractor
 	title = "Security Contractor"
 	department = "Science"
 	department_flag = SCI
-	flag = CONTRACTOR
+	flag = CLOWN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1

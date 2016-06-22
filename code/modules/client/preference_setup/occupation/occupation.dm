@@ -216,7 +216,7 @@
 			pref.job_medsci_high = 0
 			pref.job_engsec_high = 0
 
-	if((job.department_flag & CIV) || (job.department_flag & CRG))
+	if(job.department_flag & (CIV|CRG))
 		switch(level)
 			if(2)
 				pref.job_civilian_high = job.flag
@@ -226,7 +226,7 @@
 				pref.job_civilian_low &= ~job.flag
 			else
 				pref.job_civilian_low |= job.flag
-	else if((job.department_flag & MED) || (job.department_flag & SCI))
+	else if(job.department_flag & (MED|SCI))
 		switch(level)
 			if(2)
 				pref.job_medsci_high = job.flag
@@ -236,7 +236,7 @@
 				pref.job_medsci_low &= ~job.flag
 			else
 				pref.job_medsci_low |= job.flag
-	else if((job.department_flag & ENG) || (job.department_flag & SEC) || (job.department_flag & COM) || (job.department_flag & MSC))
+	else if(job.department_flag & (ENG|SEC|COM|MSC))
 		switch(level)
 			if(2)
 				pref.job_engsec_high = job.flag
@@ -269,7 +269,7 @@
 /datum/preferences/proc/GetJobDepartment(var/datum/job/job, var/level)
 	if(!job || !level)	return 0
 
-	if((job.department_flag & CIV) || (job.department_flag & CRG))
+	if(job.department_flag & (CIV|CRG))
 		switch(level)
 			if(1)
 				return job_civilian_high
@@ -277,7 +277,7 @@
 				return job_civilian_med
 			if(3)
 				return job_civilian_low
-	if((job.department_flag & MED) || (job.department_flag & SCI))
+	if(job.department_flag & (MED|SCI))
 		switch(level)
 			if(1)
 				return job_medsci_high
@@ -285,7 +285,7 @@
 				return job_medsci_med
 			if(3)
 				return job_medsci_low
-	if((job.department_flag & ENG) || (job.department_flag & SEC) || (job.department_flag & COM) || (job.department_flag & MSC))
+	if(job.department_flag & (ENG|SEC|COM|MSC))
 		switch(level)
 			if(1)
 				return job_engsec_high
