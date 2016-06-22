@@ -1,0 +1,6 @@
+author: HarpyEagle
+
+delete-after: True
+
+changes: 
+  - rscadd: "Adds applying pressure to body parts to reduce bleeding. With desired body part selected, help-intent click yourself or get an aggressive grab, then help-intent attack with the grab item. Each person should only be able to apply pressure to one body part on one person at a time, so choose wisely. Applying pressure will get blood on your hands."
