@@ -359,7 +359,7 @@
 	if(!organ || !(organ.status & ORGAN_BLEEDING))
 		return 0
 
-	if(organ.status & ORGAN_APPLY_PRESSURE)
+	if(organ.applied_pressure)
 		user << "<span class='warning'>Someone is already applying pressure to [user == src? "your [organ]" : "[src]'s [organ.name]"].</span>"
 		return 0
 
@@ -368,15 +368,16 @@
 	else
 		user.visible_message("\The [user] starts applying pressure to [src]'s [organ.name]!", "You start applying pressure to [src]'s [organ.name]!")
 	spawn(0)
-		organ.status |= ORGAN_APPLY_PRESSURE
+		organ.applied_pressure = user
 
 		//apply pressure as long as they stay still and keep grabbing
 		do_mob(user, src, INFINITY, target_zone, progress = 0)
-		
+
+		organ.applied_pressure = null
+
 		if(user == src)
 			user.visible_message("\The [user] stops applying pressure to \his [organ]!", "You stop applying pressure to your [organ]!")
 		else
 			user.visible_message("\The [user] stops applying pressure to [src]'s [organ.name]!", "You stop applying pressure to [src]'s [organ.name]!")
-		organ.status &= ~(ORGAN_APPLY_PRESSURE) 
 
 	return 1

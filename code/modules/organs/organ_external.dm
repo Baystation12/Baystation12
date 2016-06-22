@@ -57,6 +57,7 @@
 	var/can_grasp //It would be more appropriate if these two were named "affects_grasp" and "affects_stand" at this point
 	var/can_stand
 	var/body_hair
+	var/mob/living/applied_pressure
 
 /obj/item/organ/external/Destroy()
 	if(parent && parent.children)
@@ -255,6 +256,7 @@
 	if(is_damageable(brute + burn) || !config.limbs_can_break)
 		if(brute)
 			if(can_cut)
+				//need to check sharp again here so that blunt damage that was strong enough to break skin doesn't give puncture wounds
 				if(sharp && !edge)
 					createwound( PIERCE, brute )
 				else

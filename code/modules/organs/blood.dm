@@ -42,8 +42,8 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 	if(!species.has_organ["heart"])
 		return
 
-	var/obj/item/organ/heart/H = internal_organs_by_name["heart"]
-	if(!H)	//not having a heart is bad for health
+	var/obj/item/organ/heart/heart = internal_organs_by_name["heart"]
+	if(!heart)	//not having a heart is bad for health
 		setOxyLoss(max(getOxyLoss(), maxHealth))
 		adjustOxyLoss(10)
 
@@ -51,6 +51,11 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 	var/blood_max = 0
 	for(var/obj/item/organ/external/temp in organs)
 		if(!(temp.status & ORGAN_BLEEDING) || (temp.robotic >= ORGAN_ROBOT))
+			continue
+		if(temp.applied_pressure)
+			if(ishuman(temp.applied_pressure))
+				var/mob/living/carbon/human/H = temp.applied_pressure
+				H.bloody_hands(src, 0)
 			continue
 		for(var/datum/wound/W in temp.wounds) if(W.bleeding())
 			blood_max += W.damage / 40
