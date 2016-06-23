@@ -214,6 +214,7 @@
 	no_attack_log = 1
 
 /obj/item/weapon/holo/esword
+	name = "holosword"
 	desc = "May the force be within you. Sorta."
 	icon_state = "sword0"
 	force = 3.0
@@ -262,10 +263,7 @@
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		user << "<span class='notice'>[src] can now be concealed.</span>"
 
-	if(istype(user,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = user
-		H.update_inv_l_hand()
-		H.update_inv_r_hand()
+	update_held_icon()
 
 	add_fingerprint(user)
 	return

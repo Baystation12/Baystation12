@@ -55,6 +55,7 @@ var/list/organ_cache = list()
 		max_damage = min_broken_damage * 2
 	if(istype(holder))
 		src.owner = holder
+		src.w_class = max(src.w_class + mob_size_difference(holder.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
 		species = all_species["Human"]
 		if(holder.dna)
 			dna = holder.dna.Clone()

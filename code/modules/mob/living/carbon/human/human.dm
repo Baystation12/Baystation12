@@ -1395,20 +1395,18 @@
 /mob/living/carbon/human/put_in_hands(var/obj/item/W)
 	if(!W)
 		return 0
-	if(put_in_active_hand(W))
-		update_inv_l_hand()
-		update_inv_r_hand()
+	if(put_in_active_hand(W) || put_in_inactive_hand(W))
+		W.update_held_icon()
 		return 1
-	else if(put_in_inactive_hand(W))
-		update_inv_l_hand()
-		update_inv_r_hand()
-		return 1
-	else
-		return ..()
+	return ..()
 
 /mob/living/carbon/human/put_in_l_hand(var/obj/item/W)
 	if(!..() || l_hand)
 		return 0
+	var/obj/item/organ/external/hand = organs_by_name["l_hand"]
+	if(!hand || !hand.is_usable())
+		return 0
+
 	W.forceMove(src)
 	l_hand = W
 	W.equipped(src,slot_l_hand)
@@ -1419,6 +1417,10 @@
 /mob/living/carbon/human/put_in_r_hand(var/obj/item/W)
 	if(!..() || r_hand)
 		return 0
+	var/obj/item/organ/external/hand = organs_by_name["r_hand"]
+	if(!hand || !hand.is_usable())
+		return 0
+
 	W.forceMove(src)
 	r_hand = W
 	W.equipped(src,slot_r_hand)

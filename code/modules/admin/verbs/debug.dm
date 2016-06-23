@@ -412,6 +412,7 @@
 		"death commando",
 		"syndicate commando",
 		"special ops officer",
+		"space special ops",
 		"blue wizard",
 		"red wizard",
 		"marisa wizard",
@@ -693,7 +694,7 @@
 			M.equip_to_slot_or_del(W, slot_wear_id)
 
 		if("emergency response team")
-			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/ert(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/swat(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/swat(M), slot_gloves)
 			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/ert(M), slot_l_ear)
@@ -710,15 +711,39 @@
 			W.registered_name = M.real_name
 			M.equip_to_slot_or_del(W, slot_wear_id)
 
-		if("special ops officer")
+		if("space special ops")
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate/combat(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/suit/space/void/swat(M), slot_wear_suit)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/combat(M), slot_gloves)
 			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/captain(M), slot_l_ear)
 			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/plain/eyepatch(M), slot_glasses)
-			M.equip_to_slot_or_del(new /obj/item/clothing/mask/smokable/cigarette/cigar/havana(M), slot_wear_mask)
+			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse_rifle/M1911(M), slot_belt)
+			var /obj/item/weapon/tank/jetpack/J = new /obj/item/weapon/tank/jetpack/oxygen(M)
+			M.equip_to_slot_or_del(J, slot_back)
+			J.toggle()
+			M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat(M), slot_wear_mask)
+			J.Topic(null, list("stat" = 1))
 			M.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/deathsquad(M), slot_head)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.icon_state = "centcom"
+			W.access = get_all_station_access()
+			W.access += get_all_centcom_access()
+			W.assignment = "Special Operations Officer"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+
+		if("special ops officer")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate/combat(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/armor/swat/officer(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/combat(M), slot_gloves)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/captain(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/plain/eyepatch(M), slot_glasses)
+			M.equip_to_slot_or_del(new /obj/item/clothing/mask/smokable/cigarette/cigar/havana(M), slot_wear_mask)
+			M.equip_to_slot_or_del(new /obj/item/clothing/head/beret/deathsquad(M), slot_head)
 			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse_rifle/M1911(M), slot_belt)
 			M.equip_to_slot_or_del(new /obj/item/weapon/flame/lighter/zippo(M), slot_r_store)
 			M.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(M), slot_back)
@@ -856,9 +881,9 @@
 		if("Mobs")
 			usr << jointext(mob_list,",")
 		if("Living Mobs")
-			usr << jointext(living_mob_list,",")
+			usr << jointext(living_mob_list_,",")
 		if("Dead Mobs")
-			usr << jointext(dead_mob_list,",")
+			usr << jointext(dead_mob_list_,",")
 		if("Clients")
 			usr << jointext(clients,",")
 

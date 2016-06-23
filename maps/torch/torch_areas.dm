@@ -208,6 +208,7 @@
 
 /area/shuttle/escape_pod6/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod7
 	name = "\improper Escape Pod Two"
@@ -221,6 +222,7 @@
 
 /area/shuttle/escape_pod7/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod8
 	name = "\improper Escape Pod Three"
@@ -234,6 +236,7 @@
 
 /area/shuttle/escape_pod8/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod9
 	name = "\improper Escape Pod Four"
@@ -247,6 +250,7 @@
 
 /area/shuttle/escape_pod9/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod10
 	name = "\improper Escape Pod Five"
@@ -261,6 +265,7 @@
 
 /area/shuttle/escape_pod10/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/east/shuttlespace_ew1
 
 /area/shuttle/escape_pod11
 	name = "\improper Escape Pod Six"
@@ -275,6 +280,7 @@
 
 /area/shuttle/escape_pod11/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/east/shuttlespace_ew1
 
 
 //torch small pods
@@ -290,6 +296,7 @@
 
 /area/shuttle/escape_pod12/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod13
 	name = "\improper Escape Pod Eight"
@@ -303,6 +310,7 @@
 
 /area/shuttle/escape_pod13/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod14
 	name = "\improper Escape Pod Nine"
@@ -316,6 +324,7 @@
 
 /area/shuttle/escape_pod14/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod15
 	name = "\improper Escape Pod Ten"
@@ -329,6 +338,7 @@
 
 /area/shuttle/escape_pod15/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod16
 	name = "\improper Escape Pod Eleven"
@@ -342,6 +352,7 @@
 
 /area/shuttle/escape_pod16/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod17
 	name = "\improper Escape Pod Twelve"
@@ -355,6 +366,7 @@
 
 /area/shuttle/escape_pod17/transit
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 //Calypso
 

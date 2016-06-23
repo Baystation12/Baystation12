@@ -133,10 +133,7 @@
 	// Don't fall through and smack people with gripper, instead just no-op
 	return 0
 
-/obj/item/weapon/gripper/afterattack(var/atom/target, var/mob/living/user, proximity, params)
-
-	if(!proximity)
-		return // This will prevent them using guns at range but adminbuse can add them directly to modules, so eh.
+/obj/item/weapon/gripper/resolve_attackby(var/atom/target, var/mob/living/user, params)
 
 	//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
 	if(!wrapped)
@@ -146,16 +143,16 @@
 
 	if(wrapped) //Already have an item.
 		//Temporary put wrapped into user so target's attackby() checks pass.
-		wrapped.loc = user
+		wrapped.loc = user //should we use forceMove() here? It is a virtual move after all, that is intended to be reset
 
 		//The force of the wrapped obj gets set to zero during the attack() and afterattack().
 		var/force_holder = wrapped.force
 		wrapped.force = 0.0
 
 		//Pass the attack on to the target. This might delete/relocate wrapped.
-		var/resolved = target.attackby(wrapped,user)
+		var/resolved = wrapped.resolve_attackby(target,user,params)
 		if(!resolved && wrapped && target)
-			wrapped.afterattack(target,user,1)
+			wrapped.afterattack(target,user,1,params)
 
 		wrapped.force = force_holder
 

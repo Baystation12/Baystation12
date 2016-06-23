@@ -62,10 +62,6 @@
 	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.
 	var/obj/item/weapon/tank/tank = null              // Deployable tank, if any.
 
-/obj/item/clothing/suit/space/void/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 1
-
 /obj/item/clothing/suit/space/void/examine(user)
 	..(user)
 	var/list/part_list = new

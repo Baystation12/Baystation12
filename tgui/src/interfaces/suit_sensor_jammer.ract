@@ -1,0 +1,22 @@
+<ui-display title='Active: {{data.active ? "Enabled" : "Disabled"}}'>
+    <ui-section>
+        <ui-button style='{{data.active ? "selected" : null}}' action='enable_jammer'>Enable</ui-button>
+        <ui-button style='{{data.active ? null : "selected"}}' action='disable_jammer'>Disable</ui-button>
+    </ui-section>
+</ui-display>
+<ui-display title='Range: {{data.range}} meter(s)'>
+    <ui-section>
+        <ui-button style='{{data.range <= 0 ? "selected" : null}}' action='decrease_range'>Decrease</ui-button>
+        <ui-button style='{{data.active >= data.max_range ? "selected" : "null"}}' action='increase_range'>Increase</ui-button>
+    </ui-section>
+</ui-display>
+<ui-display title='Mode:'>
+    {{#each data.methods}}
+        <ui-button style='{{data.current_method == ref ? "selected" : null}}' action='select_method' params='{"method" : {{ref}}}'>{{name}} - {{cost}}</ui-button><br>
+    {{/each}}
+</ui-display>
+<ui-section>
+	<ui-display title='Charge: {{data.current_charge}}/{{data.max_charge}}'>
+	<ui-bar min='0' max='1' value='{{data.current_charge/data.max_charge}}' state='{{data.current_charge/data.max_charge}}'>{{Math.fixed(data.current_charge*100/data.max_charge)}}%</ui-bar>
+</ui-section>
+<ui-display title='Energy Consumption: ~{{data.total_cost}}W'>

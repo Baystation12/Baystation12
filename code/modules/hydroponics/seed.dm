@@ -114,32 +114,29 @@
 
 
 	if(!target_limb) target_limb = pick("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm", "r_arm","head","chest","groin")
-	var/obj/item/organ/external/affecting = target.get_organ(target_limb)
-	var/damage = 0
-
-	if(get_trait(TRAIT_CARNIVOROUS))
-		if(get_trait(TRAIT_CARNIVOROUS) == 2)
-			if(affecting)
-				target << "<span class='danger'>\The [fruit]'s thorns pierce your [affecting.name] greedily!</span>"
-			else
-				target << "<span class='danger'>\The [fruit]'s thorns pierce your flesh greedily!</span>"
-			damage = get_trait(TRAIT_POTENCY)/2
-		else
-			if(affecting)
-				target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your [affecting.name]!</span>"
-			else
-				target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your flesh!</span>"
-			damage = get_trait(TRAIT_POTENCY)/5
-	else
+	var/blocked = target.run_armor_check(target_limb, "melee")
+	if(blocked >= 100)
 		return
 
-	if(affecting)
-		affecting.take_damage(damage, 0)
-		affecting.add_autopsy_data("Thorns",damage)
+	var/obj/item/organ/external/affecting = target.get_organ(target_limb)
+	var/damage = 0
+	var/has_edge = 0
+	if(get_trait(TRAIT_CARNIVOROUS) >= 2)
+		if(affecting)
+			target << "<span class='danger'>\The [fruit]'s thorns pierce your [affecting.name] greedily!</span>"
+		else
+			target << "<span class='danger'>\The [fruit]'s thorns pierce your flesh greedily!</span>"
+		damage = max(5, round(15*get_trait(TRAIT_POTENCY)/100, 1))
+		has_edge = prob(get_trait(TRAIT_POTENCY)/2)
 	else
-		target.adjustBruteLoss(damage)
-	target.UpdateDamageIcon()
-	target.updatehealth()
+		if(affecting)
+			target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your [affecting.name]!</span>"
+		else
+			target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your flesh!</span>"
+		damage = max(1, round(5*get_trait(TRAIT_POTENCY)/100, 1))
+		has_edge = prob(get_trait(TRAIT_POTENCY)/5)
+
+	target.apply_damage(damage, BRUTE, target_limb, blocked, "Thorns", sharp=1, edge=has_edge)
 
 // Adds reagents to a target.
 /datum/seed/proc/do_sting(var/mob/living/carbon/human/target, var/obj/item/fruit)

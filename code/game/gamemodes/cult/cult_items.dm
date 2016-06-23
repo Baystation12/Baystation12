@@ -3,6 +3,8 @@
 	desc = "An arcane weapon wielded by the followers of Nar-Sie."
 	icon_state = "cultblade"
 	item_state = "cultblade"
+	edge = 1
+	sharp = 1
 	w_class = 4
 	force = 30
 	throwforce = 10

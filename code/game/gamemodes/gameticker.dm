@@ -204,12 +204,12 @@ var/global/datum/controller/gameticker/ticker
 		var/obj/structure/bed/temp_buckle = new(src)
 		//Incredibly hackish. It creates a bed within the gameticker (lol) to stop mobs running around
 		if(station_missed)
-			for(var/mob/living/M in living_mob_list)
+			for(var/mob/living/M in living_mob_list_)
 				M.buckled = temp_buckle				//buckles the mob so it can't do anything
 				if(M.client)
 					M.client.screen += cinematic	//show every client the cinematic
 		else	//nuke kills everyone on z-level 1 to prevent "hurr-durr I survived"
-			for(var/mob/living/M in living_mob_list)
+			for(var/mob/living/M in living_mob_list_)
 				M.buckled = temp_buckle
 				if(M.client)
 					M.client.screen += cinematic
@@ -276,8 +276,8 @@ var/global/datum/controller/gameticker/ticker
 						flick("station_explode_fade_red", cinematic)
 						world << sound('sound/effects/explosionfar.ogg')
 						cinematic.icon_state = "summary_selfdes"
-				for(var/mob/living/M in living_mob_list)
-					if(M.loc.z in using_map.station_levels)
+				for(var/mob/living/M in living_mob_list_)
+					if(is_station_turf(get_turf(M)))
 						M.death()//No mercy
 		//If its actually the end of the round, wait for it to end.
 		//Otherwise if its a verb it will continue on afterwards.
@@ -483,8 +483,8 @@ var/global/datum/controller/gameticker/ticker
 		if (needs_ghost)
 			looking_for_antags = 1
 			antag_pool.Cut()
-			world << "<b>A ghost is needed to spawn \a [antag.role_text].</b>\nGhosts may enter the antag pool by making sure their [antag.role_text] preference is set to high, then using the toggle-add-antag-candidacy verb. You have 30 seconds to enter the pool."
-			sleep(300)
+			world << "<b>A ghost is needed to spawn \a [antag.role_text].</b>\nGhosts may enter the antag pool by making sure their [antag.role_text] preference is set to high, then using the toggle-add-antag-candidacy verb. You have 3 minutes to enter the pool."
+			sleep(3 MINUTES)
 			looking_for_antags = 0
 			antag.update_current_antag_max()
 			antag.build_candidate_list(needs_ghost)
@@ -496,7 +496,7 @@ var/global/datum/controller/gameticker/ticker
 			antag.update_current_antag_max()
 			antag.build_candidate_list(needs_ghost)
 			for(var/datum/mind/candidate in antag.candidates)
-				if(isghost(candidate.current))
+				if(isghostmind(candidate))
 					antag.candidates -= candidate
 					log_debug("[candidate.key] is a ghost and can not be selected.")
 		if(length(antag.candidates) >= antag.initial_spawn_req)

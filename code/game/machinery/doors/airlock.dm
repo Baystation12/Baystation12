@@ -260,7 +260,6 @@
 	var/last_event = 0
 
 /obj/machinery/door/airlock/process()
-	// Deliberate no call to parent.
 	if(main_power_lost_until > 0 && world.time >= main_power_lost_until)
 		regainMainPower()
 

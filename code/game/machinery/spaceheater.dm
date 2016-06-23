@@ -2,12 +2,13 @@
 	anchored = 0
 	density = 1
 	icon = 'icons/obj/atmos.dmi'
-	icon_state = "sheater0"
+	icon_state = "sheater-off"
 	name = "space heater"
 	desc = "Made by Space Amish using traditional space techniques, this heater is guaranteed not to set the station on fire."
 	var/obj/item/weapon/cell/cell
 	var/on = 0
 	var/set_temperature = T0C + 50	//K
+	var/active = 0
 	var/heating_power = 40000
 
 
@@ -16,11 +17,20 @@
 	cell = new(src)
 	update_icon()
 
-/obj/machinery/space_heater/update_icon()
-	overlays.Cut()
-	icon_state = "sheater[on]"
-	if(panel_open)
-		overlays  += "sheater-open"
+/obj/machinery/space_heater/update_icon(var/rebuild_overlay = 0)
+	if(!on)
+		icon_state = "sheater-off"
+	else if(active > 0)
+		icon_state = "sheater-heat"
+	else if(active < 0)
+		icon_state = "sheater-cool"
+	else
+		icon_state = "sheater-standby"
+
+	if(rebuild_overlay)
+		overlays.Cut()
+		if(panel_open)
+			overlays  += "sheater-open"
 
 /obj/machinery/space_heater/examine(mob/user)
 	..(user)
@@ -68,7 +78,7 @@
 	else if(istype(I, /obj/item/weapon/screwdriver))
 		panel_open = !panel_open
 		user.visible_message("<span class='notice'>[user] [panel_open ? "opens" : "closes"] the hatch on the [src].</span>", "<span class='notice'>You [panel_open ? "open" : "close"] the hatch on the [src].</span>")
-		update_icon()
+		update_icon(1)
 		if(!panel_open && user.machine == src)
 			user << browse(null, "window=spaceheater")
 			user.unset_machine()
@@ -84,8 +94,8 @@
 
 	if(panel_open)
 
-		var/dat
-		dat = "Power cell: "
+		var/list/dat = list()
+		dat += "Power cell: "
 		if(cell)
 			dat += "<A href='byond://?src=\ref[src];op=cellremove'>Installed</A><BR>"
 		else
@@ -100,9 +110,10 @@
 		dat += " [set_temperature]K ([set_temperature-T0C]&deg;C)"
 		dat += "<A href='?src=\ref[src];op=temp;val=5'>+</A><BR>"
 
-		user.set_machine(src)
-		user << browse("<HEAD><TITLE>Space Heater Control Panel</TITLE></HEAD><TT>[dat]</TT>", "window=spaceheater")
-		onclose(user, "spaceheater")
+		var/datum/browser/popup = new(usr, "spaceheater", "Space Heater Control Panel")
+		popup.set_content(jointext(dat, null))
+		popup.set_title_image(usr.browse_rsc_icon(src.icon, "sheater-standby"))
+		popup.open()
 	else
 		on = !on
 		user.visible_message("<span class='notice'>[user] switches [on ? "on" : "off"] the [src].</span>","<span class='notice'>You switch [on ? "on" : "off"] the [src].</span>")
@@ -157,7 +168,9 @@
 	if(on)
 		if(cell && cell.charge)
 			var/datum/gas_mixture/env = loc.return_air()
-			if(env && abs(env.temperature - set_temperature) > 0.1)
+			if(env && abs(env.temperature - set_temperature) <= 0.1)
+				active = 0
+			else
 				var/transfer_moles = 0.25 * env.total_moles
 				var/datum/gas_mixture/removed = env.remove(transfer_moles)
 
@@ -179,9 +192,11 @@
 
 						var/power_used = abs(heat_transfer)/cop
 						cell.use(power_used*CELLRATE)
+					active = heat_transfer
 
 				env.merge(removed)
 		else
 			on = 0
+			active = 0
 			power_change()
-			update_icon()
+		update_icon()

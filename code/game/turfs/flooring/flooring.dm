@@ -155,8 +155,12 @@ var/list/flooring_types
 	can_paint = 1
 
 /decl/flooring/reinforced/circuit/green
-	name = "processing strata"
 	icon_base = "gcircuit"
+
+/decl/flooring/reinforced/circuit/red
+	icon_base = "rcircuit"
+	flags = TURF_ACID_IMMUNE
+	can_paint = 0
 
 /decl/flooring/reinforced/cult
 	name = "engraved floor"

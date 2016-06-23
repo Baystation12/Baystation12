@@ -335,7 +335,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //When a borg is activated, it can choose which AI it wants to be slaved to
 /proc/active_ais()
 	. = list()
-	for(var/mob/living/silicon/ai/A in living_mob_list)
+	for(var/mob/living/silicon/ai/A in living_mob_list_)
 		if(A.stat == DEAD)
 			continue
 		if(A.control_disabled == 1)
@@ -637,138 +637,68 @@ proc/GaussRandRound(var/sigma,var/roundto)
 				atoms += A
 	return atoms
 
-/datum/coords //Simple datum for storing coordinates.
-	var/x_pos = null
-	var/y_pos = null
-	var/z_pos = null
-
-/area/proc/move_contents_to(var/area/A, var/turftoleave=null, var/direction = null)
+/area/proc/move_contents_to(var/area/A, var/turftoleave=null, var/direction = null, var/check_solid = 0)
 	//Takes: Area. Optional: turf type to leave behind.
 	//Returns: Nothing.
 	//Notes: Attempts to move the contents of one area to another area.
 	//       Movement based on lower left corner. Tiles that do not fit
-	//		 into the new area will not be moved.
+	//       into the new area will not be moved.
 
 	if(!A || !src) return 0
 
 	var/list/turfs_src = get_area_turfs(src.type)
 	var/list/turfs_trg = get_area_turfs(A.type)
 
-	var/src_min_x = 0
-	var/src_min_y = 0
-	for (var/turf/T in turfs_src)
-		if(T.x < src_min_x || !src_min_x) src_min_x	= T.x
-		if(T.y < src_min_y || !src_min_y) src_min_y	= T.y
+	if(!turfs_src.len || !turfs_trg.len) return 0
 
-	var/trg_min_x = 0
-	var/trg_min_y = 0
-	for (var/turf/T in turfs_trg)
-		if(T.x < trg_min_x || !trg_min_x) trg_min_x	= T.x
-		if(T.y < trg_min_y || !trg_min_y) trg_min_y	= T.y
+	//figure out a suitable origin - this assumes the shuttle areas are the exact same size and shape
+	//might be worth doing this with a shuttle core object instead of areas, in the future
+	var/src_min_x = src.x
+	var/src_min_y = src.y
 
-	var/list/refined_src = new/list()
-	for(var/turf/T in turfs_src)
-		refined_src += T
-		refined_src[T] = new/datum/coords
-		var/datum/coords/C = refined_src[T]
-		C.x_pos = (T.x - src_min_x)
-		C.y_pos = (T.y - src_min_y)
+	var/trg_z = A.z //multilevel shuttles are not supported, unfortunately
+	var/trg_min_x = A.x
+	var/trg_min_y = A.y
 
-	var/list/refined_trg = new/list()
-	for(var/turf/T in turfs_trg)
-		refined_trg += T
-		refined_trg[T] = new/datum/coords
-		var/datum/coords/C = refined_trg[T]
-		C.x_pos = (T.x - trg_min_x)
-		C.y_pos = (T.y - trg_min_y)
+	//obtain all the source turfs and their relative coords,
+	//then use that to find corresponding targets
+	for(var/turf/source in turfs_src)
+		if(check_solid && !source.is_solid_structure())
+			continue
 
-	var/list/fromupdate = new/list()
-	var/list/toupdate = new/list()
+		var/x_pos = (source.x - src_min_x)
+		var/y_pos = (source.y - src_min_y)
+		
+		var/turf/target = locate(trg_min_x + x_pos, trg_min_y + y_pos, trg_z)
+		if(!target || target.loc != A)
+			continue
 
-	moving:
-		for (var/turf/T in refined_src)
-			var/datum/coords/C_src = refined_src[T]
-			for (var/turf/B in refined_trg)
-				var/datum/coords/C_trg = refined_trg[B]
-				if(C_src.x_pos == C_trg.x_pos && C_src.y_pos == C_trg.y_pos)
+		transport_turf_contents(source, target, direction)
 
-					var/old_dir1 = T.dir
-					var/old_icon_state1 = T.icon_state
-					var/old_icon1 = T.icon
-					var/old_overlays = T.overlays.Copy()
-					var/old_underlays = T.underlays.Copy()
+	//change the old turfs
+	for(var/turf/source in turfs_src)
+		if(turftoleave)
+			source.ChangeTurf(turftoleave, 1, 1)
+		else
+			source.ChangeTurf(get_base_turf_by_area(source), 1, 1)
 
-					var/turf/X = B.ChangeTurf(T.type)
-					X.set_dir(old_dir1)
-					X.icon_state = old_icon_state1
-					X.icon = old_icon1 //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
-					X.overlays = old_overlays
-					X.underlays = old_underlays
+	//fixes lighting issue caused by turf
 
-					var/turf/simulated/ST = T
-					if(istype(ST) && ST.zone)
-						var/turf/simulated/SX = X
-						if(!SX.air)
-							SX.make_air()
-						SX.air.copy_from(ST.zone.air)
-						ST.zone.remove(ST)
+//Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
+/proc/transport_turf_contents(turf/source, turf/target, var/direction)
 
-					/* Quick visual fix for some weird shuttle corner artefacts when on transit space tiles */
-					if(direction && findtext(X.icon_state, "swall_s"))
+	var/turf/new_turf = target.ChangeTurf(source.type, 1, 1)
+	new_turf.transport_properties_from(source)
 
-						// Spawn a new shuttle corner object
-						var/obj/corner = new()
-						corner.loc = X
-						corner.density = 1
-						corner.anchored = 1
-						corner.icon = X.icon
-						corner.icon_state = replacetext(X.icon_state, "_s", "_f")
-						corner.tag = "delete me"
-						corner.name = "wall"
+	for(var/obj/O in source)
+		if(O.simulated)
+			O.forceMove(new_turf)
 
-						// Find a new turf to take on the property of
-						var/turf/nextturf = get_step(corner, direction)
-						if(!nextturf || !istype(nextturf, /turf/space))
-							nextturf = get_step(corner, turn(direction, 180))
+	for(var/mob/M in source)
+		if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable
+		M.forceMove(new_turf)
 
-
-						// Take on the icon of a neighboring scrolling space icon
-						X.icon = nextturf.icon
-						X.icon_state = nextturf.icon_state
-
-
-					for(var/obj/O in T)
-
-						// Reset the shuttle corners
-						if(O.tag == "delete me")
-							X.icon = 'icons/turf/shuttle.dmi'
-							X.icon_state = replacetext(O.icon_state, "_f", "_s") // revert the turf to the old icon_state
-							X.name = "wall"
-							qdel(O) // prevents multiple shuttle corners from stacking
-							continue
-						if(!istype(O,/obj)) continue
-						O.loc = X
-					for(var/mob/M in T)
-						if(!istype(M,/mob) || isEye(M)) continue // If we need to check for more mobs, I'll add a variable
-						M.loc = X
-
-//					var/area/AR = X.loc
-
-//					if(AR.lighting_use_dynamic)							//TODO: rewrite this code so it's not messed by lighting ~Carn
-//						X.opacity = !X.opacity
-//						X.SetOpacity(!X.opacity)
-
-					toupdate += X
-
-					if(turftoleave)
-						fromupdate += T.ChangeTurf(turftoleave)
-					else
-						T.ChangeTurf(get_base_turf_by_area(T))
-
-					refined_src -= T
-					refined_trg -= B
-					continue moving
-
+	return new_turf
 
 proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 	if(!original)
@@ -788,6 +718,12 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 					O.vars[V] = original.vars[V]
 	return O
 
+
+
+/datum/coords //Simple datum for storing coordinates.
+	var/x_pos = null
+	var/y_pos = null
+	var/z_pos = null
 
 /area/proc/copy_contents_to(var/area/A , var/platingRequired = 0 )
 	//Takes: Area. Optional: If it should copy to areas that don't have plating
@@ -1242,10 +1178,12 @@ var/mob/dview/dview_mob = new
 	..()
 	// We don't want to be in any mob lists; we're a dummy not a mob.
 	mob_list -= src
-	if(stat == DEAD)
-		dead_mob_list -= src
-	else
-		living_mob_list -= src
+
+/mob/dview/add_to_living_mob_list()
+	return
+
+/mob/dview/add_to_dead_mob_list()
+	return
 
 // call to generate a stack trace and print to runtime logs
 /proc/crash_with(msg)

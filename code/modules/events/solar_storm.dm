@@ -27,11 +27,11 @@
 		radiate()
 
 /datum/event/solar_storm/proc/radiate()
-	for(var/mob/living/L in living_mob_list)
+	for(var/mob/living/L in living_mob_list_)
 		var/turf/T = get_turf(L)
 		if(!T || !(T.z in using_map.player_levels))
 			continue
-		
+
 		if(!istype(T.loc,/area/space) && !istype(T,/turf/space))	//Make sure you're in a space area or on a space turf
 			continue
 

@@ -2,6 +2,7 @@
 	name = "vintage .45 pistol"
 	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 rounds."
 	magazine_type = /obj/item/ammo_magazine/c45m
+	allowed_magazines = /obj/item/ammo_magazine/c45m
 	icon_state = "colt"
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
@@ -12,6 +13,7 @@
 	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Found pretty much everywhere humans are. Uses .45 rounds."
 	icon_state = "secguncomp"
 	magazine_type = /obj/item/ammo_magazine/c45m/flash
+	allowed_magazines = /obj/item/ammo_magazine/c45m
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
@@ -40,7 +42,7 @@
 
 /obj/item/weapon/gun/projectile/silenced
 	name = "silenced pistol"
-	desc = "A small, quiet,  easily concealable gun. Uses .45 rounds."
+	desc = "A handgun with an integral silencer. Uses .45 rounds."
 	icon_state = "silenced_pistol"
 	w_class = 3
 	caliber = ".45"
@@ -48,6 +50,7 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c45m
+	allowed_magazines = /obj/item/ammo_magazine/c45m
 
 /obj/item/weapon/gun/projectile/deagle
 	name = "desert eagle"
@@ -58,7 +61,7 @@
 	caliber = ".50"
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a50
-	auto_eject = 1
+	allowed_magazines = /obj/item/ammo_magazine/a50
 
 /obj/item/weapon/gun/projectile/deagle/gold
 	desc = "A gold plated gun folded over a million times by superior martian gunsmiths. Uses .50 AE ammo."
@@ -69,8 +72,8 @@
 	desc = "A Deagle brand Deagle for operators operating operationally. Uses .50 AE ammo."
 	icon_state = "deaglecamo"
 	item_state = "deagleg"
+	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-
 
 
 /obj/item/weapon/gun/projectile/gyropistol
@@ -105,6 +108,7 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 2)
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mm
+	allowed_magazines = /obj/item/ammo_magazine/mc9mm
 
 /obj/item/weapon/gun/projectile/pistol/flash
 	name = "holdout signal pistol"
@@ -118,8 +122,8 @@
 				return
 			user << "<span class='notice'>You unscrew [silenced] from [src].</span>"
 			user.put_in_hands(silenced)
-			silenced = 0
-			w_class = 2
+			silenced = initial(silenced)
+			w_class = initial(w_class)
 			update_icon()
 			return
 	..()
@@ -133,7 +137,7 @@
 		user << "<span class='notice'>You screw [I] onto [src].</span>"
 		silenced = I	//dodgy?
 		w_class = 3
-		I.loc = src		//put the silencer into the gun
+		I.forceMove(src)		//put the silencer into the gun
 		update_icon()
 		return
 	..()

@@ -98,6 +98,9 @@
 
 //Checks if the item is being held by a mob, and if so, updates the held icons
 /obj/item/proc/update_twohanding()
+	update_held_icon()
+
+/obj/item/proc/update_held_icon()
 	if(ismob(src.loc))
 		var/mob/M = src.loc
 		if(M.l_hand == src)

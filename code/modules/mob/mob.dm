@@ -1,7 +1,7 @@
 /mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
 	mob_list -= src
-	dead_mob_list -= src
-	living_mob_list -= src
+	dead_mob_list_ -= src
+	living_mob_list_ -= src
 	unset_machine()
 	qdel(hud_used)
 	clear_fullscreen()
@@ -42,9 +42,9 @@
 /mob/New()
 	mob_list += src
 	if(stat == DEAD)
-		dead_mob_list += src
+		add_to_dead_mob_list()
 	else
-		living_mob_list += src
+		add_to_living_mob_list()
 	..()
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
@@ -412,7 +412,7 @@
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
 	client.screen.Cut()
-	client.screen += client.void
+	add_click_catcher()
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
@@ -1091,3 +1091,20 @@ mob/proc/yank_out_object()
 	src.in_throw_mode = 1
 	if(src.throw_icon)
 		src.throw_icon.icon_state = "act_throw_on"
+
+/mob/proc/toggle_antag_pool()
+	set name = "Toggle Add-Antag Candidacy"
+	set desc = "Toggles whether or not you will be considered a candidate by an add-antag vote."
+	set category = "OOC"
+	if(isghostmind(src.mind) || isnewplayer(src))
+		if(ticker && ticker.looking_for_antags)
+			if(src.mind in ticker.antag_pool)
+				ticker.antag_pool -= src.mind
+				usr << "You have left the antag pool."
+			else
+				ticker.antag_pool += src.mind
+				usr << "You have joined the antag pool. Make sure you have the needed role set to high!"
+		else
+			usr << "The game is not currently looking for antags."
+	else
+		usr << "You must be observing or in the lobby to join the antag pool."

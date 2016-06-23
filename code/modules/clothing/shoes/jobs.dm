@@ -4,6 +4,7 @@
 	icon_state = "galoshes"
 	permeability_coefficient = 0.05
 	item_flags = NOSLIP
+	can_hold_knife = 1
 	species_restricted = null
 
 /obj/item/clothing/shoes/galoshes/New()

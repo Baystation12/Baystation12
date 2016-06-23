@@ -95,7 +95,7 @@
 	containername = "\improper Singularity Generator crate"
 	access = access_ce
 
-/decl/hierarchy/supply_pack/engineering/engine/collector
+/decl/hierarchy/supply_pack/engineering/collector
 	name = "Collector crate"
 	contains = list(/obj/machinery/power/rad_collector = 3)
 	cost = 10
@@ -103,7 +103,7 @@
 	containername = "\improper Collector crate"
 	access = access_ce
 
-/decl/hierarchy/supply_pack/engineering/engine/PA
+/decl/hierarchy/supply_pack/engineering/PA
 	name = "Particle Accelerator crate"
 	contains = list(/obj/structure/particle_accelerator/fuel_chamber,
 					/obj/machinery/particle_accelerator/control_box,
@@ -222,8 +222,9 @@
 	access = access_robotics
 
 /decl/hierarchy/supply_pack/engineering/radsuit
-	name = "Radiation suits package"
-	contains = list(/obj/item/clothing/suit/radiation = 6)
+	name = "Radiation protection gear"
+	contains = list(/obj/item/clothing/suit/radiation = 6,
+			/obj/item/clothing/head/radiation = 6)
 	cost = 20
 	containertype = /obj/structure/closet/radiation
 	containername = "\improper Radiation suit locker"

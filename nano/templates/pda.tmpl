@@ -373,6 +373,12 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         <tr><td><span class="average">{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
                     {{/for}}
                 {{/if}}
+                {{if data.manifest.bot.length}}
+                    <tr><th colspan="3" class="bot">Synthetic</th></tr>
+                    {{for data.manifest["bot"]}}
+                        <tr><td><span class="average">{{:value.name}}</span></td><td colspan="2"><span class="average">{{:value.rank}}</span></td></tr>
+                    {{/for}}
+                {{/if}}
             </tbody></table></center>
         </div>
 

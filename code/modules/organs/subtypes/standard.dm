@@ -2,13 +2,15 @@
 			   ORGAN DEFINES
 ****************************************************/
 
+//Make sure that w_class is set as if the parent mob was medium sized! This is because w_class is adjusted automatically for mob_size in New()
+
 /obj/item/organ/external/chest
 	name = "upper body"
 	limb_name = "chest"
 	icon_name = "torso"
 	max_damage = 100
 	min_broken_damage = 35
-	w_class = 5
+	w_class = 5 //Used for dismembering thresholds, in addition to storage. Humans are w_class 6, so it makes sense that chest is w_class 5.
 	body_part = UPPER_TORSO
 	vital = 1
 	amputation_point = "spine"
@@ -93,7 +95,7 @@
 	can_stand = 1
 
 /obj/item/organ/external/foot/removed()
-	if(owner) owner.u_equip(owner.shoes)
+	if(owner) owner.drop_from_inventory(owner.shoes)
 	..()
 
 /obj/item/organ/external/foot/right
@@ -120,7 +122,7 @@
 	can_grasp = 1
 
 /obj/item/organ/external/hand/removed()
-	owner.u_equip(owner.gloves)
+	owner.drop_from_inventory(owner.gloves)
 	..()
 
 /obj/item/organ/external/hand/right
@@ -136,6 +138,7 @@
 	limb_name = "head"
 	icon_name = "head"
 	name = "head"
+	slot_flags = SLOT_BELT
 	max_damage = 75
 	min_broken_damage = 35
 	w_class = 3
@@ -151,11 +154,11 @@
 /obj/item/organ/external/head/removed()
 	if(owner)
 		name = "[owner.real_name]'s head"
-		owner.u_equip(owner.glasses)
-		owner.u_equip(owner.head)
-		owner.u_equip(owner.l_ear)
-		owner.u_equip(owner.r_ear)
-		owner.u_equip(owner.wear_mask)
+		owner.drop_from_inventory(owner.glasses)
+		owner.drop_from_inventory(owner.head)
+		owner.drop_from_inventory(owner.l_ear)
+		owner.drop_from_inventory(owner.r_ear)
+		owner.drop_from_inventory(owner.wear_mask)
 		spawn(1)
 			owner.update_hair()
 	..()

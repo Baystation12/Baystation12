@@ -18,6 +18,7 @@
 
 /mob/new_player/New()
 	mob_list += src
+	verbs += /mob/proc/toggle_antag_pool
 
 /mob/new_player/verb/new_player_panel()
 	set src = usr
@@ -273,14 +274,6 @@
 	if(!job.player_old_enough(src.client))	return 0
 	return 1
 
-/mob/new_player/proc/IsSpawnSafe(var/turf/T)
-	if(istype(T, /turf/space)) // Space tiles
-		return "Spawn location is open to space."
-	var/datum/gas_mixture/air = T.return_air()
-	if(!air)
-		return "Spawn location lacks atmosphere."
-	return is_safe_atmosphere(air, 1)
-
 /mob/new_player/proc/AttemptLateSpawn(rank,var/spawning_at)
 	if(src != usr)
 		return 0
@@ -295,7 +288,7 @@
 		return 0
 
 	var/turf/T = job_master.LateSpawn(client, rank, 1)
-	var/airstatus = IsSpawnSafe(T)
+	var/airstatus = IsTurfAtmosUnsafe(T)
 	if(airstatus)
 		var/reply = alert(usr, "Warning. Your selected spawn location seems to have unfavorable atmospheric conditions. \
 		You may die shortly after spawning. It is possible to select different spawn point via character preferences. \
@@ -512,6 +505,9 @@
 	return
 
 /mob/new_player/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
+	return
+
+/mob/new_player/show_message(msg, type, alt, alt_type)
 	return
 
 mob/new_player/MayRespawn()

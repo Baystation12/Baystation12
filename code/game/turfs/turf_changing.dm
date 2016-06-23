@@ -30,6 +30,8 @@
 
 	if(connections) connections.erase_all()
 
+	overlays.Cut()
+	underlays.Cut()
 	if(istype(src,/turf/simulated))
 		//Yeah, we're just going to rebuild the whole thing.
 		//Despite this being called a bunch during explosions,
@@ -85,3 +87,32 @@
 			lighting_build_overlays()
 		else
 			lighting_clear_overlays()
+
+/turf/proc/transport_properties_from(turf/other)
+	if(!istype(other, src.type))
+		return 0
+
+	src.set_dir(other.dir)
+	src.icon_state = other.icon_state
+	src.icon = other.icon
+	src.overlays = other.overlays.Copy()
+	src.underlays = other.underlays.Copy()
+	return 1
+
+//I would name this copy_from() but we remove the other turf from their air zone for some reason
+/turf/simulated/transport_properties_from(turf/simulated/other)
+	if(!..())
+		return 0
+
+	if(other.zone)
+		if(!src.air)
+			src.make_air()
+		src.air.copy_from(other.zone.air)
+		other.zone.remove(other)
+	return 1
+
+
+//No idea why resetting the base appearence from New() isn't enough, but without this it doesn't work
+/turf/simulated/shuttle/wall/corner/transport_properties_from(turf/simulated/other)
+	. = ..()
+	reset_base_appearance()

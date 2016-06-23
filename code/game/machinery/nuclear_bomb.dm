@@ -3,9 +3,12 @@ var/bomb_set
 /obj/machinery/nuclearbomb
 	name = "\improper Nuclear Fission Explosive"
 	desc = "Uh oh. RUN!!!!"
-	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "nuclearbomb0"
+	icon = 'icons/obj/nuke.dmi'
+	icon_state = "idle"
 	density = 1
+	use_power = 0
+	unacidable = 1
+
 	var/deployable = 0
 	var/extended = 0
 	var/lighthack = 0
@@ -18,8 +21,6 @@ var/bomb_set
 	var/obj/item/weapon/disk/nuclear/auth = null
 	var/removal_stage = 0 // 0 is no removal, 1 is covers removed, 2 is covers open, 3 is sealant open, 4 is unwrenched, 5 is removed from bolts.
 	var/lastentered
-	use_power = 0
-	unacidable = 1
 	var/previous_level = ""
 	var/datum/wires/nuclearbomb/wires = null
 
@@ -48,12 +49,12 @@ var/bomb_set
 		if (src.auth)
 			if (panel_open == 0)
 				panel_open = 1
-				overlays += image(icon, "npanel_open")
+				overlays |= "panel_open"
 				user << "You unscrew the control panel of [src]."
 				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 			else
 				panel_open = 0
-				overlays -= image(icon, "npanel_open")
+				overlays -= "panel_open"
 				user << "You screw the control panel of [src] back on."
 				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 		else
@@ -61,10 +62,10 @@ var/bomb_set
 				user << "\The [src] emits a buzzing noise, the panel staying locked in."
 			if (panel_open == 1)
 				panel_open = 0
-				overlays -= image(icon, "npanel_open")
+				overlays -= "panel_open"
 				user << "You screw the control panel of \the [src] back on."
 				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
-			flick("nuclearbombc", src)
+			flick("lock", src)
 		return
 
 	if (panel_open && (istype(O, /obj/item/device/multitool) || istype(O, /obj/item/weapon/wirecutters)))
@@ -164,7 +165,7 @@ var/bomb_set
 			visible_message("<span class='warning'>\The [src] makes a highly unpleasant crunching noise. It looks like the anchoring bolts have been cut.</span>")
 		extended = 1
 		if(!src.lighthack)
-			flick("nuclearbombc", src)
+			flick("lock", src)
 			update_icon()
 	return
 
@@ -298,6 +299,7 @@ var/bomb_set
 				safety = !safety
 				if(safety)
 					secure_device()
+				update_icon()
 			if (href_list["anchor"])
 				if(removal_stage == 5)
 					anchored = 0
@@ -338,29 +340,22 @@ var/bomb_set
 	src.yes_code = 0
 	src.safety = 1
 	update_icon()
-	
+
 	SetUniversalState(/datum/universal_state/nuclear_explosion, args=list(src))
 
 	return
 
 /obj/machinery/nuclearbomb/update_icon()
 	if(lighthack)
-		icon_state = "nuclearbomb0"
-		return
-
+		icon_state = "idle"
 	else if(timing == -1)
-		icon_state = "nuclearbomb3"
+		icon_state = "exploding"
 	else if(timing)
-		icon_state = "nuclearbomb2"
-	else if(extended)
-		icon_state = "nuclearbomb1"
+		icon_state = "urgent"
+	else if(extended || !safety)
+		icon_state = "greenlight"
 	else
-		icon_state = "nuclearbomb0"
-/*
-if(!N.lighthack)
-	if (N.icon_state == "nuclearbomb2")
-		N.icon_state = "nuclearbomb1"
-		*/
+		icon_state = "idle"
 
 //====The nuclear authentication disc====
 /obj/item/weapon/disk/nuclear
@@ -374,12 +369,12 @@ if(!N.lighthack)
 /obj/item/weapon/disk/nuclear/New()
 	..()
 	nuke_disks |= src
-	
+
 /obj/item/weapon/disk/nuclear/initialize()
 	..()
 	// Can never be quite sure that a game mode has been properly initiated or not at this point, so always register
 	moved_event.register(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level)
-	
+
 /obj/item/weapon/disk/nuclear/proc/check_z_level()
 	if(!(ticker && istype(ticker.mode, /datum/game_mode/nuclear)))
 		moved_event.unregister(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level) // However, when we are certain unregister if necessary
@@ -399,3 +394,53 @@ if(!N.lighthack)
 		else
 			log_and_message_admins("[src], the last authentication disk, has been destroyed. Failed to respawn disc!")
 	return ..()
+
+/obj/machinery/nuclearbomb/station
+	name = "station self-destruct terminal"
+	desc = "For when it all gets too much to bear. Do not taunt."
+	icon = 'icons/obj/nuke_station.dmi'
+	anchored = 1
+	deployable = 1
+	extended = 1
+
+	var/list/flash_tiles = list()
+	var/last_turf_state
+
+/obj/machinery/nuclearbomb/station/initialize()
+	..()
+	verbs -= /obj/machinery/nuclearbomb/verb/toggle_deployable
+	for(var/turf/simulated/floor/T in trange(1, src))
+		T.set_flooring(get_flooring_data(/decl/flooring/reinforced/circuit/red))
+		flash_tiles += T
+	update_icon()
+
+/obj/machinery/nuclearbomb/station/Destroy()
+	flash_tiles.Cut()
+	return ..()
+
+/obj/machinery/nuclearbomb/station/update_icon()
+	var/target_icon_state
+	if(lighthack)
+		target_icon_state = "rcircuit_off"
+		icon_state = "idle"
+	else if(timing == -1)
+		target_icon_state = "rcircuitanim"
+		icon_state = "exploding"
+	else if(timing)
+		target_icon_state = "rcircuitanim"
+		icon_state = "urgent"
+	else if(!safety)
+		target_icon_state = "rcircuit"
+		icon_state = "greenlight"
+	else
+		target_icon_state = "rcircuit_off"
+		icon_state = "idle"
+
+	if(!last_turf_state || target_icon_state != last_turf_state)
+		for(var/thing in flash_tiles)
+			var/turf/simulated/floor/T = thing
+			if(!istype(T.flooring, /decl/flooring/reinforced/circuit/red))
+				flash_tiles -= T
+				continue
+			T.icon_state = target_icon_state
+		last_turf_state = target_icon_state

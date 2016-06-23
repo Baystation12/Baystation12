@@ -156,6 +156,27 @@
 					DestroySurroundings()
 				AttackTarget()
 
+
+/mob/living/simple_animal/hostile/attackby(var/obj/item/O, var/mob/user)
+	var/oldhealth = health
+	. = ..()
+	if(health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
+		target_mob = user
+		MoveToTarget()
+
+/mob/living/simple_animal/hostile/attack_hand(mob/living/carbon/human/M)
+	. = ..()
+	if(M.a_intent == I_HURT && !incapacitated(INCAPACITATION_KNOCKOUT))
+		target_mob = M
+		MoveToTarget()
+
+/mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
+	var/oldhealth = health
+	. = ..()
+	if(!target_mob && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
+		target_mob = Proj.firer
+		MoveToTarget()
+
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
 	var/target = target_mob
 	visible_message("\red <b>[src]</b> fires at [target]!", 1)

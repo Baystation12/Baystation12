@@ -33,15 +33,6 @@
 		available_turfs = start_turfs
 	return pick(available_turfs)
 
-/proc/turf_contains_dense_objects(var/turf/T)
-	return T.contains_dense_objects()
-
-/proc/not_turf_contains_dense_objects(var/turf/T)
-	return !turf_contains_dense_objects(T)
-
-/proc/is_station_turf(var/turf/T)
-	return T && isStationLevel(T.z)
-
 /proc/get_random_turf_in_range(var/atom/origin, var/outer_range, var/inner_range)
 	origin = get_turf(origin)
 	if(!origin)
@@ -52,3 +43,27 @@
 			turfs += T
 	if(turfs.len)
 		return pick(turfs)
+
+/*
+	Predicate helpers
+*/
+
+/proc/turf_contains_dense_objects(var/turf/T)
+	return T.contains_dense_objects()
+
+/proc/not_turf_contains_dense_objects(var/turf/T)
+	return !turf_contains_dense_objects(T)
+
+/proc/is_station_turf(var/turf/T)
+	return T && isStationLevel(T.z)
+
+/proc/IsTurfAtmosUnsafe(var/turf/T)
+	if(istype(T, /turf/space)) // Space tiles
+		return "Spawn location is open to space."
+	var/datum/gas_mixture/air = T.return_air()
+	if(!air)
+		return "Spawn location lacks atmosphere."
+	return get_atmosphere_issues(air, 1)
+
+/proc/IsTurfAtmosSafe(var/turf/T)
+	return !IsTurfAtmosUnsafe(T)

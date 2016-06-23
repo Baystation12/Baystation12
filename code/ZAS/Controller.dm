@@ -158,6 +158,9 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		//defer updating of self-zone-blocked turfs until after all other turfs have been updated.
 		//this hopefully ensures that non-self-zone-blocked turfs adjacent to self-zone-blocked ones
 		//have valid zones when the self-zone-blocked turfs update.
+
+		//This ensures that doorways don't form their own single-turf zones, since doorways are self-zone-blocked and
+		//can merge with an adjacent zone, whereas zones that are formed on adjacent turfs cannot merge with the doorway.
 		var/list/deferred = list()
 
 		for(var/turf/T in updating)
