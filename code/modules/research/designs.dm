@@ -1714,8 +1714,8 @@ CIRCUITS BELOW
 	name = "airlock brace design"
 	desc = "Special door attachment that can be used to provide extra security."
 	id = "brace"
-	req_tech = list(TECH_ENGINEERING = 3, TECH_POWER = 2)
-	materials = list(DEFAULT_WALL_MATERIAL = 400, "glass" = 50)
+	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 50)
 	build_path = /obj/item/weapon/airlock_brace
 	sort_string = "VBAAP"
 
@@ -1734,7 +1734,7 @@ CIRCUITS BELOW
 	name = "maintenance jack design"
 	desc = "A special maintenance tool that can be used to remove airlock braces."
 	id = "bracejack"
-	req_tech = list(TECH_ENGINEERING = 3, TECH_POWER = 2)
+	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 120)
 	build_path = /obj/item/weapon/brace_jack
 	sort_string = "VBAAS"
