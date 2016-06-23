@@ -299,7 +299,7 @@ datum/wound/cut/massive
 
 /** PUNCTURES **/
 /datum/wound/puncture
-	bleed_threshold = 5
+	bleed_threshold = 10
 	damage_type = PIERCE
 
 /datum/wound/puncture/can_worsen(damage_type, damage)
