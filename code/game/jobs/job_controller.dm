@@ -42,6 +42,12 @@ var/global/datum/controller/occupations/job_master
 			if(J.title == rank)	return J
 		return null
 
+	proc/ShouldCreateRecords(var/rank)
+		if(!rank) return 0
+		var/datum/job/job = GetJob(rank)
+		if(!job) return 0
+		return job.create_record
+
 	proc/GetPlayerAltTitle(mob/new_player/player, rank)
 		return player.client.prefs.GetPlayerAltTitle(GetJob(rank))
 
