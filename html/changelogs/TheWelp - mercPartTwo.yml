@@ -1,0 +1,4 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Adds traders and a trader process."
