@@ -81,7 +81,6 @@
 	title = "Security Contractor"
 	department = "Science"
 	department_flag = SCI
-	flag = CONTRACTOR
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
