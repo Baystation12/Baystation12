@@ -10,18 +10,19 @@
 /datum/category_item/player_setup_item/occupation/load_character(var/savefile/S)
 	S["alternate_option"]	>> pref.alternate_option
 	S["job_high"]	>> pref.job_high
-	var/params
-	S["job_medium"]	>> params
-	pref.job_medium = params2list(params)
-	S["job_civilian_low"]	>> params
-	pref.job_low = params2list(params)
+	S["job_medium"]	>> pref.job_medium
+	S["job_low"]	>> pref.job_low
+	if(!pref.job_medium)
+		pref.job_medium = list()
+	if(!pref.job_low)
+		pref.job_low = list()
 	S["player_alt_titles"]	>> pref.player_alt_titles
 
 /datum/category_item/player_setup_item/occupation/save_character(var/savefile/S)
 	S["alternate_option"]	<< pref.alternate_option
 	S["job_high"]	<< pref.job_high
-	S["job_medium"]	<< list2params(pref.job_medium)
-	S["job_low"]	<< list2params(pref.job_low)
+	S["job_medium"]	<< pref.job_medium
+	S["job_low"]	<< pref.job_low
 	S["player_alt_titles"]	<< pref.player_alt_titles
 
 /datum/category_item/player_setup_item/occupation/sanitize_character()
