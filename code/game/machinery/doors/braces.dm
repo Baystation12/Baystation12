@@ -34,9 +34,9 @@
 	var/list/keycards = list()
 
 
-/obj/item/weapon/airlock_brace/examine()
+/obj/item/weapon/airlock_brace/examine(var/mob/user)
 	..()
-	usr << examine_health()
+	user << examine_health()
 
 
 // This is also called from airlock's examine, so it's a different proc to prevent code copypaste.
@@ -84,25 +84,25 @@
 		if(!airlock)
 			C.brace = src
 			keycards |= C
-			usr << "You swipe \the [C] through \the [src]. A small green light blinks on \the [C]."
+			user << "You swipe \the [C] through \the [src]. A small green light blinks on \the [C]."
 		else
 			if(C.brace == src)
-				usr << "You swipe \the [C] through \the [src]."
-				if(do_after(usr, 10, airlock))
-					usr << "\The [src] clicks few times and detaches itself from \the [airlock]!"
+				user << "You swipe \the [C] through \the [src]."
+				if(do_after(user, 10, airlock))
+					user << "\The [src] clicks few times and detaches itself from \the [airlock]!"
 					unlock_brace(usr)
 			else
-				usr << "You swipe \the [C] through \the [src], but it does not react."
+				user << "You swipe \the [C] through \the [src], but it does not react."
 		return
 
 	if (istype(W, /obj/item/weapon/brace_jack))
 		if(!airlock)
 			return
 		var/obj/item/weapon/brace_jack/C = W
-		usr << "You begin forcibly removing \the [src] with \the [C]."
-		if(do_after(usr, rand(150,300), airlock))
-			usr << "You finish removing \the [src]."
-			unlock_brace(usr)
+		user << "You begin forcibly removing \the [src] with \the [C]."
+		if(do_after(user, rand(150,300), airlock))
+			user << "You finish removing \the [src]."
+			unlock_brace(user)
 		return
 
 	if(istype(W, /obj/item/weapon/weldingtool))
