@@ -252,35 +252,36 @@
 
 // update the icon_state and luminosity of the light depending on its state
 /obj/machinery/light/proc/update(var/trigger = 1)
-
 	update_icon()
 	if(on)
-		if(light_range != brightness_range || light_power != brightness_power || light_color != brightness_color)
-			switchcount++
-			if(rigged)
-				if(status == LIGHT_OK && trigger)
+		use_power = 2
 
-					log_admin("LOG: Rigged light explosion, last touched by [fingerprintslast]")
-					message_admins("LOG: Rigged light explosion, last touched by [fingerprintslast]")
+		var/changed = 0
+		if(current_mode && (current_mode in lighting_modes))
+			changed = set_light(arglist(lighting_modes[current_mode]))
+		else
+			changed = set_light(brightness_range, brightness_power, brightness_color)
 
-					explode()
-			else if( prob( min(60, switchcount*switchcount*0.01) ) )
-				if(status == LIGHT_OK && trigger)
-					status = LIGHT_BURNED
-					icon_state = "[base_state]-burned"
-					on = 0
-					set_light(0)
-			else
-				use_power = 2
-				if(current_mode && (current_mode in lighting_modes))
-					set_light(arglist(lighting_modes[current_mode]))
-				else
-					set_light(brightness_range, brightness_power, brightness_color)
+		if(trigger && changed)
+			switch_check()
 	else
-		use_power = 1
+		use_power = 0
 		set_light(0)
 
-	active_power_usage = ((light_range + light_power) * 10)
+	active_power_usage = ((light_range * light_power) * 5)
+
+/obj/machinery/light/proc/switch_check()
+	if(status != LIGHT_OK)
+		return //already busted
+
+	switchcount++
+	if(rigged)
+		log_admin("LOG: Rigged light explosion, last touched by [fingerprintslast]")
+		message_admins("LOG: Rigged light explosion, last touched by [fingerprintslast]")
+
+		explode()
+	else if( prob( min(60, switchcount*switchcount*0.01) ) )
+		burn_out()
 
 /obj/machinery/light/attack_generic(var/mob/user, var/damage)
 	if(!damage)
@@ -299,6 +300,16 @@
 	if(current_mode != new_mode)
 		current_mode = new_mode
 		update(0)
+
+/obj/machinery/light/proc/set_emergency_lighting(var/enable)
+	if(enable)
+		if("emergency_lighting" in lighting_modes)
+			set_mode("emergency_lighting")
+			power_channel = ENVIRON
+	else
+		if(current_mode == "emergency_lighting")
+			set_mode(null)
+			power_channel = initial(power_channel)
 
 // attempt to set the light's on/off status
 // will not switch on if broken/burned/empty
@@ -423,7 +434,7 @@
 // true if area has power and lightswitch is on
 /obj/machinery/light/powered()
 	var/area/A = get_area(src)
-	return A && A.lightswitch && (!A.requires_power || A.power_light)
+	return A && A.lightswitch && ..(power_channel)
 
 /obj/machinery/light/proc/flicker(var/amount = rand(10, 20))
 	if(flickering) return
@@ -607,6 +618,11 @@
 		explosion(T, 0, 0, 2, 2)
 		sleep(1)
 		qdel(src)
+
+obj/machinery/light/proc/burn_out()
+	status = LIGHT_BURNED
+	update_icon()
+	set_light(0)
 
 // the light item
 // can be tube or bulb subtypes
