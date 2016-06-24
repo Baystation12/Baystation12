@@ -1128,14 +1128,14 @@
 			environ = autoset(environ, 1)
 			autoflag = 3
 			power_alarm.clearAlarm(loc, src)
-	else if((cell.percent() <= 30) && (cell.percent() > 15) && longtermpower < 0)                       // <30%, turn off equipment
+	else if((cell.percent() <= 30) && (cell.percent() > 20) && longtermpower < 0)                       // <30%, turn off equipment
 		if(autoflag != 2)
 			equipment = autoset(equipment, 2)
 			lighting = autoset(lighting, 1)
 			environ = autoset(environ, 1)
 			power_alarm.triggerAlarm(loc, src)
 			autoflag = 2
-	else if(cell.percent() <= 15)        // <15%, turn off lighting & equipment
+	else if(cell.percent() <= 20)        // <20%, turn off lighting & equipment
 		if((autoflag > 1 && longtermpower < 0) || (autoflag > 1 && longtermpower >= 0))
 			equipment = autoset(equipment, 2)
 			lighting = autoset(lighting, 2)
