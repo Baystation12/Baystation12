@@ -75,8 +75,8 @@
 	var/offline = 1                                           // Should we be applying suit maluses?
 	var/online_slowdown = 0                                   // If the suit is deployed and powered, it sets slowdown to this.
 	var/offline_slowdown = 3                                  // If the suit is deployed and unpowered, it sets slowdown to this.
-	var/vision_restriction
-	var/offline_vision_restriction = 1                        // 0 - none, 1 - welder vision, 2 - blind. Maybe move this to helmets.
+	var/vision_restriction = TINT_NONE
+	var/offline_vision_restriction = TINT_HEAVY               // tint value given to helmet
 	var/airtight = 1 //If set, will adjust AIRTIGHT and STOPPRESSUREDAMAGE flags on components. Otherwise it should leave them untouched.
 
 	var/emp_protection = 0
@@ -172,9 +172,9 @@
 
 /obj/item/weapon/rig/proc/set_slowdown_and_vision(var/active)
 	if(chest)
-		chest.slowdown_per_slot[slot_wear_suit] = active? online_slowdown : offline_slowdown
-	//if(helmet)
-	//	helmet. tint = TODO
+		chest.slowdown_per_slot[slot_wear_suit] = (active? online_slowdown : offline_slowdown)
+	if(helmet)
+		helmet.tint = (active? vision_restriction : offline_vision_restriction)
 
 /obj/item/weapon/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || wearer.back != src)
@@ -349,9 +349,9 @@
 					wearer << "<span class='danger'>Your suit beeps stridently, and suddenly goes dead.</span>"
 				else
 					wearer << "<span class='danger'>Your suit beeps stridently, and suddenly you're wearing a leaden mass of metal and plastic composites instead of a powered suit.</span>"
-			if(offline_vision_restriction == 1)
+			if(offline_vision_restriction >= TINT_MODERATE)
 				wearer << "<span class='danger'>The suit optics flicker and die, leaving you with restricted vision.</span>"
-			else if(offline_vision_restriction == 2)
+			else if(offline_vision_restriction >= TINT_BLIND)
 				wearer << "<span class='danger'>The suit optics drop out completely, drowning you in darkness.</span>"
 
 			if(electrified > 0)
