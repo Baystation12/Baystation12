@@ -143,10 +143,6 @@
 	power_channel = LIGHT //Lights are calc'd via area so they dont need to be in the machine list
 
 	var/on = 0					// 1 if on, 0 if off
-	var/on_gs = 0
-	var/brightness_range = 8	// luminosity when on, also used in power calculation
-	var/brightness_power = 3
-	var/brightness_color = "#FFFFFF"
 	var/status = LIGHT_OK		// LIGHT_OK, _EMPTY, _BURNED or _BROKEN
 	var/flickering = 0
 	var/light_type = /obj/item/weapon/light/tube		// the type of light item
@@ -157,22 +153,31 @@
 	var/rigged = 0				// true if rigged to explode
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 
-	var/has_emergency_mode = 1 // If true, light power failures that don't remove or totally
-							   // drain the APC will result in dim red emergency lights.
-	var/emergency_brightness_range = 5
-	var/emergency_brightness_power = 2
-	var/emergency_brightness_color = "#da0205"
+	//default lighting
+	var/brightness_range = 8	// luminosity when on, also used in power calculation
+	var/brightness_power = 3
+	var/brightness_color = "#FFFFFF"
+
+	var/current_mode = null
+	var/list/lighting_modes = list(
+		"emergency_lighting" = list(l_range = 5, l_power = 2, l_color = "#da0205"), 
+		)
 
 // the smaller bulb light fixture
 /obj/machinery/light/small
 	icon_state = "bulb1"
 	base_state = "bulb"
 	fitting = "bulb"
+	desc = "A small lighting fixture."
+	light_type = /obj/item/weapon/light/bulb
+
 	brightness_range = 4
 	brightness_power = 2
 	brightness_color = "#a0a080"
-	desc = "A small lighting fixture."
-	light_type = /obj/item/weapon/light/bulb
+
+	lighting_modes = list(
+			"emergency_lighting" = list(l_range = 4, l_power = 1, l_color = "#da0205"),
+			)
 
 /obj/machinery/light/small/emergency
 	brightness_range = 4
@@ -267,33 +272,15 @@
 					set_light(0)
 			else
 				use_power = 2
-				set_light(brightness_range, brightness_power, brightness_color)
-
-	else if(has_emergency_mode)
-
-		use_power = 1
-
-		var/no_power
-		var/area/A = get_area(src)
-		if(!A || !A.lightswitch)
-			no_power = 1
-		else
-			var/obj/machinery/power/apc/apc = A.get_apc()
-			// 'apc.lighting != 1' ==  APC lighting channel not set to auto-off
-			if(!istype(apc) || apc.lighting != 1 || !apc.cell || apc.cell.percent() < 1)
-				no_power = 1
-
-		if(no_power)
-			set_light(0)
-		else
-			set_light(emergency_brightness_range, emergency_brightness_power, emergency_brightness_color)
+				if(current_mode && (current_mode in lighting_modes))
+					set_light(arglist(lighting_modes[current_mode]))
+				else
+					set_light(brightness_range, brightness_power, brightness_color)
 	else
 		use_power = 1
 		set_light(0)
 
 	active_power_usage = ((light_range + light_power) * 10)
-	if(on != on_gs)
-		on_gs = on
 
 /obj/machinery/light/attack_generic(var/mob/user, var/damage)
 	if(!damage)
@@ -307,6 +294,11 @@
 	attack_animation(user)
 	broken()
 	return 1
+
+/obj/machinery/light/proc/set_mode(var/new_mode)
+	if(current_mode != new_mode)
+		current_mode = new_mode
+		update(0)
 
 // attempt to set the light's on/off status
 // will not switch on if broken/burned/empty
