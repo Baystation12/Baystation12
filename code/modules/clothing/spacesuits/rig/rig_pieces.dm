@@ -67,8 +67,8 @@
 	if(user.wear_suit != src)
 		return 0 //not wearing the suit
 	var/obj/item/weapon/rig/rig = user.back
-	if(!istype(rig) || rig.offline)
-		return 0 //not wearing a rig control unit or it's offline
+	if(!istype(rig) || rig.offline || rig.canremove)
+		return 0 //not wearing a rig control unit or it's offline or unsealed
 	return 1
 
 /obj/item/clothing/suit/space/rig/proc/check_limb_support(var/mob/living/carbon/human/user)
@@ -80,20 +80,20 @@
 	if(can_support(user))
 		for(var/obj/item/organ/external/E in user.bad_external_organs)
 			if((E.body_part & body_parts_covered) && E.is_broken() && E.apply_splint(src))
-				user << "You feel [src] constrict about your [E.name], supporting it."
+				user << "<span class='notice'>You feel [src] constrict about your [E.name], supporting it.</span>"
 				supporting_limbs |= E
 	else
 		// Otherwise, remove the splints.
 		for(var/obj/item/organ/external/E in supporting_limbs)
 			if(E.splinted == src && E.remove_splint(src))
-				user << "\The [src] stops supporting your [E.name]."
+				user << "<span class='notice'>\The [src] stops supporting your [E.name].</span>"
 		supporting_limbs.Cut()
 
 /obj/item/clothing/suit/space/rig/proc/handle_fracture(var/mob/living/carbon/human/user, var/obj/item/organ/external/E)
 	if(!istype(user) || isnull(supporting_limbs) || !can_support(user))
 		return
 	if((E.body_part & body_parts_covered) && E.is_broken() && E.apply_splint(src))
-		user << "You feel [src] constrict about your [E.name], supporting it."
+		user << "<span class='notice'>You feel [src] constrict about your [E.name], supporting it.</span>"
 		supporting_limbs |= E
 
 

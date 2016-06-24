@@ -137,7 +137,6 @@
 		chest = new chest_type(src)
 		if(allowed)
 			chest.allowed = allowed
-		set_slowdown(offline_slowdown)
 		verbs |= /obj/item/weapon/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
@@ -155,7 +154,7 @@
 		piece.unacidable = unacidable
 		if(islist(armor)) piece.armor = armor.Copy()
 
-	set_slowdown(online_slowdown)
+	set_slowdown_and_vision(!offline)
 	update_icon(1)
 
 /obj/item/weapon/rig/Destroy()
@@ -171,8 +170,11 @@
 	spark_system = null
 	return ..()
 
-/obj/item/weapon/rig/proc/set_slowdown(var/new_slowdown)
-	chest.slowdown_per_slot[slot_wear_suit] = new_slowdown
+/obj/item/weapon/rig/proc/set_slowdown_and_vision(var/active)
+	if(chest)
+		chest.slowdown_per_slot[slot_wear_suit] = active? online_slowdown : offline_slowdown
+	//if(helmet)
+	//	helmet. tint = TODO
 
 /obj/item/weapon/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || wearer.back != src)
@@ -188,8 +190,9 @@
 	return 1
 
 /obj/item/weapon/rig/proc/reset()
-	offline = 2
 	canremove = 1
+	if(istype(chest))
+		chest.check_limb_support(wearer)
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(!piece) continue
 		piece.icon_state = "[initial(icon_state)]"
@@ -337,56 +340,52 @@
 				M.drop_from_inventory(piece)
 			piece.forceMove(src)
 
-	update_offline()
-	if(offline)
-		if(offline == 1)
-			for(var/obj/item/rig_module/module in installed_modules)
-				module.deactivate()
-			offline = 2
-			set_slowdown(offline_slowdown)
-		return
+	var/changed = update_offline()
+	if(changed)
+		if(offline)
+			//notify the wearer
+			if(!canremove)
+				if (offline_slowdown < 3)
+					wearer << "<span class='danger'>Your suit beeps stridently, and suddenly goes dead.</span>"
+				else
+					wearer << "<span class='danger'>Your suit beeps stridently, and suddenly you're wearing a leaden mass of metal and plastic composites instead of a powered suit.</span>"
+			if(offline_vision_restriction == 1)
+				wearer << "<span class='danger'>The suit optics flicker and die, leaving you with restricted vision.</span>"
+			else if(offline_vision_restriction == 2)
+				wearer << "<span class='danger'>The suit optics drop out completely, drowning you in darkness.</span>"
 
-	if(cell && cell.charge > 0 && electrified > 0)
-		electrified--
-
-	if(malfunction_delay > 0)
-		malfunction_delay--
-	else if(malfunctioning)
-		malfunctioning--
-		malfunction()
-
-	for(var/obj/item/rig_module/module in installed_modules)
-		cell.use(module.process()*10)
-
-//offline should not be set outside of this proc
-/obj/item/weapon/rig/proc/update_offline()
-	if(!istype(wearer) || loc != wearer || wearer.back != src || canremove || !cell || cell.charge <= 0)
-		if(!cell || cell.charge <= 0)
 			if(electrified > 0)
 				electrified = 0
-			if(!offline)
-				if(istype(wearer))
-					if(!canremove)
-						if (offline_slowdown < 3)
-							wearer << "<span class='danger'>Your suit beeps stridently, and suddenly goes dead.</span>"
-						else
-							wearer << "<span class='danger'>Your suit beeps stridently, and suddenly you're wearing a leaden mass of metal and plastic composites instead of a powered suit.</span>"
-					if(offline_vision_restriction == 1)
-						wearer << "<span class='danger'>The suit optics flicker and die, leaving you with restricted vision.</span>"
-					else if(offline_vision_restriction == 2)
-						wearer << "<span class='danger'>The suit optics drop out completely, drowning you in darkness.</span>"
-		if(!offline)
-			offline = 1
-			if(istype(chest))
-				chest.check_limb_support()
-	else
-		if(offline)
-			offline = 0
+			for(var/obj/item/rig_module/module in installed_modules)
+				module.deactivate()
+		else
 			if(istype(wearer) && !wearer.wearing_rig)
 				wearer.wearing_rig = src
-			set_slowdown(online_slowdown)
-			if(istype(chest))
-				chest.check_limb_support()
+
+		set_slowdown_and_vision(!offline)
+		if(istype(chest))
+			chest.check_limb_support(wearer)
+
+	if(!offline)
+		if(cell && cell.charge > 0 && electrified > 0)
+			electrified--
+
+		if(malfunction_delay > 0)
+			malfunction_delay--
+		else if(malfunctioning)
+			malfunctioning--
+			malfunction()
+
+		for(var/obj/item/rig_module/module in installed_modules)
+			cell.use(module.process()*10)
+
+//offline should not change outside this proc
+/obj/item/weapon/rig/proc/update_offline()
+	var/go_offline = (!istype(wearer) || loc != wearer || wearer.back != src || canremove || sealing || !cell || cell.charge <= 0)
+	if(offline != go_offline)
+		offline = go_offline
+		return 1
+	return 0
 
 /obj/item/weapon/rig/proc/check_power_cost(var/mob/living/user, var/cost, var/use_unconcious, var/obj/item/rig_module/mod, var/user_is_ai)
 
