@@ -3,7 +3,7 @@
 //stuff like that.
 
 var/list/worths = list(
-//REAGENT CONTAINERS
+//REAGENT CONTAINERS,
 					/obj/item/weapon/reagent_containers/hypospray = -90,
 					/obj/item/weapon/reagent_containers/spray = -23,
 					/obj/item/weapon/reagent_containers/food/snacks/human = -300,
@@ -15,7 +15,7 @@ var/list/worths = list(
 					/obj/item/weapon/reagent_containers/glass/fertilizer = -25,
 					/obj/item/weapon/reagent_containers/glass = -60,
 					/obj/item/weapon/reagent_containers = -1,
-//GUNS
+//GUNS,
 					/obj/item/weapon/gun/energy/laser/practice = 500,
 					/obj/item/weapon/gun/energy/laser = 3000,
 					/obj/item/weapon/gun/energy/retro = 1400,
@@ -32,19 +32,19 @@ var/list/worths = list(
 					/obj/item/weapon/gun/energy/crossbow = 750,
 					/obj/item/weapon/gun/energy/temperature = 3000,
 					/obj/item/weapon/gun/energy = 2100,
-
+//LAUNCHERS,
 					/obj/item/weapon/gun/launcher/crossbow = 120,
 					/obj/item/weapon/gun/launcher/pneumatic = 200,
 					/obj/item/weapon/gun/launcher/syringe = 150,
 					/obj/item/weapon/gun/launcher/spikethrower = 3500,
 					/obj/item/weapon/gun/launcher = 300,
-
+//AUTOMATICS,
 					/obj/item/weapon/gun/projectile/automatic/c20r = 3250,
 					/obj/item/weapon/gun/projectile/automatic/sts35 = 3800,
 					/obj/item/weapon/gun/projectile/automatic/z8 = 3100,
 					/obj/item/weapon/gun/projectile/automatic/l6_saw = 13400,
 					/obj/item/weapon/gun/projectile/automatic = 3000,
-
+//PROJECTILE,
 					/obj/item/weapon/gun/projectile/colt = 1700,
 					/obj/item/weapon/gun/projectile/sec = 1650,
 					/obj/item/weapon/gun/projectile/deagle/gold = 3000,
@@ -53,10 +53,9 @@ var/list/worths = list(
 					/obj/item/weapon/gun/projectile/heavysniper = 12000,
 					/obj/item/weapon/gun/projectile/silenced = 1700,
 					/obj/item/weapon/gun/projectile = 1500,
-
+//GUN,
 					/obj/item/weapon/gun = 500,
-
-//STACKS
+//MATERIAL STACKS,
 					/obj/item/stack/material/marble = -20,
 					/obj/item/stack/material/diamond = -60,
 					/obj/item/stack/material/uranium = -120,
@@ -75,7 +74,7 @@ var/list/worths = list(
 					/obj/item/stack/material/glass/phoronglass = -35,
 					/obj/item/stack/material/glass/phoronrglass = -65,
 					/obj/item/stack/material = -5,
-
+//STACKS,
 					/obj/item/stack/medical/advanced/bruise_pack = -30,
 					/obj/item/stack/medical/advanced/ointment = -40,
 					/obj/item/stack/medical/splint = -25,
@@ -85,14 +84,13 @@ var/list/worths = list(
 					/obj/item/stack/telecrystal = -100,
 					/obj/item/stack/wax = -5,
 					/obj/item/stack = -5,
-
-//STORAGE
+//STORAGE,
 					/obj/item/weapon/storage/briefcase/crimekit = -50,
 					/obj/item/weapon/storage = -30,
-//WEAPONS
+//WEAPONS,
 					/obj/item/weapon/ore = 10,
 					/obj/item/weapon/mining_scanner =  130,
-//PICK AXES
+//PICK AXES,
 					/obj/item/weapon/pickaxe/silver = 300,
 					/obj/item/weapon/pickaxe/drill = 100,
 					/obj/item/weapon/pickaxe/jackhammer = 90,
@@ -101,7 +99,6 @@ var/list/worths = list(
 					/obj/item/weapon/pickaxe/diamond = 600,
 					/obj/item/weapon/pickaxe/diamonddrill = 700,
 					/obj/item/weapon/pickaxe = 30,
-
 					/obj/item/weapon/shovel/spade = 20,
 					/obj/item/weapon/slimepotion = 200,
 					/obj/item/weapon/slimepotion2 = 300,
@@ -110,7 +107,7 @@ var/list/worths = list(
 					/obj/item/weapon/portable_destructive_analyzer = 780,
 					/obj/item/weapon/inflatable_dispenser = 300,
 					/obj/item/weapon/matter_decompiler = 400,
-//COMPUTER HARDWARE
+//COMPUTER HARDWARE,
 					/obj/item/weapon/computer_hardware/battery_module/advanced = 110,
 					/obj/item/weapon/computer_hardware/battery_module/super = 150,
 					/obj/item/weapon/computer_hardware/battery_module/ultra = 190,
@@ -134,9 +131,8 @@ var/list/worths = list(
 					/obj/item/weapon/computer_hardware/tesla_link = 350,
 					/obj/item/weapon/computer_hardware = 80,
 					/obj/item/weapon/computer_hardware/hard_drive = 125,
-
 					/obj/item/weapon/clipboard = 15,
-//POWER CELLS
+//POWER CELLS,
 					/obj/item/weapon/cell/device = 100,
 					/obj/item/weapon/cell/crap = 30,
 					/obj/item/weapon/cell/apc = 130,
@@ -148,12 +144,11 @@ var/list/worths = list(
 					/obj/item/weapon/cell/potato = 1,
 					/obj/item/weapon/cell/slime = 160,
 					/obj/item/weapon/cell = 60,
-//SMES COILS
+//SMES COILS,
 					/obj/item/weapon/smes_coil/weak = 1000,
 					/obj/item/weapon/smes_coil/super_capacity = 5000,
 					/obj/item/weapon/smes_coil/super_io = 4500,
 					/obj/item/weapon/smes_coil = 2000,
-
 					/obj/item/weapon/tracker_electronics = 150,
 					/obj/item/weapon/am_containment = 5000,
 					/obj/item/weapon/syringe_cartridge = 20,
@@ -176,8 +171,7 @@ var/list/worths = list(
 					/obj/item/weapon/caution = 15,
 					/obj/item/weapon/SWF_uplink = 300,
 					/obj/item/weapon/module = 100,
-
-//STOCK PARTS
+//STOCK PARTS,
 					/obj/item/weapon/stock_parts/capacitor/adv = 160,
 					/obj/item/weapon/stock_parts/scanning_module/adv = 160,
 					/obj/item/weapon/stock_parts/manipulator/nano = 160,
@@ -196,7 +190,6 @@ var/list/worths = list(
 					/obj/item/weapon/stock_parts/subspace/crystal = 530,
 					/obj/item/weapon/stock_parts/subspace/transmitter = 620,
 					/obj/item/weapon/stock_parts = 80,
-
 					/obj/item/weapon/ectoplasm = 10,
 					/obj/item/weapon/toy/xmas_cracker = 20,
 					/obj/item/weapon/pinpointer = 180,
@@ -211,13 +204,12 @@ var/list/worths = list(
 					/obj/item/weapon/cartridge = 50,
 					/obj/item/weapon/aiModule = 3000,
 					/obj/item/weapon/autopsy_scanner = 180,
-//CARDS
+//CARDS,
 					/obj/item/weapon/card/emag = 300,
 					/obj/item/weapon/card/id/silver = 200,
 					/obj/item/weapon/card/id/gold = 300,
 					/obj/item/weapon/card/id/captains_spare = 300,
 					/obj/item/weapon/card/id = 30,
-
 					/obj/item/weapon/flame/match = 1,
 					/obj/item/weapon/flame/lighter/zippo = 10,
 					/obj/item/weapon/dnainjector = 70,
@@ -233,7 +225,7 @@ var/list/worths = list(
 					/obj/item/weapon/teleportation_scroll = 1000,
 					/obj/item/weapon/shield/riot = 150,
 					/obj/item/weapon/shield/energy = 1200,
-//SURGERY
+//SURGERY,
 					/obj/item/weapon/retractor = 80,
 					/obj/item/weapon/hemostat = 90,
 					/obj/item/weapon/cautery = 110,
@@ -247,25 +239,23 @@ var/list/worths = list(
 					/obj/item/weapon/bonegel = 300,
 					/obj/item/weapon/FixOVein = 500,
 					/obj/item/weapon/bonesetter = 150,
-
 					/obj/item/weapon/locator = 100,
 					/obj/item/weapon/hand_tele = 7600,
 					/obj/item/weapon/wrench = 30,
 					/obj/item/weapon/screwdriver = 15,
 					/obj/item/weapon/wirecutters = 25,
-//WELDINGTOOLS
+//WELDINGTOOLS,
 					/obj/item/weapon/weldingtool/largetank = 150,
 					/obj/item/weapon/weldingtool/hugetank = 300,
 					/obj/item/weapon/weldingtool/experimental = 600,
 					/obj/item/weapon/weldingtool = 100,
-
 					/obj/item/weapon/crowbar = 10,
 					/obj/item/weapon/beartrap = 35,
 					/obj/item/weapon/nullrod = 60,
 					/obj/item/weapon/weldpack = 300,
 					/obj/item/weapon/circuitboard/aicore = 6000,
 					/obj/item/weapon/circuitboard = 1000,
-//GRENADES
+//GRENADES,
 					/obj/item/weapon/grenade/anti_photon = 200,
 					/obj/item/weapon/grenade/empgrenade = 180,
 					/obj/item/weapon/grenade/frag = 300,
@@ -273,10 +263,9 @@ var/list/worths = list(
 					/obj/item/weapon/grenade/spawnergrenade/spesscarp = 350,
 					/obj/item/weapon/grenade/spawnergrenade = 300,
 					/obj/item/weapon/grenade = 150,
-
 					/obj/item/weapon/implant = 100,
 					/obj/item/weapon/implanter = 80,
-//MELEE
+//MELEE,
 					/obj/item/weapon/melee/cultblade = 500,
 					/obj/item/weapon/melee/energy/axe = 3400,
 					/obj/item/weapon/melee/energy = 1200,
@@ -285,11 +274,10 @@ var/list/worths = list(
 					/obj/item/weapon/melee/baton = 80,
 					/obj/item/weapon/melee/classic_baton = 30,
 					/obj/item/weapon/melee/telebaton = 90,
-
 					/obj/item/weapon/tank/jetpack = 390,
 					/obj/item/weapon/tank = 40,
 					/obj/item/weapon/contraband/poster = 25,
-//RIGS
+//RIGS,
 					/obj/item/weapon/rig/unathi/fancy = 30000,
 					/obj/item/weapon/rig/unathi = 17000,
 					/obj/item/weapon/rig/combat = 25000,
@@ -301,7 +289,6 @@ var/list/worths = list(
 					/obj/item/weapon/rig/merc = 25000,
 					/obj/item/weapon/rig/internalaffairs = 9000,
 					/obj/item/weapon/rig = 15000,
-
 					/obj/item/weapon/forensics = 65,
 					/obj/item/weapon/evidencebag = 5,
 					/obj/item/weapon/sample = 15,
@@ -312,8 +299,8 @@ var/list/worths = list(
 					/obj/item/weapon/beach_ball/holoball = 0,
 					/obj/item/weapon/book = 15,
 					/obj/item/weapon/barcodescanner = 130,
-//CLOTHING
-//EARS
+//CLOTHING,
+//EARS,
 					/obj/item/clothing/ears/skrell = 100,
 					/obj/item/clothing/ears/skrell/chain/silver = 170,
 					/obj/item/clothing/ears/skrell/chain/bluejewels = 400,
@@ -325,12 +312,12 @@ var/list/worths = list(
 					/obj/item/clothing/ears/skrell/band/redjewels = 360,
 					/obj/item/clothing/ears/skrell/band/ebony = 355,
 					/obj/item/clothing/ears/skrell/band = 200,
-//GLASSES
+//GLASSES,
 					/obj/item/clothing/glasses/meson/prescription = 880,
 					/obj/item/clothing/glasses/meson = 800,
 					/obj/item/clothing/glasses/science = 400,
 					/obj/item/clothing/glasses/night = 1000,
-					/obj/item/clothing/glasses/regular/hipster = 400, //Hipstering is an expensive lifestyle yo
+					/obj/item/clothing/glasses/regular/hipster = 400, //Hipstering is an expensive lifestyle yo,
 					/obj/item/clothing/glasses/regular = 300,
 					/obj/item/clothing/glasses/welding/superior = 450,
 					/obj/item/clothing/glasses/welding = 250,
@@ -339,18 +326,18 @@ var/list/worths = list(
 					/obj/item/clothing/glasses/sunglasses/sechud = 530,
 					/obj/item/clothing/glasses/thermal = 990,
 					/obj/item/clothing/glasses = 150,
-//GLOVES
+//GLOVES,
 					/obj/item/clothing/gloves/boxing = 60,
 					/obj/item/clothing/gloves/white = 20,
 					/obj/item/clothing/gloves/yellow = 300,
-					/obj/item/clothing/gloves/fyellow = 25, //cheap cheap cheap
+					/obj/item/clothing/gloves/fyellow = 25, //cheap cheap cheap,
 					/obj/item/clothing/gloves/black = 350,
 					/obj/item/clothing/gloves/captain = 100,
 					/obj/item/clothing/gloves/swat = 125,
 					/obj/item/clothing/gloves/combat = 400,
 					/obj/item/clothing/gloves/latex = 5,
 					/obj/item/clothing/gloves/botanic_leather = 6,
-//MASKS
+//MASKS,
 					/obj/item/clothing/mask/luchador = 60,
 					/obj/item/clothing/mask/breath/medical = 180,
 					/obj/item/clothing/mask/breath = 80,
@@ -372,7 +359,7 @@ var/list/worths = list(
 					/obj/item/clothing/shoes/magboots = 350,
 					/obj/item/clothing/shoes/swat = 100,
 					/obj/item/clothing/shoes/combat = 200,
-//SUITS
+//SUITS,
 					/obj/item/clothing/suit/space/skrell = 1500,
 					/obj/item/clothing/suit/space/void/merc = 3000,
 					/obj/item/clothing/suit/space/void/security = 3000,
@@ -403,7 +390,7 @@ var/list/worths = list(
 					/obj/item/clothing/suit/fire = 500,
 					/obj/item/clothing/suit/radiation = 450,
 					/obj/item/clothing/suit/bomb_suit = 300,
-//HEADS
+//HEADS,
 					/obj/item/clothing/head/collectable/petehat = 350,
 					/obj/item/clothing/head/collectable = 80,
 					/obj/item/clothing/head/hardhat = 180,
@@ -436,7 +423,7 @@ var/list/worths = list(
 					/obj/item/clothing/head/helmet/space/skrell = 1200,
 					/obj/item/clothing/head/helmet/space/cult = 200,
 					/obj/item/clothing/head/helmet/space = 450,
-//ACCESSORIES
+//ACCESSORIES,
 					/obj/item/clothing/accessory/storage = 55,
 					/obj/item/clothing/accessory/stethoscope = 70,
 					/obj/item/clothing/accessory/medal = 100,
@@ -449,7 +436,7 @@ var/list/worths = list(
 					/obj/item/clothing/accessory/burgundy_jacket = 160,
 					/obj/item/clothing/accessory/checkered_jacket = 200,
 					/obj/item/clothing/accessory = 15,
-//UNDERS
+//UNDERS,
 					/obj/item/clothing/under/rank/captain = 100,
 					/obj/item/clothing/under/rank/head_of_personnel = 60,
 					/obj/item/clothing/under/rank/head_of_personnel_whimsy = 80,
@@ -457,9 +444,8 @@ var/list/worths = list(
 					/obj/item/clothing/under/rank/research_director = 60,
 					/obj/item/clothing/under/rank/chief_medical_officer = 65,
 					/obj/item/clothing/under/rank/warden = 5,
-
 					/obj/item/clothing = 50,
-//DEVICES
+//DEVICES,
 					/obj/item/device/mmi = 1200,
 					/obj/item/device/kit/paint = 500,
 					/obj/item/device/kit = 100,
@@ -485,13 +471,12 @@ var/list/worths = list(
 					/obj/item/device/uv_light = 150,
 					/obj/item/device/eftpos = 30,
 					/obj/item/device = 90,
-
-//ORGANS
+//ORGANS,
 					/obj/item/organ/heart = 1200,
 					/obj/item/organ/brain = 1200,
 					/obj/item/organ/pariah_brain = 5,
 					/obj/item/organ = 400,
-//ITEMS
+//ITEMS,
 					/obj/item/slime_extract = 200,
 					/obj/item/broken_device = 10,
 					/obj/item/robot_parts/robot_component = 250,
@@ -528,7 +513,7 @@ var/list/worths = list(
 					/obj/item/mecha_parts = 500,
 					/obj/item/mecha_parts/mecha_equipment = 1000,
 					/obj/item/missile = 1200,
-					/obj/item/blueprints = 4000, //Information is valuable
+					/obj/item/blueprints = 4000, //Information is valuable,
 					/obj/item/bodybag/cryobag = 600,
 					/obj/item/bodybag = 20,
 					/obj/item/glass_jar = 10,
@@ -551,18 +536,18 @@ var/list/worths = list(
 					/obj/item/bee_pack = 200,
 					/obj/item/weedkiller = 30,
 					/obj/item = 5,
-//STRUCTURES
+//STRUCTURES,
 					/obj/structure/ore_box = 12,
 					/obj/structure/constructshell = 100,
 					/obj/structure/cable = 1,
 					/obj/structure/particle_accelerator = 2000,
 					/obj/structure/droppod_door = 65,
-					/obj/structure/disposalconstruct = 0, //Similar to cables, they are assembled into something else.
+					/obj/structure/disposalconstruct = 0, //Similar to cables, they are assembled into something else,
 					/obj/structure/disposalpipe/tagger = 70,
 					/obj/structure/disposalpipe/sortjunction = 65,
 					/obj/structure/disposalpipe = 35,
 					/obj/structure/disposaloutlet = 65,
-					/obj/structure/boulder = 0, //just a dumb boulder
+					/obj/structure/boulder = 0, //just a dumb boulder,
 					/obj/structure/showcase = 400,
 					/obj/structure/shuttle = 150,
 					/obj/structure/plasticflaps = 15,
@@ -585,7 +570,7 @@ var/list/worths = list(
 					/obj/structure/lattice = 1,
 					/obj/structure/morgue = 100,
 					/obj/structure/crematorium = 600,
-					/obj/structure/device/piano = 1200, //pianos are expensive
+					/obj/structure/device/piano = 1200, //pianos are expensive,
 					/obj/structure/noticeboard = 15,
 					/obj/structure/safe/floor = 180,
 					/obj/structure/safe = 200,
@@ -602,18 +587,18 @@ var/list/worths = list(
 					/obj/structure/bookcase = 50,
 					/obj/structure/barricade = -1,
 					/obj/structure = 30,
-//MOBS
+//MOBS,
 					/mob/living/carbon/human = -10000,
 					/mob/living/carbon/slime = 5000,
 					/mob/living/simple_animal/borer = 10000,
-					/mob/living/simple_animal/corgi/Ian = 1000, //Ian is valuable
-					/mob/living/simple_animal/cow = 2000, //Cow expensive
+					/mob/living/simple_animal/corgi/Ian = 1000, //Ian is valuable,
+					/mob/living/simple_animal/cow = 2000, //Cow expensive,
 					/mob/living/simple_animal = 500,
 					/mob/living = 100,
-//MECHAS
+//MECHAS,
 					/obj/mecha/combat = -50000,
 					/obj/mecha = -20000,
-//MACHINERY
+//MACHINERY,
 					/obj/machinery/modular_computer/laptop = -3000,
 					/obj/machinery/mineral/unloading_machine = -500,
 					/obj/machinery/mining/brace = -300,
@@ -733,12 +718,12 @@ var/list/worths = list(
 					/obj/machinery/botany = -9050,
 					/obj/machinery/seed_storage = -500,
 					/obj/machinery/beehive = -500,
-					/obj/machinery/portable_atmospherics/hydroponics/soil = 1, //its dirt
+					/obj/machinery/portable_atmospherics/hydroponics/soil = 1, //its dirt,
 					/obj/machinery/portable_atmospherics/hydroponics = -2300,
 					/obj/machinery/librarypubliccomp = -600,
 					/obj/machinery/librarycomp = -1000,
 					/obj/machinery/libraryscanner = -1000,
 					/obj/machinery/bookbinder = -1200,
 					/obj/machinery = -1000,
-					) //Must be in descending order. Child before parents, otherwise it doesn't work.
+					) //Must be in descending order. Child before parents, otherwise it doesn't work.,
 
