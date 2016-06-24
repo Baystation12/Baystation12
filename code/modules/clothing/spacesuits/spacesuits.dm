@@ -105,7 +105,7 @@
 
 	if(user.wear_suit == src)
 		for(var/obj/item/organ/external/E in user.organs)
-			if(E.apply_splint(src))
+			if(E.is_broken() && E.apply_splint(src))
 				user << "You feel [src] constrict about your [E.name], supporting it."
 				supporting_limbs |= E
 	else

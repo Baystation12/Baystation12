@@ -254,7 +254,6 @@ var/list/organ_cache = list()
 	robotic = ORGAN_ROBOT
 	src.status &= ~ORGAN_BROKEN
 	src.status &= ~ORGAN_BLEEDING
-	src.status &= ~ORGAN_SPLINTED
 	src.status &= ~ORGAN_CUT_AWAY
 
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc

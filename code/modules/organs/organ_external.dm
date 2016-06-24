@@ -495,11 +495,11 @@ This function completely restores a damaged organ to perfect condition.
 //external organs handle brokenness a bit differently when it comes to damage. Instead brute_dam is checked inside process()
 //this also ensures that an external organ cannot be "broken" without broken_description being set.
 /obj/item/organ/external/is_broken()
-	return ((status & ORGAN_CUT_AWAY) || ((status & ORGAN_BROKEN) && !(status & ORGAN_SPLINTED)))
+	return ((status & ORGAN_CUT_AWAY) || ((status & ORGAN_BROKEN) && !splinted))
 
 //Determines if we even need to process this organ.
 /obj/item/organ/external/proc/need_process()
-	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DESTROYED|ORGAN_SPLINTED|ORGAN_DEAD|ORGAN_MUTATED))
+	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DESTROYED|ORGAN_DEAD|ORGAN_MUTATED))
 		return 1
 	if((brute_dam || burn_dam) && (robotic < ORGAN_ROBOT)) //Robot limbs don't autoheal and thus don't need to process when damaged
 		return 1
@@ -962,25 +962,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 	// This is mostly for the ninja suit to stop ninja being so crippled by breaks.
 	// TODO: consider moving this to a suit proc or process() or something during
 	// hardsuit rewrite.
-	if(!(status & ORGAN_SPLINTED) && owner && istype(owner.wear_suit, /obj/item/clothing/suit/space))
+	if(!splinted && owner && istype(owner.wear_suit, /obj/item/clothing/suit/space))
 		var/obj/item/clothing/suit/space/suit = owner.wear_suit
 		suit.check_limb_support()
-
-/obj/item/organ/external/proc/apply_splint(var/atom/movable/splint)
-	if(!splinted)
-		splinted = splint
-		status |= ORGAN_SPLINTED
-		return 1
-	return 0
-
-/obj/item/organ/external/proc/remove_splint()
-	if(splinted)
-		if(splinted.loc == src)
-			splinted.dropInto(owner? owner.loc : src.loc)
-		splinted = null
-		status &= ~(ORGAN_SPLINTED)
-		return 1
-	return 0
 
 /obj/item/organ/external/proc/mend_fracture()
 	if(robotic >= ORGAN_ROBOT)
@@ -990,6 +974,20 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	status &= ~ORGAN_BROKEN
 	return 1
+
+/obj/item/organ/external/proc/apply_splint(var/atom/movable/splint)
+	if(!splinted)
+		splinted = splint
+		return 1
+	return 0
+
+/obj/item/organ/external/proc/remove_splint()
+	if(splinted)
+		if(splinted.loc == src)
+			splinted.dropInto(owner? owner.loc : src.loc)
+		splinted = null
+		return 1
+	return 0
 
 /obj/item/organ/external/robotize(var/company)
 	..()
@@ -1006,6 +1004,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	dislocated = -1 //TODO, make robotic limbs a separate type, remove snowflake
 	cannot_break = 1
+	remove_splint()
 	update_icon(1)
 	unmutate()
 	for (var/obj/item/organ/external/T in children)
@@ -1065,6 +1064,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	victim.bad_external_organs -= src
 
+	remove_splint()
 	for(var/atom/movable/implant in implants)
 		//large items and non-item objs fall to the floor, everything else stays
 		var/obj/item/I = implant

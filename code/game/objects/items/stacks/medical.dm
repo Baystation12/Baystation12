@@ -258,7 +258,7 @@
 		if(!(affecting.limb_name in list("l_arm","r_arm","l_leg","r_leg")))
 			user << "<span class='danger'>You can't apply a splint there!</span>"
 			return
-		if(affecting.status & ORGAN_SPLINTED)
+		if(affecting.splinted)
 			user << "<span class='danger'>[M]'s [limb] is already splinted!</span>"
 			return
 		if (M != user)
