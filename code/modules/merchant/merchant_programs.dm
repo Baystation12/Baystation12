@@ -148,5 +148,3 @@
 			if(href_list["PRG_how_much_do_you_want"])
 				. = 1
 				last_comms = T.how_much_do_you_want(text2num(href_list["PRG_how_much_do_you_want"]) + 1)
-	if(.)
-		nanomanager.update_uis(NM)
