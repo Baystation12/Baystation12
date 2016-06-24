@@ -1,3 +1,4 @@
+/*
 /obj/item/device/onetankbomb
 	name = "bomb"
 	icon = 'icons/obj/tank.dmi'
@@ -153,3 +154,6 @@
 	if(!T)
 		return
 	T.assume_air(removed)
+*/
+
+///Depricated

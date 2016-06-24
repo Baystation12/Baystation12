@@ -105,7 +105,7 @@ var/list/global/tank_gauge_cache = list()
 		user << "<span class='notice'>\The [src] feels [descriptive].</span>"
 
 	if(src.proxyassembly.assembly || wired)
-		user << "<span class='warning'>It seems to have [wired? "some wires ": ""][wired && src.proxyassembly.assembly? "and ":""][src.proxyassembly.assembly ? "some sort of assembly ":""]attached to it."
+		user << "<span class='warning'>It seems to have [wired? "some wires ": ""][wired && src.proxyassembly.assembly? "and ":""][src.proxyassembly.assembly ? "some sort of assembly ":""]attached to it.</span>"
 	if(src.valve_welded)
 		user << "<span class='warning'>\The [src] emergency relief valve has been welded shut!</span>"
 
@@ -176,7 +176,7 @@ var/list/global/tank_gauge_cache = list()
 		if(wired)
 			user << "<span class='notice'>You begin attaching the assembly to \the [src].</span>"
 			if(do_after(user, 50, src))
-				user << "<span class='notice'>You finish attaching the assembly to \the [src]."
+				user << "<span class='notice'>You finish attaching the assembly to \the [src].</span>"
 				bombers += "[key_name(user)] attached an assembly to a wired [src]. Temp: [src.air_contents.temperature-T0C]"
 				message_admins("[key_name_admin(user)] attached an assembly to a wired [src]. Temp: [src.air_contents.temperature-T0C]")
 				assemble_bomb(W,user)
