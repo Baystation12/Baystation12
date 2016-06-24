@@ -86,7 +86,7 @@
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/space/equipped(mob/M)
-	check_limb_support()
+	check_limb_support(M)
 	..()
 
 /obj/item/clothing/suit/space/dropped(var/mob/user)
@@ -100,14 +100,18 @@
 /obj/item/clothing/suit/space/proc/check_limb_support(var/mob/living/carbon/human/user)
 
 	// If this isn't set, then we don't need to care.
-	if(!supporting_limbs || !supporting_limbs.len)
+	if(!istype(user) || isnull(supporting_limbs) || !supporting_limbs.len)
 		return
 
-	if(!istype(user) || user.wear_suit == src)
-		return
+	if(user.wear_suit == src)
+		for(var/obj/item/organ/external/E in user.organs)
+			if(E.apply_splint(src))
+				user << "You feel [src] constrict about your [E.name], supporting it."
+				supporting_limbs |= E
+	else
+		// Otherwise, remove the splints.
+		for(var/obj/item/organ/external/E in supporting_limbs)
+			if(E.splinted == src && E.remove_splint(src))
+				user << "\The [src] stops supporting your [E.name]."
+		supporting_limbs.Cut()
 
-	// Otherwise, remove the splints.
-	for(var/obj/item/organ/external/E in supporting_limbs)
-		E.status &= ~ ORGAN_SPLINTED
-		user << "The suit stops supporting your [E.name]."
-	supporting_limbs = list()

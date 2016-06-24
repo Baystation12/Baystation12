@@ -142,10 +142,12 @@
 		for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
 			var/obj/item/organ/external/o = get_organ(organ)
 			if (o && o.status & ORGAN_SPLINTED)
-				var/obj/item/W = new /obj/item/stack/medical/splint(get_turf(src), 1)
-				o.status &= ~ORGAN_SPLINTED
-				W.add_fingerprint(user)
-				removed_splint = 1
+				var/obj/item/S = o.splinted
+				if(istype(S) && S.loc == o) //can only remove splints that are actually worn on the organ (deals with hardsuit splints)
+					S.add_fingerprint(user)
+					if(o.remove_splints())
+						user.put_in_active_hand(S)
+						removed_splint = 1
 		if(removed_splint)
 			visible_message("<span class='danger'>\The [user] removes \the [src]'s splints!</span>")
 		else
