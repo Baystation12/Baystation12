@@ -1,0 +1,14 @@
+author: LorenLuke
+
+delete-after: True
+
+changes: 
+  - rscdel: "Removed bomb.dm from baystation12.dme."
+  - rscdel: "Got rid of the awful singletank code."
+  - rscadd: "Created new singletank logic for its construction usage and disassembly."
+  - rscadd: "Rupturing and exploding tanks (including TTVs) now create shrapnel."
+  - tweak: "Changed the leak/rupture/explosion logic for air tanks."
+  - tweak: "Air from rupturing/exploding tanks now merged into environment instead of deleted."
+  - tweak: "Added relief valve to air tanks. They now trigger leak logic at over 173? C (don't get it too hot, kiddies!). Can be welded shut to prevent leakage."
+  - tweak: "Explosion radii based on pressure and gas amount in a rupturing vessel."
+  

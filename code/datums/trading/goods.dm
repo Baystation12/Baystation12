@@ -171,7 +171,6 @@ Sells devices, odds and ends, and medical stuff
 								/obj/item/device/encryptionkey             = TRADER_BLACKLIST_ALL,
 								/obj/item/device/flashlight/drone          = TRADER_BLACKLIST,
 								/obj/item/device/flashlight/slime          = TRADER_BLACKLIST,
-								/obj/item/device/onetankbomb               = TRADER_BLACKLIST,
 								/obj/item/device/pda                       = TRADER_BLACKLIST_ALL,
 								/obj/item/device/powersink                 = TRADER_BLACKLIST,
 								/obj/item/device/radio                     = TRADER_BLACKLIST_ALL,
