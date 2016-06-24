@@ -964,7 +964,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	// hardsuit rewrite.
 	if(!splinted && owner && istype(owner.wear_suit, /obj/item/clothing/suit/space))
 		var/obj/item/clothing/suit/space/suit = owner.wear_suit
-		suit.check_limb_support()
+		suit.handle_fracture(owner, src)
 
 /obj/item/organ/external/proc/mend_fracture()
 	if(robotic >= ORGAN_ROBOT)
