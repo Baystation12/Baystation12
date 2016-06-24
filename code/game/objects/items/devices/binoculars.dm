@@ -15,4 +15,4 @@
 
 
 /obj/item/device/binoculars/attack_self(mob/user)
-	zoom()
+	zoom(user)

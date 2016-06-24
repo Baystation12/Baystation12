@@ -400,14 +400,14 @@
 		mouthshoot = 0
 		return
 
-/obj/item/weapon/gun/proc/toggle_scope(var/zoom_amount=2.0)
+/obj/item/weapon/gun/proc/toggle_scope(mob/user, var/zoom_amount=2.0)
 	//looking through a scope limits your periphereal vision
 	//still, increase the view size by a tiny amount so that sniping isn't too restricted to NSEW
 	var/zoom_offset = round(world.view * zoom_amount)
 	var/view_size = round(world.view + zoom_amount)
 	var/scoped_accuracy_mod = zoom_offset
 
-	zoom(zoom_offset, view_size)
+	zoom(user, zoom_offset, view_size)
 	if(zoom)
 		accuracy = scoped_accuracy + scoped_accuracy_mod
 		if(screen_shake)
