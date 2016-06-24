@@ -79,45 +79,6 @@
 	siemens_coefficient = 0.9
 	species_restricted = list("exclude","Diona", "Xenomorph")
 
-	var/list/supporting_limbs //If not-null, automatically splints breaks. Checked when removing the suit.
-
 /obj/item/clothing/suit/space/New()
 	..()
 	slowdown_per_slot[slot_wear_suit] = 1
-
-/obj/item/clothing/suit/space/equipped(mob/M)
-	check_limb_support(M)
-	..()
-
-/obj/item/clothing/suit/space/dropped(var/mob/user)
-	check_limb_support(user)
-	..()
-
-// Some space suits are equipped with reactive membranes that support
-// broken limbs - at the time of writing, only the ninja suit, but
-// I can see it being useful for other suits as we expand them. ~ Z
-// The actual splinting occurs in /obj/item/organ/external/proc/fracture()
-/obj/item/clothing/suit/space/proc/check_limb_support(var/mob/living/carbon/human/user)
-
-	// If this isn't set, then we don't need to care.
-	if(!istype(user) || isnull(supporting_limbs))
-		return
-
-	if(user.wear_suit == src)
-		for(var/obj/item/organ/external/E in user.bad_external_organs)
-			if(E.is_broken() && E.apply_splint(src))
-				user << "You feel [src] constrict about your [E.name], supporting it."
-				supporting_limbs |= E
-	else
-		// Otherwise, remove the splints.
-		for(var/obj/item/organ/external/E in supporting_limbs)
-			if(E.splinted == src && E.remove_splint(src))
-				user << "\The [src] stops supporting your [E.name]."
-		supporting_limbs.Cut()
-
-/obj/item/clothing/suit/space/proc/handle_fracture(var/mob/living/carbon/human/user, var/obj/item/organ/external/E)
-	if(!istype(user) || isnull(supporting_limbs))
-		return
-	if(E.is_broken() && E.apply_splint(src))
-		user << "You feel [src] constrict about your [E.name], supporting it."
-		supporting_limbs |= E

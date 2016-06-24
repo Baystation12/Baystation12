@@ -337,30 +337,7 @@
 				M.drop_from_inventory(piece)
 			piece.forceMove(src)
 
-	if(!istype(wearer) || loc != wearer || wearer.back != src || canremove || !cell || cell.charge <= 0)
-		if(!cell || cell.charge <= 0)
-			if(electrified > 0)
-				electrified = 0
-			if(!offline)
-				if(istype(wearer))
-					if(!canremove)
-						if (offline_slowdown < 3)
-							wearer << "<span class='danger'>Your suit beeps stridently, and suddenly goes dead.</span>"
-						else
-							wearer << "<span class='danger'>Your suit beeps stridently, and suddenly you're wearing a leaden mass of metal and plastic composites instead of a powered suit.</span>"
-					if(offline_vision_restriction == 1)
-						wearer << "<span class='danger'>The suit optics flicker and die, leaving you with restricted vision.</span>"
-					else if(offline_vision_restriction == 2)
-						wearer << "<span class='danger'>The suit optics drop out completely, drowning you in darkness.</span>"
-		if(!offline)
-			offline = 1
-	else
-		if(offline)
-			offline = 0
-			if(istype(wearer) && !wearer.wearing_rig)
-				wearer.wearing_rig = src
-			set_slowdown(online_slowdown)
-
+	update_offline()
 	if(offline)
 		if(offline == 1)
 			for(var/obj/item/rig_module/module in installed_modules)
@@ -380,6 +357,36 @@
 
 	for(var/obj/item/rig_module/module in installed_modules)
 		cell.use(module.process()*10)
+
+//offline should not be set outside of this proc
+/obj/item/weapon/rig/proc/update_offline()
+	if(!istype(wearer) || loc != wearer || wearer.back != src || canremove || !cell || cell.charge <= 0)
+		if(!cell || cell.charge <= 0)
+			if(electrified > 0)
+				electrified = 0
+			if(!offline)
+				if(istype(wearer))
+					if(!canremove)
+						if (offline_slowdown < 3)
+							wearer << "<span class='danger'>Your suit beeps stridently, and suddenly goes dead.</span>"
+						else
+							wearer << "<span class='danger'>Your suit beeps stridently, and suddenly you're wearing a leaden mass of metal and plastic composites instead of a powered suit.</span>"
+					if(offline_vision_restriction == 1)
+						wearer << "<span class='danger'>The suit optics flicker and die, leaving you with restricted vision.</span>"
+					else if(offline_vision_restriction == 2)
+						wearer << "<span class='danger'>The suit optics drop out completely, drowning you in darkness.</span>"
+		if(!offline)
+			offline = 1
+			if(istype(chest))
+				chest.check_limb_support()
+	else
+		if(offline)
+			offline = 0
+			if(istype(wearer) && !wearer.wearing_rig)
+				wearer.wearing_rig = src
+			set_slowdown(online_slowdown)
+			if(istype(chest))
+				chest.check_limb_support()
 
 /obj/item/weapon/rig/proc/check_power_cost(var/mob/living/user, var/cost, var/use_unconcious, var/obj/item/rig_module/mod, var/user_is_ai)
 

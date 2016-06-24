@@ -962,8 +962,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	// This is mostly for the ninja suit to stop ninja being so crippled by breaks.
 	// TODO: consider moving this to a suit proc or process() or something during
 	// hardsuit rewrite.
-	if(!splinted && owner && istype(owner.wear_suit, /obj/item/clothing/suit/space))
-		var/obj/item/clothing/suit/space/suit = owner.wear_suit
+	if(!splinted && owner && istype(owner.wear_suit, /obj/item/clothing/suit/space/rig))
+		var/obj/item/clothing/suit/space/rig/suit = owner.wear_suit
 		suit.handle_fracture(owner, src)
 
 /obj/item/organ/external/proc/mend_fracture()
