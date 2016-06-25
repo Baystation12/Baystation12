@@ -104,7 +104,7 @@ obj/machinery/recharger/process()
 			cell = E.power_supply
 
 		if(istype(cell, /obj/item/weapon/cell))
-			var/obj/item/weapon/cell/C = charging
+			var/obj/item/weapon/cell/C = cell
 			if(!C.fully_charged())
 				icon_state = icon_state_charging
 				C.give(active_power_usage*CELLRATE)
