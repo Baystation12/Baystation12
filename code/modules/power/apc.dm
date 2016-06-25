@@ -39,6 +39,9 @@
 #define POWERCHAN_ON       2
 #define POWERCHAN_ON_AUTO  3
 
+//thresholds for channels going off automatically. ENVIRON channel stays on as long as possible, and doesn't have a threshold
+#define AUTO_THRESHOLD_LIGHTING  50
+#define AUTO_THRESHOLD_EQUIPMENT 25
 
 //NOTE: STUFF STOLEN FROM AIRLOCK.DM thx
 
@@ -1121,21 +1124,21 @@
 	else if(longtermpower > -10)
 		longtermpower -= 2
 
-	if((cell.percent() > 30) || longtermpower > 0)              // Put most likely at the top so we don't check it last, effeciency 101
+	if((cell.percent() > AUTO_THRESHOLD_LIGHTING) || longtermpower > 0)              // Put most likely at the top so we don't check it last, effeciency 101
 		if(autoflag != 3)
 			equipment = autoset(equipment, 1)
 			lighting = autoset(lighting, 1)
 			environ = autoset(environ, 1)
 			autoflag = 3
 			power_alarm.clearAlarm(loc, src)
-	else if((cell.percent() <= 30) && (cell.percent() > 20) && longtermpower < 0)                       // <30%, turn off equipment
+	else if((cell.percent() <= AUTO_THRESHOLD_LIGHTING) && (cell.percent() > AUTO_THRESHOLD_EQUIPMENT) && longtermpower < 0)                       // <50%, turn off lighting
 		if(autoflag != 2)
-			equipment = autoset(equipment, 2)
-			lighting = autoset(lighting, 1)
+			equipment = autoset(equipment, 1)
+			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
 			power_alarm.triggerAlarm(loc, src)
 			autoflag = 2
-	else if(cell.percent() <= 20)        // <20%, turn off lighting & equipment
+	else if(cell.percent() <= AUTO_THRESHOLD_EQUIPMENT)        // <25%, turn off lighting & equipment
 		if((autoflag > 1 && longtermpower < 0) || (autoflag > 1 && longtermpower >= 0))
 			equipment = autoset(equipment, 2)
 			lighting = autoset(lighting, 2)
