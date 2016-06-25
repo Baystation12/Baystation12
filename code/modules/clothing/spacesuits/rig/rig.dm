@@ -209,7 +209,7 @@
 		initiator << "<span class='danger'>Cannot toggle suit: The suit is currently not being worn by anyone.</span>"
 		return 0
 
-	if(!check_power_cost(wearer))
+	if(!check_power_cost(wearer, 1))
 		return 0
 
 	deploy(wearer,instant)
@@ -406,7 +406,7 @@
 		fail_msg = "<span class='warning'>You are in no fit state to do that.</span>"
 	else if(!cell)
 		fail_msg = "<span class='warning'>There is no cell installed in the suit.</span>"
-	else if(cost && cell.charge < cost * 10) //TODO: Cellrate?
+	else if(cost && cell.check_charge(cost * 10)) //TODO: Cellrate?
 		fail_msg = "<span class='warning'>Not enough stored power.</span>"
 
 	if(fail_msg)
