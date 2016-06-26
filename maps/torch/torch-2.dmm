@@ -472,7 +472,7 @@
 "jd" = (/obj/machinery/computer/message_monitor,/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/lino,/area/tcommsat/computer)
 "je" = (/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/lino,/area/tcommsat/computer)
 "jf" = (/obj/structure/cable/green{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/lino,/area/tcommsat/computer)
-"jg" = (/obj/structure/table/steel,/obj/structure/cable/green{d2 = 8; icon_state = "0-8"},/obj/item/weapon/storage/box/cups,/obj/machinery/power/apc/hyper{name = "east bump"; pixel_x = 24},/turf/simulated/floor/lino,/area/tcommsat/computer)
+"jg" = (/obj/structure/table/steel,/obj/structure/cable/green{d2 = 8; icon_state = "0-8"},/obj/item/weapon/storage/box/cups,/obj/machinery/power/apc/hyper{dir = 4; name = "east bump"; pixel_x = 24},/turf/simulated/floor/lino,/area/tcommsat/computer)
 "jh" = (/obj/structure/ore_box,/turf/simulated/floor/plating,/area/maintenance/thirddeck/forestarboard)
 "ji" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/obj/machinery/firealarm{dir = 8; pixel_x = -24; pixel_y = 0},/turf/simulated/floor/plating,/area/engineering/atmos/aux)
 "jj" = (/obj/machinery/atmospherics/pipe/simple/visible/universal{dir = 4},/turf/simulated/floor/plating,/area/engineering/atmos/aux)
