@@ -121,27 +121,12 @@ proc/age2agedescription(age)
 		if(70 to INFINITY)	return "elderly"
 		else				return "unknown"
 
-proc/RoundHealth(health)
-	switch(health)
-		if(100 to INFINITY)
-			return "health100"
-		if(70 to 100)
-			return "health80"
-		if(50 to 70)
-			return "health60"
-		if(30 to 50)
-			return "health40"
-		if(18 to 30)
-			return "health25"
-		if(5 to 18)
-			return "health10"
-		if(1 to 5)
-			return "health1"
-		if(-99 to 0)
-			return "health0"
-		else
-			return "health-100"
-	return "0"
+/proc/RoundHealth(health)
+	var/list/icon_states = icon_states('icons/mob/hud_med.dmi')
+	for(var/icon_state in icon_states)
+		if(health >= text2num(icon_state))
+			return icon_state
+	return icon_states[icon_states.len] // If we had no match, return the last element
 
 /*
 Proc for attack log creation, because really why not
