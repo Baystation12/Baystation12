@@ -60,18 +60,11 @@ datum/preferences
 		//Mob preview
 	var/icon/preview_icon = null
 
-		//Jobs, uses bitflags
-	var/job_civilian_high = 0
-	var/job_civilian_med = 0
-	var/job_civilian_low = 0
 
-	var/job_medsci_high = 0
-	var/job_medsci_med = 0
-	var/job_medsci_low = 0
-
-	var/job_engsec_high = 0
-	var/job_engsec_med = 0
-	var/job_engsec_low = 0
+	//Since there can only be 1 high job.
+	var/job_high = null
+	var/list/job_medium = list() //List of all things selected for medium weight
+	var/list/job_low    = list() //List of all the things selected for low weight
 
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 0
