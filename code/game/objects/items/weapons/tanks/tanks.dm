@@ -125,11 +125,10 @@ var/list/global/tank_gauge_cache = list()
 		src.add_fingerprint(user)
 
 	if(istype(W, /obj/item/stack/cable_coil))
-		var/obj/item/stack/cable_coil/C = W
-		C.use(1)
-		wired = 1
-		src.overlays += "bomb_assembly"
-		user << "<span class='notice'>You attach the wires to the tank.</span>"
+		if(W:use(1))
+			wired = 1
+			user << "<span class='notice'>You attach the wires to the tank.</span>"
+			src.add_bomb_overlay()
 
 	if(istype(W, /obj/item/weapon/wirecutters))
 		if(wired && src.proxyassembly.assembly)
@@ -186,7 +185,7 @@ var/list/global/tank_gauge_cache = list()
 			user << "<span class='notice'>You need to wire the device up first.</span>"
 
 
-	if((istype(W, /obj/item/weapon/weldingtool) && W:welding))
+	if((istype(W, /obj/item/weapon/weldingtool) && W:remove_fuel(1,user)))
 		if(!valve_welded)
 			user << "<span class='notice'>You begin welding the \the [src] emergency pressure relief valve.</span>"
 			if(do_after(user, 40,src))
@@ -352,6 +351,16 @@ var/list/global/tank_gauge_cache = list()
 	check_status()
 
 
+/obj/item/weapon/tank/proc/add_bomb_overlay()
+	if(src.wired)
+		src.overlays += "bomb_assembly"
+		if(src.proxyassembly.assembly)
+			var/icon/test = getFlatIcon(src.proxyassembly.assembly)
+			test.Shift(SOUTH,1)
+			test.Shift(WEST,3)
+			overlays += test
+
+
 /obj/item/weapon/tank/proc/update_gauge()
 	var/gauge_pressure = 0
 	if(air_contents)
@@ -366,19 +375,16 @@ var/list/global/tank_gauge_cache = list()
 
 	last_gauge_pressure = gauge_pressure
 	overlays.Cut()
+	add_bomb_overlay()
 	var/indicator = "[gauge_icon][(gauge_pressure == -1) ? "overload" : gauge_pressure]"
 	if(!tank_gauge_cache[indicator])
 		tank_gauge_cache[indicator] = image(icon, indicator)
 	overlays += tank_gauge_cache[indicator]
 
-	if(src.wired)
-		src.overlays += "bomb_assembly"
 
-	if(src.proxyassembly.assembly)
-		var/icon/test = getFlatIcon(src.proxyassembly.assembly)
-		test.Shift(SOUTH,1)
-		test.Shift(WEST,4)
-		overlays += test
+
+
+
 
 /obj/item/weapon/tank/proc/check_status()
 	//Handle exploding, leaking, and rupturing of the tank
@@ -399,7 +405,7 @@ var/list/global/tank_gauge_cache = list()
 			var/env_pressure = environment.return_pressure()
 			var/tank_pressure = src.air_contents.return_pressure()
 
-			var/release_ratio = min(max( 0.02, sqrt((tank_pressure-env_pressure)/tank_pressure) ),1)
+			var/release_ratio = Clamp(0.02, sqrt((tank_pressure-env_pressure)/tank_pressure),1)
 			var/datum/gas_mixture/leaked_gas = air_contents.remove_ratio(release_ratio)
 			//dynamic air release based on ambient pressure
 
@@ -434,6 +440,7 @@ var/list/global/tank_gauge_cache = list()
 			var/fragments = round(rand(12,25)* sqrt(strength * mult)/8)
 
 			var/turf/simulated/T = get_turf(src)
+			T.hotspot_expose(src.air_contents.temperature, 70, 1)
 			if(!T)
 				return
 			T.assume_air(air_contents)
@@ -448,8 +455,6 @@ var/list/global/tank_gauge_cache = list()
 				round(min(BOMBCAP_FLASH_RADIUS, ((mult)*strength)*1.20)),
 				)
 
-
-			T.hotspot_expose(700, 50, 1)
 
 			///frag code
 
@@ -506,10 +511,7 @@ var/list/global/tank_gauge_cache = list()
 			T.assume_air(air_contents)
 			playsound(get_turf(src), 'sound/weapons/gunshot/shotgun.ogg', 20, 1)
 			visible_message("\icon[src] <span class='danger'>\The [src] flies apart!</span>", "<span class='warning'>You hear a bang!</span>")
-			T.hotspot_expose(air_contents.temperature, 50, 1)
-
-
-
+			T.hotspot_expose(air_contents.temperature, 70, 1)
 
 
 			///Non-explosive Frag code
@@ -617,10 +619,7 @@ var/list/global/tank_gauge_cache = list()
 	src.update_icon()
 
 
-	var/icon/test = getFlatIcon(W)
-	test.Shift(SOUTH,2)
-	test.Shift(WEST,2)
-	overlays += test
+	src.add_bomb_overlay()
 
 	return
 
