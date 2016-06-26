@@ -52,11 +52,50 @@
 		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',
 		"Unathi" = 'icons/mob/species/unathi/suit.dmi'
 		)
-	supporting_limbs = list()
+	var/list/supporting_limbs = list() //If not-null, automatically splints breaks. Checked when removing the suit.
 
-//TODO: move this to modules
-/obj/item/clothing/head/helmet/space/rig/proc/prevent_track()
-	return 0
+/obj/item/clothing/suit/space/rig/equipped(mob/M)
+	check_limb_support(M)
+	..()
+
+/obj/item/clothing/suit/space/rig/dropped(var/mob/user)
+	check_limb_support(user)
+	..()
+
+// Some space suits are equipped with reactive membranes that support broken limbs
+/obj/item/clothing/suit/space/rig/proc/can_support(var/mob/living/carbon/human/user)
+	if(user.wear_suit != src)
+		return 0 //not wearing the suit
+	var/obj/item/weapon/rig/rig = user.back
+	if(!istype(rig) || rig.offline || rig.canremove)
+		return 0 //not wearing a rig control unit or it's offline or unsealed
+	return 1
+
+/obj/item/clothing/suit/space/rig/proc/check_limb_support(var/mob/living/carbon/human/user)
+
+	// If this isn't set, then we don't need to care.
+	if(!istype(user) || isnull(supporting_limbs))
+		return
+
+	if(can_support(user))
+		for(var/obj/item/organ/external/E in user.bad_external_organs)
+			if((E.body_part & body_parts_covered) && E.is_broken() && E.apply_splint(src))
+				user << "<span class='notice'>You feel [src] constrict about your [E.name], supporting it.</span>"
+				supporting_limbs |= E
+	else
+		// Otherwise, remove the splints.
+		for(var/obj/item/organ/external/E in supporting_limbs)
+			if(E.splinted == src && E.remove_splint(src))
+				user << "<span class='notice'>\The [src] stops supporting your [E.name].</span>"
+		supporting_limbs.Cut()
+
+/obj/item/clothing/suit/space/rig/proc/handle_fracture(var/mob/living/carbon/human/user, var/obj/item/organ/external/E)
+	if(!istype(user) || isnull(supporting_limbs) || !can_support(user))
+		return
+	if((E.body_part & body_parts_covered) && E.is_broken() && E.apply_splint(src))
+		user << "<span class='notice'>You feel [src] constrict about your [E.name], supporting it.</span>"
+		supporting_limbs |= E
+
 
 /obj/item/clothing/gloves/rig/Touch(var/atom/A, var/proximity)
 
