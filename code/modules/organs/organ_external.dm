@@ -73,15 +73,17 @@
 	return ..()
 
 /obj/item/organ/external/emp_act(severity)
-	if(!(robotic >= ORGAN_ROBOT))
-		return
+	var/burn_damage = 0
 	switch (severity)
 		if (1)
-			take_damage(10)
+			burn_damage = 15
 		if (2)
-			take_damage(5)
+			burn_damage = 7
 		if (3)
-			take_damage(1)
+			burn_damage = 3
+	burn_damage *= robotic/burn_mod //ignore burn mod for EMP damage
+	if(burn_damage)
+		take_damage(0, burn_damage)
 
 /obj/item/organ/external/attack_self(var/mob/user)
 	if(!contents.len)
@@ -227,11 +229,10 @@
 	return (vital || (robotic >= ORGAN_ROBOT) || brute_dam + burn_dam + additional_damage < max_damage)
 
 /obj/item/organ/external/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
+	brute = round(brute * brute_mod, 0.1)
+	burn = round(burn * burn_mod, 0.1)
 	if((brute <= 0) && (burn <= 0))
 		return 0
-
-	brute *= brute_mod
-	burn *= burn_mod
 
 	// High brute damage or sharp objects may damage internal organs
 	if(internal_organs && (brute_dam >= max_damage || (((sharp && brute >= 5) || brute >= 10) && prob(5))))
