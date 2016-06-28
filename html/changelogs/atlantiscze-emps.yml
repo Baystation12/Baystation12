@@ -1,0 +1,6 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - tweak: "EMPs are no longer one-hit kills for AIs - APCs with critical flag take reduced damage from EMPs, and AI's power restoration routine now resets the APC that may have been EMPed."

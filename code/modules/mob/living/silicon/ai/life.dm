@@ -116,6 +116,7 @@
 									sleep(2)
 									theAPC.operating = 1
 									theAPC.equipment = 3
+									theAPC.failure_timer = 0
 									theAPC.update()
 									aiRestorePowerRoutine = 3
 									src << "Here are your current laws:"
