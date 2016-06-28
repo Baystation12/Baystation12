@@ -463,7 +463,7 @@
 	id = access_crate_cash
 	access_type = ACCESS_TYPE_NONE
 
-/var/const/access_merchant = 101
+/var/const/access_merchant = 201
 /datum/access/merchant
 	id = access_merchant
 	desc = "Merchant"
