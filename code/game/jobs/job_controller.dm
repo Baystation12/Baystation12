@@ -26,6 +26,8 @@ var/global/datum/controller/occupations/job_master
 			occupations += job
 			if(job.department_flag & COM)
 				command_positions += job.title
+			if(job.department_flag & SEC)
+				security_positions += job.title
 			if(job.department_flag & ENG)
 				engineering_positions += job.title
 			if(job.department_flag & MED)

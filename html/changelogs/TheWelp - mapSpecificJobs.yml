@@ -1,5 +1,0 @@
-author: TheWelp
-delete-after: True
-changes: 
-  - rscadd: "Adds support for map-specific jobs."
-  - rscadd: "Adds torch specific jobs."
