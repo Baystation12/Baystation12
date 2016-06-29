@@ -97,9 +97,7 @@
 	//PDA
 	pda = new(src)
 	spawn(5)
-		pda.ownjob = "Personal Assistant"
-		pda.owner = text("[]", src)
-		pda.name = pda.owner + " (" + pda.ownjob + ")"
+		pda.set_owner_rank_job(text("[]", src), "Personal Assistant")
 		pda.toff = 1
 	..()
 

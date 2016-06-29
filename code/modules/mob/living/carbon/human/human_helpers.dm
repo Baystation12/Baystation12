@@ -110,6 +110,5 @@
 		else if(search_pda && istype(A,/obj/item/device/pda))
 			var/obj/item/device/pda/PDA = A
 			if(PDA.owner == old_name)
-				PDA.owner = new_name
-				PDA.name = "PDA-[new_name] ([PDA.ownjob])"
+				PDA.set_owner(new_name)
 				search_pda = 0

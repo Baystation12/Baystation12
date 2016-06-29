@@ -606,9 +606,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if ("Authenticate")//Checks for ID
 			id_check(U, 1)
 		if("UpdateInfo")
-			ownjob = id.assignment
-			ownrank = id.rank
-			name = "PDA-[owner] ([ownjob])"
+			set_rank_job(id.rank, ownjob)
 		if("Eject")//Ejects the cart, only done from hub.
 			verb_remove_cartridge()
 
@@ -1181,9 +1179,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			user << "<span class='notice'>\The [src] rejects the ID.</span>"
 			return
 		if(!owner)
-			owner = idcard.registered_name
-			ownjob = idcard.assignment
-			ownrank = idcard.rank
+			set_owner_rank_job(idcard.registered_name, idcard.rank, idcard.assignment)
 			name = "PDA-[owner] ([ownjob])"
 			user << "<span class='notice'>Card scanned.</span>"
 		else
@@ -1417,3 +1413,19 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/emp_act(severity)
 	for(var/atom/A in src)
 		A.emp_act(severity)
+
+/obj/item/device/pda/proc/set_owner(var/owner)
+	src.owner = owner
+	update_label()
+
+/obj/item/device/pda/proc/set_rank_job(var/owner, var/rank, var/job)
+	ownrank = rank
+	ownjob = job ? job : rank
+	update_label()
+
+/obj/item/device/pda/proc/set_owner_rank_job(var/owner, var/rank, var/job)
+	set_owner(owner)
+	set_rank_job(rank, job)
+
+/obj/item/device/pda/proc/update_label()
+	name = "PDA-[owner] ([ownjob])"

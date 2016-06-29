@@ -1,6 +1,5 @@
 /decl/hierarchy/supply_pack/supply
 	name = "Supply"
-	hierarchy_type = /decl/hierarchy/supply_pack/supply
 
 /decl/hierarchy/supply_pack/supply/food
 	name = "Kitchen supply crate"
