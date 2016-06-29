@@ -447,6 +447,7 @@
 /var/const/access_syndicate = 150//General Syndicate Access
 /datum/access/syndicate
 	id = access_syndicate
+	desc = "Syndicate"
 	access_type = ACCESS_TYPE_SYNDICATE
 
 /*******
@@ -461,4 +462,5 @@
 /var/const/access_crate_cash = 200
 /datum/access/crate_cash
 	id = access_crate_cash
+	desc = "Crate cash"
 	access_type = ACCESS_TYPE_NONE
