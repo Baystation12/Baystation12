@@ -6,7 +6,7 @@
 	desc = "It's a gruesome pile of thick, sticky resin shaped like a nest."
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "nest"
-	buckle_pixel_shift = list(0,6)
+	buckle_pixel_shift = "x=0;y=6"
 	var/health = 100
 
 /obj/structure/bed/nest/update_icon()

@@ -180,7 +180,7 @@
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0
-	buckle_pixel_shift = list(0,6)
+	buckle_pixel_shift = "x=0;y=6"
 
 /obj/structure/bed/roller/update_icon()
 	return // Doesn't care about material or anything else.

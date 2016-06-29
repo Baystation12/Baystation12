@@ -208,3 +208,19 @@ var/global/list/string_slot_flags = list(
 				. += "    has: [t]\n"
 	world << .
 */
+
+//*** params cache
+
+var/global/list/xy_cache = list()
+
+/proc/cached_xy_decode(var/xy_data)
+	. = xy_cache[xy_data]
+	if(!.)
+		. = xy_decode(xy_data)
+		xy_cache[xy_data] = .
+
+/proc/xy_decode(var/xy_data)
+	var/list/L = params2list(xy_data)
+	L["x"] = text2num(L["x"])
+	L["y"] = text2num(L["y"])
+	return L

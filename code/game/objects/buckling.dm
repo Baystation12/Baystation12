@@ -3,7 +3,7 @@
 	var/buckle_movable = 0
 	var/buckle_dir = 0
 	var/buckle_lying = -1 //bed-like behavior, forces mob.lying = buckle_lying if != -1
-	var/buckle_pixel_shift = list(0,0) //where the buckled mob should be pixel shifted to
+	var/buckle_pixel_shift = "x=0;y=0" //where the buckled mob should be pixel shifted to, or null for no pixel shift control
 	var/buckle_require_restraints = 0 //require people to be handcuffed before being able to buckle. eg: pipes
 	var/mob/living/buckled_mob = null
 
@@ -52,7 +52,8 @@
 /obj/proc/post_buckle_mob(mob/living/M)
 	if(buckle_pixel_shift)
 		if(M == buckled_mob)
-			animate(M, pixel_x = M.default_pixel_x + buckle_pixel_shift[1], pixel_y = M.default_pixel_y + buckle_pixel_shift[2], 4, 1, LINEAR_EASING)
+			var/list/pixel_shift = cached_xy_decode(buckle_pixel_shift)
+			animate(M, pixel_x = M.default_pixel_x + pixel_shift["x"], pixel_y = M.default_pixel_y + pixel_shift["y"], 4, 1, LINEAR_EASING)
 		else
 			animate(M, pixel_x = M.default_pixel_x, pixel_y = M.default_pixel_y, 4, 1, LINEAR_EASING)
 
