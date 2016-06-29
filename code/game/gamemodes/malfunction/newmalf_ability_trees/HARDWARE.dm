@@ -105,6 +105,6 @@
 			radio.autosay("Self destructing now. Have a nice day.", "Self-Destruct Control")
 		timer--
 
-	SetUniversalState(/datum/universal_state/nuclear_explosion/malf, args=list(user)) //TODO: find the station nuclear device and use that
+	SetUniversalState(/datum/universal_state/nuclear_explosion/malf, arguments=list(user)) //TODO: find the station nuclear device and use that
 
 

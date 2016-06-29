@@ -341,7 +341,7 @@ var/bomb_set
 	src.safety = 1
 	update_icon()
 
-	SetUniversalState(/datum/universal_state/nuclear_explosion, args=list(src))
+	SetUniversalState(/datum/universal_state/nuclear_explosion, arguments=list(src))
 
 	return
 
