@@ -28,8 +28,8 @@
 	// We aren't shut down, and we lack external power. Try to fix it using the restoration routine.
 	if (!self_shutdown && !has_power(0))
 		// AI's restore power routine is not running. Start it automatically.
-		if(!aiRestorePowerRoutine)
-			aiRestorePowerRoutine = 1
+		if(aiRestorePowerRoutine == AI_RESTOREPOWER_IDLE)
+			aiRestorePowerRoutine = AI_RESTOREPOWER_STARTING
 			spawn(0)
 				handle_power_failure()
 

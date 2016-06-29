@@ -1,14 +1,4 @@
-#define POWER_RESTORE_MAX_ATTEMPTS 3
 
-// Values represented as Oxyloss. Can be tweaked, but make sure to use integers only.
-#define AI_POWERUSAGE_LOWPOWER 1
-#define AI_POWERUSAGE_RESTORATION 2
-#define AI_POWERUSAGE_NORMAL 5
-#define AI_POWERUSAGE_RECHARGING 7
-
-// Above values get multiplied by this when converting oxyloss -> watts.
-// For now, one oxyloss point equals 10kJ of energy, so normal AI uses 5 oxyloss per tick (50kW or 70kW if charging)
-#define AI_POWERUSAGE_OXYLOSS_TO_WATTS_MULTIPLIER 10000
 
 // This is the main power restoration sequence. Only one sequence per AI can exist.
 /mob/living/silicon/ai/proc/handle_power_failure()
@@ -20,67 +10,72 @@
 	var/obj/machinery/power/apc/theAPC = null
 	var/connection_failures = 0
 	while(aiRestorePowerRoutine)
-		if(aiRestorePowerRoutine > -1)
+		// If the routine is running, proceed to another step.
+		if(aiRestorePowerRoutine > AI_RESTOREPOWER_FAILED)
 			aiRestorePowerRoutine++
 
 		sleep(5 SECONDS)
 
+		if(self_shutdown)
+			src << "<span class='notice'>Systems offline. Power restoration routine aborted.</span>"
+			aiRestorePowerRoutine = AI_RESTOREPOWER_IDLE
+			return
+
 		if(has_power(0))
 			src << "<span class='notice'>Main power restored. All systems returning to normal mode.</span>"
-			aiRestorePowerRoutine = 0
+			aiRestorePowerRoutine = AI_RESTOREPOWER_IDLE
 			updateicon()
 			return
 
-		if(aiRestorePowerRoutine == -1)
+		if(aiRestorePowerRoutine == AI_RESTOREPOWER_FAILED)
 			continue
 
 		switch(aiRestorePowerRoutine)
-			// 1 and 2 are fluff only things.
-			if(2)
+			if(AI_RESTOREPOWER_DIAGNOSTICS)
 				src << "<span class='notice'>Diagnostics completed. Failure confirmed: Main power connection nonfunctional.</span>"
 				continue
-			if(3)
+			if(AI_RESTOREPOWER_CONNECTING)
 				src << "<span class='notice'>Attempting to connect to area power controller.</span>"
 				continue
 			// step 3 tries to locate an APC. It tries up to three times before failing, relying on external influence to restore power only.
-			if(4)
+			if(AI_RESTOREPOWER_CONNECTED)
 				var/area/A = get_area(src)
 				theAPC = A.get_apc()
 
 				if(!istype(theAPC))
-					src << "<span class='notice'>Error processing connection to APC: Attempt [connection_failures+1]/[POWER_RESTORE_MAX_ATTEMPTS]</span>"
+					src << "<span class='notice'>Error processing connection to APC: Attempt [connection_failures+1]/[AI_POWER_RESTORE_MAX_ATTEMPTS]</span>"
 					connection_failures++
-					if(connection_failures == POWER_RESTORE_MAX_ATTEMPTS)
-						aiRestorePowerRoutine = -1
-						src << "<span class='danger'>Unable to connect to APC after [POWER_RESTORE_MAX_ATTEMPTS] attempts. Aborting power restoration sequence.</span>"
+					if(connection_failures == AI_POWER_RESTORE_MAX_ATTEMPTS)
+						aiRestorePowerRoutine = AI_RESTOREPOWER_FAILED
+						src << "<span class='danger'>Unable to connect to APC after [AI_POWER_RESTORE_MAX_ATTEMPTS] attempts. Aborting power restoration sequence.</span>"
 						continue
-					aiRestorePowerRoutine--
+					aiRestorePowerRoutine = AI_RESTOREPOWER_CONNECTING
 					continue
 				src << "<span class='notice'>APC connection confirmed: [theAPC]. Sending emergency reset signal...</span>"
 				continue
 			// step 4 tries to reset the APC, if we still have connection to it.
-			if(5)
+			if(AI_RESTOREPOWER_COMPLETED)
 				// The APC was destroyed since last step
 				if(!istype(theAPC))
 					src << "<span class='danger'>Connection to APC lost. Attempting to re-connect.</span>"
-					aiRestorePowerRoutine = 2
+					aiRestorePowerRoutine = AI_RESTOREPOWER_CONNECTING
 					connection_failures = 0
 					continue
 				// Our area has changed.
 				if(get_area(src) != get_area(theAPC))
 					src << "<span class='danger'>APC change detected. Attempting to locate new APC.</span>"
-					aiRestorePowerRoutine = 2
+					aiRestorePowerRoutine = AI_RESTOREPOWER_CONNECTING
 					connection_failures = 0
 					continue
 				// The APC is damaged
 				if(theAPC.stat & BROKEN)
 					src << "<span class='danger'>APC internal diagnostics reports hardware failure. Unable to reset. Aborting power restoration sequence.</span>"
-					aiRestorePowerRoutine = -1
+					aiRestorePowerRoutine = AI_RESTOREPOWER_FAILED
 					continue
 				// APC's cell is removed and/or below 1% charge. This prevents the AI from briefly regaining power as we force the APC on, only to lose it again next tick due to 0% cell charge.
 				if(theAPC.cell && theAPC.cell.percent() < 1)
 					src << "<span class='danger'>APC internal power reserves are critical. Unable to restore main power.</span>"
-					aiRestorePowerRoutine = -1
+					aiRestorePowerRoutine = AI_RESTOREPOWER_FAILED
 					continue
 				// Success!
 				src << "<span class='notice'>Reset signal successfully transmitted. Sequence completed.</span>"
@@ -90,8 +85,7 @@
 
 // Handles all necessary power checks: Area power, Intellicard and Malf AI APU power and manual override.
 /mob/living/silicon/ai/proc/has_power(var/respect_override = 1)
-	var/area/current_area = get_area(src)
-	if(current_area && (current_area.power_equip || current_area.requires_power == 0))
+	if(psupply && psupply.powered())
 		return 1
 	if(istype(src.loc,/obj/item))
 		return 1
