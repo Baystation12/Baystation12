@@ -6,7 +6,8 @@
 	anchored = 1
 	density = 1
 	use_power = 1
-	idle_power_usage = 40
+	idle_power_usage = 4
+	active_power_usage = 4000 // 4 Kw. A CT scan machine uses 1-15 kW depending on the model and equipment involved.
 	req_access = list(access_medical)
 
 	icon_state = "body_scanner_0"
@@ -18,8 +19,12 @@
 	var/mob/living/carbon/human/occupant = null
 	var/obj/item/organ/internal/stack/lace = null
 
+	var/resleeving = 0
 	var/remaining = 0
 	var/timetosleeve = 120
+
+	var/occupant_name = null // Put in seperate var to prevent runtime.
+	var/lace_name = null
 
 /obj/machinery/resleever/New()
 	..()
@@ -33,6 +38,49 @@
 	update_icon()
 
 
+obj/machinery/resleever/process()
+
+	if(occupant)
+		occupant.sleeping = 10 // We need to always keep the occupant sleeping if they're in here.
+	if(stat & (NOPOWER|BROKEN) || !anchored)
+		update_use_power(0)
+		return
+	if(resleeving)
+		update_use_power(2)
+		if(remaining < timetosleeve)
+			remaining += 1
+
+			if(remaining == 90) // 30 seconds left
+				occupant << "<span class='notice'>You feel a wash of sensation as your senses begin to flood your mind. You will come to soon.</span>"
+		else
+			remaining = 0
+			resleeving = 0
+			update_use_power(1)
+			eject_occupant()
+			playsound(loc, 'sound/machines/ping.ogg', 100, 1)
+			visible_message("\The [src] pings as it completes its procedure!", 3)
+			return
+	update_use_power(0)
+	return
+
+/obj/machinery/resleever/proc/isOccupiedEjectable()
+	if(occupant)
+		if(!resleeving)
+			return 1
+	return 0
+
+/obj/machinery/resleever/proc/isLaceEjectable()
+	if(lace)
+		if(!resleeving)
+			return 1
+	return 0
+
+/obj/machinery/resleever/proc/readyToBegin()
+	if(lace && occupant)
+		if(!resleeving)
+			return 1
+	return 0
+
 /obj/machinery/resleever/attack_ai(mob/user as mob)
 
 	add_hiddenprint(user)
@@ -40,17 +88,60 @@
 
 
 /obj/machinery/resleever/attack_hand(mob/user as mob)
-	return
+	if(!anchored)
+		return
 
+	if(stat & (NOPOWER|BROKEN))
+		usr << "\The [src] doesn't appear to function."
+		return
+
+	tg_ui_interact(user)
+
+/obj/machinery/resleever/ui_status(mob/user, datum/ui_state/state)
+	if(!anchored || inoperable())
+		return UI_CLOSE
+	return ..()
+
+
+/obj/machinery/resleever/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = default_state)
+	ui = tgui_process.try_update_ui(user, src, ui_key, ui, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "resleever", "Neural Lace Resleever", 300, 300, master_ui, state)
+		ui.open()
+
+/obj/machinery/resleever/ui_data()
+	var/list/data = list(
+		"name" = occupant_name,
+		"lace" = lace_name,
+		"isOccupiedEjectable" = isOccupiedEjectable(),
+		"isLaceEjectable" = isLaceEjectable(),
+		"active" = resleeving,
+		"remaining" = remaining,
+		"timetosleeve" = 120,
+		"ready" = readyToBegin()
+	)
+
+	return data
+
+/obj/machinery/resleever/ui_act(action, params)
+	if(..())
+		return
+	switch(action)
+		if("begin")
+			sleeve()
+			resleeving = 1
+		if("eject")
+			eject_occupant()
+		if("ejectlace")
+			eject_lace()
+	update_icon()
 
 /obj/machinery/resleever/proc/sleeve()
 	if(lace && occupant)
 		var/obj/item/organ/I = occupant.organs_by_name["head"]
 		lace.replaced(occupant, I)
 		lace = null
-		playsound(loc, 'sound/machines/ping.ogg', 100, 1)
-		visible_message("\The [src] pings as it completes its procedure!", 3)
-		eject_occupant()
+		lace_name = null
 	else
 		return
 
@@ -73,6 +164,8 @@
 			user.drop_from_inventory(W)
 			lace = W
 			W.loc = src
+			if(lace.backup)
+				lace_name = lace.backup.name
 		else
 			user << "<span class='warning'>\The [src] already has a neural lace inside it!</span>"
 			return
@@ -110,22 +203,11 @@
 			M.forceMove(src)
 
 			occupant = M
+			occupant_name = occupant.name
 			update_icon()
 			if(M.client)
 				M.client.perspective = EYE_PERSPECTIVE
 				M.client.eye = src
-
-
-/obj/machinery/resleever/verb/eject()
-	set name = "Eject Resleever"
-	set category = "Object"
-	set src in oview(1)
-
-	if(usr.stat != 0)
-		return
-	eject_occupant()
-	add_fingerprint(usr)
-	return
 
 /obj/machinery/resleever/proc/eject_occupant()
 	if(!(occupant))
@@ -135,6 +217,7 @@
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant = null
+	occupant_name = null
 	update_icon()
 
 /obj/machinery/resleever/proc/eject_lace()
@@ -142,6 +225,7 @@
 		return
 	lace.loc = loc
 	lace = null
+	lace_name = null
 
 /obj/machinery/resleever/emp_act(severity)
 	//if(prob(100/severity))
