@@ -11,6 +11,7 @@
 	name_language = LANGUAGE_RESOMI
 	min_age = 12
 	max_age = 45
+	health_hud_intensity = 3
 
 	blood_color = "#D514F7"
 	flesh_color = "#5F7BB0"

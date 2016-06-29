@@ -14,6 +14,7 @@
 	mob_size = MOB_SMALL
 	has_fine_manipulation = 0
 	show_ssd = null
+	health_hud_intensity = 2
 
 	eyes = "blank_eyes"
 
