@@ -221,6 +221,6 @@ var/global/list/xy_cache = list()
 
 /proc/xy_decode(var/xy_data)
 	var/list/L = params2list(xy_data)
-	L["x"] = text2num(L["x"])
-	L["y"] = text2num(L["y"])
+	for(var/key in L)
+		L[key] = text2num(L[key])
 	return L

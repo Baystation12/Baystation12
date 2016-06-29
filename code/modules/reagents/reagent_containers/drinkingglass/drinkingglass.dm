@@ -129,12 +129,13 @@
 			if(GE.glass_color)
 				I.color = GE.glass_color
 			underlays += I
-		else if(istype(item, /obj/item/weapon/reagent_containers/food/snacks/fruit_slice))
+		else if(rim_pos && istype(item, /obj/item/weapon/reagent_containers/food/snacks/fruit_slice))
 			var/obj/FS = item
 			var/image/I = image(FS)
 
-			var/fsy = rim_pos[1] - 20
-			var/fsx = rim_pos[side == "left" ? 2 : 3] - 16
+			var/list/rim_pos_data = cached_xy_decode(rim_pos)
+			var/fsy = rim_pos_data["y"] - 20
+			var/fsx = rim_pos_data[side == "left" ? "x_left" : "x_right"] - 16
 
 			var/matrix/M = matrix()
 			M.Scale(0.5)

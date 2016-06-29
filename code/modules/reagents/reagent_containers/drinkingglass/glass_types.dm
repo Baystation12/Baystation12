@@ -6,7 +6,7 @@
 	filling_states = list(20, 40, 60, 80, 100)
 	volume = 30
 	possible_transfer_amounts = list(5,10,15,30)
-	rim_pos = list(23,13,20) // y, x0, x1
+	rim_pos = "y=23;x_left=13;x_right=20" // y, x0, x1
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/rocks
 	name = "rocks glass"
@@ -15,7 +15,7 @@
 	filling_states = list(25, 50, 75, 100)
 	volume = 20
 	possible_transfer_amounts = list(5,10,20)
-	rim_pos = list(21, 10, 23)
+	rim_pos = "y=21;x_left=10;x_right=23"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/shake
 	name = "milkshake glass"
@@ -24,7 +24,7 @@
 	filling_states = list(25, 50, 75, 100)
 	volume = 30
 	possible_transfer_amounts = list(5,10,15,30)
-	rim_pos = list(25, 13, 21)
+	rim_pos = "y=25;x_left=13;x_right=21"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/cocktail
 	name = "cocktail glass"
@@ -33,7 +33,7 @@
 	filling_states = list(33, 66, 100)
 	volume = 15
 	possible_transfer_amounts = list(5,10,15)
-	rim_pos = list(22, 13, 21)
+	rim_pos = "y=22;x_left=13;x_right=21"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/shot
 	name = "shot glass"
@@ -42,7 +42,7 @@
 	filling_states = list(33, 66, 100)
 	volume = 5
 	possible_transfer_amounts = list(1,2,5)
-	rim_pos = list(17, 13, 21)
+	rim_pos = "y=17;x_left=13;x_right=21"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/pint
 	name = "pint glass"
@@ -51,7 +51,7 @@
 	filling_states = list(16, 33, 50, 66, 83, 100)
 	volume = 60
 	possible_transfer_amounts = list(5,10,15,30,60)
-	rim_pos = list(25, 12, 21)
+	rim_pos = "y=25;x_left=12;x_right=21"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/mug
 	name = "glass mug"
@@ -60,7 +60,7 @@
 	filling_states = list(25, 50, 75, 100)
 	volume = 40
 	possible_transfer_amounts = list(5,10,20,40)
-	rim_pos = list(22, 12, 20)
+	rim_pos = "y=22;x_left=12;x_right=20"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/wine
 	name = "wine glass"
@@ -69,4 +69,4 @@
 	filling_states = list(20, 40, 60, 80, 100)
 	volume = 25
 	possible_transfer_amounts = list(5, 10, 15, 25)
-	rim_pos = list(25, 12, 21)
+	rim_pos = "y=25;x_left=12;x_right=21"
