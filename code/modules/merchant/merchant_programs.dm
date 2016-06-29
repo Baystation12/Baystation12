@@ -8,6 +8,7 @@
 	available_on_ntnet = 1
 	size = 12
 	usage_flags = PROGRAM_CONSOLE
+	required_access = access_merchant
 	var/obj/machinery/merchant_pad/pad = null
 	var/current_merchant = 0
 	var/show_trades = 0
