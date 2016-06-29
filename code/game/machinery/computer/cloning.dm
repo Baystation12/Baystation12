@@ -352,7 +352,7 @@
 						var/mob/selected = find_dead_player("[C.ckey]")
 						selected << 'sound/machines/chime.ogg'	//probably not the best sound but I think it's reasonable
 						var/answer = alert(selected,"Do you want to return to life?","Cloning","Yes","No")
-						if(answer != "No" && pod.growclone(C))
+						if(answer == "Yes" && pod.growclone(C))
 							cloning = 1
 					if(cloning)
 						temp = "Initiating cloning cycle..."
@@ -379,18 +379,16 @@
 		return
 	if(!config.use_cortical_stacks)
 		if (!subject.has_brain())
-			if(istype(subject, /mob/living/carbon/human))
+			if(ishuman(subject))
 				var/mob/living/carbon/human/H = subject
 				if(H.species.has_organ["brain"])
 					scantemp = "Error: No signs of intelligence detected."
 			else
 				scantemp = "Error: No signs of intelligence detected."
-		else
-			scantemp = "Error: No signs of intelligence detected."
-		return
-	if ((!subject.ckey) || (!subject.client))
-		scantemp = "Error: Mental interface failure."
-		return
+			return
+		if ((!subject.ckey) || (!subject.client))
+			scantemp = "Error: Mental interface failure."
+			return
 	if (NOCLONE in subject.mutations)
 		scantemp = "Error: Major genetic degradation."
 		return
