@@ -245,31 +245,34 @@
 					. |= M		// Since we're already looping through mobs, why bother using |= ? This only slows things down.
 	return .
 
-/proc/get_mobs_and_objs_in_view_fast(var/turf/T, var/range)
-        var/list/results = list("objs" = list(), "mobs" = list())
+/proc/get_mobs_and_objs_in_view_fast(var/turf/T, var/range, var/list/mobs, var/list/objs, var/checkghosts = GHOSTS_ALL_HEAR)
 
-        var/list/hear = dview(range,T,INVISIBILITY_MAXIMUM)
-        var/list/hearturfs = list()
+	var/list/hear = dview(range,T,INVISIBILITY_MAXIMUM)
+	var/list/hearturfs = list()
 
-        for(var/I in hear)
-                if(ismob(I))
-                        var/mob/M = I
-                        results["mobs"] += M
-                        hearturfs += M.locs[1]
-                else if(isobj(I))
-                        var/obj/O = I
-                        results["objs"] += I
-                        hearturfs += O.locs[1]
+	for(var/atom/movable/AM in hear)
+		if(ismob(AM))
+			mobs += AM
+			hearturfs += AM.locs[1]
+		else if(isobj(AM))
+			objs += AM 
+			hearturfs += AM.locs[1]
 
 
-        for(var/mob/M in player_list)
-                if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
-                        results["mobs"] |= M
-                        continue
-                if(M.loc && M.locs[1] in hearturfs)
-                        results["mobs"] |= M
+	for(var/mob/M in player_list)
+		if(checkghosts == GHOSTS_ALL_HEAR && M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
+			mobs |= M
+			continue
+		if(M.loc && M.locs[1] in hearturfs)
+			mobs |= M
 
-        return results
+	
+
+	for(var/obj/O in listening_objects)
+		if(O && O.loc && O.locs[1] in hearturfs)
+			objs |= O
+
+
 
 
 

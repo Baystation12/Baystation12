@@ -63,19 +63,16 @@
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
 
 	//Being hit while using a deadman switch
-	if(istype(get_active_hand(),/obj/item/device/assembly/signaler))
-		var/obj/item/device/assembly/signaler/signaler = get_active_hand()
-		if(signaler.deadman && prob(80))
-			log_and_message_admins("has triggered a signaler deadman's switch")
-			src.visible_message("\red [src] triggers their deadman's switch!")
-			signaler.signal()
+	var/obj/item/device/assembly/signaler/signaler = get_active_hand()
+	if(istype(signaler) && signaler.deadman)
+		log_and_message_admins("has triggered a signaler deadman's switch")
+		src.visible_message("<span class='warning'>[src] triggers their deadman's switch!</span>")
+		signaler.signal()
 
 	//Stun Beams
 	if(P.taser_effect)
 		stun_effect_act(0, P.agony, def_zone, P)
-		src <<"\red You have been hit by [P]!"
-		qdel(P)
-		return
+		//src <<"<span class='warning'>You have been hit by [P]!</span>"
 
 	//Armor
 	var/absorb = run_armor_check(def_zone, P.check_armour, P.armor_penetration)
@@ -264,7 +261,7 @@
 	return
 
 /mob/living/proc/adjust_fire_stacks(add_fire_stacks) //Adjusting the amount of fire_stacks we have on person
-    fire_stacks = Clamp(fire_stacks + add_fire_stacks, FIRE_MIN_STACKS, FIRE_MAX_STACKS)
+	fire_stacks = Clamp(fire_stacks + add_fire_stacks, FIRE_MIN_STACKS, FIRE_MAX_STACKS)
 
 /mob/living/proc/handle_fire()
 	if(fire_stacks < 0)
@@ -284,8 +281,11 @@
 	var/turf/location = get_turf(src)
 	location.hotspot_expose(fire_burn_temperature(), 50, 1)
 
-/mob/living/fire_act()
-	adjust_fire_stacks(2)
+/mob/living/fire_act(datum/gas_mixture/air, temperature, volume)
+	//once our fire_burn_temperature has reached the temperature of the fire that's giving fire_stacks, stop adding them.
+	//allow fire_stacks to go up to 4 for fires cooler than 700 K, since are being immersed in flame after all.
+	if(fire_stacks <= 4 || fire_burn_temperature() < temperature)
+		adjust_fire_stacks(2)
 	IgniteMob()
 
 /mob/living/proc/get_cold_protection()

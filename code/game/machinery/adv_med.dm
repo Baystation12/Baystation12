@@ -343,7 +343,7 @@
 			break
 		if(istype(e, /obj/item/organ/external/chest) && occ["lung_ruptured"])
 			lung_ruptured = "Lung ruptured:"
-		if(e.status & ORGAN_SPLINTED)
+		if(e.splinted)
 			splint = "Splinted:"
 		if(e.status & ORGAN_BLEEDING)
 			bled = "Bleeding:"

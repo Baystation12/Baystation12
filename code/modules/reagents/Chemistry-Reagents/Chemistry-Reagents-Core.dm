@@ -7,8 +7,7 @@
 	color = "#C80000"
 	taste_description = "iron"
 	taste_mult = 1.3
-	glass_icon_state = "glass_red"
-	glass_name = "glass of tomato juice"
+	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
 
 /datum/reagent/blood/initialize_data(var/newdata)
@@ -36,12 +35,9 @@
 
 /datum/reagent/blood/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 
-	var/effective_dose = dose
-	if(issmall(M)) effective_dose *= 2
-
-	if(effective_dose > 5)
+	if(dose > 5)
 		M.adjustToxLoss(removed)
-	if(effective_dose > 15)
+	if(dose > 15)
 		M.adjustToxLoss(removed)
 	if(data && data["virus2"])
 		var/list/vlist = data["virus2"]
@@ -91,8 +87,7 @@
 	color = "#0064C877"
 	metabolism = REM * 10
 	taste_description = "water"
-	glass_icon_state = "glass_clear"
-	glass_name = "glass of water"
+	glass_name = "water"
 	glass_desc = "The father of all refreshments."
 
 /datum/reagent/water/touch_turf(var/turf/simulated/T)
@@ -156,8 +151,7 @@
 	color = "#660000"
 	touch_met = 5
 
-	glass_icon_state = "dr_gibb_glass"
-	glass_name = "glass of welder fuel"
+	glass_name = "welder fuel"
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
 
 /datum/reagent/fuel/touch_turf(var/turf/T)
@@ -166,7 +160,6 @@
 	return
 
 /datum/reagent/fuel/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(issmall(M)) removed *= 2
 	M.adjustToxLoss(2 * removed)
 
 /datum/reagent/fuel/touch_mob(var/mob/living/L, var/amount)

@@ -577,6 +577,7 @@
 	required_reagents = list("water" = 1, "potassium" = 1)
 	result_amount = 2
 	mix_message = null
+	reaction_rate = HALF_LIFE(0)
 
 /datum/chemical_reaction/explosion_potassium/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -596,6 +597,7 @@
 	result = null
 	required_reagents = list("aluminum" = 1, "potassium" = 1, "sulfur" = 1 )
 	result_amount = null
+	reaction_rate = HALF_LIFE(0)
 
 /datum/chemical_reaction/flash_powder/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -609,7 +611,7 @@
 					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
 						continue
 
-				flick("e_flash", M.flash)
+				M.flash_eyes()
 				M.Weaken(15)
 
 			if(4 to 5)
@@ -617,7 +619,7 @@
 					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
 						continue
 
-				flick("e_flash", M.flash)
+				M.flash_eyes()
 				M.Stun(5)
 
 /datum/chemical_reaction/emp_pulse
@@ -642,6 +644,7 @@
 	required_reagents = list("glycerol" = 1, "pacid" = 1, "sacid" = 1)
 	result_amount = 2
 	log_is_important = 1
+	reaction_rate = HALF_LIFE(0)
 
 /datum/chemical_reaction/nitroglycerin/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -677,6 +680,7 @@
 	result = null
 	required_reagents = list("potassium" = 1, "sugar" = 1, "phosphorus" = 1)
 	result_amount = 0.4
+	reaction_rate = HALF_LIFE(0) //need to process everything at once for the smoke strength calculation to work
 
 /datum/chemical_reaction/chemsmoke/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -696,6 +700,7 @@
 	required_reagents = list("surfactant" = 1, "water" = 1)
 	result_amount = 2
 	mix_message = "The solution violently bubbles!"
+	reaction_rate = HALF_LIFE(0)
 
 /datum/chemical_reaction/foam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -715,6 +720,7 @@
 	result = null
 	required_reagents = list("aluminum" = 3, "foaming_agent" = 1, "pacid" = 1)
 	result_amount = 5
+	reaction_rate = HALF_LIFE(0)
 
 /datum/chemical_reaction/metalfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -733,6 +739,7 @@
 	result = null
 	required_reagents = list("iron" = 3, "foaming_agent" = 1, "pacid" = 1)
 	result_amount = 5
+	reaction_rate = HALF_LIFE(0)
 
 /datum/chemical_reaction/ironfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -983,6 +990,7 @@
 /* Slime cores */
 
 /datum/chemical_reaction/slime
+	reaction_rate = HALF_LIFE(0)
 	var/required = null
 
 /datum/chemical_reaction/slime/can_happen(var/datum/reagents/holder)
@@ -1093,7 +1101,7 @@
 	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
 	for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
 		if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
-			flick("e_flash", M.flash)
+			M.flash_eyes()
 
 	for(var/i = 1, i <= 4 + rand(1,2), i++)
 		var/chosen = pick(borks)
@@ -1181,6 +1189,7 @@
 	required = /obj/item/slime_extract/yellow
 
 /datum/chemical_reaction/slime/cell/on_reaction(var/datum/reagents/holder, var/created_volume)
+	..()
 	var/obj/item/weapon/cell/slime/P = new /obj/item/weapon/cell/slime
 	P.loc = get_turf(holder.my_atom)
 

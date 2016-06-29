@@ -326,11 +326,13 @@ proc/TextPreview(var/string,var/len=40)
 	return 0
 
 /proc/generateRandomString(var/length)
-	var/text = ""
+	. = list()
 	for(var/a in 1 to length)
 		var/letter = rand(33,126)
-		text += ascii2text(letter)
-	return text
+		. += ascii2text(letter)
+	. = jointext(.,null)
+
+#define starts_with(string, substring) (copytext(string,1,1+length(substring)) == substring)
 
 #define gender2text(gender) capitalize(gender)
 

@@ -106,10 +106,6 @@
 	// A is your location but is not a turf; or is on you (backpack); or is on something on you (box in backpack); sdepth is needed here because contents depth does not equate inventory storage depth.
 	var/sdepth = A.storage_depth(src)
 	if((!isturf(A) && A == loc) || (sdepth != -1 && sdepth <= 1))
-		// faster access to objects already on you
-		if(A.loc != src)
-			setMoveCooldown(10) //getting something out of a backpack
-
 		if(W)
 			var/resolved = W.resolve_attackby(A, src, params)
 			if(!resolved && A && W)
@@ -130,8 +126,6 @@
 	sdepth = A.storage_depth_turf()
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		if(A.Adjacent(src)) // see adjacent.dm
-			setMoveCooldown(5)
-
 			if(W)
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
 				var/resolved = W.resolve_attackby(A,src, params)
@@ -202,15 +196,6 @@
 	if((LASER in mutations) && a_intent == I_HURT)
 		LaserEyes(A) // moved into a proc below
 	else if(TK in mutations)
-		switch(get_dist(src,A))
-			if(1 to 5) // not adjacent may mean blocked by window
-				setMoveCooldown(2)
-			if(5 to 7)
-				setMoveCooldown(5)
-			if(8 to tk_maxrange)
-				setMoveCooldown(10)
-			else
-				return
 		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		A.attack_tk(src)
 /*
@@ -339,11 +324,19 @@
 		facedir(direction)
 
 /obj/screen/click_catcher
-	icon = 'icons/mob/screen1_full.dmi'
-	icon_state = "passage0"
-	layer = 0
+	icon = 'icons/mob/screen_gen.dmi'
+	icon_state = "click_catcher"
+	plane = CLICKCATCHER_PLANE
 	mouse_opacity = 2
-	screen_loc = "1,1"
+	screen_loc = "CENTER-7,CENTER-7"
+
+/obj/screen/click_catcher/proc/MakeGreed()
+	. = list()
+	for(var/i = 0, i<15, i++)
+		for(var/j = 0, j<15, j++)
+			var/obj/screen/click_catcher/CC = new()
+			CC.screen_loc = "NORTH-[i],EAST-[j]"
+			. += CC
 
 /obj/screen/click_catcher/Click(location, control, params)
 	var/list/modifiers = params2list(params)
@@ -351,7 +344,7 @@
 		var/mob/living/carbon/C = usr
 		C.swap_hand()
 	else
-		var/turf/T = screen_loc2turf(modifiers["screen-loc"], get_turf(usr))
+		var/turf/T = screen_loc2turf(screen_loc, get_turf(usr))
 		if(T)
 			T.Click(location, control, params)
-	return 1
+	. = 1

@@ -105,9 +105,6 @@
 			radio.autosay("Self destructing now. Have a nice day.", "Self-Destruct Control")
 		timer--
 
-	if(ticker)
-		ticker.station_explosion_cinematic(0,null)
-		if(ticker.mode)
-			ticker.mode:station_was_nuked = 1
+	SetUniversalState(/datum/universal_state/nuclear_explosion/malf, arguments=list(user)) //TODO: find the station nuclear device and use that
 
 

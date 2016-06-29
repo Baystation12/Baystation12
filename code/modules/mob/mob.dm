@@ -1,9 +1,10 @@
 /mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
 	mob_list -= src
-	dead_mob_list -= src
-	living_mob_list -= src
+	dead_mob_list_ -= src
+	living_mob_list_ -= src
 	unset_machine()
 	qdel(hud_used)
+	clear_fullscreen()
 	if(client)
 		for(var/obj/screen/movable/spell_master/spell_master in spell_masters)
 			qdel(spell_master)
@@ -17,8 +18,6 @@
 	. = ..()
 
 /mob/proc/remove_screen_obj_references()
-	flash = null
-	blind = null
 	hands = null
 	pullin = null
 	purged = null
@@ -33,7 +32,6 @@
 	throw_icon = null
 	nutrition_icon = null
 	pressure = null
-	damageoverlay = null
 	pain = null
 	item_use_icon = null
 	gun_move_icon = null
@@ -44,9 +42,9 @@
 /mob/New()
 	mob_list += src
 	if(stat == DEAD)
-		dead_mob_list += src
+		add_to_dead_mob_list()
 	else
-		living_mob_list += src
+		add_to_living_mob_list()
 	..()
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
@@ -117,21 +115,26 @@
 	var/range = world.view
 	if(hearing_distance)
 		range = hearing_distance
-	var/list/hear = get_mobs_or_objects_in_view(range,src)
 
-	for(var/I in hear)
-		if(isobj(I))
-			spawn(0)
-				if(I) //It's possible that it could be deleted in the meantime.
-					var/obj/O = I
-					O.show_message( message, 2, deaf_message, 1)
-		else if(ismob(I))
-			var/mob/M = I
-			var/msg = message
-			if(self_message && M==src)
-				msg = self_message
-			M.show_message( msg, 2, deaf_message, 1)
+	var/turf/T = get_turf(src)
 
+	var/list/mobs = list()
+	var/list/objs = list()
+	get_mobs_and_objs_in_view_fast(T, range, mobs, objs)
+
+
+	for(var/m in mobs)
+		var/mob/M = m
+		if(self_message && M==src)
+			M.show_message(self_message,2,deaf_message,1)
+			continue
+
+		M.show_message(message,2,deaf_message,1)
+
+
+	for(var/o in objs)
+		var/obj/O = o
+		O.show_message(message,2,deaf_message,1)
 
 /mob/proc/findname(msg)
 	for(var/mob/M in mob_list)
@@ -409,7 +412,7 @@
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
 	client.screen.Cut()
-	client.screen += client.void
+	add_click_catcher()
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
@@ -567,7 +570,7 @@
 			for(var/name in H.organs_by_name)
 				var/obj/item/organ/external/e = H.organs_by_name[name]
 				if(e && H.lying)
-					if(((e.status & ORGAN_BROKEN && !(e.status & ORGAN_SPLINTED)) || e.status & ORGAN_BLEEDING) && (H.getBruteLoss() + H.getFireLoss() >= 100))
+					if((((e.status & ORGAN_BROKEN) && !e.splinted) || e.status & ORGAN_BLEEDING ) && (H.getBruteLoss() + H.getFireLoss() >= 100))
 						return 1
 						break
 		return 0
@@ -1088,3 +1091,20 @@ mob/proc/yank_out_object()
 	src.in_throw_mode = 1
 	if(src.throw_icon)
 		src.throw_icon.icon_state = "act_throw_on"
+
+/mob/proc/toggle_antag_pool()
+	set name = "Toggle Add-Antag Candidacy"
+	set desc = "Toggles whether or not you will be considered a candidate by an add-antag vote."
+	set category = "OOC"
+	if(isghostmind(src.mind) || isnewplayer(src))
+		if(ticker && ticker.looking_for_antags)
+			if(src.mind in ticker.antag_pool)
+				ticker.antag_pool -= src.mind
+				usr << "You have left the antag pool."
+			else
+				ticker.antag_pool += src.mind
+				usr << "You have joined the antag pool. Make sure you have the needed role set to high!"
+		else
+			usr << "The game is not currently looking for antags."
+	else
+		usr << "You must be observing or in the lobby to join the antag pool."

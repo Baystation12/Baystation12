@@ -22,7 +22,8 @@
 	desc = "A floating crystal that hums with an unearthly energy."
 	icon_state = "pylon"
 	var/isbroken = 0
-	light_range = 5
+	light_power = 2
+	light_range = 13
 	light_color = "#3e0000"
 	var/obj/item/wepon = null
 
@@ -162,9 +163,7 @@
 				if(istype(W, /obj/item/weapon/implant))
 					qdel(W)
 					continue
-				W.layer = initial(W.layer)
-				W.loc = M.loc
-				W.dropped(M)
+				M.drop_from_inventory(W)
 
 		var/mob/living/new_mob = new /mob/living/simple_animal/corgi(A.loc)
 		new_mob.a_intent = I_HURT

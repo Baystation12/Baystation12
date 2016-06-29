@@ -148,6 +148,7 @@
 	processing_objects.Remove(src)
 	for(var/obj/item/weapon/computer_hardware/CH in src.get_all_components())
 		uninstall_component(null, CH)
+		qdel(CH)
 	return ..()
 
 /obj/item/modular_computer/update_icon()
@@ -198,6 +199,8 @@
 		var/list/program = list()
 		program["name"] = P.filename
 		program["desc"] = P.filedesc
+		if(P in idle_threads)
+			program["running"] = 1
 		programs.Add(list(program))
 
 	data["programs"] = programs
@@ -395,10 +398,6 @@
 		if(!active_program || !processor_unit)
 			return
 
-		if(idle_threads.len >= processor_unit.max_idle_programs)
-			user << "<span class='notice'>\The [src] displays a \"Maximal CPU load reached. Unable to minimize another program.\" error</span>"
-			return
-
 		idle_threads.Add(active_program)
 		active_program.program_state = PROGRAM_STATE_BACKGROUND // Should close any existing UIs
 		nanomanager.close_uis(active_program.NM ? active_program.NM : active_program)
@@ -406,6 +405,20 @@
 		update_icon()
 		if(user && istype(user))
 			ui_interact(user) // Re-open the UI on this computer. It should show the main screen now.
+
+	if( href_list["PC_killprogram"] )
+		var/prog = href_list["PC_killprogram"]
+		var/datum/computer_file/program/P = null
+		var/mob/user = usr
+		if(hard_drive)
+			P = hard_drive.find_file_by_name(prog)
+
+		if(!istype(P) || P.program_state == PROGRAM_STATE_KILLED)
+			return
+
+		P.kill_program(1)
+		update_uis()
+		user << "<span class='notice'>Program [P.filename].[P.filetype] with PID [rand(100,999)] has been killed.</span>"
 
 	if( href_list["PC_runprogram"] )
 		var/prog = href_list["PC_runprogram"]
@@ -431,9 +444,14 @@
 			update_icon()
 			return
 
+		if(idle_threads.len >= processor_unit.max_idle_programs+1)
+			user << "<span class='notice'>\The [src] displays a \"Maximal CPU load reached. Unable to run another program.\" error</span>"
+			return
+
 		if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature)) // The program requires NTNet connection, but we are not connected to NTNet.
 			user << "<span class='danger'>\The [src]'s screen shows \"NETWORK ERROR - Unable to connect to NTNet. Please retry. If problem persists contact your system administrator.\" warning.</span>"
 			return
+
 		if(P.run_program(user))
 			active_program = P
 			update_icon()

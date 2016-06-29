@@ -14,8 +14,6 @@
 				if(client.prefs.muted & MUTE_IC)
 					src << "You cannot send IC messages (muted)."
 					return
-				if (src.client.handle_spam_prevention(message,MUTE_IC))
-					return
 			if (stat)
 				return
 			if(!(message))
@@ -185,6 +183,40 @@
 			else
 				message = "buzzes."
 			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+			m_type = 1
+
+		if("confirm")
+			var/M = null
+			if(param)
+				for (var/mob/A in view(null, null))
+					if (param == A.name)
+						M = A
+						break
+			if(!M)
+				param = null
+
+			if (param)
+				message = "emits an affirmative blip at [param]."
+			else
+				message = "emits an affirmative blip."
+			playsound(src.loc, 'sound/machines/synth_yes.ogg', 50, 0)
+			m_type = 1
+
+		if("deny")
+			var/M = null
+			if(param)
+				for (var/mob/A in view(null, null))
+					if (param == A.name)
+						M = A
+						break
+			if(!M)
+				param = null
+
+			if (param)
+				message = "emits a negative blip at [param]."
+			else
+				message = "emits a negative blip."
+			playsound(src.loc, 'sound/machines/synth_no.ogg', 50, 0)
 			m_type = 1
 
 		if("law")

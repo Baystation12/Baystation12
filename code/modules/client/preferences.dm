@@ -60,18 +60,11 @@ datum/preferences
 		//Mob preview
 	var/icon/preview_icon = null
 
-		//Jobs, uses bitflags
-	var/job_civilian_high = 0
-	var/job_civilian_med = 0
-	var/job_civilian_low = 0
 
-	var/job_medsci_high = 0
-	var/job_medsci_med = 0
-	var/job_medsci_low = 0
-
-	var/job_engsec_high = 0
-	var/job_engsec_med = 0
-	var/job_engsec_low = 0
+	//Since there can only be 1 high job.
+	var/job_high = null
+	var/list/job_medium = list() //List of all things selected for medium weight
+	var/list/job_low    = list() //List of all the things selected for low weight
 
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 0
@@ -239,12 +232,14 @@ datum/preferences
 	else if(href_list["reload"])
 		load_preferences()
 		load_character()
+		sanitize_preferences()
 	else if(href_list["load"])
 		if(!IsGuestKey(usr.key))
 			open_load_dialog(usr)
 			return 1
 	else if(href_list["changeslot"])
 		load_character(text2num(href_list["changeslot"]))
+		sanitize_preferences()
 		close_load_dialog(usr)
 	else
 		return 0
@@ -252,7 +247,7 @@ datum/preferences
 	ShowChoices(usr)
 	return 1
 
-/datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = 1)
+/datum/preferences/proc/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
 	character.set_species(species)
@@ -267,25 +262,7 @@ datum/preferences
 		else if(firstspace == name_length)
 			real_name += "[pick(last_names)]"
 
-	character.real_name = real_name
-	character.name = character.real_name
-	if(character.dna)
-		character.dna.real_name = character.real_name
-
-	character.flavor_texts["general"] = flavor_texts["general"]
-	character.flavor_texts["head"] = flavor_texts["head"]
-	character.flavor_texts["face"] = flavor_texts["face"]
-	character.flavor_texts["eyes"] = flavor_texts["eyes"]
-	character.flavor_texts["torso"] = flavor_texts["torso"]
-	character.flavor_texts["arms"] = flavor_texts["arms"]
-	character.flavor_texts["hands"] = flavor_texts["hands"]
-	character.flavor_texts["legs"] = flavor_texts["legs"]
-	character.flavor_texts["feet"] = flavor_texts["feet"]
-
-	character.med_record = med_record
-	character.sec_record = sec_record
-	character.gen_record = gen_record
-	character.exploit_record = exploit_record
+	character.fully_replace_character_name(real_name)
 
 	character.gender = gender
 	character.age = age
@@ -314,16 +291,7 @@ datum/preferences
 	character.h_style = h_style
 	character.f_style = f_style
 
-	character.home_system = home_system
-	character.citizenship = citizenship
-	character.personal_faction = faction
-	character.religion = religion
-
-	character.skills = skills
-	character.used_skillpoints = used_skillpoints
-
 	// Destroy/cyborgize organs
-
 	for(var/name in organ_data)
 
 		var/status = organ_data[name]
@@ -343,7 +311,7 @@ datum/preferences
 					O.robotize(rlimb_data[name])
 				else
 					O.robotize()
-		else
+		else if(!O && !is_preview_copy)
 			var/obj/item/organ/I = character.internal_organs_by_name[name]
 			if(I)
 				if(status == "assisted")
@@ -368,13 +336,38 @@ datum/preferences
 		backbag = 1 //Same as above
 	character.backbag = backbag
 
-	if(icon_updates)
-		character.force_update_limbs()
-		character.update_mutations(0)
-		character.update_body(0)
-		character.update_underwear(0)
-		character.update_hair(0)
-		character.update_icons()
+	character.force_update_limbs()
+	character.update_mutations(0)
+	character.update_body(0)
+	character.update_underwear(0)
+	character.update_hair(0)
+	character.update_icons()
+
+	if(is_preview_copy)
+		return
+
+	character.flavor_texts["general"] = flavor_texts["general"]
+	character.flavor_texts["head"] = flavor_texts["head"]
+	character.flavor_texts["face"] = flavor_texts["face"]
+	character.flavor_texts["eyes"] = flavor_texts["eyes"]
+	character.flavor_texts["torso"] = flavor_texts["torso"]
+	character.flavor_texts["arms"] = flavor_texts["arms"]
+	character.flavor_texts["hands"] = flavor_texts["hands"]
+	character.flavor_texts["legs"] = flavor_texts["legs"]
+	character.flavor_texts["feet"] = flavor_texts["feet"]
+
+	character.med_record = med_record
+	character.sec_record = sec_record
+	character.gen_record = gen_record
+	character.exploit_record = exploit_record
+
+	character.home_system = home_system
+	character.citizenship = citizenship
+	character.personal_faction = faction
+	character.religion = religion
+
+	character.skills = skills
+	character.used_skillpoints = used_skillpoints
 
 /datum/preferences/proc/open_load_dialog(mob/user)
 	var/dat  = list()

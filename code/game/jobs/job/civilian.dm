@@ -1,9 +1,8 @@
 //Food
 /datum/job/bartender
 	title = "Bartender"
-	flag = BARTENDER
 	department = "Civilian"
-	department_flag = CIVILIAN
+	department_flag = CIV
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -29,9 +28,8 @@
 
 /datum/job/chef
 	title = "Chef"
-	flag = CHEF
 	department = "Civilian"
-	department_flag = CIVILIAN
+	department_flag = CIV
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
@@ -56,9 +54,8 @@
 
 /datum/job/hydro
 	title = "Gardener"
-	flag = BOTANIST
 	department = "Civilian"
-	department_flag = CIVILIAN
+	department_flag = CIV
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 1
@@ -89,9 +86,8 @@
 //Cargo
 /datum/job/qm
 	title = "Quartermaster"
-	flag = QUARTERMASTER
 	department = "Cargo"
-	department_flag = CIVILIAN
+	department_flag = CIV|CRG
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -119,9 +115,8 @@
 
 /datum/job/cargo_tech
 	title = "Cargo Technician"
-	flag = CARGOTECH
 	department = "Cargo"
-	department_flag = CIVILIAN
+	department_flag = CIV|CRG
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
@@ -144,9 +139,8 @@
 
 /datum/job/mining
 	title = "Shaft Miner"
-	flag = MINER
 	department = "Cargo"
-	department_flag = CIVILIAN
+	department_flag = CIV
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 3
@@ -170,10 +164,10 @@
 //		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
 		if(H.backbag == 1)
 			H.equip_to_slot_or_del(new /obj/item/weapon/crowbar(H), slot_l_hand)
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/bag/ore(H), slot_l_store)
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/ore(H), slot_l_store)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/crowbar(H), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/bag/ore(H), slot_in_backpack)
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/ore(H), slot_in_backpack)
 		return 1
 
 	equip_survival(var/mob/living/carbon/human/H)
@@ -183,9 +177,8 @@
 
 /datum/job/janitor
 	title = "Janitor"
-	flag = JANITOR
 	department = "Civilian"
-	department_flag = CIVILIAN
+	department_flag = CIV
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -208,9 +201,8 @@
 //More or less assistants
 /datum/job/librarian
 	title = "Librarian"
-	flag = LIBRARIAN
 	department = "Civilian"
-	department_flag = CIVILIAN
+	department_flag = CIV
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -234,9 +226,8 @@
 //var/global/lawyer = 0//Checks for another lawyer //This changed clothes on 2nd lawyer, both IA get the same dreds.
 /datum/job/lawyer
 	title = "Internal Affairs Agent"
-	flag = LAWYER
 	department = "Civilian"
-	department_flag = CIVILIAN
+	department_flag = CIV
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
@@ -245,6 +236,7 @@
 	economic_modifier = 7
 	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
+	minimal_player_age = 10
 
 
 	equip(var/mob/living/carbon/human/H)

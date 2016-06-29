@@ -51,7 +51,7 @@
 	if(!istype(S))
 		return
 	has_suit = S
-	loc = has_suit
+	forceMove(has_suit)
 	has_suit.overlays += get_inv_overlay()
 
 	if(user)

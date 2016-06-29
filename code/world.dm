@@ -1,34 +1,4 @@
 
-/*
-	The initialization of the game happens roughly like this:
-
-	1. All global variables are initialized (including the global_init instance).
-	2. The map is initialized, and map objects are created.
-	3. world/New() runs, creating the process scheduler (and the old master controller) and spawning their setup.
-	4. processScheduler/setup() runs, creating all the processes. game_controller/setup() runs, calling initialize() on all movable atoms in the world.
-	5. The gameticker is created.
-
-*/
-var/global/datum/global_init/init = new ()
-
-/*
-	Pre-map initialization stuff should go here.
-*/
-/datum/global_init/New()
-	generate_gameid()
-
-	makeDatumRefLists()
-	populateGlobalLists()
-	load_configuration()
-
-	initialize_chemical_reagents()
-	initialize_chemical_reactions()
-
-	qdel(src) //we're done
-
-/datum/global_init/Destroy()
-	return 1
-
 /var/game_id = null
 /proc/generate_gameid()
 	if(game_id != null)
@@ -76,7 +46,7 @@ var/global/datum/global_init/init = new ()
 		config.server_name += " #[(world.port % 1000) / 100]"
 
 	if(config && config.log_runtime)
-		log = file("data/logs/runtime/[time2text(world.realtime,"YYYY-MM-DD-(hh-mm-ss)")]-runtime.log")
+		log = file("data/logs/runtime/[date_string]-runtime.log")
 
 	callHook("startup")
 	//Emergency Fix
@@ -166,7 +136,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/input[] = params2list(T)
 		var/list/s = list()
 		s["version"] = game_version
-		s["mode"] = master_mode
+		s["mode"] = PUBLIC_GAME_MODE
 		s["respawn"] = config.abandon_allowed
 		s["enter"] = config.enter_allowed
 		s["vote"] = config.allow_vote_mode
@@ -212,34 +182,16 @@ var/world_topic_spam_protect_time = world.timeofday
 		return list2params(s)
 
 	else if(T == "manifest")
+		data_core.get_manifest_list()
 		var/list/positions = list()
-		var/list/set_names = list(
-				"heads" = command_positions,
-				"sec" = security_positions,
-				"eng" = engineering_positions,
-				"med" = medical_positions,
-				"sci" = science_positions,
-				"car" = cargo_positions,
-				"civ" = civilian_positions,
-				"bot" = nonhuman_positions
-			)
 
-		for(var/datum/data/record/t in data_core.general)
-			var/name = t.fields["name"]
-			var/rank = t.fields["rank"]
-			var/real_rank = make_list_rank(t.fields["real_rank"])
-
-			var/department = 0
-			for(var/k in set_names)
-				if(real_rank in set_names[k])
-					if(!positions[k])
-						positions[k] = list()
-					positions[k][name] = rank
-					department = 1
-			if(!department)
-				if(!positions["misc"])
-					positions["misc"] = list()
-				positions["misc"][name] = rank
+		// We rebuild the list in the format external tools expect
+		for(var/dept in PDA_Manifest)
+			var/list/dept_list = PDA_Manifest[dept]
+			if(dept_list.len > 0)
+				positions[dept] = list()
+				for(var/list/person in dept_list)
+					positions[dept][person["name"]] = person["rank"]
 
 		for(var/k in positions)
 			positions[k] = list2params(positions[k]) // converts positions["heads"] = list("Bob"="Captain", "Bill"="CMO") into positions["heads"] = "Bob=Captain&Bill=CMO"
@@ -278,6 +230,10 @@ var/world_topic_spam_protect_time = world.timeofday
 			if(M.mind)
 				strings += M.mind.assigned_role
 				strings += M.mind.special_role
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				if(H.species)
+					strings += H.species.name
 			for(var/text in strings)
 				if(ckey(text) in ckeysearch)
 					match[M] += 10 // an exact match is far better than a partial one
@@ -319,8 +275,14 @@ var/world_topic_spam_protect_time = world.timeofday
 							clone = L.getCloneLoss(),
 							brain = L.getBrainLoss()
 						))
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					info["species"] = H.species.name
+				else
+					info["species"] = "non-human"
 			else
 				info["damage"] = "non-living"
+				info["species"] = "non-human"
 			info["gender"] = M.gender
 			return list2params(info)
 		else

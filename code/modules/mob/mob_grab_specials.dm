@@ -51,10 +51,16 @@
 		return
 
 	attacker.visible_message("<span class='danger'>[attacker] [pick("bent", "twisted")] [target]'s [organ.name] into a jointlock!</span>")
+
+	if(target.species.flags & NO_PAIN)
+		return
+
 	var/armor = target.run_armor_check(target, "melee")
 	if(armor < 100)
 		target << "<span class='danger'>You feel extreme pain!</span>"
-		affecting.adjustHalLoss(Clamp(0, 60-affecting.halloss, 30)) //up to 60 halloss
+
+		var/max_halloss = round(target.species.total_health * 0.8) //up to 80% of passing out
+		affecting.adjustHalLoss(Clamp(0, max_halloss - affecting.halloss, 30))
 
 /obj/item/weapon/grab/proc/attack_eye(mob/living/carbon/human/target, mob/living/carbon/human/attacker)
 	if(!istype(attacker))
@@ -131,6 +137,10 @@
 		return
 	if(force_down)
 		attacker << "<span class='warning'>You are already pinning [target] to the ground.</span>"
+		return
+	if(size_difference(affecting, assailant) > 0)
+		attacker << "<span class='warning'>You are too small to do that!</span>"
+		return
 
 	attacker.visible_message("<span class='danger'>[attacker] starts forcing [target] to the ground!</span>")
 	if(do_after(attacker, 20, progress=0) && target)

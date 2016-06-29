@@ -92,7 +92,6 @@
 		if(loaded.len)
 			for(var/i in 1 to max_shells)
 				Fire(user, user)	//will this work? //it will. we call it twice, for twice the FUN
-				playsound(user, fire_sound, 50, 1)
 			user.visible_message("<span class='danger'>The shotgun goes off!</span>", "<span class='danger'>The shotgun goes off in your face!</span>")
 			return
 		if(do_after(user, 30, src))	//SHIT IS STEALTHY EYYYYY

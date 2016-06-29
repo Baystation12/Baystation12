@@ -63,9 +63,12 @@
 /datum/universal_state/proc/OverlayAndAmbientSet()
 	return
 
-/proc/SetUniversalState(var/newstate,var/on_exit=1, var/on_enter=1)
+/proc/SetUniversalState(var/newstate,var/on_exit=1, var/on_enter=1, list/arguments=null)
 	if(on_exit)
 		universe.OnExit()
-	universe = new newstate
+	if(arguments)
+		universe = new newstate(arglist(arguments))
+	else
+		universe = new newstate
 	if(on_enter)
 		universe.OnEnter()

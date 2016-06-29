@@ -9,8 +9,6 @@
 		if(client.prefs.muted & MUTE_IC)
 			src << "\red You cannot speak in IC (muted)."
 			return
-		if (src.client.handle_spam_prevention(message,MUTE_IC))
-			return
 
 	if(istype(src.loc,/mob/living/simple_animal/borer))
 

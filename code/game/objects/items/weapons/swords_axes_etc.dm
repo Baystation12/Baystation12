@@ -62,10 +62,7 @@
 		force = 3//not so robust now
 		attack_verb = list("hit", "punched")
 
-	if(istype(user,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = user
-		H.update_inv_l_hand()
-		H.update_inv_r_hand()
+	update_held_icon()
 
 	playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 	add_fingerprint(user)

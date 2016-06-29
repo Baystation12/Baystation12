@@ -14,19 +14,33 @@
 	for(var/turf/simulated/floor in get_cardinal_neighbors())
 		if(get_dist(parent, floor) > spread_distance)
 			continue
-		if((locate(/obj/effect/plant) in floor.contents) || (locate(/obj/effect/dead_plant) in floor.contents) )
+
+		var/blocked = 0
+		for(var/obj/effect/plant/other in floor.contents)
+			if(other.seed == src.seed)
+				blocked = 1
+				break
+		if(blocked)
 			continue
+
 		if(floor.density)
 			if(!isnull(seed.chems["pacid"]))
 				spawn(rand(5,25)) floor.ex_act(3)
 			continue
+
 		if(!Adjacent(floor) || !floor.Enter(src))
 			continue
+
 		neighbors |= floor
+
+	if(neighbors.len)
+		plant_controller.add_plant(src) //if we have neighbours again, start processing
+
 	// Update all of our friends.
 	var/turf/T = get_turf(src)
 	for(var/obj/effect/plant/neighbor in range(1,src))
-		neighbor.neighbors -= T
+		if(neighbor.seed == src.seed)
+			neighbor.neighbors -= T
 
 /obj/effect/plant/process()
 
@@ -71,9 +85,15 @@
 
 	if(sampled)
 		//Should be between 2-7 for given the default range of values for TRAIT_PRODUCTION
-		var/chance = max(1, round(30/seed.get_trait(TRAIT_PRODUCTION)))
+		var/chance = max(1, round(15/seed.get_trait(TRAIT_PRODUCTION)))
 		if(prob(chance))
 			sampled = 0
+
+	if(is_mature() && !buckled_mob)
+		for(var/turf/neighbor in neighbors)
+			for(var/mob/living/M in neighbor)
+				if(seed.get_trait(TRAIT_SPREAD) >= 2 && (M.lying || prob(round(seed.get_trait(TRAIT_POTENCY)))))
+					entangle(M)
 
 	if(is_mature() && neighbors.len && prob(spread_chance))
 		//spread to 1-3 adjacent turfs depending on yield trait.
@@ -84,19 +104,52 @@
 				sleep(rand(3,5))
 				if(!neighbors.len)
 					break
-				var/turf/target_turf = pick(neighbors)
-				var/obj/effect/plant/child = new(get_turf(src),seed,parent)
-				spawn(1) // This should do a little bit of animation.
-					child.loc = target_turf
-					child.update_icon()
-				// Update neighboring squares.
-				for(var/obj/effect/plant/neighbor in range(1,target_turf))
-					neighbor.neighbors -= target_turf
+				spread_to(pick(neighbors))
 
 	// We shouldn't have spawned if the controller doesn't exist.
 	check_health()
-	if(neighbors.len || health != max_health)
+	if(buckled_mob || neighbors.len)
 		plant_controller.add_plant(src)
+
+//spreading vines aren't created on their final turf. 
+//Instead, they are created at their parent and then move to their destination.
+/obj/effect/plant/proc/spread_to(turf/target_turf)
+	var/obj/effect/plant/child = new(get_turf(src),seed,parent)
+
+	spawn(1) // This should do a little bit of animation.
+		if(deleted(child))
+			return
+
+		//move out to the destination
+		child.anchored = 0
+		step_to(child, target_turf)
+		child.anchored = 1
+		child.update_icon()
+
+		//see if anything is there
+		for(var/thing in child.loc)
+			if(thing != child && istype(thing, /obj/effect/plant))
+				var/obj/effect/plant/other = thing
+				if(other.seed != child.seed)
+					other.vine_overrun(child.seed, src) //vine fight
+				qdel(child)
+				return
+			if(istype(thing, /obj/effect/dead_plant))
+				qdel(thing)
+				qdel(child)
+				return
+			if(isliving(thing) && (seed.get_trait(TRAIT_CARNIVOROUS) || (seed.get_trait(TRAIT_SPREAD) >= 2 && prob(round(seed.get_trait(TRAIT_POTENCY))))))
+				entangle(thing)
+				qdel(child)
+				return
+
+		// Update neighboring squares.
+		for(var/obj/effect/plant/neighbor in range(1, child.loc)) //can use the actual final child loc now
+			if(child.seed == neighbor.seed) //neighbors of different seeds will continue to try to overrun each other
+				neighbor.neighbors -= target_turf
+
+		child.finish_spreading()
+
 
 /obj/effect/plant/proc/die_off()
 	// Kill off our plant.

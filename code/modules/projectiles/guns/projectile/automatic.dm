@@ -42,13 +42,14 @@
 	desc = "The C-20r is a lightweight and rapid firing SMG, for when you REALLY need someone dead. Uses 10mm rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp."
 	icon_state = "c20r"
 	item_state = "c20r"
-	w_class = 3
+	w_class = 4
 	force = 10
 	caliber = "10mm"
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	slot_flags = SLOT_BELT|SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a10mm
+	allowed_magazines = /obj/item/ammo_magazine/a10mm
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 	requires_two_hands = 1
@@ -70,7 +71,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/sts35
 	name = "assault rifle"
-	desc = "The rugged STS-35 is a durable automatic weapon of a make popular on the frontier worlds. Uses 7.62mm rounds. This one is unmarked."
+	desc = "The rugged STS-35 is a durable automatic weapon of a make popular on the frontier worlds. The serial number has been scratched off. Uses 7.62mm rounds."
 	icon_state = "arifle"
 	item_state = null
 	w_class = 5
@@ -80,6 +81,7 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c762
+	allowed_magazines = /obj/item/ammo_magazine/c762
 	requires_two_hands = 3
 
 	//Assault rifle, burst fire degrades quicker than SMG, worse one-handing penalty, slightly increased move delay
@@ -102,9 +104,10 @@
 	caliber = "9mm"
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
 	slot_flags = SLOT_BELT
-	ammo_type = /obj/item/ammo_casing/c9mmr
+	ammo_type = /obj/item/ammo_casing/c9mm/rubber
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mmt/rubber
+	allowed_magazines = /obj/item/ammo_magazine/mc9mmt
 
 	//machine pistol, like SMG but easier to one-hand with
 	firemodes = list(
@@ -134,6 +137,7 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a556
+	allowed_magazines = /obj/item/ammo_magazine/a556
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 	requires_two_hands = 5
@@ -193,7 +197,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw
 	name = "light machine gun"
-	desc = "A rather traditionally made L6 SAW with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2531' engraved on the reciever."
+	desc = "A rather traditionally made L6 SAW with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2531' engraved on the reciever." //probably should refluff this
 	icon_state = "l6closed100"
 	item_state = "l6closedmag"
 	w_class = 5
@@ -202,10 +206,11 @@
 	max_shells = 50
 	caliber = "a762"
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 2)
-	slot_flags = SLOT_BACK
+	slot_flags = 0 //need sprites for SLOT_BACK
 	ammo_type = /obj/item/ammo_casing/a762
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/a762
+	magazine_type = /obj/item/ammo_magazine/box/a762
+	allowed_magazines = list(/obj/item/ammo_magazine/box/a762, /obj/item/ammo_magazine/c762)
 	requires_two_hands = 6
 
 	//LMG, better sustained fire accuracy than assault rifles (comparable to SMG), higer move delay and one-handing penalty
@@ -216,6 +221,9 @@
 		)
 
 	var/cover_open = 0
+
+/obj/item/weapon/gun/projectile/automatic/l6_saw/mag
+	magazine_type = /obj/item/ammo_magazine/c762
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/special_check(mob/user)
 	if(cover_open)
@@ -241,11 +249,20 @@
 		return ..() //once open, behave like normal
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/update_icon()
-	icon_state = "l6[cover_open ? "open" : "closed"][ammo_magazine ? round(ammo_magazine.stored_ammo.len, 25) : "-empty"]"
+	if(istype(ammo_magazine, /obj/item/ammo_magazine/box))
+		icon_state = "l6[cover_open ? "open" : "closed"][round(ammo_magazine.stored_ammo.len, 25)]"
+		item_state = "l6[cover_open ? "open" : "closed"]"
+	else if(ammo_magazine)
+		icon_state = "l6[cover_open ? "open" : "closed"]mag"
+		item_state = "l6[cover_open ? "open" : "closed"]mag"
+	else
+		icon_state = "l6[cover_open ? "open" : "closed"]-empty"
+		item_state = "l6[cover_open ? "open" : "closed"]-empty"
+	..()
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/load_ammo(var/obj/item/A, mob/user)
 	if(!cover_open)
-		user << "<span class='warning'>You need to open the cover to load [src].</span>"
+		user << "<span class='warning'>You need to open the cover to load that into [src].</span>"
 		return
 	..()
 

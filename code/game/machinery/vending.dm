@@ -1,72 +1,3 @@
-#define CAT_NORMAL 1
-#define CAT_HIDDEN 2  // also used in corresponding wires/vending.dm
-#define CAT_COIN   4
-
-/**
- *  Datum used to hold information about a product in a vending machine
- */
-/datum/data/vending_product
-	var/product_name = "generic" // Display name for the product
-	var/product_path = null
-	var/amount = 0            // The original amount held in the vending machine
-	var/list/instances
-	var/price = 0              // Price to buy one
-	var/display_color = null   // Display color for vending machine listing
-	var/category = CAT_NORMAL  // CAT_HIDDEN for contraband, CAT_COIN for premium
-	var/vending_machine        // The vending machine we belong to
-
-/datum/data/vending_product/New(var/vending_machine, var/path, var/name = null, var/amount = 1, var/price = 0, var/color = null, var/category = CAT_NORMAL)
-	..()
-
-	src.product_path = path
-
-	if(!name)
-		var/atom/tmp = path
-		src.product_name = initial(tmp.name)
-	else
-		src.product_name = name
-
-	src.amount = amount
-	src.price = price
-	src.display_color = color
-	src.category = category
-	src.vending_machine = vending_machine
-
-/datum/data/vending_product/Destroy()
-	vending_machine = null
-	if(instances)
-		for(var/product in instances)
-			qdel(product)
-		instances.Cut()
-	. = ..()
-
-/datum/data/vending_product/proc/get_amount()
-	return instances ? instances.len : amount
-
-/datum/data/vending_product/proc/add_product(var/atom/movable/product)
-	if(product.type != product_path)
-		return 0
-	init_products()
-	product.forceMove(vending_machine)
-	instances += product
-
-/datum/data/vending_product/proc/get_product(var/product_location)
-	if(!get_amount() || !product_location)
-		return
-	init_products()
-
-	var/atom/movable/product = instances[instances.len]	// Remove the last added product
-	instances -= product
-	product.forceMove(product_location)
-	return product
-
-/datum/data/vending_product/proc/init_products()
-	if(instances)
-		return
-	instances = list()
-	for(var/i = 1 to amount)
-		var/new_product = new product_path(vending_machine)
-		instances += new_product
 
 /**
  *  A vending machine
@@ -93,7 +24,7 @@
 	var/vend_ready = 1 //Are we ready to vend?? Is it time??
 	var/vend_delay = 10 //How long does it take to vend?
 	var/categories = CAT_NORMAL // Bitmask of cats we're currently showing
-	var/datum/data/vending_product/currently_vending = null // What we're requesting payment for right now
+	var/datum/stored_items/vending_products/currently_vending = null // What we're requesting payment for right now
 	var/status_message = "" // Status screen messages like "insufficient funds", displayed in NanoUI
 	var/status_error = 0 // Set to 1 if status_message is an error
 
@@ -173,7 +104,7 @@
 		var/category = current_list[2]
 
 		for(var/entry in current_list[1])
-			var/datum/data/vending_product/product = new/datum/data/vending_product(src, entry)
+			var/datum/stored_items/vending_products/product = new/datum/stored_items/vending_products(src, entry)
 
 			product.price = (entry in src.prices) ? src.prices[entry] : 0
 			product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
@@ -186,7 +117,7 @@
 	wires = null
 	qdel(coin)
 	coin = null
-	for(var/datum/data/vending_product/R in product_records)
+	for(var/datum/stored_items/vending_products/R in product_records)
 		qdel(R)
 	product_records = null
 	return ..()
@@ -281,8 +212,8 @@
 
 	else
 
-		for(var/datum/data/vending_product/R in product_records)
-			if(istype(W, R.product_path))
+		for(var/datum/stored_items/vending_products/R in product_records)
+			if(istype(W, R.item_path))
 				stock(W, R, user)
 				return 1
 		..()
@@ -373,7 +304,7 @@
 		// create entry in the purchaser's account log
 		var/datum/transaction/T = new()
 		T.target_name = "[vendor_account.owner_name] (via [src.name])"
-		T.purpose = "Purchase of [currently_vending.product_name]"
+		T.purpose = "Purchase of [currently_vending.item_name]"
 		if(currently_vending.price > 0)
 			T.amount = "([currently_vending.price])"
 		else
@@ -399,7 +330,7 @@
 
 	var/datum/transaction/T = new()
 	T.target_name = target
-	T.purpose = "Purchase of [currently_vending.product_name]"
+	T.purpose = "Purchase of [currently_vending.item_name]"
 	T.amount = "[currently_vending.price]"
 	T.source_terminal = src.name
 	T.date = current_date_string
@@ -431,7 +362,7 @@
 	var/list/data = list()
 	if(currently_vending)
 		data["mode"] = 1
-		data["product"] = currently_vending.product_name
+		data["product"] = currently_vending.item_name
 		data["price"] = currently_vending.price
 		data["message_err"] = 0
 		data["message"] = src.status_message
@@ -441,14 +372,14 @@
 		var/list/listed_products = list()
 
 		for(var/key = 1 to src.product_records.len)
-			var/datum/data/vending_product/I = src.product_records[key]
+			var/datum/stored_items/vending_products/I = src.product_records[key]
 
 			if(!(I.category & src.categories))
 				continue
 
 			listed_products.Add(list(list(
 				"key" = key,
-				"name" = I.product_name,
+				"name" = I.item_name,
 				"price" = I.price,
 				"color" = I.display_color,
 				"amount" = I.get_amount())))
@@ -496,7 +427,7 @@
 				return
 
 			var/key = text2num(href_list["vend"])
-			var/datum/data/vending_product/R = product_records[key]
+			var/datum/stored_items/vending_products/R = product_records[key]
 
 			// This should not happen unless the request from NanoUI was bad
 			if(!(R.category & src.categories))
@@ -525,7 +456,7 @@
 		src.add_fingerprint(usr)
 		nanomanager.update_uis(src)
 
-/obj/machinery/vending/proc/vend(datum/data/vending_product/R, mob/user)
+/obj/machinery/vending/proc/vend(var/datum/stored_items/vending_products/R, mob/user)
 	if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
 		usr << "<span class='warning'>Access denied.</span>"	//Unless emagged of course
 		flick(src.icon_deny,src)
@@ -579,7 +510,7 @@
  * Checks if item is vendable in this machine should be performed before
  * calling. W is the item being inserted, R is the associated vending_product entry.
  */
-/obj/machinery/vending/proc/stock(obj/item/weapon/W, var/datum/data/vending_product/R, var/mob/user)
+/obj/machinery/vending/proc/stock(obj/item/weapon/W, var/datum/stored_items/vending_products/R, var/mob/user)
 	if(!user.unEquip(W))
 		return
 
@@ -631,7 +562,7 @@
 
 //Oh no we're malfunctioning!  Dump out some product and break.
 /obj/machinery/vending/proc/malfunction()
-	for(var/datum/data/vending_product/R in src.product_records)
+	for(var/datum/stored_items/vending_products/R in src.product_records)
 		while(R.get_amount()>0)
 			R.get_product(loc)
 		break
@@ -647,7 +578,7 @@
 	if(!target)
 		return 0
 
-	for(var/datum/data/vending_product/R in src.product_records)
+	for(var/datum/stored_items/vending_products/R in src.product_records)
 		throw_item = R.get_product(loc)
 		if (!throw_item)
 			continue
@@ -704,15 +635,23 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/barflask = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 30,
-					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass = 30,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/square = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/rocks = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/shake = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/cocktail = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/shot = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/pint = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/mug = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/wine = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/ice = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/tea = 15)
+					/obj/item/weapon/reagent_containers/food/drinks/tea = 15,
+					/obj/item/weapon/glass_extra/stick = 15,
+					/obj/item/weapon/glass_extra/straw = 15)
 	contraband = list()
 	vend_delay = 15
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
@@ -775,6 +714,28 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 1)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
+/obj/machinery/vending/fitness
+	name = "SweatMAX"
+	desc = "Fueled by your inner inadequacy!"
+	icon_state = "fitness"
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/chocolate = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/fitnessflask/proteinshake = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/fitnessflask = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/liquidfood = 8,
+					/obj/item/weapon/reagent_containers/pill/diet = 8)
+
+	prices = list(/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton = 3,
+					/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/chocolate = 3,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/fitnessflask/proteinshake = 20,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/fitnessflask = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/liquidfood = 5,
+					/obj/item/weapon/reagent_containers/pill/diet = 25)
+
+	contraband = list(/obj/item/weapon/reagent_containers/syringe/steroid = 4)
+
 //This one's from bay12
 /obj/machinery/vending/cart
 	name = "PTech"
@@ -830,9 +791,8 @@
 	product_ads = "Go save some lives!;The best stuff for your medbay.;Only the finest tools.;Natural chemicals!;This stuff saves lives.;Don't you want some?"
 	icon_state = "wallmed"
 	icon_deny = "wallmed-deny"
-	req_access = list(access_medical)
 	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
-	products = list(/obj/item/stack/medical/bruise_pack = 2,/obj/item/stack/medical/ointment = 2,/obj/item/weapon/reagent_containers/hypospray/autoinjector = 4,/obj/item/device/healthanalyzer = 1)
+	products = list(/obj/item/stack/medical/bruise_pack = 2,/obj/item/stack/medical/ointment = 2,/obj/item/weapon/reagent_containers/hypospray/autoinjector = 4)
 	contraband = list(/obj/item/weapon/reagent_containers/syringe/antitoxin = 4,/obj/item/weapon/reagent_containers/syringe/antiviral = 4,/obj/item/weapon/reagent_containers/pill/tox = 1)
 
 /obj/machinery/vending/wallmed2
@@ -840,10 +800,9 @@
 	desc = "Wall-mounted Medical Equipment dispenser."
 	icon_state = "wallmed"
 	icon_deny = "wallmed-deny"
-	req_access = list(access_medical)
 	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
-	products = list(/obj/item/weapon/reagent_containers/hypospray/autoinjector = 5,/obj/item/weapon/reagent_containers/syringe/antitoxin = 3,/obj/item/stack/medical/bruise_pack = 3,
-					/obj/item/stack/medical/ointment =3,/obj/item/device/healthanalyzer = 3)
+	products = list(/obj/item/weapon/reagent_containers/hypospray/autoinjector = 5,/obj/item/weapon/reagent_containers/syringe/antitoxin = 1,/obj/item/stack/medical/bruise_pack = 3,
+					/obj/item/stack/medical/ointment =3)
 	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 3)
 
 /obj/machinery/vending/security
@@ -865,7 +824,7 @@
 	icon_state = "nutri"
 	icon_deny = "nutri-deny"
 	products = list(/obj/item/weapon/reagent_containers/glass/fertilizer/ez = 35,/obj/item/weapon/reagent_containers/glass/fertilizer/l4z = 25,/obj/item/weapon/reagent_containers/glass/fertilizer/rh = 15,/obj/item/weapon/plantspray/pests = 20,
-					/obj/item/weapon/reagent_containers/syringe = 5,/obj/item/weapon/storage/bag/plants = 5)
+					/obj/item/weapon/reagent_containers/syringe = 5,/obj/item/weapon/storage/plants = 5)
 	premium = list(/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 10,/obj/item/weapon/reagent_containers/glass/bottle/diethylamine = 5)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
@@ -904,7 +863,7 @@
 		for(var/entry in current_list[1])
 			var/obj/item/seeds/S = new entry(src)
 			var/name = S.name
-			var/datum/data/vending_product/product = new/datum/data/vending_product(src, entry, name)
+			var/datum/stored_items/vending_products/product = new/datum/stored_items/vending_products(src, entry, name)
 
 			product.price = (entry in src.prices) ? src.prices[entry] : 0
 			product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
@@ -934,7 +893,7 @@
 	/obj/item/weapon/material/kitchen/utensil/spoon = 6,
 	/obj/item/weapon/material/knife = 3,
 	/obj/item/weapon/material/kitchen/rollingpin = 2,
-	/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,
+	/obj/item/weapon/reagent_containers/food/drinks/glass2/square = 8,
 	/obj/item/clothing/suit/chef/classic = 2,
 	/obj/item/weapon/storage/lunchbox = 3,
 	/obj/item/weapon/storage/lunchbox/heart = 3,
@@ -953,8 +912,8 @@
 	desc = "An old sweet water vending machine,how did this end up here?"
 	icon_state = "sovietsoda"
 	product_ads = "For Tsar and Country.;Have you fulfilled your nutrition quota today?;Very nice!;We are simple people, for this is all we eat.;If there is a person, there is a problem. If there is no person, then there is no problem."
-	products = list(/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/soda = 30)
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/cola = 20)
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/space_up = 30) // TODO Russian soda can
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/cola = 20) // TODO Russian cola can
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/tool
@@ -1022,3 +981,4 @@
 	desc = "A container that dispenses containers."
 	icon_state = "robotics"
 	products = list(/obj/structure/closet/crate/freezer = 2, /obj/structure/closet = 3, /obj/structure/closet/crate = 3)
+

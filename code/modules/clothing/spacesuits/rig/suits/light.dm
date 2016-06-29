@@ -9,8 +9,8 @@
 	emp_protection = 10
 	online_slowdown = 0
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL
-	offline_slowdown = 0
-	offline_vision_restriction = 0
+	offline_slowdown = TINT_NONE
+	offline_vision_restriction = TINT_NONE
 
 	chest_type = /obj/item/clothing/suit/space/rig/light
 	helm_type =  /obj/item/clothing/head/helmet/space/rig/light

@@ -34,6 +34,13 @@
 
 	#endif
 
+	// asset_cache
+	if(href_list["asset_cache_confirm_arrival"])
+		//src << "ASSET JOB [href_list["asset_cache_confirm_arrival"]] ARRIVED."
+		var/job = text2num(href_list["asset_cache_confirm_arrival"])
+		completed_asset_jobs += job
+		return
+
 	//search the href for script injection
 	if( findtext(href,"<script",1,0) )
 		world.log << "Attempted use of scripts within a topic call, by [src]"
@@ -73,21 +80,6 @@
 		if("vars")		return view_var_Topic(href,href_list,hsrc)
 
 	..()	//redirect to hsrc.Topic()
-
-/client/proc/handle_spam_prevention(var/message, var/mute_type)
-	if(config.automute_on && !holder && src.last_message == message)
-		src.last_message_count++
-		if(src.last_message_count >= SPAM_TRIGGER_AUTOMUTE)
-			src << "\red You have exceeded the spam filter limit for identical messages. An auto-mute was applied."
-			cmd_admin_mute(src.mob, mute_type, 1)
-			return 1
-		if(src.last_message_count >= SPAM_TRIGGER_WARNING)
-			src << "\red You are nearing the spam filter limit for identical messages."
-			return 0
-	else
-		last_message = message
-		src.last_message_count = 0
-		return 0
 
 //This stops files larger than UPLOAD_LIMIT being sent from client to server via input(), client.Import() etc.
 /client/AllowUpload(filename, filelength)
@@ -146,6 +138,7 @@
 	prefs.last_id = computer_id			//these are gonna be used for banning
 
 	. = ..()	//calls mob.Login()
+	prefs.sanitize_preferences()
 
 	if(custom_event_msg && custom_event_msg != "")
 		src << "<h1 class='alert'>Custom Event</h1>"
@@ -172,6 +165,8 @@
 
 	if(!void)
 		void = new()
+		void = void.MakeGreed()
+
 	screen += void
 
 	if(prefs.lastchangelog != changelog_hash) //bolds the changelog button on the interface so we know there are updates.
@@ -181,6 +176,8 @@
 			src.changes()
 
 
+	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
+		src << "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>"
 
 	//////////////
 	//DISCONNECT//

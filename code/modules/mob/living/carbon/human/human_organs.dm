@@ -67,7 +67,7 @@
 /mob/living/carbon/human/proc/handle_stance()
 	// Don't need to process any of this if they aren't standing anyways
 	// unless their stance is damaged, and we want to check if they should stay down
-	if (!stance_damage && (lying || resting) && (life_tick % 4) == 0)
+	if (!stance_damage && (lying || resting) && (life_tick % 4) != 0)
 		return
 
 	stance_damage = 0
@@ -78,7 +78,7 @@
 
 	for(var/limb_tag in list("l_leg","r_leg","l_foot","r_foot"))
 		var/obj/item/organ/external/E = organs_by_name[limb_tag]
-		if(!E || (E.status & (ORGAN_MUTATED|ORGAN_DEAD)) || E.is_stump()) //should just be !E.is_usable() here but dislocation screws that up.
+		if(!E || !E.is_usable())
 			stance_damage += 2 // let it fail even if just foot&leg
 		else if (E.is_malfunctioning())
 			//malfunctioning only happens intermittently so treat it as a missing limb when it procs
@@ -91,7 +91,7 @@
 				spark_system.start()
 				spawn(10)
 					qdel(spark_system)
-		else if (E.is_broken() || !E.is_usable())
+		else if (E.is_broken())
 			stance_damage += 1
 		else if (E.is_dislocated())
 			stance_damage += 0.5
@@ -138,10 +138,10 @@
 		return
 
 	for (var/obj/item/organ/external/E in organs)
-		if(!E || !E.can_grasp || (E.status & ORGAN_SPLINTED))
+		if(!E || !E.can_grasp)
 			continue
 
-		if(E.is_broken() || E.is_dislocated())
+		if((E.is_broken() || E.is_dislocated()) && !E.splinted)
 			switch(E.body_part)
 				if(HAND_LEFT, ARM_LEFT)
 					if(!l_hand)

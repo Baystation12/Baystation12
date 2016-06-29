@@ -83,13 +83,13 @@ var/list/slot_equipment_priority = list( \
 	// Try put it in their backpack
 	if(istype(src.back,/obj/item/weapon/storage))
 		var/obj/item/weapon/storage/backpack = src.back
-		if(backpack.can_be_inserted(newitem, 1))
+		if(backpack.can_be_inserted(newitem, null, 1))
 			newitem.forceMove(src.back)
 			return backpack
 
 	// Try to place it in any item that can store stuff, on the mob.
 	for(var/obj/item/weapon/storage/S in src.contents)
-		if(S.can_be_inserted(newitem, 1))
+		if(S.can_be_inserted(newitem, null, 1))
 			newitem.forceMove(S)
 			return S
 
@@ -132,9 +132,7 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/put_in_hands(var/obj/item/W)
 	if(!W)
 		return 0
-	W.forceMove(get_turf(src))
-	W.layer = initial(W.layer)
-	W.dropped(src)
+	drop_from_inventory(W)
 	return 0
 
 // Removes an item from inventory and places it in the target atom.
@@ -164,7 +162,9 @@ var/list/slot_equipment_priority = list( \
 	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
 	Does nothing else.
 
-	DO NOT CALL THIS PROC DIRECTLY. It is meant to be called only by other inventory procs.
+	>>>> *** DO NOT CALL THIS PROC DIRECTLY *** <<<<
+
+	It is meant to be called only by other inventory procs.
 	It's probably okay to use it if you are transferring the item between slots on the same mob,
 	but chances are you're safer calling remove_from_mob() or drop_from_inventory() anyways.
 
@@ -195,7 +195,9 @@ var/list/slot_equipment_priority = list( \
 	if(!I) //If there's nothing to drop, the drop is automatically successful.
 		return 1
 	var/slot = get_inventory_slot(I)
-	return slot && I.mob_can_unequip(src, slot)
+	if(!slot)
+		return 1 //already unequipped, so success
+	return I.mob_can_unequip(src, slot)
 
 /mob/proc/get_inventory_slot(obj/item/I)
 	var/slot = 0

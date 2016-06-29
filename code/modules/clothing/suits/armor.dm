@@ -35,6 +35,8 @@
 	icon_state = "warden_jacket"
 	item_state = "armor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+	heat_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 
 
 /obj/item/clothing/suit/armor/riot
@@ -42,6 +44,7 @@
 	desc = "A suit of armor with heavy padding to protect against melee attacks. Looks like it might impair movement."
 	icon_state = "riot"
 	item_state = "swat_suit"
+	w_class = 4
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 75, bullet = 33, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 	flags_inv = HIDEJUMPSUIT
@@ -89,34 +92,15 @@
 
 			return PROJECTILE_CONTINUE // complete projectile permutation
 
-/obj/item/clothing/suit/armor/swat
-	name = "\improper SWAT suit"
-	desc = "A heavily armored suit that protects against moderate damage. Used in special operations."
-	icon_state = "deathsquad"
-	item_state = "swat_suit"
-	gas_transfer_coefficient = 0.01
-	permeability_coefficient = 0.01
-	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
-	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen)
-	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 100, rad = 100)
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
-	siemens_coefficient = 0.6
-
-/obj/item/clothing/suit/armor/swat/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 1
-
 /obj/item/clothing/suit/armor/swat/officer
 	name = "officer jacket"
 	desc = "An armored jacket used in special operations."
 	icon_state = "detective"
 	item_state = "det_suit"
 	blood_overlay_type = "coat"
-	flags_inv = 0
-	body_parts_covered = UPPER_TORSO|ARMS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+	heat_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 
 
 /obj/item/clothing/suit/armor/det_suit
@@ -192,6 +176,7 @@
 	icon_state = "swatarmor"
 	item_state = "armor"
 	var/obj/item/weapon/gun/holstered = null
+	w_class = 4
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 20, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
@@ -323,7 +308,7 @@
 	item_state = "centcom"
 	w_class = 5//bulky item
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen)
+	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE

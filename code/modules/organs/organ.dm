@@ -55,6 +55,7 @@ var/list/organ_cache = list()
 		max_damage = min_broken_damage * 2
 	if(istype(holder))
 		src.owner = holder
+		src.w_class = max(src.w_class + mob_size_difference(holder.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
 		species = all_species["Human"]
 		if(holder.dna)
 			dna = holder.dna.Clone()
@@ -235,6 +236,8 @@ var/list/organ_cache = list()
 
 //Note: external organs have their own version of this proc
 /obj/item/organ/proc/take_damage(amount, var/silent=0)
+	amount = round(amount, 0.1)
+
 	if(src.robotic >= ORGAN_ROBOT)
 		src.damage = between(0, src.damage + (amount * 0.8), max_damage)
 	else
@@ -253,7 +256,6 @@ var/list/organ_cache = list()
 	robotic = ORGAN_ROBOT
 	src.status &= ~ORGAN_BROKEN
 	src.status &= ~ORGAN_BLEEDING
-	src.status &= ~ORGAN_SPLINTED
 	src.status &= ~ORGAN_CUT_AWAY
 
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc

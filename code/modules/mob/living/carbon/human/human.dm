@@ -27,7 +27,7 @@
 		if(mind)
 			mind.name = real_name
 
-	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
+	hud_list[HEALTH_HUD]      = image('icons/mob/hud_med.dmi', src, "100")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealthy")
 	hud_list[LIFE_HUD]	      = image('icons/mob/hud.dmi', src, "hudhealthy")
 	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudunknown")
@@ -88,7 +88,7 @@
 
 /mob/living/carbon/human/ex_act(severity)
 	if(!blinded)
-		flick("flash", flash)
+		flash_eyes()
 
 	var/b_loss = null
 	var/f_loss = null
@@ -1025,7 +1025,7 @@
 /mob/living/carbon/human/proc/handle_embedded_objects()
 
 	for(var/obj/item/organ/external/organ in src.organs)
-		if(organ.status & ORGAN_SPLINTED) //Splints prevent movement.
+		if(organ.splinted) //Splints prevent movement.
 			continue
 		for(var/obj/item/O in organ.implants)
 			if(!istype(O,/obj/item/weapon/implant) && prob(5)) //Moving with things stuck in you could be bad.
@@ -1335,14 +1335,12 @@
 	var/list/limbs = list()
 	for(var/limb in organs_by_name)
 		var/obj/item/organ/external/current_limb = organs_by_name[limb]
-		if(current_limb && current_limb.dislocated == 2)
-			limbs |= limb
-	var/choice = input(usr,"Which joint do you wish to relocate?") as null|anything in limbs
+		if(current_limb && current_limb.dislocated > 0 && !current_limb.is_parent_dislocated()) //if the parent is also dislocated you will have to relocate that first
+			limbs |= current_limb
+	var/obj/item/organ/external/current_limb = input(usr,"Which joint do you wish to relocate?") as null|anything in limbs
 
-	if(!choice)
+	if(!current_limb)
 		return
-
-	var/obj/item/organ/external/current_limb = organs_by_name[choice]
 
 	if(self)
 		src << "<span class='warning'>You brace yourself to relocate your [current_limb.joint]...</span>"
@@ -1351,7 +1349,7 @@
 
 	if(!do_after(U, 30, src))
 		return
-	if(!choice || !current_limb || !S || !U)
+	if(!current_limb || !S || !U)
 		return
 
 	if(self)
@@ -1400,20 +1398,18 @@
 /mob/living/carbon/human/put_in_hands(var/obj/item/W)
 	if(!W)
 		return 0
-	if(put_in_active_hand(W))
-		update_inv_l_hand()
-		update_inv_r_hand()
+	if(put_in_active_hand(W) || put_in_inactive_hand(W))
+		W.update_held_icon()
 		return 1
-	else if(put_in_inactive_hand(W))
-		update_inv_l_hand()
-		update_inv_r_hand()
-		return 1
-	else
-		return ..()
+	return ..()
 
 /mob/living/carbon/human/put_in_l_hand(var/obj/item/W)
 	if(!..() || l_hand)
 		return 0
+	var/obj/item/organ/external/hand = organs_by_name["l_hand"]
+	if(!hand || !hand.is_usable())
+		return 0
+
 	W.forceMove(src)
 	l_hand = W
 	W.equipped(src,slot_l_hand)
@@ -1424,6 +1420,10 @@
 /mob/living/carbon/human/put_in_r_hand(var/obj/item/W)
 	if(!..() || r_hand)
 		return 0
+	var/obj/item/organ/external/hand = organs_by_name["r_hand"]
+	if(!hand || !hand.is_usable())
+		return 0
+
 	W.forceMove(src)
 	r_hand = W
 	W.equipped(src,slot_r_hand)
@@ -1466,8 +1466,8 @@
 		return PULSE_NONE
 	else
 		return H.pulse
-		
-/mob/living/carbon/human/can_devour(mob/victim)		
+
+/mob/living/carbon/human/can_devour(mob/victim)
 	if(src.species.gluttonous && (iscarbon(victim) || isanimal(victim)))
 		if(src.species.gluttonous == GLUT_TINY && (victim.mob_size <= MOB_TINY) && !ishuman(victim)) // Anything MOB_TINY or smaller
 			return DEVOUR_SLOW
@@ -1475,5 +1475,5 @@
 			return DEVOUR_SLOW
 		else if(src.species.gluttonous == GLUT_ANYTHING) // Eat anything ever
 			return DEVOUR_FAST
-	
+
 	..()

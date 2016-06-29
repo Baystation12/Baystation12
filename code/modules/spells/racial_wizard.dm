@@ -133,7 +133,7 @@
 	smoke_amt = 5
 	smoke_spread = 1
 
-	possible_transformations = list(/mob/living/simple_animal/armalis)
+	possible_transformations = list(/mob/living/simple_animal/hostile/armalis)
 
 	hud_state = "wiz_vox"
 
@@ -160,19 +160,30 @@
 
 /spell/moghes_blessing/choose_targets(mob/user = usr)
 	var/list/hands = list()
-	if(user.l_hand && !findtext(user.l_hand.name,"Moghes Blessing"))
-		hands += user.l_hand
-	if(user.r_hand && !findtext(user.r_hand.name,"Moghes Blessing"))
-		hands += user.r_hand
+	for(var/obj/item/I in list(user.l_hand, user.r_hand))
+		//make sure it's not already blessed
+		if(istype(I) && !has_extension(I, /datum/extension/moghes_blessing))
+			hands += I
 	return hands
 
 /spell/moghes_blessing/cast(var/list/targets, mob/user)
 	for(var/obj/item/I in targets)
-		I.name = "[I.name] (Moghes Blessing)"
-		I.force += 10
-		I.throwforce += 7
-		I.color = "#663300"
+		set_extension(I, /datum/extension/moghes_blessing, /datum/extension/moghes_blessing)
 
+/datum/extension/moghes_blessing
+	expected_type = /obj/item
+	flags = EXTENSION_FLAG_IMMEDIATE
+
+/datum/extension/moghes_blessing/New(var/datum/holder)
+	..(holder)
+	apply_blessing(holder)
+
+/datum/extension/moghes_blessing/proc/apply_blessing(obj/item/I)
+	I.name += " of Moghes"
+	I.desc += "<BR>It has been imbued with the memories of Moghes."
+	I.force += 10
+	I.throwforce += 14
+	I.color = "#663300"
 
 //DIONA
 /spell/aoe_turf/conjure/grove/gestalt

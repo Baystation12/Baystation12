@@ -1653,6 +1653,10 @@
 		log_and_message_admins("created [number] [english_list(paths)]")
 		return
 
+	else if(href_list["admin_secrets_panel"])
+		var/datum/admin_secret_category/AC = locate(href_list["admin_secrets_panel"]) in admin_secrets.categories
+		src.Secrets(AC)
+
 	else if(href_list["admin_secrets"])
 		var/datum/admin_secret_item/item = locate(href_list["admin_secrets"]) in admin_secrets.items
 		item.execute(usr)

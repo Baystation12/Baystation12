@@ -121,27 +121,12 @@ proc/age2agedescription(age)
 		if(70 to INFINITY)	return "elderly"
 		else				return "unknown"
 
-proc/RoundHealth(health)
-	switch(health)
-		if(100 to INFINITY)
-			return "health100"
-		if(70 to 100)
-			return "health80"
-		if(50 to 70)
-			return "health60"
-		if(30 to 50)
-			return "health40"
-		if(18 to 30)
-			return "health25"
-		if(5 to 18)
-			return "health10"
-		if(1 to 5)
-			return "health1"
-		if(-99 to 0)
-			return "health0"
-		else
-			return "health-100"
-	return "0"
+/proc/RoundHealth(health)
+	var/list/icon_states = icon_states('icons/mob/hud_med.dmi')
+	for(var/icon_state in icon_states)
+		if(health >= text2num(icon_state))
+			return icon_state
+	return icon_states[icon_states.len] // If we had no match, return the last element
 
 /*
 Proc for attack log creation, because really why not
@@ -175,7 +160,7 @@ Proc for attack log creation, because really why not
 	else
 		return pick("chest", "groin")
 
-/proc/do_mob(mob/user , mob/target, time = 30, uninterruptible = 0, progress = 1)
+/proc/do_mob(mob/user , mob/target, time = 30, target_zone = 0, uninterruptible = 0, progress = 1)
 	if(!user || !target)
 		return 0
 	var/user_loc = user.loc
@@ -208,6 +193,10 @@ Proc for attack log creation, because really why not
 			break
 
 		if(user.get_active_hand() != holding)
+			. = 0
+			break
+
+		if(target_zone && user.zone_sel.selecting != target_zone)
 			. = 0
 			break
 
@@ -259,3 +248,35 @@ Proc for attack log creation, because really why not
 		if(!M.is_physically_disabled())
 			mobs += M
 	return mobs
+
+// Returns true if M was not already in the dead mob list
+/mob/proc/switch_from_living_to_dead_mob_list()
+	remove_from_living_mob_list()
+	. = add_to_dead_mob_list()
+
+// Returns true if M was not already in the living mob list
+/mob/proc/switch_from_dead_to_living_mob_list()
+	remove_from_dead_mob_list()
+	. = add_to_living_mob_list()
+
+// Returns true if the mob was in neither the dead or living list
+/mob/proc/add_to_living_mob_list()
+	if((src in living_mob_list_) || (src in dead_mob_list_))
+		return FALSE
+	living_mob_list_ += src
+	return TRUE
+
+// Returns true if the mob was removed from the living list
+/mob/proc/remove_from_living_mob_list()
+	return living_mob_list_.Remove(src)
+
+// Returns true if the mob was in neither the dead or living list
+/mob/proc/add_to_dead_mob_list()
+	if((src in living_mob_list_) || (src in dead_mob_list_))
+		return FALSE
+	dead_mob_list_ += src
+	return TRUE
+
+// Returns true if the mob was removed form the dead list
+/mob/proc/remove_from_dead_mob_list()
+	return dead_mob_list_.Remove(src)

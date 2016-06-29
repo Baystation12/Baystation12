@@ -461,7 +461,7 @@
 // - Has between 17% and 30% oxygen
 // - Has temperature between -10C and 50C
 // - Has no or only minimal phoron or N2O
-/proc/is_safe_atmosphere(datum/gas_mixture/atmosphere, var/returntext = 0)
+/proc/get_atmosphere_issues(datum/gas_mixture/atmosphere, var/returntext = 0)
     var/list/status = list()
     if(!atmosphere)
         status.Add("No atmosphere present.")

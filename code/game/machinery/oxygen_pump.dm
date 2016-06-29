@@ -7,7 +7,7 @@
 	var/obj/item/clothing/mask/gas/contained
 	var/mob/living/carbon/breather
 
-	var/spawn_type = /obj/item/weapon/tank/emergency_oxygen/engi
+	var/spawn_type = /obj/item/weapon/tank/emergency/oxygen/engi
 
 	power_channel = ENVIRON
 	idle_power_usage = 10

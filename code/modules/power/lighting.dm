@@ -17,6 +17,7 @@
 	icon_state = "tube-construct-stage1"
 	anchored = 1
 	layer = 5
+
 	var/stage = 1
 	var/fixture_type = "tube"
 	var/sheets_refunded = 2
@@ -140,11 +141,12 @@
 	idle_power_usage = 2
 	active_power_usage = 20
 	power_channel = LIGHT //Lights are calc'd via area so they dont need to be in the machine list
+
 	var/on = 0					// 1 if on, 0 if off
 	var/on_gs = 0
 	var/brightness_range = 8	// luminosity when on, also used in power calculation
 	var/brightness_power = 3
-	var/brightness_color = null
+	var/brightness_color = "#FFFFFF"
 	var/status = LIGHT_OK		// LIGHT_OK, _EMPTY, _BURNED or _BROKEN
 	var/flickering = 0
 	var/light_type = /obj/item/weapon/light/tube		// the type of light item
@@ -155,8 +157,13 @@
 	var/rigged = 0				// true if rigged to explode
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 
-// the smaller bulb light fixture
+	var/has_emergency_mode = 1 // If true, light power failures that don't remove or totally
+							   // drain the APC will result in dim red emergency lights.
+	var/emergency_brightness_range = 5
+	var/emergency_brightness_power = 2
+	var/emergency_brightness_color = "#da0205"
 
+// the smaller bulb light fixture
 /obj/machinery/light/small
 	icon_state = "bulb1"
 	base_state = "bulb"
@@ -261,6 +268,25 @@
 			else
 				use_power = 2
 				set_light(brightness_range, brightness_power, brightness_color)
+
+	else if(has_emergency_mode)
+
+		use_power = 1
+
+		var/no_power
+		var/area/A = get_area(src)
+		if(!A || !A.lightswitch)
+			no_power = 1
+		else
+			var/obj/machinery/power/apc/apc = A.get_apc()
+			// 'apc.lighting != 1' ==  APC lighting channel not set to auto-off
+			if(!istype(apc) || apc.lighting != 1 || !apc.cell || apc.cell.percent() < 1)
+				no_power = 1
+
+		if(no_power)
+			set_light(0)
+		else
+			set_light(emergency_brightness_range, emergency_brightness_power, emergency_brightness_color)
 	else
 		use_power = 1
 		set_light(0)

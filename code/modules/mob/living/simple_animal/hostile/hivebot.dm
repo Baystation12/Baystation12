@@ -14,7 +14,7 @@
 	melee_damage_lower = 2
 	melee_damage_upper = 3
 	attacktext = "clawed"
-	projectilesound = 'sound/weapons/Gunshot.ogg'
+	projectilesound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	projectiletype = /obj/item/projectile/hivebotbullet
 	faction = "hivebot"
 	min_oxy = 0
@@ -45,8 +45,7 @@
 
 
 /mob/living/simple_animal/hostile/hivebot/death()
-	..()
-	visible_message("<b>[src]</b> blows apart!")
+	..(null, "blows apart!")
 	new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)
@@ -54,7 +53,7 @@
 	qdel(src)
 	return
 
-/mob/living/simple_animal/hostile/hivebot/tele//this still needs work
+/mob/living/simple_animal/hostile/hivebot/tele
 	name = "Beacon"
 	desc = "Some odd beacon thing"
 	icon = 'icons/mob/hivebot.dmi'
@@ -65,43 +64,45 @@
 	status_flags = 0
 	anchored = 1
 	stop_automated_movement = 1
-	var/bot_type = "norm"
+	var/bot_type = /mob/living/simple_animal/hostile/hivebot
 	var/bot_amt = 10
-	var/spawn_delay = 600
-	var/turn_on = 0
-	var/auto_spawn = 1
-	proc
+	var/spawn_delay = 100
+	var/spawn_time = 0
+
+/mob/living/simple_animal/hostile/hivebot/tele/New()
+	..()
+	var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
+	smoke.set_up(5, 0, src.loc)
+	smoke.start()
+	visible_message("\red <B>The [src] warps in!</B>")
+	playsound(src.loc, 'sound/effects/EMPulse.ogg', 25, 1)
+
+/mob/living/simple_animal/hostile/hivebot/tele/proc/warpbots()
+	while(bot_amt > 0 && bot_type)
+		bot_amt--
+		var/mob/M = new bot_type(get_turf(src))
+		M.faction = faction
+	playsound(src.loc, 'sound/effects/teleport.ogg', 50, 1)
+	qdel(src)
+	return
+
+/mob/living/simple_animal/hostile/hivebot/tele/FindTarget()
+	if(..() && !spawn_time)
+		spawn_time = world.time + spawn_delay
+		visible_message("<span class='danger'>\The [src] turns on!</span>")
+		icon_state = "def_radar"
+	return null
+
+/mob/living/simple_animal/hostile/hivebot/tele/Life()
+	. = ..()
+	if(. && spawn_time && spawn_time <= world.time)
 		warpbots()
 
+/mob/living/simple_animal/hostile/hivebot/tele/strong
+	bot_type = /mob/living/simple_animal/hostile/hivebot/strong
 
-	New()
-		..()
-		var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
-		smoke.set_up(5, 0, src.loc)
-		smoke.start()
-		visible_message("\red <B>The [src] warps in!</B>")
-		playsound(src.loc, 'sound/effects/EMPulse.ogg', 25, 1)
+/mob/living/simple_animal/hostile/hivebot/tele/range
+	bot_type = /mob/living/simple_animal/hostile/hivebot/range
 
-	warpbots()
-		icon_state = "def_radar"
-		visible_message("\red The [src] turns on!")
-		while(bot_amt > 0)
-			bot_amt--
-			switch(bot_type)
-				if("norm")
-					new /mob/living/simple_animal/hostile/hivebot(get_turf(src))
-				if("range")
-					new /mob/living/simple_animal/hostile/hivebot/range(get_turf(src))
-				if("rapid")
-					new /mob/living/simple_animal/hostile/hivebot/rapid(get_turf(src))
-		spawn(100)
-			qdel(src)
-		return
-
-
-	Life()
-		..()
-		if(stat == 0)
-			if(prob(2))//Might be a bit low, will mess with it likely
-				warpbots()
-
+/mob/living/simple_animal/hostile/hivebot/tele/rapid
+	bot_type = /mob/living/simple_animal/hostile/hivebot/rapid

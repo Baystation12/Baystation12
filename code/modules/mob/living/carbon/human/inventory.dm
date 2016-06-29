@@ -117,9 +117,13 @@ This saves us from having to call add_fingerprint() any time something is put in
 		update_inv_head()
 	else if (W == l_ear)
 		l_ear = null
+		if(r_ear == W) //check for items that get equipped to both ear slots
+			r_ear = null
 		update_inv_ears()
 	else if (W == r_ear)
 		r_ear = null
+		if(l_ear == W)
+			l_ear = null
 		update_inv_ears()
 	else if (W == shoes)
 		shoes = null
@@ -229,19 +233,13 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_l_ear)
 			src.l_ear = W
 			if(l_ear.slot_flags & SLOT_TWOEARS)
-				var/obj/item/clothing/ears/offear/O = new(W)
-				O.forceMove(src)
-				src.r_ear = O
-				O.layer = SCREEN_LAYER+0.01
+				src.r_ear = W
 			W.equipped(src, slot)
 			update_inv_ears(redraw_mob)
 		if(slot_r_ear)
 			src.r_ear = W
 			if(r_ear.slot_flags & SLOT_TWOEARS)
-				var/obj/item/clothing/ears/offear/O = new(W)
-				O.forceMove(src)
-				src.l_ear = O
-				O.layer = SCREEN_LAYER+0.01
+				src.l_ear = W
 			W.equipped(src, slot)
 			update_inv_ears(redraw_mob)
 		if(slot_glasses)

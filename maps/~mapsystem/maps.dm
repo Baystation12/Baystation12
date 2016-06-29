@@ -31,11 +31,17 @@ var/list/all_maps = list()
 	var/list/sealed_levels = list()  // Z-levels that don't allow random transit at edge
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 
+	var/list/allowed_jobs	       //Job datums to use.
+	                               //Works a lot better so if we get to a point where three-ish maps are used
+	                               //We don't have to C&P ones that are only common between two of them
+	                               //That doesn't mean we have to include them with the rest of the jobs though, especially for map specific ones.
+	                               //Also including them lets us override already created jobs, letting us keep the datums to a minimum mostly.
+	                               //This is probably a lot longer explanation than it needs to be.
 	// Unit test vars
 	var/list/exempt_areas = list()
 	var/const/NO_APC = 1
 	var/const/NO_VENT = 2
-	var/const/NO_SCRUBBER = 3
+	var/const/NO_SCRUBBER = 4
 
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock
@@ -45,8 +51,10 @@ var/list/all_maps = list()
 	var/emergency_shuttle_leaving_dock
 	var/emergency_shuttle_called_message
 	var/emergency_shuttle_recall_message
-	
+
 /datum/map/New()
 	..()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
+	if(!allowed_jobs)
+		allowed_jobs = subtypesof(/datum/job)

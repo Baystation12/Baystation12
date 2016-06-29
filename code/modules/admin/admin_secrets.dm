@@ -22,6 +22,9 @@ var/datum/admin_secrets/admin_secrets = new()
 		dd_insertObjectList(category.items, item)
 		items += item
 
+//
+// Secret Item Category - Each subtype is a category for organizing secret commands.
+//
 /datum/admin_secret_category
 	var/name = ""
 	var/desc = ""
@@ -37,6 +40,10 @@ var/datum/admin_secrets/admin_secrets = new()
 			return 1
 	return 0
 
+//
+// Secret Item Datum - Each subtype is a command on the secrets panel.
+// 	Override execute() with the implementation of the command.
+//
 /datum/admin_secret_item
 	var/name = ""
 	var/category = null

@@ -1,9 +1,8 @@
 /datum/job/cmo
 	title = "Chief Medical Officer"
-	flag = CMO
 	head_position = 1
 	department = "Medical"
-	department_flag = MEDSCI
+	department_flag = MED|COM
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -39,9 +38,8 @@
 
 /datum/job/doctor
 	title = "Medical Doctor"
-	flag = DOCTOR
 	department = "Medical"
-	department_flag = MEDSCI
+	department_flag = MED
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 3
@@ -102,9 +100,8 @@
 //Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro
 /datum/job/chemist
 	title = "Chemist"
-	flag = CHEMIST
 	department = "Medical"
-	department_flag = MEDSCI
+	department_flag = MED
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
@@ -133,9 +130,8 @@
 
 /datum/job/geneticist
 	title = "Geneticist"
-	flag = GENETICIST
 	department = "Medical"
-	department_flag = MEDSCI
+	department_flag = MED
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
@@ -162,9 +158,8 @@
 
 /datum/job/psychiatrist
 	title = "Psychiatrist"
-	flag = PSYCHIATRIST
 	department = "Medical"
-	department_flag = MEDSCI
+	department_flag = MED
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -195,9 +190,8 @@
 
 /datum/job/Paramedic
 	title = "Paramedic"
-	flag = PARAMEDIC
 	department = "Medical"
-	department_flag = MEDSCI
+	department_flag = MED
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2

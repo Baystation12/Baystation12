@@ -19,8 +19,6 @@
 				if (client.prefs.muted & MUTE_IC)
 					src << "\red You cannot send IC messages (muted)."
 					return
-				if (src.client.handle_spam_prevention(message,MUTE_IC))
-					return
 			if (stat)
 				return
 			if(!(message))
@@ -67,7 +65,7 @@
 	if (message)
 		log_emote("[name]/[key] : [message]")
 
-		for(var/mob/M in dead_mob_list)
+		for(var/mob/M in dead_mob_list_)
 			if (!M.client || istype(M, /mob/new_player))
 				continue //skip monkeys, leavers, and new_players
 			if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_sight) && !(M in viewers(src,null)))

@@ -117,61 +117,10 @@
 	slot_flags = SLOT_EARS
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ears.dmi')
 
-/obj/item/clothing/ears/attack_hand(mob/user as mob)
-	if (!user) return
-
-	if (src.loc != user || !istype(user,/mob/living/carbon/human))
-		..()
-		return
-
-	var/mob/living/carbon/human/H = user
-	if(H.l_ear != src && H.r_ear != src)
-		..()
-		return
-
-	if(!canremove)
-		return
-
-	var/obj/item/clothing/ears/O
-	if(slot_flags & SLOT_TWOEARS )
-		O = (H.l_ear == src ? H.r_ear : H.l_ear)
-		user.u_equip(O)
-		if(!istype(src,/obj/item/clothing/ears/offear))
-			qdel(O)
-			O = src
-	else
-		O = src
-
-	user.u_equip(src)
-
-	if (O)
-		user.put_in_hands(O)
-		O.add_fingerprint(user)
-
-	if(istype(src,/obj/item/clothing/ears/offear))
-		qdel(src)
-
 /obj/item/clothing/ears/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_ears()
-
-/obj/item/clothing/ears/offear
-	name = "Other ear"
-	simulated = 0
-	icon = 'icons/mob/screen1_Midnight.dmi'
-	icon_state = "block"
-	slot_flags = SLOT_EARS | SLOT_TWOEARS
-
-	get_storage_cost()
-		return DO_NOT_STORE
-
-	New(var/obj/O)
-		name = O.name
-		desc = O.desc
-		icon = O.icon
-		icon_state = O.icon_state
-		set_dir(O.dir)
 
 /obj/item/clothing/ears/earmuffs
 	name = "earmuffs"
@@ -452,10 +401,7 @@ BLIND     // can't see anything
 
 
 /obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
-	if(can_hold_knife && istype(I, /obj/item/weapon/material/shard) || \
-	 istype(I, /obj/item/weapon/material/butterfly) || \
-	 istype(I, /obj/item/weapon/material/kitchen/utensil) || \
-	 istype(I, /obj/item/weapon/material/hatchet/tacknife))
+	if(can_hold_knife && is_type_in_list(I, list(/obj/item/weapon/material/shard, /obj/item/weapon/material/butterfly, /obj/item/weapon/material/kitchen/utensil, /obj/item/weapon/material/hatchet/tacknife)))
 		if(holding)
 			user << "<span class='warning'>\The [src] is already holding \a [holding].</span>"
 			return
@@ -489,7 +435,7 @@ BLIND     // can't see anything
 	name = "suit"
 	var/fire_resist = T0C+100
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
-	allowed = list(/obj/item/weapon/tank/emergency_oxygen)
+	allowed = list(/obj/item/weapon/tank/emergency)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	slot_flags = SLOT_OCLOTHING
 	var/blood_overlay_type = "suit"
@@ -520,7 +466,7 @@ BLIND     // can't see anything
 	slot_flags = SLOT_ICLOTHING
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	w_class = 3
-	var/has_sensor = 1 //For the crew computer 2 = unable to change mode
+	var/has_sensor = SUIT_HAS_SENSORS //For the crew computer 2 = unable to change mode
 	var/sensor_mode = 0
 		/*
 		1 = Report living/dead
@@ -609,7 +555,7 @@ BLIND     // can't see anything
 	else
 		rolled_sleeves = -1
 	if(H) update_clothing_icon()
-	
+
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
@@ -632,10 +578,10 @@ BLIND     // can't see anything
 	var/mob/M = user
 	if (isobserver(M)) return
 	if (user.incapacitated()) return
-	if(has_sensor >= 2)
+	if(has_sensor >= SUIT_LOCKED_SENSORS)
 		user << "The controls are locked."
 		return 0
-	if(has_sensor <= 0)
+	if(has_sensor <= SUIT_NO_SENSORS)
 		user << "This suit does not have any sensors."
 		return 0
 
@@ -664,6 +610,19 @@ BLIND     // can't see anything
 			user.visible_message("[user] adjusts the tracking sensor on [src.loc]'s [src.name].", "You adjust [src.loc]'s sensors.")
 	else
 		user.visible_message("[user] adjusts the tracking sensor on [src]", "You adjust the sensor on [src].")
+
+/obj/item/clothing/under/emp_act(var/severity)
+	..()
+	var/new_mode
+	switch(severity)
+		if(1)
+			new_mode = pick(75;SUIT_SENSOR_OFF, 15;SUIT_SENSOR_BINARY, 10;SUIT_SENSOR_VITAL)
+		if(2)
+			new_mode = pick(50;SUIT_SENSOR_OFF, 25;SUIT_SENSOR_BINARY, 20;SUIT_SENSOR_VITAL, 5;SUIT_SENSOR_TRACKING)
+		else
+			new_mode = pick(25;SUIT_SENSOR_OFF, 35;SUIT_SENSOR_BINARY, 30;SUIT_SENSOR_VITAL, 10;SUIT_SENSOR_TRACKING)
+
+	sensor_mode = new_mode
 
 /obj/item/clothing/under/verb/toggle()
 	set name = "Toggle Suit Sensors"

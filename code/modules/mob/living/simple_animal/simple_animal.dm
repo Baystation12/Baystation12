@@ -86,8 +86,7 @@
 	if(stat == DEAD)
 		if(health > 0)
 			icon_state = icon_living
-			dead_mob_list -= src
-			living_mob_list += src
+			switch_from_dead_to_living_mob_list()
 			stat = CONSCIOUS
 			density = 1
 		return 0
@@ -121,8 +120,8 @@
 	if(!client && speak_chance)
 		if(rand(0,200) < speak_chance)
 			var/action = pick(
-				speak.len;      "speak", 
-				emote_hear.len; "emote_hear", 
+				speak.len;      "speak",
+				emote_hear.len; "emote_hear",
 				emote_see.len;  "emote_see"
 				)
 
@@ -320,7 +319,7 @@
 
 /mob/living/simple_animal/ex_act(severity)
 	if(!blinded)
-		flick("flash", flash)
+		flash_eyes()
 
 	var/damage
 	switch (severity)

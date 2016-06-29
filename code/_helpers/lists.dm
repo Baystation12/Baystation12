@@ -446,7 +446,7 @@ proc/listclearnulls(list/list)
 // Insert an object into a sorted list, preserving sortedness
 /proc/dd_insertObjectList(var/list/L, var/O)
 	var/min = 1
-	var/max = L.len
+	var/max = L.len + 1
 	var/Oval = O:dd_SortValue()
 
 	while(1)
@@ -601,8 +601,7 @@ proc/dd_sortedTextList(list/incoming)
 /datum/alarm/dd_SortValue()
 	return "[sanitize_old(last_name)]"
 
-/proc/subtypesof(prototype)
-	return (typesof(prototype) - prototype)
+#define subtypesof(prototype) (typesof(prototype) - prototype)
 
 //creates every subtype of prototype (excluding prototype) and adds it to list L.
 //if no list/L is provided, one is created.
@@ -613,3 +612,9 @@ proc/dd_sortedTextList(list/incoming)
 	return L
 
 #define listequal(A, B) (A.len == B.len && !length(A^B))
+
+/proc/filter_list(var/list/L, var/type)
+	. = list()
+	for(var/entry in L)
+		if(istype(entry, type))
+			. += entry

@@ -4,6 +4,7 @@
 //shuttle moving state defines are in setup.dm
 
 /datum/shuttle
+	var/name = ""
 	var/warmup_time = 0
 	var/moving_status = SHUTTLE_IDLE
 
@@ -11,12 +12,33 @@
 	var/datum/computer/file/embedded_program/docking/docking_controller	//the controller itself. (micro-controller, not game controller)
 
 	var/arrive_time = 0	//the time at which the shuttle arrives when long jumping
+	var/flags = SHUTTLE_FLAGS_PROCESS
+	var/category = /datum/shuttle
+
+/datum/shuttle/New()
+	..()
+	if(src.name in shuttle_controller.shuttles)
+		CRASH("A shuttle with the name '[name]' is already defined.")
+	shuttle_controller.shuttles[src.name] = src
+	if(flags & SHUTTLE_FLAGS_PROCESS)
+		shuttle_controller.process_shuttles += src
+	if(flags & SHUTTLE_FLAGS_SUPPLY)
+		if(supply_controller.shuttle)
+			CRASH("A supply shuttle is already defined.")
+		supply_controller.shuttle = src
+
+/datum/shuttle/Destroy()
+	shuttle_controller.shuttles -= src.name
+	shuttle_controller.process_shuttles -= src
+	if(supply_controller.shuttle == src)
+		supply_controller.shuttle = null
+	. = ..()
 
 /datum/shuttle/proc/init_docking_controllers()
 	if(docking_controller_tag)
 		docking_controller = locate(docking_controller_tag)
 		if(!istype(docking_controller))
-			world << "<span class='danger'>warning: shuttle with docking tag [docking_controller_tag] could not find it's controller!</span>"
+			warning("Shuttle with docking tag [docking_controller_tag] could not find it's controller!")
 
 /datum/shuttle/proc/short_jump(var/area/origin,var/area/destination)
 	if(moving_status != SHUTTLE_IDLE) return
@@ -102,16 +124,15 @@
 
 	for(var/turf/T in dstturfs)
 		var/turf/D = locate(T.x, throwy - 1, 1)
-		for(var/atom/movable/AM as mob|obj in T)
-			AM.Move(D)
-		if(istype(T, /turf/simulated))
-			qdel(T)
+		for(var/atom/movable/AM in T)
+			if(AM.simulated)
+				AM.Move(D)
 
-	for(var/mob/living/carbon/bug in destination)
-		bug.gib()
-
-	for(var/mob/living/simple_animal/pest in destination)
-		pest.gib()
+	var/turf/T
+	for(var/mob/living/bug in destination)
+		T = get_turf(bug)
+		if(!T || T.is_solid_structure())
+			bug.gib()
 
 	origin.move_contents_to(destination, direction=direction)
 

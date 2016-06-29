@@ -111,7 +111,7 @@ var/list/ai_verbs_default = list(
 				pickedName = null
 
 	aiPDA = new/obj/item/device/pda/ai(src)
-	SetName(pickedName)
+	fully_replace_character_name(pickedName)
 	anchored = 1
 	canmove = 0
 	density = 1
@@ -254,7 +254,7 @@ var/list/ai_verbs_default = list(
 	set src = usr.contents
 	return 0
 
-/mob/living/silicon/ai/SetName(pickedName as text)
+/mob/living/silicon/ai/fully_replace_character_name(pickedName as text)
 	..()
 	announcement.announcer = pickedName
 	if(eyeobj)
@@ -265,6 +265,8 @@ var/list/ai_verbs_default = list(
 		aiPDA.ownjob = "AI"
 		aiPDA.owner = pickedName
 		aiPDA.name = pickedName + " (" + aiPDA.ownjob + ")"
+		
+	data_core.ResetPDAManifest()
 
 /*
 	The AI Power supply is a dummy object used for powering the AI since only machinery should be using power.

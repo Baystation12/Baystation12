@@ -58,7 +58,7 @@
 			updateUsrDialog()
 	else if(processing)
 		user << "<span class='notice'>\The [src] is currently processing.</span>"
-	else if(istype(O, /obj/item/weapon/storage/bag/plants))
+	else if(istype(O, /obj/item/weapon/storage/plants))
 		var/i = 0
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in contents)
 			i++

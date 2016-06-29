@@ -50,7 +50,7 @@ var/datum/antagonist/actor/actor
 	if(choice != "Yes")
 		return
 
-	if(isghost(usr) || isnewplayer(usr))
+	if(isghostmind(usr.mind) || isnewplayer(usr))
 		if(actor.current_antagonists.len >= actor.hard_cap)
 			usr << "No more actors may spawn at the current time."
 			return

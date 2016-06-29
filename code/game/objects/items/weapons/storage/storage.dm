@@ -28,8 +28,8 @@
 	var/allow_quick_gather	//Set this variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
 	var/collection_mode = 1;  //0 = pick one at a time, 1 = pick all on tile
 	var/use_sound = "rustle"	//sound played when used. null for no sound.
-	
-	//initializes the contents of the storage with some items based on an assoc list. The assoc key must be an item path, 
+
+	//initializes the contents of the storage with some items based on an assoc list. The assoc key must be an item path,
 	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
 	var/list/startswith
 
@@ -50,10 +50,6 @@
 		return
 
 	if (ishuman(usr) || issmall(usr)) //so monkeys can take off their backpacks -- Urist
-
-		if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech. why?
-			return
-
 		if(over_object == usr && Adjacent(usr)) // this must come before the screen objects only block
 			src.open(usr)
 			return
@@ -61,26 +57,20 @@
 		if (!( istype(over_object, /obj/screen) ))
 			return ..()
 
+		if (usr.incapacitated())
+			return
+
 		//makes sure that the storage is equipped, so that we can't drag it into our hand from miles away.
-		//there's got to be a better way of doing this.
-		if (!(src.loc == usr) || (src.loc && src.loc.loc == usr))
+		if (!usr.contains(src))
 			return
 
-		if (( usr.restrained() ) || ( usr.stat ))
-			return
-	
-
-		if ((src.loc == usr) && !(istype(over_object, /obj/screen)) && !usr.unEquip(src))
-			return
-
-		switch(over_object.name)
-			if("r_hand")
-				usr.u_equip(src)
-				usr.put_in_r_hand(src)
-			if("l_hand")
-				usr.u_equip(src)
-				usr.put_in_l_hand(src)
 		src.add_fingerprint(usr)
+		if(usr.unEquip(src))
+			switch(over_object.name)
+				if("r_hand")
+					usr.put_in_r_hand(src)
+				if("l_hand")
+					usr.put_in_l_hand(src)
 
 
 /obj/item/weapon/storage/proc/return_inv()
@@ -271,19 +261,24 @@
 		src.slot_orient_objs()
 	return
 
+/obj/item/weapon/storage/proc/storage_space_used()
+	. = 0
+	for(var/obj/item/I in contents)
+		. += I.get_storage_cost()
+
 //This proc return 1 if the item can be picked up and 0 if it can't.
 //Set the stop_messages to stop it from printing messages
-/obj/item/weapon/storage/proc/can_be_inserted(obj/item/W as obj, stop_messages = 0)
+/obj/item/weapon/storage/proc/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 	if(!istype(W)) return //Not an item
 
-	if(usr && usr.isEquipped(W) && !usr.canUnEquip(W))
+	if(user && user.isEquipped(W) && !user.canUnEquip(W))
 		return 0
 
 	if(src.loc == W)
 		return 0 //Means the item is already in the storage item
 	if(storage_slots != null && contents.len >= storage_slots)
 		if(!stop_messages)
-			usr << "<span class='notice'>\The [src] is full, make some space.</span>"
+			user << "<span class='notice'>\The [src] is full, make some space.</span>"
 		return 0 //Storage item is full
 
 	if(W.anchored)
@@ -292,42 +287,48 @@
 	if(can_hold.len)
 		if(!is_type_in_list(W, can_hold))
 			if(!stop_messages && ! istype(W, /obj/item/weapon/hand_labeler))
-				usr << "<span class='notice'>\The [src] cannot hold [W].</span>"
+				user << "<span class='notice'>\The [src] cannot hold [W].</span>"
 			return 0
 		var/max_instances = can_hold[W.type]
 		if(max_instances && instances_of_type_in_list(W, contents) >= max_instances)
 			if(!stop_messages && !istype(W, /obj/item/weapon/hand_labeler))
-				usr << "<span class='notice'>\The [src] has no more space specifically for [W].</span>"
+				user << "<span class='notice'>\The [src] has no more space specifically for [W].</span>"
 			return 0
 
 	if(cant_hold.len && is_type_in_list(W, cant_hold))
 		if(!stop_messages)
-			usr << "<span class='notice'>\The [src] cannot hold [W].</span>"
+			user << "<span class='notice'>\The [src] cannot hold [W].</span>"
 		return 0
 
 	if (max_w_class != null && W.w_class > max_w_class)
 		if(!stop_messages)
-			usr << "<span class='notice'>\The [W] is too big for this [src.name].</span>"
+			user << "<span class='notice'>\The [W] is too big for this [src.name].</span>"
 		return 0
 
 	var/total_storage_space = W.get_storage_cost()
 	if(total_storage_space == DO_NOT_STORE)
-		usr << "<span class='notice'>\The [W] cannot be placed in [src].</span>" //TODO replace usr
+		if(!stop_messages)
+			user << "<span class='notice'>\The [W] cannot be placed in [src].</span>"
 		return 0
-	for(var/obj/item/I in contents)
-		total_storage_space += I.get_storage_cost() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
 
+	total_storage_space += storage_space_used() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
 	if(total_storage_space > max_storage_space)
 		if(!stop_messages)
-			usr << "<span class='notice'>\The [src] is too full, make some space.</span>"
+			user << "<span class='notice'>\The [src] is too full, make some space.</span>"
 		return 0
 
+
+//Commented out so that trash bags can fit in backpacks and hold storage items.
+//This means that storage items with max_w_class greater than their own w_class
+//can now be exploited for infinite storage, so don't let players have those okay?
+/*
 	if(istype(W, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/other = W
 		if(other.w_class > src.w_class || other.max_w_class >= src.w_class)
 			if(!stop_messages)
 				usr << "<span class='notice'>\The [src] cannot hold [W].</span>"
 			return 0 //To prevent infinite storage exploits
+*/
 
 	return 1
 
@@ -339,19 +340,16 @@
 	if(usr)
 		usr.remove_from_mob(W)
 		usr.update_icons()	//update our overlays
-	W.loc = src
+	W.forceMove(src)
 	W.on_enter_storage(src)
 	if(usr)
-		if (usr.client && usr.s_active != src)
-			usr.client.screen -= W
-		W.dropped(usr)
 		add_fingerprint(usr)
 
 		if(!prevent_warning)
 			for(var/mob/M in viewers(usr, null))
 				if (M == usr)
 					usr << "<span class='notice'>You put \the [W] into [src].</span>"
-				else if (M in range(1)) //If someone is standing close enough, they can tell what it is...
+				else if (M in range(1)) //If someone is standing close enough, they can tell what it is... TODO replace with distance check
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
 				else if (W && W.w_class >= NORMAL_ITEM) //Otherwise they can only see large or normal items from a distance...
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
@@ -414,7 +412,7 @@
 			user << "You inserted [amt_inserted] light\s into \the [LP.name]. You have [LP.uses] light\s remaining."
 			return
 
-	if(!can_be_inserted(W))
+	if(!can_be_inserted(W, user))
 		return
 
 	if(istype(W, /obj/item/weapon/tray))
@@ -424,11 +422,8 @@
 				user << "<span class='warning'>The tray won't fit in [src].</span>"
 				return
 			else
-				W.loc = user.loc
-				if ((user.client && user.s_active != src))
-					user.client.screen -= W
-				W.dropped(user)
-				user << "<span class='warning'>God damnit!</span>"
+				if(user.unEquip(W))
+					user << "<span class='warning'>God damnit!</span>"
 
 	W.add_fingerprint(user)
 	return handle_item_insertion(W)

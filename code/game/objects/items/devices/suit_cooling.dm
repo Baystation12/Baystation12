@@ -1,7 +1,7 @@
 /obj/item/device/suit_cooling_unit
 	name = "portable suit cooling unit"
 	desc = "A portable heat sink and liquid cooled radiator that can be hooked up to a space suit's existing temperature controls to provide industrial levels of cooling."
-	w_class = 5
+	w_class = 4
 	icon = 'icons/obj/device.dmi'
 	icon_state = "suitcooler0"
 	slot_flags = SLOT_BACK	//you can carry it on your back if you want, but it won't do anything unless attached to suit storage
@@ -61,10 +61,11 @@
 	if (ishuman(loc))
 		var/mob/living/carbon/human/H = loc
 		if(istype(H.loc, /obj/mecha))
-			var/obj/mecha/M = loc
+			var/obj/mecha/M = H.loc
 			return M.return_temperature()
 		else if(istype(H.loc, /obj/machinery/atmospherics/unary/cryo_cell))
-			return H.loc:air_contents.temperature
+			var/obj/machinery/atmospherics/unary/cryo_cell/C = H.loc
+			return C.air_contents.temperature
 
 	var/turf/T = get_turf(src)
 	if(istype(T, /turf/space))

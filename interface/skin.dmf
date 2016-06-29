@@ -1008,6 +1008,24 @@ menu "menu"
 		group = "size"
 		is-disabled = false
 		saved-params = "is-checked"
+	elem "icon128"
+		name = "&128x128"
+		command = ".winset \"mapwindow.map.icon-size=128\""
+		category = "&Icons"
+		is-checked = false
+		can-check = true
+		group = "size"
+		is-disabled = false
+		saved-params = "is-checked"
+	elem "icon96"
+		name = "&96x96"
+		command = ".winset \"mapwindow.map.icon-size=96\""
+		category = "&Icons"
+		is-checked = false
+		can-check = true
+		group = "size"
+		is-disabled = false
+		saved-params = "is-checked"
 	elem "icon64"
 		name = "&64x64"
 		command = ".winset \"mapwindow.map.icon-size=64\""
@@ -1713,6 +1731,32 @@ window "mainwindow"
 		macro = "macro"
 		menu = "menu"
 		on-close = ""
+	elem "asset_cache_browser"
+		type = BROWSER
+		pos = 424,208
+		size = 1x1
+		anchor1 = none
+		anchor2 = none
+		font-family = ""
+		font-size = 0
+		font-style = ""
+		text-color = #000000
+		background-color = none
+		is-visible = false
+		is-disabled = false
+		is-transparent = false
+		is-default = false
+		border = none
+		drop-zone = false
+		right-click = false
+		saved-params = ""
+		on-size = ""
+		show-history = false
+		show-url = false
+		auto-format = true
+		use-title = false
+		on-show = ""
+		on-hide = ""
 	elem "hotkey_toggle"
 		type = BUTTON
 		pos = 560,420

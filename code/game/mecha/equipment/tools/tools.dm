@@ -390,7 +390,7 @@
 		var/area/thearea = pick(theareas)
 		var/list/L = list()
 		var/turf/pos = get_turf(src)
-		for(var/turf/T in get_area_turfs(thearea.type))
+		for(var/turf/T in get_area_turfs(thearea))
 			if(!T.density && pos.z == T.z)
 				var/clear = 1
 				for(var/obj/O in T)

@@ -76,9 +76,9 @@
 	if(A == loc || (A in loc) || (A in contents))
 		// No adjacency checks
 
-		var/resolved = A.attackby(W,src)
+		var/resolved = W.resolve_attackby(A, src, params)
 		if(!resolved && A && W)
-			W.afterattack(A,src,1,params)
+			W.afterattack(A, src, 1, params) // 1 indicates adjacency
 		return
 
 	if(!isturf(loc))
@@ -88,9 +88,9 @@
 	if(isturf(A) || isturf(A.loc))
 		if(A.Adjacent(src)) // see adjacent.dm
 
-			var/resolved = A.attackby(W, src)
+			var/resolved = W.resolve_attackby(A, src, params)
 			if(!resolved && A && W)
-				W.afterattack(A, src, 1, params)
+				W.afterattack(A, src, 1, params) // 1 indicates adjacency
 			return
 		else
 			W.afterattack(A, src, 0, params)

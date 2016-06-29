@@ -455,8 +455,7 @@ default behaviour is:
 
 	// remove the character from the list of the dead
 	if(stat == DEAD)
-		dead_mob_list -= src
-		living_mob_list += src
+		switch_from_dead_to_living_mob_list()
 		tod = null
 		timeofdeath = 0
 
@@ -471,7 +470,7 @@ default behaviour is:
 	BITSET(hud_updateflag, LIFE_HUD)
 
 	failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
-
+	reload_fullscreen()
 	return
 
 /mob/living/proc/UpdateDamageIcon()
@@ -653,26 +652,9 @@ default behaviour is:
 
 /mob/living/proc/resist_grab()
 	var/resisting = 0
-	for(var/obj/O in requests)
-		requests.Remove(O)
-		qdel(O)
-		resisting++
 	for(var/obj/item/weapon/grab/G in grabbed_by)
 		resisting++
-		switch(G.state)
-			if(GRAB_PASSIVE)
-				qdel(G)
-			if(GRAB_AGGRESSIVE)
-				//Not standing up makes it much harder to break, so it is easier to cuff someone who is down without forcing them into unconsciousness.
-				//Otherwise, it's the same chance of breaking the grab as disarm.
-				if(incapacitated(INCAPACITATION_KNOCKDOWN)? prob(15) : prob(60))
-					visible_message("<span class='warning'>[src] has broken free of [G.assailant]'s grip!</span>")
-					qdel(G)
-			if(GRAB_NECK)
-				//If the you move when grabbing someone then it's easier for them to break free. Same if the affected mob is immune to stun.
-				if (((world.time - G.assailant.l_move_time < 30 || !stunned) && prob(15)) || prob(3))
-					visible_message("<span class='warning'>[src] has broken free of [G.assailant]'s headlock!</span>")
-					qdel(G)
+		G.handle_resist()
 	if(resisting)
 		visible_message("<span class='danger'>[src] resists!</span>")
 
@@ -790,6 +772,15 @@ default behaviour is:
 		var/area/new_area = get_area(loc)
 		if(new_area)
 			new_area.Entered(src)
+
+//called when the mob receives a bright flash
+/mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	if(override_blindness_check || !(disabilities & BLIND))
+		overlay_fullscreen("flash", type)
+		spawn(25)
+			if(src)
+				clear_fullscreen("flash", 25)
+		return 1
 
 /mob/living/proc/cannot_use_vents()
 	if(mob_size > MOB_SMALL)

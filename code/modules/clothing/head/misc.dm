@@ -242,6 +242,7 @@
 		slot_r_hand_str = "xenos_helm",
 		)
 	desc = "A helmet made out of chitinous alien hide."
+	w_class = 3
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	siemens_coefficient = 2.0
 	body_parts_covered = HEAD|FACE|EYES
@@ -255,7 +256,6 @@
 		slot_r_hand_str = "pwig",
 		)
 	flags_inv = BLOCKHAIR
-	siemens_coefficient = 2.0 //why is it so conductive?!
 	body_parts_covered = 0
 
 /obj/item/clothing/head/orangebandana //themij: Taryn Kifer
@@ -284,3 +284,17 @@
 	body_parts_covered = 0
 	flags_inv = BLOCKHEADHAIR //Shows beards!
 
+/obj/item/clothing/head/beret/deathsquad
+	name = "officer's beret"
+	desc = "An armored beret commonly used by special operations officers."
+	icon_state = "beret_badge"
+	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
+	flags_inv = BLOCKHAIR
+	siemens_coefficient = 0.9
+
+/obj/item/clothing/head/cowboy_hat
+	name = "cowboy hat"
+	desc = "A wide-brimmed hat, in the prevalent style of America's frontier period. By SolGov law, you are required to wear this hat while watching True Grit."
+	icon_state = "cowboyhat"
+	item_state = "cowboy_hat"
+	body_parts_covered = 0

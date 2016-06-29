@@ -10,8 +10,6 @@
 			src << "\red You cannot whisper (muted)."
 			return
 
-		if (src.client.handle_spam_prevention(message,MUTE_IC))
-			return
 
 	if (src.stat == 2)
 		return src.say_dead(message)
@@ -80,7 +78,7 @@
 	listening |= src
 
 	//ghosts
-	for (var/mob/M in dead_mob_list)	//does this include players who joined as observers as well?
+	for (var/mob/M in dead_mob_list_)	//does this include players who joined as observers as well?
 		if (!(M.client))
 			continue
 		if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))

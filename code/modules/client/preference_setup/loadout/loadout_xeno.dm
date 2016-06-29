@@ -32,10 +32,10 @@
 	path = /obj/item/clothing/ears/skrell/colored/chain
 	sort_category = "Xenowear"
 	whitelisted = "Skrell"
-	
+
 /datum/gear/ears/skrell/colored/chain/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks = list(gear_tweak_free_color_choice())
 
 //Skrell Bands
 /datum/gear/ears/skrell/bands
@@ -51,16 +51,16 @@
 		var/obj/item/clothing/ears/skrell/band/band = band_style
 		bandtypes[initial(band.name)] = band
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(bandtypes))
-	
+
 /datum/gear/ears/skrell/colored/band
 	display_name = "colored headtail bands (Skrell)"
 	path = /obj/item/clothing/ears/skrell/colored/band
 	sort_category = "Xenowear"
 	whitelisted = "Skrell"
-	
+
 /datum/gear/ears/skrell/colored/band/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks = list(gear_tweak_free_color_choice())
 
 //Skrell Cloth
 /datum/gear/ears/skrell/cloth/male
@@ -112,7 +112,7 @@
 /datum/gear/uniform/resomi/med
 	display_name = "uniform, Medical (Resomi)"
 	path = /obj/item/clothing/under/resomi/medical
-	
+
 /datum/gear/uniform/resomi/science
 	display_name = "uniform, Science (Resomi)"
 	path = /obj/item/clothing/under/resomi/science

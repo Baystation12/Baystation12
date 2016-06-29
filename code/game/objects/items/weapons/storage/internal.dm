@@ -47,14 +47,15 @@
 		if (!(master_item.loc == user) || (master_item.loc && master_item.loc.loc == user))
 			return 0
 
+		//TODO make this less terrible
 		if (!( user.restrained() ) && !( user.stat ))
 			switch(over_object.name)
 				if("r_hand")
-					user.u_equip(master_item)
-					user.put_in_r_hand(master_item)
+					if(user.unEquip(master_item))
+						user.put_in_r_hand(master_item)
 				if("l_hand")
-					user.u_equip(master_item)
-					user.put_in_l_hand(master_item)
+					if(user.unEquip(master_item))
+						user.put_in_l_hand(master_item)
 			master_item.add_fingerprint(user)
 			return 0
 	return 0

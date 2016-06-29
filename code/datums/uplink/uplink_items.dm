@@ -59,7 +59,7 @@ var/datum/uplink/uplink = new()
 	if(!goods)
 		return
 
-	purchase_log(U)
+	purchase_log(U, user, cost)
 	U.uses -= cost
 	U.used_TC += cost
 	return goods
@@ -108,10 +108,11 @@ var/datum/uplink/uplink = new()
 /datum/uplink_item/proc/log_icon()
 	return
 
-/datum/uplink_item/proc/purchase_log(obj/item/device/uplink/U)
+/datum/uplink_item/proc/purchase_log(obj/item/device/uplink/U, var/mob/user, var/cost)
 	feedback_add_details("traitor_uplink_items_bought", "[src]")
 	log_and_message_admins("used \the [U.loc] to buy \a [src]")
-	U.purchase_log[src] = U.purchase_log[src] + 1
+	if(user)
+		uplink_purchase_repository.add_entry(user.mind, src, cost)
 
 datum/uplink_item/dd_SortValue()
 	return cost(INFINITY, null)

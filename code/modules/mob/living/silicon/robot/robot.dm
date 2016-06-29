@@ -24,6 +24,7 @@
 
 //Icon stuff
 
+	var/static/list/eye_overlays
 	var/icontype 				//Persistent icontype tracking allows for cleaner icon updates
 	var/module_sprites[0] 		//Used to store the associations between sprite names and sprite index.
 	var/icon_selected = 1		//If icon selection has been completed yet
@@ -177,7 +178,7 @@
 
 	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
-/mob/living/silicon/robot/SetName(pickedName as text)
+/mob/living/silicon/robot/fully_replace_character_name(pickedName as text)
 	custom_name = pickedName
 	updatename()
 
@@ -299,6 +300,10 @@
 
 	// if we've changed our name, we also need to update the display name for our PDA
 	setup_PDA()
+	
+	// Synths aren't in data_core, but are on manifest. Invalidate old one so the
+	// synth shows up.
+	data_core.ResetPDAManifest() 
 
 	//We also need to update name of internal camera.
 	if (camera)
@@ -349,6 +354,9 @@
 /mob/living/silicon/robot/verb/toggle_lights()
 	set category = "Silicon Commands"
 	set name = "Toggle Lights"
+
+	if(stat == DEAD)
+		return
 
 	lights_on = !lights_on
 	usr << "You [lights_on ? "enable" : "disable"] your integrated light."
@@ -711,7 +719,15 @@
 /mob/living/silicon/robot/updateicon()
 	overlays.Cut()
 	if(stat == CONSCIOUS)
-		overlays += "eyes-[module_sprites[icontype]]"
+		var/eye_icon_state = "eyes-[module_sprites[icontype]]"
+		if(eye_icon_state in icon_states(icon))
+			if(!eye_overlays)
+				eye_overlays = list()
+			var/image/eye_overlay = eye_overlays[eye_icon_state]
+			if(!eye_overlay)
+				eye_overlay = image(icon, eye_icon_state, LIGHTING_LAYER+0.1)
+				eye_overlays[eye_icon_state] = eye_overlay
+			overlays += eye_overlay
 
 	if(opened)
 		var/panelprefix = custom_sprite ? src.ckey : "ov"

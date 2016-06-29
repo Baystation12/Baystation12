@@ -68,7 +68,7 @@
 	proc/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		return null
 
-proc/spread_germs_to_organ(var/obj/item/organ/external/E, var/mob/living/carbon/human/user)
+/proc/spread_germs_to_organ(var/obj/item/organ/external/E, var/mob/living/carbon/human/user)
 	if(!istype(user) || !istype(E)) return
 
 	var/germ_level = user.germ_level
@@ -77,7 +77,7 @@ proc/spread_germs_to_organ(var/obj/item/organ/external/E, var/mob/living/carbon/
 
 	E.germ_level = max(germ_level,E.germ_level) //as funny as scrubbing microbes out with clean gloves is - no.
 
-proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
+/obj/item/proc/do_surgery(mob/living/carbon/M, mob/living/user)
 	if(!istype(M))
 		return 0
 	if (user.a_intent == I_HURT)	//check for Hippocratic Oath
@@ -88,18 +88,18 @@ proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 		return 1
 	for(var/datum/surgery_step/S in surgery_steps)
 		//check if tool is right or close enough and if this step is possible
-		if(S.tool_quality(tool))
-			var/step_is_valid = S.can_use(user, M, zone, tool)
+		if(S.tool_quality(src))
+			var/step_is_valid = S.can_use(user, M, zone, src)
 			if(step_is_valid && S.is_valid_target(M))
 				if(step_is_valid == SURGERY_FAILURE) // This is a failure that already has a message for failing.
 					return 1
 				M.op_stage.in_progress += zone
-				S.begin_step(user, M, zone, tool)		//start on it
+				S.begin_step(user, M, zone, src)		//start on it
 				//We had proper tools! (or RNG smiled.) and user did not move or change hands.
-				if(prob(S.tool_quality(tool)) &&  do_mob(user, M, rand(S.min_duration, S.max_duration)))
-					S.end_step(user, M, zone, tool)		//finish successfully
-				else if ((tool in user.contents) && user.Adjacent(M))			//or
-					S.fail_step(user, M, zone, tool)		//malpractice~
+				if(prob(S.tool_quality(src)) &&  do_mob(user, M, rand(S.min_duration, S.max_duration)))
+					S.end_step(user, M, zone, src)		//finish successfully
+				else if ((src in user.contents) && user.Adjacent(M))			//or
+					S.fail_step(user, M, zone, src)		//malpractice~
 				else // This failing silently was a pain.
 					user << "<span class='warning'>You must remain close to your patient to conduct surgery.</span>"
 				M.op_stage.in_progress -= zone 									// Clear the in-progress flag.
@@ -109,11 +109,11 @@ proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 				return	1	  												//don't want to do weapony things after surgery
 
 	if (user.a_intent == I_HELP)
-		user << "<span class='warning'>You can't see any useful way to use [tool] on [M].</span>"
+		user << "<span class='warning'>You can't see any useful way to use [src] on [M].</span>"
 		return 1
 	return 0
 
-proc/sort_surgeries()
+/proc/sort_surgeries()
 	var/gap = surgery_steps.len
 	var/swapped = 1
 	while (gap > 1 || swapped)

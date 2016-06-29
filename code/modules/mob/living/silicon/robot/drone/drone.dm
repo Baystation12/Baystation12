@@ -135,7 +135,7 @@ var/list/mob_hat_cache = list()
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 
 //Redefining some robot procs...
-/mob/living/silicon/robot/drone/SetName(pickedName as text)
+/mob/living/silicon/robot/drone/fully_replace_character_name(pickedName as text)
 	// Would prefer to call the grandparent proc but this isn't possible, so..
 	real_name = pickedName
 	name = real_name
@@ -264,10 +264,13 @@ var/list/mob_hat_cache = list()
 //Drones killed by damage will gib.
 /mob/living/silicon/robot/drone/handle_regular_status_updates()
 	var/turf/T = get_turf(src)
-	if((!T || health <= -35 || (master_fabricator && T.z != master_fabricator.z)) && src.stat != DEAD)
+	if((health <= -35 || (master_fabricator && (T && T.z != master_fabricator.z))) && src.stat != DEAD)
 		timeofdeath = world.time
 		death() //Possibly redundant, having trouble making death() cooperate.
 		gib()
+		return
+	if(health <= 0 && src.stat != DEAD)
+		death()
 		return
 	..()
 

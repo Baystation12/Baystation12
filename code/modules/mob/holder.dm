@@ -101,13 +101,7 @@ var/list/holder_mob_icon_cache = list()
 	last_holder = H
 	register_all_movement(H, M)
 
-	if(istype(H))
-		if(H.l_hand == src)
-			H.update_inv_l_hand()
-		else if(H.r_hand == src)
-			H.update_inv_r_hand()
-		else
-			H.regenerate_icons()
+	update_held_icon()
 
 //Mob specific holders.
 /obj/item/weapon/holder/diona
@@ -134,6 +128,11 @@ var/list/holder_mob_icon_cache = list()
 
 	if(!holder_type || buckled || pinned.len)
 		return
+
+	if(self_grab)
+		if(src.incapacitated()) return
+	else
+		if(grabber.incapacitated()) return
 
 	var/obj/item/weapon/holder/H = new holder_type(get_turf(src))
 

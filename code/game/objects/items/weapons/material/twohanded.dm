@@ -29,7 +29,7 @@
 
 /obj/item/weapon/material/twohanded/update_twohanding()
 	var/mob/living/M = loc
-	if(istype(M) && !issmall(M) && is_held_twohanded(M))
+	if(istype(M) && M.can_wield_item(src) && is_held_twohanded(M))
 		wielded = 1
 		force = force_wielded
 		name = "[base_name] (wielded)"
@@ -66,7 +66,8 @@
 
 /obj/item/weapon/material/twohanded/update_icon()
 	icon_state = "[base_icon][wielded]"
-	item_state = icon_state
+	item_state_slots[slot_l_hand_str] = icon_state
+	item_state_slots[slot_r_hand_str] = icon_state
 
 /*
  * Fireaxe
@@ -76,8 +77,10 @@
 	base_icon = "fireaxe"
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
+	
+	// 15/32 with hardness 60 (steel) and 20/42 with hardness 80 (plasteel)
+	force_divisor = 0.525
 	unwielded_force_divisor = 0.25
-	force_divisor = 0.7 // 10/42 with hardness 60 (steel) and 0.25 unwielded divisor
 	sharp = 1
 	edge = 1
 	w_class = 5
@@ -108,8 +111,10 @@
 	force = 10
 	w_class = 5
 	slot_flags = SLOT_BACK
-	force_wielded = 0.75           // 22 when wielded with hardness 15 (glass)
-	unwielded_force_divisor = 0.65 // 14 when unwielded based on above
+
+	// 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
+	force_divisor = 0.33
+	unwielded_force_divisor = 0.20
 	thrown_force_divisor = 1.5 // 20 when thrown with weight 15 (glass)
 	throw_speed = 3
 	edge = 0
@@ -117,3 +122,8 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	default_material = "glass"
+
+/obj/item/weapon/material/twohanded/spear/shatter(var/consumed)
+	if(!consumed)
+		new /obj/item/weapon/material/wirerod(get_turf(src)) //give back the wired rod
+	..()

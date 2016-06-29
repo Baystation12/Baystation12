@@ -22,7 +22,7 @@
 	new /obj/item/clothing/gloves/black(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/device/analyzer(src)
-	new /obj/item/weapon/storage/bag/ore(src)
+	new /obj/item/weapon/storage/ore(src)
 	new /obj/item/device/flashlight/lantern(src)
 	new /obj/item/weapon/shovel(src)
 	new /obj/item/weapon/pickaxe(src)
@@ -151,7 +151,7 @@
 	force = 8.0
 	throwforce = 4.0
 	item_state = "shovel"
-	w_class = 3.0
+	w_class = 5
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")

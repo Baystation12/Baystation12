@@ -142,6 +142,15 @@
 		icon_state = "hair_ponytail4"
 		gender = FEMALE
 
+	ponytail5
+		name = "Ponytail 5"
+		icon_state = "hair_ponytail5"
+		gender = FEMALE
+
+	fringetail
+		name = "Fringetail"
+		icon_state = "hair_fringetail"
+
 	sideponytail
 		name = "Side Ponytail"
 		icon_state = "hair_stail"
@@ -155,6 +164,10 @@
 		name = "Pompadour"
 		icon_state = "hair_pompadour"
 		gender = MALE
+
+	sleeze
+		name = "Sleeze"
+		icon_state = "hair_sleeze"
 
 	quiff
 		name = "Quiff"
@@ -250,6 +263,14 @@
 		name = "Big Afro"
 		icon_state = "hair_bigafro"
 		gender = MALE
+
+	rows
+		name = "Rows"
+		icon_state = "hair_rows1"
+
+	rows2
+		name = "Rows 2"
+		icon_state = "hair_rows2"
 
 	sargeant
 		name = "Flat Top"
@@ -434,8 +455,12 @@
 		icon_state = "hair_halfshaved"
 
 	bun
-		name = "Bun"
+		name = "Low Bun"
 		icon_state = "hair_bun"
+		
+	bun2
+		name = "High Bun"
+		icon_state = "hair_bun2"
 
 	doublebun
 		name = "Double-Bun"

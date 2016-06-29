@@ -13,7 +13,6 @@
 
 /datum/reagent/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(strength && alien != IS_DIONA)
-		if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
 		M.adjustToxLoss(strength * removed)
 
 /datum/reagent/toxin/plasticide
@@ -296,16 +295,12 @@
 	if(alien == IS_DIONA)
 		return
 
-	var/effective_dose = dose
-	if(issmall(M))
-		effective_dose *= 2
-
-	if(effective_dose < 1)
-		if(effective_dose == metabolism * 2 || prob(5))
+	if(dose < 1)
+		if(dose == metabolism * 2 || prob(5))
 			M.emote("yawn")
-	else if(effective_dose < 1.5)
+	else if(dose < 1.5)
 		M.eye_blurry = max(M.eye_blurry, 10)
-	else if(effective_dose < 5)
+	else if(dose < 5)
 		if(prob(50))
 			M.Weaken(2)
 		M.drowsyness = max(M.drowsyness, 20)
@@ -328,20 +323,16 @@
 	if(alien == IS_DIONA)
 		return
 
-	var/effective_dose = dose
-	if(issmall(M))
-		effective_dose *= 2
-
-	if(effective_dose == metabolism)
+	if(dose == metabolism)
 		M.confused += 2
 		M.drowsyness += 2
-	else if(effective_dose < 2)
+	else if(dose < 2)
 		M.Weaken(30)
 		M.eye_blurry = max(M.eye_blurry, 10)
 	else
 		M.sleeping = max(M.sleeping, 30)
 
-	if(effective_dose > 1)
+	if(dose > 1)
 		M.adjustToxLoss(removed)
 
 /datum/reagent/chloralhydrate/beer2 //disguised as normal beer for use by emagged brobots
@@ -350,13 +341,10 @@
 	description = "An alcoholic beverage made from malted grains, hops, yeast, and water. The fermentation appears to be incomplete." //If the players manage to analyze this, they deserve to know something is wrong.
 	taste_description = "shitty piss water"
 	reagent_state = LIQUID
-	color = "#664300"
+	color = "#FFD300"
 
-	glass_icon_state = "beerglass"
-	glass_name = "glass of beer"
+	glass_name = "beer"
 	glass_desc = "A freezing pint of beer"
-	glass_center_of_mass = list("x"=16, "y"=8)
-
 /* Drugs */
 
 /datum/reagent/space_drugs
@@ -462,14 +450,12 @@
 		return
 	M.druggy = max(M.druggy, 30)
 
-	var/effective_dose = dose
-	if(issmall(M)) effective_dose *= 2
-	if(effective_dose < 1)
+	if(dose < 1)
 		M.apply_effect(3, STUTTER)
 		M.make_dizzy(5)
 		if(prob(5))
 			M.emote(pick("twitch", "giggle"))
-	else if(effective_dose < 2)
+	else if(dose < 2)
 		M.apply_effect(3, STUTTER)
 		M.make_jittery(5)
 		M.make_dizzy(5)
@@ -522,9 +508,7 @@
 		if(istype(W, /obj/item/weapon/implant)) //TODO: Carn. give implants a dropped() or something
 			qdel(W)
 			continue
-		W.layer = initial(W.layer)
-		W.loc = M.loc
-		W.dropped(M)
+		M.drop_from_inventory(W)
 	var/mob/living/carbon/slime/new_mob = new /mob/living/carbon/slime(M.loc)
 	new_mob.a_intent = "hurt"
 	new_mob.universal_speak = 1
