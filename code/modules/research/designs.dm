@@ -1067,6 +1067,20 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/crew
 	sort_string = "FAGAI"
 
+/datum/design/circuit/bioprinter
+	name = "bioprinter"
+	id = "bioprinter"
+	req_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 3, TECH_DATA = 3)
+	build_path = /obj/item/weapon/circuitboard/bioprinter
+	sort_string = "FAGAK"
+
+/datum/design/circuit/roboprinter
+	name = "prosthetic organ fabricator"
+	id = "roboprinter"
+	req_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 3)
+	build_path = /obj/item/weapon/circuitboard/roboprinter
+	sort_string = "FAGAM"
+
 /datum/design/circuit/teleconsole
 	name = "teleporter control console"
 	id = "teleconsole"

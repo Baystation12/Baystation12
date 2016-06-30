@@ -1,6 +1,5 @@
 /decl/hierarchy/supply_pack/security
 	name = "Security"
-	hierarchy_type = /decl/hierarchy/supply_pack/security
 
 /decl/hierarchy/supply_pack/security/specialops
 	name = "Special Ops supplies"
