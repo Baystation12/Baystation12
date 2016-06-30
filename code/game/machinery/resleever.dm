@@ -41,7 +41,7 @@
 obj/machinery/resleever/process()
 
 	if(occupant)
-		occupant.sleeping = 10 // We need to always keep the occupant sleeping if they're in here.
+		occupant.Paralyse(4) // We need to always keep the occupant sleeping if they're in here.
 	if(stat & (NOPOWER|BROKEN) || !anchored)
 		update_use_power(0)
 		return
@@ -214,8 +214,7 @@ obj/machinery/resleever/process()
 		return
 	occupant.loc = loc
 	if(occupant.client)
-		occupant.client.eye = occupant.client.mob
-		occupant.client.perspective = MOB_PERSPECTIVE
+		occupant.reset_view(null)
 	occupant = null
 	occupant_name = null
 	update_icon()

@@ -110,8 +110,7 @@
 		return
 	usr.stop_pulling()
 	if(usr.client)
-		usr.client.perspective = EYE_PERSPECTIVE
-		usr.client.eye = src
+		usr.reset_view(src)
 	usr.loc = src
 	src.occupant = usr
 	src.icon_state = "scanner_1"
@@ -171,8 +170,7 @@
 	if ((!( src.occupant ) || src.locked))
 		return
 	if (src.occupant.client)
-		src.occupant.client.eye = src.occupant.client.mob
-		src.occupant.client.perspective = MOB_PERSPECTIVE
+		src.occupant.reset_view(null)
 	src.occupant.loc = src.loc
 	src.occupant = null
 	src.icon_state = "scanner_0"
