@@ -2084,6 +2084,10 @@ area/space/atmosalert()
 	name = "\improper Listening Post Solars"
 	icon_state = "LPS"
 
+
+/area/merchant_station
+	name = "\improper Merchant Station"
+	icon_state = "LP"
 //DERELICT
 
 /area/derelict
