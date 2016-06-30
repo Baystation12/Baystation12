@@ -77,6 +77,7 @@
 	var/halloss_message = "slumps to the ground, too weak to continue fighting."
 	var/halloss_message_self = "You're in too much pain to keep going..."
 
+	var/spawns_with_stack = 0
 	// Environment tolerance/life processes vars.
 	var/reagent_tag                                   //Used for metabolizing reagents.
 	var/breath_pressure = 16                          // Minimum partial pressure safe for breathing, kPa

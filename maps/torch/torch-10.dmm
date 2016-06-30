@@ -2089,7 +2089,7 @@
 "aOi" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/gloves{pixel_x = 3; pixel_y = 4},/obj/item/weapon/storage/box/masks{pixel_x = 0; pixel_y = 0},/turf/unsimulated/floor{icon_state = "white"},/area/centcom/holding)
 "aOj" = (/obj/item/weapon/tank/nitrogen,/turf/unsimulated/floor{tag = "icon-asteroid"; icon_state = "asteroid"},/area/syndicate_mothership{name = "\improper Raider Base"})
 "aOk" = (/obj/item/organ/xenos/eggsac,/turf/unsimulated/floor{tag = "icon-asteroid"; icon_state = "asteroid"},/area/syndicate_mothership{name = "\improper Raider Base"})
-"aOl" = (/obj/item/organ/stack,/turf/unsimulated/floor{tag = "icon-asteroid"; icon_state = "asteroid"},/area/syndicate_mothership{name = "\improper Raider Base"})
+"aOl" = (/turf/unsimulated/floor{tag = "icon-asteroid"; icon_state = "asteroid"},/area/syndicate_mothership{name = "\improper Raider Base"})
 "aOm" = (/obj/structure/bed/chair{dir = 1},/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/syndicate_mothership{name = "\improper Raider Base"})
 "aOn" = (/obj/effect/floor_decal/corner/red/three_quarters,/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/tdome)
 "aOo" = (/obj/effect/floor_decal/corner/red{dir = 10},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/tdome)
