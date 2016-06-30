@@ -25,21 +25,21 @@ var/global/datum/controller/occupations/job_master
 			if(job.faction != faction)	continue
 			occupations += job
 			if(job.department_flag & COM)
-				command_positions += job.title
+				command_positions |= job.title
 			if(job.department_flag & SEC)
-				security_positions += job.title
+				security_positions |= job.title
 			if(job.department_flag & ENG)
 				engineering_positions += job.title
 			if(job.department_flag & MED)
-				medical_positions += job.title
+				medical_positions |= job.title
 			if(job.department_flag & SCI)
-				science_positions += job.title
+				science_positions |= job.title
 			if(job.department_flag & CRG)
-				cargo_positions += job.title
+				cargo_positions |= job.title
 			if(job.department_flag & CIV)
-				civilian_positions += job.title
+				civilian_positions |= job.title
 			if(job.department_flag & MSC)
-				nonhuman_positions += job.title
+				nonhuman_positions |= job.title
 
 
 		return 1
