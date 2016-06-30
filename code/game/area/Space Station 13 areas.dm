@@ -372,6 +372,11 @@ area/space/atmosalert()
 /area/syndicate_mothership/ninja
 	name = "\improper Ninja Base"
 
+/area/syndicate_heist
+	name = "\improper Pirate Station"
+	icon_state = "syndie-ship"
+	requires_power = 0
+
 //EXTRA
 
 /area/asteroid					// -- TLE
