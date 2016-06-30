@@ -16,7 +16,7 @@
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_STABLE)
 		M.add_chemical_effect(CE_PAINKILLER, 25)
-	M.add_chemical_effect(CE_PULSE, 1)
+		M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/bicaridine
 	name = "Bicaridine"
@@ -182,9 +182,9 @@
 	taste_description = "sickness"
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose = 60
+	overdose = REAGENTS_OVERDOSE * 2
 	scannable = 1
-	metabolism = 0.02
+	metabolism = REM * 0.1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/paracetamol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -201,9 +201,9 @@
 	taste_description = "sourness"
 	reagent_state = LIQUID
 	color = "#CB68FC"
-	overdose = 30
+	overdose = REAGENTS_OVERDOSE
 	scannable = 1
-	metabolism = 0.02
+	metabolism = REM * 0.1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/tramadol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -220,8 +220,8 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#800080"
-	overdose = 20
-	metabolism = 0.02
+	overdose = REAGENTS_OVERDOSE * 0.5
+	metabolism = REM * 0.1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/oxycodone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -246,16 +246,15 @@
 	scannable = 1
 
 /datum/reagent/synaptizine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-	M.drowsyness = max(M.drowsyness - 5, 0)
-	M.AdjustParalysis(-1)
-	M.AdjustStunned(-1)
-	M.AdjustWeakened(-1)
-	holder.remove_reagent("mindbreaker", 5)
-	M.hallucination = max(0, M.hallucination - 10)
-	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
-	M.add_chemical_effect(CE_PAINKILLER, 40)
+	if(alien != IS_DIONA)
+		M.drowsyness = max(M.drowsyness - 5, 0)
+		M.AdjustParalysis(-1)
+		M.AdjustStunned(-1)
+		M.AdjustWeakened(-1)
+		holder.remove_reagent("mindbreaker", 5)
+		M.hallucination = max(0, M.hallucination - 10)
+		M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
+		M.add_chemical_effect(CE_PAINKILLER, 40)
 
 /datum/reagent/alkysine
 	name = "Alkysine"
@@ -270,10 +269,9 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/alkysine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-	M.adjustBrainLoss(-30 * removed)
-	M.add_chemical_effect(CE_PAINKILLER, 10)
+	if(alien != IS_DIONA)
+		M.adjustBrainLoss(-30 * removed)
+		M.add_chemical_effect(CE_PAINKILLER, 10)
 
 /datum/reagent/imidazoline
 	name = "Imidazoline"
@@ -285,7 +283,6 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
-
 
 /datum/reagent/imidazoline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.eye_blurry = max(M.eye_blurry - 5, 0)
@@ -348,12 +345,11 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 
 /datum/reagent/hyperzine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-	if(prob(5))
-		M.emote(pick("twitch", "blink_r", "shiver"))
-	M.add_chemical_effect(CE_SPEEDBOOST, 1)
-	M.add_chemical_effect(CE_PULSE, 2)
+	if(alien != IS_DIONA)
+		if(prob(5))
+			M.emote(pick("twitch", "blink_r", "shiver"))
+		M.add_chemical_effect(CE_SPEEDBOOST, 1)
+		M.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/ethylredoxrazine
 	name = "Ethylredoxrazine"
@@ -364,16 +360,15 @@
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/ethylredoxrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-	M.dizziness = 0
-	M.drowsyness = 0
-	M.stuttering = 0
-	M.confused = 0
-	if(M.ingested)
-		for(var/datum/reagent/R in M.ingested.reagent_list)
-			if(istype(R, /datum/reagent/ethanol))
-				R.dose = max(R.dose - removed * 5, 0)
+	if(alien != IS_DIONA)
+		M.dizziness = 0
+		M.drowsyness = 0
+		M.stuttering = 0
+		M.confused = 0
+		if(M.ingested)
+			for(var/datum/reagent/R in M.ingested.reagent_list)
+				if(istype(R, /datum/reagent/ethanol))
+					R.dose = max(R.dose - removed * 5, 0)
 
 /datum/reagent/hyronalin
 	name = "Hyronalin"
@@ -459,101 +454,7 @@
 		M.bodytemperature = max(310, M.bodytemperature - (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
 	else if(M.bodytemperature < 311)
 		M.bodytemperature = min(310, M.bodytemperature + (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
-
-/* Antidepressants */
-
-#define ANTIDEPRESSANT_MESSAGE_DELAY 5*60*10
-
-/datum/reagent/methylphenidate
-	name = "Methylphenidate"
-	id = "methylphenidate"
-	description = "Improves the ability to concentrate."
-	taste_description = "sourness"
-	reagent_state = LIQUID
-	color = "#BF80BF"
-	metabolism = 0.01
-	data = 0
-
-/datum/reagent/methylphenidate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-	if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
-		data = world.time
-		M << "<span class='warning'>You lose focus...</span>"
-	else
-		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
-			data = world.time
-			M << "<span class='notice'>Your mind feels focused and undivided.</span>"
-
-/datum/reagent/citalopram
-	name = "Citalopram"
-	id = "citalopram"
-	description = "Stabilizes the mind a little."
-	taste_description = "bitterness"
-	reagent_state = LIQUID
-	color = "#FF80FF"
-	metabolism = 0.01
-	data = 0
-
-/datum/reagent/citalopram/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-	if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
-		data = world.time
-		M << "<span class='warning'>Your mind feels a little less stable...</span>"
-	else
-		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
-			data = world.time
-			M << "<span class='notice'>Your mind feels stable... a little stable.</span>"
-
-/datum/reagent/paroxetine
-	name = "Paroxetine"
-	id = "paroxetine"
-	description = "Stabilizes the mind greatly, but has a chance of adverse effects."
-	reagent_state = LIQUID
-	color = "#FF80BF"
-	metabolism = 0.01
-	data = 0
-
-/datum/reagent/paroxetine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-	if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
-		data = world.time
-		M << "<span class='warning'>Your mind feels much less stable...</span>"
-	else
-		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
-			data = world.time
-			if(prob(90))
-				M << "<span class='notice'>Your mind feels much more stable.</span>"
-			else
-				M << "<span class='warning'>Your mind breaks apart...</span>"
-				M.hallucination += 200
 				
-/datum/reagent/nicotine
-	name = "Nicotine"
-	id = "nicotine"
-	description = "Stimulates and relaxes the mind and body."
-	taste_description = "smoke"
-	reagent_state = LIQUID
-	color = "#181818"
-	metabolism = REM * 0.002
-	overdose = REAGENTS_OVERDOSE * 0.5
-	scannable = 1	
-	data = 0
-
-/datum/reagent/nicotine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-	M.add_chemical_effect(CE_PULSE, 1)
-	if(volume <= 0.02 && dose >= 0.05 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
-		data = world.time
-		M << "<span class='warning'>You feel antsy, your concentration wavers...</span>"
-	else
-		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
-			data = world.time
-			M << "<span class='notice'>You feel invigorated and calm.</span>"					
-
 /datum/reagent/rezadone
 	name = "Rezadone"
 	id = "rezadone"
@@ -575,3 +476,93 @@
 	if(dose > 10)
 		M.make_dizzy(5)
 		M.make_jittery(5)
+
+/* Psychological drugs */
+
+#define ANTIDEPRESSANT_MESSAGE_DELAY 5*60*10
+
+/datum/reagent/methylphenidate
+	name = "Methylphenidate"
+	id = "methylphenidate"
+	description = "Improves the ability to concentrate."
+	taste_description = "sourness"
+	reagent_state = LIQUID
+	color = "#BF80BF"
+	metabolism = REM * 0.05
+	data = 0
+
+/datum/reagent/methylphenidate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien != IS_DIONA)
+		if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+			data = world.time
+			M << "<span class='warning'>You lose focus...</span>"
+		else
+			if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+				data = world.time
+				M << "<span class='notice'>Your mind feels focused and undivided.</span>"
+
+/datum/reagent/citalopram
+	name = "Citalopram"
+	id = "citalopram"
+	description = "Stabilizes the mind a little."
+	taste_description = "bitterness"
+	reagent_state = LIQUID
+	color = "#FF80FF"
+	metabolism = REM * 0.05
+	data = 0
+
+/datum/reagent/citalopram/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien != IS_DIONA)
+		if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+			data = world.time
+			M << "<span class='warning'>Your mind feels a little less stable...</span>"
+		else
+			if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+				data = world.time
+				M << "<span class='notice'>Your mind feels stable... a little stable.</span>"
+
+/datum/reagent/paroxetine
+	name = "Paroxetine"
+	id = "paroxetine"
+	description = "Stabilizes the mind greatly, but has a chance of adverse effects."
+	reagent_state = LIQUID
+	color = "#FF80BF"
+	metabolism = REM * 0.05
+	data = 0
+
+/datum/reagent/paroxetine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien != IS_DIONA)
+		if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+			data = world.time
+			M << "<span class='warning'>Your mind feels much less stable...</span>"
+		else
+			if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+				data = world.time
+				if(prob(90))
+					M << "<span class='notice'>Your mind feels much more stable.</span>"
+				else
+					M << "<span class='warning'>Your mind breaks apart...</span>"
+					M.hallucination += 200
+				
+/datum/reagent/nicotine
+	name = "Nicotine"
+	id = "nicotine"
+	description = "Stimulates and relaxes the mind and body."
+	taste_description = "smoke"
+	reagent_state = LIQUID
+	color = "#181818"
+	metabolism = REM * 0.002 // Snowflakey, but required to make cigarettes work properly
+	overdose = REAGENTS_OVERDOSE * 0.5
+	scannable = 1	
+	data = 0
+
+/datum/reagent/nicotine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien != IS_DIONA)
+		M.add_chemical_effect(CE_PULSE, 1)
+		if(volume <= 0.02 && dose >= 0.05 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3) // Very snowflakey
+			data = world.time
+			M << "<span class='warning'>You feel antsy, your concentration wavers...</span>"
+		else
+			if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
+				data = world.time
+				M << "<span class='notice'>You feel invigorated and calm.</span>"
