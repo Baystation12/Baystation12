@@ -39,3 +39,4 @@
 //reagent flags
 #define IGNORE_MOB_SIZE 0x1
 #define AFFECTS_DEAD    0x2
+#define AFFECTS_DIONA	0x4

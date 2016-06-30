@@ -1,4 +1,3 @@
-
 //Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent id
 /proc/initialize_chemical_reagents()
 	var/paths = typesof(/datum/reagent) - /datum/reagent
@@ -26,6 +25,8 @@
 	var/dose = 0
 	var/max_dose = 0
 	var/overdose = 0
+	var/effective_dose = 0
+	var/effects_list = list()
 	var/scannable = 0 // Shows up on health analyzers.
 	var/color = "#000000"
 	var/color_weight = 1
@@ -51,6 +52,8 @@
 
 /datum/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(!istype(M))
+		return
+	if(!(flags & AFFECTS_DIONA) && alien == IS_DIONA)
 		return
 	if(!(flags & AFFECTS_DEAD) && M.stat == DEAD)
 		return
@@ -120,13 +123,19 @@
 	..()
 	holder = null
 
-/* DEPRECATED - TODO: REMOVE EVERYWHERE */
-
-/datum/reagent/proc/reaction_turf(var/turf/target)
-	touch_turf(target)
-
-/datum/reagent/proc/reaction_obj(var/obj/target)
-	touch_obj(target)
-
-/datum/reagent/proc/reaction_mob(var/mob/target)
-	touch_mob(target)
+/*	
+//Medicine rework, includes addiction and dose-response curve (sort of)	
+/datum/reagent/proc/dose_response(var/effective_dose)
+	return
+	
+/datum/reagent/proc/addiction(var/mob/living/carbon/M, var/msg_withdrawal, var/msg_normal, var/msg_normal2, var/msg_prob) //Refactor from antidepressants
+	var/mesaage_delay = 5*60*10	
+	if(volume <= 0.1 && dose >= 0.5 && world.time > data + message_delay)
+		data = world.time
+		M << "<span class='warning'>[msg_withdrawal]</span>"
+	else
+		if(world.time > data + message_delay)
+			data = world.time
+			M << "<span class='notice'>[msg_normal]</span>"			
+	return
+*/

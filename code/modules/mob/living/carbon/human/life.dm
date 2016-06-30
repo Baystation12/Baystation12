@@ -71,8 +71,6 @@
 
 		handle_pain()
 
-		handle_medical_side_effects()
-
 		if(!client)
 			species.handle_npc(src)
 

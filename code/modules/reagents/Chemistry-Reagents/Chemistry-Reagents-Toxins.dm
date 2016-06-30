@@ -12,7 +12,7 @@
 	var/strength = 4 // How much damage it deals per unit
 
 /datum/reagent/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(strength && alien != IS_DIONA)
+	if(strength)
 		M.adjustToxLoss(strength * removed)
 
 /datum/reagent/toxin/plasticide
@@ -78,6 +78,7 @@
 	metabolism = REM * 2
 
 /datum/reagent/toxin/cyanide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
 	M.adjustOxyLoss(20 * removed)
 	M.sleeping += 1
 
@@ -92,6 +93,7 @@
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/toxin/potassium_chloride/overdose(var/mob/living/carbon/M, var/alien)
+	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.stat != 1)
@@ -113,6 +115,7 @@
 	overdose = 20
 
 /datum/reagent/toxin/potassium_chlorophoride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.stat != 1)
@@ -133,13 +136,13 @@
 	strength = 3
 
 /datum/reagent/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		M.status_flags |= FAKEDEATH
-		M.adjustOxyLoss(3 * removed)
-		M.Weaken(10)
-		M.silent = max(M.silent, 10)
-		M.tod = stationtime2text()
-		M.add_chemical_effect(CE_NOPULSE, 1)
+	..()
+	M.status_flags |= FAKEDEATH
+	M.adjustOxyLoss(3 * removed)
+	M.Weaken(10)
+	M.silent = max(M.silent, 10)
+	M.tod = stationtime2text()
+	M.add_chemical_effect(CE_NOPULSE, 1)
 
 /datum/reagent/toxin/zombiepowder/Destroy()
 	if(holder && holder.my_atom && ismob(holder.my_atom))
@@ -177,6 +180,7 @@
 	reagent_state = LIQUID
 	color = "#49002E"
 	strength = 4
+	flags = AFFECTS_DIONA
 
 /datum/reagent/toxin/plantbgone/touch_turf(var/turf/T)
 	if(istype(T, /turf/simulated/wall))
@@ -191,10 +195,12 @@
 		qdel(O)
 
 /datum/reagent/toxin/plantbgone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
 	if(alien == IS_DIONA)
 		M.adjustToxLoss(50 * removed)
 
 /datum/reagent/toxin/plantbgone/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
 	if(alien == IS_DIONA)
 		M.adjustToxLoss(50 * removed)
 
@@ -218,10 +224,10 @@
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/lexorin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		M.take_organ_damage(3 * removed, 0)
-		if(M.losebreath < 15)
-			M.losebreath++
+
+	M.take_organ_damage(3 * removed, 0)
+	if(M.losebreath < 15)
+		M.losebreath++
 
 /datum/reagent/mutagen
 	name = "Unstable mutagen"
@@ -265,12 +271,11 @@
 	color = "#801E28"
 
 /datum/reagent/slimejelly/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		if(prob(10))
-			M << "<span class='danger'>Your insides are burning!</span>"
-			M.adjustToxLoss(rand(100, 300) * removed)
-		else if(prob(40))
-			M.heal_organ_damage(25 * removed, 0)
+	if(prob(10))
+		M << "<span class='danger'>Your insides are burning!</span>"
+		M.adjustToxLoss(rand(100, 300) * removed)
+	else if(prob(40))
+		M.heal_organ_damage(25 * removed, 0)
 
 /datum/reagent/soporific
 	name = "Soporific"
@@ -283,20 +288,19 @@
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		if(dose < 1)
-			if(dose == metabolism * 2 || prob(5))
-				M.emote("yawn")
-		else if(dose < 1.5)
-			M.eye_blurry = max(M.eye_blurry, 10)
-		else if(dose < 5)
-			if(prob(50))
-				M.Weaken(2)
-			M.drowsyness = max(M.drowsyness, 20)
-		else
-			M.sleeping = max(M.sleeping, 20)
-			M.drowsyness = max(M.drowsyness, 60)
-		M.add_chemical_effect(CE_PULSE, -1)
+	if(dose < 1)
+		if(dose == metabolism * 2 || prob(5))
+			M.emote("yawn")
+	else if(dose < 1.5)
+		M.eye_blurry = max(M.eye_blurry, 10)
+	else if(dose < 5)
+		if(prob(50))
+			M.Weaken(2)
+		M.drowsyness = max(M.drowsyness, 20)
+	else
+		M.sleeping = max(M.sleeping, 20)
+		M.drowsyness = max(M.drowsyness, 60)
+	M.add_chemical_effect(CE_PULSE, -1)
 
 /datum/reagent/chloralhydrate
 	name = "Chloral Hydrate"
@@ -309,18 +313,17 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 
 /datum/reagent/chloralhydrate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		if(dose == metabolism)
-			M.confused += 2
-			M.drowsyness += 2
-		else if(dose < 2)
-			M.Weaken(30)
-			M.eye_blurry = max(M.eye_blurry, 10)
-		else
-			M.sleeping = max(M.sleeping, 30)
+	if(dose == metabolism)
+		M.confused += 2
+		M.drowsyness += 2
+	else if(dose < 2)
+		M.Weaken(30)
+		M.eye_blurry = max(M.eye_blurry, 10)
+	else
+		M.sleeping = max(M.sleeping, 30)
 
-		if(dose > 1)
-			M.adjustToxLoss(removed)
+	if(dose > 1)
+		M.adjustToxLoss(removed)
 
 /datum/reagent/chloralhydrate/beer2 //disguised as normal beer for use by emagged brobots
 	name = "Beer"
@@ -346,13 +349,12 @@
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/space_drugs/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		M.druggy = max(M.druggy, 15)
-		if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
-			step(M, pick(cardinal))
-		if(prob(7))
-			M.emote(pick("twitch", "drool", "moan", "giggle"))
-		M.add_chemical_effect(CE_PULSE, -1)
+	M.druggy = max(M.druggy, 15)
+	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
+		step(M, pick(cardinal))
+	if(prob(7))
+		M.emote(pick("twitch", "drool", "moan", "giggle"))
+	M.add_chemical_effect(CE_PULSE, -1)
 
 /datum/reagent/serotrotium
 	name = "Serotrotium"
@@ -365,10 +367,10 @@
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/serotrotium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		if(prob(7))
-			M.emote(pick("twitch", "drool", "moan", "gasp"))
-		return
+
+	if(prob(7))
+		M.emote(pick("twitch", "drool", "moan", "gasp"))
+	return
 
 /datum/reagent/cryptobiolin
 	name = "Cryptobiolin"
@@ -381,9 +383,9 @@
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/cryptobiolin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		M.make_dizzy(4)
-		M.confused = max(M.confused, 20)
+
+	M.make_dizzy(4)
+	M.confused = max(M.confused, 20)
 
 /datum/reagent/impedrezene
 	name = "Impedrezene"
@@ -395,14 +397,14 @@
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/impedrezene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		M.jitteriness = max(M.jitteriness - 5, 0)
-		if(prob(80))
-			M.adjustBrainLoss(0.1 * removed)
-		if(prob(50))
-			M.drowsyness = max(M.drowsyness, 3)
-		if(prob(10))
-			M.emote("drool")
+
+	M.jitteriness = max(M.jitteriness - 5, 0)
+	if(prob(80))
+		M.adjustBrainLoss(0.1 * removed)
+	if(prob(50))
+		M.drowsyness = max(M.drowsyness, 3)
+	if(prob(10))
+		M.emote("drool")
 
 /datum/reagent/mindbreaker
 	name = "Mindbreaker Toxin"
@@ -415,8 +417,8 @@
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/mindbreaker/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		M.hallucination = max(M.hallucination, 100)
+
+	M.hallucination = max(M.hallucination, 100)
 
 /datum/reagent/psilocybin
 	name = "Psilocybin"
@@ -428,28 +430,28 @@
 	metabolism = REM * 0.5
 
 /datum/reagent/psilocybin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		M.druggy = max(M.druggy, 30)
 
-		if(dose < 1)
-			M.apply_effect(3, STUTTER)
-			M.make_dizzy(5)
-			if(prob(5))
-				M.emote(pick("twitch", "giggle"))
-		else if(dose < 2)
-			M.apply_effect(3, STUTTER)
-			M.make_jittery(5)
-			M.make_dizzy(5)
-			M.druggy = max(M.druggy, 35)
-			if(prob(10))
-				M.emote(pick("twitch", "giggle"))
-		else
-			M.apply_effect(3, STUTTER)
-			M.make_jittery(10)
-			M.make_dizzy(10)
-			M.druggy = max(M.druggy, 40)
-			if(prob(15))
-				M.emote(pick("twitch", "giggle"))
+	M.druggy = max(M.druggy, 30)
+
+	if(dose < 1)
+		M.apply_effect(3, STUTTER)
+		M.make_dizzy(5)
+		if(prob(5))
+			M.emote(pick("twitch", "giggle"))
+	else if(dose < 2)
+		M.apply_effect(3, STUTTER)
+		M.make_jittery(5)
+		M.make_dizzy(5)
+		M.druggy = max(M.druggy, 35)
+		if(prob(10))
+			M.emote(pick("twitch", "giggle"))
+	else
+		M.apply_effect(3, STUTTER)
+		M.make_jittery(10)
+		M.make_dizzy(10)
+		M.druggy = max(M.druggy, 40)
+		if(prob(15))
+			M.emote(pick("twitch", "giggle"))
 
 /* Transformations */
 
