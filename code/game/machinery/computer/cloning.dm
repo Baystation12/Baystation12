@@ -84,7 +84,7 @@
 	var/num = 1
 	var/area/A = get_area(src)
 	for(var/obj/machinery/clonepod/P in A.get_contents())
-		if(!P.connected || (P.connected == src))
+		if(!P.connected)
 			pods += P
 			P.connected = src
 			P.name = "[initial(P.name)] #[num++]"
