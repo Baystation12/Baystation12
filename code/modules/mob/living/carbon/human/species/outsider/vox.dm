@@ -22,7 +22,6 @@
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
-	spawns_with_stack = 0
 
 	cold_level_1 = 80
 	cold_level_2 = 50
@@ -54,8 +53,8 @@
 		"liver" =    /obj/item/organ/liver/vox,
 		"kidneys" =  /obj/item/organ/kidneys/vox,
 		"brain" =    /obj/item/organ/brain,
-		"eyes" =     /obj/item/organ/eyes//,
-		//"stack" =    /obj/item/organ/stack/vox
+		"eyes" =     /obj/item/organ/eyes,
+		"stack" =    /obj/item/organ/internal/stack/vox
 		)
 
 	has_limbs = list(

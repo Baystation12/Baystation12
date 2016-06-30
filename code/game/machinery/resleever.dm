@@ -37,6 +37,11 @@
 	RefreshParts()
 	update_icon()
 
+/obj/machinery/resleever/Destroy()
+	eject_occupant()
+	eject_lace()
+	..()
+
 
 obj/machinery/resleever/process()
 
@@ -125,7 +130,7 @@ obj/machinery/resleever/process()
 
 /obj/machinery/resleever/ui_act(action, params)
 	if(..())
-		return
+		return TRUE
 	switch(action)
 		if("begin")
 			sleeve()
@@ -135,6 +140,7 @@ obj/machinery/resleever/process()
 		if("ejectlace")
 			eject_lace()
 	update_icon()
+	return TRUE
 
 /obj/machinery/resleever/proc/sleeve()
 	if(lace && occupant)
@@ -163,7 +169,7 @@ obj/machinery/resleever/process()
 			user << "<span class='notice'>You insert \the [W] into [src].</span>"
 			user.drop_from_inventory(W)
 			lace = W
-			W.loc = src
+			W.forceMove(src)
 			if(lace.backup)
 				lace_name = lace.backup.name
 		else
@@ -193,7 +199,7 @@ obj/machinery/resleever/process()
 		if(!check_occupant_allowed(grab.affecting))
 			return
 
-		var/mob/M = W:affecting
+		var/mob/M = grab.affecting
 
 		visible_message("[user] starts putting [grab.affecting:name] into \the [src].", 3)
 
@@ -212,7 +218,7 @@ obj/machinery/resleever/process()
 /obj/machinery/resleever/proc/eject_occupant()
 	if(!(occupant))
 		return
-	occupant.loc = loc
+	occupant.forceMove(loc)
 	if(occupant.client)
 		occupant.reset_view(null)
 	occupant = null
@@ -222,7 +228,7 @@ obj/machinery/resleever/process()
 /obj/machinery/resleever/proc/eject_lace()
 	if(!(lace))
 		return
-	lace.loc = loc
+	lace.forceMove(loc)
 	lace = null
 	lace_name = null
 
@@ -237,21 +243,21 @@ obj/machinery/resleever/process()
 	switch(severity)
 		if(1.0)
 			for(var/atom/movable/A as mob|obj in src)
-				A.loc = loc
+				A.forceMove(loc)
 				ex_act(severity)
 			qdel(src)
 			return
 		if(2.0)
 			if(prob(50))
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = loc
+					A.forceMove(loc)
 					ex_act(severity)
 				qdel(src)
 				return
 		if(3.0)
 			if(prob(25))
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = loc
+					A.forceMove(loc)
 					ex_act(severity)
 				qdel(src)
 				return
