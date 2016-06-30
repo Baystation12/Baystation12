@@ -262,10 +262,8 @@ var/list/ai_verbs_default = list(
 
 	// Set ai pda name
 	if(aiPDA)
-		aiPDA.ownjob = "AI"
-		aiPDA.owner = pickedName
-		aiPDA.name = pickedName + " (" + aiPDA.ownjob + ")"
-		
+		aiPDA.set_owner_rank_job(pickedName, "AI")
+
 	data_core.ResetPDAManifest()
 
 /*

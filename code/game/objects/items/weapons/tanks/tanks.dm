@@ -169,35 +169,36 @@ var/list/global/tank_gauge_cache = list()
 			src.distribute_pressure += cp
 		src.distribute_pressure = min(max(round(src.distribute_pressure), 0), TANK_MAX_RELEASE_PRESSURE)
 	if (href_list["stat"])
-		if(istype(loc,/mob/living/carbon))
-			var/mob/living/carbon/location = loc
-			if(location.internal == src)
-				location.internal = null
-				location.internals.icon_state = "internal0"
-				usr << "<span class='notice'>You close the tank release valve.</span>"
-				if (location.internals)
-					location.internals.icon_state = "internal0"
-			else
-
-				var/can_open_valve
-				if(location.wear_mask && (location.wear_mask.item_flags & AIRTIGHT))
-					can_open_valve = 1
-				else if(istype(location,/mob/living/carbon/human))
-					var/mob/living/carbon/human/H = location
-					if(H.head && (H.head.item_flags & AIRTIGHT))
-						can_open_valve = 1
-
-				if(can_open_valve)
-					location.internal = src
-					usr << "<span class='notice'>You open \the [src] valve.</span>"
-					if (location.internals)
-						location.internals.icon_state = "internal1"
-				else
-					usr << "<span class='warning'>You need something to connect to \the [src].</span>"
+		toggle_valve(usr)
 
 	src.add_fingerprint(usr)
 	return 1
 
+/obj/item/weapon/tank/proc/toggle_valve(var/mob/user)
+	if(istype(loc,/mob/living/carbon))
+		var/mob/living/carbon/location = loc
+		if(location.internal == src)
+			location.internal = null
+			location.internals.icon_state = "internal0"
+			user << "<span class='notice'>You close the tank release valve.</span>"
+			if (location.internals)
+				location.internals.icon_state = "internal0"
+		else
+			var/can_open_valve
+			if(location.wear_mask && (location.wear_mask.item_flags & AIRTIGHT))
+				can_open_valve = 1
+			else if(istype(location,/mob/living/carbon/human))
+				var/mob/living/carbon/human/H = location
+				if(H.head && (H.head.item_flags & AIRTIGHT))
+					can_open_valve = 1
+
+			if(can_open_valve)
+				location.internal = src
+				user << "<span class='notice'>You open \the [src] valve.</span>"
+				if (location.internals)
+					location.internals.icon_state = "internal1"
+			else
+				user << "<span class='warning'>You need something to connect to \the [src].</span>"
 
 /obj/item/weapon/tank/remove_air(amount)
 	return air_contents.remove(amount)
