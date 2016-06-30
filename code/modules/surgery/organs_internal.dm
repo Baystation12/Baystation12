@@ -264,7 +264,7 @@
 				user << "<span class='warning'>\The [O.organ_tag] [o_do] normally go in \the [affected.name].</span>"
 				return SURGERY_FAILURE
 
-		else if(istype(O, /obj/item/organ/internal/stack))
+		else if(istype(O, /obj/item/organ/stack))
 
 			if(!target.internal_organs_by_name[O.organ_tag])
 				organ_missing = 1

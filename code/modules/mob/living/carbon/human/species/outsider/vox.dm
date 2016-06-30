@@ -54,7 +54,7 @@
 		"kidneys" =  /obj/item/organ/kidneys/vox,
 		"brain" =    /obj/item/organ/brain,
 		"eyes" =     /obj/item/organ/eyes,
-		"stack" =    /obj/item/organ/internal/stack/vox
+		"stack" =    /obj/item/organ/stack/vox
 		)
 
 	has_limbs = list(

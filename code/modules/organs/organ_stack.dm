@@ -1,11 +1,11 @@
 /mob/living/carbon/human/proc/create_stack()
 	set waitfor=0
 	sleep(10)
-	internal_organs_by_name["stack"] = new /obj/item/organ/internal/stack(src,1)
+	internal_organs_by_name["stack"] = new /obj/item/organ/stack(src,1)
 	src << "<span class='notice'>You feel a faint sense of vertigo as your neural lace boots.</span>"
 
 
-/obj/item/organ/internal/stack
+/obj/item/organ/stack
 	name = "neural lace"
 	parent_organ = "head"
 	icon_state = "cortical-stack"
@@ -20,14 +20,14 @@
 	var/list/languages = list()
 	var/datum/mind/backup
 
-/obj/item/organ/internal/stack/emp_act()
+/obj/item/organ/stack/emp_act()
 	return
 
-/obj/item/organ/internal/stack/vox
+/obj/item/organ/stack/vox
 	name = "cortical stack"
 	invasive = 1
 
-/obj/item/organ/internal/stack/proc/do_backup()
+/obj/item/organ/stack/proc/do_backup()
 	if(owner && owner.stat != DEAD && !is_broken() && owner.mind)
 		languages = owner.languages.Copy()
 		backup = owner.mind
@@ -35,14 +35,14 @@
 		if(owner.ckey)
 			ownerckey = owner.ckey
 
-/obj/item/organ/internal/stack/New()
+/obj/item/organ/stack/New()
 	..()
 	do_backup()
 
-/obj/item/organ/internal/stack/proc/backup_inviable()
+/obj/item/organ/stack/proc/backup_inviable()
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
 
-/obj/item/organ/internal/stack/replaced()
+/obj/item/organ/stack/replaced()
 	..()
 	if(owner && !backup_inviable())
 		var/current_owner = owner
@@ -52,11 +52,11 @@
 	sleep(-1)
 	do_backup()
 
-/obj/item/organ/internal/stack/removed()
+/obj/item/organ/stack/removed()
 	do_backup()
 	..()
 
-/obj/item/organ/internal/stack/vox/removed()
+/obj/item/organ/stack/vox/removed()
 	var/obj/item/organ/external/head = owner.get_organ(parent_organ)
 	owner.visible_message("<span class='danger'>\The [src] rips gaping holes in \the [owner]'s [head.name] as it is torn loose!</span>")
 	head.take_damage(rand(15,20))
@@ -64,7 +64,7 @@
 		O.take_damage(rand(30,70))
 	..()
 
-/obj/item/organ/internal/stack/proc/overwrite()
+/obj/item/organ/stack/proc/overwrite()
 	if(owner.mind && owner.ckey) //Someone is already in this body!
 		owner.visible_message("<span class='danger'>\The [owner] spasms violently!</span>")
 		if(prob(66))
