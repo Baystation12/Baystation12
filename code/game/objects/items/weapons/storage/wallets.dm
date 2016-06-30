@@ -2,7 +2,7 @@
 	name = "wallet"
 	desc = "It can hold a few small and personal things."
 	icon = 'icons/obj/wallet.dmi'
-	icon_state = "wallet-orange"
+	icon_state = "wallet-white"
 	w_class = 2
 	max_w_class = 1
 	max_storage_space = 10
@@ -28,6 +28,12 @@
 	slot_flags = SLOT_ID
 
 	var/obj/item/weapon/card/id/front_id = null
+
+/obj/item/weapon/storage/wallet/Destroy()
+	if(front_id)
+		front_id.dropInto(loc)
+		front_id = null
+	..()
 
 /obj/item/weapon/storage/wallet/remove_from_storage(obj/item/W as obj, atom/new_location)
 	. = ..(W, new_location)
@@ -80,41 +86,37 @@
 			new item2_type(src)
 		if(item3_type)
 			new item3_type(src)
-
-	SC.update_icon()
+	update_icon()
 
 /obj/item/weapon/storage/wallet/poly
 	name = "polychromic wallet"
 	desc = "You can recolor it! Fancy! The future is NOW!"
-	icon_state = "wallet-white"
 
 /obj/item/weapon/storage/wallet/poly/New()
 	..()
 	verbs |= /obj/item/weapon/storage/wallet/poly/proc/change_color
-	color = "#"+get_random_colour()
+	color = get_random_colour()
 	update_icon()
-	
+
 /obj/item/weapon/storage/wallet/poly/proc/change_color()
 	set name = "Change Wallet Color"
 	set category = "Object"
 	set desc = "Change the color of the wallet."
 	set src in usr
 
-	if(usr.stat || usr.restrained() || usr.incapacitated())
+	if(usr.incapacitated())
 		return
 
 	var/new_color = input(usr, "Pick a new color", "Wallet Color", color) as color|null
-
-	if(new_color && (new_color != color))
-		color = new_color
+	if(!new_color || new_color == color || usr.incapacitated())
+		return
+	color = new_color
 
 /obj/item/weapon/storage/wallet/poly/emp_act()
-	var/original_state = icon_state
 	icon_state = "wallet-emp"
 	update_icon()
-	
+
 	spawn(200)
 		if(src)
-			icon_state = original_state
+			icon_state = initial(icon_state)
 			update_icon()
-			
