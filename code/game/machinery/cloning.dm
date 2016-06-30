@@ -170,6 +170,7 @@
 
 	if((occupant) && (occupant.loc == src))
 		if((occupant.stat == DEAD))  //Autoeject corpses
+			locked = 0
 			go_out()
 			connected_message("Clone Rejected: Deceased.")
 			return

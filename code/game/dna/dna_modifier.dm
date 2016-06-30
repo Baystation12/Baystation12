@@ -109,8 +109,7 @@
 		usr << "<span class='warning'>The subject cannot have abiotic items on.</span>"
 		return
 	usr.stop_pulling()
-	if(usr.client)
-		usr.reset_view(src)
+	usr.reset_view(src)
 	usr.loc = src
 	src.occupant = usr
 	src.icon_state = "scanner_1"
@@ -169,8 +168,7 @@
 /obj/machinery/dna_scannernew/proc/go_out()
 	if ((!( src.occupant ) || src.locked))
 		return
-	if (src.occupant.client)
-		src.occupant.reset_view(null)
+	src.occupant.reset_view(null)
 	src.occupant.loc = src.loc
 	src.occupant = null
 	src.icon_state = "scanner_0"

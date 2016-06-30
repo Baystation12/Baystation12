@@ -35,9 +35,9 @@
 		if(owner.ckey)
 			ownerckey = owner.ckey
 
-/obj/item/organ/internal/stack/process()
-	do_backup()
+/obj/item/organ/internal/stack/New()
 	..()
+	do_backup()
 
 /obj/item/organ/internal/stack/proc/backup_inviable()
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
@@ -51,6 +51,10 @@
 			overwrite()
 	sleep(-1)
 	do_backup()
+
+/obj/item/organ/internal/stack/removed()
+	do_backup()
+	..()
 
 /obj/item/organ/internal/stack/vox/removed()
 	var/obj/item/organ/external/head = owner.get_organ(parent_organ)
@@ -76,4 +80,3 @@
 	if(default_language) owner.default_language = default_language
 	owner.languages = languages.Copy()
 	owner << "<span class='notice'>Consciousness slowly creeps over you as your new body awakens.</span>"
-	do_backup()
