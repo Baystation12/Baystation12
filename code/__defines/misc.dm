@@ -198,3 +198,8 @@
 #define CONFIG_OBJECTIVE_NONE 2
 #define CONFIG_OBJECTIVE_VERB 1
 #define CONFIG_OBJECTIVE_ALL  0
+
+
+//Grid for Item Placement
+#define CELLS 8								//Amount of cells per row/column in grid
+#define CELLSIZE (world.icon_size/CELLS)	//Size of a cell in pixels

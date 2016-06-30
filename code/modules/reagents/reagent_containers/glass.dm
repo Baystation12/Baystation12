@@ -117,6 +117,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "beaker"
 	item_state = "beaker"
+	center_of_mass = "x=15;y=10"
 	matter = list("glass" = 500)
 
 	New()
@@ -165,6 +166,7 @@
 	name = "large beaker"
 	desc = "A large beaker."
 	icon_state = "beakerlarge"
+	center_of_mass = "x=16;y=10"
 	matter = list("glass" = 5000)
 	volume = 120
 	amount_per_transfer_from_this = 10
@@ -175,6 +177,7 @@
 	name = "cryostasis beaker"
 	desc = "A cryostasis beaker that allows for chemical storage without reactions."
 	icon_state = "beakernoreact"
+	center_of_mass = "x=16;y=8"
 	matter = list("glass" = 500)
 	volume = 60
 	amount_per_transfer_from_this = 10
@@ -184,6 +187,7 @@
 	name = "bluespace beaker"
 	desc = "A bluespace beaker, powered by experimental bluespace technology."
 	icon_state = "beakerbluespace"
+	center_of_mass = "x=16;y=10"
 	matter = list("glass" = 5000)
 	volume = 300
 	amount_per_transfer_from_this = 10
@@ -194,6 +198,7 @@
 	name = "vial"
 	desc = "A small glass vial."
 	icon_state = "vial"
+	center_of_mass = "x=15;y=8"
 	matter = list("glass" = 250)
 	volume = 30
 	w_class = 1 //half the volume of a bottle, half the size
@@ -219,6 +224,7 @@
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "bucket"
 	item_state = "bucket"
+	center_of_mass = "x=16;y=9"
 	matter = list(DEFAULT_WALL_MATERIAL = 200)
 	w_class = 3.0
 	amount_per_transfer_from_this = 20
