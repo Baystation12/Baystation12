@@ -1,6 +1,5 @@
 /decl/hierarchy/supply_pack/reagents
 	name = "Reagents"
-	hierarchy_type = /decl/hierarchy/supply_pack/reagents
 
 /decl/hierarchy/supply_pack/reagents/chemistry_dispenser
 	name = "Reagent dispenser"
@@ -125,7 +124,6 @@
 
 /decl/hierarchy/supply_pack/dispenser_cartridges
 	name = "Dispenser Cartridges"
-	hierarchy_type = /decl/hierarchy/supply_pack/dispenser_cartridges
 
 #define SEC_PACK(_tname, _type, _name, _cname, _cost, _access)\
 	decl/hierarchy/supply_pack/dispenser_cartridges{\

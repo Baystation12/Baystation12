@@ -1,6 +1,5 @@
 /decl/hierarchy/supply_pack/hospitality
 	name = "Hospitality"
-	hierarchy_type = /decl/hierarchy/supply_pack/hospitality
 
 /decl/hierarchy/supply_pack/hospitality/party
 	name = "Party equipment"
