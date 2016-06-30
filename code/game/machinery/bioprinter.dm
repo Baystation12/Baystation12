@@ -52,9 +52,9 @@
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	RefreshParts()
 
-/obj/machinery/organ_printer/examine()
+/obj/machinery/organ_printer/examine(var/mob/user)
 	..()
-	usr << "<span class='notice'>It is loaded with [stored_matter]/[max_stored_matter] matter units.</span>"
+	user << "<span class='notice'>It is loaded with [stored_matter]/[max_stored_matter] matter units.</span>"
 
 /obj/machinery/organ_printer/RefreshParts()
 	print_delay = initial(print_delay)
