@@ -81,7 +81,8 @@
 	update_hair(0)
 
 	mutations.Add(HUSK)
-	status_flags |= DISFIGURED	//makes them unknown without fucking up other stuff like admintools
+	for(var/obj/item/organ/external/E in organs)
+		E.disfigured = 1
 	update_body(1)
 	return
 
@@ -100,6 +101,7 @@
 	update_hair(0)
 
 	mutations.Add(SKELETON)
-	status_flags |= DISFIGURED
+	for(var/obj/item/organ/external/E in organs)
+		E.disfigured = 1
 	update_body(1)
 	return
