@@ -10,6 +10,7 @@
 #define CANPUSH     0x8
 #define LEAPING     0x10
 #define PASSEMOTES  0x32    // Mob has a cortical borer or holders inside of it that need to see emotes.
+#define NO_ANTAG    0x0800  // Players are restricted from gaining antag roles when occupying this mob
 #define GODMODE     0x1000
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
 #define DISFIGURED  0x4000  // Set but never checked. Remove this sometime and replace occurences with the appropriate organ code

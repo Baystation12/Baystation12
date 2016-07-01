@@ -6,7 +6,7 @@
 			return 0
 		if(config.protect_roles_from_antagonist && (player.assigned_role in protected_jobs))
 			return 0
-		if(istype(player.current, /mob/living/silicon/robot/drone))
+		if(player.current && (player.current.status_flags & NO_ANTAG))
 			return 0
 	return 1
 
