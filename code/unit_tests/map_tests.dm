@@ -25,35 +25,35 @@ datum/unit_test/apc_area_test/start_test()
 			continue
 		area_test_count++
 		var/area_good = 1
-		var/bad_msg = "[ascii_red]--------------- [A.name]([A.type])"
+		var/bad_msg = "--------------- [A.name]([A.type])"
 
 		var/exemptions = get_exemptions(A)
 		if(!A.apc && !(exemptions & using_map.NO_APC))
-			log_unit_test("[bad_msg] lacks an APC.[ascii_reset]")
+			log_bad("[bad_msg] lacks an APC.")
 			area_good = 0
 		else if(A.apc && (exemptions & using_map.NO_APC))
-			log_unit_test("[bad_msg] is not supposed to have an APC.[ascii_reset]")
+			log_bad("[bad_msg] is not supposed to have an APC.")
 			area_good = 0
 
 		if(!A.air_scrub_info.len && !(exemptions & using_map.NO_SCRUBBER))
-			log_unit_test("[bad_msg] lacks an air scrubber.[ascii_reset]")
+			log_bad("[bad_msg] lacks an air scrubber.")
 			area_good = 0
 		else if(A.air_scrub_info.len && (exemptions & using_map.NO_SCRUBBER))
-			log_unit_test("[bad_msg] is not supposed to have an air scrubber.[ascii_reset]")
+			log_bad("[bad_msg] is not supposed to have an air scrubber.")
 			area_good = 0
 
 		if(!A.air_vent_info.len && !(exemptions & using_map.NO_VENT))
-			log_unit_test("[bad_msg] lacks an air vent.[ascii_reset]")
+			log_bad("[bad_msg] lacks an air vent.[ascii_reset]")
 			area_good = 0
 		else if(A.air_vent_info.len && (exemptions & using_map.NO_VENT))
-			log_unit_test("[bad_msg] is not supposed to have an air vent.[ascii_reset]")
+			log_bad("[bad_msg] is not supposed to have an air vent.")
 			area_good = 0
 
 		if(!area_good)
 			bad_areas.Add(A)
 
 	if(bad_areas.len)
-		fail("\[[bad_areas.len]/[area_test_count]\]Some areas lacked APCs, air Scrubbers, or air vents.")
+		fail("\[[bad_areas.len]/[area_test_count]\]Some areas did not have the expected APC/vent/scrubber setup.")
 	else
 		pass("All \[[area_test_count]\] areas contained APCs, air scrubbers, and air vents.")
 
