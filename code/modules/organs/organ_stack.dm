@@ -38,6 +38,7 @@
 /obj/item/organ/stack/New()
 	..()
 	do_backup()
+	robotize()
 
 /obj/item/organ/stack/proc/backup_inviable()
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
