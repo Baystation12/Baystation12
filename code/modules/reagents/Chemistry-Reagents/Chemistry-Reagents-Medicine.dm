@@ -3,18 +3,18 @@
 /datum/reagent/inaprovaline
 	name = "Inaprovaline"
 	id = "inaprovaline"
-	description = "Inaprovaline is a synaptic stimulant and cardiostimulant. Commonly used to stabilize patients."
+	description = "Inaprovaline is a fast metabolizing synaptic stimulant and cardiostimulant. Commonly used to stabilize patients."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#00BFFF"
 	overdose = REAGENTS_OVERDOSE * 2
-	metabolism = REM * 0.5
+	metabolism = REM * 2
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/inaprovaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_STABLE)
-	M.add_chemical_effect(CE_PAINKILLER, 25)
+	M.add_chemical_effect(CE_PAINKILLER, 15)
 	M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/bicaridine
@@ -30,7 +30,7 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/bicaridine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.heal_organ_damage(6 * removed, 0)
+	M.heal_organ_damage(5 * removed, 0)
 
 /datum/reagent/kelotane
 	name = "Kelotane"
@@ -44,12 +44,12 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/kelotane/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.heal_organ_damage(0, 6 * removed)
+	M.heal_organ_damage(0, 5 * removed)
 
 /datum/reagent/dermaline
 	name = "Dermaline"
 	id = "dermaline"
-	description = "Dermaline is the next step in burn medication. Works twice as good as kelotane and enables the body to restore even the direst heat-damaged tissue."
+	description = "Dermaline is derived from kelotane, it is more effective in restoring heat-damaged tissue."
 	taste_description = "bitterness"
 	taste_mult = 1.5
 	reagent_state = LIQUID
@@ -59,7 +59,7 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/dermaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.heal_organ_damage(0, 12 * removed)
+	M.heal_organ_damage(0, 10 * removed)
 
 /datum/reagent/dylovene
 	name = "Dylovene"
@@ -68,22 +68,24 @@
 	taste_description = "a roll of gauze"
 	reagent_state = LIQUID
 	color = "#00A000"
+	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/dylovene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.drowsyness = max(0, M.drowsyness - 6 * removed)
 	M.hallucination = max(0, M.hallucination - 9 * removed)
-	M.adjustToxLoss(-4 * removed)
+	M.adjustToxLoss(-3 * removed)
 
 /datum/reagent/dexalin
 	name = "Dexalin"
 	id = "dexalin"
-	description = "Dexalin is used in the treatment of oxygen deprivation."
+	description = "Dexalin is used for treating oxygen deprivation, it rapidly oxygenates the blood and counteract the effects of hypoxemia."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#0080FF"
 	overdose = REAGENTS_OVERDOSE
+	metabolism = REM * 2
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
@@ -91,18 +93,19 @@
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 6)
 	else 
-		M.adjustOxyLoss(-15 * removed)
+		M.adjustOxyLoss(-10 * removed)
 
 	holder.remove_reagent("lexorin", 2 * removed)
 
 /datum/reagent/dexalinp
 	name = "Dexalin Plus"
 	id = "dexalinp"
-	description = "Dexalin Plus is used in the treatment of oxygen deprivation. It is highly effective."
+	description = "Dexalin plus is derrived from dexalin, it is used to treat severe oxygen deprivation. It is more effective than standard dexalin."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#0040FF"
 	overdose = REAGENTS_OVERDOSE * 0.5
+	metabolism = REM * 2
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
@@ -110,29 +113,31 @@
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 9)
 	else
-		M.adjustOxyLoss(-300 * removed)
+		M.adjustOxyLoss(-30 * removed)
 
 	holder.remove_reagent("lexorin", 3 * removed)
 
 /datum/reagent/tricordrazine
 	name = "Tricordrazine"
 	id = "tricordrazine"
-	description = "Tricordrazine is a highly potent stimulant, originally derived from cordrazine. Can be used to treat a wide range of injuries."
+	description = "Tricordrazine is a highly potent stimulant, originally derived from cordrazine. Can be used to treat a wide range of injuries, but less effectively than other specialized medication."
 	taste_description = "grossness"
 	reagent_state = LIQUID
 	color = "#8040FF"
+	overdose = REAGENTS_OVERDOSE
+	metabolism = REM * 0.5	
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/tricordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjustOxyLoss(-6 * removed)
-	M.heal_organ_damage(3 * removed, 3 * removed)
-	M.adjustToxLoss(-3 * removed)
+	M.adjustOxyLoss(-4 * removed)
+	M.heal_organ_damage(2 * removed, 2 * removed)
+	M.adjustToxLoss(-2 * removed)
 
 /datum/reagent/cryoxadone
 	name = "Cryoxadone"
 	id = "cryoxadone"
-	description = "A chemical mixture with almost magical healing powers. Its main limitation is that the targets body temperature must be under 170K for it to metabolise correctly."
+	description = "A chemical mixture used in cryotherapy for treating a wide variety of injuries and genetic damage. The body temperature of the patient must be between 200K and 100K for it to metabolize correctly, it is most effective at temperatures between 170K and 130K."
 	taste_description = "sludge"
 	reagent_state = LIQUID
 	color = "#8080FF"
@@ -141,17 +146,23 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/cryoxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(M.bodytemperature < 170)
+	if(M.bodytemperature <=170 && M.bodytemperature >= 130)
 		M.adjustCloneLoss(-10 * removed)
 		M.adjustOxyLoss(-10 * removed)
 		M.heal_organ_damage(10 * removed, 10 * removed)
 		M.adjustToxLoss(-10 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
+	else if (M.bodytemperature <=200 && M.bodytemperature >= 100) //Placeholder until I implement scaling by temperature gradient
+		M.adjustCloneLoss(-4 * removed)
+		M.adjustOxyLoss(-4 * removed)
+		M.heal_organ_damage(4 * removed, 4 * removed)
+		M.adjustToxLoss(-4 * removed)
+		M.add_chemical_effect(CE_PULSE, -2)
 
 /datum/reagent/clonexadone
 	name = "Clonexadone"
 	id = "clonexadone"
-	description = "A liquid compound similar to that used in the cloning process. Can be used to 'finish' the cloning process when used in conjunction with a cryo tube."
+	description = "A liquid compound derived from cryoxadone for use in advanced cryotherapy. It is more effective than its predecessor, but requires the body temperature of the patient to be between 140K and 60K to metabolize correctly. It is most effective at temperatures between 110K and 90K."
 	taste_description = "slime"
 	reagent_state = LIQUID
 	color = "#80BFFF"
@@ -160,11 +171,17 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(M.bodytemperature < 170)
-		M.adjustCloneLoss(-30 * removed)
-		M.adjustOxyLoss(-30 * removed)
-		M.heal_organ_damage(30 * removed, 30 * removed)
-		M.adjustToxLoss(-30 * removed)
+	if(M.bodytemperature <= 110 && M.bodytemperature >= 90)
+		M.adjustCloneLoss(-20 * removed)
+		M.adjustOxyLoss(-20 * removed)
+		M.heal_organ_damage(20 * removed, 20 * removed)
+		M.adjustToxLoss(-20 * removed)
+		M.add_chemical_effect(CE_PULSE, -2)
+	else if (M.bodytemperature <=140 && M.bodytemperature >= 60) //Placeholder until I implement scaling by temperature gradient
+		M.adjustCloneLoss(-6 * removed)
+		M.adjustOxyLoss(-6 * removed)
+		M.heal_organ_damage(6 * removed, 6 * removed)
+		M.adjustToxLoss(-6 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
 
 /* Painkillers */
@@ -177,12 +194,12 @@
 	reagent_state = LIQUID
 	color = "#C8A5DC"
 	overdose = REAGENTS_OVERDOSE * 2
+	metabolism = REM * 2
 	scannable = 1
-	metabolism = REM * 0.1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/paracetamol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_PAINKILLER, 50)
+	M.add_chemical_effect(CE_PAINKILLER, 25)
 
 /datum/reagent/paracetamol/overdose(var/mob/living/carbon/M, var/alien)
 	..()
@@ -197,15 +214,15 @@
 	color = "#CB68FC"
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
-	metabolism = REM * 0.1
+	metabolism = REM * 2
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/tramadol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_PAINKILLER, 80)
+	M.add_chemical_effect(CE_PAINKILLER, 50)
 
 /datum/reagent/tramadol/overdose(var/mob/living/carbon/M, var/alien)
 	..()
-	M.hallucination = max(M.hallucination, 2)
+	M.hallucination = max(M.hallucination, 3)
 
 /datum/reagent/oxycodone
 	name = "Oxycodone"
@@ -215,28 +232,28 @@
 	reagent_state = LIQUID
 	color = "#800080"
 	overdose = REAGENTS_OVERDOSE * 0.5
-	metabolism = REM * 0.1
+	metabolism = REM * 2
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/oxycodone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_PAINKILLER, 200)
+	M.add_chemical_effect(CE_PAINKILLER, 80)
 
 /datum/reagent/oxycodone/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.druggy = max(M.druggy, 10)
-	M.hallucination = max(M.hallucination, 3)
+	M.hallucination = max(M.hallucination, 4)
 
 /* Other medicine */
 
 /datum/reagent/synaptizine
 	name = "Synaptizine"
 	id = "synaptizine"
-	description = "Synaptizine is used to treat various diseases."
+	description = "Synaptizine is a slow metabolizing synaptic stimulant used to treat acute neurological disorders. Warning: will cause neurotoxicity."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#99CCFF"
-	metabolism = REM * 0.05
-	overdose = REAGENTS_OVERDOSE
+	metabolism = REM * 0.1
+	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 
 /datum/reagent/synaptizine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -247,28 +264,30 @@
 	holder.remove_reagent("mindbreaker", 5)
 	M.hallucination = max(0, M.hallucination - 10)
 	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
+	M.adjustBrainLoss(5 * removed)
 	M.add_chemical_effect(CE_PAINKILLER, 40)
 
 /datum/reagent/alkysine
 	name = "Alkysine"
 	id = "alkysine"
-	description = "Alkysine is a drug used to lessen the damage to neurological tissue after a catastrophic injury. Can heal brain tissue."
+	description = "Alkysine is a drug used to treat severe nerve injuries and neurotoxicity. May cause minor neurological side effects. Medicate cautiously."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#FFFF66"
 	metabolism = REM * 0.25
-	overdose = REAGENTS_OVERDOSE
+	overdose = REAGENTS_OVERDOSE * 0.33
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/alkysine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjustBrainLoss(-30 * removed)
+	M.adjustBrainLoss(-15 * removed)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
+	// TODO: add negative effects
 
 /datum/reagent/imidazoline
 	name = "Imidazoline"
 	id = "imidazoline"
-	description = "Heals eye damage"
+	description = "Imidazoline is an eye medication that specifically affect the retina and optic nerves, it is commonly used to treat eye injuries through direct application to the affected eye. May cause headaches and minor neurotoxicity."
 	taste_description = "dull toxin"
 	reagent_state = LIQUID
 	color = "#C8A5DC"
@@ -285,15 +304,18 @@
 		if(E && istype(E))
 			if(E.damage > 0)
 				E.damage = max(E.damage - 5 * removed, 0)
+		if(prob(10))
+			M.adjustBrainLoss(1 * removed)
 
 /datum/reagent/peridaxon
 	name = "Peridaxon"
 	id = "peridaxon"
-	description = "Used to encourage recovery of internal organs and nervous systems. Medicate cautiously."
+	description = "Peridaxon is used to encourage recovery of damaged internal organs and nervous systems. Medicate cautiously."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#561EC3"
-	overdose = 10
+	metabolism = REM * 0.25
+	overdose = REAGENTS_OVERDOSE * 0.33
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
@@ -307,32 +329,34 @@
 /datum/reagent/ryetalyn
 	name = "Ryetalyn"
 	id = "ryetalyn"
-	description = "Ryetalyn can cure all genetic abnomalities via a catalytic process."
+	description = "Ryetalyn is used to treat genetic abnomalities via a rapid catalytic process. Warning: will increase blood toxicity due to mutative properties."
 	taste_description = "acid"
 	reagent_state = SOLID
 	color = "#004000"
-	overdose = REAGENTS_OVERDOSE
+	overdose = REAGENTS_OVERDOSE * 0.5
+	scannable = 1
+	metabolism = REM * 2
 
 /datum/reagent/ryetalyn/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/needs_update = M.mutations.len > 0
-
 	M.mutations = list()
 	M.disabilities = 0
 	M.sdisabilities = 0
-
+	M.adjustToxLoss(2 * removed)
 	// Might need to update appearance for hulk etc.
 	if(needs_update && ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.update_mutations()
+		
 
 /datum/reagent/hyperzine
 	name = "Hyperzine"
 	id = "hyperzine"
-	description = "Hyperzine is a highly effective, long lasting, muscle stimulant."
+	description = "Hyperzine is a highly effective muscle stimulant. It also quickens the metabolism of all drugs in the bloodstream."
 	taste_description = "acid"
 	reagent_state = LIQUID
 	color = "#FF3300"
-	metabolism = REM * 0.15
+	metabolism = REM * 2
 	overdose = REAGENTS_OVERDOSE * 0.5
 
 /datum/reagent/hyperzine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -340,6 +364,9 @@
 		M.emote(pick("twitch", "blink_r", "shiver"))
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 	M.add_chemical_effect(CE_PULSE, 2)
+	
+	for(var/datum/reagent/R in M.reagents.reagent_list)
+		R.metabolism *= 2 // Placeholder while I figure out out to make this loop only run once, so metabolisom won't hit ludicrous speed
 
 /datum/reagent/ethylredoxrazine
 	name = "Ethylredoxrazine"
@@ -347,7 +374,8 @@
 	description = "A powerful oxidizer that reacts with ethanol."
 	reagent_state = SOLID
 	color = "#605048"
-	overdose = REAGENTS_OVERDOSE
+	metabolism = REM * 2
+	overdose = REAGENTS_OVERDOSE	
 
 /datum/reagent/ethylredoxrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.dizziness = 0
@@ -372,7 +400,7 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/hyronalin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.radiation = max(M.radiation - 30 * removed, 0)
+	M.radiation = max(M.radiation - 20 * removed, 0)
 
 /datum/reagent/arithrazine
 	name = "Arithrazine"
@@ -381,12 +409,12 @@
 	reagent_state = LIQUID
 	color = "#008000"
 	metabolism = REM * 0.25
-	overdose = REAGENTS_OVERDOSE
+	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/arithrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.radiation = max(M.radiation - 70 * removed, 0)
+	M.radiation = max(M.radiation - 60 * removed, 0)
 	M.adjustToxLoss(-10 * removed)
 	if(prob(60))
 		M.take_organ_damage(4 * removed, 0)
@@ -460,8 +488,10 @@
 	M.adjustOxyLoss(-2 * removed)
 	M.heal_organ_damage(20 * removed, 20 * removed)
 	M.adjustToxLoss(-20 * removed)
-	if(dose > 3)
-		M.status_flags &= ~DISFIGURED
+	if(dose > 3 && ishuman(M))
+		var/mob/living/carbon/human/H = M
+		for(var/obj/item/organ/external/E in H.organs)
+			E.disfigured = 1 //currently only matters for the head, but might as well disfigure them all.
 	if(dose > 10)
 		M.make_dizzy(5)
 		M.make_jittery(5)
