@@ -167,7 +167,7 @@
 "dk" = (/obj/structure/bed/chair{dir = 4},/obj/machinery/status_display{density = 0; layer = 4; pixel_x = -32; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/shuttle/escape_pod7/station)
 "dl" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/tiled/dark,/area/shuttle/escape_pod7/station)
 "dm" = (/obj/structure/disposalpipe/up,/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/plating,/area/maintenance/fourthdeck/starboard)
-"dn" = (/obj/machinery/floodlight,/obj/item/device/radio/intercom{dir = 4; pixel_x = -22},/obj/machinery/alarm{dir = 1; pixel_y = -22},/obj/machinery/camera/network/expedition{c_tag = "Expedition - Storage"; dir = 1},/turf/simulated/floor/tiled/steel,/area/quartermaster/expedition/storage)
+"dn" = (/obj/machinery/floodlight,/obj/item/device/radio/intercom{dir = 4; pixel_x = -22},/obj/machinery/alarm{dir = 1; pixel_y = -22},/turf/simulated/floor/tiled/steel,/area/quartermaster/expedition/storage)
 "do" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled,/area/quartermaster/expedition/storage)
 "dp" = (/obj/structure/table/rack,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/machinery/door/window/northright{name = "suit storage"; req_one_access = list(48,65)},/obj/item/weapon/rig/industrial/equipped,/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled,/area/quartermaster/expedition/storage)
 "dq" = (/obj/structure/ore_box,/turf/simulated/floor/tiled/steel,/area/quartermaster/expedition/storage)
