@@ -13,7 +13,7 @@ var/global/datum/controller/occupations/job_master
 	var/list/job_debug = list()
 
 
-	proc/SetupOccupations(var/faction = "Station")
+	proc/SetupOccupations(var/faction = "Station", var/setup_titles = 0)
 		occupations = list()
 		var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
 		if(!all_jobs.len)
@@ -24,22 +24,23 @@ var/global/datum/controller/occupations/job_master
 			if(!job)	continue
 			if(job.faction != faction)	continue
 			occupations += job
+			if(!setup_titles) continue
 			if(job.department_flag & COM)
-				command_positions += job.title
+				command_positions |= job.title
 			if(job.department_flag & SEC)
-				security_positions += job.title
+				security_positions |= job.title
 			if(job.department_flag & ENG)
 				engineering_positions += job.title
 			if(job.department_flag & MED)
-				medical_positions += job.title
+				medical_positions |= job.title
 			if(job.department_flag & SCI)
-				science_positions += job.title
+				science_positions |= job.title
 			if(job.department_flag & CRG)
-				cargo_positions += job.title
+				cargo_positions |= job.title
 			if(job.department_flag & CIV)
-				civilian_positions += job.title
+				civilian_positions |= job.title
 			if(job.department_flag & MSC)
-				nonhuman_positions += job.title
+				nonhuman_positions |= job.title
 
 
 		return 1

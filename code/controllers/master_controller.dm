@@ -23,7 +23,7 @@ datum/controller/game_controller/New()
 
 	if(!job_master)
 		job_master = new /datum/controller/occupations()
-		job_master.SetupOccupations()
+		job_master.SetupOccupations(setup_titles=1)
 		job_master.LoadJobs("config/jobs.txt")
 		admin_notice("<span class='danger'>Job setup complete</span>", R_DEBUG)
 
