@@ -10,11 +10,41 @@
 /obj/item/weapon/dice/New()
 	icon_state = "[name][rand(1,sides)]"
 
+/obj/item/weapon/dice/d4
+	name = "d4"
+	desc = "A dice with four sides."
+	icon_state = "d2020"
+	sides = 4
+
+/obj/item/weapon/dice/d8
+	name = "d8"
+	desc = "A dice with eight sides."
+	icon_state = "d2020"
+	sides = 8
+
+/obj/item/weapon/dice/d10
+	name = "d10"
+	desc = "A dice with ten sides."
+	icon_state = "d2020"
+	sides = 10
+
+/obj/item/weapon/dice/d12
+	name = "d12"
+	desc = "A dice with twelve sides."
+	icon_state = "d2020"
+	sides = 12
+
 /obj/item/weapon/dice/d20
 	name = "d20"
 	desc = "A dice with twenty sides."
 	icon_state = "d2020"
 	sides = 20
+
+/obj/item/weapon/dice/d100
+	name = "d100"
+	desc = "A dice with one hundred sides."
+	icon_state = "d2020"
+	sides = 100
 
 /obj/item/weapon/dice/attack_self(mob/user as mob)
 	var/result = rand(1, sides)

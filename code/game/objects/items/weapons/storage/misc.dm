@@ -1,11 +1,25 @@
-/obj/item/weapon/storage/pill_bottle/dice
+/obj/item/weapon/storage/pill_bottle/dice	//7d6
 	name = "pack of dice"
 	desc = "It's a small container with dice inside."
 
 	New()
 		..()
+		for(var/i = 1 to 7)
 		new /obj/item/weapon/dice( src )
+
+/obj/item/weapon/storage/pill_bottle/dice/nerd	//DnD dice
+	name = "pack of dice"
+	desc = "It's a small container with gaming dice inside."
+
+	New()
+		..()
+		new /obj/item/weapon/dice/d4( src )
+		new /obj/item/weapon/dice( src )
+		new /obj/item/weapon/dice/d8( src )
+		new /obj/item/weapon/dice/d10( src )
+		new /obj/item/weapon/dice/d12( src )
 		new /obj/item/weapon/dice/d20( src )
+		new /obj/item/weapon/dice/d100( src )
 
 /*
  * Donut Box
