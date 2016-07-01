@@ -47,11 +47,7 @@
 /obj/machinery/light_switch/proc/set_state(var/newstate)
 	if(on != newstate)
 		on = newstate
-
-		connected_area.lightswitch = on
-		connected_area.updateicon()
-		connected_area.power_change()
-
+		connected_area.set_lightswitch(on)
 		update_icon()
 
 /obj/machinery/light_switch/proc/sync_state()
