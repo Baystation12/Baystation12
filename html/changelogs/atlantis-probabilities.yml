@@ -1,0 +1,7 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - tweak: "Random event probabilities have been changed a bit. This is mostly noticeable with electrical storms, which should be less common now."
+  - tweak: "Electrical storm now shuts down APCs for longer duration which is controlled by event severity. APCs with critical flag are now affected too, but are only shut down for a short time in comparison to others."
