@@ -9,7 +9,7 @@
 
 	load_item_visible = 1
 	load_offset_x = 0
-	mob_offset_y = 7
+	buckle_pixel_shift = "x=0;y=7"
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	active_engines = 1
@@ -33,7 +33,7 @@
 	load_item_visible = 1
 	load_offset_x = 0
 	load_offset_y = 4
-	mob_offset_y = 8
+	buckle_pixel_shift = "x=0;y=8"
 
 //-------------------------------------------
 // Standard procs
