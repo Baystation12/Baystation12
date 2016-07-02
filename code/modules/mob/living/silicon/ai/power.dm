@@ -130,6 +130,7 @@
 	newusage *= AI_POWERUSAGE_OXYLOSS_TO_WATTS_MULTIPLIER
 	if(psupply)
 		psupply.active_power_usage = newusage
+		psupply.update_power_state()
 
 /mob/living/silicon/ai/proc/handle_power_oxyloss()
 	// Powered, lose oxyloss
@@ -191,24 +192,22 @@
 /obj/machinery/ai_powersupply/New(var/mob/living/silicon/ai/ai=null)
 	powered_ai = ai
 	powered_ai.psupply = src
-	forceMove(powered_ai.loc)
-
+	forceMove(powered_ai)
 	..()
 
 /obj/machinery/ai_powersupply/Destroy()
 	. = ..()
 	powered_ai = null
 
-/obj/machinery/ai_powersupply/process()
-	if(!powered_ai || powered_ai.stat == DEAD)
-		qdel(src)
-		return
-	if(powered_ai.psupply != src) // For some reason, the AI has different powersupply object. Delete this one, it's no longer needed.
-		qdel(src)
-		return
-	if(powered_ai.loc != src.loc)
-		forceMove(powered_ai.loc)
-	if(powered_ai.APU_power || powered_ai.admin_powered || istype(powered_ai.loc, /obj/item/))
-		use_power = 0
-		return
-	use_power = 2
+/obj/machinery/ai_powersupply/proc/update_power_state()
+	use_power = get_power_state()
+
+/obj/machinery/ai_powersupply/proc/get_power_state()
+	// Dead, powered by APU, admin power, or inside an item (intellicard/IIS). No power usage.
+	if(!powered_ai.stat == DEAD || powered_ai.APU_power || powered_ai.admin_powered || istype(powered_ai.loc, /obj/item/))
+		return 0
+	// Normal power usage.
+	return 2
+
+/obj/machinery/ai_powersupply/powered(var/chan = -1)
+	return ..(chan, get_area(powered_ai))
