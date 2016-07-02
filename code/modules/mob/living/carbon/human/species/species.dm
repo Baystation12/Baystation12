@@ -128,7 +128,7 @@
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
 	var/primitive_form            // Lesser form, if any (ie. monkey for humans)
 	var/greater_form              // Greater form, if any, ie. human for monkeys.
-	var/holder_type
+	var/holder_type               // In-hand wrapper object, if any.
 	var/gluttonous                // Can eat some mobs. Values can be GLUT_TINY, GLUT_SMALLER, GLUT_ANYTHING.
 	var/rarity_value = 1          // Relative rarity/collector value for this species.
 	                              // Determines the organs that the species spawns with and
