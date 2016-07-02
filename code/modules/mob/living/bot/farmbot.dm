@@ -201,7 +201,7 @@
 				visible_message("<span class='notice'>[src] starts fertilizing \the [A].</span>")
 				attacking = 1
 				if(do_after(src, 30, A))
-					visible_message("<span class='notice'>[src] waters \the [A].</span>")
+					visible_message("<span class='notice'>[src] fertilizes \the [A].</span>")
 					T.reagents.add_reagent("ammonia", 10)
 		attacking = 0
 		action = ""

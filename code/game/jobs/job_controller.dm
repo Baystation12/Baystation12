@@ -13,9 +13,9 @@ var/global/datum/controller/occupations/job_master
 	var/list/job_debug = list()
 
 
-	proc/SetupOccupations(var/faction = "Station")
+	proc/SetupOccupations(var/faction = "Station", var/setup_titles = 0)
 		occupations = list()
-		var/list/all_jobs = typesof(/datum/job)
+		var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
 		if(!all_jobs.len)
 			world << "<span class='warning'>Error setting up jobs, no job datums found!</span>"
 			return 0
@@ -24,6 +24,23 @@ var/global/datum/controller/occupations/job_master
 			if(!job)	continue
 			if(job.faction != faction)	continue
 			occupations += job
+			if(!setup_titles) continue
+			if(job.department_flag & COM)
+				command_positions |= job.title
+			if(job.department_flag & SEC)
+				security_positions |= job.title
+			if(job.department_flag & ENG)
+				engineering_positions += job.title
+			if(job.department_flag & MED)
+				medical_positions |= job.title
+			if(job.department_flag & SCI)
+				science_positions |= job.title
+			if(job.department_flag & CRG)
+				cargo_positions |= job.title
+			if(job.department_flag & CIV)
+				civilian_positions |= job.title
+			if(job.department_flag & MSC)
+				nonhuman_positions |= job.title
 
 
 		return 1
@@ -41,6 +58,12 @@ var/global/datum/controller/occupations/job_master
 			if(!J)	continue
 			if(J.title == rank)	return J
 		return null
+
+	proc/ShouldCreateRecords(var/rank)
+		if(!rank) return 0
+		var/datum/job/job = GetJob(rank)
+		if(!job) return 0
+		return job.create_record
 
 	proc/GetPlayerAltTitle(mob/new_player/player, rank)
 		return player.client.prefs.GetPlayerAltTitle(GetJob(rank))
@@ -94,7 +117,7 @@ var/global/datum/controller/occupations/job_master
 			if(flag && !(flag in player.client.prefs.be_special_role))
 				Debug("FOC flag failed, Player: [player], Flag: [flag], ")
 				continue
-			if(player.client.prefs.GetJobDepartment(job, level) & job.flag)
+			if(player.client.prefs.CorrectLevel(job,level))
 				Debug("FOC pass, Player: [player], Level:[level]")
 				candidates += player
 		return candidates
@@ -268,7 +291,7 @@ var/global/datum/controller/occupations/job_master
 						continue
 
 					// If the player wants that job on this level, then try give it to him.
-					if(player.client.prefs.GetJobDepartment(job, level) & job.flag)
+					if(player.client.prefs.CorrectLevel(job,level))
 
 						// If the job isn't filled
 						if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
@@ -583,11 +606,11 @@ var/global/datum/controller/occupations/job_master
 				if(!job.player_old_enough(player.client))
 					level6++
 					continue
-				if(player.client.prefs.GetJobDepartment(job, 1) & job.flag)
+				if(player.client.prefs.CorrectLevel(job, 1))
 					level1++
-				else if(player.client.prefs.GetJobDepartment(job, 2) & job.flag)
+				else if(player.client.prefs.CorrectLevel(job, 2))
 					level2++
-				else if(player.client.prefs.GetJobDepartment(job, 3) & job.flag)
+				else if(player.client.prefs.CorrectLevel(job, 3))
 					level3++
 				else level4++ //not selected
 

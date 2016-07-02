@@ -7,6 +7,7 @@
 	bright, alien sun. This comes at the cost of mobility, flexibility, and increased \
 	oxygen requirements to support their robust metabolism."
 	icobase = 'icons/mob/human_races/subspecies/r_gravworlder.dmi'
+	health_hud_intensity = 3
 
 	flash_mod =     0.9
 	oxy_mod =       1.1
@@ -21,6 +22,7 @@
 	lack both light and atmosphere. As such, they're quite resistant to asphyxiation as well as \
 	toxins, but they suffer from weakened bone structure and a marked vulnerability to bright lights."
 	icobase = 'icons/mob/human_races/subspecies/r_spacer.dmi'
+	health_hud_intensity = 1.2
 
 	oxy_mod =   0.8
 	toxins_mod =   0.9

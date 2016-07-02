@@ -1,6 +1,5 @@
 /decl/hierarchy
 	var/name = "Hierarchy"
-	var/hierarchy_type = /decl/hierarchy // If a given instance has the same type as hierarchy_type that means it's a category node.
 	var/decl/hierarchy/parent
 	var/list/decl/hierarchy/children
 
@@ -21,7 +20,7 @@
 		dd_insertObjectList(subtype_parent.children, subtype_instance)
 
 /decl/hierarchy/proc/is_category()
-	return type == hierarchy_type
+	return children.len
 
 /decl/hierarchy/dd_SortValue()
 	return name

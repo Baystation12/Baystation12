@@ -8,6 +8,7 @@
 	unarmed_types = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/strong)
 	hud_type = /datum/hud_data/alien
 	rarity_value = 3
+	health_hud_intensity = 2.6
 
 	has_fine_manipulation = 0
 	siemens_coefficient = 0
@@ -50,7 +51,7 @@
 		"brain" =           /obj/item/organ/brain/xeno,
 		"plasma vessel" =   /obj/item/organ/xenos/plasmavessel,
 		"hive node" =       /obj/item/organ/xenos/hivenode,
-		"nutrient vessel" = /obj/item/organ/diona/nutrients
+		"nutrient channel" = /obj/item/organ/diona/nutrients
 		)
 
 	bump_flag = ALIEN
@@ -160,7 +161,7 @@
 		"acid gland" =      /obj/item/organ/xenos/acidgland,
 		"hive node" =       /obj/item/organ/xenos/hivenode,
 		"resin spinner" =   /obj/item/organ/xenos/resinspinner,
-		"nutrient vessel" = /obj/item/organ/diona/nutrients
+		"nutrient channel" = /obj/item/organ/diona/nutrients
 		)
 
 	inherent_verbs = list(
@@ -197,7 +198,7 @@
 		"brain" =           /obj/item/organ/brain/xeno,
 		"plasma vessel" =   /obj/item/organ/xenos/plasmavessel/hunter,
 		"hive node" =       /obj/item/organ/xenos/hivenode,
-		"nutrient vessel" = /obj/item/organ/diona/nutrients
+		"nutrient channel" = /obj/item/organ/diona/nutrients
 		)
 
 	inherent_verbs = list(
@@ -227,7 +228,7 @@
 		"plasma vessel" =   /obj/item/organ/xenos/plasmavessel/sentinel,
 		"acid gland" =      /obj/item/organ/xenos/acidgland,
 		"hive node" =       /obj/item/organ/xenos/hivenode,
-		"nutrient vessel" = /obj/item/organ/diona/nutrients
+		"nutrient channel" = /obj/item/organ/diona/nutrients
 		)
 
 	inherent_verbs = list(
@@ -261,7 +262,7 @@
 		"acid gland" =      /obj/item/organ/xenos/acidgland,
 		"hive node" =       /obj/item/organ/xenos/hivenode,
 		"resin spinner" =   /obj/item/organ/xenos/resinspinner,
-		"nutrient vessel" = /obj/item/organ/diona/nutrients
+		"nutrient channel" = /obj/item/organ/diona/nutrients
 		)
 
 	inherent_verbs = list(

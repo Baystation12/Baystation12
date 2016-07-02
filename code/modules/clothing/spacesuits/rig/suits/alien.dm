@@ -7,8 +7,8 @@
 	emp_protection = -20
 	online_slowdown = 6
 	offline_slowdown = 10
-	vision_restriction = 1
-	offline_vision_restriction = 2
+	vision_restriction = TINT_HEAVY
+	offline_vision_restriction = TINT_BLIND
 
 	chest_type = /obj/item/clothing/suit/space/rig/unathi
 	helm_type = /obj/item/clothing/head/helmet/space/rig/unathi
@@ -21,7 +21,7 @@
 	suit_type = "breacher chassis"
 	icon_state = "breacher_rig"
 	armor = list(melee = 90, bullet = 90, laser = 90, energy = 90, bomb = 90, bio = 100, rad = 80) //Takes TEN TIMES as much damage to stop someone in a breacher. In exchange, it's slow.
-	vision_restriction = 0
+	vision_restriction = TINT_NONE //Still blind when offline. It is fully armoured after all
 
 /obj/item/clothing/head/helmet/space/rig/unathi
 	species_restricted = list("Unathi")

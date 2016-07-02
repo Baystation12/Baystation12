@@ -76,9 +76,6 @@
 		G.process_hud(src)
 
 /mob/living/carbon/human/proc/process_rig(var/obj/item/weapon/rig/O)
-	if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
-		if((O.offline && O.offline_vision_restriction == 2) || (!O.offline && O.vision_restriction == 2))
-			equipment_tint_total += TINT_BLIND
 	if(O.visor && O.visor.active && O.visor.vision && O.visor.vision.glasses && (!O.helmet || (head && O.helmet == head)))
 		process_glasses(O.visor.vision.glasses)
 
@@ -113,6 +110,5 @@
 		else if(search_pda && istype(A,/obj/item/device/pda))
 			var/obj/item/device/pda/PDA = A
 			if(PDA.owner == old_name)
-				PDA.owner = new_name
-				PDA.name = "PDA-[new_name] ([PDA.ownjob])"
+				PDA.set_owner(new_name)
 				search_pda = 0

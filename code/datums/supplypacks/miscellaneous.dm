@@ -1,6 +1,5 @@
 /decl/hierarchy/supply_pack/miscellaneous
 	name = "Miscellaneous"
-	hierarchy_type = /decl/hierarchy/supply_pack/miscellaneous
 
 /decl/hierarchy/supply_pack/miscellaneous/wizard
 	name = "Wizard costume"

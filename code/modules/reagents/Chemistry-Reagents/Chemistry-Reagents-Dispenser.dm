@@ -341,22 +341,19 @@
 		if(removed <= 0)
 			return
 
-	if(volume < meltdose) // Not enough to melt anything
-		M.take_organ_damage(0, removed * power * 0.2) //burn damage, since it causes chemical burns. Acid doesn't make bones shatter, like brute trauma would.
+	if(M.unacidable)
 		return
-	if(!M.unacidable && removed > 0)
-		if(istype(M, /mob/living/carbon/human) && volume >= meltdose)
+
+	if(volume < meltdose) // Not enough to melt anything
+		M.take_organ_damage(0, removed * power * 0.1) //burn damage, since it causes chemical burns. Acid doesn't make bones shatter, like brute trauma would.
+	else
+		M.take_organ_damage(0, removed * power * 0.2)
+		if(removed && ishuman(M) && prob(100 * removed / meltdose)) // Applies disfigurement
 			var/mob/living/carbon/human/H = M
-			var/obj/item/organ/external/affecting = H.get_organ("head")
-			if(affecting)
-				if(affecting.take_damage(0, removed * power * 0.1))
-					H.UpdateDamageIcon()
-				if(prob(100 * removed / meltdose)) // Applies disfigurement
-					if (!(H.species && (H.species.flags & NO_PAIN)))
-						H.emote("scream")
-					H.status_flags |= DISFIGURED
-		else
-			M.take_organ_damage(0, removed * power * 0.1) // Balance. The damage is instant, so it's weaker. 10 units -> 5 damage, double for pacid. 120 units beaker could deal 60, but a) it's burn, which is not as dangerous, b) it's a one-use weapon, c) missing with it will splash it over the ground and d) clothes give some protection, so not everything will hit
+			if(!(H.species && (H.species.flags & NO_PAIN))) //TODO proc for whether someone can feel pain
+				H.emote("scream")
+			for(var/obj/item/organ/external/affecting in H.organs)
+				affecting.disfigured = 1
 
 /datum/reagent/acid/touch_obj(var/obj/O)
 	if(O.unacidable)

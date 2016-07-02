@@ -212,5 +212,5 @@
 	if (href_list["smoke"])
 		src.smoke()
 	if (href_list["toggle_zoom"])
-		src.zoom()
+		src.zoom(usr)
 	return
