@@ -1,4 +1,5 @@
-UPDATE erro_ban SET job="Borer" WHERE job="borer"; -- Case-insensitive is the default but we're playing it safe
+-- Case-insensitive is the default but we're playing it safe
+UPDATE erro_ban SET job="Borer" WHERE job="borer";
 UPDATE erro_ban SET job="Xenomorph" WHERE job="xeno";
 -- UPDATE erro_ban SET job="actor" WHERE job="actor"; -- Same
 UPDATE erro_ban SET job="ert" WHERE job="Emergency Response Team";
