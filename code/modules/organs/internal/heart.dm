@@ -9,6 +9,10 @@
 	var/beat_sound = 'sound/effects/singlebeat.ogg'
 	var/efficiency = 1
 
+/obj/item/organ/heart/robotize()
+	. = ..()
+	icon_state = "heart-prosthetic"
+
 /obj/item/organ/heart/process()
 	if(owner)
 		handle_pulse()

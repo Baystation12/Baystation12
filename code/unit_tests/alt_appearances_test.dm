@@ -39,7 +39,7 @@
 	var/list/backpack_types = list()
 	for(var/ca_type in subtypesof(/decl/cardborg_appearance))
 		var/decl/cardborg_appearance/ca = ca_type
-		group_by(backpack_types, ca, initial(ca.backpack_type))
+		group_by(backpack_types, initial(ca.backpack_type), ca)
 
 	var/number_of_issues = number_of_issues(backpack_types, "Backpack Types")
 	if(number_of_issues)

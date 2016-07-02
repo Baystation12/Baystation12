@@ -7,6 +7,7 @@
 	bright, alien sun. This comes at the cost of mobility, flexibility, and increased \
 	oxygen requirements to support their robust metabolism."
 	icobase = 'icons/mob/human_races/subspecies/r_gravworlder.dmi'
+	health_hud_intensity = 3
 
 	flash_mod =     0.9
 	oxy_mod =       1.1

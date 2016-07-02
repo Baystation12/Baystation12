@@ -102,6 +102,9 @@ var/list/ghostteleportlocs = list()
 	power_environ = 0
 	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
 
+/area/space/updateicon()
+	return
+
 area/space/atmosalert()
 	return
 
@@ -117,7 +120,7 @@ area/space/atmosalert()
 /area/space/partyalert()
 	return
 
-/area/turret_protected/
+/area/turret_protected
 
 /area/arrival
 	requires_power = 0
@@ -2084,6 +2087,10 @@ area/space/atmosalert()
 	name = "\improper Listening Post Solars"
 	icon_state = "LPS"
 
+
+/area/merchant_station
+	name = "\improper Merchant Station"
+	icon_state = "LP"
 //DERELICT
 
 /area/derelict

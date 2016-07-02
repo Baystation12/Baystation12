@@ -1,7 +1,6 @@
 /decl/hierarchy/supply_pack/hydroponics
 	name = "Hydroponics"
 	containertype = /obj/structure/closet/crate/hydroponics
-	hierarchy_type = /decl/hierarchy/supply_pack/hydroponics
 
 /decl/hierarchy/supply_pack/hydroponics/monkey
 	name = "Monkey crate"

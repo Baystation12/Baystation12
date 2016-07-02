@@ -735,37 +735,38 @@
 	if(!..())
 		return
 
-	if(stat == UNCONSCIOUS && health <= 0)
-		//Critical damage passage overlay
-		var/severity = 0
-		switch(health)
-			if(-20 to -10)			severity = 1
-			if(-30 to -20)			severity = 2
-			if(-40 to -30)			severity = 3
-			if(-50 to -40)			severity = 4
-			if(-60 to -50)			severity = 5
-			if(-70 to -60)			severity = 6
-			if(-80 to -70)			severity = 7
-			if(-90 to -80)			severity = 8
-			if(-95 to -90)			severity = 9
-			if(-INFINITY to -95)	severity = 10
-		overlay_fullscreen("crit", /obj/screen/fullscreen/crit, severity)
-	else
-		clear_fullscreen("crit")
-		//Oxygen damage overlay
-		if(oxyloss)
+	if(stat != DEAD)
+		if(stat == UNCONSCIOUS && health <= 0)
+			//Critical damage passage overlay
 			var/severity = 0
-			switch(oxyloss)
-				if(10 to 20)		severity = 1
-				if(20 to 25)		severity = 2
-				if(25 to 30)		severity = 3
-				if(30 to 35)		severity = 4
-				if(35 to 40)		severity = 5
-				if(40 to 45)		severity = 6
-				if(45 to INFINITY)	severity = 7
-			overlay_fullscreen("oxy", /obj/screen/fullscreen/oxy, severity)
+			switch(health)
+				if(-20 to -10)			severity = 1
+				if(-30 to -20)			severity = 2
+				if(-40 to -30)			severity = 3
+				if(-50 to -40)			severity = 4
+				if(-60 to -50)			severity = 5
+				if(-70 to -60)			severity = 6
+				if(-80 to -70)			severity = 7
+				if(-90 to -80)			severity = 8
+				if(-95 to -90)			severity = 9
+				if(-INFINITY to -95)	severity = 10
+			overlay_fullscreen("crit", /obj/screen/fullscreen/crit, severity)
 		else
-			clear_fullscreen("oxy")
+			clear_fullscreen("crit")
+			//Oxygen damage overlay
+			if(oxyloss)
+				var/severity = 0
+				switch(oxyloss)
+					if(10 to 20)		severity = 1
+					if(20 to 25)		severity = 2
+					if(25 to 30)		severity = 3
+					if(30 to 35)		severity = 4
+					if(35 to 40)		severity = 5
+					if(40 to 45)		severity = 6
+					if(45 to INFINITY)	severity = 7
+				overlay_fullscreen("oxy", /obj/screen/fullscreen/oxy, severity)
+			else
+				clear_fullscreen("oxy")
 
 		//Fire and Brute damage overlay (BSSR)
 		var/hurtdamage = src.getBruteLoss() + src.getFireLoss() + damageoverlaytemp
@@ -783,7 +784,7 @@
 		else
 			clear_fullscreen("brute")
 
-		if(healths  && stat != DEAD) // They are dead, let death() handle their hud update on this.
+		if(healths)
 			if (analgesic > 100)
 				healths.icon_state = "health_numb"
 			else
@@ -791,15 +792,37 @@
 					if(1)	healths.icon_state = "health6"
 					if(2)	healths.icon_state = "health7"
 					else
-						//switch(health - halloss)
-						switch(100 - ((species.flags & NO_PAIN) ? 0 : traumatic_shock))
-							if(100 to INFINITY)		healths.icon_state = "health0"
-							if(80 to 100)			healths.icon_state = "health1"
-							if(60 to 80)			healths.icon_state = "health2"
-							if(40 to 60)			healths.icon_state = "health3"
-							if(20 to 40)			healths.icon_state = "health4"
-							if(0 to 20)				healths.icon_state = "health5"
-							else					healths.icon_state = "health6"
+						// Generate a by-limb health display.
+						healths.icon_state = "blank"
+						healths.overlays = null
+
+						var/no_damage = 1
+						var/trauma_val = 0 // Used in calculating softcrit/hardcrit indicators.
+						if(!(species.flags & NO_PAIN))
+							trauma_val = max(traumatic_shock,halloss)/species.total_health
+						var/limb_trauma_val = trauma_val*0.5
+						// Collect and apply the images all at once to avoid appearance churn.
+						var/list/health_images = list()
+						for(var/obj/item/organ/external/E in organs)
+							if(no_damage && (E.brute_dam || E.burn_dam))
+								no_damage = 0
+							health_images += E.get_damage_hud_image(limb_trauma_val)
+
+						// Apply a fire overlay if we're burning.
+						if(on_fire)
+							health_images += image('icons/mob/screen1_health.dmi',"burning")
+
+						// Show a general pain/crit indicator if needed.
+						if(trauma_val)
+							if(!(species.flags & NO_PAIN))
+								if(trauma_val > 0.7)
+									health_images += image('icons/mob/screen1_health.dmi',"softcrit")
+								if(trauma_val >= 1)
+									health_images += image('icons/mob/screen1_health.dmi',"hardcrit")
+						else if(no_damage)
+							health_images += image('icons/mob/screen1_health.dmi',"fullhealth")
+
+						healths.overlays += health_images
 
 		if(nutrition_icon)
 			switch(nutrition)
