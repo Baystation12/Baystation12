@@ -7,8 +7,8 @@
 	path = /obj/item/weapon/storage/pill_bottle/dice
 
 /datum/gear/dice/nerd
-	display_name = "gaming dice pack"
-	path = /obj/item/weapon/storage/pill_bottle/dice/nerd
+	display_name = "dice pack (gaming)"
+	path = /obj/item/weapon/storage/pill_bottle/dice_nerd
 
 /datum/gear/cards
 	display_name = "deck of cards"
