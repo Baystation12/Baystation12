@@ -800,7 +800,7 @@
 						var/trauma_val = 0 // Used in calculating softcrit/hardcrit indicators.
 						if(!(species.flags & NO_PAIN))
 							trauma_val = max(traumatic_shock,halloss)/species.total_health
-						var/limb_trauma_val = trauma_val*0.5
+						var/limb_trauma_val = trauma_val*0.3
 						// Collect and apply the images all at once to avoid appearance churn.
 						var/list/health_images = list()
 						for(var/obj/item/organ/external/E in organs)
