@@ -53,6 +53,7 @@
 
 	// Used for setting appearance.
 	var/list/valid_species =       list("Unathi","Tajara","Skrell","Human")
+	var/min_player_age = 14
 
 	// Runtime vars.
 	var/datum/mind/leader                   // Current leader, if any.
