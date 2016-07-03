@@ -162,8 +162,8 @@ var/list/sacrificed = list()
 							target.adjustBrainLoss(1)
 
 				initial_message = 1
-				if (target.species && (target.species.flags & NO_PAIN))
-					target.visible_message("<span class='warning'>The markings below [target] glow a bloody red.</span>")
+				if (!target.can_feel_pain())
+					target.visible_message("<span class='warning'>The markings below \the [target] glow a bloody red.</span>")
 				else
 					target.visible_message("<span class='warning'>[target] writhes in pain as the markings below \him glow a bloody red.</span>", "<span class='danger'>AAAAAAHHHH!</span>", "<span class='warning'>You hear an anguished scream.</span>")
 
@@ -617,8 +617,8 @@ var/list/sacrificed = list()
 					if(!(iscultist(V)))
 						victims += V//Checks for cult status and mob type
 			for(var/obj/item/I in src.loc)//Checks for MMIs/brains/Intellicards
-				if(istype(I,/obj/item/organ/brain))
-					var/obj/item/organ/brain/B = I
+				if(istype(I,/obj/item/organ/internal/brain))
+					var/obj/item/organ/internal/brain/B = I
 					victims += B.brainmob
 				else if(istype(I,/obj/item/device/mmi))
 					var/obj/item/device/mmi/B = I

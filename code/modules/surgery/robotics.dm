@@ -8,7 +8,7 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if (isslime(target))
 			return 0
-		if (target_zone == "eyes")	//there are specific steps for eye surgery
+		if (target_zone == BP_EYES)	//there are specific steps for eye surgery
 			return 0
 		if (!hasorgans(target))
 			return 0
@@ -34,7 +34,7 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
 			var/obj/item/organ/external/affected = target.get_organ(target_zone)
-			return affected && affected.open == 0 && target_zone != "mouth"
+			return affected && affected.open == 0 && target_zone != BP_MOUTH
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -78,7 +78,7 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("<span class='notice'>[user] opens the maintenance hatch on [target]'s [affected.name] with \the [tool].</span>", \
 		 "<span class='notice'>You open the maintenance hatch on [target]'s [affected.name] with \the [tool].</span>")
-		affected.open = 2
+		affected.open = 3
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -98,7 +98,7 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
 			var/obj/item/organ/external/affected = target.get_organ(target_zone)
-			return affected && affected.open && target_zone != "mouth"
+			return affected && affected.open && target_zone != BP_MOUTH
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -134,7 +134,7 @@
 				var/obj/item/weapon/weldingtool/welder = tool
 				if(!welder.isOn() || !welder.remove_fuel(1,user))
 					return 0
-			return affected && affected.open == 2 && affected.brute_dam > 0 && target_zone != "mouth"
+			return affected && affected.open == 3 && (affected.disfigured || affected.brute_dam > 0) && target_zone != BP_MOUTH
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -147,7 +147,7 @@
 		user.visible_message("<span class='notice'>[user] finishes patching damage to [target]'s [affected.name] with \the [tool].</span>", \
 		"<span class='notice'>You finish patching damage to [target]'s [affected.name] with \the [tool].</span>")
 		affected.heal_damage(rand(30,50),0,1,1)
-
+		affected.disfigured = 0
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("<span class='warning'>[user]'s [tool.name] slips, damaging the internal structure of [target]'s [affected.name].</span>",
@@ -166,7 +166,15 @@
 		if(..())
 			var/obj/item/stack/cable_coil/C = tool
 			var/obj/item/organ/external/affected = target.get_organ(target_zone)
-			var/limb_can_operate = (affected && affected.open == 2 && affected.burn_dam > 0 && target_zone != "mouth")
+			var/limb_can_operate = ((affected && affected.open >= 3) && (affected.disfigured || affected.burn_dam > 0) && target_zone != BP_MOUTH)
+			if(limb_can_operate)
+				if(istype(C))
+					if(!C.get_amount() >= 3)
+						user << "<span class='danger'>You need three or more cable pieces to repair this damage.</span>"
+						return SURGERY_FAILURE
+					C.use(3)
+					return 1
+			return SURGERY_FAILURE
 
 			if(!limb_can_operate)
 				return 0
@@ -189,6 +197,7 @@
 		user.visible_message("<span class='notice'>[user] finishes splicing cable into [target]'s [affected.name].</span>", \
 		"<span class='notice'>You finishes splicing new cable into [target]'s [affected.name].</span>")
 		affected.heal_damage(0,rand(30,50),1,1)
+		affected.disfigured = 0
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -214,10 +223,10 @@
 		if(!affected) return
 		var/is_organ_damaged = 0
 		for(var/obj/item/organ/I in affected.internal_organs)
-			if(I.damage > 0 && I.robotic >= 2)
+			if(I.damage > 0 && (I.robotic >= ORGAN_ROBOT))
 				is_organ_damaged = 1
 				break
-		return affected.open == 2 && is_organ_damaged
+		return affected.open == 3 && is_organ_damaged
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
@@ -227,7 +236,7 @@
 
 		for(var/obj/item/organ/I in affected.internal_organs)
 			if(I && I.damage > 0)
-				if(I.robotic >= 2)
+				if(I.robotic >= ORGAN_ROBOT)
 					user.visible_message("[user] starts mending the damage to [target]'s [I.name]'s mechanisms.", \
 					"You start mending the damage to [target]'s [I.name]'s mechanisms." )
 
@@ -243,7 +252,7 @@
 		for(var/obj/item/organ/I in affected.internal_organs)
 
 			if(I && I.damage > 0)
-				if(I.robotic >= 2)
+				if(I.robotic >= ORGAN_ROBOT)
 					user.visible_message("<span class='notice'>[user] repairs [target]'s [I.name] with [tool].</span>", \
 					"<span class='notice'>You repair [target]'s [I.name] with [tool].</span>" )
 					I.damage = 0
@@ -278,7 +287,7 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if(!(affected && (affected.robotic >= ORGAN_ROBOT)))
 			return 0
-		if(affected.open != 2)
+		if(affected.open < 3)
 			return 0
 
 		target.op_stage.current_organ = null
@@ -306,7 +315,7 @@
 		user.visible_message("<span class='notice'>[user] has decoupled [target]'s [target.op_stage.current_organ] with \the [tool].</span>" , \
 		"<span class='notice'>You have decoupled [target]'s [target.op_stage.current_organ] with \the [tool].</span>")
 
-		var/obj/item/organ/I = target.internal_organs_by_name[target.op_stage.current_organ]
+		var/obj/item/organ/internal/I = target.internal_organs_by_name[target.op_stage.current_organ]
 		if(I && istype(I))
 			I.status |= ORGAN_CUT_AWAY
 
@@ -327,7 +336,7 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if(!(affected && (affected.robotic >= ORGAN_ROBOT)))
 			return 0
-		if(affected.open != 2)
+		if(affected.open < 3)
 			return 0
 
 		target.op_stage.current_organ = null
@@ -372,12 +381,12 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
-		if(target_zone != "chest")
+		if(target_zone != BP_HEAD)
 			return
 
 		var/obj/item/device/mmi/M = tool
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		if(!(affected && affected.open == 2))
+		if(!(affected && affected.open == 3))
 			return 0
 
 		if(!istype(M))
@@ -391,15 +400,11 @@
 			user << "<span class='danger'>You cannot install a computer brain into a meat torso.</span>"
 			return SURGERY_FAILURE
 
-		if(!target.species)
-			user << "<span class='danger'>You have no idea what species this person is. Report this on the bug tracker.</span>"
-			return SURGERY_FAILURE
-
-		if(!target.species.has_organ["brain"])
+		if(!target.should_have_organ(BP_BRAIN))
 			user << "<span class='danger'>You're pretty sure [target.species.name_plural] don't normally have a brain.</span>"
 			return SURGERY_FAILURE
 
-		if(!isnull(target.internal_organs["brain"]))
+		if(!isnull(target.internal_organs[BP_BRAIN]))
 			user << "<span class='danger'>Your subject already has a brain.</span>"
 			return SURGERY_FAILURE
 
@@ -417,8 +422,8 @@
 		"<span class='notice'>You have installed \the [tool] into [target]'s [affected.name].</span>")
 
 		var/obj/item/device/mmi/M = tool
-		var/obj/item/organ/mmi_holder/holder = new(target, 1)
-		target.internal_organs_by_name["brain"] = holder
+		var/obj/item/organ/internal/mmi_holder/holder = new(target, 1)
+		target.internal_organs_by_name[BP_BRAIN] = holder
 		user.drop_from_inventory(tool)
 		tool.forceMove(holder)
 		holder.stored_mmi = tool

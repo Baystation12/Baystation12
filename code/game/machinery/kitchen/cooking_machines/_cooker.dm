@@ -83,7 +83,7 @@
 	// Gotta hurt.
 	if(istype(cooking_obj, /obj/item/weapon/holder))
 		for(var/mob/living/M in cooking_obj.contents)
-			M.apply_damage(rand(30,40), BURN, "chest")
+			M.apply_damage(rand(30,40), BURN, BP_CHEST)
 
 	// Not sure why a food item that passed the previous checks would fail to drop, but safety first.
 	if(!user.unEquip(I))

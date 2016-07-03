@@ -291,27 +291,42 @@ datum/preferences
 	character.h_style = h_style
 	character.f_style = f_style
 
-	// Destroy/cyborgize organs
-	for(var/name in organ_data)
+	// Replace any missing limbs.
+	for(var/name in BP_ALL_LIMBS)
+		var/obj/item/organ/external/O = character.organs_by_name[name]
+		if(!O && organ_data[name] != "amputated")
+			var/list/organ_data = character.species.has_limbs[name]
+			if(!islist(organ_data)) continue
+			var/limb_path = organ_data["path"]
+			O = new limb_path(character)
 
+	// Destroy/cyborgize organs and limbs. The order is important for preserving low-level choices for robolimb sprites being overridden.
+	for(var/name in BP_BY_DEPTH)
 		var/status = organ_data[name]
 		var/obj/item/organ/external/O = character.organs_by_name[name]
-		if(O)
-			O.status = 0
-			if(status == "amputated")
-				character.organs_by_name[O.limb_name] = null
-				character.organs -= O
-				if(O.children) // This might need to become recursive.
-					for(var/obj/item/organ/external/child in O.children)
-						character.organs_by_name[child.limb_name] = null
-						character.organs -= child
+		if(!O)
+			continue
+		O.status = 0
+		O.robotic = 0
+		O.model = null
+		if(status == "amputated")
+			character.organs_by_name[O.organ_tag] = null
+			character.organs -= O
+			if(O.children) // This might need to become recursive.
+				for(var/obj/item/organ/external/child in O.children)
+					character.organs_by_name[child.organ_tag] = null
+					character.organs -= child
+		else if(status == "cyborg")
+			if(rlimb_data[name])
+				O.robotize(rlimb_data[name])
+			else
+				O.robotize()
 
-			else if(status == "cyborg")
-				if(rlimb_data[name])
-					O.robotize(rlimb_data[name])
-				else
-					O.robotize()
-		else if(!O && !is_preview_copy)
+	if(!is_preview_copy)
+		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN))
+			var/status = organ_data[name]
+			if(!status)
+				continue
 			var/obj/item/organ/I = character.internal_organs_by_name[name]
 			if(I)
 				if(status == "assisted")
@@ -321,7 +336,6 @@ datum/preferences
 
 	character.all_underwear.Cut()
 	character.all_underwear_metadata.Cut()
-
 	for(var/underwear_category_name in all_underwear)
 		var/datum/category_group/underwear/underwear_category = global_underwear.categories_by_name[underwear_category_name]
 		if(underwear_category)
@@ -331,7 +345,6 @@ datum/preferences
 				character.all_underwear_metadata[underwear_category_name] = all_underwear_metadata[underwear_category_name]
 		else
 			all_underwear -= underwear_category_name
-
 	if(backbag > 4 || backbag < 1)
 		backbag = 1 //Same as above
 	character.backbag = backbag

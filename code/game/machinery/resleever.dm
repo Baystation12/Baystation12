@@ -17,7 +17,7 @@
 	var/disallow_occupant_types = list()
 
 	var/mob/living/carbon/human/occupant = null
-	var/obj/item/organ/stack/lace = null
+	var/obj/item/organ/internal/stack/lace = null
 
 	var/resleeving = 0
 	var/remaining = 0
@@ -144,7 +144,7 @@ obj/machinery/resleever/process()
 
 /obj/machinery/resleever/proc/sleeve()
 	if(lace && occupant)
-		var/obj/item/organ/I = occupant.organs_by_name["head"]
+		var/obj/item/organ/I = occupant.organs_by_name[BP_HEAD]
 		lace.replaced(occupant, I)
 		lace = null
 		lace_name = null
@@ -164,7 +164,7 @@ obj/machinery/resleever/process()
 		if(occupant)
 			user << "<span class='warning'>You need to remove the occupant first!</span>"
 			return
-	if(istype(W, /obj/item/organ/stack))
+	if(istype(W, /obj/item/organ/internal/stack))
 		if(isnull(lace))
 			user << "<span class='notice'>You insert \the [W] into [src].</span>"
 			user.drop_from_inventory(W)

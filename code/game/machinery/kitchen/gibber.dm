@@ -172,8 +172,9 @@
 	if(!src.occupant)
 		visible_message("<span class='danger'>You hear a loud metallic grinding sound.</span>")
 		return
+
 	use_power(1000)
-	visible_message("<span class='danger'>You hear a loud squelchy grinding sound.</span>")
+	visible_message("<span class='danger'>You hear a loud [occupant.isSynthetic() ? "metallic" : "squelchy"] grinding sound.</span>")
 	src.operating = 1
 	update_icon()
 
@@ -195,7 +196,7 @@
 	else if(istype(src.occupant,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = occupant
 		slab_name = src.occupant.real_name
-		slab_type = H.species.meat_type
+		slab_type = H.isSynthetic() ? /obj/item/stack/material/steel : H.species.meat_type
 
 	// Small mobs don't give as much nutrition.
 	if(issmall(src.occupant))
@@ -203,12 +204,12 @@
 	slab_nutrition /= slab_count
 
 	for(var/i=1 to slab_count)
-		var/obj/item/weapon/reagent_containers/food/snacks/meat/new_meat = new slab_type(src)
-		new_meat.name = "[slab_name] [new_meat.name]"
-		new_meat.reagents.add_reagent("nutriment",slab_nutrition)
-
-		if(src.occupant.reagents)
-			src.occupant.reagents.trans_to_obj(new_meat, round(occupant.reagents.total_volume/slab_count,1))
+		var/obj/item/weapon/reagent_containers/food/snacks/meat/new_meat = new slab_type(src, rand(3,8))
+		if(istype(new_meat))
+			new_meat.name = "[slab_name] [new_meat.name]"
+			new_meat.reagents.add_reagent("nutriment",slab_nutrition)
+			if(src.occupant.reagents)
+				src.occupant.reagents.trans_to_obj(new_meat, round(occupant.reagents.total_volume/slab_count,1))
 
 	src.occupant.attack_log += "\[[time_stamp()]\] Was gibbed by <b>[user]/[user.ckey]</b>" //One shall not simply gib a mob unnoticed!
 	user.attack_log += "\[[time_stamp()]\] Gibbed <b>[src.occupant]/[src.occupant.ckey]</b>"

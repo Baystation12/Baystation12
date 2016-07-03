@@ -84,14 +84,3 @@
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "brown"
 	item_state = "browngloves"
-
-/obj/item/clothing/gloves/evening
-	desc = "A pair of gloves that reach past the elbow.  Fancy!"
-	name = "evening gloves"
-	icon_state = "evening_gloves"
-	item_state = "graygloves"
-
-	cold_protection = HANDS
-	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = HANDS
-	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE

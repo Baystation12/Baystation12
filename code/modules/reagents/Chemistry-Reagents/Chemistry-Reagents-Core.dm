@@ -48,8 +48,10 @@
 					infect_virus2(M, V.getcopy())
 
 /datum/reagent/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_MACHINE)
-		return
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(H.isSynthetic())
+			return
 	if(data && data["virus2"])
 		var/list/vlist = data["virus2"]
 		if(vlist.len)
