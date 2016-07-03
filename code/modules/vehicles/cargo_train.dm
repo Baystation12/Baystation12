@@ -174,7 +174,7 @@
 // Interaction procs
 //-------------------------------------------
 /obj/vehicle/train/cargo/engine/relaymove(mob/user, direction)
-	if(user != load)
+	if(user != load || user.incapacitated())
 		return 0
 
 	if(is_train_head())
