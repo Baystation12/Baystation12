@@ -38,7 +38,7 @@
 
 /obj/item/device/flashlight/attack(mob/living/M as mob, mob/living/user as mob)
 	add_fingerprint(user)
-	if(on && user.zone_sel.selecting == "eyes")
+	if(on && user.zone_sel.selecting == BP_EYES)
 
 		if((CLUMSY in user.mutations) && prob(50))	//too dumb to use flashlight properly
 			return ..()	//just hit them in the head
@@ -51,7 +51,7 @@
 					return
 
 			var/obj/item/organ/vision
-			if(!H.species.vision_organ)
+			if(!H.species.vision_organ || !H.should_have_organ(H.species.vision_organ))
 				user << "<span class='warning'>You can't find anything on [H] to direct [src] into!</span>"
 				return
 

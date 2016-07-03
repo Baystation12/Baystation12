@@ -47,11 +47,11 @@ meteor_act
 	agony_amount *= siemens_coeff
 
 	switch (def_zone)
-		if("head")
+		if(BP_HEAD)
 			agony_amount *= 1.50
-		if("l_hand", "r_hand")
+		if(BP_L_HAND, BP_R_HAND)
 			var/c_hand
-			if (def_zone == "l_hand")
+			if (def_zone == BP_L_HAND)
 				c_hand = l_hand
 			else
 				c_hand = r_hand
@@ -64,7 +64,7 @@ meteor_act
 					emote("me", 1, "drops what they were holding, their [affected.name] malfunctioning!")
 				else
 					var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
-					emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ]drops what they were holding in their [affected.name]!")
+					emote("me", 1, "[affected.can_feel_pain() ? "" : emote_scream]drops what they were holding in their [affected.name]!")
 
 	..(stun_amount, agony_amount, def_zone)
 
@@ -113,7 +113,7 @@ meteor_act
 		if(gear && istype(gear ,/obj/item/clothing))
 			var/obj/item/clothing/C = gear
 			if(istype(C) && C.body_parts_covered & def_zone.body_part)
-				protection = add_armor(protection, C.armor[type]) 
+				protection = add_armor(protection, C.armor[type])
 	return protection
 
 /mob/living/carbon/human/proc/check_head_coverage()
@@ -188,7 +188,7 @@ meteor_act
 		if(!..(I, user, effective_force, blocked, hit_zone))
 			return 0
 
-		//set the dislocate mult less than the effective force mult so that 
+		//set the dislocate mult less than the effective force mult so that
 		//dislocating limbs on disarm is a bit easier than breaking limbs on harm
 		attack_joint(affecting, I, effective_force, 0.5, blocked) //...but can dislocate joints
 	else if(!..())
@@ -215,7 +215,7 @@ meteor_act
 	return 1
 
 /mob/living/carbon/human/proc/attack_bloody(obj/item/W, mob/living/attacker, var/effective_force, var/hit_zone)
-	if(W.damtype != BRUTE) 
+	if(W.damtype != BRUTE)
 		return
 
 	//make non-sharp low-force weapons less likely to be bloodied
@@ -237,7 +237,7 @@ meteor_act
 				H.bloody_hands(src)
 
 		switch(hit_zone)
-			if("head")
+			if(BP_HEAD)
 				if(wear_mask)
 					wear_mask.add_blood(src)
 					update_inv_wear_mask(0)
@@ -247,7 +247,7 @@ meteor_act
 				if(glasses && prob(33))
 					glasses.add_blood(src)
 					update_inv_glasses(0)
-			if("chest")
+			if(BP_CHEST)
 				bloody_body(src)
 
 /mob/living/carbon/human/proc/projectile_hit_bloody(obj/item/projectile/P, var/effective_force, var/hit_zone)
@@ -261,7 +261,7 @@ meteor_act
 			location.add_blood(src)
 
 		switch(hit_zone)
-			if("head")
+			if(BP_HEAD)
 				if(wear_mask)
 					wear_mask.add_blood(src)
 					update_inv_wear_mask(0)
@@ -271,7 +271,7 @@ meteor_act
 				if(glasses && prob(33))
 					glasses.add_blood(src)
 					update_inv_glasses(0)
-			if("chest")
+			if(BP_CHEST)
 				bloody_body(src)
 
 /mob/living/carbon/human/proc/attack_joint(var/obj/item/organ/external/organ, var/obj/item/W, var/effective_force, var/dislocate_mult, var/blocked)
@@ -321,7 +321,7 @@ meteor_act
 			var/mob/living/L = O.thrower
 			zone = check_zone(L.zone_sel.selecting)
 		else
-			zone = ran_zone("chest",75)	//Hits a random part of the body, geared towards the chest
+			zone = ran_zone(BP_CHEST,75)	//Hits a random part of the body, geared towards the chest
 
 		//check if we hit
 		var/miss_chance = 15

@@ -1,5 +1,5 @@
 #define HUMAN_EATING_NO_ISSUE		0
-#define HUMAN_EATING_NO_MOUTH		1
+#define HUMAN_EATING_NBP_MOUTH		1
 #define HUMAN_EATING_BLOCKED_MOUTH	2
 
 #define add_clothing_protection(A)	\
@@ -12,7 +12,7 @@
 	if(status[1] == HUMAN_EATING_NO_ISSUE)
 		return 1
 	if(feedback)
-		if(status[1] == HUMAN_EATING_NO_MOUTH)
+		if(status[1] == HUMAN_EATING_NBP_MOUTH)
 			src << "Where do you intend to put \the [food]? You don't have a mouth!"
 		else if(status[1] == HUMAN_EATING_BLOCKED_MOUTH)
 			src << "<span class='warning'>\The [status[2]] is in the way!</span>"
@@ -23,7 +23,7 @@
 	if(status[1] == HUMAN_EATING_NO_ISSUE)
 		return 1
 	if(feedback)
-		if(status[1] == HUMAN_EATING_NO_MOUTH)
+		if(status[1] == HUMAN_EATING_NBP_MOUTH)
 			feeder << "Where do you intend to put \the [food]? \The [src] doesn't have a mouth!"
 		else if(status[1] == HUMAN_EATING_BLOCKED_MOUTH)
 			feeder << "<span class='warning'>\The [status[2]] is in the way!</span>"
@@ -31,14 +31,14 @@
 
 /mob/living/carbon/human/proc/can_eat_status()
 	if(!check_has_mouth())
-		return list(HUMAN_EATING_NO_MOUTH)
+		return list(HUMAN_EATING_NBP_MOUTH)
 	var/obj/item/blocked = check_mouth_coverage()
 	if(blocked)
 		return list(HUMAN_EATING_BLOCKED_MOUTH, blocked)
 	return list(HUMAN_EATING_NO_ISSUE)
 
 #undef HUMAN_EATING_NO_ISSUE
-#undef HUMAN_EATING_NO_MOUTH
+#undef HUMAN_EATING_NBP_MOUTH
 #undef HUMAN_EATING_BLOCKED_MOUTH
 
 /mob/living/carbon/human/proc/update_equipment_vision()

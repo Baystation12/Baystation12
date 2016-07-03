@@ -70,7 +70,7 @@
 		if(!hasorgans(target))
 			return 0
 
-		if (target_zone == "mouth" || target_zone == "eyes")
+		if (target_zone == BP_MOUTH || target_zone == BP_EYES)
 			return 0
 
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -124,7 +124,7 @@
 		if(!hasorgans(target))
 			return 0
 
-		if (target_zone == "mouth" || target_zone == "eyes")
+		if (target_zone == BP_MOUTH || target_zone == BP_EYES)
 			return 0
 
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -190,7 +190,7 @@
 			var/obj/item/weapon/weldingtool/welder = tool
 			if(!welder.isOn() || !welder.remove_fuel(1,user))
 				return 0
-		return (target_zone == "chest") && istype(target.back, /obj/item/weapon/rig) && !(target.back.canremove)
+		return (target_zone == BP_CHEST) && istype(target.back, /obj/item/weapon/rig) && !(target.back.canremove)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("[user] starts cutting through the support systems of [target]'s [target.back] with \the [tool]." , \
