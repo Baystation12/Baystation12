@@ -52,7 +52,7 @@
 
 	attacker.visible_message("<span class='danger'>[attacker] [pick("bent", "twisted")] [target]'s [organ.name] into a jointlock!</span>")
 
-	if(target.species.flags & NO_PAIN)
+	if(!organ.can_feel_pain())
 		return
 
 	var/armor = target.run_armor_check(target, "melee")
@@ -66,7 +66,7 @@
 	if(!istype(attacker))
 		return
 
-	var/datum/unarmed_attack/attack = attacker.get_unarmed_attack(target, "eyes")
+	var/datum/unarmed_attack/attack = attacker.get_unarmed_attack(target, BP_EYES)
 
 	if(!attack)
 		return
@@ -105,13 +105,13 @@
 	else
 		attacker.visible_message("<span class='danger'>[attacker] thrusts \his head into [target]'s skull!</span>")
 
-	var/armor = target.run_armor_check("head", "melee")
-	target.apply_damage(damage, BRUTE, "head", armor, sharp=is_sharp)
-	attacker.apply_damage(10, BRUTE, "head", attacker.run_armor_check("head", "melee"))
+	var/armor = target.run_armor_check(BP_HEAD, "melee")
+	target.apply_damage(damage, BRUTE, BP_HEAD, armor, sharp=is_sharp)
+	attacker.apply_damage(10, BRUTE, BP_HEAD, attacker.run_armor_check(BP_HEAD, "melee"))
 
-	if(armor < 50 && target.headcheck("head") && prob(damage))
+	if(armor < 50 && target.headcheck(BP_HEAD) && prob(damage))
 		target.apply_effect(20, PARALYZE)
-		target.visible_message("<span class='danger'>[target] [target.species.knockout_message]</span>")
+		target.visible_message("<span class='danger'>[target] [target.species.get_knockout_message(target)]</span>")
 
 	playsound(attacker.loc, "swing_hit", 25, 1, -1)
 	attacker.attack_log += text("\[[time_stamp()]\] <font color='red'>Headbutted [target.name] ([target.ckey])</font>")

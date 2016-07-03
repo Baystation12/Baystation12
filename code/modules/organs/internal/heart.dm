@@ -2,12 +2,17 @@
 	name = "heart"
 	icon_state = "heart-on"
 	organ_tag = "heart"
-	parent_organ = "chest"
-	dead_icon = "heart-off"
+	parent_organ = BP_CHEST
+	var/dead_icon = "heart-off"
 	var/pulse = PULSE_NORM
 	var/heartbeat = 0
 	var/beat_sound = 'sound/effects/singlebeat.ogg'
 	var/efficiency = 1
+
+/obj/item/organ/heart/die()
+	if(dead_icon)
+		icon_state = dead_icon
+	..()
 
 /obj/item/organ/heart/robotize()
 	. = ..()

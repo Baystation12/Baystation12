@@ -137,6 +137,11 @@
 	path = /obj/item/device/radio/off
 	category = "General"
 
+/datum/autolathe/recipe/suit_cooler
+	name = "suit cooling unit"
+	path = /obj/item/device/suit_cooling_unit
+	category = "General"
+
 /datum/autolathe/recipe/weldermask
 	name = "welding mask"
 	path = /obj/item/clothing/head/welding

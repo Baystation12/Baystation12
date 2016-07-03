@@ -65,7 +65,7 @@
 	SetWeakened(round(crush_damage / 8, 1))
 
 	var/turf/T = get_turf(src)
-	
+
 	var/list/valid_turfs = list()
 	for(var/dir_to_test in cardinal)
 		var/turf/new_turf = get_step(T, dir_to_test)
@@ -81,7 +81,7 @@
 
 /mob/living/carbon/airlock_crush(var/crush_damage)
 	. = ..()
-	if (!(species && (species.flags & NO_PAIN)))
+	if (can_feel_pain())
 		emote("scream")
 
 /mob/living/silicon/robot/airlock_crush(var/crush_damage)

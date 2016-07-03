@@ -91,10 +91,10 @@
 				user << "<span class='danger'>You need a better grip to do that!</span>"
 			else
 				if(user.a_intent == I_HURT)
-					var/blocked = M.run_armor_check("head", "melee")
+					var/blocked = M.run_armor_check(BP_HEAD, "melee")
 					if (prob(30 * blocked_mult(blocked)))
 						M.Weaken(5)
-					M.apply_damage(8, BRUTE, "head", blocked)
+					M.apply_damage(8, BRUTE, BP_HEAD, blocked)
 					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
 					if(material)
 						playsound(loc, material.tableslam_noise, 50, 1)
@@ -106,7 +106,7 @@
 						if(S.sharp && prob(50))
 							M.visible_message("<span class='danger'>\The [S] slices into [M]'s face!</span>",
 							                  "<span class='danger'>\The [S] slices into your face!</span>")
-							M.standard_weapon_hit_effects(S, G.assailant, S.force*2, blocked, "head") //standard weapon hit effects include damage and embedding
+							M.standard_weapon_hit_effects(S, G.assailant, S.force*2, blocked, BP_HEAD) //standard weapon hit effects include damage and embedding
 				else
 					G.affecting.forceMove(src.loc)
 					G.affecting.Weaken(5)

@@ -19,11 +19,11 @@
 	var/printing
 
 	var/list/products = list(
-		"heart" =   list(/obj/item/organ/heart,  50),
-		"lungs" =   list(/obj/item/organ/lungs,  40),
-		"kidneys" = list(/obj/item/organ/kidneys,20),
-		"eyes" =    list(/obj/item/organ/eyes,   30),
-		"liver" =   list(/obj/item/organ/liver,  50)
+		BP_HEART   = list(/obj/item/organ/internal/heart,  50),
+		BP_LUNGS   = list(/obj/item/organ/internal/lungs,  40),
+		BP_KIDNEYS = list(/obj/item/organ/internal/kidneys,20),
+		BP_EYES    = list(/obj/item/organ/internal/eyes,   30),
+		BP_LIVER   = list(/obj/item/organ/internal/liver,  50)
 		)
 
 /obj/machinery/organ_printer/attackby(var/obj/item/O, var/mob/user)

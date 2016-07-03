@@ -113,7 +113,7 @@
 		return
 
 
-	if(!target_limb) target_limb = pick("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm", "r_arm","head","chest","groin")
+	if(!target_limb) target_limb = pick(BP_ALL_LIMBS)
 	var/blocked = target.run_armor_check(target_limb, "melee")
 	if(blocked >= 100)
 		return
