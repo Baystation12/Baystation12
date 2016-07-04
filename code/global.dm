@@ -61,10 +61,11 @@ var/list/wizardstart     = list()
 var/list/newplayer_start = list()
 
 //Spawnpoints.
-var/list/latejoin         = list()
-var/list/latejoin_gateway = list()
-var/list/latejoin_cryo    = list()
-var/list/latejoin_cyborg  = list()
+var/list/latejoin          = list()
+var/list/latejoin_gateway  = list()
+var/list/latejoin_cryo     = list()
+var/list/latejoin_cyborg   = list()
+var/list/latejoin_merchant = list()
 
 var/list/prisonwarp         = list() // Prisoners go to these
 var/list/xeno_spawn         = list() // Aliens spawn at at these.

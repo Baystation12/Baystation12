@@ -25,6 +25,7 @@ var/list/spawntypes = list()
 /datum/spawnpoint/arrivals
 	display_name = "Arrivals Shuttle"
 	msg = "has arrived on the station"
+	disallow_job = list("Merchant")
 
 /datum/spawnpoint/arrivals/New()
 	..()
@@ -33,6 +34,7 @@ var/list/spawntypes = list()
 /datum/spawnpoint/gateway
 	display_name = "Gateway"
 	msg = "has completed translation from offsite gateway"
+	disallow_job = list("Merchant")
 
 /datum/spawnpoint/gateway/New()
 	..()
@@ -41,7 +43,7 @@ var/list/spawntypes = list()
 /datum/spawnpoint/cryo
 	display_name = "Cryogenic Storage"
 	msg = "has completed cryogenic revival"
-	disallow_job = list("Cyborg")
+	disallow_job = list("Cyborg", "Merchant")
 
 /datum/spawnpoint/cryo/New()
 	..()
@@ -51,7 +53,17 @@ var/list/spawntypes = list()
 	display_name = "Cyborg Storage"
 	msg = "has been activated from storage"
 	restrict_job = list("Cyborg")
+	disallow_job = list("Merchant")
 
 /datum/spawnpoint/cyborg/New()
 	..()
 	turfs = latejoin_cyborg
+
+/datum/spawnpoint/merchant
+	display_name = "Merchant Station"
+	msg = "has arrived on the Merchant Station"
+	restrict_job = list("Merchant")
+
+/datum/spawnpoint/merchant/New()
+	..()
+	turfs = latejoin_merchant

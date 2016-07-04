@@ -1,0 +1,4 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Adds the merchant job and the merchant station spawn point. Use this spawn point when spawning as a merchant otherwise you will not have access to the station."
