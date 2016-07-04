@@ -127,7 +127,7 @@
 	if(T.density)
 		return 0
 	for(var/atom/A in T.contents)
-		if(A.density)
+		if(!A.CanPass(src, T, 0.5))
 			if(isairlock(A))
 				var/obj/machinery/door/D = A
 				if(D.allowed(src))
