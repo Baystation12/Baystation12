@@ -191,6 +191,7 @@ var/list/global/tank_gauge_cache = list()
 			if(do_after(user, 40,src))
 				user << "<span class='notice'>You carefully weld \the [src] emergency pressure relief valve shut.</span><span class='warning'> \The [src] may now rupture under pressure!</span>"
 				src.valve_welded = 1
+				src.leaking = 0
 			else
 				bombers += "[key_name(user)] attempted to weld a [src]. [src.air_contents.temperature-T0C]"
 				message_admins("[key_name_admin(user)] attempted to weld a [src]. [src.air_contents.temperature-T0C]")
@@ -319,6 +320,41 @@ var/list/global/tank_gauge_cache = list()
 	return 1
 
 
+
+
+/obj/item/weapon/tank/proc/fragment(var/number_fragments, var/list/frag_type = list(/obj/item/projectile/bullet/pellet/fragment), var/radius = 7)
+
+	var/turf/simulated/T = get_turf(src)
+	var/list/target_turfs = getcircle(T, radius)
+	var/fragments_per_projectile = round(number_fragments/target_turfs.len)
+
+	for(var/turf/O in target_turfs)
+		sleep(0)
+		var/fragtype = pick(frag_type)
+		var/obj/item/projectile/bullet/pellet/fragment/P = new fragtype(T)
+
+		P.pellets = fragments_per_projectile
+		P.shot_from = src.name
+
+		P.launch(O)
+
+		//Make sure to hit any mobs in the source turf
+		for(var/mob/living/M in T)
+
+			//check if it's being held, if so, they're in a heap of trouble.
+			if(P in M.contents && !M.lying)
+				P.attack_mob(M, 0, 40)
+			//lying on a tank while the tank is on the ground causes you to absorb most of the shrapnel.
+			//you will most likely be dead, but others nearby will be spared the fragments that hit you instead.
+			else if(M.lying && (isturf(src.loc) || P in M.contents) )
+				P.attack_mob(M, 0, 0)
+			else
+				P.attack_mob(M, 0, 85) //otherwise, allow a decent amount of fragments to pass
+
+
+
+
+
 /obj/item/weapon/tank/remove_air(amount)
 	return air_contents.remove(amount)
 
@@ -397,7 +433,7 @@ var/list/global/tank_gauge_cache = list()
 
 	if(pressure > TANK_LEAK_PRESSURE || air_contents.temperature - T0C > failure_temp)
 
-		if(integrity <= 19 && !valve_welded)
+		if((integrity <= 19 || src.leaking) && !valve_welded)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)
 				return
@@ -437,15 +473,12 @@ var/list/global/tank_gauge_cache = list()
 			pressure = air_contents.return_pressure()
 			var/strength = ((pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE)
 			var/mult = max(0.2,1 + log(2.6, (air_contents.total_moles/29)) ) //1 + log base 2 of standard sized full (room temperature) tanks
-			var/fragments = round(rand(12,25)* sqrt(strength * mult)/8)
 
 			var/turf/simulated/T = get_turf(src)
 			T.hotspot_expose(src.air_contents.temperature, 70, 1)
 			if(!T)
 				return
 			T.assume_air(air_contents)
-
-
 
 			explosion(
 				get_turf(loc),
@@ -456,35 +489,9 @@ var/list/global/tank_gauge_cache = list()
 				)
 
 
-			///frag code
+			var/num_fragments = round(rand(12,25)* sqrt(strength * mult)/8)
+			src.fragment(num_fragments, list(/obj/item/projectile/bullet/pellet/fragment,/obj/item/projectile/bullet/pellet/fragment,/obj/item/projectile/bullet/pellet/fragment/strong))
 
-			var/list/target_turfs = getcircle(T, 7)
-			var/fragments_per_projectile = round(fragments/target_turfs.len)
-
-			for(var/turf/O in target_turfs)
-				sleep(0)
-				var/fragtype = pick(/obj/item/projectile/bullet/pellet/fragment,/obj/item/projectile/bullet/pellet/fragment,/obj/item/projectile/bullet/pellet/fragment/strong)
-				var/obj/item/projectile/bullet/pellet/fragment/P = new fragtype(T)
-
-				P.pellets = fragments_per_projectile
-				P.shot_from = src.name
-
-				P.launch(O)
-
-				//Make sure to hit any mobs in the source turf
-				for(var/mob/living/M in T)
-
-					//check if it's being held, if so, they're in a heap of trouble.
-					if(P in M.contents && !M.lying)
-						P.attack_mob(M, 0, 40)
-					//lying on a frag grenade while the grenade is on the ground causes you to absorb most of the shrapnel.
-					//you will most likely be dead, but others nearby will be spared the fragments that hit you instead.
-					else if(M.lying && (isturf(src.loc) || P in M.contents) )
-						P.attack_mob(M, 0, 0)
-					else
-						P.attack_mob(M, 0, 90) //otherwise, allow a decent amount of fragments to pass
-
-			///////////////////////
 
 			if(istype(loc, /obj/item/device/transfer_valve))
 				var/obj/item/device/transfer_valve/TTV = loc
@@ -514,40 +521,11 @@ var/list/global/tank_gauge_cache = list()
 			T.hotspot_expose(air_contents.temperature, 70, 1)
 
 
-			///Non-explosive Frag code
-
 			var/strength = log(2,(pressure-TANK_RUPTURE_PRESSURE)/TANK_FRAGMENT_SCALE)+1
 			var/mult = max(0.1,log(air_contents.total_moles/25)+1)
-			var/fragments = round(rand(2,8)* strength * mult/20)
 
-
-			var/list/target_turfs = getcircle(T, 7)
-			var/fragments_per_projectile = round(fragments/target_turfs.len)
-
-			for(var/turf/O in target_turfs)
-				sleep(0)
-				var/obj/item/projectile/bullet/pellet/fragment/P = new /obj/item/projectile/bullet/pellet/fragment(T)
-
-				P.pellets = fragments_per_projectile
-				P.shot_from = src.name
-
-				P.launch(O)
-
-				//Make sure to hit any mobs in the source turf
-				for(var/mob/living/M in T)
-
-					//check if it's being held, if so, they're in a heap of trouble.
-					if(P in M.contents && !M.lying)
-						P.attack_mob(M, 0, 40)
-					//lying on a frag grenade while the grenade is on the ground causes you to absorb most of the shrapnel.
-					//you will most likely be dead, but others nearby will be spared the fragments that hit you instead.
-					else if(M.lying && (isturf(src.loc) || P in M.contents) )
-						P.attack_mob(M, 0, 0)
-					else
-						P.attack_mob(M, 0, 90) //otherwise, allow a decent amount of fragments to pass
-
-
-			//////////////////////////////////////////
+			var/num_fragments = round(rand(2,8)* strength * mult/20)
+			src.fragment(num_fragments)
 
 
 			if(istype(loc, /obj/item/device/transfer_valve))
@@ -555,9 +533,7 @@ var/list/global/tank_gauge_cache = list()
 				TTV.remove_tank(src)
 
 
-
 			qdel(src)
-
 
 		else
 			integrity-= 4
