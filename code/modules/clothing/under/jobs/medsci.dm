@@ -116,8 +116,9 @@
 /obj/item/clothing/under/rank/medical/paramedic
 	name = "short sleeve medical jumpsuit"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one has a cross on the chest denoting that the wearer is trained medical personnel."
-	icon_state = "medical_short"
+	icon_state = "medical"
 	item_state = "medical_short"
+	worn_state = "medical_short"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 /obj/item/clothing/under/rank/medical/blue

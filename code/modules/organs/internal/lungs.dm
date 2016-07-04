@@ -16,6 +16,10 @@
 	var/SA_para_min = 1
 	var/SA_sleep_min = 5
 
+/obj/item/organ/lungs/robotize()
+	. = ..()
+	icon_state = "lungs-prosthetic"
+
 /obj/item/organ/lungs/set_dna(var/datum/dna/new_dna)
 	..()
 	min_breath_pressure = species.breath_pressure

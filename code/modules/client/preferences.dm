@@ -60,18 +60,11 @@ datum/preferences
 		//Mob preview
 	var/icon/preview_icon = null
 
-		//Jobs, uses bitflags
-	var/job_civilian_high = 0
-	var/job_civilian_med = 0
-	var/job_civilian_low = 0
 
-	var/job_medsci_high = 0
-	var/job_medsci_med = 0
-	var/job_medsci_low = 0
-
-	var/job_engsec_high = 0
-	var/job_engsec_med = 0
-	var/job_engsec_low = 0
+	//Since there can only be 1 high job.
+	var/job_high = null
+	var/list/job_medium = list() //List of all things selected for medium weight
+	var/list/job_low    = list() //List of all the things selected for low weight
 
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 0
@@ -109,6 +102,7 @@ datum/preferences
 	var/savefile/loaded_preferences
 	var/savefile/loaded_character
 	var/datum/category_collection/player_setup_collection/player_setup
+	var/has_cortical_stack = 1
 	var/datum/browser/panel
 
 /datum/preferences/New(client/C)
@@ -215,9 +209,9 @@ datum/preferences
 	popup.open()
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
-	if(!user)	return
 
-	if(!istype(user, /mob/new_player))	return
+	if(!user)	return
+	if(isliving(user)) return
 
 	if(href_list["preference"] == "open_whitelist_forum")
 		if(config.forumurl)

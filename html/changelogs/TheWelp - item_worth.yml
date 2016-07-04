@@ -1,0 +1,4 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Adds the item_worth var and get_worth proc to obj subtypes and mob/living"

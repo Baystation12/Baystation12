@@ -126,6 +126,15 @@
 	area_station = /area/shuttle/alien/mine
 	flags = SHUTTLE_FLAGS_NONE
 
+/datum/shuttle/ferry/merchant
+	name = "Merchant"
+	warmup_time = 10
+	docking_controller_tag = "merchant_ship_dock"
+	dock_target_station = "merchant_station_dock"
+	dock_target_offsite = "merchant_shuttle_station_dock"
+	area_station = /area/shuttle/merchant/home
+	area_offsite = /area/shuttle/merchant/away
+
 /datum/shuttle/multi_shuttle/mercenary
 	name = "Mercenary"
 	warmup_time = 0

@@ -125,6 +125,7 @@
 			var/mob/living/carbon/human/dummy/mannequin = new()
 			client.prefs.dress_preview_mob(mannequin)
 			observer.appearance = mannequin
+			observer.appearance_flags |= KEEP_TOGETHER // replace KEEP_TOGETHER flag so the ghost looks normal-ish
 			observer.alpha = 127
 			observer.layer = initial(observer.layer)
 			observer.invisibility = initial(observer.invisibility)
@@ -342,16 +343,16 @@
 		character.buckled.set_dir(character.dir)
 
 	ticker.mode.handle_latejoin(character)
+	if(job_master.ShouldCreateRecords(rank))
+		if(character.mind.assigned_role != "Cyborg")
+			data_core.manifest_inject(character)
+			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 
-	if(character.mind.assigned_role != "Cyborg")
-		data_core.manifest_inject(character)
-		ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
+			//Grab some data from the character prefs for use in random news procs.
 
-		//Grab some data from the character prefs for use in random news procs.
-
-		AnnounceArrival(character, rank, join_message)
-	else
-		AnnounceCyborg(character, rank, join_message)
+			AnnounceArrival(character, rank, join_message)
+		else
+			AnnounceCyborg(character, rank, join_message)
 
 	qdel(src)
 
@@ -444,17 +445,16 @@
 		new_character.dna.SetSEState(GLASSESBLOCK,1,0)
 		new_character.disabilities |= NEARSIGHTED
 
-	// And uncomment this, too.
-	//new_character.dna.UpdateSE()
+	// Give them their cortical stack if we're using them.
+	if(config && config.use_cortical_stacks && client && client.prefs.has_cortical_stack /*&& new_character.species.has_organ["brain"]*/)
+		new_character.create_stack()
 
 	// Do the initial caching of the player's body icons.
 	new_character.force_update_limbs()
 	new_character.update_eyes()
 	new_character.regenerate_icons()
 	new_character.key = key		//Manually transfer the key to log them in
-
 	return new_character
-
 /mob/new_player/proc/ViewManifest()
 	var/dat = "<div align='center'>"
 	dat += data_core.get_manifest(OOC = 1)

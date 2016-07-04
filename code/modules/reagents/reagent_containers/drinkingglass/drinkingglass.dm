@@ -19,7 +19,7 @@
 
 	var/rim_pos // Position of the rim for fruit slices. list(y, x_left, x_right)
 
-	center_of_mass = list("x"=16, "y"=10)
+	center_of_mass ="x=16;y=9"
 
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = list(5,10,15,30)

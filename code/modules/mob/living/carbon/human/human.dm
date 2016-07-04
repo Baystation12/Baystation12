@@ -27,7 +27,7 @@
 		if(mind)
 			mind.name = real_name
 
-	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
+	hud_list[HEALTH_HUD]      = image('icons/mob/hud_med.dmi', src, "100")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealthy")
 	hud_list[LIFE_HUD]	      = image('icons/mob/hud.dmi', src, "hudhealthy")
 	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudunknown")
@@ -1025,7 +1025,7 @@
 /mob/living/carbon/human/proc/handle_embedded_objects()
 
 	for(var/obj/item/organ/external/organ in src.organs)
-		if(organ.status & ORGAN_SPLINTED) //Splints prevent movement.
+		if(organ.splinted) //Splints prevent movement.
 			continue
 		for(var/obj/item/O in organ.implants)
 			if(!istype(O,/obj/item/weapon/implant) && prob(5)) //Moving with things stuck in you could be bad.
@@ -1151,6 +1151,9 @@
 		if(hud_used)
 			qdel(hud_used)
 		hud_used = new /datum/hud(src)
+
+	if(config && config.use_cortical_stacks && client && client.prefs.has_cortical_stack)
+		create_stack()
 
 	if(species)
 		return 1

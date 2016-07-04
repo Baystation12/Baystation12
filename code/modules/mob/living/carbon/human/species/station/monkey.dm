@@ -14,6 +14,7 @@
 	mob_size = MOB_SMALL
 	has_fine_manipulation = 0
 	show_ssd = null
+	health_hud_intensity = 1
 
 	eyes = "blank_eyes"
 
@@ -54,6 +55,7 @@
 /datum/species/monkey/tajaran
 	name = "Farwa"
 	name_plural = "Farwa"
+	health_hud_intensity = 1.2
 
 	icobase = 'icons/mob/human_races/monkeys/r_farwa.dmi'
 	deform = 'icons/mob/human_races/monkeys/r_farwa.dmi'

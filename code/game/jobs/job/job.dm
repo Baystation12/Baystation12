@@ -5,7 +5,6 @@
 	//Job access. The use of minimal_access or access is determined by a config setting: config.jobs_have_minimal_access
 	var/list/minimal_access = list()      // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
 	var/list/access = list()              // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
-	var/flag = 0 	                      // Bitflags for the job
 	var/department_flag = 0
 	var/faction = "None"	              // Players will be allowed to spawn in as jobs that are set to "Station"
 	var/total_positions = 0               // How many players can be this job
@@ -21,6 +20,7 @@
 	var/head_position = 0                 // Is this position Command?
 	var/minimum_character_age = 0
 	var/ideal_character_age = 30
+	var/create_record = 1                 // Do we announce/make records for people who spawn on this job?
 
 	var/account_allowed = 1				  // Does this job type come with a station account?
 	var/economic_modifier = 2			  // With how much does this job modify the initial account amount?
