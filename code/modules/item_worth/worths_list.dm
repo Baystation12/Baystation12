@@ -464,7 +464,6 @@ var/list/worths = list(
 					/obj/item/device/violin = 250,
 					/obj/item/device/pda = 60,
 					/obj/item/device/radio = 150,
-					/obj/item/device/onetankbomb = 200,
 					/obj/item/device/assembly/igniter = 15,
 					/obj/item/device/assembly/infra = 10,
 					/obj/item/device/assembly/mousetrap = 5,
