@@ -122,7 +122,7 @@ var/list/outfits_decls_by_type_
 	for(var/path in backpack_contents)
 		var/number = backpack_contents[path]
 		for(var/i=0,i<number,i++)
-			H.equip_to_slot_or_del(new path(H),slot_in_backpack)
+			H.equip_to_slot_or_del(new path(H), slot_in_backpack)
 
 	post_equip(H)
 	H.regenerate_icons()

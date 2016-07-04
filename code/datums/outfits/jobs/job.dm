@@ -20,9 +20,10 @@
 /decl/hierarchy/outfit/job/pre_equip(mob/living/carbon/human/H)
 	..()
 	switch(H.backbag)
+		if(2) back = backpack
 		if(3) back = satchel_one
 		if(4) back = satchel_two
-		else back = backpack // You don't want a bag? You get one anyway, we need something to stuff things into
+		else back = null
 	backpack_contents[survival_box] = 1
 
 /decl/hierarchy/outfit/job/equip_id(mob/living/carbon/human/H)

@@ -29,6 +29,9 @@
 
 	var/obj/item/weapon/card/id/front_id = null
 
+/obj/item/weapon/storage/wallet/leather
+	color = COLOR_SEDONA
+
 /obj/item/weapon/storage/wallet/Destroy()
 	if(front_id)
 		front_id.dropInto(loc)
@@ -94,11 +97,10 @@
 
 /obj/item/weapon/storage/wallet/poly/New()
 	..()
-	verbs |= /obj/item/weapon/storage/wallet/poly/proc/change_color
 	color = get_random_colour()
 	update_icon()
 
-/obj/item/weapon/storage/wallet/poly/proc/change_color()
+/obj/item/weapon/storage/wallet/poly/verb/change_color()
 	set name = "Change Wallet Color"
 	set category = "Object"
 	set desc = "Change the color of the wallet."

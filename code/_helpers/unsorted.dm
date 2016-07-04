@@ -1134,7 +1134,7 @@ var/list/WALLITEMS = list(
 		arglist = list2params(arglist)
 	return "<a href='?src=\ref[D];[arglist]'>[content]</a>"
 
-/proc/get_random_colour(var/simple, var/lower, var/upper)
+/proc/get_random_colour(var/simple = FALSE, var/lower = 0, var/upper = 255)
 	var/colour
 	if(simple)
 		colour = pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))
@@ -1142,7 +1142,7 @@ var/list/WALLITEMS = list(
 		for(var/i=1;i<=3;i++)
 			var/temp_col = "[num2hex(rand(lower,upper))]"
 			if(length(temp_col )<2)
-				temp_col  = "0[temp_col]"
+				temp_col = "0[temp_col]"
 			colour += temp_col
 	return "#[colour]"
 
