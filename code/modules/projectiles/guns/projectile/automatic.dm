@@ -20,22 +20,29 @@
 		)
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
-	name = "\improper Uzi"
-	desc = "The UZI is a lightweight, fast firing gun. For when you want someone dead. Uses .45 rounds."
+	name = ".45 machine pistol"
+	desc = "An uncommon machine pistol, sometimes refered to as an 'uzi' by the backwater spacers it is often associated with, though its origins have been lost to time. Uses .45 rounds."
 	icon_state = "mini-uzi"
+	item_state = "wt550"
 	w_class = 3
-	load_method = SPEEDLOADER //yup. until someone sprites a magazine for it.
-	max_shells = 15
+	load_method = MAGAZINE
 	caliber = ".45"
-	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 4)
 	ammo_type = /obj/item/ammo_casing/c45
+	allowed_magazines = /obj/item/ammo_magazine/c45uzi //more damage compared to the wt550, smaller mag size
 
-	//PDW
 	firemodes = list(
-		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, requires_two_hands=1, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    requires_two_hands=2, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    requires_two_hands=3, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
+		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, requires_two_hands=0, burst_accuracy=null, dispersion=null),
+		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    requires_two_hands=1, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
+		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    requires_two_hands=2, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
 		)
+
+/obj/item/weapon/gun/projectile/automatic/mini_uzi/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "mini-uzi"
+	else
+		icon_state = "mini-uzi-empty"
 
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "submachine gun"
@@ -96,7 +103,7 @@
 	icon_state = (ammo_magazine)? "arifle" : "arifle-empty"
 
 /obj/item/weapon/gun/projectile/automatic/wt550
-	name = "machine pistol"
+	name = "9mm machine pistol"
 	desc = "The W-T 550 Saber is a cheap self-defense weapon, mass-produced by Ward-Takahashi for paramilitary and private use. Uses 9mm rounds."
 	icon_state = "wt550"
 	item_state = "wt550"
