@@ -6,7 +6,7 @@
 	filling_states = list(20, 40, 60, 80, 100)
 	volume = 30
 	possible_transfer_amounts = list(5,10,15,30)
-	rim_pos = "y=23;x_left=13;x_right=20" // y, x0, x1
+	rim_pos = "y=23;x_left=13;x_right=20"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/rocks
 	name = "rocks glass"

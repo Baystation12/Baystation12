@@ -52,7 +52,7 @@
 /obj/proc/post_buckle_mob(mob/living/M)
 	if(buckle_pixel_shift)
 		if(M == buckled_mob)
-			var/list/pixel_shift = cached_xy_decode(buckle_pixel_shift)
+			var/list/pixel_shift = cached_key_number_decode(buckle_pixel_shift)
 			animate(M, pixel_x = M.default_pixel_x + pixel_shift["x"], pixel_y = M.default_pixel_y + pixel_shift["y"], 4, 1, LINEAR_EASING)
 		else
 			animate(M, pixel_x = M.default_pixel_x, pixel_y = M.default_pixel_y, 4, 1, LINEAR_EASING)

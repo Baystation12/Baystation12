@@ -211,16 +211,16 @@ var/global/list/string_slot_flags = list(
 
 //*** params cache
 
-var/global/list/xy_cache = list()
+var/global/list/paramslist_cache = list()
 
-/proc/cached_xy_decode(var/xy_data)
-	. = xy_cache[xy_data]
+/proc/cached_key_number_decode(var/key_number_data)
+	. = paramslist_cache[key_number_data]
 	if(!.)
-		. = xy_decode(xy_data)
-		xy_cache[xy_data] = .
+		. = key_number_decode(key_number_data)
+		paramslist_cache[key_number_data] = .
 
-/proc/xy_decode(var/xy_data)
-	var/list/L = params2list(xy_data)
+/proc/key_number_decode(var/key_number_data)
+	var/list/L = params2list(key_number_data)
 	for(var/key in L)
 		L[key] = text2num(L[key])
 	return L
