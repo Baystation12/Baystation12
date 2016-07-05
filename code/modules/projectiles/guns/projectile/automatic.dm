@@ -27,7 +27,8 @@
 	w_class = 3
 	load_method = MAGAZINE
 	caliber = ".45"
-	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 4)
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 3)
+	slot_flags = SLOT_BELT
 	ammo_type = /obj/item/ammo_casing/c45
 	allowed_magazines = /obj/item/ammo_magazine/c45uzi //more damage compared to the wt550, smaller mag size
 
@@ -84,7 +85,7 @@
 	w_class = 5
 	force = 10
 	caliber = "a762"
-	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 4)
+	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 5)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c762
