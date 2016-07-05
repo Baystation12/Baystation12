@@ -45,7 +45,7 @@ var/list/worths = list(
 					/obj/item/weapon/gun/projectile/automatic/sts35 = 3800,
 					/obj/item/weapon/gun/projectile/automatic/z8 = 3100,
 					/obj/item/weapon/gun/projectile/automatic/l6_saw = 13400,
-					/obj/item/weapon/gun/projectile/automatic/mini_uzi/usi = 2000
+					/obj/item/weapon/gun/projectile/automatic/mini_uzi/usi = 2000,
 					/obj/item/weapon/gun/projectile/automatic = 3000,
 //PROJECTILE,
 					/obj/item/weapon/gun/projectile/colt = 1700,
