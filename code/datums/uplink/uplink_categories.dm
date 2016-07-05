@@ -47,6 +47,3 @@
 
 /datum/uplink_category/telecrystals
 	name = "Telecrystals"
-
-/datum/uplink_category/jamming
-	name = "Jamming"
