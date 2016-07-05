@@ -52,6 +52,15 @@ datum/controller/game_controller/proc/setup_objects()
 #ifndef UNIT_TEST
 	var/initialized_objects = 0
 #endif
+
+	// Do these first since character setup will rely on them
+
+	// Set up antagonists.
+	populate_antag_type_list()
+
+	//Set up spawn points.
+	populate_spawn_points()
+
 	admin_notice("<span class='danger'>Initializing objects</span>", R_DEBUG)
 	for(var/atom/movable/object in world)
 		if(!deleted(object))
@@ -77,12 +86,6 @@ datum/controller/game_controller/proc/setup_objects()
 			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
 			T.broadcast_status()
 		CHECK_SLEEP_MASTER
-
-	// Set up antagonists.
-	populate_antag_type_list()
-
-	//Set up spawn points.
-	populate_spawn_points()
 
 	admin_notice("<span class='danger'>Initializations complete.</span>", R_DEBUG)
 
