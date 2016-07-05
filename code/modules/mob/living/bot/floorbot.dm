@@ -137,11 +137,13 @@
 						target = T
 				if(improvefloors && istype(T, /turf/simulated/floor))
 					var/turf/simulated/floor/F = T
-					if(!F.flooring && (get_turf(T) == loc || prob(40)))
+					if(!F.flooring && turf_is_targetable(T) && (get_turf(T) == loc || prob(40)))
 						target = T
 
 	if(emagged) // Time to griff
 		for(var/turf/simulated/floor/D in view(src))
+			if(!turf_is_targetable(get_turf(D)))
+				continue
 			if(D.loc.name == "Space")
 				continue
 			if(D in ignorelist)

@@ -47,7 +47,8 @@
 //		spawn(0)
 		path = AStar(loc, target.loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 30, id = botcard)
 		if(!path)
-			custom_emote(2, "[src] can't reach the target and is giving up.")
+			custom_emote(2, "can't reach the target and is giving up.")
+			log_debug("[src] can't reach [target.name] ([target.x], [target.y])")
 			target = null
 			path = list()
 		return
@@ -94,6 +95,8 @@
 		for(var/i=0, i <= maximum_search_range, i++)
 			for(var/obj/effect/decal/cleanable/D in view(i, src))
 				if(D in ignorelist)
+					continue
+				if(!turf_is_targetable(get_turf(D)))
 					continue
 				for(var/T in target_types)
 					if(istype(D, T))
