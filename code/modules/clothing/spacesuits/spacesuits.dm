@@ -19,7 +19,7 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
-	place_centered = 1
+	center_of_mass = null
 	randpixel = 0
 	species_restricted = list("exclude","Diona", "Xenomorph")
 	flash_protection = FLASH_PROTECTION_MAJOR
@@ -79,7 +79,7 @@
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
-	place_centered = 1
+	center_of_mass = null
 	randpixel = 0
 	species_restricted = list("exclude","Diona", "Xenomorph")
 

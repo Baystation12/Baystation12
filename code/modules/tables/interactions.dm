@@ -152,10 +152,9 @@ auto_align() will then place the sprite so the defined center_of_mass is at the 
 closest to where the cursor has clicked on.
 Note: This proc can be overwritten to allow for different types of auto-alignment.
 */
-/obj/item/var/center_of_mass = "x=16;y=16"
-/obj/item/var/place_centered = 0
+/obj/item/var/center_of_mass = "x=16;y=16" //can be null for no exact placement behaviour
 /obj/structure/table/proc/auto_align(obj/item/W, click_params)
-	if (W.place_centered) // Clothing, material stacks, generally items with large sprites where exact placement would be unhandy.
+	if (!W.center_of_mass) // Clothing, material stacks, generally items with large sprites where exact placement would be unhandy.
 		W.pixel_x = rand(-W.randpixel, W.randpixel)
 		W.pixel_y = rand(-W.randpixel, W.randpixel)
 		W.pixel_z = 0
@@ -182,11 +181,12 @@ Note: This proc can be overwritten to allow for different types of auto-alignmen
 	W.pixel_z = 0
 
 /obj/structure/table/rack/auto_align(obj/item/W, click_params)
-	if(W && W.place_centered)
+	if(W && !W.center_of_mass)
 		..(W)
+
 	var/i = -1
 	for (var/obj/item/I in get_turf(src))
-		if (I.anchored || I.place_centered)
+		if (I.anchored || !I.center_of_mass)
 			continue
 		i++
 		I.pixel_x = max(3-i*3, -3) + 1 // There's a sprite layering bug for 0/0 pixelshift, so we avoid it.
