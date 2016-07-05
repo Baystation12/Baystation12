@@ -54,7 +54,7 @@
 
 /obj/item/device/uplink_service
 	name = "tiny device"
-	desc = "Press button to active. Can be done once and only once."
+	desc = "Press button to activate. Can be done once and only once."
 	w_class = 1
 	icon_state = "sflash"
 	var/state = AWAITING_ACTIVATION
