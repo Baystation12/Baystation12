@@ -1,6 +1,7 @@
 var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
 
 /datum/preferences
+	var/has_cortical_stack = TRUE
 	var/equip_preview_mob = EQUIP_PREVIEW_ALL
 
 /datum/category_item/player_setup_item/general/body
@@ -73,6 +74,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.g_eyes			= sanitize_integer(pref.g_eyes, 0, 255, initial(pref.g_eyes))
 	pref.b_eyes			= sanitize_integer(pref.b_eyes, 0, 255, initial(pref.b_eyes))
 	pref.b_type			= sanitize_text(pref.b_type, initial(pref.b_type))
+	pref.has_cortical_stack = sanitize_bool(pref.has_cortical_stack, initial(pref.has_cortical_stack))
 
 	pref.disabilities	= sanitize_integer(pref.disabilities, 0, 65535, initial(pref.disabilities))
 	if(!pref.organ_data) pref.organ_data = list()
