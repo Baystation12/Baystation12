@@ -13,7 +13,7 @@
 	var/base_icon = "square" // Base icon name
 	volume = 30
 
-	var/list/filling_states // List of percentages full that have icons
+	var/filling_states // List of percentages full that have icons
 
 	var/list/extras = list() // List of extras. Two extras maximum
 
@@ -22,7 +22,7 @@
 	center_of_mass ="x=16;y=9"
 
 	amount_per_transfer_from_this = 5
-	possible_transfer_amounts = list(5,10,15,30)
+	possible_transfer_amounts = "5;10;15;30"
 	flags = OPENCONTAINER
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/examine(mob/M as mob)
@@ -91,7 +91,7 @@
 
 		var/amnt = 100
 		var/percent = round((reagents.total_volume / volume) * 100)
-		for(var/k in filling_states)
+		for(var/k in cached_number_list_decode(filling_states))
 			if(percent <= k)
 				amnt = k
 				break
