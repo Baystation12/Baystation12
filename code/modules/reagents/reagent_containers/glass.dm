@@ -10,7 +10,7 @@
 	icon_state = "null"
 	item_state = "null"
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = list(5,10,15,25,30,60)
+	possible_transfer_amounts = "5;10;15;25;30;60"
 	volume = 60
 	w_class = 2
 	flags = OPENCONTAINER
@@ -170,7 +170,7 @@
 	matter = list("glass" = 5000)
 	volume = 120
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = list(5,10,15,25,30,60,120)
+	possible_transfer_amounts = "5;10;15;25;30;60;120"
 	flags = OPENCONTAINER
 
 /obj/item/weapon/reagent_containers/glass/beaker/noreact
@@ -191,7 +191,7 @@
 	matter = list("glass" = 5000)
 	volume = 300
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = list(5,10,15,25,30,60,120,300)
+	possible_transfer_amounts = "5;10;15;25;30;60;120;300"
 	flags = OPENCONTAINER
 
 /obj/item/weapon/reagent_containers/glass/beaker/vial
@@ -203,7 +203,7 @@
 	volume = 30
 	w_class = 1 //half the volume of a bottle, half the size
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = list(5,10,15,25)
+	possible_transfer_amounts = "5;10;15;25"
 	flags = OPENCONTAINER
 
 /obj/item/weapon/reagent_containers/glass/beaker/cryoxadone
@@ -228,7 +228,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 200)
 	w_class = 3.0
 	amount_per_transfer_from_this = 20
-	possible_transfer_amounts = list(10,20,30,60,120)
+	possible_transfer_amounts = "10;20;30;60;120"
 	volume = 120
 	flags = OPENCONTAINER
 	unacidable = 0
@@ -287,6 +287,6 @@
 	w_class = 5
 
 	amount_per_transfer_from_this = 20
-	possible_transfer_amounts = list(10,20,30,60)
+	possible_transfer_amounts = "10;20;30;60"
 	volume = 120
 */

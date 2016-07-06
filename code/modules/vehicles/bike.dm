@@ -6,7 +6,7 @@
 	dir = SOUTH
 
 	load_item_visible = 1
-	mob_offset_y = 5
+	buckle_pixel_shift = "x=0;y=5"
 	health = 100
 	maxhealth = 100
 
@@ -133,7 +133,7 @@
 		user << "You unbuckle yourself from \the [src]"
 
 /obj/vehicle/bike/relaymove(mob/user, direction)
-	if(user != load || !on)
+	if(user != load || !on || user.incapacitated())
 		return
 	return Move(get_step(src, direction))
 

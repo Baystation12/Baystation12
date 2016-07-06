@@ -7,7 +7,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "dropper0"
 	amount_per_transfer_from_this = 5
-	possible_transfer_amounts = list(1,2,3,4,5)
+	possible_transfer_amounts = "1;2;3;4;5"
 	w_class = 1
 	slot_flags = SLOT_EARS
 	volume = 5
@@ -107,7 +107,7 @@
 	name = "Industrial Dropper"
 	desc = "A larger dropper. Transfers 10 units."
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = list(1,2,3,4,5,6,7,8,9,10)
+	possible_transfer_amounts = "1;2;3;4;5;6;7;8;9;10"
 	volume = 10
 
 ////////////////////////////////////////////////////////////////////////////////

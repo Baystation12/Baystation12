@@ -764,14 +764,14 @@ proc/admin_notice(var/message, var/rights)
 	if(!ticker)
 		alert("Unable to start the game as it is not set up.")
 		return
-	if(ticker.current_state == GAME_STATE_PREGAME)
-		ticker.current_state = GAME_STATE_SETTING_UP
+	if(ticker.current_state == GAME_STATE_PREGAME && !master_controller.init_immediately)
 		log_admin("[usr.key] has started the game.")
 		message_admins("<font color='blue'>[usr.key] has started the game.</font>")
 		feedback_add_details("admin_verb","SN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		master_controller.init_immediately = TRUE
 		return 1
 	else
-		usr << "<font color='red'>Error: Start Now: Game has already started.</font>"
+		usr << "<span class='warning'>Error: Start Now: Game has already started.</span>"
 		return 0
 
 /datum/admins/proc/toggleenter()

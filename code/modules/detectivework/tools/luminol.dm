@@ -5,7 +5,7 @@
 	icon_state = "luminol"
 	item_state = "cleaner"
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = list(5,10)
+	possible_transfer_amounts = "5;10"
 	volume = 250
 
 /obj/item/weapon/reagent_containers/spray/luminol/New()

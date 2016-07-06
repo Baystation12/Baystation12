@@ -28,6 +28,18 @@
 	display_name = "armband, science"
 	path = /obj/item/clothing/accessory/armband/science
 
+/datum/gear/accessory/wallet
+	display_name = "wallet"
+	path = /obj/item/weapon/storage/wallet
+/datum/gear/accessory/wallet/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice())
+
+/datum/gear/accessory/wallet_poly
+	display_name = "wallet, polychromic"
+	path = /obj/item/weapon/storage/wallet/poly
+	cost = 2
+
 /datum/gear/accessory/holster
 	display_name = "holster, armpit"
 	path = /obj/item/clothing/accessory/holster/armpit

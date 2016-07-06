@@ -1,4 +1,5 @@
 /decl/hierarchy/outfit/nanotrasen
+	hierarchy_type = /decl/hierarchy/outfit/nanotrasen
 	uniform = /obj/item/clothing/under/rank/centcom
 	shoes = /obj/item/clothing/shoes/laceup
 	gloves = /obj/item/clothing/gloves/white
@@ -9,8 +10,6 @@
 	id_type = /obj/item/weapon/card/id/centcom/station
 	pda_slot = slot_r_store
 	pda_type = /obj/item/device/pda/heads
-
-	flags = OUTFIT_HIDE_IF_CATEGORY
 
 /decl/hierarchy/outfit/nanotrasen/representative
 	name = "Nanotrasen representative"
