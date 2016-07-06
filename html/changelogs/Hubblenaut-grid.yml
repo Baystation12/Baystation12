@@ -1,9 +1,0 @@
-author: Hubblenaut
-delete-after: True
-changes: 
-  - rscadd: "Racks will automatically align their contents."
-  - tweak: "Tables use an invisible 8x8 grid for item placement."
-  - tweak: "Items spawning or placed in closets will not be pixelshifted."
-  - tweak: "Certain items will now always be placed centered (This is mostly reserved for items with sprites too big to be handy for grid placement)."
-  - tweak: "Flips rack icon to be consistent with other sprites."
-  - bugfix: "Sets center_of_mass for tools and chemistry reagent containers."
