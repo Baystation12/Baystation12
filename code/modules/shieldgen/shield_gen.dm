@@ -12,22 +12,22 @@
 	icon_state = "generator0"
 	var/active = 0
 	var/field_radius = 3
-	var/max_field_radius = 100
+	var/max_field_radius = 255
 	var/list/field
 	density = 1
 	var/locked = 0
 	var/average_field_strength = 0
 	var/strengthen_rate = 0.2
 	var/max_strengthen_rate = 0.5	//the maximum rate that the generator can increase the average field strength
-	var/dissipation_rate = 0.030	//the percentage of the shield strength that needs to be replaced each second
-	var/min_dissipation = 0.01		//will dissipate by at least this rate in renwicks per field tile (otherwise field would never dissipate completely as dissipation is a percentage)
+	var/dissipation_rate = 0.001	//the percentage of the shield strength that needs to be replaced each second
+	var/min_dissipation = 0.0001	//will dissipate by at least this rate in renwicks per field tile (otherwise field would never dissipate completely as dissipation is a percentage)
 	var/powered = 0
 	var/check_powered = 1
 	var/obj/machinery/shield_capacitor/owned_capacitor
 	var/target_field_strength = 10
 	var/max_field_strength = 10
 	var/time_since_fail = 100
-	var/energy_conversion_rate = 0.0002	//how many renwicks per watt?
+	var/energy_conversion_rate = 0.00002	//how many renwicks per watt?
 	use_power = 0	//doesn't use APC power
 
 /obj/machinery/shield_gen/New()
@@ -44,7 +44,7 @@
 		field.Remove(D)
 		qdel(D)
 	..()
-	
+
 /obj/machinery/shield_gen/emag_act(var/remaining_charges, var/mob/user)
 	if(prob(75))
 		src.locked = !src.locked
@@ -117,11 +117,11 @@
 		<a href='?src=\ref[src];change_radius=5'>++</a> \
 		<a href='?src=\ref[src];change_radius=50'>+++</a><br>"
 		t += "Overall Field Strength: [round(average_field_strength, 0.01)] Renwick ([target_field_strength ? round(100 * average_field_strength / target_field_strength, 0.1) : "NA"]%)<br>"
-		t += "Upkeep Power: [round(field.len * max(average_field_strength * dissipation_rate, min_dissipation) / energy_conversion_rate)] W<br>"
+		t += "Upkeep Power: [round(field.len * max(average_field_strength * dissipation_rate, min_dissipation) / energy_conversion_rate / 1000)] kW<br>"
 		t += "Charge Rate: <a href='?src=\ref[src];strengthen_rate=-0.1'>--</a> \
 		[strengthen_rate] Renwick/s \
 		<a href='?src=\ref[src];strengthen_rate=0.1'>++</a><br>"
-		t += "Shield Generation Power: [round(field.len * min(strengthen_rate, target_field_strength - average_field_strength) / energy_conversion_rate)] W<br>"
+		t += "Shield Generation Power: [round(field.len * min(strengthen_rate, target_field_strength - average_field_strength) / energy_conversion_rate / 1000)] kW<br>"
 		t += "Maximum Field Strength: \
 		<a href='?src=\ref[src];target_field_strength=-10'>\[min\]</a> \
 		<a href='?src=\ref[src];target_field_strength=-5'>--</a> \

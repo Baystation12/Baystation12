@@ -1,0 +1,8 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - tweak: "Shield generator configuration has been tweaked. Shield generators upkeep power is reduced considerably (stationwide shield is approx. 1.1MW at full strength). Shields still use a lot of power when regenerating."
+  - tweak: "Shield capacitors now act as actual capacitors. Their power storage is 2 GJ, and maximal input 4MW, as opposed to 8MJ/400kW it was now."
+  - tweak: "Shield generator+capacitor UI now displays in kilowatts and megawatts instead of watts where applicable."
