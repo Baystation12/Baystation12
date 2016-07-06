@@ -205,7 +205,7 @@
 			new/obj/item/weapon/reagent_containers/glass/fertilizer/rh(loc)
 			new/obj/item/weapon/reagent_containers/glass/fertilizer/rh(loc)
 		if("wallet")
-			new/obj/item/weapon/storage/wallet(loc)
+			new/obj/item/weapon/storage/wallet/leather(loc)
 		if("gloves")
 			new/obj/item/clothing/gloves/botanic_leather(loc)
 		if("tbelt")

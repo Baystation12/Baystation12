@@ -1,0 +1,1 @@
+#undef OUTFIT_JOB_NAME
