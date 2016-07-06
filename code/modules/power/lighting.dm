@@ -8,7 +8,9 @@
 #define LIGHT_EMPTY 1
 #define LIGHT_BROKEN 2
 #define LIGHT_BURNED 3
+
 #define LIGHT_BULB_TEMPERATURE 400 //K - used value for a 60W bulb
+#define LIGHTING_POWER_FACTOR 5		//5W per luminosity * range
 
 var/global/list/light_type_cache = list()
 /proc/get_light_type_instance(var/light_type)
@@ -242,7 +244,7 @@ var/global/list/light_type_cache = list()
 		use_power = 0
 		set_light(0)
 
-	active_power_usage = ((light_range * light_power) * 5)
+	active_power_usage = ((light_range * light_power) * LIGHTING_POWER_FACTOR)
 
 /obj/machinery/light/proc/switch_check()
 	if(status != LIGHT_OK)
@@ -527,14 +529,6 @@ var/global/list/light_type_cache = list()
 
 // timed process
 // use power
-
-#define LIGHTING_POWER_FACTOR 20		//20W per unit luminosity
-
-
-/obj/machinery/light/process()
-	if(on)
-		use_power(light_range * LIGHTING_POWER_FACTOR, LIGHT)
-
 
 // called when area power state changes
 /obj/machinery/light/power_change()
