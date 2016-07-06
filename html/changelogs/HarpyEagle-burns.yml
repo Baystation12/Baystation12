@@ -1,0 +1,6 @@
+author: HarpyEagle
+
+delete-after: True
+
+changes: 
+  - rscadd: "Severe enough burn damage now causes one-time blood loss due to blistering and body fluid cook-off."
