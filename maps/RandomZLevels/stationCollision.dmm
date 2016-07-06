@@ -300,9 +300,6 @@
 "fN" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/grille,/turf/simulated/floor/plating,/area/awaymission/midblock)
 "fO" = (/turf/simulated/shuttle/wall{tag = "icon-swall_s6"; icon_state = "swall_s"; dir = 14; dir = 2},/area/awaymission/arrivalblock)
 "fP" = (/turf/simulated/shuttle/wall{tag = "icon-swall14"; icon_state = "swall_t"; dir = 1; dir = 2},/area/awaymission/arrivalblock)
-"fQ" = (/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/structure/grille,/turf/simulated/floor/plating,/area/awaymission/arrivalblock)
-"fR" = (/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/structure/grille,/turf/simulated/floor/plating,/area/awaymission/arrivalblock)
-"fS" = (/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/grille,/turf/simulated/floor/plating,/area/awaymission/arrivalblock)
 "fT" = (/turf/space,/turf/simulated/shuttle/wall{dir = 3; icon_state = "swall_c"; dir = 2; layer = 2; tag = "icon-swall_f10"},/area/awaymission/arrivalblock)
 "fU" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp/green{pixel_x = -3; pixel_y = 5},/obj/item/weapon/paper{pixel_x = 3},/obj/item/weapon/pen{pixel_x = 10; pixel_y = 10},/turf/simulated/floor{icon_state = "grimy"},/area/awaymission/northblock)
 "fV" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor{icon_state = "grimy"},/area/awaymission/northblock)
@@ -355,7 +352,6 @@
 "gQ" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/drinks/bottle/holywater,/turf/simulated/floor{icon_state = "dark"},/area/awaymission/midblock)
 "gR" = (/turf/simulated/floor{dir = 1; icon_state = "chapel"},/area/awaymission/midblock)
 "gS" = (/turf/simulated/floor{dir = 4; icon_state = "chapel"},/area/awaymission/midblock)
-"gT" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/obj/structure/grille,/turf/simulated/floor/plating,/area/awaymission/arrivalblock)
 "gU" = (/obj/machinery/door/unpowered/shuttle{name = "Shuttle Airlock"},/turf/simulated/floor/shuttle/white,/area/awaymission/arrivalblock)
 "gV" = (/obj/machinery/door/airlock/external{welded = 1},/turf/simulated/floor/plating,/area/awaymission/arrivalblock)
 "gW" = (/obj/structure/sign/vacuum{pixel_y = 32},/obj/effect/decal/remains/human,/turf/simulated/floor{dir = 2; icon_state = "warning"},/area/awaymission/arrivalblock)
@@ -379,7 +375,6 @@
 "ho" = (/obj/structure/table/woodentable,/turf/simulated/floor{icon_state = "dark"},/area/awaymission/midblock)
 "hp" = (/turf/simulated/floor{dir = 8; icon_state = "chapel"},/area/awaymission/midblock)
 "hq" = (/turf/simulated/floor{icon_state = "chapel"},/area/awaymission/midblock)
-"hr" = (/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/obj/structure/grille,/turf/simulated/floor/plating,/area/awaymission/arrivalblock)
 "hs" = (/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/awaymission/arrivalblock)
 "ht" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/awaymission/arrivalblock)
 "hu" = (/obj/effect/decal/remains/human,/turf/simulated/floor,/area/awaymission/arrivalblock)
@@ -680,17 +675,17 @@ aaaaaaaaaaaaajajeZekfaaFfadQajdRfbfcfdfcfcajaGfebyeDeEeFeGbKdWffbKbKfgbKfhebbKbK
 aaaaaaaaaaaaafajajfifjfkejflajajajfmajajajajaBfebyeFeFeFeGbKdWfnbKbKbKbKfoebbKfpbKbKbKfqbyakaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaajajajajajajajfrfsfsajftftfufvfwbyeDeEeFeGbKdWfxfyfzfAfBfCebbKfDbKbKbKfEbyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaajfsfFfGajfHfIfJfJfKbybybybybybybybybybybybybybybybybybybybybyfLfLfLfLfLfLfLfMfNaaaaaaaaaaaaaaaaaaaa
-aafOfPfQfRfSfPfTaaaaaaaaaaaaajfUfsfVajftfWfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfLfYfZfYgafYgafZgagbfNaaaaaaaaaaaaaaaaaa
+aafOfPksiJktfPfTaaaaaaaaaaaaajfUfsfVajftfWfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfLfYfZfYgafYgafZgagbfNaaaaaaaaaaaaaaaaaa
 aagcgdgegfgegdgcaaaaaaaaaaaaajggghgiajftgjfXgkglgmglgnfXgogpgqfXgrgsgtgugvglglgwglfXftftfLfYgafYgafYgagxgagagyaaaaaaaaaaaaaaaaaa
 aagzgAgegegegAgBgCgCgCgCgCgCgCgCgCgCgCftfWfXgDglgEglgFfXglglgFfXgGgHgIgJgKglgLgugMfXftftgNgOgOgPgOgOgOgQgRgSgyaaaaaaaaaaaaaaaaaa
-aagTgegegegegegUgVgWgXgCgYgZhahbhchdgChefWfXhfhfhghhhifXhjfXfXfXglhkhlguhmglglglhnfXftftgNgOgOgOgOgOgOhohphqgyaaaaaaaaaaaaaaaaaa
-aahrgfgfgegfgfhshthuhvhwhxhyhyhzhAhBgChChDfXgDglhgglgFfXglhEhFhGglgugvglhHglgLgugMfXfHftfLfYgafYgafYgagxgagagyaaaaaaaaaaaaaaaaaa
+aahZgegegegegegUgVgWgXgCgYgZhahbhchdgChefWfXhfhfhghhhifXhjfXfXfXglhkhlguhmglglglhnfXftftgNgOgOgOgOgOgOhohphqgyaaaaaaaaaaaaaaaaaa
+aakagfgfgegfgfhshthuhvhwhxhyhyhzhAhBgChChDfXgDglhgglgFfXglhEhFhGglgugvglhHglgLgugMfXfHftfLfYgafYgafYgagxgagagyaaaaaaaaaaaaaaaaaa
 aagcgegegegegegchIhyhugChJhyhKhLhMhNgCfufWfXhOglgEglhPfXhQglglhRglgugvglhShThUglhVfXftftfLfYhWfYgafYgahWgahXhYaaaaaaaaaaaaaaaaaa
 aagcgfgfgegfgfgchZiahygCibicicididieifigihfXglglhgglglfXiiglglglglguijikilikiminiofXftftfLfLfLfLfLfLfLfLfMhYaaaaaaaaaaaaaaaaaaaa
 aagcgegegegegegchZipiqgCirisisisisitgCftfWfXiuhOhghPhPfXiviwixiygliziAiBiCiDiEiFglfXftftfXaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aagzgfgfgegfgfgziGiHhygCgCiIiJiKgCiLgCftfWfXfXfXhjfXfXfXfXfXfXfXfXfXfXfXiMiNfXfXfXfXftftfXaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aagTgegegegegeiOiPhuiQgCiRiSiSiSiTiUgCiViWiXiXiYiZiXiXiXiXiXjaiXiXiXiXiXiWiXiXiXiXiXiXjbjcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aahrgfgfgegfgfhrjdhyipgCjejfjfjgjhjijjjkjljmjmjmjnjojmjpjmjmjmjmjmjmjmjqjriXjsiXiXiXiXiXjcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aahZgegegegegeiOiPhuiQgCiRiSiSiSiTiUgCiViWiXiXiYiZiXiXiXiXiXjaiXiXiXiXiXiWiXiXiXiXiXiXjbjcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aakagfgfgegfgfkajdhyipgCjejfjfjgjhjijjjkjljmjmjmjnjojmjpjmjmjmjmjmjmjmjqjriXjsiXiXiXiXiXjcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aagcgegegegegegchIiHipgCgCgCgCgCgCjtgCgCgCjujujcjcjvjcjcjcjcjwjcjcjcjxjyjzjzjzjzjzjzjzjxjcjcjcjAjBjCaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aagcgfgfgegfgfgchZhyhujDjEjFipjGhyjHhyhyhyhyhyjcjIjJjKjcjLjMjMjNjOjcjPjJjzjQjRjSjTjUjzjVjVjWjWjXjYjZaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aagcgegegegegegckakbiHhuiahykcjDhykdhyhyhyhyhyjckekfkgjckhkikjkkkljcjPkmjzjQknkokpjUjzjVjVjVjVjVkqjZaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -704,3 +699,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaagClDlPlQlRhyhykOjclSklklkvlcjPlTjPlUjclVlWlXlYlYlZ
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaagCgCgCgCgCgCgCgCjcmfmgmhjcklkjmimjmkjcjPjPjPmlmlmlmlmmjzlMmnmojzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaajcjcjcjcjcjcjcjcjcjcjcjcjcjcjcjcjcjcjcjzjzjzjzjzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+
