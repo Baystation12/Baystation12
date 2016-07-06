@@ -1,6 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - rscadd: "Uplink services now all spawn a proper item which can be used to trigger the relevant effect at a desired time, as opposed to it firing immediately."
-  - tweak: "The jammer item has been moved into the 'Devices and Tools' category."
-  - tweak: "The jammer services have been moved into the 'Services' category."
