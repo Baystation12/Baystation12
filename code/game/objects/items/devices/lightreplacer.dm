@@ -124,48 +124,19 @@
 
 /obj/item/device/lightreplacer/proc/ReplaceLight(var/obj/machinery/light/target, var/mob/living/U)
 
-	if(target.status != LIGHT_OK)
-		if(CanUse(U))
-			if(!Use(U)) return
-			U << "<span class='notice'>You replace the [target.fitting] with the [src].</span>"
+	if(target.status == LIGHT_OK)
+		U << "There is a working [target.get_fitting_name()] already inserted."
+	else if(!CanUse(U))
+		U << failmsg
+	else if(Use(U))
+		U << "<span class='notice'>You replace the [target.get_fitting_name()] with the [src].</span>"
 
-			if(target.status != LIGHT_EMPTY)
+		if(target.status != LIGHT_EMPTY)
+			target.remove_bulb()
 
-				var/obj/item/weapon/light/L1 = new target.light_type(target.loc)
-				L1.status = target.status
-				L1.rigged = target.rigged
-				L1.brightness_range = target.brightness_range
-				L1.brightness_power = target.brightness_power
-				L1.brightness_color = target.brightness_color
-				L1.switchcount = target.switchcount
-				target.switchcount = 0
-				L1.update()
+		var/obj/item/weapon/light/L = new target.light_type()
+		target.insert_bulb(L)
 
-				target.status = LIGHT_EMPTY
-				target.update()
-
-			var/obj/item/weapon/light/L2 = new target.light_type()
-
-			target.status = L2.status
-			target.switchcount = L2.switchcount
-			target.rigged = emagged
-			target.brightness_range = L2.brightness_range
-			target.brightness_power = L2.brightness_power
-			target.brightness_color = L2.brightness_color
-			target.on = target.powered()
-			target.update()
-			qdel(L2)
-
-			if(target.on && target.rigged)
-				target.explode()
-			return
-
-		else
-			U << failmsg
-			return
-	else
-		U << "There is a working [target.fitting] already inserted."
-		return
 
 /obj/item/device/lightreplacer/emag_act(var/remaining_charges, var/mob/user)
 	emagged = !emagged
