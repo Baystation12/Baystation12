@@ -285,10 +285,12 @@
 "fy" = (/obj/structure/table,/turf/simulated/floor/plating,/area/vacant/infirmary)
 "fz" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/autoinjectors,/turf/simulated/floor/tiled/white,/area/vacant/infirmary)
 "fA" = (/obj/structure/closet/crate/freezer/rations,/turf/simulated/floor/tiled/dark,/area/shuttle/escape_pod6/station)
+"fB" = (/turf/simulated/floor/plating{icon_state = "white"},/area/shuttle/escape_pod6/station)
 "fC" = (/obj/machinery/sleeper{dir = 8},/obj/machinery/vending/wallmed1{name = "Emergency NanoMed"; pixel_x = 32; req_access = newlist()},/turf/simulated/floor/tiled/dark,/area/shuttle/escape_pod6/station)
 "fD" = (/obj/effect/floor_decal/corner/lime{dir = 1},/turf/simulated/floor/tiled/dark,/area/hallway/primary/fourthdeck/center)
 "fE" = (/obj/effect/floor_decal/corner/lime{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/tiled/dark,/area/hallway/primary/fourthdeck/center)
 "fF" = (/obj/machinery/sleeper{dir = 4},/obj/machinery/vending/wallmed1{name = "Emergency NanoMed"; pixel_x = -32; req_access = newlist()},/turf/simulated/floor/tiled/dark,/area/shuttle/escape_pod7/station)
+"fG" = (/turf/simulated/floor/plating{icon_state = "white"},/area/shuttle/escape_pod7/station)
 "fH" = (/obj/structure/closet/crate/freezer/rations,/turf/simulated/floor/tiled/dark,/area/shuttle/escape_pod7/station)
 "fI" = (/obj/machinery/shield_capacitor,/turf/simulated/floor/plating,/area/maintenance/fourthdeck/starboard)
 "fJ" = (/obj/machinery/suit_cycler/science,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled,/area/quartermaster/expedition/eva)
@@ -299,6 +301,8 @@
 "fO" = (/obj/effect/floor_decal/industrial/warning/corner{dir = 4},/turf/simulated/floor/plating,/area/quartermaster/hangar)
 "fP" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/plating,/area/quartermaster/hangar)
 "fQ" = (/obj/effect/floor_decal/industrial/warning{dir = 5},/turf/simulated/floor/plating,/area/quartermaster/hangar)
+"fR" = (/obj/structure/bed/chair{dir = 4},/turf/simulated/floor/plating{icon_state = "steel"},/area/calypso_hangar/start)
+"fS" = (/obj/structure/bed/chair{dir = 8},/obj/machinery/light{dir = 4},/turf/simulated/floor/plating{icon_state = "steel"},/area/calypso_hangar/start)
 "fT" = (/obj/effect/floor_decal/industrial/warning{dir = 9},/turf/simulated/floor/plating,/area/quartermaster/hangar)
 "fU" = (/obj/structure/reagent_dispensers/acid{density = 0; pixel_x = -32},/turf/simulated/floor/tiled/dark,/area/rnd/anom)
 "fV" = (/turf/simulated/floor/tiled/dark,/area/rnd/anom)
@@ -1561,4 +1565,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
