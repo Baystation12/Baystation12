@@ -176,13 +176,17 @@
 	return s_click(hud)
 
 
+/obj/item/weapon/grab/proc/reset_position()
+	if(!affecting.buckled)
+		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
+	affecting.layer = initial(affecting.layer)
+
 //Updating pixelshift, position and direction
 //Gets called on process, when the grab gets upgraded or the assailant moves
 /obj/item/weapon/grab/proc/adjust_position()
-	if(!affecting)
+	if(!affecting || affecting.buckled)
 		return
-	if(affecting.buckled)
-		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
+	if(!assailant)
 		return
 	if(affecting.lying && state != GRAB_KILL)
 		animate(affecting, pixel_x = 0, pixel_y = 0, 5, 1, LINEAR_EASING)
@@ -191,7 +195,7 @@
 		return
 	var/shift = 0
 	var/adir = get_dir(assailant, affecting)
-	affecting.layer = 4
+	affecting.layer = initial(affecting.layer)
 	switch(state)
 		if(GRAB_PASSIVE)
 			shift = 8
@@ -214,7 +218,7 @@
 	switch(adir)
 		if(NORTH)
 			animate(affecting, pixel_x = 0, pixel_y =-shift, 5, 1, LINEAR_EASING)
-			affecting.layer = 3.9
+			affecting.layer = initial(affecting.layer) - 0.1
 		if(SOUTH)
 			animate(affecting, pixel_x = 0, pixel_y = shift, 5, 1, LINEAR_EASING)
 		if(WEST)
@@ -393,10 +397,10 @@
 	var/destroying = 0
 
 /obj/item/weapon/grab/Destroy()
-	animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
-	affecting.layer = 4
 	if(affecting)
+		reset_position()
 		affecting.grabbed_by -= src
+		affecting.layer = initial(affecting.layer)
 		affecting = null
 	if(assailant)
 		if(assailant.client)

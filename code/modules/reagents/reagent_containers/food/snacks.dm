@@ -878,7 +878,7 @@
 	icon_state = "roburger"
 	filling_color = "#CCCCCC"
 	volume = 100
-	center_of_mass = "x=16;y=1"
+	center_of_mass = "x=16;y=11"
 
 	New()
 		..()
@@ -1900,7 +1900,7 @@
 	icon_state = "spagettiboiled"
 	trash = /obj/item/trash/plate
 	filling_color = "#FCEE81"
-	center_of_mass = "x=16;y=103"
+	center_of_mass = "x=16;y=10"
 	nutriment_desc = list("noodles" = 2)
 	nutriment_amt = 2
 	New()

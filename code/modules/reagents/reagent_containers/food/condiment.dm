@@ -11,7 +11,7 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "emptycondiment"
 	flags = OPENCONTAINER
-	possible_transfer_amounts = list(1,5,10)
+	possible_transfer_amounts = "1;5;10"
 	center_of_mass = "x=16;y=6"
 	volume = 50
 
@@ -135,7 +135,7 @@
 	name = "Salt Shaker"											//	a large one.
 	desc = "Salt. From space oceans, presumably."
 	icon_state = "saltshakersmall"
-	possible_transfer_amounts = list(1,20) //for clown turning the lid off
+	possible_transfer_amounts = "1;20" //for clown turning the lid off
 	amount_per_transfer_from_this = 1
 	volume = 20
 	New()
@@ -146,7 +146,7 @@
 	name = "Pepper Mill"
 	desc = "Often used to flavor food or make people sneeze."
 	icon_state = "peppermillsmall"
-	possible_transfer_amounts = list(1,20) //for clown turning the lid off
+	possible_transfer_amounts = "1;20" //for clown turning the lid off
 	amount_per_transfer_from_this = 1
 	volume = 20
 	New()

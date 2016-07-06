@@ -73,6 +73,9 @@
 // Interaction procs
 //-------------------------------------------
 /obj/vehicle/train/relaymove(mob/user, direction)
+	if(user.incapacitated())
+		return 0
+
 	var/turf/T = get_step_to(src, get_step(src, direction))
 	if(!T)
 		user << "You can't find a clear area to step onto."
