@@ -75,7 +75,7 @@
 		src << "<span class='warning'>You cannot leap in your current state.</span>"
 		return
 
-	last_special = world.time + 17.5 SECONDS
+	last_special = world.time + (17.5 SECONDS)
 	status_flags |= LEAPING
 
 	src.visible_message("<span class='danger'>\The [src] leaps at [T]!</span>")
