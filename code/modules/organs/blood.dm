@@ -78,7 +78,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 	if(!amt)
 		return
 
-	vessel.remove_reagent("blood",amt)
+	vessel.remove_reagent("blood", amt * (src.mob_size/MOB_MEDIUM))
 	blood_splatter(src,src)
 
 /****************************************************
