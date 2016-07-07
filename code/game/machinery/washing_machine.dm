@@ -47,10 +47,12 @@
 	sleep(200)
 	for(var/atom/A in contents)
 		A.clean_blood()
-
-	for(var/obj/item/I in contents)
-		I.decontaminate()
-		if()
+		if(isitem(A))
+			var/obj/item/I = A
+			I.decontaminate()
+			if(crayon && iscoloredgloves(I))
+				var/obj/item/clothing/gloves/color/C = I
+				C.color = crayon.color
 
 	//Tanning!
 	for(var/obj/item/stack/material/hairlesshide/HH in contents)
