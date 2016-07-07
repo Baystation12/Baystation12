@@ -26,8 +26,8 @@
 
 /obj/item/clothing/gloves/insulated/cheap/New()
 	..()
-	//average of 0.5, somewhat better than regular gloves' 0.75
-	siemens_coefficient = pick(0,0.1,0.3,0.5,0.5,0.75,1.35)
+	//average of 0.4, better than regular gloves' 0.75
+	siemens_coefficient = pick(0, 0.1, 0.2, 0.3, 0.4, 0.6, 1.3)
 
 /obj/item/clothing/gloves/forensic
 	desc = "Specially made gloves for forensic technicians. The luminescent threads woven into the material stand out under scrutiny."
@@ -40,7 +40,7 @@
 	name = "work gloves"
 	icon_state = "black"
 	item_state = "bgloves"
-	siemens_coefficient = 0.50
+	siemens_coefficient = 0.40
 	permeability_coefficient = 0.05
 	force = 5
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
