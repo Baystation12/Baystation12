@@ -72,7 +72,27 @@ var/list/outfits_decls_by_type_
 		J.toggle()
 		J.toggle_valve()
 
-/decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/rank, var/assignment)
+	equip_base(H)
+
+	rank = id_pda_assignment ? id_pda_assignment : rank
+	assignment = id_pda_assignment ? id_pda_assignment : (assignment ? assignment : rank)
+	var/obj/item/weapon/card/id/W = equip_id(H, rank, assignment)
+	if(W)
+		rank = W.rank
+		assignment = W.assignment
+	equip_pda(H, rank, assignment)
+
+	for(var/path in backpack_contents)
+		var/number = backpack_contents[path]
+		for(var/i=0,i<number,i++)
+			H.equip_to_slot_or_del(new path(H), slot_in_backpack)
+
+	post_equip(H)
+	H.regenerate_icons()
+	return 1
+
+/decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H)
 	pre_equip(H)
 
 	//Start with uniform,suit,backpack for additional slots
@@ -112,31 +132,27 @@ var/list/outfits_decls_by_type_
 	if(r_hand)
 		H.put_in_r_hand(new r_hand(H))
 
-	if(id_slot)
-		equip_id(H)
-	if(pda_slot)
-		var/obj/item/device/pda/heads/pda = new pda_type(H)
-		pda.set_owner_rank_job(H.real_name, id_pda_assignment ? id_pda_assignment : name)
-		H.equip_to_slot_or_del(pda, pda_slot)
-
-	for(var/path in backpack_contents)
-		var/number = backpack_contents[path]
-		for(var/i=0,i<number,i++)
-			H.equip_to_slot_or_del(new path(H), slot_in_backpack)
-
-	post_equip(H)
-	H.regenerate_icons()
-	return 1
-
-/decl/hierarchy/outfit/proc/equip_id(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/proc/equip_id(mob/living/carbon/human/H, rank, assignment)
+	if(!id_slot)
+		return
 	var/obj/item/weapon/card/id/W = new id_type(H)
 	if(id_desc)
 		W.desc = id_desc
-	if(id_pda_assignment != null)
-		W.assignment = id_pda_assignment
+	if(rank)
+		W.rank = rank
+	if(assignment)
+		W.assignment = assignment
 	H.set_id_info(W)
-	H.equip_to_slot_or_del(W, id_slot)
-	return W
+	if(H.equip_to_slot_or_del(W, id_slot))
+		return W
+
+/decl/hierarchy/outfit/proc/equip_pda(mob/living/carbon/human/H, rank, assignment)
+	if(!pda_slot)
+		return
+	var/obj/item/device/pda/heads/pda = new pda_type(H)
+	pda.set_owner_rank_job(H.real_name, rank, assignment)
+	if(H.equip_to_slot_or_del(pda, pda_slot))
+		return pda
 
 /decl/hierarchy/outfit/dd_SortValue()
 	return name

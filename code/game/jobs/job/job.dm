@@ -27,16 +27,16 @@
 	var/outfit_type                       // The outfit the employee will be dressed in, if any
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title)
-	var/decl/hierarchy/outfit/outfit = outfit_type(H, alt_title)
+	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
 	if(!outfit)
 		return FALSE
-	outfit = outfit_by_type(outfit)
-	. = outfit.equip(H)
+	. = outfit.equip(H, title, alt_title)
 
-/datum/job/proc/outfit_type(var/mob/living/carbon/human/H, var/alt_title)
-	if(alt_title)
+/datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title)
+	if(alt_title && alt_titles)
 		. = alt_titles[alt_title]
 	. = . ? . : outfit_type
+	. = outfit_by_type(.)
 
 /datum/job/proc/equip_survival(var/mob/living/carbon/human/H)
 	if(!H)	return 0
@@ -81,7 +81,10 @@
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/del()
 /datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title)
-	. = equip(H, alt_title)
+	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
+	if(!outfit)
+		return FALSE
+	. = outfit.equip_base(H, title, alt_title)
 
 /datum/job/proc/get_access()
 	if(!config || config.jobs_have_minimal_access)

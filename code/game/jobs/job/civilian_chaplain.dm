@@ -11,7 +11,7 @@
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
 	minimal_access = list(access_morgue, access_chapel_office, access_crematorium)
 	alt_titles = list("Counselor")
-
+	outfit_type = /decl/hierarchy/outfit/job/chaplain
 
 	equip(var/mob/living/carbon/human/H, var/alt_title, var/ask_questions = TRUE)
 		. = ..()
@@ -151,6 +151,3 @@
 			feedback_set_details("religion_deity","[new_deity]")
 			feedback_set_details("religion_book","[new_book_style]")
 		return 1
-
-/datum/job/chaplain/equip_preview(var/mob/living/carbon/human/H, var/alt_title)
-	return equip(H, alt_title, FALSE)
