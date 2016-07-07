@@ -31,7 +31,4 @@
 	if(H.mind)
 		if(H.mind.initial_account)
 			C.associated_account_number = H.mind.initial_account.account_number
-		if(H.mind.role_alt_title && id_pda_assignment == null)
-			C.assignment = H.mind.role_alt_title
-			C.update_name()
 	return C

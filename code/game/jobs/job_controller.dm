@@ -390,8 +390,8 @@ var/global/datum/controller/occupations/job_master
 						else
 							spawn_in_storage += thing
 			//Equip job items.
-			job.equip(H, H.mind ? H.mind.role_alt_title : "")
 			job.setup_account(H)
+			job.equip(H, H.mind ? H.mind.role_alt_title : "")
 			job.equip_survival(H)
 			job.apply_fingerprints(H)
 

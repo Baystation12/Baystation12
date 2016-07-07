@@ -10,6 +10,8 @@ var/global/last_tick_duration = 0
 var/global/air_processing_killed = 0
 var/global/pipe_processing_killed = 0
 
+var/global/initialization_stage = 0
+
 datum/controller/game_controller
 	var/list/shuttle_list	                    // For debugging and VV
 	var/init_immediately = FALSE
@@ -44,13 +46,12 @@ datum/controller/game_controller/proc/setup()
 	transfer_controller = new
 
 	admin_notice("<span class='danger'>Initializations complete.</span>", R_DEBUG)
-	if(init_immediately && ticker && ticker.current_state == GAME_STATE_PREGAME)
-		ticker.current_state = GAME_STATE_SETTING_UP
+	initialization_stage |= INITIALIZATION_COMPLETE
 
 #ifdef UNIT_TEST
 #define CHECK_SLEEP_MASTER // For unit tests we don't care about a smooth lobby screen experience. We care about speed.
 #else
-#define CHECK_SLEEP_MASTER if(!init_immediately && ++initialized_objects > 500) { initialized_objects=0;sleep(world.tick_lag); }
+#define CHECK_SLEEP_MASTER if(!(initialization_stage & INITIALIZATION_NOW) && ++initialized_objects > 500) { initialized_objects=0;sleep(world.tick_lag); }
 #endif
 
 datum/controller/game_controller/proc/setup_objects()
