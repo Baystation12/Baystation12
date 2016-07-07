@@ -8,7 +8,7 @@
 	alt_titles = list("Trader", "Clerk")
 	idtype = /obj/item/weapon/card/id/silver
 	minimal_player_age = 15
-	create_record = 1
+	create_record = 0
 	access = list(access_merchant)
 	minimal_access = list(access_merchant)
 	account_allowed = 0
