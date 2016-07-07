@@ -20,5 +20,5 @@
 
 /datum/gear/gloves/evening
 	display_name = "gloves, evening"
-	path = /obj/item/clothing/gloves/evening
+	path = /obj/item/clothing/gloves/color/evening
 	flags = GEAR_HAS_COLOR_SELECTION
