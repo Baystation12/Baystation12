@@ -131,7 +131,7 @@
 "cA" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/wood,/area/awaymission/wwmines)
 "cB" = (/obj/effect/mine/plasma,/obj/item/ammo_magazine/a10mm,/turf/simulated/floor/plating/ironsand{tag = "icon-ironsand1"; icon_state = "ironsand1"},/area/awaymission/wwmines)
 "cC" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/toolbox/electrical,/turf/simulated/floor/wood,/area/awaymission/wwgov)
-"cD" = (/obj/structure/table/woodentable,/obj/item/clothing/gloves/color/insulated,/obj/item/device/multitool,/turf/simulated/floor/wood,/area/awaymission/wwgov)
+"cD" = (/obj/structure/table/woodentable,/obj/item/clothing/gloves/insulated,/obj/item/device/multitool,/turf/simulated/floor/wood,/area/awaymission/wwgov)
 "cE" = (/obj/structure/stool/bed/chair/wood/normal{dir = 4},/turf/simulated/floor/wood,/area/awaymission/wwgov)
 "cF" = (/obj/structure/table/woodentable,/turf/simulated/floor/wood,/area/awaymission/wwgov)
 "cG" = (/mob/living/simple_animal/hostile/creature,/turf/simulated/floor{tag = "icon-stage_bleft"; icon_state = "stage_bleft"},/area/awaymission/wwgov)

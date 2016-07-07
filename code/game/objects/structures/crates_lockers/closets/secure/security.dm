@@ -259,7 +259,7 @@
 		new /obj/item/clothing/suit/storage/det_trench/grey(src)
 		new /obj/item/clothing/suit/storage/forensics/blue(src)
 		new /obj/item/clothing/suit/storage/forensics/red(src)
-		new /obj/item/clothing/gloves/color/thick(src)
+		new /obj/item/clothing/gloves/thick(src)
 		new /obj/item/clothing/head/det(src)
 		new /obj/item/clothing/head/det/grey(src)
 		new /obj/item/clothing/shoes/laceup(src)

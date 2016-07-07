@@ -376,7 +376,7 @@
 "il" = (/obj/machinery/power/smes/buildable{charge = 2.5e+006; input_attempt = 1; input_level = 250000; inputting = 0; output_attempt = 1; output_level = 250000; RCon_tag = "Telecommunications Satellite"},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/plating,/area/tcommsat/powercontrol)
 "im" = (/obj/structure/sign/electricshock,/turf/simulated/wall/r_wall,/area/tcommsat/powercontrol)
 "in" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/table/standard,/obj/machinery/cell_charger,/turf/simulated/floor/plating,/area/tcommsat/powercontrol)
-"io" = (/obj/structure/table/rack,/obj/item/clothing/gloves/color/insulated,/turf/simulated/floor/airless,/area/AIsattele)
+"io" = (/obj/structure/table/rack,/obj/item/clothing/gloves/insulated,/turf/simulated/floor/airless,/area/AIsattele)
 "ip" = (/obj/structure/girder,/turf/simulated/floor/airless,/area/AIsattele)
 "iq" = (/obj/item/weapon/cell,/turf/simulated/floor/airless,/area/AIsattele)
 "ir" = (/obj/structure/grille/broken,/turf/simulated/floor/airless,/area/AIsattele)

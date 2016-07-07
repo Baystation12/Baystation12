@@ -28,7 +28,7 @@
 "aB" = (/obj/structure/table/standard,/obj/machinery/cell_charger,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/awaymission/labs/cave)
 "aC" = (/obj/structure/table/standard,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/awaymission/labs/cave)
 "aD" = (/obj/structure/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/belt/utility,/obj/item/weapon/wrench,/obj/item/weapon/weldingtool,/obj/item/clothing/head/welding{pixel_x = -3; pixel_y = 5},/turf/simulated/floor/plating,/area/awaymission/labs/cave)
-"aE" = (/obj/structure/rack{dir = 8; layer = 2.9},/obj/item/clothing/gloves/color/insulated,/obj/item/weapon/storage/belt/utility,/turf/simulated/floor/plating,/area/awaymission/labs/cave)
+"aE" = (/obj/structure/rack{dir = 8; layer = 2.9},/obj/item/clothing/gloves/insulated,/obj/item/weapon/storage/belt/utility,/turf/simulated/floor/plating,/area/awaymission/labs/cave)
 "aF" = (/obj/structure/closet/radiation,/turf/simulated/floor/plating,/area/awaymission/labs/cave)
 "aG" = (/obj/structure/closet/secure_closet/engineering_electrical,/turf/simulated/floor/plating,/area/awaymission/labs/cave)
 "aH" = (/obj/structure/closet/secure_closet/engineering_welding,/turf/simulated/floor/plating,/area/awaymission/labs/cave)

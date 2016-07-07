@@ -11,11 +11,35 @@
 	item_state = "r_hands"
 	siemens_coefficient = 1.0
 
-/obj/item/clothing/gloves/swat
-	desc = "These tactical gloves are somewhat fire and impact-resistant."
-	name = "\improper SWAT Gloves"
+/obj/item/clothing/gloves/insulated
+	desc = "These gloves will protect the wearer from electric shock."
+	name = "insulated gloves"
+	icon_state = "yellow"
+	item_state = "ygloves"
+	siemens_coefficient = 0
+	permeability_coefficient = 0.05
+
+/obj/item/clothing/gloves/insulated/cheap                             //Cheap Chinese Crap
+	desc = "These gloves are cheap copies of the coveted gloves, no way this can end badly."
+	name = "budget insulated gloves"
+	siemens_coefficient = 1			//Set to a default of 1, gets overridden in New()
+
+/obj/item/clothing/gloves/insulated/cheap/New()
+	..()
+	//average of 0.5, somewhat better than regular gloves' 0.75
+	siemens_coefficient = pick(0,0.1,0.3,0.5,0.5,0.75,1.35)
+
+/obj/item/clothing/gloves/forensic
+	desc = "Specially made gloves for forensic technicians. The luminescent threads woven into the material stand out under scrutiny."
+	name = "forensic gloves"
+	icon_state = "forensic"
+	item_state = "bgloves"
+
+/obj/item/clothing/gloves/thick
+	desc = "These work gloves are thick and fire-resistant."
+	name = "work gloves"
 	icon_state = "black"
-	item_state = "swat_gl"
+	item_state = "bgloves"
 	siemens_coefficient = 0.50
 	permeability_coefficient = 0.05
 	force = 5
@@ -26,7 +50,12 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/gloves/combat //Combined effect of SWAT gloves and insulated gloves
+/obj/item/clothing/gloves/thick/swat
+	desc = "These tactical gloves are somewhat fire and impact-resistant."
+	name = "\improper SWAT Gloves"
+	item_state = "swat_gl"
+
+/obj/item/clothing/gloves/thick/combat //Combined effect of SWAT gloves and insulated gloves
 	desc = "These tactical gloves are somewhat fire and impact resistant."
 	name = "combat gloves"
 	icon_state = "work"
@@ -40,12 +69,18 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
+/obj/item/clothing/gloves/thick/botany
+	desc = "These leather work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
+	name = "botanist's leather gloves"
+	icon_state = "leather"
+	item_state = "ggloves"
+
 /obj/item/clothing/gloves/latex
 	name = "latex gloves"
 	desc = "Sterile latex gloves."
 	icon_state = "latex"
 	item_state = "lgloves"
-	siemens_coefficient = 1.0 //thin latex gloves, much more conductive than fabric gloves (basically a capacitor for AC)
+	siemens_coefficient = 1.1 //thin latex gloves, much more conductive than fabric gloves (basically a capacitor for AC)
 	permeability_coefficient = 0.01
 	germ_level = 0
 
@@ -85,3 +120,4 @@
 	siemens_coefficient = 0.7
 	permeability_coefficient = 0.03
 	armor = list(melee = 40, bullet = 40, laser = 40, energy = 25, bomb = 30, bio = 0, rad = 0)
+

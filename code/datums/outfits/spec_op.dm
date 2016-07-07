@@ -9,7 +9,7 @@
 	belt = /obj/item/weapon/gun/energy/pulse_rifle/M1911
 	back = /obj/item/weapon/storage/backpack/satchel
 	shoes = /obj/item/clothing/shoes/combat
-	gloves = /obj/item/clothing/gloves/combat
+	gloves = /obj/item/clothing/gloves/thick/combat
 
 	id_slot = slot_wear_id
 	id_type = /obj/item/weapon/card/id/centcom/ERT
@@ -28,7 +28,7 @@
 	name = "Spec ops - Emergency response team"
 	uniform = /obj/item/clothing/under/ert
 	shoes = /obj/item/clothing/shoes/swat
-	gloves = /obj/item/clothing/gloves/swat
+	gloves = /obj/item/clothing/gloves/thick/swat
 	l_ear = /obj/item/device/radio/headset/ert
 	belt = /obj/item/weapon/gun/energy/gun
 	glasses = /obj/item/clothing/glasses/sunglasses

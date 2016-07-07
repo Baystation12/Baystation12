@@ -134,7 +134,7 @@
 	if(prob(20))
 		new /obj/item/device/multitool(src)
 	if(prob(5))
-		new /obj/item/clothing/gloves/color/insulated(src)
+		new /obj/item/clothing/gloves/insulated(src)
 	if(prob(40))
 		new /obj/item/clothing/head/hardhat(src)
 
