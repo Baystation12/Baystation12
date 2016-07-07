@@ -548,7 +548,7 @@ obj/random/material //Random materials for building stuff
 					prob(2);/obj/item/clothing/shoes/galoshes,\
 					prob(1);/obj/item/clothing/shoes/magboots,\
 					prob(4);/obj/item/clothing/shoes/laceup,\
-					prob(1);/obj/item/clothing/gloves/yellow,\
+					prob(1);/obj/item/clothing/gloves/color/insulated,\
 					prob(4);/obj/item/clothing/gloves/color/thick,\
 					prob(2);/obj/item/clothing/gloves/latex,\
 					prob(1);/obj/item/clothing/gloves/swat,\
@@ -623,7 +623,7 @@ obj/random/material //Random materials for building stuff
 					prob(2);/obj/item/clothing/gloves/latex,\
 					prob(1);/obj/item/clothing/gloves/swat,\
 					prob(1);/obj/item/clothing/gloves/combat,\
-					prob(1);/obj/item/clothing/gloves/yellow,\
+					prob(1);/obj/item/clothing/gloves/color/insulated,\
 					prob(1);/obj/item/clothing/glasses/sunglasses,\
 					prob(3);/obj/item/clothing/glasses/meson,\
 					prob(2);/obj/item/clothing/glasses/meson/prescription,\

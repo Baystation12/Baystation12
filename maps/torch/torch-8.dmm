@@ -301,7 +301,7 @@
 "fO" = (/obj/item/weapon/material/shard{icon_state = "medium"},/turf/simulated/floor/airless,/area/AIsattele)
 "fP" = (/turf/simulated/floor/airless,/area/AIsattele)
 "fQ" = (/obj/structure/cable,/turf/simulated/floor/airless,/area/AIsattele)
-"fR" = (/obj/structure/table/rack,/obj/item/clothing/gloves/yellow,/turf/simulated/floor/airless,/area/AIsattele)
+"fR" = (/obj/structure/table/rack,/obj/item/clothing/gloves/color/insulated,/turf/simulated/floor/airless,/area/AIsattele)
 "fS" = (/obj/structure/girder,/turf/simulated/floor/airless,/area/AIsattele)
 "fT" = (/obj/item/weapon/cell,/turf/simulated/floor/airless,/area/AIsattele)
 "fU" = (/obj/structure/grille/broken,/turf/simulated/floor/airless,/area/AIsattele)

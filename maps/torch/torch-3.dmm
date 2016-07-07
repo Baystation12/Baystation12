@@ -395,7 +395,7 @@
 "hE" = (/obj/machinery/power/smes/buildable{charge = 2e+006; RCon_tag = "Substation - Atmospherics"},/obj/structure/cable/cyan{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled/steel,/area/engineering/engine_smes)
 "hF" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/table/steel,/obj/machinery/alarm{pixel_y = 24},/turf/simulated/floor/tiled/steel,/area/engineering/engine_smes)
 "hG" = (/obj/machinery/power/smes/buildable{charge = 1e+007; cur_coils = 4; input_attempt = 1; input_level = 500000; output_level = 500000; RCon_tag = "Engine - Main"},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled/steel,/area/engineering/engine_smes)
-"hH" = (/obj/structure/cable/cyan{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/table/steel,/obj/item/clothing/gloves/yellow,/obj/item/device/multitool{pixel_x = 5},/obj/structure/extinguisher_cabinet{pixel_y = 32},/turf/simulated/floor/tiled/steel,/area/engineering/engine_smes)
+"hH" = (/obj/structure/cable/cyan{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/table/steel,/obj/item/clothing/gloves/color/insulated,/obj/item/device/multitool{pixel_x = 5},/obj/structure/extinguisher_cabinet{pixel_y = 32},/turf/simulated/floor/tiled/steel,/area/engineering/engine_smes)
 "hI" = (/obj/machinery/power/smes/buildable{charge = 2e+006; input_attempt = 1; input_level = 100000; output_level = 200000; RCon_tag = "Engine - Core"},/obj/structure/cable/cyan{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled/steel,/area/engineering/engine_smes)
 "hJ" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/plating,/area/engineering/engine_room)
 "hK" = (/turf/simulated/floor/plating,/area/engineering/engine_room)

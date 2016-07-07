@@ -76,7 +76,7 @@
 "bx" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor{icon_state = "warning"},/area/awaymission/challenge/main)
 "by" = (/obj/machinery/light{dir = 4},/turf/simulated/floor{icon_state = "warning"},/area/awaymission/challenge/main)
 "bz" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating/airless,/area/awaymission/challenge/main)
-"bA" = (/obj/item/clothing/gloves/yellow,/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/awaymission/challenge/main)
+"bA" = (/obj/item/clothing/gloves/color/insulated,/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/awaymission/challenge/main)
 "bB" = (/obj/structure/window/reinforced{dir = 8},/obj/machinery/power/emitter{active = 1; active_power_usage = 0; anchored = 1; dir = 8; idle_power_usage = 0; locked = 1; name = "Energy Cannon"; req_access_txt = "100"; state = 2; use_power = 0},/turf/simulated/floor/plating/airless,/area/awaymission/challenge/main)
 "bC" = (/obj/structure/window/reinforced{dir = 4},/obj/machinery/power/emitter{active = 1; active_power_usage = 0; anchored = 1; dir = 4; idle_power_usage = 0; locked = 1; name = "Energy Cannon"; req_access_txt = "100"; state = 2; use_power = 0},/turf/simulated/floor/plating/airless,/area/awaymission/challenge/main)
 "bD" = (/obj/item/weapon/storage/firstaid/fire,/turf/simulated/floor/airless,/area/awaymission/challenge/main)
