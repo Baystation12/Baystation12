@@ -255,7 +255,7 @@
 					/obj/item/clothing/suit/storage/forensics/red,
 					/obj/item/clothing/suit/storage/forensics/blue,
 					/obj/item/clothing/gloves/forensic,
-					/obj/item/clothing/gloves/black = 2)
+					/obj/item/clothing/gloves/color/thick = 2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Investigation clothing"
@@ -276,7 +276,7 @@
 					/obj/item/weapon/melee/baton/loaded,
 					/obj/item/clothing/glasses/sunglasses/sechud,
 					/obj/item/taperoll/police,
-					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/gloves/color/thick,
 					/obj/item/device/hailer,
 					/obj/item/device/flashlight/flare,
 					/obj/item/clothing/accessory/storage/black_vest,
@@ -340,7 +340,7 @@
 					/obj/item/clothing/under/rank/head_of_security,
 					/obj/item/clothing/suit/armor/hos/jensen,
 					/obj/item/clothing/head/soft/sec = 4,
-					/obj/item/clothing/gloves/black = 4,
+					/obj/item/clothing/gloves/color/thick = 4,
 					/obj/item/weapon/storage/box/holobadge)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
@@ -361,7 +361,7 @@
 					/obj/item/clothing/head/beret/sec/navy/officer = 4,
 					/obj/item/clothing/head/beret/sec/navy/warden,
 					/obj/item/clothing/head/beret/sec/navy/hos,
-					/obj/item/clothing/gloves/black = 4,
+					/obj/item/clothing/gloves/color/thick = 4,
 					/obj/item/weapon/storage/box/holobadge)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
@@ -379,7 +379,7 @@
 					/obj/item/clothing/head/beret/sec = 4,
 					/obj/item/clothing/head/beret/sec/corporate/warden,
 					/obj/item/clothing/head/beret/sec/corporate/hos,
-					/obj/item/clothing/gloves/black = 4,
+					/obj/item/clothing/gloves/color/thick = 4,
 					/obj/item/weapon/storage/box/holobadge)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure

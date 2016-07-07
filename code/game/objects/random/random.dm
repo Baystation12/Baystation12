@@ -114,7 +114,7 @@
 					prob(1);/obj/item/weapon/packageWrap,\
 					prob(2);/obj/random/bomb_supply,\
 					prob(1);/obj/item/weapon/extinguisher,\
-					prob(1);/obj/item/clothing/gloves/fyellow,\
+					prob(1);/obj/item/clothing/gloves/color/insulated/cheap,\
 					prob(3);/obj/item/stack/cable_coil/random,\
 					prob(2);/obj/random/toolbox,\
 					prob(2);/obj/item/weapon/storage/belt/utility,\
@@ -549,7 +549,7 @@ obj/random/material //Random materials for building stuff
 					prob(1);/obj/item/clothing/shoes/magboots,\
 					prob(4);/obj/item/clothing/shoes/laceup,\
 					prob(1);/obj/item/clothing/gloves/yellow,\
-					prob(4);/obj/item/clothing/gloves/black,\
+					prob(4);/obj/item/clothing/gloves/color/thick,\
 					prob(2);/obj/item/clothing/gloves/latex,\
 					prob(1);/obj/item/clothing/gloves/swat,\
 					prob(1);/obj/item/clothing/gloves/combat,\
@@ -619,7 +619,7 @@ obj/random/material //Random materials for building stuff
 					prob(2);/obj/item/clothing/shoes/galoshes,\
 					prob(1);/obj/item/clothing/shoes/magboots,\
 					prob(4);/obj/item/clothing/shoes/laceup,\
-					prob(4);/obj/item/clothing/gloves/black,\
+					prob(4);/obj/item/clothing/gloves/color/thick,\
 					prob(2);/obj/item/clothing/gloves/latex,\
 					prob(1);/obj/item/clothing/gloves/swat,\
 					prob(1);/obj/item/clothing/gloves/combat,\

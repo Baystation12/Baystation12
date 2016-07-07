@@ -14,6 +14,8 @@ var/list/gear_datums = list()
 	//create a list of gear datums to sort
 	for(var/geartype in typesof(/datum/gear)-/datum/gear)
 		var/datum/gear/G = geartype
+		if(initial(G.category) == geartype)
+			continue
 
 		var/use_name = initial(G.display_name)
 		var/use_category = initial(G.sort_category)
@@ -191,6 +193,8 @@ var/list/gear_datums = list()
 	var/list/allowed_roles //Roles that can spawn with this item.
 	var/whitelisted        //Term to check the whitelist for..
 	var/sort_category = "General"
+	var/flags              //Special tweaks in new
+	var/category
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
 
 /datum/gear/New()
@@ -198,6 +202,8 @@ var/list/gear_datums = list()
 	if(!description)
 		var/obj/O = path
 		description = initial(O.desc)
+	if(flags & GEAR_HAS_COLOR_SELECTION)
+		gear_tweaks += list(gear_tweak_free_color_choice())
 
 /datum/gear_data
 	var/path

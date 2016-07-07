@@ -69,7 +69,7 @@
 	new /obj/item/clothing/under/rank/janitor(src)
 	new /obj/item/device/radio/headset/headset_service(src)
 	new /obj/item/weapon/cartridge/janitor(src)
-	new /obj/item/clothing/gloves/black(src)
+	new /obj/item/clothing/gloves/color/thick(src)
 	new /obj/item/clothing/head/soft/purple(src)
 	new /obj/item/clothing/head/beret/purple(src)
 	new /obj/item/device/flashlight(src)

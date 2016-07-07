@@ -951,7 +951,7 @@
 "so" = (/obj/structure/closet/secure_closet/engineering_electrical,/obj/item/device/radio/intercom{dir = 4; pixel_x = -22},/turf/simulated/floor/tiled/steel,/area/engineering/locker_room)
 "sp" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/steel,/area/engineering/locker_room)
 "sq" = (/obj/item/stack/material/steel{amount = 50},/obj/item/stack/material/steel{amount = 50},/obj/item/stack/material/steel{amount = 50},/obj/structure/table/rack{dir = 8; layer = 2.6},/turf/simulated/floor/tiled,/area/engineering/locker_room)
-"sr" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/table/steel,/obj/item/clothing/gloves/black,/obj/item/clothing/gloves/black,/obj/item/clothing/gloves/black,/obj/item/clothing/gloves/black,/obj/item/weapon/storage/box/lights/mixed,/turf/simulated/floor/tiled,/area/engineering/locker_room)
+"sr" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/table/steel,/obj/item/clothing/gloves/color/thick,/obj/item/clothing/gloves/color/thick,/obj/item/clothing/gloves/color/thick,/obj/item/clothing/gloves/color/thick,/obj/item/weapon/storage/box/lights/mixed,/turf/simulated/floor/tiled,/area/engineering/locker_room)
 "ss" = (/obj/structure/closet/secure_closet/engineering_personal,/turf/simulated/floor/tiled,/area/engineering/locker_room)
 "st" = (/obj/machinery/suit_storage_unit/engineering,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled,/area/engineering/engine_eva)
 "su" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/disposalpipe/segment,/turf/simulated/floor/tiled/steel,/area/engineering/engine_eva)

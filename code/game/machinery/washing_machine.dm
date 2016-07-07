@@ -22,6 +22,11 @@
 	var/gibs_ready = 0
 	var/obj/crayon
 
+/obj/machinery/washing_machine/Destroy()
+	qdel(crayon)
+	crayon = null
+	. = ..()
+
 /obj/machinery/washing_machine/verb/start()
 	set name = "Start Washing"
 	set category = "Object"
@@ -45,6 +50,7 @@
 
 	for(var/obj/item/I in contents)
 		I.decontaminate()
+		if()
 
 	//Tanning!
 	for(var/obj/item/stack/material/hairlesshide/HH in contents)
@@ -81,7 +87,7 @@
 			if(!crayon)
 				user.drop_item()
 				crayon = W
-				crayon.loc = src
+				crayon.forceMove(src)
 			else
 				..()
 		else
@@ -162,13 +168,13 @@
 		if(2)
 			state = 1
 			for(var/atom/movable/O in contents)
-				O.loc = src.loc
+				O.forceMove(loc)
 		if(3)
 			state = 4
 		if(4)
 			state = 3
 			for(var/atom/movable/O in contents)
-				O.loc = src.loc
+				O.forceMove(src)
 			crayon = null
 			state = 1
 		if(5)
@@ -182,7 +188,7 @@
 					var/mob/M = locate(/mob,contents)
 					M.gib()
 			for(var/atom/movable/O in contents)
-				O.loc = src.loc
+				O.forceMove(src.loc)
 			crayon = null
 			state = 1
 
