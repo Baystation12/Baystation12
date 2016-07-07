@@ -235,7 +235,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		return "You can only invest one spell slot at a time."
 	uses--
 	processing_objects += src
-	investing_time = world.time + 9000 //15 minutes
+	investing_time = world.time + (15 MINUTES)
 	return "You invest a spellslot and will recieve two in return in thirty minutes."
 
 /obj/item/weapon/spellbook/process()
