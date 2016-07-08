@@ -1,0 +1,6 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - tweak: "Rebalances leap to respect handcuffs, ability to walk, etc."
+  - tweak: "Pariahs HP deficit has been removed (65->100), instead they are now more vulnerable to all types of damage."
+  - rscadd: "Adds missing hair color flag for regular Vox. Now you can have colorful dyed Vox hair! Within reason."
