@@ -50,7 +50,8 @@
 								/obj/item/trash                                         = TRADER_SUBTYPES_ONLY,
 								/obj/item/remains                                       = TRADER_ALL,
 								/obj/item/clothing/accessory                            = TRADER_ALL,
-								/obj/item/robot_parts                                   = TRADER_SUBTYPES_ONLY
+								/obj/item/robot_parts                                   = TRADER_SUBTYPES_ONLY,
+								/obj/item/robot_parts/robot_component                   = TRADER_BLACKLIST
 								)
 
 	mob_transfer_message = "<span class='danger'>You are transported to the ORIGIN, when the transportation dizziness wears off, you find you are surrounded by cackling Vox...</span>"
