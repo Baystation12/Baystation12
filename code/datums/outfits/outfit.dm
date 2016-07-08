@@ -131,6 +131,8 @@ var/list/outfits_decls_by_type_
 		H.put_in_l_hand(new l_hand(H))
 	if(r_hand)
 		H.put_in_r_hand(new r_hand(H))
+	if(H.species)
+		H.species.equip_survival_gear(H, flags&OUTFIT_EXTENDED_SURVIVAL)
 
 /decl/hierarchy/outfit/proc/equip_id(mob/living/carbon/human/H, rank, assignment)
 	if(!id_slot)

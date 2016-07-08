@@ -99,8 +99,3 @@
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
 	alt_titles = list("Emergency Medical Technician" = /decl/hierarchy/outfit/job/medical/paramedic/emt)
 	outfit_type = /decl/hierarchy/outfit/job/medical/paramedic
-		
-	equip_survival(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.species.equip_survival_gear(H,1)
-		return 1
