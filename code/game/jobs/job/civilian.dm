@@ -84,6 +84,11 @@
 	minimal_access = list(access_mining, access_mining_station, access_mailsorting)
 	alt_titles = list("Drill Technician","Prospector")
 	outfit_type = /decl/hierarchy/outfit/job/cargo/mining
+	
+	equip_survival(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		H.species.equip_survival_gear(H,1)
+		return 1
 
 /datum/job/janitor
 	title = "Janitor"

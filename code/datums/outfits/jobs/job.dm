@@ -15,7 +15,6 @@
 	var/backpack = /obj/item/weapon/storage/backpack
 	var/satchel_one  = /obj/item/weapon/storage/backpack/satchel_norm
 	var/satchel_two  = /obj/item/weapon/storage/backpack/satchel
-	var/survival_box = /obj/item/weapon/storage/box/survival
 
 /decl/hierarchy/outfit/job/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -24,7 +23,6 @@
 		if(3) back = satchel_one
 		if(4) back = satchel_two
 		else back = null
-	backpack_contents[survival_box] = 1
 
 /decl/hierarchy/outfit/job/equip_id(mob/living/carbon/human/H)
 	var/obj/item/weapon/card/id/C = ..()

@@ -24,6 +24,11 @@
 			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
 	minimal_player_age = 10
 	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
+	
+	equip_survival(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		H.species.equip_survival_gear(H,1)
+		return 1
 
 /datum/job/engineer
 	title = "Station Engineer"
@@ -40,6 +45,11 @@
 	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction)
 	alt_titles = list("Maintenance Technician","Engine Technician","Electrician")
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
+	
+	equip_survival(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		H.species.equip_survival_gear(H,1)
+		return 1
 
 /datum/job/atmos
 	title = "Atmospheric Technician"
@@ -55,3 +65,8 @@
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_external_airlocks)
 	minimal_access = list(access_eva, access_engine, access_atmospherics, access_maint_tunnels, access_emergency_storage, access_construction, access_external_airlocks)
 	outfit_type = /decl/hierarchy/outfit/job/engineering/atmos
+	
+	equip_survival(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		H.species.equip_survival_gear(H,1)
+		return 1
