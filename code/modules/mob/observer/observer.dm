@@ -35,12 +35,6 @@ var/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 		updateallghostimages()
 	. = ..()
 
-/mob/observer/add_to_living_mob_list()
-	return
-
-/mob/observer/add_to_dead_mob_list()
-	return
-
 mob/observer/check_airflow_movable()
 	return FALSE
 

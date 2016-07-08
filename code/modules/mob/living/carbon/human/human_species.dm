@@ -9,10 +9,10 @@
 	delete_inventory()
 
 /mob/living/carbon/human/dummy/mannequin/add_to_living_mob_list()
-	return
+	return FALSE
 
 /mob/living/carbon/human/dummy/mannequin/add_to_dead_mob_list()
-	return
+	return FALSE
 
 /mob/living/carbon/human/dummy/mannequin/fully_replace_character_name(new_name)
 	..("[new_name] (mannequin)", FALSE)
