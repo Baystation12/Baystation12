@@ -3,6 +3,8 @@
 #define Clamp(x, y, z) 	(x <= y ? y : (x >= z ? z : x))
 #define CLAMP01(x) 		(Clamp(x, 0, 1))
 
+#define get_turf(A) get_step(A,0)
+
 #define isAI(A) istype(A, /mob/living/silicon/ai)
 
 #define isalien(A) istype(A, /mob/living/carbon/alien)

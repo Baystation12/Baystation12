@@ -668,7 +668,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 
 		var/x_pos = (source.x - src_min_x)
 		var/y_pos = (source.y - src_min_y)
-		
+
 		var/turf/target = locate(trg_min_x + x_pos, trg_min_y + y_pos, trg_z)
 		if(!target || target.loc != A)
 			continue
@@ -901,12 +901,6 @@ proc/get_mob_with_client_list()
 	else if (zone == "l_foot") return "left foot"
 	else if (zone == "r_foot") return "right foot"
 	else return zone
-
-//gets the turf the atom is located in (or itself, if it is a turf).
-//returns null if the atom is not in a turf.
-/proc/get_turf(atom/movable/A)
-	if(isturf(A)) return A
-	if(A && A.locs.len) return A.locs[1]
 
 /proc/get(atom/loc, type)
 	while(loc)
