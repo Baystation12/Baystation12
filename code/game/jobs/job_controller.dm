@@ -392,7 +392,6 @@ var/global/datum/controller/occupations/job_master
 			//Equip job items.
 			job.setup_account(H)
 			job.equip(H, H.mind ? H.mind.role_alt_title : "")
-			job.equip_survival(H)
 			job.apply_fingerprints(H)
 
 			//If some custom items could not be equipped before, try again now.
