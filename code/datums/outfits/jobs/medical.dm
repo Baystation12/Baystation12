@@ -4,6 +4,8 @@
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/device/pda/medical
 	pda_slot = slot_l_store
+	backpack = /obj/item/weapon/storage/backpack/medic
+	satchel_one = /obj/item/weapon/storage/backpack/satchel_med
 
 /decl/hierarchy/outfit/job/medical/cmo
 	name = OUTFIT_JOB_NAME("Chief Medical Officer")
@@ -15,8 +17,6 @@
 	r_pocket = /obj/item/device/flashlight/pen
 	id_type = /obj/item/weapon/card/id/medical/head
 	pda_type = /obj/item/device/pda/heads/cmo
-	backpack = /obj/item/weapon/storage/backpack/medic
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_med
 
 /decl/hierarchy/outfit/job/medical/doctor
 	name = OUTFIT_JOB_NAME("Medical Doctor")
@@ -84,8 +84,6 @@
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/laceup
 	id_type = /obj/item/weapon/card/id/medical/psychiatrist
-	backpack = /obj/item/weapon/storage/backpack
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_norm
 
 /decl/hierarchy/outfit/job/medical/psychiatrist/psychologist
 	name = OUTFIT_JOB_NAME("Psychologist")
