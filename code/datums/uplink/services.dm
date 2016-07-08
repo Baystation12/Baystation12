@@ -80,6 +80,7 @@
 /obj/item/device/uplink_service/attack_self(var/mob/user)
 	if(state != AWAITING_ACTIVATION)
 		user << "<span class='warning'>\The [src] won't activate again.</span>"
+		return
 	if(!enable())
 		return
 	state = CURRENTLY_ACTIVE
