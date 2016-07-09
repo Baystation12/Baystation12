@@ -198,7 +198,7 @@
 	if (temperature < lower_limit)
 		bias = min(round((average - temperature)/TEMPERATURE_DIVISOR, 1), TEMPERATURE_CHANGE_MAX)
 	else if (temperature > upper_limit)
-		bias = max(round((temperature - average)/TEMPERATURE_DIVISOR, 1), -TEMPERATURE_CHANGE_MAX)
+		bias = max(round((average - temperature)/TEMPERATURE_DIVISOR, 1), -TEMPERATURE_CHANGE_MAX)
 
 	//limit temperature increase so that it cannot raise temperature above upper_limit,
 	//or if it is already above upper_limit, limit the increase to 0.
