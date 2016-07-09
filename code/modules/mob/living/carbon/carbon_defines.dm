@@ -21,7 +21,7 @@
 	var/datum/reagents/metabolism/touching = null
 	var/losebreath = 0 //if we failed to breathe last tick
 
-	var/does_not_breathe = 0 //Used for specific mobs that can't take advantage of the species flags (changelings)
+	var/does_not_breathe = 0 //snowflake var for changelings
 	var/coughedtime = null
 	var/lastpuke = 0
 
