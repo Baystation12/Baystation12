@@ -1,0 +1,6 @@
+author: HarpyEagle
+
+delete-after: True
+
+changes: 
+  - rscadd: "Armor that provides 'bio' protection will now protect against the effects of slime feeding. Slimes can still glomp you, however, and are still dangerous even if you are wearing biohazard suits."
