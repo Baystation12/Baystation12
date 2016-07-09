@@ -33,9 +33,10 @@
 				C.adjustFireLoss(-heal_amount)
 				sleep(1 SECOND)
 
-	src.verbs -= /mob/proc/changeling_fleshmend
-	spawn(50 SECONDS)
 		src << "<span class='notice'>Our regeneration has slowed to normal levels.</span>"
 		src.verbs += /mob/proc/changeling_fleshmend
+
+	src.verbs -= /mob/proc/changeling_fleshmend
+
 	feedback_add_details("changeling_powers","FM")
 	return 1
