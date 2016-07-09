@@ -226,7 +226,7 @@
 
 /obj/machinery/power/port_gen/pacman/proc/overheat()
 	overheating++
-	if (overheating > 120)
+	if (overheating > 150)
 		explode()
 
 /obj/machinery/power/port_gen/pacman/explode()
