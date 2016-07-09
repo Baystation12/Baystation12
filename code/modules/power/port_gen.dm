@@ -200,11 +200,7 @@
 	else if (temperature > upper_limit)
 		bias = max(round((average - temperature)/TEMPERATURE_DIVISOR, 1), -TEMPERATURE_CHANGE_MAX)
 
-	//limit temperature increase so that it cannot raise temperature above upper_limit,
-	//or if it is already above upper_limit, limit the increase to 0.
-	var/inc_limit = max(upper_limit - temperature, 0)
-	var/dec_limit = min(temperature - lower_limit, 0)
-	temperature += between(dec_limit, rand(-7 + bias, 7 + bias), inc_limit)
+	temperature += rand(-7 + bias, 7 + bias)
 
 	if (temperature > max_temperature)
 		overheat()
@@ -230,7 +226,7 @@
 
 /obj/machinery/power/port_gen/pacman/proc/overheat()
 	overheating++
-	if (overheating > 60)
+	if (overheating > 120)
 		explode()
 
 /obj/machinery/power/port_gen/pacman/explode()
