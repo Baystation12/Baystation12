@@ -180,6 +180,10 @@
 #define SUIT_SENSOR_VITAL    2
 #define SUIT_SENSOR_TRACKING 3
 
+#define SUIT_NO_SENSORS 0
+#define SUIT_HAS_SENSORS 1
+#define SUIT_LOCKED_SENSORS 2
+
 // Storage
 
 /*

@@ -258,7 +258,7 @@
 		if(!(affecting.limb_name in list("l_arm","r_arm","l_leg","r_leg")))
 			user << "<span class='danger'>You can't apply a splint there!</span>"
 			return
-		if(affecting.status & ORGAN_SPLINTED)
+		if(affecting.splinted)
 			user << "<span class='danger'>[M]'s [limb] is already splinted!</span>"
 			return
 		if (M != user)
@@ -269,14 +269,18 @@
 				return
 			user.visible_message("<span class='danger'>[user] starts to apply \the [src] to their [limb].</span>", "<span class='danger'>You start to apply \the [src] to your [limb].</span>", "<span class='danger'>You hear something being wrapped.</span>")
 		if(do_after(user, 50, M))
-			if (M != user)
-				user.visible_message("<span class='danger'>[user] finishes applying \the [src] to [M]'s [limb].</span>", "<span class='danger'>You finish applying \the [src] to [M]'s [limb].</span>", "<span class='danger'>You hear something being wrapped.</span>")
-			else
-				if(prob(25))
-					user.visible_message("<span class='danger'>[user] successfully applies \the [src] to their [limb].</span>", "<span class='danger'>You successfully apply \the [src] to your [limb].</span>", "<span class='danger'>You hear something being wrapped.</span>")
-				else
-					user.visible_message("<span class='danger'>[user] fumbles \the [src].</span>", "<span class='danger'>You fumble \the [src].</span>", "<span class='danger'>You hear something being wrapped.</span>")
+			if(M == user && prob(75))
+				user.visible_message("<span class='danger'>\The [user] fumbles [src].</span>", "<span class='danger'>You fumble [src].</span>", "<span class='danger'>You hear something being wrapped.</span>")
+				return
+			var/obj/item/stack/medical/splint/S = split(1)
+			if(S)
+				if(affecting.apply_splint(S))
+					S.forceMove(affecting)
+					if (M != user)
+						user.visible_message("<span class='danger'>\The [user] finishes applying [src] to [M]'s [limb].</span>", "<span class='danger'>You finish applying \the [src] to [M]'s [limb].</span>", "<span class='danger'>You hear something being wrapped.</span>")
+					else
+						user.visible_message("<span class='danger'>\The [user] successfully applies [src] to their [limb].</span>", "<span class='danger'>You successfully apply \the [src] to your [limb].</span>", "<span class='danger'>You hear something being wrapped.</span>")
 					return
-			affecting.status |= ORGAN_SPLINTED
-			use(1)
+				S.dropInto(src.loc) //didn't get applied, so just drop it
+			user.visible_message("<span class='danger'>\The [user] fails to apply [src].</span>", "<span class='danger'>You fail to apply [src].</span>", "<span class='danger'>You hear something being wrapped.</span>")
 		return

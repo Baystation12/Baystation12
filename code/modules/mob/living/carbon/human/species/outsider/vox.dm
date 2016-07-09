@@ -16,6 +16,7 @@
 	dealing with their traders and merchants; those that do rarely enjoy the experience."
 
 	taste_sensitivity = TASTE_DULL
+	health_hud_intensity = 1.5
 
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
@@ -36,7 +37,7 @@
 
 	flags = NO_SCAN | NO_MINOR_CUT
 	spawn_flags = IS_WHITELISTED
-	appearance_flags = HAS_EYE_COLOR
+	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
@@ -89,16 +90,20 @@
 		H.internal = H.r_hand
 	H.internals.icon_state = "internal1"
 
-
-
 /datum/species/vox/pariah
 	name = "Vox Pariah"
-	//blurb = "TODO Vox Pariah specific blurb."
+	blurb = "Sickly biproducts of Vox society, these creatures are vilified by their own kind \
+	and taken advantage of by enterprising companies for cheap, disposable labor. \
+	They aren't very smart, smell worse than a vox, and vomit constantly, \
+	earning them the true title of 'shitbird'."
 	rarity_value = 0.1
 	speech_chance = 60        // No volume control.
 	siemens_coefficient = 0.5 // Ragged scaleless patches.
 
-	total_health = 65
+	oxy_mod = 1.4
+	brute_mod = 1.3
+	burn_mod = 1.4
+	toxins_mod = 1.3
 
 	cold_level_1 = 130
 	cold_level_2 = 100
@@ -117,7 +122,7 @@
 		)
 	spawn_flags = IS_WHITELISTED | CAN_JOIN
 	flags = NO_SCAN
-	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR //so pariah can change their hair colour but regular vox can't?
+	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
 /datum/species/vox/pariah/get_bodytype()
 	return "Vox"

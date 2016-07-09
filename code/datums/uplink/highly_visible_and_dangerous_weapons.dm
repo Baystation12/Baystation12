@@ -31,14 +31,14 @@
 
 /datum/uplink_item/item/visible_weapons/revolver
 	name = "Revolver"
-	item_cost = 11
+	item_cost = 13
 	antag_costs = list(MODE_MERCENARY = 6)
 	path = /obj/item/weapon/gun/projectile/revolver
 
 /datum/uplink_item/item/visible_weapons/grenade_launcher
 	name = "Grenade Launcher"
-	item_cost = 12
-	antag_roles = list(MODE_MERCENARY)
+	item_cost = 15
+	antag_roles = list(MODE_MERCENARY = 12)
 	path = /obj/item/weapon/gun/launcher/grenade/loaded
 
 //These are for traitors (or other antags, perhaps) to have the option of purchasing some merc gear.
@@ -50,11 +50,11 @@
 
 /datum/uplink_item/item/visible_weapons/assaultrifle
 	name = "Assault Rifle"
-	item_cost = 16
+	item_cost = 15
 	antag_costs = list(MODE_MERCENARY = 9)
 	path = /obj/item/weapon/gun/projectile/automatic/sts35
 
 /datum/uplink_item/item/visible_weapons/heavysniper
 	name = "Anti-materiel Rifle"
-	item_cost = 21
+	item_cost = 15
 	path = /obj/item/weapon/gun/projectile/heavysniper

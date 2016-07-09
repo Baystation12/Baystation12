@@ -140,7 +140,6 @@
 		user.visible_message("\blue [user] has mended the damaged bones in [target]'s [affected.name] with \the [tool]."  , \
 			"\blue You have mended the damaged bones in [target]'s [affected.name] with \the [tool]." )
 		affected.status &= ~ORGAN_BROKEN
-		affected.status &= ~ORGAN_SPLINTED
 		affected.stage = 0
 		affected.perma_injury = 0
 

@@ -1,3 +1,8 @@
+/mob/living/carbon/alien/Stat()
+	. = ..()
+	if(. && statpanel("Status"))
+		stat("Growth", "[round(amount_grown)]/[max_grown]")
+
 /mob/living/carbon/alien/verb/evolve()
 
 	set name = "Moult"

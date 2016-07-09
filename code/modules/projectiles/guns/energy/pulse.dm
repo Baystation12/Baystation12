@@ -37,5 +37,6 @@
 	desc = "It's not the size of the gun, it's the size of the hole it puts through people."
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	icon_state = "m1911-p"
+	item_state = "pulse"
 	max_shots = 8
 	w_class = 3

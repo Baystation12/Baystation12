@@ -570,8 +570,10 @@
 	M.adjustOxyLoss(-2 * removed)
 	M.heal_organ_damage(20 * removed, 20 * removed)
 	M.adjustToxLoss(-20 * removed)
-	if(dose > 3)
-		M.status_flags &= ~DISFIGURED
+	if(dose > 3 && ishuman(M))
+		var/mob/living/carbon/human/H = M
+		for(var/obj/item/organ/external/E in H.organs)
+			E.disfigured = 1 //currently only matters for the head, but might as well disfigure them all.
 	if(dose > 10)
 		M.make_dizzy(5)
 		M.make_jittery(5)

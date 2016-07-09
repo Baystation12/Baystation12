@@ -30,6 +30,14 @@
 	//req_access = list(access_mining)
 	shuttle_tag = "GUP"
 
+/obj/machinery/computer/shuttle_control/merchant
+	name = "merchant shuttle control console"
+	icon_keyboard = "power_key"
+	icon_screen = "shuttle"
+	req_access = list(access_merchant)
+	shuttle_tag = "Merchant"
+
+
 /*
 /obj/machinery/computer/shuttle_control/multi/turbolift
 	name = "turbolift control console"

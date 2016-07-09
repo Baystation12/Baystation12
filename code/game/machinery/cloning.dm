@@ -4,23 +4,32 @@
 //Potential replacement for genetics revives or something I dunno (?)
 
 //Find a dead mob with a brain and client.
-/proc/find_dead_player(var/find_key)
+/proc/find_dead_player(var/find_key, var/include_observers = 0)
 	if(isnull(find_key))
 		return
 
 	var/mob/selected = null
-	for(var/mob/living/M in player_list)
-		//Dead people only thanks!
-		if((M.stat != 2) || (!M.client))
-			continue
-		//They need a brain!
-		if(istype(M, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.species.has_organ["brain"] && !H.has_brain())
+
+	if(include_observers)
+		for(var/mob/M in player_list)
+			if((M.stat != DEAD) || (!M.client))
 				continue
-		if(M.ckey == find_key)
-			selected = M
-			break
+			if(M.ckey == find_key)
+				selected = M
+				break
+	else
+		for(var/mob/living/M in player_list)
+			//Dead people only thanks!
+			if((M.stat != DEAD) || (!M.client))
+				continue
+			//They need a brain!
+			if(istype(M, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = M
+				if(H.species.has_organ["brain"] && !H.has_brain())
+					continue
+			if(M.ckey == find_key)
+				selected = M
+				break
 	return selected
 
 #define CLONE_BIOMASS 150
@@ -83,14 +92,11 @@
 /obj/machinery/clonepod/proc/growclone(var/datum/dna2/record/R)
 	if(mess || attempting)
 		return 0
-	var/datum/mind/clonemind = locate(R.mind)
+	var/datum/mind/clonemind
 
-	if(!istype(clonemind, /datum/mind))	//not a mind
-		return 0
-	if(clonemind.current && clonemind.current.stat != DEAD)	//mind is associated with a non-dead body
-		return 0
-	if(clonemind.active)	//somebody is using that mind
-		if(ckey(clonemind.key) != R.ckey)
+	if(!config.use_cortical_stacks)
+		clonemind = locate(R.mind)
+		if(!istype(clonemind, /datum/mind))	//not a mind
 			return 0
 	else
 		for(var/mob/observer/ghost/G in player_list)
@@ -110,7 +116,7 @@
 	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src, R.dna.species)
 	occupant = H
 
-	if(!R.dna.real_name)	//to prevent null names
+	if(!R.dna.real_name /*|| config.use_cortical_stacks*/)	//to prevent null names
 		R.dna.real_name = "clone ([rand(0,999)])"
 	H.real_name = R.dna.real_name
 
@@ -121,9 +127,11 @@
 	//Here let's calculate their health so the pod doesn't immediately eject them!!!
 	H.updatehealth()
 
-	clonemind.transfer_to(H)
-	H.ckey = R.ckey
-	H << "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>"
+	if(clonemind)
+		clonemind.transfer_to(H)
+		if(R.ckey)
+			H.ckey = R.ckey
+			H << "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>"
 
 	// -- Mode/mind specific stuff goes here
 	callHook("clone", list(H))
@@ -161,7 +169,7 @@
 		return
 
 	if((occupant) && (occupant.loc == src))
-		if((occupant.stat == DEAD) || !occupant.key)
+		if((occupant.stat == DEAD))  //Autoeject corpses
 			locked = 0
 			go_out()
 			connected_message("Clone Rejected: Deceased.")

@@ -1,3 +1,10 @@
+/mob/living/New()
+	..()
+	if(stat == DEAD)
+		add_to_dead_mob_list()
+	else
+		add_to_living_mob_list()
+
 //mob verbs are faster than object verbs. See mob/verb/examine.
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"
@@ -455,8 +462,7 @@ default behaviour is:
 
 	// remove the character from the list of the dead
 	if(stat == DEAD)
-		dead_mob_list -= src
-		living_mob_list += src
+		switch_from_dead_to_living_mob_list()
 		tod = null
 		timeofdeath = 0
 

@@ -29,7 +29,7 @@
 /obj/structure/alien/egg/process()
 	progress++
 	if(progress >= MAX_PROGRESS)
-		for(var/mob/M in dead_mob_list)
+		for(var/mob/M in dead_mob_list_)
 			if(isghost(M) && M.client && M.client.prefs && (MODE_XENOMORPH in M.client.prefs.be_special_role))
 				M << "<span class='notice'>An alien is ready to hatch! ([ghost_follow_link(src, M)]) (<a href='byond://?src=\ref[src];spawn=1'>spawn</a>)</span>"
 		processing_objects -= src
@@ -83,6 +83,7 @@
 	// Create the mob, transfer over key.
 	var/mob/living/carbon/alien/larva/larva = new(get_turf(src))
 	larva.ckey = user.ckey
+	xenomorphs.add_antagonist(larva.mind, 1)
 	spawn(-1)
 		if(user) qdel(user) // Remove the keyless ghost if it exists.
 

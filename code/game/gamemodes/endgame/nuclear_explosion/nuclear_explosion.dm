@@ -32,7 +32,7 @@
 
 	sleep(100)
 
-	for(var/mob/living/L in living_mob_list)
+	for(var/mob/living/L in living_mob_list_)
 		if(L.client)
 			L.client.screen -= cinematic
 

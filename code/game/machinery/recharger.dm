@@ -9,7 +9,7 @@ obj/machinery/recharger
 	idle_power_usage = 4
 	active_power_usage = 15000	//15 kW
 	var/obj/item/charging = null
-	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/laptop, /obj/item/weapon/cell, /obj/item/modular_computer/)
+	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/laptop, /obj/item/weapon/cell, /obj/item/modular_computer/, /obj/item/device/suit_sensor_jammer)
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
 	var/icon_state_idle = "recharger0" //also when unpowered
@@ -46,10 +46,16 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 			if(!C.battery_module)
 				user << "This device does not have a battery installed."
 				return
-		user.drop_item()
-		G.loc = src
-		charging = G
-		update_icon()
+		if(istype(G, /obj/item/device/suit_sensor_jammer))
+			var/obj/item/device/suit_sensor_jammer/J = G
+			if(!J.bcell)
+				user << "This device does not have a battery installed."
+				return
+
+		if(user.unEquip(G))
+			G.forceMove(src)
+			charging = G
+			update_icon()
 	else if(portable && istype(G, /obj/item/weapon/wrench))
 		if(charging)
 			user << "<span class='warning'>Remove [charging] first!</span>"
@@ -80,56 +86,25 @@ obj/machinery/recharger/process()
 		update_use_power(1)
 		icon_state = icon_state_idle
 	else
-		if(istype(charging, /obj/item/weapon/gun/energy))
-			var/obj/item/weapon/gun/energy/E = charging
-			if(!E.power_supply.fully_charged())
-				icon_state = icon_state_charging
-				E.power_supply.give(active_power_usage*CELLRATE)
-				update_use_power(2)
-			else
-				icon_state = icon_state_charged
-				update_use_power(1)
-			return
-
-		if(istype(charging, /obj/item/weapon/melee/baton))
+		var/cell = charging
+		if(istype(charging, /obj/item/device/suit_sensor_jammer))
+			var/obj/item/device/suit_sensor_jammer/J = charging
+			charging = J.bcell
+		else if(istype(charging, /obj/item/weapon/melee/baton))
 			var/obj/item/weapon/melee/baton/B = charging
-			if(B.bcell)
-				if(!B.bcell.fully_charged())
-					icon_state = icon_state_charging
-					B.bcell.give(active_power_usage*CELLRATE)
-					update_use_power(2)
-				else
-					icon_state = icon_state_charged
-					update_use_power(1)
-			else
-				icon_state = icon_state_idle
-				update_use_power(1)
-			return
-
-		if(istype(charging, /obj/item/laptop))
-			var/obj/item/laptop/L = charging
-			if(!L.stored_computer.cpu.battery_module.battery.fully_charged())
-				icon_state = icon_state_charging
-				L.stored_computer.cpu.battery_module.battery.give(active_power_usage*CELLRATE)
-				update_use_power(2)
-			else
-				icon_state = icon_state_charged
-				update_use_power(1)
-			return
-
-		if(istype(charging, /obj/item/modular_computer))
+			cell = B.bcell
+		else if(istype(charging, /obj/item/modular_computer))
 			var/obj/item/modular_computer/C = charging
-			if(!C.battery_module.battery.fully_charged())
-				icon_state = icon_state_charging
-				C.battery_module.battery.give(active_power_usage*CELLRATE)
-				update_use_power(2)
-			else
-				icon_state = icon_state_charged
-				update_use_power(1)
-			return
+			cell = C.battery_module.battery
+		else if(istype(charging, /obj/item/laptop))
+			var/obj/item/laptop/L = charging
+			cell = L.stored_computer.cpu.battery_module.battery
+		else if(istype(charging, /obj/item/weapon/gun/energy))
+			var/obj/item/weapon/gun/energy/E = charging
+			cell = E.power_supply
 
-		if(istype(charging, /obj/item/weapon/cell))
-			var/obj/item/weapon/cell/C = charging
+		if(istype(cell, /obj/item/weapon/cell))
+			var/obj/item/weapon/cell/C = cell
 			if(!C.fully_charged())
 				icon_state = icon_state_charging
 				C.give(active_power_usage*CELLRATE)

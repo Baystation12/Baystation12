@@ -50,7 +50,7 @@
 		src.invisibility = INVISIBILITY_MAXIMUM
 		density = 0
 
-/obj/machinery/cooking/cultify()
+/obj/machinery/cooker/cultify()
 	new /obj/structure/cult/talisman(loc)
 	qdel(src)
 

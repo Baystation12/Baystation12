@@ -1,4 +1,4 @@
-/obj/item/weapon/rig/internalaffairs
+/obj/item/weapon/rig/light/internalaffairs
 	name = "augmented tie"
 	suit_type = "augmented suit"
 	desc = "Prepare for paperwork."
@@ -20,7 +20,7 @@
 
 	hides_uniform = 0
 
-/obj/item/weapon/rig/internalaffairs/equipped
+/obj/item/weapon/rig/light/internalaffairs/equipped
 
 	req_access = list(access_lawyer)
 
@@ -44,7 +44,8 @@
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 100, rad = 50)
 	online_slowdown = 3
 	offline_slowdown = 10
-	offline_vision_restriction = 2
+	vision_restriction = TINT_HEAVY
+	offline_vision_restriction = TINT_BLIND
 	emp_protection = -20
 
 	chest_type = /obj/item/clothing/suit/space/rig/industrial
@@ -88,7 +89,7 @@
 	armor = list(melee = 30, bullet = 10, laser = 20,energy = 25, bomb = 20, bio = 100, rad = 100)
 	online_slowdown = 0
 	offline_slowdown = 1
-	offline_vision_restriction = 1
+	offline_vision_restriction = TINT_HEAVY
 
 	chest_type = /obj/item/clothing/suit/space/rig/eva
 	helm_type = /obj/item/clothing/head/helmet/space/rig/eva
@@ -133,7 +134,7 @@
 	armor = list(melee = 40, bullet = 10, laser = 30,energy = 25, bomb = 40, bio = 100, rad = 100)
 	online_slowdown = 0
 	offline_slowdown = 0
-	offline_vision_restriction = 0
+	offline_vision_restriction = TINT_HEAVY
 
 	chest_type = /obj/item/clothing/suit/space/rig/ce
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ce
@@ -172,7 +173,7 @@
 	icon_state = "science_rig"
 	armor = list(melee = 45, bullet = 5, laser = 45, energy = 80, bomb = 60, bio = 100, rad = 100)
 	online_slowdown = 1
-	offline_vision_restriction = 1
+	offline_vision_restriction = TINT_HEAVY
 
 	chest_type = /obj/item/clothing/suit/space/rig/hazmat
 	helm_type = /obj/item/clothing/head/helmet/space/rig/hazmat
@@ -216,7 +217,7 @@
 	icon_state = "medical_rig"
 	armor = list(melee = 30, bullet = 15, laser = 20, energy = 60, bomb = 30, bio = 100, rad = 100)
 	online_slowdown = 1
-	offline_vision_restriction = 1
+	offline_vision_restriction = TINT_HEAVY
 
 	chest_type = /obj/item/clothing/suit/space/rig/medical
 	helm_type = /obj/item/clothing/head/helmet/space/rig/medical
@@ -260,7 +261,7 @@
 	armor = list(melee = 60, bullet = 40, laser = 30, energy = 15, bomb = 60, bio = 100, rad = 30)
 	online_slowdown = 1
 	offline_slowdown = 3
-	offline_vision_restriction = 1
+	offline_vision_restriction = TINT_BLIND
 
 	chest_type = /obj/item/clothing/suit/space/rig/hazard
 	helm_type = /obj/item/clothing/head/helmet/space/rig/hazard

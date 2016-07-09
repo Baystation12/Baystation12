@@ -145,7 +145,7 @@ var/list/VVckey_edit = list("key", "ckey")
 	var/assoc = 0
 	if(L.len > 0)
 		var/a = L[1]
-		if(istext(a) && L[a] != null)
+		if(!isnum(a) && L[a] != null)
 			assoc = 1 //This is pretty weak test but i can't think of anything else
 			usr << "List appears to be associative."
 
@@ -504,7 +504,7 @@ var/list/VVckey_edit = list("key", "ckey")
 			if(dir)
 				usr << "If a direction, direction is: [dir]"
 
-		var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+		var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","json","edit referenced object","restore to default")
 		if(src.holder)
 			var/datum/marked_datum = holder.marked_datum()
 			if(marked_datum)
@@ -551,11 +551,11 @@ var/list/VVckey_edit = list("key", "ckey")
 				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
 				if(var_new == null) return
 				if((O.vars[variable] == 2) && (var_new < 2))//Bringing the dead back to life
-					dead_mob_list -= O
-					living_mob_list += O
+					var/mob/M = O
+					M.switch_from_dead_to_living_mob_list()
 				if((O.vars[variable] < 2) && (var_new == 2))//Kill he
-					living_mob_list -= O
-					dead_mob_list += O
+					var/mob/M = O
+					M.switch_from_living_to_dead_mob_list()
 				O.vars[variable] = var_new
 			else
 				var/var_new =  input("Enter new number:","Num",O.vars[variable]) as null|num
@@ -586,6 +586,13 @@ var/list/VVckey_edit = list("key", "ckey")
 			var/var_new = input("Pick icon:","Icon",O.vars[variable]) as null|icon
 			if(var_new==null) return
 			O.vars[variable] = var_new
+
+		if("json")
+			var/json_str = input("JSON string", "JSON", json_encode(O.vars[variable])) as null | message
+			try
+				O.vars[variable] = json_decode(json_str)
+			catch
+				return
 
 		if("marked datum")
 			O.vars[variable] = holder.marked_datum()

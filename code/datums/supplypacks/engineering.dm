@@ -1,6 +1,5 @@
 /decl/hierarchy/supply_pack/engineering
 	name = "Engineering"
-	hierarchy_type = /decl/hierarchy/supply_pack/engineering
 
 /decl/hierarchy/supply_pack/engineering/lightbulbs
 	name = "Replacement lights"
@@ -222,8 +221,9 @@
 	access = access_robotics
 
 /decl/hierarchy/supply_pack/engineering/radsuit
-	name = "Radiation suits package"
-	contains = list(/obj/item/clothing/suit/radiation = 6)
+	name = "Radiation protection gear"
+	contains = list(/obj/item/clothing/suit/radiation = 6,
+			/obj/item/clothing/head/radiation = 6)
 	cost = 20
 	containertype = /obj/structure/closet/radiation
 	containername = "\improper Radiation suit locker"

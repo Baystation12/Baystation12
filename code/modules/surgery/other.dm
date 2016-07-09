@@ -114,11 +114,8 @@
 	max_duration = 60
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		if (!istype(tool, /obj/item/weapon/reagent_containers))
-			return 0
-
 		var/obj/item/weapon/reagent_containers/container = tool
-		if(!container.reagents.has_reagent("peridaxon"))
+		if(!istype(container) || !container.reagents.has_reagent("peridaxon"))
 			return 0
 
 		if(!hasorgans(target))
@@ -145,10 +142,16 @@
 
 		var/obj/item/weapon/reagent_containers/container = tool
 
-		var/trans = container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_BLOOD) //technically it's contact, but the reagents are being applied to internal tissue
+		var/amount = container.amount_per_transfer_from_this
+		var/datum/reagents/temp = new(amount)
+		container.reagents.trans_to_holder(temp, amount)
+
+		var/rejuvenate = temp.has_reagent("peridaxon")
+
+		var/trans = temp.trans_to_mob(target, temp.total_volume, CHEM_BLOOD) //technically it's contact, but the reagents are being applied to internal tissue
 		if (trans > 0)
 
-			if(container.reagents.has_reagent("peridaxon"))
+			if(rejuvenate)
 				affected.status &= ~ORGAN_DEAD
 				affected.owner.update_body(1)
 
