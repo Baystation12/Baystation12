@@ -357,6 +357,29 @@
 	)
 
 	restricted_programs = list(
-	"Atmospheric Burn Simulation" = "burntest",
+	"Wildlife Simulation" = "wildlifecarp"
+	)
+
+/obj/machinery/computer/HolodeckControl/Torch
+	linkedholodeck_area = /area/holodeck/alphadeck
+
+/obj/machinery/computer/HolodeckControl/Torch/New()
+	..()
+	supported_programs = list(
+	"Empty Court" 		= "emptycourt",
+	"Basketball Court" 	= "basketball",
+	"Thunderdome Court"	= "thunderdomecourt",
+	"Boxing Ring"		= "boxingcourt",
+	"Beach" 			= "beach",
+	"Desert" 			= "desert",
+	"Space" 			= "space",
+	"Picnic Area" 		= "picnicarea",
+	"Snow Field" 		= "snowfield",
+	"Theatre" 			= "theatre",
+	"Meeting Hall" 		= "meetinghall",
+	"Courtroom" 		= "courtroom"
+	)
+
+	restricted_programs = list(
 	"Wildlife Simulation" = "wildlifecarp"
 	)
