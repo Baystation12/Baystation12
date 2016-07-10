@@ -3,6 +3,8 @@
 #define Clamp(x, y, z) 	(x <= y ? y : (x >= z ? z : x))
 #define CLAMP01(x) 		(Clamp(x, 0, 1))
 
+#define get_turf(A) get_step(A,0)
+
 #define isAI(A) istype(A, /mob/living/silicon/ai)
 
 #define isalien(A) istype(A, /mob/living/carbon/alien)
@@ -48,6 +50,8 @@
 #define isslime(A) istype(A, /mob/living/carbon/slime)
 
 #define attack_animation(A) if(istype(A)) A.do_attack_animation(src)
+
+#define isairlock(A) istype(A, /obj/machinery/door/airlock)
 
 #define sequential_id(key) uniqueness_repository.Generate(/datum/uniqueness_generator/id_sequential, key)
 

@@ -84,7 +84,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 			dat += "<td class='dark'"
 		else
 			dat += "<td class='light'"
-			
+
 		if(board["[i]"])
 			var/obj/item/I = board["[i]"]
 			user << browse_rsc(board_icons["[I.icon] [I.icon_state]"],"[I.icon_state].png")
@@ -168,7 +168,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 	icon = 'icons/obj/pieces.dmi'
 	icon_state = "checker_black"
 	w_class = 1
-	center_of_mass = list("x"=16, "y"=16)
+	center_of_mass = "x=16;y=16"
 	nutriment_desc = list("a choking hazard" = 4)
 	nutriment_amt = 1
 	var/piece_color ="black"

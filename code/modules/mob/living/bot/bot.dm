@@ -123,3 +123,17 @@
 /mob/living/bot/proc/explode()
 	qdel(src)
 
+/mob/living/bot/proc/turf_is_targetable(var/turf/T)
+	if(T.density)
+		return 0
+	for(var/atom/A in T.contents)
+		if(!A.CanPass(src, T, 0.5))
+			if(isairlock(A))
+				var/obj/machinery/door/D = A
+				if(D.allowed(src))
+					continue
+			return 0
+	return 1
+				
+			
+	

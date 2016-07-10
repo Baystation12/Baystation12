@@ -20,6 +20,7 @@
 								/obj/item/weapon/gun/projectile/colt        = TRADER_ALL,
 								/obj/item/weapon/gun/projectile/deagle      = TRADER_ALL,
 								/obj/item/weapon/gun/projectile/sec         = TRADER_ALL,
+								/obj/item/weapon/gun/projectile/sec/MK      = TRADER_BLACKLIST,
 								/obj/item/weapon/gun/projectile/shotgun/pump= TRADER_SUBTYPES_ONLY,
 								/obj/item/ammo_magazine                     = TRADER_SUBTYPES_ONLY,
 								/obj/item/ammo_magazine/a10mm/empty         = TRADER_BLACKLIST,
@@ -27,6 +28,12 @@
 								/obj/item/ammo_magazine/a75/empty           = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/c45m/empty          = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/mc9mm/empty         = TRADER_BLACKLIST,
+								/obj/item/ammo_magazine/box/c9mm/empty      = TRADER_BLACKLIST,
+								/obj/item/ammo_magazine/box/c45/empty       = TRADER_BLACKLIST,
+								/obj/item/ammo_magazine/box/a762/empty      = TRADER_BLACKLIST,
+								/obj/item/ammo_magazine/c45uzi/empty        = TRADER_BLACKLIST,
+								/obj/item/ammo_magazine/mc9mmt/empty        = TRADER_BLACKLIST,
+								/obj/item/ammo_magazine/a50/empty           = TRADER_BLACKLIST,
 								/obj/item/clothing/accessory/holster        = TRADER_ALL)
 
 /datum/trader/ship/egunshop
@@ -52,11 +59,11 @@
 								/obj/item/weapon/gun/energy/xray                         = TRADER_THIS_TYPE,
 								/obj/item/weapon/gun/energy/laser                        = TRADER_THIS_TYPE,
 								/obj/item/weapon/gun/energy/gun                          = TRADER_THIS_TYPE,
-								/obj/item/weapon/cell                                    = TRADER_ALL,
-								/obj/item/weapon/cell/infinite                           = TRADER_BLACKLIST,
-								/obj/item/weapon/cell/slime                              = TRADER_BLACKLIST,
-								/obj/item/weapon/cell/secborg                            = TRADER_BLACKLIST_ALL,
-								/obj/item/weapon/cell/device                             = TRADER_BLACKLIST_ALL,
+								/obj/item/weapon/cell                                    = TRADER_THIS_TYPE,
+								/obj/item/weapon/cell/crap                               = TRADER_THIS_TYPE,
+								/obj/item/weapon/cell/high                               = TRADER_THIS_TYPE,
+								/obj/item/weapon/cell/super                              = TRADER_THIS_TYPE,
+								/obj/item/weapon/cell/hyper                              = TRADER_THIS_TYPE,
 								/obj/item/clothing/accessory/holster                     = TRADER_ALL)
 
 /datum/trader/dogan

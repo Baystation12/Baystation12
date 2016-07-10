@@ -16,7 +16,7 @@ var/decl/hierarchy/supply_pack/cargo_supply_packs	// Non-category supply packs
 
 /decl/hierarchy/supply_pack/New()
 	..()
-	if(is_category())
+	if(is_hidden_category())
 		return	// Don't init the manifest for category entries
 
 	if(!cargo_supply_packs) cargo_supply_packs = list()

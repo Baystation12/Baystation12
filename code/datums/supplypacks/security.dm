@@ -231,7 +231,7 @@
 					/obj/item/device/camera,
 					/obj/item/weapon/folder/red,
 					/obj/item/weapon/folder/blue,
-					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/gloves/forensic,
 					/obj/item/device/taperecorder,
 					/obj/item/device/mass_spectrometer,
 					/obj/item/device/camera_film = 2,
@@ -255,6 +255,7 @@
 					/obj/item/clothing/suit/storage/det_trench/grey,
 					/obj/item/clothing/suit/storage/forensics/red,
 					/obj/item/clothing/suit/storage/forensics/blue,
+					/obj/item/clothing/gloves/forensic,
 					/obj/item/clothing/gloves/black = 2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure

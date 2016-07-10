@@ -137,28 +137,61 @@
 
 	// Placing stuff on tables
 	if(user.drop_from_inventory(W, src.loc))
-		place_item(W, click_params)
+		auto_align(W, click_params)
 
 	return
 
-/obj/structure/table/proc/place_item(obj/item/W, var/click_params)
-	var/list/click_data = params2list(click_params)
-	//Center the icon where the user clicked.
-	if(!click_data || !click_data["icon-x"] || !click_data["icon-y"])
+/*
+Automatic alignment of items to an invisible grid, defined by CELLS and CELLSIZE, defined in code/__defines/misc.dm.
+Since the grid will be shifted to own a cell that is perfectly centered on the turf, we end up with two 'cell halves'
+on edges of each row/column.
+Each item defines a center_of_mass, which is the pixel of a sprite where its projected center of mass toward a turf
+surface can be assumed. For a piece of paper, this will be in its center. For a bottle, it will be (near) the bottom
+of the sprite.
+auto_align() will then place the sprite so the defined center_of_mass is at the bottom left corner of the grid cell
+closest to where the cursor has clicked on.
+Note: This proc can be overwritten to allow for different types of auto-alignment.
+*/
+/obj/item/var/center_of_mass = "x=16;y=16" //can be null for no exact placement behaviour
+/obj/structure/table/proc/auto_align(obj/item/W, click_params)
+	if (!W.center_of_mass) // Clothing, material stacks, generally items with large sprites where exact placement would be unhandy.
+		W.pixel_x = rand(-W.randpixel, W.randpixel)
+		W.pixel_y = rand(-W.randpixel, W.randpixel)
+		W.pixel_z = 0
 		return
 
-	//Food is special, apparently
-	var/center_x = 16
-	var/center_y = 16
-	if(istype(W, /obj/item/weapon/reagent_containers/food))
-		var/obj/item/weapon/reagent_containers/food/F = W
-		if(F.center_of_mass.len)
-			center_x = F.center_of_mass["x"]
-			center_y = F.center_of_mass["y"]
+	if (!click_params)
+		return
 
-	//Clamp it so that the icon never moves more than 16 pixels in either direction (thus leaving the table turf)
-	W.pixel_x = Clamp(text2num(click_data["icon-x"]) - center_x, -(world.icon_size/2), world.icon_size/2)
-	W.pixel_y = Clamp(text2num(click_data["icon-y"]) - center_y, -(world.icon_size/2), world.icon_size/2)
+	var/list/click_data = params2list(click_params)
+	if (!click_data["icon-x"] || !click_data["icon-y"])
+		return
+
+	// Calculation to apply new pixelshift.
+	var/mouse_x = text2num(click_data["icon-x"])-1 // Ranging from 0 to 31
+	var/mouse_y = text2num(click_data["icon-y"])-1
+
+	var/cell_x = Clamp(round(mouse_x/CELLSIZE), 0, CELLS-1) // Ranging from 0 to CELLS-1
+	var/cell_y = Clamp(round(mouse_y/CELLSIZE), 0, CELLS-1)
+
+	var/list/center = cached_key_number_decode(W.center_of_mass)
+
+	W.pixel_x = (CELLSIZE * (cell_x + 0.5)) - center["x"]
+	W.pixel_y = (CELLSIZE * (cell_y + 0.5)) - center["y"]
+	W.pixel_z = 0
+
+/obj/structure/table/rack/auto_align(obj/item/W, click_params)
+	if(W && !W.center_of_mass)
+		..(W)
+
+	var/i = -1
+	for (var/obj/item/I in get_turf(src))
+		if (I.anchored || !I.center_of_mass)
+			continue
+		i++
+		I.pixel_x = max(3-i*3, -3) + 1 // There's a sprite layering bug for 0/0 pixelshift, so we avoid it.
+		I.pixel_y = max(4-i*4, -4) + 1
+		I.pixel_z = 0
 
 /obj/structure/table/attack_tk() // no telehulk sorry
 	return

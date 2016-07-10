@@ -37,7 +37,6 @@
 	var/load_item_visible = 1	//set if the loaded item should be overlayed on the vehicle sprite
 	var/load_offset_x = 0		//pixel_x offset for item overlay
 	var/load_offset_y = 0		//pixel_y offset for item overlay
-	var/mob_offset_y = 0		//pixel_y offset for mob overlay
 
 //-------------------------------------------
 // Standard procs
@@ -158,10 +157,6 @@
 /obj/vehicle/attack_ai(mob/user as mob)
 	return
 
-// For downstream compatibility (in particular Paradise)
-/obj/vehicle/proc/handle_rotation()
-	return
-
 //-------------------------------------------
 // Vehicle procs
 //-------------------------------------------
@@ -275,8 +270,8 @@
 
 	// if a create/closet, close before loading
 	var/obj/structure/closet/crate = C
-	if(istype(crate))
-		crate.close()
+	if(istype(crate) && !crate.close())
+		return 0
 
 	C.forceMove(loc)
 	C.set_dir(dir)
@@ -285,15 +280,13 @@
 	load = C
 
 	if(load_item_visible)
-		C.pixel_x += load_offset_x
-		if(ismob(C))
-			C.pixel_y += mob_offset_y
-		else
-			C.pixel_y += load_offset_y
 		C.layer = layer + 0.1		//so it sits above the vehicle
 
 	if(ismob(C))
 		buckle_mob(C)
+	else if(load_item_visible)
+		C.pixel_x += load_offset_x
+		C.pixel_y += load_offset_y
 
 	return 1
 
@@ -331,8 +324,13 @@
 	load.forceMove(dest)
 	load.set_dir(get_dir(loc, dest))
 	load.anchored = 0		//we can only load non-anchored items, so it makes sense to set this to false
-	load.pixel_x = initial(load.pixel_x)
-	load.pixel_y = initial(load.pixel_y)
+	if(ismob(load)) //atoms should probably have their own procs to define how their pixel shifts and layer can be manipulated, someday
+		var/mob/M = load
+		M.pixel_x = M.default_pixel_x
+		M.pixel_y = M.default_pixel_y
+	else
+		load.pixel_x = initial(load.pixel_x)
+		load.pixel_y = initial(load.pixel_y)
 	load.layer = initial(load.layer)
 
 	if(ismob(load))

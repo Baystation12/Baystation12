@@ -113,7 +113,7 @@
 		return
 
 	// Change the way they should download resources.
-	if(config.resource_urls)
+	if(config.resource_urls && config.resource_urls.len)
 		src.preload_rsc = pick(config.resource_urls)
 	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
 
