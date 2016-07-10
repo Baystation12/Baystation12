@@ -12,7 +12,7 @@
 			seed.display_name = "strange plants" //more thematic for the vine infestation event
 
 			//make vine zero start off fully matured
-			var/obj/effect/plant/vine = new(T,seed, start_matured = 1)
+			new /obj/effect/plant(T,seed, start_matured = 1)
 
 			log_and_message_admins("Spacevines spawned in \the [get_area(T)]", location = T)
 			return
