@@ -11,7 +11,7 @@
 
 
 // MAINTENANCE JACK - Acts as an universal keycard, but works with a 15-30s delay
-/obj/item/weapon/wrench/brace_jack
+/obj/item/weapon/crowbar/brace_jack
 	name = "maintenance jack"
 	desc = "A special wrench that can be used to safely remove maintenance braces from airlocks."
 	w_class = 3
@@ -95,10 +95,10 @@
 				user << "You swipe \the [C] through \the [src], but it does not react."
 		return
 
-	if (istype(W, /obj/item/weapon/wrench/brace_jack))
+	if (istype(W, /obj/item/weapon/crowbar/brace_jack))
 		if(!airlock)
 			return
-		var/obj/item/weapon/wrench/brace_jack/C = W
+		var/obj/item/weapon/crowbar/brace_jack/C = W
 		user << "You begin forcibly removing \the [src] with \the [C]."
 		if(do_after(user, rand(150,300), airlock))
 			user << "You finish removing \the [src]."

@@ -1736,5 +1736,5 @@ CIRCUITS BELOW
 	id = "bracejack"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 120)
-	build_path = /obj/item/weapon/wrench/brace_jack
+	build_path = /obj/item/weapon/crowbar/brace_jack
 	sort_string = "VBAAS"
