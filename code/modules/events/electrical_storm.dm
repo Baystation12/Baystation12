@@ -47,11 +47,9 @@
 
 		if(T.is_critical)
 			T.energy_fail(10 * severity)
+			continue
 		else
 			T.energy_fail(10 * severity * rand(severity * 2, severity * 4))
-
-		if(T.is_critical)
-			continue
 
 		// Very tiny chance to completely break the APC. Has a check to ensure we don't break critical APCs such as the Engine room, or AI core. Does not occur on Mundane severity.
 		if(prob((0.2 * severity) - 0.2))
