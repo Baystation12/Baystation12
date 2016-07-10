@@ -59,6 +59,8 @@
 		return 0
 	if(user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1)
 		return 0
+
+	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	if(ismob(user.pulling))
 		var/mob/M = user.pulling
 		var/atom/movable/t = M.pulling

@@ -152,8 +152,8 @@ var/global/list/limb_icon_cache = list()
 // damage amount to represent the pain of the injuries involved.
 
 // Global scope, used in code below.
-var/list/flesh_hud_colours = list("#00FF00","#AAFF00","#FFFF00","#FFAA00","#FF0000","#AA0000","#660000")
-var/list/robot_hud_colours = list("#FFFFFF","#CCCCCC","#AAAAAA","#888888","#666666","#444444","#222222","#000000")
+var/list/flesh_hud_colours = list("#02BA08","#9ECF19","#DEDE10","#FFAA00","#FF0000","#AA0000","#660000")
+var/list/robot_hud_colours = list("#CFCFCF","#AFAFAF","#8F8F8F","#6F6F6F","#4F4F4F","#2F2F2F","#000000")
 
 /obj/item/organ/external/proc/get_damage_hud_image(var/min_dam_state)
 
@@ -165,12 +165,19 @@ var/list/robot_hud_colours = list("#FFFFFF","#CCCCCC","#AAAAAA","#888888","#6666
 		if(!icon_cache_key || !limb_icon_cache[cache_key])
 			limb_icon_cache[cache_key] = icon(get_icon(), null, SOUTH)
 		var/image/temp = image(limb_icon_cache[cache_key])
-		if(species)
+		if((robotic < ORGAN_ROBOT) && species)
 			// Calculate the required colour matrix.
 			var/r = 0.30 * species.health_hud_intensity
 			var/g = 0.59 * species.health_hud_intensity
 			var/b = 0.11 * species.health_hud_intensity
 			temp.color = list(r, r, r, g, g, g, b, b, b)
+		else if(model)
+			var/datum/robolimb/R = all_robolimbs[model]
+			if(istype(R))
+				var/r = 0.30 * R.health_hud_intensity
+				var/g = 0.59 * R.health_hud_intensity
+				var/b = 0.11 * R.health_hud_intensity
+				temp.color = list(r, r, r, g, g, g, b, b, b)
 		hud_damage_image = image(null)
 		hud_damage_image.overlays += temp
 

@@ -405,9 +405,9 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			namecounts[name] = 1
 		if (M.real_name && M.real_name != M.name)
 			name += " \[[M.real_name]\]"
-		if (M.stat == 2)
-			if(istype(M, /mob/observer/ghost/))
-				name += " \[ghost\]"
+		if (M.stat == DEAD)
+			if(isobserver(M))
+				name += " \[observer\]"
 			else
 				name += " \[dead\]"
 		creatures[name] = M
@@ -668,7 +668,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 
 		var/x_pos = (source.x - src_min_x)
 		var/y_pos = (source.y - src_min_y)
-		
+
 		var/turf/target = locate(trg_min_x + x_pos, trg_min_y + y_pos, trg_z)
 		if(!target || target.loc != A)
 			continue
@@ -902,12 +902,6 @@ proc/get_mob_with_client_list()
 	else if (zone == "r_foot") return "right foot"
 	else return zone
 
-//gets the turf the atom is located in (or itself, if it is a turf).
-//returns null if the atom is not in a turf.
-/proc/get_turf(atom/movable/A)
-	if(isturf(A)) return A
-	if(A && A.locs.len) return A.locs[1]
-
 /proc/get(atom/loc, type)
 	while(loc)
 		if(istype(loc, type))
@@ -1134,7 +1128,7 @@ var/list/WALLITEMS = list(
 		arglist = list2params(arglist)
 	return "<a href='?src=\ref[D];[arglist]'>[content]</a>"
 
-/proc/get_random_colour(var/simple, var/lower, var/upper)
+/proc/get_random_colour(var/simple = FALSE, var/lower = 0, var/upper = 255)
 	var/colour
 	if(simple)
 		colour = pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))
@@ -1142,7 +1136,7 @@ var/list/WALLITEMS = list(
 		for(var/i=1;i<=3;i++)
 			var/temp_col = "[num2hex(rand(lower,upper))]"
 			if(length(temp_col )<2)
-				temp_col  = "0[temp_col]"
+				temp_col = "0[temp_col]"
 			colour += temp_col
 	return "#[colour]"
 
@@ -1178,12 +1172,6 @@ var/mob/dview/dview_mob = new
 	..()
 	// We don't want to be in any mob lists; we're a dummy not a mob.
 	mob_list -= src
-
-/mob/dview/add_to_living_mob_list()
-	return
-
-/mob/dview/add_to_dead_mob_list()
-	return
 
 // call to generate a stack trace and print to runtime logs
 /proc/crash_with(msg)

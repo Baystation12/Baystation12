@@ -1,12 +1,11 @@
 /decl/hierarchy/outfit/tournament_gear
+	hierarchy_type = /decl/hierarchy/outfit/tournament_gear
 	head = /obj/item/clothing/head/helmet/thunderdome
 	suit = /obj/item/clothing/suit/armor/vest
 	l_hand = /obj/item/weapon/material/knife
 	r_hand = /obj/item/weapon/gun/energy/pulse_rifle/destroyer
 	r_pocket = /obj/item/weapon/grenade/smokebomb
 	shoes = /obj/item/clothing/shoes/black
-
-	flags = OUTFIT_HIDE_IF_CATEGORY
 
 /decl/hierarchy/outfit/tournament_gear/red
 	name = "Tournament - Red"

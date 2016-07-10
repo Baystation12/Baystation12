@@ -1,4 +1,7 @@
 //general stuff
+/proc/sanitize_bool(boolean, default=FALSE)
+	return sanitize_integer(boolean, FALSE, TRUE, default)
+
 /proc/sanitize_integer(number, min=0, max=1, default=0)
 	if(isnum(number))
 		number = round(number)

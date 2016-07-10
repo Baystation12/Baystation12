@@ -23,6 +23,8 @@
 		return "This subject is too far away..."
 	if (issilicon(M))
 		return "This subject does not have an edible life energy..."
+	if (M.getarmor(null, "bio") >= 100)
+		return "This subject is protected..."
 	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.species.flags & (NO_POISON|NO_SCAN))
@@ -49,14 +51,15 @@
 		if(Adjacent(M))
 			UpdateFeed(M)
 
+			var/hazmat = blocked_mult(M.getarmor(null, "bio")) //scale feeding rate by overall bio protection
 			if(istype(M, /mob/living/carbon))
-				Victim.adjustCloneLoss(rand(5,6))
-				Victim.adjustToxLoss(rand(1,2))
+				Victim.adjustCloneLoss(rand(5,6) * hazmat)
+				Victim.adjustToxLoss(rand(1,2) * hazmat)
 				if(Victim.health <= 0)
-					Victim.adjustToxLoss(rand(2,4))
+					Victim.adjustToxLoss(rand(2,4) * hazmat)
 
 			else if(istype(M, /mob/living/simple_animal))
-				Victim.adjustBruteLoss(is_adult ? rand(7, 15) : rand(4, 12))
+				Victim.adjustBruteLoss((is_adult ? rand(7, 15) : rand(4, 12)) * hazmat)
 
 			else
 				src << "<span class='warning'>[pick("This subject is incompatable", "This subject does not have a life energy", "This subject is empty", "I am not satisified", "I can not feed from this subject", "I do not feel nourished", "This subject is not food")]...</span>"
@@ -73,12 +76,13 @@
 					if (!(C.species && (C.species.flags & NO_PAIN)))
 						M << "<span class='danger'>[painMes]</span>"
 
-			gain_nutrition(rand(20,25))
+			gain_nutrition(rand(20,25) * hazmat)
 
-			adjustOxyLoss(-10) //Heal yourself
-			adjustBruteLoss(-10)
-			adjustFireLoss(-10)
-			adjustCloneLoss(-10)
+			var/heal_amt = 10 * hazmat
+			adjustOxyLoss(-heal_amt) //Heal yourself
+			adjustBruteLoss(-heal_amt)
+			adjustFireLoss(-heal_amt)
+			adjustCloneLoss(-heal_amt)
 			updatehealth()
 			if(Victim)
 				Victim.updatehealth()
