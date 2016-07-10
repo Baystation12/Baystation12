@@ -41,10 +41,6 @@
 
 /mob/New()
 	mob_list += src
-	if(stat == DEAD)
-		add_to_dead_mob_list()
-	else
-		add_to_living_mob_list()
 	..()
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
@@ -412,7 +408,7 @@
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
 	client.screen.Cut()
-	client.screen += client.void
+	add_click_catcher()
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
@@ -570,7 +566,7 @@
 			for(var/name in H.organs_by_name)
 				var/obj/item/organ/external/e = H.organs_by_name[name]
 				if(e && H.lying)
-					if(((e.status & ORGAN_BROKEN && !(e.status & ORGAN_SPLINTED)) || e.status & ORGAN_BLEEDING) && (H.getBruteLoss() + H.getFireLoss() >= 100))
+					if((((e.status & ORGAN_BROKEN) && !e.splinted) || e.status & ORGAN_BLEEDING ) && (H.getBruteLoss() + H.getFireLoss() >= 100))
 						return 1
 						break
 		return 0
@@ -738,29 +734,20 @@
 	if(!resting && cannot_stand() && can_stand_overridden())
 		lying = 0
 		canmove = 1
-	else
-		if(istype(buckled, /obj/vehicle))
-			var/obj/vehicle/V = buckled
-			if(is_physically_disabled())
-				lying = 1
-				canmove = 0
-				pixel_y = V.mob_offset_y - 5
+	else if(buckled)
+		anchored = 1
+		canmove = 0
+		if(istype(buckled))
+			if(buckled.buckle_lying == -1)
+				lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 			else
-				if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
+				lying = buckled.buckle_lying
+			if(buckled.buckle_movable)
+				anchored = 0
 				canmove = 1
-				pixel_y = V.mob_offset_y
-		else if(buckled)
-			anchored = 1
-			canmove = 0
-			if(istype(buckled))
-				if(buckled.buckle_lying != -1)
-					lying = buckled.buckle_lying
-				if(buckled.buckle_movable)
-					anchored = 0
-					canmove = 1
-		else
-			lying = incapacitated(INCAPACITATION_KNOCKDOWN)
-			canmove = !incapacitated(INCAPACITATION_DISABLED)
+	else
+		lying = incapacitated(INCAPACITATION_KNOCKDOWN)
+		canmove = !incapacitated(INCAPACITATION_DISABLED)
 
 	if(lying)
 		density = 0

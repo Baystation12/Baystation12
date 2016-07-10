@@ -1,6 +1,5 @@
 /decl/hierarchy/supply_pack/engineering
 	name = "Engineering"
-	hierarchy_type = /decl/hierarchy/supply_pack/engineering
 
 /decl/hierarchy/supply_pack/engineering/lightbulbs
 	name = "Replacement lights"

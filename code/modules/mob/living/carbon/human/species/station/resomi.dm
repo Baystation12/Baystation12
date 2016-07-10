@@ -11,6 +11,7 @@
 	name_language = LANGUAGE_RESOMI
 	min_age = 12
 	max_age = 45
+	health_hud_intensity = 3
 
 	blood_color = "#D514F7"
 	flesh_color = "#5F7BB0"
@@ -34,7 +35,7 @@
 	holder_type = /obj/item/weapon/holder/human
 	short_sighted = 1
 	gluttonous = GLUT_TINY
-	blood_volume = 400
+	blood_volume = 280
 	hunger_factor = 0.2
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED

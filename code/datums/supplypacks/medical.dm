@@ -1,7 +1,6 @@
 /decl/hierarchy/supply_pack/medical
 	name = "Medical"
 	containertype = /obj/structure/closet/crate/medical
-	hierarchy_type = /decl/hierarchy/supply_pack/medical
 
 /decl/hierarchy/supply_pack/medical/medical
 	name = "Medical crate"

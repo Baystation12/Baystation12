@@ -618,3 +618,12 @@ proc/dd_sortedTextList(list/incoming)
 	for(var/entry in L)
 		if(istype(entry, type))
 			. += entry
+
+
+/proc/group_by(var/list/group_list, var/key, var/value)
+	var/values = group_list[key]
+	if(!values)
+		values = list()
+		group_list[key] = values
+
+	values += value

@@ -104,7 +104,7 @@ obj/item/weapon/gun/energy/retro
 	fire_delay = 35
 	force = 10
 	w_class = 5
-	accuracy = -3 //shooting at the hip
+	accuracy = -2 //shooting at the hip
 	scoped_accuracy = 0
 
 /obj/item/weapon/gun/energy/sniperrifle/update_icon()
@@ -116,7 +116,7 @@ obj/item/weapon/gun/energy/retro
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(2.0)
+	toggle_scope(usr, 2.0)
 
 ////////Laser Tag////////////////////
 

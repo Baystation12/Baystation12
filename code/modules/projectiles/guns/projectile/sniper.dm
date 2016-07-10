@@ -14,7 +14,7 @@
 	max_shells = 1
 	ammo_type = /obj/item/ammo_casing/a145
 	requires_two_hands = 6
-	accuracy = -3
+	accuracy = -2
 	scoped_accuracy = 5 //increased accuracy over the LWAP because only one shot
 	var/bolt_open = 0
 
@@ -62,4 +62,5 @@
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(2.0)
+	toggle_scope(usr, 2.0)
+

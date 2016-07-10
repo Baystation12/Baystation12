@@ -37,23 +37,25 @@
 			continue
 
 		// Decent chance to overload lighting circuit.
-		if(prob(10))
+		if(prob(3 * severity))
 			T.overload_lighting()
 
 		// Relatively small chance to emag the apc as apc_damage event does.
-		if(prob(1))
+		if(prob(0.2 * severity))
 			T.emagged = 1
 			T.update_icon()
 
 		if(T.is_critical)
+			T.energy_fail(10 * severity)
 			continue
+		else
+			T.energy_fail(10 * severity * rand(severity * 2, severity * 4))
 
 		// Very tiny chance to completely break the APC. Has a check to ensure we don't break critical APCs such as the Engine room, or AI core. Does not occur on Mundane severity.
 		if(prob((0.2 * severity) - 0.2))
 			T.set_broken()
 
-		// At all times, assuming the APC is not protected, turn it off briefly (as gridcheck does, just considerably shorter duration)
-		T.energy_fail(10)
+
 
 /datum/event/electrical_storm/end()
 	..()

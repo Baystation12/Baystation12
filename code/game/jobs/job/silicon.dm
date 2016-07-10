@@ -1,7 +1,6 @@
 /datum/job/ai
 	title = "AI"
-	flag = AI
-	department_flag = ENGSEC
+	department_flag = MSC
 	faction = "Station"
 	total_positions = 0 // Not used for AI, see is_position_available below and modules/mob/living/silicon/ai/latejoin.dm
 	spawn_positions = 1
@@ -15,14 +14,6 @@
 		if(!H)	return 0
 		return 1
 
-	equip_survival(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		return 1
-
-	equip_backpack(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		return 1
-
 /datum/job/ai/is_position_available()
 	return (empty_playable_ai_cores.len != 0)
 
@@ -33,8 +24,7 @@
 
 /datum/job/cyborg
 	title = "Cyborg"
-	flag = CYBORG
-	department_flag = ENGSEC
+	department_flag = MSC
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
@@ -47,15 +37,6 @@
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
-		return 1
-
-	equip_survival(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		return 1
-
-	equip_backpack(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		return 1
 		return 1
 
 /datum/job/cyborg/equip_preview(mob/living/carbon/human/H)

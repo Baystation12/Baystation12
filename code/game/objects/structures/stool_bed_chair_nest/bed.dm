@@ -180,6 +180,7 @@
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0
+	buckle_pixel_shift = "x=0;y=6"
 
 /obj/structure/bed/roller/update_icon()
 	return // Doesn't care about material or anything else.
@@ -255,13 +256,9 @@
 
 /obj/structure/bed/roller/post_buckle_mob(mob/living/M as mob)
 	if(M == buckled_mob)
-		M.pixel_y = 6
-		M.old_y = 6
 		density = 1
 		icon_state = "up"
 	else
-		M.pixel_y = 0
-		M.old_y = 0
 		density = 0
 		icon_state = "down"
 

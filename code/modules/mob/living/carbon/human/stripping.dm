@@ -129,27 +129,22 @@
 
 // Remove all splints.
 /mob/living/carbon/human/proc/remove_splints(var/mob/living/user)
-
-	var/can_reach_splints = 1
-	if(istype(wear_suit,/obj/item/clothing/suit/space))
-		var/obj/item/clothing/suit/space/suit = wear_suit
-		if(suit.supporting_limbs && suit.supporting_limbs.len)
-			user << "<span class='warning'>You cannot remove the splints - [src]'s [suit] is supporting some of the breaks.</span>"
-			can_reach_splints = 0
-
-	if(can_reach_splints)
-		var/removed_splint
-		for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
-			var/obj/item/organ/external/o = get_organ(organ)
-			if (o && o.status & ORGAN_SPLINTED)
-				var/obj/item/W = new /obj/item/stack/medical/splint(get_turf(src), 1)
-				o.status &= ~ORGAN_SPLINTED
-				W.add_fingerprint(user)
-				removed_splint = 1
-		if(removed_splint)
-			visible_message("<span class='danger'>\The [user] removes \the [src]'s splints!</span>")
-		else
-			user << "<span class='warning'>\The [src] has no splints to remove.</span>"
+	var/removed_splint = 0
+	for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
+		var/obj/item/organ/external/o = get_organ(organ)
+		if (o && o.splinted)
+			var/obj/item/S = o.splinted
+			if(!istype(S) || S.loc != o) //can only remove splints that are actually worn on the organ (deals with hardsuit splints)
+				user << "<span class='warning'>You cannot remove any splints on [src]'s [o.name] - [o.splinted] is supporting some of the breaks.</span>"
+			else
+				S.add_fingerprint(user)
+				if(o.remove_splint())
+					user.put_in_active_hand(S)
+					removed_splint = 1
+	if(removed_splint)
+		visible_message("<span class='danger'>\The [user] removes \the [src]'s splints!</span>")
+	else
+		user << "<span class='warning'>\The [src] has no splints that can be removed.</span>"
 
 // Set internals on or off.
 /mob/living/carbon/human/proc/toggle_internals(var/mob/living/user)
