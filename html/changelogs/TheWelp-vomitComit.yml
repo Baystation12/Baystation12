@@ -1,0 +1,6 @@
+author: TheWelp
+
+delete-after: True
+
+changes: 
+  - rscadd: "Humans can now use the *vomit emote, which causes them to vomit."
