@@ -14,6 +14,7 @@ var/datum/antagonist/raider/raiders
 	hard_cap_round = 10
 	initial_spawn_req = 4
 	initial_spawn_target = 6
+	min_player_age = 14
 
 	id_type = /obj/item/weapon/card/id/syndicate
 
