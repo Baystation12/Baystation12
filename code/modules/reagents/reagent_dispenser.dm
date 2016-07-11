@@ -36,7 +36,7 @@
 		set name = "Set transfer amount"
 		set category = "Object"
 		set src in view(1)
-		var/N = input("Amount per transfer from this:","[src]") as null|anything in possible_transfer_amounts
+		var/N = input("Amount per transfer from this:","[src]") as null|anything in cached_number_list_decode(possible_transfer_amounts)
 		if (N)
 			amount_per_transfer_from_this = N
 
