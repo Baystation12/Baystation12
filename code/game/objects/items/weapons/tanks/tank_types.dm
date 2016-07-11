@@ -152,9 +152,9 @@
  */
 
 /obj/item/weapon/tank/carbon_dioxide
-	name = "co2 tank"
+	name = "carbon dioxide tank"
 	desc = "a tank of carbon dioxide"
-	icon_state = "oxygen_fr"
+	icon_state = "carbon_dioxide"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 
 /obj/item/weapon/tank/carbon_dioxide/New()
@@ -164,9 +164,9 @@
 	return
 
 /obj/item/weapon/tank/emergency/carbon_dioxide
-	name = "emergency co2 tank"
+	name = "emergency carbon dioxide tank"
 	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
-	icon_state = "emergency_nitro"
+	icon_state = "emergency_carbondioxide"
 	gauge_icon = "indicator_emergency"
 
 /obj/item/weapon/tank/emergency/nitrogen/New()
