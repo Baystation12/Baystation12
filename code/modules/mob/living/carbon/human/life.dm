@@ -379,15 +379,7 @@
 
 	var/relative_density = (environment.total_moles/environment.volume) / (MOLES_CELLSTANDARD/CELL_VOLUME)
 	if(relative_density > 0.02) //don't bother if we are in vacuum or near-vacuum
-		var/loc_temp = T0C
-		if(istype(loc, /obj/mecha))
-			var/obj/mecha/M = loc
-			loc_temp =  M.return_temperature()
-		else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-			var/obj/machinery/atmospherics/unary/cryo_cell/C = loc
-			loc_temp = C.air_contents.temperature
-		else
-			loc_temp = environment.temperature
+		var/loc_temp = environment.temperature
 
 		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < species.heat_level_1 && bodytemperature > species.cold_level_1)
 			pressure_alert = 0
