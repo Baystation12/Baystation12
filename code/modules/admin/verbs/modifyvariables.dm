@@ -145,9 +145,11 @@ var/list/VVckey_edit = list("key", "ckey")
 	var/assoc = 0
 	if(L.len > 0)
 		var/a = L[1]
-		if(!isnum(a) && L[a] != null)
-			assoc = 1 //This is pretty weak test but i can't think of anything else
-			usr << "List appears to be associative."
+		try 
+			if(!isnum(a) && L[a] != null)
+				assoc = 1 //This is pretty weak test but I can't think of anything else
+				usr << "List appears to be associative."
+		catch {} // Builtin non-assoc lists (contents, etc.) will runtime if you try to get an assoc value of them
 
 	var/list/names = null
 	if(!assoc)
