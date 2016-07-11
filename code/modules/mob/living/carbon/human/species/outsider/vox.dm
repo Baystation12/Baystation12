@@ -31,8 +31,10 @@
 	eyes = "vox_eyes_s"
 	gluttonous = GLUT_SMALLER
 
-	breath_type = "nitrogen"
+	breath_type = "carbon_dioxide"
 	poison_type = "oxygen"
+	exhale_type = null
+
 	siemens_coefficient = 0.2
 
 	flags = NO_SCAN | NO_MINOR_CUT
@@ -81,11 +83,11 @@
 /datum/species/vox/equip_survival_gear(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(H), slot_wear_mask)
 	if(H.backbag == 1)
-		H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_back)
+		H.equip_to_slot_or_del(new /obj/item/weapon/tank/carbon_dioxide(H), slot_back)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/vox(H), slot_r_hand)
 		H.internal = H.back
 	else
-		H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_r_hand)
+		H.equip_to_slot_or_del(new /obj/item/weapon/tank/carbon_dioxide(H), slot_r_hand)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/vox(H.back), slot_in_backpack)
 		H.internal = H.r_hand
 	H.internals.icon_state = "internal1"
