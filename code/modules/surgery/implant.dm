@@ -182,6 +182,8 @@
 					find_prob +=60
 				else
 					find_prob +=40
+			else if(istype(obj, /obj/item/organ))
+				find_prob += 100
 			else
 				find_prob +=50
 
