@@ -380,7 +380,8 @@
 			var/obj/mecha/M = loc
 			loc_temp =  M.return_temperature()
 		else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-			loc_temp = loc:air_contents.temperature
+			var/obj/machinery/atmospherics/unary/cryo_cell/C = loc
+			loc_temp = C.air_contents.temperature
 		else
 			loc_temp = environment.temperature
 
@@ -400,7 +401,7 @@
 				temp_adj = (1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR)
 
 		//Use heat transfer as proportional to the gas density. However, we only care about the relative density vs standard 101 kPa/20 C air. Therefore we can use mole ratios
-		var/relative_density = environment.total_moles / MOLES_CELLSTANDARD
+		var/relative_density = (environment.total_moles/environment.volume) / (MOLES_CELLSTANDARD/CELL_VOLUME)
 		bodytemperature += between(BODYTEMP_COOLING_MAX, temp_adj*relative_density, BODYTEMP_HEATING_MAX)
 
 	// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
