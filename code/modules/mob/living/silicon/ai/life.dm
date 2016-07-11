@@ -1,128 +1,41 @@
 /mob/living/silicon/ai/Life()
 	if (src.stat == DEAD)
 		return
-	else //I'm not removing that shitton of tabs, unneeded as they are. -- Urist
-		//Being dead doesn't mean your temperature never changes
-		var/turf/T = get_turf(src)
 
-		if (src.stat!=CONSCIOUS)
-			src.cameraFollow = null
-			src.reset_view(null)
+	if (src.stat!=CONSCIOUS)
+		src.cameraFollow = null
+		src.reset_view(null)
 
-		src.updatehealth()
+	src.updatehealth()
 
-		if (!hardware_integrity() || !backup_capacitor())
-			death()
-			return
+	if (!hardware_integrity() || !backup_capacitor())
+		death()
+		return
 
-		// If our powersupply object was destroyed somehow, create new one.
-		if(!psupply)
-			create_powersupply()
+	// If our powersupply object was destroyed somehow, create new one.
+	if(!psupply)
+		create_powersupply()
 
+	handle_stunned()	// Handle EMP-stun
+	lying = 0			// Handle lying down
 
-		// Handle power damage (oxy)
-		if(aiRestorePowerRoutine != 0 && !APU_power)
-			// Lose power
-			adjustOxyLoss(1)
-		else
-			// Gain Power
-			aiRestorePowerRoutine = 0 // Necessary if AI activated it's APU AFTER losing primary power.
-			adjustOxyLoss(-1)
+	malf_process()
 
-		handle_stunned()	// Handle EMP-stun
-		lying = 0			// Handle lying down
+	if(APU_power && (hardware_integrity() < 50))
+		src << "<span class='notice'><b>APU GENERATOR FAILURE! (System Damaged)</b></span>"
+		stop_apu(1)
 
-		malf_process()
+	// We aren't shut down, and we lack external power. Try to fix it using the restoration routine.
+	if (!self_shutdown && !has_power(0))
+		// AI's restore power routine is not running. Start it automatically.
+		if(aiRestorePowerRoutine == AI_RESTOREPOWER_IDLE)
+			aiRestorePowerRoutine = AI_RESTOREPOWER_STARTING
+			spawn(0)
+				handle_power_failure()
 
-		if(APU_power && (hardware_integrity() < 50))
-			src << "<span class='notice'><b>APU GENERATOR FAILURE! (System Damaged)</b></span>"
-			stop_apu(1)
-
-		if (!is_blinded())
-			if (aiRestorePowerRoutine==2)
-				src << "Alert cancelled. Power has been restored without our assistance."
-				aiRestorePowerRoutine = 0
-				clear_fullscreen("blind")
-				updateicon()
-				return
-			else if (aiRestorePowerRoutine==3)
-				src << "Alert cancelled. Power has been restored."
-				aiRestorePowerRoutine = 0
-				clear_fullscreen("blind")
-				updateicon()
-				return
-			else if (APU_power)
-				aiRestorePowerRoutine = 0
-				clear_fullscreen("blind")
-				updateicon()
-				return
-		else
-			var/area/current_area = get_area(src)
-
-			if (lacks_power())
-				if (aiRestorePowerRoutine==0)
-					aiRestorePowerRoutine = 1
-
-					//Now to tell the AI why they're blind and dying slowly.
-					src << "You've lost power!"
-
-					spawn(20)
-						src << "Backup battery online. Scanners, camera, and radio interface offline. Beginning fault-detection."
-						sleep(50)
-						if (current_area.power_equip)
-							if (!istype(T, /turf/space))
-								src << "Alert cancelled. Power has been restored without our assistance."
-								aiRestorePowerRoutine = 0
-								clear_fullscreen("blind")
-								return
-						src << "Fault confirmed: missing external power. Shutting down main control system to save power."
-						sleep(20)
-						src << "Emergency control system online. Verifying connection to power network."
-						sleep(50)
-						if (istype(T, /turf/space))
-							src << "Unable to verify! No power connection detected!"
-							aiRestorePowerRoutine = 2
-							return
-						src << "Connection verified. Searching for APC in power network."
-						sleep(50)
-						var/obj/machinery/power/apc/theAPC = null
-
-						var/PRP
-						for (PRP=1, PRP<=4, PRP++)
-							for (var/obj/machinery/power/apc/APC in current_area)
-								if (!(APC.stat & BROKEN))
-									theAPC = APC
-									break
-							if (!theAPC)
-								switch(PRP)
-									if (1) src << "Unable to locate APC!"
-									else src << "Lost connection with the APC!"
-								src:aiRestorePowerRoutine = 2
-								return
-							if (current_area.power_equip)
-								if (!istype(T, /turf/space))
-									src << "Alert cancelled. Power has been restored without our assistance."
-									aiRestorePowerRoutine = 0
-									clear_fullscreen("blind")
-									return
-							switch(PRP)
-								if (1) src << "APC located. Optimizing route to APC to avoid needless power waste."
-								if (2) src << "Best route identified. Hacking offline APC power port."
-								if (3) src << "Power port upload access confirmed. Loading control program into APC power port software."
-								if (4)
-									src << "Transfer complete. Forcing APC to execute program."
-									sleep(50)
-									src << "Receiving control information from APC."
-									sleep(2)
-									theAPC.operating = 1
-									theAPC.equipment = 3
-									theAPC.update()
-									aiRestorePowerRoutine = 3
-									src << "Here are your current laws:"
-									show_laws()
-									updateicon()
-							sleep(50)
-							theAPC = null
+	update_power_usage()
+	handle_power_oxyloss()
+	update_sight()
 
 	process_queued_alarms()
 	handle_regular_hud_updates()
@@ -132,12 +45,6 @@
 		if (MED_HUD)
 			process_med_hud(src,0,src.eyeobj)
 
-/mob/living/silicon/ai/proc/lacks_power()
-	if(APU_power)
-		return 0
-	var/turf/T = get_turf(src)
-	var/area/A = get_area(src)
-	return ((!A.power_equip) && A.requires_power == 1 || istype(T, /turf/space)) && !istype(src.loc,/obj/item)
 
 /mob/living/silicon/ai/updatehealth()
 	if(status_flags & GODMODE)
@@ -152,20 +59,14 @@
 	add_ai_verbs(src)
 
 /mob/living/silicon/ai/update_sight()
-	if(is_blinded())
+	if(!has_power() || self_shutdown)
 		updateicon()
 		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
-		src.sight = src.sight&~SEE_TURFS
-		src.sight = src.sight&~SEE_MOBS
-		src.sight = src.sight&~SEE_OBJS
-		src.see_in_dark = 0
-		src.see_invisible = SEE_INVISIBLE_LIVING
+		sight = sight&~SEE_TURFS
+		sight = sight&~SEE_MOBS
+		sight = sight&~SEE_OBJS
+		see_in_dark = 0
+		see_invisible = SEE_INVISIBLE_LIVING
 	else
 		clear_fullscreen("blind")
 		update_dead_sight()
-
-/mob/living/silicon/ai/proc/is_blinded()
-	var/area/A = get_area(src)
-	if (A && !A.power_equip && !istype(src.loc,/obj/item) && !APU_power)
-		return 1
-	return 0
