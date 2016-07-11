@@ -331,9 +331,8 @@
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, get_turf(target))
 			s.start()
-			var/turf/picked = get_turf(pick(turfs))                      // Just in case...
 			new/obj/effect/decal/cleanable/molten_item(get_turf(target)) // Leave a pile of goo behind for dramatic effect...
-			target.forceMove(picked)                                     // And teleport them to the chosen location.
+			target.forceMove(T)                                     // And teleport them to the chosen location.
 			impact = 1
 
 	return impact
