@@ -154,7 +154,7 @@
 		usr << "<span class='warning'>The suit is not initialized.</span>"
 		return 0
 
-	if(usr.lying || usr.stat || usr.stunned || usr.paralysis || usr.weakened)
+	if(usr.is_physically_disabled())
 		usr << "<span class='warning'>You cannot use the suit in this state.</span>"
 		return 0
 
@@ -174,9 +174,8 @@
 	return 1
 
 // Proc for toggling on active abilities.
-/obj/item/rig_module/proc/activate()
-
-	if(active || !engage())
+/obj/item/rig_module/proc/activate(var/engage = TRUE)
+	if(active || (engage && !engage()))
 		return 0
 
 	active = 1

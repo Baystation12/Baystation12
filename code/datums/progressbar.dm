@@ -12,7 +12,7 @@
 		EXCEPTION("Invalid target given")
 	if (goal_number)
 		goal = goal_number
-	bar = image('icons/effects/progessbar.dmi', target, "prog_bar_0")
+	bar = image('icons/effects/progessbar.dmi', target, "prog_bar_0", layer = FLY_LAYER)
 	bar.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 	bar.pixel_y = 32
 	src.user = user
@@ -23,6 +23,9 @@
 	if (client)
 		client.images -= bar
 	qdel(bar)
+	bar = null
+	user = null
+	client = null
 	. = ..()
 
 /datum/progressbar/proc/update(progress)

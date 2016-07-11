@@ -71,6 +71,18 @@
 		if(istype(T))
 			T.reconsider_lights()
 
+/atom/proc/get_luminosity()
+	var/turf/T = get_turf(src)
+	if(!T)
+		return 10
+	var/area/A = T.loc
+	if(!A.lighting_use_dynamic)
+		return 10
+	if(!T.lighting_overlay)
+		return 0
+
+	return Clamp(T.lighting_overlay.lum_r + T.lighting_overlay.lum_g + T.lighting_overlay.lum_b ,0, 10)
+
 /obj/item/equipped()
 	. = ..()
 	update_light()
