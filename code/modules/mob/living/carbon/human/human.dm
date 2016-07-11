@@ -734,6 +734,9 @@
 		return
 	if(stat == DEAD)
 		return
+	if(nutrition < 40)
+		custom_emote(1,"dry heaves.")
+		return
 	if(!lastpuke)
 		lastpuke = 1
 		src << "<span class='warning'>You feel nauseous...</span>"
