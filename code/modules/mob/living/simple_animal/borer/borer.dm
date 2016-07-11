@@ -52,7 +52,7 @@
 	verbs += /mob/living/proc/hide
 
 	generation = gen
-	truename = "[borer_names[min(generation, borer_names.len)]] [rand(1000,9999)]"
+	truename = "[borer_names[min(generation, borer_names.len)]] [random_id("borer[generation]", 1000, 9999)]"
 	if(!roundstart) request_player()
 
 /mob/living/simple_animal/borer/Life()
