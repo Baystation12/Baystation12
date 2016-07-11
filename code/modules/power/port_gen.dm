@@ -194,13 +194,8 @@
 	var/average = (upper_limit + lower_limit)/2
 
 	//calculate the temperature increase
-	var/bias = 0
-	if (temperature < lower_limit)
-		bias = min(round((average - temperature)/TEMPERATURE_DIVISOR, 1), TEMPERATURE_CHANGE_MAX)
-	else if (temperature > upper_limit)
-		bias = max(round((average - temperature)/TEMPERATURE_DIVISOR, 1), -TEMPERATURE_CHANGE_MAX)
-
-	temperature += rand(-7 + bias, 7 + bias)
+	var/bias = Clamp(round((average - temperature)/TEMPERATURE_DIVISOR, 1),  -TEMPERATURE_CHANGE_MAX, TEMPERATURE_CHANGE_MAX)
+	temperature += bias + rand(-7, 7)
 
 	if (temperature > max_temperature)
 		overheat()
