@@ -24,7 +24,10 @@
 	mob_size = MOB_SMALL
 
 	var/generation = 1
-	var/static/list/borer_names = list("Primary","Secondary","Tertiary","Quaternary","Quinary")
+	var/static/list/borer_names = list(
+		"Primary", "Secondary", "Tertiary", "Quaternary", "Quinary", "Senary",
+		"Septenary", "Octonary", "Novenary", "Decenary", "Undenary", "Duodenary",
+		)
 
 	var/used_dominate
 	var/chemicals = 10                      // Chemicals used for reproduction and spitting neurotoxin.
