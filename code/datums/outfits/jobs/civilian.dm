@@ -15,7 +15,7 @@
 	name = OUTFIT_JOB_NAME("Chef")
 	uniform = /obj/item/clothing/under/rank/chef
 	suit = /obj/item/clothing/suit/chef
-	head = /obj/item/clothing/head
+	head = /obj/item/clothing/head/chefhat
 	id_type = /obj/item/weapon/card/id/civilian/chef
 	pda_type = /obj/item/device/pda/chef
 
