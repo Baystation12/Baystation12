@@ -454,41 +454,38 @@ its easier to just keep the beam vertical.
 	else
 		return 0
 
+
 // Show a message to all mobs and objects in sight of this atom
 // Use for objects performing visible actions
 // message is output to anyone who can see, e.g. "The [src] does something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
-/atom/proc/visible_message(var/message, var/blind_message, var/range = world.view)
+/atom/proc/visible_message(var/message, var/blind_message, var/range = world.view, var/checkghosts = null)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
-	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, ONLY_GHOSTS_IN_VIEW)
+	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, checkghosts)
 
 	for(var/o in objs)
 		var/obj/O = o
-		O.show_message(message,1,blind_message,2)
+		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 
 	for(var/m in mobs)
 		var/mob/M = m
 		if(M.see_invisible >= invisibility)
-			M.show_message(message,1,blind_message,2)
+			M.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 		else if(blind_message)
-			M.show_message(blind_message, 2)
+			M.show_message(blind_message, AUDIBLE_MESSAGE)
 
 // Show a message to all mobs and objects in earshot of this atom
 // Use for objects performing audible actions
 // message is the message output to anyone who can hear.
 // deaf_message (optional) is what deaf people will see.
 // hearing_distance (optional) is the range, how many tiles away the message can be heard.
-/atom/proc/audible_message(var/message, var/deaf_message, var/hearing_distance)
-
-	var/range = world.view
-	if(hearing_distance)
-		range = hearing_distance
+/atom/proc/audible_message(var/message, var/deaf_message, var/hearing_distance = world.view, var/checkghosts = null)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
-	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, ONLY_GHOSTS_IN_VIEW)
+	get_mobs_and_objs_in_view_fast(T, hearing_distance, mobs, objs, checkghosts)
 
 	for(var/m in mobs)
 		var/mob/M = m
