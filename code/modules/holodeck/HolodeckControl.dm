@@ -27,8 +27,8 @@
 /obj/machinery/computer/HolodeckControl/New()
 	..()
 	linkedholodeck = locate(linkedholodeck_area)
-	supported_programs = list()
-	restricted_programs = list()
+	supported_programs = using_map.holodeck_supported_programs.Copy()
+	restricted_programs = using_map.holodeck_restricted_programs.Copy()
 
 /obj/machinery/computer/HolodeckControl/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
@@ -335,51 +335,3 @@
 
 	active = 0
 	use_power = 1
-
-/obj/machinery/computer/HolodeckControl/Exodus
-	linkedholodeck_area = /area/holodeck/alphadeck
-
-/obj/machinery/computer/HolodeckControl/Exodus/New()
-	..()
-	supported_programs = list(
-	"Empty Court" 		= "emptycourt",
-	"Basketball Court" 	= "basketball",
-	"Thunderdome Court"	= "thunderdomecourt",
-	"Boxing Ring"		= "boxingcourt",
-	"Beach" 			= "beach",
-	"Desert" 			= "desert",
-	"Space" 			= "space",
-	"Picnic Area" 		= "picnicarea",
-	"Snow Field" 		= "snowfield",
-	"Theatre" 			= "theatre",
-	"Meeting Hall" 		= "meetinghall",
-	"Courtroom" 		= "courtroom"
-	)
-
-	restricted_programs = list(
-	"Wildlife Simulation" = "wildlifecarp"
-	)
-
-/obj/machinery/computer/HolodeckControl/Torch
-	linkedholodeck_area = /area/holodeck/alphadeck
-
-/obj/machinery/computer/HolodeckControl/Torch/New()
-	..()
-	supported_programs = list(
-	"Empty Court" 		= "emptycourt",
-	"Basketball Court" 	= "basketball",
-	"Thunderdome Court"	= "thunderdomecourt",
-	"Boxing Ring"		= "boxingcourt",
-	"Beach" 			= "beach",
-	"Desert" 			= "desert",
-	"Space" 			= "space",
-	"Picnic Area" 		= "picnicarea",
-	"Snow Field" 		= "snowfield",
-	"Theatre" 			= "theatre",
-	"Meeting Hall" 		= "meetinghall",
-	"Courtroom" 		= "courtroom"
-	)
-
-	restricted_programs = list(
-	"Wildlife Simulation" = "wildlifecarp"
-	)
