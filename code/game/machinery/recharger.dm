@@ -9,7 +9,7 @@ obj/machinery/recharger
 	idle_power_usage = 4
 	active_power_usage = 15000	//15 kW
 	var/obj/item/charging = null
-	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/laptop, /obj/item/weapon/cell, /obj/item/modular_computer/, /obj/item/device/suit_sensor_jammer)
+	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/laptop, /obj/item/weapon/cell, /obj/item/modular_computer/, /obj/item/device/suit_sensor_jammer, /obj/item/weapon/computer_hardware/battery_module)
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
 	var/icon_state_idle = "recharger0" //also when unpowered
@@ -102,7 +102,9 @@ obj/machinery/recharger/process()
 		else if(istype(charging, /obj/item/weapon/gun/energy))
 			var/obj/item/weapon/gun/energy/E = charging
 			cell = E.power_supply
-
+		else if(istype(charging, /obj/item/weapon/computer_hardware/battery_module))
+			var/obj/item/weapon/computer_hardware/battery_module/BM = charging
+			cell = BM.battery
 		if(istype(cell, /obj/item/weapon/cell))
 			var/obj/item/weapon/cell/C = cell
 			if(!C.fully_charged())
