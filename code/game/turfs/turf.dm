@@ -4,17 +4,14 @@
 	var/holy = 0
 
 	// Initial air contents (in moles)
-	var/oxygen = 0
-	var/carbon_dioxide = 0
-	var/nitrogen = 0
-	var/phoron = 0
+	var/init_air = "temperature=T20C"
 
 	//Properties for airtight tiles (/wall)
 	var/thermal_conductivity = 0.05
 	var/heat_capacity = 1
+	var/temperature = T20C
 
 	//Properties for both
-	var/temperature = T20C      // Initial turf temperature.
 	var/blocks_air = 0          // Does this turf contain air/let air through?
 
 	// General properties.

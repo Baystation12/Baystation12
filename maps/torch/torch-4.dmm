@@ -1960,7 +1960,7 @@
 "LJ" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/turf/simulated/floor/plating,/area/maintenance/firstdeck/centralport)
 "LK" = (/obj/random/junk,/turf/simulated/floor/plating,/area/maintenance/firstdeck/centralport)
 "LL" = (/obj/machinery/door/firedoor/border_only,/turf/simulated/floor/plating,/area/maintenance/firstdeck/centralport)
-"LM" = (/obj/machinery/telecomms/relay/preset/firstdeck,/turf/simulated/floor/bluegrid{name = "Mainframe Base"; nitrogen = 82.1472; oxygen = 21.8366; temperature = 293.15},/area/tcommsat/relay/firstdeck)
+"LM" = (/obj/machinery/telecomms/relay/preset/firstdeck,/turf/simulated/floor/bluegrid{name = "Mainframe Base"; init_air = "nitrogen=82.1472&oxygen=21.8366&temperature=293.15"},/area/tcommsat/relay/firstdeck)
 "LN" = (/obj/machinery/light/small,/obj/machinery/firealarm{dir = 4; pixel_x = 24},/turf/simulated/floor/tiled/dark,/area/tcommsat/relay/firstdeck)
 "LO" = (/obj/machinery/photocopier,/turf/simulated/floor/tiled/white,/area/rnd/equipment)
 "LP" = (/turf/simulated/floor/tiled/white,/area/rnd/equipment)

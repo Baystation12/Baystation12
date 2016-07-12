@@ -1,7 +1,7 @@
 /datum/gas_mixture
 	//Associative list of gas moles.
 	//Gases with 0 moles are not tracked and are pruned by update_values()
-	var/list/gas = list()
+	var/list/gas = null
 	//Temperature in Kelvin of this gas mix.
 	var/temperature = 0
 
@@ -13,10 +13,24 @@
 	var/group_multiplier = 1
 
 	//List of active tile overlays for this gas_mixture.  Updated by check_tile_graphic()
-	var/list/graphic = list()
+	var/list/graphic = null
 
-/datum/gas_mixture/New(vol = CELL_VOLUME)
+/datum/gas_mixture/New(vol = CELL_VOLUME, list/gas_in = null)
 	volume = vol
+	
+	graphic = list()
+
+	if(gas_in)
+		temperature = gas_in["temperature"] - 0
+		gas = gas_in - "temperature"
+		update_values()
+	else
+		gas = list()
+
+/datum/gas_mixture/proc/Clone()
+	var/datum/gas_mixture/clone = new(volume)
+	clone.copy_from(src)
+	return clone
 
 //Takes a gas string and the amount of moles to adjust by.  Calls update_values() if update isn't 0.
 /datum/gas_mixture/proc/adjust_gas(gasid, moles, update = 1)
