@@ -56,6 +56,17 @@
 		
 		-->
 		<div class="commit sansserif">
+			<h2 class="date">12 July 2016</h2>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Random event probabilities have been changed a bit. This is mostly noticeable with electrical storms, which should be less common now.</li>
+				<li class="tweak">Electrical storm now shuts down APCs for longer duration which is controlled by event severity. APCs with critical flag are now affected too, but are only shut down for a short time in comparison to others.</li>
+				<li class="tweak">EMPs are no longer one-hit kills for AIs - APCs with critical flag take reduced damage from EMPs, and AI's power restoration routine now resets the APC that may have been EMPed.</li>
+				<li class="tweak">AI's power usage has been overhauled. Under the hood changes should improve reliability a bit and take more scenarios in consideration. The power restoration routine now provides better feedback to the AI if it fails, such as, whether the APC is broken or only discharged, etc.</li>
+				<li class="rscadd">AI now has a Shutdown verb that can be used to reduce it's power usage five times. This disables AI's control, cameras, and most communications as if it was without power. This verb acts as a toggle, so it can be used again to turn yourself back on.</li>
+				<li class="rscadd">AI now has Toggle Power Override verb that can be used to disable power saving mode when it loses APC power. This results in much faster discharge of internal capacitor, but allows you to operate as if you were powered. Can be toggled at any time.</li>
+			</ul>
+
 			<h2 class="date">09 July 2016</h2>
 			<h3 class="author">HarpyEagle updated:</h3>
 			<ul class="changes bgimages16">
