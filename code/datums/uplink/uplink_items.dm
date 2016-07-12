@@ -93,7 +93,7 @@ var/datum/uplink/uplink = new()
 			var/datum/antagonist/antag = all_antag_types[antag_role]
 			if(antag.is_antagonist(U.uplink_owner))
 				. = min(antag_costs[antag_role], .)
-	return U ?  U.get_item_cost(src, .) : .
+	return max(1, U ?  U.get_item_cost(src, .) : .)
 
 /datum/uplink_item/proc/description()
 	return desc

@@ -2098,6 +2098,7 @@
 #include "code\unit_tests\test_obj.dm"
 #include "code\unit_tests\unique_tests.dm"
 #include "code\unit_tests\unit_test.dm"
+#include "code\unit_tests\uplink_tests.dm"
 #include "code\unit_tests\zas_tests.dm"
 #include "code\ZAS\_docs.dm"
 #include "code\ZAS\Airflow.dm"
