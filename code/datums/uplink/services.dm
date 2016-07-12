@@ -20,7 +20,7 @@
 	name = "Radiation Storm Announcement"
 	desc = "Interferes with the station's radiation sensors."
 	item_cost = 6
-	path = /obj/item/device/uplink_service/fake_ion_storm
+	path = /obj/item/device/uplink_service/fake_rad_storm
 
 /datum/uplink_item/item/services/fake_crew_annoncement
 	name = "Crew Arrival Announcement and Records"
