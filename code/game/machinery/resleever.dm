@@ -144,10 +144,12 @@ obj/machinery/resleever/process()
 
 /obj/machinery/resleever/proc/sleeve()
 	if(lace && occupant)
-		var/obj/item/organ/I = occupant.organs_by_name["head"]
-		lace.replaced(occupant, I)
-		lace = null
-		lace_name = null
+		var/obj/item/organ/O = occupant.get_organ(lace.parent_organ)
+		if(istype(O))
+			lace.status &= ~ORGAN_CUT_AWAY //ensure the lace is properly attached
+			lace.replaced(occupant, O)
+			lace = null
+			lace_name = null
 	else
 		return
 

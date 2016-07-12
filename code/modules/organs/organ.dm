@@ -275,7 +275,15 @@ var/list/organ_cache = list()
 		if (3)
 			take_damage(1)
 
-/obj/item/organ/proc/removed(var/mob/living/user)
+//disconnected the organ from it's owner but does not remove it, instead it becomes an implant that can be removed with implant surgery
+//TODO move this to organ/internal once the FPB port comes through
+/obj/item/organ/proc/cut_away(var/mob/living/user)
+	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
+	if(istype(parent)) //TODO ensure that we don't have to check this.
+		removed(user, drop_organ=0)
+		parent.implants += src
+
+/obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1)
 
 	if(!istype(owner))
 		return
@@ -286,14 +294,19 @@ var/list/organ_cache = list()
 	owner.internal_organs -= src
 
 	var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
-	if(affected) affected.internal_organs -= src
+	if(affected) 
+		affected.internal_organs -= src
+		status |= ORGAN_CUT_AWAY
 
-	loc = get_turf(owner)
+	if(drop_organ)
+		dropInto(owner.loc)
+
 	processing_objects |= src
 	rejecting = null
-	var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list
-	if(!organ_blood || !organ_blood.data["blood_DNA"])
-		owner.vessel.trans_to(src, 5, 1, 1)
+	if(robotic < ORGAN_ROBOT)
+		var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list //TODO fix this and all other occurences of locate(/datum/reagent/blood) horror
+		if(!organ_blood || !organ_blood.data["blood_DNA"])
+			owner.vessel.trans_to(src, 5, 1, 1)
 
 	if(owner && vital)
 		if(user)
@@ -308,6 +321,8 @@ var/list/organ_cache = list()
 
 	if(!istype(target)) return
 
+	if(status & ORGAN_CUT_AWAY) return //organs don't work very well in the body when they aren't properly attached
+
 	var/datum/reagent/blood/transplant_blood = locate(/datum/reagent/blood) in reagents.reagent_list
 	transplant_data = list()
 	if(!transplant_blood)
@@ -320,7 +335,7 @@ var/list/organ_cache = list()
 		transplant_data["blood_DNA"] =  transplant_blood.data["blood_DNA"]
 
 	owner = target
-	loc = owner
+	forceMove(owner) //just in case
 	processing_objects -= src
 	target.internal_organs |= src
 	affected.internal_organs |= src
