@@ -922,7 +922,7 @@
 				stomach_contents.Remove(M)
 				continue
 			if(iscarbon(M)|| isanimal(M))
-				if(M.stat == 2)
+				if(M.stat == DEAD)
 					M.death(1)
 					stomach_contents.Remove(M)
 					qdel(M)
