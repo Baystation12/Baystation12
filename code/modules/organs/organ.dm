@@ -280,8 +280,12 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/cut_away(var/mob/living/user)
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(istype(parent)) //TODO ensure that we don't have to check this.
-		removed(user, drop_organ=0)
+		removed(user, 0)
 		parent.implants += src
+
+//TODO move cut_away() to the internal organ subtype and get rid of this
+/obj/item/organ/external/cut_away(var/mob/living/user)
+	removed(user)
 
 /obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1)
 
