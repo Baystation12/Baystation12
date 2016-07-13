@@ -182,8 +182,6 @@
 					find_prob +=60
 				else
 					find_prob +=40
-			else if(istype(obj, /obj/item/organ))
-				find_prob += 100
 			else
 				find_prob +=50
 
@@ -202,7 +200,7 @@
 					worm.detatch()
 					worm.leave_host()
 				else
-					obj.loc = get_turf(target)
+					obj.dropInto(target.loc)
 					obj.add_blood(target)
 					obj.update_icon()
 					if(istype(obj,/obj/item/weapon/implant))
