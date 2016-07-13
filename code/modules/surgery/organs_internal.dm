@@ -136,9 +136,6 @@
 		return ..() && organ_to_remove
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-
-		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-
 		user.visible_message("[user] starts to separate [target]'s [target.op_stage.current_organ] with \the [tool].", \
 		"You start to separate [target]'s [target.op_stage.current_organ] with \the [tool]." )
 		target.custom_pain("Someone's ripping out your [target.op_stage.current_organ]!",1)
@@ -193,6 +190,7 @@
 		return ..()
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("[user] starts removing [target]'s [target.op_stage.current_organ] with \the [tool].", \
 		"You start removing [target]'s [target.op_stage.current_organ] with \the [tool].")
 		target.custom_pain("The pain in your [affected.name] is living hell!",1)
@@ -357,6 +355,7 @@
 		var/obj/item/organ/I = target.op_stage.current_organ
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if(istype(I) && I.parent_organ == target_zone && affected && (I in affected.implants))
+			I.status &= ~ORGAN_CUT_AWAY //apply fixovein
 			affected.implants -= I
 			I.replaced(target, affected)
 
