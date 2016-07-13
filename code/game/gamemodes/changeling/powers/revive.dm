@@ -12,9 +12,6 @@
 		src << "<span class='danger'>You have no genomes, not even your own, and cannot revive.</span>"
 		return 0
 
-	if(src.stat == DEAD)
-		dead_mob_list -= src
-		living_mob_list += src
 	var/mob/living/carbon/C = src
 
 	C.tod = null
@@ -32,10 +29,10 @@
 		var/mob/living/carbon/human/H = src
 		H.restore_blood()
 		H.mutations.Remove(HUSK)
-		H.status_flags -= DISFIGURED
 		H.update_body(1)
 		for(var/limb in H.organs_by_name)
 			var/obj/item/organ/external/current_limb = H.organs_by_name[limb]
+			current_limb.disfigured = 0
 			current_limb.undislocate()
 
 	C.halloss = 0
@@ -46,6 +43,8 @@
 	feedback_add_details("changeling_powers","CR")
 	C.stat = CONSCIOUS
 	C.timeofdeath = null
+	C.switch_from_dead_to_living_mob_list()
+
 	src.verbs -= /mob/proc/changeling_revive
 	// re-add our changeling powers
 	C.make_changeling()
