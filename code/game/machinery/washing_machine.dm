@@ -50,8 +50,8 @@
 		if(isitem(A))
 			var/obj/item/I = A
 			I.decontaminate()
-			if(crayon && iscoloredgloves(I))
-				var/obj/item/clothing/gloves/color/C = I
+			if(crayon && iscolorablegloves(I))
+				var/obj/item/clothing/gloves/C = I
 				C.color = crayon.color
 
 	//Tanning!
