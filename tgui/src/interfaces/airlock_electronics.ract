@@ -1,7 +1,13 @@
 <ui-display>
+  {{#if data.locked}}
+  <ui-section label='Card locked!'>
+    Swipe ID to continue: <ui-button icon='unlock' action='unlock'>Unlock</ui-button>
+  </ui-section>
+  {{else}}
   <ui-section>
     <ui-button icon='{{data.oneAccess ? "unlock" : "lock"}}' action='one_access'>{{data.oneAccess ? "One" : "All"}} Required</ui-button>
     <ui-button icon='refresh' action='clear'>Clear</ui-button>
+    <ui-button icon='lock' action='lock'>Lock</ui-button>
   </ui-section>
   <hr/>
   <table>
@@ -20,6 +26,7 @@
 			{{/each}}</tr>
 		</tbody>
 	</table>
+{{/if}}
 </ui-display>
 
 <style>
