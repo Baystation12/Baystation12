@@ -127,7 +127,7 @@
 			if(I && !(I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
 				attached_organs |= organ
 
-		var/organ_to_remove = input(user, "Which organ do you want to prepare for removal?") as null|anything in attached_organs
+		var/organ_to_remove = input(user, "Which organ do you want to separate?") as null|anything in attached_organs
 		if(!organ_to_remove)
 			return 0
 
