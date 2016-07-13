@@ -493,6 +493,8 @@ obj/random/material //Random materials for building stuff
 					prob(4);/obj/item/weapon/tank/emergency/oxygen,\
 					prob(3);/obj/item/weapon/tank/emergency/oxygen/engi,\
 					prob(2);/obj/item/weapon/tank/emergency/oxygen/double,\
+					prob(1);/obj/item/weapon/tank/carbon_dioxide,\
+					prob(2);/obj/item/weapon/tank/emergency/carbon_dioxide,\
 					prob(2);/obj/item/weapon/tank/emergency/nitrogen,\
 					prob(1);/obj/item/weapon/tank/nitrogen)
 

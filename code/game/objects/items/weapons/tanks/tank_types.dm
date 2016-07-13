@@ -131,18 +131,6 @@
 	gauge_icon = "indicator_emergency_double"
 	volume = 10
 
-
-/obj/item/weapon/tank/emergency/nitrogen
-	name = "emergency nitrogen tank"
-	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
-	icon_state = "emergency_nitro"
-	gauge_icon = "indicator_emergency"
-
-/obj/item/weapon/tank/emergency/nitrogen/New()
-	..()
-	src.air_contents.adjust_gas("nitrogen", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
-
-
 /*
  * Nitrogen
  */
@@ -158,3 +146,30 @@
 
 	src.air_contents.adjust_gas("nitrogen", (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
 	return
+
+/*
+ * Carbon Dioxide
+ */
+
+/obj/item/weapon/tank/carbon_dioxide
+	name = "carbon dioxide tank"
+	desc = "a tank of carbon dioxide"
+	icon_state = "carbon_dioxide"
+	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
+
+/obj/item/weapon/tank/carbon_dioxide/New()
+	..()
+
+	src.air_contents.adjust_gas("carbon_dioxide", (6*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
+	return
+
+/obj/item/weapon/tank/emergency/carbon_dioxide
+	name = "emergency carbon dioxide tank"
+	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
+	icon_state = "emergency_carbondioxide"
+	gauge_icon = "indicator_emergency"
+
+/obj/item/weapon/tank/emergency/nitrogen/New()
+	..()
+	src.air_contents.adjust_gas("carbon_dioxide", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
+
