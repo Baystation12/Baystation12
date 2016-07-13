@@ -11,7 +11,7 @@
 	set category = "Changeling"
 	set name = "Regenerative Stasis (20)"
 
-	var/datum/changeling/changeling = changeling_power(20,1,100,DEAD)
+	var/datum/changeling/changeling = changeling_power(20,1,100,INCAPACITATION_NONE)
 	if(!changeling)
 		return
 

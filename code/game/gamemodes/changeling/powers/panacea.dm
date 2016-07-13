@@ -12,7 +12,7 @@
 	set name = "Anatomic Panacea (20)"
 	set desc = "Clense ourselves of impurities."
 
-	var/datum/changeling/changeling = changeling_power(20,0,100,UNCONSCIOUS)
+	var/datum/changeling/changeling = changeling_power(20,0,100,INCAPACITATION_DEAD)
 	if(!changeling)
 		return 0
 	src.mind.changeling.chem_charges -= 20

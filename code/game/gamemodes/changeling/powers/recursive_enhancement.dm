@@ -10,7 +10,7 @@
 	set category = "Changeling"
 	set name = "Recursive Enhancement (10)"
 	set desc = "Empowers our next ability."
-	var/datum/changeling/changeling = changeling_power(10,0,100,UNCONSCIOUS)
+	var/datum/changeling/changeling = changeling_power(10,0,100,INCAPACITATION_DEAD)
 	if(!changeling)
 		return 0
 	if(src.mind.changeling.recursive_enhancement)

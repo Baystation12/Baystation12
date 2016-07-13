@@ -1,6 +1,6 @@
 //This is a generic proc that should be called by other ling armor procs to equip them.
 /mob/proc/changeling_generic_armor(var/armor_type, var/helmet_type)
-	var/datum/changeling/changeling = changeling_power(20,1,100,CONSCIOUS)
+	var/datum/changeling/changeling = changeling_power(20,1,100)
 	if(!changeling)
 		return
 
@@ -39,7 +39,7 @@
 	return 1
 
 /mob/proc/changeling_generic_equip_all_slots(var/list/stuff_to_equip, var/cost)
-	var/datum/changeling/changeling = changeling_power(cost,1,100,CONSCIOUS)
+	var/datum/changeling/changeling = changeling_power(cost,1,100)
 	if(!changeling)
 		return
 
@@ -235,7 +235,7 @@
 
 //This is a generic proc that should be called by other ling weapon procs to equip them.
 /mob/proc/changeling_generic_weapon(var/weapon_type, var/make_sound = 1, var/cost = 20)
-	var/datum/changeling/changeling = changeling_power(cost,1,100,CONSCIOUS)
+	var/datum/changeling/changeling = changeling_power(cost,1,100)
 	if(!changeling)
 		return
 

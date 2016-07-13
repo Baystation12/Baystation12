@@ -12,7 +12,7 @@
 	set name = "Electric Lockpick (5 + 10/use)"
 	set desc = "Bruteforces open most electrical locking systems, at 10 chemicals per use."
 
-	var/datum/changeling/changeling = changeling_power(5,0,100,CONSCIOUS)
+	var/datum/changeling/changeling = changeling_power(5,0,100)
 
 	var/obj/held_item = get_active_hand()
 

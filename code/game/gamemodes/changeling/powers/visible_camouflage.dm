@@ -22,7 +22,7 @@
 			return 1
 
 		//We delay the check, so that people can uncloak without needing 10 chemicals to do so.
-		var/datum/changeling/changeling = changeling_power(10,0,100,CONSCIOUS)
+		var/datum/changeling/changeling = changeling_power(10,0,100)
 
 		if(!changeling)
 			return 0

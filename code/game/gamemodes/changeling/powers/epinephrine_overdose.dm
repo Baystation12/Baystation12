@@ -12,7 +12,7 @@
 	set name = "Epinephrine Overdose (30)"
 	set desc = "Removes all stuns instantly, and reduces future stuns."
 
-	var/datum/changeling/changeling = changeling_power(30,0,100,UNCONSCIOUS)
+	var/datum/changeling/changeling = changeling_power(30,0,100,INCAPACITATION_DEAD)
 	if(!changeling)
 		return 0
 	changeling.chem_charges -= 30

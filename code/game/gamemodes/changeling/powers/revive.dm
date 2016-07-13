@@ -4,7 +4,7 @@
 	set name = "Revive"
 	set desc = "We are ready to revive ourselves on command."
 
-	var/datum/changeling/changeling = changeling_power(0,0,100,DEAD)
+	var/datum/changeling/changeling = changeling_power(0,0,100,INCAPACITATION_NONE)
 	if(!changeling)
 		return 0
 

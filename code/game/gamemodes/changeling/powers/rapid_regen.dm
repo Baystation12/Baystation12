@@ -13,7 +13,7 @@
 	set name = "Rapid Regeneration (50)"
 	set desc = "Heal ourselves of most injuries instantly."
 
-	var/datum/changeling/changeling = changeling_power(50,0,100,UNCONSCIOUS)
+	var/datum/changeling/changeling = changeling_power(50,0,100,INCAPACITATION_DEAD)
 	if(!changeling)
 		return 0
 	src.mind.changeling.chem_charges -= 50

@@ -20,7 +20,7 @@
 	set name = "Resonant Shriek (20)"
 	set desc = "Emits a high-frequency sound that confuses and deafens humans, blows out nearby lights and overloads cyborg sensors."
 
-	var/datum/changeling/changeling = changeling_power(20,0,100,CONSCIOUS)
+	var/datum/changeling/changeling = changeling_power(20,0,100)
 	if(!changeling)	return 0
 
 	if(ishuman(src))
@@ -75,7 +75,7 @@
 	set name = "Dissonant Shriek (20)"
 	set desc = "We shift our vocal cords to release a high-frequency sound that overloads nearby electronics."
 
-	var/datum/changeling/changeling = changeling_power(20,0,100,CONSCIOUS)
+	var/datum/changeling/changeling = changeling_power(20,0,100)
 	if(!changeling)	return 0
 
 	if(ishuman(src))
