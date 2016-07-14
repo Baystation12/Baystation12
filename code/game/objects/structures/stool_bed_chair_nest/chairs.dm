@@ -155,7 +155,7 @@
 	if(propelled)
 		var/mob/living/occupant = unbuckle_mob()
 
-		var/def_zone = ran_zone()
+		var/def_zone = occupant.ran_zone()
 		var/blocked = occupant.run_armor_check(def_zone, "melee")
 		occupant.throw_at(A, 3, propelled)
 		occupant.apply_effect(6, STUN, blocked)
@@ -165,7 +165,7 @@
 		playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
 		if(istype(A, /mob/living))
 			var/mob/living/victim = A
-			def_zone = ran_zone()
+			def_zone = victim.ran_zone()
 			blocked = victim.run_armor_check(def_zone, "melee")
 			victim.apply_effect(6, STUN, blocked)
 			victim.apply_effect(6, WEAKEN, blocked)

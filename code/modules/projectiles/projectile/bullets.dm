@@ -100,7 +100,7 @@
 		//pellet hits spread out across different zones, but 'aim at' the targeted zone with higher probability
 		//whether the pellet actually hits the def_zone or a different zone should still be determined by the parent using get_zone_with_miss_chance().
 		var/old_zone = def_zone
-		def_zone = ran_zone(def_zone, spread)
+		def_zone = target_mob.ran_zone(def_zone, spread)
 		if (..()) hits++
 		def_zone = old_zone //restore the original zone the projectile was aimed at
 

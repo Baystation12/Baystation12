@@ -367,7 +367,7 @@ This function restores all organs.
 	if(isorgan(def_zone))
 		organ = def_zone
 	else
-		if(!def_zone)	def_zone = ran_zone(def_zone)
+		if(!def_zone)	def_zone = src.ran_zone()
 		organ = get_organ(check_zone(def_zone))
 	if(!organ)	return 0
 

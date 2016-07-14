@@ -50,7 +50,7 @@
 		if(istype(A, /mob/living))
 			var/mob/living/M = A
 			visible_message("\red [src] knocks over [M]!")
-			var/def_zone = ran_zone()
+			var/def_zone = M.ran_zone()
 			M.apply_effects(5, 5)				//knock people down if you hit them
 			M.apply_damage(22 / move_delay, BRUTE, def_zone, M.run_armor_check(def_zone, "melee"))	// and do damage according to how fast the train is going
 			if(istype(load, /mob/living/carbon/human))

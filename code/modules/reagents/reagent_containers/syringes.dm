@@ -223,7 +223,7 @@
 
 			var/mob/living/carbon/human/H = target
 
-			var/target_zone = ran_zone(check_zone(user.zone_sel.selecting, target))
+			var/target_zone = target.ran_zone(check_zone(user.zone_sel.selecting, target), 20)
 			var/obj/item/organ/external/affecting = H.get_organ(target_zone)
 
 			if (!affecting || affecting.is_stump())
