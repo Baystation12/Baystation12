@@ -812,10 +812,10 @@ default behaviour is:
 	ear_deaf = max(0, ear_deaf + deaf)
 
 //pass a negative argument to skip one of the variable
-/mob/living/setEarDamage(var/damage, var/deaf)
-	if(damage >= 0)
+/mob/living/setEarDamage(var/damage = null, var/deaf = null)
+	if(!isnull(damage))
 		ear_damage = damage
-	if(deaf >= 0)
+	if(!isnull(deaf))
 		ear_deaf = deaf
 
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
