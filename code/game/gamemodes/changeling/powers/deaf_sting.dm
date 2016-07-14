@@ -14,13 +14,12 @@
 
 	var/mob/living/carbon/T = changeling_sting(5,/mob/proc/changeling_deaf_sting)
 	if(!T)	return 0
-	var/duration = 300
+	var/duration = 15
 	if(src.mind.changeling.recursive_enhancement)
-		duration = duration + 100
+		duration = duration + 10
 		src << "<span class='notice'>They will be unable to hear for a little longer.</span>"
 		src.mind.changeling.recursive_enhancement = 0
 	T << "<span class='danger'>Your ears pop and begin ringing loudly!</span>"
-	T.sdisabilities |= DEAF
-	spawn(duration)	T.sdisabilities &= ~DEAF
+	T.adjustEarDamage(5,duration)
 	feedback_add_details("changeling_powers","DS")
 	return 1
