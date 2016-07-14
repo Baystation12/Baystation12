@@ -104,9 +104,12 @@
 
 /obj/item/weapon/electric_hand/New()
 	if(ismob(loc))
-		visible_message("<span class='warning'>Electrical arcs form around [loc.name]\'s hand!</span>",
-		"<span class='warning'>We store a charge of electricity in our hand.</span>",
-		"<span class='italics'>You hear crackling electricity!</span>")
+		var/mob/M = loc
+		M.visible_message(
+			"<span class='warning'>Electrical arcs form around [loc]\'s hand!</span>",
+			"<span class='warning'>We store a charge of electricity in our hand.</span>",
+			"<span class='italics'>You hear crackling electricity!</span>"
+			)
 		var/T = get_turf(src)
 		var/datum/effect/effect/system/spark_spread/spark_system = new () //this should really have a helper
 		spark_system.set_up(5, 0, T)
@@ -118,10 +121,8 @@
 		if(src)
 			qdel(src)
 
-/obj/item/weapon/electric_hand/afterattack(var/atom/target, var/mob/living/carbon/human/user, proximity)
+/obj/item/weapon/electric_hand/resolve_attackby(var/atom/target, var/mob/living/carbon/human/user)
 	if(!target)
-		return
-	if(!proximity)
 		return
 
 	//Excuse the copypasta.
@@ -155,9 +156,11 @@
 		spark_system.set_up(5, 0, T)
 		spark_system.start()
 		playsound(T, "sparks", 50, 1)
-		visible_message("<span class='warning'>Arcs of electricity strike [target]!</span>",
-		"<span class='warning'>Our hand channels raw electricity into [target]</span>",
-		"<span class='italics'>You hear sparks!</span>")
+		user.visible_message(
+			"<span class='warning'>Arcs of electricity strike [target]!</span>",
+			"<span class='warning'>Our hand channels raw electricity into [target]</span>",
+			"<span class='italics'>You hear sparks!</span>"
+			)
 		user.mind.changeling.chem_charges -= shock_cost
 	else
 		src << "<span class='warning'>Our gloves block us from shocking \the [target].</span>"
