@@ -528,18 +528,47 @@ var/global/list/damage_icon_parts = list()
 
 	if(update_icons)   update_icons()
 
+/*
+		else
+			if(head.item_state_slots && head.item_state_slots[slot_head_str])
+				t_state = head.item_state_slots[slot_head_str]
+			else if(head.item_state)
+				t_state = head.item_state
+			else
+				t_state = head.icon_state
+		//Determine the icon to use
+		var/t_icon
+		if(head.icon_override)
+			t_icon = head.icon_override
+		else if(head.sprite_sheets && head.sprite_sheets[species.get_bodytype()] && (t_state in icon_states(head.sprite_sheets[species.get_bodytype()])))
+			t_icon = head.sprite_sheets[species.get_bodytype()]
+		else if(head.item_icons && (slot_head_str in head.item_icons))
+			t_icon = head.item_icons[slot_head_str]
+		else
+			t_icon = INV_HEAD_DEF_ICON
+			*/
+
 /mob/living/carbon/human/update_inv_gloves(var/update_icons=1)
 	if(gloves && !(wear_suit && wear_suit.flags_inv & HIDEGLOVES))
-		var/t_state = gloves.item_state
-		if(!t_state)	t_state = gloves.icon_state
-
-		var/image/standing
-		if(gloves.icon_override)
-			standing = image("icon" = gloves.icon_override, "icon_state" = "[t_state]")
-		else if(gloves.sprite_sheets && gloves.sprite_sheets[species.get_bodytype()])
-			standing = image("icon" = gloves.sprite_sheets[species.get_bodytype()], "icon_state" = "[t_state]")
+		var/t_state
+		if(gloves.item_state_slots && gloves.item_state_slots[slot_gloves_str])
+			t_state = gloves.item_state_slots[slot_gloves_str]
+		else if(head.item_state)
+			t_state = gloves.item_state
 		else
-			standing = image("icon" = 'icons/mob/hands.dmi', "icon_state" = "[t_state]")
+			t_state = gloves.icon_state
+
+		var/icon/t_icon
+		if(gloves.icon_override)
+			t_icon = gloves.icon_override
+		else if(gloves.sprite_sheets && gloves.sprite_sheets[species.get_bodytype()])
+			t_icon = gloves.sprite_sheets[species.get_bodytype()]
+		else if(gloves.item_icons && gloves.item_icons[slot_gloves_str])
+			t_icon = gloves.item_icons[slot_gloves_str]
+		else
+			t_icon = INV_GLOVES_DEF_ICON
+
+		var/image/standing = image(icon = t_icon, icon_state = t_state)
 
 		if(gloves.blood_DNA)
 			var/image/bloodsies	= image("icon" = species.blood_mask, "icon_state" = "bloodyhands")

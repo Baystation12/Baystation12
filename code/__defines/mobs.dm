@@ -93,6 +93,7 @@
 #define MAX_SUPPLIED_LAW_NUMBER 50
 
 //default item on-mob icons
+#define INV_GLOVES_DEF_ICON 'icons/mob/hands.dmi'
 #define INV_HEAD_DEF_ICON 'icons/mob/head.dmi'
 #define INV_BACK_DEF_ICON 'icons/mob/back.dmi'
 #define INV_L_HAND_DEF_ICON 'icons/mob/items/lefthand.dmi'
