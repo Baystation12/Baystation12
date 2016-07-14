@@ -372,7 +372,7 @@ default behaviour is:
 
 /mob/living/proc/get_organ_target()
 	var/mob/shooter = src
-	var/obj/item/organ/external/def_zone = src.ran_zone(check_zone(shooter.zone_sel.selecting))
+	var/obj/item/organ/external/def_zone = src.ran_zone(src.check_zone(shooter.zone_sel.selecting))
 	return def_zone
 
 

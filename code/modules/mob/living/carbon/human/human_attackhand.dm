@@ -320,10 +320,8 @@
 		return 0
 
 	if(!def_zone) def_zone = user.zone_sel.selecting
-	var/target_zone = check_zone(def_zone)
-	if(!target_zone)
-		return 0
-	var/obj/item/organ/external/organ = get_organ(check_zone(target_zone))
+
+	var/obj/item/organ/external/organ = get_organ(def_zone)
 	if(!organ || organ.dislocated > 0 || organ.dislocated == -1) //don't use is_dislocated() here, that checks parent
 		return 0
 

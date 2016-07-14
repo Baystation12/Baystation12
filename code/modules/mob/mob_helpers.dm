@@ -108,14 +108,18 @@ var/global/list/organ_rel_size = list(5, 10, 25, 50, 70, 140, 300, 600, 1000)
 		w_class = O.w_class
 	return organ_rel_size[Clamp(w_class, 1, organ_rel_size.len)]
 
-/proc/check_zone(zone)
-	if(!zone)	return "chest"
-	switch(zone)
+/mob/proc/check_zone(zone)
+	return "chest" //zone is irrelevant for this mob type
+
+/mob/living/carbon/human/check_zone(zone)
+	switch(zone) //TODO
 		if("eyes")
 			zone = "head"
 		if("mouth")
 			zone = "head"
-	return zone
+	if(zone in species.has_limbs)
+		return zone
+	return ..()
 
 // Returns zone with a certain probability. If the probability fails, or no zone is specified, then a random body part is chosen.
 // Do not use this if someone is intentionally trying to hit a specific body part.
@@ -125,7 +129,7 @@ var/global/list/organ_rel_size = list(5, 10, 25, 50, 70, 140, 300, 600, 1000)
 
 /mob/living/carbon/human/ran_zone(zone, probability)
 	if(zone)
-		zone = check_zone(zone)
+		zone = src.check_zone(zone)
 		if(prob(probability))
 			return zone
 
@@ -140,7 +144,7 @@ var/global/list/organ_rel_size = list(5, 10, 25, 50, 70, 140, 300, 600, 1000)
 // May return null if missed
 // miss_chance_mod may be negative.
 /proc/get_zone_with_miss_chance(zone, var/mob/target, var/miss_chance_mod = 0, var/ranged_attack=0)
-	zone = check_zone(zone)
+	zone = target.check_zone(zone)
 
 	if(!ranged_attack)
 		// you cannot miss if your target is prone or restrained
