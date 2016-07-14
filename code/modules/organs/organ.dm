@@ -280,8 +280,12 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/cut_away(var/mob/living/user)
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(istype(parent)) //TODO ensure that we don't have to check this.
-		removed(user, drop_organ=0)
+		removed(user, 0)
 		parent.implants += src
+
+//TODO move cut_away() to the internal organ subtype and get rid of this
+/obj/item/organ/external/cut_away(var/mob/living/user)
+	removed(user)
 
 /obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1)
 
@@ -319,9 +323,11 @@ var/list/organ_cache = list()
 
 /obj/item/organ/proc/replaced(var/mob/living/carbon/human/target,var/obj/item/organ/external/affected)
 
-	if(!istype(target)) return
+	if(!istype(target))
+		return 0
 
-	if(status & ORGAN_CUT_AWAY) return //organs don't work very well in the body when they aren't properly attached
+	if(status & ORGAN_CUT_AWAY)
+		return 0 //organs don't work very well in the body when they aren't properly attached
 
 	var/datum/reagent/blood/transplant_blood = locate(/datum/reagent/blood) in reagents.reagent_list
 	transplant_data = list()
@@ -340,8 +346,11 @@ var/list/organ_cache = list()
 	target.internal_organs |= src
 	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src
+	return 1
 
 /obj/item/organ/eyes/replaced(var/mob/living/carbon/human/target)
+
+	if(!..()) return 0
 
 	// Apply our eye colour to the target.
 	if(istype(target) && eye_colour)
@@ -349,7 +358,8 @@ var/list/organ_cache = list()
 		target.g_eyes = eye_colour[2]
 		target.b_eyes = eye_colour[3]
 		target.update_eyes()
-	..()
+
+	return 1
 
 /obj/item/organ/proc/bitten(mob/user)
 
