@@ -52,6 +52,9 @@
 #define I_GRAB		"grab"
 #define I_HURT		"harm"
 
+#define MOVE_INTENT_WALK "walk"
+#define MOVE_INTENT_RUN "run"
+
 //These are used Bump() code for living mobs, in the mob_bump_flag, mob_swap_flags, and mob_push_flags vars to determine whom can bump/swap with whom.
 #define HUMAN 1
 #define MONKEY 2
@@ -90,6 +93,7 @@
 #define MAX_SUPPLIED_LAW_NUMBER 50
 
 //default item on-mob icons
+#define INV_GLOVES_DEF_ICON 'icons/mob/hands.dmi'
 #define INV_HEAD_DEF_ICON 'icons/mob/head.dmi'
 #define INV_BACK_DEF_ICON 'icons/mob/back.dmi'
 #define INV_L_HAND_DEF_ICON 'icons/mob/items/lefthand.dmi'
@@ -139,8 +143,6 @@
 #define FLASH_PROTECTION_NONE 0
 #define FLASH_PROTECTION_MODERATE 1
 #define FLASH_PROTECTION_MAJOR 2
-#define ANIMAL_SPAWN_DELAY round(config.respawn_delay / 6)
-#define DRONE_SPAWN_DELAY  round(config.respawn_delay / 3)
 
 #define ANIMAL_SPAWN_DELAY round(config.respawn_delay / 6)
 #define DRONE_SPAWN_DELAY  round(config.respawn_delay / 3)
@@ -152,8 +154,10 @@
 #define INCAPACITATION_BUCKLED_FULLY 4
 #define INCAPACITATION_STUNNED 8
 #define INCAPACITATION_FORCELYING 16 //needs a better name - represents being knocked down BUT still conscious.
-#define INCAPACITATION_KNOCKOUT 32
+#define INCAPACITATION_UNCONSCIOUS 64
+#define INCAPACITATION_DEAD 128
 
+#define INCAPACITATION_KNOCKOUT (INCAPACITATION_UNCONSCIOUS|INCAPACITATION_DEAD)
 #define INCAPACITATION_KNOCKDOWN (INCAPACITATION_KNOCKOUT|INCAPACITATION_FORCELYING)
 #define INCAPACITATION_DISABLED (INCAPACITATION_KNOCKDOWN|INCAPACITATION_STUNNED)
 #define INCAPACITATION_DEFAULT (INCAPACITATION_RESTRAINED|INCAPACITATION_BUCKLED_FULLY|INCAPACITATION_DISABLED)
@@ -170,3 +174,16 @@
 #define TASTE_NORMAL 1 //anything below 15%
 #define TASTE_DULL 0.5 //anything below 30%
 #define TASTE_NUMB 0.1 //anything below 150%
+
+#define BP_L_FOOT "l_foot"
+#define BP_R_FOOT "r_foot"
+#define BP_L_LEG  "l_leg"
+#define BP_R_LEG  "r_leg"
+#define BP_L_HAND "l_hand"
+#define BP_R_HAND "r_hand"
+#define BP_L_ARM  "l_arm"
+#define BP_R_ARM  "r_arm"
+#define BP_HEAD   "head"
+#define BP_TORSO  "torso"
+#define BP_GROIN  "groin"
+#define BP_ALL list(BP_GROIN, BP_TORSO, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG)

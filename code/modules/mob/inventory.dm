@@ -135,6 +135,20 @@ var/list/slot_equipment_priority = list( \
 	drop_from_inventory(W)
 	return 0
 
+/mob/proc/get_held_hand(var/obj/item/I)
+	if(l_hand == I)
+		return 0
+	if(r_hand == I)
+		return 1
+	return -1
+
+/mob/proc/get_held_zone(var/obj/item/I)
+	if(l_hand == I)
+		return "l_hand"
+	if(r_hand == I)
+		return "r_hand"
+	return null
+
 // Removes an item from inventory and places it in the target atom.
 // If canremove or other conditions need to be checked then use unEquip instead.
 /mob/proc/drop_from_inventory(var/obj/item/W, var/atom/target = null)

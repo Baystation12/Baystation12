@@ -84,9 +84,6 @@ proc/get_radio_key_from_channel(var/channel)
 /mob/living/proc/get_default_language()
 	return default_language
 
-/mob/living/proc/is_muzzled()
-	return 0
-
 //Takes a list of the form list(message, verb, whispering) and modifies it as needed
 //Returns 1 if a speech problem was applied, 0 otherwise
 /mob/living/proc/handle_speech_problems(var/list/message_data)
@@ -173,10 +170,6 @@ proc/get_radio_key_from_channel(var/channel)
 		return 1
 
 	verb = say_quote(message, speaking)
-
-	if(is_muzzled())
-		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
-		return
 
 	message = trim_left(message)
 

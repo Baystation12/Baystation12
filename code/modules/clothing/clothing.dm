@@ -18,6 +18,7 @@
 		while sprite_sheets should be used for "flexible" clothing items that do not need to be refitted (e.g. vox wearing jumpsuits).
 	*/
 	var/list/sprite_sheets_refit = null
+	var/ear_protection = 0
 
 //Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
@@ -128,6 +129,7 @@
 	icon_state = "earmuffs"
 	item_state = "earmuffs"
 	slot_flags = SLOT_EARS | SLOT_TWOEARS
+	ear_protection = 2
 
 ///////////////////////////////////////////////////////////////////////
 //Glasses

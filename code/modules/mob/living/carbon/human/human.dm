@@ -102,23 +102,22 @@
 			else
 				var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
 				throw_at(target, 200, 4)
-			//return
-//				var/atom/target = get_edge_target_turf(user, get_dir(src, get_step_away(user, src)))
-				//user.throw_at(target, 200, 4)
 
 		if (2.0)
 			b_loss = 60
 			f_loss = 60
 
-			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
+			if (!get_ear_protection() >= 2)
 				ear_damage += 30
 				ear_deaf += 120
 			if (prob(70))
 				Paralyse(10)
 
 		if(3.0)
-			b_loss = 30
-			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
+			b_loss += 30
+			if (prob(getarmor(null, "bomb")))
+				b_loss = b_loss/2
+			if (!get_ear_protection() >= 2)
 				ear_damage += 15
 				ear_deaf += 60
 			if (prob(50))

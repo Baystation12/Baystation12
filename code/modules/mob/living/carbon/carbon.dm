@@ -25,10 +25,13 @@
 		qdel(food)
 	return ..()
 
-/mob/living/carbon/rejuvenate()
+/mob/living/carbon/proc/clear_all_reagents()
 	bloodstr.clear_reagents()
 	ingested.clear_reagents()
 	touching.clear_reagents()
+
+/mob/living/carbon/rejuvenate()
+	clear_all_reagents()
 	nutrition = 400
 	..()
 
@@ -79,7 +82,7 @@
 		M.loc = src.loc
 		for(var/mob/N in viewers(src, null))
 			if(N.client)
-				N.show_message(text("\red <B>[M] bursts out of [src]!</B>"), 2)
+				N.show_message("<span class='danger'>\The [M] bursts out of \the [src]!</span>", 2)
 	..()
 
 /mob/living/carbon/attack_hand(mob/M as mob)
@@ -90,7 +93,7 @@
 		if (H.hand)
 			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			H << "\red You can't use your [temp.name]"
+			H << "<span class='danger'>You can't use your [temp.name]!</span>"
 			return
 
 	return
@@ -105,17 +108,17 @@
 	playsound(loc, "sparks", 50, 1, -1)
 	if (shock_damage > 15)
 		src.visible_message(
-			"\red [src] was shocked by the [source]!", \
-			"\red <B>You feel a powerful shock course through your body!</B>", \
-			"\red You hear a heavy electrical crack." \
+			"<span class='warning'>\The [src] was shocked by \the [source]!</span>", \
+			"<span class='danger'>You feel a powerful shock course through your body!</span>", \
+			"<span class='warning'>You hear a heavy electrical crack.</span>" \
 		)
 		Stun(10)//This should work for now, more is really silly and makes you lay there forever
 		Weaken(10)
 	else
 		src.visible_message(
-			"\red [src] was mildly shocked by the [source].", \
-			"\red You feel a mild shock course through your body.", \
-			"\red You hear a light zapping." \
+			"<span class='warning'>\The [src] was mildly shocked by \the [source].</span>", \
+			"<span class='danger'>You feel a mild shock course through your body.</span>", \
+			"<span class='warning'>You hear a light zapping.</span>" \
 		)
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -339,7 +342,8 @@
 		return
 
 	//actually throw it!
-	src.visible_message("<span class='warning'>[src] has thrown [item].</span>")
+	if (item)
+		src.visible_message("<span class='warning'>\The [src] has thrown \the [item].</span>")
 
 	if(!src.lastarea)
 		src.lastarea = get_area(src.loc)
@@ -396,7 +400,7 @@
 	set category = "IC"
 
 	if(usr.sleeping)
-		usr << "\red You are already sleeping"
+		usr << "<span class='warning'>You are already sleeping.</span>"
 		return
 	if(alert(src,"You sure you want to sleep for a while?","Sleep","Yes","No") == "Yes")
 		usr.sleeping = 20 //Short nap

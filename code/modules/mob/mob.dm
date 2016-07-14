@@ -180,7 +180,10 @@
 	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (weakened || resting))
 		return 1
 
-	if ((incapacitation_flags & INCAPACITATION_KNOCKOUT) && (stat || paralysis || sleeping || (status_flags & FAKEDEATH)))
+	if ((incapacitation_flags & INCAPACITATION_DEAD) && stat == DEAD)
+		return 1
+
+	if ((incapacitation_flags & INCAPACITATION_UNCONSCIOUS) && (stat == UNCONSCIOUS || paralysis || sleeping || (status_flags & FAKEDEATH)))
 		return 1
 
 	if((incapacitation_flags & INCAPACITATION_RESTRAINED) && restrained())

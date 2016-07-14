@@ -18,7 +18,7 @@
 		if(!temp || !temp.is_usable())
 			H << "\red You can't use your hand."
 			return
-
+	break_cloak()
 	..()
 
 	// Should this all be in Touch()?

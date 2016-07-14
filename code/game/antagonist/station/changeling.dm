@@ -73,4 +73,11 @@
 					if(player.current.client.prefs.organ_data["torso"] == "cyborg") // Full synthetic.
 						return 0
 					return 1
- 	return 0
+	return 0
+
+/datum/antagonist/changeling/print_player(var/datum/mind/ply)
+	. = ..()
+	if(ply.changeling)
+		var/datum/changeling/ling_datum = ply.changeling
+		. += " (had [ling_datum.max_geneticpoints] genomes)"
+		. += "<br>Bought [english_list(ling_datum.purchased_powers_history)]."

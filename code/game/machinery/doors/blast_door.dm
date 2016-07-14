@@ -99,11 +99,17 @@
 
 // Proc: attackby()
 // Parameters: 2 (C - Item this object was clicked with, user - Mob which clicked this object)
-// Description: If we are clicked with crowbar or wielded fire axe, try to manually open the door.
+// Description: If we are clicked with crowbar, wielded fire axe, or armblade, try to manually open the door.
 // This only works on broken doors or doors without power. Also allows repair with Plasteel.
 /obj/machinery/door/blast/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	src.add_fingerprint(user)
-	if(istype(C, /obj/item/weapon/crowbar) || (istype(C, /obj/item/weapon/material/twohanded/fireaxe) && C:wielded == 1))
+	if(istype(C, /obj/item/weapon/crowbar) || istype(C, /obj/item/weapon/material/twohanded/fireaxe) || istype(C, /obj/item/weapon/melee/arm_blade))
+		if(istype(C,/obj/item/weapon/material/twohanded/fireaxe))
+			var/obj/item/weapon/material/twohanded/fireaxe/F = C
+			if(!F.wielded)
+				user << "<span class='warning'>You need to be wielding \the [F] to do that.</span>"
+				return
+
 		if(((stat & NOPOWER) || (stat & BROKEN)) && !( src.operating ))
 			force_toggle()
 		else
