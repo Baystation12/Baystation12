@@ -25,9 +25,8 @@
 /obj/item/weapon/melee/arm_blade
 	name = "arm blade"
 	desc = "A grotesque blade made out of bone and flesh that cleaves through people as a hot knife through butter."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/mob/items/changeling.dmi'
 	icon_state = "arm_blade"
-	item_state = "arm_blade"
 	w_class = 5.0
 	force = 40
 	sharp = 1
@@ -46,17 +45,26 @@
 
 /obj/item/weapon/melee/arm_blade/New(location)
 	..()
+	//TODO item appearance datum or something
+	item_icons[slot_l_hand_str] = 'icons/mob/items/changeling.dmi'
+	item_icons[slot_r_hand_str] = 'icons/mob/items/changeling.dmi'
+	item_state_slots[slot_l_hand_str] = "arm_blade_l_hand"
+	item_state_slots[slot_r_hand_str] = "arm_blade_r_hand"
 	processing_objects |= src
 	if(ismob(loc))
-		visible_message("<span class='warning'>A grotesque blade forms around [loc.name]\'s arm!</span>",
-		"<span class='warning'>Our arm twists and mutates, transforming it into a deadly blade.</span>",
-		"<span class='italics'>You hear organic matter ripping and tearing!</span>")
 		src.creator = loc
+		src.creator.visible_message(
+			"<span class='warning'>A grotesque blade forms around [loc.name]\'s arm!</span>",
+			"<span class='warning'>Our arm twists and mutates, transforming it into a deadly blade.</span>",
+			"<span class='italics'>You hear organic matter ripping and tearing!</span>"
+			)
 
 /obj/item/weapon/melee/arm_blade/dropped(mob/user)
-	visible_message("<span class='warning'>With a sickening crunch, [creator] reforms their arm blade into an arm!</span>",
-	"<span class='notice'>We assimilate the weapon back into our body.</span>",
-	"<span class='italics'>You hear organic matter ripping and tearing!</span>")
+	user.visible_message(
+		"<span class='warning'>With a sickening crunch, [creator] reforms their arm blade into an arm!</span>",
+		"<span class='notice'>We assimilate the weapon back into our body.</span>",
+		"<span class='italics'>You hear organic matter ripping and tearing!</span>"
+		)
 	playsound(src, 'sound/effects/blobattack.ogg', 30, 1)
 	spawn(1)
 		if(src)
@@ -67,6 +75,7 @@
 	creator = null
 	. = ..()
 
+//TODO ensure embedded objects call dropped, ensure items unembed themselves when deleted
 /obj/item/weapon/melee/arm_blade/process()  //Stolen from ninja swords.
 	if(!creator || loc != creator || (creator.l_hand != src && creator.r_hand != src))
 		// Tidy up a bit.
