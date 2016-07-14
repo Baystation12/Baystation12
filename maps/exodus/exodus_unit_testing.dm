@@ -11,6 +11,7 @@
 		/area/engineering/atmos/storage = NO_SCRUBBER|NO_VENT,
 		/area/holodeck = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/maintenance = NO_SCRUBBER,
+		/area/maintenance/atmos_control = 0,
 		/area/maintenance/engi_shuttle = 0,
 		/area/maintenance/substation/command = 0,
 		/area/mine/explored = NO_SCRUBBER|NO_VENT,
@@ -24,8 +25,8 @@
 		/area/skipjack_station = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/solar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/storage/emergency = NO_SCRUBBER|NO_VENT,
-		/area/storage/emergency2 = NO_SCRUBBER|NO_VENT,
+		/area/storage/emergency = NO_SCRUBBER,
+		/area/storage/emergency2 = NO_SCRUBBER,
 		/area/supply = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/syndicate_station = NO_SCRUBBER|NO_VENT|NO_APC,
 	)
