@@ -12,10 +12,7 @@
 			seed.display_name = "strange plants" //more thematic for the vine infestation event
 
 			//make vine zero start off fully matured
-			var/obj/effect/plant/vine = new(T,seed)
-			vine.health = vine.max_health
-			vine.mature_time = 0
-			vine.process()
+			new /obj/effect/plant(T,seed, start_matured = 1)
 
 			log_and_message_admins("Spacevines spawned in \the [get_area(T)]", location = T)
 			return
@@ -73,7 +70,7 @@
 /obj/effect/plant/single
 	spread_chance = 0
 
-/obj/effect/plant/New(var/newloc, var/datum/seed/newseed, var/obj/effect/plant/newparent)
+/obj/effect/plant/New(var/newloc, var/datum/seed/newseed, var/obj/effect/plant/newparent, var/start_matured = 0)
 	..()
 
 	if(!newparent)
@@ -120,6 +117,10 @@
 	spread_chance = seed.get_trait(TRAIT_POTENCY)
 	spread_distance = ((growth_type>0) ? round(spread_chance*0.6) : round(spread_chance*0.3))
 	update_icon()
+	if(start_matured)
+		mature_time = 0
+		health = max_health
+		process()
 
 // Plants will sometimes be spawned in the turf adjacent to the one they need to end up in, for the sake of correct dir/etc being set.
 /obj/effect/plant/proc/finish_spreading()
@@ -261,7 +262,7 @@
 	var/aggression = 0
 	aggression += (attacker_seed.get_trait(TRAIT_CARNIVOROUS) - seed.get_trait(TRAIT_CARNIVOROUS))
 	aggression += (attacker_seed.get_trait(TRAIT_SPREAD) - seed.get_trait(TRAIT_SPREAD))
-	
+
 	var/resiliance
 	if(is_mature())
 		resiliance = 0

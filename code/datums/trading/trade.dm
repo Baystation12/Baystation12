@@ -116,8 +116,8 @@
 /datum/trader/proc/get_item_value(var/trading_num)
 	if(!trading_items[trading_items[trading_num]])
 		var/type = trading_items[trading_num]
-		var/value = 0
-		//<INSERT CALCULATED COST HERE>
+		var/value = get_value(type)
+		value = round(rand(90,110)/100 * value) //For some reason rand doesn't like decimals.
 		trading_items[type] = value
 	return trading_items[trading_items[trading_num]]
 
@@ -140,8 +140,7 @@
 			return 0
 
 	var/trading_worth = get_item_value(num)
-	var/offer_worth = 0
-	//<INSERT CODE FOR DETERMINING ITEM WORTH HERE>
+	var/offer_worth = get_value(offer)
 	if(is_wanted)
 		offer_worth *= 2
 	if(!offer_worth)

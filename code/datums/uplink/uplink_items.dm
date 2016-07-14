@@ -50,9 +50,6 @@ var/datum/uplink/uplink = new()
 	if(!can_buy(U))
 		return
 
-	if(U.CanUseTopic(user, inventory_state) != STATUS_INTERACTIVE)
-		return
-
 	var/cost = cost(U.uses, U)
 
 	var/goods = get_goods(U, get_turf(user), user, extra_args)
@@ -96,7 +93,7 @@ var/datum/uplink/uplink = new()
 			var/datum/antagonist/antag = all_antag_types[antag_role]
 			if(antag.is_antagonist(U.uplink_owner))
 				. = min(antag_costs[antag_role], .)
-	return U ?  U.get_item_cost(src, .) : .
+	return max(1, U ?  U.get_item_cost(src, .) : .)
 
 /datum/uplink_item/proc/description()
 	return desc
@@ -150,20 +147,6 @@ datum/uplink_item/dd_SortValue()
 /datum/uplink_item/item/log_icon()
 	var/obj/I = path
 	return "\icon[I]"
-
-/********************************
-*                           	*
-*	Abstract Uplink Entries		*
-*                           	*
-********************************/
-/datum/uplink_item/abstract
-	var/static/image/default_abstract_uplink_icon
-
-/datum/uplink_item/abstract/log_icon()
-	if(!default_abstract_uplink_icon)
-		default_abstract_uplink_icon = image('icons/obj/pda.dmi', "pda-syn")
-
-	return "\icon[default_abstract_uplink_icon]"
 
 /****************
 * Support procs *

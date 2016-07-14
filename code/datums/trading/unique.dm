@@ -13,7 +13,9 @@
 							)
 
 	possible_trading_items = list(/obj/mecha/combat                                                    = TRADER_SUBTYPES_ONLY,
-							/obj/item/weapon/gun/projectile/automatic                                  = TRADER_SUBTYPES_ONLY
+							/obj/item/weapon/gun/projectile/automatic                                  = TRADER_SUBTYPES_ONLY,
+							/obj/item/weapon/gun/projectile/automatic/mini_uzi/usi                     = TRADER_BLACKLIST,
+							/obj/item/weapon/gun/projectile/automatic/l6_saw/mag                       = TRADER_BLACKLIST
 							)
 
 	blacklisted_trade_items = null
@@ -78,7 +80,8 @@
 								/obj/item/clothing/head/wizard                   = TRADER_ALL,
 								/obj/item/clothing/suit/space/void/wizard        = TRADER_THIS_TYPE,
 								/obj/item/toy/figure/wizard                      = TRADER_THIS_TYPE,
-								/obj/item/weapon/staff                           = TRADER_ALL
+								/obj/item/weapon/staff                           = TRADER_ALL,
+								/obj/item/weapon/gun/energy/staff                = TRADER_ALL
 								) //Probably see about getting some more wizard based shit
 
 	speech = list("hail_generic"     = "Hello! Are you here on pleasure or business?",

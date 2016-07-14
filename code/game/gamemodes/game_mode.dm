@@ -273,13 +273,14 @@ var/global/list/additional_antag_types = list()
 	if(emergency_shuttle.returned() || station_was_nuked)
 		return 1
 	if(end_on_antag_death && antag_templates && antag_templates.len)
+		var/has_antags = 0
 		for(var/datum/antagonist/antag in antag_templates)
 			if(!antag.antags_are_dead())
-				return 0
-		if(config.continous_rounds)
+				has_antags = 1
+				break
+		if(!has_antags)
 			emergency_shuttle.auto_recall = 0
-			return 0
-		return 1
+			return 1
 	return 0
 
 /datum/game_mode/proc/cleanup()	//This is called when the round has ended but not the game, if any cleanup would be necessary in that case.

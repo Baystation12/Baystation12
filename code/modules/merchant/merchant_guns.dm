@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/projectile/sec/MK
-	desc = "Similar in both appearance and use of the NT Mk58, the MK pistol is an cheap knock off that preys on the unsuspecting."
-	jam_chance = 45
+	desc = "Similar in both appearance and use of the NT Mk58, the MK pistol is an cheap knock off that preys on the unsuspecting firearm buyers."
+	jam_chance = 35
 
 /obj/item/weapon/gun/projectile/silenced/cheap
 	desc = "A handgun with an integrated silencer(?). Uses .45 rounds."
@@ -16,13 +16,12 @@
 	caliber = "9mm"
 
 /obj/item/weapon/gun/energy/laser/dogan
-	desc = "Crafted from the best materials Dogan could find, this carbine works just as well as a normal carbine. Most of the time."
+	desc = "This carbine works just as well as a normal carbine. Most of the time." //removed reference to Dogan, since only the merchant is likely to know who that is.
 
 /obj/item/weapon/gun/energy/laser/dogan/consume_next_projectile()
 	projectile_type = pick(/obj/item/projectile/beam/midlaser, /obj/item/projectile/beam/lastertag/red, /obj/item/projectile/beam)
 	return ..()
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi/usi
-	name = "\improper Usi"
-	desc = "The USI is a replica of the UZI made from scrapped together pistol parts. Does the same thing an UZI does, except cheaper."
-	jam_chance = 55
+	desc = "An uncommon machine pistol, sometimes refered to as an 'uzi' by the backwater spacers it is often associated with. This one looks especially run-down. Uses .45 rounds."
+	jam_chance = 20

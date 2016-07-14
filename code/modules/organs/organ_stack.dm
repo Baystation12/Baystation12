@@ -42,7 +42,8 @@
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
 
 /obj/item/organ/internal/stack/replaced()
-	..()
+	if(!..()) return 0
+
 	if(owner && !backup_inviable())
 		var/current_owner = owner
 		var/response = input(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life?", "Resleeving") as anything in list("Yes", "No")
@@ -50,6 +51,8 @@
 			overwrite()
 	sleep(-1)
 	do_backup()
+
+	return 1
 
 /obj/item/organ/internal/stack/removed()
 	do_backup()

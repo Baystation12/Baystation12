@@ -102,7 +102,6 @@ datum/preferences
 	var/savefile/loaded_preferences
 	var/savefile/loaded_character
 	var/datum/category_collection/player_setup_collection/player_setup
-	var/has_cortical_stack = 1
 	var/datum/browser/panel
 
 /datum/preferences/New(client/C)

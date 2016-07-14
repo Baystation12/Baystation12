@@ -9,7 +9,7 @@
 	matter = list("glass" = 5)
 	w_class = 2.0
 	amount_per_transfer_from_this = 1
-	possible_transfer_amounts = list(1, 2)
+	possible_transfer_amounts = "1;2"
 	volume = 2
 	flags = OPENCONTAINER
 

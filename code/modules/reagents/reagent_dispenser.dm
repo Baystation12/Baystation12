@@ -9,7 +9,7 @@
 	anchored = 0
 
 	var/amount_per_transfer_from_this = 10
-	var/possible_transfer_amounts = list(10,25,50,100)
+	var/possible_transfer_amounts = "10;25;50;100"
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		return
@@ -36,7 +36,7 @@
 		set name = "Set transfer amount"
 		set category = "Object"
 		set src in view(1)
-		var/N = input("Amount per transfer from this:","[src]") as null|anything in possible_transfer_amounts
+		var/N = input("Amount per transfer from this:","[src]") as null|anything in cached_number_list_decode(possible_transfer_amounts)
 		if (N)
 			amount_per_transfer_from_this = N
 

@@ -100,6 +100,8 @@
 
 /obj/item/organ/internal/brain/replaced(var/mob/living/target)
 
+	if(!..()) return 0
+
 	if(target.key)
 		target.ghostize()
 
@@ -108,7 +110,8 @@
 			brainmob.mind.transfer_to(target)
 		else
 			target.key = brainmob.key
-	..()
+
+	return 1
 
 /obj/item/organ/internal/brain/slime
 	name = "slime core"

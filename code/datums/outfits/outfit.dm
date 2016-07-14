@@ -55,13 +55,10 @@ var/list/outfits_decls_by_type_
 /decl/hierarchy/outfit/New()
 	..()
 
-	if(is_hidden())
+	if(is_hidden_category())
 		return
 	outfits_decls_by_type_[type] = src
 	dd_insertObjectList(outfits_decls_, src)
-
-/decl/hierarchy/outfit/proc/is_hidden()
-	return is_category() && (flags & OUTFIT_HIDE_IF_CATEGORY)
 
 /decl/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)
 	//to be overriden for customization depending on client prefs,species etc
@@ -75,7 +72,27 @@ var/list/outfits_decls_by_type_
 		J.toggle()
 		J.toggle_valve()
 
-/decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/rank, var/assignment)
+	equip_base(H)
+
+	rank = id_pda_assignment ? id_pda_assignment : rank
+	assignment = id_pda_assignment ? id_pda_assignment : (assignment ? assignment : rank)
+	var/obj/item/weapon/card/id/W = equip_id(H, rank, assignment)
+	if(W)
+		rank = W.rank
+		assignment = W.assignment
+	equip_pda(H, rank, assignment)
+
+	for(var/path in backpack_contents)
+		var/number = backpack_contents[path]
+		for(var/i=0,i<number,i++)
+			H.equip_to_slot_or_del(new path(H), slot_in_backpack)
+
+	post_equip(H)
+	H.regenerate_icons()
+	return 1
+
+/decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H)
 	pre_equip(H)
 
 	//Start with uniform,suit,backpack for additional slots
@@ -114,27 +131,30 @@ var/list/outfits_decls_by_type_
 		H.put_in_l_hand(new l_hand(H))
 	if(r_hand)
 		H.put_in_r_hand(new r_hand(H))
+	if(H.species)
+		H.species.equip_survival_gear(H, flags&OUTFIT_EXTENDED_SURVIVAL)
 
-	if(id_slot)
-		var/obj/item/weapon/card/id/W = new id_type(H)
-		if(id_desc)
-			W.desc = id_desc
-		W.assignment = id_pda_assignment != null ? id_pda_assignment : name
-		H.set_id_info(W)
-		H.equip_to_slot_or_del(W, id_slot)
-	if(pda_slot)
-		var/obj/item/device/pda/heads/pda = new pda_type(H)
-		pda.set_owner_rank_job(H.real_name, id_pda_assignment ? id_pda_assignment : name)
-		H.equip_to_slot_or_del(pda, pda_slot)
+/decl/hierarchy/outfit/proc/equip_id(mob/living/carbon/human/H, rank, assignment)
+	if(!id_slot)
+		return
+	var/obj/item/weapon/card/id/W = new id_type(H)
+	if(id_desc)
+		W.desc = id_desc
+	if(rank)
+		W.rank = rank
+	if(assignment)
+		W.assignment = assignment
+	H.set_id_info(W)
+	if(H.equip_to_slot_or_del(W, id_slot))
+		return W
 
-	for(var/path in backpack_contents)
-		var/number = backpack_contents[path]
-		for(var/i=0,i<number,i++)
-			H.equip_to_slot_or_del(new path(H),slot_in_backpack)
-
-	post_equip(H)
-	H.regenerate_icons()
-	return 1
+/decl/hierarchy/outfit/proc/equip_pda(mob/living/carbon/human/H, rank, assignment)
+	if(!pda_slot)
+		return
+	var/obj/item/device/pda/heads/pda = new pda_type(H)
+	pda.set_owner_rank_job(H.real_name, rank, assignment)
+	if(H.equip_to_slot_or_del(pda, pda_slot))
+		return pda
 
 /decl/hierarchy/outfit/dd_SortValue()
 	return name

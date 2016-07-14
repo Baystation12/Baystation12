@@ -10,8 +10,11 @@ var/global/last_tick_duration = 0
 var/global/air_processing_killed = 0
 var/global/pipe_processing_killed = 0
 
+var/global/initialization_stage = 0
+
 datum/controller/game_controller
 	var/list/shuttle_list	                    // For debugging and VV
+	var/init_immediately = FALSE
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -42,16 +45,28 @@ datum/controller/game_controller/proc/setup()
 
 	transfer_controller = new
 
+	admin_notice("<span class='danger'>Initializations complete.</span>", R_DEBUG)
+	initialization_stage |= INITIALIZATION_COMPLETE
+
 #ifdef UNIT_TEST
 #define CHECK_SLEEP_MASTER // For unit tests we don't care about a smooth lobby screen experience. We care about speed.
 #else
-#define CHECK_SLEEP_MASTER if(++initialized_objects > 500) { initialized_objects=0;sleep(world.tick_lag); }
+#define CHECK_SLEEP_MASTER if(!(initialization_stage & INITIALIZATION_NOW) && ++initialized_objects > 500) { initialized_objects=0;sleep(world.tick_lag); }
 #endif
 
 datum/controller/game_controller/proc/setup_objects()
 #ifndef UNIT_TEST
 	var/initialized_objects = 0
 #endif
+
+	// Do these first since character setup will rely on them
+
+	// Set up antagonists.
+	populate_antag_type_list()
+
+	//Set up spawn points.
+	populate_spawn_points()
+
 	admin_notice("<span class='danger'>Initializing objects</span>", R_DEBUG)
 	for(var/atom/movable/object in world)
 		if(!deleted(object))
@@ -77,13 +92,5 @@ datum/controller/game_controller/proc/setup_objects()
 			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
 			T.broadcast_status()
 		CHECK_SLEEP_MASTER
-
-	// Set up antagonists.
-	populate_antag_type_list()
-
-	//Set up spawn points.
-	populate_spawn_points()
-
-	admin_notice("<span class='danger'>Initializations complete.</span>", R_DEBUG)
 
 #undef CHECK_SLEEP_MASTER

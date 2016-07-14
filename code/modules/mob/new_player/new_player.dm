@@ -125,6 +125,7 @@
 			var/mob/living/carbon/human/dummy/mannequin = new()
 			client.prefs.dress_preview_mob(mannequin)
 			observer.appearance = mannequin
+			observer.appearance_flags |= KEEP_TOGETHER // replace KEEP_TOGETHER flag so the ghost looks normal-ish
 			observer.alpha = 127
 			observer.layer = initial(observer.layer)
 			observer.invisibility = initial(observer.invisibility)

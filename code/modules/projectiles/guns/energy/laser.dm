@@ -104,7 +104,7 @@ obj/item/weapon/gun/energy/retro
 	fire_delay = 35
 	force = 10
 	w_class = 5
-	accuracy = -3 //shooting at the hip
+	accuracy = -2 //shooting at the hip
 	scoped_accuracy = 0
 
 /obj/item/weapon/gun/energy/sniperrifle/update_icon()

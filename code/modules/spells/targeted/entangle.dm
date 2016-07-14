@@ -32,11 +32,8 @@
 /spell/targeted/entangle/cast(var/list/targets)
 	for(var/mob/M in targets)
 		var/turf/T = get_turf(M)
-		var/obj/effect/plant/single/P = new(T,seed)
+		var/obj/effect/plant/single/P = new(T,seed, start_matured =1)
 		P.can_buckle = 1
-		P.health = P.max_health
-		P.mature_time = 0
-		P.process()
 
 		P.buckle_mob(M)
 		M.set_dir(pick(cardinal))

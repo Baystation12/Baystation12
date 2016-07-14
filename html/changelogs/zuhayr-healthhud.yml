@@ -1,4 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - rscadd: "The health indicator on the player GUI will now show a more detailed breakdown of damage to your body."

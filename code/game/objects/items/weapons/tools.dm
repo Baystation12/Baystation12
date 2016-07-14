@@ -26,6 +26,7 @@
 	w_class = 2.0
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
+	center_of_mass = "x=17;y=16"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
 
@@ -45,6 +46,7 @@
 	throw_speed = 3
 	throw_range = 5
 	matter = list(DEFAULT_WALL_MATERIAL = 75)
+	center_of_mass = "x=16;y=7"
 	attack_verb = list("stabbed")
 	lock_picking_level = 5
 
@@ -101,6 +103,7 @@
 	w_class = 2.0
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 80)
+	center_of_mass = "x=18;y=10"
 	attack_verb = list("pinched", "nipped")
 	sharp = 1
 	edge = 1
@@ -133,6 +136,7 @@
 	icon_state = "welder"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
+	center_of_mass = "x=14;y=15"
 
 	//Amount of OUCH when it's thrown
 	force = 3.0
@@ -418,6 +422,7 @@
 	w_class = 2.0
 	origin_tech = list(TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 50)
+	center_of_mass = "x=16;y=20"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 
 /obj/item/weapon/crowbar/red

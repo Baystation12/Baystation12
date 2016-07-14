@@ -13,6 +13,7 @@ var/datum/antagonist/wizard/wizards
 	hard_cap_round = 3
 	initial_spawn_req = 1
 	initial_spawn_target = 1
+	min_player_age = 18
 
 	faction = "wizard"
 

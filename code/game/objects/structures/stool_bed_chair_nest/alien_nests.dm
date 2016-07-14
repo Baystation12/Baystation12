@@ -6,6 +6,7 @@
 	desc = "It's a gruesome pile of thick, sticky resin shaped like a nest."
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "nest"
+	buckle_pixel_shift = "x=0;y=6"
 	var/health = 100
 
 /obj/structure/bed/nest/update_icon()
@@ -19,8 +20,6 @@
 					"<span class='notice'>[user.name] pulls [buckled_mob.name] free from the sticky nest!</span>",\
 					"<span class='notice'>[user.name] pulls you free from the gelatinous resin.</span>",\
 					"<span class='notice'>You hear squelching...</span>")
-				buckled_mob.pixel_y = 0
-				buckled_mob.old_y = 0
 				unbuckle_mob()
 			else
 				if(world.time <= buckled_mob.last_special+NEST_RESIST_TIME)
@@ -33,8 +32,6 @@
 				spawn(NEST_RESIST_TIME)
 					if(user && buckled_mob && user.buckled == src)
 						buckled_mob.last_special = world.time
-						buckled_mob.pixel_y = 0
-						buckled_mob.old_y = 0
 						unbuckle_mob()
 			src.add_fingerprint(user)
 	return
@@ -57,17 +54,11 @@
 	if(M == usr)
 		return
 	else
-		M.visible_message(\
-			"<span class='notice'>[user.name] secretes a thick vile goo, securing [M.name] into [src]!</span>",\
-			"<span class='warning'>[user.name] drenches you in a foul-smelling resin, trapping you in the [src]!</span>",\
+		M.visible_message(
+			"<span class='notice'>[user.name] secretes a thick vile goo, securing [M] into [src]!</span>",
+			"<span class='warning'>[user.name] drenches you in a foul-smelling resin, trapping you in the [src]!</span>",
 			"<span class='notice'>You hear squelching...</span>")
-	M.buckled = src
-	M.loc = src.loc
-	M.set_dir(src.dir)
-	M.update_canmove()
-	M.pixel_y = 6
-	M.old_y = 6
-	src.buckled_mob = M
+	buckle_mob(M)
 	src.add_fingerprint(user)
 	return
 

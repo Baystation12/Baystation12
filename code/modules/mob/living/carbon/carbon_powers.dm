@@ -55,7 +55,7 @@
 		B.has_reproduced = 1
 
 		vomit(1)
-		new /mob/living/simple_animal/borer(get_turf(src))
+		new /mob/living/simple_animal/borer(get_turf(src), B.generation + 1)
 
 	else
 		src << "<span class='warning'>You do not have enough chemicals stored to reproduce.</span>"

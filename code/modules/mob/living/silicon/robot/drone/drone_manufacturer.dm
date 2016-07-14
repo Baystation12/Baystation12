@@ -8,6 +8,7 @@
 /obj/machinery/drone_fabricator
 	name = "drone fabricator"
 	desc = "A large automated factory for producing maintenance drones."
+	appearance_flags = 0
 
 	density = 1
 	anchored = 1

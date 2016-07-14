@@ -1,7 +1,13 @@
 /datum/antagonist/proc/can_become_antag(var/datum/mind/player, var/ignore_role)
 	if(player.current && jobban_isbanned(player.current, id))
 		return 0
+
 	if(!ignore_role)
+		if(player.current && player.current.client)
+			var/client/C = player.current.client
+			// Limits antag status to clients above player age, if the age system is being used.
+			if(C && config.use_age_restriction_for_jobs && isnum(C.player_age) && isnum(min_player_age) && (C.player_age < min_player_age))
+				return 0
 		if(player.assigned_role in restricted_jobs)
 			return 0
 		if(config.protect_roles_from_antagonist && (player.assigned_role in protected_jobs))

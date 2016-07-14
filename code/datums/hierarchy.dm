@@ -1,5 +1,6 @@
 /decl/hierarchy
 	var/name = "Hierarchy"
+	var/hierarchy_type
 	var/decl/hierarchy/parent
 	var/list/decl/hierarchy/children
 
@@ -20,7 +21,10 @@
 		dd_insertObjectList(subtype_parent.children, subtype_instance)
 
 /decl/hierarchy/proc/is_category()
-	return children.len
+	return hierarchy_type == type || children.len
+
+/decl/hierarchy/proc/is_hidden_category()
+	return hierarchy_type == type
 
 /decl/hierarchy/dd_SortValue()
 	return name

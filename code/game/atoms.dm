@@ -368,9 +368,6 @@ its easier to just keep the beam vertical.
 			fingerprintshidden += text("\[[]\]Real name: [], Key: []",time_stamp(), M.real_name, M.key)
 			fingerprintslast = M.key
 
-	//Cleaning up shit.
-	if(fingerprints && !fingerprints.len)
-		qdel(fingerprints)
 	return
 
 

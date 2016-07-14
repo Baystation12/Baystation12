@@ -31,6 +31,7 @@ REAGENT SCANNER
 	return 1
 
 /obj/item/device/healthanalyzer/attack(mob/living/M, mob/living/user)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	scan_mob(M, user)
 
 /obj/item/device/healthanalyzer/proc/scan_mob(mob/living/M, mob/living/user)
