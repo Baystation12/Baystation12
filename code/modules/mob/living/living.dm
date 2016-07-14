@@ -370,12 +370,6 @@ default behaviour is:
 /mob/living/proc/can_inject(var/mob/user, var/target_zone)
 	return 1
 
-/mob/living/proc/get_organ_target()
-	var/mob/shooter = src
-	var/obj/item/organ/external/def_zone = src.ran_zone(src.check_zone(shooter.zone_sel.selecting))
-	return def_zone
-
-
 // heal ONE external organ, organ gets randomly selected from damaged ones.
 /mob/living/proc/heal_organ_damage(var/brute, var/burn)
 	adjustBruteLoss(-brute)
