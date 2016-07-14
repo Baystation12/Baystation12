@@ -1,0 +1,11 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "Multiple map changes have been made. This should make decompression due to breaches slightly more dangerous, as there's more airlocks around the station to contain the leaks."
+  - rscadd: "Most maintenance sections now have a vent for refilling without needing portable pump (if you don't mind the slow speed)."
+  - rscadd: "Engine radiator has been split up into three smaller radiators. Total combined cooling power is pretty much equal to the original big radiator. Split radiators are slightly more meteor-resistant - a meteor should no longer one-shot the whole cooling system."
+  - tweak: "Swapped some canisters around engineering and engine room. Engineers won't need to break into atmospherics anymore to get gas canisters. Note: Current canisters in engine room are on double pressure, so one canister contains twice as much gas as regular one."
+  - tweak: "Arrivals shuttle has been exposed to the arrivals hallway. When the hallway gets depressurised, the shuttle will leak too, triggering the automatic on-join warning (and letting you pick other spawn point), so people should no longer be trapped on shuttle when adjacent hallways are vented."
+  - rscadd: "For full in-depth list of changes see: https://github.com/Baystation12/Baystation12/pull/13707"
