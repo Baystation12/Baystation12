@@ -26,6 +26,9 @@
 		//Random events (vomiting etc)
 		handle_random_events()
 
+		//stuff in the stomach
+		handle_stomach()
+
 		. = 1
 
 	//Handle temperature/pressure differences between body and environment
@@ -34,9 +37,6 @@
 
 	//Check if we're on fire
 	handle_fire()
-
-	//stuff in the stomach
-	handle_stomach()
 
 	update_pulling()
 
