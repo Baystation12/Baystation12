@@ -1953,6 +1953,7 @@
 #include "code\modules\shieldgen\energy_field.dm"
 #include "code\modules\shieldgen\sheldwallgen.dm"
 #include "code\modules\shieldgen\shield_capacitor.dm"
+#include "code\modules\shieldgen\shield_dis.dm"
 #include "code\modules\shieldgen\shield_gen.dm"
 #include "code\modules\shieldgen\shield_gen_external.dm"
 #include "code\modules\shuttles\_defines.dm"
