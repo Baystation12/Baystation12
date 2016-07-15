@@ -50,7 +50,7 @@
 
 	else
 		var/atom/movable/prize = pick(contents)
-		prize.loc = src.loc
+		prize.forceMove(src.loc)
 
 /obj/machinery/computer/arcade/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
@@ -235,7 +235,7 @@
 			src.temp = "You have been drained! GAME OVER"
 			if(emagged)
 				feedback_inc("arcade_loss_mana_emagged")
-				usr.gib()
+				explode()
 			else
 				feedback_inc("arcade_loss_mana_normal")
 
@@ -254,13 +254,16 @@
 		src.temp = "You have been crushed! GAME OVER"
 		if(emagged)
 			feedback_inc("arcade_loss_hp_emagged")
-			usr.gib()
+			explode()
 		else
 			feedback_inc("arcade_loss_hp_normal")
 
 	src.blocked = 0
 	return
 
+/obj/machinery/computer/arcade/proc/explode()
+	explosion(loc, 0, 1, 2, 3)
+	qdel(src)
 
 /obj/machinery/computer/arcade/battle/emag_act(var/charges, var/mob/user)
 	if(!emagged)
