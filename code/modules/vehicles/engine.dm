@@ -57,10 +57,10 @@
 	return cell.use(cost_per_move)
 
 /obj/item/weapon/engine/electric/rev_engine(var/atom/movable/M)
-	M.audible_message("\The [M] beeps, turning up.")
+	M.audible_message("\The [M] beeps, spinning up.")
 
 /obj/item/weapon/engine/electric/putter(var/atom/movable/M)
-	M.audible_message("\The [M] makes one depressed beep before turning off.")
+	M.audible_message("\The [M] makes one depressed beep before winding down.")
 
 /obj/item/weapon/engine/electric/emp_act(var/severity)
 	if(cell)

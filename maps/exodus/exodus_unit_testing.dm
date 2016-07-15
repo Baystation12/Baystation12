@@ -14,6 +14,7 @@
 		/area/maintenance/atmos_control = 0,
 		/area/maintenance/engi_shuttle = 0,
 		/area/maintenance/substation/command = 0,
+		/area/medical/genetics = NO_APC,
 		/area/mine/explored = NO_SCRUBBER|NO_VENT,
 		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/outpost/abandoned = NO_SCRUBBER|NO_VENT|NO_APC,
