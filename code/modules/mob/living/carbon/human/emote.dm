@@ -143,6 +143,10 @@
 				message = "makes a strong noise."
 				m_type = 2
 
+		if("vomit")
+			vomit()
+			return
+
 		if ("clap")
 			if (!src.restrained())
 				message = "claps."
@@ -515,7 +519,7 @@
 cry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob,
 grin, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug,
 sigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, twitch_s, whimper,
-wink, yawn, swish, sway/wag, fastsway/qwag, stopsway/swag"}
+wink, yawn, swish, sway/wag, fastsway/qwag, stopsway/swag, vomit"}
 
 		else
 			src << "\blue Unusable emote '[act]'. Say *help for a list."
