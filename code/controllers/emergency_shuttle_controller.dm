@@ -36,19 +36,19 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		if (world.time >= launch_time)	//time to launch the shuttle
 			stop_launch_countdown()
 
-			if (!shuttle.location)	//leaving from the station
+			if (!location())	//leaving from the station
 				//launch the pods!
 				for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
 					if (!pod.arming_controller || pod.arming_controller.armed)
 						pod.launch(src)
 
-			if (autopilot)
+			if (autopilot && shuttle)
 				shuttle.launch(src)
 
 //called when the shuttle has arrived.
 
 /datum/emergency_shuttle_controller/proc/shuttle_arrived()
-	if (!shuttle.location)	//at station
+	if (!location())	//at station
 		if (autopilot)
 			set_launch_countdown(SHUTTLE_LEAVETIME)	//get ready to return
 
@@ -129,6 +129,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		priority_announcement.Announce(using_map.shuttle_recall_message)
 
 /datum/emergency_shuttle_controller/proc/can_call(var/user, var/forced)
+	if(!shuttle)
+		return 0
 	if (!universe.OnShuttleCall(null))
 		return 0
 	if (deny_shuttle)
@@ -152,6 +154,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 //e.g. the shuttle is already at the station or wasn't called to begin with
 //other reasons for the shuttle not being recallable should be handled elsewhere
 /datum/emergency_shuttle_controller/proc/can_recall()
+	if(!shuttle)
+		return 0
 	if (shuttle.moving_status == SHUTTLE_INTRANSIT)	//if the shuttle is already in transit then it's too late
 		return 0
 	if (!shuttle.location)	//already at the station.
@@ -174,7 +178,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 //returns 1 if the shuttle is docked at the station and waiting to leave
 /datum/emergency_shuttle_controller/proc/waiting_to_leave()
-	if (shuttle.location)
+	if (location())
 		return 0	//not at station
 	return (wait_for_launch || shuttle.moving_status != SHUTTLE_INTRANSIT)
 
@@ -186,6 +190,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 //returns the time left until the shuttle arrives at it's destination, in seconds
 /datum/emergency_shuttle_controller/proc/estimate_arrival_time()
+	if(!shuttle)
+		return 0
 	var/eta
 	if (shuttle.has_arrive_time())
 		//we are in transition and can get an accurate ETA
@@ -205,10 +211,12 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 //returns 1 if the shuttle has gone to the station and come back at least once,
 //used for game completion checking purposes
 /datum/emergency_shuttle_controller/proc/returned()
-	return (departed && shuttle.moving_status == SHUTTLE_IDLE && shuttle.location)	//we've gone to the station at least once, no longer in transit and are idle back at centcom
+	return (shuttle && departed && shuttle.moving_status == SHUTTLE_IDLE && shuttle.location)	//we've gone to the station at least once, no longer in transit and are idle back at centcom
 
 //returns 1 if the shuttle is not idle at centcom
 /datum/emergency_shuttle_controller/proc/online()
+	if(!shuttle) // Here we cannot use location() because the outcome differs between not having a shuttle and not having a location
+		return 0
 	if (!shuttle.location)	//not at centcom
 		return 1
 	if (wait_for_launch || shuttle.moving_status != SHUTTLE_IDLE)
@@ -217,11 +225,11 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 //returns 1 if the shuttle is currently in transit (or just leaving) to the station
 /datum/emergency_shuttle_controller/proc/going_to_station()
-	return (!shuttle.direction && shuttle.moving_status != SHUTTLE_IDLE)
+	return (shuttle && !shuttle.direction && shuttle.moving_status != SHUTTLE_IDLE)
 
 //returns 1 if the shuttle is currently in transit (or just leaving) to centcom
 /datum/emergency_shuttle_controller/proc/going_to_centcom()
-	return (shuttle.direction && shuttle.moving_status != SHUTTLE_IDLE)
+	return (shuttle && shuttle.direction && shuttle.moving_status != SHUTTLE_IDLE)
 
 
 /datum/emergency_shuttle_controller/proc/get_status_panel_eta()
