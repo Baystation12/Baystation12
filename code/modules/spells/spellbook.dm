@@ -236,7 +236,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	uses--
 	processing_objects += src
 	investing_time = world.time + (15 MINUTES)
-	return "You invest a spellslot and will recieve two in return in thirty minutes."
+	return "You invest a spellslot and will recieve two in return in 15 minutes."
 
 /obj/item/weapon/spellbook/process()
 	if(investing_time && investing_time <= world.time)
