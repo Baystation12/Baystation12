@@ -340,7 +340,8 @@
 
 				else if(pod.growclone(C))
 					temp = "Initiating cloning cycle..."
-					records.Remove(C)
+					if(!config.use_cortical_stacks)
+						records.Remove(C)
 					qdel(C)
 					menu = 1
 				else
@@ -356,7 +357,8 @@
 							cloning = 1
 					if(cloning)
 						temp = "Initiating cloning cycle..."
-						records.Remove(C)
+						if(!config.use_cortical_stacks)
+							records.Remove(C)
 						qdel(C)
 						menu = 1
 					else

@@ -89,7 +89,10 @@ var/list/admin_verbs_admin = list(
 	/client/proc/view_chemical_reaction_logs,
 	/client/proc/makePAI,
 	/datum/admins/proc/paralyze_mob,
-	/client/proc/fixatmos
+	/client/proc/fixatmos,
+	/client/proc/list_traders,
+	/client/proc/add_trader,
+	/client/proc/remove_trader
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,

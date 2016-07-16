@@ -12,7 +12,7 @@
 	action_button_name = "Toggle Magboots"
 	var/obj/item/clothing/shoes/shoes = null	//Undershoes
 	var/mob/living/carbon/human/wearer = null	//For shoe procs
-	place_centered = 1
+	center_of_mass = null
 	randpixel = 0
 
 /obj/item/clothing/shoes/magboots/proc/set_slowdown()

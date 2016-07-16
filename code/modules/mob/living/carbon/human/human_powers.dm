@@ -71,11 +71,11 @@
 	if(last_special > world.time)
 		return
 
-	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len)
+	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len || stance_damage >= 4 || src.legcuffed)
 		src << "<span class='warning'>You cannot leap in your current state.</span>"
 		return
 
-	last_special = world.time + 75
+	last_special = world.time + (17.5 SECONDS)
 	status_flags |= LEAPING
 
 	src.visible_message("<span class='danger'>\The [src] leaps at [T]!</span>")
@@ -93,7 +93,7 @@
 	T.Weaken(3)
 
 	// Pariahs are not good at leaping. This is snowflakey, pls fix.
-	if(species.name == "Vox Pariah")
+	if(species.name == "Vox Pariah" || src.handcuffed || stance_damage >= 2)
 		src.Weaken(5)
 		return
 

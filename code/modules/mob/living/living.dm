@@ -1,3 +1,10 @@
+/mob/living/New()
+	..()
+	if(stat == DEAD)
+		add_to_dead_mob_list()
+	else
+		add_to_living_mob_list()
+
 //mob verbs are faster than object verbs. See mob/verb/examine.
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"
@@ -807,10 +814,10 @@ default behaviour is:
 	ear_deaf = max(0, ear_deaf + deaf)
 
 //pass a negative argument to skip one of the variable
-/mob/living/setEarDamage(var/damage, var/deaf)
-	if(damage >= 0)
+/mob/living/setEarDamage(var/damage = null, var/deaf = null)
+	if(!isnull(damage))
 		ear_damage = damage
-	if(deaf >= 0)
+	if(!isnull(deaf))
 		ear_deaf = deaf
 
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)

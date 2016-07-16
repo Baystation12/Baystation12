@@ -4,7 +4,7 @@
 /datum/proc/nano_container()
 	return src
 
-/datum/proc/CanUseTopic(var/mob/user, var/datum/topic_state/state)
+/datum/proc/CanUseTopic(var/mob/user, var/datum/topic_state/state = default_state)
 	var/datum/src_object = nano_host()
 	return state.can_use_topic(src_object, user)
 
@@ -22,7 +22,7 @@
 	return STATUS_INTERACTIVE
 
 /mob/living/silicon/ai/shared_nano_interaction()
-	if(lacks_power())
+	if(!has_power())
 		return STATUS_CLOSE
 	if (check_unable(1, 0))
 		return STATUS_CLOSE

@@ -41,10 +41,6 @@
 
 /mob/New()
 	mob_list += src
-	if(stat == DEAD)
-		add_to_dead_mob_list()
-	else
-		add_to_living_mob_list()
 	..()
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
@@ -738,29 +734,20 @@
 	if(!resting && cannot_stand() && can_stand_overridden())
 		lying = 0
 		canmove = 1
-	else
-		if(istype(buckled, /obj/vehicle))
-			var/obj/vehicle/V = buckled
-			if(is_physically_disabled())
-				lying = 1
-				canmove = 0
-				pixel_y = V.mob_offset_y - 5
+	else if(buckled)
+		anchored = 1
+		canmove = 0
+		if(istype(buckled))
+			if(buckled.buckle_lying == -1)
+				lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 			else
-				if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
+				lying = buckled.buckle_lying
+			if(buckled.buckle_movable)
+				anchored = 0
 				canmove = 1
-				pixel_y = V.mob_offset_y
-		else if(buckled)
-			anchored = 1
-			canmove = 0
-			if(istype(buckled))
-				if(buckled.buckle_lying != -1)
-					lying = buckled.buckle_lying
-				if(buckled.buckle_movable)
-					anchored = 0
-					canmove = 1
-		else
-			lying = incapacitated(INCAPACITATION_KNOCKDOWN)
-			canmove = !incapacitated(INCAPACITATION_DISABLED)
+	else
+		lying = incapacitated(INCAPACITATION_KNOCKDOWN)
+		canmove = !incapacitated(INCAPACITATION_DISABLED)
 
 	if(lying)
 		density = 0

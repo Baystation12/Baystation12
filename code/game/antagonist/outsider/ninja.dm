@@ -13,6 +13,7 @@ var/datum/antagonist/ninja/ninjas
 	initial_spawn_target = 1
 	hard_cap = 1
 	hard_cap_round = 3
+	min_player_age = 18
 
 	id_type = /obj/item/weapon/card/id/syndicate
 

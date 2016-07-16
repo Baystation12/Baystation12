@@ -70,16 +70,16 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 	drip(blood_max)
 
 //Makes a blood drop, leaking amt units of blood from the mob
-/mob/living/carbon/human/proc/drip(var/amt as num)
+/mob/living/carbon/human/proc/drip(var/amt)
+	if(remove_blood(amt))
+		blood_splatter(src,src)
 
+/mob/living/carbon/human/proc/remove_blood(var/amt)
 	if(species && species.flags & NO_BLOOD) //TODO: Make drips come from the reagents instead.
-		return
-
+		return 0
 	if(!amt)
-		return
-
-	vessel.remove_reagent("blood",amt)
-	blood_splatter(src,src)
+		return 0
+	return vessel.remove_reagent("blood", amt * (src.mob_size/MOB_MEDIUM))
 
 /****************************************************
 				BLOOD TRANSFERS

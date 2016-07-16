@@ -11,7 +11,6 @@
 	slot_flags = SLOT_BELT
 	var/active = 0
 	var/det_time = 50
-	var/loadable = TRUE
 
 /obj/item/weapon/grenade/proc/clown_check(var/mob/living/user)
 	if((CLUMSY in user.mutations) && prob(50))

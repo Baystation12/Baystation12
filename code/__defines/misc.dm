@@ -37,41 +37,6 @@
 #define  STATUS_HUD_OOC 9 // STATUS_HUD without virus DB check for someone being ill.
 #define 	  LIFE_HUD 10 // STATUS_HUD that only reports dead or alive
 
-//some colors
-#define COLOR_WHITE            "#ffffff"
-#define COLOR_SILVER           "#c0c0c0"
-#define COLOR_GRAY             "#808080"
-#define COLOR_BLACK            "#000000"
-#define COLOR_RED              "#ff0000"
-#define COLOR_RED_LIGHT        "#ff3333"
-#define COLOR_MAROON           "#800000"
-#define COLOR_YELLOW           "#ffff00"
-#define COLOR_OLIVE            "#808000"
-#define COLOR_LIME             "#00ff00"
-#define COLOR_GREEN            "#008000"
-#define COLOR_CYAN             "#00ffff"
-#define COLOR_TEAL             "#008080"
-#define COLOR_BLUE             "#0000ff"
-#define COLOR_BLUE_LIGHT       "#33ccff"
-#define COLOR_NAVY             "#000080"
-#define COLOR_PINK             "#ff00ff"
-#define COLOR_PURPLE           "#800080"
-#define COLOR_ORANGE           "#ff9900"
-#define COLOR_LUMINOL          "#66ffff"
-#define COLOR_BEIGE            "#ceb689"
-#define COLOR_BLUE_GRAY        "#6a97b0"
-#define COLOR_BROWN            "#b19664"
-#define COLOR_DARK_BROWN       "#917448"
-#define COLOR_DARK_ORANGE      "#b95a00"
-#define COLOR_GREEN_GRAY       "#8daf6a"
-#define COLOR_RED_GRAY         "#aa5f61"
-#define COLOR_PALE_BLUE_GRAY   "#8bbbd5"
-#define COLOR_PALE_GREEN_GRAY  "#aed18b"
-#define COLOR_PALE_RED_GRAY    "#cc9090"
-#define COLOR_PALE_PURPLE_GRAY "#bda2ba"
-#define COLOR_PURPLE_GRAY      "#a2819e"
-#define COLOR_SUN              "#ec8b2f"
-
 //	Shuttles.
 
 // These define the time taken for the shuttle to get to the space station, and the time before it leaves again.
@@ -199,6 +164,28 @@
 #define CONFIG_OBJECTIVE_VERB 1
 #define CONFIG_OBJECTIVE_ALL  0
 
+// How many times an AI tries to connect to APC before switching to low power mode.
+#define AI_POWER_RESTORE_MAX_ATTEMPTS 3
+
+// AI power restoration routine steps.
+#define AI_RESTOREPOWER_FAILED -1
+#define AI_RESTOREPOWER_IDLE 0
+#define AI_RESTOREPOWER_STARTING 1
+#define AI_RESTOREPOWER_DIAGNOSTICS 2
+#define AI_RESTOREPOWER_CONNECTING 3
+#define AI_RESTOREPOWER_CONNECTED 4
+#define AI_RESTOREPOWER_COMPLETED 5
+
+
+// Values represented as Oxyloss. Can be tweaked, but make sure to use integers only.
+#define AI_POWERUSAGE_LOWPOWER 1
+#define AI_POWERUSAGE_RESTORATION 2
+#define AI_POWERUSAGE_NORMAL 5
+#define AI_POWERUSAGE_RECHARGING 7
+
+// Above values get multiplied by this when converting AI oxyloss -> watts.
+// For now, one oxyloss point equals 10kJ of energy, so normal AI uses 5 oxyloss per tick (50kW or 70kW if charging)
+#define AI_POWERUSAGE_OXYLOSS_TO_WATTS_MULTIPLIER 10000
 
 //Grid for Item Placement
 #define CELLS 8								//Amount of cells per row/column in grid

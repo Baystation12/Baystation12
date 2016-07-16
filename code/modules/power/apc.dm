@@ -1,3 +1,4 @@
+#define CRITICAL_APC_EMP_PROTECTION 10 // EMP effect duration is divided by this number if the APC has "critical" flag
 //update_state
 #define UPDATE_CELL_IN 1
 #define UPDATE_OPENED1 2
@@ -211,7 +212,7 @@
 	return ..()
 
 /obj/machinery/power/apc/proc/energy_fail(var/duration)
-	failure_timer = max(failure_timer, duration)
+	failure_timer = max(failure_timer, round(duration))
 
 /obj/machinery/power/apc/proc/make_terminal()
 	// create a terminal object at the same position as original turf loc
@@ -1176,9 +1177,18 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 /obj/machinery/power/apc/emp_act(severity)
 	// Fail for 8-12 minutes (divided by severity)
 	// Division by 2 is required, because machinery ticks are every two seconds. Without it we would fail for 16-24 minutes.
-	energy_fail(round(rand(240, 360) / severity))
-	if(cell)
-		cell.emp_act(severity+1)
+	if(is_critical)
+		// Critical APCs are considered EMP shielded and will be offline only for about half minute. Prevents AIs being one-shot disabled by EMP strike.
+		// Critical APCs are also more resilient to cell corruption/power drain.
+		energy_fail(rand(240, 360) / severity / CRITICAL_APC_EMP_PROTECTION)
+		if(cell)
+			cell.emp_act(severity+2)
+	else
+		// Regular APCs fail for normal time.
+		energy_fail(rand(240, 360) / severity)
+		if(cell)
+			cell.emp_act(severity+1)
+
 	update_icon()
 	..()
 

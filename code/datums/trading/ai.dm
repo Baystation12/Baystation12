@@ -29,22 +29,32 @@ They sell generic supplies and ask for generic supplies.
 								/obj/item/device/assembly_holder         = TRADER_BLACKLIST_ALL,
 								/obj/item/device/encryptionkey/syndicate = TRADER_BLACKLIST,
 								/obj/item/device/onetankbomb             = TRADER_BLACKLIST,
-								/obj/item/device/radio/intercom          = TRADER_BLACKLIST_ALL,
+								/obj/item/device/radio                   = TRADER_BLACKLIST_ALL,
 								/obj/item/device/uplink                  = TRADER_BLACKLIST)
-	possible_trading_items = list(/obj/item/weapon/storage                           = TRADER_SUBTYPES_ONLY,
-								/obj/item/weapon/storage/bag                         = TRADER_BLACKLIST,
+	possible_trading_items = list(/obj/item/weapon/storage/bag                       = TRADER_SUBTYPES_ONLY,
 								/obj/item/weapon/storage/bag/cash/infinite           = TRADER_BLACKLIST,
-								/obj/item/weapon/storage/bible                       = TRADER_BLACKLIST_ALL,
-								/obj/item/weapon/storage/box                         = TRADER_BLACKLIST_ALL,
-								/obj/item/weapon/storage/fancy                       = TRADER_BLACKLIST,
-								/obj/item/weapon/storage/internal                    = TRADER_BLACKLIST_ALL,
-								/obj/item/weapon/storage/secure                      = TRADER_BLACKLIST,
-								/obj/item/weapon/storage/secure/safe                 = TRADER_BLACKLIST,
-								/obj/item/weapon/storage/lockbox                     = TRADER_BLACKLIST_ALL,
-								/obj/item/weapon/storage/pill_bottle                 = TRADER_BLACKLIST_SUB,
+								/obj/item/weapon/storage/backpack                    = TRADER_ALL,
+								/obj/item/weapon/storage/backpack/cultpack           = TRADER_BLACKLIST,
+								/obj/item/weapon/storage/backpack/holding            = TRADER_BLACKLIST,
+								/obj/item/weapon/storage/backpack/satchel/withwallet = TRADER_BLACKLIST,
+								/obj/item/weapon/storage/backpack/satchel/syndie_kit = TRADER_BLACKLIST_ALL,
+								/obj/item/weapon/storage/backpack/chameleon          = TRADER_BLACKLIST,
+								/obj/item/weapon/storage/backpack/ert                = TRADER_BLACKLIST_ALL,
+								/obj/item/weapon/storage/backpack/dufflebag/syndie   = TRADER_BLACKLIST_SUB,
+								/obj/item/weapon/storage/belt/champion               = TRADER_THIS_TYPE,
+								/obj/item/weapon/storage/briefcase                   = TRADER_THIS_TYPE,
+								/obj/item/weapon/storage/fancy                       = TRADER_SUBTYPES_ONLY,
+								/obj/item/weapon/storage/laundry_basket              = TRADER_THIS_TYPE,
+								/obj/item/weapon/storage/secure/briefcase            = TRADER_THIS_TYPE,
+								/obj/item/weapon/storage/plants                      = TRADER_THIS_TYPE,
+								/obj/item/weapon/storage/ore                         = TRADER_THIS_TYPE,
+								/obj/item/weapon/storage/toolbox                     = TRADER_ALL,
+								/obj/item/weapon/storage/wallet                      = TRADER_THIS_TYPE,
+								/obj/item/weapon/storage/photo_album                 = TRADER_THIS_TYPE,
 								/obj/item/clothing/glasses                           = TRADER_SUBTYPES_ONLY,
 								/obj/item/clothing/glasses/hud                       = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/glasses/sunglasses/blindfold/tape = TRADER_BLACKLIST,
+								/obj/item/clothing/glasses/chameleon                 = TRADER_BLACKLIST
 								)
 
 	insult_drop = 0
@@ -57,15 +67,25 @@ They sell generic supplies and ask for generic supplies.
 /datum/trader/trading_beacon/mine
 	origin = "Mining Beacon"
 
-	possible_trading_items = list(/obj/item/weapon/ore              = TRADER_SUBTYPES_ONLY,
-								/obj/item/stack/material/           = TRADER_SUBTYPES_ONLY,
-								/obj/item/stack/material/animalhide = TRADER_BLACKLIST_ALL,
-								/obj/item/stack/material/cyborg     = TRADER_BLACKLIST_ALL,
-								/obj/item/stack/material/leather    = TRADER_BLACKLIST,
-								/obj/item/stack/material/wetleather = TRADER_BLACKLIST,
-								/obj/item/stack/material/wood       = TRADER_BLACKLIST,
-								/obj/item/stack/material/xenochitin = TRADER_BLACKLIST,
-								/obj/machinery/mining               = TRADER_SUBTYPES_ONLY
+	possible_trading_items = list(/obj/item/weapon/ore                    = TRADER_SUBTYPES_ONLY,
+								/obj/item/stack/material/glass            = TRADER_ALL,
+								/obj/item/stack/material/glass/fifty      = TRADER_BLACKLIST,
+								/obj/item/stack/material/iron             = TRADER_THIS_TYPE,
+								/obj/item/stack/material/sandstone        = TRADER_THIS_TYPE,
+								/obj/item/stack/material/marble           = TRADER_THIS_TYPE,
+								/obj/item/stack/material/diamond          = TRADER_THIS_TYPE,
+								/obj/item/stack/material/uranium          = TRADER_THIS_TYPE,
+								/obj/item/stack/material/phoron           = TRADER_THIS_TYPE,
+								/obj/item/stack/material/plastic          = TRADER_THIS_TYPE,
+								/obj/item/stack/material/gold             = TRADER_THIS_TYPE,
+								/obj/item/stack/material/silver           = TRADER_THIS_TYPE,
+								/obj/item/stack/material/platinum         = TRADER_THIS_TYPE,
+								/obj/item/stack/material/mhydrogen        = TRADER_THIS_TYPE,
+								/obj/item/stack/material/tritium          = TRADER_THIS_TYPE,
+								/obj/item/stack/material/osmium           = TRADER_THIS_TYPE,
+								/obj/item/stack/material/steel            = TRADER_THIS_TYPE,
+								/obj/item/stack/material/plasteel         = TRADER_THIS_TYPE,
+								/obj/machinery/mining                     = TRADER_SUBTYPES_ONLY
 								)
 
 /datum/trader/trading_beacon/manufacturing
@@ -91,5 +111,6 @@ They sell generic supplies and ask for generic supplies.
 								/obj/structure/plushie              = TRADER_SUBTYPES_ONLY,
 								/obj/structure/sign                 = TRADER_SUBTYPES_ONLY,
 								/obj/structure/sign/double          = TRADER_BLACKLIST_ALL,
+								/obj/structure/sign/goldenplaque    = TRADER_BLACKLIST_ALL,
 								/obj/structure/sign/poster          = TRADER_BLACKLIST
 								)

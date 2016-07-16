@@ -19,7 +19,7 @@
 	if(message_mode == "department")
 		return holopad_talk(message, verb, speaking)
 	else if(message_mode)
-		if (aiRadio.disabledAi || aiRestorePowerRoutine || stat)
+		if (aiRadio.disabledAi || !has_power() || stat)
 			src << "<span class='danger'>System Error - Transceiver Disabled.</span>"
 			return 0
 		if(message_mode == "general")

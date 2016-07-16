@@ -65,7 +65,7 @@
 		else if(!anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			user << "<span class='notice'>Now securing the girder...</span>"
-			if(get_turf(user, 40))
+			if(do_after(user, 40,src))
 				user << "<span class='notice'>You secured the girder!</span>"
 				reset_girder()
 

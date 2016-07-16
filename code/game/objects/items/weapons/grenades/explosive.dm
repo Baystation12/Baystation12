@@ -17,7 +17,6 @@
 	name = "fragmentation grenade"
 	desc = "A military fragmentation grenade, designed to explode in a deadly shower of fragments, while avoiding massive structural damage."
 	icon_state = "frggrenade"
-	loadable = FALSE
 
 	var/fragment_type = /obj/item/projectile/bullet/pellet/fragment
 	var/num_fragments = 72  //total number of fragments produced by the grenade
@@ -67,7 +66,6 @@
 	name = "fragmentation grenade"
 	desc = "A light fragmentation grenade, designed to be fired from a launcher. It can still be activated and thrown by hand if necessary."
 	icon_state = "fragshell"
-	loadable = TRUE
 
 	num_fragments = 50 //less powerful than a regular frag grenade
 
@@ -75,7 +73,6 @@
 	name = "fragmentation bomb"
 	desc = "Larger and heavier than a standard fragmentation grenade, this device is extremely dangerous. It cannot be thrown as far because of its weight."
 	icon_state = "frag"
-	loadable = FALSE
 
 	w_class = 3
 	throw_speed = 3

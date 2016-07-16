@@ -57,7 +57,7 @@
 
 		new /obj/effect/decal/cleanable/vomit(get_turf(src))
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-		new /mob/living/simple_animal/borer(get_turf(src))
+		new /mob/living/simple_animal/borer(get_turf(src), B.generation + 1)
 
 	else
 		src << "You do not have enough chemicals stored to reproduce."

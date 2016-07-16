@@ -48,6 +48,25 @@
 			for(var/datum/reagent/nutriment/N in G.reagents.reagent_list)
 				biomass = Clamp(biomass + round(N.volume*deconstruct_eff),1,biomass_max)
 			qdel(G)
+
+	if (istype(O, /obj/item/weapon/wrench))
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
+		if(anchored)
+			user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
+		else
+			user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
+
+		if(do_after(user, 20, src))
+			if(!src) return
+			user << "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>"
+			anchored = !anchored
+		return
+	else if(default_deconstruction_screwdriver(user, O))
+		return
+	else if(default_deconstruction_crowbar(user, O))
+		return
+	else if(default_part_replacement(user, O))
+		return
 	else
 		..()
 
@@ -145,3 +164,8 @@
 				queued_dishes -= queued_dishes[1]
 				start_making = 1
 	..()
+
+/obj/machinery/food_replicator/examine(mob/user)
+	..(user)
+	if(panel_open)
+		user << "The maintenance hatch is open."
