@@ -18,12 +18,15 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	var/deny_shuttle = 0	//allows admins to prevent the shuttle from being called
 	var/departed = 0		//if the shuttle has left the station at least once
 
+	var/list/emergency_shuttle_predicates // List of datums which may prevent the emergency shuttle from being called
+
 	var/datum/announcement/priority/emergency_shuttle_docked = new(0, new_sound = sound('sound/AI/shuttledock.ogg'))
 	var/datum/announcement/priority/emergency_shuttle_called = new(0, new_sound = sound('sound/AI/shuttlecalled.ogg'))
 	var/datum/announcement/priority/emergency_shuttle_recalled = new(0, new_sound = sound('sound/AI/shuttlerecalled.ogg'))
 
 /datum/emergency_shuttle_controller/New()
 	escape_pods = list()
+	emergency_shuttle_predicates = list()
 	..()
 
 /datum/emergency_shuttle_controller/proc/process()
@@ -74,8 +77,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	wait_for_launch = 0
 
 //calls the shuttle for an emergency evacuation
-/datum/emergency_shuttle_controller/proc/call_evac()
-	if(!can_call()) return
+/datum/emergency_shuttle_controller/proc/call_evac(var/user = null, var/forced = FALSE)
+	if(!can_call(user, forced)) return FALSE
 
 	//set the launch timer
 	autopilot = 1
@@ -91,10 +94,11 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	for(var/area/A in world)
 		if(istype(A, /area/hallway))
 			A.readyalert()
+	return TRUE
 
 //calls the shuttle for a routine crew transfer
-/datum/emergency_shuttle_controller/proc/call_transfer()
-	if(!can_call()) return
+/datum/emergency_shuttle_controller/proc/call_transfer(var/user = null, var/forced = FALSE)
+	if(!can_call(user, forced)) return FALSE
 
 	//set the launch timer
 	autopilot = 1
@@ -105,6 +109,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
 
 	priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_called_message, "%dock_name%", "[dock_name]"),  "%ETA%", "[round(estimate_arrival_time()/60)] minute\s"))
+	return TRUE
+
 //recalls the shuttle
 /datum/emergency_shuttle_controller/proc/recall()
 	if (!can_recall()) return
@@ -122,7 +128,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	else
 		priority_announcement.Announce(using_map.shuttle_recall_message)
 
-/datum/emergency_shuttle_controller/proc/can_call()
+/datum/emergency_shuttle_controller/proc/can_call(var/user, var/forced)
 	if (!universe.OnShuttleCall(null))
 		return 0
 	if (deny_shuttle)
@@ -131,6 +137,15 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		return 0
 	if (wait_for_launch)	//already launching
 		return 0
+	if(!forced)
+		for(var/predicate in emergency_shuttle_predicates)
+			var/datum/emergency_shuttle_predicate/esp = predicate
+			if(!esp.is_valid())
+				emergency_shuttle_predicates -= esp
+				qdel(esp)
+			else
+				if(!esp.can_call(user))
+					return 0
 	return 1
 
 //this only returns 0 if it would absolutely make no sense to recall
@@ -223,6 +238,12 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 			return "ETD-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]"
 
 	return ""
+
+/datum/emergency_shuttle_controller/proc/add_can_call_predicate(var/datum/emergency_shuttle_predicate/esp)
+	if(esp in emergency_shuttle_predicates)
+		CRASH("[esp] has already been added as an emergency shuttle predicate")
+	emergency_shuttle_predicates += esp
+
 /*
 	Some slapped-together star effects for maximum spess immershuns. Basically consists of a
 	spawner, an ender, and bgstar. Spawners create bgstars, bgstars shoot off into a direction
@@ -273,3 +294,15 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		S.direction = spawndir
 		spawn()
 			S.startmove()
+
+/datum/emergency_shuttle_predicate/New()
+	return
+
+/datum/emergency_shuttle_predicate/Destroy()
+	return 0
+
+/datum/emergency_shuttle_predicate/proc/is_valid()
+	return FALSE
+
+/datum/emergency_shuttle_predicate/proc/can_call(var/user)
+	return TRUE
