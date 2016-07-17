@@ -744,6 +744,13 @@
 				if(nutrition < 40)
 					custom_emote(1,"dry heaves.")
 				else
+					for(var/a in stomach_contents)
+						var/atom/movable/A = a
+						A.forceMove(get_turf(src))
+						stomach_contents.Remove(a)
+						if(src.species.gluttonous & GLUT_PROJECTILE_VOMIT)
+							A.throw_at(get_edge_target_turf(src,src.dir),7,7,src)
+
 					src.visible_message("<span class='warning'>[src] throws up!</span>","<span class='warning'>You throw up!</span>")
 					playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
@@ -1468,13 +1475,24 @@
 	else
 		return H.pulse
 
-/mob/living/carbon/human/can_devour(mob/victim)
-	if(src.species.gluttonous && (iscarbon(victim) || isanimal(victim)))
-		if(src.species.gluttonous == GLUT_TINY && (victim.mob_size <= MOB_TINY) && !ishuman(victim)) // Anything MOB_TINY or smaller
+/mob/living/carbon/human/can_devour(atom/movable/victim)
+	if(!src.species.gluttonous)
+		return FALSE
+	if(iscarbon(victim) || isanimal(victim))
+		var/mob/living/L = victim
+		if((src.species.gluttonous & GLUT_TINY) && (L.mob_size <= MOB_TINY) && !ishuman(victim)) // Anything MOB_TINY or smaller
 			return DEVOUR_SLOW
-		else if(src.species.gluttonous == GLUT_SMALLER && (src.mob_size > victim.mob_size)) // Anything we're larger than
+		else if((src.species.gluttonous & GLUT_SMALLER) && (src.mob_size > L.mob_size)) // Anything we're larger than
 			return DEVOUR_SLOW
-		else if(src.species.gluttonous == GLUT_ANYTHING) // Eat anything ever
+		else if(src.species.gluttonous & GLUT_ANYTHING) // Eat anything ever
+			return DEVOUR_FAST
+	else if(istype(victim, /obj/item) && !istype(victim, /obj/item/weapon/holder)) //Don't eat holders. They are special.
+		var/obj/item/I = victim
+		if((src.species.gluttonous & GLUT_ITEM_TINY) && I.w_class < 3)
+			return DEVOUR_SLOW
+		else if((src.species.gluttonous & GLUT_ITEM_NORMAL) && I.w_class <= 3)
+			return DEVOUR_SLOW
+		else if(src.species.gluttonous & GLUT_ITEM_ANYTHING)
 			return DEVOUR_FAST
 
-	..()
+	return ..()

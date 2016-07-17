@@ -124,7 +124,12 @@
 // Gluttony levels.
 #define GLUT_TINY 1       // Eat anything tiny and smaller
 #define GLUT_SMALLER 2    // Eat anything smaller than we are
-#define GLUT_ANYTHING 3   // Eat anything, ever
+#define GLUT_ANYTHING 4   // Eat anything, ever
+
+#define GLUT_ITEM_TINY 8         // Eat items with a w_class of small or smaller
+#define GLUT_ITEM_NORMAL 16      // Eat items with a w_class of normal or smaller
+#define GLUT_ITEM_ANYTHING 32    // Eat any item
+#define GLUT_PROJECTILE_VOMIT 64 // When vomitting, does it fly out?
 
 // Devour speeds, returned by can_devour()
 #define DEVOUR_SLOW 1

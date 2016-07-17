@@ -29,7 +29,7 @@
 	cold_level_3 = 0
 
 	eyes = "vox_eyes_s"
-	gluttonous = GLUT_SMALLER
+	gluttonous = GLUT_ITEM_NORMAL
 
 	breath_type = "nitrogen"
 	poison_type = "oxygen"

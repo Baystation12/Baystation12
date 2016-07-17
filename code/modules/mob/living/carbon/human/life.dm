@@ -905,11 +905,12 @@
 
 /mob/living/carbon/human/handle_stomach()
 	spawn(0)
-		for(var/mob/living/M in stomach_contents)
-			if(M.loc != src)
-				stomach_contents.Remove(M)
+		for(var/a in stomach_contents)
+			if(!a in contents)
+				stomach_contents.Remove(a)
 				continue
-			if(iscarbon(M)|| isanimal(M))
+			if(iscarbon(a)|| isanimal(a))
+				var/mob/living/M = a
 				if(M.stat == DEAD)
 					M.death(1)
 					stomach_contents.Remove(M)
@@ -919,6 +920,12 @@
 					if(!(M.status_flags & GODMODE))
 						M.adjustBruteLoss(5)
 					nutrition += 10
+			else if(istype(a,/obj/item))
+				var/obj/item/I = a
+				if(air_master.current_cycle%6==1 && (I.sharp || I.edge))
+					var/obj/item/organ/external/organ = src.get_organ("chest")
+					if (istype(organ) && organ.take_damage(rand(1,round(I.force*1.5)), 0))
+						src.UpdateDamageIcon()
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)
