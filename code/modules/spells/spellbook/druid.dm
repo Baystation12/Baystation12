@@ -21,7 +21,7 @@
 				/spell/targeted/equip_item/party_hardy = 			1,
 				/spell/targeted/equip_item/seed = 					1,
 				/spell/aoe_turf/disable_tech = 						1,
-				/spell/targeted/entangle = 							1,
+				/spell/hand/charges/entangle = 						1,
 				/spell/aoe_turf/conjure/grove/sanctuary = 			1,
 				/spell/aoe_turf/knock = 							1,
 				/obj/structure/closet/wizard/souls = 				1,

@@ -1,0 +1,6 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - tweak: "Reduces fireloss cost of casting Dyrnwyn (30->10)"
+  - tweak: "Reduces investment time (30 minutes -> 15)"
+  - tweak: "Entangle is now a hand-spell."
