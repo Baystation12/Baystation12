@@ -294,26 +294,16 @@
 /obj/machinery/shieldwall/ex_act(severity)
 	if(needs_power)
 		var/obj/machinery/shieldwallgen/G
+		if(prob(50))
+			G = gen_primary
+		else
+			G = gen_secondary
 		switch(severity)
 			if(1.0) //big boom
-				if(prob(50))
-					G = gen_primary
-				else
-					G = gen_secondary
 				G.storedpower -= 120000
-
 			if(2.0) //medium boom
-				if(prob(50))
-					G = gen_primary
-				else
-					G = gen_secondary
 				G.storedpower -= 30000
-
 			if(3.0) //lil boom
-				if(prob(50))
-					G = gen_primary
-				else
-					G = gen_secondary
 				G.storedpower -= 12000
 	return
 
