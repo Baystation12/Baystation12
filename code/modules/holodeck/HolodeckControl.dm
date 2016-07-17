@@ -22,16 +22,16 @@
 	var/last_change = 0
 	var/last_gravity_change = 0
 	var/programs_list_id = null
-	var/list/supported_programs
-	var/list/restricted_programs
+	var/list/supported_programs = list()
+	var/list/restricted_programs = list()
 
 /obj/machinery/computer/HolodeckControl/New()
 	..()
 	linkedholodeck = locate(linkedholodeck_area)
-	var/list/original_supported_programs = using_map.holodeck_supported_programs[programs_list_id]
-	var/list/original_restricted_programs = using_map.holodeck_restricted_programs[programs_list_id]
-	supported_programs = original_supported_programs.Copy()
-	restricted_programs = original_restricted_programs.Copy()
+	if (programs_list_id in using_map.holodeck_supported_programs)
+		supported_programs |= using_map.holodeck_supported_programs[programs_list_id]
+	if (programs_list_id in using_map.holodeck_restricted_programs)
+		restricted_programs |= using_map.holodeck_restricted_programs[programs_list_id]
 
 /obj/machinery/computer/HolodeckControl/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
