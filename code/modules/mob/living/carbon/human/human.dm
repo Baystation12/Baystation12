@@ -1478,6 +1478,17 @@
 /mob/living/carbon/human/can_devour(atom/movable/victim)
 	if(!src.species.gluttonous)
 		return FALSE
+	var/total = 0
+	for(var/a in stomach_contents)
+		if(ismob(a))
+			var/mob/M = a
+			total += M.mob_size
+		else
+			var/obj/item/I = a
+			total += I.w_class
+	if(total > src.species.stomach_capacity)
+		return FALSE
+
 	if(iscarbon(victim) || isanimal(victim))
 		var/mob/living/L = victim
 		if((src.species.gluttonous & GLUT_TINY) && (L.mob_size <= MOB_TINY) && !ishuman(victim)) // Anything MOB_TINY or smaller
