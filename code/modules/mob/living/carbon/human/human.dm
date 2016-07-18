@@ -1486,7 +1486,13 @@
 		else
 			var/obj/item/I = a
 			total += I.w_class
-	if(total > src.species.stomach_capacity)
+	if(isobj(victim,/obj/item))
+		var/obj/item/I = victim
+		total += I.w_class
+	else
+		var/mob/M = victim
+		total += M.mob_size
+	if(total >= src.species.stomach_capacity)
 		return FALSE
 
 	if(iscarbon(victim) || isanimal(victim))
