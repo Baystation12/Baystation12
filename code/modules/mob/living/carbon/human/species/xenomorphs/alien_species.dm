@@ -13,7 +13,7 @@
 	has_fine_manipulation = 0
 	siemens_coefficient = 0
 	gluttonous = GLUT_ANYTHING
-	stomach_capacity = 40
+	stomach_capacity = 20
 
 	eyes = "blank_eyes"
 

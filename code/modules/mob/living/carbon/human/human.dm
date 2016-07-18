@@ -1479,20 +1479,14 @@
 	if(!src.species.gluttonous)
 		return FALSE
 	var/total = 0
-	for(var/a in stomach_contents)
+	for(var/a in stomach_contents + victim)
 		if(ismob(a))
 			var/mob/M = a
 			total += M.mob_size
 		else
 			var/obj/item/I = a
 			total += I.w_class
-	if(isobj(victim,/obj/item))
-		var/obj/item/I = victim
-		total += I.w_class
-	else
-		var/mob/M = victim
-		total += M.mob_size
-	if(total >= src.species.stomach_capacity)
+	if(total > src.species.stomach_capacity)
 		return FALSE
 
 	if(iscarbon(victim) || isanimal(victim))
