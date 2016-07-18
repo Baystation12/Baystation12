@@ -270,7 +270,7 @@
 
 	// if a create/closet, close before loading
 	var/obj/structure/closet/crate = C
-	if(istype(crate) && !crate.close())
+	if(istype(crate) && crate.opened && !crate.close())
 		return 0
 
 	C.forceMove(loc)
