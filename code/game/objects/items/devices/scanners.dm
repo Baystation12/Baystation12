@@ -398,11 +398,7 @@ REAGENT SCANNER
 		return
 	if (user.stat)
 		return
-	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
-		user << "<span class='warning'>You don't have the dexterity to do this!</span>"
-		return
-	if(!istype(target))
-		return
 
 	var/value = get_value(target)
-	user.show_message("VALUE: [value ? value : "ERROR, NO VALUE FOUND"]")
+	user.visible_message("\The [user] scans \the [target] with \the [src]")
+	user.show_message("Price estimation of \the [target]: [value ? value : "N/A"] Thalers")
