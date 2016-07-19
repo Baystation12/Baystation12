@@ -178,7 +178,7 @@
 
 /obj/machinery/door_timer/ui_act(action, params)
 	if(..())
-		return
+		return TRUE
 
 	src.add_fingerprint(usr)
 

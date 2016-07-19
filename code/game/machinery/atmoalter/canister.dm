@@ -299,16 +299,18 @@ update_flag
 		return
 	ui = tgui_process.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, ui_key, "canister", name, 500, 700, master_ui, state)
+		ui = new(user, src, ui_key, "canister", name, 400, 400, master_ui, state)
 		ui.open()
 
+
+
+/obj/machinery/portable_atmospherics/canister/ui_status(mob/user, datum/ui_state/state)
+	if(!istype(src.loc, /turf))
+		return UI_CLOSE
+	return ..()
+
+
 /obj/machinery/portable_atmospherics/canister/ui_act(action, params)
-	if (!istype(src.loc, /turf))
-		return
-
-	if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
-		return
-
 	switch(action)
 		if("relabel")
 			if (can_label)
