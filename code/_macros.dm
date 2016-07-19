@@ -13,6 +13,8 @@
 
 #define isairlock(A) istype(A, /obj/machinery/door/airlock)
 
+#define isbot(A) istype(A, /mob/living/bot)
+
 #define isbrain(A) istype(A, /mob/living/carbon/brain)
 
 #define iscarbon(A) istype(A, /mob/living/carbon)

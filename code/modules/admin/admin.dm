@@ -1374,3 +1374,44 @@ proc/admin_notice(var/message, var/rights)
 			H.paralysis = 0
 			msg = "has unparalyzed [key_name(H)]."
 		log_and_message_admins(msg)
+
+/datum/admins/proc/admin_cryo(mob/living/H as mob)
+	set category = "Admin"
+	set name = "Remove Character From World"
+	set desc = "Deletes a character from the world and sends out a global announcement."
+
+	if (check_rights(R_ADMIN))
+		if (isliving(H)) // Maybe you want to cryo a possessed chair, pls no
+			var/role_title
+			var/on_store_message = "has entered long-term storage."
+			var/on_store_name = "Cryogenic Oversight"
+
+			if (issilicon(H) || isbot(H)) // In case bots break and you want to kill them without making a mess
+				on_store_message = "has entered robotic storage."
+				on_store_name = "Robotic Storage Oversight"
+
+			if(H.mind)
+				job_master.FreeRole(H.mind.assigned_role)
+				qdel(H.mind.objectives)
+				H.mind.special_role = null
+				role_title = H.mind.role_alt_title
+
+			if(PDA_Manifest.len)
+				PDA_Manifest.Cut()
+
+			for(var/r in data_core.medical)
+				var/datum/data/record/R = r
+				if (R && R.fields["name"] == H.real_name)
+					qdel(R)
+			for(var/t in data_core.security)
+				var/datum/data/record/T = t
+				if (T && T.fields["name"] == H.real_name)
+					qdel(T)
+			for(var/g in data_core.general)
+				var/datum/data/record/G = g
+				if (G && G.fields["name"] == H.real_name)
+					qdel(G)
+
+			global_announcer.autosay("\The [H.real_name] [role_title ?", [role_title], ":""][on_store_message]", "[on_store_name]")
+			qdel(H)
+			log_and_message_admins("[key_name_admin(usr)] has admincryo'd [key_name(H)].")
