@@ -25,7 +25,7 @@
 	min_breath_pressure = species.breath_pressure
 	breath_type = species.breath_type ? species.breath_type : "oxygen"
 	poison_type = species.poison_type ? species.poison_type : "phoron"
-	exhale_type = species.exhale_type ? species.exhale_type : 0
+	exhale_type = species.exhale_type ? species.exhale_type : "carbon_dioxide"
 
 /obj/item/organ/lungs/process()
 	..()

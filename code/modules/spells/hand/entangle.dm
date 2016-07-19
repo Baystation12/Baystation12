@@ -1,4 +1,4 @@
-/spell/targeted/entangle
+/spell/hand/charges/entangle
 	name = "Entangle"
 	desc = "This spell creates vines that immediately entangle a nearby victim."
 	feedback = "ET"
@@ -8,16 +8,17 @@
 	invocation = "BU EKEL 'INAS"
 	invocation_type = SpI_SHOUT
 	range = 3
-	max_targets = 1
+	max_casts = 1
 
 	level_max = list(Sp_TOTAL = 2, Sp_SPEED = 2, Sp_POWER = 2)
 	cooldown_min = 300
 	duration = 30
+	compatible_targets = list(/mob)
 
 	hud_state = "wiz_entangle"
 	var/datum/seed/seed
 
-/spell/targeted/entangle/New()
+/spell/hand/charges/entangle/New()
 	..()
 	seed = new()
 	seed.set_trait(TRAIT_PLANT_ICON,"flower")
@@ -29,19 +30,20 @@
 	seed.display_name = "vines"
 	seed.chems = list("nutriment" = list(1,20))
 
-/spell/targeted/entangle/cast(var/list/targets)
-	for(var/mob/M in targets)
-		var/turf/T = get_turf(M)
-		var/obj/effect/plant/single/P = new(T,seed, start_matured =1)
-		P.can_buckle = 1
+/spell/hand/charges/entangle/cast_hand(var/mob/M,var/mob/user)
+	var/turf/T = get_turf(M)
+	var/obj/effect/plant/single/P = new(T,seed, start_matured =1)
+	P.can_buckle = 1
 
-		P.buckle_mob(M)
-		M.set_dir(pick(cardinal))
-		M.visible_message("<span class='danger'>[P] appear from the floor, spinning around \the [M] tightly!</span>")
-/spell/targeted/entangle/empower_spell()
+	P.buckle_mob(M)
+	M.set_dir(pick(cardinal))
+	M.visible_message("<span class='danger'>[P] appear from the floor, spinning around \the [M] tightly!</span>")
+	return ..()
+
+/spell/hand/charges/entangle/empower_spell()
 	if(!..())
 		return 0
 
-	max_targets++
+	max_casts++
 
-	return "This spell will now entangle [max_targets] people at the same time."
+	return "This spell will now entangle [max_casts] times before running out."

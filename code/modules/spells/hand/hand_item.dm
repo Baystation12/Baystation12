@@ -11,12 +11,10 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	icon_state = "spell"
 	var/next_spell_time = 0
 	var/spell/hand/hand_spell
-	var/casts = 0
 
 /obj/item/magic_hand/New(var/spell/hand/S)
 	hand_spell = S
 	name = "[name] ([S.name])"
-	casts = S.casts
 	icon_state = S.hand_state
 
 /obj/item/magic_hand/get_storage_cost()
@@ -40,15 +38,12 @@ Basically: I can use it to target things where I click. I can then pass these ta
 
 	if(hand_spell.cast_hand(A,user))
 		next_spell_time = world.time + hand_spell.spell_delay
-		casts--
 		if(hand_spell.move_delay)
 			user.setMoveCooldown(hand_spell.move_delay)
 		if(hand_spell.click_delay)
 			user.setClickCooldown(hand_spell.move_delay)
-		if(!casts)
-			user.drop_from_inventory(src)
-			return
-		user << "[casts]/[hand_spell.casts] charges left."
+	else
+		user.drop_from_inventory(src)
 
 /obj/item/magic_hand/throw_at() //no throwing pls
 	usr.drop_from_inventory(src)

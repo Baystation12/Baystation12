@@ -496,19 +496,22 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/weapon/flame/lighter/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M, /mob))
 		return
-	M.IgniteMob()
 
-	if(istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == "mouth" && lit)
-		var/obj/item/clothing/mask/smokable/cigarette/cig = M.wear_mask
-		if(M == user)
-			cig.attackby(src, user)
-		else
-			if(istype(src, /obj/item/weapon/flame/lighter/zippo))
-				cig.light("<span class='rose'>[user] whips the [name] out and holds it for [M].</span>")
+	if(lit)
+		M.IgniteMob()
+
+		if(istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == "mouth")
+			var/obj/item/clothing/mask/smokable/cigarette/cig = M.wear_mask
+			if(M == user)
+				cig.attackby(src, user)
 			else
-				cig.light("<span class='notice'>[user] holds the [name] out for [M], and lights the [cig.name].</span>")
-	else
-		..()
+				if(istype(src, /obj/item/weapon/flame/lighter/zippo))
+					cig.light("<span class='rose'>[user] whips the [name] out and holds it for [M].</span>")
+				else
+					cig.light("<span class='notice'>[user] holds the [name] out for [M], and lights the [cig.name].</span>")
+			return
+
+	..()
 
 /obj/item/weapon/flame/lighter/process()
 	var/turf/location = get_turf(src)

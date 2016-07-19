@@ -1,11 +1,10 @@
 /spell/hand
 	var/min_range = 0
-	var/list/compatible_targets = list()
-	var/casts = 1
+	var/list/compatible_targets = list(/atom)
 	var/spell_delay = 5
 	var/move_delay
 	var/click_delay
-	var/hand_state = "magic"
+	var/hand_state = "spell"
 
 /spell/hand/choose_targets(mob/user = usr)
 	return list(user)
@@ -19,7 +18,7 @@
 		if(!M.put_in_active_hand(H))
 			qdel(H)
 			return
-		user << "You ready the [name] spell ([casts]/[casts] charges)."
+	return 1
 
 /spell/hand/proc/valid_target(var/atom/a,var/mob/user) //we use seperate procs for our target checking for the hand spells.
 	var/distance = get_dist(a,user)
@@ -31,3 +30,18 @@
 
 /spell/hand/proc/cast_hand(var/atom/a,var/mob/user) //same for casting.
 	return 1
+
+/spell/hand/charges
+	var/casts = 1
+	var/max_casts = 1
+
+/spell/hand/charges/cast(list/targets, mob/user)
+	. = ..()
+	if(.)
+		casts = max_casts
+		user << "You ready the [name] spell ([casts]/[casts] charges)."
+
+/spell/hand/charges/cast_hand()
+	if(casts-- && ..())
+		holder << "<span class='notice'>The [name] spell has [casts] out of [max_casts] charges left</span>"
+	return !!casts
