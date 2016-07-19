@@ -327,12 +327,13 @@
 		target.op_stage.current_organ = null
 
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		if(!affected)
+		if(!affected || affected.robotic >= ORGAN_ROBOT)
+			// robotic attachment handled via screwdriver
 			return 0
 
 		var/list/attachable_organs = list()
 		for(var/obj/item/organ/I in affected.implants)
-			if(I && (I.status & ORGAN_CUT_AWAY) && !(I.robotic >= ORGAN_ROBOT) && I.parent_organ == target_zone)
+			if(I && (I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
 				attachable_organs |= I
 
 		var/organ_to_replace = input(user, "Which organ do you want to reattach?") as null|anything in attachable_organs
