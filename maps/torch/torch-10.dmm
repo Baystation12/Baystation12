@@ -1657,7 +1657,7 @@
 "aFS" = (/obj/effect/wingrille_spawn/reinforced/crescent,/turf/unsimulated/floor{icon_state = "vault"; dir = 8},/area/centcom/specops)
 "aFT" = (/obj/structure/sign/securearea,/turf/unsimulated/wall,/area/centcom/specops)
 "aFU" = (/obj/effect/floor_decal/corner/green{dir = 4},/obj/effect/floor_decal/industrial/warning/corner,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
-"aFV" = (/obj/machinery/computer/ordercomp,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
+"aFV" = (/obj/machinery/computer/supply,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
 "aFW" = (/obj/structure/bed/chair{dir = 8},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
 "aFX" = (/obj/structure/window/reinforced/crescent{dir = 8},/obj/structure/window/reinforced/crescent,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
 "aFY" = (/obj/machinery/door/window{dir = 2; name = "AI Core Door"; req_access = list(109)},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)

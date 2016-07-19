@@ -1,20 +1,24 @@
 #ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it! 
+#error T_BOARD macro is not defined but we need it!
 #endif
 
 /obj/item/weapon/circuitboard/supplycomp
 	name = T_BOARD("supply control console")
-	build_path = /obj/machinery/computer/supplycomp
+	build_path = /obj/machinery/computer/supply
 	origin_tech = list(TECH_DATA = 3)
 	var/contraband_enabled = 0
+	var/emagged = 0
 
-/obj/item/weapon/circuitboard/supplycomp/construct(var/obj/machinery/computer/supplycomp/SC)
+/obj/item/weapon/circuitboard/supplycomp/construct(var/obj/machinery/computer/supply/SC)
 	if (..(SC))
 		SC.can_order_contraband = contraband_enabled
+		SC.emagged = emagged
+		SC.generateSupplyList()
 
-/obj/item/weapon/circuitboard/supplycomp/deconstruct(var/obj/machinery/computer/supplycomp/SC)
+/obj/item/weapon/circuitboard/supplycomp/deconstruct(var/obj/machinery/computer/supply/SC)
 	if (..(SC))
 		contraband_enabled = SC.can_order_contraband
+		emagged = SC.emagged
 
 /obj/item/weapon/circuitboard/supplycomp/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I,/obj/item/device/multitool))

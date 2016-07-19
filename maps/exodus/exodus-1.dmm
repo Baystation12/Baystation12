@@ -3784,7 +3784,7 @@
 "buN" = (/obj/structure/cable/cyan{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/computer/aiupload,/turf/simulated/floor/bluegrid,/area/turret_protected/ai_upload)
 "buO" = (/obj/item/weapon/paper_bin{pixel_x = -3; pixel_y = 7},/obj/item/weapon/clipboard,/obj/item/weapon/pen/red{pixel_x = 2; pixel_y = 6},/obj/structure/table/standard,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled,/area/quartermaster/office)
 "buP" = (/obj/item/weapon/stamp{pixel_x = -3; pixel_y = 3},/obj/item/weapon/stamp/denied{pixel_x = 4; pixel_y = -2},/obj/structure/table/standard,/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 1},/turf/simulated/floor/tiled,/area/quartermaster/office)
-"buQ" = (/obj/machinery/computer/ordercomp,/turf/simulated/floor/tiled,/area/quartermaster/office)
+"buQ" = (/obj/machinery/computer/supply,/turf/simulated/floor/tiled,/area/quartermaster/office)
 "buR" = (/obj/structure/window/shuttle,/obj/structure/grille,/turf/simulated/floor/plating,/area/shuttle/research/station)
 "buS" = (/obj/machinery/alarm{pixel_y = 23},/obj/machinery/camera/network/civilian_west{c_tag = "Cargo Lobby"},/turf/simulated/floor/tiled,/area/quartermaster/office)
 "buT" = (/obj/structure/bed/chair{dir = 8},/obj/machinery/firealarm{pixel_y = 27},/obj/machinery/light{dir = 1},/obj/machinery/atmospherics/unary/vent_scrubber/on,/turf/simulated/floor/tiled,/area/quartermaster/office)
@@ -3949,7 +3949,7 @@
 "bxW" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/quartermaster/storage)
 "bxX" = (/obj/machinery/light_switch{pixel_x = 27},/turf/simulated/floor/tiled,/area/quartermaster/storage)
 "bxY" = (/obj/machinery/autolathe,/obj/machinery/light_switch{pixel_x = -27},/turf/simulated/floor/tiled,/area/quartermaster/office)
-"bxZ" = (/obj/machinery/computer/supplycomp,/turf/simulated/floor/tiled,/area/quartermaster/office)
+"bxZ" = (/obj/machinery/computer/supply,/turf/simulated/floor/tiled,/area/quartermaster/office)
 "bya" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled,/area/quartermaster/office)
 "byb" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled,/area/quartermaster/office)
 "byc" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled,/area/hallway/primary/central_three)
@@ -4276,7 +4276,7 @@
 "bEl" = (/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_y = -24},/obj/structure/cable/green,/obj/machinery/camera/network/civilian_west{c_tag = "Cargo Bay South"; dir = 1},/turf/simulated/floor/tiled,/area/quartermaster/storage)
 "bEm" = (/obj/machinery/navbeacon{codes_txt = "delivery;dir=8"; freq = 1400; location = "QM #4"},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled,/area/quartermaster/storage)
 "bEn" = (/turf/simulated/wall,/area/maintenance/research_shuttle)
-"bEo" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/circuitboard/arcade/battle,/obj/item/weapon/circuitboard/arcade/orion_trail,/obj/item/weapon/circuitboard/ordercomp,/turf/simulated/floor/plating,/area/storage/tech)
+"bEo" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/circuitboard/arcade/battle,/obj/item/weapon/circuitboard/arcade/orion_trail,/obj/item/weapon/circuitboard/supplycomp,/turf/simulated/floor/plating,/area/storage/tech)
 "bEp" = (/obj/machinery/light,/obj/structure/disposalpipe/segment{dir = 1; icon_state = "pipe-c"},/obj/machinery/computer/guestpass{pixel_y = -28},/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/effect/floor_decal/corner/brown,/turf/simulated/floor/tiled,/area/quartermaster/office)
 "bEq" = (/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_y = -24},/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/tiled,/area/quartermaster/office)
 "bEr" = (/turf/simulated/wall/r_wall,/area/turret_protected/ai_upload_foyer)
@@ -4372,7 +4372,7 @@
 "bGd" = (/obj/structure/disposalpipe/segment{dir = 4},/obj/machinery/door/firedoor/border_only,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled,/area/hallway/primary/port)
 "bGe" = (/obj/structure/filingcabinet,/turf/simulated/floor/tiled,/area/quartermaster/qm)
 "bGf" = (/obj/machinery/computer/security/mining,/turf/simulated/floor/tiled,/area/quartermaster/qm)
-"bGg" = (/obj/machinery/computer/supplycomp,/turf/simulated/floor/tiled,/area/quartermaster/qm)
+"bGg" = (/obj/machinery/computer/supply,/turf/simulated/floor/tiled,/area/quartermaster/qm)
 "bGh" = (/obj/structure/disposalpipe/sortjunction/flipped{dir = 4; name = "Primary Tool Storage"; sortType = "Primary Tool Storage"},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled,/area/hallway/primary/port)
 "bGi" = (/obj/machinery/status_display/supply_display,/turf/simulated/wall,/area/quartermaster/qm)
 "bGj" = (/obj/structure/disposalpipe/segment{dir = 4},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled,/area/hallway/primary/port)
@@ -7354,4 +7354,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
