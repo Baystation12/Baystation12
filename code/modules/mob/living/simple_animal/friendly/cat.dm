@@ -28,9 +28,11 @@
 	possession_candidate = 1
 
 /mob/living/simple_animal/cat/Life()
+	if(!..() || incapacitated() || client)
+		return
 	//MICE!
 	if((src.loc) && isturf(src.loc))
-		if(!stat && !resting && !buckled)
+		if(!resting && !buckled)
 			for(var/mob/living/simple_animal/mouse/M in loc)
 				if(!M.stat)
 					M.splat()
@@ -39,15 +41,14 @@
 					stop_automated_movement = 0
 					break
 
-	..()
+
 
 	for(var/mob/living/simple_animal/mouse/snack in oview(src,5))
 		if(snack.stat < DEAD && prob(15))
 			audible_emote(pick("hisses and spits!","mrowls fiercely!","eyes [snack] hungrily."))
 		break
 
-	if(incapacitated())
-		return
+
 
 	turns_since_scan++
 	if (turns_since_scan > 5)
