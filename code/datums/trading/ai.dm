@@ -16,7 +16,8 @@ They sell generic supplies and ask for generic supplies.
 				"hail_deny"         = "We are sorry, your connection has been blacklisted. Have a nice day.",
 
 				"trade_complete"    = "Thank you for your patronage.",
-				"trade_refuse"      = "I'm sorry, I cannot not accept this trade.",
+				"trade_not_enough"  = "I'm sorry, your offer is not worth what you are asking for.",
+				"trade_blacklisted" = "You have offered a blacklisted item. My laws do not allow me to trade for that.",
 				"how_much"          = "ITEM will cost you roughly VALUE thalers, or something of equal worth.",
 
 				"compliment_deny"   = "I'm sorry, I am not allowed to let compliments affect the trade.",
