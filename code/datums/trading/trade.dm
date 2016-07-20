@@ -143,7 +143,7 @@
 			else if((trade_flags & TRADER_WANTED_ONLY) && !is_wanted)
 				return TRADER_FOUND_UNWANTED
 
-		offer_worth += get_value(offer) * (1 + is_wanted)
+		offer_worth += get_value(offer) * (is_wanted ? want_multiplier : 1)
 	if(!offer_worth)
 		return TRADER_NOT_ENOUGH
 	var/trading_worth = get_item_value(num)
