@@ -18,7 +18,7 @@
 	if(stations)
 		possible += subtypesof(/datum/trader) - typesof(/datum/trader/ship)
 	else
-		if(prob(0.5))
+		if(prob(5))
 			possible += subtypesof(/datum/trader/ship/unique)
 		else
 			possible += subtypesof(/datum/trader/ship) - typesof(/datum/trader/ship/unique)
