@@ -294,7 +294,7 @@ update_flag
 	return data
 
 
-/obj/machinery/portable_atmospherics/canister/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = default_state)
+/obj/machinery/portable_atmospherics/canister/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = tg_physical_state)
 	if (src.destroyed)
 		return
 	ui = tgui_process.try_update_ui(user, src, ui_key, ui, force_open)

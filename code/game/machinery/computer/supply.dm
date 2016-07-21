@@ -97,15 +97,17 @@
 		else
 			shuttlestatus = "Docked at remote location"
 
-	data["cart"] = list()
-	for(var/datum/supply_order/SO in supply_controller.shoppinglist)
-		data["cart"] += list(list(
-			"id" = SO.ordernum,
-			"object" = SO.object.name,
-			"orderer" = SO.orderedby,
-			"cost" = SO.object.cost,
-			"reason" = SO.reason
-			))
+
+	if(activeterminal)
+		data["cart"] = list()
+		for(var/datum/supply_order/SO in supply_controller.shoppinglist)
+			data["cart"] += list(list(
+				"id" = SO.ordernum,
+				"object" = SO.object.name,
+				"orderer" = SO.orderedby,
+				"cost" = SO.object.cost,
+				"reason" = SO.reason
+				))
 
 	data["requests"] = list()
 	for(var/datum/supply_order/SO in supply_controller.requestlist)
