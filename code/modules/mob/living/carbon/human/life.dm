@@ -906,7 +906,7 @@
 /mob/living/carbon/human/handle_stomach()
 	spawn(0)
 		for(var/a in stomach_contents)
-			if(!a in contents)
+			if(!(a in contents) || isnull(a))
 				stomach_contents.Remove(a)
 				continue
 			if(iscarbon(a)|| isanimal(a))
@@ -922,10 +922,10 @@
 					nutrition += 10
 			else if(istype(a,/obj/item))
 				var/obj/item/I = a
-				if(air_master.current_cycle%6==1 && (I.sharp || I.edge))
+				if((I.sharp || I.edge) && prob(1))
 					var/obj/item/organ/external/organ = src.get_organ("chest")
-					if (istype(organ) && organ.take_damage(rand(1,round(I.force*1.5)), 0))
-						src.UpdateDamageIcon()
+					var/datum/wound/internal_bleeding/wound = new(max(min(I.w_class * 5, 15), min(I.force, 30)))
+					organ.wounds += wound
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)

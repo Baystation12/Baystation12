@@ -1485,7 +1485,7 @@
 			total += M.mob_size
 		else
 			var/obj/item/I = a
-			total += I.w_class
+			total += I.get_storage_cost()
 	if(total > src.species.stomach_capacity)
 		return FALSE
 
@@ -1499,11 +1499,12 @@
 			return DEVOUR_FAST
 	else if(istype(victim, /obj/item) && !istype(victim, /obj/item/weapon/holder)) //Don't eat holders. They are special.
 		var/obj/item/I = victim
-		if((src.species.gluttonous & GLUT_ITEM_TINY) && I.w_class < 3)
-			return DEVOUR_SLOW
-		else if((src.species.gluttonous & GLUT_ITEM_NORMAL) && I.w_class <= 3)
-			return DEVOUR_SLOW
-		else if(src.species.gluttonous & GLUT_ITEM_ANYTHING)
-			return DEVOUR_FAST
-
+		var/cost = I.get_storage_cost()
+		if(cost != DO_NOT_STORE)
+			if((src.species.gluttonous & GLUT_ITEM_TINY) && cost < 4)
+				return DEVOUR_SLOW
+			else if((src.species.gluttonous & GLUT_ITEM_NORMAL) && cost <= 4)
+				return DEVOUR_SLOW
+			else if(src.species.gluttonous & GLUT_ITEM_ANYTHING)
+				return DEVOUR_FAST
 	return ..()
