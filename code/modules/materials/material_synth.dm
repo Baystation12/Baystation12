@@ -36,3 +36,13 @@
 	icon_state = "sheet-rglass"
 	default_type = "rglass"
 	charge_costs = list(500, 1000)
+
+/obj/item/stack/material/cyborg/boroglass
+	icon_state = "sheet-phoronglass"
+	default_type = "phglass"
+	charge_costs = list(1000)
+
+/obj/item/stack/material/cyborg/boroglass/reinforced
+	icon_state = "sheet-phoronrglass"
+	default_type = "rphglass"
+	charge_costs = list(500, 1000)

@@ -20,7 +20,8 @@
 	laws = new /datum/ai_laws/syndicate_override
 	overlays.Cut()
 	init_id()
-	new /obj/item/weapon/robot_module/syndicate(src)
+	new /obj/item/weapon/robot_module/robot/security(src)
+	emagged = 1
 
 	radio.keyslot = new /obj/item/device/encryptionkey/syndicate(radio)
 	radio.recalculateChannels()
