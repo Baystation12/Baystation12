@@ -450,7 +450,7 @@
 		stat(null, text("Lights: [lights_on ? "ON" : "OFF"]"))
 		if(module)
 			for(var/datum/matter_synth/ms in module.synths)
-				stat("[ms.name]: [ms.energy]/[ms.max_energy_multiplied]")
+				stat("[ms.name]: [ms.energy]/[ms.max_energy]")
 
 /mob/living/silicon/robot/restrained()
 	return 0
@@ -876,7 +876,7 @@
 	. = ..()
 
 	if(module)
-		if(module.type == /obj/item/weapon/robot_module/janitor)
+		if(module.type == /obj/item/weapon/robot_module/robot/janitor)
 			var/turf/tile = loc
 			if(isturf(tile))
 				tile.clean_blood()

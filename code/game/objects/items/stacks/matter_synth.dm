@@ -2,16 +2,15 @@
 	var/name = "Generic Synthesizer"
 	var/max_energy = 60000
 	var/recharge_rate = 2000
-	var/max_energy_multiplied = 60000
+	var/max_energy_base = 60000
 	var/multiplier = 1						// Robot may be upgraded with better matter bin to multiply capacity of it's synthetisers
 	var/energy
 
 /datum/matter_synth/New(var/store = 0)
 	if(store)
-		max_energy = store
-	energy = max_energy_multiplied
+		max_energy_base = store
 	set_multiplier(1)
-	return
+	energy = max_energy
 
 /datum/matter_synth/proc/get_charge()
 	return energy
@@ -23,15 +22,15 @@
 	return 0
 
 /datum/matter_synth/proc/add_charge(var/amount)
-	energy = min(energy + amount, max_energy_multiplied)
+	energy = min(energy + amount, max_energy)
 
 /datum/matter_synth/proc/emp_act(var/severity)
-	use_charge(max_energy_multiplied * 0.1 / severity)
+	use_charge(max_energy * 0.1 / severity)
 
 /datum/matter_synth/proc/set_multiplier(var/new_multiplier)
 	multiplier = new_multiplier
-	max_energy_multiplied = max_energy * multiplier
-	energy = min(max_energy_multiplied, energy)
+	max_energy = max_energy_base * multiplier
+	energy = min(max_energy, energy)
 
 /datum/matter_synth/medicine
 	name = "Medicine Synthesizer"
@@ -48,6 +47,9 @@
 
 /datum/matter_synth/glass
 	name = "Glass Synthesizer"
+
+/datum/matter_synth/borosilicate
+	name = "Borosilicate Glass Synthesizer"
 
 /datum/matter_synth/wood
 	name = "Wood Synthesizer"
