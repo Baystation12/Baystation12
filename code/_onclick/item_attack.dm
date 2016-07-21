@@ -44,7 +44,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	return I.attack(src, user, user.zone_sel.selecting)
 
 /mob/living/carbon/human/attackby(obj/item/I, mob/user)
-	if(user == src && src.a_intent == I_DISARM && src.zone_sel.selecting == "mouth")
+	if(user == src && src.a_intent == I_DISARM && src.zone_sel.selecting == "mouth" && I.abstract == 0 && I.anchored == 0) //We check abstract/anchored so we don't get bad objects like ninja blade/grabs
 		var/obj/item/blocked = src.check_mouth_coverage()
 		if(blocked)
 			user << "<span class='warning'>\The [blocked] is in the way!</span>"
