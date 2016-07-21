@@ -1483,7 +1483,7 @@
 		if(ismob(a))
 			var/mob/M = a
 			total += M.mob_size
-		else
+		else if(isobj(a))
 			var/obj/item/I = a
 			total += I.get_storage_cost()
 	if(total > src.species.stomach_capacity)
