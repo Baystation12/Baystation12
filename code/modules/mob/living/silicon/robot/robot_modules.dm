@@ -416,7 +416,6 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/security/New()
 	..()
 	src.modules += new /obj/item/borg/sight/hud/sec(src)
-	src.modules += new /obj/item/borg/sight/thermal(src)
 	src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
 	src.modules += new /obj/item/weapon/melee/baton/robot(src)
 	src.modules += new /obj/item/weapon/gun/energy/gun/mounted(src)
@@ -480,7 +479,6 @@ var/global/list/robot_modules = list(
 					LANGUAGE_SOL_COMMON	= 1,
 					LANGUAGE_UNATHI		= 1,
 					LANGUAGE_SIIK_MAAS	= 1,
-					LANGUAGE_SIIK_TAJR	= 1,
 					LANGUAGE_SKRELLIAN	= 1,
 					LANGUAGE_RESOMI		= 1,
 					LANGUAGE_TRADEBAND	= 1,
