@@ -173,13 +173,13 @@
 		..()
 
 /obj/item/weapon/storage/fancy/cigarettes/dromedaryco
-	name = "\improper DromedaryCo packet"
-	desc = "A packet of six imported DromedaryCo cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\"."
+	name = "\improper pack of Dromedary Co. cigarettes"
+	desc = "A packet of six imported Dromedary Company cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\"."
 	icon_state = "Dpacket"
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat
-	name = "\improper AcmeCo packet"
-	desc = "A packet of six AcmeCo cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
+	name = "\improper pack of Acme Co. cigarettes"
+	desc = "A packet of six Acme Company cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
 	icon_state = "Bpacket"
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat/New()
@@ -205,6 +205,9 @@
 	desc = "With a sharp and natural organic menthol flavor, these Temperamentos are a favorite of NDV crews. Hardly anyone knows they make 'em in non-menthol!"
 	icon_state = "TMpacket"
 	item_state = "Dpacket"
+
+	key_type = /obj/item/clothing/mask/smokable/cigarette/menthol
+	startswith = list(/obj/item/clothing/mask/smokable/cigarette/menthol = 6)
 
 /obj/item/weapon/storage/fancy/cigarettes/carcinomas
 	name = "\improper pack of Carcinoma Angels"
