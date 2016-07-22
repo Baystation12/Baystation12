@@ -1,0 +1,7 @@
+author: PsiOmegaDelta
+
+delete-after: True
+
+changes: 
+  - tweak: "Some antag uplink weapons now come with ammunition (and a container to hold them) and their price and description has been updated accordingly."
+  - tweak: "Buying random items from the antag uplink will no longer give you weapons without relevant ammunition, or ammunition for weapons you may not have."
