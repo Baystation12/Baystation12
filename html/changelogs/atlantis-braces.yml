@@ -1,6 +1,0 @@
-author: atlantiscze
-
-delete-after: True
-
-changes: 
-  - rscadd: "Adds maintenance braces. These can be printed by research and used to lock down an airlock. Braces can be removed with paired keycard or maintenance jack tool (also available from research). Braces prevent the airlock from opening via any means, and absorb a lot of damage until they break off, protecting the airlock."
