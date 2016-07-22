@@ -204,7 +204,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		return ..()
 
 /obj/item/clothing/mask/smokable/cigarette
-	name = "\improper cigarette"
+	name = "cigarette"
 	desc = "A roll of tobacco and nicotine."
 	icon_state = "cigoff"
 	throw_speed = 0.5
@@ -228,7 +228,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		reagents.add_reagent("nicotine", 1)
 
 /obj/item/clothing/mask/smokable/cigarette/menthol
-	name = "\improper menthol cigarette"
+	name = "menthol cigarette"
 	desc = "A cigarette with a little minty kick. Well, minty in theory."
 
 	New()
