@@ -484,8 +484,8 @@ BLIND     // can't see anything
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.
 	var/worn_state = null
-	valid_accessory_slots = list("utility","armband","decor")
-	restricted_accessory_slots = list("utility", "armband")
+	valid_accessory_slots = list("utility","armband","rank","decor")
+	restricted_accessory_slots = list("utility", "armband","rank")
 
 
 /obj/item/clothing/under/attack_hand(var/mob/user)

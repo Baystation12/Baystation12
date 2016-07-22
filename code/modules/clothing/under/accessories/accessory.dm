@@ -171,45 +171,376 @@
 
 //Medals
 /obj/item/clothing/accessory/medal
-	name = "bronze medal"
-	desc = "A bronze medal."
+	name = "medal"
+	desc = "A simple medal."
 	icon_state = "bronze"
 
-/obj/item/clothing/accessory/medal/conduct
-	name = "distinguished conduct medal"
-	desc = "A bronze medal awarded for distinguished conduct. Whilst a great honor, this is most basic award on offer. It is often awarded by a captain to a member of their crew."
+/obj/item/clothing/accessory/medal/iron
+	name = "iron medal"
+	desc = "A simple iron medal."
+	icon_state = "iron"
+	item_state = "iron"
 
-/obj/item/clothing/accessory/medal/bronze_heart
+/obj/item/clothing/accessory/medal/iron/star
+	name = "iron star medal"
+	desc = "An iron star awarded to members of the SCG for meritorious achievement or service in a combat zone."
+	icon_state = "iron_star"
+
+/obj/item/clothing/accessory/medal/iron/nanotrasen
+	name = "nanotrasen merit medal"
+	desc = "An iron medal awarded to NanoTrasen employees for merit."
+	icon_state = "iron_nt"
+
+/obj/item/clothing/accessory/medal/iron/sol
+	name = "sol expeditionary medal"
+	desc = "An iron medal awarded to members of the SCG for service outside of the borders of the Sol Central Government."
+	icon_state = "iron_sol"
+
+/obj/item/clothing/accessory/medal/bronze
+	name = "bronze medal"
+	desc = "A simple bronze medal."
+	icon_state = "bronze"
+	item_state = "bronze"
+
+/obj/item/clothing/accessory/medal/bronze/heart
 	name = "bronze heart medal"
-	desc = "A bronze heart-shaped medal awarded for sacrifice. It is often awarded posthumously or for severe injury in the line of duty."
+	desc = "A bronze heart awarded to members of the SCG for injury or death in the line of duty."
 	icon_state = "bronze_heart"
 
-/obj/item/clothing/accessory/medal/nobel_science
-	name = "nobel sciences award"
-	desc = "A bronze medal which represents significant contributions to the field of science or engineering."
+/obj/item/clothing/accessory/medal/bronze/nanotrasen
+	name = "nanotrasen sciences medal"
+	desc = "A bronze medal awarded to NanoTrasen employees for signifigant contributions to the fields of science or engineering."
+	icon_state = "bronze_nt"
+
+/obj/item/clothing/accessory/medal/bronze/sol
+	name = "sol defensive operations medal"
+	desc = "A bronze medal awarded for members of the SCG for service defending the border regions."
+	icon_state = "bronze_sol"
 
 /obj/item/clothing/accessory/medal/silver
 	name = "silver medal"
-	desc = "A silver medal."
+	desc = "A simple silver medal."
 	icon_state = "silver"
+	item_state = "silver"
 
-/obj/item/clothing/accessory/medal/silver/valor
-	name = "medal of valor"
-	desc = "A silver medal awarded for acts of exceptional valor."
+/obj/item/clothing/accessory/medal/silver/sword
+	name = "combat action medal"
+	desc = "A silver medal awarded to members of the SCG for honorable service while under enemy fire."
+	icon_state = "silver_sword"
 
-/obj/item/clothing/accessory/medal/silver/security
-	name = "robust security award"
-	desc = "An award for distinguished combat and sacrifice in defence of corporate commercial interests. Often awarded to security staff."
+/obj/item/clothing/accessory/medal/silver/nanotrasen
+	name = "nanotrasen service medal"
+	desc = "A silver medal awarded to NanoTrasen employees for distinguished service in support of corporate interests."
+	icon_state = "silver_nt"
+
+/obj/item/clothing/accessory/medal/silver/sol
+	name = "sol valor medal"
+	desc = "A silver medal awarded for members of the SCG for acts of exceptional valor."
+	icon_state = "silver_sol"
 
 /obj/item/clothing/accessory/medal/gold
 	name = "gold medal"
-	desc = "A prestigious golden medal."
+	desc = "A simple gold medal."
 	icon_state = "gold"
+	item_state = "gold"
 
-/obj/item/clothing/accessory/medal/gold/captain
-	name = "medal of captaincy"
-	desc = "A golden medal awarded exclusively to those promoted to the rank of captain. It signifies the codified responsibilities of a captain, and their undisputable authority over their crew."
+/obj/item/clothing/accessory/medal/gold/star
+	name = "gold star medal"
+	desc = "A gold star awarded to members of the SCG for acts of heroism in a combat zone."
+	icon_state = "gold_star"
 
-/obj/item/clothing/accessory/medal/gold/heroism
-	name = "medal of exceptional heroism"
-	desc = "An extremely rare golden medal awarded only by company officials. To recieve such a medal is the highest honor and as such, very few exist. This medal is almost never awarded to anybody but commanders."
+/obj/item/clothing/accessory/medal/gold/sun
+	name = "solar service medal"
+	desc = "A gold medal awarded to members of the SCG by the Secretary General for significant contributions to the Sol Central Government."
+	icon_state = "gold_sun"
+
+/obj/item/clothing/accessory/medal/gold/crest
+	name = "solar honor medal"
+	desc = "A gold medal awarded to members of the Defense Forces by the Secretary General for personal acts of valor and heroism above and beyond the call of duty."
+	icon_state = "gold_crest"
+
+/obj/item/clothing/accessory/medal/gold/nanotrasen
+	name = "nanotrasen command medal"
+	desc = "A gold medal awarded to NanoTrasen employees for service as the Captain of a NanoTrasen facility, station, or vessel."
+	icon_state = "gold_nt"
+
+/obj/item/clothing/accessory/medal/gold/sol
+	name = "sol sapientarian medal"
+	desc = "A gold medal awarded for members of the SCG for significant contributions to sapient rights."
+	icon_state = "gold_sol"
+
+/obj/item/clothing/accessory/medal/heart
+	name = "medical medal"
+	desc = "A white heart emblazoned with a red cross awarded to members of the SCG for service as a medical professional in a combat zone."
+	icon_state = "white_heart"
+
+//Ribbons
+/obj/item/clothing/accessory/ribbon
+	name = "ribbon"
+	desc = "A simple military decoration."
+	icon_state = "ribbon_marksman"
+
+/obj/item/clothing/accessory/ribbon/marksman
+	name = "marksmanship ribbon"
+	desc = "A military decoration awarded to members of the SCG for good marksmanship scores in training. Common in the days of energy weapons."
+	icon_state = "ribbon_marksman"
+
+/obj/item/clothing/accessory/ribbon/peace
+	name = "peacekeeping ribbon"
+	desc = "A military decoration awarded to members of the SCG for service during a peacekeeping operation."
+	icon_state = "ribbon_peace"
+
+/obj/item/clothing/accessory/ribbon/frontier
+	name = "frontier ribbon"
+	desc = "A military decoration awarded to members of the SCG for service along the frontier."
+	icon_state = "ribbon_frontier"
+
+/obj/item/clothing/accessory/ribbon/instructor
+	name = "instructor ribbon"
+	desc = "A military decoration awarded to members of the SCG for service as an instructor."
+	icon_state = "ribbon_instructor"
+
+//Specialty Pins
+/obj/item/clothing/accessory/specialty
+	name = "speciality blaze"
+	desc = "A color blaze denoting fleet personnel in some special role. This one is silver."
+	icon_state = "marinerank_command"
+
+/obj/item/clothing/accessory/specialty/janitor
+	name = "custodial blazes"
+	desc = "Purple blazes denoting a custodial technician."
+	icon_state = "fleetspec_janitor"
+
+/obj/item/clothing/accessory/specialty/brig
+	name = "brig blazes"
+	desc = "Red blazes denoting a brig officer."
+	icon_state = "fleetspec_brig"
+
+/obj/item/clothing/accessory/specialty/forensic
+	name = "forensics blazes"
+	desc = "Steel blazes denoting a forensic technician."
+	icon_state = "fleetspec_forensics"
+
+/obj/item/clothing/accessory/specialty/atmos
+	name = "atmospherics blazes"
+	desc = "Turquoise blazes denoting an atmospheric technician."
+	icon_state = "fleetspec_atmos"
+
+/obj/item/clothing/accessory/specialty/counselor
+	name = "counselor blazes"
+	desc = "Blue blazes denoting a counselor."
+	icon_state = "fleetspec_counselor"
+
+/obj/item/clothing/accessory/specialty/chemist
+	name = "chemistry blazes"
+	desc = "Orange blazes denoting a chemist."
+	icon_state = "fleetspec_chemist"
+
+/obj/item/clothing/accessory/specialty/enlisted
+	name = "enlisted qualification pin"
+	desc = "An iron pin denoting some special qualification."
+	icon_state = "fleetpin_enlisted"
+
+/obj/item/clothing/accessory/specialty/pin/officer
+	name = "officer's qualification pin"
+	desc = "A golden pin denoting some special qualification."
+	icon_state = "fleetpin_officer"
+
+//Ranks
+/obj/item/clothing/accessory/rank
+	name = "ranks"
+	desc = "Insignia denoting rank of some kind. These appear blank."
+	icon_state = "fleetrank"
+	slot = "rank"
+
+/obj/item/clothing/accessory/rank/fleet
+	name = "naval ranks"
+	desc = "Insignia denoting naval rank of some kind. These appear blank."
+	icon_state = "fleetrank"
+
+/obj/item/clothing/accessory/rank/fleet/enlisted
+	name = "crewman recruit ranks"
+	desc = "Insignia denoting the rank of Crewman Recruit."
+	icon_state = "fleetrank_enlisted"
+
+/obj/item/clothing/accessory/rank/enlisted/e2
+	name = "crewman apprentice ranks"
+	desc = "Insignia denoting the rank of Crewman Apprentice."
+
+/obj/item/clothing/accessory/rank/enlisted/e3
+	name = "crewman ranks"
+	desc = "Insignia denoting the rank of Crewman."
+
+/obj/item/clothing/accessory/rank/enlisted/e4
+	name = "petty officer third class ranks"
+	desc = "Insignia denoting the rank of Petty Officer Third Class."
+
+/obj/item/clothing/accessory/rank/enlisted/e5
+	name = "petty officer second class ranks"
+	desc = "Insignia denoting the rank of Petty Officer Second Class."
+
+/obj/item/clothing/accessory/rank/enlisted/e6
+	name = "petty officer first class ranks"
+	desc = "Insignia denoting the rank of Petty Officer First Class."
+
+/obj/item/clothing/accessory/rank/enlisted/e7
+	name = "chief petty officer ranks"
+	desc = "Insignia denoting the rank of Chief Petty Officer."
+
+/obj/item/clothing/accessory/rank/enlisted/e8
+	name = "senior chief petty officer ranks"
+	desc = "Insignia denoting the rank of Senior Chief Petty Officer."
+
+/obj/item/clothing/accessory/rank/enlisted/e9
+	name = "master chief petty officer ranks"
+	desc = "Insignia denoting the rank of Master Chief Petty Officer."
+
+/obj/item/clothing/accessory/rank/fleet/officer
+	name = "ensign ranks"
+	desc = "Insignia denoting the rank of Ensign."
+	icon_state = "fleetrank_officer"
+
+/obj/item/clothing/accessory/rank/fleet/officer/o2
+	name = "lieutenant junior grade ranks"
+	desc = "Insignia denoting the rank of Lieutenant Junior Grade."
+
+/obj/item/clothing/accessory/rank/fleet/officer/o3
+	name = "lieutenant ranks"
+	desc = "Insignia denoting the rank of Lieutenant."
+
+/obj/item/clothing/accessory/rank/fleet/officer/o4
+	name = "lieutenant commander ranks"
+	desc = "Insignia denoting the rank of Lieutenant Commander."
+
+/obj/item/clothing/accessory/rank/fleet/officer/o5
+	name = "commander ranks"
+	desc = "Insignia denoting the rank of Commander."
+
+/obj/item/clothing/accessory/rank/fleet/officer/o6
+	name = "captain ranks"
+	desc = "Insignia denoting the rank of Captain."
+	icon_state = "fleetrank_command"
+
+/obj/item/clothing/accessory/rank/fleet/flag
+	name = "rear admiral lower half ranks"
+	desc = "Insignia denoting the rank of Rear Admiral Lower Half."
+	icon_state = "fleetrank_command"
+
+/obj/item/clothing/accessory/rank/fleet/flag/o8
+	name = "rear admiral upper half ranks"
+	desc = "Insignia denoting the rank of Rear Admiral Upper Half."
+
+/obj/item/clothing/accessory/rank/fleet/flag/o9
+	name = "vice admiral ranks"
+	desc = "Insignia denoting the rank of Vice Admiral."
+
+/obj/item/clothing/accessory/rank/fleet/flag/o10
+	name = "admiral ranks"
+	desc = "Insignia denoting the rank of Admiral."
+
+/obj/item/clothing/accessory/rank/marine
+	name = "marine ranks"
+	desc = "Insignia denoting marine rank of some kind. These appear blank."
+	icon_state = "marinerank_enlisted"
+
+/obj/item/clothing/accessory/rank/marine/enlisted
+	name = "private ranks"
+	desc = "Insignia denoting the rank of Private."
+	icon_state = "marinerank_enlisted"
+
+/obj/item/clothing/accessory/rank/marine/e2
+	name = "private first class ranks"
+	desc = "Insignia denoting the rank of Private First Class."
+
+/obj/item/clothing/accessory/rank/marine/e3
+	name = "lance corporal ranks"
+	desc = "Insignia denoting the rank of Lance Corporal."
+
+/obj/item/clothing/accessory/rank/marine/e4
+	name = "corporal ranks"
+	desc = "Insignia denoting the rank of Corporal."
+
+/obj/item/clothing/accessory/rank/marine/e5
+	name = "sergeant ranks"
+	desc = "Insignia denoting the rank of Sergeant."
+
+/obj/item/clothing/accessory/rank/marine/e6
+	name = "staff sergeant ranks"
+	desc = "Insignia denoting the rank of Staff Sergeant."
+
+/obj/item/clothing/accessory/rank/marine/e7
+	name = "gunnery sergeant ranks"
+	desc = "Insignia denoting the rank of Gunnery Sergeant."
+
+/obj/item/clothing/accessory/rank/marine/e8
+	name = "master sergeant ranks"
+	desc = "Insignia denoting the rank of Master Sergeant."
+
+/obj/item/clothing/accessory/rank/marine/e8alt
+	name = "first sergeant ranks"
+	desc = "Insignia denoting the rank of First Sergeant."
+
+/obj/item/clothing/accessory/rank/marine/e9
+	name = "master gunnery sergeant ranks"
+	desc = "Insignia denoting the rank of Master Gunnery Sergeant."
+
+/obj/item/clothing/accessory/rank/marine/e9alt
+	name = "sergeant major ranks"
+	desc = "Insignia denoting the rank of Sergeant Major."
+
+/obj/item/clothing/accessory/rank/marine/officer
+	name = "second lieutenant ranks"
+	desc = "Insignia denoting the rank of Second Lieutenant."
+	icon_state = "marinerank_officer"
+
+/obj/item/clothing/accessory/rank/marine/officer/o2
+	name = "first lieutenant ranks"
+	desc = "Insignia denoting the rank of First Lieutenant."
+
+/obj/item/clothing/accessory/rank/marine/officer/o3
+	name = "captain ranks"
+	desc = "Insignia denoting the rank of Captain."
+
+/obj/item/clothing/accessory/rank/marine/officer/o4
+	name = "major ranks"
+	desc = "Insignia denoting the rank of Major."
+
+/obj/item/clothing/accessory/rank/marine/officer/o5
+	name = "lieutenant commander ranks"
+	desc = "Insignia denoting the rank of Lieutenant Commander."
+
+/obj/item/clothing/accessory/rank/marine/officer/o6
+	name = "colonel ranks"
+	desc = "Insignia denoting the rank of Colonel."
+	icon_state = "marinerank_command"
+
+/obj/item/clothing/accessory/rank/marine/flag
+	name = "brigadier general ranks"
+	desc = "Insignia denoting the rank of Brigadier General."
+	icon_state = "marinerank_command"
+
+/obj/item/clothing/accessory/rank/marine/flag/o8
+	name = "major general ranks"
+	desc = "Insignia denoting the rank of Major General."
+
+/obj/item/clothing/accessory/rank/marine/flag/o9
+	name = "lieutenant general ranks"
+	desc = "Insignia denoting the rank of lieutenant general."
+
+/obj/item/clothing/accessory/rank/marine/flag/o10
+	name = "general ranks"
+	desc = "Insignia denoting the rank of General."
+
+
+//Necklaces
+/obj/item/clothing/accessory/necklace
+	name = "necklace"
+	desc = "A simple silver necklace."
+	icon_state = "locket"
+
+
+//Misc
+/obj/item/clothing/accessory/kneepads
+	name = "kneepads"
+	desc = "A pair of synthetic kneepads. Doesn't provide protection from more than arthritis."
+	icon_state = "kneepads"
