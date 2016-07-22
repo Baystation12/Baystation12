@@ -922,10 +922,17 @@
 					nutrition += 10
 			else if(istype(a,/obj/item))
 				var/obj/item/I = a
-				if((I.sharp || I.edge) && prob(1))
+				if((I.sharp || I.edge))
 					var/obj/item/organ/external/organ = src.get_organ("chest")
-					var/datum/wound/internal_bleeding/wound = new(max(min(I.w_class * 5, 15), min(I.force, 30)))
-					organ.wounds += wound
+					if(!organ)
+						continue
+					if(prob(1))
+						var/datum/wound/internal_bleeding/wound = new(max(min(I.w_class * 5, 15), min(I.force, 30)))
+						organ.wounds += wound
+					else if(prob(1))
+						stomach_contents.Remove(I)
+						src << "<span class='danger'>You feel something rip painfully out of your stomach!</span>"
+						organ.embed(I)
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)

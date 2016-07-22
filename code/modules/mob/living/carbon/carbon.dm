@@ -458,3 +458,12 @@
 		return DEVOUR_FAST
 
 	return FALSE
+
+/mob/living/carbon/onDropInto(var/atom/movable/AM)
+	if(AM.loc in stomach_contents)
+		if(can_devour(AM))
+			stomach_contents += AM
+			return null
+		src.visible_message("<span class='warning'>\The [src] regurgitates \the [AM]!</span>")
+		return loc
+	return ..()
