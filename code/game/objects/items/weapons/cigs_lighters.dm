@@ -223,18 +223,18 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	weldermes = "<span class='notice'>USER casually lights the NAME with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME.</span>"
 
-	New()
-		..()
-		reagents.add_reagent("nicotine", 1)
+/obj/item/clothing/mask/smokable/cigarette/New()
+	..()
+	reagents.add_reagent("nicotine", 1)
 
 /obj/item/clothing/mask/smokable/cigarette/menthol
 	name = "menthol cigarette"
 	desc = "A cigarette with a little minty kick. Well, minty in theory."
 
-	New()
-		..()
-		reagents.add_reagent("nicotine", 1)
-		reagents.add_reagent("menthol", 1)
+/obj/item/clothing/mask/smokable/cigarette/menthol/New()
+	..()
+	reagents.add_reagent("nicotine", 1)
+	reagents.add_reagent("menthol", 1)
 
 /obj/item/clothing/mask/smokable/cigarette/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
