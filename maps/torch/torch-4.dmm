@@ -979,7 +979,7 @@
 "sQ" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/door/airlock/maintenance_hatch{req_access = list(12)},/turf/simulated/floor/plating,/area/hallway/primary/firstdeck/aft)
 "sR" = (/turf/simulated/wall,/area/hallway/primary/firstdeck/aft)
 "sS" = (/turf/simulated/wall/r_wall,/area/hallway/primary/firstdeck/aft)
-"sT" = (/obj/effect/floor_decal/corner/brown{dir = 9},/obj/machinery/computer/supplycomp,/turf/simulated/floor/tiled/dark,/area/bridge)
+"sT" = (/obj/effect/floor_decal/corner/brown{dir = 9},/obj/machinery/computer/supply,/turf/simulated/floor/tiled/dark,/area/bridge)
 "sU" = (/obj/effect/floor_decal/corner/blue,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/dark,/area/bridge)
 "sV" = (/obj/effect/floor_decal/corner/blue/three_quarters{dir = 4},/turf/simulated/floor/tiled/dark,/area/bridge)
 "sW" = (/obj/effect/floor_decal/corner/blue{dir = 9},/obj/structure/table/rack,/obj/item/device/flash,/obj/item/device/flash,/obj/item/device/aicard,/obj/structure/fireaxecabinet{pixel_x = 32},/turf/simulated/floor/tiled/dark,/area/bridge)
