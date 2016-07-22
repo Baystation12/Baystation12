@@ -1730,3 +1730,32 @@ CIRCUITS BELOW
 	id = "cart_captain"
 	build_path = /obj/item/weapon/cartridge/captain
 	sort_string = "VBAAO"
+
+/datum/design/item/airlock_brace
+	name = "airlock brace design"
+	desc = "Special door attachment that can be used to provide extra security."
+	id = "brace"
+	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 50)
+	build_path = /obj/item/weapon/airlock_brace
+	sort_string = "VBAAP"
+
+/datum/design/item/brace_keycard
+	name = "brace keycard design"
+	desc = "A small card resembling an ID, it can be paired with airlock braces for quick access."
+	id = "bracecard"
+	req_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
+	chemicals = list("sacid" = 20)
+	build_type = IMPRINTER
+	build_path = /obj/item/weapon/brace_keycard
+	sort_string = "VBAAR"
+
+/datum/design/item/brace_jack
+	name = "maintenance jack design"
+	desc = "A special maintenance tool that can be used to remove airlock braces."
+	id = "bracejack"
+	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 120)
+	build_path = /obj/item/weapon/crowbar/brace_jack
+	sort_string = "VBAAS"
