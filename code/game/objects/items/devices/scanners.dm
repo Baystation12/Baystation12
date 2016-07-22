@@ -381,3 +381,22 @@ REAGENT SCANNER
 	if (T.cores > 1)
 		user.show_message("Anomalious slime core amount detected")
 	user.show_message("Growth progress: [T.amount_grown]/10")
+
+/obj/item/device/price_scanner
+	name = "price scanner"
+	desc = "Using an up-to-date database of various costs and prices, this device estimates the market price of an item up to 0.001% accuracy."
+	icon_state = "price_scanner"
+	slot_flags = SLOT_BELT
+	w_class = 2.0
+	throwforce = 0
+	throw_speed = 3
+	throw_range = 3
+	matter = list(DEFAULT_WALL_MATERIAL = 25, "glass" = 25)
+
+/obj/item/device/price_scanner/afterattack(atom/movable/target, mob/user as mob, proximity)
+	if(!proximity)
+		return
+
+	var/value = get_value(target)
+	user.visible_message("\The [user] scans \the [target] with \the [src]")
+	user.show_message("Price estimation of \the [target]: [value ? value : "N/A"] Thalers")
