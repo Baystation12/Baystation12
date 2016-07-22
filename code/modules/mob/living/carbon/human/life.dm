@@ -923,7 +923,7 @@
 			else if(istype(a,/obj/item))
 				var/obj/item/I = a
 				if((I.sharp || I.edge))
-					var/obj/item/organ/external/organ = src.get_organ("chest")
+					var/obj/item/organ/external/organ = src.get_organ("groin")
 					if(!organ)
 						continue
 					if(prob(1))
