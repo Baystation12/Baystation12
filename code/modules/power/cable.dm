@@ -96,12 +96,11 @@ var/list/possible_cable_coil_colours
 /obj/structure/cable/attack_ghost(mob/user)
 	if(user.client && user.client.inquisitive_ghost)
 		user.examinate(src)
-		if (isghost(user))
-			// following code taken from attackby (multitool)
-			if(powernet && (powernet.avail > 0))
-				user << "<span class='warning'>[powernet.avail]W in power network.</span>"
-			else
-				user << "<span class='warning'>The cable is not powered.</span>"
+		// following code taken from attackby (multitool)
+		if(powernet && (powernet.avail > 0))
+			user << "<span class='warning'>[powernet.avail]W in power network.</span>"
+		else
+			user << "<span class='warning'>The cable is not powered.</span>"
 	return
 
 ///////////////////////////////////
