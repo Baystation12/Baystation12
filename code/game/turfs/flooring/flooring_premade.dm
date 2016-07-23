@@ -57,40 +57,25 @@
 	initial_flooring = /decl/flooring/reinforced
 
 /turf/simulated/floor/reinforced/airless
-	oxygen = 0
-	nitrogen = 0
+	init_air = "temperature=TCMB"
 
 /turf/simulated/floor/reinforced/airmix
-	oxygen = MOLES_O2ATMOS
-	nitrogen = MOLES_N2ATMOS
+	init_air = "oxygen=MOLES_O2ATMOS;nitrogen=MOLES_N2ATMOS;temperature=T20C"
 
 /turf/simulated/floor/reinforced/nitrogen
-	oxygen = 0
-	nitrogen = ATMOSTANK_NITROGEN
+	init_air = "nitrogen=ATMOSTANK_NITROGEN;temperature=T20C"
 
 /turf/simulated/floor/reinforced/oxygen
-	oxygen = ATMOSTANK_OXYGEN
-	nitrogen = 0
+	init_air = "oxygen=ATMOSTANK_OXYGEN;temperature=T20C"
 
 /turf/simulated/floor/reinforced/phoron
-	oxygen = 0
-	nitrogen = 0
-	phoron = ATMOSTANK_PHORON
+	init_air = "phoron=ATMOSTANK_PHORON;temperature=T20C"
 
 /turf/simulated/floor/reinforced/carbon_dioxide
-	oxygen = 0
-	nitrogen = 0
-	carbon_dioxide = ATMOSTANK_CO2
+	init_air = "carbon_dioxide=ATMOSTANK_CO2;temperature=T20C"
 
 /turf/simulated/floor/reinforced/n20
-	oxygen = 0
-	nitrogen = 0
-
-/turf/simulated/floor/reinforced/n20/New()
-	..()
-	sleep(-1)
-	if(!air) make_air()
-	air.adjust_gas("sleeping_agent", ATMOSTANK_NITROUSOXIDE)
+	init_air = "sleeping_agent=ATMOSTANK_NITROUSOXIDE;temperature=T20C"
 
 /turf/simulated/floor/cult
 	name = "engraved floor"
@@ -112,8 +97,7 @@
 	initial_flooring = /decl/flooring/tiling/steel
 
 /turf/simulated/floor/tiled/steel/airless
-	oxygen = 0
-	nitrogen = 0
+	init_air = "temperature=TCMB"
 
 /turf/simulated/floor/tiled/white
 	name = "white floor"
@@ -134,42 +118,30 @@
 //ATMOS PREMADES
 /turf/simulated/floor/reinforced/airless
 	name = "vacuum floor"
-	oxygen = 0
-	nitrogen = 0
-	temperature = TCMB
+	init_air = "temperature=TCMB"
 
 /turf/simulated/floor/airless
 	name = "airless plating"
-	oxygen = 0
-	nitrogen = 0
-	temperature = TCMB
+	init_air = "temperature=TCMB"
 
 /turf/simulated/floor/tiled/airless
 	name = "airless floor"
-	oxygen = 0
-	nitrogen = 0
-	temperature = TCMB
+	init_air = "temperature=TCMB"
 
 /turf/simulated/floor/bluegrid/airless
 	name = "airless floor"
-	oxygen = 0
-	nitrogen = 0
-	temperature = TCMB
+	init_air = "temperature=TCMB"
 
 /turf/simulated/floor/greengrid/airless
 	name = "airless floor"
-	oxygen = 0
-	nitrogen = 0
-	temperature = TCMB
+	init_air = "temperature=TCMB"
 
 /turf/simulated/floor/greengrid/nitrogen
-	oxygen = 0
+	init_air = "nitrogen=MOLES_N2STANDARD"
 
 /turf/simulated/floor/tiled/white/airless
 	name = "airless floor"
-	oxygen = 0
-	nitrogen = 0
-	temperature = TCMB
+	init_air = "temperature=TCMB"
 
 // Placeholders
 /turf/simulated/floor/airless/lava

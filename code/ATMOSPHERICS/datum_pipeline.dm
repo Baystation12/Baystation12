@@ -141,52 +141,7 @@ datum/pipeline
 		var/total_heat_capacity = air.heat_capacity()
 		var/partial_heat_capacity = total_heat_capacity*(share_volume/air.volume)
 
-		if(istype(target, /turf/simulated))
-			var/turf/simulated/modeled_location = target
-
-			if(modeled_location.blocks_air)
-
-				if((modeled_location.heat_capacity>0) && (partial_heat_capacity>0))
-					var/delta_temperature = air.temperature - modeled_location.temperature
-
-					var/heat = thermal_conductivity*delta_temperature* \
-						(partial_heat_capacity*modeled_location.heat_capacity/(partial_heat_capacity+modeled_location.heat_capacity))
-
-					air.temperature -= heat/total_heat_capacity
-					modeled_location.temperature += heat/modeled_location.heat_capacity
-
-			else
-				var/delta_temperature = 0
-				var/sharer_heat_capacity = 0
-
-				if(modeled_location.zone)
-					delta_temperature = (air.temperature - modeled_location.zone.air.temperature)
-					sharer_heat_capacity = modeled_location.zone.air.heat_capacity()
-				else
-					delta_temperature = (air.temperature - modeled_location.air.temperature)
-					sharer_heat_capacity = modeled_location.air.heat_capacity()
-
-				var/self_temperature_delta = 0
-				var/sharer_temperature_delta = 0
-
-				if((sharer_heat_capacity>0) && (partial_heat_capacity>0))
-					var/heat = thermal_conductivity*delta_temperature* \
-						(partial_heat_capacity*sharer_heat_capacity/(partial_heat_capacity+sharer_heat_capacity))
-
-					self_temperature_delta = -heat/total_heat_capacity
-					sharer_temperature_delta = heat/sharer_heat_capacity
-				else
-					return 1
-
-				air.temperature += self_temperature_delta
-
-				if(modeled_location.zone)
-					modeled_location.zone.air.temperature += sharer_temperature_delta/modeled_location.zone.air.group_multiplier
-				else
-					modeled_location.air.temperature += sharer_temperature_delta
-
-
-		else
+		if(target.blocks_air)
 			if((target.heat_capacity>0) && (partial_heat_capacity>0))
 				var/delta_temperature = air.temperature - target.temperature
 
@@ -194,6 +149,30 @@ datum/pipeline
 					(partial_heat_capacity*target.heat_capacity/(partial_heat_capacity+target.heat_capacity))
 
 				air.temperature -= heat/total_heat_capacity
+				if(istype(target, /turf/simulated))
+					target.temperature += heat/target.heat_capacity
+
+		else
+			var/datum/gas_mixture/target_air = target.return_air()
+
+			var/delta_temperature = (air.temperature - target_air.temperature)
+			var/sharer_heat_capacity = target_air.heat_capacity()
+
+			var/self_temperature_delta = 0
+			var/sharer_temperature_delta = 0
+
+			if((sharer_heat_capacity>0) && (partial_heat_capacity>0))
+				var/heat = thermal_conductivity*delta_temperature* \
+					(partial_heat_capacity*sharer_heat_capacity/(partial_heat_capacity+sharer_heat_capacity))
+
+				self_temperature_delta = -heat/total_heat_capacity
+				sharer_temperature_delta = heat/sharer_heat_capacity
+			else
+				return 1
+
+			air.temperature += self_temperature_delta
+
+			target_air.temperature += sharer_temperature_delta/target_air.group_multiplier
 		if(network)
 			network.update = 1
 

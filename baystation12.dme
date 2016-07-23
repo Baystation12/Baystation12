@@ -2087,6 +2087,7 @@
 #include "code\modules\wireless\interfaces.dm"
 #include "code\modules\xgm\xgm_gas_data.dm"
 #include "code\modules\xgm\xgm_gas_mixture.dm"
+#include "code\modules\xgm\xgm_static_gas.dm"
 #include "code\unit_tests\alt_appearances_test.dm"
 #include "code\unit_tests\equipment_tests.dm"
 #include "code\unit_tests\extension_tests.dm"

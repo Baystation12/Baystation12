@@ -42,7 +42,7 @@
 "aP" = (/turf/simulated/shuttle/wall/corner/dark{dir = 9},/area/shuttle/escape_pod7/station)
 "aQ" = (/obj/effect/wingrille_spawn/reinforced,/obj/structure/window/reinforced{dir = 10},/turf/simulated/floor/plating,/area/shuttle/escape_pod7/station)
 "aR" = (/turf/simulated/shuttle/wall/corner/dark{dir = 5},/area/shuttle/escape_pod7/station)
-"aS" = (/obj/machinery/telecomms/relay/preset/fourthdeck,/turf/simulated/floor/bluegrid{name = "Mainframe Base"; nitrogen = 82.1472; oxygen = 21.8366; temperature = 293.15},/area/maintenance/fourthdeck/starboard)
+"aS" = (/obj/machinery/telecomms/relay/preset/fourthdeck,/turf/simulated/floor/bluegrid{name = "Mainframe Base"; init_air = "nitrogen=82.1472&oxygen=21.8366&temperature=293.15"},/area/maintenance/fourthdeck/starboard)
 "aT" = (/turf/simulated/wall/r_wall,/area/quartermaster/expedition/storage)
 "aU" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/plating,/area/quartermaster/hangar)
 "aV" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 4},/turf/simulated/floor/plating,/area/quartermaster/hangar)
