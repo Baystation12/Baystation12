@@ -47,10 +47,10 @@
 	desc = "Sturdy mess of synthcotton belts and buckles, ready to share your burden."
 	icon_state = "webbing"
 
-/obj/item/clothing/accessory/storage/big_webbing
+/obj/item/clothing/accessory/storage/webbing_large
 	name = "large webbing"
 	desc = "A large collection of synthcotton pockets and pouches."
-	icon_state = "large_webbing"
+	icon_state = "webbing_large"
 	slots = 4
 
 /obj/item/clothing/accessory/storage/black_vest
