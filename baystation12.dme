@@ -1157,6 +1157,7 @@
 #include "code\modules\clothing\under\pants.dm"
 #include "code\modules\clothing\under\shorts.dm"
 #include "code\modules\clothing\under\skirts.dm"
+#include "code\modules\clothing\under\solgov.dm"
 #include "code\modules\clothing\under\syndicate.dm"
 #include "code\modules\clothing\under\accessories\accessory.dm"
 #include "code\modules\clothing\under\accessories\armband.dm"

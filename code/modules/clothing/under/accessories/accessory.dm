@@ -512,7 +512,6 @@
 /obj/item/clothing/accessory/rank/marine/officer/o6
 	name = "colonel ranks"
 	desc = "Insignia denoting the rank of Colonel."
-	icon_state = "marinerank_command"
 
 /obj/item/clothing/accessory/rank/marine/flag
 	name = "brigadier general ranks"
