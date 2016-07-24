@@ -20,10 +20,13 @@
 				"hail_deny-1"        = "We no trade with shit like you!",
 				"hail_deny1"         = "Trade gone now. Goodbye.",
 
-				"trade_known1"       = "What is this? We agree to PROPOSAL for ITEM! You break the trade?",
 				"trade_complete0"    = "Yes, kikikikikiki! You will not regret this trade!",
 				"trade_complete1"    = "Yes... this is a good trade for the Shaol!",
-				"trade_refuse0"      = "Vox only deals in EQUAL trades of goods.",
+				"trade_no_money0"    = "Money? Vox no need money. GOODS! Give it GOODS!",
+				"trade_no_money1"    = "You know as well as it that money is no good.",
+				"trade_not_enough0"  = "It wants MORE for that. Give it more.",
+				"trade_not_enough1"  = "Ech, you insult it with such a trade? Respect it, make it equal.",
+
 				"trade_refuse1"      = "You know as well as it that is not a good trade.",
 				"how_much0"          = "You give it something worth VALUE, yes?",
 				"how_much1"          = "Hmm.... VALUE. Something like that.",
@@ -58,6 +61,7 @@
 
 
 /datum/trader/ship/vox/hail(var/mob/user)
+	var/specific
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species)
@@ -68,7 +72,13 @@
 				if("Vox Pariah")
 					hailed_vox = -1
 					disposition = -1000
-	return ..()
+			specific = H.species.name
+	else if(istype(user, /mob/living/silicon))
+		specific = "silicon"
+	if(!speech["hail_[specific][hailed_vox]"])
+		specific = "generic"
+	. = get_response("hail_[specific][hailed_vox]", "Greetings, MOB!")
+	. = replacetext(., "MOB", user.name)
 
 /datum/trader/ship/vox/can_hail()
 	if(hailed_vox >= 0)

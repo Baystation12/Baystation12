@@ -18,7 +18,7 @@
 		// point, check if we can actually attach the medal
 		var/obj/item/clothing/uniform = H.w_uniform
 		if(uniform)
-			var/obj/item/clothing/accessory/medal/gold/captain/medal = new()
+			var/obj/item/clothing/accessory/medal/gold/nanotrasen/medal = new()
 			if(uniform.can_attach_accessory(medal))
 				uniform.attach_accessory(null, medal)
 			else

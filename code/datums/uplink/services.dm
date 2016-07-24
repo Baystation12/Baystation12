@@ -223,7 +223,7 @@
 	var/datum/data/record/medical = data_core.CreateMedicalRecord(general.fields["name"], general.fields["id"])
 	data_core.CreateSecurityRecord(general.fields["name"], general.fields["id"])
 
-	if(!random_general_record)
+	if(random_general_record)
 		general.fields["citizenship"]	= random_general_record.fields["citizenship"]
 		general.fields["faction"] 		= random_general_record.fields["faction"]
 		general.fields["fingerprint"] 	= random_general_record.fields["fingerprint"]

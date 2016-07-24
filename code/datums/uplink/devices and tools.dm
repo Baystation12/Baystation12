@@ -18,7 +18,7 @@
 /datum/uplink_item/item/tools/clerical
 	name = "Morphic Clerical Kit"
 	item_cost = 4
-	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit
+	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/clerical
 
 /datum/uplink_item/item/tools/plastique
 	name = "C-4 (Destroys walls)"

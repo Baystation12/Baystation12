@@ -1,0 +1,4 @@
+author: Superbee29
+delete-after: True
+changes: 
+  - rscadd: "Ghosts can now see the power in a cable when examining it."

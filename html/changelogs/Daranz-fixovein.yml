@@ -1,6 +1,0 @@
-author: Daranz
-
-delete-after: True
-
-changes: 
-  - bugfix: "FixOVeins can now be used for attaching robotic organs (such as neural laces) in organic patients. Follow the same procedure as with normal organ transplant."

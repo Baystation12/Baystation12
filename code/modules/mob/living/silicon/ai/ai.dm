@@ -164,8 +164,7 @@ var/list/ai_verbs_default = list(
 
 			on_mob_init()
 
-	spawn(5)
-		new /obj/machinery/ai_powersupply(src)
+	create_powersupply()
 
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
