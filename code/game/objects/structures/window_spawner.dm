@@ -10,7 +10,8 @@
 	density = 1
 	anchored = 1.0
 	var/win_path = /obj/structure/window/basic
-	var/activated
+	var/activated = FALSE
+	var/fulltile = FALSE
 
 // stops ZAS expanding zones past us, the windows will block the zone anyway
 /obj/effect/wingrille_spawn/CanPass()
@@ -34,26 +35,37 @@
 
 /obj/effect/wingrille_spawn/proc/activate()
 	if(activated) return
-	if (!locate(/obj/structure/grille) in get_turf(src))
-		var/obj/structure/grille/G = PoolOrNew(/obj/structure/grille, src.loc)
+
+	if(locate(/obj/structure/window) in loc)
+		warning("Window Spawner: A window structure already exists at [loc.x]-[loc.y]-[loc.z]")
+
+	if(locate(/obj/structure/grille) in loc)
+		warning("Window Spawner: A grille already exists at [loc.x]-[loc.y]-[loc.z]")
+	else
+		var/obj/structure/grille/G = PoolOrNew(/obj/structure/grille, loc)
 		handle_grille_spawn(G)
+
 	var/list/neighbours = list()
-	for (var/dir in cardinal)
-		var/turf/T = get_step(src, dir)
-		var/obj/effect/wingrille_spawn/other = locate(/obj/effect/wingrille_spawn) in T
-		if(!other)
-			var/found_connection
-			if(locate(/obj/structure/grille) in T)
-				for(var/obj/structure/window/W in T)
-					if(W.type == win_path && W.dir == get_dir(T,src))
-						found_connection = 1
-						qdel(W)
-			if(!found_connection)
-				var/obj/structure/window/new_win = PoolOrNew(win_path, src.loc)
-				new_win.set_dir(dir)
-				handle_window_spawn(new_win)
-		else
-			neighbours |= other
+	if(fulltile)
+		var/obj/structure/window/new_win = PoolOrNew(win_path, loc)
+		handle_window_spawn(new_win)
+	else
+		for (var/dir in cardinal)
+			var/turf/T = get_step(src, dir)
+			var/obj/effect/wingrille_spawn/other = locate(type) in T
+			if(!other)
+				var/found_connection
+				if(locate(/obj/structure/grille) in T)
+					for(var/obj/structure/window/W in T)
+						if(W.type == win_path && W.dir == get_dir(T,src))
+							found_connection = 1
+							qdel(W)
+				if(!found_connection)
+					var/obj/structure/window/new_win = PoolOrNew(win_path, loc)
+					new_win.set_dir(dir)
+					handle_window_spawn(new_win)
+			else
+				neighbours |= other
 	activated = 1
 	for(var/obj/effect/wingrille_spawn/other in neighbours)
 		if(!other.activated) other.activate()
@@ -71,6 +83,11 @@
 	icon_state = "r-wingrille"
 	win_path = /obj/structure/window/reinforced
 
+/obj/effect/wingrille_spawn/reinforced/full
+	name = "reinforced window grille spawner - full tile"
+	fulltile = TRUE
+	win_path = /obj/structure/window/reinforced/full
+
 /obj/effect/wingrille_spawn/reinforced/crescent
 	name = "Crescent window grille spawner"
 	win_path = /obj/structure/window/reinforced/crescent
@@ -85,11 +102,21 @@
 	icon_state = "pr-wingrille"
 	win_path = /obj/structure/window/phoronreinforced
 
+/obj/effect/wingrille_spawn/reinforced_phoron/full
+	name = "reinforced phoron window grille spawner - full tile"
+	fulltile = TRUE
+	win_path = /obj/structure/window/phoronreinforced/full
+
 /obj/effect/wingrille_spawn/reinforced/polarized
 	name = "polarized window grille spawner"
 	color = "#444444"
 	win_path = /obj/structure/window/reinforced/polarized
 	var/id
+
+/obj/effect/wingrille_spawn/reinforced/polarized/full
+	name = "polarized window grille spawner - full tile"
+	fulltile = TRUE
+	win_path = /obj/structure/window/reinforced/polarized/full
 
 /obj/effect/wingrille_spawn/reinforced/polarized/handle_window_spawn(var/obj/structure/window/reinforced/polarized/P)
 	if(id)
