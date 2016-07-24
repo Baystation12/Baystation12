@@ -4,6 +4,7 @@
 	#include "torch_shuttles.dm"
 	#include "torch_unit_testing.dm"
 	#include "torch_jobs.dm"
+	#include "torch_holodecks.dm"
 
 	#include "torch-1.dmm"
 	#include "torch-2.dmm"

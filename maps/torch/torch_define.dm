@@ -17,22 +17,3 @@
 	emergency_shuttle_leaving_dock = "Emergency escape pods are launched, arriving at rendezvous point in %ETA%."
 	emergency_shuttle_called_message = "Emergency escape pods are being prepped. ETA %ETA%"
 	emergency_shuttle_recall_message = "Emergency escape sequence aborted, please return to your duties."
-
-	holodeck_supported_programs = list(
-		"Empty Court"       = "emptycourt",
-		"Basketball Court"  = "basketball",
-		"Thunderdome Court" = "thunderdomecourt",
-		"Boxing Ring"       = "boxingcourt",
-		"Beach"             = "beach",
-		"Desert"            = "desert",
-		"Space"             = "space",
-		"Picnic Area"       = "picnicarea",
-		"Snow Field"        = "snowfield",
-		"Theatre"           = "theatre",
-		"Meeting Hall"      = "meetinghall",
-		"Courtroom"         = "courtroom"
-	)
-
-	holodeck_restricted_programs = list(
-		"Wildlife Simulation" = "wildlifecarp"
-	)
