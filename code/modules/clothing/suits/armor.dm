@@ -298,12 +298,12 @@
 	armor = list(melee = 30, bullet = 15, laser = 40, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/nt
-	name = "nanotrasen armored vest"
+	name = "NanoTrasen armored vest"
 	desc = "A synthetic armor vest. This one is marked with the crest of NanoTrasen."
 	icon_state = "ntvest"
 
 /obj/item/clothing/suit/armor/vest/solgov
-	name = "sol central government armored vest"
+	name = "Sol Central Government armored vest"
 	desc = "A synthetic armor vest. This one is marked with the crest of the Sol Central Government."
 	icon_state = "solvest"
 
@@ -332,7 +332,7 @@
 	siemens_coefficient = 0.6
 
 /obj/item/clothing/suit/storage/vest/nt
-	name = "nanotrasen heavy armored vest"
+	name = "corporate security heavy armored vest"
 	desc = "A synthetic armor vest with CORPORATE SECURITY printed in red lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "ntwebvest"
 
@@ -347,22 +347,22 @@
 	icon_state = "comwebvest"
 
 /obj/item/clothing/suit/storage/vest/solgov
-	name = "\improper sol central government heavy armored vest"
-	desc = "A synthetic armor vest with PEACEKEEPER printed in blue lettering on the chest. This one has added webbing and ballistic plates."
+	name = "Sol Central Government heavy armored vest"
+	desc = "A synthetic armor vest with PEACEKEEPER printed in distinctive blue lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "solwebvest"
 
 /obj/item/clothing/suit/storage/vest/solgov/security
-	name = "\improper master at arms heavy armored vest"
+	name = "master at arms heavy armored vest"
 	desc = "A synthetic armor vest with MASTER AT ARMS printed in silver lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "secwebvest"
 
 /obj/item/clothing/suit/storage/vest/solgov/command
-	name = "\improper command heavy armored vest"
+	name = "command heavy armored vest"
 	desc = "A synthetic armor vest with SOL CENTRAL GOVERNMENT printed in gold lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "comwebvest"
 
 /obj/item/clothing/suit/storage/vest/pcrc
-	name = "\improper PCRC heavy armored vest"
+	name = "contractor heavy armored vest"
 	desc = "A synthetic armor vest with PRIVATE SECURITY printed in cyan lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "pcrcwebvest"
 
