@@ -187,12 +187,12 @@
 	icon_state = "iron_star"
 
 /obj/item/clothing/accessory/medal/iron/nanotrasen
-	name = "NanoTrasen merit medal"
+	name = "\improper NanoTrasen merit medal"
 	desc = "An iron medal awarded to NanoTrasen employees for merit."
 	icon_state = "iron_nt"
 
 /obj/item/clothing/accessory/medal/iron/sol
-	name = "Sol expeditionary medal"
+	name = "\improper Sol expeditionary medal"
 	desc = "An iron medal awarded to members of the SCG for service outside of the borders of the Sol Central Government."
 	icon_state = "iron_sol"
 
@@ -208,12 +208,12 @@
 	icon_state = "bronze_heart"
 
 /obj/item/clothing/accessory/medal/bronze/nanotrasen
-	name = "NanoTrasen sciences medal"
+	name = "\improper NanoTrasen sciences medal"
 	desc = "A bronze medal awarded to NanoTrasen employees for signifigant contributions to the fields of science or engineering."
 	icon_state = "bronze_nt"
 
 /obj/item/clothing/accessory/medal/bronze/sol
-	name = "Sol defensive operations medal"
+	name = "\improper Sol defensive operations medal"
 	desc = "A bronze medal awarded for members of the SCG for service defending the border regions."
 	icon_state = "bronze_sol"
 
@@ -229,12 +229,12 @@
 	icon_state = "silver_sword"
 
 /obj/item/clothing/accessory/medal/silver/nanotrasen
-	name = "NanoTrasen service medal"
+	name = "\improper NanoTrasen service medal"
 	desc = "A silver medal awarded to NanoTrasen employees for distinguished service in support of corporate interests."
 	icon_state = "silver_nt"
 
 /obj/item/clothing/accessory/medal/silver/sol
-	name = "Sol valor medal"
+	name = "\improper Sol valor medal"
 	desc = "A silver medal awarded for members of the SCG for acts of exceptional valor."
 	icon_state = "silver_sol"
 
@@ -260,12 +260,12 @@
 	icon_state = "gold_crest"
 
 /obj/item/clothing/accessory/medal/gold/nanotrasen
-	name = "NanoTrasen command medal"
+	name = "\improper NanoTrasen command medal"
 	desc = "A gold medal awarded to NanoTrasen employees for service as the Captain of a NanoTrasen facility, station, or vessel."
 	icon_state = "gold_nt"
 
 /obj/item/clothing/accessory/medal/gold/sol
-	name = "Sol sapientarian medal"
+	name = "\improper Sol sapientarian medal"
 	desc = "A gold medal awarded for members of the SCG for significant contributions to sapient rights."
 	icon_state = "gold_sol"
 

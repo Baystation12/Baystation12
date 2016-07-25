@@ -47,7 +47,6 @@
 	w_class = 4
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 75, bullet = 33, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
-	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.5
 
 /obj/item/clothing/suit/armor/riot/New()
@@ -62,7 +61,6 @@
 	blood_overlay_type = "armor"
 	w_class = 3
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	flags_inv = null
 
 /obj/item/clothing/suit/armor/riot/vest/New()
 	..()
@@ -76,7 +74,6 @@
 	w_class = 4
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 42, bullet = 75, laser = 42, energy = 10, bomb = 25, bio = 0, rad = 0)
-	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/suit/armor/bulletproof/New()
@@ -91,7 +88,6 @@
 	blood_overlay_type = "armor"
 	w_class = 3
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	flags_inv = null
 
 /obj/item/clothing/suit/armor/bulletproof/vest/New()
 	..()
@@ -105,7 +101,6 @@
 	w_class = 4
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 33, bullet = 33, laser = 77, energy = 50, bomb = 0, bio = 0, rad = 0)
-	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0
 
 /obj/item/clothing/suit/armor/laserproof/New()
@@ -120,7 +115,6 @@
 	blood_overlay_type = "armor"
 	w_class = 3
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	flags_inv = null
 
 /obj/item/clothing/suit/armor/laserproof/vest/New()
 	..()
@@ -298,12 +292,12 @@
 	armor = list(melee = 30, bullet = 15, laser = 40, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/nt
-	name = "NanoTrasen armored vest"
+	name = "\improper NanoTrasen armored vest"
 	desc = "A synthetic armor vest. This one is marked with the crest of NanoTrasen."
 	icon_state = "ntvest"
 
 /obj/item/clothing/suit/armor/vest/solgov
-	name = "Sol Central Government armored vest"
+	name = "\improper Sol Central Government armored vest"
 	desc = "A synthetic armor vest. This one is marked with the crest of the Sol Central Government."
 	icon_state = "solvest"
 
@@ -347,7 +341,7 @@
 	icon_state = "comwebvest"
 
 /obj/item/clothing/suit/storage/vest/solgov
-	name = "Sol Central Government heavy armored vest"
+	name = "\improper Sol Central Government heavy armored vest"
 	desc = "A synthetic armor vest with PEACEKEEPER printed in distinctive blue lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "solwebvest"
 
