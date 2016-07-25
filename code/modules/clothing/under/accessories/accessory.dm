@@ -260,12 +260,12 @@
 	icon_state = "gold_crest"
 
 /obj/item/clothing/accessory/medal/gold/nanotrasen
-	name = "NanoTrasen command medal"
+	name = "\improper NanoTrasen command medal"
 	desc = "A gold medal awarded to NanoTrasen employees for service as the Captain of a NanoTrasen facility, station, or vessel."
 	icon_state = "gold_nt"
 
 /obj/item/clothing/accessory/medal/gold/sol
-	name = "Sol sapientarian medal"
+	name = "\improper Sol sapientarian medal"
 	desc = "A gold medal awarded for members of the SCG for significant contributions to sapient rights."
 	icon_state = "gold_sol"
 
