@@ -319,7 +319,7 @@
 /obj/item/clothing/accessory/specialty/forensic
 	name = "forensics blazes"
 	desc = "Steel blazes denoting a forensic technician."
-	icon_state = "fleetspec_forensics"
+	icon_state = "fleetspec_forensic"
 
 /obj/item/clothing/accessory/specialty/atmos
 	name = "atmospherics blazes"
