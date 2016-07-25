@@ -17,22 +17,3 @@
 	emergency_shuttle_leaving_dock = "The Emergency Shuttle has left the station. Estimate %ETA% minutes until the shuttle docks at %dock_name%."
 	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive in approximately %ETA%"
 	emergency_shuttle_recall_message = "The emergency shuttle has been recalled."
-
-	holodeck_supported_programs = list(
-		"Empty Court"       = "emptycourt",
-		"Basketball Court"  = "basketball",
-		"Thunderdome Court" = "thunderdomecourt",
-		"Boxing Ring"       = "boxingcourt",
-		"Beach"             = "beach",
-		"Desert"            = "desert",
-		"Space"             = "space",
-		"Picnic Area"       = "picnicarea",
-		"Snow Field"        = "snowfield",
-		"Theatre"           = "theatre",
-		"Meeting Hall"      = "meetinghall",
-		"Courtroom"         = "courtroom"
-	)
-
-	holodeck_restricted_programs = list(
-		"Wildlife Simulation" = "wildlifecarp"
-	)
