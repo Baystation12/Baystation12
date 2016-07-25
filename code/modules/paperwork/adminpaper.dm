@@ -13,6 +13,9 @@
 	var/header = null
 	var/headerOn = TRUE
 
+	var/footer = null
+	var/footerOn = FALSE
+
 /obj/item/weapon/paper/admin/New()
 	..()
 	generateInteractions()
@@ -21,36 +24,52 @@
 /obj/item/weapon/paper/admin/proc/generateInteractions()
 	//clear first
 	interactions = null
-	interactions += "<HR>"
-	interactions += "<center><A href='?src=\ref[src];confirm=1'>Send fax</A> "
+
+	//Snapshot is crazy and likes putting each topic hyperlink on a seperate line from any other tags so it's nice and clean.
+	interactions += "<HR><center><font size= \"1\">The fax will transmit everything above this line</font><br>"
+	interactions += "<A href='?src=\ref[src];confirm=1'>Send fax</A> "
 	interactions += "<A href='?src=\ref[src];penmode=1'>Pen mode: [isCrayon ? "Crayon" : "Pen"]</A> "
 	interactions += "<A href='?src=\ref[src];cancel=1'>Cancel fax</A> "
 	interactions += "<BR>"
 	interactions += "<A href='?src=\ref[src];toggleheader=1'>Toggle Header</A> "
-	interactions += "<A href='?src=\ref[src];clear=1'>Clear page</A> </center>"
+	interactions += "<A href='?src=\ref[src];togglefooter=1'>Toggle Footer</A> "
+	interactions += "<A href='?src=\ref[src];clear=1'>Clear page</A> "
+	interactions += "</center>"
 
 /obj/item/weapon/paper/admin/proc/generateHeader()
 	var/originhash = md5("[origin]")
-	var/timehash = copytext(md5("[world.time]"),1,10)
+	var/challengehash = copytext(md5("[game_id]"),1,10) // changed to a hash of the game ID so it's more consistant but changes every round.
 	var/text = null
 	//TODO change logo based on who you're contacting.
 	text = "<center><img src = ntlogo.png></br>"
-	text += "<b>[origin] quantum uplink signed message</b><br>"
+	text += "<b>[origin] Quantum Uplink Signed Message</b><br>"
 	text += "<font size = \"1\">Encryption key: [originhash]<br>"
-	text += "Challenge: [timehash]<br></font></center><hr>"
+	text += "Challenge: [challengehash]<br></font></center><hr>"
 
 	header = text
+
+/obj/item/weapon/paper/admin/proc/generateFooter()
+	var/text = null
+
+	text = "<hr><font size= \"1\">"
+	text += "This transmission is intended only for the addressee and may contain confidential information. Any unauthorized disclosure is strictly prohibited. <br><br>"
+	text += "If this transmission is recieved in error, please notify both the sender and the office of [boss_name] Internal Affairs immediately so that corrective action may be taken."
+	text += "Failure to comply is a breach of regulation and may be prosecuted to the fullest extent of the law, where applicable."
+	text += "</font>"
+
+	footer = text
+
 
 /obj/item/weapon/paper/admin/proc/adminbrowse()
 	updateinfolinks()
 	generateHeader()
-	usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[header][info_links][stamps][interactions]</BODY></HTML>", "window=[name];can_close=0")
+	generateFooter()
+	updateDisplay()
 
 obj/item/weapon/paper/admin/proc/updateDisplay()
-	if (headerOn)
-		usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[header][info_links][stamps][interactions]</BODY></HTML>", "window=[name];can_close=0")
-	else
-		usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links][stamps][interactions]</BODY></HTML>", "window=[name];can_close=0")
+	usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[headerOn ? header : ""][info_links][stamps][footerOn ? footer : ""][interactions]</BODY></HTML>", "window=[name];can_close=0")
+
+
 
 /obj/item/weapon/paper/admin/Topic(href, href_list)
 	if(href_list["write"])
@@ -94,7 +113,9 @@ obj/item/weapon/paper/admin/proc/updateDisplay()
 			if("Yes")
 				if(headerOn)
 					info = header + info
-					updateinfolinks()
+				if(footerOn)
+					info += footer
+				updateinfolinks()
 				usr << browse(null, "window=[name]")
 				admindatum.faxCallback(src, destination)
 		return
@@ -117,6 +138,11 @@ obj/item/weapon/paper/admin/proc/updateDisplay()
 
 	if(href_list["toggleheader"])
 		headerOn = !headerOn
+		updateDisplay()
+		return
+
+	if(href_list["togglefooter"])
+		footerOn = !footerOn
 		updateDisplay()
 		return
 
