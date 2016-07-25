@@ -113,8 +113,8 @@
 //CIG PACK//
 ////////////
 /obj/item/weapon/storage/fancy/cigarettes
-	name = "cigarette packet"
-	desc = "The most popular brand of Space Cigarettes, sponsors of the Space Olympics."
+	name = "pack of Trans-Stellar Duty-frees"
+	desc = "A ubiquitous brand of cigarettes, found in the facilities of every major spacefaring corporation in the universe. As mild and flavorless as it gets."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigpacket"
 	item_state = "cigpacket"
@@ -173,18 +173,53 @@
 		..()
 
 /obj/item/weapon/storage/fancy/cigarettes/dromedaryco
-	name = "\improper DromedaryCo packet"
-	desc = "A packet of six imported DromedaryCo cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\"."
+	name = "pack of Dromedary Co. cigarettes"
+	desc = "A packet of six imported Dromedary Company cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\"."
 	icon_state = "Dpacket"
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat
-	name = "\improper AcmeCo packet"
-	desc = "A packet of six AcmeCo cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
+	name = "pack of Acme Co. cigarettes"
+	desc = "A packet of six Acme Company cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
 	icon_state = "Bpacket"
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat/New()
 	..()
 	fill_cigarre_package(src,list("fuel" = 4))
+
+// New exciting ways to kill your lungs! - Earthcrusher //
+
+/obj/item/weapon/storage/fancy/cigarettes/luckystars
+	name = "pack of Lucky Stars"
+	desc = "A mellow blend made from synthetic, pod-grown tobacco. The commercial jingle is guaranteed to get stuck in your head."
+	icon_state = "LSpacket"
+	item_state = "Dpacket" //I actually don't mind cig packs not showing up in the hand. whotf doesn't just keep them in their pockets/coats //
+
+/obj/item/weapon/storage/fancy/cigarettes/jerichos
+	name = "pack of Jerichos"
+	desc = "Typically seen dangling from the lips of Martian soldiers and border world hustlers. Tastes like hickory smoke, feels like warm liquid death down your lungs."
+	icon_state = "Jpacket"
+	item_state = "Dpacket"
+
+/obj/item/weapon/storage/fancy/cigarettes/menthols
+	name = "pack of Temperamento Menthols"
+	desc = "With a sharp and natural organic menthol flavor, these Temperamentos are a favorite of NDV crews. Hardly anyone knows they make 'em in non-menthol!"
+	icon_state = "TMpacket"
+	item_state = "Dpacket"
+
+	key_type = /obj/item/clothing/mask/smokable/cigarette/menthol
+	startswith = list(/obj/item/clothing/mask/smokable/cigarette/menthol = 6)
+
+/obj/item/weapon/storage/fancy/cigarettes/carcinomas
+	name = "pack of Carcinoma Angels"
+	desc = "This unknown brand was slated for the chopping block, until they were publicly endorsed by an old Earthling gonzo journalist. The rest is history. They sell a variety for cats, too. Yes, actual cats."
+	icon_state = "CApacket"
+	item_state = "Dpacket"
+
+/obj/item/weapon/storage/fancy/cigarettes/professionals
+	name = "pack of Professional 120s"
+	desc = "Let's face it - if you're smoking these, you're either trying to look upper-class or you're 80 years old. That's the only excuse. They taste disgusting, too."
+	icon_state = "P100packet"
+	item_state = "Dpacket"
 
 /obj/item/weapon/storage/fancy/cigar
 	name = "cigar case"
