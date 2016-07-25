@@ -1446,7 +1446,7 @@ datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies
 
 
 	if(destination.recievefax(P))
-		src.owner << "\blue Message reply to transmitted successfully."
+		src.owner << "<span class='notice'>Message reply to transmitted successfully.</span>"
 		if(P.sender) // sent as a reply
 			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(P.sender)]")
 			for(var/client/C in admins)
@@ -1459,7 +1459,7 @@ datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies
 					C << "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] has sent a fax message to [destination.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>"
 
 	else
-		src.owner << "\red Message reply failed."
+		src.owner << "<span class='warning'>Message reply failed.</span>"
 
 	spawn(100)
 		qdel(P)
