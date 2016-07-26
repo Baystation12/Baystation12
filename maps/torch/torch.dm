@@ -3,6 +3,8 @@
 	#include "torch_areas.dm"
 	#include "torch_shuttles.dm"
 	#include "torch_unit_testing.dm"
+	#include "torch_ranks.dm"
+	#include "torch_occupation.dm"
 	#include "torch_jobs.dm"
 	#include "torch_holodecks.dm"
 
