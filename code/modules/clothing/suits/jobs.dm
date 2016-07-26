@@ -202,6 +202,17 @@
 	icon_open = "ems_jacket_open"
 	icon_closed = "ems_jacket_closed"
 
+/obj/item/clothing/suit/surgicalapron
+	name = "surgical apron"
+	desc = "A sterile blue apron for performing surgery."
+	icon_state = "surgical"
+	item_state = "surgical"
+	blood_overlay_type = "armor"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	allowed = list(/obj/item/stack/medical, /obj/item/weapon/reagent_containers/dropper, /obj/item/weapon/reagent_containers/hypospray, /obj/item/weapon/reagent_containers/syringe, \
+	/obj/item/device/healthanalyzer, /obj/item/device/flashlight, /obj/item/device/radio, /obj/item/weapon/tank/emergency,/obj/item/weapon/scalpel,/obj/item/weapon/retractor,/obj/item/weapon/hemostat, \
+	/obj/item/weapon/cautery,/obj/item/weapon/bonegel,/obj/item/weapon/FixOVein)
+
 //Mime
 /obj/item/clothing/suit/suspenders
 	name = "suspenders"
