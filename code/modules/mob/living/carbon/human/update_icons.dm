@@ -335,7 +335,10 @@ var/global/list/damage_icon_parts = list()
 		overlays_standing[UNDERWEAR_LAYER] = list()
 		for(var/category in all_underwear)
 			var/datum/category_item/underwear/UWI = all_underwear[category]
-			overlays_standing[UNDERWEAR_LAYER] += UWI.generate_image(all_underwear_metadata[category])
+			var/image/standing = UWI.generate_image(all_underwear_metadata[category])
+			if(standing)
+				standing.appearance_flags = RESET_COLOR
+				overlays_standing[UNDERWEAR_LAYER] += standing
 
 	if(update_icons)   update_icons()
 
@@ -499,6 +502,7 @@ var/global/list/damage_icon_parts = list()
 			for(var/obj/item/clothing/accessory/A in under.accessories)
 				standing.overlays |= A.get_mob_overlay(src)
 
+		standing.appearance_flags = RESET_COLOR
 		overlays_standing[UNIFORM_LAYER]	= standing
 	else
 		overlays_standing[UNIFORM_LAYER]	= null
@@ -517,6 +521,7 @@ var/global/list/damage_icon_parts = list()
 				standing = image("icon" = wear_id.sprite_sheets[species.get_bodytype()], "icon_state" = "[icon_state]")
 			else
 				standing = image("icon" = 'icons/mob/mob.dmi', "icon_state" = "id")
+			standing.appearance_flags = RESET_COLOR
 			overlays_standing[ID_LAYER] = standing
 		else
 			overlays_standing[ID_LAYER]	= null
@@ -547,6 +552,7 @@ var/global/list/damage_icon_parts = list()
 			standing.overlays	+= bloodsies
 		gloves.screen_loc = ui_gloves
 		standing.color = gloves.color
+		standing.appearance_flags = RESET_COLOR
 		overlays_standing[GLOVES_LAYER]	= standing
 	else
 		if(blood_DNA)
@@ -568,6 +574,7 @@ var/global/list/damage_icon_parts = list()
 		else
 			standing = image("icon" = 'icons/mob/eyes.dmi', "icon_state" = "[glasses.icon_state]")
 		standing.color = glasses.color
+		standing.appearance_flags = RESET_COLOR
 		overlays_standing[GLASSES_LAYER] = standing
 
 	else
@@ -597,7 +604,7 @@ var/global/list/damage_icon_parts = list()
 				standing = image("icon" = 'icons/mob/ears.dmi', "icon_state" = "[t_type]")
 			standing.color = l_ear.color
 			both.overlays += standing
-			
+
 		if(r_ear)
 			var/image/standing
 			var/t_type = r_ear.icon_state
@@ -611,7 +618,7 @@ var/global/list/damage_icon_parts = list()
 				standing = image("icon" = 'icons/mob/ears.dmi', "icon_state" = "[t_type]")
 			standing.color = r_ear.color
 			both.overlays += standing
-			
+		both.appearance_flags = RESET_COLOR
 		overlays_standing[EARS_LAYER] = both
 
 	else
@@ -634,11 +641,13 @@ var/global/list/damage_icon_parts = list()
 			bloodsies.color = shoes.blood_color
 			standing.overlays += bloodsies
 		standing.color = shoes.color
+		standing.appearance_flags = RESET_COLOR
 		overlays_standing[SHOES_LAYER] = standing
 	else
 		if(feet_blood_DNA)
 			var/image/bloodsies = image("icon" = species.blood_mask, "icon_state" = "shoeblood")
 			bloodsies.color = feet_blood_color
+			bloodsies.appearance_flags = RESET_COLOR
 			overlays_standing[SHOES_LAYER] = bloodsies
 		else
 			overlays_standing[SHOES_LAYER] = null
@@ -701,6 +710,7 @@ var/global/list/damage_icon_parts = list()
 				standing.overlays |= light_overlay_cache[cache_key]
 
 		standing.color = head.color
+		standing.appearance_flags = RESET_COLOR
 		overlays_standing[HEAD_LAYER] = standing
 
 	else
@@ -736,6 +746,7 @@ var/global/list/damage_icon_parts = list()
 					standing.overlays	+= image("icon" = 'icons/mob/belt.dmi', "icon_state" = "[i_state]")
 
 		standing.color = belt.color
+		standing.appearance_flags = RESET_COLOR
 
 		overlays_standing[belt_layer] = standing
 	else
@@ -779,6 +790,7 @@ var/global/list/damage_icon_parts = list()
 			for(var/obj/item/clothing/accessory/A in suit.accessories)
 				standing.overlays |= A.get_mob_overlay(src)
 
+		standing.appearance_flags = RESET_COLOR
 		overlays_standing[SUIT_LAYER]	= standing
 		update_tail_showing(0)
 
@@ -816,6 +828,7 @@ var/global/list/damage_icon_parts = list()
 			var/image/bloodsies = image("icon" = species.blood_mask, "icon_state" = "maskblood")
 			bloodsies.color = wear_mask.blood_color
 			standing.overlays	+= bloodsies
+		standing.appearance_flags = RESET_COLOR
 		overlays_standing[FACEMASK_LAYER]	= standing
 	else
 		overlays_standing[FACEMASK_LAYER]	= null
@@ -853,6 +866,7 @@ var/global/list/damage_icon_parts = list()
 		//apply color
 		var/image/standing = image(icon = overlay_icon, icon_state = overlay_state)
 		standing.color = back.color
+		standing.appearance_flags = RESET_COLOR
 
 		//create the image
 		overlays_standing[BACK_LAYER] = standing
@@ -883,6 +897,7 @@ var/global/list/damage_icon_parts = list()
 			standing = image("icon" = handcuffed.sprite_sheets[species.get_bodytype()], "icon_state" = "handcuff1")
 		else
 			standing = image("icon" = 'icons/mob/mob.dmi', "icon_state" = "handcuff1")
+		standing.appearance_flags = RESET_COLOR
 		overlays_standing[HANDCUFF_LAYER] = standing
 
 	else
@@ -899,6 +914,7 @@ var/global/list/damage_icon_parts = list()
 			standing = image("icon" = legcuffed.sprite_sheets[species.get_bodytype()], "icon_state" = "legcuff1")
 		else
 			standing = image("icon" = 'icons/mob/mob.dmi', "icon_state" = "legcuff1")
+		standing.appearance_flags = RESET_COLOR
 		overlays_standing[LEGCUFF_LAYER] = standing
 
 		if(src.m_intent != "walk")
@@ -937,6 +953,7 @@ var/global/list/damage_icon_parts = list()
 		//apply color
 		var/image/standing = image(icon = t_icon, icon_state = t_state)
 		standing.appearance_flags = RESET_ALPHA|RESET_COLOR
+		standing.color = r_hand.color
 
 		overlays_standing[R_HAND_LAYER] = standing
 
@@ -973,6 +990,7 @@ var/global/list/damage_icon_parts = list()
 		//apply color
 		var/image/standing = image(icon = t_icon, icon_state = t_state)
 		standing.appearance_flags = RESET_ALPHA|RESET_COLOR
+		standing.color = l_hand.color
 
 		overlays_standing[L_HAND_LAYER] = standing
 
@@ -1075,6 +1093,7 @@ var/global/list/damage_icon_parts = list()
 	if(wear_suit)
 		if(wear_suit.icon_state in C.IconStates())
 			standing = image("icon" = C, "icon_state" = "[wear_suit.icon_state]")
+			standing.appearance_flags = RESET_COLOR
 
 	overlays_standing[COLLAR_LAYER]	= standing
 
@@ -1084,7 +1103,9 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_fire(var/update_icons=1)
 	overlays_standing[FIRE_LAYER] = null
 	if(on_fire)
-		overlays_standing[FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"=FIRE_LAYER)
+		var/image/standing = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"=FIRE_LAYER)
+		standing.appearance_flags = RESET_COLOR
+		overlays_standing[FIRE_LAYER] = standing
 
 	if(update_icons)   update_icons()
 
@@ -1095,6 +1116,7 @@ var/global/list/damage_icon_parts = list()
 		if(E.open)
 			var/image/I = image("icon"='icons/mob/surgery.dmi', "icon_state"="[E.name][round(E.open)]", "layer"=-SURGERY_LEVEL)
 			total.overlays += I
+	total.appearance_flags = RESET_COLOR
 	overlays_standing[SURGERY_LEVEL] = total
 	if(update_icons)   update_icons()
 

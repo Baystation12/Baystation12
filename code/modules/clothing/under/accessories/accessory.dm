@@ -25,6 +25,7 @@
 			inv_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
 		else
 			inv_overlay = image(icon = INV_ACCESSORIES_DEF_ICON, icon_state = tmp_icon_state, dir = SOUTH)
+		inv_overlay.appearance_flags = RESET_COLOR
 	return inv_overlay
 
 /obj/item/clothing/accessory/proc/get_mob_overlay(var/mob/user_mob)
@@ -40,10 +41,13 @@
 		if(sprite_sheets[bodytype])
 			use_sprite_sheet = sprite_sheets[bodytype]
 
+		var/image/mob_over
 		if(icon_override && ("[tmp_icon_state]_mob" in icon_states(icon_override)))
-			mob_overlay[bodytype] = image(icon = icon_override, icon_state = "[tmp_icon_state]_mob")
+			mob_over = image(icon = icon_override, icon_state = "[tmp_icon_state]_mob")
 		else
-			mob_overlay[bodytype] = image(icon = use_sprite_sheet, icon_state = tmp_icon_state)
+			mob_over = image(icon = use_sprite_sheet, icon_state = tmp_icon_state)
+		mob_over.appearance_flags = RESET_COLOR
+		mob_overlay[bodytype] = mob_over
 	return mob_overlay[bodytype]
 
 //when user attached an accessory to S
