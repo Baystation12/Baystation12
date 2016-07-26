@@ -91,15 +91,13 @@
 		if(!target || !istype(target))
 			return
 
-		message_admins("<span class='notice'>[key_name_admin(usr)] [target.canmove ? "locked down" : "released"] [target.name]!</span>")
-		log_game("[key_name(usr)] [target.canmove ? "locked down" : "released"] [target.name]!")
-		target.canmove = !target.canmove
-		if (target.lockcharge)
-			target.lockcharge = !target.lockcharge
-			target << "Your lockdown has been lifted!"
-		else
-			target.lockcharge = !target.lockcharge
-			target << "You have been locked down!"
+		if(target.SetLockdown(!target.lockcharge))
+			message_admins("<span class='notice'>[key_name_admin(usr)] [target.lockcharge ? "locked down" : "released"] [target.name]!</span>")
+			log_game("[key_name(usr)] [target.lockcharge ? "locked down" : "released"] [target.name]!")
+			if(target.lockcharge)
+				target << "<span class='danger'>You have been locked down!</span>"
+			else
+				target << "<span class='notice'>Your lockdown has been lifted!</span>"
 
 	// Remotely hacks the cyborg. Only antag AIs can do this and only to linked cyborgs.
 	else if (href_list["hack"])
