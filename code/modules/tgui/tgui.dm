@@ -262,6 +262,7 @@
 /datum/tgui/Topic(href, href_list)
 	if(user != usr)
 		return // Something is not right here.
+	user.AddTopicPrint(src_object.ui_host()) // Add a print whenever we attempt to interact with an UI
 
 	var/action = href_list["action"]
 	var/params = href_list; params -= "action"

@@ -144,8 +144,6 @@
 
 	var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
 
-	src.add_fingerprint(usr)
-
 	switch(action)
 		if("send")
 			if(shuttle.at_station())
