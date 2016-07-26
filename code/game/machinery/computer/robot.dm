@@ -77,11 +77,11 @@
 			return
 
 		if(isAI(user) && (target.connected_ai != user))
-			user << "Access Denied. This robot is not linked to you."
+			user << "<span class='warning'>Access Denied. This robot is not linked to you.</span>"
 			return
 
 		if(isrobot(user))
-			user << "Access Denied."
+			user << "<span class='warning'>Access Denied.</span>"
 			return
 
 		var/choice = input("Really [target.lockcharge ? "unlock" : "lockdown"] [target.name] ?") in list ("Yes", "No")
@@ -98,6 +98,8 @@
 				target << "<span class='danger'>You have been locked down!</span>"
 			else
 				target << "<span class='notice'>Your lockdown has been lifted!</span>"
+		else
+			user << "<span class='warning'>ERROR: Lockdown attempt failed.</span>"
 
 	// Remotely hacks the cyborg. Only antag AIs can do this and only to linked cyborgs.
 	else if (href_list["hack"])
