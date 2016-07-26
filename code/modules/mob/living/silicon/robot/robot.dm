@@ -931,6 +931,8 @@
 	// They stay locked down if their wire is cut.
 	if(wires.LockedCut())
 		state = 1
+	else if(has_zeroth_law())
+		state = 0
 
 	if(lockcharge != state)
 		lockcharge = state
@@ -1073,6 +1075,7 @@
 				var/time = time2text(world.realtime,"hh:mm:ss")
 				lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
 				set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
+				SetLockdown(0)
 				. = 1
 				spawn()
 					src << "<span class='danger'>ALERT: Foreign software detected.</span>"
