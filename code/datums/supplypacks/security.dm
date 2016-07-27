@@ -403,13 +403,13 @@
 /decl/hierarchy/supply_pack/security/tactical
 	name = "Tactical suits"
 	contains = list(/obj/item/clothing/under/tactical,
-					/obj/item/clothing/suit/armor/tactical,
+					/obj/item/clothing/suit/storage/vest/tactical,
 					/obj/item/clothing/head/helmet/tactical,
 					/obj/item/clothing/mask/balaclava/tactical,
 					/obj/item/clothing/glasses/sunglasses/sechud/tactical,
 					/obj/item/weapon/storage/belt/security/tactical,
-					/obj/item/clothing/shoes/jackboots,
-					/obj/item/clothing/gloves/black)
+					/obj/item/clothing/shoes/tactical,
+					/obj/item/clothing/gloves/tactical)
 	cost = 45
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Tactical Suit Locker"

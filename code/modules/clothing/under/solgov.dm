@@ -249,7 +249,7 @@
 /obj/item/clothing/under/dress/marine/command
 	name = "marine command dress uniform"
 	desc = "The dress uniform of the SCG Marine Corps, even classier in gold."
-	icon_state = "blackress_com"
+	icon_state = "blackdress_com"
 	worn_state = "blackdress_com"
 
 
