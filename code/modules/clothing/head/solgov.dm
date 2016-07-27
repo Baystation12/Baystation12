@@ -12,7 +12,7 @@
 	icon_state = "expeditionsoft"
 
 /obj/item/clothing/head/soft/sol/fleet
-	name = "\improper Expeditionary Corps cap"
+	name = "fleet cap"
 	desc = "It's a navy blue ballcap with the SCG Fleet crest."
 	icon_state = "fleetsoft"
 
