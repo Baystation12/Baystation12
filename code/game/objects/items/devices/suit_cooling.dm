@@ -8,6 +8,7 @@
 	w_class = 4
 	icon = 'icons/obj/suitcooler.dmi'
 	icon_state = "suitcooler0"
+	item_state = "welderpack"			// A placeholder icon, until someone gets to make an actual one.
 	slot_flags = SLOT_BACK
 
 	//copied from tank.dm
@@ -35,7 +36,7 @@
 	if (!on || !cell)
 		return
 
-	if (!is_on_back())
+	if (!is_in_slot())
 		return
 
 	var/mob/living/carbon/human/H = loc
@@ -55,14 +56,14 @@
 	if(cell.charge <= 0)
 		turn_off()
 
-// Checks whether the cooling unit is being worn on the back slot.
+// Checks whether the cooling unit is being worn on the back/suit slot.
 // That way you can't carry it in your hands while it's running to cool yourself down.
-/obj/item/device/suit_cooling_unit/proc/is_on_back()
+/obj/item/device/suit_cooling_unit/proc/is_in_slot()
 	var/mob/living/carbon/human/H = loc
 	if(!istype(H))
 		return 0
 
-	return (H.back == src)
+	return (H.back == src) || (H.s_store == src)
 
 /obj/item/device/suit_cooling_unit/proc/turn_on()
 	if(!cell)
