@@ -87,7 +87,7 @@ obj/item/weapon/paper/admin/proc/updateDisplay()
 
 		//t = html_encode(t)
 		t = replacetext(t, "\n", "<BR>")
-		t = parsepencode(t, isCrayon) // Encode everything from pencode to html
+		t = parsepencode(t,,, isCrayon) // Encode everything from pencode to html
 
 
 		if(fields > 50)//large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
@@ -145,78 +145,6 @@ obj/item/weapon/paper/admin/proc/updateDisplay()
 		footerOn = !footerOn
 		updateDisplay()
 		return
-
-
-
-
-/obj/item/weapon/paper/admin/parsepencode(var/t, var/iscrayon = 0, var/sign = 1)
-//	t = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
-
-	t = replacetext(t, "\[center\]", "<center>")
-	t = replacetext(t, "\[/center\]", "</center>")
-	t = replacetext(t, "\[br\]", "<BR>")
-	t = replacetext(t, "\[b\]", "<B>")
-	t = replacetext(t, "\[/b\]", "</B>")
-	t = replacetext(t, "\[i\]", "<I>")
-	t = replacetext(t, "\[/i\]", "</I>")
-	t = replacetext(t, "\[u\]", "<U>")
-	t = replacetext(t, "\[/u\]", "</U>")
-	t = replacetext(t, "\[time\]", "[stationtime2text()]")
-	t = replacetext(t, "\[date\]", "[stationdate2text()]")
-	t = replacetext(t, "\[large\]", "<font size=\"4\">")
-	t = replacetext(t, "\[/large\]", "</font>")
-	if(!sign)
-		t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[get_signature()]</i></font>")
-	t = replacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
-
-	t = replacetext(t, "\[h1\]", "<H1>")
-	t = replacetext(t, "\[/h1\]", "</H1>")
-	t = replacetext(t, "\[h2\]", "<H2>")
-	t = replacetext(t, "\[/h2\]", "</H2>")
-	t = replacetext(t, "\[h3\]", "<H3>")
-	t = replacetext(t, "\[/h3\]", "</H3>")
-
-	if(!iscrayon)
-		t = replacetext(t, "\[*\]", "<li>")
-		t = replacetext(t, "\[hr\]", "<HR>")
-		t = replacetext(t, "\[small\]", "<font size = \"1\">")
-		t = replacetext(t, "\[/small\]", "</font>")
-		t = replacetext(t, "\[list\]", "<ul>")
-		t = replacetext(t, "\[/list\]", "</ul>")
-		t = replacetext(t, "\[table\]", "<table border=1 cellspacing=0 cellpadding=3 style='border: 1px solid black;'>")
-		t = replacetext(t, "\[/table\]", "</td></tr></table>")
-		t = replacetext(t, "\[grid\]", "<table>")
-		t = replacetext(t, "\[/grid\]", "</td></tr></table>")
-		t = replacetext(t, "\[row\]", "</td><tr>")
-		t = replacetext(t, "\[cell\]", "<td>")
-		t = replacetext(t, "\[logo\]", "<img src = ntlogo.png>")
-
-		t = "<font face=\"[deffont]\" color=\"black\">[t]</font>"
-	else // If it is a crayon, and he still tries to use these, make them empty!
-		t = replacetext(t, "\[*\]", "")
-		t = replacetext(t, "\[hr\]", "")
-		t = replacetext(t, "\[small\]", "")
-		t = replacetext(t, "\[/small\]", "")
-		t = replacetext(t, "\[list\]", "")
-		t = replacetext(t, "\[/list\]", "")
-		t = replacetext(t, "\[table\]", "")
-		t = replacetext(t, "\[/table\]", "")
-		t = replacetext(t, "\[row\]", "")
-		t = replacetext(t, "\[cell\]", "")
-		t = replacetext(t, "\[logo\]", "")
-
-		t = "<font face=\"[crayonfont]\" color=\"black\"><b>[t]</b></font>"
-
-//Count the fields
-	var/laststart = 1
-	while(1)
-		var/i = findtext(t, "<span class=\"paper_field\">", laststart)	//</span>
-		if(i==0)
-			break
-		laststart = i+1
-		fields++
-
-	return t
 
 /obj/item/weapon/paper/admin/get_signature()
 	return input(usr, "Enter the name you wish to sign the paper with (will prompt for multiple entries, in order of entry)", "Signature") as text|null
