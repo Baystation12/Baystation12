@@ -57,6 +57,14 @@
 	permeability_coefficient = 0.05
 	siemens_coefficient = 0.50 //thick work gloves
 
+/obj/item/clothing/gloves/work
+	desc = "These brown tactical gloves are made from a durable synthetic."
+	name = "work gloves"
+	icon_state = "work"
+	item_state = "wgloves"
+	siemens_coefficient = 0.50
+	armor = list(melee = 10, bullet = 10, laser = 10, energy = 5, bomb = 0, bio = 0, rad = 0)
+
 /obj/item/clothing/gloves/tactical
 	desc = "These brown tactical gloves are made from a durable synthetic, and have hardened knuckles."
 	name = "tactical gloves"

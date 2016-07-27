@@ -79,7 +79,7 @@
 	icon_state = "greengarrisoncap"
 
 /obj/item/clothing/head/service/marine/garrison/command
-	name = "marine officer's wheel cover"
+	name = "marine officer's garrison cap"
 	desc = "A green garrison cap belonging to the SCG Marine Corps. This one has a gold pin."
 	icon_state = "greengarrisoncap_com"
 
@@ -104,7 +104,7 @@
 /obj/item/clothing/head/dress/expedition
 	name = "expedition dress cap"
 	desc = "A peaked grey dress uniform cap belonging to the SCG Expeditionary Corps."
-	icon_state = "whitepeakcap"
+	icon_state = "greydresscap"
 
 /obj/item/clothing/head/dress/expedition/command
 	name = "expedition command dress cap"
