@@ -9,9 +9,8 @@
 	var/slot = "decor"
 	var/obj/item/clothing/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
-	var/list/mob_overlay = list()
 	var/overlay_state = null
-
+	icon_onmob = INV_ACCESSORIES_DEF_ICON
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ties.dmi') // for species where human variants do not fit
 
 /obj/item/clothing/accessory/Destroy()
@@ -28,27 +27,12 @@
 		inv_overlay.appearance_flags = RESET_COLOR
 	return inv_overlay
 
-/obj/item/clothing/accessory/proc/get_mob_overlay(var/mob/user_mob)
-	var/bodytype = "Default"
-	if(ishuman(user_mob))
-		var/mob/living/carbon/human/user_human = user_mob
-		if(user_human.species.get_bodytype() in sprite_sheets)
-			bodytype = user_human.species.get_bodytype()
-
-	if(!mob_overlay[bodytype])
-		var/tmp_icon_state = overlay_state? overlay_state : icon_state
-		var/use_sprite_sheet = INV_ACCESSORIES_DEF_ICON
-		if(sprite_sheets[bodytype])
-			use_sprite_sheet = sprite_sheets[bodytype]
-
-		var/image/mob_over
-		if(icon_override && ("[tmp_icon_state]_mob" in icon_states(icon_override)))
-			mob_over = image(icon = icon_override, icon_state = "[tmp_icon_state]_mob")
-		else
-			mob_over = image(icon = use_sprite_sheet, icon_state = tmp_icon_state)
-		mob_over.appearance_flags = RESET_COLOR
-		mob_overlay[bodytype] = mob_over
-	return mob_overlay[bodytype]
+/obj/item/clothing/accessory/get_mob_overlay(var/mob/user_mob)
+	var/image/ret = ..()
+	ret.icon_state = overlay_state? overlay_state : icon_state
+	if(icon_override && ("[ret.icon_state]_mob" in icon_states(icon_override)))
+		ret.icon_state = "[ret.icon_state]_mob"
+	return ret
 
 //when user attached an accessory to S
 /obj/item/clothing/accessory/proc/on_attached(var/obj/item/clothing/S, var/mob/user)
