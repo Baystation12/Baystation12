@@ -180,8 +180,6 @@
 	if(..())
 		return TRUE
 
-	src.add_fingerprint(usr)
-
 	if(!src.allowed(usr))
 		return TRUE
 
