@@ -323,6 +323,9 @@
 					a_intent = I_GRAB
 					if(invalidFeedTarget(Target))
 						a_intent = I_HURT //just glomp them instead
+						Atkcool = 1
+						spawn(45)
+							Atkcool = 0
 					UnarmedAttack(Target)
 
 		else if(Target in view(7, src))
