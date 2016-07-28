@@ -51,6 +51,7 @@
 	var/zoom = 0 //1 if item is actively being used to zoom. For scoped guns and binoculars.
 
 	var/icon_override = null  //Used to override hardcoded clothing dmis in human clothing proc.
+	var/icon_onmob = INV_BACK_DEF_ICON  //Used on mob if no species-specific spritesheets are defined.
 
 	//** These specify item/icon overrides for _slots_
 
@@ -59,7 +60,11 @@
 	// Used to specify the icon file to be used when the item is worn. If not set the default icon for that slot will be used.
 	// If icon_override or sprite_sheets are set they will take precendence over this, assuming they apply to the slot in question.
 	// Only slot_l_hand/slot_r_hand are implemented at the moment. Others to be implemented as needed.
-	var/list/item_icons = list()
+	var/list/item_icons = list(
+		slot_l_hand_str = INV_L_HAND_DEF_ICON,
+		slot_r_hand_str = INV_R_HAND_DEF_ICON,
+		slot_belt_str = 'icons/mob/belt.dmi'
+		)
 
 	//** These specify item/icon overrides for _species_
 
@@ -680,3 +685,37 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
+
+/obj/item/proc/get_mob_overlay(mob/user_mob, slot)
+	var/bodytype = "Default"
+	if(ishuman(user_mob))
+		var/mob/living/carbon/human/user_human = user_mob
+		bodytype = user_human.species.get_bodytype()
+
+	var/mob_state
+	if(item_state_slots && item_state_slots[slot])
+		mob_state = item_state_slots[slot]
+	else if (item_state)
+		mob_state = item_state
+	else
+		mob_state = icon_state
+
+	var/mob_icon
+	if(icon_override)
+		mob_icon = icon_override
+		if(slot == 	slot_l_hand_str || slot == slot_l_ear_str)
+			mob_state = "[mob_state]_l"
+		if(slot == 	slot_r_hand_str || slot == slot_r_ear_str)
+			mob_state = "[mob_state]_r"
+	else if(sprite_sheets && sprite_sheets[bodytype])
+		if(slot == slot_l_ear)
+			mob_state = "[mob_state]_l"
+		if(slot == slot_r_ear)
+			mob_state = "[mob_state]_r"
+		mob_icon = sprite_sheets[bodytype]
+	else if(item_icons && item_icons[slot])
+		mob_icon = item_icons[slot]
+	else
+		mob_icon = icon_onmob
+
+	return overlay_image(mob_icon,mob_state,color,RESET_COLOR)

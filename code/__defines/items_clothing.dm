@@ -97,6 +97,18 @@
 #define slot_w_uniform_str	"slot_w_uniform"
 #define slot_head_str		"slot_head"
 #define slot_wear_suit_str	"slot_suit"
+#define slot_l_ear_str      "slot_l_ear"
+#define slot_r_ear_str      "slot_r_ear"
+#define slot_belt_str       "slot_belt"
+#define slot_shoes_str      "slot_shoes"
+#define slot_head_str      	"slot_head"
+#define slot_wear_mask_str 	"slot_wear_mask"
+#define slot_handcuffed_str "slot_handcuffed"
+#define slot_legcuffed_str "slot_legcuffed"
+#define slot_wear_mask_str 	"slot_wear_mask"
+#define slot_wear_id_str  	"slot_wear_id"
+#define slot_gloves_str  	"slot_gloves"
+#define slot_glasses_str  	"slot_glasses"
 
 // Bitflags for clothing parts.
 #define HEAD        0x1

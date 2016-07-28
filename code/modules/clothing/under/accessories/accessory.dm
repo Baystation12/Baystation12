@@ -13,6 +13,7 @@
 	var/overlay_state = null
 
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ties.dmi') // for species where human variants do not fit
+	icon_onmob = 'icons/mob/ties.dmi'
 
 /obj/item/clothing/accessory/Destroy()
 	on_removed()
@@ -27,7 +28,7 @@
 			inv_overlay = image(icon = INV_ACCESSORIES_DEF_ICON, icon_state = tmp_icon_state, dir = SOUTH)
 	return inv_overlay
 
-/obj/item/clothing/accessory/proc/get_mob_overlay(var/mob/user_mob)
+/obj/item/clothing/accessory/get_mob_overlay(var/mob/user_mob)
 	var/bodytype = "Default"
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob

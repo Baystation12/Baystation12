@@ -35,6 +35,7 @@
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/items/lefthand_guns.dmi',
 		slot_r_hand_str = 'icons/mob/items/righthand_guns.dmi',
+		slot_belt_str = 'icons/mob/belt.dmi'
 		)
 	icon_state = "detective"
 	item_state = "gun"

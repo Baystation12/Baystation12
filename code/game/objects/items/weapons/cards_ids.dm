@@ -119,6 +119,12 @@ var/const/NO_EMAG_ACT = -50
 	var/dorm = 0			// determines if this ID has claimed a dorm already
 
 	var/job_access_type     // Job type to acquire access rights from, if any
+	icon_onmob = 'icons/mob/mob.dmi'
+
+/obj/item/weapon/card/id/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	ret.icon_state = "id"
+	return ret
 
 /obj/item/weapon/card/id/New()
 	..()

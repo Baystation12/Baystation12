@@ -17,6 +17,11 @@
 	layer = 4
 	slot_flags = SLOT_HEAD
 	body_parts_covered = HEAD
+	item_icons = list(
+		slot_l_hand_str = INV_L_HAND_DEF_ICON,
+		slot_r_hand_str = INV_R_HAND_DEF_ICON,
+		slot_head_str = 'icons/mob/head.dmi'
+		)
 	attack_verb = list("bapped")
 
 	var/info		//What's actually written on the paper.

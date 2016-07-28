@@ -18,6 +18,15 @@
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/handcuffs.dmi')
+	icon_onmob = 'icons/mob/mob.dmi'
+
+/obj/item/weapon/handcuffs/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(slot == slot_handcuffed_str)
+		ret.icon_state = "handcuff1"
+	if(slot == slot_legcuffed_str)
+		ret.icon_state = "legcuff1"
+	return ret
 
 /obj/item/weapon/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
 
