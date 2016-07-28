@@ -79,7 +79,11 @@
 
 	//should have already been set if we are attacking a mob, but it doesn't hurt and will cover attacking non-mobs too
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-
+	if(Atkcool)
+		return
+	Atkcool = 1
+	spawn(45)
+		Atkcool = 0
 	var/mob/living/M = A
 	if(!istype(M))
 		A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped") // Basic attack.
@@ -114,11 +118,6 @@
 			if (I_GRAB) // We feed
 				Wrap(M)
 			if (I_HURT) // Attacking
-				if(Atkcool)
-					return
-				Atkcool = 1
-				spawn(45)
-					Atkcool = 0
 				if(iscarbon(M) && prob(15))
 					M.visible_message("<span class='danger'>[src] has pounced at [M]!</span>", "<span class='danger'>[src] has pounced at you!</span>")
 					M.Weaken(power)
