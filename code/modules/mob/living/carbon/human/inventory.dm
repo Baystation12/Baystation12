@@ -29,6 +29,42 @@ This saves us from having to call add_fingerprint() any time something is put in
 		qdel(W)
 	return null
 
+//Puts the item into our active hand if possible. returns 1 on success.
+/mob/living/carbon/human/put_in_active_hand(var/obj/item/W)
+	return (hand ? put_in_l_hand(W) : put_in_r_hand(W))
+
+//Puts the item into our inactive hand if possible. returns 1 on success.
+/mob/living/carbon/human/put_in_inactive_hand(var/obj/item/W)
+	return (hand ? put_in_r_hand(W) : put_in_l_hand(W))
+
+/mob/living/carbon/human/put_in_hands(var/obj/item/W)
+	if(!W)
+		return 0
+	if(put_in_active_hand(W) || put_in_inactive_hand(W))
+		W.update_held_icon()
+		return 1
+	return ..()
+
+/mob/living/carbon/human/put_in_l_hand(var/obj/item/W)
+	if(!..() || l_hand)
+		return 0
+	var/obj/item/organ/external/hand = organs_by_name["l_hand"]
+	if(!hand || !hand.is_usable())
+		return 0
+	equip_to_slot(W,slot_l_hand)
+	W.add_fingerprint(src)
+	return 1
+
+/mob/living/carbon/human/put_in_r_hand(var/obj/item/W)
+	if(!..() || r_hand)
+		return 0
+	var/obj/item/organ/external/hand = organs_by_name["r_hand"]
+	if(!hand || !hand.is_usable())
+		return 0
+
+	equip_to_slot(W,slot_r_hand)
+	W.add_fingerprint(src)
+	return 1
 
 /mob/living/carbon/human/proc/has_organ(name)
 	var/obj/item/organ/external/O = organs_by_name[name]
@@ -216,10 +252,12 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_l_hand)
 			src.l_hand = W
 			W.equipped(src, slot)
+			W.screen_loc = ui_lhand
 			update_inv_l_hand(redraw_mob)
 		if(slot_r_hand)
 			src.r_hand = W
 			W.equipped(src, slot)
+			W.screen_loc = ui_rhand
 			update_inv_r_hand(redraw_mob)
 		if(slot_belt)
 			src.belt = W
@@ -308,7 +346,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 		update_inv_r_hand()
 
 	W.layer = SCREEN_LAYER+0.01
-
+	for(var/s in species.hud.gear)
+		var/list/gear = species.hud.gear[s]
+		if(gear["slot"] == slot)
+			W.screen_loc = gear["loc"]
 	if(W.action_button_name)
 		update_action_buttons()
 
