@@ -1,4 +1,3 @@
-
 var/datum/map/using_map = new USING_MAP_DATUM
 var/list/all_maps = list()
 
@@ -58,6 +57,9 @@ var/list/all_maps = list()
 	                                              // second level maps from program friendly display names ("Picnic Area") to program string ids ("picnicarea")
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
+
+	var/HAS_BRANCH	//Branch system for occupations, togglable
+	var/HAS_RANK	//Rank system, also togglable
 
 /datum/map/New()
 	..()

@@ -17,3 +17,6 @@
 	emergency_shuttle_leaving_dock = "Emergency escape pods are launched, arriving at rendezvous point in %ETA%."
 	emergency_shuttle_called_message = "Emergency escape pods are being prepped. ETA %ETA%"
 	emergency_shuttle_recall_message = "Emergency escape sequence aborted, please return to your duties."
+
+	HAS_BRANCH = 1
+	HAS_RANK = 1
