@@ -69,7 +69,7 @@ datum/controller/game_controller/proc/setup_objects()
 
 	admin_notice("<span class='danger'>Initializing objects</span>", R_DEBUG)
 	for(var/atom/movable/object in world)
-		if(!deleted(object))
+		if(!qdeleted(object))
 			object.initialize()
 			CHECK_SLEEP_MASTER
 

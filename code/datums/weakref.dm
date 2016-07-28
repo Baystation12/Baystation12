@@ -14,10 +14,10 @@
 	return D.weakref
 
 /datum/weakref
-	var/ref
+	var/reference
 
 /datum/weakref/New(datum/D)
-	ref = "\ref[D]"
+	reference = "\ref[D]"
 
 /datum/weakref/Destroy()
 	// A weakref datum should not be manually destroyed as it is a shared resource,
@@ -25,7 +25,7 @@
 	return 0
 
 /datum/weakref/proc/resolve()
-	var/datum/D = locate(ref)
+	var/datum/D = locate(reference)
 	if(D && D.weakref == src)
 		return D
 	return null

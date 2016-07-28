@@ -177,6 +177,7 @@ var/list/global/organ_rel_size = list(
 
 
 /proc/stars(n, pr)
+	n = html_encode(n)
 	if (pr == null)
 		pr = 25
 	if (pr <= 0)
@@ -189,19 +190,13 @@ var/list/global/organ_rel_size = list(
 	n = length(n)
 	var/p = null
 	p = 1
-	var/intag = 0
 	while(p <= n)
-		var/char = copytext(te, p, p + 1)
-		if (char == "<") //let's try to not break tags
-			intag = !intag
-		if (intag || char == " " || prob(pr))
-			t = text("[][]", t, char)
+		if ((copytext(te, p, p + 1) == " " || prob(pr)))
+			t = text("[][]", t, copytext(te, p, p + 1))
 		else
 			t = text("[]*", t)
-		if (char == ">")
-			intag = !intag
 		p++
-	return t
+	return sanitize(t)
 
 proc/slur(phrase)
 	phrase = html_decode(phrase)

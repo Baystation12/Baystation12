@@ -582,7 +582,7 @@ var/list/sacrificed = list()
 /////////////////////////////////////////FOURTEETH RUNE
 
 		// returns 0 if the rune is not used. returns 1 if the rune is used.
-		communicate()
+		communicate_rune()
 			. = 1 // Default output is 1. If the rune is deleted it will return 1
 			var/input = input(usr, "Please choose a message to tell to the other acolytes.", "Voice of Blood", "")//sanitize() below, say() and whisper() have their own
 			if(!input)

@@ -60,10 +60,10 @@
 /datum/unit_test/observation/global_listeners_shall_receive_events/conduct_test()
 	var/turf/start = locate(20,20,1)
 	var/turf/target = locate(20,21,1)
-	var/mob/living/carbon/human/H = new(start)
+	var/obj/O = new(start)
 
 	moved_event.register_global(src, /datum/unit_test/observation/proc/receive_move)
-	H.forceMove(target)
+	O.forceMove(target)
 
 	if(received_moves.len != 1)
 		fail("Expected 1 raised moved event, were [received_moves.len].")
@@ -71,13 +71,13 @@
 		return 1
 
 	var/list/event = received_moves[1]
-	if(event[1] != H || event[2] != start || event[3] != target)
-		fail("Unepected move event received. Expected [H], was [event[1]]. Expected [start], was [event[2]]. Expected [target], was [event[3]]")
+	if(event[1] != O || event[2] != start || event[3] != target)
+		fail("Unepected move event received. Expected [O], was [event[1]]. Expected [start], was [event[2]]. Expected [target], was [event[3]]")
 	else
 		pass("Received the expected move event.")
 
 	moved_event.unregister_global(src)
-	qdel(H)
+	qdel(O)
 	return 1
 
 /datum/unit_test/observation/moved_observer_shall_register_on_follow
@@ -123,6 +123,9 @@
 /datum/unit_test/observation/moved_shall_not_register_on_enter_without_listeners/conduct_test()
 	var/turf/T = locate(20,20,1)
 	var/mob/living/carbon/human/H = new(T)
+	qdel(H.virtual)
+	H.virtual = null
+
 	var/obj/structure/closet/C = new(T)
 
 	H.forceMove(C)

@@ -150,9 +150,6 @@
 							src.say("BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
 						ears.loc = src.loc
 						ears = null
-						for(var/possible_phrase in speak)
-							if(copytext(possible_phrase,1,3) in department_radio_keys)
-								possible_phrase = copytext(possible_phrase,3,length(possible_phrase))
 					else
 						usr << "\red There is nothing to remove from its [remove_from]."
 						return
@@ -313,27 +310,8 @@
 			//Cycle through message modes for the headset
 			if(speak.len)
 				var/list/newspeak = list()
-
-				if(available_channels.len && src.ears)
-					for(var/possible_phrase in speak)
-
-						//50/50 chance to not use the radio at all
-						var/useradio = 0
-						if(prob(50))
-							useradio = 1
-
-						if(copytext(possible_phrase,1,3) in department_radio_keys)
-							possible_phrase = "[useradio?pick(available_channels):""] [copytext(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
-						else
-							possible_phrase = "[useradio?pick(available_channels):""] [possible_phrase]"
-
-						newspeak.Add(possible_phrase)
-
-				else //If we have no headset or channels to use, dont try to use any!
-					for(var/possible_phrase in speak)
-						if(copytext(possible_phrase,1,3) in department_radio_keys)
-							possible_phrase = "[copytext(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
-						newspeak.Add(possible_phrase)
+				for(var/possible_phrase in speak)
+					newspeak.Add(possible_phrase)
 				speak = newspeak
 
 			//Search for item to steal
@@ -682,53 +660,6 @@
 	ears = new /obj/item/device/radio/headset/headset_eng(src)
 	available_channels = list(":e")
 	..()
-
-/mob/living/simple_animal/parrot/say(var/message)
-
-	if(stat)
-		return
-
-	var/verb = "says"
-	if(speak_emote.len)
-		verb = pick(speak_emote)
-
-
-	var/message_mode=""
-	if(copytext(message,1,2) == ";")
-		message_mode = "headset"
-		message = copytext(message,2)
-
-	if(length(message) >= 2)
-		var/channel_prefix = copytext(message, 1 ,3)
-		message_mode = department_radio_keys[channel_prefix]
-
-	if(copytext(message,1,2) == ":")
-		var/positioncut = 3
-		message = trim(copytext(message,positioncut))
-
-	message = capitalize(trim_left(message))
-
-	if(message_mode)
-		if(message_mode in radiochannels)
-			if(ears && istype(ears,/obj/item/device/radio))
-				ears.talk_into(src,sanitize(message), message_mode, verb, null)
-
-
-	..(message)
-
-
-/mob/living/simple_animal/parrot/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
-	if(prob(50))
-		parrot_hear(message)
-	..(message,verb,language,alt_name,italics,speaker)
-
-
-
-/mob/living/simple_animal/parrot/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
-	if(prob(50))
-		parrot_hear("[pick(available_channels)] [message]")
-	..(message,verb,language,part_a,part_b,speaker,hard_to_hear)
-
 
 /mob/living/simple_animal/parrot/proc/parrot_hear(var/message="")
 	if(!message || stat)

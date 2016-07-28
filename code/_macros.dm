@@ -57,10 +57,19 @@
 
 #define random_id(key,min_id,max_id) uniqueness_repository.Generate(/datum/uniqueness_generator/id_random, key, min_id, max_id)
 
+//Returns a string with reserved characters and spaces before the first word and after the last word removed.
+#define trim(text) trim_left(trim_right(text))
+
+#define subtypesof(prototype) (typesof(prototype) - prototype)
+
 #define to_chat(target, message) target << message
 
 #define MAP_IMAGE_PATH "nano/images/[using_map.path]/"
 
 #define map_image_file_name(z_level) "[using_map.path]-[z_level].png"
 
+
 #define RANDOM_BLOOD_TYPE pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
+
+#define ref(thing) "\ref[thing]"
+

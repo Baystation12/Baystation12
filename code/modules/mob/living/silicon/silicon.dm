@@ -182,7 +182,7 @@
 
 //Silicon mob language procs
 
-/mob/living/silicon/can_speak(datum/language/speaking)
+/mob/living/silicon/can_speak_language(datum/language/speaking)
 	return universal_speak || (speaking in src.speech_synthesizer_langs)	//need speech synthesizer support to vocalize a language
 
 /mob/living/silicon/add_language(var/language, var/can_speak=1)
@@ -382,3 +382,4 @@
 /mob/living/silicon/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
 	if(affect_silicon)
 		return ..()
+

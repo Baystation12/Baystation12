@@ -1,0 +1,35 @@
+"a" = (/turf/space,/area/space)
+"b" = (/turf/simulated/wall/r_wall,/area/say_test)
+"c" = (/obj/effect/landmark/test/say_mark{name = "1"},/turf/simulated/floor,/area/say_test)
+"d" = (/obj/effect/landmark/test/say_mark{name = "2"},/turf/simulated/floor,/area/say_test)
+"e" = (/obj/effect/landmark/test/say_mark{name = "3"},/turf/simulated/floor,/area/say_test)
+"f" = (/turf/simulated/floor,/area/say_test)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaabbbbbbbbbbaaaaaaaa
+aaaaaaaabcdbefbffbaaaaaaaa
+aaaaaaaabffbffbffbaaaaaaaa
+aaaaaaaabbbbbbbbbbaaaaaaaa
+aaaaaaaabffbffbffbaaaaaaaa
+aaaaaaaabffbffbffbaaaaaaaa
+aaaaaaaabbbbbbbbbbaaaaaaaa
+aaaaaaaabffbffbffbaaaaaaaa
+aaaaaaaabffbffbffbaaaaaaaa
+aaaaaaaabbbbbbbbbbaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

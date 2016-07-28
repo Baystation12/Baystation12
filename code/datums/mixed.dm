@@ -4,6 +4,9 @@
 	var/name = "data"
 	var/size = 1.0
 
+/datum/data/record/Destroy()
+	..()
+	return QDEL_HINT_HARDDEL_NOW
 
 /datum/data/function
 	name = "function"

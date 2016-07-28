@@ -87,6 +87,11 @@ datum/unit_test/proc/check_result()
 	fail("No check results proc")
 	return 1
 
+datum/unit_test/proc/get_landmark(var/landmark_type, var/landmark_name)
+	#ifdef UNIT_TEST
+	var/list/name_list = test_landmarks[landmark_type]
+	return name_list[landmark_name]
+	#endif
 
 proc/load_unit_test_changes()
 /*

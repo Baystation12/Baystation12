@@ -1,3 +1,10 @@
+// Body "language", for visible emotes
+/datum/language/body
+	name = "Body"
+	desc = "Body language."
+	key = ""
+	flags = NONVERBAL|RESTRICTED|NONGLOBAL|INNATE|NO_TALK_MSG|NO_STUTTER
+
 // Noise "language", for audible emotes.
 /datum/language/noise
 	name = "Noise"
@@ -20,7 +27,7 @@
 
 // 'basic' language; spoken by default.
 /datum/language/common
-	name = "Galactic Common"
+	name = LANGUAGE_GAL_COMMON
 	desc = "The common galactic tongue."
 	speech_verb = "says"
 	whisper_verb = "whispers"
@@ -39,7 +46,7 @@
 
 // Galactic common languages (systemwide accepted standards).
 /datum/language/trader
-	name = "Tradeband"
+	name = LANGUAGE_TRADEBAND
 	desc = "Maintained by the various trading cartels in major systems, this elegant, structured language is used for bartering and bargaining."
 	speech_verb = "enunciates"
 	colour = "say_quote"
@@ -56,7 +63,7 @@
 
 // Criminal language.
 /datum/language/gutter
-	name = "Gutter"
+	name = LANGUAGE_GUTTER
 	desc = "Much like Standard, this crude pidgin tongue descended from numerous languages and serves as Tradeband for criminal elements."
 	speech_verb = "growls"
 	colour = "rough"
