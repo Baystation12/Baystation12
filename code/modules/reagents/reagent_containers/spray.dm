@@ -207,3 +207,34 @@
 		return
 
 	..()
+
+/obj/item/weapon/reagent_containers/spray/paint
+	name = "paint remover sprayer"
+	desc = "Very short range. Do not point at eyes. Ages 3 and above. For clean types."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "paintspray"
+
+/obj/item/weapon/reagent_containers/spray/paint/New()
+	..()
+	reagents.add_reagent("paint", 100, color)
+
+/obj/item/weapon/reagent_containers/spray/paint/Spray_at(atom/A, mob/user, proximity)
+	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
+	if (proximity)
+		A.visible_message("[usr] sprays [A] with [src].")
+		reagents.touch(A, amount_per_transfer_from_this)
+
+/obj/item/weapon/reagent_containers/spray/paint/olive
+	name = "olive paint sprayer"
+	desc = "Very short range. Ages 3 and above. For the outdoors types."
+	color = COLOR_OLIVE_DRAB
+
+/obj/item/weapon/reagent_containers/spray/paint/tan
+	name = "tan paint sprayer"
+	desc = "Very short range. Ages 3 and above. For the hotheaded types."
+	color = COLOR_TAN
+
+/obj/item/weapon/reagent_containers/spray/paint/black
+	name = "black paint sprayer"
+	desc = "Very short range. Ages 3 and above. For the shady types."
+	color = COLOR_GRAY

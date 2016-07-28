@@ -83,6 +83,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	name = "smokable item"
 	desc = "You're not sure what this is. You should probably ahelp it."
 	body_parts_covered = 0
+	blood_overlay_type = null
 	var/lit = 0
 	var/icon_on
 	var/icon_off

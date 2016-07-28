@@ -33,3 +33,5 @@
 #define COLOR_PURPLE_GRAY      "#a2819e"
 #define COLOR_SEDONA           "#cc6600"
 #define COLOR_SUN              "#ec8b2f"
+#define COLOR_OLIVE_DRAB	   "#668031"
+#define COLOR_TAN			   "#d2b48c"
