@@ -871,12 +871,15 @@ var/list/admin_verbs_mentor = list(
 	if(new_fstyle)
 		M.f_style = new_fstyle
 
-	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female")
+	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female", "Neuter")
 	if (new_gender)
 		if(new_gender == "Male")
 			M.gender = MALE
-		else
+		else if (new_gender == "Female")
 			M.gender = FEMALE
+		else
+			M.gender = NEUTER
+
 	M.update_hair()
 	M.update_body()
 	M.check_dna(M)

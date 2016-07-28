@@ -664,24 +664,6 @@ About the new airlock wires panel:
 			if(src.shock(user, 100))
 				return
 
-	// No. -- cib
-	/**
-	if(ishuman(user) && prob(40) && src.density)
-		var/mob/living/carbon/human/H = user
-		if(H.getBrainLoss() >= 60)
-			playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
-			if(!istype(H.head, /obj/item/clothing/head/helmet))
-				visible_message("<span class='warning'>[user] headbutts the airlock.</span>")
-				var/obj/item/organ/external/affecting = H.get_organ("head")
-				H.Stun(8)
-				H.Weaken(5)
-				if(affecting.take_damage(10, 0))
-					H.UpdateDamageIcon()
-			else
-				visible_message("<span class='warning'>[user] headbutts the airlock. Good thing they're wearing a helmet.</span>")
-			return
-	**/
-
 	if(src.p_open)
 		user.set_machine(src)
 		wires.Interact(user)

@@ -125,7 +125,7 @@
 		var/obj/item/projectile/P = damage_source
 
 		var/reflectchance = 40 - round(damage/3)
-		if(!(def_zone in list("chest", "groin"))) //not changing this so arm and leg shots reflect, gives some incentive to not aim center-mass
+		if(!(def_zone in list(BP_CHEST, BP_GROIN))) //not changing this so arm and leg shots reflect, gives some incentive to not aim center-mass
 			reflectchance /= 2
 		if(P.starting && prob(reflectchance))
 			visible_message("<span class='danger'>\The [user]'s [src.name] reflects [attack_text]!</span>")

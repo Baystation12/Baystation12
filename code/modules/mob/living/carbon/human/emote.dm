@@ -19,6 +19,7 @@
 	if(src.stat == 2.0 && (act != "deathgasp"))
 		return
 	switch(act)
+
 		if ("airguitar")
 			if (!src.restrained())
 				message = "is strumming the air and headbanging like a safari chimp."
@@ -225,7 +226,7 @@
 				m_type = 2
 
 		if ("deathgasp")
-			message = "[species.death_message]"
+			message = "[species.get_death_message()]"
 			m_type = 1
 
 		if ("giggle")

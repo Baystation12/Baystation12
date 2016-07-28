@@ -145,7 +145,7 @@
 	if(!istype(M, /mob))
 		return
 
-	if(M == user && user.zone_sel.selecting == "mouth")
+	if(M == user && user.zone_sel.selecting == BP_MOUTH && contents.len > 0 && !user.wear_mask)
 		// Find ourselves a cig. Note that we could be full of lighters.
 		var/obj/item/clothing/mask/smokable/cigarette/cig = null
 		for(var/obj/item/clothing/mask/smokable/cigarette/C in contents)

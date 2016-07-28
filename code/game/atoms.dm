@@ -204,7 +204,7 @@ its easier to just keep the beam vertical.
 			f_name = "some "
 		else
 			f_name = "a "
-		if(blood_color != "#030303")
+		if(blood_color != SYNTH_BLOOD_COLOUR)
 			f_name += "<span class='danger'>blood-stained</span> [name][infix]!"
 		else
 			f_name += "oil-stained [name][infix]."
@@ -407,8 +407,7 @@ its easier to just keep the beam vertical.
 			M.dna = new /datum/dna(null)
 			M.dna.real_name = M.real_name
 		M.check_dna()
-		if (M.species)
-			blood_color = M.species.blood_color
+		blood_color = M.species.get_blood_colour(M)
 	. = 1
 	return 1
 

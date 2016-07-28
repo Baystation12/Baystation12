@@ -117,7 +117,6 @@ var/global/list/string_slot_flags = list(
 /proc/get_mannequin(var/ckey)
 	if(!mannequins_)
 		mannequins_ = new()
-
 	. = mannequins_[ckey]
 	if(!.)
 		. = new/mob/living/carbon/human/dummy/mannequin()
