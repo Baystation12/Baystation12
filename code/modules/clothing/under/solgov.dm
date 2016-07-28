@@ -99,9 +99,9 @@
 /obj/item/clothing/under/utility/fleet
 	name = "fleet coveralls"
 	desc = "The utility uniform of the SCG Fleet, made from an insulated material."
-	icon_state = "navyutility_crew"
+	icon_state = "navyutility"
 	item_state = "jensensuit"
-	worn_state = "navyutility_crew"
+	worn_state = "navyutility"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 10, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 
