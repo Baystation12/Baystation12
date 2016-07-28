@@ -110,6 +110,7 @@
 #define slot_gloves_str  	"slot_gloves"
 #define slot_glasses_str  	"slot_glasses"
 #define slot_s_store_str	"slot_s_store"
+#define slot_tie_str		"slot_tie"
 
 // Bitflags for clothing parts.
 #define HEAD        0x1
@@ -247,5 +248,6 @@ var/list/default_onmob_icons = list(
 		slot_handcuffed_str = 'icons/mob/mob.dmi',
 		slot_legcuffed_str = 'icons/mob/mob.dmi',
 		slot_gloves_str = 'icons/mob/hands.dmi',
-		slot_s_store_str = 'icons/mob/belt_mirror.dmi'
+		slot_s_store_str = 'icons/mob/belt_mirror.dmi',
+		slot_tie_str = 'icons/mob/ties.dmi'
 		)

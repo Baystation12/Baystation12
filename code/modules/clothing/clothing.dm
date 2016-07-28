@@ -584,7 +584,7 @@ BLIND     // can't see anything
 
 	//autodetect rollability
 	if(rolled_down < 0)
-		if((worn_state + "_d_s") in icon_states('icons/mob/uniform.dmi'))
+		if((worn_state + "_d_s") in icon_states(default_onmob_icons[slot_w_uniform_str]))
 			rolled_down = 0
 
 /obj/item/clothing/under/proc/update_rolldown_status()
@@ -601,7 +601,7 @@ BLIND     // can't see anything
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else
-		under_icon = INV_W_UNIFORM_DEF_ICON
+		under_icon = default_onmob_icons[slot_w_uniform_str]
 
 	// The _s is because the icon update procs append it.
 	if(("[worn_state]_d_s") in icon_states(under_icon))
@@ -624,7 +624,7 @@ BLIND     // can't see anything
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else
-		under_icon = INV_W_UNIFORM_DEF_ICON
+		under_icon = default_onmob_icons[slot_w_uniform_str]
 
 	// The _s is because the icon update procs append it.
 	if(("[worn_state]_r_s") in icon_states(under_icon))

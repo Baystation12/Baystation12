@@ -24,7 +24,7 @@
 		if(icon_override && ("[tmp_icon_state]_tie" in icon_states(icon_override)))
 			inv_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
 		else
-			inv_overlay = image(icon = INV_ACCESSORIES_DEF_ICON, icon_state = tmp_icon_state, dir = SOUTH)
+			inv_overlay = image(icon = default_onmob_icons[slot_tie_str], icon_state = tmp_icon_state, dir = SOUTH)
 	return inv_overlay
 
 /obj/item/clothing/accessory/get_mob_overlay(var/mob/user_mob)
@@ -36,7 +36,7 @@
 
 	if(!mob_overlay[bodytype])
 		var/tmp_icon_state = overlay_state? overlay_state : icon_state
-		var/use_sprite_sheet = INV_ACCESSORIES_DEF_ICON
+		var/use_sprite_sheet = default_onmob_icons[slot_tie_str]
 		if(sprite_sheets[bodytype])
 			use_sprite_sheet = sprite_sheets[bodytype]
 
