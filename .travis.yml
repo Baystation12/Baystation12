@@ -5,7 +5,7 @@ env:
   global:
     BYOND_MAJOR="510"
     BYOND_MINOR="1346"
-    MACRO_COUNT=906
+    MACRO_COUNT=905
     NODE_VERSION="4"
 
 # ALL MAPS MUST BE PRESENT HERE
@@ -53,7 +53,7 @@ script:
   - (num=`grep -E '"/obj' **/*.dm | wc -l`; echo "$num /obj text paths (expecting 13 or less)"; [ $num -le 13 ])
   - (num=`grep -E '"/turf' **/*.dm | wc -l`; echo "$num /turf text paths (expecting 8 or less)"; [ $num -le 8 ])
   - awk -f tools/indentation.awk **/*.dm
-  - md5sum -c - <<< "a7534ef155ebb32ae7249c48a87abf0d *.gitignore"
+  - md5sum -c - <<< "4bab08611ef5a6f7478d8c4f8b1aa355 *.gitignore"
   - md5sum -c - <<< "0af969f671fba6cf9696c78cd175a14a *baystation12.int"
   - md5sum -c - <<< "88490b460c26947f5ec1ab1bb9fa9f17 *html/changelogs/example.yml"
   - python tools/TagMatcher/tag-matcher.py ../..

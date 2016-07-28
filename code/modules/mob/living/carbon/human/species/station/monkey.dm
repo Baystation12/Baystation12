@@ -14,7 +14,7 @@
 	mob_size = MOB_SMALL
 	has_fine_manipulation = 0
 	show_ssd = null
-	health_hud_intensity = 2
+	health_hud_intensity = 1.75
 
 	gibbed_anim = "gibbed-m"
 	dusted_anim = "dust-m"
@@ -67,6 +67,7 @@
 /datum/species/monkey/tajaran
 	name = "Farwa"
 	name_plural = "Farwa"
+	health_hud_intensity = 2
 
 	icobase = 'icons/mob/human_races/monkeys/r_farwa.dmi'
 	deform = 'icons/mob/human_races/monkeys/r_farwa.dmi'
@@ -80,6 +81,7 @@
 /datum/species/monkey/skrell
 	name = "Neaera"
 	name_plural = "Neaera"
+	health_hud_intensity = 1.75
 
 	icobase = 'icons/mob/human_races/monkeys/r_neaera.dmi'
 	deform = 'icons/mob/human_races/monkeys/r_neaera.dmi'
@@ -94,6 +96,7 @@
 /datum/species/monkey/unathi
 	name = "Stok"
 	name_plural = "Stok"
+	health_hud_intensity = 1.5
 
 	icobase = 'icons/mob/human_races/monkeys/r_stok.dmi'
 	deform = 'icons/mob/human_races/monkeys/r_stok.dmi'

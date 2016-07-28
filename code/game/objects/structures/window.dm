@@ -456,6 +456,9 @@
 	damage_per_fire_tick = 1.0 // This should last for 80 fire ticks if the window is not damaged at all. The idea is that borosilicate windows have something like ablative layer that protects them for a while.
 	maxhealth = 80.0
 
+/obj/structure/window/phoronreinforced/full
+	dir = 5
+	icon_state = "phoronwindow0"
 
 /obj/structure/window/reinforced
 	name = "reinforced window"
@@ -509,6 +512,10 @@
 	name = "electrochromic window"
 	desc = "Adjusts its tint with voltage. Might take a few good hits to shatter it."
 	var/id
+
+/obj/structure/window/reinforced/polarized/full
+	dir = 5
+	icon_state = "fwindow"
 
 /obj/structure/window/reinforced/polarized/proc/toggle()
 	if(opacity)

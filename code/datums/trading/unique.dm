@@ -24,7 +24,9 @@
 				"hail_deny"          = "--CONNECTION SEVERED--",
 
 				"trade_complete"     = "Hahahahahahaha! Thankyouthankyouthankyou!",
-				"trade_refuse"       = "No! T-that isn't even close... I want more...",
+				"trade_no_money"     = "I d-don't NEED cash.",
+				"trade_not_enough"   = "N-no, no no no. M-more than that.... more...",
+				"trade_found_unwanted" = "I d-don't think you GET what I want, from your offer.",
 				"how_much"           = "Meat. I want meat. The kind they don't serve i-in teh mess hall.",
 
 				"compliment_deny"    = "Your lies won't c-change what I did.",
@@ -48,6 +50,9 @@
 				"hail_deny"          = "Blub does not want to speak to boo.",
 
 				"trade_complete"     = "Blub likes to trade!",
+				"trade_no_money"     = "Boo try to give Blub paper. Blub does not want paper.",
+				"trade_not_enough"   = "Blub hungry for bore than that.",
+				"trade_found_unwanted" = "Blub only wants bocks. Give bocks.",
 				"trade_refuse"       = "No, Blub will not do that. Blub wants bocks, yes? Give bocks.",
 				"how_much"           = "Blub wants bocks. Boo give bocks. Blub gives stuff blub found.",
 
@@ -89,7 +94,9 @@
 				"hail_deny"          = "I'm sorry, but I REALLY don't want to speak to you.",
 
 				"trade_complete"     = "Pleasure doing business with you! Just don't feed it after midnight!",
-				"trade_refuse"       = "See, thats not what I want. I thought you knew better.",
+				"trade_no_money"     = "Cash? Ha! What's cash to a man like me?",
+				"trade_not_enough"   = "Hm, well I do enjoy what you're offering, I prefer a fair trade.",
+				"trade_found_unwanted" = "What? I want oddities! Don't you understand?",
 				"how_much"           = "I want dark things, brooding things... things that go bump in the night. Things that bleed wrong, live wrong, are wrong.",
 
 				"compliment_deny"    = "Like I haven't heard that one before!",

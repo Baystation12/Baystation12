@@ -64,12 +64,11 @@
 /decl/hierarchy/supply_pack/security/armor
 	num_contained = 5
 	contains = list(/obj/item/clothing/suit/armor/vest,
-					/obj/item/clothing/suit/armor/vest/security,
+					/obj/item/clothing/suit/armor/vest/nt,
 					/obj/item/clothing/suit/armor/vest/detective,
-					/obj/item/clothing/suit/storage/vest/hos,
+					/obj/item/clothing/suit/storage/vest/nt/hos,
 					/obj/item/clothing/suit/storage/vest/pcrc,
-					/obj/item/clothing/suit/storage/vest/warden,
-					/obj/item/clothing/suit/storage/vest/officer,
+					/obj/item/clothing/suit/storage/vest/nt/warden,
 					/obj/item/clothing/suit/storage/vest)
 
 	name = "Armor crate"
@@ -264,7 +263,7 @@
 
 /decl/hierarchy/supply_pack/security/officergear
 	name = "Officer equipment"
-	contains = list(/obj/item/clothing/suit/storage/vest/officer,
+	contains = list(/obj/item/clothing/suit/storage/vest/nt,
 					/obj/item/clothing/head/helmet,
 					/obj/item/weapon/cartridge/security,
 					/obj/item/clothing/accessory/badge/holo,
@@ -291,7 +290,7 @@
 
 /decl/hierarchy/supply_pack/security/wardengear
 	name = "Warden equipment"
-	contains = list(/obj/item/clothing/suit/storage/vest/warden,
+	contains = list(/obj/item/clothing/suit/storage/vest/nt/warden,
 					/obj/item/clothing/under/rank/warden,
 					/obj/item/clothing/under/rank/warden/corp,
 					/obj/item/clothing/suit/armor/vest/warden,
@@ -313,7 +312,7 @@
 
 /decl/hierarchy/supply_pack/security/headofsecgear
 	name = "Head of security equipment"
-	contains = list(/obj/item/clothing/suit/storage/vest/hos,
+	contains = list(/obj/item/clothing/suit/storage/vest/nt/hos,
 					/obj/item/clothing/under/rank/head_of_security/corp,
 					/obj/item/clothing/suit/armor/hos,
 					/obj/item/weapon/cartridge/hos,

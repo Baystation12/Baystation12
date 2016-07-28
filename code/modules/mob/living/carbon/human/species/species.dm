@@ -293,6 +293,8 @@
 	for(var/obj/item/organ/O in (H.organs|H.internal_organs))
 		O.owner = H
 
+	H.sync_organ_dna()
+
 /datum/species/proc/hug(var/mob/living/carbon/human/H,var/mob/living/target)
 
 	var/t_him = "them"

@@ -43,6 +43,7 @@
 
 		if (nutrition <= 100)
 			src << "<span class='danger'>You gag as you want to throw up, but there's nothing in your stomach!</span>"
+			custom_emote(1, "dry heaves")
 			src.Weaken(10)
 			src.adjustToxLoss(3)
 			return
@@ -56,6 +57,7 @@
 			sleep(100)	//and you have 10 more for mad dash to the bucket
 
 		Stun(5)
+
 		src.visible_message("<span class='warning'>[src] throws up!</span>","<span class='warning'>You throw up!</span>")
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 

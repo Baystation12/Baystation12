@@ -554,6 +554,25 @@
 			data = world.time
 			M << "<span class='notice'>You feel invigorated and calm.</span>"
 
+/datum/reagent/menthol
+	name = "Menthol"
+	id = "menthol"
+	description = "Tastes naturally minty, and imparts a very mild numbing sensation."
+	taste_description = "mint"
+	reagent_state = LIQUID
+	color = "#80AF9C"
+	metabolism = REM * 0.002
+	overdose = REAGENTS_OVERDOSE * 0.25
+	scannable = 1
+	data = 0
+
+/datum/reagent/menthol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+	if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.35)
+		data = world.time
+		M << "<span class='notice'>You feel faintly sore in the throat.</span>"
+
 /datum/reagent/rezadone
 	name = "Rezadone"
 	id = "rezadone"

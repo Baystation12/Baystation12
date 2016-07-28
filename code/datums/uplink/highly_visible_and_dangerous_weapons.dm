@@ -21,7 +21,7 @@
 
 /datum/uplink_item/item/visible_weapons/g9mm
 	name = "Silenced Holdout Pistol"
-	item_cost = 7
+	item_cost = 8
 	path = /obj/item/weapon/storage/box/syndie_kit/g9mm
 
 /datum/uplink_item/item/visible_weapons/riggedlaser
@@ -31,9 +31,9 @@
 
 /datum/uplink_item/item/visible_weapons/revolver
 	name = "Revolver"
-	item_cost = 13
-	antag_costs = list(MODE_MERCENARY = 6)
-	path = /obj/item/weapon/gun/projectile/revolver
+	item_cost = 14
+	antag_costs = list(MODE_MERCENARY = 7)
+	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver
 
 /datum/uplink_item/item/visible_weapons/grenade_launcher
 	name = "Grenade Launcher"
@@ -55,6 +55,6 @@
 	path = /obj/item/weapon/gun/projectile/automatic/sts35
 
 /datum/uplink_item/item/visible_weapons/heavysniper
-	name = "Anti-materiel Rifle"
-	item_cost = 15
-	path = /obj/item/weapon/gun/projectile/heavysniper
+	name = "Anti-materiel Rifle with ammunition"
+	item_cost = 17
+	path = /obj/item/weapon/storage/secure/briefcase/heavysniper

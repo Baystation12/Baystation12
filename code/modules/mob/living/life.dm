@@ -26,6 +26,9 @@
 		//Random events (vomiting etc)
 		handle_random_events()
 
+		//stuff in the stomach
+		handle_stomach()
+
 		. = 1
 
 	//Handle temperature/pressure differences between body and environment
@@ -34,9 +37,6 @@
 
 	//Check if we're on fire
 	handle_fire()
-
-	//stuff in the stomach
-	handle_stomach()
 
 	update_pulling()
 
@@ -159,11 +159,11 @@
 /mob/living/proc/handle_impaired_hearing()
 	//Ears
 	if(sdisabilities & DEAF)	//disabled-deaf, doesn't get better on its own
-		setEarDamage(-1, max(ear_deaf, 1))
+		setEarDamage(null, max(ear_deaf, 1))
 	else if(ear_damage < 25)
-		adjustEarDamage(-0.05, 0)	// having ear damage impairs the recovery of ear_deaf
+		adjustEarDamage(-0.05, -1)	// having ear damage impairs the recovery of ear_deaf
 	else if(ear_damage < 100)
-		adjustEarDamage(-0.05, -1)	// deafness recovers slowly over time, unless ear_damage is over 100. TODO meds that heal ear_damage
+		adjustEarDamage(-0.05, 0)	// deafness recovers slowly over time, unless ear_damage is over 100. TODO meds that heal ear_damage
 
 
 //this handles hud updates. Calls update_vision() and handle_hud_icons()

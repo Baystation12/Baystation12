@@ -91,6 +91,18 @@ var/list/possible_cable_coil_colours
 	cable_list -= src							//remove it from global cable list
 	..()										// then go ahead and delete the cable
 
+
+// Ghost examining the cable -> tells him the power
+/obj/structure/cable/attack_ghost(mob/user)
+	if(user.client && user.client.inquisitive_ghost)
+		user.examinate(src)
+		// following code taken from attackby (multitool)
+		if(powernet && (powernet.avail > 0))
+			user << "<span class='warning'>[powernet.avail]W in power network.</span>"
+		else
+			user << "<span class='warning'>The cable is not powered.</span>"
+	return
+
 ///////////////////////////////////
 // General procedures
 ///////////////////////////////////

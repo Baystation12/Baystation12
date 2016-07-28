@@ -18,7 +18,7 @@
 /datum/uplink_item/item/tools/clerical
 	name = "Morphic Clerical Kit"
 	item_cost = 4
-	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit
+	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/clerical
 
 /datum/uplink_item/item/tools/plastique
 	name = "C-4 (Destroys walls)"
@@ -35,12 +35,16 @@
 	item_cost = 4
 	path = /obj/item/device/encryptionkey/syndicate
 
+/datum/uplink_item/item/tools/shield_disrupter
+	name = "Shield disrupter"
+	item_cost = 4
+	path = /obj/item/device/shield_disrupter
+
 /datum/uplink_item/item/tools/suit_sensor_mobile
 	name = "Suit Sensor Jamming Device"
 	desc = "This device will affect suit sensor data using method and radius defined by the user."
 	item_cost = 5
 	path = /obj/item/device/suit_sensor_jammer
-
 
 /datum/uplink_item/item/tools/encryptionkey_binary
 	name = "Binary Translator Key"

@@ -1087,7 +1087,6 @@
 	icon_state = lowertext(species.name)
 
 	species.create_organs(src)
-	src.sync_organ_dna()
 	species.handle_post_spawn(src)
 
 	maxHealth = species.total_health

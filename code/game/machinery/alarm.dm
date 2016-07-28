@@ -100,24 +100,21 @@
 	wires = null
 	return ..()
 
-/obj/machinery/alarm/New(var/loc, var/dir, var/building = 0)
-	..()
+/obj/machinery/alarm/New(var/loc, var/dir, atom/frame)
+	..(loc)
 
-	if(building)
-		if(loc)
-			src.loc = loc
+	if(dir)
+		src.set_dir(dir)
 
-		if(dir)
-			src.set_dir(dir)
-
+	if(istype(frame))
 		buildstage = 0
 		wiresexposed = 1
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
 		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
 		update_icon()
-		return
-
-	first_run()
+		frame.transfer_fingerprints_to(src)
+	else
+		first_run()
 
 /obj/machinery/alarm/proc/first_run()
 	alarm_area = get_area(src)
@@ -1093,20 +1090,18 @@ FIRE ALARM
 
 
 
-/obj/machinery/firealarm/New(loc, dir, building)
-	..()
-
-	if(loc)
-		src.loc = loc
+/obj/machinery/firealarm/New(loc, dir, atom/frame)
+	..(loc)
 
 	if(dir)
 		src.set_dir(dir)
 
-	if(building)
+	if(istype(frame))
 		buildstage = 0
 		wiresexposed = 1
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
 		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
+		frame.transfer_fingerprints_to(src)
 
 /obj/machinery/firealarm/proc/set_security_level(var/newlevel)
 	if(seclevel != newlevel)

@@ -73,6 +73,8 @@
 
 	if(statpanel("Lobby") && ticker)
 		stat("Game Mode:", PUBLIC_GAME_MODE)
+		var/extra_antags = list2params(additional_antag_types)
+		stat("Added Antagonists:", extra_antags ? extra_antags : "None")
 
 		if(ticker.current_state == GAME_STATE_PREGAME)
 			stat("Time To Start:", "[ticker.pregame_timeleft][round_progressing ? "" : " (DELAYED)"]")

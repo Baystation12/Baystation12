@@ -141,9 +141,3 @@
 				stat("SYSTEM OVERRIDE INITIATED")
 			else if(system_override == 2)
 				stat("SYSTEM OVERRIDE COMPLETED")
-
-// Cleaner proc for creating powersupply for an AI.
-/mob/living/silicon/ai/proc/create_powersupply()
-	if(psupply)
-		qdel(psupply)
-	psupply = new/obj/machinery/ai_powersupply(src)
