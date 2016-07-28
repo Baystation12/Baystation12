@@ -196,6 +196,14 @@ BLIND     // can't see anything
 		"Resomi" = 'icons/mob/species/resomi/eyes.dmi',
 		)
 
+/obj/item/clothing/glasses/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(item_state_slots && item_state_slots[slot])
+		ret.icon_state = item_state_slots[slot]
+	else
+		ret.icon_state = icon_state
+	return ret
+
 /obj/item/clothing/glasses/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
