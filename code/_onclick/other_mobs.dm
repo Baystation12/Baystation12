@@ -114,6 +114,11 @@
 			if (I_GRAB) // We feed
 				Wrap(M)
 			if (I_HURT) // Attacking
+				if(Atkcool)
+					return
+				Atkcool = 1
+				spawn(45)
+					Atkcool = 0
 				if(iscarbon(M) && prob(15))
 					M.visible_message("<span class='danger'>[src] has pounced at [M]!</span>", "<span class='danger'>[src] has pounced at you!</span>")
 					M.Weaken(power)
