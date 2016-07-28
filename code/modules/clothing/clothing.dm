@@ -523,12 +523,12 @@ BLIND     // can't see anything
 		ret.icon_state = item_state_slots[slot]
 	else
 		ret.icon_state = icon_state
-
-	var/icon/C = new('icons/mob/collar.dmi')
-	if(icon_state in C.IconStates())
-		ret.overlays += image(C, icon_state)
 	return ret
 
+/obj/item/clothing/suit/proc/get_collar()
+	var/icon/C = new('icons/mob/collar.dmi')
+	if(icon_state in C.IconStates())
+		return image(C, icon_state)
 ///////////////////////////////////////////////////////////////////////
 //Under clothing
 /obj/item/clothing/under

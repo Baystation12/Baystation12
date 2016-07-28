@@ -734,14 +734,11 @@ var/global/list/damage_icon_parts = list()
 //Adds a collar overlay above the helmet layer if the suit has one
 //	Suit needs an identically named sprite in icons/mob/collar.dmi
 /mob/living/carbon/human/proc/update_collar(var/update_icons=1)
-	var/icon/C = new('icons/mob/collar.dmi')
-	var/image/standing = null
-
-	if(wear_suit)
-		if(wear_suit.icon_state in C.IconStates())
-			standing = image("icon" = C, "icon_state" = "[wear_suit.icon_state]")
-
-	overlays_standing[COLLAR_LAYER]	= standing
+	if(istype(wear_suit,/obj/item/clothing/suit))
+		var/obj/item/clothing/suit/S = wear_suit
+		overlays_standing[COLLAR_LAYER]	= S.get_collar()
+	else
+		overlays_standing[COLLAR_LAYER]	= null
 
 	if(update_icons)   update_icons()
 
@@ -750,6 +747,7 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[FIRE_LAYER] = null
 	if(on_fire)
 		var/image/standing = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"=FIRE_LAYER)
+		standing.appearance_flags = RESET_COLOR
 		overlays_standing[FIRE_LAYER] = standing
 
 	if(update_icons)   update_icons()
@@ -761,6 +759,7 @@ var/global/list/damage_icon_parts = list()
 		if(E.open)
 			var/image/I = image("icon"='icons/mob/surgery.dmi', "icon_state"="[E.name][round(E.open)]", "layer"=-SURGERY_LEVEL)
 			total.overlays += I
+	total.appearance_flags = RESET_COLOR
 	overlays_standing[SURGERY_LEVEL] = total
 	if(update_icons)   update_icons()
 

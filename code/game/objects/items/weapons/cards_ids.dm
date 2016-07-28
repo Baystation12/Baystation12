@@ -120,11 +120,6 @@ var/const/NO_EMAG_ACT = -50
 
 	var/job_access_type     // Job type to acquire access rights from, if any
 
-/obj/item/weapon/card/id/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
-	ret.icon_state = "id"
-	return ret
-
 /obj/item/weapon/card/id/New()
 	..()
 	if(job_access_type)
