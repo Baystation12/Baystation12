@@ -1374,3 +1374,94 @@ proc/admin_notice(var/message, var/rights)
 			H.paralysis = 0
 			msg = "has unparalyzed [key_name(H)]."
 		log_and_message_admins(msg)
+
+
+/datum/admins/proc/sendFax()
+	set category = "Special Verbs"
+	set name = "Send Fax"
+	set desc = "Sends a fax to this machine"
+	var/department = input("Choose a fax", "Fax") as null|anything in alldepartments
+	for(var/obj/machinery/photocopier/faxmachine/sendto in allfaxes)
+		if(sendto.department == department)
+
+			if (!istype(src,/datum/admins))
+				src = usr.client.holder
+			if (!istype(src,/datum/admins))
+				usr << "Error: you are not an admin!"
+				return
+
+			var/replyorigin = input(src.owner, "Please specify who the fax is coming from", "Origin") as text|null
+
+			var/obj/item/weapon/paper/admin/P = new /obj/item/weapon/paper/admin( null ) //hopefully the null loc won't cause trouble for us
+			faxreply = P
+
+			P.admindatum = src
+			P.origin = replyorigin
+			P.destination = sendto
+
+			P.adminbrowse()
+
+
+datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies in
+
+/datum/admins/proc/faxCallback(var/obj/item/weapon/paper/admin/P, var/obj/machinery/photocopier/faxmachine/destination)
+	var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
+
+	P.name = "[P.origin] - [customname]"
+	P.desc = "This is a paper titled '" + P.name + "'."
+
+	var/shouldStamp = 1
+	if(!P.sender) // admin initiated
+		switch(alert("Would you like the fax stamped?",, "Yes", "No"))
+			if("No")
+				shouldStamp = 0
+
+	if(shouldStamp)
+		P.stamps += "<hr><i>This paper has been stamped by the [P.origin] Quantum Relay.</i>"
+
+		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
+		var/{x; y;}
+		x = rand(-2, 0)
+		y = rand(-1, 2)
+		P.offset_x += x
+		P.offset_y += y
+		stampoverlay.pixel_x = x
+		stampoverlay.pixel_y = y
+
+		if(!P.ico)
+			P.ico = new
+		P.ico += "paper_stamp-cent"
+		stampoverlay.icon_state = "paper_stamp-cent"
+
+		if(!P.stamped)
+			P.stamped = new
+		P.stamped += /obj/item/weapon/stamp/centcomm
+		P.overlays += stampoverlay
+
+	var/obj/item/rcvdcopy
+	rcvdcopy = destination.copy(P)
+	rcvdcopy.loc = null //hopefully this shouldn't cause trouble
+	adminfaxes += rcvdcopy
+
+
+
+	if(destination.recievefax(P))
+		src.owner << "<span class='notice'>Message reply to transmitted successfully.</span>"
+		if(P.sender) // sent as a reply
+			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(P.sender)]")
+			for(var/client/C in admins)
+				if((R_ADMIN | R_MOD) & C.holder.rights)
+					C << "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(P.sender)] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>"
+		else
+			log_admin("[key_name(src.owner)] has sent a fax message to [destination.department]")
+			for(var/client/C in admins)
+				if((R_ADMIN | R_MOD) & C.holder.rights)
+					C << "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] has sent a fax message to [destination.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>"
+
+	else
+		src.owner << "<span class='warning'>Message reply failed.</span>"
+
+	spawn(100)
+		qdel(P)
+		faxreply = null
+	return

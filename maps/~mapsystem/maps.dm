@@ -52,6 +52,13 @@ var/list/all_maps = list()
 	var/emergency_shuttle_called_message
 	var/emergency_shuttle_recall_message
 
+	var/list/holodeck_programs = list() // map of string ids to /datum/holodeck_program instances
+	var/list/holodeck_supported_programs = list() // map of maps - first level maps from list-of-programs string id (e.g. "BarPrograms") to another map
+                                                  // this is in order to support multiple holodeck program listings for different holodecks
+	                                              // second level maps from program friendly display names ("Picnic Area") to program string ids ("picnicarea")
+	                                              // as defined in holodeck_programs
+	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
+
 /datum/map/New()
 	..()
 	if(!map_levels)

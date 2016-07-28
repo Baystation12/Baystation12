@@ -835,6 +835,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			var/matrix/M = matrix()
 			M.Turn(rand(180))
 			src.transform = M
+			forceMove(get_turf(src))
 			if(!clean)
 				// Throw limb around.
 				if(src && istype(loc,/turf))

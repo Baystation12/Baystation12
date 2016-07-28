@@ -315,6 +315,7 @@
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!")
 	icon_state = icon_dead
 	density = 0
+	walk_to(src,0)
 	return ..(gibbed,deathmessage)
 
 /mob/living/simple_animal/ex_act(severity)

@@ -323,9 +323,14 @@ datum/controller/vote
 							initiator_key << "The crew transfer button has been disabled!"
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
-						if (config.allow_extra_antags && !antag_add_finished)
+						if (config.allow_extra_antags && is_addantag_allowed(1))
 							choices.Add("Add Antagonist")
 				if("add_antagonist")
+					if(!is_addantag_allowed(automatic))
+						if(!automatic)
+							usr << "The add antagonist vote is unavailable at this time. The game may not have started yet, the game mode may disallow adding antagonists, or you don't have required permissions."
+						return 0
+
 					if(!config.allow_extra_antags)
 						return 0
 					for(var/antag_type in all_antag_types)
@@ -455,7 +460,7 @@ datum/controller/vote
 				. += "<font color='grey'>Map (Disallowed)</font>"
 			. += "</li><li>"
 			//extra antagonists
-			if(!antag_add_finished && config.allow_extra_antags)
+			if(config.allow_extra_antags && is_addantag_allowed(0))
 				. += "<a href='?src=\ref[src];vote=add_antagonist'>Add Antagonist Type</a>"
 			else
 				. += "<font color='grey'>Add Antagonist (Disallowed)</font>"
@@ -517,6 +522,19 @@ datum/controller/vote
 			if(t) // it starts from 1, so there's no problem
 				submit_vote(usr.ckey, t, weight)
 		usr.vote()
+
+// Helper proc for determining whether addantag vote can be called.
+datum/controller/vote/proc/is_addantag_allowed(var/automatic)
+	// Gamemode has to be determined before we can add antagonists, so we can respect gamemode's add antag vote settings.
+	if((ticker.current_state <= 2) || !ticker.mode)
+		return 0
+	if(automatic)
+		return (ticker.mode.addantag_allowed & ADDANTAG_AUTO) && !antag_add_finished
+	if(check_rights(R_ADMIN, 0))
+		return ticker.mode.addantag_allowed & (ADDANTAG_ADMIN|ADDANTAG_PLAYER)
+	else
+		return (ticker.mode.addantag_allowed & ADDANTAG_PLAYER) && !antag_add_finished
+
 
 
 /mob/verb/vote()

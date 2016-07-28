@@ -71,14 +71,17 @@
 
 /datum/computer_file/program/merchant/proc/offer_item(var/datum/trader/T, var/num)
 	if(pad)
-		var/target = pad.get_target()
-		if(!computer_emagged && istype(target,/mob/living/carbon/human))
-			last_comms = "SAFETY LOCK ENABLED: SENTIENT MATTER UNTRANSMITTABLE"
-			return
-		if(T.offer_item_for_trade(target,num))
-			last_comms = T.get_response("trade_complete","Thanks for your business!")
+		var/list/targets = pad.get_targets()
+		for(var/target in targets)
+			if(!computer_emagged && istype(target,/mob/living/carbon/human))
+				last_comms = "SAFETY LOCK ENABLED: SENTIENT MATTER UNTRANSMITTABLE"
+				return
+		var/response = T.offer_items_for_trade(targets,num)
+		if(istext(response))
+			last_comms = T.get_response(response,"No, a million times no.")
 		else
-			last_comms = T.get_response("trade_refuse","No, a million times no.")
+			last_comms = T.get_response("trade_complete","Thanks for your business!")
+
 		return
 	last_comms = "PAD NOT CONNECTED"
 

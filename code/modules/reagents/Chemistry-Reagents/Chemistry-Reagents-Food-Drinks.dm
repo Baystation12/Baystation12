@@ -1885,7 +1885,7 @@
 /datum/reagent/ethanol/sbiten
 	name = "Sbiten"
 	id = "sbiten"
-	description = "A spicy Vodka! Might be a little hot for the little guys!"
+	description = "A spicy Mead! Might be a little hot for the little guys!"
 	taste_description = "hot and spice"
 	color = "#FFA371"
 	strength = 15
@@ -1893,7 +1893,7 @@
 	targ_temp = 360
 
 	glass_name = "Sbiten"
-	glass_desc = "A spicy mix of Vodka and Spice. Very hot."
+	glass_desc = "A spicy mix of Mead and Spice. Very hot."
 
 /datum/reagent/ethanol/screwdrivercocktail
 	name = "Screwdriver"

@@ -33,7 +33,7 @@
 	var/received_irc_pm = -99999
 	var/irc_admin			//IRC admin that spoke with them last.
 	var/mute_irc = 0
-
+	var/warned_about_multikeying = 0	// Prevents people from being spammed about multikeying every time their mob changes.
 
 		////////////////////////////////////
 		//things that require the database//
@@ -44,4 +44,4 @@
 
 	preload_rsc = 0 // This is 0 so we can set it to an URL once the player logs in and have them download the resources from a different server.
 	var/global/obj/screen/click_catcher/void
-	
+

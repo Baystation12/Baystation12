@@ -31,13 +31,18 @@ var/global/list/light_type_cache = list()
 	var/fixture_type = /obj/machinery/light
 	var/sheets_refunded = 2
 
-/obj/machinery/light_construct/New(atom/newloc, obj/machinery/light/fixture = null)
+/obj/machinery/light_construct/New(atom/newloc, var/newdir, atom/fixture = null)
 	..(newloc)
-	if(fixture)
-		fixture_type = fixture.type
+
+	if(newdir)
+		set_dir(newdir)
+
+	if(istype(fixture))
+		if(istype(fixture, /obj/machinery/light))
+			fixture_type = fixture.type
 		fixture.transfer_fingerprints_to(src)
-		set_dir(fixture.dir)
 		stage = 2
+
 	update_icon()
 
 /obj/machinery/light_construct/update_icon()
@@ -392,7 +397,7 @@ var/global/list/light_type_cache = list()
 			user.visible_message("[user.name] opens [src]'s casing.", \
 				"You open [src]'s casing.", "You hear a noise.")
 			
-			new construct_type(src.loc, src)
+			new construct_type(src.loc, src.dir, src)
 			qdel(src)
 			return
 

@@ -4,7 +4,7 @@
 	feedback = "SD"
 	charge_type = Sp_HOLDVAR
 	holder_var_type = "fireloss"
-	holder_var_amount = 30
+	holder_var_amount = 10
 	school = "evocation"
 	invocation = "anrhydeddu fi"
 	invocation_type = SpI_SHOUT

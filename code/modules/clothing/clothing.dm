@@ -129,6 +129,32 @@
 	item_state = "earmuffs"
 	slot_flags = SLOT_EARS | SLOT_TWOEARS
 
+/obj/item/clothing/ears/earmuffs/headphones
+	name = "headphones"
+	desc = "It's probably not in accordance with corporate policy to listen to music on the job... but fuck it."
+	var/headphones_on = 0
+	icon_state = "headphones_off"
+	item_state = "headphones"
+	slot_flags = SLOT_EARS | SLOT_TWOEARS
+
+/obj/item/clothing/ears/earmuffs/headphones/verb/togglemusic()
+	set name = "Toggle Headphone Music"
+	set category = "Object"
+	set src in usr
+	if(!istype(usr, /mob/living)) return
+	if(usr.incapacitated()) return
+
+	if(headphones_on)
+		icon_state = "headphones_off"
+		headphones_on = 0
+		usr << "<span class='notice'>You turn the music off.</span>"
+	else
+		icon_state = "headphones_on"
+		headphones_on = 1
+		usr << "<span class='notice'>You turn the music on.</span>"
+
+	update_clothing_icon()
+
 ///////////////////////////////////////////////////////////////////////
 //Glasses
 /*
@@ -137,7 +163,7 @@ SEE_MOBS  // can see all mobs, no matter what
 SEE_OBJS  // can see all objs, no matter what
 SEE_TURFS // can see all turfs (and areas), no matter what
 SEE_PIXELS// if an object is located on an unlit area, but some of its pixels are
-          // in a lit area (via pixel_x,y or smooth movement), can see those pixels
+          // in a lit area (via pixel_x, y or smooth movement), can see those pixels
 BLIND     // can't see anything
 */
 /obj/item/clothing/glasses
@@ -484,8 +510,8 @@ BLIND     // can't see anything
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.
 	var/worn_state = null
-	valid_accessory_slots = list("utility","armband","decor")
-	restricted_accessory_slots = list("utility", "armband")
+	valid_accessory_slots = list("utility","armband","rank","decor")
+	restricted_accessory_slots = list("utility", "armband","rank")
 
 
 /obj/item/clothing/under/attack_hand(var/mob/user)

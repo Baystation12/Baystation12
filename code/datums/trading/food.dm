@@ -11,7 +11,9 @@
 				"hail_deny"         = "Beeeep... I'm sorry, your connection has been severed.",
 
 				"trade_complete"    = "Thank you for choosing ORIGIN!",
-				"trade_refuse"      = "Uhh... I don't think we can do that.",
+				"trade_no_goods"    = "I'm sorry but we only take cash.",
+				"trade_blacklisted" = "Sir thats... highly illegal.",
+				"trade_not_enough"  = "Uhh... thats not enough money for pizza.",
 				"how_much"          = "That pizza will cost you VALUE thalers.",
 
 				"compliment_deny"   = "That's a bit forward, don't you think?",
@@ -61,7 +63,9 @@
 				"hail_deny"          = "We do not take orders from rude customers.",
 
 				"trade_complete"     = "Thank you sir for your patronage.",
-				"trade_refuse"       = "No, I am sorry that is not possible.",
+				"trade_blacklist"    = "No, that is very odd. Why would you trade that away?",
+				"trade_no_goods"     = "I only accept money transfers.",
+				"trade_not_enough"   = "No, I am sorry that is not possible. I need to make a living.",
 				"how_much"           = "I give you ITEM for VALUE thalers. No more, no less.",
 
 				"compliment_deny"    = "That was an odd thing to say, you are very odd.",
@@ -105,7 +109,9 @@
 				"hail_deny"          = "I'm sorry, we've blacklisted your communications due to rude behavior.",
 
 				"trade_complete"     = "Thank you for shopping at ORIGIN!",
-				"trade_refuse"       = "I'm sorry, ORIGIN doesn't think this trade is a good idea.",
+				"trade_blacklist"    = "I... wow that's... no, sir. No.",
+				"trade_no_goods"     = "ORIGIN only accepts cash, sir.",
+				"trade_not_enough"   = "That is not enough money, sir.",
 				"how_much"           = "Sir, that'll cost you VALUE thalers. Will that be all?",
 
 				"compliment_deny"    = "Sir, this is a professional environment. Please don't make me get my manager.",
@@ -124,7 +130,9 @@
 				"hail_deny"          = "Our food is a privelege, not a right. Goodbye.",
 
 				"trade_complete"     = "Thank you for your purchase! Come again if you're hungry for more!",
-				"trade_refuse"       = "Oh no, I'm afraid I can't make that trade.",
+				"trade_blacklist"    = "We only accept money. Not... that.",
+				"trade_no_goods"     = "Cash for Cakes! That's our business!",
+				"trade_not_enough"   = "Our dishes are much more expensive than that, sir.",
 				"how_much"           = "That lovely dish will cost you VALUE thalers.",
 
 				"compliment_deny"    = "Oh wow, how nice of you...",
