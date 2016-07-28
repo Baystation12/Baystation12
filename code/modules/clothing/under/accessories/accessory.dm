@@ -13,7 +13,6 @@
 	var/overlay_state = null
 
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ties.dmi') // for species where human variants do not fit
-	icon_onmob = 'icons/mob/ties.dmi'
 
 /obj/item/clothing/accessory/Destroy()
 	on_removed()

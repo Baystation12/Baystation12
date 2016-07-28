@@ -109,6 +109,7 @@
 #define slot_wear_id_str  	"slot_wear_id"
 #define slot_gloves_str  	"slot_gloves"
 #define slot_glasses_str  	"slot_glasses"
+#define slot_s_store_str	"slot_s_store"
 
 // Bitflags for clothing parts.
 #define HEAD        0x1
@@ -228,3 +229,23 @@
 #define DEFAULT_BACKPACK_STORAGE base_storage_capacity(5)
 #define DEFAULT_LARGEBOX_STORAGE base_storage_capacity(4)
 #define DEFAULT_BOX_STORAGE      base_storage_capacity(3)
+
+var/list/default_onmob_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand.dmi',
+		slot_belt_str = 'icons/mob/belt.dmi',
+		slot_back_str = 'icons/mob/back.dmi',
+		slot_l_ear_str = 'icons/mob/ears.dmi',
+		slot_r_ear_str = 'icons/mob/ears.dmi',
+		slot_glasses_str = 'icons/mob/eyes.dmi',
+		slot_wear_id_str = 'icons/mob/mob.dmi',
+		slot_w_uniform_str = 'icons/mob/uniform.dmi',
+		slot_wear_suit_str = 'icons/mob/suit.dmi',
+		slot_head_str = 'icons/mob/head.dmi',
+		slot_shoes_str = 'icons/mob/feet.dmi',
+		slot_wear_mask_str = 'icons/mob/mask.dmi',
+		slot_handcuffed_str = 'icons/mob/mob.dmi',
+		slot_legcuffed_str = 'icons/mob/mob.dmi',
+		slot_gloves_str = 'icons/mob/hands.dmi',
+		slot_s_store_str = 'icons/mob/belt_mirror.dmi'
+		)

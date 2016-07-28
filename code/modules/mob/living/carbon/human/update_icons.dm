@@ -534,8 +534,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_s_store(var/update_icons=1)
 	if(s_store)
 		s_store.screen_loc = ui_sstore1		//TODO
-		var/t_state = s_store.item_state ? s_store.item_state : s_store.icon_state
-		overlays_standing[SUIT_STORE_LAYER]	= overlay_image('icons/mob/belt_mirror.dmi', "[t_state]",s_store.color, RESET_COLOR)
+		overlays_standing[SUIT_STORE_LAYER]	= s_store.get_mob_overlay(src,slot_s_store_str)
 	else
 		overlays_standing[SUIT_STORE_LAYER]	= null
 	if(update_icons)   update_icons()

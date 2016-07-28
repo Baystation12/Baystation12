@@ -132,7 +132,6 @@
 	throwforce = 2
 	slot_flags = SLOT_EARS
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ears.dmi')
-	icon_onmob = 'icons/mob/ears.dmi'
 
 /obj/item/clothing/ears/update_clothing_icon()
 	if (ismob(src.loc))
@@ -196,7 +195,6 @@ BLIND     // can't see anything
 		"Vox" = 'icons/mob/species/vox/eyes.dmi',
 		"Resomi" = 'icons/mob/species/resomi/eyes.dmi',
 		)
-	icon_onmob = 'icons/mob/eyes.dmi'
 
 /obj/item/clothing/glasses/update_clothing_icon()
 	if (ismob(src.loc))
@@ -223,7 +221,6 @@ BLIND     // can't see anything
 		"Resomi" = 'icons/mob/species/resomi/gloves.dmi',
 		)
 	blood_overlay_type = "bloodyhands"
-	icon_onmob = 'icons/mob/hands.dmi'
 
 /obj/item/clothing/gloves/update_clothing_icon()
 	if (ismob(src.loc))
@@ -283,7 +280,6 @@ BLIND     // can't see anything
 		"Resomi" = 'icons/mob/species/resomi/head.dmi'
 		)
 	blood_overlay_type = "helmetblood"
-	icon_onmob = 'icons/mob/head.dmi'
 
 /obj/item/clothing/head/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
@@ -399,7 +395,6 @@ BLIND     // can't see anything
 	var/list/say_messages
 	var/list/say_verbs
 	blood_overlay_type = "maskblood"
-	icon_onmob = 'icons/mob/mask.dmi'
 
 /obj/item/clothing/mask/update_clothing_icon()
 	if (ismob(src.loc))
@@ -432,7 +427,7 @@ BLIND     // can't see anything
 		"Resomi" = 'icons/mob/species/resomi/shoes.dmi',
 		)
 	blood_overlay_type = "shoeblood"
-	icon_onmob = 'icons/mob/feet.dmi'
+
 /obj/item/clothing/shoes/New()
 	..()
 	slowdown_per_slot[slot_shoes] = SHOES_SLOWDOWN
@@ -508,7 +503,6 @@ BLIND     // can't see anything
 		"Vox" = 'icons/mob/species/vox/suit.dmi',
 		"Resomi" = 'icons/mob/species/resomi/suit.dmi'
 		)
-	icon_onmob = 'icons/mob/suit.dmi'
 
 /obj/item/clothing/suit/update_clothing_icon()
 	if (ismob(src.loc))
@@ -555,7 +549,6 @@ BLIND     // can't see anything
 		"Vox" = 'icons/mob/species/vox/uniform.dmi',
 		"Resomi" = 'icons/mob/species/resomi/uniform.dmi'
 		)
-	icon_onmob = 'icons/mob/uniform.dmi'
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.

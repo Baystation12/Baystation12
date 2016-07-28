@@ -9,7 +9,6 @@
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/belt.dmi')
-	icon_onmob = 'icons/mob/belt.dmi'
 	var/show_above_suit = 0
 
 /obj/item/weapon/storage/belt/verb/toggle_layer()

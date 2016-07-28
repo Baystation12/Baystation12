@@ -51,7 +51,6 @@
 	var/zoom = 0 //1 if item is actively being used to zoom. For scoped guns and binoculars.
 
 	var/icon_override = null  //Used to override hardcoded clothing dmis in human clothing proc.
-	var/icon_onmob = INV_BACK_DEF_ICON  //Used on mob if no species-specific spritesheets are defined.
 
 	//** These specify item/icon overrides for _slots_
 
@@ -60,11 +59,7 @@
 	// Used to specify the icon file to be used when the item is worn. If not set the default icon for that slot will be used.
 	// If icon_override or sprite_sheets are set they will take precendence over this, assuming they apply to the slot in question.
 	// Only slot_l_hand/slot_r_hand are implemented at the moment. Others to be implemented as needed.
-	var/list/item_icons = list(
-		slot_l_hand_str = INV_L_HAND_DEF_ICON,
-		slot_r_hand_str = INV_R_HAND_DEF_ICON,
-		slot_belt_str = 'icons/mob/belt.dmi'
-		)
+	var/list/item_icons
 
 	//** These specify item/icon overrides for _species_
 
@@ -716,6 +711,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else if(item_icons && item_icons[slot])
 		mob_icon = item_icons[slot]
 	else
-		mob_icon = icon_onmob
+		mob_icon = default_onmob_icons[slot]
 
 	return overlay_image(mob_icon,mob_state,color,RESET_COLOR)
