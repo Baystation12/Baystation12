@@ -320,6 +320,10 @@ datum/preferences
 				O.robotize(rlimb_data[name])
 			else
 				O.robotize()
+		else //normal organ
+			O.force_icon = null
+			O.name = initial(O.name)
+			O.desc = initial(O.desc)
 
 	if(!is_preview_copy)
 		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN))
