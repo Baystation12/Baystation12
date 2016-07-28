@@ -563,15 +563,9 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/update_inv_wear_suit(var/update_icons=1)
 
-	if( wear_suit && istype(wear_suit, /obj/item/) )
-		if( istype(wear_suit, /obj/item/clothing/suit/straight_jacket) )
-			drop_from_inventory(handcuffed)
-			drop_l_hand()
-			drop_r_hand()
-
+	if(wear_suit)
 		overlays_standing[SUIT_LAYER]	= wear_suit.get_mob_overlay(src,slot_wear_suit_str)
 		update_tail_showing(0)
-
 	else
 		overlays_standing[SUIT_LAYER]	= null
 		update_tail_showing(0)
@@ -613,21 +607,13 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/update_inv_handcuffed(var/update_icons=1)
 	if(handcuffed)
-		drop_r_hand()
-		drop_l_hand()
-		stop_pulling()	//TODO: should be handled elsewhere
 		overlays_standing[HANDCUFF_LAYER] = handcuffed.get_mob_overlay(src,slot_handcuffed_str)
-
 	else
 		overlays_standing[HANDCUFF_LAYER]	= null
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_legcuffed(var/update_icons=1)
 	if(legcuffed)
-		if(src.m_intent != "walk")
-			src.m_intent = "walk"
-			if(src.hud_used && src.hud_used.move_intent)
-				src.hud_used.move_intent.icon_state = "walking"
 		overlays_standing[LEGCUFF_LAYER]	= legcuffed.get_mob_overlay(src,slot_legcuffed_str)
 	else
 		overlays_standing[LEGCUFF_LAYER]	= null

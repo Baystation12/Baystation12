@@ -93,9 +93,7 @@
 		cuffs = new(get_turf(user))
 	else
 		user.drop_from_inventory(cuffs)
-	cuffs.loc = target
-	target.handcuffed = cuffs
-	target.update_inv_handcuffed()
+	target.equip_to_slot(cuffs,slot_handcuffed)
 	return 1
 
 var/last_chew = 0
