@@ -404,7 +404,7 @@ datum/objective/harm
 				if(!found)
 					return 1
 
-			var/obj/item/organ/external/head/head = H.get_organ("head")
+			var/obj/item/organ/external/head/head = H.get_organ(BP_HEAD)
 			if(head.disfigured)
 				return 1
 		return 0

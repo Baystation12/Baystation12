@@ -4,7 +4,7 @@
 #ifdef PRECISE_TIMER_AVAILABLE
 var/global/__btime__libName = "btime.[world.system_type==MS_WINDOWS?"dll":"so"]"
 #define TimeOfHour (__extern__timeofhour)
-#define __extern__timeofhour text2num(call(__btime__libName, "gettime")())
+#define __extern__timeofhour text2num(call("./[__btime__libName]", "gettime")())
 /hook/startup/proc/checkbtime()
 	try
 		// This will always return 1 unless the btime library cannot be accessed
