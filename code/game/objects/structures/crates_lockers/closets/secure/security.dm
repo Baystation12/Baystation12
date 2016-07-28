@@ -105,7 +105,7 @@
 		else
 			new /obj/item/weapon/storage/backpack/satchel_sec(src)
 		new /obj/item/clothing/head/HoS(src)
-		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/clothing/suit/armor/vest/nt(src)
 		new /obj/item/clothing/suit/storage/vest/nt/hos(src)
 		new /obj/item/clothing/under/rank/head_of_security/jensen(src)
 		new /obj/item/clothing/under/rank/head_of_security/corp(src)
@@ -148,7 +148,7 @@
 			new /obj/item/weapon/storage/backpack/satchel_sec(src)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
-		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/clothing/suit/armor/vest/nt(src)
 		new /obj/item/clothing/suit/storage/vest/nt/warden(src)
 		new /obj/item/clothing/under/rank/warden(src)
 		new /obj/item/clothing/under/rank/warden/corp(src)
