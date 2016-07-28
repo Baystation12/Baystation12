@@ -356,8 +356,9 @@ update_flag
 					release_log += "Valve was <b>closed</b> by [usr] ([usr.ckey]), stopping the transfer into the [holding]<br>"
 				if(istype(holding, /obj/item/weapon/tank))
 					holding.manipulated_by = usr.real_name
-				holding.loc = loc
+				holding.forceMove(get_turf(src))
 				holding = null
+				update_icon()
 	return TRUE
 
 /obj/machinery/portable_atmospherics/canister/phoron/New()
