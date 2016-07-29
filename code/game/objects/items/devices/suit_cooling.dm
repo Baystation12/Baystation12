@@ -8,7 +8,7 @@
 	w_class = 4
 	icon = 'icons/obj/suitcooler.dmi'
 	icon_state = "suitcooler0"
-	item_state = "welderpack"			// A placeholder icon, until someone gets to make an actual one.
+	item_state = "coolingpack"			// beautiful codersprites until someone makes a prettier one.
 	slot_flags = SLOT_BACK
 
 	//copied from tank.dm
@@ -54,6 +54,8 @@
 	var/charge_usage = (temp_adj/max_cooling)*charge_consumption
 
 	H.bodytemperature -= temp_adj
+	world << "Temp adj: [temp_adj]"
+	world << "Body temp: [H.bodytemperature]"
 
 	cell.use(charge_usage)
 	update_icon()
