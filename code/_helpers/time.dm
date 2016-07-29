@@ -10,6 +10,25 @@
 #define DAY *864000
 #define DAYS *864000
 
+#define TimeOfGame (get_game_time())
+#define TimeOfTick (world.tick_usage*0.01*world.tick_lag)
+
+/proc/get_game_time()
+	var/global/time_offset = 0
+	var/global/last_time = 0
+	var/global/last_usage = 0
+
+	var/wtime = world.time
+	var/wusage = world.tick_usage * 0.01
+
+	if(last_time < wtime && last_usage > 1)
+		time_offset += last_usage - 1
+
+	last_time = wtime
+	last_usage = wusage
+
+	return wtime + (time_offset + wusage) * world.tick_lag
+
 var/roundstart_hour = 0
 var/station_date = ""
 var/next_station_date_change = 1 DAY
