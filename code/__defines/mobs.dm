@@ -109,11 +109,6 @@
 
 #define COMPANY_ALIGNMENTS		list(COMPANY_LOYAL,COMPANY_SUPPORTATIVE,COMPANY_NEUTRAL,COMPANY_SKEPTICAL,COMPANY_OPPOSED)
 
-// Defines the argument used for get_mobs_and_objs_in_view_fast
-#define GHOSTS_ALL_HEAR 1
-#define ONLY_GHOSTS_IN_VIEW 0
-
-
 // Defines mob sizes, used by lockers and to determine what is considered a small sized mob, etc.
 #define MOB_LARGE  		40
 #define MOB_MEDIUM 		20
@@ -170,3 +165,7 @@
 #define TASTE_NORMAL 1 //anything below 15%
 #define TASTE_DULL 0.5 //anything below 30%
 #define TASTE_NUMB 0.1 //anything below 150%
+
+//Used by show_message() and emotes
+#define VISIBLE_MESSAGE 1
+#define AUDIBLE_MESSAGE 2
