@@ -1,8 +1,0 @@
-author: atlantiscze
-
-delete-after: True
-
-changes: 
-  - tweak: "Add Antagonist vote can no longer be freely called by players. It can still be called by admins, or as an alternative to crew transfer."
-  - tweak: "Add Antagonist is no longer an alternative to crew transfer during Extended gamemode. The intention is to keep that gamemode antagonist-free, as it was originally intended."
-  - rscadd: "Players in the lobby will now see which antagonist types were added to the game. This is displayed below the gamemode's name in the Lobby tab."
