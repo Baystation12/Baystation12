@@ -79,3 +79,8 @@
 	name = "corporate security cap"
 	desc = "It's field cap in corporate colors."
 	icon_state = "corpsoft"
+
+/obj/item/clothing/head/soft/mbill
+	name = "shipping cap"
+	desc = "It's a ballcap bearing the Major Bill's Shipping colors."
+	icon_state = "mbillsoft"

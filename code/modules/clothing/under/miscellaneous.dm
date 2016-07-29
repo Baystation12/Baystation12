@@ -529,3 +529,57 @@
 	icon_state = "pcrc"
 	item_state = "jensensuit"
 	worn_state = "pcrc"
+
+/obj/item/clothing/under/grayson
+	name = "\improper Grayson overalls"
+	desc = "A set of overalls belonging to Grayson Manufactories, a mining Trans-Stellar."
+	icon_state = "grayson"
+	worn_state = "grayson"
+
+/obj/item/clothing/under/wardt
+	name = "\improper Ward-Takahashi jumpsuit"
+	desc = "A jumpsuit belonging to Ward-Takahashi, a Trans-Stellar in the consumer goods market."
+	icon_state = "wardt"
+	worn_state = "wardt"
+
+/obj/item/clothing/under/mbill
+	name = "\improper Major Bill's uniform"
+	desc = "A uniform belonging to Major Bill's Transportation, a shipping megacorporation."
+	icon_state = "mbill"
+	worn_state = "mbill"
+
+/obj/item/clothing/under/confederacy
+	name = "\improper Confederacy uniform"
+	desc = "A military uniform belonging to the Confederacy of Man, an independent human government."
+	icon_state = "pcrc"
+	worn_state = "pcrc"
+
+/obj/item/clothing/under/saare
+	name = "\improper SAARE uniform"
+	desc = "A dress uniform belonging to Stealth Assault Enterprises, a minor private military corporation."
+	icon_state = "saare"
+	worn_state = "saare"
+
+/obj/item/clothing/under/frontier
+	name = "frontier clothes"
+	desc = "A rugged flannel shirt and denim overalls. A popular style among frontier colonists."
+	icon_state = "frontier"
+	worn_state = "frontier"
+
+/obj/item/clothing/under/aether
+	name = "\improper Aether jumpsuit"
+	desc = "A jumpsuit belonging to Aether Atmospherics and Recycling, a Trans-Stellar that supplies recycling and atmospheric systems to colonies."
+	icon_state = "aether"
+	worn_state = "aether"
+
+/obj/item/clothing/under/focal
+	name = "\improper Focal Point jumpsuit"
+	desc = "A jumpsuit belonging to Focal Point Energistics, an engineering megacorporation."
+	icon_state = "focal"
+	worn_state = "focal"
+
+/obj/item/clothing/under/hephaestus
+	name = "\improper Hephaestus jumpsuit"
+	desc = "A jumpsuit belonging to Hephaestus Industries, a Trans-Stellar best known for its arms production."
+	icon_state = "heph"
+	worn_state = "heph"
