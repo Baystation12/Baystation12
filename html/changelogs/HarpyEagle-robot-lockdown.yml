@@ -1,0 +1,6 @@
+author: HarpyEagle
+
+delete-after: True
+
+changes: 
+  - rscadd: "Emagged and traitor synths can no longer be locked down, except by physically cutting the lockdown wire (merely pulsing will not work)."
