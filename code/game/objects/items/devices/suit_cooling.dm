@@ -1,10 +1,15 @@
 /obj/item/device/suit_cooling_unit
-	name = "portable suit cooling unit"
-	desc = "A portable heat sink and liquid cooled radiator that can be hooked up to a space suit's existing temperature controls to provide industrial levels of cooling."
+	name = "portable cooling unit"
+	desc = "A large portable heat sink with liquid cooled radiator packaged into a modified backpack."
+	description_info = "You may wear this instead of your packpack to cool yourself down. It is commonly used by IPCs, \
+	as it allows them to go into low pressure environments for more than few seconds without overhating. It runs off energy provided by internal power cell. \
+	Remember to turn it on by clicking it when it's your in your hand before you put it on."
+
 	w_class = 4
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/suitcooler.dmi'
 	icon_state = "suitcooler0"
-	slot_flags = SLOT_BACK	//you can carry it on your back if you want, but it won't do anything unless attached to suit storage
+	item_state = "welderpack"			// A placeholder icon, until someone gets to make an actual one.
+	slot_flags = SLOT_BACK
 
 	//copied from tank.dm
 	flags = CONDUCT
@@ -15,78 +20,50 @@
 
 	origin_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 2)
 
-	var/on = 0				//is it turned on?
-	var/cover_open = 0		//is the cover open?
+	var/on = 0							//is it turned on?
+	var/cover_open = 0					//is the cover open?
 	var/obj/item/weapon/cell/cell
 	var/max_cooling = 12				//in degrees per second - probably don't need to mess with heat capacity here
-	var/charge_consumption = 3		//charge per second at max_cooling
+	var/charge_consumption = 3			//charge per second at max_cooling
 	var/thermostat = T20C
-
-	//TODO: make it heat up the surroundings when not in space
 
 /obj/item/device/suit_cooling_unit/New()
 	processing_objects |= src
-	cell = new/obj/item/weapon/cell/high()	//comes not with the crappy default power cell - because this is dedicated EVA equipment
-	cell.loc = src
+	cell = new/obj/item/weapon/cell/high()		// 10K rated cell.
+	cell.forceMove(src)
 
 /obj/item/device/suit_cooling_unit/process()
 	if (!on || !cell)
 		return
 
-	if (!ismob(loc))
-		return
-
-	if (!attached_to_suit(loc))		//make sure they have a suit and we are attached to it
+	if (!is_in_slot())
 		return
 
 	var/mob/living/carbon/human/H = loc
 
-	var/efficiency = 1 - H.get_pressure_weakness()		//you need to have a good seal for effective cooling
-	var/env_temp = get_environment_temperature()		//wont save you from a fire
-	var/temp_adj = min(H.bodytemperature - max(thermostat, env_temp), max_cooling)
+	var/temp_adj = min(H.bodytemperature - thermostat, max_cooling)
 
 	if (temp_adj < 0.5)	//only cools, doesn't heat, also we don't need extreme precision
 		return
 
 	var/charge_usage = (temp_adj/max_cooling)*charge_consumption
 
-	H.bodytemperature -= temp_adj*efficiency
+	H.bodytemperature -= temp_adj
 
 	cell.use(charge_usage)
+	update_icon()
 
 	if(cell.charge <= 0)
 		turn_off()
 
-/obj/item/device/suit_cooling_unit/proc/get_environment_temperature()
-	if (ishuman(loc))
-		var/mob/living/carbon/human/H = loc
-		if(istype(H.loc, /obj/mecha))
-			var/obj/mecha/M = H.loc
-			return M.return_temperature()
-		else if(istype(H.loc, /obj/machinery/atmospherics/unary/cryo_cell))
-			var/obj/machinery/atmospherics/unary/cryo_cell/C = H.loc
-			return C.air_contents.temperature
-
-	var/turf/T = get_turf(src)
-	if(istype(T, /turf/space))
-		return 0	//space has no temperature, this just makes sure the cooling unit works in space
-
-	var/datum/gas_mixture/environment = T.return_air()
-	if (!environment)
+// Checks whether the cooling unit is being worn on the back/suit slot.
+// That way you can't carry it in your hands while it's running to cool yourself down.
+/obj/item/device/suit_cooling_unit/proc/is_in_slot()
+	var/mob/living/carbon/human/H = loc
+	if(!istype(H))
 		return 0
 
-	return environment.temperature
-
-/obj/item/device/suit_cooling_unit/proc/attached_to_suit(mob/M)
-	if (!ishuman(M))
-		return 0
-
-	var/mob/living/carbon/human/H = M
-
-	if (!H.wear_suit || H.s_store != src)
-		return 0
-
-	return 1
+	return (H.back == src) || (H.s_store == src)
 
 /obj/item/device/suit_cooling_unit/proc/turn_on()
 	if(!cell)
@@ -95,31 +72,30 @@
 		return
 
 	on = 1
-	updateicon()
+	update_icon()
 
 /obj/item/device/suit_cooling_unit/proc/turn_off()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.show_message("\The [src] clicks and whines as it powers down.", 2)	//let them know in case it's run out of power.
 	on = 0
-	updateicon()
+	update_icon()
 
 /obj/item/device/suit_cooling_unit/attack_self(mob/user as mob)
 	if(cover_open && cell)
 		if(ishuman(user))
 			user.put_in_hands(cell)
 		else
-			cell.loc = get_turf(loc)
+			cell.forceMove(get_turf(src))
 
 		cell.add_fingerprint(user)
 		cell.update_icon()
 
 		user << "You remove the [src.cell]."
 		src.cell = null
-		updateicon()
+		update_icon()
 		return
 
-	//TODO use a UI like the air tanks
 	if(on)
 		turn_off()
 	else
@@ -135,7 +111,7 @@
 		else
 			cover_open = 1
 			user << "You unscrew the panel."
-		updateicon()
+		update_icon()
 		return
 
 	if (istype(W, /obj/item/weapon/cell))
@@ -144,42 +120,54 @@
 				user << "There is a [cell] already installed here."
 			else
 				user.drop_item()
-				W.loc = src
+				W.forceMove(src)
 				cell = W
 				user << "You insert the [cell]."
-		updateicon()
+		update_icon()
 		return
 
 	return ..()
 
-/obj/item/device/suit_cooling_unit/proc/updateicon()
+/obj/item/device/suit_cooling_unit/update_icon()
+	overlays.Cut()
 	if (cover_open)
 		if (cell)
 			icon_state = "suitcooler1"
 		else
 			icon_state = "suitcooler2"
-	else
-		icon_state = "suitcooler0"
+		return
+
+	icon_state = "suitcooler0"
+
+	if(!cell || !on)
+		return
+
+	switch(round(cell.percent()))
+		if(86 to INFINITY)
+			overlays.Add("battery-0")
+		if(69 to 85)
+			overlays.Add("battery-1")
+		if(52 to 68)
+			overlays.Add("battery-2")
+		if(35 to 51)
+			overlays.Add("battery-3")
+		if(18 to 34)
+			overlays.Add("battery-4")
+		if(-INFINITY to 17)
+			overlays.Add("battery-5")
+
 
 /obj/item/device/suit_cooling_unit/examine(mob/user)
 	if(!..(user, 1))
 		return
 
 	if (on)
-		if (attached_to_suit(src.loc))
-			user << "It's switched on and running."
-		else
-			user << "It's switched on, but not attached to anything."
+		user << "It's switched on and running."
 	else
 		user << "It is switched off."
 
 	if (cover_open)
-		if(cell)
-			user << "The panel is open, exposing the [cell]."
-		else
-			user << "The panel is open."
+		user << "The panel is open."
 
 	if (cell)
 		user << "The charge meter reads [round(cell.percent())]%."
-	else
-		user << "It doesn't have a power cell installed."
