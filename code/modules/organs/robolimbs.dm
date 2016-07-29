@@ -37,6 +37,7 @@ var/datum/robolimb/basic_robolimb
 /datum/robolimb/bishop/alt/monitor
 	company = "Bishop Monitor."
 	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_monitor.dmi'
+	restricted_to = list("Machine")
 	unavailable_at_fab = 1
 
 /datum/robolimb/hesphaistos
@@ -53,6 +54,7 @@ var/datum/robolimb/basic_robolimb
 /datum/robolimb/hesphiastos/alt/monitor
 	company = "Hesphiastos Monitor."
 	icon = 'icons/mob/human_races/cyberlimbs/hesphiastos/hesphiastos_monitor.dmi'
+	restricted_to = list("Machine")
 	can_eat = null
 	unavailable_at_fab = 1
 
@@ -76,6 +78,7 @@ var/datum/robolimb/basic_robolimb
 /datum/robolimb/xion/alt/monitor
 	company = "Xion Monitor."
 	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_monitor.dmi'
+	restricted_to = list("Machine")
 	can_eat = null
 	unavailable_at_fab = 1
 
@@ -99,6 +102,7 @@ var/datum/robolimb/basic_robolimb
 /datum/robolimb/wardtakahashi/alt/monitor
 	company = "Ward-Takahashi Monitor."
 	icon = 'icons/mob/human_races/cyberlimbs/wardtakahashi/wardtakahashi_monitor.dmi'
+	restricted_to = list("Machine")
 	can_eat = null
 	unavailable_at_fab = 1
 
@@ -108,6 +112,7 @@ var/datum/robolimb/basic_robolimb
 	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_main.dmi'
 	restricted_to = list("Machine")
 	use_eye_icon = "blank_eyes"
+	unavailable_at_fab = 1
 
 /datum/robolimb/morpheus/alt
 	company = "Morpheus Alt."

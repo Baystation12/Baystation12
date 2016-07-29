@@ -3,33 +3,33 @@
 
 	name = "display monitor"
 	desc = "A rather clunky old CRT-style display screen, fit for mounting on an optical output."
-	flags_inv = HIDEFACE|HIDEEYES
-	body_parts_covered = FACE
+	flags_inv = HIDEEYES
+	body_parts_covered = EYES
 	dir = SOUTH
 
-	icon = 'icons/mob/monitor_icons.dmi'
+	icon = 'icons/obj/clothing/monitor.dmi'
 	icon_override = 'icons/mob/monitor_icons.dmi'
 	icon_state = "ipc_blank"
 	item_state = null
 
 	var/monitor_state_index = "blank"
 	var/global/list/monitor_states = list(
-		"blank" =    "ipc_blank_s",
-		"pink" =     "ipc_pink_s",
-		"red" =      "ipc_red_s",
-		"green" =    "ipc_green_s",
-		"blue" =     "ipc_blue_s",
-		"breakout" = "ipc_breakout_s",
-		"eight" =    "ipc_eight_s",
-		"goggles" =  "ipc_goggles_s",
-		"heart" =    "ipc_heart_s",
-		"monoeye" =  "ipc_monoeye_s",
-		"nature" =   "ipc_nature_s",
-		"orange" =   "ipc_orange_s",
-		"purple" =   "ipc_purple_s",
-		"shower" =   "ipc_shower_s",
-		"static" =   "ipc_static_s",
-		"yellow" =   "ipc_yellow_s"
+		"blank" =    "ipc_blank",
+		"pink" =     "ipc_pink",
+		"red" =      "ipc_red",
+		"green" =    "ipc_green",
+		"blue" =     "ipc_blue",
+		"breakout" = "ipc_breakout",
+		"eight" =    "ipc_eight",
+		"goggles" =  "ipc_goggles",
+		"heart" =    "ipc_heart",
+		"monoeye" =  "ipc_monoeye",
+		"nature" =   "ipc_nature",
+		"orange" =   "ipc_orange",
+		"purple" =   "ipc_purple",
+		"shower" =   "ipc_shower",
+		"static" =   "ipc_static",
+		"yellow" =   "ipc_yellow"
 		)
 
 /obj/item/clothing/mask/monitor/set_dir()

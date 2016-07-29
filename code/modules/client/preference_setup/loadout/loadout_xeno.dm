@@ -123,7 +123,8 @@
 	sort_category = "Xenowear"
 
 /datum/gear/mask/ipc_monitor
-	display_name = "display monitor (prosthetic head only)"
+	display_name = "display monitor (IPC)"
 	path = /obj/item/clothing/mask/monitor
 	sort_category = "Xenowear"
+	whitelisted = "Machine"
 	cost = 1

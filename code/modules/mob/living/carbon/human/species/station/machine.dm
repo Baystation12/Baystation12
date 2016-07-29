@@ -20,8 +20,8 @@
 	min_age = 1
 	max_age = 90
 
-	brute_mod = 1.875 // 100% * 1.875 * 0.8 (robolimbs) ~= 150%
-	burn_mod = 1.875  // So they take 50% extra damage from brute/burn overall.
+	brute_mod = 1 // Because of the introduction of FBPs, IPCs are rebalanced back to 1.
+	burn_mod = 1  //
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
@@ -39,6 +39,7 @@
 
 	flags = NO_SCAN | NO_PAIN | NO_POISON
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	appearance_flags = HAS_UNDERWEAR //IPCs can wear undies too :(
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
