@@ -1,7 +1,7 @@
 // KEYCARD - Can be paired with a brace to instantly unlock it.
 /obj/item/weapon/brace_keycard
 	name = "brace keycard"
-	desc = "A small keycard that seems to fit into an airlock maintenance brace's card slot."
+	desc = "A small keycard that seems to fit into an airlock brace's card slot."
 	w_class = 2
 	var/obj/item/weapon/airlock_brace/brace = null
 	icon = 'icons/obj/card.dmi'
@@ -13,10 +13,12 @@
 // MAINTENANCE JACK - Acts as an universal keycard, but works with a 15-30s delay
 /obj/item/weapon/crowbar/brace_jack
 	name = "maintenance jack"
-	desc = "A special wrench that can be used to safely remove maintenance braces from airlocks."
+	desc = "A special crowbar that can be used to safely remove airlock braces from airlocks."
 	w_class = 3
 	icon = 'icons/obj/items.dmi'
 	icon_state = "maintenance_jack"
+	force = 8 //It has a hammer head, should probably do some more damage. - Cirra
+	throwforce = 10
 
 
 
