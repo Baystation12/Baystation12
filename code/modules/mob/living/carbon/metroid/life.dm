@@ -300,23 +300,14 @@
 
 		if(Target.Adjacent(src))
 			if(istype(Target, /mob/living/silicon)) // Glomp the silicons
-				if(!Atkcool)
-					a_intent = I_HURT
-					UnarmedAttack(Target)
-					Atkcool = 1
-					spawn(45)
-						Atkcool = 0
+				a_intent = I_HURT
+				UnarmedAttack(Target)
 				AIproc = 0
 				return
 
 			if(Target.client && !Target.lying && prob(60 + powerlevel * 4)) // Try to take down the target first
-				if(!Atkcool)
-					Atkcool = 1
-					spawn(45)
-						Atkcool = 0
-
-					a_intent = I_DISARM
-					UnarmedAttack(Target)
+				a_intent = I_DISARM
+				UnarmedAttack(Target)
 
 			else
 				if(!Atkcool)
