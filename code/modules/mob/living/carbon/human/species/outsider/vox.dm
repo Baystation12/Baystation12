@@ -27,7 +27,8 @@
 	cold_level_2 = 50
 	cold_level_3 = 0
 
-	gluttonous = GLUT_SMALLER
+	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
+	stomach_capacity = 12
 
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
@@ -102,7 +103,6 @@
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/vox(H.back), slot_in_backpack)
 		H.internal = H.r_hand
 	H.internals.icon_state = "internal1"
-
 
 
 /datum/species/vox/pariah

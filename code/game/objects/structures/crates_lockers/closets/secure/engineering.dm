@@ -35,6 +35,7 @@
 		new /obj/item/device/multitool(src)
 		new /obj/item/device/flash(src)
 		new /obj/item/taperoll/engineering(src)
+		new /obj/item/weapon/crowbar/brace_jack(src)
 		return
 
 

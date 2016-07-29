@@ -6,8 +6,8 @@
 
 	if (istype(loc, /turf/space)) return -1 // It's hard to be slowed down in space by... anything
 
-	if(embedded_flag)
-		handle_embedded_objects() //Moving with objects stuck in you can cause bad times.
+	if(embedded_flag || (stomach_contents && stomach_contents.len))
+		handle_embedded_and_stomach_objects() //Moving with objects stuck in you can cause bad times.
 
 	if(CE_SPEEDBOOST in chem_effects)
 		return -1

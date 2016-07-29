@@ -54,31 +54,38 @@
 		B.chemicals -= 100
 		B.has_reproduced = 1
 
-		vomit(1)
+		new /obj/effect/decal/cleanable/vomit(get_turf(src))
+		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 		new /mob/living/simple_animal/borer(get_turf(src), B.generation + 1)
 
 	else
 		src << "<span class='warning'>You do not have enough chemicals stored to reproduce.</span>"
 		return
-		
+
 /**
  *  Attempt to devour victim
  *
  *  Returns TRUE on success, FALSE on failure
  */
-/mob/living/carbon/proc/devour(mob/victim)
+/mob/living/carbon/proc/devour(atom/movable/victim)
 	var/can_eat = can_devour(victim)
 	if(!can_eat)
 		return FALSE
-	
-	src.visible_message("<span class='danger'>\The [src] is attempting to devour \the [victim]!</span>")
+	var/eat_speed = 100
 	if(can_eat == DEVOUR_FAST)
-		if(!do_mob(src, victim, 30)) return FALSE
-	else
-		if(!do_mob(src, victim, 100)) return FALSE
+		eat_speed = 30
+	src.visible_message("<span class='danger'>\The [src] is attempting to devour \the [victim]!</span>")
+	var/mob/target = victim
+	if(isobj(victim))
+		target = src
+	if(!do_mob(src,target,eat_speed))
+		return FALSE
 	src.visible_message("<span class='danger'>\The [src] devours \the [victim]!</span>")
-	admin_attack_log(src, victim, "Devoured.", "Was devoured by.", "devoured")
+	if(ismob(victim))
+		admin_attack_log(src, victim, "Devoured.", "Was devoured by.", "devoured")
+	else
+		src.drop_from_inventory(victim)
 	victim.forceMove(src)
 	src.stomach_contents.Add(victim)
-	
+
 	return TRUE

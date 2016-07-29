@@ -109,11 +109,6 @@
 
 #define COMPANY_ALIGNMENTS		list(COMPANY_LOYAL,COMPANY_SUPPORTATIVE,COMPANY_NEUTRAL,COMPANY_SKEPTICAL,COMPANY_OPPOSED)
 
-// Defines the argument used for get_mobs_and_objs_in_view_fast
-#define GHOSTS_ALL_HEAR 1
-#define ONLY_GHOSTS_IN_VIEW 0
-
-
 // Defines mob sizes, used by lockers and to determine what is considered a small sized mob, etc.
 #define MOB_LARGE  		40
 #define MOB_MEDIUM 		20
@@ -124,7 +119,12 @@
 // Gluttony levels.
 #define GLUT_TINY 1       // Eat anything tiny and smaller
 #define GLUT_SMALLER 2    // Eat anything smaller than we are
-#define GLUT_ANYTHING 3   // Eat anything, ever
+#define GLUT_ANYTHING 4   // Eat anything, ever
+
+#define GLUT_ITEM_TINY 8         // Eat items with a w_class of small or smaller
+#define GLUT_ITEM_NORMAL 16      // Eat items with a w_class of normal or smaller
+#define GLUT_ITEM_ANYTHING 32    // Eat any item
+#define GLUT_PROJECTILE_VOMIT 64 // When vomitting, does it fly out?
 
 // Devour speeds, returned by can_devour()
 #define DEVOUR_SLOW 1
@@ -212,3 +212,7 @@
 #define TASTE_NORMAL 1 //anything below 15%
 #define TASTE_DULL 0.5 //anything below 30%
 #define TASTE_NUMB 0.1 //anything below 150%
+
+//Used by show_message() and emotes
+#define VISIBLE_MESSAGE 1
+#define AUDIBLE_MESSAGE 2

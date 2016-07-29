@@ -922,11 +922,12 @@
 
 /mob/living/carbon/human/handle_stomach()
 	spawn(0)
-		for(var/mob/living/M in stomach_contents)
-			if(M.loc != src)
-				stomach_contents.Remove(M)
+		for(var/a in stomach_contents)
+			if(!(a in contents) || isnull(a))
+				stomach_contents.Remove(a)
 				continue
-			if(iscarbon(M)|| isanimal(M))
+			if(iscarbon(a)|| isanimal(a))
+				var/mob/living/M = a
 				if(M.stat == DEAD)
 					M.death(1)
 					stomach_contents.Remove(M)

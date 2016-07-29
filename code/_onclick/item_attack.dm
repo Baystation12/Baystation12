@@ -15,7 +15,7 @@ mob/attacked_with_item() should then do mob-type specific stuff (like determinin
 
 Item Hit Effects:
 
-item/apply_hit_effect() can be overriden to do whatever you want. However "standard" physical damage based weapons should make use of the target mob's hit_with_weapon() proc to 
+item/apply_hit_effect() can be overriden to do whatever you want. However "standard" physical damage based weapons should make use of the target mob's hit_with_weapon() proc to
 avoid code duplication. This includes items that may sometimes act as a standard weapon in addition to having other effects (e.g. stunbatons on harm intent).
 */
 
@@ -42,6 +42,16 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if(can_operate(src) && I.do_surgery(src,user)) //Surgery
 		return 1
 	return I.attack(src, user, user.zone_sel.selecting)
+
+/mob/living/carbon/human/attackby(obj/item/I, mob/user)
+	if(user == src && src.a_intent == I_DISARM && src.zone_sel.selecting == "mouth")
+		var/obj/item/blocked = src.check_mouth_coverage()
+		if(blocked)
+			user << "<span class='warning'>\The [blocked] is in the way!</span>"
+			return 1
+		else if(devour(I))
+			return 1
+	return ..()
 
 // Proximity_flag is 1 if this afterattack was called on something adjacent, in your square, or on your person.
 // Click parameters is the params string from byond Click() code, see that documentation.
@@ -78,7 +88,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /obj/item/proc/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	if(hitsound)
 		playsound(loc, hitsound, 50, 1, -1)
-	
+
 	var/power = force
 	if(HULK in user.mutations)
 		power *= 2
