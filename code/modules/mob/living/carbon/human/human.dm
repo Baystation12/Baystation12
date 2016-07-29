@@ -744,6 +744,13 @@
 				if(nutrition < 40)
 					custom_emote(1,"dry heaves.")
 				else
+					for(var/a in stomach_contents)
+						var/atom/movable/A = a
+						A.forceMove(get_turf(src))
+						stomach_contents.Remove(a)
+						if(src.species.gluttonous & GLUT_PROJECTILE_VOMIT)
+							A.throw_at(get_edge_target_turf(src,src.dir),7,7,src)
+
 					src.visible_message("<span class='warning'>[src] throws up!</span>","<span class='warning'>You throw up!</span>")
 					playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
@@ -1024,27 +1031,40 @@
 				return 1
 	return 0
 
-/mob/living/carbon/human/proc/handle_embedded_objects()
-
+/mob/living/carbon/human/proc/handle_embedded_and_stomach_objects()
 	for(var/obj/item/organ/external/organ in src.organs)
-		if(organ.splinted) //Splints prevent movement.
+		if(organ.splinted)
 			continue
 		for(var/obj/item/O in organ.implants)
 			if(!istype(O,/obj/item/weapon/implant) && prob(5)) //Moving with things stuck in you could be bad.
-				// All kinds of embedded objects cause bleeding.
-				if(species.flags & NO_PAIN)
-					src << "<span class='warning'>You feel [O] moving inside your [organ.name].</span>"
-				else
-					var/msg = pick( \
-						"<span class='warning'>A spike of pain jolts your [organ.name] as you bump [O] inside.</span>", \
-						"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>", \
-						"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>")
-					src << msg
+				jossle_internal_object(organ, O)
+	var/obj/item/organ/external/groin = src.get_organ("groin")
+	if(groin && stomach_contents && stomach_contents.len)
+		for(var/obj/item/O in stomach_contents)
+			if(O.edge || O.sharp)
+				if(prob(1))
+					stomach_contents.Remove(O)
+					if(!(species.flags & NO_PAIN))
+						src << "<span class='danger'>You feel something rip out of your stomach!</span>"
+						groin.embed(O)
+				else if(prob(5))
+					jossle_internal_object(groin,O)
 
-				organ.take_damage(rand(1,3), 0, 0)
-				if(!(organ.robotic >= ORGAN_ROBOT) && !(species.flags & NO_BLOOD)) //There is no blood in protheses.
-					organ.status |= ORGAN_BLEEDING
-					src.adjustToxLoss(rand(1,3))
+/mob/living/carbon/human/proc/jossle_internal_object(var/obj/item/organ/organ, var/obj/item/O)
+	// All kinds of embedded objects cause bleeding.
+	if(species.flags & NO_PAIN)
+		src << "<span class='warning'>You feel [O] moving inside your [organ.name].</span>"
+	else
+		var/msg = pick( \
+			"<span class='warning'>A spike of pain jolts your [organ.name] as you bump [O] inside.</span>", \
+			"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>", \
+			"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>")
+		src << msg
+
+	organ.take_damage(rand(1,3), 0, 0)
+	if(!(organ.robotic >= ORGAN_ROBOT) && !(species.flags & NO_BLOOD)) //There is no blood in protheses.
+		organ.status |= ORGAN_BLEEDING
+		src.adjustToxLoss(rand(1,3))
 
 /mob/living/carbon/human/verb/check_pulse()
 	set category = "Object"
@@ -1468,13 +1488,36 @@
 	else
 		return H.pulse
 
-/mob/living/carbon/human/can_devour(mob/victim)
-	if(src.species.gluttonous && (iscarbon(victim) || isanimal(victim)))
-		if(src.species.gluttonous == GLUT_TINY && (victim.mob_size <= MOB_TINY) && !ishuman(victim)) // Anything MOB_TINY or smaller
-			return DEVOUR_SLOW
-		else if(src.species.gluttonous == GLUT_SMALLER && (src.mob_size > victim.mob_size)) // Anything we're larger than
-			return DEVOUR_SLOW
-		else if(src.species.gluttonous == GLUT_ANYTHING) // Eat anything ever
-			return DEVOUR_FAST
+/mob/living/carbon/human/can_devour(atom/movable/victim)
+	if(!src.species.gluttonous)
+		return FALSE
+	var/total = 0
+	for(var/a in stomach_contents + victim)
+		if(ismob(a))
+			var/mob/M = a
+			total += M.mob_size
+		else if(isobj(a))
+			var/obj/item/I = a
+			total += I.get_storage_cost()
+	if(total > src.species.stomach_capacity)
+		return FALSE
 
-	..()
+	if(iscarbon(victim) || isanimal(victim))
+		var/mob/living/L = victim
+		if((src.species.gluttonous & GLUT_TINY) && (L.mob_size <= MOB_TINY) && !ishuman(victim)) // Anything MOB_TINY or smaller
+			return DEVOUR_SLOW
+		else if((src.species.gluttonous & GLUT_SMALLER) && (src.mob_size > L.mob_size)) // Anything we're larger than
+			return DEVOUR_SLOW
+		else if(src.species.gluttonous & GLUT_ANYTHING) // Eat anything ever
+			return DEVOUR_FAST
+	else if(istype(victim, /obj/item) && !istype(victim, /obj/item/weapon/holder)) //Don't eat holders. They are special.
+		var/obj/item/I = victim
+		var/cost = I.get_storage_cost()
+		if(cost != DO_NOT_STORE)
+			if((src.species.gluttonous & GLUT_ITEM_TINY) && cost < 4)
+				return DEVOUR_SLOW
+			else if((src.species.gluttonous & GLUT_ITEM_NORMAL) && cost <= 4)
+				return DEVOUR_SLOW
+			else if(src.species.gluttonous & GLUT_ITEM_ANYTHING)
+				return DEVOUR_FAST
+	return ..()

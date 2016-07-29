@@ -1,0 +1,8 @@
+author: TheWelp
+
+delete-after: True
+
+changes: 
+  - rscadd: "Certain races can now swallow objects whole by using the disarm intent and aiming at their mouth."
+  - rscadd: "Vomitting now shoves out all the things in your stomach."
+  - rscadd: "Adds support for projectile vomitting being an ability of a species."
