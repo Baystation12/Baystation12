@@ -93,12 +93,175 @@
 	              access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
 	outfit_type = /decl/hierarchy/outfit/job/security/officer/contractor
 
+//Torch Job Loadouts
+
 /decl/hierarchy/outfit/job/security/officer/contractor
 	name = OUTFIT_JOB_NAME("Security contractor")
 	l_ear = /obj/item/device/radio/headset/headset_sci
 	glasses = null
 	gloves = null
-	id_type = /obj/item/weapon/card/id/security/contractor
+	id_type = /obj/item/weapon/card/id/torch/research/guard
+
+
+//Torch ID Cards
+
+/obj/item/weapon/card/id/torch/silver
+	name = "identification card"
+	desc = "A silver card belonging to heads of staff."
+	icon_state = "silver"
+	item_state = "silver_id"
+	job_access_type = /datum/job/hop
+
+/obj/item/weapon/card/id/torch/gold
+	name = "identification card"
+	desc = "A golden card belonging to the Commanding Officer."
+	icon_state = "gold"
+	item_state = "gold_id"
+	job_access_type = /datum/job/captain
+
+/obj/item/weapon/card/id/torch/captains_spare
+	name = "captain's spare ID"
+	desc = "The skipper's spare ID."
+	icon_state = "gold"
+	item_state = "gold_id"
+	registered_name = "Captain"
+	assignment = "Captain"
+/obj/item/weapon/card/id/captains_spare/New()
+	access = get_all_station_access()
+	..()
+
+// SolGov Crew and NT Contractors
+/obj/item/weapon/card/id/torch
+	name = "identification card"
+	desc = "A card issued to SEV Torch crew."
+	icon_state = "solgov"
+	job_access_type = /datum/job/assistant
+
+/obj/item/weapon/card/id/torch/medical
+	desc = "A card issued to SEV Torch medical staff."
+	job_access_type = /datum/job/doctor
+
+/obj/item/weapon/card/id/torch/medical/chemist
+	job_access_type = /datum/job/chemist
+
+/obj/item/weapon/card/id/torch/medical/virologist
+	desc = "A card issued to SEV Torch medical contractors."
+	icon_state = "corporate"
+	job_access_type = /datum/job/doctor
+
+/obj/item/weapon/card/id/torch/medical/counselor
+	job_access_type = /datum/job/psychiatrist
+
+/obj/item/weapon/card/id/torch/medical/contractor
+	desc = "A card issued to SEV Torch medical contractors."
+	icon_state = "corporate"
+	job_access_type = /datum/job/Paramedic
+
+/obj/item/weapon/card/id/torch/silver/medical
+	job_access_type = /datum/job/cmo
+
+/obj/item/weapon/card/id/torch/security
+	desc = "A card issued to SEV Torch security staff."
+	job_access_type = /datum/job/officer
+
+/obj/item/weapon/card/id/torch/security/brigofficer
+	job_access_type = /datum/job/warden
+
+/obj/item/weapon/card/id/torch/security/forensic
+	job_access_type = /datum/job/detective
+
+/obj/item/weapon/card/id/torch/silver/security
+	job_access_type = /datum/job/hos
+
+/obj/item/weapon/card/id/torch/engineering
+	desc = "A card issued to SEV Torch engineering staff."
+	job_access_type = /datum/job/engineer
+
+/obj/item/weapon/card/id/torch/engineering/atmos
+	job_access_type = /datum/job/atmos
+
+/obj/item/weapon/card/id/torch/engineering/roboticist
+	desc = "A card issued to SEV Torch engineering contractors."
+	icon_state = "corporate"
+	job_access_type = /datum/job/roboticist
+
+/obj/item/weapon/card/id/torch/engineering/contractor
+	desc = "A card issued to SEV Torch engineering contractors."
+	icon_state = "corporate"
+	job_access_type = /datum/job/engineer
+
+/obj/item/weapon/card/id/torch/silver/engineering
+	name = "identification card"
+	job_access_type = /datum/job/chief_engineer
+
+/obj/item/weapon/card/id/torch/supply
+	desc = "A card issued to SEV Torch supply staff."
+	job_access_type = /datum/job/cargo_tech
+
+/obj/item/weapon/card/id/torch/supply/contractor
+	desc = "A card issued to SEV Torch supply contractors."
+	icon_state = "corporate"
+	job_access_type = /datum/job/cargo_tech
+
+/obj/item/weapon/card/id/torch/supply/deckofficer
+	job_access_type = /datum/job/qm
+
+/obj/item/weapon/card/id/torch/support
+	desc = "A card issued to SEV Torch support staff."
+	job_access_type = /datum/job/assistant
+
+/obj/item/weapon/card/id/torch/support/janitor
+	job_access_type = /datum/job/janitor
+
+/obj/item/weapon/card/id/torch/support/chef
+	job_access_type = /datum/job/chef
+
+/obj/item/weapon/card/id/torch/support/contractor/bartender
+	desc = "A card issued to SEV Torch support contractors."
+	icon_state = "corporate"
+	job_access_type = /datum/job/bartender
+
+/obj/item/weapon/card/id/torch/representative
+	job_access_type = /datum/job/lawyer
+
+//NanoTrasen
+
+/obj/item/weapon/card/id/torch/research
+	name = "identification card"
+	desc = "A card issued to NanoTrasen employees."
+	icon_state = "corporate"
+	job_access_type = /datum/job/assistant
+
+/obj/item/weapon/card/id/torch/research/scientist
+	name = "identification card"
+	job_access_type = /datum/job/scientist
+
+/obj/item/weapon/card/id/torch/research/xenobiologist
+	job_access_type = /datum/job/xenobiologist
+
+/obj/item/weapon/card/id/torch/silver/research
+	job_access_type = /datum/job/rd
+
+/obj/item/weapon/card/id/torch/research/mining
+	job_access_type = /datum/job/mining
+
+/obj/item/weapon/card/id/torch/research/guard
+	job_access_type = /datum/job/scientist
+
+/obj/item/weapon/card/id/torch/research/liaison
+	job_access_type = /datum/job/lawyer
+
+//Passengers
+
+/obj/item/weapon/card/id/torch/passenger
+	name = "identification card"
+	desc = "A card issued to passengers."
+	icon_state = "id"
+	job_access_type = /datum/job/assistant
+
+
+
+
 
 /obj/item/weapon/card/id/security/contractor
 	job_access_type = /datum/job/contractor
