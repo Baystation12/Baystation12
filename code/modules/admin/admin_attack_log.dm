@@ -5,7 +5,9 @@
 proc/log_and_message_admins(var/message as text, var/mob/user = usr, var/turf/location)
 	var/turf/T = location ? location : (user ? get_turf(user) : null)
 	if(T)
-		message = message + " (<a HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>)"
+		message = message + " (<a HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP LOC</a>)"
+	if(user)
+		message = message + " (<a HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP MOB</a>)"
 
 	log_admin(user ? "[key_name(user)] [message]" : "EVENT [message]")
 	message_admins(user ? "[key_name_admin(user)] [message]" : "EVENT [message]")

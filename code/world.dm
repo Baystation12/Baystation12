@@ -205,14 +205,14 @@ var/world_topic_spam_protect_time = world.timeofday
 		L["gameid"] = game_id
 		L["dm_version"] = DM_VERSION // DreamMaker version compiled in
 		L["dd_version"] = world.byond_version // DreamDaemon version running on
-		
+
 		if(revdata.revision)
 			L["revision"] = revdata.revision
 			L["branch"] = revdata.branch
 			L["date"] = revdata.date
 		else
 			L["revision"] = "unknown"
-		
+
 		return list2params(L)
 
 	else if(copytext(T,1,5) == "info")

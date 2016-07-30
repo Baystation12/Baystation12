@@ -36,7 +36,7 @@
 	if(EM.add_to_queue)
 		EC.available_events += EM
 
-	log_debug("Event '[EM.name]' has completed at [station_adjusted_time(world.time)].")
+	log_debug("Event '[EM.name]' has completed at [worldtime2stationtime(world.time)].")
 
 /datum/event_manager/proc/delay_events(var/severity, var/delay)
 	var/list/datum/event_container/EC = event_containers[severity]
@@ -59,12 +59,12 @@
 		var/datum/event_meta/EM = E.event_meta
 		if(EM.name == "Nothing")
 			continue
-		var/message = "'[EM.name]' began at [station_adjusted_time(E.startedAt)] "
+		var/message = "'[EM.name]' began at [worldtime2stationtime(E.startedAt)] "
 		if(E.isRunning)
 			message += "and is still running."
 		else
 			if(E.endedAt - E.startedAt > MinutesToTicks(5)) // Only mention end time if the entire duration was more than 5 minutes
-				message += "and ended at [station_adjusted_time(E.endedAt)]."
+				message += "and ended at [worldtime2stationtime(E.endedAt)]."
 			else
 				message += "and ran to completion."
 
@@ -122,7 +122,7 @@
 			var/next_event_at = max(0, EC.next_event_time - world.time)
 			html += "<tr>"
 			html += "<td>[severity_to_string[severity]]</td>"
-			html += "<td>[station_adjusted_time(max(EC.next_event_time, world.time))]</td>"
+			html += "<td>[worldtime2stationtime(max(EC.next_event_time, world.time))]</td>"
 			html += "<td>[round(next_event_at / 600, 0.1)]</td>"
 			html += "<td>"
 			html +=   "<A align='right' href='?src=\ref[src];dec_timer=2;event=\ref[EC]'>--</A>"
@@ -170,7 +170,7 @@
 			html += "<tr>"
 			html += "<td>[severity_to_string[EM.severity]]</td>"
 			html += "<td>[EM.name]</td>"
-			html += "<td>[station_adjusted_time(ends_at)]</td>"
+			html += "<td>[worldtime2stationtime(ends_at)]</td>"
 			html += "<td>[ends_in]</td>"
 			html += "<td><A align='right' href='?src=\ref[src];stop=\ref[E]'>Stop</A></td>"
 			html += "</tr>"
