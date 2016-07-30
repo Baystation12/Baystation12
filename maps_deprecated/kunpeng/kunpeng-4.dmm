@@ -135,7 +135,7 @@
 "cE" = (/obj/structure/closet/wardrobe/suit,/obj/item/clothing/head/chicken,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/space)
 "cF" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,/turf/simulated/floor/carpet,/area/space)
 "cG" = (/obj/structure/closet/crate{icon_state = "crateopen"; name = "Grenade Crate"; opened = 1},/obj/item/weapon/grenade/chem_grenade,/obj/item/weapon/grenade/chem_grenade,/obj/item/weapon/grenade/chem_grenade,/obj/item/weapon/grenade/chem_grenade,/obj/item/device/assembly/igniter,/obj/item/device/assembly/igniter,/obj/item/device/assembly/igniter,/obj/item/device/assembly/timer,/obj/item/device/assembly/timer,/obj/item/device/assembly/timer,/turf/simulated/floor/plating,/area/space)
-"cH" = (/obj/structure/closet/crate,/obj/item/device/t_scanner,/obj/item/clothing/gloves/color/insulated,/turf/simulated/floor/plating,/area/space)
+"cH" = (/obj/structure/closet/crate,/obj/item/device/t_scanner,/obj/item/clothing/gloves/yellow,/turf/simulated/floor/plating,/area/space)
 "cI" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/plating,/area/space)
 "cJ" = (/obj/machinery/portable_atmospherics/powered/scrubber,/turf/simulated/floor/plating,/area/space)
 "cK" = (/obj/effect/decal/remains/robot,/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor/plating,/area/space)
@@ -749,7 +749,7 @@
 "ou" = (/obj/structure/table/rack,/obj/structure/window/reinforced{dir = 4},/obj/machinery/door/window/brigdoor{dir = 8; name = "Weapons locker"; req_access = list(3)},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/space)
 "ov" = (/obj/machinery/artifact_scanpad,/turf/simulated/floor/reinforced,/area/space)
 "ow" = (/obj/machinery/computer/atmoscontrol,/turf/simulated/floor/plating,/area/space)
-"ox" = (/obj/structure/table/rack,/obj/item/weapon/camera_assembly,/obj/item/clothing/gloves/color/insulated,/obj/item/stack/cable_coil/random,/turf/simulated/floor/plating,/area/space)
+"ox" = (/obj/structure/table/rack,/obj/item/weapon/camera_assembly,/obj/item/clothing/gloves/yellow,/obj/item/stack/cable_coil/random,/turf/simulated/floor/plating,/area/space)
 "oy" = (/obj/structure/sign/directions/evac{dir = 2; name = "Escape Pod"; pixel_x = 32; pixel_y = -10},/turf/simulated/floor/tiled,/area/space)
 "oz" = (/obj/machinery/door/firedoor/border_only{dir = 2},/obj/machinery/door/airlock/glass,/turf/simulated/floor/tiled,/area/space)
 "oA" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/medical{name = "Mental Health"; req_access = list()},/turf/simulated/floor/tiled,/area/space)
@@ -1122,4 +1122,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-

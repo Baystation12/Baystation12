@@ -127,7 +127,7 @@
 "cw" = (/obj/structure/closet/crate/secure,/obj/item/weapon/coin/silver,/obj/item/weapon/coin/silver,/obj/item/weapon/coin/silver,/obj/item/weapon/coin/silver,/turf/simulated/floor/plating,/area/space)
 "cx" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"; name = "Clothing Storage"},/obj/item/clothing/glasses/regular/hipster,/obj/item/clothing/head/soft/mime,/obj/item/weapon/lipstick/random,/turf/simulated/floor/plating,/area/space)
 "cy" = (/obj/structure/table/rack,/obj/item/weapon/camera_assembly,/turf/simulated/floor/plating,/area/space)
-"cz" = (/obj/structure/closet/crate,/obj/item/clothing/gloves/color/insulated,/turf/simulated/floor/plating,/area/space)
+"cz" = (/obj/structure/closet/crate,/obj/item/clothing/gloves/yellow,/turf/simulated/floor/plating,/area/space)
 "cA" = (/obj/machinery/light/small,/obj/structure/closet/crate/radiation,/turf/simulated/floor/plating,/area/space)
 "cB" = (/obj/structure/table/rack,/obj/item/clothing/glasses/meson/prescription,/obj/item/clothing/glasses/meson/prescription,/obj/item/clothing/glasses/meson/prescription,/obj/item/clothing/glasses/welding,/turf/simulated/floor/plating,/area/space)
 "cC" = (/obj/structure/disposalpipe/trunk{dir = 1},/obj/structure/disposaloutlet,/turf/simulated/wall/r_wall,/area/space)
@@ -956,4 +956,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-

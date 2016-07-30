@@ -187,7 +187,7 @@
 "dE" = (/obj/machinery/light/small{tag = "icon-bulb1 (WEST)"; icon_state = "bulb1"; dir = 8},/turf/simulated/floor/plating,/area/construction)
 "dF" = (/obj/structure/closet/emcloset,/turf/simulated/floor/plating,/area/construction)
 "dG" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/circuitboard/powermonitor{pixel_x = -2; pixel_y = 2},/obj/item/weapon/circuitboard/stationalert_engineering{pixel_x = 1; pixel_y = -1},/obj/item/weapon/circuitboard/atmos_alert{pixel_x = 3; pixel_y = -3},/obj/item/weapon/circuitboard/security{name = "Circuit board (Engineering Monitor)"; network = list("Engineering","Power Alarms","Atmosphere Alarms","Fire Alarms")},/turf/simulated/floor/plating,/area/construction)
-"dH" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/toolbox/electrical{pixel_x = 1; pixel_y = -1},/obj/item/clothing/gloves/color/insulated,/obj/item/device/t_scanner,/obj/item/clothing/glasses/meson,/obj/item/device/multitool,/turf/simulated/floor/plating,/area/construction)
+"dH" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/toolbox/electrical{pixel_x = 1; pixel_y = -1},/obj/item/clothing/gloves/yellow,/obj/item/device/t_scanner,/obj/item/clothing/glasses/meson,/obj/item/device/multitool,/turf/simulated/floor/plating,/area/construction)
 "dI" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/toolbox/electrical{pixel_x = 1; pixel_y = -1},/obj/item/device/multitool,/obj/item/clothing/glasses/meson,/turf/simulated/floor/plating,/area/construction)
 "dJ" = (/obj/structure/table,/obj/machinery/cell_charger{pixel_y = 5},/obj/item/device/multitool,/turf/simulated/floor/plating,/area/construction)
 "dK" = (/obj/structure/table,/obj/item/weapon/cell/high{charge = 100; maxcharge = 15000},/turf/simulated/floor/plating,/area/construction)
@@ -734,4 +734,3 @@ aalraaaaaalraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaalrlrlraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
