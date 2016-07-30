@@ -9,7 +9,7 @@
 	item_flags = THICKMATERIAL
 	body_parts_covered = HEAD
 	armor = list(melee = 50, bullet = 50, laser = 50,energy = 25, bomb = 30, bio = 0, rad = 0)
-	flags_inv = HIDEEARS|BLOCKHAIR
+	flags_inv = HIDEEARS
 	cold_protection = HEAD
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HEAD
@@ -124,7 +124,7 @@
 	desc = "A helmet with optical and cranial augments coupled to it."
 	icon_state = "v62"
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
-	flags_inv = HIDEEARS|HIDEEYES|BLOCKHAIR
+	flags_inv = HIDEEARS|HIDEEYES
 	body_parts_covered = HEAD|EYES
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
