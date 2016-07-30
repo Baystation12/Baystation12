@@ -129,7 +129,7 @@
 
 /obj/item/clothing/accessory/badge/interstellarintel
 	name = "agent's badge"
-	desc = "A synthleather holographic badge bearing the crest of the Defense Intelligence Agency."
+	desc = "A synthleather holographic badge bearing the crest of the Office of Interstellar Intelligence."
 	icon_state = "intelbadge"
 	slot_flags = SLOT_TIE
 	badge_string = "Office of Interstellar Intelligence"

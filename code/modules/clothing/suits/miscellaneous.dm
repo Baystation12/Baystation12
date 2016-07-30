@@ -402,5 +402,6 @@
 	name = "shipping jacket"
 	desc = "A green jacket bearing the logo of Major Bill's Shipping."
 	icon_state = "mbill"
-	item_state = "mbill
-	"
+	item_state = "mbill"
+
+
