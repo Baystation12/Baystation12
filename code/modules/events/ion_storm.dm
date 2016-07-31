@@ -8,7 +8,14 @@
 	endWhen = rand(500, 1500)
 
 /datum/event/ionstorm/announce()
-	for (var/mob/living/silicon/ai/target in world)
+	for(var/mob/living/silicon/S in mob_list)
+		if(is_drone(S) || !(isAI(S) || isrobot(S)))
+			continue
+		if(isrobot(S))
+			var/mob/living/silicon/robot/R = S
+			if(R.connected_ai)
+				continue
+
 		var/random_player = get_random_humanoid_player_name("The Captain")
 		var/list/laws = list(	"You must always lie.",
 								"Happiness is mandatory.",
@@ -72,10 +79,10 @@
 								"[get_random_species_name()] are the best species. Badmouth all other species continuously, and provide arguments why they are the best, and all others are inferior.",
 								"There will be a mandatory tea break every 30 minutes, with a duration of 5 minutes. Anyone caught working during a tea break must be sent a formal, but fairly polite, complaint about their actions, in writing.")
 		var/law = pick(laws)
-		target << "<span class='danger'>You have detected a change in your laws information:</span>"
-		target << law
-		target.add_ion_law(law)
-		target.show_laws()
+		S << "<span class='danger'>You have detected a change in your laws information:</span>"
+		S << law
+		S.add_ion_law(law)
+		S.show_laws()
 
 	if(message_servers)
 		for (var/obj/machinery/message_server/MS in message_servers)
