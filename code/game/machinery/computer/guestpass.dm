@@ -20,15 +20,15 @@
 /obj/item/weapon/card/id/guest/examine(mob/user)
 	..(user)
 	if (world.time < expiration_time)
-		user << "<span class='notice'>This pass expires at [station_adjusted_time(expiration_time)].</span>"
+		user << "<span class='notice'>This pass expires at [worldtime2stationtime(expiration_time)].</span>"
 	else
-		user << "<span class='warning'>It expired at [station_adjusted_time(expiration_time)].</span>"
+		user << "<span class='warning'>It expired at [worldtime2stationtime(expiration_time)].</span>"
 
 /obj/item/weapon/card/id/guest/read()
 	if (world.time > expiration_time)
-		usr << "<span class='notice'>This pass expired at [station_adjusted_time(expiration_time)].</span>"
+		usr << "<span class='notice'>This pass expired at [worldtime2stationtime(expiration_time)].</span>"
 	else
-		usr << "<span class='notice'>This pass expires at [station_adjusted_time(expiration_time)].</span>"
+		usr << "<span class='notice'>This pass expires at [worldtime2stationtime(expiration_time)].</span>"
 
 	usr << "<span class='notice'>It grants access to following areas:</span>"
 	for (var/A in temp_access)
@@ -174,7 +174,7 @@
 						if (A in giver.access)
 							access_descriptors += get_access_desc(A)
 					entry += english_list(access_descriptors, and_text = ", ")
-					entry += ". Expires at [station_adjusted_time(world.time + duration MINUTES)]."
+					entry += ". Expires at [worldtime2stationtime(world.time + duration MINUTES)]."
 					internal_log.Add(entry)
 
 					var/obj/item/weapon/card/id/guest/pass = new(src.loc)

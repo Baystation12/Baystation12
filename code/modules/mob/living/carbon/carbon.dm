@@ -460,12 +460,14 @@
 	return FALSE
 
 /mob/living/carbon/onDropInto(var/atom/movable/AM)
-	if(AM.loc in stomach_contents)
-		if(can_devour(AM))
-			stomach_contents += AM
-			return null
-		src.visible_message("<span class='warning'>\The [src] regurgitates \the [AM]!</span>")
-		return loc
+	for(var/e in stomach_contents)
+		var/atom/movable/stomach_content = e
+		if(stomach_content.contains(AM))
+			if(can_devour(AM))
+				stomach_contents += AM
+				return null
+			src.visible_message("<span class='warning'>\The [src] regurgitates \the [AM]!</span>")
+			return loc
 	return ..()
 /mob/living/carbon/proc/should_have_organ(var/organ_check)
 	return 0
@@ -474,4 +476,3 @@
 	if(isSynthetic())
 		return 0
 	return !(species.flags & NO_PAIN)
-

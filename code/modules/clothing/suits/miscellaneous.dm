@@ -397,3 +397,11 @@
 	item_state = "black_hoodie"
 	icon_open = "black_hoodie_open"
 	icon_closed = "black_hoodie"
+
+/obj/item/clothing/suit/storage/mbill
+	name = "shipping jacket"
+	desc = "A green jacket bearing the logo of Major Bill's Shipping."
+	icon_state = "mbill"
+	item_state = "mbill"
+
+

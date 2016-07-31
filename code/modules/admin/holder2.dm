@@ -65,21 +65,22 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 	if(ismob(C))
 		var/mob/M = C
 		C = M.client
+	if(!C)
+		return FALSE
+	if(!C.holder)
+		if(show_msg)
+			C << "<span class='warning'>Error: You are not an admin.</span>"
+		return FALSE
 
-	if(C)
-		if(rights_required)
-			if(rights_required & C.holder.rights)
-				return 1
-			else
-				if(show_msg)
-					C << "<font color='red'>Error: You do not have sufficient rights to do that. You require one of the following flags:[rights2text(rights_required," ")].</font>"
+	if(rights_required)
+		if(rights_required & C.holder.rights)
+			return TRUE
 		else
-			if(C.holder)
-				return 1
-			else
-				if(show_msg)
-					C << "<font color='red'>Error: You are not an admin.</font>"
-	return 0
+			if(show_msg)
+				C << "<span class='warning'>Error: You do not have sufficient rights to do that. You require one of the following flags:[rights2text(rights_required," ")].</span>"
+			return FALSE
+	else
+		return TRUE
 
 //probably a bit iffy - will hopefully figure out a better solution
 /proc/check_if_greater_rights_than(client/other)

@@ -59,3 +59,15 @@
 	name = "Thong"
 	icon_state = "thong"
 	has_color = TRUE
+
+/datum/category_item/underwear/bottom/expedition_pt_shorts
+	name = "PT shorts, Expeditionary Corps"
+	icon_state = "expedition_shorts"
+
+/datum/category_item/underwear/bottom/fleet_pt_shorts
+	name = "PT shorts, Fleet"
+	icon_state = "fleet_shorts"
+
+/datum/category_item/underwear/bottom/marine_pt_shorts
+	name = "PT shorts, Marine Corps"
+	icon_state = "marine_shorts"

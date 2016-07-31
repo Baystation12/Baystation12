@@ -29,16 +29,16 @@
 
 	return wtime + (time_offset + wusage) * world.tick_lag
 
-var/roundstart_hour = 0
+var/roundstart_hour
 var/station_date = ""
 var/next_station_date_change = 1 DAY
 
-#define station_adjusted_time(time) time2text(time + station_time_in_ticks, "hh:mm")
+#define duration2stationtime(time) time2text(station_time_in_ticks + time, "hh:mm")
+#define worldtime2stationtime(time) time2text(roundstart_hour HOURS + time, "hh:mm")
 #define round_duration_in_ticks (round_start_time ? world.time - round_start_time : 0)
 #define station_time_in_ticks (roundstart_hour HOURS + round_duration_in_ticks)
 
 /proc/stationtime2text()
-	if(!roundstart_hour) roundstart_hour = pick(2,7,12,17)
 	return time2text(station_time_in_ticks, "hh:mm")
 
 /proc/stationdate2text()
@@ -53,7 +53,7 @@ var/next_station_date_change = 1 DAY
 	return station_date
 
 /proc/time_stamp()
-	return time2text(world.timeofday, "hh:mm:ss")
+	return time2text(station_time_in_ticks, "hh:mm:ss")
 
 /* Returns 1 if it is the selected month and day */
 proc/isDay(var/month, var/day)
@@ -97,3 +97,7 @@ var/round_start_time = 0
 /proc/process_schedule_interval(var/process_name)
 	var/datum/controller/process/process = processScheduler.getProcess(process_name)
 	return process.schedule_interval
+
+/hook/startup/proc/set_roundstart_hour()
+	roundstart_hour = pick(2,7,12,17)
+	return 1
