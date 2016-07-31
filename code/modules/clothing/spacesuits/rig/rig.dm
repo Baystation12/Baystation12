@@ -96,8 +96,15 @@
 			usr << "\icon[piece] \The [piece] [piece.gender == PLURAL ? "are" : "is"] deployed."
 
 	if(src.loc == usr)
+		usr << "The access panel is [locked? "locked" : "unlocked"]."
 		usr << "The maintenance panel is [open ? "open" : "closed"]."
 		usr << "Hardsuit systems are [offline ? "<font color='red'>offline</font>" : "<font color='green'>online</font>"]."
+
+		if(open && installed_modules.len)
+			usr << "It's equipped with:"
+			for(var/obj/item/rig_module/E in installed_modules)
+				usr << "[E]"
+
 
 /obj/item/weapon/rig/New()
 	..()
