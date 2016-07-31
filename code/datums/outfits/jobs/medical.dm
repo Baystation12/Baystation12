@@ -91,14 +91,16 @@
 
 /decl/hierarchy/outfit/job/medical/paramedic
 	name = OUTFIT_JOB_NAME("Paramedic")
-	uniform = /obj/item/clothing/under/rank/medical/black
+	uniform = /obj/item/clothing/under/rank/medical/paramedic
 	suit = /obj/item/clothing/suit/storage/toggle/fr_jacket
 	shoes = /obj/item/clothing/shoes/jackboots
 	l_hand = /obj/item/weapon/storage/firstaid/adv
 	belt = /obj/item/weapon/storage/belt/medical/emt
 	id_type = /obj/item/weapon/card/id/medical/paramedic
+	backpack = /obj/item/weapon/storage/backpack/emt
+	satchel_one = /obj/item/weapon/storage/backpack/satchel_emt
 	flags = OUTFIT_EXTENDED_SURVIVAL
 
 /decl/hierarchy/outfit/job/medical/paramedic/emt
 	name = OUTFIT_JOB_NAME("Emergency medical technician")
-	uniform = /obj/item/clothing/under/rank/medical/paramedic
+	uniform = /obj/item/clothing/under/rank/medical/black

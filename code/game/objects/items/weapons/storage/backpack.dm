@@ -24,7 +24,7 @@
 	slot_flags = SLOT_BACK
 	max_w_class = 4
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
-	
+
 /obj/item/weapon/storage/backpack/equipped()
 	if(!has_extension(src, /datum/extension/appearance))
 		set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
@@ -94,6 +94,12 @@
 	name = "medical backpack"
 	desc = "It's a backpack especially designed for use in a sterile environment."
 	icon_state = "medicalpack"
+	item_state_slots = null
+
+/obj/item/weapon/storage/backpack/emt
+	name = "emergency medical backpack"
+	desc = "It's a tough backpack used by first responders."
+	icon_state = "emtpack"
 	item_state_slots = null
 
 /obj/item/weapon/storage/backpack/security
@@ -230,6 +236,12 @@
 		slot_l_hand_str = "medicalpack",
 		slot_r_hand_str = "medicalpack",
 		)
+
+
+/obj/item/weapon/storage/backpack/satchel_emt
+	name = "emergency medical satchel"
+	desc = "It's a tough satchel used by first responders."
+	icon_state = "satchel-emt"
 
 /obj/item/weapon/storage/backpack/satchel_vir
 	name = "virologist satchel"
