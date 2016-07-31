@@ -23,10 +23,10 @@ var/global/datum/robolimb/basic_robolimb
 	desc = "This limb has a white polymer casing with blue holo-displays."
 	icon = 'icons/mob/human_races/cyberlimbs/bishop.dmi'
 
-/datum/robolimb/hesphaistos
-	company = "Hesphiastos Industries"
+/datum/robolimb/hephaestus
+	company = "Hephaestus Industries"
 	desc = "This limb has a militaristic black and green casing with gold stripes."
-	icon = 'icons/mob/human_races/cyberlimbs/hesphaistos.dmi'
+	icon = 'icons/mob/human_races/cyberlimbs/hephaestus.dmi'
 
 /datum/robolimb/zenghu
 	company = "Zeng-Hu Pharmaceuticals"
