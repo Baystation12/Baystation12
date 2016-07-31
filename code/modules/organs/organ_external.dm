@@ -446,7 +446,7 @@ This function completely restores a damaged organ to perfect condition.
 /obj/item/organ/external/proc/createwound(var/type = CUT, var/damage)
 	if(damage == 0) return
 
-	//moved these before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return) 
+	//moved these before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return)
 
 	//Brute damage can possibly trigger an internal wound, too.
 	var/local_damage = brute_dam + burn_dam + damage
@@ -1053,6 +1053,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/proc/embed(var/obj/item/weapon/W, var/silent = 0, var/supplied_message)
 	if(!owner || loc != owner)
+		return
+	if(species.flags & NO_EMBED)
 		return
 	if(!silent)
 		if(supplied_message)

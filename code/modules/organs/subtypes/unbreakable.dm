@@ -1,4 +1,4 @@
-// Slime limbs.
+// Slime/xeno limbs.
 /obj/item/organ/external/chest/unbreakable
 	cannot_break = 1
 	dislocated = -1
