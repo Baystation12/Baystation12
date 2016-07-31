@@ -1,5 +1,6 @@
 /datum/admin_secret_item/admin_secret/prison_warp
 	name = "Prison Warp"
+	warn_before_use = TRUE
 
 /datum/admin_secret_item/admin_secret/prison_warp/can_execute(var/mob/user)
 	if(!ticker) return 0
