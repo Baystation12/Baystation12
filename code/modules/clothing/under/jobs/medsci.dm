@@ -116,8 +116,8 @@
 /obj/item/clothing/under/rank/medical/paramedic
 	name = "paramedic's jumpsuit"
 	desc = "A durable green jumpsuit made from a special fiber that provides minor protection against hazards such as debris or biohazards."
-	icon_state = "emtitem"
-	item_state = "emt"
+	icon_state = "emt"
+	item_state = "emtitem"
 	worn_state = "emt"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
