@@ -46,7 +46,9 @@
 		config.server_name += " #[(world.port % 1000) / 100]"
 
 	if(config && config.log_runtime)
-		log = file("data/logs/runtime/[date_string]-runtime.log")
+		var/runtime_log = file("data/logs/runtime/[date_string]-[game_id].log")
+		runtime_log << "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]"
+		log = runtime_log
 
 	callHook("startup")
 	//Emergency Fix
@@ -205,7 +207,9 @@ var/world_topic_spam_protect_time = world.timeofday
 		L["dd_version"] = world.byond_version // DreamDaemon version running on
 
 		if(revdata.revision)
-			return list2params(list(branch = revdata.branch, date = revdata.date, revision = revdata.revision, gameid = game_id))
+			L["revision"] = revdata.revision
+			L["branch"] = revdata.branch
+			L["date"] = revdata.date
 		else
 			L["revision"] = "unknown"
 

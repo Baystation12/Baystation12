@@ -23,7 +23,7 @@
 		return 0
 
 	proc/get_cavity(var/obj/item/organ/external/affected)
-		switch (affected.name)
+		switch (affected.organ_tag)
 			if (BP_HEAD)
 				return "cranial"
 			if (BP_CHEST)
