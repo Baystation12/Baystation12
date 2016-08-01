@@ -36,4 +36,5 @@ changes:
   - rscadd: "Implemented full body prosthetics. Full Body prosthetics (FBPs) allow replacement of the entire body with cyborg components and replacement of internal organs with synethic or assisted counterparts. Players can create a FBP character by selecting full body in the limbs section of character preferences."
   - rscadd: "FBPs gain the benefits of a stronger body and no longer requiring breathing, but are prone to overheating much like IPCs and can take pressure damage in space. If you play an FBP, be sure to wear a suit and cooler!"
   - rscadd: "IPC monitor screens are now a seperate object in the loadout menu. IPCs can select a variety of other heads from other prosthetic manufacturing companies to change their head and body appearance."
+  - imageadd: "IPC monitor screens have an object sprite that's synced to their mob sprite."
   - tweak: "Rebalanced IPC brute and burn modifiers due to the introduction of FBPs. These settings may be tweaked again in the future after gameplay has been conducted."

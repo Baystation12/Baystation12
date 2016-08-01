@@ -589,6 +589,13 @@ var/list/VVckey_edit = list("key", "ckey")
 			if(var_new==null) return
 			O.vars[variable] = var_new
 
+		if("json")
+			var/json_str = input("JSON string", "JSON", json_encode(O.vars[variable])) as null | message
+			try
+				O.vars[variable] = json_decode(json_str)
+			catch
+				return
+
 		if("marked datum")
 			O.vars[variable] = holder.marked_datum()
 
