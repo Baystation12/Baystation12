@@ -1,0 +1,6 @@
+author: Haswell
+
+delete-after: True
+
+changes: 
+  - rscadd: "Modules installed within a hardsuit will now be listed when examining the hardsuit control module while being held or worn, if the maintenance panel is open."
