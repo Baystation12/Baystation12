@@ -94,6 +94,11 @@
 	icon = 'icons/obj/doors/Doorext.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_ext
 
+/obj/machinery/door/airlock/external/bolted_open
+	locked = 1
+	density = 0
+	icon_state = "door_open"
+
 /obj/machinery/door/airlock/glass
 	name = "Glass Airlock"
 	icon = 'icons/obj/doors/Doorglass.dmi'
