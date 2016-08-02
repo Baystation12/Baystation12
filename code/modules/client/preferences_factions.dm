@@ -29,7 +29,7 @@ var/global/list/home_system_choices = list(
 	)
 
 var/global/list/faction_choices = list(
-	"Sol Central",
+	"Sol Central Government",
 	"Vey Med",
 	"Einstein Engines",
 	"Free Trade Union",
@@ -39,7 +39,7 @@ var/global/list/faction_choices = list(
 	"Grayson Manufactories Ltd.",
 	"Aether Atmospherics",
 	"Zeng-Hu Pharmaceuticals",
-	"Hesphaistos Industries"
+	"Hephaestus Industries"
 	)
 
 var/global/list/religion_choices = list(
