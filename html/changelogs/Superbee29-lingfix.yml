@@ -1,0 +1,5 @@
+author: Superbee29
+delete-after: True
+
+changes: 
+  - bugfix: "Changeling transformation sting no longer causes organ rejection."
