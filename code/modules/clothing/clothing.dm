@@ -34,7 +34,7 @@
 
 	if(accessories.len)
 		for(var/obj/item/clothing/accessory/A in accessories)
-			ret.overlays |= A.get_mob_overlay(src, slot)
+			ret.overlays |= A.get_mob_overlay(user_mob, slot)
 	return ret
 
 // Aurora forensics port.
