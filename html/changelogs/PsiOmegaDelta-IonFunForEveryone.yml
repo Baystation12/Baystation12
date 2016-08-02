@@ -1,6 +1,0 @@
-author: PsiOmegaDelta
-
-delete-after: True
-
-changes: 
-  - rscadd: "Ion storms now also affect unslaved borgs, but not drones."
