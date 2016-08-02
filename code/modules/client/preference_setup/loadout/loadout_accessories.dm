@@ -31,9 +31,7 @@
 /datum/gear/accessory/wallet
 	display_name = "wallet"
 	path = /obj/item/weapon/storage/wallet
-/datum/gear/accessory/wallet/New()
-	..()
-	gear_tweaks = list(gear_tweak_free_color_choice())
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/wallet_poly
 	display_name = "wallet, polychromic"

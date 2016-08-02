@@ -2,7 +2,7 @@
 	name = "Tunnel clown"
 	uniform = /obj/item/clothing/under/rank/clown
 	shoes = /obj/item/clothing/shoes/clown_shoes
-	gloves = /obj/item/clothing/gloves/black
+	gloves = /obj/item/clothing/gloves/thick
 	mask = /obj/item/clothing/mask/gas/clown_hat
 	head = /obj/item/clothing/head/chaplain_hood
 	l_ear = /obj/item/device/radio/headset
@@ -38,7 +38,7 @@
 	name = "Reaper"
 	uniform = /obj/item/clothing/under/suit_jacket
 	shoes = /obj/item/clothing/shoes/black
-	gloves = /obj/item/clothing/gloves/black
+	gloves = /obj/item/clothing/gloves/thick
 	l_ear = /obj/item/device/radio/headset
 	glasses = /obj/item/clothing/glasses/sunglasses
 	suit = /obj/item/clothing/suit/wcoat

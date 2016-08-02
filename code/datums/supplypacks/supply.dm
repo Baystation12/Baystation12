@@ -69,7 +69,7 @@
 					/obj/item/weapon/storage/backpack/satchel_eng,
 					/obj/item/device/radio/headset/headset_cargo,
 					/obj/item/clothing/under/rank/miner,
-					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/gloves/thick,
 					/obj/item/clothing/shoes/black,
 					/obj/item/device/analyzer,
 					/obj/item/weapon/storage/ore,

@@ -207,7 +207,7 @@
 		if("wallet")
 			new/obj/item/weapon/storage/wallet/leather(loc)
 		if("gloves")
-			new/obj/item/clothing/gloves/botanic_leather(loc)
+			new/obj/item/clothing/gloves/thick/botany(loc)
 		if("tbelt")
 			new/obj/item/weapon/storage/belt/utility(loc)
 		if("satchel")
