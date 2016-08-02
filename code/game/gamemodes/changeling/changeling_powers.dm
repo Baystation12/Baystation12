@@ -796,6 +796,8 @@ var/list/datum/dna/hivemind_bank = list()
 	T.visible_message("<span class='warning'>[T] transforms!</span>")
 	T.dna = chosen_dna.Clone()
 	T.real_name = chosen_dna.real_name
+	for (var/obj/item/organ/O in T.internal_organs)
+		O.dna = chosen_dna.Clone()
 	T.UpdateAppearance()
 	domutcheck(T, null)
 	feedback_add_details("changeling_powers","TS")
