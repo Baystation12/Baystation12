@@ -746,10 +746,8 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_fire(var/update_icons=1)
 	overlays_standing[FIRE_LAYER] = null
 	if(on_fire)
-		var/image/standing = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"=FIRE_LAYER)
-		standing.appearance_flags = RESET_COLOR
+		var/image/standing = overlay_image('icons/mob/OnFire.dmi', "Standing", RESET_COLOR)
 		overlays_standing[FIRE_LAYER] = standing
-
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/proc/update_surgery(var/update_icons=1)
