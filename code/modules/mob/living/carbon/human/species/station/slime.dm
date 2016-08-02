@@ -8,7 +8,7 @@
 
 	language = null //todo?
 	unarmed_types = list(/datum/unarmed_attack/slime_glomp)
-	flags = NO_SCAN | NO_SLIP | NO_BREATHE | NO_MINOR_CUT
+	flags = NO_SCAN | NO_SLIP | NO_BREATHE | NO_EMBED
 	spawn_flags = IS_RESTRICTED
 	siemens_coefficient = 3 //conductive
 	darksight = 3
