@@ -154,5 +154,3 @@
 				if(target.species.flags & NO_BREATHE) //dont breathe so why do they smell it.
 					continue
 			M << "<span class='danger'>A terrible stench emanates from \the [H].</span>"
-	if(prob(1) && prob(50)) //0.5% chance
-		H.vomit()
