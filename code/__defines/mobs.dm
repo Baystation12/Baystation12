@@ -214,3 +214,19 @@
 //Used by show_message() and emotes
 #define VISIBLE_MESSAGE 1
 #define AUDIBLE_MESSAGE 2
+
+//used for getting species temp values
+#define COLD_LEVEL_1 -1
+#define COLD_LEVEL_2 -2
+#define COLD_LEVEL_3 -3
+#define HEAT_LEVEL_1 1
+#define HEAT_LEVEL_2 2
+#define HEAT_LEVEL_3 3
+
+//Synthetic human temperature vals
+#define SYNTH_COLD_LEVEL_1 50
+#define SYNTH_COLD_LEVEL_2 -1
+#define SYNTH_COLD_LEVEL_3 -1
+#define SYNTH_HEAT_LEVEL_1 500
+#define SYNTH_HEAT_LEVEL_2 1000
+#define SYNTH_HEAT_LEVEL_3 2000

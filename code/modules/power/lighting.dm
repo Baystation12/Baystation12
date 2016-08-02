@@ -396,7 +396,7 @@ var/global/list/light_type_cache = list()
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			user.visible_message("[user.name] opens [src]'s casing.", \
 				"You open [src]'s casing.", "You hear a noise.")
-			
+
 			new construct_type(src.loc, src.dir, src)
 			qdel(src)
 			return
@@ -461,7 +461,7 @@ var/global/list/light_type_cache = list()
 		var/mob/living/carbon/human/H = user
 
 		if(istype(H))
-			if(H.species.heat_level_1 > LIGHT_BULB_TEMPERATURE)
+			if(H.getSpeciesOrSynthTemp(HEAT_LEVEL_1) > LIGHT_BULB_TEMPERATURE)
 				prot = 1
 			else if(H.gloves)
 				var/obj/item/clothing/gloves/G = H.gloves
@@ -595,7 +595,7 @@ obj/machinery/light/proc/burn_out()
 	brightness_power = 3
 	brightness_color = "#FFFFFF"
 	lighting_modes = list(
-		"emergency_lighting" = list(l_range = 5, l_power = 1, l_color = "#da0205"), 
+		"emergency_lighting" = list(l_range = 5, l_power = 1, l_color = "#da0205"),
 		)
 
 /obj/item/weapon/light/tube/large

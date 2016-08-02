@@ -26,13 +26,13 @@
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
 
-	cold_level_1 = 50
-	cold_level_2 = -1
-	cold_level_3 = -1
+	cold_level_1 = SYNTH_COLD_LEVEL_1
+	cold_level_2 = SYNTH_COLD_LEVEL_2
+	cold_level_3 = SYNTH_COLD_LEVEL_3
 
-	heat_level_1 = 500		// Gives them about 25 seconds in space before taking damage
-	heat_level_2 = 1000
-	heat_level_3 = 2000
+	heat_level_1 = SYNTH_HEAT_LEVEL_1		// Gives them about 25 seconds in space before taking damage
+	heat_level_2 = SYNTH_HEAT_LEVEL_2
+	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
 	body_temperature = null
 	passive_temp_gain = 5  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.

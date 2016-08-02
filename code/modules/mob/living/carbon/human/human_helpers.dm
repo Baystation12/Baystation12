@@ -112,3 +112,21 @@
 			if(PDA.owner == old_name)
 				PDA.set_owner(new_name)
 				search_pda = 0
+
+
+//Get species or synthetic temp if the mob is a FBP. Used when a synthetic type human mob is exposed to a temp check.
+//Essentially, used when a synthetic human mob should act diffferently than a normal type mob.
+/mob/living/carbon/human/proc/getSpeciesOrSynthTemp(var/temptype)
+	switch(temptype)
+		if(COLD_LEVEL_1)
+			return isSynthetic()? SYNTH_COLD_LEVEL_1 : species.cold_level_1
+		if(COLD_LEVEL_2)
+			return isSynthetic()? SYNTH_COLD_LEVEL_2 : species.cold_level_2
+		if(COLD_LEVEL_3)
+			return isSynthetic()? SYNTH_COLD_LEVEL_3 : species.cold_level_3
+		if(HEAT_LEVEL_1)
+			return isSynthetic()? SYNTH_HEAT_LEVEL_1 : species.heat_level_1
+		if(HEAT_LEVEL_2)
+			return isSynthetic()? SYNTH_HEAT_LEVEL_2 : species.heat_level_2
+		if(HEAT_LEVEL_3)
+			return isSynthetic()? SYNTH_HEAT_LEVEL_3 : species.heat_level_3

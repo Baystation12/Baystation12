@@ -54,8 +54,6 @@
 	var/charge_usage = (temp_adj/max_cooling)*charge_consumption
 
 	H.bodytemperature -= temp_adj
-	world << "Temp adj: [temp_adj]"
-	world << "Body temp: [H.bodytemperature]"
 
 	cell.use(charge_usage)
 	update_icon()
