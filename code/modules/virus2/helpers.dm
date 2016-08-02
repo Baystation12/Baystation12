@@ -163,11 +163,11 @@ proc/airborne_can_reach(turf/source, turf/target)
 			//Allow for small chance of touching other zones. 
 			//This is proc is also used for passive spreading so just because they are targeting
 			//that zone doesn't mean that's necessarily where they will touch.
-			var/touch_zone = ran_zone(src.zone_sel.selecting, 80)
+			var/touch_zone = H.ran_zone(src.zone_sel.selecting, 80)
 			var/obj/item/organ/external/select_area = H.get_organ(touch_zone)
 			if(!select_area)
 				//give it one more chance, since this is also called for passive spreading
-				select_area = H.get_organ(ran_zone())
+				select_area = H.get_organ(H.ran_zone())
 
 			if(!select_area)
 				nudity = 0 //cant contact a missing body part

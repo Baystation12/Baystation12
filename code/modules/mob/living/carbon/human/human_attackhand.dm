@@ -27,26 +27,33 @@
 			H.do_attack_animation(src)
 			return 0
 
+		//kind of pointless now that you can pull punches
+		//maybe add the ability for items to grant unarmed attacks?
 		if(istype(H.gloves, /obj/item/clothing/gloves/boxing/hologlove))
 			H.do_attack_animation(src)
+			var/affecting = get_zone_with_miss_chance(H.zone_sel.selecting, src)
+			if(!affecting)
+				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+				visible_message("<span class='danger'>[H] has attempted to punch [src], but missed!</span>")
+				return 0
+
 			var/damage = rand(0, 9)
 			if(!damage)
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-				visible_message("\red <B>[H] has attempted to punch [src]!</B>")
+				visible_message("<span class='danger'>[H] has attempted to punch [src]!</span>")
 				return 0
-			var/obj/item/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
-			var/armor_block = run_armor_check(affecting, "melee")
 
 			if(HULK in H.mutations)
 				damage += 5
 
 			playsound(loc, "punch", 25, 1, -1)
 
-			visible_message("\red <B>[H] has punched [src]!</B>")
+			visible_message("<span class='danger'>[H] has punched [src]!</span>")
 
+			var/armor_block = run_armor_check(affecting, "melee")
 			apply_damage(damage, HALLOSS, affecting, armor_block)
-			if(damage >= 9)
-				visible_message("\red <B>[H] has weakened [src]!</B>")
+			if(damage >= 9 && armor_block < 100)
+				visible_message("<span class='danger'>[H] has weakened [src]!</span>")
 				apply_effect(4, WEAKEN, armor_block)
 
 			return
@@ -179,7 +186,7 @@
 					TODO: proc for melee combat miss chances depending on organ?
 				*/
 				if(prob(80))
-					hit_zone = ran_zone(hit_zone)
+					hit_zone = src.ran_zone(hit_zone)
 				if(prob(15) && hit_zone != "chest") // Missed!
 					if(!src.lying)
 						attack_message = "[H] attempted to strike [src], but missed!"
@@ -236,7 +243,8 @@
 
 			if(w_uniform)
 				w_uniform.add_fingerprint(M)
-			var/obj/item/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
+
+			var/affecting = src.ran_zone(M.zone_sel.selecting, 20)
 
 			var/list/holding = list(get_active_hand() = 40, get_inactive_hand = 20)
 
@@ -312,10 +320,8 @@
 		return 0
 
 	if(!def_zone) def_zone = user.zone_sel.selecting
-	var/target_zone = check_zone(def_zone)
-	if(!target_zone)
-		return 0
-	var/obj/item/organ/external/organ = get_organ(check_zone(target_zone))
+
+	var/obj/item/organ/external/organ = get_organ(def_zone)
 	if(!organ || organ.dislocated > 0 || organ.dislocated == -1) //don't use is_dislocated() here, that checks parent
 		return 0
 

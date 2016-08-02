@@ -69,13 +69,16 @@
 			user << "<span class='warning'>This syringe is broken!</span>"
 			return
 
-		if(user.a_intent == I_HURT && ismob(target))
-			if((CLUMSY in user.mutations) && prob(50))
-				target = user
-			syringestab(target, user)
-			return
+		var/target_zone = user.zone_sel.selecting
+		if(ismob(target))
+			var/mob/M = target
+			target_zone = M.check_zone(target_zone)
 
-		var/target_zone = check_zone(user.zone_sel.selecting)
+			if(user.a_intent == I_HURT)
+				if((CLUMSY in user.mutations) && prob(50))
+					target = user
+				syringestab(target, user)
+				return
 
 		switch(mode)
 			if(SYRINGE_DRAW)
@@ -223,7 +226,7 @@
 
 			var/mob/living/carbon/human/H = target
 
-			var/target_zone = ran_zone(check_zone(user.zone_sel.selecting, target))
+			var/target_zone = target.ran_zone(target.check_zone(user.zone_sel.selecting, target), 20)
 			var/obj/item/organ/external/affecting = H.get_organ(target_zone)
 
 			if (!affecting || affecting.is_stump())

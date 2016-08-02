@@ -41,7 +41,7 @@ meteor_act
 	return blocked
 
 /mob/living/carbon/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone)
-	var/obj/item/organ/external/affected = get_organ(check_zone(def_zone))
+	var/obj/item/organ/external/affected = get_organ(def_zone)
 	var/siemens_coeff = get_siemens_coefficient_organ(affected)
 	stun_amount *= siemens_coeff
 	agony_amount *= siemens_coeff
@@ -82,12 +82,11 @@ meteor_act
 
 	//If you don't specify a bodypart, it checks ALL your bodyparts for protection, and averages out the values
 	for(var/organ_name in organs_by_name)
-		if (organ_name in organ_rel_size)
-			var/obj/item/organ/external/organ = organs_by_name[organ_name]
-			if(organ)
-				var/weight = organ_rel_size[organ_name]
-				armorval += getarmor_organ(organ, type) * weight //use plain addition here because we are calculating an average
-				total += weight
+		var/obj/item/organ/external/organ = organs_by_name[organ_name]
+		if(organ)
+			var/weight = get_organ_rel_size(organ)
+			armorval += getarmor_organ(organ, type) * weight //use plain addition here because we are calculating an average
+			total += weight
 	return (armorval/max(total, 1))
 
 //this proc returns the Siemens coefficient of electrical resistivity for a particular external organ.
@@ -321,7 +320,7 @@ meteor_act
 			var/mob/living/L = O.thrower
 			zone = check_zone(L.zone_sel.selecting)
 		else
-			zone = ran_zone("chest",75)	//Hits a random part of the body, geared towards the chest
+			zone = src.ran_zone("chest",75)	//Hits a random part of the body, geared towards the chest
 
 		//check if we hit
 		var/miss_chance = 15

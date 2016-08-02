@@ -74,7 +74,7 @@
 
 	var/target_zone
 	if(L.lying)
-		target_zone = ran_zone()
+		target_zone = L.ran_zone()
 	else
 		target_zone = pick("l_foot", "r_foot", "l_leg", "r_leg")
 

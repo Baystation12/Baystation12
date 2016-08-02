@@ -98,63 +98,53 @@ var/list/global/base_miss_chance = list(
 	"r_foot" = 50,
 )
 
-//Used to weight organs when an organ is hit randomly (i.e. not a directed, aimed attack).
-//Also used to weight the protection value that armour provides for covering that body part when calculating protection from full-body effects.
-var/list/global/organ_rel_size = list(
-	"head" = 25,
-	"chest" = 70,
-	"groin" = 30,
-	"l_leg" = 25,
-	"r_leg" = 25,
-	"l_arm" = 25,
-	"r_arm" = 25,
-	"l_hand" = 10,
-	"r_hand" = 10,
-	"l_foot" = 10,
-	"r_foot" = 10,
-)
+//Table of relative sizes based on organ w_class
+var/global/list/organ_rel_size = list(5, 10, 25, 50, 70, 140, 300, 600, 1000)
+/proc/get_organ_rel_size(var/obj/item/organ/external/O)
+	var/w_class
+	if(ispath(O))
+		w_class = initial(O.w_class)
+	else
+		w_class = O.w_class
+	return organ_rel_size[Clamp(w_class, 1, organ_rel_size.len)]
 
-/proc/check_zone(zone)
-	if(!zone)	return "chest"
-	switch(zone)
+/mob/proc/check_zone(zone)
+	return "chest" //zone is irrelevant for this mob type
+
+/mob/living/carbon/human/check_zone(zone)
+	switch(zone) //TODO
 		if("eyes")
 			zone = "head"
 		if("mouth")
 			zone = "head"
-	return zone
+	if(zone in species.has_limbs)
+		return zone
+	return ..()
 
 // Returns zone with a certain probability. If the probability fails, or no zone is specified, then a random body part is chosen.
 // Do not use this if someone is intentionally trying to hit a specific body part.
 // Use get_zone_with_miss_chance() for that.
-/proc/ran_zone(zone, probability)
-	if (zone)
-		zone = check_zone(zone)
-		if (prob(probability))
+/mob/proc/ran_zone(zone, probability)
+	return zone? zone : "chest" //zone is irrelevant for this mob type
+
+/mob/living/carbon/human/ran_zone(zone, probability)
+	if(zone)
+		zone = src.check_zone(zone)
+		if(prob(probability))
 			return zone
 
-	var/ran_zone = zone
-	while (ran_zone == zone)
-		ran_zone = pick (
-			organ_rel_size["head"]; "head",
-			organ_rel_size["chest"]; "chest",
-			organ_rel_size["groin"]; "groin",
-			organ_rel_size["l_arm"]; "l_arm",
-			organ_rel_size["r_arm"]; "r_arm",
-			organ_rel_size["l_leg"]; "l_leg",
-			organ_rel_size["r_leg"]; "r_leg",
-			organ_rel_size["l_hand"]; "l_hand",
-			organ_rel_size["r_hand"]; "r_hand",
-			organ_rel_size["l_foot"]; "l_foot",
-			organ_rel_size["r_foot"]; "r_foot",
-		)
+	var/list/pick_list = list()
+	for(var/limb in species.has_limbs)
+		var/obj/item/organ/external/O = get_organ(limb)
+		pick_list[limb] = get_organ_rel_size(istype(O)? O : species.has_limbs[limb]["path"])
+	return pickweight(pick_list)
 
-	return ran_zone
 
 // Emulates targetting a specific body part, and miss chances
 // May return null if missed
 // miss_chance_mod may be negative.
 /proc/get_zone_with_miss_chance(zone, var/mob/target, var/miss_chance_mod = 0, var/ranged_attack=0)
-	zone = check_zone(zone)
+	zone = target.check_zone(zone)
 
 	if(!ranged_attack)
 		// you cannot miss if your target is prone or restrained

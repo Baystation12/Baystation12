@@ -46,7 +46,7 @@
 		attacker << "<span class='warning'>You require a better grab to do this.</span>"
 		return
 
-	var/obj/item/organ/external/organ = target.get_organ(check_zone(target_zone))
+	var/obj/item/organ/external/organ = target.get_organ(target_zone)
 	if(!organ || organ.dislocated == -1)
 		return
 

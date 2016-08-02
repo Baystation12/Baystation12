@@ -108,7 +108,7 @@
 
 				if(prob(stunprob))
 					var/shock_damage = max(0, powerlevel-3) * rand(6,10)
-					M.electrocute_act(shock_damage, src, 1.0, ran_zone())
+					M.electrocute_act(shock_damage, src, 1.0, M.ran_zone())
 				else if(prob(40))
 					M.visible_message("<span class='danger'>[src] has pounced at [M]!</span>", "<span class='danger'>[src] has pounced at you!</span>")
 					M.Weaken(power)

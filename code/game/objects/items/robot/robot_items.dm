@@ -22,7 +22,7 @@
 	playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 	
 	M.apply_effect(5, STUTTER)
-	M.stun_effect_act(0, 70, check_zone(hit_zone), src)
+	M.stun_effect_act(0, 70, M.check_zone(hit_zone), src)
 	
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
