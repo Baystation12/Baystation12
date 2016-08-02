@@ -407,6 +407,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 		// Do not let them amputate their entire body, ty.
 		var/list/choice_options = list("Normal","Amputated","Prosthesis")
+
+		//Dare ye who decides to one day make fbps be able to have fleshy bits. Heed my warning, recursion is a bitch. - Snapshot
+		if(pref.organ_data[BP_CHEST] == "cyborg")
+			choice_options = list("Amputated", "Prosthesis")
+
 		switch(organ_tag)
 			if("Left Leg")
 				limb = BP_L_LEG
@@ -449,6 +454,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					for(var/other_limb in (BP_ALL_LIMBS - BP_CHEST))
 						pref.organ_data[other_limb] = null
 						pref.rlimb_data[other_limb] = null
+						for(var/internal_organ in list(BP_HEART,BP_EYES))
+							pref.organ_data[internal_organ] = null
 				pref.organ_data[limb] = null
 				pref.rlimb_data[limb] = null
 				if(third_limb)
@@ -513,6 +520,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/list/organ_choices = list("Normal","Assisted")
 		if(pref.organ_data[BP_CHEST] == "cyborg")
 			organ_choices -= "Normal"
+			organ_choices += "Synthetic"
 
 		var/new_state = input(user, "What state do you wish the organ to be in?") as null|anything in organ_choices
 		if(!new_state) return

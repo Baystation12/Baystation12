@@ -119,6 +119,9 @@
 		if(!isnull(H.internal_organs_by_name["cell"]) && H.nutrition < 450)
 			H.nutrition = min(H.nutrition+10, 450)
 			cell.use(7000/450*10)
+		else if(H.nutrition < 400)//special snoflake FBP case
+			H.nutrition = min(H.nutrition+10, 400)
+			cell.use(7000/450*10)
 
 
 /obj/machinery/recharge_station/examine(mob/user)
@@ -238,6 +241,8 @@
 		return (R.cell)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
+		if(H.isSynthetic()) // FBPs and IPCs
+			return 1
 		return H.internal_organs_by_name["cell"]
 	return 0
 
