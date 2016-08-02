@@ -32,10 +32,7 @@
 	path = /obj/item/clothing/ears/skrell/colored/chain
 	sort_category = "Xenowear"
 	whitelisted = "Skrell"
-
-/datum/gear/ears/skrell/colored/chain/New()
-	..()
-	gear_tweaks = list(gear_tweak_free_color_choice())
+	flags = GEAR_HAS_COLOR_SELECTION
 
 //Skrell Bands
 /datum/gear/ears/skrell/bands
@@ -57,10 +54,7 @@
 	path = /obj/item/clothing/ears/skrell/colored/band
 	sort_category = "Xenowear"
 	whitelisted = "Skrell"
-
-/datum/gear/ears/skrell/colored/band/New()
-	..()
-	gear_tweaks = list(gear_tweak_free_color_choice())
+	flags = GEAR_HAS_COLOR_SELECTION
 
 //Skrell Cloth
 /datum/gear/ears/skrell/cloth/male

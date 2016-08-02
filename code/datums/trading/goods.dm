@@ -153,7 +153,7 @@
 								/obj/item/clothing/gloves                 = TRADER_SUBTYPES_ONLY,
 								/obj/item/clothing/gloves/lightrig        = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/gloves/rig             = TRADER_BLACKLIST_ALL,
-								/obj/item/clothing/gloves/swat            = TRADER_BLACKLIST,
+								/obj/item/clothing/gloves/thick/swat            = TRADER_BLACKLIST,
 								/obj/item/clothing/gloves/chameleon       = TRADER_BLACKLIST,
 								/obj/item/clothing/head                   = TRADER_SUBTYPES_ONLY,
 								/obj/item/clothing/head/HoS               = TRADER_BLACKLIST_ALL,

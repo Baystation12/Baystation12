@@ -221,15 +221,17 @@
 
 	var/list/data[0]
 	data["state"] = state
-	data["devtype"] = devtype
-	data["hw_battery"] = dev_battery
-	data["hw_disk"] = dev_disk
-	data["hw_netcard"] = dev_netcard
-	data["hw_tesla"] = dev_tesla
-	data["hw_nanoprint"] = dev_nanoprint
-	data["hw_card"] = dev_card
-	data["hw_cpu"] = dev_cpu
-	data["totalprice"] = "[total_price]ş"
+	if(state == 1)
+		data["devtype"] = devtype
+		data["hw_battery"] = dev_battery
+		data["hw_disk"] = dev_disk
+		data["hw_netcard"] = dev_netcard
+		data["hw_tesla"] = dev_tesla
+		data["hw_nanoprint"] = dev_nanoprint
+		data["hw_card"] = dev_card
+		data["hw_cpu"] = dev_cpu
+	if(state == 1 || state == 2)
+		data["totalprice"] = total_price
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

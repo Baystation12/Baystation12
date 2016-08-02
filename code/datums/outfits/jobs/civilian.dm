@@ -23,7 +23,7 @@
 	name = OUTFIT_JOB_NAME("Gardener")
 	uniform = /obj/item/clothing/under/rank/hydroponics
 	suit = /obj/item/clothing/suit/apron
-	gloves = /obj/item/clothing/gloves/botanic_leather
+	gloves = /obj/item/clothing/gloves/thick/botany
 	r_pocket = /obj/item/device/analyzer/plant_analyzer
 	backpack = /obj/item/weapon/storage/backpack/hydroponics
 	satchel_one = /obj/item/weapon/storage/backpack/satchel_hyd

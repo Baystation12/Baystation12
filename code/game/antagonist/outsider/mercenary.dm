@@ -37,7 +37,7 @@ var/datum/antagonist/mercenary/mercs
 
 	player.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(player), slot_w_uniform)
 	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(player), slot_shoes)
-	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/swat(player), slot_gloves)
+	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/thick/swat(player), slot_gloves)
 	if(player.backbag == 2) player.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(player), slot_back)
 	if(player.backbag == 3) player.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(player), slot_back)
 	if(player.backbag == 4) player.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(player), slot_back)

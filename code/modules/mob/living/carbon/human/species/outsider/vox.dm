@@ -34,7 +34,7 @@
 	poison_type = "oxygen"
 	siemens_coefficient = 0.2
 
-	flags = NO_SCAN | NO_MINOR_CUT
+	flags = NO_SCAN
 	spawn_flags = IS_WHITELISTED
 	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
@@ -168,5 +168,3 @@
 				if(!target.should_have_organ(BP_LUNGS)) //dont breathe so why do they smell it.
 					continue
 			M << "<span class='danger'>A terrible stench emanates from \the [H].</span>"
-	if(prob(1) && prob(50)) //0.5% chance
-		H.vomit()

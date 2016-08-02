@@ -263,8 +263,8 @@
 	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/gloves/black(src)
-	new /obj/item/clothing/gloves/black(src)
+	new /obj/item/clothing/gloves/thick(src)
+	new /obj/item/clothing/gloves/thick(src)
 	return
 
 

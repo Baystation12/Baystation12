@@ -17,11 +17,17 @@
 
 #define iscarbon(A) istype(A, /mob/living/carbon)
 
+#define iscolorablegloves(A) (istype(A, /obj/item/clothing/gloves/color)||istype(A, /obj/item/clothing/gloves/insulated)||istype(A, /obj/item/clothing/gloves/thick))
+
 #define iscorgi(A) istype(A, /mob/living/simple_animal/corgi)
+
+#define is_drone(A) istype(A, /mob/living/silicon/robot/drone)
 
 #define isEye(A) istype(A, /mob/observer/eye)
 
 #define ishuman(A) istype(A, /mob/living/carbon/human)
+
+#define isitem(A) istype(A, /obj/item)
 
 #define islist(A) istype(A, /list)
 

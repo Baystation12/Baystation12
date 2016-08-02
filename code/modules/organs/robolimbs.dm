@@ -40,20 +40,20 @@ var/datum/robolimb/basic_robolimb
 	restricted_to = list("Machine")
 	unavailable_at_fab = 1
 
-/datum/robolimb/hesphaistos
-	company = "Hesphiastos"
+/datum/robolimb/hephaestus
+	company = "Hephaestus Industries"
 	desc = "This limb has a militaristic black and green casing with gold stripes."
-	icon = 'icons/mob/human_races/cyberlimbs/hesphiastos/hesphiastos_main.dmi'
+	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_main.dmi'
 
-/datum/robolimb/hesphiastos/alt
-	company = "Hesphiastos Alt."
-	icon = 'icons/mob/human_races/cyberlimbs/hesphiastos/hesphiastos_alt.dmi'
+/datum/robolimb/hephaestus/alt
+	company = "Hephaestus Alt."
+	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_alt.dmi'
 	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
 
 /datum/robolimb/hesphiastos/alt/monitor
-	company = "Hesphiastos Monitor."
-	icon = 'icons/mob/human_races/cyberlimbs/hesphiastos/hesphiastos_monitor.dmi'
+	company = "Hephaestus Monitor."
+	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_monitor.dmi'
 	restricted_to = list("Machine")
 	can_eat = null
 	unavailable_at_fab = 1
