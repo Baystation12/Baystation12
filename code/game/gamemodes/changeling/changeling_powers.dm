@@ -788,7 +788,7 @@ var/list/datum/dna/hivemind_bank = list()
 	if(!chosen_dna)
 		return
 
-	var/mob/living/carbon/human/T = changeling_sting(40,/mob/proc/changeling_transformation_sting) //changed this to human, so there doesn't have to be an if ishuman and a new var later (carbon does not have b_type)
+	var/mob/living/carbon/T = changeling_sting(40,/mob/proc/changeling_transformation_sting)
 	if(!T)	return 0
 	if((HUSK in T.mutations) || (!ishuman(T) && !issmall(T)))
 		src << "<span class='warning'>Our sting appears ineffective against its DNA.</span>"
@@ -797,12 +797,14 @@ var/list/datum/dna/hivemind_bank = list()
 
 	T.dna = chosen_dna.Clone()
 	T.real_name = chosen_dna.real_name
-	T.b_type = chosen_dna.b_type
 	for (var/obj/item/organ/O in T.internal_organs)
 		O.dna = chosen_dna.Clone()
 		var/BD = list()
 		BD[O.dna.unique_enzymes] = chosen_dna.b_type
 		O.blood_DNA = BD
+	if(ishuman(T))
+		var/mob/living/carbon/human/H = T
+		H.b_type = chosen_dna.b_type
 	T.UpdateAppearance()
 	domutcheck(T, null)
 
