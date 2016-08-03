@@ -14,8 +14,9 @@
 /obj/item/clothing/gloves/insulated
 	desc = "These gloves will protect the wearer from electric shock."
 	name = "insulated gloves"
-	icon_state = "yellow"
-	item_state = "ygloves"
+	color = COLOR_YELLOW
+	icon_state = "white"
+	item_state = "lgloves"
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 
