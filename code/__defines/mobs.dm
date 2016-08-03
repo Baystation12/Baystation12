@@ -157,6 +157,48 @@
 #define INCAPACITATION_DEFAULT (INCAPACITATION_RESTRAINED|INCAPACITATION_BUCKLED_FULLY|INCAPACITATION_DISABLED)
 #define INCAPACITATION_ALL (~INCAPACITATION_NONE)
 
+// Organs.
+#define BP_MOUTH    "mouth"
+#define BP_EYES     "eyes"
+#define BP_HEART    "heart"
+#define BP_LUNGS    "lungs"
+#define BP_BRAIN    "brain"
+#define BP_LIVER    "liver"
+#define BP_KIDNEYS  "kidneys"
+#define BP_PLASMA   "plasma vessel"
+#define BP_STACK    "stack"
+#define BP_APPENDIX "appendix"
+#define BP_CELL     "cell"
+#define BP_OPTICS   "optics"
+#define BP_HIVE     "hive node"
+#define BP_NUTRIENT "nutrient vessel"
+#define BP_ACID     "acid gland"
+#define BP_EGG      "egg sac"
+#define BP_RESIN    "resin spinner"
+#define BP_STRATA   "neural strata"
+#define BP_RESPONSE "response node"
+#define BP_GBLADDER "gas bladder"
+#define BP_POLYP    "polyp segment"
+#define BP_ANCHOR   "anchoring ligament"
+
+// Limbs.
+#define BP_L_FOOT "l_foot"
+#define BP_R_FOOT "r_foot"
+#define BP_L_LEG  "l_leg"
+#define BP_R_LEG  "r_leg"
+#define BP_L_HAND "l_hand"
+#define BP_R_HAND "r_hand"
+#define BP_L_ARM  "l_arm"
+#define BP_R_ARM  "r_arm"
+#define BP_HEAD   "head"
+#define BP_CHEST  "chest"
+#define BP_GROIN  "groin"
+#define BP_ALL_LIMBS list(BP_CHEST, BP_GROIN, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
+#define BP_BY_DEPTH list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_CHEST)
+
+#define SYNTH_BLOOD_COLOUR "#030303"
+#define SYNTH_FLESH_COLOUR "#575757"
+
 #define MOB_PULL_NONE 0
 #define MOB_PULL_SMALLER 1
 #define MOB_PULL_SAME 2
@@ -172,3 +214,19 @@
 //Used by show_message() and emotes
 #define VISIBLE_MESSAGE 1
 #define AUDIBLE_MESSAGE 2
+
+//used for getting species temp values
+#define COLD_LEVEL_1 -1
+#define COLD_LEVEL_2 -2
+#define COLD_LEVEL_3 -3
+#define HEAT_LEVEL_1 1
+#define HEAT_LEVEL_2 2
+#define HEAT_LEVEL_3 3
+
+//Synthetic human temperature vals
+#define SYNTH_COLD_LEVEL_1 50
+#define SYNTH_COLD_LEVEL_2 -1
+#define SYNTH_COLD_LEVEL_3 -1
+#define SYNTH_HEAT_LEVEL_1 500
+#define SYNTH_HEAT_LEVEL_2 1000
+#define SYNTH_HEAT_LEVEL_3 2000

@@ -1,7 +1,8 @@
 datum/preferences
 	//The mob should have a gender you want before running this proc. Will run fine without H
 	proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
-		var/datum/species/current_species = all_species[species ? species : "Human"]
+		var/datum/species/current_species = all_species[species]
+		if(!current_species) current_species = all_species["Human"]
 		gender = pick(current_species.genders)
 
 		h_style = random_hair_style(gender, species)

@@ -25,7 +25,7 @@
 	if(!M) return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.species && H.species.flags & NO_BLOOD)
+		if(!H.should_have_organ(BP_HEART))
 			return
 	M.dna.check_integrity()
 	var/block = pick(GLASSESBLOCK,COUGHBLOCK,FAKEBLOCK,NERVOUSBLOCK,CLUMSYBLOCK,TWITCHBLOCK,HEADACHEBLOCK,BLINDBLOCK,DEAFBLOCK,HALLUCINATIONBLOCK)
@@ -36,7 +36,7 @@
 	if(!M) return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.species && H.species.flags & NO_BLOOD)
+		if(!H.should_have_organ(BP_HEART))
 			return
 	M.dna.check_integrity()
 	var/block = pick(HULKBLOCK,XRAYBLOCK,FIREBLOCK,TELEBLOCK,NOBREATHBLOCK,REMOTEVIEWBLOCK,REGENERATEBLOCK,INCREASERUNBLOCK,REMOTETALKBLOCK,MORPHBLOCK,BLENDBLOCK,NOPRINTSBLOCK,SHOCKIMMUNITYBLOCK,SMALLSIZEBLOCK)
@@ -158,10 +158,11 @@
 
 		H.s_tone   = 35 - dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) // Value can be negative.
 
-		if (dna.GetUIState(DNA_UI_GENDER))
-			H.gender = FEMALE
-		else
-			H.gender = MALE
+		if(H.gender != NEUTER)
+			if (dna.GetUIState(DNA_UI_GENDER))
+				H.gender = FEMALE
+			else
+				H.gender = MALE
 
 		//Hair
 		var/hair = dna.GetUIValueRange(DNA_UI_HAIR_STYLE,hair_styles_list.len)
@@ -174,6 +175,7 @@
 			H.f_style = facial_hair_styles_list[beard]
 
 		H.force_update_limbs()
+		H.update_body()
 		H.update_eyes()
 		H.update_hair()
 

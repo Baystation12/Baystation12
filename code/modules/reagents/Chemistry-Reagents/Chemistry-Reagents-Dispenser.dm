@@ -269,7 +269,7 @@
 				if(prob(50))
 					M.apply_effect(50, IRRADIATE, blocked = 0) // curing it that way may kill you instead
 					var/absorbed = 0
-					var/obj/item/organ/diona/nutrients/rad_organ = locate() in M.internal_organs
+					var/obj/item/organ/internal/diona/nutrients/rad_organ = locate() in M.internal_organs
 					if(rad_organ && !rad_organ.is_broken())
 						absorbed = 1
 					if(!absorbed)
@@ -350,9 +350,11 @@
 		M.take_organ_damage(0, removed * power * 0.2)
 		if(removed && ishuman(M) && prob(100 * removed / meltdose)) // Applies disfigurement
 			var/mob/living/carbon/human/H = M
-			if(!(H.species && (H.species.flags & NO_PAIN))) //TODO proc for whether someone can feel pain
-				H.emote("scream")
+			var/screamed
 			for(var/obj/item/organ/external/affecting in H.organs)
+				if(!screamed && affecting.can_feel_pain())
+					screamed = 1
+					H.emote("scream")
 				affecting.disfigured = 1
 
 /datum/reagent/acid/touch_obj(var/obj/O)

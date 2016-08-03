@@ -197,13 +197,15 @@ var/global/list/damage_icon_parts = list()
 			continue
 
 		O.update_damstate()
+		O.update_icon()
 		if(O.damage_state == "00") continue
 		var/icon/DI
-		var/cache_index = "[O.damage_state]/[O.icon_name]/[species.blood_color]/[species.get_bodytype()]"
+		var/use_colour = ((O.robotic >= ORGAN_ROBOT) ? SYNTH_BLOOD_COLOUR : O.species.get_blood_colour(src))
+		var/cache_index = "[O.damage_state]/[O.icon_name]/[use_colour]/[species.get_bodytype()]"
 		if(damage_icon_parts[cache_index] == null)
 			DI = new /icon(species.damage_overlays, O.damage_state)			// the damage icon for whole human
 			DI.Blend(new /icon(species.damage_mask, O.icon_name), ICON_MULTIPLY)	// mask with this organ's pixels
-			DI.Blend(species.blood_color, ICON_MULTIPLY)
+			DI.Blend(use_colour, ICON_MULTIPLY)
 			damage_icon_parts[cache_index] = DI
 		else
 			DI = damage_icon_parts[cache_index]
@@ -242,8 +244,8 @@ var/global/list/damage_icon_parts = list()
 		icon_key += "[lip_style]"
 	else
 		icon_key += "nolips"
-	var/obj/item/organ/eyes/eyes = internal_organs_by_name["eyes"]
-	if(eyes)
+	var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[species.vision_organ ? species.vision_organ : BP_EYES]
+	if(istype(eyes))
 		icon_key += "[rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3])]"
 	else
 		icon_key += "#000000"
@@ -276,7 +278,7 @@ var/global/list/damage_icon_parts = list()
 		base_icon = human_icon_cache[icon_key]
 	else
 		//BEGIN CACHED ICON GENERATION.
-		var/obj/item/organ/external/chest = get_organ("chest")
+		var/obj/item/organ/external/chest = get_organ(BP_CHEST)
 		base_icon = chest.get_icon()
 
 		for(var/obj/item/organ/external/part in organs)
@@ -344,7 +346,7 @@ var/global/list/damage_icon_parts = list()
 	//Reset our hair
 	overlays_standing[HAIR_LAYER]	= null
 
-	var/obj/item/organ/external/head/head_organ = get_organ("head")
+	var/obj/item/organ/external/head/head_organ = get_organ(BP_HEAD)
 	if(!head_organ || head_organ.is_stump() )
 		if(update_icons)   update_icons()
 		return
@@ -597,7 +599,7 @@ var/global/list/damage_icon_parts = list()
 				standing = image("icon" = 'icons/mob/ears.dmi', "icon_state" = "[t_type]")
 			standing.color = l_ear.color
 			both.overlays += standing
-			
+
 		if(r_ear)
 			var/image/standing
 			var/t_type = r_ear.icon_state
@@ -611,7 +613,7 @@ var/global/list/damage_icon_parts = list()
 				standing = image("icon" = 'icons/mob/ears.dmi', "icon_state" = "[t_type]")
 			standing.color = r_ear.color
 			both.overlays += standing
-			
+
 		overlays_standing[EARS_LAYER] = both
 
 	else
@@ -769,9 +771,10 @@ var/global/list/damage_icon_parts = list()
 
 		if(wear_suit.blood_DNA)
 			var/obj/item/clothing/suit/S = wear_suit
-			var/image/bloodsies = image("icon" = species.blood_mask, "icon_state" = "[S.blood_overlay_type]blood")
-			bloodsies.color = wear_suit.blood_color
-			standing.overlays	+= bloodsies
+			if(istype(S)) //You can put non-suits in your suit slot (diona nymphs etc).
+				var/image/bloodsies = image("icon" = species.blood_mask, "icon_state" = "[S.blood_overlay_type]blood")
+				bloodsies.color = wear_suit.blood_color
+				standing.overlays	+= bloodsies
 
 		// Accessories - copied from uniform, BOILERPLATE because fuck this system.
 		var/obj/item/clothing/suit/suit = wear_suit

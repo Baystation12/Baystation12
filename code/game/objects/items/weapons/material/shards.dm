@@ -74,7 +74,7 @@
 
 			M << "<span class='danger'>You step on \the [src]!</span>"
 
-			var/list/check = list("l_foot", "r_foot")
+			var/list/check = list(BP_L_FOOT, BP_R_FOOT)
 			while(check.len)
 				var/picked = pick(check)
 				var/obj/item/organ/external/affecting = H.get_organ(picked)
@@ -84,7 +84,7 @@
 					if(affecting.take_damage(5, 0))
 						H.UpdateDamageIcon()
 					H.updatehealth()
-					if(!(H.species.flags & NO_PAIN))
+					if(affecting.can_feel_pain())
 						H.Weaken(3)
 					return
 				check -= picked

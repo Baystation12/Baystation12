@@ -31,12 +31,12 @@
 
 	var/obj/item/organ/external/E
 	var/nopain
-	if(ishuman(victim) && user.zone_sel.selecting != "groin" && user.zone_sel.selecting != "chest")
+	if(ishuman(victim) && user.zone_sel.selecting != BP_GROIN && user.zone_sel.selecting != BP_CHEST)
 		var/mob/living/carbon/human/H = victim
-		if(H.species.flags & NO_PAIN)
-			nopain = 2
 		E = H.get_organ(user.zone_sel.selecting)
-		if(E.status & ORGAN_ROBOT)
+		if(!E || !E.can_feel_pain())
+			nopain = 2
+		else if(E.robotic >= ORGAN_ROBOT)
 			nopain = 1
 
 	user.visible_message("<span class='danger'>\The [user] shoves \the [victim][E ? "'s [E.name]" : ""] into \the [src]!</span>")
@@ -45,7 +45,7 @@
 		E.take_damage(0, rand(20,30))
 		if(E.children && E.children.len)
 			for(var/obj/item/organ/external/child in E.children)
-				if(nopain && nopain < 2 && !(child.status & ORGAN_ROBOT))
+				if(nopain && nopain < 2 && !(child.robotic >= ORGAN_ROBOT))
 					nopain = 0
 				child.take_damage(0, rand(20,30))
 	else

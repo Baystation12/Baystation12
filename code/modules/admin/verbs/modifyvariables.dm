@@ -145,7 +145,7 @@ var/list/VVckey_edit = list("key", "ckey")
 	var/assoc = 0
 	if(L.len > 0)
 		var/a = L[1]
-		try 
+		try
 			if(!isnum(a) && L[a] != null)
 				assoc = 1 //This is pretty weak test but I can't think of anything else
 				usr << "List appears to be associative."

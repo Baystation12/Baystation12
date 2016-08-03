@@ -523,6 +523,13 @@
 	item_state = "blue_blazer"
 	worn_state = "blue_blazer"
 
+/obj/item/clothing/under/harness
+	name = "gear harness"
+	desc = "How... minimalist."
+	icon_state = "gear_harness"
+	worn_state = "gear_harness"
+	body_parts_covered = 0
+
 /obj/item/clothing/under/pcrc
 	name = "\improper PCRC uniform"
 	desc = "A uniform belonging to Proxima Centauri Risk Control, a private security firm."
