@@ -111,9 +111,9 @@
 /obj/item/proc/is_held_twohanded(mob/living/M)
 	var/check_hand
 	if(M.l_hand == src && !M.r_hand)
-		check_hand = "r_hand" //item in left hand, check right hand
+		check_hand = BP_R_HAND //item in left hand, check right hand
 	else if(M.r_hand == src && !M.l_hand)
-		check_hand = "l_hand" //item in right hand, check left hand
+		check_hand = BP_L_HAND //item in right hand, check left hand
 	else
 		return FALSE
 
@@ -177,9 +177,9 @@
 	if (!user) return
 	if (hasorgans(user))
 		var/mob/living/carbon/human/H = user
-		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
+		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
 		if (user.hand)
-			temp = H.organs_by_name["l_hand"]
+			temp = H.organs_by_name[BP_L_HAND]
 		if(temp && !temp.is_usable())
 			user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
 			return
@@ -511,7 +511,7 @@ var/list/global/slot_flags_enumeration = list(
 
 	if(istype(H))
 
-		var/obj/item/organ/eyes/eyes = H.internal_organs_by_name["eyes"]
+		var/obj/item/organ/internal/eyes/eyes = H.internal_organs_by_name[BP_EYES]
 
 		if(H != user)
 			for(var/mob/O in (viewers(M) - user - M))
@@ -527,7 +527,7 @@ var/list/global/slot_flags_enumeration = list(
 		eyes.damage += rand(3,4)
 		if(eyes.damage >= eyes.min_bruised_damage)
 			if(M.stat != 2)
-				if(eyes.robotic <= 1) //robot eyes bleeding might be a bit silly
+				if(eyes.robotic < ORGAN_ROBOT) //robot eyes bleeding might be a bit silly
 					M << "<span class='danger'>Your eyes start to bleed profusely!</span>"
 			if(prob(50))
 				if(M.stat != 2)
@@ -539,7 +539,7 @@ var/list/global/slot_flags_enumeration = list(
 			if (eyes.damage >= eyes.min_broken_damage)
 				if(M.stat != 2)
 					M << "<span class='warning'>You go blind!</span>"
-		var/obj/item/organ/external/affecting = H.get_organ("head")
+		var/obj/item/organ/external/affecting = H.get_organ(BP_HEAD)
 		if(affecting.take_damage(7))
 			M:UpdateDamageIcon()
 	else

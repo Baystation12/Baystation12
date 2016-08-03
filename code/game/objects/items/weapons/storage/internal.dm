@@ -50,10 +50,10 @@
 		//TODO make this less terrible
 		if (!( user.restrained() ) && !( user.stat ))
 			switch(over_object.name)
-				if("r_hand")
+				if(BP_R_HAND)
 					if(user.unEquip(master_item))
 						user.put_in_r_hand(master_item)
-				if("l_hand")
+				if(BP_L_HAND)
 					if(user.unEquip(master_item))
 						user.put_in_l_hand(master_item)
 			master_item.add_fingerprint(user)

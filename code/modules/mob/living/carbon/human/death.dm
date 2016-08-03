@@ -15,7 +15,7 @@
 		I.throw_at(get_edge_target_turf(src,pick(alldirs)), rand(1,3), round(30/I.w_class))
 
 	..(species.gibbed_anim)
-	gibs(loc, dna, null, species.flesh_color, species.blood_color)
+	gibs(loc, dna, null, species.get_flesh_colour(src), species.get_blood_colour(src))
 
 /mob/living/carbon/human/dust()
 	if(species)
@@ -31,12 +31,10 @@
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
 
-
 	//backs up lace if available.
-	var/obj/item/organ/stack/s = get_organ("stack")
+	var/obj/item/organ/internal/stack/s = get_organ(BP_STACK)
 	if(s)
 		s.do_backup()
-
 
 	//Handle species-specific deaths.
 	species.handle_death(src)
@@ -44,7 +42,7 @@
 	animate_tail_stop()
 
 	//Handle brain slugs.
-	var/obj/item/organ/external/head = get_organ("head")
+	var/obj/item/organ/external/head = get_organ(BP_HEAD)
 	var/mob/living/simple_animal/borer/B
 
 	for(var/I in head.implants)
@@ -71,7 +69,7 @@
 	if(wearing_rig)
 		wearing_rig.notify_ai("<span class='danger'>Warning: user death event. Mobility control passed to integrated intelligence system.</span>")
 
-	. = ..(gibbed,species.death_message)
+	. = ..(gibbed,species.get_death_message(src))
 	if(!gibbed)
 		handle_organs()
 		if(species.death_sound)

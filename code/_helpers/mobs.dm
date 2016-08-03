@@ -32,10 +32,13 @@ proc/random_hair_style(gender, species = "Human")
 	var/list/valid_hairstyles = list()
 	for(var/hairstyle in hair_styles_list)
 		var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
-		if(gender == MALE && S.gender == FEMALE)
-			continue
-		if(gender == FEMALE && S.gender == MALE)
-			continue
+
+		if(gender != NEUTER && gender != PLURAL)
+			if(gender == MALE && S.gender == FEMALE)
+				continue
+			if(gender == FEMALE && S.gender == MALE)
+				continue
+
 		if( !(species in S.species_allowed))
 			continue
 		valid_hairstyles[hairstyle] = hair_styles_list[hairstyle]
@@ -51,10 +54,13 @@ proc/random_facial_hair_style(gender, species = "Human")
 	var/list/valid_facialhairstyles = list()
 	for(var/facialhairstyle in facial_hair_styles_list)
 		var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
-		if(gender == MALE && S.gender == FEMALE)
-			continue
-		if(gender == FEMALE && S.gender == MALE)
-			continue
+
+		if(gender != NEUTER && gender != PLURAL)
+			if(gender == MALE && S.gender == FEMALE)
+				continue
+			if(gender == FEMALE && S.gender == MALE)
+				continue
+
 		if( !(species in S.species_allowed))
 			continue
 
@@ -156,9 +162,9 @@ Proc for attack log creation, because really why not
 /proc/get_exposed_defense_zone(var/atom/movable/target)
 	var/obj/item/weapon/grab/G = locate() in target
 	if(G && G.state >= GRAB_NECK) //works because mobs are currently not allowed to upgrade to NECK if they are grabbing two people.
-		return pick("head", "l_hand", "r_hand", "l_foot", "r_foot", "l_arm", "r_arm", "l_leg", "r_leg")
+		return pick(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG)
 	else
-		return pick("chest", "groin")
+		return pick(BP_CHEST, BP_GROIN)
 
 /proc/do_mob(mob/user , mob/target, time = 30, target_zone = 0, uninterruptible = 0, progress = 1)
 	if(!user || !target)
