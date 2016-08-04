@@ -1,0 +1,5 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Added status display icons for green, blue and delta alerts."
+  - rscadd: "Status displays now have coloured lights for alert icons."
