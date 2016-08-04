@@ -19,6 +19,14 @@
 	var/cuff_type = "handcuffs"
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/handcuffs.dmi')
 
+/obj/item/weapon/handcuffs/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(slot == slot_handcuffed_str)
+		ret.icon_state = "handcuff1"
+	if(slot == slot_legcuffed_str)
+		ret.icon_state = "legcuff1"
+	return ret
+
 /obj/item/weapon/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
 
 	if(!user.IsAdvancedToolUser())
@@ -85,9 +93,7 @@
 		cuffs = new(get_turf(user))
 	else
 		user.drop_from_inventory(cuffs)
-	cuffs.loc = target
-	target.handcuffed = cuffs
-	target.update_inv_handcuffed()
+	target.equip_to_slot(cuffs,slot_handcuffed)
 	return 1
 
 var/last_chew = 0

@@ -54,12 +54,12 @@
 
 	//** These specify item/icon overrides for _slots_
 
-	var/list/item_state_slots = list() //overrides the default item_state for particular slots.
+	var/list/item_state_slots = list(slot_wear_id_str = "id") //overrides the default item_state for particular slots.
 
 	// Used to specify the icon file to be used when the item is worn. If not set the default icon for that slot will be used.
 	// If icon_override or sprite_sheets are set they will take precendence over this, assuming they apply to the slot in question.
 	// Only slot_l_hand/slot_r_hand are implemented at the moment. Others to be implemented as needed.
-	var/list/item_icons = list()
+	var/list/item_icons
 
 	//** These specify item/icon overrides for _species_
 
@@ -680,3 +680,37 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
+
+/obj/item/proc/get_mob_overlay(mob/user_mob, slot)
+	var/bodytype = "Default"
+	if(ishuman(user_mob))
+		var/mob/living/carbon/human/user_human = user_mob
+		bodytype = user_human.species.get_bodytype()
+
+	var/mob_state
+	if(item_state_slots && item_state_slots[slot])
+		mob_state = item_state_slots[slot]
+	else if (item_state)
+		mob_state = item_state
+	else
+		mob_state = icon_state
+
+	var/mob_icon
+	if(icon_override)
+		mob_icon = icon_override
+		if(slot == 	slot_l_hand_str || slot == slot_l_ear_str)
+			mob_state = "[mob_state]_l"
+		if(slot == 	slot_r_hand_str || slot == slot_r_ear_str)
+			mob_state = "[mob_state]_r"
+	else if(sprite_sheets && sprite_sheets[bodytype])
+		if(slot == slot_l_ear)
+			mob_state = "[mob_state]_l"
+		if(slot == slot_r_ear)
+			mob_state = "[mob_state]_r"
+		mob_icon = sprite_sheets[bodytype]
+	else if(item_icons && item_icons[slot])
+		mob_icon = item_icons[slot]
+	else
+		mob_icon = default_onmob_icons[slot]
+
+	return overlay_image(mob_icon,mob_state,color,RESET_COLOR)
