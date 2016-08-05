@@ -18,6 +18,50 @@
 		game_id = "[c[(t % l) + 1]][game_id]"
 		t = round(t / l)
 
+// Find mobs matching a given string
+//
+// search_string: the string to search for, in params format; for example, "some_key;mob_name"
+// restrict_type: A mob type to restrict the search to, or null to not restrict
+//
+// Partial matches will be found, but exact matches will be preferred by the search
+//
+// Returns: A possibly-empty list of the strongest matches
+/proc/text_find_mobs(search_string, restrict_type = null)
+	var/list/search = params2list(search_string)
+	var/list/ckeysearch = list()
+	for(var/text in search)
+		ckeysearch += ckey(text)
+
+	var/list/match = list()
+
+	for(var/mob/M in mob_list)
+		if(restrict_type && !istype(M, restrict_type))
+			continue
+		var/strings = list(M.name, M.ckey)
+		if(M.mind)
+			strings += M.mind.assigned_role
+			strings += M.mind.special_role
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			if(H.species)
+				strings += H.species.name
+		for(var/text in strings)
+			if(ckey(text) in ckeysearch)
+				match[M] += 10 // an exact match is far better than a partial one
+			else
+				for(var/searchstr in search)
+					if(findtext(text, searchstr))
+						match[M] += 1
+
+	var/maxstrength = 0
+	for(var/mob/M in match)
+		maxstrength = max(match[M], maxstrength)
+	for(var/mob/M in match)
+		if(match[M] < maxstrength)
+			match -= M
+
+	return match
+
 
 /world
 	mob = /mob/new_player
@@ -215,6 +259,56 @@ var/world_topic_spam_protect_time = world.timeofday
 
 		return list2params(L)
 
+	else if(copytext(T,1,5) == "laws")
+		var/input[] = params2list(T)
+		if(input["key"] != config.comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
+
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+
+			return "Bad Key"
+
+		var/list/match = text_find_mobs(input["laws"], /mob/living/silicon)
+
+		if(!match.len)
+			return "No matches"
+		else if(match.len == 1)
+			var/mob/living/silicon/S = match[1]
+			var/info = list()
+			info["name"] = S.name
+			info["key"] = S.key
+
+			if(!S.laws)
+				info["laws"] = null
+				return list2params(info)
+
+			var/list/lawset_parts = list(
+				"ion" = S.laws.ion_laws,
+				"inherent" = S.laws.inherent_laws,
+				"supplied" = S.laws.supplied_laws
+			)
+
+			for(var/law_type in lawset_parts)
+				var/laws = list()
+				for(var/datum/ai_law/L in lawset_parts[law_type])
+					laws += L.law
+				info[law_type] = list2params(laws)
+
+			info["zero"] = S.laws.zeroth_law ? S.laws.zeroth_law.law : null
+
+			return list2params(info)
+
+		else
+			var/list/ret = list()
+			for(var/mob/M in match)
+				ret[M.key] = M.name
+			return list2params(ret)
+
 	else if(copytext(T,1,5) == "info")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
@@ -229,36 +323,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 			return "Bad Key"
 
-		var/list/search = params2list(input["info"])
-		var/list/ckeysearch = list()
-		for(var/text in search)
-			ckeysearch += ckey(text)
-
-		var/list/match = list()
-
-		for(var/mob/M in mob_list)
-			var/strings = list(M.name, M.ckey)
-			if(M.mind)
-				strings += M.mind.assigned_role
-				strings += M.mind.special_role
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				if(H.species)
-					strings += H.species.name
-			for(var/text in strings)
-				if(ckey(text) in ckeysearch)
-					match[M] += 10 // an exact match is far better than a partial one
-				else
-					for(var/searchstr in search)
-						if(findtext(text, searchstr))
-							match[M] += 1
-
-		var/maxstrength = 0
-		for(var/mob/M in match)
-			maxstrength = max(match[M], maxstrength)
-		for(var/mob/M in match)
-			if(match[M] < maxstrength)
-				match -= M
+		var/list/match = text_find_mobs(input["info"])
 
 		if(!match.len)
 			return "No matches"
