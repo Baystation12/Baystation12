@@ -480,7 +480,7 @@ var/list/worths = list(
 					/obj/item/device/eftpos = 30,
 					/obj/item/device = 90,
 //ORGANS,
-					/obj/item/organ/heart = 1200,
+					/obj/item/organ/internal/heart = 1200,
 					/obj/item/organ/internal/brain = 1200,
 					/obj/item/organ/internal/pariah_brain = 5,
 					/obj/item/organ = 400,
