@@ -63,7 +63,7 @@ var/global/datum/ntnet/ntnet_global = new()
 
 	// Check all relays. If we have at least one working relay, network is up.
 	for(var/obj/machinery/ntnet_relay/R in relays)
-		if(R.is_operational())
+		if(R.operable())
 			operating = 1
 			break
 
