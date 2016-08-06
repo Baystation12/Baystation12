@@ -558,6 +558,7 @@
 #include "code\game\machinery\doors\unpowered.dm"
 #include "code\game\machinery\doors\windowdoor.dm"
 #include "code\game\machinery\embedded_controller\airlock_controllers.dm"
+#include "code\game\machinery\embedded_controller\airlock_controllers_dummy.dm"
 #include "code\game\machinery\embedded_controller\airlock_docking_controller.dm"
 #include "code\game\machinery\embedded_controller\airlock_docking_controller_multi.dm"
 #include "code\game\machinery\embedded_controller\airlock_program.dm"
