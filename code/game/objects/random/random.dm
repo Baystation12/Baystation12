@@ -765,3 +765,8 @@ var/list/multi_point_spawns
 		for(var/entry in spawn_points)
 			qdel(entry)
 	return 1
+
+/obj/random_multi/single_item/captains_spare_id
+	name = "Multi Point - Captain's Spare"
+	id = "Captain's spare id"
+	item_path = /obj/item/weapon/card/id/captains_spare
