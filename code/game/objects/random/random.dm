@@ -729,9 +729,7 @@ var/list/multi_point_spawns
 
 /obj/random_multi/initialize()
 	..()
-	if(weight < 1)
-		weight = 1
-	weight = round(weight)
+	weight = max(1, round(weight))
 
 	if(!multi_point_spawns)
 		multi_point_spawns = list()
