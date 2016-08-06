@@ -1,0 +1,6 @@
+author: Haswell
+
+delete-after: True
+
+changes:
+  - tweak: "Emitters can now be locked using IDs with engine room access while it's on or off."
