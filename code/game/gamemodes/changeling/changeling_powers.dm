@@ -181,7 +181,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		return
 
 	var/mob/living/carbon/human/T = G.affecting
-	if(!istype(T))
+	if(!istype(T) && !istype(T, /mob/living/carbon/human/machine))
 		src << "<span class='warning'>[T] is not compatible with our biology.</span>"
 		return
 
@@ -692,6 +692,9 @@ var/list/datum/dna/hivemind_bank = list()
 	if(!(T in view(changeling.sting_range))) return
 	if(!sting_can_reach(T, changeling.sting_range)) return
 	if(!changeling_power(required_chems)) return
+	if(istype(T, /mob/living/carbon/human/machine))
+		src << "<span class='warning'>[T] is not compatible with our biology.</span>"
+		return
 
 	changeling.chem_charges -= required_chems
 	changeling.sting_range = 1
