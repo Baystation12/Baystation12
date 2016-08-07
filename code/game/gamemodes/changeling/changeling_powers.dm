@@ -181,7 +181,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		return
 
 	var/mob/living/carbon/human/T = G.affecting
-	if(!istype(T) && !istype(T, /mob/living/carbon/human/machine))
+	if(!istype(T))
 		src << "<span class='warning'>[T] is not compatible with our biology.</span>"
 		return
 
