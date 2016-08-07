@@ -304,11 +304,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	src.real_name = chosen_dna.real_name
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		for (var/obj/item/organ/O in H.internal_organs)
-			O.dna = chosen_dna.Clone()
-			var/BD = list()
-			BD[O.dna.unique_enzymes] = chosen_dna.b_type
-			O.blood_DNA = BD
+		H.sync_organ_dna()
 		H.b_type = chosen_dna.b_type
 	src.flavor_text = ""
 	src.UpdateAppearance()
@@ -805,14 +801,10 @@ var/list/datum/dna/hivemind_bank = list()
 
 	T.dna = chosen_dna.Clone()
 	T.real_name = chosen_dna.real_name
-	for (var/obj/item/organ/O in T.internal_organs)
-		O.dna = chosen_dna.Clone()
-		var/BD = list()
-		BD[O.dna.unique_enzymes] = chosen_dna.b_type
-		O.blood_DNA = BD
 	if(ishuman(T))
 		var/mob/living/carbon/human/H = T
 		H.b_type = chosen_dna.b_type
+		H.sync_organ_dna()
 	T.UpdateAppearance()
 	domutcheck(T, null)
 
