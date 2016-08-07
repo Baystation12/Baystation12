@@ -2,4 +2,5 @@ author: Superbee29
 delete-after: True
 
 changes: 
-  - bugfix: "Changeling transformation sting no longer causes organ rejection."
+  - bugfix: "Changeling transformation sting no longer causes organ rejection (organ's DNA changes)."
+  - bugfix: "Changeling's organs DNA change when it transforms."
