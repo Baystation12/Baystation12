@@ -302,6 +302,14 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	changeling.geneticdamage = 30
 	src.dna = chosen_dna.Clone()
 	src.real_name = chosen_dna.real_name
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+		for (var/obj/item/organ/O in H.internal_organs)
+			O.dna = chosen_dna.Clone()
+			var/BD = list()
+			BD[O.dna.unique_enzymes] = chosen_dna.b_type
+			O.blood_DNA = BD
+		H.b_type = chosen_dna.b_type
 	src.flavor_text = ""
 	src.UpdateAppearance()
 	domutcheck(src, null)
