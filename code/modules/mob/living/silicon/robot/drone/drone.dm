@@ -50,7 +50,6 @@ var/list/mob_hat_cache = list()
 
 	//Used for self-mailing.
 	var/mail_destination = ""
-	var/obj/machinery/drone_fabricator/master_fabricator
 	var/law_type = /datum/ai_laws/drone
 	var/module_type = /obj/item/weapon/robot_module/drone
 	var/obj/item/hat
@@ -58,6 +57,41 @@ var/list/mob_hat_cache = list()
 	var/hat_y_offset = -13
 
 	holder_type = /obj/item/weapon/holder/drone
+
+/mob/living/silicon/robot/drone/New()
+	..()
+	moved_event.register(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
+
+/mob/living/silicon/robot/drone/Destroy()
+	if(hat)
+		hat.dropInto(loc)
+		hat = null
+	moved_event.unregister(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
+	. = ..()
+
+/mob/living/silicon/robot/drone/proc/on_moved(var/atom/movable/am, var/turf/old_loc, var/turf/new_loc)
+	old_loc = get_turf(old_loc)
+	new_loc = get_turf(new_loc)
+
+	if(!(old_loc && new_loc)) // Allows inventive admins to move drones between non-adjacent Z-levels by moving them to null space first I suppose
+		return
+	var/z_diff = new_loc.z - old_loc.z
+	if(0)
+		return
+	else if(z_diff > 0)  // New is potentially above old
+		var/turf/above_turf = GetAbove(old_loc)
+		while(above_turf && above_turf.z < new_loc.z)
+			above_turf = GetAbove(above_turf)
+		if(above_turf == new_loc)
+			return
+	else if(z_diff < 0) // New is potentially below old
+		var/turf/below_turf = GetBelow(old_loc)
+		while(below_turf && below_turf.z > new_loc.z)
+			below_turf = GetBelow(below_turf)
+		if(below_turf == new_loc)
+			return
+	// None of the tests passed, good bye
+	self_destruct()
 
 /mob/living/silicon/robot/drone/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	if(!istype(possessor) || !possessor.client || !possessor.ckey)
@@ -86,11 +120,6 @@ var/list/mob_hat_cache = list()
 	transfer_personality(possessor.client)
 	qdel(possessor)
 	return 1
-
-/mob/living/silicon/robot/drone/Destroy()
-	if(hat)
-		hat.loc = get_turf(src)
-	..()
 
 /mob/living/silicon/robot/drone/construction
 	icon_state = "constructiondrone"
@@ -263,16 +292,18 @@ var/list/mob_hat_cache = list()
 //Standard robots use config for crit, which is somewhat excessive for these guys.
 //Drones killed by damage will gib.
 /mob/living/silicon/robot/drone/handle_regular_status_updates()
-	var/turf/T = get_turf(src)
-	if((health <= -35 || (master_fabricator && (T && T.z != master_fabricator.z))) && src.stat != DEAD)
-		timeofdeath = world.time
-		death() //Possibly redundant, having trouble making death() cooperate.
-		gib()
+	if(health <= -35 && src.stat != DEAD)
+		self_destruct()
 		return
 	if(health <= 0 && src.stat != DEAD)
 		death()
 		return
 	..()
+
+/mob/living/silicon/robot/drone/self_destruct()
+	timeofdeath = world.time
+	death() //Possibly redundant, having trouble making death() cooperate.
+	gib()
 
 //DRONE MOVEMENT.
 /mob/living/silicon/robot/drone/slip_chance(var/prob_slip)
