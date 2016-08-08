@@ -1,6 +1,0 @@
-author: Techhead
-
-delete-after: True
-
-changes: 
-  - rscadd: "Ghosts can flicker lights when the round is spooky enough."
