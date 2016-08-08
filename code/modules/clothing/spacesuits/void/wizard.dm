@@ -33,9 +33,11 @@
 	..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
-/obj/item/clothing/gloves/purple/wizard
+/obj/item/clothing/gloves/wizard
 	name = "mystical gloves"
-	desc = "These look like they go along with a matching suit."
+	desc = "Reinforced, gem-studded gloves that radiate energy. They look like they go along with a matching voidsuit."
+	icon_state = "mystical"
+	item_state = "purplegloves"
 	item_flags = THICKMATERIAL
 	body_parts_covered = HANDS
 	cold_protection =    HANDS

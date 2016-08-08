@@ -80,7 +80,7 @@
 								/mob/living/simple_animal/familiar/pet          = TRADER_BLACKLIST,
 								/mob/living/simple_animal/hostile/mimic         = TRADER_ALL)
 
-	possible_trading_items = list(/obj/item/clothing/gloves/purple/wizard        = TRADER_THIS_TYPE,
+	possible_trading_items = list(/obj/item/clothing/gloves/wizard        = TRADER_THIS_TYPE,
 								/obj/item/clothing/head/helmet/space/void/wizard = TRADER_THIS_TYPE,
 								/obj/item/clothing/head/wizard                   = TRADER_ALL,
 								/obj/item/clothing/suit/space/void/wizard        = TRADER_THIS_TYPE,
