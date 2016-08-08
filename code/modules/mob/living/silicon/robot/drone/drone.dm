@@ -76,7 +76,7 @@ var/list/mob_hat_cache = list()
 	if(!(old_loc && new_loc)) // Allows inventive admins to move drones between non-adjacent Z-levels by moving them to null space first I suppose
 		return
 	var/z_diff = new_loc.z - old_loc.z
-	if(0)
+	if(z_diff == 0)
 		return
 	else if(z_diff > 0)  // New is potentially above old
 		var/turf/above_turf = GetAbove(old_loc)
