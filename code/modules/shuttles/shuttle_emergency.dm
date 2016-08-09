@@ -126,7 +126,7 @@
 	if (authorized.len >= req_authorizations)
 		return 0	//don't need any more
 
-	if (!emergency_shuttle.evac)
+	if (!emergency_shuttle.evac && security_level < SEC_LEVEL_RED)
 		src.visible_message("\The [src] buzzes. It does not appear to be accepting any commands.")
 		return 0
 
