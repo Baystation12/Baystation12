@@ -88,6 +88,11 @@
 	desc = "A green campaign cover with an SCG Marine Corps crest. Only found on the heads of Drill Instructors."
 	icon_state = "greendrill"
 
+/obj/item/clothing/head/confederacy
+	name = "\improper Confederacy of Man cap"
+	desc = "A cap belonging to the Confederacy of Man, an independant human government."
+	icon_state = "confederacy"
+
 //Dress
 
 /obj/item/clothing/head/dress
@@ -130,8 +135,3 @@
 	name = "marine officer's dress wheel cover"
 	desc = "A white dress uniform cover with an SCG Marine Corps crest and gold stripe."
 	icon_state = "whitewheelcap_com"
-
-/obj/item/clothing/head/dress/confederacy
-	name = "\improper Confederacy of Man cap"
-	desc = "A cap belonging to the Confederacy of Man, an independant human government."
-	icon_state = "confederacy_dress"
