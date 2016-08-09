@@ -1,0 +1,6 @@
+author: Haswell
+
+delete-after: True
+
+changes: 
+  - tweak: "The autopilot on the escape shuttle can no longer be overridden during crew transfers. It can only be overridden during an evacuation."

@@ -126,6 +126,10 @@
 	if (authorized.len >= req_authorizations)
 		return 0	//don't need any more
 
+	if (!emergency_shuttle.evac)
+		src.visible_message("\The [src] buzzes. It does not appear to be accepting any commands.")
+		return 0
+
 	var/list/access
 	var/auth_name
 	var/dna_hash
