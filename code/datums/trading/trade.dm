@@ -208,7 +208,6 @@
 				M.wreckage = null //So they don't ruin the illusion
 			qdel(offer)
 
-	world << "Stuff"
 	var/type = trading_items[num]
 
 	var/atom/movable/M = new type(location)

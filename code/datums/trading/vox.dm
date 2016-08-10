@@ -13,7 +13,7 @@
 				"hail_silicon1"      = "YOU KNOW VOX? Yes is good, yes yes, MOB. Trade GOOD!",
 				"hail_Human0"        = "Hello hueman! Kiikikikiki! MOB trade with us, yes? Good!",
 				"hail_Human1"        = "Friend of Vox is friend of all Vox! MOB you trade now!",
-				"hail_Vox1"          = "SKREEEE! May the Shaol make this trade good, MOB!",
+				"hail_Vox1"          = "SKREEEE! May the Shoal make this trade good, MOB!",
 				"hail_Resomi0"       = "Hello MOB! You tiny thing, how pilot ship? Maybe come for dinner! KIKIKIKI!",
 				"hail_Resomi1"       = "Greetings, MOB, be dinner or friend? KIKIKIKIKII!",
 				"hail_deny0"         = "Trade closed, GO AWAY!",
@@ -31,7 +31,7 @@
 				"how_much0"          = "You give it something worth VALUE, yes?",
 				"how_much1"          = "Hmm.... VALUE. Something like that.",
 				"what_want0"         = "Vox wants",
-				"what_want1"         = "Shaol wants",
+				"what_want1"         = "Shoal wants",
 
 				"compliment_deny0"   = "No.",
 				"compliment_deny1"   = "You know better than that!",
