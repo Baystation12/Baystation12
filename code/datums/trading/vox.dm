@@ -30,6 +30,8 @@
 				"trade_refuse1"      = "You know as well as it that is not a good trade.",
 				"how_much0"          = "You give it something worth VALUE, yes?",
 				"how_much1"          = "Hmm.... VALUE. Something like that.",
+				"what_want0"         = "Vox wants",
+				"what_want1"         = "Shaol wants",
 
 				"compliment_deny0"   = "No.",
 				"compliment_deny1"   = "You know better than that!",
