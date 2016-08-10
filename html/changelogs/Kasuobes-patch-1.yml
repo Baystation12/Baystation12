@@ -1,0 +1,6 @@
+author: Haswell
+
+delete-after: True
+
+changes: 
+  - tweak: "Engi-Vend and Robco Tool Maker machines can now be used by atmospheric technicians."
