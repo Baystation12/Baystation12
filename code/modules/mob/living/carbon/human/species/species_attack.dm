@@ -5,6 +5,15 @@
 	sharp = 1
 	edge = 1
 
+/datum/unarmed_attack/bite/sharp/resomi
+	edge = 0
+
+/datum/unarmed_attack/bite/sharp/resomi/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
+	..()
+	var/obj/item/organ/external/affecting = target.get_organ(zone)
+
+	affecting.createwound(PIERCE, attack_damage * 2)
+
 /datum/unarmed_attack/diona
 	attack_verb = list("lashed", "bludgeoned")
 	attack_noun = list("tendril")
