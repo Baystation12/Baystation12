@@ -347,9 +347,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	return 0
 
 /mob/observer/ghost/check_holy(var/turf/T)
+	if(!T || (T && !T.holy))
+		return FALSE
+	if(invisibility >= INVISIBILITY_OBSERVER)
+		return FALSE
 	if(check_rights(R_ADMIN|R_FUN, 0, src))
-		return 0
-	return (T && T.holy) && (invisibility <= SEE_INVISIBLE_LIVING || (mind in cult.current_antagonists))
+		return FALSE
+	return TRUE
 
 /mob/observer/ghost/verb/jumptomob(target in getmobs()) //Moves the ghost instead of just changing the ghosts's eye -Nodrak
 	set category = "Ghost"
