@@ -130,3 +130,51 @@
 			return isSynthetic()? SYNTH_HEAT_LEVEL_2 : species.heat_level_2
 		if(HEAT_LEVEL_3)
 			return isSynthetic()? SYNTH_HEAT_LEVEL_3 : species.heat_level_3
+
+/mob/living/carbon/human
+	var/next_sonar_ping = 0
+
+/mob/living/carbon/human/proc/sonar_ping()
+	set name = "Listen In"
+	set desc = "Allows you to listen in to movement and noises around you."
+	set category = "IC"
+
+	if(incapacitated())
+		src << "<span class='warning'>You need to recover before you can use this ability.</span>"
+		return
+	if(world.time < next_sonar_ping)
+		src << "<span class='warning'>You need another moment to focus.</span>"
+		return
+	if(is_deaf() || is_below_sound_pressure(get_turf(src)))
+		src << "<span class='warning'>You are for all intents and purposes currently deaf!</span>"
+		return
+	next_sonar_ping += 10 SECONDS
+	var/heard_something = FALSE
+	src << "<span class='notice'>You take a moment to listen in to your environment...</span>"
+	for(var/mob/living/L in range(client.view, src))
+		var/turf/T = get_turf(L)
+		if(!T || L == src || L.stat == DEAD || is_below_sound_pressure(T))
+			continue
+		heard_something = TRUE
+		var/feedback = list()
+		feedback += "<span class='notice'>There are noises of movement "
+		var/direction = get_dir(src, L)
+		if(direction)
+			feedback += "towards the [dir2text(direction)], "
+			switch(get_dist(src, L) / client.view)
+				if(0 to 0.2)
+					feedback += "very close by."
+				if(0.2 to 0.4)
+					feedback += "close by."
+				if(0.4 to 0.6)
+					feedback += "some distance away."
+				if(0.6 to 0.8)
+					feedback += "further away."
+				else
+					feedback += "far away."
+		else // No need to check distance if they're standing right on-top of us
+			feedback += "right on top of you."
+		feedback += "</span>"
+		src << jointext(feedback,null)
+	if(!heard_something)
+		src << "<span class='notice'>You hear no movement but your own.</span>"

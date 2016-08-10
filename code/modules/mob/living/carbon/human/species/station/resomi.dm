@@ -84,3 +84,5 @@
 		/datum/unarmed_attack/claws,
 		/datum/unarmed_attack/stomp/weak
 		)
+
+	inherent_verbs = list(/mob/living/carbon/human/proc/sonar_ping)
