@@ -3,7 +3,7 @@
 
 /datum/unit_test/icon_test/robots_shall_have_eyes_for_each_state
 	name = "ICON STATE - Robot shall have eyes for each icon state"
-	var/list/excepted_icon_states = list(
+	var/list/excepted_icon_states_ = list(
 		"b1","b1+o","b2","b2+o","b3","b3+o","d1","d1+o","d2","d2+o","d3","d3+o",
 		"floor1","floor2","floor3","floor4","floor5","floor6","floor7",
 		"gib1","gib2","gib3","gib4","gib5","gib6","gib7","gibdown","gibup","gibbl1","gibarm","gibleg",
@@ -14,9 +14,14 @@
 /datum/unit_test/icon_test/robots_shall_have_eyes_for_each_state/start_test()
 	var/missing_states = 0
 	var/list/valid_states = icon_states('icons/mob/robots.dmi')
+
+	log_debug("Excepted icon states:")
+	for(var/e in excepted_icon_states_)
+		log_debug(" [e] - [length(e)]")
+
 	var/list/original_valid_states = valid_states.Copy()
 	for(var/icon_state in valid_states)
-		if(icon_state in excepted_icon_states)
+		if(icon_state in excepted_icon_states_)
 			continue
 		if(starts_with(icon_state, "eyes-"))
 			continue
@@ -24,7 +29,7 @@
 			continue
 		var/eye_icon_state = "eyes-[icon_state]"
 		if(!(eye_icon_state in valid_states))
-			log_unit_test("Eye icon state [eye_icon_state] is missing.")
+			log_unit_test("Eye icon state [eye_icon_state] - [length(icon_state)] is missing.")
 			missing_states++
 
 	if(missing_states)
