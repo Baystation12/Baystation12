@@ -89,7 +89,7 @@
 			return
 		var/mob/M = selection:mob
 		log_and_message_admins("jumped to [key_name(M)]")
-		M.jumpTo(get_turf(M))
+		mob.jumpTo(get_turf(M))
 		feedback_add_details("admin_verb","JK") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	else
 		alert("Admin jumping disabled")
