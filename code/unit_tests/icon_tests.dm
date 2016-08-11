@@ -17,7 +17,10 @@
 
 	log_debug("Excepted icon states:")
 	for(var/e in excepted_icon_states_)
-		log_debug(" [e] - [length(e)]")
+		log_debug(" [e] - [length(e)] - \ref[e]")
+	log_debug("Valid icon states:")
+	for(var/e in valid_states)
+		log_debug(" [e] - [length(e)] - \ref[e]")
 
 	var/list/original_valid_states = valid_states.Copy()
 	for(var/icon_state in valid_states)
