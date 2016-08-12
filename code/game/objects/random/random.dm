@@ -494,6 +494,7 @@ obj/random/material //Random materials for building stuff
 					prob(3);/obj/item/weapon/tank/emergency/oxygen/engi,\
 					prob(2);/obj/item/weapon/tank/emergency/oxygen/double,\
 					prob(2);/obj/item/weapon/tank/emergency/nitrogen,\
+					prob(1);/obj/item/weapon/tank/emergency/nitrogen/double,\
 					prob(1);/obj/item/weapon/tank/nitrogen)
 
 
@@ -670,6 +671,7 @@ obj/random/material //Random materials for building stuff
 		return pick(/obj/item/clothing/head/helmet/space/void,\
 					/obj/item/clothing/head/helmet/space/void/engineering,\
 					/obj/item/clothing/head/helmet/space/void/engineering/alt,\
+					/obj/item/clothing/head/helmet/space/void/engineering/salvage,\
 					/obj/item/clothing/head/helmet/space/void/mining,\
 					/obj/item/clothing/head/helmet/space/void/mining/alt,\
 					/obj/item/clothing/head/helmet/space/void/security,\
@@ -689,6 +691,7 @@ obj/random/material //Random materials for building stuff
 		return pick(/obj/item/clothing/suit/space/void,\
 					/obj/item/clothing/suit/space/void/engineering,\
 					/obj/item/clothing/suit/space/void/engineering/alt,\
+					/obj/item/clothing/suit/space/void/engineering/salvage,\
 					/obj/item/clothing/suit/space/void/mining,\
 					/obj/item/clothing/suit/space/void/mining/alt,\
 					/obj/item/clothing/suit/space/void/security,\
