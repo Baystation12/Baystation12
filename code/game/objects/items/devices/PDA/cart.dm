@@ -1,3 +1,48 @@
+var/list/command_cartridges = list(
+	/obj/item/weapon/cartridge/captain,
+	/obj/item/weapon/cartridge/hop,
+	/obj/item/weapon/cartridge/hos,
+	/obj/item/weapon/cartridge/ce,
+	/obj/item/weapon/cartridge/rd,
+	/obj/item/weapon/cartridge/head,
+	/obj/item/weapon/cartridge/lawyer // Internal Affaris,
+	)
+
+var/list/security_cartridges = list(
+	/obj/item/weapon/cartridge/security,
+	/obj/item/weapon/cartridge/detective,
+	/obj/item/weapon/cartridge/hos
+	)
+
+var/list/engineering_cartridges = list(
+	/obj/item/weapon/cartridge/engineering,
+	/obj/item/weapon/cartridge/atmos,
+	/obj/item/weapon/cartridge/ce
+	)
+
+var/list/medical_cartridges = list(
+	/obj/item/weapon/cartridge/medical,
+	/obj/item/weapon/cartridge/chemistry,
+	/obj/item/weapon/cartridge/cmo
+	)
+
+var/list/research_cartridges = list(
+	/obj/item/weapon/cartridge/signal/science,
+	/obj/item/weapon/cartridge/rd
+	)
+
+var/list/cargo_cartridges = list(
+	/obj/item/weapon/cartridge/quartermaster, // This also covers cargo-techs, apparently,
+	/obj/item/weapon/cartridge/miner,
+	/obj/item/weapon/cartridge/hop
+	)
+
+var/list/civilian_cartridges = list(
+	/obj/item/weapon/cartridge/janitor,
+	/obj/item/weapon/cartridge/service,
+	/obj/item/weapon/cartridge/hop
+	)
+
 /obj/item/weapon/cartridge
 	name = "generic cartridge"
 	desc = "A data cartridge for portable microcomputers."
@@ -98,6 +143,10 @@
 	access_flora = 1
 */
 
+/obj/item/weapon/cartridge/service
+	name = "\improper Serv-U Pro"
+	desc = "A data cartridge designed to serve YOU!"
+
 /obj/item/weapon/cartridge/signal
 	name = "generic signaler cartridge"
 	desc = "A data cartridge with an integrated radio signaler module."
@@ -127,6 +176,11 @@
 /obj/item/weapon/cartridge/quartermaster/initialize()
 	radio = new /obj/item/radio/integrated/mule(src)
 	..()
+
+/obj/item/weapon/cartridge/miner
+	name = "\improper Drill-Jockey 4.5"
+	desc = "It's covered in some sort of sand."
+	icon_state = "cart-q"
 
 /obj/item/weapon/cartridge/head
 	name = "\improper Easy-Record DELUXE"

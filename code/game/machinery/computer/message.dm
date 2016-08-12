@@ -26,6 +26,7 @@
 	// Custom Message Properties
 	var/customsender = "System Administrator"
 	var/obj/item/device/pda/customrecepient = null
+	var/obj/item/device/pda/customreply_to = null
 	var/customjob		= "Admin"
 	var/custommessage 	= "This is a test, please ignore."
 
@@ -202,6 +203,7 @@
 					<tr><td width='20%'><A href='?src=\ref[src];select=Sender'>Sender</a></td>
 					<td width='20%'><A href='?src=\ref[src];select=RecJob'>Sender's Job</a></td>
 					<td width='20%'><A href='?src=\ref[src];select=Recepient'>Recipient</a></td>
+					<td width='20%'><A href='?src=\ref[src];select=ReplyTo'>Reply-To</a></td>
 					<td width='300px' word-wrap: break-word><A href='?src=\ref[src];select=Message'>Message</a></td></tr>"}
 				//Sender  - Sender's Job  - Recepient - Message
 				//Al Green- Your Dad	  - Your Mom  - WHAT UP!?
@@ -278,6 +280,7 @@
 /obj/machinery/computer/message_monitor/proc/ResetMessage()
 	customsender 	= "System Administrator"
 	customrecepient = null
+	customreply_to	= null
 	custommessage 	= "This is a test, please ignore."
 	customjob 		= "Admin"
 
@@ -423,6 +426,17 @@
 						else
 							customrecepient = null
 
+					//Select Reply-To
+					if("ReplyTo")
+						//Get out list of viable PDAs
+						var/list/obj/item/device/pda/sendPDAs = list()
+						for(var/obj/item/device/pda/P in PDAs)
+							sendPDAs += P
+						if(PDAs && PDAs.len > 0)
+							customreply_to = input(usr, "Select a PDA from the list.") as null|anything in sortAtom(sendPDAs)
+						else
+							customreply_to = null
+
 					//Enter custom job
 					if("RecJob")
 						customjob	 	= sanitize(input(usr, "Please enter the sender's job.") as text|null)
@@ -454,17 +468,18 @@
 						//Sender isn't faking as someone who exists
 						if(isnull(PDARec))
 							src.linkedServer.send_pda_message("[customrecepient.owner]", "[customsender]","[custommessage]")
-							customrecepient.new_message(customsender, customsender, customjob, custommessage)
+							customrecepient.new_message(customsender, customsender, customjob, custommessage, customreply_to)
+							//no way to create a PDA conversation for this unfortunately, not without a major rewrite
 						//Sender is faking as someone who exists
 						else
 
 							src.linkedServer.send_pda_message("[customrecepient.owner]", "[PDARec.owner]","[custommessage]")
-							customrecepient.tnote.Add(list(list("sent" = 0, "owner" = "[PDARec.owner]", "job" = "[customjob]", "message" = "[custommessage]", "target" ="\ref[PDARec]")))
+							customrecepient.tnote.Add(list(list("sent" = 0, "owner" = "[PDARec.owner]", "job" = "[PDARec.ownjob]", "message" = "[custommessage]", "target" ="\ref[PDARec]")))
 
-							if(!customrecepient.conversations.Find("\ref[PDARec]"))
-								customrecepient.conversations.Add("\ref[PDARec]")
+							//reroute replies to the PDA of our choosing until the next time the PDA we are impersonating sends a message to this recipient
+							customrecepient.conversations["\ref[PDARec]"] = "\ref[customreply_to]"
 
-							customrecepient.new_message(PDARec, custommessage)
+							customrecepient.new_message(PDARec, PDARec.owner, PDARec.ownjob, custommessage, customreply_to) //you can send a message pretending to be someone else, 
 						//Finally..
 						ResetMessage()
 
