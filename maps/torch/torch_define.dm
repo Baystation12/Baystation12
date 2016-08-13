@@ -1,8 +1,8 @@
-
 /datum/map/torch
 	name = "Torch"
 	full_name = "SEV Torch"
 	path = "torch"
+	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 
 	station_levels = list(1,2,3,4,5)
 	contact_levels = list(1,2,3,4,5)
@@ -17,6 +17,3 @@
 	emergency_shuttle_leaving_dock = "Emergency escape pods are launched, arriving at rendezvous point in %ETA%."
 	emergency_shuttle_called_message = "Emergency escape pods are being prepped. ETA %ETA%"
 	emergency_shuttle_recall_message = "Emergency escape sequence aborted, please return to your duties."
-
-	HAS_BRANCH = 1
-	HAS_RANK = 1

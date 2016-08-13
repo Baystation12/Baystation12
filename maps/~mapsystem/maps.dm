@@ -1,6 +1,9 @@
 var/datum/map/using_map = new USING_MAP_DATUM
 var/list/all_maps = list()
 
+var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
+var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
+
 /hook/startup/proc/initialise_map_list()
 	for(var/type in typesof(/datum/map) - /datum/map)
 		var/datum/map/M
@@ -58,8 +61,7 @@ var/list/all_maps = list()
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
-	var/HAS_BRANCH	//Branch system for occupations, togglable
-	var/HAS_RANK	//Rank system, also togglable
+	var/flags = 0
 
 /datum/map/New()
 	..()
