@@ -1,0 +1,5 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - rscadd: "Invented supermatter grenades and made them available to certain sets of antags."
+  - rscadd: "The antag uplink now allows you to also buy x1 grenades, in addition to the x5 sets, with some markup."
