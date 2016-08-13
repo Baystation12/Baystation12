@@ -99,9 +99,9 @@
 /obj/item/clothing/under/utility/fleet
 	name = "fleet coveralls"
 	desc = "The utility uniform of the SCG Fleet, made from an insulated material."
-	icon_state = "navyutility_crew"
+	icon_state = "navyutility"
 	item_state = "jensensuit"
-	worn_state = "navyutility_crew"
+	worn_state = "navyutility"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 10, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 
@@ -139,24 +139,24 @@
 /obj/item/clothing/under/utility/marine
 	name = "marine fatigues"
 	desc = "The utility uniform of the SCG Marine Corps, made from durable material."
-	icon_state = "greyutility_crew"
+	icon_state = "greyutility"
 	item_state = "gy_suit"
-	worn_state = "greyutility_crew"
+	worn_state = "greyutility"
 	armor = list(melee = 10, bullet = 0, laser = 10,energy = 0, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/under/utility/marine/green
 	name = "green fatigues"
 	desc = "A green version of the SCG marine utility uniform, made from durable material."
-	icon_state = "greenutility_crew"
+	icon_state = "greenutility"
 	item_state = "jensensuit"
-	worn_state = "greenutility_crew"
+	worn_state = "greenutility"
 
 /obj/item/clothing/under/utility/marine/tan
 	name = "tan fatigues"
 	desc = "A tan version of the SCG marine utility uniform, made from durable material."
-	icon_state = "tanutility_crew"
+	icon_state = "tanutility"
 	item_state = "johnny"
-	worn_state = "tanutility_crew"
+	worn_state = "tanutility"
 
 /obj/item/clothing/under/utility/marine/medical
 	name = "marine medical fatigues"
@@ -249,7 +249,7 @@
 /obj/item/clothing/under/dress/marine/command
 	name = "marine command dress uniform"
 	desc = "The dress uniform of the SCG Marine Corps, even classier in gold."
-	icon_state = "blackress_com"
+	icon_state = "blackdress_com"
 	worn_state = "blackdress_com"
 
 

@@ -559,3 +559,21 @@
 /area/ninja_dojo/transit
 	name = "\improper bluespace"
 	icon_state = "shuttle"
+
+// Elevator areas.
+/area/shuttle/turbolift/torch_top
+	name = "Top Floor"
+	lift_announce_str = "Arriving at Operations Deck: Bridge. Head of Staff Offices. Emergency Armory."
+
+/area/shuttle/turbolift/torch_second
+	name = "Second Floor"
+	lift_announce_str = "Arriving at Maintenance Deck: Engineering. Atmospherics. AI Core."
+
+/area/shuttle/turbolift/torch_first
+	name = "First Floor"
+	lift_announce_str = "Arriving at Habitation Deck: EVA. Security Offices. Telecommunications. Hydroponics. Mess Hall."
+
+/area/shuttle/turbolift/torch_ground
+	name = "Ground Floor"
+	lift_announce_str = "Arriving at Hangar Deck: Shuttle Docks. Main Docks."
+	base_turf = /turf/simulated/floor

@@ -146,7 +146,7 @@
 					toner = 0
 	return
 
-/obj/machinery/photocopier/proc/copy(var/obj/item/weapon/paper/copy)
+/obj/machinery/photocopier/proc/copy(var/obj/item/weapon/paper/copy, var/need_toner=1)
 	var/obj/item/weapon/paper/c = new /obj/item/weapon/paper (loc)
 	if(toner > 10)	//lots of toner, make it dark
 		c.info = "<font color = #101010>"
@@ -177,13 +177,14 @@
 		img.pixel_y = copy.offset_y[j]
 		c.overlays += img
 	c.updateinfolinks()
-	toner--
+	if(need_toner)
+		toner--
 	if(toner == 0)
 		visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
 	return c
 
 
-/obj/machinery/photocopier/proc/photocopy(var/obj/item/weapon/photo/photocopy)
+/obj/machinery/photocopier/proc/photocopy(var/obj/item/weapon/photo/photocopy, var/need_toner=1)
 	var/obj/item/weapon/photo/p = photocopy.copy()
 	p.loc = src.loc
 
@@ -197,7 +198,8 @@
 		p.img.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(100,100,100))
 		p.tiny.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(100,100,100))
 	p.icon = I
-	toner -= 5	//photos use a lot of ink!
+	if(need_toner)
+		toner -= 5	//photos use a lot of ink!
 	if(toner < 0)
 		toner = 0
 		visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")

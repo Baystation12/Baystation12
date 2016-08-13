@@ -17,3 +17,8 @@
 	emergency_shuttle_leaving_dock = "Emergency escape pods are launched, arriving at rendezvous point in %ETA%."
 	emergency_shuttle_called_message = "Emergency escape pods are being prepped. ETA %ETA%"
 	emergency_shuttle_recall_message = "Emergency escape sequence aborted, please return to your duties."
+
+/datum/map/torch/perform_map_generation()
+	new /datum/random_map/automata/cave_system(null,1,1,7,255,255) // Create the mining Z-level.
+	new /datum/random_map/noise/ore(null,1,1,7,64, 64)             // Create the mining ore distribution map.
+	return 1

@@ -21,7 +21,7 @@
 /decl/hierarchy/outfit/soviet_admiral
 	head = /obj/item/clothing/head/hgpiratecap
 	shoes = /obj/item/clothing/shoes/combat
-	gloves = /obj/item/clothing/gloves/combat
+	gloves = /obj/item/clothing/gloves/thick/combat
 	l_ear = /obj/item/device/radio/headset/heads/captain
 	glasses = /obj/item/clothing/glasses/thermal/plain/eyepatch
 	suit = /obj/item/clothing/suit/hgpirate

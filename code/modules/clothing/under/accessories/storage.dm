@@ -90,3 +90,26 @@
 	new /obj/item/weapon/material/hatchet/unathiknife(hold)
 	new /obj/item/weapon/material/hatchet/unathiknife(hold)
 
+/obj/item/clothing/accessory/storage/bandolier
+	name = "bandolier"
+	desc = "A lightweight synthethic bandolier with straps for holding ammunition or other small objects."
+	icon_state = "bandolier"
+	slots = 10
+	max_w_class = 3
+
+/obj/item/clothing/accessory/storage/bandolier/New()
+	..()
+	hold.can_hold = list(
+		/obj/item/ammo_casing,
+		/obj/item/weapon/grenade,
+		/obj/item/weapon/material/hatchet/tacknife,
+		/obj/item/weapon/material/kitchen/utensil/knife,
+		/obj/item/weapon/material/knife,
+		/obj/item/weapon/material/star,
+		/obj/item/weapon/rcd_ammo,
+		/obj/item/weapon/reagent_containers/syringe,
+		/obj/item/weapon/syringe_cartridge,
+		/obj/item/weapon/plastique,
+		/obj/item/clothing/mask/smokable
+	)
+

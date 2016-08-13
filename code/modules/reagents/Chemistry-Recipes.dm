@@ -1946,7 +1946,7 @@
 	name = "Sbiten"
 	id = "sbiten"
 	result = "sbiten"
-	required_reagents = list("vodka" = 10, "capsaicin" = 1)
+	required_reagents = list("mead" = 10, "capsaicin" = 1)
 	result_amount = 10
 
 /datum/chemical_reaction/red_mead

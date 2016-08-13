@@ -75,6 +75,9 @@ var/datum/antagonist/traitor/traitors
 /datum/antagonist/traitor/equip(var/mob/living/carbon/human/traitor_mob)
 	if(istype(traitor_mob, /mob/living/silicon)) // this needs to be here because ..() returns false if the mob isn't human
 		add_law_zero(traitor_mob)
+		if(istype(traitor_mob, /mob/living/silicon/robot))
+			var/mob/living/silicon/robot/R = traitor_mob
+			R.SetLockdown(0)
 		return 1
 
 	if(!..())

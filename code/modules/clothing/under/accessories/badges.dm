@@ -120,3 +120,31 @@
 	badge_string = "Sol Central Government"
 	slot_flags = SLOT_MASK | SLOT_TIE
 
+/obj/item/clothing/accessory/badge/defenseintel
+	name = "investigator's badge"
+	desc = "A leather-backed silver badge bearing the crest of the Defense Intelligence Agency."
+	icon_state = "diabadge"
+	slot_flags = SLOT_TIE
+	badge_string = "Defense Intelligence Agency"
+
+/obj/item/clothing/accessory/badge/interstellarintel
+	name = "agent's badge"
+	desc = "A synthleather holographic badge bearing the crest of the Office of Interstellar Intelligence."
+	icon_state = "intelbadge"
+	slot_flags = SLOT_TIE
+	badge_string = "Office of Interstellar Intelligence"
+
+/obj/item/clothing/accessory/badge/representative
+	name = "representative's badge"
+	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a representative of the Sol Central Government."
+	icon_state = "solbadge"
+	slot_flags = SLOT_TIE
+	badge_string = "Sol Central Government"
+
+/obj/item/clothing/accessory/badge/nanotrasen
+	name = "\improper NanoTrasen badge"
+	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a NanoTrasen corporate executive."
+	icon_state = "ntbadge"
+	slot_flags = SLOT_TIE
+	badge_string = "NanoTrasen"
+

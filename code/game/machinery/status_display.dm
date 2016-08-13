@@ -3,6 +3,12 @@
 #define FONT_STYLE "Arial Black"
 #define SCROLL_SPEED 2
 
+var/list/status_icons_to_colour = list(
+	"redalert" = COLOR_RED,
+	"greenalert" = COLOR_GREEN,
+	"bluealert" = COLOR_BLUE
+	)
+
 // Status display
 // (formerly Countdown timer display)
 
@@ -23,10 +29,10 @@
 					// 3 = alert picture
 					// 4 = Supply shuttle timer
 
-	var/picture_state	// icon_state of alert picture
-	var/message1 = ""	// message line 1
-	var/message2 = ""	// message line 2
-	var/index1			// display index for scrolling messages or 0 if non-scrolling
+	var/picture_state = "greenalert" // icon_state of alert picture
+	var/message1 = ""                // message line 1
+	var/message2 = ""                // message line 2
+	var/index1                       // display index for scrolling messages or 0 if non-scrolling
 	var/index2
 	var/picture = null
 
@@ -156,6 +162,8 @@
 	if(!picture || picture_state != state)
 		picture_state = state
 		picture = image('icons/obj/status_display.dmi', icon_state=picture_state)
+	if(picture_state && status_icons_to_colour[picture_state])
+		set_light(l_range = 2, l_power = 2, l_color = status_icons_to_colour[picture_state])
 	overlays |= picture
 
 /obj/machinery/status_display/proc/update_display(line1, line2)
@@ -188,6 +196,7 @@
 	return ""
 
 /obj/machinery/status_display/proc/remove_display()
+	set_light(0)
 	if(overlays.len)
 		overlays.Cut()
 	if(maptext)

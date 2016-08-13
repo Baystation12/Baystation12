@@ -18,21 +18,49 @@
 	icon_state = "tanktop_alt"
 	has_color = TRUE
 
+/datum/category_item/underwear/undershirt/tank_top_fleet
+	name = "Tank top, Fleet"
+	icon_state = "tank_fleet_s"
+
 /datum/category_item/underwear/undershirt/tank_top_fire
 	name = "Tank top, fire"
 	icon_state = "tank_fire_s"
+
+/datum/category_item/underwear/undershirt/tank_top_rainbow
+	name = "Tank top, rainbow"
+	icon_state = "tank_rainbow_s"
+
+/datum/category_item/underwear/undershirt/tank_top_stripes
+	name = "Tank top, striped"
+	icon_state = "tank_stripes_s"
+
+/datum/category_item/underwear/undershirt/tank_top_sun
+	name = "Tank top, sun"
+	icon_state = "tank_sun_s"
+
+/datum/category_item/underwear/undershirt/shirt_button
+	name = "Shirt, button down"
+	icon_state = "shirt_long_s"
+
+/datum/category_item/underwear/undershirt/shirt_expedition
+	name = "Shirt, Expeditionary Corps"
+	icon_state = "expedition_s"
 
 /datum/category_item/underwear/undershirt/shirt_heart
 	name = "Shirt, heart"
 	icon_state = "lover_s"
 
-/datum/category_item/underwear/undershirt/shirt_nt
-	name = "Shirt, NT"
-	icon_state = "shirt_nano_s"
-
 /datum/category_item/underwear/undershirt/shirt_love_nt
 	name = "Shirt, I<3NT"
 	icon_state = "lover_s"
+
+/datum/category_item/underwear/undershirt/shirt_marine
+	name = "Shirt, Marine Corps"
+	icon_state = "marine_s"
+
+/datum/category_item/underwear/undershirt/shirt_nt
+	name = "Shirt, NT"
+	icon_state = "shirt_nano_s"
 
 /datum/category_item/underwear/undershirt/shortsleeve_shirt
 	name = "Shortsleeve shirt"

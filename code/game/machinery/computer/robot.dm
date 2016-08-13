@@ -77,11 +77,11 @@
 			return
 
 		if(isAI(user) && (target.connected_ai != user))
-			user << "Access Denied. This robot is not linked to you."
+			user << "<span class='warning'>Access Denied. This robot is not linked to you.</span>"
 			return
 
 		if(isrobot(user))
-			user << "Access Denied."
+			user << "<span class='warning'>Access Denied.</span>"
 			return
 
 		var/choice = input("Really [target.lockcharge ? "unlock" : "lockdown"] [target.name] ?") in list ("Yes", "No")
@@ -91,15 +91,15 @@
 		if(!target || !istype(target))
 			return
 
-		message_admins("<span class='notice'>[key_name_admin(usr)] [target.canmove ? "locked down" : "released"] [target.name]!</span>")
-		log_game("[key_name(usr)] [target.canmove ? "locked down" : "released"] [target.name]!")
-		target.canmove = !target.canmove
-		if (target.lockcharge)
-			target.lockcharge = !target.lockcharge
-			target << "Your lockdown has been lifted!"
+		if(target.SetLockdown(!target.lockcharge))
+			message_admins("<span class='notice'>[key_name_admin(usr)] [target.lockcharge ? "locked down" : "released"] [target.name]!</span>")
+			log_game("[key_name(usr)] [target.lockcharge ? "locked down" : "released"] [target.name]!")
+			if(target.lockcharge)
+				target << "<span class='danger'>You have been locked down!</span>"
+			else
+				target << "<span class='notice'>Your lockdown has been lifted!</span>"
 		else
-			target.lockcharge = !target.lockcharge
-			target << "You have been locked down!"
+			user << "<span class='warning'>ERROR: Lockdown attempt failed.</span>"
 
 	// Remotely hacks the cyborg. Only antag AIs can do this and only to linked cyborgs.
 	else if (href_list["hack"])

@@ -227,8 +227,10 @@
 
 /obj/item/clothing/glasses/sunglasses/sechud/tactical
 	name = "tactical HUD"
-	desc = "Flash-resistant goggles with inbuilt combat and security information."
+	desc = "Flash-resistant goggles with inbuilt security information. Made from durable synthetic."
 	icon_state = "swatgoggles"
+	armor = list(melee = 20, bullet = 20, laser = 20, energy = 15, bomb = 20, bio = 0, rad = 0)
+	siemens_coefficient = 0.6
 
 /obj/item/clothing/glasses/thermal
 	name = "Optical Thermal Scanner"

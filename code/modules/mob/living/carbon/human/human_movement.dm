@@ -6,8 +6,8 @@
 
 	if (istype(loc, /turf/space)) return -1 // It's hard to be slowed down in space by... anything
 
-	if(embedded_flag)
-		handle_embedded_objects() //Moving with objects stuck in you can cause bad times.
+	if(embedded_flag || (stomach_contents && stomach_contents.len))
+		handle_embedded_and_stomach_objects() //Moving with objects stuck in you can cause bad times.
 
 	if(CE_SPEEDBOOST in chem_effects)
 		return -1
@@ -15,14 +15,14 @@
 	var/health_deficiency = (maxHealth - health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 
-	if (!(species && (species.flags & NO_PAIN)))
+	if(can_feel_pain())
 		if(halloss >= 10) tally += (halloss / 10) //halloss shouldn't slow you down if you can't even feel it
 
 	var/hungry = (500 - nutrition)/5 // So overeat would be 100 and default level would be 80
 	if (hungry >= 70) tally += hungry/50
 
 	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
-		for(var/organ_name in list("l_hand","r_hand","l_arm","r_arm"))
+		for(var/organ_name in list(BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM))
 			var/obj/item/organ/external/E = get_organ(organ_name)
 			if(!E || E.is_stump())
 				tally += 4
@@ -37,7 +37,7 @@
 				tally += I.slowdown_general
 				tally += I.slowdown_per_slot[slot]
 
-		for(var/organ_name in list("l_foot","r_foot","l_leg","r_leg"))
+		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = get_organ(organ_name)
 			if(!E || E.is_stump())
 				tally += 4

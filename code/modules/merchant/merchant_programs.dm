@@ -15,6 +15,7 @@
 	var/hailed_merchant = 0
 	var/last_comms = null
 	var/temp = null
+	var/bank = 0 //A straight up money till
 
 /datum/nano_module/program/merchant
 	name = "Merchant's List"
@@ -38,6 +39,7 @@
 		data["mode"] = !!P.current_merchant
 		data["last_comms"] = P.last_comms
 		data["pad"] = !!P.pad
+		data["bank"] = P.bank
 		show_trade = P.show_trades
 		hailed = P.hailed_merchant
 		T = P.get_merchant(P.current_merchant)
@@ -69,6 +71,19 @@
 		return 1
 	return 0
 
+/datum/computer_file/program/merchant/proc/offer_money(var/datum/trader/T, var/num)
+	if(pad)
+		var/response = T.offer_money_for_trade(num, bank)
+		if(istext(response))
+			last_comms = T.get_response(response, "No thank you.")
+		else
+			last_comms = T.get_response("trade_complete", "Thank you!")
+			T.trade(null,num, get_turf(pad))
+			bank -= response
+		return
+	last_comms = "PAD NOT CONNECTED"
+
+
 /datum/computer_file/program/merchant/proc/offer_item(var/datum/trader/T, var/num)
 	if(pad)
 		var/list/targets = pad.get_targets()
@@ -76,7 +91,7 @@
 			if(!computer_emagged && istype(target,/mob/living/carbon/human))
 				last_comms = "SAFETY LOCK ENABLED: SENTIENT MATTER UNTRANSMITTABLE"
 				return
-		var/response = T.offer_items_for_trade(targets,num)
+		var/response = T.offer_items_for_trade(targets,num, get_turf(pad))
 		if(istext(response))
 			last_comms = T.get_response(response,"No, a million times no.")
 		else
@@ -84,6 +99,40 @@
 
 		return
 	last_comms = "PAD NOT CONNECTED"
+
+/datum/computer_file/program/merchant/proc/sell_items(var/datum/trader/T)
+	if(pad)
+		var/list/targets = pad.get_targets()
+		var/response = T.sell_items(targets)
+		if(istext(response))
+			last_comms = T.get_response(response, "Nope. Nope nope nope.")
+		else
+			last_comms = T.get_response("trade_complete", "Glad to be of service!")
+			bank += response
+		return
+	last_comms = "PAD NOT CONNECTED"
+
+/datum/computer_file/program/merchant/proc/transfer_to_bank()
+	if(pad)
+		var/list/targets = pad.get_targets()
+		for(var/target in targets)
+			if(istype(target, /obj/item/weapon/spacecash))
+				var/obj/item/weapon/spacecash/cash = target
+				bank += cash.worth
+				qdel(target)
+		last_comms = "ALL MONEY DETECTED ON PAD TRANSFERED"
+		return
+	last_comms = "PAD NOT CONNECTED"
+
+/datum/computer_file/program/merchant/proc/get_money()
+	if(!pad)
+		last_comms = "PAD NOT CONNECTED. CANNOT TRANSFER"
+		return
+	var/turf/T = get_turf(pad)
+	var/obj/item/weapon/spacecash/bundle/B = new(T)
+	B.worth = bank
+	bank = 0
+	B.update_icon()
 
 /datum/computer_file/program/merchant/Topic(href, href_list)
 	if(..())
@@ -95,6 +144,12 @@
 	if(href_list["PRG_continue"])
 		. = 1
 		temp = null
+	if(href_list["PRG_transfer_to_bank"])
+		. = 1
+		transfer_to_bank()
+	if(href_list["PRG_get_money"])
+		. = 1
+		get_money()
 	if(href_list["PRG_main_menu"])
 		. = 1
 		current_merchant = 0
@@ -152,3 +207,12 @@
 			if(href_list["PRG_how_much_do_you_want"])
 				. = 1
 				last_comms = T.how_much_do_you_want(text2num(href_list["PRG_how_much_do_you_want"]) + 1)
+			if(href_list["PRG_offer_money_for_item"])
+				. = 1
+				offer_money(T, text2num(href_list["PRG_offer_money_for_item"])+1)
+			if(href_list["PRG_what_do_you_want"])
+				. = 1
+				last_comms = T.what_do_you_want()
+			if(href_list["PRG_sell_items"])
+				. = 1
+				sell_items(T)

@@ -49,58 +49,7 @@
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD
 
-//Mime
-/obj/item/clothing/head/beret
-	name = "beret"
-	desc = "A beret, an artists favorite headwear."
-	icon_state = "beret"
-	body_parts_covered = 0
 
-//Security
-/obj/item/clothing/head/beret/sec
-	name = "security beret"
-	desc = "A beret with the security insignia emblazoned on it. For officers that are more inclined towards style than safety."
-	icon_state = "beret_officer"
-/obj/item/clothing/head/beret/sec/navy/officer
-	name = "officer beret"
-	desc = "A navy blue beret with an officer's rank emblem. For officers that are more inclined towards style than safety."
-	icon_state = "beret_navy_officer"
-/obj/item/clothing/head/beret/sec/navy/hos
-	name = "officer beret"
-	desc = "A navy blue beret with a commander's rank emblem. For officers that are more inclined towards style than safety."
-	icon_state = "beret_navy_hos"
-/obj/item/clothing/head/beret/sec/navy/warden
-	name = "warden beret"
-	desc = "A navy blue beret with a warden's rank emblem. For officers that are more inclined towards style than safety."
-	icon_state = "beret_navy_warden"
-/obj/item/clothing/head/beret/sec/corporate/officer
-	name = "officer beret"
-	desc = "A corporate black beret with an officer's rank emblem. For officers that are more inclined towards style than safety."
-	icon_state = "beret_corporate_officer"
-/obj/item/clothing/head/beret/sec/corporate/hos
-	name = "officer beret"
-	desc = "A corporate black beret with a commander's rank emblem. For officers that are more inclined towards style than safety."
-	icon_state = "beret_corporate_hos"
-/obj/item/clothing/head/beret/sec/corporate/warden
-	name = "warden beret"
-	desc = "A corporate black beret with a warden's rank emblem. For officers that are more inclined towards style than safety."
-	icon_state = "beret_corporate_warden"
-/obj/item/clothing/head/beret/engineering
-	name = "engineering beret"
-	desc = "A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety."
-	icon_state = "beret_engineering"
-/obj/item/clothing/head/beret/purple
-	name = "purple beret"
-	desc = "A stylish, if purple, beret."
-	icon_state = "beret_purple"
-/obj/item/clothing/head/beret/centcom/officer
-	name = "officers beret"
-	desc = "A black beret adorned with the shield - a silver kite shield with an engraved sword - of the corporate security forces."
-	icon_state = "beret_centcom_officer"
-/obj/item/clothing/head/beret/centcom/captain
-	name = "captains beret"
-	desc = "A white beret adorned with the shield - a silver kite shield with an engraved sword - of the corporate security forces."
-	icon_state = "beret_centcom_captain"
 
 //Medical
 /obj/item/clothing/head/surgery
@@ -128,3 +77,110 @@
 /obj/item/clothing/head/surgery/navyblue
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is navy blue."
 	icon_state = "surgcap_navyblue"
+
+
+
+//Berets
+/obj/item/clothing/head/beret
+	name = "beret"
+	desc = "A beret, an artists favorite headwear."
+	icon_state = "beret"
+	body_parts_covered = 0
+
+/obj/item/clothing/head/beret/sol
+	name = "peacekeeper beret"
+	desc = "A beret in Sol Central Government colors. For peacekeepers that are more inclined towards style than safety."
+	icon_state = "beret_lightblue"
+
+/obj/item/clothing/head/beret/sol/homeguard
+	name = "home guard beret"
+	desc = "A red beret denoting service in the Sol Home Guard. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_red"
+
+/obj/item/clothing/head/beret/sol/gateway
+	name = "gateway administration beret"
+	desc = "An orange beret denoting service in the Gateway Administration. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_orange"
+
+/obj/item/clothing/head/beret/sol/customs
+	name = "customs and trade beret"
+	desc = "A purple beret denoting service in the Customs and Trade Bureau. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_purpleyellow"
+
+/obj/item/clothing/head/beret/sol/orbital
+	name = "orbital assault beret"
+	desc = "A blue beret denoting orbital assault training. For helljumpers that are more inclined towards style than safety."
+	icon_state = "beret_blue"
+
+/obj/item/clothing/head/beret/sol/research
+	name = "government research beret"
+	desc = "A green beret denoting service in the Bureau of Research. For explorers that are more inclined towards style than safety."
+	icon_state = "beret_green"
+
+/obj/item/clothing/head/beret/sol/health
+	name = "health service beret"
+	desc = "A white beret denoting service in the Interstellar Health Service. For medics that are more inclined towards style than safety."
+	icon_state = "beret_white"
+
+/obj/item/clothing/head/beret/sec
+	name = "corporate security beret"
+	desc = "A beret with the security insignia emblazoned on it. For officers that are more inclined towards style than safety."
+	icon_state = "beret_corporate_red"
+
+/obj/item/clothing/head/beret/sec/navy/officer
+	name = "corporate security officer beret"
+	desc = "A navy blue beret with an officer's rank emblem. For officers that are more inclined towards style than safety."
+	icon_state = "beret_corporate_navy_officer"
+
+/obj/item/clothing/head/beret/sec/navy/hos
+	name = "corporate security commander beret"
+	desc = "A navy blue beret with a commander's rank emblem. For officers that are more inclined towards style than safety."
+	icon_state = "beret_corporate_navy_hos"
+
+/obj/item/clothing/head/beret/sec/navy/warden
+	name = "corporate security warden beret"
+	desc = "A navy blue beret with a warden's rank emblem. For officers that are more inclined towards style than safety."
+	icon_state = "beret_corporate_navy_warden"
+
+/obj/item/clothing/head/beret/sec/corporate/officer
+	name = "corporate security officer beret"
+	desc = "A corporate black beret with an officer's rank emblem. For officers that are more inclined towards style than safety."
+	icon_state = "beret_corporate_officer"
+
+/obj/item/clothing/head/beret/sec/corporate/hos
+	name = "corporate security commander beret"
+	desc = "A corporate black beret with a commander's rank emblem. For officers that are more inclined towards style than safety."
+	icon_state = "beret_corporate_hos"
+
+/obj/item/clothing/head/beret/sec/corporate/warden
+	name = "corporate security warden beret"
+	desc = "A corporate black beret with a warden's rank emblem. For officers that are more inclined towards style than safety."
+	icon_state = "beret_corporate_warden"
+
+/obj/item/clothing/head/beret/engineering
+	name = "corporate engineering beret"
+	desc = "A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety."
+	icon_state = "beret_orange"
+
+/obj/item/clothing/head/beret/purple
+	name = "purple beret"
+	desc = "A stylish, if purple, beret. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_purple"
+
+/obj/item/clothing/head/beret/centcom/officer
+	name = "asset protection beret"
+	desc = "A navy blue beret adorned with the crest of corporate asset protection. For asset protection agents that are more inclined towards style than safety."
+	icon_state = "beret_corporate_navy"
+
+/obj/item/clothing/head/beret/centcom/captain
+	name = "asset protection command beret"
+	desc = "A white beret adorned with the crest of corporate asset protection. For asset protection leaders that are more inclined towards style than safety."
+	icon_state = "beret_corporate_white"
+
+/obj/item/clothing/head/beret/deathsquad
+	name = "heavy asset protection beret"
+	desc = "An armored red beret adorned with the crest of corporate asset protection. Doesn't sacrifice style or safety."
+	icon_state = "beret_red"
+	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
+	siemens_coefficient = 0.9
+

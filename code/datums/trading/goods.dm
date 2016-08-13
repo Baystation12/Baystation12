@@ -12,6 +12,7 @@
 				"trade_found_unwanted" = "Nah! That's not what I'm looking for. Something rarer.",
 				"trade_not_enough"   = "Just cause they're made of cardboard doesn't mean they don't cost money...",
 				"how_much"          = "Uuuuuuuh... I'm thinking like... VALUE. Right? Or something rare that complements my interest.",
+				"what_want"         = "Uuuuum..... I guess I want",
 
 				"compliment_deny"   = "Ha! Very funny! You should write your own television show.",
 				"compliment_accept" = "Why yes, I do work out.",
@@ -153,7 +154,7 @@
 								/obj/item/clothing/gloves                 = TRADER_SUBTYPES_ONLY,
 								/obj/item/clothing/gloves/lightrig        = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/gloves/rig             = TRADER_BLACKLIST_ALL,
-								/obj/item/clothing/gloves/swat            = TRADER_BLACKLIST,
+								/obj/item/clothing/gloves/thick/swat            = TRADER_BLACKLIST,
 								/obj/item/clothing/gloves/chameleon       = TRADER_BLACKLIST,
 								/obj/item/clothing/head                   = TRADER_SUBTYPES_ONLY,
 								/obj/item/clothing/head/HoS               = TRADER_BLACKLIST_ALL,

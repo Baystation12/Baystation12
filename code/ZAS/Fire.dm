@@ -65,12 +65,12 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 /zone/proc/remove_liquidfuel(var/used_liquid_fuel, var/remove_fire=0)
 	if(!fuel_objs.len)
 		return
-	
-	//As a simplification, we remove fuel equally from all fuel sources. It might be that some fuel sources have more fuel, 
+
+	//As a simplification, we remove fuel equally from all fuel sources. It might be that some fuel sources have more fuel,
 	//some have less, but whatever. It will mean that sometimes we will remove a tiny bit less fuel then we intended to.
-	
+
 	var/fuel_to_remove = used_liquid_fuel/(fuel_objs.len*LIQUIDFUEL_AMOUNT_TO_MOL) //convert back to liquid volume units
-	
+
 	for(var/O in fuel_objs)
 		var/obj/effect/decal/cleanable/liquid_fuel/fuel = O
 		if(!istype(fuel))
@@ -188,7 +188,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		return
 
 	set_dir(pick(cardinal))
-	
+
 	var/datum/gas_mixture/air_contents = loc.return_air()
 	color = fire_color(air_contents.temperature)
 	set_light(3, 1, color)
@@ -209,7 +209,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	var/turf/T = loc
 	if (istype(T))
 		set_light(0)
-		
+
 		T.fire = null
 		loc = null
 	air_master.active_hotspots.Remove(src)
@@ -224,12 +224,12 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 /datum/gas_mixture/proc/zburn(zone/zone, force_burn, no_check = 0)
 	. = 0
 	if((temperature > PHORON_MINIMUM_BURN_TEMPERATURE || force_burn) && (no_check ||check_recombustability(zone? zone.fuel_objs : null)))
-	
+
 		#ifdef FIREDBG
 		log_debug("***************** FIREDBG *****************")
 		log_debug("Burning [zone? zone.name : "zoneless gas_mixture"]!")
 		#endif
-	
+
 		var/gas_fuel = 0
 		var/liquid_fuel = 0
 		var/total_fuel = 0
@@ -278,7 +278,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		var/total_reaction_progress = gas_reaction_progress + liquid_reaction_progress
 		var/used_fuel = min(total_reaction_progress, reaction_limit)
 		var/used_oxidizers = used_fuel*(FIRE_REACTION_OXIDIZER_AMOUNT/FIRE_REACTION_FUEL_AMOUNT)
-		
+
 		#ifdef FIREDBG
 		log_debug("gas_fuel = [gas_fuel], liquid_fuel = [liquid_fuel], total_oxidizers = [total_oxidizers]")
 		log_debug("fuel_area = [fuel_area], total_fuel = [total_fuel], reaction_limit = [reaction_limit]")
@@ -312,12 +312,12 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		//calculate the energy produced by the reaction and then set the new temperature of the mix
 		temperature = (starting_energy + vsc.fire_fuel_energy_release * (used_gas_fuel + used_liquid_fuel)) / heat_capacity()
 		update_values()
-		
+
 		#ifdef FIREDBG
 		log_debug("used_gas_fuel = [used_gas_fuel]; used_liquid_fuel = [used_liquid_fuel]; total = [used_fuel]")
 		log_debug("new temperature = [temperature]; new pressure = [return_pressure()]")
 		#endif
-		
+
 		return firelevel
 
 datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
@@ -369,19 +369,19 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	if(total_combustables > 0)
 		//slows down the burning when the concentration of the reactants is low
 		var/damping_multiplier = min(1, active_combustables / (total_moles/group_multiplier))
-		
+
 		//weight the damping mult so that it only really brings down the firelevel when the ratio is closer to 0
 		damping_multiplier = 2*damping_multiplier - (damping_multiplier*damping_multiplier)
-		
+
 		//calculates how close the mixture of the reactants is to the optimum
 		//fires burn better when there is more oxidizer -- too much fuel will choke the fire out a bit, reducing firelevel.
 		var/mix_multiplier = 1 / (1 + (5 * ((total_fuel / total_combustables) ** 2)))
-		
+
 		#ifdef FIREDBG
 		ASSERT(damping_multiplier <= 1)
 		ASSERT(mix_multiplier <= 1)
 		#endif
-		
+
 		//toss everything together -- should produce a value between 0 and fire_firelevel_multiplier
 		firelevel = vsc.fire_firelevel_multiplier * mix_multiplier * damping_multiplier
 
@@ -425,10 +425,10 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 
 	//Always check these damage procs first if fire damage isn't working. They're probably what's wrong.
 
-	apply_damage(2.5*mx*head_exposure, BURN, "head", 0, 0, "Fire")
-	apply_damage(2.5*mx*chest_exposure, BURN, "chest", 0, 0, "Fire")
-	apply_damage(2.0*mx*groin_exposure, BURN, "groin", 0, 0, "Fire")
-	apply_damage(0.6*mx*legs_exposure, BURN, "l_leg", 0, 0, "Fire")
-	apply_damage(0.6*mx*legs_exposure, BURN, "r_leg", 0, 0, "Fire")
-	apply_damage(0.4*mx*arms_exposure, BURN, "l_arm", 0, 0, "Fire")
-	apply_damage(0.4*mx*arms_exposure, BURN, "r_arm", 0, 0, "Fire")
+	apply_damage(2.5*mx*head_exposure,  BURN, BP_HEAD,  0, 0, "Fire")
+	apply_damage(2.5*mx*chest_exposure, BURN, BP_CHEST, 0, 0, "Fire")
+	apply_damage(2.0*mx*groin_exposure, BURN, BP_GROIN, 0, 0, "Fire")
+	apply_damage(0.6*mx*legs_exposure,  BURN, BP_L_LEG, 0, 0, "Fire")
+	apply_damage(0.6*mx*legs_exposure,  BURN, BP_R_LEG, 0, 0, "Fire")
+	apply_damage(0.4*mx*arms_exposure,  BURN, BP_L_ARM, 0, 0, "Fire")
+	apply_damage(0.4*mx*arms_exposure,  BURN, BP_R_ARM, 0, 0, "Fire")

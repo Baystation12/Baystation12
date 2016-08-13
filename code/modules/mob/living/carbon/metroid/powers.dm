@@ -73,7 +73,7 @@
 					H.custom_pain(painMes)
 				else if (istype(M, /mob/living/carbon))
 					var/mob/living/carbon/C = M
-					if (!(C.species && (C.species.flags & NO_PAIN)))
+					if (C.can_feel_pain())
 						M << "<span class='danger'>[painMes]</span>"
 
 			gain_nutrition(rand(20,25) * hazmat)
