@@ -1717,7 +1717,7 @@
 #include "code\modules\power\cable.dm"
 #include "code\modules\power\cable_heavyduty.dm"
 #include "code\modules\power\cell.dm"
-#include "code\modules\power\fractal_reactor.dm"
+#include "code\modules\power\debug_items.dm"
 #include "code\modules\power\generator.dm"
 #include "code\modules\power\generator_type2.dm"
 #include "code\modules\power\gravitygenerator.dm"

@@ -40,6 +40,8 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	maxcharge = charge_amount
 	charge = maxcharge
 	update_icon()
+	spawn(1 MINUTE)
+		log_and_message_admins("DEBUG: New power cell with capacity of [maxcharge] created. loc = [loc]")
 
 /obj/item/weapon/cell/crap
 	name = "\improper rechargable AA battery"
