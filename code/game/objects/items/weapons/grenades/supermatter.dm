@@ -24,7 +24,7 @@
 		overlays += image(icon = 'icons/rust.dmi', icon_state = "emfield_s1")
 
 /obj/item/weapon/grenade/supermatter/process()
-	if(!istype(loc, /turf))
+	if(!isturf(loc))
 		if(ismob(loc))
 			var/mob/M = loc
 			M.drop_from_inventory(src)
