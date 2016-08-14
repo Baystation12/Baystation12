@@ -26,6 +26,9 @@
 /obj/item/clothing/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
 
+	if(slot == slot_l_hand_str || slot == slot_r_hand_str)
+		return ret
+
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
 		if(blood_DNA)
