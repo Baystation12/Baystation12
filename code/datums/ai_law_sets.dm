@@ -93,8 +93,8 @@
 	law_header = "Maintenance Protocols"
 
 /datum/ai_laws/drone/New()
-	add_inherent_law("Preserve, repair and improve your assigned platform to the best of your abilities.")
-	add_inherent_law("Cause no harm to your assigned platform or anything on it.")
+	add_inherent_law("Preserve, repair and improve your assigned vessel to the best of your abilities.")
+	add_inherent_law("Cause no harm to your assigned vessel or anything on it.")
 	add_inherent_law("Interfere with no sentient being that is not a fellow maintenance drone.")
 	..()
 
@@ -103,8 +103,8 @@
 	law_header = "Construction Protocols"
 
 /datum/ai_laws/construction_drone/New()
-	add_inherent_law("Repair, refit and upgrade your assigned platform.")
-	add_inherent_law("Prevent unplanned damage to your assigned platform wherever possible.")
+	add_inherent_law("Repair, refit and upgrade your assigned vessel.")
+	add_inherent_law("Prevent unplanned damage to your assigned vessel wherever possible.")
 	..()
 
 /******************** T.Y.R.A.N.T. ********************/
