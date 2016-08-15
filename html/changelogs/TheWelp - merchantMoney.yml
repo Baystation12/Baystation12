@@ -1,5 +1,0 @@
-author: TheWelp
-delete-after: True
-changes: 
-  - rscadd: "Adds ability for merchants to fast buy via cash using a banking system."
-  - rscadd: "Adds ability for players to sell things to merchants. They will only take things they like."
