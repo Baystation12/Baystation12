@@ -41,10 +41,11 @@
 
 	var/is_synth = isSynthetic()
 	if(!(skipjumpsuit && skipface))
-		msg +=", \a "
-		if(is_synth && species.name != "Machine")
-			msg += "<b><font color='#555555'>Cyborg </font></b>"
-		msg += "<b><font color='[species.get_flesh_colour(src)]'>[species.name]!</font></b>"
+		var/species_name = "\improper "
+		if(is_synth && species.type != /datum/species/machine)
+			species_name += "Cyborg "
+		species_name += "[species.name]"
+		msg += ", <b><font color='[species.get_flesh_colour(src)]'> \a [species_name]!</font></b>"
 	msg += "<br>"
 
 	//uniform
