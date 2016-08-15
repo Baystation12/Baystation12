@@ -41,17 +41,10 @@
 
 	var/is_synth = isSynthetic()
 	if(!(skipjumpsuit && skipface))
-		if(is_synth)
-			var/use_gender = "synthetic"
-			if(gender == MALE)
-				use_gender = "android"
-			else if(gender == FEMALE)
-				use_gender = "gynoid"
-
-			msg += ", <b><font color='#555555'>\a [use_gender]!</font></b>"
-
-		else if(species.name != "Human")
-			msg += ", \a <b><font color='[species.get_flesh_colour(src)]'>[species.name]!</font></b>"
+		msg +=", \a "
+		if(is_synth && species.name != "Machine")
+			msg += "<b><font color='#555555'>Cyborg </font></b>"
+		msg += "<b><font color='[species.get_flesh_colour(src)]'>[species.name]!</font></b>"
 	msg += "<br>"
 
 	//uniform
