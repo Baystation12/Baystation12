@@ -242,20 +242,13 @@ Ccomp's first proc.
 		return mobs
 
 
-/client/proc/allow_character_respawn()
+/client/proc/allow_character_respawn(mob/observer/ghost/G in get_ghosts())
 	set category = "Special Verbs"
 	set name = "Allow player to respawn"
 	set desc = "Let's the player bypass the 30 minute wait to respawn or allow them to re-enter their corpse."
 	if(!holder)
 		src << "Only administrators may use this command."
-	var/list/ghosts= get_ghosts(1,1)
 
-	var/target = input("Please, select a ghost!", "COME BACK TO LIFE!", null, null) as null|anything in ghosts
-	if(!target)
-		src << "Hrm, appears you didn't select a ghost"		// Sanity check, if no ghosts in the list we don't want to edit a null variable and cause a runtime error.
-		return
-
-	var/mob/observer/ghost/G = ghosts[target]
 	if(G.has_enabled_antagHUD && config.antag_hud_restricted)
 		var/response = alert(src, "Are you sure you wish to allow this individual to play?","Ghost has used AntagHUD","Yes","No")
 		if(response == "No") return
@@ -266,7 +259,7 @@ Ccomp's first proc.
 	G.has_enabled_antagHUD = 2
 	G.can_reenter_corpse = 1
 
-	G:show_message(text("\blue <B>You may now respawn.  You should roleplay as if you learned nothing about the round during your time with the dead.</B>"), 1)
+	G.show_message("<span class=notice><b>You may now respawn.  You should roleplay as if you learned nothing about the round during your time with the dead.</b></span>", 1)
 	log_admin("[key_name(usr)] allowed [key_name(G)] to bypass the 30 minute respawn limit")
 	message_admins("Admin [key_name_admin(usr)] allowed [key_name_admin(G)] to bypass the 30 minute respawn limit", 1)
 
