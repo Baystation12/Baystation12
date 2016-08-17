@@ -170,14 +170,13 @@
 		update_icon()
 		mytape.timestamp += mytape.used_capacity
 		mytape.storedinfo += "\[[time2text(mytape.used_capacity*10,"mm:ss")]\] Recording started."
-		var/used = mytape.used_capacity	//to stop runtimes when you eject the tape
-		var/max = mytape.max_capacity
-		for(used, used < max)
+		for(mytape.used_capacity, mytape.used_capacity < mytape.max_capacity)
 			if(recording == 0)
 				break
 			mytape.used_capacity++
-			used++
 			sleep(10)
+			if(!mytape)
+				break
 		recording = 0
 		update_icon()
 		return
