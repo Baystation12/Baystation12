@@ -81,7 +81,7 @@
 	set name = "Eject Tape"
 	set category = "Object"
 
-	if(usr.incapacitated)
+	if(usr.incapacitated())
 		return
 	if(!mytape)
 		usr << "<span class='notice'>There's no tape in \the [src].</span>"
@@ -147,7 +147,7 @@
 	set name = "Start Recording"
 	set category = "Object"
 
-	if(usr.incapacitated)
+	if(usr.incapacitated())
 		return
 	if(!mytape)
 		usr << "<span class='notice'>There's no tape!</span>"
@@ -189,7 +189,7 @@
 	set name = "Stop"
 	set category = "Object"
 
-	if(usr.incapacitated)
+	if(usr.incapacitated())
 		return
 	if(recording)
 		recording = 0
@@ -211,7 +211,7 @@
 	set name = "Wipe Tape"
 	set category = "Object"
 
-	if(usr.incapacitated)
+	if(usr.incapacitated())
 		return
 	if(emagged)
 		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
@@ -234,7 +234,7 @@
 	set name = "Playback Tape"
 	set category = "Object"
 
-	if(usr.incapacitated)
+	if(usr.incapacitated())
 		return
 	if(!mytape)
 		usr << "<span class='notice'>There's no tape!</span>"
@@ -307,7 +307,7 @@
 	set name = "Print Transcript"
 	set category = "Object"
 
-	if(usr.incapacitated)
+	if(usr.incapacitated())
 		return
 	if(!mytape)
 		usr << "<span class='notice'>There's no tape!</span>"
