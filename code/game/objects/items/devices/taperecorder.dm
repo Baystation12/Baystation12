@@ -190,9 +190,6 @@
 
 	if(usr.stat)
 		return
-	if(emagged == 1)
-		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
-		return
 	if(recording == 1)
 		recording = 0
 		update_icon()
@@ -209,9 +206,8 @@
 		usr << "<span class='notice'>Stop what?</span>"
 
 
-//TODO wipe tape?
-/*/obj/item/device/taperecorder/verb/clear_memory()
-	set name = "Clear Memory"
+/obj/item/device/taperecorder/verb/wipe_tape()
+	set name = "Wipe Tape"
 	set category = "Object"
 
 	if(usr.stat)
@@ -219,15 +215,18 @@
 	if(emagged == 1)
 		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
 		return
+	if(mytape.ruined)
+		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
+		return
 	if(recording == 1 || playing == 1)
-		usr << "<span class='notice'>You can't clear the memory while playing or recording!</span>"
+		usr << "<span class='notice'>You can't wipe the tape while playing or recording!</span>"
 		return
 	else
-		if(storedinfo)	storedinfo.Cut()
-		if(timestamp)	timestamp.Cut()
+		if(mytape.storedinfo)	mytape.storedinfo.Cut()
+		if(mytape.timestamp)	mytape.timestamp.Cut()
 		mytape.used_capacity = 0
-		usr << "<span class='notice'>Memory cleared.</span>"
-		return*/
+		usr << "<span class='notice'>You wipe the tape.</span>"
+		return
 
 
 /obj/item/device/taperecorder/verb/playback_memory()
@@ -240,9 +239,6 @@
 		usr << "<span class='notice'>There's no tape!</span>"
 		return
 	if(mytape.ruined)
-		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
-		return
-	if(emagged == 1)
 		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
 		return
 	if(recording == 1)
@@ -286,7 +282,7 @@
 
 	playing = 0
 	update_icon()
-	// Only triggers if you emag the recorder while it's playing.
+
 	if(emagged == 1.0)
 		var/turf/T = get_turf(src)
 		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: This tape recorder will self-destruct in... Five.</font>")
