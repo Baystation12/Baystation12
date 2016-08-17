@@ -50,9 +50,12 @@
 
 
 /obj/item/device/taperecorder/proc/eject(mob/user)
-	if(mytape)
+	if(!mytape)
+		user << "<span class='notice'>There's no tape!</span>"
+	else
+		if(playing == 1 || recording == 1)
+			stop()
 		user << "<span class='notice'>You remove [mytape] from [src].</span>"
-		stop()
 		user.put_in_hands(mytape)
 		mytape = null
 		update_icon()
@@ -101,7 +104,7 @@
 /obj/item/device/taperecorder/see_emote(mob/M as mob, text, var/emote_type)
 	if(emote_type != 2) //only hearable emotes
 		return
-	if(recording)
+	if(mytape && recording)
 		mytape.timestamp += mytape.used_capacity
 		mytape.storedinfo += "\[[time2text(mytape.used_capacity*10,"mm:ss")]\] [strip_html_properly(text)]"
 
@@ -114,9 +117,9 @@
 		recordedtext = alt
 	else
 		return
-	if(recording)
+	if(mytape && recording)
 		mytape.timestamp += mytape.used_capacity
-		mytape.storedinfo += "*\[[time2text(mytape.used_capacity*10,"mm:ss")]\] *[strip_html_properly(recordedtext)]*" //"*" at front as a marker
+		mytape.storedinfo += "*\[[time2text(mytape.used_capacity*10,"mm:ss")]\] [strip_html_properly(recordedtext)]" //"*" at front as a marker
 
 /obj/item/device/taperecorder/emag_act(var/remaining_charges, var/mob/user)
 	if(emagged == 0)
@@ -145,11 +148,17 @@
 
 	if(usr.stat)
 		return
-	if(!mytape || mytape.ruined)
+	if(!mytape)
+		usr << "<span class='notice'>There's no tape!</span>"
+		return
+	if(mytape.ruined)
+		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
 		return
 	if(recording)
+		usr << "<span class='notice'>You're already recording!</span>"
 		return
 	if(playing)
+		usr << "<span class='notice'>You can't record when playing!</span>"
 		return
 	if(emagged == 1)
 		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
@@ -186,16 +195,18 @@
 		return
 	if(recording == 1)
 		recording = 0
+		update_icon()
 		mytape.timestamp+= mytape.used_capacity
 		mytape.storedinfo += "\[[time2text(mytape.used_capacity*10,"mm:ss")]\] Recording stopped."
 		usr << "<span class='notice'>Recording stopped.</span>"
 		return
 	else if(playing == 1)
 		playing = 0
-		var/turf/T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Playback stopped.</font>")
+		update_icon()
+		usr << "<span class='notice'>Playback stopped.</span>"
 		return
-	update_icon()
+	else
+		usr << "<span class='notice'>Stop what?</span>"
 
 
 //TODO wipe tape?
