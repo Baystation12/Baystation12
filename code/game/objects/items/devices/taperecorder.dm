@@ -47,6 +47,7 @@
 		mytape = I
 		user << "<span class='notice'>You insert [I] into [src].</span>"
 		update_icon()
+		return
 	..()
 
 
