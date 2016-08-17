@@ -11,7 +11,7 @@
 	var/recording = 0.0
 	var/playing = 0.0
 	var/playsleepseconds = 0.0
-	var/obj/item/device/tape/mytape
+	var/obj/item/device/tape/mytape = /obj/item/device/tape/random
 	var/canprint = 1
 	flags = CONDUCT
 	throwforce = 2
@@ -20,15 +20,13 @@
 
 /obj/item/device/taperecorder/New()
 	..()
-	mytape = new /obj/item/device/tape/random(src)
-	update_icon()
+	if(ispath(mytape))
+		mytape = new mytape(src)
+		update_icon()
 	listening_objects += src
 
-/obj/item/device/taperecorder/empty/New()
-	..()
-	mytape = null
-	update_icon()
-	listening_objects += src
+/obj/item/device/taperecorder/empty
+	var/obj/item/device/tape/mytape = null
 
 /obj/item/device/taperecorder/Destroy()
 	listening_objects -= src
@@ -43,10 +41,11 @@
 			return
 		if(!user.unEquip(I))
 			return
-		I.loc = src
+		I.forceMove(src)
 		mytape = I
 		user << "<span class='notice'>You insert [I] into [src].</span>"
 		update_icon()
+	..()
 
 
 /obj/item/device/taperecorder/proc/eject(mob/user)
@@ -62,18 +61,16 @@
 
 
 /obj/item/device/taperecorder/fire_act()
-	mytape.ruin() //Fires destroy the tape
-	return()
+	if(mytape)
+		mytape.ruin() //Fires destroy the tape
+	return() ..()
 
 
 /obj/item/device/taperecorder/attack_hand(mob/user)
 	if(loc == user)
 		if(mytape)
-			if(user.l_hand != src && user.r_hand != src)
-				..()
-				return
-			eject(user)
-			return
+		eject(user)
+		return
 	..()
 
 
@@ -81,7 +78,7 @@
 	set name = "Eject Tape"
 	set category = "Object"
 
-	if(usr.stat)
+	if(usr.incapacitated)
 		return
 	if(!mytape)
 		return
@@ -146,7 +143,7 @@
 	set name = "Start Recording"
 	set category = "Object"
 
-	if(usr.stat)
+	if(usr.incapacitated)
 		return
 	if(!mytape)
 		usr << "<span class='notice'>There's no tape!</span>"
@@ -188,7 +185,7 @@
 	set name = "Stop"
 	set category = "Object"
 
-	if(usr.stat)
+	if(usr.incapacitated)
 		return
 	if(recording == 1)
 		recording = 0
@@ -210,7 +207,7 @@
 	set name = "Wipe Tape"
 	set category = "Object"
 
-	if(usr.stat)
+	if(usr.incapacitated)
 		return
 	if(emagged == 1)
 		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
@@ -233,7 +230,7 @@
 	set name = "Playback Tape"
 	set category = "Object"
 
-	if(usr.stat)
+	if(usr.incapacitated)
 		return
 	if(!mytape)
 		usr << "<span class='notice'>There's no tape!</span>"
@@ -306,7 +303,7 @@
 	set name = "Print Transcript"
 	set category = "Object"
 
-	if(usr.stat)
+	if(usr.incapacitated)
 		return
 	if(!mytape)
 		usr << "<span class='notice'>There's no tape!</span>"
@@ -358,7 +355,6 @@
 
 
 
-
 /obj/item/device/tape
 	name = "tape"
 	desc = "A magnetic tape that can hold up to ten minutes of content."
@@ -375,6 +371,12 @@
 	var/ruined = 0
 
 
+/obj/item/device/tape/update_icon()
+	overlays.Cut()
+	if(ruined)
+		overlays += "ribbonoverlay"
+
+
 /obj/item/device/tape/fire_act()
 	ruin()
 
@@ -385,14 +387,13 @@
 
 
 /obj/item/device/tape/proc/ruin()
-	if(!ruined)
-		overlays += "ribbonoverlay"
 	ruined = 1
+	update_icon()
 
 
 /obj/item/device/tape/proc/fix()
-	overlays -= "ribbonoverlay"
 	ruined = 0
+	update_icon()
 
 
 /obj/item/device/tape/attackby(obj/item/I, mob/user, params)
