@@ -30,6 +30,7 @@
 
 /obj/item/device/taperecorder/Destroy()
 	listening_objects -= src
+	processing_objects.Remove(src)
 	if(mytape)
 		qdel(mytape)
 		mytape = null
@@ -426,6 +427,8 @@
 		if(do_after(user, 120, target = src))
 			user << "<span class='notice'>You wound the tape back in.</span>"
 			fix()
+		return
+	..()
 
 
 //Random colour tapes
