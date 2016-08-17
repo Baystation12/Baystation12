@@ -26,7 +26,7 @@
 	listening_objects += src
 
 /obj/item/device/taperecorder/empty
-	var/obj/item/device/tape/mytape = null
+	mytape = null
 
 /obj/item/device/taperecorder/Destroy()
 	listening_objects -= src
