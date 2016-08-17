@@ -92,22 +92,22 @@
 
 /obj/item/device/taperecorder/hear_talk(mob/living/M as mob, msg, var/verb="says", datum/language/speaking=null)
 	if(mytape && recording)
-		mytape.timestamp += mytape.get_recording_time()
+		mytape.timestamp += mytape.used_capacity
 
 		if(speaking)
 			if(!speaking.machine_understands)
 				msg = speaking.scramble(msg)
-			mytape.storedinfo += "\[[time2text(mytape.get_recording_time()*10,"mm:ss")]\] [M.name] [speaking.format_message_plain(msg, verb)]"
+			mytape.storedinfo += "\[[time2text(mytape.used_capacity*10,"mm:ss")]\] [M.name] [speaking.format_message_plain(msg, verb)]"
 		else
-			mytape.storedinfo += "\[[time2text(mytape.get_recording_time()*10,"mm:ss")]\] [M.name] [verb], \"[msg]\""
+			mytape.storedinfo += "\[[time2text(mytape.used_capacity*10,"mm:ss")]\] [M.name] [verb], \"[msg]\""
 
 
 /obj/item/device/taperecorder/see_emote(mob/M as mob, text, var/emote_type)
 	if(emote_type != 2) //only hearable emotes
 		return
 	if(mytape && recording)
-		mytape.timestamp += mytape.get_recording_time()
-		mytape.storedinfo += "\[[time2text(mytape.get_recording_time()*10,"mm:ss")]\] [strip_html_properly(text)]"
+		mytape.timestamp += mytape.used_capacity
+		mytape.storedinfo += "\[[time2text(mytape.used_capacity*10,"mm:ss")]\] [strip_html_properly(text)]"
 
 
 /obj/item/device/taperecorder/show_message(msg, type, alt, alt_type)
@@ -119,8 +119,8 @@
 	else
 		return
 	if(mytape && recording)
-		mytape.timestamp += mytape.get_recording_time()
-		mytape.storedinfo += "*\[[time2text(mytape.get_recording_time()*10,"mm:ss")]\] [strip_html_properly(recordedtext)]" //"*" at front as a marker
+		mytape.timestamp += mytape.used_capacity
+		mytape.storedinfo += "*\[[time2text(mytape.used_capacity*10,"mm:ss")]\] [strip_html_properly(recordedtext)]" //"*" at front as a marker
 
 /obj/item/device/taperecorder/emag_act(var/remaining_charges, var/mob/user)
 	if(emagged == 0)
@@ -170,7 +170,6 @@
 		update_icon()
 		processing_objects.Add(src)
 
-		mytape.recording_started = world.time
 		mytape.timestamp += mytape.used_capacity
 		mytape.storedinfo += "\[[time2text(mytape.used_capacity*10,"mm:ss")]\] Recording started."
 		/*for(mytape.used_capacity, mytape.used_capacity < mytape.max_capacity)
@@ -190,12 +189,24 @@
 /obj/item/device/taperecorder/process()
 	if(!recording || !mytape)
 		return
-	if(mytape.get_recording_time() >= mytape.max_capacity)
-		if(usr)
-			usr << "<span class='notice'>The tape is full.</span>"
-		stop()
+	mytape.used_capacity += 2 //process() is called every two seconds, as set in /datum/controller/process/obj/setup()
+	if(mytape.used_capacity >= mytape.max_capacity)
+		if(ismob(loc))
+			var/mob/M = loc
+			M << "<span class='notice'>The tape is full.</span>"
+		stop_recording()
 
 
+/obj/item/device/taperecorder/proc/stop_recording()
+	//Sanity checks skipped, should not be called unless actually recording
+	recording = 0
+	update_icon()
+	processing_objects.Remove(src)
+	mytape.timestamp += mytape.used_capacity
+	mytape.storedinfo += "\[[time2text(mytape.used_capacity*10,"mm:ss")]\] Recording stopped."
+	if(ismob(loc))
+		var/mob/M = loc
+		M << "<span class='notice'>Recording stopped.</span>"
 
 
 /obj/item/device/taperecorder/verb/stop()
@@ -205,13 +216,7 @@
 	if(usr.incapacitated())
 		return
 	if(recording)
-		recording = 0
-		update_icon()
-		processing_objects.Remove(src)
-		mytape.used_capacity = mytape.get_recording_time()
-		mytape.timestamp+= mytape.used_capacity
-		mytape.storedinfo += "\[[time2text(mytape.used_capacity*10,"mm:ss")]\] Recording stopped."
-		usr << "<span class='notice'>Recording stopped.</span>"
+		stop_recording()
 		return
 	else if(playing)
 		playing = 0
@@ -385,7 +390,6 @@
 	throwforce = 0
 	var/max_capacity = 600
 	var/used_capacity = 0
-	var/recording_started
 	var/list/storedinfo = new/list()
 	var/list/timestamp = new/list()
 	var/ruined = 0
@@ -414,11 +418,6 @@
 /obj/item/device/tape/proc/fix()
 	ruined = 0
 	update_icon()
-
-
-/obj/item/device/tape/proc/get_recording_time()
-	//total recording time = current time + previous times
-	return round(world.time - recording_started + used_capacity, 10) / 10
 
 
 /obj/item/device/tape/attackby(obj/item/I, mob/user, params)
