@@ -55,7 +55,7 @@
 	if(!mytape)
 		user << "<span class='notice'>There's no tape!</span>"
 	else
-		if(playing == 1 || recording == 1)
+		if(playing || recording)
 			stop()
 		user << "<span class='notice'>You remove [mytape] from [src].</span>"
 		user.put_in_hands(mytape)
@@ -72,8 +72,8 @@
 /obj/item/device/taperecorder/attack_hand(mob/user)
 	if(loc == user)
 		if(mytape)
-		eject(user)
-		return
+			eject(user)
+			return
 	..()
 
 
@@ -84,6 +84,7 @@
 	if(usr.incapacitated)
 		return
 	if(!mytape)
+		usr << "<span class='notice'>There's no tape in \the [src].</span>"
 		return
 
 	eject(usr)
@@ -160,7 +161,7 @@
 	if(playing)
 		usr << "<span class='notice'>You can't record when playing!</span>"
 		return
-	if(emagged == 1)
+	if(emagged)
 		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
 		return
 	if(mytape.used_capacity < mytape.max_capacity)
@@ -190,14 +191,14 @@
 
 	if(usr.incapacitated)
 		return
-	if(recording == 1)
+	if(recording)
 		recording = 0
 		update_icon()
 		mytape.timestamp+= mytape.used_capacity
 		mytape.storedinfo += "\[[time2text(mytape.used_capacity*10,"mm:ss")]\] Recording stopped."
 		usr << "<span class='notice'>Recording stopped.</span>"
 		return
-	else if(playing == 1)
+	else if(playing)
 		playing = 0
 		update_icon()
 		usr << "<span class='notice'>Playback stopped.</span>"
@@ -212,13 +213,13 @@
 
 	if(usr.incapacitated)
 		return
-	if(emagged == 1)
+	if(emagged)
 		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
 		return
 	if(mytape.ruined)
 		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
 		return
-	if(recording == 1 || playing == 1)
+	if(recording || playing)
 		usr << "<span class='notice'>You can't wipe the tape while playing or recording!</span>"
 		return
 	else
@@ -241,10 +242,10 @@
 	if(mytape.ruined)
 		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
 		return
-	if(recording == 1)
+	if(recording)
 		usr << "<span class='notice'>You can't playback when recording!</span>"
 		return
-	if(playing == 1)
+	if(playing)
 		usr << "<span class='notice'>You're already playing!</span>"
 		return
 	playing = 1
@@ -283,7 +284,7 @@
 	playing = 0
 	update_icon()
 
-	if(emagged == 1.0)
+	if(emagged)
 		var/turf/T = get_turf(src)
 		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: This tape recorder will self-destruct in... Five.</font>")
 		sleep(10)
@@ -314,13 +315,13 @@
 	if(mytape.ruined)
 		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
 		return
-	if(emagged == 1)
+	if(emagged)
 		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
 		return
 	if(!canprint)
 		usr << "<span class='notice'>The recorder can't print that fast!</span>"
 		return
-	if(recording == 1 || playing == 1)
+	if(recording || playing)
 		usr << "<span class='notice'>You can't print the transcript while playing or recording!</span>"
 		return
 
@@ -340,7 +341,7 @@
 
 
 /obj/item/device/taperecorder/attack_self(mob/user)
-	if(recording == 1 || playing == 1)
+	if(recording || playing)
 		stop()
 	else
 		record()
