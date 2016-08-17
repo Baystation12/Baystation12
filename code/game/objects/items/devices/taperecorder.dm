@@ -30,7 +30,9 @@
 
 /obj/item/device/taperecorder/Destroy()
 	listening_objects -= src
-	mytape = null
+	if(mytape)
+		qdel(mytape)
+		mytape = null
 	return ..()
 
 
@@ -63,7 +65,7 @@
 /obj/item/device/taperecorder/fire_act()
 	if(mytape)
 		mytape.ruin() //Fires destroy the tape
-	return() ..()
+	return ..()
 
 
 /obj/item/device/taperecorder/attack_hand(mob/user)
