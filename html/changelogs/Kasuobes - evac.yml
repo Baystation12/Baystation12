@@ -1,6 +1,0 @@
-author: Haswell
-
-delete-after: True
-
-changes: 
-  - tweak: "The autopilot on the escape shuttle can no longer be overridden during crew transfers while on blue alert or lower. It can only be overridden during an evacuation, or during an alert level higher than blue."
