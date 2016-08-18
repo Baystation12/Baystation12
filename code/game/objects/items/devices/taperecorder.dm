@@ -89,7 +89,7 @@
 		usr << "<span class='notice'>There's no tape in \the [src].</span>"
 		return
 	if(emagged)
-		user << "<span class='notice'>The tape seems to be stuck inside.</span>"
+		usr << "<span class='notice'>The tape seems to be stuck inside.</span>"
 		return
 
 	eject(usr)
