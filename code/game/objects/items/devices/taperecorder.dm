@@ -52,18 +52,6 @@
 	..()
 
 
-/obj/item/device/taperecorder/proc/eject(mob/user)
-	if(!mytape)
-		user << "<span class='notice'>There's no tape!</span>"
-	else
-		if(playing || recording)
-			stop()
-		user << "<span class='notice'>You remove [mytape] from [src].</span>"
-		user.put_in_hands(mytape)
-		mytape = null
-		update_icon()
-
-
 /obj/item/device/taperecorder/fire_act()
 	if(mytape)
 		mytape.ruin() //Fires destroy the tape
@@ -71,14 +59,14 @@
 
 
 /obj/item/device/taperecorder/attack_hand(mob/user)
-	if(loc == user)
+	if(user.get_inactive_hand() == src)
 		if(mytape)
-			eject(user)
+			eject()
 			return
 	..()
 
 
-/obj/item/device/taperecorder/verb/ejectverb()
+/obj/item/device/taperecorder/verb/eject()
 	set name = "Eject Tape"
 	set category = "Object"
 
@@ -91,7 +79,12 @@
 		usr << "<span class='notice'>The tape seems to be stuck inside.</span>"
 		return
 
-	eject(usr)
+	if(playing || recording)
+		stop()
+	usr << "<span class='notice'>You remove [mytape] from [src].</span>"
+	usr.put_in_hands(mytape)
+	mytape = null
+	update_icon()
 
 
 /obj/item/device/taperecorder/hear_talk(mob/living/M as mob, msg, var/verb="says", datum/language/speaking=null)
@@ -434,6 +427,7 @@
 				name = "tape - '[n_name]'"
 				user << "<span class='notice'>You label the tape '[n_name]'.</span>"
 			else
+				name = "tape"
 				user << "<span class='notice'>You scratch off the label.</span>"
 		return
 	..()
