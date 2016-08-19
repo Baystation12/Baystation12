@@ -88,6 +88,10 @@
 	update()
 	return
 
+/obj/structure/morgue/attack_ai(var/mob/user)
+	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
+		return attack_hand(user)
+
 /obj/structure/morgue/attackby(P as obj, mob/user as mob)
 	if (istype(P, /obj/item/weapon/pen))
 		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
