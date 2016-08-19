@@ -427,6 +427,15 @@
 			user << "<span class='notice'>You wound the tape back in.</span>"
 			fix()
 		return
+	else if(istype(I, /obj/item/weapon/pen))
+		var/n_name = sanitizeSafe(input(usr, "What would you like to label the tape?", "Tape Labelling", null)  as text, MAX_NAME_LEN)
+		if(loc == user && !user.incapacitated())
+			if(n_name)
+				name = "tape - '[n_name]'"
+				user << "<span class='notice'>You label the tape '[n_name]'.</span>"
+			else
+				user << "<span class='notice'>You scratch off the label.</span>"
+		return
 	..()
 
 
