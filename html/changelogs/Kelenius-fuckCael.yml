@@ -41,7 +41,7 @@ changes:
   - tweak: "Suspension generator's different field types removed. By the way, remember that they can suspend any item and even mobs."
   - tweak: "Archeology belts and pick sets can now hold small pickaxes. Pick sets still only have 7 slots. Brushes fit on your ears."
   - tweak: "Empty rock drop rate reduced."
-  - tweak: "Empty rock renamed from "rock" to "small rock" so you can tell if you are clicking on a turf or an item when hovering over it."
+  - tweak: "Empty rock renamed from 'rock' to 'small rock' so you can tell if you are clicking on a turf or an item when hovering over it."
   - tweak: "Empty boulder spawn rate reduced."
   - tweak: "Tape measuring is a bit faster."
   - tweak: "Scanner now shows the lowest and the highest depth of the find (highest is depth + clearance) for easier calculations. Ideally, you need to hit exactly the lowest spot. Less ideally, hit anywhere between higest and lowest. Hit below lowest and you have a chance to break the find."
