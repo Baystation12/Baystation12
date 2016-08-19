@@ -410,13 +410,13 @@
 
 
 /obj/item/device/tape/proc/record_speech(text)
-	timestamp += mytape.used_capacity
+	timestamp += used_capacity
 	storedinfo += "\[[time2text(used_capacity*10,"mm:ss")]\] [text]"
 
 
 //shows up on the printed transcript as (Unrecognized sound)
 /obj/item/device/tape/proc/record_noise(text)
-	timestamp += mytape.used_capacity
+	timestamp += used_capacity
 	storedinfo += "*\[[time2text(used_capacity*10,"mm:ss")]\] [text]"
 
 
