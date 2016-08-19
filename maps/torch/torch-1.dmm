@@ -306,7 +306,7 @@
 "fT" = (/obj/effect/floor_decal/industrial/warning{dir = 9},/turf/simulated/floor/plating,/area/quartermaster/hangar)
 "fU" = (/obj/structure/reagent_dispensers/acid{density = 0; pixel_x = -32},/turf/simulated/floor/tiled/dark,/area/rnd/anom)
 "fV" = (/turf/simulated/floor/tiled/dark,/area/rnd/anom)
-"fW" = (/obj/structure/table/steel,/obj/item/weapon/storage/box/solution_trays,/obj/item/weapon/reagent_containers/dropper{pixel_y = -4},/obj/item/weapon/anobattery{pixel_x = -2; pixel_y = -2},/obj/item/weapon/anobattery{pixel_x = -6; pixel_y = 2},/obj/item/weapon/anobattery{pixel_x = 6; pixel_y = 6},/obj/item/weapon/anobattery{pixel_x = 2; pixel_y = 2},/turf/simulated/floor/tiled/dark,/area/rnd/anom)
+"fW" = (/obj/structure/table/steel,/obj/item/weapon/reagent_containers/dropper{pixel_y = -4},/obj/item/weapon/anobattery{pixel_x = -2; pixel_y = -2},/obj/item/weapon/anobattery{pixel_x = -6; pixel_y = 2},/obj/item/weapon/anobattery{pixel_x = 6; pixel_y = 6},/obj/item/weapon/anobattery{pixel_x = 2; pixel_y = 2},/turf/simulated/floor/tiled/dark,/area/rnd/anom)
 "fX" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/random/maintenance,/turf/simulated/floor/plating,/area/maintenance/fourthdeck/aft)
 "fY" = (/obj/structure/cable/green,/obj/structure/cable/green{d2 = 2; icon_state = "0-2"},/obj/machinery/power/smes/buildable{charge = 0; RCon_tag = "Substation - Fourth Deck"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/aft)
 "fZ" = (/obj/structure/cable,/obj/machinery/power/terminal{dir = 8},/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/aft)
