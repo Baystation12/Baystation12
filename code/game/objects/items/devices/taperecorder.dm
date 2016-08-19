@@ -266,8 +266,8 @@
 	playing = 1
 	update_icon()
 	usr << "<span class='notice'>Playing started.</span>"
-	for(var/i=1 , mytape && i < mytape.max_capacity , i++)
-		if(playing == 0)
+	for(var/i=1 , i < mytape.max_capacity , i++)
+		if(!mytape || !playing)
 			break
 		if(mytape.storedinfo.len < i)
 			break
