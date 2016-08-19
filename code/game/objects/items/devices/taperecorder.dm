@@ -31,7 +31,6 @@
 
 /obj/item/device/taperecorder/Destroy()
 	listening_objects -= src
-	processing_objects.Remove(src)
 	if(mytape)
 		qdel(mytape)
 		mytape = null
@@ -173,40 +172,31 @@
 		usr << "<span class='notice'>Recording started.</span>"
 		recording = 1
 		update_icon()
-		processing_objects.Add(src)
 
 		mytape.timestamp += mytape.used_capacity
 		mytape.storedinfo += "\[[time2text(mytape.used_capacity*10,"mm:ss")]\] Recording started."
-		/*for(mytape.used_capacity, mytape.used_capacity < mytape.max_capacity)
-			if(recording == 0)
-				break
-			mytape.used_capacity++
+
+		//count seconds until full, or recording is stopped
+		while(mytape && recording && mytape.used_capacity < mytape.max_capacity)
 			sleep(10)
-			if(!mytape)
-				break
-		recording = 0
-		update_icon()*/
+			mytape.used_capacity++
+			if(mytape.used_capacity >= mytape.max_capacity)
+				if(ismob(loc))
+					var/mob/M = loc
+					M << "<span class='notice'>The tape is full.</span>"
+				stop_recording()
+
+
+		update_icon()
 		return
 	else
 		usr << "<span class='notice'>The tape is full.</span>"
-
-
-/obj/item/device/taperecorder/process()
-	if(!recording || !mytape)
-		return
-	mytape.used_capacity += 2 //process() is called every two seconds, as set in /datum/controller/process/obj/setup()
-	if(mytape.used_capacity >= mytape.max_capacity)
-		if(ismob(loc))
-			var/mob/M = loc
-			M << "<span class='notice'>The tape is full.</span>"
-		stop_recording()
 
 
 /obj/item/device/taperecorder/proc/stop_recording()
 	//Sanity checks skipped, should not be called unless actually recording
 	recording = 0
 	update_icon()
-	processing_objects.Remove(src)
 	mytape.timestamp += mytape.used_capacity
 	mytape.storedinfo += "\[[time2text(mytape.used_capacity*10,"mm:ss")]\] Recording stopped."
 	if(ismob(loc))
