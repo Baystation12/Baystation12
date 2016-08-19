@@ -181,10 +181,10 @@
 
 	for(var/mob/living/M in T)
 		M.weakened += 5
-		M.visible_message("\blue \icon[M] [M] begins to float in the air!","You feel tingly and light, but it is difficult to move.")
+		M.visible_message("<span class='notice'>\icon[M] [M] begins to float in the air!</span>","You feel tingly and light, but it is difficult to move.")
 
 	suspension_field = new(T)
-	src.visible_message("\blue \icon[src] [src] activates with a low hum.")
+	src.visible_message("<span class='notice'>\icon[src] [src] activates with a low hum.</span>")
 	icon_state = "suspension3"
 
 	for(var/obj/item/I in T)
@@ -194,7 +194,7 @@
 	if(collected)
 		suspension_field.icon_state = "energynet"
 		suspension_field.overlays += "shield2"
-		src.visible_message("\blue \icon[suspension_field] [suspension_field] gently absconds [collected > 1 ? "something" : "several things"].")
+		src.visible_message("<span class='notice'>\icon[suspension_field] [suspension_field] gently absconds [collected > 1 ? "something" : "several things"].</span>")
 	else
 		if(istype(T,/turf/simulated/mineral) || istype(T,/turf/simulated/wall))
 			suspension_field.icon_state = "shieldsparkles"
@@ -209,14 +209,14 @@
 		M << "<span class='info'>You no longer feel like floating.</span>"
 		M.weakened = min(M.weakened, 3)
 
-	src.visible_message("\blue \icon[src] [src] deactivates with a gentle shudder.")
+	src.visible_message("<span class='notice'>\icon[src] [src] deactivates with a gentle shudder.</span>")
 	qdel(suspension_field)
 	suspension_field = null
 	icon_state = "suspension2"
 
 /obj/machinery/suspension_gen/Destroy()
 	deactivate()
-	..()
+	return ..()
 
 /obj/machinery/suspension_gen/verb/rotate_ccw()
 	set src in view(1)
@@ -224,7 +224,7 @@
 	set category = "Object"
 
 	if(anchored)
-		usr << "\red You cannot rotate [src], it has been firmly fixed to the floor."
+		usr << "<span class='warning'>You cannot rotate [src], it has been firmly fixed to the floor.</span>"
 	else
 		set_dir(turn(dir, 90))
 
@@ -234,7 +234,7 @@
 	set category = "Object"
 
 	if(anchored)
-		usr << "\red You cannot rotate [src], it has been firmly fixed to the floor."
+		usr << "<span class='warning'>You cannot rotate [src], it has been firmly fixed to the floor.</span>"
 	else
 		set_dir(turn(dir, -90))
 
@@ -247,4 +247,4 @@
 /obj/effect/suspension_field/Destroy()
 	for(var/atom/movable/I in src)
 		I.loc = src.loc
-	..()
+	return ..()

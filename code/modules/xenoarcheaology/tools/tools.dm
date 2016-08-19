@@ -197,7 +197,8 @@
 	onclose(user, "depth_scanner")
 
 /obj/item/device/depth_scanner/Topic(href, href_list)
-	..()
+	if(..())
+		return 1
 	usr.set_machine(src)
 
 	if(href_list["select"])
@@ -237,7 +238,7 @@
 
 /obj/item/device/beacon_locator/Destroy()
 	processing_objects.Remove(src)
-	..()
+	return ..()
 
 /obj/item/device/beacon_locator/process()
 	if(target_radio)
@@ -297,7 +298,8 @@
 	onclose(user, "locater")
 
 /obj/item/device/beacon_locator/Topic(href, href_list)
-	..()
+	if(..())
+		return 1
 	usr.set_machine(src)
 
 	if(href_list["reset_tracking"])

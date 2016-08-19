@@ -85,6 +85,8 @@
 			scanned_object = null
 
 /obj/machinery/artifact_analyser/Topic(href, href_list)
+	if(..())
+		return 1
 	if(href_list["begin_scan"])
 		if(!owned_scanner)
 			reconnect_scanner()
@@ -121,7 +123,6 @@
 		usr.unset_machine(src)
 		usr << browse(null, "window=artanalyser")
 
-	..()
 	updateDialog()
 
 //hardcoded responses, oh well

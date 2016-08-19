@@ -159,6 +159,10 @@
 	processing_objects.Add(src)
 	loc_last_process = src.loc
 
+/obj/effect/decal/cleanable/blood/splatter/animated/Destroy()
+	processing_objects.Remove(src)
+	return ..()
+
 /obj/effect/decal/cleanable/blood/splatter/animated/process()
 	if(target_turf && src.loc != target_turf)
 		step_towards(src,target_turf)

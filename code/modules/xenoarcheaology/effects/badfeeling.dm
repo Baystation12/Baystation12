@@ -31,9 +31,9 @@
 			var/mob/living/carbon/human/H = user
 			if(prob(50))
 				if(prob(75))
-					H << "<b><font color='red' size='[num2text(rand(1,5))]'>[pick(drastic_messages)]</b></font>"
+					H << "<span class='danger'>[pick(drastic_messages)]</span>"
 				else
-					H << "<font color='red'>[pick(messages)]</font>"
+					H << "<span class='warning'>[pick(messages)]</span>"
 
 			if(prob(50))
 				H.dizziness += rand(3,5)
@@ -44,9 +44,9 @@
 		for (var/mob/living/carbon/human/H in range(src.effectrange,T))
 			if(prob(5))
 				if(prob(75))
-					H << "<font color='red'>[pick(messages)]</font>"
+					H << "<span class='warning'>[pick(messages)]</span>"
 				else
-					H << "<font color='red' size='[num2text(rand(1,5))]'><b>[pick(drastic_messages)]</b></font>"
+					H << "<span class='danger'>[pick(drastic_messages)]</span>"
 
 			if(prob(10))
 				H.dizziness += rand(3,5)
@@ -58,9 +58,9 @@
 		for (var/mob/living/carbon/human/H in range(src.effectrange,T))
 			if(prob(50))
 				if(prob(95))
-					H << "<font color='red' size='[num2text(rand(1,5))]'><b>[pick(drastic_messages)]</b></font>"
+					H << "<span class='danger'>[pick(drastic_messages)]</span>"
 				else
-					H << "<font color='red'>[pick(messages)]</font>"
+					H << "<span class='warning'>[pick(messages)]</span>"
 
 			if(prob(50))
 				H.dizziness += rand(3,5)

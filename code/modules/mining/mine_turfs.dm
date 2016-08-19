@@ -347,7 +347,7 @@ var/list/mining_floors = list()
 		var/obj/effect/suspension_field/S = locate() in src
 		if(!S)
 			if(X)
-				visible_message("\red<b>[pick("[display_name] crumbles away into dust","[display_name] breaks apart")].</b>")
+				visible_message("<span class='danger'>[pick("[display_name] crumbles away into dust","[display_name] breaks apart")].</span>")
 				qdel(X)
 
 	finds.Remove(F)

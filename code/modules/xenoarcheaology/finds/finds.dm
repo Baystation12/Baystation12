@@ -31,7 +31,7 @@
 	if(istype(I, /obj/item/weapon/pickaxe/brush))
 		var/obj/item/inside = locate() in src
 		if(inside)
-			inside.loc = get_turf(src)
+			inside.forceMove(get_turf(src))
 			visible_message("<span class='info'>\The [src] is brushed away, revealing \the [inside].</span>")
 		else
 			visible_message("<span class='info'>\The [src] is brushed away into nothing.</span>")
@@ -44,7 +44,7 @@
 			if(W.get_fuel() >= 2)
 				var/obj/item/inside = locate() in src
 				if(inside)
-					inside.loc = get_turf(src)
+					inside.forceMove(get_turf(src))
 					visible_message("<span class='info'>\The [src] burns away revealing \the [inside].</span>")
 				else
 					visible_message("<span class='info'>\The [src] burns away into nothing.</span>")
