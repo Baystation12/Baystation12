@@ -88,9 +88,10 @@
 	update()
 	return
 
-/obj/structure/morgue/attack_ai(var/mob/user)
-	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
+/obj/structure/morgue/attack_robot(var/mob/user)
+	if(Adjacent(user))
 		return attack_hand(user)
+	else return ..()
 
 /obj/structure/morgue/attackby(P as obj, mob/user as mob)
 	if (istype(P, /obj/item/weapon/pen))
