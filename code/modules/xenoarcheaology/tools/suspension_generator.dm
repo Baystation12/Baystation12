@@ -88,7 +88,7 @@
 		var/obj/item/I = usr.get_active_hand()
 		if (istype(I, /obj/item/weapon/card))
 			usr.drop_item()
-			I.loc = src
+			I.forceMove(src)
 			auth_card = I
 			if(attempt_unlock(I, usr))
 				usr << "<span class='info'>You insert [I], the console flashes \'<i>Access granted.</i>\'</span>"
@@ -102,7 +102,7 @@
 					usr.put_in_hands(auth_card)
 				auth_card = null
 			else
-				auth_card.loc = loc
+				auth_card.forceMove(loc)
 				auth_card = null
 	else if(href_list["lock"])
 		locked = 1
@@ -116,7 +116,7 @@
 	if(!panel_open)
 		interact(user)
 	else if(cell)
-		cell.loc = loc
+		cell.forceMove(loc)
 		cell.add_fingerprint(user)
 		cell.update_icon()
 
@@ -146,7 +146,7 @@
 				user << "<span class='warning'>There is a power cell already installed.</span>"
 			else
 				user.drop_item()
-				W.loc = src
+				W.forceMove(src)
 				cell = W
 				user << "<span class='info'>You insert the power cell.</span>"
 				icon_state = "suspension1"
@@ -188,7 +188,7 @@
 	icon_state = "suspension3"
 
 	for(var/obj/item/I in T)
-		I.loc = suspension_field
+		I.forceMove(suspension_field)
 		collected++
 
 	if(collected)
@@ -246,5 +246,5 @@
 
 /obj/effect/suspension_field/Destroy()
 	for(var/atom/movable/I in src)
-		I.loc = src.loc
+		I.forceMove(src.loc)
 	return ..()
