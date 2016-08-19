@@ -77,7 +77,7 @@ var/list/all_maps = list()
 
 	for(var/thing in mining_walls)
 		var/turf/simulated/mineral/M = thing
-		M.updateMineralOverlays()
+		M.update_icon()
 	for(var/thing in mining_floors)
 		var/turf/simulated/floor/asteroid/M = thing
 		M.updateMineralOverlays()
