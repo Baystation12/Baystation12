@@ -236,4 +236,3 @@
 /obj/item/device/radio/headset/uplink/New()
 	..()
 	hidden_uplink = new(src)
-	hidden_uplink.uses = DEFAULT_TELECRYSTAL_AMOUNT

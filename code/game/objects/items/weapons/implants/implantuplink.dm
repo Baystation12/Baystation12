@@ -5,8 +5,7 @@
 
 /obj/item/weapon/implant/uplink/New()
 	activation_emote = pick("blink", "blink_r", "eyebrow", "chuckle", "twitch_s", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")
-	hidden_uplink = new(src)
-	hidden_uplink.uses = round((DEFAULT_TELECRYSTAL_AMOUNT / 2) * 0.8)
+	hidden_uplink = new(src, telecrystals = round((DEFAULT_TELECRYSTAL_AMOUNT / 2) * 0.8))
 	..()
 	return
 
