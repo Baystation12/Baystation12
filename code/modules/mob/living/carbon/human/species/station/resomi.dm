@@ -85,8 +85,4 @@
 		/datum/unarmed_attack/stomp/weak
 		)
 
-/datum/species/resomi/get_vision_flags(var/mob/living/carbon/human/H)
-	if(!(H.sdisabilities & DEAF) && !H.ear_deaf)
-		return SEE_SELF|SEE_MOBS
-	else
-		return SEE_SELF
+	inherent_verbs = list(/mob/living/carbon/human/proc/sonar_ping)
