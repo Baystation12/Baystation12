@@ -12,6 +12,7 @@
 				"trade_found_unwanted" = "Nah! That's not what I'm looking for. Something rarer.",
 				"trade_not_enough"   = "Just cause they're made of cardboard doesn't mean they don't cost money...",
 				"how_much"          = "Uuuuuuuh... I'm thinking like... VALUE. Right? Or something rare that complements my interest.",
+				"what_want"         = "Uuuuum..... I guess I want",
 
 				"compliment_deny"   = "Ha! Very funny! You should write your own television show.",
 				"compliment_accept" = "Why yes, I do work out.",

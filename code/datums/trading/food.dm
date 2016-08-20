@@ -22,12 +22,11 @@
 				"insult_bad"        = "Sir, just because I'm contractually obligated to keep you on the line for a minute doesn't mean I have to take this.",
 				)
 
-/datum/trader/pizzaria/trade(var/atom/movable/offer)
-	var/turf/T = get_turf(offer)
+/datum/trader/pizzaria/trade(var/list/offers, var/num, var/turf/location)
 	. = ..()
 	if(.)
 		var/atom/movable/M = .
-		var/obj/item/pizzabox/box = new(T)
+		var/obj/item/pizzabox/box = new(location)
 		M.loc = box
 		box.pizza = M
 		box.boxtag = "A special order from [origin]"
@@ -74,11 +73,10 @@
 				"insult_bad"         = "I do not need to take this from you.",
 				)
 
-/datum/trader/ship/chinese/trade(var/atom/movable/offer)
-	var/turf/T = get_turf(offer)
+/datum/trader/ship/chinese/trade(var/list/offers, var/num, var/turf/location)
 	. = ..()
 	if(.)
-		var/obj/item/weapon/reagent_containers/food/snacks/fortunecookie/cookie = new(T)
+		var/obj/item/weapon/reagent_containers/food/snacks/fortunecookie/cookie = new(location)
 		var/obj/item/weapon/paper/paper = new(cookie)
 		cookie.trash = paper
 		paper.name = "Fortune"

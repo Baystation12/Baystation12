@@ -566,7 +566,7 @@ proc/is_blind(A)
 			perpname = id.registered_name
 
 		var/datum/data/record/R = find_security_record("name", perpname)
-		if(check_records && !R)
+		if(check_records && !R && !isMonkey())
 			threatcount += 4
 
 		if(check_arrest && R && (R.fields["criminal"] == "*Arrest*"))

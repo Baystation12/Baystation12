@@ -8,6 +8,12 @@
 	var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 	if(L)
 		qdel(L)
+// Called after turf replaces old one
+/turf/proc/post_change()
+	levelupdate()
+	var/turf/simulated/open/T = GetAbove(src)
+	if(istype(T))
+		T.update_icon()
 
 //Creates a new turf
 /turf/proc/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
@@ -17,7 +23,7 @@
 	// This makes sure that turfs are not changed to space when one side is part of a zone
 	if(N == /turf/space)
 		var/turf/below = GetBelow(src)
-		if(istype(below) && (air_master.has_valid_zone(below) || air_master.has_valid_zone(src)))
+		if(istype(below) && !istype(below,/turf/space))
 			N = /turf/simulated/open
 
 	var/obj/fire/old_fire = fire
@@ -39,44 +45,27 @@
 		var/turf/simulated/S = src
 		if(S.zone) S.zone.rebuild()
 
-	if(ispath(N, /turf/simulated/floor))
-		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
+	var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
+
+	if(ispath(N, /turf/simulated))
 		if(old_fire)
 			fire = old_fire
-
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
+	else if(old_fire)
+		old_fire.RemoveFire()
 
-		if(tell_universe)
-			universe.OnTurfChange(W)
+	if(tell_universe)
+		universe.OnTurfChange(W)
 
-		if(air_master)
-			air_master.mark_for_update(src) //handle the addition of the new turf.
+	if(air_master)
+		air_master.mark_for_update(src) //handle the addition of the new turf.
 
-		for(var/turf/space/S in range(W,1))
-			S.update_starlight()
+	for(var/turf/space/S in range(W,1))
+		S.update_starlight()
 
-		W.levelupdate()
-		. = W
-
-	else
-
-		var/turf/W = new N( locate(src.x, src.y, src.z) )
-
-		if(old_fire)
-			old_fire.RemoveFire()
-
-		if(tell_universe)
-			universe.OnTurfChange(W)
-
-		if(air_master)
-			air_master.mark_for_update(src)
-
-		for(var/turf/space/S in range(W,1))
-			S.update_starlight()
-
-		W.levelupdate()
-		. =  W
+	W.post_change()
+	. = W
 
 	lighting_overlay = old_lighting_overlay
 	affecting_lights = old_affecting_lights

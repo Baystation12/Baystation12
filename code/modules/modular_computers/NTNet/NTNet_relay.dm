@@ -20,8 +20,8 @@
 
 
 // TODO: Implement more logic here. For now it's only a placeholder.
-/obj/machinery/ntnet_relay/proc/is_operational()
-	if(stat & (BROKEN | NOPOWER | EMPED))
+/obj/machinery/ntnet_relay/operable()
+	if(!..(EMPED))
 		return 0
 	if(dos_failure)
 		return 0
@@ -30,13 +30,13 @@
 	return 1
 
 /obj/machinery/ntnet_relay/update_icon()
-	if(is_operational())
+	if(operable())
 		icon_state = "bus"
 	else
 		icon_state = "bus_off"
 
 /obj/machinery/ntnet_relay/process()
-	if(is_operational())
+	if(operable())
 		use_power = 2
 	else
 		use_power = 1

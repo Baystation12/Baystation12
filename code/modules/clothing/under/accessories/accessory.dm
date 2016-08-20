@@ -11,7 +11,7 @@
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
 	var/list/mob_overlay = list()
 	var/overlay_state = null
-
+	var/list/accessory_icons = list(slot_w_uniform_str = 'icons/mob/ties.dmi')
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ties.dmi') // for species where human variants do not fit
 
 /obj/item/clothing/accessory/Destroy()
@@ -24,27 +24,25 @@
 		if(icon_override && ("[tmp_icon_state]_tie" in icon_states(icon_override)))
 			inv_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
 		else
-			inv_overlay = image(icon = INV_ACCESSORIES_DEF_ICON, icon_state = tmp_icon_state, dir = SOUTH)
+			inv_overlay = image(icon = default_onmob_icons[slot_tie_str], icon_state = tmp_icon_state, dir = SOUTH)
 	return inv_overlay
 
-/obj/item/clothing/accessory/proc/get_mob_overlay(var/mob/user_mob)
+/obj/item/clothing/accessory/get_mob_overlay(mob/user_mob, slot)
 	var/bodytype = "Default"
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
 		if(user_human.species.get_bodytype() in sprite_sheets)
 			bodytype = user_human.species.get_bodytype()
 
-	if(!mob_overlay[bodytype])
 		var/tmp_icon_state = overlay_state? overlay_state : icon_state
-		var/use_sprite_sheet = INV_ACCESSORIES_DEF_ICON
+		var/use_sprite_sheet = accessory_icons[slot]
 		if(sprite_sheets[bodytype])
 			use_sprite_sheet = sprite_sheets[bodytype]
 
 		if(icon_override && ("[tmp_icon_state]_mob" in icon_states(icon_override)))
-			mob_overlay[bodytype] = image(icon = icon_override, icon_state = "[tmp_icon_state]_mob")
+			return overlay_image(icon_override, "[tmp_icon_state]_mob", color, RESET_COLOR)
 		else
-			mob_overlay[bodytype] = image(icon = use_sprite_sheet, icon_state = tmp_icon_state)
-	return mob_overlay[bodytype]
+			return overlay_image(use_sprite_sheet, tmp_icon_state, color, RESET_COLOR)
 
 //when user attached an accessory to S
 /obj/item/clothing/accessory/proc/on_attached(var/obj/item/clothing/S, var/mob/user)

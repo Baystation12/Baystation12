@@ -42,7 +42,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 	if(!should_have_organ(BP_HEART))
 		return
 
-	var/obj/item/organ/heart/heart = internal_organs_by_name["heart"]
+	var/obj/item/organ/internal/heart/heart = internal_organs_by_name["heart"]
 	if(!heart)	//not having a heart is bad for health
 		setOxyLoss(max(getOxyLoss(), maxHealth))
 		adjustOxyLoss(10)

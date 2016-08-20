@@ -242,20 +242,13 @@ Ccomp's first proc.
 		return mobs
 
 
-/client/proc/allow_character_respawn()
+/client/proc/allow_character_respawn(mob/observer/ghost/G in get_ghosts())
 	set category = "Special Verbs"
 	set name = "Allow player to respawn"
 	set desc = "Let's the player bypass the 30 minute wait to respawn or allow them to re-enter their corpse."
 	if(!holder)
 		src << "Only administrators may use this command."
-	var/list/ghosts= get_ghosts(1,1)
 
-	var/target = input("Please, select a ghost!", "COME BACK TO LIFE!", null, null) as null|anything in ghosts
-	if(!target)
-		src << "Hrm, appears you didn't select a ghost"		// Sanity check, if no ghosts in the list we don't want to edit a null variable and cause a runtime error.
-		return
-
-	var/mob/observer/ghost/G = ghosts[target]
 	if(G.has_enabled_antagHUD && config.antag_hud_restricted)
 		var/response = alert(src, "Are you sure you wish to allow this individual to play?","Ghost has used AntagHUD","Yes","No")
 		if(response == "No") return
@@ -266,7 +259,7 @@ Ccomp's first proc.
 	G.has_enabled_antagHUD = 2
 	G.can_reenter_corpse = 1
 
-	G:show_message(text("\blue <B>You may now respawn.  You should roleplay as if you learned nothing about the round during your time with the dead.</B>"), 1)
+	G.show_message("<span class=notice><b>You may now respawn.  You should roleplay as if you learned nothing about the round during your time with the dead.</b></span>", 1)
 	log_admin("[key_name(usr)] allowed [key_name(G)] to bypass the 30 minute respawn limit")
 	message_admins("Admin [key_name_admin(usr)] allowed [key_name_admin(G)] to bypass the 30 minute respawn limit", 1)
 
@@ -560,13 +553,17 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(light == null) return
 	var/flash = input("Range of flash. -1 to none", text("Input"))  as num|null
 	if(flash == null) return
-
+	var/shaped = 0
+	if(config.use_recursive_explosions)
+		if(alert(src, "Shaped explosion?", "Shape", "Yes", "No") == "Yes")
+			shaped = input("Shaped where to?", "Input")  as anything in list("NORTH","SOUTH","EAST","WEST")
+			shaped = text2dir(shaped)
 	if ((devastation != -1) || (heavy != -1) || (light != -1) || (flash != -1))
 		if ((devastation > 20) || (heavy > 20) || (light > 20))
 			if (alert(src, "Are you sure you want to do this? It will laaag.", "Confirmation", "Yes", "No") == "No")
 				return
 
-		explosion(O, devastation, heavy, light, flash)
+		explosion(O, devastation, heavy, light, flash, shaped=shaped)
 		log_admin("[key_name(usr)] created an explosion ([devastation],[heavy],[light],[flash]) at ([O.x],[O.y],[O.z])")
 		message_admins("[key_name_admin(usr)] created an explosion ([devastation],[heavy],[light],[flash]) at ([O.x],[O.y],[O.z])", 1)
 		feedback_add_details("admin_verb","EXPL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

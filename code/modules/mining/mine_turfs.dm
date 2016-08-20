@@ -1,3 +1,6 @@
+var/list/mining_walls = list()
+var/list/mining_floors = list()
+
 /**********************Mineral deposits**************************/
 /turf/unsimulated/mineral
 	name = "impassable rock"
@@ -34,10 +37,15 @@
 	has_resources = 1
 
 /turf/simulated/mineral/New()
+	mining_walls += src
 	spawn(0)
 		MineralSpread()
 	spawn(2)
 		updateMineralOverlays(1)
+
+/turf/simulated/mineral/Destroy()
+	mining_walls -= src
+	return ..()
 
 /turf/simulated/mineral/can_build_cable()
 	return !density
@@ -415,9 +423,13 @@
 	has_resources = 1
 
 /turf/simulated/floor/asteroid/New()
-
+	mining_floors += src
 	if(prob(20))
 		overlay_detail = "asteroid[rand(0,9)]"
+
+/turf/simulated/floor/asteroid/Destroy()
+	mining_floors -= src
+	return ..()
 
 /turf/simulated/floor/asteroid/ex_act(severity)
 	switch(severity)

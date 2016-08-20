@@ -493,6 +493,12 @@ var/global/list/light_type_cache = list()
 	user << "You telekinetically remove the light [get_fitting_name()]."
 	remove_bulb()
 
+// ghost attack - make lights flicker like an AI, but even spookier!
+/obj/machinery/light/attack_ghost(mob/user)
+	if(round_is_spooky())
+		src.flicker(rand(2,5))
+	else return ..()
+
 // break the light and make sparks if was on
 /obj/machinery/light/proc/broken(var/skip_sound_and_sparks = 0)
 	if(status == LIGHT_EMPTY)

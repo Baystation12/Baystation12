@@ -295,7 +295,6 @@ var/last_message_id = 0
 
 	if(!frequency) return
 
-
 	var/datum/signal/status_signal = new
 	status_signal.source = src
 	status_signal.transmission_method = 1
