@@ -60,7 +60,8 @@
 		discount_amount = pick(90;0.9, 80;0.8, 70;0.7, 60;0.6, 50;0.5, 40;0.4, 30;0.3, 20;0.2, 10;0.1)
 
 		do
-			discount_item = default_uplink_selection.get_random_item(INFINITY)
+			var/datum/uplink_random_selection/uplink_selection = get_uplink_random_selection_by_type(/datum/uplink_random_selection/blacklist)
+			discount_item = uplink_selection.get_random_item(INFINITY, src)
 		// Ensures we only only get items for which we get an actual discount and that this particular uplink can actually view (can buy would risk near-infinite loops).
 		while(discount_item && (discount_item.cost(uses) == discount_item.cost(uses) * discount_amount) || !discount_item.can_view(src))
 
