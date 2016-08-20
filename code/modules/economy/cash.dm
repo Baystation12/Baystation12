@@ -15,6 +15,7 @@
 	var/access = list()
 	access = access_crate_cash
 	var/worth = 0
+	var/global/denominations = list(1000,500,200,100,50,20,10,1)
 
 /obj/item/weapon/spacecash/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/spacecash))
@@ -55,7 +56,6 @@
 	. = list()
 	var/sum = src.worth
 	var/num = 0
-	var/list/denominations = list(1000,500,200,100,50,20,10,1)
 	for(var/i in denominations)
 		while(sum >= i && num < 50)
 			sum -= i
@@ -67,7 +67,6 @@
 /obj/item/weapon/spacecash/bundle/update_icon()
 	overlays.Cut()
 	var/list/images = src.getMoneyImages()
-	var/list/denominations = list(1000,500,200,100,50,20,10,1)
 	
 	for(var/A in images)
 		var/image/banknote = image('icons/obj/items.dmi', A)
