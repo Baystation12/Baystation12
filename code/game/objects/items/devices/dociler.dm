@@ -35,7 +35,7 @@
 		return
 
 	user.visible_message("\The [user] thrusts \the [src] deep into \the [L]'s head, injecting something!")
-	L << "<span class='notice'>You feel pain as \the [user] injects something into you. All of a sudden you feel as if [user] is the friendliest and nicest person you've ever know. You want to be friends with him and all his friends."
+	L << "<span class='notice'>You feel pain as \the [user] injects something into you. All of a sudden you feel as if [user] is the friendliest and nicest person you've ever know. You want to be friends with him and all his friends.</span>"
 	if(mode == "somewhat")
 		L.faction = user.faction
 	else

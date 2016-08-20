@@ -296,7 +296,7 @@ var/list/worths = list(
 					/obj/item/weapon/tank/jetpack = 390,
 					/obj/item/weapon/tank = 40,
 					/obj/item/weapon/contraband/poster = 25,
-//MATERIAL
+//MATERIAL,
 					/obj/item/weapon/material/sword/katana/replica = -120,
 					/obj/item/weapon/material/sword/katana = -150,
 					/obj/item/weapon/material/sword/replica = -100,

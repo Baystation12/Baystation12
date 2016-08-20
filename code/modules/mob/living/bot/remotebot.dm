@@ -43,7 +43,7 @@
 /mob/living/bot/remotebot/attackby(var/obj/item/I, var/mob/living/user)
 	if(istype(I, /obj/item/device/bot_controller) && !controller)
 		user.visible_message("\The [user] waves \the [I] over \the [src].")
-		user << "<span class='notice'>You link \the [src] to \the [I]."
+		user << "<span class='notice'>You link \the [src] to \the [I].</span>"
 		var/obj/item/device/bot_controller/B = I
 		B.bot = src
 		controller = B
