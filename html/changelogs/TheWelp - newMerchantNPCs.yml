@@ -1,0 +1,9 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Adds four new traders, a robot trader, a pet trader, a replica trader, and a prank trader."
+  - rscadd: "Adds unique items (and a bot) for the traders to sell."
+  - rscadd: "Adds missing item worth values to the list."
+  - tweak: "Unique NPCs now stay around for twice as long."
+  - tweak: "Tweaks Hostile mob AI, so that if they have no faction at all, they will target nobody."
+  - tweak: "Spawner grenade can now set variables (using a list) upon spawning whatever it spawns."
