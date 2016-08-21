@@ -139,6 +139,10 @@
 	cost = 3
 
 
+/datum/gear/head/hardhat
+	display_name = "hardhat, yellow"
+	path = /obj/item/clothing/head/hardhat
+
 /datum/gear/head/hardhat/blue
 	display_name = "hardhat, blue"
 	path = /obj/item/clothing/head/hardhat/dblue
