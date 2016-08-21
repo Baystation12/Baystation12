@@ -114,9 +114,10 @@
 	display_name = "hair flower pin, blue"
 	path = /obj/item/clothing/head/hairflower/blue
 
-/datum/gear/head/hardhat
-	display_name = "hardhat, yellow"
-	path = /obj/item/clothing/head/hardhat
+/datum/gear/head/welding/demon
+	display_name = "welding mask, demon"
+	path = /obj/item/clothing/head/welding/demon
+	allowed_roles = list("Roboticist","Station Engineer","Atmospheric Technician","Chief Engineer")
 	cost = 2
 
 /datum/gear/head/hardhat/blue

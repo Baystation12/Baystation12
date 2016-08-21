@@ -63,6 +63,58 @@
 		usr.update_action_buttons()
 
 
+/obj/item/clothing/head/welding/demon
+	name = "painted welding helmet"
+	desc = "A painted welding helmet, this one has a demonic face on it."
+	icon_state = "demonwelding"
+	item_state_slots = list(
+		slot_l_hand_str = "demonwelding",
+		slot_r_hand_str = "demonwelding",
+		)
+	matter = list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 1000)
+	up = 0
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	flags_inv = (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
+	body_parts_covered = HEAD|FACE|EYES
+	action_button_name = "Flip Welding Mask"
+	siemens_coefficient = 0.9
+	w_class = 3
+	base_state
+	flash_protection = FLASH_PROTECTION_MAJOR
+	tint = TINT_HEAVY
+
+/obj/item/clothing/head/welding/demon/attack_self()
+	if(!base_state)
+		base_state = icon_state
+	toggle()
+
+
+/obj/item/clothing/head/welding/demon/toggle()
+	set category = "Object"
+	set name = "Adjust welding mask"
+	set src in usr
+
+	if(usr.canmove && !usr.stat && !usr.restrained())
+		if(src.up)
+			src.up = !src.up
+			body_parts_covered |= (EYES|FACE)
+			flags_inv |= (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
+			flash_protection = initial(flash_protection)
+			tint = initial(tint)
+			icon_state = base_state
+			usr << "You flip the [src] down to protect your eyes."
+		else
+			src.up = !src.up
+			body_parts_covered &= ~(EYES|FACE)
+			flash_protection = FLASH_PROTECTION_NONE
+			tint = TINT_NONE
+			flags_inv &= ~(HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
+			icon_state = "[base_state]up"
+			usr << "You push the [src] up out of your face."
+		update_clothing_icon()	//so our mob-overlays
+		usr.update_action_buttons()
+
+
 /*
  * Cakehat
  */
