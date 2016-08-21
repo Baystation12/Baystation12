@@ -197,7 +197,8 @@ var/list/admin_verbs_debug = list(
 	/datum/admins/proc/run_unit_test,
 	/turf/proc/view_chunk,
 	/turf/proc/update_chunk,
-	/datum/admins/proc/capture_map
+	/datum/admins/proc/capture_map,
+	/datum/admins/proc/view_runtimes
 	)
 
 var/list/admin_verbs_paranoid_debug = list(
