@@ -31,8 +31,10 @@
 		var/file_name = "map_capture_x[currentx]_y[currenty]_z[currentz]_r32.png"
 		usr << "Saved capture in cache as [file_name]."
 		usr << browse_rsc(cap, file_name)
+		file("map_capture/[file_name]") << cap
 		currentx = currentx + 32
-		.(currentz, currentx, currenty)
+		spawn (10)
+			.(currentz, currentx, currenty)
 	else
 		currenty = currenty + 32
 		currentx = 1
@@ -42,7 +44,8 @@
 			usr << "Saved capture in cache as [file_name]."
 			usr << browse_rsc(cap, file_name)
 			currentx = currentx + 32
-			.(currentz, currentx, currenty)
+			spawn (10)
+				.(currentz, currentx, currenty)
 		else
 			usr << "End of map, capture is done."
 
@@ -67,4 +70,4 @@
 
 	switch(alert("Are you sure? (This will cause masive lag!!!)", "Map Capture", "Yes", "No"))
 		if("Yes")
-			capture_map_capture_next(tz, 1, 1)
+			usr.client.holder.capture_map_capture_next(tz, 1, 1)
