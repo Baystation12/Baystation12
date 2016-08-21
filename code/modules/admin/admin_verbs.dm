@@ -803,8 +803,8 @@ var/list/admin_verbs_mentor = list(
 		return
 
 	if(alert("Switch from code [get_security_level()] to code [sec_level]?","Change security level?","Yes","No") == "Yes")
+		log_and_message_admins("changed the security level from code [get_security_level()] to code [sec_level].")
 		set_security_level(sec_level)
-		log_admin("[key_name(usr)] changed the security level to code [sec_level].")
 
 
 //---- bs12 verbs ----
