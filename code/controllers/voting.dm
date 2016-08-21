@@ -27,7 +27,7 @@ datum/controller/vote
 		if(mode)
 			// No more change mode votes after the game has started.
 			// 3 is GAME_STATE_PLAYING, but that #define is undefined for some reason
-			if(mode == "gamemode" && ticker.current_state >= 2)
+			if(mode == "gamemode" && ticker.current_state >= GAME_STATE_SETTING_UP)
 				world << "<b>Voting aborted due to game start.</b>"
 				src.reset()
 				return
@@ -222,22 +222,23 @@ datum/controller/vote
 								.[i] = pick(choices)
 								world << "The random antag in [i]\th place is [.[i]]."
 						var/antag_type = antag_names_to_ids[.[1]]
-						if(ticker.current_state >= 2)
+						if(ticker.current_state < GAME_STATE_SETTING_UP)
+							additional_antag_types |= antag_type
+						else
 							spawn(0) // break off so we don't hang the vote process
 								var/list/antag_choices = list(all_antag_types[antag_type], all_antag_types[antag_names_to_ids[.[2]]], all_antag_types[antag_names_to_ids[.[3]]])
-								if(!ticker.attempt_late_antag_spawn(antag_choices))
-									world << "<b>No antags were added.</b>"
+								if(ticker.attempt_late_antag_spawn(antag_choices))
 									antag_add_finished = 1
 									if(auto_add_antag)
 										auto_add_antag = 0
+										// the buffer will already have an hour added to it, so we'll give it one more
+										transfer_controller.timerbuffer = transfer_controller.timerbuffer + config.vote_autotransfer_interval
+								else
+									world << "<b>No antags were added.</b>"
+									if(auto_add_antag)
+										auto_add_antag = 0
 										spawn(10)
-											autotransfer();
-								else if(auto_add_antag)
-									auto_add_antag = 0
-									// the buffer will already have an hour added to it, so we'll give it one more
-									transfer_controller.timerbuffer = transfer_controller.timerbuffer + config.vote_autotransfer_interval
-						else
-							additional_antag_types |= antag_type
+											autotransfer()
 				if("map")
 					var/datum/map/M = all_maps[.[1]]
 					fdel("use_map")
@@ -298,7 +299,7 @@ datum/controller/vote
 				if("restart")
 					choices.Add("Restart Round","Continue Playing")
 				if("gamemode")
-					if(ticker.current_state >= 2)
+					if(ticker.current_state >= GAME_STATE_SETTING_UP)
 						return 0
 					choices.Add(config.votable_modes)
 					for (var/F in choices)
@@ -318,14 +319,19 @@ datum/controller/vote
 						if (get_security_level() == "red" || get_security_level() == "delta")
 							initiator_key << "The current alert status is too high to call for a crew transfer!"
 							return 0
-						if(ticker.current_state <= 2)
+						if(ticker.current_state <= GAME_STATE_SETTING_UP)
 							return 0
 							initiator_key << "The crew transfer button has been disabled!"
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
-						if (config.allow_extra_antags && !antag_add_finished)
+						if (config.allow_extra_antags && is_addantag_allowed(1))
 							choices.Add("Add Antagonist")
 				if("add_antagonist")
+					if(!is_addantag_allowed(automatic))
+						if(!automatic)
+							usr << "The add antagonist vote is unavailable at this time. The game may not have started yet, the game mode may disallow adding antagonists, or you don't have required permissions."
+						return 0
+
 					if(!config.allow_extra_antags)
 						return 0
 					for(var/antag_type in all_antag_types)
@@ -455,7 +461,7 @@ datum/controller/vote
 				. += "<font color='grey'>Map (Disallowed)</font>"
 			. += "</li><li>"
 			//extra antagonists
-			if(!antag_add_finished && config.allow_extra_antags)
+			if(config.allow_extra_antags && is_addantag_allowed(0))
 				. += "<a href='?src=\ref[src];vote=add_antagonist'>Add Antagonist Type</a>"
 			else
 				. += "<font color='grey'>Add Antagonist (Disallowed)</font>"
@@ -517,6 +523,19 @@ datum/controller/vote
 			if(t) // it starts from 1, so there's no problem
 				submit_vote(usr.ckey, t, weight)
 		usr.vote()
+
+// Helper proc for determining whether addantag vote can be called.
+datum/controller/vote/proc/is_addantag_allowed(var/automatic)
+	// Gamemode has to be determined before we can add antagonists, so we can respect gamemode's add antag vote settings.
+	if((ticker.current_state <= 2) || !ticker.mode)
+		return 0
+	if(automatic)
+		return (ticker.mode.addantag_allowed & ADDANTAG_AUTO) && !antag_add_finished
+	if(check_rights(R_ADMIN, 0))
+		return ticker.mode.addantag_allowed & (ADDANTAG_ADMIN|ADDANTAG_PLAYER)
+	else
+		return (ticker.mode.addantag_allowed & ADDANTAG_PLAYER) && !antag_add_finished
+
 
 
 /mob/verb/vote()

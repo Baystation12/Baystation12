@@ -10,7 +10,7 @@
 	var/list/valid_accessory_slots
 	var/list/restricted_accessory_slots
 	var/list/starting_accessories
-
+	var/blood_overlay_type = "uniformblood"
 	/*
 		Sprites used when the clothing item is refit. This is done by setting icon_override.
 		For best results, if this is set then sprite_sheets should be null and vice versa, but that is by no means necessary.
@@ -22,6 +22,23 @@
 //Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
 	return
+
+/obj/item/clothing/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+
+	if(slot == slot_l_hand_str || slot == slot_r_hand_str)
+		return ret
+
+	if(ishuman(user_mob))
+		var/mob/living/carbon/human/user_human = user_mob
+		if(blood_DNA)
+			var/image/bloodsies	= overlay_image(user_human.species.blood_mask, blood_overlay_type, blood_color, RESET_COLOR)
+			ret.overlays	+= bloodsies
+
+	if(accessories.len)
+		for(var/obj/item/clothing/accessory/A in accessories)
+			ret.overlays |= A.get_mob_overlay(user_mob, slot)
+	return ret
 
 // Aurora forensics port.
 /obj/item/clothing/clean_blood()
@@ -129,6 +146,32 @@
 	item_state = "earmuffs"
 	slot_flags = SLOT_EARS | SLOT_TWOEARS
 
+/obj/item/clothing/ears/earmuffs/headphones
+	name = "headphones"
+	desc = "It's probably not in accordance with corporate policy to listen to music on the job... but fuck it."
+	var/headphones_on = 0
+	icon_state = "headphones_off"
+	item_state = "headphones"
+	slot_flags = SLOT_EARS | SLOT_TWOEARS
+
+/obj/item/clothing/ears/earmuffs/headphones/verb/togglemusic()
+	set name = "Toggle Headphone Music"
+	set category = "Object"
+	set src in usr
+	if(!istype(usr, /mob/living)) return
+	if(usr.incapacitated()) return
+
+	if(headphones_on)
+		icon_state = "headphones_off"
+		headphones_on = 0
+		usr << "<span class='notice'>You turn the music off.</span>"
+	else
+		icon_state = "headphones_on"
+		headphones_on = 1
+		usr << "<span class='notice'>You turn the music on.</span>"
+
+	update_clothing_icon()
+
 ///////////////////////////////////////////////////////////////////////
 //Glasses
 /*
@@ -137,7 +180,7 @@ SEE_MOBS  // can see all mobs, no matter what
 SEE_OBJS  // can see all objs, no matter what
 SEE_TURFS // can see all turfs (and areas), no matter what
 SEE_PIXELS// if an object is located on an unlit area, but some of its pixels are
-          // in a lit area (via pixel_x,y or smooth movement), can see those pixels
+          // in a lit area (via pixel_x, y or smooth movement), can see those pixels
 BLIND     // can't see anything
 */
 /obj/item/clothing/glasses
@@ -153,6 +196,14 @@ BLIND     // can't see anything
 		"Vox" = 'icons/mob/species/vox/eyes.dmi',
 		"Resomi" = 'icons/mob/species/resomi/eyes.dmi',
 		)
+
+/obj/item/clothing/glasses/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(item_state_slots && item_state_slots[slot])
+		ret.icon_state = item_state_slots[slot]
+	else
+		ret.icon_state = icon_state
+	return ret
 
 /obj/item/clothing/glasses/update_clothing_icon()
 	if (ismob(src.loc))
@@ -178,6 +229,7 @@ BLIND     // can't see anything
 		"Vox" = 'icons/mob/species/vox/gloves.dmi',
 		"Resomi" = 'icons/mob/species/resomi/gloves.dmi',
 		)
+	blood_overlay_type = "bloodyhands"
 
 /obj/item/clothing/gloves/update_clothing_icon()
 	if (ismob(src.loc))
@@ -236,6 +288,18 @@ BLIND     // can't see anything
 		"Vox" = 'icons/mob/species/vox/head.dmi',
 		"Resomi" = 'icons/mob/species/resomi/head.dmi'
 		)
+	blood_overlay_type = "helmetblood"
+
+/obj/item/clothing/head/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	var/bodytype = "Default"
+	if(ishuman(user_mob))
+		var/mob/living/carbon/human/user_human = user_mob
+		bodytype = user_human.species.get_bodytype()
+	var/cache_key = "[light_overlay]_[bodytype]"
+	if(on && light_overlay_cache[cache_key] && slot == slot_head_str)
+		ret.overlays |= light_overlay_cache[cache_key]
+	return ret
 
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
@@ -339,11 +403,20 @@ BLIND     // can't see anything
 	var/voicechange = 0
 	var/list/say_messages
 	var/list/say_verbs
+	blood_overlay_type = "maskblood"
 
 /obj/item/clothing/mask/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_wear_mask()
+
+/obj/item/clothing/mask/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(item_state_slots && item_state_slots[slot])
+		ret.icon_state = item_state_slots[slot]
+	else
+		ret.icon_state = icon_state
+	return ret
 
 /obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 	return
@@ -370,6 +443,7 @@ BLIND     // can't see anything
 		"Vox" = 'icons/mob/species/vox/shoes.dmi',
 		"Resomi" = 'icons/mob/species/resomi/shoes.dmi',
 		)
+	blood_overlay_type = "shoeblood"
 
 /obj/item/clothing/shoes/New()
 	..()
@@ -438,7 +512,7 @@ BLIND     // can't see anything
 	allowed = list(/obj/item/weapon/tank/emergency)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	slot_flags = SLOT_OCLOTHING
-	var/blood_overlay_type = "suit"
+	blood_overlay_type = "suit"
 	siemens_coefficient = 0.9
 	w_class = 3
 
@@ -452,6 +526,18 @@ BLIND     // can't see anything
 		var/mob/M = src.loc
 		M.update_inv_wear_suit()
 
+/obj/item/clothing/suit/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(item_state_slots && item_state_slots[slot])
+		ret.icon_state = item_state_slots[slot]
+	else
+		ret.icon_state = icon_state
+	return ret
+
+/obj/item/clothing/suit/proc/get_collar()
+	var/icon/C = new('icons/mob/collar.dmi')
+	if(icon_state in C.IconStates())
+		return image(C, icon_state)
 ///////////////////////////////////////////////////////////////////////
 //Under clothing
 /obj/item/clothing/under
@@ -484,8 +570,17 @@ BLIND     // can't see anything
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.
 	var/worn_state = null
-	valid_accessory_slots = list("utility","armband","decor")
-	restricted_accessory_slots = list("utility", "armband")
+	valid_accessory_slots = list("utility","armband","rank","decor")
+	restricted_accessory_slots = list("utility", "armband","rank")
+
+/obj/item/clothing/under/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(item_state_slots && item_state_slots[slot])
+		ret.icon_state = item_state_slots[slot]
+	else
+		ret.icon_state = icon_state
+	ret.icon_state = "[ret.icon_state]_s"
+	return ret
 
 
 /obj/item/clothing/under/attack_hand(var/mob/user)
@@ -506,7 +601,7 @@ BLIND     // can't see anything
 
 	//autodetect rollability
 	if(rolled_down < 0)
-		if((worn_state + "_d_s") in icon_states('icons/mob/uniform.dmi'))
+		if((worn_state + "_d_s") in icon_states(default_onmob_icons[slot_w_uniform_str]))
 			rolled_down = 0
 
 /obj/item/clothing/under/proc/update_rolldown_status()
@@ -523,7 +618,7 @@ BLIND     // can't see anything
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else
-		under_icon = INV_W_UNIFORM_DEF_ICON
+		under_icon = default_onmob_icons[slot_w_uniform_str]
 
 	// The _s is because the icon update procs append it.
 	if(("[worn_state]_d_s") in icon_states(under_icon))
@@ -546,7 +641,7 @@ BLIND     // can't see anything
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else
-		under_icon = INV_W_UNIFORM_DEF_ICON
+		under_icon = default_onmob_icons[slot_w_uniform_str]
 
 	// The _s is because the icon update procs append it.
 	if(("[worn_state]_r_s") in icon_states(under_icon))

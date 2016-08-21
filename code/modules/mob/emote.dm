@@ -1,13 +1,13 @@
 // All mobs should have custom emote, really..
-//m_type == 1 --> visual.
-//m_type == 2 --> audible
-/mob/proc/custom_emote(var/m_type=1,var/message = null)
+//m_type == VISIBLE_MESSAGE --> visual.
+//m_type == AUDIBLE_MESSAGE --> audible
+/mob/proc/custom_emote(var/m_type=VISIBLE_MESSAGE,var/message = null)
 	if(usr && stat || !use_me && usr == src)
 		src << "You are unable to emote."
 		return
 
 	var/muzzled = istype(src.wear_mask, /obj/item/clothing/mask/muzzle)
-	if(m_type == 2 && muzzled) return
+	if(m_type == AUDIBLE_MESSAGE && muzzled) return
 
 	var/input
 	if(!message)
@@ -26,39 +26,11 @@
  //Hearing gasp and such every five seconds is not good emotes were not global for a reason.
  // Maybe some people are okay with that.
 
-		for(var/mob/M in player_list)
-			if (!M.client)
-				continue //skip monkeys and leavers
-			if (istype(M, /mob/new_player))
-				continue
-			if(findtext(message," snores.")) //Because we have so many sleeping people.
-				break
-			if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_sight) && !(M in viewers(src,null)))
-				M.show_message(message, m_type)
-
-		if (m_type & 1)
-			var/list/see = get_mobs_or_objects_in_view(world.view,src) | viewers(get_turf(src), null)
-			for(var/I in see)
-				if(isobj(I))
-					spawn(0)
-						if(I) //It's possible that it could be deleted in the meantime.
-							var/obj/O = I
-							O.see_emote(src, message, 1)
-				else if(ismob(I))
-					var/mob/M = I
-					M.show_message(message, 1)
-
-		else if (m_type & 2)
-			var/list/hear = get_mobs_or_objects_in_view(world.view,src)
-			for(var/I in hear)
-				if(isobj(I))
-					spawn(0)
-						if(I) //It's possible that it could be deleted in the meantime.
-							var/obj/O = I
-							O.see_emote(src, message, 2)
-				else if(ismob(I))
-					var/mob/M = I
-					M.show_message(message, 2)
+		switch(m_type)
+			if(VISIBLE_MESSAGE)
+				visible_message(message, checkghosts = /datum/client_preference/ghost_sight)
+			if(AUDIBLE_MESSAGE)
+				audible_message(message, checkghosts = /datum/client_preference/ghost_sight)
 
 /mob/proc/emote_dead(var/message)
 

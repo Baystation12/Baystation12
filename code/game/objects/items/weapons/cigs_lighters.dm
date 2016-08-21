@@ -222,10 +222,19 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
 	weldermes = "<span class='notice'>USER casually lights the NAME with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME.</span>"
-	
-	New()
-		..()
-		reagents.add_reagent("nicotine", 1)
+
+/obj/item/clothing/mask/smokable/cigarette/New()
+	..()
+	reagents.add_reagent("nicotine", 1)
+
+/obj/item/clothing/mask/smokable/cigarette/menthol
+	name = "menthol cigarette"
+	desc = "A cigarette with a little minty kick. Well, minty in theory."
+
+/obj/item/clothing/mask/smokable/cigarette/menthol/New()
+	..()
+	reagents.add_reagent("nicotine", 1)
+	reagents.add_reagent("menthol", 1)
 
 /obj/item/clothing/mask/smokable/cigarette/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -276,7 +285,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
 	weldermes = "<span class='notice'>USER insults NAME by lighting it with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME with the power of science.</span>"
-	
+
 	New()
 		..()
 		reagents.add_reagent("nicotine", 5)
@@ -296,7 +305,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_off = "cigar2off"
 	smoketime = 3000
 	chem_volume = 20
-	
+
 	New()
 		..()
 		reagents.add_reagent("nicotine", 10)
@@ -470,9 +479,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 				else
 					user << "<span class='warning'>You burn yourself while lighting the lighter.</span>"
 					if (user.l_hand == src)
-						user.apply_damage(2,BURN,"l_hand")
+						user.apply_damage(2,BURN,BP_L_HAND)
 					else
-						user.apply_damage(2,BURN,"r_hand")
+						user.apply_damage(2,BURN,BP_R_HAND)
 					user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src], they however burn their finger in the process.</span>")
 
 			set_light(2)
@@ -500,7 +509,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(lit)
 		M.IgniteMob()
 
-		if(istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == "mouth")
+		if(istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == BP_MOUTH)
 			var/obj/item/clothing/mask/smokable/cigarette/cig = M.wear_mask
 			if(M == user)
 				cig.attackby(src, user)

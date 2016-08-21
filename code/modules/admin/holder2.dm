@@ -12,7 +12,7 @@ var/list/admin_datums = list()
 	var/datum/feed_message/admincaster_feed_message = new /datum/feed_message   //These two will act as holders.
 	var/datum/feed_channel/admincaster_feed_channel = new /datum/feed_channel
 	var/admincaster_signature	//What you'll sign the newsfeeds as
-	
+
 /datum/admins/proc/marked_datum()
 	if(marked_datum_weak)
 		return marked_datum_weak.resolve()
@@ -61,22 +61,26 @@ proc/admin_proc()
 
 NOTE: It checks usr by default. Supply the "user" argument if you wish to check for a specific mob.
 */
-/proc/check_rights(rights_required, show_msg=1, var/mob/user = usr)
-	if(user && user.client)
-		if(rights_required)
-			if(user.client.holder)
-				if(rights_required & user.client.holder.rights)
-					return 1
-				else
-					if(show_msg)
-						user << "<font color='red'>Error: You do not have sufficient rights to do that. You require one of the following flags:[rights2text(rights_required," ")].</font>"
+/proc/check_rights(rights_required, show_msg=1, var/client/C = usr)
+	if(ismob(C))
+		var/mob/M = C
+		C = M.client
+	if(!C)
+		return FALSE
+	if(!C.holder)
+		if(show_msg)
+			C << "<span class='warning'>Error: You are not an admin.</span>"
+		return FALSE
+
+	if(rights_required)
+		if(rights_required & C.holder.rights)
+			return TRUE
 		else
-			if(user.client.holder)
-				return 1
-			else
-				if(show_msg)
-					user << "<font color='red'>Error: You are not an admin.</font>"
-	return 0
+			if(show_msg)
+				C << "<span class='warning'>Error: You do not have sufficient rights to do that. You require one of the following flags:[rights2text(rights_required," ")].</span>"
+			return FALSE
+	else
+		return TRUE
 
 //probably a bit iffy - will hopefully figure out a better solution
 /proc/check_if_greater_rights_than(client/other)

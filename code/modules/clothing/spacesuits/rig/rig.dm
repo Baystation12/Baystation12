@@ -96,8 +96,12 @@
 			usr << "\icon[piece] \The [piece] [piece.gender == PLURAL ? "are" : "is"] deployed."
 
 	if(src.loc == usr)
+		usr << "The access panel is [locked? "locked" : "unlocked"]."
 		usr << "The maintenance panel is [open ? "open" : "closed"]."
 		usr << "Hardsuit systems are [offline ? "<font color='red'>offline</font>" : "<font color='green'>online</font>"]."
+
+		if(open)
+			usr << "It's equipped with [english_list(installed_modules)]."
 
 /obj/item/weapon/rig/New()
 	..()
@@ -170,6 +174,14 @@
 	qdel(spark_system)
 	spark_system = null
 	return ..()
+
+/obj/item/weapon/rig/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(icon_override)
+		ret.icon = icon_override
+	else if(slot == slot_back_str)
+		ret.icon = mob_icon
+	return ret
 
 /obj/item/weapon/rig/proc/set_slowdown_and_vision(var/active)
 	if(chest)
@@ -917,8 +929,8 @@
 			return wearer.pulledby.relaymove(wearer, direction)
 		else if(istype(wearer.buckled, /obj/structure/bed/chair/wheelchair))
 			if(ishuman(wearer.buckled))
-				var/obj/item/organ/external/l_hand = wearer.get_organ("l_hand")
-				var/obj/item/organ/external/r_hand = wearer.get_organ("r_hand")
+				var/obj/item/organ/external/l_hand = wearer.get_organ(BP_L_HAND)
+				var/obj/item/organ/external/r_hand = wearer.get_organ(BP_R_HAND)
 				if((!l_hand || (l_hand.status & ORGAN_DESTROYED)) && (!r_hand || (r_hand.status & ORGAN_DESTROYED)))
 					return // No hands to drive your chair? Tough luck!
 			wearer_move_delay += 2
@@ -937,7 +949,7 @@
 	return src
 
 /mob/living/carbon/human/get_rig()
-	return back
+	return wearing_rig
 
 #undef ONLY_DEPLOY
 #undef ONLY_RETRACT

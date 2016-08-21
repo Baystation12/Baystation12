@@ -38,6 +38,27 @@
 	/obj/item/weapon/circuitboard/miningdrill
 	)
 
+
+/obj/item/weapon/gripper/gun
+	name = "firearm gripper"
+	desc = "A special gripper for picking up and manipulating various firearms."
+	icon_state = "gripper"
+
+	can_hold = list(
+	/obj/item/weapon/gun
+	)
+
+/obj/item/weapon/gripper/gun/afterattack(atom/A, mob/living/user, adjacent, params)
+	if(wrapped)
+		// This seems to be necessary in order to ensure the gripper held weapon can be manipulated (for example, placed into recharger) while allowing targeting and shooting to work.
+		// In short, if it's an obj subtype it's most likely a machine of some sort, so use regular gripper functionality for that (lets us use rechargers, and build turrets for example).
+		// In other cases (turf or mob especially), relay the afterattack to the held gun, which allows us to shoot and target things.
+		if(istype(A, /obj/))
+			return ..()
+		else
+			. = wrapped.afterattack(A, user, adjacent, params)
+			update_icon() // An extra icon update here, as the gun overlay changes quite often for some weapons
+
 /obj/item/weapon/gripper/paperwork
 	name = "paperwork gripper"
 	desc = "A simple grasping tool for clerical work."
@@ -71,9 +92,9 @@
 		/obj/item/device/mmi,
 		/obj/item/robot_parts,
 		/obj/item/borg/upgrade,
-		/obj/item/device/flash, //to build borgs,
-		/obj/item/organ/brain, //to insert into MMIs,
-		/obj/item/stack/cable_coil, //again, for borg building,
+		/obj/item/device/flash,
+		/obj/item/organ/internal/brain,
+		/obj/item/stack/cable_coil,
 		/obj/item/weapon/circuitboard,
 		/obj/item/slime_extract,
 		/obj/item/weapon/reagent_containers/glass,
@@ -108,17 +129,19 @@
 		)
 
 /obj/item/weapon/gripper/examine(mob/user)
-	..()
 	if(wrapped)
-		user << "It is holding \a [wrapped]."
+		wrapped.examine(user)
+	else
+		..()
 
 /obj/item/weapon/gripper/attack_self(mob/user as mob)
 	if(wrapped)
-		return wrapped.attack_self(user)
-	return ..()
+		. = wrapped.attack_self(user)
+	else
+		. = ..()
+	update_icon()
 
 /obj/item/weapon/gripper/verb/drop_item()
-
 	set name = "Drop Item"
 	set desc = "Release an item from your magnetic gripper."
 	set category = "Silicon Commands"
@@ -134,13 +157,21 @@
 		return
 
 	src.loc << "<span class='danger'>You drop \the [wrapped].</span>"
-	wrapped.loc = get_turf(src)
+	wrapped.forceMove(get_turf(src))
 	wrapped = null
-	//update_icon()
+	update_icon()
 
 /obj/item/weapon/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	// Don't fall through and smack people with gripper, instead just no-op
 	return 0
+
+// Draw the held item over our sprite. Probably not the visually nicest method, but it's useful.
+/obj/item/weapon/gripper/update_icon()
+	overlays.Cut()
+	if(wrapped)
+		wrapped.update_icon()
+		overlays += image(wrapped.icon, wrapped.icon_state)
+
 
 /obj/item/weapon/gripper/resolve_attackby(var/atom/target, var/mob/living/user, params)
 
@@ -170,6 +201,7 @@
 			wrapped.loc = src
 		else
 			wrapped = null
+			update_icon()
 			return
 
 	else if(istype(target,/obj/item)) //Check that we're not pocketing a mob.
@@ -190,8 +222,9 @@
 		//We can grab the item, finally.
 		if(grab)
 			user << "You collect \the [I]."
-			I.loc = src
+			I.forceMove(src)
 			wrapped = I
+			update_icon()
 			return
 		else
 			user << "<span class='danger'>Your gripper cannot hold \the [target].</span>"
@@ -227,6 +260,8 @@
 				A.cell = null
 
 				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
+	update_icon()
+
 
 //TODO: Matter decompiler.
 /obj/item/weapon/matter_decompiler

@@ -16,9 +16,6 @@ obj/machinery/recharger
 	var/portable = 1
 
 obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
-	if(istype(user,/mob/living/silicon))
-		return
-
 	var/allowed = 0
 	for (var/allowed_type in allowed_devices)
 		if (istype(G, allowed_type)) allowed = 1
@@ -31,6 +28,11 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 		if(!powered())
 			user << "<span class='warning'>The [name] blinks red as you try to insert the item!</span>"
 			return
+		if (istype(G, /obj/item/weapon/gun/energy))
+			var/obj/item/weapon/gun/energy/E = G
+			if(E.use_external_power)
+				user << "<span class='notice'>This weapon can not be recharged using this device.</span>"
+				return
 		if (istype(G, /obj/item/weapon/gun/energy/gun/nuclear) || istype(G, /obj/item/weapon/gun/energy/crossbow))
 			user << "<span class='notice'>Your gun's recharge port was removed to make room for a miniaturized reactor.</span>"
 			return
@@ -65,7 +67,7 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 		playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 
 obj/machinery/recharger/attack_hand(mob/user as mob)
-	if(istype(user,/mob/living/silicon))
+	if(istype(user,/mob/living/silicon/ai))
 		return
 
 	add_fingerprint(user)

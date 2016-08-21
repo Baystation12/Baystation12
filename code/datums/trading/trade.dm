@@ -29,6 +29,8 @@
 	trade_complete		When a trade is made
 	trade_refuse		When a trade is refused
 
+	what_want			What the person says when they are asked if they want something
+
 	*/
 	var/want_multiplier = 2                                     //How much wanted items are multiplied by when traded for
 	var/insult_drop = 5                                         //How far disposition drops on insult
@@ -121,34 +123,45 @@
 		trading_items[type] = value
 	return trading_items[trading_items[trading_num]]
 
-/datum/trader/proc/offer_item_for_trade(var/atom/movable/offer, var/num)
-	if(!offer)
-		return 0
-	num = Clamp(num,1, trading_items.len)
-	var/is_wanted = 0
-	if(is_type_in_list(offer,wanted_items))
-		is_wanted = 1
+/datum/trader/proc/offer_money_for_trade(var/trade_num, var/money_amount)
+	if(!(trade_flags & TRADER_MONEY))
+		return TRADER_NO_MONEY
+	var/value = get_item_value(trade_num)
+	if(money_amount < value)
+		return TRADER_NOT_ENOUGH
 
-	if(blacklisted_trade_items && blacklisted_trade_items.len && is_type_in_list(offer,blacklisted_trade_items))
-		return 0
+	return value
 
-	if(istype(offer,/obj/item/weapon/spacecash))
-		if(!(trade_flags & TRADER_MONEY))
+/datum/trader/proc/offer_items_for_trade(var/list/offers, var/num, var/turf/location)
+	if(!offers || !offers.len)
+		return TRADER_NOT_ENOUGH
+	num = Clamp(num, 1, trading_items.len)
+	var/offer_worth = 0
+	for(var/item in offers)
+		var/atom/movable/offer = item
+		var/is_wanted = 0
+		if(is_type_in_list(offer,wanted_items))
+			is_wanted = 1
+		if(blacklisted_trade_items && blacklisted_trade_items.len && is_type_in_list(offer,blacklisted_trade_items))
 			return 0
-	else
-		if(!(trade_flags & TRADER_GOODS) || ((trade_flags & TRADER_WANTED_ONLY) && !is_wanted))
-			return 0
 
-	var/trading_worth = get_item_value(num)
-	var/offer_worth = get_value(offer)
-	if(is_wanted)
-		offer_worth *= 2
+		if(istype(offer,/obj/item/weapon/spacecash))
+			if(!(trade_flags & TRADER_MONEY))
+				return TRADER_NO_MONEY
+		else
+			if(!(trade_flags & TRADER_GOODS))
+				return TRADER_NO_GOODS
+			else if((trade_flags & TRADER_WANTED_ONLY) && !is_wanted)
+				return TRADER_FOUND_UNWANTED
+
+		offer_worth += get_value(offer) * (is_wanted ? want_multiplier : 1)
 	if(!offer_worth)
-		return 0
+		return TRADER_NOT_ENOUGH
+	var/trading_worth = get_item_value(num)
 	var/percent = offer_worth/trading_worth
 	if(percent > max(0.9,0.9-disposition/100))
-		return trade(offer, num)
-	return 0
+		return trade(offers, num, location)
+	return TRADER_NOT_ENOUGH
 
 /datum/trader/proc/hail(var/mob/user)
 	var/specific
@@ -184,18 +197,21 @@
 		disposition += rand(compliment_increase, compliment_increase * 2)
 	return get_response("compliment_accept", "Thank you!")
 
-/datum/trader/proc/trade(var/atom/movable/offer, var/num)
+/datum/trader/proc/trade(var/list/offers, var/num, var/turf/location)
+	if(offers && offers.len)
+		for(var/offer in offers)
+			if(istype(offer,/mob))
+				var/text = mob_transfer_message
+				offer << replacetext(text, "ORIGIN", origin)
+			if(istype(offer, /obj/mecha))
+				var/obj/mecha/M = offer
+				M.wreckage = null //So they don't ruin the illusion
+			qdel(offer)
+
 	var/type = trading_items[num]
-	var/turf/T = get_turf(offer)
-	if(istype(offer,/mob))
-		var/text = mob_transfer_message
-		offer << replacetext(text, "ORIGIN", origin)
-	if(istype(offer, /obj/mecha))
-		var/obj/mecha/M = offer
-		M.wreckage = null //So they don't ruin the illusion
-	qdel(offer)
-	var/atom/movable/M = new type(T)
-	playsound(T, 'sound/effects/teleport.ogg', 50, 1)
+
+	var/atom/movable/M = new type(location)
+	playsound(location, 'sound/effects/teleport.ogg', 50, 1)
 
 	disposition += rand(compliment_increase,compliment_increase*3) //Traders like it when you trade with them
 
@@ -206,3 +222,30 @@
 	. = get_response("how_much", "Hmm.... how about VALUE thalers?")
 	. = replacetext(.,"VALUE",get_item_value(num))
 	. = replacetext(.,"ITEM", initial(M.name))
+
+/datum/trader/proc/what_do_you_want()
+	if(!(trade_flags & TRADER_GOODS))
+		return get_response(TRADER_NO_GOODS, "I don't deal in goods.")
+
+	. = get_response("what_want", "Hm, I want")
+	var/list/want_english = list()
+	for(var/type in wanted_items)
+		var/atom/a = type
+		want_english += initial(a.name)
+	. += " [english_list(want_english)]"
+
+/datum/trader/proc/sell_items(var/list/offers)
+	if(!(trade_flags & TRADER_GOODS))
+		return TRADER_NO_GOODS
+	if(!offers || !offers.len)
+		return TRADER_NOT_ENOUGH
+
+	for(var/offer in offers)
+		if(!is_type_in_list(offer,wanted_items))
+			return TRADER_FOUND_UNWANTED
+
+	playsound(get_turf(offers[1]), 'sound/effects/teleport.ogg', 50, 1)
+	. = 0
+	for(var/offer in offers)
+		. += get_value(offer) * want_multiplier
+		qdel(offer)

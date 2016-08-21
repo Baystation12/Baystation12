@@ -321,7 +321,7 @@
 		if(!reagents || reagents.total_volume <= 0)
 			return
 		reagents.remove_any(rand(1,3)) //Todo, make it actually remove the reagents the seed uses.
-		var/affected = pick("r_hand","l_hand")
+		var/affected = pick(BP_R_HAND,BP_L_HAND)
 		seed.do_thorns(H,src,affected)
 		seed.do_sting(H,src,affected)
 

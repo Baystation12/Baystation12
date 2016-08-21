@@ -53,3 +53,9 @@
 	..()
 	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots = 4, slot_size = 2)
 
+
+/obj/item/clothing/suit/storage/vest/tactical/New()
+	..()
+	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots = 4, slot_size = 2)
+
+

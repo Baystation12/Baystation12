@@ -15,7 +15,7 @@
 	icon_state = "mime"
 
 /obj/item/clothing/shoes/swat
-	name = "\improper SWAT shoes"
+	name = "\improper SWAT boots"
 	desc = "When you want to turn up the heat."
 	icon_state = "swat"
 	force = 3
@@ -27,7 +27,7 @@
 /obj/item/clothing/shoes/combat //Basically SWAT shoes combined with galoshes.
 	name = "combat boots"
 	desc = "When you REALLY want to turn up the heat."
-	icon_state = "swat"
+	icon_state = "duty"
 	force = 5
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
 	item_flags = NOSLIP
@@ -38,6 +38,42 @@
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
+
+/obj/item/clothing/shoes/jungleboots
+	name = "jungle boots"
+	desc = "A pair of durable brown boots. Waterproofed for use planetside."
+	icon_state = "jungle"
+	force = 3
+	armor = list(melee = 30, bullet = 10, laser = 10, energy = 15, bomb = 20, bio = 10, rad = 0)
+	siemens_coefficient = 0.7
+	can_hold_knife = 1
+
+/obj/item/clothing/shoes/dutyboots
+	name = "duty boots"
+	desc = "A pair of steel-toed synthleather boots with a mirror shine."
+	icon_state = "duty"
+	armor = list(melee = 40, bullet = 0, laser = 0, energy = 15, bomb = 20, bio = 0, rad = 20)
+	siemens_coefficient = 0.7
+	can_hold_knife = 1
+
+/obj/item/clothing/shoes/tactical
+	name = "tactical boots"
+	desc = "Tan boots with extra padding and armor."
+	icon_state = "jungle"
+	force = 3
+	armor = list(melee = 40, bullet = 30, laser = 40,energy = 25, bomb = 50, bio = 0, rad = 0)
+	siemens_coefficient = 0.7
+	can_hold_knife = 1
+
+/obj/item/clothing/shoes/dress
+	name = "dress shoes"
+	desc = "Sharp looking low quarters, perfect for a formal uniform."
+	icon_state = "laceups"
+
+/obj/item/clothing/shoes/dress/white
+	name = "white dress shoes"
+	desc = "Brilliantly white low quarters, not a spot on them."
+	icon_state = "whitedress"
 
 /obj/item/clothing/shoes/sandal
 	desc = "A pair of rather plain, wooden sandals."

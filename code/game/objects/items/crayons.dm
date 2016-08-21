@@ -1,62 +1,62 @@
 /obj/item/weapon/pen/crayon/red
 	icon_state = "crayonred"
-	colour = "#DA0000"
-	shadeColour = "#810C0C"
+	colour = "#da0000"
+	shadeColour = "#810c0c"
 	colourName = "red"
 
 /obj/item/weapon/pen/crayon/orange
 	icon_state = "crayonorange"
-	colour = "#FF9300"
-	shadeColour = "#A55403"
+	colour = "#ff9300"
+	shadeColour = "#a55403"
 	colourName = "orange"
 
 /obj/item/weapon/pen/crayon/yellow
 	icon_state = "crayonyellow"
-	colour = "#FFF200"
+	colour = "#fff200"
 	shadeColour = "#886422"
 	colourName = "yellow"
 
 /obj/item/weapon/pen/crayon/green
 	icon_state = "crayongreen"
-	colour = "#A8E61D"
-	shadeColour = "#61840F"
+	colour = "#a8e61d"
+	shadeColour = "#61840f"
 	colourName = "green"
 
 /obj/item/weapon/pen/crayon/blue
 	icon_state = "crayonblue"
-	colour = "#00B7EF"
-	shadeColour = "#0082A8"
+	colour = "#00b7ef"
+	shadeColour = "#0082a8"
 	colourName = "blue"
 
 /obj/item/weapon/pen/crayon/purple
 	icon_state = "crayonpurple"
-	colour = "#DA00FF"
-	shadeColour = "#810CFF"
+	colour = "#da00ff"
+	shadeColour = "#810cff"
 	colourName = "purple"
 
 /obj/item/weapon/pen/crayon/mime
 	icon_state = "crayonmime"
 	desc = "A very sad-looking crayon."
-	colour = "#FFFFFF"
+	colour = "#ffffff"
 	shadeColour = "#000000"
 	colourName = "mime"
 	uses = 0
 
 /obj/item/weapon/pen/crayon/mime/attack_self(mob/living/user as mob) //inversion
-	if(colour != "#FFFFFF" && shadeColour != "#000000")
-		colour = "#FFFFFF"
+	if(colour != "#ffffff" && shadeColour != "#000000")
+		colour = "#ffffff"
 		shadeColour = "#000000"
 		user << "You will now draw in white and black with this crayon."
 	else
 		colour = "#000000"
-		shadeColour = "#FFFFFF"
+		shadeColour = "#ffffff"
 		user << "You will now draw in black and white with this crayon."
 	return
 
 /obj/item/weapon/pen/crayon/rainbow
 	icon_state = "crayonrainbow"
-	colour = "#FFF000"
-	shadeColour = "#000FFF"
+	colour = "#fff000"
+	shadeColour = "#000fff"
 	colourName = "rainbow"
 	uses = 0
 

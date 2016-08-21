@@ -197,6 +197,12 @@
 	icon_state = "flashbang"
 	startswith = list(/obj/item/weapon/grenade/anti_photon = 5)
 
+/obj/item/weapon/storage/box/supermatters
+	name = "box of supermatter grenades"
+	desc = "A box containing 5 highly experimental supermatter grenades."
+	icon_state = "radbox"
+	startswith = list(/obj/item/weapon/grenade/supermatter = 5)
+    
 /obj/item/weapon/storage/box/trackimp
 	name = "boxed tracking implant kit"
 	desc = "Box full of scum-bag tracking utensils."

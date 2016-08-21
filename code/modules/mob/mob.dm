@@ -44,54 +44,52 @@
 	..()
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
-
 	if(!client)	return
 
-	if (type)
-		if(type & 1 && (sdisabilities & BLIND || blinded || paralysis) )//Vision related
-			if (!( alt ))
+	//spaghetti code
+	if(type)
+		if((type & VISIBLE_MESSAGE) && is_blind())//Vision related
+			if(!alt)
 				return
 			else
 				msg = alt
 				type = alt_type
-		if (type & 2 && (sdisabilities & DEAF || ear_deaf))//Hearing related
-			if (!( alt ))
+		if((type & AUDIBLE_MESSAGE) && is_deaf())//Hearing related
+			if(!alt)
 				return
 			else
 				msg = alt
 				type = alt_type
-				if ((type & 1 && sdisabilities & BLIND))
+				if(((type & VISIBLE_MESSAGE) && is_blind()))
 					return
-	// Added voice muffling for Issue 41.
-	if(stat == UNCONSCIOUS || sleeping > 0)
-		src << "<I>... You can almost hear someone talking ...</I>"
-	else
-		src << msg
-	return
+
+	src << msg
+
+
 
 // Show a message to all mobs and objects in sight of this one
 // This would be for visible actions by the src mob
 // message is the message output to anyone who can see e.g. "[src] does something!"
 // self_message (optional) is what the src mob sees  e.g. "You do something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
+/mob/visible_message(var/message, var/self_message, var/blind_message, var/range = world.view, var/checkghosts = null)
+	var/turf/T = get_turf(src)
+	var/list/mobs = list()
+	var/list/objs = list()
+	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, checkghosts)
 
-/mob/visible_message(var/message, var/self_message, var/blind_message)
-	var/list/see = get_mobs_or_objects_in_view(world.view,src) | viewers(world.view,src)
+	for(var/o in objs)
+		var/obj/O = o
+		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 
-	for(var/I in see)
-		if(isobj(I))
-			spawn(0)
-				if(I) //It's possible that it could be deleted in the meantime.
-					var/obj/O = I
-					O.show_message( message, 1, blind_message, 2)
-		else if(ismob(I))
-			var/mob/M = I
-			if(self_message && M==src)
-				M.show_message( self_message, 1, blind_message, 2)
-			else if(M.see_invisible >= invisibility) // Cannot view the invisible
-				M.show_message( message, 1, blind_message, 2)
-			else if (blind_message)
-				M.show_message(blind_message, 2)
+	for(var/m in mobs)
+		var/mob/M = m
+		if(self_message && M == src)
+			M.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+		if(M.see_invisible >= invisibility)
+			M.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+		else if(blind_message)
+			M.show_message(blind_message, AUDIBLE_MESSAGE)
 
 // Returns an amount of power drawn from the object (-1 if it's not viable).
 // If drain_check is set it will not actually drain power, just return a value.
@@ -106,31 +104,24 @@
 // self_message (optional) is what the src mob hears.
 // deaf_message (optional) is what deaf people will see.
 // hearing_distance (optional) is the range, how many tiles away the message can be heard.
-/mob/audible_message(var/message, var/deaf_message, var/hearing_distance, var/self_message)
-
-	var/range = world.view
-	if(hearing_distance)
-		range = hearing_distance
-
+/mob/audible_message(var/message, var/self_message, var/deaf_message, var/hearing_distance = world.view, var/checkghosts = null)
 	var/turf/T = get_turf(src)
-
 	var/list/mobs = list()
 	var/list/objs = list()
-	get_mobs_and_objs_in_view_fast(T, range, mobs, objs)
-
+	get_mobs_and_objs_in_view_fast(T, hearing_distance, mobs, objs, checkghosts)
 
 	for(var/m in mobs)
 		var/mob/M = m
-		if(self_message && M==src)
-			M.show_message(self_message,2,deaf_message,1)
-			continue
-
-		M.show_message(message,2,deaf_message,1)
-
+		if(self_message && M == src)
+			M.show_message(self_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
+		else if(M.see_invisible >= invisibility) // Cannot view the invisible
+			M.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
+		else
+			M.show_message(message, AUDIBLE_MESSAGE)
 
 	for(var/o in objs)
 		var/obj/O = o
-		O.show_message(message,2,deaf_message,1)
+		O.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
 
 /mob/proc/findname(msg)
 	for(var/mob/M in mob_list)
@@ -165,6 +156,12 @@
 	if(!buckled)
 		return UNBUCKLED
 	return restrained() ? FULLY_BUCKLED : PARTIALLY_BUCKLED
+
+/mob/proc/is_blind()
+	return ((sdisabilities & BLIND) || blinded || incapacitated(INCAPACITATION_KNOCKOUT))
+
+/mob/proc/is_deaf()
+	return ((sdisabilities & DEAF) || ear_deaf || incapacitated(INCAPACITATION_KNOCKOUT))
 
 /mob/proc/is_physically_disabled()
 	return incapacitated(INCAPACITATION_DISABLED)

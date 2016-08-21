@@ -586,6 +586,12 @@ var/list/name_to_material
 	hardness = 500
 	weight = 500
 
+// Likewise.
+/material/voxalloy/elevatorium
+	name = "elevatorium"
+	display_name = "elevator panelling"
+	icon_colour = "#666666"
+
 /material/wood
 	name = "wood"
 	adjective_name = "wooden"
@@ -677,7 +683,7 @@ var/list/name_to_material
 
 /material/resin/can_open_material_door(var/mob/living/user)
 	var/mob/living/carbon/M = user
-	if(istype(M) && locate(/obj/item/organ/xenos/hivenode) in M.internal_organs)
+	if(istype(M) && locate(/obj/item/organ/internal/xenos/hivenode) in M.internal_organs)
 		return 1
 	return 0
 

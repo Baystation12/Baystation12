@@ -62,6 +62,7 @@
 		else
 			user << "\blue You inscribe \"[label_text]\" into \the [initial(BB.name)]."
 			BB.name = "[initial(BB.name)] (\"[label_text]\")"
+	else ..()
 
 /obj/item/ammo_casing/update_icon()
 	if(spent_icon && !BB)
@@ -134,6 +135,7 @@
 		C.forceMove(src)
 		stored_ammo.Insert(1, C) //add to the head of the list
 		update_icon()
+	else ..()
 
 /obj/item/ammo_magazine/attack_self(mob/user)
 	if(!stored_ammo.len)

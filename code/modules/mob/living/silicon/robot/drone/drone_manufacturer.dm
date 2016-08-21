@@ -82,7 +82,6 @@
 	if(player.mob && player.mob.mind) player.mob.mind.reset()
 	var/mob/living/silicon/robot/drone/new_drone = PoolOrNew(drone_type, get_turf(src))
 	new_drone.transfer_personality(player)
-	new_drone.master_fabricator = src
 
 	drone_progress = 0
 	return new_drone

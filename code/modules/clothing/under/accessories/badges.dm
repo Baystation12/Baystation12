@@ -6,17 +6,16 @@
 
 /obj/item/clothing/accessory/badge
 	name = "detective's badge"
-	desc = "A corporate security badge, made from gold and set on false leather."
-	icon_state = "badge"
-	item_state = "marshalbadge"
+	desc = "A simple badge, made from gold."
+	icon_state = "goldbadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 
 	var/stored_name
-	var/badge_string = "Corporate Security"
+	var/badge_string = "Private Investigator"
 
 /obj/item/clothing/accessory/badge/old
 	name = "faded badge"
-	desc = "A faded badge, backed with leather. It bears the emblem of the Forensic division."
+	desc = "A faded badge, backed with leather. Looks crummy."
 	icon_state = "badge_round"
 
 /obj/item/clothing/accessory/badge/proc/set_name(var/new_name)
@@ -26,7 +25,7 @@
 /obj/item/clothing/accessory/badge/attack_self(mob/user as mob)
 
 	if(!stored_name)
-		user << "You polish your badge fondly, shining up the surface."
+		user << "You polish your [src.name] fondly, shining up the surface."
 		set_name(user.real_name)
 		return
 
@@ -46,6 +45,7 @@
 	desc = "This glowing blue badge marks the holder as a member of corporate security."
 	icon_state = "holobadge"
 	item_state = "holobadge"
+	badge_string = "NanoTrasen Security"
 	var/emagged //Emagging removes Sec check.
 
 /obj/item/clothing/accessory/badge/holo/cord
@@ -100,22 +100,51 @@
 		return
 
 
-/obj/item/clothing/accessory/badge/warden
-	name = "warden's badge"
-	desc = "A silver corporate security badge. Stamped with the words 'Brig Officer.'."
+/obj/item/clothing/accessory/badge/security
+	name = "security forces badge"
+	desc = "A silver law enforcement badge. Stamped with the words 'Master at Arms'."
 	icon_state = "silverbadge"
 	slot_flags = SLOT_TIE
-
-
-/obj/item/clothing/accessory/badge/hos
-	name = "commander's badge"
-	desc = "An immaculately polished gold security badge. Labeled 'Commander.'."
-	icon_state = "goldbadge"
-	slot_flags = SLOT_TIE
+	badge_string = "Sol Central Government"
 
 /obj/item/clothing/accessory/badge/marshal
 	name = "marshal's badge"
 	desc = "A leather-backed gold badge displaying the crest of the Colonial Marshals."
 	icon_state = "marshalbadge"
 	badge_string = "Colonial Marshal Bureau"
+
+/obj/item/clothing/accessory/badge/tags //child of a badge for now because I'd rather not copy-paste their code
+	name = "dog tags"
+	desc = "Plain identification tags made from a durable metal. Stamped with a variety of informational details."
+	icon_state = "tags"
+	badge_string = "Sol Central Government"
+	slot_flags = SLOT_MASK | SLOT_TIE
+
+/obj/item/clothing/accessory/badge/defenseintel
+	name = "investigator's badge"
+	desc = "A leather-backed silver badge bearing the crest of the Defense Intelligence Agency."
+	icon_state = "diabadge"
+	slot_flags = SLOT_TIE
+	badge_string = "Defense Intelligence Agency"
+
+/obj/item/clothing/accessory/badge/interstellarintel
+	name = "agent's badge"
+	desc = "A synthleather holographic badge bearing the crest of the Office of Interstellar Intelligence."
+	icon_state = "intelbadge"
+	slot_flags = SLOT_TIE
+	badge_string = "Office of Interstellar Intelligence"
+
+/obj/item/clothing/accessory/badge/representative
+	name = "representative's badge"
+	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a representative of the Sol Central Government."
+	icon_state = "solbadge"
+	slot_flags = SLOT_TIE
+	badge_string = "Sol Central Government"
+
+/obj/item/clothing/accessory/badge/nanotrasen
+	name = "\improper NanoTrasen badge"
+	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a NanoTrasen corporate executive."
+	icon_state = "ntbadge"
+	slot_flags = SLOT_TIE
+	badge_string = "NanoTrasen"
 

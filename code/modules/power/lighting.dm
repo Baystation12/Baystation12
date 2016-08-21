@@ -31,13 +31,18 @@ var/global/list/light_type_cache = list()
 	var/fixture_type = /obj/machinery/light
 	var/sheets_refunded = 2
 
-/obj/machinery/light_construct/New(atom/newloc, obj/machinery/light/fixture = null)
+/obj/machinery/light_construct/New(atom/newloc, var/newdir, atom/fixture = null)
 	..(newloc)
-	if(fixture)
-		fixture_type = fixture.type
+
+	if(newdir)
+		set_dir(newdir)
+
+	if(istype(fixture))
+		if(istype(fixture, /obj/machinery/light))
+			fixture_type = fixture.type
 		fixture.transfer_fingerprints_to(src)
-		set_dir(fixture.dir)
 		stage = 2
+
 	update_icon()
 
 /obj/machinery/light_construct/update_icon()
@@ -391,8 +396,8 @@ var/global/list/light_type_cache = list()
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			user.visible_message("[user.name] opens [src]'s casing.", \
 				"You open [src]'s casing.", "You hear a noise.")
-			
-			new construct_type(src.loc, src)
+
+			new construct_type(src.loc, src.dir, src)
 			qdel(src)
 			return
 
@@ -456,7 +461,7 @@ var/global/list/light_type_cache = list()
 		var/mob/living/carbon/human/H = user
 
 		if(istype(H))
-			if(H.species.heat_level_1 > LIGHT_BULB_TEMPERATURE)
+			if(H.getSpeciesOrSynthTemp(HEAT_LEVEL_1) > LIGHT_BULB_TEMPERATURE)
 				prot = 1
 			else if(H.gloves)
 				var/obj/item/clothing/gloves/G = H.gloves
@@ -487,6 +492,12 @@ var/global/list/light_type_cache = list()
 
 	user << "You telekinetically remove the light [get_fitting_name()]."
 	remove_bulb()
+
+// ghost attack - make lights flicker like an AI, but even spookier!
+/obj/machinery/light/attack_ghost(mob/user)
+	if(round_is_spooky())
+		src.flicker(rand(2,5))
+	else return ..()
 
 // break the light and make sparks if was on
 /obj/machinery/light/proc/broken(var/skip_sound_and_sparks = 0)
@@ -590,7 +601,7 @@ obj/machinery/light/proc/burn_out()
 	brightness_power = 3
 	brightness_color = "#FFFFFF"
 	lighting_modes = list(
-		"emergency_lighting" = list(l_range = 5, l_power = 1, l_color = "#da0205"), 
+		"emergency_lighting" = list(l_range = 5, l_power = 1, l_color = "#da0205"),
 		)
 
 /obj/item/weapon/light/tube/large

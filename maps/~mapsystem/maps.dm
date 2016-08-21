@@ -52,7 +52,11 @@ var/list/all_maps = list()
 	var/emergency_shuttle_called_message
 	var/emergency_shuttle_recall_message
 
-	var/list/holodeck_supported_programs = list() // e.g.: list("Picnic Area" = "picnicarea", "Basketball Court" = "basketball") - see holodeck_programs
+	var/list/holodeck_programs = list() // map of string ids to /datum/holodeck_program instances
+	var/list/holodeck_supported_programs = list() // map of maps - first level maps from list-of-programs string id (e.g. "BarPrograms") to another map
+                                                  // this is in order to support multiple holodeck program listings for different holodecks
+	                                              // second level maps from program friendly display names ("Picnic Area") to program string ids ("picnicarea")
+	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
 /datum/map/New()
@@ -61,3 +65,19 @@ var/list/all_maps = list()
 		map_levels = station_levels.Copy()
 	if(!allowed_jobs)
 		allowed_jobs = subtypesof(/datum/job)
+
+// Used to apply various post-compile procedural effects to the map.
+/datum/map/proc/perform_map_generation()
+	return
+
+/datum/map/proc/refresh_mining_turfs()
+
+	set background = 1
+	set waitfor = 0
+
+	for(var/thing in mining_walls)
+		var/turf/simulated/mineral/M = thing
+		M.updateMineralOverlays()
+	for(var/thing in mining_floors)
+		var/turf/simulated/floor/asteroid/M = thing
+		M.updateMineralOverlays()

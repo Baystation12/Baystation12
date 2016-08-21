@@ -1,11 +1,12 @@
 var/global/list/robot_modules = list(
 	"Standard"		= /obj/item/weapon/robot_module/robot/standard,
-	"Utility" 		= /obj/item/weapon/robot_module/robot/utility,
+	"Service" 		= /obj/item/weapon/robot_module/robot/service,
 	"Research" 		= /obj/item/weapon/robot_module/robot/research,
 	"Miner" 		= /obj/item/weapon/robot_module/robot/miner,
 	"Medical" 		= /obj/item/weapon/robot_module/robot/medical,
 	"Security" 		= /obj/item/weapon/robot_module/robot/security,
 	"Engineering"	= /obj/item/weapon/robot_module/robot/engineering,
+	"Combat" 		= /obj/item/weapon/robot_module/robot/combat,
 	"Janitor" 		= /obj/item/weapon/robot_module/robot/janitor
 	)
 
@@ -416,9 +417,10 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/borg/sight/hud/sec(src)
 	src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
 	src.modules += new /obj/item/weapon/melee/baton/robot(src)
-	src.modules += new /obj/item/weapon/gun/energy/gun/mounted(src)
+	src.modules += new /obj/item/weapon/gun/energy/taser/mounted(src)
+	src.modules += new /obj/item/weapon/gripper/gun(src)
 	src.modules += new /obj/item/taperoll/police(src)
-	src.emag = new/obj/item/weapon/gun/energy/lasercannon/mounted(src)
+	src.emag = new /obj/item/weapon/gun/energy/laser/mounted(src)
 
 /obj/item/weapon/robot_module/robot/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
@@ -470,8 +472,8 @@ var/global/list/robot_modules = list(
 
 
 // Utility module. For various paperwork/utility tasks.
-/obj/item/weapon/robot_module/robot/utility
-	name = "utility robot module"
+/obj/item/weapon/robot_module/robot/service
+	name = "service robot module"
 	channels = list("Service" = 1)
 	languages = list(
 					LANGUAGE_SOL_COMMON	= 1,
@@ -493,7 +495,7 @@ var/global/list/robot_modules = list(
 					"Eyebot" = "eyebot-standard"
 				  	)
 
-/obj/item/weapon/robot_module/robot/utility/New()
+/obj/item/weapon/robot_module/robot/service/New()
 	..()
 	src.modules += new /obj/item/weapon/gripper/service(src)
 	src.modules += new /obj/item/weapon/reagent_containers/glass/bucket(src)
@@ -527,7 +529,7 @@ var/global/list/robot_modules = list(
 	R.add_reagent("beer2", 50)
 	src.emag.name = "Mickey Finn's Special Brew"
 
-/obj/item/weapon/robot_module/robot/clerical/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/weapon/robot_module/robot/service/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer/B = src.emag
@@ -600,6 +602,21 @@ var/global/list/robot_modules = list(
 	N.synths = list(nanite)
 	src.modules += N
 
+
+// Combat module - admin use only.
+/obj/item/weapon/robot_module/robot/combat
+	name = "combat robot module"
+	hide_on_manifest = 1
+	sprites = list("Combat Android" = "droid-combat")
+
+/obj/item/weapon/robot_module/robot/combat/New()
+	src.modules += new /obj/item/borg/sight/thermal(src)
+	src.modules += new /obj/item/weapon/gun/energy/laser/mounted(src)
+	src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
+	src.modules += new /obj/item/borg/combat/shield(src)
+	src.modules += new /obj/item/borg/combat/mobility(src)
+	src.emag = new /obj/item/weapon/gun/energy/lasercannon/mounted(src)
+	..()
 
 
 // Drone. While technically a small engineering cyborg it's very limited in terms of available tools

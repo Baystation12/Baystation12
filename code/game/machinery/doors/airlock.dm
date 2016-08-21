@@ -38,6 +38,7 @@
 
 	var/_wifi_id
 	var/datum/wifi/receiver/button/door/wifi_receiver
+	var/obj/item/weapon/airlock_brace/brace = null
 
 /obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
 	if(stat & (BROKEN|NOPOWER))
@@ -536,7 +537,10 @@ About the new airlock wires panel:
 		icon_state = "door_open"
 		if((stat & BROKEN) && !(stat & NOPOWER))
 			overlays += image(icon, "sparks_open")
-	return
+
+	if(brace)
+		brace.update_icon()
+		overlays += image(brace.icon, brace.icon_state)
 
 /obj/machinery/door/airlock/do_animate(animation)
 	switch(animation)
@@ -660,24 +664,6 @@ About the new airlock wires panel:
 			if(src.shock(user, 100))
 				return
 
-	// No. -- cib
-	/**
-	if(ishuman(user) && prob(40) && src.density)
-		var/mob/living/carbon/human/H = user
-		if(H.getBrainLoss() >= 60)
-			playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
-			if(!istype(H.head, /obj/item/clothing/head/helmet))
-				visible_message("<span class='warning'>[user] headbutts the airlock.</span>")
-				var/obj/item/organ/external/affecting = H.get_organ("head")
-				H.Stun(8)
-				H.Weaken(5)
-				if(affecting.take_damage(10, 0))
-					H.UpdateDamageIcon()
-			else
-				visible_message("<span class='warning'>[user] headbutts the airlock. Good thing they're wearing a helmet.</span>")
-			return
-	**/
-
 	if(src.p_open)
 		user.set_machine(src)
 		wires.Interact(user)
@@ -760,7 +746,24 @@ About the new airlock wires panel:
 	return 1
 
 /obj/machinery/door/airlock/attackby(C as obj, mob/user as mob)
-	//world << text("airlock attackby src [] obj [] mob []", src, C, user)
+	// Brace is considered installed on the airlock, so interacting with it is protected from electrification.
+	if(brace && (istype(C, /obj/item/weapon/brace_keycard) || istype(C, /obj/item/weapon/crowbar/brace_jack)))
+		return brace.attackby(C, user)
+
+	if(!brace && istype(C, /obj/item/weapon/airlock_brace))
+		if(!density)
+			user << "You must close \the [src] before installing \the [C]!"
+			return
+
+		if(do_after(user, 50, src) && density)
+			user << "You successfully install \the [C]. \The [src] has been locked."
+			brace = C
+			brace.airlock = src
+			user.drop_from_inventory(brace)
+			brace.forceMove(src)
+			update_icon()
+		return
+
 	if(!istype(usr, /mob/living/silicon))
 		if(src.isElectrified())
 			if(src.shock(user, 75))
@@ -899,6 +902,9 @@ About the new airlock wires panel:
 	return ..()
 
 /obj/machinery/door/airlock/can_open(var/forced=0)
+	if(brace)
+		return 0
+
 	if(!forced)
 		if(!arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR))
 			return 0
@@ -1026,6 +1032,8 @@ About the new airlock wires panel:
 	wires = null
 	qdel(wifi_receiver)
 	wifi_receiver = null
+	if(brace)
+		qdel(brace)
 	return ..()
 
 // Most doors will never be deconstructed over the course of a round,
@@ -1069,3 +1077,16 @@ About the new airlock wires panel:
 		src.open()
 		src.lock()
 	return
+
+// Braces can act as an extra layer of armor - they will take damage first.
+/obj/machinery/door/airlock/take_damage(var/amount)
+	if(brace)
+		brace.take_damage(amount)
+	else
+		..(amount)
+
+/obj/machinery/door/airlock/examine()
+	..()
+	if(brace)
+		usr << "\The [brace] is installed on \the [src], preventing it from opening."
+		usr << brace.examine_health()

@@ -132,6 +132,9 @@
 			return ask_verb
 	return speech_verb
 
+/datum/language/proc/can_speak_special(var/mob/speaker)
+	return 1
+
 // Language handling.
 /mob/proc/add_language(var/language)
 
@@ -156,7 +159,7 @@
 
 // Can we speak this language, as opposed to just understanding it?
 /mob/proc/can_speak(datum/language/speaking)
-	return (universal_speak || (speaking && speaking.flags & INNATE) || speaking in src.languages)
+	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || speaking in src.languages))
 
 /mob/proc/get_language_prefix()
 	if(client && client.prefs.language_prefixes && client.prefs.language_prefixes.len)

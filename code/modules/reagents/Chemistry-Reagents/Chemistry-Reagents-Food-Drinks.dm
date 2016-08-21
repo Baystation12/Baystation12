@@ -304,11 +304,11 @@
 	M.adjustToxLoss(0.5 * removed)
 
 /datum/reagent/capsaicin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA || alien == IS_MACHINE)
+	if(alien == IS_DIONA)
 		return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.species && (H.species.flags & (NO_PAIN)))
+		if(!H.can_feel_pain())
 			return
 	if(dose < agony_dose)
 		if(prob(5) || dose == metabolism) //dose == metabolism is a very hacky way of forcing the message the first time this procs
@@ -347,7 +347,7 @@
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		protection = list(H.head, H.glasses, H.wear_mask)
-		if(H.species && (H.species.flags & NO_PAIN))
+		if(!H.can_feel_pain())
 			no_pain = 1 //TODO: living-level can_feel_pain() proc
 	else
 		protection = list(M.wear_mask)
@@ -387,7 +387,7 @@
 /datum/reagent/condensedcapsaicin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.species && (H.species.flags & NO_PAIN))
+		if(!H.can_feel_pain())
 			return
 	if(dose == metabolism)
 		M << "<span class='danger'>You feel like your insides are burning!</span>"
@@ -1864,7 +1864,7 @@
 		M.adjustToxLoss(2 * removed)
 	if(dose > 60 && ishuman(M) && prob(5))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/heart/L = H.internal_organs_by_name["heart"]
+		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
 		if (L && istype(L))
 			if(dose < 120)
 				L.take_damage(10 * removed, 0)
@@ -1885,7 +1885,7 @@
 /datum/reagent/ethanol/sbiten
 	name = "Sbiten"
 	id = "sbiten"
-	description = "A spicy Vodka! Might be a little hot for the little guys!"
+	description = "A spicy Mead! Might be a little hot for the little guys!"
 	taste_description = "hot and spice"
 	color = "#FFA371"
 	strength = 15
@@ -1893,7 +1893,7 @@
 	targ_temp = 360
 
 	glass_name = "Sbiten"
-	glass_desc = "A spicy mix of Vodka and Spice. Very hot."
+	glass_desc = "A spicy mix of Mead and Spice. Very hot."
 
 /datum/reagent/ethanol/screwdrivercocktail
 	name = "Screwdriver"

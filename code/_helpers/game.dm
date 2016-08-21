@@ -245,7 +245,7 @@
 					. |= M		// Since we're already looping through mobs, why bother using |= ? This only slows things down.
 	return .
 
-/proc/get_mobs_and_objs_in_view_fast(var/turf/T, var/range, var/list/mobs, var/list/objs, var/checkghosts = GHOSTS_ALL_HEAR)
+/proc/get_mobs_and_objs_in_view_fast(var/turf/T, var/range, var/list/mobs, var/list/objs, var/checkghosts = null)
 
 	var/list/hear = dview(range,T,INVISIBILITY_MAXIMUM)
 	var/list/hearturfs = list()
@@ -253,23 +253,19 @@
 	for(var/atom/movable/AM in hear)
 		if(ismob(AM))
 			mobs += AM
-			hearturfs += AM.locs[1]
+			hearturfs += get_turf(AM)
 		else if(isobj(AM))
 			objs += AM 
-			hearturfs += AM.locs[1]
-
+			hearturfs += get_turf(AM)
 
 	for(var/mob/M in player_list)
-		if(checkghosts == GHOSTS_ALL_HEAR && M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
+		if(checkghosts && M.stat == DEAD && M.is_preference_enabled(checkghosts))
 			mobs |= M
-			continue
-		if(M.loc && M.locs[1] in hearturfs)
+		else if(get_turf(M) in hearturfs)
 			mobs |= M
-
-	
 
 	for(var/obj/O in listening_objects)
-		if(O && O.loc && O.locs[1] in hearturfs)
+		if(get_turf(O) in hearturfs)
 			objs |= O
 
 

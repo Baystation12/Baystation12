@@ -108,8 +108,11 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 		update_icon()
 
 	var/cancel_aim = 1
+	var/obj/item/targeting_object = aiming_with
+	if(istype(targeting_object.loc, /obj/item/weapon/gripper))
+		targeting_object = aiming_with.loc
 
-	if(!(aiming_with in owner) || (istype(owner, /mob/living/carbon/human) && (owner.l_hand != aiming_with && owner.r_hand != aiming_with)))
+	if(!(targeting_object in owner) || (owner.get_active_hand() != targeting_object))
 		owner << "<span class='warning'>You must keep hold of your weapon!</span>"
 	else if(owner.eye_blind)
 		owner << "<span class='warning'>You are blind and cannot see your target!</span>"

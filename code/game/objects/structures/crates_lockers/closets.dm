@@ -313,7 +313,7 @@
 	if(!usr.canmove || usr.stat || usr.restrained())
 		return
 
-	if(ishuman(usr))
+	if(ishuman(usr) || isrobot(usr))
 		src.add_fingerprint(usr)
 		src.toggle(usr)
 	else

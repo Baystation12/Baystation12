@@ -64,12 +64,11 @@
 /decl/hierarchy/supply_pack/security/armor
 	num_contained = 5
 	contains = list(/obj/item/clothing/suit/armor/vest,
-					/obj/item/clothing/suit/armor/vest/security,
+					/obj/item/clothing/suit/armor/vest/nt,
 					/obj/item/clothing/suit/armor/vest/detective,
-					/obj/item/clothing/suit/storage/vest/hos,
+					/obj/item/clothing/suit/storage/vest/nt/hos,
 					/obj/item/clothing/suit/storage/vest/pcrc,
-					/obj/item/clothing/suit/storage/vest/warden,
-					/obj/item/clothing/suit/storage/vest/officer,
+					/obj/item/clothing/suit/storage/vest/nt/warden,
 					/obj/item/clothing/suit/storage/vest)
 
 	name = "Armor crate"
@@ -256,7 +255,7 @@
 					/obj/item/clothing/suit/storage/forensics/red,
 					/obj/item/clothing/suit/storage/forensics/blue,
 					/obj/item/clothing/gloves/forensic,
-					/obj/item/clothing/gloves/black = 2)
+					/obj/item/clothing/gloves/thick = 2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Investigation clothing"
@@ -264,7 +263,7 @@
 
 /decl/hierarchy/supply_pack/security/officergear
 	name = "Officer equipment"
-	contains = list(/obj/item/clothing/suit/storage/vest/officer,
+	contains = list(/obj/item/clothing/suit/storage/vest/nt,
 					/obj/item/clothing/head/helmet,
 					/obj/item/weapon/cartridge/security,
 					/obj/item/clothing/accessory/badge/holo,
@@ -277,7 +276,7 @@
 					/obj/item/weapon/melee/baton/loaded,
 					/obj/item/clothing/glasses/sunglasses/sechud,
 					/obj/item/taperoll/police,
-					/obj/item/clothing/gloves/black,
+					/obj/item/clothing/gloves/thick,
 					/obj/item/device/hailer,
 					/obj/item/device/flashlight/flare,
 					/obj/item/clothing/accessory/storage/black_vest,
@@ -291,7 +290,7 @@
 
 /decl/hierarchy/supply_pack/security/wardengear
 	name = "Warden equipment"
-	contains = list(/obj/item/clothing/suit/storage/vest/warden,
+	contains = list(/obj/item/clothing/suit/storage/vest/nt/warden,
 					/obj/item/clothing/under/rank/warden,
 					/obj/item/clothing/under/rank/warden/corp,
 					/obj/item/clothing/suit/armor/vest/warden,
@@ -313,7 +312,7 @@
 
 /decl/hierarchy/supply_pack/security/headofsecgear
 	name = "Head of security equipment"
-	contains = list(/obj/item/clothing/suit/storage/vest/hos,
+	contains = list(/obj/item/clothing/suit/storage/vest/nt/hos,
 					/obj/item/clothing/under/rank/head_of_security/corp,
 					/obj/item/clothing/suit/armor/hos,
 					/obj/item/weapon/cartridge/hos,
@@ -341,7 +340,7 @@
 					/obj/item/clothing/under/rank/head_of_security,
 					/obj/item/clothing/suit/armor/hos/jensen,
 					/obj/item/clothing/head/soft/sec = 4,
-					/obj/item/clothing/gloves/black = 4,
+					/obj/item/clothing/gloves/thick = 4,
 					/obj/item/weapon/storage/box/holobadge)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
@@ -362,7 +361,7 @@
 					/obj/item/clothing/head/beret/sec/navy/officer = 4,
 					/obj/item/clothing/head/beret/sec/navy/warden,
 					/obj/item/clothing/head/beret/sec/navy/hos,
-					/obj/item/clothing/gloves/black = 4,
+					/obj/item/clothing/gloves/thick = 4,
 					/obj/item/weapon/storage/box/holobadge)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
@@ -380,7 +379,7 @@
 					/obj/item/clothing/head/beret/sec = 4,
 					/obj/item/clothing/head/beret/sec/corporate/warden,
 					/obj/item/clothing/head/beret/sec/corporate/hos,
-					/obj/item/clothing/gloves/black = 4,
+					/obj/item/clothing/gloves/thick = 4,
 					/obj/item/weapon/storage/box/holobadge)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
@@ -404,13 +403,13 @@
 /decl/hierarchy/supply_pack/security/tactical
 	name = "Tactical suits"
 	contains = list(/obj/item/clothing/under/tactical,
-					/obj/item/clothing/suit/armor/tactical,
+					/obj/item/clothing/suit/storage/vest/tactical,
 					/obj/item/clothing/head/helmet/tactical,
 					/obj/item/clothing/mask/balaclava/tactical,
 					/obj/item/clothing/glasses/sunglasses/sechud/tactical,
 					/obj/item/weapon/storage/belt/security/tactical,
-					/obj/item/clothing/shoes/jackboots,
-					/obj/item/clothing/gloves/black)
+					/obj/item/clothing/shoes/tactical,
+					/obj/item/clothing/gloves/tactical)
 	cost = 45
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Tactical Suit Locker"

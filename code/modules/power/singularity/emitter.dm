@@ -213,12 +213,8 @@
 			user << "<span class='warning'>The lock seems to be broken.</span>"
 			return
 		if(src.allowed(user))
-			if(active)
-				src.locked = !src.locked
-				user << "The controls are now [src.locked ? "locked." : "unlocked."]"
-			else
-				src.locked = 0 //just in case it somehow gets locked
-				user << "<span class='warning'>The controls can only be locked when [src] is online.</span>"
+			src.locked = !src.locked
+			user << "The controls are now [src.locked ? "locked." : "unlocked."]"
 		else
 			user << "<span class='warning'>Access denied.</span>"
 		return

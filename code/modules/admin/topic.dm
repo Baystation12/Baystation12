@@ -1394,86 +1394,21 @@
 			H.show(src.owner)
 		return
 
-	else if(href_list["CentcommFaxReply"])
-		var/mob/sender = locate(href_list["CentcommFaxReply"])
+	else if(href_list["FaxReply"])
+		var/mob/sender = locate(href_list["FaxReply"])
 		var/obj/machinery/photocopier/faxmachine/fax = locate(href_list["originfax"])
-
-		//todo: sanitize
-		var/input = input(src.owner, "Please enter a message to reply to [key_name(sender)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
-		if(!input)	return
-
-		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
-
-		// Create the reply message
-		var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( null ) //hopefully the null loc won't cause trouble for us
-		P.name = "[command_name()]- [customname]"
-		P.info = input
-		P.update_icon()
-
-		// Stamps
-		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-		stampoverlay.icon_state = "paper_stamp-cent"
-		if(!P.stamped)
-			P.stamped = new
-		P.stamped += /obj/item/weapon/stamp
-		P.overlays += stampoverlay
-		P.stamps += "<HR><i>This paper has been stamped by the Central Command Quantum Relay.</i>"
-
-		if(fax.recievefax(P))
-			src.owner << "\blue Message reply to transmitted successfully."
-			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(sender)]: [input]")
-			message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(sender)]", 1)
-		else
-			src.owner << "\red Message reply failed."
-
-		spawn(100)
-			qdel(P)
-		return
-
-	else if(href_list["SolGovFaxReply"])
-		//TODO
-		/*
-		var/mob/living/carbon/human/H = locate(href_list["SolGovFaxReply"])
-		var/obj/machinery/photocopier/faxmachine/fax = locate(href_list["originfax"])
-
-		var/input = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
-		if(!input)	return
-
-		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
-
-		for(var/obj/machinery/photocopier/faxmachine/F in machines)
-			if(F == fax)
-				if(! (F.stat & (BROKEN|NOPOWER) ) )
-
-					// animate! it's alive!
-					flick("faxreceive", F)
-
-					// give the sprite some time to flick
-					spawn(20)
-						var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
-						P.name = "Sol Government- [customname]"
-						P.info = input
-						P.update_icon()
-
-						playsound(F.loc, "sound/items/polaroid1.ogg", 50, 1)
-
-						// Stamps
-						var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-						stampoverlay.icon_state = "paper_stamp-cap"
-						if(!P.stamped)
-							P.stamped = new
-						P.stamped += /obj/item/weapon/stamp
-						P.overlays += stampoverlay
-						P.stamps += "<HR><i>This paper has been stamped and encrypted by the Sol Government Quantum Relay.</i>"
-
-				src.owner << "Message reply to transmitted successfully."
-				log_admin("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")
-				message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(H)]", 1)
-				return
-		src.owner << "/red Unable to locate fax!"
-		*/
+		var/replyorigin = href_list["replyorigin"]
 
 
+		var/obj/item/weapon/paper/admin/P = new /obj/item/weapon/paper/admin( null ) //hopefully the null loc won't cause trouble for us
+		faxreply = P
+
+		P.admindatum = src
+		P.origin = replyorigin
+		P.destination = fax
+		P.sender = sender
+
+		P.adminbrowse()
 
 	else if(href_list["jumpto"])
 		if(!check_rights(R_ADMIN))	return

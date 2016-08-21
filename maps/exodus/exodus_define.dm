@@ -18,21 +18,7 @@
 	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive in approximately %ETA%"
 	emergency_shuttle_recall_message = "The emergency shuttle has been recalled."
 
-	holodeck_supported_programs = list(
-		"Empty Court"       = "emptycourt",
-		"Basketball Court"  = "basketball",
-		"Thunderdome Court" = "thunderdomecourt",
-		"Boxing Ring"       = "boxingcourt",
-		"Beach"             = "beach",
-		"Desert"            = "desert",
-		"Space"             = "space",
-		"Picnic Area"       = "picnicarea",
-		"Snow Field"        = "snowfield",
-		"Theatre"           = "theatre",
-		"Meeting Hall"      = "meetinghall",
-		"Courtroom"         = "courtroom"
-	)
-
-	holodeck_restricted_programs = list(
-		"Wildlife Simulation" = "wildlifecarp"
-	)
+/datum/map/exodus/perform_map_generation()
+	new /datum/random_map/automata/cave_system(null,1,1,5,255,255) // Create the mining Z-level.
+	new /datum/random_map/noise/ore(null, 1, 1, 5, 64, 64)         // Create the mining ore distribution map.
+	return 1

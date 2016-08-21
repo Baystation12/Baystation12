@@ -114,7 +114,7 @@
 					prob(1);/obj/item/weapon/packageWrap,\
 					prob(2);/obj/random/bomb_supply,\
 					prob(1);/obj/item/weapon/extinguisher,\
-					prob(1);/obj/item/clothing/gloves/fyellow,\
+					prob(1);/obj/item/clothing/gloves/insulated/cheap,\
 					prob(3);/obj/item/stack/cable_coil/random,\
 					prob(2);/obj/random/toolbox,\
 					prob(2);/obj/item/weapon/storage/belt/utility,\
@@ -548,11 +548,11 @@ obj/random/material //Random materials for building stuff
 					prob(2);/obj/item/clothing/shoes/galoshes,\
 					prob(1);/obj/item/clothing/shoes/magboots,\
 					prob(4);/obj/item/clothing/shoes/laceup,\
-					prob(1);/obj/item/clothing/gloves/yellow,\
-					prob(4);/obj/item/clothing/gloves/black,\
+					prob(1);/obj/item/clothing/gloves/insulated,\
+					prob(4);/obj/item/clothing/gloves/thick,\
 					prob(2);/obj/item/clothing/gloves/latex,\
-					prob(1);/obj/item/clothing/gloves/swat,\
-					prob(1);/obj/item/clothing/gloves/combat,\
+					prob(1);/obj/item/clothing/gloves/thick/swat,\
+					prob(1);/obj/item/clothing/gloves/thick/combat,\
 					prob(5);/obj/item/clothing/gloves/white,\
 					prob(5);/obj/item/clothing/gloves/rainbow,\
 					prob(1);/obj/item/clothing/glasses/sunglasses,\
@@ -619,11 +619,11 @@ obj/random/material //Random materials for building stuff
 					prob(2);/obj/item/clothing/shoes/galoshes,\
 					prob(1);/obj/item/clothing/shoes/magboots,\
 					prob(4);/obj/item/clothing/shoes/laceup,\
-					prob(4);/obj/item/clothing/gloves/black,\
+					prob(4);/obj/item/clothing/gloves/thick,\
 					prob(2);/obj/item/clothing/gloves/latex,\
-					prob(1);/obj/item/clothing/gloves/swat,\
-					prob(1);/obj/item/clothing/gloves/combat,\
-					prob(1);/obj/item/clothing/gloves/yellow,\
+					prob(1);/obj/item/clothing/gloves/thick/swat,\
+					prob(1);/obj/item/clothing/gloves/thick/combat,\
+					prob(1);/obj/item/clothing/gloves/insulated,\
 					prob(1);/obj/item/clothing/glasses/sunglasses,\
 					prob(3);/obj/item/clothing/glasses/meson,\
 					prob(2);/obj/item/clothing/glasses/meson/prescription,\
@@ -712,3 +712,59 @@ obj/random/material //Random materials for building stuff
 					/obj/item/weapon/rig/light,\
 					/obj/item/weapon/rig/unathi,\
 					/obj/item/weapon/rig/unathi/fancy)
+
+/*
+	Selects one spawn point out of a group of points with the same ID and asks it to generate its items
+*/
+var/list/multi_point_spawns
+
+/obj/random_multi
+	name = "random object spawn point"
+	desc = "This item type is used to spawn random objects at round-start. Only one spawn point for a given group id is selected."
+	icon = 'icons/misc/mark.dmi'
+	icon_state = "x3"
+	invisibility = INVISIBILITY_MAXIMUM
+	var/id     // Group id
+	var/weight // Probability weight for this spawn point
+
+/obj/random_multi/initialize()
+	..()
+	weight = max(1, round(weight))
+
+	if(!multi_point_spawns)
+		multi_point_spawns = list()
+	var/list/spawnpoints = multi_point_spawns[id]
+	if(!spawnpoints)
+		spawnpoints = list()
+		multi_point_spawns[id] = spawnpoints
+	spawnpoints[src] = weight
+
+/obj/random_multi/Destroy()
+	var/list/spawnpoints = multi_point_spawns[id]
+	spawnpoints -= src
+	if(!spawnpoints.len)
+		multi_point_spawns -= id
+	. = ..()
+
+/obj/random_multi/proc/generate_items()
+	return
+
+/obj/random_multi/single_item
+	var/item_path  // Item type to spawn
+
+/obj/random_multi/single_item/generate_items()
+	new item_path(loc)
+
+/hook/roundstart/proc/generate_multi_spawn_items()
+	for(var/id in multi_point_spawns)
+		var/list/spawn_points = multi_point_spawns[id]
+		var/obj/random_multi/rm = pickweight(spawn_points)
+		rm.generate_items()
+		for(var/entry in spawn_points)
+			qdel(entry)
+	return 1
+
+/obj/random_multi/single_item/captains_spare_id
+	name = "Multi Point - Captain's Spare"
+	id = "Captain's spare id"
+	item_path = /obj/item/weapon/card/id/captains_spare

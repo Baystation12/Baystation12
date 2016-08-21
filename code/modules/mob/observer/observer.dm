@@ -47,6 +47,12 @@ mob/observer/check_airflow_movable()
 /mob/observer/gib()		//observers can't be gibbed.
 	return
 
+/mob/observer/is_blind()	//Not blind either.
+	return
+
+/mob/observer/is_deaf() 	//Nor deaf.
+	return
+
 /proc/updateallghostimages()
 	for (var/mob/observer/ghost/O in player_list)
 		O.updateghostimages()

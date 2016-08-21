@@ -49,3 +49,26 @@
 
 	usr.Move(below)
 	usr << "<span class='notice'>You move downwards.</span>"
+
+/mob/observer/verb/zup()
+	set name = "Move Up"
+	set category = "IC"
+
+	var/turf/above = GetAbove(src)
+	if(!istype(above))
+		usr << "<span class='notice'>There is nothing of interest in this direction.</span>"
+		return
+
+	usr.Move(above)
+	usr << "<span class='notice'>You move upwards.</span>"
+
+/mob/observer/verb/zdown()
+	set name = "Move Down"
+	set category = "IC"
+
+	var/turf/below = GetBelow(src)
+	if(!istype(below))
+		usr << "<span class='notice'>There is nothing of interest in this direction.</span>"
+		return
+	usr.Move(below)
+	usr << "<span class='notice'>You move downwards.</span>"

@@ -140,5 +140,5 @@ proc/trigger_armed_response_team(var/force = 0)
 /datum/emergency_shuttle_predicate/ert/can_call(var/user)
 	if(world.time >= prevent_until)
 		return TRUE
-	user << "<span class='warning'>An emergency response team has been dispatched. Emergency shuttle requests will be denied until [station_adjusted_time(prevent_until - world.time)].</span>"
+	user << "<span class='warning'>An emergency response team has been dispatched. Emergency shuttle requests will be denied until [duration2stationtime(prevent_until - world.time)].</span>"
 	return FALSE

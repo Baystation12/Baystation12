@@ -33,15 +33,9 @@
 	else
 		loc_temp = environment.temperature
 
-	if(loc_temp < 310.15) // a cold place
-		bodytemperature += adjust_body_temperature(bodytemperature, loc_temp, 1)
-	else // a hot place
-		bodytemperature += adjust_body_temperature(bodytemperature, loc_temp, 1)
-
-	//Account for massive pressure differences
+	bodytemperature += adjust_body_temperature(bodytemperature, loc_temp, 1)
 
 	if(bodytemperature < (T0C + 5)) // start calculating temperature damage etc
-
 		if(bodytemperature <= hurt_temperature)
 			if(bodytemperature <= die_temperature)
 				adjustToxLoss(200)
@@ -300,23 +294,14 @@
 
 		if(Target.Adjacent(src))
 			if(istype(Target, /mob/living/silicon)) // Glomp the silicons
-				if(!Atkcool)
-					a_intent = I_HURT
-					UnarmedAttack(Target)
-					Atkcool = 1
-					spawn(45)
-						Atkcool = 0
+				a_intent = I_HURT
+				UnarmedAttack(Target)
 				AIproc = 0
 				return
 
 			if(Target.client && !Target.lying && prob(60 + powerlevel * 4)) // Try to take down the target first
-				if(!Atkcool)
-					Atkcool = 1
-					spawn(45)
-						Atkcool = 0
-
-					a_intent = I_DISARM
-					UnarmedAttack(Target)
+				a_intent = I_DISARM
+				UnarmedAttack(Target)
 
 			else
 				if(!Atkcool)

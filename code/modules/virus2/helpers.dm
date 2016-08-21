@@ -4,7 +4,7 @@ proc/infection_check(var/mob/living/carbon/M, var/vector = "Airborne")
 		return 0
 
 	var/mob/living/carbon/human/H = M
-	if(istype(H) && H.species.virus_immune)
+	if(istype(H) && H.species.get_virus_immune(H))
 		return 0
 
 	var/protection = M.getarmor(null, "bio")	//gets the full body bio armour value, weighted by body part coverage.
