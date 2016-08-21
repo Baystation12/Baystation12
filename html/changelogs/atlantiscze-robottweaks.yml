@@ -1,0 +1,11 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - tweak: "A rebalance pass of cyborg modules. Some modules have been merged, and tool sets were tweaked."
+  - rscdel: "Drones have lost various advanced materials and tools (some of them were transferred to the engineering module). This corresponds with original intention of drones performing simple maintenance only."
+  - rscadd: "New gripper added - firearm gripper, capable of holding almost any gun. It is primarily designed for energy weapons, and allows you to place them into rechargers, as well as use them as if the weapon was one of your modules. Ballistics can still be used and shot with, but the gripper does not allow for reloading and such actions."
+  - tweak: "If a gripper holds an item, it's sprite will overlay the gripper's icon, allowing you to see this item's sprite. Examining the gripper that holds an item will examine the held item instead. This applies to all grippers."
+  - tweak: "Cyborgs can now interact with rechargers."
+  - tweak: "Examining a cyborg will now show the cyborg's active tools (for grippers this shows the item held in gripper)."

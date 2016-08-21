@@ -556,7 +556,7 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/attack_hand(mob/user as mob)
 
-	if(istype(usr,/mob/living/silicon))
+	if(istype(usr,/mob/living/silicon/ai))
 		return
 
 	if(harvest)
