@@ -63,7 +63,7 @@
 	if(G && G.active)
 		equipment_darkness_modifier += G.darkness_view
 		equipment_vision_flags |= G.vision_flags
-		equipment_prescription = equipment_prescription || G.prescription
+		equipment_prescription += G.prescription
 		if(G.overlay)
 			equipment_overlays |= G.overlay
 		if(G.see_invisible >= 0)
