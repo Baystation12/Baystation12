@@ -18,34 +18,37 @@
 		return
 
 	if(locate(tx,ty,tz))
-		var/cap = generate_image(tx ,ty ,tz ,range, CAPTURE_MODE_PARTIAL, null, 1, 1)
+		var ligths = 0
+		if(alert("Do you want lighting to be included in capture?", "Map Capture", "No", "Yes") == "Yes")
+			ligths = 1
+		var/cap = generate_image(tx ,ty ,tz ,range, CAPTURE_MODE_PARTIAL, null, ligths, 1)
 		var/file_name = "map_capture_x[tx]_y[ty]_z[tz]_r[range].png"
 		usr << "Saved capture in cache as [file_name]."
 		usr << browse_rsc(cap, file_name)
 	else
 		usr << "Target coordinates are incorrect."
 
-/datum/admins/proc/capture_map_capture_next(currentz, currentx, currenty)
+/datum/admins/proc/capture_map_capture_next(currentz, currentx, currenty, ligths)
 	if(locate(currentx, currenty, currentz))
-		var/cap = generate_image(currentx ,currenty ,currentz ,32, CAPTURE_MODE_PARTIAL, null, 1, 1)
+		var/cap = generate_image(currentx ,currenty ,currentz ,32, CAPTURE_MODE_PARTIAL, null, ligths, 1)
 		var/file_name = "map_capture_x[currentx]_y[currenty]_z[currentz]_r32.png"
 		usr << "Saved capture in cache as [file_name]."
 		usr << browse_rsc(cap, file_name)
 		file("map_capture/[file_name]") << cap
 		currentx = currentx + 32
 		spawn (10)
-			.(currentz, currentx, currenty)
+			.(currentz, currentx, currenty, ligths)
 	else
 		currenty = currenty + 32
 		currentx = 1
 		if(locate(currentx, currenty, currentz))
-			var/cap = generate_image(currentx ,currenty ,currentz ,32, CAPTURE_MODE_PARTIAL, null, 1, 1)
+			var/cap = generate_image(currentx ,currenty ,currentz ,32, CAPTURE_MODE_PARTIAL, null, ligths, 1)
 			var/file_name = "map_capture_x[currentx]_y[currenty]_z[currentz]_r32.png"
 			usr << "Saved capture in cache as [file_name]."
 			usr << browse_rsc(cap, file_name)
 			currentx = currentx + 32
 			spawn (10)
-				.(currentz, currentx, currenty)
+				.(currentz, currentx, currenty, ligths)
 		else
 			usr << "End of map, capture is done."
 
@@ -68,6 +71,10 @@
 		usr << "Target z-level is incorrect."
 		return
 
-	switch(alert("Are you sure? (This will cause masive lag!!!)", "Map Capture", "Yes", "No"))
+	var ligths = 0
+	if(alert("Do you want lighting to be included in capture?", "Map Capture", "No", "Yes") == "Yes")
+		ligths = 1
+
+	switch(alert("Are you sure? (This will cause masive lag!!!)", "Map Capture", "No", "Yes"))
 		if("Yes")
-			usr.client.holder.capture_map_capture_next(tz, 1, 1)
+			usr.client.holder.capture_map_capture_next(tz, 1, 1, ligths)
