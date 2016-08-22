@@ -1,7 +1,7 @@
 /obj/effect/map/ship
 	name = "generic ship"
 	desc = "Space faring vessel."
-	icon_state = "sheet-sandstone"
+	icon_state = "ship"
 	var/vessel_mass = 9000 //tonnes, random number
 	var/default_delay = 60
 	var/list/speed = list(0,0)
@@ -32,10 +32,10 @@
 	return !(speed[1] || speed[2])
 
 /obj/effect/map/ship/proc/get_acceleration()
-	return eng_control.get_total_thrust()/vessel_mass
+	return round(eng_control.get_total_thrust()/vessel_mass, 0.1)
 
 /obj/effect/map/ship/proc/get_speed()
-	return round(sqrt(speed[1]*speed[1] + speed[2]*speed[2]))
+	return round(sqrt(speed[1]*speed[1] + speed[2]*speed[2]), 0.1)
 
 /obj/effect/map/ship/proc/get_heading()
 	var/res = 0
@@ -111,5 +111,5 @@
 		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
 		if(newloc)
 			Move(newloc)
-		if(rotate)	
+		if(rotate)
 			rotate(get_heading())

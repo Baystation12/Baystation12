@@ -52,8 +52,8 @@ var/global/list/map_sectors = list()
 
 /obj/effect/map
 	name = "map object"
-	icon = 'icons/obj/items.dmi'
-	icon_state = "sheet-plasteel"
+	icon = 'icons/obj/overmap.dmi'
+	icon_state = "object"
 	var/map_z = 0
 	var/area/shuttle/shuttle_landing
 	var/always_known = 1
@@ -67,8 +67,8 @@ var/global/list/map_sectors = list()
 		icon_state = data.icon_state
 	if(data.desc)
 		desc = data.desc
-	var/new_x = data.mapx ? data.mapx : rand(OVERMAP_EDGE, world.maxx - OVERMAP_EDGE)
-	var/new_y = data.mapy ? data.mapy : rand(OVERMAP_EDGE, world.maxy - OVERMAP_EDGE)
+	var/new_x = data.mapx ? data.mapx : rand(OVERMAP_EDGE, OVERMAP_SIZE - OVERMAP_EDGE)
+	var/new_y = data.mapy ? data.mapy : rand(OVERMAP_EDGE, OVERMAP_SIZE - OVERMAP_EDGE)
 	loc = locate(new_x, new_y, OVERMAP_ZLEVEL)
 
 	if(data.landing_area)
@@ -93,6 +93,7 @@ var/global/list/map_sectors = list()
 /obj/effect/map/sector
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
+	icon_state = "sector"
 	anchored = 1
 
 //Space stragglers go here
