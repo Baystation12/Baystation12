@@ -26,6 +26,9 @@
 /obj/item/clothing/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
 
+	if(slot == slot_l_hand_str || slot == slot_r_hand_str)
+		return ret
+
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
 		if(blood_DNA)
@@ -406,6 +409,14 @@ BLIND     // can't see anything
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_wear_mask()
+
+/obj/item/clothing/mask/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(item_state_slots && item_state_slots[slot])
+		ret.icon_state = item_state_slots[slot]
+	else
+		ret.icon_state = icon_state
+	return ret
 
 /obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 	return

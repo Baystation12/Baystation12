@@ -72,7 +72,10 @@
 	feedback_add_details("admin_verb","JC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_and_message_admins("jumped to coordinates [tx], [ty], [tz]")
 
-/client/proc/jumptokey()
+/proc/sorted_client_keys()
+	return sortKey(clients.Copy())
+
+/client/proc/jumptokey(client/C in sorted_client_keys())
 	set category = "Admin"
 	set name = "Jump to Key"
 
@@ -80,14 +83,11 @@
 		return
 
 	if(config.allow_admin_jump)
-		var/list/keys = list()
-		for(var/mob/M in player_list)
-			keys += M.client
-		var/selection = input("Please, select a player!", "Admin Jumping", null, null) as null|anything in sortKey(keys)
-		if(!selection)
-			src << "No keys found."
+		if(!istype(C))
+			usr << "[C] is not a client, somehow."
 			return
-		var/mob/M = selection:mob
+
+		var/mob/M = C.mob
 		log_and_message_admins("jumped to [key_name(M)]")
 		mob.jumpTo(get_turf(M))
 		feedback_add_details("admin_verb","JK") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

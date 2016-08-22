@@ -702,7 +702,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			mob_state = "[mob_state]_l"
 		if(slot == 	slot_r_hand_str || slot == slot_r_ear_str)
 			mob_state = "[mob_state]_r"
-	else if(sprite_sheets && sprite_sheets[bodytype])
+	else if(sprite_sheets && sprite_sheets[bodytype] && !(slot == slot_r_hand_str || slot == slot_l_hand_str))
 		if(slot == slot_l_ear)
 			mob_state = "[mob_state]_l"
 		if(slot == slot_r_ear)
