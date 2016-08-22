@@ -18,7 +18,7 @@
 		return
 
 	if(locate(tx,ty,tz))
-		var ligths = 0
+		var/ligths = 0
 		if(alert("Do you want lighting to be included in capture?", "Map Capture", "No", "Yes") == "Yes")
 			ligths = 1
 		var/cap = generate_image(tx ,ty ,tz ,range, CAPTURE_MODE_PARTIAL, null, ligths, 1)
@@ -34,7 +34,6 @@
 		var/file_name = "map_capture_x[currentx]_y[currenty]_z[currentz]_r32.png"
 		usr << "Saved capture in cache as [file_name]."
 		usr << browse_rsc(cap, file_name)
-		file("map_capture/[file_name]") << cap
 		currentx = currentx + 32
 		spawn (10)
 			.(currentz, currentx, currenty, ligths)
@@ -71,7 +70,7 @@
 		usr << "Target z-level is incorrect."
 		return
 
-	var ligths = 0
+	var/ligths = 0
 	if(alert("Do you want lighting to be included in capture?", "Map Capture", "No", "Yes") == "Yes")
 		ligths = 1
 
