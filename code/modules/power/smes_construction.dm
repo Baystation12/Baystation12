@@ -64,7 +64,7 @@
 
 // SMES itself
 /obj/machinery/power/smes/buildable
-	var/max_coils = 6 			//30M capacity, 1.5MW input/output when fully upgraded /w default coils
+	var/max_coils = 6 			// 250 kWh capacity, 1.5MW input/output when fully upgraded /w default coils
 	var/cur_coils = 1 			// Current amount of installed coils
 	var/safeties_enabled = 1 	// If 0 modifications can be done without discharging the SMES, at risk of critical failure.
 	var/failing = 0 			// If 1 critical failure has occured and SMES explosion is imminent.

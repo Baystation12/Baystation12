@@ -1,0 +1,10 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - tweak: "Power cell no longer use magical charge units. Instead they are rated in WattHours. For example, a cell with rating of 1000 will be capable of providing 1000 watts for one hour. (or 2000 watts for half a hour, etc.)"
+  - tweak: "In general this means that a power cell with rating of 1000 will hold MUCH more energy than it held before. To balance this out, power cell capacities have been reduced considerably. When these two changes add up the cells last for approximately same time as they used to."
+  - tweak: "As part of this change, higher grade power cells have became a bit more rare. Research can still fabricate them in bulk, but they are much rarer from random spawns, and no longer available from vending machines. Vending machines provide standard cells instead. EngiVend can be hacked to provide few high capacity ones."
+  - tweak: "Vending machines no longer shoot objects at people when malfunctioning. They merely shudder and dump the item on the ground. This should make the random event a little bit less annoying."
+  - tweak: "Space heater's default temperature setting is now 20C (changed from 50C), which is the default station temperature. It can still be changed via the UI when the panel is open."

@@ -17,7 +17,7 @@
 
 	user << "Connected to powernet: [powernet]"
 	user << "Available power: [num2text(powernet.avail, 20)] W"
-	user << "Load: [num2text(powernet.viewload, 20)] W ([powernet.get_percent_load()] %)"
+	user << "Load: [num2text(powernet.viewload, 20)] W"
 	user << "Has alert: [powernet.problem ? "YES" : "NO"]"
 	user << "Cables: [powernet.cables.len]"
 	user << "Nodes: [powernet.nodes.len]"
@@ -35,7 +35,6 @@
 /obj/machinery/power/debug_items/infinite_generator/show_info(var/mob/user)
 	..()
 	user << "Generator is providing [num2text(power_generation_rate, 20)] W"
-
 
 
 // A cable powersink, without the explosion/network alarms normal powersink causes.
@@ -61,5 +60,6 @@
 	active_power_usage = 0
 
 /obj/machinery/power/debug_items/infinite_apc_powersink/show_info(var/mob/user)
+	..()
 	user << "Dummy load is using [num2text(active_power_usage, 20)] W"
 	user << "Powered: [powered() ? "YES" : "NO"]"
