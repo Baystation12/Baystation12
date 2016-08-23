@@ -178,6 +178,9 @@
 		if(!affected)
 			return 0
 
+		if(!(affected && !(affected.robotic >= ORGAN_ROBOT)))
+			return 0
+
 		var/list/removable_organs = list()
 		for(var/obj/item/organ/internal/I in affected.implants)
 			if(I.status & ORGAN_CUT_AWAY)
@@ -209,6 +212,11 @@
 			O.dropInto(target.loc)
 			target.op_stage.current_organ = null
 			playsound(target.loc, 'sound/effects/squelch1.ogg', 50, 1)
+
+		// Just in case somehow the organ we're extracting from an organic is an MMI
+		if(istype(O, /obj/item/organ/internal/mmi_holder))
+			var/obj/item/organ/internal/mmi_holder/brain = O
+			brain.transfer_and_delete()
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
