@@ -42,8 +42,8 @@ proc/toggle_move_stars(zlevel, direction)
 	if(!direction)
 		gen_dir = null
 
-	if (moving_levels["zlevel"] != gen_dir)
-		moving_levels["zlevel"] = gen_dir
+	if (moving_levels["[zlevel]"] != gen_dir)
+		moving_levels["[zlevel]"] = gen_dir
 		for(var/x = 1 to world.maxx)
 			for(var/y = 1 to world.maxy)
 				var/turf/space/T = locate(x,y,zlevel)

@@ -16,11 +16,11 @@
 
 /obj/effect/map/ship/initialize()
 	for(var/obj/machinery/computer/engines/E in machines)
-		if (E.z == map_z)
+		if (E.z in map_z)
 			eng_control = E
 			break
 	for(var/obj/machinery/computer/helm/H in machines)
-		if (H.z == map_z)
+		if (H.z in map_z)
 			nav_control = H
 			break
 	processing_objects.Add(src)
@@ -54,10 +54,11 @@
 /obj/effect/map/ship/proc/adjust_speed(n_x, n_y)
 	speed[1] = Clamp(speed[1] + n_x, -default_delay, default_delay)
 	speed[2] = Clamp(speed[2] + n_y, -default_delay, default_delay)
-	if(is_still())
-		toggle_move_stars(map_z)
-	else
-		toggle_move_stars(map_z, fore_dir)
+	for(var/zz in map_z)
+		if(is_still())
+			toggle_move_stars(zz)
+		else
+			toggle_move_stars(zz, fore_dir)
 
 /obj/effect/map/ship/proc/can_burn()
 	if (!eng_control)

@@ -33,6 +33,9 @@
 	name = "\improper Cargo Hold"
 	icon_state = "quartstorage"
 
+/area/ship/scrap/cargo/lower
+	name = "\improper Lower Cargo Hold"
+
 /area/ship/scrap/dock
 	name = "\improper Docking Bay"
 	icon_state = "entry"
@@ -68,6 +71,9 @@
 /area/ship/scrap/maintenance/engine
 	name = "\improper Engine Compartments"
 	icon_state = "engine"
+
+/area/ship/scrap/maintenance/engine/lower
+	name = "\improper Lower Engine Compartments"
 
 /area/ship/scrap/command
 	name = "\improper Command Deck"
