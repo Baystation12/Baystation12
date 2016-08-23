@@ -38,9 +38,13 @@
 	..()
 	do_backup()
 	robotize()
-
-/obj/item/organ/internal/stack/proc/backup_inviable()
-	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
+/**
+ *  Determine if a backup can be used to relive someone
+ *
+ *  target - mob which the backup is supposed to be loaded to
+ */
+/obj/item/organ/internal/stack/proc/backup_inviable(var/mob/target = owner)
+	return (!istype(backup) || (target && backup == target.mind) || (backup.current && backup.current.stat != DEAD))
 
 /obj/item/organ/internal/stack/replaced()
 	if(!..()) return 0
