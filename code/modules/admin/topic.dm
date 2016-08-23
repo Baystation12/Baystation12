@@ -1184,6 +1184,18 @@
 		sleep(2)
 		C.jumptomob(M)
 
+	else if(href_list["adminplayerobservefollow"])
+		if(!check_rights(R_MENTOR|R_MOD|R_ADMIN))
+			return
+
+		var/mob/M = locate(href_list["adminplayerobservefollow"])
+
+		var/client/C = usr.client
+		if(!isobserver(usr))	C.admin_ghost()
+		var/mob/observer/ghost/G = C.mob
+		sleep(2)
+		G.ManualFollow(M)
+
 	else if(href_list["check_antagonist"])
 		check_antagonists()
 
