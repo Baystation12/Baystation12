@@ -1,0 +1,335 @@
+"aa" = (/turf/space,/area/ship_battle/team_one)
+"ab" = (/turf/space,/area/ship_battle/team_one/port)
+"ac" = (/obj/machinery/space_battle/missile_sensor/dish{dir = 1; pixel_y = -7; sensor_id = "2south1radar"},/turf/space,/area/ship_battle/team_one/port)
+"ad" = (/turf/simulated/wall/r_wall,/area/ship_battle/team_one/port)
+"ae" = (/obj/structure/bed/chair/office/dark{dir = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"af" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"ag" = (/obj/structure/grille,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/machinery/door/blast/regular{density = 0; dir = 2; icon_state = "pdoor0"; id = "3kratosdeck4window"; name = "Security Shutters"; opacity = 0},/obj/machinery/door/firedoor/battle,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (WEST)"; icon_state = "phoronrwindow"; dir = 8},/obj/structure/window/phoronreinforced,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (NORTH)"; icon_state = "phoronrwindow"; dir = 1},/turf/simulated/floor/plating,/area/ship_battle/team_one/port)
+"ah" = (/obj/machinery/door/firedoor/battle,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"ai" = (/obj/machinery/space_battle/warp_pad{id_tag = "1squadtele1"},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aj" = (/obj/machinery/oxygen_pump{active_power_usage = 121; pixel_y = 27},/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"ak" = (/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/machinery/space_battle/warp_pad{id_tag = "1squadtele2"},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"al" = (/obj/machinery/power/terminal{dir = 4},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"am" = (/obj/machinery/power/smes/buildable/battle,/obj/machinery/light{dir = 1},/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"an" = (/obj/machinery/atmospherics/pipe/tank/oxygen,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"ao" = (/obj/structure/shuttle/engine/propulsion/burst{dir = 8},/turf/simulated/floor/plating,/area/ship_battle/team_one/port)
+"ap" = (/obj/structure/shuttle/engine/heater{dir = 8},/turf/simulated/wall/r_wall,/area/ship_battle/team_one/port)
+"aq" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/plating,/area/ship_battle/team_one/port)
+"ar" = (/obj/structure/window/phoronreinforced,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"as" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"at" = (/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/structure/window/phoronreinforced,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"au" = (/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 6},/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"av" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aw" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 4},/obj/machinery/meter,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"ax" = (/obj/structure/missile_rack,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"ay" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/reagent_dispensers/fueltank,/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/ship_battle/team_one/port)
+"az" = (/obj/machinery/space_battle/missile_sensor/hub,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aA" = (/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/machinery/space_battle/missile_sensor/tracking,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aB" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aC" = (/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aD" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aE" = (/obj/structure/missile_rack,/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aF" = (/obj/machinery/door/airlock/external,/obj/machinery/door/firedoor/battle,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aG" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aH" = (/obj/machinery/door/airlock/external,/obj/machinery/door/firedoor/battle,/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aI" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aJ" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aK" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aL" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (NORTHWEST)"; icon_state = "intact"; dir = 9},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aM" = (/turf/simulated/floor/plating,/area/ship_battle/team_one/port)
+"aN" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/reagent_dispensers/fueltank,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/ship_battle/team_one/port)
+"aO" = (/obj/structure/table/rack,/obj/item/clothing/suit/space/battle,/obj/item/clothing/head/helmet/space/battle,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aP" = (/obj/structure/window/reinforced{dir = 4},/obj/machinery/space_battle/missile_sensor/guidance,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aQ" = (/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aR" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aS" = (/obj/structure/missile_rack,/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aT" = (/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/wood,/area/ship_battle/team_one/port)
+"aU" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/wood,/area/ship_battle/team_one/port)
+"aV" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/wood,/area/ship_battle/team_one/port)
+"aW" = (/obj/structure/missile_rack,/obj/machinery/alarm/battle{dir = 8; pixel_x = 30},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"aX" = (/obj/structure/table/woodentable,/obj/item/weapon/book/manual/frontier,/obj/item/device/flashlight/flare,/turf/simulated/floor/wood,/area/ship_battle/team_one/port)
+"aY" = (/obj/structure/bed,/obj/effect/landmark/start{name = "Team Four Sailor"},/obj/machinery/power/apc/battle{name = "south bump"; pixel_y = -27},/obj/structure/cable,/turf/simulated/floor/wood,/area/ship_battle/team_one/port)
+"aZ" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"; name = "Clothing Storage"},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/wood,/area/ship_battle/team_one/port)
+"ba" = (/obj/machinery/light,/obj/structure/bed/chair/office/dark{dir = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"bb" = (/obj/machinery/space_battle/missile_computer{id_tag = "3kratosdeck4"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/port)
+"bc" = (/turf/space,/area/ship_battle/team_one/central_two)
+"bd" = (/obj/machinery/space_battle/missile_sensor/dish{dir = 1; pixel_y = -7; sensor_id = "4north1guidance"},/turf/space,/area/ship_battle/team_one/central_two)
+"be" = (/turf/simulated/wall/r_wall,/area/ship_battle/team_one/central_two)
+"bf" = (/turf/simulated/floor/plating,/area/ship_battle/team_one/central_two)
+"bg" = (/obj/structure/grille,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (NORTH)"; icon_state = "phoronrwindow"; dir = 1},/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (WEST)"; icon_state = "phoronrwindow"; dir = 8},/turf/simulated/floor/plating,/area/ship_battle/team_one/central_two)
+"bh" = (/obj/structure/grille,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (NORTH)"; icon_state = "phoronrwindow"; dir = 1},/obj/structure/window/phoronreinforced,/turf/simulated/floor/plating,/area/ship_battle/team_one/central_two)
+"bi" = (/obj/structure/grille,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (NORTH)"; icon_state = "phoronrwindow"; dir = 1},/turf/simulated/floor/plating,/area/ship_battle/team_one/central_two)
+"bj" = (/obj/machinery/space_battle/missile_sensor/dish{id_tag = null; pixel_y = 7; sensor_id = "1coresouthradar1"},/turf/space,/area/ship_battle/team_one/port)
+"bk" = (/obj/structure/grille,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/machinery/door/blast/regular{density = 0; dir = 2; icon_state = "pdoor0"; id = "3kratosdeck4window"; name = "Security Shutters"; opacity = 0},/obj/machinery/door/firedoor/battle,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (WEST)"; icon_state = "phoronrwindow"; dir = 8},/obj/structure/window/phoronreinforced,/turf/simulated/floor/plating,/area/ship_battle/team_one/central_two)
+"bl" = (/obj/machinery/space_battle/missile_computer{id_tag = "3kratosdeck4"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_two)
+"bm" = (/obj/structure/grille,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (WEST)"; icon_state = "phoronrwindow"; dir = 8},/obj/machinery/door/blast/regular{density = 0; dir = 2; icon_state = "pdoor0"; id = "3kratosdeck4window"; name = "Security Shutters"; opacity = 0},/obj/machinery/door/firedoor/battle,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/structure/window/phoronreinforced,/turf/simulated/floor/plating,/area/ship_battle/team_one/central_two)
+"bn" = (/obj/machinery/space_battle/deck_gun{dir = 1; id_tag = "3kratosdeck4"},/turf/simulated/wall/r_wall,/area/ship_battle/team_one/central_two)
+"bo" = (/obj/structure/table/standard,/obj/machinery/oxygen_pump,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_two)
+"bp" = (/obj/item/weapon/stool,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_two)
+"bq" = (/obj/structure/table/standard,/obj/machinery/button/remote/blast_door{id = "3kratosdeck4window"; name = "Window Control"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_two)
+"br" = (/obj/structure/shuttle/engine/propulsion/burst{dir = 8},/turf/simulated/floor/plating,/area/ship_battle/team_one/central_two)
+"bs" = (/obj/structure/shuttle/engine/heater{dir = 8},/turf/simulated/floor/plating,/area/ship_battle/team_one/central_two)
+"bt" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/plating,/area/ship_battle/team_one/central_two)
+"bu" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"; name = "Clothing Storage"},/turf/simulated/floor/wood,/area/ship_battle/team_one/central_two)
+"bv" = (/obj/structure/window/reinforced{dir = 4},/obj/machinery/power/apc/battle{dir = 1; name = "north bump"; pixel_y = 27},/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/turf/simulated/floor/wood,/area/ship_battle/team_one/central_two)
+"bw" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_two)
+"bx" = (/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_two)
+"by" = (/obj/machinery/missile/magazine/heavy,/obj/structure/table/rack,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_two)
+"bz" = (/obj/structure/table/rack,/obj/item/weapon/storage/firstaid/combat,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_two)
+"bA" = (/turf/simulated/floor/tiled,/area/ship_battle/team_one/central_two)
+"bB" = (/obj/structure/table/rack,/obj/machinery/missile/magazine/penetrative,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_two)
+"bC" = (/obj/machinery/missile/magazine/light,/obj/structure/table/rack,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_two)
+"bD" = (/obj/structure/shuttle/engine/heater{dir = 8},/turf/simulated/wall/r_wall,/area/ship_battle/team_one/central_two)
+"bE" = (/obj/structure/bed,/obj/effect/landmark/start{name = "Team Four Sailor"},/obj/team_start,/obj/machinery/light{dir = 8},/turf/simulated/floor/wood,/area/ship_battle/team_one/central_two)
+"bF" = (/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/wood,/area/ship_battle/team_one/central_two)
+"bG" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_two)
+"bH" = (/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/tiled,/area/ship_battle/team_one/central_two)
+"bI" = (/obj/machinery/missile/magazine/penetrative,/obj/structure/table/rack,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_two)
+"bJ" = (/obj/structure/table/woodentable,/obj/item/weapon/book/manual/frontier,/obj/item/device/flashlight/flare,/turf/simulated/floor/wood,/area/ship_battle/team_one/central_two)
+"bK" = (/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/wood,/area/ship_battle/team_one/central_two)
+"bL" = (/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 6},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/tiled,/area/ship_battle/team_one/central_two)
+"bM" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/machinery/space_battle/missile_sensor/thermal,/turf/simulated/floor/tiled,/area/ship_battle/team_one/central_two)
+"bN" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/obj/machinery/space_battle/missile_sensor/tracking,/turf/simulated/floor/tiled,/area/ship_battle/team_one/central_two)
+"bO" = (/obj/machinery/space_battle/missile_sensor/hub,/turf/simulated/floor/tiled,/area/ship_battle/team_one/central_two)
+"bP" = (/obj/machinery/space_battle/missile_sensor/tracking,/turf/simulated/floor/tiled,/area/ship_battle/team_one/central_two)
+"bQ" = (/obj/machinery/space_battle/missile_sensor/thermal,/turf/simulated/floor/tiled,/area/ship_battle/team_one/central_two)
+"bR" = (/obj/machinery/missile/magazine/heavy,/obj/structure/table/rack,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_two)
+"bS" = (/turf/space,/area/ship_battle/team_one/central_three)
+"bT" = (/obj/structure/shuttle/engine/propulsion/burst{dir = 8},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/ship_battle/team_one/central_three)
+"bU" = (/obj/structure/shuttle/engine/heater{dir = 8},/turf/simulated/wall/r_wall,/area/ship_battle/team_one/central_three)
+"bV" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/reagent_dispensers/fueltank,/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/ship_battle/team_one/central_three)
+"bW" = (/obj/structure/window/reinforced{dir = 1; pixel_y = 3},/obj/machinery/atmospherics/pipe/tank/oxygen,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"bX" = (/obj/structure/window/reinforced{dir = 1; pixel_y = 3},/obj/machinery/atmospherics/pipe/tank/oxygen,/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"bY" = (/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"bZ" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/tiled,/area/ship_battle/team_one/central_three)
+"ca" = (/obj/machinery/space_battle/missile_sensor/scanning,/turf/simulated/floor/tiled,/area/ship_battle/team_one/central_three)
+"cb" = (/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (WEST)"; icon_state = "phoronrwindow"; dir = 8},/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (NORTH)"; icon_state = "phoronrwindow"; dir = 1},/obj/structure/table/rack,/obj/item/weapon/tank/jetpack/carbondioxide,/obj/item/weapon/tank/jetpack/carbondioxide,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cc" = (/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (NORTH)"; icon_state = "phoronrwindow"; dir = 1},/obj/machinery/space_battle/warp_pad{id_tag = "1squadtele1"},/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cd" = (/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (NORTH)"; icon_state = "phoronrwindow"; dir = 1},/obj/machinery/space_battle/warp_pad{id_tag = "1squadtele2"},/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"ce" = (/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (NORTH)"; icon_state = "phoronrwindow"; dir = 1},/obj/structure/table/rack,/obj/item/clothing/shoes/magboots,/obj/item/clothing/shoes/magboots,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cf" = (/turf/simulated/floor/tiled,/area/ship_battle/team_one/central_three)
+"cg" = (/obj/structure/closet/secure_closet/freezer/fridge,/obj/machinery/alarm/battle{dir = 8; pixel_x = 30},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"ch" = (/turf/simulated/wall/r_wall,/area/ship_battle/team_one/central_three)
+"ci" = (/obj/machinery/door/airlock/external,/obj/machinery/door/firedoor/battle,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cj" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"ck" = (/obj/machinery/door/airlock/external,/obj/machinery/door/firedoor/battle,/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cl" = (/obj/machinery/atmospherics/pipe/manifold/visible,/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cm" = (/obj/machinery/atmospherics/pipe/manifold/visible,/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cn" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"co" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 4},/obj/machinery/meter,/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/tiled,/area/ship_battle/team_one/central_three)
+"cp" = (/obj/machinery/space_battle/ship_core,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/tiled,/area/ship_battle/team_one/central_three)
+"cq" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cr" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cs" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/tiled,/area/ship_battle/team_one/central_three)
+"ct" = (/obj/machinery/power/apc/battle{dir = 4; name = "east bump"; pixel_x = 27; pixel_y = 0},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cu" = (/obj/structure/shuttle/engine/propulsion/burst{dir = 8},/obj/structure/window/reinforced{dir = 1; pixel_y = 3},/turf/simulated/floor/plating,/area/ship_battle/team_one/central_three)
+"cv" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/reagent_dispensers/fueltank,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/ship_battle/team_one/central_three)
+"cw" = (/obj/machinery/power/smes/buildable/battle,/obj/structure/cable,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cx" = (/obj/machinery/power/smes/buildable/battle,/obj/structure/window/reinforced{dir = 4},/obj/structure/cable,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cy" = (/obj/structure/table/rack,/obj/item/clothing/suit/space/battle,/obj/item/clothing/head/helmet/space/battle,/obj/structure/window/phoronreinforced,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (WEST)"; icon_state = "phoronrwindow"; dir = 8},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cz" = (/obj/structure/table/rack,/obj/item/clothing/suit/space/battle,/obj/item/clothing/head/helmet/space/battle,/obj/structure/window/phoronreinforced,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cA" = (/obj/structure/window/phoronreinforced,/obj/structure/closet{icon_closed = "toolcloset"; icon_opened = "toolclosetopen"; icon_state = "toolcloset"},/obj/item/weapon/module/power_control,/obj/item/device/multitool,/obj/item/weapon/cell/high,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cB" = (/obj/structure/closet{icon_closed = "toolcloset"; icon_opened = "toolclosetopen"; icon_state = "toolcloset"},/obj/item/stack/material/steel{amount = 50},/obj/item/stack/material/plasteel{amount = 50},/obj/structure/window/phoronreinforced,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/item/weapon/screwdriver,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central_three)
+"cC" = (/turf/space,/area/ship_battle/team_one/central)
+"cD" = (/turf/simulated/wall/r_wall,/area/ship_battle/team_one/central)
+"cE" = (/obj/structure/window/reinforced{dir = 1; pixel_y = 3},/obj/structure/table/woodentable,/obj/item/weapon/book/manual/frontier,/obj/item/device/flashlight/flare,/obj/machinery/power/terminal{dir = 1},/turf/simulated/floor/wood,/area/ship_battle/team_one/central)
+"cF" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1; pixel_y = 3},/obj/machinery/power/terminal{dir = 1},/turf/simulated/floor/wood,/area/ship_battle/team_one/central)
+"cG" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central)
+"cH" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 5; icon_state = "intact"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/tiled,/area/ship_battle/team_one/central)
+"cI" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/machinery/space_battle/missile_sensor/thermal,/turf/simulated/floor/tiled,/area/ship_battle/team_one/central)
+"cJ" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/obj/machinery/space_battle/missile_sensor/tracking,/turf/simulated/floor/tiled,/area/ship_battle/team_one/central)
+"cK" = (/obj/machinery/space_battle/missile_sensor/hub,/turf/simulated/floor/tiled,/area/ship_battle/team_one/central)
+"cL" = (/obj/machinery/space_battle/missile_sensor/tracking,/turf/simulated/floor/tiled,/area/ship_battle/team_one/central)
+"cM" = (/obj/machinery/space_battle/missile_sensor/thermal,/turf/simulated/floor/tiled,/area/ship_battle/team_one/central)
+"cN" = (/turf/simulated/floor/tiled,/area/ship_battle/team_one/central)
+"cO" = (/obj/machinery/missile/magazine/heavy,/obj/structure/table/rack,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central)
+"cP" = (/obj/structure/shuttle/engine/propulsion/burst{dir = 8},/turf/simulated/floor/plating,/area/ship_battle/team_one/central)
+"cQ" = (/obj/structure/shuttle/engine/heater{dir = 8},/turf/simulated/wall/r_wall,/area/ship_battle/team_one/central)
+"cR" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/plating,/area/ship_battle/team_one/central)
+"cS" = (/obj/structure/bed,/obj/effect/landmark/start{name = "Team Four Sailor"},/obj/machinery/light{dir = 8},/turf/simulated/floor/wood,/area/ship_battle/team_one/central)
+"cT" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/wood,/area/ship_battle/team_one/central)
+"cU" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central)
+"cV" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/tiled,/area/ship_battle/team_one/central)
+"cW" = (/obj/machinery/missile/magazine/penetrative,/obj/structure/table/rack,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central)
+"cX" = (/obj/structure/shuttle/engine/heater{dir = 8},/turf/simulated/floor/plating,/area/ship_battle/team_one/central)
+"cY" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/reagent_dispensers/fueltank,/turf/simulated/wall/r_wall,/area/ship_battle/team_one/central)
+"cZ" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"; name = "Clothing Storage"},/turf/simulated/floor/wood,/area/ship_battle/team_one/central)
+"da" = (/obj/structure/window/reinforced{dir = 4},/obj/machinery/power/apc/battle{name = "south bump"; pixel_y = -27},/obj/structure/cable,/turf/simulated/floor/wood,/area/ship_battle/team_one/central)
+"db" = (/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central)
+"dc" = (/obj/machinery/missile/magazine/heavy,/obj/structure/table/rack,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central)
+"dd" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/silenced,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central)
+"de" = (/obj/structure/table/rack,/obj/machinery/missile/magazine/penetrative,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central)
+"df" = (/obj/machinery/missile/magazine/light,/obj/structure/table/rack,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central)
+"dg" = (/turf/simulated/floor/plating,/area/ship_battle/team_one/central)
+"dh" = (/obj/structure/table/standard,/obj/machinery/oxygen_pump,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central)
+"di" = (/obj/item/weapon/stool,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central)
+"dj" = (/obj/structure/table/standard,/obj/machinery/button/remote/blast_door{id = "3kratosdeck4window"; name = "Window Control"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central)
+"dk" = (/obj/missile_start{name = "team one"},/turf/space,/area/ship_battle/team_one)
+"dl" = (/obj/machinery/space_battle/deck_gun{id_tag = "3kratosdeck4"},/turf/simulated/wall/r_wall,/area/ship_battle/team_one/central)
+"dm" = (/obj/structure/grille,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (NORTH)"; icon_state = "phoronrwindow"; dir = 1},/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/machinery/door/blast/regular{density = 0; dir = 2; icon_state = "pdoor0"; id = "3kratosdeck4window"; name = "Security Shutters"; opacity = 0},/obj/machinery/door/firedoor/battle,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (WEST)"; icon_state = "phoronrwindow"; dir = 8},/turf/simulated/floor/plating,/area/ship_battle/team_one/central)
+"dn" = (/obj/machinery/space_battle/missile_computer{id_tag = "3kratosdeck4"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/central)
+"do" = (/obj/structure/grille,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (NORTH)"; icon_state = "phoronrwindow"; dir = 1},/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (WEST)"; icon_state = "phoronrwindow"; dir = 8},/obj/machinery/door/blast/regular{density = 0; dir = 2; icon_state = "pdoor0"; id = "3kratosdeck4window"; name = "Security Shutters"; opacity = 0},/obj/machinery/door/firedoor/battle,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/turf/simulated/floor/plating,/area/ship_battle/team_one/central)
+"dp" = (/obj/structure/grille,/obj/structure/window/phoronreinforced,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (WEST)"; icon_state = "phoronrwindow"; dir = 8},/obj/machinery/door/blast/regular{density = 0; dir = 2; icon_state = "pdoor0"; id = "3kratosdeck4window"; name = "Security Shutters"; opacity = 0},/obj/machinery/door/firedoor/battle,/turf/simulated/floor/plating,/area/ship_battle/team_one/central)
+"dq" = (/obj/structure/grille,/obj/structure/window/phoronreinforced,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (NORTH)"; icon_state = "phoronrwindow"; dir = 1},/obj/machinery/door/blast/regular{density = 0; dir = 2; icon_state = "pdoor0"; id = "3kratosdeck4window"; name = "Security Shutters"; opacity = 0},/obj/machinery/door/firedoor/battle,/turf/simulated/floor/plating,/area/ship_battle/team_one/central)
+"dr" = (/obj/structure/grille,/obj/structure/window/phoronreinforced,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/machinery/door/blast/regular{density = 0; dir = 2; icon_state = "pdoor0"; id = "3kratosdeck4window"; name = "Security Shutters"; opacity = 0},/obj/machinery/door/firedoor/battle,/turf/simulated/floor/plating,/area/ship_battle/team_one/central)
+"ds" = (/obj/machinery/space_battle/missile_sensor/dish{pixel_y = 7; sensor_id = "3unotracking"},/turf/space,/area/ship_battle/team_one/central)
+"dt" = (/turf/space,/area/ship_battle/team_one/starboard)
+"du" = (/obj/machinery/space_battle/missile_sensor/dish{dir = 1; pixel_y = -7; sensor_id = "2south1radar"},/turf/space,/area/ship_battle/team_one/starboard)
+"dv" = (/turf/simulated/wall/r_wall,/area/ship_battle/team_one/starboard)
+"dw" = (/obj/structure/bed/chair/office/dark{dir = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dx" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dy" = (/obj/structure/grille,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/machinery/door/blast/regular{density = 0; dir = 2; icon_state = "pdoor0"; id = "3kratosdeck4window"; name = "Security Shutters"; opacity = 0},/obj/machinery/door/firedoor/battle,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (WEST)"; icon_state = "phoronrwindow"; dir = 8},/obj/structure/window/phoronreinforced,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (NORTH)"; icon_state = "phoronrwindow"; dir = 1},/turf/simulated/floor/plating,/area/ship_battle/team_one/starboard)
+"dz" = (/obj/machinery/door/firedoor/battle,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dA" = (/obj/machinery/space_battle/warp_pad{id_tag = "1squadtele1"},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dB" = (/obj/machinery/oxygen_pump{active_power_usage = 121; pixel_y = 27},/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dC" = (/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/machinery/space_battle/warp_pad{id_tag = "1squadtele2"},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dD" = (/obj/machinery/power/terminal{dir = 4},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dE" = (/obj/machinery/power/smes/buildable/battle,/obj/machinery/light{dir = 1},/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dF" = (/obj/machinery/atmospherics/pipe/tank/oxygen,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dG" = (/obj/structure/shuttle/engine/propulsion/burst{dir = 8},/turf/simulated/floor/plating,/area/ship_battle/team_one/starboard)
+"dH" = (/obj/structure/shuttle/engine/heater{dir = 8},/turf/simulated/wall/r_wall,/area/ship_battle/team_one/starboard)
+"dI" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/plating,/area/ship_battle/team_one/starboard)
+"dJ" = (/obj/structure/window/phoronreinforced,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dK" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dL" = (/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/structure/window/phoronreinforced,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dM" = (/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 6},/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dN" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dO" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 4},/obj/machinery/meter,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dP" = (/obj/structure/missile_rack,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dQ" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/reagent_dispensers/fueltank,/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/ship_battle/team_one/starboard)
+"dR" = (/obj/machinery/space_battle/missile_sensor/hub,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dS" = (/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/machinery/space_battle/missile_sensor/tracking,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dT" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dU" = (/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dV" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dW" = (/obj/structure/missile_rack,/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dX" = (/obj/machinery/door/airlock/external,/obj/machinery/door/firedoor/battle,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dY" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"dZ" = (/obj/machinery/door/airlock/external,/obj/machinery/door/firedoor/battle,/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"ea" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"eb" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"ec" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"ed" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (NORTHWEST)"; icon_state = "intact"; dir = 9},/obj/machinery/conveyor_switch/oneway{id = "1squadsouthconveyor"},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"ee" = (/obj/machinery/conveyor{dir = 4; id = "1squadsouthconveyor"},/turf/simulated/floor/plating,/area/ship_battle/team_one/starboard)
+"ef" = (/obj/structure/plasticflaps/mining,/obj/machinery/conveyor{dir = 4; id = "1squadsouthconveyor"},/obj/machinery/door/blast/regular{id = "1squadsouthdoors"; name = "Blast Door"},/turf/simulated/floor/plating,/area/ship_battle/team_one/starboard)
+"eg" = (/obj/machinery/space_battle/tube{dir = 4; id_tag = "2north2gun"},/turf/simulated/floor/airless,/area/ship_battle/team_one/starboard)
+"eh" = (/obj/machinery/door/blast/regular{id = "1squadsouthdoors"; name = "Blast Door"},/turf/simulated/floor/plating,/area/ship_battle/team_one/starboard)
+"ei" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/reagent_dispensers/fueltank,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/ship_battle/team_one/starboard)
+"ej" = (/obj/structure/table/rack,/obj/item/clothing/suit/space/battle,/obj/item/clothing/head/helmet/space/battle,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"ek" = (/obj/structure/window/reinforced{dir = 4},/obj/machinery/space_battle/missile_sensor/guidance,/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"el" = (/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"em" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"en" = (/obj/structure/missile_rack,/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"eo" = (/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/wood,/area/ship_battle/team_one/starboard)
+"ep" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/wood,/area/ship_battle/team_one/starboard)
+"eq" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/wood,/area/ship_battle/team_one/starboard)
+"er" = (/obj/structure/missile_rack,/obj/machinery/alarm/battle{dir = 8; pixel_x = 30},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"es" = (/obj/structure/table/woodentable,/obj/item/weapon/book/manual/frontier,/obj/item/device/flashlight/flare,/turf/simulated/floor/wood,/area/ship_battle/team_one/starboard)
+"et" = (/obj/structure/bed,/obj/effect/landmark/start{name = "Team Four Sailor"},/obj/machinery/power/apc/battle{name = "south bump"; pixel_y = -27},/obj/structure/cable,/turf/simulated/floor/wood,/area/ship_battle/team_one/starboard)
+"eu" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"; name = "Clothing Storage"},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/wood,/area/ship_battle/team_one/starboard)
+"ev" = (/obj/machinery/light,/obj/structure/bed/chair/office/dark{dir = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"ew" = (/obj/machinery/space_battle/missile_computer{id_tag = "3kratosdeck4"},/turf/simulated/floor/tiled/dark,/area/ship_battle/team_one/starboard)
+"ex" = (/obj/machinery/space_battle/missile_sensor/dish{id_tag = null; pixel_y = 7; sensor_id = "1coresouthradar1"},/turf/space,/area/ship_battle/team_one/starboard)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababacadadabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababadadadadababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababadadaeafagababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababadadadadahadadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababadadaiajakalamanadadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaoapaqarasatauavawaxadadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaoapayazasaAaBaCaDaCaEadadadabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaFaGaHaIaJaKaLaMaMaMaMaMaMaMabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaoapaNaOasaPaQaRaRaRaSadadadabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaoapaqaTaUaVaQaQaQaWadadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababadadaXaYaZaQbabbadadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcbcbcbcbcbdbcbcbcbcbcbcbcbcbcbcbdbcbcbcbcbcaaaaaaaaaaaaaaaaaaababababadadadadahadadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcbcbcbcbdbebcbcbcbcbcbcbcbcbcbcbebdbcbcbcbcaaaaaaaaaaaaaaaaaaababababababadadaeafagababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcbcbcbdbebebcbcbfbfbfbfbfbfbcbcbebebdbcbcbcaaaaaaaaaaaaaaaaaaabababababababadadadadababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcbcbcbebebebfbfbfbgbhbhbibfbfbfbebebebcbcbcaaaaaaaaaaaaaaaaaaabababababababbjadadabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcbcbebebebebebebebkblblbmbebebebebebebebcbcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcbebebebebebebnbebobpbpbqbebnbebebebebebebcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabrbsbtbebubvbwbxbybzbAbAbBbybxbCbebebebebebeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcbrbDbtbEbFbGbHbAbAbAbAbAbAbAbIbebebebebebcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcbcbebebJbKbwbLbMbNbObObPbQbAbRbebebebebcbcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabSbTbUbVbWbXbYbZcacbcccdcecacfcgchchchchchbSbSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabScicjckclcmcncocpcqcrcrcqcscsctchchchchchchbSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabScubUcvcwcxbYbZcacyczcAcBcacfbYchchchchchbSbSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacCcCcDcDcEcFcGcHcIcJcKcKcLcMcNcOcDcDcDcDcCcCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacCcPcQcRcScTcUcVcNcNcNcNcNcNcNcWcDcDcDcDcDcCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacPcXcYcDcZdacGdbdcddcNcNdedcdbdfcDcDcDcDcDcDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacCcDcDcDcDcDcDdgcDdhdididjcDdgcDcDcDcDcDcDcCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacCcCcDcDcDcDcDdlcDdmdndndocDdlcDcDcDcDcDcCcCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacCcCcCcDcDcDdgdgdgdpdqdqdrdgdgdgcDcDcDcCcCcCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacCcCcCdscDcDcCcCdgdgdgdgdgdgcCcCcDcDdscCcCcCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacCcCcCcCdscDcCcCcCcCcCcCcCcCcCcCcDdscCcCcCcCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacCcCcCcCcCdscCcCcCcCcCcCcCcCcCcCdscCcCcCcCcCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdtdtdtdtdtdtdtdtdtdtdtdtdtdtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdtdtdtdtdtdudvdvdtdtdtdtdtdtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdtdtdtdtdtdvdvdvdvdtdtdtdtdtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdtdtdtdtdvdvdwdxdydtdtdtdtdtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdtdtdvdvdvdvdzdvdvdvdvdtdtdtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdtdvdvdAdBdCdDdEdFdvdvdvdtdtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdGdHdIdJdKdLdMdNdOdPdvdvdvdtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdGdHdQdRdKdSdTdUdVdUdWdvdvdvaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdXdYdZeaebecedeeeeeeeeefegehaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdGdHeiejdKekelemememendvdvdvaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdGdHdIeoepeqelelelerdvdvdvdtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdtdvdveseteuelevewdvdvdvdtdtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdtdtdvdvdvdvdzdvdvdvdvdtdtdtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdtdtdtdtdvdvdwdxdydtdtdtdtdtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdtdtdtdtdtdvdvdvdvdtdtdtdtdtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdtdtdtdtdtexdvdvdtdtdtdtdtdtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

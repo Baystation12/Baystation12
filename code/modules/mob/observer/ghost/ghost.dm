@@ -33,6 +33,8 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 	var/list/hud_images // A list of hud images
 
+	var/ghost_cooldown = 0
+
 /mob/observer/ghost/New(mob/body)
 	see_in_dark = 100
 	verbs += /mob/observer/ghost/proc/dead_tele
@@ -152,6 +154,9 @@ Works together with spawning an observer, noted above.
 			return
 	if(key)
 		var/mob/observer/ghost/ghost = new(src)	//Transfer safety to observer spawning proc.
+		if(src.client)
+			src << "<span class='notice'>You're now a ghost, lost on it's way to Valhalla. You've gained [src.client.get_karma(src)] karma \
+			          throughout your life through various deeds, which may help you in the afterlife.</span>"
 		ghost.can_reenter_corpse = can_reenter_corpse
 		ghost.timeofdeath = src.stat == DEAD ? src.timeofdeath : world.time
 		ghost.key = key
@@ -713,3 +718,107 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /proc/isghostmind(var/datum/mind/player)
 	return player && !isnewplayer(player.current) && (!player.current || isghost(player.current) || (isliving(player.current) && player.current.stat == DEAD) || !player.current.client)
+
+/mob/observer/ghost/verb/BreathOfLife(var/mob/living/carbon/human/H)
+	set name = "Breath of Life (5)"
+	set category = "Karma"
+
+	if(!H || !istype(H))
+		usr << "<span class='warning'>You cannot do that!</span>"
+		return
+
+	if(H.stat)
+		usr << "<span class='warning'>That person is dead.</span>"
+		return
+
+	if(client.karma < 5)
+		usr << "<span class='warning'>You do not have enough karma for that!</span>"
+		return
+
+	if(ghost_cooldown > world.time)
+		usr << "<span class='warning'>Your spirit is still recuperating!</span>"
+		return
+
+	if(prob(50))
+		H << "<small>[pick("You feel a cold breath on your cheek...", "You gasp and sputter violently!", "Your lungs fill with air!")]</small>"
+		H.emote("splutters!")
+	H.adjustOxyLoss(rand(-100,0))
+	ghost_cooldown = world.time + 300
+	client.ghost_activity += pick(5,50;6)
+	usr << "<span class='notice'>You grant \the [H] the breath of life.</span>"
+	return
+
+/mob/observer/ghost/verb/HealingTouch(var/mob/living/carbon/human/H)
+	set name = "Healing Touch (5)"
+	set category = "Karma"
+
+	if(!H || !istype(H))
+		usr << "<span class='warning'>You cannot do that!</span>"
+		return
+
+	if(H.stat)
+		usr << "<span class='warning'>That person is dead.</span>"
+		return
+
+	if(client.karma < 5)
+		usr << "<span class='warning'>You do not have enough karma for that!</span>"
+		return
+
+	if(ghost_cooldown > world.time)
+		usr << "<span class='warning'>Your spirit is still recuperating!</span>"
+		return
+
+	if(prob(50))
+		H << "<small>[pick("Your pain soothes slightly...", "You feel a warmth spread throughout your body...", "You feel something pierce through you!")]</small>"
+		H.emote("gasp")
+	H.adjustBruteLoss(rand(-50,0))
+	ghost_cooldown = world.timeofday + 300
+	client.ghost_activity += pick(5, 20;6)
+	usr << "<span class='notice'>You touch \the [H] lightly, sealing their wounds.</span>"
+	return
+
+/mob/observer/ghost/verb/WhisperInTheDark(var/mob/living/carbon/human/H)
+	set name = "Whisper In The Dark (1)"
+	set category = "Karma"
+
+	if(!H || !istype(H))
+		usr << "<span class='warning'>You cannot do that!</span>"
+		return
+
+	if(H.stat)
+		usr << "<span class='warning'>That person is dead!</span>"
+		return
+
+	if(client.karma < 1)
+		usr << "<span class='warning'>You do not have enough karma for that!</span>"
+		return
+
+	if(ghost_cooldown > world.time)
+		usr << "<span class='warning'>Your spirit is still recuperating!</span>"
+		return
+
+	var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
+	if(isturf(H.loc))
+		var/turf/T = loc
+		var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in T
+		if(L)
+			light_amount = min(10,L.lum_r + L.lum_g + L.lum_b)
+		else
+			light_amount =  5
+	if(light_amount > 5)
+		usr << "<span class='warning'>It is not dark enough!</span>"
+		return
+
+	var/message = input(usr, "What is it you would like to say?(5-20 characters)", "Speak.") as text
+	if(!message || length(message) < 5 || length(message) > 20)
+		usr << "<span class='warning'>That message is invalid!</span>"
+		return
+
+	message = "<small><i>You hear something eminating from the dark, \"[RadioChat(message, 100, 5)]\"</i></small>"
+	H << message
+	usr << "\The [H] hears, [message]"
+
+	ghost_cooldown = world.timeofday + 300
+	client.ghost_activity -= pick(20;1, 0)
+	return
+

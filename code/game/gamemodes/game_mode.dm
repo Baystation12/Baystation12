@@ -6,7 +6,7 @@ var/global/list/additional_antag_types = list()
 	var/round_description = "How did you even vote this in?"
 	var/extended_round_description = "This roundtype should not be spawned, let alone votable. Someone contact a developer and tell them the game's broken again."
 	var/config_tag = null
-	var/votable = 1
+	var/votable = 0
 	var/probability = 0
 
 	var/required_players = 0                 // Minimum players for round to start if voted in.
@@ -36,6 +36,11 @@ var/global/list/additional_antag_types = list()
 
 	var/event_delay_mod_moderate             // Modifies the timing of random events.
 	var/event_delay_mod_major                // As above.
+
+	var/list/allowed_factions = list()
+
+	proc/force_setup()
+		return 1
 
 /datum/game_mode/New()
 	..()

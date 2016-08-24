@@ -307,6 +307,21 @@
 			src << alert("[rank] is not available. Please try another.")
 			return 0
 
+	var/team = 0
+	var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
+	for(var/datum/job/space_battle/job in all_jobs)
+		if(job.title == rank)
+			team = job.team
+	var/obj/machinery/space_battle/ship_core/has_core
+	if(team)
+		for(var/obj/machinery/space_battle/ship_core/S in world)
+			if(S.team == team)
+				has_core = S
+				break
+		if(!has_core)
+			usr << "<span class='warning'>That team has been eliminated!</span>"
+			return 0
+
 	job_master.AssignRole(src, rank, 1)
 
 	var/mob/living/character = create_character()	//creates the human and transfers vars and mind
@@ -382,6 +397,7 @@
 				dat += "<font color='red'>The station is currently undergoing crew transfer procedures.</font><br>"
 
 	dat += "Choose from the following open/valid positions:<br>"
+	world << "Latechoices!"
 	for(var/datum/job/job in job_master.occupations)
 		if(job && IsJobAvailable(job.title))
 			if(job.minimum_character_age && (client.prefs.age < job.minimum_character_age))

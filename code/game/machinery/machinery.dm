@@ -113,6 +113,12 @@ Class Procs:
 	var/global/gl_uid = 1
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 
+	var/obj/item/upgrade_module/circuit_board
+	var/has_circuit = 0
+	var/resistance = 1
+
+/obj/machinery/New(l, d=0)
+
 /obj/machinery/New(l, d=0)
 	..(l)
 	if(d)
@@ -122,6 +128,9 @@ Class Procs:
 	else
 		machines += src
 		machinery_sort_required = 1
+	if(has_circuit)
+		circuit_board = new(src)
+		circuit_board.resistance = resistance
 
 /obj/machinery/Destroy()
 	machines -= src

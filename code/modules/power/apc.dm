@@ -127,6 +127,8 @@
 	var/global/list/status_overlays_lighting
 	var/global/list/status_overlays_environ
 
+	var/mob/living/carbon/human/hacked_by
+
 /obj/machinery/power/apc/updateDialog()
 	if (stat & (BROKEN|MAINT))
 		return
@@ -828,7 +830,7 @@
 
 /obj/machinery/power/apc/proc/update()
 	if(operating && !shorted && !failure_timer)
-		
+
 		//prevent unnecessary updates to emergency lighting
 		var/new_power_light = (lighting >= POWERCHAN_ON)
 		if(area.power_light != new_power_light)
@@ -865,6 +867,7 @@
 		user << "<span class='warning'>You must stand to use [src]!</span>"
 		return 0
 	autoflag = 5
+	if(hacked_by == user) return 1
 	if (istype(user, /mob/living/silicon))
 		var/permit = 0 // Malfunction variable. If AI hacks APC it can control it even without AI control wire.
 		var/mob/living/silicon/ai/AI = user

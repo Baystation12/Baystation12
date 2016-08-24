@@ -45,9 +45,9 @@
 	else if(operating == -1)
 		movedir = backwards
 	else operating = 0
-	update_icon()
+	update()
 
-/obj/machinery/conveyor/update_icon()
+/obj/machinery/conveyor/proc/update()
 	if(stat & BROKEN)
 		icon_state = "conveyor-broken"
 		operating = 0
@@ -65,6 +65,9 @@
 		return
 	if(!operating)
 		return
+	for(var/obj/O in get_turf(src))
+		if(O.density && O.anchored)
+			return
 	use_power(100)
 
 	affecting = loc.contents - src		// moved items will be all in loc
@@ -72,6 +75,8 @@
 		var/items_moved = 0
 		for(var/atom/movable/A in affecting)
 			if(!A.anchored)
+				if(istype(A, /mob/missile_eye))
+					continue
 				if(A.loc == src.loc) // prevents the object from being affected if it's not currently here.
 					step(A,movedir)
 					items_moved++
@@ -117,7 +122,7 @@
 // also propagate inoperability to any connected conveyor with the same ID
 /obj/machinery/conveyor/proc/broken()
 	stat |= BROKEN
-	update_icon()
+	update()
 
 	var/obj/machinery/conveyor/C = locate() in get_step(src, dir)
 	if(C)
@@ -136,7 +141,7 @@
 		return
 	operable = op
 
-	update_icon()
+	update()
 	var/obj/machinery/conveyor/C = locate() in get_step(src, stepdir)
 	if(C)
 		C.set_operable(stepdir, id, op)
@@ -146,6 +151,10 @@
 	set src in view()
 	src.broken()
 */
+
+/obj/machinery/conveyor/power_change()
+	..()
+	update()
 
 // the conveyor control switch
 //
@@ -172,7 +181,7 @@
 	..(loc)
 	if(!id)
 		id = newid
-	update_icon()
+	update()
 
 	spawn(5)		// allow map load
 		conveyors = list()
@@ -182,7 +191,7 @@
 
 // update the icon depending on the position
 
-/obj/machinery/conveyor_switch/update_icon()
+/obj/machinery/conveyor_switch/proc/update()
 	if(position<0)
 		icon_state = "switch-rev"
 	else if(position>0)
@@ -221,13 +230,13 @@
 		position = 0
 
 	operated = 1
-	update_icon()
+	update()
 
 	// find any switches with same id as this one, and set their positions to match us
 	for(var/obj/machinery/conveyor_switch/S in world)
 		if(S.id == src.id)
 			S.position = position
-			S.update_icon()
+			S.update()
 
 
 /obj/machinery/conveyor_switch/attackby(obj/item/I, mob/user, params)
@@ -250,13 +259,13 @@
 		position = 0
 
 	operated = 1
-	update_icon()
+	update()
 
 	// find any switches with same id as this one, and set their positions to match us
 	for(var/obj/machinery/conveyor_switch/S in world)
 		if(S.id == src.id)
 			S.position = position
-			S.update_icon()
+			S.update()
 
 
 
@@ -269,7 +278,7 @@
 	icon_state = "conveyor0"
 	name = "conveyor belt assembly"
 	desc = "A conveyor belt assembly."
-	w_class = 5
+	w_class = 4
 	var/id = "" //inherited by the belt
 
 /obj/item/conveyor_construct/attackby(obj/item/I, mob/user, params)
@@ -290,6 +299,14 @@
 			return
 		cdir |= CB.dir
 		qdel(CB)
+	if(!id)
+		user << "<span class='warning'>\The [src] has no id!</span>"
+		return
+	var/turf/T = get_turf(A)
+	var/obj/machinery/conveyor/present = locate() in T
+	if(present)
+		user << "<span class='warning'>There is already a conveyor there!</span>"
+		return
 	var/obj/machinery/conveyor/C = new/obj/machinery/conveyor(A,cdir)
 	C.id = id
 	transfer_fingerprints_to(C)
@@ -300,7 +317,7 @@
 	desc = "A conveyor control switch assembly."
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "switch-off"
-	w_class = 5
+	w_class = 4
 	var/id = "" //inherited by the switch
 
 /obj/item/conveyor_switch_construct/New()

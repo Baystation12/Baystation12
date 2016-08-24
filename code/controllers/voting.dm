@@ -140,7 +140,7 @@ datum/controller/vote
 	proc/announce_result()
 		var/list/winners = get_result()
 		var/text
-		var/firstChoice
+		var/firstChoice = "two ship combat"
 		var/secondChoice
 		var/thirdChoice
 		if(length(winners[1]) > 0)

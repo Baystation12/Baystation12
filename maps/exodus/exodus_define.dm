@@ -1,4 +1,4 @@
-
+#define USING_MAP_DATUM /datum/map/exodus
 /datum/map/exodus
 	name = "Exodus"
 	full_name = "NSS Exodus"

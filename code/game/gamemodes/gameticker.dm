@@ -41,12 +41,13 @@ var/global/datum/controller/gameticker/ticker
 	login_music = pick(\
 	/*'sound/music/halloween/skeletons.ogg',\
 	'sound/music/halloween/halloween.ogg',\
-	'sound/music/halloween/ghosts.ogg'*/
+	'sound/music/halloween/ghosts.ogg'
 	'sound/music/space.ogg',\
 	'sound/music/traitor.ogg',\
 	'sound/music/title2.ogg',\
 	'sound/music/clouds.s3m',\
-	'sound/music/space_oddity.ogg') //Ground Control to Major Tom, this song is cool, what's going on?
+	'sound/music/space_oddity.ogg'*/
+	'sound/music/triage.ogg') //Ground Control to Major Tom, this song is cool, what's going on?
 	do
 		if(!gamemode_voted)
 			pregame_timeleft = 180
@@ -113,11 +114,11 @@ var/global/datum/controller/gameticker/ticker
 		current_state = GAME_STATE_PREGAME
 		world << "<span class='danger'>Serious error in mode setup!</span> Reverting to pre-game lobby."
 		return 0
-
-	job_master.ResetOccupations()
+	src.mode.force_setup()
+	job_master.ResetOccupations(src.mode.allowed_factions)
 	src.mode.create_antagonists()
 	src.mode.pre_setup()
-	job_master.DivideOccupations() // Apparently important for new antagonist system to register specific job antags properly.
+	job_master.DivideOccupations(src.mode.allowed_factions) // Apparently important for new antagonist system to register specific job antags properly.
 
 	if(!src.mode.can_start())
 		world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players needed. Reverting to pre-game lobby."
@@ -403,20 +404,20 @@ var/global/datum/controller/gameticker/ticker
 					if(isNotAdminLevel(playerTurf.z))
 						Player << "<font color='blue'><b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b></font>"
 					else
-						Player << "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></font>"
+						Player << "<font color='green'><b>You managed to survive the battle as [Player.real_name].</b></font>"
 				else if(isAdminLevel(playerTurf.z))
-					Player << "<font color='green'><b>You successfully underwent crew transfer after events on [station_name()] as [Player.real_name].</b></font>"
+					Player << "<font color='green'><b>You successfully survived the combat as [Player.real_name].</b></font>"
 				else if(issilicon(Player))
-					Player << "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>"
+					Player << "<font color='green'><b>You remain operational after the battle as [Player.real_name].</b></font>"
 				else
-					Player << "<font color='blue'><b>You missed the crew transfer after the events on [station_name()] as [Player.real_name].</b></font>"
+					Player << "<font color='blue'><b>You survived but got stranded as [Player.real_name].</b></font>"
 			else
 				if(isghost(Player))
 					var/mob/observer/ghost/O = Player
 					if(!O.started_as_observer)
-						Player << "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>"
+						Player << "<font color='red'><b>You did not survive the battle..</b></font>"
 				else
-					Player << "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>"
+					Player << "<font color='red'><b>You did not survive the battle...</b></font>"
 	world << "<br>"
 
 	for (var/mob/living/silicon/ai/aiPlayer in mob_list)

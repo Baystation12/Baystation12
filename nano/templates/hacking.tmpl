@@ -1,0 +1,72 @@
+<div class='itemLabelWide'>
+    {{:helper.link('Hacked', 'home', {'hacked' : 1}, data.menu == 'hacked' ? 'disabled' : null, 'fixedLeft')}}
+    {{:helper.link('Hacking', 'link', {'hacking' : 1}, data.menu == 'hacking' ? 'disabled' : null, 'fixedLeft')}}
+	{{:helper.link('Settings', 'note', {'logs' : 1}, data.menu == 'logs' ? 'disabled' : null, 'fixedLeft')}}
+</div>
+<br>
+<div class='item'>
+{{if data.selected_name}}
+	{{:data.selected_name}}
+	<br><hr>
+	{{for data.selected_actions}}
+		<div style='itemContentWide'>{{:helper.link(value, 'gear', { 'action' : value })}}</div>
+	{{empty}}
+		<b>Error! There are no actions to be taken on this device!</b>
+	{{/for}}
+{{else data.menu == "hacking"}}
+	<div style='itemLabelWide'>
+		{{:helper.link('Team:', 'bullet', { 'team' : 1})}}</div>
+		<div style='itemContentWide'>
+			{{:data.team}}</div><br>		
+	{{for data.categories}}
+		<tr><td>{{:helper.link(value, 'alert', { 'begin' : value})}}
+	{{empty}}
+		<b>No categories detected!</b>
+	{{/for}}
+{{else data.menu == "hacked"}}
+	{{for data.hacked}}
+		{{:helper.link(value, 'link', { 'hacked_object' : value})}}
+	{{empty}}
+		<b>Nothing has been hacked!</b>
+	{{/for}}
+{{else data.menu == "progress"}}
+	<div class='notice'>
+	<b><i>Hacking in progress!</i></b><br>
+	<b>Estimated time remaining: </b>
+		{{:data.timeleft}} seconds.<br>
+	{{if data.hacking_name}}
+		<b>Target:</b> {{:data.hacking_name}}<br>
+	{{/if}}
+	{{if data.operation}}
+		<b>Operation:</b> {{:data.operation}}
+	</div><hr><br>
+	{{/if}}
+	{{if data.can_cancel}}
+		{{:helper.link('Cancel', 'refresh', { 'cancel' : 1})}}
+	{{/if}}	
+{{else data.menu == "complete"}}
+	<div class='notice'>	
+	<b>Hacking complete!</b>
+	</div>
+{{else data.menu == "logs"}}
+	<div class='itemLabel'><b>Detection Level:</b></div>
+	<div class='itemContentWide'>
+	{{if data.detection == 1}}
+		<div stye='oxy'>{{:data.detection_lvl}}%</div>
+	{{else data.detection == 2}}
+		<div style='burn'>{{:data.detection_lvl}}%</div>
+	{{else}}
+		<div style='brute'>{{:data.detection_lvl}}%</div>
+	{{/if}}
+	</div><br>
+	<div class='itemLabel'><b>Speed:</b></div>
+	<div class='itemContentWide'>{{:helper.link(''+data.speed+'', 'wrench', { 'speed' : 1})}}</div><br>	
+
+{{else}}
+	<b>This is an error!</b>
+{{/if}}	
+</div>
+	
+			
+	
+	

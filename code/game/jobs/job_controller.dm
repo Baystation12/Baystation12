@@ -4,6 +4,12 @@ var/global/datum/controller/occupations/job_master
 #define BE_ASSISTANT 1
 #define RETURN_TO_LOBBY 2
 
+#define TEAM_ONE 1
+#define TEAM_TWO 2
+#define TEAM_THREE 3
+#define TEAM_FOUR 4
+
+
 /datum/controller/occupations
 		//List of all jobs
 	var/list/occupations = list()
@@ -14,8 +20,47 @@ var/global/datum/controller/occupations/job_master
 		//Debug info
 	var/list/job_debug = list()
 
-
-	proc/SetupOccupations(var/faction = "Station", var/setup_titles = 0)
+	proc/FillTeams(var/list/factions = list("Team One", "Team Two", "Team Three", "Team Four"))
+		var/list/unassigned_command_jobs = list()
+		for(var/level = 1 to 3) // First, assign all the teams a commander.
+			for(var/datum/job/space_battle/job in occupations)
+				if(!job.head_position) continue
+				var/list/candidates = FindOccupationCandidates(job, level)
+				if(!candidates.len)
+					unassigned_command_jobs += job
+					continue
+				var/mob/candidate = pick(candidates)
+				AssignRole(candidate, job.title)
+		for(var/datum/job/space_battle/job in unassigned_command_jobs) // If there's a team without a commander, force someone into it.
+			if(!job || !istype(job)) continue
+			for(var/mob/new_player/player in player_list)
+				if(player.ready && player.mind && !player.mind.assigned_role)
+					AssignRole(player, job.title)
+					break
+		var/list/ready_players = list()
+		for(var/mob/new_player/player in player_list)
+			if(player.ready && player.mind && !player.mind.assigned_role)
+				ready_players.Add(player)
+		var/list/teams = list("Team One","Team Two", "Team Three", "Team Four")
+		for(var/level = 1 to 3)
+			for(var/datum/job/space_battle/job in occupations)
+				if(!job || !istype(job))	continue
+				if(job.current_positions > 0) continue
+				var/list/candidates = FindOccupationCandidates(job, level)
+				if(!candidates.len)	continue
+				for(var/mob/M in candidates)
+					if(!M) continue
+					if(teams[job.team] > (ready_players.len / factions.len)) continue // Equal amount per team.
+					AssignRole(M, job.title)
+					teams[job.team] += 1
+/*		for(var/datum/job/space_battle/job in occupations)
+			if(job.current_positions <= 0)
+				for(var/mob/new_player/player in player_list)
+					if(player.ready && player.mind && !player.mind.assigned_role)
+						AssignRole(player, job.title)
+						break
+*/
+	proc/SetupOccupations(var/list/factions = list("Team One", "Team Two", "Team Three", "Team Four"), var/setup_titles = 0)
 		occupations = list()
 		occupations_by_type = list()
 		var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
@@ -25,26 +70,26 @@ var/global/datum/controller/occupations/job_master
 		for(var/J in all_jobs)
 			var/datum/job/job = new J()
 			if(!job)	continue
-			if(job.faction != faction)	continue
-			occupations += job
-			occupations_by_type[job.type] = job
-			if(!setup_titles) continue
-			if(job.department_flag & COM)
-				command_positions |= job.title
-			if(job.department_flag & SEC)
-				security_positions |= job.title
-			if(job.department_flag & ENG)
-				engineering_positions += job.title
-			if(job.department_flag & MED)
-				medical_positions |= job.title
-			if(job.department_flag & SCI)
-				science_positions |= job.title
-			if(job.department_flag & CRG)
-				cargo_positions |= job.title
-			if(job.department_flag & CIV)
-				civilian_positions |= job.title
-			if(job.department_flag & MSC)
-				nonhuman_positions |= job.title
+			if(job.faction in factions)
+				occupations += job
+				occupations_by_type[job.type] = job
+				if(!setup_titles) continue
+				if(job.department_flag & COM)
+					command_positions |= job.title
+				if(job.department_flag & SEC)
+					security_positions |= job.title
+				if(job.department_flag & ENG)
+					engineering_positions += job.title
+				if(job.department_flag & MED)
+					medical_positions |= job.title
+				if(job.department_flag & SCI)
+					science_positions |= job.title
+				if(job.department_flag & CRG)
+					cargo_positions |= job.title
+				if(job.department_flag & CIV)
+					civilian_positions |= job.title
+				if(job.department_flag & MSC)
+					nonhuman_positions |= job.title
 
 
 		return 1
@@ -155,12 +200,12 @@ var/global/datum/controller/occupations/job_master
 				unassigned -= player
 				break
 
-	proc/ResetOccupations()
+	proc/ResetOccupations(var/list/factions = list("Team One", "Team Two", "Team Three", "Team Four"))
 		for(var/mob/new_player/player in player_list)
 			if((player) && (player.mind))
 				player.mind.assigned_role = null
 				player.mind.special_role = null
-		SetupOccupations()
+		SetupOccupations(factions)
 		unassigned = list()
 		return
 
@@ -222,10 +267,10 @@ var/global/datum/controller/occupations/job_master
  *  fills var "assigned_role" for all ready players.
  *  This proc must not have any side effect besides of modifying "assigned_role".
  **/
-	proc/DivideOccupations()
+	proc/DivideOccupations(var/list/factions = list("Team One", "Team Two", "Team Three", "Team Four"))
 		//Setup new player list and get the jobs list
 		Debug("Running DO")
-		SetupOccupations()
+		SetupOccupations(factions)
 
 		//Holder for Triumvirate is stored in the ticker, this just processes it
 		if(ticker && ticker.triai)
@@ -262,6 +307,7 @@ var/global/datum/controller/occupations/job_master
 		Debug("DO, Running Head Check")
 		FillHeadPosition()
 		Debug("DO, Head Check end")
+		FillTeams(factions)
 
 		//Other jobs are now checked
 		Debug("DO, Running Standard Check")
@@ -490,10 +536,10 @@ var/global/datum/controller/occupations/job_master
 
 		H << "<B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B>"
 
-		if(job.supervisors)
-			H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
+//		if(job.supervisors)
+//			H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
 
-		H << "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>"
+		H << "<b>To speak on your ship's radio channels use :i whilst near an intercomm.</b>"
 
 		if(job.req_admin_notify)
 			H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>"
@@ -574,7 +620,7 @@ var/global/datum/controller/occupations/job_master
 
 			tmp_str += "HIGH=[level1]|MEDIUM=[level2]|LOW=[level3]|NEVER=[level4]|BANNED=[level5]|YOUNG=[level6]|-"
 			feedback_add_details("job_preferences",tmp_str)
-
+/*
 /datum/controller/occupations/proc/LateSpawn(var/client/C, var/rank, var/return_location = 0)
 	//spawn at one of the latespawn locations
 
@@ -610,6 +656,6 @@ var/global/datum/controller/occupations/job_master
 			if(H)
 				H.forceMove(pick(latejoin))
 			return "has arrived on the station"
-
+*/
 /datum/controller/occupations/proc/GetJobByType(var/job_type)
 	return occupations_by_type[job_type]

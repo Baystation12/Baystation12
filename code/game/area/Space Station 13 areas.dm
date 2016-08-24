@@ -87,6 +87,897 @@ var/list/ghostteleportlocs = list()
 
 /*-----------------------------------------------------------------------------*/
 
+//////////
+//BATTLE//
+//////////
+/area/ship_battle/var/team = 1
+/area/ship_battle/has_gravity = 0
+/area/ship_battle/team_one
+	name = "\improper Team One"
+	icon_state = "purple"
+
+	bathroom
+		name = "\improper Team One - Bathroom"
+		icon_state = "toilet"
+
+	teleporter
+		name = "\improper Team One - Teleporte"
+		icon_state = "teleporter"
+
+	lab
+		name = "\improper Team One - Lab"
+		icon_state = "research"
+
+	solar_one
+		name = "\improper Team One - Solars"
+		icon_state = "panelsS"
+
+	solar_two
+		name = "\improper Team One - Solars"
+		icon_state = "panelsP"
+
+	armory
+		name = "\improper Team One - Armory"
+		icon_state = "armory"
+
+	ai
+		name = "\improper Team One - AI"
+		icon_state = "ai"
+
+	telecomms
+		name = "\improper Team One - Telecommunications"
+		icon_state = "tcomsatcham"
+
+	substation
+		name = "\improper Team One - Substation"
+		icon_state = "substation"
+
+	maintenance
+		name = "\improper Team One - Maintenance"
+		icon_state = "maintcentral"
+
+	aft_maintenance
+		name = "\improper Team One - Aft Maintenance"
+		icon_state = "maintcentral"
+
+	port_maintenance
+		name = "\improper Team One - Port Maintenance"
+		icon_state = "maintcentral"
+
+	starboard_maintenance
+		name = "\improper Team One - Starboard Maintenance"
+		icon_state = "maintcentral"
+
+	fore_maintenance
+		name = "\improper Team One - Fore Maintenance"
+		icon_state = "maintcentral"
+
+	ammo_storage
+		name = "\improper Team One - Ammo Storage"
+		icon_state = "armory"
+
+	emergency_storage
+		name = "\improper Team One - Emergency Storage"
+		icon_state = "storage"
+
+	core
+		name = "\improper Team One - Core"
+		icon_state = "green"
+
+	engines
+		name = "\improper Team One - Engines"
+		icon_state = "yellow"
+
+	primary_weapons_one
+		name = "\improper Team One - Primary Weapons"
+		icon_state = "armory"
+
+	primary_weapons_two
+		name = "\improper Team One - Primary Weapons"
+		icon_state = "armory"
+
+	secondary_weapons_one
+		name = "\improper Team One - Secondary Weapons"
+		icon_state = "armory"
+
+	secondary_weapons_two
+		name = "\improper Team One - Secondary Weapons"
+		icon_state = "armory"
+
+	external
+		name = "\improper Team One - External"
+		icon_state = "away"
+
+	port
+		name = "\improper Team One - Port"
+		icon_state = "hallP"
+
+	port_two
+		name = "\improper Team One - Port"
+		icon_state = "hallP"
+
+	starboard
+		name = "\improper Team One - Starboard"
+		icon_state = "hallS"
+
+	starboard_two
+		name = "\improper Team One - Starboard"
+		icon_state = "hallS"
+
+	aft
+		name = "\improper Team One - Aft"
+		icon_state = "hallA"
+
+	aft_two
+		name = "\improper Team One - Aft"
+		icon_state = "hallA"
+
+	fore
+		name = "\improper Team One - Fore"
+		icon_state = "hallF"
+
+	fore_two
+		name = "\improper Team One - Fore"
+		icon_state = "hallF"
+
+	central
+		name = "\improper Team One - Central"
+		icon_state = "hallC1"
+
+	central_two
+		name = "\improper Team One - Central"
+		icon_state = "hallC2"
+
+	central_three
+		name = "\improper Team One - Central"
+		icon_state = "hallC3"
+
+	bridge
+		name = "\improper Team One - Bridge"
+		icon_state = "bridge"
+
+	storage
+		name = "\improper Team One - Storage"
+		icon_state = "storage"
+
+	power
+		name = "\improper Team One - Power"
+		icon_state = "substation"
+
+	atmos
+		name = "\improper Team One - Atmos"
+		icon_state = "atmos"
+
+	sensors
+		name = "\improper Team One - Sensors"
+		icon_state = "exam_room"
+
+	engineering
+		name = "\improper Team One - Engineering"
+		icon_state = "engineering"
+
+	dorms
+		name = "\improper Team One - Dorms"
+		icon_state = "crew_quarters"
+
+	security
+		name = "\improper Team One - Security"
+		icon_state = "security"
+
+	medbay
+		name = "\improper Team One - Medbay"
+		icon_state = "medbay3"
+
+
+
+/area/ship_battle/team_two
+	team = 2
+	name = "\improper Team Two"
+	icon_state = "purple"
+
+	bathroom
+		name = "\improper Team Two - Bathroom"
+		icon_state = "toilet"
+
+	teleporter
+		name = "\improper Team Two - Teleporte"
+		icon_state = "teleporter"
+
+	lab
+		name = "\improper Team Two - Lab"
+		icon_state = "research"
+
+	solar_one
+		name = "\improper Team Two - Solars"
+		icon_state = "panelsS"
+
+	solar_two
+		name = "\improper Team Two - Solars"
+		icon_state = "panelsP"
+
+	armory
+		name = "\improper Team Two - Armory"
+		icon_state = "armory"
+
+	ai
+		name = "\improper Team Two - AI"
+		icon_state = "ai"
+
+	telecomms
+		name = "\improper Team Two - Telecommunications"
+		icon_state = "tcomsatcham"
+
+	substation
+		name = "\improper Team Two - Substation"
+		icon_state = "substation"
+
+	maintenance
+		name = "\improper Team Two - Maintenance"
+		icon_state = "maintcentral"
+
+	aft_maintenance
+		name = "\improper Team Two - Aft Maintenance"
+		icon_state = "maintcentral"
+
+	port_maintenance
+		name = "\improper Team Two - Port Maintenance"
+		icon_state = "maintcentral"
+
+	starboard_maintenance
+		name = "\improper Team Two - Starboard Maintenance"
+		icon_state = "maintcentral"
+
+	fore_maintenance
+		name = "\improper Team Two - Fore Maintenance"
+		icon_state = "maintcentral"
+
+	ammo_storage
+		name = "\improper Team Two - Ammo Storage"
+		icon_state = "armory"
+
+	emergency_storage
+		name = "\improper Team Two - Emergency Storage"
+		icon_state = "storage"
+
+	core
+		name = "\improper Team Two - Core"
+		icon_state = "green"
+
+	engines
+		name = "\improper Team Two - Engines"
+		icon_state = "yellow"
+
+	primary_weapons_one
+		name = "\improper Team Two - Primary Weapons"
+		icon_state = "armory"
+
+	primary_weapons_two
+		name = "\improper Team Two - Primary Weapons"
+		icon_state = "armory"
+
+	secondary_weapons_one
+		name = "\improper Team Two - Secondary Weapons"
+		icon_state = "armory"
+
+	secondary_weapons_two
+		name = "\improper Team Two - Secondary Weapons"
+		icon_state = "armory"
+
+	external
+		name = "\improper Team Two - External"
+		icon_state = "away"
+
+	port
+		name = "\improper Team Two - Port"
+		icon_state = "hallP"
+
+	port_two
+		name = "\improper Team Two - Port"
+		icon_state = "hallP"
+
+	starboard
+		name = "\improper Team Two - Starboard"
+		icon_state = "hallS"
+
+	starboard_two
+		name = "\improper Team Two - Starboard"
+		icon_state = "hallS"
+
+	aft
+		name = "\improper Team Two - Aft"
+		icon_state = "hallA"
+
+	aft_two
+		name = "\improper Team Two - Aft"
+		icon_state = "hallA"
+
+	fore
+		name = "\improper Team Two - Fore"
+		icon_state = "hallF"
+
+	fore_two
+		name = "\improper Team Two - Fore"
+		icon_state = "hallF"
+
+	central
+		name = "\improper Team Two - Central"
+		icon_state = "hallC1"
+
+	central_two
+		name = "\improper Team Two - Central"
+		icon_state = "hallC2"
+
+	central_three
+		name = "\improper Team Two - Central"
+		icon_state = "hallC3"
+
+	bridge
+		name = "\improper Team Two - Bridge"
+		icon_state = "bridge"
+
+	storage
+		name = "\improper Team Two - Storage"
+		icon_state = "storage"
+
+	power
+		name = "\improper Team Two - Power"
+		icon_state = "substation"
+
+	atmos
+		name = "\improper Team Two - Atmos"
+		icon_state = "atmos"
+
+	sensors
+		name = "\improper Team Two - Sensors"
+		icon_state = "exam_room"
+
+	engineering
+		name = "\improper Team Two - Engineering"
+		icon_state = "engineering"
+
+	dorms
+		name = "\improper Team Two - Dorms"
+		icon_state = "crew_quarters"
+
+	security
+		name = "\improper Team Two - Security"
+		icon_state = "security"
+
+	medbay
+		name = "\improper Team Two - Medbay"
+		icon_state = "medbay3"
+
+/area/ship_battle/team_three
+	team = 3
+	name = "\improper Team Three"
+	icon_state = "purple"
+
+	bathroom
+		name = "\improper Team Three - Bathroom"
+		icon_state = "toilet"
+
+	teleporter
+		name = "\improper Team Three - Teleporte"
+		icon_state = "teleporter"
+
+	lab
+		name = "\improper Team Three - Lab"
+		icon_state = "research"
+
+	solar_one
+		name = "\improper Team Three - Solars"
+		icon_state = "panelsS"
+
+	solar_two
+		name = "\improper Team Three - Solars"
+		icon_state = "panelsP"
+
+	armory
+		name = "\improper Team Three - Armory"
+		icon_state = "armory"
+
+	ai
+		name = "\improper Team Three - AI"
+		icon_state = "ai"
+
+	telecomms
+		name = "\improper Team Three - Telecommunications"
+		icon_state = "tcomsatcham"
+
+	substation
+		name = "\improper Team Three - Substation"
+		icon_state = "substation"
+
+	maintenance
+		name = "\improper Team Three - Maintenance"
+		icon_state = "maintcentral"
+
+	aft_maintenance
+		name = "\improper Team Three - Aft Maintenance"
+		icon_state = "maintcentral"
+
+	port_maintenance
+		name = "\improper Team Three - Port Maintenance"
+		icon_state = "maintcentral"
+
+	starboard_maintenance
+		name = "\improper Team Three - Starboard Maintenance"
+		icon_state = "maintcentral"
+
+	fore_maintenance
+		name = "\improper Team Three - Fore Maintenance"
+		icon_state = "maintcentral"
+
+	ammo_storage
+		name = "\improper Team Three - Ammo Storage"
+		icon_state = "armory"
+
+	emergency_storage
+		name = "\improper Team Three - Emergency Storage"
+		icon_state = "storage"
+
+	core
+		name = "\improper Team Three - Core"
+		icon_state = "green"
+
+	engines
+		name = "\improper Team Three - Engines"
+		icon_state = "yellow"
+
+	primary_weapons_one
+		name = "\improper Team Three - Primary Weapons"
+		icon_state = "armory"
+
+	primary_weapons_two
+		name = "\improper Team Three - Primary Weapons"
+		icon_state = "armory"
+
+	secondary_weapons_one
+		name = "\improper Team Three - Secondary Weapons"
+		icon_state = "armory"
+
+	secondary_weapons_two
+		name = "\improper Team Three - Secondary Weapons"
+		icon_state = "armory"
+
+	external
+		name = "\improper Team Three - External"
+		icon_state = "away"
+
+	port
+		name = "\improper Team Three - Port"
+		icon_state = "hallP"
+
+	port_two
+		name = "\improper Team Three - Port"
+		icon_state = "hallP"
+
+	starboard
+		name = "\improper Team Three - Starboard"
+		icon_state = "hallS"
+
+	starboard_two
+		name = "\improper Team Three - Starboard"
+		icon_state = "hallS"
+
+	aft
+		name = "\improper Team Three - Aft"
+		icon_state = "hallA"
+
+	aft_two
+		name = "\improper Team Three - Aft"
+		icon_state = "hallA"
+
+	fore
+		name = "\improper Team Three - Fore"
+		icon_state = "hallF"
+
+	fore_two
+		name = "\improper Team Three - Fore"
+		icon_state = "hallF"
+
+	central
+		name = "\improper Team Three - Central"
+		icon_state = "hallC1"
+
+	central_two
+		name = "\improper Team Three - Central"
+		icon_state = "hallC2"
+
+	central_three
+		name = "\improper Team Three - Central"
+		icon_state = "hallC3"
+
+	bridge
+		name = "\improper Team Three - Bridge"
+		icon_state = "bridge"
+
+	storage
+		name = "\improper Team Three - Storage"
+		icon_state = "storage"
+
+	power
+		name = "\improper Team Three - Power"
+		icon_state = "substation"
+
+	atmos
+		name = "\improper Team Three - Atmos"
+		icon_state = "atmos"
+
+	sensors
+		name = "\improper Team Three - Sensors"
+		icon_state = "exam_room"
+
+	engineering
+		name = "\improper Team Three - Engineering"
+		icon_state = "engineering"
+
+	dorms
+		name = "\improper Team Three - Dorms"
+		icon_state = "crew_quarters"
+
+	security
+		name = "\improper Team Three - Security"
+		icon_state = "security"
+
+	medbay
+		name = "\improper Team Three - Medbay"
+		icon_state = "medbay3"
+
+/area/ship_battle/team_four
+	team = 4
+	name = "\improper Team Four"
+	icon_state = "purple"
+
+	bathroom
+		name = "\improper Team Four - Bathroom"
+		icon_state = "toilet"
+
+	teleporter
+		name = "\improper Team Four - Teleporte"
+		icon_state = "teleporter"
+
+	lab
+		name = "\improper Team Four - Lab"
+		icon_state = "research"
+
+	solar_one
+		name = "\improper Team Four - Solars"
+		icon_state = "panelsS"
+
+	solar_two
+		name = "\improper Team Four - Solars"
+		icon_state = "panelsP"
+
+	armory
+		name = "\improper Team Four - Armory"
+		icon_state = "armory"
+
+	ai
+		name = "\improper Team Four - AI"
+		icon_state = "ai"
+
+	telecomms
+		name = "\improper Team Four - Telecommunications"
+		icon_state = "tcomsatcham"
+
+	substation
+		name = "\improper Team Four - Substation"
+		icon_state = "substation"
+
+	maintenance
+		name = "\improper Team Four - Maintenance"
+		icon_state = "maintcentral"
+
+	aft_maintenance
+		name = "\improper Team Four - Aft Maintenance"
+		icon_state = "maintcentral"
+
+	port_maintenance
+		name = "\improper Team Four - Port Maintenance"
+		icon_state = "maintcentral"
+
+	starboard_maintenance
+		name = "\improper Team Four - Starboard Maintenance"
+		icon_state = "maintcentral"
+
+	fore_maintenance
+		name = "\improper Team Four - Fore Maintenance"
+		icon_state = "maintcentral"
+
+	ammo_storage
+		name = "\improper Team Four - Ammo Storage"
+		icon_state = "armory"
+
+	emergency_storage
+		name = "\improper Team Four - Emergency Storage"
+		icon_state = "storage"
+
+	core
+		name = "\improper Team Four - Core"
+		icon_state = "green"
+
+	engines
+		name = "\improper Team Four - Engines"
+		icon_state = "yellow"
+
+	primary_weapons_one
+		name = "\improper Team Four - Primary Weapons"
+		icon_state = "armory"
+
+	primary_weapons_two
+		name = "\improper Team Four - Primary Weapons"
+		icon_state = "armory"
+
+	secondary_weapons_one
+		name = "\improper Team Four - Secondary Weapons"
+		icon_state = "armory"
+
+	secondary_weapons_two
+		name = "\improper Team Four - Secondary Weapons"
+		icon_state = "armory"
+
+	external
+		name = "\improper Team Four - External"
+		icon_state = "away"
+
+	port
+		name = "\improper Team Four - Port"
+		icon_state = "hallP"
+
+	port_two
+		name = "\improper Team Four - Port"
+		icon_state = "hallP"
+
+	starboard
+		name = "\improper Team Four - Starboard"
+		icon_state = "hallS"
+
+	starboard_two
+		name = "\improper Team Four - Starboard"
+		icon_state = "hallS"
+
+	aft
+		name = "\improper Team Four - Aft"
+		icon_state = "hallA"
+
+	aft_two
+		name = "\improper Team Four - Aft"
+		icon_state = "hallA"
+
+	fore
+		name = "\improper Team Four - Fore"
+		icon_state = "hallF"
+
+	fore_two
+		name = "\improper Team Four - Fore"
+		icon_state = "hallF"
+
+	central
+		name = "\improper Team Four - Central"
+		icon_state = "hallC1"
+
+	central_two
+		name = "\improper Team Four - Central"
+		icon_state = "hallC2"
+
+	central_three
+		name = "\improper Team Four - Central"
+		icon_state = "hallC3"
+
+	bridge
+		name = "\improper Team Four - Bridge"
+		icon_state = "bridge"
+
+	storage
+		name = "\improper Team Four - Storage"
+		icon_state = "storage"
+
+	power
+		name = "\improper Team Four - Power"
+		icon_state = "substation"
+
+	atmos
+		name = "\improper Team Four - Atmos"
+		icon_state = "atmos"
+
+	sensors
+		name = "\improper Team Four - Sensors"
+		icon_state = "exam_room"
+
+	engineering
+		name = "\improper Team Four - Engineering"
+		icon_state = "engineering"
+
+	dorms
+		name = "\improper Team Four - Dorms"
+		icon_state = "crew_quarters"
+
+	security
+		name = "\improper Team Four - Security"
+		icon_state = "security"
+
+	medbay
+		name = "\improper Team Four - Medbay"
+		icon_state = "medbay3"
+
+/area/ship_battle/team_five
+	team = 5
+	name = "\improper Team Five"
+	icon_state = "purple"
+
+	bathroom
+		name = "\improper Team Five - Bathroom"
+		icon_state = "toilet"
+
+	teleporter
+		name = "\improper Team Five - Teleporte"
+		icon_state = "teleporter"
+
+	lab
+		name = "\improper Team Five - Lab"
+		icon_state = "research"
+
+	solar_one
+		name = "\improper Team Five - Solars"
+		icon_state = "panelsS"
+
+	solar_two
+		name = "\improper Team Five - Solars"
+		icon_state = "panelsP"
+
+	armory
+		name = "\improper Team Five - Armory"
+		icon_state = "armory"
+
+	ai
+		name = "\improper Team Five - AI"
+		icon_state = "ai"
+
+	telecomms
+		name = "\improper Team Five - Telecommunications"
+		icon_state = "tcomsatcham"
+
+	substation
+		name = "\improper Team Five - Substation"
+		icon_state = "substation"
+
+	maintenance
+		name = "\improper Team Five - Maintenance"
+		icon_state = "maintcentral"
+
+	aft_maintenance
+		name = "\improper Team Five - Aft Maintenance"
+		icon_state = "maintcentral"
+
+	port_maintenance
+		name = "\improper Team Five - Port Maintenance"
+		icon_state = "maintcentral"
+
+	starboard_maintenance
+		name = "\improper Team Five - Starboard Maintenance"
+		icon_state = "maintcentral"
+
+	fore_maintenance
+		name = "\improper Team Five - Fore Maintenance"
+		icon_state = "maintcentral"
+
+	ammo_storage
+		name = "\improper Team Five - Ammo Storage"
+		icon_state = "armory"
+
+	emergency_storage
+		name = "\improper Team Five - Emergency Storage"
+		icon_state = "storage"
+
+	core
+		name = "\improper Team Five - Core"
+		icon_state = "green"
+
+	engines
+		name = "\improper Team Five - Engines"
+		icon_state = "yellow"
+
+	primary_weapons_one
+		name = "\improper Team Five - Primary Weapons"
+		icon_state = "armory"
+
+	primary_weapons_two
+		name = "\improper Team Five - Primary Weapons"
+		icon_state = "armory"
+
+	secondary_weapons_one
+		name = "\improper Team Five - Secondary Weapons"
+		icon_state = "armory"
+
+	secondary_weapons_two
+		name = "\improper Team Five - Secondary Weapons"
+		icon_state = "armory"
+
+	external
+		name = "\improper Team Five - External"
+		icon_state = "away"
+
+	port
+		name = "\improper Team Five - Port"
+		icon_state = "hallP"
+
+	port_two
+		name = "\improper Team Five - Port"
+		icon_state = "hallP"
+
+	starboard
+		name = "\improper Team Five - Starboard"
+		icon_state = "hallS"
+
+	starboard_two
+		name = "\improper Team Five - Starboard"
+		icon_state = "hallS"
+
+	aft
+		name = "\improper Team Five - Aft"
+		icon_state = "hallA"
+
+	aft_two
+		name = "\improper Team Five - Aft"
+		icon_state = "hallA"
+
+	fore
+		name = "\improper Team Five - Fore"
+		icon_state = "hallF"
+
+	fore_two
+		name = "\improper Team Five - Fore"
+		icon_state = "hallF"
+
+	central
+		name = "\improper Team Five - Central"
+		icon_state = "hallC1"
+
+	central_two
+		name = "\improper Team Five - Central"
+		icon_state = "hallC2"
+
+	central_three
+		name = "\improper Team Five - Central"
+		icon_state = "hallC3"
+
+	bridge
+		name = "\improper Team Five - Bridge"
+		icon_state = "bridge"
+
+	storage
+		name = "\improper Team Five - Storage"
+		icon_state = "storage"
+
+	power
+		name = "\improper Team Five - Power"
+		icon_state = "substation"
+
+	atmos
+		name = "\improper Team Five - Atmos"
+		icon_state = "atmos"
+
+	sensors
+		name = "\improper Team Five - Sensors"
+		icon_state = "exam_room"
+
+	engineering
+		name = "\improper Team Five - Engineering"
+		icon_state = "engineering"
+
+	dorms
+		name = "\improper Team Five - Dorms"
+		icon_state = "crew_quarters"
+
+	security
+		name = "\improper Team Five - Security"
+		icon_state = "security"
+
+	medbay
+		name = "\improper Team Five - Medbay"
+		icon_state = "medbay3"
+
 /////////
 //SPACE//
 /////////

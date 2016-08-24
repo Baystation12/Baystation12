@@ -30,22 +30,22 @@ var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
 
 var/diary               = null
 var/href_logfile        = null
-var/station_name        = "NSS Exodus"
-var/station_short       = "Exodus"
-var/const/dock_name     = "N.A.S. Crescent"
+var/station_name        = "Ship Battles"
+var/station_short       = "Ship Battles"
+var/const/dock_name     = "moon"
 var/const/boss_name     = "Central Command"
 var/const/boss_short    = "Centcomm"
 var/const/company_name  = "NanoTrasen"
 var/const/company_short = "NT"
-var/game_version        = "Baystation12"
+var/game_version        = "Space Battles"
 var/changelog_hash      = ""
-var/game_year           = (text2num(time2text(world.realtime, "YYYY")) + 544)
+var/game_year           = (text2num(time2text(world.realtime, "YYYY")) + 122)
 
 var/round_progressing = 1
-var/master_mode       = "extended" // "extended"
-var/secondary_mode    = "extended"
-var/tertiary_mode     = "extended"
-var/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
+var/master_mode       = "two ship combat" // "extended"
+var/secondary_mode    = "two ship combat"
+var/tertiary_mode     = "two ship combat"
+var/secret_force_mode = "two ship combat"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
 
 var/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
 

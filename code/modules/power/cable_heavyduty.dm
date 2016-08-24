@@ -26,3 +26,11 @@
 
 /obj/structure/cable/heavyduty/cableColor(var/colorC)
 	return
+
+/obj/structure/cable/heavyduty/hides_under_flooring()
+	return 0
+
+/obj/structure/cable/heavyduty/ex_act(var/severity = 0)
+	if(severity == 1)
+		if(prob(50))
+			qdel(src)

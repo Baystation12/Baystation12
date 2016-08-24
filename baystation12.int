@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+LAST_COMPILE_TIME: 1472028236
+DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\controllers code\controllers\Processes code\datums code\datums\appearances code\datums\appearances\automatic code\datums\extensions code\datums\extensions\appearance code\datums\extensions\multitool code\datums\extensions\multitool\items code\datums\helper_datums code\datums\outfits code\game code\game\gamemodes code\game\jobs code\game\machinery code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\items\weapons code\game\objects\items\weapons\circuitboards code\game\objects\items\weapons\circuitboards\machinery code\game\turfs code\game\turfs\flooring code\game\turfs\simulated code\modules code\modules\client code\modules\client\preference_setup code\modules\events code\modules\mob code\modules\mob\new_player code\modules\power code\modules\power\antimatter code\modules\recycling code\modules\shieldgen code\modules\ship_combat code\modules\ship_combat\jobs code\modules\ship_combat\navigation code\modules\spells code\modules\spells\targeted code\modules\spells\targeted\equip icons icons\obj icons\obj\machines maps maps\ships maps\stations maps\torch sound sound\effects sound\weapons ~code 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 511.1353
+WINDOW: code\modules\ship_combat\computer.dm;code\modules\ship_combat\misc.dm;maps\ships\aphrodyte.dmm;maps\ships\core.dmm;maps\ships\blasta.dmm;code\modules\ship_combat\navigation\engine.dm;icons\obj\ship_battles.dmi;maps\ships\endurance.dmm;code\modules\ship_combat\navigation\communication.dm;code\game\gamemodes\gameticker.dm;code\modules\ship_combat\modes.dm;code\hub.dm;code\global.dm;code\modules\mob\new_player\new_player.dm;code\modules\recycling\conveyor2.dm;code\game\turfs\simulated\floor_acts.dm
+FILE: code\modules\ship_combat\navigation\engine.dm
 */
 // END_INTERNALS

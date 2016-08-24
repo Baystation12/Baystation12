@@ -378,8 +378,8 @@
 
 		if (G && G.active)
 			return 0
-	else if (locate(/obj/machinery/shieldwallgen) in T)
-		var/obj/machinery/shieldwallgen/S = locate(/obj/machinery/shieldwallgen) in T
+	else if (locate(/obj/machinery/space_battle/shieldwallgen) in T)
+		var/obj/machinery/space_battle/shieldwallgen/S = locate(/obj/machinery/space_battle/shieldwallgen) in T
 
 		if (S && S.active)
 			return 0

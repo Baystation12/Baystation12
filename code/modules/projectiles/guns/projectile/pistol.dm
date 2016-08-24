@@ -166,7 +166,7 @@
 	max_shells = 1 //literally just a barrel
 
 	var/global/list/ammo_types = list(
-		/obj/item/ammo_casing/a357              = ".357",
+/*		/obj/item/ammo_casing/a357              = ".357",
 		/obj/item/ammo_casing/shotgun           = "12 gauge",
 		/obj/item/ammo_casing/shotgun           = "12 gauge",
 		/obj/item/ammo_casing/shotgun/pellet    = "12 gauge",
@@ -176,7 +176,8 @@
 		/obj/item/ammo_casing/shotgun/stunshell = "12 gauge",
 		/obj/item/ammo_casing/shotgun/flash     = "12 gauge",
 		/obj/item/ammo_casing/a762              = "7.62mm",
-		/obj/item/ammo_casing/a556              = "5.56mm"
+		/obj/item/ammo_casing/a556              = "5.56mm",
+*/		/obj/item/ammo_casing/a10mm = "a10mm"
 		)
 
 /obj/item/weapon/gun/projectile/pirate/New()
