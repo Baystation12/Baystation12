@@ -81,9 +81,12 @@
 	if(current_viewing_message)
 		data["message_current"] = current_viewing_message
 
-	if(evac_control.is_prepared())
+	if(evac_control.shuttle.location)
 		data["have_shuttle"] = 1
-		data["have_shuttle_called"] = 1
+		if(evac_control.is_idle())
+			data["have_shuttle_called"] = 0
+		else
+			data["have_shuttle_called"] = 1
 	else
 		data["have_shuttle"] = 0
 

@@ -67,4 +67,3 @@
 /datum/evacuation_controller/proc/is_departing()
 	if(state == EVAC_LAUNCHING)
 		return 1
-

@@ -16,7 +16,7 @@
 	// Launch the pods!
 	for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
 		if (!pod.arming_controller || pod.arming_controller.armed)
-			pod.move_time = (evac_transit_delay*10)
+			pod.move_time = (evac_transit_delay/10)
 			pod.launch(src)
 
 	if (emergency_evacuation)

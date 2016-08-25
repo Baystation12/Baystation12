@@ -16,9 +16,9 @@ var/datum/evacuation_controller/evacuation_controller
 	var/auto_recall_time
 	var/emergency_evacuation
 
-	var/evac_prep_delay =    10 MINUTES
-	var/evac_launch_delay =   2 MINUTES
-	var/evac_transit_delay =  3 MINUTES
+	var/evac_prep_delay =   10 MINUTES
+	var/evac_launch_delay =  3 MINUTES
+	var/evac_transit_delay = 2 MINUTES
 
 	var/evac_cooldown_time
 	var/evac_called_at
@@ -84,7 +84,7 @@ var/datum/evacuation_controller/evacuation_controller
 	if(!can_cancel())
 		return 0
 
-	evac_cooldown_time = evac_called_at + evac_prep_delay
+	evac_cooldown_time = world.time + (world.time - evac_called_at)
 	state = EVAC_COOLDOWN
 
 	evac_ready_time =   null

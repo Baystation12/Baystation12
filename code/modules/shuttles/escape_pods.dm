@@ -4,7 +4,7 @@ var/list/escape_pods_by_name = list()
 /datum/shuttle/ferry/escape_pod
 	var/datum/computer/file/embedded_program/docking/simple/escape_pod/arming_controller
 	category = /datum/shuttle/ferry/escape_pod
-	move_time = 3 MINUTES
+	move_time = 100
 
 /datum/shuttle/ferry/escape_pod/New()
 	if(name in escape_pods_by_name)
@@ -12,6 +12,7 @@ var/list/escape_pods_by_name = list()
 	move_time = evacuation_controller.evac_transit_delay + rand(-30, 60)
 	escape_pods_by_name[name] = src
 	escape_pods += src
+	move_time = round(evacuation_controller.evac_transit_delay/10)
 	..()
 
 /datum/shuttle/ferry/escape_pod/init_docking_controllers()
