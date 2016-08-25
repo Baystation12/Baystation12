@@ -2152,6 +2152,7 @@
 #include "maps\example\example_define.dm"
 #include "maps\exodus\exodus.dm"
 #include "maps\exodus\exodus_define.dm"
+#include "maps\overmap\overmap_example_define.dm"
 #include "maps\torch\torch_define.dm"
 #include "maps\~mapsystem\maps.dm"
 #include "~code\global_init.dm"
