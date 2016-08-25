@@ -9,9 +9,10 @@ var/list/ship_engines = list()
 /datum/ship_engine/New(var/obj/machinery/holder)
 	engine = holder
 	zlevel = holder.z
+	ship_engines += src
 	for(var/obj/machinery/computer/engines/E in machines)
-		if (E.z == zlevel && !(src in E.engines))
-			E.engines += src
+		if (zlevel in E.zlevels)
+			E.engines |= src
 			break
 
 //Tries to fire the engine. If successfull, returns 1
@@ -53,6 +54,7 @@ var/list/ship_engines = list()
 	return 1
 
 /datum/ship_engine/proc/die()
+	ship_engines -= src
 	for(var/obj/machinery/computer/engines/E in machines)
 		if (E.z == zlevel)
 			E.engines -= src

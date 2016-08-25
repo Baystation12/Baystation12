@@ -6,7 +6,7 @@
 ///process()
 ///Called by the gameticker
 /datum/game_mode/proc/process()
-	if(round_autoantag && world.time >= next_spawn && !emergency_shuttle.departed)
+	if(round_autoantag && world.time >= next_spawn && !evacuation_controller.has_evacuated())
 		process_autoantag()
 
 //This can be overriden in case a game mode needs to do stuff when a player latejoins
