@@ -330,7 +330,7 @@
 	mouse_opacity = 2
 	screen_loc = "CENTER-7,CENTER-7"
 
-/obj/screen/click_catcher/proc/MakeGreed()
+/proc/create_click_catcher()
 	. = list()
 	for(var/i = 0, i<15, i++)
 		for(var/j = 0, j<15, j++)
