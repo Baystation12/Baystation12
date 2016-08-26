@@ -13,7 +13,7 @@
 	return departed
 
 /datum/evacuation_controller/pods/shuttle/waiting_to_leave()
-	return (!autopilot || shuttle.is_launching())
+	return (!autopilot || (shuttle && shuttle.is_launching()))
 
 /datum/evacuation_controller/pods/shuttle/launch_evacuation()
 
@@ -53,7 +53,7 @@
 	return 0
 
 /datum/evacuation_controller/pods/shuttle/get_eta()
-	if (shuttle.has_arrive_time())
+	if (shuttle && shuttle.has_arrive_time())
 		return (shuttle.arrive_time-world.time)/10
 	return ..()
 
