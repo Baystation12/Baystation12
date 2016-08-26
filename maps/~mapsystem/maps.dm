@@ -62,6 +62,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
 	var/flags = 0
+	var/evac_controller_type = /datum/evacuation_controller
 
 /datum/map/New()
 	..()

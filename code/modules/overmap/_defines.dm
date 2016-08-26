@@ -1,7 +1,29 @@
 //Zlevel where overmap objects should be
 #define OVERMAP_ZLEVEL 1
 //How far from the edge of overmap zlevel could randomly placed objects spawn
-#define OVERMAP_EDGE 7
+#define OVERMAP_EDGE 2
+#define OVERMAP_SIZE 30
+
+/area/overmap/
+	name = "System Map"
+	icon_state = "start"
+	requires_power = 0
+	luminosity = 1
+	lighting_use_dynamic = 0
+	base_turf = /turf/unsimulated/map
+
+/turf/unsimulated/map
+	icon = 'icons/turf/space.dmi'
+	icon_state = "map"
+
+/turf/unsimulated/map/edge
+	opacity = 1
+	density = 1
+
+/turf/unsimulated/map/New()
+	..()
+	if(x == 1 || y == 1)
+		maptext = "<center>[x]-[y]</center>"
 
 //list used to track which zlevels are being 'moved' by the proc below
 var/list/moving_levels = list()
@@ -20,14 +42,14 @@ proc/toggle_move_stars(zlevel, direction)
 	if(!direction)
 		gen_dir = null
 
-	if (moving_levels["zlevel"] != gen_dir)
-		moving_levels["zlevel"] = gen_dir
+	if (moving_levels["[zlevel]"] != gen_dir)
+		moving_levels["[zlevel]"] = gen_dir
 		for(var/x = 1 to world.maxx)
 			for(var/y = 1 to world.maxy)
 				var/turf/space/T = locate(x,y,zlevel)
 				if (istype(T))
 					if(!gen_dir)
-						T.icon_state = "[((T.x + T.y) ^ ~(T.x * T.y) + T.z) % 25]"
+						T.icon_state = "[((T.x + T.y) ^ ~(T.x * T.y)) % 25]"
 					else
 						T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"
 						for(var/atom/movable/AM in T)
@@ -39,6 +61,8 @@ proc/toggle_move_stars(zlevel, direction)
 var/list/cached_space = list()
 
 proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
+	return	//a plug until issues with thrown objects spawning endless space levels are resolved
+
 	var/obj/effect/map/M = map_sectors["[T.z]"]
 	if (!M)
 		return

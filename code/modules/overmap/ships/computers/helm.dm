@@ -87,7 +87,7 @@
 	data["d_x"] = dx
 	data["d_y"] = dy
 	data["speed"] = linked.get_speed()
-	data["accel"] = round(linked.get_acceleration())
+	data["accel"] = linked.get_acceleration()
 	data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 	data["autopilot"] = autopilot
 	data["manual_control"] = manual_control

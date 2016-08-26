@@ -1,7 +1,7 @@
 // These are basically USB data sticks and may be used to transfer files between devices
 /obj/item/weapon/computer_hardware/hard_drive/portable/
 	name = "basic data crystal"
-	desc = "Small crystal with imprinted photonic circuits that can be used to store data. It's capacity is 16 GQ."
+	desc = "Small crystal with imprinted photonic circuits that can be used to store data. Its capacity is 16 GQ."
 	power_usage = 10
 	icon_state = "flashdrive_basic"
 	hardware_size = 1
@@ -10,7 +10,7 @@
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/advanced
 	name = "advanced data crystal"
-	desc = "Small crystal with imprinted high-density photonic circuits that can be used to store data. It's capacity is 64 GQ."
+	desc = "Small crystal with imprinted high-density photonic circuits that can be used to store data. Its capacity is 64 GQ."
 	power_usage = 20
 	icon_state = "flashdrive_advanced"
 	hardware_size = 1
@@ -19,7 +19,7 @@
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/super
 	name = "super data crystal"
-	desc = "Small crystal with imprinted ultra-density photonic circuits that can be used to store data. It's capacity is 256 GQ."
+	desc = "Small crystal with imprinted ultra-density photonic circuits that can be used to store data. Its capacity is 256 GQ."
 	power_usage = 40
 	icon_state = "flashdrive_super"
 	hardware_size = 1

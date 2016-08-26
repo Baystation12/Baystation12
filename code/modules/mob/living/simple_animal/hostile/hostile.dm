@@ -20,7 +20,8 @@
 	var/enroute = 0
 
 /mob/living/simple_animal/hostile/proc/FindTarget()
-
+	if(!faction) //No faction, no reason to attack anybody.
+		return null
 	var/atom/T = null
 	stop_automated_movement = 0
 	for(var/atom/A in ListTargets(10))
@@ -228,7 +229,7 @@
 
 /mob/living/simple_animal/hostile/proc/check_horde()
 	return 0
-	if(emergency_shuttle.shuttle.location)
+	if(evacuation_controller.is_prepared())
 		if(!enroute && !target_mob)	//The shuttle docked, all monsters rush for the escape hallway
 			if(!shuttletarget && escape_list.len) //Make sure we didn't already assign it a target, and that there are targets to pick
 				shuttletarget = pick(escape_list) //Pick a shuttle target
