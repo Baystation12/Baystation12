@@ -1,7 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+LAST_COMPILE_TIME: 1472253374
+DIR: code code\game\gamemodes code\game\gamemodes\cult code\game\gamemodes\endgame code\game\gamemodes\endgame\supermatter_cascade code\modules\lighting code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food code\modules\reagents\reagent_containers\food\drinks 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 511.1351
+WINDOW: code\modules\lighting\lighting_atom.dm;code\modules\lighting\lighting_area.dm;code\modules\lighting\lighting_corner.dm;code\modules\lighting\lighting_overlay.dm;code\modules\lighting\lighting_process.dm;code\modules\lighting\lighting_setup.dm;code\modules\lighting\lighting_source.dm;code\modules\lighting\lighting_turf.dm;code\modules\lighting\~lighting_undefs.dm;code\modules\reagents\reagent_containers\food\drinks\bottle.dm;code\game\gamemodes\cult\hell_universe.dm;code\game\gamemodes\endgame\supermatter_cascade\universe.dm
+FILE: code\game\gamemodes\endgame\supermatter_cascade\universe.dm
 */
 // END_INTERNALS
-
