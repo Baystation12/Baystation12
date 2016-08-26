@@ -374,7 +374,7 @@
 	name = "\improper SEV Torch Hangar Deck"
 	icon_state = "yellow"
 	requires_power = 0
-	lighting_use_dynamic = 1
+	dynamic_lighting = 1
 	flags = RAD_SHIELDED
 
 /area/calypso_hangar/start
@@ -420,7 +420,7 @@
 	name = "\improper SEV Torch Hangar Deck"
 	icon_state = "yellow"
 	requires_power = 0
-	lighting_use_dynamic = 1
+	dynamic_lighting = 1
 	flags = RAD_SHIELDED
 
 
@@ -462,7 +462,7 @@
 	name = "\improper Turbolift"
 	icon_state = "shuttle"
 	requires_power = 0
-	lighting_use_dynamic = 1
+	dynamic_lighting = 1
 	flags = RAD_SHIELDED
 
 /area/turbolift/start
@@ -516,12 +516,12 @@
 	name = "\improper Ninja Base"
 	icon_state = "green"
 	requires_power = 0
-	lighting_use_dynamic = 1
+	dynamic_lighting = 1
 	flags = RAD_SHIELDED
 
 /area/ninja_dojo/dojo
 	name = "\improper Clan Dojo"
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 
 /area/ninja_dojo/start
 	name = "\improper Clan Dojo"

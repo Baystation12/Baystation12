@@ -27,19 +27,20 @@
 	if(isnull(gcDestroyed) && loc)
 		testing("GC: -- [type] was deleted via del() rather than qdel() --")
 		crash_with("GC: -- [type] was deleted via del() rather than qdel() --") // stick a stack trace in the runtime logs
-//	else if(isnull(gcDestroyed))
-//		testing("GC: [type] was deleted via GC without qdel()") //Not really a huge issue but from now on, please qdel()
-//	else
-//		testing("GC: [type] was deleted via GC with qdel()")
 	..()
 
 /atom/movable/Destroy()
 	. = ..()
 	for(var/atom/movable/AM in src)
 		qdel(AM)
+	var/turf/un_opaque
+	if(opacity && isturf(loc))
+		un_opaque = loc
 	forceMove(null)
-	if (pulledby)
-		if (pulledby.pulling == src)
+	if(un_opaque)
+		un_opaque.recalc_atom_opacity()
+	if(pulledby)
+		if(pulledby.pulling == src)
 			pulledby.pulling = null
 		pulledby = null
 

@@ -96,7 +96,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "space"
 	requires_power = 1
 	always_unpowered = 1
-	lighting_use_dynamic = 1
+	dynamic_lighting = 1
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
@@ -324,7 +324,7 @@ area/space/atmosalert()
 	name = "\improper Centcom"
 	icon_state = "centcom"
 	requires_power = 0
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 
 /area/centcom/control
 	name = "\improper Centcom Control"
@@ -362,7 +362,7 @@ area/space/atmosalert()
 	name = "\improper Mercenary Base"
 	icon_state = "syndie-ship"
 	requires_power = 0
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 
 /area/syndicate_mothership/control
 	name = "\improper Mercenary Control Room"
@@ -417,7 +417,7 @@ area/space/atmosalert()
 	name = "\improper Thunderdome"
 	icon_state = "thunder"
 	requires_power = 0
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 	sound_env = ARENA
 
 /area/tdome/tdome1
@@ -440,7 +440,7 @@ area/space/atmosalert()
 /area/acting
 	name = "\improper Centcom Acting Guild"
 	icon_state = "red"
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 	requires_power = 0
 
 /area/acting/backstage
@@ -448,7 +448,7 @@ area/space/atmosalert()
 
 /area/acting/stage
 	name = "\improper Stage"
-	lighting_use_dynamic = 1
+	dynamic_lighting = 1
 	icon_state = "yellow"
 
 //RESCUE
@@ -458,13 +458,13 @@ area/space/atmosalert()
 	name = "\improper Response Team Base"
 	icon_state = "yellow"
 	requires_power = 0
-	lighting_use_dynamic = 1
+	dynamic_lighting = 1
 	flags = RAD_SHIELDED
 
 /area/rescue_base/base
 	name = "\improper Barracks"
 	icon_state = "yellow"
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 
 /area/rescue_base/start
 	name = "\improper Response Team Base"
@@ -576,7 +576,7 @@ area/space/atmosalert()
 	name = "\improper Wizard's Den"
 	icon_state = "yellow"
 	requires_power = 0
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 
 /area/skipjack_station
 	name = "\improper Skipjack"
@@ -1189,7 +1189,7 @@ area/space/atmosalert()
 /area/holodeck
 	name = "\improper Holodeck"
 	icon_state = "Holodeck"
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 	sound_env = LARGE_ENCLOSED
 
 /area/holodeck/alphadeck
@@ -1356,7 +1356,7 @@ area/space/atmosalert()
 /area/solar
 	requires_power = 1
 	always_unpowered = 1
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 	base_turf = /turf/space
 
 
@@ -2346,25 +2346,25 @@ area/space/atmosalert()
 	name = "\improper AI Sat Ext"
 	icon_state = "storage"
 	luminosity = 1
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 
 /area/turret_protected/AIsatextFS
 	name = "\improper AI Sat Ext"
 	icon_state = "storage"
 	luminosity = 1
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 
 /area/turret_protected/AIsatextAS
 	name = "\improper AI Sat Ext"
 	icon_state = "storage"
 	luminosity = 1
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 
 /area/turret_protected/AIsatextAP
 	name = "\improper AI Sat Ext"
 	icon_state = "storage"
 	luminosity = 1
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 
 /area/turret_protected/NewAIMain
 	name = "\improper AI Main New"
@@ -2542,7 +2542,7 @@ area/space/atmosalert()
 	name = "Beach"
 	icon_state = "null"
 	luminosity = 1
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 	requires_power = 0
 	ambience = list()
 	var/sound/mysound = null
@@ -2619,7 +2619,7 @@ var/list/centcom_areas = list (
 	name = "Keelin's private beach"
 	icon_state = "null"
 	luminosity = 1
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 	requires_power = 0
 	var/sound/mysound = null
 
