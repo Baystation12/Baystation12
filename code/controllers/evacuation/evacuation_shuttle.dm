@@ -13,7 +13,7 @@
 	return departed
 
 /datum/evacuation_controller/pods/shuttle/waiting_to_leave()
-	return (!autopilot || shuttle.is_launching())
+	return (!autopilot || (shuttle && shuttle.is_launching()))
 
 /datum/evacuation_controller/pods/shuttle/launch_evacuation()
 
