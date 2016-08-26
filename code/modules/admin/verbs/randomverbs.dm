@@ -748,59 +748,67 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/admin_call_shuttle()
 
 	set category = "Admin"
-	set name = "Call Evacuation"
+	set name = "Call Shuttle"
 
-	if(!ticker || !evacuation_controller)
+	if ((!( ticker ) || !emergency_shuttle.location()))
 		return
 
 	if(!check_rights(R_ADMIN))	return
 
-	if(alert(src, "Are you sure?", "Confirm", "Yes", "No") != "Yes") return
+	var/confirm = alert(src, "You sure?", "Confirm", "Yes", "No")
+	if(confirm != "Yes") return
 
+	var/choice
 	if(ticker.mode.auto_recall_shuttle)
-		if(input("The evacuation will just be cancelled if you call it. Call anyway?") in list("Confirm", "Cancel") != "Confirm")
+		choice = input("The shuttle will just return if you call it. Call anyway?") in list("Confirm", "Cancel")
+		if(choice == "Confirm")
+			emergency_shuttle.auto_recall = 1	//enable auto-recall
+		else
 			return
 
-	var/choice = input("Is this an emergency evacuation or a crew transfer?") in list("Emergency", "Crew Transfer")
-	evacuation_controller.call_evacuation(usr, (choice == "Emergency"))
+	choice = input("Is this an emergency evacuation or a crew transfer?") in list("Emergency", "Crew Transfer")
+	if (choice == "Emergency")
+		emergency_shuttle.call_evac(usr, TRUE)
+	else
+		emergency_shuttle.call_transfer(usr, TRUE)
+
 
 	feedback_add_details("admin_verb","CSHUT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	log_admin("[key_name(usr)] admin-called an evacuation.")
-	message_admins("\blue [key_name_admin(usr)] admin-called an evacuation.", 1)
+	log_admin("[key_name(usr)] admin-called the emergency shuttle.")
+	message_admins("\blue [key_name_admin(usr)] admin-called the emergency shuttle.", 1)
 	return
 
 /client/proc/admin_cancel_shuttle()
 	set category = "Admin"
-	set name = "Cancel Evacuation"
+	set name = "Cancel Shuttle"
 
 	if(!check_rights(R_ADMIN))	return
 
 	if(alert(src, "You sure?", "Confirm", "Yes", "No") != "Yes") return
 
-	if(!ticker || !evacuation_controller)
+	if(!ticker || !emergency_shuttle.can_recall())
 		return
 
-	evacuation_controller.cancel_evacuation()
-
+	emergency_shuttle.recall()
 	feedback_add_details("admin_verb","CCSHUT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	log_admin("[key_name(usr)] admin-cancelled the evacuation.")
-	message_admins("\blue [key_name_admin(usr)] admin-cancelled the evacuation.", 1)
+	log_admin("[key_name(usr)] admin-recalled the emergency shuttle.")
+	message_admins("\blue [key_name_admin(usr)] admin-recalled the emergency shuttle.", 1)
 
 	return
 
 /client/proc/admin_deny_shuttle()
 	set category = "Admin"
-	set name = "Toggle Deny Evac"
+	set name = "Toggle Deny Shuttle"
 
-	if (!ticker || !evacuation_controller)
+	if (!ticker)
 		return
 
 	if(!check_rights(R_ADMIN))	return
 
-	evacuation_controller.deny = !evacuation_controller.deny
+	emergency_shuttle.deny_shuttle = !emergency_shuttle.deny_shuttle
 
-	log_admin("[key_name(src)] has [evacuation_controller.deny ? "denied" : "allowed"] evacuation to be called.")
-	message_admins("[key_name_admin(usr)] has [evacuation_controller.deny ? "denied" : "allowed"] evacuation to be called.")
+	log_admin("[key_name(src)] has [emergency_shuttle.deny_shuttle ? "denied" : "allowed"] the shuttle to be called.")
+	message_admins("[key_name_admin(usr)] has [emergency_shuttle.deny_shuttle ? "denied" : "allowed"] the shuttle to be called.")
 
 /client/proc/cmd_admin_attack_log(mob/M as mob in mob_list)
 	set category = "Special Verbs"

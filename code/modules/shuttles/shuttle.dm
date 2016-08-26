@@ -15,10 +15,8 @@
 	var/flags = SHUTTLE_FLAGS_PROCESS
 	var/category = /datum/shuttle
 
-/datum/shuttle/New(_name)
+/datum/shuttle/New()
 	..()
-	if(_name)
-		src.name = _name
 	if(src.name in shuttle_controller.shuttles)
 		CRASH("A shuttle with the name '[name]' is already defined.")
 	shuttle_controller.shuttles[src.name] = src

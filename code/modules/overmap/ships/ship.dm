@@ -1,7 +1,7 @@
 /obj/effect/map/ship
 	name = "generic ship"
 	desc = "Space faring vessel."
-	icon_state = "ship"
+	icon_state = "sheet-sandstone"
 	var/vessel_mass = 9000 //tonnes, random number
 	var/default_delay = 60
 	var/list/speed = list(0,0)
@@ -16,11 +16,11 @@
 
 /obj/effect/map/ship/initialize()
 	for(var/obj/machinery/computer/engines/E in machines)
-		if (E.z in map_z)
+		if (E.z == map_z)
 			eng_control = E
 			break
 	for(var/obj/machinery/computer/helm/H in machines)
-		if (H.z in map_z)
+		if (H.z == map_z)
 			nav_control = H
 			break
 	processing_objects.Add(src)
@@ -32,10 +32,10 @@
 	return !(speed[1] || speed[2])
 
 /obj/effect/map/ship/proc/get_acceleration()
-	return round(eng_control.get_total_thrust()/vessel_mass, 0.1)
+	return eng_control.get_total_thrust()/vessel_mass
 
 /obj/effect/map/ship/proc/get_speed()
-	return round(sqrt(speed[1]*speed[1] + speed[2]*speed[2]), 0.1)
+	return round(sqrt(speed[1]*speed[1] + speed[2]*speed[2]))
 
 /obj/effect/map/ship/proc/get_heading()
 	var/res = 0
@@ -54,11 +54,10 @@
 /obj/effect/map/ship/proc/adjust_speed(n_x, n_y)
 	speed[1] = Clamp(speed[1] + n_x, -default_delay, default_delay)
 	speed[2] = Clamp(speed[2] + n_y, -default_delay, default_delay)
-	for(var/zz in map_z)
-		if(is_still())
-			toggle_move_stars(zz)
-		else
-			toggle_move_stars(zz, fore_dir)
+	if(is_still())
+		toggle_move_stars(map_z)
+	else
+		toggle_move_stars(map_z, fore_dir)
 
 /obj/effect/map/ship/proc/can_burn()
 	if (!eng_control)
@@ -112,5 +111,5 @@
 		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
 		if(newloc)
 			Move(newloc)
-		if(rotate)
+		if(rotate)	
 			rotate(get_heading())

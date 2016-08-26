@@ -39,12 +39,6 @@
 	crew_announcement.newscast = 1
 
 /datum/nano_module/program/comm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
-
-	var/datum/evacuation_controller/pods/shuttle/evac_control = evacuation_controller
-	if(!istype(evac_control))
-		user << "<span class='danger'>This console should not in use on this map. Please report this to a developer.</span>"
-		return
-
 	var/list/data = host.initial_data()
 
 	if(program)
@@ -81,12 +75,12 @@
 	if(current_viewing_message)
 		data["message_current"] = current_viewing_message
 
-	if(evac_control.shuttle.location)
+	if(emergency_shuttle.location())
 		data["have_shuttle"] = 1
-		if(evac_control.is_idle())
-			data["have_shuttle_called"] = 0
-		else
+		if(emergency_shuttle.online())
 			data["have_shuttle_called"] = 1
+		else
+			data["have_shuttle_called"] = 0
 	else
 		data["have_shuttle"] = 0
 
@@ -317,15 +311,15 @@ var/last_message_id = 0
 	frequency.post_signal(src, status_signal)
 
 /proc/cancel_call_proc(var/mob/user)
-	if (!ticker || !evacuation_controller)
+	if (!( ticker ) || !emergency_shuttle.can_recall())
 		return
 	if((ticker.mode.name == "blob")||(ticker.mode.name == "Meteor"))
 		return
 
-	if(evacuation_controller.cancel_evacuation())
-		log_game("[key_name(user)] has cancelled the evacuation.")
-		message_admins("[key_name_admin(user)] has cancelled the evacuation.", 1)
-
+	if(!emergency_shuttle.going_to_centcom()) //check that shuttle isn't already heading to centcomm
+		emergency_shuttle.recall()
+		log_game("[key_name(user)] has recalled the shuttle.")
+		message_admins("[key_name_admin(user)] has recalled the shuttle.", 1)
 	return
 
 
@@ -340,7 +334,7 @@ var/last_message_id = 0
 		PS.allowedtocall = !(PS.allowedtocall)
 
 /proc/call_shuttle_proc(var/mob/user)
-	if (!ticker || !evacuation_controller)
+	if ((!( ticker ) || !emergency_shuttle.location()))
 		return
 
 	if(!universe.OnShuttleCall(usr))
@@ -348,36 +342,53 @@ var/last_message_id = 0
 		return
 
 	if(deathsquad.deployed)
-		user << "[boss_short] will not allow an evacuation to take place. Consider all contracts terminated."
+		user << "[boss_short] will not allow the shuttle to be called. Consider all contracts terminated."
 		return
 
-	if(evacuation_controller.deny)
-		user << "An evacuation cannot be called at this time. Please try again later."
+	if(emergency_shuttle.deny_shuttle)
+		user << "The emergency shuttle may not be sent at this time. Please try again later."
 		return
 
-	if(evacuation_controller.is_on_cooldown()) // Ten minute grace period to let the game get going without lolmetagaming. -- TLE
-		user << evacuation_controller.get_cooldown_message()
+	if(world.time < 6000) // Ten minute grace period to let the game get going without lolmetagaming. -- TLE
+		user << "The emergency shuttle is refueling. Please wait another [round((6000-world.time)/600)] minute\s before trying again."
+		return
 
-	if(evacuation_controller.is_evacuating())
-		user << "An evacuation is already underway."
+	if(emergency_shuttle.going_to_centcom())
+		user << "The emergency shuttle may not be called while returning to [boss_short]."
+		return
+
+	if(emergency_shuttle.online())
+		user << "The emergency shuttle is already on its way."
 		return
 
 	if(ticker.mode.name == "blob" || ticker.mode.name == "epidemic")
 		user << "Under directive 7-10, [station_name()] is quarantined until further notice."
 		return
 
-	if(evacuation_controller.call_evacuation(user))
-		log_and_message_admins("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
+	if(!emergency_shuttle.call_evac(user))
+		return
+	log_and_message_admins("has called the shuttle.")
 
 /proc/init_shift_change(var/mob/user, var/force = 0)
-	if (!ticker || !evacuation_controller)
+	if ((!( ticker ) || !emergency_shuttle.location()))
+		return
+
+	if(emergency_shuttle.going_to_centcom())
+		user << "The shuttle may not be called while returning to [boss_short]."
+		return
+
+	if(emergency_shuttle.online())
+		user << "The shuttle is already on its way."
 		return
 
 	// if force is 0, some things may stop the shuttle call
 	if(!force)
-
-		if(evacuation_controller.deny)
+		if(emergency_shuttle.deny_shuttle)
 			user << "[boss_short] does not currently have a shuttle available in your sector. Please try again later."
+			return
+
+		if(deathsquad.deployed == 1)
+			user << "[boss_short] will not allow the shuttle to be called. Consider all contracts terminated."
 			return
 
 		if(world.time < 54000) // 30 minute grace period to let the game get going
@@ -386,11 +397,20 @@ var/last_message_id = 0
 
 		if(ticker.mode.auto_recall_shuttle)
 			//New version pretends to call the shuttle but cause the shuttle to return after a random duration.
-			evacuation_controller.auto_recall(1)
+			emergency_shuttle.auto_recall = 1
+
+		if(ticker.mode.name == "blob" || ticker.mode.name == "epidemic")
+			user << "Under directive 7-10, [station_name()] is quarantined until further notice."
+			return
+
+	emergency_shuttle.call_transfer()
 
 	//delay events in case of an autotransfer
 	if (isnull(user))
 		event_manager.delay_events(EVENT_LEVEL_MODERATE, 10200) //17 minutes
 		event_manager.delay_events(EVENT_LEVEL_MAJOR, 10200)
 
-	return call_shuttle_proc(user)
+	log_game("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
+	message_admins("[user? key_name_admin(user) : "Autotransfer"] has called the shuttle.", 1)
+
+	return

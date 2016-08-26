@@ -59,8 +59,6 @@ var/list/all_maps = list()
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
-	var/evac_controller_type = /datum/evacuation_controller
-
 /datum/map/New()
 	..()
 	if(!map_levels)

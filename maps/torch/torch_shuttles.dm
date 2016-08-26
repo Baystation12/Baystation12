@@ -100,7 +100,7 @@
 
 //Torch Large Pods
 
-/datum/shuttle/ferry/escape_pod/escape_pod_six
+/datum/shuttle/ferry/emergency/escape_pod_six
 	name = "Escape Pod 6"
 	location = 0
 	warmup_time = 10
@@ -111,6 +111,7 @@
 	dock_target_station = "escape_pod_6_berth"
 	dock_target_offsite = "escape_pod_6_recovery"
 	transit_direction = NORTH
+	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_seven
 	name = "Escape Pod 7"
@@ -123,6 +124,7 @@
 	dock_target_station = "escape_pod_7_berth"
 	dock_target_offsite = "escape_pod_7_recovery"
 	transit_direction = NORTH
+	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_eight
 	name = "Escape Pod 8"
@@ -135,6 +137,7 @@
 	dock_target_station = "escape_pod_8_berth"
 	dock_target_offsite = "escape_pod_8_recovery"
 	transit_direction = SOUTH
+	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_nine
 	name = "Escape Pod 9"
@@ -147,6 +150,7 @@
 	dock_target_station = "escape_pod_9_berth"
 	dock_target_offsite = "escape_pod_9_recovery"
 	transit_direction = SOUTH
+	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_ten
 	name = "Escape Pod 10"
@@ -159,6 +163,7 @@
 	dock_target_station = "escape_pod_10_berth"
 	dock_target_offsite = "escape_pod_10_recovery"
 	transit_direction = WEST
+	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_eleven
 	name = "Escape Pod 11"
@@ -171,6 +176,7 @@
 	dock_target_station = "escape_pod_11_berth"
 	dock_target_offsite = "escape_pod_11_recovery"
 	transit_direction = WEST
+	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 //Torch Small Pods
 
@@ -185,6 +191,7 @@
 	dock_target_station = "escape_pod_12_berth"
 	dock_target_offsite = "escape_pod_12_recovery"
 	transit_direction = NORTH
+	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_thirteen
 	name = "Escape Pod 13"
@@ -197,6 +204,7 @@
 	dock_target_station = "escape_pod_13_berth"
 	dock_target_offsite = "escape_pod_13_recovery"
 	transit_direction = NORTH
+	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_fourteen
 	name = "Escape Pod 14"
@@ -209,6 +217,7 @@
 	dock_target_station = "escape_pod_14_berth"
 	dock_target_offsite = "escape_pod_14_recovery"
 	transit_direction = NORTH
+	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_fifthteen
 	name = "Escape Pod 15"
@@ -221,6 +230,7 @@
 	dock_target_station = "escape_pod_15_berth"
 	dock_target_offsite = "escape_pod_15_recovery"
 	transit_direction = SOUTH
+	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_sixteen
 	name = "Escape Pod 16"
@@ -233,6 +243,7 @@
 	dock_target_station = "escape_pod_16_berth"
 	dock_target_offsite = "escape_pod_16_recovery"
 	transit_direction = SOUTH
+	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_seventeen
 	name = "Escape Pod 17"
@@ -245,6 +256,7 @@
 	dock_target_station = "escape_pod_17_berth"
 	dock_target_offsite = "escape_pod_17_recovery"
 	transit_direction = SOUTH
+	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 //Calypso.
 /datum/shuttle/multi_shuttle/calypso
