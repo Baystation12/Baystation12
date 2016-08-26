@@ -12,8 +12,10 @@ var/global/list/map_sectors = list()
 	for(var/level in 1 to world.maxz)
 		data = locate("sector[level]")
 		if (data)
-			testing("Located sector \"[data.name]\" at [data.mapx],[data.mapy] corresponding to zlevel [level]")
-			map_sectors["[level]"] = new data.obj_type(data)
+			var/obj/effect/map/M = new data.obj_type(data)
+			testing("Located sector \"[data.name]\" at [data.mapx],[data.mapy], containing z [english_list(M.map_z)]")
+			for(var/zlevel in M.map_z)
+				map_sectors["[zlevel]"] = M
 	return 1
 
 //===================================================================================
@@ -52,14 +54,14 @@ var/global/list/map_sectors = list()
 
 /obj/effect/map
 	name = "map object"
-	icon = 'icons/obj/items.dmi'
-	icon_state = "sheet-plasteel"
-	var/map_z = 0
+	icon = 'icons/obj/overmap.dmi'
+	icon_state = "object"
+	var/map_z = list()
 	var/area/shuttle/shuttle_landing
 	var/always_known = 1
 
 /obj/effect/map/New(var/obj/effect/mapinfo/data)
-	map_z = data.zlevel
+	map_z = GetConnectedZlevels(data.zlevel)
 	name = data.name
 	always_known = data.known
 	if (data.icon != 'icons/mob/screen1.dmi')
@@ -67,8 +69,8 @@ var/global/list/map_sectors = list()
 		icon_state = data.icon_state
 	if(data.desc)
 		desc = data.desc
-	var/new_x = data.mapx ? data.mapx : rand(OVERMAP_EDGE, world.maxx - OVERMAP_EDGE)
-	var/new_y = data.mapy ? data.mapy : rand(OVERMAP_EDGE, world.maxy - OVERMAP_EDGE)
+	var/new_x = data.mapx ? data.mapx : rand(OVERMAP_EDGE, OVERMAP_SIZE - OVERMAP_EDGE)
+	var/new_y = data.mapy ? data.mapy : rand(OVERMAP_EDGE, OVERMAP_SIZE - OVERMAP_EDGE)
 	loc = locate(new_x, new_y, OVERMAP_ZLEVEL)
 
 	if(data.landing_area)
@@ -93,6 +95,7 @@ var/global/list/map_sectors = list()
 /obj/effect/map/sector
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
+	icon_state = "sector"
 	anchored = 1
 
 //Space stragglers go here
@@ -104,9 +107,9 @@ var/global/list/map_sectors = list()
 
 /obj/effect/map/sector/temporary/New(var/nx, var/ny, var/nz)
 	loc = locate(nx, ny, OVERMAP_ZLEVEL)
-	map_z = nz
+	map_z += nz
 	map_sectors["[map_z]"] = src
-	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [map_z].")
+	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [map_z[1]].")
 
 /obj/effect/map/sector/temporary/Destroy()
 	map_sectors["[map_z]"] = null
@@ -116,9 +119,9 @@ var/global/list/map_sectors = list()
 		world.maxz--
 
 /obj/effect/map/sector/temporary/proc/can_die(var/mob/observer)
-	testing("Checking if sector at [map_z] can die.")
+	testing("Checking if sector at [map_z[1]] can die.")
 	for(var/mob/M in player_list)
-		if(M != observer && M.z == map_z)
+		if(M != observer && M.z in map_z)
 			testing("There are people on it.")
 			return 0
 	return 1

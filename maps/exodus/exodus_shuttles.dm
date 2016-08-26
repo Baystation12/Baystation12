@@ -10,7 +10,6 @@
 	dock_target_station = "escape_dock"
 	dock_target_offsite = "centcom_dock"
 	transit_direction = NORTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_one
 	name = "Escape Pod 1"
@@ -23,7 +22,6 @@
 	dock_target_station = "escape_pod_1_berth"
 	dock_target_offsite = "escape_pod_1_recovery"
 	transit_direction = NORTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_two
 	name = "Escape Pod 2"
@@ -36,7 +34,6 @@
 	dock_target_station = "escape_pod_2_berth"
 	dock_target_offsite = "escape_pod_2_recovery"
 	transit_direction = NORTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_three
 	name = "Escape Pod 3"
@@ -49,7 +46,6 @@
 	dock_target_station = "escape_pod_3_berth"
 	dock_target_offsite = "escape_pod_3_recovery"
 	transit_direction = EAST
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_four
 	name = "Escape Pod 4"
@@ -62,7 +58,6 @@
 	dock_target_station = "escape_pod_5_berth"
 	dock_target_offsite = "escape_pod_5_recovery"
 	transit_direction = EAST //should this be WEST? I have no idea.
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/supply/cargo
 	name = "Supply"
