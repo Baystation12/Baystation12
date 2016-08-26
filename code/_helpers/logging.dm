@@ -173,15 +173,13 @@
 
 /atom/log_info_line()
 	var/turf/t = get_turf(src)
-	if(istype(t))
-		return "([t]) ([t.x],[t.y],[t.z]) ([t.type])"
-	else if(loc)
-		return "([loc]) (0,0,0) ([loc.type])"
-	else
-		return "(NULL) (0,0,0) (NULL)"
+	return "[src] ([t ? t : "NULL"]) ([t ? t.x : 0],[t ? t.y : 0],[t ? t.z : 0]) ([t ? t.type : "NULL"])"
 
 /mob/log_info_line()
 	return "[..()] ([ckey])"
+
+/turf/log_info_line()
+	return "[src] ([loc]) ([x],[y],[z]) ([loc.type])"
 
 /proc/log_info_line(var/datum/d)
 	if(!istype(d))
