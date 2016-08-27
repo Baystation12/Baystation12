@@ -390,7 +390,7 @@
 			malfunction()
 
 		for(var/obj/item/rig_module/module in installed_modules)
-			cell.use(module.process()*10)
+			cell.use(module.process() * CELLRATE)
 
 //offline should not change outside this proc
 /obj/item/weapon/rig/proc/update_offline()
@@ -419,7 +419,7 @@
 		fail_msg = "<span class='warning'>You are in no fit state to do that.</span>"
 	else if(!cell)
 		fail_msg = "<span class='warning'>There is no cell installed in the suit.</span>"
-	else if(cost && !cell.check_charge(cost * 10)) //TODO: Cellrate?
+	else if(cost && !cell.check_charge(cost * CELLRATE)) //TODO: Cellrate?
 		fail_msg = "<span class='warning'>Not enough stored power.</span>"
 
 	if(fail_msg)
@@ -432,7 +432,7 @@
 			if(module.active && module.disruptable)
 				module.deactivate()
 
-	cell.use(cost*10)
+	cell.use(cost * CELLRATE)
 	return 1
 
 /obj/item/weapon/rig/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/nano_state = inventory_state)

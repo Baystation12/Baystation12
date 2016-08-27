@@ -324,6 +324,7 @@
 	icon_state = "ewar"
 	toggleable = 1
 	usable = 0
+	active_power_cost = 100
 
 	activate_string = "Enable Countermeasures"
 	deactivate_string = "Disable Countermeasures"
@@ -366,6 +367,7 @@
 	var/atom/interfaced_with // Currently draining power from this device.
 	var/total_power_drained = 0
 	var/drain_loc
+	var/max_draining_rate = 120 KILOWATTS // The same as unupgraded cyborg recharger.
 
 /obj/item/rig_module/power_sink/deactivate()
 
@@ -449,9 +451,8 @@
 		drain_complete(H)
 		return
 
-	// Attempts to drain up to 12.5*cell-capacity kW, determines this value from remaining cell capacity to ensure we don't drain too much.
-	// 1Ws/(12.5*CELLRATE) = 40s to charge
-	var/to_drain = max(min(12.5*holder.cell.maxcharge, ((holder.cell.maxcharge - holder.cell.charge) / CELLRATE)), 200000)
+
+	var/to_drain = max_draining_rate / CELLRATE
 	var/target_drained = interfaced_with.drain_power(0,0,to_drain)
 	if(target_drained <= 0)
 		H << "<span class = 'danger'>Your power sink flashes a red light; there is no power left in [interfaced_with].</span>"
