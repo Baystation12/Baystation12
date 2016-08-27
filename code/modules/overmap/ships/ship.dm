@@ -2,15 +2,14 @@
 	name = "generic ship"
 	desc = "Space faring vessel."
 	icon_state = "ship"
-	var/vessel_mass = 9000 //tonnes, random number
-	var/default_delay = 60
-	var/list/speed = list(0,0)
-	var/last_burn = 0
-	var/list/last_movement = list(0,0)
-	var/fore_dir = NORTH
-	var/rotate = 1 //For proc rotate
+	var/vessel_mass = 9000 				//tonnes, arbitrary number, affects acceleration provided by engines
+	var/default_delay = 6 				//deciseconds it takes to move to next tile on overmap
+	var/list/speed = list(0,0)			//speed in x,y direction
+	var/last_burn = 0					//worldtime when ship last acceleated
+	var/list/last_movement = list(0,0)	//worldtime when ship last moved in x,y direction
+	var/fore_dir = NORTH				//what dir ship flies towards for purpose of moving stars effect procs
+	var/rotate = 1						//if icon should be rotated to heading
 
-	var/obj/effect/overmap/current_sector
 	var/obj/machinery/computer/helm/nav_control
 	var/obj/machinery/computer/engines/eng_control
 
@@ -59,6 +58,7 @@
 			toggle_move_stars(zz)
 		else
 			toggle_move_stars(zz, fore_dir)
+	update_icon()
 
 /obj/effect/overmap/ship/proc/can_burn()
 	if (!eng_control)
@@ -97,9 +97,6 @@
 
 
 /obj/effect/overmap/ship/proc/rotate(var/direction)
-	var/matrix/M = matrix()
-	M.Turn(dir2angle(direction))
-	src.transform = M //Rotate ship
 
 /obj/effect/overmap/ship/process()
 	if(!is_still())
@@ -111,5 +108,10 @@
 		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
 		if(newloc)
 			Move(newloc)
-		if(rotate)
-			rotate(get_heading())
+		update_icon()
+
+/obj/effect/overmap/ship/update_icon()
+	if(rotate)
+		var/matrix/M = matrix()
+		M.Turn(dir2angle(get_heading()))
+		src.transform = M //Rotate ship

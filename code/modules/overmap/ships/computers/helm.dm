@@ -79,8 +79,11 @@
 	var/data[0]
 	data["state"] = state
 
-	data["sector"] = linked.current_sector ? linked.current_sector.name : "Deep Space"
-	data["sector_info"] = linked.current_sector ? linked.current_sector.desc : "Not Available"
+	var/turf/T = get_turf(linked)
+	var/obj/effect/overmap/sector/current_sector = locate() in T
+
+	data["sector"] = current_sector ? current_sector.name : "Deep Space"
+	data["sector_info"] = current_sector ? current_sector.desc : "Not Available"
 	data["s_x"] = linked.x
 	data["s_y"] = linked.y
 	data["dest"] = dy && dx
