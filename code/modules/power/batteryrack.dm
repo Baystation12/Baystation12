@@ -84,8 +84,6 @@
 	for(var/obj/item/weapon/cell/C in internal_cells)
 		newmaxcharge += C.maxcharge
 
-	newmaxcharge /= CELLRATE		// Convert to Joules
-	newmaxcharge *= SMESRATE		// And to SMES charge units (which are for some reason different than CELLRATE)
 	capacity = newmaxcharge
 	charge = between(0, charge, newmaxcharge)
 
@@ -178,9 +176,6 @@
 	charge = 0
 	for(var/obj/item/weapon/cell/C in internal_cells)
 		charge += C.charge
-	charge /= CELLRATE		// Convert to Joules
-	charge *= SMESRATE		// And to SMES charge units (which are for some reason different than CELLRATE)
-
 
 	..()
 	ui_tick = !ui_tick

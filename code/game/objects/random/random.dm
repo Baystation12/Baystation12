@@ -72,9 +72,9 @@
 	icon_state = "cell"
 	item_to_spawn()
 		return pick(prob(10);/obj/item/weapon/cell/crap,\
-					prob(40);/obj/item/weapon/cell,\
-					prob(40);/obj/item/weapon/cell/high,\
-					prob(9);/obj/item/weapon/cell/super,\
+					prob(80);/obj/item/weapon/cell,\
+					prob(5);/obj/item/weapon/cell/high,\
+					prob(4);/obj/item/weapon/cell/super,\
 					prob(1);/obj/item/weapon/cell/hyper)
 
 
