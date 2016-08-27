@@ -1,9 +1,11 @@
+//How far from the edge of overmap zlevel could randomly placed objects spawn
 #define OVERMAP_EDGE 2
+//Dimension of overmap (squares 4 lyfe)
 #define OVERMAP_SIZE 30
 var/global/list/map_sectors = list()
 //Zlevel where overmap objects should be
 var/overmap_z = 1
-//How far from the edge of overmap zlevel could randomly placed objects spawn
+
 
 /area/overmap/
 	name = "System Map"
