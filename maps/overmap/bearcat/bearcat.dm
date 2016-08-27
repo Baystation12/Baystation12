@@ -1,16 +1,12 @@
-/obj/effect/mapinfo/ship/bearcat
-	name = "CSV Bearcat"
-	landing_area = /area/ship/scrap/shuttle/ingoing
-	obj_type = /obj/effect/map/ship/bearcat
-	mapx = 4
-	mapy = 4
-
-/obj/effect/map/ship/bearcat
+/obj/effect/overmap/ship/bearcat
 	name = "CSV Bearcat"
 	color = "#00FFFF"
+	landing_area = /area/ship/scrap/shuttle/ingoing
+	start_x = 4
+	start_y = 4
 
 /obj/machinery/computer/shuttle_control/explore/bearcat
 	name = "exploration shuttle console"
 	shuttle_tag = "Exploration"
-	landing_type = /area/ship/scrap/shuttle/outgoing
+	shuttle_area = /area/ship/scrap/shuttle/outgoing
 

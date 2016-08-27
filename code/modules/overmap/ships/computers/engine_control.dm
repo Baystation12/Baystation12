@@ -7,7 +7,7 @@
 	var/state = "status"
 	var/list/engines = list()
 	var/list/zlevels = list()
-	var/obj/effect/map/ship/linked
+	var/obj/effect/overmap/ship/linked
 
 /obj/machinery/computer/engines/initialize()
 	linked = map_sectors["[z]"]

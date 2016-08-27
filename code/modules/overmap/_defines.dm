@@ -65,7 +65,7 @@ var/list/cached_space = list()
 proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	return	//a plug until issues with thrown objects spawning endless space levels are resolved
 
-	var/obj/effect/map/M = map_sectors["[T.z]"]
+	var/obj/effect/overmap/M = map_sectors["[T.z]"]
 	if (!M)
 		return
 	var/mapx = M.x
@@ -97,13 +97,13 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	testing("[A] moving from [M] ([M.x], [M.y]) to ([mapx],[mapy]).")
 
 	var/turf/map = locate(mapx,mapy,overmap_z)
-	var/obj/effect/map/TM = locate() in map
+	var/obj/effect/overmap/TM = locate() in map
 	if(TM)
 		nz = TM.map_z
 		testing("Destination: [TM]")
 	else
 		if(cached_space.len)
-			var/obj/effect/map/sector/temporary/cache = cached_space[cached_space.len]
+			var/obj/effect/overmap/sector/temporary/cache = cached_space[cached_space.len]
 			cached_space -= cache
 			nz = cache.map_z
 			cache.x = mapx
@@ -112,15 +112,15 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 		else
 			world.maxz++
 			nz = world.maxz
-			TM = new /obj/effect/map/sector/temporary(mapx, mapy, nz)
+			TM = new /obj/effect/overmap/sector/temporary(mapx, mapy, nz)
 			testing("Destination: *new* [TM]")
 
 	var/turf/dest = locate(nx,ny,nz)
 	if(dest)
 		A.loc = dest
 
-	if(istype(M, /obj/effect/map/sector/temporary))
-		var/obj/effect/map/sector/temporary/source = M
+	if(istype(M, /obj/effect/overmap/sector/temporary))
+		var/obj/effect/overmap/sector/temporary/source = M
 		if (source.can_die())
 			testing("Catching [M] for future use")
 			source.loc = null
