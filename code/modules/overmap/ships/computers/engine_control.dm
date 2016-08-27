@@ -21,6 +21,7 @@
 	for(var/datum/ship_engine/E in ship_engines)
 		if (E.zlevel in zlevels)
 			engines |= E
+	..()
 
 /obj/machinery/computer/engines/attack_hand(var/mob/user as mob)
 	if(..())

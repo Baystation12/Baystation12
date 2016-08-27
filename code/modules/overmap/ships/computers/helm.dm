@@ -2,7 +2,6 @@
 	name = "helm control console"
 	icon_keyboard = "med_key"
 	icon_screen = "id"
-	var/state = "status"
 	var/obj/effect/overmap/ship/linked			//connected overmap object
 	var/autopilot = 0
 	var/manual_control = 0
@@ -27,6 +26,7 @@
 			R.fields["x"] = S.x
 			R.fields["y"] = S.y
 			known_sectors += R
+	..()
 
 /obj/machinery/computer/helm/process()
 	..()
@@ -77,7 +77,6 @@
 		return
 
 	var/data[0]
-	data["state"] = state
 
 	var/turf/T = get_turf(linked)
 	var/obj/effect/overmap/sector/current_sector = locate() in T
@@ -168,12 +167,10 @@
 
 	if (href_list["apilot"])
 		autopilot = !autopilot
-
+	world << href
 	if (href_list["manual"])
 		manual_control = !manual_control
 
-	if (href_list["state"])
-		state = href_list["state"]
 	add_fingerprint(usr)
 	updateUsrDialog()
 
