@@ -1,5 +1,5 @@
 //Zlevel where overmap objects should be
-#define OVERMAP_ZLEVEL 1
+var/overmap_z = 1
 //How far from the edge of overmap zlevel could randomly placed objects spawn
 #define OVERMAP_EDGE 2
 #define OVERMAP_SIZE 30
@@ -15,6 +15,7 @@
 /turf/unsimulated/map
 	icon = 'icons/turf/space.dmi'
 	icon_state = "map"
+	dynamic_lighting = 0
 
 /turf/unsimulated/map/edge
 	opacity = 1
@@ -22,8 +23,9 @@
 
 /turf/unsimulated/map/New()
 	..()
+	name = "[x]-[y]"
 	if(x == 1 || y == 1)
-		maptext = "<center>[x]-[y]</center>"
+		maptext = "<center>[name]</center>"
 
 //list used to track which zlevels are being 'moved' by the proc below
 var/list/moving_levels = list()
@@ -94,7 +96,7 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 
 	testing("[A] moving from [M] ([M.x], [M.y]) to ([mapx],[mapy]).")
 
-	var/turf/map = locate(mapx,mapy,OVERMAP_ZLEVEL)
+	var/turf/map = locate(mapx,mapy,overmap_z)
 	var/obj/effect/map/TM = locate() in map
 	if(TM)
 		nz = TM.map_z

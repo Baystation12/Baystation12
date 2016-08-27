@@ -7,7 +7,24 @@ var/global/list/map_sectors = list()
 /hook/startup/proc/build_map()
 	if(!config.use_overmap)
 		return 1
+
 	testing("Building overmap...")
+	world.maxz++
+	overmap_z = world.maxz
+	var/list/turfs = list()
+	for (var/square in block(locate(1,1,overmap_z), locate(OVERMAP_SIZE,OVERMAP_SIZE,overmap_z)))
+		var/turf/T = square
+		if(T.x == OVERMAP_SIZE || T.y == OVERMAP_SIZE)
+			T = T.ChangeTurf(/turf/unsimulated/map/edge)
+		else
+			T = T.ChangeTurf(/turf/unsimulated/map/)
+		T.lighting_clear_overlays()
+		turfs += T
+
+	var/area/overmap/A = new
+	A.contents.Add(turfs)
+	testing("Overmap created at Z[overmap_z].")
+
 	var/obj/effect/mapinfo/data
 	for(var/level in 1 to world.maxz)
 		data = locate("sector[level]")
@@ -71,7 +88,7 @@ var/global/list/map_sectors = list()
 		desc = data.desc
 	var/new_x = data.mapx ? data.mapx : rand(OVERMAP_EDGE, OVERMAP_SIZE - OVERMAP_EDGE)
 	var/new_y = data.mapy ? data.mapy : rand(OVERMAP_EDGE, OVERMAP_SIZE - OVERMAP_EDGE)
-	loc = locate(new_x, new_y, OVERMAP_ZLEVEL)
+	loc = locate(new_x, new_y, overmap_z)
 
 	if(data.landing_area)
 		shuttle_landing = locate(data.landing_area)
@@ -106,7 +123,7 @@ var/global/list/map_sectors = list()
 	always_known = 0
 
 /obj/effect/map/sector/temporary/New(var/nx, var/ny, var/nz)
-	loc = locate(nx, ny, OVERMAP_ZLEVEL)
+	loc = locate(nx, ny, overmap_z)
 	map_z += nz
 	map_sectors["[map_z]"] = src
 	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [map_z[1]].")

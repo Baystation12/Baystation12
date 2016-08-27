@@ -1,7 +1,4 @@
 #if !defined(USING_MAP_DATUM)
-
-	#include "_map.dmm"
-
 	#include "bearcat/bearcat.dm"
 	#include "bearcat/bearcat_areas.dm"
 	#include "bearcat/bearcat-1.dmm"
