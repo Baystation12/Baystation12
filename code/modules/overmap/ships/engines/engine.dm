@@ -10,10 +10,17 @@ var/list/ship_engines = list()
 /datum/ship_engine/New(var/obj/machinery/holder, var/id)
 	engine = holder
 	zlevel = holder.z
+<<<<<<< HEAD
 	engine_id = id
 	for(var/obj/machinery/space_battle/engine_control/E in machines)
 		if (E.z == zlevel && E.engine_id == src.engine_id && !(src in E.engines))
 			E.engines += src
+=======
+	ship_engines += src
+	for(var/obj/machinery/computer/engines/E in machines)
+		if (zlevel in E.zlevels)
+			E.engines |= src
+>>>>>>> 0b4cb4dda55c69006c7065b8e53f93e75d17612e
 			break
 
 //Tries to fire the engine. If successfull, returns 1
@@ -55,7 +62,13 @@ var/list/ship_engines = list()
 	return 1
 
 /datum/ship_engine/proc/die()
+<<<<<<< HEAD
 	for(var/obj/machinery/space_battle/engine_control/E in machines)
 		if (E.z == zlevel && src in E.engines)
+=======
+	ship_engines -= src
+	for(var/obj/machinery/computer/engines/E in machines)
+		if (E.z == zlevel)
+>>>>>>> 0b4cb4dda55c69006c7065b8e53f93e75d17612e
 			E.engines -= src
 	qdel(src)

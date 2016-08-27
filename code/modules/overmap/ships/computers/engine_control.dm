@@ -6,6 +6,7 @@
 	icon_state = "computer"
 	var/state = "status"
 	var/list/engines = list()
+	var/list/zlevels = list()
 	var/obj/effect/map/ship/linked
 	var/engine_id = null
 	var/cooldown = 0
@@ -18,14 +19,21 @@
 		if (!(src in linked.eng_controls))
 			linked.eng_controls.Add(src)
 		testing("Engines console at level [z] found a corresponding overmap object '[linked.name]'.")
+		zlevels = linked.map_z
 	else
 		testing("Engines console at level [z] was unable to find a corresponding overmap object.")
+<<<<<<< HEAD
 
 	for(var/datum/ship_engine/E in engines)
 		if (E.zlevel == z && !(E in engines))
 			if(engine_id && E.engine_id == src.engine_id)
 				engines += E
 				E.controller = src
+=======
+	for(var/datum/ship_engine/E in ship_engines)
+		if (E.zlevel in zlevels)
+			engines |= E
+>>>>>>> 0b4cb4dda55c69006c7065b8e53f93e75d17612e
 
 /obj/machinery/space_battle/engine_control/attack_hand(var/mob/user as mob)
 	if(..())

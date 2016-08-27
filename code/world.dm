@@ -1,6 +1,6 @@
 
 /var/game_id = null
-/proc/generate_gameid()
+/hook/global_init/proc/generate_gameid()
 	if(game_id != null)
 		return
 	game_id = ""
@@ -17,6 +17,7 @@
 	for(var/_ = 1 to 3)
 		game_id = "[c[(t % l) + 1]][game_id]"
 		t = round(t / l)
+	return 1
 
 // Find mobs matching a given string
 //
@@ -470,6 +471,10 @@ var/world_topic_spam_protect_time = world.timeofday
 		return
 
 	..(reason)
+
+/world/Del()
+	callHook("shutdown")
+	return ..()
 
 /hook/startup/proc/loadMode()
 	world.load_mode()
