@@ -6,7 +6,7 @@
 "f" = (/turf/simulated/mineral/random{mineralChance = 5},/area/mine/unexplored)
 "g" = (/turf/simulated/mineral/random{mineralChance = 100},/area/mine/unexplored)
 "h" = (/turf/space,/area/space)
-"i" = (/obj/effect/mapinfo/asteroid{known = 1; name = "Medium Asteroid"},/turf/space,/area/mine/unexplored)
+"i" = (/obj/effect/mapinfo/asteroid{known = 1; landing_area = /area/shuttle/mining_shuttle/destination; name = "Medium Asteroid"},/turf/space,/area/mine/unexplored)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

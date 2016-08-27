@@ -1,10 +1,11 @@
 // BEGIN_INTERNALS
 /*
 LAST_COMPILE_TIME: 1472262944
-DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\controllers code\controllers\Processes code\datums code\datums\appearances code\datums\appearances\automatic code\datums\extensions code\datums\extensions\appearance code\game code\modules code\modules\ship_combat code\modules\ship_combat\navigation 
+DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\controllers code\controllers\Processes code\datums code\datums\appearances code\datums\appearances\automatic code\datums\extensions code\datums\extensions\appearance code\game code\modules code\modules\overmap code\modules\ship_combat code\modules\ship_combat\navigation maps maps\exodus maps\ships 
 AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 511.1353
-WINDOW: code\modules\ship_combat\misc.dm;code\modules\ship_combat\navigation\fueled_engines.dm
+WINDOW: code\modules\ship_combat\misc.dm;code\modules\ship_combat\navigation\fueled_engines.dm;maps\ships\aphrodyte.dmm;maps\exodus\exodus-1.dmm;code\modules\overmap\README.dm;code\modules\ship_combat\navigation\shuttles.dm;maps\ships\asteroid.dmm
+FILE: code\modules\ship_combat\misc.dm
 */
 // END_INTERNALS

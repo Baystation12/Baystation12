@@ -138,10 +138,11 @@
 	else if(href_list["cancel"])
 		shuttle.cancel_launch(src)
 
+/area/shuttle/mining_shuttle/requires_power = 1
+
 /area/shuttle/mining_shuttle/aphrodyte
 	name = "Mining Shuttle"
 	icon_state = "shuttle3"
-	requires_power = 1
 
 /area/shuttle/mining_shuttle/destination
 	name = "Mining Shuttle Landing Site"
