@@ -25,6 +25,7 @@ var/list/global/tank_gauge_cache = list()
 		"Resomi" = 'icons/mob/species/resomi/back.dmi'
 		)
 
+	var/back_only = 1
 	var/datum/gas_mixture/air_contents = null
 	var/distribute_pressure = ONE_ATMOSPHERE
 	var/integrity = 3
@@ -193,6 +194,9 @@ var/list/global/tank_gauge_cache = list()
 					can_open_valve = 1
 
 			if(can_open_valve)
+				if(back_only && user.get_inventory_slot(src) != slot_back)
+					user << "<span class='warning'>It's too big, it has to go on your back!</span>"
+					return
 				location.internal = src
 				user << "<span class='notice'>You open \the [src] valve.</span>"
 				if (location.internals)

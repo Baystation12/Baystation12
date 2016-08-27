@@ -110,18 +110,15 @@
 		for(var/obj/machinery/space_battle/ship_core/not_chosen in world)
 			if(not_chosen in protected_cores) continue
 			qdel(not_chosen)
-		if(galaxy)
-			galaxy.place_stations(teams)
-
 
 	post_setup()
 		..()
 
 /datum/game_mode/ship_battles/two
-	name = "Two Ship Combat"
+	name = "two team combat"
 	round_description = "An enemy ship been spotted! All crew to battle stations!"
 	extended_round_description = ""
-	config_tag = "Two Ship Combat"
+	config_tag = "two team combat"
 	votable = 1
 	probability = 33
 
@@ -130,10 +127,10 @@
 
 
 /datum/game_mode/ship_battles/three
-	name = "Three Ship Combat"
+	name = "three team combat"
 	round_description = "Two enemy ships have been spotted! All crew to battle stations!"
 	extended_round_description = ""
-	config_tag = "Three Ship Combat"
+	config_tag = "three team combat"
 	votable = 1
 	probability = 33
 
@@ -141,13 +138,13 @@
 	team_count = 3
 
 /datum/game_mode/ship_battles/four
-	name = "Four Ship Combat"
+	name = "four team combat"
 	round_description = "Three enemy ships have been spotted! All crew to battle stations!"
 	extended_round_description = ""
 	config_tag = null
 	votable = 1
 	probability = 34
-	config_tag = "Four Ship Combat"
+	config_tag = "four team combat"
 
 	required_players = 4
 	team_count = 4

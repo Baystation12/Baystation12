@@ -49,6 +49,11 @@
 			eye << "<span class='notice'>You hear something about...\"[text]\""
 		..()
 
+	show_message(msg, type, alt, alt_type)
+		if(eye)
+			eye.show_message(msg, type, alt, alt_type)
+		return ..()
+
 	update_icon()
 		if(stat & (BROKEN|NOPOWER)) return ..()
 		if(cooldown)

@@ -132,6 +132,35 @@ Class Procs:
 		circuit_board = new(src)
 		circuit_board.resistance = resistance
 
+/obj/machinery/examine(var/mob/user)
+	if(circuit_board)
+		user << "<span class='notice'>It has a circuit board installed with [get_efficiency(1,0,0)]% efficiency and [circuit_board.resistance] damage resistance!</span>"
+	return ..()
+
+
+/obj/machinery/attackby(var/obj/item/I, var/mob/living/carbon/human/user)
+	if(istype(I, /obj/item/weapon/screwdriver))
+		if(!circuit_board)
+			user << "<span class='notice'>\The [src] has no circuit board!</span>"
+			return
+		user.visible_message("<span class='notice'>[user] begins removing \the [circuit_board] from \the [src]..</span>")
+		if(do_after(user, 100))
+			circuit_board.forceMove(get_turf(user))
+			user.put_in_hands(circuit_board)
+			circuit_board = null
+		return 1
+	if(istype(I, /obj/item/upgrade_module))
+		if(circuit_board)
+			user << "<span class='notice'>\The [src] already has a circuit board!</span>"
+			return
+		user.visible_message("<span class='notice'>[user] begins installing \the [I] into \the [src]..</span>")
+		if(do_after(user, 100))
+			user.drop_item()
+			I.forceMove(src)
+			src.circuit_board = I
+		return 1
+	return 0
+
 /obj/machinery/Destroy()
 	machines -= src
 	if(component_parts)

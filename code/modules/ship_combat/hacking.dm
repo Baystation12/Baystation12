@@ -177,7 +177,7 @@
 	if(href_list["hacked_object"])
 		selected = null
 		for(var/obj/machinery/M in hacked)
-			if(M.name == href_list["hacked_object"])
+			if("[M.name]" == href_list["hacked_object"])
 				selected = M
 		if(!selected)
 			usr << "<span class='warning'>Something has gone wrong! You tried to select something we don't know about!</span>"

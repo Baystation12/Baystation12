@@ -301,8 +301,12 @@
 							//We've determined the best container now we set it as our internals
 
 							if(best)
-								C << "<span class='notice'>You are now running on internals from [tankcheck[best]] [from] your [nicename[best]].</span>"
-								C.internal = tankcheck[best]
+								var/obj/item/weapon/tank/T = tankcheck[best]
+								if(T.back_only && C.get_equipped_item(slot_back) != T)
+									C << "<span class='warning'>\The [T] is too big, it has to be carried on your back!</span>"
+								else
+									C << "<span class='notice'>You are now running on internals from [tankcheck[best]] [from] your [nicename[best]].</span>"
+									C.internal = tankcheck[best]
 
 
 							if(C.internal)

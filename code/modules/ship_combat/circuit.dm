@@ -15,12 +15,14 @@
 	icon_state = "power_mod"
 
 	var/list/internal_wiring = new/list(16)
+	var/spawn_type = null
 
 	var/resistance = 1
 
-	New()
+	New(var/obj/machinery/M)
 		..()
 		rewire()
+		spawn_type = M.type
 
 	proc/rewire()
 		var/chance = 1
@@ -211,8 +213,9 @@
 				string += "<font color='#afc50c'><b>YELLOW</b></font>"
 			user << string
 		user << "<span class='notice'>\The [src]'s efficiency is: [get_efficiency()]</span>"
+		user << "<span class='notice'>\The [src] has a damage resistance of [resistance]!</span>"
 
-/obj/machinery/proc/get_efficiency(var/positive = 1, var/decimal = 1, var/can_break = 1)
+/obj/machinery/proc/get_efficiency(var/positive = 1, var/decimal = 1, var/can_break = 0.5)
 	if(positive == 1) // Direct number
 		if(circuit_board)
 			return !decimal ? circuit_board.get_efficiency() : (circuit_board.get_efficiency() * 0.01)

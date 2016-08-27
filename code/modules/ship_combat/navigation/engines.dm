@@ -6,6 +6,7 @@ var/list/ship_engines = list()
 	var/obj/machinery/engine	//actual engine object
 	var/zlevel = 0
 	var/engine_id = null
+	var/obj/machinery/space_battle/engine_control/controller
 
 /datum/ship_engine/New(var/obj/machinery/holder, var/id)
 	engine = holder
@@ -14,6 +15,7 @@ var/list/ship_engines = list()
 	for(var/obj/machinery/space_battle/engine_control/E in machines)
 		if (E.z == zlevel && E.engine_id == src.engine_id && !(src in E.engines))
 			E.engines += src
+			controller = E
 			break
 
 //Tries to fire the engine. If successfull, returns 1
@@ -59,3 +61,6 @@ var/list/ship_engines = list()
 		if (E.z == zlevel && src in E.engines)
 			E.engines -= src
 	qdel(src)
+
+/datum/ship_engine/proc/cooldown()
+	return controller ? controller.cooldown() : 0

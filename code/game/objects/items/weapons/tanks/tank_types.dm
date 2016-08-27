@@ -15,6 +15,7 @@
 	desc = "A tank of oxygen."
 	icon_state = "oxygen"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
+	slot_flags = SLOT_BACK
 
 
 /obj/item/weapon/tank/oxygen/New()
@@ -109,7 +110,7 @@
 	force = 4
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	volume = 2 //Tiny. Real life equivalents only have 21 breaths of oxygen in them. They're EMERGENCY tanks anyway -errorage (dangercon 2011)
-
+	back_only = 0
 /obj/item/weapon/tank/emergency/oxygen
 	name = "emergency oxygen tank"
 	desc = "Used for emergencies. Contains very little oxygen, so try to conserve it until you actually need it."

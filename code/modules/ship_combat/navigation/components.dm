@@ -56,64 +56,33 @@
 /obj/item/weapon/component/engine
 	name = "engine"
 	desc = "An engine component."
-	var/ppj = 50000 // 50,000w of power per jump.
-
-	tier = 1
-
-	proc/get_resources()
-		var/turf/T = get_turf(src)
-		var/obj/structure/cable/C = T.get_cable_node()
-		var/datum/powernet/PN
-		if(C)	PN = C.powernet		// find the powernet of the connected cable
-
-		if(PN)
-			if(PN.draw_power(ppj) >= ppj)
-				return 1
-		return 0
-
-	nuclear
-		name = "nuclear engine"
-		desc = "A nuclear engine, runs off of nuclear supplies."
-
-		nuclear_thermal
-			name = "nuclear thermal engine"
-			desc = "A nuclear thermal engine, more efficiency than a nuclear engine."
-			tier = 2
-
+	var/mod = 0.2
 
 	ion
 		name = "electrical ion engine"
 		desc = "An electrical ion drive, runs off of electricity."
-		ppj = 200000
 
 		ion_pulse
 			name = "electrical ion pulse engine"
 			desc = "An electrical ion pulse engine, more efficienct than an ion engine."
 			tier = 2
-			ppj = 180000
+			mod = 0.4
 
 	fuel
 		name = "liquid fuel	engine"
 		desc = "A liquid fuel engine, runs off of liquid fuel."
-		var/fpj = 1000 //fuel per jump
-
-		get_resources()
-			var/obj/structure/reagent_dispensers/fueltank/F = locate() in orange(1)
-			if(F && F.reagents.has_reagent("fuel", fpj) && ..() && F.reagents.remove_reagent("fuel",fpj))
-				return ..()
-			return 0
 
 		compressed_fuel
 			name = "compressed liquid fuel engine"
 			desc = "A compressed liquid fuel engine, more efficient than a liquid fuel engine."
 			tier = 2
-			fpj = 800
+			mod = 0.4
 
 		magneto
 			name = "magneto liquid fuel engine"
 			desc = "A magneto liquid fuel egnine, more efficient than a compressed liquid fuel engine."
 			tier = 3
-			fpj = 600
+			mod = 0.6
 
 
 

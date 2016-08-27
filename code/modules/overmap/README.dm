@@ -36,7 +36,7 @@ It has 'current_sector' var that keeps refernce to, well, sector ship currently 
 *************************************************************
 Helm console
 *************************************************************
-/obj/machinery/computer/helm, helm.dm
+/obj/machinery/space_battle/helm, helm.dm
 On creation console seeks a ship overmap object corresponding to this zlevel and links it.
 Clicking with empty hand on it starts steering, Cancel-Camera-View stops it.
 Helm console relays movement of mob to the linked overmap object.

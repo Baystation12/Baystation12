@@ -1,11 +1,13 @@
 /obj/machinery/space_battle
 	icon = 'icons/obj/ship_battles.dmi'
+	var/broken_state
 	var/damage_level = 0
 	var/id_tag = null
 	var/melee_absorption = 20
 	var/max_damage = 9
 	var/component_type = null
 	var/obj/item/weapon/component/component
+	var/can_be_destroyed = 1
 	has_circuit = 1
 	resistance = 1.5
 
@@ -61,23 +63,29 @@
 			O.emp_act(severity)
 
 	update_icon()
-		if(stat & NOPOWER && !(stat & BROKEN))
+		if(stat & BROKEN)
+			if(broken_state)
+				icon_state = broken_state
+			else
+				icon_state = "[initial(icon_state)]_broken"
+		else if(stat & NOPOWER)
 			icon_state = "[initial(icon_state)]_off"
-		else if(!(stat & NOPOWER)  && !(stat & BROKEN))
+		else
 			icon_state = initial(icon_state)
 
 	proc/break_machine(var/dmg = 1)
 		if(!dmg) return
-		icon_state = "[initial(icon_state)]_broken"
 		stat |= BROKEN
-		damage_level += dmg
-		if(damage_level > max_damage)
+		damage_level = min(damage_level+dmg, max_damage)
+		if(can_be_destroyed && damage_level >= max_damage)
 			if(!(stat & NOPOWER))
 				src.visible_message("<span class='danger'>\The [src] fizzles and sparks violently!</span>")
 				explosion(src, 0, rand(0,1), rand(1,3), rand(3,7))
 			else
 				src.visible_message("<span class='danger'>\The [src] collapses!</span>")
 			qdel(src)
+			return
+		update_icon()
 
 	proc/fix_machine(var/mob/user)
 		icon_state = initial(icon_state)
@@ -85,6 +93,7 @@
 		damage_level = 0
 		if(user && user.client)
 			user.client.repairs_made += 1
+		update_icon()
 
 	proc/reconnect()
 		return 1
@@ -94,6 +103,7 @@
 			break_machine(round(P.damage / 5, 1))
 
 	attackby(var/obj/item/I, var/mob/living/carbon/human/user)
+		update_icon()
 		if(istype(I, /obj/item/stack/cable_coil))
 			user << "<span class='notice'>You rewire \the [src]'s cable connections!</span>"
 			power_change()
@@ -173,32 +183,14 @@
 					else
 						user << "<span class='warning'>The welding tool must be on!</span>"
 					return
-
-		if(istype(I, /obj/item/weapon/screwdriver))
-			if(!circuit_board)
-				user << "<span class='notice'>\The [src] has no circuit board!</span>"
-				return
-			user.visible_message("<span class='notice'>[user] begins removing \the [circuit_board] from \the [src]..</span>")
-			if(do_after(user, 100))
-				circuit_board.forceMove(get_turf(user))
-				user.put_in_hands(circuit_board)
-				circuit_board = null
-
-		if(istype(I, /obj/item/upgrade_module))
-			if(circuit_board)
-				user << "<span class='notice'>\The [src] already has a circuit board!</span>"
-				return
-			user.visible_message("<span class='notice'>[user] begins installing \the [I] into \the [src]..</span>")
-			if(do_after(user, 100))
-				user.drop_item()
-				I.forceMove(src)
-				src.circuit_board = I
-			return
 		if(istype(I, /obj/item/device/multitool))
 			var/newid = text2num(input(user, "What would you like to set \the [src]'s id to?", "Fire Control"))
 			if(newid)
 				id_tag = newid
 			reconnect()
+			return
+		if(..())
+			return 1
 		else
 			if(I.force > 4)
 				if(user.a_intent == I_HURT)

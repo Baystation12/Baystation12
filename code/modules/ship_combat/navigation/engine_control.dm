@@ -9,8 +9,9 @@
 	var/obj/effect/map/ship/linked
 	var/engine_id = null
 	var/cooldown = 0
-	var/braked = 0
-	var/still_time = 0
+	var/braked = 1
+	anchored = 1
+	density = 1
 
 /obj/machinery/space_battle/engine_control/initialize()
 	linked = map_sectors["[z]"]
@@ -25,12 +26,11 @@
 		if (E.zlevel == z && !(E in engines))
 			if(engine_id && E.engine_id == src.engine_id)
 				engines += E
-				E.controller = src
 
 /obj/machinery/space_battle/engine_control/attack_hand(var/mob/user as mob)
-	if(..())
-		user.unset_machine()
-		return
+//	if(..())
+//		user.unset_machine()
+//		return
 
 	if(!isAI(user))
 		user.set_machine(src)
@@ -94,11 +94,10 @@
 	updateUsrDialog()
 
 /obj/machinery/space_battle/engine_control/proc/burn()
-	if(!cooldown())
+	if(braked)
 		return 0
 	if(engines.len == 0)
 		return 0
-	braked = 0
 	var/res = 0
 	for(var/datum/ship_engine/E in engines)
 		res |= E.burn()
@@ -113,22 +112,23 @@
 		return 0
 	return 1
 
+/obj/machinery/space_battle/engine_control/proc/stopped()
+	if(!braked)
+		cooldown = world.timeofday+(ENGINE_JUMP_DELAY*get_efficiency(-1,1)*10)
+		braked = 1
+		world << "<span class='warning'>Cooldown set to [time_remaining()] seconds!</span>"
+
+/obj/machinery/space_battle/engine_control/process()
+	if(!linked) return PROCESS_KILL
+	if(cooldown())
+		braked = 0
+	return ..()
+
 /obj/machinery/space_battle/engine_control/proc/time_remaining()
 	var/time = (cooldown - world.timeofday)/10
 	if(time < 0)
 		time = 0
 	return round(time)
-
-/obj/machinery/space_battle/engine_control/process()
-	if(!linked) return PROCESS_KILL
-	if(linked.is_still())
-		still_time++
-	else
-		still_time = 0
-	if(!braked && cooldown() && still_time > 25)
-		cooldown = world.timeofday+(ENGINE_JUMP_DELAY*get_efficiency(-1,1)*10)
-		braked = 1
-	return ..()
 
 /obj/machinery/space_battle/engine_control/examine(var/mob/user)
 	..()

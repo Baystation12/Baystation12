@@ -1,7 +1,7 @@
 //Zlevel where overmap objects should be
 #define OVERMAP_ZLEVEL 1
 //How far from the edge of overmap zlevel could randomly placed objects spawn
-#define OVERMAP_EDGE 7
+#define OVERMAP_EDGE 5
 
 //list used to track which zlevels are being 'moved' by the proc below
 var/list/moving_levels = list()

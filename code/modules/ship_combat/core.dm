@@ -11,7 +11,8 @@
 	power_channel = EQUIP
 	var/self_destructing = 0
 	var/timer = 60
-	max_damage = 1000
+	max_damage = 12
+	can_be_destroyed = 0 // Destroyed in a special way.
 
 	Destroy()
 		for(var/obj/machinery/space_battle/M in world)
