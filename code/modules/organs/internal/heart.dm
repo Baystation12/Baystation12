@@ -42,7 +42,9 @@
 			pulse = Clamp(pulse + owner.chem_effects[CE_PULSE], PULSE_SLOW, PULSE_2FAST)
 
 /obj/item/organ/internal/heart/proc/handle_heartbeat()
-	if(pulse >= PULSE_2FAST || owner.shock_stage >= 10 || istype(get_turf(owner), /turf/space))
+	var/turf/T = get_turf(owner)
+	var/datum/gas_mixture/environment = T.return_air()
+	if(pulse >= PULSE_2FAST || owner.shock_stage >= 10 || environment.return_pressure() < SOUND_MINIMUM_PRESSURE)
 		//PULSE_THREADY - maximum value for pulse, currently it 5.
 		//High pulse value corresponds to a fast rate of heartbeat.
 		//Divided by 2, otherwise it is too slow.
