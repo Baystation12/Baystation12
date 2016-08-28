@@ -1,0 +1,9 @@
+author: Haswell
+
+delete-after: True
+
+changes: 
+  - rscdel: "Atmospheric technician is now unavailable for general play."
+  - rscadd: "Alt title 'Atmospheric Technician' is now added to engineers."
+  - tweak: "Engineers now have all the accesses atmospheric technicians previously held."
+  - tweak: "Tweaked job selection screen to properly indicate which jobs aren't available to play as."

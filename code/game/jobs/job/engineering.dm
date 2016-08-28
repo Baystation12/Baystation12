@@ -30,15 +30,16 @@
 	department = "Engineering"
 	department_flag = ENG
 	faction = "Station"
-	total_positions = 5
-	spawn_positions = 5
+	total_positions = 8
+	spawn_positions = 7
 	supervisors = "the chief engineer"
 	selection_color = "#5b4d20"
 	economic_modifier = 5
 	minimal_player_age = 7
-	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics)
-	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction)
-	alt_titles = list("Maintenance Technician","Engine Technician","Electrician")
+	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
+	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
+	alt_titles = list("Maintenance Technician","Engine Technician","Electrician",
+		"Atmospheric Technician" = /decl/hierarchy/outfit/job/engineering/atmos)
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
 
 /datum/job/atmos
@@ -46,12 +47,12 @@
 	department = "Engineering"
 	department_flag = ENG
 	faction = "Station"
-	total_positions = 3
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the chief engineer"
 	selection_color = "#5b4d20"
 	economic_modifier = 5
 	minimal_player_age = 7
-	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_external_airlocks)
-	minimal_access = list(access_eva, access_engine, access_atmospherics, access_maint_tunnels, access_emergency_storage, access_construction, access_external_airlocks)
+	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
+	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
 	outfit_type = /decl/hierarchy/outfit/job/engineering/atmos
