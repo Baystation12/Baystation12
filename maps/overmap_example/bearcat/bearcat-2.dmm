@@ -395,7 +395,7 @@
 "hE" = (/obj/structure/disposalpipe/segment{tag = "icon-conpipe-c (WEST)"; icon_state = "conpipe-c"; dir = 8},/obj/structure/reagent_dispensers/fueltank,/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (SOUTHWEST)"; icon_state = "corner_white"; dir = 10},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance)
 "hF" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_x = 0; pixel_y = -32; tag = "icon-alarm0 (NORTH)"},/obj/machinery/light/small{dir = 8},/obj/machinery/power/port_gen/pacman/super,/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/power)
 "hG" = (/obj/machinery/power/terminal{dir = 4},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/power)
-"hH" = (/obj/machinery/power/smes,/obj/structure/cable,/turf/simulated/floor/plating,/area/ship/scrap/maintenance/power)
+"hH" = (/obj/machinery/power/smes/buildable,/obj/structure/cable,/turf/simulated/floor/plating,/area/ship/scrap/maintenance/power)
 "hI" = (/turf/space,/area/ship/scrap/maintenance/atmos)
 "hJ" = (/obj/structure/grille,/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled{icon_state = "white"},/area/ship/scrap/maintenance/atmos)
 "hK" = (/obj/machinery/atmospherics/pipe/simple/visible/green{tag = "icon-intact (NORTH)"; icon_state = "intact"; dir = 1},/obj/machinery/meter,/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/atmos)
