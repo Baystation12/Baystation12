@@ -269,12 +269,7 @@
 		system_error("resources depleted")
 
 /obj/machinery/mining/drill/proc/use_cell_power()
-	if(!cell) return 0
-	var/charge_to_use = actual_power_usage * CELLRATE
-	if(cell.charge >= charge_to_use)
-		cell.use(charge_to_use)
-		return 1
-	return 0
+	return cell && cell.checked_use(actual_power_usage * CELLRATE)
 
 /obj/machinery/mining/drill/verb/unload()
 	set name = "Unload Drill"
