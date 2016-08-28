@@ -26,7 +26,7 @@
 	var/cover_open = 0						//is the cover open?
 	var/obj/item/weapon/cell/cell
 	var/max_cooling = 12					// in degrees per second - probably don't need to mess with heat capacity here
-	var/charge_consumption = 1 KILOWATTS	// energy usage at full power
+	var/charge_consumption = 2 KILOWATTS	// energy usage at full power
 	var/thermostat = T20C
 
 /obj/item/device/suit_cooling_unit/ui_action_click()
