@@ -65,7 +65,11 @@
 		removed = ingest_met
 	if(touch_met && (location == CHEM_TOUCH))
 		removed = touch_met
+	var/mob/living/carbon/human/H = M
+	if(istype(H))
+		removed *= H.species.metabolism_mod
 	removed = min(removed, volume)
+
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
 	var/effective = removed
