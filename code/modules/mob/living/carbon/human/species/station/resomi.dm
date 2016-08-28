@@ -72,12 +72,12 @@
 		)
 
 	has_organ = list(
-		BP_HEART =    /obj/item/organ/internal/heart,
-		BP_LUNGS =    /obj/item/organ/internal/lungs,
-		BP_LIVER =    /obj/item/organ/internal/liver,
-		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
-		BP_BRAIN =    /obj/item/organ/internal/brain,
-		BP_EYES =     /obj/item/organ/internal/eyes
+		BP_HEART =    /obj/item/organ/internal/heart/resomi,
+		BP_LUNGS =    /obj/item/organ/internal/lungs/resomi,
+		BP_LIVER =    /obj/item/organ/internal/liver/resomi,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys/resomi,
+		BP_BRAIN =    /obj/item/organ/internal/brain/resomi,
+		BP_EYES =     /obj/item/organ/internal/eyes/resomi
 		)
 
 	unarmed_types = list(
