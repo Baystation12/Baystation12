@@ -340,7 +340,11 @@ var/list/organ_cache = list()
 		transplant_data["species"] =    transplant_blood.data["species"]
 		transplant_data["blood_type"] = transplant_blood.data["blood_type"]
 		transplant_data["blood_DNA"] =  transplant_blood.data["blood_DNA"]
-
+		
+	// robotic organs emulate behavior of the equivalent flesh organ of the species
+	if(robotic >= ORGAN_ROBOT || !species)
+		species = target.species
+		
 	owner = target
 	forceMove(owner) //just in case
 	processing_objects -= src
