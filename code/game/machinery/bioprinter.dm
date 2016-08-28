@@ -183,6 +183,10 @@
 		
 		O.set_dna(C.dna)
 		
+		if(O.species)
+			// This is a very hacky way of doing of what organ/New() does if it has an owner
+			O.w_class = max(O.w_class + mob_size_difference(O.species.mob_size, MOB_MEDIUM), 1)
+		
 		O.transplant_data["species"] =    C.species.name
 		O.transplant_data["blood_type"] = loaded_dna["blood_type"]
 		O.transplant_data["blood_DNA"] =  loaded_dna["blood_DNA"]
