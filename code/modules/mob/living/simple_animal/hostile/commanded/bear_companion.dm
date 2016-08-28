@@ -10,6 +10,8 @@
 	health = 75
 	maxHealth = 75
 
+	density = 1
+
 	attacktext = "swatted"
 	melee_damage_lower = 10
 	melee_damage_upper = 10
