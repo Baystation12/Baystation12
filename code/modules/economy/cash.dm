@@ -15,6 +15,7 @@
 	var/access = list()
 	access = access_crate_cash
 	var/worth = 0
+	var/global/denominations = list(1000,500,200,100,50,20,10,1)
 
 /obj/item/weapon/spacecash/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/spacecash))
@@ -39,39 +40,47 @@
 		user << "<span class='notice'>You add [src.worth] Thalers worth of money to the bundles.<br>It holds [bundle.worth] Thalers now.</span>"
 		qdel(src)
 
+/obj/item/weapon/spacecash/proc/getMoneyImages()
+	if(icon_state)
+		return list(icon_state)
+
 /obj/item/weapon/spacecash/bundle
 	name = "pile of thalers"
 	icon_state = ""
 	desc = "They are worth 0 Thalers."
 	worth = 0
 
-/obj/item/weapon/spacecash/bundle/update_icon()
-	overlays.Cut()
+/obj/item/weapon/spacecash/bundle/getMoneyImages()
+	if(icon_state)
+		return list(icon_state)
+	. = list()
 	var/sum = src.worth
 	var/num = 0
-	var/list/denominations = list(1000,500,200,100,50,20,10,1)
 	for(var/i in denominations)
 		while(sum >= i && num < 50)
 			sum -= i
 			num++
-			var/image/banknote = image('icons/obj/items.dmi', "spacecash[i]")
-			var/matrix/M = matrix()
-			M.Translate(rand(-6, 6), rand(-4, 8))
-			M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
-			banknote.transform = M
-			src.overlays += banknote
+			. += "spacecash[i]"
 	if(num == 0) // Less than one thaler, let's just make it look like 1 for ease
-		var/image/banknote = image('icons/obj/items.dmi', "spacecash1")
+		. += "spacecash1"
+
+/obj/item/weapon/spacecash/bundle/update_icon()
+	overlays.Cut()
+	var/list/images = src.getMoneyImages()
+	
+	for(var/A in images)
+		var/image/banknote = image('icons/obj/items.dmi', A)
 		var/matrix/M = matrix()
 		M.Translate(rand(-6, 6), rand(-4, 8))
 		M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
 		banknote.transform = M
 		src.overlays += banknote
+	
 	src.desc = "They are worth [worth] Thalers."
 	if(worth in denominations)
 		src.name = "[worth] Thaler"
 	else
-		src.name = "pile of thalers"
+		src.name = "pile of [worth] thalers"
 
 	if(overlays.len <= 2)
 		w_class = 1

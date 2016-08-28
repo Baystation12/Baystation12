@@ -10,7 +10,9 @@
 
 /turf/space/New()
 	if(icon_state == "0")
-		icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
+		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
+	if(!istype(src, /turf/space/transit))
+		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
 	update_starlight()
 	..()
 
@@ -184,5 +186,5 @@
 
 //Bluespace turfs for shuttles and possible future transit use
 /turf/space/bluespace
-	name = "\proper bluespace"
+	name = "bluespace"
 	icon_state = "bluespace"

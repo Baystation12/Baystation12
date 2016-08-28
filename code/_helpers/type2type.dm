@@ -74,14 +74,14 @@
 // Turns a direction into text
 /proc/dir2text(direction)
 	switch (direction)
-		if (1.0)  return "north"
-		if (2.0)  return "south"
-		if (4.0)  return "east"
-		if (8.0)  return "west"
-		if (5.0)  return "northeast"
-		if (6.0)  return "southeast"
-		if (9.0)  return "northwest"
-		if (10.0) return "southwest"
+		if (NORTH)     return "north"
+		if (SOUTH)     return "south"
+		if (EAST)      return "east"
+		if (WEST)      return "west"
+		if (NORTHEAST) return "northeast"
+		if (SOUTHEAST) return "southeast"
+		if (NORTHWEST) return "northwest"
+		if (SOUTHWEST) return "southwest"
 
 // Turns text into proper directions
 /proc/text2dir(direction)

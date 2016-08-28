@@ -1,6 +1,6 @@
 
 /var/game_id = null
-/proc/generate_gameid()
+/hook/global_init/proc/generate_gameid()
 	if(game_id != null)
 		return
 	game_id = ""
@@ -17,6 +17,7 @@
 	for(var/_ = 1 to 3)
 		game_id = "[c[(t % l) + 1]][game_id]"
 		t = round(t / l)
+	return 1
 
 // Find mobs matching a given string
 //
@@ -90,7 +91,7 @@
 		config.server_name += " #[(world.port % 1000) / 100]"
 
 	if(config && config.log_runtime)
-		var/runtime_log = file("data/logs/runtime/[date_string]-[game_id].log")
+		var/runtime_log = file("data/logs/runtime/[date_string]_[time2text(world.timeofday, "hh:mm")]_[game_id].log")
 		runtime_log << "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]"
 		log = runtime_log
 
@@ -470,6 +471,10 @@ var/world_topic_spam_protect_time = world.timeofday
 		return
 
 	..(reason)
+
+/world/Del()
+	callHook("shutdown")
+	return ..()
 
 /hook/startup/proc/loadMode()
 	world.load_mode()

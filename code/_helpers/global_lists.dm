@@ -102,7 +102,7 @@ var/global/list/string_slot_flags = list(
 /////Initial Building/////
 //////////////////////////
 
-/proc/populateGlobalLists()
+/hook/global_init/proc/populateGlobalLists()
     possible_cable_coil_colours = sortAssoc(list(
 		"Yellow" = COLOR_YELLOW,
 		"Green" = COLOR_LIME,
@@ -113,6 +113,7 @@ var/global/list/string_slot_flags = list(
 		"Red" = COLOR_RED,
 		"White" = COLOR_WHITE
 	))
+    return 1
 
 /proc/get_mannequin(var/ckey)
 	if(!mannequins_)
@@ -122,7 +123,7 @@ var/global/list/string_slot_flags = list(
 		. = new/mob/living/carbon/human/dummy/mannequin()
 		mannequins_[ckey] = .
 
-/proc/makeDatumRefLists()
+/hook/global_init/proc/makeDatumRefLists()
 	var/list/paths
 
 	//Hair - Initialise all /datum/sprite_accessory/hair into an list indexed by hair-style name
