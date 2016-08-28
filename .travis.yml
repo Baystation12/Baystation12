@@ -14,7 +14,7 @@ env:
     - MAP_PATH=example
     - MAP_PATH=exodus
     - MAP_PATH=torch
-    - MAP_PATH=overmap
+    - MAP_PATH=overmap_example
 
 cache:
   directories:

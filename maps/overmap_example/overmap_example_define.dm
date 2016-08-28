@@ -1,7 +1,7 @@
 /datum/map/overmap_example
 	name = "Overmap Example"
 	full_name = "The Overmap Example"
-	path = "overmap"
+	path = "overmap_example"
 
 /datum/map/overmap_example/setup_map()
 	station_levels = list()
