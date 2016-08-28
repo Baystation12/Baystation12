@@ -43,9 +43,6 @@
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "chitin"
 
-/obj/item/organ/internal/brain/resomi
-	w_class = 1.0
-
 /obj/item/organ/internal/brain/robotize()
 	. = ..()
 	icon_state = "brain-prosthetic"
