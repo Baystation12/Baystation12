@@ -180,6 +180,9 @@
 	if(loaded_dna)
 		O.transplant_data = list()
 		var/mob/living/carbon/C = loaded_dna["donor"]
+		
+		O.set_dna(C.dna)
+		
 		O.transplant_data["species"] =    C.species.name
 		O.transplant_data["blood_type"] = loaded_dna["blood_type"]
 		O.transplant_data["blood_DNA"] =  loaded_dna["blood_DNA"]
