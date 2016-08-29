@@ -1,5 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - rscadd: "Added /vg/ direct-action ventcrawling. You will now crawl through the actual pipe network, a step at a time. Have fun."
- 
