@@ -22,6 +22,16 @@
 
 /obj/item/organ/internal/lungs/set_dna(var/datum/dna/new_dna)
 	..()
+	sync_breath_types()
+	
+/obj/item/organ/internal/lungs/replaced()
+	..()
+	sync_breath_types()
+	
+/**
+ *  Set these lungs' breath types based on the lungs' species
+ */
+/obj/item/organ/internal/lungs/proc/sync_breath_types()
 	min_breath_pressure = species.breath_pressure
 	breath_type = species.breath_type ? species.breath_type : "oxygen"
 	poison_type = species.poison_type ? species.poison_type : "phoron"
