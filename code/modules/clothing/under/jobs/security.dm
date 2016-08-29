@@ -170,7 +170,6 @@
 	item_state = "hostrench"
 	flags_inv = 0
 	siemens_coefficient = 0.6
-	body_parts_covered = UPPER_TORSO|ARMS
 
 /*
  * Navy uniforms
