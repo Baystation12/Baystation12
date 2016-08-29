@@ -143,6 +143,13 @@
 	src.air_contents.adjust_gas("nitrogen", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 
 
+/obj/item/weapon/tank/emergency/nitrogen/double
+	name = "double emergency nitrogen tank"
+	icon_state = "emergency_double_nitrogen"
+	gauge_icon = "indicator_emergency_double"
+	volume = 10
+
+
 /*
  * Nitrogen
  */
