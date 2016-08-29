@@ -28,7 +28,6 @@ var/datum/antagonist/cultist/cult
 
 	var/allow_narsie = 1
 	var/datum/mind/sacrifice_target
-	var/list/startwords = list("blood","join","self","hell")
 	var/list/allwords = list("travel","self","see","hell","blood","join","tech","destroy", "other", "hide")
 	var/list/sacrificed = list()
 	var/list/harvested = list()
@@ -75,28 +74,6 @@ var/datum/antagonist/cultist/cult
 	var/obj/item/weapon/storage/S = locate() in player.contents
 	if(S && istype(S))
 		T.loc = S
-
-/datum/antagonist/cultist/greet(var/datum/mind/player)
-	if(!..())
-		return 0
-	grant_runeword(player.current)
-
-/datum/antagonist/cultist/proc/grant_runeword(mob/living/carbon/human/cult_mob, var/word)
-
-	if (!word)
-		if(startwords.len > 0)
-			word=pick(startwords)
-			startwords -= word
-		else
-			word = pick(allwords)
-
-	// Ensure runes are randomized.
-	if(!cultwords["travel"])
-		runerandom()
-
-	var/wordexp = "[cultwords[word]] is [word]..."
-	cult_mob << "<span class='warning'>You remember one thing from the dark teachings of your master... [wordexp]</span>"
-	cult_mob.mind.store_memory("You remember that <B>[wordexp]</B>", 0, 0)
 
 /datum/antagonist/cultist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(!..())
