@@ -50,7 +50,7 @@
 
 /obj/item/clothing/shoes/rainbow
 	name = "rainbow shoes"
-	desc = "Very gay shoes."
+	desc = "Very colourful shoes."
 	icon_state = "rain_bow"
 
 /obj/item/clothing/shoes/orange

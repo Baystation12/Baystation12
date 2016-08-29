@@ -114,10 +114,34 @@
 	display_name = "hair flower pin, blue"
 	path = /obj/item/clothing/head/hairflower/blue
 
+/datum/gear/head/welding/demon
+	display_name = "welding mask, demon"
+	path = /obj/item/clothing/head/welding/demon
+	allowed_roles = list("Roboticist","Station Engineer","Atmospheric Technician","Chief Engineer")
+	cost = 3
+
+/datum/gear/head/welding/knight
+	display_name = "welding mask, knight"
+	path = /obj/item/clothing/head/welding/knight
+	allowed_roles = list("Roboticist","Station Engineer","Atmospheric Technician","Chief Engineer")
+	cost = 3
+
+/datum/gear/head/welding/fancy
+	display_name = "welding mask, fancy"
+	path = /obj/item/clothing/head/welding/fancy
+	allowed_roles = list("Roboticist","Station Engineer","Atmospheric Technician","Chief Engineer")
+	cost = 3
+
+/datum/gear/head/welding/engie
+	display_name = "welding mask, engineering"
+	path = /obj/item/clothing/head/welding/engie
+	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer")
+	cost = 3
+
+
 /datum/gear/head/hardhat
 	display_name = "hardhat, yellow"
 	path = /obj/item/clothing/head/hardhat
-	cost = 2
 
 /datum/gear/head/hardhat/blue
 	display_name = "hardhat, blue"
