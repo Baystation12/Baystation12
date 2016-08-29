@@ -133,9 +133,9 @@ Class Procs:
 		circuit_board.resistance = resistance
 
 /obj/machinery/examine(var/mob/user)
+	..()
 	if(circuit_board)
 		user << "<span class='notice'>It has a circuit board installed with [get_efficiency(1,0,0)]% efficiency and [circuit_board.resistance] damage resistance!</span>"
-	return ..()
 
 
 /obj/machinery/attackby(var/obj/item/I, var/mob/living/carbon/human/user)
@@ -172,6 +172,9 @@ Class Procs:
 	if(contents) // The same for contents.
 		for(var/atom/A in contents)
 			qdel(A)
+	if(circuit_board)
+		qdel(circuit_board)
+		circuit_board = null
 	return ..()
 
 /obj/machinery/process()//If you dont use process or power why are you here

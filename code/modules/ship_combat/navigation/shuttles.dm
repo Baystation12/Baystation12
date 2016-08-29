@@ -140,10 +140,6 @@
 
 /area/shuttle/mining_shuttle/requires_power = 1
 
-/area/shuttle/mining_shuttle/aphrodyte
-	name = "Mining Shuttle"
-	icon_state = "shuttle3"
-
 /area/shuttle/mining_shuttle/destination
 	name = "Mining Shuttle Landing Site"
 	icon_state = "shuttle3"

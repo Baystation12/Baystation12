@@ -14,11 +14,16 @@
 	var/obj/effect/map/current_sector
 	var/obj/machinery/space_battle/helm/nav_control
 	var/list/eng_controls = list()
+	var/list/fire_controls = list()
+	var/braked = 1
 
 /obj/effect/map/ship/initialize()
 	for(var/obj/machinery/space_battle/engine_control/E in world)
 		if (E.z == map_z && !(E in eng_controls))
 			eng_controls.Add(E)
+	for(var/obj/machinery/space_battle/missile_computer/M in world)
+		if (M.z == map_z && !(M in fire_controls))
+			fire_controls.Add(M)
 	for(var/obj/machinery/space_battle/helm/H in machines)
 		if (H.z == map_z)
 			nav_control = H
@@ -61,7 +66,10 @@
 		toggle_move_stars(map_z)
 		for(var/obj/machinery/space_battle/engine_control/E in eng_controls)
 			E.stopped()
+		for(var/obj/machinery/space_battle/missile_computer/M in fire_controls)
+			M.find_targets()
 	else
+		braked = 0
 		toggle_move_stars(map_z, fore_dir)
 
 /obj/effect/map/ship/proc/can_burn()

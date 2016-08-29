@@ -1,6 +1,8 @@
 /obj/machinery/space_battle/helm
 	name = "helm control console"
 	icon_state = "computer"
+	anchored = 1
+	density = 1
 	var/state = "status"
 	var/obj/effect/map/ship/linked			//connected overmap object
 	var/autopilot = 0
@@ -26,6 +28,11 @@
 			R.fields["x"] = S.x
 			R.fields["y"] = S.y
 			known_sectors += R
+
+/obj/machinery/space_battle/helm/Destroy()
+	linked.nav_control = null
+	linked = null
+	return ..()
 
 /obj/machinery/space_battle/helm/process()
 	..()
@@ -59,10 +66,10 @@
 	return 0
 
 /obj/machinery/space_battle/helm/attack_hand(var/mob/user as mob)
-	if(..())
-		user.unset_machine()
-		manual_control = 0
-		return
+//	if(..())
+//		user.unset_machine()
+//		manual_control = 0
+//		return
 
 	if(!isAI(user))
 		user.set_machine(src)

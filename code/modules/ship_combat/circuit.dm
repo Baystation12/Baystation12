@@ -22,10 +22,10 @@
 	New(var/obj/machinery/M)
 		..()
 		rewire()
-		spawn_type = M.type
+		if(M && M.type)
+			spawn_type = M.type
 
-	proc/rewire()
-		var/chance = 1
+	proc/rewire(var/chance = 1)
 		for(var/i=1 to internal_wiring.len)
 			if(internal_wiring[i] == BLACK)
 				chance++
@@ -37,12 +37,12 @@
 		if(1.0)
 			for(var/i=1 to internal_wiring.len)
 				if(internal_wiring[i] == YELLOW)
-					if(prob(80/resistance))
+					if(prob(100/resistance))
 						internal_wiring[i] = RED
 					break
-				if(prob(45/resistance))
+				if(prob(50/resistance))
 					internal_wiring[i] = BLACK
-				else if(prob(50/resistance))
+				else if(prob(80/resistance))
 					internal_wiring[i] = RED
 		if(2.0)
 			for(var/i=1 to internal_wiring.len)

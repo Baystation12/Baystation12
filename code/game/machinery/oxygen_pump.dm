@@ -12,6 +12,8 @@
 	power_channel = ENVIRON
 	idle_power_usage = 10
 	active_power_usage = 120 // No idea what the realistic amount would be.
+	density = 0
+	anchored = 1
 
 /obj/machinery/oxygen_pump/New()
 	..()

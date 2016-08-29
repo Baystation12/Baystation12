@@ -17,6 +17,7 @@
 	allowed_factions = list()
 	var/list/teams = list()
 	var/team_count
+	var/setup = 0
 
 	proc/generate_statistics()
 		var/client/first_death
@@ -49,8 +50,11 @@
 			world << "<b>[most_repairs]</b> was the handiest sailor, making a total of [most_repairs.repairs_made] repairs!"
 
 	check_finished()
+		if(!setup)
+			return 0
 		var/list/active_starts = list()
 		for(var/obj/missile_start/S in world)
+			S.refresh_active()
 			if(S.active)
 				active_starts += S
 		if(active_starts.len <= 1)
@@ -102,15 +106,16 @@
 			var/list/team_cores = list()
 			for(var/obj/machinery/space_battle/ship_core/core in world)
 				if(core.team && core.team == text2num(teams[i]))
-					team_cores.Add(core)
+					protected_cores.Add(core)
+				else if(!core.team) // Derelicts
+					protected_cores.Add(core)
 
-			var/obj/machinery/space_battle/ship_core/chosen = pick(team_cores)
-			message_admins("Team [(teams[i])] has [team_cores.len] cores. [chosen && istype(chosen) ? "Successfully picked" : "Not picked"]")
-			if(chosen) protected_cores.Add(chosen)
+			message_admins("Team [(teams[i])] has [team_cores.len] cores.")
 		for(var/obj/machinery/space_battle/ship_core/not_chosen in world)
 			if(not_chosen in protected_cores) continue
 			qdel(not_chosen)
 
+	setup = 1
 	post_setup()
 		..()
 

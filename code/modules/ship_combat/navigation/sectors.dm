@@ -33,10 +33,13 @@ var/global/list/map_sectors = list()
 	var/known = 1
 
 /obj/effect/mapinfo/New()
+	prepare_map()
 	tag = "sector[z]"
-	testing("tag: sector[z]")
 	zlevel = z
 	loc = null
+
+/obj/effect/mapinfo/proc/prepare_map()
+	return 1
 
 /obj/effect/mapinfo/sector
 	name = "generic sector"
@@ -45,6 +48,8 @@ var/global/list/map_sectors = list()
 /obj/effect/mapinfo/ship
 	name = "generic ship"
 	obj_type = /obj/effect/map/ship
+
+
 
 
 //===================================================================================
@@ -60,7 +65,7 @@ var/global/list/map_sectors = list()
 	var/always_known = 1
 
 /obj/effect/map/New(var/obj/effect/mapinfo/data)
-	map_z = data.zlevel
+	map_z = GetConnectedZlevels(data.zlevel)
 	name = data.name
 	always_known = data.known
 	if (data.icon != 'icons/mob/screen1.dmi')
@@ -68,12 +73,13 @@ var/global/list/map_sectors = list()
 		icon_state = data.icon_state
 	if(data.desc)
 		desc = data.desc
-	var/new_x = data.mapx ? data.mapx : rand(OVERMAP_EDGE, world.maxx - OVERMAP_EDGE)
-	var/new_y = data.mapy ? data.mapy : rand(OVERMAP_EDGE, world.maxy - OVERMAP_EDGE)
+	var/new_x = data.mapx ? data.mapx : rand(OVERMAP_EDGE, OVERMAP_SIZE - OVERMAP_EDGE)
+	var/new_y = data.mapy ? data.mapy : rand(OVERMAP_EDGE, OVERMAP_SIZE - OVERMAP_EDGE)
 	loc = locate(new_x, new_y, OVERMAP_ZLEVEL)
 
 	if(data.landing_area)
 		shuttle_landing = locate(data.landing_area)
+
 
 /obj/effect/map/CanPass(atom/movable/A)
 	testing("[A] attempts to enter sector\"[name]\"")

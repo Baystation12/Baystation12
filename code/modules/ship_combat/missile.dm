@@ -68,6 +68,7 @@
 
 	Destroy()
 		processing_objects.Remove(src)
+		let_go()
 		..()
 
 	proc/let_go()
@@ -193,29 +194,32 @@
 	invisibility = 101
 	density = 0
 	anchored = 1
-	var/active = 0
+	var/active = 1
 	var/team = 0
+	var/alive = 1
+	var/initialised = 0
 
 	New()
 		..()
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
 			team = A.team
-		refresh_active()
+
 
 	proc/refresh_active()
-		if(ticker && ticker.mode && istype(ticker.mode, /datum/game_mode/ship_battles))
-			var/datum/game_mode/ship_battles/mode = ticker.mode
-			for(var/I in mode.allowed_factions)
-				if(lowertext(I) == lowertext(src.name))
-					active = 1
+		if(!initialised)
+			active = 1
+		else if(ticker && ticker.mode && istype(ticker.mode, /datum/game_mode/ship_battles))
+//			var/datum/game_mode/ship_battles/mode = ticker.mode
+//			for(var/I in mode.allowed_factions)
+//				if(lowertext(I) == lowertext(src.name))
+//					active = 1
 			var/has_core = 0
 			for(var/obj/machinery/space_battle/ship_core/S in world)
-				if(S.team == src.team)
+				if(S.z == src.z)
 					has_core = 1
-			active = (has_core && active)
-		else
-			active = 0
+			active = has_core && alive
+		return active
 
 
 

@@ -16,12 +16,13 @@
 	anchored = 1
 	var/list/target_teams = list()
 	var/list/hacked = list()				  //[1]=name, [2] = selectable type list, [3] = selectable action list,[3][1] = action, [3][2] = action delay, [4] = added delay to hacking.
-	var/list/available_categories = list(list("Sensors", list(/obj/machinery/space_battle/missile_sensor), list(EMP = 180, FRY_CIRCUIT = 180, DISABLE = 180), 60),\
-										 list("Life Support", list(/obj/machinery/alarm), list(EMP = 30, FRY_CIRCUIT = 60, UI_INTERACT = 90, UNLOCK = 150), 30),\
-										 list("Lighting", list(/obj/machinery/light), list(SHATTER = 20), 1), \
-										 list("Power", list(/obj/machinery/power/apc), list(EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 180, SURGE = 30), 90), \
-										 list("Defensive Systems", list(/obj/machinery/space_battle/ecm, /obj/machinery/space_battle/shieldwallgen), list(EMP = 240, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 270), 300), \
-										 list("Engines", list(/obj/machinery/space_battle/engine), list(EMP = 90, FRY_CIRCUIT = 180, UI_INTERACT = 90), 120))
+	var/list/available_categories = list(list("Sensors", list(/obj/machinery/space_battle/missile_sensor), list(EMP = 180, FRY_CIRCUIT = 180, DISABLE = 180), 600),\
+										 list("Life Support", list(/obj/machinery/alarm), list(EMP = 30, FRY_CIRCUIT = 60, UI_INTERACT = 90, UNLOCK = 150), 300),\
+										 list("Lighting", list(/obj/machinery/light), list(SHATTER = 20), 20), \
+										 list("Power", list(/obj/machinery/power/apc), list(EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 180, SURGE = 30), 1200), \
+										 list("Defensive Systems", list(/obj/machinery/space_battle/ecm, /obj/machinery/space_battle/shieldwallgen), list(EMP = 240, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 270), 1500), \
+										 list("Engines", list(/obj/machinery/space_battle/engine), list(EMP = 90, FRY_CIRCUIT = 180), 120), \
+										 list("Piloting", list(/obj/machinery/space_battle/engine_control, /obj/machinery/space_battle/helm), list(EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 120), 900))
 
 	var/team = 0
 	var/obj/machinery/hacking
@@ -281,7 +282,8 @@
 			mod = target.get_efficiency(2, 1) ** 3
 		else
 			mod = 0.2 // 20% time to hack.
-		time = min(1200, max(0, (added_time ? added_time + BASE_HACKING_TIME : BASE_HACKING_TIME - added_time) * mod * (1+detection*0.1)))
+		time = min(1200, max(0, BASE_HACKING_TIME * mod * (1+detection*0.1)))
+		time += added_time
 	time /= speed
 	hacking_time = world.timeofday + time*10
 	menu = "progress"

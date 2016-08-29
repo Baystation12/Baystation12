@@ -133,14 +133,14 @@
 								if(istype(P, I) && (req_components[I] > 0))
 									playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 									if(istype(P, /obj/item/stack/cable_coil))
-										var/obj/item/stack/cable_coil/CP = P
-										if(CP.get_amount() > 1)
-											var/camt = min(CP.amount, req_components[I]) // amount of cable to take, idealy amount required, but limited by amount provided
-											var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src)
-											CC.amount = camt
-											CC.update_icon()
-											CP.use(camt)
-											components += CC
+										var/obj/item/stack/S = P
+										if(S.get_amount() > 1)
+											var/camt = min(S.amount, req_components[I]) // amount of cable to take, idealy amount required, but limited by amount provided
+											var/obj/item/stack/SS = new S.type(src)
+											SS.amount = camt
+											SS.update_icon()
+											S.use(camt)
+											components += SS
 											req_components[I] -= camt
 											update_desc()
 											break

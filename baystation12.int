@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
-LAST_COMPILE_TIME: 1472262944
-DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\controllers code\controllers\Processes code\datums code\datums\appearances code\datums\appearances\automatic code\datums\extensions code\datums\extensions\appearance code\game code\modules code\modules\overmap code\modules\ship_combat code\modules\ship_combat\navigation maps maps\exodus maps\ships 
+LAST_COMPILE_TIME: 1472385181
+DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\trinary_devices code\ATMOSPHERICS\components\unary code\controllers code\controllers\Processes code\datums code\datums\appearances code\datums\extensions code\modules code\modules\power code\modules\ship_combat code\modules\ship_combat\navigation maps maps\exodus maps\RandomZLevels maps\ships maps\ships\aphrodyte maps\ships\core maps\stations maps\stations\asteroids maps\stations\derelicts maps\stations\derelicts\mining_platform maps\stations\derelicts\osirus 
 AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 511.1353
-WINDOW: code\modules\ship_combat\misc.dm;code\modules\ship_combat\navigation\fueled_engines.dm;maps\ships\aphrodyte.dmm;maps\exodus\exodus-1.dmm;code\modules\overmap\README.dm;code\modules\ship_combat\navigation\shuttles.dm;maps\ships\asteroid.dmm
-FILE: code\modules\ship_combat\misc.dm
+WINDOW: code\modules\ship_combat\navigation\inhibitor.dm;code\modules\ship_combat\circuit.dm;code\modules\ship_combat\navigation\stations.dm;maps\ships\core\core.dmm;code\modules\ship_combat\navigation\ship.dm;code\modules\ship_combat\core.dm;code\modules\ship_combat\navigation\helm.dm;maps\stations\derelicts\osirus\osirus.dmm;maps\stations\derelicts\mining_platform\mining_platform.dmm;maps\stations\one.dmm;maps\ships\aphrodyte\aphrodyte.dmm;maps\exodus\exodus-5.dmm;maps\stations\asteroids\asteroid_s1.dmm
+FILE: maps\stations\derelicts\mining_platform\mining_platform.dmm
 */
 // END_INTERNALS

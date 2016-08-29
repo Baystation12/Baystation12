@@ -10,15 +10,45 @@
 	var/obj/machinery/missile/contained
 	var/contained_type = /obj/machinery/missile/standard
 
+	attackby(var/obj/item/I, var/mob/living/carbon/human/user)
+		if(istype(I, /obj/item/weapon/missile_grab))
+			var/obj/item/weapon/missile_grab/G
+			if(G.holding && G.holding.type == contained_type)
+				if(contained && contained_count >= (8 - contained.req_grabs*2))
+					user << "<span class='warning'>\The [src] has no space for \the [G.holding]!</span>"
+				else
+					user.visible_message("<span class='notice'>\The [user] begins placing \the [G.holding] into \the [src]</span>")
+					if(do_after(user, 150))
+						if(G && G.holding)
+							user.visible_message("<span class='notice'>\The [user] places \the [G.holding] into \the [src]</span>")
+							if(contained)
+								qdel(G.holding)
+								contained_count++
+							else
+								var/obj/machinery/missile/M = G.holding
+								M.let_go()
+								M.forceMove(src)
+								contained = M
+
+			else
+				user << "<span class='warning'>\The [G.holding] will not fit into \the [src]!</span>"
+		else if(istype(I, /obj/item/weapon/wrench))
+			if(contained || contained_count)
+				user << "<span class='warning'>\The [src] must be emptied first!</span>"
+			else
+				anchored = !anchored
+				src.visible_message("<span class='notice'>\The [user] [anchored ? "anchors" : "unanchors"] \the [src]!</span>")
+		return ..()
+
 	New()
 		..()
 		if(contained_type)
 			contained = new contained_type(src)
 			switch(contained.req_grabs)
 				if(1)
-					contained_count = 4
+					contained_count = 6
 				else if(2)
-					contained_count = 3
+					contained_count = 4
 				else
 					contained_count = 2
 			contained_count -= 1
@@ -35,6 +65,9 @@
 			qdel(src)
 
 	attack_hand(var/mob/living/carbon/human/user)
+		if(!anchored)
+			user << "<span class='warning'>\The [src] has to be anchored first!</span>"
+			return
 		if(contained)
 			user.visible_message("<span class='notice'>[user] removes \the [contained] from \the [src].</span>")
 			contained.forceMove(get_turf(user))

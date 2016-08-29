@@ -1,9 +1,6 @@
 //Zlevel where overmap objects should be
 #define OVERMAP_ZLEVEL 1
-//How far from the edge of overmap zlevel could randomly placed objects spawn
-<<<<<<< HEAD
-#define OVERMAP_EDGE 5
-=======
+//How far from the edge of overmap zlevel could randomly placed objects spawn#define OVERMAP_EDGE 5
 #define OVERMAP_EDGE 2
 #define OVERMAP_SIZE 30
 
@@ -27,7 +24,6 @@
 	..()
 	if(x == 1 || y == 1)
 		maptext = "<center>[x]-[y]</center>"
->>>>>>> 0b4cb4dda55c69006c7065b8e53f93e75d17612e
 
 //list used to track which zlevels are being 'moved' by the proc below
 var/list/moving_levels = list()

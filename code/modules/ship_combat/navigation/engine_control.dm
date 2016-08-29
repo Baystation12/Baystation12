@@ -9,7 +9,6 @@
 	var/obj/effect/map/ship/linked
 	var/engine_id = null
 	var/cooldown = 0
-	var/braked = 1
 	anchored = 1
 	density = 1
 
@@ -26,6 +25,14 @@
 		if (E.zlevel == z && !(E in engines))
 			if(engine_id && E.engine_id == src.engine_id)
 				engines += E
+
+/obj/machinery/space_battle/engine_control/Destroy()
+	for(var/datum/ship_engine/S in engines)
+		S.controller = null
+	engines.Cut()
+	linked.eng_controls.Cut(linked.eng_controls.Find(src), (linked.eng_controls.Find(src))+1)
+	linked = null
+	return ..()
 
 /obj/machinery/space_battle/engine_control/attack_hand(var/mob/user as mob)
 //	if(..())
@@ -94,7 +101,7 @@
 	updateUsrDialog()
 
 /obj/machinery/space_battle/engine_control/proc/burn()
-	if(braked)
+	if(linked.braked)
 		return 0
 	if(engines.len == 0)
 		return 0
@@ -112,16 +119,16 @@
 		return 0
 	return 1
 
-/obj/machinery/space_battle/engine_control/proc/stopped()
-	if(!braked)
+/obj/machinery/space_battle/engine_control/proc/stopped(var/forced = 0)
+	if(!linked.braked || forced)
 		cooldown = world.timeofday+(ENGINE_JUMP_DELAY*get_efficiency(-1,1)*10)
-		braked = 1
+		linked.braked = 1
 		world << "<span class='warning'>Cooldown set to [time_remaining()] seconds!</span>"
 
 /obj/machinery/space_battle/engine_control/process()
 	if(!linked) return PROCESS_KILL
 	if(cooldown())
-		braked = 0
+		linked.braked = 0
 	return ..()
 
 /obj/machinery/space_battle/engine_control/proc/time_remaining()

@@ -4,6 +4,22 @@
 	internal_organs_by_name[BP_STACK] = new /obj/item/organ/internal/stack(src,1)
 	src << "<span class='notice'>You feel a faint sense of vertigo as your neural lace boots.</span>"
 
+/mob/living/carbon/human/proc/get_team()
+	var/obj/item/organ/internal/stack/stack = internal_organs_by_name[BP_STACK]
+	if(stack && istype(stack))
+		return stack.team
+	return 0
+
+/mob/living/carbon/human/proc/lethal_injection()
+	var/obj/item/organ/internal/stack/stack = internal_organs_by_name[BP_STACK]
+	if(stack)
+		vessel.add_reagent("cyanide", 25)
+		for(var/obj/item/organ/O in head.contents)
+			if(O != src)
+				O.take_damage(rand(30,70))
+		return 1
+	return 0
+
 /obj/item/organ/internal/stack
 	name = "neural lace"
 	parent_organ = BP_HEAD
@@ -18,6 +34,7 @@
 	var/default_language
 	var/list/languages = list()
 	var/datum/mind/backup
+	var/team = 0
 
 /obj/item/organ/internal/stack/emp_act()
 	return

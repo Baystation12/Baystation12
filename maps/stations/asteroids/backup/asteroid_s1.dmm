@@ -1,0 +1,68 @@
+"a" = (/turf/space,/area/ship_battle/asteroid/asteroid_s1_1)
+"b" = (/turf/space,/area/ship_battle/asteroid/asteroid_s1_2)
+"c" = (/turf/unsimulated/mask,/area/ship_battle/asteroid/asteroid_s1_1)
+"d" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/asteroid_s1_1)
+"e" = (/turf/space,/area/shuttle/mining_shuttle/destination)
+"f" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/asteroid_s1_2)
+"g" = (/turf/simulated/floor/asteroid,/area/shuttle/mining_shuttle/destination)
+"h" = (/turf/unsimulated/mask,/area/ship_battle/asteroid/asteroid_s1_2)
+"i" = (/turf/space,/area/ship_battle/asteroid/asteroid_s1_3)
+"j" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/asteroid_s1_3)
+"k" = (/turf/unsimulated/mask,/area/ship_battle/asteroid/asteroid_s1_3)
+"l" = (/turf/unsimulated/mask,/area/ship_battle/asteroid/asteroid_s1_4)
+"m" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/asteroid_s1_4)
+"n" = (/turf/space,/area/ship_battle/asteroid/asteroid_s1_4)
+"o" = (/obj/effect/mapinfo/asteroid{dimensions_x = 50; dimensions_y = 50; landing_area = /area/shuttle/mining_shuttle/destination; name = "Small Asteroid"; overmap_state = "asteroid_small"},/turf/space,/area/ship_battle/asteroid/asteroid_s1_3)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaacaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaaaaaaacaaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaaaaaaaccaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaaaaaaaacaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaacaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaacdccaaaaaaaadaabbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaacccccccdddcccadddbbbeeeeeeeeeeeebbbbbbb
+aaaaaaaaaaccccccccddccccaccdffbeeeeeeeeeeeebbbbbbb
+aaaaaaaaaccccccccccdccccccccfffeeeeeeeeeeeebbbbbbb
+aaaaaaaddccccccccccccccccccdfffgeeeeeeeeeeebbbbbbb
+aaaaaaadddccccccccccccccccccfffgeeeeeeeeeeebbbbbbb
+aaaaaaaaddcccccccccccccccccchffeeeeeeeeeeeebbbbbbb
+aaaaaaaaddcccccccccccccccccdfffggggeeeeeeeebbbbbbb
+aaaaaaaccccccccccccccccccccdfffggggeeeeeeeebbbbbbb
+aaaaaaaaacccccccccccccccccccfhfggggeeeeeeeebbbbbbb
+aaaaaaaaccccccccccccccccccccfhfggggeeeeeeeebbbbbbb
+iiiiiiiijkkkkkkkkkkkkkklllllllmggggeeeeeeeennnnnnn
+iiiiiiiiijkkkkkkkkkkkkklllllllmggggeeeeeeeennnnnnn
+iiiiiiiiikkkkkkkkkkkkkklllllllmmmllnnnnnnnnnnnnnnn
+iiiiiiiiikikkkkkkkkkkkklllllnnmmmlllnnnnnnnnnnnnnn
+iiiiiiiiiiikkkkkkkkkkkklllllnnnnlllllnnnnnnnnnnnnn
+iiiiiiiiiiiikkkkkjkkkkkllllnnnnnlnlnnnnnnnnnnnnnnn
+iiiiiiiiiiiiikkkjjjjkkklllnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiiiikjjjjjkkkllnnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiiiiikjjjjkkknnnnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiiiiiiiiijkkinnnnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiikkiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiikiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnn
+iiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnn
+oiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnn
+"}

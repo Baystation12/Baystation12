@@ -2,6 +2,7 @@
 #define TANK_DEFAULT_RELEASE_PRESSURE 24
 #define TANK_IDEAL_PRESSURE 1015 //Arbitrary.
 
+
 var/list/global/tank_gauge_cache = list()
 
 /obj/item/weapon/tank
@@ -25,6 +26,7 @@ var/list/global/tank_gauge_cache = list()
 		"Resomi" = 'icons/mob/species/resomi/back.dmi'
 		)
 
+	var/max_pressure_mod = 1
 	var/back_only = 1
 	var/datum/gas_mixture/air_contents = null
 	var/distribute_pressure = ONE_ATMOSPHERE
@@ -261,7 +263,7 @@ var/list/global/tank_gauge_cache = list()
 		return 0
 
 	var/pressure = air_contents.return_pressure()
-	if(pressure > TANK_FRAGMENT_PRESSURE)
+	if(pressure > TANK_FRAGMENT_PRESSURE*max_pressure_mod)
 		if(!istype(src.loc,/obj/item/device/transfer_valve))
 			message_admins("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
 			log_game("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
@@ -272,7 +274,7 @@ var/list/global/tank_gauge_cache = list()
 		air_contents.react()
 
 		pressure = air_contents.return_pressure()
-		var/range = (pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE
+		var/range = (pressure-TANK_FRAGMENT_PRESSURE*max_pressure_mod)/TANK_FRAGMENT_SCALE
 
 		explosion(
 			get_turf(loc),
@@ -283,7 +285,7 @@ var/list/global/tank_gauge_cache = list()
 			)
 		qdel(src)
 
-	else if(pressure > TANK_RUPTURE_PRESSURE)
+	else if(pressure > TANK_RUPTURE_PRESSURE*max_pressure_mod)
 		#ifdef FIREDBG
 		log_debug("<span class='warning'>[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]</span>")
 		#endif
@@ -298,7 +300,7 @@ var/list/global/tank_gauge_cache = list()
 		else
 			integrity--
 
-	else if(pressure > TANK_LEAK_PRESSURE)
+	else if(pressure > TANK_LEAK_PRESSURE*max_pressure_mod)
 		#ifdef FIREDBG
 		log_debug("<span class='warning'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>")
 		#endif

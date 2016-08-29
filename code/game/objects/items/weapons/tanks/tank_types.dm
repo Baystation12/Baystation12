@@ -111,6 +111,7 @@
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	volume = 2 //Tiny. Real life equivalents only have 21 breaths of oxygen in them. They're EMERGENCY tanks anyway -errorage (dangercon 2011)
 	back_only = 0
+	max_pressure_mod = 0.075
 /obj/item/weapon/tank/emergency/oxygen
 	name = "emergency oxygen tank"
 	desc = "Used for emergencies. Contains very little oxygen, so try to conserve it until you actually need it."
@@ -124,13 +125,15 @@
 /obj/item/weapon/tank/emergency/oxygen/engi
 	name = "extended-capacity emergency oxygen tank"
 	icon_state = "emergency_engi"
-	volume = 6
+	volume = 3
+	max_pressure_mod = 0.15
 
 /obj/item/weapon/tank/emergency/oxygen/double
 	name = "double emergency oxygen tank"
 	icon_state = "emergency_double"
 	gauge_icon = "indicator_emergency_double"
-	volume = 10
+	volume = 6
+	max_pressure_mod = 0.25
 
 
 /obj/item/weapon/tank/emergency/nitrogen

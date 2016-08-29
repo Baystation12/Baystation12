@@ -33,6 +33,8 @@
 
 	var/id_num = 0
 
+	var/obj/effect/map/ship/linked
+
 	Destroy()
 		if(eye)
 			eye.return_to_owner()
@@ -91,6 +93,33 @@
 			name = "[initial(name)]([id_num])"
 		reconnect()
 
+	initialize()
+		spawn(10)
+		linked = map_sectors["[z]"]
+		if (linked)
+			if (!(src in linked.fire_controls))
+				linked.fire_controls.Add(src)
+
+	proc/find_targets()
+		starts.Cut()
+		if(!linked || !linked.is_still())
+			return 0
+		var/list/targettable_z_levels = list()
+		for(var/obj/effect/map/ship/ship in range(3, linked))
+			targettable_z_levels.Add(ship.map_z[1])
+		var/area/ship_battle/us = get_area(src)
+		if(!istype(us)) return
+		for(var/obj/missile_start/S in world)
+			for(var/i=1 to targettable_z_levels.len)
+				if(S.z == text2num(targettable_z_levels[i]))
+					S.refresh_active()
+					if(!S.active) continue
+					var/area/ship_battle/enemy = get_area(S)
+					if(!istype(enemy))
+						continue
+					if(enemy.team != us.team)
+						starts += S
+
 	reconnect()
 		for(var/obj/machinery/space_battle/tube/T in world)
 			if(T.id_tag == id_tag)
@@ -106,16 +135,7 @@
 				if(G.id_tag == src.id_tag)
 					gun = G
 					break
-		for(var/obj/missile_start/S in world)
-			S.refresh_active()
-			if(!S.active) continue
-			var/area/ship_battle/us = get_area(src)
-			var/area/ship_battle/enemy = get_area(S)
-			if(!istype(us) || !istype(enemy))
-				continue
-			if(enemy.team != us.team)
-				starts += S
-
+		find_targets()
 		if(tube)
 			tube.name = "[initial(tube.name)]([id_num])"
 		if(sensor)
@@ -134,10 +154,9 @@
 		if(stat & (BROKEN|NOPOWER) && !forced)
 			user << "<span class='warning'>\The [src] is not responding!</span>"
 			return
-		if(!starts.len)
-			src.reconnect()
-			spawn
-				user << "<span class='notice'>Scan Complete...[starts.len] targets found!</span>"
+		src.find_targets()
+		user << "<span class='notice'>Scan Complete...[starts.len] targets found!</span>"
+		if(!starts.len) return 0
 		if(!sensor)
 			for(var/obj/machinery/space_battle/missile_sensor/hub/S in world)
 				if(S.id_tag == id_tag)

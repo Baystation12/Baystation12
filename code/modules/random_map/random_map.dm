@@ -53,7 +53,7 @@ var/global/list/map_count = list()
 	set_map_size()
 
 	var/start_time = world.timeofday
-	if(!do_not_announce) admin_notice("<span class='danger'>Generating [name].</span>", R_DEBUG)
+	if(!do_not_announce) admin_notice("<span class='danger'>Generating [name] at z level: [tz].</span>", R_DEBUG)
 	sleep(-1)
 
 	// Testing needed to see how reliable this is (asynchronous calls, called during worldgen), DM ref is not optimistic

@@ -241,7 +241,7 @@
 		if(T)
 			var/datum/seed/seed = plant_controller.create_random_seed(1)
 			seed.set_trait(TRAIT_SPREAD,2)             // So it will function properly as vines.
-			seed.set_trait(TRAIT_POTENCY,rand(30, 100)) // 70-100 potency will help guarantee a wide spread and powerful effects.
+			seed.set_trait(TRAIT_POTENCY,rand(1,70)) // 70-100 potency will help guarantee a wide spread and powerful effects.
 			seed.set_trait(TRAIT_MATURATION,rand(1, 5))
 			var/ptype = 0 // So we can guarantee atleast one dangerous effect
 			if(prob(10))
