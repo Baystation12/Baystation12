@@ -56,7 +56,7 @@ var/total_runtimes_skipped = 0
 			srcinfo += "  src.loc: [locinfo]"
 	if(istype(usr))
 		usrinfo = list("  usr: [log_info_line(usr)]")
-		locinfo = log_info_line(usr)
+		locinfo = log_info_line(usr.loc)
 		if(locinfo)
 			usrinfo += "  usr.loc: [locinfo]"
 	// The proceeding mess will almost definitely break if error messages are ever changed
