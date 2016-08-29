@@ -75,6 +75,9 @@
 		. += "<tr bgcolor='[job.selection_color]'><td width='60%' align='right'>"
 		var/rank = job.title
 		lastJob = job
+		if(job.total_positions == 0 && job.spawn_positions == 0)
+			. += "<del>[rank]</del></td><td><b> \[UNAVAILABLE]</b></td></tr>"
+			continue
 		if(jobban_isbanned(user, rank))
 			. += "<del>[rank]</del></td><td><b> \[BANNED]</b></td></tr>"
 			continue
