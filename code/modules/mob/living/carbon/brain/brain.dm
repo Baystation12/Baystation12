@@ -59,3 +59,6 @@
 
 /mob/living/carbon/brain/binarycheck()
 	return istype(loc, /obj/item/device/mmi/digital)
+
+/mob/living/carbon/brain/check_has_mouth()
+	return 0

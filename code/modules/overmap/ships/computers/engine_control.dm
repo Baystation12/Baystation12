@@ -7,11 +7,15 @@
 	var/state = "status"
 	var/list/engines = list()
 	var/list/zlevels = list()
+<<<<<<< HEAD
 	var/obj/effect/map/ship/linked
 	var/engine_id = null
 	var/cooldown = 0
 	var/braked = 0
 	var/still_time = 0
+=======
+	var/obj/effect/overmap/ship/linked
+>>>>>>> c9a8e118133bb0b368e33256d8255e3d310a5553
 
 /obj/machinery/space_battle/engine_control/initialize()
 	linked = map_sectors["[z]"]
@@ -33,7 +37,11 @@
 	for(var/datum/ship_engine/E in ship_engines)
 		if (E.zlevel in zlevels)
 			engines |= E
+<<<<<<< HEAD
 >>>>>>> 0b4cb4dda55c69006c7065b8e53f93e75d17612e
+=======
+	..()
+>>>>>>> c9a8e118133bb0b368e33256d8255e3d310a5553
 
 /obj/machinery/space_battle/engine_control/attack_hand(var/mob/user as mob)
 	if(..())

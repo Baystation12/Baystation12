@@ -26,7 +26,7 @@
 	cell_type = /obj/item/weapon/cell/super
 	fire_delay = 25
 	projectile_type=/obj/item/projectile/beam/pulse
-	charge_cost=400
+	charge_cost=40
 
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
 	user << "<span class='warning'>[src.name] has three settings, and they are all DESTROY.</span>"

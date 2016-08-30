@@ -98,8 +98,6 @@ var/list/powernets = list()
 var/Debug2 = 0
 var/datum/debug/debugobj
 
-var/datum/moduletypes/mods = new()
-
 var/gravity_is_on = 1
 
 var/join_motd = null

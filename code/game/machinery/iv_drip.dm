@@ -131,6 +131,8 @@
 	else
 		return ..()
 
+obj/machinery/iv_drip/attack_ai(mob/user as mob)
+	return
 
 /obj/machinery/iv_drip/verb/toggle_mode()
 	set category = "Object"

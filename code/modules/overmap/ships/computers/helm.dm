@@ -2,8 +2,7 @@
 	name = "helm control console"
 	icon_keyboard = "med_key"
 	icon_screen = "id"
-	var/state = "status"
-	var/obj/effect/map/ship/linked			//connected overmap object
+	var/obj/effect/overmap/ship/linked			//connected overmap object
 	var/autopilot = 0
 	var/manual_control = 0
 	var/list/known_sectors = list()
@@ -20,13 +19,14 @@
 		testing("Helm console at level [z] was unable to find a corresponding overmap object.")
 
 	for(var/level in map_sectors)
-		var/obj/effect/map/sector/S = map_sectors["[level]"]
-		if (istype(S) && S.always_known)
+		var/obj/effect/overmap/sector/S = map_sectors["[level]"]
+		if (istype(S) && S.known)
 			var/datum/data/record/R = new()
 			R.fields["name"] = S.name
 			R.fields["x"] = S.x
 			R.fields["y"] = S.y
 			known_sectors += R
+	..()
 
 /obj/machinery/computer/helm/process()
 	..()
@@ -77,10 +77,12 @@
 		return
 
 	var/data[0]
-	data["state"] = state
 
-	data["sector"] = linked.current_sector ? linked.current_sector.name : "Deep Space"
-	data["sector_info"] = linked.current_sector ? linked.current_sector.desc : "Not Available"
+	var/turf/T = get_turf(linked)
+	var/obj/effect/overmap/sector/current_sector = locate() in T
+
+	data["sector"] = current_sector ? current_sector.name : "Deep Space"
+	data["sector_info"] = current_sector ? current_sector.desc : "Not Available"
 	data["s_x"] = linked.x
 	data["s_y"] = linked.y
 	data["dest"] = dy && dx
@@ -165,12 +167,10 @@
 
 	if (href_list["apilot"])
 		autopilot = !autopilot
-
+	world << href
 	if (href_list["manual"])
 		manual_control = !manual_control
 
-	if (href_list["state"])
-		state = href_list["state"]
 	add_fingerprint(usr)
 	updateUsrDialog()
 

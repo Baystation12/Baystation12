@@ -288,6 +288,10 @@
 			user.remove_from_mob(O)
 			O.forceMove(target)
 			affected.implants |= O //move the organ into the patient. The organ is properly reattached in the next step
+			if(!(O.status & ORGAN_CUT_AWAY))
+				log_debug("[user] ([user.ckey]) replaced organ [O], which didn't have ORGAN_CUT_AWAY set, in [target] ([target.ckey])")
+				O.status |= ORGAN_CUT_AWAY
+			
 			playsound(target.loc, 'sound/effects/squelch1.ogg', 50, 1)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
