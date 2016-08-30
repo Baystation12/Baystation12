@@ -202,12 +202,8 @@
 				if (evacuation_controller.call_evacuation(usr, TRUE))
 					log_admin("[key_name(usr)] called an evacuation.")
 					message_admins("\blue [key_name_admin(usr)] called an evacuation.", 1)
-
 			if("2")
-				if (evacuation_controller.call_evacuation(usr, TRUE))
-					log_admin("[key_name(usr)] called an evacuation.")
-					message_admins("\blue [key_name_admin(usr)] called an evacuation.", 1)
-				else if (evacuation_controller.cancel_evacuation())
+				if (evacuation_controller.cancel_evacuation())
 					log_admin("[key_name(usr)] cancelled an evacuation.")
 					message_admins("\blue [key_name_admin(usr)] cancelled an evacuation.", 1)
 
