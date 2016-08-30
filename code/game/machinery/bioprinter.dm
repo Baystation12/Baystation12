@@ -18,6 +18,7 @@
 	var/print_delay = 100
 	var/printing
 
+	// These should be subtypes of /obj/item/organ
 	var/list/products = list(
 		BP_HEART   = list(/obj/item/organ/internal/heart,  50),
 		BP_LUNGS   = list(/obj/item/organ/internal/lungs,  40),
@@ -99,7 +100,9 @@
 
 /obj/machinery/organ_printer/proc/print_organ(var/choice)
 	var/new_organ = products[choice][1]
-	var/obj/item/result = new new_organ(get_turf(src))
+	var/obj/item/organ/result = new new_organ(get_turf(src))
+	result.status |= ORGAN_CUT_AWAY
+	
 	return result
 // END GENERIC PRINTER
 
@@ -128,6 +131,7 @@
 /obj/machinery/organ_printer/robot/print_organ(var/choice)
 	var/obj/item/organ/O = ..()
 	O.robotize()
+	O.status |= ORGAN_CUT_AWAY  // robotize() resets status to 0
 	visible_message("<span class='info'>\The [src] churns for a moment, then spits out \a [O].</span>")
 	return O
 
