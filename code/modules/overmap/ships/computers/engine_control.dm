@@ -8,7 +8,7 @@
 	var/list/engines = list()
 	var/list/zlevels = list()
 <<<<<<< HEAD
-	var/obj/effect/map/ship/linked
+	var/obj/effect/overmap/ship/linked
 	var/engine_id = null
 	var/cooldown = 0
 	var/braked = 0

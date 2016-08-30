@@ -4,7 +4,7 @@
 	anchored = 1
 	density = 1
 	var/state = "status"
-	var/obj/effect/map/ship/linked			//connected overmap object
+	var/obj/effect/overmap/ship/linked			//connected overmap object
 	var/autopilot = 0
 	var/manual_control = 0
 	var/list/known_sectors = list()
@@ -21,7 +21,7 @@
 		testing("Helm console at level [z] was unable to find a corresponding overmap object.")
 
 	for(var/level in map_sectors)
-		var/obj/effect/map/sector/S = map_sectors["[level]"]
+		var/obj/effect/overmap/sector/S = map_sectors["[level]"]
 		if (istype(S) && S.always_known)
 			var/datum/data/record/R = new()
 			R.fields["name"] = S.name

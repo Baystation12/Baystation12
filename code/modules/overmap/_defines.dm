@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-//Zlevel where overmap objects should be
-#define OVERMAP_ZLEVEL 1
-//How far from the edge of overmap zlevel could randomly placed objects spawn#define OVERMAP_EDGE 5
-=======
-//How far from the edge of overmap zlevel could randomly placed objects spawn
->>>>>>> c9a8e118133bb0b368e33256d8255e3d310a5553
+
 #define OVERMAP_EDGE 2
 //Dimension of overmap (squares 4 lyfe)
 #define OVERMAP_SIZE 30

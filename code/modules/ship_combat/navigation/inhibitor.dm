@@ -15,8 +15,8 @@
 			user << "<span class='warning'>The circuit inside \the [src] is not efficient enough to power \the [src]!</span>"
 		else if(alert(user,"Are you sure you want to activate the inhibitor?", "Engine Inhibitor", "Yes", "No.") == "Yes")
 			user.visible_message("<span class='danger'>\The [user] activates \the [src]!</span>")
-			var/obj/effect/map/ship/linked = map_sectors["[z]"]
-			for(var/obj/effect/map/ship/S in range(3, linked))
+			var/obj/effect/overmap/ship/linked = map_sectors["[z]"]
+			for(var/obj/effect/overmap/ship/S in range(3, linked))
 				world << "<span class='notice'>Ship: [S] in distance!</span>"
 				S.speed = list(0, 0)
 				for(var/obj/machinery/space_battle/engine_control/E in S.eng_controls)

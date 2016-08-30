@@ -33,7 +33,7 @@
 
 	var/id_num = 0
 
-	var/obj/effect/map/ship/linked
+	var/obj/effect/overmap/ship/linked
 
 	Destroy()
 		if(eye)
@@ -102,10 +102,10 @@
 
 	proc/find_targets()
 		starts.Cut()
-		if(!linked || (istype(linked, /obj/effect/map/ship) && !linked.is_still()))
+		if(!linked || (istype(linked, /obj/effect/overmap/ship) && !linked.is_still()))
 			return 0
 		var/list/targettable_z_levels = list()
-		for(var/obj/effect/map/ship/ship in range(3, linked))
+		for(var/obj/effect/overmap/ship/ship in range(3, linked))
 			targettable_z_levels.Add(ship.map_z[1])
 		var/area/ship_battle/us = get_area(src)
 		if(!istype(us)) return

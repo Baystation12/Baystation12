@@ -36,10 +36,10 @@
 				qdel(S)
 		for(var/obj/machinery/space_battle/missile_computer/computer in world)
 			computer.find_targets()
-		var/obj/effect/map/ship/linked = map_sectors["[z]"]
+		var/obj/effect/overmap/ship/linked = map_sectors["[z]"]
 		map_sectors["[z]"] = null
 		if(linked)
-			if(istype(linked, /obj/effect/map/ship))
+			if(istype(linked, /obj/effect/overmap/ship))
 				linked.fire_controls.Cut()
 				qdel(linked)
 		return ..()

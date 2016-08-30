@@ -15,11 +15,11 @@
 	var/fore_dir = NORTH
 	var/rotate = 1 //For proc rotate
 
-	var/obj/effect/map/current_sector
+	var/obj/effect/overmap/current_sector
 	var/obj/machinery/space_battle/helm/nav_control
 	var/list/eng_controls = list()
 
-/obj/effect/map/ship/initialize()
+/obj/effect/overmap/ship/initialize()
 <<<<<<< HEAD
 	for(var/obj/machinery/space_battle/engine_control/E in world)
 		if (E.z == map_z && !(E in eng_controls))
@@ -59,7 +59,7 @@
 	return !(speed[1] || speed[2])
 
 <<<<<<< HEAD
-/obj/effect/map/ship/proc/get_acceleration()
+/obj/effect/overmap/ship/proc/get_acceleration()
 <<<<<<< HEAD
 	var/thrust = 0
 	for(var/obj/machinery/space_battle/engine_control/E in eng_controls)
@@ -108,7 +108,7 @@
 <<<<<<< HEAD
 >>>>>>> 0b4cb4dda55c69006c7065b8e53f93e75d17612e
 
-/obj/effect/map/ship/proc/can_burn()
+/obj/effect/overmap/ship/proc/can_burn()
 	if (!eng_controls.len)
 =======
 	update_icon()
