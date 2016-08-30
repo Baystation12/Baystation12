@@ -204,16 +204,22 @@
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
 			team = A.team
+	initialize()
+		..()
+		spawn(10)
+			initialised = 1
 
 
 	proc/refresh_active()
 		if(!initialised)
 			active = 1
+			alive = 1
 		else if(ticker && ticker.mode && istype(ticker.mode, /datum/game_mode/ship_battles))
-//			var/datum/game_mode/ship_battles/mode = ticker.mode
-//			for(var/I in mode.allowed_factions)
-//				if(lowertext(I) == lowertext(src.name))
-//					active = 1
+			alive = 0
+			var/datum/game_mode/ship_battles/mode = ticker.mode
+			for(var/I in mode.allowed_factions)
+				if(lowertext(I) == lowertext(src.name))
+					alive = 1
 			var/has_core = 0
 			for(var/obj/machinery/space_battle/ship_core/S in world)
 				if(S.z == src.z)

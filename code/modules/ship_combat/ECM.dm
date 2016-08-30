@@ -37,10 +37,12 @@
 		ui_interact(user)
 		return
 
-	proc/can_block(var/range = 11)
-		if(range > radius || stat & (BROKEN|NOPOWER|EMPED))
+	proc/can_block(var/range = 3)
+		if(range > radius || stat & (BROKEN|NOPOWER))
+			world << "ecm failure: range too great or broken"
 			return 0
 		if(!dish || !dish.can_sense())
+			world << "ecm failure: [dish ? dish.can_sense() : "no dish"]"
 			return 0
 		return 1
 

@@ -35,7 +35,6 @@
 		return viewflag
 
 	ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-		if(src.z > 6) return
 		if(stat & (NOPOWER|BROKEN)) return
 		if(user.stat) return
 
@@ -63,7 +62,7 @@
 		if(..())
 			return 1
 		if(href_list["switch_camera"])
-			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
+			if(stat&(NOPOWER|BROKEN)) return
 			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
 			var/obj/machinery/camera/C = locate(href_list["switch_camera"]) in cameranet.cameras
 			if(!C)
@@ -74,13 +73,13 @@
 			switch_to_camera(usr, C)
 			return 1
 		else if(href_list["switch_network"])
-			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
+			if(stat&(NOPOWER|BROKEN)) return
 			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
 			if(href_list["switch_network"] in network)
 				current_network = href_list["switch_network"]
 			return 1
 		else if(href_list["reset"])
-			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
+			if(stat&(NOPOWER|BROKEN)) return
 			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
 			reset_current()
 			usr.reset_view(current_camera)
@@ -89,9 +88,6 @@
 			. = ..()
 
 	attack_hand(var/mob/user as mob)
-		if (src.z > 6)
-			user << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!"
-			return
 		if(stat & (NOPOWER|BROKEN))	return
 
 		if(!isAI(user))

@@ -70,7 +70,7 @@ var/global/datum/controller/occupations/job_master
 		for(var/J in all_jobs)
 			var/datum/job/job = new J()
 			if(!job)	continue
-			if(job.faction in factions)
+			if(job.faction in factions || job.faction == "All")
 				occupations += job
 				occupations_by_type[job.type] = job
 				if(!setup_titles) continue

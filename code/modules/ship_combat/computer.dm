@@ -102,7 +102,7 @@
 
 	proc/find_targets()
 		starts.Cut()
-		if(!linked || !linked.is_still())
+		if(!linked || (istype(linked, /obj/effect/map/ship) && !linked.is_still()))
 			return 0
 		var/list/targettable_z_levels = list()
 		for(var/obj/effect/map/ship/ship in range(3, linked))

@@ -199,7 +199,7 @@
 				linked.eye << "<span class='notice'>Loaded: [A]</span>"
 	if(barrel && istype(A, /obj/machinery/missile))
 		barrel.charge_up()
-	else // try locating the barrel again.
+	else if(!barrel) // try locating the barrel again.
 		var/turf/T = get_step(loc,dir)
 		barrel = locate() in T
 		if(barrel)
@@ -254,7 +254,7 @@
 					if(next)
 						next.charge_up()
 					use_power = 1
-		return ..()
+					processing_objects.Remove(src)
 
 	update_icon()
 		if(!(stat & (BROKEN|NOPOWER)))
@@ -281,7 +281,7 @@
 	var/efficiency = get_efficiency(-1,1)
 	if(istype(O, /obj/item/weapon/screwdriver) && jammed)
 		user.visible_message("<span class='notice'>\The [user] begins to unjam \the [src]..</span>")
-		if(do_after(user, rand(100,200)))
+		if(do_after(user, (rand(100,200)*efficiency)))
 			user.visible_message("<span class='notice'>[user] carefully unjams \the [src]!</span>", "<span class='notice'>You unjam \the [src]!</span>")
 			if(prob(10*efficiency))
 				user << "<span class='warning'>Whilst unjamming \the [src], your arm gets stuck in the mechanism! You need a moment to get free...</span>"

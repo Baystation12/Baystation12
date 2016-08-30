@@ -6,6 +6,7 @@
 #define UNLOCK "Bruteforce Encryption Hack"// Limited to machines with ui_interact
 #define ION "Discharge Capacitors" // Limited to APC's
 #define DISABLE "Disable Activity" // Limited to Sensors
+#define ADJUST_NETWORK "Sync To Local Network"
 
 /obj/machinery/space_battle/hacking
 	name = "Hacking System"
@@ -17,12 +18,14 @@
 	var/list/target_teams = list()
 	var/list/hacked = list()				  //[1]=name, [2] = selectable type list, [3] = selectable action list,[3][1] = action, [3][2] = action delay, [4] = added delay to hacking.
 	var/list/available_categories = list(list("Sensors", list(/obj/machinery/space_battle/missile_sensor), list(EMP = 180, FRY_CIRCUIT = 180, DISABLE = 180), 600),\
-										 list("Life Support", list(/obj/machinery/alarm), list(EMP = 30, FRY_CIRCUIT = 60, UI_INTERACT = 90, UNLOCK = 150), 300),\
+										 list("Life Support", list(/obj/machinery/alarm), list(EMP = 30, FRY_CIRCUIT = 60, UI_INTERACT = 30, UNLOCK = 150), 300),\
 										 list("Lighting", list(/obj/machinery/light), list(SHATTER = 20), 20), \
 										 list("Power", list(/obj/machinery/power/apc), list(EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 180, SURGE = 30), 1200), \
 										 list("Defensive Systems", list(/obj/machinery/space_battle/ecm, /obj/machinery/space_battle/shieldwallgen), list(EMP = 240, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 270), 1500), \
 										 list("Engines", list(/obj/machinery/space_battle/engine), list(EMP = 90, FRY_CIRCUIT = 180), 120), \
-										 list("Piloting", list(/obj/machinery/space_battle/engine_control, /obj/machinery/space_battle/helm), list(EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 120), 900))
+										 list("Piloting", list(/obj/machinery/space_battle/engine_control, /obj/machinery/space_battle/helm), list(EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 120), 900), \
+										 list("Doors", list(/obj/machinery/door/airlock), list(EMP = 60, FRY_CIRCUIT = 60, UI_INTERACT = 60), 200), \
+										 list("Cameras", list(/obj/machinery/camera/network/battle), list(EMP = 15, FRY_CIRCUIT = 30, ADJUST_NETWORK = 90), 120))
 
 	var/team = 0
 	var/obj/machinery/hacking
@@ -60,7 +63,7 @@
 	if(!hacking_time)
 		if(!detection)
 			return
-		if(prob(1 * get_efficiency(0,1)))
+		if(prob(0.1 * get_efficiency(0,1)))
 			detection--
 	else if(world.timeofday >= hacking_time)
 		end_hacking()
@@ -231,6 +234,22 @@
 					if(istype(selected, /obj/machinery/power/apc))
 						var/obj/machinery/power/apc/A = selected
 						A.ion_act()
+				if(ADJUST_NETWORK)
+					if(istype(selected, /obj/machinery/camera/network/battle))
+						var/team_string = 0
+						switch(team)
+							if(1)
+								team_string = "Team One"
+							if(2)
+								team_string = "Team Two"
+							if(3)
+								team_string = "Team Three"
+							if(4)
+								team_string = "Team Four"
+						if(team_string)
+							var/obj/machinery/camera/network/battle/C = selected
+							selected.replace_networks(uniquelist(team_string))
+
 			operation = action_type
 			src.visible_message("<span class='notice'>\The [src] beeps, \"Running [action_type].exe on \the [selected]. Estimated time: [begin_hacking(null, time, 0)] seconds.\"</span>")
 			if(prob(5 * (1+detection*0.1) * get_efficiency(0,1) * speed) || action_type == SHATTER)

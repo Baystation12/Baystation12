@@ -38,8 +38,10 @@
 			computer.find_targets()
 		var/obj/effect/map/ship/linked = map_sectors["[z]"]
 		map_sectors["[z]"] = null
-		linked.fire_controls.Cut()
-		qdel(linked)
+		if(linked)
+			if(istype(linked, /obj/effect/map/ship))
+				linked.fire_controls.Cut()
+				qdel(linked)
 		return ..()
 
 	proc/take_damage(var/damage, var/external = 1)

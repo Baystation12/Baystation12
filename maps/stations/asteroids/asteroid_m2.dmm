@@ -12,6 +12,7 @@
 "l" = (/turf/space,/area/ship_battle/asteroid/m_two/four)
 "m" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/m_two/four)
 "n" = (/turf/unsimulated/mask,/area/ship_battle/asteroid/m_two/four)
+"o" = (/obj/effect/mapinfo/asteroid{dimensions_x = 75; dimensions_y = 75; landing_area = /area/shuttle/mining_shuttle/destination; name = "Broken Asteroid"; overmap_state = "asteroid_medium"},/turf/space,/area/ship_battle/asteroid/m_one/three)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
@@ -112,6 +113,6 @@ iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiilllllllllllllllllllllllllll
 iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiilllllllllllllllllllllllllllllllllllllllllllllll
 iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiilllllllllllllllllllllllllllllllllllllllllllllll
 iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiilllllllllllllllllllllllllllllllllllllllllllllll
-kiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiilllllllllllllllllllllllllllllllllllllllllllllll
-jiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiilllllllllllllllllllllllllllllllllllllllllllllll
+iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiilllllllllllllllllllllllllllllllllllllllllllllll
+oiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiilllllllllllllllllllllllllllllllllllllllllllllll
 "}

@@ -31,7 +31,9 @@
 		if(!can_sense)
 			return "Disabled"
 		if(needs_dish)
-			if(!dish || !dish.can_sense())
+			if(!dish)
+				return "Wireless Connection Severed: Dish not responding."
+			else if(!dish.can_sense())
 				return "Wireless Connection Severed: Dish status - [dish.can_sense()]"
 		return 1
 

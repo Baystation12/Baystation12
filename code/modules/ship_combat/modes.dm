@@ -105,9 +105,9 @@
 		for(var/i=1,i<=teams.len,i++)
 			var/list/team_cores = list()
 			for(var/obj/machinery/space_battle/ship_core/core in world)
-				if(core.team && core.team == text2num(teams[i]))
+				if(core.team > 0 && core.team == text2num(teams[i]))
 					protected_cores.Add(core)
-				else if(!core.team) // Derelicts
+				else if(core.team <= 0) // Derelicts
 					protected_cores.Add(core)
 
 			message_admins("Team [(teams[i])] has [team_cores.len] cores.")
