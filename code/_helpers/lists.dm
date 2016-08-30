@@ -46,6 +46,13 @@ proc/isemptylist(list/list)
 			return 1
 	return 0
 
+//Checks for specific paths in a list
+/proc/is_path_in_list(var/path, var/list/L)
+	for(var/type in L)
+		if(ispath(path, type))
+			return 1
+	return 0
+
 /proc/instances_of_type_in_list(var/atom/A, var/list/L)
 	var/instances = 0
 	for(var/type in L)

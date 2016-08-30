@@ -6,9 +6,6 @@ obj/machinery/atmospherics/binary
 	var/datum/gas_mixture/air1
 	var/datum/gas_mixture/air2
 
-	var/obj/machinery/atmospherics/node1
-	var/obj/machinery/atmospherics/node2
-
 	var/datum/pipe_network/network1
 	var/datum/pipe_network/network2
 

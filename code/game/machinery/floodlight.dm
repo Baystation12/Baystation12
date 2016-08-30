@@ -14,8 +14,8 @@
 
 /obj/machinery/floodlight/New()
 	src.cell = new(src)
-	cell.maxcharge = 1000
-	cell.charge = 1000 // 41minutes @ 200W
+	cell.maxcharge = 100
+	cell.charge = 100 // 30 minutes @ 200W (assuming no lag)
 	..()
 
 /obj/machinery/floodlight/update_icon()

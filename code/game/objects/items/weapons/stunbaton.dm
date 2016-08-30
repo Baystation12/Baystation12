@@ -16,7 +16,7 @@
 	var/agonyforce = 60
 	var/status = 0		//whether the thing is on or not
 	var/obj/item/weapon/cell/bcell = null
-	var/hitcost = 1000	//oh god why do power cells carry so much charge? We probably need to make a distinction between "industrial" sized power cells for APCs and power cells for everything else.
+	var/hitcost = 100	//oh god why do power cells carry so much charge? We probably need to make a distinction between "industrial" sized power cells for APCs and power cells for everything else.
 
 /obj/item/weapon/melee/baton/New()
 	..()
@@ -189,6 +189,6 @@
 	throwforce = 5
 	stunforce = 0
 	agonyforce = 60	//same force as a stunbaton, but uses way more charge.
-	hitcost = 2500
+	hitcost = 250
 	attack_verb = list("poked")
 	slot_flags = null

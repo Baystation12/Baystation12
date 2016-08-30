@@ -236,3 +236,35 @@ Sells devices, odds and ends, and medical stuff
 				"insult_good"       = "Wow, where was that coming from?",
 				"insult_bad"        = "Don't make me blacklist your connection.",
 				)
+
+/datum/trader/ship/robots
+	name = "Robot Seller"
+	name_language = TRADER_DEFAULT_NAME
+	origin = "Robot Store"
+	possible_origins = list("AI for the Straight Guy", "Mechanical Buddies", "Bot Chop Shop", "Omni Consumer Projects")
+	possible_trading_items = list(/obj/item/weapon/secbot_assembly/ed209_assembly = TRADER_THIS_TYPE,
+								/obj/item/weapon/toolbox_tiles                    = TRADER_THIS_TYPE,
+								/obj/item/weapon/toolbox_tiles_sensor             = TRADER_THIS_TYPE,
+								/obj/item/weapon/secbot_assembly                  = TRADER_ALL,
+								/obj/item/weapon/farmbot_arm_assembly             = TRADER_THIS_TYPE,
+								/obj/item/weapon/firstaid_arm_assembly            = TRADER_THIS_TYPE,
+								/obj/item/weapon/bucket_sensor                    = TRADER_THIS_TYPE,
+								/obj/item/device/bot_kit                          = TRADER_THIS_TYPE,
+								/obj/item/device/paicard                          = TRADER_THIS_TYPE,
+								/obj/item/device/aicard                           = TRADER_THIS_TYPE,
+								/mob/living/bot                                   = TRADER_SUBTYPES_ONLY)
+	speech = list("hail_generic" = "Welcome to ORIGIN! Let me walk you through our fine robotic selection!",
+				"hail_silicon"   = "Welcome to ORIGIN! Le-well, you're a synth! Well, your money is good anyways, welcome welcome!",
+				"hail_deny"      = "ORIGIN no longer wants to speak to you.",
+
+				"trade_complete" = "I hope you enjoy your new robot!",
+				"trade_blacklist"= "I work with robots, sir. Not that.",
+				"trade_no_goods" = "You gotta buy the robots, sir. I don't do trades.",
+				"trade_not_enough" = "You're coming up short on cash.",
+				"how_much"       = "My fine selection of robots will cost you VALUE!",
+
+				"compliment_deny"= "Well, I almost believed that.",
+				"compliment_accept"= "Thank you! My craftsmanship is my life.",
+				"insult_good"    = "Uncalled for.... uncalled for.",
+				"insult_bad"     = "I've programmed AIs better at insulting than you!",
+				)
