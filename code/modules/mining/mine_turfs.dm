@@ -33,6 +33,7 @@ var/list/mining_floors = list()
 	var/excav_overlay = ""
 	var/obj/item/weapon/last_find
 	var/datum/artifact_find/artifact_find
+	var/image/ore_overlay
 
 	has_resources = 1
 
@@ -120,7 +121,7 @@ var/list/mining_floors = list()
 		icon_state = "rock"
 		return
 	name = "\improper [mineral.display_name] deposit"
-	new /obj/effect/mineral(src, mineral)
+	ore_overlay = image('icons/obj/mining.dmi', "rock_[mineral.name]")
 
 //Not even going to touch this pile of spaghetti
 /turf/simulated/mineral/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -254,8 +255,8 @@ var/list/mining_floors = list()
 		return ..()
 
 /turf/simulated/mineral/proc/clear_ore_effects()
-	for(var/obj/effect/mineral/M in contents)
-		qdel(M)
+	overlays -= ore_overlay
+	ore_overlay = null
 
 /turf/simulated/mineral/proc/DropMineral()
 	if(!mineral)
