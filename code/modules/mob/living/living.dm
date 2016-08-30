@@ -640,16 +640,22 @@ default behaviour is:
 			if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
 				return
 		M.status_flags &= ~PASSEMOTES
-
 	else if(istype(H.loc,/obj/item/clothing/accessory/holster))
 		var/obj/item/clothing/accessory/holster/holster = H.loc
 		if(holster.holstered == H)
 			holster.clear_holster()
 		src << "<span class='warning'>You extricate yourself from \the [holster].</span>"
 		H.forceMove(get_turf(H))
-	else if(istype(H.loc,/obj/item))
+	else if(istype(H.loc,/obj))
+		if(istype(H.loc, /obj/machinery/cooker))
+			var/obj/machinery/cooker/C = H.loc
+			C.cooking_obj = null
+			C.check_cooking_obj()
 		src << "<span class='warning'>You struggle free of \the [H.loc].</span>"
 		H.forceMove(get_turf(H))
+
+	if(loc != H)
+		qdel(H)
 
 /mob/living/proc/escape_buckle()
 	if(buckled)
