@@ -10,28 +10,24 @@
 	var/dy		//coordinates
 
 /obj/machinery/computer/helm/initialize()
-	linked = map_sectors["[z]"]
-	if (linked)
-		if(!linked.nav_control)
-			linked.nav_control = src
-		testing("Helm console at level [z] found a corresponding overmap object '[linked.name]'.")
-	else
-		testing("Helm console at level [z] was unable to find a corresponding overmap object.")
+	..()
+	get_known_sectors()
 
-	for(var/level in map_sectors)
-		var/obj/effect/overmap/sector/S = map_sectors["[level]"]
-		if (istype(S) && S.known)
+/obj/machinery/computer/helm/proc/get_known_sectors()
+	var/area/overmap/map = locate() in world
+	for(var/obj/effect/overmap/sector/S in map)
+		if (S.known)
 			var/datum/data/record/R = new()
 			R.fields["name"] = S.name
 			R.fields["x"] = S.x
 			R.fields["y"] = S.y
-			known_sectors += R
+			known_sectors[S.name] = R
 	..()
 
 /obj/machinery/computer/helm/process()
 	..()
 	if (autopilot && dx && dy)
-		var/turf/T = locate(dx,dy,1)
+		var/turf/T = locate(dx,dy,using_map.overmap_z)
 		if(linked.loc == T)
 			if(linked.is_still())
 				autopilot = 0
@@ -95,7 +91,8 @@
 	data["manual_control"] = manual_control
 
 	var/list/locations[0]
-	for (var/datum/data/record/R in known_sectors)
+	for (var/key in known_sectors)
+		var/datum/data/record/R = known_sectors[key]
 		var/list/rdata[0]
 		rdata["name"] = R.fields["name"]
 		rdata["x"] = R.fields["x"]
@@ -125,6 +122,9 @@
 		if(!sec_name)
 			sec_name = "Sector #[known_sectors.len]"
 		R.fields["name"] = sec_name
+		if(sec_name in known_sectors)
+			usr << "<span class='warning'>Sector with that name already exists, please input a different name.</span>"
+			return
 		switch(href_list["add"])
 			if("current")
 				R.fields["x"] = linked.x
@@ -134,11 +134,12 @@
 				R.fields["x"] = Clamp(newx, 1, world.maxx)
 				var/newy = input("Input new entry y coordinate", "Coordinate input", linked.y) as num
 				R.fields["y"] = Clamp(newy, 1, world.maxy)
-		known_sectors += R
+		known_sectors[sec_name] = R
 
 	if (href_list["remove"])
 		var/datum/data/record/R = locate(href_list["remove"])
-		known_sectors.Remove(R)
+		known_sectors[R.fields["name"]] = null
+		qdel(R)
 
 	if (href_list["setx"])
 		var/newx = input("Input new destiniation x coordinate", "Coordinate input", dx) as num|null
@@ -167,7 +168,7 @@
 
 	if (href_list["apilot"])
 		autopilot = !autopilot
-	world << href
+
 	if (href_list["manual"])
 		manual_control = !manual_control
 

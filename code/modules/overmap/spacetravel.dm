@@ -9,7 +9,7 @@ var/list/cached_space = list()
 	known = 0
 
 /obj/effect/overmap/sector/temporary/New(var/nx, var/ny, var/nz)
-	loc = locate(nx, ny, overmap_z)
+	loc = locate(nx, ny, using_map.overmap_z)
 	map_z += nz
 	map_sectors["[map_z]"] = src
 	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [map_z[1]].")
@@ -63,7 +63,7 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 
 	testing("[A] moving from [M] ([M.x], [M.y]) to ([mapx],[mapy]).")
 
-	var/turf/map = locate(mapx,mapy,overmap_z)
+	var/turf/map = locate(mapx,mapy,using_map.overmap_z)
 	var/obj/effect/overmap/TM = locate() in map
 	if(TM)
 		nz = TM.map_z

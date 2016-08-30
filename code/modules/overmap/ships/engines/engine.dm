@@ -7,6 +7,7 @@ var/list/ship_engines = list()
 	var/zlevel = 0
 
 /datum/ship_engine/New(var/obj/machinery/holder)
+	..()
 	engine = holder
 	zlevel = holder.z
 	ship_engines += src

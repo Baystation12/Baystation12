@@ -10,18 +10,14 @@
 	var/obj/effect/overmap/ship/linked
 
 /obj/machinery/computer/engines/initialize()
-	linked = map_sectors["[z]"]
-	if (linked)
-		if (!linked.eng_control)
-			linked.eng_control = src
-		testing("Engines console at level [z] found a corresponding overmap object '[linked.name]'.")
-		zlevels = linked.map_z
-	else
-		testing("Engines console at level [z] was unable to find a corresponding overmap object.")
+	..()
+	refresh_engines()
+
+/obj/machinery/computer/engines/proc/refresh_engines()
+	engines.Cut()
 	for(var/datum/ship_engine/E in ship_engines)
 		if (E.zlevel in zlevels)
 			engines |= E
-	..()
 
 /obj/machinery/computer/engines/attack_hand(var/mob/user as mob)
 	if(..())

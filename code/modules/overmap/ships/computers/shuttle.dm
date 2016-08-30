@@ -10,7 +10,6 @@
 
 /obj/machinery/computer/shuttle_control/explore/initialize()
 	..()
-	home = map_sectors["[z]"]
 	shuttle_tag = "[shuttle_tag]-[z]"
 	if(!shuttle_controller.shuttles[shuttle_tag])
 		var/datum/shuttle/ferry/shuttle = new(shuttle_tag)
