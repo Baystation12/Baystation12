@@ -55,6 +55,9 @@
 /obj/machinery/atmospherics/proc/can_crawl_through()
 	return 1
 
+/obj/machinery/atmospherics/unary/vent_pump/can_crawl_through()
+	return !welded
+
 /obj/machinery/atmospherics/proc/findConnecting(var/direction)
 	for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 		if(target.initialize_directions & get_dir(target,src))
@@ -84,3 +87,6 @@ obj/machinery/atmospherics/trinary/isConnectable(var/obj/machinery/atmospherics/
 
 /obj/machinery/atmospherics/unary/isConnectable(var/obj/machinery/atmospherics/target)
 	return (target == node || ..())
+
+/obj/machinery/atmospherics/valve/isConnectable()
+	return (open && ..())

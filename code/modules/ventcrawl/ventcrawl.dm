@@ -50,9 +50,9 @@ var/list/ventcrawl_machinery = list(
 	return ..()
 
 /mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	if(carried_item == held_item)
+	if(carried_item in list(held_item, radio, connected_ai, cell, camera, mmi))
 		return 1
-	return ..()
+	return 0
 
 /mob/living/proc/ventcrawl_carry()
 	for(var/atom/A in src.contents)
@@ -74,7 +74,7 @@ var/list/ventcrawl_machinery = list(
 	var/atom/pipe
 	var/list/pipes = list()
 	for(var/obj/machinery/atmospherics/unary/U in range(1))
-		if(is_type_in_list(U,ventcrawl_machinery) && Adjacent(U))
+		if(is_type_in_list(U,ventcrawl_machinery) && Adjacent(U) && U.can_crawl_through())
 			pipes |= U
 	if(!pipes || !pipes.len)
 		to_chat(src, "There are no pipes that you can ventcrawl into within range!")
