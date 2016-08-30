@@ -1,11 +1,7 @@
 /datum/map/overmap_example
 	name = "Overmap Example"
 	full_name = "The Overmap Example"
-	path = "overmap"
-
-	station_levels = list(2,3)
-	contact_levels = list(2,3)
-	player_levels = list(2,3)
+	path = "overmap_example"
 
 /datum/map/overmap_example/setup_map()
 	station_levels = list()
