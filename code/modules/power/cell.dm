@@ -80,7 +80,6 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	use(amount)
 	return 1
 
-
 /obj/item/weapon/cell/proc/give(var/amount)
 	if(maxcharge < amount)	return 0
 	var/amount_used = min(maxcharge-charge,amount)
@@ -88,12 +87,10 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	update_icon()
 	return amount_used
 
-
 /obj/item/weapon/cell/examine(mob/user)
 	..()
 	user << "The label states it's capacity is [maxcharge] Wh"
 	user << "The charge meter reads [round(src.percent(), 0.1)]%"
-
 
 /obj/item/weapon/cell/emp_act(severity)
 	//remove this once emp changes on dev are merged in

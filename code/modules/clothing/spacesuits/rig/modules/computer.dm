@@ -451,9 +451,7 @@
 		drain_complete(H)
 		return
 
-
-	var/to_drain = max_draining_rate / CELLRATE
-	var/target_drained = interfaced_with.drain_power(0,0,to_drain)
+	var/target_drained = interfaced_with.drain_power(0,0,max_draining_rate)
 	if(target_drained <= 0)
 		H << "<span class = 'danger'>Your power sink flashes a red light; there is no power left in [interfaced_with].</span>"
 		drain_complete(H)
@@ -467,9 +465,9 @@
 /obj/item/rig_module/power_sink/proc/drain_complete(var/mob/living/M)
 
 	if(!interfaced_with)
-		if(M) M << "<font color='blue'><b>Total power drained:</b> [round(total_power_drained*CELLRATE)] cell units.</font>"
+		if(M) M << "<font color='blue'><b>Total power drained:</b> [round(total_power_drained*CELLRATE)] Wh.</font>"
 	else
-		if(M) M << "<font color='blue'><b>Total power drained from [interfaced_with]:</b> [round(total_power_drained*CELLRATE)] cell units.</font>"
+		if(M) M << "<font color='blue'><b>Total power drained from [interfaced_with]:</b> [round(total_power_drained*CELLRATE)] Wh.</font>"
 		interfaced_with.drain_power(0,1,0) // Damage the victim.
 
 	drain_loc = null

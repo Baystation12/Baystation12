@@ -1683,7 +1683,7 @@
 /obj/mecha/proc/get_charge()
 	if(!src.cell)
 		return
-	return max(0, src.cell.charge)
+	return max(0, src.cell.charge / CELLRATE)
 
 /obj/mecha/proc/use_power(amount)
 	if(get_charge())

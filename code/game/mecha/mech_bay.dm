@@ -7,11 +7,11 @@
 	layer = TURF_LAYER + 0.1
 	anchored = 1
 	idle_power_usage = 200	// Some electronics, passive drain.
-	active_power_usage = 120 KILOWATTS // When charging
+	active_power_usage = 60 KILOWATTS // When charging
 	use_power = 1
 
 	var/obj/mecha/charging = null
-	var/base_charge_rate = 120 KILOWATTS		// Comparable to hardsuit powersink or cyborg charger
+	var/base_charge_rate = 60 KILOWATTS
 	var/repair_power_usage = 10 KILOWATTS		// Per 1 HP of health.
 	var/repair = 0
 
@@ -65,9 +65,13 @@
 	if(!charging)
 		use_power = 1
 		return
-
 	if(charging.loc != loc)
 		stop_charging()
+		return
+
+	if(stat & (BROKEN|NOPOWER))
+		stop_charging()
+		charging.occupant_message("<span class='warning'>Internal System Error - Charging aborted.</span>")
 		return
 
 	// Cell could have been removed.
@@ -83,14 +87,13 @@
 		if(fully_repaired())
 			charging.occupant_message("<span class='notice'>Fully repaired.</span>")
 
-	if(!charging.cell.fully_charged())
-		charging.cell.give(remaining_energy)
+	if(!charging.cell.fully_charged() && remaining_energy)
+		charging.give_power(remaining_energy)
 		if(charging.cell.fully_charged())
 			charging.occupant_message("<span class='notice'>Fully charged.</span>")
 
 	if((!repair || fully_repaired()) && charging.cell.fully_charged())
 		stop_charging()
-	return
 
 // An ugly proc, but apparently mechs don't have maxhealth var of any kind.
 /obj/machinery/mech_recharger/proc/fully_repaired()
