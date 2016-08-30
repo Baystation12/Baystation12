@@ -1,0 +1,7 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "Repair capability of upgraded cyborg rechargers now also works on IPCs and FBPs."
+  - tweak: "If the cyborg recharger is upgraded enough, it will be capable of rebooting (and eventually repairing) destroyed modules, for some extra power."
