@@ -24,7 +24,7 @@
 	. = ..()
 
 /obj/machinery/atmospherics/relaymove(mob/living/user, direction)
-	if(!(direction & initialize_directions)) //can't go in a way we aren't connecting to
+	if(user.loc != src || !(direction & initialize_directions)) //can't go in a way we aren't connecting to
 		return
 	ventcrawl_to(user,findConnecting(direction, user.ventcrawl_layer),direction)
 
@@ -55,6 +55,9 @@
 /obj/machinery/atmospherics/proc/can_crawl_through()
 	return 1
 
+/obj/machinery/atmospherics/unary/vent_pump/can_crawl_through()
+	return !welded
+
 /obj/machinery/atmospherics/proc/findConnecting(var/direction)
 	for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 		if(target.initialize_directions & get_dir(target,src))
@@ -84,3 +87,6 @@ obj/machinery/atmospherics/trinary/isConnectable(var/obj/machinery/atmospherics/
 
 /obj/machinery/atmospherics/unary/isConnectable(var/obj/machinery/atmospherics/target)
 	return (target == node || ..())
+
+/obj/machinery/atmospherics/valve/isConnectable()
+	return (open && ..())

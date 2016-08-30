@@ -180,6 +180,7 @@
 					var/confirm = alert("Are you sure you want to call the shuttle?", name, "No", "Yes")
 					if(confirm == "Yes" && can_still_topic())
 						call_shuttle_proc(usr)
+
 				if(href_list["target"] == "cancel" && !issilicon(usr))
 					var/confirm = alert("Are you sure you want to cancel the shuttle?", name, "No", "Yes")
 					if(confirm == "Yes" && can_still_topic())
@@ -339,9 +340,12 @@ var/last_message_id = 0
 	for(var/obj/machinery/computer/prison_shuttle/PS in machines)
 		PS.allowedtocall = !(PS.allowedtocall)
 
-/proc/call_shuttle_proc(var/mob/user)
+/proc/call_shuttle_proc(var/mob/user, var/emergency)
 	if (!ticker || !evacuation_controller)
 		return
+
+	if(isnull(emergency))
+		emergency = 1
 
 	if(!universe.OnShuttleCall(usr))
 		user << "<span class='notice'>Cannot establish a bluespace connection.</span>"
@@ -366,7 +370,7 @@ var/last_message_id = 0
 		user << "Under directive 7-10, [station_name()] is quarantined until further notice."
 		return
 
-	if(evacuation_controller.call_evacuation(user))
+	if(evacuation_controller.call_evacuation(user, _emergency_evac = emergency))
 		log_and_message_admins("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
 
 /proc/init_shift_change(var/mob/user, var/force = 0)
@@ -393,4 +397,4 @@ var/last_message_id = 0
 		event_manager.delay_events(EVENT_LEVEL_MODERATE, 10200) //17 minutes
 		event_manager.delay_events(EVENT_LEVEL_MAJOR, 10200)
 
-	return call_shuttle_proc(user)
+	return call_shuttle_proc(user, 0)
