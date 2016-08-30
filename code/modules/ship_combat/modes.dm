@@ -91,33 +91,33 @@
 			if(faction_to_add in allowed_factions) continue
 			allowed_factions.Add(faction_to_add)
 		while(allowed_factions.len < team_count)
-		for(var/I in allowed_factions)
-			switch(I)
-				if("Team One")
-					teams.Add("1")
-				if("Team Two")
-					teams.Add("2")
-				if("Team Three")
-					teams.Add("3")
-				if("Team Four")
-					teams.Add("4")
-		var/list/protected_cores = list()
-		for(var/i=1,i<=teams.len,i++)
-			var/list/team_cores = list()
-			for(var/obj/machinery/space_battle/ship_core/core in world)
-				if(core.team > 0 && core.team == text2num(teams[i]))
-					protected_cores.Add(core)
-				else if(core.team <= 0) // Derelicts
-					protected_cores.Add(core)
+		spawn(10)
+			for(var/I in allowed_factions)
+				switch(I)
+					if("Team One")
+						teams.Add("1")
+					if("Team Two")
+						teams.Add("2")
+					if("Team Three")
+						teams.Add("3")
+					if("Team Four")
+						teams.Add("4")
+			var/list/protected_cores = list()
+			for(var/i=1,i<=teams.len,i++)
+				var/team_cores = 0
+				for(var/obj/machinery/space_battle/ship_core/core in world)
+					if(core.team > 0 && core.team == text2num(teams[i]))
+						protected_cores.Add(core)
+						team_cores++
+					else if(core.team <= 0) // Derelicts
+						protected_cores.Add(core)
 
-			message_admins("Team [(teams[i])] has [team_cores.len] cores.")
-		for(var/obj/machinery/space_battle/ship_core/not_chosen in world)
-			if(not_chosen in protected_cores) continue
-			qdel(not_chosen)
-
-	setup = 1
-	post_setup()
-		..()
+				message_admins("Team [(teams[i])] has [team_cores] cores.")
+			for(var/obj/machinery/space_battle/ship_core/not_chosen in world)
+				if(not_chosen in protected_cores) continue
+				message_admins("Core ([not_chosen]) deleted! (Team:[not_chosen.team])(Area:[get_area(not_chosen)])(Protected Cores:[protected_cores.len])")
+				qdel(not_chosen)
+			setup = 1
 
 /datum/game_mode/ship_battles/two
 	name = "two team combat"

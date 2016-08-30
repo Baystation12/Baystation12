@@ -248,7 +248,7 @@
 								team_string = "Team Four"
 						if(team_string)
 							var/obj/machinery/camera/network/battle/C = selected
-							selected.replace_networks(uniquelist(team_string))
+							C.replace_networks(uniquelist(team_string))
 
 			operation = action_type
 			src.visible_message("<span class='notice'>\The [src] beeps, \"Running [action_type].exe on \the [selected]. Estimated time: [begin_hacking(null, time, 0)] seconds.\"</span>")

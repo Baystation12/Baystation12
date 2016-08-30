@@ -17,6 +17,18 @@
 	var/list/fire_controls = list()
 	var/braked = 1
 
+/obj/effect/map/ship/Destroy()
+	current_sector = null
+	nav_control = null
+	for(var/obj/machinery/space_battle/engine_control/E in eng_controls)
+		E.linked = null
+	eng_controls.Cut()
+	for(var/obj/machinery/space_battle/missile_computer/M in fire_controls)
+		M.linked = null
+	fire_controls.Cut()
+	map_sectors["[z]"] = null
+	return ..()
+
 /obj/effect/map/ship/initialize()
 	for(var/obj/machinery/space_battle/engine_control/E in world)
 		if (E.z == map_z && !(E in eng_controls))

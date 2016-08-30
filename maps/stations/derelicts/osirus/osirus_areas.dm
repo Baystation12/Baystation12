@@ -1,6 +1,7 @@
 /area/ship_battle/osirus
 	name = "\improper Osirus"
 	icon_state = "purple"
+	team = 0
 
 	bridge
 		name = "\improper Osirus - Bridge"
