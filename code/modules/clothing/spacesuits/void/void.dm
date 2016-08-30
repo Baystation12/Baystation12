@@ -11,7 +11,7 @@
 
 	//Species-specific stuff.
 	species_restricted = list("Human", "Machine")
-	sprite_sheets_refit = list(
+	sprite_sheets = list(
 		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
 		"Skrell" = 'icons/mob/species/skrell/helmet.dmi',
@@ -39,7 +39,7 @@
 	siemens_coefficient = 0.4
 
 	species_restricted = list("Human", "Skrell", "Machine")
-	sprite_sheets_refit = list(
+	sprite_sheets = list(
 		"Unathi" = 'icons/mob/species/unathi/suit.dmi',
 		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',
 		"Skrell" = 'icons/mob/species/skrell/suit.dmi',
