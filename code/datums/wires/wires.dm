@@ -96,9 +96,13 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 		html += "<tr>"
 		html += "<td[row_options1]><font color='[colour]'>[capitalize(colour)]</font></td>"
 		html += "<td[row_options2]>"
-		html += "<A href='?src=\ref[src];action=1;cut=[colour]'>[IsColourCut(colour) ? "Mend" :  "Cut"]</A>"
-		html += " <A href='?src=\ref[src];action=1;pulse=[colour]'>Pulse</A>"
-		html += " <A href='?src=\ref[src];action=1;attach=[colour]'>[IsAttached(colour) ? "Detach" : "Attach"] Signaller</A></td></tr>"
+		html += "<A href='?src=\ref[src];interact=[colour]'><font color='[colour]'>====="
+		html += IsColourCut(colour) ? "/  /" : "=="
+		html +="======"
+		html += IsColourCut(colour) ? "<font color='[COLOR_GREEN_GRAY]'>\[-<font color='#ff0000'>0</font>-\]</font>" : "==="
+		html +="=====</font><</A>"
+
+		html += "</td></tr>"
 	html += "</table>"
 	html += "</div>"
 
@@ -109,47 +113,31 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 
 /datum/wires/Topic(href, href_list)
 	..()
-	if(in_range(holder, usr) && isliving(usr))
+	if(!in_range(holder, usr) || !isliving(usr))
+		return
 
-		var/mob/living/L = usr
-		if(CanUse(L) && href_list["action"])
-			var/obj/item/I = L.get_active_hand()
-			holder.add_hiddenprint(L)
-			if(href_list["cut"]) // Toggles the cut/mend status
-				if(istype(I, /obj/item/weapon/wirecutters))
-					var/colour = href_list["cut"]
-					CutWireColour(colour)
-				else
-					L << "<span class='error'>You need wirecutters!</span>"
+	var/mob/living/L = usr
+	if(CanUse(L) && href_list["interact"])
+		var/colour = href_list["interact"]
+		var/obj/item/I = L.get_active_hand()
+		holder.add_hiddenprint(L)
+		if(istype(I, /obj/item/weapon/wirecutters))
+			CutWireColour(colour)
 
-			else if(href_list["pulse"])
-				if(istype(I, /obj/item/device/multitool))
-					var/colour = href_list["pulse"]
-					PulseColour(colour)
-				else
-					L << "<span class='error'>You need a multitool!</span>"
+		if(istype(I, /obj/item/device/multitool))
+			PulseColour(colour)
 
-			else if(href_list["attach"])
-				var/colour = href_list["attach"]
-				// Detach
-				if(IsAttached(colour))
-					var/obj/item/O = Detach(colour)
-					if(O)
-						L.put_in_hands(O)
+		if(IsAttached(colour))
+			var/obj/item/O = Detach(colour)
+			if(O)
+				L.put_in_hands(O)
+		else
+			if(istype(I, /obj/item/device/assembly/signaler))
+				L.drop_item()
+				Attach(colour, I)
 
-				// Attach
-				else
-					if(istype(I, /obj/item/device/assembly/signaler))
-						L.drop_item()
-						Attach(colour, I)
-					else
-						L << "<span class='error'>You need a remote signaller!</span>"
-
-
-
-
-		// Update Window
-			Interact(usr)
+	// Update Window
+		Interact(usr)
 
 	if(href_list["close"])
 		usr << browse(null, "window=wires")
