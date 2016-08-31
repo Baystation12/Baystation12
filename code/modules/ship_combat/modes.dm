@@ -52,12 +52,17 @@
 	check_finished()
 		if(!setup)
 			return 0
-		var/list/active_starts = list()
+		var/list/team_cores = list()
+		var/list/active_teams = teams.Copy()
 		for(var/obj/missile_start/S in world)
 			S.refresh_active()
-			if(S.active)
-				active_starts += S
-		if(active_starts.len <= 1)
+			if(S.active && S.team >= 1)
+				team_cores["[S.team]"] += 1
+		for(var/i=1 to team_cores.len)
+			var/value = team_cores[i]
+			if(text2num(value) >= 1)
+				active_teams += team_cores[i]
+		if(active_teams.len <= 1)
 			return 1
 		return 0
 

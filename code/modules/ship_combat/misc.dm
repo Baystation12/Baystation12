@@ -10,6 +10,8 @@
 	var/can_be_destroyed = 1
 	has_circuit = 1
 	resistance = 1.5
+	density = 1
+	anchored = 1
 
 	New()
 		..()
@@ -511,6 +513,52 @@
 	charge = 1e6
 
 	output_attempt = 1
+
+/obj/machinery/power/smes/buildable/battle/recalc_coils()
+	if ((cur_coils <= max_coils) && (cur_coils >= 1))
+		capacity = 0
+		input_level_max = 0
+		output_level_max = 0
+		for(var/obj/item/weapon/smes_coil/C in component_parts)
+			capacity += C.ChargeCapacity
+			input_level_max += C.IOCapacity
+			output_level_max += C.IOCapacity
+		charge = between(0, charge, capacity)
+		return 1
+	else
+		return 0
+
+//40KW Capacity, 2.5MW I/O
+/obj/machinery/power/smes/buildable/battle/supercapacitor
+	name = "supercapacitor"
+
+/obj/machinery/power/smes/buildable/battle/supercapacitor/New()
+	..(0)
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	recalc_coils()
+
+//250KW Capacity, 100KW I/O
+/obj/machinery/power/smes/buildable/battle/backup
+	name = "backup capacitor"
+	output_attempt = 0
+
+/obj/machinery/power/smes/buildable/battle/backup/New()
+	..(0)
+	component_parts += new /obj/item/weapon/smes_coil/super_capacity(src)
+	recalc_coils()
+
+/obj/machinery/power/smes/buildable/battle/solar
+	name = "input capacitor"
+	output_attempt = 0
+
+//20KW Capacity, 300KW I/O
+/obj/machinery/power/smes/buildable/battle/solar/New()
+	..(0)
+	component_parts += new /obj/item/weapon/smes_coil/weak(src)
+	component_parts += new /obj/item/weapon/smes_coil/weak(src)
+	recalc_coils()
+
 
 
 

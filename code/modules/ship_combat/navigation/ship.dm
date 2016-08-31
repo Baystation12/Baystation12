@@ -76,12 +76,14 @@
 	speed[2] = Clamp(speed[2] + n_y, -default_delay, default_delay)
 	if(is_still())
 		toggle_move_stars(map_z)
-		for(var/obj/machinery/space_battle/engine_control/E in eng_controls)
-			E.stopped()
-		for(var/obj/machinery/space_battle/missile_computer/M in fire_controls)
-			M.find_targets()
+		if(!braked)
+			var/obj/effect/overmap/station/S = locate() in src.loc
+			if(S && istype(S))
+				for(var/obj/machinery/space_battle/engine_control/E in eng_controls)
+					E.stopped()
+				for(var/obj/machinery/space_battle/missile_computer/M in fire_controls)
+					M.find_targets()
 	else
-		braked = 0
 		toggle_move_stars(map_z, fore_dir)
 
 /obj/effect/overmap/ship/proc/can_burn()

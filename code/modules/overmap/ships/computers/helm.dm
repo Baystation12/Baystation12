@@ -1,4 +1,4 @@
-/obj/machinery/computer/helm
+/obj/machinery/space_battle/helm
 	name = "helm control console"
 	icon_keyboard = "med_key"
 	icon_screen = "id"
@@ -9,7 +9,7 @@
 	var/dx		//desitnation
 	var/dy		//coordinates
 
-/obj/machinery/computer/helm/initialize()
+/obj/machinery/space_battle/helm/initialize()
 	linked = map_sectors["[z]"]
 	if (linked)
 		if(!linked.nav_control)
@@ -28,7 +28,7 @@
 			known_sectors += R
 	..()
 
-/obj/machinery/computer/helm/process()
+/obj/machinery/space_battle/helm/process()
 	..()
 	if (autopilot && dx && dy)
 		var/turf/T = locate(dx,dy,1)
@@ -47,19 +47,19 @@
 
 		return
 
-/obj/machinery/computer/helm/relaymove(var/mob/user, direction)
+/obj/machinery/space_battle/helm/relaymove(var/mob/user, direction)
 	if(manual_control && linked)
 		linked.relaymove(user,direction)
 		return 1
 
-/obj/machinery/computer/helm/check_eye(var/mob/user as mob)
+/obj/machinery/space_battle/helm/check_eye(var/mob/user as mob)
 	if (!manual_control)
 		return -1
 	if (!get_dist(user, src) > 1 || user.blinded || !linked )
 		return -1
 	return 0
 
-/obj/machinery/computer/helm/attack_hand(var/mob/user as mob)
+/obj/machinery/space_battle/helm/attack_hand(var/mob/user as mob)
 	if(..())
 		user.unset_machine()
 		manual_control = 0
@@ -72,7 +72,7 @@
 
 	ui_interact(user)
 
-/obj/machinery/computer/helm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/space_battle/helm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
 		return
 
@@ -112,7 +112,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/computer/helm/Topic(href, href_list)
+/obj/machinery/space_battle/helm/Topic(href, href_list)
 	if(..())
 		return 1
 

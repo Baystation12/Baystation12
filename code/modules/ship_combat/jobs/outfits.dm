@@ -179,6 +179,9 @@
 	suit = /obj/item/clothing/suit/armor/swat/battle
 	head = /obj/item/clothing/head/helmet/swat/battle
 	belt = /obj/item/weapon/storage/belt/arrow
+	backpack = null
+	satchel_one = null
+	backpack_contents = null
 	back = /obj/item/weapon/gun/launcher/crossbow
 	mask = /obj/item/clothing/mask/gas/syndicate
 	l_pocket = /obj/item/weapon/tank/emergency/oxygen/double

@@ -19,6 +19,7 @@ var/global/datum/controller/occupations/job_master
 	var/list/unassigned = list()
 		//Debug info
 	var/list/job_debug = list()
+	var/list/teams = list("Team One","Team Two", "Team Three", "Team Four")
 
 	proc/FillTeams(var/list/factions = list("Team One", "Team Two", "Team Three", "Team Four"))
 		var/list/unassigned_command_jobs = list()
@@ -41,7 +42,6 @@ var/global/datum/controller/occupations/job_master
 		for(var/mob/new_player/player in player_list)
 			if(player.ready && player.mind && !player.mind.assigned_role)
 				ready_players.Add(player)
-		var/list/teams = list("Team One","Team Two", "Team Three", "Team Four")
 		for(var/level = 1 to 3)
 			for(var/datum/job/space_battle/job in occupations)
 				if(!job || !istype(job))	continue

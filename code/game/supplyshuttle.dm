@@ -39,13 +39,31 @@ var/list/mechtoys = list(
 	anchored = 1
 	layer = 4
 	explosion_resistance = 5
+	var/can_pass = 0
 	var/list/mobs_can_pass = list(
 		/mob/living/carbon/slime,
 		/mob/living/simple_animal/mouse,
 		/mob/living/silicon/robot/drone
 		)
 
+	ex_act()
+		return
+
+	attackby(var/obj/item/I, var/mob/user)
+		if(istype(I, /obj/item/weapon/wirecutters) && anchored)
+			user.visible_message("<span class='notice'>\The [user] begins cutting \the [src] off of it's mantle...</span>")
+			if(do_after(user, 200))
+				anchored = 0
+				can_pass = 1
+		if(istype(I, /obj/item/weapon/wrench) && !anchored)
+			user.visible_message("<span class='notice'>\The [user] begins anchoring \the [src] into place..</span>")
+			if(do_after(user, 120))
+				anchored = 1
+				can_pass = 0
+		return ..()
+
 /obj/structure/plasticflaps/CanPass(atom/A, turf/T)
+	if(can_pass) return 1
 	if(istype(A) && A.checkpass(PASSGLASS))
 		return prob(60)
 

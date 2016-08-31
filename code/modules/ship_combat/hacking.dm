@@ -4,7 +4,6 @@
 #define SHATTER "Overload"// Limited to lights.
 #define UI_INTERACT "RCON" // Limited to machines with ui_interact
 #define UNLOCK "Bruteforce Encryption Hack"// Limited to machines with ui_interact
-#define ION "Discharge Capacitors" // Limited to APC's
 #define DISABLE "Disable Activity" // Limited to Sensors
 #define ADJUST_NETWORK "Sync To Local Network"
 
@@ -20,12 +19,12 @@
 	var/list/available_categories = list(list("Sensors", list(/obj/machinery/space_battle/missile_sensor), list(EMP = 180, FRY_CIRCUIT = 180, DISABLE = 180), 600),\
 										 list("Life Support", list(/obj/machinery/alarm), list(EMP = 30, FRY_CIRCUIT = 60, UI_INTERACT = 30, UNLOCK = 150), 300),\
 										 list("Lighting", list(/obj/machinery/light), list(SHATTER = 20), 20), \
-										 list("Power", list(/obj/machinery/power/apc), list(EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 180, SURGE = 30), 1200), \
+										 list("Power", list(/obj/machinery/power/apc), list(EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 180), 1200), \
 										 list("Defensive Systems", list(/obj/machinery/space_battle/ecm, /obj/machinery/space_battle/shieldwallgen), list(EMP = 240, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 270), 1500), \
 										 list("Engines", list(/obj/machinery/space_battle/engine), list(EMP = 90, FRY_CIRCUIT = 180), 120), \
 										 list("Piloting", list(/obj/machinery/space_battle/engine_control, /obj/machinery/space_battle/helm), list(EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 120), 900), \
 										 list("Doors", list(/obj/machinery/door/airlock), list(EMP = 60, FRY_CIRCUIT = 60, UI_INTERACT = 60), 200), \
-										 list("Cameras", list(/obj/machinery/camera/network/battle), list(EMP = 15, FRY_CIRCUIT = 30, ADJUST_NETWORK = 90), 120))
+										 list("Cameras", list(/obj/machinery/camera/autoname/battle), list(EMP = 15, FRY_CIRCUIT = 30, ADJUST_NETWORK = 90), 120))
 
 	var/team = 0
 	var/obj/machinery/hacking
@@ -188,6 +187,7 @@
 	if(href_list["action"])
 		if(selected.stat & (BROKEN|NOPOWER|MAINT))
 			usr << "<span class='warning'>\The [selected] is not responding!</span>"
+			selected.visible_message("<span class='warning'>\The [src] buzzes briefly!</span>")
 			src.visible_message("<span class='warning'>\The [src] beeps, \"Remote connection to \the [selected] unavailable. Disconnecting...</span>")
 			hacked.Cut(hacked.Find(selected),  (hacked.Find(selected)+1))
 			selected = null
@@ -230,12 +230,8 @@
 						var/obj/machinery/alarm/alarm = selected
 						alarm.locked = 0
 						alarm.visible_message("<span class='warning'>\The [alarm] buzzes noisily!</span>")
-				if(ION)
-					if(istype(selected, /obj/machinery/power/apc))
-						var/obj/machinery/power/apc/A = selected
-						A.ion_act()
 				if(ADJUST_NETWORK)
-					if(istype(selected, /obj/machinery/camera/network/battle))
+					if(istype(selected, /obj/machinery/camera/autoname/battle))
 						var/team_string = 0
 						switch(team)
 							if(1)
@@ -247,7 +243,7 @@
 							if(4)
 								team_string = "Team Four"
 						if(team_string)
-							var/obj/machinery/camera/network/battle/C = selected
+							var/obj/machinery/camera/autoname/battle/C = selected
 							C.replace_networks(uniquelist(team_string))
 
 			operation = action_type
@@ -302,8 +298,8 @@
 		else
 			mod = 0.2 // 20% time to hack.
 		time = min(1200, max(0, BASE_HACKING_TIME * mod * (1+detection*0.1)))
-		time += added_time
 	time /= speed
+	time += added_time
 	hacking_time = world.timeofday + time*10
 	menu = "progress"
 	icon_state = "recalibrated"

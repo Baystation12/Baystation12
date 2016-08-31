@@ -4,21 +4,23 @@
 	name = "exploration shuttle console"
 	shuttle_tag = "Exploration"
 	req_access = list()
-	var/landing_type	//area for shuttle ship-side
+	var/shuttle_area	//area for shuttle ship-side
 	var/obj/effect/overmap/destination //current destination
-	var/obj/effect/overmap/home //current destination
+	var/obj/effect/overmap/home //home port for shuttle
+	var/docking_controller_tag = null
+	var/datum/shuttle/ferry/shuttle
 
-/obj/machinery/computer/shuttle_control/explore/initialize()
+/obj/machinery/computer/shuttle_control/explore/New()
 	..()
 	home = map_sectors["[z]"]
 	shuttle_tag = "[shuttle_tag]-[z]"
 	if(!shuttle_controller.shuttles[shuttle_tag])
 		var/datum/shuttle/ferry/shuttle = new(shuttle_tag)
+		if(docking_controller_tag)
+			shuttle.docking_controller_tag = docking_controller_tag
 		shuttle.warmup_time = 10
-		shuttle.area_station = locate(landing_type)
+		shuttle.area_station = locate(shuttle_area)
 		shuttle.area_offsite = shuttle.area_station
-//		shuttle_controller.shuttles[shuttle_tag] = shuttle
-		shuttle_controller.process_shuttles += shuttle
 		testing("Exploration shuttle '[shuttle_tag]' at zlevel [z] successfully added.")
 
 //Sets destination to new sector. Can be null.
@@ -26,7 +28,7 @@
 	destination = D
 	if(destination && shuttle_controller.shuttles[shuttle_tag])
 		var/datum/shuttle/ferry/shuttle = shuttle_controller.shuttles[shuttle_tag]
-		shuttle.area_offsite = destination.shuttle_landing
+		shuttle.area_offsite = destination.landing_area
 		testing("Shuttle controller [shuttle_tag] now sends shuttle to [destination]")
 		shuttle_controller.shuttles[shuttle_tag] = shuttle
 
@@ -35,7 +37,7 @@
 	var/list/res = list()
 	var/datum/shuttle/ferry/shuttle = shuttle_controller.shuttles[shuttle_tag]
 	for (var/obj/effect/overmap/S in orange(shuttle.range, home))
-		if(S.shuttle_landing)
+		if(S.landing_area)
 			res += S
 	return res
 
@@ -138,8 +140,6 @@
 	else if(href_list["cancel"])
 		shuttle.cancel_launch(src)
 
-/area/shuttle/mining_shuttle/requires_power = 1
-
 /area/shuttle/mining_shuttle/destination
-	name = "Mining Shuttle Landing Site"
+	name = "Mining Shuttle"
 	icon_state = "shuttle3"

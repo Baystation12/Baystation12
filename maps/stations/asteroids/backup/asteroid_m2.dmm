@@ -12,7 +12,7 @@
 "l" = (/turf/space,/area/ship_battle/asteroid/m_two/four)
 "m" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/m_two/four)
 "n" = (/turf/unsimulated/mask,/area/ship_battle/asteroid/m_two/four)
-"o" = (/obj/effect/overmap/station/asteroid{dimensions_x = 75; dimensions_y = 75; icon_state = "asteroid_medium"; landing_area = /area/shuttle/mining_shuttle/destination; name = "Broken Asteroid"},/turf/space,/area/ship_battle/asteroid/m_one/three)
+"o" = (/obj/effect/overmap/asteroid{dimensions_x = 75; dimensions_y = 75; icon_state = "asteroid_medium"; landing_area = /area/shuttle/mining_shuttle/destination; name = "Broken Asteroid"},/turf/space,/area/ship_battle/asteroid/m_one/three)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb

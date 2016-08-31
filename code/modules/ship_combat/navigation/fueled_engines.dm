@@ -163,3 +163,19 @@
 	if(E)
 		new/obj/effect/engine_exhaust(E,exhaust_dir,1000)
 	return 1
+
+/obj/effect/engine_exhaust
+	name = "engine exhaust"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "exhaust"
+	anchored = 1
+
+	New(var/turf/nloc, var/ndir, var/temp)
+		set_dir(ndir)
+		..(nloc)
+
+		if(nloc)
+			nloc.hotspot_expose(temp,125)
+
+		spawn(20)
+			loc = null

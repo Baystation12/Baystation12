@@ -1,10 +1,19 @@
 /datum/job/space_battle/is_position_available()
-//	for(var/datum/job/space_battle/job in job_master.occupations)
-//		if(job == src) continue
-//		if(job.current_positions && src.current_positions > job.current_positions)
-//			return 0
-	message_admins("Is job available: [title] yes!")
-	return 1
+	testing("Checking if position [src.title] is available(teamslen:[job_master.teams.len])(factionslen:[ticker.mode.allowed_factions.len])")
+	var/less_populated_team = ""
+	var/less_populated_team_count = 0
+	for(var/i=1 to job_master.teams.len)
+		if(job_master.teams[i] in ticker.mode.allowed_factions)
+			if(!less_populated_team_count || job_master.teams[i] < less_populated_team_count)
+				less_populated_team = job_master.teams[i]
+				less_populated_team_count = job_master.teams[less_populated_team]
+				testing("Least populated team: [less_populated_team]")
+	if(faction == less_populated_team)
+		return 1
+		testing("Is job available: [title]")
+	testing("Job is not available: [title]")
+	return 0
+
 
 //access 1-10 = Team One, 11 - 20 = Team Two ... 31-40 = Team Four
 //1 = Common(Halls)

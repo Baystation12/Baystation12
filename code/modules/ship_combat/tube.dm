@@ -2,8 +2,8 @@
 	name = "firing tube"
 	icon = 'icons/obj/ship_battles.dmi'
 	icon_state = "mass_driver"
-	anchored = 1
 	resistance = 2.5
+	density = 0
 
 	idle_power_usage = 100
 	power_channel = EQUIP
@@ -218,7 +218,7 @@
 	name = "firing tube"
 	icon = 'icons/obj/ship_battles.dmi'
 	icon_state = "rail"
-	anchored = 1
+	density = 0
 	resistance = 5
 
 	idle_power_usage = 1

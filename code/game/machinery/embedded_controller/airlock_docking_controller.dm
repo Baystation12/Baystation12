@@ -5,11 +5,14 @@
 	var/datum/computer/file/embedded_program/docking/airlock/docking_program
 	tag_secure = 1
 
-/obj/machinery/embedded_controller/radio/airlock/docking_port/initialize()
+/obj/machinery/embedded_controller/radio/airlock/docking_port/New()
 	..()
-	airlock_program = new/datum/computer/file/embedded_program/airlock/docking(src)
-	docking_program = new/datum/computer/file/embedded_program/docking/airlock(src, airlock_program)
-	program = docking_program
+	spawn(-1)
+		airlock_program = new/datum/computer/file/embedded_program/airlock/docking(src)
+		docking_program = new/datum/computer/file/embedded_program/docking/airlock(src, airlock_program)
+		program = docking_program
+		if(docking_program.tag != id_tag)
+			docking_program.tag = id_tag // Hacks
 
 /obj/machinery/embedded_controller/radio/airlock/docking_port/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nano_ui/master_ui = null, var/datum/topic_state/state = default_state)
 	var/data[0]

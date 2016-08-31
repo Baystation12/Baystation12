@@ -1,5 +1,4 @@
 /obj/machinery/missile/bomb/fire_missile(var/turf/location)
-	world << "bomb launch!"
 	var/obj/machinery/space_battle/tube/T = locate() in loc
 	if(T && T.linked)
 		if(T.linked.firing_angle == "Flanking" || (prob(30) && T.linked.firing_angle != "Carefully Aimed"))

@@ -12,7 +12,7 @@
 
 	attackby(var/obj/item/I, var/mob/living/carbon/human/user)
 		if(istype(I, /obj/item/weapon/missile_grab))
-			var/obj/item/weapon/missile_grab/G
+			var/obj/item/weapon/missile_grab/G = I
 			if(G.holding && G.holding.type == contained_type)
 				if(contained && contained_count >= (8 - contained.req_grabs*2))
 					user << "<span class='warning'>\The [src] has no space for \the [G.holding]!</span>"

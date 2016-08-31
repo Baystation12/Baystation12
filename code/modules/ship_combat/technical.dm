@@ -12,7 +12,7 @@
 		if(A && istype(A))
 			team = A.team
 
-/datum/controller/occupations/proc/LateSpawn(var/client/C, var/rank, var/return_location = 0, var/obj/machinery/space_battle/ship_core/core)
+/datum/controller/occupations/proc/LateSpawn(var/client/C, var/rank, var/return_location = 0)
 	//spawn at one of the latespawn locations
 
 
@@ -22,30 +22,19 @@
 		CRASH("Null client passed to LateSpawn() proc!")
 
 	var/mob/H = C.mob
-	var/team = 0
-	switch(rank)
-		if("Team One Sailor")
-			team = 1
-		if("Team Two Sailor")
-			team = 2
-		if("Team Three Sailor")
-			team = 3
-		if("Team Four Sailor")
-			team = 4
-	if(team)
-		sleep(0)
-		for(var/obj/team_start/S in world)
-			if(S.z == core.z && S.team == team)
+	var/datum/job/space_battle/job = GetJob(rank)
+	for(var/obj/team_start/S in world)
+		var/area/ship_battle/A = get_area(S)
+		if(A && istype(A))
+			if(A.team == job.team)
 				if(return_location)
 					return get_turf(S)
 				else
 					if(H)
 						H.forceMove(get_turf(S))
-						return "has teleported into team [team]"
-			else continue
+						return "has teleported into team [job.team]"
 
-	else if(C.prefs.spawnpoint)
-		spawnpos = spawntypes[C.prefs.spawnpoint]
+	spawnpos = spawntypes[C.prefs.spawnpoint]
 
 	if(spawnpos && istype(spawnpos))
 		if(spawnpos.check_job_spawning(rank))

@@ -120,7 +120,7 @@
 "cp" = (/obj/item/frame/apc,/turf/simulated/floor/tiled,/area/ship_battle/osirus/central)
 "cq" = (/obj/structure/cable/orange{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/cable/orange{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/structure/cable/orange{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/plating,/area/ship_battle/osirus/engineering)
 "cr" = (/obj/structure/table,/turf/simulated/floor/tiled,/area/ship_battle/osirus/central)
-"cs" = (/obj/effect/overmap/ship/derelict{start_x = null; start_y = null},/turf/space,/area/ship_battle/osirus)
+"cs" = (/obj/effect/mapinfo/ship/derelict{mapx = null; mapy = null},/turf/space,/area/ship_battle/osirus)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

@@ -3,13 +3,19 @@
 	icon_state = "computer"
 	anchored = 1
 	density = 1
-	var/state = "status"
 	var/obj/effect/overmap/ship/linked			//connected overmap object
 	var/autopilot = 0
 	var/manual_control = 0
 	var/list/known_sectors = list()
 	var/dx		//desitnation
 	var/dy		//coordinates
+
+
+/obj/machinery/space_battle/helm/Destroy()
+	linked.nav_control = null
+	linked = null
+	known_sectors = null
+	return ..()
 
 /obj/machinery/space_battle/helm/initialize()
 	linked = map_sectors["[z]"]
@@ -22,17 +28,13 @@
 
 	for(var/level in map_sectors)
 		var/obj/effect/overmap/sector/S = map_sectors["[level]"]
-		if (istype(S) && S.always_known)
+		if (istype(S) && S.known)
 			var/datum/data/record/R = new()
 			R.fields["name"] = S.name
 			R.fields["x"] = S.x
 			R.fields["y"] = S.y
 			known_sectors += R
-
-/obj/machinery/space_battle/helm/Destroy()
-	linked.nav_control = null
-	linked = null
-	return ..()
+	..()
 
 /obj/machinery/space_battle/helm/process()
 	..()
@@ -66,7 +68,7 @@
 	return 0
 
 /obj/machinery/space_battle/helm/attack_hand(var/mob/user as mob)
-//	if(..())
+///	if(..())
 //		user.unset_machine()
 //		manual_control = 0
 //		return
@@ -83,17 +85,19 @@
 		return
 
 	var/data[0]
-	data["state"] = state
 
-	data["sector"] = linked.current_sector ? linked.current_sector.name : "Deep Space"
-	data["sector_info"] = linked.current_sector ? linked.current_sector.desc : "Not Available"
+	var/turf/T = get_turf(linked)
+	var/obj/effect/overmap/sector/current_sector = locate() in T
+
+	data["sector"] = current_sector ? current_sector.name : "Deep Space"
+	data["sector_info"] = current_sector ? current_sector.desc : "Not Available"
 	data["s_x"] = linked.x
 	data["s_y"] = linked.y
 	data["dest"] = dy && dx
 	data["d_x"] = dx
 	data["d_y"] = dy
 	data["speed"] = linked.get_speed()
-	data["accel"] = round(linked.get_acceleration())
+	data["accel"] = linked.get_acceleration()
 	data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 	data["autopilot"] = autopilot
 	data["manual_control"] = manual_control
@@ -171,12 +175,10 @@
 
 	if (href_list["apilot"])
 		autopilot = !autopilot
-
+//	world << href
 	if (href_list["manual"])
 		manual_control = !manual_control
 
-	if (href_list["state"])
-		state = href_list["state"]
 	add_fingerprint(usr)
 	updateUsrDialog()
 

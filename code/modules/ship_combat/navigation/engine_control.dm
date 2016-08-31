@@ -101,13 +101,14 @@
 	updateUsrDialog()
 
 /obj/machinery/space_battle/engine_control/proc/burn()
-	if(linked.braked)
+	if(!cooldown())
 		return 0
 	if(engines.len == 0)
 		return 0
 	var/res = 0
 	for(var/datum/ship_engine/E in engines)
 		res |= E.burn()
+	linked.braked = 0
 	return res
 
 /obj/machinery/space_battle/engine_control/proc/get_total_thrust()
@@ -120,17 +121,13 @@
 	return 1
 
 /obj/machinery/space_battle/engine_control/proc/stopped(var/forced = 0)
-	if(!linked.braked || forced)
+	if(!(linked.braked && cooldown()) || forced)
 		cooldown = world.timeofday+(ENGINE_JUMP_DELAY*get_efficiency(-1,1)*10)
 		linked.braked = 1
-		world << "<span class='warning'>Cooldown set to [time_remaining()] seconds!</span>"
-
-/obj/machinery/space_battle/engine_control/process()
-	if(!linked) return PROCESS_KILL
-	if(cooldown())
-		linked.braked = 0
-	return ..()
-
+		var/obj/machinery/space_battle/helm/H = linked.nav_control
+		if(H && istype(H))
+			H.visible_message("<span class='warning'>\The [H] beeps, \"Cooldown set to [time_remaining()] seconds!\"</span>")
+		src.visible_message("<span class='warning'>\The [src] beeps, \"Cooldown set to [time_remaining()] seconds!\"</span>")
 /obj/machinery/space_battle/engine_control/proc/time_remaining()
 	var/time = (cooldown - world.timeofday)/10
 	if(time < 0)

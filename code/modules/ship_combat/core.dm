@@ -41,7 +41,7 @@
 		if(linked)
 			if(istype(linked, /obj/effect/overmap/ship))
 				linked.fire_controls.Cut()
-				qdel(linked)
+			qdel(linked)
 		return ..()
 
 	proc/take_damage(var/damage, var/external = 1)
@@ -59,7 +59,9 @@
 		..()
 		if(damage_level > 6)
 			if(!self_destructing)
-				world << "<span class='danger'>[ship_name]'s core self destruct sequence engaged!</span>"
+				var/obj/effect/overmap/O = map_sectors["[z]"]
+				if(O)
+					world << "<span class='danger'>[O.name]'s core self destruct sequence engaged!</span>"
 				self_destructing = 1
 
 	attackby(var/obj/item/I, var/mob/user)

@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
-LAST_COMPILE_TIME: 1472541648
-DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\trinary_devices code\modules code\modules\ship_combat code\modules\ship_combat\navigation code\modules\shuttles maps maps\ships maps\ships\aphrodyte maps\ships\core maps\stations maps\stations\derelicts maps\stations\derelicts\osirus 
+LAST_COMPILE_TIME: 1472627910
+DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\trinary_devices code\controllers code\controllers\Processes code\game code\game\machinery code\game\machinery\computer code\game\machinery\embedded_controller code\modules code\modules\overmap code\modules\overmap\ships code\modules\overmap\ships\computers code\modules\ship_combat code\modules\ship_combat\jobs code\modules\ship_combat\navigation code\modules\shuttles maps maps\ships maps\ships\aphrodyte maps\ships\endurance maps\ships\old maps\stations maps\stations\asteroids maps\stations\derelicts maps\stations\one sound sound\AI sound\voice sound\voice\Serithi 
 AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 511.1353
-WINDOW: code\modules\ship_combat\tube.dm;maps\ships\aphrodyte\aphrodyte.dmm;maps\ships\core\core.dmm;code\modules\ship_combat\computer.dm;code\modules\ship_combat\modes.dm;code\modules\ship_combat\navigation\ship.dm;code\modules\ship_combat\navigation\shuttles.dm;code\modules\shuttles\shuttle_ferry.dm;maps\stations\derelicts\osirus\osirus_areas.dm;maps\stations\derelicts\osirus\osirus.dmm;code\modules\shuttles\shuttle.dm
+WINDOW: maps\ships\endurance\endurance.dmm;maps\ships\old\boss.dmm;maps\stations\one\one.dmm;code\modules\ship_combat\navigation\ship.dm;code\modules\ship_combat\navigation\shuttles.dm
 FILE: code\modules\ship_combat\navigation\shuttles.dm
 */
 // END_INTERNALS

@@ -68,7 +68,7 @@ var/global/list/map_sectors = list()
 
 	var/known = 1		//shows up on nav computers automatically
 
-/obj/effect/overmap/New(var/obj/effect/overmapinfo/data)
+/obj/effect/overmap/New()
 	tag = "sector[z]"
 	if(ispath(landing_area))
 		landing_area = locate(landing_area)

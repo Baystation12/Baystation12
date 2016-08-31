@@ -41,8 +41,13 @@
 		if(range > radius || stat & (BROKEN|NOPOWER))
 			world << "ecm failure: range too great or broken"
 			return 0
-		if(!dish || !dish.can_sense())
-			world << "ecm failure: [dish ? dish.can_sense() : "no dish"]"
+		if(!dish)
+			reconnect()
+			if(!dish)
+				world << "ecm failure: [dish ? dish.can_sense() : "no dish"]"
+				return 0
+		else if(!dish.can_sense())
+			world << "ecm failure: [dish.can_sense()]"
 			return 0
 		return 1
 
@@ -53,7 +58,7 @@
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "ecm.tmpl", "Hacking", 800, 500, state = state)
+		ui = new(user, src, ui_key, "ecm.tmpl", "Electronic Counter Measures", 800, 500, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

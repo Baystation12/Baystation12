@@ -96,11 +96,11 @@
 				user.visible_message("<span class='notice'>[user] lets go of \the [src]!</span>", "<span class='notice'>You let go of \the [src]!</span>")
 				let_go()
 				return
-			else if(H.machine)
-				user << "<span class='warning'>You are already interacting with \the [H.machine]</span>"
 			else if(H.get_active_hand() || H.get_inactive_hand())
 				user << "<span class='notice'>You need two free hands to carry \the [src]!</span>"
 			else if(!H.stat && !H.lying && !H.restrained())
+				if(H.machine)
+					H.machine = null
 				grabs += H
 				H.visible_message("<span class='warning'>[user] grabs \the [src]!</span>", "<span class='warning'>You grab \the [src]</span>")
 				H.machine = src
@@ -204,9 +204,10 @@
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
 			team = A.team
+
 	initialize()
 		..()
-		spawn(10)
+		spawn(100)
 			initialised = 1
 
 
@@ -217,14 +218,16 @@
 		else if(ticker && ticker.mode && istype(ticker.mode, /datum/game_mode/ship_battles))
 			alive = 0
 			var/datum/game_mode/ship_battles/mode = ticker.mode
-			for(var/I in mode.allowed_factions)
-				if(lowertext(I) == lowertext(src.name))
+			for(var/I in mode.teams)
+				if(text2num(I) == src.team)
 					alive = 1
 			var/has_core = 0
 			for(var/obj/machinery/space_battle/ship_core/S in world)
 				if(S.z == src.z)
 					has_core = 1
 			active = has_core && alive
+		else
+			testing("Ticker mode is not correct!")
 		return active
 
 

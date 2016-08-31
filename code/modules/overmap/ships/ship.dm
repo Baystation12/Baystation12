@@ -36,7 +36,7 @@
 	var/fore_dir = NORTH				//what dir ship flies towards for purpose of moving stars effect procs
 	var/rotate = 1						//if icon should be rotated to heading
 
-	var/obj/machinery/computer/helm/nav_control
+	var/obj/machinery/space_battle/helm/nav_control
 	var/obj/machinery/computer/engines/eng_control
 
 /obj/effect/overmap/ship/initialize()
@@ -45,7 +45,7 @@
 		if (E.z in map_z)
 			eng_control = E
 			break
-	for(var/obj/machinery/computer/helm/H in machines)
+	for(var/obj/machinery/space_battle/helm/H in machines)
 		if (H.z in map_z)
 >>>>>>> 0b4cb4dda55c69006c7065b8e53f93e75d17612e
 			nav_control = H

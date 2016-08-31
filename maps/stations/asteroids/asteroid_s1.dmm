@@ -12,7 +12,7 @@
 "l" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/s_one/four)
 "m" = (/turf/space,/area/ship_battle/asteroid/s_one/four)
 "n" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/s_one/three)
-"o" = (/obj/effect/mapinfo/asteroid{dimensions_x = 50; dimensions_y = 50; landing_area = /area/shuttle/mining_shuttle/destination; name = "Small Asteroid"; overmap_state = "asteroid_small"},/turf/space,/area/ship_battle/asteroid/s_one/three)
+"o" = (/obj/effect/overmap/station/asteroid{dimensions_x = 50; dimensions_y = 50; icon_state = "asteroid_small"; landing_area = /area/shuttle/mining_shuttle/destination; name = "Small Asteroid"},/turf/space,/area/ship_battle/asteroid/s_one/three)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbb
