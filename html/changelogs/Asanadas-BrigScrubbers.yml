@@ -1,0 +1,8 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - bugfix: "Huge atmospheric scrubbers should properly update their icon to show they are working again."
+  - maptweak: "The riot control huge atmospherics scrubbers in the brig now properly sync with their specified console on round start."
+  - maptweak: "The warden's office now contains a paper shredder."
