@@ -1728,7 +1728,6 @@
 #include "code\modules\power\batteryrack.dm"
 #include "code\modules\power\breaker_box.dm"
 #include "code\modules\power\cable.dm"
-#include "code\modules\power\cable_heavyduty.dm"
 #include "code\modules\power\cell.dm"
 #include "code\modules\power\debug_items.dm"
 #include "code\modules\power\generator.dm"
