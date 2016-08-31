@@ -1,0 +1,9 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - tweak: "Converts few other things over to work with the recent CELLRATE change. This fixes various issues where battery life of some things (drills, etc.) was very short, while some other things had power cells with very large capacities."
+  - tweak: "Hardsuits and Mechas now use energy in joules rather than Wh (this fixes Ninja suit, among others). Various exosuit tools now have rebalanced power usage. Energy based exosuit weapons use energy on per-shot basis, ballistic weapons use single massive spike when fabricating a new magazine."
+  - tweak: "Minor power-related changes to exosuit modules. Energy cost of some offensive modules increased a bit. Added short cooldown for teleporter module to prevent spamming. Added power usage to various industrial/science modules (anomaly scanner, various drills, etc.). Increased mounted RCD power usage by a lot (matter fabrication is very power demanding process). Powersink module is limited to 120kW transfer rate, and is slower (30kW) when used on APCs with enabled interface lock. Furthermore, when draining from APC it first tries to take energy from the grid, before resorting to taking it from the cell."
+  - bugfix: "APCs drained by a ninja no longer get stuck on 0% charge, and instead recharge themselves as usual."

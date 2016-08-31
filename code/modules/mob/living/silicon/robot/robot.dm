@@ -134,9 +134,7 @@
 		C.wrapped = new C.external_type
 
 	if(!cell)
-		cell = new /obj/item/weapon/cell(src)
-		cell.maxcharge = 7500
-		cell.charge = 7500
+		cell = new /obj/item/weapon/cell/high(src)
 
 	..()
 
@@ -300,10 +298,10 @@
 
 	// if we've changed our name, we also need to update the display name for our PDA
 	setup_PDA()
-	
+
 	// Synths aren't in data_core, but are on manifest. Invalidate old one so the
 	// synth shows up.
-	data_core.ResetPDAManifest() 
+	data_core.ResetPDAManifest()
 
 	//We also need to update name of internal camera.
 	if (camera)

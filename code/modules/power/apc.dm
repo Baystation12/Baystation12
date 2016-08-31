@@ -143,20 +143,25 @@
 	if(drain_check)
 		return 1
 
-	if(!cell)
-		return 0
+	// Prevents APCs from being stuck on 0% cell charge while reporting "Fully Charged" status.
+	charging = 0
 
-	if(surge && !emagged)
-		flick("apc-spark", src)
-		emagged = 1
-		locked = 0
-		update_icon()
-		return 0
+	// If the APC's interface is locked, limit the charge rate to 25%.
+	if(locked)
+		amount /= 4
 
+	var/drained_energy = 0
+
+	// First try to drain the power directly from attached power grid.
 	if(terminal && terminal.powernet)
 		terminal.powernet.trigger_warning()
+		drained_energy += terminal.powernet.draw_power(amount)
 
-	return cell.drain_power(drain_check, surge, amount)
+	// If the power grid provided enough power, we're good. If not, take the rest from the power cell.
+	if((drained_energy < amount) && cell)
+		drained_energy += cell.use((amount - drained_energy) * CELLRATE)
+
+	return drained_energy
 
 /obj/machinery/power/apc/New(turf/loc, var/ndir, var/building=0)
 	wires = new(src)

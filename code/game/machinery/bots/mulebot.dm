@@ -47,8 +47,8 @@
 	var/auto_return = 1	// true if auto return to home beacon after unload
 	var/auto_pickup = 1 // true if auto-pickup at beacon
 
-	var/obj/item/weapon/cell/cell
-						// the installed power cell
+	var/obj/item/weapon/cell/cell	// the installed power cell
+	var/movement_power_usage = 250	// Power usage in joules per tile
 
 	// constants for internal wiring bitflags
 	var/datum/wires/mulebot/wires = null
@@ -61,8 +61,6 @@
 	botcard = new(src)
 	botcard.access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	cell = new(src)
-	cell.charge = 2000
-	cell.maxcharge = 2000
 
 	spawn(5)	// must wait for map loading to finish
 		if(radio_controller)
@@ -556,7 +554,7 @@
 
 
 					var/moved = step_towards(src, next)	// attempt to move
-					if(cell) cell.use(1)
+					if(cell) cell.use(movement_power_usage * CELLRATE)
 					if(moved)	// successful move
 						//world << "Successful move."
 						blockcount = 0
