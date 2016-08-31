@@ -366,10 +366,12 @@
 
 	if(!is_component_functioning("diagnosis unit"))
 		src << "\red Your self-diagnosis component isn't functioning."
+		return
 
 	var/datum/robot_component/CO = get_component("diagnosis unit")
 	if (!cell_use_power(CO.active_usage))
 		src << "\red Low Power."
+		return
 	var/dat = self_diagnosis()
 	src << browse(dat, "window=robotdiagnosis")
 
@@ -992,10 +994,6 @@
 /mob/living/silicon/robot/proc/cell_use_power(var/amount = 0)
 	// No cell inserted
 	if(!cell)
-		return 0
-
-	// Power cell is empty.
-	if(cell.charge == 0)
 		return 0
 
 	var/power_use = amount * CYBORG_POWER_USAGE_MULTIPLIER
