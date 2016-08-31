@@ -130,8 +130,7 @@
 // Remove all splints.
 /mob/living/carbon/human/proc/remove_splints(var/mob/living/user)
 	var/removed_splint = 0
-	for(var/organ in list(BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM))
-		var/obj/item/organ/external/o = get_organ(organ)
+	for(var/obj/item/organ/external/o in organs)
 		if (o && o.splinted)
 			var/obj/item/S = o.splinted
 			if(!istype(S) || S.loc != o) //can only remove splints that are actually worn on the organ (deals with hardsuit splints)
