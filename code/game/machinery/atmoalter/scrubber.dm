@@ -171,7 +171,7 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/update_icon()
 	src.overlays = 0
 
-	if(on && !(stat & (NOPOWER|BROKEN)))
+	if(on && !(stat && (NOPOWER|BROKEN)))
 		icon_state = "scrubber:1"
 	else
 		icon_state = "scrubber:0"
