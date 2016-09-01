@@ -158,7 +158,6 @@
 		"South of Second Deck" = /area/calypso_hangar/seconddeck,
 		"West of Third Deck" = /area/calypso_hangar/thirddeck,
 		"East of Fourth Deck" = /area/calypso_hangar/fourthdeck,
-		"Debris Field" = /area/calypso_hangar/salvage,
 		"Asteroid" = /area/calypso_hangar/mining,
 		"Away Site" = /area/calypso_hangar/away,
 		)
@@ -179,7 +178,6 @@
 		"West of Second Deck" = /area/guppy_hangar/seconddeck,
 		"South of Third Deck" = /area/guppy_hangar/thirddeck,
 		"North of Fourth Deck" = /area/guppy_hangar/fourthdeck,
-		"Debris Field" = /area/guppy_hangar/salvage,
 		"Asteroid" = /area/guppy_hangar/mining,
 		)
 
