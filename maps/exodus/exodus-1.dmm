@@ -1885,7 +1885,7 @@
 "aKm" = (/obj/structure/table/standard,/obj/item/weapon/storage/fancy/cigarettes{pixel_y = 2},/obj/machinery/alarm{dir = 4; pixel_x = -23; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/gateway)
 "aKn" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled,/area/gateway)
 "aKo" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/turf/simulated/floor/tiled,/area/gateway)
-"aKp" = (/obj/machinery/computer/arcade,/turf/simulated/floor/tiled,/area/crew_quarters/locker)
+"aKp" = (/obj/machinery/vending/fashionvend,/turf/simulated/floor/tiled,/area/crew_quarters/locker)
 "aKq" = (/obj/machinery/suit_cycler/mining,/turf/simulated/floor/tiled/dark,/area/ai_monitored/storage/eva)
 "aKr" = (/obj/structure/reagent_dispensers/watertank,/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled,/area/ai_monitored/storage/eva)
 "aKs" = (/obj/structure/reagent_dispensers/fueltank,/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/effect/floor_decal/industrial/warning{dir = 8},/turf/simulated/floor/tiled,/area/ai_monitored/storage/eva)
