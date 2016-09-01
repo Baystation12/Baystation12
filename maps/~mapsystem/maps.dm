@@ -1,6 +1,8 @@
-
 var/datum/map/using_map = new USING_MAP_DATUM
 var/list/all_maps = list()
+
+var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
+var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /hook/startup/proc/initialise_map_list()
 	for(var/type in typesof(/datum/map) - /datum/map)
@@ -59,9 +61,28 @@ var/list/all_maps = list()
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
+	var/flags = 0
+	var/evac_controller_type = /datum/evacuation_controller
+
 /datum/map/New()
 	..()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
 	if(!allowed_jobs)
 		allowed_jobs = subtypesof(/datum/job)
+
+// Used to apply various post-compile procedural effects to the map.
+/datum/map/proc/perform_map_generation()
+	return
+
+/datum/map/proc/refresh_mining_turfs()
+
+	set background = 1
+	set waitfor = 0
+
+	for(var/thing in mining_walls)
+		var/turf/simulated/mineral/M = thing
+		M.updateMineralOverlays()
+	for(var/thing in mining_floors)
+		var/turf/simulated/floor/asteroid/M = thing
+		M.updateMineralOverlays()

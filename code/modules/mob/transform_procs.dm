@@ -124,12 +124,6 @@
 
 	var/mob/living/silicon/robot/O = new /mob/living/silicon/robot( loc )
 
-	// cyborgs produced by Robotize get an automatic power cell
-	O.cell = new(O)
-	O.cell.maxcharge = 7500
-	O.cell.charge = 7500
-
-
 	O.gender = gender
 	O.invisibility = 0
 
@@ -145,9 +139,9 @@
 	O.loc = loc
 	O.job = "Cyborg"
 	if(O.mind.assigned_role == "Cyborg")
-		if(O.mind.role_alt_title == "Robot")
+		if(O.mind.role_alt_title == "Android")
 			O.mmi = new /obj/item/device/mmi/digital/posibrain(O)
-		else if(O.mind.role_alt_title == "Drone")
+		else if(O.mind.role_alt_title == "Robot")
 			O.mmi = new /obj/item/device/mmi/digital/robot(O)
 		else
 			O.mmi = new /obj/item/device/mmi(O)

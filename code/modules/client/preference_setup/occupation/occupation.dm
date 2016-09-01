@@ -17,6 +17,8 @@
 	if(!pref.job_low)
 		pref.job_low = list()
 	S["player_alt_titles"]	>> pref.player_alt_titles
+	S["char_branch"] 			>> pref.char_branch
+	S["char_rank"] 				>> pref.char_rank
 
 /datum/category_item/player_setup_item/occupation/save_character(var/savefile/S)
 	S["alternate_option"]	<< pref.alternate_option
@@ -24,6 +26,8 @@
 	S["job_medium"]	<< pref.job_medium
 	S["job_low"]	<< pref.job_low
 	S["player_alt_titles"]	<< pref.player_alt_titles
+	S["char_branch"] 			<< pref.char_branch
+	S["char_rank"] 				<< pref.char_rank
 
 /datum/category_item/player_setup_item/occupation/sanitize_character()
 	pref.alternate_option	= sanitize_integer(pref.alternate_option, 0, 2, initial(pref.alternate_option))
@@ -35,6 +39,11 @@
 		for(var/i in 1 to pref.job_low.len)
 			pref.job_low[i]  = sanitize(pref.job_low[i])
 	if(!pref.player_alt_titles) pref.player_alt_titles = new()
+
+	if(!pref.char_branch)
+		pref.char_branch = "Unset"
+	if(!pref.char_rank)
+		pref.char_rank = "Unset"
 
 	if(!job_master)
 		return
@@ -51,6 +60,11 @@
 	. = list()
 	. += "<tt><center>"
 	. += "<b>Choose occupation chances</b><br>Unavailable occupations are crossed out.<br>"
+	if(using_map.flags & MAP_HAS_BRANCH)
+		. += "Branch of Service: <a href='?src=\ref[src];char_branch=1'>[pref.char_branch]</a>	"
+	if(using_map.flags & MAP_HAS_RANK)
+		. += "Rank: <a href='?src=\ref[src];char_rank=1'>[pref.char_rank]</a>	"
+	. += "<br>"
 	. += "<table width='100%' cellpadding='1' cellspacing='0'><tr><td width='20%'>" // Table within a table for alignment, also allows you to easily add more columns.
 	. += "<table width='100%' cellpadding='1' cellspacing='0'>"
 	var/index = -1
@@ -75,6 +89,9 @@
 		. += "<tr bgcolor='[job.selection_color]'><td width='60%' align='right'>"
 		var/rank = job.title
 		lastJob = job
+		if(job.total_positions == 0 && job.spawn_positions == 0)
+			. += "<del>[rank]</del></td><td><b> \[UNAVAILABLE]</b></td></tr>"
+			continue
 		if(jobban_isbanned(user, rank))
 			. += "<del>[rank]</del></td><td><b> \[BANNED]</b></td></tr>"
 			continue
@@ -84,6 +101,9 @@
 			continue
 		if(job.minimum_character_age && user.client && (user.client.prefs.age < job.minimum_character_age))
 			. += "<del>[rank]</del></td><td> \[MINIMUM CHARACTER AGE: [job.minimum_character_age]]</td></tr>"
+			continue
+		if((job.allowed_branches && !(pref.char_branch in job.allowed_branches)) || (job.allowed_ranks && !(pref.char_rank in job.allowed_ranks)))
+			. += "<del>[rank]</del></td><td><b> \[NOT AVAILABLE]</b></td></tr>"
 			continue
 		if(("Assistant" in pref.job_low) && (rank != "Assistant"))
 			. += "<font color=grey>[rank]</font></td><td></td></tr>"

@@ -55,10 +55,6 @@
 	description_info = "This is a special 'supply' pipe, which does not connect to 'normal' pipes.  If you want to connect it, use \
 	a Universal Adapter pipe."
 
-//Insulated pipes
-/obj/machinery/atmospherics/pipe/simple/insulated
-	description_info = "This is completely useless, use a normal pipe." //Sorry, but it's true.
-
 //Four way manifolds
 /obj/machinery/atmospherics/pipe/manifold4w
 	description_info = "This is a four-way pipe."

@@ -74,18 +74,19 @@ var/const/FALLOFF_SOUNDS = 0.5
 
 /mob/proc/playsound_local(var/turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global)
 	if(!src.client || ear_deaf > 0)	return
-	soundin = get_sfx(soundin)
-
-	var/sound/S = sound(soundin)
-	S.wait = 0 //No queue
-	S.channel = 0 //Any channel
-	S.volume = vol
-	S.environment = -1
-	if (vary)
-		if(frequency)
-			S.frequency = frequency
-		else
-			S.frequency = get_rand_frequency()
+	var/sound/S = soundin
+	if(!istype(S))
+		soundin = get_sfx(soundin)
+		S = sound(soundin)
+		S.wait = 0 //No queue
+		S.channel = 0 //Any channel
+		S.volume = vol
+		S.environment = -1
+		if (vary)
+			if(frequency)
+				S.frequency = frequency
+			else
+				S.frequency = get_rand_frequency()
 
 	//sound volume falloff with pressure
 	var/pressure_factor = 1.0

@@ -11,13 +11,6 @@
 	var/list/restricted_accessory_slots
 	var/list/starting_accessories
 	var/blood_overlay_type = "uniformblood"
-	/*
-		Sprites used when the clothing item is refit. This is done by setting icon_override.
-		For best results, if this is set then sprite_sheets should be null and vice versa, but that is by no means necessary.
-		Ideally, sprite_sheets_refit should be used for "hard" clothing items that can't change shape very well to fit the wearer (e.g. helmets, hardsuits),
-		while sprite_sheets should be used for "flexible" clothing items that do not need to be refitted (e.g. vox wearing jumpsuits).
-	*/
-	var/list/sprite_sheets_refit = null
 
 //Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
@@ -25,6 +18,9 @@
 
 /obj/item/clothing/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
+
+	if(slot == slot_l_hand_str || slot == slot_r_hand_str)
+		return ret
 
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
@@ -84,15 +80,9 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Human", "Skrell")	//humanoid bodytypes
-			species_restricted = list("Human", "Skrell") //skrell/humans can wear each other's suits
+			species_restricted = list("Human", "Skrell", "Machine") //skrell/humans/machines can wear each other's suits
 		else
 			species_restricted = list(target_species)
-
-	//Set icon
-	if (sprite_sheets_refit && (target_species in sprite_sheets_refit))
-		icon_override = sprite_sheets_refit[target_species]
-	else
-		icon_override = initial(icon_override)
 
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
 		icon = sprite_sheets_obj[target_species]
@@ -106,16 +96,11 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Skrell")
-			species_restricted = list("Human", "Skrell") //skrell helmets fit humans too
-
+			species_restricted = list("Human", "Skrell", "Machine") //skrell helmets fit humans too
+		if("Human")
+			species_restricted = list("Human", "Machine") //human helmets fit IPCs too
 		else
 			species_restricted = list(target_species)
-
-	//Set icon
-	if (sprite_sheets_refit && (target_species in sprite_sheets_refit))
-		icon_override = sprite_sheets_refit[target_species]
-	else
-		icon_override = initial(icon_override)
 
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
 		icon = sprite_sheets_obj[target_species]
@@ -406,6 +391,14 @@ BLIND     // can't see anything
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_wear_mask()
+
+/obj/item/clothing/mask/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(item_state_slots && item_state_slots[slot])
+		ret.icon_state = item_state_slots[slot]
+	else
+		ret.icon_state = icon_state
+	return ret
 
 /obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 	return

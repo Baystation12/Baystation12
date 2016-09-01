@@ -2,7 +2,7 @@
 
 /datum/controller/process/machinery/setup()
 	name = "machinery"
-	schedule_interval = 20 // every 2 seconds
+	schedule_interval = MACHINERY_TICKRATE SECONDS // See code/__defines/machinery.dm for definition of MACHINERY_TICKRATE.
 	start_delay = 12
 
 /datum/controller/process/machinery/doWork()

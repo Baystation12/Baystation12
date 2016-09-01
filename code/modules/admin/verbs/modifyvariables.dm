@@ -534,7 +534,7 @@ var/list/VVckey_edit = list("key", "ckey")
 			return
 
 		if("restore to default")
-			O.vars[variable] = initial(O.vars[variable])
+			var_value = initial(O.vars[variable])
 
 		if("edit referenced object")
 			return .(O.vars[variable])
@@ -542,7 +542,7 @@ var/list/VVckey_edit = list("key", "ckey")
 		if("text")
 			var/var_new = input("Enter new text:","Text",O.vars[variable]) as null|text
 			if(var_new==null) return
-			O.vars[variable] = var_new
+			var_value = var_new
 
 		if("num")
 			if(variable=="light_range")
@@ -558,47 +558,103 @@ var/list/VVckey_edit = list("key", "ckey")
 				if((O.vars[variable] < 2) && (var_new == 2))//Kill he
 					var/mob/M = O
 					M.switch_from_living_to_dead_mob_list()
-				O.vars[variable] = var_new
+				var_value = var_new
 			else
 				var/var_new =  input("Enter new number:","Num",O.vars[variable]) as null|num
 				if(var_new==null) return
-				O.vars[variable] = var_new
+				var_value = var_new
 
 		if("type")
 			var/var_new = input("Enter type:","Type",O.vars[variable]) as null|anything in typesof(/obj,/mob,/area,/turf)
 			if(var_new==null) return
-			O.vars[variable] = var_new
+			var_value = var_new
 
 		if("reference")
 			var/var_new = input("Select reference:","Reference",O.vars[variable]) as null|mob|obj|turf|area in world
 			if(var_new==null) return
-			O.vars[variable] = var_new
+			var_value = var_new
 
 		if("mob reference")
 			var/var_new = input("Select reference:","Reference",O.vars[variable]) as null|mob in world
 			if(var_new==null) return
-			O.vars[variable] = var_new
+			var_value = var_new
 
 		if("file")
 			var/var_new = input("Pick file:","File",O.vars[variable]) as null|file
 			if(var_new==null) return
-			O.vars[variable] = var_new
+			var_value = var_new
 
 		if("icon")
 			var/var_new = input("Pick icon:","Icon",O.vars[variable]) as null|icon
 			if(var_new==null) return
-			O.vars[variable] = var_new
+			var_value = var_new
 
 		if("json")
 			var/json_str = input("JSON string", "JSON", json_encode(O.vars[variable])) as null | message
 			try
-				O.vars[variable] = json_decode(json_str)
+				var_value = json_decode(json_str)
 			catch
 				return
 
 		if("marked datum")
-			O.vars[variable] = holder.marked_datum()
+			var_value = holder.marked_datum()
 
-	world.log << "### VarEdit by [src]: [O.type] [variable]=[html_encode("[O.vars[variable]]")]"
-	log_admin("[key_name(src)] modified [original_name]'s [variable] to [O.vars[variable]]")
-	message_admins("[key_name_admin(src)] modified [original_name]'s [variable] to [O.vars[variable]]")
+	var/old_value = O.vars[variable]
+	if(!special_set_vv_var(O, variable, var_value, src))
+		O.vars[variable] = var_value
+
+	var/new_value = O.vars[variable]
+	if(old_value == new_value)
+		return
+
+	world.log << "### VarEdit by [src]: [O.type] [variable]=[html_encode("[new_value]")]"
+	log_and_message_admins("modified [original_name]'s [variable] from '[old_value]' to '[new_value]'")
+
+/client
+	var/static/vv_set_handlers
+
+/client/proc/special_set_vv_var(var/datum/O, variable, var_value, client)
+	if(!vv_set_handlers)
+		vv_set_handlers = init_subtypes(/decl/vv_set_handler)
+	for(var/vv_handler in vv_set_handlers)
+		var/decl/vv_set_handler/sh = vv_handler
+		if(sh.handle_set_var(O, variable, var_value, client))
+			return TRUE
+	return FALSE
+
+/decl/vv_set_handler/proc/handle_set_var(O, variable, var_value)
+	return
+
+/decl/vv_set_handler/location_hander/handle_set_var(O, variable, var_value, client)
+	if(!ismovable(O))
+		return
+	var/atom/movable/AM = O
+	if(variable == "loc")
+		. = TRUE
+		if(istype(var_value, /atom) || isnull(var_value) || var_value == "")	// Proper null or empty string is fine, 0 is not
+			AM.forceMove(var_value)
+		else
+			client << "<span class='warning'>May only assign null or /atom types to loc.</span>"
+	else if(variable == "x" || variable == "y" || variable == "z")
+		. = TRUE
+		if(istext(var_value))
+			var_value = text2num(var_value)
+		if(!isnum(var_value))
+			client << "<span class='warning'>May only assign numerals to x/y/z.</span>"
+			return
+		var/x = AM.x
+		var/y = AM.y
+		var/z = AM.z
+		switch(variable)
+			if("x")
+				x = var_value
+			if("y")
+				y = var_value
+			if("z")
+				z = var_value
+
+		var/turf/T = locate(x,y,z)
+		if(T)
+			AM.forceMove(T)
+		else
+			client << "<span class='warning'>Unable to locate a turf at [x]-[y]-[z].</span>"

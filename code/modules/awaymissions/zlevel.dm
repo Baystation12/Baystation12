@@ -2,6 +2,9 @@ proc/createRandomZlevel()
 	if(awaydestinations.len)	//crude, but it saves another var!
 		return
 
+	if(!fexists("maps/RandomZLevels/fileList.txt"))
+		return
+
 	var/list/potentialRandomZlevels = list()
 	admin_notice("\red \b Searching for away missions...", R_DEBUG)
 	var/list/Lines = file2list("maps/RandomZLevels/fileList.txt")

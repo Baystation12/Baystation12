@@ -13,8 +13,8 @@ Buildable meters
 #define PIPE_MVALVE				8
 #define PIPE_PUMP				9
 #define PIPE_SCRUBBER			10
-#define PIPE_INSULATED_STRAIGHT	11
-#define PIPE_INSULATED_BENT		12
+//#define unsed	11
+//#define unsed	12
 #define PIPE_GAS_FILTER			13
 #define PIPE_GAS_MIXER			14
 #define PIPE_PASSIVE_GATE       15
@@ -83,8 +83,6 @@ Buildable meters
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/heat_exchanging))
 			src.pipe_type = PIPE_HE_STRAIGHT + is_bent
 			connect_types = CONNECT_TYPE_HE
-		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/insulated))
-			src.pipe_type = PIPE_INSULATED_STRAIGHT + is_bent
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/visible/supply) || istype(make_from, /obj/machinery/atmospherics/pipe/simple/hidden/supply))
 			src.pipe_type = PIPE_SUPPLY_STRAIGHT + is_bent
 			connect_types = CONNECT_TYPE_SUPPLY
@@ -326,7 +324,7 @@ Buildable meters
 
 	src.set_dir(turn(src.dir, -90))
 
-	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_INSULATED_STRAIGHT, PIPE_MVALVE))
+	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_MVALVE))
 		if(dir==2)
 			set_dir(1)
 		else if(dir==8)
@@ -338,10 +336,10 @@ Buildable meters
 
 /obj/item/pipe/Move()
 	..()
-	if ((pipe_type in list (PIPE_SIMPLE_BENT, PIPE_SUPPLY_BENT, PIPE_SCRUBBERS_BENT, PIPE_HE_BENT, PIPE_INSULATED_BENT)) \
+	if ((pipe_type in list (PIPE_SIMPLE_BENT, PIPE_SUPPLY_BENT, PIPE_SCRUBBERS_BENT, PIPE_HE_BENT)) \
 		&& (src.dir in cardinal))
 		src.set_dir(src.dir|turn(src.dir, 90))
-	else if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_INSULATED_STRAIGHT, PIPE_MVALVE))
+	else if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_MVALVE))
 		if(dir==2)
 			set_dir(1)
 		else if(dir==8)
@@ -359,7 +357,6 @@ Buildable meters
 
 	switch(pipe_type)
 		if(	PIPE_SIMPLE_STRAIGHT, \
-			PIPE_INSULATED_STRAIGHT, \
 			PIPE_HE_STRAIGHT, \
 			PIPE_JUNCTION ,\
 			PIPE_PUMP ,\
@@ -371,7 +368,7 @@ Buildable meters
 			PIPE_UNIVERSAL, \
 		)
 			return dir|flip
-		if(PIPE_SIMPLE_BENT, PIPE_INSULATED_BENT, PIPE_HE_BENT, PIPE_SUPPLY_BENT, PIPE_SCRUBBERS_BENT)
+		if(PIPE_SIMPLE_BENT, PIPE_HE_BENT, PIPE_SUPPLY_BENT, PIPE_SCRUBBERS_BENT)
 			return dir //dir|acw
 		if(PIPE_CONNECTOR,PIPE_UVENT,PIPE_SCRUBBER,PIPE_HEAT_EXCHANGE)
 			return dir
@@ -435,7 +432,7 @@ Buildable meters
 		return ..()
 	if (!isturf(src.loc))
 		return 1
-	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_HE_STRAIGHT, PIPE_INSULATED_STRAIGHT, PIPE_MVALVE))
+	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_HE_STRAIGHT, PIPE_MVALVE))
 		if(dir==2)
 			set_dir(1)
 		else if(dir==8)
@@ -893,24 +890,6 @@ Buildable meters
 				S.node.initialize()
 				S.node.build_network()
 
-		if(PIPE_INSULATED_STRAIGHT, PIPE_INSULATED_BENT)
-			var/obj/machinery/atmospherics/pipe/simple/insulated/P = new( src.loc )
-			P.set_dir(src.dir)
-			P.initialize_directions = pipe_dir
-			var/turf/T = P.loc
-			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
-			if (deleted(P))
-				usr << pipefailtext
-				return 1
-			P.build_network()
-			if (P.node1)
-				P.node1.initialize()
-				P.node1.build_network()
-			if (P.node2)
-				P.node2.initialize()
-				P.node2.build_network()
-
 		if(PIPE_MTVALVE)		//manual t-valve
 			var/obj/machinery/atmospherics/tvalve/V = new(src.loc)
 			V.set_dir(dir)
@@ -1185,8 +1164,6 @@ Buildable meters
 #undef PIPE_MVALVE
 #undef PIPE_PUMP
 #undef PIPE_SCRUBBER
-#undef PIPE_INSULATED_STRAIGHT
-#undef PIPE_INSULATED_BENT
 #undef PIPE_GAS_FILTER
 #undef PIPE_GAS_MIXER
 #undef PIPE_PASSIVE_GATE

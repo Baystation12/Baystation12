@@ -31,7 +31,7 @@
 	var/move_delay = 1	//set this to limit the speed of the vehicle
 
 	var/obj/item/weapon/cell/cell
-	var/charge_use = 5	//set this to adjust the amount of power the vehicle uses per move
+	var/charge_use = 200 //W
 
 	var/atom/movable/load		//all vehicles can take a load, since they should all be a least drivable
 	var/load_item_visible = 1	//set if the loaded item should be overlayed on the vehicle sprite
@@ -61,7 +61,7 @@
 		anchored = init_anc
 
 		if(on && powered)
-			cell.use(charge_use)
+			cell.use(charge_use * CELLRATE)
 
 		//Dummy loads do not have to be moved as they are just an overlay
 		//See load_object() proc in cargo_trains.dm for an example
@@ -156,6 +156,11 @@
 
 /obj/vehicle/attack_ai(mob/user as mob)
 	return
+
+/obj/vehicle/unbuckle_mob(mob/user)
+	. = ..(user)
+	if(load == .)
+		unload(.)
 
 //-------------------------------------------
 // Vehicle procs

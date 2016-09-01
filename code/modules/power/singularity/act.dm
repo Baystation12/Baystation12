@@ -3,7 +3,7 @@
 /atom/proc/singularity_act()
 	return
 
-/atom/proc/singularity_pull()
+/atom/proc/singularity_pull(S, current_size)
 	return
 
 /mob/living/singularity_act()
@@ -11,19 +11,20 @@
 	gib()
 	return 20
 
-/mob/living/singularity_pull(S)
+/mob/living/singularity_pull(S, current_size)
 	step_towards(src, S)
+	apply_effect(current_size * 3, IRRADIATE, blocked = getarmor(null, "rad"))
 
 /mob/living/carbon/human/singularity_pull(S, current_size)
 	if(current_size >= STAGE_THREE)
 		var/list/handlist = list(l_hand, r_hand)
 		for(var/obj/item/hand in handlist)
 			if(prob(current_size*5) && hand.w_class >= ((11-current_size)/2) && unEquip(hand))
-				step_towards(hand, src)
-				src << "<span class = 'warning'>The [S] pulls \the [hand] from your grip!</span>"
-	apply_effect(current_size * 3, IRRADIATE, blocked = getarmor(null, "rad"))
-	if(shoes)
-		if(shoes.item_flags & NOSLIP) return 0
+				step_towards(hand, S)
+				src << "<span class = 'warning'>\The [S] pulls \the [hand] from your grip!</span>"
+		if(!lying && (!shoes || !(shoes.item_flags & NOSLIP)) && (!species || !(species.flags & NOSLIP)) && prob(current_size*5))
+			src << "<span class='danger'>A strong gravitational force slams you to the ground!</span>"
+			Weaken(current_size)
 	..()
 
 /obj/singularity_act()
@@ -61,7 +62,7 @@
 	return
 
 /obj/machinery/power/supermatter/shard/singularity_act()
-	src.loc = null
+	src.forceMove(null)
 	qdel(src)
 	return 5000
 
@@ -76,7 +77,7 @@
 	SetUniversalState(/datum/universal_state/supermatter_cascade)
 	log_admin("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
 	message_admins("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
-	src.loc = null
+	src.forceMove(null)
 	qdel(src)
 	return 50000
 
