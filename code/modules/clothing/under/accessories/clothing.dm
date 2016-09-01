@@ -29,6 +29,19 @@
 	icon_state = "checkered_jacket"
 
 /obj/item/clothing/accessory/hawaii
-	name = "flower shirt"
+	name = "flower-pattern shirt"
 	desc = "You probably need some welder googles to look at this."
 	icon_state = "hawaii"
+
+/obj/item/clothing/accessory/hawaii/red
+	icon_state = "hawaii2"
+
+/obj/item/clothing/accessory/hawaii/random
+	name = "flower-pattern shirt"
+
+/obj/item/clothing/accessory/hawaii/random/New()
+	if(prob(50))
+		icon_state = "hawaii2"
+	var/angle = rand(-11,12)*15
+	color = color_rotation(angle)
+	desc += "Turned by [angle]."
