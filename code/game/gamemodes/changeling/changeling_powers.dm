@@ -280,14 +280,17 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 /mob/proc/handle_changeling_transform(var/datum/absorbed_dna/chosen_dna)
 	src.visible_message("<span class='warning'>[src] transforms!</span>")
 
+	src.dna = chosen_dna.dna
+	src.real_name = chosen_dna.name
+	src.flavor_text = ""
+
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 		var/newSpecies = chosen_dna.speciesName
 		H.set_species(newSpecies,1)
+		H.b_type = chosen_dna.dna.b_type
+		H.sync_organ_dna()
 
-	src.dna = chosen_dna.dna
-	src.real_name = chosen_dna.name
-	src.flavor_text = ""
 	domutcheck(src, null)
 	src.UpdateAppearance()
 
