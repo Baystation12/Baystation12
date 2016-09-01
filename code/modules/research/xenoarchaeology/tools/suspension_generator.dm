@@ -309,6 +309,7 @@
 
 	src.visible_message("\blue \icon[src] [src] deactivates with a gentle shudder.")
 	qdel(suspension_field)
+	suspension_field = null
 	icon_state = "suspension2"
 
 /obj/machinery/suspension_gen/Destroy()
