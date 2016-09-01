@@ -82,3 +82,7 @@
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/accessory/storage/webbing
 	cost = 2
+
+/datum/gear/accessory/hawaii
+	display_name = "hawaii shirt"
+	path = /obj/item/clothing/accessory/hawaii

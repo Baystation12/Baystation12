@@ -27,3 +27,8 @@
 	name = "checkered suit jacket"
 	desc = "Lucky suit jacket."
 	icon_state = "checkered_jacket"
+
+/obj/item/clothing/accessory/hawaii
+	name = "flower shirt"
+	desc = "You probably need some welder googles to look at this."
+	icon_state = "hawaii"
