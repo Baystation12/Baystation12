@@ -8,7 +8,7 @@
 	w_class = 4
 	icon = 'icons/obj/suitcooler.dmi'
 	icon_state = "suitcooler0"
-	item_state = "welderpack"			// A placeholder icon, until someone gets to make an actual one.
+	item_state = "coolingpack"			// beautiful codersprites until someone makes a prettier one.
 	slot_flags = SLOT_BACK
 
 	//copied from tank.dm
@@ -17,15 +17,20 @@
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 4
+	action_button_name = "Toggle Heatsink"
 
+	matter = list("steel" = 15000, "glass" = 3500)
 	origin_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 2)
 
-	var/on = 0							//is it turned on?
-	var/cover_open = 0					//is the cover open?
+	var/on = 0								//is it turned on?
+	var/cover_open = 0						//is the cover open?
 	var/obj/item/weapon/cell/cell
-	var/max_cooling = 12				//in degrees per second - probably don't need to mess with heat capacity here
-	var/charge_consumption = 3			//charge per second at max_cooling
+	var/max_cooling = 12					// in degrees per second - probably don't need to mess with heat capacity here
+	var/charge_consumption = 2 KILOWATTS	// energy usage at full power
 	var/thermostat = T20C
+
+/obj/item/device/suit_cooling_unit/ui_action_click()
+	toggle(usr)
 
 /obj/item/device/suit_cooling_unit/New()
 	processing_objects |= src
@@ -50,11 +55,11 @@
 
 	H.bodytemperature -= temp_adj
 
-	cell.use(charge_usage)
+	cell.use(charge_usage * CELLRATE)
 	update_icon()
 
 	if(cell.charge <= 0)
-		turn_off()
+		turn_off(1)
 
 // Checks whether the cooling unit is being worn on the back/suit slot.
 // That way you can't carry it in your hands while it's running to cool yourself down.
@@ -74,14 +79,12 @@
 	on = 1
 	update_icon()
 
-/obj/item/device/suit_cooling_unit/proc/turn_off()
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.show_message("\The [src] clicks and whines as it powers down.", 2)	//let them know in case it's run out of power.
+/obj/item/device/suit_cooling_unit/proc/turn_off(var/failed)
+	if(failed) visible_message("\The [src] clicks and whines as it powers down.")
 	on = 0
 	update_icon()
 
-/obj/item/device/suit_cooling_unit/attack_self(mob/user as mob)
+/obj/item/device/suit_cooling_unit/attack_self(var/mob/user)
 	if(cover_open && cell)
 		if(ishuman(user))
 			user.put_in_hands(cell)
@@ -91,17 +94,19 @@
 		cell.add_fingerprint(user)
 		cell.update_icon()
 
-		user << "You remove the [src.cell]."
+		user << "You remove \the [src.cell]."
 		src.cell = null
 		update_icon()
 		return
 
+	toggle(user)
+
+/obj/item/device/suit_cooling_unit/proc/toggle(var/mob/user)
 	if(on)
 		turn_off()
 	else
 		turn_on()
-		if (on)
-			user << "You switch on the [src]."
+	user << "<span class='notice'>You switch \the [src] [on ? "on" : "off"].</span>"
 
 /obj/item/device/suit_cooling_unit/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/screwdriver))

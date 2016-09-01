@@ -361,7 +361,9 @@ datum/hud/New(mob/owner)
 	update_action_buttons()
 
 /mob/proc/add_click_catcher()
-	client.screen += client.void
+	if(!client.void)
+		client.void = create_click_catcher()
+	client.screen |= client.void
 
 /mob/new_player/add_click_catcher()
 	return

@@ -138,7 +138,7 @@ var/list/admin_verbs_spawn = list(
 	/client/proc/spawn_chemdisp_cartridge
 	)
 var/list/admin_verbs_server = list(
-	/datum/admins/proc/capture_map,
+	/datum/admins/proc/capture_map_part,
 	/client/proc/Set_Holiday,
 	/client/proc/ToRban,
 	/datum/admins/proc/startnow,
@@ -196,7 +196,9 @@ var/list/admin_verbs_debug = list(
 	/client/proc/dsay,
 	/datum/admins/proc/run_unit_test,
 	/turf/proc/view_chunk,
-	/turf/proc/update_chunk
+	/turf/proc/update_chunk,
+	/datum/admins/proc/capture_map,
+	/datum/admins/proc/view_runtimes
 	)
 
 var/list/admin_verbs_paranoid_debug = list(
@@ -802,8 +804,8 @@ var/list/admin_verbs_mentor = list(
 		return
 
 	if(alert("Switch from code [get_security_level()] to code [sec_level]?","Change security level?","Yes","No") == "Yes")
+		log_and_message_admins("changed the security level from code [get_security_level()] to code [sec_level].")
 		set_security_level(sec_level)
-		log_admin("[key_name(usr)] changed the security level to code [sec_level].")
 
 
 //---- bs12 verbs ----
@@ -871,12 +873,15 @@ var/list/admin_verbs_mentor = list(
 	if(new_fstyle)
 		M.f_style = new_fstyle
 
-	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female")
+	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female", "Neuter")
 	if (new_gender)
 		if(new_gender == "Male")
 			M.gender = MALE
-		else
+		else if (new_gender == "Female")
 			M.gender = FEMALE
+		else
+			M.gender = NEUTER
+
 	M.update_hair()
 	M.update_body()
 	M.check_dna(M)

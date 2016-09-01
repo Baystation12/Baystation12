@@ -180,11 +180,17 @@ var/global/photo_count = 0
 					holding += " and \a [A.r_hand]"
 				else
 					holding = "They are holding \a [A.r_hand]"
+		var/max
+		var/mob/living/carbon/human/H = A
+		if(istype(H))
+			max = H.species.total_health
+		else
+			max = A.maxHealth
 
 		if(!mob_detail)
-			mob_detail = "You can see [A] on the photo[A:health < 75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]. "
+			mob_detail = "You can see [A] on the photo[(A:health / max) < 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]. "
 		else
-			mob_detail += "You can also see [A] on the photo[A:health < 75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]."
+			mob_detail += "You can also see [A] on the photo[(A:health / max) < 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]."
 	return mob_detail
 
 /obj/item/device/camera/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)

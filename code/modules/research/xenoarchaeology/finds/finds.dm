@@ -353,11 +353,9 @@
 				new_item.icon_state = "egun[rand(1,6)]"
 				new_gun.desc = "This is an antique energy weapon, you're not sure if it will fire or not."
 
-				//5% chance to explode when first fired
 				//10% chance to have an unchargeable cell
 				//15% chance to gain a random amount of starting energy, otherwise start with an empty cell
-				if(prob(5))
-					new_gun.power_supply.rigged = 1
+
 				if(prob(10))
 					new_gun.power_supply.maxcharge = 0
 				if(prob(15))

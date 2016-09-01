@@ -9,8 +9,10 @@
 //	heat_capacity = 700000 No.
 
 /turf/space/New()
+	if(icon_state == "0")
+		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
 	if(!istype(src, /turf/space/transit))
-		icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
+		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
 	update_starlight()
 	..()
 
@@ -181,3 +183,8 @@
 
 /turf/space/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
 	return ..(N, tell_universe, 1)
+
+//Bluespace turfs for shuttles and possible future transit use
+/turf/space/bluespace
+	name = "bluespace"
+	icon_state = "bluespace"

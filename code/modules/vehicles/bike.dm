@@ -35,7 +35,7 @@
 
 /obj/vehicle/bike/verb/toggle()
 	set name = "Toggle Engine"
-	set category = "Vehicle"
+	set category = "Object"
 	set src in view(0)
 
 	if(usr.incapacitated()) return
@@ -50,7 +50,7 @@
 
 /obj/vehicle/bike/verb/kickstand()
 	set name = "Toggle Kickstand"
-	set category = "Vehicle"
+	set category = "Object"
 	set src in view(0)
 
 	if(usr.incapacitated()) return

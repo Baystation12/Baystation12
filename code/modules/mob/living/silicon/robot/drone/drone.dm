@@ -7,7 +7,7 @@ var/list/mob_hat_cache = list()
 		t_state = hat.item_state
 	var/key = "[t_state]_[offset_x]_[offset_y]"
 	if(!mob_hat_cache[key])            // Not ideal as there's no guarantee all hat icon_states
-		var/t_icon = INV_HEAD_DEF_ICON // are unique across multiple dmis, but whatever.
+		var/t_icon = default_onmob_icons[slot_head_str] // are unique across multiple dmis, but whatever.
 		if(hat.icon_override)
 			t_icon = hat.icon_override
 		else if(hat.item_icons && (slot_head_str in hat.item_icons))
@@ -30,7 +30,7 @@ var/list/mob_hat_cache = list()
 	universal_understand = 1
 	gender = NEUTER
 	pass_flags = PASSTABLE
-	braintype = "Robot"
+	braintype = "Drone"
 	lawupdate = 0
 	density = 1
 	req_access = list(access_engine, access_robotics)
@@ -50,7 +50,6 @@ var/list/mob_hat_cache = list()
 
 	//Used for self-mailing.
 	var/mail_destination = ""
-	var/obj/machinery/drone_fabricator/master_fabricator
 	var/law_type = /datum/ai_laws/drone
 	var/module_type = /obj/item/weapon/robot_module/drone
 	var/obj/item/hat
@@ -58,6 +57,41 @@ var/list/mob_hat_cache = list()
 	var/hat_y_offset = -13
 
 	holder_type = /obj/item/weapon/holder/drone
+
+/mob/living/silicon/robot/drone/New()
+	..()
+	moved_event.register(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
+
+/mob/living/silicon/robot/drone/Destroy()
+	if(hat)
+		hat.dropInto(loc)
+		hat = null
+	moved_event.unregister(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
+	. = ..()
+
+/mob/living/silicon/robot/drone/proc/on_moved(var/atom/movable/am, var/turf/old_loc, var/turf/new_loc)
+	old_loc = get_turf(old_loc)
+	new_loc = get_turf(new_loc)
+
+	if(!(old_loc && new_loc)) // Allows inventive admins to move drones between non-adjacent Z-levels by moving them to null space first I suppose
+		return
+	var/z_diff = new_loc.z - old_loc.z
+	if(z_diff == 0)
+		return
+	else if(z_diff > 0)  // New is potentially above old
+		var/turf/above_turf = GetAbove(old_loc)
+		while(above_turf && above_turf.z < new_loc.z)
+			above_turf = GetAbove(above_turf)
+		if(above_turf == new_loc)
+			return
+	else if(z_diff < 0) // New is potentially below old
+		var/turf/below_turf = GetBelow(old_loc)
+		while(below_turf && below_turf.z > new_loc.z)
+			below_turf = GetBelow(below_turf)
+		if(below_turf == new_loc)
+			return
+	// None of the tests passed, good bye
+	self_destruct()
 
 /mob/living/silicon/robot/drone/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	if(!istype(possessor) || !possessor.client || !possessor.ckey)
@@ -87,11 +121,6 @@ var/list/mob_hat_cache = list()
 	qdel(possessor)
 	return 1
 
-/mob/living/silicon/robot/drone/Destroy()
-	if(hat)
-		hat.loc = get_turf(src)
-	..()
-
 /mob/living/silicon/robot/drone/construction
 	icon_state = "constructiondrone"
 	law_type = /datum/ai_laws/construction_drone
@@ -109,10 +138,6 @@ var/list/mob_hat_cache = list()
 	remove_language("Robot Talk")
 	add_language("Robot Talk", 0)
 	add_language("Drone Talk", 1)
-
-	//They are unable to be upgraded, so let's give them a bit of a better battery.
-	cell.maxcharge = 10000
-	cell.charge = 10000
 
 	// NO BRAIN.
 	mmi = null
@@ -263,16 +288,18 @@ var/list/mob_hat_cache = list()
 //Standard robots use config for crit, which is somewhat excessive for these guys.
 //Drones killed by damage will gib.
 /mob/living/silicon/robot/drone/handle_regular_status_updates()
-	var/turf/T = get_turf(src)
-	if((health <= -35 || (master_fabricator && (T && T.z != master_fabricator.z))) && src.stat != DEAD)
-		timeofdeath = world.time
-		death() //Possibly redundant, having trouble making death() cooperate.
-		gib()
+	if(health <= -35 && src.stat != DEAD)
+		self_destruct()
 		return
 	if(health <= 0 && src.stat != DEAD)
 		death()
 		return
 	..()
+
+/mob/living/silicon/robot/drone/self_destruct()
+	timeofdeath = world.time
+	death() //Possibly redundant, having trouble making death() cooperate.
+	gib()
 
 //DRONE MOVEMENT.
 /mob/living/silicon/robot/drone/slip_chance(var/prob_slip)
@@ -323,9 +350,9 @@ var/list/mob_hat_cache = list()
 	welcome_drone()
 
 /mob/living/silicon/robot/drone/proc/welcome_drone()
-	src << "<b>You are a maintenance drone, a tiny-brained robotic repair machine</b>."
-	src << "You have no individual will, no personality, and no drives or urges other than your laws."
-	src << "Remember,  you are <b>lawed against interference with the crew</b>. Also remember, <b>you DO NOT take orders from the AI.</b>"
+	src << "<b>You are a maintenance drone, a tiny-brained robotic repair machine</b>. You have no individual will, no personality, and no drives or urges other than your laws."
+	src << "Remember, you are <b>lawed against interference with the crew</b>, you should leave the area if your actions are interfering, or that the crew does not want your presence."
+	src << "You are <b>not required to follow orders from anyone; not the AI, not humans, and not other synthetics.</b>. However, you should respond to presence requests issued from drone controls consoles."
 	src << "Use <b>say ;Hello</b> to talk to other drones and <b>say Hello</b> to speak silently to your nearby fellows."
 
 /mob/living/silicon/robot/drone/add_robot_verbs()

@@ -138,12 +138,12 @@
 	return
 
 /obj/item/weapon/paper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(user.zone_sel.selecting == "eyes")
+	if(user.zone_sel.selecting == BP_EYES)
 		user.visible_message("<span class='notice'>You show the paper to [M]. </span>", \
 			"<span class='notice'> [user] holds up a paper and shows it to [M]. </span>")
 		M.examinate(src)
 
-	else if(user.zone_sel.selecting == "mouth") // lipstick wiping
+	else if(user.zone_sel.selecting == BP_MOUTH) // lipstick wiping
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H == user)
@@ -531,3 +531,19 @@
 
 /obj/item/weapon/paper/crumpled/bloody
 	icon_state = "scrap_bloodied"
+
+/obj/item/weapon/paper/exodus_armory
+	name = "armory inventory"
+	info = "<center><big><B>NSS Exodus</B></big><BR> <small>Armoury Inventory</small></center> <HR> <HR> <BR> <B>Weaponry</B><BR> 4x energy gun(s)<BR> 4x laser gun(s)<BR> 2x ion rifle(s)<BR> 4x .45 pistol(s) (.45 flash)<BR> 2x shotgun(s) (beanbag shell)<BR> 2x box(es) of beanbag shells <HR> <B>Armour</B><BR> 2x ballistic suit(s)<BR> 2x abalative suit(s)<BR> 4x heavy armored vest(s)<BR> 1x Biohazard Suit(s)<BR> 1x Bomb Suit(s) <HR> <B>Auxiliary Equipment</B><BR> 6x Gasmask(s)<BR> 3x papperspray(s)<BR> 2x box(es) of flashbangs<BR> 2x box(es) of pepperspray grenades<BR> 2x box(es) of spare handcuffs<BR> 1x box(es) of R.O.B.U.S.T. Cartridges <HR> <B>Riot Equipment</B><BR> 3x stunbaton(s)<BR> 3x riot suit(s)<BR> 3x riot shield(s)<HR> <B>Implants</B><BR> 1x boxed tracking implant kit(s)<BR> 1x boxed chemical implant kit(s) <HR> <B>Defensive Equipment</B><BR> 4x deployable barrier(s)<BR> 3x Portable Flasher(s) <HR> <B>Other</B><BR> 1x holobadge box(es) <HR> <B><center>Warden's's Signature:</B> </center> <HR>"
+
+/obj/item/weapon/paper/exodus_cmo
+	name = "outgoing CMO's notes"
+	info = "<I><center>To the incoming CMO of Exodus:</I></center><BR><BR>I wish you and your crew well. Do take note:<BR><BR><BR>The Medical Emergency Red Phone system has proven itself well. Take care to keep the phones in their designated places as they have been optimised for broadcast. The two handheld green radios (I have left one in this office, and one near the Emergency Entrance) are free to be used. The system has proven effective at alerting Medbay of important details, especially during power outages.<BR><BR>I think I may have left the toilet cubicle doors shut. It might be a good idea to open them so the staff and patients know they are not engaged.<BR><BR>The new syringe gun has been stored in secondary storage. I tend to prefer it stored in my office, but 'guidelines' are 'guidelines'.<BR><BR>Also in secondary storage is the grenade equipment crate. I've just realised I've left it open - you may wish to shut it.<BR><BR>There were a few problems with their installation, but the Medbay Quarantine shutters should now be working again  - they lock down the Emergency and Main entrances to prevent travel in and out. Pray you shan't have to use them.<BR><BR>The new version of the Medical Diagnostics Manual arrived. I distributed them to the shelf in the staff break room, and one on the table in the corner of this room.<BR><BR>The exam/triage room has the walking canes in it. I'm not sure why we'd need them - but there you have it.<BR><BR>Emergency Cryo bags are beside the emergency entrance, along with a kit.<BR><BR>Spare paper cups for the reception are on the left side of the reception desk.<BR><BR>I've fed Runtime. She should be fine.<BR><BR><BR><center>That should be all. Good luck!</center>"
+
+/obj/item/weapon/paper/exodus_bartender
+	name = "shotgun permit"
+	info = "This permit signifies that the Bartender is permitted to posess this firearm in the bar, and ONLY the bar. Failure to adhere to this permit will result in confiscation of the weapon and possibly arrest."
+
+/obj/item/weapon/paper/exodus_holodeck
+	name = "holodeck disclaimer"
+	info = "Brusies sustained in the holodeck can be healed simply by sleeping."

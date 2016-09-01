@@ -60,7 +60,6 @@
 	environ = 0
 	locked = 0
 	coverlocked = 0
-	start_charge = 100
 
 /obj/machinery/power/apc/super
 	cell_type = /obj/item/weapon/cell/super
@@ -83,7 +82,6 @@
 	var/areastring = null
 	var/obj/item/weapon/cell/cell
 	var/chargelevel = 0.0005  // Cap for how fast APC cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
-	var/start_charge = 90				// initial cell charge %
 	var/cell_type = /obj/item/weapon/cell/apc
 	var/opened = 0 //0=closed, 1=opened, 2=cover removed
 	var/shorted = 0
@@ -145,20 +143,25 @@
 	if(drain_check)
 		return 1
 
-	if(!cell)
-		return 0
+	// Prevents APCs from being stuck on 0% cell charge while reporting "Fully Charged" status.
+	charging = 0
 
-	if(surge && !emagged)
-		flick("apc-spark", src)
-		emagged = 1
-		locked = 0
-		update_icon()
-		return 0
+	// If the APC's interface is locked, limit the charge rate to 25%.
+	if(locked)
+		amount /= 4
 
+	var/drained_energy = 0
+
+	// First try to drain the power directly from attached power grid.
 	if(terminal && terminal.powernet)
 		terminal.powernet.trigger_warning()
+		drained_energy += terminal.powernet.draw_power(amount)
 
-	return cell.drain_power(drain_check, surge, amount)
+	// If the power grid provided enough power, we're good. If not, take the rest from the power cell.
+	if((drained_energy < amount) && cell)
+		drained_energy += cell.use((amount - drained_energy) * CELLRATE)
+
+	return drained_energy
 
 /obj/machinery/power/apc/New(turf/loc, var/ndir, var/building=0)
 	wires = new(src)
@@ -226,7 +229,6 @@
 	// is starting with a power cell installed, create it and set its charge level
 	if(cell_type)
 		src.cell = new cell_type(src)
-		cell.charge = start_charge * cell.maxcharge / 100.0 		// (convert percentage to actual value)
 
 	var/area/A = src.loc.loc
 
@@ -828,7 +830,7 @@
 
 /obj/machinery/power/apc/proc/update()
 	if(operating && !shorted && !failure_timer)
-		
+
 		//prevent unnecessary updates to emergency lighting
 		var/new_power_light = (lighting >= POWERCHAN_ON)
 		if(area.power_light != new_power_light)
@@ -953,23 +955,6 @@
 	operating = !operating
 	src.update()
 	update_icon()
-
-/obj/machinery/power/apc/proc/ion_act()
-	if(prob(3))
-		src.locked = 1
-		if (src.cell.charge > 0)
-			src.cell.charge = 0
-			cell.corrupt()
-			update_icon()
-			var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
-			smoke.set_up(3, 0, src.loc)
-			smoke.attach(src)
-			smoke.start()
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(3, 1, src)
-			s.start()
-			visible_message("<span class='danger'>The [src.name] suddenly lets out a blast of smoke and some sparks!</span>", \
-							"<span class='danger'>You hear sizzling electronics.</span>")
 
 
 /obj/machinery/power/apc/surplus()

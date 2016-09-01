@@ -372,14 +372,13 @@
 	dat += "<b>Welcome, [name].<br></b>"
 	dat += "Round Duration: [roundduration2text()]<br>"
 
-	if(emergency_shuttle) //In case Nanotrasen decides reposess CentComm's shuttles.
-		if(emergency_shuttle.going_to_centcom()) //Shuttle is going to centcomm, not recalled
-			dat += "<font color='red'><b>The station has been evacuated.</b></font><br>"
-		if(emergency_shuttle.online())
-			if (emergency_shuttle.evac)	// Emergency shuttle is past the point of no recall
-				dat += "<font color='red'>The station is currently undergoing evacuation procedures.</font><br>"
-			else						// Crew transfer initiated
-				dat += "<font color='red'>The station is currently undergoing crew transfer procedures.</font><br>"
+	if(evacuation_controller.has_evacuated())
+		dat += "<font color='red'><b>The station has been evacuated.</b></font><br>"
+	else if(evacuation_controller.is_evacuating())
+		if(evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
+			dat += "<font color='red'>The station is currently undergoing evacuation procedures.</font><br>"
+		else                                           // Crew transfer initiated
+			dat += "<font color='red'>The station is currently undergoing crew transfer procedures.</font><br>"
 
 	dat += "Choose from the following open/valid positions:<br>"
 	for(var/datum/job/job in job_master.occupations)
@@ -448,7 +447,7 @@
 		new_character.disabilities |= NEARSIGHTED
 
 	// Give them their cortical stack if we're using them.
-	if(config && config.use_cortical_stacks && client && client.prefs.has_cortical_stack /*&& new_character.species.has_organ["brain"]*/)
+	if(config && config.use_cortical_stacks && client && client.prefs.has_cortical_stack /*&& new_character.should_have_organ(BP_BRAIN)*/)
 		new_character.create_stack()
 
 	// Do the initial caching of the player's body icons.
@@ -457,6 +456,7 @@
 	new_character.regenerate_icons()
 	new_character.key = key		//Manually transfer the key to log them in
 	return new_character
+
 /mob/new_player/proc/ViewManifest()
 	var/dat = "<div align='center'>"
 	dat += data_core.get_manifest(OOC = 1)

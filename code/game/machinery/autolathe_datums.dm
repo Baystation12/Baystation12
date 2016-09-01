@@ -137,6 +137,11 @@
 	path = /obj/item/device/radio/off
 	category = "General"
 
+/datum/autolathe/recipe/suit_cooler
+	name = "suit cooling unit"
+	path = /obj/item/device/suit_cooling_unit
+	category = "General"
+
 /datum/autolathe/recipe/weldermask
 	name = "welding mask"
 	path = /obj/item/clothing/head/welding
@@ -173,7 +178,12 @@
 
 /datum/autolathe/recipe/taperecorder
 	name = "tape recorder"
-	path = /obj/item/device/taperecorder
+	path = /obj/item/device/taperecorder/empty
+	category = "General"
+
+/datum/autolathe/recipe/tape
+	name = "tape"
+	path = /obj/item/device/tape
 	category = "General"
 
 /datum/autolathe/recipe/airlockmodule

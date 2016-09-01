@@ -54,12 +54,12 @@
 
 	//** These specify item/icon overrides for _slots_
 
-	var/list/item_state_slots = list() //overrides the default item_state for particular slots.
+	var/list/item_state_slots = list(slot_wear_id_str = "id") //overrides the default item_state for particular slots.
 
 	// Used to specify the icon file to be used when the item is worn. If not set the default icon for that slot will be used.
 	// If icon_override or sprite_sheets are set they will take precendence over this, assuming they apply to the slot in question.
 	// Only slot_l_hand/slot_r_hand are implemented at the moment. Others to be implemented as needed.
-	var/list/item_icons = list()
+	var/list/item_icons
 
 	//** These specify item/icon overrides for _species_
 
@@ -111,9 +111,9 @@
 /obj/item/proc/is_held_twohanded(mob/living/M)
 	var/check_hand
 	if(M.l_hand == src && !M.r_hand)
-		check_hand = "r_hand" //item in left hand, check right hand
+		check_hand = BP_R_HAND //item in left hand, check right hand
 	else if(M.r_hand == src && !M.l_hand)
-		check_hand = "l_hand" //item in right hand, check left hand
+		check_hand = BP_L_HAND //item in right hand, check left hand
 	else
 		return FALSE
 
@@ -177,9 +177,9 @@
 	if (!user) return
 	if (hasorgans(user))
 		var/mob/living/carbon/human/H = user
-		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
+		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
 		if (user.hand)
-			temp = H.organs_by_name["l_hand"]
+			temp = H.organs_by_name[BP_L_HAND]
 		if(temp && !temp.is_usable())
 			user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
 			return
@@ -511,7 +511,7 @@ var/list/global/slot_flags_enumeration = list(
 
 	if(istype(H))
 
-		var/obj/item/organ/eyes/eyes = H.internal_organs_by_name["eyes"]
+		var/obj/item/organ/internal/eyes/eyes = H.internal_organs_by_name[BP_EYES]
 
 		if(H != user)
 			for(var/mob/O in (viewers(M) - user - M))
@@ -527,7 +527,7 @@ var/list/global/slot_flags_enumeration = list(
 		eyes.damage += rand(3,4)
 		if(eyes.damage >= eyes.min_bruised_damage)
 			if(M.stat != 2)
-				if(eyes.robotic <= 1) //robot eyes bleeding might be a bit silly
+				if(eyes.robotic < ORGAN_ROBOT) //robot eyes bleeding might be a bit silly
 					M << "<span class='danger'>Your eyes start to bleed profusely!</span>"
 			if(prob(50))
 				if(M.stat != 2)
@@ -539,7 +539,7 @@ var/list/global/slot_flags_enumeration = list(
 			if (eyes.damage >= eyes.min_broken_damage)
 				if(M.stat != 2)
 					M << "<span class='warning'>You go blind!</span>"
-		var/obj/item/organ/external/affecting = H.get_organ("head")
+		var/obj/item/organ/external/affecting = H.get_organ(BP_HEAD)
 		if(affecting.take_damage(7))
 			M:UpdateDamageIcon()
 	else
@@ -680,3 +680,37 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
+
+/obj/item/proc/get_mob_overlay(mob/user_mob, slot)
+	var/bodytype = "Default"
+	if(ishuman(user_mob))
+		var/mob/living/carbon/human/user_human = user_mob
+		bodytype = user_human.species.get_bodytype()
+
+	var/mob_state
+	if(item_state_slots && item_state_slots[slot])
+		mob_state = item_state_slots[slot]
+	else if (item_state)
+		mob_state = item_state
+	else
+		mob_state = icon_state
+
+	var/mob_icon
+	if(icon_override)
+		mob_icon = icon_override
+		if(slot == 	slot_l_hand_str || slot == slot_l_ear_str)
+			mob_state = "[mob_state]_l"
+		if(slot == 	slot_r_hand_str || slot == slot_r_ear_str)
+			mob_state = "[mob_state]_r"
+	else if(sprite_sheets && sprite_sheets[bodytype] && !(slot == slot_r_hand_str || slot == slot_l_hand_str))
+		if(slot == slot_l_ear)
+			mob_state = "[mob_state]_l"
+		if(slot == slot_r_ear)
+			mob_state = "[mob_state]_r"
+		mob_icon = sprite_sheets[bodytype]
+	else if(item_icons && item_icons[slot])
+		mob_icon = item_icons[slot]
+	else
+		mob_icon = default_onmob_icons[slot]
+
+	return overlay_image(mob_icon,mob_state,color,RESET_COLOR)

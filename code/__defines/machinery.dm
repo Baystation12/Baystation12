@@ -4,9 +4,9 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define MEGAWATTS *1000000
 #define GIGAWATTS *1000000000
 
-#define CELLRATE 0.002 // Multiplier for watts per tick <> cell storage (e.g., 0.02 means if there is a load of 1000 watts, 20 units will be taken from a cell per second)
-                       // It's a conversion constant. power_used*CELLRATE = charge_provided, or charge_used/CELLRATE = power_provided
-#define SMESRATE 0.05  // Same for SMESes. A different number for some reason.
+#define MACHINERY_TICKRATE 2		// Tick rate for machinery in seconds. As it affects CELLRATE calculation it is kept as define here
+
+#define CELLRATE (1 / ( 3600 / MACHINERY_TICKRATE )) // Multiplier for charge units. Converts cell charge units(watthours) to joules. Takes into consideration that our machinery ticks once per two seconds.
 
 // Doors!
 #define DOOR_CRUSH_DAMAGE 40

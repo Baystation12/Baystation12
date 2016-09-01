@@ -7,14 +7,14 @@
 	desc = "Made by Space Amish using traditional space techniques, this heater is guaranteed not to set the station on fire."
 	var/obj/item/weapon/cell/cell
 	var/on = 0
-	var/set_temperature = T0C + 50	//K
+	var/set_temperature = T0C + 20	//K
 	var/active = 0
 	var/heating_power = 40000
 
 
 /obj/machinery/space_heater/New()
 	..()
-	cell = new(src)
+	cell = new/obj/item/weapon/cell/high(src)
 	update_icon()
 
 /obj/machinery/space_heater/update_icon(var/rebuild_overlay = 0)

@@ -110,3 +110,15 @@
 /datum/gear/uniform/resomi/science
 	display_name = "uniform, Science (Resomi)"
 	path = /obj/item/clothing/under/resomi/science
+
+/datum/gear/uniform/harness
+	display_name = "gear harness (Full Body Prosthetic, Diona)"
+	path = /obj/item/clothing/under/harness
+	sort_category = "Xenowear"
+
+/datum/gear/mask/ipc_monitor
+	display_name = "display monitor (IPC)"
+	path = /obj/item/clothing/mask/monitor
+	sort_category = "Xenowear"
+	whitelisted = "Machine"
+	cost = 1

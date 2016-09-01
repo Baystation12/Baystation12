@@ -1,3 +1,6 @@
+var/list/mining_walls = list()
+var/list/mining_floors = list()
+
 /**********************Mineral deposits**************************/
 /turf/unsimulated/mineral
 	name = "impassable rock"
@@ -30,14 +33,20 @@
 	var/excav_overlay = ""
 	var/obj/item/weapon/last_find
 	var/datum/artifact_find/artifact_find
+	var/image/ore_overlay
 
 	has_resources = 1
 
 /turf/simulated/mineral/New()
+	mining_walls += src
 	spawn(0)
 		MineralSpread()
 	spawn(2)
 		updateMineralOverlays(1)
+
+/turf/simulated/mineral/Destroy()
+	mining_walls -= src
+	return ..()
 
 /turf/simulated/mineral/can_build_cable()
 	return !density
@@ -112,7 +121,7 @@
 		icon_state = "rock"
 		return
 	name = "\improper [mineral.display_name] deposit"
-	new /obj/effect/mineral(src, mineral)
+	ore_overlay = image('icons/obj/mining.dmi', "rock_[mineral.name]")
 
 //Not even going to touch this pile of spaghetti
 /turf/simulated/mineral/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -246,8 +255,8 @@
 		return ..()
 
 /turf/simulated/mineral/proc/clear_ore_effects()
-	for(var/obj/effect/mineral/M in contents)
-		qdel(M)
+	overlays -= ore_overlay
+	ore_overlay = null
 
 /turf/simulated/mineral/proc/DropMineral()
 	if(!mineral)
@@ -415,9 +424,13 @@
 	has_resources = 1
 
 /turf/simulated/floor/asteroid/New()
-
+	mining_floors += src
 	if(prob(20))
 		overlay_detail = "asteroid[rand(0,9)]"
+
+/turf/simulated/floor/asteroid/Destroy()
+	mining_floors -= src
+	return ..()
 
 /turf/simulated/floor/asteroid/ex_act(severity)
 	switch(severity)

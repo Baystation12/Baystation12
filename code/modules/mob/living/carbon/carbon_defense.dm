@@ -71,7 +71,7 @@
 	var/total_damage = 0
 	for(var/i in 1 to 3)
 		var/damage = min(W.force*1.5, 20)*damage_mod
-		apply_damage(damage, W.damtype, "head", 0, sharp=W.sharp, edge=W.edge)
+		apply_damage(damage, W.damtype, BP_HEAD, 0, sharp=W.sharp, edge=W.edge)
 		total_damage += damage
 
 	var/oxyloss = total_damage

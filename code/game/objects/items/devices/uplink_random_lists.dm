@@ -1,5 +1,3 @@
-var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_random_selection/default()
-
 /datum/uplink_random_item
 	var/uplink_item				// The uplink item
 	var/keep_probability		// The probability we'll decide to keep this item if selected
@@ -34,6 +32,14 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 		if(U && !I.can_buy(U))
 			continue
 		return I
+
+var/list/uplink_random_selections_
+/proc/get_uplink_random_selection_by_type(var/uplist_selection_type)
+	if(!uplink_random_selections_)
+		uplink_random_selections_ = init_subtypes(/datum/uplink_random_selection)
+		for(var/datum/entry in uplink_random_selections_)
+			uplink_random_selections_[entry.type] = entry
+	return uplink_random_selections_[uplist_selection_type]
 
 /datum/uplink_random_selection/default/New()
 	..()
@@ -93,6 +99,26 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/suit_sensor_mobile)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/services/suit_sensor_shutdown, 75, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/services/suit_sensor_garble, 75, 0)
+
+/datum/uplink_random_selection/blacklist
+	var/list/blacklist = list(
+			/datum/uplink_item/item/ammo,
+			/datum/uplink_item/item/badassery,
+			/datum/uplink_item/item/telecrystal,
+			/datum/uplink_item/item/tools/teleporter,
+			/datum/uplink_item/item/tools/supply_beacon
+		)
+
+/datum/uplink_random_selection/blacklist/New()
+	..()
+	for(var/uplink_item_type in subtypesof(/datum/uplink_item/item))
+		var/datum/uplink_item/item/ui = uplink_item_type
+		if(!initial(ui.name))
+			continue
+		if(is_path_in_list(uplink_item_type, blacklist))
+			continue
+		var/new_thing = new/datum/uplink_random_item(uplink_item_type)
+		items += new_thing
 
 #ifdef DEBUG
 /proc/debug_uplink_purchage_log()

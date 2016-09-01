@@ -479,9 +479,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 				else
 					user << "<span class='warning'>You burn yourself while lighting the lighter.</span>"
 					if (user.l_hand == src)
-						user.apply_damage(2,BURN,"l_hand")
+						user.apply_damage(2,BURN,BP_L_HAND)
 					else
-						user.apply_damage(2,BURN,"r_hand")
+						user.apply_damage(2,BURN,BP_R_HAND)
 					user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src], they however burn their finger in the process.</span>")
 
 			set_light(2)
@@ -509,7 +509,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(lit)
 		M.IgniteMob()
 
-		if(istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == "mouth")
+		if(istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == BP_MOUTH)
 			var/obj/item/clothing/mask/smokable/cigarette/cig = M.wear_mask
 			if(M == user)
 				cig.attackby(src, user)

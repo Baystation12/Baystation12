@@ -91,6 +91,7 @@
 	magazine_type = /obj/item/ammo_magazine/c762
 	allowed_magazines = /obj/item/ammo_magazine/c762
 	requires_two_hands = 3
+	wielded_item_state = "arifle-wielded"
 
 	//Assault rifle, burst fire degrades quicker than SMG, worse one-handing penalty, slightly increased move delay
 	firemodes = list(
@@ -100,8 +101,9 @@
 		)
 
 /obj/item/weapon/gun/projectile/automatic/sts35/update_icon()
-	..()
 	icon_state = (ammo_magazine)? "arifle" : "arifle-empty"
+	wielded_item_state = (ammo_magazine)? "arifle-wielded" : "arifle-wielded-empty"
+	..()
 
 /obj/item/weapon/gun/projectile/automatic/wt550
 	name = "9mm machine pistol"
@@ -150,7 +152,7 @@
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 	requires_two_hands = 5
 	burst_delay = 4
-
+	wielded_item_state = "z8carbine-wielded"
 	//would have requires_two_hands=4,5 but the added weight of a grenade launcher makes one-handing even harder
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1,    fire_delay=0,    move_delay=null, use_launcher=null, requires_two_hands=5, burst_accuracy=null, dispersion=null),

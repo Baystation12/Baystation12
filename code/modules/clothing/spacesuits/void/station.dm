@@ -198,3 +198,24 @@
 	name = "heavy duty atmos voidsuit"
 	armor = list(melee = 20, bullet = 5, laser = 20,energy = 15, bomb = 45, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+
+//Misc
+/obj/item/clothing/head/helmet/space/void/engineering/salvage
+	name = "salvage voidsuit helmet"
+	desc = "A heavily modified salvage voidsuit helmet. It has been fitted with radiation-resistant plating."
+	icon_state = "rig0-salvage"
+	item_state = "eng_helm"
+	item_state_slots = list(
+		slot_l_hand_str = "eng_helm",
+		slot_r_hand_str = "eng_helm",
+		)
+	armor = list(melee = 50, bullet = 10, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 80)
+
+/obj/item/clothing/suit/space/void/engineering/salvage
+	name = "salvage voidsuit"
+	desc = "A hand-me-down salvage voidsuit. It has obviously had a lot of repair work done to its radiation shielding."
+	icon_state = "rig-salvage"
+	item_state = "eng_voidsuit"
+	armor = list(melee = 50, bullet = 10, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 80)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/weapon/rcd)
+

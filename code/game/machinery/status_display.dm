@@ -3,6 +3,12 @@
 #define FONT_STYLE "Arial Black"
 #define SCROLL_SPEED 2
 
+var/list/status_icons_to_colour = list(
+	"redalert" = COLOR_RED,
+	"greenalert" = COLOR_GREEN,
+	"bluealert" = COLOR_BLUE
+	)
+
 // Status display
 // (formerly Countdown timer display)
 
@@ -23,10 +29,10 @@
 					// 3 = alert picture
 					// 4 = Supply shuttle timer
 
-	var/picture_state	// icon_state of alert picture
-	var/message1 = ""	// message line 1
-	var/message2 = ""	// message line 2
-	var/index1			// display index for scrolling messages or 0 if non-scrolling
+	var/picture_state = "greenalert" // icon_state of alert picture
+	var/message1 = ""                // message line 1
+	var/message2 = ""                // message line 2
+	var/index1                       // display index for scrolling messages or 0 if non-scrolling
 	var/index2
 	var/picture = null
 
@@ -82,18 +88,18 @@
 		if(STATUS_DISPLAY_BLANK)	//blank
 			return 1
 		if(STATUS_DISPLAY_TRANSFER_SHUTTLE_TIME)				//emergency shuttle timer
-			if(emergency_shuttle.waiting_to_leave())
+			if(evacuation_controller.is_prepared())
 				message1 = "-ETD-"
-				if (emergency_shuttle.shuttle.is_launching())
+				if (evacuation_controller.waiting_to_leave())
 					message2 = "Launch"
 				else
-					message2 = get_shuttle_timer_departure()
+					message2 = get_shuttle_timer()
 					if(length(message2) > CHARS_PER_LINE)
 						message2 = "Error"
 				update_display(message1, message2)
-			else if(emergency_shuttle.has_eta())
+			else if(evacuation_controller.has_eta())
 				message1 = "-ETA-"
-				message2 = get_shuttle_timer_arrival()
+				message2 = get_shuttle_timer()
 				if(length(message2) > CHARS_PER_LINE)
 					message2 = "Error"
 				update_display(message1, message2)
@@ -156,6 +162,8 @@
 	if(!picture || picture_state != state)
 		picture_state = state
 		picture = image('icons/obj/status_display.dmi', icon_state=picture_state)
+	if(picture_state && status_icons_to_colour[picture_state])
+		set_light(l_range = 2, l_power = 2, l_color = status_icons_to_colour[picture_state])
 	overlays |= picture
 
 /obj/machinery/status_display/proc/update_display(line1, line2)
@@ -163,14 +171,8 @@
 	if(maptext != new_text)
 		maptext = new_text
 
-/obj/machinery/status_display/proc/get_shuttle_timer_arrival()
-	var/timeleft = emergency_shuttle.estimate_arrival_time()
-	if(timeleft < 0)
-		return ""
-	return "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
-
-/obj/machinery/status_display/proc/get_shuttle_timer_departure()
-	var/timeleft = emergency_shuttle.estimate_launch_time()
+/obj/machinery/status_display/proc/get_shuttle_timer()
+	var/timeleft = evacuation_controller.get_eta()
 	if(timeleft < 0)
 		return ""
 	return "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
@@ -188,6 +190,7 @@
 	return ""
 
 /obj/machinery/status_display/proc/remove_display()
+	set_light(0)
 	if(overlays.len)
 		overlays.Cut()
 	if(maptext)

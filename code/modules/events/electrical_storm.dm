@@ -12,7 +12,7 @@
 		if(EVENT_LEVEL_MODERATE)
 			command_announcement.Announce("The station is about to pass through an electrical storm. Please secure sensitive electrical equipment until the storm passes.", "Electrical Storm Alert")
 		if(EVENT_LEVEL_MAJOR)
-			command_announcement.Announce("Alert. A strong electrical storm has been detected in proximity of the station. It is reccomended to immediately secure sensitive electrical equipment until the storm passes.", "Electrical Storm Alert")
+			command_announcement.Announce("Alert. A strong electrical storm has been detected in proximity of the station. It is recommended to immediately secure sensitive electrical equipment until the storm passes.", "Electrical Storm Alert")
 
 /datum/event/electrical_storm/start()
 	..()

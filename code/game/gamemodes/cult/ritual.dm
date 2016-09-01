@@ -184,7 +184,6 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 	throw_speed = 1
 	throw_range = 5
 	unique = 1
-	var/notedat = ""
 	var/tomedat = ""
 	var/list/words = list("ire" = "ire", "ego" = "ego", "nahlizet" = "nahlizet", "certum" = "certum", "veri" = "veri", "jatkaa" = "jatkaa", "balaq" = "balaq", "mgar" = "mgar", "karazet" = "karazet", "geeri" = "geeri")
 
@@ -284,57 +283,12 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 				</html>
 				"}
 
-
-	Topic(href,href_list[])
-		if (src.loc == usr)
-			var/number = text2num(href_list["number"])
-			if (usr.stat|| usr.restrained())
-				return
-			switch(href_list["action"])
-				if("clear")
-					words[words[number]] = words[number]
-				if("change")
-					words[words[number]] = input("Enter the translation for [words[number]]", "Word notes") in engwords
-					for (var/w in words)
-						if ((words[w] == words[words[number]]) && (w != words[number]))
-							words[w] = w
-			notedat = {"
-						<br><b>Word translation notes</b> <br>
-						[words[1]] is <a href='byond://?src=\ref[src];number=1;action=change'>[words[words[1]]]</A> <A href='byond://?src=\ref[src];number=1;action=clear'>Clear</A><BR>
-						[words[2]] is <A href='byond://?src=\ref[src];number=2;action=change'>[words[words[2]]]</A> <A href='byond://?src=\ref[src];number=2;action=clear'>Clear</A><BR>
-						[words[3]] is <a href='byond://?src=\ref[src];number=3;action=change'>[words[words[3]]]</A> <A href='byond://?src=\ref[src];number=3;action=clear'>Clear</A><BR>
-						[words[4]] is <a href='byond://?src=\ref[src];number=4;action=change'>[words[words[4]]]</A> <A href='byond://?src=\ref[src];number=4;action=clear'>Clear</A><BR>
-						[words[5]] is <a href='byond://?src=\ref[src];number=5;action=change'>[words[words[5]]]</A> <A href='byond://?src=\ref[src];number=5;action=clear'>Clear</A><BR>
-						[words[6]] is <a href='byond://?src=\ref[src];number=6;action=change'>[words[words[6]]]</A> <A href='byond://?src=\ref[src];number=6;action=clear'>Clear</A><BR>
-						[words[7]] is <a href='byond://?src=\ref[src];number=7;action=change'>[words[words[7]]]</A> <A href='byond://?src=\ref[src];number=7;action=clear'>Clear</A><BR>
-						[words[8]] is <a href='byond://?src=\ref[src];number=8;action=change'>[words[words[8]]]</A> <A href='byond://?src=\ref[src];number=8;action=clear'>Clear</A><BR>
-						[words[9]] is <a href='byond://?src=\ref[src];number=9;action=change'>[words[words[9]]]</A> <A href='byond://?src=\ref[src];number=9;action=clear'>Clear</A><BR>
-						[words[10]] is <a href='byond://?src=\ref[src];number=10;action=change'>[words[words[10]]]</A> <A href='byond://?src=\ref[src];number=10;action=clear'>Clear</A><BR>
-						"}
-			usr << browse("[notedat]", "window=notes")
-//		call(/obj/item/weapon/book/tome/proc/edit_notes)()
-		else
-			usr << browse(null, "window=notes")
-			return
-
-
-//	proc/edit_notes()     FUCK IT. Cant get it to work properly. - K0000
-//		world << "its been called! [usr]"
-//		notedat = {"
-//		<br><b>Word translation notes</b> <br>
-//			[words[1]] is <a href='byond://?src=\ref[src];number=1;action=change'>[words[words[1]]]</A> <A href='byond://?src=\ref[src];number=1;action=clear'>Clear</A><BR>
-//			[words[2]] is <A href='byond://?src=\ref[src];number=2;action=change'>[words[words[2]]]</A> <A href='byond://?src=\ref[src];number=2;action=clear'>Clear</A><BR>
-//			[words[3]] is <a href='byond://?src=\ref[src];number=3;action=change'>[words[words[3]]]</A> <A href='byond://?src=\ref[src];number=3;action=clear'>Clear</A><BR>
-//			[words[4]] is <a href='byond://?src=\ref[src];number=4;action=change'>[words[words[4]]]</A> <A href='byond://?src=\ref[src];number=4;action=clear'>Clear</A><BR>
-//			[words[5]] is <a href='byond://?src=\ref[src];number=5;action=change'>[words[words[5]]]</A> <A href='byond://?src=\ref[src];number=5;action=clear'>Clear</A><BR>
-//			[words[6]] is <a href='byond://?src=\ref[src];number=6;action=change'>[words[words[6]]]</A> <A href='byond://?src=\ref[src];number=6;action=clear'>Clear</A><BR>
-//			[words[7]] is <a href='byond://?src=\ref[src];number=7;action=change'>[words[words[7]]]</A> <A href='byond://?src=\ref[src];number=7;action=clear'>Clear</A><BR>
-//			[words[8]] is <a href='byond://?src=\ref[src];number=8;action=change'>[words[words[8]]]</A> <A href='byond://?src=\ref[src];number=8;action=clear'>Clear</A><BR>
-//			[words[9]] is <a href='byond://?src=\ref[src];number=9;action=change'>[words[words[9]]]</A> <A href='byond://?src=\ref[src];number=9;action=clear'>Clear</A><BR>
-//			[words[10]] is <a href='byond://?src=\ref[src];number=10;action=change'>[words[words[10]]]</A> <A href='byond://?src=\ref[src];number=10;action=clear'>Clear</A><BR>
-//					"}
-//		usr << "whatev"
-//		usr << browse(null, "window=tank")
+	New()
+		..()
+		if(!cultwords["travel"])
+			runerandom()
+		for(var/V in cultwords)
+			words[cultwords[V]] = V
 
 	attack(mob/living/M as mob, mob/living/user as mob)
 
@@ -386,32 +340,13 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 				alert("The cloth of reality can't take that much of a strain. Remove some runes first!")
 				return
 			else
-				switch(alert("You open the tome",,"Read it","Scribe a rune", "Notes")) //Fuck the "Cancel" option. Rewrite the whole tome interface yourself if you want it to work better. And input() is just ugly. - K0000
+				switch(alert("You open the tome",,"Read it","Scribe a rune", "Cancel"))
 					if("Cancel")
 						return
 					if("Read it")
 						if(usr.get_active_hand() != src)
 							return
 						user << browse("[tomedat]", "window=Arcane Tome")
-						return
-					if("Notes")
-						if(usr.get_active_hand() != src)
-							return
-						notedat = {"
-					<br><b>Word translation notes</b> <br>
-					[words[1]] is <a href='byond://?src=\ref[src];number=1;action=change'>[words[words[1]]]</A> <A href='byond://?src=\ref[src];number=1;action=clear'>Clear</A><BR>
-					[words[2]] is <A href='byond://?src=\ref[src];number=2;action=change'>[words[words[2]]]</A> <A href='byond://?src=\ref[src];number=2;action=clear'>Clear</A><BR>
-					[words[3]] is <a href='byond://?src=\ref[src];number=3;action=change'>[words[words[3]]]</A> <A href='byond://?src=\ref[src];number=3;action=clear'>Clear</A><BR>
-					[words[4]] is <a href='byond://?src=\ref[src];number=4;action=change'>[words[words[4]]]</A> <A href='byond://?src=\ref[src];number=4;action=clear'>Clear</A><BR>
-					[words[5]] is <a href='byond://?src=\ref[src];number=5;action=change'>[words[words[5]]]</A> <A href='byond://?src=\ref[src];number=5;action=clear'>Clear</A><BR>
-					[words[6]] is <a href='byond://?src=\ref[src];number=6;action=change'>[words[words[6]]]</A> <A href='byond://?src=\ref[src];number=6;action=clear'>Clear</A><BR>
-					[words[7]] is <a href='byond://?src=\ref[src];number=7;action=change'>[words[words[7]]]</A> <A href='byond://?src=\ref[src];number=7;action=clear'>Clear</A><BR>
-					[words[8]] is <a href='byond://?src=\ref[src];number=8;action=change'>[words[words[8]]]</A> <A href='byond://?src=\ref[src];number=8;action=clear'>Clear</A><BR>
-					[words[9]] is <a href='byond://?src=\ref[src];number=9;action=change'>[words[words[9]]]</A> <A href='byond://?src=\ref[src];number=9;action=clear'>Clear</A><BR>
-					[words[10]] is <a href='byond://?src=\ref[src];number=10;action=change'>[words[words[10]]]</A> <A href='byond://?src=\ref[src];number=10;action=clear'>Clear</A><BR>
-					"}
-//						call(/obj/item/weapon/book/tome/proc/edit_notes)()
-						user << browse("[notedat]", "window=notes")
 						return
 			if(usr.get_active_hand() != src)
 				return
@@ -496,21 +431,6 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 		else
 			user << "The book seems full of illegible scribbles. Is this a joke?"
 			return
-
-	attackby(obj/item/weapon/book/tome/T as obj, mob/living/user as mob)
-		if(istype(T, /obj/item/weapon/book/tome)) // sanity check to prevent a runtime error
-			switch(alert("Copy the runes from your tome?",,"Copy", "Cancel"))
-				if("cancel")
-					return
-	//		var/list/nearby = viewers(1,src) //- Fuck this as well. No clue why this doesnt work. -K0000
-	//			if (T.loc != user)
-	//				return
-	//		for(var/mob/M in nearby)
-	//			if(M == user)
-			for(var/entry in words)
-				words[entry] = T.words[entry]
-			user << "You copy the translation notes from your tome."
-
 
 	examine(mob/user)
 		if(!iscultist(user))

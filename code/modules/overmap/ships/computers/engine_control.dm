@@ -6,7 +6,8 @@
 	icon_screen = "id"
 	var/state = "status"
 	var/list/engines = list()
-	var/obj/effect/map/ship/linked
+	var/list/zlevels = list()
+	var/obj/effect/overmap/ship/linked
 
 /obj/machinery/computer/engines/initialize()
 	linked = map_sectors["[z]"]
@@ -14,12 +15,13 @@
 		if (!linked.eng_control)
 			linked.eng_control = src
 		testing("Engines console at level [z] found a corresponding overmap object '[linked.name]'.")
+		zlevels = linked.map_z
 	else
 		testing("Engines console at level [z] was unable to find a corresponding overmap object.")
-
-	for(var/datum/ship_engine/E in engines)
-		if (E.zlevel == z && !(E in engines))
-			engines += E
+	for(var/datum/ship_engine/E in ship_engines)
+		if (E.zlevel in zlevels)
+			engines |= E
+	..()
 
 /obj/machinery/computer/engines/attack_hand(var/mob/user as mob)
 	if(..())

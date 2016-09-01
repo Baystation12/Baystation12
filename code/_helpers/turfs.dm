@@ -39,7 +39,10 @@
 		return
 	var/list/turfs = list()
 	for(var/turf/T in orange(origin, outer_range))
-		if(get_dist(origin, T) >= inner_range)
+		if(!(T.z in using_map.sealed_levels)) // Picking a turf outside the map edge isn't recommended
+			if(T.x >= world.maxx-TRANSITIONEDGE || T.x <= TRANSITIONEDGE)	continue
+			if(T.y >= world.maxy-TRANSITIONEDGE || T.y <= TRANSITIONEDGE)	continue
+		if(!inner_range || get_dist(origin, T) >= inner_range)
 			turfs += T
 	if(turfs.len)
 		return pick(turfs)
@@ -80,3 +83,10 @@
 
 /proc/IsTurfAtmosSafe(var/turf/T)
 	return !IsTurfAtmosUnsafe(T)
+
+/proc/is_below_sound_pressure(var/turf/T)
+	var/datum/gas_mixture/environment = T ? T.return_air() : null
+	var/pressure =  environment ? environment.return_pressure() : 0
+	if(pressure < SOUND_MINIMUM_PRESSURE)
+		return TRUE
+	return FALSE

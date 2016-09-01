@@ -162,8 +162,8 @@ var/list/sacrificed = list()
 							target.adjustBrainLoss(1)
 
 				initial_message = 1
-				if (target.species && (target.species.flags & NO_PAIN))
-					target.visible_message("<span class='warning'>The markings below [target] glow a bloody red.</span>")
+				if (!target.can_feel_pain())
+					target.visible_message("<span class='warning'>The markings below \the [target] glow a bloody red.</span>")
 				else
 					target.visible_message("<span class='warning'>[target] writhes in pain as the markings below \him glow a bloody red.</span>", "<span class='danger'>AAAAAAHHHH!</span>", "<span class='warning'>You hear an anguished scream.</span>")
 
@@ -409,7 +409,7 @@ var/list/sacrificed = list()
 						L.ajourn=0
 						return
 					else
-						L.take_organ_damage(10, 0)
+						L.take_organ_damage(3, 0)
 					sleep(100)
 			return fizzle()
 
@@ -617,8 +617,8 @@ var/list/sacrificed = list()
 					if(!(iscultist(V)))
 						victims += V//Checks for cult status and mob type
 			for(var/obj/item/I in src.loc)//Checks for MMIs/brains/Intellicards
-				if(istype(I,/obj/item/organ/brain))
-					var/obj/item/organ/brain/B = I
+				if(istype(I,/obj/item/organ/internal/brain))
+					var/obj/item/organ/internal/brain/B = I
 					victims += B.brainmob
 				else if(istype(I,/obj/item/device/mmi))
 					var/obj/item/device/mmi/B = I
@@ -655,7 +655,6 @@ var/list/sacrificed = list()
 							if(H.stat !=2)
 								if(prob(80) || worth)
 									usr << "<span class='cult'>The Geometer of Blood accepts this [worth ? "exotic " : ""]sacrifice.</span>"
-									cult.grant_runeword(usr)
 								else
 									usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
 									usr << "<span class='warning'>However, this soul was not enough to gain His favor.</span>"
@@ -666,7 +665,6 @@ var/list/sacrificed = list()
 							else
 								if(prob(40) || worth)
 									usr << "<span class='cult'>The Geometer of Blood accepts this [worth ? "exotic " : ""]sacrifice.</span>"
-									cult.grant_runeword(usr)
 								else
 									usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
 									usr << "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>"
@@ -681,7 +679,6 @@ var/list/sacrificed = list()
 								if(prob(40))
 
 									usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
-									cult.grant_runeword(usr)
 								else
 									usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
 									usr << "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>"
@@ -694,7 +691,6 @@ var/list/sacrificed = list()
 						if(H.stat !=2)
 							if(prob(80))
 								usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
-								cult.grant_runeword(usr)
 							else
 								usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
 								usr << "<span class='warning'>However, this soul was not enough to gain His favor.</span>"
@@ -705,7 +701,6 @@ var/list/sacrificed = list()
 						else
 							if(prob(40))
 								usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
-								cult.grant_runeword(usr)
 							else
 								usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
 								usr << "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>"
@@ -719,7 +714,6 @@ var/list/sacrificed = list()
 						else
 							if(prob(40))
 								usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
-								cult.grant_runeword(usr)
 							else
 								usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
 								usr << "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>"

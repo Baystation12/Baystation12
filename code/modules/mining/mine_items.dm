@@ -227,13 +227,12 @@
 
 /obj/item/stack/flag/attack_self(mob/user as mob)
 
-	var/obj/item/stack/flag/F = locate() in get_turf(src)
-
 	var/turf/T = get_turf(src)
 	if(!T || !istype(T,/turf/simulated/floor/asteroid))
 		user << "The flag won't stand up in this terrain."
 		return
 
+	var/obj/item/stack/flag/F = locate() in T
 	if(F && F.upright)
 		user << "There is already a flag here."
 		return
@@ -241,8 +240,8 @@
 	var/obj/item/stack/flag/newflag = new src.type(T)
 	newflag.amount = 1
 	newflag.upright = 1
-	anchored = 1
+	newflag.anchored = 1
 	newflag.name = newflag.singular_name
 	newflag.icon_state = "[newflag.base_state]_open"
-	newflag.visible_message("<b>[user]</b> plants [newflag] firmly in the ground.")
+	newflag.visible_message("\The [user] plants \the [newflag] firmly in the ground.")
 	src.use(1)

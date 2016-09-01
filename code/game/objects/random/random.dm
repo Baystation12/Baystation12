@@ -72,9 +72,9 @@
 	icon_state = "cell"
 	item_to_spawn()
 		return pick(prob(10);/obj/item/weapon/cell/crap,\
-					prob(40);/obj/item/weapon/cell,\
-					prob(40);/obj/item/weapon/cell/high,\
-					prob(9);/obj/item/weapon/cell/super,\
+					prob(80);/obj/item/weapon/cell,\
+					prob(5);/obj/item/weapon/cell/high,\
+					prob(4);/obj/item/weapon/cell/super,\
 					prob(1);/obj/item/weapon/cell/hyper)
 
 
@@ -494,6 +494,7 @@ obj/random/material //Random materials for building stuff
 					prob(3);/obj/item/weapon/tank/emergency/oxygen/engi,\
 					prob(2);/obj/item/weapon/tank/emergency/oxygen/double,\
 					prob(2);/obj/item/weapon/tank/emergency/nitrogen,\
+					prob(1);/obj/item/weapon/tank/emergency/nitrogen/double,\
 					prob(1);/obj/item/weapon/tank/nitrogen)
 
 
@@ -670,6 +671,7 @@ obj/random/material //Random materials for building stuff
 		return pick(/obj/item/clothing/head/helmet/space/void,\
 					/obj/item/clothing/head/helmet/space/void/engineering,\
 					/obj/item/clothing/head/helmet/space/void/engineering/alt,\
+					/obj/item/clothing/head/helmet/space/void/engineering/salvage,\
 					/obj/item/clothing/head/helmet/space/void/mining,\
 					/obj/item/clothing/head/helmet/space/void/mining/alt,\
 					/obj/item/clothing/head/helmet/space/void/security,\
@@ -689,6 +691,7 @@ obj/random/material //Random materials for building stuff
 		return pick(/obj/item/clothing/suit/space/void,\
 					/obj/item/clothing/suit/space/void/engineering,\
 					/obj/item/clothing/suit/space/void/engineering/alt,\
+					/obj/item/clothing/suit/space/void/engineering/salvage,\
 					/obj/item/clothing/suit/space/void/mining,\
 					/obj/item/clothing/suit/space/void/mining/alt,\
 					/obj/item/clothing/suit/space/void/security,\
@@ -712,3 +715,59 @@ obj/random/material //Random materials for building stuff
 					/obj/item/weapon/rig/light,\
 					/obj/item/weapon/rig/unathi,\
 					/obj/item/weapon/rig/unathi/fancy)
+
+/*
+	Selects one spawn point out of a group of points with the same ID and asks it to generate its items
+*/
+var/list/multi_point_spawns
+
+/obj/random_multi
+	name = "random object spawn point"
+	desc = "This item type is used to spawn random objects at round-start. Only one spawn point for a given group id is selected."
+	icon = 'icons/misc/mark.dmi'
+	icon_state = "x3"
+	invisibility = INVISIBILITY_MAXIMUM
+	var/id     // Group id
+	var/weight // Probability weight for this spawn point
+
+/obj/random_multi/initialize()
+	..()
+	weight = max(1, round(weight))
+
+	if(!multi_point_spawns)
+		multi_point_spawns = list()
+	var/list/spawnpoints = multi_point_spawns[id]
+	if(!spawnpoints)
+		spawnpoints = list()
+		multi_point_spawns[id] = spawnpoints
+	spawnpoints[src] = weight
+
+/obj/random_multi/Destroy()
+	var/list/spawnpoints = multi_point_spawns[id]
+	spawnpoints -= src
+	if(!spawnpoints.len)
+		multi_point_spawns -= id
+	. = ..()
+
+/obj/random_multi/proc/generate_items()
+	return
+
+/obj/random_multi/single_item
+	var/item_path  // Item type to spawn
+
+/obj/random_multi/single_item/generate_items()
+	new item_path(loc)
+
+/hook/roundstart/proc/generate_multi_spawn_items()
+	for(var/id in multi_point_spawns)
+		var/list/spawn_points = multi_point_spawns[id]
+		var/obj/random_multi/rm = pickweight(spawn_points)
+		rm.generate_items()
+		for(var/entry in spawn_points)
+			qdel(entry)
+	return 1
+
+/obj/random_multi/single_item/captains_spare_id
+	name = "Multi Point - Captain's Spare"
+	id = "Captain's spare id"
+	item_path = /obj/item/weapon/card/id/captains_spare

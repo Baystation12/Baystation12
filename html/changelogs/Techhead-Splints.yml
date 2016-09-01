@@ -1,0 +1,7 @@
+author: Techhead
+
+delete-after: True
+
+changes: 
+  - rscadd: "Medical splints can now also be applied to hands and feet (in addition to arms and legs)."
+  - rscadd: "For those that miss the old functionality, ghetto splints have been added. These can be crafted with a roll of tape and a metal rod and can only splint arms and legs."
