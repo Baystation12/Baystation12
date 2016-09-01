@@ -680,7 +680,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!(T in view(changeling.sting_range))) return
 	if(!sting_can_reach(T, changeling.sting_range)) return
 	if(!changeling_power(required_chems)) return
-	if(istype(T, /mob/living/carbon/human/machine))
+	if(T.isSynthetic())
 		src << "<span class='warning'>[T] is not compatible with our biology.</span>"
 		return
 
