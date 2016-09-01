@@ -42,6 +42,4 @@
 /obj/item/clothing/accessory/hawaii/random/New()
 	if(prob(50))
 		icon_state = "hawaii2"
-	var/angle = rand(-11,12)*15
-	color = color_rotation(angle)
-	desc += "Turned by [angle]."
+	color = color_rotation(rand(-11,12)*15)
