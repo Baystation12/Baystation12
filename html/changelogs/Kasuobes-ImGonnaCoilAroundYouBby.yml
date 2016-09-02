@@ -1,0 +1,7 @@
+author: Haswell
+
+delete-after: True
+
+changes:
+  - rscadd: "Added more SMES coils and circuitboard to supply packs."
+  - tweak: "Adjusted price of SMES coil."
