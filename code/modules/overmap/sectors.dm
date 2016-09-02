@@ -14,10 +14,32 @@
 
 	var/known = 1		//shows up on nav computers automatically
 
-/obj/effect/overmap/New(var/obj/effect/overmapinfo/data)
-	tag = "sector[z]"
+/obj/effect/overmap/initialize()
+	if(!config.use_overmap)
+		qdel(src)
+		return
+
+	if(!using_map.overmap_z)
+		build_overmap()
+
 	if(ispath(landing_area))
 		landing_area = locate(landing_area)
+
+	map_z = GetConnectedZlevels(z)
+	for(var/zlevel in map_z)
+		map_sectors["[zlevel]"] = src
+
+	if(!start_x)
+		start_x = rand(OVERMAP_EDGE, OVERMAP_SIZE - OVERMAP_EDGE)
+	if(!start_y)
+		start_y = rand(OVERMAP_EDGE, OVERMAP_SIZE - OVERMAP_EDGE)
+
+	forceMove(locate(start_x, start_y, using_map.overmap_z))
+	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
+
+	for(var/obj/machinery/computer/shuttle_control/explore/console in machines)
+		if(console.z in map_z)
+			console.home = src
 
 /obj/effect/overmap/sector
 	name = "generic sector"
@@ -25,20 +47,20 @@
 	icon_state = "sector"
 	anchored = 1
 
+/obj/effect/overmap/sector/initialize()
+	..()
+	for(var/obj/machinery/computer/helm/H in machines)
+		H.get_known_sectors()
 
-//===================================================================================
-//Hook for building overmap
-//===================================================================================
-
-/hook/startup/proc/build_overmap()
+/proc/build_overmap()
 	if(!config.use_overmap)
 		return 1
 
 	testing("Building overmap...")
 	world.maxz++
-	overmap_z = world.maxz
+	using_map.overmap_z = world.maxz
 	var/list/turfs = list()
-	for (var/square in block(locate(1,1,overmap_z), locate(OVERMAP_SIZE,OVERMAP_SIZE,overmap_z)))
+	for (var/square in block(locate(1,1,using_map.overmap_z), locate(OVERMAP_SIZE,OVERMAP_SIZE,using_map.overmap_z)))
 		var/turf/T = square
 		if(T.x == OVERMAP_SIZE || T.y == OVERMAP_SIZE)
 			T = T.ChangeTurf(/turf/unsimulated/map/edge)
@@ -49,20 +71,5 @@
 
 	var/area/overmap/A = new
 	A.contents.Add(turfs)
-	testing("Overmap created at Z[overmap_z].")
-
-	testing("Populating overmap...")
-	var/obj/effect/overmap/data
-	for(var/level in 1 to world.maxz)
-		data = locate("sector[level]")
-		if (data)
-			var/new_x = data.start_x ? data.start_x : rand(OVERMAP_EDGE, OVERMAP_SIZE - OVERMAP_EDGE)
-			var/new_y = data.start_y ? data.start_y : rand(OVERMAP_EDGE, OVERMAP_SIZE - OVERMAP_EDGE)
-			data.forceMove(locate(new_x, new_y, overmap_z))
-
-			data.map_z = GetConnectedZlevels(level)
-			for(var/zlevel in data.map_z)
-				map_sectors["[zlevel]"] = data
-
-			testing("Located sector \"[data.name]\" at [data.x],[data.y], containing Z [english_list(data.map_z)]")
+	testing("Overmap created at Z[using_map.overmap_z].")
 	return 1

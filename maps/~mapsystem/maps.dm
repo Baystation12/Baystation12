@@ -63,6 +63,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/flags = 0
 	var/evac_controller_type = /datum/evacuation_controller
+	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
 
 /datum/map/New()
 	..()
