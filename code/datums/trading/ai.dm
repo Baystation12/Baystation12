@@ -25,6 +25,8 @@ They sell generic supplies and ask for generic supplies.
 				"compliment_accept" = "Thank you, but that will not not change our business interactions.",
 				"insult_good"       = "I do not understand, are we not on good terms?",
 				"insult_bad"        = "I do not understand, are you insulting me?",
+
+				"bribe_refusal"     = "You have given me money to stay, however, I am a station. I do not leave.",
 				)
 	possible_wanted_items = list(/obj/item/device/                       = TRADER_SUBTYPES_ONLY,
 								/obj/item/device/assembly                = TRADER_BLACKLIST_ALL,

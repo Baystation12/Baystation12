@@ -3,6 +3,25 @@
 	want_multiplier = 5
 	typical_duration = 10
 
+/datum/trader/ship/unique/New()
+	..()
+	wanted_items = list()
+	for(var/type in possible_wanted_items)
+		var/status = possible_wanted_items[type]
+		if(status & TRADER_THIS_TYPE)
+			wanted_items += type
+		if(status & TRADER_SUBTYPES_ONLY)
+			wanted_items += subtypesof(type)
+		if(status & TRADER_BLACKLIST)
+			wanted_items -= type
+		if(status & TRADER_BLACKLIST_SUB)
+			wanted_items -= subtypesof(type)
+
+/datum/trader/ship/unique/tick()
+	if(prob(-disposition) || refuse_comms)
+		duration_of_stay--
+	return --duration_of_stay > 0
+
 /datum/trader/ship/unique/what_do_you_want()
 	return get_response("what_want", "I don't want anything!")
 
