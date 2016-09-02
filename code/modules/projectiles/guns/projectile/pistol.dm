@@ -20,7 +20,7 @@
 
 /obj/item/weapon/gun/projectile/sec/update_icon()
 	..()
-	if(ammo_magazine)
+	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		icon_state = "secguncomp"
 	else
 		icon_state = "secguncomp-e"
@@ -35,7 +35,7 @@
 
 /obj/item/weapon/gun/projectile/sec/wood/update_icon()
 	..()
-	if(ammo_magazine)
+	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		icon_state = "secgundark"
 	else
 		icon_state = "secgundark-e"
@@ -148,6 +148,8 @@
 		icon_state = "pistol-silencer"
 	else
 		icon_state = "pistol"
+	if(!(ammo_magazine && ammo_magazine.stored_ammo.len))
+		icon_state = "[icon_state]-e"
 
 /obj/item/weapon/silencer
 	name = "silencer"
