@@ -122,6 +122,7 @@ var/list/mining_floors = list()
 		return
 	name = "\improper [mineral.display_name] deposit"
 	ore_overlay = image('icons/obj/mining.dmi', "rock_[mineral.name]")
+	overlays = list(ore_overlay)
 
 //Not even going to touch this pile of spaghetti
 /turf/simulated/mineral/attackby(obj/item/weapon/W as obj, mob/user as mob)
