@@ -1,0 +1,6 @@
+author: Superbee29
+
+delete-after: True
+
+changes: 
+  - bugfix: "IPCs can no longer be stung by changelings."
