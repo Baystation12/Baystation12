@@ -2,6 +2,11 @@
 	data_core = new /datum/datacore()
 	return 1
 
+/datum/data/record
+	var/name = "record"
+	var/size = 5
+	var/list/fields = list()
+
 /datum/datacore
 	var/name = "datacore"
 	var/medical[] = list()

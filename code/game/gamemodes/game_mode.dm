@@ -219,8 +219,8 @@ var/global/list/additional_antag_types = list()
 			antag.attempt_spawn() //select antags to be spawned
 		antag.finalize_spawn() //actually spawn antags
 
-	if(emergency_shuttle && auto_recall_shuttle)
-		emergency_shuttle.auto_recall = 1
+	if(evacuation_controller && auto_recall_shuttle)
+		evacuation_controller.recall = 1
 
 	feedback_set_details("round_start","[time2text(world.realtime)]")
 	if(ticker && ticker.mode)
@@ -271,7 +271,7 @@ var/global/list/additional_antag_types = list()
 	command_announcement.Announce("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time, and post-evacuation recovery efforts will be substantially delayed.","Emergency Transmission")
 
 /datum/game_mode/proc/check_finished()
-	if(emergency_shuttle.returned() || station_was_nuked)
+	if(evacuation_controller.round_over() || station_was_nuked)
 		return 1
 	if(end_on_antag_death && antag_templates && antag_templates.len)
 		var/has_antags = 0
@@ -280,7 +280,7 @@ var/global/list/additional_antag_types = list()
 				has_antags = 1
 				break
 		if(!has_antags)
-			emergency_shuttle.auto_recall = 0
+			evacuation_controller.recall = 0
 			return 1
 	return 0
 
@@ -312,46 +312,24 @@ var/global/list/additional_antag_types = list()
 	var/ghosts = 0
 	var/escaped_humans = 0
 	var/escaped_total = 0
-	var/escaped_on_pod_1 = 0
-	var/escaped_on_pod_2 = 0
-	var/escaped_on_pod_3 = 0
-	var/escaped_on_pod_5 = 0
-	var/escaped_on_shuttle = 0
-
-	var/list/area/escape_locations = list(/area/shuttle/escape/centcom, /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom)
 
 	for(var/mob/M in player_list)
 		if(M.client)
 			clients++
-			if(ishuman(M))
-				if(M.stat != DEAD)
-					surviving_humans++
-					if(M.loc && M.loc.loc && M.loc.loc.type in escape_locations)
-						escaped_humans++
 			if(M.stat != DEAD)
-				surviving_total++
-				if(M.loc && M.loc.loc && M.loc.loc.type in escape_locations)
+				surviving_humans++
+				var/turf/T = get_turf(M)
+				if(T && (T in using_map.admin_levels)) // Still not great but beats the previous hard coded list of safe escape locations
+					if(ishuman(M))
+						escaped_humans++
 					escaped_total++
-
-				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape/centcom)
-					escaped_on_shuttle++
-
-				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape_pod1/centcom)
-					escaped_on_pod_1++
-				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape_pod2/centcom)
-					escaped_on_pod_2++
-				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape_pod3/centcom)
-					escaped_on_pod_3++
-				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape_pod5/centcom)
-					escaped_on_pod_5++
-
-			if(isghost(M))
+			else if(isghost(M))
 				ghosts++
 
 	var/text = ""
 	if(surviving_total > 0)
 		text += "<br>There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]"
-		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [emergency_shuttle.evac ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.<br>"
+		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [evacuation_controller.emergency_evacuation ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.<br>"
 	else
 		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
 	world << text
@@ -368,18 +346,8 @@ var/global/list/additional_antag_types = list()
 		feedback_set("escaped_human",escaped_humans)
 	if(escaped_total > 0)
 		feedback_set("escaped_total",escaped_total)
-	if(escaped_on_shuttle > 0)
-		feedback_set("escaped_on_shuttle",escaped_on_shuttle)
-	if(escaped_on_pod_1 > 0)
-		feedback_set("escaped_on_pod_1",escaped_on_pod_1)
-	if(escaped_on_pod_2 > 0)
-		feedback_set("escaped_on_pod_2",escaped_on_pod_2)
-	if(escaped_on_pod_3 > 0)
-		feedback_set("escaped_on_pod_3",escaped_on_pod_3)
-	if(escaped_on_pod_5 > 0)
-		feedback_set("escaped_on_pod_5",escaped_on_pod_5)
 
-	send2mainirc("A round of [src.name] has ended - [surviving_total] survivors, [ghosts] ghosts.")
+	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
 
 	return 0
 

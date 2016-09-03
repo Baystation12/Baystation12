@@ -17,7 +17,6 @@ var/list/organ_cache = list()
 
 	// Reference data.
 	var/mob/living/carbon/human/owner // Current mob owning the organ.
-	var/list/transplant_data          // Transplant match data.
 	var/list/autopsy_data = list()    // Trauma data for forensics.
 	var/list/trace_chemicals = list() // Traces of chemicals in the organ.
 	var/datum/dna/dna                 // Original DNA.
@@ -32,7 +31,6 @@ var/list/organ_cache = list()
 /obj/item/organ/Destroy()
 
 	if(owner)           owner = null
-	if(transplant_data) transplant_data.Cut()
 	if(autopsy_data)    autopsy_data.Cut()
 	if(trace_chemicals) trace_chemicals.Cut()
 	dna = null
@@ -329,18 +327,11 @@ var/list/organ_cache = list()
 
 	if(status & ORGAN_CUT_AWAY)
 		return 0 //organs don't work very well in the body when they aren't properly attached
-
-	var/datum/reagent/blood/transplant_blood = locate(/datum/reagent/blood) in reagents.reagent_list
-	transplant_data = list()
-	if(!transplant_blood)
-		transplant_data["species"] =    target.species.name
-		transplant_data["blood_type"] = target.dna.b_type
-		transplant_data["blood_DNA"] =  target.dna.unique_enzymes
-	else
-		transplant_data["species"] =    transplant_blood.data["species"]
-		transplant_data["blood_type"] = transplant_blood.data["blood_type"]
-		transplant_data["blood_DNA"] =  transplant_blood.data["blood_DNA"]
-
+		
+	// robotic organs emulate behavior of the equivalent flesh organ of the species
+	if(robotic >= ORGAN_ROBOT || !species)
+		species = target.species
+		
 	owner = target
 	forceMove(owner) //just in case
 	processing_objects -= src

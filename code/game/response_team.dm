@@ -119,7 +119,7 @@ proc/trigger_armed_response_team(var/force = 0)
 		return
 
 	command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. We will prepare and send one as soon as possible.", "[boss_name]")
-	emergency_shuttle.add_can_call_predicate(new/datum/emergency_shuttle_predicate/ert())
+	evacuation_controller.add_can_call_predicate(new/datum/evacuation_predicate/ert())
 
 	can_call_ert = 0 // Only one call per round, gentleman.
 	send_emergency_team = 1
@@ -127,18 +127,18 @@ proc/trigger_armed_response_team(var/force = 0)
 	sleep(600 * 5)
 	send_emergency_team = 0 // Can no longer join the ERT.
 
-/datum/emergency_shuttle_predicate/ert
+/datum/evacuation_predicate/ert
 	var/prevent_until
 
-/datum/emergency_shuttle_predicate/ert/New()
+/datum/evacuation_predicate/ert/New()
 	..()
 	prevent_until = world.time + 30 MINUTES
 
-/datum/emergency_shuttle_predicate/ert/is_valid()
+/datum/evacuation_predicate/ert/is_valid()
 	return world.time < prevent_until
 
-/datum/emergency_shuttle_predicate/ert/can_call(var/user)
+/datum/evacuation_predicate/ert/can_call(var/user)
 	if(world.time >= prevent_until)
 		return TRUE
-	user << "<span class='warning'>An emergency response team has been dispatched. Emergency shuttle requests will be denied until [duration2stationtime(prevent_until - world.time)].</span>"
+	user << "<span class='warning'>An emergency response team has been dispatched. Evacuation requests will be denied until [duration2stationtime(prevent_until - world.time)].</span>"
 	return FALSE

@@ -3,7 +3,8 @@
 	if(!current_antagonists.len)
 		return 0
 
-	var/text = "<br><br><font size = 2><b>The [current_antagonists.len == 1 ? "[role_text] was" : "[role_text_plural] were"]:</b></font>"
+	var/text = list()
+	text += "<br><br><font size = 2><b>The [current_antagonists.len == 1 ? "[role_text] was" : "[role_text_plural] were"]:</b></font>"
 	for(var/datum/mind/P in current_antagonists)
 		text += print_player(P)
 		text += get_special_objective_text(P)
@@ -36,7 +37,8 @@
 			num++
 
 	// Display the results.
-	world << text
+	text += "<br>"
+	world << jointext(text,null)
 
 /datum/antagonist/proc/print_objective(var/datum/objective/O, var/num, var/append_success)
 	var/text = "<br><b>Objective [num]:</b> [O.explanation_text] "

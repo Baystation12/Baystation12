@@ -33,6 +33,7 @@ var/list/mining_floors = list()
 	var/excav_overlay = ""
 	var/obj/item/weapon/last_find
 	var/datum/artifact_find/artifact_find
+	var/image/ore_overlay
 
 	has_resources = 1
 
@@ -70,6 +71,9 @@ var/list/mining_floors = list()
 			T.updateMineralOverlays()
 		else if(istype(turf_to_check,/turf/space) || istype(turf_to_check,/turf/simulated/floor))
 			turf_to_check.overlays += image('icons/turf/walls.dmi', "rock_side", dir = turn(step_overlays[direction], 180))
+
+	if(ore_overlay)
+		overlays += ore_overlay
 
 	if(excav_overlay)
 		overlays += excav_overlay
@@ -129,7 +133,7 @@ var/list/mining_floors = list()
 
 /turf/simulated/mineral/proc/UpdateMineral()
 	clear_ore_effects()
-	new /obj/effect/mineral(src, mineral)
+	ore_overlay = image('icons/obj/mining.dmi', "rock_[mineral.name]")
 	update_icon()
 
 //Not even going to touch this pile of spaghetti
@@ -263,8 +267,8 @@ var/list/mining_floors = list()
 		return ..()
 
 /turf/simulated/mineral/proc/clear_ore_effects()
-	for(var/obj/effect/mineral/M in contents)
-		qdel(M)
+	overlays -= ore_overlay
+	ore_overlay = null
 
 /turf/simulated/mineral/proc/DropMineral()
 	if(!mineral)

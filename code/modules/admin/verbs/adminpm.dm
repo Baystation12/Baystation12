@@ -56,12 +56,7 @@
 			else		src << "<font color='red'>Error: Private-Message: Client not found. They may have lost connection, so try using an adminhelp!</font>"
 			return
 
-
-	//clean the message if it's not sent by a high-rank admin
-	//todo: sanitize for all???
-	if(!check_rights(R_SERVER|R_DEBUG,0))
-		msg = sanitize(msg)
-		if(!msg)	return
+	msg = sanitize(msg)
 
 	var/recieve_pm_type = "Player"
 	if(holder)
@@ -125,8 +120,6 @@
 
 	if(!msg)
 		return
-
-	sanitize(msg)
 
 	// Handled on Bot32's end, unsure about other bots
 //	if(length(msg) > 400) // TODO: if message length is over 400, divide it up into seperate messages, the message length restriction is based on IRC limitations.  Probably easier to do this on the bots ends.

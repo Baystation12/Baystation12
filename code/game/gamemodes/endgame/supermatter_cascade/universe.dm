@@ -45,9 +45,8 @@ var/global/universe_has_ended = 0
 	for(var/mob/M in player_list)
 		M.flash_eyes()
 
-	if(emergency_shuttle.can_recall())
-		priority_announcement.Announce("The emergency shuttle has returned due to bluespace distortion.")
-		emergency_shuttle.recall()
+	if(evacuation_controller.cancel_evacuation())
+		priority_announcement.Announce("The evacuation has been aborted due to bluespace distortion.")
 
 	AreaSet()
 	MiscSet()

@@ -22,11 +22,11 @@
 	matter = list("steel" = 15000, "glass" = 3500)
 	origin_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 2)
 
-	var/on = 0							//is it turned on?
-	var/cover_open = 0					//is the cover open?
+	var/on = 0								//is it turned on?
+	var/cover_open = 0						//is the cover open?
 	var/obj/item/weapon/cell/cell
-	var/max_cooling = 12				// in degrees per second - probably don't need to mess with heat capacity here
-	var/charge_consumption = 3			// charge per second at max_cooling
+	var/max_cooling = 12					// in degrees per second - probably don't need to mess with heat capacity here
+	var/charge_consumption = 2 KILOWATTS	// energy usage at full power
 	var/thermostat = T20C
 
 /obj/item/device/suit_cooling_unit/ui_action_click()
@@ -55,7 +55,7 @@
 
 	H.bodytemperature -= temp_adj
 
-	cell.use(charge_usage)
+	cell.use(charge_usage * CELLRATE)
 	update_icon()
 
 	if(cell.charge <= 0)

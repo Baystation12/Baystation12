@@ -66,7 +66,7 @@
 	equip_cooldown = 8
 	name = "\improper CH-PS \"Immolator\" laser"
 	icon_state = "mecha_laser"
-	energy_drain = 30
+	energy_drain = 3 KILOWATTS
 	projectile = /obj/item/projectile/beam
 	fire_sound = 'sound/weapons/Laser.ogg'
 
@@ -75,7 +75,7 @@
 	name = "jury-rigged welder-laser"
 	desc = "While not regulation, this inefficient weapon can be attached to working exo-suits in desperate, or malicious, times."
 	icon_state = "mecha_laser"
-	energy_drain = 80
+	energy_drain = 10 KILOWATTS // Inefficient
 	projectile = /obj/item/projectile/beam
 	fire_sound = 'sound/weapons/Laser.ogg'
 	required_type = list(/obj/mecha/combat, /obj/mecha/working)
@@ -84,7 +84,7 @@
 	equip_cooldown = 15
 	name = "\improper CH-LC \"Solaris\" laser cannon"
 	icon_state = "mecha_laser"
-	energy_drain = 60
+	energy_drain = 6 KILOWATTS
 	projectile = /obj/item/projectile/beam/heavylaser
 	fire_sound = 'sound/weapons/lasercannonfire.ogg'
 
@@ -92,7 +92,7 @@
 	equip_cooldown = 40
 	name = "mkIV ion heavy cannon"
 	icon_state = "mecha_ion"
-	energy_drain = 120
+	energy_drain = 25 KILOWATTS
 	projectile = /obj/item/projectile/ion
 	fire_sound = 'sound/weapons/Laser.ogg'
 
@@ -100,7 +100,7 @@
 	equip_cooldown = 30
 	name = "eZ-13 mk2 heavy pulse rifle"
 	icon_state = "mecha_pulse"
-	energy_drain = 120
+	energy_drain = 15 KILOWATTS
 	origin_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 6, TECH_POWER = 4)
 	projectile = /obj/item/projectile/beam/pulse/heavy
 	fire_sound = 'sound/weapons/marauder.ogg'
@@ -120,7 +120,7 @@
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/taser
 	name = "\improper PBT \"Pacifier\" mounted taser"
 	icon_state = "mecha_taser"
-	energy_drain = 20
+	energy_drain = 2 KILOWATTS
 	equip_cooldown = 8
 	projectile = /obj/item/projectile/beam/stun
 	fire_sound = 'sound/weapons/Taser.ogg'
@@ -206,7 +206,7 @@
 	projectiles = 40
 	projectiles_per_shot = 4
 	deviation = 0.7
-	projectile_energy_cost = 25
+	projectile_energy_cost = 50 KILOWATTS
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg
 	name = "\improper Ultra AC 2"
@@ -217,7 +217,7 @@
 	projectiles = 300
 	projectiles_per_shot = 3
 	deviation = 0.3
-	projectile_energy_cost = 20
+	projectile_energy_cost = 40 KILOWATTS
 	fire_cooldown = 2
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack
@@ -235,7 +235,7 @@
 	auto_rearm = 1
 	fire_cooldown = 20
 	projectiles_per_shot = 1
-	projectile_energy_cost = 20
+	projectile_energy_cost = 40 KILOWATTS
 	missile_speed = 1
 	missile_range = 15
 	required_type = /obj/mecha  //Why restrict it to just mining or combat mechs?
@@ -251,7 +251,7 @@
 	projectile = /obj/item/missile
 	fire_sound = 'sound/effects/bang.ogg'
 	projectiles = 8
-	projectile_energy_cost = 1000
+	projectile_energy_cost = 200 KILOWATTS
 	equip_cooldown = 60
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive/Fire(atom/movable/AM, atom/target)
@@ -280,7 +280,7 @@
 	fire_sound = 'sound/effects/bang.ogg'
 	projectiles = 6
 	missile_speed = 1.5
-	projectile_energy_cost = 800
+	projectile_energy_cost = 200 KILOWATTS
 	equip_cooldown = 60
 	var/det_time = 20
 

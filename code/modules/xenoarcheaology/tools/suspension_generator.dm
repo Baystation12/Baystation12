@@ -8,7 +8,7 @@
 	var/obj/item/weapon/cell/cell
 	var/obj/item/weapon/card/id/auth_card
 	var/locked = 1
-	var/power_use = 5
+	var/power_use = 5 KILOWATTS
 	var/obj/effect/suspension_field/suspension_field
 
 /obj/machinery/suspension_gen/New()
@@ -16,13 +16,14 @@
 	src.cell = new /obj/item/weapon/cell/high(src)
 
 /obj/machinery/suspension_gen/process()
+	set background = 1
 	if(suspension_field)
-		cell.charge -= power_use
+		cell.use(power_use * CELLRATE)
 
 		var/turf/T = get_turf(suspension_field)
 		for(var/mob/living/M in T)
 			M.weakened = max(M.weakened, 3)
-			cell.charge -= power_use
+			cell.use(power_use * CELLRATE)
 			if(prob(5))
 				M << "<span class='warning'>[pick("You feel tingly","You feel like floating","It is hard to speak","You can barely move")].</span>"
 

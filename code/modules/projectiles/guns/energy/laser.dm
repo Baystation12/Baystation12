@@ -56,7 +56,7 @@ obj/item/weapon/gun/energy/retro
 	requires_two_hands = 6 //large and heavy
 	w_class = 5
 	projectile_type = /obj/item/projectile/beam/heavylaser
-	charge_cost = 400
+	charge_cost = 40
 	max_shots = 6
 	accuracy = 2
 	fire_delay = 20
@@ -79,7 +79,7 @@ obj/item/weapon/gun/energy/retro
 	projectile_type = /obj/item/projectile/beam/xray/midlaser
 	requires_two_hands = 2
 	w_class = 4
-	charge_cost = 150
+	charge_cost = 15
 	max_shots = 10
 
 /obj/item/weapon/gun/energy/xray/pistol
@@ -100,7 +100,7 @@ obj/item/weapon/gun/energy/retro
 	projectile_type = /obj/item/projectile/beam/sniper
 	requires_two_hands = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	slot_flags = SLOT_BACK
-	charge_cost = 400
+	charge_cost = 40
 	max_shots = 4
 	fire_delay = 35
 	force = 10

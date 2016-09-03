@@ -2,8 +2,7 @@
 	name = "helm control console"
 	icon_keyboard = "med_key"
 	icon_screen = "id"
-	var/state = "status"
-	var/obj/effect/map/ship/linked			//connected overmap object
+	var/obj/effect/overmap/ship/linked			//connected overmap object
 	var/autopilot = 0
 	var/manual_control = 0
 	var/list/known_sectors = list()
@@ -11,27 +10,24 @@
 	var/dy		//coordinates
 
 /obj/machinery/computer/helm/initialize()
-	linked = map_sectors["[z]"]
-	if (linked)
-		if(!linked.nav_control)
-			linked.nav_control = src
-		testing("Helm console at level [z] found a corresponding overmap object '[linked.name]'.")
-	else
-		testing("Helm console at level [z] was unable to find a corresponding overmap object.")
+	..()
+	get_known_sectors()
 
-	for(var/level in map_sectors)
-		var/obj/effect/map/sector/S = map_sectors["[level]"]
-		if (istype(S) && S.always_known)
+/obj/machinery/computer/helm/proc/get_known_sectors()
+	var/area/overmap/map = locate() in world
+	for(var/obj/effect/overmap/sector/S in map)
+		if (S.known)
 			var/datum/data/record/R = new()
 			R.fields["name"] = S.name
 			R.fields["x"] = S.x
 			R.fields["y"] = S.y
-			known_sectors += R
+			known_sectors[S.name] = R
+	..()
 
 /obj/machinery/computer/helm/process()
 	..()
 	if (autopilot && dx && dy)
-		var/turf/T = locate(dx,dy,1)
+		var/turf/T = locate(dx,dy,using_map.overmap_z)
 		if(linked.loc == T)
 			if(linked.is_still())
 				autopilot = 0
@@ -77,23 +73,26 @@
 		return
 
 	var/data[0]
-	data["state"] = state
 
-	data["sector"] = linked.current_sector ? linked.current_sector.name : "Deep Space"
-	data["sector_info"] = linked.current_sector ? linked.current_sector.desc : "Not Available"
+	var/turf/T = get_turf(linked)
+	var/obj/effect/overmap/sector/current_sector = locate() in T
+
+	data["sector"] = current_sector ? current_sector.name : "Deep Space"
+	data["sector_info"] = current_sector ? current_sector.desc : "Not Available"
 	data["s_x"] = linked.x
 	data["s_y"] = linked.y
 	data["dest"] = dy && dx
 	data["d_x"] = dx
 	data["d_y"] = dy
 	data["speed"] = linked.get_speed()
-	data["accel"] = round(linked.get_acceleration())
+	data["accel"] = linked.get_acceleration()
 	data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 	data["autopilot"] = autopilot
 	data["manual_control"] = manual_control
 
 	var/list/locations[0]
-	for (var/datum/data/record/R in known_sectors)
+	for (var/key in known_sectors)
+		var/datum/data/record/R = known_sectors[key]
 		var/list/rdata[0]
 		rdata["name"] = R.fields["name"]
 		rdata["x"] = R.fields["x"]
@@ -123,6 +122,9 @@
 		if(!sec_name)
 			sec_name = "Sector #[known_sectors.len]"
 		R.fields["name"] = sec_name
+		if(sec_name in known_sectors)
+			usr << "<span class='warning'>Sector with that name already exists, please input a different name.</span>"
+			return
 		switch(href_list["add"])
 			if("current")
 				R.fields["x"] = linked.x
@@ -132,11 +134,12 @@
 				R.fields["x"] = Clamp(newx, 1, world.maxx)
 				var/newy = input("Input new entry y coordinate", "Coordinate input", linked.y) as num
 				R.fields["y"] = Clamp(newy, 1, world.maxy)
-		known_sectors += R
+		known_sectors[sec_name] = R
 
 	if (href_list["remove"])
 		var/datum/data/record/R = locate(href_list["remove"])
-		known_sectors.Remove(R)
+		known_sectors[R.fields["name"]] = null
+		qdel(R)
 
 	if (href_list["setx"])
 		var/newx = input("Input new destiniation x coordinate", "Coordinate input", dx) as num|null
@@ -169,8 +172,6 @@
 	if (href_list["manual"])
 		manual_control = !manual_control
 
-	if (href_list["state"])
-		state = href_list["state"]
 	add_fingerprint(usr)
 	updateUsrDialog()
 

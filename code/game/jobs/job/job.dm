@@ -26,6 +26,9 @@
 
 	var/outfit_type                       // The outfit the employee will be dressed in, if any
 
+	var/list/allowed_branches			  // For Torch, also expandable for other purposes
+	var/list/allowed_ranks				  // Ditto
+
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
 	if(!outfit)
