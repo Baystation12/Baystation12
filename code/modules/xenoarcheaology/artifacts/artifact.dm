@@ -48,6 +48,11 @@
 		if(prob(25))
 			my_effect.trigger = pick(TRIGGER_WATER, TRIGGER_ACID, TRIGGER_VOLATILE, TRIGGER_TOXIN)
 
+/obj/machinery/artifact/Destroy()
+	qdel(my_effect)
+	qdel(secondary_effect)
+	..()
+
 /obj/machinery/artifact/process()
 	var/turf/L = loc
 	if(!istype(L)) 	// We're inside a container or on null turf, either way stop processing effects
@@ -232,30 +237,33 @@
 /obj/machinery/artifact/Bumped(M as mob|obj)
 	..()
 	if(istype(M,/obj))
-		if(M:throwforce >= 10)
+		var/obj/O = M
+		if(O.throwforce >= 10)
 			if(my_effect.trigger == TRIGGER_FORCE)
 				my_effect.ToggleActivate()
 			if(secondary_effect && secondary_effect.trigger == TRIGGER_FORCE && prob(25))
 				secondary_effect.ToggleActivate(0)
-	else if(ishuman(M) && !istype(M:gloves,/obj/item/clothing/gloves))
-		var/warn = 0
+	else if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(!istype(H.gloves, /obj/item/clothing/gloves))
+			var/warn = 0
 
-		if (my_effect.trigger == TRIGGER_TOUCH && prob(50))
-			my_effect.ToggleActivate()
-			warn = 1
-		if(secondary_effect && secondary_effect.trigger == TRIGGER_TOUCH && prob(25))
-			secondary_effect.ToggleActivate(0)
-			warn = 1
+			if (my_effect.trigger == TRIGGER_TOUCH && prob(50))
+				my_effect.ToggleActivate()
+				warn = 1
+			if(secondary_effect && secondary_effect.trigger == TRIGGER_TOUCH && prob(25))
+				secondary_effect.ToggleActivate(0)
+				warn = 1
 
-		if (my_effect.effect == EFFECT_TOUCH && prob(50))
-			my_effect.DoEffectTouch(M)
-			warn = 1
-		if(secondary_effect && secondary_effect.effect == EFFECT_TOUCH && secondary_effect.activated && prob(50))
-			secondary_effect.DoEffectTouch(M)
-			warn = 1
+			if (my_effect.effect == EFFECT_TOUCH && prob(50))
+				my_effect.DoEffectTouch(M)
+				warn = 1
+			if(secondary_effect && secondary_effect.effect == EFFECT_TOUCH && secondary_effect.activated && prob(50))
+				secondary_effect.DoEffectTouch(M)
+				warn = 1
 
-		if(warn)
-			M << "<b>You accidentally touch [src].</b>"
+			if(warn)
+				M << "<b>You accidentally touch [src].</b>"
 	..()
 
 /obj/machinery/artifact/bullet_act(var/obj/item/projectile/P)

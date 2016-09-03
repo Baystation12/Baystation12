@@ -4,7 +4,7 @@
 
 /datum/artifact_find/New()
 
-	artifact_id = "[pick("kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
+	artifact_id = "[pick("kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[random_id(/datum/artifact_find, 100, 999)]"
 
 	artifact_find_type = pick(
 	5;/obj/machinery/power/supermatter,
