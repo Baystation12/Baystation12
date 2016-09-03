@@ -1,5 +1,0 @@
-author: Superbee29
-delete-after: True
-
-changes: 
-  - bugfix: "Changeling transformation (of itself and others via sting) no longer causes organ rejection."
