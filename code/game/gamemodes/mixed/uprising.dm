@@ -5,7 +5,7 @@
 	config_tag = "uprising"
 	required_players = 15
 	required_enemies = 3
-	end_on_antag_death = 1
+	end_on_antag_death = 0
 	antag_tags = list(MODE_REVOLUTIONARY, MODE_LOYALIST, MODE_CULTIST)
 	require_all_templates = 1
 	votable = 0
