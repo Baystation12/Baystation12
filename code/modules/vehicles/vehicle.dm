@@ -48,7 +48,7 @@
 /obj/vehicle/Move()
 	if(world.time > l_move_time + move_delay)
 		var/old_loc = get_turf(src)
-		if(on && powered && cell.charge < charge_use)
+		if(on && powered && cell.charge < (charge_use * CELLRATE))
 			turn_off()
 
 		var/init_anc = anchored
@@ -168,7 +168,7 @@
 /obj/vehicle/proc/turn_on()
 	if(stat)
 		return 0
-	if(powered && cell.charge < charge_use)
+	if(powered && cell.charge < (charge_use * CELLRATE))
 		return 0
 	on = 1
 	set_light(initial(light_range))
@@ -225,7 +225,7 @@
 		turn_off()
 		return
 
-	if(cell.charge < charge_use)
+	if(cell.charge < (charge_use * CELLRATE))
 		turn_off()
 		return
 
