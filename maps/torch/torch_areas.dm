@@ -383,36 +383,38 @@
 	base_turf = /turf/simulated/floor/plating
 
 /area/calypso_hangar/firstdeck
-	name = "\improper north of first deck"
+	name = "north of first deck"
 	icon_state = "north"
 
 /area/calypso_hangar/seconddeck
-	name = "\improper south of second deck"
+	name = "south of second deck"
 	icon_state = "south"
 
 /area/calypso_hangar/thirddeck
-	name = "\improper west of third deck"
+	name = "west of third deck"
 	icon_state = "west"
 
 /area/calypso_hangar/fourthdeck
-	name = "\improper east of fourth deck"
+	name = "east of fourth deck"
 	icon_state = "east"
 
 /area/calypso_hangar/mining
-	name = "\improper asteroid"
+	name = "mining site"
 	icon_state = "shuttlered"
 
 /area/calypso_hangar/salvage
-	name = "\improper debris field"
+	name = "debris field"
 	icon_state = "shuttlered"
 
 /area/calypso_hangar/away
-	name = "\improper away site"
+	name = "away site"
 	icon_state = "shuttlered"
+	base_turf = /turf/simulated/floor/asteroid
 
 /area/calypso_hangar/transit
-	name = "\improper bluespace"
+	name = "transit"
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 //Guppy
 
@@ -430,32 +432,33 @@
 	base_turf = /turf/simulated/floor/plating
 
 /area/guppy_hangar/firstdeck
-	name = "\improper east of first deck"
+	name = "east of first deck"
 	icon_state = "east"
 
 /area/guppy_hangar/seconddeck
-	name = "\improper west of second deck"
+	name = "west of second deck"
 	icon_state = "west"
 
 /area/guppy_hangar/thirddeck
-	name = "\improper south of third deck"
+	name = "south of third deck"
 	icon_state = "south"
 
 /area/guppy_hangar/fourthdeck
-	name = "\improper north of fourth deck"
+	name = "north of fourth deck"
 	icon_state = "north"
 
 /area/guppy_hangar/mining
-	name = "\improper asteroid"
+	name = "mining site"
 	icon_state = "shuttlered"
 
 /area/guppy_hangar/salvage
-	name = "\improper debris field"
+	name = "debris field"
 	icon_state = "shuttlered"
 
 /area/guppy_hangar/transit
-	name = "\improper bluespace"
+	name = "transit"
 	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 //Turbolift
 /area/turbolift
@@ -529,33 +532,220 @@
 	base_turf = /turf/simulated/floor/plating
 
 /area/ninja_dojo/firstdeck
-	name = "\improper south of first deck"
+	name = "south of first deck"
 	icon_state = "south"
 
 /area/ninja_dojo/seconddeck
-	name = "\improper north of second deck"
+	name = "north of second deck"
 	icon_state = "north"
 
 /area/ninja_dojo/thirddeck
-	name = "\improper east of third deck"
+	name = "east of third deck"
 	icon_state = "east"
 
 /area/ninja_dojo/fourthdeck
-	name = "\improper west of fourth deck"
+	name = "west of fourth deck"
 	icon_state = "west"
 
 /area/ninja_dojo/mining
-	name = "\improper asteroid"
+	name = "mining site"
 	icon_state = "shuttlered"
 
 /area/ninja_dojo/salvage
-	name = "\improper debris field"
+	name = "debris field"
 	icon_state = "shuttlered"
 
 /area/ninja_dojo/away
-	name = "\improper away site"
+	name = "away site"
 	icon_state = "shuttlered"
 
 /area/ninja_dojo/transit
-	name = "\improper bluespace"
+	name = "bluespace"
 	icon_state = "shuttle"
+	base_turf = /turf/space/bluespace
+
+//Merchant
+
+/area/shuttle/merchant
+	icon_state = "shuttlegrn"
+
+/area/shuttle/merchant/home
+	name = "\improper Merchant Vessel - Home"
+
+/area/shuttle/merchant/away
+	name = "\improper Merchant Vessel - Away"
+
+
+//Merc
+
+/area/syndicate_station
+	name = "\improper Independant Station"
+	icon_state = "yellow"
+	requires_power = 0
+	flags = RAD_SHIELDED
+
+/area/syndicate_station/start
+	name = "\improper Mercenary Forward Operating Base"
+	icon_state = "yellow"
+
+/area/syndicate_station/firstdeck
+	name = "north-east of first deck"
+	icon_state = "northeast"
+
+/area/syndicate_station/seconddeck
+	name = "south-east of second deck"
+	icon_state = "southeast"
+
+/area/syndicate_station/thirddeck
+	name = "south of third deck"
+	icon_state = "south"
+
+/area/syndicate_station/fourthdeck
+	name = "north-west of fourth deck"
+	icon_state = "northwest"
+
+/area/syndicate_station/mining
+	name = "mining site"
+	icon_state = "shuttlered"
+
+/area/syndicate_station/salvage
+	name = "debris field"
+	icon_state = "shuttlered"
+
+/area/syndicate_station/away
+	name = "away site"
+	icon_state = "shuttlered"
+	base_turf = /turf/simulated/floor/asteroid
+
+/area/syndicate_station/transit
+	name = " bluespace"
+	icon_state = "shuttle"
+	base_turf = /turf/space/bluespace
+
+/area/syndicate_station/arrivals_dock
+	name = "\improper docked with SEV Torch"
+	icon_state = "shuttle"
+
+//Skipjack
+
+/area/skipjack_station
+	name = "Raider Outpost"
+	icon_state = "yellow"
+	requires_power = 0
+
+/area/skipjack_station/start
+	name = "\improper Skipjack"
+	icon_state = "yellow"
+
+/area/skipjack_station/transit
+	name = "bluespace"
+	icon_state = "shuttle"
+	base_turf = /turf/space/bluespace
+
+/area/skipjack_station/firstdeck
+	name = "north-west of first deck"
+	icon_state = "northwest"
+
+/area/skipjack_station/seconddeck
+	name = "south-west of second deck"
+	icon_state = "southwest"
+
+/area/skipjack_station/thirddeck
+	name = "south-east of third deck"
+	icon_state = "southeast"
+
+/area/skipjack_station/fourthdeck
+	name = "north-east of fourth deck"
+	icon_state = "northeast"
+
+/area/skipjack_station/mining
+	name = "mining site"
+	icon_state = "shuttlered"
+
+/area/skipjack_station/salvage
+	name = "debris field"
+	icon_state = "shuttlered"
+
+/area/skipjack_station/away
+	name = "away site"
+	icon_state = "shuttlered"
+	base_turf = /turf/simulated/floor/asteroid
+
+/area/skipjack_station/arrivals_dock
+	name = "\improper docked with SEV Torch"
+	icon_state = "shuttle"
+
+//NT rescue shuttle
+
+/area/rescue_base
+	name = "\improper Response Team Base"
+	icon_state = "yellow"
+	requires_power = 0
+	lighting_use_dynamic = 1
+	flags = RAD_SHIELDED
+
+/area/rescue_base/base
+	name = "\improper Barracks"
+	icon_state = "yellow"
+	lighting_use_dynamic = 0
+
+/area/rescue_base/start
+	name = "\improper Response Team Base"
+	icon_state = "shuttlered"
+	base_turf = /turf/unsimulated/floor/rescue_base
+
+/area/rescue_base/firstdeck
+	name = "south-west of first deck"
+	icon_state = "southwest"
+
+/area/rescue_base/seconddeck
+	name = "north-west of second deck"
+	icon_state = "northwest"
+
+/area/rescue_base/thirddeck
+	name = "north of third deck"
+	icon_state = "north"
+
+/area/rescue_base/fourthdeck
+	name = "south-east of fourth deck"
+	icon_state = "southeast"
+
+/area/rescue_base/away
+	name = "away site"
+	icon_state = "shuttlered"
+
+/area/rescue_base/salvage
+	name = "debris field"
+	icon_state = "shuttlered"
+
+/area/rescue_base/mining
+	name = "mining site"
+	icon_state = "shuttlered"
+	base_turf = /turf/simulated/floor/asteroid
+
+/area/rescue_base/arrivals_dock
+	name = "\improper docked with SEV Torch"
+	icon_state = "shuttle"
+
+/area/rescue_base/transit
+	name = "bluespace"
+	icon_state = "shuttle"
+	base_turf = /turf/space/bluespace
+
+// Elevator areas.
+/area/shuttle/turbolift/torch_top
+	name = "First Deck"
+	lift_announce_str = "Arriving at Operations Deck: Bridge. Command Offices. Emergency Armory. Infirmary. Research Wing."
+
+/area/shuttle/turbolift/torch_second
+	name = "Second Deck"
+	lift_announce_str = "Arriving at Maintenance Deck: Engineering. Atmospherics. AI Core. Sanitation."
+
+/area/shuttle/turbolift/torch_first
+	name = "Third Deck"
+	lift_announce_str = "Arriving at Habitation Deck: EVA. Security Wing. Telecommunications. Hydroponics. Mess Hall. Cryogenic Storage."
+
+/area/shuttle/turbolift/torch_ground
+	name = "Fourth Deck"
+	lift_announce_str = "Arriving at Hangar Deck: Shuttle Docks. Storage. Main Hangar. Supply Office."
+	base_turf = /turf/simulated/floor

@@ -7,35 +7,35 @@
 /datum/uplink_item/item/services/fake_ion_storm
 	name = "Ion Storm Announcement"
 	desc = "Interferes with the station's ion sensors."
-	item_cost = 2
+	item_cost = 8
 	path = /obj/item/device/uplink_service/fake_ion_storm
 
 /datum/uplink_item/item/services/suit_sensor_garble
 	name = "Complete Suit Sensor Jamming"
 	desc = "Garbles all suit sensor data for 10 minutes."
-	item_cost = 4
+	item_cost = 16
 	path = /obj/item/device/uplink_service/jamming/garble
 
 /datum/uplink_item/item/services/fake_rad_storm
 	name = "Radiation Storm Announcement"
 	desc = "Interferes with the station's radiation sensors."
-	item_cost = 6
-	path = /obj/item/device/uplink_service/fake_ion_storm
+	item_cost = 24
+	path = /obj/item/device/uplink_service/fake_rad_storm
 
 /datum/uplink_item/item/services/fake_crew_annoncement
 	name = "Crew Arrival Announcement and Records"
 	desc = "Creates a fake crew arrival announcement as well as fake crew records, using your current appearance (including held items!) and worn id card. Prepare well!"
-	item_cost = 8
+	item_cost = 32
 	path = /obj/item/device/uplink_service/fake_crew_announcement
 
 /datum/uplink_item/item/services/suit_sensor_shutdown
 	name = "Complete Suit Sensor Shutdown"
 	desc = "Completely disables all suit sensors for 10 minutes."
-	item_cost = 10
+	item_cost = 40
 	path = /obj/item/device/uplink_service/jamming
 
 /datum/uplink_item/item/services/fake_update_annoncement
-	item_cost = 10
+	item_cost = 40
 	path = /obj/item/device/uplink_service/fake_update_announcement
 
 /datum/uplink_item/item/services/fake_update_annoncement/New()
@@ -223,7 +223,7 @@
 	var/datum/data/record/medical = data_core.CreateMedicalRecord(general.fields["name"], general.fields["id"])
 	data_core.CreateSecurityRecord(general.fields["name"], general.fields["id"])
 
-	if(!random_general_record)
+	if(random_general_record)
 		general.fields["citizenship"]	= random_general_record.fields["citizenship"]
 		general.fields["faction"] 		= random_general_record.fields["faction"]
 		general.fields["fingerprint"] 	= random_general_record.fields["fingerprint"]

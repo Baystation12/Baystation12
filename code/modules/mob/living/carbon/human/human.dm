@@ -27,16 +27,16 @@
 		if(mind)
 			mind.name = real_name
 
-	hud_list[HEALTH_HUD]      = image('icons/mob/hud_med.dmi', src, "100")
-	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealthy")
-	hud_list[LIFE_HUD]	      = image('icons/mob/hud.dmi', src, "hudhealthy")
-	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudunknown")
-	hud_list[WANTED_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPLOYAL_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[STATUS_HUD_OOC]  = image('icons/mob/hud.dmi', src, "hudhealthy")
+	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud_med.dmi', src, "100")
+	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
+	hud_list[LIFE_HUD]	      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
+	hud_list[ID_HUD]          = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudunknown")
+	hud_list[WANTED_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPLOYAL_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPCHEM_HUD]     = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPTRACK_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[STATUS_HUD_OOC]  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
 
 	human_mob_list |= src
 	..()
@@ -58,8 +58,9 @@
 	if(statpanel("Status"))
 		stat("Intent:", "[a_intent]")
 		stat("Move Mode:", "[m_intent]")
-		if(emergency_shuttle)
-			var/eta_status = emergency_shuttle.get_status_panel_eta()
+
+		if(evacuation_controller)
+			var/eta_status = evacuation_controller.get_status_panel_eta()
 			if(eta_status)
 				stat(null, eta_status)
 
@@ -71,7 +72,7 @@
 				stat("Tank Pressure", internal.air_contents.return_pressure())
 				stat("Distribution Pressure", internal.distribute_pressure)
 
-		var/obj/item/organ/xenos/plasmavessel/P = internal_organs_by_name["plasma vessel"]
+		var/obj/item/organ/internal/xenos/plasmavessel/P = internal_organs_by_name[BP_PLASMA]
 		if(P)
 			stat(null, "Phoron Stored: [P.stored_plasma]/[P.max_plasma]")
 
@@ -142,26 +143,12 @@
 	var/weapon_message = "Explosive Blast"
 
 	for(var/obj/item/organ/external/temp in organs)
-		switch(temp.name)
-			if("head")
+		switch(temp.organ_tag)
+			if(BP_HEAD)
 				update |= temp.take_damage(b_loss * 0.2, f_loss * 0.2, used_weapon = weapon_message)
-			if("chest")
+			if(BP_CHEST)
 				update |= temp.take_damage(b_loss * 0.4, f_loss * 0.4, used_weapon = weapon_message)
-			if("l_arm")
-				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05, used_weapon = weapon_message)
-			if("r_arm")
-				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05, used_weapon = weapon_message)
-			if("l_leg")
-				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05, used_weapon = weapon_message)
-			if("r_leg")
-				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05, used_weapon = weapon_message)
-			if("r_foot")
-				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05, used_weapon = weapon_message)
-			if("l_foot")
-				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05, used_weapon = weapon_message)
-			if("r_arm")
-				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05, used_weapon = weapon_message)
-			if("l_arm")
+			else
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05, used_weapon = weapon_message)
 	if(update)	UpdateDamageIcon()
 
@@ -171,7 +158,7 @@
 	var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(M)
 	L.imp_in = M
 	L.implanted = 1
-	var/obj/item/organ/external/affected = M.organs_by_name["head"]
+	var/obj/item/organ/external/affected = M.organs_by_name[BP_HEAD]
 	affected.implants += L
 	L.part = affected
 	L.implanted(src)
@@ -317,7 +304,7 @@
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
 /mob/living/carbon/human/proc/get_face_name()
-	var/obj/item/organ/external/head = get_organ("head")
+	var/obj/item/organ/external/head = get_organ(BP_HEAD)
 	if(!head || head.disfigured || head.is_stump() || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
 		return "Unknown"
 	return real_name
@@ -346,7 +333,7 @@
 	if(status_flags & GODMODE)	return 0	//godmode
 
 	if (!def_zone)
-		def_zone = pick("l_hand", "r_hand")
+		def_zone = pick(BP_L_HAND, BP_R_HAND)
 
 	var/obj/item/organ/external/affected_organ = get_organ(check_zone(def_zone))
 	var/siemens_coeff = base_siemens_coeff * get_siemens_coefficient_organ(affected_organ)
@@ -653,21 +640,15 @@
 ///eyecheck()
 ///Returns a number between -1 to 2
 /mob/living/carbon/human/eyecheck()
-	if(!species.has_organ["eyes"]) //No eyes, can't hurt them.
-		return FLASH_PROTECTION_MAJOR
-
-	if(internal_organs_by_name["eyes"]) // Eyes are fucked, not a 'weak point'.
-		var/obj/item/organ/I = internal_organs_by_name["eyes"]
+	if(internal_organs_by_name[BP_EYES]) // Eyes are fucked, not a 'weak point'.
+		var/obj/item/organ/I = internal_organs_by_name[BP_EYES]
 		if(I.status & ORGAN_CUT_AWAY)
 			return FLASH_PROTECTION_MAJOR
-
 	return flash_protection
 
 //Used by various things that knock people out by applying blunt trauma to the head.
 //Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
-/mob/living/carbon/human/proc/headcheck(var/target_zone, var/brain_tag = "brain")
-	if(!species.has_organ[brain_tag])
-		return 0
+/mob/living/carbon/human/proc/headcheck(var/target_zone, var/brain_tag = BP_BRAIN)
 
 	var/obj/item/organ/affecting = internal_organs_by_name[brain_tag]
 
@@ -721,15 +702,17 @@
 			xylophone=0
 	return
 
-/mob/living/carbon/human/proc/check_has_mouth()
+/mob/living/proc/check_has_mouth()
+	return 1
+
+/mob/living/carbon/human/check_has_mouth()
 	// Todo, check stomach organ when implemented.
-	var/obj/item/organ/external/head/H = get_organ("head")
+	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
 	if(!H || !H.can_intake_reagents)
 		return 0
 	return 1
 
 /mob/living/carbon/human/proc/vomit()
-
 	if(!check_has_mouth())
 		return
 	if(stat == DEAD)
@@ -741,16 +724,25 @@
 			src << "<span class='warning'>You feel like you are about to throw up!</span>"
 			spawn(100)	//and you have 10 more for mad dash to the bucket
 				Stun(5)
+				if(nutrition < 40)
+					custom_emote(1,"dry heaves.")
+				else
+					for(var/a in stomach_contents)
+						var/atom/movable/A = a
+						A.forceMove(get_turf(src))
+						stomach_contents.Remove(a)
+						if(src.species.gluttonous & GLUT_PROJECTILE_VOMIT)
+							A.throw_at(get_edge_target_turf(src,src.dir),7,7,src)
 
-				src.visible_message("<span class='warning'>[src] throws up!</span>","<span class='warning'>You throw up!</span>")
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+					src.visible_message("<span class='warning'>[src] throws up!</span>","<span class='warning'>You throw up!</span>")
+					playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
-				var/turf/location = loc
-				if (istype(location, /turf/simulated))
-					location.add_vomit_floor(src, 1)
+					var/turf/location = loc
+					if (istype(location, /turf/simulated))
+						location.add_vomit_floor(src, 1)
 
-				nutrition -= 40
-				adjustToxLoss(-3)
+					nutrition -= 40
+					adjustToxLoss(-3)
 				spawn(350)	//wait 35 seconds before next volley
 					lastpuke = 0
 
@@ -823,12 +815,14 @@
 	if(new_style)
 		f_style = new_style
 
-	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female")
+	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female", "Neutral")
 	if (new_gender)
 		if(new_gender == "Male")
 			gender = MALE
-		else
+		else if(new_gender == "Female")
 			gender = FEMALE
+		else
+			gender = NEUTER
 	regenerate_icons()
 	check_dna()
 
@@ -913,16 +907,15 @@
 
 /mob/living/carbon/human/revive()
 
-	if(species && !(species.flags & NO_BLOOD))
+	if(should_have_organ(BP_HEART))
 		vessel.add_reagent("blood",species.blood_volume-vessel.total_volume)
 		fixblood()
 
-	// Fix up all organs.
-	// This will ignore any prosthetics in the prefs currently.
-	species.create_organs(src)
+	species.create_organs(src) // Reset our organs/limbs.
+	restore_all_organs()       // Reapply robotics/amputated status from preferences.
 
 	if(!client || !key) //Don't boot out anyone already in the mob.
-		for (var/obj/item/organ/brain/H in world)
+		for (var/obj/item/organ/internal/brain/H in world)
 			if(H.brainmob)
 				if(H.brainmob.real_name == src.real_name)
 					if(H.brainmob.mind)
@@ -939,11 +932,11 @@
 	..()
 
 /mob/living/carbon/human/proc/is_lung_ruptured()
-	var/obj/item/organ/lungs/L = internal_organs_by_name["lungs"]
+	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[BP_LUNGS]
 	return L && L.is_bruised()
 
 /mob/living/carbon/human/proc/rupture_lung()
-	var/obj/item/organ/lungs/L = internal_organs_by_name["lungs"]
+	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[BP_LUNGS]
 	if(L)
 		L.rupture()
 
@@ -1022,27 +1015,40 @@
 				return 1
 	return 0
 
-/mob/living/carbon/human/proc/handle_embedded_objects()
-
+/mob/living/carbon/human/proc/handle_embedded_and_stomach_objects()
 	for(var/obj/item/organ/external/organ in src.organs)
-		if(organ.splinted) //Splints prevent movement.
+		if(organ.splinted)
 			continue
 		for(var/obj/item/O in organ.implants)
 			if(!istype(O,/obj/item/weapon/implant) && prob(5)) //Moving with things stuck in you could be bad.
-				// All kinds of embedded objects cause bleeding.
-				if(species.flags & NO_PAIN)
-					src << "<span class='warning'>You feel [O] moving inside your [organ.name].</span>"
-				else
-					var/msg = pick( \
-						"<span class='warning'>A spike of pain jolts your [organ.name] as you bump [O] inside.</span>", \
-						"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>", \
-						"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>")
-					src << msg
+				jossle_internal_object(organ, O)
+	var/obj/item/organ/external/groin = src.get_organ(BP_GROIN)
+	if(groin && stomach_contents && stomach_contents.len)
+		for(var/obj/item/O in stomach_contents)
+			if(O.edge || O.sharp)
+				if(prob(1))
+					stomach_contents.Remove(O)
+					if(can_feel_pain())
+						src << "<span class='danger'>You feel something rip out of your stomach!</span>"
+						groin.embed(O)
+				else if(prob(5))
+					jossle_internal_object(groin,O)
 
-				organ.take_damage(rand(1,3), 0, 0)
-				if(!(organ.robotic >= ORGAN_ROBOT) && !(species.flags & NO_BLOOD)) //There is no blood in protheses.
-					organ.status |= ORGAN_BLEEDING
-					src.adjustToxLoss(rand(1,3))
+/mob/living/carbon/human/proc/jossle_internal_object(var/obj/item/organ/organ, var/obj/item/O)
+	// All kinds of embedded objects cause bleeding.
+	if(!can_feel_pain())
+		src << "<span class='warning'>You feel [O] moving inside your [organ.name].</span>"
+	else
+		var/msg = pick( \
+			"<span class='warning'>A spike of pain jolts your [organ.name] as you bump [O] inside.</span>", \
+			"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>", \
+			"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>")
+		src << msg
+
+	organ.take_damage(rand(1,3), 0, 0)
+	if(!(organ.robotic >= ORGAN_ROBOT) && (should_have_organ(BP_HEART))) //There is no blood in protheses.
+		organ.status |= ORGAN_BLEEDING
+		src.adjustToxLoss(rand(1,3))
 
 /mob/living/carbon/human/verb/check_pulse()
 	set category = "Object"
@@ -1129,7 +1135,6 @@
 	icon_state = lowertext(species.name)
 
 	species.create_organs(src)
-	src.sync_organ_dna()
 	species.handle_post_spawn(src)
 
 	maxHealth = species.total_health
@@ -1154,7 +1159,7 @@
 
 	if(config && config.use_cortical_stacks && client && client.prefs.has_cortical_stack)
 		create_stack()
-
+	full_prosthetic = null
 	if(species)
 		return 1
 	else
@@ -1281,23 +1286,27 @@
 /mob/living/carbon/human/getDNA()
 	if(species.flags & NO_SCAN)
 		return null
+	if(isSynthetic())
+		return
 	..()
 
 /mob/living/carbon/human/setDNA()
 	if(species.flags & NO_SCAN)
 		return
+	if(isSynthetic())
+		return
 	..()
 
 /mob/living/carbon/human/has_brain()
-	if(internal_organs_by_name["brain"])
-		var/obj/item/organ/brain = internal_organs_by_name["brain"]
+	if(internal_organs_by_name[BP_BRAIN])
+		var/obj/item/organ/internal/brain = internal_organs_by_name[BP_BRAIN]
 		if(brain && istype(brain))
 			return 1
 	return 0
 
 /mob/living/carbon/human/has_eyes()
-	if(internal_organs_by_name["eyes"])
-		var/obj/item/organ/eyes = internal_organs_by_name["eyes"]
+	if(internal_organs_by_name[BP_EYES])
+		var/obj/item/organ/internal/eyes = internal_organs_by_name[BP_EYES]
 		if(eyes && istype(eyes) && !(eyes.status & ORGAN_CUT_AWAY))
 			return 1
 	return 0
@@ -1373,7 +1382,7 @@
 /mob/living/carbon/human/can_stand_overridden()
 	if(wearing_rig && wearing_rig.ai_can_move_suit(check_for_ai = 1))
 		// Actually missing a leg will screw you up. Everything else can be compensated for.
-		for(var/limbcheck in list("l_leg","r_leg"))
+		for(var/limbcheck in list(BP_L_LEG,BP_R_LEG))
 			var/obj/item/organ/affecting = get_organ(limbcheck)
 			if(!affecting)
 				return 0
@@ -1386,50 +1395,6 @@
 		get_scooped(H, (usr == src))
 		return
 	return ..()
-
-//Puts the item into our active hand if possible. returns 1 on success.
-/mob/living/carbon/human/put_in_active_hand(var/obj/item/W)
-	return (hand ? put_in_l_hand(W) : put_in_r_hand(W))
-
-//Puts the item into our inactive hand if possible. returns 1 on success.
-/mob/living/carbon/human/put_in_inactive_hand(var/obj/item/W)
-	return (hand ? put_in_r_hand(W) : put_in_l_hand(W))
-
-/mob/living/carbon/human/put_in_hands(var/obj/item/W)
-	if(!W)
-		return 0
-	if(put_in_active_hand(W) || put_in_inactive_hand(W))
-		W.update_held_icon()
-		return 1
-	return ..()
-
-/mob/living/carbon/human/put_in_l_hand(var/obj/item/W)
-	if(!..() || l_hand)
-		return 0
-	var/obj/item/organ/external/hand = organs_by_name["l_hand"]
-	if(!hand || !hand.is_usable())
-		return 0
-
-	W.forceMove(src)
-	l_hand = W
-	W.equipped(src,slot_l_hand)
-	W.add_fingerprint(src)
-	update_inv_l_hand()
-	return 1
-
-/mob/living/carbon/human/put_in_r_hand(var/obj/item/W)
-	if(!..() || r_hand)
-		return 0
-	var/obj/item/organ/external/hand = organs_by_name["r_hand"]
-	if(!hand || !hand.is_usable())
-		return 0
-
-	W.forceMove(src)
-	r_hand = W
-	W.equipped(src,slot_r_hand)
-	W.add_fingerprint(src)
-	update_inv_r_hand()
-	return 1
 
 /mob/living/carbon/human/verb/pull_punches()
 	set name = "Pull Punches"
@@ -1461,19 +1426,63 @@
 //			output for machines^	^^^^^^^output for people^^^^^^^^^
 
 /mob/living/carbon/human/proc/pulse()
-	var/obj/item/organ/heart/H = internal_organs_by_name["heart"]
+	var/obj/item/organ/internal/heart/H = internal_organs_by_name["heart"]
 	if(!H)
 		return PULSE_NONE
 	else
 		return H.pulse
 
-/mob/living/carbon/human/can_devour(mob/victim)
-	if(src.species.gluttonous && (iscarbon(victim) || isanimal(victim)))
-		if(src.species.gluttonous == GLUT_TINY && (victim.mob_size <= MOB_TINY) && !ishuman(victim)) // Anything MOB_TINY or smaller
-			return DEVOUR_SLOW
-		else if(src.species.gluttonous == GLUT_SMALLER && (src.mob_size > victim.mob_size)) // Anything we're larger than
-			return DEVOUR_SLOW
-		else if(src.species.gluttonous == GLUT_ANYTHING) // Eat anything ever
-			return DEVOUR_FAST
+/mob/living/carbon/human/can_devour(atom/movable/victim)
+	if(!src.species.gluttonous)
+		return FALSE
+	var/total = 0
+	for(var/a in stomach_contents + victim)
+		if(ismob(a))
+			var/mob/M = a
+			total += M.mob_size
+		else if(isobj(a))
+			var/obj/item/I = a
+			total += I.get_storage_cost()
+	if(total > src.species.stomach_capacity)
+		return FALSE
 
-	..()
+	if(iscarbon(victim) || isanimal(victim))
+		var/mob/living/L = victim
+		if((src.species.gluttonous & GLUT_TINY) && (L.mob_size <= MOB_TINY) && !ishuman(victim)) // Anything MOB_TINY or smaller
+			return DEVOUR_SLOW
+		else if((src.species.gluttonous & GLUT_SMALLER) && (src.mob_size > L.mob_size)) // Anything we're larger than
+			return DEVOUR_SLOW
+		else if(src.species.gluttonous & GLUT_ANYTHING) // Eat anything ever
+			return DEVOUR_FAST
+	else if(istype(victim, /obj/item) && !istype(victim, /obj/item/weapon/holder)) //Don't eat holders. They are special.
+		var/obj/item/I = victim
+		var/cost = I.get_storage_cost()
+		if(cost != DO_NOT_STORE)
+			if((src.species.gluttonous & GLUT_ITEM_TINY) && cost < 4)
+				return DEVOUR_SLOW
+			else if((src.species.gluttonous & GLUT_ITEM_NORMAL) && cost <= 4)
+				return DEVOUR_SLOW
+			else if(src.species.gluttonous & GLUT_ITEM_ANYTHING)
+				return DEVOUR_FAST
+	return ..()
+
+/mob/living/carbon/human/should_have_organ(var/organ_check)
+
+	var/obj/item/organ/external/affecting
+	if(organ_check in list(BP_HEART, BP_LUNGS))
+		affecting = organs_by_name[BP_CHEST]
+	else if(organ_check in list(BP_LIVER, BP_KIDNEYS))
+		affecting = organs_by_name[BP_GROIN]
+
+	if(affecting && (affecting.robotic >= ORGAN_ROBOT))
+		return 0
+	return (species && species.has_organ[organ_check])
+
+/mob/living/carbon/human/can_feel_pain(var/obj/item/organ/check_organ)
+	if(isSynthetic())
+		return 0
+	if(check_organ)
+		if(!istype(check_organ))
+			return 0
+		return check_organ.can_feel_pain()
+	return !(species.flags & NO_PAIN)

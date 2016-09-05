@@ -89,7 +89,7 @@
 		return
 	ui_interact(user)
 
-/obj/machinery/mecha_part_fabricator/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1) 
+/obj/machinery/mecha_part_fabricator/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
 
 	var/datum/design/current = queue.len ? queue[1] : null
@@ -103,6 +103,8 @@
 		var/list/T = list()
 		for(var/A in all_robolimbs)
 			var/datum/robolimb/R = all_robolimbs[A]
+			if(R.unavailable_at_fab || R.applies_to_part.len)
+				continue
 			T += list(list("id" = A, "company" = R.company))
 		data["manufacturers"] = T
 		data["manufacturer"] = manufacturer
@@ -227,7 +229,7 @@
 
 /obj/machinery/mecha_part_fabricator/proc/can_build(var/datum/design/D)
 	for(var/M in D.materials)
-		if(materials[M] < D.materials[M])
+		if(materials[M] <= D.materials[M] * mat_efficiency)
 			return 0
 	return 1
 

@@ -2,7 +2,7 @@
 	name = "tesla link"
 	desc = "An advanced tesla link that wirelessly recharges connected device from nearby area power controller."
 	critical = 0
-	enabled = 0 // Starts turned off
+	enabled = 1
 	icon_state = "teslalink"
 	hardware_size = 2		// Can't be installed into tablets
 	origin_tech = list(TECH_DATA = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)

@@ -83,57 +83,49 @@
 		)
 
 // Clerical uplink kit
-/obj/item/weapon/storage/backpack/satchel/syndie_kit
-	startswith = list(
-		/obj/item/weapon/storage/box/syndie_kit/clerical,
-		/obj/item/weapon/packageWrap,
-		/obj/item/weapon/hand_labeler,
-		)
-
-/obj/item/weapon/storage/box/syndie_kit/clerical
+/obj/item/weapon/storage/backpack/satchel/syndie_kit/clerical
 	name = "clerical kit"
 	desc = "Comes with all you need to fake paperwork. Assumes you have passed basic writing lessons."
-
 	startswith = list(
+		/obj/item/weapon/packageWrap,
+		/obj/item/weapon/hand_labeler,
 		/obj/item/weapon/stamp/chameleon,
 		/obj/item/weapon/pen/chameleon,
 		/obj/item/device/destTagger,
 		)
 
-/obj/item/weapon/storage/box/syndie_kit/clerical/New()
-	..()
-
 /obj/item/weapon/storage/box/syndie_kit/spy
 	name = "spy kit"
 	desc = "For when you want to conduct voyeurism from afar."
-
-/obj/item/weapon/storage/box/syndie_kit/spy/New()
-	..()
-	new /obj/item/device/spy_bug(src)
-	new /obj/item/device/spy_bug(src)
-	new /obj/item/device/spy_bug(src)
-	new /obj/item/device/spy_bug(src)
-	new /obj/item/device/spy_bug(src)
-	new /obj/item/device/spy_bug(src)
-	new /obj/item/device/spy_monitor(src)
+	startswith = list(
+		/obj/item/device/spy_bug = 6,
+		/obj/item/device/spy_monitor
+	)
 
 /obj/item/weapon/storage/box/syndie_kit/g9mm
 	name = "\improper Smooth operator"
-	desc = "9mm with silencer kit."
+	desc = "9mm with silencer kit and ammunition."
+	startswith = list(
+		/obj/item/weapon/gun/projectile/pistol,
+		/obj/item/weapon/silencer,
+		/obj/item/ammo_magazine/mc9mm
+	)
 
-/obj/item/weapon/storage/box/syndie_kit/g9mm/New()
-	..()
-	new /obj/item/weapon/gun/projectile/pistol(src)
-	new /obj/item/weapon/silencer(src)
+/obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver
+	name = "\improper Tough operator"
+	desc = "Revolver with ammunition."
+	startswith = list(
+		/obj/item/weapon/gun/projectile/revolver,
+		/obj/item/ammo_magazine/a357
+	)
 
 /obj/item/weapon/storage/box/syndie_kit/toxin
 	name = "toxin kit"
 	desc = "An apple will not be enough to keep the doctor away after this."
-
-/obj/item/weapon/storage/box/syndie_kit/toxin/New()
-	..()
-	new /obj/item/weapon/reagent_containers/glass/beaker/vial/random/toxin(src)
-	new /obj/item/weapon/reagent_containers/syringe(src)
+	startswith = list(
+		/obj/item/weapon/reagent_containers/glass/beaker/vial/random/toxin,
+		/obj/item/weapon/reagent_containers/syringe
+	)
 
 /obj/item/weapon/storage/box/syndie_kit/cigarette
 	name = "\improper Tricky smokes"
@@ -184,6 +176,15 @@
 		/obj/item/rig_module/voice,
 		)
 
+/obj/item/weapon/storage/secure/briefcase/heavysniper
+	startswith = list(
+		/obj/item/weapon/gun/projectile/heavysniper,
+		/obj/item/weapon/storage/box/sniperammo
+	)
+
+/obj/item/weapon/storage/secure/briefcase/heavysniper/New()
+	..()
+	make_exact_fit()
 
 /obj/item/weapon/storage/secure/briefcase/money
 	name = "suspicious briefcase"

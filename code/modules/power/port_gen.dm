@@ -39,9 +39,6 @@
 		icon_state = initial(icon_state)
 		handleInactive()
 
-/obj/machinery/power/powered()
-	return 1 //doesn't require an external power source
-
 /obj/machinery/power/port_gen/attack_hand(mob/user as mob)
 	if(..())
 		return
@@ -194,17 +191,8 @@
 	var/average = (upper_limit + lower_limit)/2
 
 	//calculate the temperature increase
-	var/bias = 0
-	if (temperature < lower_limit)
-		bias = min(round((average - temperature)/TEMPERATURE_DIVISOR, 1), TEMPERATURE_CHANGE_MAX)
-	else if (temperature > upper_limit)
-		bias = max(round((temperature - average)/TEMPERATURE_DIVISOR, 1), -TEMPERATURE_CHANGE_MAX)
-
-	//limit temperature increase so that it cannot raise temperature above upper_limit,
-	//or if it is already above upper_limit, limit the increase to 0.
-	var/inc_limit = max(upper_limit - temperature, 0)
-	var/dec_limit = min(temperature - lower_limit, 0)
-	temperature += between(dec_limit, rand(-7 + bias, 7 + bias), inc_limit)
+	var/bias = Clamp(round((average - temperature)/TEMPERATURE_DIVISOR, 1),  -TEMPERATURE_CHANGE_MAX, TEMPERATURE_CHANGE_MAX)
+	temperature += bias + rand(-7, 7)
 
 	if (temperature > max_temperature)
 		overheat()
@@ -230,7 +218,7 @@
 
 /obj/machinery/power/port_gen/pacman/proc/overheat()
 	overheating++
-	if (overheating > 60)
+	if (overheating > 150)
 		explode()
 
 /obj/machinery/power/port_gen/pacman/explode()

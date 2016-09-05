@@ -56,9 +56,9 @@
 	if(drain_check)
 		return 1
 
-	var/smes_amt = min((amount * SMESRATE), charge)
+	var/smes_amt = min((amount * CELLRATE), charge)
 	charge -= smes_amt
-	return smes_amt / SMESRATE
+	return smes_amt / CELLRATE
 
 
 /obj/machinery/power/smes/New()
@@ -147,10 +147,10 @@
 
 // Mostly in place due to child types that may store power in other way (PSUs)
 /obj/machinery/power/smes/proc/add_charge(var/amount)
-	charge += amount*SMESRATE
+	charge += amount*CELLRATE
 
 /obj/machinery/power/smes/proc/remove_charge(var/amount)
-	charge -= amount*SMESRATE
+	charge -= amount*CELLRATE
 
 /obj/machinery/power/smes/process()
 	if(stat & BROKEN)	return
@@ -170,7 +170,7 @@
 	input_available = 0
 	//inputting
 	if(input_attempt && (!input_pulsed && !input_cut))
-		target_load = min((capacity-charge)/SMESRATE, input_level)	// Amount we will request from the powernet.
+		target_load = min((capacity-charge)/CELLRATE, input_level)	// Amount we will request from the powernet.
 		if(terminal && terminal.powernet)
 			terminal.powernet.smes_demand += target_load
 			terminal.powernet.inputting.Add(src)
@@ -181,7 +181,7 @@
 	output_used = 0
 	//outputting
 	if(output_attempt && (!output_pulsed && !output_cut) && powernet && charge)
-		output_used = min( charge/SMESRATE, output_level)		//limit output to that stored
+		output_used = min( charge/CELLRATE, output_level)		//limit output to that stored
 		remove_charge(output_used)			// reduce the storage (may be recovered in /restore() if excessive)
 		add_avail(output_used)				// add output to powernet (smes side)
 		outputting = 2
@@ -274,7 +274,7 @@
 	if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)
 		building_terminal = 1
 		var/obj/item/stack/cable_coil/CC = W
-		if (CC.get_amount() <= 10)
+		if (CC.get_amount() < 10)
 			user << "<span class='warning'>You need more cables.</span>"
 			building_terminal = 0
 			return 0
@@ -337,8 +337,8 @@
 	var/data[0]
 	data["nameTag"] = name_tag
 	data["storedCapacity"] = round(100.0*charge/capacity, 0.1)
-	data["storedCapacityAbs"] = round(smes_charge_to_kwh(charge), 0.1)
-	data["storedCapacityMax"] = round(smes_charge_to_kwh(capacity), 0.1)
+	data["storedCapacityAbs"] = round(charge/1000, 0.1)
+	data["storedCapacityMax"] = round(capacity/1000, 0.1)
 	data["charging"] = inputting
 	data["chargeMode"] = input_attempt
 	data["chargeLevel"] = round(input_level/1000, 0.1)
@@ -476,7 +476,3 @@
 			user << "<span class='notice'>It's casing is quite seriously damaged.</span>"
 		if(0 to 24)
 			user << "It's casing has some minor damage."
-
-//unit conversion helper
-/proc/smes_charge_to_kwh(var/charge)
-	return ((charge/SMESRATE)/((1 HOUR)/process_schedule_interval("machinery")))/1000 //((watt-ticks)/(ticks-per-hour))/(W-per-kW)

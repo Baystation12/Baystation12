@@ -11,10 +11,12 @@
 /datum/job/captain
 	title = "Commanding Officer"
 	alt_titles = list("Captain (Fleet)", "Commander", "Colonel", "Lieutenant Colonel")
+	allowed_ranks = list(FLEET_O5,MARINE_O5,FLEET_O6,MARINE_O6)
 
 /datum/job/hop
 	title = "Executive Officer"
 	alt_titles = list("Lieutenant Commander", "Major")
+	allowed_ranks = list(FLEET_O4,MARINE_O4)
 
 /datum/job/rd
 	supervisors = "NanoTrasen"
@@ -26,31 +28,39 @@
 			            access_tox_storage, access_teleporter, access_sec_doors,
 			            access_research, access_robotics, access_xenobiology, access_ai_upload, access_tech_storage,
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_network)
+	allowed_ranks = list(CIV_CIVILIAN)
 
 /datum/job/lawyer
 	title = "SolGov Representative"
+	allowed_ranks = list(CIV_CIVILIAN)
 
 /datum/job/warden
 	title = "Brig Officer"
+	allowed_ranks = list(FLEET_E5,MARINE_E5,FLEET_E6,MARINE_E6,FLEET_E7,MARINE_E7)
 
 /datum/job/detective
 	title = "Forensic Technician"
 	alt_titles = list()
+	allowed_ranks = list(FLEET_E3,MARINE_E3,FLEET_E4,MARINE_E4,FLEET_E5,MARINE_E5)
 
 /datum/job/officer
 	title = "Master at Arms"
 	total_positions = 2
 	spawn_positions = 2
+	allowed_ranks = list(FLEET_E2,MARINE_E2,FLEET_E3,MARINE_E3,FLEET_E4,MARINE_E4)
 
 /datum/job/qm
 	title = "Deck Officer"
+	allowed_ranks = list(FLEET_E5,MARINE_E5,FLEET_E6,MARINE_E6,FLEET_E7,MARINE_E7)
 
 /datum/job/cargo_tech
 	title = "Deck Technician"
+	allowed_ranks = list(FLEET_E2,MARINE_E2,FLEET_E3,MARINE_E3)
 
 /datum/job/chemist
 	total_positions = 1
 	spawn_positions = 1
+	allowed_ranks = list(FLEET_E3,MARINE_E3,FLEET_E4,MARINE_E4)
 
 /datum/job/chaplain
 	department = "Medical"
@@ -60,11 +70,13 @@
 	alt_titles = list("Psychologist", "Psychiatrist", "Counselor")
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels, access_medical, access_medical_equip, access_surgery, access_chemistry, access_virology, access_genetics, access_psychiatrist)
 	minimal_access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels, access_medical, access_medical_equip, access_surgery, access_chemistry, access_virology, access_genetics, access_psychiatrist)
+	allowed_ranks = list(FLEET_E2,MARINE_E2,FLEET_E3,MARINE_E3)
 
 /datum/job/scientist
 	total_positions = 4
 	spawn_positions = 4
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
+	allowed_ranks = list(CIV_CIVILIAN)
 
 /datum/job/mining
 	title = "Prospector"
@@ -75,7 +87,7 @@
 	alt_titles = list("Scavanger", "Shaft Miner")
 	total_positions = 4
 	spawn_positions = 4
-
+	allowed_ranks = list(CIV_CIVILIAN)
 
 /datum/job/contractor
 	title = "Security Contractor"
@@ -92,17 +104,178 @@
 	              access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_morgue, access_external_airlocks,
 	              access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
+	outfit_type = /decl/hierarchy/outfit/job/security/officer/contractor
+	allowed_ranks = list(CIV_CONTRACTOR)
 
-/datum/job/contractor/equip(var/mob/living/carbon/human/H)
-	if(!H)	return 0
-	H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sci(H), slot_l_ear)
-	switch(H.backbag)
-		if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/security(H), slot_back)
-		if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_sec(H), slot_back)
-		if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-	H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/security(H), slot_w_uniform)
-	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(H), slot_shoes)
-	H.equip_to_slot_or_del(new /obj/item/device/pda/security(H), slot_belt)
-	H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_s_store)
-	H.equip_to_slot_or_del(new /obj/item/device/flash(H), slot_l_store)
-	return 1
+//Torch Job Loadouts
+
+/decl/hierarchy/outfit/job/security/officer/contractor
+	name = OUTFIT_JOB_NAME("Security contractor")
+	l_ear = /obj/item/device/radio/headset/headset_sci
+	glasses = null
+	gloves = null
+	id_type = /obj/item/weapon/card/id/torch/research/guard
+
+
+//Torch ID Cards
+
+/obj/item/weapon/card/id/torch/silver
+	name = "identification card"
+	desc = "A silver card belonging to heads of staff."
+	icon_state = "silver"
+	item_state = "silver_id"
+	job_access_type = /datum/job/hop
+
+/obj/item/weapon/card/id/torch/gold
+	name = "identification card"
+	desc = "A golden card belonging to the Commanding Officer."
+	icon_state = "gold"
+	item_state = "gold_id"
+	job_access_type = /datum/job/captain
+
+/obj/item/weapon/card/id/torch/captains_spare
+	name = "captain's spare ID"
+	desc = "The skipper's spare ID."
+	icon_state = "gold"
+	item_state = "gold_id"
+	registered_name = "Captain"
+	assignment = "Captain"
+/obj/item/weapon/card/id/captains_spare/New()
+	access = get_all_station_access()
+	..()
+
+// SolGov Crew and NT Contractors
+/obj/item/weapon/card/id/torch
+	name = "identification card"
+	desc = "A card issued to SEV Torch crew."
+	icon_state = "solgov"
+	job_access_type = /datum/job/assistant
+
+/obj/item/weapon/card/id/torch/medical
+	desc = "A card issued to SEV Torch medical staff."
+	job_access_type = /datum/job/doctor
+
+/obj/item/weapon/card/id/torch/medical/chemist
+	job_access_type = /datum/job/chemist
+
+/obj/item/weapon/card/id/torch/medical/virologist
+	desc = "A card issued to SEV Torch medical contractors."
+	icon_state = "corporate"
+	job_access_type = /datum/job/doctor
+
+/obj/item/weapon/card/id/torch/medical/counselor
+	job_access_type = /datum/job/psychiatrist
+
+/obj/item/weapon/card/id/torch/medical/contractor
+	desc = "A card issued to SEV Torch medical contractors."
+	icon_state = "corporate"
+	job_access_type = /datum/job/Paramedic
+
+/obj/item/weapon/card/id/torch/silver/medical
+	job_access_type = /datum/job/cmo
+
+/obj/item/weapon/card/id/torch/security
+	desc = "A card issued to SEV Torch security staff."
+	job_access_type = /datum/job/officer
+
+/obj/item/weapon/card/id/torch/security/brigofficer
+	job_access_type = /datum/job/warden
+
+/obj/item/weapon/card/id/torch/security/forensic
+	job_access_type = /datum/job/detective
+
+/obj/item/weapon/card/id/torch/silver/security
+	job_access_type = /datum/job/hos
+
+/obj/item/weapon/card/id/torch/engineering
+	desc = "A card issued to SEV Torch engineering staff."
+	job_access_type = /datum/job/engineer
+
+/obj/item/weapon/card/id/torch/engineering/atmos
+	job_access_type = /datum/job/atmos
+
+/obj/item/weapon/card/id/torch/engineering/roboticist
+	desc = "A card issued to SEV Torch engineering contractors."
+	icon_state = "corporate"
+	job_access_type = /datum/job/roboticist
+
+/obj/item/weapon/card/id/torch/engineering/contractor
+	desc = "A card issued to SEV Torch engineering contractors."
+	icon_state = "corporate"
+	job_access_type = /datum/job/engineer
+
+/obj/item/weapon/card/id/torch/silver/engineering
+	name = "identification card"
+	job_access_type = /datum/job/chief_engineer
+
+/obj/item/weapon/card/id/torch/supply
+	desc = "A card issued to SEV Torch supply staff."
+	job_access_type = /datum/job/cargo_tech
+
+/obj/item/weapon/card/id/torch/supply/contractor
+	desc = "A card issued to SEV Torch supply contractors."
+	icon_state = "corporate"
+	job_access_type = /datum/job/cargo_tech
+
+/obj/item/weapon/card/id/torch/supply/deckofficer
+	job_access_type = /datum/job/qm
+
+/obj/item/weapon/card/id/torch/support
+	desc = "A card issued to SEV Torch support staff."
+	job_access_type = /datum/job/assistant
+
+/obj/item/weapon/card/id/torch/support/janitor
+	job_access_type = /datum/job/janitor
+
+/obj/item/weapon/card/id/torch/support/chef
+	job_access_type = /datum/job/chef
+
+/obj/item/weapon/card/id/torch/support/contractor/bartender
+	desc = "A card issued to SEV Torch support contractors."
+	icon_state = "corporate"
+	job_access_type = /datum/job/bartender
+
+/obj/item/weapon/card/id/torch/representative
+	job_access_type = /datum/job/lawyer
+
+//NanoTrasen
+
+/obj/item/weapon/card/id/torch/research
+	name = "identification card"
+	desc = "A card issued to NanoTrasen employees."
+	icon_state = "corporate"
+	job_access_type = /datum/job/assistant
+
+/obj/item/weapon/card/id/torch/research/scientist
+	name = "identification card"
+	job_access_type = /datum/job/scientist
+
+/obj/item/weapon/card/id/torch/research/xenobiologist
+	job_access_type = /datum/job/xenobiologist
+
+/obj/item/weapon/card/id/torch/silver/research
+	job_access_type = /datum/job/rd
+
+/obj/item/weapon/card/id/torch/research/mining
+	job_access_type = /datum/job/mining
+
+/obj/item/weapon/card/id/torch/research/guard
+	job_access_type = /datum/job/scientist
+
+/obj/item/weapon/card/id/torch/research/liaison
+	job_access_type = /datum/job/lawyer
+
+//Passengers
+
+/obj/item/weapon/card/id/torch/passenger
+	name = "identification card"
+	desc = "A card issued to passengers."
+	icon_state = "id"
+	job_access_type = /datum/job/assistant
+
+
+
+
+
+/obj/item/weapon/card/id/security/contractor
+	job_access_type = /datum/job/contractor

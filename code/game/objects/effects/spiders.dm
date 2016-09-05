@@ -111,16 +111,19 @@
 /obj/effect/spider/spiderling
 	name = "spiderling"
 	desc = "It never stays still for long."
-	icon_state = "spiderling"
+	icon_state = "guard"
 	anchored = 0
 	layer = 2.7
 	health = 3
+	var/mob/living/simple_animal/hostile/giant_spider/greater_form
 	var/last_itch = 0
 	var/amount_grown = -1
 	var/obj/machinery/atmospherics/unary/vent_pump/entry_vent
 	var/travelling_in_vent = 0
 
 /obj/effect/spider/spiderling/New(var/location, var/atom/parent)
+	greater_form = pick(typesof(/mob/living/simple_animal/hostile/giant_spider))
+	icon_state = initial(greater_form.icon_state)
 	pixel_x = rand(6,-6)
 	pixel_y = rand(6,-6)
 	processing_objects |= src
@@ -211,8 +214,7 @@
 					break
 
 		if(amount_grown >= 100)
-			var/spawn_type = pick(typesof(/mob/living/simple_animal/hostile/giant_spider))
-			new spawn_type(src.loc, src)
+			new greater_form(src.loc, src)
 			qdel(src)
 	else if(isorgan(loc))
 		if(!amount_grown) amount_grown = 1
@@ -222,9 +224,9 @@
 			src.loc = O.owner ? O.owner.loc : O.loc
 			src.visible_message("<span class='warning'>\A [src] makes its way out of [O.owner ? "[O.owner]'s [O.name]" : "\the [O]"]!</span>")
 			if(O.owner)
-				O.owner.apply_damage(1, BRUTE, O.limb_name)
+				O.owner.apply_damage(1, BRUTE, O.organ_tag)
 		else if(prob(1))
-			O.owner.apply_damage(1, TOX, O.limb_name)
+			O.owner.apply_damage(1, TOX, O.organ_tag)
 			if(world.time > last_itch + 30 SECONDS)
 				last_itch = world.time
 				O.owner << "<span class='notice'>Your [O.name] itches...</span>"

@@ -187,7 +187,11 @@
 		edit_admin_permissions()
 
 	else if(href_list["call_shuttle"])
+
 		if(!check_rights(R_ADMIN))	return
+
+		if (!ticker || !evacuation_controller)
+			return
 
 		if( ticker.mode.name == "blob" )
 			alert("You can't call the shuttle during blob!")
@@ -195,47 +199,13 @@
 
 		switch(href_list["call_shuttle"])
 			if("1")
-				if ((!( ticker ) || !emergency_shuttle.location()))
-					return
-				if (emergency_shuttle.can_call())
-					emergency_shuttle.call_evac()
-					log_admin("[key_name(usr)] called the Emergency Shuttle")
-					message_admins("\blue [key_name_admin(usr)] called the Emergency Shuttle to the station", 1)
-
+				if (evacuation_controller.call_evacuation(usr, TRUE))
+					log_admin("[key_name(usr)] called an evacuation.")
+					message_admins("\blue [key_name_admin(usr)] called an evacuation.", 1)
 			if("2")
-				if (!( ticker ) || !emergency_shuttle.location())
-					return
-				if (emergency_shuttle.can_call())
-					emergency_shuttle.call_evac()
-					log_admin("[key_name(usr)] called the Emergency Shuttle")
-					message_admins("\blue [key_name_admin(usr)] called the Emergency Shuttle to the station", 1)
-
-				else if (emergency_shuttle.can_recall())
-					emergency_shuttle.recall()
-					log_admin("[key_name(usr)] sent the Emergency Shuttle back")
-					message_admins("\blue [key_name_admin(usr)] sent the Emergency Shuttle back", 1)
-
-		href_list["secretsadmin"] = "check_antagonist"
-
-	else if(href_list["edit_shuttle_time"])
-		if(!check_rights(R_SERVER))	return
-
-		if (emergency_shuttle.wait_for_launch)
-			var/new_time_left = input("Enter new shuttle launch countdown (seconds):","Edit Shuttle Launch Time", emergency_shuttle.estimate_launch_time() ) as num
-
-			emergency_shuttle.launch_time = world.time + new_time_left*10
-
-			log_admin("[key_name(usr)] edited the Emergency Shuttle's launch time to [new_time_left]")
-			message_admins("\blue [key_name_admin(usr)] edited the Emergency Shuttle's launch time to [new_time_left*10]", 1)
-		else if (emergency_shuttle.shuttle.has_arrive_time())
-
-			var/new_time_left = input("Enter new shuttle arrival time (seconds):","Edit Shuttle Arrival Time", emergency_shuttle.estimate_arrival_time() ) as num
-			emergency_shuttle.shuttle.arrive_time = world.time + new_time_left*10
-
-			log_admin("[key_name(usr)] edited the Emergency Shuttle's arrival time to [new_time_left]")
-			message_admins("\blue [key_name_admin(usr)] edited the Emergency Shuttle's arrival time to [new_time_left*10]", 1)
-		else
-			alert("The shuttle is neither counting down to launch nor is it in transit. Please try again when it is.")
+				if (evacuation_controller.cancel_evacuation())
+					log_admin("[key_name(usr)] cancelled an evacuation.")
+					message_admins("\blue [key_name_admin(usr)] cancelled an evacuation.", 1)
 
 		href_list["secretsadmin"] = "check_antagonist"
 
@@ -1184,6 +1154,18 @@
 		sleep(2)
 		C.jumptomob(M)
 
+	else if(href_list["adminplayerobservefollow"])
+		if(!check_rights(R_MENTOR|R_MOD|R_ADMIN))
+			return
+
+		var/mob/M = locate(href_list["adminplayerobservefollow"])
+
+		var/client/C = usr.client
+		if(!isobserver(usr))	C.admin_ghost()
+		var/mob/observer/ghost/G = C.mob
+		sleep(2)
+		G.ManualFollow(M)
+
 	else if(href_list["check_antagonist"])
 		check_antagonists()
 
@@ -1394,86 +1376,21 @@
 			H.show(src.owner)
 		return
 
-	else if(href_list["CentcommFaxReply"])
-		var/mob/sender = locate(href_list["CentcommFaxReply"])
+	else if(href_list["FaxReply"])
+		var/mob/sender = locate(href_list["FaxReply"])
 		var/obj/machinery/photocopier/faxmachine/fax = locate(href_list["originfax"])
-
-		//todo: sanitize
-		var/input = input(src.owner, "Please enter a message to reply to [key_name(sender)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
-		if(!input)	return
-
-		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
-
-		// Create the reply message
-		var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( null ) //hopefully the null loc won't cause trouble for us
-		P.name = "[command_name()]- [customname]"
-		P.info = input
-		P.update_icon()
-
-		// Stamps
-		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-		stampoverlay.icon_state = "paper_stamp-cent"
-		if(!P.stamped)
-			P.stamped = new
-		P.stamped += /obj/item/weapon/stamp
-		P.overlays += stampoverlay
-		P.stamps += "<HR><i>This paper has been stamped by the Central Command Quantum Relay.</i>"
-
-		if(fax.recievefax(P))
-			src.owner << "\blue Message reply to transmitted successfully."
-			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(sender)]: [input]")
-			message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(sender)]", 1)
-		else
-			src.owner << "\red Message reply failed."
-
-		spawn(100)
-			qdel(P)
-		return
-
-	else if(href_list["SolGovFaxReply"])
-		//TODO
-		/*
-		var/mob/living/carbon/human/H = locate(href_list["SolGovFaxReply"])
-		var/obj/machinery/photocopier/faxmachine/fax = locate(href_list["originfax"])
-
-		var/input = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
-		if(!input)	return
-
-		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
-
-		for(var/obj/machinery/photocopier/faxmachine/F in machines)
-			if(F == fax)
-				if(! (F.stat & (BROKEN|NOPOWER) ) )
-
-					// animate! it's alive!
-					flick("faxreceive", F)
-
-					// give the sprite some time to flick
-					spawn(20)
-						var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
-						P.name = "Sol Government- [customname]"
-						P.info = input
-						P.update_icon()
-
-						playsound(F.loc, "sound/items/polaroid1.ogg", 50, 1)
-
-						// Stamps
-						var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-						stampoverlay.icon_state = "paper_stamp-cap"
-						if(!P.stamped)
-							P.stamped = new
-						P.stamped += /obj/item/weapon/stamp
-						P.overlays += stampoverlay
-						P.stamps += "<HR><i>This paper has been stamped and encrypted by the Sol Government Quantum Relay.</i>"
-
-				src.owner << "Message reply to transmitted successfully."
-				log_admin("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")
-				message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(H)]", 1)
-				return
-		src.owner << "/red Unable to locate fax!"
-		*/
+		var/replyorigin = href_list["replyorigin"]
 
 
+		var/obj/item/weapon/paper/admin/P = new /obj/item/weapon/paper/admin( null ) //hopefully the null loc won't cause trouble for us
+		faxreply = P
+
+		P.admindatum = src
+		P.origin = replyorigin
+		P.destination = fax
+		P.sender = sender
+
+		P.adminbrowse()
 
 	else if(href_list["jumpto"])
 		if(!check_rights(R_ADMIN))	return

@@ -25,7 +25,7 @@
 		usr.client.debug_variables(antag)
 		message_admins("Admin [key_name_admin(usr)] is debugging the [antag.role_text] template.")
 
-/client/proc/debug_controller(controller in list("Master","Ticker","Ticker Process","Air","Jobs","Sun","Radio","Supply","Shuttles","Emergency Shuttle","Configuration","pAI", "Cameras", "Transfer Controller", "Gas Data","Event","Plants","Alarm","Nano","Chemistry","Wireless","Observation"))
+/client/proc/debug_controller(controller in list("Master","Ticker","Ticker Process","Air","Jobs","Sun","Radio","Supply","Shuttles","Evacuation","Configuration","pAI", "Cameras", "Transfer Controller", "Gas Data","Event","Plants","Alarm","Nano","Chemistry","Wireless","Observation","Alt Appearance Manager","Datacore"))
 	set category = "Debug"
 	set name = "Debug Controller"
 	set desc = "Debug the various periodic loop controllers for the game (be careful!)"
@@ -59,8 +59,8 @@
 		if("Shuttles")
 			debug_variables(shuttle_controller)
 			feedback_add_details("admin_verb","DShuttles")
-		if("Emergency Shuttle")
-			debug_variables(emergency_shuttle)
+		if("Evacuation")
+			debug_variables(evacuation_controller)
 			feedback_add_details("admin_verb","DEmergency")
 		if("Configuration")
 			debug_variables(config)
@@ -98,5 +98,11 @@
 		if("Observation")
 			debug_variables(all_observable_events)
 			feedback_add_details("admin_verb", "DObservation")
+		if("Alt Appearance Manager")
+			debug_variables(all_observable_events)
+			feedback_add_details("admin_verb", "DAltAppearanceManager")
+		if("Datacore")
+			debug_variables(data_core)
+			feedback_add_details("admin_verb", "DDatacore")
 	message_admins("Admin [key_name_admin(usr)] is debugging the [controller] controller.")
 	return

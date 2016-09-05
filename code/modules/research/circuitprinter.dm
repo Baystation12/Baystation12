@@ -163,7 +163,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 /obj/machinery/r_n_d/circuit_imprinter/proc/canBuild(var/datum/design/D)
 	for(var/M in D.materials)
-		if(materials[M] < D.materials[M])
+		if(materials[M] <= D.materials[M] * mat_efficiency)
 			return 0
 	for(var/C in D.chemicals)
 		if(!reagents.has_reagent(C, D.chemicals[C]))

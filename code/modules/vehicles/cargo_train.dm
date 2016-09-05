@@ -12,6 +12,7 @@
 	buckle_pixel_shift = "x=0;y=7"
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
+	charge_use = 1 KILOWATTS
 	active_engines = 1
 	var/obj/item/weapon/key/cargo_train/key
 
@@ -47,7 +48,7 @@
 	turn_off()	//so engine verbs are correctly set
 
 /obj/vehicle/train/cargo/engine/Move(var/turf/destination)
-	if(on && cell.charge < charge_use)
+	if(on && cell.charge < (charge_use * CELLRATE))
 		turn_off()
 		update_stats()
 		if(load && is_train_head())
@@ -55,7 +56,7 @@
 
 	if(is_train_head() && !on)
 		return 0
-	
+
 	//space check ~no flying space trains sorry
 	if(on && istype(destination, /turf/space))
 		return 0
@@ -146,7 +147,7 @@
 		verbs += /obj/vehicle/train/cargo/engine/verb/stop_engine
 
 /obj/vehicle/train/cargo/RunOver(var/mob/living/carbon/human/H)
-	var/list/parts = list("head", "chest", "l_leg", "r_leg", "l_arm", "r_arm")
+	var/list/parts = list(BP_HEAD, BP_CHEST, BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM)
 
 	H.apply_effects(5, 5)
 	for(var/i = 0, i < rand(1,5), i++)
@@ -198,7 +199,7 @@
 
 /obj/vehicle/train/cargo/engine/verb/start_engine()
 	set name = "Start engine"
-	set category = "Vehicle"
+	set category = "Object"
 	set src in view(0)
 
 	if(!istype(usr, /mob/living/carbon/human))
@@ -219,7 +220,7 @@
 
 /obj/vehicle/train/cargo/engine/verb/stop_engine()
 	set name = "Stop engine"
-	set category = "Vehicle"
+	set category = "Object"
 	set src in view(0)
 
 	if(!istype(usr, /mob/living/carbon/human))
@@ -235,7 +236,7 @@
 
 /obj/vehicle/train/cargo/engine/verb/remove_key()
 	set name = "Remove key"
-	set category = "Vehicle"
+	set category = "Object"
 	set src in view(0)
 
 	if(!istype(usr, /mob/living/carbon/human))

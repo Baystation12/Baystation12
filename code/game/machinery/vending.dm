@@ -573,21 +573,17 @@
 
 //Somebody cut an important wire and now we're following a new definition of "pitch."
 /obj/machinery/vending/proc/throw_item()
-	var/obj/throw_item = null
-	var/mob/living/target = locate() in view(7,src)
-	if(!target)
+	var/obj/dispensed_item = null
+	for(var/datum/stored_items/vending_products/R in src.product_records)
+		dispensed_item = R.get_product(loc)
+		if (dispensed_item)
+			break
+
+	if (!dispensed_item)
 		return 0
 
-	for(var/datum/stored_items/vending_products/R in src.product_records)
-		throw_item = R.get_product(loc)
-		if (!throw_item)
-			continue
-		break
-	if (!throw_item)
-		return 0
-	spawn(0)
-		throw_item.throw_at(target, 16, 3, src)
-	src.visible_message("<span class='warning'>\The [src] launches \a [throw_item] at \the [target]!</span>")
+	dispensed_item.forceMove(get_turf(src))
+	visible_message("<span class='warning'>\The [src] shudders and \a [dispensed_item] falls out!</span>")
 	return 1
 
 /*
@@ -750,15 +746,44 @@
 
 /obj/machinery/vending/cigarette
 	name = "Cigarette machine" //OCD had to be uppercase to look nice with the new formating
-	desc = "If you want to get cancer, might as well do it in style!"
-	product_slogans = "Space cigs taste good like a cigarette should.;I'd rather toolbox than switch.;Smoke!;Don't believe the reports - smoke today!"
-	product_ads = "Probably not bad for you!;Don't believe the scientists!;It's good for you!;Don't quit, buy more!;Smoke!;Nicotine heaven.;Best cigarettes since 2150.;Award-winning cigs."
+	desc = "A specialized vending machine designed to contribute to your slow and uncomfortable death."
+	product_slogans = "There's no better time to start smokin'.;\
+		Smoke now, and win the adoration of your peers.;\
+		They beat cancer centuries ago, so smoke away.;\
+		If you're not smoking, you must be joking."
+	product_ads = "Probably not bad for you!;\
+		Don't believe the scientists!;\
+		It's good for you!;\
+		Don't quit, buy more!;\
+		Smoke!;\
+		Nicotine heaven.;\
+		Best cigarettes since 2150.;\
+		Award-winning cigarettes, all the best brands.;\
+		Feeling temperamental? Try a Temperamento!;\
+		Carcinoma Angels - go fuck yerself!;\
+		Don't be so hard on yourself, kid. Smoke a Lucky Star!;\
+		We understand the depressed, alcoholic cowboy in you. That's why we also smoke Jericho.;\
+		Professionals. Better cigarettes for better people. Yes, better people."
 	vend_delay = 34
 	icon_state = "cigs"
-	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/flame/lighter/random = 4)
+	products = list(/obj/item/weapon/storage/fancy/cigarettes = 5,
+					/obj/item/weapon/storage/fancy/cigarettes/luckystars = 5,
+					/obj/item/weapon/storage/fancy/cigarettes/jerichos = 5,
+					/obj/item/weapon/storage/fancy/cigarettes/menthols = 5,
+					/obj/item/weapon/storage/fancy/cigarettes/carcinomas = 5,
+					/obj/item/weapon/storage/fancy/cigarettes/professionals = 5,
+					/obj/item/weapon/storage/box/matches = 10,
+					/obj/item/weapon/flame/lighter/random = 4)
 	contraband = list(/obj/item/weapon/flame/lighter/zippo = 4)
-	premium = list(/obj/item/weapon/storage/fancy/cigar = 5,/obj/item/weapon/storage/fancy/cigarettes/killthroat = 5 )
-	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 15,/obj/item/weapon/storage/box/matches = 1,/obj/item/weapon/flame/lighter/random = 2)
+	premium = list(/obj/item/weapon/storage/fancy/cigar = 5,/obj/item/weapon/storage/fancy/cigarettes/killthroat = 5)
+	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 15,
+					/obj/item/weapon/storage/fancy/cigarettes/luckystars = 17,
+					/obj/item/weapon/storage/fancy/cigarettes/jerichos = 22,
+					/obj/item/weapon/storage/fancy/cigarettes/menthols = 18,
+					/obj/item/weapon/storage/fancy/cigarettes/carcinomas = 21,
+					/obj/item/weapon/storage/fancy/cigarettes/professionals = 23,
+					/obj/item/weapon/storage/box/matches = 1,
+					/obj/item/weapon/flame/lighter/random = 2)
 
 
 /obj/machinery/vending/medical
@@ -924,17 +949,17 @@
 	//req_access = list(access_maint_tunnels) //Maintenance access
 	products = list(/obj/item/stack/cable_coil/random = 10,/obj/item/weapon/crowbar = 5,/obj/item/weapon/weldingtool = 3,/obj/item/weapon/wirecutters = 5,
 					/obj/item/weapon/wrench = 5,/obj/item/device/analyzer = 5,/obj/item/device/t_scanner = 5,/obj/item/weapon/screwdriver = 5)
-	contraband = list(/obj/item/weapon/weldingtool/hugetank = 2,/obj/item/clothing/gloves/fyellow = 2)
-	premium = list(/obj/item/clothing/gloves/yellow = 1)
+	contraband = list(/obj/item/weapon/weldingtool/hugetank = 2,/obj/item/clothing/gloves/insulated/cheap = 2)
+	premium = list(/obj/item/clothing/gloves/insulated = 1)
 
 /obj/machinery/vending/engivend
 	name = "Engi-Vend"
 	desc = "Spare tool vending. What? Did you expect some witty description?"
 	icon_state = "engivend"
 	icon_deny = "engivend-deny"
-	req_access = list(access_engine_equip)
-	products = list(/obj/item/clothing/glasses/meson = 2,/obj/item/device/multitool = 4,/obj/item/weapon/airlock_electronics = 10,/obj/item/weapon/module/power_control = 10,/obj/item/weapon/airalarm_electronics = 10,/obj/item/weapon/cell/high = 10)
-	contraband = list(/obj/item/weapon/cell/potato = 3)
+	req_one_access = list(access_atmospherics,access_engine_equip)
+	products = list(/obj/item/clothing/glasses/meson = 2,/obj/item/device/multitool = 4,/obj/item/weapon/airlock_electronics = 10,/obj/item/weapon/module/power_control = 10,/obj/item/weapon/airalarm_electronics = 10,/obj/item/weapon/cell = 10)
+	contraband = list(/obj/item/weapon/cell/high = 3)
 	premium = list(/obj/item/weapon/storage/belt/utility = 3)
 
 //This one's from bay12
@@ -943,13 +968,14 @@
 	desc = "Everything you need for do-it-yourself station repair."
 	icon_state = "engi"
 	icon_deny = "engi-deny"
-	req_access = list(access_engine_equip)
-	products = list(/obj/item/clothing/under/rank/chief_engineer = 4,/obj/item/clothing/under/rank/engineer = 4,/obj/item/clothing/shoes/orange = 4,/obj/item/clothing/head/hardhat = 4,
-					/obj/item/weapon/storage/belt/utility = 4,/obj/item/clothing/glasses/meson = 4,/obj/item/clothing/gloves/yellow = 4, /obj/item/weapon/screwdriver = 12,
+	req_one_access = list(access_atmospherics,access_engine_equip)
+	products = list(/obj/item/weapon/storage/belt/utility = 4,/obj/item/clothing/glasses/meson = 4,/obj/item/clothing/gloves/insulated = 4, /obj/item/weapon/screwdriver = 12,
 					/obj/item/weapon/crowbar = 12,/obj/item/weapon/wirecutters = 12,/obj/item/device/multitool = 12,/obj/item/weapon/wrench = 12,/obj/item/device/t_scanner = 12,
-					/obj/item/stack/cable_coil/heavyduty = 8, /obj/item/weapon/cell = 8, /obj/item/weapon/weldingtool = 8,/obj/item/clothing/head/welding = 8,
-					/obj/item/weapon/light/tube = 10,/obj/item/clothing/suit/fire = 4, /obj/item/weapon/stock_parts/scanning_module = 5,/obj/item/weapon/stock_parts/micro_laser = 5,
-					/obj/item/weapon/stock_parts/matter_bin = 5,/obj/item/weapon/stock_parts/manipulator = 5,/obj/item/weapon/stock_parts/console_screen = 5)
+					/obj/item/weapon/cell = 8, /obj/item/weapon/weldingtool = 8,/obj/item/clothing/head/welding = 8,
+					/obj/item/weapon/light/tube = 10,/obj/item/weapon/stock_parts/scanning_module = 5,/obj/item/weapon/stock_parts/micro_laser = 5,
+					/obj/item/weapon/stock_parts/matter_bin = 5,/obj/item/weapon/stock_parts/manipulator = 5,/obj/item/weapon/stock_parts/console_screen = 5,
+					/obj/item/weapon/stock_parts/capacitor = 5)
+	contraband = list(/obj/item/weapon/rcd = 1, /obj/item/weapon/rcd_ammo = 5)
 	// There was an incorrect entry (cablecoil/power).  I improvised to cablecoil/heavyduty.
 	// Another invalid entry, /obj/item/weapon/circuitry.  I don't even know what that would translate to, removed it.
 	// The original products list wasn't finished.  The ones without given quantities became quantity 5.  -Sayu
@@ -961,11 +987,10 @@
 	icon_state = "robotics"
 	icon_deny = "robotics-deny"
 	req_access = list(access_robotics)
-	products = list(/obj/item/clothing/suit/storage/toggle/labcoat = 4,/obj/item/clothing/under/rank/roboticist = 4,/obj/item/stack/cable_coil = 4,/obj/item/device/flash = 4,
-					/obj/item/weapon/cell/high = 12, /obj/item/device/assembly/prox_sensor = 3,/obj/item/device/assembly/signaler = 3,/obj/item/device/healthanalyzer = 3,
-					/obj/item/weapon/scalpel = 2,/obj/item/weapon/circular_saw = 2,/obj/item/weapon/tank/anesthetic = 2,/obj/item/clothing/mask/breath/medical = 5,
-					/obj/item/weapon/screwdriver = 5,/obj/item/weapon/crowbar = 5)
-	//everything after the power cell had no amounts, I improvised.  -Sayu
+	products = list(/obj/item/stack/cable_coil = 4,/obj/item/device/flash/synthetic = 4,/obj/item/weapon/cell = 4,/obj/item/device/healthanalyzer = 2,
+					/obj/item/weapon/scalpel = 1,/obj/item/weapon/circular_saw = 1,/obj/item/weapon/tank/anesthetic = 2,/obj/item/clothing/mask/breath/medical = 5,
+					/obj/item/weapon/screwdriver = 2,/obj/item/weapon/crowbar = 2)
+	contraband = list(/obj/item/device/flash = 2)
 
 //FOR ACTORS GUILD - mainly props that cannot be spawned otherwise
 /obj/machinery/vending/props
@@ -982,3 +1007,31 @@
 	icon_state = "robotics"
 	products = list(/obj/structure/closet/crate/freezer = 2, /obj/structure/closet = 3, /obj/structure/closet/crate = 3)
 
+/obj/machinery/vending/fashionvend
+	name = "Smashing Fashions"
+	desc = "For all your cheap knockoff needs."
+	product_slogans = "Look smashing for your darling!;Be rich! Dress rich!"
+	vend_delay = 15
+	vend_reply = "Absolutely smashing!"
+	product_ads = "Impress the love of your life!;Don't look poor, look rich!;100% authentic designers!;All sales are final!;Lowest prices guaranteed!"
+	products = list(/obj/item/weapon/mirror = 8,
+					/obj/item/weapon/haircomb = 8,
+					/obj/item/clothing/glasses/monocle = 5,
+					/obj/item/clothing/glasses/sunglasses = 5,
+					/obj/item/weapon/lipstick = 3,
+					/obj/item/weapon/lipstick/black = 3,
+					/obj/item/weapon/lipstick/purple = 3,
+					/obj/item/weapon/lipstick/jade = 3,
+					/obj/item/weapon/storage/wallet/poly = 2)
+	contraband = list(/obj/item/clothing/glasses/eyepatch = 2, /obj/item/clothing/accessory/horrible = 2)
+	premium = list(/obj/item/clothing/mask/smokable/pipe = 3)
+	prices = list(/obj/item/weapon/mirror = 60,
+					/obj/item/weapon/haircomb = 40,
+					/obj/item/clothing/glasses/monocle = 700,
+					/obj/item/clothing/glasses/sunglasses = 500,
+					/obj/item/weapon/lipstick = 100,
+					/obj/item/weapon/lipstick/black = 100,
+					/obj/item/weapon/lipstick/purple = 100,
+					/obj/item/weapon/lipstick/jade = 100,
+					/obj/item/weapon/storage/wallet/poly = 600
+					)

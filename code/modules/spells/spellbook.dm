@@ -92,7 +92,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 				for(var/id in reagent_list)
 					if(R.has_reagent(id,5))
 						make_sacrifice(I,user, id)
-						return
+						return 1
 	..()
 
 /obj/item/weapon/spellbook/interact(mob/user as mob)
@@ -102,6 +102,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	else
 		dat = "<center><h3>[spellbook.title]</h3><i>[spellbook.title_desc]</i><br>You have [uses] spell slot[uses > 1 ? "s" : ""] left.</center><br>"
 		dat += "<center><font color='#ff33cc'>Requires Wizard Garb</font><br><font color='#ff6600'>Selectable Target</font><br><font color='#33cc33'>Spell Charge Type: Recharge, Sacrifice, Charges</font></center><br>"
+		dat += "<center><b>To use a contract, first bind it to your soul, then give it to someone to sign. This will bind their soul to you.</b></center><br>"
 		for(var/i in 1 to spellbook.spells.len)
 			var/name = "" //name of target
 			var/desc = "" //description of target
@@ -140,7 +141,10 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			dat += "<br><i>[desc]</i><br>"
 		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spellbook.</a></center>"
 		if(spellbook.book_flags & INVESTABLE)
-			dat += "<center><A href='byond://?src=\ref[src];invest=1'>Invest a Spell Slot</a><br><i>Investing a spellpoint will return two spellpoints back in 30 minutes.<br>Some say a sacrifice could even shorten the time...</i></center>"
+			if(investing_time)
+				dat += "<center><b>Currently investing in a slot...</b></center>"
+			else
+				dat += "<center><A href='byond://?src=\ref[src];invest=1'>Invest a Spell Slot</a><br><i>Investing a spellpoint will return two spellpoints back in 15 minutes.<br>Some say a sacrifice could even shorten the time...</i></center>"
 		if(!(spellbook.book_flags & NOREVERT))
 			dat += "<center><A href='byond://?src=\ref[src];book=1'>Choose different spellbook.</a></center>"
 		dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spellbook.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"
@@ -235,8 +239,8 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		return "You can only invest one spell slot at a time."
 	uses--
 	processing_objects += src
-	investing_time = world.time + 18000 //30 minutes
-	return "You invest a spellslot and will recieve two in return in thirty minutes."
+	investing_time = world.time + (15 MINUTES)
+	return "You invest a spellslot and will recieve two in return in 15 minutes."
 
 /obj/item/weapon/spellbook/process()
 	if(investing_time && investing_time <= world.time)

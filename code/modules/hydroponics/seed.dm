@@ -113,7 +113,7 @@
 		return
 
 
-	if(!target_limb) target_limb = pick("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm", "r_arm","head","chest","groin")
+	if(!target_limb) target_limb = pick(BP_ALL_LIMBS)
 	var/blocked = target.run_armor_check(target_limb, "melee")
 	if(blocked >= 100)
 		return
@@ -331,9 +331,8 @@
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, get_turf(target))
 			s.start()
-			var/turf/picked = get_turf(pick(turfs))                      // Just in case...
 			new/obj/effect/decal/cleanable/molten_item(get_turf(target)) // Leave a pile of goo behind for dramatic effect...
-			target.forceMove(picked)                                     // And teleport them to the chosen location.
+			target.forceMove(T)                                     // And teleport them to the chosen location.
 			impact = 1
 
 	return impact

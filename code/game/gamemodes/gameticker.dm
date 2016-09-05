@@ -334,10 +334,10 @@ var/global/datum/controller/gameticker/ticker
 		var/game_finished = 0
 		var/mode_finished = 0
 		if (config.continous_rounds)
-			game_finished = (emergency_shuttle.returned() || mode.station_was_nuked)
+			game_finished = (evacuation_controller.round_over() || mode.station_was_nuked)
 			mode_finished = (!post_game && mode.check_finished())
 		else
-			game_finished = (mode.check_finished() || (emergency_shuttle.returned() && emergency_shuttle.evac == 1)) || universe_has_ended
+			game_finished = (mode.check_finished() || (evacuation_controller.round_over() && evacuation_controller.emergency_evacuation) || universe_has_ended)
 			mode_finished = game_finished
 
 		if(!mode.explosion_in_progress && game_finished && (mode_finished || post_game))
@@ -399,7 +399,7 @@ var/global/datum/controller/gameticker/ticker
 		if(Player.mind && !isnewplayer(Player))
 			if(Player.stat != DEAD)
 				var/turf/playerTurf = get_turf(Player)
-				if(emergency_shuttle.departed && emergency_shuttle.evac)
+				if(evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
 					if(isNotAdminLevel(playerTurf.z))
 						Player << "<font color='blue'><b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b></font>"
 					else
@@ -502,6 +502,7 @@ var/global/datum/controller/gameticker/ticker
 		if(length(antag.candidates) >= antag.initial_spawn_req)
 			antag.attempt_spawn()
 			antag.finalize_spawn()
+			additional_antag_types.Add(antag.id)
 			return 1
 		else
 			if(antag.initial_spawn_req > 1)

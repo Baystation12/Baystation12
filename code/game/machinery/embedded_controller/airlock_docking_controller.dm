@@ -11,7 +11,7 @@
 	docking_program = new/datum/computer/file/embedded_program/docking/airlock(src, airlock_program)
 	program = docking_program
 
-/obj/machinery/embedded_controller/radio/airlock/docking_port/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/embedded_controller/radio/airlock/docking_port/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nano_ui/master_ui = null, var/datum/topic_state/state = default_state)
 	var/data[0]
 
 	data = list(
@@ -27,7 +27,7 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
-		ui = new(user, src, ui_key, "docking_airlock_console.tmpl", name, 470, 290)
+		ui = new(user, src, ui_key, "docking_airlock_console.tmpl", name, 470, 290, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

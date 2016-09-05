@@ -23,6 +23,12 @@
 	holder_type = /obj/item/weapon/holder/borer
 	mob_size = MOB_SMALL
 
+	var/generation = 1
+	var/static/list/borer_names = list(
+		"Primary", "Secondary", "Tertiary", "Quaternary", "Quinary", "Senary",
+		"Septenary", "Octonary", "Novenary", "Decenary", "Undenary", "Duodenary",
+		)
+
 	var/used_dominate
 	var/chemicals = 10                      // Chemicals used for reproduction and spitting neurotoxin.
 	var/mob/living/carbon/human/host        // Human host for the brain worm.
@@ -41,14 +47,15 @@
 	if(mind)
 		borers.add_antagonist(mind)
 
-/mob/living/simple_animal/borer/New()
-	..()
+/mob/living/simple_animal/borer/New(atom/newloc, var/gen=1)
+	..(newloc)
 
 	add_language("Cortical Link")
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
-	truename = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
+	generation = gen
+	truename = "[borer_names[min(generation, borer_names.len)]] [random_id("borer[generation]", 1000, 9999)]"
 	if(!roundstart) request_player()
 
 /mob/living/simple_animal/borer/Life()
@@ -93,8 +100,8 @@
 	. = ..()
 	statpanel("Status")
 
-	if(emergency_shuttle)
-		var/eta_status = emergency_shuttle.get_status_panel_eta()
+	if(evacuation_controller)
+		var/eta_status = evacuation_controller.get_status_panel_eta()
 		if(eta_status)
 			stat(null, eta_status)
 
@@ -107,7 +114,7 @@
 
 	if(istype(host,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = host
-		var/obj/item/organ/external/head = H.get_organ("head")
+		var/obj/item/organ/external/head = H.get_organ(BP_HEAD)
 		head.implants -= src
 
 	controlling = 0

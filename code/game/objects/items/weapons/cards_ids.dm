@@ -412,3 +412,10 @@ var/const/NO_EMAG_ACT = -50
 	name = "identification card"
 	desc = "A card which represents common sense and responsibility."
 	icon_state = "civGold"
+
+/obj/item/weapon/card/id/merchant
+	name = "identification card"
+	desc = "A card issued to Merchants, indicating their right to sell and buy goods."
+	icon_state = "trader"
+	access = list(access_merchant)
+

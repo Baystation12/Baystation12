@@ -33,7 +33,7 @@
 	if(istype(H) && H.shoes)
 		return
 	seed.do_thorns(victim,src)
-	seed.do_sting(victim,src,pick("r_foot","l_foot","r_leg","l_leg"))
+	seed.do_sting(victim,src,pick(BP_R_FOOT,BP_L_FOOT,BP_R_LEG,BP_L_LEG))
 
 /obj/effect/plant/proc/unbuckle()
 	if(buckled_mob)
@@ -85,17 +85,17 @@
 		var/can_grab = 1
 		if(istype(victim, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = victim
-			if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & NOSLIP))
+			if((istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & NOSLIP)) || (H.species.flags & NO_SLIP))
 				can_grab = 0
 		if(can_grab)
 			src.visible_message("<span class='danger'>Tendrils lash out from \the [src] and drag \the [victim] in!</span>")
 			victim.forceMove(src.loc)
-
-	//entangling people
-	if(victim.loc == src.loc)
-		buckle_mob(victim)
-		victim.set_dir(pick(cardinal))
-		victim << "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>"
+			sleep(1)
+			//entangling people
+			if(victim.loc == src.loc)
+				buckle_mob(victim)
+				victim.set_dir(pick(cardinal))
+				victim << "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>"
 
 /obj/effect/plant/buckle_mob()
 	. = ..()

@@ -11,7 +11,7 @@
 	var/open = 0
 	var/screwed = 1
 	var/field_type = ""
-	var/power_use = 25
+	var/power_use = 5 KILOWATTS
 	var/obj/effect/suspension_field/suspension_field
 	var/list/secured_mobs = list()
 
@@ -23,20 +23,20 @@
 	set background = 1
 
 	if (suspension_field)
-		cell.charge -= power_use
+		cell.use(power_use * CELLRATE)
 
 		var/turf/T = get_turf(suspension_field)
 		if(field_type == "carbon")
 			for(var/mob/living/carbon/M in T)
 				M.weakened = max(M.weakened, 3)
-				cell.charge -= power_use
+				cell.use(power_use * CELLRATE)
 				if(prob(5))
 					M << "\blue [pick("You feel tingly.","You feel like floating.","It is hard to speak.","You can barely move.")]"
 
 		if(field_type == "iron")
 			for(var/mob/living/silicon/M in T)
 				M.weakened = max(M.weakened, 3)
-				cell.charge -= power_use
+				cell.use(power_use * CELLRATE)
 				if(prob(5))
 					M << "\blue [pick("You feel tingly.","You feel like floating.","It is hard to speak.","You can barely move.")]"
 
@@ -48,7 +48,7 @@
 
 		for(var/mob/living/simple_animal/M in T)
 			M.weakened = max(M.weakened, 3)
-			cell.charge -= power_use
+			cell.use(power_use * CELLRATE)
 			if(prob(5))
 				M << "\blue [pick("You feel tingly.","You feel like floating.","It is hard to speak.","You can barely move.")]"
 
@@ -309,6 +309,7 @@
 
 	src.visible_message("\blue \icon[src] [src] deactivates with a gentle shudder.")
 	qdel(suspension_field)
+	suspension_field = null
 	icon_state = "suspension2"
 
 /obj/machinery/suspension_gen/Destroy()

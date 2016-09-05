@@ -83,7 +83,7 @@
 	var/weapon_lock = 0
 	var/weaponlock_time = 120
 	var/lawupdate = 1 //Cyborgs will sync their laws with their AI by default
-	var/lockcharge //Used when locking down a borg to preserve cell charge
+	var/lockcharge //If a robot is locked down
 	var/speed = 0 //Cause sec borgs gotta go fast //No they dont!
 	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
 	var/tracking_entities = 0 //The number of known entities currently accessing the internal camera
@@ -134,9 +134,7 @@
 		C.wrapped = new C.external_type
 
 	if(!cell)
-		cell = new /obj/item/weapon/cell(src)
-		cell.maxcharge = 7500
-		cell.charge = 7500
+		cell = new /obj/item/weapon/cell/high(src)
 
 	..()
 
@@ -147,15 +145,15 @@
 
 	add_robot_verbs()
 
-	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
-	hud_list[LIFE_HUD]        = image('icons/mob/hud.dmi', src, "hudhealth100")
-	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[WANTED_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPLOYAL_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealth100")
+	hud_list[LIFE_HUD]        = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealth100")
+	hud_list[ID_HUD]          = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[WANTED_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPLOYAL_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPCHEM_HUD]     = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPTRACK_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 
 /mob/living/silicon/robot/proc/recalculate_synth_capacities()
 	if(!module || !module.synths)
@@ -260,7 +258,7 @@
 	if((crisis && security_level == SEC_LEVEL_RED) || crisis_override) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
-	modtype = input("Please, select a module!", "Robot", null, null) as null|anything in modules
+	modtype = input("Please, select a module!", "Robot module", null, null) as null|anything in modules
 
 	if(module)
 		return
@@ -281,9 +279,9 @@
 		modtype = prefix
 
 	if(istype(mmi, /obj/item/device/mmi/digital/posibrain))
-		braintype = "Android"
-	else if(istype(mmi, /obj/item/device/mmi/digital/robot))
 		braintype = "Robot"
+	else if(istype(mmi, /obj/item/device/mmi/digital/robot))
+		braintype = "Drone"
 	else
 		braintype = "Cyborg"
 
@@ -300,10 +298,10 @@
 
 	// if we've changed our name, we also need to update the display name for our PDA
 	setup_PDA()
-	
+
 	// Synths aren't in data_core, but are on manifest. Invalidate old one so the
 	// synth shows up.
-	data_core.ResetPDAManifest() 
+	data_core.ResetPDAManifest()
 
 	//We also need to update name of internal camera.
 	if (camera)
@@ -368,10 +366,12 @@
 
 	if(!is_component_functioning("diagnosis unit"))
 		src << "\red Your self-diagnosis component isn't functioning."
+		return
 
 	var/datum/robot_component/CO = get_component("diagnosis unit")
 	if (!cell_use_power(CO.active_usage))
 		src << "\red Low Power."
+		return
 	var/dat = self_diagnosis()
 	src << browse(dat, "window=robotdiagnosis")
 
@@ -931,8 +931,14 @@
 	// They stay locked down if their wire is cut.
 	if(wires.LockedCut())
 		state = 1
-	lockcharge = state
-	update_canmove()
+	else if(has_zeroth_law())
+		state = 0
+
+	if(lockcharge != state)
+		lockcharge = state
+		update_canmove()
+		return 1
+	return 0
 
 /mob/living/silicon/robot/mode()
 	set name = "Activate Held Object"
@@ -956,7 +962,7 @@
 		if(!(icontype in module_sprites))
 			icontype = module_sprites[1]
 	else
-		icontype = input("Select an icon! [triesleft ? "You have [triesleft] more chance\s." : "This is your last try."]", "Robot", icontype, null) in module_sprites
+		icontype = input("Select an icon! [triesleft ? "You have [triesleft] more chance\s." : "This is your last try."]", "Robot Icon", icontype, null) in module_sprites
 	icon_state = module_sprites[icontype]
 	updateicon()
 
@@ -988,10 +994,6 @@
 /mob/living/silicon/robot/proc/cell_use_power(var/amount = 0)
 	// No cell inserted
 	if(!cell)
-		return 0
-
-	// Power cell is empty.
-	if(cell.charge == 0)
 		return 0
 
 	var/power_use = amount * CYBORG_POWER_USAGE_MULTIPLIER
@@ -1069,6 +1071,7 @@
 				var/time = time2text(world.realtime,"hh:mm:ss")
 				lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
 				set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
+				SetLockdown(0)
 				. = 1
 				spawn()
 					src << "<span class='danger'>ALERT: Foreign software detected.</span>"

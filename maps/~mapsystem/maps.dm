@@ -1,6 +1,8 @@
-
 var/datum/map/using_map = new USING_MAP_DATUM
 var/list/all_maps = list()
+
+var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
+var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /hook/startup/proc/initialise_map_list()
 	for(var/type in typesof(/datum/map) - /datum/map)
@@ -53,9 +55,36 @@ var/list/all_maps = list()
 	var/emergency_shuttle_recall_message
 	var/list/station_networks = list() 		// Camera networks that will show up on the console.
 
+	var/list/holodeck_programs = list() // map of string ids to /datum/holodeck_program instances
+	var/list/holodeck_supported_programs = list() // map of maps - first level maps from list-of-programs string id (e.g. "BarPrograms") to another map
+                                                  // this is in order to support multiple holodeck program listings for different holodecks
+	                                              // second level maps from program friendly display names ("Picnic Area") to program string ids ("picnicarea")
+	                                              // as defined in holodeck_programs
+	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
+
+	var/flags = 0
+	var/evac_controller_type = /datum/evacuation_controller
+	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
+
 /datum/map/New()
 	..()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
 	if(!allowed_jobs)
 		allowed_jobs = subtypesof(/datum/job)
+
+// Used to apply various post-compile procedural effects to the map.
+/datum/map/proc/perform_map_generation()
+	return
+
+/datum/map/proc/refresh_mining_turfs()
+
+	set background = 1
+	set waitfor = 0
+
+	for(var/thing in mining_walls)
+		var/turf/simulated/mineral/M = thing
+		M.updateMineralOverlays()
+	for(var/thing in mining_floors)
+		var/turf/simulated/floor/asteroid/M = thing
+		M.updateMineralOverlays()

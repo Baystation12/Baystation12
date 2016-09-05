@@ -241,7 +241,7 @@ proc/get_radio_key_from_channel(var/channel)
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
-		get_mobs_and_objs_in_view_fast(T, message_range, listening, listening_obj)
+		get_mobs_and_objs_in_view_fast(T, message_range, listening, listening_obj, /datum/client_preference/ghost_ears)
 
 
 	var/speech_bubble_test = say_test(message)

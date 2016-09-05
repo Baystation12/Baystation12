@@ -8,6 +8,7 @@
 	var/banglet = 0
 	var/spawner_type = null // must be an object path
 	var/deliveryamt = 1 // amount of type to deliver
+	var/list/newvars
 
 	detonate()												// Prime now just handles the two loops that query for people in lockers and people who can see it.
 
@@ -21,6 +22,9 @@
 
 			for(var/i=1, i<=deliveryamt, i++)
 				var/atom/movable/x = new spawner_type
+				if(newvars && length(newvars))
+					for(var/v in newvars)
+						x.vars[v] = newvars[v]
 				x.loc = T
 				if(prob(50))
 					for(var/j = 1, j <= rand(1, 3), j++)

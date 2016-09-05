@@ -88,6 +88,11 @@
 	update()
 	return
 
+/obj/structure/morgue/attack_robot(var/mob/user)
+	if(Adjacent(user))
+		return attack_hand(user)
+	else return ..()
+
 /obj/structure/morgue/attackby(P as obj, mob/user as mob)
 	if (istype(P, /obj/item/weapon/pen))
 		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
@@ -334,7 +339,7 @@
 					M.emote("scream")
 				else
 					var/mob/living/carbon/C = M
-					if (!(C.species && (C.species.flags & NO_PAIN)))
+					if (C.can_feel_pain())
 						C.emote("scream")
 
 			//Logging for this causes runtimes resulting in the cremator locking up. Commenting it out until that's figured out.

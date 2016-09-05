@@ -31,9 +31,7 @@
 /datum/gear/accessory/wallet
 	display_name = "wallet"
 	path = /obj/item/weapon/storage/wallet
-/datum/gear/accessory/wallet/New()
-	..()
-	gear_tweaks = list(gear_tweak_free_color_choice())
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/wallet_poly
 	display_name = "wallet, polychromic"
@@ -84,3 +82,15 @@
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/accessory/storage/webbing
 	cost = 2
+
+/datum/gear/accessory/hawaii
+	display_name = "hawaii shirt"
+	path = /obj/item/clothing/accessory/hawaii
+
+/datum/gear/accessory/hawaii/New()
+	..()
+	var/list/shirts = list()
+	shirts["blue hawaii shirt"] = /obj/item/clothing/accessory/hawaii
+	shirts["red hawaii shirt"] = /obj/item/clothing/accessory/hawaii/red
+	shirts["random colored hawaii shirt"] = /obj/item/clothing/accessory/hawaii/random
+	gear_tweaks += new/datum/gear_tweak/path(shirts)

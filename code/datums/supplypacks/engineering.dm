@@ -31,16 +31,40 @@
 	cost = 10
 	containername = "\improper Plastic sheets crate"
 
+/decl/hierarchy/supply_pack/engineering/smes_circuit
+	name = "Superconducting Magnetic Energy Storage Unit Circuitry"
+	contains = list(/obj/item/weapon/circuitboard/smes)
+	cost = 20
+	containername = "\improper Superconducting Magnetic Energy Storage Unit Circuitry"
+
 /decl/hierarchy/supply_pack/engineering/smescoil
-	name = "Superconducting Magnetic Coil"
+	name = "Superconductive Magnetic Coil"
 	contains = list(/obj/item/weapon/smes_coil)
-	cost = 75
-	containername = "\improper Superconducting Magnetic Coil crate"
+	cost = 35
+	containername = "\improper Superconductive Magnetic Coil crate"
+
+/decl/hierarchy/supply_pack/engineering/smescoil_weak
+	name = "Basic Superconductive Magnetic Coil"
+	contains = list(/obj/item/weapon/smes_coil/weak)
+	cost = 25
+	containername = "\improper Basic Superconductive Magnetic Coil crate"
+
+/decl/hierarchy/supply_pack/engineering/smescoil_super_capacity
+	name = "Superconductive Capacitance Coil"
+	contains = list(/obj/item/weapon/smes_coil/super_capacity)
+	cost = 45
+	containername = "\improper Superconductive Capacitance Coil crate"
+
+/decl/hierarchy/supply_pack/engineering/smescoil_super_io
+	name = "Superconductive Transmission Coil"
+	contains = list(/obj/item/weapon/smes_coil/super_io)
+	cost = 45
+	containername = "\improper Superconductive Transmission Coil crate"
 
 /decl/hierarchy/supply_pack/engineering/electrical
 	name = "Electrical maintenance crate"
 	contains = list(/obj/item/weapon/storage/toolbox/electrical = 2,
-					/obj/item/clothing/gloves/yellow = 2,
+					/obj/item/clothing/gloves/insulated = 2,
 					/obj/item/weapon/cell = 2,
 					/obj/item/weapon/cell/high = 2)
 	cost = 15

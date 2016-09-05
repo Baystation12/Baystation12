@@ -7,9 +7,12 @@
 	speech = list("hail_generic"    = "Uuhh... hello? Welcome to ORIGIN, I hope you have a uh.... good shoping trip.",
 				"hail_deny"         = "Nah, you're not allowed here. At all",
 
-				"trade_complete"    = "Thanks for shopping... here.... at ORIGIN.",
-				"trade_refuse"      = "Uhhhh.... no? No.",
+				"trade_complete"       = "Thanks for shopping... here.... at ORIGIN.",
+				"trade_blacklist"      = "Uuuuuuuuuuuuuuuuuuuh.... no.",
+				"trade_found_unwanted" = "Nah! That's not what I'm looking for. Something rarer.",
+				"trade_not_enough"   = "Just cause they're made of cardboard doesn't mean they don't cost money...",
 				"how_much"          = "Uuuuuuuh... I'm thinking like... VALUE. Right? Or something rare that complements my interest.",
+				"what_want"         = "Uuuuum..... I guess I want",
 
 				"compliment_deny"   = "Ha! Very funny! You should write your own television show.",
 				"compliment_accept" = "Why yes, I do work out.",
@@ -46,7 +49,9 @@
 				"hail_deny"         = "Your call has been disconnected.",
 
 				"trade_complete"    = "Thank you for shopping at ORIGIN, would you like to put a warranty on that?",
-				"trade_refuse"      = "I'm sorry sir, I can't accept that.",
+				"trade_blacklist"   = "Sir, this is a /electronics/ store.",
+				"trade_no_goods"    = "As much as I'd love to buy that from you, I'm not.",
+				"trade_not_enough"  = "Your offer isn't adequete to the item you've selected, sir.",
 				"how_much"          = "Your total comes out to VALUE thalers.",
 
 				"compliment_deny"   = "Hahaha! Yeah... funny...",
@@ -69,7 +74,6 @@
 								/obj/item/weapon/circuitboard/broken                     = TRADER_BLACKLIST,
 								/obj/item/stack/cable_coil                               = TRADER_SUBTYPES_ONLY,
 								/obj/item/stack/cable_coil/cyborg                        = TRADER_BLACKLIST,
-								/obj/item/stack/cable_coil/heavyduty                     = TRADER_BLACKLIST,
 								/obj/item/stack/cable_coil/random                        = TRADER_BLACKLIST,
 								/obj/item/stack/cable_coil/cut                           = TRADER_BLACKLIST,
 								/obj/item/weapon/airalarm_electronics                    = TRADER_THIS_TYPE,
@@ -95,7 +99,9 @@
 				"hail_deny"         = "We do not trade with rude customers. Consider yourself blacklisted.",
 
 				"trade_complete"    = "Thank you for shopping at ORIGIN, remember: you can return after the first day if you still have the tags on!",
-				"trade_refuse"      = "I'm sorry sir, ORIGIN policy says not to accept that.",
+				"trade_blacklist"   = "Hm, how about no?",
+				"trade_no_goods"    = "We don't buy, sir. Only sell.",
+				"trade_not_enough"  = "Sorry, ORIGIN policy to not accept trades below our marked prices.",
 				"how_much"          = "Your total comes out to VALUE thalers.",
 
 				"compliment_deny"   = "Excuse me?",
@@ -147,7 +153,7 @@
 								/obj/item/clothing/gloves                 = TRADER_SUBTYPES_ONLY,
 								/obj/item/clothing/gloves/lightrig        = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/gloves/rig             = TRADER_BLACKLIST_ALL,
-								/obj/item/clothing/gloves/swat            = TRADER_BLACKLIST,
+								/obj/item/clothing/gloves/thick/swat            = TRADER_BLACKLIST,
 								/obj/item/clothing/gloves/chameleon       = TRADER_BLACKLIST,
 								/obj/item/clothing/head                   = TRADER_SUBTYPES_ONLY,
 								/obj/item/clothing/head/HoS               = TRADER_BLACKLIST_ALL,
@@ -219,11 +225,45 @@ Sells devices, odds and ends, and medical stuff
 				"hail_deny"         = "Oh no. I don't want to deal with YOU.",
 
 				"trade_complete"    = "Thank you! Now remember, there isn't any return policy here, so be careful with that!",
-				"trade_refuse"      = "Oh no, I have to make a living.",
+				"trade_blacklist"   = "Hm. Well that would be illegal, so no.",
+				"trade_no_goods"    = "I'm sorry, I only sell goods.",
+				"trade_not_enough"  = "Gotta pay more than that to get that!",
 				"how_much"          = "Well... I bought it for a lot, but I'll give it to you for VALUE.",
 
 				"compliment_deny"   = "Uh... did you say something?",
 				"compliment_accept" = "Mhm! I can agree to that!",
 				"insult_good"       = "Wow, where was that coming from?",
 				"insult_bad"        = "Don't make me blacklist your connection.",
+				)
+
+/datum/trader/ship/robots
+	name = "Robot Seller"
+	name_language = TRADER_DEFAULT_NAME
+	origin = "Robot Store"
+	possible_origins = list("AI for the Straight Guy", "Mechanical Buddies", "Bot Chop Shop", "Omni Consumer Projects")
+	possible_trading_items = list(/obj/item/weapon/secbot_assembly/ed209_assembly = TRADER_THIS_TYPE,
+								/obj/item/weapon/toolbox_tiles                    = TRADER_THIS_TYPE,
+								/obj/item/weapon/toolbox_tiles_sensor             = TRADER_THIS_TYPE,
+								/obj/item/weapon/secbot_assembly                  = TRADER_ALL,
+								/obj/item/weapon/farmbot_arm_assembly             = TRADER_THIS_TYPE,
+								/obj/item/weapon/firstaid_arm_assembly            = TRADER_THIS_TYPE,
+								/obj/item/weapon/bucket_sensor                    = TRADER_THIS_TYPE,
+								/obj/item/device/bot_kit                          = TRADER_THIS_TYPE,
+								/obj/item/device/paicard                          = TRADER_THIS_TYPE,
+								/obj/item/device/aicard                           = TRADER_THIS_TYPE,
+								/mob/living/bot                                   = TRADER_SUBTYPES_ONLY)
+	speech = list("hail_generic" = "Welcome to ORIGIN! Let me walk you through our fine robotic selection!",
+				"hail_silicon"   = "Welcome to ORIGIN! Le-well, you're a synth! Well, your money is good anyways, welcome welcome!",
+				"hail_deny"      = "ORIGIN no longer wants to speak to you.",
+
+				"trade_complete" = "I hope you enjoy your new robot!",
+				"trade_blacklist"= "I work with robots, sir. Not that.",
+				"trade_no_goods" = "You gotta buy the robots, sir. I don't do trades.",
+				"trade_not_enough" = "You're coming up short on cash.",
+				"how_much"       = "My fine selection of robots will cost you VALUE!",
+
+				"compliment_deny"= "Well, I almost believed that.",
+				"compliment_accept"= "Thank you! My craftsmanship is my life.",
+				"insult_good"    = "Uncalled for.... uncalled for.",
+				"insult_bad"     = "I've programmed AIs better at insulting than you!",
 				)

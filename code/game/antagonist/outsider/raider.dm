@@ -14,6 +14,7 @@ var/datum/antagonist/raider/raiders
 	hard_cap_round = 10
 	initial_spawn_req = 4
 	initial_spawn_target = 6
+	min_player_age = 14
 
 	id_type = /obj/item/weapon/card/id/syndicate
 
@@ -291,7 +292,7 @@ var/datum/antagonist/raider/raiders
 
 	player.equip_to_slot_or_del(new uniform_type(player), slot_w_uniform)
 	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(player), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
-	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/yellow/vox(player), slot_gloves) // AS ABOVE.
+	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/vox(player), slot_gloves) // AS ABOVE.
 	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat/vox(player), slot_wear_mask)
 	player.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(player), slot_back)
 	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_r_store)

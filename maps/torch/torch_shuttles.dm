@@ -1,106 +1,6 @@
-/datum/shuttle/ferry/administration
-	name = "Administration"
-	location = 1
-	warmup_time = 10	//want some warmup time so people can cancel.
-	area_offsite = /area/shuttle/administration/centcom
-	area_station = /area/shuttle/administration/station
-	docking_controller_tag = "admin_shuttle"
-	dock_target_station = "admin_shuttle_dock_airlock"
-	dock_target_offsite = "admin_shuttle_bay"
-
-/datum/shuttle/multi_shuttle/mercenary
-	name = "Mercenary"
-	warmup_time = 0
-	origin = /area/syndicate_station/start
-	interim = /area/syndicate_station/transit
-	start_location = "Mercenary Base"
-	destinations = list(
-		"Northwest of the station" = /area/syndicate_station/northwest,
-		"North of the station" = /area/syndicate_station/north,
-		"Northeast of the station" = /area/syndicate_station/northeast,
-		"Southwest of the station" = /area/syndicate_station/southwest,
-		"South of the station" = /area/syndicate_station/south,
-		"Southeast of the station" = /area/syndicate_station/southeast,
-		"Telecomms Satellite" = /area/syndicate_station/commssat,
-		"Mining Station" = /area/syndicate_station/mining,
-		"Arrivals dock" = /area/syndicate_station/arrivals_dock,
-		)
-	docking_controller_tag = "merc_shuttle"
-	destination_dock_targets = list(
-		"Mercenary Base" = "merc_base",
-		"Arrivals dock" = "nuke_shuttle_dock_airlock",
-		)
-	announcer = "NDV Icarus"
-
-/datum/shuttle/multi_shuttle/mercenary/New()
-	arrival_message = "Attention, [station_short], you have a large signature approaching the station - looks unarmed to surface scans. We're too far out to intercept - brace for visitors."
-	departure_message = "Your visitors are on their way out of the system, [station_short], burning delta-v like it's nothing. Good riddance."
-	..()
-
-/datum/shuttle/multi_shuttle/skipjack
-	name = "Skipjack"
-	warmup_time = 0
-	origin = /area/skipjack_station/start
-	interim = /area/skipjack_station/transit
-	destinations = list(
-		"Fore Starboard Solars" = /area/skipjack_station/northeast_solars,
-		"Fore Port Solars" = /area/skipjack_station/northwest_solars,
-		"Aft Starboard Solars" = /area/skipjack_station/southeast_solars,
-		"Aft Port Solars" = /area/skipjack_station/southwest_solars,
-		"Mining Station" = /area/skipjack_station/mining
-		)
-	announcer = "NDV Icarus"
-
-/datum/shuttle/multi_shuttle/skipjack/New()
-	arrival_message = "Attention, [station_short], we just tracked a small target bypassing our defensive perimeter. Can't fire on it without hitting the station - you've got incoming visitors, like it or not."
-	departure_message = "Your guests are pulling away, [station_short] - moving too fast for us to draw a bead on them. Looks like they're heading out of the system at a rapid clip."
-	..()
-
-/datum/shuttle/multi_shuttle/rescue
-	name = "Rescue"
-	warmup_time = 0
-	origin = /area/rescue_base/start
-	interim = /area/rescue_base/transit
-	start_location = "Response Team Base"
-	destinations = list(
-		"Northwest of the station" = /area/rescue_base/northwest,
-		"North of the station" = /area/rescue_base/north,
-		"Northeast of the station" = /area/rescue_base/northeast,
-		"Southwest of the station" = /area/rescue_base/southwest,
-		"South of the station" = /area/rescue_base/south,
-		"Southeast of the station" = /area/rescue_base/southeast,
-		"Telecomms Satellite" = /area/rescue_base/commssat,
-		"Engineering Station" = /area/rescue_base/mining,
-		"Arrivals dock" = /area/rescue_base/arrivals_dock,
-		)
-	docking_controller_tag = "rescue_shuttle"
-	destination_dock_targets = list(
-		"Response Team Base" = "rescue_base",
-		"Arrivals dock" = "rescue_shuttle_dock_airlock",
-		)
-	announcer = "NDV Icarus"
-
-/datum/shuttle/multi_shuttle/rescue/New()
-	arrival_message = "Attention, [station_short], there's a small patrol craft headed your way, it flashed us Asset Protection codes and we let it pass. You've got guests on the way."
-	departure_message = "[station_short], That Asset Protection vessel is headed back the way it came. Hope they were helpful."
-	..()
-
-/datum/shuttle/ferry/multidock/specops/ert
-	name = "Special Operations"
-	location = 0
-	warmup_time = 10
-	area_offsite = /area/shuttle/specops/station	//centcom is the home station, the Exodus is offsite
-	area_station = /area/shuttle/specops/centcom
-	docking_controller_tag = "specops_shuttle_port"
-	docking_controller_tag_station = "specops_shuttle_port"
-	docking_controller_tag_offsite = "specops_shuttle_fore"
-	dock_target_station = "specops_centcom_dock"
-	dock_target_offsite = "specops_dock_airlock"
-
-
 //Torch Large Pods
 
-/datum/shuttle/ferry/emergency/escape_pod_six
+/datum/shuttle/ferry/escape_pod/escape_pod_six
 	name = "Escape Pod 6"
 	location = 0
 	warmup_time = 10
@@ -111,7 +11,6 @@
 	dock_target_station = "escape_pod_6_berth"
 	dock_target_offsite = "escape_pod_6_recovery"
 	transit_direction = NORTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_seven
 	name = "Escape Pod 7"
@@ -124,7 +23,6 @@
 	dock_target_station = "escape_pod_7_berth"
 	dock_target_offsite = "escape_pod_7_recovery"
 	transit_direction = NORTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_eight
 	name = "Escape Pod 8"
@@ -137,7 +35,6 @@
 	dock_target_station = "escape_pod_8_berth"
 	dock_target_offsite = "escape_pod_8_recovery"
 	transit_direction = SOUTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_nine
 	name = "Escape Pod 9"
@@ -150,7 +47,6 @@
 	dock_target_station = "escape_pod_9_berth"
 	dock_target_offsite = "escape_pod_9_recovery"
 	transit_direction = SOUTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_ten
 	name = "Escape Pod 10"
@@ -163,7 +59,6 @@
 	dock_target_station = "escape_pod_10_berth"
 	dock_target_offsite = "escape_pod_10_recovery"
 	transit_direction = WEST
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_eleven
 	name = "Escape Pod 11"
@@ -176,7 +71,6 @@
 	dock_target_station = "escape_pod_11_berth"
 	dock_target_offsite = "escape_pod_11_recovery"
 	transit_direction = WEST
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 //Torch Small Pods
 
@@ -191,7 +85,6 @@
 	dock_target_station = "escape_pod_12_berth"
 	dock_target_offsite = "escape_pod_12_recovery"
 	transit_direction = NORTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_thirteen
 	name = "Escape Pod 13"
@@ -204,7 +97,6 @@
 	dock_target_station = "escape_pod_13_berth"
 	dock_target_offsite = "escape_pod_13_recovery"
 	transit_direction = NORTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_fourteen
 	name = "Escape Pod 14"
@@ -217,7 +109,6 @@
 	dock_target_station = "escape_pod_14_berth"
 	dock_target_offsite = "escape_pod_14_recovery"
 	transit_direction = NORTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_fifthteen
 	name = "Escape Pod 15"
@@ -230,7 +121,6 @@
 	dock_target_station = "escape_pod_15_berth"
 	dock_target_offsite = "escape_pod_15_recovery"
 	transit_direction = SOUTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_sixteen
 	name = "Escape Pod 16"
@@ -243,7 +133,6 @@
 	dock_target_station = "escape_pod_16_berth"
 	dock_target_offsite = "escape_pod_16_recovery"
 	transit_direction = SOUTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /datum/shuttle/ferry/escape_pod/escape_pod_seventeen
 	name = "Escape Pod 17"
@@ -256,7 +145,6 @@
 	dock_target_station = "escape_pod_17_berth"
 	dock_target_offsite = "escape_pod_17_recovery"
 	transit_direction = SOUTH
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 //Calypso.
 /datum/shuttle/multi_shuttle/calypso
@@ -270,7 +158,6 @@
 		"South of Second Deck" = /area/calypso_hangar/seconddeck,
 		"West of Third Deck" = /area/calypso_hangar/thirddeck,
 		"East of Fourth Deck" = /area/calypso_hangar/fourthdeck,
-		"Debris Field" = /area/calypso_hangar/salvage,
 		"Asteroid" = /area/calypso_hangar/mining,
 		"Away Site" = /area/calypso_hangar/away,
 		)
@@ -291,7 +178,6 @@
 		"West of Second Deck" = /area/guppy_hangar/seconddeck,
 		"South of Third Deck" = /area/guppy_hangar/thirddeck,
 		"North of Fourth Deck" = /area/guppy_hangar/fourthdeck,
-		"Debris Field" = /area/guppy_hangar/salvage,
 		"Asteroid" = /area/guppy_hangar/mining,
 		)
 
@@ -318,3 +204,130 @@
 	announcer = "SEV Torch Sensor Array"
 	arrival_message = "Attention, anomalous sensor reading detected entering vessel proximity."
 	departure_message = "Attention, anomalous sensor reading detected leaving vessel proximity."
+
+//Merchant
+
+/datum/shuttle/ferry/merchant
+	name = "Merchant"
+	warmup_time = 10
+	docking_controller_tag = "merchant_ship_dock"
+	dock_target_station = "merchant_station_dock"
+	dock_target_offsite = "merchant_shuttle_station_dock"
+	area_station = /area/shuttle/merchant/home
+	area_offsite = /area/shuttle/merchant/away
+
+//Admin
+
+/datum/shuttle/ferry/administration
+	name = "Administration"
+	location = 1
+	warmup_time = 10	//want some warmup time so people can cancel.
+	area_offsite = /area/shuttle/administration/centcom
+	area_station = /area/shuttle/administration/station
+	docking_controller_tag = "admin_shuttle"
+	dock_target_station = "admin_shuttle_dock_airlock"
+	dock_target_offsite = "admin_shuttle_bay"
+
+//Merc
+
+/datum/shuttle/multi_shuttle/mercenary
+	name = "Mercenary"
+	warmup_time = 0
+	origin = /area/syndicate_station/start
+	interim = /area/syndicate_station/transit
+	start_location = "Mercenary Base"
+	destinations = list(
+		"Northeast of first deck" = /area/syndicate_station/firstdeck,
+		"Southeast of the second deck" = /area/syndicate_station/seconddeck,
+		"South of third deck" = /area/syndicate_station/thirddeck,
+		"Northwest of fourth deck" = /area/syndicate_station/fourthdeck,
+		"Away Site" = /area/syndicate_station/away,
+		"Debris Field" = /area/syndicate_station/salvage,
+		"Mining Site" = /area/syndicate_station/mining,
+		"Docking Port" = /area/syndicate_station/arrivals_dock,
+		)
+	docking_controller_tag = "merc_shuttle"
+	destination_dock_targets = list(
+		"Forward Operating Base" = "merc_base",
+		"Docking Port" = "nuke_shuttle_dock_airlock",
+		)
+	announcer = "SEV Torch Sensor Array"
+
+/datum/shuttle/multi_shuttle/mercenary/New()
+	arrival_message = "Attention, vessel detected entering vessel proximity."
+	departure_message = "Attention, vessel detected leaving vessel proximity."
+	..()
+
+//Skipjack
+
+/datum/shuttle/multi_shuttle/skipjack
+	name = "Skipjack"
+	warmup_time = 0
+	origin = /area/skipjack_station/start
+	interim = /area/skipjack_station/transit
+	destinations = list(
+		"Northwest of first deck" = /area/skipjack_station/firstdeck,
+		"Southwest of second deck" = /area/skipjack_station/seconddeck,
+		"Southeast of third deck" = /area/skipjack_station/thirddeck,
+		"Northeast of fourth deck" = /area/skipjack_station/fourthdeck,
+		"Mining Site" = /area/skipjack_station/mining,
+		"Debris Field" = /area/skipjack_station/salvage,
+		"Away Site" = /area/skipjack_station/away,
+		"Docking Port" = /area/skipjack_station/arrivals_dock,
+		)
+	docking_controller_tag = "skipjack_shuttle"
+	destination_dock_targets = list(
+		"Raider Outpost" = "skipjack_base",
+		"Docking Port" = "skipjack_shuttle_dock_airlock",
+		)
+	announcer = "SEV Torch Sensor Array"
+
+/datum/shuttle/multi_shuttle/skipjack/New()
+	arrival_message = "Attention, vessel detected entering vessel proximity."
+	departure_message = "Attention, vessel detected leaving vessel proximity."
+	..()
+
+//NT Rescue Shuttle
+
+/datum/shuttle/multi_shuttle/rescue
+	name = "Rescue"
+	warmup_time = 0
+	origin = /area/rescue_base/start
+	interim = /area/rescue_base/transit
+	start_location = "Response Team Base"
+	destinations = list(
+		"Southwest of first deck" = /area/rescue_base/firstdeck,
+		"Northwest of second deck" = /area/rescue_base/seconddeck,
+		"North of third deck" = /area/rescue_base/thirddeck,
+		"Southeast of fourth deck" = /area/rescue_base/fourthdeck,
+		"Away Site" = /area/rescue_base/away,
+		"Debris Field" = /area/rescue_base/salvage,
+		"Mining Site" = /area/rescue_base/mining,
+		"Docking Port" = /area/rescue_base/arrivals_dock,
+		)
+	docking_controller_tag = "rescue_shuttle"
+	destination_dock_targets = list(
+		"Response Team Base" = "rescue_base",
+		"Docking Port" = "rescue_shuttle_dock_airlock",
+		)
+	announcer = "SEV Torch Sensor Array"
+
+/datum/shuttle/multi_shuttle/rescue/New()
+	arrival_message = "Attention, vessel detected entering vessel proximity."
+	departure_message = "Attention, vessel detected leaving vessel proximity."
+	..()
+
+//SCGMC Assault Pod
+
+/datum/shuttle/ferry/multidock/specops/ert
+	name = "Special Operations"
+	location = 0
+	warmup_time = 10
+	area_offsite = /area/shuttle/specops/station
+	area_station = /area/shuttle/specops/centcom
+	docking_controller_tag = "specops_shuttle_port"
+	docking_controller_tag_station = "specops_shuttle_port"
+	docking_controller_tag_offsite = "specops_shuttle_fore"
+	dock_target_station = "specops_centcom_dock"
+	dock_target_offsite = "specops_dock_airlock"
+

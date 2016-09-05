@@ -340,7 +340,8 @@
 
 				else if(pod.growclone(C))
 					temp = "Initiating cloning cycle..."
-					records.Remove(C)
+					if(!config.use_cortical_stacks)
+						records.Remove(C)
 					qdel(C)
 					menu = 1
 				else
@@ -356,7 +357,8 @@
 							cloning = 1
 					if(cloning)
 						temp = "Initiating cloning cycle..."
-						records.Remove(C)
+						if(!config.use_cortical_stacks)
+							records.Remove(C)
 						qdel(C)
 						menu = 1
 					else
@@ -381,13 +383,16 @@
 		if (!subject.has_brain())
 			if(ishuman(subject))
 				var/mob/living/carbon/human/H = subject
-				if(H.species.has_organ["brain"])
+				if(H.should_have_organ(BP_BRAIN))
 					scantemp = "Error: No signs of intelligence detected."
 			else
 				scantemp = "Error: No signs of intelligence detected."
 			return
 		if ((!subject.ckey) || (!subject.client))
 			scantemp = "Error: Mental interface failure."
+			return
+		if(subject.isSynthetic())
+			scantemp = "Error: Subject is not organic."
 			return
 	if (NOCLONE in subject.mutations)
 		scantemp = "Error: Major genetic degradation."

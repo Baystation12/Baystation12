@@ -29,6 +29,7 @@
 	desc = "A battery-powered engine used to power a small vehicle."
 	icon_state = "engine_electric"
 	trail_type = /datum/effect/effect/system/trail/ion
+	cost_per_move = 200	// W
 	var/obj/item/weapon/cell/cell
 
 /obj/item/weapon/engine/electric/attackby(var/obj/item/I, var/mob/user)
@@ -54,13 +55,13 @@
 /obj/item/weapon/engine/electric/use_power()
 	if(!cell)
 		return 0
-	return cell.use(cost_per_move)
+	return cell.use(cost_per_move * CELLRATE)
 
 /obj/item/weapon/engine/electric/rev_engine(var/atom/movable/M)
-	M.audible_message("\The [M] beeps, turning up.")
+	M.audible_message("\The [M] beeps, spinning up.")
 
 /obj/item/weapon/engine/electric/putter(var/atom/movable/M)
-	M.audible_message("\The [M] makes one depressed beep before turning off.")
+	M.audible_message("\The [M] makes one depressed beep before winding down.")
 
 /obj/item/weapon/engine/electric/emp_act(var/severity)
 	if(cell)

@@ -16,8 +16,10 @@ They sell generic supplies and ask for generic supplies.
 				"hail_deny"         = "We are sorry, your connection has been blacklisted. Have a nice day.",
 
 				"trade_complete"    = "Thank you for your patronage.",
-				"trade_refuse"      = "I'm sorry, I cannot not accept this trade.",
+				"trade_not_enough"  = "I'm sorry, your offer is not worth what you are asking for.",
+				"trade_blacklisted" = "You have offered a blacklisted item. My laws do not allow me to trade for that.",
 				"how_much"          = "ITEM will cost you roughly VALUE thalers, or something of equal worth.",
+				"what_want"         = "I have logged need for",
 
 				"compliment_deny"   = "I'm sorry, I am not allowed to let compliments affect the trade.",
 				"compliment_accept" = "Thank you, but that will not not change our business interactions.",
@@ -30,6 +32,7 @@ They sell generic supplies and ask for generic supplies.
 								/obj/item/device/encryptionkey/syndicate = TRADER_BLACKLIST,
 								/obj/item/device/onetankbomb             = TRADER_BLACKLIST,
 								/obj/item/device/radio                   = TRADER_BLACKLIST_ALL,
+								/obj/item/device/pda                     = TRADER_BLACKLIST_SUB,
 								/obj/item/device/uplink                  = TRADER_BLACKLIST)
 	possible_trading_items = list(/obj/item/weapon/storage/bag                       = TRADER_SUBTYPES_ONLY,
 								/obj/item/weapon/storage/bag/cash/infinite           = TRADER_BLACKLIST,

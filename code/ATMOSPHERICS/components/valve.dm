@@ -12,8 +12,6 @@
 	var/open = 0
 	var/openDuringInit = 0
 
-	var/obj/machinery/atmospherics/node1
-	var/obj/machinery/atmospherics/node2
 
 	var/datum/pipe_network/network_node1
 	var/datum/pipe_network/network_node2

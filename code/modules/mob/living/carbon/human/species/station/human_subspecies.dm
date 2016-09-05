@@ -22,7 +22,6 @@
 	lack both light and atmosphere. As such, they're quite resistant to asphyxiation as well as \
 	toxins, but they suffer from weakened bone structure and a marked vulnerability to bright lights."
 	icobase = 'icons/mob/human_races/subspecies/r_spacer.dmi'
-	health_hud_intensity = 1.2
 
 	oxy_mod =   0.8
 	toxins_mod =   0.9
@@ -40,12 +39,12 @@
 
 	toxins_mod =   1.1
 	has_organ = list(
-		"heart" =    /obj/item/organ/heart,
-		"lungs" =    /obj/item/organ/lungs,
-		"liver" =    /obj/item/organ/liver,
-		"kidneys" =  /obj/item/organ/kidneys,
-		"brain" =    /obj/item/organ/brain,
-		"eyes" =     /obj/item/organ/eyes
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_LUNGS =    /obj/item/organ/internal/lungs,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_EYES =     /obj/item/organ/internal/eyes
 		)
 
 /datum/species/human/vatgrown/sanitize_name(name)

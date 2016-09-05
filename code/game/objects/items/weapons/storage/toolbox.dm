@@ -58,7 +58,7 @@
 	new /obj/item/stack/cable_coil/random(src,30)
 	new /obj/item/stack/cable_coil/random(src,30)
 	if(prob(5))
-		new /obj/item/clothing/gloves/yellow(src)
+		new /obj/item/clothing/gloves/insulated(src)
 	else
 		new /obj/item/stack/cable_coil/random(src,30)
 
@@ -71,7 +71,7 @@
 
 /obj/item/weapon/storage/toolbox/syndicate/New()
 	..()
-	new /obj/item/clothing/gloves/yellow(src)
+	new /obj/item/clothing/gloves/insulated(src)
 	new /obj/item/weapon/screwdriver(src)
 	new /obj/item/weapon/wrench(src)
 	new /obj/item/weapon/weldingtool(src)

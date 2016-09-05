@@ -22,6 +22,7 @@
 	desc = "A shoulder-mounted micro-explosive dispenser."
 	selectable = 1
 	icon_state = "grenadelauncher"
+	use_power_cost = 2 KILOWATTS	// 2kJ per shot, a mass driver that propels the grenade?
 
 	interface_name = "integrated grenade launcher"
 	interface_desc = "Discharges loaded grenades against the wearer's location."
@@ -164,8 +165,8 @@
 	usable = 0
 	selectable = 1
 	toggleable = 1
-	use_power_cost = 50
-	active_power_cost = 10
+	use_power_cost = 10 KILOWATTS
+	active_power_cost = 500
 	passive_power_cost = 0
 
 	gun_type = /obj/item/weapon/gun/energy/crossbow/ninja
@@ -213,7 +214,7 @@
 	desc = "A self-contained microfactory system for hardsuit integration."
 	selectable = 1
 	usable = 1
-	use_power_cost = 15
+	use_power_cost = 5 KILOWATTS
 	icon_state = "enet"
 
 	engage_string = "Fabricate Star"

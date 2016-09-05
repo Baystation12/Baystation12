@@ -1,5 +1,3 @@
-var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_random_selection/default()
-
 /datum/uplink_random_item
 	var/uplink_item				// The uplink item
 	var/keep_probability		// The probability we'll decide to keep this item if selected
@@ -35,15 +33,20 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 			continue
 		return I
 
+var/list/uplink_random_selections_
+/proc/get_uplink_random_selection_by_type(var/uplist_selection_type)
+	if(!uplink_random_selections_)
+		uplink_random_selections_ = init_subtypes(/datum/uplink_random_selection)
+		for(var/datum/entry in uplink_random_selections_)
+			uplink_random_selections_[entry.type] = entry
+	return uplink_random_selections_[uplist_selection_type]
+
 /datum/uplink_random_selection/default/New()
 	..()
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/g9mm)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/ammo/mc9mm)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/revolver)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/ammo/a357)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/heavysniper, 15, 0)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/ammo/sniperammo, 15, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/grenades/emp, 50)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/crossbow, 33)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/energy_sword, 75)
@@ -83,7 +86,7 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/thermal, reselect_propbability = 15)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/energy_net, reselect_propbability = 15)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/ewar_voice, reselect_propbability = 15)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/ewar_voice, reselect_propbability = 15)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/maneuvering_jets, reselect_propbability = 15)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/egun, reselect_propbability = 15)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/power_sink, reselect_propbability = 15)
@@ -96,6 +99,26 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/suit_sensor_mobile)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/services/suit_sensor_shutdown, 75, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/services/suit_sensor_garble, 75, 0)
+
+/datum/uplink_random_selection/blacklist
+	var/list/blacklist = list(
+			/datum/uplink_item/item/ammo,
+			/datum/uplink_item/item/badassery,
+			/datum/uplink_item/item/telecrystal,
+			/datum/uplink_item/item/tools/teleporter,
+			/datum/uplink_item/item/tools/supply_beacon
+		)
+
+/datum/uplink_random_selection/blacklist/New()
+	..()
+	for(var/uplink_item_type in subtypesof(/datum/uplink_item/item))
+		var/datum/uplink_item/item/ui = uplink_item_type
+		if(!initial(ui.name))
+			continue
+		if(is_path_in_list(uplink_item_type, blacklist))
+			continue
+		var/new_thing = new/datum/uplink_random_item(uplink_item_type)
+		items += new_thing
 
 #ifdef DEBUG
 /proc/debug_uplink_purchage_log()

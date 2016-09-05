@@ -38,6 +38,13 @@
 	if(radio_controller)
 		radio_controller.add_object(listener, beacon_freq, filter = RADIO_NAVBEACONS)
 
+/mob/living/bot/cleanbot/Destroy()
+	. = ..()
+	path = null
+	patrol_path = null
+	target = null
+	ignorelist = null
+
 /mob/living/bot/cleanbot/proc/handle_target()
 	if(loc == target.loc)
 		if(!cleaning)
@@ -47,8 +54,9 @@
 //		spawn(0)
 		path = AStar(loc, target.loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 30, id = botcard)
 		if(!path)
-			custom_emote(2, "can't reach the target and is giving up.")
+			custom_emote(2, "can't reach \the [target.name] and is giving up for now.")
 			log_debug("[src] can't reach [target.name] ([target.x], [target.y])")
+			ignorelist |= weakref(target)
 			target = null
 			path = list()
 		return
@@ -62,7 +70,11 @@
 	..()
 
 	if(!on)
+		ignorelist = list()
 		return
+
+	if(ignorelist.len && prob(2))
+		ignorelist -= pick(ignorelist)
 
 	if(client)
 		return
@@ -80,9 +92,10 @@
 	if(oddbutton && prob(5)) // Make a big mess
 		visible_message("Something flies out of [src]. He seems to be acting oddly.")
 		var/obj/effect/decal/cleanable/blood/gibs/gib = new /obj/effect/decal/cleanable/blood/gibs(loc)
-		ignorelist += gib
+		var/datum/weakref/g = weakref(gib)
+		ignorelist += g
 		spawn(600)
-			ignorelist -= gib
+			ignorelist -= g
 
 		// Find a target
 
@@ -93,21 +106,24 @@
 	var/found_spot
 	search_loop:
 		for(var/i=0, i <= maximum_search_range, i++)
-			for(var/obj/effect/decal/cleanable/D in view(i, src))
-				if(D in ignorelist)
-					continue
-				if(!turf_is_targetable(get_turf(D)))
-					continue
-				for(var/T in target_types)
-					if(istype(D, T))
-						patrol_path = list()
-						target = D
-						found_spot = handle_target()
-						if (found_spot)
-							break search_loop
-						else
-							target = null
-							continue // no need to check the other types
+			cleanable_loop:
+				for(var/obj/effect/decal/cleanable/D in view(i, src))
+					for(var/item in ignorelist)
+						var/datum/weakref/wr = item
+						if(wr.resolve() == D)
+							continue cleanable_loop
+					if(!turf_is_targetable(get_turf(D)))
+						continue
+					for(var/T in target_types)
+						if(istype(D, T))
+							patrol_path = list()
+							target = D
+							found_spot = handle_target()
+							if (found_spot)
+								break search_loop
+							else
+								target = null
+								continue // no need to check the other types
 
 
 	if(!found_spot && !target) // No targets in range

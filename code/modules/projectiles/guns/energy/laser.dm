@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/laser
 	name = "laser carbine"
-	desc = "An Hesphaistos Industries G40E carbine, designed to kill with concentrated energy blasts."
+	desc = "An Hephaestus Industries G40E carbine, designed to kill with concentrated energy blasts."
 	icon_state = "laser"
 	item_state = "laser"
 	slot_flags = SLOT_BELT|SLOT_BACK
@@ -10,6 +10,7 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	projectile_type = /obj/item/projectile/beam/midlaser
+	wielded_item_state = "laser-wielded"
 
 /obj/item/weapon/gun/energy/laser/mounted
 	self_recharge = 1
@@ -55,7 +56,7 @@ obj/item/weapon/gun/energy/retro
 	requires_two_hands = 6 //large and heavy
 	w_class = 5
 	projectile_type = /obj/item/projectile/beam/heavylaser
-	charge_cost = 400
+	charge_cost = 40
 	max_shots = 6
 	accuracy = 2
 	fire_delay = 20
@@ -78,7 +79,7 @@ obj/item/weapon/gun/energy/retro
 	projectile_type = /obj/item/projectile/beam/xray/midlaser
 	requires_two_hands = 2
 	w_class = 4
-	charge_cost = 150
+	charge_cost = 15
 	max_shots = 10
 
 /obj/item/weapon/gun/energy/xray/pistol
@@ -92,14 +93,14 @@ obj/item/weapon/gun/energy/retro
 
 /obj/item/weapon/gun/energy/sniperrifle
 	name = "marksman energy rifle"
-	desc = "The HI DMR 9E is an older design of Hesphaistos Industries. A designated marksman rifle capable of shooting powerful ionized beams, this is a weapon to kill from a distance."
+	desc = "The HI DMR 9E is an older design of Hephaestus Industries. A designated marksman rifle capable of shooting powerful ionized beams, this is a weapon to kill from a distance."
 	icon_state = "sniper"
 	item_state = "laser"
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 5, TECH_POWER = 4)
 	projectile_type = /obj/item/projectile/beam/sniper
 	requires_two_hands = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	slot_flags = SLOT_BACK
-	charge_cost = 400
+	charge_cost = 40
 	max_shots = 4
 	fire_delay = 35
 	force = 10

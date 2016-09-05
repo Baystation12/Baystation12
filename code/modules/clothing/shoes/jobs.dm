@@ -13,7 +13,7 @@
 
 /obj/item/clothing/shoes/jackboots
 	name = "jackboots"
-	desc = "Standard-issue Security combat boots for combat scenarios or combat situations. All combat, all the time."
+	desc = "Tall synthleather boots with an artificial shine."
 	icon_state = "jackboots"
 	item_state = "jackboots"
 	force = 3
@@ -23,7 +23,7 @@
 
 /obj/item/clothing/shoes/jackboots/unathi
 	name = "toe-less jackboots"
-	desc = "Modified pair of jackboots, particularly friendly to those species whose toes hold claws."
+	desc = "Modified pair of jackboots, particularly comfortable for those species whose toes hold claws."
 	item_state = "digiboots"
 	icon_state = "digiboots"
 	species_restricted = null

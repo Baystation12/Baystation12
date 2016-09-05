@@ -11,24 +11,11 @@
 
 //Returns a list in plain english as a string
 /proc/english_list(var/list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "" )
-	var/total = input.len
-	if (!total)
-		return "[nothing_text]"
-	else if (total == 1)
-		return "[input[1]]"
-	else if (total == 2)
-		return "[input[1]][and_text][input[2]]"
-	else
-		var/output = ""
-		var/index = 1
-		while (index < total)
-			if (index == total - 1)
-				comma_text = final_comma_text
-
-			output += "[input[index]][comma_text]"
-			index++
-
-		return "[output][and_text][input[index]]"
+	switch(input.len)
+		if(0) return nothing_text
+		if(1) return "[input[1]]"
+		if(2) return "[input[1]][and_text][input[2]]"
+		else  return "[jointext(input, comma_text, 1, -1)][final_comma_text][and_text][input[input.len]]"
 
 //Returns list element or null. Should prevent "index out of bounds" error.
 proc/listgetindex(var/list/list,index)
@@ -56,6 +43,13 @@ proc/isemptylist(list/list)
 /proc/is_type_in_list(var/atom/A, var/list/L)
 	for(var/type in L)
 		if(istype(A, type))
+			return 1
+	return 0
+
+//Checks for specific paths in a list
+/proc/is_path_in_list(var/path, var/list/L)
+	for(var/type in L)
+		if(ispath(path, type))
 			return 1
 	return 0
 

@@ -18,12 +18,13 @@
 	var/print_delay = 100
 	var/printing
 
+	// These should be subtypes of /obj/item/organ
 	var/list/products = list(
-		"heart" =   list(/obj/item/organ/heart,  50),
-		"lungs" =   list(/obj/item/organ/lungs,  40),
-		"kidneys" = list(/obj/item/organ/kidneys,20),
-		"eyes" =    list(/obj/item/organ/eyes,   30),
-		"liver" =   list(/obj/item/organ/liver,  50)
+		BP_HEART   = list(/obj/item/organ/internal/heart,  50),
+		BP_LUNGS   = list(/obj/item/organ/internal/lungs,  40),
+		BP_KIDNEYS = list(/obj/item/organ/internal/kidneys,20),
+		BP_EYES    = list(/obj/item/organ/internal/eyes,   30),
+		BP_LIVER   = list(/obj/item/organ/internal/liver,  50)
 		)
 
 /obj/machinery/organ_printer/attackby(var/obj/item/O, var/mob/user)
@@ -99,7 +100,9 @@
 
 /obj/machinery/organ_printer/proc/print_organ(var/choice)
 	var/new_organ = products[choice][1]
-	var/obj/item/result = new new_organ(get_turf(src))
+	var/obj/item/organ/result = new new_organ(get_turf(src))
+	result.status |= ORGAN_CUT_AWAY
+	
 	return result
 // END GENERIC PRINTER
 
@@ -128,6 +131,7 @@
 /obj/machinery/organ_printer/robot/print_organ(var/choice)
 	var/obj/item/organ/O = ..()
 	O.robotize()
+	O.status |= ORGAN_CUT_AWAY  // robotize() resets status to 0
 	visible_message("<span class='info'>\The [src] churns for a moment, then spits out \a [O].</span>")
 	return O
 
@@ -178,11 +182,14 @@
 /obj/machinery/organ_printer/flesh/print_organ(var/choice)
 	var/obj/item/organ/O = ..()
 	if(loaded_dna)
-		O.transplant_data = list()
 		var/mob/living/carbon/C = loaded_dna["donor"]
-		O.transplant_data["species"] =    C.species.name
-		O.transplant_data["blood_type"] = loaded_dna["blood_type"]
-		O.transplant_data["blood_DNA"] =  loaded_dna["blood_DNA"]
+		
+		O.set_dna(C.dna)
+		
+		if(O.species)
+			// This is a very hacky way of doing of what organ/New() does if it has an owner
+			O.w_class = max(O.w_class + mob_size_difference(O.species.mob_size, MOB_MEDIUM), 1)
+		
 		visible_message("<span class='info'>\The [src] churns for a moment, injects its stored DNA into the biomass, then spits out \a [O].</span>")
 	else
 		visible_message("<span class='info'>\The [src] churns for a moment, then spits out \a [O].</span>")

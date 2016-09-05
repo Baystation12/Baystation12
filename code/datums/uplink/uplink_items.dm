@@ -93,7 +93,7 @@ var/datum/uplink/uplink = new()
 			var/datum/antagonist/antag = all_antag_types[antag_role]
 			if(antag.is_antagonist(U.uplink_owner))
 				. = min(antag_costs[antag_role], .)
-	return U ?  U.get_item_cost(src, .) : .
+	return max(1, U ?  U.get_item_cost(src, .) : .)
 
 /datum/uplink_item/proc/description()
 	return desc
@@ -154,7 +154,8 @@ datum/uplink_item/dd_SortValue()
 /proc/get_random_uplink_items(var/obj/item/device/uplink/U, var/remaining_TC, var/loc)
 	var/list/bought_items = list()
 	while(remaining_TC)
-		var/datum/uplink_item/I = default_uplink_selection.get_random_item(remaining_TC, U, bought_items)
+		var/datum/uplink_random_selection/uplink_selection = get_uplink_random_selection_by_type(/datum/uplink_random_selection/default)
+		var/datum/uplink_item/I = uplink_selection.get_random_item(remaining_TC, U, bought_items)
 		if(!I)
 			break
 		bought_items += I

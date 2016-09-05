@@ -191,7 +191,7 @@
 	else
 		shift_light(4,initial(light_color))
 	if(grav_pulling)
-		supermatter_pull()
+		supermatter_pull(src)
 
 	//Ok, get the air from the turf
 	var/datum/gas_mixture/removed = null
@@ -216,7 +216,7 @@
 
 		//Ok, 100% oxygen atmosphere = best reaction
 		//Maxes out at 100% oxygen pressure
-		oxygen = max(min((removed.gas["oxygen"] - (removed.gas["nitrogen"] * NITROGEN_RETARDATION_FACTOR)) / removed.total_moles, 1), 0)
+		oxygen = Clamp((removed.get_by_flag(XGM_GAS_OXIDIZER) - (removed.gas["nitrogen"] * NITROGEN_RETARDATION_FACTOR)) / removed.total_moles, 0, 1)
 
 		//calculate power gain for oxygen reaction
 		var/temp_factor
@@ -371,7 +371,7 @@
 
 	power += 200
 
-		//Some poor sod got eaten, go ahead and irradiate people nearby.
+	//Some poor sod got eaten, go ahead and irradiate people nearby.
 	for(var/mob/living/l in range(10))
 		if(l in view())
 			l.show_message("<span class=\"warning\">As \the [src] slowly stops resonating, you find your skin covered in new radiation burns.</span>", 1,\
@@ -381,16 +381,9 @@
 		var/rads = 500 * sqrt( 1 / (get_dist(l, src) + 1) )
 		l.apply_effect(rads, IRRADIATE, blocked = l.getarmor(null, "rad"))
 
-
-/obj/machinery/power/supermatter/proc/supermatter_pull()
-	for(var/atom/A in range(255, src))
-		A.singularity_pull(src, STAGE_FIVE)
-		if(istype(A, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = A
-			if(!H.lying)
-				H << "<span class='danger'>A strong gravitational force slams you to the ground!</span>"
-				H.Weaken(20)
-
+/proc/supermatter_pull(var/atom/target, var/pull_range = 255, var/pull_power = STAGE_FIVE)
+	for(var/atom/A in range(pull_range, target))
+		A.singularity_pull(target, pull_power)
 
 /obj/machinery/power/supermatter/GotoAirflowDest(n) //Supermatter not pushed around by airflow
 	return

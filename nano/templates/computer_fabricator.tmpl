@@ -12,7 +12,7 @@
 	<table>
 		<tr>
 			<td><b>Current Price:</b>
-			<td>{{:data.totalprice}}
+			<td>{{:data.totalprice}}T
 		<tr>	
 			<td><b>Battery:</b>
 			<td>{{:helper.link('Standard', null, { "hw_battery" : 1 }, data.hw_battery == 1 ? 'selected' : null)}}
@@ -63,7 +63,7 @@
 	<h2>Step 3: Payment</h2>
 	<b>Your device is now ready for fabrication..</b><br>
 	<i>Please swipe your identification card to finish purchase.</i><br>
-	<i>Total price: <b>{{:data.totalprice}}</b></i>
+	<i>Total price: <b>{{:data.totalprice}}T</b></i>
 {{else data.state == 3}}
 	<h2>Step 4: Thank you for your purchase</h2>
 	<b>Should you experience any issues with your new device, contact technical support at support@computerservice.nt</b>

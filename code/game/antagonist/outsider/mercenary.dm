@@ -16,6 +16,7 @@ var/datum/antagonist/mercenary/mercs
 	hard_cap_round = 8
 	initial_spawn_req = 4
 	initial_spawn_target = 6
+	min_player_age = 14
 
 	faction = "mercenary"
 
@@ -36,7 +37,7 @@ var/datum/antagonist/mercenary/mercs
 
 	player.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(player), slot_w_uniform)
 	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(player), slot_shoes)
-	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/swat(player), slot_gloves)
+	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/thick/swat(player), slot_gloves)
 	if(player.backbag == 2) player.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(player), slot_back)
 	if(player.backbag == 3) player.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(player), slot_back)
 	if(player.backbag == 4) player.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(player), slot_back)

@@ -150,8 +150,8 @@
 
 // this function displays the shuttles ETA in the status panel if the shuttle has been called
 /mob/living/silicon/proc/show_emergency_shuttle_eta()
-	if(emergency_shuttle)
-		var/eta_status = emergency_shuttle.get_status_panel_eta()
+	if(evacuation_controller)
+		var/eta_status = evacuation_controller.get_status_panel_eta()
 		if(eta_status)
 			stat(null, eta_status)
 
@@ -369,7 +369,7 @@
 
 	job_master.FreeRole(job)
 	data_core.ResetPDAManifest()
-	
+
 	if(mind.objectives.len)
 		qdel(mind.objectives)
 		mind.special_role = null

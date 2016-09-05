@@ -73,7 +73,6 @@
 			src.timer_end() // open doors, reset timer, clear status screen
 			src.timing = 0
 
-		src.updateUsrDialog()
 		src.update_icon()
 
 	else
@@ -91,6 +90,10 @@
 
 	// Set releasetime
 	releasetime = world.timeofday + timetoset
+
+
+	//set timing
+	timing = 1
 
 	for(var/obj/machinery/door/window/brigdoor/door in targets)
 		if(door.density)	continue
@@ -111,6 +114,9 @@
 
 	// Reset releasetime
 	releasetime = 0
+
+	//reset timing
+	timing = 0
 
 	for(var/obj/machinery/door/window/brigdoor/door in targets)
 		if(!door.density)	continue
@@ -145,116 +151,62 @@
 /obj/machinery/door_timer/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
 
-
-//Allows humans to use door_timer
-//Opens dialog window when someone clicks on door timer
-// Allows altering timer and the timing boolean.
-// Flasher activation limited to 150 seconds
 /obj/machinery/door_timer/attack_hand(var/mob/user as mob)
-	if(..())
-		return
+	tg_ui_interact(user)
 
-	// Used for the 'time left' display
-	var/second = round(timeleft() % 60)
-	var/minute = round((timeleft() - second) / 60)
+/obj/machinery/door_timer/ui_data(mob/user)
+	var/list/data = list()
 
-	// Used for 'set timer'
-	var/setsecond = round((timetoset / 10) % 60)
-	var/setminute = round(((timetoset / 10) - setsecond) / 60)
+	data["timing"] = timing
+	data["releasetime"] = releasetime
+	data["timetoset"] = timetoset
+	data["timeleft"] = timeleft()
 
-	user.set_machine(src)
+	var/list/flashes = list()
 
-	// dat
-	var/dat = "<HTML><BODY><TT>"
-
-	dat += "<HR>Timer System:</hr>"
-	dat += " <b>Door [src.id] controls</b><br/>"
-
-	// Start/Stop timer
-	if (src.timing)
-		dat += "<a href='?src=\ref[src];timing=0'>Stop Timer and open door</a><br/>"
-	else
-		dat += "<a href='?src=\ref[src];timing=1'>Activate Timer and close door</a><br/>"
-
-	// Time Left display (uses releasetime)
-	dat += "Time Left: [(minute ? text("[minute]:") : null)][second] <br/>"
-	dat += "<br/>"
-
-	// Set Timer display (uses timetoset)
-	if(src.timing)
-		dat += "Set Timer: [(setminute ? text("[setminute]:") : null)][setsecond]  <a href='?src=\ref[src];change=1'>Set</a><br/>"
-	else
-		dat += "Set Timer: [(setminute ? text("[setminute]:") : null)][setsecond]<br/>"
-
-	// Controls
-	dat += "<a href='?src=\ref[src];tp=-60'>-</a> <a href='?src=\ref[src];tp=-1'>-</a> <a href='?src=\ref[src];tp=1'>+</a> <A href='?src=\ref[src];tp=60'>+</a><br/>"
-
-	// Mounted flash controls
-	for(var/obj/machinery/flasher/F in targets)
-		if(F.last_flash && (F.last_flash + 150) > world.time)
-			dat += "<br/><A href='?src=\ref[src];fc=1'>Flash Charging</A>"
+	for(var/obj/machinery/flasher/flash  in targets)
+		var/list/flashdata = list()
+		if(flash.last_flash && (flash.last_flash + 150) > world.time)
+			flashdata["status"] = 0
 		else
-			dat += "<br/><A href='?src=\ref[src];fc=1'>Activate Flash</A>"
+			flashdata["status"] = 1
+		flashes[++flashes.len] = flashdata
 
-	dat += "<br/><br/><a href='?src=\ref[user];mach_close=computer'>Close</a>"
-	dat += "</TT></BODY></HTML>"
-
-	user << browse(dat, "window=computer;size=400x500")
-	onclose(user, "computer")
-	return
+	data["flashes"] = flashes
+	return data
 
 
-//Function for using door_timer dialog input, checks if user has permission
-// href_list to
-//  "timing" turns on timer
-//  "tp" value to modify timer
-//  "fc" activates flasher
-// 	"change" resets the timer to the timetoset amount while the timer is counting down
-// Also updates dialog window and timer icon
-/obj/machinery/door_timer/Topic(href, href_list)
+/obj/machinery/door_timer/ui_act(action, params)
 	if(..())
-		return
+		return TRUE
+
 	if(!src.allowed(usr))
-		return
+		return TRUE
 
-	usr.set_machine(src)
-
-	if(href_list["timing"])
-		src.timing = text2num(href_list["timing"])
-
-		if(src.timing)
-			src.timer_start()
-		else
-			src.timer_end()
-
-	else
-		if(href_list["tp"])  //adjust timer, close door if not already closed
-			var/tp = text2num(href_list["tp"])
-			var/addtime = (timetoset / 10)
-			addtime += tp
-			addtime = min(max(round(addtime), 0), 3600)
-
-			timeset(addtime)
-
-		if(href_list["fc"])
+	switch (action)
+		if("start")
+			if(timetoset > 18000)
+				log_admin("[key_name(usr)] has started a brig timer over 30 minutes in length!")
+				message_admins("[key_name_admin(usr)] has started a brig timer over 30 minutes in length!")
+			timer_start()
+		if("stop")
+			timer_end()
+		if("flash")
 			for(var/obj/machinery/flasher/F in targets)
 				F.flash()
+		if("time")
+			timetoset += text2num(params["adjust"])
+			timetoset = Clamp(timetoset, 0, 36000)
 
-		if(href_list["change"])
-			src.timer_start()
-
-	src.add_fingerprint(usr)
-	src.updateUsrDialog()
 	src.update_icon()
+	return TRUE
 
-	/* if(src.timing)
-		src.timer_start()
 
-	else
-		src.timer_end() */
-
-	return
-
+/obj/machinery/door_timer/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = default_state)
+	ui = tgui_process.try_update_ui(user, src, ui_key, ui, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "brig_timer", name , 300, 150, master_ui, state)
+		ui.open()
 
 //icon update function
 // if NOPOWER, display blank
@@ -275,7 +227,9 @@
 			disp2 = "Error"
 		update_display(disp1, disp2)
 	else
-		if(maptext)	maptext = ""
+		if(maptext)
+			maptext = ""
+		update_display("Set","Time") // would be nice to have some default printed text
 	return
 
 

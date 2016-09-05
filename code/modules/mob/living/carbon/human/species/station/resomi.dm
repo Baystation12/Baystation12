@@ -26,7 +26,6 @@
 	damage_mask = 'icons/mob/human_races/masks/dam_mask_resomi.dmi'
 	blood_mask = 'icons/mob/human_races/masks/blood_resomi.dmi'
 
-	eyes = "eyes_resomi"
 	slowdown = -1
 	total_health = 50
 	brute_mod = 1.35
@@ -58,26 +57,26 @@
 	cold_discomfort_level = 180
 
 	has_limbs = list(
-		"chest" =  list("path" = /obj/item/organ/external/chest),
-		"groin" =  list("path" = /obj/item/organ/external/groin),
-		"head" =   list("path" = /obj/item/organ/external/head),
-		"l_arm" =  list("path" = /obj/item/organ/external/arm),
-		"r_arm" =  list("path" = /obj/item/organ/external/arm/right),
-		"l_leg" =  list("path" = /obj/item/organ/external/leg),
-		"r_leg" =  list("path" = /obj/item/organ/external/leg/right),
-		"l_hand" = list("path" = /obj/item/organ/external/hand/resomi),
-		"r_hand" = list("path" = /obj/item/organ/external/hand/right/resomi),
-		"l_foot" = list("path" = /obj/item/organ/external/foot/resomi),
-		"r_foot" = list("path" = /obj/item/organ/external/foot/right/resomi)
+		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head/resomi),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand/resomi),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/resomi),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/resomi),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/resomi)
 		)
 
 	has_organ = list(
-		"heart" =    /obj/item/organ/heart,
-		"lungs" =    /obj/item/organ/lungs,
-		"liver" =    /obj/item/organ/liver,
-		"kidneys" =  /obj/item/organ/kidneys,
-		"brain" =    /obj/item/organ/brain,
-		"eyes" =     /obj/item/organ/eyes
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_LUNGS =    /obj/item/organ/internal/lungs,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_EYES =     /obj/item/organ/internal/eyes
 		)
 
 	unarmed_types = list(
@@ -86,8 +85,4 @@
 		/datum/unarmed_attack/stomp/weak
 		)
 
-/datum/species/resomi/get_vision_flags(var/mob/living/carbon/human/H)
-	if(!(H.sdisabilities & DEAF) && !H.ear_deaf)
-		return SEE_SELF|SEE_MOBS
-	else
-		return SEE_SELF
+	inherent_verbs = list(/mob/living/carbon/human/proc/sonar_ping)

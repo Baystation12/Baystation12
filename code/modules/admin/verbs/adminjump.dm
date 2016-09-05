@@ -1,8 +1,9 @@
-/mob/proc/on_mob_jump()
-	return
+/mob/proc/jumpTo(var/location)
+	forceMove(location)
 
-/mob/observer/ghost/on_mob_jump()
+/mob/observer/ghost/jumpTo()
 	stop_following()
+	..()
 
 /client/proc/Jump(var/area/A in return_sorted_areas())
 	set name = "Jump to Area"
@@ -12,11 +13,8 @@
 		return
 
 	if(config.allow_admin_jump)
-		usr.on_mob_jump()
-		usr.forceMove(pick(get_area_turfs(A)))
-
-		log_admin("[key_name(usr)] jumped to [A]")
-		message_admins("[key_name_admin(usr)] jumped to [A]", 1)
+		mob.jumpTo(pick(get_area_turfs(A)))
+		log_and_message_admins("jumped to [A]")
 		feedback_add_details("admin_verb","JA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	else
 		alert("Admin jumping disabled")
@@ -27,10 +25,8 @@
 	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
 	if(config.allow_admin_jump)
-		log_admin("[key_name(usr)] jumped to [T.x],[T.y],[T.z] in [T.loc]")
-		message_admins("[key_name_admin(usr)] jumped to [T.x],[T.y],[T.z] in [T.loc]", 1)
-		usr.on_mob_jump()
-		usr.forceMove(T)
+		log_and_message_admins("jumped to [T.x],[T.y],[T.z] in [T.loc]")
+		mob.jumpTo(T)
 		feedback_add_details("admin_verb","JT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	else
 		alert("Admin jumping disabled")
@@ -44,17 +40,14 @@
 		return
 
 	if(config.allow_admin_jump)
-		log_admin("[key_name(usr)] jumped to [key_name(M)]")
-		message_admins("[key_name_admin(usr)] jumped to [key_name_admin(M)]", 1)
-		if(src.mob)
-			var/mob/A = src.mob
+		log_and_message_admins("jumped to [key_name(M)]")
+		if(mob)
 			var/turf/T = get_turf(M)
 			if(T && isturf(T))
 				feedback_add_details("admin_verb","JM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-				A.on_mob_jump()
-				A.forceMove(T)
+				mob.jumpTo(T)
 			else
-				A << "This mob is not located in the game world."
+				mob << "This mob is not located in the game world."
 	else
 		alert("Admin jumping disabled")
 
@@ -65,20 +58,24 @@
 	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
 
-	if (config.allow_admin_jump)
-		if(src.mob)
-			var/mob/A = src.mob
-			A.on_mob_jump()
-			A.x = tx
-			A.y = ty
-			A.z = tz
-			feedback_add_details("admin_verb","JC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-		message_admins("[key_name_admin(usr)] jumped to coordinates [tx], [ty], [tz]")
-
-	else
+	if(!config.allow_admin_jump)
 		alert("Admin jumping disabled")
+		return
+	if(!mob)
+		return
 
-/client/proc/jumptokey()
+	var/turf/T = locate(tx, ty, tz)
+	if(!T)
+		return
+	mob.jumpTo(T)
+
+	feedback_add_details("admin_verb","JC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	log_and_message_admins("jumped to coordinates [tx], [ty], [tz]")
+
+/proc/sorted_client_keys()
+	return sortKey(clients.Copy())
+
+/client/proc/jumptokey(client/C in sorted_client_keys())
 	set category = "Admin"
 	set name = "Jump to Key"
 
@@ -86,18 +83,13 @@
 		return
 
 	if(config.allow_admin_jump)
-		var/list/keys = list()
-		for(var/mob/M in player_list)
-			keys += M.client
-		var/selection = input("Please, select a player!", "Admin Jumping", null, null) as null|anything in sortKey(keys)
-		if(!selection)
-			src << "No keys found."
+		if(!istype(C))
+			usr << "[C] is not a client, somehow."
 			return
-		var/mob/M = selection:mob
-		log_admin("[key_name(usr)] jumped to [key_name(M)]")
-		message_admins("[key_name_admin(usr)] jumped to [key_name_admin(M)]", 1)
-		usr.on_mob_jump()
-		usr.forceMove(M.loc)
+
+		var/mob/M = C.mob
+		log_and_message_admins("jumped to [key_name(M)]")
+		mob.jumpTo(get_turf(M))
 		feedback_add_details("admin_verb","JK") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	else
 		alert("Admin jumping disabled")
@@ -109,10 +101,8 @@
 	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
 	if(config.allow_admin_jump)
-		log_admin("[key_name(usr)] teleported [key_name(M)]")
-		message_admins("[key_name_admin(usr)] teleported [key_name_admin(M)]", 1)
-		M.on_mob_jump()
-		M.forceMove(get_turf(usr))
+		log_and_message_admins("teleported [key_name(M)] to self.")
+		M.jumpTo(get_turf(mob))
 		feedback_add_details("admin_verb","GM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	else
 		alert("Admin jumping disabled")
@@ -136,11 +126,9 @@
 
 		if(!M)
 			return
-		log_admin("[key_name(usr)] teleported [key_name(M)]")
-		message_admins("[key_name_admin(usr)] teleported [key_name(M)]", 1)
+		log_and_message_admins("teleported [key_name(M)] to self.")
 		if(M)
-			M.on_mob_jump()
-			M.forceMove(get_turf(usr))
+			M.jumpTo(get_turf(mob))
 			feedback_add_details("admin_verb","GK") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	else
 		alert("Admin jumping disabled")
@@ -153,11 +141,8 @@
 	var/area/A = input(usr, "Pick an area.", "Pick an area") in return_sorted_areas()
 	if(A)
 		if(config.allow_admin_jump)
-			M.on_mob_jump()
-			M.forceMove(pick(get_area_turfs(A)))
+			M.jumpTo(pick(get_area_turfs(A)))
 			feedback_add_details("admin_verb","SMOB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-			log_admin("[key_name(usr)] teleported [key_name(M)] to [A]")
-			message_admins("[key_name_admin(usr)] teleported [key_name_admin(M)] to [A]", 1)
+			log_and_message_admins("teleported [key_name(M)] to [A].")
 		else
 			alert("Admin jumping disabled")

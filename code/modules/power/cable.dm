@@ -91,6 +91,18 @@ var/list/possible_cable_coil_colours
 	cable_list -= src							//remove it from global cable list
 	..()										// then go ahead and delete the cable
 
+
+// Ghost examining the cable -> tells him the power
+/obj/structure/cable/attack_ghost(mob/user)
+	if(user.client && user.client.inquisitive_ghost)
+		user.examinate(src)
+		// following code taken from attackby (multitool)
+		if(powernet && (powernet.avail > 0))
+			user << "<span class='warning'>[powernet.avail]W in power network.</span>"
+		else
+			user << "<span class='warning'>The cable is not powered.</span>"
+	return
+
 ///////////////////////////////////
 // General procedures
 ///////////////////////////////////
@@ -121,6 +133,7 @@ var/list/possible_cable_coil_colours
 //   - Cable coil : merge cables
 //   - Multitool : get the power currently passing through the cable
 //
+
 /obj/structure/cable/attackby(obj/item/W, mob/user)
 
 	var/turf/T = src.loc
@@ -490,10 +503,9 @@ obj/structure/cable/proc/cableColor(var/colorC)
 ///////////////////////////////////
 
 //you can use wires to heal robotics
-/obj/item/stack/cable_coil/afterattack(var/mob/M, var/mob/user)
-
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+/obj/item/stack/cable_coil/attack(var/atom/A, var/mob/living/user, var/def_zone)
+	if(ishuman(A) && user.a_intent == I_HELP)
+		var/mob/living/carbon/human/H = A
 		var/obj/item/organ/external/S = H.organs_by_name[user.zone_sel.selecting]
 
 		if (!S) return
@@ -504,9 +516,8 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		if(can_use(use_amt))
 			if(S.robo_repair(3*use_amt, BURN, "some damaged wiring", src, user))
 				src.use(use_amt)
-
-	else
-		return ..()
+		return
+	return ..()
 
 
 /obj/item/stack/cable_coil/update_icon()

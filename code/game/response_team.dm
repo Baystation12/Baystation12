@@ -119,9 +119,26 @@ proc/trigger_armed_response_team(var/force = 0)
 		return
 
 	command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. We will prepare and send one as soon as possible.", "[boss_name]")
+	evacuation_controller.add_can_call_predicate(new/datum/evacuation_predicate/ert())
 
 	can_call_ert = 0 // Only one call per round, gentleman.
 	send_emergency_team = 1
 
 	sleep(600 * 5)
 	send_emergency_team = 0 // Can no longer join the ERT.
+
+/datum/evacuation_predicate/ert
+	var/prevent_until
+
+/datum/evacuation_predicate/ert/New()
+	..()
+	prevent_until = world.time + 30 MINUTES
+
+/datum/evacuation_predicate/ert/is_valid()
+	return world.time < prevent_until
+
+/datum/evacuation_predicate/ert/can_call(var/user)
+	if(world.time >= prevent_until)
+		return TRUE
+	user << "<span class='warning'>An emergency response team has been dispatched. Evacuation requests will be denied until [duration2stationtime(prevent_until - world.time)].</span>"
+	return FALSE

@@ -11,7 +11,7 @@
 	slot_flags = SLOT_BELT
 	var/active = 0
 	var/det_time = 50
-	var/loadable = TRUE
+	var/arm_sound = 'sound/weapons/armbomb.ogg'
 
 /obj/item/weapon/grenade/proc/clown_check(var/mob/living/user)
 	if((CLUMSY in user.mutations) && prob(50))
@@ -75,7 +75,7 @@
 
 	icon_state = initial(icon_state) + "_active"
 	active = 1
-	playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
+	playsound(loc, arm_sound, 75, 0, -3)
 
 	spawn(det_time)
 		detonate()

@@ -15,7 +15,7 @@
 	name = OUTFIT_JOB_NAME("Chef")
 	uniform = /obj/item/clothing/under/rank/chef
 	suit = /obj/item/clothing/suit/chef
-	head = /obj/item/clothing/head
+	head = /obj/item/clothing/head/chefhat
 	id_type = /obj/item/weapon/card/id/civilian/chef
 	pda_type = /obj/item/device/pda/chef
 
@@ -23,7 +23,7 @@
 	name = OUTFIT_JOB_NAME("Gardener")
 	uniform = /obj/item/clothing/under/rank/hydroponics
 	suit = /obj/item/clothing/suit/apron
-	gloves = /obj/item/clothing/gloves/botanic_leather
+	gloves = /obj/item/clothing/gloves/thick/botany
 	r_pocket = /obj/item/device/analyzer/plant_analyzer
 	backpack = /obj/item/weapon/storage/backpack/hydroponics
 	satchel_one = /obj/item/weapon/storage/backpack/satchel_hyd
@@ -45,6 +45,7 @@
 
 /decl/hierarchy/outfit/job/internal_affairs_agent
 	name = OUTFIT_JOB_NAME("Internal affairs agent")
+	l_ear = /obj/item/device/radio/headset/ia
 	uniform = /obj/item/clothing/under/rank/internalaffairs
 	suit = /obj/item/clothing/suit/storage/toggle/internalaffairs
 	shoes = /obj/item/clothing/shoes/brown

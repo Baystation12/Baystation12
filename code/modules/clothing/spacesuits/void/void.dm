@@ -7,11 +7,11 @@
 	heat_protection = HEAD
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 20)
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	siemens_coefficient = 0.7
+	siemens_coefficient = 0.4
 
 	//Species-specific stuff.
-	species_restricted = list("Human")
-	sprite_sheets_refit = list(
+	species_restricted = list("Human", "Machine")
+	sprite_sheets = list(
 		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
 		"Skrell" = 'icons/mob/species/skrell/helmet.dmi',
@@ -36,10 +36,10 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	siemens_coefficient = 0.7
+	siemens_coefficient = 0.4
 
-	species_restricted = list("Human", "Skrell")
-	sprite_sheets_refit = list(
+	species_restricted = list("Human", "Skrell", "Machine")
+	sprite_sheets = list(
 		"Unathi" = 'icons/mob/species/unathi/suit.dmi',
 		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',
 		"Skrell" = 'icons/mob/species/skrell/suit.dmi',
