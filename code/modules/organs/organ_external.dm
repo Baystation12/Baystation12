@@ -1173,6 +1173,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 		var/obj/item/I = implant
 		if(istype(I) && I.w_class < NORMAL_ITEM)
 			implant.forceMove(src)
+			
+			// let actual implants still inside know they're no longer implanted
+			if(istype(I, /obj/item/weapon/implant))
+				var/obj/item/weapon/implant/imp_device = I
+				imp_device.removed()
 		else
 			implants.Remove(implant)
 			implant.forceMove(get_turf(src))
