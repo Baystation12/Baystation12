@@ -395,6 +395,16 @@
 		icon_state = "hair_poofy"
 		gender = FEMALE
 
+	poofy2
+		name = "Poofy2"
+		icon_state = "hair_poofy2"
+		gender = FEMALE
+
+	mahdrills
+		name = "Drillruru"
+		icon_state = "hair_drillruru"
+		gender = FEMALE
+
 	crono
 		name = "Chrono"
 		icon_state = "hair_toriyama"
@@ -449,7 +459,7 @@
 	bun
 		name = "Low Bun"
 		icon_state = "hair_bun"
-		
+
 	bun2
 		name = "High Bun"
 		icon_state = "hair_bun2"
