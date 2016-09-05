@@ -167,6 +167,54 @@
 
 // The ERT variant has access to ERT and crescent cams, but still checks for accesses. ERT members should be able to use it.
 /datum/nano_module/camera_monitor/hacked/modify_networks_list(var/list/networks)
+	..()
 	networks.Add(list(list("tag" = NETWORK_ERT, "has_access" = 1)))
 	networks.Add(list(list("tag" = NETWORK_CRESCENT, "has_access" = 1)))
 	return networks
+
+
+
+
+// The following piece of code is temporary and is in place only because of map corruption of two torch Z levels.
+// As i am unable to directly modify these map files without breaking my git client, i will use these placeholders.
+// Anyone who wants to remove these and replace them with actual modular consoles may do so. -- ATL
+/obj/machinery/computer/security
+	name = "modular computer placeholder"
+	desc = "You shouldn't see this"
+	var/network
+
+/obj/machinery/computer/security/New()
+	new/obj/machinery/modular_computer/console/preset/security(get_turf(src))
+	qdel(src)
+
+/obj/machinery/computer/security/supply/New()
+	new/obj/machinery/modular_computer/console/preset/civilian(get_turf(src))
+	qdel(src)
+
+/obj/machinery/computer/security/engineering/New()
+	new/obj/machinery/modular_computer/console/preset/engineering(get_turf(src))
+	qdel(src)
+
+/obj/machinery/computer/security/nuclear/New()
+	new/obj/machinery/modular_computer/console/preset/mercenary(get_turf(src))
+	qdel(src)
+
+/obj/machinery/computer/security/research/New()
+	new/obj/machinery/modular_computer/console/preset/research(get_turf(src))
+	qdel(src)
+
+// These types are not suposed to be used at all, so they will be deleted.
+/obj/machinery/computer/security/telescreen/New()
+	qdel(src)
+
+/obj/machinery/computer/security/telescreen/entertainment/New()
+	qdel(src)
+
+/obj/item/weapon/circuitboard/security/New()
+	qdel(src)
+
+/obj/item/weapon/circuitboard/security/mining/New()
+	qdel(src)
+
+/obj/item/weapon/circuitboard/security/engineering/New()
+	qdel(src)
