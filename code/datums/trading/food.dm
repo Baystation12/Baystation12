@@ -20,6 +20,8 @@
 				"compliment_accept" = "Thanks, sir! You're very nice!",
 				"insult_good"       = "Please stop that, sir.",
 				"insult_bad"        = "Sir, just because I'm contractually obligated to keep you on the line for a minute doesn't mean I have to take this.",
+
+				"bribe_refusal"     = "Uh... thanks for the cash, sir. As long as you're in the area, we'll be here...",
 				)
 
 /datum/trader/pizzaria/trade(var/list/offers, var/num, var/turf/location)
@@ -71,6 +73,9 @@
 				"compliment_accept"  = "Good philosophy, see good in bad, I like.",
 				"insult_good"        = "As a man said long ago, \"When anger rises, think of the consequences.\" Think on that.",
 				"insult_bad"         = "I do not need to take this from you.",
+
+				"bribe_refusal"     = "Hm... I'll think about it.",
+				"bribe_accept"      = "Oh yes! I think I'll stay a few more minutes, then.",
 				)
 
 /datum/trader/ship/chinese/trade(var/list/offers, var/num, var/turf/location)
@@ -116,6 +121,8 @@
 				"compliment_accept"  = "Thank you, sir!",
 				"insult_good"        = "Sir, please do not make a scene.",
 				"insult_bad"         = "Sir, I WILL get my manager if you don't calm down.",
+
+				"bribe_refusal"      = "Of course sir! ORIGIN is always here for you!",
 				)
 
 /datum/trader/bakery
@@ -137,6 +144,8 @@
 				"compliment_accept"  = "You're almost as sweet as my pies!",
 				"insult_good"        = "My pie are NOT knockoffs!",
 				"insult_bad"         = "Well, aren't you a sour apple?",
+
+				"bribe_refusal"      = "Oh ho ho! I'd never think of taking ORIGIN on the road!",
 				)
 	possible_trading_items = list(/obj/item/weapon/reagent_containers/food/snacks/slice/birthdaycake/filled     = TRADER_THIS_TYPE,
 								/obj/item/weapon/reagent_containers/food/snacks/slice/carrotcake/filled         = TRADER_THIS_TYPE,

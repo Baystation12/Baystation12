@@ -19,6 +19,9 @@
 				"compliment_accept" = "Thank you. I needed that.",
 				"insult_good"       = "I ask you to stop. We can be peaceful. I know we can.",
 				"insult_bad"        = "My interactions with you are becoming less than fruitful.",
+
+				"bribe_refusal"     = "I'm not going to do that. I have places to be.",
+				"bribe_accept"      = "Hm. It'll be good for the animals, so sure.",
 				)
 
 	possible_wanted_items = list(/mob/living/simple_animal/adultslime = TRADER_THIS_TYPE,
@@ -81,13 +84,16 @@
 				"trade_complete" = "We thank you for purchasing something. We enjoyed the experience of you doing so and we hope to learn from it.",
 				"trade_blacklist"= "We are not allowed to do such. We are sorry.",
 				"trade_not_enough"="We have sufficiently experienced giving away goods for free. We wish to experience getting money in return.",
-				"how_much"       = "We believe that is worth",
+				"how_much"       = "We believe that is worth VALUE thalers.",
 				"what_want"      = "We wish only for the experiences you give us, in all else we want",
 
 				"compliment_deny"= "You are attempting to compliment us.",
 				"compliment_accept"="You are attempting to compliment us.",
 				"insult_good"    = "You are attempting to insult us, correct?",
-				"insult_bad"     = "We do not understand."
+				"insult_bad"     = "We do not understand.",
+
+				"bribe_refusal"  = "We are sorry but we cannot accept.",
+				"bribe_accept"   = "We are happy to say that we accept this bribe.",
 				)
 	possible_trading_items = list(/obj/item/clothing/mask/gas/clown_hat = TRADER_THIS_TYPE,
 								/obj/item/clothing/mask/gas/mime        = TRADER_THIS_TYPE,
@@ -118,13 +124,16 @@
 				"trade_complete" = "Now remember, these may be replicas, but they are still a bit sharp!",
 				"trade_blacklist"= "No, I don't deal in that.",
 				"trade_not_enough"="Hm. Well, I need more money than that.",
-				"how_much"       = "This fine piece of craftsmanship costs about",
+				"how_much"       = "This fine piece of craftsmanship costs about VALUE thalers.",
 				"what_want"      = "I want",
 
 				"compliment_deny"= "Oh ho ho! Aren't you quite the jester.",
 				"compliment_accept"="Hard to tell, isn't it? I make them all myself.",
 				"insult_good"    = "They aren't JUST replicas!",
-				"insult_bad"     = "Well, I'll never!"
+				"insult_bad"     = "Well, I'll never!",
+
+				"bribe_refusal"  = "Well. I'd love to stay, but I've got an Unathi client somewhere else, and they are not known for patience.",
+				"bribe_accept"   = "Sure, I'll stay a bit longer. Just for you, though.",
 				)
 	possible_trading_items = list(/obj/item/clothing/head/wizard/magus = TRADER_THIS_TYPE,
 								/obj/item/weapon/shield/buckler        = TRADER_THIS_TYPE,
