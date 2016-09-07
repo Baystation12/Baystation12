@@ -623,7 +623,7 @@ var/list/sacrificed = list()
 				else if(istype(I,/obj/item/device/mmi))
 					var/obj/item/device/mmi/B = I
 					victims += B.brainmob
-				else if(istype(I,/obj/item/device/aicard))
+				else if(istype(I,/obj/item/weapon/aicard))
 					for(var/mob/living/silicon/ai/A in I)
 						victims += A
 			for(var/mob/living/carbon/C in orange(1,src))
