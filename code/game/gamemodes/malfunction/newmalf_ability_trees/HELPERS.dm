@@ -113,7 +113,7 @@
 	if(user.research.stored_cpu < check_price)
 		user << "You do not have enough CPU power stored. Please wait a moment."
 		return 0
-	if(user.hacking && !override)
+	if(user.hacking && !user.system_override && !override)
 		user << "Your system is busy processing another task. Please wait until completion."
 		return 0
 	if(user.APU_power && !override)
@@ -169,6 +169,8 @@
 /proc/get_unhacked_apcs(var/mob/living/silicon/ai/user)
 	var/list/H = list()
 	for(var/obj/machinery/power/apc/A in machines)
+		if(!(A.z in using_map.station_levels))
+			continue
 		if(A.hacker && A.hacker == user)
 			continue
 		H.Add(A)
