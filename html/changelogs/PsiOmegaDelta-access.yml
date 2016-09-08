@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - rscadd: "Equipment that doesn't check a specific id card for access now checks the collective access of all id cards in both hands and the id slot. Among other things such equipment includes doors."
