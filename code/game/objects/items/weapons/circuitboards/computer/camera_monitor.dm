@@ -12,10 +12,7 @@
 
 /obj/item/weapon/circuitboard/security/New()
 	..()
-	if(using_map.station_networks.len)
-		network = using_map.station_networks.Copy()
-	else
-		network = station_networks.Copy()
+	network = using_map.station_networks.Copy()
 
 /obj/item/weapon/circuitboard/security/engineering
 	name = T_BOARD("engineering camera monitor")
