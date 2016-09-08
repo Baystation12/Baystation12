@@ -16,7 +16,10 @@
 
 	New()
 		if(!network)
-			network = station_networks.Copy()
+			if(using_map.station_networks.len)
+				network = using_map.station_networks.Copy()
+			else
+				network = station_networks.Copy()
 		..()
 		if(network.len)
 			current_network = network[1]
@@ -232,7 +235,7 @@
 	desc = "Used to access the various cameras on the outpost."
 	icon_keyboard = "mining_key"
 	icon_screen = "mining"
-	network = list("MINE")
+	network = list(NETWORK_MINE)
 	circuit = /obj/item/weapon/circuitboard/security/mining
 	light_color = "#F9BBFC"
 
