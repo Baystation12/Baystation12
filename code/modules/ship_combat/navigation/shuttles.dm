@@ -1,4 +1,6 @@
 //Shuttle controller computer for shuttles going between sectors
+var/list/sector_shuttles = list()
+
 /datum/shuttle/ferry/var/range = 0	//how many overmap tiles can shuttle go, for picking destinatiosn and returning.
 /obj/machinery/computer/shuttle_control/explore
 	name = "exploration shuttle console"
@@ -7,17 +9,13 @@
 	var/shuttle_area	//area for shuttle ship-side
 	var/obj/effect/overmap/destination //current destination
 	var/obj/effect/overmap/home //home port for shuttle
-	var/docking_controller_tag = null
-	var/datum/shuttle/ferry/shuttle
 
 /obj/machinery/computer/shuttle_control/explore/initialize()
 	..()
-	home = map_sectors["[z]"]
 	shuttle_tag = "[shuttle_tag]-[z]"
 	if(!shuttle_controller.shuttles[shuttle_tag])
-		var/datum/shuttle/ferry/shuttle = new(shuttle_tag, docking_controller_tag)
-		if(docking_controller_tag)
-			shuttle.docking_controller_tag = docking_controller_tag
+		var/datum/shuttle/ferry/shuttle = new(shuttle_tag)
+		sector_shuttles += shuttle
 		shuttle.warmup_time = 10
 		shuttle.area_station = locate(shuttle_area)
 		shuttle.area_offsite = shuttle.area_station
@@ -139,7 +137,3 @@
 		shuttle.force_launch(src)
 	else if(href_list["cancel"])
 		shuttle.cancel_launch(src)
-
-/area/shuttle/mining_shuttle/destination
-	name = "Mining Shuttle"
-	icon_state = "shuttle3"
