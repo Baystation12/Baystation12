@@ -377,7 +377,7 @@
 	var/max_syringes = 10
 	var/max_volume = 75 //max reagent volume
 	var/synth_speed = 5 //[num] reagent units per cycle
-	energy_drain = 10
+	energy_drain = 2 KILOWATTS // Synthetises things, so it's quite power-hungry
 	var/mode = 0 //0 - fire syringe, 1 - analyze reagents.
 	var/datum/global_iterator/mech_synth/synth
 	range = MELEE|RANGED
@@ -631,7 +631,7 @@
 	process(var/obj/item/mecha_parts/mecha_equipment/tool/syringe_gun/S)
 		if(!S.chassis)
 			return stop()
-		var/energy_drain = S.energy_drain*10
+		var/energy_drain = S.energy_drain
 		if(!S.processed_reagents.len || S.reagents.total_volume >= S.reagents.maximum_volume || !S.chassis.has_charge(energy_drain))
 			S.occupant_message("<span class=\"alert\">Reagent processing stopped.</span>")
 			S.log_message("Reagent processing stopped.")

@@ -5,7 +5,7 @@
 	config_tag = "paranoia"
 	required_players = 2
 	required_enemies = 1
-	end_on_antag_death = 1
+	end_on_antag_death = 0
 	antag_tags = list(MODE_MALFUNCTION, MODE_RENEGADE, MODE_CHANGELING)
 	require_all_templates = 1
 	votable = 0

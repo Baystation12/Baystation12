@@ -163,6 +163,7 @@
 	var/swap_flags = ~HEAVY	// What can we swap place with?
 
 	var/pass_flags = 0
+	var/breathing_sound = 'sound/voice/monkey.ogg'
 
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
 	return

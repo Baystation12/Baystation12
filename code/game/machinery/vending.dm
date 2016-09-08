@@ -971,7 +971,7 @@
 	req_one_access = list(access_atmospherics,access_engine_equip)
 	products = list(/obj/item/weapon/storage/belt/utility = 4,/obj/item/clothing/glasses/meson = 4,/obj/item/clothing/gloves/insulated = 4, /obj/item/weapon/screwdriver = 12,
 					/obj/item/weapon/crowbar = 12,/obj/item/weapon/wirecutters = 12,/obj/item/device/multitool = 12,/obj/item/weapon/wrench = 12,/obj/item/device/t_scanner = 12,
-					/obj/item/stack/cable_coil/heavyduty = 8, /obj/item/weapon/cell = 8, /obj/item/weapon/weldingtool = 8,/obj/item/clothing/head/welding = 8,
+					/obj/item/weapon/cell = 8, /obj/item/weapon/weldingtool = 8,/obj/item/clothing/head/welding = 8,
 					/obj/item/weapon/light/tube = 10,/obj/item/weapon/stock_parts/scanning_module = 5,/obj/item/weapon/stock_parts/micro_laser = 5,
 					/obj/item/weapon/stock_parts/matter_bin = 5,/obj/item/weapon/stock_parts/manipulator = 5,/obj/item/weapon/stock_parts/console_screen = 5,
 					/obj/item/weapon/stock_parts/capacitor = 5)
@@ -1007,3 +1007,31 @@
 	icon_state = "robotics"
 	products = list(/obj/structure/closet/crate/freezer = 2, /obj/structure/closet = 3, /obj/structure/closet/crate = 3)
 
+/obj/machinery/vending/fashionvend
+	name = "Smashing Fashions"
+	desc = "For all your cheap knockoff needs."
+	product_slogans = "Look smashing for your darling!;Be rich! Dress rich!"
+	vend_delay = 15
+	vend_reply = "Absolutely smashing!"
+	product_ads = "Impress the love of your life!;Don't look poor, look rich!;100% authentic designers!;All sales are final!;Lowest prices guaranteed!"
+	products = list(/obj/item/weapon/mirror = 8,
+					/obj/item/weapon/haircomb = 8,
+					/obj/item/clothing/glasses/monocle = 5,
+					/obj/item/clothing/glasses/sunglasses = 5,
+					/obj/item/weapon/lipstick = 3,
+					/obj/item/weapon/lipstick/black = 3,
+					/obj/item/weapon/lipstick/purple = 3,
+					/obj/item/weapon/lipstick/jade = 3,
+					/obj/item/weapon/storage/wallet/poly = 2)
+	contraband = list(/obj/item/clothing/glasses/eyepatch = 2, /obj/item/clothing/accessory/horrible = 2)
+	premium = list(/obj/item/clothing/mask/smokable/pipe = 3)
+	prices = list(/obj/item/weapon/mirror = 60,
+					/obj/item/weapon/haircomb = 40,
+					/obj/item/clothing/glasses/monocle = 700,
+					/obj/item/clothing/glasses/sunglasses = 500,
+					/obj/item/weapon/lipstick = 100,
+					/obj/item/weapon/lipstick/black = 100,
+					/obj/item/weapon/lipstick/purple = 100,
+					/obj/item/weapon/lipstick/jade = 100,
+					/obj/item/weapon/storage/wallet/poly = 600
+					)

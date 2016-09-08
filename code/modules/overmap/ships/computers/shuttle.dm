@@ -1,4 +1,6 @@
 //Shuttle controller computer for shuttles going between sectors
+var/list/sector_shuttles = list()
+
 /datum/shuttle/ferry/var/range = 0	//how many overmap tiles can shuttle go, for picking destinatiosn and returning.
 /obj/machinery/computer/shuttle_control/explore
 	name = "exploration shuttle console"
@@ -10,10 +12,10 @@
 
 /obj/machinery/computer/shuttle_control/explore/initialize()
 	..()
-	home = map_sectors["[z]"]
 	shuttle_tag = "[shuttle_tag]-[z]"
 	if(!shuttle_controller.shuttles[shuttle_tag])
 		var/datum/shuttle/ferry/shuttle = new(shuttle_tag)
+		sector_shuttles += shuttle
 		shuttle.warmup_time = 10
 		shuttle.area_station = locate(shuttle_area)
 		shuttle.area_offsite = shuttle.area_station

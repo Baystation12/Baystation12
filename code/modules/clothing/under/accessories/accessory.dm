@@ -25,9 +25,12 @@
 			inv_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
 		else
 			inv_overlay = image(icon = default_onmob_icons[slot_tie_str], icon_state = tmp_icon_state, dir = SOUTH)
+	inv_overlay.color = color
 	return inv_overlay
 
 /obj/item/clothing/accessory/get_mob_overlay(mob/user_mob, slot)
+	if(!istype(loc,/obj/item/clothing/))	//don't need special handling if it's worn as normal item.
+		return ..()
 	var/bodytype = "Default"
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob

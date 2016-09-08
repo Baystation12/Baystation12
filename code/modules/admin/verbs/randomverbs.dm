@@ -241,28 +241,42 @@ Ccomp's first proc.
 	else
 		return mobs
 
+/client/proc/get_ghosts_by_key()
+	. = list()
+	for(var/mob/observer/ghost/M in mob_list)
+		.[M.ckey] = M
+	. = sortAssoc(.)
 
-/client/proc/allow_character_respawn(mob/observer/ghost/G in get_ghosts())
+/client/proc/allow_character_respawn(var/selection in get_ghosts_by_key())
 	set category = "Special Verbs"
 	set name = "Allow player to respawn"
-	set desc = "Let's the player bypass the 30 minute wait to respawn or allow them to re-enter their corpse."
-	if(!holder)
-		src << "Only administrators may use this command."
+	set desc = "Allows the player bypass the wait to respawn or allow them to re-enter their corpse."
 
-	if(G.has_enabled_antagHUD && config.antag_hud_restricted)
-		var/response = alert(src, "Are you sure you wish to allow this individual to play?","Ghost has used AntagHUD","Yes","No")
+	if(!check_rights(R_ADMIN))
+		return
+
+	var/list/ghosts = get_ghosts_by_key()
+	var/mob/observer/ghost/G = ghosts[selection]
+	if(!istype(G))
+		src << "<span class='warning'>[selection] no longer has an associated ghost.</span>"
+		return
+
+	if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
+		var/response = alert(src, "[selection] has enabled antagHUD. Are you sure you wish to allow them to respawn?","Ghost has used AntagHUD","No","Yes")
 		if(response == "No") return
+	else
+		var/response = alert(src, "Are you sure you wish to allow [selection] to respawn?","Allow respawn","No","Yes")
+		if(response == "No") return
+
 	G.timeofdeath=-19999						/* time of death is checked in /mob/verb/abandon_mob() which is the Respawn verb.
 									   timeofdeath is used for bodies on autopsy but since we're messing with a ghost I'm pretty sure
 									   there won't be an autopsy.
 									*/
 	G.has_enabled_antagHUD = 2
-	G.can_reenter_corpse = 1
+	G.can_reenter_corpse = CORPSE_CAN_REENTER_AND_RESPAWN
 
 	G.show_message("<span class=notice><b>You may now respawn.  You should roleplay as if you learned nothing about the round during your time with the dead.</b></span>", 1)
-	log_admin("[key_name(usr)] allowed [key_name(G)] to bypass the 30 minute respawn limit")
-	message_admins("Admin [key_name_admin(usr)] allowed [key_name_admin(G)] to bypass the 30 minute respawn limit", 1)
-
+	log_and_message_admins("has allowed [key_name(G)] to bypass the [config.respawn_delay] minute respawn limit.")
 
 /client/proc/toggle_antagHUD_use()
 	set category = "Server"

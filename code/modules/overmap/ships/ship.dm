@@ -40,16 +40,30 @@
 	var/obj/machinery/computer/engines/eng_control
 
 /obj/effect/overmap/ship/initialize()
+<<<<<<< HEAD
 >>>>>>> c9a8e118133bb0b368e33256d8255e3d310a5553
 	for(var/obj/machinery/computer/engines/E in machines)
 		if (E.z in map_z)
 			eng_control = E
 			break
 	for(var/obj/machinery/space_battle/helm/H in machines)
+=======
+	..()
+	for(var/obj/machinery/computer/engines/E in machines)
+		if (E.z in map_z)
+			eng_control = E
+			E.linked = src
+			E.zlevels = map_z
+			E.refresh_engines()
+			testing("Engines console at level [E.z] linked to overmap object '[name]'.")
+	for(var/obj/machinery/computer/helm/H in machines)
+>>>>>>> c2114477b4decf684d3386c4ae2aa3f265370f38
 		if (H.z in map_z)
 >>>>>>> 0b4cb4dda55c69006c7065b8e53f93e75d17612e
 			nav_control = H
-			break
+			H.linked = src
+			H.get_known_sectors()
+			testing("Helm console at level [H.z] linked to overmap object '[name]'.")
 	processing_objects.Add(src)
 
 /obj/effect/overmap/ship/relaymove(mob/user, direction)

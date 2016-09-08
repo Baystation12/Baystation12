@@ -249,3 +249,6 @@
 	for(var/offer in offers)
 		. += get_value(offer) * want_multiplier
 		qdel(offer)
+
+/datum/trader/proc/bribe_to_stay_longer(var/amt)
+	return get_response("bribe_refusal", "How about... no?")

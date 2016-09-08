@@ -1,0 +1,6 @@
+author: Haswell
+
+delete-after: True
+
+changes:
+  - tweak: "Reduced wallet capacity, added more items that can fit in wallets."

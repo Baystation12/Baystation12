@@ -17,6 +17,7 @@
 	var/obj/effect/overmap/ship/linked
 >>>>>>> c9a8e118133bb0b368e33256d8255e3d310a5553
 
+<<<<<<< HEAD
 /obj/machinery/space_battle/engine_control/initialize()
 	linked = map_sectors["[z]"]
 	if (linked)
@@ -42,6 +43,17 @@
 =======
 	..()
 >>>>>>> c9a8e118133bb0b368e33256d8255e3d310a5553
+=======
+/obj/machinery/computer/engines/initialize()
+	..()
+	refresh_engines()
+
+/obj/machinery/computer/engines/proc/refresh_engines()
+	engines.Cut()
+	for(var/datum/ship_engine/E in ship_engines)
+		if (E.zlevel in zlevels)
+			engines |= E
+>>>>>>> c2114477b4decf684d3386c4ae2aa3f265370f38
 
 /obj/machinery/space_battle/engine_control/attack_hand(var/mob/user as mob)
 	if(..())

@@ -25,6 +25,8 @@
 	parent_organ = BP_HEAD
 	vital = 1
 	var/obj/item/device/mmi/stored_mmi
+	var/datum/mind/persistantMind //Mind that the organ will hold on to after being removed, used for transfer_and_delete
+	var/ownerckey // used in the event the owner is out of body
 
 /obj/item/organ/internal/mmi_holder/Destroy()
 	stored_mmi = null
@@ -36,6 +38,8 @@
 		stored_mmi = new(src)
 	sleep(-1)
 	update_from_mmi()
+	persistantMind = owner.mind
+	ownerckey = owner.ckey
 
 /obj/item/organ/internal/mmi_holder/proc/update_from_mmi()
 
@@ -61,18 +65,24 @@
 		owner.switch_from_dead_to_living_mob_list()
 		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
 
-/obj/item/organ/internal/mmi_holder/removed(var/mob/living/user)
+/obj/item/organ/internal/mmi_holder/removed()
+	if(owner && owner.mind)
+		persistantMind = owner.mind
+		if(owner.ckey)
+			ownerckey = owner.ckey
+	..()
 
+/obj/item/organ/internal/mmi_holder/proc/transfer_and_delete()
 	if(stored_mmi)
 		stored_mmi.forceMove(src.loc)
-		if(owner.mind)
-			owner.mind.transfer_to(stored_mmi.brainmob)
-	..()
-	var/mob/living/holder_mob = loc
-	if(istype(holder_mob))
-		holder_mob.drop_from_inventory(src)
-		holder_mob.put_in_hands(src)
+		if(persistantMind)
+			persistantMind.transfer_to(stored_mmi.brainmob)
+		else
+			var/response = input(find_dead_player(ownerckey, 1), "Your [initial(stored_mmi.name)] has been removed from your body. Do you wish to return to life?", "Robotic Rebirth") as anything in list("Yes", "No")
+			if(response == "Yes")
+				persistantMind.transfer_to(stored_mmi.brainmob)
 	qdel(src)
+
 
 /obj/item/organ/internal/mmi_holder/posibrain
 	name = "positronic brain interface"
@@ -86,3 +96,4 @@
 	..()
 	stored_mmi.icon_state = "posibrain-occupied"
 	icon_state = stored_mmi.icon_state
+

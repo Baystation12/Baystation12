@@ -83,6 +83,13 @@
 		return
 	last_comms = "PAD NOT CONNECTED"
 
+/datum/computer_file/program/merchant/proc/bribe(var/datum/trader/T, var/amt)
+	if(bank < amt)
+		last_comms = "ERROR: NOT ENOUGH FUNDS."
+		return
+
+	bank -= amt
+	last_comms = T.bribe_to_stay_longer(amt)
 
 /datum/computer_file/program/merchant/proc/offer_item(var/datum/trader/T, var/num)
 	if(pad)
@@ -216,3 +223,6 @@
 			if(href_list["PRG_sell_items"])
 				. = 1
 				sell_items(T)
+			if(href_list["PRG_bribe"])
+				. = 1
+				bribe(T, text2num(href_list["PRG_bribe"]))

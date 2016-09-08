@@ -2,7 +2,7 @@
 	name = "hydraulic clamp"
 	icon_state = "mecha_clamp"
 	equip_cooldown = 15
-	energy_drain = 10
+	energy_drain = 1 KILOWATTS
 	var/dam_force = 20
 	var/obj/mecha/working/ripley/cargo_holder
 	required_type = /obj/mecha/working
@@ -252,7 +252,7 @@
 	icon_state = "mecha_rcd"
 	origin_tech = list(TECH_MATERIAL = 4, TECH_BLUESPACE = 3, TECH_MAGNET = 4, TECH_POWER = 4)
 	equip_cooldown = 10
-	energy_drain = 250
+	energy_drain = 25 KILOWATTS
 	range = MELEE|RANGED
 	var/mode = 0 //0 - deconstruct, 1 - wall or floor, 2 - airlock.
 	var/disabled = 0 //malf
@@ -355,7 +355,7 @@
 	icon_state = "mecha_teleport"
 	origin_tech = list(TECH_BLUESPACE = 10)
 	equip_cooldown = 150
-	energy_drain = 1000
+	energy_drain = 200 KILOWATTS
 	range = RANGED
 
 	action(atom/target)
@@ -375,7 +375,7 @@
 	icon_state = "mecha_wholegen"
 	origin_tech = list(TECH_BLUESPACE = 3)
 	equip_cooldown = 50
-	energy_drain = 300
+	energy_drain = 50 KILOWATTS
 	range = RANGED
 
 
@@ -425,7 +425,7 @@
 	icon_state = "mecha_teleport"
 	origin_tech = list(TECH_BLUESPACE = 2, TECH_MAGNET = 3)
 	equip_cooldown = 10
-	energy_drain = 100
+	energy_drain = 10 KILOWATTS
 	range = MELEE|RANGED
 	var/atom/movable/locked
 	var/mode = 1 //1 - gravsling 2 - gravpush
@@ -500,7 +500,7 @@
 	desc = "Powered armor-enhancing mech equipment."
 	icon_state = "mecha_abooster_proj"
 	equip_cooldown = 10
-	energy_drain = 50
+	energy_drain = 5 KILOWATTS
 	range = 0
 	var/deflect_coeff = 1
 	var/damage_coeff = 1
@@ -590,7 +590,7 @@
 	icon_state = "repair_droid"
 	origin_tech = list(TECH_MAGNET = 3, TECH_DATA = 3)
 	equip_cooldown = 20
-	energy_drain = 100
+	energy_drain = 10 KILOWATTS
 	range = 0
 	var/health_boost = 2
 	var/datum/global_iterator/pr_repair_droid
@@ -777,7 +777,7 @@
 	var/max_fuel = 150000
 	var/fuel_per_cycle_idle = 100
 	var/fuel_per_cycle_active = 500
-	var/power_per_cycle = 20
+	var/power_per_cycle = 1 KILOWATTS
 
 	New()
 		..()
@@ -908,7 +908,7 @@
 	max_fuel = 50000
 	fuel_per_cycle_idle = 10
 	fuel_per_cycle_active = 30
-	power_per_cycle = 50
+	power_per_cycle = 5 KILOWATTS
 	var/rad_per_cycle = 0.3
 
 	init()
@@ -997,7 +997,7 @@
 	desc = "A mountable passenger compartment for exo-suits. Rather cramped."
 	icon_state = "mecha_abooster_ccw"
 	origin_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 1)
-	energy_drain = 10
+	energy_drain = 1 KILOWATTS
 	range = MELEE
 	equip_cooldown = 20
 	var/mob/living/carbon/occupant = null

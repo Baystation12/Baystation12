@@ -36,7 +36,7 @@
 	interface_desc = "A self-sustaining plasma arc capable of cutting through walls."
 	suit_overlay_active = "plasmacutter"
 	suit_overlay_inactive = "plasmacutter"
-	use_power_cost = 0.5
+	use_power_cost = 50
 
 	device_type = /obj/item/weapon/pickaxe/plasmacutter
 
@@ -46,6 +46,7 @@
 	icon_state = "scanner"
 	interface_name = "health scanner"
 	interface_desc = "Shows an informative health readout when used on a subject."
+	use_power_cost = 200
 
 	device_type = /obj/item/device/healthanalyzer
 
@@ -57,7 +58,7 @@
 	interface_desc = "A diamond-tipped industrial drill."
 	suit_overlay_active = "mounted-drill"
 	suit_overlay_inactive = "mounted-drill"
-	use_power_cost = 0.1
+	use_power_cost = 75
 
 	device_type = /obj/item/weapon/pickaxe/diamonddrill
 
@@ -68,6 +69,7 @@
 	interface_name = "Alden-Saraspova counter"
 	interface_desc = "An exotic particle detector commonly used by xenoarchaeologists."
 	engage_string = "Begin Scan"
+	use_power_cost = 200
 	usable = 1
 	selectable = 0
 	device_type = /obj/item/device/ano_scanner
@@ -81,6 +83,7 @@
 	engage_string = "Begin Scan"
 	usable = 1
 	selectable = 0
+	use_power_cost = 200
 	device_type = /obj/item/weapon/mining_scanner
 
 /obj/item/rig_module/device/rcd
@@ -91,6 +94,7 @@
 	interface_desc = "A device for building or removing walls. Cell-powered."
 	usable = 1
 	engage_string = "Configure RCD"
+	use_power_cost = 100 KILOWATTS // Matter fabrication is a very energy-demanding process.
 
 	device_type = /obj/item/weapon/rcd/mounted
 
@@ -125,6 +129,7 @@
 	selectable = 0
 	toggleable = 0
 	disruptive = 0
+	use_power_cost = 500
 
 	engage_string = "Inject"
 
@@ -270,6 +275,7 @@
 	selectable = 0
 	toggleable = 0
 	disruptive = 0
+	active_power_cost = 100
 
 	engage_string = "Configure Synthesiser"
 
@@ -323,6 +329,7 @@
 	toggleable = 1
 	selectable = 0
 	disruptive = 0
+	active_power_cost = 50
 
 	suit_overlay_active = "maneuvering_active"
 	suit_overlay_inactive = null //"maneuvering_inactive"
@@ -390,6 +397,7 @@
 	interface_name = "paper dispenser"
 	interface_desc = "Dispenses warm, clean, and crisp sheets of paper."
 	engage_string = "Dispense"
+	use_power_cost = 200
 	usable = 1
 	selectable = 0
 	device_type = /obj/item/weapon/paper_bin

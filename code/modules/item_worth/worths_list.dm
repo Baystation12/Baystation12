@@ -508,7 +508,6 @@ var/list/worths = list(
 					/obj/item/organ = 400,
 //ITEMS,
 					/obj/item/slime_extract = 200,
-					/obj/item/broken_device = 10,
 					/obj/item/robot_parts/robot_component = 250,
 					/obj/item/robot_parts = 30,
 					/obj/item/modular_computer/tablet = 1300,

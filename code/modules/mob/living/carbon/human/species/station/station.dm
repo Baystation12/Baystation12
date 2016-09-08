@@ -76,6 +76,7 @@
 		"You feel sluggish and cold.",
 		"Your scales bristle against the cold."
 		)
+	breathing_sound = 'sound/voice/lizard.ogg'
 
 /datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()

@@ -51,6 +51,7 @@
 	toggleable = 1
 	disruptive = 0
 	module_cooldown = 0
+	active_power_cost = 100
 
 	engage_string = "Cycle Visor Mode"
 	activate_string = "Enable Visor"

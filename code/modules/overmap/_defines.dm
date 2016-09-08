@@ -3,9 +3,6 @@
 //Dimension of overmap (squares 4 lyfe)
 #define OVERMAP_SIZE 30
 var/global/list/map_sectors = list()
-//Zlevel where overmap objects should be
-var/overmap_z = 1
-
 
 /area/overmap/
 	name = "System Map"

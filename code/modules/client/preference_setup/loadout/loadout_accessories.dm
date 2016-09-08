@@ -82,3 +82,15 @@
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/accessory/storage/webbing
 	cost = 2
+
+/datum/gear/accessory/hawaii
+	display_name = "hawaii shirt"
+	path = /obj/item/clothing/accessory/hawaii
+
+/datum/gear/accessory/hawaii/New()
+	..()
+	var/list/shirts = list()
+	shirts["blue hawaii shirt"] = /obj/item/clothing/accessory/hawaii
+	shirts["red hawaii shirt"] = /obj/item/clothing/accessory/hawaii/red
+	shirts["random colored hawaii shirt"] = /obj/item/clothing/accessory/hawaii/random
+	gear_tweaks += new/datum/gear_tweak/path(shirts)

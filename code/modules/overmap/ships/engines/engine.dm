@@ -7,7 +7,12 @@ var/list/ship_engines = list()
 	var/zlevel = 0
 	var/engine_id = null
 
+<<<<<<< HEAD
 /datum/ship_engine/New(var/obj/machinery/holder, var/id)
+=======
+/datum/ship_engine/New(var/obj/machinery/holder)
+	..()
+>>>>>>> c2114477b4decf684d3386c4ae2aa3f265370f38
 	engine = holder
 	zlevel = holder.z
 <<<<<<< HEAD
