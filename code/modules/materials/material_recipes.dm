@@ -88,6 +88,7 @@
 	recipes += new/datum/stack_recipe("Metal crate", /obj/structure/closet/crate, 10, time = 50, one_per_turf = 1)
 	recipes += new/datum/stack_recipe("knife grip", /obj/item/weapon/material/butterflyhandle, 4, time = 20, one_per_turf = 0, on_floor = 1, supplied_material = "[name]")
 	recipes += new/datum/stack_recipe("dark floor tile", /obj/item/stack/tile/floor_dark, 1, 4, 20)
+	recipes += new/datum/stack_recipe("missile rack", /obj/structure/missile_rack/built, 20, time = 75, one_per_turf = 1, on_floor = 1)
 
 /material/stone/generate_recipes()
 	..()
@@ -103,6 +104,7 @@
 	recipes += new/datum/stack_recipe("reagent dispenser cartridge (small)", /obj/item/weapon/reagent_containers/chem_disp_cartridge/small,  1, on_floor=0) // 100u
 	recipes += new/datum/stack_recipe("white floor tile", /obj/item/stack/tile/floor_white, 1, 4, 20)
 	recipes += new/datum/stack_recipe("freezer floor tile", /obj/item/stack/tile/floor_freezer, 1, 4, 20)
+	recipes += new/datum/stack_recipe("plastic flaps", /obj/structure/plasticflaps/mining/built, 12, one_per_turf = 1, on_floor = 1)
 
 /material/wood/generate_recipes()
 	..()

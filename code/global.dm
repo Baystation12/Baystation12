@@ -44,7 +44,7 @@ var/game_year           = (text2num(time2text(world.realtime, "YYYY")) + 122)
 var/round_progressing = 1
 var/master_mode       = "two team combat" // "extended"
 var/secondary_mode    = "two team combat"
-var/tertiary_mode     = "two team combat"
+var/tertiary_mode     = "three team combat"
 var/secret_force_mode = "two team combat"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
 
 var/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed

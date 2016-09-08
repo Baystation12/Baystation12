@@ -265,6 +265,10 @@ var/list/floor_decals = list()
 	name = "yellow outline"
 	color = "#CFCF55"
 
+/obj/effect/floor_decal/industrial/outline/red
+	name = "red outline"
+	color = "#FF0000"
+
 /obj/effect/floor_decal/industrial/outline/grey
 	name = "grey outline"
 	color = "#808080"

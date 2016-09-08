@@ -85,20 +85,15 @@ var/list/mechtoys = list(
 
 	return ..()
 
-/obj/structure/plasticflaps/ex_act(severity)
-	switch(severity)
-		if (1)
-			qdel(src)
-		if (2)
-			if (prob(50))
-				qdel(src)
-		if (3)
-			if (prob(5))
-				qdel(src)
-
 /obj/structure/plasticflaps/mining //A specific type for mining that doesn't allow airflow because of them damn crates
 	name = "airtight plastic flaps"
 	desc = "Heavy duty, airtight, plastic flaps."
+
+	attackby()
+		..()
+		var/turf/T = get_turf(loc)
+		if(T)
+			T.blocks_air = anchored
 
 	New() //set the turf below the flaps to block air
 		var/turf/T = get_turf(loc)
@@ -113,6 +108,14 @@ var/list/mechtoys = list(
 				T.blocks_air = 0
 		..()
 
+/obj/structure/plasticflaps/mining/built/New()
+	..()
+	anchored = 0
+	can_pass = 1
+	var/turf/T = get_turf(loc)
+	if(T)
+		if(istype(T, /turf/simulated/floor))
+			T.blocks_air = 0
 /*
 /obj/effect/marker/supplymarker
 	icon_state = "X"

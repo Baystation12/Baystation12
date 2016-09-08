@@ -31,8 +31,6 @@
 	var/y_offset = 0
 	var/x_offset = 0
 
-	var/id_num = 0
-
 	var/obj/effect/overmap/ship/linked
 
 	Destroy()
@@ -58,7 +56,7 @@
 
 	update_icon()
 		if(stat & (BROKEN|NOPOWER)) return ..()
-		if(cooldown)
+		if(cooldown >= world.timeofday)
 			icon_state = "recalibrated"
 		else
 			icon_state = initial(icon_state)
@@ -68,18 +66,17 @@
 			time *= get_efficiency(-1, 1)
 		else
 			time *= 2.5
-		cooldown = 1
+		cooldown = world.timeofday + time
 		update_icon()
-		spawn(time)
-			cooldown = 0
-			if(eye)
-				eye << "<span class='notice'>Sensors recalibrated!</span>"
-			src.visible_message("<span class='notice'>\The [src] beeps, \"Sensors recalibrated!\"</span>")
-			update_icon()
-		return time
+		return round(time)
 
-	New()
-		..()
+	proc/time_remaining()
+		var/time = (cooldown - world.timeofday)/10
+		if(time < 0)
+			time = 0
+		return round(time)
+
+	rename()
 		var/team = 0
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
@@ -88,22 +85,31 @@
 		for(var/obj/machinery/space_battle/missile_computer/C in world)
 			if(C.z == src.z)
 				num++
+				if(C == src)
+					break
 		if(team)
 			id_num = "[team]-#[num]"
 			name = "[initial(name)]([id_num])"
-		reconnect()
+		if(tube)
+			tube.rename()
+		if(sensor)
+			sensor.rename(id_num)
 
 	initialize()
-		spawn(10)
 		linked = map_sectors["[z]"]
-		if (linked)
+		if (linked && istype(linked))
 			if (!(src in linked.fire_controls))
 				linked.fire_controls.Add(src)
+		reconnect()
 
 	proc/find_targets()
 		starts.Cut()
-		if(!linked || (istype(linked, /obj/effect/overmap/ship) && !linked.is_still()))
+		if(!linked)
 			return 0
+		if(istype(linked, /obj/effect/overmap/ship))
+			var/obj/effect/overmap/ship/S = linked
+			if(!S.is_still())
+				return 0
 		var/list/targettable_z_levels = list()
 		for(var/obj/effect/overmap/ship/ship in range(3, linked))
 			targettable_z_levels.Add(ship.map_z[1])
@@ -129,18 +135,14 @@
 		for(var/obj/machinery/space_battle/missile_sensor/hub/S in world)
 			if(S.id_tag == id_tag)
 				sensor = S
+				S.linked = src
 				break
 		if(!tube)
 			for(var/obj/machinery/space_battle/deck_gun/G in world)
 				if(G.id_tag == src.id_tag)
 					gun = G
 					break
-		find_targets()
-		if(tube)
-			tube.name = "[initial(tube.name)]([id_num])"
-		if(sensor)
-			sensor.name = "[initial(sensor.name)]([id_num])"
-			sensor.set_names(id_num)
+		rename()
 		return
 
 
@@ -238,7 +240,7 @@
 			else
 				user << "<span class='danger'>CAUTION: X-ray module offline. Internal view unavailable: [has_microwave]</span>"
 
-		if(cooldown)
+		if(cooldown >= world.timeofday)
 			user << "<span class='warning'>Sensors are recalibrating!</span>"
 
 		if(tube)
@@ -291,6 +293,8 @@
 		process()
 		eye = M
 		eye_owner = user
+		spawn(25)
+			eye << "<span class='notice'><b>Head left!</b></span>"
 
 /obj/machinery/space_battle/missile_computer/process()
 	if(eye && !(forced_by && forced_by == eye_owner))
@@ -413,8 +417,8 @@
 	set category = "Fire Control"
 
 	if(linked && linked.tube)
-		if(linked.cooldown)
-			usr << "<span class='warning'>The sensors are recalibrating! Be patient!</span>"
+		if(linked.cooldown > world.timeofday)
+			usr << "<span class='warning'>The sensors are recalibrating! Please wait another [linked.time_remaining()] seocnds!</span>"
 			return
 		if(!advguidance)
 			var/inp = input(usr, "You have no advanced guidance, this will take a significant amount of time. Are you sure?", "Offset") in list("Yes", "Cancel")
@@ -433,8 +437,8 @@
 				cd = 500 * linked.sensor.advguidance.get_efficiency(-1, 1)
 			else
 				cd = 2000
-			linked.cooldown(cd)
-			src << "<span class='notice'>The sensors are now recalibrating! [(cd/10)] seconds remaining.</span>"
+			cd = linked.cooldown(cd)
+			src << "<span class='notice'>The sensors are now recalibrating! [linked.time_remaining()] seconds remaining.</span>"
 			linked.y_offset = yo
 			linked.x_offset = xo
 
@@ -446,8 +450,8 @@
 		var/turf/T = A
 		var/efficiency = linked.tube.get_efficiency(-1,1)
 		var/guidance_efficiency = linked.sensor.guidance ? linked.sensor.guidance.get_efficiency(-1,1) : 2
-		if(linked.cooldown)
-			usr << "<span class='warning'>The sensors are recalibrating! Be patient!</span>"
+		if(linked.cooldown > world.timeofday)
+			usr << "<span class='warning'>The sensors are recalibrating! [linked.time_remaining()] seconds left!</span>"
 			firing = 0
 			return
 		var/wait_time = MISSILE_COOLDOWN
@@ -464,7 +468,7 @@
 			for(var/area/ar in world)
 				if(istype(ar, /area/ship_battle/))
 					var/area/ship_battle/S = ar
-					if(S.team == area.team)
+					if(S.z == start_loc.z && S.team == area.team)
 						available_areas += ar.name
 						available_areas[ar.name] = ar
 
@@ -472,11 +476,11 @@
 				var/choice = input(usr, "Where would you like to aim?", "Underhand") in available_areas
 				var/area/ship_battle/chosen = available_areas[choice]
 				if(chosen)
-					var/turf/newloc = pick_area_turf(get_area(start_loc))
+					var/turf/newloc = pick_area_turf(chosen)
 					if(newloc)
 						start_loc = newloc
 						var/R
-						R = linked.tube.fire_missile(T, start_loc)
+						R = linked.tube.fire_missile(start_loc, start_loc) // Dont move, just go boom.
 						if(istext(R))
 							usr << "<span class='warning'>[R]</span>"
 							return
@@ -506,7 +510,7 @@
 			if(ECM || linked.firing_angle == "Flanking" || (!guidance||prob(miss_chance)) && linked.firing_angle != "Carefully Aimed") // Random firing.
 				var/turf/newloc = pick_area_turf(get_area(start_loc), list(/proc/isspace, /proc/not_turf_contains_dense_objects))
 				if(newloc) start_loc = newloc
-				wait_time *= 1.75*efficiency
+				wait_time *= 1.5*efficiency
 				if(!guidance)
 					wait_time *= 1.5*efficiency
 				if(ECM)
@@ -570,11 +574,16 @@
 					wait_time *= 1.75*efficiency
 				if(1 to 2)
 					wait_time *= 1.25*efficiency
-			if(radars)
-				wait_time /= (1+radars)
-			linked.cooldown = 1
+			var/radar_division = 1
+			for(var/obj/machinery/space_battle/missile_sensor/radar/R in radars)
+				var/failure_message = R.can_sense()
+				if(failure_message != 1)
+					usr << "<span class='notice'>Radar system([R.name]) unable to reduce recalibration: [failure_message]"
+				else
+					radar_division += R.get_efficiency(1,1)
+			wait_time /= radar_division
+			wait_time = linked.cooldown(wait_time)
 			usr << "<span class='notice'>Sensors are now calibrating. Please wait [(wait_time / 10)] seconds.</span>"
-			linked.cooldown(wait_time)
 			firing = 0
 
 	else

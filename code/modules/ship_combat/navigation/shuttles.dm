@@ -10,12 +10,12 @@
 	var/docking_controller_tag = null
 	var/datum/shuttle/ferry/shuttle
 
-/obj/machinery/computer/shuttle_control/explore/New()
+/obj/machinery/computer/shuttle_control/explore/initialize()
 	..()
 	home = map_sectors["[z]"]
 	shuttle_tag = "[shuttle_tag]-[z]"
 	if(!shuttle_controller.shuttles[shuttle_tag])
-		var/datum/shuttle/ferry/shuttle = new(shuttle_tag)
+		var/datum/shuttle/ferry/shuttle = new(shuttle_tag, docking_controller_tag)
 		if(docking_controller_tag)
 			shuttle.docking_controller_tag = docking_controller_tag
 		shuttle.warmup_time = 10

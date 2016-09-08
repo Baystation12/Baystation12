@@ -194,9 +194,9 @@
 	invisibility = 101
 	density = 0
 	anchored = 1
-	var/active = 1
+	var/active = 1 // Do we have a core?
 	var/team = 0
-	var/alive = 1
+	var/alive = 1 // Do we count towards round finish?
 	var/initialised = 0
 
 	New()
@@ -208,24 +208,31 @@
 	initialize()
 		..()
 		spawn(100)
+			refresh_alive()
 			initialised = 1
 
 
-	proc/refresh_active()
+	proc/refresh_alive()
 		if(!initialised)
-			active = 1
 			alive = 1
-		else if(ticker && ticker.mode && istype(ticker.mode, /datum/game_mode/ship_battles))
+		else
 			alive = 0
 			var/datum/game_mode/ship_battles/mode = ticker.mode
 			for(var/I in mode.teams)
 				if(text2num(I) == src.team)
 					alive = 1
-			var/has_core = 0
+
+	proc/refresh_active()
+		if(!initialised)
+			active = 1
+			alive = 1
+			return 1
+		else if(ticker && ticker.mode && istype(ticker.mode, /datum/game_mode/ship_battles))
+			active = 0
 			for(var/obj/machinery/space_battle/ship_core/S in world)
 				if(S.z == src.z)
-					has_core = 1
-			active = has_core && alive
+					active = 1
+					break
 		else
 			testing("Ticker mode is not correct!")
 		return active

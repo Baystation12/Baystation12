@@ -18,7 +18,6 @@
 	var/list/teams = list()
 	var/team_count
 	var/setup = 0
-
 	proc/generate_statistics()
 		var/client/first_death
 		var/client/most_karma
@@ -53,16 +52,19 @@
 		if(!setup)
 			return 0
 		var/list/team_cores = list()
-		var/list/active_teams = teams.Copy()
+		var/active_teams = 0
 		for(var/obj/missile_start/S in world)
-			S.refresh_active()
-			if(S.active && S.team >= 1)
-				team_cores["[S.team]"] += 1
+			if(S.alive)
+				S.refresh_active()
+				if(S.active && S.team >= 1)
+					team_cores["Team [S.team]"] += 1
+//					testing("Team cores active check([S.team])([(team_cores["Team [S.team]"])])")
 		for(var/i=1 to team_cores.len)
 			var/value = team_cores[i]
-			if(text2num(value) >= 1)
-				active_teams += team_cores[i]
-		if(active_teams.len <= 1)
+			if(text2num(team_cores[value]) >= 1)
+				active_teams += 1
+//				testing("Active team:([(team_cores[i])])([(team_cores[value])])")
+		if(active_teams <= 1)
 			return 1
 		return 0
 
@@ -71,12 +73,14 @@
 			world << sound('sound/music/cheeki.ogg')
 			var/team = 0
 			for(var/obj/missile_start/S in world)
-				team = S.team
+				if(S.alive)
+					team = S.team // Should only be one team.
+					break
 			world << "<span class='notice'><b>Team [team] is victorious! All heil the new masters of the galaxy!</b></span>"
 			spawn(20)
 				var/text = "<b>And it's crew, </b>"
-				for(var/mob/living/carbon/M in world)
-					if(M.mind && M.mind.team == team)
+				for(var/mob/living/carbon/human/M in world)
+					if(M.get_team() == team)
 						text += "<b>[M.name]</b>[M.mind.role_alt_title ? ", \the [M.mind.role_alt_title], " : ", "]"
 				text += "aswell as all those who died in the field of battle!"
 				world << text
@@ -89,13 +93,14 @@
 		world << sound('sound/effects/siren.ogg')
 		return 1
 
-	force_setup()
+	force_setup(var/list/forced_teams)
 		allowed_factions.Cut()
-		do
+		if(forced_teams.len)
+			allowed_factions = forced_teams.Copy()
+		while(allowed_factions.len < team_count)
 			var/faction_to_add = pick("Team One", "Team Two", "Team Three", "Team Four")
 			if(faction_to_add in allowed_factions) continue
 			allowed_factions.Add(faction_to_add)
-		while(allowed_factions.len < team_count)
 		spawn(10)
 			for(var/I in allowed_factions)
 				switch(I)

@@ -12,7 +12,7 @@
 	var/needs_dish = 0
 	var/obj/machinery/space_battle/missile_sensor/dish/dish
 
-	New()
+	initialize()
 		..()
 		reconnect()
 
@@ -23,6 +23,33 @@
 			dish = null
 		return ..()
 
+	attack_hand(var/mob/user)
+		src.visible_message("<span class='notice'>\The [user] begins inspecting \the [src]..</span>")
+		if(do_after(user, 50))
+			user << "<span class='notice'>\The [src] has an efficiency of: [get_efficiency(1,0,0)]</span>"
+			user << "<span class='notice'>\The [src] ID tag is set to: \"[id_tag]\"</span>"
+			if(!istype(src, /obj/machinery/space_battle/missile_sensor/hub))
+				user << "<span class='notice'>\The [src] External Dish ID is set to: \"[sensor_id]\" \
+				<b><A href='?src=\ref[src];change_sensor_id=[1]'>\[Change\]</A></b></span>"
+				var/sensing = can_sense()
+				if(sensing == 1) user << "<span class='notice'>\The [src] is working properly!</span>"
+				else user << "<span class='warning'>\The [src] produces an error when tested, \"[sensing]\"</span>"
+
+	Topic(href, href_list)
+		if(Adjacent(usr) && !usr.stat)
+			if(href_list["change_sensor_id"])
+				var/inp = input(usr, "What would you like to change \the [src]'s ID to?")
+				if(inp)
+					if(length(inp) < 25)
+						src.visible_message("<span class='notice'>\The [usr] begins modifying \the [src]'s external sensor id..</span>")
+						if(do_after(usr, 50))
+							sensor_id = inp
+							reconnect()
+							usr << "<span class='notice'>You set \the [src]'s sensor identification to, \"[sensor_id]\"</span>"
+					else
+						usr << "<span class='warning'>That is too long!</span>"
+		..()
+
 	proc/can_sense()
 		if(stat & (BROKEN))
 			return "Broken"
@@ -32,7 +59,9 @@
 			return "Disabled"
 		if(needs_dish)
 			if(!dish)
-				return "Wireless Connection Severed: Dish not responding."
+				reconnect()
+				if(!dish)
+					return "Wireless Connection Severed: Dish not responding."
 			else if(!dish.can_sense())
 				return "Wireless Connection Severed: Dish status - [dish.can_sense()]"
 		return 1
@@ -47,20 +76,24 @@
 		..()
 
 	reconnect()
-		spawn(2)
+		dish = null
 		if(needs_dish)
 			for(var/obj/machinery/space_battle/missile_sensor/dish/D in world)
-				if(D.sensor_id == src.sensor_id && src.sensor_id)
-					if(!D.linked_sensor)
-						dish = D
-						D.linked_sensor = src
-						break
+				if(D.sensor_id == src.sensor_id && src.z == D.z)
+					dish = D
+					D.linked_sensor = src
+					break
 
 	attackby(var/obj/item/O, var/mob/user)
+		if(!stat & (BROKEN|NOPOWER))
+			if(istype(O, /obj/item/stack/cable_coil))
+				user.visible_message("<span class='notice'>[user] [can_sense ? "disables" : "enables"] \the [src]!</span>", "<span class='notice'>You [can_sense ? "disable" : "enable"] \the [src]!")
+				can_sense = !can_sense
+				return
+			if(istype(O, /obj/item/weapon/wrench))
+				anchored = !anchored
+				user.visible_message("<span class='notice'>\The [user] [anchored ? "" : "un"]anchors \the [src]!</span>")
 		..()
-		if(istype(O, /obj/item/weapon/wrench))
-			user.visible_message("<span class='notice'>[user] [can_sense ? "disables" : "enables"] \the [src]!</span>", "<span class='notice'>You [can_sense ? "disable" : "enable"] \the [src]!")
-			can_sense = !can_sense
 
 /obj/machinery/space_battle/missile_sensor/dish
 	name = "radar dish"
@@ -134,6 +167,7 @@
 	name = "sensor hub"
 	desc = "A hub filled with cable inputs."
 	icon_state = "hub"
+	can_be_destroyed = 0
 
 	var/obj/machinery/space_battle/missile_sensor/guidance/guidance
 	var/obj/machinery/space_battle/missile_sensor/tracking/tracking
@@ -142,6 +176,8 @@
 	var/obj/machinery/space_battle/missile_sensor/microwave/microwave
 	var/obj/machinery/space_battle/missile_sensor/xray/xray
 	var/obj/machinery/space_battle/missile_sensor/advguidance/advguidance
+
+	var/obj/machinery/space_battle/linked
 
 	var/list/radars = list()
 
@@ -156,8 +192,14 @@
 
 /obj/machinery/space_battle/missile_sensor/hub/reconnect()
 	spawn(3)
+	if(linked)
+		linked.reconnect()
+	for(var/obj/machinery/space_battle/missile_computer/F in world)
+		if(F.id_tag == src.id_tag && F.z == src.z)
+			F.sensor = src
+			linked = F
 	for(var/obj/machinery/space_battle/missile_sensor/M in world)
-		if(M.id_tag == src.id_tag)
+		if(M.id_tag == src.id_tag && M.z == src.z)
 			if(istype(M, /obj/machinery/space_battle/missile_sensor/guidance) && !guidance)
 				guidance = M
 			if(istype(M, /obj/machinery/space_battle/missile_sensor/tracking) && !tracking)
@@ -174,10 +216,15 @@
 				advguidance = M
 			if(istype(M, /obj/machinery/space_battle/missile_sensor/radar))
 				radars.Add(M)
+	rename()
 	return
 
-/obj/machinery/space_battle/missile_sensor/hub/proc/set_names(var/id_num)
-	reconnect()
+/obj/machinery/space_battle/missile_sensor/hub/rename()
+	var/id_num
+	if(linked)
+		id_num = linked.id_num
+	if(!id_num) return
+	name = "[initial(name)]([id_num])"
 	if(guidance)
 		guidance.name = "[initial(guidance.name)]([id_num])"
 	if(tracking)

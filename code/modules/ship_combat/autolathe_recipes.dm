@@ -424,8 +424,8 @@
 	hidden = 0
 	category = "Arms and Ammunition"
 	resources = list(DEFAULT_WALL_MATERIAL = 55250,
-					 "plasteel" = 3000,
-					 "glass" = 200)
+					 "plasteel" = 8000,
+					 "glass" = 500)
 
 /datum/autolathe/recipe/scatter_missile
 	name = "scatter missile"
@@ -433,7 +433,7 @@
 	hidden = 0
 	category = "Arms and Ammunition"
 	resources = list(DEFAULT_WALL_MATERIAL = 60000,
-					 "plasteel" = 3250,
+					 "plasteel" = 5000,
 					 "glass" = 200)
 
 /datum/autolathe/recipe/emp_bomb
@@ -478,6 +478,20 @@
 	resources = list(DEFAULT_WALL_MATERIAL = 15000,
 					 "wood" = 500,
 					 "glass" = 50)
+
+/datum/autolathe/recipe/conveyor_belt
+	name = "conveyor belt"
+	path = /obj/item/conveyor_construct
+	hidden = 0
+	category = "Devices and Components"
+	resources = list(DEFAULT_WALL_MATERIAL = 2500)
+
+/datum/autolathe/recipe/conveyor_belt
+	name = "conveyor belt"
+	path = /obj/item/conveyor_switch_construct
+	hidden = 0
+	category = "Devices and Components"
+	resources = list(DEFAULT_WALL_MATERIAL = 1500)
 
 
 

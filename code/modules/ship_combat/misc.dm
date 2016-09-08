@@ -1,3 +1,35 @@
+/proc/team2text(var/num = 0)
+	switch(num)
+		if(0)
+			return "All"
+		if(1)
+			return "Team One"
+		if(2)
+			return "Team Two"
+		if(3)
+			return "Team Three"
+		if(4)
+			return "Team Four"
+		if(5)
+			return "Misc"
+	return 0
+
+/proc/team2num(var/team = "All")
+	switch(team)
+		if("All")
+			return 0
+		if("Team One")
+			return 1
+		if("Team Two")
+			return 2
+		if("Team Three")
+			return 3
+		if("Team Four")
+			return 4
+		if("Misc")
+			return 5
+	return 0
+
 /obj/machinery/space_battle
 	icon = 'icons/obj/ship_battles.dmi'
 	var/broken_state
@@ -12,12 +44,15 @@
 	resistance = 1.5
 	density = 1
 	anchored = 1
+	var/id_num = 0
 
 	New()
 		..()
 		if(component_type)
 			component = new component_type(src)
 
+	proc/rename(var/identification)
+		return 1
 
 	process()
 		..()
@@ -186,9 +221,14 @@
 						user << "<span class='warning'>The welding tool must be on!</span>"
 					return
 		if(istype(I, /obj/item/device/multitool))
-			var/newid = text2num(input(user, "What would you like to set \the [src]'s id to?", "Fire Control"))
-			if(newid)
-				id_tag = newid
+			user << "<span class='notice'>\The [src]'s ID tag is set to: \"[id_tag]\"</span>"
+			var/newid = text2num(input(user, "What would you like to set \the [src]'s id to? (Nothing to cancel)", "Multitool"))
+			if(!newid) return
+			if(length(newid) < 25)
+				id_tag = lowertext(newid)
+			else
+				user << "<span class='warning'>Too long!</span>"
+				return
 			reconnect()
 			return
 		if(..())

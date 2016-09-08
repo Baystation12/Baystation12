@@ -26,6 +26,8 @@
 	for(var/obj/machinery/space_battle/missile_computer/M in fire_controls)
 		M.linked = null
 	fire_controls.Cut()
+	if(fake)
+		fake_ship = null
 	map_sectors["[z]"] = null
 	return ..()
 
@@ -103,8 +105,8 @@
 	return get_speed()/get_acceleration()
 
 #define SIGN(X) (X == 0 ? 0 : (X > 0 ? 1 : -1))
-/obj/effect/overmap/ship/proc/decelerate()
-	if(!is_still() && can_burn())
+/obj/effect/overmap/ship/proc/decelerate(var/forced = 0)
+	if(!is_still() && (forced || can_burn()))
 		if (speed[1])
 			adjust_speed(-SIGN(speed[1]) * min(get_acceleration(),abs(speed[1])), 0)
 		if (speed[2])

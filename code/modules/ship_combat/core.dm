@@ -16,12 +16,26 @@
 	var/ship_name = ""
 	var/reset_time = 0
 	var/can_be_reset = 0
+	var/obj/missile_start/start
+
 
 	New()
 		..()
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
 			team = A.team
+
+	initialize()
+		..()
+		for(var/obj/missile_start/S in world)
+			if(S.z == src.z)
+				start = S
+				break
+		spawn(10)
+			var/obj/effect/overmap/linked = map_sectors["[z]"]
+			if(linked)
+				linked.team = src.team
+
 
 	Destroy()
 		for(var/obj/machinery/M in machines)
@@ -31,9 +45,7 @@
 					qdel(M)
 				else
 					processing_objects.Remove(M)
-		for(var/obj/missile_start/S	in world)
-			if(S.z == src.z || S.team == src.team)
-				qdel(S)
+		start = null
 		for(var/obj/machinery/space_battle/missile_computer/computer in world)
 			computer.find_targets()
 		var/obj/effect/overmap/ship/linked = map_sectors["[z]"]
@@ -44,18 +56,10 @@
 			qdel(linked)
 		return ..()
 
-	proc/take_damage(var/damage, var/external = 1)
-		if(external && armour > 1)
-			var/a = armour // Should this be necessary?
-			armour -= damage
-			damage -= a
-		if(damage > 1)
-			break_machine(round(damage/2))
-			for(var/mob/living/carbon/human/H in world)
-				if(H.z == src.z && H.get_team() == src.team)
-					H << "<span class='warning'>You hear a voice: \"Core damaged!\"</span>"
-
 	break_machine(var/num)
+		if(armour > num)
+			armour -= num
+			return 0
 		..()
 		if(damage_level > 6)
 			if(!self_destructing)
@@ -63,22 +67,24 @@
 				if(O)
 					world << "<span class='danger'>[O.name]'s core self destruct sequence engaged!</span>"
 				self_destructing = 1
+		for(var/mob/living/carbon/human/H in world)
+			if(H.z == src.z && text2num(H.get_team()) == text2num(src.team))
+				H << "<span class='warning'>You hear a voice: \"Core damaged!\"</span>"
 
 	attackby(var/obj/item/I, var/mob/user)
-		if(istype(I, /obj/item/device/multitool) && self_destructing)
+		if(istype(I, /obj/item/device/multitool) && self_destructing && damage_level < 3)
 			var/mob/living/carbon/human/H = user
 			if(H && istype(H))
 				H.visible_message("<span class='notice'>\The [H] begins setting \the [src] to reset!</span>")
 				spawn(30)
 					if(team && H.get_team() == team)
-						H << "<span class='warning'>You hear a voice, \"Core Destruction Attempt detected. Engaging lethal injection.\"</span>"
-						H.lethal_injection()
+						H << "<span class='warning'>You hear a voice, \"Core Destruction Attempt detected. Cease immediately.\"</span>"
 						H.Weaken(5) // TO cancel the do after
 						return
 				if(do_after(user, 100))
 					H.visible_message("<span class='notice'>\The [H] sets the \the [src] to begin resetting!</span>")
 					H << "<span class='notice'>You estimate that \the [src] will have finished resetting in 10 minutes.</span>"
-					reset_time = world.timeofday+12000 // 1200 seconds =/= minutes
+					reset_time = world.timeofday+12000 // 1200 seconds = 10 minutes
 		else if(istype(I, /obj/item/weapon/screwdriver) && can_be_reset)
 			var/mob/living/carbon/human/H = user
 			if(H && istype(H))
@@ -90,6 +96,9 @@
 					for(var/area/ship_battle/A in world)
 						if(A.z == src.z)
 							A.team = src.team
+					start.team = src.team
+					start.refresh_alive()
+					start.refresh_active()
 		..()
 
 	power_change()
@@ -110,7 +119,7 @@
 		..()
 		if(stat & NOPOWER)
 			if(prob(20))
-				take_damage(rand(1,2), 0)
+				break_machine(1)
 		var/turf/T = get_turf(src)
 		if(T)
 			var/datum/gas_mixture/environment = T.return_air()
@@ -121,15 +130,16 @@
 						for(var/mob/living/carbon/human/H in world)
 							if(H.z == src.z && H.get_team() == src.team)
 								H << "<span class='warning'>Your hear a voice: \"Core unpressurised!\"</span>"
-						take_damage(1)
+						break_machine(1)
 
 		if(self_destructing && !reset_time)
+			var/obj/effect/overmap/O = map_sectors["[z]"]
 			if(damage_level < 6)
-				world << "<span class='danger'>Team [team] core self destruct sequences disengaged!</span>"
+				world << "<span class='danger'>[O.name]'s core self destruct sequences disengaged!</span>"
 				self_destructing = 0
 			timer--
 			if(timer == 10)
-				world << "<span class='danger'>Team [team] core self destruct imminent..</span>"
+				world << "<span class='danger'>[O.name]'s  core self destruct imminent..</span>"
 			if(timer <= 0)
 				processing_objects.Remove(src)
 				self_destruct()
@@ -138,27 +148,27 @@
 			src.visible_message("<span class='notice'>\The [src] beeps, \"Reset procedure complete!\"</span>")
 			reset_time = 0
 			can_be_reset = 1
-			timer += 90 // Give em another minute and a half to reset it.
+			timer = min(initial(timer), timer+60) // Give em another minute to reset it.
 
 
 	ex_act(severity)
 		switch(severity)
 			if(1)
-				take_damage(rand(7,12))
+				break_machine(rand(7,12))
 			if(2)
-				take_damage(rand(1,8))
+				break_machine(rand(1,8))
 			if(1)
-				take_damage(rand(0,4))
+				break_machine(rand(0,4))
 
 	emp_act(severity)
-		take_damage(rand(severity,severity*2), 0)
+		break_machine(rand(severity,severity*2), 0)
 
 	bullet_act(var/obj/item/projectile/bullet/P)
 		if(prob(50))
 			src.visible_message("<span class='notice'>\The [P] bounces off of \the [src] harmlessly!</span>")
 			return
 		if(P && istype(P) && P.damage_type == BRUTE)
-			take_damage(round(P.damage / 5, 1))
+			break_machine(round(P.damage / 5, 1))
 
 	proc/self_destruct()
 		if(self_destructing == 1)
@@ -169,7 +179,7 @@
 						M.ghostize(0)
 			spawn(10)
 				for(var/obj/missile_start/S in world)
-					if(S.z == src.z)
+					if(S.z == src.z && S.team == src.team)
 						S.active = 0
 				spawn(10)
 					qdel(src)

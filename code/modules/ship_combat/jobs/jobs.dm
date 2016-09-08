@@ -7,7 +7,7 @@
 			if(!less_populated_team_count || job_master.teams[i] < less_populated_team_count)
 				less_populated_team = job_master.teams[i]
 				less_populated_team_count = job_master.teams[less_populated_team]
-				testing("Least populated team: [less_populated_team]")
+				testing("Least populated team: [less_populated_team]:[less_populated_team_count]")
 	if(faction == less_populated_team)
 		return 1
 		testing("Is job available: [title]")

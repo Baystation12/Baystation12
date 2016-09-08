@@ -39,7 +39,7 @@
 
 	proc/can_block(var/range = 3)
 		if(range > radius || stat & (BROKEN|NOPOWER))
-			world << "ecm failure: range too great or broken"
+//			world << "ecm failure: range too great or broken"
 			return 0
 		if(!dish)
 			reconnect()
@@ -47,7 +47,7 @@
 				world << "ecm failure: [dish ? dish.can_sense() : "no dish"]"
 				return 0
 		else if(!dish.can_sense())
-			world << "ecm failure: [dish.can_sense()]"
+//			world << "ecm failure: [dish.can_sense()]"
 			return 0
 		return 1
 

@@ -63,7 +63,6 @@
 
 	//used for optional self-objectives that antagonists can give themselves, which are displayed at the end of the round.
 	var/ambitions
-
 	var/team = 0
 
 /datum/mind/New(var/key)

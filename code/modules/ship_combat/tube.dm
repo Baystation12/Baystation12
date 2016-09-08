@@ -1,5 +1,5 @@
 /obj/machinery/space_battle/tube
-	name = "firing tube"
+	name = "firing breech"
 	icon = 'icons/obj/ship_battles.dmi'
 	icon_state = "mass_driver"
 	resistance = 2.5
@@ -19,7 +19,9 @@
 	var/list/can_pass = list(/obj/structure/grille, /obj/machinery/shieldwall)
 
 	Destroy()
-		linked = null
+		if(linked)
+			linked.tube = null
+			linked = null
 		if(to_kill)
 			qdel(to_kill)
 		..()
@@ -28,6 +30,9 @@
 		var/turf/T = get_step(loc,dir)
 		barrel = locate() in T
 		..()
+
+	rename()
+		name = "[initial(name)][linked.id_num]"
 
 /obj/machinery/space_battle/tube/proc/jammed()
 	if(!barrel)
@@ -291,6 +296,7 @@
 			jammed = 0
 			update_icon()
 			return
+	..()
 
 
 

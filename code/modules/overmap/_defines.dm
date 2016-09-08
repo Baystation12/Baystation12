@@ -19,6 +19,7 @@ var/overmap_z = 1
 	icon = 'icons/turf/space.dmi'
 	icon_state = "map"
 	dynamic_lighting = 0
+	var/team = 0
 
 /turf/unsimulated/map/edge
 	opacity = 1

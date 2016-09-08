@@ -36,6 +36,7 @@ var/global/datum/controller/gameticker/ticker
 
 	var/list/antag_pool = list()
 	var/looking_for_antags = 0
+	var/list/forced_teams = list()
 
 /datum/controller/gameticker/proc/pregame()
 	login_music = pick(\
@@ -114,7 +115,7 @@ var/global/datum/controller/gameticker/ticker
 		current_state = GAME_STATE_PREGAME
 		world << "<span class='danger'>Serious error in mode setup!</span> Reverting to pre-game lobby."
 		return 0
-	src.mode.force_setup()
+	src.mode.force_setup(forced_teams)
 	job_master.ResetOccupations(src.mode.allowed_factions)
 	src.mode.create_antagonists()
 	src.mode.pre_setup()

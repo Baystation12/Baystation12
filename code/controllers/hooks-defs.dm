@@ -97,3 +97,10 @@
  * Parameters: var/obj/structure/closet/crate/sold, var/area/shuttle
  */
 /hook/sell_crate
+
+/**
+ * New ship.
+ * Called in ship_building.dm when a new ship is being built.
+ * Parameters: var/size_x, var/size_y, var/team
+ */
+/hook/construct_ship

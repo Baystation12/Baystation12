@@ -4,6 +4,7 @@
 	armor = list(melee = 75, bullet = 80, laser = 55,energy = 15, bomb = 70, bio = 40, rad = 60)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	item_flags = THICKMATERIAL
+	icon_state = "heavy"
 
 /obj/item/clothing/suit/armor/swat/battle/New()
 	..()
@@ -129,21 +130,24 @@
 			return W
 
 	equip(mob/living/carbon/human/H, var/rank, var/assignment)
-		spawn(0)
-			return ..(H, rank, assignment)
+		..()
+		spawn(10)
+			var/obj/item/organ/internal/stack/S = H.internal_organs_by_name[BP_STACK]
+			if(H && H.mind && H.mind.team && S)
+				S.team = H.mind.team
 
 /decl/hierarchy/outfit/job/space_battle/captain
 	name = OUTFIT_JOB_NAME("Space Commander")
 	glasses = /obj/item/clothing/glasses/sunglasses
 	suit = /obj/item/clothing/suit/storage/vest/nt/hos
 	backpack_contents = null
-	backpack = null
-	satchel_one = null
-	back = /obj/item/weapon/gun/projectile/pirate/battle
+	l_hand = /obj/item/weapon/gun/projectile/pirate/battle
 	belt = /obj/item/weapon/storage/belt/ammo_pouch
 	uniform = /obj/item/clothing/under/rank/security/battle/captain
 	head = /obj/item/clothing/head/dress/fleet/command/battle
+	mask = /obj/item/clothing/mask/smokable/cigarette/cigar/havana
 	job_type = "commander"
+
 
 /decl/hierarchy/outfit/job/space_battle/engineer
 	name = OUTFIT_JOB_NAME("Space Engineer")
@@ -182,10 +186,11 @@
 	backpack = null
 	satchel_one = null
 	backpack_contents = null
-	back = /obj/item/weapon/gun/launcher/crossbow
+	l_hand = /obj/item/weapon/gun/launcher/crossbow
 	mask = /obj/item/clothing/mask/gas/syndicate
 	l_pocket = /obj/item/weapon/tank/emergency/oxygen/double
 	job_type = "security"
+
 
 /decl/hierarchy/outfit/job/space_battle/pilot
 	name = "Space Pirate"

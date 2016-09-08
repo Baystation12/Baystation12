@@ -9,7 +9,7 @@
 	..()
 	spawn(-1)
 		airlock_program = new/datum/computer/file/embedded_program/airlock/docking(src)
-		docking_program = new/datum/computer/file/embedded_program/docking/airlock(src, airlock_program)
+		docking_program = new/datum/computer/file/embedded_program/docking/airlock(src, airlock_program, id_tag)
 		program = docking_program
 		if(docking_program.tag != id_tag)
 			docking_program.tag = id_tag // Hacks

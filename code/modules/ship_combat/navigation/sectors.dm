@@ -13,11 +13,17 @@
 	var/start_y			//overmap zlevel
 
 	var/known = 1		//shows up on nav computers automatically
+	var/team = 0
+
+	var/datum/fake_ship/fake_ship
+	var/fake = 0
 
 /obj/effect/overmap/New()
 	tag = "sector[z]"
 	if(ispath(landing_area))
 		landing_area = locate(landing_area)
+	if(fake)
+		fake_ship = new(src)
 	prepare_map()
 
 /obj/effect/overmap/sector

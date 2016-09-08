@@ -13,7 +13,7 @@
 /mob/living/carbon/human/proc/lethal_injection()
 	var/obj/item/organ/internal/stack/stack = internal_organs_by_name[BP_STACK]
 	if(stack)
-		vessel.add_reagent("cyanide", 25)
+		reagents.add_reagent("cyanide", 25)
 		for(var/obj/item/organ/O in head.contents)
 			if(O != src)
 				O.take_damage(rand(30,70))
