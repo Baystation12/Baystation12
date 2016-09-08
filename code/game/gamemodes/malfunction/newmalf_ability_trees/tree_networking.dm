@@ -107,11 +107,11 @@
 		if(prob(10))
 			user.hack_fails ++
 			announce_hack_failure(user, "quantum message relay")
-			log_ability_use(user, "elite encryption hack (CRITFAIL)")
+			log_ability_use(user, "elite encryption hack (CRITFAIL - title: [title])")
 			return
-		log_ability_use(user, "elite encryption hack (FAIL)")
+		log_ability_use(user, "elite encryption hack (FAIL - title: [title])")
 		return
-	log_ability_use(user, "elite encryption hack (SUCCESS)")
+	log_ability_use(user, "elite encryption hack (SUCCESS - title: [title])")
 	command_announcement.Announce(text, title)
 
 /datum/game_mode/malfunction/verb/elite_encryption_hack()
@@ -133,11 +133,11 @@
 		if(prob(20))
 			user.hack_fails ++
 			announce_hack_failure(user, "alert control system")
-			log_ability_use(user, "elite encryption hack (CRITFAIL)")
+			log_ability_use(user, "elite encryption hack (CRITFAIL - [alert_target])")
 			return
-		log_ability_use(user, "elite encryption hack (FAIL)")
+		log_ability_use(user, "elite encryption hack (FAIL - [alert_target])")
 		return
-	log_ability_use(user, "elite encryption hack (SUCCESS)")
+	log_ability_use(user, "elite encryption hack (SUCCESS - [alert_target])")
 	set_security_level(alert_target)
 
 

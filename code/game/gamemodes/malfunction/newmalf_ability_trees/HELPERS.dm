@@ -210,9 +210,7 @@
 /proc/log_ability_use(var/mob/living/silicon/ai/A, var/ability_name, var/atom/target = null, var/notify_admins = 1)
 	var/message
 	if(target)
-		message = text("\[[time_stamp()]\] [A] Used newmalf ability/function: [ability_name] on [target] ([target.x], [target.y], [target.z])")
+		message = text("used malf ability/function: [ability_name] on [target] ([target.x], [target.y], [target.z])")
 	else
-		message = text("\[[time_stamp()]\] [A] Used newmalf ability/function: [ability_name] (no target)")
-	A.attack_log += message
-	if(notify_admins)
-		log_and_message_admins(message)
+		message = text("used malf ability/function: [ability_name].")
+	admin_attack_log(A, null, message, null, message)
