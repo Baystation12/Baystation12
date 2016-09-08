@@ -254,6 +254,13 @@
 		for(var/obj/implant in implants)
 			implant.forceMove(owner)
 			
+			if(istype(implant, /obj/item/weapon/implant))
+				var/obj/item/weapon/implant/imp_device = implant
+				
+				// we can't use implanted() here since it's often interactive
+				imp_device.imp_in = owner
+				imp_device.implanted = 1
+			
 		for(var/obj/item/organ/external/organ in children)
 			organ.replaced(owner)
 
