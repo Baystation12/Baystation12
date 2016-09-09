@@ -141,22 +141,31 @@
 	return
 
 /obj/item/organ/external/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	switch(stage)
+	switch(open)
 		if(0)
 			if(istype(W,/obj/item/weapon/scalpel))
 				user.visible_message("<span class='danger'><b>[user]</b> cuts [src] open with [W]!</span>")
-				stage++
+				open++
 				return
 		if(1)
 			if(istype(W,/obj/item/weapon/retractor))
 				user.visible_message("<span class='danger'><b>[user]</b> cracks [src] open like an egg with [W]!</span>")
-				stage++
+				open++
 				return
 		if(2)
 			if(istype(W,/obj/item/weapon/hemostat))
-				if(contents.len)
-					var/obj/item/removing = pick(contents)
-					removing.loc = get_turf(user.loc)
+				var/list/organs = get_contents_recursive()
+				if(organs.len)
+					var/obj/item/removing = pick(organs)
+					var/obj/item/organ/external/current_child = removing.loc
+					
+					current_child.implants.Remove(removing)
+					current_child.internal_organs.Remove(removing)
+					
+					status |= ORGAN_CUT_AWAY
+
+					removing.forceMove(get_turf(user))
+					
 					if(!(user.l_hand && user.r_hand))
 						user.put_in_hands(removing)
 					user.visible_message("<span class='danger'><b>[user]</b> extracts [removing] from [src] with [W]!</span>")
@@ -164,6 +173,21 @@
 					user.visible_message("<span class='danger'><b>[user]</b> fishes around fruitlessly in [src] with [W].</span>")
 				return
 	..()
+	
+	
+/**
+ *  Get a list of contents of this organ and all the child organs
+ */
+/obj/item/organ/external/proc/get_contents_recursive()
+	var/list/all_items = list()
+	
+	all_items.Add(implants)
+	all_items.Add(internal_organs)
+	
+	for(var/obj/item/organ/external/child in children)
+		all_items.Add(child.get_contents_recursive())
+	
+	return all_items
 
 /obj/item/organ/external/proc/is_dislocated()
 	if(dislocated > 0)
@@ -219,13 +243,28 @@
 /obj/item/organ/external/replaced(var/mob/living/carbon/human/target)
 	owner = target
 	forceMove(owner)
+	
 	if(istype(owner))
 		owner.organs_by_name[organ_tag] = src
-		owner.organs |= src
-		for(var/obj/item/organ/organ in src)
-			organ.replaced(owner,src)
+		owner.organs |= src	
+		
+		for(var/obj/item/organ/organ in internal_organs)
+			organ.replaced(owner, src)
+				
+		for(var/obj/implant in implants)
+			implant.forceMove(owner)
+			
+			if(istype(implant, /obj/item/weapon/implant))
+				var/obj/item/weapon/implant/imp_device = implant
+				
+				// we can't use implanted() here since it's often interactive
+				imp_device.imp_in = owner
+				imp_device.implanted = 1
+			
+		for(var/obj/item/organ/external/organ in children)
+			organ.replaced(owner)
 
-	if(parent_organ)
+	if(!parent && parent_organ)
 		parent = owner.organs_by_name[src.parent_organ]
 		if(parent)
 			if(!parent.children)
@@ -1140,24 +1179,31 @@ Note that amputating the affected organ does in fact remove the infection from t
 		//large items and non-item objs fall to the floor, everything else stays
 		var/obj/item/I = implant
 		if(istype(I) && I.w_class < NORMAL_ITEM)
-			implant.loc = get_turf(victim.loc)
+			implant.forceMove(src)
+			
+			// let actual implants still inside know they're no longer implanted
+			if(istype(I, /obj/item/weapon/implant))
+				var/obj/item/weapon/implant/imp_device = I
+				imp_device.removed()
 		else
-			implant.loc = src
-	implants.Cut()
+			implants.Remove(implant)
+			implant.forceMove(get_turf(src))
 
 	// Attached organs also fly off.
 	if(!ignore_children)
 		for(var/obj/item/organ/external/O in children)
 			O.removed()
 			if(O)
-				O.loc = src
-				for(var/obj/item/I in O.contents)
-					I.loc = src
+				O.forceMove(src)
+				
+				// if we didn't lose the organ we still want it as a child
+				children += O
+				O.parent = src
 
 	// Grab all the internal giblets too.
 	for(var/obj/item/organ/organ in internal_organs)
-		organ.removed()
-		organ.loc = src
+		organ.removed(user, 0, 0)  // Organ stays inside and connected
+		organ.forceMove(src)
 
 	// Remove parent references
 	parent.children -= src
