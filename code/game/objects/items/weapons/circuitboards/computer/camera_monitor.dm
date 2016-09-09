@@ -12,7 +12,7 @@
 
 /obj/item/weapon/circuitboard/security/New()
 	..()
-	network = station_networks
+	network = using_map.station_networks.Copy()
 
 /obj/item/weapon/circuitboard/security/engineering
 	name = T_BOARD("engineering camera monitor")
@@ -26,7 +26,7 @@
 /obj/item/weapon/circuitboard/security/mining
 	name = T_BOARD("mining camera monitor")
 	build_path = /obj/machinery/computer/security/mining
-	network = list("MINE")
+	network = list(NETWORK_MINE)
 	req_access = list()
 
 /obj/item/weapon/circuitboard/security/research

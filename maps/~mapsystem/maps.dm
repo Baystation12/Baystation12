@@ -61,6 +61,31 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
+	var/list/station_networks = list(
+		NETWORK_CALYPSO,
+		NETWORK_CIVILIAN_EAST,
+		NETWORK_CIVILIAN_WEST,
+		NETWORK_COMMAND,
+		NETWORK_ENGINE,
+		NETWORK_ENGINEERING,
+		NETWORK_ENGINEERING_OUTPOST,
+		NETWORK_EXODUS,
+		NETWORK_EXPEDITION,
+		NETWORK_FIRST_DECK,
+		NETWORK_FOURTH_DECK,
+		NETWORK_MEDICAL,
+		NETWORK_MINE,
+		NETWORK_RESEARCH,
+		NETWORK_RESEARCH_OUTPOST,
+		NETWORK_ROBOTS,
+		NETWORK_POD,
+		NETWORK_PRISON,
+		NETWORK_SECOND_DECK,
+		NETWORK_SECURITY,
+		NETWORK_SUPPLY,
+		NETWORK_THIRD_DECK
+	) // List of camera networks available on this station
+
 	var/flags = 0
 	var/evac_controller_type = /datum/evacuation_controller
 	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
