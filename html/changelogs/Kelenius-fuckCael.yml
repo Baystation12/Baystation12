@@ -1,0 +1,60 @@
+################################
+# Example Changelog File
+#
+# Note: This file, and files beginning with ".", and files that don't end in ".yml" will not be read. If you change this file, you will look really dumb.
+#
+# Your changelog will be merged with a master changelog. (New stuff added only, and only on the date entry for the day it was merged.)
+# When it is, any changes listed below will disappear.
+#
+# Valid Prefixes: 
+#   bugfix
+#   wip (For works in progress)
+#   tweak
+#   soundadd
+#   sounddel
+#   rscadd (general adding of nice things)
+#   rscdel (general deleting of nice things)
+#   imageadd
+#   imagedel
+#   maptweak
+#   spellcheck (typo fixes)
+#   experiment
+#################################
+
+# Your name.  
+author: Kelenius
+
+# Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
+delete-after: True
+
+# Any changes you've made.  See valid prefix list above.
+# INDENT WITH TWO SPACES.  NOT TABS.  SPACES.
+# SCREW THIS UP AND IT WON'T WORK.
+# Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
+# Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
+changes: 
+  - rscadd: "Xenoarcheology code has been partially redone."
+  - tweak: "Pick set will now sort the picks inside it."
+  - tweak: "Removed useless random numbers from GPS coordinates in various places. I'm sure we have not lost the arcane knowledge of rounding 500 years into the future."
+  - tweak: "Picks renamed to show their excavation depths."
+  - tweak: "Suspension generator's power use lowered."
+  - tweak: "Suspension generator's different field types removed. By the way, remember that they can suspend any item and even mobs."
+  - tweak: "Archeology belts and pick sets can now hold small pickaxes. Pick sets still only have 7 slots. Brushes fit on your ears."
+  - tweak: "Empty rock drop rate reduced."
+  - tweak: "Empty rock renamed from 'rock' to 'small rock' so you can tell if you are clicking on a turf or an item when hovering over it."
+  - tweak: "Empty boulder spawn rate reduced."
+  - tweak: "Tape measuring is a bit faster."
+  - tweak: "Scanner now shows the lowest and the highest depth of the find (highest is depth + clearance) for easier calculations. Ideally, you need to hit exactly the lowest spot. Less ideally, hit anywhere between higest and lowest. Hit below lowest and you have a chance to break the find."
+  - tweak: "You can now use a brush to clear strange rocks. Welder uses less fuel for that than before."
+  - tweak: "Anomaly analyser's report made a bit easier to read."
+  - tweak: "Anomaly locater will now also locate normal finds."
+  - bugfix: "Gas masks will now correctly spawn as archeological finds."
+  - bugfix: "Digsites will now properly contain several (4-12) turfs in a 5x5 radius. Be careful when digging near your finds."
+  - bugfix: "Suspension generator will now correctly turn off (qdel issue)."
+  - bugfix: "Archeology overlays won't disappear when the icon is updated (e.g. when mining next to it)."
+  - bugfix: "Archeology overlays won't overlap each other and will properly disappear when you mine out a find."
+  - bugfix: "Some spawning oddities were fixed."
+  - bugfix: "Checks for whether you get a strange rock or a clean item were fixed (previously it always gave you clean item where it should have been rolling a random number)."
+  - bugfix: "Can no longer get rid of any item by putting it into evidence bag and bag into core sampler."
+  - bugfix: "CO2 generator effect now has a type."
+  - bugfix: "Phoron generator effect will now always generate phoron, not sometimes phoron and sometimes oxygen."
