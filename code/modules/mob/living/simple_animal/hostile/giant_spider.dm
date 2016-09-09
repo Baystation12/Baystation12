@@ -27,8 +27,9 @@
 	melee_damage_upper = 20
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
-	var/poison_per_bite = 5
-	var/poison_type = "toxin"
+	var/poison_per_bite = 4
+	var/poison_extra_chance = 5
+	var/poison_type = "venom"
 	faction = "spiders"
 	var/busy = 0
 	pass_flags = PASSTABLE
@@ -45,7 +46,8 @@
 	health = 40
 	melee_damage_lower = 5
 	melee_damage_upper = 10
-	poison_per_bite = 10
+	poison_per_bite = 4
+	poison_extra_chance = 10
 	var/atom/cocoon_target
 	poison_type = "stoxin"
 	var/fed = 0
@@ -60,7 +62,8 @@
 	health = 120
 	melee_damage_lower = 10
 	melee_damage_upper = 20
-	poison_per_bite = 5
+	poison_per_bite = 8
+	poison_extra_chance = 0
 	move_to_delay = 4
 
 /mob/living/simple_animal/hostile/giant_spider/New(var/location, var/atom/parent)
@@ -68,20 +71,20 @@
 	..()
 
 /mob/living/simple_animal/hostile/giant_spider/AttackingTarget()
-	var/target = ..()
-	if(isliving(target))
-		var/mob/living/L = target
+	. = ..()
+	if(isliving(.))
+		var/mob/living/L = .
 		if(L.reagents)
-			L.reagents.add_reagent("toxin", poison_per_bite)
-			if(prob(poison_per_bite))
-				L << "\red You feel a tiny prick."
+			L.reagents.add_reagent("venom", poison_per_bite)
+			if(prob(poison_extra_chance))
+				L << "<span class='warning'>You feel a tiny prick.</span>"
 				L.reagents.add_reagent(poison_type, 5)
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/AttackingTarget()
-	var/target = ..()
-	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
-		if(prob(poison_per_bite))
+	. = ..()
+	if(ishuman(.))
+		var/mob/living/carbon/human/H = .
+		if(prob(poison_extra_chance))
 			var/obj/item/organ/external/O = pick(H.organs)
 			if(!(O.robotic >= ORGAN_ROBOT))
 				var/eggs = PoolOrNew(/obj/effect/spider/eggcluster/, list(O, src))
