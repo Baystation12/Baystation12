@@ -1594,6 +1594,7 @@
 #include "code\modules\mob\observer\freelook\chunk.dm"
 #include "code\modules\mob\observer\freelook\eye.dm"
 #include "code\modules\mob\observer\freelook\life.dm"
+#include "code\modules\mob\observer\freelook\logging.dm"
 #include "code\modules\mob\observer\freelook\read_me.dm"
 #include "code\modules\mob\observer\freelook\update_triggers.dm"
 #include "code\modules\mob\observer\freelook\visualnet.dm"

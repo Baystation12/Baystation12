@@ -7,10 +7,13 @@
 	var/list/chunks = list()
 	var/list/sources = list()
 	var/chunk_type = /datum/chunk
+	var/list/valid_source_types
 
 /datum/visualnet/New()
 	..()
 	visual_nets += src
+	if(!valid_source_types)
+		valid_source_types = list()
 
 /datum/visualnet/Destroy()
 	visual_nets -= src
@@ -82,6 +85,9 @@
 		return
 	major_chunk_change(A)
 
+/datum/visualnet/proc/update_visibility_nocheck(atom/A)
+	update_visibility(A, FALSE)
+
 // Will check if an atom is on a viewable turf. Returns 1 if it is, otherwise returns 0.
 /datum/visualnet/proc/is_visible(var/atom/target)
 	// 0xf = 15
@@ -103,6 +109,9 @@
 	for_all_chunks_in_range(source, /datum/chunk/proc/visibility_changed, list())
 
 /datum/visualnet/proc/add_source(var/atom/source, var/update_visibility = TRUE, var/opacity_check = FALSE)
+	if(!(source && is_type_in_list(source, valid_source_types)))
+		log_visualnet("Was given an unhandled source", source)
+		return FALSE
 	if(source in sources)
 		return FALSE
 	sources += source
@@ -128,14 +137,8 @@
 	var/turf/old_turf = get_turf(old_loc)
 	var/turf/new_turf = get_turf(new_loc)
 
-	if(old_turf && new_turf)
-		var/old_x1 = max(0, old_turf.x - 8) & ~0xf
-		var/old_y1 = max(0, old_turf.y - 8) & ~0xf
-		var/new_x1 = max(0, new_turf.x - 8) & ~0xf
-		var/new_y1 = max(0, new_turf.y - 8) & ~0xf
-
-		if(old_x1 == new_x1 && old_y1 == new_y1)
-			return
+	if(old_turf == new_turf)
+		return
 
 	// A more proper way would be to figure out which chunks have gone out of range, and which have come into range
 	//  and only remove/add to those.
