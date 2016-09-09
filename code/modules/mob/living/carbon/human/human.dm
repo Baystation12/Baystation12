@@ -1486,3 +1486,6 @@
 			return 0
 		return check_organ.can_feel_pain()
 	return !(species.flags & NO_PAIN)
+
+/mob/living/carbon/human/get_adjusted_metabolism(metabolism)
+	return ..() * (species ? species.metabolism_mod : 1)
