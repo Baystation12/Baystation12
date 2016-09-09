@@ -114,7 +114,7 @@
 			message_admins("[key_name_admin(user)] opened fueltank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), leaking fuel. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>)")
 			log_game("[key_name(user)] opened fueltank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), leaking fuel.")
 			leak_fuel(amount_per_transfer_from_this)
-	if (istype(W,/obj/item/device/assembly_holder))
+	else if (istype(W,/obj/item/device/assembly_holder))
 		if (rig)
 			user << "<span class='warning'>There is another device in the way.</span>"
 			return ..()
@@ -135,6 +135,13 @@
 			test.Shift(NORTH,1)
 			test.Shift(EAST,6)
 			overlays += test
+
+	else if(isflamesource(W))
+		message_admins("[key_name_admin(user)] triggered a fueltank explosion with a [W].")
+		log_game("[key_name(user)] triggered a fueltank explosion with a [W].")
+		user.visible_message("<span class='danger'>\The [user] puts \the [W] to \the [src]!</span>", "<span class='danger'>You put your [W] to \the [src] and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.</span>")
+		src.explode()
+		return
 
 	return ..()
 
