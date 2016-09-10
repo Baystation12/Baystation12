@@ -24,19 +24,6 @@
 	color = "#CF3600"
 	strength = 5
 
-/datum/reagent/toxin/venom
-	name = "Venom"
-	id = "venom"
-	//If anyone has suggestions for a description, let me know.
-	reagent_state = LIQUID
-	color = "#CBCBB3"
-	strength = 8
-
-/datum/reagent/toxin/venom/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	if(prob(5))
-		M << "<span class='danger'>You feel a searing pain in your veins!</span>"
-
 /datum/reagent/toxin/amatoxin
 	name = "Amatoxin"
 	id = "amatoxin"
