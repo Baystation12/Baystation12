@@ -160,9 +160,6 @@ datum/hud/New(mob/owner)
 //	item_action_list = null // ?
 	mymob = null
 
-/datum/hud/proc/common_hud()
-    mymob.client.screen += mymob.client.void
-
 /datum/hud/proc/hidden_inventory_update()
 	if(!mymob) return
 	if(ishuman(mymob))
