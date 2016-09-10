@@ -261,7 +261,7 @@
 				hidden = C
 				break
 
-		if(hidden)
+		if(hidden && user != src)
 			if(E.status & ORGAN_BLEEDING && !(hidden.item_flags & THICKMATERIAL)) //not through a spacesuit
 				wound_flavor_text["[hidden.name]"] = "[T.He] [T.has] blood soaking through [hidden]!<br>"
 		else
