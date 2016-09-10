@@ -219,8 +219,10 @@
 			return
 		if(default_part_replacement(user, W))
 			return
-	if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
-		if(!check_access(W))
+			
+	var/id = W.GetIdCard()
+	if(id)
+		if(!check_access(id))
 			user << "<span class='warning'>Access Denied.</span>"
 			return
 		if((!locked) || (isnull(occupant)))

@@ -66,8 +66,8 @@
 			src.MouseDrop_T(W:affecting, user)      //act like they were dragged onto the closet
 		user.drop_item()
 		if (W) W.forceMove(src.loc)
-	else if(W.GetID())
-		var/obj/item/weapon/card/id/I = W.GetID()
+	else if(W.GetIdCard())
+		var/obj/item/weapon/card/id/I = W.GetIdCard()
 
 		if(src.broken)
 			user << "<span class='warning'>It appears to be broken.</span>"

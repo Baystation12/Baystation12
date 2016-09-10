@@ -292,7 +292,7 @@
 		var/criminal = "None"
 
 		if(wear_id)
-			var/obj/item/weapon/card/id/I = wear_id.GetID()
+			var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
 			if(I)
 				perpname = I.registered_name
 			else
