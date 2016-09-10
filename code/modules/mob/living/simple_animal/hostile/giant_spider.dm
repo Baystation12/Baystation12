@@ -27,7 +27,7 @@
 	melee_damage_upper = 20
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
-	var/poison_per_bite = 4
+	var/poison_per_bite = 3
 	var/poison_extra_chance = 5
 	var/poison_type = "venom"
 	faction = "spiders"
@@ -46,7 +46,7 @@
 	health = 40
 	melee_damage_lower = 5
 	melee_damage_upper = 10
-	poison_per_bite = 4
+	poison_per_bite = 3
 	poison_extra_chance = 10
 	var/atom/cocoon_target
 	poison_type = "stoxin"
@@ -62,7 +62,7 @@
 	health = 120
 	melee_damage_lower = 10
 	melee_damage_upper = 20
-	poison_per_bite = 8
+	poison_per_bite = 6
 	poison_extra_chance = 0
 	move_to_delay = 4
 
