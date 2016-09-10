@@ -33,6 +33,5 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: "Giant Spiders have been given new, stronger venom."
-  - tweak: "Nurse spiders now inject less venom, while hunter spiders inject more."
+  - tweak: "Slightly decreased how much toxin nurse and guard spiders inject, while increasing it for hunters."
   - bugfix: "Nurse spiders should now correctly have a chance to implant eggs on attack."
