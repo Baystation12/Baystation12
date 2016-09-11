@@ -819,7 +819,7 @@
 				feedback_inc("ban_perma",1)
 				DB_ban_record(BANTYPE_PERMA, M, -1, reason)
 
-				qdel(M.client)
+				del(M.client)
 				//qdel(M)
 			if("Cancel")
 				return
