@@ -13,7 +13,7 @@
 	user << "<span class='warning'>Your [src] flashes a red light as it fails to analyze \the [A].</span>"
 	return 0
 
-/proc/atmosanalyzer_scan(var/obj/target, var/datum/gas_mixture/mixture, var/mob/user)
+/proc/atmosanalyzer_scan(var/atom/target, var/datum/gas_mixture/mixture, var/mob/user)
 	var/pressure = mixture.return_pressure()
 	var/total_moles = mixture.total_moles
 
@@ -28,8 +28,11 @@
 
 	return results
 
-/obj/proc/atmosanalyze(var/mob/user)
+/atom/proc/atmosanalyze(var/mob/user)
 	return
+
+/turf/atmosanalyze(var/mob/user)
+	return atmosanalyzer_scan(src, air, user)
 
 /obj/item/weapon/tank/atmosanalyze(var/mob/user)
 	return atmosanalyzer_scan(src, src.air_contents, user)
