@@ -1,0 +1,5 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - rscadd: "All staff should now be able to access the Secrets menu. Each category handles its own permission checks.."
+  - rscadd: "Administrators and moderators can now review admin PMs and attack logs from the Secrets menu, see the new Investigation category."

@@ -2,5 +2,5 @@
 	var/timestamp
 	var/data
 
-/datum/repository/New()
+/repository/New()
 	return

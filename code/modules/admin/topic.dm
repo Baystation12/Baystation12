@@ -1148,8 +1148,11 @@
 		if(!check_rights(R_MENTOR|R_MOD|R_ADMIN))	return
 
 		var/mob/M = locate(href_list["adminplayerobservejump"])
-
 		var/client/C = usr.client
+		if(!M)
+			C << "<span class='warning'>Unable to locate mob.</span>"
+			return
+
 		if(!isghost(usr))	C.admin_ghost()
 		sleep(2)
 		C.jumptomob(M)
@@ -1159,8 +1162,11 @@
 			return
 
 		var/mob/M = locate(href_list["adminplayerobservefollow"])
-
 		var/client/C = usr.client
+		if(!M)
+			C << "<span class='warning'>Unable to locate mob.</span>"
+			return
+
 		if(!isobserver(usr))	C.admin_ghost()
 		var/mob/observer/ghost/G = C.mob
 		sleep(2)
