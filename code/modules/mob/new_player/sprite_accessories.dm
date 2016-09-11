@@ -89,7 +89,7 @@
 	
 	resomi_sunburst
 		name = "Resomi Sunburst" // kill me
-		icon_state = "resomi_burst"
+		icon_state = "resomi_burst_short"
 		species_allowed = list("Resomi")
 
 	resomi_mohawk
