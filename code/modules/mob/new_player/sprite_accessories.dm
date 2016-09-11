@@ -75,6 +75,27 @@
 		name = "Resomi Spiky"
 		icon_state = "resomi_spiky"
 		species_allowed = list("Resomi")
+		
+
+	resomi_hedgehog
+		name = "Resomi Hedgehog"
+		icon_state = "resomi_hedge"
+		species_allowed = list("Resomi")
+
+	resomi_long
+		name = "Resomi Unpruned"
+		icon_state = "resomi_long"
+		species_allowed = list("Resomi")
+	
+	resomi_sunburst
+		name = "Resomi Sunburst" // kill me
+		icon_state = "resomi_burst"
+		species_allowed = list("Resomi")
+
+	resomi_mohawk
+		name = "Resomi Mohawk"
+		icon_state = "resomi_mohawk"
+		species_allowed = list("Resomi")
 
 	cut
 		name = "Cut Hair"
