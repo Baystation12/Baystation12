@@ -500,16 +500,6 @@ datum/objective/steal
 						found_amount += (target_name=="28 moles of phoron (full tank)" ? (I:air_contents:gas["phoron"]) : (I:amount))
 				return found_amount>=target_amount
 
-			if("50 coins (in bag)")
-				var/obj/item/weapon/moneybag/B = locate() in all_items
-
-				if(B)
-					var/target = text2num(target_name)
-					var/found_amount = 0.0
-					for(var/obj/item/weapon/coin/C in B)
-						found_amount++
-					return found_amount>=target
-
 			if("a functional AI")
 
 				for(var/obj/item/device/aicard/C in all_items) //Check for ai card
