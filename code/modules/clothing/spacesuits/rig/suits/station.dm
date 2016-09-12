@@ -59,7 +59,7 @@
 	req_one_access = list()
 
 /obj/item/clothing/head/helmet/space/rig/industrial
-	camera_networks = list(NETWORK_MINE)
+	camera = /obj/machinery/camera/network/mining
 	species_restricted = list("Human")
 
 /obj/item/clothing/suit/space/rig/industrial
@@ -100,10 +100,10 @@
 
 	req_access = list()
 	req_one_access = list()
-	
+
 /obj/item/clothing/head/helmet/space/rig/eva
 	light_overlay = "helmet_light_dual"
-	camera_networks = list(NETWORK_ENGINEERING)
+	camera = /obj/machinery/camera/network/engineering
 	species_restricted = list("Human")
 
 /obj/item/clothing/suit/space/rig/eva
@@ -159,8 +159,8 @@
 		)
 
 /obj/item/clothing/head/helmet/space/rig/ce
-	camera_networks = list(NETWORK_ENGINEERING)
-	
+	camera = /obj/machinery/camera/network/engineering
+
 /obj/item/clothing/suit/space/rig/ce
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
@@ -184,10 +184,10 @@
 
 	req_access = list()
 	req_one_access = list()
-	
+
 /obj/item/clothing/head/helmet/space/rig/hazmat
 	light_overlay = "helmet_light_dual"
-	camera_networks = list(NETWORK_RESEARCH)
+	camera = /obj/machinery/camera/network/research
 	species_restricted = list("Human")
 
 /obj/item/clothing/suit/space/rig/hazmat
@@ -228,9 +228,9 @@
 
 	req_access = list()
 	req_one_access = list()
-	
+
 /obj/item/clothing/head/helmet/space/rig/medical
-	camera_networks = list(NETWORK_MEDICAL)
+	camera = /obj/machinery/camera/network/medbay
 	species_restricted = list("Human")
 
 /obj/item/clothing/suit/space/rig/medical
@@ -272,10 +272,10 @@
 
 	req_access = list()
 	req_one_access = list()
-	
+
 /obj/item/clothing/head/helmet/space/rig/hazard
 	light_overlay = "helmet_light_dual"
-	camera_networks = list(NETWORK_SECURITY)
+	camera = /obj/machinery/camera/network/security
 	species_restricted = list("Human")
 
 /obj/item/clothing/suit/space/rig/hazard

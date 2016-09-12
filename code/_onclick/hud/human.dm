@@ -336,8 +336,6 @@
 	mymob.client.screen += src.adding + src.hotkeybuttons
 	inventory_shown = 0
 
-	common_hud()
-
 /mob/living/carbon/human/verb/toggle_hotkey_verbs()
 	set category = "OOC"
 	set name = "Toggle hotkey buttons"

@@ -286,7 +286,14 @@ var/list/organ_cache = list()
 /obj/item/organ/external/cut_away(var/mob/living/user)
 	removed(user)
 
-/obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1)
+/**
+ *  Remove an organ
+ * 
+ *  drop_organ - if true, organ will be dropped at the loc of its former owner
+ *  detach - if true, organ will be detached from parent. Keep false for organs 
+ *           removed together with parent, as with an amputation.
+ */
+/obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
 
 	if(!istype(owner))
 		return
@@ -296,10 +303,11 @@ var/list/organ_cache = list()
 	owner.internal_organs_by_name -= null
 	owner.internal_organs -= src
 
-	var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
-	if(affected) 
-		affected.internal_organs -= src
-		status |= ORGAN_CUT_AWAY
+	if(detach)
+		var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
+		if(affected) 
+			affected.internal_organs -= src
+			status |= ORGAN_CUT_AWAY
 
 	if(drop_organ)
 		dropInto(owner.loc)

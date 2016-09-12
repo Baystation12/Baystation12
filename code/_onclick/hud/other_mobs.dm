@@ -32,9 +32,7 @@
 	blobhealthdisplay.layer = SCREEN_LAYER
 
 	mymob.client.screen = list()
-
 	mymob.client.screen += list(blobpwrdisplay, blobhealthdisplay)
-	common_hud()
 
 /mob/living/carbon/slime/instantiate_hud(var/datum/hud/HUD)
 	HUD.slime_hud()
@@ -104,9 +102,6 @@
 
 	mymob.client.screen = list()
 	mymob.client.screen += src.adding
-	common_hud()
-
-	return
 
 /mob/living/simple_animal/construct/instantiate_hud(var/datum/hud/HUD)
 	HUD.construct_hud()
@@ -154,6 +149,4 @@
 		mymob.purged.screen_loc = ui_construct_purge
 
 	mymob.client.screen = list()
-
 	mymob.client.screen += list(mymob.fire, mymob.healths, mymob.pullin, mymob.zone_sel, mymob.purged)
-	common_hud()

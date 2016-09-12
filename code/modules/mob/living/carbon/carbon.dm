@@ -476,3 +476,6 @@
 	if(isSynthetic())
 		return 0
 	return !(species.flags & NO_PAIN)
+
+/mob/living/carbon/proc/get_adjusted_metabolism(metabolism)
+	return metabolism
