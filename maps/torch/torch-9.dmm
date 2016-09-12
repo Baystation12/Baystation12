@@ -388,10 +388,10 @@
 "hx" = (/obj/item/weapon/pickaxe/plasmacutter,/obj/structure/cable/orange{tag = "icon-1-2 (EAST)"; icon_state = "1-2"; dir = 4},/turf/simulated/floor/tiled/steel/airless,/area/outpost/abandoned)
 "hy" = (/obj/machinery/power/solar_control/autostart,/obj/structure/cable/orange{tag = "icon-0-4"; icon_state = "0-4"},/obj/structure/cable/orange{tag = "icon-1-2 (EAST)"; icon_state = "1-2"; dir = 4},/turf/simulated/floor/tiled/steel/airless,/area/outpost/abandoned)
 "hz" = (/obj/structure/cable/orange{tag = "icon-1-2 (EAST)"; icon_state = "1-2"; dir = 4},/turf/simulated/wall/titanium,/area/outpost/abandoned)
-"hA" = (/obj/structure/cable/orange{tag = "icon-1-2 (EAST)"; icon_state = "1-2"; dir = 4},/turf/unsimulated/mask,/area/mine/unexplored)
-"hB" = (/obj/structure/cable/orange{tag = "icon-1-4 (EAST)"; icon_state = "1-4"; dir = 4},/obj/structure/cable/orange{tag = "icon-1-2 (EAST)"; icon_state = "1-2"; dir = 4},/turf/unsimulated/mask,/area/mine/unexplored)
-"hC" = (/obj/structure/cable/orange{tag = "icon-1-2 (EAST)"; icon_state = "1-2"; dir = 4},/obj/structure/cable/orange{tag = "icon-1-4 (EAST)"; icon_state = "1-4"; dir = 4},/turf/unsimulated/mask,/area/mine/unexplored)
-"hD" = (/obj/structure/cable/orange{tag = "icon-1-4 (EAST)"; icon_state = "1-4"; dir = 4},/turf/unsimulated/mask,/area/mine/unexplored)
+"hA" = (/obj/structure/cable/orange{tag = "icon-1-2 (EAST)"; icon_state = "1-2"; dir = 4},/turf/unsimulated/mask,/area/outpost/abandoned)
+"hB" = (/obj/structure/cable/orange{tag = "icon-1-4 (EAST)"; icon_state = "1-4"; dir = 4},/obj/structure/cable/orange{tag = "icon-1-2 (EAST)"; icon_state = "1-2"; dir = 4},/turf/unsimulated/mask,/area/outpost/abandoned)
+"hC" = (/obj/structure/cable/orange{tag = "icon-1-2 (EAST)"; icon_state = "1-2"; dir = 4},/obj/structure/cable/orange{tag = "icon-1-4 (EAST)"; icon_state = "1-4"; dir = 4},/turf/unsimulated/mask,/area/outpost/abandoned)
+"hD" = (/obj/structure/cable/orange{tag = "icon-1-4 (EAST)"; icon_state = "1-4"; dir = 4},/turf/unsimulated/mask,/area/outpost/abandoned)
 "hE" = (/obj/structure/table/rack,/obj/random/tool,/turf/simulated/floor/plating,/area/outpost/abandoned)
 "hF" = (/obj/random/junk,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/liquid_fuel,/turf/simulated/floor/plating,/area/outpost/abandoned)
 "hG" = (/obj/structure/table/reinforced,/obj/random/material,/obj/effect/decal/cleanable/liquid_fuel,/turf/simulated/floor/plating,/area/outpost/abandoned)
@@ -658,3 +658,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

@@ -17,6 +17,7 @@
 #include "code\stylesheet.dm"
 #include "code\world.dm"
 #include "code\__datastructures\priority_queue.dm"
+#include "code\__datastructures\stack.dm"
 #include "code\__defines\_compile_options.dm"
 #include "code\__defines\admin.dm"
 #include "code\__defines\appearance.dm"
@@ -2117,6 +2118,7 @@
 #include "code\modules\xgm\xgm_gas_data.dm"
 #include "code\modules\xgm\xgm_gas_mixture.dm"
 #include "code\unit_tests\alt_appearances_test.dm"
+#include "code\unit_tests\area_tests.dm"
 #include "code\unit_tests\equipment_tests.dm"
 #include "code\unit_tests\extension_tests.dm"
 #include "code\unit_tests\food_tests.dm"
@@ -2157,5 +2159,6 @@
 #include "maps\overmap_example\overmap_example_define.dm"
 #include "maps\torch\torch_define.dm"
 #include "maps\~mapsystem\maps.dm"
+#include "maps\~mapsystem\maps_unit_testing.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE

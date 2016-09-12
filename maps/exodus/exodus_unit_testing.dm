@@ -1,6 +1,6 @@
 /datum/map/exodus
 	// Unit test exemptions
-	exempt_areas = list(
+	apc_test_exempt_areas = list(
 		/area/AIsattele = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/construction = NO_SCRUBBER|NO_VENT,
 		/area/constructionsite = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -22,6 +22,7 @@
 		/area/maintenance/incinerator = NO_SCRUBBER,
 		/area/maintenance/foresolar = NO_SCRUBBER,
 		/area/maintenance/portsolar = NO_SCRUBBER,
+		/area/maintenance/research_port = 0,
 		/area/maintenance/research_starboard = NO_SCRUBBER,
 		/area/maintenance/starboardsolar = NO_SCRUBBER,
 		/area/maintenance/substation/command = 0,
@@ -42,3 +43,13 @@
 		/area/supply = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/syndicate_station = NO_SCRUBBER|NO_VENT|NO_APC,
 	)
+
+	area_coherency_test_exempt_areas = list(
+			/area/space,
+			/area/mine/explored,
+			/area/mine/unexplored,
+			/area/centcom/control,
+			/area/engineering/atmos,
+			/area/constructionsite,
+			/area/constructionsite/maintenance,
+			/area/solar/constructionsite)

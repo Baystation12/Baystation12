@@ -39,11 +39,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                               //That doesn't mean we have to include them with the rest of the jobs though, especially for map specific ones.
 	                               //Also including them lets us override already created jobs, letting us keep the datums to a minimum mostly.
 	                               //This is probably a lot longer explanation than it needs to be.
-	// Unit test vars
-	var/list/exempt_areas = list()
-	var/const/NO_APC = 1
-	var/const/NO_VENT = 2
-	var/const/NO_SCRUBBER = 4
 
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock
