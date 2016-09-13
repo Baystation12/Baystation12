@@ -12,8 +12,6 @@
 			C.energy_fail(rand(30 * severity,60 * severity))
 
 /proc/power_restore(var/announce = 1)
-	var/list/skipped_areas = list(/area/turret_protected/ai)
-
 	if(announce)
 		command_announcement.Announce("Power has been restored to [station_name()]. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
 	for(var/obj/machinery/power/apc/C in machines)
@@ -21,9 +19,6 @@
 		if(C.cell)
 			C.cell.charge = C.cell.maxcharge
 	for(var/obj/machinery/power/smes/S in machines)
-		var/area/current_area = get_area(S)
-		if(current_area.type in skipped_areas)
-			continue
 		S.failure_timer = 0
 		S.charge = S.capacity
 		S.update_icon()

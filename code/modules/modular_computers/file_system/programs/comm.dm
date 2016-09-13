@@ -336,10 +336,6 @@ var/last_message_id = 0
             return 1
     return 0
 
-/proc/enable_prison_shuttle(var/mob/user)
-	for(var/obj/machinery/computer/prison_shuttle/PS in machines)
-		PS.allowedtocall = !(PS.allowedtocall)
-
 /proc/call_shuttle_proc(var/mob/user, var/emergency)
 	if (!ticker || !evacuation_controller)
 		return

@@ -23,7 +23,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map
 	var/name = "Unnamed Map"
 	var/full_name = "Unnamed Map"
-	proc/setup_map()
 	var/path
 
 	var/list/station_levels = list() // Z-levels the station exists on
@@ -67,10 +66,13 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(!allowed_jobs)
 		allowed_jobs = subtypesof(/datum/job)
 
-// Used to apply various post-compile procedural effects to the map.
+/datum/map/proc/setup_map()
+	return
+
 /datum/map/proc/perform_map_generation()
 	return
 
+// Used to apply various post-compile procedural effects to the map.
 /datum/map/proc/refresh_mining_turfs()
 
 	set background = 1

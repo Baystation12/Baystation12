@@ -25,11 +25,6 @@ var/list/mechtoys = list(
 	name = "supply manifest"
 	var/is_copy = 1
 
-/area/supply/dock
-	name = "Supply Shuttle"
-	icon_state = "shuttle3"
-	requires_power = 0
-
 /obj/structure/plasticflaps //HOW DO YOU CALL THOSE THINGS ANYWAY
 	name = "\improper plastic flaps"
 	desc = "Completely impassable - or are they?"

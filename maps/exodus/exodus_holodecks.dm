@@ -39,7 +39,6 @@
 		"theatre"          = new/datum/holodeck_program(/area/holodeck/source_theatre),
 		"meetinghall"      = new/datum/holodeck_program(/area/holodeck/source_meetinghall),
 		"courtroom"        = new/datum/holodeck_program(/area/holodeck/source_courtroom, list('sound/music/traitor.ogg')),
-		"burntest"         = new/datum/holodeck_program(/area/holodeck/source_burntest, list()),
 		"wildlifecarp"     = new/datum/holodeck_program(/area/holodeck/source_wildlife, list()),
 		"turnoff"          = new/datum/holodeck_program(/area/holodeck/source_plating, list())
 	)

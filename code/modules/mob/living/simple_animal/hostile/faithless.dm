@@ -53,7 +53,3 @@
 
 /mob/living/simple_animal/hostile/faithless/cult/cultify()
 	return
-
-/mob/living/simple_animal/hostile/faithless/cult/Life()
-	..()
-	check_horde()
