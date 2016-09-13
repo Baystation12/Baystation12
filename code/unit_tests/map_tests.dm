@@ -61,10 +61,10 @@ datum/unit_test/apc_area_test/start_test()
 
 datum/unit_test/apc_area_test/proc/get_exemptions(var/area)
 	// We assume deeper types come last
-	for(var/i = using_map.exempt_areas.len; i>0; i--)
-		var/exempt_type = using_map.exempt_areas[i]
+	for(var/i = using_map.apc_test_exempt_areas.len; i>0; i--)
+		var/exempt_type = using_map.apc_test_exempt_areas[i]
 		if(istype(area, exempt_type))
-			return using_map.exempt_areas[exempt_type]
+			return using_map.apc_test_exempt_areas[exempt_type]
 
 //=======================================================================================
 

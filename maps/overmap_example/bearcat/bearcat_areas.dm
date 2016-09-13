@@ -2,8 +2,14 @@
 	name = "\improper Generic Ship"
 
 /area/ship/scrap/crew
-	name = "\improper Crew Compartemnts"
+	name = "\improper Crew Compartements"
 	icon_state = "hallC"
+
+/area/ship/scrap/crew/hallway/port
+	name = "\improper Crew Hallway - Port"
+
+/area/ship/scrap/crew/hallway/starboard
+	name = "\improper Crew Hallway - Starboard"
 
 /area/ship/scrap/crew/kitchen
 	name = "\improper Galley"
@@ -69,8 +75,15 @@
 	icon_state = "engine_smes"
 
 /area/ship/scrap/maintenance/engine
-	name = "\improper Engine Compartments"
-	icon_state = "engine"
+
+/area/ship/scrap/maintenance/engine/aft
+	name = "\improper Engine Compartment - Aft"
+
+/area/ship/scrap/maintenance/engine/port
+	name = "\improper Engine Compartment - Port"
+
+/area/ship/scrap/maintenance/engine/starboard
+	name = "\improper Engine Compartments - Starboard"
 
 /area/ship/scrap/maintenance/engine/lower
 	name = "\improper Lower Engine Compartments"

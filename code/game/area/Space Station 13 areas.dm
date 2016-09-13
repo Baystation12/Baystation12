@@ -374,6 +374,9 @@ area/space/atmosalert()
 
 /area/syndicate_mothership/ninja
 	name = "\improper Ninja Base"
+	
+/area/syndicate_mothership/raider_base
+	name = "\improper Raider Base"
 
 //EXTRA
 
