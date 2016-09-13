@@ -84,9 +84,6 @@
 	//src.update_icon()
 	src.updateDialog()
 
-/obj/machinery/portable_atmospherics/powered/scrubber/return_air()
-	return air_contents
-
 /obj/machinery/portable_atmospherics/powered/scrubber/attack_ai(var/mob/user)
 	src.add_hiddenprint(user)
 	return src.attack_hand(user)
