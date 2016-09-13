@@ -245,11 +245,12 @@
 		var/list/organ_data = species.has_limbs[organ_tag]
 		var/organ_descriptor = organ_data["descriptor"]
 		var/obj/item/organ/external/E = organs_by_name[organ_tag]
-		wound_flavor_text["[E.name]"] = ""
 
 		if(!E)
 			wound_flavor_text["[organ_descriptor]"] = "<b>[T.He] [T.is] missing [T.his] [organ_descriptor].</b>\n"
 			continue
+
+		wound_flavor_text["[E.name]"] = ""
 
 		if(E.applied_pressure == src)
 			applying_pressure = "<span class='info'>[T.He] is applying pressure to [T.his] [E.name].</span><br>"
