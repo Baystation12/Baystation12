@@ -61,5 +61,32 @@
 /proc/is_station_area(var/area/A)
 	. = isStationLevel(A.z)
 
-/proc/is_not_space(var/area/A)
+/proc/is_contact_area(var/area/A)
+	. = isContactLevel(A.z)
+
+/proc/is_player_area(var/area/A)
+	. = isPlayerLevel(A.z)
+
+/proc/is_not_space_area(var/area/A)
 	. = !istype(A,/area/space)
+
+/proc/is_not_shuttle_area(var/area/A)
+	. = !istype(A,/area/shuttle)
+
+/proc/is_area_with_turf(var/area/A)
+	. = isnum(A.x)
+
+/proc/is_area_without_turf(var/area/A)
+	. = !is_area_with_turf(A)
+
+/var/list/is_station_but_not_space_or_shuttle_area = list(/proc/is_station_area, /proc/is_not_space_area, /proc/is_not_shuttle_area)
+
+/var/list/is_contact_but_not_space_or_shuttle_area = list(/proc/is_contact_area, /proc/is_not_space_area, /proc/is_not_shuttle_area)
+
+/var/list/is_player_but_not_space_or_shuttle_area = list(/proc/is_player_area, /proc/is_not_space_area, /proc/is_not_shuttle_area)
+
+
+/*
+	Misc Helpers
+*/
+#define teleportlocs area_repository.get_areas_by_name(is_player_but_not_space_or_shuttle_area)
