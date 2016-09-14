@@ -503,7 +503,7 @@ var/global/datum/controller/occupations/job_master
 			var/equipped = H.equip_to_slot_or_del(new /obj/item/clothing/glasses/regular(H), slot_glasses)
 			if(equipped != 1)
 				var/obj/item/clothing/glasses/G = H.glasses
-				G.prescription = 7
+				G.prescription = 1
 
 		BITSET(H.hud_updateflag, ID_HUD)
 		BITSET(H.hud_updateflag, IMPLOYAL_HUD)
@@ -592,7 +592,7 @@ var/global/datum/controller/occupations/job_master
 		if(!(C.prefs.spawnpoint in M.allowed_spawns))
 			if(H)
 				H << "Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead."
-				H.forceMove(pick(joinlatecryo))//This for torch really
+				H.forceMove(pick(latejoin_cryo))//This for torch really
 //			return "has arrived on the station"
 
 	if(spawnpos && istype(spawnpos))

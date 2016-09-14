@@ -56,13 +56,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
-<<<<<<< HEAD
 	var/allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Cyborg Storage")
-=======
 	var/flags = 0
 	var/evac_controller_type = /datum/evacuation_controller
 	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
->>>>>>> dd5656613b4778940e028aefb5907f885cebccd6
+
 
 /datum/map/New()
 	..()
