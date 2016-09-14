@@ -24,6 +24,9 @@
 
 /obj/machinery/camera/network/ert
 	network = list(NETWORK_ERT)
+	
+/obj/machinery/camera/network/mercenary
+	network = list(NETWORK_MERCENARY)
 
 /obj/machinery/camera/network/exodus
 	network = list(NETWORK_EXODUS)

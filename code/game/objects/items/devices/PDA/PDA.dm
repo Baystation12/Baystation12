@@ -171,6 +171,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	owner = "John Doe"
 	hidden = 1
 
+/obj/item/device/pda/ninja
+	icon_state = "pda-syn"
+	name = "Stealth PDA"
+	owner = "John Doe"
+	hidden = 1
+
 /obj/item/device/pda/chaplain
 	icon_state = "pda-holy"
 	ttone = "holy"
@@ -338,7 +344,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	else
 		return ..()
 
-/obj/item/device/pda/GetID()
+/obj/item/device/pda/GetIdCard()
 	return id
 
 /obj/item/device/pda/MouseDrop(obj/over_object as obj, src_location, over_location)

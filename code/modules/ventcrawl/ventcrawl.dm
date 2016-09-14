@@ -18,7 +18,15 @@ var/list/ventcrawl_machinery = list(
 /mob/var/next_play_vent = 0
 
 /mob/living/proc/can_ventcrawl()
-	return 0
+	if(!client)
+		return FALSE
+	if(!(/mob/living/proc/ventcrawl in verbs))
+		to_chat(src, "<span class='warning'>You don't possess the ability to ventcrawl!</span>")
+		return FALSE
+	if(incapacitated())
+		to_chat(src, "<span class='warning'>You cannot ventcrawl in your current state!</span>")
+		return FALSE
+	return ventcrawl_carry()
 
 /mob/living/Login()
 	. = ..()
@@ -29,9 +37,9 @@ var/list/ventcrawl_machinery = list(
 
 /mob/living/carbon/slime/can_ventcrawl()
 	if(Victim)
-		src << "<span class='warning'>You cannot ventcrawl while feeding.</span>"
-		return 0
-	return 1
+		to_chat(src, "<span class='warning'>You cannot ventcrawl while feeding.</span>")
+		return FALSE
+	. = ..()
 
 /mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	for(var/type in can_enter_vent_with)
@@ -55,20 +63,17 @@ var/list/ventcrawl_machinery = list(
 	return 0
 
 /mob/living/proc/ventcrawl_carry()
-	for(var/atom/A in src.contents)
+	for(var/atom/A in contents)
 		if(!is_allowed_vent_crawl_item(A))
-			src << "<span class='warning'>You can't be carrying that when vent crawling!</span>"
-			return 0
-	return 1
+			to_chat(src, "<span class='warning'>You can't carry \the [A] while ventcrawling!</span>")
+			return FALSE
+	return TRUE
 
 /mob/living/AltClickOn(var/atom/A)
-	if(is_type_in_list(A,ventcrawl_machinery) && src.can_ventcrawl())
-		src.handle_ventcrawl(A)
+	if(is_type_in_list(A,ventcrawl_machinery))
+		handle_ventcrawl(A)
 		return 1
 	return ..()
-
-/mob/living/carbon/human/can_ventcrawl()
-	return issmall(src)
 
 /mob/proc/start_ventcrawl()
 	var/atom/pipe
@@ -86,104 +91,73 @@ var/list/ventcrawl_machinery = list(
 	if(canmove && pipe)
 		return pipe
 
-/mob/living/carbon/slime/can_ventcrawl()
-	return 1
-
-/mob/living/simple_animal/borer/can_ventcrawl()
-	return 1
-
-/mob/living/simple_animal/borer/ventcrawl_carry()
-	return 1
-
-/mob/living/simple_animal/mouse/can_ventcrawl()
-	return 1
-
-/mob/living/simple_animal/spiderbot/can_ventcrawl()
-	return 1
-
-/mob/living/carbon/alien/can_ventcrawl()
-	return 1
-
 /mob/living/carbon/alien/ventcrawl_carry()
 	return 1
 
 /mob/living/var/ventcrawl_layer = 3
 
 /mob/living/proc/handle_ventcrawl(var/atom/clicked_on)
+	if(!can_ventcrawl())
+		return
 
-	if(!stat)
-		if(!lying)
+	var/obj/machinery/atmospherics/unary/vent_found
+	if(clicked_on && Adjacent(clicked_on))
+		vent_found = clicked_on
+		if(!istype(vent_found) || !vent_found.can_crawl_through())
+			vent_found = null
 
-			var/obj/machinery/atmospherics/unary/vent_found
+	if(!vent_found)
+		for(var/obj/machinery/atmospherics/machine in range(1,src))
+			if(is_type_in_list(machine, ventcrawl_machinery))
+				vent_found = machine
 
-			if(clicked_on && Adjacent(clicked_on))
-				vent_found = clicked_on
-				if(!istype(vent_found) || !vent_found.can_crawl_through())
-					vent_found = null
-
-			if(!vent_found)
-				for(var/obj/machinery/atmospherics/machine in range(1,src))
-					if(is_type_in_list(machine, ventcrawl_machinery))
-						vent_found = machine
-
-					if(!vent_found || !vent_found.can_crawl_through())
-						vent_found = null
-
-					if(vent_found)
-						break
+			if(!vent_found || !vent_found.can_crawl_through())
+				vent_found = null
 
 			if(vent_found)
-				if(vent_found.network && (vent_found.network.normal_members.len || vent_found.network.line_members.len))
+				break
 
-					to_chat(src, "You begin climbing into the ventilation system...")
-					if(vent_found.air_contents && !issilicon(src))
+	if(vent_found)
+		if(vent_found.network && (vent_found.network.normal_members.len || vent_found.network.line_members.len))
 
-						switch(vent_found.air_contents.temperature)
-							if(0 to BODYTEMP_COLD_DAMAGE_LIMIT)
-								to_chat(src, "<span class='danger'>You feel a painful freeze coming from the vent!</span>")
-							if(BODYTEMP_COLD_DAMAGE_LIMIT to T0C)
-								to_chat(src, "<span class='warning'>You feel an icy chill coming from the vent.</span>")
-							if(T0C + 40 to BODYTEMP_HEAT_DAMAGE_LIMIT)
-								to_chat(src, "<span class='warning'>You feel a hot wash coming from the vent.</span>")
-							if(BODYTEMP_HEAT_DAMAGE_LIMIT to INFINITY)
-								to_chat(src, "<span class='danger'>You feel a searing heat coming from the vent!</span>")
+			to_chat(src, "You begin climbing into the ventilation system...")
+			if(vent_found.air_contents && !issilicon(src))
 
-						switch(vent_found.air_contents.return_pressure())
-							if(0 to HAZARD_LOW_PRESSURE)
-								to_chat(src, "<span class='danger'>You feel a rushing draw pulling you into the vent!</span>")
-							if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)
-								to_chat(src, "<span class='warning'>You feel a strong drag pulling you into the vent.</span>")
-							if(WARNING_HIGH_PRESSURE to HAZARD_HIGH_PRESSURE)
-								to_chat(src, "<span class='warning'>You feel a strong current pushing you away from the vent.</span>")
-							if(HAZARD_HIGH_PRESSURE to INFINITY)
-								to_chat(src, "<span class='danger'>You feel a roaring wind pushing you away from the vent!</span>")
+				switch(vent_found.air_contents.temperature)
+					if(0 to BODYTEMP_COLD_DAMAGE_LIMIT)
+						to_chat(src, "<span class='danger'>You feel a painful freeze coming from the vent!</span>")
+					if(BODYTEMP_COLD_DAMAGE_LIMIT to T0C)
+						to_chat(src, "<span class='warning'>You feel an icy chill coming from the vent.</span>")
+					if(T0C + 40 to BODYTEMP_HEAT_DAMAGE_LIMIT)
+						to_chat(src, "<span class='warning'>You feel a hot wash coming from the vent.</span>")
+					if(BODYTEMP_HEAT_DAMAGE_LIMIT to INFINITY)
+						to_chat(src, "<span class='danger'>You feel a searing heat coming from the vent!</span>")
 
-					if(!do_after(src, 45, vent_found, 1, 1))
-						return
+				switch(vent_found.air_contents.return_pressure())
+					if(0 to HAZARD_LOW_PRESSURE)
+						to_chat(src, "<span class='danger'>You feel a rushing draw pulling you into the vent!</span>")
+					if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)
+						to_chat(src, "<span class='warning'>You feel a strong drag pulling you into the vent.</span>")
+					if(WARNING_HIGH_PRESSURE to HAZARD_HIGH_PRESSURE)
+						to_chat(src, "<span class='warning'>You feel a strong current pushing you away from the vent.</span>")
+					if(HAZARD_HIGH_PRESSURE to INFINITY)
+						to_chat(src, "<span class='danger'>You feel a roaring wind pushing you away from the vent!</span>")
 
-					if(!client)
-						return
+			if(!do_after(src, 45, vent_found, 1, 1))
+				return
+			if(!can_ventcrawl())
+				return
 
-					if(!ventcrawl_carry())
-						return
+			visible_message("<B>[src] scrambles into the ventilation ducts!</B>", "You climb into the ventilation system.")
 
-					visible_message("<B>[src] scrambles into the ventilation ducts!</B>", "You climb into the ventilation system.")
-
-					forceMove(vent_found)
-					add_ventcrawl(vent_found)
-
-				else
-					to_chat(src, "This vent is not connected to anything.")
-
-			else
-				to_chat(src, "You must be standing on or beside an air vent to enter it.")
+			forceMove(vent_found)
+			add_ventcrawl(vent_found)
 
 		else
-			to_chat(src, "You can't vent crawl while you're stunned!")
+			to_chat(src, "This vent is not connected to anything.")
 
 	else
-		to_chat(src, "You must be conscious to do this!")
-	return
+		to_chat(src, "You must be standing on or beside an air vent to enter it.")
 
 /mob/living/proc/add_ventcrawl(obj/machinery/atmospherics/starting_machine)
 	is_ventcrawling = 1

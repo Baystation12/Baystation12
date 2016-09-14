@@ -141,22 +141,31 @@
 	return
 
 /obj/item/organ/external/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	switch(stage)
+	switch(open)
 		if(0)
 			if(istype(W,/obj/item/weapon/scalpel))
 				user.visible_message("<span class='danger'><b>[user]</b> cuts [src] open with [W]!</span>")
-				stage++
+				open++
 				return
 		if(1)
 			if(istype(W,/obj/item/weapon/retractor))
 				user.visible_message("<span class='danger'><b>[user]</b> cracks [src] open like an egg with [W]!</span>")
-				stage++
+				open++
 				return
 		if(2)
 			if(istype(W,/obj/item/weapon/hemostat))
-				if(contents.len)
-					var/obj/item/removing = pick(contents)
-					removing.loc = get_turf(user.loc)
+				var/list/organs = get_contents_recursive()
+				if(organs.len)
+					var/obj/item/removing = pick(organs)
+					var/obj/item/organ/external/current_child = removing.loc
+
+					current_child.implants.Remove(removing)
+					current_child.internal_organs.Remove(removing)
+
+					status |= ORGAN_CUT_AWAY
+
+					removing.forceMove(get_turf(user))
+
 					if(!(user.l_hand && user.r_hand))
 						user.put_in_hands(removing)
 					user.visible_message("<span class='danger'><b>[user]</b> extracts [removing] from [src] with [W]!</span>")
@@ -164,6 +173,21 @@
 					user.visible_message("<span class='danger'><b>[user]</b> fishes around fruitlessly in [src] with [W].</span>")
 				return
 	..()
+
+
+/**
+ *  Get a list of contents of this organ and all the child organs
+ */
+/obj/item/organ/external/proc/get_contents_recursive()
+	var/list/all_items = list()
+
+	all_items.Add(implants)
+	all_items.Add(internal_organs)
+
+	for(var/obj/item/organ/external/child in children)
+		all_items.Add(child.get_contents_recursive())
+
+	return all_items
 
 /obj/item/organ/external/proc/is_dislocated()
 	if(dislocated > 0)
@@ -219,13 +243,28 @@
 /obj/item/organ/external/replaced(var/mob/living/carbon/human/target)
 	owner = target
 	forceMove(owner)
+
 	if(istype(owner))
 		owner.organs_by_name[organ_tag] = src
 		owner.organs |= src
-		for(var/obj/item/organ/organ in src)
-			organ.replaced(owner,src)
 
-	if(parent_organ)
+		for(var/obj/item/organ/organ in internal_organs)
+			organ.replaced(owner, src)
+
+		for(var/obj/implant in implants)
+			implant.forceMove(owner)
+
+			if(istype(implant, /obj/item/weapon/implant))
+				var/obj/item/weapon/implant/imp_device = implant
+
+				// we can't use implanted() here since it's often interactive
+				imp_device.imp_in = owner
+				imp_device.implanted = 1
+
+		for(var/obj/item/organ/external/organ in children)
+			organ.replaced(owner)
+
+	if(!parent && parent_organ)
 		parent = owner.organs_by_name[src.parent_organ]
 		if(parent)
 			if(!parent.children)
@@ -253,7 +292,7 @@
 		return 0
 
 	// High brute damage or sharp objects may damage internal organs
-	if(internal_organs && (brute_dam >= max_damage || (((sharp && brute >= 5) || brute >= 10) && prob(5))))
+	if(internal_organs && (brute_dam + brute >= max_damage || (((sharp && brute >= 5) || brute >= 10) && prob(5))))
 		// Damage an internal organ
 		if(internal_organs && internal_organs.len)
 			var/obj/item/organ/I = pick(internal_organs)
@@ -267,7 +306,16 @@
 		add_autopsy_data("[used_weapon]", brute + burn)
 
 	var/can_cut = (prob(brute*2) || sharp) && (robotic < ORGAN_ROBOT)
-
+	var/spillover = 0
+	var/pure_brute = brute
+	if(!is_damageable(brute + burn))
+		spillover =  brute_dam + burn_dam + brute - max_damage
+		if(spillover > 0)
+			brute -= spillover
+		else
+			spillover = brute_dam + burn_dam + brute + burn - max_damage
+			if(spillover > 0)
+				burn -= spillover
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
 	// Non-vital organs are limited to max_damage. You can't kill someone by bludeonging their arm all the way to 200 -- you can
 	// push them faster into paincrit though, as the additional damage is converted into shock.
@@ -284,32 +332,6 @@
 		if(burn)
 			createwound( BURN, burn )
 	else
-		//If we can't inflict the full amount of damage, spread the damage in other ways
-		//How much damage can we actually cause?
-		var/can_inflict = max_damage * config.organ_health_multiplier - (brute_dam + burn_dam)
-		var/spillover = 0
-		if(can_inflict)
-			if (brute > 0)
-				//Inflict all burte damage we can
-				if(can_cut)
-					if(sharp && !edge)
-						createwound( PIERCE, min(brute,can_inflict) )
-					else
-						createwound( CUT, min(brute,can_inflict) )
-				else
-					createwound( BRUISE, min(brute,can_inflict) )
-				var/temp = can_inflict
-				//How much mroe damage can we inflict
-				can_inflict = max(0, can_inflict - brute)
-				//How much brute damage is left to inflict
-				spillover += max(0, brute - temp)
-
-			if (burn > 0 && can_inflict)
-				//Inflict all burn damage we can
-				createwound(BURN, min(burn,can_inflict))
-				//How much burn damage is left to inflict
-				spillover += max(0, burn - can_inflict)
-
 		//If there are still hurties to dispense
 		if (spillover)
 			owner.shock_stage += spillover * config.organ_damage_spillover_multiplier
@@ -317,16 +339,14 @@
 	// sync the organ's damage with its wounds
 	src.update_damages()
 	owner.updatehealth() //droplimb will call updatehealth() again if it does end up being called
-
 	//If limb took enough damage, try to cut or tear it off
 	if(owner && loc == owner && !is_stump())
-		if(!cannot_amputate && config.limbs_can_break && (brute_dam + burn_dam) >= (max_damage * config.organ_health_multiplier))
+		if(!cannot_amputate && config.limbs_can_break && (brute_dam + burn_dam + brute + burn + spillover) >= (max_damage * config.organ_health_multiplier))
 			//organs can come off in three cases
 			//1. If the damage source is edge_eligible and the brute damage dealt exceeds the edge threshold, then the organ is cut off.
 			//2. If the damage amount dealt exceeds the disintegrate threshold, the organ is completely obliterated.
 			//3. If the organ has already reached or would be put over it's max damage amount (currently redundant),
 			//   and the brute damage dealt exceeds the tearoff threshold, the organ is torn off.
-
 			//Check edge eligibility
 			var/edge_eligible = 0
 			if(edge)
@@ -336,7 +356,7 @@
 						edge_eligible = 1
 				else
 					edge_eligible = 1
-
+			brute = pure_brute
 			if(edge_eligible && brute >= max_damage / DROPLIMB_THRESHOLD_EDGE && prob(brute))
 				droplimb(0, DROPLIMB_EDGE)
 			else if(burn >= max_damage / DROPLIMB_THRESHOLD_DESTROY && prob(burn/3))
@@ -1140,24 +1160,31 @@ Note that amputating the affected organ does in fact remove the infection from t
 		//large items and non-item objs fall to the floor, everything else stays
 		var/obj/item/I = implant
 		if(istype(I) && I.w_class < NORMAL_ITEM)
-			implant.loc = get_turf(victim.loc)
+			implant.forceMove(src)
+
+			// let actual implants still inside know they're no longer implanted
+			if(istype(I, /obj/item/weapon/implant))
+				var/obj/item/weapon/implant/imp_device = I
+				imp_device.removed()
 		else
-			implant.loc = src
-	implants.Cut()
+			implants.Remove(implant)
+			implant.forceMove(get_turf(src))
 
 	// Attached organs also fly off.
 	if(!ignore_children)
 		for(var/obj/item/organ/external/O in children)
 			O.removed()
 			if(O)
-				O.loc = src
-				for(var/obj/item/I in O.contents)
-					I.loc = src
+				O.forceMove(src)
+
+				// if we didn't lose the organ we still want it as a child
+				children += O
+				O.parent = src
 
 	// Grab all the internal giblets too.
 	for(var/obj/item/organ/organ in internal_organs)
-		organ.removed()
-		organ.loc = src
+		organ.removed(user, 0, 0)  // Organ stays inside and connected
+		organ.forceMove(src)
 
 	// Remove parent references
 	parent.children -= src
