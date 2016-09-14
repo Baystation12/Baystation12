@@ -354,6 +354,9 @@
 	Move(var/turf/T, dir = 1)
 		if(!linked) return ..()
 		var/tracking_efficiency = (linked.sensor.tracking ? linked.sensor.tracking.get_efficiency(-1,1) : 0)
+		var/obj/machinery/space_battle/ecm/ecm = locate() in range(MAX_ECM_RANGE)
+		if(prob(80) && ecm.can_block(get_dist(src, ecm))
+			tracking_efficiency = 100 // 100% chance to stagger
 		if(prob(1*tracking_efficiency))
 			Stagger(src, dir)
 			return 0
@@ -480,17 +483,22 @@
 				var/area/ship_battle/chosen = available_areas[choice]
 				if(prob(50*guidance_efficiency))
 					chosen = pick(available_areas)
+				else
+					var/obj/machinery/space_battle/ecm/ecm = locate() in chosen
+					if(ecm && istype(ecm) && ecm.can_block(1))
+						chosen = pick(available_areas)
 				if(chosen)
 					var/turf/newloc = pick_area_turf(chosen)
 					if(newloc)
-						start_loc = newloc
-						var/R
-						R = linked.tube.fire_missile(start_loc, start_loc) // Dont move, just go boom.
-						if(istext(R))
-							usr << "<span class='warning'>[R]</span>"
-							return
-						else
-							usr << "<span class='notice'>Missile launch successful!</span>"
+						if(!(prob(50*guidance_efficiency)))
+							start_loc = newloc
+							var/R
+							R = linked.tube.fire_missile(start_loc, start_loc) // Dont move, just go boom.
+							if(istext(R))
+								usr << "<span class='warning'>[R]</span>"
+								return
+							else
+								usr << "<span class='notice'>Missile launch successful!</span>"
 						wait_time *= 10*efficiency // Eyup
 					else
 						usr << "<span class='warning'>You cannot aim there!</span>"

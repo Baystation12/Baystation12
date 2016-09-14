@@ -996,7 +996,7 @@
 "th" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/obj/machinery/door/airlock/maintenance_hatch,/obj/machinery/door/firedoor/battle,/turf/simulated/floor/plating,/area/ship_battle/hub/starboard)
 "ti" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/turf/simulated/floor/plating,/area/ship_battle/hub/starboard)
 "tj" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 9},/obj/machinery/conveyor{dir = 2; id = "1stationscon"},/turf/simulated/floor/plating,/area/ship_battle/hub/starboard)
-"tk" = (/obj/machinery/conveyor_switch/oneway{id = "1stationncon"},/turf/simulated/floor/tiled,/area/ship_battle/hub/starboard)
+"tk" = (/obj/machinery/conveyor_switch/oneway{id = "1stationscon"},/turf/simulated/floor/tiled,/area/ship_battle/hub/starboard)
 "tl" = (/obj/machinery/atmospherics/pipe/simple/visible/supply,/obj/structure/cable/green{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/tiled,/area/ship_battle/hub/starboard)
 "tm" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/structure/table/glass,/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled,/area/ship_battle/hub/starboard)
 "tn" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/machinery/atmospherics/unary/vent_pump/on,/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/space_battle/missile_computer{id_tag = "1station_south_gun"},/turf/simulated/floor/tiled,/area/ship_battle/hub/starboard)

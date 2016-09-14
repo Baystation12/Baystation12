@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 LAST_COMPILE_TIME: 1473836444
-DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\trinary_devices code\datums code\datums\extensions code\datums\extensions\multitool code\datums\extensions\multitool\items code\game code\game\machinery code\game\objects code\game\objects\items code\game\objects\items\devices code\modules code\modules\overmap code\modules\overmap\ships code\modules\overmap\ships\computers code\modules\overmap\ships\engines code\modules\power code\modules\research code\modules\ship_combat code\modules\ship_combat\navigation code\modules\vehicles icons icons\obj maps maps\exodus maps\ships maps\ships\endurance maps\stations maps\stations\four sound sound\weapons 
+DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\trinary_devices code\modules code\modules\overmap code\modules\power code\modules\recycling code\modules\ship_combat code\modules\ship_combat\navigation maps maps\exodus maps\ships maps\ships\endurance maps\stations maps\stations\four maps\stations\one 
 AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 510.1347
-WINDOW: maps\ships\endurance\endurance.dmm;code\modules\overmap\ships\engines\engine.dm;code\modules\ship_combat\navigation\sectors.dm;code\modules\overmap\sectors.dm;maps\exodus\exodus.dm;code\modules\power\cable.dm;code\modules\power\cell.dm;maps\stations\four\Celestia.dmm
+WINDOW: maps\ships\endurance\endurance.dmm;code\modules\ship_combat\navigation\sectors.dm;code\modules\overmap\sectors.dm;maps\exodus\exodus.dm;code\modules\power\cable.dm;maps\stations\four\Celestia.dmm;code\modules\ship_combat\circuit.dm;maps\stations\one\one.dmm;code\modules\ship_combat\computer.dm;code\modules\recycling\disposal.dm
 FILE: maps\stations\four\Celestia.dmm
 */
 // END_INTERNALS

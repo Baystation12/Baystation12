@@ -141,7 +141,7 @@
 
 	proc/splice(var/obj/item/upgrade_module/splicer)
 		for(var/i=1 to internal_wiring.len)
-			if(internal_wiring[i] == RED && splicer.internal_wiring[i] == BLUE || splicer.internal_wiring[i] == GREEN)
+			if(internal_wiring[i] == RED && (splicer.internal_wiring[i] == BLUE || splicer.internal_wiring[i] == GREEN))
 				internal_wiring[i] = splicer.internal_wiring[i]
 
 	proc/transcribe(var/obj/item/upgrade_module/transcriber)
