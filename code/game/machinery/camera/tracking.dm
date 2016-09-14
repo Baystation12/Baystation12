@@ -242,7 +242,11 @@ mob/living/proc/near_camera()
 		return camera && camera.can_use() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
 
 /mob/living/carbon/human/tracking_status()
-	. = ..()
+	if(cloaked)
+		. = TRACKING_TERMINATE
+	else
+		. = ..()
+
 	if(. == TRACKING_TERMINATE)
 		return
 
