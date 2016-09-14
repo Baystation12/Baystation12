@@ -12,6 +12,7 @@ var/list/client_preference_stats_
 	for(var/client_pref_description in client_preference_stats_)
 		var/stat_client_preference/scp = client_preference_stats_[client_pref_description]
 		if(scp.client_preference.may_toggle(user))
+			scp.update_name(user)
 			.[client_pref_description] = scp
 
 /client/verb/toggle_preference_verb(var/client_pref_name in client_preference_stats_for_usr())
@@ -26,8 +27,6 @@ var/list/client_preference_stats_
 
 /client/Stat()
 	. = ..()
-	if(!.)
-		return
 	if(!mob || !statpanel("Preferences"))
 		return
 	var/list/preferences = client_preference_stats_for_usr(mob)
@@ -56,4 +55,6 @@ var/list/client_preference_stats_
 		return
 	usr.client.prefs.save_preferences()
 	to_chat(usr, "[client_preference.description]: [usr.is_preference_enabled(client_preference) ? client_preference.enabled_description : client_preference.disabled_description]")
-	name = "[usr.is_preference_enabled(client_preference) ? client_preference.enabled_description : client_preference.disabled_description]"
+
+/stat_client_preference/proc/update_name(var/mob/user)
+	name = "[user.is_preference_enabled(client_preference) ? client_preference.enabled_description : client_preference.disabled_description]"

@@ -51,6 +51,14 @@
 		if(part)
 			part.implants.Remove(src)
 		return ..()
+	
+/**
+ *  Let the implant know it's no longer implanted
+ */ 
+/obj/item/weapon/implant/proc/removed()
+	imp_in = null
+	implanted = 0
+	
 
 /obj/item/weapon/implant/tracking
 	name = "tracking implant"
@@ -464,6 +472,10 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		mobname = source.real_name
 		processing_objects.Add(src)
 		return 1
+		
+/obj/item/weapon/implant/death_alarm/removed()
+	..()
+	processing_objects.Remove(src)
 
 /obj/item/weapon/implant/compressed
 	name = "compressed matter implant"

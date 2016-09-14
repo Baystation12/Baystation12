@@ -65,7 +65,8 @@
 		removed = ingest_met
 	if(touch_met && (location == CHEM_TOUCH))
 		removed = touch_met
-	removed = min(removed, volume)
+	removed = M.get_adjusted_metabolism(removed)
+
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
 	var/effective = removed

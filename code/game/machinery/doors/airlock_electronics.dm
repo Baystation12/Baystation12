@@ -81,16 +81,14 @@
 				last_configurator = usr.name
 				return TRUE
 			else
-				var/obj/item/I = usr.get_active_hand()
-				if (istype(I, /obj/item/device/pda))
-					var/obj/item/device/pda/pda = I
-					I = pda.id
+				var/obj/item/weapon/card/id/I = usr.get_active_hand()
+				I = I ? I.GetIdCard() : null
 				if(!istype(I, /obj/item/weapon/card/id))
 					usr << "<span class='warning'>[\src] flashes a yellow LED near the ID scanner. Did you remember to scan your ID or PDA?</span>"
 					return TRUE
-				if (I && src.check_access(I))
+				if (check_access(I))
 					locked = 0
-					last_configurator = I:registered_name
+					last_configurator = I.registered_name
 				else
 					usr << "<span class='warning'>[\src] flashes a red LED near the ID scanner, indicating your access has been denied.</span>"
 					return TRUE

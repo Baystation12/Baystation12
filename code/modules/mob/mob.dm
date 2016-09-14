@@ -683,35 +683,36 @@
 /mob/Stat()
 	..()
 	. = (is_client_active(10 MINUTES))
+	if(!.)
+		return
 
-	if(.)
-		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
-			stat("Station Time", stationtime2text())
-			stat("Round Duration", roundduration2text())
+	if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
+		stat("Station Time", stationtime2text())
+		stat("Round Duration", roundduration2text())
 
-		if(client.holder)
-			if(statpanel("Status"))
-				stat("Location:", "([x], [y], [z]) [loc]")
-				stat("CPU:","[world.cpu]")
-				stat("Instances:","[world.contents.len]")
-			if(statpanel("Processes"))
-				if(processScheduler)
-					processScheduler.statProcesses()
+	if(client.holder)
+		if(statpanel("Status"))
+			stat("Location:", "([x], [y], [z]) [loc]")
+			stat("CPU:","[world.cpu]")
+			stat("Instances:","[world.contents.len]")
+		if(statpanel("Processes"))
+			if(processScheduler)
+				processScheduler.statProcesses()
 
-		if(listed_turf && client)
-			if(!TurfAdjacent(listed_turf))
-				listed_turf = null
-			else
-				if(statpanel("Turf"))
-					stat(listed_turf)
-					for(var/atom/A in listed_turf)
-						if(!A.mouse_opacity)
-							continue
-						if(A.invisibility > see_invisible)
-							continue
-						if(is_type_in_list(A, shouldnt_see))
-							continue
-						stat(A)
+	if(listed_turf && client)
+		if(!TurfAdjacent(listed_turf))
+			listed_turf = null
+		else
+			if(statpanel("Turf"))
+				stat(listed_turf)
+				for(var/atom/A in listed_turf)
+					if(!A.mouse_opacity)
+						continue
+					if(A.invisibility > see_invisible)
+						continue
+					if(is_type_in_list(A, shouldnt_see))
+						continue
+					stat(A)
 
 
 // facing verbs
@@ -1092,3 +1093,6 @@ mob/proc/yank_out_object()
 			usr << "The game is not currently looking for antags."
 	else
 		usr << "You must be observing or in the lobby to join the antag pool."
+
+/mob/proc/is_invisible_to(var/mob/viewer)
+	return (!alpha || !mouse_opacity || viewer.see_invisible < invisibility)

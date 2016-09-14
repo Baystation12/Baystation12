@@ -57,7 +57,7 @@
 	var/drill_verb = "drilling"
 	sharp = 1
 
-	var/excavation_amount = 100
+	var/excavation_amount = 200
 
 /obj/item/weapon/pickaxe/hammer
 	name = "sledgehammer"
