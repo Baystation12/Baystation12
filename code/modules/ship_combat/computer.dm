@@ -355,7 +355,7 @@
 		if(!linked) return ..()
 		var/tracking_efficiency = (linked.sensor.tracking ? linked.sensor.tracking.get_efficiency(-1,1) : 0)
 		var/obj/machinery/space_battle/ecm/ecm = locate() in range(MAX_ECM_RANGE)
-		if(prob(80) && ecm.can_block(get_dist(src, ecm))
+		if(prob(80) && ecm.can_block(get_dist(src, ecm)))
 			tracking_efficiency = 100 // 100% chance to stagger
 		if(prob(1*tracking_efficiency))
 			Stagger(src, dir)
