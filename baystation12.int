@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+LAST_COMPILE_TIME: 1473885839
+DIR: code code\game code\game\jobs code\game\objects code\game\objects\effects code\game\objects\random code\modules code\modules\client code\modules\client\preference_setup code\modules\client\preference_setup\general code\modules\mob maps maps\exodus maps\torch maps\~mapsystem 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 510.1347
+WINDOW: maps\torch\torch-3.dmm;maps\torch\torch-1.dmm;maps\torch\torch-2.dmm;maps\exodus\exodus.dm;maps\exodus\exodus_define.dm;maps\torch\torch_define.dm;maps\~mapsystem\maps.dm;code\global.dm;code\modules\client\preference_setup\general\01_basic.dm;code\game\jobs\job_controller.dm
+FILE: code\game\jobs\job_controller.dm
 */
 // END_INTERNALS

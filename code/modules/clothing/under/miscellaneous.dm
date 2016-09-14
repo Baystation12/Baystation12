@@ -561,6 +561,11 @@
 	icon_state = "pcrc"
 	worn_state = "pcrc"
 
+/obj/item/clothing/under/confederacy/alt
+	name = "\improper Confederacy of Man uniform"
+	icon_state = "confederacy"
+	worn_state = "confederacy"
+
 /obj/item/clothing/under/saare
 	name = "\improper SAARE uniform"
 	desc = "A dress uniform belonging to Stealth Assault Enterprises, a minor private military corporation."
