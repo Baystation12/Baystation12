@@ -82,7 +82,12 @@
 	var/list/data = list()
 	var/list/hack = list()
 	for(var/obj/machinery/M in hacked)
-		hack.Add(M.name)
+		var/N = 0
+		var/Na = M.name
+		while(Na in hack)
+			N++
+			Na = "[Na][N]"
+		hack.Add(Na)
 	data["hacked"] = hack
 	var/list/categories = list()
 	for(var/list/T in available_categories)
@@ -172,8 +177,19 @@
 			else
 				var/obj/machinery/target
 				target = pick(targets)
-				var/time = begin_hacking(target, added_time)
-				usr << "<span class='notice'>Hacking begun on [target]! It will end in: [time] seconds!</span>"
+				var/failed = 0
+				for(var/i=1 to 10) // prevents infinite loops
+					if(i >= 9)
+						failed = 1
+						break
+					if(target in hacked)
+						target = pick(targets)
+					else break
+				if(!failed)
+					var/time = begin_hacking(target, added_time)
+					usr << "<span class='notice'>Hacking begun on [target]! It will end in: [time] seconds!</span>"
+				else
+					usr << "<span class='warning'>No more targets are currently broadcasting!</span>"
 	if(href_list["hacked_object"])
 		selected = null
 		for(var/obj/machinery/M in hacked)
@@ -187,7 +203,7 @@
 		if(selected.stat & (BROKEN|NOPOWER|MAINT))
 			usr << "<span class='warning'>\The [selected] is not responding!</span>"
 			selected.visible_message("<span class='warning'>\The [src] buzzes briefly!</span>")
-			src.visible_message("<span class='warning'>\icon[src] \The [src] beeps, \"Remote connection to \the [selected] unavailable. Disconnecting...</span>")
+			src.visible_message("<span class='warning'>\icon[icon_state] \The [src] beeps, \"Remote connection to \the [selected] unavailable. Disconnecting...</span>")
 			hacked.Cut(hacked.Find(selected),  (hacked.Find(selected)+1))
 			selected = null
 		else

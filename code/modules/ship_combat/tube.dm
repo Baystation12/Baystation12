@@ -283,7 +283,7 @@
 
 
 /obj/machinery/space_battle/tube_barrel/proc/charge_up()
-	if(current_charge >= maxcharge) return
+	if(current_charge >= maxcharge || use_power > 1) return
 	use_power = 2
 	processing_objects.Add(src)
 

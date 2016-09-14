@@ -325,6 +325,8 @@
 	..()
 	id = rand() //this couldn't possibly go wrong
 
+
+
 /obj/item/conveyor_switch_construct/afterattack(atom/A, mob/user, proximity)
 	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
 		return
