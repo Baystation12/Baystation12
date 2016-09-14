@@ -131,6 +131,9 @@
 	onclose(user, "flamethrower")
 	return
 
+/obj/item/weapon/flamethrower/return_air()
+	if(ptank)
+		return ptank.return_air()
 
 /obj/item/weapon/flamethrower/Topic(href,href_list[])
 	if(href_list["close"])

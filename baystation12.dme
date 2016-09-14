@@ -239,6 +239,7 @@
 #include "code\datums\outfits\jobs\misc.dm"
 #include "code\datums\outfits\jobs\science.dm"
 #include "code\datums\outfits\jobs\security.dm"
+#include "code\datums\repositories\areas.dm"
 #include "code\datums\repositories\cameras.dm"
 #include "code\datums\repositories\repository.dm"
 #include "code\datums\repositories\unique.dm"
