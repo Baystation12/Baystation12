@@ -1093,3 +1093,6 @@ mob/proc/yank_out_object()
 			usr << "The game is not currently looking for antags."
 	else
 		usr << "You must be observing or in the lobby to join the antag pool."
+
+/mob/proc/is_invisible_to(var/mob/viewer)
+	return (!alpha || !mouse_opacity || viewer.see_invisible < invisibility)

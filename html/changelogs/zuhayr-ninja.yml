@@ -1,0 +1,4 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - tweak: "Ninja cloak now only renders you invisible to the player; right-click will show you, and your inhands will still render."
