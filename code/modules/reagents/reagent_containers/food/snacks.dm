@@ -1609,7 +1609,6 @@
 		H.set_species(monkey_type)
 		H.real_name = H.species.get_random_name()
 		H.name = H.real_name
-		src.loc = null
 		qdel(src)
 		return 1
 

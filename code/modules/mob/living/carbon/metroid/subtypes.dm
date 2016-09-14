@@ -1,79 +1,76 @@
-/mob/living/carbon/slime/proc/mutation_table(var/colour)
-	var/list/slime_mutation[4]
-	switch(colour)
-		//Tier 1
+/mob/living/carbon/slime/proc/GetMutations()
+	switch(src.colour)
 		if("grey")
-			slime_mutation[1] = "orange"
-			slime_mutation[2] = "metal"
-			slime_mutation[3] = "blue"
-			slime_mutation[4] = "purple"
-		//Tier 2
+			return list("orange", "metal", "blue", "purple")
 		if("purple")
-			slime_mutation[1] = "dark purple"
-			slime_mutation[2] = "dark blue"
-			slime_mutation[3] = "green"
-			slime_mutation[4] = "green"
+			return list("dark purple", "dark blue", "green", "green")
 		if("metal")
-			slime_mutation[1] = "silver"
-			slime_mutation[2] = "yellow"
-			slime_mutation[3] = "gold"
-			slime_mutation[4] = "gold"
+			return list("silver", "yellow", "gold", "gold")
 		if("orange")
-			slime_mutation[1] = "dark purple"
-			slime_mutation[2] = "yellow"
-			slime_mutation[3] = "red"
-			slime_mutation[4] = "red"
+			return list("dark purple", "yellow", "red", "red")
 		if("blue")
-			slime_mutation[1] = "dark blue"
-			slime_mutation[2] = "silver"
-			slime_mutation[3] = "pink"
-			slime_mutation[4] = "pink"
+			return list("dark blue", "silver", "pink", "pink")
 		//Tier 3
 		if("dark blue")
-			slime_mutation[1] = "purple"
-			slime_mutation[2] = "cerulean"
-			slime_mutation[3] = "blue"
-			slime_mutation[4] = "blue"
+			return list("purple", "cerulean", "blue", "blue")
 		if("dark purple")
-			slime_mutation[1] = "purple"
-			slime_mutation[2] = "sepia"
-			slime_mutation[3] = "orange"
-			slime_mutation[4] = "orange"
+			return list("purple", "sepia", "orange", "orange")
 		if("yellow")
-			slime_mutation[1] = "bluespace"
-			slime_mutation[2] = "metal"
-			slime_mutation[3] = "orange"
-			slime_mutation[4] = "orange"
+			return list("bluespace", "metal", "orange", "orange")
 		if("silver")
-			slime_mutation[1] = "metal"
-			slime_mutation[2] = "pyrite"
-			slime_mutation[3] = "blue"
-			slime_mutation[4] = "blue"
+			return list("metal", "pyrite", "blue", "blue")
 		//Tier 4
 		if("pink")
-			slime_mutation[1] = "pink"
-			slime_mutation[2] = "pink"
-			slime_mutation[3] = "light pink"
-			slime_mutation[4] = "light pink"
+			return list("pink", "pink", "light pink", "light pink")
 		if("red")
-			slime_mutation[1] = "red"
-			slime_mutation[2] = "red"
-			slime_mutation[3] = "oil"
-			slime_mutation[4] = "oil"
+			return list("red", "red", "oil", "oil")
 		if("gold")
-			slime_mutation[1] = "gold"
-			slime_mutation[2] = "gold"
-			slime_mutation[3] = "adamantine"
-			slime_mutation[4] = "adamantine"
+			return list("gold", "gold", "adamantine", "adamantine")
 		if("green")
-			slime_mutation[1] = "green"
-			slime_mutation[2] = "green"
-			slime_mutation[3] = "black"
-			slime_mutation[4] = "black"
+			return list("green", "green", "black", "black")
 		// Tier 5
 		else
-			slime_mutation[1] = colour
-			slime_mutation[2] = colour
-			slime_mutation[3] = colour
-			slime_mutation[4] = colour
-	return(slime_mutation)
+			return list()
+
+/mob/living/carbon/slime/proc/GetCoreType()
+	switch(src.colour)
+		// Tier 1
+		if("grey")
+			return /obj/item/slime_extract/grey
+		// Tier 2
+		if("purple")
+			return /obj/item/slime_extract/purple
+		if("metal")
+			return /obj/item/slime_extract/metal
+		if("orange")
+			return /obj/item/slime_extract/orange
+		if("blue")
+			return /obj/item/slime_extract/blue
+		// Tier 3
+		if("dark blue")
+			return /obj/item/slime_extract/darkblue
+		if("dark purple")
+			return /obj/item/slime_extract/darkpurple
+		if("yellow")
+			return /obj/item/slime_extract/yellow
+		if("silver")
+			return /obj/item/slime_extract/silver
+		// Tier 4
+		if("pink")
+			return /obj/item/slime_extract/pink
+		if("red")
+			return /obj/item/slime_extract/red
+		if("gold")
+			return /obj/item/slime_extract/gold
+		if("green")
+			return /obj/item/slime_extract/green
+		//Tier 5
+		if("light pink")
+			return /obj/item/slime_extract/lightpink
+		if("oil")
+			return /obj/item/slime_extract/oil
+		if("adamantine")
+			return /obj/item/slime_extract/adamantine
+		if("black")
+			return /obj/item/slime_extract/black
+	return /obj/item/slime_extract/grey
