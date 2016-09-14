@@ -115,20 +115,3 @@
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
-
-// Temporary subtypes. In place because torch maps can not be edited without breaking regular mapmerge.
-// Feel free to remove them and replace them with actual correct types if mapmerge works for you.
-
-/obj/item/device/aicard
-	name = "placeholder"
-
-/obj/item/device/aicard/New()
-	new/obj/item/weapon/aicard(get_turf(src))
-	qdel(src)
-
-/obj/machinery/computer/aifixer
-	name = "placeholder"
-
-/obj/machinery/computer/aifixer/New()
-	new/obj/machinery/modular_computer/console/preset/research(get_turf(src))
-	qdel(src)

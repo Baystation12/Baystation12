@@ -982,7 +982,7 @@
 "sT" = (/obj/effect/floor_decal/corner/brown{dir = 9},/obj/machinery/computer/supply,/turf/simulated/floor/tiled/dark,/area/bridge)
 "sU" = (/obj/effect/floor_decal/corner/blue,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/dark,/area/bridge)
 "sV" = (/obj/effect/floor_decal/corner/blue/three_quarters{dir = 4},/turf/simulated/floor/tiled/dark,/area/bridge)
-"sW" = (/obj/effect/floor_decal/corner/blue{dir = 9},/obj/structure/table/rack,/obj/item/device/flash,/obj/item/device/flash,/obj/item/device/aicard,/obj/structure/fireaxecabinet{pixel_x = 32},/turf/simulated/floor/tiled/dark,/area/bridge)
+"sW" = (/obj/effect/floor_decal/corner/blue{dir = 9},/obj/structure/table/rack,/obj/item/device/flash,/obj/item/device/flash,/obj/item/weapon/aicard,/obj/structure/fireaxecabinet{pixel_x = 32},/turf/simulated/floor/tiled/dark,/area/bridge)
 "sX" = (/obj/structure/filingcabinet/filingcabinet,/turf/simulated/floor/tiled/dark,/area/bridge/meeting_room)
 "sY" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/bridge/meeting_room)
 "sZ" = (/obj/structure/sign/electricshock,/turf/simulated/wall/r_wall,/area/bridge/meeting_room)
