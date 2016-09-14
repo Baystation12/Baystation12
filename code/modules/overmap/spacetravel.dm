@@ -46,6 +46,7 @@ proc/get_deepspace(x,y)
 		return new /obj/effect/overmap/sector/temporary(x, y, world.maxz)
 
 proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
+	return 1
 	var/obj/effect/overmap/M = map_sectors["[T.z]"]
 	if (!M)
 		return

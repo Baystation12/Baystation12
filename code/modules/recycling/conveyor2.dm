@@ -174,6 +174,7 @@
 
 	var/list/conveyors		// the list of converyors that are controlled by this switch
 	anchored = 1
+	layer = 3.5
 
 
 

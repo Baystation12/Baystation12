@@ -1,0 +1,36 @@
+<div class='item'>
+		{{:helper.link('Messaging', 'link', {'messaging' : 1}, data.menu == 'messaging' ? 'disabled' : null, 'fixedLeft')}}
+		{{:helper.link('Comms', 'home', {'communication' : 1}, data.menu == 'communication' ? 'disabled' : null, 'fixedLeft')}}
+</div>	
+{{if data.menu == "messaging"}}
+	<div class='item'>
+		Available Consoles:<br>
+		{{for data.consoles}}
+			<div class='itemLabel'>
+				{{:value}}:
+			</div>
+			<div style='fixedLeft'>
+				{{:helper.link('Message', 'link', { 'msg' : value })}}
+				<br><br>
+			</div>	
+		{{empty}}
+			No consoles available!
+		{{/for}}
+	</div>	
+{{else}}		
+	<div class='block'>
+		<div class='item'>
+			{{for data.logs}}
+				{{:value}}<br>
+			{{empty}}
+				No logs to show!
+			{{/for}}
+		</div>
+	</div>
+{{/if}}	
+<br><hr><br>
+<div class='item'>
+	{{:helper.link('Refresh', 'refresh', { 'refresh' : 1 })}}
+</div>	
+		
+	

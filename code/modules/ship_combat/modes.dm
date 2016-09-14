@@ -23,6 +23,7 @@
 		var/client/most_karma
 		var/client/most_missiles_fired
 		var/client/most_repairs
+		var/client/most_cursing
 		for(var/mob/M in world)
 			if(!M.client) continue
 			var/client/C = M.client
@@ -38,6 +39,9 @@
 			if(C.timeofdeath)
 				if(!first_death || C.timeofdeath < first_death.timeofdeath)
 					first_death = C
+			if(C.potty_words > 5)
+				if(!most_cursing || C.potty_words > most_cursing.potty_words)
+					most_cursing = C
 		if(first_death)
 			world <<"<b>[first_death]</b> was the first brave soldier lost, etching their memory into the world with their last words of, \
 			          \"[first_death.last_words ? "[first_death.last_words]" : "[pick("Man am I hungry", "Oh my god!", "Does anyone smell that?", "I can't wait to return home.")]"]\""
@@ -47,6 +51,8 @@
 			world << "<b>[most_missiles_fired]</b> was like a [pick("machine gun", "rabid chipmunk", "machine", "crazed walrus")], firing a total of [most_missiles_fired.missiles_fired] missiles!"
 		if(most_repairs)
 			world << "<b>[most_repairs]</b> was the handiest sailor, making a total of [most_repairs.repairs_made] repairs!"
+		if(most_cursing)
+			world << "<b>[most_cursing]</b> needs their mouth washed out with soap, having sworn [most_cursing.potty_words] times!"
 
 	check_finished()
 		if(!setup)
@@ -74,8 +80,9 @@
 			var/team = 0
 			for(var/obj/missile_start/S in world)
 				if(S.alive)
-					team = S.team // Should only be one team.
-					break
+					S.refresh_active()
+					if(S.active && S.team >= 1)
+						team = S.team
 			world << "<span class='notice'><b>Team [team] is victorious! All heil the new masters of the galaxy!</b></span>"
 			spawn(20)
 				var/text = "<b>And it's crew, </b>"

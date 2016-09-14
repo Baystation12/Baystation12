@@ -182,11 +182,11 @@
 	return 1
 
 
-/obj/machinery/missile/ex_act(var/severity)
-	var/obj/item/missile/ship/projectile = new spawn_type(get_turf(src))
-	projectile.throw_impact(src)
-	qdel(src)
-	return
+//obj/machinery/missile/ex_act(var/severity)
+//	var/obj/item/missile/ship/projectile = new spawn_type(get_turf(src))
+//	projectile.throw_impact(src)
+//	qdel(src)
+//	return
 
 
 /obj/missile_start
@@ -224,7 +224,6 @@
 
 	proc/refresh_active()
 		if(!initialised)
-			active = 1
 			alive = 1
 			return 1
 		else if(ticker && ticker.mode && istype(ticker.mode, /datum/game_mode/ship_battles))

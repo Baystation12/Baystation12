@@ -5,7 +5,7 @@
 	icon_state = "fission_reactor"
 	anchored = 1
 	density = 1
-	var/power_generation_rate = 3000 //3kw
+	var/power_generation_rate = 5000 //5kw
 	var/powernet_connection_failed = 0
 
 /obj/machinery/power/fission_reactor/process()

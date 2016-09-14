@@ -32,11 +32,11 @@
 		icon_state = "hallC1"
 
 	port_command
-		name = "\improper Endurance - Core"
+		name = "\improper Endurance - Port Command"
 		icon_state = "green"
 
 	starboard_command
-		name = "\improper Endurance - Core"
+		name = "\improper Endurance - Starboard Command"
 		icon_state = "green"
 
 /area/shuttle/mining_shuttle/endurance

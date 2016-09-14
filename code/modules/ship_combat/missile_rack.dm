@@ -64,10 +64,10 @@
 		contained = null
 		return ..()
 
-	ex_act()
-		contained.ex_act()
-		spawn(1)
-			qdel(src)
+//	ex_act()
+//		contained.ex_act()
+//		spawn(1)
+//			qdel(src)
 
 	attack_hand(var/mob/living/carbon/human/user)
 		if(!anchored)

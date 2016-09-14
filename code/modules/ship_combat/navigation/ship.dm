@@ -19,6 +19,7 @@
 
 /obj/effect/overmap/ship/Destroy()
 	current_sector = null
+	nav_control.linked = null
 	nav_control = null
 	for(var/obj/machinery/space_battle/engine_control/E in eng_controls)
 		E.linked = null
@@ -32,16 +33,23 @@
 	return ..()
 
 /obj/effect/overmap/ship/initialize()
-	for(var/obj/machinery/space_battle/engine_control/E in world)
-		if (E.z == map_z && !(E in eng_controls))
-			eng_controls.Add(E)
+	..()
 	for(var/obj/machinery/space_battle/missile_computer/M in world)
-		if (M.z == map_z && !(M in fire_controls))
+		if (M.z in map_z)
 			fire_controls.Add(M)
+	for(var/obj/machinery/space_battle/engine_control/E in machines)
+		if (E.z in map_z)
+			eng_controls += E
+			E.linked = src
+			E.zlevels = map_z
+			E.refresh_engines()
+			testing("Engines console at level [E.z] linked to overmap object '[name]'.")
 	for(var/obj/machinery/space_battle/helm/H in machines)
-		if (H.z == map_z)
+		if (H.z in map_z)
 			nav_control = H
-			break
+			H.linked = src
+			H.get_known_sectors()
+			testing("Helm console at level [H.z] linked to overmap object '[name]'.")
 	processing_objects.Add(src)
 
 /obj/effect/overmap/ship/relaymove(mob/user, direction)

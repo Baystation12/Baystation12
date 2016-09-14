@@ -82,7 +82,7 @@ proc/Ellipsis(original_msg, chance = 50)
 
 	return new_msg
 
-proc/RadioChat(message, distortion_chance = 60, distortion_speed = 1)
+proc/RadioChat(message, distortion_chance = 60, distortion_speed = 1, english_only = 0)
 	var/new_message = ""
 	var/p = 1 // progress
 	for(var/i=1, i<=length(message), i++)
@@ -99,11 +99,14 @@ proc/RadioChat(message, distortion_chance = 60, distortion_speed = 1)
 				else if(prob(2 * p))
 					newletter =	pick("a","e","i","o","u") // Minor mishearing.
 					p += 0.25 * distortion_speed
-				else if(prob(1.5 * p))
+				else if(prob(1.5 * p) && !english_only)
 					newletter = pick("ø", "Ð", "%", "æ", "µ") // Major mishearings
 					p += 0.5 * distortion_speed
 				else if(prob(0.05 * p))
-					newletter = "¦w¡¼b»%>-BZZT-"	 // Audible major cutout
+					if(!english_only)
+						newletter = "¦w¡¼b»%>-BZZT-"	 // Audible major cutout
+					else
+						newletter = "srgt%$hjc-sda.BZZT"
 					new_message += newletter
 					break
 		else

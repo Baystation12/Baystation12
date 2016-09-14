@@ -1,0 +1,38 @@
+{{if data.menu == "locked"}}
+	<div class='item'>
+		<div class='notice'>
+			<b>Access Denied!</b>
+			{{:helper.link('Swipe ID', 'lock', { 'unlock' : 1 })}}
+		</div>	
+	</div>	
+{{else data.menu == "id"}}
+	<div class='item'>
+		{{for data.access}}
+			<div class='itemLabelNarrow'>
+				{{:value.name}}
+			</div>
+			<div style='fixedLeft'>
+				{{:helper.link(value.has_already > 0 ? 'Enabled' : 'Disabled', 'key', { 'change_id' : value.number }, null, value.has_already > 0 ? 'selected' : null)}}
+			</div>
+			<br>
+		{{empty}}
+			Unable to detect access!
+		{{/for}}
+		<br>
+		{{:helper.link('Return', 'home', { 'return' : 1 })}}
+	</div>
+{{else}}
+	<div class='item'>
+		{{for data.options}}
+			{{:helper.link(value, 'gear', { 'mob' : value })}}
+			<br>
+		{{empty}}
+			Cannot detect any ID cards to modify!
+		{{/for}}	
+	</div>	
+{{/if}}	
+<br><hr><br>
+<div class='item'>
+	{{:helper.link('Refresh', 'refresh', { 'refresh' : 1 })}}
+</div>	
+	

@@ -6,7 +6,6 @@
 	anchored = 1
 	density = 0
 	var/armour = 5
-	var/team = 0
 	idle_power_usage = 1000
 	power_channel = EQUIP
 	var/self_destructing = 0
@@ -18,12 +17,6 @@
 	var/can_be_reset = 0
 	var/obj/missile_start/start
 
-
-	New()
-		..()
-		var/area/ship_battle/A = get_area(src)
-		if(A && istype(A))
-			team = A.team
 
 	initialize()
 		..()
@@ -38,22 +31,20 @@
 
 
 	Destroy()
-		for(var/obj/machinery/M in machines)
-			if(M == src) continue
-			if(M.z == src.z)
-				if(istype(M, /obj/machinery/space_battle))
-					qdel(M)
-				else
-					processing_objects.Remove(M)
-		start = null
-		for(var/obj/machinery/space_battle/missile_computer/computer in world)
-			computer.find_targets()
 		var/obj/effect/overmap/ship/linked = map_sectors["[z]"]
 		map_sectors["[z]"] = null
 		if(linked)
 			if(istype(linked, /obj/effect/overmap/ship))
 				linked.fire_controls.Cut()
 			qdel(linked)
+		for(var/obj/machinery/M in machines)
+			if(M == src) continue
+			if(M.z == src.z)
+				if(istype(M, /obj/machinery/space_battle))
+					qdel(M)
+		start = null
+		for(var/obj/machinery/space_battle/missile_computer/computer in world)
+			computer.find_targets()
 		return ..()
 
 	break_machine(var/num)
@@ -65,14 +56,14 @@
 			if(!self_destructing)
 				var/obj/effect/overmap/O = map_sectors["[z]"]
 				if(O)
-					world << "<span class='danger'>[O.name]'s core self destruct sequence engaged!</span>"
+					world << "<span class='danger'><BIG>[O.name]'s core self destruct sequence engaged!</BIG></span>"
 				self_destructing = 1
 		for(var/mob/living/carbon/human/H in world)
 			if(H.z == src.z && text2num(H.get_team()) == text2num(src.team))
 				H << "<span class='warning'>You hear a voice: \"Core damaged!\"</span>"
 
 	attackby(var/obj/item/I, var/mob/user)
-		if(istype(I, /obj/item/device/multitool) && self_destructing && damage_level < 3)
+		if(istype(I, /obj/item/device/multitool) && self_destructing && damage_level < 8)
 			var/mob/living/carbon/human/H = user
 			if(H && istype(H))
 				H.visible_message("<span class='notice'>\The [H] begins setting \the [src] to reset!</span>")
@@ -95,7 +86,7 @@
 					team = H.get_team()
 					for(var/area/ship_battle/A in world)
 						if(A.z == src.z)
-							A.team = src.team
+							A.change_team(src.team)
 					start.team = src.team
 					start.refresh_alive()
 					start.refresh_active()
@@ -118,7 +109,7 @@
 	process()
 		..()
 		if(stat & NOPOWER)
-			if(prob(20))
+			if(prob(10))
 				break_machine(1)
 		var/turf/T = get_turf(src)
 		if(T)
@@ -126,7 +117,7 @@
 			if(environment)
 				var/cp = environment.return_pressure()
 				if(cp < 40)
-					if(prob(20))
+					if(prob(10))
 						for(var/mob/living/carbon/human/H in world)
 							if(H.z == src.z && H.get_team() == src.team)
 								H << "<span class='warning'>Your hear a voice: \"Core unpressurised!\"</span>"
@@ -145,7 +136,7 @@
 				self_destruct()
 				timer+=10
 		else if(reset_time && reset_time > world.timeofday)
-			src.visible_message("<span class='notice'>\The [src] beeps, \"Reset procedure complete!\"</span>")
+			src.visible_message("<span class='notice'>\icon[src] \The [src] beeps, \"Reset procedure complete!\"</span>")
 			reset_time = 0
 			can_be_reset = 1
 			timer = min(initial(timer), timer+60) // Give em another minute to reset it.

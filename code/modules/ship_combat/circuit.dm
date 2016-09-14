@@ -25,6 +25,10 @@
 		if(M && M.type)
 			spawn_type = M.type
 
+	examine(var/mob/user)
+		..()
+		user << "<span class='notice'>\The [src] has [get_efficiency(1,0,0)]% efficiency!</span>"
+
 	proc/rewire(var/chance = 1)
 		for(var/i=1 to internal_wiring.len)
 			if(internal_wiring[i] == BLACK)

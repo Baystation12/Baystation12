@@ -117,7 +117,7 @@
 				team = "team_three"
 			if(4)
 				team = "team_four"
-		var/new_id_type = text2path("/obj/item/weapon/card/id/space_battle/[team]/[job_type]") // /obj/item/weapon/card/id/space_battle/team_one/medic
+		var/new_id_type = text2path("/obj/item/weapon/card/id/space_battle/[team][job_type ? "/[job_type]" : ""]") // /obj/item/weapon/card/id/space_battle/team_one/medic
 		var/obj/item/weapon/card/id/W = new new_id_type(H)
 		if(id_desc)
 			W.desc = id_desc
@@ -135,6 +135,11 @@
 			var/obj/item/organ/internal/stack/S = H.internal_organs_by_name[BP_STACK]
 			if(H && H.mind && H.mind.team && S)
 				S.team = H.mind.team
+
+/decl/hierarchy/outfit/job/space_battle/sailor
+	name = OUTFIT_JOB_NAME("Space Sailor")
+	glasses = /obj/item/clothing/glasses/sunglasses
+
 
 /decl/hierarchy/outfit/job/space_battle/captain
 	name = OUTFIT_JOB_NAME("Space Commander")

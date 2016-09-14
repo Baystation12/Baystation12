@@ -13,7 +13,7 @@ var/list/ship_engines = list()
 	zlevel = holder.z
 	engine_id = id
 	for(var/obj/machinery/space_battle/engine_control/E in machines)
-		if (E.z == zlevel && E.engine_id == src.engine_id && !(src in E.engines))
+		if (zlevel in E.zlevels && E.engine_id == src.engine_id && !(src in E.engines))
 			E.engines += src
 			controller = E
 			break

@@ -4,8 +4,9 @@
 	icon = 'icons/obj/ship_battles.dmi'
 	icon_state = "sensor"
 	var/sensor_id = null // For dishes
-	var/can_sense = 1
-	idle_power_usage = 400
+	use_power = 2
+	idle_power_usage = 100
+	active_power_usage = 600
 	density = 1
 	anchored = 1
 
@@ -15,6 +16,10 @@
 	initialize()
 		..()
 		reconnect()
+		var/area/ship_battle/A = get_area(src)
+		if(A && istype(A))
+			req_access = list(A.team*10 - SPACE_ENGINEERING)
+
 
 	Destroy()
 		sensor_id = null
@@ -26,8 +31,11 @@
 	attack_hand(var/mob/user)
 		src.visible_message("<span class='notice'>\The [user] begins inspecting \the [src]..</span>")
 		if(do_after(user, 50))
-			user << "<span class='notice'>\The [src] has an efficiency of: [get_efficiency(1,0,0)]</span>"
+			var/efficiency = get_efficiency(1,0,0)
+			user << "<span class='[efficiency < 50 ? "warning" : "notice"]'>\The [src] has an efficiency of: [efficiency]%</span>"
 			user << "<span class='notice'>\The [src] ID tag is set to: \"[id_tag]\"</span>"
+			if(use_power == 1)
+				user << "<span class='warning'>\The [src] is disabled!</span>"
 			if(!istype(src, /obj/machinery/space_battle/missile_sensor/hub))
 				user << "<span class='notice'>\The [src] External Dish ID is set to: \"[sensor_id]\" \
 				<b><A href='?src=\ref[src];change_sensor_id=[1]'>\[Change\]</A></b></span>"
@@ -38,6 +46,13 @@
 	Topic(href, href_list)
 		if(Adjacent(usr) && !usr.stat)
 			if(href_list["change_sensor_id"])
+				var/mob/living/carbon/human/H = usr
+				if(!istype(H))
+					usr << "<span class='warning'>Only humans can do this!</span>"
+					return
+				if(!allowed(H))
+					usr << "<span class='warning'>You don't have access to do that!</span>"
+					return
 				var/inp = input(usr, "What would you like to change \the [src]'s ID to?")
 				if(inp)
 					if(length(inp) < 25)
@@ -55,24 +70,24 @@
 			return "Broken"
 		if(stat & NOPOWER)
 			return "Insufficient Power"
-		if(!can_sense)
+		if(use_power == 1)
 			return "Disabled"
 		if(needs_dish)
 			if(!dish)
 				reconnect()
 				if(!dish)
-					return "Wireless Connection Severed: Dish not responding."
+					return "Wireless Connection Severed: No connected dish."
 			else if(!dish.can_sense())
 				return "Wireless Connection Severed: Dish status - [dish.can_sense()]"
 		return 1
 
 	examine(var/mob/user)
 		..()
-		if(!can_sense)
+		if(use_power == 1)
 			usr << "<span class='warning'>It's disabled!</span>"
 
 	emp_act()
-		can_sense = 0
+		use_power = 1
 		..()
 
 	reconnect()
@@ -87,8 +102,10 @@
 	attackby(var/obj/item/O, var/mob/user)
 		if(!stat & (BROKEN|NOPOWER))
 			if(istype(O, /obj/item/stack/cable_coil))
-				user.visible_message("<span class='notice'>[user] [can_sense ? "disables" : "enables"] \the [src]!</span>", "<span class='notice'>You [can_sense ? "disable" : "enable"] \the [src]!")
-				can_sense = !can_sense
+				user.visible_message("<span class='notice'>[user] [use_power > 1 ? "disables" : "enables"] \the [src]!</span>", "<span class='notice'>You [use_power > 1 ? "disable" : "enable"] \the [src]!")
+				if(use_power == 1)
+					use_power = 2
+				else use_power = 1
 				return
 			if(istype(O, /obj/item/weapon/wrench))
 				anchored = !anchored
@@ -126,6 +143,16 @@
 	desc = "Allows the enemy ship to be easily tracked."
 	needs_dish = 1
 	icon_state = "tracker"
+	var/obj/machinery/space_battle/missile_sensor/ship_sensor/target_finder
+
+/obj/machinery/space_battle/missile_sensor/tracking/proc/find_targets()
+	return target_finder.find_targets()
+
+/obj/machinery/space_battle/missile_sensor/tracking/reconnect()
+	for(var/obj/machinery/space_battle/missile_sensor/ship_sensor/T in world)
+		if(T.z == src.z && id_tag && T.id_tag == src.id_tag)
+			target_finder = T
+	..()
 
 /obj/machinery/space_battle/missile_sensor/scanning // Allows the eye nightvision & see_turf
 	name = "ship radar"
@@ -239,6 +266,8 @@
 		xray.name = "[initial(xray.name)]([id_num])"
 	if(advguidance)
 		advguidance.name = "[initial(advguidance.name)]([id_num])"
+	for(var/obj/machinery/space_battle/missile_sensor/radar/R in radars)
+		R.name = "[initial(R.name)]([id_num])"
 	return
 
 /obj/machinery/space_battle/missile_sensor/hub/proc/has_guidance()
@@ -293,11 +322,45 @@
 
 /obj/machinery/space_battle/missile_sensor/hub/proc/has_radars()
 	if(!can_sense()) return 0
-	var/count = 0
-	for(var/obj/machinery/space_battle/missile_sensor/radar/M in radars)
-		if(M.can_sense())
-			count++
-	return count
+	return radars
+
+/****************
+*Overmap Sensors*
+****************/
+
+/obj/machinery/space_battle/missile_sensor/ship_sensor
+	name = "ship sensor"
+	desc = "A ship sensor."
+	component_type = /obj/item/weapon/component/sensor
+	needs_dish = 1
+
+/obj/machinery/space_battle/missile_sensor/ship_sensor/proc/find_targets()
+	if(!can_sense()) return 0
+	if(component && istype(component, /obj/item/weapon/component/sensor))
+		var/obj/item/weapon/component/sensor/S = component
+		return S.find_targets()
+	else return 0
+
+/obj/machinery/space_battle/missile_sensor/ship_sensor/gravity // Allows the eye to move
+	name = "gravity sensor"
+	desc = "Searches for gravity sensors."
+	needs_dish = 1
+	icon_state = "tracker"
+	component_type = /obj/item/weapon/component/sensor
+
+/obj/machinery/space_battle/missile_sensor/ship_sensor/gravity // Allows the eye to move
+	name = "gravity sensor"
+	desc = "Searches for gravity sensors."
+	needs_dish = 1
+	icon_state = "tracker"
+	component_type = /obj/item/weapon/component/sensor
+
+/obj/machinery/space_battle/missile_sensor/ship_sensor/gravity // Allows the eye to move
+	name = "gravity sensor"
+	desc = "Searches for gravity sensors."
+	needs_dish = 1
+	icon_state = "tracker"
+	component_type = /obj/item/weapon/component/sensor
 
 
 

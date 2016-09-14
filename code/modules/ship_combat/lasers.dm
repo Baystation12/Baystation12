@@ -36,11 +36,11 @@
 
 /obj/machinery/space_battle/laser_control/proc/find_targets()
 	if(!linked)
-		return 0
+		return null
 	if(istype(linked, /obj/effect/overmap/ship))
 		var/obj/effect/overmap/ship/S = linked
 		if(!S.is_still())
-			return 0
+			return null
 	var/list/targets = list()
 	for(var/obj/effect/overmap/possible_target in range(3, linked))
 		if(possible_target.team != linked.team)
@@ -128,6 +128,7 @@
 			else
 				return_message += "<br><span class='warning'>Laser #[i] intercepted by shielding!</span>"
 		return_message += "<br><span class='notice'>Laser fire successful!</span>"
+		stored_charge = 0
 		return return_message
 
 

@@ -125,7 +125,7 @@ for reference:
 			qdel(src)
 			return
 		if(2.0)
-			src.health -= 25
+			src.health -= 50
 			if (src.health <= 0)
 				visible_message("<span class='danger'>\The [src] is blown apart!</span>")
 				dismantle()

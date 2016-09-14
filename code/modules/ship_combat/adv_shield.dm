@@ -147,7 +147,7 @@
 		powered = powernet ? powernet.avail : 0
 		if(!powered)
 			online = 0
-			visible_message("<span class='warning'>\The [src] beeps, \"Warning! Power intake insufficient! Shutting down.\"</span>")
+			visible_message("<span class='warning'>\icon[src] \The [src] beeps, \"Warning! Power intake insufficient! Shutting down.\"</span>")
 	var/cost = update_flux(powered) // Will be used for capacitors later.
 	powernet.draw_power(cost)
 	update_feedback()

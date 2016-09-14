@@ -180,7 +180,7 @@
 
 	if (building==0)
 		init_round_start()
-	else
+	else if (building==1)
 		area = get_area(src)
 		area.apc = src
 		opened = 1

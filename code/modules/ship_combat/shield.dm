@@ -2,7 +2,6 @@
 /obj/machinery/space_battle/shieldwallgen
 		name = "Shield Generator"
 		desc = "A shield generator."
-		icon = 'icons/obj/stationobjs.dmi'
 		icon_state = "Shield_Gen"
 		anchored = 0
 		density = 1
@@ -60,11 +59,19 @@
 		ui.open()
 		ui.set_auto_update(1)
 
+/obj/machinery/space_battle/shieldwallgen/update_icon()
+	if(stat & BROKEN) return ..()
+	else
+		if(!active)
+			icon_state = "Shield_Gen"
+		else
+			icon_state = "Shield_Gen_active"
+
 /obj/machinery/space_battle/shieldwallgen/Topic(href, href_list)
 	if(href_list["toggle"])
 		if(src.active >= 1)
 			src.active = 0
-			icon_state = "Shield_Gen"
+			update_icon()
 
 			usr.visible_message("\The [usr] turned the shield generator off.", \
 				"You turn off the shield generator.", \
@@ -72,7 +79,7 @@
 			for(var/dir in list(1,2,4,8)) src.cleanup(dir)
 		else
 			src.active = 1
-			icon_state = "Shield_Gen +a"
+			update_icon()
 			usr.visible_message("\The [usr] turned the shield generator on.", \
 				"You turn on the shield generator.", \
 				"You hear heavy droning.")
@@ -138,7 +145,9 @@
 	return 1
 
 /obj/machinery/space_battle/shieldwallgen/process()
-	power()
+	power = 0
+	if(!(stat & BROKEN))
+		power()
 	var/efficiency = get_efficiency(-1,1)
 	if(power)
 		storedpower -= 1200*efficiency //the generator post itself uses some power
@@ -167,8 +176,8 @@
 		if(src.power == 0)
 			src.visible_message("\red The [src.name] shuts down due to lack of power!", \
 				"You hear heavy droning fade out")
-			icon_state = "Shield_Gen"
 			src.active = 0
+			update_icon()
 			for(var/dir in list(1,2,4,8)) src.cleanup(dir)
 
 /obj/machinery/space_battle/shieldwallgen/proc/setup_field(var/NSEW = 0)

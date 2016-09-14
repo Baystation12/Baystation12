@@ -42,6 +42,7 @@
 		gun = null
 		sensor = null
 		tube = null
+		processing_objects.Remove(src)
 		return ..()
 
 	hear_talk(mob/M as mob, text)
@@ -56,10 +57,11 @@
 
 	update_icon()
 		if(stat & (BROKEN|NOPOWER)) return ..()
-		if(cooldown >= world.timeofday)
+		var/time = time_remaining()
+		if(time > 1)
 			icon_state = "recalibrated"
-		else
-			icon_state = initial(icon_state)
+			return
+		icon_state = "computer"
 
 	proc/cooldown(var/time)
 		if(circuit_board)
@@ -101,6 +103,7 @@
 			if (!(src in linked.fire_controls))
 				linked.fire_controls.Add(src)
 		reconnect()
+		processing_objects.Add(src)
 
 	proc/find_targets()
 		starts.Cut()
@@ -111,8 +114,8 @@
 			if(!S.is_still())
 				return 0
 		var/list/targettable_z_levels = list()
-		for(var/obj/effect/overmap/ship/ship in range(3, linked))
-			targettable_z_levels.Add(ship.map_z[1])
+		for(var/obj/effect/overmap/S in range(3, linked))
+			targettable_z_levels.Add(S.map_z[1])
 		var/area/ship_battle/us = get_area(src)
 		if(!istype(us)) return
 		for(var/obj/missile_start/S in world)
@@ -241,7 +244,7 @@
 				user << "<span class='danger'>CAUTION: X-ray module offline. Internal view unavailable: [has_microwave]</span>"
 
 		if(cooldown >= world.timeofday)
-			user << "<span class='warning'>Sensors are recalibrating!</span>"
+			user << "<span class='warning'>Sensors are recalibrating! [time_remaining()] seconds left!</span>"
 
 		if(tube)
 			var/obj/loaded = locate(/obj/machinery/missile) in get_turf(tube)
@@ -314,6 +317,7 @@
 			else
 				eye << "<span class='warning'>You are not adjacent to \the [src]!</span>"
 		eye.return_to_owner()
+	return ..()
 
 /mob/missile_eye
 	name = "Eye"
@@ -456,7 +460,6 @@
 			return
 		var/wait_time = MISSILE_COOLDOWN
 		var/processed = 0
-		var/radars = linked.sensor.has_radars()
 		if(linked.firing_angle == "Underhand")
 			processed = 1
 			if(!guidance)
@@ -475,6 +478,8 @@
 			if(available_areas.len)
 				var/choice = input(usr, "Where would you like to aim?", "Underhand") in available_areas
 				var/area/ship_battle/chosen = available_areas[choice]
+				if(prob(50*guidance_efficiency))
+					chosen = pick(available_areas)
 				if(chosen)
 					var/turf/newloc = pick_area_turf(chosen)
 					if(newloc)
@@ -486,7 +491,7 @@
 							return
 						else
 							usr << "<span class='notice'>Missile launch successful!</span>"
-						wait_time *= 6*efficiency // Eyup
+						wait_time *= 10*efficiency // Eyup
 					else
 						usr << "<span class='warning'>You cannot aim there!</span>"
 				else
@@ -568,20 +573,21 @@
 			firing = 0
 
 		if(processed)
+			var/radar = 0
+			var/list/radars = linked.sensor.has_radars()
+			for(var/obj/machinery/space_battle/missile_sensor/radar/M in radars)
+				if(M.can_sense())
+					radar += M.get_efficiency(1,1,1)
+				else
+					usr << "<span class='danger'>NOTICE: [M.name] inactive: [M.can_sense()]!</span>"
+			radar = max(1, radar)
 			wait_time += wait
 			switch(linked.tube.dir)
 				if(8)
 					wait_time *= 1.75*efficiency
 				if(1 to 2)
 					wait_time *= 1.25*efficiency
-			var/radar_division = 1
-			for(var/obj/machinery/space_battle/missile_sensor/radar/R in radars)
-				var/failure_message = R.can_sense()
-				if(failure_message != 1)
-					usr << "<span class='notice'>Radar system([R.name]) unable to reduce recalibration: [failure_message]"
-				else
-					radar_division += R.get_efficiency(1,1)
-			wait_time /= radar_division
+			wait_time = max(50, wait_time / radar)
 			wait_time = linked.cooldown(wait_time)
 			usr << "<span class='notice'>Sensors are now calibrating. Please wait [(wait_time / 10)] seconds.</span>"
 			firing = 0

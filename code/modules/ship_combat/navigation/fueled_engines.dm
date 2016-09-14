@@ -61,6 +61,10 @@
 		spawn(0)
 			reagents.add_reagent("rocketfuel",2500)
 
+/obj/structure/reagent_dispensers/fueltank/rocketfuel/ex_act(var/severity = 0)
+	if(prob(60/severity))
+		..()
+	return 0
 //	examine(var/mob/user)
 //		..()
 //		user << "<span class='notice'>Upon inspection, you notice it has [reagents.get_reagent_amount("rocketfuel")]ml remaining!</span>"
@@ -96,6 +100,11 @@
 	var/fuel_id = null
 	idle_power_usage = 50
 	var/engine_id = null
+
+/obj/machinery/space_battle/engine/fuelled/attack_hand(var/mob/user)
+	if(controller)
+		controller.toggle()
+	user << "<span class='notice'>\The [src] is now [on ? "on" : "off"]!</span>"
 
 /obj/machinery/space_battle/engine/fuelled/initialize()
 	..()

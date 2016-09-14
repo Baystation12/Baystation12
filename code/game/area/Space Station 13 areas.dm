@@ -92,6 +92,11 @@ var/list/ghostteleportlocs = list()
 //////////
 /area/ship_battle/var/team = 1
 /area/ship_battle/has_gravity = 0
+/area/ship_battle/proc/change_team(var/T)
+	team = T
+	for(var/obj/machinery/space_battle/S in src.contents)
+		S.team = team
+	return 1
 /area/ship_battle/team_one
 	name = "\improper Hub Station"
 	icon_state = "purple"

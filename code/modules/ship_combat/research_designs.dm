@@ -1880,6 +1880,13 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/space_battle/ecm
 	sort_string = "AAAASBO"
 
+/datum/design/circuit/space_battle/warp_pad
+	name = "warp pad"
+	id = "warp_pad"
+	build_path = /obj/item/weapon/circuitboard/space_battle/warp_pad
+	sort_string = "AAAASBP"
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_BLUESPACE = 2)
+
 
 
 

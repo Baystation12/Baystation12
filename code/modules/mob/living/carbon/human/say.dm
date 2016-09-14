@@ -3,6 +3,11 @@
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
 
+	for(var/curse in list("fuck","shit","damn","whore","kill","hell","god","damnit"))	//*gasp
+		if(findtext(curse,  message))
+			src.client.potty_words += 1
+
+
 	message = sanitize(message)
 	..(message, alt_name = alt_name)
 

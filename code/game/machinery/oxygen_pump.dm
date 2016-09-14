@@ -116,7 +116,7 @@
 
 /obj/machinery/oxygen_pump/process()
 	if(breather)
-		if(!Adjacent(breather) || breather.wear_mask != contained)
+		if(get_dist(src, breather) > 3 || breather.wear_mask != contained)
 			if(tank)
 				tank.forceMove(src)
 			breather.remove_from_mob(contained)

@@ -84,5 +84,52 @@
 			tier = 3
 			mod = 0.6
 
+//Sensors
+/obj/item/weapon/component/sensor/proc/find_targets()
+	return 0
 
+/obj/item/weapon/component/sensor
+	name = "sensor"
+	desc = "A sensor component."
+	var/range = 3
+
+/obj/item/weapon/component/sensor/em
+	name = "em sensor"
+
+/obj/item/weapon/component/sensor/em/find_targets()
+	var/obj/effect/overmap/linked = map_sectors["[z]"]
+	var/list/targets = list()
+	if(linked && istype(linked))
+		for(var/obj/effect/overmap/target in range(range, linked))
+			if(target.em_sensitivity > 0)
+				targets += target
+	return targets
+
+
+/obj/item/weapon/component/sensor/thermal
+	name = "thermal sensor."
+
+/obj/item/weapon/component/sensor/thermal/find_targets()
+	var/obj/effect/overmap/linked = map_sectors["[z]"]
+	var/list/targets = list()
+	if(linked && istype(linked))
+		for(var/obj/effect/overmap/target in range(range, linked))
+			if(!istype(target, /obj/effect/overmap/ship))
+				targets += target
+			else
+				var/obj/effect/overmap/ship/S = target
+				if(!S.is_still())
+					targets += S
+	return targets
+
+/obj/item/weapon/component/sensor/grav
+	name = "gravity sensor"
+
+/obj/item/weapon/component/sensor/grav/find_targets()
+	var/obj/effect/overmap/linked = map_sectors["[z]"]
+	var/list/targets = list()
+	if(linked && istype(linked))
+		for(var/obj/effect/overmap/target in range(range, linked))
+			targets += target
+	return targets
 

@@ -8,6 +8,7 @@
 	var/repairs_made = 0
 	var/ghost_activity = 0
 	var/damage_dealt = 0
+	var/potty_words = 0
 
 	var/last_words
 	var/timeofdeath
@@ -29,6 +30,7 @@
 		new_karma -= gun_count
 		if(damage_dealt)
 			new_karma -= damage_dealt / 10
+		new_karma -= potty_words * 0.5
 
 		karma = new_karma
 		return new_karma

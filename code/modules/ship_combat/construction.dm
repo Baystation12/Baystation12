@@ -8,6 +8,7 @@
 							/obj/item/stack/cable_coil = 2,
 							/obj/item/weapon/stock_parts/capacitor = 1,
 							/obj/item/upgrade_module = 1)
+	origin_tech = list(TECH_DATA = 2, TECH_COMAT = 1, TECH_MATERIAL = 2)
 
 /*****
 *MISC*
@@ -69,6 +70,16 @@
 						  /obj/item/weapon/component/engine/ion = 1,
 						  /obj/item/stack/material/steel = 15,
 						  /obj/item/upgrade_module = 1)
+
+/obj/item/weapon/circuitboard/space_battle/warp_pad
+	name = T_BOARD("warp pad")
+	build_path = /obj/machinery/space_battle/warp_pad
+	req_components = list(/obj/item/stack/cable_coil = 50,
+						  /obj/item/weapon/stock_parts/capacitor = 5,
+						  /obj/item/weapon/cell = 1,
+						  /obj/item/stack/material/steel = 5,
+						  /obj/item/upgrade_module = 1)
+	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_BLUESPACE = 2)
 
 /********
 *SENSORS*

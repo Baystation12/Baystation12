@@ -54,7 +54,7 @@
 			break
 		if(next.jammed && jamming == 2)
 			return -1
-		if(next.current_charge >= next.maxcharge)
+		if(next.current_charge >= next.maxcharge && !(next.stat & (NOPOWER)))
 			rails.Add(next)
 		if(next.stat & BROKEN)
 			break
@@ -105,7 +105,7 @@
 				to_kill << "<span class='danger'>You're caught in \the [M]'s launch!</span>"
 
 		var/mob/lasttouch = get_mob_by_key(M.fingerprintslast)
-		if(lasttouch && ishuman(lasttouch))
+		if(lasttouch && lasttouch.client)
 			lasttouch.client.missiles_loaded += 1
 		if(rails.len)
 			M.power *= (1+(rails.len*0.02))
@@ -148,8 +148,7 @@
 		else
 			return 1
 	for(var/obj/machinery/space_battle/tube_barrel/B in rails)
-		B.current_charge = 0
-		B.update_icon()
+		B.fired()
 	var/turf/T = get_turf(src)
 	var/datum/gas_mixture/env = T.return_air()
 	if(env && env.return_pressure())
@@ -247,6 +246,7 @@
 	process()
 		if(use_power == 1)
 			processing_objects.Remove(src)
+			return
 		else
 			if(!(stat & (NOPOWER|BROKEN) || jammed))
 				current_charge += active_power_usage/2
@@ -270,6 +270,16 @@
 			else
 				icon_state = initial(icon_state)
 		else return ..()
+
+/obj/machinery/space_battle/tube_barrel/ex_act()
+	current_charge = 0
+	..()
+
+/obj/machinery/space_battle/tube_barrel/proc/fired()
+	current_charge = 0
+	use_power = 1
+	update_icon()
+	processing_objects.Remove(src)
 
 
 /obj/machinery/space_battle/tube_barrel/proc/charge_up()

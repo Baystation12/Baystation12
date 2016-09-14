@@ -40,16 +40,21 @@
 	var/component_type = null
 	var/obj/item/weapon/component/component
 	var/can_be_destroyed = 1
+	var/team = 0
 	has_circuit = 1
 	resistance = 1.5
 	density = 1
 	anchored = 1
 	var/id_num = 0
+	var/repairing = 0
 
 	New()
 		..()
 		if(component_type)
 			component = new component_type(src)
+		var/area/ship_battle/A = get_area(src)
+		if(A && istype(A))
+			team = A.team
 
 	proc/rename(var/identification)
 		return 1
@@ -58,17 +63,18 @@
 		..()
 		if(!powered(power_channel))
 			var/turf/T = get_turf(src)
-			var/obj/structure/cable/C = T.get_cable_node()
-			var/datum/powernet/PN
-			if(C)	PN = C.powernet		// find the powernet of the connected cable
+			if(T)
+				var/obj/structure/cable/C = T.get_cable_node()
+				var/datum/powernet/PN
+				if(C)	PN = C.powernet		// find the powernet of the connected cable
 
-			if(PN)
-				if(PN.draw_power(idle_power_usage) >= idle_power_usage)
-					if(stat & NOPOWER)
-						stat &= ~NOPOWER
-				else
-					stat |= NOPOWER
-					return 1
+				if(PN)
+					if(PN.draw_power(idle_power_usage) >= idle_power_usage)
+						if(stat & NOPOWER)
+							stat &= ~NOPOWER
+					else
+						stat |= NOPOWER
+						return 1
 		update_icon()
 
 
@@ -117,7 +123,7 @@
 		if(can_be_destroyed && damage_level >= max_damage)
 			if(!(stat & NOPOWER))
 				src.visible_message("<span class='danger'>\The [src] fizzles and sparks violently!</span>")
-				explosion(src, 0, rand(0,1), rand(1,3), rand(3,7))
+				explosion(src, 0, 0, rand(1,3), rand(3,7))
 			else
 				src.visible_message("<span class='danger'>\The [src] collapses!</span>")
 			qdel(src)
@@ -146,84 +152,113 @@
 			power_change()
 		if(damage_level)
 			if(istype(I, /obj/item/weapon/wrench))
-				if(damage_level == 1)
+				if(damage_level == 1 && !repairing)
 					user.visible_message("<span class='notice'>[user] begins repairing \the [src] with \the [I]...</span>")
+					repairing = 1
 					if(do_after(user,150))
 						user << "<span class='notice'>You tighten the armour plating!"
 						fix_machine(user)
+						repairing = 0
 						return
+					else repairing = 0
 			if(istype(I, /obj/item/weapon/crowbar))
-				if(damage_level == 2)
+				if(damage_level == 2 && !repairing)
 					user.visible_message("<span class='notice'>[user] begins repairing \the [src] with \the [I]...</span>")
+					repairing = 1
 					if(do_after(user,150))
 						user << "<span class='notice'>You fix the armour plating!"
 						damage_level--
+						repairing = 0
 						return
+					else repairing = 0
 			if(istype(I, /obj/item/stack/material/steel))
-				if(damage_level == 3)
+				if(damage_level == 3 && !repairing)
 					var/obj/item/stack/material/steel/S = I
 					if(!S.can_use(5))
 						user << "<span class='warning'>You need atleast 5 sheets to do that!</span>"
 					else
 						user.visible_message("<span class='notice'>[user] begins repairing \the [src] with \the [I]...</span>")
+						repairing = 1
 						if(do_after(user,150))
 							damage_level--
+							repairing = 0
 							return
+						else repairing = 0
 			if(istype(I,/obj/item/weapon/wirecutters))
-				if(damage_level == 4)
+				if(damage_level == 4 && !repairing)
 					user.visible_message("<span class='notice'>[user] begins repairing \the [src] with \the [I]...</span>")
+					repairing = 1
 					if(do_after(user,150))
 						user << "<span class='notice'>You fix the loose wiring!</span>"
 						damage_level--
+						repairing = 0
 						return
-			if(istype(I, /obj/item/stack/cable_coil))
+					else repairing = 0
+			if(istype(I, /obj/item/stack/cable_coil) && !repairing)
 				var/obj/item/stack/cable_coil/C = I
 				if(C.can_use(5))
 					user.visible_message("<span class='notice'>[user] begins repairing \the [src] with \the [I]...</span>")
+					repairing = 1
 					if(do_after(user,150))
 						user << "<span class='notice'>You repair the internal wiring!</span>"
 						damage_level--
+						repairing = 0
+					else repairing = 0
 				else
 					user << "<span class='notice'>You need atleast 5 lengths of cable to do that!</span>"
 				return
 			if(istype(I, /obj/item/weapon/screwdriver))
-				if(damage_level == 6)
+				if(damage_level == 6 && !repairing)
 					user.visible_message("<span class='notice'>[user] begins repairing \the [src] with \the [I]...</span>")
+					repairing = 1
 					if(do_after(user,150))
 						user << "<span class='notice'>You anchor the circuit boards in place!</span>"
 						damage_level--
-					return
+						repairing = 0
+						return
+					else repairing = 0
 			if(istype(I, /obj/item/device/multitool))
-				if(damage_level == 7)
+				if(damage_level == 7 && !repairing)
 					user.visible_message("<span class='notice'>[user] begins repairing \the [src] with \the [I]...</span>")
+					repairing = 1
 					if(do_after(user,150))
 						user << "<span class='notice'>You tune the circuit boards!</span>"
 						damage_level--
-					return
+						repairing = 0
+						return
+					else repairing = 0
 			if(istype(I,/obj/item/stack/material/glass/reinforced))
-				if(damage_level == 8)
+				if(damage_level == 8 && !repairing)
 					user.visible_message("<span class='notice'>[user] begins repairing \the [src] with \the [I]...</span>")
+					repairing = 1
 					if(do_after(user,150))
 						user << "<span class='notice'>You repair the circuit boards!</span>"
+						damage_level--
+						repairing = 0
 					return
 			if(istype(I,/obj/item/weapon/weldingtool))
-				if(damage_level >= 9)
+				if(damage_level >= 9 && !repairing)
 					var/obj/item/weapon/weldingtool/F = I
 					if(F.welding)
 						user.visible_message("<span class='notice'>[user] begins repairing \the [src] with \the [I]...</span>")
+						repairing = 1
 						if(do_after(user,150))
 							if(F.remove_fuel(1, user))
 								damage_level--
 								user << "<span class='notice'>You repair the structural frame!</span>"
 							else
 								user << "<span class='warning'>You need more fuel to do that!</span>"
+							repairing = 0
+						else repairing = 0
 					else
 						user << "<span class='warning'>The welding tool must be on!</span>"
 					return
 		if(istype(I, /obj/item/device/multitool))
 			user << "<span class='notice'>\The [src]'s ID tag is set to: \"[id_tag]\"</span>"
-			var/newid = text2num(input(user, "What would you like to set \the [src]'s id to? (Nothing to cancel)", "Multitool"))
-			if(!newid) return
+			var/newid = input(user, "What would you like to set \the [src]'s id to? (Nothing to cancel)", "Multitool")
+			if(!newid)
+				user << "<span class='warning'>Invalid ID tag!</span>"
+				return
 			if(length(newid) < 25)
 				id_tag = lowertext(newid)
 			else
@@ -269,7 +304,7 @@
 			if(7)
 				damagetext = "\The [src]'s circuitboards need tuning! You need to repair them using a multitool."
 			if(8)
-				damagetext = "\The [src]'s circuitboards are extremely damaged. You need to repair them with some glass!"
+				damagetext = "\The [src]'s circuitboards are extremely damaged. You need to repair them with some reinforced glass!"
 			if(9 to INFINITY)
 				damagetext = "\The [src]'s structure is battered. You need to repair it	using a welder!"
 		user << "<span class='warning'>[damagetext]</span>"
@@ -285,44 +320,27 @@
 
 
 /obj/machinery/door/firedoor/battle
-	req_one_access = list(1,2,3,4)
-	req_access = list()
 
 	New()
 		..()
+		req_access = list()
+		req_one_access = list()
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
-			switch(A.team)
-				if(1)
-					req_one_access = list(1)
-				if(2)
-					req_one_access = list(11)
-				if(3)
-					req_one_access = list(21)
-				if(4)
-					req_one_access = list(31)
+			req_access = list(A.team*10 - 9)
 
 /obj/machinery/alarm/battle
-	req_one_access = list(1,2,3,4)
-	req_access = list()
 	has_circuit = 1
 
 	New()
 		..()
+		req_access = list()
+		req_one_access = list()
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
-			switch(A.team)
-				if(1)
-					req_one_access = list(5)
-				if(2)
-					req_one_access = list(15)
-				if(3)
-					req_one_access = list(25)
-				if(4)
-					req_one_access = list(35)
+			req_access = list(A.team*10 - 9)
 
 /obj/machinery/power/apc/battle
-	req_one_access = list(1,2,3,4)
 	req_access = list()
 	has_circuit = 1
 
@@ -330,16 +348,7 @@
 		..()
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
-			switch(A.team)
-				if(1)
-					req_one_access = list(5)
-				if(2)
-					req_one_access = list(15)
-				if(3)
-					req_one_access = list(25)
-				if(4)
-					req_one_access = list(35)
-
+			req_access = list(A.team*10 - 9)
 
 /obj/machinery/light/small/battle
 	name = "emergency bulb"
@@ -351,7 +360,10 @@
 	brightness_range = 5
 	brightness_power = 3
 	desc = "A small lighting fixture."
-	light_type = /obj/item/weapon/light/bulb/red
+	light_type = /obj/item/weapon/light/bulb/red/battle
+
+/obj/item/weapon/light/bulb/red/battle
+	broken_chance = 0
 
 /datum/reagent/lexorin/necrosis
 	name = "necrosa"
@@ -438,7 +450,7 @@
 	icon_state = "wallmed"
 	icon_deny = "wallmed-deny"
 	req_access = list()
-	req_one_access = list(1,2,3,4)
+	req_one_access = list(1,11,21,31)
 	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
 	products = list(/obj/item/stack/medical/bruise_pack = 1,/obj/item/stack/medical/ointment = 1,/obj/item/device/healthanalyzer = 1)
 
@@ -446,15 +458,8 @@
 		..()
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
-			switch(A.team)
-				if(1)
-					req_one_access = list(1)
-				if(2)
-					req_one_access = list(11)
-				if(3)
-					req_one_access = list(21)
-				if(4)
-					req_one_access = list(31)
+			req_one_access = list(A.team*10 - 9)
+
 /obj/item/clothing/head/helmet/space/battle
 	name = "battle helmet"
 	icon_state = "space"
@@ -551,6 +556,8 @@
 
 /obj/machinery/power/smes/buildable/battle
 	charge = 1e6
+	output_level = 20 KILOWATTS
+	input_level = 20 KILOWATTS
 
 	output_attempt = 1
 
@@ -571,6 +578,8 @@
 //40KW Capacity, 2.5MW I/O
 /obj/machinery/power/smes/buildable/battle/supercapacitor
 	name = "supercapacitor"
+	output_level = 100 KILOWATTS
+	input_level = 100 KILOWATTS
 
 /obj/machinery/power/smes/buildable/battle/supercapacitor/New()
 	..(0)
@@ -582,6 +591,8 @@
 /obj/machinery/power/smes/buildable/battle/backup
 	name = "backup capacitor"
 	output_attempt = 0
+	output_level = 10 KILOWATTS
+	input_level = 10 KILOWATTS
 
 /obj/machinery/power/smes/buildable/battle/backup/New()
 	..(0)
@@ -590,7 +601,8 @@
 
 /obj/machinery/power/smes/buildable/battle/solar
 	name = "input capacitor"
-	output_attempt = 0
+	output_attempt = 1
+	input_attempt = 1
 
 //20KW Capacity, 300KW I/O
 /obj/machinery/power/smes/buildable/battle/solar/New()
@@ -599,6 +611,11 @@
 	component_parts += new /obj/item/weapon/smes_coil/weak(src)
 	recalc_coils()
 
-
+/obj/machinery/floor_light/prebuilt/battle
+	name = "floor cover"
+	alpha = 150
+	layer = 2.5
+	default_light_power = 1
+	default_light_range = 2
 
 

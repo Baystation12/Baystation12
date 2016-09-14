@@ -24,11 +24,11 @@
 /obj/item/organ/internal/lungs/set_dna(var/datum/dna/new_dna)
 	..()
 	sync_breath_types()
-	
+
 /obj/item/organ/internal/lungs/replaced()
 	..()
 	sync_breath_types()
-	
+
 /**
  *  Set these lungs' breath types based on the lungs' species
  */
@@ -69,7 +69,7 @@
 		return 1
 	//exposure to extreme pressures can rupture lungs
 	if(breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5)
-		if(!is_bruised() && prob(5)) //only rupture if NOT already ruptured
+		if(!is_bruised() && prob(1)) //only rupture if NOT already ruptured
 			rupture()
 	if(breath.total_moles == 0)
 		return 1

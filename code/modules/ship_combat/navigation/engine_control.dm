@@ -6,6 +6,7 @@
 	icon_state = "computer"
 	var/state = "status"
 	var/list/engines = list()
+	var/list/zlevels = list()
 	var/obj/effect/overmap/ship/linked
 	var/engine_id = null
 	var/cooldown = 0
@@ -13,25 +14,25 @@
 	density = 1
 
 /obj/machinery/space_battle/engine_control/initialize()
-	linked = map_sectors["[z]"]
-	if (linked)
-		if (!(src in linked.eng_controls))
-			linked.eng_controls.Add(src)
-		testing("Engines console at level [z] found a corresponding overmap object '[linked.name]'.")
-	else
-		testing("Engines console at level [z] was unable to find a corresponding overmap object.")
+	..()
+	refresh_engines()
 
-	for(var/datum/ship_engine/E in engines)
-		if (E.zlevel == z && !(E in engines))
-			if(engine_id && E.engine_id == src.engine_id)
-				engines += E
+/obj/machinery/space_battle/engine_control/proc/refresh_engines()
+	engines.Cut()
+	for(var/datum/ship_engine/E in ship_engines)
+		if ((E.zlevel in zlevels || E.zlevel == src.z) && E.engine_id == src.engine_id && !(src in engines))
+			engines += E
+			E.controller = src
+	return engines.len
+
 
 /obj/machinery/space_battle/engine_control/Destroy()
 	for(var/datum/ship_engine/S in engines)
 		S.controller = null
 	engines.Cut()
-	linked.eng_controls.Cut(linked.eng_controls.Find(src), (linked.eng_controls.Find(src))+1)
-	linked = null
+	if(linked)
+		linked.eng_controls.Cut(linked.eng_controls.Find(src), (linked.eng_controls.Find(src))+1)
+		linked = null
 	return ..()
 
 /obj/machinery/space_battle/engine_control/attack_hand(var/mob/user as mob)
@@ -41,6 +42,9 @@
 
 	if(!isAI(user))
 		user.set_machine(src)
+
+	if(!engines.len)
+		refresh_engines()
 
 	ui_interact(user)
 
@@ -127,7 +131,7 @@
 		var/obj/machinery/space_battle/helm/H = linked.nav_control
 		if(H && istype(H))
 			H.visible_message("<span class='warning'>\The [H] beeps, \"Cooldown set to [time_remaining()] seconds!\"</span>")
-		src.visible_message("<span class='warning'>\The [src] beeps, \"Cooldown set to [time_remaining()] seconds!\"</span>")
+		src.visible_message("<span class='warning'>\icon[src] \The [src] beeps, \"Cooldown set to [time_remaining()] seconds!\"</span>")
 /obj/machinery/space_battle/engine_control/proc/time_remaining()
 	var/time = (cooldown - world.timeofday)/10
 	if(time < 0)

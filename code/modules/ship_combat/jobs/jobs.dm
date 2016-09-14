@@ -1,20 +1,29 @@
 /datum/job/space_battle/is_position_available()
-	testing("Checking if position [src.title] is available(teamslen:[job_master.teams.len])(factionslen:[ticker.mode.allowed_factions.len])")
-	var/less_populated_team = ""
+	var/less_populated_team
 	var/less_populated_team_count = 0
+	var/passed = 0
+	for(var/obj/missile_start/S in world)
+		S.refresh_active()
+		if(S.active && S.team == team)
+			passed = 1
+	if(!passed)
+		return 0
+
 	for(var/i=1 to job_master.teams.len)
 		if(job_master.teams[i] in ticker.mode.allowed_factions)
-			if(!less_populated_team_count || job_master.teams[i] < less_populated_team_count)
-				less_populated_team = job_master.teams[i]
-				less_populated_team_count = job_master.teams[less_populated_team]
-				testing("Least populated team: [less_populated_team]:[less_populated_team_count]")
-	if(faction == less_populated_team)
-		return 1
-		testing("Is job available: [title]")
-	testing("Job is not available: [title]")
+			var/team_name = job_master.teams[i]
+			var/team_count = job_master.teams[team_name]
+			if(isnull(team_count)) team_count = 0
+			if(!less_populated_team || team_count < less_populated_team_count)
+				less_populated_team = team_name
+				less_populated_team_count = team_count
+	for(var/i=1 to job_master.teams.len)
+		if(job_master.teams[i] in ticker.mode.allowed_factions)
+			var/team_name = job_master.teams[i]
+			var/team_count = job_master.teams[team_name]
+			if(team_name == less_populated_team || team_count == less_populated_team_count)
+				return ..()
 	return 0
-
-
 //access 1-10 = Team One, 11 - 20 = Team Two ... 31-40 = Team Four
 //1 = Common(Halls)
 //2 = Firing Tubes
@@ -44,12 +53,12 @@
 	access = list(1)
 	minimal_access = list(1)
 	alt_titles = list("Team One Swab")
-	outfit_type = /decl/hierarchy/outfit/job/space_battle
+	outfit_type = /decl/hierarchy/outfit/job/space_battle/sailor
 	team = 1
 
 /datum/job/space_battle/team_one/engineer
 	title = "Team One Engineer"
-	access = list(1,5,6)
+	access = list(1,2,5,7)
 	minimal_access = list(1,5)
 	alt_titles = list("Team One Boatswain")
 	minimal_player_age = 3
@@ -125,12 +134,12 @@
 	access = list(11)
 	minimal_access = list(1)
 	alt_titles = list("Team Two Swab")
-	outfit_type = /decl/hierarchy/outfit/job/space_battle
+	outfit_type = /decl/hierarchy/outfit/job/space_battle/sailor
 	team = 2
 
 /datum/job/space_battle/team_two/engineer
 	title = "Team Two Engineer"
-	access = list(11,15,16)
+	access = list(11,12,15,17)
 	minimal_access = list(11,15)
 	alt_titles = list("Team Two Boatswain")
 	minimal_player_age = 3
@@ -203,15 +212,15 @@
 	supervisors = "the captain"
 	selection_color = "#800000"
 	economic_modifier = 1
-	access = list(1)
+	access = list(21)
 	minimal_access = list(21)
 	alt_titles = list("Team Three Swab")
-	outfit_type = /decl/hierarchy/outfit/job/space_battle
+	outfit_type = /decl/hierarchy/outfit/job/space_battle/sailor
 	team = 3
 
 /datum/job/space_battle/team_three/engineer
 	title = "Team Three Engineer"
-	access = list(21,25,26)
+	access = list(21,22,25,27)
 	minimal_access = list(21,25)
 	alt_titles = list("Team Three Boatswain")
 	minimal_player_age = 3
@@ -287,12 +296,12 @@
 	access = list(31)
 	minimal_access = list(31)
 	alt_titles = list("Team Four Swab")
-	outfit_type = /decl/hierarchy/outfit/job/space_battle
+	outfit_type = /decl/hierarchy/outfit/job/space_battle/sailor
 	team = 4
 
 /datum/job/space_battle/team_four/engineer
 	title = "Team Four Engineer"
-	access = list(31,35,36)
+	access = list(31,32,35,37)
 	minimal_access = list(31,35)
 	alt_titles = list("Team Four Boatswain")
 	minimal_player_age = 3

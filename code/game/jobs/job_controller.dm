@@ -32,13 +32,11 @@ var/global/datum/controller/occupations/job_master
 					continue
 				var/mob/candidate = pick(candidates)
 				AssignRole(candidate, job.title)
-				teams[(team2text(job.team))] += 1
 		for(var/datum/job/space_battle/job in unassigned_command_jobs) // If there's a team without a commander, force someone into it.
 			if(!job || !istype(job)) continue
 			for(var/mob/new_player/player in player_list)
 				if(player.ready && player.mind && !player.mind.assigned_role)
 					AssignRole(player, job.title)
-					teams[(team2text(job.team))] += 1
 					break
 		var/list/ready_players = list()
 		for(var/mob/new_player/player in player_list)
@@ -54,7 +52,6 @@ var/global/datum/controller/occupations/job_master
 					if(!M) continue
 					if(text2num(teams[job.team]) > (ready_players.len / factions.len)) continue // Equal amount per team.
 					AssignRole(M, job.title)
-					teams[(team2text(job.team))] += 1
 /*		for(var/datum/job/space_battle/job in occupations)
 			if(job.current_positions <= 0)
 				for(var/mob/new_player/player in player_list)
@@ -131,7 +128,9 @@ var/global/datum/controller/occupations/job_master
 				return 0
 			if(!job.player_old_enough(player.client))
 				return 0
-
+			if(istype(job, /datum/job/space_battle))
+				var/datum/job/space_battle/J = job
+				teams[(team2text(J.team))] += 1
 			var/position_limit = job.total_positions
 			if(!latejoin)
 				position_limit = job.spawn_positions
@@ -199,9 +198,6 @@ var/global/datum/controller/occupations/job_master
 			if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
 				Debug("GRJ Random job given, Player: [player], Job: [job]")
 				AssignRole(player, job.title)
-				if(istype(job, /datum/job/space_battle))
-					var/datum/job/space_battle/J = job
-					teams[(team2text(J.team))] += 1
 				unassigned -= player
 				break
 

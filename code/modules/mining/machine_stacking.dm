@@ -126,6 +126,7 @@
 			S.amount = stack_amt
 			stack_storage[sheet] -= stack_amt
 
-	console.updateUsrDialog()
+	if(console && istype(console))
+		console.updateUsrDialog()
 	return
 

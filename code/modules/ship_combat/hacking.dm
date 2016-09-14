@@ -6,6 +6,8 @@
 #define UNLOCK "Bruteforce Encryption Hack"// Limited to machines with ui_interact
 #define DISABLE "Disable Activity" // Limited to Sensors
 #define ADJUST_NETWORK "Sync To Local Network"
+#define SPOOF "Spoof"
+#define REMOVE "Disconnect"
 
 /obj/machinery/space_battle/hacking
 	name = "Hacking System"
@@ -14,19 +16,19 @@
 	icon_state = "computer"
 	density = 1
 	anchored = 1
+	var/target_team
 	var/list/target_teams = list()
 	var/list/hacked = list()				  //[1]=name, [2] = selectable type list, [3] = selectable action list,[3][1] = action, [3][2] = action delay, [4] = added delay to hacking.
-	var/list/available_categories = list(list("Sensors", list(/obj/machinery/space_battle/missile_sensor), list(EMP = 180, FRY_CIRCUIT = 180, DISABLE = 180), 600),\
-										 list("Life Support", list(/obj/machinery/alarm), list(EMP = 30, FRY_CIRCUIT = 60, UI_INTERACT = 30, UNLOCK = 150), 300),\
-										 list("Lighting", list(/obj/machinery/light), list(SHATTER = 20), 20), \
-										 list("Power", list(/obj/machinery/power/apc), list(EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 180), 1200), \
-										 list("Defensive Systems", list(/obj/machinery/space_battle/ecm, /obj/machinery/space_battle/shieldwallgen), list(EMP = 240, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 270), 1500), \
-										 list("Engines", list(/obj/machinery/space_battle/engine), list(EMP = 90, FRY_CIRCUIT = 180), 120), \
-										 list("Piloting", list(/obj/machinery/space_battle/engine_control, /obj/machinery/space_battle/helm), list(EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 120), 900), \
-										 list("Doors", list(/obj/machinery/door/airlock), list(EMP = 60, FRY_CIRCUIT = 60, UI_INTERACT = 60), 200), \
-										 list("Cameras", list(/obj/machinery/camera/autoname/battle), list(EMP = 15, FRY_CIRCUIT = 30, ADJUST_NETWORK = 90), 120))
+	var/list/available_categories = list(list("Sensors", list(/obj/machinery/space_battle/missile_sensor), list(REMOVE = 0, SPOOF = 60, EMP = 180, FRY_CIRCUIT = 180, DISABLE = 180), 600),\
+										 list("Life Support", list(/obj/machinery/alarm), list(REMOVE = 0, SPOOF = 60, EMP = 30, FRY_CIRCUIT = 60, UI_INTERACT = 30, UNLOCK = 150), 300),\
+										 list("Lighting", list(/obj/machinery/light), list(REMOVE = 0, SHATTER = 20), 20), \
+										 list("Power", list(/obj/machinery/power/apc), list(REMOVE = 0, EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 180), 1200), \
+										 list("Defensive Systems", list(/obj/machinery/space_battle/ecm, /obj/machinery/space_battle/shieldwallgen), list(REMOVE = 0, SPOOF = 60, EMP = 240, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 270), 1500), \
+										 list("Engines", list(/obj/machinery/space_battle/engine), list(REMOVE = 0, SPOOF = 60, EMP = 90, FRY_CIRCUIT = 180), 120), \
+										 list("Piloting", list(/obj/machinery/space_battle/engine_control, /obj/machinery/space_battle/helm), list(REMOVE = 0, SPOOF = 60, EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 120), 900), \
+										 list("Doors", list(/obj/machinery/door/airlock), list(REMOVE = 0, EMP = 60, FRY_CIRCUIT = 60, UI_INTERACT = 60), 200), \
+										 list("Cameras", list(/obj/machinery/camera/autoname/battle), list(REMOVE = 0, EMP = 15, FRY_CIRCUIT = 30, ADJUST_NETWORK = 90), 120))
 
-	var/team = 0
 	var/obj/machinery/hacking
 	var/speed = 1
 	var/hacking_time = 0
@@ -37,10 +39,9 @@
 	var/can_cancel = 1
 
 /obj/machinery/space_battle/hacking/attack_hand(var/mob/user)
+	if(!target_teams.len)
+		reconnect()
 	ui_interact(user)
-
-/obj/machinery/space_battle/hacking/New()
-	..()
 
 /obj/machinery/space_battle/hacking/update_icon()
 	return
@@ -48,14 +49,13 @@
 /obj/machinery/space_battle/hacking/reconnect()
 	target_teams.Cut()
 	for(var/obj/missile_start/S in world)
-		var/area/ship_battle/A = get_area(src)
-		if(!(A && istype(A))) continue
-		if(A.team != S.team)
-			if(S.active)
-				target_teams.Add("[S.team]")
+		if(S.team && S.team != src.team && S.active)
+			var/obj/effect/overmap/linked = map_sectors["[S.z]"]
+			if(linked)
+				target_teams.Add("[linked.name]")
 
 	if(target_teams.len)
-		team = target_teams[1]
+		target_team = target_teams[1]
 	..()
 
 /obj/machinery/space_battle/hacking/process()
@@ -90,7 +90,7 @@
 		categories.Add(category)
 	data["categories"] = categories
 	data["menu"] = menu
-	data["team"] = team
+	data["team"] = target_team
 	if(detection < 15)
 		data["detection"] = 1
 	else if(detection < 50)
@@ -138,11 +138,11 @@
 		icon_state = initial(icon_state)
 		can_cancel = initial(can_cancel)
 	if(href_list["team"])
-		var/index = target_teams.Find(team)
+		var/index = target_teams.Find(target_team)
 		index++
 		if(index > target_teams.len)
 			index = 1
-		team = target_teams[index]
+		target_team = target_teams[index]
 	if(href_list["speed"])
 		if(speed == 3)
 			speed = 1
@@ -160,21 +160,18 @@
 		if(!category_types)
 			usr << "<span class='warning'>A problem has occured!</span>"
 		else
-//			usr << "DEBUG: Category Type \[[category_type]\]"
 			var/list/targets = list()
 			for(var/obj/machinery/M in world)
 				if(is_type_in_list(M, category_types))
 					if(!(M.stat & (NOPOWER|BROKEN|EMPED|MAINT)))
-						var/area/ship_battle/S = get_area(M)
-						var/mteam = (S && istype(S)) ? S.team : 0
-//						usr << "DEBUG: Machine Team: \[[mteam]\] Set team: \[[team]\]"
-						if(mteam == text2num(team))
-//							usr << "DEBUG: Machine found: [M]"
+						var/obj/effect/overmap/O = map_sectors["[M.z]"]
+						if(O && O.name == target_team)
 							targets.Add(M)
 			if(!targets.len)
 				usr << "<span class='warning'>No targets are currently broadcasting!</span>"
 			else
-				var/obj/machinery/target = pick(targets)
+				var/obj/machinery/target
+				target = pick(targets)
 				var/time = begin_hacking(target, added_time)
 				usr << "<span class='notice'>Hacking begun on [target]! It will end in: [time] seconds!</span>"
 	if(href_list["hacked_object"])
@@ -182,13 +179,15 @@
 		for(var/obj/machinery/M in hacked)
 			if("[M.name]" == href_list["hacked_object"])
 				selected = M
-		if(!selected)
-			usr << "<span class='warning'>Something has gone wrong! You tried to select something we don't know about!</span>"
+				if(!selected)
+					usr << "<span class='warning'>Unable to designate hacking target: Wireless connection severed. Removing data..</span>"
+					hacked.Cut(hacked.Find(selected),  (hacked.Find(selected)+1))
+				break
 	if(href_list["action"])
 		if(selected.stat & (BROKEN|NOPOWER|MAINT))
 			usr << "<span class='warning'>\The [selected] is not responding!</span>"
 			selected.visible_message("<span class='warning'>\The [src] buzzes briefly!</span>")
-			src.visible_message("<span class='warning'>\The [src] beeps, \"Remote connection to \the [selected] unavailable. Disconnecting...</span>")
+			src.visible_message("<span class='warning'>\icon[src] \The [src] beeps, \"Remote connection to \the [selected] unavailable. Disconnecting...</span>")
 			hacked.Cut(hacked.Find(selected),  (hacked.Find(selected)+1))
 			selected = null
 		else
@@ -207,6 +206,12 @@
 			switch(action_type)
 				if(EMP)
 					selected.emp_act(1)
+				if(SPOOF)
+					var/msg = input(usr, "What message do you wish to spoof?", "Hacking")
+					if(!msg || length(msg) > 25)
+						usr << "<span class='warning'>Invalid!</span>"
+					else
+						selected.visible_message("<span class='warning'>[RadioChat(msg, rand(70,100), 8)]</span>")
 				if(FRY_CIRCUIT)
 					if(selected.circuit_board)
 						for(var/i in selected.circuit_board.internal_wiring)
@@ -247,14 +252,14 @@
 							C.replace_networks(uniquelist(team_string))
 
 			operation = action_type
-			src.visible_message("<span class='notice'>\The [src] beeps, \"Running [action_type].exe on \the [selected]. Estimated time: [begin_hacking(null, time, 0)] seconds.\"</span>")
-			if(prob(5 * (1+detection*0.1) * get_efficiency(0,1) * speed) || action_type == SHATTER)
+			src.visible_message("<span class='notice'>\icon[src] \The [src] beeps, \"Running [action_type].exe on \the [selected]. Estimated time: [begin_hacking(null, time, 0)] seconds.\"</span>")
+			if(prob(5 * (1+detection*0.1) * get_efficiency(0,1) * speed) || action_type == SHATTER || action_type == REMOVE)
 				var/index = hacked.Find(selected)
 				hacked.Cut(index, index+1)
 				var/N = selected.name
 				if(action_type != SHATTER)
 					spawn(rand(25,80))
-						src.visible_message("<span class='warning'>\The [src] beeps, \"Hack attempt detected by counter measures. Remote connection to \the [N] has been lost.\"</span>")
+						src.visible_message("<span class='warning'>\icon[src] \The [src] beeps, \"Hack attempt detected by counter measures. Remote connection to \the [N] has been lost.\"</span>")
 			selected = null
 	src.add_fingerprint(usr)
 	nanomanager.update_uis(src)
@@ -312,7 +317,7 @@
 		hacked.Add(hacking)
 		hacking = null
 	menu = "complete"
-	src.visible_message("<span class='notice'>\The [src] beeps, \"Hacking attempt successful.\"</span>")
+	src.visible_message("<span class='notice'>\icon[src] \The [src] beeps, \"Hacking attempt successful.\"</span>")
 	icon_state = initial(icon_state)
 	operation = initial(operation)
 	can_cancel = initial(can_cancel)

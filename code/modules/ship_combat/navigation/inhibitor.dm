@@ -6,14 +6,26 @@
 	density = 1
 	var/cooldown_time = 0
 
+	New()
+		..()
+		var/area/ship_battle/A = get_area(src)
+		if(A && istype(A))
+			req_access = list(A.team*10 - SPACE_NAVIGATION)
+
 	attack_hand(var/mob/user)
 		if(cooldown_time >= world.timeofday)
 			user << "<span class='warning'>\The [src] cannot activate again for another [round((cooldown_time - world.timeofday)/10)] seconds</span>"
+			return
 		else if(!circuit_board)
 			user << "<span class='warning'>\The [src] does not have a circuit!</span>"
+			return
 		else if(get_efficiency(1,0) < 50)
 			user << "<span class='warning'>The circuit inside \the [src] is not efficient enough to power \the [src]!</span>"
-		else if(alert(user,"Are you sure you want to activate the inhibitor?", "Engine Inhibitor", "Yes", "No.") == "Yes")
+			return
+		if(!allowed(user))
+			user << "<span class='warning'>You do not have access to use this machinery!</span>"
+			return
+		else if(alert(user,"Are you sure you want to activate the inhibitor? Do this only when near other ships, or you'll get stuck!", "Engine Inhibitor", "Yes", "No.") == "Yes")
 			user.visible_message("<span class='danger'>\The [user] activates \the [src]!</span>")
 			var/obj/effect/overmap/ship/linked = map_sectors["[z]"]
 			for(var/obj/effect/overmap/ship/S in range(3, linked))
@@ -33,5 +45,5 @@
 			circuit_board.emp_act(1)
 			spawn(10)
 				src.visible_message("<span class='warning'>\The [src] spits out \the [circuit_board]</span>")
-				circuit_board.forceMove(get_turf(user))
+				circuit_board.forceMove(get_turf(src))
 				circuit_board = null

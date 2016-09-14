@@ -484,10 +484,10 @@
 	path = /obj/item/conveyor_construct
 	hidden = 0
 	category = "Devices and Components"
-	resources = list(DEFAULT_WALL_MATERIAL = 2500)
+	resources = list(DEFAULT_WALL_MATERIAL = 4000)
 
-/datum/autolathe/recipe/conveyor_belt
-	name = "conveyor belt"
+/datum/autolathe/recipe/conveyor_switch
+	name = "conveyor switch"
 	path = /obj/item/conveyor_switch_construct
 	hidden = 0
 	category = "Devices and Components"

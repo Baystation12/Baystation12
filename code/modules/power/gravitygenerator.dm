@@ -9,6 +9,25 @@
 	density = 1
 	var/obj/machinery/gravity_generator = null
 
+	New()
+		..()
+		spawn(30)
+			if(gravity_generator:on)
+				gravity_generator:on = 0
+
+				for(var/area/A in gravity_generator:localareas)
+					var/obj/machinery/gravity_generator/G
+					for(G in machines)
+						if((A in G.localareas) && (G.on))
+							break
+					if(!G)
+						A.gravitychange(0,A)
+
+
+			else
+				for(var/area/A in gravity_generator:localareas)
+					gravity_generator:on = 1
+					A.gravitychange(1,A)
 
 /obj/machinery/gravity_generator/
 	name = "Gravitational Generator"
@@ -20,7 +39,7 @@
 	use_power = 1
 	idle_power_usage = 200
 	active_power_usage = 1000
-	var/on = 1
+	var/on = 0
 	var/list/localareas = list()
 	var/effectiverange = 25
 
