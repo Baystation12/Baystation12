@@ -27,6 +27,8 @@
 	var/totalFlavor = 0
 	for(var/taste in data)
 		totalFlavor += data[taste]
+	if(!totalFlavor)
+		return
 	for(var/taste in data)
 		if(data[taste]/totalFlavor < 0.1)
 			data -= taste

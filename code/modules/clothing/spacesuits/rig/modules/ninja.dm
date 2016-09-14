@@ -16,8 +16,8 @@
 	disruptable = 1
 	disruptive = 0
 
-	use_power_cost = 50
-	active_power_cost = 10
+	use_power_cost = 5 KILOWATTS
+	active_power_cost = 500
 	passive_power_cost = 0
 	module_cooldown = 30
 
@@ -38,7 +38,8 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	H << "<font color='blue'><b>You are now invisible to normal detection.</b></font>"
-	H.invisibility = INVISIBILITY_LEVEL_TWO
+	H.cloaked = TRUE
+	H.update_icons()
 
 	anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
 
@@ -52,7 +53,8 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	H << "<span class='danger'>You are now visible.</span>"
-	H.invisibility = 0
+	H.cloaked = FALSE
+	H.update_icons()
 
 	anim(get_turf(H), H,'icons/mob/mob.dmi',,"uncloak",,H.dir)
 	anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
@@ -67,11 +69,11 @@
 	name = "teleportation module"
 	desc = "A complex, sleek-looking, hardsuit-integrated teleportation module."
 	icon_state = "teleporter"
-	use_power_cost = 200
+	use_power_cost = 25 KILOWATTS
 	redundant = 1
 	usable = 1
 	selectable = 1
-
+	module_cooldown = 60
 	engage_string = "Emergency Leap"
 
 	interface_name = "VOID-shift phase projector"
@@ -148,7 +150,7 @@
 	engage_string = "Fabricate Net"
 
 	fabrication_type = /obj/item/weapon/energy_net
-	use_power_cost = 70
+	use_power_cost = 20 KILOWATTS
 
 /obj/item/rig_module/fabricator/energy_net/engage(atom/target)
 

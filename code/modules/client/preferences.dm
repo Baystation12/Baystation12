@@ -57,6 +57,8 @@ datum/preferences
 	var/faction = "None"                //Antag faction/general associated faction.
 	var/religion = "None"               //Religious association.
 
+	var/char_branch						//branch system
+	var/char_rank						//rank system
 		//Mob preview
 	var/icon/preview_icon = null
 

@@ -143,7 +143,8 @@
 	return
 
 /obj/item/weapon/paper_bundle/Topic(href, href_list)
-	..()
+	if(..())
+		return 1
 	if((src in usr.contents) || (istype(src.loc, /obj/item/weapon/folder) && (src.loc in usr.contents)))
 		usr.set_machine(src)
 		var/obj/item/weapon/in_hand = usr.get_active_hand()
@@ -178,11 +179,11 @@
 				page = pages.len
 
 			update_icon()
-	else
-		usr << "<span class='notice'>You need to hold it in hands!</span>"
-	if (istype(src.loc, /mob) ||istype(src.loc.loc, /mob))
+
 		src.attack_self(usr)
 		updateUsrDialog()
+	else
+		usr << "<span class='notice'>You need to hold it in hands!</span>"
 
 /obj/item/weapon/paper_bundle/verb/rename()
 	set name = "Rename bundle"

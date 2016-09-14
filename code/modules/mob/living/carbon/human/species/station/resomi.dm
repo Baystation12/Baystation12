@@ -30,9 +30,10 @@
 	total_health = 50
 	brute_mod = 1.35
 	burn_mod =  1.35
+	metabolism_mod = 2.0
 	mob_size = MOB_SMALL
 	holder_type = /obj/item/weapon/holder/human
-	short_sighted = 1
+	short_sighted = 6
 	gluttonous = GLUT_TINY
 	blood_volume = 280
 	hunger_factor = 0.2
@@ -73,8 +74,8 @@
 	has_organ = list(
 		BP_HEART =    /obj/item/organ/internal/heart,
 		BP_LUNGS =    /obj/item/organ/internal/lungs,
-		BP_LIVER =    /obj/item/organ/internal/liver,
-		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_LIVER =    /obj/item/organ/internal/liver/resomi,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys/resomi,
 		BP_BRAIN =    /obj/item/organ/internal/brain,
 		BP_EYES =     /obj/item/organ/internal/eyes
 		)
@@ -85,8 +86,4 @@
 		/datum/unarmed_attack/stomp/weak
 		)
 
-/datum/species/resomi/get_vision_flags(var/mob/living/carbon/human/H)
-	if(!(H.sdisabilities & DEAF) && !H.ear_deaf)
-		return SEE_SELF|SEE_MOBS
-	else
-		return SEE_SELF
+	inherent_verbs = list(/mob/living/carbon/human/proc/sonar_ping)

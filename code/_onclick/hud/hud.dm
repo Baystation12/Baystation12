@@ -160,9 +160,6 @@ datum/hud/New(mob/owner)
 //	item_action_list = null // ?
 	mymob = null
 
-/datum/hud/proc/common_hud()
-    mymob.client.screen += mymob.client.void
-
 /datum/hud/proc/hidden_inventory_update()
 	if(!mymob) return
 	if(ishuman(mymob))
@@ -361,7 +358,9 @@ datum/hud/New(mob/owner)
 	update_action_buttons()
 
 /mob/proc/add_click_catcher()
-	client.screen += client.void
+	if(!client.void)
+		client.void = create_click_catcher()
+	client.screen |= client.void
 
 /mob/new_player/add_click_catcher()
 	return

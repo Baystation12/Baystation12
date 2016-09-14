@@ -5,7 +5,7 @@
 	desc = "A gun that changes temperatures. It has a small label on the side, 'More extreme temperatures will cost more charge!'"
 	var/temperature = T20C
 	var/current_temperature = T20C
-	charge_cost = 100
+	charge_cost = 10
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 4, TECH_POWER = 3, TECH_MAGNET = 2)
 	slot_flags = SLOT_BELT|SLOT_BACK
 	requires_two_hands = 2
@@ -63,11 +63,11 @@
 
 /obj/item/weapon/gun/energy/temperature/process()
 	switch(temperature)
-		if(0 to 100) charge_cost = 1000
-		if(100 to 250) charge_cost = 500
-		if(251 to 300) charge_cost = 100
-		if(301 to 400) charge_cost = 500
-		if(401 to 500) charge_cost = 1000
+		if(0 to 100) charge_cost = 100
+		if(100 to 250) charge_cost = 50
+		if(251 to 300) charge_cost = 10
+		if(301 to 400) charge_cost = 50
+		if(401 to 500) charge_cost = 100
 
 	if(current_temperature != temperature)
 		var/difference = abs(current_temperature - temperature)

@@ -61,6 +61,8 @@ datum/unit_test
 	var/reported = 0	// If it's reported a success or failure.  Any tests that have not are assumed to be failures.
 	var/why_disabled = "No reason set."   // If we disable a unit test we will display why so it reminds us to check back on it later.
 
+datum/unit_test/proc/log_debug(var/message)
+	log_unit_test("[ascii_yellow]---  DEBUG  --- \[[name]\]: [message][ascii_reset]")
 
 datum/unit_test/proc/log_bad(var/message)
 	log_unit_test("[ascii_red]\[[name]\]: [message][ascii_reset]")
@@ -91,9 +93,9 @@ datum/unit_test/proc/check_result()
 proc/load_unit_test_changes()
 /*
 	//This takes about 60 seconds to run on Travis and is only used for the ZAS vacume check on The Asteroid.
-	if(config.generate_asteroid != 1)
+	if(config.generate_map != 1)
 		log_unit_test("Overiding Configuration option for Asteroid Generation to ENABLED")
-		config.generate_asteroid = 1	// The default map requires it, the example config doesn't have this enabled.
+		config.generate_map = 1	// The default map requires it, the example config doesn't have this enabled.
  */
 
 

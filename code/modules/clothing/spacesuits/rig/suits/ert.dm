@@ -25,7 +25,7 @@
 
 /obj/item/clothing/head/helmet/space/rig/ert
 	light_overlay = "helmet_light_dual"
-	camera_networks = list(NETWORK_ERT)
+	camera = /obj/machinery/camera/network/ert
 	species_restricted = list("Human","Skrell","Unathi")
 
 /obj/item/clothing/suit/space/rig/ert
@@ -36,7 +36,7 @@
 
 /obj/item/clothing/gloves/rig/ert
 	species_restricted = list("Human","Skrell","Unathi")
-	
+
 
 /obj/item/weapon/rig/ert/engineer
 	name = "asset protection engineering hardsuit control module"

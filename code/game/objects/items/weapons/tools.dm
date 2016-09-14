@@ -224,13 +224,6 @@
 		user << "<span class='notice'>Welder refueled</span>"
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
-	else if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && src.welding)
-		message_admins("[key_name_admin(user)] triggered a fueltank explosion with a welding tool.")
-		log_game("[key_name(user)] triggered a fueltank explosion with a welding tool.")
-		user << "<span class='danger'>You begin welding on the fueltank and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.</span>"
-		var/obj/structure/reagent_dispensers/fueltank/tank = O
-		tank.explode()
-		return
 	if (src.welding)
 		remove_fuel(1)
 		var/turf/location = get_turf(user)

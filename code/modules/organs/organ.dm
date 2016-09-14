@@ -17,7 +17,6 @@ var/list/organ_cache = list()
 
 	// Reference data.
 	var/mob/living/carbon/human/owner // Current mob owning the organ.
-	var/list/transplant_data          // Transplant match data.
 	var/list/autopsy_data = list()    // Trauma data for forensics.
 	var/list/trace_chemicals = list() // Traces of chemicals in the organ.
 	var/datum/dna/dna                 // Original DNA.
@@ -32,7 +31,6 @@ var/list/organ_cache = list()
 /obj/item/organ/Destroy()
 
 	if(owner)           owner = null
-	if(transplant_data) transplant_data.Cut()
 	if(autopsy_data)    autopsy_data.Cut()
 	if(trace_chemicals) trace_chemicals.Cut()
 	dna = null
@@ -288,7 +286,14 @@ var/list/organ_cache = list()
 /obj/item/organ/external/cut_away(var/mob/living/user)
 	removed(user)
 
-/obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1)
+/**
+ *  Remove an organ
+ * 
+ *  drop_organ - if true, organ will be dropped at the loc of its former owner
+ *  detach - if true, organ will be detached from parent. Keep false for organs 
+ *           removed together with parent, as with an amputation.
+ */
+/obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
 
 	if(!istype(owner))
 		return
@@ -298,10 +303,11 @@ var/list/organ_cache = list()
 	owner.internal_organs_by_name -= null
 	owner.internal_organs -= src
 
-	var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
-	if(affected) 
-		affected.internal_organs -= src
-		status |= ORGAN_CUT_AWAY
+	if(detach)
+		var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
+		if(affected) 
+			affected.internal_organs -= src
+			status |= ORGAN_CUT_AWAY
 
 	if(drop_organ)
 		dropInto(owner.loc)
@@ -329,18 +335,11 @@ var/list/organ_cache = list()
 
 	if(status & ORGAN_CUT_AWAY)
 		return 0 //organs don't work very well in the body when they aren't properly attached
-
-	var/datum/reagent/blood/transplant_blood = locate(/datum/reagent/blood) in reagents.reagent_list
-	transplant_data = list()
-	if(!transplant_blood)
-		transplant_data["species"] =    target.species.name
-		transplant_data["blood_type"] = target.dna.b_type
-		transplant_data["blood_DNA"] =  target.dna.unique_enzymes
-	else
-		transplant_data["species"] =    transplant_blood.data["species"]
-		transplant_data["blood_type"] = transplant_blood.data["blood_type"]
-		transplant_data["blood_DNA"] =  transplant_blood.data["blood_DNA"]
-
+		
+	// robotic organs emulate behavior of the equivalent flesh organ of the species
+	if(robotic >= ORGAN_ROBOT || !species)
+		species = target.species
+		
 	owner = target
 	forceMove(owner) //just in case
 	processing_objects -= src

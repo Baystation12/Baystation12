@@ -1,6 +1,8 @@
-
 var/datum/map/using_map = new USING_MAP_DATUM
 var/list/all_maps = list()
+
+var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
+var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /hook/startup/proc/initialise_map_list()
 	for(var/type in typesof(/datum/map) - /datum/map)
@@ -37,11 +39,6 @@ var/list/all_maps = list()
 	                               //That doesn't mean we have to include them with the rest of the jobs though, especially for map specific ones.
 	                               //Also including them lets us override already created jobs, letting us keep the datums to a minimum mostly.
 	                               //This is probably a lot longer explanation than it needs to be.
-	// Unit test vars
-	var/list/exempt_areas = list()
-	var/const/NO_APC = 1
-	var/const/NO_VENT = 2
-	var/const/NO_SCRUBBER = 4
 
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock
@@ -59,7 +56,13 @@ var/list/all_maps = list()
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
+<<<<<<< HEAD
 	var/allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Cyborg Storage")
+=======
+	var/flags = 0
+	var/evac_controller_type = /datum/evacuation_controller
+	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
+>>>>>>> dd5656613b4778940e028aefb5907f885cebccd6
 
 /datum/map/New()
 	..()
@@ -67,3 +70,19 @@ var/list/all_maps = list()
 		map_levels = station_levels.Copy()
 	if(!allowed_jobs)
 		allowed_jobs = subtypesof(/datum/job)
+
+// Used to apply various post-compile procedural effects to the map.
+/datum/map/proc/perform_map_generation()
+	return
+
+/datum/map/proc/refresh_mining_turfs()
+
+	set background = 1
+	set waitfor = 0
+
+	for(var/thing in mining_walls)
+		var/turf/simulated/mineral/M = thing
+		M.update_icon()
+	for(var/thing in mining_floors)
+		var/turf/simulated/floor/asteroid/M = thing
+		M.updateMineralOverlays()

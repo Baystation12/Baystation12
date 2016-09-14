@@ -11,7 +11,7 @@
 		return chest.attackby(W,user)
 
 	// Lock or unlock the access panel.
-	if(W.GetID())
+	if(W.GetIdCard())
 		if(subverted)
 			locked = 0
 			user << "<span class='danger'>It looks like the locking system has been shorted out.</span>"

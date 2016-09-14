@@ -19,11 +19,14 @@ They sell generic supplies and ask for generic supplies.
 				"trade_not_enough"  = "I'm sorry, your offer is not worth what you are asking for.",
 				"trade_blacklisted" = "You have offered a blacklisted item. My laws do not allow me to trade for that.",
 				"how_much"          = "ITEM will cost you roughly VALUE thalers, or something of equal worth.",
+				"what_want"         = "I have logged need for",
 
 				"compliment_deny"   = "I'm sorry, I am not allowed to let compliments affect the trade.",
 				"compliment_accept" = "Thank you, but that will not not change our business interactions.",
 				"insult_good"       = "I do not understand, are we not on good terms?",
 				"insult_bad"        = "I do not understand, are you insulting me?",
+
+				"bribe_refusal"     = "You have given me money to stay, however, I am a station. I do not leave.",
 				)
 	possible_wanted_items = list(/obj/item/device/                       = TRADER_SUBTYPES_ONLY,
 								/obj/item/device/assembly                = TRADER_BLACKLIST_ALL,
@@ -31,6 +34,7 @@ They sell generic supplies and ask for generic supplies.
 								/obj/item/device/encryptionkey/syndicate = TRADER_BLACKLIST,
 								/obj/item/device/onetankbomb             = TRADER_BLACKLIST,
 								/obj/item/device/radio                   = TRADER_BLACKLIST_ALL,
+								/obj/item/device/pda                     = TRADER_BLACKLIST_SUB,
 								/obj/item/device/uplink                  = TRADER_BLACKLIST)
 	possible_trading_items = list(/obj/item/weapon/storage/bag                       = TRADER_SUBTYPES_ONLY,
 								/obj/item/weapon/storage/bag/cash/infinite           = TRADER_BLACKLIST,

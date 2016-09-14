@@ -59,7 +59,8 @@ proc/admin_notice(var/message, var/rights)
 		<a href='?src=\ref[usr];priv_msg=\ref[M]'>PM</a> -
 		<a href='?src=\ref[src];subtlemessage=\ref[M]'>SM</a> -
 		[admin_jump_link(M, src)]\] <br>
-		<b>Mob type</b> = [M.type]<br><br>
+		<b>Mob type:</b> [M.type]<br>
+		<b>Inactivity time:</b> [M.client ? "[M.client.inactivity/600] minutes" : "Logged out"]<br/><br/>
 		<A href='?src=\ref[src];boot2=\ref[M]'>Kick</A> |
 		<A href='?_src_=holder;warn=[M.ckey]'>Warn</A> |
 		<A href='?src=\ref[src];newban=\ref[M]'>Ban</A> |
@@ -660,10 +661,9 @@ proc/admin_notice(var/message, var/rights)
 	set desc="Announce your desires to the world"
 	if(!check_rights(0))	return
 
-	var/message = input("Global message to send:", "Admin Announce", null, null)  as message//todo: sanitize for all?
+	var/message = input("Global message to send:", "Admin Announce", null, null) as message
+	message = sanitize(message, 500, extra = 0)
 	if(message)
-		if(!check_rights(R_SERVER,0))
-			message = sanitize(message, 500, extra = 0)
 		message = replacetext(message, "\n", "<br>") // required since we're putting it in a <p> tag
 		world << "<span class=notice><b>[usr.client.holder.fakekey ? "Administrator" : usr.key] Announces:</b><p style='text-indent: 50px'>[message]</p></span>"
 		log_admin("Announce: [key_name(usr)] : [message]")

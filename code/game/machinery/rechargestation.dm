@@ -7,7 +7,7 @@
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 50
-	var/mob/occupant = null
+	var/mob/living/occupant = null
 	var/obj/item/weapon/cell/cell = null
 	var/icon_update_tick = 0	// Used to rebuild the overlay only once every 10 ticks
 	var/charging = 0
@@ -88,6 +88,15 @@
 
 //Processes the occupant, drawing from the internal power cell if needed.
 /obj/machinery/recharge_station/proc/process_occupant()
+	// Check whether the mob is compatible
+	if(!isrobot(occupant) && !ishuman(occupant))
+		return
+
+	// If we have repair capabilities, repair any damage.
+	if(weld_rate && occupant.getBruteLoss() && cell.checked_use(weld_power_use * weld_rate * CELLRATE))
+		occupant.adjustBruteLoss(-weld_rate)
+	if(wire_rate && occupant.getFireLoss() && cell.checked_use(wire_power_use * wire_rate * CELLRATE))
+		occupant.adjustFireLoss(-wire_rate)
 
 	if(isrobot(occupant))
 		var/mob/living/silicon/robot/R = occupant
@@ -98,30 +107,20 @@
 			var/diff = min(R.cell.maxcharge - R.cell.charge, charging_power * CELLRATE) // Capped by charging_power / tick
 			var/charge_used = cell.use(diff)
 			R.cell.give(charge_used)
+		// If we are capable of repairing damage, reboot destroyed components and allow them to be repaired for very large power spike.
+		var/list/damaged = R.get_damaged_components(1,1,1)
+		if(damaged.len && wire_rate && weld_rate)
+			for(var/datum/robot_component/C in damaged)
+				if((C.installed == -1) && cell.checked_use(100 KILOWATTS * CELLRATE))
+					C.repair()
 
-		//Lastly, attempt to repair the cyborg if enabled
-		if(weld_rate && R.getBruteLoss() && cell.checked_use(weld_power_use * weld_rate * CELLRATE))
-			R.adjustBruteLoss(-weld_rate)
-		if(wire_rate && R.getFireLoss() && cell.checked_use(wire_power_use * wire_rate * CELLRATE))
-			R.adjustFireLoss(-wire_rate)
-
-	else if(ishuman(occupant))
-
+	if(ishuman(occupant))
 		var/mob/living/carbon/human/H = occupant
 
-		// In case they somehow end up with positive values for otherwise unobtainable damage...
-		if(H.getToxLoss()>0)   H.adjustToxLoss(-(rand(1,3)))
-		if(H.getOxyLoss()>0)   H.adjustOxyLoss(-(rand(1,3)))
-		if(H.getCloneLoss()>0) H.adjustCloneLoss(-(rand(1,3)))
-		if(H.getBrainLoss()>0) H.adjustBrainLoss(-(rand(1,3)))
+		// Recharge mechanical human mobs. Assuming 1 nutrition = 1 KJ of energy.
+		if(H.nutrition < 450)
+			H.nutrition += (cell.use(10 KILOWATTS * CELLRATE) / CELLRATE) / (1 KILOWATTS)
 
-		// Also recharge their internal battery.
-		if(!isnull(H.internal_organs_by_name["cell"]) && H.nutrition < 450)
-			H.nutrition = min(H.nutrition+10, 450)
-			cell.use(7000/450*10)
-		else if(H.nutrition < 400)//special snoflake FBP case
-			H.nutrition = min(H.nutrition+10, 400)
-			cell.use(7000/450*10)
 
 
 /obj/machinery/recharge_station/examine(mob/user)

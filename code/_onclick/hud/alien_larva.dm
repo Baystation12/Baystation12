@@ -33,4 +33,3 @@
 	mymob.client.screen = list()
 	mymob.client.screen += list( mymob.healths, mymob.fire)
 	mymob.client.screen += src.adding + src.other
-	common_hud()

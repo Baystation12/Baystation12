@@ -5,7 +5,7 @@
 	config_tag = "infestation"
 	required_players = 15
 	required_enemies = 5
-	end_on_antag_death = 1
+	end_on_antag_death = 0
 	antag_tags = list(MODE_BORER, MODE_XENOMORPH, MODE_CHANGELING)
 	require_all_templates = 1
 	votable = 0

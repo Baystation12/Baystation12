@@ -10,7 +10,7 @@
 		gun_options = init_subtypes(/datum/detective_gun_skin)
 
 /obj/item/weapon/gun/projectile/colt/detective/update_icon()
-	if(ammo_magazine)
+	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		if(unique_reskin)
 			icon_state = unique_reskin.icon_state
 		else

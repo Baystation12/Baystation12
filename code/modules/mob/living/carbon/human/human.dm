@@ -58,8 +58,9 @@
 	if(statpanel("Status"))
 		stat("Intent:", "[a_intent]")
 		stat("Move Mode:", "[m_intent]")
-		if(emergency_shuttle)
-			var/eta_status = emergency_shuttle.get_status_panel_eta()
+
+		if(evacuation_controller)
+			var/eta_status = evacuation_controller.get_status_panel_eta()
 			if(eta_status)
 				stat(null, eta_status)
 
@@ -316,7 +317,7 @@
 		var/obj/item/device/pda/P = wear_id
 		return P.owner
 	if(wear_id)
-		var/obj/item/weapon/card/id/I = wear_id.GetID()
+		var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
 		if(I)
 			return I.registered_name
 	return
@@ -324,7 +325,7 @@
 //gets ID card object from special clothes slot or null.
 /mob/living/carbon/human/proc/get_idcard()
 	if(wear_id)
-		return wear_id.GetID()
+		return wear_id.GetIdCard()
 
 //Removed the horrible safety parameter. It was only being used by ninja code anyways.
 //Now checks siemens_coefficient of the affected area by default
@@ -360,7 +361,7 @@
 			var/modified = 0
 			var/perpname = "wot"
 			if(wear_id)
-				var/obj/item/weapon/card/id/I = wear_id.GetID()
+				var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
 				if(I)
 					perpname = I.registered_name
 				else
@@ -1485,3 +1486,9 @@
 			return 0
 		return check_organ.can_feel_pain()
 	return !(species.flags & NO_PAIN)
+
+/mob/living/carbon/human/get_adjusted_metabolism(metabolism)
+	return ..() * (species ? species.metabolism_mod : 1)
+
+/mob/living/carbon/human/is_invisible_to(var/mob/viewer)
+	return (cloaked || ..())

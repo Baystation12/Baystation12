@@ -7,7 +7,7 @@
 
 	var/in_use = null	//tells the controller whether this shuttle needs processing
 
-	var/area_transition
+	var/area/area_transition
 	var/move_time = 0		//the time spent in the transition area
 	var/transit_direction = null	//needed for area/move_contents_to() to properly handle shuttle corners - not exactly sure how it works.
 

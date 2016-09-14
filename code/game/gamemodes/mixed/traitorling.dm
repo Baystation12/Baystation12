@@ -5,6 +5,6 @@
 	config_tag = "traitorling"
 	required_players = 10
 	required_enemies = 5
-	end_on_antag_death = 1
+	end_on_antag_death = 0
 	antag_tags = list(MODE_CHANGELING, MODE_TRAITOR)
 	require_all_templates = 1

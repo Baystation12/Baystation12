@@ -12,6 +12,8 @@
 	var/braces_needed = 2
 	var/list/supports = list()
 	var/supported = 0
+	var/base_power_usage = 10 KILOWATTS // Base power usage when the drill is running.
+	var/actual_power_usage = 10 KILOWATTS // Actual power usage, with upgrades in mind.
 	var/active = 0
 	var/list/resource_field = list()
 
@@ -31,7 +33,6 @@
 	//Upgrades
 	var/harvest_speed
 	var/capacity
-	var/charge_use
 	var/obj/item/weapon/cell/cell = null
 
 	//Flags
@@ -208,7 +209,7 @@
 	..()
 	harvest_speed = 0
 	capacity = 0
-	charge_use = 50
+	var/charge_multiplier = 0
 
 	for(var/obj/item/weapon/stock_parts/P in component_parts)
 		if(istype(P, /obj/item/weapon/stock_parts/micro_laser))
@@ -216,8 +217,12 @@
 		if(istype(P, /obj/item/weapon/stock_parts/matter_bin))
 			capacity = 200 * P.rating
 		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
-			charge_use -= 10 * P.rating
+			charge_multiplier += P.rating
 	cell = locate(/obj/item/weapon/cell) in component_parts
+	if(charge_multiplier)
+		actual_power_usage = base_power_usage / charge_multiplier
+	else
+		actual_power_usage = base_power_usage
 
 /obj/machinery/mining/drill/proc/check_supports()
 
@@ -264,11 +269,7 @@
 		system_error("resources depleted")
 
 /obj/machinery/mining/drill/proc/use_cell_power()
-	if(!cell) return 0
-	if(cell.charge >= charge_use)
-		cell.use(charge_use)
-		return 1
-	return 0
+	return cell && cell.checked_use(actual_power_usage * CELLRATE)
 
 /obj/machinery/mining/drill/verb/unload()
 	set name = "Unload Drill"
@@ -294,7 +295,7 @@
 
 /obj/machinery/mining/brace/New()
 	..()
-	
+
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/miningdrillbrace(src)
 

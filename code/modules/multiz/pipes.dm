@@ -13,9 +13,6 @@ obj/machinery/atmospherics/pipe/zpipe
 		dir = SOUTH
 		initialize_directions = SOUTH
 
-		var/obj/machinery/atmospherics/node1	//connection on the same Z
-		var/obj/machinery/atmospherics/node2	//connection on the other Z
-
 		var/minimum_temperature_difference = 300
 		var/thermal_conductivity = 0 //WALL_HEAT_TRANSFER_COEFFICIENT No
 

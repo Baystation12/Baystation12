@@ -409,7 +409,7 @@ var/list/sacrificed = list()
 						L.ajourn=0
 						return
 					else
-						L.take_organ_damage(10, 0)
+						L.take_organ_damage(3, 0)
 					sleep(100)
 			return fizzle()
 
@@ -655,7 +655,6 @@ var/list/sacrificed = list()
 							if(H.stat !=2)
 								if(prob(80) || worth)
 									usr << "<span class='cult'>The Geometer of Blood accepts this [worth ? "exotic " : ""]sacrifice.</span>"
-									cult.grant_runeword(usr)
 								else
 									usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
 									usr << "<span class='warning'>However, this soul was not enough to gain His favor.</span>"
@@ -666,7 +665,6 @@ var/list/sacrificed = list()
 							else
 								if(prob(40) || worth)
 									usr << "<span class='cult'>The Geometer of Blood accepts this [worth ? "exotic " : ""]sacrifice.</span>"
-									cult.grant_runeword(usr)
 								else
 									usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
 									usr << "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>"
@@ -681,7 +679,6 @@ var/list/sacrificed = list()
 								if(prob(40))
 
 									usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
-									cult.grant_runeword(usr)
 								else
 									usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
 									usr << "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>"
@@ -694,7 +691,6 @@ var/list/sacrificed = list()
 						if(H.stat !=2)
 							if(prob(80))
 								usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
-								cult.grant_runeword(usr)
 							else
 								usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
 								usr << "<span class='warning'>However, this soul was not enough to gain His favor.</span>"
@@ -705,7 +701,6 @@ var/list/sacrificed = list()
 						else
 							if(prob(40))
 								usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
-								cult.grant_runeword(usr)
 							else
 								usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
 								usr << "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>"
@@ -719,7 +714,6 @@ var/list/sacrificed = list()
 						else
 							if(prob(40))
 								usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
-								cult.grant_runeword(usr)
 							else
 								usr << "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>"
 								usr << "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>"

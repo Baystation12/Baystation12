@@ -1,6 +1,6 @@
 /datum/map/torch
 	// Unit test exemptions
-	exempt_areas = list(
+	apc_test_exempt_areas = list(
 		/area/AIsattele = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/calypso_hangar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/calypso_hangar/start = NO_SCRUBBER|NO_APC,
@@ -9,7 +9,6 @@
 		/area/constructionsite/ai = NO_SCRUBBER|NO_VENT,
 		/area/constructionsite/atmospherics = NO_SCRUBBER,
 		/area/constructionsite/teleporter = NO_SCRUBBER,
-		/area/crew_quarters/cryolocker = NO_SCRUBBER|NO_VENT,
 		/area/derelict/ship = NO_SCRUBBER|NO_VENT,
 		/area/engineering/atmos/storage = NO_SCRUBBER|NO_VENT,
 		/area/engineering/auxpower = NO_SCRUBBER|NO_VENT,
@@ -50,10 +49,13 @@
 		/area/rnd/test_area = NO_SCRUBBER|NO_VENT,
 		/area/server = 0,
 		/area/shuttle = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/shuttle/merchant = NO_SCRUBBER|NO_APC,
+		/area/shuttle/merchant/away = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/skipjack_station = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/solar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/storage = NO_SCRUBBER|NO_VENT,
+		/area/storage/auxillary/starboard = 0,
 		/area/storage/auxillary/port = 0,
 		/area/storage/tech = 0,
 		/area/storage/tools = 0,
@@ -72,3 +74,13 @@
 		/area/vacant/monitoring = NO_SCRUBBER|NO_VENT,
 		/area/vacant/missile = NO_SCRUBBER|NO_VENT,
 	)
+
+
+	area_coherency_test_exempt_areas = list(
+			/area/space,
+			/area/mine/explored,
+			/area/mine/unexplored,
+			/area/centcom/control,
+			/area/constructionsite,
+			/area/constructionsite/maintenance,
+			/area/solar/constructionsite)
