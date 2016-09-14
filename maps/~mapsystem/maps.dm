@@ -59,6 +59,8 @@ var/list/all_maps = list()
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
+	var/allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Cyborg Storage")
+
 /datum/map/New()
 	..()
 	if(!map_levels)
