@@ -51,7 +51,7 @@
 /datum/universal_state/nuclear_explosion/proc/dust_mobs(var/list/affected_z_levels)
 	for(var/mob/living/L in mob_list)
 		var/turf/T = get_turf(L)
-		if(T.z in affected_z_levels)
+		if(T && (T.z in affected_z_levels))
 			//this is needed because dusting resets client screen 1.5 seconds after being called (delayed due to the dusting animation)
 			var/mob/ghost = L.ghostize(0) //So we ghostize them right beforehand instead
 			if(ghost && ghost.client)

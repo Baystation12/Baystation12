@@ -1,5 +1,5 @@
 /obj/item/weapon/ore
-	name = "rock"
+	name = "small rock"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "ore2"
 	randpixel = 8

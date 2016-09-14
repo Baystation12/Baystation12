@@ -216,8 +216,7 @@
 				obj.update_icon()
 				if(istype(obj,/obj/item/weapon/implant))
 					var/obj/item/weapon/implant/imp = obj
-					imp.imp_in = null
-					imp.implanted = 0
+					imp.removed()
 			playsound(target.loc, 'sound/effects/squelch1.ogg', 50, 1)
 		else
 			user.visible_message("<span class='notice'>[user] removes \the [tool] from [target]'s [affected.name].</span>", \

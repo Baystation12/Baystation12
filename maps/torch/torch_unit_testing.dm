@@ -1,6 +1,6 @@
 /datum/map/torch
 	// Unit test exemptions
-	exempt_areas = list(
+	apc_test_exempt_areas = list(
 		/area/AIsattele = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/calypso_hangar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/calypso_hangar/start = NO_SCRUBBER|NO_APC,
@@ -74,3 +74,13 @@
 		/area/vacant/monitoring = NO_SCRUBBER|NO_VENT,
 		/area/vacant/missile = NO_SCRUBBER|NO_VENT,
 	)
+
+
+	area_coherency_test_exempt_areas = list(
+			/area/space,
+			/area/mine/explored,
+			/area/mine/unexplored,
+			/area/centcom/control,
+			/area/constructionsite,
+			/area/constructionsite/maintenance,
+			/area/solar/constructionsite)
