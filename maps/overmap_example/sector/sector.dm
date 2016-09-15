@@ -1,14 +1,14 @@
 /obj/effect/overmap/sector/test1
 	name = "Test Sector #1"
 	color = "#00FF00"
-	landing_area = /area/sector/shuttle/ingoing1
+	landing_areas = list(/area/sector/shuttle/ingoing1,/area/sector/shuttle/ingoing3,/area/sector/shuttle/ingoing4)
 	start_x = 8
 	start_y = 8
 
 /obj/effect/overmap/sector/test2
 	name = "Test Sector #2"
 	color = "#FF0000"
-	landing_area = /area/sector/shuttle/ingoing2
+	landing_areas = list(/area/sector/shuttle/ingoing2)
 	start_x = 6
 	start_y = 8
 
@@ -29,6 +29,12 @@
 
 /area/sector/shuttle/ingoing2
 	name = "\improper Entry Point #2"
+
+/area/sector/shuttle/ingoing3
+	name = "\improper Entry Point #3"
+
+/area/sector/shuttle/ingoing4
+	name = "\improper Entry Point #4"
 
 /area/sector/shuttle/outgoing2
 	name = "\improper Exit Point #2"
