@@ -334,7 +334,7 @@
 "gv" = (/obj/structure/cable/orange{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/plating,/area/ship_battle/aphrodyte/engines)
 "gw" = (/obj/machinery/space_battle/missile_sensor/hub{id_tag = "2south2gun"},/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/outline/blue,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/light/small/battle,/turf/simulated/floor/plating,/area/ship_battle/aphrodyte/engines)
 "gx" = (/obj/machinery/recharge_station,/obj/structure/window/reinforced,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/plating,/area/ship_battle/aphrodyte/engines)
-"gy" = (/obj/machinery/alarm/battle{dir = 1; pixel_y = -30},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/plating,/area/ship_battle/aphrodyte/engines)
+"gy" = (/obj/machinery/alarm/battle{dir = 1; pixel_y = -30},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/plating,/area/ship_battle/aphrodyte/engines)
 "gz" = (/obj/machinery/space_battle/hacking,/turf/simulated/wall,/area/ship_battle/aphrodyte/engines)
 "gA" = (/obj/machinery/atmospherics/pipe/simple/visible,/turf/simulated/floor/tiled,/area/ship_battle/aphrodyte/central)
 "gB" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/obj/machinery/oxygen_pump{dir = 4; pixel_x = 27},/turf/simulated/floor/tiled,/area/ship_battle/aphrodyte/central)

@@ -106,7 +106,7 @@
 					blue = 1
 				if(red && blue)
 					blues += 4
-					greens += 1
+					greens += 2
 			else if(internal_wiring[i] == YELLOW)
 				var/red = 0
 				var/green = 0
@@ -125,7 +125,7 @@
 					yellow = 1
 				if(red && yellow)
 					greens += 5
-					blues += 1
+					blues += 2
 				break
 
 		return list(blues, greens)
