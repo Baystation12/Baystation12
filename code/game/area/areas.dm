@@ -348,7 +348,7 @@ var/list/mob/living/forced_ambiance_list = new
 
 /area/proc/get_dimensions()
 	var/list/res = list("x"=1,"y"=1)
-	var/list/min = list("x"=255,"y"=255)
+	var/list/min = list("x"=world.maxx,"y"=world.maxy)
 	for(var/turf/T in src)
 		res["x"] = max(T.x, res["x"])
 		res["y"] = max(T.y, res["y"])
