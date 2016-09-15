@@ -1,11 +1,26 @@
 var/global/list/ore_data = list()
+var/global/list/ores_by_type = list()
+
+/hook/startup/proc/initialise_ore_data()
+	ensure_ore_data_initialised()
+	return 1
+
+/proc/ensure_ore_data_initialised()
+	if(ore_data && ore_data.len) return
+
+	for(var/oretype in subtypesof(/ore))
+		var/ore/O = new oretype()
+		ore_data[O.name] = O
+		ores_by_type[oretype] = O
 
 /ore
-	var/name
-	var/display_name
-	var/alloy
-	var/smelts_to
-	var/compresses_to
+	var/name              // Name of ore. Also used as a tag.
+	var/display_name      // Visible name of ore.
+	var/icon_tag          // Used for icon_state as "ore_[icon_tag]" and "rock_[icon_tag]"
+	var/material          // Name of associated mineral, if any
+	var/alloy             // Can alloy?
+	var/smelts_to         // Smelts to material; this is the name of the result material.
+	var/compresses_to     // Compresses to material; this is the name of the result material.
 	var/result_amount     // How much ore?
 	var/spread = 1	      // Does this type of deposit spread?
 	var/spread_chance     // Chance of spreading in any direction
@@ -17,11 +32,16 @@ var/global/list/ore_data = list()
 		"million" = 999
 		)
 	var/xarch_source_mineral = "iron"
+	var/list/origin_tech = list(TECH_MATERIAL = 1)
 
 /ore/New()
 	. = ..()
 	if(!display_name)
 		display_name = name
+	if(!material)
+		material = name
+	if(!icon_tag)
+		icon_tag = name
 
 /ore/uranium
 	name = "uranium"
@@ -36,6 +56,7 @@ var/global/list/ore_data = list()
 		"million" = 704
 		)
 	xarch_source_mineral = "potassium"
+	origin_tech = list(TECH_MATERIAL = 5)
 
 /ore/hematite
 	name = "iron"
@@ -50,6 +71,7 @@ var/global/list/ore_data = list()
 /ore/coal
 	name = "carbon"
 	display_name = "raw carbon"
+	icon_tag = "coal"
 	smelts_to = "plastic"
 	alloy = 1
 	result_amount = 5
@@ -60,6 +82,7 @@ var/global/list/ore_data = list()
 /ore/glass
 	name = "sand"
 	display_name = "sand"
+	icon_tag = "glass"
 	smelts_to = "glass"
 	alloy = 1
 	compresses_to = "sandstone"
@@ -80,6 +103,7 @@ var/global/list/ore_data = list()
 		"billion_lower" = 10
 		)
 	xarch_source_mineral = "phoron"
+	origin_tech = list(TECH_MATERIAL = 2)
 
 /ore/silver
 	name = "silver"
@@ -89,6 +113,7 @@ var/global/list/ore_data = list()
 	spread_chance = 10
 	ore = /obj/item/weapon/ore/silver
 	scan_icon = "mineral_uncommon"
+	origin_tech = list(TECH_MATERIAL = 3)
 
 /ore/gold
 	smelts_to = "gold"
@@ -104,6 +129,7 @@ var/global/list/ore_data = list()
 		"billion" = 4,
 		"billion_lower" = 3
 		)
+	origin_tech = list(TECH_MATERIAL = 4)
 
 /ore/diamond
 	name = "diamond"
@@ -114,6 +140,7 @@ var/global/list/ore_data = list()
 	ore = /obj/item/weapon/ore/diamond
 	scan_icon = "mineral_rare"
 	xarch_source_mineral = "nitrogen"
+	origin_tech = list(TECH_MATERIAL = 6)
 
 /ore/platinum
 	name = "platinum"

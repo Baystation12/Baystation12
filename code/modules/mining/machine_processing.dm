@@ -124,12 +124,10 @@
 		for(var/alloytype in typesof(/datum/alloy)-/datum/alloy)
 			alloy_data += new alloytype()
 
-	if(!ore_data || !ore_data.len)
-		for(var/oretype in typesof(/ore)-/ore)
-			var/ore/OD = new oretype()
-			ore_data[OD.name] = OD
-			ores_processing[OD.name] = 0
-			ores_stored[OD.name] = 0
+	ensure_ore_data_initialised()
+	for(var/ore in ore_data)
+		ores_processing[ore] = 0
+		ores_stored[ore] = 0
 
 	//Locate our output and input machinery.
 	spawn(5)
@@ -152,8 +150,10 @@
 	for(var/i = 0,i<sheets_per_tick,i++)
 		var/obj/item/weapon/ore/O = locate() in input.loc
 		if(!O) break
-		if(!isnull(ores_stored[O.material]))
-			ores_stored[O.material]++
+		if(O.ore && !isnull(ores_stored[O.ore.name]))
+			ores_stored[O.ore.name]++
+		else
+			world.log << "[src] encountered ore [O] with oretag [O.ore ? O.ore : "(no ore)"] which this machine did not have an entry for!"
 
 		qdel(O)
 
