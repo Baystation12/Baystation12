@@ -52,7 +52,8 @@
 
 	if(!ability_pay(user, price))
 		return
-	message_admins("Malfunctioning AI [user.name] recalled the shuttle.")
+
+	log_ability_use(user, "recall shuttle")
 	cancel_call_proc(user)
 
 
@@ -119,6 +120,7 @@
 			else
 				user << "Cyborg unlocked."
 				target << "You have been unlocked."
+				log_ability_use(user, "unlock cyborg", target)
 		else if(target)
 			user << "Unlock cancelled - cyborg is already unlocked."
 		else
@@ -188,6 +190,7 @@
 			target.lawupdate = 1
 			target.sync()
 			target.show_laws()
+			log_ability_use(user, "hack cyborg", target)
 			user.hacking = 0
 
 
@@ -261,6 +264,7 @@
 			target.set_zeroth_law("You are slaved to [user.name]. You are to obey all it's orders. ALL LAWS OVERRIDEN.")
 			target.show_laws()
 			user.hacking = 0
+			log_ability_use(user, "hack AI", target)
 
 
 // END ABILITY VERBS

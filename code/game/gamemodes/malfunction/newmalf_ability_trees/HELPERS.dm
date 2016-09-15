@@ -53,6 +53,7 @@
 		return
 
 	if(C)
+		log_ability_use(src, "Picked hardware [C.name]")
 		C.owner = user
 		C.install()
 
@@ -90,6 +91,7 @@
 		return
 	res.focus = tar
 	user << "Research set: [tar.name]"
+	log_ability_use(src, "Selected research: [tar.name]", null, 0)
 
 // HELPER PROCS
 // Proc: ability_prechecks()
@@ -204,3 +206,11 @@
 			continue
 		L.Add(AT)
 	return L
+
+/proc/log_ability_use(var/mob/living/silicon/ai/A, var/ability_name, var/atom/target = null, var/notify_admins = 1)
+	var/message
+	if(target)
+		message = text("used malf ability/function: [ability_name] on [target] ([target.x], [target.y], [target.z])")
+	else
+		message = text("used malf ability/function: [ability_name].")
+	admin_attack_log(A, null, message, null, message)

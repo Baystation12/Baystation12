@@ -1007,7 +1007,7 @@
 "ts" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
 "tt" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/ladder/up,/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
 "tu" = (/obj/machinery/vending/assist,/obj/effect/floor_decal/industrial/outline/grey,/turf/simulated/floor/tiled/dark,/area/storage/tech)
-"tv" = (/obj/structure/table/standard{name = "plastic table frame"},/obj/item/device/aicard,/turf/simulated/floor/tiled/dark,/area/storage/tech)
+"tv" = (/obj/structure/table/standard{name = "plastic table frame"},/obj/item/weapon/aicard,/turf/simulated/floor/tiled/dark,/area/storage/tech)
 "tw" = (/obj/structure/table/standard{name = "plastic table frame"},/obj/machinery/cell_charger{pixel_y = 5},/obj/item/weapon/cell/high{charge = 100; maxcharge = 15000},/obj/item/weapon/cell/high{charge = 100; maxcharge = 15000},/turf/simulated/floor/tiled/dark,/area/storage/tech)
 "tx" = (/obj/structure/table/standard{name = "plastic table frame"},/obj/item/device/flash,/obj/item/device/flash,/obj/item/device/flashlight{pixel_x = 1; pixel_y = 5},/obj/item/device/flashlight{pixel_x = 1; pixel_y = 5},/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_y = -24},/obj/structure/cable/green,/turf/simulated/floor/tiled/dark,/area/storage/tech)
 "ty" = (/obj/structure/table/standard{name = "plastic table frame"},/obj/item/weapon/storage/box/lights/mixed,/obj/machinery/requests_console{department = "Tech storage"; pixel_x = 28; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/storage/tech)

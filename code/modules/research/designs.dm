@@ -652,7 +652,7 @@ other types of metals and chemistry for reagents).
 	id = "intellicard"
 	req_tech = list(TECH_DATA = 4, TECH_MATERIAL = 4)
 	materials = list("glass" = 1000, "gold" = 200)
-	build_path = /obj/item/device/aicard
+	build_path = /obj/item/weapon/aicard
 	sort_string = "VACAA"
 
 /datum/design/item/posibrain
@@ -963,6 +963,16 @@ other types of metals and chemistry for reagents).
 	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/processor_unit/photonic/small
 	sort_string = "VBAAY"
+
+// Tesla Link
+/datum/design/item/modularcomponent/teslalink
+	name = "intellicard slot"
+	id = "aislot"
+	req_tech = list(TECH_POWER = 2, TECH_DATA = 3)
+	build_type = IMPRINTER
+	materials = list(DEFAULT_WALL_MATERIAL = 2000)
+	build_path = /obj/item/weapon/computer_hardware/ai_slot
+	sort_string = "VBAAZ"
 /*
 CIRCUITS BELOW
 */
@@ -1109,13 +1119,6 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 4)
 	build_path = /obj/item/weapon/circuitboard/rdconsole
 	sort_string = "HAAAE"
-
-/datum/design/circuit/aifixer
-	name = "AI integrity restorer"
-	id = "aifixer"
-	req_tech = list(TECH_DATA = 3, TECH_BIO = 2)
-	build_path = /obj/item/weapon/circuitboard/aifixer
-	sort_string = "HAAAF"
 
 /datum/design/circuit/comm_monitor
 	name = "telecommunications monitoring console"

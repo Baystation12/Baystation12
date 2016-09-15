@@ -1,0 +1,7 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "Created new AI restorer program, by default available on research consoles. Also added a new hardware piece that acts as connection between intellicard and a computer (laptop and console only). The new program allows AI restoration, as well as simple law modifications. It can also be used to purge malfunctioning AI's laws correctly. This program can only work on intellicarded AIs, that are placed in the computer itself. The program can be run/used by anyone, but requires head of staff level access to download from NTNet."
+  - rscdel: "Removed old AI integrity restorer console"
