@@ -587,13 +587,10 @@ var/global/datum/controller/occupations/job_master
 	var/mob/H = C.mob
 	if(C.prefs.spawnpoint)
 		spawnpos = spawntypes[C.prefs.spawnpoint]
-	if(using_map)
-		var/datum/map/M = using_map
-		if(!(C.prefs.spawnpoint in M.allowed_spawns))
-			if(H)
-				H << "Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead."
-				H.forceMove(pick(latejoin_cryo))//This for torch really
-//			return "has arrived on the station"
+	if(!(C.prefs.spawnpoint in using_map.allowed_spawns))
+		if(H)
+			H << "Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead."
+			H.forceMove(pick(latejoin_cryo))//This for torch really
 
 	if(spawnpos && istype(spawnpos))
 		if(spawnpos.check_job_spawning(rank))
