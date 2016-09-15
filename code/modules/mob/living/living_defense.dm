@@ -30,12 +30,12 @@
 		return 100
 
 	//this makes it so that X armour blocks X% damage, when including the chance of hard block.
-	//I double checked and this formula will also ensure that a higher effective_armor 
+	//I double checked and this formula will also ensure that a higher effective_armor
 	//will always result in higher (non-fullblock) damage absorption too, which is also a nice property
 	//In particular, blocked will increase from 0 to 50 as effective_armor increases from 0 to 0.999 (if it is 1 then we never get here because ofc)
 	//and the average damage absorption = (blocked/100)*(1-fullblock) + 1.0*(fullblock) = effective_armor
 	var/blocked = (effective_armor - fullblock)/(1 - fullblock)*100
-	
+
 	if(blocked > 20)
 		//Should we show this every single time?
 		if(soften_text)
@@ -45,7 +45,7 @@
 
 	return round(blocked, 1)
 
-//Adds two armor values together. 
+//Adds two armor values together.
 //If armor_a and armor_b are between 0-100 the result will always also be between 0-100.
 /proc/add_armor(var/armor_a, var/armor_b)
 	if(armor_a >= 100 || armor_b >= 100)

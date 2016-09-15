@@ -54,8 +54,7 @@
 	playsound(src.loc, 'sound/effects/EMPulse.ogg', 75, 1)
 
 	check_failure()
-	opacity = 1
-	spawn(20) if(src) opacity = 0
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	..()
 

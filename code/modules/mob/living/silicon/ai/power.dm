@@ -111,6 +111,9 @@
 	if(admin_powered)
 		return 0
 
+	if(istype(loc, /obj/item/weapon/aicard))
+		return 0
+
 	if(self_shutdown)
 		return AI_POWERUSAGE_LOWPOWER
 
@@ -136,7 +139,7 @@
 	// Powered, lose oxyloss
 	if(has_power(0))
 		// Self-shutdown mode uses only 10kW, so we don't have any spare power to charge.
-		if(!self_shutdown)
+		if(!self_shutdown || carded)
 			adjustOxyLoss(AI_POWERUSAGE_NORMAL - AI_POWERUSAGE_RECHARGING)
 		return
 
