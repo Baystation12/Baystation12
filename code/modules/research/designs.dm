@@ -964,13 +964,14 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/computer_hardware/processor_unit/photonic/small
 	sort_string = "VBAAY"
 
-// Tesla Link
-/datum/design/item/modularcomponent/teslalink
+// Intellicard Slot
+/datum/design/item/modularcomponent/aislot
 	name = "intellicard slot"
 	id = "aislot"
 	req_tech = list(TECH_POWER = 2, TECH_DATA = 3)
 	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 2000)
+	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/ai_slot
 	sort_string = "VBAAZ"
 /*
