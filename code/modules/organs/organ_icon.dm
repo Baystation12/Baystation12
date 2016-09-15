@@ -17,7 +17,9 @@ var/list/limb_icon_cache = list()
 	s_col = null
 	h_col = null
 	if(robotic >= ORGAN_ROBOT)
-		return
+		var/datum/robolimb/franchise = all_robolimbs[model]
+		if(!(franchise && franchise.skintone))
+			return
 	if(species && human.species && species.name != human.species.name)
 		return
 	if(!isnull(human.s_tone) && (human.species.appearance_flags & HAS_SKIN_TONE))
@@ -31,7 +33,9 @@ var/list/limb_icon_cache = list()
 	s_col = null
 	h_col = null
 	if(robotic >= ORGAN_ROBOT)
-		return
+		var/datum/robolimb/franchise = all_robolimbs[model]
+		if(!(franchise && franchise.skintone))
+			return
 	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (species.appearance_flags & HAS_SKIN_TONE))
 		s_tone = dna.GetUIValue(DNA_UI_SKIN_TONE)
 	if(species.appearance_flags & HAS_SKIN_COLOR)
@@ -99,7 +103,6 @@ var/list/limb_icon_cache = list()
 
 	if(model)
 		icon_cache_key += "_model_[model]"
-
 	dir = EAST
 	icon = mob_icon
 
