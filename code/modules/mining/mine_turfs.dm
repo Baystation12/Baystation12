@@ -133,7 +133,7 @@ var/list/mining_floors = list()
 
 /turf/simulated/mineral/proc/UpdateMineral()
 	clear_ore_effects()
-	ore_overlay = image('icons/obj/mining.dmi', "rock_[mineral.name]")
+	ore_overlay = image('icons/obj/mining.dmi', "rock_[mineral.icon_tag]")
 	update_icon()
 
 //Not even going to touch this pile of spaghetti
