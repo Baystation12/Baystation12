@@ -1,0 +1,7 @@
+author: Haswell
+
+delete-after: True
+
+changes:
+  - rscadd: "Added coin mint to the mining outpost."
+  - rscadd: "Borosilicate (phoron) glass can now be made with the mineral processor."
