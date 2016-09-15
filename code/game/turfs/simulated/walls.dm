@@ -56,6 +56,9 @@
 
 	var/proj_damage = Proj.get_structure_damage()
 
+	if(reinf_material)
+		proj_damage /= reinf_material.projectile_armor
+
 	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
 	var/damage = min(proj_damage, 100)
 
