@@ -2,22 +2,15 @@
 /obj/machinery/shieldwallgen
 		name = "Shield Generator"
 		desc = "A shield generator."
+		icon = 'icons/obj/stationobjs.dmi'
 		icon_state = "Shield_Gen"
 		anchored = 0
 		density = 1
 		req_access = list(access_engine_equip)
 		var/active = 0
 		var/power = 0
-		var/state = 0
-		var/steps = 0
-		var/last_check = 0
-		var/check_delay = 10
-		var/recalc = 0
 		var/locked = 1
-		var/destroyed = 0
-		var/directwired = 1
-//		var/maxshieldload = 200
-		var/obj/structure/cable/attached		// the attached cable
+		var/max_range = 8
 		var/storedpower = 0
 		flags = CONDUCT
 		//There have to be at least two posts, so these are effectively doubled
@@ -31,7 +24,7 @@
 	data["draw"] = round(power_draw)
 	data["power"] = round(storedpower)
 	data["maxpower"] = round(max_stored_power)
-	data["current_draw"] = ((between(500, max_stored_power - storedpower, power_draw)) + active_power_usage)
+	data["current_draw"] = ((between(500, max_stored_power - storedpower, power_draw)) + power ? active_power_usage : 0)
 	data["online"] = active == 2 ? 1 : 0
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -42,14 +35,15 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/shieldwallgen/update_icon()
-	if(stat & BROKEN) return ..()
+//	if(stat & BROKEN) -TODO: Broken icon
+	if(!active)
+		icon_state = "Shield_Gen"
 	else
-		if(!active)
-			icon_state = "Shield_Gen"
-		else
-			icon_state = "Shield_Gen +a"
+		icon_state = "Shield_Gen +a"
 
 /obj/machinery/shieldwallgen/Topic(href, href_list)
+	if(..())
+		return 1
 	if(href_list["toggle"])
 		if(src.active >= 1)
 			src.active = 0
@@ -65,9 +59,7 @@
 			usr.visible_message("\The [usr] turned the shield generator on.", \
 				"You turn on the shield generator.", \
 				"You hear heavy droning.")
-	src.add_fingerprint(usr)
-	nanomanager.update_uis(src)
-
+	return 1
 
 /obj/machinery/shieldwallgen/ex_act(var/severity)
 	switch(severity)
@@ -80,14 +72,17 @@
 			storedpower -= rand(0, max_stored_power)
 
 /obj/machinery/shieldwallgen/emp_act(var/severity)
-	if(1)
-		storedpower -= rand(storedpower/2, storedpower)
-	if(2)
-		storedpower -= rand(storedpower/2, storedpower)
+	switch(severity)
+		if(1)
+			storedpower = 0
+		if(2)
+			storedpower -= rand(storedpower/2, storedpower)
+		if(3)
+			storedpower -= rand(storedpower/4, storedpower/2)
 	..()
 
 /obj/machinery/shieldwallgen/attack_hand(mob/user as mob)
-	if(state != 1)
+	if(anchored != 1)
 		user << "\red The shield generator needs to be firmly secured to the floor first."
 		return 1
 	if(src.locked && !istype(user, /mob/living/silicon))
@@ -134,11 +129,9 @@
 		storedpower = max_stored_power
 	if(storedpower <= 0)
 		storedpower = 0
-//	if(shieldload >= maxshieldload) //there was a loop caused by specifics of process(), so this was needed.
-//		shieldload = maxshieldload
 
 	if(src.active == 1)
-		if(!src.state == 1)
+		if(!src.anchored == 1)
 			src.active = 0
 			return
 		spawn(1)
@@ -159,8 +152,9 @@
 			for(var/dir in list(1,2,4,8)) src.cleanup(dir)
 
 /obj/machinery/shieldwallgen/proc/setup_field(var/NSEW = 0)
-	var/turf/T = src.loc
-	var/turf/T2 = src.loc
+	var/turf/T = get_turf(src)
+	if(!T) return
+	var/turf/T2 = T
 	var/obj/machinery/shieldwallgen/G
 	var/steps = 0
 	var/oNSEW = 0
@@ -177,7 +171,7 @@
 	else if(NSEW == 8)
 		oNSEW = 4
 
-	for(var/dist = 0, dist <= 8, dist += 1) // checks out to 8 tiles away for another generator
+	for(var/dist = 0, dist <= (max_range+1), dist += 1) // checks out to 8 tiles away for another generator
 		T = get_step(T2, NSEW)
 		T2 = T
 		steps += 1
@@ -209,15 +203,13 @@
 			user << "Turn off the field generator first."
 			return
 
-		else if(state == 0)
-			state = 1
+		else if(anchored == 0)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			user << "You secure the external reinforcing bolts to the floor."
 			src.anchored = 1
 			return
 
-		else if(state == 1)
-			state = 0
+		else if(anchored == 1)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			user << "You undo the external reinforcing bolts."
 			src.anchored = 0
@@ -242,7 +234,7 @@
 	var/turf/T = src.loc
 	var/turf/T2 = src.loc
 
-	for(var/dist = 0, dist <= 9, dist += 1) // checks out to 8 tiles away for fields
+	for(var/dist = 0, (max_range+1), dist += 1) // checks out to 8 tiles away for fields
 		T = get_step(T2, NSEW)
 		T2 = T
 		if(locate(/obj/machinery/shieldwall) in T)
@@ -274,7 +266,6 @@
 		light_range = 3
 		var/needs_power = 0
 		var/active = 1
-//		var/power = 10
 		var/delay = 5
 		var/last_active
 		var/mob/U
@@ -305,10 +296,8 @@
 	return
 
 /obj/machinery/shieldwall/attackby(var/obj/item/I, var/mob/user)
-	if(prob(50))
-		gen_primary.storedpower -= 2500*I.force
-	else
-		gen_secondary.storedpower -= 2500*I.force
+	var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
+	G.storedpower -= I.force*2500
 	user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [I]!</span>")
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
@@ -324,19 +313,13 @@
 			qdel(src)
 			return
 
-		if(prob(50))
-			gen_primary.storedpower -= power_usage
-		else
-			gen_secondary.storedpower -= power_usage
+		var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
+		G.storedpower -= power_usage
 
 
 /obj/machinery/shieldwall/bullet_act(var/obj/item/projectile/Proj)
 	if(needs_power)
-		var/obj/machinery/shieldwallgen/G
-		if(prob(50))
-			G = gen_primary
-		else
-			G = gen_secondary
+		var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
 		G.storedpower -= 400 * Proj.get_structure_damage()
 	..()
 	return
@@ -344,28 +327,16 @@
 
 /obj/machinery/shieldwall/ex_act(severity)
 	if(needs_power)
-		var/obj/machinery/shieldwallgen/G
+		var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
 		switch(severity)
 			if(1.0) //big boom
-				if(prob(50))
-					G = gen_primary
-				else
-					G = gen_secondary
-				G.storedpower -= rand(90000, 120000)
+				G.storedpower -= rand(30000, min(G.storedpower, 60000))
 
 			if(2.0) //medium boom
-				if(prob(50))
-					G = gen_primary
-				else
-					G = gen_secondary
-				G.storedpower -= rand(30000, 90000)
+				G.storedpower -= rand(15000, min(G.storedpower, 30000))
 
 			if(3.0) //lil boom
-				if(prob(50))
-					G = gen_primary
-				else
-					G = gen_secondary
-				G.storedpower -= rand(12000, 30000)
+				G.storedpower -= rand(5000, min(G.storedpower, 15000))
 	return
 
 
@@ -379,3 +350,11 @@
 			return prob(10)
 		else
 			return !src.density
+
+/obj/machinery/shieldwallgen/online
+	anchored = 1
+	active = 1
+
+/obj/machinery/shieldwallgen/online/initialize()
+	storedpower = max_stored_power
+	..()
