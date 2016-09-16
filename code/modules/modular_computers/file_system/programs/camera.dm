@@ -6,17 +6,17 @@
 	switch(network)
 		if(NETWORK_THUNDER)
 			return 0
-		if(NETWORK_ENGINE || NETWORK_ENGINEERING || NETWORK_ENGINEERING_OUTPOST || NETWORK_ALARM_ATMOS || NETWORK_ALARM_FIRE || NETWORK_ALARM_POWER)
+		if(NETWORK_ENGINE,NETWORK_ENGINEERING,NETWORK_ENGINEERING_OUTPOST,NETWORK_ALARM_ATMOS,NETWORK_ALARM_FIRE,NETWORK_ALARM_POWER)
 			return access_engine
 		if(NETWORK_MEDICAL)
 			return access_medical
-		if(NETWORK_RESEARCH || NETWORK_RESEARCH_OUTPOST)
+		if(NETWORK_RESEARCH,NETWORK_RESEARCH_OUTPOST)
 			return access_research
-		if(NETWORK_MINE || NETWORK_SUPPLY || NETWORK_CIVILIAN_WEST || NETWORK_EXPEDITION || NETWORK_CALYPSO || NETWORK_POD)
+		if(NETWORK_MINE,NETWORK_SUPPLY,NETWORK_CIVILIAN_WEST,NETWORK_EXPEDITION,NETWORK_CALYPSO,NETWORK_POD)
 			return access_mailsorting // Cargo office - all cargo staff should have access here.
-		if(NETWORK_COMMAND || NETWORK_TELECOM)
+		if(NETWORK_COMMAND,NETWORK_TELECOM)
 			return access_heads
-		if(NETWORK_CRESCENT || NETWORK_ERT)
+		if(NETWORK_CRESCENT,NETWORK_ERT)
 			return access_cent_specops
 
 	return access_security // Default for all other networks
@@ -46,7 +46,7 @@
 	for(var/network in using_map.station_networks)
 		all_networks.Add(list(list(
 							"tag" = network,
-							"has_access" = can_access_network(usr, get_camera_access(network))
+							"has_access" = can_access_network(user, get_camera_access(network))
 							)))
 
 	all_networks = modify_networks_list(all_networks)
