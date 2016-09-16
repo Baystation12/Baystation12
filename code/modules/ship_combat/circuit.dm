@@ -145,10 +145,15 @@
 				internal_wiring[i] = splicer.internal_wiring[i]
 
 	proc/transcribe(var/obj/item/upgrade_module/transcriber)
-		var/list/transcribable = list(RED, PURPLE, AQUA, YELLOW)
+		var/list/transcribable = list(RED, PURPLE, AQUA, YELLOW, ORANGE)
+		var/list/overwritten = list(BLUE, GREEN)
 		for(var/i=1 to internal_wiring.len)
-			if(transcriber.internal_wiring[i] in transcribable && internal_wiring[i] == BLUE || internal_wiring[i] == GREEN)
+			if(transcriber.internal_wiring[i] in overwritten && src.internal_wiring[i] in transcribable)
 				internal_wiring[i] = transcriber.internal_wiring[i]
+
+	proc/transcribe(var/obj/item/upgrade_module/overwritter)
+		for(var/i=1 to internal_wiring.len)
+			internal_wiring[i] = overwritter.internal_wiring[i]
 
 	proc/shift()
 		var/list/newlist = list()
@@ -177,6 +182,11 @@
 					var/obj/item/upgrade_module/to_compare = secondary
 					user.visible_message("<span class='notice'>\The [user] begins comparing \the [I] and \the [src].</span>")
 					user << "<span class='notice'>\The [src.get_efficiency() > to_compare.get_efficiency() ? "[src]" : "[to_compare]"] is more efficient!</span>"
+			else if(istype(secondary, /obj/item/stack/cable_coil))
+				user.visible_message("<span class='notice'>\The [user] begins overwritting \the [src] with \the [I].</span>")
+				if(do_after(user, 175))
+					user.visible_message("<span class='notice'>\The [user] overwrites \the [src] with \the [I].</span>")
+					overwrite(I)
 			else
 				user << "<span class='warning'>You require a screwdriver, multitool or second module in your hands!</span>"
 		if(istype(I, /obj/item/weapon/crowbar))
