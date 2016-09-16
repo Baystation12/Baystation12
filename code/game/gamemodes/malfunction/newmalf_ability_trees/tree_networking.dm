@@ -10,7 +10,7 @@
 // BEGIN RESEARCH DATUMS
 
 /datum/malf_research_ability/networking/basic_hack
-	ability = new/datum/game_mode/malfunction/verb/basic_encryption_hack()
+	ability = list(new/datum/game_mode/malfunction/verb/basic_encryption_hack(), new/datum/game_mode/malfunction/verb/basic_encryption_hack_station(), new/datum/game_mode/malfunction/verb/basic_encryption_hack_offstation())
 	price = 25
 	next = new/datum/malf_research_ability/networking/advanced_hack()
 	name = "Basic Encryption Hack"
@@ -38,50 +38,77 @@
 // END RESEARCH DATUMS
 // BEGIN ABILITY VERBS
 
-/datum/game_mode/malfunction/verb/basic_encryption_hack(obj/machinery/power/apc/A as obj in get_unhacked_apcs(src))
-	set category = "Software"
+/datum/game_mode/malfunction/verb/basic_encryption_hack(var/obj/machinery/power/apc/A as obj in get_unhacked_apcs(src)) // Right-click
 	set name = "Basic Encryption Hack"
-	set desc = "10 CPU - Basic encryption hack that allows you to overtake APCs on the station."
-	var/price = 10
+	set category = null
+
 	var/mob/living/silicon/ai/user = usr
+	if(!istype(user))
+		return
+	user.basic_encryption_hack_proc(A)
+
+/datum/game_mode/malfunction/verb/basic_encryption_hack_station(var/obj/machinery/power/apc/A as obj in get_unhacked_station_apcs(src))
+	set category = "Software"
+	set name = "Basic Encryption Hack: Station"
+	set desc = "10 CPU - Basic encryption hack that allows you to overtake APCs on the station."
+	set popup_menu = 0
+
+	var/mob/living/silicon/ai/user = usr
+	if(!istype(user))
+		return
+	user.basic_encryption_hack_proc(A)
+
+/datum/game_mode/malfunction/verb/basic_encryption_hack_offstation(var/obj/machinery/power/apc/A as obj in get_unhacked_offstation_apcs(src))
+	set category = "Software"
+	set name = "Basic Encryption Hack: Off-Station"
+	set desc = "10 CPU - Basic encryption hack that allows you to overtake APCs outside of the station. These APCs provide no CPU power bonuses."
+	set popup_menu = 0
+
+	var/mob/living/silicon/ai/user = usr
+	if(!istype(user))
+		return
+	user.basic_encryption_hack_proc(A)
+
+/mob/living/silicon/ai/proc/basic_encryption_hack_proc(var/obj/machinery/power/apc/A)
+	var/price = 10
 
 	if(!A)
 		return
 
 	if(!istype(A))
-		user << "This is not an APC!"
+		src << "This is not an APC!"
 		return
 
 	if(A)
-		if(A.hacker && A.hacker == user)
-			user << "You already control this APC!"
+		if(A.hacker && A.hacker == src)
+			src << "You already control this APC!"
 			return
 		else if(A.aidisabled)
-			user << "<span class='notice'>Unable to connect to APC. Please verify wire connection and try again.</span>"
+			src << "<span class='notice'>Unable to connect to APC. Please verify wire connection and try again.</span>"
 			return
 	else
 		return
 
-	if(!ability_prechecks(user, price) || !ability_pay(user, price))
+	if(!ability_prechecks(src, price) || !ability_pay(src, price))
 		return
 
-	log_ability_use(user, "basic encryption hack", A, 0)	// Does not notify admins, but it's still logged for reference.
-	user.hacking = 1
-	user << "Beginning APC system override..."
+	log_ability_use(src, "basic encryption hack", A, 0)	// Does not notify admins, but it's still logged for reference.
+	src.hacking = 1
+	src << "Beginning APC system override..."
 	sleep(300)
-	user << "APC hack completed. Uploading modified operation software.."
+	src << "APC hack completed. Uploading modified operation software.."
 	sleep(200)
-	user << "Restarting APC to apply changes.."
+	src << "Restarting APC to apply changes.."
 	sleep(100)
 	if(A)
-		A.ai_hack(user)
-		if(A.hacker == user)
-			user << "Hack successful. You now have full control over the APC."
+		A.ai_hack(src)
+		if(A.hacker == src)
+			src << "Hack successful. You now have full control over the APC."
 		else
-			user << "<span class='notice'>Hack failed. Connection to APC has been lost. Please verify wire connection and try again.</span>"
+			src << "<span class='notice'>Hack failed. Connection to APC has been lost. Please verify wire connection and try again.</span>"
 	else
-		user << "<span class='notice'>Hack failed. Unable to locate APC. Please verify the APC still exists.</span>"
-	user.hacking = 0
+		src << "<span class='notice'>Hack failed. Unable to locate APC. Please verify the APC still exists.</span>"
+	src.hacking = 0
 
 
 /datum/game_mode/malfunction/verb/advanced_encryption_hack()

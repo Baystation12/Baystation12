@@ -32,7 +32,11 @@
 	if(!focus)
 		return
 	owner << "<b>Research Completed</b>: [focus.name]"
-	owner.verbs.Add(focus.ability)
+	if(islist(focus.ability))
+		for(var/A in focus.ability)
+			owner.verbs.Add(A)
+	else
+		owner.verbs.Add(focus.ability)
 	available_abilities -= focus
 	if(focus.next)
 		available_abilities += focus.next

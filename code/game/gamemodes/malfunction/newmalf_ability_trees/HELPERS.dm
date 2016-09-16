@@ -169,13 +169,25 @@
 // Parameters: None
 // Description: Returns a list of all unhacked APCs
 /proc/get_unhacked_apcs(var/mob/living/silicon/ai/user)
-	var/list/H = list()
+	. = list()
 	for(var/obj/machinery/power/apc/A in machines)
 		if(A.hacker && A.hacker == user)
 			continue
-		H.Add(A)
-	return H
+		. += A
 
+/proc/get_unhacked_station_apcs(var/mob/living/silicon/ai/user)
+	var/list/H = get_unhacked_apcs(user)
+	. = list()
+	for(var/obj/machinery/power/apc/A in H)
+		if(A.z in using_map.station_levels)
+			. += A
+
+/proc/get_unhacked_offstation_apcs(var/mob/living/silicon/ai/user)
+	var/list/H = get_unhacked_apcs(user)
+	. = list()
+	for(var/obj/machinery/power/apc/A in H)
+		if(!(A.z in using_map.station_levels))
+			. += A
 
 // Helper procs which return lists of relevant mobs.
 /proc/get_unlinked_cyborgs(var/mob/living/silicon/ai/A)
