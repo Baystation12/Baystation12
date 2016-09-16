@@ -164,6 +164,7 @@
 
 /datum/nano_module/camera_monitor/ert
 	name = "Advanced Camera Monitoring Program"
+	available_to_ai = FALSE
 
 // The ERT variant has access to ERT and crescent cams, but still checks for accesses. ERT members should be able to use it.
 /datum/nano_module/camera_monitor/hacked/modify_networks_list(var/list/networks)
