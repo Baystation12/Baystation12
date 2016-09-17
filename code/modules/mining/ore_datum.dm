@@ -86,6 +86,7 @@ var/global/list/ores_by_type = list()
 	smelts_to = "glass"
 	alloy = 1
 	compresses_to = "sandstone"
+	ore = /obj/item/weapon/ore/glass //Technically not needed since there's no glass ore vein, but consistency is nice
 
 /ore/phoron
 	name = "phoron"
@@ -158,4 +159,5 @@ var/global/list/ores_by_type = list()
 	display_name = "metallic hydrogen"
 	smelts_to = "tritium"
 	compresses_to = "mhydrogen"
+	ore = /obj/item/weapon/ore/hydrogen //Technically not needed since there's no hydrogen ore vein, but consistency is nice
 	scan_icon = "mineral_rare"
