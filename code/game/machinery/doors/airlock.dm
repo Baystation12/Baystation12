@@ -360,11 +360,13 @@ About the new airlock wires panel:
 					return
 			else /*if(src.justzap)*/
 				return
-		else if(user.hallucination > 50 && prob(10) && src.operating == 0)
-			user << "<span class='danger'>You feel a powerful shock course through your body!</span>"
-			user.halloss += 10
-			user.stunned += 10
-			return
+		else if(prob(10) && src.operating == 0)
+			var/mob/living/carbon/C = user
+			if(istype(C) && C.hallucination > 50)
+				user << "<span class='danger'>You feel a powerful shock course through your body!</span>"
+				user.halloss += 10
+				user.stunned += 10
+				return
 	..(user)
 
 /obj/machinery/door/airlock/bumpopen(mob/living/simple_animal/user as mob)

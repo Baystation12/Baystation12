@@ -665,21 +665,12 @@
 			Paralyse(3)
 
 		if(hallucination)
-			if(hallucination >= 20)
-				if(prob(3))
-					fake_attack(src)
-				if(!handling_hal)
-					spawn handle_hallucinations() //The not boring kind!
-				if(client && prob(5))
-					client.dir = pick(2,4,8)
-					spawn(rand(20,50))
-						client.dir = 1
+			if(client && hallucination >= 20) //no sense in spookying NPCs
+				handle_hallucinations()
 
 			hallucination = max(0, hallucination - 2)
 		else
-			for(var/atom/a in hallucinations)
-				qdel(a)
-
+			hallucination_power = 0
 			if(halloss >= species.total_health)
 				src << "<span class='warning'>[species.halloss_message_self]</span>"
 				src.visible_message("<B>[src]</B> [species.halloss_message].")
@@ -698,7 +689,7 @@
 					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
 					if(client || sleeping > 3)
 						AdjustSleeping(-1)
-				if( prob(2) && health && !hal_crit )
+				if( prob(2) && health)
 					spawn(0)
 						emote("snore")
 		//CONSCIOUS
@@ -799,41 +790,37 @@
 			if (analgesic > 100)
 				healths.icon_state = "health_numb"
 			else
-				switch(hal_screwyhud)
-					if(1)	healths.icon_state = "health6"
-					if(2)	healths.icon_state = "health7"
-					else
-						// Generate a by-limb health display.
-						healths.icon_state = "blank"
-						healths.overlays = null
+				// Generate a by-limb health display.
+				healths.icon_state = "blank"
+				healths.overlays = null
 
-						var/no_damage = 1
-						var/trauma_val = 0 // Used in calculating softcrit/hardcrit indicators.
-						if(!can_feel_pain())
-							trauma_val = max(traumatic_shock,halloss)/species.total_health
-						var/limb_trauma_val = trauma_val*0.5
-						// Collect and apply the images all at once to avoid appearance churn.
-						var/list/health_images = list()
-						for(var/obj/item/organ/external/E in organs)
-							if(no_damage && (E.brute_dam || E.burn_dam))
-								no_damage = 0
-							health_images += E.get_damage_hud_image(limb_trauma_val)
+				var/no_damage = 1
+				var/trauma_val = 0 // Used in calculating softcrit/hardcrit indicators.
+				if(!can_feel_pain())
+					trauma_val = max(traumatic_shock,halloss)/species.total_health
+				var/limb_trauma_val = trauma_val*0.5
+				// Collect and apply the images all at once to avoid appearance churn.
+				var/list/health_images = list()
+				for(var/obj/item/organ/external/E in organs)
+					if(no_damage && (E.brute_dam || E.burn_dam))
+						no_damage = 0
+					health_images += E.get_damage_hud_image(limb_trauma_val)
 
-						// Apply a fire overlay if we're burning.
-						if(on_fire)
-							health_images += image('icons/mob/screen1_health.dmi',"burning")
+				// Apply a fire overlay if we're burning.
+				if(on_fire)
+					health_images += image('icons/mob/screen1_health.dmi',"burning")
 
-						// Show a general pain/crit indicator if needed.
-						if(trauma_val)
-							if(can_feel_pain())
-								if(trauma_val > 0.7)
-									health_images += image('icons/mob/screen1_health.dmi',"softcrit")
-								if(trauma_val >= 1)
-									health_images += image('icons/mob/screen1_health.dmi',"hardcrit")
-						else if(no_damage)
-							health_images += image('icons/mob/screen1_health.dmi',"fullhealth")
+				// Show a general pain/crit indicator if needed.
+				if(trauma_val)
+					if(can_feel_pain())
+						if(trauma_val > 0.7)
+							health_images += image('icons/mob/screen1_health.dmi',"softcrit")
+						if(trauma_val >= 1)
+							health_images += image('icons/mob/screen1_health.dmi',"hardcrit")
+				else if(no_damage)
+					health_images += image('icons/mob/screen1_health.dmi',"fullhealth")
 
-						healths.overlays += health_images
+				healths.overlays += health_images
 
 		if(nutrition_icon)
 			switch(nutrition)
@@ -846,10 +833,10 @@
 		if(pressure)
 			pressure.icon_state = "pressure[pressure_alert]"
 		if(toxin)
-			if(hal_screwyhud == 4 || phoron_alert)	toxin.icon_state = "tox1"
+			if(phoron_alert)	toxin.icon_state = "tox1"
 			else									toxin.icon_state = "tox0"
 		if(oxygen)
-			if(hal_screwyhud == 3 || oxygen_alert)	oxygen.icon_state = "oxy1"
+			if(oxygen_alert)	oxygen.icon_state = "oxy1"
 			else									oxygen.icon_state = "oxy0"
 		if(fire)
 			if(fire_alert)							fire.icon_state = "fire[fire_alert]" //fire_alert is either 0 if no alert, 1 for cold and 2 for heat.
