@@ -169,6 +169,28 @@ datum/unit_test/map_image_map_test/start_test()
 
 	return 1
 
+//=======================================================================================
+
+datum/unit_test/correct_allowed_spawn_test
+	name = "MAP: All allowed_spawns entries should have spawnpoints on map."
+	
+datum/unit_test/correct_allowed_spawn_test/start_test()
+	var/failed = FALSE
+	
+	for(var/spawn_name in using_map.allowed_spawns)
+		var/datum/spawnpoint/spawnpoint = spawntypes[spawn_name]
+		if(!spawnpoint.turfs.len)
+			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] has no associated spawn turfs.")
+			failed = TRUE
+			
+	if(failed)
+		fail("Some of the entries in allowed_spawns have no spawnpoint turfs.")
+	else
+		pass("All entries in allowed_spawns have spawnpoints.")
+		
+	return 1
+
+//=======================================================================================
 
 datum/unit_test/map_check
 	name = "MAP: Map Check"
