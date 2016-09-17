@@ -112,3 +112,6 @@
 /area/ship/scrap/shuttle/outgoing
 	name = "\improper Docking Bay #2"
 	icon_state = "tcomsatcham"
+
+/area/ship/scrap/shuttle/pod
+	name = "pod approach"
