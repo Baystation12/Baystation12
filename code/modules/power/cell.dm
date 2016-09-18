@@ -1,5 +1,3 @@
-var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglier code in nanoUI.
-
 // Power Cells
 /obj/item/weapon/cell
 	name = "power cell"
@@ -14,16 +12,17 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	throw_range = 5
 	w_class = NORMAL_ITEM
 	var/c_uid
-	var/charge = 0			// Current charge
-	var/maxcharge = 1000	// Capacity in Wh
+	var/charge			                // Current charge
+	var/maxcharge = 1000 // Capacity in Wh
 	var/overlay_state
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 
 
 /obj/item/weapon/cell/New()
+	if(isnull(charge))
+		charge = maxcharge
+	c_uid = sequential_id(/obj/item/weapon/cell)
 	..()
-	charge = maxcharge
-	c_uid = cell_uid++
 
 /obj/item/weapon/cell/initialize()
 	..()
@@ -127,20 +126,28 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 /obj/item/weapon/cell/device
 	name = "device power cell"
 	desc = "A small power cell designed to power handheld devices."
-	icon_state = "cell" //placeholder
+	icon_state = "device"
 	w_class = SMALL_ITEM
 	force = 0
 	throw_speed = 5
 	throw_range = 7
-	maxcharge = 1000
-	matter = list("metal" = 350, "glass" = 50)
+	maxcharge = 100
+	matter = list("metal" = 70, "glass" = 5)
 
 /obj/item/weapon/cell/device/variable/New(newloc, charge_amount)
-	..(newloc)
 	maxcharge = charge_amount
-	charge = maxcharge
-	update_icon()
+	..(newloc)
 
+/obj/item/weapon/cell/device/standard
+	name = "standard device power cell"
+	maxcharge = 25
+
+/obj/item/weapon/cell/device/high
+	name = "advanced device power cell"
+	desc = "A small power cell designed to power more energy-demanding devices."
+	icon_state = "hdevice"
+	maxcharge = 100
+	matter = list("metal" = 70, "glass" = 6)
 
 /obj/item/weapon/cell/crap
 	name = "old power cell"
@@ -149,10 +156,8 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	maxcharge = 100
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 40)
 
-/obj/item/weapon/cell/crap/empty/New()
-	..()
+/obj/item/weapon/cell/crap/empty
 	charge = 0
-
 
 /obj/item/weapon/cell/standard
 	name = "standard power cell"
