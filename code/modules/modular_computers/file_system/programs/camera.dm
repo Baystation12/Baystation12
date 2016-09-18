@@ -36,7 +36,7 @@
 	var/obj/machinery/camera/current_camera = null
 	var/current_network = null
 
-/datum/nano_module/camera_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
+/datum/nano_module/camera_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = default_state)
 	var/list/data = host.initial_data()
 
 	data["current_camera"] = current_camera ? current_camera.nano_structure() : null
@@ -58,7 +58,7 @@
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "sec_camera.tmpl", "Camera Monitoring", 900, 800)
+		ui = new(user, src, ui_key, "sec_camera.tmpl", "Camera Monitoring", 900, 800, state = state)
 		// ui.auto_update_layout = 1 // Disabled as with suit sensors monitor - breaks the UI map. Re-enable once it's fixed somehow.
 
 		ui.add_template("mapContent", "sec_camera_map_content.tmpl")
