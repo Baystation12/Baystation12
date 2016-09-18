@@ -40,6 +40,19 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 		if(prob(20*item_multiplier) && !(fibertext in suit_fibers))
 			suit_fibers += "Material from a pair of [M.gloves.name]."
 
+/mob/living/proc/get_full_print()
+	if (mFingerprints in mutations)
+		return
+	return md5(dna.uni_identity)
+
+/mob/living/carbon/human/get_full_print(ignoregloves)
+	if(!..())
+		return
+
+	var/obj/item/organ/external/E = organs_by_name[hand ? BP_L_HAND : BP_R_HAND]
+	if(E && !E.is_stump() && E.dna)
+		return md5(E.dna.uni_identity)
+
 /datum/data/record/forensic
 	name = "forensic data"
 	var/uid
