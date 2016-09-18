@@ -9,6 +9,8 @@
 	player_levels = list(1,2,3,4,5,6,7,8,9)
 	admin_levels = list(10)
 
+	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
+
 	shuttle_docked_message = "Bluespace drive has been spooled up, prepare for launch. Time to jump, approximately %ETD%."
 	shuttle_leaving_dock = "Jump initiated, entering bluespace in %ETA%."
 	shuttle_called_message = "All hands, bluespace drive is spooling up. Jump in %ETA%."
