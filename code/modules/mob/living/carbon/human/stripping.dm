@@ -60,8 +60,7 @@
 
 			if(istype(A, /obj/item/clothing/accessory/badge) || istype(A, /obj/item/clothing/accessory/medal))
 				user.visible_message("<span class='danger'>\The [user] tears off \the [A] from [src]'s [suit.name]!</span>")
-			attack_log += "\[[time_stamp()]\] <font color='orange'>Has had \the [A] removed by [user.name] ([user.ckey])</font>"
-			user.attack_log += "\[[time_stamp()]\] <font color='red'>Attempted to remove [name]'s ([ckey]) [A.name]</font>"
+			admin_attack_log(user, src, "Stripped \an [A] from \the [suit].", "Was stripped of \an [A] from \the [suit].", "stripped \an [A] from \the [suit] of")
 			A.on_removed(user)
 			suit.accessories -= A
 			update_inv_w_uniform()
@@ -123,8 +122,8 @@
 	if (suit.has_sensor >= 2)
 		user << "<span class='warning'>\The [src]'s suit sensor controls are locked.</span>"
 		return
-	attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their sensors toggled by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to toggle [name]'s ([ckey]) sensors</font>")
+
+	admin_attack_log(user, src, "Toggled their suit sensors.", "Toggled their suit sensors.", "toggled the suit sensors of")
 	suit.set_sensors(user)
 
 // Remove all splints.

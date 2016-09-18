@@ -103,7 +103,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 		take_charge(user, skipcharge)
 
 		before_cast(targets) //applies any overlays and effects
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>[user.real_name] ([user.ckey]) cast the spell [name].</font>")
+		admin_attacker_log(user, "cast the spell [name]")
 		if(prob(critfailchance))
 			critfail(targets, user)
 		else

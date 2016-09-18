@@ -204,9 +204,7 @@
 				H.visible_message("<span class='danger'>[attack_message]</span>")
 
 			playsound(loc, ((miss_type) ? (miss_type == 1 ? attack.miss_sound : 'sound/weapons/thudswoosh.ogg') : attack.attack_sound), 25, 1, -1)
-			H.attack_log += text("\[[time_stamp()]\] <font color='red'>[miss_type ? (miss_type == 1 ? "Missed" : "Blocked") : "[pick(attack.attack_verb)]"] [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>[miss_type ? (miss_type == 1 ? "Was missed by" : "Has blocked") : "Has Been [pick(attack.attack_verb)]"] by [H.name] ([H.ckey])</font>")
-			msg_admin_attack("[key_name(H)] [miss_type ? (miss_type == 1 ? "has missed" : "was blocked by") : "has [pick(attack.attack_verb)]"] [key_name(src)]")
+			admin_attack_log(H, src, "[miss_type ? (miss_type == 1 ? "Has missed" : "Was blocked by") : "Has [pick(attack.attack_verb)]"] their victim.", "[miss_type ? (miss_type == 1 ? "Missed" : "Blocked") : "[pick(attack.attack_verb)]"] their attacker", "[miss_type ? (miss_type == 1 ? "has missed" : "was blocked by") : "has [pick(attack.attack_verb)]"]")
 
 			if(miss_type)
 				return 0
@@ -228,10 +226,7 @@
 			apply_damage(real_damage, (attack.deal_halloss ? HALLOSS : BRUTE), hit_zone, armour, sharp=attack.sharp, edge=attack.edge)
 
 		if(I_DISARM)
-			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [M.name] ([M.ckey])</font>")
-
-			msg_admin_attack("[key_name(M)] disarmed [src.name] ([src.ckey])")
+			admin_attack_log(M, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
 			M.do_attack_animation(src)
 
 			if(w_uniform)
@@ -287,10 +282,7 @@
 
 	if(!damage || !istype(user))
 		return
-
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
-	src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [user.name] ([user.ckey])</font>")
-	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")
+	admin_attack_log(user, src, "Attacked their victim", "Was attacked", "has [attack_message]")
 	user.do_attack_animation(src)
 
 	var/dam_zone = pick(organs_by_name)

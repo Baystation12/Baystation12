@@ -150,19 +150,19 @@
 		user.bullet_act(src, target_zone)
 		qdel(src)
 		return 0
-	
+
 	loc = get_turf(user) //move the projectile out into the world
-	
+
 	firer = user
 	shot_from = launcher.name
 	silenced = launcher.silenced
-	
+
 	return launch(target, target_zone, x_offset, y_offset)
 
 //Used to change the direction of the projectile in flight.
 /obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null)
 	var/turf/new_target = locate(new_x, new_y, src.z)
-	
+
 	original = new_target
 	if(new_firer)
 		firer = src
@@ -204,8 +204,7 @@
 
 			admin_attack_log(firer, target_mob, attacker_message, victim_message, admin_message)
 		else
-			target_mob.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[target_mob]/[target_mob.ckey]</b> with <b>\a [src]</b>"
-			msg_admin_attack("UNKNOWN shot [target_mob] ([target_mob.ckey]) with \a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target_mob.x];Y=[target_mob.y];Z=[target_mob.z]'>JMP</a>)")
+			admin_victim_log(target_mob, "was shot by an <b>UNKNOWN SUBJECT (No longer exists)</b> using \a [src]")
 
 	//sometimes bullet_act() will want the projectile to continue flying
 	if (result == PROJECTILE_CONTINUE)
@@ -408,9 +407,9 @@
 	var/turf/targloc = get_turf(target)
 	if(!curloc || !targloc)
 		return 0
-	
+
 	original = target
-	
+
 	//plot the initial trajectory
 	setup_trajectory(curloc, targloc)
 	return process(targloc)
@@ -444,7 +443,7 @@
 
 	//Set the flags and pass flags to that of the real projectile...
 	if(!isnull(flags))
-		trace.flags = flags 
+		trace.flags = flags
 	trace.pass_flags = pass_flags
 
 	var/output = trace.launch(target) //Test it!

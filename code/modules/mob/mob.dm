@@ -63,7 +63,7 @@
 				if(((type & VISIBLE_MESSAGE) && is_blind()))
 					return
 
-	src << msg
+	to_chat(src, msg)
 
 
 

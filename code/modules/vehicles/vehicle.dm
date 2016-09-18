@@ -357,7 +357,7 @@
 		return
 	visible_message("<span class='danger'>\The [user] [attack_message] the \the [src]!</span>")
 	if(istype(user))
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked \the [src.name]</font>")
+		admin_attacker_log(user, "attacked \the [src]")
 		user.do_attack_animation(src)
 	src.health -= damage
 	if(prob(10))
