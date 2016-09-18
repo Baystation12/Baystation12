@@ -3,6 +3,7 @@
 	#include "example_unit_testing.dm"
 
 	#include "example-1.dmm"
+	#include "example-2.dmm"
 
 	#define USING_MAP_DATUM /datum/map/example
 
