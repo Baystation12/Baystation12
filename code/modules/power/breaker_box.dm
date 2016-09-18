@@ -18,6 +18,7 @@
 	var/directions = list(1,2,4,8,5,6,9,10)
 	var/RCon_tag = "NO_TAG"
 	var/update_locked = 0
+	var/rcon_id
 
 /obj/machinery/power/breakerbox/Destroy()
 	..()

@@ -14,10 +14,12 @@
 	req_one_access = list(access_engine)
 	var/current_tag = null
 	var/datum/nano_module/rcon/rcon
+	var/rcon_id
 
 /obj/machinery/computer/rcon/New()
 	..()
 	rcon = new(src)
+	rcon.rcon_id = src.rcon_id
 
 /obj/machinery/computer/rcon/Destroy()
 	qdel(rcon)

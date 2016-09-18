@@ -72,6 +72,7 @@
 	var/grounding = 1			// Cut to quickly discharge, at cost of "minor" electrical issues in output powernet.
 	var/RCon = 1				// Cut to disable AI and remote control.
 	var/RCon_tag = "NO_TAG"		// RCON tag, change to show it on SMES Remote control console.
+	var/rcon_id
 	charge = 0
 	should_be_mapped = 1
 

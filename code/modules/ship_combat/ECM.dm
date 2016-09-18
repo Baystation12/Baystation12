@@ -71,3 +71,8 @@
 
 /obj/machinery/space_battle/ecm/advanced
 	component_type = /obj/item/weapon/component/ecm/ionic
+
+/obj/machinery/space_battle/missile_sensor/eccm
+	name = "electronic counter counter measures"
+	desc = "Distrupts enemy ECM"
+	needs_dish = 1

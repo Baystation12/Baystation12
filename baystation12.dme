@@ -2206,6 +2206,7 @@
 #include "maps\ships\core\core.dmm"
 #include "maps\ships\endurance\endurance_areas.dm"
 #include "maps\ships\endurance\endurance.dmm"
+#include "maps\stations\four\celestia_areas.dm"
 #include "maps\stations\one\hub_areas.dm"
 #include "maps\stations\one\one.dmm"
 #include "maps\stations\three\brakka_areas.dm"

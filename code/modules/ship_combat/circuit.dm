@@ -151,7 +151,7 @@
 			if(transcriber.internal_wiring[i] in overwritten && src.internal_wiring[i] in transcribable)
 				internal_wiring[i] = transcriber.internal_wiring[i]
 
-	proc/transcribe(var/obj/item/upgrade_module/overwritter)
+	proc/overwrite(var/obj/item/upgrade_module/overwritter)
 		for(var/i=1 to internal_wiring.len)
 			internal_wiring[i] = overwritter.internal_wiring[i]
 

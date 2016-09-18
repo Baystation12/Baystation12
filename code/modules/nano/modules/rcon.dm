@@ -6,6 +6,7 @@
 	var/hide_SMES = 0
 	var/hide_SMES_details = 0
 	var/hide_breakers = 0
+	var/rcon_id
 
 /datum/nano_module/rcon/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1, var/datum/topic_state/state = default_state)
 	FindDevices() // Update our devices list
@@ -108,10 +109,10 @@
 /datum/nano_module/rcon/proc/FindDevices()
 	known_SMESs = new /list()
 	for(var/obj/machinery/power/smes/buildable/SMES in machines)
-		if(SMES.RCon_tag && (SMES.RCon_tag != "NO_TAG") && SMES.RCon)
+		if(SMES.RCon_tag && (SMES.RCon_tag != "NO_TAG") && SMES.RCon && SMES.rcon_id == src.rcon_id)
 			known_SMESs.Add(SMES)
 
 	known_breakers = new /list()
 	for(var/obj/machinery/power/breakerbox/breaker in machines)
-		if(breaker.RCon_tag != "NO_TAG")
+		if(breaker.RCon_tag != "NO_TAG" && breaker.rcon_id == src.rcon_id)
 			known_breakers.Add(breaker)

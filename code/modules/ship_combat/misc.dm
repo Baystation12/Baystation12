@@ -59,6 +59,9 @@
 	proc/rename(var/identification)
 		return 1
 
+	proc/change_team(var/team)
+		return 1
+
 	process()
 		..()
 		if(!powered(power_channel))
