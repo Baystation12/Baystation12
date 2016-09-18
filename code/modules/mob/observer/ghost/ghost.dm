@@ -342,20 +342,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 	..()
 
-/mob/observer/ghost/verb/jumptomob(target in getmobs())
-	set category = "Ghost"
-	set name = "Jump to Mob"
-	set desc = "Teleport to a mob"
-
-	if (!target)//Make sure we actually have a target
-		return
-
-	var/mob/M = getmobs()[target] //Destination mob
-	if(get_turf(M))	//Make the target is not in nullspace then follow it
-		ManualFollow(target)
-	else
-		to_chat(src, "This mob is not located in the game world.")
-
 /mob/observer/ghost/memory()
 	set hidden = 1
 	to_chat(src, "<span class='warning'>You are dead! You have no mind to store memory!</span>")
