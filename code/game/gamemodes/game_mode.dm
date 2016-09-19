@@ -148,17 +148,17 @@ var/global/list/additional_antag_types = list()
 
 ///can_start()
 ///Checks to see if the game can be setup and ran with the current number of players or whatnot.
-/datum/game_mode/proc/can_start(var/do_not_spawn)
+/datum/game_mode/proc/startRequirements()
 	var/playerC = 0
 	for(var/mob/new_player/player in player_list)
 		if((player.client)&&(player.ready))
 			playerC++
 
 	if(playerC < required_players)
-		return 0
+		return "Not enough players, [src.required_players] players needed."
 
 	if(!(antag_templates && antag_templates.len))
-		return 1
+		return 0
 
 	var/enemy_count = 0
 	if(antag_tags && antag_tags.len)
@@ -173,11 +173,11 @@ var/global/list/additional_antag_types = list()
 				potential = antag.candidates
 			if(islist(potential))
 				if(require_all_templates && potential.len < antag.initial_spawn_req)
-					return 0
+					return "Not enough antagonists ([antag.role_text]), [antag.initial_spawn_req] required and [potential.len] available."
 				enemy_count += potential.len
 				if(enemy_count >= required_enemies)
-					return 1
-	return 0
+					return 0
+	return "Not enough antagonists, [required_enemies] required and [enemy_count] available."
 
 /datum/game_mode/proc/refresh_event_modifiers()
 	if(event_delay_mod_moderate || event_delay_mod_major)
