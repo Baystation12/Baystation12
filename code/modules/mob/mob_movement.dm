@@ -174,7 +174,7 @@
 		if(mob.control_object.density)
 			step(mob.control_object,direct)
 			if(!mob.control_object)	return
-			mob.control_object.dir = direct
+			mob.control_object.set_dir(direct)
 		else
 			mob.control_object.forceMove(get_step(mob.control_object,direct))
 	return
@@ -392,13 +392,13 @@
 ///Allows mobs to run though walls
 /client/proc/Process_Incorpmove(direct)
 	var/turf/T = get_step(mob, direct)
-	if(mob.check_holy(T))
-		mob << "<span class='warning'>You cannot get past holy grounds while you are in this plane of existence!</span>"
+	if(mob.check_is_holy_turf(T))
+		to_chat(mob, "<span class='warning'>You cannot enter holy grounds while you are in this plane of existence!</span>")
 		return
 
 	if(T)
 		mob.forceMove(T)
-	mob.dir = direct
+	mob.set_dir(direct)
 
 	mob.Post_Incorpmove()
 	return 1

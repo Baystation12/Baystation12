@@ -5,31 +5,38 @@
 	randpixel = 8
 	w_class = 2
 	var/datum/geosample/geologic_data
-	var/material
+	var/ore/ore = null // set to a type to find the right instance on init
+
+	New()
+		..()
+		if(ispath(ore))
+			ensure_ore_data_initialised()
+			ore = ores_by_type[ore]
+			if(ore.ore != type)
+				world.log << "[src] ([src.type]) had ore type [ore.type] but that type does not have [src.type] set as its ore item!"
+			update_ore()
+
+	proc/update_ore()
+		name = ore.display_name
+		icon_state = "ore_[ore.icon_tag]"
+		origin_tech = ore.origin_tech.Copy()
+
+/obj/item/weapon/ore/slag
+	name = "Slag"
+	desc = "Someone screwed up..."
+	icon_state = "slag"
 
 /obj/item/weapon/ore/uranium
-	name = "pitchblende"
-	icon_state = "ore_uranium"
-	origin_tech = list(TECH_MATERIAL = 5)
-	material = "uranium"
+	ore = /ore/uranium
 
 /obj/item/weapon/ore/iron
-	name = "hematite"
-	icon_state = "ore_iron"
-	origin_tech = list(TECH_MATERIAL = 1)
-	material = "hematite"
+	ore = /ore/hematite
 
 /obj/item/weapon/ore/coal
-	name = "raw carbon"
-	icon_state = "ore_coal"
-	origin_tech = list(TECH_MATERIAL = 1)
-	material = "carbon"
+	ore = /ore/coal
 
 /obj/item/weapon/ore/glass
-	name = "sand"
-	icon_state = "ore_glass"
-	origin_tech = list(TECH_MATERIAL = 1)
-	material = "sand"
+	ore = /ore/glass
 	slot_flags = SLOT_HOLSTER
 
 // POCKET SAND!
@@ -45,44 +52,22 @@
 
 
 /obj/item/weapon/ore/phoron
-	name = "phoron crystals"
-	icon_state = "ore_phoron"
-	origin_tech = list(TECH_MATERIAL = 2)
-	material = "phoron"
+	ore = /ore/phoron
 
 /obj/item/weapon/ore/silver
-	name = "native silver ore"
-	icon_state = "ore_silver"
-	origin_tech = list(TECH_MATERIAL = 3)
-	material = "silver"
+	ore = /ore/silver
 
 /obj/item/weapon/ore/gold
-	name = "native gold ore"
-	icon_state = "ore_gold"
-	origin_tech = list(TECH_MATERIAL = 4)
-	material = "gold"
+	ore = /ore/gold
 
 /obj/item/weapon/ore/diamond
-	name = "diamonds"
-	icon_state = "ore_diamond"
-	origin_tech = list(TECH_MATERIAL = 6)
-	material = "diamond"
+	ore = /ore/diamond
 
 /obj/item/weapon/ore/osmium
-	name = "raw platinum"
-	icon_state = "ore_platinum"
-	material = "platinum"
+	ore = /ore/platinum
 
 /obj/item/weapon/ore/hydrogen
-	name = "raw hydrogen"
-	icon_state = "ore_hydrogen"
-	material = "mhydrogen"
-
-/obj/item/weapon/ore/slag
-	name = "Slag"
-	desc = "Someone screwed up..."
-	icon_state = "slag"
-	material = null
+	ore = /ore/hydrogen
 
 /obj/item/weapon/ore/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/device/core_sampler))

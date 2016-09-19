@@ -180,7 +180,7 @@
 	var/list/preserve_items = list(
 		/obj/item/weapon/hand_tele,
 		/obj/item/weapon/card/id/captains_spare,
-		/obj/item/device/aicard,
+		/obj/item/weapon/aicard,
 		/obj/item/device/mmi,
 		/obj/item/device/paicard,
 		/obj/item/weapon/gun,

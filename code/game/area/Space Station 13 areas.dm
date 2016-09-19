@@ -53,38 +53,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/sound_env = STANDARD_STATION
 	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
 
-/*Adding a wizard area teleport list because motherfucking lag -- Urist*/
-/*I am far too lazy to make it a proper list of areas so I'll just make it run the usual telepot routine at the start of the game*/
-var/list/teleportlocs = list()
-
-/hook/startup/proc/setupTeleportLocs()
-	for(var/area/AR in world)
-		if(istype(AR, /area/shuttle) || istype(AR, /area/syndicate_station) || istype(AR, /area/wizard_station)) continue
-		if(teleportlocs.Find(AR.name)) continue
-		var/turf/picked = pick_area_turf(AR.type, list(/proc/is_station_turf))
-		if (picked)
-			teleportlocs += AR.name
-			teleportlocs[AR.name] = AR
-
-	teleportlocs = sortAssoc(teleportlocs)
-
-	return 1
-
-var/list/ghostteleportlocs = list()
-
-/hook/startup/proc/setupGhostTeleportLocs()
-	for(var/area/AR in world)
-		if(!AR.x)
-			continue
-		if(ghostteleportlocs.Find(AR.name)) continue
-		var/turf/picked = pick_area_turf(AR.type)
-		if (picked)
-			ghostteleportlocs[AR.name] = AR
-
-	ghostteleportlocs = sortAssoc(ghostteleportlocs)
-
-	return 1
-
 /*-----------------------------------------------------------------------------*/
 
 //////////

@@ -48,9 +48,8 @@
 
 /obj/machinery/space_battle/hacking/reconnect()
 	target_teams.Cut()
-	for(var/obj/missile_start/S in world)
+	for(var/obj/missile_start/S in missile_starts)
 		if(S.team && S.team != src.team && S.active)
-			var/obj/effect/overmap/linked = map_sectors["[S.z]"]
 			if(linked)
 				target_teams.Add("[linked.name]")
 

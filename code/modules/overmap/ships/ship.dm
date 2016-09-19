@@ -1,23 +1,45 @@
 /obj/effect/overmap/ship
 	name = "generic ship"
 	desc = "Space faring vessel."
+	icon = 'icons/obj/ship_battles.dmi'
 	icon_state = "ship"
-	var/vessel_mass = 9000 				//tonnes, arbitrary number, affects acceleration provided by engines
-	var/default_delay = 6 				//deciseconds it takes to move to next tile on overmap
-	var/list/speed = list(0,0)			//speed in x,y direction
-	var/last_burn = 0					//worldtime when ship last acceleated
-	var/list/last_movement = list(0,0)	//worldtime when ship last moved in x,y direction
-	var/fore_dir = NORTH				//what dir ship flies towards for purpose of moving stars effect procs
-	var/rotate = 1						//if icon should be rotated to heading
+	var/vessel_mass = 9000 //tonnes, random number
+	var/default_delay = 60
+	var/list/speed = list(0,0)
+	var/last_burn = 0
+	var/list/last_movement = list(0,0)
+	var/fore_dir = NORTH
+	var/rotate = 1 //For proc rotate
 
+	var/obj/effect/overmap/current_sector
 	var/obj/machinery/space_battle/helm/nav_control
-	var/obj/machinery/computer/engines/eng_control
+	var/list/eng_controls = list()
+	var/list/fire_controls = list()
+	var/braked = 1
+
+/obj/effect/overmap/ship/Destroy()
+	current_sector = null
+	nav_control.linked = null
+	nav_control = null
+	for(var/obj/machinery/space_battle/engine_control/E in eng_controls)
+		E.linked = null
+	eng_controls.Cut()
+	for(var/obj/machinery/space_battle/missile_computer/M in fire_controls)
+		M.linked = null
+	fire_controls.Cut()
+	if(fake)
+		fake_ship = null
+	map_sectors["[z]"] = null
+	return ..()
 
 /obj/effect/overmap/ship/initialize()
 	..()
-	for(var/obj/machinery/computer/engines/E in machines)
+	for(var/obj/machinery/space_battle/missile_computer/M in world)
+		if (M.z in map_z)
+			fire_controls.Add(M)
+	for(var/obj/machinery/space_battle/engine_control/E in machines)
 		if (E.z in map_z)
-			eng_control = E
+			eng_controls += E
 			E.linked = src
 			E.zlevels = map_z
 			E.refresh_engines()
@@ -37,10 +59,13 @@
 	return !(speed[1] || speed[2])
 
 /obj/effect/overmap/ship/proc/get_acceleration()
-	return round(eng_control.get_total_thrust()/vessel_mass, 0.1)
+	var/thrust = 0
+	for(var/obj/machinery/space_battle/engine_control/E in eng_controls)
+		thrust += E.get_total_thrust()/vessel_mass
+	return thrust
 
 /obj/effect/overmap/ship/proc/get_speed()
-	return round(sqrt(speed[1]*speed[1] + speed[2]*speed[2]), 0.1)
+	return round(sqrt(speed[1]*speed[1] + speed[2]*speed[2]))
 
 /obj/effect/overmap/ship/proc/get_heading()
 	var/res = 0
@@ -59,29 +84,37 @@
 /obj/effect/overmap/ship/proc/adjust_speed(n_x, n_y)
 	speed[1] = Clamp(speed[1] + n_x, -default_delay, default_delay)
 	speed[2] = Clamp(speed[2] + n_y, -default_delay, default_delay)
-	for(var/zz in map_z)
-		if(is_still())
-			toggle_move_stars(zz)
-		else
-			toggle_move_stars(zz, fore_dir)
-	update_icon()
+	if(is_still())
+		toggle_move_stars(map_z)
+		if(!braked)
+			var/obj/effect/overmap/station/S = locate() in src.loc
+			if(S && istype(S))
+				for(var/obj/machinery/space_battle/engine_control/E in eng_controls)
+					E.stopped()
+				for(var/obj/machinery/space_battle/missile_computer/M in fire_controls)
+					M.find_targets()
+	else
+		toggle_move_stars(map_z, fore_dir)
 
 /obj/effect/overmap/ship/proc/can_burn()
-	if (!eng_control)
+	if (!eng_controls.len)
 		return 0
 	if (world.time < last_burn + 10)
 		return 0
-	if (!eng_control.burn())
-		return 0
-	return 1
+	var/can_burn = 0
+	for(var/obj/machinery/space_battle/engine_control/E in eng_controls)
+		if(E.burn())
+			can_burn = 1
+	return can_burn
 
 /obj/effect/overmap/ship/proc/get_brake_path()
 	if(!get_acceleration())
 		return INFINITY
 	return get_speed()/get_acceleration()
 
-/obj/effect/overmap/ship/proc/decelerate()
-	if(!is_still() && can_burn())
+#define SIGN(X) (X == 0 ? 0 : (X > 0 ? 1 : -1))
+/obj/effect/overmap/ship/proc/decelerate(var/forced = 0)
+	if(!is_still() && (forced || can_burn()))
 		if (speed[1])
 			adjust_speed(-SIGN(speed[1]) * min(get_acceleration(),abs(speed[1])), 0)
 		if (speed[2])
@@ -103,6 +136,9 @@
 
 
 /obj/effect/overmap/ship/proc/rotate(var/direction)
+	var/matrix/M = matrix()
+	M.Turn(dir2angle(direction))
+	src.transform = M //Rotate ship
 
 /obj/effect/overmap/ship/process()
 	if(!is_still())
@@ -114,10 +150,5 @@
 		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
 		if(newloc)
 			Move(newloc)
-		update_icon()
-
-/obj/effect/overmap/ship/update_icon()
-	if(rotate)
-		var/matrix/M = matrix()
-		M.Turn(dir2angle(get_heading()))
-		src.transform = M //Rotate ship
+		if(rotate)
+			rotate(get_heading())

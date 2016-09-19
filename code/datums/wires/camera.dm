@@ -57,9 +57,6 @@ var/const/CAMERA_WIRE_NOTHING2 = 32
 			var/new_range = (C.view_range == initial(C.view_range) ? C.short_range : initial(C.view_range))
 			C.setViewRange(new_range)
 
-		if(CAMERA_WIRE_POWER)
-			C.kick_viewers() // Kicks anyone watching the camera
-
 		if(CAMERA_WIRE_LIGHT)
 			C.light_disabled = !C.light_disabled
 

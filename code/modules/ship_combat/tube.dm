@@ -11,7 +11,7 @@
 	var/jammed = 0
 	var/charging = 0
 
-	var/obj/machinery/space_battle/missile_computer/linked
+	var/obj/machinery/space_battle/missile_computer/computer
 	var/obj/machinery/space_battle/tube_barrel/barrel
 
 	var/mob/to_kill // Muahaha
@@ -19,9 +19,9 @@
 	var/list/can_pass = list(/obj/structure/grille, /obj/machinery/shieldwall)
 
 	Destroy()
-		if(linked)
-			linked.tube = null
-			linked = null
+		if(computer)
+			computer.tube = null
+			computer = null
 		if(to_kill)
 			qdel(to_kill)
 		..()
@@ -32,7 +32,7 @@
 		..()
 
 	rename()
-		name = "[initial(name)][linked.id_num]"
+		name = "[initial(name)][computer.id_num]"
 
 /obj/machinery/space_battle/tube/proc/jammed()
 	if(!barrel)
@@ -111,11 +111,11 @@
 			M.power *= (1+(rails.len*0.02))
 		to_return = M.fire_missile(location, start)
 		use_power(720)
-		if(linked && linked.firing_angle != "Carefully Aimed")
-			if(linked.firing_angle == "Flanking")
+		if(computer && computer.firing_angle != "Carefully Aimed")
+			if(computer.firing_angle == "Flanking")
 				if(prob(10*efficiency))
 					jammed()
-			if(linked.firing_angle == "Rapid Fire")
+			if(computer.firing_angle == "Rapid Fire")
 				if(prob(30*efficiency))
 					jammed()
 			else if(prob(5*efficiency))
@@ -189,18 +189,18 @@
 	..()
 
 /obj/machinery/space_battle/tube/attack_hand(var/mob/user)
-	if(linked)
+	if(computer)
 		user << "<span class='notice'>You begin unlocking \the [src]'s manual control panel..</span>"
 		if(do_after(user, rand(100,200)))
-			linked.attack_hand(user, 1)
+			computer.attack_hand(user, 1)
 			return
 
 
 /obj/machinery/space_battle/tube/Crossed(atom/movable/A as mob|obj)
-	if(linked)
-		if(linked.eye)
+	if(computer)
+		if(computer.eye)
 			if(istype(A, /obj) || istype(A, /mob/living))
-				linked.eye << "<span class='notice'>Loaded: [A]</span>"
+				computer.eye << "<span class='notice'>Loaded: [A]</span>"
 	if(barrel && istype(A, /obj/machinery/missile))
 		barrel.charge_up()
 	else if(!barrel) // try locating the barrel again.
@@ -232,7 +232,7 @@
 	var/maxcharge = 100
 	var/current_charge = 0
 	active_power_usage = 20
-	var/obj/machinery/space_battle/tube/linked
+	var/obj/machinery/space_battle/tube/tube
 
 
 	New()
@@ -240,7 +240,7 @@
 		..()
 
 	Destroy()
-		linked = null
+		tube = null
 		..()
 
 	process()
@@ -288,7 +288,7 @@
 	processing_objects.Add(src)
 
 /obj/machinery/space_battle/tube_barrel/proc/jam(var/obj/machinery/space_battle/tube/T)
-	linked = T
+	tube = T
 	jammed = 1
 	update_icon()
 

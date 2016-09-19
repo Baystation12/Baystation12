@@ -686,18 +686,20 @@
 	if(!.)
 		return
 
-	if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
-		stat("Station Time", stationtime2text())
-		stat("Round Duration", roundduration2text())
-
-	if(client.holder)
-		if(statpanel("Status"))
+	if(statpanel("Status"))
+		if(ticker && ticker.current_state != GAME_STATE_PREGAME)
+			stat("Station Time", stationtime2text())
+			stat("Round Duration", roundduration2text())
+		if(client.holder || isghost(client.mob))
 			stat("Location:", "([x], [y], [z]) [loc]")
+		if(client.holder)
 			stat("CPU:","[world.cpu]")
 			stat("Instances:","[world.contents.len]")
-		if(statpanel("Processes"))
-			if(processScheduler)
-				processScheduler.statProcesses()
+			
+	if(client.holder && statpanel("Processes"))
+		if(processScheduler)
+			processScheduler.statProcesses()
+		sleep(1 SECOND)
 
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))
@@ -1093,3 +1095,6 @@ mob/proc/yank_out_object()
 			usr << "The game is not currently looking for antags."
 	else
 		usr << "You must be observing or in the lobby to join the antag pool."
+
+/mob/proc/is_invisible_to(var/mob/viewer)
+	return (!alpha || !mouse_opacity || viewer.see_invisible < invisibility)

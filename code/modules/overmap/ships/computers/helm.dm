@@ -2,7 +2,6 @@
 	name = "helm control console"
 	icon_state = "computer"
 	icon = 'icons/obj/ship_battles.dmi'
-	var/obj/effect/overmap/ship/linked			//connected overmap object
 	var/autopilot = 0
 	var/manual_control = 0
 	var/list/known_sectors = list()

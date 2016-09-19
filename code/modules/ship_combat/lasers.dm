@@ -6,14 +6,12 @@
 	icon_state = "computer"
 
 	var/list/laser_emitters = list()
-	var/obj/effect/overmap/linked
 
 	reconnect()
 		laser_emitters.Cut()
 		for(var/obj/machinery/space_battle/laser_emitter/L in world)
 			if(L.id_tag == src.id_tag && L.z == src.z)
 				laser_emitters.Add(L)
-		linked = map_sectors["[z]"]
 
 	initialize()
 		..()

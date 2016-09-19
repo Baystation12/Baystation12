@@ -78,15 +78,15 @@
 	else
 		visible_message("<span class='danger'>\The [user] is trying to put \a [held] on \the [src]!</span>")
 
-	if(!do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
-		return
-
-	if(!stripping && user.get_active_hand() != held)
+	if(!do_mob(user, src, HUMAN_STRIP_DELAY))
 		return
 
 	if(stripping)
-		admin_attack_log(user, src, "Attempted to remove \a [target_slot]", "Target of an attempt to remove \a [target_slot].", "attempted to remove \a [target_slot] from")
-		unEquip(target_slot)
+		if(unEquip(target_slot))
+			admin_attack_log(user, src, "Stripped \a [target_slot]", "Was stripped of \a [target_slot].", "stripped \a [target_slot] from")
+			user.put_in_active_hand(target_slot)
+		else
+			admin_attack_log(user, src, "Attempted to strip \a [target_slot]", "Target of a failed strip of \a [target_slot].", "attempted to strip \a [target_slot] from")
 	else if(user.unEquip(held))
 		if(!equip_to_slot_if_possible(held, text2num(slot_to_strip_text), del_on_fail=0, disable_warning=1, redraw_mob=1))
 			user.put_in_active_hand(held)

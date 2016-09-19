@@ -31,8 +31,6 @@
 	var/y_offset = 0
 	var/x_offset = 0
 
-	var/obj/effect/overmap/ship/linked
-
 	Destroy()
 		if(eye)
 			eye.return_to_owner()
@@ -108,16 +106,16 @@
 	proc/find_targets()
 		starts.Cut()
 		if(!linked)
-			return 0
+			return "Incompatible Host!"
 		if(istype(linked, /obj/effect/overmap/ship))
 			var/obj/effect/overmap/ship/S = linked
 			if(!S.is_still())
-				return 0
-		var/list/targettable_z_levels = list()
-		for(var/obj/effect/overmap/S in range(3, linked))
-			targettable_z_levels.Add(S.map_z[1])
+				return "Ship is moving!"
+		var/list/targettable_z_levels = get_firing_targets()
+		if(!targettable_z_levels || !targettable_z_levels.len)
+			return "Nothing in range!"
 		var/area/ship_battle/us = get_area(src)
-		if(!istype(us)) return
+		if(!istype(us)) return "Fatal error!"
 		for(var/obj/missile_start/S in world)
 			for(var/i=1 to targettable_z_levels.len)
 				if(S.z == text2num(targettable_z_levels[i]))
@@ -128,6 +126,10 @@
 						continue
 					if(enemy.team != us.team)
 						starts += S
+
+	proc/get_firing_targets()
+		return sensor ? sensor.get_firing_targets() : 0
+
 
 	reconnect()
 		for(var/obj/machinery/space_battle/tube/T in world)
@@ -159,8 +161,11 @@
 		if(stat & (BROKEN|NOPOWER) && !forced)
 			user << "<span class='warning'>\The [src] is not responding!</span>"
 			return
-		src.find_targets()
-		user << "<span class='notice'>Scan Complete...[starts.len] targets found!</span>"
+		var/find_targets = src.find_targets()
+		if(!starts.len)
+			user << "<span class='warning'>Scan incomplete: [find_targets]</span>"
+		else
+			user << "<span class='notice'>Scan Complete...[starts.len] targets found!</span>"
 		if(!starts.len) return 0
 		if(!sensor)
 			for(var/obj/machinery/space_battle/missile_sensor/hub/S in world)
@@ -243,7 +248,7 @@
 			else
 				user << "<span class='danger'>CAUTION: X-ray module offline. Internal view unavailable: [has_microwave]</span>"
 
-		var/has_eccm = sensor.eccm()
+		var/has_eccm = sensor.has_eccm()
 		if(sensor.eccm)
 			if(isnum(has_eccm) && has_eccm > 1)
 				user << "<font color='#00FF00'>ECCM operational at a strength of [has_eccm].</font>"
@@ -345,6 +350,7 @@
 	var/tracking = 0
 	var/xray = 0
 	var/mode = 0
+	var/eccm = 0
 
 	var/wait = 0
 	var/firing = 0
@@ -520,7 +526,7 @@
 			var/miss_message = ""
 			var/ECM = 0
 			var/obj/machinery/space_battle/ecm/E = locate(/obj/machinery/space_battle/ecm) in range(MAX_ECM_RANGE, T)
-			if(E && E.can_block(get_dist(T, E)))
+			if(E && E.can_block(get_dist(T, E)) && E.strength >= eccm)
 				ECM = 1
 			var/miss_chance = (advguidance ? 10*max(linked.sensor.advguidance.get_efficiency(-1,1), guidance_efficiency) : 25*guidance_efficiency)
 			if(ECM || linked.firing_angle == "Flanking" || (!guidance||prob(miss_chance)) && linked.firing_angle != "Carefully Aimed") // Random firing.

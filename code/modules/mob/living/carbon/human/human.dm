@@ -1488,3 +1488,6 @@
 
 /mob/living/carbon/human/get_adjusted_metabolism(metabolism)
 	return ..() * (species ? species.metabolism_mod : 1)
+
+/mob/living/carbon/human/is_invisible_to(var/mob/viewer)
+	return (cloaked || ..())

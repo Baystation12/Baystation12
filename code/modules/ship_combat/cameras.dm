@@ -33,7 +33,7 @@
 */
 	add_networks(new_network)
 	invalidateCameraCache()
-
+/*
 /obj/machinery/computer/security/battle/initialize()
 	..()
 	spawn(5)
@@ -55,3 +55,4 @@
 
 		if(network.len)
 			current_network = network[1]
+*/

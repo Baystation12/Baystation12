@@ -95,19 +95,21 @@
 
 /obj/item/weapon/component/sensor/em
 	name = "em sensor"
+	range = 5
 
 /obj/item/weapon/component/sensor/em/find_targets()
 	var/obj/effect/overmap/linked = map_sectors["[z]"]
 	var/list/targets = list()
 	if(linked && istype(linked))
 		for(var/obj/effect/overmap/target in range(range, linked))
-			if(target.em_sensitivity > 0)
+			if(target.em_signature > 0)
 				targets += target
 	return targets
 
 
 /obj/item/weapon/component/sensor/thermal
-	name = "thermal sensor."
+	name = "thermal sensor"
+	range = 7
 
 /obj/item/weapon/component/sensor/thermal/find_targets()
 	var/obj/effect/overmap/linked = map_sectors["[z]"]
@@ -122,7 +124,7 @@
 					targets += S
 	return targets
 
-/obj/item/weapon/component/sensor/grav
+/obj/item/weapon/component/sensor/gravity
 	name = "gravity sensor"
 
 /obj/item/weapon/component/sensor/grav/find_targets()

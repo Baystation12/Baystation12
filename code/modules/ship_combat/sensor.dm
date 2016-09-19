@@ -86,8 +86,10 @@
 		if(use_power == 1)
 			usr << "<span class='warning'>It's disabled!</span>"
 
-	emp_act()
-		use_power = 1
+	emp_act(var/severity = 0)
+		if(severity)
+			if(prob(100/severity))
+				toggle_active()
 		..()
 
 	reconnect()
@@ -99,13 +101,19 @@
 					D.linked_sensor = src
 					break
 
+	proc/toggle_active()
+		if(use_power == 1)
+			use_power = 2
+			linked.em_signature += 1
+		else
+			use_power = 1
+			linked.em_signature -= 1
+
 	attackby(var/obj/item/O, var/mob/user)
 		if(!stat & (BROKEN|NOPOWER))
 			if(istype(O, /obj/item/stack/cable_coil))
 				user.visible_message("<span class='notice'>[user] [use_power > 1 ? "disables" : "enables"] \the [src]!</span>", "<span class='notice'>You [use_power > 1 ? "disable" : "enable"] \the [src]!")
-				if(use_power == 1)
-					use_power = 2
-				else use_power = 1
+				toggle_active()
 				return
 			if(istype(O, /obj/item/weapon/wrench))
 				anchored = !anchored
@@ -203,8 +211,8 @@
 	var/obj/machinery/space_battle/missile_sensor/microwave/microwave
 	var/obj/machinery/space_battle/missile_sensor/xray/xray
 	var/obj/machinery/space_battle/missile_sensor/advguidance/advguidance
-
-	var/obj/machinery/space_battle/linked
+	var/obj/machinery/space_battle/missile_sensor/eccm
+	var/obj/machinery/space_battle/missile_sensor/ship_sensor/sensor
 
 	var/list/radars = list()
 
@@ -215,6 +223,7 @@
 	thermal = null
 	microwave = null
 	xray = null
+	eccm = null
 	return ..()
 
 /obj/machinery/space_battle/missile_sensor/hub/reconnect()
@@ -241,8 +250,12 @@
 				xray = M
 			if(istype(M, /obj/machinery/space_battle/missile_sensor/advguidance) && !advguidance)
 				advguidance = M
+			if(istype(M, /obj/machinery/space_battle/missile_sensor/eccm) && !eccm)
+				eccm = M
 			if(istype(M, /obj/machinery/space_battle/missile_sensor/radar))
 				radars.Add(M)
+			if(istype(M, /obj/machinery/space_battle/missile_sensor/ship_sensor) && !sensor)
+				sensor = M
 	rename()
 	return
 
@@ -312,6 +325,13 @@
 		return "Unconnected"
 	return 0
 
+/obj/machinery/space_battle/missile_sensor/hub/proc/has_eccm()
+	if(can_sense())
+		if(eccm)
+			return eccm.can_sense()
+		return "Unconnected"
+	return 0
+
 /obj/machinery/space_battle/missile_sensor/hub/proc/has_xray()
 	if(xray && can_sense())
 		if(has_scanning() && has_thermal() && has_microwave())
@@ -324,6 +344,10 @@
 	if(!can_sense()) return 0
 	return radars
 
+/obj/machinery/space_battle/missile_sensor/hub/proc/get_firing_targets()
+	if(sensor)
+		return sensor.find_targets()
+	return 0
 /****************
 *Overmap Sensors*
 ****************/
@@ -343,24 +367,24 @@
 
 /obj/machinery/space_battle/missile_sensor/ship_sensor/gravity // Allows the eye to move
 	name = "gravity sensor"
-	desc = "Searches for gravity sensors."
+	desc = "Searches for ships within the specified range."
 	needs_dish = 1
 	icon_state = "tracker"
-	component_type = /obj/item/weapon/component/sensor
+	component_type = /obj/item/weapon/component/sensor/gravity
 
-/obj/machinery/space_battle/missile_sensor/ship_sensor/gravity // Allows the eye to move
-	name = "gravity sensor"
-	desc = "Searches for gravity sensors."
+/obj/machinery/space_battle/missile_sensor/ship_sensor/em // Allows the eye to move
+	name = "em sensor"
+	desc = "Searches for active weaponry or shields."
 	needs_dish = 1
 	icon_state = "tracker"
-	component_type = /obj/item/weapon/component/sensor
+	component_type = /obj/item/weapon/component/sensor/em
 
-/obj/machinery/space_battle/missile_sensor/ship_sensor/gravity // Allows the eye to move
-	name = "gravity sensor"
-	desc = "Searches for gravity sensors."
+/obj/machinery/space_battle/missile_sensor/ship_sensor/thermal // Allows the eye to move
+	name = "thermal sensor"
+	desc = "Searches for thermal signatures."
 	needs_dish = 1
 	icon_state = "tracker"
-	component_type = /obj/item/weapon/component/sensor
+	component_type = /obj/item/weapon/component/sensor/thermal
 
 
 

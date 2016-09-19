@@ -652,7 +652,7 @@ other types of metals and chemistry for reagents).
 	id = "intellicard"
 	req_tech = list(TECH_DATA = 4, TECH_MATERIAL = 4)
 	materials = list("glass" = 1000, "gold" = 200)
-	build_path = /obj/item/device/aicard
+	build_path = /obj/item/weapon/aicard
 	sort_string = "VACAA"
 
 /datum/design/item/posibrain
@@ -963,6 +963,17 @@ other types of metals and chemistry for reagents).
 	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/processor_unit/photonic/small
 	sort_string = "VBAAY"
+
+// Intellicard Slot
+/datum/design/item/modularcomponent/aislot
+	name = "intellicard slot"
+	id = "aislot"
+	req_tech = list(TECH_POWER = 2, TECH_DATA = 3)
+	build_type = IMPRINTER
+	materials = list(DEFAULT_WALL_MATERIAL = 2000)
+	chemicals = list("sacid" = 20)
+	build_path = /obj/item/weapon/computer_hardware/ai_slot
+	sort_string = "VBAAZ"
 /*
 CIRCUITS BELOW
 */
@@ -1002,13 +1013,7 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 1)
 	build_path = /obj/item/weapon/circuitboard/arcade/orion_trail
 	sort_string = "MABAA"
-
-/datum/design/circuit/seccamera
-	name = "security camera monitor"
-	id = "seccamera"
-	build_path = /obj/item/weapon/circuitboard/security
-	sort_string = "DAAAA"
-
+/*
 /datum/design/circuit/secdata
 	name = "security records console"
 	id = "sec_data"
@@ -1026,7 +1031,7 @@ CIRCUITS BELOW
 	id = "med_data"
 	build_path = /obj/item/weapon/circuitboard/med_data
 	sort_string = "FAAAA"
-
+*/
 /datum/design/circuit/operating
 	name = "patient monitoring console"
 	id = "operating"
@@ -1094,7 +1099,7 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 3, TECH_BLUESPACE = 2)
 	build_path = /obj/item/weapon/circuitboard/teleporter
 	sort_string = "HAAAA"
-
+/*
 /datum/design/circuit/robocontrol
 	name = "robotics control console"
 	id = "robocontrol"
@@ -1108,21 +1113,14 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 3)
 	build_path = /obj/item/weapon/circuitboard/mecha_control
 	sort_string = "HAAAC"
-
+*/
 /datum/design/circuit/rdconsole
 	name = "R&D control console"
 	id = "rdconsole"
 	req_tech = list(TECH_DATA = 4)
 	build_path = /obj/item/weapon/circuitboard/rdconsole
 	sort_string = "HAAAE"
-
-/datum/design/circuit/aifixer
-	name = "AI integrity restorer"
-	id = "aifixer"
-	req_tech = list(TECH_DATA = 3, TECH_BIO = 2)
-	build_path = /obj/item/weapon/circuitboard/aifixer
-	sort_string = "HAAAF"
-
+/*
 /datum/design/circuit/comm_monitor
 	name = "telecommunications monitoring console"
 	id = "comm_monitor"
@@ -1143,7 +1141,7 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 5)
 	build_path = /obj/item/weapon/circuitboard/message_monitor
 	sort_string = "HAACC"
-
+*/
 /datum/design/circuit/aiupload
 	name = "AI upload console"
 	id = "aiupload"
@@ -1316,14 +1314,14 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 3)
 	build_path = /obj/item/weapon/airlock_electronics/secure
 	sort_string = "JDAAA"
-
+/*
 /datum/design/circuit/supplycomp
 	name = "cargo supply console"
 	id = "supplycomp"
 	req_tech = list(TECH_DATA = 3)
 	build_path = /obj/item/weapon/circuitboard/supplycomp
 	sort_string = "KAAAB"
-
+*/
 /datum/design/circuit/biogenerator
 	name = "biogenerator"
 	id = "biogenerator"
@@ -1647,7 +1645,7 @@ CIRCUITS BELOW
 	materials = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 	build_path = /obj/item/device/pda
 	sort_string = "VAAAA"
-
+/*
 // Cartridges
 /datum/design/item/pda_cartridge
 	req_tech = list(TECH_ENGINEERING = 2, TECH_POWER = 3)
@@ -1731,7 +1729,7 @@ CIRCUITS BELOW
 	id = "cart_captain"
 	build_path = /obj/item/weapon/cartridge/captain
 	sort_string = "VBAAO"
-
+*/
 /datum/design/item/airlock_brace
 	name = "airlock brace design"
 	desc = "Special door attachment that can be used to provide extra security."
@@ -1760,3 +1758,132 @@ CIRCUITS BELOW
 	materials = list(DEFAULT_WALL_MATERIAL = 120)
 	build_path = /obj/item/weapon/crowbar/brace_jack
 	sort_string = "VBAAS"
+
+//Spess Battle
+/datum/design/circuit/space_battle
+	req_tech = list(TECH_ENGINEERING = 1)
+
+/datum/design/circuit/space_battle/AssembleDesignName()
+	name = "Combat Machinery Circuit ([name])"
+/datum/design/circuit/space_battle/AssembleDesignDesc()
+	desc = "Allows for the construction of \a [name] module."
+
+/datum/design/circuit/space_battle/sensor
+	name = "missile sensor"
+	id = "missile_sensor"
+	req_tech = list(TECH_DATA = 2, TECH_COMAT = 1, TECH_MATERIAL = 2)
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/tracking
+	sort_string = "AAAASB"
+
+/datum/design/circuit/space_battle/sensor/AssembleDesignName()
+	name = "Combat Sensor Circuit ([name])"
+/datum/design/circuit/space_battle/sensor/AssembleDesignDesc()
+	desc = "Allows for the construction of \a [name] module."
+
+/datum/design/circuit/space_battle/sensor/tracking
+	name = "tracking"
+	id = "tracking_sensor"
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/tracking
+	sort_string = "AAAASBA"
+
+/datum/design/circuit/space_battle/sensor/scanning
+	name = "scanning"
+	id = "scanning_sensor"
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/scanning
+	sort_string = "AAAASBB"
+
+/datum/design/circuit/space_battle/sensor/guidance
+	name = "missile guidance"
+	id = "guidance_sensor"
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/guidance
+	sort_string = "AAAASBC"
+
+/datum/design/circuit/space_battle/sensor/advguidance
+	name = "advanced missile guidance"
+	id = "advguidance_sensor"
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/advguidance
+	sort_string = "AAAASBD"
+
+/datum/design/circuit/space_battle/sensor/hub
+	name = "hub"
+	id = "hub_sensor"
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/hub
+	sort_string = "AAAASBE"
+
+/datum/design/circuit/space_battle/sensor/dish
+	name = "external dish"
+	id = "dish_sensor"
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/dish
+	sort_string = "AAAASBF"
+
+/datum/design/circuit/space_battle/sensor/radar
+	name = "radar"
+	id = "radar_sensor"
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/radar
+	sort_string = "AAAASBG"
+
+/datum/design/circuit/space_battle/sensor/microwave
+	name = "microwave"
+	id = "microwave_sensor"
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/microwave
+	sort_string = "AAAASBH"
+
+/datum/design/circuit/space_battle/sensor/xray
+	name = "scanning"
+	id = "xray_sensor"
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/xray
+	sort_string = "AAAASBI"
+
+/datum/design/circuit/space_battle/sensor/thermal
+	name = "thermal"
+	id = "thermal_sensor"
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/thermal
+	sort_string = "AAAASBJ"
+
+/datum/design/circuit/space_battle/engine
+	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2, TECH_POWER = 2)
+
+/datum/design/circuit/space_battle/engine/AssembleDesignName()
+	name = "Ship Engine Circuit ([name])"
+/datum/design/circuit/space_battle/engine/AssembleDesignDesc()
+	desc = "Allows for the construction of \a [name] module."
+
+/datum/design/circuit/space_battle/engine/fueled
+	name = "fueled"
+	id = "fueled_engine"
+	build_path = /obj/item/weapon/circuitboard/space_battle/fueled_engine
+	sort_string = "AAAASBK"
+
+/datum/design/circuit/space_battle/engine/electric
+	name = "electric"
+	id = "electric_engine"
+	build_path = /obj/item/weapon/circuitboard/space_battle/electric_engine
+	sort_string = "AAAASBL"
+
+/datum/design/circuit/space_battle/tube
+	name = "firing breech"
+	id = "firing_breech"
+	build_path = /obj/item/weapon/circuitboard/space_battle/missile_launch_tube
+	sort_string = "AAAASBM"
+
+/datum/design/circuit/space_battle/control
+	name = "firing control"
+	id = "firing_control"
+	build_path = /obj/item/weapon/circuitboard/space_battle/missile_computer
+	sort_string = "AAAASBN"
+
+/datum/design/circuit/space_battle/ecm
+	name = "ecm"
+	id = "ecm"
+	build_path = /obj/item/weapon/circuitboard/space_battle/ecm
+	sort_string = "AAAASBO"
+
+/datum/design/circuit/space_battle/warp_pad
+	name = "warp pad"
+	id = "warp_pad"
+	build_path = /obj/item/weapon/circuitboard/space_battle/warp_pad
+	sort_string = "AAAASBP"
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_BLUESPACE = 2)
+
+
+

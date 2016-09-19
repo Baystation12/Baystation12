@@ -47,6 +47,7 @@
 	anchored = 1
 	var/id_num = 0
 	var/repairing = 0
+	var/obj/effect/overmap/linked
 
 	New()
 		..()
@@ -55,6 +56,10 @@
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
 			team = A.team
+
+	initialize()
+		linked = map_sectors["[z]"]
+		..()
 
 	proc/rename(var/identification)
 		return 1

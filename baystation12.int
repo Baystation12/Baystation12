@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 LAST_COMPILE_TIME: 1473836444
-DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\trinary_devices code\modules code\modules\overmap code\modules\power code\modules\recycling code\modules\ship_combat code\modules\ship_combat\navigation maps maps\exodus maps\ships maps\ships\endurance maps\stations maps\stations\four maps\stations\one 
+DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\trinary_devices code\datums code\datums\outfits code\datums\outfits\jobs code\datums\repositories code\datums\supplypacks code\datums\wires code\game code\game\jobs code\game\jobs\job code\game\machinery code\game\machinery\camera code\game\machinery\computer code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\circuitboards code\game\objects\items\weapons\circuitboards\computer code\game\objects\items\weapons\circuitboards\machinery code\modules code\modules\alarm code\modules\events code\modules\mob code\modules\mob\observer code\modules\mob\observer\freelook code\modules\mob\observer\freelook\ai code\modules\mob\observer\ghost code\modules\modular_computers code\modules\modular_computers\file_system code\modules\modular_computers\file_system\programs code\modules\modular_computers\file_system\programs\antagonist code\modules\overmap code\modules\overmap\ships code\modules\overmap\ships\computers code\modules\research code\modules\ship_combat code\modules\ship_combat\navigation icons icons\effects icons\NTOS icons\obj icons\obj\machines maps maps\ships maps\ships\endurance 
 AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 510.1347
-WINDOW: maps\ships\endurance\endurance.dmm;code\modules\ship_combat\navigation\sectors.dm;code\modules\overmap\sectors.dm;maps\exodus\exodus.dm;code\modules\power\cable.dm;maps\stations\four\Celestia.dmm;code\modules\ship_combat\circuit.dm;maps\stations\one\one.dmm;code\modules\ship_combat\computer.dm;code\modules\recycling\disposal.dm
-FILE: maps\stations\four\Celestia.dmm
+WINDOW: code\modules\ship_combat\sensor.dm;code\modules\ship_combat\computer.dm;code\modules\ship_combat\navigation\components.dm;code\modules\ship_combat\navigation\ship.dm;code\modules\overmap\sectors.dm;code\modules\ship_combat\misc.dm;code\modules\ship_combat\hacking.dm;code\modules\ship_combat\lasers.dm;code\modules\ship_combat\tube.dm;code\modules\ship_combat\missile.dm
+FILE: code\modules\ship_combat\missile.dm
 */
 // END_INTERNALS

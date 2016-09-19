@@ -8,15 +8,6 @@ var/list/VVlocked = list("vars", "holder", "client", "virus", "viruses", "cuffed
 var/list/VVicon_edit_lock = list("icon", "icon_state", "overlays", "underlays")
 var/list/VVckey_edit = list("key", "ckey")
 
-/*
-/client/proc/cmd_modify_object_variables(obj/O as obj|mob|turf|area in world)   // Acceptable 'in world', as VV would be incredibly hampered otherwise
-	set category = "Debug"
-	set name = "Edit Variables"
-	set desc="(target) Edit a target item's variables"
-	src.modify_variables(O)
-	feedback_add_details("admin_verb","EDITV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-*/
-
 /client/proc/cmd_modify_ticker_variables()
 	set category = "Debug"
 	set name = "Edit Ticker Variables"
@@ -29,7 +20,7 @@ var/list/VVckey_edit = list("key", "ckey")
 
 /client/proc/mod_list_add_ass()
 	var/class = "text"
-	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","color","list","edit referenced object","restore to default")
 	if(src.holder)
 		var/datum/marked_datum = holder.marked_datum()
 		if(marked_datum)
@@ -71,6 +62,9 @@ var/list/VVckey_edit = list("key", "ckey")
 		if("marked datum")
 			var_value = holder.marked_datum()
 
+		if("color")
+			var_value = input("Select new color:","Color") as null|color
+
 	if(!var_value) return
 
 	return var_value
@@ -79,7 +73,7 @@ var/list/VVckey_edit = list("key", "ckey")
 /client/proc/mod_list_add(var/list/L, atom/O, original_name, objectvar)
 
 	var/class = "text"
-	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","color","edit referenced object","restore to default")
 	if(src.holder)
 		var/datum/marked_datum = holder.marked_datum()
 		if(marked_datum)
@@ -506,7 +500,7 @@ var/list/VVckey_edit = list("key", "ckey")
 			if(dir)
 				usr << "If a direction, direction is: [dir]"
 
-		var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","json","edit referenced object","restore to default")
+		var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","json","color","edit referenced object","restore to default")
 		if(src.holder)
 			var/datum/marked_datum = holder.marked_datum()
 			if(marked_datum)
@@ -588,6 +582,9 @@ var/list/VVckey_edit = list("key", "ckey")
 			var/var_new = input("Pick icon:","Icon",O.vars[variable]) as null|icon
 			if(var_new==null) return
 			var_value = var_new
+
+		if("color")
+			var_value = input("Select new color:","Color") as null|color
 
 		if("json")
 			var/json_str = input("JSON string", "JSON", json_encode(O.vars[variable])) as null | message

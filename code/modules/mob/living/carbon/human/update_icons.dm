@@ -154,15 +154,31 @@ Please contact me on #coderbus IRC. ~Carn x
 	overlays.Cut()
 
 	if (icon_update)
-		icon = stand_icon
-		for(var/entry in overlays_standing)
-			if(istype(entry, /image))
-				overlays += entry
-			else if(istype(entry, /list))
-				for(var/inner_entry in entry)
-					overlays += inner_entry
-		if(species.has_floating_eyes)
-			overlays |= species.get_eyes(src)
+
+		if(cloaked)
+
+			icon = 'icons/mob/human.dmi'
+			icon_state = "blank"
+
+			for(var/entry in list(overlays_standing[R_HAND_LAYER], overlays_standing[L_HAND_LAYER]))
+				if(istype(entry, /image))
+					overlays += entry
+				else if(istype(entry, /list))
+					for(var/inner_entry in entry)
+						overlays += inner_entry
+		else
+
+			icon = stand_icon
+			icon_state = null
+
+			for(var/entry in overlays_standing)
+				if(istype(entry, /image))
+					overlays += entry
+				else if(istype(entry, /list))
+					for(var/inner_entry in entry)
+						overlays += inner_entry
+			if(species.has_floating_eyes)
+				overlays |= species.get_eyes(src)
 
 	if(lying && !species.prone_icon) //Only rotate them if we're not drawing a specific icon for being prone.
 		var/matrix/M = matrix()
@@ -224,7 +240,6 @@ var/global/list/damage_icon_parts = list()
 
 //BASE MOB SPRITE
 /mob/living/carbon/human/proc/update_body(var/update_icons=1)
-
 	var/husk_color_mod = rgb(96,88,80)
 	var/hulk_color_mod = rgb(48,224,40)
 
@@ -260,22 +275,23 @@ var/global/list/damage_icon_parts = list()
 		var/obj/item/organ/external/part = organs_by_name[organ_tag]
 		if(isnull(part) || part.is_stump())
 			icon_key += "0"
-		else if(part.robotic >= ORGAN_ROBOT)
-			icon_key += "2[part.model ? "-[part.model]": ""]"
-		else if(part.status & ORGAN_DEAD)
-			icon_key += "3"
-		else
-			icon_key += "1"
+			continue
 		if(part)
 			icon_key += "[part.species.race_key]"
 			icon_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
-			icon_key += "[part.dna.GetUIValue(DNA_UI_SKIN_TONE)]"
+			icon_key += "[part.s_tone]"
 			if(part.s_col && part.s_col.len >= 3)
 				icon_key += "[rgb(part.s_col[1],part.s_col[2],part.s_col[3])]"
 			if(part.body_hair && part.h_col && part.h_col.len >= 3)
 				icon_key += "[rgb(part.h_col[1],part.h_col[2],part.h_col[3])]"
 			else
 				icon_key += "#000000"
+		if(part.robotic >= ORGAN_ROBOT)
+			icon_key += "2[part.model ? "-[part.model]": ""]"
+		else if(part.status & ORGAN_DEAD)
+			icon_key += "3"
+		else
+			icon_key += "1"
 
 	icon_key = "[icon_key][husk ? 1 : 0][fat ? 1 : 0][hulk ? 1 : 0][skeleton ? 1 : 0]"
 

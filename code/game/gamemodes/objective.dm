@@ -425,7 +425,7 @@ datum/objective/steal
 		"an RCD" = /obj/item/weapon/rcd,
 		"a jetpack" = /obj/item/weapon/tank/jetpack,
 		"a captain's jumpsuit" = /obj/item/clothing/under/rank/captain,
-		"a functional AI" = /obj/item/device/aicard,
+		"a functional AI" = /obj/item/weapon/aicard,
 		"a pair of magboots" = /obj/item/clothing/shoes/magboots,
 		"the station blueprints" = /obj/item/blueprints,
 		"a nasa voidsuit" = /obj/item/clothing/suit/space/void,
@@ -500,19 +500,9 @@ datum/objective/steal
 						found_amount += (target_name=="28 moles of phoron (full tank)" ? (I:air_contents:gas["phoron"]) : (I:amount))
 				return found_amount>=target_amount
 
-			if("50 coins (in bag)")
-				var/obj/item/weapon/moneybag/B = locate() in all_items
-
-				if(B)
-					var/target = text2num(target_name)
-					var/found_amount = 0.0
-					for(var/obj/item/weapon/coin/C in B)
-						found_amount++
-					return found_amount>=target
-
 			if("a functional AI")
 
-				for(var/obj/item/device/aicard/C in all_items) //Check for ai card
+				for(var/obj/item/weapon/aicard/C in all_items) //Check for ai card
 					for(var/mob/living/silicon/ai/M in C)
 						if(istype(M, /mob/living/silicon/ai) && M.stat != 2) //See if any AI's are alive inside that card.
 							return 1

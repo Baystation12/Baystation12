@@ -53,6 +53,7 @@
 		if(prob(1) && prob(1)) // Very very small chance to actually destroy the APC.
 			AP.set_broken()
 	user.hacking = 1
+	log_ability_use(user, "electrical pulse")
 	spawn(150)
 		user.hacking = 0
 
@@ -84,6 +85,8 @@
 					return
 				target.reset_wires()
 				user << "Camera reactivated."
+				log_ability_use(user, "hack camera (reset)", target)
+				return
 		if("Add X-Ray")
 			if(target.isXRay())
 				user << "Camera already has X-Ray function."
@@ -92,6 +95,7 @@
 				target.upgradeXRay()
 				target.reset_wires()
 				user << "X-Ray camera module enabled."
+				log_ability_use(user, "hack camera (add X-Ray)", target)
 				return
 		if("Add Motion Sensor")
 			if(target.isMotion())
@@ -101,6 +105,7 @@
 				target.upgradeMotion()
 				target.reset_wires()
 				user << "Motion Sensor camera module enabled."
+				log_ability_use(user, "hack camera (add motion)", target)
 				return
 		if("Add EMP Shielding")
 			if(target.isEmpProof())
@@ -110,6 +115,7 @@
 				target.upgradeEmpProof()
 				target.reset_wires()
 				user << "EMP Shielding camera module enabled."
+				log_ability_use(user, "hack camera (add EMP shielding)", target)
 				return
 
 
@@ -127,6 +133,7 @@
 	user << "Emergency forcefield projection completed."
 	new/obj/machinery/shield/malfai(T)
 	user.hacking = 1
+	log_ability_use(user, "emergency forcefield", T)
 	spawn(20)
 		user.hacking = 0
 
@@ -153,14 +160,14 @@
 		else if (istype(N, /obj/machinery/power/apc)) // APC. Explosion is increased by available cell power.
 			var/obj/machinery/power/apc/A = N
 			if(A.cell && A.cell.charge)
-				explosion_intensity = 4 + round(A.cell.charge / 2000) // Explosion is increased by 1 for every 2k charge in cell
+				explosion_intensity = 4 + round((A.cell.charge / CELLRATE) / 100000)
 			else
 				user << "<span class='notice'>ERROR: APC Malfunction - Cell depleted or removed. Unable to overload.</span>"
 				return
 		else if (istype(N, /obj/machinery/power/smes/buildable)) // SMES. These explode in a very very very big boom. Similar to magnetic containment failure when messing with coils.
 			var/obj/machinery/power/smes/buildable/S = N
 			if(S.charge && S.RCon)
-				explosion_intensity = 4 + round(S.charge / 1000000)
+				explosion_intensity = 4 + round((S.charge / CELLRATE) / 100000)
 			else
 				// Different error texts
 				if(!S.charge)
@@ -181,7 +188,10 @@
 
 	explosion_intensity = min(explosion_intensity, 12) // 3, 6, 12 explosion cap
 
-	M.use_power(2000000) // Major power spike, few of these will completely burn APC's cell - equivalent of 2GJ of power.
+	if(!ability_pay(user,price))
+		return
+
+	M.use_power(1 MEGAWATTS)
 
 	// Trigger a powernet alarm. Careful engineers will probably notice something is going on.
 	var/area/temp_area = get_area(M)
@@ -190,17 +200,12 @@
 		if(temp_apc && temp_apc.terminal && temp_apc.terminal.powernet)
 			temp_apc.terminal.powernet.trigger_warning(50) // Long alarm
 		if(temp_apc)
-			temp_apc.emp_act(3) // Such power surges are not good for APC electronics
-			if(temp_apc.cell)
-				temp_apc.cell.maxcharge -= between(0, (temp_apc.cell.maxcharge/2) + 500, temp_apc.cell.maxcharge)
-				if(temp_apc.cell.maxcharge < 100) // That's it, you busted the APC cell completely. Break the APC and completely destroy the cell.
-					qdel(temp_apc.cell)
-					temp_apc.set_broken()
+			temp_apc.emp_act(3) // Such power surges are not good for APC electronics/cell in general.
+			if(prob(explosion_intensity))
+				temp_apc.set_broken()
 
 
-	if(!ability_pay(user,price))
-		return
-
+	log_ability_use(user, "machine overload", M)
 	M.visible_message("<span class='notice'>BZZZZZZZT</span>")
 	spawn(50)
 		explosion(get_turf(M), round(explosion_intensity/4),round(explosion_intensity/2),round(explosion_intensity),round(explosion_intensity * 2))

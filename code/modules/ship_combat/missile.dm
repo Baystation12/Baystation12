@@ -1,3 +1,5 @@
+var/global/missile_starts = list()
+
 /obj/item/weapon/missile_grab
 	name = "grab"
 	icon = 'icons/mob/screen1.dmi'
@@ -204,6 +206,8 @@
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
 			team = A.team
+		if(!(src in missile_starts))
+			missile_starts += src
 
 	initialize()
 		..()

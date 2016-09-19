@@ -64,6 +64,10 @@
 /datum/species/monkey/get_random_name()
 	return "[lowertext(name)] ([rand(100,999)])"
 
+/datum/species/monkey/handle_post_spawn(var/mob/living/carbon/human/H)
+	..()
+	H.item_state = lowertext(name)
+
 /datum/species/monkey/tajaran
 	name = "Farwa"
 	name_plural = "Farwa"

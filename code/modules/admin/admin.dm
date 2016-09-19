@@ -609,12 +609,14 @@ proc/admin_notice(var/message, var/rights)
 	for(var/datum/admin_secret_category/category in admin_secrets.categories)
 		if(!category.can_view(usr))
 			continue
-		dat += "<A href='?src=\ref[src];admin_secrets_panel=\ref[category]'>[category.name]</A> "
+		if(active_category == category)
+			dat += "<span class='linkOn'>[category.name]</span>"
+		else
+			dat += "<A href='?src=\ref[src];admin_secrets_panel=\ref[category]'>[category.name]</A> "
 	dat += "<HR>"
 
 	// If a category is selected, print its description and then options
 	if(istype(active_category) && active_category.can_view(usr))
-		dat += "<B>[active_category.name]</B><BR>"
 		if(active_category.desc)
 			dat += "<I>[active_category.desc]</I><BR>"
 		for(var/datum/admin_secret_item/item in active_category.items)
@@ -623,7 +625,7 @@ proc/admin_notice(var/message, var/rights)
 			dat += "<A href='?src=\ref[src];admin_secrets=\ref[item]'>[item.name()]</A><BR>"
 		dat += "<BR>"
 
-	var/datum/browser/popup = new(usr, "secrets", "Secrets", 500, 500)
+	var/datum/browser/popup = new(usr, "secrets", "Secrets", 550, 500)
 	popup.set_content(dat)
 	popup.open()
 	return
