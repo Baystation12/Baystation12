@@ -1,8 +1,15 @@
 <div class='item'>
 		{{:helper.link('<b>Radius:</b>', 'gear', { 'radius' : 1})}}
 		{{:data.radius}}<br><br>
+		{{:helper.link('<b>Strength:</b>', 'gear', { 'strength' : 1})}}
+		{{:data.strength}}<br><br>
 		<div class='itemLabelNarrow'><b>Power Use:</b></div>
 		<div class='itemContentNarrow'>{{:data.power}}w</div>
+		<div class='itemLabelNarrow'><b>Status:</b></div>
+		{{if data.working == 0}}
+			<div class='itemContentNarrow'><span class="bad">Nonfunctional</span></div>	
+		{{else}}
+			<div class='itemContentNarrow'><span class="good">Operational</span></div>
 <br><hr><br>
 </div>
 	

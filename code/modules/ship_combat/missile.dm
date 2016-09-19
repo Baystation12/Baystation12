@@ -57,7 +57,7 @@
 	var/width = 1
 	var/space_only = 1
 	var/moving = 0
-	var/delay_time = 15
+	var/delay_time = 0
 	var/power = 1
 
 	var/spawn_type = /obj/item/missile/ship

@@ -243,6 +243,14 @@
 			else
 				user << "<span class='danger'>CAUTION: X-ray module offline. Internal view unavailable: [has_microwave]</span>"
 
+		var/has_eccm = sensor.eccm()
+		if(sensor.eccm)
+			if(isnum(has_eccm) && has_eccm > 1)
+				user << "<font color='#00FF00'>ECCM operational at a strength of [has_eccm].</font>"
+				M.eccm = has_eccm
+			else
+				user << "<span class='danger'>NOTICE: ECCM nonfunctional: [has_eccm]</span>"
+
 		if(cooldown >= world.timeofday)
 			user << "<span class='warning'>Sensors are recalibrating! [time_remaining()] seconds left!</span>"
 
@@ -250,9 +258,6 @@
 			var/obj/loaded = locate(/obj/machinery/missile) in get_turf(tube)
 			if(loaded)
 				user << "<span class='notice'>Loaded: [loaded]"
-				var/obj/machinery/missile/missile = loaded
-				if(!advguidance)
-					additional_time += rand(missile.delay_time / 2, missile.delay_time * 2)
 			else
 				loaded = locate(/obj/item) in get_turf(tube)
 				if(loaded && loaded != tube)
@@ -354,9 +359,6 @@
 	Move(var/turf/T, dir = 1)
 		if(!linked) return ..()
 		var/tracking_efficiency = (linked.sensor.tracking ? linked.sensor.tracking.get_efficiency(-1,1) : 0)
-		var/obj/machinery/space_battle/ecm/ecm = locate() in range(MAX_ECM_RANGE)
-		if(prob(80) && ecm.can_block(get_dist(src, ecm)))
-			tracking_efficiency = 100 // 100% chance to stagger
 		if(prob(1*tracking_efficiency))
 			Stagger(src, dir)
 			return 0
@@ -461,6 +463,7 @@
 			usr << "<span class='warning'>The sensors are recalibrating! [linked.time_remaining()] seconds left!</span>"
 			firing = 0
 			return
+		var/obj/machinery/missile/loaded = locate() in get_turf(linked.tube)
 		var/wait_time = MISSILE_COOLDOWN
 		var/processed = 0
 		if(linked.firing_angle == "Underhand")
@@ -596,6 +599,8 @@
 				if(1 to 2)
 					wait_time *= 1.25*efficiency
 			wait_time = max(50, wait_time / radar)
+			if(loaded && istype(loaded))
+				wait_time += loaded.delay_time
 			wait_time = linked.cooldown(wait_time)
 			usr << "<span class='notice'>Sensors are now calibrating. Please wait [(wait_time / 10)] seconds.</span>"
 			firing = 0

@@ -173,8 +173,8 @@
 	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
 		src << "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>"
 
-	spawn(100)
-		src << "<span class='danger'><big>If you are unable to click on something or icons are missing, go to the \
+	spawn(150)
+		src << "<span class='notice'><big><i>[src], </i></big></span><span class='danger'>if you are unable to click on something or icons are missing, go to the \
 			    top of your bar, right click, and press options and messages to see your resource download progress. \
 			    The same goes for if you're experiencing lag not matching your .ping results.</span>"
 	//////////////

@@ -429,7 +429,7 @@
 		if(start_active)
 			spawn(30)
 				active = 1
-				icon_state = "Shield_Gen +a"
+				update_icon()
 
 /obj/machinery/space_battle/shieldwallgen/remote/weak
 	component_type = /obj/item/weapon/component/shield/compact
@@ -449,9 +449,9 @@
 		if(R.id_tag == src.id_tag || R.id_tag == src.id)
 			R.active = on
 			if(on)
-				R.icon_state = "Shield_Gen +a"
+				R.update_icon()
 			else
-				R.icon_state = initial(R.icon_state)
+				R.update_icon()
 
 /obj/machinery/button/remote/bubble_shield // Refreshes the shield, I guess
 	name = "Regenerate Shield"

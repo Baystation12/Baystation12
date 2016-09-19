@@ -30,6 +30,7 @@
 		var/turf/T = locate(dx,dy,using_map.overmap_z)
 		if(linked.loc == T)
 			if(linked.is_still())
+				src.visible_message("<span class='notice'>\The [src] pings happily!</span>")
 				autopilot = 0
 			else
 				linked.decelerate()

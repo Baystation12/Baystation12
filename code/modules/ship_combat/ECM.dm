@@ -50,7 +50,8 @@
 	var/list/data = list()
 	data["radius"] = radius
 	data["power"] = round(idle_power_usage ** (1+radius*0.05) * strength * get_efficiency(-1,1))
-
+	data["working"] = can_block(1)
+	data["strength"] = strength
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "ecm.tmpl", "Electronic Counter Measures", 800, 500, state = state)
@@ -59,15 +60,21 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/space_battle/ecm/Topic(href, href_list)
+	if(..())
+		return 1
 	if(href_list["radius"])
 		var/nradius = input(usr, "Enter a new range(0-[MAX_ECM_RANGE])", "ECM") as num
 		if(isnum(nradius))
 			radius = min(12, max(0, nradius))
 		else
 			usr << "<span class='warning'>That is invalid!</span>"
-
-	src.add_fingerprint(usr)
-	nanomanager.update_uis(src)
+	if(href_list["radius"])
+		var/nstrength = input(usr, "Enter a new strength(0-3)", "ECM") as num
+		if(isnum(nstrength))
+			radius = min(3, max(0, nstrength))
+		else
+			usr << "<span class='warning'>That is invalid!</span>"
+	return 1
 
 /obj/machinery/space_battle/ecm/advanced
 	component_type = /obj/item/weapon/component/ecm/ionic
@@ -76,3 +83,29 @@
 	name = "electronic counter counter measures"
 	desc = "Distrupts enemy ECM"
 	needs_dish = 1
+	var/strength = 1
+	idle_power_usage = 200
+	active_power_usage = 500
+
+	attack_hand(var/mob/user)
+		if(!stat & (BROKEN|NOPOWER))
+			strength++
+			if(strength > 3) strength = 1
+			user << "<span class='notice'>\The [src]'s strength is now: [strength]</span>"
+		else return ..()
+
+	can_sense()
+		if(stat & (BROKEN))
+			return "Broken"
+		if(stat & NOPOWER)
+			return "Insufficient Power"
+		if(use_power == 1)
+			return "Disabled"
+		if(needs_dish)
+			if(!dish)
+				reconnect()
+				if(!dish)
+					return "Wireless Connection Severed: No connected dish."
+			else if(!dish.can_sense())
+				return "Wireless Connection Severed: Dish status - [dish.can_sense()]"
+		return strength

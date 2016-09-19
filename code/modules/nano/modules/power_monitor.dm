@@ -2,6 +2,7 @@
 	name = "Power monitor"
 	var/list/grid_sensors
 	var/active_sensor = null	//name_tag of the currently selected sensor
+	var/RCon_id
 
 /datum/nano_module/power_monitor/New()
 	..()
@@ -52,7 +53,7 @@
 	if(!T) // Safety check
 		return
 	for(var/obj/machinery/power/sensor/S in machines)
-		if((T && S.loc.z == T.z) || (S.long_range)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
+		if((T && S.loc.z == T.z && S.RCon_id == src.RCon_id) || (S.long_range)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			if(S.name_tag == "#UNKN#") // Default name. Shouldn't happen!
 				warning("Powernet sensor with unset ID Tag! [S.x]X [S.y]Y [S.z]Z")
 			else

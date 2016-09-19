@@ -26,7 +26,8 @@
 		if(check_access(I))
 			locked = !locked
 			user.visible_message("<span class='notice'>\The [user] [locked ? "locks" : "unlocks"] \the [src]!</span>")
-	return ..()
+	else
+		return ..()
 /obj/machinery/space_battle/identification_computer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = list()
 	var/list/options = list()
@@ -78,7 +79,7 @@
 		available_access = get_access()
 	if(href_list["return"])
 		selected_id.visible_message("<span class='notice'>\The [selected_id] beeps, \"Access Modification applied!\"</span>")
-		selected_id = null
+		selected_id.access |= new_access
 		new_access.Cut()
 	if(href_list["mob"])
 		var/mob_name = href_list["mob"]

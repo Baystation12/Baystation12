@@ -86,6 +86,13 @@
 		else
 			user << "<span class='notice'>\The [src] is empty!</span>"
 
+	examine(var/mob/user)
+		..()
+		if(contained)
+			user << "<span class='notice'>It contains [contained_count+1] [contained]s!</span>"
+		else
+			user << "<span class='warning'>It is empty!</span>"
+
 /obj/structure/missile_rack/built
 	contained_type = null
 	contained_count = null

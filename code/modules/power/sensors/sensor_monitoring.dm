@@ -20,6 +20,7 @@
 	idle_power_usage = 300
 	active_power_usage = 300
 	var/datum/nano_module/power_monitor/power_monitor
+	var/RCon_id
 
 // Checks the sensors for alerts. If change (alerts cleared or detected) occurs, calls for icon update.
 /obj/machinery/computer/power_monitor/process()
@@ -45,6 +46,7 @@
 /obj/machinery/computer/power_monitor/New()
 	..()
 	power_monitor = new(src)
+	power_monitor.RCon_id = src.RCon_id
 
 // On user click opens the UI of this computer.
 /obj/machinery/computer/power_monitor/attack_hand(mob/user)

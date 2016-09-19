@@ -149,4 +149,4 @@
 
 /area/shuttle/mining_shuttle/brakka
 	name = "Mining Shuttle"
-	icon_state = "shuttle3"
+	icon_state = "shuttle1"

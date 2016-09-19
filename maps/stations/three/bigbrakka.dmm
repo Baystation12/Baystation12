@@ -580,7 +580,7 @@
 "lh" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/computer/gravity_control_computer,/turf/simulated/floor/tiled/dark,/area/ship_battle/brakka/core)
 "li" = (/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/machinery/power/terminal,/turf/simulated/floor/tiled/dark,/area/ship_battle/brakka/core)
 "lj" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/machinery/firealarm{dir = 4; layer = 3.3; pixel_x = 26},/turf/simulated/floor/tiled/dark,/area/ship_battle/brakka/core)
-"lk" = (/obj/machinery/space_battle/warp_pad{id_tag = "team_three"},/obj/effect/floor_decal/industrial/warning{dir = 10; icon_state = "warning"},/obj/structure/cable,/obj/item/device/radio/intercom/locked/ship{dir = 4; germ_level = 111; pixel_x = -25; pixel_y = 0},/obj/machinery/floor_light/prebuilt/battle{icon_state = "on"},/turf/simulated/floor/plating,/area/ship_battle/brakka/central)
+"lk" = (/obj/machinery/space_battle/warp_pad{id_tag = null},/obj/effect/floor_decal/industrial/warning{dir = 10; icon_state = "warning"},/obj/structure/cable,/obj/item/device/radio/intercom/locked/ship{dir = 4; germ_level = 111; pixel_x = -25; pixel_y = 0},/obj/machinery/floor_light/prebuilt/battle{icon_state = "on"},/turf/simulated/floor/plating,/area/ship_battle/brakka/central)
 "ll" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/effect/floor_decal/industrial/warning/corner{dir = 8},/obj/machinery/floor_light/prebuilt/battle{icon_state = "on"},/turf/simulated/floor/plating,/area/ship_battle/brakka/central)
 "lm" = (/obj/structure/missile_rack/heavy,/obj/effect/floor_decal/industrial/outline/red,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/ship_battle/brakka)
 "ln" = (/obj/machinery/conveyor{dir = 1; id = "3brakka_mcon4"},/turf/simulated/floor/reinforced,/area/ship_battle/brakka/primary_weapons_one)
@@ -620,7 +620,7 @@
 "lV" = (/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/machinery/conveyor_switch/oneway{id = "3brakka_mcon4"},/turf/simulated/floor/tiled,/area/ship_battle/brakka/central)
 "lW" = (/obj/machinery/conveyor{dir = 4; id = "3brakka_mcon4"},/turf/simulated/floor/plating,/area/ship_battle/brakka)
 "lX" = (/obj/machinery/light/small/battle{dir = 1},/obj/machinery/conveyor{dir = 4; id = "3brakka_mcon4"},/turf/simulated/floor/plating,/area/ship_battle/brakka)
-"lY" = (/obj/machinery/conveyor{dir = 10; icon_state = "conveyor0"; id = "3brakka_mcon4"; tag = "icon-conveyor0 (NORTHEAST)"},/turf/simulated/floor/plating,/area/ship_battle/brakka)
+"lY" = (/obj/machinery/conveyor{dir = 5; icon_state = "conveyor0"; id = "3brakka_mcon4"; tag = "icon-conveyor0 (NORTHEAST)"},/turf/simulated/floor/plating,/area/ship_battle/brakka)
 "lZ" = (/obj/machinery/space_battle/missile_sensor/hub{id_tag = "3brakka_gun"},/obj/item/device/radio/intercom/locked/ship{dir = 4; germ_level = 111; pixel_x = -25; pixel_y = 0},/turf/simulated/floor/bluegrid,/area/ship_battle/brakka/sensors)
 "ma" = (/obj/machinery/firealarm{idle_power_usage = 5; pixel_x = -22; pixel_y = 25},/turf/simulated/floor/tiled/dark,/area/ship_battle/brakka/sensors)
 "mb" = (/turf/simulated/floor/tiled/dark,/area/ship_battle/brakka/sensors)
@@ -1077,7 +1077,7 @@
 "uK" = (/obj/machinery/light,/obj/machinery/vending/wallmed1/battle{desc = "Wall-mounted Medical Equipment dispensers."; dir = 2; pixel_x = 0; pixel_y = -27},/turf/simulated/floor/tiled/white,/area/ship_battle/brakka/lab)
 "uL" = (/obj/machinery/space_battle/missile_sensor/dish{id_tag = null; pixel_y = 7; sensor_id = "3brakka_thermal"},/obj/structure/lattice,/turf/space,/area/ship_battle/brakka)
 "uM" = (/obj/machinery/space_battle/missile_sensor/dish{id_tag = null; pixel_y = 7; sensor_id = "3brakka_microwave"},/obj/structure/lattice,/turf/space,/area/ship_battle/brakka)
-"uN" = (/obj/effect/overmap/ship{landing_area = /area/shuttle/mining_shuttle/destination; name = "Big Brakka"; start_x = 3; start_y = 3},/turf/space,/area/ship_battle/brakka)
+"uN" = (/obj/effect/overmap/ship{landing_area = /area/shuttle/mining_shuttle/brakka; name = "Big Brakka"; start_x = 3; start_y = 3},/turf/space,/area/ship_battle/brakka)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
