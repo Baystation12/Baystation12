@@ -1,0 +1,6 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - maptweak: "There are now more rechargers placed around the station."
+  - maptweak: "Added fire fighting equipment in the library and port research maintenance areas."
+  - maptweak: "The engineering washroom now has two entrances."
