@@ -146,8 +146,9 @@ var/global/list/additional_antag_types = list()
 		else
 			message_admins("[antag_summary]")
 
-///can_start()
-///Checks to see if the game can be setup and ran with the current number of players or whatnot.
+// startRequirements()
+// Checks to see if the game can be setup and ran with the current number of players or whatnot.
+// Returns 0 if the mode can start and a message explaining the reason why it can't otherwise.
 /datum/game_mode/proc/startRequirements()
 	var/playerC = 0
 	for(var/mob/new_player/player in player_list)
