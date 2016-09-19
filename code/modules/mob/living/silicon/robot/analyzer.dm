@@ -68,6 +68,8 @@
 
 			var/mob/living/carbon/human/H = M
 			user << "<span class='notice'>Analyzing Results for \the [H]:</span>"
+			if(H.isSynthetic())
+				user << "System instability: <font color='green'>[H.getToxLoss()]</font>"
 			user << "Key: <font color='#FFA500'>Electronics</font>/<font color='red'>Brute</font>"
 			user << "<span class='notice'>External prosthetics:</span>"
 			var/organ_found
