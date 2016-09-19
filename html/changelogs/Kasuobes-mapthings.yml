@@ -1,0 +1,6 @@
+author: Haswell
+delete-after: True
+changes: 
+  - maptweak: "Readded missing blast shutters on mercenary shuttle and Skipjack."
+  - maptweak: "Removed random steel floor tiles."
+  - maptweak: "Added random coin spawns."
