@@ -267,6 +267,55 @@
 			coil.use(1)
 			src.wires = 1.0
 			user << "<span class='notice'>You insert the wire!</span>"
+	if(istype(W, /obj/item/robot_parts/head))
+		// Attempt to create full-body prosthesis.
+		var/success = 1
+		if(!src.wires)
+			user << "<span class='warning'>You need to attach wires to it first!</span>"
+			success = 0
+		if(!src.cell)
+			user << "<span class='warning'>You need to attach a cell to it first!</span>"
+			success = 0
+		if(!(W:flash2 && W:flash1))
+			user << "<span class='warning'>You need to attach a flash to it first!</span>"
+			success = 0
+		if (success)
+			var/obj/item/robot_parts/head/head_part = W
+
+			// Create a new, nonliving human.
+			var/mob/living/carbon/human/H = new /mob/living/carbon/human(loc)
+			H.stat = DEAD
+			H.fully_replace_character_name("prosthetic ([rand(0,999)])")
+
+			// Remove all external organs other than chest and head..
+			for (var/O in list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG))
+				var/obj/item/organ/external/organ = H.organs_by_name[O]
+				H.organs -= organ
+				H.organs_by_name[organ.organ_tag] = null
+				qdel(organ)
+
+			// Remove brain (we want to put one in).
+			var/obj/item/organ/internal/brain = H.internal_organs_by_name[BP_BRAIN]
+			H.organs -= brain
+			H.organs_by_name[brain.organ_tag] = null
+			qdel(brain)
+
+			// Robotize remaining organs: Eyes, head, and chest.
+			// Respect brand used.
+			var/obj/item/organ/internal/eyes = H.internal_organs_by_name[BP_EYES]
+			eyes.robotize()
+
+			var/obj/item/organ/external/head = H.organs_by_name[BP_HEAD]
+			var/head_company = head_part.model_info
+			head.robotize(head_company)
+
+			var/obj/item/organ/external/chest = H.organs_by_name[BP_CHEST]
+			var/chest_company = model_info
+			chest.robotize(chest_company)
+
+			// Cleanup
+			qdel(W)
+			qdel(src)
 	return
 
 /obj/item/robot_parts/head/attackby(obj/item/W as obj, mob/user as mob)
