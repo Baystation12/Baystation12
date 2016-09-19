@@ -119,8 +119,9 @@ var/global/datum/controller/gameticker/ticker
 	src.mode.pre_setup()
 	job_master.DivideOccupations() // Apparently important for new antagonist system to register specific job antags properly.
 
-	if(!src.mode.can_start())
-		world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players needed. Reverting to pre-game lobby."
+	var/t = src.mode.startRequirements()
+	if(t)
+		world << "<B>Unable to start [mode.name].</B> [t] Reverting to pre-game lobby."
 		current_state = GAME_STATE_PREGAME
 		mode.fail_setup()
 		mode = null
