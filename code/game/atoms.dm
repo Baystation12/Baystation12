@@ -250,7 +250,8 @@ its easier to just keep the beam vertical.
 	if(!M || !M.key)
 		return
 	if(fingerprintslast == M.key)
-		fingerprintslast = M.key
+		return
+	fingerprintslast = M.key
 	if(!fingerprintshidden)
 		fingerprintshidden = list()
 	if (ishuman(M))
@@ -327,23 +328,15 @@ its easier to just keep the beam vertical.
 
 
 /atom/proc/transfer_fingerprints_to(var/atom/A)
-
-	if(!istype(A.fingerprints,/list))
-		A.fingerprints = list()
-
-	if(!istype(A.fingerprintshidden,/list))
-		A.fingerprintshidden = list()
-
-	if(!istype(fingerprintshidden, /list))
-		fingerprintshidden = list()
-
-	//skytodo
-	//A.fingerprints |= fingerprints            //detective
-	//A.fingerprintshidden |= fingerprintshidden    //admin
-	if(A.fingerprints && fingerprints)
+	if(fingerprints)
+		if(!A.fingerprints)
+			A.fingerprints = list()
 		A.fingerprints |= fingerprints.Copy()            //detective
-	if(A.fingerprintshidden && fingerprintshidden)
-		A.fingerprintshidden |= fingerprintshidden.Copy()    //admin	A.fingerprintslast = fingerprintslast
+	if(fingerprintshidden)
+		if(!A.fingerprintshidden)
+			A.fingerprintshidden = list()
+		A.fingerprintshidden |= fingerprintshidden.Copy()    //admin
+		A.fingerprintslast = fingerprintslast
 
 
 //returns 1 if made bloody, returns 0 otherwise
