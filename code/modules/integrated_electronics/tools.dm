@@ -81,7 +81,7 @@
 			if(selected_io)
 				to_chat(user, "<span class='notice'>You decide not to wire the data channel.</span>")
 			selected_io = null
-			mode = UNWIRE
+			mode = WIRE
 		if(UNWIRE)
 			mode = WIRE
 		if(UNWIRING)
