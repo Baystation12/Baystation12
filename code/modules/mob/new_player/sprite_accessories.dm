@@ -57,6 +57,10 @@
 		name = "Short Hair"	  // try to capatilize the names please~
 		icon_state = "hair_a" // you do not need to define _s or _l sub-states, game automatically does this for you
 
+	twintail
+		name = "Twintail"
+		icon_state = "hair_twintail"
+
 	short2
 		name = "Short Hair 2"
 		icon_state = "hair_shorthair3"
