@@ -204,7 +204,7 @@
 		var/rn = rand(0, 200)
 		if(getBrainLoss() >= 5)
 			if(0 <= rn && rn <= 3)
-				custom_pain("Your head feels numb and painful.")
+				custom_pain("Your head feels numb and painful.",10)
 		if(getBrainLoss() >= 15)
 			if(4 <= rn && rn <= 6) if(eye_blurry <= 0)
 				src << "<span class='warning'>It becomes hard to see for some reason.</span>"
@@ -560,16 +560,12 @@
 
 	if(reagents)
 		chem_effects.Cut()
-		analgesic = 0
 
 		if(!isSynthetic())
 
 			if(touching) touching.metabolize()
 			if(ingested) ingested.metabolize()
 			if(bloodstr) bloodstr.metabolize()
-
-			if(CE_PAINKILLER in chem_effects)
-				analgesic = chem_effects[CE_PAINKILLER]
 
 			var/total_phoronloss = 0
 			for(var/obj/item/I in src)
@@ -796,7 +792,7 @@
 			clear_fullscreen("brute")
 
 		if(healths)
-			if (analgesic > 100)
+			if (chem_effects[CE_PAINKILLER] > 100)
 				healths.icon_state = "health_numb"
 			else
 				switch(hal_screwyhud)
@@ -960,8 +956,10 @@
 		shock_stage = max(shock_stage-1, 0)
 		return
 
+	if(stat) return 0
+
 	if(shock_stage == 10)
-		src << "<span class='danger'>[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!</span>"
+		custom_pain("[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!", 40)
 
 	if(shock_stage >= 30)
 		if(shock_stage == 30) emote("me",1,"is having trouble keeping their eyes open.")
