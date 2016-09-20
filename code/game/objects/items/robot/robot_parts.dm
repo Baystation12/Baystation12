@@ -283,11 +283,20 @@
 			success = 0
 		if (success)
 			var/obj/item/robot_parts/head/head_part = W
+			
+			// Species selection.
+			var/species = input(user, "Select a species for the prosthetic.") as null|anything in playable_species
+			if(!species)
+				species = "Human"
+			var/name = sanitizeSafe(input(user,"Set a name for the new prosthetic."), MAX_NAME_LEN)
+			if(!name)
+				name = "prosthetic ([rand(0,999)])"
 
 			// Create a new, nonliving human.
 			var/mob/living/carbon/human/H = new /mob/living/carbon/human(loc)
 			H.stat = DEAD
-			H.fully_replace_character_name("prosthetic ([rand(0,999)])")
+			H.set_species(species)
+			H.fully_replace_character_name(name)
 
 			// Remove all external organs other than chest and head..
 			for (var/O in list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG))
