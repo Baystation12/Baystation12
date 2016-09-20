@@ -5,55 +5,12 @@ mob/var/list/pain_stored = list()
 mob/var/last_pain_message = ""
 mob/var/next_pain_time = 0
 
-// partname is the name of a body part
-// amount is a num from 1 to 100
-mob/living/carbon/proc/pain(var/partname, var/amount, var/force, var/burning = 0)
-	if(!can_feel_pain())
-		return
-	if(chem_effects[CE_PAINKILLER] > amount)
-		return
-	if(world.time < next_pain_time && !force)
-		return
-	if(amount > 10 && istype(src,/mob/living/carbon/human))
-		if(src:paralysis)
-			src:paralysis = max(0, src:paralysis-round(amount/10))
-	if(amount > 50 && prob(amount / 5))
-		drop_item()
-	var/msg
-	if(burning)
-		switch(amount)
-			if(1 to 10)
-				msg = "Your [partname] burns."
-			if(11 to 90)
-				flash_weak_pain()
-				msg = "<font size=2>Your [partname] burns badly!</font>"
-			if(91 to 10000)
-				flash_pain()
-				msg = "<font size=3>OH GOD! Your [partname] is on fire!</font>"
-	else
-		switch(amount)
-			if(1 to 10)
-				msg = "Your [partname] hurts."
-			if(11 to 90)
-				flash_weak_pain()
-				msg = "<font size=2>Your [partname] hurts badly.</font>"
-			if(91 to 10000)
-				flash_pain()
-				msg = "<font size=3>OH GOD! Your [partname] is hurting terribly!</font>"
-	custom_pain(msg, amount, force || prob(10))
-
 // message is the custom message to be displayed
 // power decides how much painkillers will stop the message
 // force means it ignores anti-psam timer
 mob/living/carbon/proc/custom_pain(message, power, force)
-	if(stat)
+	if(!message || stat || !can_feel_pain() || chem_effects[CE_PAINKILLER] > power)
 		return 0
-	if(!message)
-		return
-	if(!can_feel_pain())
-		return
-	if(chem_effects[CE_PAINKILLER] > power)
-		return
 	message = "<span class='danger'>[message]</span>"
 	if(power >= 50)
 		message = "<font size=3>[message]</font>"
@@ -69,18 +26,35 @@ mob/living/carbon/human/proc/handle_pain()
 		return
 	if(!can_feel_pain())
 		return
+	if(world.time < next_pain_time)
+		return
 	var/maxdam = 0
 	var/obj/item/organ/external/damaged_organ = null
 	for(var/obj/item/organ/external/E in organs)
-		if((E.status & ORGAN_DEAD) || E.robotic >= ORGAN_ROBOT) continue
+		if(!E.can_feel_pain()) continue
 		var/dam = E.get_damage()
 		// make the choice of the organ depend on damage,
 		// but also sometimes use one of the less damaged ones
 		if(dam > maxdam && (maxdam == 0 || prob(70)) )
 			damaged_organ = E
 			maxdam = dam
-	if(damaged_organ)
-		pain(damaged_organ.name, maxdam, 0)
+	if(damaged_organ && chem_effects[CE_PAINKILLER] < maxdam)
+		if(maxdam > 10 && paralysis)
+			paralysis = max(0, paralysis - round(maxdam/10))
+		if(maxdam > 50 && prob(maxdam / 5))
+			drop_item()
+		var/burning = damaged_organ.burn_dam > damaged_organ.brute_dam
+		var/msg
+		switch(maxdam)
+			if(1 to 10)
+				msg =  "Your [damaged_organ.name] [burning ? "burns" : "hurts"]."
+			if(11 to 90)
+				flash_weak_pain()
+				msg = "<font size=2>Your [damaged_organ.name] [burning ? "burns" : "hurts"] badly!</font>"
+			if(91 to 10000)
+				flash_pain()
+				msg = "<font size=3>OH GOD! Your [damaged_organ.name] is [burning ? "on fire" : "hurting terribly"]!</font>"
+		custom_pain(msg, maxdam, prob(10))
 
 	// Damage to internal organs hurts a lot.
 	for(var/obj/item/organ/I in internal_organs)
