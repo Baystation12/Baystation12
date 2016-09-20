@@ -35,3 +35,4 @@ delete-after: True
 changes: 
   - tweak: "Removed 'system instability' readout from robot analyzer due to the targets being immune to 'system instability'."
   - rscadd: "Added ability to create full-body prosthetics by adding a robot head to a robot torso."
+  - tweak: "Robotic heads and torsos can now be manufactured with brands."
