@@ -1093,7 +1093,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if(id)
 			remove_id()
 		else
-			usr << "<span class='notice'>This PDA does not have an ID in it.</span>"
+			usr << "<span class='notice'>\The [src] does not have an ID in it.</span>"
 	else
 		usr << "<span class='notice'>You cannot do this while restrained.</span>"
 
@@ -1117,7 +1117,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					return
 			O.loc = get_turf(src)
 		else
-			usr << "<span class='notice'>This PDA does not have a pen in it.</span>"
+			usr << "<span class='notice'>\The [src] does not have a pen in it.</span>"
 	else
 		usr << "<span class='notice'>You cannot do this while restrained.</span>"
 
