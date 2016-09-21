@@ -15,8 +15,8 @@
 	var/stunforce = 0
 	var/agonyforce = 60
 	var/status = 0		//whether the thing is on or not
-	var/obj/item/weapon/cell/bcell = null
-	var/hitcost = 100	//oh god why do power cells carry so much charge? We probably need to make a distinction between "industrial" sized power cells for APCs and power cells for everything else.
+	var/obj/item/weapon/cell/bcell = /obj/item/weapon/cell/device/high
+	var/hitcost = 10
 
 /obj/item/weapon/melee/baton/New()
 	..()
@@ -30,7 +30,8 @@
 
 /obj/item/weapon/melee/baton/loaded/New() //this one starts with a cell pre-installed.
 	..()
-	bcell = new/obj/item/weapon/cell/high(src)
+	if(ispath(bcell))
+		bcell = new bcell(src)
 	update_icon()
 	return
 
@@ -67,27 +68,24 @@
 		user <<"<span class='warning'>The baton does not have a power source installed.</span>"
 
 /obj/item/weapon/melee/baton/attackby(obj/item/weapon/W, mob/user)
-	if(istype(W, /obj/item/weapon/cell))
-		if(!bcell)
-			user.drop_item()
-			W.loc = src
+	if(istype(W, /obj/item/weapon/cell/device))
+		if(!bcell && user.unEquip(W))
+			W.forceMove(src)
 			bcell = W
-			user << "<span class='notice'>You install a cell in [src].</span>"
+			to_chat(user, "<span class='notice'>You install a cell into the [src].</span>")
 			update_icon()
 		else
-			user << "<span class='notice'>[src] already has a cell.</span>"
-
+			to_chat(user, "<span class='notice'>[src] already has a cell.</span>")
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		if(bcell)
 			bcell.update_icon()
-			bcell.loc = get_turf(src.loc)
+			bcell.dropInto(loc)
 			bcell = null
 			user << "<span class='notice'>You remove the cell from the [src].</span>"
 			status = 0
 			update_icon()
-			return
+	else
 		..()
-	return
 
 /obj/item/weapon/melee/baton/attack_self(mob/user)
 	set_status(!status, user)
@@ -97,15 +95,15 @@
 	if(bcell && bcell.charge > hitcost)
 		if(status != newstatus)
 			status = newstatus
-			user << "<span class='notice'>[src] is now [status ? "on" : "off"].</span>"
+			to_chat(user, "<span class='notice'>[src] is now [status ? "on" : "off"].</span>")
 			playsound(loc, "sparks", 75, 1, -1)
 			update_icon()
 	else
 		status = 0
 		if(!bcell)
-			user << "<span class='warning'>[src] does not have a power source!</span>"
+			to_chat(user, "<span class='warning'>[src] does not have a power source!</span>")
 		else
-			user << "<span class='warning'>[src] is out of charge.</span>"
+			to_chat(user,  "<span class='warning'>[src] is out of charge.</span>")
 
 /obj/item/weapon/melee/baton/attack(mob/M, mob/user)
 	if(status && (CLUMSY in user.mutations) && prob(50))
@@ -173,7 +171,10 @@
 	//try to find our power cell
 	var/mob/living/silicon/robot/R = loc
 	if (istype(R))
+		if(bcell && bcell != R.cell)
+			bcell.dropInto(loc)
 		bcell = R.cell
+		hitcost = hitcost * 10
 	return ..()
 
 /obj/item/weapon/melee/baton/robot/attackby(obj/item/weapon/W, mob/user)
@@ -189,6 +190,6 @@
 	throwforce = 5
 	stunforce = 0
 	agonyforce = 60	//same force as a stunbaton, but uses way more charge.
-	hitcost = 250
+	hitcost = 25
 	attack_verb = list("poked")
 	slot_flags = null

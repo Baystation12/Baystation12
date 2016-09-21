@@ -208,9 +208,13 @@ other types of metals and chemistry for reagents).
 
 /datum/design/item/powercell
 	build_type = PROTOLATHE | MECHFAB
+	category = "Misc"
 
 /datum/design/item/powercell/AssembleDesignName()
 	name = "Power cell model ([item_name])"
+
+/datum/design/item/powercell/device/AssembleDesignName()
+	name = "Device cell model ([item_name])"
 
 /datum/design/item/powercell/AssembleDesignDesc()
 	if(build_path)
@@ -224,22 +228,18 @@ other types of metals and chemistry for reagents).
 
 /datum/design/item/powercell/basic
 	name = "basic"
-	build_type = PROTOLATHE | MECHFAB
 	id = "basic_cell"
 	req_tech = list(TECH_POWER = 1)
 	materials = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 	build_path = /obj/item/weapon/cell
-	category = "Misc"
 	sort_string = "DAAAA"
 
 /datum/design/item/powercell/high
 	name = "high-capacity"
-	build_type = PROTOLATHE | MECHFAB
 	id = "high_cell"
 	req_tech = list(TECH_POWER = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 60)
 	build_path = /obj/item/weapon/cell/high
-	category = "Misc"
 	sort_string = "DAAAB"
 
 /datum/design/item/powercell/super
@@ -248,7 +248,6 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_POWER = 3, TECH_MATERIAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
 	build_path = /obj/item/weapon/cell/super
-	category = "Misc"
 	sort_string = "DAAAC"
 
 /datum/design/item/powercell/hyper
@@ -257,8 +256,24 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 400, "gold" = 150, "silver" = 150, "glass" = 70)
 	build_path = /obj/item/weapon/cell/hyper
-	category = "Misc"
 	sort_string = "DAAAD"
+
+/datum/design/item/powercell/device/standard
+	name = "basic"
+	id = "device_cell_standard"
+	req_tech = list(TECH_POWER = 1)
+	materials = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 5)
+	build_path = /obj/item/weapon/cell/device/standard
+	sort_string = "DAAAE"
+
+/datum/design/item/powercell/device/high
+	name = "high-capacity"
+	build_type = PROTOLATHE | MECHFAB
+	id = "device_cell_high"
+	req_tech = list(TECH_POWER = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 6)
+	build_path = /obj/item/weapon/cell/device/high
+	sort_string = "DAAAF"
 
 /datum/design/item/hud
 	materials = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
