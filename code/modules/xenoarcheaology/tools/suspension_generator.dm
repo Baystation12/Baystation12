@@ -247,5 +247,5 @@
 
 /obj/effect/suspension_field/Destroy()
 	for(var/atom/movable/I in src)
-		I.forceMove(src.loc)
+		I.dropInto(loc)
 	return ..()
