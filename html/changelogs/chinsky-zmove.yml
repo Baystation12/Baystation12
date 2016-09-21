@@ -1,7 +1,0 @@
-author: Chinsky
-
-delete-after: True
-
-changes: 
-  - rscadd: "Ghosts AND AI eyes can travel zlevels again with Move Upwards/Down verbs."
-  - rscadd: "Humans can too, with either working jetpack or wearing magboots and near a wall (climbing). Don't try in gravity-working areas though, you'll still drop."
