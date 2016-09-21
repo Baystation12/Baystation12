@@ -90,7 +90,7 @@
 	if(!paperamount)
 		return
 	paperamount--
-	return PoolOrNew(/obj/item/weapon/shreddedp, get_turf(src))
+	return new /obj/item/weapon/shreddedp(get_turf(src))
 
 /obj/machinery/papershredder/update_icon()
 	icon_state = "papershredder[max(0,min(5,Floor(paperamount/2)))]"
@@ -120,7 +120,7 @@
 	var/mob/living/M = loc
 	if(istype(M))
 		M.drop_from_inventory(src)
-	PoolOrNew(/obj/effect/decal/cleanable/ash,get_turf(src))
+	new /obj/effect/decal/cleanable/ash(get_turf(src))
 	qdel(src)
 
 /obj/item/weapon/shreddedp

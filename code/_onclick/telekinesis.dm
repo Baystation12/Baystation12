@@ -150,7 +150,7 @@ var/const/tk_maxrange = 15
 
 /obj/item/tk_grab/proc/apply_focus_overlay()
 	if(!focus)	return
-	var/obj/effect/overlay/O = PoolOrNew(/obj/effect/overlay, locate(focus.x,focus.y,focus.z))
+	var/obj/effect/overlay/O = new /obj/effect/overlay(locate(focus.x,focus.y,focus.z))
 	O.name = "sparkles"
 	O.anchored = 1
 	O.density = 0

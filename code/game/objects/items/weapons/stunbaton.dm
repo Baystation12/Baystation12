@@ -15,25 +15,23 @@
 	var/stunforce = 0
 	var/agonyforce = 60
 	var/status = 0		//whether the thing is on or not
-	var/obj/item/weapon/cell/bcell = /obj/item/weapon/cell/device/high
+	var/obj/item/weapon/cell/bcell
 	var/hitcost = 10
 
+/obj/item/weapon/melee/baton/loaded
+	bcell = /obj/item/weapon/cell/device/high
+
 /obj/item/weapon/melee/baton/New()
-	..()
-	update_icon()
-	return
-
-/obj/item/weapon/melee/baton/Destroy()
-	qdel(bcell)
-	bcell = null
-	return ..()
-
-/obj/item/weapon/melee/baton/loaded/New() //this one starts with a cell pre-installed.
-	..()
 	if(ispath(bcell))
 		bcell = new bcell(src)
-	update_icon()
-	return
+		update_icon()
+	..()
+
+/obj/item/weapon/melee/baton/Destroy()
+	if(bcell && !ispath(bcell))
+		qdel(bcell)
+		bcell = null
+	return ..()
 
 /obj/item/weapon/melee/baton/proc/deductcharge(var/chrgdeductamt)
 	if(bcell)

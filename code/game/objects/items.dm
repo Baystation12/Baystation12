@@ -93,10 +93,6 @@
 		src.loc = null
 	return ..()
 
-/obj/item/ResetVars(var/list/exclude = list())
-	exclude += "item_state_slots"
-	..(exclude)
-
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
 

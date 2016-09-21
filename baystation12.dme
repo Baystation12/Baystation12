@@ -51,7 +51,6 @@
 #include "code\_helpers\atmospherics.dm"
 #include "code\_helpers\atom_movables.dm"
 #include "code\_helpers\cmp.dm"
-#include "code\_helpers\datum_pool.dm"
 #include "code\_helpers\files.dm"
 #include "code\_helpers\functional.dm"
 #include "code\_helpers\game.dm"
