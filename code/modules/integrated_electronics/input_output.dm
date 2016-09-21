@@ -316,6 +316,16 @@
 	outputs = list()
 	activators = list("play sound")
 	var/list/sounds = list()
+	category = /obj/item/integrated_circuit/output/sound
+
+/obj/item/integrated_circuit/output/sound/New()
+	..()
+	extended_desc = list()
+	extended_desc += "The first input pin determines which sound is used. The choices are; "
+	extended_desc += jointext(sounds, ", ")
+	extended_desc += ". The second pin determines the volume of sound that is played"
+	extended_desc += ", and the third determines if the frequency of the sound will vary with each activation."
+	extended_desc = jointext(extended_desc, null)
 
 /obj/item/integrated_circuit/output/sound/do_work()
 	var/datum/integrated_io/ID = inputs[1]
@@ -323,18 +333,18 @@
 	var/datum/integrated_io/frequency = inputs[3]
 	if(istext(ID.data) && isnum(vol.data) && isnum(frequency.data))
 		var/selected_sound = sounds[ID.data]
+		if(!selected_sound)
+			world << "No sound"
+			return
 		vol.data = Clamp(vol.data, 0, 100)
-		frequency.data = Clamp(frequency.data, 0, 100)
-		playsound(get_turf(src), selected_sound, vol.data, frequency.data > 0, frequency.data, -1)
+		frequency.data = round(Clamp(frequency.data, 0, 1))
+		playsound(get_turf(src), selected_sound, vol.data, frequency.data, -1)
 
 /obj/item/integrated_circuit/output/sound/beeper
 	name = "beeper circuit"
 	desc = "A miniature speaker is attached to this component.  This is often used in the construction of motherboards, which use \
 	the speaker to tell the user if something goes very wrong when booting up.  It can also do other similar synthetic sounds such \
 	as buzzing, pinging, chiming, and more."
-	extended_desc = "The first input pin determines what sound is used.  The choices are; beep, chime, buzz sigh, buzz twice, ping, \
-	synth yes, synth no, warning buzz.  The second pin determines the volume of sound that is played, and the third determines if \
-	the frequency of the sound will vary with each activation."
 	sounds = list(
 		"beep"			= 'sound/machines/twobeep.ogg',
 		"chime"			= 'sound/machines/chime.ogg',
@@ -349,9 +359,6 @@
 /obj/item/integrated_circuit/output/sound/beepsky
 	name = "securitron sound circuit"
 	desc = "A miniature speaker is attached to this component.  Considered by some to be the essential component for a securitron."
-	extended_desc = "The first input pin determines what sound is used.  The choices are; creep, criminal, freeze, god, \
-	i am the law, insult, radio, secure day.  The second pin determines the volume of sound that is played, and the \
-	third determines if the frequency of the sound will vary with each activation."
 	sounds = list(
 		"creep"			= 'sound/voice/bcreep.ogg',
 		"criminal"		= 'sound/voice/bcriminal.ogg',

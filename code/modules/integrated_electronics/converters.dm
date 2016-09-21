@@ -2,8 +2,9 @@
 /obj/item/integrated_circuit/converter
 	complexity = 2
 	inputs = list("input")
-	inputs = list("outputs")
-	inputs = list("convert")
+	outputs = list("output")
+	activators = list("convert")
+	category = /obj/item/integrated_circuit/converter
 
 /obj/item/integrated_circuit/converter/num2text
 	name = "number to string"

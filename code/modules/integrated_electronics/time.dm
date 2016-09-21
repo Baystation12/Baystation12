@@ -4,6 +4,7 @@
 	complexity = 2
 	inputs = list()
 	outputs = list()
+	category = /obj/item/integrated_circuit/time
 
 /obj/item/integrated_circuit/time/delay
 	name = "two-sec delay circuit"
@@ -71,21 +72,24 @@
 	complexity = 8
 	var/ticks_to_pulse = 4
 	var/ticks_completed = 0
+	var/is_running = FALSE
 	inputs = list("enable ticking")
 	activators = list("outgoing pulse")
 
 /obj/item/integrated_circuit/time/ticker/Destroy()
-	var/datum/integrated_io/do_tick = inputs[1]
-	if(do_tick.data)
+	if(is_running)
 		processing_objects -= src
 	. = ..()
 
 /obj/item/integrated_circuit/time/ticker/on_data_written()
 	var/datum/integrated_io/do_tick = inputs[1]
-	if(do_tick.data)
+	if(do_tick.data && !is_running)
+		is_running = TRUE
 		processing_objects |= src
-	else
+	else if(is_running)
+		is_running = FALSE
 		processing_objects -= src
+		ticks_completed = 0
 
 /obj/item/integrated_circuit/time/ticker/process()
 	var/process_ticks = process_schedule_interval("obj")

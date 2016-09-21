@@ -6,6 +6,7 @@
 	inputs = list("input pin 1")
 	outputs = list("output pin 1")
 	activators = list("set")
+	category = /obj/item/integrated_circuit/memory
 
 /obj/item/integrated_circuit/memory/examine(mob/user)
 	..()

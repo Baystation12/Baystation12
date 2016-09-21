@@ -4,6 +4,7 @@
 	inputs = list("A","B","C","D","E","F","G","H")
 	outputs = list("result")
 	activators = list("compute")
+	category = /obj/item/integrated_circuit/arithmetic
 
 // +Adding+ //
 

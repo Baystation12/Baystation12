@@ -46,7 +46,7 @@ var/list/swing_hit_sound = list('sound/weapons/genhit1.ogg', 'sound/weapons/genh
 var/list/hiss_sound = list('sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg')
 var/list/page_sound = list('sound/effects/pageturn1.ogg', 'sound/effects/pageturn2.ogg','sound/effects/pageturn3.ogg')
 
-/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, var/is_global)
+/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, var/is_global, var/frequency)
 
 	soundin = get_sfx(soundin) // same sound for everyone
 
@@ -54,7 +54,7 @@ var/list/page_sound = list('sound/effects/pageturn1.ogg', 'sound/effects/pagetur
 		error("[source] is an area and is trying to make the sound: [soundin]")
 		return
 
-	var/frequency = get_rand_frequency() // Same frequency for everybody
+	frequency = isnull(frequency) ? get_rand_frequency() : frequency // Same frequency for everybody
 	var/turf/turf_source = get_turf(source)
 
  	// Looping through the player list has the added bonus of working for mobs inside containers

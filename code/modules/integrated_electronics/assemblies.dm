@@ -49,7 +49,8 @@
 	HTML += "Components;<br>"
 	for(var/obj/item/integrated_circuit/circuit in contents)
 		HTML += "<a href=?src=\ref[circuit];examine=1>[circuit.name]</a> | "
-		HTML += "<a href=?src=\ref[circuit];rename=1>\[Rename\]</a>"
+		HTML += "<a href=?src=\ref[circuit];rename=1>\[Rename\]</a> | "
+		HTML += "<a href=?src=\ref[circuit];remove=1>\[Remove\]</a>"
 		HTML += "<br>"
 
 	HTML += "</body></html>"
@@ -85,19 +86,13 @@
 		icon_state = initial(icon_state)
 
 /obj/item/device/electronic_assembly/examine(mob/user)
-	..()
-	if(user.Adjacent(src))
-		if(!opened)
-			for(var/obj/item/integrated_circuit/output/screen/S in contents)
-				if(S.stuff_to_display)
-					to_chat(user, "There's a little screen labeled '[S.name]', which displays '[S.stuff_to_display]'.")
-		else
+	. = ..(user, 1)
+	if(.)
+		for(var/obj/item/integrated_circuit/output/screen/S in contents)
+			if(S.stuff_to_display)
+				to_chat(user, "There's a little screen labeled '[S.name]', which displays '[S.stuff_to_display]'.")
+		if(opened)
 			interact(user)
-
-/obj/item/device/electronic_assembly/CanUseTopic()
-	if(!opened)
-		return STATUS_CLOSE
-	return ..()
 
 /obj/item/device/electronic_assembly/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/integrated_circuit))
@@ -111,10 +106,10 @@
 			total_parts++
 			total_complexity = total_complexity + part.complexity
 
-		if( (total_parts + 1) >= max_components)
+		if( (total_parts + 1) > max_components)
 			to_chat(user, "<span class='warning'>You can't seem to add this [IC.name], since there's no more room.</span>")
 			return 0
-		if( (total_complexity + IC.complexity) >= max_complexity)
+		if( (total_complexity + IC.complexity) > max_complexity)
 			to_chat(user, "<span class='warning'>You can't seem to add this [IC.name], since this setup's too complicated for the case.</span>")
 			return 0
 
@@ -122,32 +117,25 @@
 		user.drop_item()
 		IC.forceMove(src)
 		playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
-	if(istype(I, /obj/item/weapon/screwdriver))
-		if(!opened)
-			to_chat(user, "<span class='warning'>\The [src] isn't opened, so you can't remove anything inside.  Try using a crowbar.</span>")
-			return 0
-		if(!contents.len)
-			to_chat(user, "<span class='warning'>There's nothing inside this to remove!</span>")
-			return 0
-		var/obj/item/integrated_circuit/option = input("What do you want to remove?", "Component Removal") as null|anything in contents
-		if(option  && CanInteract(user, physical_state))
-			option.disconnect_all()
-			option.forceMove(get_turf(src))
-			playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
-			to_chat(user, "<span class='notice'>You pop \the [option] out of the case, and slide it out.</span>")
-	if(istype(I, /obj/item/weapon/crowbar))
+		interact(user)
+	else if(istype(I, /obj/item/weapon/crowbar))
 		playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
 		opened = !opened
 		to_chat(user, "<span class='notice'>You [opened ? "opened" : "closed"] \the [src].</span>")
 		update_icon()
-	if(istype(I, /obj/item/device/integrated_electronics/wirer))
+	else if(istype(I, /obj/item/device/integrated_electronics/wirer) || istype(I, /obj/item/device/integrated_electronics/debugger) || istype(I, /obj/item/weapon/screwdriver))
 		if(opened)
 			interact(user)
 		else
 			to_chat(user, "<span class='warning'>\The [src] isn't opened, so you can't fiddle with the internal components.  \
 			Try using a crowbar.</span>")
+	else
+		return ..()
 
 /obj/item/device/electronic_assembly/attack_self(mob/user)
+	if(opened)
+		interact(user)
+
 	var/list/available_inputs = list()
 	for(var/obj/item/integrated_circuit/input/input in contents)
 		if(input.can_be_asked_input)

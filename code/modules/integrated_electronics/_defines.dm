@@ -17,7 +17,8 @@
 	var/list/activators = list()
 	var/next_use = 0 //Uses world.time
 	var/complexity = 1 //This acts as a limitation on building machines, more resource-intensive components cost more 'space'.
-	var/cooldown_per_use = 2 SECONDS
+	var/cooldown_per_use = 1 SECOND
+	var/category = /obj/item/integrated_circuit // Used by the toolsets to filter out category types
 
 /obj/item/integrated_circuit/examine(mob/user)
 	..()
@@ -107,7 +108,8 @@
 	HTML += "<table border='1' style='undefined;table-layout: fixed; width: 424px'>"
 
 	HTML += "<br><a href='?src=\ref[src];'>\[Refresh\]</a>  |  "
-	HTML += "<a href='?src=\ref[src];rename=1'>\[Rename\]</a><br>"
+	HTML += "<a href='?src=\ref[src];rename=1'>\[Rename\]</a>  |  "
+	HTML += "<a href='?src=\ref[src];remove=1'>\[Remove\]</a><br>"
 
 	HTML += "<colgroup>"
 	HTML += "<col style='width: 121px'>"
@@ -197,8 +199,8 @@
 		return 1
 	var/pin = locate(href_list["pin"]) in inputs + outputs + activators
 
+	var/obj/held_item = usr.get_active_hand()
 	if(href_list["wire"])
-		var/obj/held_item = usr.get_active_hand()
 		if(istype(held_item, /obj/item/device/integrated_electronics/wirer))
 			var/obj/item/device/integrated_electronics/wirer/wirer = held_item
 			if(pin)
@@ -209,13 +211,27 @@
 			if(pin)
 				debugger.write_data(pin, usr)
 		else
-			to_chat(usr, "<span class='warning'>You can't do a whole lot without tools.</span>")
+			to_chat(usr, "<span class='warning'>You can't do a whole lot without the proper tools.</span>")
 
 	if(href_list["examine"])
 		examine(usr)
 
 	if(href_list["rename"])
 		rename_component(usr)
+
+	if(href_list["remove"])
+		if(istype(held_item, /obj/item/weapon/screwdriver))
+			disconnect_all()
+			var/turf/T = get_turf(src)
+			forceMove(T)
+			playsound(T, 'sound/items/Crowbar.ogg', 50, 1)
+			to_chat(usr, "<span class='notice'>You pop \the [src] out of the case, and slide it out.</span>")
+		else
+			to_chat(usr, "<span class='warning'>You need a screwdriver to remove components.</span>")
+		var/obj/item/device/electronic_assembly/ea = loc
+		if(istype(ea))
+			ea.interact(usr)
+		return
 
 	interact(usr) // To refresh the UI.
 
@@ -254,9 +270,10 @@
 		return "(null)" // Empty data means nothing to show.
 	if(istext(data))
 		return "(\"[data]\")" // Wraps the 'string' in escaped quotes, so that people know it's a 'string'.
-	if(istype(data, /atom))
-		var/atom/A = data
-		return "([A.name] \[Ref\])" // For refs, we want just the name displayed.
+	if(isweakref(data))
+		var/weakref/w = data
+		var/atom/A = w.resolve()
+		return A ? "([A.name] \[Ref\])" : "(null)" // For refs, we want just the name displayed.
 	return "([data])" // Nothing special needed for numbers or other stuff.
 
 /datum/integrated_io/activate/display_data()
@@ -275,7 +292,7 @@
 	push_data()
 
 /datum/integrated_io/proc/write_data_to_pin(var/new_data)
-	if(isnull(new_data) || isnum(new_data) || istext(new_data) || istype(new_data, /atom/) ) // Anything else is a type we don't want.
+	if(isnull(new_data) || isnum(new_data) || istext(new_data) || isweakref(new_data)) // Anything else is a type we don't want.
 		data = new_data
 		holder.on_data_written()
 

@@ -146,7 +146,7 @@
 /obj/item/device/integrated_electronics/debugger/proc/write_data(var/datum/integrated_io/io, mob/user)
 	if(io.io_type == DATA_CHANNEL)
 		io.write_data_to_pin(data_to_write)
-		to_chat(user, "<span class='notice'>You write [data_to_write] to \the [io.holder]'s [io].</span>")
+		to_chat(user, "<span class='notice'>You write '[data_to_write ? data_to_write : "NULL"]' to the '[io]' pin of \the [io.holder].</span>")
 	else if(io.io_type == PULSE_CHANNEL)
 		io.holder.check_then_do_work()
 		to_chat(user, "<span class='notice'>You pulse \the [io.holder]'s [io].</span>")
@@ -189,7 +189,11 @@
 		)
 
 	for(var/thing in types_to_spawn)
-		for(var/i = 1 to 3)
+		var/obj/item/integrated_circuit/ic = thing
+		if(initial(ic.category) == thing)
+			continue
+
+		for(var/i = 1 to 4)
 			new thing(src)
 
 	new /obj/item/device/electronic_assembly(src)
@@ -201,9 +205,10 @@
 
 /obj/item/weapon/storage/bag/circuits/all/New()
 	..()
-	var/list/types_to_spawn = typesof(/obj/item/integrated_circuit)
-
-	for(var/thing in types_to_spawn)
+	for(var/thing in subtypesof(/obj/item/integrated_circuit))
+		var/obj/item/integrated_circuit/ic = thing
+		if(initial(ic.category) == thing)
+			continue
 		for(var/i = 1 to 10)
 			new thing(src)
 
