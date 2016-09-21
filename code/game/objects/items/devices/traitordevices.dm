@@ -35,19 +35,19 @@ effective or pretty fucking useless.
 		user << "<span class='warning'>The mind batterer has been burnt out!</span>"
 		return
 
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used [src] to knock down people in the area.</font>")
-
+	var/list/stun_victims = list()
 	for(var/mob/living/carbon/human/M in orange(10, user))
+		stun_victims += M
 		spawn()
 			if(prob(50))
-
 				M.Weaken(rand(10,20))
 				if(prob(25))
 					M.Stun(rand(5,10))
 				M << "<span class='danger'>You feel a tremendous, paralyzing wave flood your mind.</span>"
-
 			else
 				M << "<span class='danger'>You feel a sudden, electric jolt travel through your head.</span>"
+
+	admin_attacker_log_many_victims(user, stun_victims, "Used \a [src] to attempt to knockdown their victim.", "Was subject to a knockdown attempt.", ", using \a [src], attempted to knockdown")
 
 	playsound(src.loc, 'sound/misc/interference.ogg', 50, 1)
 	user << "<span class='notice'>You trigger [src].</span>"

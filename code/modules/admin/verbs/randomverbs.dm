@@ -821,7 +821,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Attack Log"
 
 	usr << text("\red <b>Attack Log for []</b>", mob)
-	for(var/t in M.attack_log)
+	for(var/t in M.attack_logs_)
 		usr << t
 	feedback_add_details("admin_verb","ATTL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 

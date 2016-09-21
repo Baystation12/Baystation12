@@ -43,9 +43,9 @@ proc/sql_report_death(var/mob/living/carbon/human/H)
 	var/sqljob = sanitizeSQL(H.mind.assigned_role)
 	var/laname
 	var/lakey
-	if(H.lastattacker)
-		laname = sanitizeSQL(H.lastattacker:real_name)
-		lakey = sanitizeSQL(H.lastattacker:key)
+	if(H.last_attacker_)
+		laname = sanitizeSQL(H.last_attacker_.name)
+		lakey = sanitizeSQL(H.last_attacker_.client.key)
 	var/sqltime = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
 	var/coord = "[H.x], [H.y], [H.z]"
 	//world << "INSERT INTO death (name, byondkey, job, special, pod, tod, laname, lakey, gender, bruteloss, fireloss, brainloss, oxyloss) VALUES ('[sqlname]', '[sqlkey]', '[sqljob]', '[sqlspecial]', '[sqlpod]', '[sqltime]', '[laname]', '[lakey]', '[H.gender]', [H.bruteloss], [H.getFireLoss()], [H.brainloss], [H.getOxyLoss()])"
@@ -77,9 +77,9 @@ proc/sql_report_cyborg_death(var/mob/living/silicon/robot/H)
 	var/sqljob = sanitizeSQL(H.mind.assigned_role)
 	var/laname
 	var/lakey
-	if(H.lastattacker)
-		laname = sanitizeSQL(H.lastattacker:real_name)
-		lakey = sanitizeSQL(H.lastattacker:key)
+	if(H.last_attacker_)
+		laname = sanitizeSQL(H.last_attacker_.name)
+		lakey = sanitizeSQL(H.last_attacker_.client.key)
 	var/sqltime = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
 	var/coord = "[H.x], [H.y], [H.z]"
 	//world << "INSERT INTO death (name, byondkey, job, special, pod, tod, laname, lakey, gender, bruteloss, fireloss, brainloss, oxyloss) VALUES ('[sqlname]', '[sqlkey]', '[sqljob]', '[sqlspecial]', '[sqlpod]', '[sqltime]', '[laname]', '[lakey]', '[H.gender]', [H.bruteloss], [H.getFireLoss()], [H.brainloss], [H.getOxyLoss()])"

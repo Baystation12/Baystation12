@@ -457,15 +457,15 @@ About the new airlock wires panel:
 		src.electrified_until = 0
 	else if(duration)	//electrify door for the given duration seconds
 		if(usr)
-			shockedby += text("\[[time_stamp()]\] - [usr](ckey:[usr.ckey])")
-			usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x] [y] [z]</font>")
+			shockedby += text("\[[time_stamp()]\] - [key_name(usr)]")
+			admin_attacker_log(usr, "electrified \the [name] [duration == -1 ? "permanently" : "for [duration] second\s"]")
 		else
 			shockedby += text("\[[time_stamp()]\] - EMP)")
 		message = "The door is now electrified [duration == -1 ? "permanently" : "for [duration] second\s"]."
 		src.electrified_until = duration == -1 ? -1 : world.time + SecondsToTicks(duration)
 
 	if(feedback && message)
-		usr << message
+		to_chat(usr, message)
 
 /obj/machinery/door/airlock/proc/set_idscan(var/activate, var/feedback = 0)
 	var/message = ""

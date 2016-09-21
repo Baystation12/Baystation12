@@ -77,9 +77,7 @@
 	if(!do_after(user,30, target))
 		return 0
 
-	H.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been handcuffed (attempt) by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to handcuff [H.name] ([H.ckey])</font>")
-	msg_admin_attack("[key_name(user)] attempted to handcuff [key_name(H)]")
+	admin_attack_log(user, H, "Attempted to handcuff the victim", "Was target of an attempted handcuff", "attempted to handcuff")
 	feedback_add_details("handcuffs","H")
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -111,10 +109,8 @@ var/last_chew = 0
 	var/obj/item/organ/external/O = H.organs_by_name[(H.hand ? BP_L_HAND : BP_R_HAND)]
 	if (!O) return
 
-	var/s = "<span class='warning'>[H.name] chews on \his [O.name]!</span>"
-	H.visible_message(s, "<span class='warning'>You chew on your [O.name]!</span>")
-	H.attack_log += text("\[[time_stamp()]\] <font color='red'>[s] ([H.ckey])</font>")
-	log_attack("[s] ([H.ckey])")
+	H.visible_message("<span class='warning'>\The [H] chews on \his [O.name]!</span>", "<span class='warning'>You chew on your [O.name]!</span>")
+	admin_attacker_log(H, "chewed on their [O.name]!")
 
 	if(O.take_damage(3,0,1,1,"teeth marks"))
 		H:UpdateDamageIcon()

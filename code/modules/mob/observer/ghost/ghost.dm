@@ -40,7 +40,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	var/turf/T
 	if(ismob(body))
 		T = get_turf(body)				//Where is the body located?
-		attack_log = body.attack_log	//preserve our attack logs by copying them to our ghost
+		attack_logs_ = body.attack_logs_	//preserve our attack logs by copying them to our ghost
 
 		if (ishuman(body))
 			var/mob/living/carbon/human/H = body

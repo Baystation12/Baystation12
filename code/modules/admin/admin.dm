@@ -9,21 +9,21 @@ var/global/floorIsLava = 0
 	log_adminwarn(msg)
 	for(var/client/C in admins)
 		if(R_ADMIN & C.holder.rights)
-			C << msg
+			to_chat(C, msg)
 
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
 	log_attack(text)
 	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
 	for(var/client/C in admins)
-		if(R_ADMIN & C.holder.rights)
+		if(check_rights(R_INVESTIGATE, 0, C))
 			if(C.is_preference_enabled(/datum/client_preference/admin/show_attack_logs))
 				var/msg = rendered
-				C << msg
+				to_chat(C, msg)
 
-proc/admin_notice(var/message, var/rights)
+/proc/admin_notice(var/message, var/rights)
 	for(var/mob/M in mob_list)
 		if(check_rights(rights, 0, M))
-			M << message
+			to_chat(M, message)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
