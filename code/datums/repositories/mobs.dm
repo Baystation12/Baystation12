@@ -13,7 +13,7 @@ var/repository/mob/mob_repository = new()
 	. = mobs_[mobclient2unique(M, C)]
 	if(!.)
 		. = new/datum/mob_lite(M, C)
-		mobs_[mobclient2unique(M, M.client)] = .
+		mobs_[mobclient2unique(M, C)] = .
 
 /datum/mob_lite
 	var/name
