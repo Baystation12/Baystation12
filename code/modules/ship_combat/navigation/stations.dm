@@ -6,6 +6,20 @@ obj/effect/overmap/station/asteroid
 	anchored = 1
 	var/dimensions_x = 0
 	var/dimensions_y = 0
+	landing_areas = list(/area/sector/shuttle/asteroid)
+
+/area/sector/shuttle
+	name = "\improper Entry Point"
+	icon_state = "tcomsatcham"
+	requires_power = 0
+	luminosity = 1
+	lighting_use_dynamic = 0
+
+/area/sector/shuttle/asteroid
+	name = "\improper Asteroid Landing Area"
+
+/area/sector/shuttle/station
+	name = "\improper Station Docking Bay"
 
 /obj/effect/overmap/station/asteroid/New()
 	..()

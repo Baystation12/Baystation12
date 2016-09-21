@@ -10,9 +10,9 @@
 "j" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/s_two/four)
 "k" = (/turf/unsimulated/mask,/area/ship_battle/asteroid/s_two/four)
 "l" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/s_two/three)
-"m" = (/turf/simulated/floor/asteroid,/area/shuttle/mining_shuttle/destination)
-"n" = (/turf/space,/area/shuttle/mining_shuttle/destination)
-"o" = (/obj/effect/overmap/station/asteroid{dimensions_x = 50; dimensions_y = 50; icon_state = "asteroid_small"; landing_area = /area/shuttle/mining_shuttle/destination; name = "Small Asteroid"},/turf/space,/area/ship_battle/asteroid/s_two/three)
+"m" = (/turf/simulated/floor/asteroid,/area/sector/shuttle/asteroid)
+"n" = (/turf/space,/area/sector/shuttle/asteroid)
+"o" = (/obj/effect/overmap/station/asteroid{dimensions_x = 60; dimensions_y = 60; icon_state = "asteroid_small"; name = "Small Asteroid"},/turf/space,/area/ship_battle/asteroid/s_two/three)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbb

@@ -14,7 +14,6 @@
 	var/obj/effect/overmap/current_sector
 	var/obj/machinery/space_battle/helm/nav_control
 	var/list/eng_controls = list()
-	var/list/fire_controls = list()
 	var/braked = 1
 
 /obj/effect/overmap/ship/Destroy()

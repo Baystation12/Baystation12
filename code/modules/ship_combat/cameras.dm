@@ -33,26 +33,6 @@
 */
 	add_networks(new_network)
 	invalidateCameraCache()
-/*
-/obj/machinery/computer/security/battle/initialize()
-	..()
-	spawn(5)
-		network.Cut()
-		var/obj/effect/overmap/linked = map_sectors["[z]"]
-		if(linked)
-			network.Add("[linked.name]")
-		var/area/ship_battle/A = get_area(src)
-		if(A && istype(A))
-			switch(A.team)
-				if(1)
-					network.Add("Team One")
-				if(2)
-					network.Add("Team Two")
-				if(3)
-					network.Add("Team Three")
-				if(4)
-					network.Add("Team Four")
 
-		if(network.len)
-			current_network = network[1]
-*/
+/obj/machinery/modular_computer/console/preset/security/battle/install_programs()
+	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor/battle())

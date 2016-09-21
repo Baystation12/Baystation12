@@ -97,9 +97,7 @@
 	var/thrust_limit = 1
 	var/nominal_thrust = 3000
 	component_type = /obj/item/weapon/component/engine
-	var/fuel_id = null
 	idle_power_usage = 50
-	var/engine_id = null
 
 /obj/machinery/space_battle/engine/fuelled/attack_hand(var/mob/user)
 	if(controller)
@@ -108,7 +106,7 @@
 
 /obj/machinery/space_battle/engine/fuelled/initialize()
 	..()
-	controller = new(src, engine_id)
+	controller = new(src, id_tag)
 
 /obj/machinery/space_battle/engine/fuelled/Destroy()
 	..()
@@ -121,7 +119,7 @@
 /obj/machinery/space_battle/engine/fuelled/initialize()
 	..()
 	for(var/obj/machinery/fuel_port/F in world)
-		if(fuel_id && F.id == src.fuel_id && F.z == src.z)
+		if(id_tag && F.id == src.id_tag && F.z == src.z)
 			fuel_ports.Add(F)
 
 /obj/machinery/space_battle/engine/fuelled/proc/get_fuel()

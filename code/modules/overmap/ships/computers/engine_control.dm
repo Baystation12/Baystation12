@@ -7,7 +7,6 @@
 	var/state = "status"
 	var/list/engines = list()
 	var/list/zlevels = list()
-	var/engine_id = null
 	var/cooldown = 0
 	anchored = 1
 	density = 1
@@ -19,7 +18,7 @@
 /obj/machinery/space_battle/engine_control/proc/refresh_engines()
 	engines.Cut()
 	for(var/datum/ship_engine/E in ship_engines)
-		if ((E.zlevel in zlevels || E.zlevel == src.z) && E.engine_id == src.engine_id && !(src in engines))
+		if ((E.zlevel in zlevels || E.zlevel == src.z) && E.id_tag == src.id_tag && !(src in engines))
 			engines += E
 			E.controller = src
 	return engines.len
@@ -29,8 +28,9 @@
 	for(var/datum/ship_engine/S in engines)
 		S.controller = null
 	engines.Cut()
-	if(linked)
-		linked.eng_controls.Cut(linked.eng_controls.Find(src), (linked.eng_controls.Find(src))+1)
+	if(linked && istype(linked, /obj/effect/overmap/ship))
+		var/obj/effect/overmap/ship/ship = linked
+		ship.eng_controls.Cut(ship.eng_controls.Find(src), (ship.eng_controls.Find(src))+1)
 		linked = null
 	return ..()
 
@@ -111,7 +111,9 @@
 	var/res = 0
 	for(var/datum/ship_engine/E in engines)
 		res |= E.burn()
-	linked.braked = 0
+	if(istype(linked, /obj/effect/overmap/ship))
+		var/obj/effect/overmap/ship/ship = linked
+		ship.braked = 0
 	return res
 
 /obj/machinery/space_battle/engine_control/proc/get_total_thrust()
@@ -124,13 +126,16 @@
 	return 1
 
 /obj/machinery/space_battle/engine_control/proc/stopped(var/forced = 0)
-	if(!(linked.braked && cooldown()) || forced)
-		cooldown = world.timeofday+(ENGINE_JUMP_DELAY*get_efficiency(-1,1)*10)
-		linked.braked = 1
-		var/obj/machinery/space_battle/helm/H = linked.nav_control
-		if(H && istype(H))
-			H.visible_message("<span class='warning'>\The [H] beeps, \"Cooldown set to [time_remaining()] seconds!\"</span>")
-		src.visible_message("<span class='warning'>\icon[src] \The [src] beeps, \"Cooldown set to [time_remaining()] seconds!\"</span>")
+	if(istype(linked, /obj/effect/overmap/ship))
+		var/obj/effect/overmap/ship/ship = linked
+		if(!(ship.braked && cooldown()) || forced)
+			cooldown = world.timeofday+(ENGINE_JUMP_DELAY*get_efficiency(-1,1)*10)
+			ship.braked = 1
+			var/obj/machinery/space_battle/helm/H = ship.nav_control
+			if(H && istype(H))
+				H.visible_message("<span class='warning'>\The [H] beeps, \"Cooldown set to [time_remaining()] seconds!\"</span>")
+			src.visible_message("<span class='warning'>\icon[src] \The [src] beeps, \"Cooldown set to [time_remaining()] seconds!\"</span>")
+
 /obj/machinery/space_battle/engine_control/proc/time_remaining()
 	var/time = (cooldown - world.timeofday)/10
 	if(time < 0)

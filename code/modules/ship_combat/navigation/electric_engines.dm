@@ -47,7 +47,7 @@
 
 /obj/machinery/space_battle/engine/electric/initialize()
 	..()
-	controller = new(src, engine_id)
+	controller = new(src, id_tag)
 
 /obj/machinery/space_battle/engine/electric/Destroy()
 	..()

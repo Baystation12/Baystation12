@@ -14,7 +14,6 @@
 	var/obj/effect/overmap/current_sector
 	var/obj/machinery/space_battle/helm/nav_control
 	var/list/eng_controls = list()
-	var/list/fire_controls = list()
 	var/braked = 1
 
 /obj/effect/overmap/ship/Destroy()
@@ -152,3 +151,6 @@
 			Move(newloc)
 		if(rotate)
 			rotate(get_heading())
+
+/area/sector/shuttle/ship
+	name = "\improper Ship Docking Area"

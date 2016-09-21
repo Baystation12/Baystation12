@@ -9,7 +9,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "comm_computer"
 	req_access = list(ACCESS_ENGINE)
-	var/engine_id = 0
+	var/id_tag = 0
 	var/authenticated = 0
 	var/obj/machinery/power/am_engine/engine/connected_E = null
 	var/obj/machinery/power/am_engine/injector/connected_I = null
@@ -19,10 +19,10 @@
 	..()
 	spawn( 24 )
 		for(var/obj/machinery/power/am_engine/engine/E in world)
-			if(E.engine_id == src.engine_id)
+			if(E.id_tag == src.id_tag)
 				src.connected_E = E
 		for(var/obj/machinery/power/am_engine/injector/I in world)
-			if(I.engine_id == src.engine_id)
+			if(I.id_tag == src.id_tag)
 				src.connected_I = I
 	return
 

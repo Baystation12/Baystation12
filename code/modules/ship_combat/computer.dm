@@ -82,7 +82,8 @@
 		if(A && istype(A))
 			team = A.team
 		var/num = 0
-		for(var/obj/machinery/space_battle/missile_computer/C in world)
+		for(var/S in linked.fire_controls)
+			var/obj/machinery/space_battle/missile_computer/C = S
 			if(C.z == src.z)
 				num++
 				if(C == src)
@@ -97,9 +98,10 @@
 
 	initialize()
 		linked = map_sectors["[z]"]
-		if (linked && istype(linked))
-			if (!(src in linked.fire_controls))
-				linked.fire_controls.Add(src)
+		if (linked && istype(linked, /obj/effect/overmap/ship))
+			var/obj/effect/overmap/ship/ship = linked
+			if (!(src in ship.fire_controls))
+				ship.fire_controls.Add(src)
 		reconnect()
 		processing_objects.Add(src)
 
@@ -116,7 +118,8 @@
 			return "Nothing in range!"
 		var/area/ship_battle/us = get_area(src)
 		if(!istype(us)) return "Fatal error!"
-		for(var/obj/missile_start/S in world)
+		for(var/M in missile_starts)
+			var/obj/missile_start/S = M
 			for(var/i=1 to targettable_z_levels.len)
 				if(S.z == text2num(targettable_z_levels[i]))
 					S.refresh_active()
@@ -133,11 +136,12 @@
 
 	reconnect()
 		for(var/obj/machinery/space_battle/tube/T in world)
-			if(T.id_tag == id_tag)
+			if(T.id_tag == id_tag && T.z == src.z)
 				tube = T
 				T.linked = src
 				break
-		for(var/obj/machinery/space_battle/missile_sensor/hub/S in world)
+		for(var/M in linked.fire_sensors)
+			var/obj/machinery/space_battle/missile_sensor/hub/S = M
 			if(S.id_tag == id_tag)
 				sensor = S
 				S.linked = src

@@ -11,7 +11,7 @@
 /obj/machinery/power/am_engine/engine
 	name = "Antimatter Engine"
 	icon_state = "am_engine"
-	var/engine_id = 0
+	var/id_tag = 0
 	var/H_fuel = 0
 	var/antiH_fuel = 0
 	var/operating = 0
@@ -21,7 +21,7 @@
 /obj/machinery/power/am_engine/injector
 	name = "Injector"
 	icon_state = "injector"
-	var/engine_id = 0
+	var/id_tag = 0
 	var/injecting = 0
 	var/fuel = 0
 	var/obj/machinery/power/am_engine/engine/connected = null

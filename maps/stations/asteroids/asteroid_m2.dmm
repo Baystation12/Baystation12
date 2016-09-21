@@ -1,10 +1,10 @@
 "a" = (/turf/space,/area/ship_battle/asteroid/m_two/one)
 "b" = (/turf/space,/area/ship_battle/asteroid/m_two/two)
-"c" = (/turf/space,/area/shuttle/mining_shuttle/destination)
+"c" = (/turf/space,/area/sector/shuttle/asteroid)
 "d" = (/turf/unsimulated/mask,/area/ship_battle/asteroid/m_two/one)
 "e" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/m_two/one)
 "f" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/m_two/two)
-"g" = (/turf/simulated/floor/asteroid,/area/shuttle/mining_shuttle/destination)
+"g" = (/turf/simulated/floor/asteroid,/area/sector/shuttle/asteroid)
 "h" = (/turf/unsimulated/mask,/area/ship_battle/asteroid/m_two/two)
 "i" = (/turf/space,/area/ship_battle/asteroid/m_two/three)
 "j" = (/turf/unsimulated/mask,/area/ship_battle/asteroid/m_two/three)
@@ -12,7 +12,7 @@
 "l" = (/turf/space,/area/ship_battle/asteroid/m_two/four)
 "m" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/m_two/four)
 "n" = (/turf/unsimulated/mask,/area/ship_battle/asteroid/m_two/four)
-"o" = (/obj/effect/overmap/station/asteroid{dimensions_x = 75; dimensions_y = 75; icon_state = "asteroid_medium"; landing_area = /area/shuttle/mining_shuttle/destination; name = "Broken Asteroid"},/turf/space,/area/ship_battle/asteroid/m_one/three)
+"o" = (/obj/effect/overmap/station/asteroid{dimensions_x = 80; dimensions_y = 80; icon_state = "asteroid_medium"; name = "Broken Asteroid"},/turf/space,/area/ship_battle/asteroid/m_one/three)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb

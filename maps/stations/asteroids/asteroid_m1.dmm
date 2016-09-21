@@ -1,8 +1,8 @@
 "a" = (/turf/space,/area/ship_battle/asteroid/m_one/one)
 "b" = (/turf/space,/area/ship_battle/asteroid/m_one/two)
 "c" = (/turf/unsimulated/mask,/area/ship_battle/asteroid/m_one/two)
-"d" = (/turf/space,/area/shuttle/mining_shuttle/destination)
-"e" = (/turf/simulated/floor/asteroid,/area/shuttle/mining_shuttle/destination)
+"d" = (/turf/space,/area/sector/shuttle/asteroid)
+"e" = (/turf/simulated/floor/asteroid,/area/sector/shuttle/asteroid)
 "f" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/m_one/two)
 "g" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/m_one/one)
 "h" = (/turf/unsimulated/mask,/area/ship_battle/asteroid/m_one/one)
@@ -12,7 +12,7 @@
 "l" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/m_one/four)
 "m" = (/turf/space,/area/ship_battle/asteroid/m_one/four)
 "n" = (/turf/simulated/floor/asteroid,/area/ship_battle/asteroid/m_one/three)
-"o" = (/obj/effect/overmap/station/asteroid{dimensions_x = 75; dimensions_y = 75; icon_state = "asteroid_medium"; landing_area = /area/shuttle/mining_shuttle/destination; name = "Average Asteroid"},/turf/space,/area/ship_battle/asteroid/m_one/three)
+"o" = (/obj/effect/overmap/station/asteroid{dimensions_x = 75; dimensions_y = 75; icon_state = "asteroid_medium"; name = "Medium Asteroid"},/turf/space,/area/ship_battle/asteroid/m_one/three)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb

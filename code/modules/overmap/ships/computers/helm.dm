@@ -25,21 +25,23 @@
 
 /obj/machinery/space_battle/helm/process()
 	..()
-	if (autopilot && dx && dy)
-		var/turf/T = locate(dx,dy,using_map.overmap_z)
-		if(linked.loc == T)
-			if(linked.is_still())
-				src.visible_message("<span class='notice'>\The [src] pings happily!</span>")
-				autopilot = 0
+	if(istype(linked, /obj/effect/overmap/ship))
+		var/obj/effect/overmap/ship/ship = linked
+		if (autopilot && dx && dy)
+			var/turf/T = locate(dx,dy,using_map.overmap_z)
+			if(ship.loc == T)
+				if(ship.is_still())
+					src.visible_message("<span class='notice'>\The [src] pings happily!</span>")
+					autopilot = 0
+				else
+					ship.decelerate()
+
+			var/brake_path = ship.get_brake_path()
+
+			if(get_dist(ship.loc, T) > brake_path)
+				ship.accelerate(get_dir(ship.loc, T))
 			else
-				linked.decelerate()
-
-		var/brake_path = linked.get_brake_path()
-
-		if(get_dist(linked.loc, T) > brake_path)
-			linked.accelerate(get_dir(linked.loc, T))
-		else
-			linked.decelerate()
+				ship.decelerate()
 
 		return
 
@@ -84,9 +86,11 @@
 	data["dest"] = dy && dx
 	data["d_x"] = dx
 	data["d_y"] = dy
-	data["speed"] = linked.get_speed()
-	data["accel"] = linked.get_acceleration()
-	data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
+	if(istype(linked, /obj/effect/overmap/ship))
+		var/obj/effect/overmap/ship/ship = linked
+		data["speed"] = ship.get_speed()
+		data["accel"] = ship.get_acceleration()
+		data["heading"] = ship.get_heading() ? dir2angle(ship.get_heading()) : 0
 	data["autopilot"] = autopilot
 	data["manual_control"] = manual_control
 
@@ -115,7 +119,8 @@
 
 	if (!linked)
 		return
-
+	var/obj/effect/overmap/ship/ship = linked
+	if(!istype(ship, /obj/effect/overmap/ship)) return 1
 	if (href_list["add"])
 		var/datum/data/record/R = new()
 		var/sec_name = input("Input naviation entry name", "New navigation entry", "Sector #[known_sectors.len]") as text
@@ -164,7 +169,7 @@
 		linked.relaymove(usr, ndir)
 
 	if (href_list["brake"])
-		linked.decelerate()
+		ship.decelerate()
 
 	if (href_list["apilot"])
 		autopilot = !autopilot

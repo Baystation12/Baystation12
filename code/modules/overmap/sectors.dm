@@ -16,6 +16,8 @@
 	var/team = 0
 
 	var/datum/fake_ship/fake_ship
+	var/list/fire_controls = list()
+	var/list/fire_sensors = list()
 	var/fake = 0
 
 	var/em_signature = 0

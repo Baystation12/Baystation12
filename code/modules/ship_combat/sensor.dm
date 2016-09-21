@@ -15,10 +15,13 @@
 
 	initialize()
 		..()
-		reconnect()
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
 			req_access = list(A.team*10 - SPACE_ENGINEERING)
+		if(linked)
+			if(!(src in linked.fire_sensors))
+				linked.fire_sensors += src
+		reconnect()
 
 
 	Destroy()
@@ -26,6 +29,9 @@
 		if(dish)
 			dish.linked_sensor = null
 			dish = null
+		if(linked)
+			linked.fire_sensors.Remove(src)
+		linked = null
 		return ..()
 
 	attack_hand(var/mob/user)
@@ -215,6 +221,7 @@
 	var/obj/machinery/space_battle/missile_sensor/ship_sensor/sensor
 
 	var/list/radars = list()
+	var/obj/machinery/space_battle/missile_computer/computer
 
 /obj/machinery/space_battle/missile_sensor/hub/Destroy()
 	guidance = null
@@ -224,17 +231,21 @@
 	microwave = null
 	xray = null
 	eccm = null
+	if(computer)
+		computer.sensor = null
+		computer = null
 	return ..()
 
 /obj/machinery/space_battle/missile_sensor/hub/reconnect()
-	spawn(3)
-	if(linked)
-		linked.reconnect()
-	for(var/obj/machinery/space_battle/missile_computer/F in world)
-		if(F.id_tag == src.id_tag && F.z == src.z)
+	if(computer)
+		computer.reconnect()
+	for(var/C in linked.fire_controls)
+		var/obj/machinery/space_battle/missile_computer/F = C
+		if(F.id_tag == src.id_tag)
 			F.sensor = src
-			linked = F
-	for(var/obj/machinery/space_battle/missile_sensor/M in world)
+			computer = F
+	for(var/S in linked.fire_sensors)
+		var/obj/machinery/space_battle/missile_sensor/M = S
 		if(M.id_tag == src.id_tag && M.z == src.z)
 			if(istype(M, /obj/machinery/space_battle/missile_sensor/guidance) && !guidance)
 				guidance = M
@@ -262,7 +273,7 @@
 /obj/machinery/space_battle/missile_sensor/hub/rename()
 	var/id_num
 	if(linked)
-		id_num = linked.id_num
+		id_num = computer.id_num
 	if(!id_num) return
 	name = "[initial(name)]([id_num])"
 	if(guidance)
@@ -345,7 +356,7 @@
 	return radars
 
 /obj/machinery/space_battle/missile_sensor/hub/proc/get_firing_targets()
-	if(sensor)
+	if(can_sense() && sensor)
 		return sensor.find_targets()
 	return 0
 /****************

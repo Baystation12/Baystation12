@@ -1,7 +1,7 @@
 /obj/machinery/missile/bomb/fire_missile(var/turf/location)
 	var/obj/machinery/space_battle/tube/T = locate() in loc
-	if(T && T.linked)
-		if(T.linked.firing_angle == "Flanking" || (prob(30) && T.linked.firing_angle != "Carefully Aimed"))
+	if(T && T.computer)
+		if(T.computer.firing_angle == "Flanking" || (prob(30) && T.computer.firing_angle != "Carefully Aimed"))
 			var/area/A = get_area(location)
 			location = pick_area_turf(A)
 	var/obj/item/missile/ship/projectile = new spawn_type(location)
