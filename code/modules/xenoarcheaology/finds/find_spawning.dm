@@ -244,7 +244,7 @@
 			apply_material_decorations = 0
 		if(23)
 			apply_prefix = 0
-			new_item = PoolOrNew(/obj/item/stack/rods, src.loc)
+			new_item = new /obj/item/stack/rods(loc)
 			apply_image_decorations = 0
 			apply_material_decorations = 0
 		if(24)

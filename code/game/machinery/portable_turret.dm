@@ -544,7 +544,7 @@ var/list/turret_icons
 	set_raised_raising(raised, 1)
 	update_icon()
 
-	var/atom/flick_holder = PoolOrNew(/atom/movable/porta_turret_cover, loc)
+	var/atom/flick_holder = new /atom/movable/porta_turret_cover(loc)
 	flick_holder.layer = layer + 0.1
 	flick("popup", flick_holder)
 	sleep(10)
@@ -564,7 +564,7 @@ var/list/turret_icons
 	set_raised_raising(raised, 1)
 	update_icon()
 
-	var/atom/flick_holder = PoolOrNew(/atom/movable/porta_turret_cover, loc)
+	var/atom/flick_holder = new /atom/movable/porta_turret_cover(loc)
 	flick_holder.layer = layer + 0.1
 	flick("popdown", flick_holder)
 	sleep(10)

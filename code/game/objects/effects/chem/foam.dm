@@ -108,7 +108,7 @@
 			F.amount += amount
 			return
 
-		F = PoolOrNew(/obj/effect/effect/foam, list(location, metal))
+		F = new /obj/effect/effect/foam(location, metal)
 		F.amount = amount
 
 		if(!metal) // don't carry other chemicals if a metal foam

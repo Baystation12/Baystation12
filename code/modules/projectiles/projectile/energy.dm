@@ -32,7 +32,7 @@
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
 	src.visible_message("<span class='warning'>\The [src] explodes in a bright flash!</span>")
 
-	var/datum/effect/effect/system/spark_spread/sparks = PoolOrNew(/datum/effect/effect/system/spark_spread)
+	var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
 	sparks.set_up(2, 1, T)
 	sparks.start()
 
@@ -50,7 +50,7 @@
 	light_colour = pick("#e58775", "#ffffff", "#90ff90", "#a09030")
 
 	..() //initial flash
-	
+
 	//residual illumination
 	new /obj/effect/effect/smoke/illumination(src.loc, rand(190,240) SECONDS, range=8, power=3, color=light_colour) //same lighting power as flare
 

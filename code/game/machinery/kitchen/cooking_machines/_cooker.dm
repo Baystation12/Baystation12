@@ -157,7 +157,7 @@
 				cooking_obj = new /obj/item/weapon/reagent_containers/food/snacks/badrecipe(src)
 				// Produce nasty smoke.
 				visible_message("<span class='danger'>\The [src] vomits a gout of rancid smoke!</span>")
-				var/datum/effect/effect/system/smoke_spread/bad/smoke = PoolOrNew(/datum/effect/effect/system/smoke_spread/bad)
+				var/datum/effect/effect/system/smoke_spread/bad/smoke = new /datum/effect/effect/system/smoke_spread/bad()
 				smoke.attach(src)
 				smoke.set_up(10, 0, usr.loc)
 				smoke.start()

@@ -221,7 +221,7 @@
 
 			for(var/a = 1 to 5)
 				spawn(0)
-					var/obj/effect/effect/water/W = PoolOrNew(/obj/effect/effect/water, get_turf(chassis))
+					var/obj/effect/effect/water/W = new /obj/effect/effect/water(get_turf(chassis))
 					var/turf/my_target
 					if(a == 1)
 						my_target = T
