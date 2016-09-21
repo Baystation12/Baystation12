@@ -75,6 +75,7 @@ var/datum/antagonist/traitor/traitors
 /datum/antagonist/traitor/equip(var/mob/living/carbon/human/traitor_mob)
 	if(istype(traitor_mob, /mob/living/silicon)) // this needs to be here because ..() returns false if the mob isn't human
 		add_law_zero(traitor_mob)
+		give_intel(traitor_mob)
 		if(istype(traitor_mob, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/R = traitor_mob
 			R.SetLockdown(0)
@@ -84,14 +85,17 @@ var/datum/antagonist/traitor/traitors
 		return 0
 
 	spawn_uplink(traitor_mob)
-	// Tell them about people they might want to contact.
+	give_intel(traitor_mob)
+
+/datum/antagonist/traitor/proc/give_intel(mob/living/traitor_mob)
+	give_collaborators(traitor_mob)
+	give_codewords(traitor_mob)
+
+/datum/antagonist/traitor/proc/give_collaborators(mob/living/traitor_mob)
 	var/mob/living/carbon/human/M = get_nt_opposed()
 	if(M && M != traitor_mob)
 		traitor_mob << "We have received credible reports that [M.real_name] might be willing to help our cause. If you need assistance, consider contacting them."
 		traitor_mob.mind.store_memory("<b>Potential Collaborator</b>: [M.real_name]")
-
-	//Begin code phrase.
-	give_codewords(traitor_mob)
 
 /datum/antagonist/traitor/proc/give_codewords(mob/living/traitor_mob)
 	traitor_mob << "<u><b>Your employers provided you with the following information on how to identify possible allies:</b></u>"
