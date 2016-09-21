@@ -69,17 +69,23 @@
 	desc = "This circuit sends an automatic pulse every four seconds."
 	icon_state = "tick-m"
 	complexity = 8
-	var/ticks_to_pulse = 2
+	var/ticks_to_pulse = 4
 	var/ticks_completed = 0
-	inputs = list("toggle ticking")
+	inputs = list("enable ticking")
 	activators = list("outgoing pulse")
 
-/obj/item/integrated_circuit/time/ticker/New()
-	..()
-	processing_objects |= src
-
 /obj/item/integrated_circuit/time/ticker/Destroy()
-	processing_objects -= src
+	var/datum/integrated_io/do_tick = inputs[1]
+	if(do_tick.data)
+		processing_objects -= src
+	. = ..()
+
+/obj/item/integrated_circuit/time/ticker/on_data_written()
+	var/datum/integrated_io/do_tick = inputs[1]
+	if(do_tick.data)
+		processing_objects |= src
+	else
+		processing_objects -= src
 
 /obj/item/integrated_circuit/time/ticker/process()
 	var/process_ticks = process_schedule_interval("obj")
@@ -97,14 +103,14 @@
 	desc = "This advanced circuit sends an automatic pulse every two seconds."
 	icon_state = "tick-f"
 	complexity = 12
-	ticks_to_pulse = 1
+	ticks_to_pulse = 2
 
 /obj/item/integrated_circuit/time/ticker/slow
 	name = "slow ticker"
 	desc = "This simple circuit sends an automatic pulse every six seconds."
 	icon_state = "tick-s"
 	complexity = 4
-	ticks_to_pulse = 3
+	ticks_to_pulse = 6
 
 /obj/item/integrated_circuit/time/clock
 	name = "integrated clock"
@@ -114,7 +120,6 @@
 	outputs = list("time (string)", "hours (number)", "minutes (number)", "seconds (number)")
 
 /obj/item/integrated_circuit/time/clock/do_work()
-	..()
 	var/datum/integrated_io/time = outputs[1]
 	var/datum/integrated_io/hour = outputs[2]
 	var/datum/integrated_io/min = outputs[3]
