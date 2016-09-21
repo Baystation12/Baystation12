@@ -16,7 +16,7 @@
 
 	var/spray_particles = 3
 	var/spray_amount = 120	//units of liquid per spray - 120 -> same as splashing them with a bucket per spray
-	var/max_water = 500
+	var/max_water = 2000
 	var/last_use = 1.0
 	var/safety = 1
 	var/sprite_name = "fire_extinguisher"
@@ -31,7 +31,7 @@
 	w_class = 2.0
 	force = 3.0
 	spray_amount = 80
-	max_water = 200
+	max_water = 1000
 	sprite_name = "miniFE"
 
 /obj/item/weapon/extinguisher/New()
@@ -74,7 +74,7 @@
 
 	if( istype(target, /obj/structure/reagent_dispensers/watertank) && flag)
 		var/obj/o = target
-		var/amount = o.reagents.trans_to_obj(src, 50)
+		var/amount = o.reagents.trans_to_obj(src, 500)
 		user << "<span class='notice'>You fill [src] with [amount] units of the contents of [target].</span>"
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return

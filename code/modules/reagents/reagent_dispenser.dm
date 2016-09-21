@@ -8,6 +8,7 @@
 	density = 1
 	anchored = 0
 
+	var/initial_capacity = 1000
 	var/amount_per_transfer_from_this = 10
 	var/possible_transfer_amounts = "10;25;50;100"
 
@@ -15,7 +16,7 @@
 		return
 
 	New()
-		var/datum/reagents/R = new/datum/reagents(1000)
+		var/datum/reagents/R = new/datum/reagents(initial_capacity)
 		reagents = R
 		R.my_atom = src
 		if (!possible_transfer_amounts)
@@ -71,9 +72,12 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
 	amount_per_transfer_from_this = 10
-	New()
-		..()
-		reagents.add_reagent("water",1000)
+	possible_transfer_amounts = "10;25;50;100"
+	initial_capacity = 50000
+
+/obj/structure/reagent_dispensers/watertank/New()
+	..()
+	reagents.add_reagent("water", initial_capacity)
 
 /obj/structure/reagent_dispensers/fueltank
 	name = "fueltank"
@@ -85,7 +89,7 @@
 	var/obj/item/device/assembly_holder/rig = null
 	New()
 		..()
-		reagents.add_reagent("fuel",1000)
+		reagents.add_reagent("fuel", initial_capacity)
 
 /obj/structure/reagent_dispensers/fueltank/examine(mob/user)
 	if(!..(user, 2))
@@ -196,7 +200,7 @@
 	amount_per_transfer_from_this = 45
 	New()
 		..()
-		reagents.add_reagent("condensedcapsaicin",1000)
+		reagents.add_reagent("condensedcapsaicin", initial_capacity)
 
 
 /obj/structure/reagent_dispensers/water_cooler
@@ -207,9 +211,10 @@
 	icon_state = "water_cooler"
 	possible_transfer_amounts = null
 	anchored = 1
+	initial_capacity = 500
 	New()
 		..()
-		reagents.add_reagent("water",500)
+		reagents.add_reagent("water", initial_capacity)
 
 /obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W,/obj/item/weapon/wrench))
@@ -235,7 +240,7 @@
 	amount_per_transfer_from_this = 10
 	New()
 		..()
-		reagents.add_reagent("beer",1000)
+		reagents.add_reagent("beer", initial_capacity)
 
 /obj/structure/reagent_dispensers/virusfood
 	name = "Virus Food Dispenser"
@@ -247,7 +252,7 @@
 
 	New()
 		..()
-		reagents.add_reagent("virusfood", 1000)
+		reagents.add_reagent("virusfood", initial_capacity)
 
 /obj/structure/reagent_dispensers/acid
 	name = "Sulphuric Acid Dispenser"
@@ -259,4 +264,4 @@
 
 	New()
 		..()
-		reagents.add_reagent("sacid", 1000)
+		reagents.add_reagent("sacid", initial_capacity)
