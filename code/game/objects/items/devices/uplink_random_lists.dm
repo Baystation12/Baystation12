@@ -32,6 +32,7 @@
 		if(U && !I.can_buy(U))
 			continue
 		return I
+	return uplink.items_assoc[/datum/uplink_item/item/stealthy_weapons/soap]
 
 var/list/uplink_random_selections_
 /proc/get_uplink_random_selection_by_type(var/uplist_selection_type)
@@ -119,6 +120,20 @@ var/list/uplink_random_selections_
 			continue
 		var/new_thing = new/datum/uplink_random_item(uplink_item_type)
 		items += new_thing
+
+/datum/uplink_random_selection/blacklist/get_random_item(var/telecrystals, obj/item/device/uplink/U, var/list/bought_items)
+	var/const/attempts = 50
+	for(var/i = 0; i < attempts; i++)
+		var/datum/uplink_random_item/RI = pick(items)
+		if(!prob(RI.keep_probability))
+			continue
+		var/datum/uplink_item/I = uplink.items_assoc[RI.uplink_item]
+		if(I.cost(telecrystals, U) > telecrystals)
+			continue
+		if(bought_items && (I in bought_items) && !prob(RI.reselect_probability))
+			continue
+		return I
+	return uplink.items_assoc[/datum/uplink_item/item/stealthy_weapons/soap]
 
 #ifdef DEBUG
 /proc/debug_uplink_purchage_log()

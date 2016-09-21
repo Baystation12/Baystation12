@@ -18,16 +18,16 @@
 **************/
 /datum/uplink_item/item/badassery/random_one
 	name = "Random Item"
-	desc = "Buys you one random item."
+	desc = "Buys you a random item for at least 1TC. Careful: No upper price cap!"
+	item_cost = 1
 
 /datum/uplink_item/item/badassery/random_one/buy(var/obj/item/device/uplink/U, var/mob/user)
 	var/datum/uplink_random_selection/uplink_selection = get_uplink_random_selection_by_type(/datum/uplink_random_selection/default)
 	var/datum/uplink_item/item = uplink_selection.get_random_item(U.uses, U)
-	return item.buy(U, user)
+	return item && item.buy(U, user)
 
 /datum/uplink_item/item/badassery/random_one/can_buy(obj/item/device/uplink/U)
-	var/datum/uplink_random_selection/uplink_selection = get_uplink_random_selection_by_type(/datum/uplink_random_selection/default)
-	return uplink_selection.get_random_item(U.uses, U) != null
+	return U.uses
 
 /datum/uplink_item/item/badassery/random_many
 	name = "Random Items"
@@ -66,7 +66,7 @@
 
 /datum/uplink_item/item/badassery/surplus/get_goods(var/obj/item/device/uplink/U, var/loc)
 	var/obj/structure/largecrate/C = new(loc)
-	var/random_items = get_random_uplink_items(null, item_worth, C)
+	var/random_items = get_random_uplink_items(U, item_worth, C)
 	for(var/datum/uplink_item/I in random_items)
 		I.purchase_log(U)
 		I.get_goods(U, C)
