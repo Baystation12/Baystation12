@@ -15,12 +15,12 @@
 
 		if(area_turfs.len != filled_turfs.len)
 			incoherent_areas++
-			log_bad("[A] ([A.type]) \[[A.x]-[A.y]-[A.z]\] is incoherent. Expected [area_turfs.len] turf\s, fill gave [filled_turfs.len].")
+			log_bad("[log_info_line(A)] is incoherent. Expected [area_turfs.len] turf\s, fill gave [filled_turfs.len].")
 
 	if(incoherent_areas)
 		fail("Found [incoherent_areas] incoherent area\s.")
 	else
-		pass("All areas were coherent.")
+		pass("All areas are coherent.")
 
 	return 1
 
@@ -45,12 +45,32 @@
 		if(!A.contents.len)
 			continue
 		if(A.name != initial(A.name))
-			log_bad("[A] has an edited name.")
+			log_bad("[log_info_line(A)] has an edited name.")
 			impure_areas++
 
 	if(impure_areas)
 		fail("Found [impure_areas] impure area\s.")
 	else
-		pass("All areas were pure.")
+		pass("All areas are pure.")
 
+	return 1
+
+/datum/unit_test/areas_shall_be_used
+	name = "AREA: Areas shall be used"
+	disabled = 0
+
+/datum/unit_test/areas_shall_be_used/start_test()
+	var/unused_areas = 0
+	for(var/area_type in subtypesof(/area))
+		if(area_type in using_map.area_usage_test_exempted_areas)
+			continue
+		var/area/located_area = locate(area_type)
+		if(located_area && !located_area.z)
+			log_bad("[log_info_line(located_area)] is unused.")
+			unused_areas++
+
+	if(unused_areas)
+		fail("Found [unused_areas] unused area\s.")
+	else
+		pass("All areas are used.")
 	return 1

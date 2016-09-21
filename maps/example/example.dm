@@ -1,5 +1,5 @@
 #if !defined(USING_MAP_DATUM)
-
+	#include "example_areas.dm"
 	#include "example_unit_testing.dm"
 
 	#include "example-1.dmm"

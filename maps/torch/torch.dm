@@ -9,6 +9,9 @@
 	#include "torch_holodecks.dm"
 	#include "torch_elevator.dm"
 
+	#include "../shared/exodus_torch_areas.dm"
+	#include "../shared/exodus_torch_zas_tests.dm"
+
 	#include "torch-1.dmm"
 	#include "torch-2.dmm"
 	#include "torch-3.dmm"

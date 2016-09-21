@@ -321,8 +321,8 @@ var/global/list/additional_antag_types = list()
 				surviving_total++
 				if(ishuman(M))
 					surviving_humans++
-				var/turf/T = get_turf(M)
-				if(T && (T.z in using_map.admin_levels)) // Still not great but beats the previous hard coded list of safe escape locations
+				var/area/A = get_area(M)
+				if(A && is_type_in_list(A, using_map.post_round_safe_areas))
 					escaped_total++
 					if(ishuman(M))
 						escaped_humans++

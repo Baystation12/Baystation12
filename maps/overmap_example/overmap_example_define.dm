@@ -6,6 +6,7 @@
 	allowed_spawns = list("Arrivals Shuttle")
 
 /datum/map/overmap_example/setup_map()
+	..()
 	station_levels = list()
 	for(var/zz in map_sectors)
 		station_levels |= text2num(zz)
