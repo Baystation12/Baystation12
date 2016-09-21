@@ -280,6 +280,10 @@
 		organ_compatible = 1
 
 	else if(istype(O, /obj/item/organ/internal/stack))
+		if(!target.can_have_stack())
+			user << "<span class='warning'>\The [target] cannot support [o_a][O.organ_tag].</span>"
+			return SURGERY_FAILURE
+
 		if(!target.internal_organs_by_name[O.organ_tag])
 			organ_missing = 1
 		else

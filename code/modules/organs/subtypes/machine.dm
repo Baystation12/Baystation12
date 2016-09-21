@@ -36,6 +36,7 @@
 	..(new_owner, internal)
 	if(!stored_mmi)
 		stored_mmi = new(src)
+		stored_mmi.loaded_stack = new(stored_mmi)
 	sleep(-1)
 	update_from_mmi()
 	persistantMind = owner.mind
@@ -58,8 +59,9 @@
 	icon = stored_mmi.icon
 
 	stored_mmi.icon_state = "mmi_full"
+	stored_mmi.locked = 1
 	icon_state = stored_mmi.icon_state
-
+	
 	if(owner && owner.stat == DEAD)
 		owner.stat = 0
 		owner.switch_from_dead_to_living_mob_list()
@@ -77,10 +79,12 @@
 		stored_mmi.forceMove(src.loc)
 		if(persistantMind)
 			persistantMind.transfer_to(stored_mmi.brainmob)
+			stored_mmi.backup_to_stack()
 		else
 			var/response = input(find_dead_player(ownerckey, 1), "Your [initial(stored_mmi.name)] has been removed from your body. Do you wish to return to life?", "Robotic Rebirth") as anything in list("Yes", "No")
 			if(response == "Yes")
 				persistantMind.transfer_to(stored_mmi.brainmob)
+				stored_mmi.backup_to_stack()
 	qdel(src)
 
 

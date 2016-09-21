@@ -1473,6 +1473,17 @@
 		return 0
 	return (species && species.has_organ[organ_check])
 
+	
+/**
+ *  Return a true value if the mob can support a stack/neural lace
+ */
+/mob/living/carbon/human/proc/can_have_stack()
+	var/obj/item/organ/external/head = organs_by_name[BP_HEAD]
+	if(head && (head.robotic >= ORGAN_ROBOT))
+		return 0
+		
+	return species && species.spawns_with_stack
+	
 /mob/living/carbon/human/can_feel_pain(var/obj/item/organ/check_organ)
 	if(isSynthetic())
 		return 0
