@@ -46,16 +46,19 @@
 /datum/sprite_accessory/hair
 
 	icon = 'icons/mob/Human_face.dmi'	  // default icon for all hairs
+	var/veryshort						//doesn't need to be hidden by BLOCKHEADHAIR hats/helmets
 
 	bald
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
 		species_allowed = list("Human","Unathi")
+		veryshort = 1
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
 		icon_state = "hair_a" // you do not need to define _s or _l sub-states, game automatically does this for you
+		veryshort = 1
 
 	twintail
 		name = "Twintail"
@@ -79,7 +82,7 @@
 		name = "Resomi Spiky"
 		icon_state = "resomi_spiky"
 		species_allowed = list("Resomi")
-		
+
 
 	resomi_hedgehog
 		name = "Resomi Hedgehog"
@@ -90,7 +93,7 @@
 		name = "Resomi Unpruned"
 		icon_state = "resomi_long"
 		species_allowed = list("Resomi")
-	
+
 	resomi_sunburst
 		name = "Resomi Sunburst" // kill me
 		icon_state = "resomi_burst_short"
@@ -104,6 +107,7 @@
 	cut
 		name = "Cut Hair"
 		icon_state = "hair_c"
+		veryshort = 1
 
 	flair
 		name = "Flaired Hair"
@@ -185,6 +189,7 @@
 	sleeze
 		name = "Sleeze"
 		icon_state = "hair_sleeze"
+		veryshort = 1
 
 	quiff
 		name = "Quiff"
@@ -235,11 +240,13 @@
 		icon_state = "hair_buzzcut"
 		gender = MALE
 		species_allowed = list("Human","Unathi")
+		veryshort = 1
 
 	crew
 		name = "Crewcut"
 		icon_state = "hair_crewcut"
 		gender = MALE
+		veryshort = 1
 
 	combover
 		name = "Combover"
@@ -284,15 +291,18 @@
 	rows
 		name = "Rows"
 		icon_state = "hair_rows1"
+		veryshort = 1
 
 	rows2
 		name = "Rows 2"
 		icon_state = "hair_rows2"
+		veryshort = 1
 
 	sargeant
 		name = "Flat Top"
 		icon_state = "hair_sargeant"
 		gender = MALE
+		veryshort = 1
 
 	emo
 		name = "Emo"
@@ -394,11 +404,13 @@
 	skinhead
 		name = "Skinhead"
 		icon_state = "hair_skinhead"
+		veryshort = 1
 
 	balding
 		name = "Balding Hair"
 		icon_state = "hair_e"
 		gender = MALE // turnoff!
+		veryshort = 1
 
 	familyman
 		name = "The Family Man"
@@ -474,7 +486,7 @@
 	bun
 		name = "Low Bun"
 		icon_state = "hair_bun"
-		
+
 	bun2
 		name = "High Bun"
 		icon_state = "hair_bun2"
@@ -482,10 +494,6 @@
 	doublebun
 		name = "Double-Bun"
 		icon_state = "hair_doublebun"
-
-	bald
-		name = "Bald"
-		icon_state = "bald"
 
 /*
 ///////////////////////////////////
