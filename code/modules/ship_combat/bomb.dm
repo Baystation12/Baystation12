@@ -1,3 +1,4 @@
+/obj/machinery/missile/bomb/move_delay = 10
 /obj/machinery/missile/bomb/fire_missile(var/turf/location)
 	var/obj/machinery/space_battle/tube/T = locate() in loc
 	if(T && T.computer)
@@ -31,6 +32,7 @@
 	width = 1
 	req_grabs = 1
 	spawn_type = /obj/item/missile/ship/bomb
+	damage = 2
 
 /obj/item/missile/ship/bomb/emp
 	name = "electrical bomb"

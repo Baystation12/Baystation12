@@ -15,6 +15,7 @@
 	var/obj/machinery/space_battle/helm/nav_control
 	var/list/eng_controls = list()
 	var/braked = 1
+	density = 1
 
 /obj/effect/overmap/ship/Destroy()
 	current_sector = null
@@ -41,7 +42,7 @@
 			eng_controls += E
 			E.linked = src
 			E.zlevels = map_z
-			E.refresh_engines()
+			E.reconnect()
 			testing("Engines console at level [E.z] linked to overmap object '[name]'.")
 	for(var/obj/machinery/space_battle/helm/H in machines)
 		if (H.z in map_z)

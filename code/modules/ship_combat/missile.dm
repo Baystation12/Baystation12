@@ -60,7 +60,11 @@ var/global/missile_starts = list()
 	var/space_only = 1
 	var/moving = 0
 	var/delay_time = 0
+	var/move_delay = 0
 	var/power = 1
+	var/range = 6
+
+	var/damage = 10 // used for fake ships
 
 	var/spawn_type = /obj/item/missile/ship
 
@@ -149,7 +153,7 @@ var/global/missile_starts = list()
 			H.visible_message("<span class='notice'>[H] begins moving \the [src]..</span>")
 			moving = 1
 			var/N = max(1, (grabs.len - req_grabs) + 1)
-			if(do_after(H, (delay_time*H.species.brute_mod)/N))
+			if(do_after(H, (move_delay*H.species.brute_mod)/N))
 				moving = 0
 				step_to(src, get_step_to(src, get_step(src, direction)))
 				for(var/mob/M in grabs)
@@ -305,42 +309,6 @@ var/global/missile_starts = list()
 			if(S)
 				return Bump(S)
 		return ..()
-
-/obj/item/missile/ship/standard/boom(atom/hit_atom)
-	explosion(hit_atom, 0, (rand(1,3)*power), (rand(3,4)*power), 7)
-	qdel(src)
-	return
-
-/obj/item/missile/ship/heavy/boom(atom/hit_atom)
-	explosion(hit_atom, (rand(1,2)*power), (rand(2,3)*power), (rand(3,5)*power), 7)
-	qdel(src)
-	return
-
-/obj/item/missile/ship/scatter/boom(atom/hit_atom)
-	explosion(hit_atom, 0, 0, (rand(3,6)*power), 7)
-	qdel(src)
-	return
-
-/obj/item/missile/ship/emp/breach
-	ap = 20
-
-	throw_impact(atom/hit_atom, speed)
-		if(speed && ap && target)
-			if(breach())
-				boom(hit_atom)
-		else boom(hit_atom)
-
-	boom(atom/hit_atom)
-		explosion(hit_atom, 0, rand(0,1), rand(0,3), 7)
-		empulse(hit_atom, rand(1,4), rand(5,10))
-		qdel(src)
-		return
-
-/obj/item/missile/ship/emp/external/boom(atom/hit_atom)
-	explosion(hit_atom, 0, rand(0, 1), rand(2,4), 7)
-	empulse(hit_atom, rand(3,6), rand(9,14))
-	qdel(src)
-	return
 
 /obj/item/missile/ship/incend/boom(atom/hit_atom)
 	explosion(hit_atom, 0, 0, rand(0,2), 7)

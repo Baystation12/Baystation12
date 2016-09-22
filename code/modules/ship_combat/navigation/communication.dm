@@ -5,6 +5,8 @@
 	var/list/logs = list()
 	var/ui_state = "home"
 
+	var/obj/machinery/space_battle/missile_sensor/dish/sensor
+
 /obj/machinery/space_battle/communication/initialize()
 	var/area/ship_battle/A = get_area(src)
 	if(A && istype(A))
@@ -21,6 +23,7 @@
 	return 0
 
 /obj/machinery/space_battle/communication/reconnect()
+	if(!linked) return
 	communications.Cut()
 	for(var/obj/machinery/space_battle/communication/C in world)
 		if(!(C.stat &(BROKEN|NOPOWER)) && C.z != src.z)
@@ -28,6 +31,9 @@
 			if(linked && !(linked in communications))
 				communications += linked.name
 				communications["[linked.name]"] = C
+	for(var/obj/machinery/space_battle/missile_sensor/dish/D in linked.fire_sensors)
+		if(D.sensor_id == src.id_tag)
+			sensor = D
 
 /obj/machinery/space_battle/communication/attack_hand(var/mob/user)
 	if(!(stat & (BROKEN|NOPOWER)))
@@ -38,11 +44,18 @@
 	else
 		user << "<span class='warning'>\The [src] is not responding!</span>"
 
+/obj/machinery/space_battle/communication/proc/operational()
+	if(!(stat & (BROKEN|NOPOWER)))
+		if(sensor && sensor.can_sense())
+			return 1
+	return 0
+
 /obj/machinery/space_battle/communication/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = list()
 	var/list/consoles = list()
 	for(var/I in communications)
 		consoles += I
+	data["functional"] = sensor ? sensor.can_sense() : 0
 	data["consoles"] = consoles
 	data["menu"] = ui_state
 	data["logs"] = logs
@@ -70,7 +83,7 @@
 			var/N = communications[i]
 			if(href_list["msg"] == N)
 				console = communications[N]
-		if(!console || console.stat & (BROKEN|NOPOWER))
+		if(!console || !console.operational())
 			usr << "<span class='warning'>It seems to be offline!</span>"
 		else
 			var/obj/effect/overmap/them = map_sectors["[console.z]"]

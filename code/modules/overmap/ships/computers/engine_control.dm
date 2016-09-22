@@ -13,9 +13,10 @@
 
 /obj/machinery/space_battle/engine_control/initialize()
 	..()
-	refresh_engines()
+	spawn(5)
+		reconnect()
 
-/obj/machinery/space_battle/engine_control/proc/refresh_engines()
+/obj/machinery/space_battle/engine_control/reconnect()
 	engines.Cut()
 	for(var/datum/ship_engine/E in ship_engines)
 		if ((E.zlevel in zlevels || E.zlevel == src.z) && E.id_tag == src.id_tag && !(src in engines))
@@ -43,7 +44,7 @@
 		user.set_machine(src)
 
 	if(!engines.len)
-		refresh_engines()
+		reconnect()
 
 	ui_interact(user)
 

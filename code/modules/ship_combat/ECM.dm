@@ -85,13 +85,14 @@
 	needs_dish = 1
 	var/strength = 1
 	idle_power_usage = 200
-	active_power_usage = 500
+	active_power_usage = 10000
 
 	attack_hand(var/mob/user)
 		if(!stat & (BROKEN|NOPOWER))
 			strength++
 			if(strength > 3) strength = 1
 			user << "<span class='notice'>\The [src]'s strength is now: [strength]</span>"
+			active_power_usage = initial(active_power_usage) * strength
 		else return ..()
 
 	can_sense()

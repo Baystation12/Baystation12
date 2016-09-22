@@ -1789,55 +1789,55 @@ CIRCUITS BELOW
 /datum/design/circuit/space_battle/sensor/scanning
 	name = "scanning"
 	id = "scanning_sensor"
-	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/scanning
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanning
 	sort_string = "AAAASBB"
 
 /datum/design/circuit/space_battle/sensor/guidance
 	name = "missile guidance"
 	id = "guidance_sensor"
-	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/guidance
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/guidance
 	sort_string = "AAAASBC"
 
 /datum/design/circuit/space_battle/sensor/advguidance
 	name = "advanced missile guidance"
 	id = "advguidance_sensor"
-	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/advguidance
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/advguidance
 	sort_string = "AAAASBD"
 
 /datum/design/circuit/space_battle/sensor/hub
 	name = "hub"
 	id = "hub_sensor"
-	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/hub
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/hub
 	sort_string = "AAAASBE"
 
 /datum/design/circuit/space_battle/sensor/dish
 	name = "external dish"
 	id = "dish_sensor"
-	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/dish
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/dish
 	sort_string = "AAAASBF"
 
 /datum/design/circuit/space_battle/sensor/radar
 	name = "radar"
 	id = "radar_sensor"
-	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/radar
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/radar
 	sort_string = "AAAASBG"
 
 /datum/design/circuit/space_battle/sensor/microwave
 	name = "microwave"
 	id = "microwave_sensor"
-	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/microwave
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/microwave
 	sort_string = "AAAASBH"
 
 /datum/design/circuit/space_battle/sensor/xray
 	name = "scanning"
 	id = "xray_sensor"
-	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/xray
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/xray
 	sort_string = "AAAASBI"
 
 /datum/design/circuit/space_battle/sensor/thermal
 	name = "thermal"
 	id = "thermal_sensor"
-	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/scanner/thermal
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/thermal
 	sort_string = "AAAASBJ"
 
 /datum/design/circuit/space_battle/engine
@@ -1885,5 +1885,28 @@ CIRCUITS BELOW
 	sort_string = "AAAASBP"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_BLUESPACE = 2)
 
+/datum/design/circuit/space_battle/engine_control
+	name = "engine control"
+	id = "engine_control"
+	build_path = /obj/item/weapon/circuitboard/space_battle/engine_control
+	sort_string = "AAAASBQ"
+
+/datum/design/circuit/space_battle/gravity
+	name = "gravity sensor"
+	id = "gravity_sensor"
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/gravity
+	sort_string = "AAAASBR"
+
+/datum/design/circuit/space_battle/em
+	name = "em sensor"
+	id = "em_sensor"
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/em
+	sort_string = "AAAASBS"
+
+/datum/design/circuit/space_battle/thermal
+	name = "thermal sensor"
+	id = "thermal_sensor"
+	build_path = /obj/item/weapon/circuitboard/space_battle/sensor/thermal
+	sort_string = "AAAASBT"
 
 

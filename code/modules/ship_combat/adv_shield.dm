@@ -63,6 +63,8 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/space_battle/shielding/shield_computer/Topic(href, href_list)
+	if(..())
+		return 1
 	if(href_list["toggle"])
 		generator.online = !generator.online
 	if(href_list["fps"])
@@ -90,8 +92,7 @@
 		new_num = between(0, new_num, generator.shields.len)
 		generator.maintaining_num = new_num
 
-	src.add_fingerprint(usr)
-	nanomanager.update_uis(src)
+	return 1
 
 
 /obj/machinery/space_battle/shielding/shield_generator

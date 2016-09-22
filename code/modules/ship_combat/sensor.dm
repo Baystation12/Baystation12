@@ -21,7 +21,10 @@
 		if(linked)
 			if(!(src in linked.fire_sensors))
 				linked.fire_sensors += src
-		reconnect()
+			if(use_power == 2)
+				linked.em_signature += 1
+		spawn(5)
+			reconnect()
 
 
 	Destroy()
@@ -29,7 +32,7 @@
 		if(dish)
 			dish.linked_sensor = null
 			dish = null
-		if(linked)
+		if(linked && istype(linked))
 			linked.fire_sensors.Remove(src)
 		linked = null
 		return ..()
@@ -101,8 +104,8 @@
 	reconnect()
 		dish = null
 		if(needs_dish)
-			for(var/obj/machinery/space_battle/missile_sensor/dish/D in world)
-				if(D.sensor_id == src.sensor_id && src.z == D.z)
+			for(var/obj/machinery/space_battle/missile_sensor/dish/D in linked.fire_sensors)
+				if(D.sensor_id == src.sensor_id)
 					dish = D
 					D.linked_sensor = src
 					break
@@ -140,11 +143,48 @@
 	reconnect()
 		return 0
 
+	can_sense()
+		var/outcome = ..()
+		if(outcome == 1)
+			var/turf/T
+			var/blocked = 0
+			for(var/i=1 to 7)
+				T = get_step(src, dir)
+				if(istype(T, /turf/simulated/wall))
+					blocked = 1
+					break
+			if(blocked)
+				return "Dish has no radar access to space!"
+			return 1
+		return outcome
+
 	Destroy()
 		if(linked_sensor)
 			linked_sensor.dish = null
 			linked_sensor = null
 		return ..()
+
+/obj/machinery/space_battle/missile_sensor/dish/built/New()
+	..()
+	var/walled = 0
+	for(var/D in cardinal)
+		var/turf/simulated/wall = get_step(src, D)
+		if(wall && istype(wall))
+			dir = reverse_direction(D)
+			walled = 1
+			break
+	if(walled)
+		switch(dir)
+			if(1)
+				pixel_y = -27
+			if(2)
+				pixel_y = 27
+			if(4)
+				pixel_x = -27
+			if(8)
+				pixel_x = 27
+
+
 
 /obj/machinery/space_battle/missile_sensor/guidance // Without it, missiles fire at the enemy ship randomly.
 	name = "missile guidance system"
@@ -157,16 +197,6 @@
 	desc = "Allows the enemy ship to be easily tracked."
 	needs_dish = 1
 	icon_state = "tracker"
-	var/obj/machinery/space_battle/missile_sensor/ship_sensor/target_finder
-
-/obj/machinery/space_battle/missile_sensor/tracking/proc/find_targets()
-	return target_finder.find_targets()
-
-/obj/machinery/space_battle/missile_sensor/tracking/reconnect()
-	for(var/obj/machinery/space_battle/missile_sensor/ship_sensor/T in world)
-		if(T.z == src.z && id_tag && T.id_tag == src.id_tag)
-			target_finder = T
-	..()
 
 /obj/machinery/space_battle/missile_sensor/scanning // Allows the eye nightvision & see_turf
 	name = "ship radar"
@@ -237,8 +267,7 @@
 	return ..()
 
 /obj/machinery/space_battle/missile_sensor/hub/reconnect()
-	if(computer)
-		computer.reconnect()
+	linked = map_sectors["[z]"]
 	for(var/C in linked.fire_controls)
 		var/obj/machinery/space_battle/missile_computer/F = C
 		if(F.id_tag == src.id_tag)
@@ -267,13 +296,15 @@
 				radars.Add(M)
 			if(istype(M, /obj/machinery/space_battle/missile_sensor/ship_sensor) && !sensor)
 				sensor = M
-	rename()
+	if(computer)
+		computer.reconnect()
+		rename()
 	return
 
 /obj/machinery/space_battle/missile_sensor/hub/rename()
+	if(!computer) return 0
 	var/id_num
-	if(linked)
-		id_num = computer.id_num
+	id_num = computer.id_num
 	if(!id_num) return
 	name = "[initial(name)]([id_num])"
 	if(guidance)
@@ -356,8 +387,18 @@
 	return radars
 
 /obj/machinery/space_battle/missile_sensor/hub/proc/get_firing_targets()
-	if(can_sense() && sensor)
-		return sensor.find_targets()
+	if(can_sense() && linked)
+		if(sensor)
+			return sensor.find_targets()
+		else
+			var/list/targets = list()
+			for(var/obj/effect/overmap/S in range(1, linked))
+				targets += S
+				testing("Added [S] to targets")
+			if(targets && targets.len)
+				return targets
+			else
+				return 0
 	return 0
 /****************
 *Overmap Sensors*

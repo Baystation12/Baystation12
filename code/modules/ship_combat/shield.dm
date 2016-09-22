@@ -68,6 +68,8 @@
 			icon_state = "Shield_Gen_active"
 
 /obj/machinery/space_battle/shieldwallgen/Topic(href, href_list)
+	if(..())
+		return 1
 	if(href_list["toggle"])
 		if(src.active >= 1)
 			src.active = 0
@@ -83,8 +85,7 @@
 			usr.visible_message("\The [usr] turned the shield generator on.", \
 				"You turn on the shield generator.", \
 				"You hear heavy droning.")
-	src.add_fingerprint(usr)
-	nanomanager.update_uis(src)
+	return 1
 
 
 /obj/machinery/space_battle/shieldwallgen/ex_act(var/severity)

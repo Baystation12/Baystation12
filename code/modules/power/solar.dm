@@ -1,6 +1,6 @@
 #define SOLAR_MAX_DIST 40
 
-var/solar_gen_rate = 1500
+var/solar_gen_rate = 3000
 var/list/solars_list = list()
 
 /obj/machinery/power/solar

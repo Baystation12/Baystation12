@@ -2,6 +2,7 @@
 		{{:helper.link('Messaging', 'link', {'messaging' : 1}, data.menu == 'messaging' ? 'disabled' : null, 'fixedLeft')}}
 		{{:helper.link('Comms', 'home', {'communication' : 1}, data.menu == 'communication' ? 'disabled' : null, 'fixedLeft')}}
 </div>	
+{{if data.functional == 1}}
 {{if data.menu == "messaging"}}
 	<div class='item'>
 		Available Consoles:<br>
@@ -31,6 +32,11 @@
 <br><hr><br>
 <div class='item'>
 	{{:helper.link('Refresh', 'refresh', { 'refresh' : 1 })}}
-</div>	
+</div>
+{{else}}
+	<div class='item'>
+		<div style='notice'>Unable to broadcast!</div>
+	</div>
+{{/if}}	
 		
 	

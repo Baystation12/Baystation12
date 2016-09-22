@@ -5,8 +5,8 @@
 #define UI_INTERACT "RCON" // Limited to machines with ui_interact
 #define UNLOCK "Bruteforce Encryption Hack"// Limited to machines with ui_interact
 #define DISABLE "Disable Activity" // Limited to Sensors
-#define ADJUST_NETWORK "Sync To Local Network"
-#define SPOOF "Spoof"
+#define ADJUST_NETWORK "Sync To Local Network" // Limited to cameras
+#define SPOOF "Spoof" // Limited to visible objects.
 #define REMOVE "Disconnect"
 
 /obj/machinery/space_battle/hacking
@@ -50,8 +50,9 @@
 	target_teams.Cut()
 	for(var/obj/missile_start/S in missile_starts)
 		if(S.team && S.team != src.team && S.active)
-			if(linked)
-				target_teams.Add("[linked.name]")
+			var/obj/effect/overmap/enemy = map_sectors["[S.z]"]
+			if(enemy)
+				target_teams.Add("[enemy.name]")
 
 	if(target_teams.len)
 		target_team = target_teams[1]
@@ -121,6 +122,8 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/space_battle/hacking/Topic(href, href_list)
+	if(..())
+		return 1
 	if(href_list["hacked"])
 		if(menu != "progress")
 			selected = null
@@ -276,8 +279,7 @@
 					spawn(rand(25,80))
 						src.visible_message("<span class='warning'>\icon[src] \The [src] beeps, \"Hack attempt detected by counter measures. Remote connection to \the [N] has been lost.\"</span>")
 			selected = null
-	src.add_fingerprint(usr)
-	nanomanager.update_uis(src)
+	return 1
 
 /obj/machinery/space_battle/hacking/proc/selected_action_types()
 	if(!selected)

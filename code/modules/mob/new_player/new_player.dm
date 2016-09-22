@@ -290,9 +290,19 @@
 		src << alert("[rank] is not available. Please try another.")
 		return 0
 
-	
-	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, rank)
-	var/turf/spawn_turf = pick(spawnpoint.turfs)
+	var/team = 0
+	var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
+	for(var/datum/job/space_battle/job in all_jobs)
+		if(job.title == rank)
+			team = job.team
+	var/obj/machinery/space_battle/ship_core/has_core
+	var/turf/spawn_turf
+	for(var/obj/team_start/S in world)
+		var/area/ship_battle/A = get_area(S)
+		if(A && istype(A))
+			if(A.team == team)
+				spawn_turf = get_turf(S)
+
 	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
 	if(airstatus)
 		var/reply = alert(usr, "Warning. Your selected spawn location seems to have unfavorable atmospheric conditions. \
@@ -308,13 +318,6 @@
 		if(!IsJobAvailable(rank))
 			src << alert("[rank] is not available. Please try another.")
 			return 0
-
-	var/team = 0
-	var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
-	for(var/datum/job/space_battle/job in all_jobs)
-		if(job.title == rank)
-			team = job.team
-	var/obj/machinery/space_battle/ship_core/has_core
 	if(team)
 		for(var/obj/machinery/space_battle/ship_core/S in world)
 			if(S.team == team)
@@ -369,9 +372,9 @@
 
 			//Grab some data from the character prefs for use in random news procs.
 
-			AnnounceArrival(character, rank, spawnpoint.msg)
+			AnnounceArrival(character, rank, "has teleported in")
 		else
-			AnnounceCyborg(character, rank, spawnpoint.msg)
+			AnnounceCyborg(character, rank, "has teleported in")
 
 	qdel(src)
 

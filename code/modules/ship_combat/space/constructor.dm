@@ -5,6 +5,7 @@
 	var/list/designs = list()
 	var/datum/space_construction/current_design
 	var/list/holding = list()
+	var/building = 0
 
 /obj/machinery/space_battle/space_construction/New()
 	..()
@@ -20,6 +21,12 @@
 		else
 			qdel(blueprint)
 	return designs.len
+
+/obj/machinery/space_battle/space_construction/update_icon()
+	if(stat & (BROKEN|NOPOWER)) return ..()
+	else
+		if(building) icon_state = "constructor_building"
+		else icon_state = "constructor"
 
 /obj/machinery/space_battle/space_construction/proc/refund_materials(var/mob/user)
 	for(var/material_name in current_design.required_materials)
@@ -40,7 +47,23 @@
 	holding.Cut()
 
 /obj/machinery/space_battle/space_construction/attack_hand(var/mob/user)
+	if(stat & (BROKEN|NOPOWER)) return
 	if(current_design)
+		if(building == 2)
+			if(current_design.complete(src, user))
+				user << "<span class='notice'>Construction of [current_design.name] successful!</span>"
+				current_design.required_materials = initial(current_design.required_materials)
+				current_design.required_items = initial(current_design.required_items)
+				current_design = null
+			else
+				user << "<span class='warning'>Unable to create design!</span>"
+				refund_materials(user)
+			building = 0
+			update_icon()
+			return
+		else if(building)
+			user << "<span class='warning'>\The [src] is currently busy!</span>"
+			return
 		var/yes = alert(user, "\The [src] already has a design loaded. Are you sure you want to override it?", "Construction", "No", "Yes")
 		if(yes == "No") return 0
 	var/list/choices = list()
@@ -54,7 +77,6 @@
 	if(selected && istype(selected))
 		current_design = selected
 		user.visible_message("<span class='notice'>\The [user] sets \the [src] to construct a [current_design.name]!</span>")
-
 	else
 		user << "<span class='warning'>You've selected an invalid choice!</span>"
 		return 0
@@ -77,12 +99,10 @@
 				current_design.required_materials["[S.material.name]"] -= amount_to_take
 				if(current_design.check_complete())
 					src.visible_message("<span class='warning'>\The [src] begins assembling \the [current_design.name]!</span>")
-					if(current_design.complete(src, user))
-						current_design.required_materials = initial(current_design.required_materials)
-						current_design = null
-					else
-						user << "<span class='warning'>Error creating design!</span>"
-						refund_materials(user)
+					building = 1
+					update_icon()
+					spawn(current_design.required_time*10)
+						building = 2
 	else if(is_type_in_list(I, current_design.required_items))
 		if(!(I.type in current_design.required_items))
 			user << "<span class='notice'>\The [src] does not need anymore [I.name]!</span>"
@@ -155,8 +175,8 @@ DESIGNS*
 	name = "FTL Jammer"
 	required_materials = list("plasteel" = 150, "rglass" = 50, "plastic" = 10)
 	required_time = 600
-	required_items = list(/obj/item/weapon/circuitboard/space_battle/sensor/scanner/hub = 1, \
-								   /obj/item/weapon/circuitboard/space_battle/sensor/scanner/dish = 4)
+	required_items = list(/obj/item/weapon/circuitboard/space_battle/sensor/hub = 1, \
+								   /obj/item/weapon/circuitboard/space_battle/sensor/dish = 4)
 
 /datum/space_construction/jammer/complete(var/obj/machinery/space_battle/space_construction/creator)
 	var/obj/effect/overmap/linked = map_sectors["[creator.z]"]
@@ -272,28 +292,38 @@ DESIGNS*
 	required_time = 500
 	required_items = list(/obj/item/weapon/circuitboard/space_battle/warp_pad = 1)
 
-/datum/space_construction/blockade/complete(var/obj/machinery/space_battle/space_construction/creator)
+/datum/space_construction/warp_gate/complete(var/obj/machinery/space_battle/space_construction/creator, var/mob/user)
+	var/warp_id = input(user, "What would you like the warp gate's ID to be?", "Construction")
 	var/obj/effect/overmap/linked = map_sectors["[creator.z]"]
-	if(linked)
-		var/obj/effect/overmap/station/blockade/created = new
-		created.forceMove(get_turf(linked))
-		created.team = 0
+	if(linked && warp_id && length(warp_id) <= 25)
+		new /obj/effect/overmap/station/warp_gate(get_turf(linked), warp_id, linked.team)
 		return 1
 	return 0
 
-/obj/effect/overmap/station/blockade
+/obj/effect/overmap/station/warp_gate
 	name = "blockade"
 	desc = "A solid chunk of metal. You shall not pass!"
 	icon = 'icons/obj/ship_battles.dmi'
-	icon_state = "asteroid_large"
+	icon_state = "warp_pad"
 	density = 1
+	var/obj/effect/overmap/station/warp_gate/destination
+	var/warp_id
+	var/teleporting = 0
 
-/obj/effect/overmap/station/blockade/New()
+/obj/effect/overmap/station/warp_gate/New(var/new_team, var/id_tag)
 	..()
-	processing_objects.Add(src)
-	fake_ship = new /datum/fake_ship/blockade(src)
-	fake_ship.team = 0
+	warp_id = id_tag
+	team = new_team
+	for(var/obj/effect/overmap/station/warp_gate/G in world)
+		if(G.warp_id == src.warp_id && G.team == src.team)
+			destination = G
+			break
 
-/datum/fake_ship/blockade
-	health = 200
-	maxhealth = 200
+/obj/effect/overmap/station/warp_gate/Crossed(var/atom/A)
+	..()
+	if(istype(A, /obj/effect/overmap/ship) && !teleporting)
+		var/obj/effect/overmap/ship/S = A
+		if(S.team == src.team)
+			destination.teleporting = 1
+			S.forceMove(get_turf(destination))
+			spawn(0) destination.teleporting = 0

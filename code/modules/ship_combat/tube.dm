@@ -32,7 +32,8 @@
 		..()
 
 	rename()
-		name = "[initial(name)][computer.id_num]"
+		if(computer)
+			name = "[initial(name)][computer.id_num]"
 
 /obj/machinery/space_battle/tube/proc/jammed()
 	if(!barrel)
@@ -221,9 +222,8 @@
 /obj/machinery/space_battle/tube_barrel
 	name = "firing tube"
 	icon = 'icons/obj/ship_battles.dmi'
-	icon_state = "rail"
-	density = 0
-	resistance = 5
+	icon_state = "barrel"
+	density = 1
 
 	idle_power_usage = 1
 	power_channel = EQUIP
@@ -233,6 +233,9 @@
 	var/current_charge = 0
 	active_power_usage = 20
 	var/obj/machinery/space_battle/tube/tube
+	has_circuit = 0
+	can_be_destroyed = 0
+	max_damage = 3
 
 
 	New()
@@ -271,9 +274,10 @@
 				icon_state = initial(icon_state)
 		else return ..()
 
-/obj/machinery/space_battle/tube_barrel/ex_act()
-	current_charge = 0
-	..()
+/obj/machinery/space_battle/tube_barrel/ex_act(var/severity)
+	if(severity == 1 || (severity == 2 && prob(50)))
+		current_charge = 0
+		..()
 
 /obj/machinery/space_battle/tube_barrel/proc/fired()
 	current_charge = 0

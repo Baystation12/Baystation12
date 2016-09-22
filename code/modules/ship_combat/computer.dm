@@ -77,6 +77,7 @@
 		return round(time)
 
 	rename()
+		if(!linked) return 0
 		var/team = 0
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
@@ -118,33 +119,32 @@
 			return "Nothing in range!"
 		var/area/ship_battle/us = get_area(src)
 		if(!istype(us)) return "Fatal error!"
-		for(var/M in missile_starts)
-			var/obj/missile_start/S = M
-			for(var/i=1 to targettable_z_levels.len)
-				if(S.z == text2num(targettable_z_levels[i]))
-					S.refresh_active()
-					if(!S.active) continue
-					var/area/ship_battle/enemy = get_area(S)
-					if(!istype(enemy))
-						continue
-					if(enemy.team != us.team)
-						starts += S
+		for(var/obj/effect/overmap/S in targettable_z_levels)
+			if(S.fake_ship)
+				starts += S.fake_ship
+			else if(S.team != src.team)
+				for(var/A in missile_starts)
+					var/obj/missile_start/M = A
+					if(M.z in S.map_z)
+						starts += M
+		return "Unknown Error!"
 
 	proc/get_firing_targets()
 		return sensor ? sensor.get_firing_targets() : 0
 
 
 	reconnect()
+		if(!linked) return 0
 		for(var/obj/machinery/space_battle/tube/T in world)
 			if(T.id_tag == id_tag && T.z == src.z)
 				tube = T
-				T.linked = src
+				T.computer = src
 				break
 		for(var/M in linked.fire_sensors)
 			var/obj/machinery/space_battle/missile_sensor/hub/S = M
-			if(S.id_tag == id_tag)
+			if(S && istype(S) && S.id_tag == id_tag)
 				sensor = S
-				S.linked = src
+				S.computer = src
 				break
 		if(!tube)
 			for(var/obj/machinery/space_battle/deck_gun/G in world)
@@ -198,8 +198,35 @@
 		var/choice = input(user, "Which ship would you like to view?", "Targetting") in choices
 		var/obj/missile_start/start = choices[choice]
 		if(!start || !istype(start))
+			if(istype(start, /datum/fake_ship))
+				var/datum/fake_ship/fake_ship = start
+				var/obj/machinery/missile/loaded = locate() in get_turf(tube)
+				if(loaded && istype(loaded))
+					fake_ship.damaged(loaded.damage)
+					var/list/R = sensor.has_radars()
+					var/radar = 0
+					for(var/obj/machinery/space_battle/missile_sensor/radar/M in R)
+						if(M.can_sense())
+							radar += M.get_efficiency(1,1,1)
+						else
+							user << "<span class='danger'>NOTICE: [M.name] inactive: [M.can_sense()]!</span>"
+					radar = max(1, radar)
+					var/wait_time = MISSILE_COOLDOWN
+					switch(tube.dir)
+						if(8)
+							wait_time *= 1.75
+						if(1 to 2)
+							wait_time *= 1.25
+					wait_time = max(50, wait_time / radar)
+					if(loaded && istype(loaded))
+						wait_time += loaded.delay_time
+					wait_time = cooldown(wait_time)
+					user << "<span class='notice'>Sensors are now calibrating. Please wait [(wait_time / 10)] seconds.</span>"
+					qdel(loaded)
+					return
 			user << "<span class='warning'>Invalid sensor target!</span>"
 			return
+
 		var/mob/missile_eye/M = new()
 
 
@@ -476,6 +503,12 @@
 		var/obj/machinery/missile/loaded = locate() in get_turf(linked.tube)
 		var/wait_time = MISSILE_COOLDOWN
 		var/processed = 0
+		var/obj/effect/overmap/them = map_sectors["[T.z]"]
+		var/obj/effect/overmap/us = map_sectors["[linked.z]"]
+		var/missile_range = round(loaded.range * efficiency * guidance_efficiency)
+		if(get_dist(them, us) > missile_range)
+			src << "<span class='warning'>\The [them] is out of missile firing range! (Your range is currently [missile_range])</span>"
+			return 0
 		if(linked.firing_angle == "Underhand")
 			processed = 1
 			if(!guidance)

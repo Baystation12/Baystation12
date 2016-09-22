@@ -84,13 +84,15 @@
 	var/obj/structure/cable/C = T.get_cable_node()
 	if(C)	powernet = C.powernet
 	if(powernet)
-		stored_charge += powernet.draw_power(1 KILOWATTS)
+		stored_charge += powernet.draw_power(5 KILOWATTS)
 	for(var/obj/machinery/space_battle/laser_feed/feed in orange(1))
 		stored_charge += feed.charge()
 
 /obj/machinery/space_battle/laser_emitter/proc/fire_laser(var/obj/effect/overmap/target)
 	if(stat & BROKEN)
 		return "<span class='warning'>Emitter apparatus damaged!</span>"
+	if(!stored_charge)
+		return "<span class='warning'>Emitter has no charge!</span>"
 	if(!sensor || !sensor.can_sense())
 		return "<span class='warning'>Sensor inactive: [sensor ? sensor.can_sense() : "No sensor linked!"]</span>"
 	var/base_damage = round(stored_charge / 5000)
@@ -158,7 +160,7 @@
 	var/obj/structure/cable/C = T.get_cable_node()
 	if(C)	powernet = C.powernet
 	if(powernet)
-		return powernet.draw_power(10 KILOWATTS)
+		return powernet.draw_power(15 KILOWATTS)
 	return 0
 
 
