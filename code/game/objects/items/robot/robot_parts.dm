@@ -270,6 +270,7 @@
 			src.wires = 1.0
 			user << "<span class='notice'>You insert the wire!</span>"
 	if(istype(W, /obj/item/robot_parts/head))
+		var/obj/item/robot_parts/head/head_part = W
 		// Attempt to create full-body prosthesis.
 		var/success = 1
 		if(!src.wires)
@@ -278,11 +279,10 @@
 		if(!src.cell)
 			user << "<span class='warning'>You need to attach a cell to it first!</span>"
 			success = 0
-		if(!(W:flash2 && W:flash1))
+		if(!(head_part.flash2 && head_part.flash1))
 			user << "<span class='warning'>You need to attach a flash to it first!</span>"
 			success = 0
 		if (success)
-			var/obj/item/robot_parts/head/head_part = W
 			
 			// Species selection.
 			var/species = input(user, "Select a species for the prosthetic.") as null|anything in playable_species
@@ -290,11 +290,11 @@
 				species = "Human"
 			var/name = sanitizeSafe(input(user,"Set a name for the new prosthetic."), MAX_NAME_LEN)
 			if(!name)
-				name = "prosthetic ([rand(0,999)])"
+				name = "prosthetic ([random_id("prosthetic_id", 1, 999)])"
 
 			// Create a new, nonliving human.
 			var/mob/living/carbon/human/H = new /mob/living/carbon/human(loc)
-			H.stat = DEAD
+			H.death(0, "no message")
 			H.set_species(species)
 			H.fully_replace_character_name(name)
 
