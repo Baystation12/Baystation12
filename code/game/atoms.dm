@@ -283,7 +283,7 @@ its easier to just keep the beam vertical.
 	if(!ignoregloves && ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if (H.gloves && H.gloves != src)
-			H.gloves.add_fingerprint(src)
+			H.gloves.add_fingerprint(M)
 			if(!istype(H.gloves, /obj/item/clothing/gloves/latex))
 				return 0
 			else if(prob(75))
