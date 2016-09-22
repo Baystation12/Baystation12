@@ -1,0 +1,7 @@
+author: Daranz
+delete-after: True
+
+changes: 
+  - tweak: "MMIs now both accept and require neural laces. All FBPs and non-humanoid cyborgs spawn with MMIs with laces in them."
+  - tweak: "In order to put someone in an MMI, put both a brain and a neural lace in it. Brain can be anyone's, neural lace should be from the the person to be put in the MMI."
+  - tweak: "Removal of lace or brain from the MMI deactivates the MMI. The lace can be used to resleeve the individual in either an MMI or an organic sleeve."
