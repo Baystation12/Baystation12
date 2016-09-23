@@ -174,6 +174,59 @@
 		if((0 < beard) && (beard <= facial_hair_styles_list.len))
 			H.f_style = facial_hair_styles_list[beard]
 
+//EROS START
+		H.r_genital   = dna.GetUIValueRange(DNA_UI_GENITAL_R,    255)
+		H.g_genital   = dna.GetUIValueRange(DNA_UI_GENITAL_G,    255)
+		H.b_genital   = dna.GetUIValueRange(DNA_UI_GENITAL_B,    255)
+
+		H.r_wings   = dna.GetUIValueRange(DNA_UI_WINGS_R,    255)
+		H.g_wings   = dna.GetUIValueRange(DNA_UI_WINGS_G,    255)
+		H.b_wings   = dna.GetUIValueRange(DNA_UI_WINGS_B,    255)
+
+		H.r_ears   = dna.GetUIValueRange(DNA_UI_EARS_R,    255)
+		H.g_ears   = dna.GetUIValueRange(DNA_UI_EARS_G,    255)
+		H.b_ears   = dna.GetUIValueRange(DNA_UI_EARS_B,    255)
+
+		H.r_tail   = dna.GetUIValueRange(DNA_UI_TAIL_R,    255)
+		H.g_tail   = dna.GetUIValueRange(DNA_UI_TAIL_G,    255)
+		H.b_tail   = dna.GetUIValueRange(DNA_UI_TAIL_B,    255)
+
+		//Tits
+		var/breast = dna.GetUIValueRange(DNA_UI_BREAST_TYPE,body_breast_list.len)
+		if((0 < breast) && (breast <= body_breast_list.len))
+			H.c_type = body_breast_list[breast]
+
+		//Dicks
+		var/dick = dna.GetUIValueRange(DNA_UI_PENIS_TYPE,body_dicks_list.len)
+		if((0 < dick) && (dick <= body_dicks_list.len))
+			H.d_type = body_dicks_list[dick]
+
+		//Vagina
+		var/vagina = dna.GetUIValueRange(DNA_UI_VAGINA_TYPE,body_vaginas_list.len)
+		if((0 < vagina) && (vagina <= body_vaginas_list.len))
+			H.v_type = body_vaginas_list[vagina]
+
+		//Ears
+		var/ears = dna.GetUIValueRange(DNA_UI_EARS,body_ears_list.len)
+		if((0 < ears) && (ears <= body_ears_list.len))
+			H.ears_type = body_ears_list[ears]
+
+		//Wings
+		var/wings = dna.GetUIValueRange(DNA_UI_WINGS,body_wings_list.len)
+		if((0 < wings) && (wings <= body_wings_list.len))
+			H.wings_type = body_wings_list[wings]
+
+		//Tail
+		var/tail = dna.GetUIValueRange(DNA_UI_TAIL,body_tails_list.len)
+		if((0 < tail) && (tail <= body_tails_list.len))
+			H.tail_type = body_tails_list[tail]
+
+		H.update_wings()
+		H.update_ears()
+		H.update_genitals_showing()
+		H.update_tail_showing()
+//EROS FINISH
+
 		H.force_update_limbs()
 		H.update_body()
 		H.update_eyes()

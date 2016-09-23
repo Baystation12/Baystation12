@@ -9,8 +9,8 @@
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_RESOMI)
 	name_language = LANGUAGE_RESOMI
-	min_age = 12
-	max_age = 45
+	min_age = 18
+	max_age = 65
 	health_hud_intensity = 3
 
 	blood_color = "#D514F7"
@@ -27,7 +27,7 @@
 	blood_mask = 'icons/mob/human_races/masks/blood_resomi.dmi'
 
 	slowdown = -1
-	total_health = 50
+	total_health = 60
 	brute_mod = 1.35
 	burn_mod =  1.35
 	metabolism_mod = 2.0
@@ -39,7 +39,7 @@
 	hunger_factor = 0.2
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
-	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_BIOMODS
 	bump_flag = MONKEY
 	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL|ALIEN

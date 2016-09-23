@@ -90,14 +90,14 @@ var/list/limb_icon_cache = list()
 		icon_cache_key += "_tone_[s_tone]"
 	else
 		if(s_col && s_col.len >= 3)
-			mob_icon.Blend(rgb(s_col[1], s_col[2], s_col[3]), ICON_ADD)
+			mob_icon.Blend(rgb(s_col[1], s_col[2], s_col[3]), ICON_MULTIPLY)
 			icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]"
 
 	if(body_hair && islist(h_col) && h_col.len >= 3)
 		var/cache_key = "[body_hair]-[icon_name]-[h_col[1]][h_col[2]][h_col[3]]"
 		if(!limb_icon_cache[cache_key])
 			var/icon/I = icon(species.icobase, "[icon_name]_[body_hair]")
-			I.Blend(rgb(h_col[1],h_col[2],h_col[3]), ICON_ADD)
+			I.Blend(rgb(h_col[1],h_col[2],h_col[3]), ICON_MULTIPLY)
 			limb_icon_cache[cache_key] = I
 		mob_icon.Blend(limb_icon_cache[cache_key], ICON_OVERLAY)
 
@@ -131,7 +131,7 @@ var/list/limb_icon_cache = list()
 			if(facial_hair_style && facial_hair_style.species_allowed && (species.get_bodytype() in facial_hair_style.species_allowed))
 				var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
 				if(facial_hair_style.do_colouration)
-					facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), ICON_ADD)
+					facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), ICON_MULTIPLY)
 				overlays |= facial_s
 
 		if(owner.h_style && !(owner.head && (owner.head.flags_inv & BLOCKHEADHAIR)))
@@ -139,7 +139,7 @@ var/list/limb_icon_cache = list()
 			if(hair_style && (species.get_bodytype() in hair_style.species_allowed))
 				var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
 				if(hair_style.do_colouration && islist(h_col) && h_col.len >= 3)
-					hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), ICON_ADD)
+					hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), ICON_MULTIPLY)
 				overlays |= hair_s
 
 	return mob_icon

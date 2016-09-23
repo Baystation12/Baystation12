@@ -41,6 +41,10 @@
 	human_mob_list |= src
 	..()
 
+	hide_underwear.Cut()
+	for(var/category in global_underwear.categories_by_name)
+		hide_underwear[category] = FALSE
+
 	if(dna)
 		dna.ready_dna(src)
 		dna.real_name = real_name
@@ -1390,6 +1394,23 @@
 		get_scooped(H, (usr == src))
 		return
 	return ..()
+
+/mob/living/carbon/human/verb/toggle_underwear()
+	set name = "Toggle Underwear"
+	set desc = "Shows/hides selected parts of your underwear."
+	set category = "Object"
+
+	if(stat) return
+	var/datum/category_group/underwear/UWC = input(usr, "Choose underwear:", "Show/hide underwear") as null|anything in global_underwear.categories
+	var/datum/category_item/underwear/UWI = all_underwear[UWC.name]
+	if(!UWI || UWI.name == "None")
+		src << "<span class='notice'>You do not have [UWC.gender==PLURAL ? "[UWC.display_name]" : "\a [UWC.display_name]"].</span>"
+		return
+	hide_underwear[UWC.name] = !hide_underwear[UWC.name]
+	update_underwear(1)
+	update_genitals_showing()
+	src << "<span class='notice'>You [hide_underwear[UWC.name] ? "take off" : "put on"] your [UWC.display_name].</span>"
+	return
 
 /mob/living/carbon/human/verb/pull_punches()
 	set name = "Pull Punches"

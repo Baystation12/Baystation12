@@ -46,12 +46,13 @@
 /datum/sprite_accessory/hair
 
 	icon = 'icons/mob/Human_face.dmi'	  // default icon for all hairs
+	species_allowed = list("Human","Unathi","Akula","Lamia", "Machine")
 
 	bald
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula","Lamia", "Machine")
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
@@ -79,7 +80,7 @@
 		name = "Resomi Spiky"
 		icon_state = "resomi_spiky"
 		species_allowed = list("Resomi")
-		
+
 
 	resomi_hedgehog
 		name = "Resomi Hedgehog"
@@ -90,7 +91,7 @@
 		name = "Resomi Unpruned"
 		icon_state = "resomi_long"
 		species_allowed = list("Resomi")
-	
+
 	resomi_sunburst
 		name = "Resomi Sunburst" // kill me
 		icon_state = "resomi_burst_short"
@@ -148,7 +149,6 @@
 	ponytail2
 		name = "Ponytail 2"
 		icon_state = "hair_pa"
-		gender = FEMALE
 
 	ponytail3
 		name = "Ponytail 3"
@@ -157,13 +157,10 @@
 	ponytail4
 		name = "Ponytail 4"
 		icon_state = "hair_ponytail4"
-		gender = FEMALE
 
 	ponytail5
 		name = "Ponytail 5"
 		icon_state = "hair_ponytail5"
-		gender = FEMALE
-
 	fringetail
 		name = "Fringetail"
 		icon_state = "hair_fringetail"
@@ -171,7 +168,6 @@
 	sideponytail
 		name = "Side Ponytail"
 		icon_state = "hair_stail"
-		gender = FEMALE
 
 	parted
 		name = "Parted"
@@ -180,7 +176,6 @@
 	pompadour
 		name = "Pompadour"
 		icon_state = "hair_pompadour"
-		gender = MALE
 
 	sleeze
 		name = "Sleeze"
@@ -189,7 +184,6 @@
 	quiff
 		name = "Quiff"
 		icon_state = "hair_quiff"
-		gender = MALE
 
 	bedhead
 		name = "Bedhead"
@@ -206,55 +200,45 @@
 	beehive
 		name = "Beehive"
 		icon_state = "hair_beehive"
-		gender = FEMALE
 
 	beehive2
 		name = "Beehive 2"
 		icon_state = "hair_beehive2"
-		gender = FEMALE
 
 	bobcurl
 		name = "Bobcurl"
 		icon_state = "hair_bobcurl"
-		gender = FEMALE
 		species_allowed = list("Human","Unathi")
 
 	bob
 		name = "Bob"
 		icon_state = "hair_bobcut"
-		gender = FEMALE
 		species_allowed = list("Human","Unathi")
 
 	bowl
 		name = "Bowl"
 		icon_state = "hair_bowlcut"
-		gender = MALE
 
 	buzz
 		name = "Buzzcut"
 		icon_state = "hair_buzzcut"
-		gender = MALE
 		species_allowed = list("Human","Unathi")
 
 	crew
 		name = "Crewcut"
 		icon_state = "hair_crewcut"
-		gender = MALE
 
 	combover
 		name = "Combover"
 		icon_state = "hair_combover"
-		gender = MALE
 
 	father
 		name = "Father"
 		icon_state = "hair_father"
-		gender = MALE
 
 	reversemohawk
 		name = "Reverse Mohawk"
 		icon_state = "hair_reversemohawk"
-		gender = MALE
 
 	devillock
 		name = "Devil Lock"
@@ -279,7 +263,6 @@
 	afro_large
 		name = "Big Afro"
 		icon_state = "hair_bigafro"
-		gender = MALE
 
 	rows
 		name = "Rows"
@@ -292,7 +275,6 @@
 	sargeant
 		name = "Flat Top"
 		icon_state = "hair_sargeant"
-		gender = MALE
 
 	emo
 		name = "Emo"
@@ -301,7 +283,6 @@
 	longemo
 		name = "Long Emo"
 		icon_state = "hair_emolong"
-		gender = FEMALE
 
 	shortovereye
 		name = "Overeye Short"
@@ -322,7 +303,6 @@
 	hitop
 		name = "Hitop"
 		icon_state = "hair_hitop"
-		gender = MALE
 
 	mohawk
 		name = "Mohawk"
@@ -331,17 +311,14 @@
 	jensen
 		name = "Adam Jensen Hair"
 		icon_state = "hair_jensen"
-		gender = MALE
 
 	gelled
 		name = "Gelled Back"
 		icon_state = "hair_gelled"
-		gender = FEMALE
 
 	gentle
 		name = "Gentle"
 		icon_state = "hair_gentle"
-		gender = FEMALE
 
 	spiky
 		name = "Spiky"
@@ -354,42 +331,34 @@
 	kagami
 		name = "Pigtails"
 		icon_state = "hair_kagami"
-		gender = FEMALE
 
 	himecut
 		name = "Hime Cut"
 		icon_state = "hair_himecut"
-		gender = FEMALE
 
 	braid
 		name = "Floorlength Braid"
 		icon_state = "hair_braid"
-		gender = FEMALE
 
 	mbraid
 		name = "Medium Braid"
 		icon_state = "hair_shortbraid"
-		gender = FEMALE
 
 	braid2
 		name = "Long Braid"
 		icon_state = "hair_hbraid"
-		gender = FEMALE
 
 	odango
 		name = "Odango"
 		icon_state = "hair_odango"
-		gender = FEMALE
 
 	ombre
 		name = "Ombre"
 		icon_state = "hair_ombre"
-		gender = FEMALE
 
 	updo
 		name = "Updo"
 		icon_state = "hair_updo"
-		gender = FEMALE
 
 	skinhead
 		name = "Skinhead"
@@ -398,62 +367,50 @@
 	balding
 		name = "Balding Hair"
 		icon_state = "hair_e"
-		gender = MALE // turnoff!
 
 	familyman
 		name = "The Family Man"
 		icon_state = "hair_thefamilyman"
-		gender = MALE
 
 	mahdrills
 		name = "Drillruru"
 		icon_state = "hair_drillruru"
-		gender = FEMALE
 
 	dandypomp
 		name = "Dandy Pompadour"
 		icon_state = "hair_dandypompadour"
-		gender = MALE
 
 	poofy
 		name = "Poofy"
 		icon_state = "hair_poofy"
-		gender = FEMALE
 
 	crono
 		name = "Chrono"
 		icon_state = "hair_toriyama"
-		gender = MALE
 
 	vegeta
 		name = "Vegeta"
 		icon_state = "hair_toriyama2"
-		gender = MALE
 
 	cia
 		name = "CIA"
 		icon_state = "hair_cia"
-		gender = MALE
 
 	mulder
 		name = "Mulder"
 		icon_state = "hair_mulder"
-		gender = MALE
 
 	scully
 		name = "Scully"
 		icon_state = "hair_scully"
-		gender = FEMALE
 
 	nitori
 		name = "Nitori"
 		icon_state = "hair_nitori"
-		gender = FEMALE
 
 	joestar
 		name = "Joestar"
 		icon_state = "hair_joestar"
-		gender = MALE
 
 	volaju
 		name = "Volaju"
@@ -474,7 +431,7 @@
 	bun
 		name = "Low Bun"
 		icon_state = "hair_bun"
-		
+
 	bun2
 		name = "High Bun"
 		icon_state = "hair_bun2"

@@ -19,9 +19,33 @@
 	var/s_tone = 0	//Skin tone
 
 	//Skin colour
-	var/r_skin = 0
-	var/g_skin = 0
-	var/b_skin = 0
+	var/r_skin = 255
+	var/g_skin = 220
+	var/b_skin = 170
+
+//EROS START
+	//Gender stuff
+	var/c_type = "None"  //breasts
+	var/d_type = "None"  //dicks
+	var/v_type = "None"  //vagina
+	var/r_genital = 255
+	var/g_genital = 220
+	var/b_genital = 170
+
+	//Extras
+	var/ears_type = "None"
+	var/wings_type = "None"
+	var/tail_type = "None"
+	var/r_wings = 200
+	var/g_wings = 200
+	var/b_wings = 200
+	var/r_ears = 200
+	var/g_ears = 200
+	var/b_ears = 200
+	var/r_tail = 200
+	var/g_tail = 200
+	var/b_tail = 200
+//EROS FINISH
 
 	var/size_multiplier = 1 //multiplier for the mob's icon size
 	var/damage_multiplier = 1 //multiplies melee combat damage
@@ -34,6 +58,7 @@
 
 	var/list/all_underwear = list()
 	var/list/all_underwear_metadata = list()
+	var/list/hide_underwear = list()
 	var/backbag = 2		//Which backpack type the player has chosen. Nothing, Satchel or Backpack.
 
 	// General information

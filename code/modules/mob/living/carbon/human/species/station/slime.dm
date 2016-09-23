@@ -9,10 +9,12 @@
 	language = null //todo?
 	unarmed_types = list(/datum/unarmed_attack/slime_glomp)
 	flags = NO_SCAN | NO_SLIP | NO_EMBED
-	spawn_flags = IS_RESTRICTED
+	appearance_flags = HAS_SKIN_COLOR | HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_BIOMODS
+	spawn_flags = CAN_JOIN
 	siemens_coefficient = 3 //conductive
 	darksight = 3
 	health_hud_intensity = 2
+	num_alternate_languages = 3
 
 	blood_color = "#05FF9B"
 	flesh_color = "#05FFFB"

@@ -51,6 +51,30 @@ datum/preferences
 	var/list/language_prefixes = list() //Kanguage prefix keys
 	var/list/gear						//Custom/fluff item loadout.
 
+//EROS START
+	var/c_type = "None"					//Breast Type
+	var/d_type = "None"					//Dick Type
+	var/v_type = "None"					//Vagina Type
+	var/r_genital = 255					//Genitals color
+	var/g_genital = 220					//Genitals color
+	var/b_genital = 177					//Genitals color
+	var/r_boobs = 255					//Boobs color
+	var/g_boobs = 220					//Boobs color
+	var/b_boobs = 177					//Boobs color
+	var/ears_type = "None"				//Ears Type
+	var/wings_type = "None"				//Wings Type
+	var/tail_type = "None"				//Tail Type
+	var/r_wings = 200					//Wings color
+	var/g_wings = 200					//Wings color
+	var/b_wings = 200					//Wings color
+	var/r_ears = 200					//Ears color
+	var/g_ears = 200					//Ears color
+	var/b_ears = 200					//Ears color
+	var/r_tail = 200					//Tail color
+	var/g_tail = 200					//Tail color
+	var/b_tail = 200					//Tail color
+//EROS FINISH
+
 		//Some faction information.
 	var/home_system = "Unset"           //System of birth.
 	var/citizenship = "None"            //Current home system.
@@ -295,6 +319,32 @@ datum/preferences
 
 	character.h_style = h_style
 	character.f_style = f_style
+
+//EROS START
+	character.c_type = c_type
+	character.d_type = d_type
+	character.v_type = v_type
+
+	character.r_genital = r_genital
+	character.g_genital = g_genital
+	character.b_genital = b_genital
+
+	character.r_wings = r_wings
+	character.g_wings = g_wings
+	character.b_wings = b_wings
+
+	character.r_ears = r_ears
+	character.g_ears = g_ears
+	character.b_ears = b_ears
+
+	character.r_tail = r_tail
+	character.g_tail = g_tail
+	character.b_tail = b_tail
+
+	character.wings_type = wings_type
+	character.ears_type = ears_type
+	character.tail_type = tail_type
+//EROS FINISH
 
 	// Replace any missing limbs.
 	for(var/name in BP_ALL_LIMBS)
