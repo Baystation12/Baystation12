@@ -33,7 +33,25 @@
 #define DNA_UI_GENDER      14
 #define DNA_UI_BEARD_STYLE 15
 #define DNA_UI_HAIR_STYLE  16
-#define DNA_UI_LENGTH      16 // Update this when you add something, or you WILL break shit.
+#define DNA_UI_BREAST_TYPE 17
+#define DNA_UI_PENIS_TYPE  18
+#define DNA_UI_VAGINA_TYPE 19
+#define DNA_UI_GENITAL_R   20
+#define DNA_UI_GENITAL_G   21
+#define DNA_UI_GENITAL_B   22
+#define DNA_UI_EARS		   23
+#define DNA_UI_WINGS	   24
+#define DNA_UI_TAIL		   25
+#define DNA_UI_WINGS_R 	   26
+#define DNA_UI_WINGS_G     27
+#define DNA_UI_WINGS_B     28
+#define DNA_UI_EARS_R 	   29
+#define DNA_UI_EARS_G      30
+#define DNA_UI_EARS_B      31
+#define DNA_UI_TAIL_R 	   32
+#define DNA_UI_TAIL_G      33
+#define DNA_UI_TAIL_B	   34
+#define DNA_UI_LENGTH      34 // Update this when you add something, or you WILL break shit.
 
 #define DNA_SE_LENGTH 27
 // For later:
@@ -151,6 +169,55 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair,  hair_styles_list.len,       1)
 	SetUIValueRange(DNA_UI_BEARD_STYLE, beard, facial_hair_styles_list.len,1)
+
+//EROS START
+
+	//Gender stuff
+	if (!character.c_type)
+		character.c_type = "None"
+	var/breast = body_breast_list.Find(character.c_type)
+	if (!character.d_type)
+		character.d_type = "None"
+	var/dick = body_dicks_list.Find(character.d_type)
+	if (!character.v_type)
+		character.v_type = "None"
+	var/vagina = body_vaginas_list.Find(character.v_type)
+
+	//Races stuff
+	if (!character.ears_type)
+		character.ears_type = "None"
+	var/ears = body_ears_list.Find(character.ears_type)
+	if (!character.wings_type)
+		character.wings_type = "None"
+	var/wings = body_wings_list.Find(character.wings_type)
+	if (!character.tail_type)
+		character.tail_type = "None"
+	var/tail = body_tails_list.Find(character.tail_type)
+
+	SetUIValueRange(DNA_UI_GENITAL_R,    character.r_genital,    255,    1)
+	SetUIValueRange(DNA_UI_GENITAL_G,    character.g_genital,    255,    1)
+	SetUIValueRange(DNA_UI_GENITAL_B,    character.b_genital,    255,    1)
+
+	SetUIValueRange(DNA_UI_WINGS_R,    character.r_wings,    255,    1)
+	SetUIValueRange(DNA_UI_WINGS_G,    character.g_wings,    255,    1)
+	SetUIValueRange(DNA_UI_WINGS_B,    character.b_wings,    255,    1)
+
+	SetUIValueRange(DNA_UI_EARS_R,    character.r_ears,    255,    1)
+	SetUIValueRange(DNA_UI_EARS_G,    character.g_ears,    255,    1)
+	SetUIValueRange(DNA_UI_EARS_B,    character.b_ears,    255,    1)
+
+	SetUIValueRange(DNA_UI_TAIL_R,    character.r_tail,    255,    1)
+	SetUIValueRange(DNA_UI_TAIL_G,    character.g_tail,    255,    1)
+	SetUIValueRange(DNA_UI_TAIL_B,    character.b_tail,    255,    1)
+
+
+	SetUIValueRange(DNA_UI_BREAST_TYPE, breast, body_breast_list.len,1)
+	SetUIValueRange(DNA_UI_PENIS_TYPE, dick, body_dicks_list.len,1)
+	SetUIValueRange(DNA_UI_VAGINA_TYPE, vagina, body_vaginas_list.len,1)
+	SetUIValueRange(DNA_UI_EARS, ears, body_ears_list.len,1)
+	SetUIValueRange(DNA_UI_WINGS, wings, body_wings_list.len,1)
+	SetUIValueRange(DNA_UI_TAIL, tail, body_tails_list.len,1)
+//EROS FINISH
 
 	UpdateUI()
 

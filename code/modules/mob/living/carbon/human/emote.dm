@@ -503,18 +503,6 @@
 				message = "makes a very loud noise."
 				m_type = AUDIBLE_MESSAGE
 
-		if("swish")
-			src.animate_tail_once()
-
-		if("wag", "sway")
-			src.animate_tail_start()
-
-		if("qwag", "fastsway")
-			src.animate_tail_fast()
-
-		if("swag", "stopsway")
-			src.animate_tail_stop()
-
 		if ("help")
 			src << {"blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough,
 cry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob,

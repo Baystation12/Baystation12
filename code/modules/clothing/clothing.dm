@@ -707,7 +707,7 @@ BLIND     // can't see anything
 	set src in usr
 	set_sensors(usr)
 	..()
-
+/*
 /obj/item/clothing/under/verb/rollsuit()
 	set name = "Roll Down Jumpsuit"
 	set category = "Object"
@@ -730,7 +730,7 @@ BLIND     // can't see anything
 		body_parts_covered = initial(body_parts_covered)
 		item_state_slots[slot_w_uniform_str] = "[worn_state]"
 	update_clothing_icon()
-
+*/
 /obj/item/clothing/under/verb/rollsleeves()
 	set name = "Roll Up Sleeves"
 	set category = "Object"

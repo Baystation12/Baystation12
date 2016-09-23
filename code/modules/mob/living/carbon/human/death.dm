@@ -39,8 +39,6 @@
 	//Handle species-specific deaths.
 	species.handle_death(src)
 
-	animate_tail_stop()
-
 	//Handle brain slugs.
 	var/obj/item/organ/external/head = get_organ(BP_HEAD)
 	var/mob/living/simple_animal/borer/B

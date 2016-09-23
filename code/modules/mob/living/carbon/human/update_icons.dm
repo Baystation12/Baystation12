@@ -116,29 +116,32 @@ Please contact me on #coderbus IRC. ~Carn x
 #define DAMAGE_LAYER			2
 #define SURGERY_LEVEL			3		//bs12 specific.
 #define UNDERWEAR_LAYER         4
-#define UNIFORM_LAYER			5
-#define ID_LAYER				6
-#define SHOES_LAYER				7
-#define GLOVES_LAYER			8
-#define BELT_LAYER				9
-#define SUIT_LAYER				10
-#define TAIL_LAYER				11		//bs12 specific. this hack is probably gonna come back to haunt me
-#define GLASSES_LAYER			12
-#define BELT_LAYER_ALT			13
-#define SUIT_STORE_LAYER		14
-#define BACK_LAYER				15
-#define HAIR_LAYER				16		//TODO: make part of head layer?
-#define EARS_LAYER				17
-#define FACEMASK_LAYER			18
-#define HEAD_LAYER				19
-#define COLLAR_LAYER			20
-#define HANDCUFF_LAYER			21
-#define LEGCUFF_LAYER			22
-#define L_HAND_LAYER			23
-#define R_HAND_LAYER			24
-#define FIRE_LAYER				25		//If you're on fire
-#define TARGETED_LAYER			26		//BS12: Layer for the target overlay from weapon targeting system
-#define TOTAL_LAYERS			26
+#define GENITALS_LAYER			5		//EROS
+#define UNIFORM_LAYER			6
+#define ID_LAYER				7
+#define SHOES_LAYER				8
+#define GLOVES_LAYER			9
+#define BELT_LAYER				10
+#define SUIT_LAYER				11
+#define TAIL_LAYER				12		//bs12 specific. this hack is probably gonna come back to haunt me
+#define WINGS_LAYER				13		//EROS
+#define GLASSES_LAYER			14
+#define BELT_LAYER_ALT			15
+#define SUIT_STORE_LAYER		16
+#define BACK_LAYER				17
+#define HAIR_LAYER				18		//TODO: make part of head layer?
+#define NATURAL_EARS_LAYER		19
+#define EARS_LAYER				20
+#define FACEMASK_LAYER			21
+#define HEAD_LAYER				22
+#define COLLAR_LAYER			23
+#define HANDCUFF_LAYER			24
+#define LEGCUFF_LAYER			25
+#define L_HAND_LAYER			26
+#define R_HAND_LAYER			27
+#define FIRE_LAYER				28		//If you're on fire
+#define TARGETED_LAYER			29		//BS12: Layer for the target overlay from weapon targeting system
+#define TOTAL_LAYERS			29
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -478,6 +481,8 @@ var/global/list/damage_icon_parts = list()
 	else
 		overlays_standing[UNIFORM_LAYER]	= null
 
+	update_genitals_showing(0) //EROS
+
 	if(update_icons)
 		update_icons()
 
@@ -590,6 +595,9 @@ var/global/list/damage_icon_parts = list()
 		update_inv_gloves(0)
 
 	update_collar(0)
+	update_genitals_showing(0) //eros
+	update_wings(0) //eros
+	update_ears(0) //eros
 
 	if(update_icons)   update_icons()
 
@@ -663,89 +671,104 @@ var/global/list/damage_icon_parts = list()
 
 	if(update_icons) update_icons()
 
+//EROS START
+
+/mob/living/carbon/human/proc/update_genitals_showing(var/update_icons=1)
+	overlays_standing[GENITALS_LAYER] = null
+	if(species.appearance_flags & HAS_UNDERWEAR)
+		var/datum/sprite_accessory/breasts = body_breast_list[c_type]
+		var/datum/sprite_accessory/vaginas = body_vaginas_list[v_type]
+		var/datum/sprite_accessory/dicks = body_dicks_list[d_type]
+		var/icon/genitals_standing	=new /icon('icons/eros/mob/blank.dmi',"blank")
+		var/draw_boobs = 1
+		var/draw_genitals = 1
+		var/obj/item/clothing/suit/esuit
+		var/obj/item/clothing/under/euniform
+		if(istype(w_uniform, /obj/item/clothing/under))
+			euniform = w_uniform
+		if(istype(wear_suit, /obj/item/clothing/suit))
+			esuit = wear_suit
+		for(var/undies in all_underwear)
+			if(istype(all_underwear[undies], /datum/category_item/underwear))
+				var/datum/category_item/underwear/eunde = all_underwear[undies]
+				if (!(eunde.show_boobs))
+					draw_boobs = 0
+				if (!(eunde.show_genitals))
+					draw_genitals = 0
+		if (draw_boobs)
+			if(breasts && breasts.species_allowed && (src.species.get_bodytype() in breasts.species_allowed))
+				if(!(w_uniform && !(euniform.show_boobs)) && !(wear_suit && !(esuit.show_boobs)))
+					var/icon/breasts_s = new/icon("icon" = breasts.icon, "icon_state" = breasts.icon_state)
+					if(breasts.do_colouration)
+						breasts_s.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
+					genitals_standing.Blend(breasts_s, ICON_OVERLAY)
+		if (draw_genitals)
+			if(vaginas && vaginas.species_allowed && (src.species.get_bodytype() in vaginas.species_allowed))
+				if(!(w_uniform && !(euniform.show_genitals)) && !(wear_suit && !(esuit.show_genitals)))
+					var/icon/vaginas_s = new/icon("icon" = vaginas.icon, "icon_state" = vaginas.icon_state)
+					if(vaginas.do_colouration)
+						vaginas_s.Blend(rgb(r_genital, g_genital, b_genital), ICON_MULTIPLY)
+					genitals_standing.Blend(vaginas_s, ICON_OVERLAY)
+			if(dicks && dicks.species_allowed && (src.species.get_bodytype() in dicks.species_allowed))
+				if(!(w_uniform && !(euniform.show_genitals)) && !(wear_suit && !(esuit.show_genitals)))
+					var/icon/dicks_s = new/icon("icon" = dicks.icon, "icon_state" = dicks.icon_state)
+					if(dicks.do_colouration)
+						dicks_s.Blend(rgb(r_genital, g_genital, b_genital), ICON_MULTIPLY)
+					genitals_standing.Blend(dicks_s, ICON_OVERLAY)
+		overlays_standing[GENITALS_LAYER] = image(genitals_standing)
+	if(update_icons)
+		update_icons()
+
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
 	overlays_standing[TAIL_LAYER] = null
 
-	if(species.tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
-		var/icon/tail_s = get_tail_icon()
-		overlays_standing[TAIL_LAYER] = image(tail_s, icon_state = "[species.tail]_s")
-		animate_tail_reset(0)
+	if(species.appearance_flags & HAS_BIOMODS) //change has underwear to a more sane flag when needed
+		var/icon/tail_standing	=new /icon('icons/eros/mob/blank.dmi',"blank")
+		var/datum/sprite_accessory/tail = body_tails_list[tail_type]
+		if (wear_suit && wear_suit.flags_inv & HIDETAIL)
+		else
+			if(tail && tail.species_allowed && (src.species.get_bodytype() in tail.species_allowed))
+				var/icon/tail_s = new/icon("icon" = tail.icon, "icon_state" = tail.icon_state)
+				if(tail.do_colouration)
+					tail_s.Blend(rgb(r_tail, g_tail, b_tail), ICON_MULTIPLY)
+				tail_standing.Blend(tail_s, ICON_OVERLAY)
+		overlays_standing[TAIL_LAYER] = image(tail_standing)
 
 	if(update_icons)
 		update_icons()
 
-/mob/living/carbon/human/proc/get_tail_icon()
-	var/icon_key = "[species.race_key][r_skin][g_skin][b_skin][r_hair][g_hair][b_hair]"
-	var/icon/tail_icon = tail_icon_cache[icon_key]
-	if(!tail_icon)
-		//generate a new one
-		tail_icon = new/icon(icon = (species.tail_animation? species.tail_animation : 'icons/effects/species.dmi'))
-		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
-		// The following will not work with animated tails.
-		if(species.tail_hair)
-			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.tail]_[species.tail_hair]")
-			hair_icon.Blend(rgb(r_hair, g_hair, b_hair), ICON_MULTIPLY)
-			tail_icon.Blend(hair_icon, ICON_OVERLAY)
-		tail_icon_cache[icon_key] = tail_icon
-
-	return tail_icon
-
-
-/mob/living/carbon/human/proc/set_tail_state(var/t_state)
-	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
-
-	if(tail_overlay && species.tail_animation)
-		tail_overlay.icon_state = t_state
-		return tail_overlay
-	return null
-
-//Not really once, since BYOND can't do that.
-//Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
-/mob/living/carbon/human/proc/animate_tail_once(var/update_icons=1)
-	var/t_state = "[species.tail]_once"
-
-	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
-	if(tail_overlay && tail_overlay.icon_state == t_state)
-		return //let the existing animation finish
-
-	tail_overlay = set_tail_state(t_state)
-	if(tail_overlay)
-		spawn(20)
-			//check that the animation hasn't changed in the meantime
-			if(overlays_standing[TAIL_LAYER] == tail_overlay && tail_overlay.icon_state == t_state)
-				animate_tail_stop()
-
+/mob/living/carbon/human/proc/update_ears(var/update_icons=1)
+	overlays_standing[NATURAL_EARS_LAYER] = null
+	if(species.appearance_flags & HAS_BIOMODS) //change to different flag when justified.
+		var/icon/ears_standing	=new /icon('icons/eros/mob/blank.dmi',"blank")
+		var/datum/sprite_accessory/ears = body_ears_list[ears_type]
+		if( (head && (head.flags_inv & (BLOCKHAIR | BLOCKHEADHAIR))) || (wear_mask && (wear_mask.flags_inv & (BLOCKHAIR | BLOCKHEADHAIR))))
+			if(update_icons)   update_icons()
+			return
+		if(ears && ears.species_allowed && (src.species.get_bodytype() in ears.species_allowed))
+			var/icon/ears_s = new/icon("icon" = ears.icon, "icon_state" = ears.icon_state)
+			if(ears.do_colouration)
+				ears_s.Blend(rgb(r_ears, g_ears, b_ears), ICON_MULTIPLY)
+			ears_standing.Blend(ears_s, ICON_OVERLAY)
+		overlays_standing[NATURAL_EARS_LAYER] = image(ears_standing)
 	if(update_icons)
 		update_icons()
 
-/mob/living/carbon/human/proc/animate_tail_start(var/update_icons=1)
-	set_tail_state("[species.tail]_slow[rand(0,9)]")
-
+/mob/living/carbon/human/proc/update_wings(var/update_icons=1)
+	overlays_standing[WINGS_LAYER] = null
+	if(species.appearance_flags & HAS_BIOMODS) //change to different flag when justified.
+		var/icon/wings_standing	=new /icon('icons/eros/mob/blank.dmi',"blank")
+		var/datum/sprite_accessory/wings = body_wings_list[wings_type]
+		if(wings && wings.species_allowed && (src.species.get_bodytype() in wings.species_allowed))
+			var/icon/wings_s = new/icon("icon" = wings.icon, "icon_state" = wings.icon_state)
+			if(wings.do_colouration)
+				wings_s.Blend(rgb(r_wings, g_wings, b_wings), ICON_MULTIPLY)
+			wings_standing.Blend(wings_s, ICON_OVERLAY)
+		overlays_standing[WINGS_LAYER] = image(wings_standing)
 	if(update_icons)
 		update_icons()
 
-/mob/living/carbon/human/proc/animate_tail_fast(var/update_icons=1)
-	set_tail_state("[species.tail]_loop[rand(0,9)]")
-
-	if(update_icons)
-		update_icons()
-
-/mob/living/carbon/human/proc/animate_tail_reset(var/update_icons=1)
-	if(stat != DEAD)
-		set_tail_state("[species.tail]_idle[rand(0,9)]")
-	else
-		set_tail_state("[species.tail]_static")
-
-
-	if(update_icons)
-		update_icons()
-
-/mob/living/carbon/human/proc/animate_tail_stop(var/update_icons=1)
-	set_tail_state("[species.tail]_static")
-
-	if(update_icons)
-		update_icons()
-
+//EROS FINISH
 
 //Adds a collar overlay above the helmet layer if the suit has one
 //	Suit needs an identically named sprite in icons/mob/collar.dmi
@@ -802,4 +825,7 @@ var/global/list/damage_icon_parts = list()
 #undef R_HAND_LAYER
 #undef TARGETED_LAYER
 #undef FIRE_LAYER
+#undef GENITALS_LAYER
+#undef WINGS_LAYER
+#undef NATURAL_EARS_LAYER
 #undef TOTAL_LAYERS

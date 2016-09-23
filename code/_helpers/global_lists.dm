@@ -33,6 +33,16 @@ var/global/list/language_keys[0]					// Table of say codes for all languages
 var/global/list/whitelisted_species = list("Human") // Species that require a whitelist check.
 var/global/list/playable_species = list("Human")    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
+//EROS START
+//Body Parts
+var/global/list/body_breast_list = list()
+var/global/list/body_dicks_list = list()
+var/global/list/body_vaginas_list = list()
+var/global/list/body_ears_list  = list()
+var/global/list/body_wings_list = list()
+var/global/list/body_tails_list = list()
+//EROS FINISH
+
 var/list/mannequins_
 
 // Posters
@@ -162,6 +172,52 @@ var/global/list/string_slot_flags = list(
 	for(var/T in paths)
 		var/datum/job/J = new T
 		joblist[J.title] = J
+
+//EROS START
+
+	//Breasts Initialization
+	paths = typesof(/datum/sprite_accessory/breasts) - /datum/sprite_accessory/breasts
+	for(var/path in paths)
+		var/datum/sprite_accessory/breasts/H = new path()
+		body_breast_list[H.name] = H
+		body_breast_list += H.name
+
+	//Dicks Initialization
+	paths = typesof(/datum/sprite_accessory/dicks) - /datum/sprite_accessory/dicks
+	for(var/path in paths)
+		var/datum/sprite_accessory/dicks/H = new path()
+		body_dicks_list[H.name] = H
+		body_dicks_list += H.name
+
+	//Vaginas Initialization
+	paths = typesof(/datum/sprite_accessory/vaginas) - /datum/sprite_accessory/vaginas
+	for(var/path in paths)
+		var/datum/sprite_accessory/vaginas/H = new path()
+		body_vaginas_list[H.name] = H
+		body_vaginas_list += H.name
+
+	//Ears Initialization
+	paths = typesof(/datum/sprite_accessory/ears) - /datum/sprite_accessory/ears
+	for(var/path in paths)
+		var/datum/sprite_accessory/ears/H = new path()
+		body_ears_list[H.name] = H
+		body_ears_list += H.name
+
+	//Wings Initialization
+	paths = typesof(/datum/sprite_accessory/wings) - /datum/sprite_accessory/wings
+	for(var/path in paths)
+		var/datum/sprite_accessory/wings/H = new path()
+		body_wings_list[H.name] = H
+		body_wings_list += H.name
+
+	//Tails Initialization
+	paths = typesof(/datum/sprite_accessory/tails) - /datum/sprite_accessory/tails
+	for(var/path in paths)
+		var/datum/sprite_accessory/tails/H = new path()
+		body_tails_list[H.name] = H
+		body_tails_list += H.name
+
+//EROS FINISH
 
 	//Languages and species.
 	paths = typesof(/datum/language)-/datum/language

@@ -25,7 +25,7 @@
 /obj/item/clothing/suit/storage/emp_act(severity)
 	pockets.emp_act(severity)
 	..()
-
+/*
 //Jackets with buttons, used for labcoats, IA jackets, First Responder jackets, and brown jackets.
 /obj/item/clothing/suit/storage/toggle
 	var/icon_open
@@ -47,7 +47,7 @@
 			usr << "You attempt to button-up the velcro on your [src], before promptly realising how silly you are."
 			return
 		update_clothing_icon()	//so our overlays update
-
+*/
 
 /obj/item/clothing/suit/storage/vest/merc/New()
 	..()

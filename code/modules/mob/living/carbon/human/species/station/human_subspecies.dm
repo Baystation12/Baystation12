@@ -6,7 +6,8 @@
 	eyes beneath a prominent brow in order to shield them from the glare of a dangerously \
 	bright, alien sun. This comes at the cost of mobility, flexibility, and increased \
 	oxygen requirements to support their robust metabolism."
-	icobase = 'icons/mob/human_races/subspecies/r_gravworlder.dmi'
+	//icobase = 'icons/mob/human_races/subspecies/r_gravworlder.dmi'
+	icobase = 'icons/mob/human_races/subspecies/r_vatgrown.dmi'
 	health_hud_intensity = 3
 
 	flash_mod =     0.9
@@ -21,8 +22,8 @@
 	blurb = "Lithe and frail, these sickly folk were engineered for work in environments that \
 	lack both light and atmosphere. As such, they're quite resistant to asphyxiation as well as \
 	toxins, but they suffer from weakened bone structure and a marked vulnerability to bright lights."
-	icobase = 'icons/mob/human_races/subspecies/r_spacer.dmi'
-
+	//icobase = 'icons/mob/human_races/subspecies/r_spacer.dmi'
+	icobase = 'icons/mob/human_races/subspecies/r_vatgrown.dmi'
 	oxy_mod =   0.8
 	toxins_mod =   0.9
 	flash_mod = 1.2
@@ -46,7 +47,7 @@
 		BP_BRAIN =    /obj/item/organ/internal/brain,
 		BP_EYES =     /obj/item/organ/internal/eyes
 		)
-	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_BIOMODS
 
 /datum/species/human/vatgrown/sanitize_name(name)
 	return sanitizeName(name, allow_numbers=TRUE)
