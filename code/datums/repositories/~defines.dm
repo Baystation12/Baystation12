@@ -1,1 +1,1 @@
-#undef mobclient2unique
+#undef mob2unique
