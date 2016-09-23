@@ -361,6 +361,8 @@ var/global/list/damage_icon_parts = list()
 	if(species.appearance_flags & HAS_UNDERWEAR)
 		overlays_standing[UNDERWEAR_LAYER] = list()
 		for(var/category in all_underwear)
+			if(hide_underwear[category])
+				continue
 			var/datum/category_item/underwear/UWI = all_underwear[category]
 			var/image/standing = UWI.generate_image(all_underwear_metadata[category])
 			if(standing)
@@ -679,7 +681,7 @@ var/global/list/damage_icon_parts = list()
 		var/datum/sprite_accessory/breasts = body_breast_list[c_type]
 		var/datum/sprite_accessory/vaginas = body_vaginas_list[v_type]
 		var/datum/sprite_accessory/dicks = body_dicks_list[d_type]
-		var/icon/genitals_standing	=new /icon('icons/eros/mob/blank.dmi',"blank")
+		var/icon/genitals_standing	=new /icon('icons/mob/human_face.dmi',"bald_s") //blank icon by excelency
 		var/draw_boobs = 1
 		var/draw_genitals = 1
 		var/obj/item/clothing/suit/esuit
@@ -691,10 +693,11 @@ var/global/list/damage_icon_parts = list()
 		for(var/undies in all_underwear)
 			if(istype(all_underwear[undies], /datum/category_item/underwear))
 				var/datum/category_item/underwear/eunde = all_underwear[undies]
-				if (!(eunde.show_boobs))
-					draw_boobs = 0
-				if (!(eunde.show_genitals))
-					draw_genitals = 0
+				if(!hide_underwear[undies])
+					if (!(eunde.show_boobs))
+						draw_boobs = 0
+					if (!(eunde.show_genitals))
+						draw_genitals = 0
 		if (draw_boobs)
 			if(breasts && breasts.species_allowed && (src.species.get_bodytype() in breasts.species_allowed))
 				if(!(w_uniform && !(euniform.show_boobs)) && !(wear_suit && !(esuit.show_boobs)))
@@ -723,7 +726,7 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[TAIL_LAYER] = null
 
 	if(species.appearance_flags & HAS_BIOMODS) //change has underwear to a more sane flag when needed
-		var/icon/tail_standing	=new /icon('icons/eros/mob/blank.dmi',"blank")
+		var/icon/tail_standing	=new /icon('icons/mob/human_face.dmi',"bald_s")
 		var/datum/sprite_accessory/tail = body_tails_list[tail_type]
 		if (wear_suit && wear_suit.flags_inv & HIDETAIL)
 		else
@@ -740,7 +743,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/update_ears(var/update_icons=1)
 	overlays_standing[NATURAL_EARS_LAYER] = null
 	if(species.appearance_flags & HAS_BIOMODS) //change to different flag when justified.
-		var/icon/ears_standing	=new /icon('icons/eros/mob/blank.dmi',"blank")
+		var/icon/ears_standing	=new /icon('icons/mob/human_face.dmi',"bald_s")
 		var/datum/sprite_accessory/ears = body_ears_list[ears_type]
 		if( (head && (head.flags_inv & (BLOCKHAIR | BLOCKHEADHAIR))) || (wear_mask && (wear_mask.flags_inv & (BLOCKHAIR | BLOCKHEADHAIR))))
 			if(update_icons)   update_icons()
@@ -757,7 +760,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/update_wings(var/update_icons=1)
 	overlays_standing[WINGS_LAYER] = null
 	if(species.appearance_flags & HAS_BIOMODS) //change to different flag when justified.
-		var/icon/wings_standing	=new /icon('icons/eros/mob/blank.dmi',"blank")
+		var/icon/wings_standing	=new /icon('icons/mob/human_face.dmi',"bald_s")
 		var/datum/sprite_accessory/wings = body_wings_list[wings_type]
 		if(wings && wings.species_allowed && (src.species.get_bodytype() in wings.species_allowed))
 			var/icon/wings_s = new/icon("icon" = wings.icon, "icon_state" = wings.icon_state)
@@ -767,6 +770,7 @@ var/global/list/damage_icon_parts = list()
 		overlays_standing[WINGS_LAYER] = image(wings_standing)
 	if(update_icons)
 		update_icons()
+
 
 //EROS FINISH
 
