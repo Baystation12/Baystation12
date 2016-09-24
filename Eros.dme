@@ -1211,6 +1211,7 @@
 #include "code\modules\economy\Events_Mundane.dm"
 #include "code\modules\economy\TradeDestinations.dm"
 #include "code\modules\eros\clothing\clothing.dm"
+#include "code\modules\eros\clothing\under.dm"
 #include "code\modules\eros\clothing\underwear.dm"
 #include "code\modules\eros\mob\new_player\sprite_accesories.dm"
 #include "code\modules\error_handler\_defines.dm"
