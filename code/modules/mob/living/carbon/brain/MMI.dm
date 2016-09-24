@@ -112,7 +112,7 @@
 			
 		var/to_remove = input(user, "What do you wish to remove?") as null|anything in removables
 		
-		if(!to_remove || !(user.l_hand == src || user.r_hand == src))
+		if(!to_remove || !(user.l_hand == src || user.r_hand == src || istype(loc, /obj/item/weapon/gripper/research)))
 			return 0
 		
 		if(to_remove == "brain")
