@@ -421,7 +421,7 @@ proc/is_blind(A)
 	var/keyname
 	if(subject && subject.client)
 		var/client/C = subject.client
-		keyname = (C.holder && C.holder.fakekey) ? C.holder.fakekey : C.key
+		keyname = C.key
 		if(C.mob) //Most of the time this is the dead/observer mob; we can totally use him if there is no better name
 			var/mindname
 			var/realname = C.mob.real_name
@@ -489,7 +489,7 @@ proc/is_blind(A)
 				else
 					name = M.real_name
 		if(!name)
-			name = (C.holder && C.holder.fakekey) ? C.holder.fakekey : C.key
+			name = C.key
 		if(joined_ghosts)
 			say_dead_direct("The ghost of <span class='name'>[name]</span> now [pick("skulks","lurks","prowls","creeps","stalks")] among the dead. [message]")
 		else
