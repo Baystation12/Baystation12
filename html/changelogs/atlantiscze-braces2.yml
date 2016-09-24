@@ -1,0 +1,7 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscdel: "Airlock brace keycards have been removed."
+  - tweak: "Airlock braces when held inhand can be accessed and configured as an airlock electronics circuit board. Instead of brace keycards they can now be unlocked by swiping an ID with configured access (or by using maintenance jack). Configuring the brace has no access requirement, but it can't be configured when installed on an airlock."
