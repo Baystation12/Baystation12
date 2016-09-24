@@ -1851,11 +1851,11 @@ mob/living/silicon/ai/can_centcom_reply()
 
 /mob/extra_admin_link(var/source)
 	if(client && eyeobj)
-		return "|<A HREF='?[source];adminplayerobservejump=\ref[eyeobj]'>EYE</A>"
+		return "|<A HREF='?[source];adminplayerobservefollow=\ref[eyeobj]'>EYE</A>"
 
 /mob/observer/ghost/extra_admin_link(var/source)
 	if(mind && (mind.current && !isghost(mind.current)))
-		return "|<A HREF='?[source];adminplayerobservejump=\ref[mind.current]'>BDY</A>"
+		return "|<A HREF='?[source];adminplayerobservefollow=\ref[mind.current]'>BDY</A>"
 
 /proc/admin_jump_link(var/atom/target, var/source)
 	if(!target) return
@@ -1865,5 +1865,5 @@ mob/living/silicon/ai/can_centcom_reply()
 	else
 		source = "_src_=holder"
 
-	. = "<A HREF='?[source];adminplayerobservejump=\ref[target]'>JMP</A>"
+	. = "<A HREF='?[source];adminplayerobservefollow=\ref[target]'>JMP</A>"
 	. += target.extra_admin_link(source)

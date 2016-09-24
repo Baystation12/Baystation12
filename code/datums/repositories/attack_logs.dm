@@ -33,11 +33,8 @@ var/repository/attack_logs/attack_log_repository = new()
 		message = "[victim.name] [action_message]"
 
 	intent = mob_attacker ? uppertext(mob_attacker.a_intent) : "N/A"
-	
+
 	if(mob_attacker)
 		location = get_turf(mob_attacker)
 	if(!location && mob_victim)
 		location = get_turf(mob_victim)
-
-/datum/attack_log/proc/mob_to_key_name(var/datum/mob_lite/M)
-	return M ? M.key_name(FALSE) : "*null*"
