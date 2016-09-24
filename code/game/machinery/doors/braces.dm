@@ -21,7 +21,6 @@
 	var/cur_health
 	var/max_health = 450
 	var/obj/machinery/door/airlock/airlock = null
-	var/list/keycards = list()
 	var/obj/item/weapon/airlock_electronics/brace/electronics
 
 
