@@ -150,6 +150,38 @@
 
 	O.push_data()
 
+/obj/item/integrated_circuit/input/adjacent_locator
+	name = "adjacent locator"
+	desc = "This is needed for certain devices that demand a reference for a target to act upon.  This type only locates something \
+	that is standing a meter away from the machine."
+	extended_desc = "The first pin requires a ref to a kind of object that you want the locator to acquire.  This means that it will \
+	give refs to nearby objects that are similar.  If more than one valid object is found nearby, it will choose one of them at \
+	random."
+	inputs = list("desired type ref")
+	outputs = list("located ref")
+	activators = list("locate")
+
+/obj/item/integrated_circuit/input/adjacent_locator/do_work()
+	var/datum/integrated_io/I = inputs[1]
+	var/datum/integrated_io/O = outputs[1]
+	O.data = null
+
+	if(!isweakref(I.data))
+		return
+	var/weakref/w = I.data
+	var/atom/A = w.resolve()
+	var/desired_type = A.type
+
+	var/list/nearby_things = range(1, get_turf(src))
+	var/list/valid_things = list()
+	for(var/atom/thing in nearby_things)
+		if(thing.type != desired_type)
+			continue
+		valid_things.Add(thing)
+	if(valid_things.len)
+		O.data = weakref(pick(valid_things))
+	O.push_data()
+
 /obj/item/integrated_circuit/input/signaler
 	name = "integrated signaler"
 	desc = "Signals from a signaler can be received with this, allowing for remote control.  Additionally, it can send signals as well."
