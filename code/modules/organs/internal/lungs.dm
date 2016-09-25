@@ -24,11 +24,11 @@
 /obj/item/organ/internal/lungs/set_dna(var/datum/dna/new_dna)
 	..()
 	sync_breath_types()
-	
+
 /obj/item/organ/internal/lungs/replaced()
 	..()
 	sync_breath_types()
-	
+
 /**
  *  Set these lungs' breath types based on the lungs' species
  */
@@ -59,7 +59,7 @@
 /obj/item/organ/internal/lungs/proc/rupture()
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(istype(parent))
-		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 1)
+		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 50)
 	bruise()
 
 /obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath)
