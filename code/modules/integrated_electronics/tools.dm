@@ -137,7 +137,7 @@
 
 /obj/item/device/integrated_electronics/debugger/afterattack(atom/target, mob/living/user, proximity)
 	if(accepting_refs && proximity)
-		data_to_write = target
+		data_to_write = weakref(target)
 		visible_message("<span class='notice'>[user] slides \a [src]'s over \the [target].</span>")
 		to_chat(user, "<span class='notice'>You set \the [src]'s memory to a reference to [target.name] \[Ref\].  The ref scanner is \
 		now off.</span>")
@@ -146,7 +146,12 @@
 /obj/item/device/integrated_electronics/debugger/proc/write_data(var/datum/integrated_io/io, mob/user)
 	if(io.io_type == DATA_CHANNEL)
 		io.write_data_to_pin(data_to_write)
-		to_chat(user, "<span class='notice'>You write '[data_to_write ? data_to_write : "NULL"]' to the '[io]' pin of \the [io.holder].</span>")
+		var/data_to_show = data_to_write
+		if(isweakref(data_to_write))
+			var/weakref/w = data_to_write
+			var/atom/A = w.resolve()
+			data_to_show = A.name
+		to_chat(user, "<span class='notice'>You write '[data_to_write ? data_to_show : "NULL"]' to the '[io]' pin of \the [io.holder].</span>")
 	else if(io.io_type == PULSE_CHANNEL)
 		io.holder.check_then_do_work()
 		to_chat(user, "<span class='notice'>You pulse \the [io.holder]'s [io].</span>")
