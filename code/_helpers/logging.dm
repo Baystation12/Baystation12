@@ -137,10 +137,7 @@
 		if(include_link && C)
 			. += "<a href='?priv_msg=\ref[C]'>"
 
-		if(C && C.holder && C.holder.fakekey && !include_name)
-			. += "Administrator"
-		else
-			. += key
+		. += key
 
 		if(include_link)
 			if(C)	. += "</a>"
