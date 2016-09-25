@@ -126,24 +126,16 @@
 					prob(2);/obj/item/weapon/tape_roll)
 
 /obj/random/medical
-	name = "Random Medicine"
+	name = "Random Medical equipment"
 	desc = "This is a random medical item."
 	icon = 'icons/obj/items.dmi'
-	icon_state = "brutepack"
-	spawn_nothing_percentage = 25
+	icon_state = "traumakit"
 	item_to_spawn()
-		return pick(prob(4);/obj/item/stack/medical/bruise_pack,\
-					prob(4);/obj/item/stack/medical/ointment,\
-					prob(2);/obj/item/stack/medical/advanced/bruise_pack,\
-					prob(2);/obj/item/stack/medical/advanced/ointment,\
-					prob(1);/obj/item/stack/medical/splint,\
+		return pick(prob(21);obj/random/medical/lite,\
 					prob(2);/obj/item/bodybag,\
-					prob(1);/obj/item/bodybag/cryobag,\
 					prob(2);/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline,\
 					prob(2);/obj/item/weapon/reagent_containers/glass/bottle/antitoxin,\
 					prob(2);/obj/item/weapon/storage/pill_bottle,\
-					prob(2);/obj/item/weapon/storage/pill_bottle/kelotane,\
-					prob(2);/obj/item/weapon/storage/pill_bottle/antitox,\
 					prob(1);/obj/item/weapon/storage/pill_bottle/tramadol,\
 					prob(2);/obj/item/weapon/storage/pill_bottle/citalopram,\
 					prob(1);/obj/item/weapon/storage/pill_bottle/dexalin_plus,\
@@ -154,6 +146,23 @@
 					prob(2);/obj/item/weapon/reagent_containers/syringe/inaprovaline,\
 					prob(1);/obj/item/weapon/storage/box/freezer,\
 					prob(1);/obj/item/stack/nanopaste)
+
+/obj/random/medical/lite
+	name = "Random Medicine"
+	desc = "This is a random simple medical item."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "brutepack"
+	spawn_nothing_percentage = 25
+	item_to_spawn()
+		return pick(prob(4);/obj/item/stack/medical/bruise_pack,\
+					prob(4);/obj/item/stack/medical/ointment,\
+					prob(2);/obj/item/stack/medical/advanced/bruise_pack,\
+					prob(2);/obj/item/stack/medical/advanced/ointment,\
+					prob(1);/obj/item/stack/medical/splint,\
+					prob(1);/obj/item/bodybag/cryobag,\
+					prob(3);/obj/item/weapon/reagent_containers/hypospray/autoinjector,\
+					prob(2);/obj/item/weapon/storage/pill_bottle/kelotane,\
+					prob(2);/obj/item/weapon/storage/pill_bottle/antitox)
 
 
 /obj/random/firstaid
