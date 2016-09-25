@@ -569,218 +569,40 @@ obj/random/material //Random materials for building stuff
 					prob(1);/obj/item/device/suit_cooling_unit)
 
 
-/obj/random/maintenance //Clutter and loot for maintenance and away missions, if you add something, make sure it's not in one of the other lists
+/obj/random/maintenance //Clutter and loot for maintenance and away missions
 	name = "random maintenance item"
 	desc = "This is a random maintenance item."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "gift1"
 	item_to_spawn()
-		return pick(prob(5);/obj/random/tech_supply,\
-					prob(4);/obj/random/medical,\
-					prob(3);/obj/random/firstaid,\
-					prob(1);/obj/random/contraband,\
-					prob(1);/obj/random/action_figure,\
-					prob(1);/obj/random/plushie,\
-					prob(5);/obj/random/junk,\
-					prob(5);/obj/random/trash,\
-					prob(4);/obj/random/material,\
-					prob(3);/obj/random/coin,\
-					prob(1);/obj/random/toy,\
-					prob(3);/obj/random/tank,\
-					prob(2);/obj/random/soap,\
-					prob(2);/obj/random/drinkbottle,\
-					prob(1);/obj/random/loot,\
-					prob(3);/obj/item/device/flashlight/lantern,\
-					prob(2);/obj/item/device/flashlight/flare,\
-					prob(1);/obj/item/device/flashlight/pen,\
-					prob(5);/obj/item/weapon/storage/fancy/cigarettes,\
-					prob(4);/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,\
-					prob(3);/obj/item/weapon/storage/fancy/cigarettes/killthroat,\
-					prob(3);/obj/item/weapon/storage/fancy/cigarettes/luckystars,\
-					prob(3);/obj/item/weapon/storage/fancy/cigarettes/jerichos,\
-					prob(3);/obj/item/weapon/storage/fancy/cigarettes/menthols,\
-					prob(3);/obj/item/weapon/storage/fancy/cigarettes/carcinomas,\
-					prob(3);/obj/item/weapon/storage/fancy/cigarettes/professionals,\
-					prob(1);/obj/item/weapon/storage/fancy/cigar,\
-					prob(1);/obj/item/clothing/mask/smokable/cigarette/cigar,\
-					prob(1);/obj/item/clothing/mask/smokable/cigarette/cigar/cohiba,\
-					prob(1);/obj/item/clothing/mask/smokable/cigarette/cigar/havana,\
-					prob(2);/obj/item/clothing/mask/gas,\
-					prob(3);/obj/item/clothing/mask/gas/half,\
-					prob(1);/obj/item/clothing/mask/gas/swat,\
-					prob(1);/obj/item/clothing/mask/gas/syndicate,\
-					prob(4);/obj/item/clothing/mask/breath,\
-					prob(2);/obj/item/clothing/mask/breath/medical,\
-					prob(2);/obj/item/clothing/mask/balaclava,\
-					prob(1);/obj/item/clothing/mask/balaclava/tactical,\
-					prob(2);/obj/item/clothing/mask/surgical,\
-					prob(2);/obj/item/weapon/reagent_containers/glass/rag ,\
-					prob(4);/obj/item/weapon/reagent_containers/food/snacks/liquidfood,\
-					prob(2);/obj/item/weapon/storage/secure/briefcase,\
-					prob(4);/obj/item/weapon/storage/briefcase,\
-					prob(4);/obj/item/weapon/storage/briefcase/inflatable,\
-					prob(5);/obj/item/weapon/storage/backpack,\
-					prob(5);/obj/item/weapon/storage/backpack/satchel,\
-					prob(3);/obj/item/weapon/storage/backpack/dufflebag,\
-					prob(5);/obj/item/weapon/storage/box,\
-					prob(3);/obj/item/weapon/storage/box/donkpockets,\
-					prob(2);/obj/item/weapon/storage/box/sinpockets,\
-					prob(1);/obj/item/weapon/storage/box/cups,\
-					prob(4);/obj/item/weapon/storage/box/mousetraps,\
-					prob(3);/obj/item/weapon/storage/box/engineer,\
-					prob(2);/obj/item/weapon/storage/box/autoinjectors,\
-					prob(3);/obj/item/weapon/storage/box/beakers,\
-					prob(3);/obj/item/weapon/storage/box/syringes,\
-					prob(3);/obj/item/weapon/storage/box/gloves,\
-					prob(3);/obj/item/weapon/storage/wallet,\
-					prob(2);/obj/item/weapon/storage/belt/utility/full,\
-					prob(2);/obj/item/weapon/storage/belt/medical/emt,\
-					prob(2);/obj/item/weapon/storage/belt/medical,\
-					prob(2);/obj/item/weapon/storage/belt/security,\
-					prob(4);/obj/item/device/toner,\
-					prob(1);/obj/item/device/paicard,\
-					prob(1);/obj/item/device/destTagger,\
-					prob(3);/obj/item/clothing/shoes/workboots,\
-					prob(3);/obj/item/clothing/shoes/jackboots,\
-					prob(1);/obj/item/clothing/shoes/swat,\
-					prob(1);/obj/item/clothing/shoes/combat,\
-					prob(2);/obj/item/clothing/shoes/galoshes,\
-					prob(1);/obj/item/clothing/shoes/syndigaloshes,\
-					prob(1);/obj/item/clothing/shoes/magboots,\
-					prob(4);/obj/item/clothing/shoes/laceup,\
-					prob(4);/obj/item/clothing/shoes/black,\
-					prob(3);/obj/item/clothing/shoes/jungleboots,\
-					prob(3);/obj/item/clothing/shoes/dutyboots,\
-					prob(1);/obj/item/clothing/shoes/tactical,\
-					prob(3);/obj/item/clothing/shoes/dress,\
-					prob(3);/obj/item/clothing/shoes/dress/white,\
-					prob(4);/obj/item/clothing/shoes/leather,\
-					prob(1);/obj/item/clothing/gloves/insulated,\
-					prob(4);/obj/item/clothing/gloves/thick,\
-					prob(3);/obj/item/clothing/gloves/thick/botany,\
-					prob(2);/obj/item/clothing/gloves/latex,\
-					prob(1);/obj/item/clothing/gloves/thick/swat,\
-					prob(1);/obj/item/clothing/gloves/thick/combat,\
-					prob(5);/obj/item/clothing/gloves/white,\
-					prob(5);/obj/item/clothing/gloves/rainbow,\
-					prob(3);/obj/item/clothing/gloves/duty,\
-					prob(1);/obj/item/clothing/gloves/guards,\
-					prob(1);/obj/item/clothing/gloves/tactical,\
-					prob(2);/obj/item/clothing/gloves/insulated/cheap,\
-					prob(1);/obj/item/clothing/glasses/sunglasses,\
-					prob(3);/obj/item/clothing/glasses/meson,\
-					prob(2);/obj/item/clothing/glasses/meson/prescription,\
-					prob(4);/obj/item/clothing/glasses/science,\
-					prob(3);/obj/item/clothing/glasses/material,\
-					prob(1);/obj/item/clothing/glasses/welding,\
-					prob(2);/obj/item/clothing/glasses/hud/health,\
-					prob(2);/obj/item/clothing/glasses/hud/security,\
-					prob(1);/obj/item/clothing/glasses/sunglasses/sechud,\
-					prob(1);/obj/item/clothing/glasses/sunglasses/sechud/goggles,\
-					prob(1);/obj/item/clothing/glasses/tacgoggles,\
-					prob(2);/obj/item/clothing/head/helmet,\
-					prob(2);/obj/item/clothing/head/helmet/solgov,\
-					prob(1);/obj/item/clothing/head/helmet/tactical,\
-					prob(1);/obj/item/clothing/head/helmet/space/emergency,\
-					prob(1);/obj/item/clothing/head/bio_hood/general,\
-					prob(4);/obj/item/clothing/head/hardhat,\
-					prob(4);/obj/item/clothing/head/hardhat/orange,\
-					prob(4);/obj/item/clothing/head/hardhat/red,\
-					prob(4);/obj/item/clothing/head/hardhat/dblue,\
-					prob(3);/obj/item/clothing/head/ushanka,\
-					prob(2);/obj/item/clothing/head/welding,\
-					prob(3);/obj/item/clothing/head/utility/fleet,\
-					prob(3);/obj/item/clothing/head/utility/marine,\
-					prob(2);/obj/item/clothing/head/utility/marine/tan,\
-					prob(2);/obj/item/clothing/head/utility/marine/green,\
-					prob(1);/obj/item/clothing/head/soft/sol/expedition,\
-					prob(3);/obj/item/clothing/head/soft/sol/fleet,\
-					prob(4);/obj/item/clothing/suit/storage/hazardvest,\
-					prob(4);/obj/item/clothing/suit/storage/toggle/labcoat,\
-					prob(1);/obj/item/clothing/suit/space/emergency,\
-					prob(4);/obj/item/clothing/suit/armor/vest,\
-					prob(2);/obj/item/clothing/suit/armor/vest/solgov,\
-					prob(2);/obj/item/clothing/suit/storage/vest/solgov,\
-					prob(1);/obj/item/clothing/suit/storage/vest/tactical,\
-					prob(3);/obj/item/clothing/suit/storage/vest,\
-					prob(3);/obj/item/clothing/suit/storage/toggle/bomber,\
-					prob(3);/obj/item/clothing/suit/chef/classic,\
-					prob(2);/obj/item/clothing/suit/surgicalapron,\
-					prob(3);/obj/item/clothing/suit/apron/overalls,\
-					prob(1);/obj/item/clothing/suit/bio_suit/general,\
-					prob(2);/obj/item/clothing/suit/storage/service/expeditionary,\
-					prob(3);/obj/item/clothing/suit/storage/toggle/hoodie/black,\
-					prob(3);/obj/item/clothing/suit/storage/toggle/brown_jacket,\
-					prob(3);/obj/item/clothing/suit/storage/leather_jacket,\
-					prob(4);/obj/item/clothing/suit/apron,\
-					prob(2);/obj/item/clothing/under/syndicate/tacticool,\
-					prob(2);/obj/item/clothing/under/utility/marine/tan,\
-					prob(2);/obj/item/clothing/under/utility/marine/green,\
-					prob(3);/obj/item/clothing/under/utility/marine,\
-					prob(4);/obj/item/clothing/under/utility,\
-					prob(4);/obj/item/clothing/under/utility/fleet,\
-					prob(1);/obj/item/clothing/under/syndicate/combat,\
-					prob(4);/obj/item/clothing/under/hazard,\
-					prob(4);/obj/item/clothing/under/sterile,\
-					prob(1);/obj/item/clothing/under/pt,\
-					prob(3);/obj/item/clothing/under/pt/expeditionary,\
-					prob(3);/obj/item/clothing/under/pt/marine,\
-					prob(4);/obj/item/clothing/under/pt/fleet,\
-					prob(2);/obj/item/clothing/under/pants/camo,\
-					prob(2);/obj/item/clothing/under/frontier,\
-					prob(2);/obj/item/clothing/under/harness,\
-					prob(2);/obj/item/clothing/under/rank/medical/paramedic,\
-					prob(2);/obj/item/clothing/under/overalls,\
-					prob(1);/obj/item/clothing/under/tactical,\
-					prob(3);/obj/item/clothing/accessory/storage/webbing,\
-					prob(3);/obj/item/clothing/accessory/storage/webbing_large,\
-					prob(2);/obj/item/clothing/accessory/storage/black_vest,\
-					prob(2);/obj/item/clothing/accessory/storage/brown_vest,\
-					prob(2);/obj/item/clothing/accessory/storage/white_vest,\
-					prob(1);/obj/item/clothing/accessory/storage/bandolier,\
-					prob(1);/obj/item/clothing/accessory/holster/thigh,\
-					prob(1);/obj/item/clothing/accessory/holster/hip,\
-					prob(1);/obj/item/clothing/accessory/holster/waist,\
-					prob(1);/obj/item/clothing/accessory/holster/armpit,\
-					prob(2);/obj/item/clothing/accessory/stethoscope,\
-					prob(3);/obj/item/clothing/ears/earmuffs,\
-					prob(4);/obj/item/weapon/spacecash/bundle/c1,\
-					prob(3);/obj/item/weapon/spacecash/bundle/c10,\
-					prob(3);/obj/item/weapon/spacecash/bundle/c20,\
-					prob(2);/obj/item/weapon/spacecash/bundle/c50,\
-					prob(2);/obj/item/weapon/spacecash/bundle/c100,\
-					prob(1);/obj/item/weapon/spacecash/bundle/c1000,\
-					prob(1);/obj/item/weapon/beartrap,\
-					prob(2);/obj/item/weapon/handcuffs,\
-					prob(3);/obj/item/weapon/camera_assembly,\
-					prob(4);/obj/item/weapon/caution,\
-					prob(4);/obj/item/weapon/caution/cone,\
-					prob(1);/obj/item/weapon/card/emag_broken,\
-					prob(2);/obj/item/device/camera,\
-					prob(3);/obj/item/device/pda,\
-					prob(3);/obj/item/device/radio/headset)
+		return pick(prob(300);/obj/random/tech_supply,\
+					prob(200);/obj/random/medical,\
+					prob(100);/obj/random/firstaid,\
+					prob(10);/obj/random/contraband,\
+					prob(50);/obj/random/action_figure,\
+					prob(50);/obj/random/plushie,\
+					prob(200);/obj/random/junk,\
+					prob(200);/obj/random/trash,\
+					prob(200);/obj/random/material,\
+					prob(100);/obj/random/coin,\
+					prob(50);/obj/random/toy,\
+					prob(100);/obj/random/tank,\
+					prob(50);/obj/random/soap,\
+					prob(60);/obj/random/drinkbottle,\
+					prob(10);/obj/random/loot,\
+					prob(500);/obj/random/maintenance/clean)
 
 
-/obj/random/maintenance/clean //Maintenance loot lists without the trash, for use inside things. If you add anything to the regular list, make sure you add it here
+/obj/random/maintenance/clean
+/*Maintenance loot lists without the trash, for use inside things.
+Individual items to add to the maintenance list should go here, if you add
+something, make sure it's not in one of the other lists.*/
 	name = "random clean maintenance item"
 	desc = "This is a random clean maintenance item."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "gift1"
 	item_to_spawn()
-		return pick(prob(5);/obj/random/tech_supply,\
-					prob(4);/obj/random/medical,\
-					prob(3);/obj/random/firstaid,\
-					prob(1);/obj/random/contraband,\
-					prob(1);/obj/random/action_figure,\
-					prob(1);/obj/random/plushie,\
-					prob(4);/obj/random/material,\
-					prob(3);/obj/random/coin,\
-					prob(1);/obj/random/toy,\
-					prob(3);/obj/random/tank,\
-					prob(2);/obj/random/soap,\
-					prob(2);/obj/random/drinkbottle,\
-					prob(1);/obj/random/loot,\
-					prob(3);/obj/item/device/flashlight/lantern,\
+		return pick(prob(3);/obj/item/device/flashlight/lantern,\
 					prob(2);/obj/item/device/flashlight/flare,\
 					prob(1);/obj/item/device/flashlight/pen,\
 					prob(5);/obj/item/weapon/storage/fancy/cigarettes,\

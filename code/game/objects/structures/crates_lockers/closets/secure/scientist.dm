@@ -217,7 +217,7 @@
 
 
 /obj/structure/closet/secure_closet/guard
-	name = "master at arms' locker"
+	name = "security guard's locker"
 	req_access = list(access_brig)
 	icon_state = "guard1"
 	icon_closed = "guard"

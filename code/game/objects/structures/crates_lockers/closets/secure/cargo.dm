@@ -85,7 +85,7 @@
 
 		return
 
-	/obj/structure/closet/secure_closet/deckofficer
+/obj/structure/closet/secure_closet/deckofficer
 	name = "deck officer's locker"
 	req_access = list(access_qm)
 	icon_state = "secureqm1"
