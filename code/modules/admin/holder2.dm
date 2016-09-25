@@ -107,7 +107,7 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 /client/Stat()
 	. = ..()
 	var/stealth_status = is_stealthed()
-	if(statpanel("Status") && stealth_status)
+	if(usr && stealth_status && statpanel("Status"))
 		stat("Stealth", "Engaged [holder.stealthy_ == STEALTH_AUTO ? "(Auto)" : "(Manual)"]")
 
 /client/proc/is_stealthed()
@@ -141,7 +141,7 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 		to_chat(src, "<span class='notice'>You are no longer stealthed.</span>")
 
 	log_and_message_admins("has turned stealth mode [holder.stealthy_ ? "ON" : "OFF"]")
-	feedback_add_details("admin_verb","SM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!´
+	feedback_add_details("admin_verb","SM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 #undef STEALTH_OFF
 #undef STEALTH_MANUAL
