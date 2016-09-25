@@ -105,7 +105,7 @@
 	icon_state = "debugger"
 	flags = CONDUCT
 	w_class = 2
-	var/data_to_write = null
+	var/weakref/data_to_write = null
 	var/accepting_refs = 0
 
 /obj/item/device/integrated_electronics/debugger/attack_self(mob/user)
@@ -148,10 +148,9 @@
 		io.write_data_to_pin(data_to_write)
 		var/data_to_show = data_to_write
 		if(isweakref(data_to_write))
-			var/weakref/w = data_to_write
-			var/atom/A = w.resolve()
+			var/atom/A = data_to_write.resolve()
 			data_to_show = A.name
-		to_chat(user, "<span class='notice'>You write '[data_to_write ? data_to_show : "NULL"]' to the '[io]' pin of \the [io.holder].</span>")
+		to_chat(user, "<span class='notice'>You write '[data_to_show ? data_to_show : "NULL"]' to the '[io]' pin of \the [io.holder].</span>")
 	else if(io.io_type == PULSE_CHANNEL)
 		io.holder.check_then_do_work()
 		to_chat(user, "<span class='notice'>You pulse \the [io.holder]'s [io].</span>")

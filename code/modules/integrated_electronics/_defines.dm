@@ -238,7 +238,7 @@
 /datum/integrated_io
 	var/name = "input/output"
 	var/obj/item/integrated_circuit/holder = null
-	var/data = null
+	var/weakref/data = null
 	var/list/linked = list()
 	var/io_type = DATA_CHANNEL
 
@@ -261,8 +261,7 @@
 /datum/integrated_io/proc/data_as_type(var/as_type)
 	if(!isweakref(data))
 		return
-	var/weakref/w = data
-	var/output = w.resolve()
+	var/output = data.resolve()
 	return istype(output, as_type) ? output : null
 
 /datum/integrated_io/proc/display_data()
@@ -271,8 +270,7 @@
 	if(istext(data))
 		return "(\"[data]\")" // Wraps the 'string' in escaped quotes, so that people know it's a 'string'.
 	if(isweakref(data))
-		var/weakref/w = data
-		var/atom/A = w.resolve()
+		var/atom/A = data.resolve()
 		return A ? "([A.name] \[Ref\])" : "(null)" // For refs, we want just the name displayed.
 	return "([data])" // Nothing special needed for numbers or other stuff.
 
