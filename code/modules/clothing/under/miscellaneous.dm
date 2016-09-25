@@ -558,8 +558,8 @@
 /obj/item/clothing/under/confederacy
 	name = "\improper Confederacy uniform"
 	desc = "A military uniform belonging to the Confederacy of Man, an independent human government."
-	icon_state = "pcrc"
-	worn_state = "pcrc"
+	icon_state = "confed"
+	worn_state = "confed"
 
 /obj/item/clothing/under/saare
 	name = "\improper SAARE uniform"
@@ -606,3 +606,11 @@
 	worn_state = "jeansmustang"
 	species_restricted = list("Monkey")
 	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
+
+/obj/item/clothing/under/blacksuit
+	desc = "A plain shirt and pair of pressed black pants."
+	name = "formal outfit"
+	icon_state = "internalaffairs"
+	item_state = "ba_suit"
+	worn_state = "internalaffairs"
+

@@ -80,6 +80,18 @@
 	..()
 	overlay = global_hud.nvg
 
+/obj/item/clothing/glasses/tacgoggles //made their own thing, with more extreme flash protection and medium NV, but no more sechud
+	name = "tactical goggles"
+	desc = "Self-polarizing goggles with light amplification for dark environments. Made from durable synthetic."
+	icon_state = "swatgoggles"
+	origin_tech = list(TECH_MAGNET = 2)
+	darkness_view = 5
+	toggleable = 1
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
+	flash_protection = FLASH_PROTECTION_MAJOR
+	armor = list(melee = 20, bullet = 20, laser = 20, energy = 15, bomb = 20, bio = 0, rad = 0)
+	siemens_coefficient = 0.6
+
 /obj/item/clothing/glasses/eyepatch
 	name = "eyepatch"
 	desc = "Yarr."
@@ -225,12 +237,10 @@
 		src.hud = new/obj/item/clothing/glasses/hud/security(src)
 		return
 
-/obj/item/clothing/glasses/sunglasses/sechud/tactical
-	name = "tactical HUD"
-	desc = "Flash-resistant goggles with inbuilt security information. Made from durable synthetic."
-	icon_state = "swatgoggles"
-	armor = list(melee = 20, bullet = 20, laser = 20, energy = 15, bomb = 20, bio = 0, rad = 0)
-	siemens_coefficient = 0.6
+/obj/item/clothing/glasses/sunglasses/sechud/goggles //now just a more "military" set of HUDglasses for the Torch
+	name = "HUD goggles"
+	desc = "Flash-resistant goggles with an inbuilt heads-up display."
+	icon_state = "goggles"
 
 /obj/item/clothing/glasses/thermal
 	name = "Optical Thermal Scanner"

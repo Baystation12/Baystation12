@@ -264,7 +264,7 @@
 
 /obj/item/clothing/mask/chameleon
 	name = "gas mask"
-	icon_state = "gas_alt"
+	icon_state = "fullgas"
 	item_state = "gas_alt"
 	desc = "It looks like a plain gask mask, but on closer inspection, it seems to have a small dial inside."
 	origin_tech = list(TECH_ILLEGAL = 3)
