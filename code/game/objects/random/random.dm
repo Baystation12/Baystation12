@@ -131,7 +131,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "traumakit"
 	item_to_spawn()
-		return pick(prob(21);obj/random/medical/lite,\
+		return pick(prob(21);/obj/random/medical/lite,\
 					prob(2);/obj/item/bodybag,\
 					prob(2);/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline,\
 					prob(2);/obj/item/weapon/reagent_containers/glass/bottle/antitoxin,\
