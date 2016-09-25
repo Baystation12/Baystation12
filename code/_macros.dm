@@ -19,6 +19,8 @@
 
 #define iscolorablegloves(A) (istype(A, /obj/item/clothing/gloves/color)||istype(A, /obj/item/clothing/gloves/insulated)||istype(A, /obj/item/clothing/gloves/thick))
 
+#define isclient(A) istype(A, /client)
+
 #define iscorgi(A) istype(A, /mob/living/simple_animal/corgi)
 
 #define is_drone(A) istype(A, /mob/living/silicon/robot/drone)

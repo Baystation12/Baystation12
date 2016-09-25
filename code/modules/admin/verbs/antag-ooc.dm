@@ -13,9 +13,6 @@
 	msg = sanitize(msg)
 	if(!msg)	return
 	var/display_name = src.key
-	if(holder)
-		if(holder.fakekey)
-			display_name = usr.client.holder.fakekey
 	var/player_display = holder ? "[display_name]([usr.client.holder.rank])" : display_name
 	for(var/mob/M in mob_list)
 		if(check_rights(R_ADMIN|R_MOD, 0, M)) // What staff see

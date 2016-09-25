@@ -47,16 +47,19 @@
 
 	icon = 'icons/mob/Human_face.dmi'	  // default icon for all hairs
 	species_allowed = list("Human","Unathi","Akula","Lamia", "Machine")
+	var/veryshort						//doesn't need to be hidden by BLOCKHEADHAIR hats/helmets
 
 	bald
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
 		species_allowed = list("Human","Unathi","Akula","Lamia", "Machine")
+		veryshort = 1
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
 		icon_state = "hair_a" // you do not need to define _s or _l sub-states, game automatically does this for you
+		veryshort = 1
 
 	twintail
 		name = "Twintail"
@@ -105,6 +108,7 @@
 	cut
 		name = "Cut Hair"
 		icon_state = "hair_c"
+		veryshort = 1
 
 	flair
 		name = "Flaired Hair"
@@ -267,14 +271,17 @@
 	rows
 		name = "Rows"
 		icon_state = "hair_rows1"
+		veryshort = 1
 
 	rows2
 		name = "Rows 2"
 		icon_state = "hair_rows2"
+		veryshort = 1
 
 	sargeant
 		name = "Flat Top"
 		icon_state = "hair_sargeant"
+		veryshort = 1
 
 	emo
 		name = "Emo"
@@ -367,6 +374,7 @@
 	balding
 		name = "Balding Hair"
 		icon_state = "hair_e"
+		veryshort = 1
 
 	familyman
 		name = "The Family Man"
@@ -439,10 +447,6 @@
 	doublebun
 		name = "Double-Bun"
 		icon_state = "hair_doublebun"
-
-	bald
-		name = "Bald"
-		icon_state = "bald"
 
 /*
 ///////////////////////////////////

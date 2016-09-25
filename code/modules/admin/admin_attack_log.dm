@@ -34,6 +34,8 @@
 /proc/admin_attack_log(var/mob/attacker, var/mob/victim, var/attacker_message, var/victim_message, var/admin_message)
 	if(!(attacker || victim))
 		EXCEPTION("Neither attacker or victim was supplied.")
+	if(!store_admin_attack_log(attacker, victim))
+		return
 
 	var/turf/attack_location
 	var/intent = "(INTENT: N/A)"
@@ -54,6 +56,11 @@
 		if(!attack_location)
 			attack_location = get_turf(victim)
 
+	attack_log_repository.store_attack_log(attacker, victim, admin_message)
+
+	if(!notify_about_admin_attack_log(attacker, victim))
+		return
+
 	var/full_admin_message
 	if(attacker && victim)
 		full_admin_message = "[key_name(attacker)] [admin_message] [key_name(victim)] (INTENT: [attacker? uppertext(attacker.a_intent) : "N/A"])"
@@ -62,9 +69,25 @@
 	else
 		full_admin_message = "[key_name(victim)] [admin_message]"
 	full_admin_message = append_admin_tools(full_admin_message, attacker||victim, attack_location)
-
 	msg_admin_attack(full_admin_message)
-	attack_log_repository.store_attack_log(attacker, victim, admin_message)
+
+// Only store attack logs if any of the involved subjects have (had) a client
+/proc/store_admin_attack_log(var/mob/attacker, var/mob/victim)
+	if(attacker && attacker.ckey)
+		return TRUE
+	if(victim && victim.ckey)
+		return TRUE
+	return FALSE
+
+// Only notify admins if all involved subjects have (had) a client
+/proc/notify_about_admin_attack_log(var/mob/attacker, var/mob/victim)
+	if(attacker && victim)
+		return attacker.ckey && victim.ckey
+	if(attacker)
+		return attacker.ckey
+	if(victim)
+		return victim.ckey
+	return FALSE
 
 /proc/admin_attacker_log_many_victims(var/mob/attacker, var/list/mob/victims, var/attacker_message, var/victim_message, var/admin_message)
 	if(!victims || !victims.len)
