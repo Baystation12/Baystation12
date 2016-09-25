@@ -1,6 +1,0 @@
-author: Chinsky
-
-delete-after: True
-
-changes: 
-  - rscadd: "Can now pick color of labcoat in loadout menu, replacing separate preset colored coats. My condolences to those who had preset ones."
