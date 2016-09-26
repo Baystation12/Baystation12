@@ -443,7 +443,7 @@
 	return
 
 /obj/structure/closet/wardrobe/suit
-	name = "suit locker"
+	name = "formal clothing locker"
 	icon_state = "mixed"
 	icon_closed = "mixed"
 
@@ -460,16 +460,8 @@
 	new /obj/item/clothing/under/suit_jacket/really_black(src)
 	new /obj/item/clothing/under/suit_jacket/red(src)
 	new /obj/item/clothing/under/scratch(src)
-	new /obj/item/clothing/under/blacksuit(src)
-	new /obj/item/clothing/suit/storage/toggle/blacksuit(src)
-
-/obj/structure/closet/wardrobe/formal //mostly the lawyer closet outside of job_closets
-	name = "formal clothing locker"
-	icon_state = "mixed"
-	icon_closed = "mixed"
-
-/obj/structure/closet/wardrobe/formal/New()
-	..()
+	new /obj/item/clothing/under/rank/internalaffairs/plain(src)
+	new /obj/item/clothing/suit/storage/toggle/internalaffairs/plain(src)
 	new /obj/item/clothing/under/assistantformal(src)
 	new /obj/item/clothing/under/lawyer/female(src)
 	new /obj/item/clothing/under/lawyer/black(src)
@@ -482,7 +474,6 @@
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/laceup(src)
 	new /obj/item/clothing/shoes/laceup(src)
-
 
 /obj/structure/closet/wardrobe/lawyer_black
 	name = "internal affairs wardrobe"

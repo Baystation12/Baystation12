@@ -59,10 +59,6 @@
  * Torch Chef
  */
 /obj/structure/closet/chefcloset/torch
-	name = "food service closet"
-	desc = "It's a storage unit for foodservice garments."
-	icon_state = "black"
-	icon_closed = "black"
 
 /obj/structure/closet/chefcloset/torch/New()
 	..()
@@ -104,18 +100,12 @@
  * Torch Janitor
  */
 /obj/structure/closet/jcloset/torch
-	name = "custodial closet"
-	desc = "It's a storage unit for janitorial equipment."
-	icon_state = "mixed"
-	icon_closed = "mixed"
 
-/obj/structure/closet/jcloset/New()
+/obj/structure/closet/jcloset/torch/New()
 	..()
-	new /obj/item/clothing/under/rank/janitor(src)
 	new /obj/item/device/radio/headset/headset_service(src)
 	new /obj/item/weapon/cartridge/janitor(src)
 	new /obj/item/clothing/gloves/thick(src)
-	new /obj/item/clothing/head/soft/purple(src)
 	new /obj/item/device/flashlight(src)
 	new /obj/item/weapon/caution(src)
 	new /obj/item/weapon/caution(src)

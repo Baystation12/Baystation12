@@ -412,14 +412,6 @@
 	icon_state = "mbill"
 	item_state = "mbill"
 
-/obj/item/clothing/suit/storage/toggle/blacksuit
-	name = "black suit jacket"
-	desc = "A smooth black suit jacket."
-	icon_state = "ia_jacket_open"
-	item_state = "ia_jacket"
-	icon_open = "ia_jacket_open"
-	icon_closed = "ia_jacket"
-	blood_overlay_type = "coat"
-	body_parts_covered = UPPER_TORSO|ARMS
+
 
 

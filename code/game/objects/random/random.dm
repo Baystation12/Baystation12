@@ -474,7 +474,6 @@ obj/random/closet //A couple of random closets to spice up maint
 					/obj/structure/closet/wardrobe/xenos,\
 					/obj/structure/closet/wardrobe/mixed,\
 					/obj/structure/closet/wardrobe/suit,\
-					/obj/structure/closet/wardrobe/formal,\
 					/obj/structure/closet/wardrobe/orange)
 
 obj/random/obstruction //Large objects to block things off in maintenance

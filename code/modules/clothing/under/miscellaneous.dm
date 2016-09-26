@@ -607,10 +607,4 @@
 	species_restricted = list("Monkey")
 	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
 
-/obj/item/clothing/under/blacksuit
-	desc = "A plain shirt and pair of pressed black pants."
-	name = "formal outfit"
-	icon_state = "internalaffairs"
-	item_state = "ba_suit"
-	worn_state = "internalaffairs"
 
