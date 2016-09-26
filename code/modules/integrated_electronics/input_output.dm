@@ -168,8 +168,9 @@
 
 	if(!isweakref(I.data))
 		return
-	var/weakref/w = I.data
-	var/atom/A = w.resolve()
+	var/atom/A = I.data.resolve()
+	if(!A)
+		return
 	var/desired_type = A.type
 
 	var/list/nearby_things = range(1, get_turf(src))
@@ -216,7 +217,7 @@
 /obj/item/integrated_circuit/input/signaler/on_data_written()
 	var/datum/integrated_io/new_freq = inputs[1]
 	var/datum/integrated_io/new_code = inputs[2]
-	if(isnum(new_freq.data))
+	if(isnum(new_freq.data) && new_freq.data > 0)
 		set_frequency(new_freq.data)
 	if(isnum(new_code.data))
 		code = new_code.data

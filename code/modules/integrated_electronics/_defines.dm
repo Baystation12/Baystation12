@@ -42,10 +42,10 @@
 	..()
 
 /obj/item/integrated_circuit/proc/setup_io(var/list/io_list, var/io_type)
-	var/list/names = io_list.Copy()
+	var/list/io_list_copy = io_list.Copy()
 	io_list.Cut()
-	for(var/name in names)
-		io_list.Add(new io_type(src, name))
+	for(var/io_entry in io_list_copy)
+		io_list.Add(new io_type(src, io_entry, io_list_copy[io_entry]))
 
 /obj/item/integrated_circuit/Destroy()
 	for(var/datum/integrated_io/I in inputs)
@@ -242,9 +242,10 @@
 	var/list/linked = list()
 	var/io_type = DATA_CHANNEL
 
-/datum/integrated_io/New(var/newloc, var/name)
+/datum/integrated_io/New(var/newloc, var/name, var/data)
 	..()
 	src.name = name
+	src.data = data
 	holder = newloc
 	if(!istype(holder))
 		message_admins("ERROR: An integrated_io ([src.name]) spawned without a valid holder!  This is a bug.")

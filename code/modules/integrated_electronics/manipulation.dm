@@ -34,53 +34,41 @@
 	flags = OPENCONTAINER
 	complexity = 20
 	cooldown_per_use = 6 SECONDS
-	inputs = list("target ref", "injection amount")
+	inputs = list("target ref", "injection amount" = 5)
 	outputs = list()
 	activators = list("inject")
-	var/inject_amount = 5
 
 /obj/item/integrated_circuit/manipulation/injector/New()
 	..()
 	create_reagents(30)
-	var/datum/integrated_io/amount = inputs[2]
-	amount.data = inject_amount
 
-/obj/item/integrated_circuit/manipulation/injector/on_data_written()
+/obj/item/integrated_circuit/manipulation/injector/proc/inject_amount()
 	var/datum/integrated_io/amount = inputs[2]
 	if(isnum(amount.data))
-		amount.data = Clamp(amount.data, 0, 30)
-		inject_amount = amount.data
+		return Clamp(amount.data, 0, 30)
 
 /obj/item/integrated_circuit/manipulation/injector/do_work()
+	set waitfor = 0 // Don't sleep in a proc that is called by a processor without this set, otherwise it'll delay the entire thing
 	var/datum/integrated_io/target = inputs[1]
 	var/atom/movable/AM = target.data_as_type(/atom/movable)
 	if(!istype(AM)) //Invalid input
 		return
 	if(!reagents.total_volume) // Empty
 		return
-	if(AM.Adjacent(get_turf(src)))
-		if(!AM.reagents)
-			return
-		if(!AM.is_open_container() && !ismob(AM) )
-			return
-		if(!AM.reagents.get_free_space())
-			return
-
+	if(AM.can_be_injected_by(src))
 		if(isliving(AM))
-			var/mob/living/L = AM
-			if(!L.can_inject(null, 0, BP_TORSO))
-				return
-			loc.visible_message("<span class='warning'>[src] is trying to inject [AM]!</span>")
+			var/turf/T = get_turf(AM)
+			T.visible_message("<span class='warning'>[src] is trying to inject [AM]!</span>")
 			sleep(3 SECONDS)
-			if(!AM.Adjacent(get_turf(src)))
+			if(!AM.can_be_injected_by(src))
 				return
 			var/contained = reagents.get_reagents()
-			var/trans = reagents.trans_to_mob(target, inject_amount, CHEM_BLOOD)
+			var/trans = reagents.trans_to_mob(target, inject_amount(), CHEM_BLOOD)
 			message_admins("[src] injected \the [AM] with [trans]u of [english_list(contained)].")
 			to_chat(AM, "<span class='notice'>You feel a tiny prick!</span>")
 			visible_message("<span class='warning'>[src] injects [AM]!</span>")
 		else
-			reagents.trans_to(AM, inject_amount)
+			reagents.trans_to(AM, inject_amount())
 
 /obj/item/integrated_circuit/manipulation/reagent_pump
 	name = "reagent pump"
@@ -91,15 +79,10 @@
 	outside the machine if it is next to the machine.  Note that this cannot be used on entities."
 	flags = OPENCONTAINER
 	complexity = 8
-	inputs = list("source ref", "target ref", "injection amount")
+	inputs = list("source ref", "target ref", "injection amount" = 10)
 	outputs = list()
 	activators = list("transfer reagents")
 	var/transfer_amount = 10
-
-/obj/item/integrated_circuit/manipulation/reagent_pump/New()
-	..()
-	var/datum/integrated_io/amount = inputs[3]
-	amount.data = transfer_amount
 
 /obj/item/integrated_circuit/manipulation/reagent_pump/on_data_written()
 	var/datum/integrated_io/amount = inputs[3]
@@ -183,11 +166,11 @@
 /obj/item/integrated_circuit/manipulation/locomotion/do_work()
 	..()
 	var/turf/T = get_turf(src)
-	if(istype(loc, /obj/item/device/electronic_assembly))
+	if(T && istype(loc, /obj/item/device/electronic_assembly))
 		var/obj/item/device/electronic_assembly/machine = loc
-		if(machine.anchored || machine.w_class >= ITEMSIZE_LARGE)
+		if(machine.anchored || machine.w_class >= 4)
 			return
-		if(machine.loc && machine.loc == T) // Check if we're held by someone.  If the loc is the floor, we're not held.
+		if(machine.loc == T) // Check if we're held by someone.  If the loc is the floor, we're not held.
 			var/datum/integrated_io/wanted_dir = inputs[1]
 			if(isnum(wanted_dir.data))
 				step(machine, wanted_dir.data)
