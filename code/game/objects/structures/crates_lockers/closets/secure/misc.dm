@@ -53,8 +53,8 @@
 		new /obj/item/device/tape/random(src)
 		new /obj/item/weapon/storage/secure/briefcase(src)
 		new /obj/item/clothing/shoes/laceup(src)
-		new /obj/item/clothing/under/blacksuit(src)
-		new /obj/item/clothing/suit/storage/toggle/blacksuit(src)
+		new /obj/item/clothing/under/rank/internalaffairs/plain(src)
+		new /obj/item/clothing/suit/storage/toggle/internalaffairs/plain(src)
 		new /obj/item/clothing/glasses/sunglasses/big(src)
 		return
 
