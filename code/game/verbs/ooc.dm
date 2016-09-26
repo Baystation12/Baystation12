@@ -46,7 +46,7 @@
 		if(target.is_preference_enabled(/datum/client_preference/show_ooc))
 			if(target.is_key_ignored(key)) // If we're ignored by this person, then do nothing.
 				continue
-			if(!is_stealthed() && config.allow_admin_ooccolor && (src.prefs.ooccolor != initial(src.prefs.ooccolor))) // keeping this for the badmins
+			if(!is_stealthed() && can_select_ooc_color(src) && (src.prefs.ooccolor != initial(src.prefs.ooccolor))) // keeping this for the badmins
 				to_chat(target, "<font color='[src.prefs.ooccolor]'><span class='ooc'>" + create_text_tag("ooc", "OOC:", target) + " <EM>[key]:</EM> <span class='message'>[msg]</span></span></font>")
 			else
 				to_chat(target, "<span class='ooc'><span class='[ooc_style]'>" + create_text_tag("ooc", "OOC:", target) + " <EM>[key]:</EM> <span class='message'>[msg]</span></span></span>")
