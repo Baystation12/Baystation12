@@ -678,6 +678,9 @@
 	name = "\improper Patient Wing"
 	icon_state = "patients"
 
+/area/medical/patient_wing/washroom
+	name = "\improper Patient Wing Washroom"
+
 /area/medical/surgery2
 	name = "\improper Operating Theatre 2"
 	icon_state = "surgery"
