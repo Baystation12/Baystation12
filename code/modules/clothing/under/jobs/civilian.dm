@@ -89,6 +89,10 @@
 	worn_state = "internalaffairs"
 	starting_accessories = list(/obj/item/clothing/accessory/black)
 
+/obj/item/clothing/under/rank/internalaffairs/plain
+	desc = "A plain shirt and pair of pressed black pants."
+	name = "formal outfit"
+
 
 /obj/item/clothing/under/rank/janitor
 	desc = "It's the official uniform of the station's janitor. It has minor protection from biohazards."
