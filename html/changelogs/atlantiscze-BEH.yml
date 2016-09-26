@@ -1,0 +1,6 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - tweak: "Malfunctioning AI ability Basic Encryption Hack now lists station APCs first. Off-station APCs (that do not contribute to CPU generation) are appended to the bottom of the list."
