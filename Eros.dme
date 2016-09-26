@@ -1213,6 +1213,7 @@
 #include "code\modules\eros\clothing\clothing.dm"
 #include "code\modules\eros\clothing\under.dm"
 #include "code\modules\eros\clothing\underwear.dm"
+#include "code\modules\eros\mob\living\carbon\human\species\station\station.dm"
 #include "code\modules\eros\mob\new_player\sprite_accesories.dm"
 #include "code\modules\error_handler\_defines.dm"
 #include "code\modules\error_handler\error_handler.dm"
