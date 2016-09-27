@@ -38,7 +38,6 @@
 
 		update_icon()
 		nanomanager.update_uis(src) // update all UIs attached to src
-		w_class = 4
 //TODO: Have this take an assemblyholder
 	else if(isassembly(item))
 		var/obj/item/device/assembly/A = item
@@ -151,9 +150,6 @@
 		tank_two = null
 	else
 		return
-
-	if(!tank_one || !tank_two)
-		w_class = 2
 
 	T.loc = get_turf(src)
 	update_icon()
