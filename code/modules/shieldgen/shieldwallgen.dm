@@ -234,7 +234,7 @@
 	var/turf/T = src.loc
 	var/turf/T2 = src.loc
 
-	for(var/dist = 0, (max_range+1), dist += 1) // checks out to 8 tiles away for fields
+	for(var/dist = 0, dist <= (max_range+1), dist += 1) // checks out to 8 tiles away for fields
 		T = get_step(T2, NSEW)
 		T2 = T
 		if(locate(/obj/machinery/shieldwall) in T)
