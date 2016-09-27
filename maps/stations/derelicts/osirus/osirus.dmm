@@ -73,7 +73,7 @@
 "bu" = (/obj/machinery/power/apc/battle{dir = 8; name = "west bump"; pixel_x = -27; pixel_y = 0},/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/structure/table/reinforced,/obj/random/tool,/obj/random/tool,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/ship_battle/osirus/bridge)
 "bv" = (/obj/machinery/space_battle/ship_core,/turf/simulated/floor/tiled,/area/ship_battle/osirus/bridge)
 "bw" = (/obj/item/weapon/stool,/turf/simulated/floor/tiled,/area/ship_battle/osirus/bridge)
-"bx" = (/obj/machinery/space_battle/helm{damage_level = 3; icon_state = "computer_broken"},/turf/simulated/floor/tiled,/area/ship_battle/osirus/bridge)
+"bx" = (/obj/machinery/space_battle/computer/helm{damage_level = 3; icon_state = "computer_broken"},/turf/simulated/floor/tiled,/area/ship_battle/osirus/bridge)
 "by" = (/obj/structure/grille/broken,/turf/simulated/floor/plating,/area/ship_battle/osirus/bridge)
 "bz" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/tiled,/area/ship_battle/osirus/central)
 "bA" = (/obj/structure/inflatable/door,/turf/simulated/floor/tiled,/area/ship_battle/osirus/central)

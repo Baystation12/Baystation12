@@ -1,18 +1,17 @@
-/obj/machinery/space_battle/helm
+/obj/machinery/space_battle/computer/helm
 	name = "helm control console"
-	icon_state = "computer"
-	icon = 'icons/obj/ship_battles.dmi'
+	screen_icon = "helm"
 	var/autopilot = 0
 	var/manual_control = 0
 	var/list/known_sectors = list()
 	var/dx		//desitnation
 	var/dy		//coordinates
 
-/obj/machinery/space_battle/helm/initialize()
+/obj/machinery/space_battle/computer/helm/initialize()
 	..()
 	get_known_sectors()
 
-/obj/machinery/space_battle/helm/proc/get_known_sectors()
+/obj/machinery/space_battle/computer/helm/proc/get_known_sectors()
 	var/area/overmap/map = locate() in world
 	for(var/obj/effect/overmap/sector/S in map)
 		if (S.known)
@@ -23,7 +22,7 @@
 			known_sectors[S.name] = R
 	..()
 
-/obj/machinery/space_battle/helm/process()
+/obj/machinery/space_battle/computer/helm/process()
 	..()
 	if(istype(linked, /obj/effect/overmap/ship))
 		var/obj/effect/overmap/ship/ship = linked
@@ -45,19 +44,19 @@
 
 		return
 
-/obj/machinery/space_battle/helm/relaymove(var/mob/user, direction)
+/obj/machinery/space_battle/computer/helm/relaymove(var/mob/user, direction)
 	if(manual_control && linked)
 		linked.relaymove(user,direction)
 		return 1
 
-/obj/machinery/space_battle/helm/check_eye(var/mob/user as mob)
+/obj/machinery/space_battle/computer/helm/check_eye(var/mob/user as mob)
 	if (!manual_control)
 		return -1
 	if (!get_dist(user, src) > 1 || user.blinded || !linked )
 		return -1
 	return 0
 
-/obj/machinery/space_battle/helm/attack_hand(var/mob/user as mob)
+/obj/machinery/space_battle/computer/helm/attack_hand(var/mob/user as mob)
 //	if(..())
 //		user.unset_machine()
 //		manual_control = 0
@@ -70,7 +69,7 @@
 
 	ui_interact(user)
 
-/obj/machinery/space_battle/helm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/space_battle/computer/helm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
 		return
 
@@ -113,7 +112,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/space_battle/helm/Topic(href, href_list)
+/obj/machinery/space_battle/computer/helm/Topic(href, href_list)
 	if(..())
 		return 1
 

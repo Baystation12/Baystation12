@@ -1,9 +1,9 @@
 #define ENGINE_JUMP_DELAY 600
 //Engine control and monitoring console
 
-/obj/machinery/space_battle/engine_control
+/obj/machinery/space_battle/computer/engine_control
 	name = "engine control console"
-	icon_state = "computer"
+	screen_icon = "engine_control"
 	var/state = "status"
 	var/list/engines = list()
 	var/list/zlevels = list()
@@ -11,12 +11,12 @@
 	anchored = 1
 	density = 1
 
-/obj/machinery/space_battle/engine_control/initialize()
+/obj/machinery/space_battle/computer/engine_control/initialize()
 	..()
 	spawn(5)
 		reconnect()
 
-/obj/machinery/space_battle/engine_control/reconnect()
+/obj/machinery/space_battle/computer/engine_control/reconnect()
 	engines.Cut()
 	for(var/datum/ship_engine/E in ship_engines)
 		if ((E.zlevel in zlevels || E.zlevel == src.z) && E.id_tag == src.id_tag && !(src in engines))
@@ -25,7 +25,7 @@
 	return engines.len
 
 
-/obj/machinery/space_battle/engine_control/Destroy()
+/obj/machinery/space_battle/computer/engine_control/Destroy()
 	for(var/datum/ship_engine/S in engines)
 		S.controller = null
 	engines.Cut()
@@ -35,7 +35,7 @@
 		linked = null
 	return ..()
 
-/obj/machinery/space_battle/engine_control/attack_hand(var/mob/user as mob)
+/obj/machinery/space_battle/computer/engine_control/attack_hand(var/mob/user as mob)
 //	if(..())
 //		user.unset_machine()
 //		return
@@ -48,7 +48,7 @@
 
 	ui_interact(user)
 
-/obj/machinery/space_battle/engine_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/space_battle/computer/engine_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
 		return
 
@@ -75,7 +75,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/space_battle/engine_control/Topic(href, href_list)
+/obj/machinery/space_battle/computer/engine_control/Topic(href, href_list)
 	if(..())
 		return 1
 
@@ -104,7 +104,7 @@
 	add_fingerprint(usr)
 	updateUsrDialog()
 
-/obj/machinery/space_battle/engine_control/proc/burn()
+/obj/machinery/space_battle/computer/engine_control/proc/burn()
 	if(!cooldown())
 		return 0
 	if(engines.len == 0)
@@ -117,33 +117,33 @@
 		ship.braked = 0
 	return res
 
-/obj/machinery/space_battle/engine_control/proc/get_total_thrust()
+/obj/machinery/space_battle/computer/engine_control/proc/get_total_thrust()
 	for(var/datum/ship_engine/E in engines)
 		. += E.get_thrust()
 
-/obj/machinery/space_battle/engine_control/proc/cooldown()
+/obj/machinery/space_battle/computer/engine_control/proc/cooldown()
 	if(cooldown > world.timeofday)
 		return 0
 	return 1
 
-/obj/machinery/space_battle/engine_control/proc/stopped(var/forced = 0)
+/obj/machinery/space_battle/computer/engine_control/proc/stopped(var/forced = 0)
 	if(istype(linked, /obj/effect/overmap/ship))
 		var/obj/effect/overmap/ship/ship = linked
 		if(!(ship.braked && cooldown()) || forced)
 			cooldown = world.timeofday+(ENGINE_JUMP_DELAY*get_efficiency(-1,1)*10)
 			ship.braked = 1
-			var/obj/machinery/space_battle/helm/H = ship.nav_control
+			var/obj/machinery/space_battle/computer/helm/H = ship.nav_control
 			if(H && istype(H))
 				H.visible_message("<span class='warning'>\The [H] beeps, \"Cooldown set to [time_remaining()] seconds!\"</span>")
 			src.visible_message("<span class='warning'>\icon[src] \The [src] beeps, \"Cooldown set to [time_remaining()] seconds!\"</span>")
 
-/obj/machinery/space_battle/engine_control/proc/time_remaining()
+/obj/machinery/space_battle/computer/engine_control/proc/time_remaining()
 	var/time = (cooldown - world.timeofday)/10
 	if(time < 0)
 		time = 0
 	return round(time)
 
-/obj/machinery/space_battle/engine_control/examine(var/mob/user)
+/obj/machinery/space_battle/computer/engine_control/examine(var/mob/user)
 	..()
 	if(time_remaining())
 		user << "<span class='warning'>It is able to jump again in [time_remaining()] seconds!</span>"

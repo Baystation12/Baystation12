@@ -1,0 +1,15 @@
+#NAME example
+#PATH /maps/ships/prefabs/example/example.dmm
+#TEAM 0
+
+#~~~~~~~ZEUS~~~~~~~#
+newship
+TITLE Zeus
+PATH /maps/ships/prefabs/two/zeus.dmm
+TEAM 2
+newship
+
+TITLE Drone
+PATH PATH /maps/ships/prefabs/one/drone.dmm
+TEAM 1
+newship

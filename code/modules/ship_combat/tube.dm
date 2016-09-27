@@ -11,12 +11,12 @@
 	var/jammed = 0
 	var/charging = 0
 
-	var/obj/machinery/space_battle/missile_computer/computer
+	var/obj/machinery/space_battle/computer/missile/computer
 	var/obj/machinery/space_battle/tube_barrel/barrel
 
 	var/mob/to_kill // Muahaha
 
-	var/list/can_pass = list(/obj/structure/grille, /obj/machinery/shieldwall)
+	var/list/can_pass = list(/obj/structure/grille, /obj/machinery/shieldwall, /obj/machinery/space_battle/tube_barrel)
 
 	Destroy()
 		if(computer)
@@ -110,7 +110,21 @@
 			lasttouch.client.missiles_loaded += 1
 		if(rails.len)
 			M.power *= (1+(rails.len*0.02))
-		to_return = M.fire_missile(location, start)
+		for(var/obj/machinery/space_battle/tube_barrel/B in rails)
+			B.fired()
+			sleep(5)
+		var/list/shields = list()
+		for(var/obj/machinery/space_battle/shield_generator/generator in world)
+			if(generator.z == start.z)
+				shields |= generator.shields
+				break
+		if(shields.len)
+			var/obj/effect/adv_shield/shield = pick(shields)
+			if(shield.take_damage(M.damage * 0.4))
+				to_return = M.fire_missile(location, start)
+			else
+				qdel(M)
+				to_return = "Missile intercepted by shields!"
 		use_power(720)
 		if(computer && computer.firing_angle != "Carefully Aimed")
 			if(computer.firing_angle == "Flanking")
@@ -121,7 +135,6 @@
 					jammed()
 			else if(prob(5*efficiency))
 				jammed()
-
 	if(!count || !to_return)
 		var/junk_count = 0
 		for(var/atom/movable/A in loc)
@@ -148,8 +161,6 @@
 			return "ERROR: No missile found!"
 		else
 			return 1
-	for(var/obj/machinery/space_battle/tube_barrel/B in rails)
-		B.fired()
 	var/turf/T = get_turf(src)
 	var/datum/gas_mixture/env = T.return_air()
 	if(env && env.return_pressure())
@@ -254,7 +265,7 @@
 			if(!(stat & (NOPOWER|BROKEN) || jammed))
 				current_charge += active_power_usage/2
 				if(current_charge >= maxcharge)
-					flick("rail_charging", src)
+					flick("[initial(icon_state)]_charging", src)
 					spawn(3.4)
 						update_icon()
 					var/turf/T = get_step(loc,dir)
@@ -274,12 +285,21 @@
 				icon_state = initial(icon_state)
 		else return ..()
 
+/obj/machinery/space_battle/tube_barrel/break_machine()
+	..()
+	if(damage_level)
+		density = 0
+
+/obj/machinery/space_battle/tube_barrel/fix_machine()
+	density = 1
+
 /obj/machinery/space_battle/tube_barrel/ex_act(var/severity)
 	if(severity == 1 || (severity == 2 && prob(50)))
 		current_charge = 0
 		..()
 
 /obj/machinery/space_battle/tube_barrel/proc/fired()
+	flick("[initial(icon_state)]_firing", src)
 	current_charge = 0
 	use_power = 1
 	update_icon()
@@ -295,6 +315,17 @@
 	tube = T
 	jammed = 1
 	update_icon()
+
+/obj/machinery/space_battle/tube_barrel/Bumped(var/atom/A as obj|mob)
+	if(istype(A, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = A
+		H.visible_message("<span class='notice'>\The [H] tries to slip under \the [src]...</span>")
+		if(do_after(usr, rand(5,60)))
+
+			H.forceMove(get_turf(src))
+			return
+	return ..()
+
 
 /obj/machinery/space_battle/tube_barrel/attackby(var/obj/item/O, var/mob/user)
 	var/efficiency = get_efficiency(-1,1)

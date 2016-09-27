@@ -27,12 +27,14 @@
 
 	initialize()
 		linked = map_sectors["[z]"]
+		reconnect()
 		..()
 
 	proc/rename(var/identification)
 		return 1
 
-	proc/change_team(var/team)
+	proc/change_team(var/new_team as num)
+		team = new_team
 		return 1
 
 	process()

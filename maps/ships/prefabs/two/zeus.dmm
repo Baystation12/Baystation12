@@ -1,0 +1,124 @@
+"aa" = (/turf/space,/area/ship_battle/zeus)
+"ab" = (/turf/simulated/wall/r_wall,/area/ship_battle/zeus)
+"ac" = (/obj/machinery/space_battle/missile_sensor/tracking{id_tag = "zeus_port_gun"; sensor_id = "zeus_port_tracking"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"ad" = (/obj/machinery/space_battle/missile_sensor/guidance{id_tag = "zeus_port_gun"; sensor_id = "zeus_port_guidance"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"ae" = (/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/window/reinforced{dir = 4},/obj/machinery/space_battle/missile_sensor/hub{id_tag = "zeus_port_gun"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"af" = (/obj/machinery/conveyor{dir = 1; id = "packageSort1"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"ag" = (/obj/machinery/conveyor{dir = 4; id = "packageSort2"},/obj/machinery/missile{dir = 8; pixel_x = -20},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"ah" = (/obj/machinery/conveyor{dir = 4; id = "packageSort2"},/obj/machinery/missile{dir = 8; pixel_x = -5},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"ai" = (/obj/machinery/conveyor{dir = 4; id = "packageSort2"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aj" = (/obj/machinery/conveyor{dir = 4; id = "packageSort2"},/obj/machinery/missile{dir = 8; pixel_x = -15},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"ak" = (/obj/structure/sign/fire,/turf/simulated/wall/r_wall,/area/ship_battle/zeus)
+"al" = (/obj/structure/shuttle/engine/propulsion/burst{dir = 8},/turf/simulated/wall/r_wall,/area/ship_battle/zeus)
+"am" = (/obj/structure/shuttle/engine/heater{dir = 8},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/wall/r_wall,/area/ship_battle/zeus)
+"an" = (/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/window/reinforced{dir = 4},/obj/structure/reagent_dispensers/fueltank,/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"ao" = (/obj/machinery/light/small{dir = 8},/obj/machinery/missile{dir = 4; pixel_x = -15},/obj/machinery/conveyor{dir = 4; id = "packageSort2"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"ap" = (/obj/machinery/missile{dir = 4; pixel_x = 5},/obj/machinery/conveyor{dir = 4; id = "packageSort2"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aq" = (/obj/machinery/conveyor{dir = 4; id = "packageSort2"},/obj/machinery/missile{dir = 4; pixel_x = -5},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"ar" = (/obj/structure/plasticflaps{opacity = 0},/obj/machinery/conveyor{dir = 4; id = "packageSort2"},/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "Biohazard"; name = "Biohazard Shutter"; opacity = 0},/obj/machinery/door/firedoor/border_only,/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"as" = (/obj/machinery/missile{dir = 4},/obj/machinery/light/small/emergency{active_power_usage = 15; brightness_range = 7; name = "dim light fixture"},/obj/machinery/space_battle/tube{dir = 4; id_tag = "zeus_port_gun"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"at" = (/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"au" = (/obj/machinery/door/blast/regular{id = "AICore"; name = "AI core maintenance hatch"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"av" = (/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/window/reinforced{dir = 4},/obj/structure/reagent_dispensers/fueltank,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aw" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/structure/window/reinforced{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 6},/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"ax" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/structure/window/reinforced{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/obj/machinery/door/window/eastright{base_state = "left"; dir = 8; icon_state = "left"; name = "Storage"; req_access = list(1)},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"ay" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"az" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/structure/window/reinforced{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/obj/machinery/door/window/eastright{name = "Storage"; req_access = list(1)},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"aA" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/structure/window/reinforced{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 10; icon_state = "intact"},/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"aB" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{external_pressure_bound = 140; external_pressure_bound_default = 140; icon_state = "map_vent_out"; pressure_checks = 1; pressure_checks_default = 1; use_power = 1},/turf/simulated/floor/airless,/area/ship_battle/zeus)
+"aC" = (/obj/machinery/door/firedoor/border_only,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"aD" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/shoes/magboots,/obj/structure/window/reinforced{dir = 8},/obj/item/weapon/tank/jetpack/carbondioxide,/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"aE" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/device/radio,/obj/item/weapon/screwdriver,/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"aF" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/suit/space,/obj/item/clothing/head/helmet/space,/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"aG" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"aH" = (/obj/machinery/light/small{dir = 1},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/machinery/space_battle/computer/missile{id_tag = "zeus_port_gun"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aI" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 1},/obj/machinery/meter,/obj/machinery/space_battle/computer/engine_control{id_tag = "zeus_engines"; name = "Engines Control Console"},/obj/machinery/button/remote/shield{id_tag = 1; name = "Remote Shielding"; pixel_y = 27},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aJ" = (/obj/machinery/atmospherics/pipe/tank/oxygen{dir = 8},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aK" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/wall,/area/ship_battle/zeus)
+"aL" = (/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/machinery/space_battle/shieldwallgen/remote{anchored = 1; id_tag = 1; name = "Remote Shield Generator"; stat = 1},/obj/machinery/light/small/emergency{active_power_usage = 15; brightness_range = 7; dir = 1; name = "dim light fixture"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aM" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 5; icon_state = "intact"},/turf/simulated/floor/airless,/area/ship_battle/zeus)
+"aN" = (/obj/machinery/door/airlock/external{frequency = 1331; icon_state = "door_locked"; id_tag = "nuke_shuttle_dock_outer"; locked = 1; name = "Docking Port Airlock"; req_access = list(13)},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aO" = (/obj/machinery/embedded_controller/radio/airlock/docking_port{frequency = 1331; id_tag = "nuke_shuttle_dock_airlock"; pixel_x = 0; pixel_y = 30; req_access = list(0); req_one_access = list(13); tag_airpump = "nuke_shuttle_dock_pump"; tag_chamber_sensor = "nuke_shuttle_dock_sensor"; tag_exterior_door = "nuke_shuttle_dock_outer"; tag_interior_door = "nuke_shuttle_dock_inner"},/obj/effect/floor_decal/industrial/warning{dir = 5},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 6},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 8; frequency = 1331; id_tag = "nuke_shuttle_dock_pump"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aP" = (/obj/machinery/door/airlock/external{frequency = 1331; icon_state = "door_locked"; id_tag = "nuke_shuttle_dock_inner"; locked = 1; name = "Docking Port Airlock"; req_access = list(13)},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aQ" = (/obj/machinery/access_button{command = "cycle_interior"; frequency = 1331; master_tag = "nuke_shuttle_dock_airlock"; name = "interior access button"; pixel_x = -28; pixel_y = 26; req_one_access = list(1)},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 9},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"aR" = (/obj/structure/window/reinforced{dir = 1},/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/structure/closet/secure_closet/freezer/fridge,/obj/machinery/door/window/eastright{base_state = "left"; dir = 8; icon_state = "left"; name = "Medical Reception"; req_access = list(5)},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aS" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/structure/window/reinforced{dir = 1},/obj/machinery/shower{dir = 2; pixel_y = -8},/obj/structure/window/reinforced{dir = 8},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aT" = (/obj/effect/floor_decal/industrial/warning{dir = 5},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/toilet,/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aU" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 5; icon_state = "intact"},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"aV" = (/obj/machinery/atmospherics/binary/pump/on{dir = 8; target_pressure = 90},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"aW" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 9},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"aX" = (/obj/machinery/space_battle/computer/communication{id_tag = "zeus_communication"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aY" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/firedoor/border_only,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"aZ" = (/obj/structure/lattice,/turf/space,/area/ship_battle/zeus)
+"ba" = (/obj/missile_start{name = "Zeus"},/turf/space,/area/ship_battle/zeus)
+"bb" = (/turf/simulated/floor/airless,/area/ship_battle/zeus)
+"bc" = (/obj/machinery/door/airlock/external{frequency = 1331; icon_state = "door_locked"; id_tag = "nuke_shuttle_dock_outer"; locked = 1; name = "Docking Port Airlock"; req_access = list(13)},/obj/machinery/access_button{command = "cycle_exterior"; frequency = 1331; master_tag = "nuke_shuttle_dock_airlock"; name = "exterior access button"; pixel_x = -5; pixel_y = -26; req_one_access = list(13)},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bd" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 1; frequency = 1331; id_tag = "nuke_shuttle_dock_pump"},/obj/machinery/airlock_sensor{frequency = 1331; id_tag = "nuke_shuttle_dock_sensor"; pixel_x = 0; pixel_y = -25},/obj/effect/floor_decal/industrial/warning{dir = 6},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/obj/machinery/light/small/emergency{active_power_usage = 15; brightness_range = 7; name = "dim light fixture"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"be" = (/obj/machinery/door/airlock/external{frequency = 1331; icon_state = "door_locked"; id_tag = "nuke_shuttle_dock_inner"; locked = 1; name = "Docking Port Airlock"; req_access = list(13)},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bf" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"bg" = (/obj/structure/window/reinforced,/obj/structure/reagent_dispensers/watertank,/obj/effect/floor_decal/industrial/warning,/obj/machinery/door/window/eastright{base_state = "left"; dir = 8; icon_state = "left"; name = "Medical Reception"; req_access = list(5)},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bh" = (/obj/effect/floor_decal/industrial/warning,/obj/structure/window/reinforced,/obj/structure/sink{dir = 8; icon_state = "sink"; pixel_x = -5; pixel_y = 2},/obj/structure/window/reinforced{dir = 8},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/obj/machinery/light/small/emergency{active_power_usage = 15; brightness_range = 7; dir = 8; name = "dim light fixture"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bi" = (/obj/structure/window/reinforced,/obj/effect/floor_decal/industrial/warning,/obj/machinery/door/window/eastright{name = "Medical Reception"; req_access = list(5)},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bj" = (/obj/machinery/space_battle/ship_core,/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"bk" = (/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"bl" = (/obj/machinery/space_battle/computer/helm,/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bm" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/machinery/door/firedoor/border_only,/obj/structure/window/reinforced{dir = 4},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bn" = (/obj/structure/sign/securearea{desc = "A warning sign which reads 'EXTERNAL AIRLOCK'"; icon_state = "space"; layer = 4; name = "EXTERNAL AIRLOCK"; pixel_x = 0; pixel_y = 0},/turf/simulated/wall/r_wall,/area/ship_battle/zeus)
+"bo" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/bed,/obj/effect/landmark/start{name = "Team One Sailor"},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"bp" = (/obj/structure/table/woodentable,/obj/random/firstaid,/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"bq" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"; name = "Clothing Storage"},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"br" = (/obj/machinery/door/firedoor/border_only,/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"bs" = (/obj/machinery/light/small,/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_y = -24},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/machinery/power/terminal,/obj/structure/window/reinforced{dir = 8},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/space_battle/computer/missile{id_tag = "zeus_starboard_gun"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bt" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/disposal,/obj/structure/disposalpipe/trunk,/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bu" = (/obj/machinery/power/smes,/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bv" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/wall,/area/ship_battle/zeus)
+"bw" = (/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/machinery/light/small/emergency{active_power_usage = 15; brightness_range = 7; name = "dim light fixture"},/obj/machinery/space_battle/shieldwallgen/remote{anchored = 1; id_tag = 1; name = "Remote Shield Generator"; stat = 1},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bx" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/reagent_dispensers/fueltank,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"by" = (/obj/effect/floor_decal/industrial/warning,/obj/structure/window/reinforced,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"bz" = (/obj/effect/floor_decal/industrial/warning,/obj/structure/window/reinforced,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/door/window/eastright{base_state = "left"; dir = 8; icon_state = "left"; name = "Bedroom"; req_access = list(1)},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"bA" = (/obj/effect/floor_decal/industrial/warning,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/structure/window/reinforced,/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"bB" = (/obj/effect/floor_decal/industrial/warning,/obj/structure/window/reinforced,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/door/window/eastright{name = "Bedroom"; req_access = list(1)},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"bC" = (/obj/effect/floor_decal/industrial/warning,/obj/structure/window/reinforced,/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/ship_battle/zeus)
+"bD" = (/obj/structure/sign/deathsposal,/obj/structure/disposalpipe/segment,/turf/simulated/wall,/area/ship_battle/zeus)
+"bE" = (/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/window/reinforced{dir = 4},/obj/structure/reagent_dispensers/fueltank,/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bF" = (/obj/machinery/missile{dir = 4},/obj/structure/disposalpipe/segment,/obj/machinery/light/small/emergency{active_power_usage = 15; brightness_range = 7; dir = 1; name = "dim light fixture"},/obj/machinery/space_battle/tube{dir = 4; id_tag = "zeus_starboard_gun"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bG" = (/obj/structure/disposaloutlet{dir = 8},/obj/structure/window/reinforced,/obj/structure/disposalpipe/trunk{dir = 4},/turf/simulated/floor/airless,/area/ship_battle/zeus)
+"bH" = (/obj/structure/disposalpipe/segment{dir = 4},/obj/machinery/space_battle/missile_sensor/guidance{id_tag = "zeus_starboard_gun"; sensor_id = "zeus_starboard_guidance"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bI" = (/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/window/reinforced{dir = 4},/obj/structure/disposalpipe/segment{dir = 4},/obj/machinery/space_battle/missile_sensor/hub{id_tag = "zeus_starboard_gun"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bJ" = (/obj/machinery/conveyor{dir = 1; id = "packageSort1"},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bK" = (/obj/machinery/conveyor{dir = 4; id = "packageSort2"},/obj/machinery/missile{dir = 8; pixel_x = -20},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bL" = (/obj/machinery/conveyor{dir = 4; id = "packageSort2"},/obj/machinery/missile{dir = 8; pixel_x = -5},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bM" = (/obj/machinery/conveyor{dir = 4; id = "packageSort2"},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bN" = (/obj/machinery/conveyor{dir = 4; id = "packageSort2"},/obj/machinery/missile{dir = 8; pixel_x = -15},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bO" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/wall,/area/ship_battle/zeus)
+"bP" = (/obj/structure/sign/fire,/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/turf/simulated/wall,/area/ship_battle/zeus)
+"bQ" = (/obj/machinery/space_battle/missile_sensor/tracking{id_tag = "zeus_starboard_gun"; sensor_id = "zeus_starboard_tracking"},/turf/simulated/floor/plating,/area/ship_battle/zeus)
+"bR" = (/obj/effect/overmap/ship{name = "NS Zeus"; start_x = null; start_y = null},/turf/space,/area/ship_battle/zeus)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaababacabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaabadaeafagahaiajabakabaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaalamanaoapaiaqaiarasatauaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaalamavawaxayazaAabababababaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaBabababaCaDaEaFaGaHaIaJaKaLabaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaMaNaOaPaQaRaSaTaUaVaWaXaYaaaZaaaaaaaaaaaabaaaaaaaaa
+aaaaaaaabbbcbdbebfbgbhbibjbkbkblbmaaaZaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaabbababbnaCbobpbqbrbsbtbubvbwabaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaalambxbybzbAbBbCabbDabababaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaalambEaoapaiaqaiarbFatauaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaabGbHbIbJbKbLbMbNbObPabaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaababbQabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+bRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

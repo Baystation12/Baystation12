@@ -12,19 +12,20 @@
 	var/rotate = 1 //For proc rotate
 
 	var/obj/effect/overmap/current_sector
-	var/obj/machinery/space_battle/helm/nav_control
+	var/obj/machinery/space_battle/computer/helm/nav_control
 	var/list/eng_controls = list()
 	var/braked = 1
 	density = 1
 
 /obj/effect/overmap/ship/Destroy()
 	current_sector = null
-	nav_control.linked = null
-	nav_control = null
-	for(var/obj/machinery/space_battle/engine_control/E in eng_controls)
+	if(nav_control)
+		nav_control.linked = null
+		nav_control = null
+	for(var/obj/machinery/space_battle/computer/engine_control/E in eng_controls)
 		E.linked = null
 	eng_controls.Cut()
-	for(var/obj/machinery/space_battle/missile_computer/M in fire_controls)
+	for(var/obj/machinery/space_battle/computer/missile/M in fire_controls)
 		M.linked = null
 	fire_controls.Cut()
 	if(fake)
@@ -34,17 +35,17 @@
 
 /obj/effect/overmap/ship/initialize()
 	..()
-	for(var/obj/machinery/space_battle/missile_computer/M in world)
+	for(var/obj/machinery/space_battle/computer/missile/M in world)
 		if (M.z in map_z)
 			fire_controls.Add(M)
-	for(var/obj/machinery/space_battle/engine_control/E in machines)
+	for(var/obj/machinery/space_battle/computer/engine_control/E in machines)
 		if (E.z in map_z)
 			eng_controls += E
 			E.linked = src
 			E.zlevels = map_z
 			E.reconnect()
 			testing("Engines console at level [E.z] linked to overmap object '[name]'.")
-	for(var/obj/machinery/space_battle/helm/H in machines)
+	for(var/obj/machinery/space_battle/computer/helm/H in machines)
 		if (H.z in map_z)
 			nav_control = H
 			H.linked = src
@@ -60,7 +61,7 @@
 
 /obj/effect/overmap/ship/proc/get_acceleration()
 	var/thrust = 0
-	for(var/obj/machinery/space_battle/engine_control/E in eng_controls)
+	for(var/obj/machinery/space_battle/computer/engine_control/E in eng_controls)
 		thrust += E.get_total_thrust()/vessel_mass
 	return thrust
 
@@ -89,9 +90,9 @@
 		if(!braked)
 			var/obj/effect/overmap/station/S = locate() in src.loc
 			if(S && istype(S))
-				for(var/obj/machinery/space_battle/engine_control/E in eng_controls)
+				for(var/obj/machinery/space_battle/computer/engine_control/E in eng_controls)
 					E.stopped()
-				for(var/obj/machinery/space_battle/missile_computer/M in fire_controls)
+				for(var/obj/machinery/space_battle/computer/missile/M in fire_controls)
 					M.find_targets()
 	else
 		toggle_move_stars(map_z, fore_dir)
@@ -102,7 +103,7 @@
 	if (world.time < last_burn + 10)
 		return 0
 	var/can_burn = 0
-	for(var/obj/machinery/space_battle/engine_control/E in eng_controls)
+	for(var/obj/machinery/space_battle/computer/engine_control/E in eng_controls)
 		if(E.burn())
 			can_burn = 1
 	return can_burn

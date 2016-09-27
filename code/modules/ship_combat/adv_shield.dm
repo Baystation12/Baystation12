@@ -7,24 +7,37 @@
 	anchored = 1
 	density = 1
 
-/obj/machinery/space_battle/shielding/shield_computer
+/obj/machinery/space_battle/computer/shield
 	name = "shield computer"
 	desc = "Provides electrical charge to a shield generator."
-	icon_state = "computer"
-	var/obj/machinery/space_battle/shielding/shield_generator/generator
+	screen_icon = "shield_off"
+	var/obj/machinery/space_battle/shield_generator/generator
 
-/obj/machinery/space_battle/shielding/shield_computer/initialize()
+/obj/machinery/space_battle/computer/shield/initialize()
 	..()
 	find_generator()
 
-/obj/machinery/space_battle/shielding/shield_computer/proc/find_generator()
-	for(var/obj/machinery/space_battle/shielding/shield_generator/S in world)
+/obj/machinery/space_battle/computer/shield/update_icon()
+	if(stat & (BROKEN|NOPOWER))
+		..()
+		return
+	if(generator.online)
+		if(generator.static_shield)
+			screen_icon = "shield_maintain"
+		else
+			screen_icon = "shield_on"
+	else
+		screen_icon = "shield_off"
+	..()
+
+/obj/machinery/space_battle/computer/shield/proc/find_generator()
+	for(var/obj/machinery/space_battle/shield_generator/S in world)
 		if(S.id_tag == src.id_tag)
 			generator = S
 			S.computer = src
 			break
 
-/obj/machinery/space_battle/shielding/shield_computer/attack_hand(var/mob/user)
+/obj/machinery/space_battle/computer/shield/attack_hand(var/mob/user)
 	if(stat & (BROKEN|NOPOWER))
 		return 0
 	if(!(generator && istype(generator)))
@@ -34,7 +47,7 @@
 			return 0
 	ui_interact(user)
 
-/obj/machinery/space_battle/shielding/shield_computer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/obj/machinery/space_battle/computer/shield/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = list()
 	data["flux_cost"] = generator.get_cost()
 	data["input"] = generator.get_available_power()
@@ -62,7 +75,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/space_battle/shielding/shield_computer/Topic(href, href_list)
+/obj/machinery/space_battle/computer/shield/Topic(href, href_list)
 	if(..())
 		return 1
 	if(href_list["toggle"])
@@ -95,11 +108,11 @@
 	return 1
 
 
-/obj/machinery/space_battle/shielding/shield_generator
+/obj/machinery/space_battle/shield_generator
 	name = "shield generator"
 	desc = "An advanced shield generator, producing fields of rapidly fluxing plasma-state phoron particles."
 	icon_state = "ecm"
-	var/obj/machinery/space_battle/shielding/shield_computer/computer
+	var/obj/machinery/space_battle/computer/shield/computer
 	var/datum/powernet/powernet
 	var/online = 0
 	idle_power_usage = 500
@@ -122,11 +135,11 @@
 	var/obj/machinery/atmospherics/pipe/tank/shield/gas_tank
 	var/list/damaged_shields = list()
 
-/obj/machinery/space_battle/shielding/shield_generator/New()
+/obj/machinery/space_battle/shield_generator/New()
 	..()
 	locate_tank()
 
-/obj/machinery/space_battle/shielding/shield_generator/initialize()
+/obj/machinery/space_battle/shield_generator/initialize()
 	for(var/obj/effect/landmark/shield/marker in world)
 		if(marker.z == src.z)
 			var/obj/effect/adv_shield/shield = new(src)
@@ -137,7 +150,7 @@
 		placed_shield.update_connections()
 
 
-/obj/machinery/space_battle/shielding/shield_generator/process()
+/obj/machinery/space_battle/shield_generator/process()
 	if(stat & (BROKEN|NOPOWER))
 		online = 0
 	var/powered = 0
@@ -154,20 +167,20 @@
 	update_feedback()
 	..()
 
-/obj/machinery/space_battle/shielding/shield_generator/proc/get_cost()
+/obj/machinery/space_battle/shield_generator/proc/get_cost()
 	return round((current_flux_rate * 0.4 KILOWATTS * flux_per_tick * get_efficiency(-1,1)) + (flux_capacity *  10 * get_efficiency(-1,1)), 5)
 
-/obj/machinery/space_battle/shielding/shield_generator/proc/get_shield_rate()
+/obj/machinery/space_battle/shield_generator/proc/get_shield_rate()
 	var/obj/effect/adv_shield/shield = shields[1]
 	if(shield && istype(shield))
 		return shield.current_flux_rate
 
-/obj/machinery/space_battle/shielding/shield_generator/proc/get_shield_capacity()
+/obj/machinery/space_battle/shield_generator/proc/get_shield_capacity()
 	var/obj/effect/adv_shield/shield = shields[1]
 	if(shield && istype(shield))
 		return shield.max_flux_capacity
 
-/obj/machinery/space_battle/shielding/shield_generator/proc/get_available_power()
+/obj/machinery/space_battle/shield_generator/proc/get_available_power()
 	var/turf/T = src.loc
 
 	var/obj/structure/cable/C = T.get_cable_node()
@@ -176,13 +189,13 @@
 		return powernet.avail
 	return 0
 
-/obj/machinery/space_battle/shielding/shield_generator/proc/locate_tank()
+/obj/machinery/space_battle/shield_generator/proc/locate_tank()
 	if(gas_tank && istype(gas_tank)) return
 	gas_tank = locate() in orange(1)
 	if(gas_tank)
 		gas_tank.generator = src
 
-/obj/machinery/space_battle/shielding/shield_generator/proc/update_flux(var/power_input = 1)
+/obj/machinery/space_battle/shield_generator/proc/update_flux(var/power_input = 1)
 	var/current_flux_cost = get_cost()
 	if(power_input > current_flux_cost && online)
 		if(!static_shield)
@@ -214,7 +227,7 @@
 	return current_flux_cost
 
 
-/obj/machinery/space_battle/shielding/shield_generator/proc/consume_flux(var/amount, var/obj/effect/adv_shield/user)
+/obj/machinery/space_battle/shield_generator/proc/consume_flux(var/amount, var/obj/effect/adv_shield/user)
 	if(user)
 		var/index = shields.Find(user)
 		if(index > maintaining_num)
@@ -225,7 +238,7 @@
 	flux_capacity -= diff
 	return amount
 
-/obj/machinery/space_battle/shielding/shield_generator/proc/update_feedback()
+/obj/machinery/space_battle/shield_generator/proc/update_feedback()
 	if(feedback <= 0)
 		feedback = 0
 		return
@@ -271,7 +284,7 @@
 						H.electrocute_act(num, src)
 						feedback -= num
 
-/obj/machinery/space_battle/shielding/shield_generator/emp_act(var/severity = 0)
+/obj/machinery/space_battle/shield_generator/emp_act(var/severity = 0)
 	if(severity == 1)
 		online = pick(1,0)
 		current_flux_rate /= 2
@@ -298,10 +311,10 @@
 	var/max_flux_capacity = 5
 
 	var/list/affecting = list()
-	var/obj/machinery/space_battle/shielding/shield_generator/generator
+	var/obj/machinery/space_battle/shield_generator/generator
 	var/shutdown_time = 0
 
-	New(var/obj/machinery/space_battle/shielding/shield_generator/created_by)
+	New(var/obj/machinery/space_battle/shield_generator/created_by)
 		..()
 		generator = created_by
 
@@ -413,7 +426,7 @@
 /obj/machinery/atmospherics/pipe/tank/shield
 	name = "shield gas tank"
 	desc = "Holds gases for use in a shield generator."
-	var/obj/machinery/space_battle/shielding/shield_generator/generator
+	var/obj/machinery/space_battle/shield_generator/generator
 
 /obj/machinery/atmospherics/pipe/tank/shield/proc/fetch_gas(var/amount, var/list/desired_gases)
 	var/datum/gas_mixture/air_contents = src.return_air()

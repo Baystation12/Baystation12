@@ -59,7 +59,7 @@
 
 /obj/effect/overmap/sector/initialize()
 	..()
-	for(var/obj/machinery/space_battle/helm/H in machines)
+	for(var/obj/machinery/space_battle/computer/helm/H in machines)
 		H.get_known_sectors()
 
 /proc/build_overmap()

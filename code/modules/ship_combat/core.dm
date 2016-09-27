@@ -43,7 +43,7 @@
 				if(istype(M, /obj/machinery/space_battle))
 					qdel(M)
 		start = null
-		for(var/obj/machinery/space_battle/missile_computer/computer in world)
+		for(var/obj/machinery/space_battle/computer/missile/computer in world)
 			computer.find_targets()
 		return ..()
 
@@ -84,6 +84,7 @@
 					return
 				else
 					team = H.get_team()
+					linked = src.team
 					for(var/area/ship_battle/A in world)
 						if(A.z == src.z)
 							A.change_team(src.team)

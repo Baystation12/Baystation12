@@ -472,8 +472,8 @@ var/global/datum/controller/occupations/job_master
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 				H.forceMove(S.loc)
 			else
-				var/datum/spawnpoint/spawnpoint = get_spawnpoint_for(H.client, rank)
-				H.forceMove(pick(spawnpoint.turfs))
+				var/turf/T = get_spawnpoint_for(H.client, rank)
+				H.forceMove(T)
 
 			// Moving wheelchair if they have one
 			if(H.buckled && istype(H.buckled, /obj/structure/bed/chair/wheelchair))
@@ -635,7 +635,14 @@ var/global/datum/controller/occupations/job_master
 
 	if(!C)
 		CRASH("Null client passed to get_spawnpoint_for() proc!")
-
+	var/turf/spawnpos
+	var/datum/job/space_battle/job = job_master.GetJob(rank)
+	for(var/obj/team_start/start in world)
+		var/area/ship_battle/A = get_area(get_turf(start))
+		if(text2num(A.team) == text2num(job.team))
+			spawnpos = get_turf(start)
+	return spawnpos
+/*
 	var/mob/H = C.mob
 	var/datum/spawnpoint/spawnpos
 
@@ -667,6 +674,6 @@ var/global/datum/controller/occupations/job_master
 		spawnpos = spawntypes[pick(using_map.allowed_spawns)]
 
 	return spawnpos
-
+*/
 /datum/controller/occupations/proc/GetJobByType(var/job_type)
 	return occupations_by_type[job_type]

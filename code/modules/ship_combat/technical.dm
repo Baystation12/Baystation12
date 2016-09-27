@@ -15,9 +15,6 @@
 /datum/controller/occupations/proc/LateSpawn(var/client/C, var/rank, var/return_location = 0)
 	//spawn at one of the latespawn locations
 
-
-	var/datum/spawnpoint/spawnpos
-
 	if(!C)
 		CRASH("Null client passed to LateSpawn() proc!")
 
@@ -33,29 +30,3 @@
 					if(H)
 						H.forceMove(get_turf(S))
 						return "has teleported into team [job.team]"
-
-	spawnpos = spawntypes[C.prefs.spawnpoint]
-
-	if(spawnpos && istype(spawnpos))
-		if(spawnpos.check_job_spawning(rank))
-			if(return_location)
-				return pick(spawnpos.turfs)
-			else
-				if(H)
-					H.forceMove(pick(spawnpos.turfs))
-				return spawnpos.msg
-		else
-			if(return_location)
-				return pick(latejoin)
-			else
-				if(H)
-					H << "Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job. Spawning you at the default spawn point instead."
-					H.forceMove(pick(latejoin))
-				return "has teleported nearby."
-	else
-		if(return_location)
-			return pick(latejoin)
-		else
-			if(H)
-				H.forceMove(pick(latejoin))
-			return "has teleported nearby."

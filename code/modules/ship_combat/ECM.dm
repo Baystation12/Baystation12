@@ -29,7 +29,7 @@
 				dish = D
 		return ..()
 
-	process()
+	proc/update_power_usage()
 		active_power_usage = round(idle_power_usage ** (1+radius*0.05) * strength * get_efficiency(-1,1))
 		..()
 
@@ -68,12 +68,13 @@
 			radius = min(12, max(0, nradius))
 		else
 			usr << "<span class='warning'>That is invalid!</span>"
-	if(href_list["radius"])
+	if(href_list["strength"])
 		var/nstrength = input(usr, "Enter a new strength(0-3)", "ECM") as num
 		if(isnum(nstrength))
 			radius = min(3, max(0, nstrength))
 		else
 			usr << "<span class='warning'>That is invalid!</span>"
+	update_power_usage()
 	return 1
 
 /obj/machinery/space_battle/ecm/advanced

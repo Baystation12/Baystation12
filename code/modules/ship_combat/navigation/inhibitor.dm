@@ -31,7 +31,7 @@
 			for(var/obj/effect/overmap/ship/S in range(3, linked))
 				world << "<span class='notice'>Ship: [S] in distance!</span>"
 				S.speed = list(0, 0)
-				for(var/obj/machinery/space_battle/engine_control/E in S.eng_controls)
+				for(var/obj/machinery/space_battle/computer/engine_control/E in S.eng_controls)
 					E.stopped(1)
 				for(var/mob/living/M in world)
 					if(M.z == S.map_z)

@@ -2220,6 +2220,7 @@
 #include "maps\ships\core\core.dmm"
 #include "maps\ships\endurance\endurance_areas.dm"
 #include "maps\ships\endurance\endurance.dmm"
+#include "maps\ships\prefabs\two\zeus_areas.dm"
 #include "maps\stations\asteroids\asteroid_areas.dm"
 #include "maps\stations\asteroids\asteroid_m1.dmm"
 #include "maps\stations\asteroids\asteroid_m2.dmm"

@@ -1,12 +1,30 @@
 #define MISSILE_COOLDOWN 600
 #define MAX_ECM_RANGE 12
 
-/obj/machinery/space_battle/missile_computer
+/obj/machinery/space_battle/computer
+	var/overlay_layer
+	var/screen_icon
+	icon_state = "computer"
+
+/obj/machinery/space_battle/computer/New()
+	overlay_layer = layer
+	..()
+
+/obj/machinery/space_battle/computer/proc/update_screen()
+	overlays.Cut()
+	if(!stat & (BROKEN|NOPOWER))
+		overlays += image(icon,screen_icon, overlay_layer)
+	else if(stat & BROKEN)
+		overlays += image(icon,"computer_broken", overlay_layer)
+
+/obj/machinery/space_battle/computer/update_icon()
+	update_screen()
+
+/obj/machinery/space_battle/computer/missile
 	name = "fire control computer"
 	desc = "A fire control computer."
 
-	icon = 'icons/obj/ship_battles.dmi'
-	icon_state = "computer"
+	screen_icon = "fire_control"
 	density = 1
 	anchored = 1
 
@@ -53,14 +71,6 @@
 			eye.show_message(msg, type, alt, alt_type)
 		return ..()
 
-	update_icon()
-		if(stat & (BROKEN|NOPOWER)) return ..()
-		var/time = time_remaining()
-		if(time > 1)
-			icon_state = "recalibrated"
-			return
-		icon_state = "computer"
-
 	proc/cooldown(var/time)
 		if(circuit_board)
 			time *= get_efficiency(-1, 1)
@@ -84,7 +94,7 @@
 			team = A.team
 		var/num = 0
 		for(var/S in linked.fire_controls)
-			var/obj/machinery/space_battle/missile_computer/C = S
+			var/obj/machinery/space_battle/computer/missile/C = S
 			if(C.z == src.z)
 				num++
 				if(C == src)
@@ -103,8 +113,8 @@
 			var/obj/effect/overmap/ship/ship = linked
 			if (!(src in ship.fire_controls))
 				ship.fire_controls.Add(src)
-		reconnect()
 		processing_objects.Add(src)
+		..()
 
 	proc/find_targets()
 		starts.Cut()
@@ -340,7 +350,7 @@
 		spawn(25)
 			eye << "<span class='notice'><b>Head left!</b></span>"
 
-/obj/machinery/space_battle/missile_computer/process()
+/obj/machinery/space_battle/computer/missile/process()
 	if(eye && !(forced_by && forced_by == eye_owner))
 		if(eye_owner && (!forced_by || forced_by != eye_owner))
 			if(get_dist(eye_owner, src) < 2)
@@ -374,7 +384,7 @@
 
 	var/obj/start_loc
 	var/mob/owner = null
-	var/obj/machinery/space_battle/missile_computer/linked
+	var/obj/machinery/space_battle/computer/missile/linked
 
 	var/guidance = 0
 	var/advguidance = 0
@@ -535,6 +545,11 @@
 						chosen = pick(available_areas)
 				if(chosen)
 					var/turf/newloc = pick_area_turf(chosen)
+					if(!newloc)
+						newloc = pick_area_turf(chosen)
+						if(!newloc)
+							usr << "<span class='warning'>You are unable to aim there!</span>"
+							return
 					if(newloc)
 						if(!(prob(50*guidance_efficiency)))
 							start_loc = newloc
@@ -546,8 +561,6 @@
 							else
 								usr << "<span class='notice'>Missile launch successful!</span>"
 						wait_time *= 10*efficiency // Eyup
-					else
-						usr << "<span class='warning'>You cannot aim there!</span>"
 				else
 					usr << "<span class='warning'>Invalid choice!</span>"
 					firing = 0

@@ -42,7 +42,7 @@ e.g. *landing_area* = /area/sector/shuttle/butts_inbound
 *************************************************************
 # Helm console
 *************************************************************
-/obj/machinery/space_battle/helm
+/obj/machinery/space_battle/computer/helm
 ### WHAT IT DOES
 Lets you steer ship around on overmap.
 Lets you use autopilot.

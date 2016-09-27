@@ -17,7 +17,7 @@
 /obj/item/weapon/circuitboard/space_battle/missile_computer
 	name = T_BOARD("missile targetting computer")
 
-	build_path = /obj/machinery/space_battle/missile_computer
+	build_path = /obj/machinery/space_battle/computer/missile
 
 	req_components = list(/obj/item/stack/cable_coil = 10,
 						  /obj/item/weapon/stock_parts/capacitor = 2,
@@ -73,7 +73,7 @@
 
 /obj/item/weapon/circuitboard/space_battle/engine_control
 	name = T_BOARD("engine control")
-	build_path = /obj/machinery/space_battle/engine_control
+	build_path = /obj/machinery/space_battle/computer/engine_control
 	req_components = list(/obj/item/stack/cable_coil = 15,
 						  /obj/item/weapon/stock_parts/capacitor = 2,
 						  /obj/item/stack/material/steel = 5,

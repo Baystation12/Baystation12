@@ -102,7 +102,7 @@
 	var/list/targets = list()
 	if(linked && istype(linked))
 		for(var/obj/effect/overmap/target in range(range, linked))
-			if(target.em_signature > 0)
+			if(target.em_signature > 0 && target != linked)
 				targets += target
 	return targets
 
@@ -116,7 +116,7 @@
 	var/list/targets = list()
 	if(linked && istype(linked))
 		for(var/obj/effect/overmap/target in range(range, linked))
-			if(!istype(target, /obj/effect/overmap/ship))
+			if(!istype(target, /obj/effect/overmap/ship) && target != linked)
 				targets += target
 			else
 				var/obj/effect/overmap/ship/S = target
@@ -132,6 +132,7 @@
 	var/list/targets = list()
 	if(linked && istype(linked))
 		for(var/obj/effect/overmap/target in range(range, linked))
-			targets += target
+			if(target != linked)
+				targets += target
 	return targets
 

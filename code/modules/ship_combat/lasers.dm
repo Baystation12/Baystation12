@@ -1,9 +1,9 @@
 //Unlike missiles/bombs/deck guns, lasers cannot be targetted manually.
 
-/obj/machinery/space_battle/laser_control
+/obj/machinery/space_battle/computer/laser
 	name = "laser firing control"
 	desc = "A fire control computer."
-	icon_state = "computer"
+	screen_icon = "laser"
 
 	var/list/laser_emitters = list()
 
@@ -17,7 +17,7 @@
 		..()
 		reconnect()
 
-/obj/machinery/space_battle/laser_control/attack_hand(var/mob/user)
+/obj/machinery/space_battle/computer/laser/attack_hand(var/mob/user)
 	var/list/targets = find_targets()
 	if(!targets.len)
 		user << "<span class='warning'>No targets found!</span>"
@@ -32,7 +32,7 @@
 		user << L.fire_laser(target)
 		sleep(5)
 
-/obj/machinery/space_battle/laser_control/proc/find_targets()
+/obj/machinery/space_battle/computer/laser/proc/find_targets()
 	if(!linked)
 		return null
 	if(istype(linked, /obj/effect/overmap/ship))
@@ -111,7 +111,7 @@
 				if(S.z == shooting_z)
 					available_areas += ar
 		var/list/shields = list()
-		for(var/obj/machinery/space_battle/shielding/shield_generator/generator in world)
+		for(var/obj/machinery/space_battle/shield_generator/generator in world)
 			if(generator.z == shooting_z)
 				shields |= generator.shields
 				break

@@ -9,11 +9,11 @@
 #define SPOOF "Spoof" // Limited to visible objects.
 #define REMOVE "Disconnect"
 
-/obj/machinery/space_battle/hacking
+/obj/machinery/space_battle/computer/hacking
 	name = "Hacking System"
 	desc = "An advanced remote hacking system."
-	icon = 'icons/obj/ship_battles.dmi'
 	icon_state = "computer"
+	screen_icon = "hack"
 	density = 1
 	anchored = 1
 	var/target_team
@@ -25,7 +25,7 @@
 										 list("Power", list(/obj/machinery/power/apc), list(REMOVE = 0, EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 180), 1200), \
 										 list("Defensive Systems", list(/obj/machinery/space_battle/ecm, /obj/machinery/space_battle/shieldwallgen), list(REMOVE = 0, SPOOF = 60, EMP = 240, FRY_CIRCUIT = 180, UI_INTERACT = 30, UNLOCK = 270), 1500), \
 										 list("Engines", list(/obj/machinery/space_battle/engine), list(REMOVE = 0, SPOOF = 60, EMP = 90, FRY_CIRCUIT = 180), 120), \
-										 list("Piloting", list(/obj/machinery/space_battle/engine_control, /obj/machinery/space_battle/helm), list(REMOVE = 0, SPOOF = 60, EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 120), 900), \
+										 list("Piloting", list(/obj/machinery/space_battle/computer/engine_control, /obj/machinery/space_battle/computer/helm), list(REMOVE = 0, SPOOF = 60, EMP = 180, FRY_CIRCUIT = 180, UI_INTERACT = 120), 900), \
 										 list("Doors", list(/obj/machinery/door/airlock), list(REMOVE = 0, EMP = 60, FRY_CIRCUIT = 60, UI_INTERACT = 60), 200), \
 										 list("Cameras", list(/obj/machinery/camera/autoname/battle), list(REMOVE = 0, EMP = 15, FRY_CIRCUIT = 30, ADJUST_NETWORK = 90), 120))
 
@@ -38,15 +38,20 @@
 	var/operation = "Hack.exe"
 	var/can_cancel = 1
 
-/obj/machinery/space_battle/hacking/attack_hand(var/mob/user)
+/obj/machinery/space_battle/computer/hacking/attack_hand(var/mob/user)
 	if(!target_teams.len)
 		reconnect()
 	ui_interact(user)
 
-/obj/machinery/space_battle/hacking/update_icon()
-	return
+/obj/machinery/space_battle/computer/hacking/update_icon()
+	if(stat & (BROKEN|NOPOWER)) return ..()
+	if(hacking_time)
+		screen_icon = "hacking"
+	else
+		screen_icon = "hack"
+	return .. ()
 
-/obj/machinery/space_battle/hacking/reconnect()
+/obj/machinery/space_battle/computer/hacking/reconnect()
 	target_teams.Cut()
 	for(var/obj/missile_start/S in missile_starts)
 		if(S.team && S.team != src.team && S.active)
@@ -58,7 +63,8 @@
 		target_team = target_teams[1]
 	..()
 
-/obj/machinery/space_battle/hacking/process()
+/obj/machinery/space_battle/computer/hacking/process()
+	update_icon()
 	if(!hacking_time)
 		if(!detection)
 			return
@@ -73,7 +79,7 @@
 					detection++
 	return ..()
 
-/obj/machinery/space_battle/hacking/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/obj/machinery/space_battle/computer/hacking/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	if(!team)
 		reconnect()
 		if(!team)
@@ -121,7 +127,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/space_battle/hacking/Topic(href, href_list)
+/obj/machinery/space_battle/computer/hacking/Topic(href, href_list)
 	if(..())
 		return 1
 	if(href_list["hacked"])
@@ -142,7 +148,7 @@
 		selected = null
 		menu = "complete"
 		operation = initial(operation)
-		icon_state = initial(icon_state)
+		update_icon()
 		can_cancel = initial(can_cancel)
 	if(href_list["team"])
 		var/index = target_teams.Find(target_team)
@@ -281,7 +287,7 @@
 			selected = null
 	return 1
 
-/obj/machinery/space_battle/hacking/proc/selected_action_types()
+/obj/machinery/space_battle/computer/hacking/proc/selected_action_types()
 	if(!selected)
 		return null
 	var/list/to_return = list()
@@ -294,13 +300,13 @@
 		to_return.Add(I)
 	return to_return
 
-/obj/machinery/space_battle/hacking/proc/time_remaining()
+/obj/machinery/space_battle/computer/hacking/proc/time_remaining()
 	var/time = (hacking_time - world.timeofday)/10
 	if(time < 0)
 		time = 0
 	return round(time)
 
-/obj/machinery/space_battle/hacking/proc/selected_data()
+/obj/machinery/space_battle/computer/hacking/proc/selected_data()
 	if(!selected)
 		return null
 	var/list/data = list()
@@ -308,7 +314,7 @@
 	data["name"] = selected.name
 	return data
 
-/obj/machinery/space_battle/hacking/proc/begin_hacking(var/obj/machinery/target, var/added_time = 0, var/cancelable = 1)
+/obj/machinery/space_battle/computer/hacking/proc/begin_hacking(var/obj/machinery/target, var/added_time = 0, var/cancelable = 1)
 	var/time = added_time
 	can_cancel = cancelable
 	if(target)
@@ -324,18 +330,18 @@
 	time += added_time
 	hacking_time = world.timeofday + time*10
 	menu = "progress"
-	icon_state = "recalibrated"
+	update_icon()
 	return time
 
 
-/obj/machinery/space_battle/hacking/proc/end_hacking()
+/obj/machinery/space_battle/computer/hacking/proc/end_hacking()
 	hacking_time = 0
 	if(hacking)
 		hacked.Add(hacking)
 		hacking = null
 	menu = "complete"
 	src.visible_message("<span class='notice'>\icon[src] \The [src] beeps, \"Hacking attempt successful.\"</span>")
-	icon_state = initial(icon_state)
+	update_icon()
 	operation = initial(operation)
 	can_cancel = initial(can_cancel)
 	return

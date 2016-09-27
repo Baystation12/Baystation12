@@ -86,7 +86,7 @@
 				reconnect()
 				if(!dish)
 					return "Wireless Connection Severed: No connected dish."
-			else if(!dish.can_sense())
+			else if(dish.can_sense() != 1)
 				return "Wireless Connection Severed: Dish status - [dish.can_sense()]"
 		return 1
 
@@ -103,7 +103,7 @@
 
 	reconnect()
 		dish = null
-		if(needs_dish)
+		if(needs_dish && linked)
 			for(var/obj/machinery/space_battle/missile_sensor/dish/D in linked.fire_sensors)
 				if(D.sensor_id == src.sensor_id)
 					dish = D
@@ -251,7 +251,7 @@
 	var/obj/machinery/space_battle/missile_sensor/ship_sensor/sensor
 
 	var/list/radars = list()
-	var/obj/machinery/space_battle/missile_computer/computer
+	var/obj/machinery/space_battle/computer/missile/computer
 
 /obj/machinery/space_battle/missile_sensor/hub/Destroy()
 	guidance = null
@@ -268,8 +268,9 @@
 
 /obj/machinery/space_battle/missile_sensor/hub/reconnect()
 	linked = map_sectors["[z]"]
+	if(!linked) return
 	for(var/C in linked.fire_controls)
-		var/obj/machinery/space_battle/missile_computer/F = C
+		var/obj/machinery/space_battle/computer/missile/F = C
 		if(F.id_tag == src.id_tag)
 			F.sensor = src
 			computer = F
@@ -387,12 +388,13 @@
 	return radars
 
 /obj/machinery/space_battle/missile_sensor/hub/proc/get_firing_targets()
-	if(can_sense() && linked)
+	linked = map_sectors["[z]"]
+	if(can_sense() == 1 && linked)
 		if(sensor)
 			return sensor.find_targets()
 		else
 			var/list/targets = list()
-			for(var/obj/effect/overmap/S in range(1, linked))
+			for(var/obj/effect/overmap/S in range(2, linked))
 				targets += S
 				testing("Added [S] to targets")
 			if(targets && targets.len)
@@ -421,21 +423,21 @@
 	name = "gravity sensor"
 	desc = "Searches for ships within the specified range."
 	needs_dish = 1
-	icon_state = "tracker"
+	icon_state = "sensor"
 	component_type = /obj/item/weapon/component/sensor/gravity
 
 /obj/machinery/space_battle/missile_sensor/ship_sensor/em // Allows the eye to move
 	name = "em sensor"
 	desc = "Searches for active weaponry or shields."
 	needs_dish = 1
-	icon_state = "tracker"
+	icon_state = "sensor"
 	component_type = /obj/item/weapon/component/sensor/em
 
 /obj/machinery/space_battle/missile_sensor/ship_sensor/thermal // Allows the eye to move
 	name = "thermal sensor"
 	desc = "Searches for thermal signatures."
 	needs_dish = 1
-	icon_state = "tracker"
+	icon_state = "sensor"
 	component_type = /obj/item/weapon/component/sensor/thermal
 
 

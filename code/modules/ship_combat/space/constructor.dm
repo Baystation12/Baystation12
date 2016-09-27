@@ -6,10 +6,43 @@
 	var/datum/space_construction/current_design
 	var/list/holding = list()
 	var/building = 0
+	var/global/list/prefabs = list()
 
 /obj/machinery/space_battle/space_construction/New()
 	..()
 	generate_designs()
+
+/obj/machinery/space_battle/space_construction/initialize()
+	if(!prefabs || !prefabs.len)
+		var/list/allships = file2list("maps/ships/prefabs/prefabs.txt", "newship")
+		for(var/ship in allships)
+			if (copytext(ship, 1, 2) == "#") continue
+			ship = trim(ship)
+			var/list/shipdata = splittext(ship, "\n")
+			var/datum/ship_prefab/to_add = new()
+			for(var/data in shipdata)
+				if (copytext(data, 1, 2) == "#") continue
+				var/breaker = findtext(data, " ")
+				var/V = copytext(data, 1, breaker)
+				var/T = copytext(data, breaker+1)
+				switch(lowertext(V))
+					if("title")
+						to_add.name = T
+					if("path")
+						to_add.path = T
+						to_add.file = file(to_add.path)
+					if("team")
+						to_add.team = T
+			if(to_add.name && to_add.file && isfile(to_add.file) && to_add.team)
+				prefabs["[to_add.name]"] = to_add
+			else
+				testing("Invalid ship: N:([to_add.name]) P: ([to_add.path]:[to_add.file && isfile(to_add.file) ? "1" : "0"]) T:[to_add.team]")
+
+
+
+		testing("[prefabs.len] prefabs found!")
+	..()
+
 
 /obj/machinery/space_battle/space_construction/proc/generate_designs()
 	designs.Cut()
@@ -274,10 +307,36 @@ DESIGNS*
 		return 0
 	var/I = input(user, "Enter desired warp ID(<25 chars)", "Construction")
 	if(!I || length(I) > 25)
-		user << "<span class='warning'>Invalid name!</span>"
+		user << "<span class='warning'>Invalid warp id!</span>"
 		return 0
 	build_ship(50, 50, N, A.team, I, linked)
 	return 1
+
+/datum/space_construction/ship/prefab
+	name = "Prefab Ship"
+	required_materials = list("plasteel" = 1)
+	required_time = 10
+	required_items = list()
+
+/datum/space_construction/ship/prefab/complete(var/obj/machinery/space_battle/space_construction/creator, var/mob/user)
+	var/list/choices = creator.prefabs.Copy()
+	for(var/ship_name in choices)
+		var/datum/ship_prefab/P = creator.prefabs[ship_name]
+		if(P && text2num(P.team) == creator.team) continue
+		choices.Cut(choices.Find(ship_name), (choices.Find(ship_name)+1))
+	var/choice = input(user, "Which ship would you like to build?", "Construction") in choices
+	var/I = input(user, "Enter desired warp ID(<25 chars)", "Construction")
+	if(!I || length(I) > 25)
+		user << "<span class='warning'>Invalid warp id!</span>"
+		return 0
+	if(choice)
+		var/datum/ship_prefab/chosen = choices[choice]
+		testing("Loading ship: [chosen]")
+		testing("Loading PATH: [chosen.path] : [chosen.file]")
+		build_ship(50, 50, null, creator.team, I, creator.linked, 1)
+		maploader.load_map(chosen.file, world.maxz)
+		return 1
+	return 0
 
 
 /**********

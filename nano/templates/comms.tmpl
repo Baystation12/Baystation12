@@ -17,6 +17,13 @@
 		{{empty}}
 			No consoles available!
 		{{/for}}
+		<br><br>
+		<div class='itemLabel'>
+			<span style="good">Transponder Status: </span>
+		</div>
+		<div style='fixedLeft'>
+			{{:helper.link(data.transponder, 'link', { 'transponder' : 1 })}}
+		</div>	
 	</div>	
 {{else}}		
 	<div class='block'>

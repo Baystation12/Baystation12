@@ -5,7 +5,7 @@ var/list/ship_engines = list()
 	var/name = "ship engine"
 	var/obj/machinery/space_battle/engine	//actual engine object
 	var/zlevel = 0
-	var/obj/machinery/space_battle/engine_control/controller
+	var/obj/machinery/space_battle/computer/engine_control/controller
 	var/id_tag
 
 /datum/ship_engine/New(var/obj/machinery/space_battle/engine/holder)
@@ -14,7 +14,7 @@ var/list/ship_engines = list()
 	engine = holder
 	zlevel = holder.z
 	ship_engines += src
-	for(var/obj/machinery/space_battle/engine_control/E in machines)
+	for(var/obj/machinery/space_battle/computer/engine_control/E in machines)
 		if (zlevel in E.zlevels && E.id_tag == src.id_tag && !(src in E.engines))
 			controller = E
 			E.engines |= src
@@ -60,7 +60,7 @@ var/list/ship_engines = list()
 
 /datum/ship_engine/proc/die()
 	ship_engines -= src
-	for(var/obj/machinery/space_battle/engine_control/E in machines)
+	for(var/obj/machinery/space_battle/computer/engine_control/E in machines)
 		if (E.z == zlevel && E.id_tag == src.id_tag)
 			E.engines -= src
 			break
