@@ -53,6 +53,7 @@
 		return
 
 	if(C)
+		log_ability_use(src, "Picked hardware [C.name]")
 		C.owner = user
 		C.install()
 
@@ -90,6 +91,7 @@
 		return
 	res.focus = tar
 	user << "Research set: [tar.name]"
+	log_ability_use(src, "Selected research: [tar.name]", null, 0)
 
 // HELPER PROCS
 // Proc: ability_prechecks()
@@ -165,14 +167,22 @@
 
 // Proc: get_unhacked_apcs()
 // Parameters: None
-// Description: Returns a list of all unhacked APCs
+// Description: Returns a list of all unhacked APCs. APCs on station Zs are on top of the list.
 /proc/get_unhacked_apcs(var/mob/living/silicon/ai/user)
-	var/list/H = list()
+	var/list/station_apcs = list()
+	var/list/offstation_apcs = list()
+
 	for(var/obj/machinery/power/apc/A in machines)
 		if(A.hacker && A.hacker == user)
 			continue
-		H.Add(A)
-	return H
+		if(A.z in using_map.station_levels)
+			station_apcs.Add(A)
+		else
+			offstation_apcs.Add(A)
+
+	// Append off-station APCs to the end of station APCs list and return it.
+	station_apcs.Add(offstation_apcs)
+	return station_apcs
 
 
 // Helper procs which return lists of relevant mobs.
@@ -204,3 +214,11 @@
 			continue
 		L.Add(AT)
 	return L
+
+/proc/log_ability_use(var/mob/living/silicon/ai/A, var/ability_name, var/atom/target = null, var/notify_admins = 1)
+	var/message
+	if(target)
+		message = text("used malf ability/function: [ability_name] on [target] ([target.x], [target.y], [target.z])")
+	else
+		message = text("used malf ability/function: [ability_name].")
+	admin_attack_log(A, null, message, null, message)

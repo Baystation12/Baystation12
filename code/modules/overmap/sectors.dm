@@ -7,7 +7,7 @@
 	icon_state = "object"
 	var/map_z = list()
 
-	var/area/shuttle/landing_area	//area where inbound exploration shuttles will go to
+	var/list/landing_areas	//areas where inbound exploration shuttles can land
 
 	var/start_x			//coordinates on the
 	var/start_y			//overmap zlevel
@@ -21,9 +21,6 @@
 
 	if(!using_map.overmap_z)
 		build_overmap()
-
-	if(ispath(landing_area))
-		landing_area = locate(landing_area)
 
 	map_z = GetConnectedZlevels(z)
 	for(var/zlevel in map_z)

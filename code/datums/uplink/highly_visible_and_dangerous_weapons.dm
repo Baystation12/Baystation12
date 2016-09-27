@@ -29,6 +29,11 @@
 	item_cost = 32
 	path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser
 
+/datum/uplink_item/item/visible_weapons/energy_gun
+	name = "Energy Gun"
+	item_cost = 32
+	path = /obj/item/weapon/gun/energy/gun
+
 /datum/uplink_item/item/visible_weapons/revolver
 	name = "Revolver"
 	item_cost = 56
@@ -53,6 +58,11 @@
 	item_cost = 60
 	antag_costs = list(MODE_MERCENARY = 9)
 	path = /obj/item/weapon/gun/projectile/automatic/sts35
+
+/datum/uplink_item/item/visible_weapons/advanced_energy_gun
+	name = "Advanced Energy Gun"
+	item_cost = 60
+	path = /obj/item/weapon/gun/energy/gun/nuclear
 
 /datum/uplink_item/item/visible_weapons/heavysniper
 	name = "Anti-materiel Rifle with ammunition"

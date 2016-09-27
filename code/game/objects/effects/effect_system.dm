@@ -75,7 +75,7 @@ steam.start() -- spawns the effect
 			spawn(0)
 				if(holder)
 					src.location = get_turf(holder)
-				var/obj/effect/effect/steam/steam = PoolOrNew(/obj/effect/effect/steam, src.location)
+				var/obj/effect/effect/steam/steam = new /obj/effect/effect/steam(location)
 				var/direction
 				if(src.cardinals)
 					direction = pick(cardinal)
@@ -147,7 +147,7 @@ steam.start() -- spawns the effect
 			spawn(0)
 				if(holder)
 					src.location = get_turf(holder)
-				var/obj/effect/sparks/sparks = PoolOrNew(/obj/effect/sparks, src.location)
+				var/obj/effect/sparks/sparks = new /obj/effect/sparks(location)
 				var/direction
 				if(src.cardinals)
 					direction = pick(cardinal)
@@ -327,7 +327,7 @@ steam.start() -- spawns the effect
 		spawn(0)
 			if(holder)
 				src.location = get_turf(holder)
-			var/obj/effect/effect/smoke/smoke = PoolOrNew(smoke_type, src.location)
+			var/obj/effect/effect/smoke/smoke = new smoke_type(location)
 			src.total_smoke++
 			var/direction = src.direction
 			if(!direction)
@@ -385,7 +385,7 @@ steam.start() -- spawns the effect
 			var/turf/T = get_turf(src.holder)
 			if(T != src.oldposition)
 				if(is_type_in_list(T, specific_turfs) && (!max_number || number < max_number))
-					var/obj/effect/effect/trail = PoolOrNew(trail_type, src.oldposition)
+					var/obj/effect/effect/trail = new trail_type(oldposition)
 					src.oldposition = T
 					effect(trail)
 					number++
@@ -462,7 +462,7 @@ steam.start() -- spawns the effect
 
 	start()
 		if (amount <= 2)
-			var/datum/effect/effect/system/spark_spread/s = PoolOrNew(/datum/effect/effect/system/spark_spread)
+			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 			s.set_up(2, 1, location)
 			s.start()
 

@@ -60,8 +60,7 @@
 
 			if(istype(A, /obj/item/clothing/accessory/badge) || istype(A, /obj/item/clothing/accessory/medal))
 				user.visible_message("<span class='danger'>\The [user] tears off \the [A] from [src]'s [suit.name]!</span>")
-			attack_log += "\[[time_stamp()]\] <font color='orange'>Has had \the [A] removed by [user.name] ([user.ckey])</font>"
-			user.attack_log += "\[[time_stamp()]\] <font color='red'>Attempted to remove [name]'s ([ckey]) [A.name]</font>"
+			admin_attack_log(user, src, "Stripped \an [A] from \the [suit].", "Was stripped of \an [A] from \the [suit].", "stripped \an [A] from \the [suit] of")
 			A.on_removed(user)
 			suit.accessories -= A
 			update_inv_w_uniform()
@@ -78,15 +77,15 @@
 	else
 		visible_message("<span class='danger'>\The [user] is trying to put \a [held] on \the [src]!</span>")
 
-	if(!do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
-		return
-
-	if(!stripping && user.get_active_hand() != held)
+	if(!do_mob(user, src, HUMAN_STRIP_DELAY))
 		return
 
 	if(stripping)
-		admin_attack_log(user, src, "Attempted to remove \a [target_slot]", "Target of an attempt to remove \a [target_slot].", "attempted to remove \a [target_slot] from")
-		unEquip(target_slot)
+		if(unEquip(target_slot))
+			admin_attack_log(user, src, "Stripped \a [target_slot]", "Was stripped of \a [target_slot].", "stripped \a [target_slot] from")
+			user.put_in_active_hand(target_slot)
+		else
+			admin_attack_log(user, src, "Attempted to strip \a [target_slot]", "Target of a failed strip of \a [target_slot].", "attempted to strip \a [target_slot] from")
 	else if(user.unEquip(held))
 		if(!equip_to_slot_if_possible(held, text2num(slot_to_strip_text), del_on_fail=0, disable_warning=1, redraw_mob=1))
 			user.put_in_active_hand(held)
@@ -123,8 +122,8 @@
 	if (suit.has_sensor >= 2)
 		user << "<span class='warning'>\The [src]'s suit sensor controls are locked.</span>"
 		return
-	attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their sensors toggled by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to toggle [name]'s ([ckey]) sensors</font>")
+
+	admin_attack_log(user, src, "Toggled their suit sensors.", "Toggled their suit sensors.", "toggled the suit sensors of")
 	suit.set_sensors(user)
 
 // Remove all splints.

@@ -3,7 +3,9 @@
 "c" = (/obj/effect/overmap/sector/test1,/turf/space,/area/space)
 "d" = (/obj/effect/meteor/dust,/turf/space,/area/space)
 "e" = (/turf/space,/area/sector/shuttle/ingoing1)
-"f" = (/obj/effect/meteor/irradiated,/turf/space,/area/space)
+"f" = (/turf/space,/area/sector/shuttle/ingoing4)
+"g" = (/turf/simulated/mineral,/area/sector/shuttle/ingoing4)
+"h" = (/turf/space,/area/sector/shuttle/ingoing3)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -17,16 +19,16 @@ aaaaaaaaaabaabbbaaaaaaaaaaaaaa
 aaaaaaaaaaaaaabbaaaaaaaaaaaaaa
 aaaaaaaacaaaaaaaadddaaaaaaaaaa
 aaaaaaaaaaeeeeaaaadddaaaaaaaaa
-aaaaaaaaaaeeeeaaaaaadaaaaaaaaa
-aaaaaaaaaaeeeeaaaaaaaaaaaaaaaa
-aaaaaaaaaaeeeeaaaaaaaaaaaaaaaa
-aaaaaaaaaaeeeeaaaaaaadaaaaaaaa
-aaaaaaaaaaeeeeaaafaaddaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaddaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaadaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaadddaaadaaaaaaaaaaaaaa
-aaaaaaaaaddaaaddaaaaaaaaaaaaaa
+aaaaaaffffeeeeaaaaaadaaaaaaaaa
+aaaaaaffffeeeeaaaaaaaaaaaaaaaa
+aaaaaaffffeeeeaaaaaaaaaaaaaaaa
+aaaaaaffffeeeeaaaaaaadaaaaaaaa
+aaaaaagfffeeeeaahhhhddaaaaaaaa
+aaaaaaggffaaaaaahhhhddaaaaaaaa
+aaaaaaaaaaaaaaaahhhhadaaaaaaaa
+aaaaaaaaaaaaaaaahhhhaaaaaaaaaa
+aaaaaaaaadddaaadhhhhaaaaaaaaaa
+aaaaaaaaaddaaaddhhhhaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

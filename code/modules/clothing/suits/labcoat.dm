@@ -10,46 +10,6 @@
 	allowed = list(/obj/item/device/analyzer,/obj/item/stack/medical,/obj/item/weapon/dnainjector,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/healthanalyzer,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 
-/obj/item/clothing/suit/storage/toggle/labcoat/red
-	name = "red labcoat"
-	desc = "A suit that protects against minor chemical spills. This one is red."
-	icon_state = "red_labcoat_open"
-	item_state = "red_labcoat"
-	icon_open = "red_labcoat_open"
-	icon_closed = "red_labcoat"
-
-/obj/item/clothing/suit/storage/toggle/labcoat/blue
-	name = "blue labcoat"
-	desc = "A suit that protects against minor chemical spills. This one is blue."
-	icon_state = "blue_labcoat_open"
-	item_state = "blue_labcoat"
-	icon_open = "blue_labcoat_open"
-	icon_closed = "blue_labcoat"
-
-/obj/item/clothing/suit/storage/toggle/labcoat/purple
-	name = "purple labcoat"
-	desc = "A suit that protects against minor chemical spills. This one is purple."
-	icon_state = "purple_labcoat_open"
-	item_state = "purple_labcoat"
-	icon_open = "purple_labcoat_open"
-	icon_closed = "purple_labcoat"
-
-/obj/item/clothing/suit/storage/toggle/labcoat/orange
-	name = "orange labcoat"
-	desc = "A suit that protects against minor chemical spills. This one is orange."
-	icon_state = "orange_labcoat_open"
-	item_state = "orange_labcoat"
-	icon_open = "orange_labcoat_open"
-	icon_closed = "orange_labcoat"
-
-/obj/item/clothing/suit/storage/toggle/labcoat/green
-	name = "green labcoat"
-	desc = "A suit that protects against minor chemical spills. This one is green."
-	icon_state = "green_labcoat_open"
-	item_state = "green_labcoat"
-	icon_open = "green_labcoat_open"
-	icon_closed = "green_labcoat"
-
 /obj/item/clothing/suit/storage/toggle/labcoat/cmo
 	name = "chief medical officer's labcoat"
 	desc = "Bluer than the standard model."

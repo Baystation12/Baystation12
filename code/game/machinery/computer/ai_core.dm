@@ -192,7 +192,7 @@
 		empty_playable_ai_cores -= src
 	..()
 
-/obj/structure/AIcore/deactivated/proc/load_ai(var/mob/living/silicon/ai/transfer, var/obj/item/device/aicard/card, var/mob/user)
+/obj/structure/AIcore/deactivated/proc/load_ai(var/mob/living/silicon/ai/transfer, var/obj/item/weapon/aicard/card, var/mob/user)
 
 	if(!istype(transfer) || locate(/mob/living/silicon/ai) in src)
 		return
@@ -219,8 +219,8 @@
 
 /obj/structure/AIcore/deactivated/attackby(var/obj/item/weapon/W, var/mob/user)
 
-	if(istype(W, /obj/item/device/aicard))
-		var/obj/item/device/aicard/card = W
+	if(istype(W, /obj/item/weapon/aicard))
+		var/obj/item/weapon/aicard/card = W
 		var/mob/living/silicon/ai/transfer = locate() in card
 		if(transfer)
 			load_ai(transfer,card,user)

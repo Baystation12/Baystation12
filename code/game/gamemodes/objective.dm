@@ -217,24 +217,28 @@ datum/objective/protect//The opposite of killing a dude.
 
 
 datum/objective/hijack
-	explanation_text = "Hijack the emergency shuttle by escaping alone."
+	explanation_text = "Hijack a shuttle or pod by escaping alone."
 
-	check_completion()
-		if(!owner.current || owner.current.stat)
+datum/objective/hijack/check_completion()
+	if(!owner.current || owner.current.stat)
+		return 0
+	if(!evacuation_controller.has_evacuated())
+		return 0
+	if(issilicon(owner.current))
+		return 0
+
+	var/area/shuttle/shuttle_area = get_area(owner.current)
+	if(!istype(shuttle_area) || !(shuttle_area.z in using_map.admin_levels))
+		return 0
+
+	for(var/mob/living/player in player_list)
+		if(is_type_in_list(player.type, list(/mob/living/silicon/ai, /mob/living/silicon/pai)))
+			continue
+		if (!player.mind || player.mind == owner)
+			continue
+		if(get_area(player) == shuttle_area)
 			return 0
-		if(!evacuation_controller.has_evacuated())
-			return 0
-		if(issilicon(owner.current))
-			return 0
-		var/area/shuttle = locate(/area/shuttle/escape/centcom)
-		var/list/protected_mobs = list(/mob/living/silicon/ai, /mob/living/silicon/pai)
-		for(var/mob/living/player in player_list)
-			if(player.type in protected_mobs)	continue
-			if (player.mind && (player.mind != owner))
-				if(player.stat != DEAD)			//they're not dead!
-					if(get_turf(player) in shuttle)
-						return 0
-		return 1
+	return 1
 
 
 datum/objective/block
@@ -271,10 +275,8 @@ datum/objective/silence
 			if(player.mind)
 				if(player.stat != DEAD)
 					var/turf/T = get_turf(player)
-					if(!T)	continue
-					switch(T.loc.type)
-						if(/area/shuttle/escape/centcom, /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom)
-							return 0
+					if(T && is_type_in_list(T.loc, using_map.post_round_safe_areas))
+						return 0
 		return 1
 
 
@@ -300,18 +302,7 @@ datum/objective/escape
 			return 0
 
 		var/area/check_area = location.loc
-		if(istype(check_area, /area/shuttle/escape/centcom))
-			return 1
-		if(istype(check_area, /area/shuttle/escape_pod1/centcom))
-			return 1
-		if(istype(check_area, /area/shuttle/escape_pod2/centcom))
-			return 1
-		if(istype(check_area, /area/shuttle/escape_pod3/centcom))
-			return 1
-		if(istype(check_area, /area/shuttle/escape_pod5/centcom))
-			return 1
-		else
-			return 0
+		return check_area && is_type_in_list(check_area, using_map.post_round_safe_areas)
 
 
 
@@ -425,7 +416,7 @@ datum/objective/steal
 		"an RCD" = /obj/item/weapon/rcd,
 		"a jetpack" = /obj/item/weapon/tank/jetpack,
 		"a captain's jumpsuit" = /obj/item/clothing/under/rank/captain,
-		"a functional AI" = /obj/item/device/aicard,
+		"a functional AI" = /obj/item/weapon/aicard,
 		"a pair of magboots" = /obj/item/clothing/shoes/magboots,
 		"the station blueprints" = /obj/item/blueprints,
 		"a nasa voidsuit" = /obj/item/clothing/suit/space/void,
@@ -500,37 +491,13 @@ datum/objective/steal
 						found_amount += (target_name=="28 moles of phoron (full tank)" ? (I:air_contents:gas["phoron"]) : (I:amount))
 				return found_amount>=target_amount
 
-			if("50 coins (in bag)")
-				var/obj/item/weapon/moneybag/B = locate() in all_items
-
-				if(B)
-					var/target = text2num(target_name)
-					var/found_amount = 0.0
-					for(var/obj/item/weapon/coin/C in B)
-						found_amount++
-					return found_amount>=target
-
 			if("a functional AI")
-
-				for(var/obj/item/device/aicard/C in all_items) //Check for ai card
-					for(var/mob/living/silicon/ai/M in C)
-						if(istype(M, /mob/living/silicon/ai) && M.stat != 2) //See if any AI's are alive inside that card.
-							return 1
-
-				for(var/mob/living/silicon/ai/ai in world)
+				for(var/mob/living/silicon/ai/ai in mob_list)
+					if(ai.stat == DEAD)
+						continue
 					var/turf/T = get_turf(ai)
-					if(istype(T))
-						var/area/check_area = get_area(ai)
-						if(istype(check_area, /area/shuttle/escape/centcom))
-							return 1
-						if(istype(check_area, /area/shuttle/escape_pod1/centcom))
-							return 1
-						if(istype(check_area, /area/shuttle/escape_pod2/centcom))
-							return 1
-						if(istype(check_area, /area/shuttle/escape_pod3/centcom))
-							return 1
-						if(istype(check_area, /area/shuttle/escape_pod5/centcom))
-							return 1
+					if(owner.current.contains(ai) || (T && is_type_in_list(T.loc, using_map.post_round_safe_areas)))
+						return 1
 			else
 
 				for(var/obj/I in all_items) //Check for items
@@ -585,13 +552,13 @@ datum/objective/capture
 
 		for(var/mob/living/carbon/human/M in A) // Humans (and subtypes).
 			var/worth = M.species.rarity_value
-			if(M.stat==2)//Dead folks are worth less.
+			if(M.stat==DEAD)//Dead folks are worth less.
 				worth*=0.5
 				continue
 			captured_amount += worth
 
 		for(var/mob/living/carbon/alien/larva/M in A)//Larva are important for research.
-			if(M.stat==2)
+			if(M.stat==DEAD)
 				captured_amount+=0.5
 				continue
 			captured_amount+=1
@@ -840,7 +807,7 @@ datum/objective/heist/salvage
 	for(var/datum/mind/cult_mind in cult.current_antagonists)
 		if (cult_mind.current && cult_mind.current.stat!=2)
 			var/area/A = get_area(cult_mind.current )
-			if ( is_type_in_list(A, centcom_areas))
+			if ( is_type_in_list(A, using_map.post_round_safe_areas))
 				acolytes_survived++
 	if(acolytes_survived >= target_amount)
 		return 0

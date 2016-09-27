@@ -27,9 +27,17 @@
 
 /obj/item/clothing/shoes/magboots/rig/light
 	name = "shoes"
+	
+	sprite_sheets = list(
+		"Resomi" = 'icons/mob/species/resomi/shoes.dmi'
+	)
 
 /obj/item/clothing/head/helmet/space/rig/light
 	name = "hood"
+	
+	sprite_sheets = list(
+		"Resomi" = 'icons/mob/species/resomi/helmet.dmi'
+	)
 
 /obj/item/weapon/rig/light/hacker
 	name = "cybersuit control module"
@@ -102,15 +110,27 @@
 		/obj/item/rig_module/datajack,
 		/obj/item/rig_module/self_destruct
 		)
+	
+	sprite_sheets = list(
+		"Resomi" = 'icons/mob/species/resomi/back.dmi'
+	)
 
 	..()
 
 /obj/item/clothing/gloves/rig/light/ninja
 	name = "insulated gloves"
 	siemens_coefficient = 0
+	
+	sprite_sheets = list(
+		"Resomi" = 'icons/mob/species/resomi/gloves.dmi'
+	)
 
 /obj/item/clothing/suit/space/rig/light/ninja
 	breach_threshold = 38 //comparable to regular hardsuits
+	
+	sprite_sheets = list(
+		"Resomi" = 'icons/mob/species/resomi/suit.dmi'
+	)
 
 /obj/item/weapon/rig/light/stealth
 	name = "stealth suit control module"

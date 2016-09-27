@@ -93,10 +93,6 @@
 		src.loc = null
 	return ..()
 
-/obj/item/ResetVars(var/list/exclude = list())
-	exclude += "item_state_slots"
-	..(exclude)
-    
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
 
@@ -496,9 +492,7 @@ var/list/global/slot_flags_enumeration = list(
 		user << "<span class='warning'>You cannot locate any eyes on [M]!</span>"
 		return
 
-	user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
-	M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
-	msg_admin_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)") //BS12 EDIT ALG
+	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(M)

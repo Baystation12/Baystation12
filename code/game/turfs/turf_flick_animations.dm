@@ -5,7 +5,7 @@
 		location = get_turf(target)
 	if(location && !target)
 		target = location
-	var/atom/movable/overlay/animation = PoolOrNew(/atom/movable/overlay, location)
+	var/atom/movable/overlay/animation = new /atom/movable/overlay(location)
 	if(direction)
 		animation.set_dir(direction)
 	animation.icon = a_icon

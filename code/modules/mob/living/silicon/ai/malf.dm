@@ -14,6 +14,7 @@
 	verbs += new/datum/game_mode/malfunction/verb/ai_select_research()
 	verbs += new/datum/game_mode/malfunction/verb/ai_help()
 
+	log_ability_use(src, "became malfunctioning AI")
 	// And greet user with some OOC info.
 	user << "You are malfunctioning, you do not have to follow any laws."
 	user << "Use ai-help command to view relevant information about your abilities"
@@ -23,6 +24,7 @@
 	if(!malfunctioning)
 		return
 	var/mob/living/silicon/ai/user = src
+	log_ability_use(user, "malfunction status removed")
 	// Generic variables
 	malfunctioning = 0
 	sleep(10)
@@ -39,7 +41,7 @@
 	if(security_level == SEC_LEVEL_DELTA)
 		set_security_level(SEC_LEVEL_RED)
 	// Reset our verbs
-	src.verbs = null
+	src.verbs.Cut()
 	add_ai_verbs()
 	// Let them know.
 	if(loud)
@@ -96,6 +98,7 @@
 		return
 	if(!shutup)
 		src << "Starting APU... ONLINE"
+	log_ability_use(src, "Switched to APU Power", null, 0)
 	APU_power = 1
 
 // Stops AI's APU generator
@@ -107,6 +110,7 @@
 		APU_power = 0
 		if(!shutup)
 			src << "Shutting down APU... DONE"
+		log_ability_use(src, "Switched to external power", null, 0)
 
 // Returns percentage of AI's remaining backup capacitor charge (maxhealth - oxyloss).
 /mob/living/silicon/ai/proc/backup_capacitor()

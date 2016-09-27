@@ -290,8 +290,10 @@
 		src << alert("[rank] is not available. Please try another.")
 		return 0
 
-	var/turf/T = job_master.LateSpawn(client, rank, 1)
-	var/airstatus = IsTurfAtmosUnsafe(T)
+	
+	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, rank)
+	var/turf/spawn_turf = pick(spawnpoint.turfs)
+	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
 	if(airstatus)
 		var/reply = alert(usr, "Warning. Your selected spawn location seems to have unfavorable atmospheric conditions. \
 		You may die shortly after spawning. It is possible to select different spawn point via character preferences. \
@@ -335,8 +337,8 @@
 		qdel(src)
 		return
 
-	//Find our spawning point.
-	var/join_message = job_master.LateSpawn(character.client, rank)
+	// Move them to the spawnpoint turf
+	character.forceMove(spawn_turf)
 
 	character.lastarea = get_area(loc)
 	// Moving wheelchair if they have one
@@ -352,9 +354,9 @@
 
 			//Grab some data from the character prefs for use in random news procs.
 
-			AnnounceArrival(character, rank, join_message)
+			AnnounceArrival(character, rank, spawnpoint.msg)
 		else
-			AnnounceCyborg(character, rank, join_message)
+			AnnounceCyborg(character, rank, spawnpoint.msg)
 
 	qdel(src)
 

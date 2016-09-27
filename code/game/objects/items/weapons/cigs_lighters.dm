@@ -97,6 +97,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/zippomes = "USER lights NAME with FLAME"
 	var/weldermes = "USER lights NAME with FLAME"
 	var/ignitermes = "USER lights NAME with FLAME"
+	var/brand
 
 /obj/item/clothing/mask/smokable/New()
 	..()
@@ -155,6 +156,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if (type_butt)
 		var/obj/item/butt = new type_butt(T)
 		transfer_fingerprints_to(butt)
+		if(brand)
+			butt.desc += " This one is \a [brand]."
 		if(ismob(loc))
 			var/mob/living/M = loc
 			if (!nomessage)

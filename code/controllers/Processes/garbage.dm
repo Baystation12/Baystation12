@@ -171,19 +171,13 @@ world/loop_checks = 0
 			A.finalize_qdel()
 
 /datum/proc/finalize_qdel()
-	if(IsPooled(src))
-		PlaceInPool(src)
-	else
-		del(src)
+	del(src)
 
 /atom/finalize_qdel()
-	if(IsPooled(src))
-		PlaceInPool(src)
+	if(garbage_collector)
+		garbage_collector.AddTrash(src)
 	else
-		if(garbage_collector)
-			garbage_collector.AddTrash(src)
-		else
-			delayed_garbage |= src
+		delayed_garbage |= src
 
 /icon/finalize_qdel()
 	del(src)
@@ -196,7 +190,7 @@ world/loop_checks = 0
 
 /turf/finalize_qdel()
 	del(src)
-	
+
 /area/finalize_qdel()
     del(src)
 

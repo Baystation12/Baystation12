@@ -82,7 +82,7 @@
 		if(ptank)
 			ptank.loc = T
 			ptank = null
-		PoolOrNew(/obj/item/stack/rods, T)
+		new /obj/item/stack/rods(T)
 		qdel(src)
 		return
 
@@ -131,6 +131,9 @@
 	onclose(user, "flamethrower")
 	return
 
+/obj/item/weapon/flamethrower/return_air()
+	if(ptank)
+		return ptank.return_air()
 
 /obj/item/weapon/flamethrower/Topic(href,href_list[])
 	if(href_list["close"])

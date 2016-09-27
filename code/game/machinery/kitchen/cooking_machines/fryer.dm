@@ -52,15 +52,13 @@
 		victim.apply_damage(rand(30,40), BURN, user.zone_sel.selecting)
 
 	if(!nopain)
-		victim << "<span class='danger'>Agony consumes you as searing hot oil scorches your [E ? E.name : "flesh"] horribly!</span>"
+		to_chat(victim, "<span class='danger'>Agony consumes you as searing hot oil scorches your [E ? E.name : "flesh"] horribly!</span>")
 		victim.emote("scream")
 	else
-		victim << "<span class='danger'>Searing hot oil scorches your [E ? E.name : "flesh"]!</span>"
+		to_chat(victim, "<span class='danger'>Searing hot oil scorches your [E ? E.name : "flesh"]!</span>")
 
-	if(victim.client)
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Has [cook_type] \the [victim] ([victim.ckey]) in \a [src]</font>")
-		victim.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [cook_type] in \a [src] by [user.name] ([user.ckey])</font>")
-		msg_admin_attack("[user] ([user.ckey]) [cook_type] \the [victim] ([victim.ckey]) in \a [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+	if(victim)
+		admin_attack_log("Has [cook_type] their victim in \a [src]", "Has been [cook_type] in \a [src] by the attacker.", "[cook_type], in \a [src], ")
 
 	icon_state = off_icon
 	cooking = 0

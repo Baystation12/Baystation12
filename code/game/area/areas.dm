@@ -338,3 +338,22 @@ var/list/mob/living/forced_ambiance_list = new
 	if(A && A.has_gravity())
 		return 1
 	return 0
+
+//Can shuttle go here without doing weird stuff?
+/area/proc/free()
+	for(var/atom/A in src)
+		if(A.density)
+			return 0
+	return 1
+
+/area/proc/get_dimensions()
+	var/list/res = list("x"=1,"y"=1)
+	var/list/min = list("x"=world.maxx,"y"=world.maxy)
+	for(var/turf/T in src)
+		res["x"] = max(T.x, res["x"])
+		res["y"] = max(T.y, res["y"])
+		min["x"] = min(T.x, min["x"])
+		min["y"] = min(T.y, min["y"])
+	res["x"] = res["x"] - min["x"] + 1
+	res["y"] = res["y"] - min["y"] + 1
+	return res

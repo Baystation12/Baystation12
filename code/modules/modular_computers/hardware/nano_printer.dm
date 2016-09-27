@@ -21,18 +21,12 @@
 	if(!check_functionality())
 		return 0
 
-	var/obj/item/weapon/paper/P = new/obj/item/weapon/paper(get_turf(holder2))
-
 	// Damaged printer causes the resulting paper to be somewhat harder to read.
 	if(damage > damage_malfunction)
-		P.info = stars(text_to_print, 100-malfunction_probability)
-	else
-		P.info = text_to_print
-	if(paper_title)
-		P.name = paper_title
-	P.update_icon()
+		text_to_print = stars(text_to_print, 100-malfunction_probability)
+	new/obj/item/weapon/paper(get_turf(holder2),text_to_print, paper_title)
+
 	stored_paper--
-	P = null
 	return 1
 
 /obj/item/weapon/computer_hardware/nano_printer/attackby(obj/item/W as obj, mob/user as mob)

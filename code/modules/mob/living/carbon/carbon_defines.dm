@@ -6,9 +6,6 @@
 	var/list/antibodies = list()
 
 	var/life_tick = 0      // The amount of life ticks that have processed on this mob.
-	var/analgesic = 0 // when this is set, the mob isn't affected by shock or pain
-					  // life should decrease this by 1 every tick
-	// total amount of wounds on mob, used to spread out healing and the like over all wounds
 	var/obj/item/handcuffed = null //Whether or not the mob is handcuffed
 	var/obj/item/legcuffed = null  //Same as handcuffs but for legs. Bear traps use this.
 	//Surgery info

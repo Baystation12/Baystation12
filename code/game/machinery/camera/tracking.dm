@@ -242,7 +242,11 @@ mob/living/proc/near_camera()
 		return camera && camera.can_use() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
 
 /mob/living/carbon/human/tracking_status()
-	. = ..()
+	if(cloaked)
+		. = TRACKING_TERMINATE
+	else
+		. = ..()
+
 	if(. == TRACKING_TERMINATE)
 		return
 
@@ -260,7 +264,7 @@ mob/living/silicon/robot/tracking_initiated()
 
 mob/living/proc/tracking_cancelled()
 
-mob/living/silicon/robot/tracking_initiated()
+mob/living/silicon/robot/tracking_cancelled()
 	tracking_entities--
 	if(!tracking_entities && has_zeroth_law())
 		src << "<span class='notice'>Internal camera is no longer being accessed.</span>"

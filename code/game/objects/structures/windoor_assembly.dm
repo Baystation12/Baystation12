@@ -79,7 +79,7 @@ obj/structure/windoor_assembly/Destroy()
 						user << "<span class='notice'>You dissasembled the windoor assembly!</span>"
 						new /obj/item/stack/material/glass/reinforced(get_turf(src), 5)
 						if(secure)
-							PoolOrNew(/obj/item/stack/rods, list(get_turf(src), 4))
+							new /obj/item/stack/rods(get_turf(src), 4)
 						qdel(src)
 				else
 					user << "<span class='notice'>You need more welding fuel to dissassemble the windoor assembly.</span>"
