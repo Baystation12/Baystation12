@@ -14,7 +14,7 @@ var/list/global/tank_gauge_cache = list()
 
 	flags = CONDUCT
 	slot_flags = SLOT_BACK
-	w_class = 3
+	w_class = 4
 
 	force = 5.0
 	throwforce = 10.0
@@ -548,13 +548,6 @@ var/list/global/tank_gauge_cache = list()
 
 
 
-
-
-
-
-
-
-
 /////////////////////////////////
 ///Pulled from rewritten bomb.dm
 /////////////////////////////////
@@ -562,7 +555,7 @@ var/list/global/tank_gauge_cache = list()
 
 /obj/item/device/tankassemblyproxy
 	name = "Tank assembly proxy"
-	desc = "Uused as a stand in to trigger single tank assemblies... but you shouldn't see this."
+	desc = "Used as a stand in to trigger single tank assemblies... but you shouldn't see this."
 	var/obj/item/weapon/tank/tank = null
 	var/obj/item/device/assembly_holder/assembly = null
 
@@ -571,9 +564,9 @@ var/list/global/tank_gauge_cache = list()
 
 
 /obj/item/device/tankassemblyproxy/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
-	visible_message("\icon[src] *beep* *beep*", "*beep* *beep*")
+	//visible_message("\icon[src] *beep* *beep*", "*beep* *beep*") //Commented out for now, shouldn't really beep if TTVs don't.
 	sleep(15)
-	tank.ignite()	//boom (or not boom if you made shijwtty mix)
+	tank.ignite()	//boom (or not boom if you made shitty mix)
 
 
 /obj/item/weapon/tank/proc/assemble_bomb(W,user)	//Bomb assembly proc. This turns assembly+tank into a bomb
@@ -630,6 +623,7 @@ var/list/global/tank_gauge_cache = list()
 		tank.update_icon()
 		tank.overlays -= "bomb_assembly"
 
+
 ////////Not sure what do with this or not.
 /*
 /obj/item/device/tank/attack_self(mob/user as mob) //pressing the bomb accesses its assembly
@@ -638,6 +632,26 @@ var/list/global/tank_gauge_cache = list()
 	return
 */
 
+
 /obj/item/device/tankassemblyproxy/HasProximity(atom/movable/AM as mob|obj)
 	if(src.assembly)
 		src.assembly.HasProximity(AM)
+
+
+
+/obj/item/device/onetankbomb //For use with merchant
+	New(newloc)
+		..(newloc)
+
+		var/obj/item/weapon/tank/phoron/tank = new(src.loc) //intent to add other tank types later.
+
+		tank.air_contents.gas = list()
+		tank.air_contents.gas["phoron"] = 6 + random(6) //Random values create varying effectiveness
+		tank.air_contents.gas["oxygen"] = 10 + random(3)
+		tank.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE-1
+		tank.air_contents.update_values()
+		tank.valve_welded = 1
+		tank.wired = 1
+
+		qdel(src)
+
