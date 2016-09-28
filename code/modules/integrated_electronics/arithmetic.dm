@@ -32,16 +32,15 @@
 	icon_state = "subtraction"
 
 /obj/item/integrated_circuit/arithmetic/subtraction/do_work()
-	if(..())
-		var/result = 0
-		for(var/datum/integrated_io/input/I in inputs)
-			I.pull_data()
-			if(isnum(I.data))
-				result = result - I.data
+	var/result = 0
+	for(var/datum/integrated_io/input/I in inputs)
+		I.pull_data()
+		if(isnum(I.data))
+			result = result - I.data
 
-		for(var/datum/integrated_io/output/O in outputs)
-			O.data = result
-			O.push_data()
+	for(var/datum/integrated_io/output/O in outputs)
+		O.data = result
+		O.push_data()
 
 // *Multiply* //
 

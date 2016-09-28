@@ -27,6 +27,7 @@
 		var/datum/integrated_io/I = inputs[i]
 		var/datum/integrated_io/O = outputs[i]
 		O.data = I.data
+	push_data()
 
 /obj/item/integrated_circuit/memory/medium
 	name = "memory circuit"

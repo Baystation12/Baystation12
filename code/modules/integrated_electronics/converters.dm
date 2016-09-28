@@ -36,6 +36,37 @@
 	outgoing.data = result
 	outgoing.push_data()
 
+/obj/item/integrated_circuit/converter/text2ascii
+	name = "char to ascii"
+	desc = "This circuit can convert a single string character into the corresponding ASCII number"
+	icon_state = "string-ascii"
+	extended_desc = "In the case of multi-character string input only the first character will be converted."
+
+/obj/item/integrated_circuit/converter/text2ascii/do_work()
+	var/result = null
+	var/datum/integrated_io/incoming = inputs[1]
+	var/datum/integrated_io/outgoing = outputs[1]
+	if(incoming.data && istext(incoming.data))
+		result = text2ascii(incoming.data)
+
+	outgoing.data = result
+	outgoing.push_data()
+
+/obj/item/integrated_circuit/converter/ascii2text
+	name = "ascii to char"
+	desc = "This circuit can convert a given ASCII number to the corresponding string"
+	icon_state = "ascii-string"
+
+/obj/item/integrated_circuit/converter/ascii2text/do_work()
+	var/result = null
+	var/datum/integrated_io/incoming = inputs[1]
+	var/datum/integrated_io/outgoing = outputs[1]
+	if(incoming.data && isnum(incoming.data))
+		result = ascii2text(incoming.data)
+
+	outgoing.data = result
+	outgoing.push_data()
+
 /obj/item/integrated_circuit/converter/ref2text
 	name = "reference to string"
 	desc = "This circuit can convert a reference to something else to a string, specifically the name of that reference."
@@ -90,12 +121,12 @@
 	activators = list("concatenate")
 
 /obj/item/integrated_circuit/converter/concatenatior/do_work()
-	var/result = null
+	var/result = list()
 	for(var/datum/integrated_io/input/I in inputs)
 		I.pull_data()
 		if(istext(I.data))
 			result = result + I.data
 
 	var/datum/integrated_io/outgoing = outputs[1]
-	outgoing.data = result
+	outgoing.data = jointext(result,null)
 	outgoing.push_data()
