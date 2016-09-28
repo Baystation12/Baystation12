@@ -737,68 +737,6 @@
 	throw_speed = 3
 	throw_range = 10
 	upgraded = list("cable" = 0, "steel" = 5, "rods" = 0, "plasteel" = 0, "power" = 0)
-
-/obj/item/device/assembly_holder/New()
-	..()
-	listening_objects += src
-
-/obj/item/device/assembly_holder/Destroy()
-	listening_objects -= src
-	return ..()
-
-
-/obj/item/device/assembly_holder/hear_talk(mob/living/M as mob, msg, verb, datum/language/speaking)
-	if(a_right)
-		a_right.hear_talk(M,msg,verb,speaking)
-	if(a_left)
-		a_left.hear_talk(M,msg,verb,speaking)
-
-
-
-
-/obj/item/device/assembly_holder/timer_igniter
-	name = "timer-igniter assembly"
-
-	New()
-		..()
-
-		var/obj/item/device/assembly/igniter/ign = new(src)
-		ign.secured = 1
-		ign.holder = src
-		var/obj/item/device/assembly/timer/tmr = new(src)
-		tmr.time=5
-		tmr.secured = 1
-		tmr.holder = src
-		processing_objects.Add(tmr)
-		a_left = tmr
-		a_right = ign
-		secured = 1
-		update_icon()
-		name = initial(name) + " ([tmr.time] secs)"
-
-		loc.verbs += /obj/item/device/assembly_holder/timer_igniter/verb/configure
-
-	detached()
-		loc.verbs -= /obj/item/device/assembly_holder/timer_igniter/verb/configure
-		..()
-
-	verb/configure()
-		set name = "Set Timer"
-		set category = "Object"
-		set src in usr
-
-		if ( !(usr.stat || usr.restrained()) )
-			var/obj/item/device/assembly_holder/holder
-			if(istype(src,/obj/item/weapon/grenade/chem_grenade))
-				var/obj/item/weapon/grenade/chem_grenade/gren = src
-				holder=gren.detonator
-			var/obj/item/device/assembly/timer/tmr = holder.a_left
-			if(!istype(tmr,/obj/item/device/assembly/timer))
-				tmr = holder.a_right
-			if(!istype(tmr,/obj/item/device/assembly/timer))
-				usr << "<span class='notice'>This detonator has no timer.</span>"
-				return
-
 	max_connections = 2
 
 /obj/item/device/assembly_holder/frame/four

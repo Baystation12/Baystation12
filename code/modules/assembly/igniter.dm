@@ -51,7 +51,7 @@
 			if(prob(30))
 				activate()
 
-
+/*
 /obj/item/device/assembly/igniter/attackby(var/obj/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/stack/cable_coil) && stage == 1)
 		var/obj/item/stack/cable_coil/C = O
@@ -93,7 +93,7 @@
 		stage = 3
 		return
 	..()
-
+*/
 
 
 /obj/item/device/assembly/igniter/activate()

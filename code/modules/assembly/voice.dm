@@ -10,31 +10,6 @@
 	wires = WIRE_MISC_SPECIAL | WIRE_PROCESS_RECEIVE | WIRE_PROCESS_ACTIVATE | WIRE_MISC_ACTIVATE | WIRE_PROCESS_SEND | WIRE_DIRECT_SEND | WIRE_ASSEMBLY_PROCESS
 	wire_num = 7
 
-/obj/item/device/assembly/voice/New()
-	..()
-	listening_objects += src
-
-/obj/item/device/assembly/voice/Destroy()
-	listening_objects -= src
-	return ..()
-
-/obj/item/device/assembly/voice/hear_talk(mob/living/M as mob, msg)
-	if(listening)
-		recorded = msg
-		listening = 0
-		var/turf/T = get_turf(src)	//otherwise it won't work in hand
-		T.visible_message("\icon[src] beeps, \"Activation message is '[recorded]'.\"")
-	else
-		if(findtext(msg, recorded))
-			pulse(0)
-
-/obj/item/device/assembly/voice/activate()
-	if(secured)
-		if(!holder)
-			listening = !listening
-			var/turf/T = get_turf(src)
-			T.visible_message("\icon[src] beeps, \"[listening ? "Now" : "No longer"] recording input.\"")
-
 /obj/item/device/assembly/voice/holder_hear_talk(mob/living/M as mob, msg)
 	if(!active_wires & WIRE_ASSEMBLY_PROCESS || !on) return
 	else if(findtext(lowertext(msg), lowertext(recorded)))
@@ -70,8 +45,4 @@
 
 
 	..()
-
-/obj/item/device/assembly/voice/toggle_secure()
-	. = ..()
-	listening = 0
 

@@ -22,7 +22,7 @@
 		icon_state = "mousetrap"
 	if(holder)
 		holder.update_icon()
-
+/*
 /obj/item/device/assembly/mousetrap/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/stack/cable_coil))
 		if(istype(src, /obj/item/device/assembly/mousetrap/pressure_plate))
@@ -43,7 +43,7 @@
 				qdel(src)
 				return
 	..()
-
+*/
 /obj/item/device/assembly/mousetrap/proc/triggered(mob/target as mob, var/type = "feet")
 	if(!armed)
 		return

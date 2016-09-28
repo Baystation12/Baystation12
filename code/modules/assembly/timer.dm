@@ -93,7 +93,7 @@
 					time_to_set = min(120, num)
 					time_to_set = max(0, num)
 	..()
-
+/*
 /obj/item/device/assembly/timer/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/stack/cable_coil))
 		if(istype(src, /obj/item/device/assembly/timer/repeater))
@@ -113,3 +113,4 @@
 				qdel(src)
 				return
 	..()
+*/
