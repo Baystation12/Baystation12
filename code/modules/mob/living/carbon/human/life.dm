@@ -928,7 +928,7 @@
 			if(isliving(A))
 				var/mob/living/M = A
 				if(M.stat == DEAD)
-					if(species.gluttonous < 3 || M.mob_size <= MOB_SMALL)
+					if(species.gluttonous & GLUT_QDEL_MOBS || M.mob_size <= MOB_SMALL)
 						M.death(1)
 						stomach_contents -= M
 						qdel(M)

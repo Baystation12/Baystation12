@@ -116,6 +116,7 @@
 #define GLUT_ITEM_NORMAL 16      // Eat items with a w_class of normal or smaller
 #define GLUT_ITEM_ANYTHING 32    // Eat any item
 #define GLUT_PROJECTILE_VOMIT 64 // When vomitting, does it fly out?
+#define GLUT_QDEL_MOBS 128       // Delete dead things in your stomach?
 
 // Devour speeds, returned by can_devour()
 #define DEVOUR_SLOW 1
