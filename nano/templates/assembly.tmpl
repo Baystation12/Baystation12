@@ -1,0 +1,69 @@
+<!-- 
+	Interface for vending machines 
+	See: code/game/machinery/vending.dm
+-->
+<div class='item'>
+<h2>Information:</h2>
+	{{if data.broken}}
+		<div class='itemLabel'>
+			<span style='color:#FF0000'>S&%d-clzz : ÿµD<br>
+			♠┌°oì§j</span>
+		</div>	
+	{{else}}
+		<span style="white-space: nowrap">
+        {{for data.extra_data}}
+            {{if index % 2 == 1}}
+                <div class='float'>
+					{{:value}}
+				</div>
+				<br>
+            {{else}}
+                <div style='itemContent'>
+                    {{:helper.link(''+value+':', 'wrench', { 'option' : value })}}
+                </div>
+               {{/if}}
+				
+        {{/for}}
+		
+       {{for data.nonset_data}}
+            <div class='float'>
+				{{:value}}
+			</div>
+			<br>
+		{{/for}}
+	{{/if}}	
+{{for data.connected_devices}}
+	{{if index == 0}}
+		<h2>Connected Devices:</h2>	
+	{{/if}}	
+	{{if index % 2 == 1}}
+		<div style='itemContentWide'>
+			{{if data.broken}}
+				{{:helper.link('r-Ù«', 'cancel', { 'disconnect' : value })}}     
+				{{:helper.link('¶ìÉÄ', 'cancel', { 'settings' : value })}}   
+				{{:helper.link('Cr£-cnz', 'cancel', { 'wiring' : value })}}
+			{{else}}
+				{{:helper.link('Disconnect', 'cancel', { 'disconnect' : value })}}     
+				{{:helper.link('Settings', 'gear', { 'settings' : value })}}   
+				{{:helper.link('Wires', 'lightbulb', { 'wiring' : value })}}
+			{{/if}}	
+		</div> 
+	{{else}}       
+		<div class='itemLabelNarrow'>
+			{{if data.broken}}
+				rãÙ-2#:
+			{{else}}
+				{{:value}}:
+			{{/if}}	
+		</div>
+	{{/if}}
+{{/for}} 
+<h2>Functions:</h2>
+	{{:helper.link('Close', 'cancel', { 'option' : 'close' })}}
+	{{for data.extra_buttons}}
+		<div style='float'>
+			{{:helper.link(''+value+'', 'wrench', { 'option' : value })}}
+		</div>	
+	{{/for}}	
+			
+</div>
