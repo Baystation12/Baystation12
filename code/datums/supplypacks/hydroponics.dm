@@ -103,7 +103,7 @@
 	contains = list(/obj/item/weapon/material/hatchet = 2,
 					/obj/item/weapon/reagent_containers/spray/plantbgone = 4,
 					/obj/item/clothing/mask/gas = 2,
-					/obj/item/weapon/grenade/chem_grenade/antiweed = 2)
+					/obj/item/device/assembly_holder/grenade/chem_grenade/antiweed = 2)
 	cost = 25
 	containername = "\improper Weed control crate"
 	access = access_hydroponics

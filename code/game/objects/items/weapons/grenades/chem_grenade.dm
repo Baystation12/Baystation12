@@ -1,4 +1,4 @@
-/obj/item/weapon/grenade/chem_grenade
+/obj/item/device/assembly_holder/grenade/chem_grenade
 	name = "grenade casing"
 	icon_state = "chemg"
 	item_state = "grenade"
@@ -183,7 +183,7 @@
 			qdel(src)	   //correctly before deleting the grenade.
 
 
-/obj/item/weapon/grenade/chem_grenade/large
+/obj/item/device/assembly_holder/grenade/chem_grenade/large
 	name = "large chem grenade"
 	desc = "An oversized grenade that affects a larger area."
 	icon_state = "large_grenade"
@@ -191,7 +191,7 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
 	affected_area = 4
 
-/obj/item/weapon/grenade/chem_grenade/metalfoam
+/obj/item/device/assembly_holder/grenade/chem_grenade/metalfoam
 	name = "metal-foam grenade"
 	desc = "Used for emergency sealing of air breaches."
 	path = 1
@@ -212,7 +212,7 @@
 		beakers += B2
 		icon_state = initial(icon_state) +"_locked"
 
-/obj/item/weapon/grenade/chem_grenade/incendiary
+/obj/item/device/assembly_holder/grenade/chem_grenade/incendiary
 	name = "incendiary grenade"
 	desc = "Used for clearing rooms of living things."
 	path = 1
@@ -235,7 +235,7 @@
 		beakers += B2
 		icon_state = initial(icon_state) +"_locked"
 
-/obj/item/weapon/grenade/chem_grenade/antiweed
+/obj/item/device/assembly_holder/grenade/chem_grenade/antiweed
 	name = "weedkiller grenade"
 	desc = "Used for purging large areas of invasive plant species. Contents under pressure. Do not directly inhale contents."
 	path = 1
@@ -257,7 +257,7 @@
 		beakers += B2
 		icon_state = "grenade"
 
-/obj/item/weapon/grenade/chem_grenade/cleaner
+/obj/item/device/assembly_holder/grenade/chem_grenade/cleaner
 	name = "cleaner grenade"
 	desc = "BLAM!-brand foaming space cleaner. In a special applicator for rapid cleaning of wide areas."
 	stage = 2
@@ -278,7 +278,7 @@
 		beakers += B2
 		icon_state = initial(icon_state) +"_locked"
 
-/obj/item/weapon/grenade/chem_grenade/teargas
+/obj/item/device/assembly_holder/grenade/chem_grenade/teargas
 	name = "tear gas grenade"
 	desc = "Concentrated Capsaicin. Contents under pressure. Use with caution."
 	stage = 2

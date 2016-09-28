@@ -15,13 +15,7 @@
 	..()
 
 /obj/item/device/assembly_holder/grenade/chem_grenade/prime() // Again, leaving this here for any old code that may use it.
-	for(var/obj/item/device/assembly/A in connected_devices)
-		A.process_activation() // Skips signal wire checking.
-
-/obj/item/device/assembly_holder/grenade/chem_grenade/large
-	name = "large grenade casing"
-	w_class = 3
-	force = 3
+	attack_self()
 
 /obj/item/device/assembly_holder/grenade/chem_grenade/metalfoam
 	name = "metal-foam grenade"
