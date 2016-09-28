@@ -432,7 +432,7 @@ obj/random/material //Random materials for building stuff
 					/obj/item/toy/katana,\
 					/obj/item/toy/snappop,\
 					/obj/item/toy/sword,\
-					/obj/item/toy/balloon,\
+					/obj/item/toy/water_balloon,\
 					/obj/item/toy/crossbow,\
 					/obj/item/toy/blink,\
 					/obj/item/toy/waterflower,\
