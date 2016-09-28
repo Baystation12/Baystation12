@@ -8,7 +8,8 @@
 		icon_state = "implant"
 		item_state = "assembly"
 		return
-	for(var/obj/item/device/assembly/A in connected_devices)
+/*	for(var/obj/item/device/assembly/A in connected_devices)
+
 		if(istype(A, /obj/item/device/assembly/chute))
 			name = "modified disposal chute"
 			desc = "It looks like a giant hole in the ground."
@@ -73,7 +74,7 @@
 		else
 			continue
 		break
-
+*/
 /obj/item/device/assembly_holder/proc/paint_assembly(var/mob/user, var/obj/item/weapon/reagent_containers/glass/paint/paint)
 	var/list/choices = list()
 	switch(paint.paint_type)

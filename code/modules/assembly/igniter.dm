@@ -2,18 +2,14 @@
 	name = "igniter"
 	desc = "A small electronic device able to ignite combustable substances."
 	icon_state = "igniter"
-<<<<<<< HEAD
-=======
 	origin_tech = list(TECH_MAGNET = 1)
->>>>>>> ac332ef302030356ad51c2640b86541a24f9a16f
 	matter = list(DEFAULT_WALL_MATERIAL = 500, "glass" = 50, "waste" = 10)
 
 	wires = WIRE_DIRECT_RECEIVE | WIRE_PROCESS_RECEIVE | WIRE_PROCESS_ACTIVATE
 	wire_num = 3
 
-<<<<<<< HEAD
 	var/stage = 0
-=======
+
 	activate()
 		if(!..())	return 0//Cooldown check
 
@@ -29,7 +25,6 @@
 					var/obj/structure/reagent_dispensers/fueltank/tank = src.loc.loc
 					if (tank && tank.modded)
 						tank.explode()
->>>>>>> ac332ef302030356ad51c2640b86541a24f9a16f
 
 /obj/item/device/assembly/igniter/process_signals(var/sent = 0)
 	if(sent && active_wires & (WIRE_PROCESS_SEND))
