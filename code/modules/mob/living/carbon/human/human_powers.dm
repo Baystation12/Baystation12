@@ -201,6 +201,10 @@
 			if(M in stomach_contents)
 				stomach_contents.Remove(M)
 				M.forceMove(loc)
+				if(iscarbon(loc))
+					var/mob/living/carbon/C = loc
+					if(src in C.stomach_contents)
+						C.stomach_contents += M
 		src.visible_message("<span class='danger'>[src] hurls out the contents of their stomach!</span>")
 	return
 

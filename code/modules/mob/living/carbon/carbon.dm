@@ -471,3 +471,9 @@
 
 /mob/living/carbon/proc/get_adjusted_metabolism(metabolism)
 	return metabolism
+
+/mob/living/carbon/return_air_for_internal_lifeform()
+	var/datum/gas_mixture/GM = new /datum/gas_mixture
+	GM.adjust_multi("oxygen", MOLES_O2STANDARD, "nitrogen", MOLES_N2STANDARD)
+	GM.temperature = bodytemperature
+	return GM

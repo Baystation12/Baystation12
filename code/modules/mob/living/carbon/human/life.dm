@@ -919,22 +919,28 @@
 			playsound_local(src,pick(scarySounds),50, 1, -1)
 
 /mob/living/carbon/human/handle_stomach()
+	if(stat == DEAD)
+		return
+
 	spawn(0)
-		for(var/a in stomach_contents)
-			if(!(a in contents) || isnull(a))
-				stomach_contents.Remove(a)
+		for(var/A in stomach_contents)
+			var/mob/living/M = A
+			if(!istype(M))
+				stomach_contents -= A
 				continue
-			if(iscarbon(a)|| isanimal(a))
-				var/mob/living/M = a
-				if(M.stat == DEAD)
+			if(M.loc != src)
+				stomach_contents -= M
+				continue
+			if(M.stat == DEAD)
+				if(species.gluttonous < 3 || M.mob_size <= MOB_SMALL)
 					M.death(1)
-					stomach_contents.Remove(M)
+					stomach_contents -= M
 					qdel(M)
-					continue
-				if(air_master.current_cycle%3==1)
-					if(!(M.status_flags & GODMODE))
-						M.adjustBruteLoss(5)
-					nutrition += 10
+				continue
+			if(air_master.current_cycle % 3 == 1)
+				if(!(M.status_flags & GODMODE))
+					M.adjustBruteLoss(5)
+				nutrition += M.mob_size / 2
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)
