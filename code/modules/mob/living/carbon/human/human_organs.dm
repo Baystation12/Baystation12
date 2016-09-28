@@ -194,3 +194,18 @@
 	var/list/all_bits = internal_organs|organs
 	for(var/obj/item/organ/O in all_bits)
 		O.set_dna(dna)
+
+//Helper procs
+/mob/living/carbon/human/proc/can_use_active_hand()
+	var/obj/item/organ/external/temp
+	if(hand)
+		temp = get_organ(BP_L_HAND)
+	else
+		temp = get_organ(BP_R_HAND)
+	if(!temp)
+		src << "<span class='notice'>You try to use your hand, but realize it is no longer attached!</span>"
+		return 0
+	if(!temp.is_usable())
+		src << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
+		return 0
+	return 1

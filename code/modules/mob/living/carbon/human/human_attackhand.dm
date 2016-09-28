@@ -12,11 +12,7 @@
 
 	var/mob/living/carbon/human/H = M
 	if(istype(H))
-		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
-		if(H.hand)
-			temp = H.organs_by_name[BP_L_HAND]
-		if(!temp || !temp.is_usable())
-			H << "\red You can't use your hand."
+		if(!H.can_use_active_hand())
 			return
 
 	..()

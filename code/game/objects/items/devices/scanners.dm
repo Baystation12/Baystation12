@@ -145,7 +145,7 @@ REAGENT SCANNER
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/name in H.organs_by_name)
-			var/obj/item/organ/external/e = H.organs_by_name[name]
+			var/obj/item/organ/external/e = H.get_organ(name)
 			if(!e)
 				continue
 			var/limb = e.name
@@ -159,7 +159,7 @@ REAGENT SCANNER
 			user.show_message("<span class='notice'>Subject has a neural lace implant.</span>")
 
 		for(var/name in H.organs_by_name)
-			var/obj/item/organ/external/e = H.organs_by_name[name]
+			var/obj/item/organ/external/e = H.get_organ(name)
 			if(e && e.status & ORGAN_BROKEN)
 				user.show_message(text("<span class='warning'>Bone fractures detected. Advanced scanner required for location.</span>"), 1)
 				break

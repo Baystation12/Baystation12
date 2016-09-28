@@ -121,7 +121,7 @@
 	//is probabilistic so we can't do that and it would be unfair to just check one.
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/hand = H.organs_by_name[check_hand]
+		var/obj/item/organ/external/hand = H.get_organ(check_hand)
 		if(istype(hand) && hand.is_usable())
 			return TRUE
 	return FALSE
@@ -175,16 +175,9 @@
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
-	if (hasorgans(user))
+	if(hasorgans(user))
 		var/mob/living/carbon/human/H = user
-		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
-		if (user.hand)
-			temp = H.organs_by_name[BP_L_HAND]
-		if(temp && !temp.is_usable())
-			user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
-			return
-		if(!temp)
-			user << "<span class='notice'>You try to use your hand, but realize it is no longer attached!</span>"
+		if(!H.can_use_active_hand())
 			return
 	src.pickup(user)
 	if (istype(src.loc, /obj/item/weapon/storage))

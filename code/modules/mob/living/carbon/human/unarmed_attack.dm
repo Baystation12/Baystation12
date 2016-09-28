@@ -28,11 +28,11 @@ var/global/list/sparring_attack_cache = list()
 		return 0
 
 	// Check if they have a functioning hand.
-	var/obj/item/organ/external/E = user.organs_by_name[BP_L_HAND]
+	var/obj/item/organ/external/E = user.get_organ(BP_L_HAND)
 	if(E && !E.is_stump())
 		return 1
 
-	E = user.organs_by_name[BP_R_HAND]
+	E = user.get_organ(BP_R_HAND)
 	if(E && !E.is_stump())
 		return 1
 

@@ -73,7 +73,7 @@
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 
-		var/obj/item/organ/external/E = H.organs_by_name[BP_HEAD]
+		var/obj/item/organ/external/E = H.get_organ(BP_HEAD)
 		if(!E || E.is_stump())
 			src << "\The [H] does not have a head!"
 

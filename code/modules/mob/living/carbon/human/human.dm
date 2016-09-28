@@ -162,7 +162,7 @@
 	var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(M)
 	L.imp_in = M
 	L.implanted = 1
-	var/obj/item/organ/external/affected = M.organs_by_name[BP_HEAD]
+	var/obj/item/organ/external/affected = M.get_organ(BP_HEAD)
 	affected.implants += L
 	L.part = affected
 	L.implanted(src)
