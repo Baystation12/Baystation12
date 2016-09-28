@@ -111,15 +111,15 @@
 	set name = "Instant TTV"
 
 	if(!check_rights(R_SPAWN)) return
-	
+
 	var/obj/effect/spawner/newbomb/proto = /obj/effect/spawner/newbomb/radio/custom
-	
+
 	var/p = input("Enter phoron amount (mol):","Phoron", initial(proto.phoron_amt)) as num|null
 	if(p == null) return
-	
+
 	var/o = input("Enter oxygen amount (mol):","Oxygen", initial(proto.oxygen_amt)) as num|null
 	if(o == null) return
-	
+
 	var/c = input("Enter carbon dioxide amount (mol):","Carbon Dioxide", initial(proto.carbon_amt)) as num|null
 	if(c == null) return
 
@@ -129,9 +129,9 @@
 	name = "TTV bomb"
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
-	
+
 	var/assembly_type = /obj/item/device/assembly/signaler
-	
+
 	//Note that the maximum amount of gas you can put in a 70L air tank at 1013.25 kPa and 519K is 16.44 mol.
 	var/phoron_amt = 10.96
 	var/oxygen_amt = 16.44
@@ -160,12 +160,12 @@
 /obj/effect/spawner/newbomb/New(newloc)
 	..(newloc)
 
-	var/obj/item/device/transfer_valve/V = new(src.loc)
+	var/obj/item/device/assembly/transfer_valve/V = new(src.loc)
 	var/obj/item/weapon/tank/phoron/PT = new(V)
 	var/obj/item/weapon/tank/oxygen/OT = new(V)
 
-	V.tank_one = PT
-	V.tank_two = OT
+	V.attach_tank(PT)
+	V.attach_tank(OT)
 
 	PT.master = V
 	OT.master = V
@@ -185,7 +185,6 @@
 	V.attached_device = S
 
 	S.holder = V
-	S.toggle_secure()
 
 	V.update_icon()
 
