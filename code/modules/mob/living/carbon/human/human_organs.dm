@@ -76,14 +76,15 @@
 	if (istype(buckled, /obj/structure/bed))
 		return
 
+	var/list/stance_limbs = species.get_stance_limbs()
 	var/limb_pain
-	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
+	for(var/limb_tag in stance_limbs)
 		var/obj/item/organ/external/E = organs_by_name[limb_tag]
 		if(!E || !E.is_usable())
-			stance_damage += 2 // let it fail even if just foot&leg
-		else if (E.is_malfunctioning())
+			stance_damage += (8 / stance_limbs.len) //for variable-amount limbs; if they only have 1 limb, they will get 8 stance damage off the bat; if they have 4, they get 2 per
+		else if(E.is_malfunctioning())
 			//malfunctioning only happens intermittently so treat it as a missing limb when it procs
-			stance_damage += 2
+			stance_damage += (8 / stance_limbs.len)
 			if(prob(10))
 				visible_message("\The [src]'s [E.name] [pick("twitches", "shudders")] and sparks!")
 				var/datum/effect/effect/system/spark_spread/spark_system = new ()
@@ -92,12 +93,14 @@
 				spark_system.start()
 				spawn(10)
 					qdel(spark_system)
-		else if (E.is_broken())
-			stance_damage += 1
-		else if (E.is_dislocated())
-			stance_damage += 0.5
+		else if(E.is_broken())
+			stance_damage += (4 / stance_limbs.len) // same as the above calculations, but halved- 1 limb = 4 stance; 4 limbs = 1 stance each
+		else if(E.is_dislocated())
+			stance_damage += (2 / stance_limbs.len) // 1 limb = 2 stance; 4 limbs = 0.5 each
 
-		if(E) limb_pain = E.can_feel_pain()
+		if(E)
+			limb_pain = E.can_feel_pain()
+
 
 	// Canes and crutches help you stand (if the latter is ever added)
 	// One cane mitigates a broken leg+foot, or a missing foot.

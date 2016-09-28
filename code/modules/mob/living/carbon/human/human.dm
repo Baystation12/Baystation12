@@ -1449,8 +1449,9 @@
 		return H.pulse
 
 /mob/living/carbon/human/can_devour(atom/movable/victim)
-	if(!src.species.gluttonous)
+	if(!species.gluttonous)
 		return FALSE
+
 	var/total = 0
 	for(var/a in stomach_contents + victim)
 		if(ismob(a))
@@ -1459,26 +1460,28 @@
 		else if(isobj(a))
 			var/obj/item/I = a
 			total += I.get_storage_cost()
-	if(total > src.species.stomach_capacity)
+
+	if(total > species.stomach_capacity)
 		return FALSE
 
 	if(iscarbon(victim) || isanimal(victim))
 		var/mob/living/L = victim
-		if((src.species.gluttonous & GLUT_TINY) && (L.mob_size <= MOB_TINY) && !ishuman(victim)) // Anything MOB_TINY or smaller
+		if((species.gluttonous & GLUT_TINY) && (L.mob_size <= MOB_TINY) && !ishuman(victim)) // Anything MOB_TINY or smaller
 			return DEVOUR_SLOW
-		else if((src.species.gluttonous & GLUT_SMALLER) && (src.mob_size > L.mob_size)) // Anything we're larger than
+		else if((species.gluttonous & GLUT_SMALLER) && (mob_size > L.mob_size)) // Anything we're larger than
 			return DEVOUR_SLOW
-		else if(src.species.gluttonous & GLUT_ANYTHING) // Eat anything ever
+		else if(species.gluttonous & GLUT_ANYTHING) // Eat anything ever
 			return DEVOUR_FAST
+
 	else if(istype(victim, /obj/item) && !istype(victim, /obj/item/weapon/holder)) //Don't eat holders. They are special.
 		var/obj/item/I = victim
 		var/cost = I.get_storage_cost()
 		if(cost != DO_NOT_STORE)
-			if((src.species.gluttonous & GLUT_ITEM_TINY) && cost < 4)
+			if((species.gluttonous & GLUT_ITEM_TINY) && cost < 4)
 				return DEVOUR_SLOW
-			else if((src.species.gluttonous & GLUT_ITEM_NORMAL) && cost <= 4)
+			else if((species.gluttonous & GLUT_ITEM_NORMAL) && cost <= 4)
 				return DEVOUR_SLOW
-			else if(src.species.gluttonous & GLUT_ITEM_ANYTHING)
+			else if(species.gluttonous & GLUT_ITEM_ANYTHING)
 				return DEVOUR_FAST
 	return ..()
 
