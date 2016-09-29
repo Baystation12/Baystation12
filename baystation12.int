@@ -1,9 +1,6 @@
 // BEGIN_INTERNALS
 /*
-DIR: code code\modules code\modules\assembly 
-AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\assembly\assembly_types.dm;code\modules\assembly\holder.dm
-FILE: code\modules\assembly\holder.dm
+AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
