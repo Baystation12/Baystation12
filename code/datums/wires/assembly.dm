@@ -154,7 +154,6 @@ var/const/WIRE_ASSEMBLY_PASSWORD = 16384 // All assemblies have these
 		A.wire_safety(index, 0)
 		if(A.holder)
 			A.holder.wire_cut(A, index)
-	world << "[index]"
 	if(A.active_wires & index)
 		if(!mended)
 			A.active_wires &= ~index
