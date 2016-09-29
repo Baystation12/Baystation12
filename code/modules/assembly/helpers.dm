@@ -55,7 +55,7 @@
 	for(var/obj/item/device/assembly/A in connected_devices)
 		if(!A.holder_pulsing(sender, receiver))
 			fail = 1 // So we can get all our reactions, not just the first one
-	if(advanced_settings["disablepulse"] == 1 || (!premade && !debug_mode && !prob(pulse_chance)))
+	if(advanced_settings["disablepulse"] == 1 || (!prespawned && !debug_mode && !prob(pulse_chance)))
 		fail = 1
 	var/index = recent_pulses.Find(sender)
 	if(index)
