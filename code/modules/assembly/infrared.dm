@@ -54,10 +54,14 @@
 	var/t = dir
 	..()
 	set_dir(t)
+	destroy_beam()
+	on = 0
 
 /obj/item/device/assembly/infra/holder_movement()
 	if(!holder)	return 0
 	set_dir(holder.dir)
+	destroy_beam()
+	on = 0
 	return 1
 
 /obj/item/device/assembly/infra/misc_activate()
@@ -73,6 +77,7 @@
 		last_triggered = world.timeofday
 		if(!resets)
 			destroy_beam()
+			on = 0
 		return
 
 /obj/item/device/assembly/infra/get_data()
