@@ -96,37 +96,3 @@
 	icon_state = "p_[inp]"
 	name = inp
 	painted = 1
-
-
-
-
-/*
-
-	var/list/matches = list()
-	for(var/list/L in assembly_holders)
-		for(var/obj/item/device/assembly/A)
-			if(A in L)
-				world << "Match found: [A]"
-				var/index = assembly_holders.Find(L)
-				if(num2text(index) in matches)
-					matches[(matches.Find(index))] += 1
-					world << "[L] : [matches[(matches.Find(index))]]"
-				else
-					matches += num2text(index)
-	for(var/i=1,i<matches.len-1,i++)
-		for(var/list/L in assembly_holders)
-			if(assembly_holders.Find[L] in matches)
-				var/index = matches[(assembly_holders.Find[L])]
-				if(index == L.len)
-					icon_state = L[L.len]
-					if(connected_devices.len > L.len)
-						name = "modified [L[L.len]]"
-					else
-						name = L[L.len]
-
-
-*/
-
-
-
-

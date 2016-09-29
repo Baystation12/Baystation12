@@ -55,18 +55,7 @@
 	for(var/obj/item/device/assembly/A in connected_devices)
 		if(!A.holder_pulsing(sender, receiver))
 			fail = 1 // So we can get all our reactions, not just the first one
-	if(receiver.dangerous)
-		var/log_str = "Dangerous Assembly triggered! (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)"
-		var/mob/mob = get_mob_by_key(src.fingerprintslast)
-		var/last_touch_info = ""
-		if(mob)
-			last_touch_info = "(<A HREF='?_src_=holder;adminmoreinfo=\ref[mob]'>?</A>)"
-		log_str += " Last touched by: [src.fingerprintslast][last_touch_info]"
-		if(admin_messages)
-			log_str += " <A href='?src=\ref[src];disableadmin=1'>(Safe)</a>"
-			message_admins(log_str, 0, 1)
-		log_game(log_str)
-	if(advanced_settings["disablepulse"] == 1 || (!debug_mode && !prob(pulse_chance)))
+	if(advanced_settings["disablepulse"] == 1 || (!premade && !debug_mode && !prob(pulse_chance)))
 		fail = 1
 	var/index = recent_pulses.Find(sender)
 	if(index)
@@ -83,6 +72,17 @@
 	if(fail)
 		add_debug_log("Sending pulse interrupted! \[[sender] > [receiver]\]")
 		return 0
+	if(receiver.dangerous)
+		var/log_str = "Dangerous Assembly triggered! (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)"
+		var/mob/mob = get_mob_by_key(src.fingerprintslast)
+		var/last_touch_info = ""
+		if(mob)
+			last_touch_info = "(<A HREF='?_src_=holder;adminmoreinfo=\ref[mob]'>?</A>)"
+		log_str += " Last touched by: [src.fingerprintslast][last_touch_info]"
+		if(admin_messages)
+			log_str += " <A href='?src=\ref[src];disableadmin=1'>(Safe)</a>"
+			message_admins(log_str, 0, 1)
+		log_game(log_str)
 	return 1
 
 /obj/item/device/assembly_holder/proc/door_opened(var/forced = 0) // Tried to avoid this..
