@@ -25,11 +25,6 @@ var/list/mechtoys = list(
 	name = "supply manifest"
 	var/is_copy = 1
 
-/area/supply/dock
-	name = "Supply Shuttle"
-	icon_state = "shuttle3"
-	requires_power = 0
-
 /obj/structure/plasticflaps //HOW DO YOU CALL THOSE THINGS ANYWAY
 	name = "\improper plastic flaps"
 	desc = "Completely impassable - or are they?"
@@ -226,6 +221,7 @@ var/list/mechtoys = list(
 			var/i = rand(1,clear_turfs.len)
 			var/turf/pickedloc = clear_turfs[i]
 			clear_turfs.Cut(i,i+1)
+			shoppinglist -= S
 
 			var/datum/supply_order/SO = S
 			var/decl/hierarchy/supply_pack/SP = SO.object
@@ -261,5 +257,4 @@ var/list/mechtoys = list(
 				slip.info += "</ul><br>"
 				slip.info += "CHECK CONTENTS AND STAMP BELOW THE LINE TO CONFIRM RECEIPT OF GOODS<hr>"
 
-		shoppinglist.Cut()
 		return

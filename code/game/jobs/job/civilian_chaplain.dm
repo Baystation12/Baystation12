@@ -79,10 +79,6 @@
 					if("Koran")
 						B.icon_state = "koran"
 						B.item_state = "koran"
-						for(var/area/chapel/main/A in world)
-							for(var/turf/T in A.contents)
-								if(T.icon_state == "carpetsymbol")
-									T.set_dir(4)
 					if("Scrapbook")
 						B.icon_state = "scrapbook"
 						B.item_state = "scrapbook"
@@ -98,10 +94,6 @@
 					if("Athiest")
 						B.icon_state = "athiest"
 						B.item_state = "syringe_kit"
-						for(var/area/chapel/main/A in world)
-							for(var/turf/T in A.contents)
-								if(T.icon_state == "carpetsymbol")
-									T.set_dir(10)
 					if("Tome")
 						B.icon_state = "tome"
 						B.item_state = "syringe_kit"
@@ -114,10 +106,6 @@
 					if("Scientology")
 						B.icon_state = "scientology"
 						B.item_state = "scientology"
-						for(var/area/chapel/main/A in world)
-							for(var/turf/T in A.contents)
-								if(T.icon_state == "carpetsymbol")
-									T.set_dir(8)
 					if("the bible melts")
 						B.icon_state = "melted"
 						B.item_state = "melted"
@@ -125,13 +113,8 @@
 						B.icon_state = "necronomicon"
 						B.item_state = "necronomicon"
 					else
-						// if christian bible, revert to default
 						B.icon_state = "bible"
 						B.item_state = "bible"
-						for(var/area/chapel/main/A in world)
-							for(var/turf/T in A.contents)
-								if(T.icon_state == "carpetsymbol")
-									T.set_dir(2)
 
 				H.update_inv_l_hand() // so that it updates the bible's item_state in his hand
 

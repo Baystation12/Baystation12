@@ -11,7 +11,7 @@
 	for(var/obj/effect/energy_field/F in created_field)
 		created_field.Remove(F)
 		qdel(F)
-	..()
+	. = ..()
 
 /datum/artifact_effect/forcefield/ToggleActivate()
 	..()

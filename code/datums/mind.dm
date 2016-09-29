@@ -409,6 +409,7 @@
 					if (!isnull(crystals))
 						if (suplink)
 							suplink.uses = crystals
+							log_and_message_admins("set the telecrystals for [key] to [crystals]")
 
 	else if (href_list["obj_announce"])
 		var/obj_count = 1

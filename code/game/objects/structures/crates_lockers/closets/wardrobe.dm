@@ -387,7 +387,7 @@
 	new /obj/item/clothing/shoes/purple(src)
 	new /obj/item/clothing/shoes/red(src)
 	new /obj/item/clothing/shoes/leather(src)
-	new /obj/item/clothing/accessory/hawaii/random(src)
+	new /obj/item/clothing/accessory/toggleable/hawaii/random(src)
 	return
 
 /obj/structure/closet/wardrobe/tactical

@@ -458,3 +458,8 @@
 	path = /obj/item/weapon/handcuffs
 	hidden = 1
 	category = "General"
+
+/datum/autolathe/recipe/cell_device
+	name = "device cell"
+	path = /obj/item/weapon/cell/device/standard
+	category = "Devices and Components"

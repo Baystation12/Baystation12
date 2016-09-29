@@ -425,8 +425,9 @@ var/global/datum/controller/occupations/job_master
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 				H.forceMove(S.loc)
 			else
-				LateSpawn(H.client, rank)
-
+				var/datum/spawnpoint/spawnpoint = get_spawnpoint_for(H.client, rank)
+				H.forceMove(pick(spawnpoint.turfs))
+			
 			// Moving wheelchair if they have one
 			if(H.buckled && istype(H.buckled, /obj/structure/bed/chair/wheelchair))
 				H.buckled.forceMove(H.loc)
@@ -575,41 +576,50 @@ var/global/datum/controller/occupations/job_master
 			tmp_str += "HIGH=[level1]|MEDIUM=[level2]|LOW=[level3]|NEVER=[level4]|BANNED=[level5]|YOUNG=[level6]|-"
 			feedback_add_details("job_preferences",tmp_str)
 
-/datum/controller/occupations/proc/LateSpawn(var/client/C, var/rank, var/return_location = 0)
-	//spawn at one of the latespawn locations
 
-	var/datum/spawnpoint/spawnpos
+/**
+ *  Return appropriate /datum/spawnpoint for given client and rank
+ *
+ *  Spawnpoint will be the one set in preferences for the client, unless the
+ *  preference is not set, or the preference is not appropriate for the rank, in
+ *  which case a fallback will be selected.
+ */
+/datum/controller/occupations/proc/get_spawnpoint_for(var/client/C, var/rank)	
 
 	if(!C)
-		CRASH("Null client passed to LateSpawn() proc!")
-
+		CRASH("Null client passed to get_spawnpoint_for() proc!")
+		
 	var/mob/H = C.mob
+	var/datum/spawnpoint/spawnpos
+	
 	if(C.prefs.spawnpoint)
-		spawnpos = spawntypes[C.prefs.spawnpoint]
-
-	if(spawnpos && istype(spawnpos))
-		if(spawnpos.check_job_spawning(rank))
-			if(return_location)
-				return pick(spawnpos.turfs)
-			else
-				if(H)
-					H.forceMove(pick(spawnpos.turfs))
-				return spawnpos.msg
-		else
-			if(return_location)
-				return pick(latejoin)
-			else
-				if(H)
-					H << "Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job. Spawning you at the default spawn point instead."
-					H.forceMove(pick(latejoin))
-				return "has arrived on the station"
-	else
-		if(return_location)
-			return pick(latejoin)
-		else
+		if(!(C.prefs.spawnpoint in using_map.allowed_spawns))
 			if(H)
-				H.forceMove(pick(latejoin))
-			return "has arrived on the station"
+				H << "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead.</span>"
+				
+			spawnpos = null
+		else
+			spawnpos = spawntypes[C.prefs.spawnpoint]
+		
+	if(spawnpos && !spawnpos.check_job_spawning(rank))
+		if(H)
+			H << "<span class='warning'>Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job ([rank]). Spawning you at another spawn point instead.</span>"
+		spawnpos = null
+	
+	if(!spawnpos)
+		// Step through all spawnpoints and pick first appropriate for job
+		for(var/spawntype in using_map.allowed_spawns)
+			var/datum/spawnpoint/candidate = spawntypes[spawntype]
+			if(candidate.check_job_spawning(rank))
+				spawnpos = candidate
+				break
+		
+	if(!spawnpos)
+		// Pick at random from all the (wrong) spawnpoints, just so we have one
+		warning("Could not find an appropriate spawnpoint for job [rank].")
+		spawnpos = spawntypes[pick(using_map.allowed_spawns)]
+		
+	return spawnpos
 
 /datum/controller/occupations/proc/GetJobByType(var/job_type)
 	return occupations_by_type[job_type]

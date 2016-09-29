@@ -5,36 +5,35 @@
 
 	if(!mob)	return
 	if(IsGuestKey(key))
-		src << "Guests may not use OOC."
+		to_chat(src, "Guests may not use OOC.")
 		return
 
 	msg = sanitize(msg)
 	if(!msg)	return
 
 	if(!is_preference_enabled(/datum/client_preference/show_ooc))
-		src << "<span class='warning'>You have OOC muted.</span>"
+		to_chat(src, "<span class='warning'>You have OOC muted.</span>")
 		return
 
 	if(!holder)
 		if(!config.ooc_allowed)
-			src << "<span class='danger'>OOC is globally muted.</span>"
+			to_chat(src, "<span class='danger'>OOC is globally muted.</span>")
 			return
 		if(!config.dooc_allowed && (mob.stat == DEAD))
-			usr << "<span class='danger'>OOC for dead mobs has been turned off.</span>"
+			to_chat(src, "<span class='danger'>OOC for dead mobs has been turned off.</span>")
 			return
 		if(prefs.muted & MUTE_OOC)
-			src << "<span class='danger'>You cannot use OOC (muted).</span>"
+			to_chat(src, "<span class='danger'>You cannot use OOC (muted).</span>")
 			return
 		if(findtext(msg, "byond://"))
-			src << "<B>Advertising other servers is not allowed.</B>"
-			log_admin("[key_name(src)] has attempted to advertise in OOC: [msg]")
-			message_admins("[key_name_admin(src)] has attempted to advertise in OOC: [msg]")
+			to_chat(src, "<B>Advertising other servers is not allowed.</B>")
+			log_and_message_admins("has attempted to advertise in OOC: [msg]")
 			return
 
 	log_ooc("[mob.name]/[key] : [msg]")
 
 	var/ooc_style = "everyone"
-	if(holder && !holder.fakekey)
+	if(holder && !is_stealthed())
 		ooc_style = "elevated"
 		if(holder.rights & R_MOD)
 			ooc_style = "moderator"
@@ -47,17 +46,10 @@
 		if(target.is_preference_enabled(/datum/client_preference/show_ooc))
 			if(target.is_key_ignored(key)) // If we're ignored by this person, then do nothing.
 				continue
-			var/display_name = src.key
-			if(holder)
-				if(holder.fakekey)
-					if(target.holder)
-						display_name = "[holder.fakekey]/([src.key])"
-					else
-						display_name = holder.fakekey
-			if(holder && !holder.fakekey && (holder.rights & R_ADMIN) && config.allow_admin_ooccolor && (src.prefs.ooccolor != initial(src.prefs.ooccolor))) // keeping this for the badmins
-				target << "<font color='[src.prefs.ooccolor]'><span class='ooc'>" + create_text_tag("ooc", "OOC:", target) + " <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
+			if(!is_stealthed() && can_select_ooc_color(src) && (src.prefs.ooccolor != initial(src.prefs.ooccolor))) // keeping this for the badmins
+				to_chat(target, "<font color='[src.prefs.ooccolor]'><span class='ooc'>" + create_text_tag("ooc", "OOC:", target) + " <EM>[key]:</EM> <span class='message'>[msg]</span></span></font>")
 			else
-				target << "<span class='ooc'><span class='[ooc_style]'>" + create_text_tag("ooc", "OOC:", target) + " <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></span>"
+				to_chat(target, "<span class='ooc'><span class='[ooc_style]'>" + create_text_tag("ooc", "OOC:", target) + " <EM>[key]:</EM> <span class='message'>[msg]</span></span></span>")
 
 /client/verb/looc(msg as text)
 	set name = "LOOC"
@@ -100,8 +92,6 @@
 	var/mob/source = mob.get_looc_source()
 
 	var/display_name = key
-	if(holder && holder.fakekey)
-		display_name = holder.fakekey
 	if(mob.stat != DEAD)
 		display_name = mob.name
 
@@ -155,14 +145,14 @@
 				prefix = "(Eye) "
 			else
 				prefix = "(Core) "
-		t << "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", t) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[msg]</span></span></span>"
+		to_chat(t, "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", t) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[msg]</span></span></span>")
 
 	for(var/client/adm in admins)	//Now send to all admins that weren't in range.
 		if(!(adm in listening) && adm.is_preference_enabled(/datum/client_preference/show_looc) && adm.is_preference_enabled(/datum/client_preference/holder/show_rlooc))
 			var/admin_stuff = "/([key])([admin_jump_link(mob, adm.holder)])"
 			var/prefix = "(R)"
 
-			adm << "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", adm) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[msg]</span></span></span>"
+			to_chat(adm, "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", adm) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[msg]</span></span></span>")
 
 /mob/proc/get_looc_source()
 	return src

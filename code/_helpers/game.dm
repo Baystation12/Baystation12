@@ -76,6 +76,9 @@
 /proc/isNotAdminLevel(var/level)
 	return !isAdminLevel(level)
 
+/proc/isContactLevel(var/level)
+	return level in using_map.contact_levels
+
 /proc/circlerange(center=usr,radius=3)
 
 	var/turf/centerturf = get_turf(center)
@@ -255,7 +258,7 @@
 			mobs += AM
 			hearturfs += get_turf(AM)
 		else if(isobj(AM))
-			objs += AM 
+			objs += AM
 			hearturfs += get_turf(AM)
 
 	for(var/mob/M in player_list)

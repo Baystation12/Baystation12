@@ -11,7 +11,7 @@
 			if(T.dynamic_lighting)
 				A = T.loc
 				if(A.lighting_use_dynamic)
-					var/atom/movable/lighting_overlay/O = PoolOrNew(/atom/movable/lighting_overlay, T)
+					var/atom/movable/lighting_overlay/O = new /atom/movable/lighting_overlay(T)
 					T.lighting_overlay = O
 
 	else
@@ -21,5 +21,5 @@
 				if(T.dynamic_lighting)
 					A = T.loc
 					if(A.lighting_use_dynamic)
-						var/atom/movable/lighting_overlay/O = PoolOrNew(/atom/movable/lighting_overlay, T)
+						var/atom/movable/lighting_overlay/O = new /atom/movable/lighting_overlay(T)
 						T.lighting_overlay = O

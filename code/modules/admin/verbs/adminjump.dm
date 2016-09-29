@@ -5,32 +5,32 @@
 	stop_following()
 	..()
 
-/client/proc/Jump(var/area/A in return_sorted_areas())
+/client/proc/Jump(var/selected_area in area_repository.get_areas_by_z_level())
 	set name = "Jump to Area"
 	set desc = "Area to jump to"
 	set category = "Admin"
 	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
+	if(!config.allow_admin_jump)
+		return alert("Admin jumping disabled")
 
-	if(config.allow_admin_jump)
-		mob.jumpTo(pick(get_area_turfs(A)))
-		log_and_message_admins("jumped to [A]")
-		feedback_add_details("admin_verb","JA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	else
-		alert("Admin jumping disabled")
+	var/list/areas = area_repository.get_areas_by_z_level()
+	var/area/A = areas[selected_area]
+	mob.jumpTo(pick(get_area_turfs(A)))
+	log_and_message_admins("jumped to [A]")
+	feedback_add_details("admin_verb","JA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/jumptoturf(var/turf/T in turfs)
 	set name = "Jump to Turf"
 	set category = "Admin"
 	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
-	if(config.allow_admin_jump)
-		log_and_message_admins("jumped to [T.x],[T.y],[T.z] in [T.loc]")
-		mob.jumpTo(T)
-		feedback_add_details("admin_verb","JT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	else
-		alert("Admin jumping disabled")
-	return
+	if(!config.allow_admin_jump)
+		return alert("Admin jumping disabled")
+		
+	log_and_message_admins("jumped to [T.x],[T.y],[T.z] in [T.loc]")
+	mob.jumpTo(T)
+	feedback_add_details("admin_verb","JT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/jumptomob(var/mob/M in mob_list)
 	set category = "Admin"
@@ -138,11 +138,15 @@
 	set name = "Send Mob"
 	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
-	var/area/A = input(usr, "Pick an area.", "Pick an area") in return_sorted_areas()
+	if(!config.allow_admin_jump)
+		alert("Admin jumping disabled")
+		return
+
+	var/list/areas = area_repository.get_areas_by_name()
+	var/area/A = input(usr, "Pick an area.", "Pick an area") as null|anything in areas
+	A = A ? areas[A] : A
 	if(A)
-		if(config.allow_admin_jump)
-			M.jumpTo(pick(get_area_turfs(A)))
-			feedback_add_details("admin_verb","SMOB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-			log_and_message_admins("teleported [key_name(M)] to [A].")
-		else
-			alert("Admin jumping disabled")
+		M.jumpTo(pick(get_area_turfs(A)))
+		feedback_add_details("admin_verb","SMOB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		log_and_message_admins("teleported [key_name(M)] to [A].")
+

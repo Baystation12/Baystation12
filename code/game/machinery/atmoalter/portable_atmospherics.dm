@@ -141,7 +141,8 @@
 
 	return
 
-
+/obj/machinery/portable_atmospherics/return_air()
+	return air_contents
 
 /obj/machinery/portable_atmospherics/powered
 	var/power_rating

@@ -193,7 +193,7 @@ Sells devices, odds and ends, and medical stuff
 	possible_origins = list("Buy 'n Save", "Drug Carnival", "C&B", "Fentles", "Dr. Goods", "Beevees")
 	possible_trading_items = list(/obj/item/device/flashlight              = TRADER_ALL,
 								/obj/item/device/kit/paint                 = TRADER_SUBTYPES_ONLY,
-								/obj/item/device/aicard                    = TRADER_THIS_TYPE,
+								/obj/item/weapon/aicard                    = TRADER_THIS_TYPE,
 								/obj/item/device/binoculars                = TRADER_THIS_TYPE,
 								/obj/item/device/cable_painter             = TRADER_THIS_TYPE,
 								/obj/item/device/flash                     = TRADER_THIS_TYPE,
@@ -261,7 +261,7 @@ Sells devices, odds and ends, and medical stuff
 								/obj/item/weapon/bucket_sensor                    = TRADER_THIS_TYPE,
 								/obj/item/device/bot_kit                          = TRADER_THIS_TYPE,
 								/obj/item/device/paicard                          = TRADER_THIS_TYPE,
-								/obj/item/device/aicard                           = TRADER_THIS_TYPE,
+								/obj/item/weapon/aicard                           = TRADER_THIS_TYPE,
 								/mob/living/bot                                   = TRADER_SUBTYPES_ONLY)
 	speech = list("hail_generic" = "Welcome to ORIGIN! Let me walk you through our fine robotic selection!",
 				"hail_silicon"   = "Welcome to ORIGIN! Le-well, you're a synth! Well, your money is good anyways, welcome welcome!",

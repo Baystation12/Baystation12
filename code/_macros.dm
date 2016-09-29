@@ -19,6 +19,8 @@
 
 #define iscolorablegloves(A) (istype(A, /obj/item/clothing/gloves/color)||istype(A, /obj/item/clothing/gloves/insulated)||istype(A, /obj/item/clothing/gloves/thick))
 
+#define isclient(A) istype(A, /client)
+
 #define iscorgi(A) istype(A, /mob/living/simple_animal/corgi)
 
 #define is_drone(A) istype(A, /mob/living/silicon/robot/drone)
@@ -47,6 +49,8 @@
 
 #define isorgan(A) istype(A, /obj/item/organ/external)
 
+#define isspace(A) istype(A, /area/space)
+
 #define ispAI(A) istype(A, /mob/living/silicon/pai)
 
 #define isrobot(A) istype(A, /mob/living/silicon/robot)
@@ -70,3 +74,5 @@
 #define map_image_file_name(z_level) "[using_map.path]-[z_level].png"
 
 #define RANDOM_BLOOD_TYPE pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
+
+#define any2ref(x) "\ref[x]"

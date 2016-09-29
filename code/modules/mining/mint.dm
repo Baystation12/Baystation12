@@ -17,7 +17,7 @@
 	var/amt_uranium = 0
 	var/newCoins = 0   //how many coins the machine made in it's last load
 	var/processing = 0
-	var/chosen = DEFAULT_WALL_MATERIAL //which material will be used to make coins
+	var/chosen //which material will be used to make coins
 	var/coinsToProduce = 10
 
 
@@ -52,7 +52,7 @@
 					amt_phoron += 100 * O.get_amount()
 				if("uranium")
 					amt_uranium += 100 * O.get_amount()
-				if(DEFAULT_WALL_MATERIAL)
+				if("iron")
 					amt_iron += 100 * O.get_amount()
 				else
 					processed = 0
@@ -81,10 +81,10 @@
 	else
 		dat += text("<A href='?src=\ref[src];choose=silver'>Choose</A>")
 	dat += text("<br><font color='#555555'><b>Iron inserted: </b>[amt_iron]</font> ")
-	if (chosen == DEFAULT_WALL_MATERIAL)
+	if (chosen == "iron")
 		dat += text("chosen")
 	else
-		dat += text("<A href='?src=\ref[src];choose=metal'>Choose</A>")
+		dat += text("<A href='?src=\ref[src];choose=iron'>Choose</A>")
 	dat += text("<br><font color='#8888FF'><b>Diamond inserted: </b>[amt_diamond]</font> ")
 	if (chosen == "diamond")
 		dat += text("chosen")
@@ -131,14 +131,10 @@
 		if (src.output)
 			processing = 1;
 			icon_state = "coinpress1"
-			var/obj/item/weapon/moneybag/M
+			var/M = output.loc
 			switch(chosen)
-				if(DEFAULT_WALL_MATERIAL)
+				if("iron")
 					while(amt_iron > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/weapon/moneybag,output.loc))
-							M = locate(/obj/item/weapon/moneybag,output.loc)
-						else
-							M = new/obj/item/weapon/moneybag(output.loc)
 						new/obj/item/weapon/coin/iron(M)
 						amt_iron -= 20
 						coinsToProduce--
@@ -147,10 +143,6 @@
 						sleep(5);
 				if("gold")
 					while(amt_gold > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/weapon/moneybag,output.loc))
-							M = locate(/obj/item/weapon/moneybag,output.loc)
-						else
-							M = new/obj/item/weapon/moneybag(output.loc)
 						new /obj/item/weapon/coin/gold(M)
 						amt_gold -= 20
 						coinsToProduce--
@@ -159,10 +151,6 @@
 						sleep(5);
 				if("silver")
 					while(amt_silver > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/weapon/moneybag,output.loc))
-							M = locate(/obj/item/weapon/moneybag,output.loc)
-						else
-							M = new/obj/item/weapon/moneybag(output.loc)
 						new /obj/item/weapon/coin/silver(M)
 						amt_silver -= 20
 						coinsToProduce--
@@ -171,10 +159,6 @@
 						sleep(5);
 				if("diamond")
 					while(amt_diamond > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/weapon/moneybag,output.loc))
-							M = locate(/obj/item/weapon/moneybag,output.loc)
-						else
-							M = new/obj/item/weapon/moneybag(output.loc)
 						new /obj/item/weapon/coin/diamond(M)
 						amt_diamond -= 20
 						coinsToProduce--
@@ -183,10 +167,6 @@
 						sleep(5);
 				if("phoron")
 					while(amt_phoron > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/weapon/moneybag,output.loc))
-							M = locate(/obj/item/weapon/moneybag,output.loc)
-						else
-							M = new/obj/item/weapon/moneybag(output.loc)
 						new /obj/item/weapon/coin/phoron(M)
 						amt_phoron -= 20
 						coinsToProduce--
@@ -195,10 +175,6 @@
 						sleep(5);
 				if("uranium")
 					while(amt_uranium > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/weapon/moneybag,output.loc))
-							M = locate(/obj/item/weapon/moneybag,output.loc)
-						else
-							M = new/obj/item/weapon/moneybag(output.loc)
 						new /obj/item/weapon/coin/uranium(M)
 						amt_uranium -= 20
 						coinsToProduce--

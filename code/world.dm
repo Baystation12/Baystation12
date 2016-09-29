@@ -191,7 +191,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 			for(var/client/C in clients)
 				if(C.holder)
-					if(C.holder.fakekey)
+					if(C.is_stealthed())
 						continue
 					admins[C.key] = C.holder.rank
 				players += C.key
@@ -206,7 +206,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 			for(var/client/C in clients)
 				if(C.holder)
-					if(C.holder.fakekey)
+					if(C.is_stealthed())
 						continue	//so stealthmins aren't revealed by the hub
 					admins++
 				s["player[n]"] = C.key

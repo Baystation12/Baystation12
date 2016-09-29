@@ -118,11 +118,9 @@
 					GM.client.eye = src
 				GM.forceMove(src)
 				for (var/mob/C in viewers(src))
-					C.show_message("\red [GM.name] has been placed in the [src] by [user].", 3)
+					C.show_message("<span class='warning'>[GM.name] has been placed in the [src] by [user].</span>", 3)
 				qdel(G)
-				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Has placed [GM.name] ([GM.ckey]) in disposals.</font>")
-				GM.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been placed in disposals by [usr.name] ([usr.ckey])</font>")
-				msg_admin_attack("[usr] ([usr.ckey]) placed [GM] ([GM.ckey]) in a disposals unit. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>)")
+				admin_attack_log(usr, GM, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
 		return
 
 	if(isrobot(user))
@@ -169,15 +167,12 @@
 		return
 	if(target == user && !user.incapacitated(INCAPACITATION_ALL))	// if drop self, then climbed in
 											// must be awake, not stunned or whatever
-		msg = "[user.name] climbs into the [src]."
-		user << "You climb into the [src]."
-	else if(target != user && !user.restrained() && !user.stat && !user.weakened && !user.stunned && !user.paralysis)
-		msg = "[user.name] stuffs [target.name] into the [src]!"
-		user << "You stuff [target.name] into the [src]!"
-
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Has placed [target.name] ([target.ckey]) in disposals.</font>")
-		target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been placed in disposals by [user.name] ([user.ckey])</font>")
-		msg_admin_attack("[user] ([user.ckey]) placed [target] ([target.ckey]) in a disposals unit. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+		msg = "\The [user] climbs into \the [src]."
+		user << "You climb into \the [src]."
+	else if(target != user && !user.incapacitated())
+		msg = "\The [user] stuffs \the [target] into \the [src]!"
+		user << "You stuff \the [target] into \the [src]!"
+		admin_attack_log(user, target, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
 	else
 		return
 	if (target.client)
@@ -1174,6 +1169,167 @@
 	name = "partial package tagger"
 	icon_state = "pipe-tagger-partial"
 	partial = 1
+
+/obj/machinery/disposal_switch
+	name = "disposal switch"
+	desc = "A disposal control switch."
+	icon = 'icons/obj/recycling.dmi'
+	icon_state = "switch-off"
+	layer = 3.11
+	var/on = 0
+	var/list/junctions = list()
+	var/id_tag
+
+/obj/machinery/disposal_switch/New(loc, newid)
+	..(loc)
+	if(!id_tag)
+		id_tag = newid
+
+/obj/machinery/disposal_switch/initialize()
+	for(var/obj/structure/disposalpipe/diversion_junction/D in world)
+		if(D.id_tag && !D.linked && D.id_tag == src.id_tag)
+			junctions += D
+			D.linked = src
+
+	..()
+
+/obj/machinery/disposal_switch/Destroy()
+	junctions.Cut()
+	return ..()
+
+/obj/machinery/disposal_switch/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/weapon/crowbar))
+		var/obj/item/disposal_switch_construct/C = new/obj/item/disposal_switch_construct(src.loc, id_tag)
+		transfer_fingerprints_to(C)
+		user.visible_message("<span class='notice'>\The [user] deattaches \the [src]</span>")
+		qdel(src)
+	else
+		..()
+
+/obj/machinery/disposal_switch/attack_hand(mob/user)
+	if(!allowed(user))
+		user << "<span class='warning'>Access denied.</span>"
+		return
+	on = !on
+	for(var/obj/structure/disposalpipe/diversion_junction/D in junctions)
+		if(D.id_tag == src.id_tag)
+			D.active = on
+	if(on)
+		icon_state = "switch-fwd"
+	else
+		icon_state = "switch-off"
+
+
+/obj/item/disposal_switch_construct
+	name = "disposal switch assembly"
+	desc = "A disposal control switch assembly."
+	icon = 'icons/obj/recycling.dmi'
+	icon_state = "switch-off"
+	w_class = 4
+	var/id_tag
+
+/obj/item/disposal_switch_construct/New(var/turf/loc, var/id)
+	..(loc)
+	if(id) id_tag = id
+	else
+		id_tag = "ds[sequential_id(/obj/item/disposal_switch_construct)]"
+
+/obj/item/disposal_switch_construct/afterattack(atom/A, mob/user, proximity)
+	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated() || !id_tag)
+		return
+	var/found = 0
+	for(var/obj/structure/disposalpipe/diversion_junction/D in world)
+		if(D.id_tag == src.id_tag)
+			found = 1
+			break
+	if(!found)
+		user << "\icon[src]<span class=notice>\The [src] is not linked to any junctions!</span>"
+		return
+	var/obj/machinery/disposal_switch/NC = new/obj/machinery/disposal_switch(A, id_tag)
+	transfer_fingerprints_to(NC)
+	qdel(src)
+
+/obj/structure/disposalpipe/diversion_junction
+	name = "diversion junction"
+	icon_state = "pipe-j1s"
+	desc = "An underfloor disposal pipe with a flip mechanism."
+
+	var/active = 0
+	var/active_dir = 0
+	var/inactive_dir = 0
+	var/sortdir = 0
+	var/id_tag
+	var/obj/machinery/disposal_switch/linked
+
+/obj/structure/disposalpipe/diversion_junction/proc/updatedesc()
+	desc = initial(desc)
+	if(sortType)
+		desc += "\nIt's currently [active ? "" : "un"]active!"
+
+/obj/structure/disposalpipe/diversion_junction/proc/updatedir()
+	inactive_dir = dir
+	active_dir = turn(inactive_dir, 180)
+	if(icon_state == "pipe-j1s")
+		sortdir = turn(inactive_dir, -90)
+	else if(icon_state == "pipe-j2s")
+		sortdir = turn(inactive_dir, 90)
+
+	dpdir = sortdir | inactive_dir | active_dir
+
+/obj/structure/disposalpipe/diversion_junction/New()
+	..()
+
+	updatedir()
+	updatedesc()
+	update()
+
+/obj/structure/disposalpipe/diversion_junction/Destroy()
+	if(linked)
+		linked.junctions.Remove(src)
+	linked = null
+	return ..()
+
+/obj/structure/disposalpipe/diversion_junction/attackby(var/obj/item/I, var/mob/user)
+	if(..())
+		return 1
+
+	if(istype(I, /obj/item/disposal_switch_construct))
+		var/obj/item/disposal_switch_construct/C = I
+		if(C.id_tag)
+			id_tag = C.id_tag
+			playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
+			user.visible_message("<span class='notice'>\The [user] changes \the [src]'s tag.</span>")
+
+
+/obj/structure/disposalpipe/diversion_junction/nextdir(var/fromdir, var/sortTag)
+	if(fromdir != sortdir)
+		if(active)
+			return sortdir
+		else
+			return inactive_dir
+	else
+		return inactive_dir
+
+/obj/structure/disposalpipe/diversion_junction/transfer(var/obj/structure/disposalholder/H)
+	var/nextdir = nextdir(H.dir, H.destinationTag)
+	H.set_dir(nextdir)
+	var/turf/T = H.nextloc()
+	var/obj/structure/disposalpipe/P = H.findpipe(T)
+
+	if(P)
+		var/obj/structure/disposalholder/H2 = locate() in P
+		if(H2 && !H2.active)
+			H.merge(H2)
+
+		H.forceMove(P)
+	else
+		H.forceMove(T)
+		return null
+
+	return P
+
+/obj/structure/disposalpipe/diversion_junction/flipped //for easier and cleaner mapping
+	icon_state = "pipe-j2s"
 
 //a three-way junction that sorts objects
 /obj/structure/disposalpipe/sortjunction

@@ -27,9 +27,8 @@
 	return
 
 /obj/item/weapon/teleportation_scroll/Topic(href, href_list)
-	..()
-	if (usr.stat || usr.restrained() || src.loc != usr)
-		return
+	if(..())
+		return 1
 	var/mob/living/carbon/human/H = usr
 	if (!( istype(H, /mob/living/carbon/human)))
 		return 1
@@ -42,15 +41,10 @@
 	return
 
 /obj/item/weapon/teleportation_scroll/proc/teleportscroll(var/mob/user)
+	var/area/thearea = input(user, "Area to jump to", "BOOYEA") as null|anything in teleportlocs
+	thearea = thearea ? teleportlocs[thearea] : thearea
 
-	var/A
-
-	A = input(user, "Area to jump to", "BOOYEA", A) in teleportlocs
-	var/area/thearea = teleportlocs[A]
-
-	if (user.stat || user.restrained())
-		return
-	if(!((user == loc || (in_range(src, user) && istype(src.loc, /turf)))))
+	if (!thearea || CanUseTopic(user) != STATUS_INTERACTIVE)
 		return
 
 	var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
@@ -87,7 +81,7 @@
 			break
 
 	if(!success)
-		user.loc = pick(L)
+		user.forceMove(pick(L))
 
 	smoke.start()
 	src.uses -= 1

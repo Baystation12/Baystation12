@@ -137,10 +137,7 @@
 		if(include_link && C)
 			. += "<a href='?priv_msg=\ref[C]'>"
 
-		if(C && C.holder && C.holder.fakekey && !include_name)
-			. += "Administrator"
-		else
-			. += key
+		. += key
 
 		if(include_link)
 			if(C)	. += "</a>"
@@ -168,20 +165,23 @@
 	return key_name(whom, 1, include_name)
 
 // Helper procs for building detailed log lines
-/datum/proc/log_info_line()
+/datum/proc/get_log_info_line()
 	return "[src] ([type])"
 
-/atom/log_info_line()
+/area/get_log_info_line()
+	return "[..()] ([isnum(z) ? "[x],[y],[z]" : "0,0,0"])"
+
+/turf/get_log_info_line()
+	return "[..()] ([x],[y],[z]) ([loc ? loc.type : "NULL"])"
+
+/atom/movable/get_log_info_line()
 	var/turf/t = get_turf(src)
-	return "[src] ([t ? t : "NULL"]) ([t ? t.x : 0],[t ? t.y : 0],[t ? t.z : 0]) ([t ? t.type : "NULL"])"
+	return "[..()] ([t ? t : "NULL"]) ([t ? "[t.x],[t.y],[t.z]" : "0,0,0"]) ([t ? t.type : "NULL"])"
 
-/mob/log_info_line()
-	return "[..()] ([ckey])"
-
-/turf/log_info_line()
-	return "[src] ([loc]) ([x],[y],[z]) ([loc.type])"
+/mob/get_log_info_line()
+	return ckey ? "[..()] ([ckey])" : ..()
 
 /proc/log_info_line(var/datum/d)
 	if(!istype(d))
 		return
-	return d.log_info_line()
+	return d.get_log_info_line()

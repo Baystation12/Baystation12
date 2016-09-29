@@ -1,13 +1,13 @@
 /*
 	List generation helpers
 */
-/proc/get_filtered_areas(var/list/predicates)
+/proc/get_filtered_areas(var/list/predicates = list(/proc/is_area_with_turf))
 	. = list()
-	if(!predicates || !predicates.len)
+	if(!predicates)
 		return
+	if(!islist(predicates))
+		predicates = list(predicates)
 	for(var/area/A)
-		if(!A.z)
-			continue
 		if(all_predicates_true(list(A), predicates))
 			. += A
 
@@ -30,6 +30,16 @@
 		for(var/turf/T in sub_area.contents)
 			if(!predicates || all_predicates_true(list(T), predicates))
 				. += T
+
+/proc/group_areas_by_name(var/list/predicates)
+	. = list()
+	for(var/area/A in get_filtered_areas(predicates))
+		group_by(., A.name, A)
+
+/proc/group_areas_by_z_level(var/list/predicates)
+	. = list()
+	for(var/area/A in get_filtered_areas(predicates))
+		group_by(., num2text(A.z), A)
 
 /*
 	Pick helpers
@@ -61,5 +71,35 @@
 /proc/is_station_area(var/area/A)
 	. = isStationLevel(A.z)
 
-/proc/is_not_space(var/area/A)
+/proc/is_contact_area(var/area/A)
+	. = isContactLevel(A.z)
+
+/proc/is_player_area(var/area/A)
+	. = isPlayerLevel(A.z)
+
+/proc/is_not_space_area(var/area/A)
 	. = !istype(A,/area/space)
+
+/proc/is_not_shuttle_area(var/area/A)
+	. = !istype(A,/area/shuttle)
+
+/proc/is_area_with_turf(var/area/A)
+	. = isnum(A.x)
+
+/proc/is_area_without_turf(var/area/A)
+	. = !is_area_with_turf(A)
+
+/proc/is_coherent_area(var/area/A)
+	return !is_type_in_list(A, using_map.area_coherency_test_exempt_areas)
+
+/var/list/is_station_but_not_space_or_shuttle_area = list(/proc/is_station_area, /proc/is_not_space_area, /proc/is_not_shuttle_area)
+
+/var/list/is_contact_but_not_space_or_shuttle_area = list(/proc/is_contact_area, /proc/is_not_space_area, /proc/is_not_shuttle_area)
+
+/var/list/is_player_but_not_space_or_shuttle_area = list(/proc/is_player_area, /proc/is_not_space_area, /proc/is_not_shuttle_area)
+
+
+/*
+	Misc Helpers
+*/
+#define teleportlocs area_repository.get_areas_by_name(is_player_but_not_space_or_shuttle_area)

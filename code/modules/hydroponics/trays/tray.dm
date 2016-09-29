@@ -229,7 +229,7 @@
 			if(toxic_reagents[R.id])
 				toxins += toxic_reagents[R.id]         * reagent_total
 			if(weedkiller_reagents[R.id])
-				weedlevel -= weedkiller_reagents[R.id] * reagent_total
+				weedlevel += weedkiller_reagents[R.id] * reagent_total
 			if(pestkiller_reagents[R.id])
 				pestlevel += pestkiller_reagents[R.id] * reagent_total
 

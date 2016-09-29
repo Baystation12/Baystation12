@@ -81,14 +81,14 @@
 	else
 		target_ai = locate(/mob/living/silicon/ai) in input_device.contents
 
-	var/obj/item/device/aicard/card = ai_card
+	var/obj/item/weapon/aicard/card = ai_card
 
 	// Downloading from/loading to a terminal.
-	if(istype(input_device,/obj/machinery/computer/aifixer) || istype(input_device,/mob/living/silicon/ai) || istype(input_device,/obj/structure/AIcore/deactivated))
+	if(istype(input_device,/mob/living/silicon/ai) || istype(input_device,/obj/structure/AIcore/deactivated))
 
 		// If we're stealing an AI, make sure we have a card for it.
 		if(!card)
-			card = new /obj/item/device/aicard(src)
+			card = new /obj/item/weapon/aicard(src)
 
 		// Terminal interaction only works with an intellicarded AI.
 		if(!istype(card))
@@ -106,7 +106,7 @@
 		update_verb_holder()
 		return 1
 
-	if(istype(input_device,/obj/item/device/aicard))
+	if(istype(input_device,/obj/item/weapon/aicard))
 		// We are carding the AI in our suit.
 		if(integrated_ai)
 			integrated_ai.attackby(input_device,user)
@@ -144,7 +144,7 @@
 
 	if(!target)
 		if(ai_card)
-			if(istype(ai_card,/obj/item/device/aicard))
+			if(istype(ai_card,/obj/item/weapon/aicard))
 				ai_card.ui_interact(H, state = deep_inventory_state)
 			else
 				eject_ai(H)
@@ -163,7 +163,7 @@
 /obj/item/rig_module/ai_container/proc/eject_ai(var/mob/user)
 
 	if(ai_card)
-		if(istype(ai_card, /obj/item/device/aicard))
+		if(istype(ai_card, /obj/item/weapon/aicard))
 			if(integrated_ai && !integrated_ai.stat)
 				if(user)
 					user << "<span class='danger'>You cannot eject your currently stored AI. Purge it manually.</span>"
@@ -193,13 +193,13 @@
 
 		if(ai_mob.key && ai_mob.client)
 
-			if(istype(ai, /obj/item/device/aicard))
+			if(istype(ai, /obj/item/weapon/aicard))
 
 				if(!ai_card)
-					ai_card = new /obj/item/device/aicard(src)
+					ai_card = new /obj/item/weapon/aicard(src)
 
-				var/obj/item/device/aicard/source_card = ai
-				var/obj/item/device/aicard/target_card = ai_card
+				var/obj/item/weapon/aicard/source_card = ai
+				var/obj/item/weapon/aicard/target_card = ai_card
 				if(istype(source_card) && istype(target_card))
 					if(target_card.grab_ai(ai_mob, user))
 						source_card.clear()
