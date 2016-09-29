@@ -89,23 +89,22 @@
 		//ui.set_auto_update(1)
 
 /obj/item/device/assembly/transfer_valve/Topic(href, href_list)
-	..()
-	if ( usr.stat || usr.restrained() )
-		return 0
-	if (src.loc != usr)
-		return 0
+	if(..())
+		return 1
 	if(tank_one && href_list["tankone"])
 		split_gases()
 		valve_open = 0
 		tank_one.forceMove(get_turf(src))
 		tank_one = null
 		update_icon()
+		return 1
 	else if(tank_two && href_list["tanktwo"])
 		split_gases()
 		valve_open = 0
 		tank_two.forceMove(get_turf(src))
 		tank_two = null
 		update_icon()
+		return 1
 	else if(href_list["open"])
 		toggle_valve()
 	else if(attached_device)
@@ -116,13 +115,13 @@
 			update_icon()
 		if(href_list["device"])
 			attached_device.attack_self(usr)
-	src.add_fingerprint(usr)
-	return 1 // Returning 1 sends an update to attached UIs
+		return 1
 
 /obj/item/device/assembly/transfer_valve/activate()
 	toggle_valve()
 	if(attached_device)
 		send_direct_pulse(attached_device)
+	return 1
 
 /obj/item/device/assembly/transfer_valve/proc/merge_gases()
 	tank_two.air_contents.volume += tank_one.air_contents.volume

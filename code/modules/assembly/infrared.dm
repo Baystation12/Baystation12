@@ -103,6 +103,8 @@
 
 
 /obj/item/device/assembly/infra/Topic(href, href_list)
+	if(..())
+		return 1
 	if(href_list["option"])
 		switch(href_list["option"])
 			if("On")
@@ -117,7 +119,7 @@
 				if(inp)
 					range = inp
 				else range = 4
-	..()
+	return 1
 
 /*
 	verb/rotate()//This could likely be better

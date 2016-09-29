@@ -25,6 +25,7 @@
 						   /obj/item/device/assembly/button)
 
 /obj/item/device/assembly_holder/grenade/New()
+	..()
 	if(default_grenade)
 		igniter = new /obj/item/device/assembly/igniter (src)
 		trigger = new /obj/item/device/assembly/button (src)
@@ -34,7 +35,6 @@
 	if(detonator) attach_device(null, detonator)
 	if(igniter) attach_device(null, igniter)
 	if(explosive) attach_device(null, explosive)
-	..()
 
 /obj/item/device/assembly_holder/grenade/proc/clown_check(var/mob/living/user)
 	if((CLUMSY in user.mutations) && prob(50))

@@ -11,31 +11,40 @@
 {{if data.state == "HOME"}}
 <h2>Connected items:</h2>
 <div class='item'>
-	{{for data.connected}}
-	{{if index % 2 == 0}}
-		<div class='itemContent'>
-			{{:value}}:
-		</div>
-	{{else}}
-		<br>
-		<div style='itemLabel'>			
-			{{:helper.link('Connect', 'link', { 'connect' : value })}}	
-			{{:helper.link('Settings', 'gear', { 'settings' : value })}}	
-			{{:helper.link('Wires', 'lightbulb', { 'wiring' : value })}}
-			{{if data.connecting}}
-				{{:helper.link('Connect To', 'link', { 'connect_to' : value })}}
-			{{/if}}					
-		</div>		
-	{{/if}}
-	{{empty}}
-		There are no connected devices!
-	{{/for}}
+	<div style='block'>
+		{{for data.connected}}
+			{{if index % 2 == 0}}
+				<div class='itemContent'>
+					{{:value}}:
+				</div>
+			{{else}}
+				<br>
+				<div style='itemLabel'>			
+					{{:helper.link('Connect', 'link', { 'connect' : value })}}	
+					{{:helper.link('Settings', 'gear', { 'settings' : value })}}	
+					{{:helper.link('Wires', 'lightbulb', { 'wiring' : value })}}
+					{{if data.connecting}}
+						{{:helper.link('Connect To', 'link', { 'connect_to' : value })}}
+					{{/if}}					
+				</div>		
+			{{/if}}
+			<br>
+		{{empty}}
+			There are no connected devices!
+		{{/for}}
+	</div>
+</div>	
 {{else data.state == "LOGS"}}
-	<br>
-	{{for data.logs}}
-		<b>{{:value}}</b><br>
-	{{/for}}
+<div class='item'>
+	<div style='block'>
+		<br>
+		{{for data.logs}}
+			<b>{{:value}}</b><br>
+		{{/for}}
+	</div>
+</div>	
 {{else data.state == "ADMIN"}}
+<div class='item'>
 	<br>
 	<div style='itemLabelWide'>
 		{{:helper.link('Password', 'gear', { 'password' : 1})}}</div>
@@ -43,7 +52,5 @@
 		{{:data.password}}</div><br>
 	<div style='itemLabel'>
 		{{:helper.link('Advanced Settings', 'gear', { 'advsettings' : 1})}}</div>
-		
-	
+</div>	
 {{/if}}	
-</div>

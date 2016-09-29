@@ -22,7 +22,8 @@
                     {{:helper.link(''+value+':', 'wrench', { 'option' : value })}}
                 </div>
                {{/if}}
-				
+		{{empty}}
+			This device has no data!
         {{/for}}
 		
        {{for data.nonset_data}}

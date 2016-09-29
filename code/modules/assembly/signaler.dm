@@ -31,6 +31,8 @@
 	return data
 
 /obj/item/device/assembly/signaler/Topic(href, href_list)
+	if(..())
+		return 1
 	if(href_list["option"])
 		switch(href_list["option"])
 			if("Frequency")
@@ -39,6 +41,7 @@
 				if(new_frequency < 1200 || new_frequency > 1600)
 					new_frequency = sanitize_frequency(new_frequency)
 				set_frequency(new_frequency)
+				return 1
 
 			if("Code")
 				var/new_code = input(usr, "What would you like to set the code to?", "Code")
@@ -48,10 +51,11 @@
 					src.code = round(src.code)
 					src.code = min(100, src.code)
 					src.code = max(1, src.code)
+				return 1
 
 			if("Send Signal")
 				process_activation()
-	..()
+				return 1
 
 /obj/item/device/assembly/signaler/receive_radio_pulse(datum/signal/signal)
 	if(!signal)	return 0

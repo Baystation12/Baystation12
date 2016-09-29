@@ -91,23 +91,23 @@
 
 
 /obj/item/device/assembly/prox_sensor/Topic(href, href_list)
-	if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
-		usr << browse(null, "window=prox")
-		onclose(usr, "prox")
-		return
-
+	if(..())
+		return 1
 	if(href_list["option"])
 		switch(href_list["option"])
 			if("Scanning")
 				toggle_scan()
+				return 1
 			if("Time")
 				var/inp = text2num(input(usr, "What would you like to set the time to?", "Proximity Sensor"))
 				if(inp && isnum(inp))
 					time = min(max(round(inp), 0), 600)
+				return 1
 			if("Range")
 				var/inp = text2num(input(usr, "What would you like to set the time to?", "Proximity Sensor"))
 				if(inp && isnum(inp))
 					range = min(max(inp, 1), 6)
+				return 1
 			if("Armed")
 				if(scanning)
 					timing = !timing
@@ -117,6 +117,7 @@
 						processing_objects.Remove(src)
 				else
 					usr << "<span class='notice'>The proximity sensor is not scanning!</span>"
+				return 1
 			if("Send Type")
 				send_type = !send_type
-	..()
+				return 1

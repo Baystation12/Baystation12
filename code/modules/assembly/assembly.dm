@@ -137,6 +137,8 @@
 	return 1
 
 /obj/item/device/assembly/Topic(href, href_list)
+	if(..())
+		return 1
 	var/datum/nanoui/ui = nanomanager.get_open_ui(usr, src, "main")
 	if(href_list["disconnect"])
 		if(href_list["disconnect"] in connects_to)
@@ -146,6 +148,7 @@
 				if(new_connects_to[i] == null || new_connects_to[i] == 0)
 					new_connects_to.Cut(i, i+1)
 			connects_to = new_connects_to
+			return 1
 	if(href_list["settings"])
 		var/index = href_list["settings"]
 		if(!(index % 2) && holder)
@@ -154,6 +157,7 @@
 			if(opened)
 				add_debug_log("Interacting with [opened.name]")
 				opened.ui_interact(usr, "main", null, 1)
+				return 1
 	if(href_list["wiring"])
 		add_debug_log("Settings: [href_list["settings"]]")
 		var/index = href_list["wiring"]
@@ -164,6 +168,7 @@
 				if(opened.wire_holder)
 					usr.set_machine(opened)
 					opened.wire_holder.Interact(usr)
+					return 1
 	if(href_list["activate"])
 		usr << "You activate \the [src]!"
 		process_activation()
@@ -171,9 +176,6 @@
 		switch(href_list["option"])
 			if("close")
 				ui.close()
-
-	src.add_fingerprint(usr)
-	nanomanager.update_uis(src)
 
 /obj/item/device/assembly/receive_signal(var/datum/signal/signal)
 	if(istype(signal))
@@ -242,6 +244,7 @@
 			add_debug_log("Processing Activation Success \[[src]\]")
 			process_success()
 			return 1
+	add_debug_log("Unable to activate! \[[src]\]")
 	return 0
 
 /obj/item/device/assembly/proc/activate() // Default action is just to send pulse to the connected objects.

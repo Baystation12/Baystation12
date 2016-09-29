@@ -30,6 +30,8 @@
 	return list("Activation Phrase", recorded, "Sending", send_type, "On", on)
 
 /obj/item/device/assembly/voice/Topic(href, href_list)
+	if(..())
+		return 1
 	if(href_list["option"])
 		switch(href_list["option"])
 			if("Activation Phrase")
@@ -37,12 +39,12 @@
 				var/inp = input(usr, "What would you like to set the activation phrase too?", "Activation")
 				if(inp && istext(inp))
 					recorded = inp
+				return 1
 			if("Sending")
 				if(send_type == "Target Communication") send_type = "Pulse"
 				else send_type = "Target Communication"
+				return 1
 			if("On")
 				process_activation()
-
-
-	..()
+				return 1
 

@@ -51,6 +51,7 @@
 				if(2)
 					usr << "You set \the [src]'s sensitivity to 'Hard-Press only'"
 					sensitive = 0
+			return 1
 	..()
 
 

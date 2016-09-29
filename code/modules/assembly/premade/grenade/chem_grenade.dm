@@ -6,11 +6,12 @@
 	w_class = 2.0
 	force = 2.0
 	default_grenade = 0
+	pulse_chance = 75
 
 /obj/item/device/assembly_holder/grenade/chem_grenade/New()
 	trigger = new /obj/item/device/assembly/button (src)
 	detonator = new /obj/item/device/assembly/timer (src)
-	igniter = new /obj/item/device/assembly/igniter (src)
+	igniter = null
 	explosive = new /obj/item/device/assembly/chem_mixer (src)
 	..()
 

@@ -48,7 +48,15 @@
 
 /obj/item/device/assembly_holder/New(var/type_change = 0)
 	..()
+	create_reagents(1000)
 	update_holder()
+
+/obj/item/device/assembly_holder/Destroy()
+	if(connected_devices.len)
+		for(var/obj/O in connected_devices)
+			qdel(O)
+	processing_objects.Remove(src)
+	return ..()
 
 /obj/item/device/assembly_holder/proc/update_holder()
 	weight = initial(weight)
@@ -91,13 +99,6 @@
 	get_type()
 	update_icon()
 
-/obj/item/device/assembly_holder/Destroy()
-	if(connected_devices.len)
-		for(var/obj/O in connected_devices)
-			qdel(O)
-	processing_objects.Remove(src)
-	..()
-
 /obj/item/device/assembly_holder/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	update_holder()
 	var/list/data = list()
@@ -124,16 +125,21 @@
 		ui.open()
 
 /obj/item/device/assembly_holder/Topic(href, href_list)
+	if(..())
+		return 1
 	if(href_list["logs"])
 		if(admin_access(usr))
 			state = "LOGS"
+			return 1
 	if(href_list["disableadmin"])
 		admin_messages = 0
 	if(href_list["home"])
 		state = "HOME"
+		return 1
 	if(href_list["admin"])
 		if(admin_access(usr))
 			state = "ADMIN"
+			return 1
 	if(href_list["advsettings"])
 		var/inp = input(usr, "Enter advanced setting flag to toggle", "Assembly")
 		if(inp in advanced_settings)
@@ -145,6 +151,7 @@
 		var/inp = input(usr, "Enter a new password", "Password")
 		if(inp && istext(inp) && lentext(inp) <= 10)
 			password = inp
+			return 1
 		else
 			usr << "<span class='warning'>That password is invalid!</span>"
 	if(href_list["settings"])
@@ -164,6 +171,7 @@
 				else if(opened)
 					if(!(opened.active_wires & WIRE_ASSEMBLY_PASSWORD) || admin_access(usr))
 						opened.ui_interact(usr, state = interactive_state)
+						return 1
 					else
 						usr << "<span class='warning'>Access denied!</span>"
 	if(href_list["wiring"])
@@ -182,6 +190,7 @@
 				else if(opened.wire_holder)
 					usr.set_machine(opened)
 					opened.wire_holder.Interact(usr)
+					return 1
 	if(href_list["connect"])
 		if(drawing_connection)
 			usr << "<span class='noice'>You stop drawing connections!</span>"
@@ -191,6 +200,7 @@
 				usr << "<span class='notice'>You begin drawing connections!</span>"
 				drawing_connection = href_list["connect"]
 				add_debug_log("Drawing connection: [drawing_connection]")
+				return 1
 	if(href_list["connect_to"])
 		var/index = href_list["connect_to"]
 		var/obj/item/device/assembly/first = connected_devices[(text2num(drawing_connection))]
@@ -212,10 +222,8 @@
 		else
 			first.connects_to.Add(index)
 			usr << "<span class='notice'>You successfully link [first] and [second]!</span>"
+			return 1
 		drawing_connection = null
-
-	src.add_fingerprint(usr)
-	nanomanager.update_uis(src)
 
 /obj/item/device/assembly_holder/proc/wire_cut(var/obj/item/device/assembly/A, var/index)
 	for(var/obj/item/device/assembly/B in connected_devices)

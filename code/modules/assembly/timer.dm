@@ -11,9 +11,6 @@
 	var/time = 10
 	var/time_to_set = 10
 
-	proc
-		timer_end()
-
 /obj/item/device/assembly/timer/get_data()
 	var/list/data = list()
 	data.Add("Time", time, "Time to Set", time_to_set)
@@ -32,7 +29,7 @@
 	update_icon()
 	return 1
 
-/obj/item/device/assembly/timer/timer_end()
+/obj/item/device/assembly/timer/proc/timer_end()
 	if(holder)
 		misc_activate()
 	else
@@ -79,6 +76,8 @@
 */
 
 /obj/item/device/assembly/timer/Topic(href, href_list)
+	if(..())
+		return 1
 	if(href_list["option"])
 		switch(href_list["option"])
 			if("Time")
@@ -87,12 +86,13 @@
 				if(inp)
 					inp = max(1, inp)
 					time = min(300, inp) // 5 mins max.
+				return 1
 			if("Time to Set")
-				var/num = input(usr, "What would you like to set the default time to?", "Repeater")
+				var/num = input(usr, "What would you like to set the default time to?", "Repeater") as num
 				if(num)
 					time_to_set = min(120, num)
 					time_to_set = max(0, num)
-	..()
+				return 1
 /*
 /obj/item/device/assembly/timer/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/stack/cable_coil))

@@ -23,15 +23,19 @@
 
 /obj/item/device/assembly/chem_mixer/New()
 	..()
-	var/datum/reagents/R = new/datum/reagents(1000)
-	reagents = R
-	R.my_atom = src
+	create_reagents(1000)
 	update_icon()
+
+/obj/item/device/assembly/chem_mixer/Destroy()
+	for(var/obj/O in beakers)
+		qdel(O)
+	return ..()
 
 /obj/item/device/assembly/chem_mixer/proc/attach_container(var/obj/item/W)
 	if(is_type_in_list(W, allowed_containers))
 		W.forceMove(src)
 		beakers += W
+	update_icon()
 
 /obj/item/device/assembly/chem_mixer/attackby(var/obj/item/W, var/mob/living/carbon/user)
 	if(is_type_in_list(W, allowed_containers))
@@ -41,7 +45,7 @@
 		else
 			if(W.reagents.total_volume)
 				user << "<span class='notice'>You add \the [W] to the assembly.</span>"
-				user.remove_from_mob(src)
+				user.drop_item()
 				attach_container(W)
 			else
 				user << "<span class='warning'>\The [W] is empty.</span>"
@@ -67,41 +71,46 @@
 
 /obj/item/device/assembly/chem_mixer/activate()
 	if(used)
-		return
+		return 0
 	playsound(src.loc, 'sound/effects/bamf.ogg', 50, 1)
-	for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
-		G.reagents.trans_to(src, G.reagents.total_volume)
+	for(var/obj/item/weapon/reagent_containers/G in beakers)
+		G.reagents.trans_to_obj((holder ? holder : src), G.reagents.total_volume)
 
-	if(src.reagents.total_volume) //The possible reactions didnt use up all reagents.
+	if((holder && holder.reagents.total_volume) || (!holder && src.reagents.total_volume)) //The possible reactions didnt use up all reagents.
 		var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
-		steam.set_up(10, 0, get_turf(src))
-		steam.attach(src)
+		var/turf/T = (holder ? get_turf(holder) : get_turf(src))
+		steam.set_up(10, 0, T)
+		steam.attach(holder ? holder : src)
 		steam.start()
-		for(var/atom/A in view(affected_area, get_turf(src)))
+		for(var/atom/A in view(affected_area, T))
 			src.reagents.touch(A)
 
-	if(istype(holder.loc, /mob/living/carbon))		//drop dat grenade if it goes off in your hand
+	if(holder && istype(holder.loc, /mob/living/carbon/human))		//drop dat grenade if it goes off in your hand
 		var/mob/living/carbon/human/H = loc
-		H.drop_item()
-		H.throw_mode_off()
+		if(H)
+			H.drop_from_inventory(holder)
+			H.throw_mode_off()
 
-	invisibility = INVISIBILITY_MAXIMUM //Why am i doing this?
-	spawn(50)		   //To make sure all reagents can work
-		used = 1
+	used = 1
 	update_icon()
+	return 1
 
 /obj/item/device/assembly/chem_mixer/igniter_act()
-	process_activation()
+	activate() // ignores wire checks
 
 /obj/item/device/assembly/chem_mixer/get_buttons()
 	return list("Eject Beakers", "Activate")
 
 /obj/item/device/assembly/chem_mixer/Topic(href, href_list)
+	if(..())
+		return 1
 	if(href_list["option"])
 		if(href_list["option"] == "Eject Beakers")
 			for(var/obj/O in beakers)
 				O.forceMove(get_turf(src))
 				beakers -= O
+			return 1
 		if(href_list["option"] == "Activate")
 			process_activation()
-	..()
+			return 1
+	update_icon()
