@@ -515,7 +515,11 @@
 		var/processed = 0
 		var/obj/effect/overmap/them = map_sectors["[T.z]"]
 		var/obj/effect/overmap/us = map_sectors["[linked.z]"]
-		var/missile_range = round(loaded.range * efficiency * guidance_efficiency)
+		if(loaded)
+			var/missile_range = round(loaded.range * efficiency * guidance_efficiency)
+		else
+			src << "<span class='warning'>Nothing is loaded!</span>"
+			return 0
 		if(get_dist(them, us) > missile_range)
 			src << "<span class='warning'>\The [them] is out of missile firing range! (Your range is currently [missile_range])</span>"
 			return 0

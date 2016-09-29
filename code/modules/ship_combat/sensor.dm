@@ -307,7 +307,6 @@
 	var/id_num
 	id_num = computer.id_num
 	if(!id_num) return
-	name = "[initial(name)]([id_num])"
 	if(guidance)
 		guidance.name = "[initial(guidance.name)]([id_num])"
 	if(tracking)
@@ -324,6 +323,7 @@
 		advguidance.name = "[initial(advguidance.name)]([id_num])"
 	for(var/obj/machinery/space_battle/missile_sensor/radar/R in radars)
 		R.name = "[initial(R.name)]([id_num])"
+	name = "[initial(name)]([id_num])"
 	return
 
 /obj/machinery/space_battle/missile_sensor/hub/proc/has_guidance()
