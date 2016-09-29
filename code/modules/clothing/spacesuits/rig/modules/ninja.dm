@@ -161,28 +161,28 @@
 	return 0
 
 /obj/item/rig_module/self_destruct
-
 	name = "self-destruct module"
 	desc = "Oh my God, Captain. A bomb."
 	icon_state = "deadman"
 	usable = 1
-	active = 1
 	permanent = 1
+	toggleable = 1
+
+	activate_string = "Enable Auto Self-Destruct"
+	deactivate_string = "Disable Auto Self-Destruct"
 
 	engage_string = "Detonate"
 
 	interface_name = "dead man's switch"
-	interface_desc = "An integrated self-destruct module. When the wearer dies, so does the surrounding area. Do not press this button."
+	interface_desc = "An integrated automatic self-destruct module. When the wearer dies, so does the surrounding area. Can be triggered manually."
 	var/list/explosion_values = list(1,2,4,5)
+	var/blink_delay = 10
+	var/blink_time = 40
+	var/blink_rapid_time = 40
+	var/blink_solid_time = 20
 
 /obj/item/rig_module/self_destruct/small
 	explosion_values = list(0,0,3,4)
-
-/obj/item/rig_module/self_destruct/activate()
-	return
-
-/obj/item/rig_module/self_destruct/deactivate()
-	return
 
 /obj/item/rig_module/self_destruct/process()
 
@@ -192,11 +192,25 @@
 
 	//OH SHIT.
 	if(holder.wearer.stat == 2)
-		engage(1)
+		if(src.active)
+			engage(1)
 
 /obj/item/rig_module/self_destruct/engage(var/skip_check)
-	if(!skip_check && usr && alert(usr, "Are you sure you want to push that button?", "Self-destruct", "No", "Yes") == "No")
-		return
+	set waitfor = 0
+	if(!skip_check && usr)
+		if(alert(usr, "Are you sure you want to push that button?", "Self-destruct", "No", "Yes") == "No")
+			return
+		if(usr == holder.wearer)
+			holder.wearer.visible_message("<span class='warning'> \The [src.holder.wearer] flicks a small switch on the back of \the [src.holder].</span>",1)
+			sleep(blink_delay)
+
+	holder.visible_message("<span class='notice'>\The [src.holder] begins beeping.</span>","<span class='notice'> You hear beeping.</span>")
+	sleep(blink_time)
+	holder.visible_message("<span class='warning'>\The [src.holder] beeps rapidly!</span>","<span class='warning'> You hear rapid beeping!</span>")
+	sleep(blink_rapid_time)
+	holder.visible_message("<span class='danger'>\The [src.holder] emits a shrill tone!</span>","<span class='danger'> You hear a shrill tone!</span>")
+	sleep(blink_solid_time)
+
 	explosion(get_turf(src), explosion_values[1], explosion_values[2], explosion_values[3], explosion_values[4])
 	if(holder && holder.wearer)
 		holder.wearer.drop_from_inventory(src)
