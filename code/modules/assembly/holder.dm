@@ -258,7 +258,6 @@
 			connected_devices.Add(A)
 			A.forceMove(src)
 			A.holder = src
-			prespawned = 0
 			if(connected_devices.len > 1 && advanced_settings["autoconnect"] == 1)
 				var/obj/item/device/assembly/prev = connected_devices[(connected_devices.len - 1)]
 				if(prev && istype(prev))
@@ -507,6 +506,7 @@
 			stage_name = A.name
 			removing = A
 			acting = 0
+			prespawned = 0
 
 	//UPRADING
 	//Note: No items are consumed except matter bins and materials.

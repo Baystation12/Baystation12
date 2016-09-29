@@ -3,8 +3,9 @@
 /datum/wires/assembly
 	holder_type = /obj/item/device/assembly
 	wire_count = 3
-	window_y = 570
-	window_x = 350
+	window_x = 470
+	window_y = 470
+	row_options2 = " width='360px'"
 	random = 1
 	can_diagnose = 1
 	var/diagnosing = 0
