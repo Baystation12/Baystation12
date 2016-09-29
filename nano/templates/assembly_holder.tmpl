@@ -11,7 +11,7 @@
 {{if data.state == "HOME"}}
 <h2>Connected items:</h2>
 <div class='item'>
-	<div style='block'>
+	<div class='block'>
 		{{for data.connected}}
 			{{if index % 2 == 0}}
 				<div class='itemContent'>
@@ -36,7 +36,7 @@
 </div>	
 {{else data.state == "LOGS"}}
 <div class='item'>
-	<div style='block'>
+	<div class='block'>
 		<br>
 		{{for data.logs}}
 			<b>{{:value}}</b><br>
