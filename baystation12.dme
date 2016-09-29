@@ -1313,6 +1313,8 @@
 #include "code\modules\lighting\lighting_system.dm"
 #include "code\modules\lighting\lighting_turf.dm"
 #include "code\modules\lighting\~lighting_undefs.dm"
+#include "code\modules\lobby_music\_licenses.dm"
+#include "code\modules\lobby_music\_lobby_music.dm"
 #include "code\modules\locks\key.dm"
 #include "code\modules\locks\lock.dm"
 #include "code\modules\locks\lock_construct.dm"

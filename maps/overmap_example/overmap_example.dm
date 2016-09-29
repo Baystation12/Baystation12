@@ -8,6 +8,8 @@
 	#include "sector/sector-1.dmm"
 	#include "sector/sector-2.dmm"
 
+	#include "../../code/modules/lobby_music/absconditus.dm"
+
 	#define USING_MAP_DATUM /datum/map/overmap_example
 
 #elif !defined(MAP_OVERRIDE)

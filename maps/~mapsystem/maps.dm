@@ -62,6 +62,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/evac_controller_type = /datum/evacuation_controller
 	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
 
+	var/lobby_icon = 'maps/exodus/exodus_lobby.dmi' // The icon which contains the lobby image(s)
+	var/list/lobby_screens = list()                 // The list of lobby screen to pick() from. If left unset the first icon state is always selected.
+	var/lobby_music/lobby_music                     // The track that will play in the lobby screen. Handed in the /setup_map() proc.
 
 /datum/map/New()
 	..()
@@ -71,7 +74,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		allowed_jobs = subtypesof(/datum/job)
 
 /datum/map/proc/setup_map()
-	return
+	var/list/lobby_music_tracks = subtypesof(/lobby_music)
+	var/lobby_music_type = /lobby_music
+	if(lobby_music_tracks.len)
+		lobby_music_type = pick(lobby_music_tracks)
+	lobby_music = new lobby_music_type()
 
 /datum/map/proc/perform_map_generation()
 	return
