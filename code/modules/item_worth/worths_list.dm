@@ -493,7 +493,6 @@ var/list/worths = list(
 					/obj/item/device/pda = 60,
 					/obj/item/device/radio = 150,
 					/obj/item/device/assembly/igniter = 15,
-					/obj/item/device/assembly/infra = 10,
 					/obj/item/device/assembly/mousetrap = 5,
 					/obj/item/device/assembly/signaler = 30,
 					/obj/item/device/assembly = 50,

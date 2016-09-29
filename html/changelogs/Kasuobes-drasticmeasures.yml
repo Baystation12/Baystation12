@@ -1,0 +1,4 @@
+author: Kasuobes
+delete-after: True
+changes:
+  - rscdel: "Removed IR emitters until they are fixed and don't kill servers."
