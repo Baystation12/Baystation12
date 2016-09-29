@@ -76,6 +76,9 @@
 	if(!new_discount_item)
 		return FALSE
 
+	if(istype(new_discount_item, /datum/uplink_item/item/stealthy_weapons/soap))
+		return FALSE
+
 	var/discount_price = round(new_discount_item.cost(uses) * discount_amount)
 	if(!discount_price || new_discount_item.cost(uses) == discount_price)
 		return TRUE
