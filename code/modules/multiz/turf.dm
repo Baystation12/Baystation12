@@ -22,7 +22,7 @@
 /turf/simulated/open/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
 	if(!istype(N,/turf/simulated/open))
 		update_cliff(src)
-	..()
+	return ..()
 
 /turf/simulated/open/proc/update_cliff(turf/ignore)
 	var/turf/simulated/open/O = get_step(src,SOUTH)
