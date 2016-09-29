@@ -174,3 +174,49 @@
 			var/datum/integrated_io/wanted_dir = inputs[1]
 			if(isnum(wanted_dir.data))
 				step(machine, wanted_dir.data)
+
+/obj/item/integrated_circuit/manipulation/grenade
+	name = "grenade primer"
+	desc = "This circuit comes with the ability to attach most types of grenades at prime them at will."
+	extended_desc = "Time between priming and detonation is limited to between 1 to 12 seconds but is optional. \
+					If unset, not a number, or a number less than 1 then the grenade's built-in timing will be used. \
+					Beware: Once primed there is no aborting the process!"
+	icon_state = "grenade"
+	complexity = 30
+	inputs = list("detonation time")
+	outputs = list()
+	activators = list("prime grenade")
+	var/obj/item/weapon/grenade/attached_grenade
+
+/obj/item/integrated_circuit/manipulation/grenade/Destroy()
+	if(attached_grenade && !attached_grenade.active)
+		attached_grenade.dropInto(loc)
+	attached_grenade = null
+	. =..()
+
+/obj/item/integrated_circuit/manipulation/grenade/attackby(var/obj/item/weapon/grenade/G, var/mob/user)
+	if(istype(G))
+		if(attached_grenade)
+			to_chat(user, "<span class='warning'>There is already a grenade attached!</span>")
+		else if(user.unEquip(G, target = src))
+			attached_grenade = G
+			user.visible_message("<span class='warning'>\The [user] attaches \a [G] to \the [src]!</span>", "<span class='notice'>You attach \the [G] to \the [src].</span>")
+	else
+		..()
+
+/obj/item/integrated_circuit/manipulation/grenade/attack_self(var/mob/user)
+	if(attached_grenade)
+		user.visible_message("<span class='warning'>\The [user] removes \an [attached_grenade] from \the [src]!</span>", "<span class='notice'>You remove \the [attached_grenade] from \the [src].</span>")
+		user.put_in_any_hand_if_possible(attached_grenade) || attached_grenade.dropInto(loc)
+		attached_grenade = null
+	else
+		..()
+
+/obj/item/integrated_circuit/manipulation/grenade/do_work()
+	if(attached_grenade && !attached_grenade.active)
+		var/datum/integrated_io/detonation_time = inputs[1]
+		if(isnum(detonation_time.data) && detonation_time.data > 0)
+			attached_grenade.det_time = between(1, detonation_time.data, 12) SECONDS
+		attached_grenade.activate()
+		var/atom/holder = loc
+		log_and_message_admins("activated a grenade assembly. Last touches: Assembly: [holder.fingerprintslast] Circuit: [fingerprintslast] Grenade: [attached_grenade.fingerprintslast]")
