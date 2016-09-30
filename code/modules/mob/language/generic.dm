@@ -66,7 +66,7 @@
 /datum/language/sign
 	name = "Sign language"
 	desc = "A sign language commonly used for those who are deaf or mute."
-	signlang_verb = list("signs, gestures")
+	signlang_verb = list("signs")
 	colour = "say_quote"
 	key = "s"
-	flags = SIGNLANG | NO_STUTTER
+	flags = SIGNLANG | NO_STUTTER | NO_TALK_MSG
