@@ -455,7 +455,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return 0 //something is terribly wrong
 
 	if(!round_is_spooky())
-		to_chat(src, "\<span class='warning'>The veil is not thin enough for you to do that.</span>")
+		to_chat(src, "<span class='warning'>The veil is not thin enough for you to do that.</span>")
 		return
 
 	var/list/choices = list()

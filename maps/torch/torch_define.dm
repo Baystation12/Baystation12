@@ -4,6 +4,8 @@
 	path = "torch"
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 
+	lobby_icon = 'maps/torch/torch_lobby.dmi'
+
 	station_levels = list(1,2,3,4,5)
 	contact_levels = list(1,2,3,4,5)
 	player_levels = list(1,2,3,4,5,6,7,8,9)

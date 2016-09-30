@@ -248,7 +248,7 @@ var/list/organ_cache = list()
 		if(owner && parent_organ && amount > 0)
 			var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 			if(parent && !silent)
-				owner.custom_pain("Something inside your [parent.name] hurts a lot.", 1)
+				owner.custom_pain("Something inside your [parent.name] hurts a lot.", amount)
 
 /obj/item/organ/proc/bruise()
 	damage = max(damage, min_bruised_damage)

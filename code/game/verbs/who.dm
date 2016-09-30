@@ -57,30 +57,40 @@
 	set category = "Admin"
 	set name = "Staffwho"
 
-	var/msg = list()
+	var/list/msg = list()
 	var/active_staff = 0
 	var/total_staff = 0
 	var/can_investigate = check_rights(R_INVESTIGATE, 0)
 
 	for(var/client/C in admins)
-		if(C.is_stealthed())
+		var/line = list()
+		if(!can_investigate && C.is_stealthed())
 			continue
 		total_staff++
-		msg += "\t[C] is \a [C.holder.rank]"
+		if(check_rights(R_ADMIN,0,C))
+			line += "\t[C] is \an <b>["\improper[C.holder.rank]"]</b>"
+		else
+			line += "\t[C] is \an ["\improper[C.holder.rank]"]"
 		if(C.is_afk())
-			msg += can_investigate ? " (AFK - [C.inactivity2text()])" : "(AFK)"
+			line += can_investigate ? " (AFK - [C.inactivity2text()])" : "(AFK)"
 		else
 			active_staff++
 		if(can_investigate)
 			if(isghost(C.mob))
-				msg += " - Observing"
+				line += " - Observing"
 			else if(istype(C.mob,/mob/new_player))
-				msg += " - Lobby"
+				line += " - Lobby"
 			else
-				msg += " - Playing"
-		msg += "\n"
+				line += " - Playing"
+			if(C.is_stealthed())
+				line += " (Stealthed)"
+		line = jointext(line,null)
+		if(check_rights(R_ADMIN,0,C))
+			msg.Insert(1, line)
+		else
+			msg += line
 
 	if(config.admin_irc)
 		to_chat(src, "<span class='info'>Adminhelps are also sent to IRC. If no admins are available in game try anyway and an admin on IRC may see it and respond.</span>")
 	to_chat(src, "<b>Current Staff ([active_staff]/[total_staff]):</b>")
-	to_chat(src, jointext(msg,null))
+	to_chat(src, jointext(msg,"\n"))
