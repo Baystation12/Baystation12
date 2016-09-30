@@ -2,7 +2,7 @@
 	icon_state = "girder"
 	anchored = 1
 	density = 1
-	layer = 2
+	layer = 2.45
 	w_class = 8
 	var/state = 0
 	var/health = 200

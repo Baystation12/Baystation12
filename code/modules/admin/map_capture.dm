@@ -35,7 +35,7 @@
 		usr << "Saved capture in cache as [file_name]."
 		usr << browse_rsc(cap, file_name)
 		currentx = currentx + 32
-		spawn (10)
+		spawn (1)
 			.(currentz, currentx, currenty, ligths)
 	else
 		currenty = currenty + 32
@@ -46,7 +46,7 @@
 			usr << "Saved capture in cache as [file_name]."
 			usr << browse_rsc(cap, file_name)
 			currentx = currentx + 32
-			spawn (10)
+			spawn (1)
 				.(currentz, currentx, currenty, ligths)
 		else
 			usr << "End of map, capture is done."

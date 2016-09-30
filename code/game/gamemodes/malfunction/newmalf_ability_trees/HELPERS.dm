@@ -167,14 +167,22 @@
 
 // Proc: get_unhacked_apcs()
 // Parameters: None
-// Description: Returns a list of all unhacked APCs
+// Description: Returns a list of all unhacked APCs. APCs on station Zs are on top of the list.
 /proc/get_unhacked_apcs(var/mob/living/silicon/ai/user)
-	var/list/H = list()
+	var/list/station_apcs = list()
+	var/list/offstation_apcs = list()
+
 	for(var/obj/machinery/power/apc/A in machines)
 		if(A.hacker && A.hacker == user)
 			continue
-		H.Add(A)
-	return H
+		if(A.z in using_map.station_levels)
+			station_apcs.Add(A)
+		else
+			offstation_apcs.Add(A)
+
+	// Append off-station APCs to the end of station APCs list and return it.
+	station_apcs.Add(offstation_apcs)
+	return station_apcs
 
 
 // Helper procs which return lists of relevant mobs.
