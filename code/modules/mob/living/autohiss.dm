@@ -54,7 +54,22 @@
 			"r" = list("rr", "rrr", "rrrr")
 		)
 	autohiss_exempt = list(LANGUAGE_SIIK_MAAS)
-
+	
+/datum/species/resomi
+    autohiss_basic_map = list(
+            "e" = list("ee", "eee")
+        )
+    autohiss_extra_map = list(
+            "u" = list("oo"),
+            "g" = list("k"),
+            "w" = list("f"),
+            "i" = list("ee"),
+            "f" = list("v"),
+            "qu" = list("kw"),
+            "th" = list("tt"),
+            "p" = list("v")
+        )
+    autohiss_exempt = list(LANGUAGE_RESOMI)
 
 /datum/species/proc/handle_autohiss(message, datum/language/lang, mode)
 	if(!autohiss_basic_map)
