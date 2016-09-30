@@ -1,23 +1,23 @@
 ////FIELD GEN START //shameless copypasta from fieldgen, powersink, and grille
 /obj/machinery/shieldwallgen
-		name = "Shield Generator"
-		desc = "A shield generator."
-		icon = 'icons/obj/stationobjs.dmi'
-		icon_state = "Shield_Gen"
-		anchored = 0
-		density = 1
-		req_access = list(access_engine_equip)
-		var/active = 0
-		var/power = 0
-		var/locked = 1
-		var/max_range = 8
-		var/storedpower = 0
-		flags = CONDUCT
-		//There have to be at least two posts, so these are effectively doubled
-		var/power_draw = 30 KILOWATTS //30 kW. How much power is drawn from powernet. Increase this to allow the generator to sustain longer shields, at the cost of more power draw.
-		var/max_stored_power = 50 KILOWATTS //50 kW
-		use_power = 0	//Draws directly from power net. Does not use APC power.
-		active_power_usage = 1200
+	name = "Shield Generator"
+	desc = "A shield generator."
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "Shield_Gen"
+	anchored = 0
+	density = 1
+	req_access = list(access_engine_equip)
+	var/active = 0
+	var/power = 0
+	var/locked = 1
+	var/max_range = 8
+	var/storedpower = 0
+	flags = CONDUCT
+	//There have to be at least two posts, so these are effectively doubled
+	var/power_draw = 30 KILOWATTS //30 kW. How much power is drawn from powernet. Increase this to allow the generator to sustain longer shields, at the cost of more power draw.
+	var/max_stored_power = 50 KILOWATTS //50 kW
+	use_power = 0	//Draws directly from power net. Does not use APC power.
+	active_power_usage = 1200
 
 /obj/machinery/shieldwallgen/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = list()
@@ -83,13 +83,13 @@
 
 /obj/machinery/shieldwallgen/attack_hand(mob/user as mob)
 	if(anchored != 1)
-		user << "\red The shield generator needs to be firmly secured to the floor first."
+		user << "<span class='warning'>The shield generator needs to be firmly secured to the floor first.</span>"
 		return 1
 	if(src.locked && !istype(user, /mob/living/silicon))
-		user << "\red The controls are locked!"
+		user << "<span class='warning'>The controls are locked!</span>"
 		return 1
 	if(power != 1)
-		user << "\red The shield generator needs to be powered by wire underneath."
+		user << "<span class='warning'>The shield generator needs to be powered by wire underneath.</span>"
 		return 1
 
 	src.ui_interact(user)
