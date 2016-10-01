@@ -11,6 +11,8 @@ proc/is_complete_print(var/print)
 atom/var/list/suit_fibers
 
 atom/proc/add_fibers(mob/living/carbon/human/M)
+	if(!istype(M))
+		return
 	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))
 		var/obj/item/clothing/gloves/G = M.gloves
 		if(G.transfer_blood) //bloodied gloves transfer blood to touched objects
@@ -41,6 +43,9 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 			suit_fibers += "Material from a pair of [M.gloves.name]."
 
 /mob/living/proc/get_full_print()
+	return
+
+/mob/living/carbon/get_full_print()
 	if (mFingerprints in mutations)
 		return
 	return md5(dna.uni_identity)
