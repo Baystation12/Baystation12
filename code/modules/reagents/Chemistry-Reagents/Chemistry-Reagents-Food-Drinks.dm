@@ -344,6 +344,11 @@
 	var/no_pain = 0
 	var/obj/item/eye_protection = null
 	var/obj/item/face_protection = null
+	
+	var/effective_strength = 5
+	
+	if(alien == IS_SKRELL)	//Larger eyes means bigger targets.
+		effective_strength = 8
 
 	var/list/protection
 	if(istype(M, /mob/living/carbon/human))
@@ -370,11 +375,11 @@
 	else
 		message = "<span class='warning'>The pepperspray gets in your eyes!</span>"
 		if(mouth_covered)
-			M.eye_blurry = max(M.eye_blurry, 15)
-			M.eye_blind = max(M.eye_blind, 5)
+			M.eye_blurry = max(M.eye_blurry, effective_strength * 3)
+			M.eye_blind = max(M.eye_blind, effective_strength)
 		else
-			M.eye_blurry = max(M.eye_blurry, 25)
-			M.eye_blind = max(M.eye_blind, 10)
+			M.eye_blurry = max(M.eye_blurry, effective_strength * 5)
+			M.eye_blind = max(M.eye_blind, effective_strength * 2)
 
 	if(mouth_covered)
 		if(!message)
