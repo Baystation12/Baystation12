@@ -12,11 +12,7 @@
 
 	var/mob/living/carbon/human/H = M
 	if(istype(H))
-		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
-		if(H.hand)
-			temp = H.organs_by_name[BP_L_HAND]
-		if(!temp || !temp.is_usable())
-			H << "\red You can't use your hand."
+		if(!H.can_use_active_hand())
 			return
 
 	..()
@@ -56,6 +52,8 @@
 
 	switch(M.a_intent)
 		if(I_HELP)
+			if(H in src)
+				return 0 //no hugging whatever ate you sorry
 			if(istype(H) && health < config.health_threshold_crit && health > config.health_threshold_dead)
 				if(!H.check_has_mouth())
 					H << "<span class='danger'>You don't have a mouth, you cannot perform CPR!</span>"
@@ -93,6 +91,8 @@
 			return 1
 
 		if(I_GRAB)
+			if(H in src)
+				return 0 //no grabbing either
 			if(M == src || anchored)
 				return 0
 			for(var/obj/item/weapon/grab/G in src.grabbed_by)
@@ -146,7 +146,7 @@
 				// Someone got a good grip on them, they won't be able to do much damage
 				rand_damage = max(1, rand_damage - 2)
 
-			if(src.grabbed_by.len || src.buckled || !src.canmove || src==H)
+			if(src.grabbed_by.len || src.buckled || !src.canmove || src==H || H in src) // you can punch them though
 				accurate = 1 // certain circumstances make it impossible for us to evade punches
 				rand_damage = 5
 
@@ -226,6 +226,8 @@
 			apply_damage(real_damage, (attack.deal_halloss ? HALLOSS : BRUTE), hit_zone, armour, sharp=attack.sharp, edge=attack.edge)
 
 		if(I_DISARM)
+			if(H in src)
+				return 0 //no pushing them down though
 			admin_attack_log(M, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
 			M.do_attack_animation(src)
 

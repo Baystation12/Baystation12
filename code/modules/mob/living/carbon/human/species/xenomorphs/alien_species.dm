@@ -12,7 +12,7 @@
 
 	has_fine_manipulation = 0
 	siemens_coefficient = 0
-	gluttonous = GLUT_ANYTHING
+	gluttonous = GLUT_ANYTHING|GLUT_QDEL_MOBS
 	stomach_capacity = MOB_MEDIUM
 
 	brute_mod = 0.25 // Hardened carapace.

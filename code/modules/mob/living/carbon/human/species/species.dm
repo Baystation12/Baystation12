@@ -417,3 +417,7 @@
 	if(H.equipment_prescription)
 		. -= H.equipment_prescription
 	return Clamp(., 0, 7)
+
+/datum/species/proc/get_stance_limbs()
+	return list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
+

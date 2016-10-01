@@ -94,13 +94,13 @@
 		user.visible_message("<span class='danger'>\The [user] tries to take prints from \the [H], but they move away.</span>")
 		return 1
 
-	if(user.zone_sel.selecting == BP_R_HAND || user.zone_sel.selecting == BP_L_HAND)
+	if(user.zone_sel.selecting in list(BP_R_HAND, BP_L_HAND))
 		var/has_hand
-		var/obj/item/organ/external/O = H.organs_by_name[BP_R_HAND]
+		var/obj/item/organ/external/O = H.get_organ(BP_R_HAND)
 		if(istype(O) && !O.is_stump())
 			has_hand = 1
 		else
-			O = H.organs_by_name[BP_L_HAND]
+			O = H.get_organ(BP_L_HAND)
 			if(istype(O) && !O.is_stump())
 				has_hand = 1
 		if(!has_hand)

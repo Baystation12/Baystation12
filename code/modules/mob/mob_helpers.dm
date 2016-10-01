@@ -118,7 +118,8 @@ var/list/global/organ_rel_size = list(
 )
 
 /proc/check_zone(zone)
-	if(!zone)	return BP_CHEST
+	if(!zone)
+		return BP_CHEST
 	switch(zone)
 		if(BP_EYES)
 			zone = BP_HEAD

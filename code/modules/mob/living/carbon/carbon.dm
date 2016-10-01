@@ -83,17 +83,12 @@
 	..()
 
 /mob/living/carbon/attack_hand(mob/M as mob)
-	if(!istype(M, /mob/living/carbon)) return
-	if (ishuman(M))
+	if(!iscarbon(M))
+		return
+	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
-		if (H.hand)
-			temp = H.organs_by_name[BP_L_HAND]
-		if(temp && !temp.is_usable())
-			H << "\red You can't use your [temp.name]"
+		if(!H.can_use_active_hand())
 			return
-
-	return
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -476,3 +471,9 @@
 
 /mob/living/carbon/proc/get_adjusted_metabolism(metabolism)
 	return metabolism
+
+/mob/living/carbon/return_air_for_internal_lifeform()
+	var/datum/gas_mixture/GM = new /datum/gas_mixture
+	GM.adjust_multi("oxygen", MOLES_O2STANDARD, "nitrogen", MOLES_N2STANDARD)
+	GM.temperature = bodytemperature
+	return GM

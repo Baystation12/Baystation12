@@ -339,8 +339,10 @@ This function restores all organs.
 	return
 
 
-/mob/living/carbon/human/proc/get_organ(var/zone)
-	return organs_by_name[check_zone(zone)]
+/mob/living/carbon/human/proc/get_organ(var/zone, var/check = 1)
+	if(check)
+		zone = check_zone(zone)
+	return organs_by_name[zone]
 
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/edge = 0, var/obj/used_weapon = null)
 

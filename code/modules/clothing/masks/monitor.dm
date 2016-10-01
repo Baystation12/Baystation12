@@ -51,7 +51,7 @@
 	if (!..())
 		return 0
 	if(istype(user))
-		var/obj/item/organ/external/E = user.organs_by_name[BP_HEAD]
+		var/obj/item/organ/external/E = user.get_organ(BP_HEAD)
 		if(istype(E) && (E.robotic >= ORGAN_ROBOT))
 			return 1
 		user << "<span class='warning'>You must have a robotic head to install this upgrade.</span>"
