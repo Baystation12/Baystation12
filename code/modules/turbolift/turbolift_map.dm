@@ -185,4 +185,6 @@
 	lift.control_panel_interior.set_dir(udir)
 	lift.current_floor = lift.floors[uz]
 
+	lift.open_doors()
+
 	qdel(src) // We're done.
