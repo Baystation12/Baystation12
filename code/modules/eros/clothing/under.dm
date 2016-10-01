@@ -1,7 +1,6 @@
 //Eros Uniforms and clothes
 
 
-/obj/item/clothing/under/eros
 
 /obj/item/clothing/under/eros/harness
 	name = "gear harness"
