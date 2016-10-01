@@ -2,7 +2,7 @@
 
 
 
-/obj/item/clothing/under/eros/harness
+/obj/item/clothing/under/harness
 	name = "gear harness"
 	desc = "How... minimalist."
 	icon_state = "eros_gear_harness"

@@ -197,6 +197,12 @@
 		shorts[initial(short_type.name)] = short_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(shorts))
 
+
+//EROS START
+
 /datum/gear/uniform/eros/harness
 	display_name = "gear harness"
-	path = /obj/item/clothing/under/eros/harness
+	path = /obj/item/clothing/under/harness
+
+
+//EROS FINISH
