@@ -71,6 +71,12 @@
 	glass_type = "/glass_virology"
 	airlock_type = "/virology"
 
+/obj/structure/door_assembly/door_assembly_sol
+	base_icon_state = "sol"
+	base_name = "Sol Central Government Airlock"
+	glass_type = "/glass_sol"
+	airlock_type = "/sol"
+
 /obj/structure/door_assembly/door_assembly_mai
 	base_icon_state = "mai"
 	base_name = "Maintenance Airlock"
