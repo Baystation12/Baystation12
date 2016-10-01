@@ -187,8 +187,8 @@
 	make_exact_fit()
 
 /obj/item/weapon/storage/secure/briefcase/money
-	name = "suspicious briefcase"
-	desc = "An ominous briefcase that has the unmistakeable smell of old stale cigarette smoke, and gives those who look at it a bad feeling."
+	name = "secure briefcase" //let's not have things that can be easily meta-d
+	desc = "An ominous briefcase that has the unmistakeable smell of old stale cigarette smoke."
 
 	startswith = list(/obj/item/weapon/spacecash/bundle/c1000 = 10)
 

@@ -82,5 +82,5 @@
 
 /obj/item/clothing/head/soft/mbill
 	name = "shipping cap"
-	desc = "It's a ballcap bearing the Major Bill's Shipping colors."
+	desc = "It's a ballcap bearing the colors of Major Bill's Shipping."
 	icon_state = "mbillsoft"

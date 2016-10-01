@@ -406,7 +406,7 @@
 					/obj/item/clothing/suit/storage/vest/tactical,
 					/obj/item/clothing/head/helmet/tactical,
 					/obj/item/clothing/mask/balaclava/tactical,
-					/obj/item/clothing/glasses/sunglasses/sechud/tactical,
+					/obj/item/clothing/glasses/tacgoggles,
 					/obj/item/weapon/storage/belt/security/tactical,
 					/obj/item/clothing/shoes/tactical,
 					/obj/item/clothing/gloves/tactical)

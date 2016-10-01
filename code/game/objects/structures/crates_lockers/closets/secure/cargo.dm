@@ -53,3 +53,87 @@
 		new /obj/item/clothing/glasses/meson(src)
 		new /obj/item/clothing/head/soft(src)
 		return
+
+/obj/structure/closet/secure_closet/cargotech/decktech
+	name = "deck technician's locker"
+	req_access = list(access_cargo)
+
+/obj/structure/closet/secure_closet/cargotech/decktech/New()
+	..()
+	if(prob(75))
+		new /obj/item/weapon/storage/backpack(src)
+	else
+		new /obj/item/weapon/storage/backpack/satchel_norm(src)
+	if(prob(25))
+		new /obj/item/weapon/storage/backpack/dufflebag(src)
+	new /obj/item/device/radio/headset/headset_cargo(src)
+	new /obj/item/clothing/gloves/thick(src)
+	new /obj/item/weapon/cartridge/quartermaster(src)
+	new /obj/item/clothing/suit/storage/hazardvest(src)
+	new /obj/item/clothing/accessory/storage/webbing_large(src)
+	new /obj/item/weapon/storage/belt/utility/atmostech(src)
+	new /obj/item/weapon/hand_labeler(src)
+	new /obj/item/weapon/clipboard(src)
+	new /obj/item/weapon/folder/yellow(src)
+	new /obj/item/weapon/packageWrap(src)
+	return
+
+/obj/structure/closet/secure_closet/quartermaster/deckofficer
+	name = "deck officer's locker"
+	req_access = list(access_qm)
+
+/obj/structure/closet/secure_closet/quartermaster/deckofficer/New()
+	..()
+	if(prob(75))
+		new /obj/item/weapon/storage/backpack(src)
+	else
+		new /obj/item/weapon/storage/backpack/satchel_norm(src)
+	if(prob(25))
+		new /obj/item/weapon/storage/backpack/dufflebag(src)
+	new /obj/item/device/radio/headset/headset_cargo(src)
+	new /obj/item/clothing/gloves/thick(src)
+	new /obj/item/weapon/cartridge/quartermaster(src)
+	new /obj/item/clothing/glasses/meson(src)
+	new /obj/item/clothing/suit/storage/hazardvest(src)
+	new /obj/item/clothing/accessory/storage/brown_vest(src)
+	new /obj/item/weapon/storage/belt/utility/full(src)
+	new /obj/item/weapon/hand_labeler(src)
+	new /obj/item/weapon/clipboard(src)
+	new /obj/item/weapon/folder/yellow(src)
+	new /obj/item/weapon/packageWrap(src)
+	new /obj/item/device/flash(src)
+	new /obj/item/device/megaphone(src)
+	new /obj/item/clothing/suit/armor/vest/solgov(src)
+	return
+
+/obj/structure/closet/secure_closet/prospector
+	name = "prospector's locker"
+	req_access = list(access_mining)
+	icon_state = "miningsec1"
+	icon_closed = "miningsec"
+	icon_locked = "miningsec1"
+	icon_opened = "miningsecopen"
+	icon_broken = "miningsecbroken"
+	icon_off = "miningsecoff"
+
+/obj/structure/closet/secure_closet/prospector/New()
+	..()
+	if(prob(50))
+		new /obj/item/weapon/storage/backpack/industrial(src)
+	else
+		new /obj/item/weapon/storage/backpack/satchel_eng(src)
+	if(prob(50))
+		new /obj/item/weapon/storage/backpack/dufflebag/eng(src)
+	new /obj/item/device/radio/headset/headset_cargo(src)
+	new /obj/item/clothing/under/rank/miner(src)
+	new /obj/item/clothing/accessory/storage/webbing(src)
+	new /obj/item/clothing/gloves/thick(src)
+	new /obj/item/clothing/shoes/workboots(src)
+	new /obj/item/device/analyzer(src)
+	new /obj/item/weapon/storage/ore(src)
+	new /obj/item/device/flashlight/lantern(src)
+	new /obj/item/weapon/shovel(src)
+	new /obj/item/weapon/pickaxe(src)
+	new /obj/item/clothing/glasses/material(src)
+	new /obj/item/clothing/glasses/meson(src)
+	return

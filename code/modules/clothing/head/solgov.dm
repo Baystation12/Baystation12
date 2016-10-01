@@ -130,3 +130,100 @@
 	name = "marine officer's dress wheel cover"
 	desc = "A white dress uniform cover with an SCG Marine Corps crest and gold stripe."
 	icon_state = "whitewheelcap_com"
+
+//Berets
+
+/obj/item/clothing/head/beret/sol
+	name = "peacekeeper beret"
+	desc = "A beret in Sol Central Government colors. For peacekeepers that are more inclined towards style than safety."
+	icon_state = "beret_lightblue"
+
+/obj/item/clothing/head/beret/sol/homeguard
+	name = "home guard beret"
+	desc = "A red beret denoting service in the Sol Home Guard. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_red"
+
+/obj/item/clothing/head/beret/sol/gateway
+	name = "gateway administration beret"
+	desc = "An orange beret denoting service in the Gateway Administration. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_orange"
+
+/obj/item/clothing/head/beret/sol/customs
+	name = "customs and trade beret"
+	desc = "A purple beret denoting service in the Customs and Trade Bureau. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_purpleyellow"
+
+/obj/item/clothing/head/beret/sol/orbital
+	name = "orbital assault beret"
+	desc = "A blue beret denoting orbital assault training. For helljumpers that are more inclined towards style than safety."
+	icon_state = "beret_blue"
+
+/obj/item/clothing/head/beret/sol/research
+	name = "government research beret"
+	desc = "A green beret denoting service in the Bureau of Research. For explorers that are more inclined towards style than safety."
+	icon_state = "beret_green"
+
+/obj/item/clothing/head/beret/sol/health
+	name = "health service beret"
+	desc = "A white beret denoting service in the Interstellar Health Service. For medics that are more inclined towards style than safety."
+	icon_state = "beret_white"
+
+/obj/item/clothing/head/beret/sol/expedition
+	name = "expeditionary beret"
+	desc = "A black beret belonging to the SCG Expeditionary Corps. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black"
+
+/obj/item/clothing/head/beret/sol/expedition/security
+	name = "expeditionary security beret"
+	desc = "An SCG Expeditionary Corps beret with a security crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_security"
+
+/obj/item/clothing/head/beret/sol/expedition/medical
+	name = "expeditionary medical beret"
+	desc = "An SCG Expeditionary Corps beret with a medical crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_medical"
+
+/obj/item/clothing/head/beret/sol/expedition/engineering
+	name = "expeditionary engineering beret"
+	desc = "An SCG Expeditionary Corps beret with an engineering crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_engineering"
+
+/obj/item/clothing/head/beret/sol/expedition/supply
+	name = "expeditionary supply beret"
+	desc = "An SCG Expeditionary Corps beret with a supply crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_supply"
+
+/obj/item/clothing/head/beret/sol/expedition/command
+	name = "expeditionary command beret"
+	desc = "An SCG Expeditionary Corps beret with a command crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_command"
+
+/obj/item/clothing/head/beret/sol/fleet
+	name = "fleet beret"
+	desc = "A navy blue beret belonging to the SCG Fleet. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_navy"
+
+/obj/item/clothing/head/beret/sol/fleet/security
+	name = "fleet security beret"
+	desc = "An SCG Fleet beret with a security crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_navy_security"
+
+/obj/item/clothing/head/beret/sol/fleet/medical
+	name = "fleet medical beret"
+	desc = "An SCG Fleet beret with a medical crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_navy_medical"
+
+/obj/item/clothing/head/beret/sol/fleet/engineering
+	name = "fleet engineering beret"
+	desc = "An SCG Fleet with an engineering crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_navy_engineering"
+
+/obj/item/clothing/head/beret/sol/fleet/supply
+	name = "fleet supply beret"
+	desc = "An SCG Fleet beret with a supply crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_navy_supply"
+
+/obj/item/clothing/head/beret/sol/fleet/command
+	name = "fleet command beret"
+	desc = "An SCG Fleet beret with a command crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_navy_command"
