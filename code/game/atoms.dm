@@ -2,9 +2,6 @@
 	layer = 2
 	var/level = 2
 	var/flags = 0
-	var/list/fingerprints
-	var/list/fingerprintshidden
-	var/fingerprintslast = null
 	var/list/blood_DNA
 	var/was_bloodied
 	var/blood_color
@@ -21,9 +18,6 @@
 	//var/chem_is_open_container = 0
 	// replaced by OPENCONTAINER flags and atom/proc/is_open_container()
 	///Chemistry.
-
-	//Detective Work, used for the duplicate data points kept in the scanners
-	var/list/original_atom
 
 /atom/Destroy()
 	if(reagents)
@@ -245,98 +239,6 @@ its easier to just keep the beam vertical.
 	if (density)
 		AM.throwing = 0
 	return
-
-/atom/proc/add_hiddenprint(mob/living/M)
-	if(!M || !M.key)
-		return
-	if(fingerprintslast == M.key)
-		return
-	fingerprintslast = M.key
-	if(!fingerprintshidden)
-		fingerprintshidden = list()
-	if (ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if (H.gloves)
-			src.fingerprintshidden += "\[[time_stamp()]\] (Wearing gloves). Real name: [H.real_name], Key: [H.key]"
-			return 0
-
-	src.fingerprintshidden += "\[[time_stamp()]\] Real name: [M.real_name], Key: [M.key]"
-	return 1
-
-/atom/proc/add_fingerprint(mob/living/M, ignoregloves)
-	if(isnull(M)) return
-	if(isAI(M)) return
-	if(!M || !M.key)
-		return
-
-	add_hiddenprint(M)
-	add_fibers(M)
-
-	if(!fingerprints)
-		fingerprints = list()
-
-	//Hash this shit.
-	var/full_print = M.get_full_print(ignoregloves)
-	if(!full_print)
-		return
-
-	if(!ignoregloves && ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if (H.gloves && H.gloves != src)
-			H.gloves.add_fingerprint(M)
-			if(!istype(H.gloves, /obj/item/clothing/gloves/latex))
-				return 0
-			else if(prob(75))
-				return 0
-
-	// Add the fingerprints
-	if(!fingerprints[full_print])
-		fingerprints[full_print] = stars(full_print, rand(0, 20))	//Initial touch, not leaving much evidence the first time.
-	else
-		switch(stringpercent(fingerprints[full_print]))		//tells us how many stars are in the current prints.
-			if(28 to 32)
-				if(prob(1))
-					fingerprints[full_print] = full_print 		// You rolled a one buddy.
-				else
-					fingerprints[full_print] = stars(full_print, rand(0,40)) // 24 to 32
-
-			if(24 to 27)
-				if(prob(3))
-					fingerprints[full_print] = full_print     	//Sucks to be you.
-				else
-					fingerprints[full_print] = stars(full_print, rand(15, 55)) // 20 to 29
-
-			if(20 to 23)
-				if(prob(5))
-					fingerprints[full_print] = full_print		//Had a good run didn't ya.
-				else
-					fingerprints[full_print] = stars(full_print, rand(30, 70)) // 15 to 25
-
-			if(16 to 19)
-				if(prob(5))
-					fingerprints[full_print] = full_print		//Welp.
-				else
-					fingerprints[full_print]  = stars(full_print, rand(40, 100))  // 0 to 21
-
-			if(0 to 15)
-				if(prob(5))
-					fingerprints[full_print] = stars(full_print, rand(0,50)) 	// small chance you can smudge.
-				else
-					fingerprints[full_print] = full_print
-
-	return 1
-
-
-/atom/proc/transfer_fingerprints_to(var/atom/A)
-	if(fingerprints)
-		if(!A.fingerprints)
-			A.fingerprints = list()
-		A.fingerprints |= fingerprints.Copy()            //detective
-	if(fingerprintshidden)
-		if(!A.fingerprintshidden)
-			A.fingerprintshidden = list()
-		A.fingerprintshidden |= fingerprintshidden.Copy()    //admin
-		A.fingerprintslast = fingerprintslast
 
 
 //returns 1 if made bloody, returns 0 otherwise
