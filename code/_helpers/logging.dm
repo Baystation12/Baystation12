@@ -31,10 +31,16 @@
 /proc/log_debug(text)
 	if (config.log_debug)
 		game_log("DEBUG", text)
+	to_debug_listeners(text)
 
+/proc/log_error(text)
+	error(text)
+	to_debug_listeners(text, "ERROR")
+
+/proc/to_debug_listeners(text, prefix = "DEBUG")
 	for(var/client/C in admins)
 		if(C.is_preference_enabled(/datum/client_preference/debug/show_debug_logs))
-			C << "DEBUG: [text]"
+			to_chat(C, "[prefix]: [text]")
 
 /proc/log_game(text)
 	if (config.log_game)
