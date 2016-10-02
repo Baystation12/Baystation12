@@ -689,13 +689,14 @@
 	if(statpanel("Status"))
 		if(ticker && ticker.current_state != GAME_STATE_PREGAME)
 			stat("Station Time", stationtime2text())
+			stat("Station Date", stationdate2text())
 			stat("Round Duration", roundduration2text())
 		if(client.holder || isghost(client.mob))
 			stat("Location:", "([x], [y], [z]) [loc]")
 		if(client.holder)
 			stat("CPU:","[world.cpu]")
 			stat("Instances:","[world.contents.len]")
-			
+
 	if(client.holder && statpanel("Processes"))
 		if(processScheduler)
 			processScheduler.statProcesses()
@@ -970,7 +971,7 @@ mob/proc/yank_out_object()
 		if(prob(selection.w_class * 5)) //I'M SO ANEMIC I COULD JUST -DIE-.
 			var/datum/wound/internal_bleeding/I = new (min(selection.w_class * 5, 15))
 			affected.wounds += I
-			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
+			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 50)
 
 		if (ishuman(U))
 			var/mob/living/carbon/human/human_user = U

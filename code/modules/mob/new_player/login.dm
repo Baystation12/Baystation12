@@ -3,18 +3,18 @@
 /obj/effect/lobby_image
 	name = "Baystation12"
 	desc = "This shouldn't be read."
-	icon = 'icons/misc/title.dmi'
 	screen_loc = "WEST,SOUTH"
 
 /obj/effect/lobby_image/initialize()
-	var/list/known_icon_states = icon_states(icon)
-	for(var/lobby_screen in config.lobby_screens)
+	icon = using_map.lobby_icon
+	var/known_icon_states = icon_states(icon)
+	for(var/lobby_screen in using_map.lobby_screens)
 		if(!(lobby_screen in known_icon_states))
 			error("Lobby screen '[lobby_screen]' did not exist in the icon set [icon].")
-			config.lobby_screens -= lobby_screen
+			using_map.lobby_screens -= lobby_screen
 
-	if(config.lobby_screens.len)
-		icon_state = pick(config.lobby_screens)
+	if(using_map.lobby_screens.len)
+		icon_state = pick(using_map.lobby_screens)
 	else
 		icon_state = known_icon_states[1]
 

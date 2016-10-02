@@ -1,0 +1,6 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - bugfix: "In-game record editing (security and medical) will now respect the same character limits as it does in the character-setup panel. No more accidentally massacring those long records!"
