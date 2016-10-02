@@ -58,10 +58,10 @@
 												/datum/species/machine           = 7,
 												/datum/species/diona             = 5,
 												/datum/species/resomi            = 5,
-												/datum/species/vox/pariah        = 1
-												/datum/species/vox/			     = 1
+												/datum/species/vox/pariah        = 1,
+												/datum/species/vox/			     = 1,
 												/datum/species/slime             = 5,
-												/datum/species/akula             = 6,
+												/datum/species/akula             = 6
 											)
 
 //---- The following corporations are friendly with NanoTrasen and loosely enable trade and travel:
