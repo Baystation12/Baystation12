@@ -17,7 +17,11 @@
 	min_age = 18
 	max_age = 80
 
-	blurb = "uplifted russian sharks"
+	blurb = "Uplifted by human beings, the akula represent humanity's first major result of genetic \
+	tampering. They enjoy full rights as an independant race. Akula politics are somewhat tumultuous, \
+	divided between appreciating their close relationship with humanity and rejecting it. As a whole, \
+	the race struggles with their innatetely often aggressive nature, similar to the sharks they were \
+	uplifted from. They are well-suited to colder climates."
 
 	cold_level_1 = 200 //Default 260 - Lower is better
 	cold_level_2 = 140 //Default 200
@@ -33,6 +37,7 @@
 	flesh_color = "#99CCCC"
 	blood_color = "#3333CC"
 
+	reagent_tag = IS_UNATHI  // using unathi reagent tag, since I'd pretty much define the same things anyways
 	base_color = "#99CCCC"
 
 	heat_discomfort_level = 295
