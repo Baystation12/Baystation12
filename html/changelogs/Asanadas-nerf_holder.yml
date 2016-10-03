@@ -1,0 +1,6 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - rscdel: "You can no longer pick up maintenance drones (and other mobs) to use their access as your own. If they have an ID, remove it and then use that."
