@@ -366,7 +366,6 @@ default behaviour is:
 			return 1
 	return 0
 
-
 /mob/living/proc/can_inject(var/mob/user, var/target_zone)
 	return 1
 
