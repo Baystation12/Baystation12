@@ -13,7 +13,7 @@ var/list/VVckey_edit = list("key", "ckey")
 	set name = "Edit Ticker Variables"
 
 	if (ticker == null)
-		src << "Game hasn't started yet."
+		to_chat(src, "Game hasn't started yet.")
 	else
 		src.modify_variables(ticker)
 		feedback_add_details("admin_verb","ETV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -129,7 +129,7 @@ var/list/VVckey_edit = list("key", "ckey")
 
 /client/proc/mod_list(var/list/L, atom/O, original_name, objectvar)
 	if(!check_rights(R_VAREDIT))	return
-	if(!istype(L,/list)) src << "Not a List."
+	if(!istype(L,/list)) to_chat(src, "Not a List.")
 
 	if(L.len > 1000)
 		var/confirm = alert(src, "The list you're trying to edit is very long, continuing may crash the server.", "Warning", "Continue", "Abort")
@@ -142,7 +142,7 @@ var/list/VVckey_edit = list("key", "ckey")
 		try
 			if(!isnum(a) && L[a] != null)
 				assoc = 1 //This is pretty weak test but I can't think of anything else
-				usr << "List appears to be associative."
+				to_chat(usr, "List appears to be associative.")
 		catch {} // Builtin non-assoc lists (contents, etc.) will runtime if you try to get an assoc value of them
 
 	var/list/names = null
@@ -179,43 +179,43 @@ var/list/VVckey_edit = list("key", "ckey")
 		if(!check_rights(R_FUN|R_DEBUG)) return
 
 	if(isnull(variable))
-		usr << "Unable to determine variable type."
+		to_chat(usr, "Unable to determine variable type.")
 
 	else if(isnum(variable))
-		usr << "Variable appears to be <b>NUM</b>."
+		to_chat(usr, "Variable appears to be <b>NUM</b>.")
 		default = "num"
 		dir = 1
 
 	else if(istext(variable))
-		usr << "Variable appears to be <b>TEXT</b>."
+		to_chat(usr, "Variable appears to be <b>TEXT</b>.")
 		default = "text"
 
 	else if(isloc(variable))
-		usr << "Variable appears to be <b>REFERENCE</b>."
+		to_chat(usr, "Variable appears to be <b>REFERENCE</b>.")
 		default = "reference"
 
 	else if(isicon(variable))
-		usr << "Variable appears to be <b>ICON</b>."
+		to_chat(usr, "Variable appears to be <b>ICON</b>.")
 		variable = "\icon[variable]"
 		default = "icon"
 
 	else if(istype(variable,/atom) || istype(variable,/datum))
-		usr << "Variable appears to be <b>TYPE</b>."
+		to_chat(usr, "Variable appears to be <b>TYPE</b>.")
 		default = "type"
 
 	else if(istype(variable,/list))
-		usr << "Variable appears to be <b>LIST</b>."
+		to_chat(usr, "Variable appears to be <b>LIST</b>.")
 		default = "list"
 
 	else if(istype(variable,/client))
-		usr << "Variable appears to be <b>CLIENT</b>."
+		to_chat(usr, "Variable appears to be <b>CLIENT</b>.")
 		default = "cancel"
 
 	else
-		usr << "Variable appears to be <b>FILE</b>."
+		to_chat(usr, "Variable appears to be <b>FILE</b>.")
 		default = "file"
 
-	usr << "Variable contains: [variable]"
+	to_chat(usr, "Variable contains: [variable]")
 	if(dir)
 		switch(variable)
 			if(1)
@@ -238,7 +238,7 @@ var/list/VVckey_edit = list("key", "ckey")
 				dir = null
 
 		if(dir)
-			usr << "If a direction, direction is: [dir]"
+			to_chat(usr, "If a direction, direction is: [dir]")
 
 	var/class = "text"
 	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
@@ -354,7 +354,7 @@ var/list/VVckey_edit = list("key", "ckey")
 
 	for(var/p in forbidden_varedit_object_types)
 		if( istype(O,p) )
-			usr << "<span class='danger'>It is forbidden to edit this object's variables.</span>"
+			to_chat(usr, "<span class='danger'>It is forbidden to edit this object's variables.</span>")
 			return
 
 	var/class
@@ -363,7 +363,7 @@ var/list/VVckey_edit = list("key", "ckey")
 
 	if(param_var_name)
 		if(!(param_var_name in O.vars))
-			src << "A variable with this name ([param_var_name]) doesn't exist in this atom ([O])"
+			to_chat(src, "A variable with this name ([param_var_name]) doesn't exist in this atom ([O])")
 			return
 
 		if(param_var_name in VVlocked)
@@ -379,41 +379,41 @@ var/list/VVckey_edit = list("key", "ckey")
 
 		if(autodetect_class)
 			if(isnull(var_value))
-				usr << "Unable to determine variable type."
+				to_chat(usr, "Unable to determine variable type.")
 				class = null
 				autodetect_class = null
 			else if(isnum(var_value))
-				usr << "Variable appears to be <b>NUM</b>."
+				to_chat(usr, "Variable appears to be <b>NUM</b>.")
 				class = "num"
 				dir = 1
 
 			else if(istext(var_value))
-				usr << "Variable appears to be <b>TEXT</b>."
+				to_chat(usr, "Variable appears to be <b>TEXT</b>.")
 				class = "text"
 
 			else if(isloc(var_value))
-				usr << "Variable appears to be <b>REFERENCE</b>."
+				to_chat(usr, "Variable appears to be <b>REFERENCE</b>.")
 				class = "reference"
 
 			else if(isicon(var_value))
-				usr << "Variable appears to be <b>ICON</b>."
+				to_chat(usr, "Variable appears to be <b>ICON</b>.")
 				var_value = "\icon[var_value]"
 				class = "icon"
 
 			else if(istype(var_value,/atom) || istype(var_value,/datum))
-				usr << "Variable appears to be <b>TYPE</b>."
+				to_chat(usr, "Variable appears to be <b>TYPE</b>.")
 				class = "type"
 
 			else if(istype(var_value,/list))
-				usr << "Variable appears to be <b>LIST</b>."
+				to_chat(usr, "Variable appears to be <b>LIST</b>.")
 				class = "list"
 
 			else if(istype(var_value,/client))
-				usr << "Variable appears to be <b>CLIENT</b>."
+				to_chat(usr, "Variable appears to be <b>CLIENT</b>.")
 				class = "cancel"
 
 			else
-				usr << "Variable appears to be <b>FILE</b>."
+				to_chat(usr, "Variable appears to be <b>FILE</b>.")
 				class = "file"
 
 	else
@@ -440,43 +440,43 @@ var/list/VVckey_edit = list("key", "ckey")
 		var/dir
 		var/default
 		if(isnull(var_value))
-			usr << "Unable to determine variable type."
+			to_chat(usr, "Unable to determine variable type.")
 
 		else if(isnum(var_value))
-			usr << "Variable appears to be <b>NUM</b>."
+			to_chat(usr, "Variable appears to be <b>NUM</b>.")
 			default = "num"
 			dir = 1
 
 		else if(istext(var_value))
-			usr << "Variable appears to be <b>TEXT</b>."
+			to_chat(usr, "Variable appears to be <b>TEXT</b>.")
 			default = "text"
 
 		else if(isloc(var_value))
-			usr << "Variable appears to be <b>REFERENCE</b>."
+			to_chat(usr, "Variable appears to be <b>REFERENCE</b>.")
 			default = "reference"
 
 		else if(isicon(var_value))
-			usr << "Variable appears to be <b>ICON</b>."
+			to_chat(usr, "Variable appears to be <b>ICON</b>.")
 			var_value = "\icon[var_value]"
 			default = "icon"
 
 		else if(istype(var_value,/atom) || istype(var_value,/datum))
-			usr << "Variable appears to be <b>TYPE</b>."
+			to_chat(usr, "Variable appears to be <b>TYPE</b>.")
 			default = "type"
 
 		else if(istype(var_value,/list))
-			usr << "Variable appears to be <b>LIST</b>."
+			to_chat(usr, "Variable appears to be <b>LIST</b>.")
 			default = "list"
 
 		else if(istype(var_value,/client))
-			usr << "Variable appears to be <b>CLIENT</b>."
+			to_chat(usr, "Variable appears to be <b>CLIENT</b>.")
 			default = "cancel"
 
 		else
-			usr << "Variable appears to be <b>FILE</b>."
+			to_chat(usr, "Variable appears to be <b>FILE</b>.")
 			default = "file"
 
-		usr << "Variable contains: [var_value]"
+		to_chat(usr, "Variable contains: [var_value]")
 		if(dir)
 			switch(var_value)
 				if(1)
@@ -498,7 +498,7 @@ var/list/VVckey_edit = list("key", "ckey")
 				else
 					dir = null
 			if(dir)
-				usr << "If a direction, direction is: [dir]"
+				to_chat(usr, "If a direction, direction is: [dir]")
 
 		var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","json","color","edit referenced object","restore to default")
 		if(src.holder)
@@ -615,29 +615,46 @@ var/list/VVckey_edit = list("key", "ckey")
 		vv_set_handlers = init_subtypes(/decl/vv_set_handler)
 	for(var/vv_handler in vv_set_handlers)
 		var/decl/vv_set_handler/sh = vv_handler
-		if(sh.handle_set_var(O, variable, var_value, client))
+		if(sh.can_handle_set_var(O, variable))
+			sh.handle_set_var(O, variable, var_value, client)
 			return TRUE
 	return FALSE
 
-/decl/vv_set_handler/proc/handle_set_var(O, variable, var_value)
-	return
+/decl/vv_set_handler
+	var/handled_type
+	var/list/handled_vars
 
-/decl/vv_set_handler/location_hander/handle_set_var(O, variable, var_value, client)
-	if(!ismovable(O))
-		return
-	var/atom/movable/AM = O
+/decl/vv_set_handler/proc/can_handle_set_var(var/datum/O, variable)
+	if(!istype(O, handled_type))
+		return FALSE
+	if(!(variable in handled_vars))
+		return FALSE
+	if(istype(O))
+		if(variable in O.vars)
+			return TRUE
+		else
+			log_error("Did not find the variable '[variable]' for the instance [log_info_line(O)].")
+			return FALSE
+	return TRUE
+
+/decl/vv_set_handler/proc/handle_set_var(O, variable, var_value)
+	return FALSE
+
+/decl/vv_set_handler/location_hander
+	handled_type = /atom/movable
+	handled_vars = list("loc","x","y","z")
+
+/decl/vv_set_handler/location_hander/handle_set_var(var/atom/movable/AM, variable, var_value, client)
 	if(variable == "loc")
-		. = TRUE
 		if(istype(var_value, /atom) || isnull(var_value) || var_value == "")	// Proper null or empty string is fine, 0 is not
 			AM.forceMove(var_value)
 		else
-			client << "<span class='warning'>May only assign null or /atom types to loc.</span>"
+			to_chat(client, "<span class='warning'>May only assign null or /atom types to loc.</span>")
 	else if(variable == "x" || variable == "y" || variable == "z")
-		. = TRUE
 		if(istext(var_value))
 			var_value = text2num(var_value)
 		if(!isnum(var_value))
-			client << "<span class='warning'>May only assign numerals to x/y/z.</span>"
+			to_chat(client, "<span class='warning'>May only assign numerals to [variable].</span>")
 			return
 		var/x = AM.x
 		var/y = AM.y
@@ -654,4 +671,24 @@ var/list/VVckey_edit = list("key", "ckey")
 		if(T)
 			AM.forceMove(T)
 		else
-			client << "<span class='warning'>Unable to locate a turf at [x]-[y]-[z].</span>"
+			to_chat(client, "<span class='warning'>Unable to locate a turf at [x]-[y]-[z].</span>")
+
+/decl/vv_set_handler/opacity_hander
+	handled_type = /atom
+	handled_vars = list("opacity")
+
+/decl/vv_set_handler/opacity_hander/handle_set_var(var/atom/A, variable, var_value, client)
+	if(isnum(var_value))
+		A.set_opacity(var_value)
+	else
+		to_chat(client, "<span class='warning'>May only assign numerals to opacity.</span>")
+
+/decl/vv_set_handler/dir_hander
+	handled_type = /atom
+	handled_vars = list("dir")
+
+/decl/vv_set_handler/dir_hander/handle_set_var(var/atom/A, variable, var_value, client)
+	if (!(var_value in alldirs))
+		to_chat(client, "<span class='warning'>May only assign directional values to dir.</span>")
+	else
+		A.set_dir(var_value)
