@@ -13,7 +13,9 @@
 	sprite_sheets = list(
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
 		"Skrell" = 'icons/mob/species/skrell/helmet.dmi',
-		"Unathi" = 'icons/mob/species/unathi/helmet.dmi'
+		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
+		"Akula" = 'icons/mob/species/akula/helmet.dmi',
+		"Slime" = 'icons/mob/species/slime/helmet.dmi'
 		)
 	species_restricted = null
 
@@ -50,7 +52,9 @@
 	can_breach = 1
 	sprite_sheets = list(
 		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',
-		"Unathi" = 'icons/mob/species/unathi/suit.dmi'
+		"Unathi" = 'icons/mob/species/unathi/suit.dmi',
+		"Akula" = 'icons/mob/species/akula/suit.dmi',
+		"Slime" = 'icons/mob/species/slime/suit.dmi'
 		)
 	var/list/supporting_limbs = list() //If not-null, automatically splints breaks. Checked when removing the suit.
 
