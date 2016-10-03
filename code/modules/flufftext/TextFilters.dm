@@ -81,3 +81,67 @@ proc/Ellipsis(original_msg, chance = 50)
 	new_msg = jointext(new_words," ")
 
 	return new_msg
+/*
+RadioChat Filter.
+args:
+message - returns a distorted version of this
+distortion_chance - the chance of a filter being applied to each character.
+distortion_speed - multiplier for the chance increase.
+english_only - whether to use traditional english letters (for use in NanoUI)
+*/
+proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_speed = 1, english_only = 0)
+	var/datum/language/language
+	if(user)
+		language = user.get_default_language()
+	message = html_decode(message)
+	var/new_message = ""
+	var/distortion = 1
+	var/input_size = length(message)
+	var/lentext = length(new_message)
+	while(lentext < input_size)
+		if(!prob(distortion_chance)) continue
+		var/newletter=copytext(message, lentext, lentext+1)
+		if(newletter != " ")
+			if(prob(0.1 * distortion)) // Major cutout
+				newletter = "*zzzt*"
+				lentext += rand(1, (length(message) - lentext)) // Skip some characters
+				distortion += 1 * distortion_speed
+			else if(prob(1 * distortion)) // Minor cut out
+				newletter = "..."
+				distortion += 0.25 * distortion_speed
+			else if(prob(2 * distortion)) // Mishearing
+				if(language && language.syllables && prob(50))
+					newletter = pick(language.syllables)
+				else
+					newletter =	pick("a","e","i","o","u")
+				distortion += 0.25 * distortion_speed
+			else if(prob(1.5 * distortion)) // Mishearing
+				if(language && prob(50))
+					if(language.syllables)
+						newletter = pick (language.syllables)
+					else
+						newletter = "*"
+				else
+					if(english_only)
+						newletter += "*"
+					else
+						newletter = pick("ø", "Ð", "%", "æ", "µ")
+				distortion += 0.5 * distortion_speed
+			else if(prob(1 * distortion)) // Incomprehensible
+				newletter = pick("<", ">", "!", "$", "%", "^", "&", "*", "~", "#")
+				distortion += 0.75 * distortion_speed
+			else if(prob(0.05 * distortion)) // Total cut out
+				if(!english_only)
+					newletter = "¦w¡¼b»%> -BZZT-"
+				else
+					newletter = "srgt%$hjc< -BZZT-"
+				new_message += newletter
+				break
+		else
+			if(prob(0.2 * distortion))
+				newletter = " *crackle* "
+				distortion += 0.25 * distortion_speed
+		new_message += newletter
+		lentext += 1
+	return new_message
+
