@@ -71,3 +71,8 @@
 /datum/category_item/underwear/bottom/marine_pt_shorts
 	name = "PT shorts, Marine Corps"
 	icon_state = "marine_shorts"
+
+/datum/category_item/underwear/bottom/fundoshi
+	name = "Fundoshi"
+	icon_state = "eros_fundoshi"
+	has_color = TRUE
