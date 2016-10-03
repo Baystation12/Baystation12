@@ -104,6 +104,31 @@
 		icon_state = "resomi_mohawk"
 		species_allowed = list("Resomi")
 
+	resomi_pointy
+		name = "Resomi Pointy"
+		icon_state = "resomi_pointy"
+		species_allowed = list("Resomi")
+
+	resomi_upright
+		name = "Resomi Upright"
+		icon_state = "resomi_upright"
+		species_allowed = list("Resomi")
+
+	resomi_mane
+		name = "Resomi Mane"
+		icon_state = "resomi_mane"
+		species_allowed = list("Resomi")
+
+	resomi_droopy
+		name = "Resomi Droopy"
+		icon_state = "resomi_droopy"
+		species_allowed = list("Resomi")
+
+	resomi_mushroom
+		name = "Resomi Mushroom"
+		icon_state = "resomi_mushroom"
+		species_allowed = list("Resomi")
+
 	cut
 		name = "Cut Hair"
 		icon_state = "hair_c"
