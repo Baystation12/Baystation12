@@ -10,7 +10,7 @@ var/list/admin_datums = list()
 	var/rights       = 0
 	var/stealthy_    = STEALTH_OFF
 
-	var/datum/weakref/marked_datum_weak
+	var/weakref/marked_datum_weak
 
 	var/admincaster_screen = 0	//See newscaster.dm under machinery for a full description
 	var/datum/feed_message/admincaster_feed_message = new /datum/feed_message   //These two will act as holders.

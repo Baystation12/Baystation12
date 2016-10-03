@@ -1,4 +1,0 @@
-author: Haswell
-delete-after: True
-changes:
-  - rscadd: "Added station date to status tab."

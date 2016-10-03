@@ -72,7 +72,10 @@
 	. = ..()
 
 	if(statpanel("Lobby") && ticker)
-		stat("Game Mode:", PUBLIC_GAME_MODE)
+		if(check_rights(R_INVESTIGATE, 0, src))
+			stat("Game Mode:", "[ticker.mode || master_mode][ticker.hide_mode ? " (Secret)" : ""]")
+		else
+			stat("Game Mode:", PUBLIC_GAME_MODE)
 		var/extra_antags = list2params(additional_antag_types)
 		stat("Added Antagonists:", extra_antags ? extra_antags : "None")
 
@@ -290,7 +293,7 @@
 		src << alert("[rank] is not available. Please try another.")
 		return 0
 
-	
+
 	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, rank)
 	var/turf/spawn_turf = pick(spawnpoint.turfs)
 	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
