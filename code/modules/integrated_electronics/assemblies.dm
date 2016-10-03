@@ -33,17 +33,17 @@
 	if(!CanInteract(user, physical_state))
 		return
 
-	var/total_parts = 0
+	var/total_part_size = 0
 	var/total_complexity = 0
 	for(var/obj/item/integrated_circuit/part in contents)
-		total_parts++
+		total_part_size += part.size
 		total_complexity = total_complexity + part.complexity
 	var/HTML = list()
 
 	HTML += "<html><head><title>[src.name]</title></head><body>"
 	HTML += "<br><a href='?src=\ref[src]'>\[Refresh\]</a>  |  "
 	HTML += "<a href='?src=\ref[src];rename=1'>\[Rename\]</a><br>"
-	HTML += "[total_parts]/[max_components] ([round((total_parts / max_components) * 100, 0.1)]%) space taken up in the assembly.<br>"
+	HTML += "[total_part_size]/[max_components] ([round((total_part_size / max_components) * 100, 0.1)]%) space taken up in the assembly.<br>"
 	HTML += "[total_complexity]/[max_complexity] ([round((total_complexity / max_complexity) * 100, 0.1)]%) maximum complexity."
 	HTML += "<br><br>"
 	HTML += "Components;<br>"
@@ -100,14 +100,14 @@
 			to_chat(user, "<span class='warning'>\The [src] isn't opened, so you can't put anything inside.  Try using a crowbar.</span>")
 			return 0
 		var/obj/item/integrated_circuit/IC = I
-		var/total_parts = 0
+		var/total_part_size = 0
 		var/total_complexity = 0
 		for(var/obj/item/integrated_circuit/part in contents)
-			total_parts++
-			total_complexity = total_complexity + part.complexity
+			total_part_size += part.size
+			total_complexity += part.complexity
 
-		if( (total_parts + 1) > max_components)
-			to_chat(user, "<span class='warning'>You can't seem to add this [IC.name], since there's no more room.</span>")
+		if( (total_part_size + IC.size) > max_components)
+			to_chat(user, "<span class='warning'>You can't seem to add this [IC.name], as there's insufficient space.</span>")
 			return 0
 		if( (total_complexity + IC.complexity) > max_complexity)
 			to_chat(user, "<span class='warning'>You can't seem to add this [IC.name], since this setup's too complicated for the case.</span>")

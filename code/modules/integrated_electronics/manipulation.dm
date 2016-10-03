@@ -183,6 +183,7 @@
 					Beware: Once primed there is no aborting the process!"
 	icon_state = "grenade"
 	complexity = 30
+	size = 2
 	inputs = list("detonation time")
 	outputs = list()
 	activators = list("prime grenade")
@@ -200,6 +201,8 @@
 			to_chat(user, "<span class='warning'>There is already a grenade attached!</span>")
 		else if(user.unEquip(G, target = src))
 			attached_grenade = G
+			size += G.w_class
+			desc += " \An [attached_grenade] is attached to it!"
 			user.visible_message("<span class='warning'>\The [user] attaches \a [G] to \the [src]!</span>", "<span class='notice'>You attach \the [G] to \the [src].</span>")
 	else
 		..()
@@ -209,6 +212,8 @@
 		user.visible_message("<span class='warning'>\The [user] removes \an [attached_grenade] from \the [src]!</span>", "<span class='notice'>You remove \the [attached_grenade] from \the [src].</span>")
 		user.put_in_any_hand_if_possible(attached_grenade) || attached_grenade.dropInto(loc)
 		attached_grenade = null
+		size = initial(size)
+		desc = initial(desc)
 	else
 		..()
 

@@ -1296,6 +1296,7 @@
 #include "code\modules\integrated_electronics\converters.dm"
 #include "code\modules\integrated_electronics\coordinate.dm"
 #include "code\modules\integrated_electronics\data_transfer.dm"
+#include "code\modules\integrated_electronics\filters.dm"
 #include "code\modules\integrated_electronics\input_output.dm"
 #include "code\modules\integrated_electronics\logic.dm"
 #include "code\modules\integrated_electronics\manipulation.dm"

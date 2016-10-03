@@ -367,7 +367,6 @@
 	if(istext(ID.data) && isnum(vol.data) && isnum(frequency.data))
 		var/selected_sound = sounds[ID.data]
 		if(!selected_sound)
-			world << "No sound"
 			return
 		vol.data = Clamp(vol.data, 0, 100)
 		frequency.data = round(Clamp(frequency.data, 0, 1))

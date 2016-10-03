@@ -17,6 +17,7 @@
 	var/list/activators = list()
 	var/next_use = 0 //Uses world.time
 	var/complexity = 1 //This acts as a limitation on building machines, more resource-intensive components cost more 'space'.
+	var/size = 1       //This acts as a limitation on building machines, physically larger units take up more actual space.
 	var/cooldown_per_use = 1 SECOND
 	var/category = /obj/item/integrated_circuit // Used by the toolsets to filter out category types
 
@@ -187,6 +188,7 @@
 	HTML += "</div>"
 
 	HTML += "<br><font color='0000FF'>Complexity: [complexity]</font>"
+	HTML += "<br><font color='0000FF'>Size: [size]</font>"
 	HTML += "<br><font color='0000FF'>[extended_desc]</font>"
 
 	HTML += "</body></html>"
