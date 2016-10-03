@@ -101,8 +101,11 @@ proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_spee
 	if(input_size < 20) // Short messages get distorted too. Bit hacksy.
 		distortion += (20-input_size)/2
 	while(lentext <= input_size)
-		if(!prob(distortion_chance)) continue
 		var/newletter=copytext(message, lentext, lentext+1)
+		if(!prob(distortion_chance))
+			new_message += newletter
+			lentext += 1
+			continue
 		if(newletter != " ")
 			if(prob(0.08 * distortion)) // Major cutout
 				newletter = "*zzzt*"
@@ -144,6 +147,20 @@ proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_spee
 					newletter = "srgt%$hjc< -BZZT-"
 				new_message += newletter
 				break
+			else if(prob(2.5 * distortion)) // Sound distortion. Still recognisable, mostly.
+				switch(lowertext(newletter))
+					if("s")
+						newletter = "$"
+					if("e")
+						newletter = "€"
+					if("w")
+						newletter = "ø"
+					if("y")
+						newletter = "¡"
+					if("x")
+						newletter = "æ"
+					if("u")
+						newletter = "µ"
 		else
 			if(prob(0.2 * distortion))
 				newletter = " *crackle* "
