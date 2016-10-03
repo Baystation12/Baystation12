@@ -92,3 +92,13 @@
 /datum/category_item/underwear/undershirt/shirt_blue_striped
 	name = "Shirt, blue stripes"
 	icon_state = "shirt_stripes_s"
+
+/datum/category_item/underwear/undershirt/long_sleeves
+	name = "Long sleeved shirt"
+	icon_state = "eros_undershirt_long"
+	has_color = TRUE
+
+/datum/category_item/underwear/undershirt/lowride_shirt
+	name = "Lowride shirt"
+	icon_state = "eros_undershirt_lowride"
+	has_color = TRUE
