@@ -112,7 +112,10 @@
 					message = stars(message)
 
 		if(hard_to_hear)
-			message = stars(message)
+			if(hard_to_hear <= 5)
+				message = stars(message)
+			else // Used for compression
+				message = RadioChat(null, message, 80, 1+(hard_to_hear/10))
 
 	var/speaker_name = speaker.name
 
