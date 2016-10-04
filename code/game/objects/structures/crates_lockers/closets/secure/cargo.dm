@@ -54,11 +54,17 @@
 		new /obj/item/clothing/head/soft(src)
 		return
 
-/obj/structure/closet/secure_closet/cargotech/decktech
+/obj/structure/closet/secure_closet/decktech
 	name = "deck technician's locker"
 	req_access = list(access_cargo)
+	icon_state = "securecargo1"
+	icon_closed = "securecargo"
+	icon_locked = "securecargo1"
+	icon_opened = "securecargoopen"
+	icon_broken = "securecargobroken"
+	icon_off = "securecargooff"
 
-/obj/structure/closet/secure_closet/cargotech/decktech/New()
+/obj/structure/closet/secure_closet/decktech/New()
 	..()
 	if(prob(75))
 		new /obj/item/weapon/storage/backpack(src)
@@ -78,11 +84,17 @@
 	new /obj/item/weapon/packageWrap(src)
 	return
 
-/obj/structure/closet/secure_closet/quartermaster/deckofficer
+/obj/structure/closet/secure_closet/deckofficer
 	name = "deck officer's locker"
 	req_access = list(access_qm)
+	icon_state = "secureqm1"
+	icon_closed = "secureqm"
+	icon_locked = "secureqm1"
+	icon_opened = "secureqmopen"
+	icon_broken = "secureqmbroken"
+	icon_off = "secureqmoff"
 
-/obj/structure/closet/secure_closet/quartermaster/deckofficer/New()
+/obj/structure/closet/secure_closet/deckofficer/New()
 	..()
 	if(prob(75))
 		new /obj/item/weapon/storage/backpack(src)

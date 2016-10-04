@@ -24,11 +24,17 @@
 		new /obj/item/weapon/clipboard(src)
 		return
 
-/obj/structure/closet/secure_closet/scientist/torch
+/obj/structure/closet/secure_closet/scientist_torch
 	name = "researcher's locker"
 	req_one_access = list(access_research)
+	icon_state = "secureres1"
+	icon_closed = "secureres"
+	icon_locked = "secureres1"
+	icon_opened = "secureresopen"
+	icon_broken = "secureresbroken"
+	icon_off = "secureresoff"
 
-/obj/structure/closet/secure_closet/scientist/torch/New()
+/obj/structure/closet/secure_closet/scientist_torch/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/toxins(src)
@@ -110,9 +116,17 @@
 		new /obj/item/weapon/clipboard(src)
 		return
 
-/obj/structure/closet/secure_closet/RD/torch
+/obj/structure/closet/secure_closet/RD_torch
+	name = "research director's locker"
+	req_access = list(access_rd)
+	icon_state = "rdsecure1"
+	icon_closed = "rdsecure"
+	icon_locked = "rdsecure1"
+	icon_opened = "rdsecureopen"
+	icon_broken = "rdsecurebroken"
+	icon_off = "rdsecureoff"
 
-/obj/structure/closet/secure_closet/RD/torch/New()
+/obj/structure/closet/secure_closet/RD_torch/New()
 	..()
 	new /obj/item/clothing/suit/bio_suit/scientist(src)
 	new /obj/item/clothing/head/bio_hood/scientist(src)
@@ -143,11 +157,17 @@
 	return
 
 
-/obj/structure/closet/secure_closet/secure_closet/scientist/torch/xenoarchaeologist
+/obj/structure/closet/secure_closet/secure_closet/xenoarchaeologist_torch
 	name = "xenoarchaeologist's locker"
 	req_access = list(access_xenoarch)
+	icon_state = "secureres1"
+	icon_closed = "secureres"
+	icon_locked = "secureres1"
+	icon_opened = "secureresopen"
+	icon_broken = "secureresbroken"
+	icon_off = "secureresoff"
 
-/obj/structure/closet/secure_closet/secure_closet/scientist/torch/xenoarchaeologist/New()
+/obj/structure/closet/secure_closet/secure_closet/xenoarchaeologist_torch/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/toxins(src)

@@ -102,11 +102,17 @@
 		new /obj/item/weapon/storage/belt/medical/emt(src)
 		return
 
-/obj/structure/closet/secure_closet/medical3/torch
+/obj/structure/closet/secure_closet/medical_torch
 	name = "physician's locker"
 	req_access = list(access_medical_equip)
+	icon_state = "securemed1"
+	icon_closed = "securemed"
+	icon_locked = "securemed1"
+	icon_opened = "securemedopen"
+	icon_broken = "securemedbroken"
+	icon_off = "securemedoff"
 
-/obj/structure/closet/secure_closet/medical3/torch/New()
+/obj/structure/closet/secure_closet/medical_torch/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/medic(src)
@@ -130,11 +136,17 @@
 	new /obj/item/clothing/glasses/hud/health(src)
 	return
 
-/obj/structure/closet/secure_closet/medical3/torch/contractor
+/obj/structure/closet/secure_closet/medical_contractor
 	name = "medical contractor's locker"
 	req_access = list(access_medical_equip)
+	icon_state = "securemed1"
+	icon_closed = "securemed"
+	icon_locked = "securemed1"
+	icon_opened = "securemedopen"
+	icon_broken = "securemedbroken"
+	icon_off = "securemedoff"
 
-/obj/structure/closet/secure_closet/medical3/torch/contractor/New()
+/obj/structure/closet/secure_closet/medical3_contractor/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/medic(src)
@@ -289,9 +301,17 @@
 		return
 
 
-/obj/structure/closet/secure_closet/CMO/torch
+/obj/structure/closet/secure_closet/CMO_torch
+	name = "chief medical officer's locker"
+	req_access = list(access_cmo)
+	icon_state = "cmosecure1"
+	icon_closed = "cmosecure"
+	icon_locked = "cmosecure1"
+	icon_opened = "cmosecureopen"
+	icon_broken = "cmosecurebroken"
+	icon_off = "cmosecureoff"
 
-/obj/structure/closet/secure_closet/CMO/torch/New()
+/obj/structure/closet/secure_closet/CMO_torch/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/medic(src)

@@ -39,9 +39,17 @@
 		return
 
 
-/obj/structure/closet/secure_closet/engineering_chief/torch
+/obj/structure/closet/secure_closet/engineering_chief_torch
+	name = "chief engineer's locker"
+	req_access = list(access_ce)
+	icon_state = "securece1"
+	icon_closed = "securece"
+	icon_locked = "securece1"
+	icon_opened = "secureceopen"
+	icon_broken = "securecebroken"
+	icon_off = "secureceoff"
 
-/obj/structure/closet/secure_closet/engineering_chief/torch/New()
+/obj/structure/closet/secure_closet/engineering_chief_torch/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/industrial(src)
@@ -166,10 +174,17 @@
 		new /obj/item/taperoll/engineering(src)
 		return
 
-/obj/structure/closet/secure_closet/engineering_personal/torch
+/obj/structure/closet/secure_closet/engineering_torch
+	name = "engineer's locker"
 	req_access = list(access_engine_equip)
+	icon_state = "secureeng1"
+	icon_closed = "secureeng"
+	icon_locked = "secureeng1"
+	icon_opened = "secureengopen"
+	icon_broken = "secureengbroken"
+	icon_off = "secureengoff"
 
-/obj/structure/closet/secure_closet/engineering_personal/torch/New()
+/obj/structure/closet/secure_closet/engineering_torch/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/industrial(src)
@@ -191,11 +206,17 @@
 	new /obj/item/taperoll/atmos(src)
 	return
 
-/obj/structure/closet/secure_closet/engineering_personal/torch/contractor
+/obj/structure/closet/secure_closet/engineering_contractor
 	name = "engineering contractor's locker"
 	req_access = list(access_engine_equip)
+	icon_state = "secureeng1"
+	icon_closed = "secureeng"
+	icon_locked = "secureeng1"
+	icon_opened = "secureengopen"
+	icon_broken = "secureengbroken"
+	icon_off = "secureengoff"
 
-/obj/structure/closet/secure_closet/engineering_personal/torch/contractor/New()
+/obj/structure/closet/secure_closet/engineering_contractor/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/industrial(src)
@@ -282,11 +303,17 @@
 		new /obj/item/taperoll/atmos(src)
 		return
 
-/obj/structure/closet/secure_closet/atmos_personal/torch
+/obj/structure/closet/secure_closet/atmos_torch
 	name = "atmospherics equipment locker"
 	req_access = list(access_atmospherics)
+	icon_state = "secureatm1"
+	icon_closed = "secureatm"
+	icon_locked = "secureatm1"
+	icon_opened = "secureatmopen"
+	icon_broken = "secureatmbroken"
+	icon_off = "secureatmoff"
 
-/obj/structure/closet/secure_closet/atmos_personal/torch/New()
+/obj/structure/closet/secure_closet/atmos_torch/New()
 	..()
 	new /obj/item/clothing/under/hazard(src)
 	new /obj/item/clothing/suit/fire/firefighter(src)

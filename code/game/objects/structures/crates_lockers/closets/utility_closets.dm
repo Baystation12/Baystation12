@@ -253,8 +253,12 @@
 		new /obj/random/medical/lite(src)
 
 
-/obj/structure/closet/toolcloset/excavation
+/obj/structure/closet/excavation_torch
 	name = "excavation equipment closet"
+	desc = "It's a storage unit for excavation equipment."
+	icon_state = "toolcloset"
+	icon_closed = "toolcloset"
+	icon_opened = "toolclosetopen"
 
 /obj/structure/closet/toolcloset/excavation/New()
 		..()

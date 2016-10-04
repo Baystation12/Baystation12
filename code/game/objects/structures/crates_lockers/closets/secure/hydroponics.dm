@@ -29,9 +29,15 @@
 		return
 
 
-/obj/structure/closet/secure_closet/hydroponics/torch //done so that it has no access reqs
+/obj/structure/closet/secure_closet/hydroponics_torch //done so that it has no access reqs
 	name = "hydroponics locker"
 	req_access = list()
+	icon_state = "hydrosecure1"
+	icon_closed = "hydrosecure"
+	icon_locked = "hydrosecure1"
+	icon_opened = "hydrosecureopen"
+	icon_broken = "hydrosecurebroken"
+	icon_off = "hydrosecureoff"
 
 
 /obj/structure/closet/secure_closet/hydroponics_torch/New()

@@ -350,12 +350,12 @@
 	new /obj/item/clothing/mask/surgical(src)
 	return
 
-/obj/structure/closet/wardrobe/medic_white/torch
+/obj/structure/closet/wardrobe/medic_torch
 	name = "medical wardrobe"
 	icon_state = "white"
 	icon_closed = "white"
 
-/obj/structure/closet/wardrobe/medic_white/torch/New()
+/obj/structure/closet/wardrobe/medic_torch/New()
 	..()
 	new /obj/item/clothing/under/sterile(src)
 	new /obj/item/clothing/under/sterile(src)

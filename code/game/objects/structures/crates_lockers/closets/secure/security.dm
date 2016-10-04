@@ -34,10 +34,17 @@
 		new /obj/item/clothing/under/captainformal(src)
 		return
 
-/obj/structure/closet/secure_closet/captains/CO
+/obj/structure/closet/secure_closet/CO
 	name = "commanding officer's locker"
+	req_access = list(access_captain)
+	icon_state = "capsecure1"
+	icon_closed = "capsecure"
+	icon_locked = "capsecure1"
+	icon_opened = "capsecureopen"
+	icon_broken = "capsecurebroken"
+	icon_off = "capsecureoff"
 
-/obj/structure/closet/secure_closet/captains/CO/New()
+/obj/structure/closet/secure_closet/CO/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/captain(src)
@@ -111,7 +118,7 @@
 		new /obj/item/clothing/head/caphat/hop(src)
 		return
 
-/obj/structure/closet/secure_closet/hop/XO
+/obj/structure/closet/secure_closet/XO
 	name = "executive officer's locker"
 	req_access = list(access_hop)
 	icon_state = "twosolsecure1"
@@ -121,7 +128,7 @@
 	icon_broken = "twosolsecurebroken"
 	icon_off = "twosolsecureoff"
 
-/obj/structure/closet/secure_closet/hop/XO/New()
+/obj/structure/closet/secure_closet/XO/New()
 	..()
 	new /obj/item/clothing/glasses/sunglasses(src)
 	new /obj/item/weapon/cartridge/hop(src)
@@ -181,10 +188,17 @@
 		new /obj/item/clothing/head/beret/sec/corporate/hos(src)
 		return
 
-/obj/structure/closet/secure_closet/hos/torch
+/obj/structure/closet/secure_closet/cos
 	name = "chief of security's locker"
+	req_access = list(access_hos)
+	icon_state = "hossecure1"
+	icon_closed = "hossecure"
+	icon_locked = "hossecure1"
+	icon_opened = "hossecureopen"
+	icon_broken = "hossecurebroken"
+	icon_off = "hossecureoff"
 
-/obj/structure/closet/secure_closet/hos/torch/New()
+/obj/structure/closet/secure_closet/cos/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/security(src)
@@ -260,11 +274,17 @@
 		new /obj/item/clothing/head/beret/sec/corporate/warden(src)
 		return
 
-/obj/structure/closet/secure_closet/warden/brigofficer
+/obj/structure/closet/secure_closet/brigofficer
 	name = "brig officer's locker"
 	req_access = list(access_armory)
+	icon_state = "wardensecure1"
+	icon_closed = "wardensecure"
+	icon_locked = "wardensecure1"
+	icon_opened = "wardensecureopen"
+	icon_broken = "wardensecurebroken"
+	icon_off = "wardensecureoff"
 
-/obj/structure/closet/secure_closet/warden/brigofficer/New()
+/obj/structure/closet/secure_closet/brigofficer/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/security(src)
@@ -369,11 +389,17 @@
 		new /obj/item/device/encryptionkey/headset_med(src)
 		return
 
-/obj/structure/closet/secure_closet/security/torch
+/obj/structure/closet/secure_closet/security_torch
 	name = "master at arms' locker"
 	req_access = list(access_brig)
+	icon_state = "sec1"
+	icon_closed = "sec"
+	icon_locked = "sec1"
+	icon_opened = "secopen"
+	icon_broken = "secbroken"
+	icon_off = "secoff"
 
-/obj/structure/closet/secure_closet/security/torch/New()
+/obj/structure/closet/secure_closet/security_torch/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/security(src)
