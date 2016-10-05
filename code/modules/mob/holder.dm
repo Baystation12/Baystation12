@@ -62,16 +62,6 @@ var/list/holder_mob_icon_cache = list()
 		return loc.loc
 	return ..()
 
-/obj/item/weapon/holder/GetIdCard()
-	for(var/mob/M in contents)
-		var/obj/item/I = M.GetIdCard()
-		if(I)
-			return I
-	return null
-
-/obj/item/weapon/holder/GetAccess()
-	var/obj/item/I = GetIdCard()
-	return I ? I.GetAccess() : ..()
 
 /obj/item/weapon/holder/attack_self()
 	for(var/mob/M in contents)
