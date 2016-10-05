@@ -16,15 +16,6 @@
 			if("No")
 				return
 
-/obj/effect/mark
-		var/mark = ""
-		icon = 'icons/misc/mark.dmi'
-		icon_state = "blank"
-		anchored = 1
-		layer = 99
-		mouse_opacity = 0
-		unacidable = 1//Just to be sure.
-
 /obj/effect/beam
 	name = "beam"
 	density = 0
@@ -32,7 +23,8 @@
 	var/def_zone
 	flags = PROXMOVE
 	pass_flags = PASSTABLE
-
+	plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	layer = BEAM_PROJECTILE_LAYER
 
 /obj/effect/begin
 	name = "begin"

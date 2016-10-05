@@ -9,6 +9,7 @@
 	if(direction)
 		animation.set_dir(direction)
 	animation.icon = a_icon
+	animation.plane = target.plane
 	animation.layer = target.layer + 0.1
 	if(a_icon_state)
 		animation.icon_state = a_icon_state

@@ -116,7 +116,8 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "1"
 	light_color = "#ED9200"
-	layer = TURF_LAYER
+	plane = ABOVE_TURF_PLANE
+	layer = TURF_FIRE_LAYER
 
 	var/firelevel = 1 //Calculated by gas_mixture.calculate_firelevel()
 

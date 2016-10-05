@@ -1,4 +1,5 @@
 /turf/space
+	plane = SPACE_PLANE
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"
 	icon_state = "0"
