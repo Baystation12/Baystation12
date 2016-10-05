@@ -67,7 +67,7 @@
 	if(istype(signaler) && signaler.deadman)
 		log_and_message_admins("has triggered a signaler deadman's switch")
 		src.visible_message("<span class='warning'>[src] triggers their deadman's switch!</span>")
-		signaler.signal()
+		signaler.activate()
 
 	//Stun Beams
 	if(P.taser_effect)

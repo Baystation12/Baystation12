@@ -174,7 +174,7 @@
 			else
 				user << "<span class='notice'>You need at least five metal sheets to complete this task.</span>"
 			return
-	else if(istype(W,/obj/item/device/transfer_valve))
+	else if(istype(W,/obj/item/device/assembly/transfer_valve))
 		if(buildstate == 4)
 			user.drop_from_inventory(W)
 			qdel(W)

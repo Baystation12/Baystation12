@@ -165,7 +165,7 @@
 	name = "box of pepperspray grenades"
 	desc = "A box containing 7 tear gas grenades. A gas mask is printed on the label.<br> WARNING: Exposure carries risk of serious injury or death. Keep away from persons with lung conditions."
 	icon_state = "flashbang"
-	startswith = list(/obj/item/weapon/grenade/chem_grenade/teargas = 7)
+	startswith = list(/obj/item/device/assembly_holder/grenade/chem_grenade/teargas = 7)
 
 /obj/item/weapon/storage/box/emps
 	name = "box of emp grenades"
@@ -202,7 +202,7 @@
 	desc = "A box containing 5 highly experimental supermatter grenades."
 	icon_state = "radbox"
 	startswith = list(/obj/item/weapon/grenade/supermatter = 5)
-    
+
 /obj/item/weapon/storage/box/trackimp
 	name = "boxed tracking implant kit"
 	desc = "Box full of scum-bag tracking utensils."

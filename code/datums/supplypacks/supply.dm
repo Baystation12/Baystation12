@@ -29,7 +29,7 @@
 					/obj/item/device/lightreplacer,
 					/obj/item/weapon/reagent_containers/spray/cleaner,
 					/obj/item/weapon/reagent_containers/glass/rag,
-					/obj/item/weapon/grenade/chem_grenade/cleaner = 3,
+					/obj/item/device/assembly_holder/grenade/chem_grenade/cleaner = 3,
 					/obj/structure/mopbucket)
 	cost = 10
 	containername = "\improper Janitorial supplies"

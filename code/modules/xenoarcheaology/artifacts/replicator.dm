@@ -62,8 +62,8 @@
 	/obj/item/weapon/wirecutters,
 	/obj/item/weapon/wrench,
 	/obj/item/weapon/screwdriver,
-	/obj/item/weapon/grenade/chem_grenade/cleaner,
-	/obj/item/weapon/grenade/chem_grenade/metalfoam)
+	/obj/item/device/assembly_holder/grenade/chem_grenade/cleaner,
+	/obj/item/device/assembly_holder/grenade/chem_grenade/metalfoam)
 
 	var/quantity = rand(5, 15)
 	for(var/i=0, i<quantity, i++)

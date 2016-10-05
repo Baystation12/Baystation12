@@ -581,13 +581,6 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/gun/energy/temperature
 	sort_string = "TABAC"
 
-/datum/design/item/weapon/large_grenade
-	id = "large_Grenade"
-	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
-	materials = list(DEFAULT_WALL_MATERIAL = 3000)
-	build_path = /obj/item/weapon/grenade/chem_grenade/large
-	sort_string = "TACAA"
-
 /datum/design/item/weapon/flora_gun
 	id = "flora_gun"
 	req_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_POWER = 3)

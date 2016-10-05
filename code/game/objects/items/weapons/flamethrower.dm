@@ -94,7 +94,6 @@
 
 	if(isigniter(W))
 		var/obj/item/device/assembly/igniter/I = W
-		if(I.secured)	return
 		if(igniter)		return
 		user.drop_item()
 		I.loc = src
@@ -207,7 +206,6 @@
 	weldtool = new /obj/item/weapon/weldingtool(src)
 	weldtool.status = 0
 	igniter = new /obj/item/device/assembly/igniter(src)
-	igniter.secured = 0
 	status = 1
 	update_icon()
 	return

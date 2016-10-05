@@ -6,7 +6,7 @@
 	contains = list(/obj/item/weapon/storage/box/emps,
 					/obj/item/weapon/grenade/smokebomb = 3,
 					/obj/item/weapon/pen/reagent/paralysis,
-					/obj/item/weapon/grenade/chem_grenade/incendiary)
+					/obj/item/device/assembly_holder/grenade/chem_grenade/incendiary)
 	cost = 20
 	containername = "\improper Special Ops crate"
 	hidden = 1

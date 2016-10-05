@@ -498,15 +498,12 @@
 	if(type != /obj/item/clothing/head/helmet) //Eh, but we don't want people making secbots out of space helmets.
 		return
 
-	if(S.secured)
-		qdel(S)
-		var/obj/item/weapon/secbot_assembly/A = new /obj/item/weapon/secbot_assembly
-		user.put_in_hands(A)
-		user << "You add the signaler to the helmet."
-		user.drop_from_inventory(src)
-		qdel(src)
-	else
-		return
+	qdel(S)
+	var/obj/item/weapon/secbot_assembly/A = new /obj/item/weapon/secbot_assembly
+	user.put_in_hands(A)
+	user << "You add the signaler to the helmet."
+	user.drop_from_inventory(src)
+	qdel(src)
 
 /obj/item/weapon/secbot_assembly
 	name = "helmet/signaler assembly"

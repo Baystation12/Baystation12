@@ -25,6 +25,7 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 	var/row_options2 = " width='260px'"
 	var/window_x = 370
 	var/window_y = 470
+	var/can_diagnose = 0
 
 /datum/wires/New(var/atom/holder)
 	..()
@@ -98,7 +99,10 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 		html += "<td[row_options2]>"
 		html += "<A href='?src=\ref[src];action=1;cut=[colour]'>[IsColourCut(colour) ? "Mend" :  "Cut"]</A>"
 		html += " <A href='?src=\ref[src];action=1;pulse=[colour]'>Pulse</A>"
-		html += " <A href='?src=\ref[src];action=1;attach=[colour]'>[IsAttached(colour) ? "Detach" : "Attach"] Signaller</A></td></tr>"
+		html += " <A href='?src=\ref[src];action=1;attach=[colour]'>[IsAttached(colour) ? "Detach" : "Attach"] Signaller</A>"
+		if(can_diagnose)
+			html += " <A href='?src=\ref[src];action=1;diagnose=[colour]'>Diagnose</A>"
+		html += "</td></tr>"
 	html += "</table>"
 	html += "</div>"
 
@@ -126,6 +130,13 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 				if(istype(I, /obj/item/device/multitool))
 					var/colour = href_list["pulse"]
 					PulseColour(colour)
+				else
+					L << "<span class='error'>You need a multitool!</span>"
+
+			else if(href_list["diagnose"])
+				if(istype(I, /obj/item/device/multitool))
+					var/colour = href_list["pulse"]
+					DiagnoseColour(colour)
 				else
 					L << "<span class='error'>You need a multitool!</span>"
 
@@ -198,6 +209,9 @@ var/const/POWER = 8
 
 /datum/wires/proc/PulseColour(var/colour)
 	PulseIndex(GetIndex(colour))
+
+/datum/wires/proc/DiagnoseColour(var/colour)
+	return 1
 
 /datum/wires/proc/PulseIndex(var/index)
 	if(IsIndexCut(index))
