@@ -32,7 +32,8 @@ var/list/mechtoys = list(
 	icon_state = "plasticflaps"
 	density = 0
 	anchored = 1
-	layer = 4
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 	explosion_resistance = 5
 	var/list/mobs_can_pass = list(
 		/mob/living/carbon/slime,

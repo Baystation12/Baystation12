@@ -52,6 +52,7 @@
 	desc = base_desc
 	icon = base_icon
 	icon_state = base_icon_state
+	plane = PLATING_PLANE
 
 	if(flooring)
 		if(flooring.build_type && place_product)
@@ -70,3 +71,8 @@
 /turf/simulated/floor/levelupdate()
 	for(var/obj/O in src)
 		O.hide(O.hides_under_flooring() && src.flooring)
+
+	if(flooring)
+		reset_plane_and_layer()
+	else
+		plane = PLATING_PLANE

@@ -56,7 +56,8 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 		animation.density = 0
 		animation.anchored = 1
 		animation.icon = 'icons/effects/effects.dmi'
-		animation.layer = 3
+		animation.plane = HUMAN_PLANE
+		animation.layer = MOB_LAYER
 		animation.master = summoned_object
 		if(istype(summoned_object,/mob)) //we want them to NOT attack us.
 			var/mob/M = summoned_object

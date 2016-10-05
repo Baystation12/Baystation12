@@ -49,13 +49,17 @@
 	for(var/spell in construct_spells)
 		src.add_spell(new spell, "const_spell_ready")
 	updateicon()
-	add_glow()
 
 /mob/living/simple_animal/construct/death()
 	new /obj/item/weapon/ectoplasm (src.loc)
 	..(null,"collapses in a shattered heap.")
 	ghostize()
 	qdel(src)
+
+/mob/living/simple_animal/construct/updateicon()
+	overlays.Cut()
+	..()
+	add_glow()
 
 /mob/living/simple_animal/construct/attack_generic(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))
@@ -243,12 +247,10 @@
 
 ////////////////Glow//////////////////
 /mob/living/simple_animal/construct/proc/add_glow()
-	overlays = 0
-	var/overlay_layer = LIGHTING_LAYER+0.1
-	if(layer != MOB_LAYER)
-		overlay_layer=TURF_LAYER+0.2
-
-	overlays += image(icon,"glow-[icon_state]",overlay_layer)
+	var/image/eye_glow = image(icon,"glow-[icon_state]")
+	eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	eye_glow.layer = EYE_GLOW_LAYER
+	overlays += eye_glow
 	set_light(2, -2, l_color = "#FFFFFF")
 
 ////////////////HUD//////////////////////

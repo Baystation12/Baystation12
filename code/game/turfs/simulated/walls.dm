@@ -216,7 +216,8 @@
 	O.icon_state = "2"
 	O.anchored = 1
 	O.density = 1
-	O.layer = 5
+	O.plane = ABOVE_TURF_PLANE
+	O.layer = TURF_FIRE_LAYER
 
 	src.ChangeTurf(/turf/simulated/floor/plating)
 
