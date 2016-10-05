@@ -1,0 +1,6 @@
+author: Chinsky
+
+delete-after: True
+
+changes: 
+  - rscadd: "Can now use chopped off arms/hands to leave fingerprints on things. Keep it in your active hand, and its fingerpints will be used."
