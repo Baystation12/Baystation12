@@ -2,6 +2,7 @@
 
 /obj/machinery/bot
 	icon = 'icons/obj/aibots.dmi'
+	plane = MOB_PLANE
 	layer = MOB_LAYER
 	light_range = 3
 	use_power = 0

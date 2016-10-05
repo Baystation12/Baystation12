@@ -265,7 +265,7 @@ var/list/tape_roll_applications = list()
 		var/turf/T = get_turf(A)
 		var/obj/item/tape/P = new tape_type(T)
 		P.update_icon()
-		P.layer = 3.2
+		P.layer = ABOVE_DOOR_LAYER
 		user << "<span class='notice'>You finish placing \the [src].</span>"
 
 	if (istype(A, /turf/simulated/floor) ||istype(A, /turf/unsimulated/floor))
@@ -315,10 +315,11 @@ var/list/tape_roll_applications = list()
 
 /obj/item/tape/proc/lift(time)
 	lifted = 1
-	layer = 8
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 	spawn(time)
 		lifted = 0
-		layer = initial(layer)
+		reset_plane_and_layer()
 
 // Returns a list of all tape objects connected to src, including itself.
 /obj/item/tape/proc/gettapeline()

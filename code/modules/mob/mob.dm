@@ -10,7 +10,9 @@
 			qdel(spell_master)
 		remove_screen_obj_references()
 		for(var/atom/movable/AM in client.screen)
-			qdel(AM)
+			var/obj/screen/screenobj = AM
+			if(!istype(screenobj) || !screenobj.globalscreen)
+				qdel(screenobj)
 		client.screen = list()
 	if(mind && mind.current == src)
 		spellremove(src)
@@ -452,16 +454,18 @@
 		prefs.save_preferences()
 		winset(src, "rpane.changelog", "background-color=none;font-style=;")
 
-/mob/verb/observe()
+/mob/new_player/verb/observe()
 	set name = "Observe"
 	set category = "OOC"
+	
+	if(!(initialization_stage&INITIALIZATION_COMPLETE))
+		to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
+		return
+	
 	var/is_admin = 0
 
 	if(client.holder && (client.holder.rights & R_ADMIN))
 		is_admin = 1
-	else if(stat != DEAD || istype(src, /mob/new_player))
-		usr << "\blue You must be observing to use this!"
-		return
 
 	if(is_admin && stat == DEAD)
 		is_admin = 0
@@ -756,6 +760,7 @@
 		if(r_hand) unEquip(r_hand)
 	else
 		density = initial(density)
+	reset_layer()
 
 	for(var/obj/item/weapon/grab/G in grabbed_by)
 		if(G.state >= GRAB_AGGRESSIVE)
@@ -773,6 +778,11 @@
 
 	return canmove
 
+/mob/proc/reset_layer()
+	if(lying)
+		plane = LYING_MOB_PLANE
+	else
+		plane = MOB_PLANE
 
 /mob/proc/facedir(var/ndir)
 	if(!canface() || client.moving || world.time < client.move_delay)

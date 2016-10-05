@@ -3,7 +3,6 @@
 	icon = 'icons/turf/shuttle.dmi'
 	thermal_conductivity = 0.05
 	heat_capacity = 0
-	layer = 2
 
 /turf/simulated/shuttle/wall
 	name = "wall"
@@ -33,7 +32,9 @@
 	if(corner_overlay)
 		overlays -= corner_overlay
 	else
-		corner_overlay = image(icon = 'icons/turf/shuttle.dmi', icon_state = corner_overlay_state, layer = src.layer, dir = src.dir)
+		corner_overlay = image(icon = 'icons/turf/shuttle.dmi', icon_state = corner_overlay_state, dir = src.dir)
+		corner_overlay.plane = plane
+		corner_overlay.layer = layer
 	overlays += corner_overlay
 
 //Predefined Shuttle Corners
