@@ -46,9 +46,15 @@ var/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1
 	holder = null
 	. = ..()
 
+/datum/proximity_trigger/proc/is_active()
+	return all_turfs_.len
+
 /datum/proximity_trigger/proc/set_range(var/new_range)
+	if(range_ == new_range)
+		return
 	range_ = new_range
-	register_turfs()
+	if(is_active())
+		register_turfs()
 
 /datum/proximity_trigger/proc/register_turfs()
 	moved_event.register(holder, src, /datum/proximity_trigger/proc/on_holder_moved)

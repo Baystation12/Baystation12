@@ -28,8 +28,6 @@
 	qdel(proximity_trigger)
 	proximity_trigger = null
 
-	world << beams.len
-
 	. = ..()
 
 /obj/item/device/assembly/infra/activate()
@@ -43,10 +41,8 @@
 		return
 	on = new_on
 	if(on)
-		world << "Enabling"
 		proximity_trigger.register_turfs()
 	else
-		world << "Disabling"
 		proximity_trigger.unregister_turfs()
 	update_icon()
 
@@ -123,13 +119,16 @@
 
 /obj/item/device/assembly/infra/proc/on_visibility_change(var/list/old_turfs, var/list/new_turfs)
 	seen_turfs = new_turfs
-	create_and_update_beams(dir, visible, seen_turfs, beams)
+	update_beams()
 
-/proc/create_and_update_beams(var/dir, var/visible, var/seen_turfs, var/list/existing_beams)
-	if(!on)
+/obj/item/device/assembly/infra/proc/update_beams()
+	create_update_and_delete_beams(on, visible, dir, seen_turfs, beams)
+
+/proc/create_update_and_delete_beams(var/active, var/visible, var/dir, var/list/seen_turfs, var/list/existing_beams)
+	if(!active)
 		for(var/b in existing_beams)
 			qdel(b)
-		beams.Cut()
+		existing_beams.Cut()
 		return
 
 	var/list/turfs_that_need_beams = seen_turfs.Copy()
