@@ -200,7 +200,7 @@
 		else
 			user.remove_from_mob(src)
 		src.master = F
-		src.reset_plane_and_layer()
+		src.layer = initial(src.layer)
 		user.remove_from_mob(src)
 		if (user.client)
 			user.client.screen -= src

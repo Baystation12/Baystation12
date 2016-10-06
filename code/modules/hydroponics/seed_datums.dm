@@ -1191,7 +1191,7 @@
 	name = "xenomorph"
 	seed_name = "alien weed"
 	display_name = "alien weeds"
-	force_layer = OBJ_LAYER
+	force_layer = 3
 	chems = list("phoron" = list(1,3))
 
 /datum/seed/xenomorph/New()

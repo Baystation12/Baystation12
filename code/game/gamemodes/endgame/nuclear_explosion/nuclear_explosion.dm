@@ -10,8 +10,7 @@
 	cinematic = new
 	cinematic.icon = 'icons/effects/station_explosion.dmi'
 	cinematic.icon_state = "station_intact"
-	cinematic.plane = HUD_PLANE
-	cinematic.layer = HUD_ABOVE_ITEM_LAYER
+	cinematic.layer = CINEMA_LAYER
 	cinematic.mouse_opacity = 2
 	cinematic.screen_loc = "1,0"
 

@@ -352,7 +352,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		src.r_hand = null
 		update_inv_r_hand()
 
-	W.hud_layerise()
+	W.layer = SCREEN_LAYER+0.01
 	for(var/s in species.hud.gear)
 		var/list/gear = species.hud.gear[s]
 		if(gear["slot"] == slot)

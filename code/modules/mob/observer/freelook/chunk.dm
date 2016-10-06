@@ -22,8 +22,7 @@
 /datum/obfuscation/proc/get_obfuscation(var/turf/T)
 	var/image/obfuscation = obfuscation_images[T]
 	if(!obfuscation)
-		obfuscation = image(icon, T, icon_state)
-		obfuscation.plane = OBSCURITY_PLANE
+		obfuscation = image(icon, T, icon_state, OBFUSCATION_LAYER)
 		if(!obfuscation_underlay)
 			// Creating a new icon of a fairly common icon state, adding some random color to prevent address searching, and hoping being static kills memory locality
 			var/turf/floor = /turf/simulated/floor/tiled

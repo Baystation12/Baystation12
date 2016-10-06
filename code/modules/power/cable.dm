@@ -34,8 +34,7 @@ var/list/possible_cable_coil_colours
 	icon_state = "0-1"
 	var/d1 = 0
 	var/d2 = 1
-	plane = ABOVE_PLATING_PLANE
-	layer = WIRE_LAYER
+	layer = 2.44 //Just below unary stuff, which is at 2.45 and above pipes, which are at 2.4
 	color = COLOR_RED
 	var/obj/machinery/power/breakerbox/breaker_box
 

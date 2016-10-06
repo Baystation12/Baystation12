@@ -1,4 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes:
-  - tweak: "Objects are now layered using both planes and layers. Visual layering issues are expected, please report them."

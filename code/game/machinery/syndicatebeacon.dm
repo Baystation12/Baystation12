@@ -84,8 +84,7 @@
 
 	anchored = 0
 	density = 1
-	plane = ABOVE_OBJ_PLANE
-	layer = ABOVE_OBJ_LAYER //so people can't hide it and it's REALLY OBVIOUS
+	layer = MOB_LAYER - 0.1 //so people can't hide it and it's REALLY OBVIOUS
 	stat = 0
 
 	var/active = 0

@@ -5,7 +5,7 @@
 	density = 1
 	w_class = 3
 
-	layer = SIDE_WINDOW_LAYER
+	layer = 3.2//Just above doors
 	anchored = 1.0
 	flags = ON_BORDER
 	var/maxhealth = 14.0
@@ -399,9 +399,7 @@
 	//A little cludge here, since I don't know how it will work with slim windows. Most likely VERY wrong.
 	//this way it will only update full-tile ones
 	overlays.Cut()
-	layer = FULL_WINDOW_LAYER
 	if(!is_fulltile())
-		layer = SIDE_WINDOW_LAYER
 		icon_state = "[basestate]"
 		return
 	var/list/dirs = list()
@@ -480,10 +478,6 @@
 	//player-constructed windows
 	if (constructed)
 		state = 0
-		
-/obj/structure/window/initialize()
-	..()
-	layer = is_full_window() ? FULL_WINDOW_LAYER : SIDE_WINDOW_LAYER
 
 /obj/structure/window/reinforced/full
     dir = 5

@@ -66,6 +66,10 @@
 	var/supernatural = 0
 	var/purge = 0
 
+/mob/living/simple_animal/New()
+	..()
+	verbs -= /mob/verb/observe
+
 /mob/living/simple_animal/updatehealth()
 	return
 

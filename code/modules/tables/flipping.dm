@@ -84,8 +84,7 @@
 
 	set_dir(direction)
 	if(dir != NORTH)
-		plane = ABOVE_HUMAN_PLANE
-		layer = ABOVE_HUMAN_LAYER
+		layer = 5
 	climbable = 0 //flipping tables allows them to be used as makeshift barriers
 	flipped = 1
 	flags |= ON_BORDER
@@ -103,7 +102,7 @@
 	verbs -=/obj/structure/table/proc/do_put
 	verbs +=/obj/structure/table/verb/do_flip
 
-	reset_plane_and_layer()
+	layer = initial(layer)
 	flipped = 0
 	climbable = initial(climbable)
 	flags &= ~ON_BORDER

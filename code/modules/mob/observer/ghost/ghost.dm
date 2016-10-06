@@ -39,10 +39,21 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 	var/turf/T
 	if(ismob(body))
-		T = get_turf(body)               //Where is the body located?
-		attack_logs_ = body.attack_logs_ //preserve our attack logs by copying them to our ghost
+		T = get_turf(body)				//Where is the body located?
+		attack_logs_ = body.attack_logs_	//preserve our attack logs by copying them to our ghost
 
-		set_appearance(body)
+		if (ishuman(body))
+			var/mob/living/carbon/human/H = body
+			icon = H.stand_icon
+			overlays = H.overlays_standing
+		else
+			icon = body.icon
+			icon_state = body.icon_state
+			overlays = body.overlays
+
+		alpha = 127
+
+		gender = body.gender
 		if(body.mind && body.mind.name)
 			name = body.mind.name
 		else
@@ -651,16 +662,3 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(check_rights(R_ADMIN|R_FUN, 0, src))
 		return FALSE
 	return TRUE
-
-/mob/observer/ghost/proc/set_appearance(var/mob/target)
-	var/pre_alpha = alpha
-	var/pre_plane = plane
-	var/pre_layer = layer
-	var/pre_invis = invisibility
-
-	appearance = target
-	appearance_flags |= initial(appearance_flags)
-	alpha = pre_alpha
-	plane = pre_plane
-	layer = pre_layer
-	invisibility = pre_invis

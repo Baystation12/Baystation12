@@ -1,4 +1,3 @@
-#define WORLD_ICON_SIZE 32
 
 /var/game_id = null
 /hook/global_init/proc/generate_gameid()
@@ -71,7 +70,6 @@
 	area = /area/space
 	view = "15x15"
 	cache_lifespan = 0	//stops player uploaded stuff from being kept in the rsc past the current session
-	icon_size = WORLD_ICON_SIZE
 
 
 #define RECOMMENDED_VERSION 509

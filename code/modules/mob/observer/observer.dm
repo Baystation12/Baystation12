@@ -5,9 +5,8 @@ var/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 
 /mob/observer
 	density = 0
-	alpha = 127
-	plane = OBSERVER_PLANE
 	invisibility = INVISIBILITY_OBSERVER
+	layer = FLY_LAYER
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	sight = SEE_TURFS|SEE_MOBS|SEE_OBJS|SEE_SELF
 	simulated = FALSE
@@ -19,8 +18,6 @@ var/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 /mob/observer/New()
 	..()
 	ghost_image = image(src.icon,src)
-	ghost_image.plane = plane
-	ghost_image.layer = layer
 	ghost_image.appearance = src
 	ghost_image.appearance_flags = RESET_ALPHA
 	if(ghost_image_flag & GHOST_IMAGE_DARKNESS)
@@ -82,4 +79,3 @@ mob/observer/check_airflow_movable()
 		inertia_dir = 0
 		throwing = 0
 		src << "<span class='notice'>You cannot move further in this direction.</span>"
-

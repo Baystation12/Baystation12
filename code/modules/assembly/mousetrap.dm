@@ -44,7 +44,7 @@
 			visible_message("\red <b>SPLAT!</b>")
 			M.splat()
 		playsound(target.loc, 'sound/effects/snap.ogg', 50, 1)
-		reset_plane_and_layer()
+		layer = MOB_LAYER - 0.2
 		armed = 0
 		update_icon()
 		pulse(0)
@@ -120,9 +120,8 @@
 	set name = "Hide"
 	set category = "Object"
 
-	if(usr.incapacitated())
+	if(usr.stat)
 		return
 
-	plane = ABOVE_TURF_PLANE
-	layer = MOUSETRAP_LAYER
-	to_chat(usr, "<span class='notice'>You hide [src].</span>")
+	layer = TURF_LAYER+0.2
+	usr << "<span class='notice'>You hide [src].</span>"

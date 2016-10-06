@@ -8,7 +8,7 @@
 	opacity = 0
 	anchored = 1
 	density = 0
-	layer = ABOVE_OBJ_LAYER
+	layer = OBJ_LAYER + 0.9
 	mouse_opacity = 0
 	animate_movement = 0
 	var/amount = 3

@@ -6,15 +6,14 @@
 	anchored = 1
 	density = 1
 	opacity = 1
-	plane = OBJ_PLANE
-	layer = ABOVE_DOOR_LAYER
+	layer = TURF_LAYER + 0.1
 	var/deploying
 	var/deployed
 
 /obj/structure/droppod_door/New(var/newloc, var/autoopen)
 	..(newloc)
 	if(autoopen)
-		spawn(10 SECONDS)
+		spawn(100)
 			deploy()
 
 /obj/structure/droppod_door/attack_ai(var/mob/user)

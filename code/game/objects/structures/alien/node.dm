@@ -3,7 +3,7 @@
 	desc = "Some kind of strange, pulsating structure."
 	icon_state = "weednode"
 	health = 100
-	layer = ABOVE_OBJ_LAYER
+	layer = 3.1
 
 /obj/structure/alien/node/New()
 	..()

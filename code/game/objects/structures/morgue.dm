@@ -136,7 +136,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "morguet"
 	density = 1
-	layer = BELOW_OBJ_LAYER
+	layer = 2.0
 	var/obj/structure/morgue/connected = null
 	anchored = 1
 	throwpass = 1
@@ -370,7 +370,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "cremat"
 	density = 1
-	layer = BELOW_OBJ_LAYER
+	layer = 2.0
 	var/obj/structure/crematorium/connected = null
 	anchored = 1
 	throwpass = 1

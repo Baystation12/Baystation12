@@ -4,8 +4,7 @@
 	anchored = 1
 	density = 1
 	pixel_x = -16
-	plane = ABOVE_HUMAN_PLANE
-	layer = ABOVE_HUMAN_LAYER
+	layer = 9
 
 /obj/structure/flora/tree/pine
 	name = "pine tree"
@@ -78,8 +77,7 @@
 	name = "potted plant"
 	icon = 'icons/obj/plants.dmi'
 	icon_state = "plant-26"
-	plane = ABOVE_HUMAN_PLANE
-	layer = ABOVE_HUMAN_LAYER
+	layer = MOB_LAYER + 0.1
 
 //newbushes
 
@@ -205,8 +203,7 @@
 	desc = "Really brings the room together."
 	icon = 'icons/obj/plants.dmi'
 	icon_state = "plant-01"
-	plane = ABOVE_HUMAN_PLANE
-	layer = ABOVE_HUMAN_LAYER
+	layer = MOB_LAYER + 0.1
 
 /obj/structure/flora/pottedplant/large
 	name = "large potted plant"

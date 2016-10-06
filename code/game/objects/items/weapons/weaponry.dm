@@ -111,12 +111,11 @@
 
 /obj/effect/energy_net/post_buckle_mob(mob/living/M)
 	if(buckled_mob)
-		plane = ABOVE_HUMAN_PLANE
-		layer = ABOVE_HUMAN_LAYER
+		layer = M.layer+1
 		visible_message("\The [M] was caught in an energy net!")
 	else
 		M << "You are free of the net!"
-		reset_plane_and_layer()
+		layer = initial(layer)
 		qdel(src)
 
 /obj/effect/energy_net/proc/healthcheck()
