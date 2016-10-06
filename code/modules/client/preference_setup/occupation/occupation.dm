@@ -56,13 +56,25 @@
 /datum/category_item/player_setup_item/occupation/content(mob/user, limit = 16, list/splitJobs, splitLimit = 1)
 	if(!job_master)
 		return
+	
+	var/datum/mil_branch/player_branch = null
+	var/datum/mil_rank/player_rank = null
 
 	. = list()
 	. += "<tt><center>"
 	. += "<b>Choose occupation chances</b><br>Unavailable occupations are crossed out.<br>"
 	if(using_map.flags & MAP_HAS_BRANCH)
+		// if the branch is set to something not available on the map, 
+		// all the jobs that ask for a branch will be unavailable.
+		
+		if(pref.char_branch in mil_branches)
+			player_branch = mil_branches[pref.char_branch]
+					
 		. += "Branch of Service: <a href='?src=\ref[src];char_branch=1'>[pref.char_branch]</a>	"
 	if(using_map.flags & MAP_HAS_RANK)
+		if(player_branch && (pref.char_rank in player_branch.ranks))
+			player_rank = player_branch.ranks[pref.char_rank]
+		
 		. += "Rank: <a href='?src=\ref[src];char_rank=1'>[pref.char_rank]</a>	"
 	. += "<br>"
 	. += "<table width='100%' cellpadding='1' cellspacing='0'><tr><td width='20%'>" // Table within a table for alignment, also allows you to easily add more columns.
@@ -102,9 +114,23 @@
 		if(job.minimum_character_age && user.client && (user.client.prefs.age < job.minimum_character_age))
 			. += "<del>[rank]</del></td><td> \[MINIMUM CHARACTER AGE: [job.minimum_character_age]]</td></tr>"
 			continue
-		if((job.allowed_branches && !(pref.char_branch in job.allowed_branches)) || (job.allowed_ranks && !(pref.char_rank in job.allowed_ranks)))
-			. += "<del>[rank]</del></td><td><b> \[NOT AVAILABLE]</b></td></tr>"
-			continue
+		if(job.allowed_branches)
+			if(!player_branch)
+				. += "<del>[rank]</del></td><td><b> \[BRANCH RESTRICTED]</b></td></tr>"
+				continue
+			if(!is_type_in_list(player_branch, job.allowed_branches))
+				. += "<del>[rank]</del></td><td><b> \[NOT FOR [player_branch.name_short]]</b></td></tr>"
+				continue
+			
+		if(job.allowed_ranks)
+			if(!player_rank)
+				. += "<del>[rank]</del></td><td><b> \[RANK RESTRICTED]</b></td></tr>"
+				continue
+				
+			if(!is_type_in_list(player_rank, job.allowed_ranks))
+				. += "<del>[rank]</del></td><td><b> \[NOT FOR [player_rank.name_short || player_rank.name]]</b></td></tr>"
+				continue
+				
 		if(("Assistant" in pref.job_low) && (rank != "Assistant"))
 			. += "<font color=grey>[rank]</font></td><td></td></tr>"
 			continue
@@ -177,6 +203,23 @@
 	else if(href_list["set_job"])
 		if(SetJob(user, href_list["set_job"])) return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 
+	else if(href_list["char_branch"])
+		var/choice = input(user, "Choose your branch of service.", "Character Preference", pref.char_branch) as null|anything in spawn_mil_branches
+		if(choice && CanUseTopic(user))
+			pref.char_branch = choice
+			pref.char_rank = "Unset"
+			return TOPIC_REFRESH
+
+	else if(href_list["char_rank"])
+		var/choice = null
+		if(pref.char_branch in mil_branches)
+			var/datum/mil_branch/current_branch = mil_branches[pref.char_branch]
+			choice = input(user, "Choose your rank.", "Character Preference", pref.char_rank) as null|anything in current_branch.spawn_ranks
+			
+		if(choice && CanUseTopic(user))
+			pref.char_rank = choice
+			return TOPIC_REFRESH
+	
 	return ..()
 
 /datum/category_item/player_setup_item/occupation/proc/SetPlayerAltTitle(datum/job/job, new_title)
