@@ -56,24 +56,6 @@
 	new /obj/item/clothing/head/chefhat(src)
 
 /*
- * Torch Chef
- */
-/obj/structure/closet/chefcloset_torch
-	name = "chef's closet"
-	desc = "It's a storage unit for foodservice equipment."
-	icon_state = "black"
-	icon_closed = "black"
-
-/obj/structure/closet/chefcloset_torch/New()
-	..()
-	new /obj/item/device/radio/headset/headset_service(src)
-	new /obj/item/weapon/storage/box/mousetraps(src)
-	new /obj/item/weapon/storage/box/mousetraps(src)
-	new /obj/item/clothing/under/rank/chef(src)
-	new /obj/item/clothing/head/chefhat(src)
-	new /obj/item/clothing/suit/chef/classic(src)
-
-/*
  * Janitor
  */
 /obj/structure/closet/jcloset
@@ -90,30 +72,6 @@
 	new /obj/item/clothing/gloves/thick(src)
 	new /obj/item/clothing/head/soft/purple(src)
 	new /obj/item/clothing/head/beret/purple(src)
-	new /obj/item/device/flashlight(src)
-	new /obj/item/weapon/caution(src)
-	new /obj/item/weapon/caution(src)
-	new /obj/item/weapon/caution(src)
-	new /obj/item/weapon/caution(src)
-	new /obj/item/device/lightreplacer(src)
-	new /obj/item/weapon/storage/bag/trash(src)
-	new /obj/item/clothing/shoes/galoshes(src)
-	new /obj/item/weapon/soap/nanotrasen(src)
-
-/*
- * Torch Janitor
- */
-/obj/structure/closet/jcloset_torch
-	name = "custodial closet"
-	desc = "It's a storage unit for janitorial equipment."
-	icon_state = "mixed"
-	icon_closed = "mixed"
-
-/obj/structure/closet/jcloset_torch/New()
-	..()
-	new /obj/item/device/radio/headset/headset_service(src)
-	new /obj/item/weapon/cartridge/janitor(src)
-	new /obj/item/clothing/gloves/thick(src)
 	new /obj/item/device/flashlight(src)
 	new /obj/item/weapon/caution(src)
 	new /obj/item/weapon/caution(src)

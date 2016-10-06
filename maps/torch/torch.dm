@@ -6,6 +6,7 @@
 	#include "torch_occupation.dm"
 	#include "torch_ranks.dm"
 	#include "torch_shuttles.dm"
+	#include "torch_closets.dm"
 
 	#include "torch_holodecks.dm"
 
