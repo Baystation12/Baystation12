@@ -3,6 +3,7 @@
 	health = 20
 	maxHealth = 20
 	icon = 'icons/obj/aibots.dmi'
+	layer = MOB_LAYER
 	universal_speak = 1
 	density = 0
 	var/obj/item/weapon/card/id/botcard = null

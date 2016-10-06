@@ -3,7 +3,7 @@
 	anchored = 1
 	opacity = 0
 	density = 0
-	layer = ABOVE_WINDOW_LAYER
+	layer = 3.5
 	w_class = 3
 
 /obj/structure/sign/ex_act(severity)

@@ -14,7 +14,7 @@
 	w_class = 1
 	throw_range = 1
 	throw_speed = 1
-	layer = ABOVE_OBJ_LAYER
+	layer = 4
 	slot_flags = SLOT_HEAD
 	body_parts_covered = HEAD
 	attack_verb = list("bapped")

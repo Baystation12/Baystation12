@@ -6,7 +6,6 @@
 
 	icon = LIGHTING_ICON
 	icon_state = "light1"
-	plane = LIGHTING_PLANE
 	layer = LIGHTING_LAYER
 	invisibility = INVISIBILITY_LIGHTING
 	color = "#000000"

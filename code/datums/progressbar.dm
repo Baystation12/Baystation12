@@ -14,9 +14,7 @@
 		goal = goal_number
 	bar = image('icons/effects/progessbar.dmi', target, "prog_bar_0")
 	bar.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
-	bar.plane = HUD_PLANE
-	bar.layer = HUD_ABOVE_ITEM_LAYER
-	bar.pixel_y = WORLD_ICON_SIZE
+	bar.pixel_y = 32
 	src.user = user
 	if(user)
 		client = user.client

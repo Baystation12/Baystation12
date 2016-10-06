@@ -31,9 +31,7 @@
 	var/force_down //determines if the affecting mob will be pinned to the ground
 	var/dancing //determines if assailant and affecting keep looking at each other. Basically a wrestling position
 
-	plane = HUD_PLANE
-	layer = HUD_ITEM_LAYER
-
+	layer = 21
 	abstract = 1
 	item_state = "nothing"
 	simulated = 0
@@ -181,7 +179,7 @@
 /obj/item/weapon/grab/proc/reset_position()
 	if(!affecting.buckled)
 		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
-	affecting.reset_plane_and_layer()
+	affecting.layer = initial(affecting.layer)
 
 //Updating pixelshift, position and direction
 //Gets called on process, when the grab gets upgraded or the assailant moves
@@ -197,7 +195,7 @@
 		return
 	var/shift = 0
 	var/adir = get_dir(assailant, affecting)
-	affecting.reset_plane_and_layer()
+	affecting.layer = initial(affecting.layer)
 	switch(state)
 		if(GRAB_PASSIVE)
 			shift = 8
@@ -210,18 +208,17 @@
 			shift = -10
 			adir = assailant.dir
 			affecting.set_dir(assailant.dir)
-			affecting.forceMove(assailant.loc)
+			affecting.loc = assailant.loc
 		if(GRAB_KILL)
 			shift = 0
 			adir = 1
 			affecting.set_dir(SOUTH) //face up
-			affecting.forceMove(assailant.loc)
+			affecting.loc = assailant.loc
 
 	switch(adir)
 		if(NORTH)
 			animate(affecting, pixel_x = 0, pixel_y =-shift, 5, 1, LINEAR_EASING)
-			affecting.plane = assailant.plane
-			affecting.layer = assailant.layer - 0.01
+			affecting.layer = initial(affecting.layer) - 0.1
 		if(SOUTH)
 			animate(affecting, pixel_x = 0, pixel_y = shift, 5, 1, LINEAR_EASING)
 		if(WEST)
@@ -400,7 +397,7 @@
 	if(affecting)
 		reset_position()
 		affecting.grabbed_by -= src
-		affecting.reset_plane_and_layer()
+		affecting.layer = initial(affecting.layer)
 		affecting = null
 	if(assailant)
 		if(assailant.client)

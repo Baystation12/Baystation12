@@ -107,9 +107,6 @@
 		new_player_panel_proc()
 
 	if(href_list["observe"])
-		if(!(initialization_stage&INITIALIZATION_COMPLETE))
-			to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
-			return
 
 		if(!config.respawn_delay || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
 			if(!client)	return 1
@@ -123,7 +120,7 @@
 			var/obj/O = locate("landmark*Observer-Start")
 			if(istype(O))
 				src << "<span class='notice'>Now teleporting.</span>"
-				observer.forceMove(O.loc)
+				observer.loc = O.loc
 			else
 				src << "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the station map.</span>"
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
@@ -132,7 +129,11 @@
 
 			var/mob/living/carbon/human/dummy/mannequin = new()
 			client.prefs.dress_preview_mob(mannequin)
-			observer.set_appearance(mannequin)
+			observer.appearance = mannequin
+			observer.appearance_flags |= KEEP_TOGETHER // replace KEEP_TOGETHER flag so the ghost looks normal-ish
+			observer.alpha = 127
+			observer.layer = initial(observer.layer)
+			observer.invisibility = initial(observer.invisibility)
 			qdel(mannequin)
 
 			if(client.prefs.be_random_name)

@@ -6,8 +6,7 @@
 	density = 0
 	anchored = 1.0
 	w_class = 3
-	plane = ABOVE_PLATING_PLANE
-	layer = LATTICE_LAYER
+	layer = 2.3 //under pipes
 	//	flags = CONDUCT
 
 /obj/structure/lattice/initialize()

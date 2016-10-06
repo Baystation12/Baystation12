@@ -648,8 +648,7 @@
 	var/dpdir = 0		// bitmask of pipe directions
 	dir = 0				// dir will contain dominant direction for junction pipes
 	var/health = 10 	// health points 0-10
-	plane = ABOVE_PLATING_PLANE
-	layer = DISPOSALS_PIPE_LAYER
+	layer = 2.3			// slightly lower than wires and other pipes
 	var/base_icon_state	// initial icon state on map
 	var/sortType = ""
 	var/subtype = 0
@@ -1176,7 +1175,7 @@
 	desc = "A disposal control switch."
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "switch-off"
-	layer = ABOVE_OBJ_LAYER
+	layer = 3.11
 	var/on = 0
 	var/list/junctions = list()
 	var/id_tag
