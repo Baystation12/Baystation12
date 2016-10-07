@@ -221,6 +221,7 @@
 					prob(2);/obj/item/weapon/soap/nanotrasen,\
 					prob(2);/obj/item/weapon/soap/deluxe,\
 					prob(1);/obj/item/weapon/soap/syndie,\
+					prob(1);/obj/item/weapon/soap/gold,\
 					prob(1);/obj/item/weapon/reagent_containers/spray/cleaner,\
 					prob(1);/obj/item/weapon/grenade/chem_grenade/cleaner)
 
