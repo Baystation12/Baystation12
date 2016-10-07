@@ -54,7 +54,7 @@
 			"r" = list("rr", "rrr", "rrrr")
 		)
 	autohiss_exempt = list(LANGUAGE_SIIK_MAAS)
-
+	
 
 /datum/species/proc/handle_autohiss(message, datum/language/lang, mode)
 	if(!autohiss_basic_map)

@@ -413,7 +413,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		if (length(heard_gibberish))
 			for (var/mob/R in heard_gibberish)
-				R.hear_radio(message, verbage, speaking, part_a, part_b, part_c, M, 1)
+				R.hear_radio(message, verbage, speaking, part_a, part_b, part_c, M, compression)
 
 	return 1
 
