@@ -21,8 +21,13 @@
 	var/store_items = 1
 	var/store_mobs = 1
 
+	var/list/will_contain
+
 /obj/structure/closet/initialize()
 	..()
+	if(will_contain)
+		create_objects_in_loc(src, will_contain)
+
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
 		var/obj/item/I
 		for(I in src.loc)
