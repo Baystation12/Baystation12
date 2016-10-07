@@ -3,6 +3,7 @@
 	desc = "A specialised, complex scanner for gleaning information on all manner of small things."
 	anchored = 1
 	density = 1
+	flags = OPENCONTAINER
 	icon = 'icons/obj/virology.dmi'
 	icon_state = "analyser"
 
@@ -79,14 +80,14 @@
 			if(choice == "Add coolant")
 				var/obj/item/weapon/reagent_containers/glass/G = I
 				var/amount_transferred = min(src.reagents.maximum_volume - src.reagents.total_volume, G.reagents.total_volume)
-				G.reagents.trans_to_obj(src, amount_transferred)
+				G.reagents.trans_to(src, amount_transferred)
 				user << "<span class='info'>You empty [amount_transferred]u of coolant into [src].</span>"
 				update_coolant()
 				return
 			else if(choice == "Empty coolant")
 				var/obj/item/weapon/reagent_containers/glass/G = I
 				var/amount_transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, src.reagents.total_volume)
-				src.reagents.trans_to_obj(G, amount_transferred)
+				src.reagents.trans_to(G, amount_transferred)
 				user << "<span class='info'>You remove [amount_transferred]u of coolant from [src].</span>"
 				update_coolant()
 				return
