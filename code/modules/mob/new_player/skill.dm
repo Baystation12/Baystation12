@@ -61,8 +61,8 @@ datum/skill/management
 
 datum/skill/knowledge/law
     ID = "law"
-    name = "Corporate Law"
-    desc = "Your knowledge of corporate law and procedures. This includes Corporate Regulations, as well as general station rulings and procedures. A low level in this skill is typical for security officers, a high level in this skill is typical for captains."
+    name = "Legal"
+    desc = "Your knowledge of law and standard operating procedures. This includes corporate regulations, as well as general station rulings and procedures. A low level in this skill is typical for security officers, a high level in this skill is typical for heads of staff."
     field = "Security"
     secondary = 1
 

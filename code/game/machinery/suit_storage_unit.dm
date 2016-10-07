@@ -44,6 +44,10 @@
 	req_access = list(access_atmospherics)
 	islocked = 1
 
+/obj/machinery/suit_storage_unit/atmos/alt
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/atmos/alt
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/atmos/alt
+
 /obj/machinery/suit_storage_unit/engineering
 	name = "Engineering Voidsuit Storage Unit"
 	SUIT_TYPE = /obj/item/clothing/suit/space/void/engineering
@@ -51,6 +55,16 @@
 	MASK_TYPE = /obj/item/clothing/mask/breath
 	req_access = list(access_engine)
 	islocked = 1
+
+/obj/machinery/suit_storage_unit/engineering/alt
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/engineering/alt
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/engineering/alt
+	MASK_TYPE = /obj/item/clothing/mask/breath
+
+/obj/machinery/suit_storage_unit/engineering/salvage
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/engineering/salvage
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/engineering/salvage
+	MASK_TYPE = /obj/item/clothing/mask/breath
 
 /obj/machinery/suit_storage_unit/medical
 	name = "Medical Voidsuit Storage Unit"
@@ -60,6 +74,11 @@
 	req_access = list(access_medical)
 	islocked = 1
 
+/obj/machinery/suit_storage_unit/medical/alt
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/medical/alt
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/medical/alt
+	MASK_TYPE = /obj/item/clothing/mask/breath
+
 /obj/machinery/suit_storage_unit/mining
 	name = "Mining Voidsuit Storage Unit"
 	SUIT_TYPE = /obj/item/clothing/suit/space/void/mining
@@ -67,6 +86,11 @@
 	MASK_TYPE = /obj/item/clothing/mask/breath
 	req_access = list(access_mining)
 	islocked = 1
+
+/obj/machinery/suit_storage_unit/mining/alt
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/mining/alt
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/mining/alt
+	MASK_TYPE = /obj/item/clothing/mask/breath
 
 /obj/machinery/suit_storage_unit/science
 	name = "Excavation Voidsuit Storage Unit"
@@ -83,6 +107,11 @@
 	MASK_TYPE = /obj/item/clothing/mask/breath
 	req_access = list(access_security)
 	islocked = 1
+
+/obj/machinery/suit_storage_unit/security/alt
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/security/alt
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/security/alt
+	MASK_TYPE = /obj/item/clothing/mask/breath
 
 /obj/machinery/suit_storage_unit/merc
 	name = "Nonstandard Voidsuit Storage Unit"
