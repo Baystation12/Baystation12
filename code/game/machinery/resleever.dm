@@ -281,9 +281,13 @@ obj/machinery/resleever/process()
 			break
 
 	if(!correct_type) return 0
-
+	
 	for(var/type in disallow_occupant_types)
 		if(istype(M, type))
 			return 0
+
+	var/mob/living/carbon/human/human = M
+	if(human && !human.can_have_stack())
+		return 0
 
 	return 1
