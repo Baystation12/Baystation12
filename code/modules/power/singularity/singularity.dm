@@ -82,7 +82,7 @@
 	dissipate()
 	check_energy()
 
-	if (current_size >= STAGE_THREE)
+	if (current_size >= STAGE_TWO)
 		move()
 		pulse()
 
