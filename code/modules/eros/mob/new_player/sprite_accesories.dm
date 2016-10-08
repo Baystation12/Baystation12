@@ -22,6 +22,15 @@
 		name = "Poofy2"
 		icon_state = "poofy2"
 
+	ponytail6
+		ponytail6
+		name = "Ponytail6"
+		icon_state = "ponytail6"
+
+	modern
+		modern
+		name = "Modern"
+		icon_state = "modern"
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
