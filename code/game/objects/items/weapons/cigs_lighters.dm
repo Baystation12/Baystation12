@@ -272,6 +272,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		die(1)
 	return ..()
 
+/obj/item/clothing/mask/smokable/cigarette/get_mob_overlay(mob/user_mob, slot)
+	var/image/res = ..()
+	if(lit == 1)
+		var/image/ember = image(res.icon,"cigember",ABOVE_LIGHTING_LAYER)
+		ember.plane = LIGHTING_PLANE
+		res.overlays += ember
+	return res
+
 ////////////
 // CIGARS //
 ////////////
