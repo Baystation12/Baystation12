@@ -9,7 +9,6 @@
 
 /area/New()
 	icon_state = ""
-	layer = 10
 	uid = ++global_uid
 	all_areas += src
 

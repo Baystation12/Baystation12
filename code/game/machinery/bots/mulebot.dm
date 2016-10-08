@@ -9,7 +9,6 @@
 	name = "Mulebot"
 	desc = "A Multiple Utility Load Effector bot."
 	icon_state = "mulebot0"
-	layer = MOB_LAYER
 	density = 1
 	anchored = 1
 	animate_movement=1
@@ -412,16 +411,17 @@
 	if(istype(crate))
 		crate.close()
 
-	C.loc = src.loc
+	C.forceMove(loc)
 	sleep(2)
 	if(C.loc != src.loc) //To prevent you from going onto more thano ne bot.
 		return
-	C.loc = src
+	C.forceMove(src)
 	load = C
 
 	C.pixel_y += 9
 	if(C.layer < layer)
 		C.layer = layer + 0.1
+	C.plane = plane
 	overlays += C
 
 	if(ismob(C))
@@ -443,9 +443,9 @@
 	mode = 1
 	overlays.Cut()
 
-	load.loc = src.loc
+	load.forceMove(loc)
 	load.pixel_y -= 9
-	load.layer = initial(load.layer)
+	load.reset_plane_and_layer()
 	if(ismob(load))
 		var/mob/M = load
 		if(M.client)
@@ -470,8 +470,8 @@
 	for(var/atom/movable/AM in src)
 		if(AM == cell || AM == botcard) continue
 
-		AM.loc = src.loc
-		AM.layer = initial(AM.layer)
+		AM.forceMove(loc)
+		AM.reset_plane_and_layer()
 		AM.pixel_y = initial(AM.pixel_y)
 		if(ismob(AM))
 			var/mob/M = AM

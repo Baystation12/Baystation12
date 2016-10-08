@@ -113,7 +113,8 @@
 	desc = "It never stays still for long."
 	icon_state = "guard"
 	anchored = 0
-	layer = 2.7
+	plane = OBJ_PLANE
+	layer = BELOW_OBJ_LAYER
 	health = 3
 	var/mob/living/simple_animal/hostile/giant_spider/greater_form
 	var/last_itch = 0
