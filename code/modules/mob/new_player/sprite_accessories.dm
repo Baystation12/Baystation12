@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human")
+	var/list/species_allowed = list("Human", "Lamia")
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -46,7 +46,7 @@
 /datum/sprite_accessory/hair
 
 	icon = 'icons/mob/Human_face.dmi'	  // default icon for all hairs
-	species_allowed = list("Human","Unathi","Akula","Lamia", "Machine")
+	species_allowed = list("Human","Unathi","Akula","Lamia", "Machine") //I rather if we had machine only hair instead, but will be good enough for release
 	var/veryshort						//doesn't need to be hidden by BLOCKHEADHAIR hats/helmets
 
 	bald

@@ -111,14 +111,15 @@ var/datum/robolimb/basic_robolimb
 	company = "Morpheus"
 	desc = "This limb is simple and functional; no effort has been made to make it look human."
 	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_main.dmi'
-	restricted_to = list("Machine")
-	use_eye_icon = "blank_eyes"
 	unavailable_at_fab = 1
 
 /datum/robolimb/morpheus/alt
-	company = "Morpheus Alt."
+	company = "Morpheus Monitor."
 	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_alt.dmi'
 	applies_to_part = list(BP_HEAD)
+	restricted_to = list("Machine")
+	can_eat = null
+	use_eye_icon = "blank_eyes"
 	unavailable_at_fab = 1
 
 /datum/robolimb/veymed

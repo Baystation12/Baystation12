@@ -358,7 +358,7 @@
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Machine","Akula","Lamia", "Resomi")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Machine","Akula","Lamia", "Resomi", "Machine")
 
 	ear_bear
 		name = "Bear Ears"
@@ -475,7 +475,7 @@
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Akula","Lamia", "Teshari")
+		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Akula","Lamia", "Resomi", "Machine")
 
 	wng_angel
 		name = "Angel Wings"
@@ -533,13 +533,13 @@
 
 /datum/sprite_accessory/tails
 	icon = 'icons/eros/mob/extras/tails.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
 
 	tal_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Akula", "Resomi")
+		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Akula", "Resomi", "Machine")
 
 	tal_bunny
 		name = "Bunny Tail"
