@@ -4,6 +4,7 @@
 #define GC_COLLECTION_TIMEOUT (30 SECONDS)
 #define GC_FORCE_DEL_PER_RUN 30
 
+
 var/datum/controller/process/garbage_collector/garbage_collector
 var/list/delayed_garbage = list()
 
@@ -68,7 +69,7 @@ world/loop_checks = 0
 			LocateReferences(A)
 			#endif
 			// Something's still referring to the qdel'd object.  Kill it.
-			testing("GC: -- \ref[A] | [A.type] was unable to be GC'd and was deleted --")
+			testing("GC: -- '[log_info_line(A)]' was unable to be GC'd and was deleted --")
 			logging["[A.type]"]++
 			del(A)
 
@@ -87,50 +88,6 @@ world/loop_checks = 0
 #undef GC_FORCE_DEL_PER_TICK
 #undef GC_COLLECTION_TIMEOUT
 #undef GC_COLLECTIONS_PER_TICK
-
-#ifdef GC_FINDREF
-
-/datum/controller/process/garbage_collector/proc/LocateReferences(var/atom/A)
-	testing("GC: Attempting to locate references to [A] | [A.type]. This is a potentially long-running operation.")
-	if(istype(A))
-		if(A.loc != null)
-			testing("GC: [A] | [A.type] is located in [A.loc] instead of null")
-		if(A.contents.len)
-			testing("GC: [A] | [A.type] has contents: [jointext(A.contents)]")
-	var/ref_count = 0
-	for(var/atom/atom)
-		ref_count += LookForRefs(atom, A)
-	for(var/datum/datum)	// This is strictly /datum, not subtypes.
-		ref_count += LookForRefs(datum, A)
-	for(var/client/client)
-		ref_count += LookForRefs(client, A)
-	var/message = "GC: References found to [A] | [A.type]: [ref_count]."
-	if(!ref_count)
-		message += " Has likely been supplied as an 'in list' argment to a proc."
-	testing(message)
-
-/datum/controller/process/garbage_collector/proc/LookForRefs(var/datum/D, var/datum/A)
-	. = 0
-	for(var/V in D.vars)
-		if(V == "contents")
-			continue
-		if(!islist(D.vars[V]))
-			if(D.vars[V] == A)
-				testing("GC: [A] | [A.type] referenced by [D] | [D.type], var [V]")
-				. += 1
-		else
-			. += LookForListRefs(D.vars[V], A, D, V)
-
-/datum/controller/process/garbage_collector/proc/LookForListRefs(var/list/L, var/datum/A, var/datum/D, var/V)
-	. = 0
-	for(var/F in L)
-		if(!islist(F))
-			if(F == A || L[F] == A)
-				testing("GC: [A] | [A.type] referenced by [D] | [D.type], list [V]")
-				. += 1
-		else
-			. += LookForListRefs(F, A, D, "[F] in list [V]")
-#endif
 
 /datum/controller/process/garbage_collector/proc/AddTrash(datum/A)
 	if(!istype(A) || !isnull(A.gcDestroyed))
@@ -202,69 +159,68 @@ world/loop_checks = 0
 	tag = null
 	return
 
-#ifdef TESTING
-/client/var/running_find_references
+#ifdef GC_FINDREF
 
-/mob/verb/create_thing()
+var/list/unwrappable_lists = list("contents","verbs","overlays","underlays","screen")
+
+/mob/verb/create_and_delete_thing() // Prevents the hidden reference counter from holding our thing
 	set category = "Debug"
-	set name = "Create Thing"
+	set name = "Create And Delete Thing"
 
 	var/path = input("Enter path")
 	var/atom/thing = new path(loc)
-	thing.find_references()
+	qdel(thing)
 
-/atom/verb/find_references()
-	set category = "Debug"
-	set name = "Find References"
-	set background = 1
-	set src in world
+/datum/controller/process/garbage_collector/proc/LocateReferences(var/atom/A)
+	testing("GC: Attempting to locate references to '[log_info_line(A)]'. This is a potentially long-running operation.")
+	if(istype(A))
+		if(A.loc != null)
+			testing("GC: '[log_info_line(A)]' is located in ''[log_info_line(A.loc)]'' instead of null")
+		if(A.contents.len)
+			testing("GC: '[log_info_line(A)]' has contents: [jointext(A.contents,null)]")
+	var/ref_count = 0
+	for(var/atom/atom)
+		ref_count += LookForRefs(atom, A)
+	for(var/datum/datum)	// This is strictly /datum, not subtypes.
+		ref_count += LookForRefs(datum, A)
+	for(var/client/client)
+		ref_count += LookForRefs(client, A)
+	for(var/global_var_name in _all_globals)
+		var/global_var = _all_globals[global_var_name]
+		if(islist(global_var))
+			ref_count += LookForListRefs(global_var, A, null, global_var_name)
+		else if(global_var == A)
+			testing("GC: '[log_info_line(A)]' referenced by the global var [global_var_name]")
+			ref_count++
+	var/message = "GC: References found to '[log_info_line(A)]': [ref_count]."
+	if(!ref_count)
+		message += " Has likely been supplied as an 'in list' argment to a proc."
+	testing(message)
 
-	if(!usr || !usr.client)
-		return
+/datum/controller/process/garbage_collector/proc/LookForRefs(var/datum/D, var/datum/A)
+	. = 0
+	for(var/var_name in D.vars)
+		if(var_name == "vars")
+			continue // It is a bit silly to loop over the vars list twice.
+		var/variable = 	D.vars[var_name]
+		if(!islist(variable))
+			if(variable == A)
+				testing("GC: '[log_info_line(A)]' referenced by '[log_info_line(D)]', var [var_name]")
+				. += 1
+		else if(islist(variable))
+			if(var_name in unwrappable_lists)
+				continue
+			. += LookForListRefs(variable, A, D, var_name)
 
-	if(usr.client.running_find_references)
-		testing("CANCELLED search for references to a [usr.client.running_find_references].")
-		usr.client.running_find_references = null
-		return
-
-	if(alert("Running this will create a lot of lag until it finishes.  You can cancel it by running it again.  Would you like to begin the search?", "Find References", "Yes", "No") == "No")
-		return
-
-	// Remove this object from the list of things to be auto-deleted.
-	if(garbage_collector)
-		garbage_collector.destroyed -= "\ref[src]"
-
-	usr.client.running_find_references = type
-	testing("Beginning search for references to a [type].")
-	var/list/things = list()
-	for(var/client/thing)
-		things += thing
-	for(var/datum/thing)
-		things += thing
-	for(var/atom/thing)
-		things += thing
-	testing("Collected list of things in search for references to a [type]. ([things.len] Thing\s)")
-	for(var/datum/thing in things)
-		if(!usr.client.running_find_references) return
-		for(var/varname in thing.vars)
-			var/variable = thing.vars[varname]
-			if(variable == src)
-				testing("Found [src.type] \ref[src] in [thing.type]'s [varname] var.")
-			else if(islist(variable))
-				if(src in variable)
-					testing("Found [src.type] \ref[src] in [thing.type]'s [varname] list var.")
-	testing("Completed search for references to a [type].")
-	usr.client.running_find_references = null
-
-/client/verb/purge_all_destroyed_objects()
-	set category = "Debug"
-	if(garbage_collector)
-		while(garbage_collector.destroyed.len)
-			var/datum/o = locate(garbage_collector.destroyed[1])
-			if(istype(o) && o.gcDestroyed)
-				del(o)
-				garbage_collector.dels++
-			garbage_collector.destroyed.Cut(1, 2)
+/datum/controller/process/garbage_collector/proc/LookForListRefs(var/list/L, var/datum/A, var/datum/D, var/list_name)
+	. = 0
+	for(var/element in L)
+		if(!islist(element))
+			if(element == A || (!isnum(element) && L[element]) == A)
+				testing("GC: '[log_info_line(A)]' referenced by [D ? "'[log_info_line(D)]'" : "global list"], list: [list_name]")
+				. += 1
+		else if(islist(element))
+			. += LookForListRefs(element, A, D, "[element] in list \[[list_name]\]")
 #endif
 
 #ifdef GC_DEBUG
