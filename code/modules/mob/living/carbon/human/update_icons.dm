@@ -351,6 +351,9 @@ var/global/list/damage_icon_parts = list()
 		update_icons()
 
 	//tail
+	update_genitals_showing(0) //eros
+	update_wings(0) //eros
+	update_ears(0) //eros
 	update_tail_showing(0)
 
 //UNDERWEAR OVERLAY

@@ -143,7 +143,7 @@
 			pref.v_type = new_v_type
 		else
 			pref.v_type = body_vaginas_list["None"]
-			return TOPIC_REFRESH_UPDATE_PREVIEW
+		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["genital_color"])
 		var/new_genital = input(user, "Choose your character's Genitals colour: ", "Character Preference", rgb(pref.r_genital, pref.g_genital, pref.b_genital)) as color|null
