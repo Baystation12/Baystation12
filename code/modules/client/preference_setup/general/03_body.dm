@@ -297,7 +297,14 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			pref.b_hair = 0//hex2num(copytext(new_hair, 6, 8))
 			pref.s_tone = 0
 			pref.age = max(min(pref.age, mob_species.max_age), mob_species.min_age)
-
+//EROS START
+			pref.c_type = body_breast_list["None"]
+			pref.d_type = body_dicks_list["None"]
+			pref.v_type = body_vaginas_list["None"]
+			pref.ears_type = body_ears_list["None"]
+			pref.wings_type = body_wings_list["None"]
+			pref.tail_type = body_tails_list["None"]
+//EROS FINISH
 			reset_limbs() // Safety for species with incompatible manufacturers; easier than trying to do it case by case.
 
 			return TOPIC_REFRESH_UPDATE_PREVIEW
