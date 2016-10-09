@@ -62,29 +62,29 @@ datum/hSB
 				if("hsbsuit")
 					var/mob/living/carbon/human/P = usr
 					if(P.wear_suit)
-						P.wear_suit.loc = P.loc
-						P.wear_suit.layer = initial(P.wear_suit.layer)
+						P.wear_suit.forceMove(P.loc)
+						P.wear_suit.reset_plane_and_layer()
 						P.wear_suit = null
 					P.wear_suit = new/obj/item/clothing/suit/space(P)
-					P.wear_suit.layer = SCREEN_LAYER+0.01
+					P.wear_suit.hud_layerise()
 					if(P.head)
-						P.head.loc = P.loc
-						P.head.layer = initial(P.head.layer)
+						P.head.forceMove(P.loc)
+						P.head.reset_plane_and_layer()
 						P.head = null
 					P.head = new/obj/item/clothing/head/helmet/space(P)
-					P.head.layer = SCREEN_LAYER+0.01
+					P.head.hud_layerise()
 					if(P.wear_mask)
-						P.wear_mask.loc = P.loc
-						P.wear_mask.layer = initial(P.wear_mask.layer)
+						P.wear_mask.forceMove(P.loc)
+						P.wear_mask.reset_plane_and_layer()
 						P.wear_mask = null
 					P.wear_mask = new/obj/item/clothing/mask/gas(P)
-					P.wear_mask.layer = SCREEN_LAYER+0.01
+					P.wear_mask.hud_layerise()
 					if(P.back)
-						P.back.loc = P.loc
-						P.back.layer = initial(P.back.layer)
+						P.back.forceMove(P.loc)
+						P.back.reset_plane_and_layer()
 						P.back = null
 					P.back = new/obj/item/weapon/tank/jetpack(P)
-					P.back.layer = SCREEN_LAYER+0.01
+					P.back.hud_layerise()
 					P.internal = P.back
 				if("hsbmetal")
 					var/obj/item/stack/sheet/hsb = new/obj/item/stack/sheet/metal

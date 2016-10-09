@@ -312,6 +312,10 @@
 		name = "Emo"
 		icon_state = "hair_emo"
 
+	emo2
+		name = "Emo Alt"
+		icon_state = "hair_emo2"
+
 	longemo
 		name = "Long Emo"
 		icon_state = "hair_emolong"

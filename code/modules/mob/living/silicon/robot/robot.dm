@@ -107,7 +107,6 @@
 
 	robot_modules_background = new()
 	robot_modules_background.icon_state = "block"
-	robot_modules_background.layer = SCREEN_LAYER
 	ident = rand(1, 999)
 	module_sprites["Basic"] = "robot"
 	icontype = "Basic"
@@ -525,10 +524,10 @@
 				sleep(30)
 				user << "You damage some parts of the chassis, but eventually manage to rip out [mmi]!"
 				var/obj/item/robot_parts/robot_suit/C = new/obj/item/robot_parts/robot_suit(loc)
-				C.l_leg = new/obj/item/robot_parts/l_leg(C)
-				C.r_leg = new/obj/item/robot_parts/r_leg(C)
-				C.l_arm = new/obj/item/robot_parts/l_arm(C)
-				C.r_arm = new/obj/item/robot_parts/r_arm(C)
+				C.parts[BP_L_LEG] = new/obj/item/robot_parts/l_leg(C)
+				C.parts[BP_R_LEG] = new/obj/item/robot_parts/r_leg(C)
+				C.parts[BP_L_ARM] = new/obj/item/robot_parts/l_arm(C)
+				C.parts[BP_R_ARM] = new/obj/item/robot_parts/r_arm(C)
 				C.updateicon()
 				new/obj/item/robot_parts/chest(loc)
 				qdel(src)
@@ -725,7 +724,9 @@
 				eye_overlays = list()
 			var/image/eye_overlay = eye_overlays[eye_icon_state]
 			if(!eye_overlay)
-				eye_overlay = image(icon, eye_icon_state, LIGHTING_LAYER+0.1)
+				eye_overlay = image(icon, eye_icon_state)
+				plane = EFFECTS_ABOVE_LIGHTING_PLANE
+				layer = EYE_GLOW_LAYER
 				eye_overlays[eye_icon_state] = eye_overlay
 			overlays += eye_overlay
 
@@ -817,19 +818,19 @@
 			return 1
 		if(!module_state_1)
 			module_state_1 = O
-			O.layer = SCREEN_LAYER
+			O.hud_layerise()
 			contents += O
 			if(istype(module_state_1,/obj/item/borg/sight))
 				sight_mode |= module_state_1:sight_mode
 		else if(!module_state_2)
 			module_state_2 = O
-			O.layer = SCREEN_LAYER
+			O.hud_layerise()
 			contents += O
 			if(istype(module_state_2,/obj/item/borg/sight))
 				sight_mode |= module_state_2:sight_mode
 		else if(!module_state_3)
 			module_state_3 = O
-			O.layer = SCREEN_LAYER
+			O.hud_layerise()
 			contents += O
 			if(istype(module_state_3,/obj/item/borg/sight))
 				sight_mode |= module_state_3:sight_mode

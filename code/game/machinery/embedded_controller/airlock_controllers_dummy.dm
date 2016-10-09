@@ -3,7 +3,7 @@
 	name = "airlock control terminal"
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "airlock_control_standby"
-	layer = 3.5
+	layer = ABOVE_OBJ_LAYER
 
 	var/datum/topic_state/remote/remote_state
 	var/obj/machinery/embedded_controller/radio/airlock/master_controller

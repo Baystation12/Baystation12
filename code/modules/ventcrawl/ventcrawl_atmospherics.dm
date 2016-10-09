@@ -17,16 +17,10 @@
 		A.ex_act(severity)
 	. = ..()
 
-/obj/machinery/atmospherics/Entered(atom/movable/Obj)
-	if(istype(Obj, /mob/living))
-		var/mob/living/L = Obj
-		L.ventcrawl_layer = layer
-	. = ..()
-
 /obj/machinery/atmospherics/relaymove(mob/living/user, direction)
 	if(user.loc != src || !(direction & initialize_directions)) //can't go in a way we aren't connecting to
 		return
-	ventcrawl_to(user,findConnecting(direction, user.ventcrawl_layer),direction)
+	ventcrawl_to(user,findConnecting(direction),direction)
 
 /obj/machinery/atmospherics/proc/ventcrawl_to(var/mob/living/user, var/obj/machinery/atmospherics/target_move, var/direction)
 	if(target_move)
