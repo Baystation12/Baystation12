@@ -84,15 +84,17 @@ What is the naming convention for planes or layers?
 
 #define ABOVE_TURF_PLANE              -18 // For items which should appear above turfs but below other objects and hiding mobs, eg: wires & pipes
 
-	#define HOLOMAP_LAYER      1
-	#define RUNE_LAYER         2
-	#define DECAL_LAYER        3
-	#define ABOVE_TILE_LAYER   4
-	#define EXPOSED_PIPE_LAYER 5
-	#define MOUSETRAP_LAYER    6
-	#define BLOOD_LAYER        7
-	#define PLANT_LAYER        8
-	#define TURF_FIRE_LAYER    9
+	#define HOLOMAP_LAYER               1
+	#define RUNE_LAYER                  2
+	#define DECAL_LAYER                 3
+	#define ABOVE_TILE_LAYER            4
+	#define EXPOSED_PIPE_LAYER          5
+	#define EXPOSED_WIRE_LAYER          6
+	#define EXPOSED_WIRE_TERMINAL_LAYER 7
+	#define MOUSETRAP_LAYER             8
+	#define BLOOD_LAYER                 9
+	#define PLANT_LAYER                 10
+	#define TURF_FIRE_LAYER             11
 
 #define HIDING_MOB_PLANE              -16 // for hiding mobs like MoMMIs or spiders or whatever, under most objects but over pipes & such.
 
