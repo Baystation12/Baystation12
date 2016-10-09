@@ -99,9 +99,9 @@ What is the naming convention for planes or layers?
 	#define HIDING_MOB_LAYER 0
 
 #define OBJ_PLANE                     -15 // For objects which appear below humans.
-	#define BELOW_TABLE_LAYER       0
-	#define TABLE_LAYER             0.5
-	#define OPEN_DOOR_LAYER         1
+	#define OPEN_DOOR_LAYER         0
+	#define BELOW_TABLE_LAYER       0.5
+	#define TABLE_LAYER             1
 	#define BELOW_OBJ_LAYER         2
 	// OBJ_LAYER                    3
 	#define ABOVE_OBJ_LAYER         4
@@ -188,6 +188,10 @@ What is the naming convention for planes or layers?
 
 /image
 	plane = FLOAT_PLANE			// this is defunct, lummox fixed this on recent compilers, but it will bug out if I remove it for coders not on the most recent compile.
+
+/image/proc/turf_decal_layerise()
+	plane = ABOVE_TURF_PLANE
+	layer = DECAL_LAYER
 
 /atom/proc/hud_layerise()
 	plane = HUD_PLANE
