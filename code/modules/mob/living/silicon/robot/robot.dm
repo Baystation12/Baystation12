@@ -725,8 +725,8 @@
 			var/image/eye_overlay = eye_overlays[eye_icon_state]
 			if(!eye_overlay)
 				eye_overlay = image(icon, eye_icon_state)
-				plane = EFFECTS_ABOVE_LIGHTING_PLANE
-				layer = EYE_GLOW_LAYER
+				eye_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+				eye_overlay.layer = EYE_GLOW_LAYER
 				eye_overlays[eye_icon_state] = eye_overlay
 			overlays += eye_overlay
 
