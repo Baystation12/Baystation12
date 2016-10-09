@@ -105,6 +105,8 @@
 		var/new_c_type = input(user, "Choose your character's Chest Type:", "Character Preference") as null|anything in valid_chest_types
 		if(new_c_type && CanUseTopic(user))
 			pref.c_type = new_c_type
+		else
+			pref.c_type = body_breast_list["None"]
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["dick_type"])
@@ -121,6 +123,8 @@
 		var/new_d_type = input(user, "Choose your character's Dick:", "Character Preference") as null|anything in valid_dick_types
 		if(new_d_type && CanUseTopic(user))
 			pref.d_type = new_d_type
+		else
+			pref.d_type = body_dicks_list["None"]
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["vagina_type"])
@@ -137,6 +141,8 @@
 		var/new_v_type = input(user, "Choose your character's Vagina:", "Character Preference") as null|anything in valid_vagina_types
 		if(new_v_type && CanUseTopic(user))
 			pref.v_type = new_v_type
+		else
+			pref.v_type = body_vaginas_list["None"]
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["genital_color"])
@@ -160,6 +166,8 @@
 		var/new_ears_type = input(user, "Choose your character's Ears:", "Character Preference") as null|anything in valid_ears_types
 		if(new_ears_type && CanUseTopic(user))
 			pref.ears_type = new_ears_type
+		else
+			pref.ears_type = body_ears_list["None"]
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["cwings_type"])
@@ -176,6 +184,8 @@
 		var/new_wings_type = input(user, "Choose your character's Wings:", "Character Preference") as null|anything in valid_wings_types
 		if(new_wings_type && CanUseTopic(user))
 			pref.wings_type = new_wings_type
+		else
+			pref.wings_type = body_wings_list["None"]
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["ctail_type"])
@@ -192,6 +202,8 @@
 		var/new_tail_type = input(user, "Choose your character's Tail:", "Character Preference") as null|anything in valid_tails_types
 		if(new_tail_type && CanUseTopic(user))
 			pref.tail_type = new_tail_type
+		else
+			pref.tail_type = body_tails_list["None"]
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["wings_color"])
