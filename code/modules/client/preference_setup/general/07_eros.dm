@@ -89,21 +89,52 @@
 
 /datum/category_item/player_setup_item/general/eros/OnTopic(var/href,var/list/href_list, var/mob/user)
 
+	var/datum/species/mob_species = all_species[pref.species]
 
 	if(href_list["chest_type"])
-		var/new_c_type = input(user, "Choose your character's Chest Type:", "Character Preference") as null|anything in body_breast_list
+		var/list/valid_chest_types = list()
+		for (var/boobs in body_breast_list)
+			var/datum/sprite_accessory/S = body_breast_list[boobs]
+			if(!(mob_species.get_bodytype() in S.species_allowed))
+				continue
+			valid_chest_types[boobs] = body_breast_list[boobs]
+			if (valid_chest_types.len)
+				pref.c_type = pick(valid_chest_types)
+			else
+				pref.c_type = body_breast_list["None"]
+		var/new_c_type = input(user, "Choose your character's Chest Type:", "Character Preference") as null|anything in valid_chest_types
 		if(new_c_type && CanUseTopic(user))
 			pref.c_type = new_c_type
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["dick_type"])
-		var/new_d_type = input(user, "Choose your character's Dick:", "Character Preference") as null|anything in body_dicks_list
+		var/list/valid_dick_types = list()
+		for (var/dicks in body_dicks_list)
+			var/datum/sprite_accessory/S = body_dicks_list[dicks]
+			if(!(mob_species.get_bodytype() in S.species_allowed))
+				continue
+			valid_dick_types[dicks] = body_dicks_list[dicks]
+			if (valid_dick_types.len)
+				pref.d_type = pick(valid_dick_types)
+			else
+				pref.d_type = body_dicks_list["None"]
+		var/new_d_type = input(user, "Choose your character's Dick:", "Character Preference") as null|anything in valid_dick_types
 		if(new_d_type && CanUseTopic(user))
 			pref.d_type = new_d_type
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["vagina_type"])
-		var/new_v_type = input(user, "Choose your character's Vagina:", "Character Preference") as null|anything in body_vaginas_list
+		var/list/valid_vagina_types = list()
+		for (var/vaginas in body_vaginas_list)
+			var/datum/sprite_accessory/S = body_vaginas_list[vaginas]
+			if(!(mob_species.get_bodytype() in S.species_allowed))
+				continue
+			valid_vagina_types[vaginas] = body_vaginas_list[vaginas]
+			if (valid_vagina_types.len)
+				pref.v_type = pick(valid_vagina_types)
+			else
+				pref.v_type = body_vaginas_list["None"]
+		var/new_v_type = input(user, "Choose your character's Vagina:", "Character Preference") as null|anything in valid_vagina_types
 		if(new_v_type && CanUseTopic(user))
 			pref.v_type = new_v_type
 			return TOPIC_REFRESH_UPDATE_PREVIEW
@@ -116,19 +147,49 @@
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["cears_type"])
-		var/new_ears_type = input(user, "Choose your character's Ears:", "Character Preference") as null|anything in body_ears_list
+		var/list/valid_ears_types = list()
+		for (var/ears in body_ears_list)
+			var/datum/sprite_accessory/S = body_ears_list[ears]
+			if(!(mob_species.get_bodytype() in S.species_allowed))
+				continue
+			valid_ears_types[ears] = body_ears_list[ears]
+			if (valid_ears_types.len)
+				pref.ears_type = pick(valid_ears_types)
+			else
+				pref.ears_type = body_ears_list["None"]
+		var/new_ears_type = input(user, "Choose your character's Ears:", "Character Preference") as null|anything in valid_ears_types
 		if(new_ears_type && CanUseTopic(user))
 			pref.ears_type = new_ears_type
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["cwings_type"])
-		var/new_wings_type = input(user, "Choose your character's Wings:", "Character Preference") as null|anything in body_wings_list
+		var/list/valid_wings_types = list()
+		for (var/wings in body_wings_list)
+			var/datum/sprite_accessory/S = body_wings_list[wings]
+			if(!(mob_species.get_bodytype() in S.species_allowed))
+				continue
+			valid_wings_types[wings] = body_wings_list[wings]
+			if (valid_wings_types.len)
+				pref.wings_type = pick(valid_wings_types)
+			else
+				pref.wings_type = body_wings_list["None"]
+		var/new_wings_type = input(user, "Choose your character's Wings:", "Character Preference") as null|anything in valid_wings_types
 		if(new_wings_type && CanUseTopic(user))
 			pref.wings_type = new_wings_type
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["ctail_type"])
-		var/new_tail_type = input(user, "Choose your character's Tail:", "Character Preference") as null|anything in body_tails_list
+		var/list/valid_tails_types = list()
+		for (var/tails in body_tails_list)
+			var/datum/sprite_accessory/S = body_tails_list[tails]
+			if(!(mob_species.get_bodytype() in S.species_allowed))
+				continue
+			valid_tails_types[tails] = body_tails_list[tails]
+			if (valid_tails_types.len)
+				pref.tail_type = pick(valid_tails_types)
+			else
+				pref.tail_type = body_tails_list["None"]
+		var/new_tail_type = input(user, "Choose your character's Tail:", "Character Preference") as null|anything in valid_tails_types
 		if(new_tail_type && CanUseTopic(user))
 			pref.tail_type = new_tail_type
 		return TOPIC_REFRESH_UPDATE_PREVIEW
