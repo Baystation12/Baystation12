@@ -70,10 +70,10 @@
 /obj/structure/sign/double/map/right
 	icon_state = "map-right"
 
-/obj/structure/sign/securearea
-	name = "\improper SECURE AREA"
-	desc = "A warning sign which reads 'SECURE AREA'."
-	icon_state = "securearea"
+/obj/structure/sign/monkey_painting
+	name = "\improper Mr. Deempisi portrait"
+	desc = "Under the painting a plaque reads: 'While the meat grinder may not have spared you, fear not. Not one part of you has gone to waste... You were delicious.'"
+	icon_state = "monkey_painting"
 
 /obj/structure/sign/warning
 	name = "\improper WARNING"
@@ -83,12 +83,22 @@
 	..()
 	desc = "A warning sign which reads '[name]'."
 
-/obj/structure/sign/warning/armory
-	name = "\improper ARMORY"
+/obj/structure/sign/warning/airlock
+	name = "\improper EXTERNAL AIRLOCK"
+	icon_state = "doors"
 
 /obj/structure/sign/warning/biohazard
 	name = "\improper BIOHAZARD"
 	icon_state = "bio"
+
+/obj/structure/sign/warning/bomb_range
+	name = "\improper BOMB RANGE"
+
+/obj/structure/sign/warning/caution
+	name = "\improper CAUTION"
+
+/obj/structure/sign/warning/compressed_gas
+	name = "\improper COMPRESSED GAS"
 
 /obj/structure/sign/warning/deathsposal
 	name = "\improper DISPOSAL LEADS TO SPACE"
@@ -97,34 +107,36 @@
 /obj/structure/sign/warning/docking_area
 	name = "\improper KEEP CLEAR: DOCKING AREA"
 
-/obj/structure/sign/warning/high_voltage
-	name = "\improper HIGH VOLTAGE"
-	icon_state = "shock"
-
-/obj/structure/sign/warning/internals_required
-	name = "\improper INTERNALS REQUIRED"
-
-/obj/structure/sign/warning/moving_parts
-	name = "\improper MOVING PARTS"
-
-/obj/structure/sign/warning/radioactive
-	name = "\improper RADIOACTIVE AREA"
-	icon_state = "radiation"
-
-/obj/structure/sign/warning/space
-	name = "\improper HARD VACUUM AHEAD"
-	icon_state = "space"
-
-/obj/structure/sign/warning/space/airlock
-	name = "\improper EXTERNAL AIRLOCK"
-
-/obj/structure/sign/warning/pods
-	name = "\improper ESCAPE PODS"
-	icon_state = "pods"
+/obj/structure/sign/warning/engineering_access
+	name = "\improper ENGINEERING ACCESS"
 
 /obj/structure/sign/warning/fire
 	name = "\improper DANGER: FIRE"
 	icon_state = "fire"
+
+/obj/structure/sign/warning/high_voltage
+	name = "\improper HIGH VOLTAGE"
+	icon_state = "shock"
+
+/obj/structure/sign/warning/hot_exhaust
+	name = "\improper HOT EXHAUST"
+	icon_state = "fire"
+
+/obj/structure/sign/warning/internals_required
+	name = "\improper INTERNALS REQUIRED"
+
+/obj/structure/sign/warning/lethal_turrets
+	name = "\improper LETHAL TURRETS"
+
+/obj/structure/sign/warning/lethal_turrets/New()
+	..()
+	desc += " Enter at own risk!."
+
+/obj/structure/sign/warning/mail_delivery
+	name = "\improper MAIL DELIVERY"
+
+/obj/structure/sign/warning/moving_parts
+	name = "\improper MOVING PARTS"
 
 /obj/structure/sign/warning/nosmoking_1
 	name = "\improper NO SMOKING"
@@ -133,6 +145,33 @@
 /obj/structure/sign/warning/nosmoking_2
 	name = "\improper NO SMOKING"
 	icon_state = "nosmoking2"
+
+/obj/structure/sign/warning/pods
+	name = "\improper ESCAPE PODS"
+	icon_state = "pods"
+
+/obj/structure/sign/warning/radioactive
+	name = "\improper RADIOACTIVE AREA"
+	icon_state = "radiation"
+
+/obj/structure/sign/warning/secure_area
+	name = "\improper SECURE AREA"
+
+/obj/structure/sign/warning/secure_area/armory
+	name = "\improper ARMORY"
+
+/obj/structure/sign/warning/server_room
+	name = "\improper SERVER ROOM"
+
+/obj/structure/sign/warning/siphon_valve
+	name = "\improper SIPHON VALVE"
+
+/obj/structure/sign/warning/vacuum
+	name = "\improper HARD VACUUM AHEAD"
+	icon_state = "space"
+
+/obj/structure/sign/warning/vent_port
+	name = "\improper EJECTION/VENTING PORT"
 
 /obj/structure/sign/redcross
 	name = "medbay"
@@ -210,6 +249,12 @@
 /obj/structure/sign/warning/science
 	name = "\improper SCIENCE!"
 	icon_state = "science1"
+
+/obj/structure/sign/warning/science/anomalous_materials
+	name = "\improper ANOMALOUS MATERIALS"
+
+/obj/structure/sign/warning/science/mass_spectrometry
+	name = "\improper MASS SPECTROMETRY"
 
 /obj/structure/sign/science_1
 	name = "\improper RESEARCH WING"
