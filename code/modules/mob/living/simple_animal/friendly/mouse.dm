@@ -22,7 +22,6 @@
 	response_harm   = "stamps on"
 	density = 0
 	var/body_color //brown, gray and white, leave blank for random
-	layer = MOB_LAYER
 	min_oxy = 16 //Require atleast 16kPA oxygen
 	minbodytemp = 223		//Below -50 Degrees Celcius
 	maxbodytemp = 323	//Above 50 Degrees Celcius
@@ -100,10 +99,6 @@
 			var/mob/M = AM
 			M << "\blue \icon[src] Squeek!"
 			M << 'sound/effects/mousesqueek.ogg'
-	..()
-
-/mob/living/simple_animal/mouse/death()
-	layer = MOB_LAYER
 	..()
 
 /*

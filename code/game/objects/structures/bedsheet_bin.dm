@@ -12,20 +12,12 @@ LINEN BINS
 	item_state = "bedsheet"
 	randpixel = 0
 	slot_flags = SLOT_BACK
-	layer = 4.0
+	plane = ABOVE_OBJ_PLANE
+	layer = ABOVE_OBJ_LAYER
 	throwforce = 1
 	throw_speed = 1
 	throw_range = 2
 	w_class = 2.0
-
-/obj/item/weapon/bedsheet/attack_self(mob/user as mob)
-	user.drop_item()
-	if(layer == initial(layer))
-		layer = MOB_LAYER + 0.1
-	else
-		layer = initial(layer)
-	add_fingerprint(user)
-	return
 
 /obj/item/weapon/bedsheet/attackby(obj/item/I, mob/user)
 	if(is_sharp(I))

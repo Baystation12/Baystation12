@@ -692,3 +692,10 @@ var/list/VVckey_edit = list("key", "ckey")
 		to_chat(client, "<span class='warning'>May only assign directional values to dir.</span>")
 	else
 		A.set_dir(var_value)
+
+/decl/vv_set_handler/ghost_appearance_handler
+	handled_type = /mob/observer/ghost
+	handled_vars = list("appearance")
+
+/decl/vv_set_handler/dir_hander/handle_set_var(var/mob/observer/ghost/ghost, variable, var_value, client)
+	ghost.set_appearance(var_value)

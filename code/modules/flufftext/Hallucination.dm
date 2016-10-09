@@ -47,7 +47,8 @@ mob/living/carbon/proc/handle_hallucinations()
 						if(!H.r_store) slots_free += ui_storage2
 					if(slots_free.len)
 						halitem.screen_loc = pick(slots_free)
-						halitem.layer = 50
+						halitem.plane = FULLSCREEN_PLANE
+						halitem.layer = HALLUCINATION_LAYER
 						switch(rand(1,6))
 							if(1) //revolver
 								halitem.icon = 'icons/obj/gun.dmi'

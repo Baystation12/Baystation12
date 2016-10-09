@@ -285,7 +285,7 @@
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
-	layer = SCREEN_LAYER+0.01
+	hud_layerise()
 	if(user.client)	user.client.screen |= src
 	if(user.pulling == src) user.stop_pulling()
 
