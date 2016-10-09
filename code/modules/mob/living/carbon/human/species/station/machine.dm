@@ -39,7 +39,7 @@
 
 	flags = NO_SCAN | NO_PAIN | NO_POISON
 	spawn_flags = CAN_JOIN
-	appearance_flags = HAS_UNDERWEAR | HAS_BIOMODS | HAS_HAIR_COLOR//IPCs can wear undies too :(
+	appearance_flags = HAS_UNDERWEAR | HAS_BIOMODS | HAS_HAIR_COLOR //IPCs can wear undies too :(
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
