@@ -101,18 +101,18 @@ What is the naming convention for planes or layers?
 	#define HIDING_MOB_LAYER 0
 
 #define OBJ_PLANE                     -15 // For objects which appear below humans.
-	#define OPEN_DOOR_LAYER         0
-	#define BELOW_TABLE_LAYER       0.5
+	#define BELOW_DOOR_LAYER        0.25
+	#define OPEN_DOOR_LAYER         0.5
+	#define BELOW_TABLE_LAYER       0.75
 	#define TABLE_LAYER             1
 	#define BELOW_OBJ_LAYER         2
 	// OBJ_LAYER                    3
 	#define ABOVE_OBJ_LAYER         4
-	#define SIDE_WINDOW_LAYER       5
-	#define FULL_WINDOW_LAYER       6
-	#define ABOVE_WINDOW_LAYER      7
-	#define BELOW_CLOSED_DOOR_LAYER 10
-	#define CLOSED_DOOR_LAYER       11
-	#define ABOVE_DOOR_LAYER        12
+	#define CLOSED_DOOR_LAYER       5
+	#define ABOVE_DOOR_LAYER        6
+	#define SIDE_WINDOW_LAYER       7
+	#define FULL_WINDOW_LAYER       8
+	#define ABOVE_WINDOW_LAYER      9
 
 #define LYING_MOB_PLANE               -14 // other mobs that are lying down.
 

@@ -19,7 +19,7 @@
 	var/icon_state_closed = null
 	var/icon_state_closing = null
 
-	closed_layer = ABOVE_DOOR_LAYER // Above airlocks when closed
+	closed_layer = ABOVE_WINDOW_LAYER
 	var/id = 1.0
 	dir = 1
 	explosion_resistance = 25

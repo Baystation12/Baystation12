@@ -16,8 +16,8 @@
 	req_one_access = list(access_atmospherics, access_engine_equip)
 	opacity = 0
 	density = 0
-	layer = BELOW_TABLE_LAYER
-	open_layer = BELOW_TABLE_LAYER
+	layer = BELOW_DOOR_LAYER
+	open_layer = BELOW_DOOR_LAYER
 	closed_layer = ABOVE_DOOR_LAYER
 
 	//These are frequenly used with windows, so make sure zones can pass.
