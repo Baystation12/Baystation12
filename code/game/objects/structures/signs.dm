@@ -22,13 +22,11 @@
 
 /obj/structure/sign/attackby(obj/item/tool as obj, mob/user as mob)	//deconstruction
 	if(istype(tool, /obj/item/weapon/screwdriver) && !istype(src, /obj/structure/sign/double))
-		user << "You unfasten the sign with your [tool]."
+		user << "You unfasten the sign with your [tool.name]."
 		var/obj/item/sign/S = new(src.loc)
 		S.name = name
 		S.desc = desc
 		S.icon_state = icon_state
-		//var/icon/I = icon('icons/obj/decals.dmi', icon_state)
-		//S.icon = I.Scale(24, 24)
 		S.sign_state = icon_state
 		qdel(src)
 	else ..()
@@ -77,49 +75,63 @@
 	desc = "A warning sign which reads 'SECURE AREA'."
 	icon_state = "securearea"
 
-/obj/structure/sign/biohazard
+/obj/structure/sign/warning
+	name = "\improper WARNING"
+	icon_state = "securearea"
+
+/obj/structure/sign/warning/New()
+	..()
+	desc = "A warning sign which reads '[name]'."
+
+/obj/structure/sign/warning/armory
+	name = "\improper ARMORY"
+
+/obj/structure/sign/warning/biohazard
 	name = "\improper BIOHAZARD"
-	desc = "A warning sign which reads 'BIOHAZARD'."
 	icon_state = "bio"
 
-/obj/structure/sign/electricshock
-	name = "\improper HIGH VOLTAGE"
-	desc = "A warning sign which reads 'HIGH VOLTAGE'."
-	icon_state = "shock"
-
-/obj/structure/sign/examroom
-	name = "\improper EXAM"
-	desc = "A guidance sign which reads 'EXAM ROOM'."
-	icon_state = "examroom"
-
-/obj/structure/sign/vacuum
-	name = "\improper HARD VACUUM AHEAD"
-	desc = "A warning sign which reads 'HARD VACUUM AHEAD'."
-	icon_state = "space"
-
-/obj/structure/sign/deathsposal
+/obj/structure/sign/warning/deathsposal
 	name = "\improper DISPOSAL LEADS TO SPACE"
-	desc = "A warning sign which reads 'DISPOSAL LEADS TO SPACE'."
 	icon_state = "deathsposal"
 
-/obj/structure/sign/pods
+/obj/structure/sign/warning/docking_area
+	name = "\improper KEEP CLEAR: DOCKING AREA"
+
+/obj/structure/sign/warning/high_voltage
+	name = "\improper HIGH VOLTAGE"
+	icon_state = "shock"
+
+/obj/structure/sign/warning/internals_required
+	name = "\improper INTERNALS REQUIRED"
+
+/obj/structure/sign/warning/moving_parts
+	name = "\improper MOVING PARTS"
+
+/obj/structure/sign/warning/radioactive
+	name = "\improper RADIOACTIVE AREA"
+	icon_state = "radiation"
+
+/obj/structure/sign/warning/space
+	name = "\improper HARD VACUUM AHEAD"
+	icon_state = "space"
+
+/obj/structure/sign/warning/space/airlock
+	name = "\improper EXTERNAL AIRLOCK"
+
+/obj/structure/sign/warning/pods
 	name = "\improper ESCAPE PODS"
-	desc = "A warning sign which reads 'ESCAPE PODS'."
 	icon_state = "pods"
 
-/obj/structure/sign/fire
+/obj/structure/sign/warning/fire
 	name = "\improper DANGER: FIRE"
-	desc = "A warning sign which reads 'DANGER: FIRE'."
 	icon_state = "fire"
 
-/obj/structure/sign/nosmoking_1
+/obj/structure/sign/warning/nosmoking_1
 	name = "\improper NO SMOKING"
-	desc = "A warning sign which reads 'NO SMOKING'."
 	icon_state = "nosmoking"
 
-/obj/structure/sign/nosmoking_2
+/obj/structure/sign/warning/nosmoking_2
 	name = "\improper NO SMOKING"
-	desc = "A warning sign which reads 'NO SMOKING'."
 	icon_state = "nosmoking2"
 
 /obj/structure/sign/redcross
@@ -195,9 +207,8 @@
 /obj/structure/sign/double/maltesefalcon/right
 	icon_state = "maltesefalcon-right"
 
-/obj/structure/sign/science
+/obj/structure/sign/warning/science
 	name = "\improper SCIENCE!"
-	desc = "A warning sign which reads 'SCIENCE!'."
 	icon_state = "science1"
 
 /obj/structure/sign/science_1
@@ -260,42 +271,42 @@
 	desc = "A direction sign, claiming to know the way."
 	icon_state = "direction"
 
+/obj/structure/sign/directions/New()
+	..()
+	desc = "A direction sign, pointing out which way \the [src] is."
+
 /obj/structure/sign/directions/science
 	name = "\improper Research Division"
-	desc = "A direction sign, pointing out which way the Research Division is."
 	icon_state = "direction_sci"
 
 /obj/structure/sign/directions/engineering
 	name = "\improper Engineering Bay"
-	desc = "A direction sign, pointing out which way the Engineering Bay is."
 	icon_state = "direction_eng"
 
 /obj/structure/sign/directions/security
 	name = "\improper Security Wing"
-	desc = "A direction sign, pointing out which way the Security Wing is."
 	icon_state = "direction_sec"
 
 /obj/structure/sign/directions/medical
 	name = "\improper Medical Bay"
-	desc = "A direction sign, pointing out which way the Medical Bay is."
 	icon_state = "direction_med"
 
 /obj/structure/sign/directions/evac
 	name = "\improper Evacuation Wing"
-	desc = "A direction sign, pointing out which way the Evacuation Wing is."
 	icon_state = "direction_evac"
 
 /obj/structure/sign/directions/bridge
 	name = "\improper Bridge"
-	desc = "A direction sign, pointing out which way the Bridge is."
 	icon_state = "direction_bridge"
 
 /obj/structure/sign/directions/supply
 	name = "\improper Supply Office"
-	desc = "A direction sign, pointing out which way the Supply Office is."
 	icon_state = "direction_supply"
 
 /obj/structure/sign/directions/infirmary
 	name = "\improper Infirmary"
-	desc = "A direction sign, pointing out which way the Infirmary is."
 	icon_state = "direction_infirm"
+
+/obj/structure/sign/directions/examroom
+	name = "\improper Exam Room"
+	icon_state = "examroom"
