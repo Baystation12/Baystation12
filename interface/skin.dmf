@@ -124,6 +124,14 @@ macro "borghotkeymode"
 		command = ".west"
 		is-disabled = false
 	elem 
+		name = "B"
+		command = "Resist"
+		is-disabled = false
+	elem 
+		name = "CTRL+B"
+		command = "Resist"
+		is-disabled = false
+	elem 
 		name = "D+REP"
 		command = ".east"
 		is-disabled = false
@@ -154,6 +162,30 @@ macro "borghotkeymode"
 	elem 
 		name = "CTRL+J"
 		command = "toggle-gun-mode"
+		is-disabled = false
+	elem 
+		name = "L"
+		command = "looc"
+		is-disabled = false
+	elem 
+		name = "CTRL+L"
+		command = "looc"
+		is-disabled = false
+	elem 
+		name = "M"
+		command = ".me"
+		is-disabled = false
+	elem 
+		name = "CTRL+M"
+		command = ".me"
+		is-disabled = false
+	elem 
+		name = "O"
+		command = "ooc"
+		is-disabled = false
+	elem 
+		name = "CTRL+O"
+		command = "ooc"
 		is-disabled = false
 	elem 
 		name = "Q"
@@ -267,7 +299,7 @@ macro "borghotkeymode"
 macro "macro"
 	elem 
 		name = "TAB"
-		command = ".winset \"mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true\""
+		command = ".winset \"mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#F0F0F0\""
 		is-disabled = false
 	elem 
 		name = "CENTER+REP"
@@ -366,6 +398,10 @@ macro "macro"
 		command = ".west"
 		is-disabled = false
 	elem 
+		name = "CTRL+B"
+		command = "Resist"
+		is-disabled = false
+	elem 
 		name = "CTRL+D+REP"
 		command = ".east"
 		is-disabled = false
@@ -384,6 +420,22 @@ macro "macro"
 	elem 
 		name = "CTRL+SHIFT+G"
 		command = ".configure graphics-hwmode on"
+		is-disabled = false
+	elem 
+		name = "CTRL+J"
+		command = "toggle-gun-mode"
+		is-disabled = false
+	elem 
+		name = "CTRL+L"
+		command = "looc"
+		is-disabled = false
+	elem 
+		name = "CTRL+M"
+		command = ".me"
+		is-disabled = false
+	elem 
+		name = "CTRL+O"
+		command = "ooc"
 		is-disabled = false
 	elem 
 		name = "CTRL+Q"
@@ -465,7 +517,7 @@ macro "macro"
 macro "hotkeymode"
 	elem 
 		name = "TAB"
-		command = ".winset \"mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true\""
+		command = ".winset \"mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#D3B5B5\""
 		is-disabled = false
 	elem 
 		name = "CENTER+REP"
@@ -588,6 +640,14 @@ macro "hotkeymode"
 		command = ".west"
 		is-disabled = false
 	elem 
+		name = "B"
+		command = "Resist"
+		is-disabled = false
+	elem 
+		name = "CTRL+B"
+		command = "Resist"
+		is-disabled = false
+	elem 
 		name = "D+REP"
 		command = ".east"
 		is-disabled = false
@@ -634,6 +694,30 @@ macro "hotkeymode"
 	elem 
 		name = "CTRL+J"
 		command = "toggle-gun-mode"
+		is-disabled = false
+	elem 
+		name = "L"
+		command = "looc"
+		is-disabled = false
+	elem 
+		name = "CTRL+L"
+		command = "looc"
+		is-disabled = false
+	elem 
+		name = "M"
+		command = ".me"
+		is-disabled = false
+	elem 
+		name = "CTRL+M"
+		command = ".me"
+		is-disabled = false
+	elem 
+		name = "O"
+		command = "ooc"
+		is-disabled = false
+	elem 
+		name = "CTRL+O"
+		command = "ooc"
 		is-disabled = false
 	elem 
 		name = "Q"
@@ -846,6 +930,10 @@ macro "borgmacro"
 		command = ".west"
 		is-disabled = false
 	elem 
+		name = "CTRL+B"
+		command = "Resist"
+		is-disabled = false
+	elem 
 		name = "CTRL+D+REP"
 		command = ".east"
 		is-disabled = false
@@ -856,6 +944,22 @@ macro "borgmacro"
 	elem 
 		name = "CTRL+G"
 		command = "a-intent right"
+		is-disabled = false
+	elem 
+		name = "CTRL+J"
+		command = "toggle-gun-mode"
+		is-disabled = false
+	elem 
+		name = "CTRL+L"
+		command = "looc"
+		is-disabled = false
+	elem 
+		name = "CTRL+M"
+		command = ".me"
+		is-disabled = false
+	elem 
+		name = "CTRL+O"
+		command = "ooc"
 		is-disabled = false
 	elem 
 		name = "CTRL+Q"
