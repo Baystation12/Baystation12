@@ -10,8 +10,6 @@
 
 /datum/sprite_accessory/hair/eros
 
-	icon = 'icons/eros/mob/Human_face.dmi'	  // default icon for all hairs
-
 	drillruru2
 		drillruru2
 		name = "Drillruru2"
@@ -41,7 +39,6 @@
 
 /datum/sprite_accessory/facial_hair/eros
 
-	icon = 'icons/eros/mob/human_face.dmi'
 	gender = NEUTER
 
 /*
@@ -60,7 +57,7 @@
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Slime")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Slime", "Resomi")
 
 	dik_normal
 		name = "Normal Dick"
@@ -195,7 +192,7 @@
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Slime")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Slime", "Resomi")
 
 	vag_normal
 		name = "Normal Vagina"
@@ -253,7 +250,7 @@
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Slime")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Slime", "Resomi")
 
 	brt_normala
 		name = "Tiny Breasts"
@@ -366,13 +363,13 @@
 
 /datum/sprite_accessory/ears
 	icon = 'icons/eros/mob/extras/ears.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
 
 	ear_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Machine","Akula","Lamia", "Resomi", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Machine","Akula","Lamia", "Resomi", "Machine", "Vox")
 
 	ear_bear
 		name = "Bear Ears"
@@ -483,13 +480,13 @@
 
 /datum/sprite_accessory/wings
 	icon = 'icons/eros/mob/extras/wings.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
 
 	wng_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Akula","Lamia", "Resomi", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Akula","Lamia", "Resomi", "Machine", "Vox")
 
 	wng_angel
 		name = "Angel Wings"
@@ -547,13 +544,13 @@
 
 /datum/sprite_accessory/tails
 	icon = 'icons/eros/mob/extras/tails.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
 
 	tal_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Akula", "Resomi", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Akula", "Resomi", "Machine", "Vox")
 
 	tal_bunny
 		name = "Bunny Tail"
