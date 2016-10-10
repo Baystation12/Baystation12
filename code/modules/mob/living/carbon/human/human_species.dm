@@ -49,6 +49,9 @@
 /mob/living/carbon/human/lamia/New(var/new_loc)
 	..(new_loc, "Lamia")
 
+/mob/living/carbon/human/drider/New(var/new_loc)
+	..(new_loc, "Drider")
+
 /mob/living/carbon/human/monkey/New(var/new_loc)
 	..(new_loc, "Monkey")
 

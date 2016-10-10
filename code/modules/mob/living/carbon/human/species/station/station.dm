@@ -306,8 +306,8 @@
 	unarmed_types = list(/datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
 	blurb = "Lamia lore"
 	num_alternate_languages = 2
-	secondary_langs = list("Sehlin")
-	name_language = "Sehlin"
+	secondary_langs = list(LANGUAGE_LAMIA)
+	name_language = LANGUAGE_LAMIA
 	min_age = 18
 	max_age = 110
 
@@ -336,3 +336,41 @@
 
 /datum/species/lamia/get_bodytype()
 	return "Lamia"
+
+/datum/species/drider
+	name = "Drider"
+	name_plural = "Driders"
+	icobase = 'icons/mob/human_races/r_drider.dmi'
+	deform = 'icons/mob/human_races/r_def_drider.dmi'
+	unarmed_types = list(/datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
+	blurb = "Drider lore"
+	num_alternate_languages = 2
+	secondary_langs = list(LANGUAGE_DRIDER)
+	name_language = LANGUAGE_DRIDER
+	min_age = 18
+	max_age = 110
+
+	toxins_mod = 0.25
+
+	gluttonous = GLUT_SMALLER // They eat smaller creatures.
+	stomach_capacity = MOB_SMALL
+
+	spawn_flags = CAN_JOIN
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+
+	has_limbs = list(
+		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
+		BP_TAUR = list("path" = /obj/item/organ/external/taur/spider)
+		)
+
+	taur_override = "Spider Abdomen"
+
+/datum/species/drider/get_bodytype()
+	return "Drider"
+

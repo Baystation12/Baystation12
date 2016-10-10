@@ -136,11 +136,25 @@
 	return ..(gender, 1, 4, 1.5)
 
 /datum/language/unathi/lamia
-	name = "Sehlin"
+	name = LANGUAGE_LAMIA
 	desc = "A hissing language spoken by Lamias."
 	colour = "lamia"
 	syllables = list("ss", "ss", "ss", "ss", "hiss", "sshs", "ssss", "sas", "es", "sh")
 	key = "/"
+
+/datum/language/drider
+	name = LANGUAGE_DRIDER
+	desc = "A chittering language used by Driders."
+	speech_verb = "chitters"
+	ask_verb = "chitters"
+	exclaim_verb = "chitters"
+	colour = "drider"
+	syllables = list(
+		"dos","vi","zhah","thus","uss","orn","tlu","zild","ssin","nal","urn","iyl","lus","bal","urn",
+		"ere","ghel","haun","sshan","blyn","tyr","menz","ului","drin","shar","wae","macha","rigg","el","lar","cere","ach",
+		"liz","duis","val","ale","ken","rafe","aban","ress","lin","quel","fae","ali","intri"
+	)
+	key = "`"
 
 //Syllable Lists
 /*

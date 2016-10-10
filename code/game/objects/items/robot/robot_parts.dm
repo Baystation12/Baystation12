@@ -74,6 +74,13 @@
 	icon_state = "s_tail"
 	force_path = /obj/item/organ/external/taur/snake
 
+/obj/item/robot_parts/taur/spider
+	name = "spider abdomen"
+	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
+	icon_state = "spider"
+	force_path = /obj/item/organ/external/taur/spider
+
+
 /obj/item/robot_parts/chest
 	name = "torso"
 	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell."

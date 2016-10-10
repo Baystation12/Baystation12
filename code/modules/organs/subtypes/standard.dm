@@ -170,7 +170,10 @@
 /obj/item/organ/external/taur/snake
 	name = "lamia tail"
 	icon_name = "s_tail"
-	joint = "tail"
+
+/obj/item/organ/external/taur/spider
+	name = "spider abdomen"
+	icon_name = "spider"
 
 /obj/item/organ/external/hand
 	organ_tag = BP_L_HAND

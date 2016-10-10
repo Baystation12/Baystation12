@@ -69,6 +69,13 @@
 	time = 35
 	materials = list(DEFAULT_WALL_MATERIAL = 40000)
 
+/datum/design/item/mechfab/robot/snake
+	name = "Robot spider abdomen"
+	id = "robot_spider"
+	build_path = /obj/item/robot_parts/taur/spider
+	time = 35
+	materials = list(DEFAULT_WALL_MATERIAL = 40000)
+
 /datum/design/item/mechfab/robot/component
 	time = 20
 	materials = list(DEFAULT_WALL_MATERIAL = 5000)
