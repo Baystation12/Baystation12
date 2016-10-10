@@ -78,10 +78,12 @@
 	. += "<br>"
 	. += "Ears Type: <a href='?src=\ref[src];cears_type=1'>[pref.ears_type]</a><br>"
 	. += "<a href='?src=\ref[src];ears_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_ears, 2)][num2hex(pref.g_ears, 2)][num2hex(pref.b_ears, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_ears, 2)][num2hex(pref.g_ears, 2)][num2hex(pref.b_ears)]'><tr><td>__</td></tr></table></font><br>"
-	if(pref.species != "Lamia")
-		. += "Tail Type: <a href='?src=\ref[src];ctail_type=1'>[pref.tail_type]</a><br>"
+	var/datum/species/S = all_species[pref.species]
+	var/taur_override = S.taur_override
+	if(taur_override)
+		. += "Tail Type: <font color='grey'>[taur_override]</font><br>"
 	else
-		. += "Tail Type: <font color='grey'>Lamia Tail</font><br>"
+		. += "Tail Type: <a href='?src=\ref[src];ctail_type=1'>[pref.tail_type]</a><br>"
 	. += "<a href='?src=\ref[src];tail_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_tail, 2)][num2hex(pref.g_tail, 2)][num2hex(pref.b_tail, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_tail, 2)][num2hex(pref.g_tail, 2)][num2hex(pref.b_tail)]'><tr><td>__</td></tr></table></font><br>"
 	. += "Wings Type: <a href='?src=\ref[src];cwings_type=1'>[pref.wings_type]</a><br>"
 	. += "<a href='?src=\ref[src];wings_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_wings, 2)][num2hex(pref.g_wings, 2)][num2hex(pref.b_wings, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_wings, 2)][num2hex(pref.g_wings, 2)][num2hex(pref.b_wings)]'><tr><td>__</td></tr></table></font><br>"

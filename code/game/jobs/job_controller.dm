@@ -427,7 +427,7 @@ var/global/datum/controller/occupations/job_master
 			else
 				var/datum/spawnpoint/spawnpoint = get_spawnpoint_for(H.client, rank)
 				H.forceMove(pick(spawnpoint.turfs))
-			
+
 			// Moving wheelchair if they have one
 			if(H.buckled && istype(H.buckled, /obj/structure/bed/chair/wheelchair))
 				H.buckled.forceMove(H.loc)
@@ -441,7 +441,7 @@ var/global/datum/controller/occupations/job_master
 			if(department_account)
 				remembered_info += "<b>Your department's account number is:</b> #[department_account.account_number]<br>"
 				remembered_info += "<b>Your department's account pin is:</b> [department_account.remote_access_pin]<br>"
-				remembered_info += "<b>Your department's account funds are:</b> þ[department_account.money]<br>"
+				remembered_info += "<b>Your department's account funds are:</b> ï¿½[department_account.money]<br>"
 
 			H.mind.store_memory(remembered_info)
 
@@ -481,7 +481,8 @@ var/global/datum/controller/occupations/job_master
 		if(istype(H)) //give humans wheelchairs, if they need them.
 			var/obj/item/organ/external/l_foot = H.get_organ(BP_L_FOOT)
 			var/obj/item/organ/external/r_foot = H.get_organ(BP_R_FOOT)
-			if(!l_foot || !r_foot)
+			var/obj/item/organ/external/taur   = H.get_organ(BP_TAUR)
+			if((!l_foot || !r_foot) && !taur)
 				var/obj/structure/bed/chair/wheelchair/W = new /obj/structure/bed/chair/wheelchair(H.loc)
 				H.buckled = W
 				H.update_canmove()
@@ -584,28 +585,28 @@ var/global/datum/controller/occupations/job_master
  *  preference is not set, or the preference is not appropriate for the rank, in
  *  which case a fallback will be selected.
  */
-/datum/controller/occupations/proc/get_spawnpoint_for(var/client/C, var/rank)	
+/datum/controller/occupations/proc/get_spawnpoint_for(var/client/C, var/rank)
 
 	if(!C)
 		CRASH("Null client passed to get_spawnpoint_for() proc!")
-		
+
 	var/mob/H = C.mob
 	var/datum/spawnpoint/spawnpos
-	
+
 	if(C.prefs.spawnpoint)
 		if(!(C.prefs.spawnpoint in using_map.allowed_spawns))
 			if(H)
 				H << "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead.</span>"
-				
+
 			spawnpos = null
 		else
 			spawnpos = spawntypes[C.prefs.spawnpoint]
-		
+
 	if(spawnpos && !spawnpos.check_job_spawning(rank))
 		if(H)
 			H << "<span class='warning'>Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job ([rank]). Spawning you at another spawn point instead.</span>"
 		spawnpos = null
-	
+
 	if(!spawnpos)
 		// Step through all spawnpoints and pick first appropriate for job
 		for(var/spawntype in using_map.allowed_spawns)
@@ -613,12 +614,12 @@ var/global/datum/controller/occupations/job_master
 			if(candidate.check_job_spawning(rank))
 				spawnpos = candidate
 				break
-		
+
 	if(!spawnpos)
 		// Pick at random from all the (wrong) spawnpoints, just so we have one
 		warning("Could not find an appropriate spawnpoint for job [rank].")
 		spawnpos = spawntypes[pick(using_map.allowed_spawns)]
-		
+
 	return spawnpos
 
 /datum/controller/occupations/proc/GetJobByType(var/job_type)

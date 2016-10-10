@@ -135,6 +135,13 @@
 /datum/language/resomi/get_random_name(gender)
 	return ..(gender, 1, 4, 1.5)
 
+/datum/language/unathi/lamia
+	name = "Sehlin"
+	desc = "A hissing language spoken by Lamias."
+	colour = "lamia"
+	syllables = list("ss", "ss", "ss", "ss", "hiss", "sshs", "ssss", "sas", "es", "sh")
+	key = "/"
+
 //Syllable Lists
 /*
 	This list really long, mainly because I can't make up my mind about which mandarin syllables should be removed,

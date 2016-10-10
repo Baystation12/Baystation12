@@ -876,7 +876,12 @@ proc/get_mob_with_client_list()
 	return mobs
 
 
-/proc/parse_zone(zone)
+/proc/parse_zone(zone, mob/living/carbon/human/H)
+	if(istype(H))
+		if(zone in BP_TAUR_OVERRIDDEN || zone == BP_TAUR)
+			var/obj/item/organ/external/taur = H.get_organ(BP_TAUR)
+			if(taur)
+				return lowertext(taur.name)
 	if(zone == BP_R_HAND) return "right hand"
 	else if (zone == BP_L_HAND) return "left hand"
 	else if (zone == BP_L_ARM) return "left arm"

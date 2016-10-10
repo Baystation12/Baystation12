@@ -6,6 +6,7 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	var/list/part = null // Order of args is important for installing robolimbs.
+	var/force_path = null // Alternative to part list, allows you to specify exactly what organ to create (for non-standard body mods)
 	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
 	var/model_info
 	var/bp_tag = null // What part is this?
@@ -26,7 +27,7 @@
 				icon = R.icon
 	else
 		name = "robot [initial(name)]"
-	
+
 /obj/item/robot_parts/proc/can_install(mob/user)
 	return TRUE
 
@@ -62,6 +63,17 @@
 	model_info = 1
 	bp_tag = BP_R_LEG
 
+/obj/item/robot_parts/taur
+	bp_tag = BP_TAUR
+	part = list(BP_TAUR)
+	model_info = 1
+
+/obj/item/robot_parts/taur/snake
+	name = "lamia tail"
+	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
+	icon_state = "s_tail"
+	force_path = /obj/item/organ/external/taur/snake
+
 /obj/item/robot_parts/chest
 	name = "torso"
 	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell."
@@ -71,7 +83,7 @@
 	bp_tag = BP_CHEST
 	var/wires = 0.0
 	var/obj/item/weapon/cell/cell = null
-	
+
 /obj/item/robot_parts/chest/can_install(mob/user)
 	var/success = TRUE
 	if(!wires)
@@ -91,7 +103,7 @@
 	bp_tag = BP_HEAD
 	var/obj/item/device/flash/flash1 = null
 	var/obj/item/device/flash/flash2 = null
-	
+
 /obj/item/robot_parts/head/can_install(mob/user)
 	var/success = TRUE;
 	if(!(flash1 && flash2))
@@ -257,7 +269,7 @@
 		success &= can_install(user)
 		success &= head_part.can_install(user)
 		if (success)
-			
+
 			// Species selection.
 			var/species = input(user, "Select a species for the prosthetic.") as null|anything in playable_species
 			if(!species)

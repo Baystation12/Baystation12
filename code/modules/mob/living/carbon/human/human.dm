@@ -1511,3 +1511,9 @@
 
 /mob/living/carbon/human/is_invisible_to(var/mob/viewer)
 	return (cloaked || ..())
+
+/mob/living/carbon/human/proc/get_stance_limbs()
+	if(organs_by_name[BP_TAUR])
+		return list(organs_by_name[BP_TAUR])
+	else
+		return list(organs_by_name[BP_L_LEG], organs_by_name[BP_R_LEG], organs_by_name[BP_L_FOOT], organs_by_name[BP_R_FOOT],)

@@ -297,3 +297,42 @@
 			qdel(D)
 
 	H.visible_message("<span class='danger'>\The [H] splits apart with a wet slithering noise!</span>")
+
+/datum/species/lamia
+	name = "Lamia"
+	name_plural = "Lamias"
+	icobase = 'icons/mob/human_races/r_lamia.dmi'
+	deform = 'icons/mob/human_races/r_def_lamia.dmi'
+	unarmed_types = list(/datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
+	blurb = "Lamia lore"
+	num_alternate_languages = 2
+	secondary_langs = list("Sehlin")
+	name_language = "Sehlin"
+	min_age = 18
+	max_age = 110
+
+	gluttonous = GLUT_ANYTHING // They eat people! But don't qdel the corpses, and can only carry one at a time.
+	stomach_capacity = MOB_MEDIUM
+
+	spawn_flags = CAN_JOIN
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+
+	has_limbs = list(
+		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
+		BP_TAUR = list("path" = /obj/item/organ/external/taur/snake)
+		)
+
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/regurgitate
+		)
+
+	taur_override = "Lamia Tail"
+
+/datum/species/lamia/get_bodytype()
+	return "Lamia"

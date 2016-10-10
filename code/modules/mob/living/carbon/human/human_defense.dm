@@ -11,7 +11,12 @@ meteor_act
 
 	def_zone = check_zone(def_zone)
 	if(!has_organ(def_zone))
-		return PROJECTILE_FORCE_MISS //if they don't have the organ in question then the projectile just passes by.
+		if(def_zone in BP_TAUR_OVERRIDDEN)
+			if(!get_organ(BP_TAUR))
+				return PROJECTILE_FORCE_MISS //if they don't have the organ in question and no taur tail, bullet misses
+			//but if they do have a taur tail, this falls through the rest of the conditional
+		else
+			return PROJECTILE_FORCE_MISS //inside an else so the taur conditional can fall through
 
 	var/obj/item/organ/external/organ = get_organ()
 

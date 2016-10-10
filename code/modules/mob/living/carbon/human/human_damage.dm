@@ -342,6 +342,11 @@ This function restores all organs.
 /mob/living/carbon/human/proc/get_organ(var/zone, var/check = 1)
 	if(check)
 		zone = check_zone(zone)
+
+	if(zone in BP_TAUR_OVERRIDDEN)
+		if(organs_by_name[BP_TAUR])
+			return organs_by_name[BP_TAUR]
+
 	return organs_by_name[zone]
 
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/edge = 0, var/obj/used_weapon = null)
@@ -352,6 +357,10 @@ This function restores all organs.
 	else
 		if(!def_zone)	def_zone = ran_zone(def_zone)
 		organ = get_organ(check_zone(def_zone))
+
+	var/obj/item/organ/external/taur = get_organ(BP_TAUR)
+	if(def_zone in BP_TAUR_OVERRIDDEN && taur)
+		organ = taur
 
 	//Handle other types of damage
 	if(damagetype != BRUTE && damagetype != BURN)

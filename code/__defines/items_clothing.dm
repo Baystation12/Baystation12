@@ -130,6 +130,7 @@
 #define HAND_LEFT   0x800
 #define HAND_RIGHT  0x1000
 #define HANDS       0x1800 // HAND_LEFT | HAND_RIGHT
+#define TAUR        0x2000
 #define FULL_BODY   0xFFFF
 
 // Bitflags for the percentual amount of protection a piece of clothing which covers the body part offers.
@@ -138,6 +139,7 @@
 #define THERMAL_PROTECTION_HEAD        0.3
 #define THERMAL_PROTECTION_UPPER_TORSO 0.15
 #define THERMAL_PROTECTION_LOWER_TORSO 0.15
+#define THERMAL_PROTECTION_TAUR        0.15
 #define THERMAL_PROTECTION_LEG_LEFT    0.075
 #define THERMAL_PROTECTION_LEG_RIGHT   0.075
 #define THERMAL_PROTECTION_FOOT_LEFT   0.025

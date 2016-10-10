@@ -62,6 +62,13 @@
 	time = 20
 	materials = list(DEFAULT_WALL_MATERIAL = 15000)
 
+/datum/design/item/mechfab/robot/snake
+	name = "Robot lamia tail"
+	id = "robot_s_tail"
+	build_path = /obj/item/robot_parts/taur/snake
+	time = 35
+	materials = list(DEFAULT_WALL_MATERIAL = 40000)
+
 /datum/design/item/mechfab/robot/component
 	time = 20
 	materials = list(DEFAULT_WALL_MATERIAL = 5000)
@@ -420,7 +427,7 @@
 	name = "Cable layer"
 	id = "mech_cable_layer"
 	build_path = /obj/item/mecha_parts/mecha_equipment/tool/cable_layer
-	
+
 /datum/design/item/mecha/flaregun
 	name = "Flare launcher"
 	id = "mecha_flare_gun"
