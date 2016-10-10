@@ -524,3 +524,6 @@ mob/new_player/MayRespawn()
 
 /mob/new_player/touch_map_edge()
 	return
+
+/mob/new_player/say(var/message)
+	sanitize_and_communicate(/decl/communication_channel/ooc, src, message)
