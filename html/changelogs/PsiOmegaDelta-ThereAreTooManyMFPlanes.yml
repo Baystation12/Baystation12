@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes:
-  - tweak: "Objects are now layered using both planes and layers. Visual layering issues are expected, please report them except if you're running a client older than 510 in which case you have to update first."
-  - tweak: "The 'Show Server Revision' verb should now be more copy-paste friendly, in terms of adding the info to issue tickets, and now also includes the major client version."
