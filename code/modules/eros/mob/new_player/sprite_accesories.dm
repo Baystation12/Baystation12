@@ -29,6 +29,11 @@
 		modern
 		name = "Modern"
 		icon_state = "modern"
+
+	asymmetric_cut
+		asymmetric_cut
+		name = "Asymmetric cut"
+		icon_state = "asymmetric_cut"
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
