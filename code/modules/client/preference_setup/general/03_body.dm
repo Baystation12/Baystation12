@@ -91,7 +91,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		pref.update_preview_icon()
 	user << browse_rsc(pref.preview_icon, "previewicon.png")
 
-	var/mob_species = all_species[pref.species]
+	var/datum/species/mob_species = all_species[pref.species]
 	. += "<table><tr style='vertical-align:top'><td><b>Body</b> "
 	. += "(<a href='?src=\ref[src];random=1'>&reg;</A>)"
 	. += "<br>"
@@ -128,6 +128,12 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				organ_name = "left foot"
 			if(BP_R_FOOT)
 				organ_name = "right foot"
+			if(BP_TAUR)
+				var/list/taur_organ = mob_species.has_limbs[BP_TAUR]
+				if(taur_organ)
+					var/obj/item/organ/external/E = taur_organ.type
+					var/E_name = initial(E.name)
+					organ_name = lowertext(E_name)
 			if(BP_L_HAND)
 				organ_name = "left hand"
 			if(BP_R_HAND)
@@ -404,6 +410,10 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		else if(pref.organ_data[BP_CHEST] == "cyborg")
 			limb_selection_list |= "Head"
 
+		if(current_species.has_limbs[BP_TAUR])
+			limb_selection_list -= list("Left Leg", "Right Leg", "Left Foot", "Right Foot")
+			limb_selection_list |= "Taur"
+
 		var/organ_tag = input(user, "Which limb do you want to change?") as null|anything in limb_selection_list
 
 		if(!organ_tag || !CanUseTopic(user)) return TOPIC_NOACTION
@@ -438,6 +448,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			if("Right Foot")
 				limb = BP_R_FOOT
 				third_limb = BP_R_LEG
+			if("Taur")
+				limb = BP_TAUR
+				choice_options = list("Normal", "Prosthesis")
 			if("Left Hand")
 				limb = BP_L_HAND
 				third_limb = BP_L_ARM

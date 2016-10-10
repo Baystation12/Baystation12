@@ -64,11 +64,15 @@
 	if(air_group || (height==0)) return 1
 	if(istype(mover, /mob/living/simple_animal/hostile/giant_spider))
 		return 1
-	else if(istype(mover, /mob/living))
+	if(ishuman(mover))
+		var/mob/living/carbon/human/H = mover
+		if(istype(H.species, /datum/species/drider)) //driders can pass through webs- only real driders though
+			return 1
+	if(isliving(mover))
 		if(prob(50))
 			mover << "<span class='warning'>You get stuck in \the [src] for a moment.</span>"
 			return 0
-	else if(istype(mover, /obj/item/projectile))
+	if(istype(mover, /obj/item/projectile))
 		return prob(30)
 	return 1
 

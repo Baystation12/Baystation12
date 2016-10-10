@@ -37,6 +37,9 @@
 	var/list/s_col                     // skin colour
 	var/list/h_col                     // hair colour
 	var/body_hair                      // Icon blend for body hair if any.
+	var/no_blend = 0                   // If the organ should be Blend()ed into the human icon or just used as an overlay.
+	var/offset_x = 0                   // Used by the above for non-standard sized icons, they have to be offset to fit correctly.
+	var/offset_y = 0                   // Same, on the y axis instead of x.
 
 	// Wound and structural data.
 	var/wound_update_accuracy = 1      // how often wounds should be updated, a higher number means less often

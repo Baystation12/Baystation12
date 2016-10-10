@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human", "Lamia")
+	var/list/species_allowed = list("Human", "Lamia", "Drider")
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -46,14 +46,14 @@
 /datum/sprite_accessory/hair
 
 	icon = 'icons/mob/Human_face.dmi'	  // default icon for all hairs
-	species_allowed = list("Human","Unathi","Akula","Lamia", "Machine") //I rather if we had machine only hair instead, but will be good enough for release
+	species_allowed = list("Human","Unathi","Akula","Lamia", "Drider", "Machine") //I rather if we had machine only hair instead, but will be good enough for release
 	var/veryshort						//doesn't need to be hidden by BLOCKHEADHAIR hats/helmets
 
 	bald
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human","Unathi","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Akula","Lamia", "Drider", "Machine")
 		veryshort = 1
 
 	short
@@ -494,7 +494,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Lamia", "Drider")
 
 	watson
 		name = "Watson Mustache"
