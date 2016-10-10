@@ -5,6 +5,8 @@ var/list/all_virtual_listeners = list()
 	invisibility = INVISIBILITY_SYSTEM
 	icon = 'icons/mob/virtual.dmi'
 
+	virtual_mob = null
+
 	var/atom/host
 	var/host_type = /atom/movable
 	var/abilities = VIRTUAL_ABILITY_HEAR|VIRTUAL_ABILITY_SEE
@@ -52,16 +54,16 @@ var/list/all_virtual_listeners = list()
 	set src = usr.contents
 	return 0
 
-/atom
-	var/mob/observer/virtual/virtual
+/atom/movable
+	var/mob/observer/virtual/virtual_mob
 
-/atom/New()
+/atom/movable/initialize()
 	..()
-	if(ispath(virtual))
-		virtual = new(get_turf(src), src)
+	if(ispath(virtual_mob))
+		virtual_mob = new(get_turf(src), src)
 
-/atom/Destroy()
-	if(virtual && !ispath(virtual))
-		qdel(virtual)
-		virtual = null
+/atom/movable/Destroy()
+	if(virtual_mob && !ispath(virtual_mob))
+		qdel(virtual_mob)
+	virtual_mob = null
 	return ..()
