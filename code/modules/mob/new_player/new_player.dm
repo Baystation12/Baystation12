@@ -277,6 +277,9 @@
 	if(!job.is_position_available()) return 0
 	if(jobban_isbanned(src,rank))	return 0
 	if(!job.player_old_enough(src.client))	return 0
+	if(!job.is_branch_allowed(client.prefs.char_branch)) return 0
+	if(!job.is_rank_allowed(client.prefs.char_branch, client.prefs.char_rank)) return 0
+	
 	return 1
 
 /mob/new_player/proc/AttemptLateSpawn(rank,var/spawning_at)

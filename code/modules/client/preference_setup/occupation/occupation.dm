@@ -40,11 +40,21 @@
 			pref.job_low[i]  = sanitize(pref.job_low[i])
 	if(!pref.player_alt_titles) pref.player_alt_titles = new()
 
-	if(!pref.char_branch)
-		pref.char_branch = "Unset"
-	if(!pref.char_rank)
-		pref.char_rank = "Unset"
+	var/datum/mil_branch/branch_obj
+	if((using_map.flags & MAP_HAS_BRANCH)\
+	   && (!pref.char_branch || !(pref.char_branch in mil_branches)))
+		pref.char_branch = "None"
+	else
+		branch_obj = mil_branches[pref.char_branch]
 
+	if((using_map.flags & MAP_HAS_RANK)\
+	   && (!pref.char_rank || !branch_obj || !(pref.char_rank in branch_obj.ranks)))
+		pref.char_rank = "None"
+
+	// We could have something like Captain set to high while on a non-rank map,
+	// so we prune here to make sure we don't spawn as a PFC captain
+	prune_job_prefs_for_rank()
+		
 	if(!job_master)
 		return
 
@@ -64,9 +74,7 @@
 	. += "<tt><center>"
 	. += "<b>Choose occupation chances</b><br>Unavailable occupations are crossed out.<br>"
 	if(using_map.flags & MAP_HAS_BRANCH)
-		// if the branch is set to something not available on the map, 
-		// all the jobs that ask for a branch will be unavailable.
-		
+
 		if(pref.char_branch in mil_branches)
 			player_branch = mil_branches[pref.char_branch]
 					
@@ -207,7 +215,8 @@
 		var/choice = input(user, "Choose your branch of service.", "Character Preference", pref.char_branch) as null|anything in spawn_mil_branches
 		if(choice && CanUseTopic(user))
 			pref.char_branch = choice
-			pref.char_rank = "Unset"
+			pref.char_rank = "None"
+			prune_job_prefs_for_rank()
 			return TOPIC_REFRESH
 
 	else if(href_list["char_rank"])
@@ -218,6 +227,7 @@
 			
 		if(choice && CanUseTopic(user))
 			pref.char_rank = choice
+			prune_job_prefs_for_rank()
 			return TOPIC_REFRESH
 	
 	return ..()
@@ -280,6 +290,26 @@
 			return !!(job.title in job_low)
 	return 0
 
+/**
+ *  Prune a player's job preferences based on current branch and rank
+ *
+ *  This proc goes through all the preferred jobs, and removes the ones incompatible with current rank or branch.
+ */
+/datum/category_item/player_setup_item/occupation/proc/prune_job_prefs_for_rank()
+	for(var/datum/job/job in job_master.occupations)
+		if(job.title == pref.job_high)
+			if(!job.is_branch_allowed(pref.char_branch) || !job.is_rank_allowed(pref.char_branch, pref.char_rank))
+				pref.job_high = null
+				
+		else if(job.title in pref.job_medium)
+			if(!job.is_branch_allowed(pref.char_branch) || !job.is_rank_allowed(pref.char_branch, pref.char_rank))
+				pref.job_medium.Remove(job.title)
+		
+		else if(job.title in pref.job_low)
+			if(!job.is_branch_allowed(pref.char_branch) || !job.is_rank_allowed(pref.char_branch, pref.char_rank))
+				pref.job_low.Remove(job.title)
+		
+	
 /datum/category_item/player_setup_item/occupation/proc/ResetJobs()
 	pref.job_high = null
 	pref.job_medium = list()
