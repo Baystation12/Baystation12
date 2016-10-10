@@ -12,30 +12,35 @@
 		return FALSE
 
 /decl/communication_channel/ooc/looc/do_communicate(var/mob/communicator, var/message)
-	var/client/C = communicator.client
-	var/display_name = communicator.stat == DEAD ? C.key : communicator.name
-	var/list/listening = clients_in_range(communicator)
+	var/list/listening_mobs = mobs_in_viewing_range(communicator)
+	var/list/listening_clients = list()
 
-	for(var/client/t in listening)
+	var/client/C = communicator.get_client()
+	var/key = C.key
+
+	for(var/listener in listening_mobs)
+		var/mob/listening_mob = listener
+		var/client/t = listening_mob.get_client()
+		if(!t)
+			continue
+		listening_clients |= t
 		if(!t.is_preference_enabled(/datum/client_preference/show_looc))
 			continue
-		var/admin_stuff = ""
-		var/prefix = ""
-		if(t in admins)
-			admin_stuff += "/([C.key])"
-			if(t != src)
-				admin_stuff += "([admin_jump_link(communicator, t.holder)])"
-		if(isEye(t.get_looc_source()))
-			prefix = "(Eye) "
-		to_chat(t, "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", t) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[message]</span></span></span>")
+		t.receive_looc(communicator, key, message, listening_mob.looc_prefix())
 
 	for(var/client/adm in admins)	//Now send to all admins that weren't in range.
-		if(!(adm in listening) && adm.is_preference_enabled(/datum/client_preference/show_looc) && adm.is_preference_enabled(/datum/client_preference/holder/show_rlooc))
-			var/admin_stuff = "/([C.key])([admin_jump_link(communicator, adm.holder)])"
-			var/prefix = "(R)"
-			to_chat(adm, "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", adm) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[message]</span></span></span>")
+		if(!(adm in listening_clients) && adm.is_preference_enabled(/datum/client_preference/show_looc) && adm.is_preference_enabled(/datum/client_preference/holder/show_rlooc))
+			adm.receive_looc(communicator, key, message, "R")
 
-/client/proc/get_looc_source()
-	if(mob.eyeobj)
-		return mob.eyeobj
-	return mob
+/client/proc/receive_looc(var/mob/communicator, var/commkey, var/message, var/prefix)
+	var/display_name = isghost(communicator) ? commkey : communicator.name
+	var/admin_stuff = holder ? "/([commkey])([admin_jump_link(communicator, holder)])" : ""
+	if(prefix)
+		prefix = "\[[prefix]\] "
+	to_chat(src, "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", src) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[message]</span></span></span>")
+
+/mob/proc/looc_prefix()
+	return eyeobj ? "Body" : ""
+
+/mob/observer/eye/looc_prefix()
+	return "Eye"

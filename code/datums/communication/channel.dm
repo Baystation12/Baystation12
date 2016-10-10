@@ -7,13 +7,17 @@
 
 /decl/communication_channel/proc/communicate(var/datum/communicator, var/message)
 	if(can_communicate(communicator, message))
-		if(is_mob_client_or_mind(communicator))
-			call(log_proc)("[log_prefix ? "([log_prefix]) " : ""][communicator.communication_identifier()] : [message]")
+		call(log_proc)("[log_prefix ? "([log_prefix]) " : ""][communicator.communication_identifier()] : [message]")
 		return do_communicate(communicator, message)
 	return FALSE
 
 /decl/communication_channel/proc/can_communicate(var/communicator, var/message)
-	return message && istype(communicator, expected_communicator_type)
+	if(!message)
+		return FALSE
+	if(!istype(communicator, expected_communicator_type))
+		log_debug("[log_info_line(communicator)] attempted to communicate over the channel [src] but was of an unexpected type.")
+		return FALSE
+	return TRUE
 
 /decl/communication_channel/proc/do_communicate(var/communicator, var/message)
 	return

@@ -20,6 +20,8 @@
 #define SEE_INVISIBLE_OBSERVER            61
 #define SEE_INVISIBLE_SYSTEM              99
 
+#define SEE_IN_DARK_DEFAULT 2
+
 #define SEE_INVISIBLE_MINIMUM 5
 #define INVISIBILITY_MAXIMUM 100
 

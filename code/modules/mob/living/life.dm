@@ -209,9 +209,12 @@
 	if(stat == DEAD || eyeobj)
 		update_dead_sight()
 	else
-		set_sight(sight&(~(SEE_TURFS|SEE_MOBS|SEE_OBJS)))
-		set_see_in_dark(initial(see_in_dark))
-		set_see_invisible(initial(see_invisible))
+		update_living_sight()
+	
+/mob/living/proc/update_living_sight()
+	set_sight(sight&(~(SEE_TURFS|SEE_MOBS|SEE_OBJS)))
+	set_see_in_dark(initial(see_in_dark))
+	set_see_invisible(initial(see_invisible))
 
 /mob/living/proc/update_dead_sight()
 	set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)

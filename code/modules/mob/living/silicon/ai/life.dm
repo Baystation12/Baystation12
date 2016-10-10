@@ -58,7 +58,7 @@
 	..()
 	add_ai_verbs(src)
 
-/mob/living/silicon/ai/update_sight()
+/mob/living/silicon/ai/update_living_sight()
 	if(!has_power() || self_shutdown)
 		updateicon()
 		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
@@ -67,4 +67,4 @@
 		set_see_invisible(SEE_INVISIBLE_LIVING)
 	else
 		clear_fullscreen("blind")
-		update_dead_sight()
+		..()

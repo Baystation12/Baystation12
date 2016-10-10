@@ -156,15 +156,7 @@
 	return 1
 
 /mob/living/carbon/brain/handle_regular_hud_updates()
-	if (stat == DEAD || (XRAY in src.mutations))
-		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
-		set_see_in_dark(8)
-		set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
-	else if (stat != DEAD)
-		set_sight(sight&(~SEE_TURFS)&(~SEE_MOBS)&(~SEE_OBJS))
-		set_see_in_dark(2)
-		set_see_invisible(SEE_INVISIBLE_LIVING)
-
+	update_sight()
 	if (healths)
 		if (stat != 2)
 			switch(health)
@@ -184,15 +176,6 @@
 					healths.icon_state = "health6"
 		else
 			healths.icon_state = "health7"
-
-		if (stat == DEAD || (XRAY in src.mutations))
-			set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
-			set_see_in_dark(8)
-			set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
-		else if (stat != DEAD)
-			set_sight(sight&(~SEE_TURFS)&(~SEE_MOBS)&(~SEE_OBJS))
-			set_see_in_dark(2)
-			set_see_invisible(SEE_INVISIBLE_LIVING)
 
 	if(stat != DEAD)
 		if(blinded)

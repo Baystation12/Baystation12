@@ -35,8 +35,6 @@
 
 #define isliving(A) istype(A, /mob/living)
 
-#define is_mob_client_or_mind(A) (istype(A,/mob) || istype(A, /client) || istype(A, /datum/mind))
-
 #define ismouse(A) istype(A, /mob/living/simple_animal/mouse)
 
 #define ismovable(A) istype(A, /atom/movable)

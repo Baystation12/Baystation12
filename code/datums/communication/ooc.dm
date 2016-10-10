@@ -9,9 +9,9 @@
 	if(!.)
 		return
 
-	if(!communicator.client)
+	var/client/C = communicator.get_client()
+	if(!C)
 		return FALSE
-	var/client/C = communicator.client
 
 	if(IsGuestKey(communicator.key))
 		to_chat(communicator, "<span class='danger'>Guests may not use [ooc_type].</span>")
