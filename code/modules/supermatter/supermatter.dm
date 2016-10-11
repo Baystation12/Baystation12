@@ -105,7 +105,7 @@
 	for(var/mob/living/mob in living_mob_list_)
 		var/turf/T = get_turf(mob)
 		if(T && (loc.z == T.z))
-			if(istype(mob, /mob/living/carbon/human)
+			if(istype(mob, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = mob
 				if(!(H.species.flags & (NO_POISON | IS_PLANT))
 					//Hilariously enough, running into a closet should make you get hit the hardest.
