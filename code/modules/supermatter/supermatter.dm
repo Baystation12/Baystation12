@@ -107,7 +107,7 @@
 		if(T && (loc.z == T.z))
 			if(istype(mob, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = mob
-				if(!(H.species.flags & (NO_POISON | IS_PLANT))
+				if(!(H.species.flags & (NO_POISON | IS_PLANT)))
 					//Hilariously enough, running into a closet should make you get hit the hardest.
 					H.hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
 				var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
