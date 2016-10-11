@@ -371,6 +371,7 @@
 		vol.data = Clamp(vol.data, 0, 100)
 		frequency.data = round(Clamp(frequency.data, 0, 1))
 		playsound(get_turf(src), selected_sound, vol.data, frequency.data, -1)
+		audible_message("\The [istype(loc, /obj/item/device/electronic_assembly) ? loc : src] plays the sound '[ID.data]'.")
 
 /obj/item/integrated_circuit/output/sound/beeper
 	name = "beeper circuit"

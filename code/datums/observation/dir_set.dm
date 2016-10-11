@@ -25,9 +25,15 @@ var/decl/observ/dir_set/dir_set_event = new()
 * Direction Handling *
 *********************/
 
+/atom/set_dir()
+	var/old_dir = dir
+	. = ..()
+	if(old_dir != dir)
+		dir_set_event.raise_event(src, old_dir, dir)
+
 /atom/movable/Entered(var/atom/movable/am, atom/old_loc)
 	. = ..()
-	if(. != CANCEL_MOVE_EVENT && dir_set_event.has_listeners(am))
+	if(dir_set_event.has_listeners(am))
 		dir_set_event.register(src, am, /atom/proc/recursive_dir_set)
 
 /atom/movable/Exited(var/atom/movable/am, atom/old_loc)
