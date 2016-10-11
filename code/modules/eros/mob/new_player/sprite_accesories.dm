@@ -10,13 +10,30 @@
 
 /datum/sprite_accessory/hair/eros
 
-	icon = 'icons/eros/mob/Human_face.dmi'	  // default icon for all hairs
+	drillruru2
+		drillruru2
+		name = "Drillruru2"
+		icon_state = "drillruru2"
 
-	example
-		example
-		name = "Example"
-		icon_state = "example"
+	poofy2
+		poofy2
+		name = "Poofy2"
+		icon_state = "poofy2"
 
+	ponytail6
+		ponytail6
+		name = "Ponytail6"
+		icon_state = "ponytail6"
+
+	modern
+		modern
+		name = "Modern"
+		icon_state = "modern"
+
+	asymmetric_cut
+		asymmetric_cut
+		name = "Asymmetric cut"
+		icon_state = "asymmetric_cut"
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
@@ -27,7 +44,6 @@
 
 /datum/sprite_accessory/facial_hair/eros
 
-	icon = 'icons/eros/mob/human_face.dmi'
 	gender = NEUTER
 
 /*
@@ -40,13 +56,13 @@
 
 /datum/sprite_accessory/dicks
 	icon = 'icons/eros/mob/extras/dicks.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider")
 
 	dik_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Slime")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Drider", "Slime", "Resomi")
 
 	dik_normal
 		name = "Normal Dick"
@@ -103,67 +119,67 @@
 		name = "Amputed Dick"
 		icon_state = "amputed"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	dik_bishop
 		name = "Bishop Synthpenis"
 		icon_state = "robo-bishop"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	dik_hesphiastos
 		name = "Hesphiastos Synthpenis"
 		icon_state = "robo-hesphiastos"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	dik_morpheus
 		name = "Morpheus Synthpenis"
 		icon_state = "robo-morpheus"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	dik_wardtakahashi
 		name = "Ward-Takahashi Synthpenis"
 		icon_state = "robo-wardtakahashi"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	dik_zenghu
 		name = "Zeng-hu Synthpenis"
 		icon_state = "robo-zenghu"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	dik_xion
 		name = "Xion Synthpenis"
 		icon_state = "robo-xion"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	dik_nt
 		name = "NanoTrasen Synthpenis"
 		icon_state = "robo-nanotrasen"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	dik_morpheus
 		name = "Morpheus Synthpenis"
 		icon_state = "robo-morpheus"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	dik_scorpius
 		name = "Scorpius Synthpenis"
 		icon_state = "robo-scorpius"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	dik_unbranded
 		name = "Unbranded Synthpenis"
 		icon_state = "robo-unbranded"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 /*
 //////////////////////////////
@@ -175,13 +191,13 @@
 
 /datum/sprite_accessory/vaginas
 	icon = 'icons/eros/mob/extras/vaginas.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider")
 
 	vag_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Slime")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Drider", "Slime", "Resomi")
 
 	vag_normal
 		name = "Normal Vagina"
@@ -233,13 +249,13 @@
 
 /datum/sprite_accessory/breasts
 	icon = 'icons/eros/mob/extras/breasts.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider")
 
 	brt_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Slime")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Drider", "Slime", "Resomi")
 
 	brt_normala
 		name = "Tiny Breasts"
@@ -291,55 +307,55 @@
 		name = "Bishop Synthbreasts"
 		icon_state = "robo-bishop"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	brt_hesphiastos
 		name = "Hesphiastos Synthbreasts"
 		icon_state = "robo-hesphiastos"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	brt_wardtakahashi
 		name = "Ward-Takahashi Synthbreasts"
 		icon_state = "robo-wardtakahashi"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	brt_zenghu
 		name = "Zeng-hu Synthbreasts"
 		icon_state = "robo-zenghu"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	brt_xion
 		name = "Xion Synthbreasts"
 		icon_state = "robo-xion"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	brt_nt
 		name = "NanoTrasen Synthbreasts"
 		icon_state = "robo-nanotrasen"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	brt_scorpius
 		name = "Scorpius Synthbreasts"
 		icon_state = "robo-scorpius"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	brt_morpheus
 		name = "Morpheus Synthbreasts"
 		icon_state = "robo-morpheus"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	brt_unbranded
 		name = "Unbranded Synthbreasts"
 		icon_state = "robo-unbranded"
 		do_colouration = 0
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 
 /*
@@ -352,13 +368,13 @@
 
 /datum/sprite_accessory/ears
 	icon = 'icons/eros/mob/extras/ears.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	ear_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Machine","Akula","Lamia", "Resomi")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Machine","Akula","Lamia", "Drider", "Resomi", "Machine", "Vox")
 
 	ear_bear
 		name = "Bear Ears"
@@ -469,13 +485,13 @@
 
 /datum/sprite_accessory/wings
 	icon = 'icons/eros/mob/extras/wings.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	wng_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Akula","Lamia", "Teshari")
+		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Akula","Lamia", "Drider", "Resomi", "Machine", "Vox")
 
 	wng_angel
 		name = "Angel Wings"
@@ -533,13 +549,13 @@
 
 /datum/sprite_accessory/tails
 	icon = 'icons/eros/mob/extras/tails.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	tal_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Akula", "Resomi")
+		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Akula", "Resomi", "Machine", "Vox")
 
 	tal_bunny
 		name = "Bunny Tail"

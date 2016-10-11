@@ -123,25 +123,26 @@ Please contact me on #coderbus IRC. ~Carn x
 #define GLOVES_LAYER			9
 #define BELT_LAYER				10
 #define SUIT_LAYER				11
-#define TAIL_LAYER				12		//bs12 specific. this hack is probably gonna come back to haunt me
-#define WINGS_LAYER				13		//EROS
-#define GLASSES_LAYER			14
-#define BELT_LAYER_ALT			15
-#define SUIT_STORE_LAYER		16
-#define BACK_LAYER				17
-#define HAIR_LAYER				18		//TODO: make part of head layer?
-#define NATURAL_EARS_LAYER		19
-#define EARS_LAYER				20
-#define FACEMASK_LAYER			21
-#define HEAD_LAYER				22
-#define COLLAR_LAYER			23
-#define HANDCUFF_LAYER			24
-#define LEGCUFF_LAYER			25
-#define L_HAND_LAYER			26
-#define R_HAND_LAYER			27
-#define FIRE_LAYER				28		//If you're on fire
-#define TARGETED_LAYER			29		//BS12: Layer for the target overlay from weapon targeting system
-#define TOTAL_LAYERS			29
+#define ORGAN_OVERLAY_LAYER		12		// for any organs that are bigger than a standard human (Blend() crops images, so it has to have special handling)
+#define TAIL_LAYER				13		//bs12 specific. this hack is probably gonna come back to haunt me
+#define WINGS_LAYER				14		//EROS
+#define GLASSES_LAYER			15
+#define BELT_LAYER_ALT			16
+#define SUIT_STORE_LAYER		17
+#define BACK_LAYER				18
+#define HAIR_LAYER				19		//TODO: make part of head layer?
+#define NATURAL_EARS_LAYER		20
+#define EARS_LAYER				21
+#define FACEMASK_LAYER			22
+#define HEAD_LAYER				23
+#define COLLAR_LAYER			24
+#define HANDCUFF_LAYER			25
+#define LEGCUFF_LAYER			26
+#define L_HAND_LAYER			27
+#define R_HAND_LAYER			28
+#define FIRE_LAYER				29		//If you're on fire
+#define TARGETED_LAYER			30		//BS12: Layer for the target overlay from weapon targeting system
+#define TOTAL_LAYERS			30
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -243,6 +244,7 @@ var/global/list/damage_icon_parts = list()
 
 //BASE MOB SPRITE
 /mob/living/carbon/human/proc/update_body(var/update_icons=1)
+	overlays_standing[ORGAN_OVERLAY_LAYER] = null
 	var/husk_color_mod = rgb(96,88,80)
 	var/hulk_color_mod = rgb(48,224,40)
 
@@ -307,6 +309,8 @@ var/global/list/damage_icon_parts = list()
 		base_icon = chest.get_icon()
 
 		for(var/obj/item/organ/external/part in organs)
+			if(part.no_blend) // organs that are larger than the mob sprite must be rendered as an overlay
+				continue
 			var/icon/temp = part.get_icon()
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
@@ -347,10 +351,19 @@ var/global/list/damage_icon_parts = list()
 	//END CACHED ICON GENERATION.
 	stand_icon.Blend(base_icon,ICON_OVERLAY)
 
+	for(var/obj/item/organ/external/E in organs)
+		if(E.no_blend)
+			var/image/S = image("icon" = E.get_icon(skeleton), "icon_state" = E.icon_state, "pixel_x" = E.offset_x, "pixel_y" = E.offset_y)
+			overlays_standing[ORGAN_OVERLAY_LAYER] = S
+			continue
+
 	if(update_icons)
 		update_icons()
 
 	//tail
+	update_genitals_showing(0) //eros
+	update_wings(0) //eros
+	update_ears(0) //eros
 	update_tail_showing(0)
 
 //UNDERWEAR OVERLAY

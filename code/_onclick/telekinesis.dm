@@ -68,11 +68,12 @@ var/const/tk_maxrange = 15
 	flags = NOBLUDGEON
 	//item_state = null
 	w_class = 10.0
-	layer = SCREEN_LAYER
 
 	var/last_throw = 0
 	var/atom/movable/focus = null
 	var/mob/living/host = null
+	plane = HUD_PLANE
+	layer = HUD_ITEM_LAYER
 
 /obj/item/tk_grab/dropped(mob/user as mob)
 	if(focus && user && loc != user && loc != user.loc) // drop_item() gets called when you tk-attack a table/closet with an item

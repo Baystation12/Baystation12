@@ -221,6 +221,8 @@
 #undef HUMAN_ID_CARDS
 
 /mob/living/silicon/GetIdCard()
+	if(stat || (ckey && !client))
+		return // Unconscious, dead or once possessed but now client-less silicons are not considered to have id access.
 	return idcard
 
 /proc/FindNameFromID(var/mob/M, var/missing_id_name = "Unknown")

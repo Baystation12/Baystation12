@@ -19,7 +19,7 @@ var/list/limb_icon_cache = list()
 	if(robotic >= ORGAN_ROBOT)
 		var/datum/robolimb/franchise = all_robolimbs[model]
 		if(!(franchise && franchise.skintone))
-			return
+			return 1
 	if(species && human.species && species.name != human.species.name)
 		return
 	if(!isnull(human.s_tone) && (human.species.appearance_flags & HAS_SKIN_TONE))
@@ -35,7 +35,7 @@ var/list/limb_icon_cache = list()
 	if(robotic >= ORGAN_ROBOT)
 		var/datum/robolimb/franchise = all_robolimbs[model]
 		if(!(franchise && franchise.skintone))
-			return
+			return 1
 	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (species.appearance_flags & HAS_SKIN_TONE))
 		s_tone = dna.GetUIValue(DNA_UI_SKIN_TONE)
 	if(species.appearance_flags & HAS_SKIN_COLOR)
@@ -115,9 +115,9 @@ var/list/limb_icon_cache = list()
 			var/icon/eyes_icon = new/icon('icons/mob/human_face.dmi', eye_icon)
 			var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
 			if(eyes)
-				eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)
+				eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_MULTIPLY)
 			else
-				eyes_icon.Blend(rgb(128,0,0), ICON_ADD)
+				eyes_icon.Blend(rgb(128,0,0), ICON_MULTIPLY)
 			mob_icon.Blend(eyes_icon, ICON_OVERLAY)
 			overlays |= eyes_icon
 
@@ -177,7 +177,7 @@ var/list/robot_hud_colours = list("#FFFFFF","#CCCCCC","#AAAAAA","#888888","#6666
 		var/cache_key = "dambase-[icon_cache_key]"
 		if(!icon_cache_key || !limb_icon_cache[cache_key])
 			limb_icon_cache[cache_key] = icon(get_icon(), null, SOUTH)
-		var/image/temp = image(limb_icon_cache[cache_key])
+		var/image/temp = image("icon" = limb_icon_cache[cache_key], "icon_state" = icon_state, "pixel_x" = offset_x, "pixel_y" = offset_y)
 		if(species)
 			// Calculate the required colour matrix.
 			var/r = 0.30 * species.health_hud_intensity

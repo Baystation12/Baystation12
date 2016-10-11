@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human")
+	var/list/species_allowed = list("Human", "Lamia", "Drider")
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -46,14 +46,14 @@
 /datum/sprite_accessory/hair
 
 	icon = 'icons/mob/Human_face.dmi'	  // default icon for all hairs
-	species_allowed = list("Human","Unathi","Akula","Lamia", "Machine")
+	species_allowed = list("Human","Unathi","Akula","Lamia", "Drider", "Machine") //I rather if we had machine only hair instead, but will be good enough for release
 	var/veryshort						//doesn't need to be hidden by BLOCKHEADHAIR hats/helmets
 
 	bald
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human","Unathi","Akula","Lamia", "Machine")
+		species_allowed = list("Human","Unathi","Akula","Lamia", "Drider", "Machine")
 		veryshort = 1
 
 	short
@@ -103,6 +103,31 @@
 	resomi_mohawk
 		name = "Resomi Mohawk"
 		icon_state = "resomi_mohawk"
+		species_allowed = list("Resomi")
+
+	resomi_pointy
+		name = "Resomi Pointy"
+		icon_state = "resomi_pointy"
+		species_allowed = list("Resomi")
+
+	resomi_upright
+		name = "Resomi Upright"
+		icon_state = "resomi_upright"
+		species_allowed = list("Resomi")
+
+	resomi_mane
+		name = "Resomi Mane"
+		icon_state = "resomi_mane"
+		species_allowed = list("Resomi")
+
+	resomi_droopy
+		name = "Resomi Droopy"
+		icon_state = "resomi_droopy"
+		species_allowed = list("Resomi")
+
+	resomi_mushroom
+		name = "Resomi Mushroom"
+		icon_state = "resomi_mushroom"
 		species_allowed = list("Resomi")
 
 	cut
@@ -287,6 +312,10 @@
 		name = "Emo"
 		icon_state = "hair_emo"
 
+	emo2
+		name = "Emo Alt"
+		icon_state = "hair_emo2"
+
 	longemo
 		name = "Long Emo"
 		icon_state = "hair_emolong"
@@ -465,7 +494,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Lamia", "Drider")
 
 	watson
 		name = "Watson Mustache"

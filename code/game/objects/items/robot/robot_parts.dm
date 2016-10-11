@@ -6,8 +6,10 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	var/list/part = null // Order of args is important for installing robolimbs.
+	var/force_path = null // Alternative to part list, allows you to specify exactly what organ to create (for non-standard body mods)
 	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
 	var/model_info
+	var/bp_tag = null // What part is this?
 	dir = SOUTH
 
 /obj/item/robot_parts/set_dir()
@@ -26,12 +28,16 @@
 	else
 		name = "robot [initial(name)]"
 
+/obj/item/robot_parts/proc/can_install(mob/user)
+	return TRUE
+
 /obj/item/robot_parts/l_arm
 	name = "left arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_arm"
 	part = list(BP_L_ARM, BP_L_HAND)
 	model_info = 1
+	bp_tag = BP_L_ARM
 
 /obj/item/robot_parts/r_arm
 	name = "right arm"
@@ -39,6 +45,7 @@
 	icon_state = "r_arm"
 	part = list(BP_R_ARM, BP_R_HAND)
 	model_info = 1
+	bp_tag = BP_R_ARM
 
 /obj/item/robot_parts/l_leg
 	name = "left leg"
@@ -46,6 +53,7 @@
 	icon_state = "l_leg"
 	part = list(BP_L_LEG, BP_L_FOOT)
 	model_info = 1
+	bp_tag = BP_L_LEG
 
 /obj/item/robot_parts/r_leg
 	name = "right leg"
@@ -53,33 +61,68 @@
 	icon_state = "r_leg"
 	part = list(BP_R_LEG, BP_R_FOOT)
 	model_info = 1
+	bp_tag = BP_R_LEG
+
+/obj/item/robot_parts/taur
+	bp_tag = BP_TAUR
+	part = list(BP_TAUR)
+	model_info = 1
+
+/obj/item/robot_parts/taur/snake
+	name = "lamia tail"
+	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
+	icon_state = "s_tail"
+	force_path = /obj/item/organ/external/taur/snake
+
+/obj/item/robot_parts/taur/spider
+	name = "spider abdomen"
+	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
+	icon_state = "spider"
+	force_path = /obj/item/organ/external/taur/spider
+
 
 /obj/item/robot_parts/chest
 	name = "torso"
 	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell."
 	icon_state = "chest"
 	part = list(BP_GROIN,BP_CHEST)
+	model_info = 1
+	bp_tag = BP_CHEST
 	var/wires = 0.0
 	var/obj/item/weapon/cell/cell = null
+
+/obj/item/robot_parts/chest/can_install(mob/user)
+	var/success = TRUE
+	if(!wires)
+		to_chat(user, "<span class='warning'>You need to attach wires to it first!</span>")
+		success = FALSE
+	if(!cell)
+		to_chat(user, "<span class='warning'>You need to attach a cell to it first!</span>")
+		success = FALSE
+	return success && ..()
 
 /obj/item/robot_parts/head
 	name = "head"
 	desc = "A standard reinforced braincase, with spine-plugged neural socket and sensor gimbals."
 	icon_state = "head"
 	part = list(BP_HEAD)
+	model_info = 1
+	bp_tag = BP_HEAD
 	var/obj/item/device/flash/flash1 = null
 	var/obj/item/device/flash/flash2 = null
+
+/obj/item/robot_parts/head/can_install(mob/user)
+	var/success = TRUE;
+	if(!(flash1 && flash2))
+		to_chat(user, "<span class='warning'>You need to attach a flash to it first!</span>")
+		success = FALSE:
+	return success && ..();
 
 /obj/item/robot_parts/robot_suit
 	name = "endoskeleton"
 	desc = "A complex metal backbone with standard limb sockets and pseudomuscle anchors."
 	icon_state = "robo_suit"
-	var/obj/item/robot_parts/l_arm/l_arm = null
-	var/obj/item/robot_parts/r_arm/r_arm = null
-	var/obj/item/robot_parts/l_leg/l_leg = null
-	var/obj/item/robot_parts/r_leg/r_leg = null
-	var/obj/item/robot_parts/chest/chest = null
-	var/obj/item/robot_parts/head/head = null
+	var/parts = list()
 	var/created_name = ""
 
 /obj/item/robot_parts/robot_suit/New()
@@ -88,30 +131,28 @@
 
 /obj/item/robot_parts/robot_suit/proc/updateicon()
 	src.overlays.Cut()
-	if(src.l_arm)
+	if(src.parts[BP_L_ARM])
 		src.overlays += "l_arm+o"
-	if(src.r_arm)
+	if(src.parts[BP_R_ARM])
 		src.overlays += "r_arm+o"
-	if(src.chest)
+	if(src.parts[BP_CHEST])
 		src.overlays += "chest+o"
-	if(src.l_leg)
+	if(src.parts[BP_L_LEG])
 		src.overlays += "l_leg+o"
-	if(src.r_leg)
+	if(src.parts[BP_R_LEG])
 		src.overlays += "r_leg+o"
-	if(src.head)
+	if(src.parts[BP_HEAD])
 		src.overlays += "head+o"
 
 /obj/item/robot_parts/robot_suit/proc/check_completion()
-	if(src.l_arm && src.r_arm)
-		if(src.l_leg && src.r_leg)
-			if(src.chest && src.head)
-				feedback_inc("cyborg_frames_built",1)
-				return 1
+	if(src.parts[BP_L_ARM] && src.parts[BP_R_ARM] && src.parts[BP_L_LEG] && src.parts[BP_R_LEG] && src.parts[BP_CHEST] && src.parts[BP_HEAD])
+		feedback_inc("cyborg_frames_built",1)
+		return 1
 	return 0
 
 /obj/item/robot_parts/robot_suit/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if(istype(W, /obj/item/stack/material) && W.get_material_name() == DEFAULT_WALL_MATERIAL && !l_arm && !r_arm && !l_leg && !r_leg && !chest && !head)
+	if(istype(W, /obj/item/stack/material) && W.get_material_name() == DEFAULT_WALL_MATERIAL && !parts[BP_L_ARM] && !parts[BP_R_ARM] && !parts[BP_L_LEG] && !parts[BP_R_LEG] && !parts[BP_CHEST] && !parts[BP_HEAD])
 		var/obj/item/stack/material/M = W
 		if (M.use(1))
 			var/obj/item/weapon/secbot_assembly/ed209_assembly/B = new /obj/item/weapon/secbot_assembly/ed209_assembly
@@ -123,55 +164,15 @@
 			qdel(src)
 		else
 			user << "<span class='warning'>You need one sheet of metal to arm the robot frame.</span>"
-	if(istype(W, /obj/item/robot_parts/l_leg))
-		if(src.l_leg)	return
-		user.drop_item()
-		W.loc = src
-		src.l_leg = W
-		src.updateicon()
 
-	if(istype(W, /obj/item/robot_parts/r_leg))
-		if(src.r_leg)	return
-		user.drop_item()
-		W.loc = src
-		src.r_leg = W
-		src.updateicon()
-
-	if(istype(W, /obj/item/robot_parts/l_arm))
-		if(src.l_arm)	return
-		user.drop_item()
-		W.loc = src
-		src.l_arm = W
-		src.updateicon()
-
-	if(istype(W, /obj/item/robot_parts/r_arm))
-		if(src.r_arm)	return
-		user.drop_item()
-		W.loc = src
-		src.r_arm = W
-		src.updateicon()
-
-	if(istype(W, /obj/item/robot_parts/chest))
-		if(src.chest)	return
-		if(W:wires && W:cell)
+	if (istype(W, /obj/item/robot_parts))
+		var/obj/item/robot_parts/part = W
+		if(src.parts[part.bp_tag])	return
+		if(part.can_install(user))
 			user.drop_item()
-			W.loc = src
-			src.chest = W
+			part.loc = src
+			src.parts[part.bp_tag] = part
 			src.updateicon()
-		else if(!W:wires)
-			user << "<span class='warning'>You need to attach wires to it first!</span>"
-		else
-			user << "<span class='warning'>You need to attach a cell to it first!</span>"
-
-	if(istype(W, /obj/item/robot_parts/head))
-		if(src.head)	return
-		if(W:flash2 && W:flash1)
-			user.drop_item()
-			W.loc = src
-			src.head = W
-			src.updateicon()
-		else
-			user << "<span class='warning'>You need to attach a flash to it first!</span>"
 
 	if(istype(W, /obj/item/device/mmi))
 		var/obj/item/device/mmi/M = W
@@ -218,6 +219,7 @@
 
 			O.job = "Cyborg"
 
+			var/obj/item/robot_parts/chest/chest = parts[BP_CHEST]
 			O.cell = chest.cell
 			O.cell.loc = O
 			W.loc = O//Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
@@ -267,6 +269,57 @@
 			coil.use(1)
 			src.wires = 1.0
 			user << "<span class='notice'>You insert the wire!</span>"
+	if(istype(W, /obj/item/robot_parts/head))
+		var/obj/item/robot_parts/head/head_part = W
+		// Attempt to create full-body prosthesis.
+		var/success = TRUE
+		success &= can_install(user)
+		success &= head_part.can_install(user)
+		if (success)
+
+			// Species selection.
+			var/species = input(user, "Select a species for the prosthetic.") as null|anything in playable_species
+			if(!species)
+				species = "Human"
+			var/name = sanitizeSafe(input(user,"Set a name for the new prosthetic."), MAX_NAME_LEN)
+			if(!name)
+				name = "prosthetic ([random_id("prosthetic_id", 1, 999)])"
+
+			// Create a new, nonliving human.
+			var/mob/living/carbon/human/H = new /mob/living/carbon/human(loc)
+			H.death(0, "no message")
+			H.set_species(species)
+			H.fully_replace_character_name(name)
+
+			// Remove all external organs other than chest and head..
+			for (var/O in list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG))
+				var/obj/item/organ/external/organ = H.organs_by_name[O]
+				H.organs -= organ
+				H.organs_by_name[organ.organ_tag] = null
+				qdel(organ)
+
+			// Remove brain (we want to put one in).
+			var/obj/item/organ/internal/brain = H.internal_organs_by_name[BP_BRAIN]
+			H.organs -= brain
+			H.organs_by_name[brain.organ_tag] = null
+			qdel(brain)
+
+			// Robotize remaining organs: Eyes, head, and chest.
+			// Respect brand used.
+			var/obj/item/organ/internal/eyes = H.internal_organs_by_name[BP_EYES]
+			eyes.robotize()
+
+			var/obj/item/organ/external/head = H.organs_by_name[BP_HEAD]
+			var/head_company = head_part.model_info
+			head.robotize(head_company)
+
+			var/obj/item/organ/external/chest = H.organs_by_name[BP_CHEST]
+			var/chest_company = model_info
+			chest.robotize(chest_company)
+
+			// Cleanup
+			qdel(W)
+			qdel(src)
 	return
 
 /obj/item/robot_parts/head/attackby(obj/item/W as obj, mob/user as mob)

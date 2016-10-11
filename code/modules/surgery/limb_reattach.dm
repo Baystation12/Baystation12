@@ -13,11 +13,17 @@
 /datum/surgery_step/limb/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!hasorgans(target))
 		return 0
+	if (target_zone in BP_TAUR_OVERRIDDEN)
+		if(istype(tool, /obj/item/organ/external/taur))
+			target_zone = BP_TAUR
+		if(istype(tool, /obj/item/robot_parts/taur))
+			target_zone = BP_TAUR
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if (affected)
 		return 0
 	var/list/organ_data = target.species.has_limbs["[target_zone]"]
-	return !isnull(organ_data)
+	var/can_use = (!isnull(organ_data) || istype(tool, /obj/item/robot_parts/taur))
+	return can_use
 
 //////////////////////////////////////////////////////////////////
 //	 limb attachment surgery step
@@ -104,6 +110,14 @@
 		var/obj/item/robot_parts/p = tool
 		if (p.part)
 			if (!(target_zone in p.part))
+				if(BP_TAUR in p.part)
+					if(target_zone in BP_TAUR_OVERRIDDEN)
+						for(var/organ in BP_TAUR_OVERRIDDEN) //taur organs can only be attached if all of the limbs it overrides are gone
+							if(!isnull(target.get_organ(organ)))
+								return 0
+							if(!isnull(target.get_organ(BP_TAUR)))
+								return 0
+							return 1
 				return 0
 		return isnull(target.get_organ(target_zone))
 
@@ -113,10 +127,13 @@
 
 /datum/surgery_step/limb/mechanize/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/robot_parts/L = tool
-	user.visible_message("<span class='notice'>[user] has attached \the [tool] to [target].</span>",	\
-	"<span class='notice'>You have attached \the [tool] to [target].</span>")
+	if(L.force_path)
+		var/obj/item/organ/external/new_limb = new L.force_path(target)
+		new_limb.robotize(L.model_info)
+		if(L.sabotaged)
+			new_limb.sabotaged = 1
 
-	if(L.part)
+	else if(L.part)
 		for(var/part_name in L.part)
 			if(!isnull(target.get_organ(part_name)))
 				continue
@@ -128,6 +145,9 @@
 			new_limb.robotize(L.model_info)
 			if(L.sabotaged)
 				new_limb.sabotaged = 1
+
+	user.visible_message("<span class='notice'>[user] has attached \the [tool] to [target].</span>",
+	"<span class='notice'>You have attached \the [tool] to [target].</span>")
 
 	target.update_body()
 	target.updatehealth()

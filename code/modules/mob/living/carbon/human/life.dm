@@ -543,6 +543,8 @@
 			. += THERMAL_PROTECTION_FOOT_LEFT
 		if(flags & FOOT_RIGHT)
 			. += THERMAL_PROTECTION_FOOT_RIGHT
+		if(flags & TAUR)
+			. += THERMAL_PROTECTION_TAUR
 		if(flags & ARM_LEFT)
 			. += THERMAL_PROTECTION_ARM_LEFT
 		if(flags & ARM_RIGHT)
@@ -1155,7 +1157,7 @@
 
 /mob/living/carbon/human/handle_vision()
 	if(client)
-		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
+		client.screen.Remove(global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
 	if(machine)
 		var/viewflags = machine.check_eye(src)
 		if(viewflags < 0)

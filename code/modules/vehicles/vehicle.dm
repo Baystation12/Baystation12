@@ -7,7 +7,8 @@
 /obj/vehicle
 	name = "vehicle"
 	icon = 'icons/obj/vehicles.dmi'
-	layer = MOB_LAYER + 0.1 //so it sits above objects including mobs
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 	density = 1
 	anchored = 1
 	animate_movement=1
@@ -16,7 +17,7 @@
 	can_buckle = 1
 	buckle_movable = 1
 	buckle_lying = 0
-
+	
 	var/attack_log = null
 	var/on = 0
 	var/health = 0	//do not forget to set health for your vehicle!
@@ -285,7 +286,8 @@
 	load = C
 
 	if(load_item_visible)
-		C.layer = layer + 0.1		//so it sits above the vehicle
+		C.plane = plane
+		C.layer = VEHICLE_LOAD_LAYER		//so it sits above the vehicle
 
 	if(ismob(C))
 		buckle_mob(C)
@@ -336,7 +338,7 @@
 	else
 		load.pixel_x = initial(load.pixel_x)
 		load.pixel_y = initial(load.pixel_y)
-	load.layer = initial(load.layer)
+	load.reset_plane_and_layer()
 
 	if(ismob(load))
 		unbuckle_mob(load)

@@ -59,12 +59,12 @@
 
 	stat = DEAD
 
+	if(plane == HIDING_MOB_PLANE)
+		reset_plane_and_layer()
 	update_canmove()
 
 	dizziness = 0
 	jitteriness = 0
-
-	layer = MOB_LAYER
 
 	sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
 	see_in_dark = 8
@@ -91,6 +91,5 @@
 
 	if(ticker && ticker.mode)
 		ticker.mode.check_win()
-
 
 	return 1

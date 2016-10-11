@@ -87,41 +87,6 @@
 	icon_state = "beret"
 	body_parts_covered = 0
 
-/obj/item/clothing/head/beret/sol
-	name = "peacekeeper beret"
-	desc = "A beret in Sol Central Government colors. For peacekeepers that are more inclined towards style than safety."
-	icon_state = "beret_lightblue"
-
-/obj/item/clothing/head/beret/sol/homeguard
-	name = "home guard beret"
-	desc = "A red beret denoting service in the Sol Home Guard. For personnel that are more inclined towards style than safety."
-	icon_state = "beret_red"
-
-/obj/item/clothing/head/beret/sol/gateway
-	name = "gateway administration beret"
-	desc = "An orange beret denoting service in the Gateway Administration. For personnel that are more inclined towards style than safety."
-	icon_state = "beret_orange"
-
-/obj/item/clothing/head/beret/sol/customs
-	name = "customs and trade beret"
-	desc = "A purple beret denoting service in the Customs and Trade Bureau. For personnel that are more inclined towards style than safety."
-	icon_state = "beret_purpleyellow"
-
-/obj/item/clothing/head/beret/sol/orbital
-	name = "orbital assault beret"
-	desc = "A blue beret denoting orbital assault training. For helljumpers that are more inclined towards style than safety."
-	icon_state = "beret_blue"
-
-/obj/item/clothing/head/beret/sol/research
-	name = "government research beret"
-	desc = "A green beret denoting service in the Bureau of Research. For explorers that are more inclined towards style than safety."
-	icon_state = "beret_green"
-
-/obj/item/clothing/head/beret/sol/health
-	name = "health service beret"
-	desc = "A white beret denoting service in the Interstellar Health Service. For medics that are more inclined towards style than safety."
-	icon_state = "beret_white"
-
 /obj/item/clothing/head/beret/sec
 	name = "corporate security beret"
 	desc = "A beret with the security insignia emblazoned on it. For officers that are more inclined towards style than safety."

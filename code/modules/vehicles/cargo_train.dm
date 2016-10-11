@@ -43,7 +43,9 @@
 	..()
 	cell = new /obj/item/weapon/cell/high(src)
 	key = new(src)
-	var/image/I = new(icon = 'icons/obj/vehicles.dmi', icon_state = "cargo_engine_overlay", layer = src.layer + 0.2) //over mobs
+	var/image/I = new(icon = 'icons/obj/vehicles.dmi', icon_state = "cargo_engine_overlay")
+	I.plane = plane
+	I.layer = layer
 	overlays += I
 	turn_off()	//so engine verbs are correctly set
 
@@ -301,14 +303,15 @@
 	if(load_item_visible)
 		C.pixel_x += load_offset_x
 		C.pixel_y += load_offset_y
-		C.layer = layer
+		C.plane = plane
+		C.layer = VEHICLE_LOAD_LAYER
 
 		overlays += C
 
 		//we can set these back now since we have already cloned the icon into the overlay
 		C.pixel_x = initial(C.pixel_x)
 		C.pixel_y = initial(C.pixel_y)
-		C.layer = initial(C.layer)
+		C.reset_plane_and_layer()
 
 /obj/vehicle/train/cargo/trolley/unload(var/mob/user, var/direction)
 	if(istype(load, /datum/vehicle_dummy_load))

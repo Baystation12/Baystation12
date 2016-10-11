@@ -87,7 +87,8 @@
 	if(isrobot(user))
 		spawn(0)
 			var/atom/movable/overlay/animation = new(user.loc)
-			animation.layer = user.layer + 1
+			animation.plane = user.plane
+			animation.layer = user.layer + 0.01
 			animation.icon_state = "blank"
 			animation.icon = 'icons/mob/mob.dmi'
 			animation.master = user
@@ -140,7 +141,8 @@
 	if(user && isrobot(user))
 		spawn(0)
 			var/atom/movable/overlay/animation = new(user.loc)
-			animation.layer = user.layer + 1
+			animation.plane = user.plane
+			animation.layer = user.layer + 0.01
 			animation.icon_state = "blank"
 			animation.icon = 'icons/mob/mob.dmi'
 			animation.master = user

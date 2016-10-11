@@ -124,9 +124,6 @@
 		else
 			healths.icon_state = "health7"
 
-	if (client)
-		client.screen.Remove(global_hud.blurry,global_hud.druggy,global_hud.vimpaired)
-
 	if(stat != DEAD)
 		if(blinded)
 			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)

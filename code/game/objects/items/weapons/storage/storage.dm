@@ -162,7 +162,7 @@
 	src.boxes.screen_loc = "[tx]:,[ty] to [mx],[my]"
 	for(var/obj/O in src.contents)
 		O.screen_loc = "[cx],[cy]"
-		O.layer = SCREEN_LAYER+0.01
+		O.hud_layerise()
 		cx++
 		if (cx > mx)
 			cx = tx
@@ -188,7 +188,7 @@
 	for(var/obj/O in contents)
 		O.screen_loc = "[cx]:16,[cy]:16"
 		O.maptext = ""
-		O.layer = SCREEN_LAYER+0.01
+		O.hud_layerise()
 		cx++
 		if (cx > (4+cols))
 			cx = 4
@@ -237,7 +237,7 @@
 
 		O.screen_loc = "4:[round((startpoint+endpoint)/2)+2],2:16"
 		O.maptext = ""
-		O.layer = SCREEN_LAYER+0.01
+		O.hud_layerise()
 
 	src.closer.screen_loc = "4:[storage_width+19],2:16"
 	return
@@ -373,12 +373,12 @@
 		if(ismob(loc))
 			W.dropped(usr)
 		if(ismob(new_location))
-			W.layer = SCREEN_LAYER+0.01
+			W.hud_layerise()
 		else
-			W.layer = initial(W.layer)
-		W.loc = new_location
+			W.reset_plane_and_layer()
+		W.forceMove(new_location)
 	else
-		W.loc = get_turf(src)
+		W.forceMove(get_turf(src))
 
 	if(usr)
 		src.orient2hud(usr)
@@ -500,41 +500,41 @@
 	src.boxes.master = src
 	src.boxes.icon_state = "block"
 	src.boxes.screen_loc = "7,7 to 10,8"
-	src.boxes.layer = SCREEN_LAYER
+	src.boxes.layer = HUD_BASE_LAYER
 
 	src.storage_start = new /obj/screen/storage(  )
 	src.storage_start.name = "storage"
 	src.storage_start.master = src
 	src.storage_start.icon_state = "storage_start"
 	src.storage_start.screen_loc = "7,7 to 10,8"
-	src.storage_start.layer = SCREEN_LAYER
+	src.storage_start.layer = HUD_BASE_LAYER
 	src.storage_continue = new /obj/screen/storage(  )
 	src.storage_continue.name = "storage"
 	src.storage_continue.master = src
 	src.storage_continue.icon_state = "storage_continue"
 	src.storage_continue.screen_loc = "7,7 to 10,8"
-	src.storage_continue.layer = SCREEN_LAYER
+	src.storage_continue.layer = HUD_BASE_LAYER
 	src.storage_end = new /obj/screen/storage(  )
 	src.storage_end.name = "storage"
 	src.storage_end.master = src
 	src.storage_end.icon_state = "storage_end"
 	src.storage_end.screen_loc = "7,7 to 10,8"
-	src.storage_end.layer = SCREEN_LAYER
+	src.storage_end.layer = HUD_BASE_LAYER
 
 	src.stored_start = new /obj //we just need these to hold the icon
 	src.stored_start.icon_state = "stored_start"
-	src.stored_start.layer = SCREEN_LAYER
+	src.stored_start.layer = HUD_BASE_LAYER
 	src.stored_continue = new /obj
 	src.stored_continue.icon_state = "stored_continue"
-	src.stored_continue.layer = SCREEN_LAYER
+	src.stored_continue.layer = HUD_BASE_LAYER
 	src.stored_end = new /obj
 	src.stored_end.icon_state = "stored_end"
-	src.stored_end.layer = SCREEN_LAYER
+	src.stored_end.layer = HUD_BASE_LAYER
 
 	src.closer = new /obj/screen/close(  )
 	src.closer.master = src
 	src.closer.icon_state = "x"
-	src.closer.layer = SCREEN_LAYER
+	src.closer.layer = HUD_BASE_LAYER
 	orient2hud()
 
 	if(startswith)

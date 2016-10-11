@@ -34,7 +34,6 @@ obj/machinery/atmospherics/pipe/mains_component
 
 obj/machinery/atmospherics/mains_pipe
 	icon = 'icons/obj/atmospherics/mainspipe.dmi'
-	layer = 2.4 //under wires with their 2.5
 
 	var/volume = 0
 

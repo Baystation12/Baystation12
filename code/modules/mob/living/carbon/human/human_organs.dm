@@ -76,10 +76,9 @@
 	if (istype(buckled, /obj/structure/bed))
 		return
 
-	var/list/stance_limbs = species.get_stance_limbs()
+	var/list/stance_limbs = get_stance_limbs()
 	var/limb_pain
-	for(var/limb_tag in stance_limbs)
-		var/obj/item/organ/external/E = organs_by_name[limb_tag]
+	for(var/obj/item/organ/external/E in stance_limbs)
 		if(!E || !E.is_usable())
 			stance_damage += (8 / stance_limbs.len) //for variable-amount limbs; if they only have 1 limb, they will get 8 stance damage off the bat; if they have 4, they get 2 per
 		else if(E.is_malfunctioning())

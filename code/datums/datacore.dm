@@ -282,7 +282,7 @@
 	var/icon/eyes_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = use_eye_icon)
 
 	if (H.species.flags & HAS_EYE_COLOR)
-		eyes_s.Blend(rgb(H.r_eyes, H.g_eyes, H.b_eyes), ICON_ADD)
+		eyes_s.Blend(rgb(H.r_eyes, H.g_eyes, H.b_eyes), ICON_MULTIPLY)
 
 	var/datum/sprite_accessory/hair_style = hair_styles_list[H.h_style]
 	if(hair_style)

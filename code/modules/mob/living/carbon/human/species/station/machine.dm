@@ -17,7 +17,7 @@
 	num_alternate_languages = 1 // potentially could be 2?
 	name_language = LANGUAGE_EAL
 
-	min_age = 1
+	min_age = 18
 	max_age = 90
 
 	brute_mod = 1 // Because of the introduction of FBPs, IPCs are rebalanced back to 1.
@@ -39,7 +39,7 @@
 
 	flags = NO_SCAN | NO_PAIN | NO_POISON
 	spawn_flags = CAN_JOIN
-	appearance_flags = HAS_UNDERWEAR | HAS_BIOMODS //IPCs can wear undies too :(
+	appearance_flags = HAS_UNDERWEAR | HAS_BIOMODS | HAS_HAIR_COLOR //IPCs can wear undies too :(
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
@@ -71,7 +71,7 @@
 	heat_discomfort_strings = list(
 		"Your CPU temperature probes warn you that you are approaching critical heat levels!"
 		)
-	genders = list(NEUTER)
+	genders = list(MALE, FEMALE, NEUTER)
 
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)
 	..()

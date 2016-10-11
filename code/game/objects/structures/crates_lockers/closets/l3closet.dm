@@ -14,6 +14,33 @@
 	..()
 	new /obj/item/clothing/suit/bio_suit/general( src )
 	new /obj/item/clothing/head/bio_hood/general( src )
+	new /obj/item/clothing/mask/gas/half(src)
+	new /obj/item/weapon/tank/emergency/oxygen/engi(src)
+
+/obj/structure/closet/l3closet/general/multi
+
+/obj/structure/closet/l3closet/general/multi/New()
+	..()
+	new /obj/item/clothing/suit/bio_suit/general(src)
+	new /obj/item/clothing/head/bio_hood/general(src)
+	new /obj/item/clothing/mask/gas/half(src)
+	new /obj/item/weapon/tank/emergency/oxygen/engi(src)
+	new /obj/item/clothing/suit/bio_suit/general(src)
+	new /obj/item/clothing/head/bio_hood/general(src)
+	new /obj/item/clothing/mask/gas/half(src)
+	new /obj/item/weapon/tank/emergency/oxygen/engi(src)
+	new /obj/item/clothing/suit/bio_suit/general(src)
+	new /obj/item/clothing/head/bio_hood/general(src)
+	new /obj/item/clothing/mask/gas/half(src)
+	new /obj/item/weapon/tank/emergency/oxygen/engi(src)
+	new /obj/item/clothing/suit/bio_suit/general(src)
+	new /obj/item/clothing/head/bio_hood/general(src)
+	new /obj/item/clothing/mask/gas/half(src)
+	new /obj/item/weapon/tank/emergency/oxygen/engi(src)
+	new /obj/item/clothing/suit/bio_suit/general(src)
+	new /obj/item/clothing/head/bio_hood/general(src)
+	new /obj/item/clothing/mask/gas/half(src)
+	new /obj/item/weapon/tank/emergency/oxygen/engi(src)
 
 
 /obj/structure/closet/l3closet/virology
@@ -25,7 +52,7 @@
 	..()
 	new /obj/item/clothing/suit/bio_suit/virology( src )
 	new /obj/item/clothing/head/bio_hood/virology( src )
-	new /obj/item/clothing/mask/breath(src)
+	new /obj/item/clothing/mask/gas(src)
 	new /obj/item/weapon/tank/oxygen(src)
 
 
@@ -38,6 +65,8 @@
 	..()
 	new /obj/item/clothing/suit/bio_suit/security( src )
 	new /obj/item/clothing/head/bio_hood/security( src )
+	new /obj/item/clothing/mask/gas/half(src)
+	new /obj/item/weapon/tank/emergency/oxygen/engi(src)
 
 
 /obj/structure/closet/l3closet/janitor
@@ -49,6 +78,8 @@
 	..()
 	new /obj/item/clothing/suit/bio_suit/janitor( src )
 	new /obj/item/clothing/head/bio_hood/janitor( src )
+	new /obj/item/clothing/mask/gas/half(src)
+	new /obj/item/weapon/tank/emergency/oxygen/engi(src)
 
 
 /obj/structure/closet/l3closet/scientist
@@ -60,3 +91,42 @@
 	..()
 	new /obj/item/clothing/suit/bio_suit/scientist( src )
 	new /obj/item/clothing/head/bio_hood/scientist( src )
+	new /obj/item/clothing/mask/gas(src)
+	new /obj/item/weapon/tank/emergency/oxygen/double(src)
+
+/obj/structure/closet/l3closet/scientist/multi
+
+/obj/structure/closet/l3closet/scientist/multi/New()
+	..()
+	new /obj/item/clothing/suit/bio_suit/scientist(src)
+	new /obj/item/clothing/head/bio_hood/scientist(src)
+	new /obj/item/clothing/mask/gas(src)
+	new /obj/item/weapon/tank/emergency/oxygen/double(src)
+	new /obj/item/clothing/suit/bio_suit/scientist(src)
+	new /obj/item/clothing/head/bio_hood/scientist(src)
+	new /obj/item/clothing/mask/gas(src)
+	new /obj/item/weapon/tank/emergency/oxygen/double(src)
+	new /obj/item/clothing/suit/bio_suit/scientist(src)
+	new /obj/item/clothing/head/bio_hood/scientist(src)
+	new /obj/item/clothing/mask/gas(src)
+	new /obj/item/weapon/tank/emergency/oxygen/double(src)
+	new /obj/item/clothing/suit/bio_suit/scientist(src)
+	new /obj/item/clothing/head/bio_hood/scientist(src)
+	new /obj/item/clothing/mask/gas(src)
+	new /obj/item/weapon/tank/emergency/oxygen/double(src)
+	new /obj/item/clothing/suit/bio_suit/scientist(src)
+	new /obj/item/clothing/head/bio_hood/scientist(src)
+	new /obj/item/clothing/mask/gas(src)
+	new /obj/item/weapon/tank/emergency/oxygen/double(src)
+
+/obj/structure/closet/l3closet/command
+	icon_state = "bio_command"
+	icon_closed = "bio_command"
+	icon_opened = "bio_commandopen"
+
+/obj/structure/closet/l3closet/command/New()
+	..()
+	new /obj/item/clothing/suit/bio_suit/cmo( src )
+	new /obj/item/clothing/head/bio_hood/cmo( src )
+	new /obj/item/clothing/mask/gas/half(src)
+	new /obj/item/weapon/tank/emergency/oxygen/engi(src)

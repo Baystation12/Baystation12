@@ -21,8 +21,13 @@
 	var/store_items = 1
 	var/store_mobs = 1
 
+	var/list/will_contain
+
 /obj/structure/closet/initialize()
 	..()
+	if(will_contain)
+		create_objects_in_loc(src, will_contain)
+
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
 		var/obj/item/I
 		for(I in src.loc)
@@ -32,9 +37,9 @@
 /obj/structure/closet/examine(mob/user)
 	if(..(user, 1) && !opened)
 		var/content_size = 0
-		for(var/obj/item/I in src.contents)
-			if(!I.anchored)
-				content_size += content_size(I)
+		for(var/atom/movable/AM in src.contents)
+			if(!AM.anchored)
+				content_size += content_size(AM)
 		if(!content_size)
 			user << "It is empty."
 		else if(storage_capacity > content_size*4)

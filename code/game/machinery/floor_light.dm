@@ -5,7 +5,8 @@ var/list/floor_light_cache = list()
 	icon = 'icons/obj/machines/floor_light.dmi'
 	icon_state = "base"
 	desc = "A backlit floor panel."
-	layer = TURF_LAYER+0.001
+	plane = ABOVE_TURF_PLANE
+	layer = ABOVE_TILE_LAYER
 	anchored = 0
 	use_power = 2
 	idle_power_usage = 2
@@ -110,6 +111,7 @@ var/list/floor_light_cache = list()
 			if(!floor_light_cache[cache_key])
 				var/image/I = image("on")
 				I.color = default_light_colour
+				I.plane = plane
 				I.layer = layer+0.001
 				floor_light_cache[cache_key] = I
 			overlays |= floor_light_cache[cache_key]
@@ -120,6 +122,7 @@ var/list/floor_light_cache = list()
 			if(!floor_light_cache[cache_key])
 				var/image/I = image("flicker[damaged]")
 				I.color = default_light_colour
+				I.plane = plane
 				I.layer = layer+0.001
 				floor_light_cache[cache_key] = I
 			overlays |= floor_light_cache[cache_key]

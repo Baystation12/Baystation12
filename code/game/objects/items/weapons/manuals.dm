@@ -726,6 +726,95 @@
 		"}
 
 
+/obj/item/weapon/book/manual/solgov_law
+	name = "Sol Central Government Law"
+	desc = "A brief overview of SolGov Law."
+	icon_state = "bookSolGovLaw"
+	author = "The Sol Central Government"
+	title = "Sol Central Government Law"
+
+/obj/item/weapon/book/manual/solgov_law/New()
+	..()
+	dat = {"
+
+		<html><head>
+		</head>
+
+		<body>
+		<iframe width='100%' height='97%' src="[config.wikiurl]Sol_Central_Government_Law&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		</body>
+
+		</html>
+
+		"}
+
+
+/obj/item/weapon/book/manual/military_law
+	name = "The Sol Code of Military Justice"
+	desc = "A brief overview of military law."
+	icon_state = "bookSolGovLaw"
+	author = "The Sol Central Government"
+	title = "The Sol Code of Military Justice"
+
+/obj/item/weapon/book/manual/military_law/New()
+	..()
+	dat = {"
+
+		<html><head>
+		</head>
+
+		<body>
+		<iframe width='100%' height='97%' src="[config.wikiurl]Sol_Code_of_Military_Justice&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		</body>
+
+		</html>
+
+		"}
+
+/obj/item/weapon/book/manual/sol_sop
+	name = "Standard Operating Procedure"
+	desc = "SOP aboard the SEV Torch."
+	icon_state = "booksolregs"
+	author = "The Sol Central Government"
+	title = "Standard Operating Procedure"
+
+/obj/item/weapon/book/manual/sol_sop/New()
+	..()
+	dat = {"
+
+		<html><head>
+		</head>
+
+		<body>
+		<iframe width='100%' height='97%' src="[config.wikiurl]SEV_Torch_Standard_Operating_Procedure&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		</body>
+
+		</html>
+
+		"}
+
+/obj/item/weapon/book/manual/nt_regs
+	name = "NanoTrasen Regulations"
+	desc = "A set of corporate guidelines for employees of NanoTrasen."
+	icon_state = "booknanoregs"
+	author = "NanoTrasen"
+	title = "NanoTrasen Regulations"
+
+/obj/item/weapon/book/manual/nt_regs/New()
+	..()
+	dat = {"
+
+		<html><head>
+		</head>
+
+		<body>
+		<iframe width='100%' height='97%' src="[config.wikiurl]Corporate_Regulations&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		</body>
+
+		</html>
+
+		"}
+
 
 /obj/item/weapon/book/manual/medical_diagnostics_manual
 	name = "Medical Diagnostics Manual"

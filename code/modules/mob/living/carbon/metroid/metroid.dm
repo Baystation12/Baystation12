@@ -6,7 +6,6 @@
 	var/is_adult = 0
 	speak_emote = list("chirps")
 
-	layer = 5
 	maxHealth = 150
 	health = 150
 	gender = NEUTER

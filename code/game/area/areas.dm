@@ -9,7 +9,6 @@
 
 /area/New()
 	icon_state = ""
-	layer = 10
 	uid = ++global_uid
 	all_areas += src
 
@@ -290,10 +289,10 @@ var/list/mob/living/forced_ambiance_list = new
 			L.playsound_local(T, sound(sound, repeat = 0, wait = 0, volume = 25, channel = 1))
 			L.client.played = world.time
 
-/area/proc/gravitychange(var/gravitystate = 0, var/area/A)
-	A.has_gravity = gravitystate
+/area/proc/gravitychange(var/gravitystate = 0)
+	has_gravity = gravitystate
 
-	for(var/mob/M in A)
+	for(var/mob/M in src)
 		if(has_gravity)
 			thunk(M)
 		M.update_floating()

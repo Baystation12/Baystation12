@@ -108,6 +108,73 @@
 	joint = "right ankle"
 	amputation_point = "right ankle"
 
+/obj/item/organ/external/taur
+	organ_tag = BP_TAUR
+	body_part = TAUR
+	parent_organ = BP_GROIN
+	joint = "groin"
+	amputation_point = "groin"
+	max_damage = 120
+	min_broken_damage = 60
+	can_stand = 1
+	dislocated = -1
+	no_blend = 1
+	offset_x = -16
+	var/list/t_col
+
+/obj/item/organ/external/taur/robotize(var/company, var/skip_prosthetics, var/keep_organs)
+	. = ..()
+	force_icon = null
+
+/obj/item/organ/external/taur/sync_colour_to_human(var/mob/living/carbon/human/human)
+	if(!..(human))
+		t_col = list(human.r_tail, human.g_tail, human.b_tail)
+
+/obj/item/organ/external/taur/sync_colour_to_dna()
+	if(!..())
+		t_col = list(dna.GetUIValue(DNA_UI_TAIL_R),dna.GetUIValue(DNA_UI_TAIL_G),dna.GetUIValue(DNA_UI_TAIL_B))
+
+/obj/item/organ/external/taur/update_icon(var/regenerate = 0)
+	icon_state = "[icon_name]"
+	icon_cache_key = "[icon_state]_[species ? species.name : "Human"]"
+
+	icon = 'icons/mob/human_races/taur.dmi'
+	if(force_icon)
+		icon = force_icon
+	else if (robotic >= ORGAN_ROBOT)
+		icon_state = "[icon_name]_r"
+		if(model)
+			icon_state = "[icon_name]_r_[lowertext(model)]"
+
+	else if (status & ORGAN_MUTATED)
+		icon_state = "[icon_name]_d"
+	else if (owner && (SKELETON in owner.mutations))
+		icon_state = "[icon_name]_s"
+
+	mob_icon = new /icon(icon, icon_state)
+	if(status & ORGAN_DEAD)
+		icon_cache_key += "_dead"
+		mob_icon.ColorTone(rgb(10,50,0))
+		mob_icon.SetIntensity(0.7)
+
+	if(t_col && t_col.len >= 3)
+		mob_icon.Blend(rgb(t_col[1], t_col[2], t_col[3]), ICON_MULTIPLY)
+		icon_cache_key += "_color_[t_col[1]]_[t_col[2]]_[t_col[3]]"
+
+	if(model)
+		icon_cache_key += "_model_[model]"
+
+	dir = EAST
+	icon = mob_icon
+
+/obj/item/organ/external/taur/snake
+	name = "lamia tail"
+	icon_name = "s_tail"
+
+/obj/item/organ/external/taur/spider
+	name = "spider abdomen"
+	icon_name = "spider"
+
 /obj/item/organ/external/hand
 	organ_tag = BP_L_HAND
 	name = "left hand"
