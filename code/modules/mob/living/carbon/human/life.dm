@@ -661,7 +661,7 @@
 			Paralyse(3)
 
 		if(hallucination)
-			if(hallucination >= 20)
+			if(hallucination >= 20 && !(species.flags & (NO_POISON|IS_PLANT)) )
 				if(prob(3))
 					fake_attack(src)
 				if(!handling_hal)
@@ -676,11 +676,11 @@
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-			if(halloss >= species.total_health)
-				src << "<span class='warning'>[species.halloss_message_self]</span>"
-				src.visible_message("<B>[src]</B> [species.halloss_message].")
-				Paralyse(10)
-				setHalLoss(species.total_health-1)
+		if(halloss >= species.total_health)
+			src << "<span class='warning'>[species.halloss_message_self]</span>"
+			src.visible_message("<B>[src]</B> [species.halloss_message].")
+			Paralyse(10)
+			setHalLoss(species.total_health-1)
 
 		if(paralysis || sleeping)
 			blinded = 1
