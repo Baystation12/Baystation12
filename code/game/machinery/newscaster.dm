@@ -166,7 +166,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	var/datum/feed_channel/viewing_channel = null
 	light_range = 0
 	anchored = 1
-
+	layer = ABOVE_WINDOW_LAYER
 
 /obj/machinery/newscaster/security_unit                   //Security unit
 	name = "Security Newscaster"

@@ -1,8 +1,8 @@
 "a" = (/turf/space,/area/space)
 "b" = (/turf/simulated/floor/reinforced/airless,/area/space)
-"c" = (/obj/structure/sign/securearea{desc = "A warning sign which reads 'EJECTION/VENTING PORT'."; name = "\improper EJECTION/VENTING PORT"; pixel_x = 0; pixel_y = 0},/turf/simulated/floor/reinforced/airless,/area/space)
+"c" = (/obj/structure/sign/warning/vent_port,/turf/simulated/floor/reinforced/airless,/area/space)
 "d" = (/turf/simulated/open,/area/space)
-"e" = (/obj/structure/sign/securearea{desc = "A warning sign which reads 'EJECTION/VENTING PORT'."; name = "\improper EJECTION/VENTING PORT"; pixel_x = 0; pixel_y = 0},/turf/simulated/floor/reinforced,/area/space)
+"e" = (/obj/structure/sign/warning/vent_port,/turf/simulated/floor/reinforced,/area/space)
 "f" = (/obj/effect/landmark/map_data{height = 5},/turf/space,/area/space)
 
 (1,1,1) = {"

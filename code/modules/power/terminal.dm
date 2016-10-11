@@ -8,8 +8,8 @@
 	icon_state = "term"
 	desc = "It's an underfloor wiring terminal for power equipment."
 	level = 1
-	plane = ABOVE_PLATING_PLANE
-	layer = WIRE_TERMINAL_LAYER
+	plane = ABOVE_TURF_PLANE
+	layer = EXPOSED_WIRE_TERMINAL_LAYER
 	var/obj/machinery/power/master = null
 	anchored = 1
 
@@ -26,9 +26,12 @@
 		master = null
 	return ..()
 
-/obj/machinery/power/terminal/hide(var/i)
-	invisibility = i ? 101 : initial(invisibility)
-	icon_state = i ? "term-f" : "term"
+/obj/machinery/power/terminal/hide(var/do_hide)
+	if(do_hide && level == 1)
+		plane = ABOVE_PLATING_PLANE
+		layer = WIRE_TERMINAL_LAYER
+	else
+		reset_plane_and_layer()
 
 // Needed so terminals are not removed from machines list.
 // Powernet rebuilds need this to work properly.

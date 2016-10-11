@@ -39,6 +39,8 @@
 	anchored = 0
 	light_range = 4
 
+	layer = ABOVE_OBJ_LAYER
+
 	var/gasefficency = 0.25
 
 	var/base_icon_state = "darkmatter"
