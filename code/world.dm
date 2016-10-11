@@ -74,7 +74,7 @@
 	icon_size = WORLD_ICON_SIZE
 
 
-#define RECOMMENDED_VERSION 509
+#define RECOMMENDED_VERSION 510
 /world/New()
 	//logs
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
