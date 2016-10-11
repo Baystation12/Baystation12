@@ -2,7 +2,7 @@
 //
 // Refactored 27.12.2014 by Atlantis
 //
-// Blast doors are suposed to be reinforced versions of regular doors. Instead of being manually
+// Blast doors are supposed to be reinforced versions of regular doors. Instead of being manually
 // controlled they use buttons or other means of remote control. This is why they cannot be emagged
 // as they lack any ID scanning system, they just handle remote control signals. Subtypes have
 // different icons, which are defined by set of variables. Subtypes are on bottom of this file.
@@ -19,7 +19,7 @@
 	var/icon_state_closed = null
 	var/icon_state_closing = null
 
-	closed_layer = ABOVE_DOOR_LAYER // Above airlocks when closed
+	closed_layer = ABOVE_WINDOW_LAYER
 	var/id = 1.0
 	dir = 1
 	explosion_resistance = 25
@@ -28,6 +28,7 @@
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
+	var/begins_closed = TRUE
 	var/_wifi_id
 	var/datum/wifi/receiver/button/door/wifi_receiver
 
@@ -35,6 +36,12 @@
 	..()
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
+
+	if(!begins_closed)
+		icon_state = icon_state_open
+		density = 0
+		opacity = 0
+		layer = open_layer
 
 /obj/machinery/door/airlock/Destroy()
 	qdel(wifi_receiver)
@@ -166,7 +173,7 @@
 
 // SUBTYPE: Regular
 // Your classical blast door, found almost everywhere.
-obj/machinery/door/blast/regular
+/obj/machinery/door/blast/regular
 	icon_state_open = "pdoor0"
 	icon_state_opening = "pdoorc0"
 	icon_state_closed = "pdoor1"
@@ -175,10 +182,8 @@ obj/machinery/door/blast/regular
 	maxhealth = 600
 	block_air_zones = 1
 
-obj/machinery/door/blast/regular/open
-	icon_state = "pdoor0"
-	density = 0
-	opacity = 0
+/obj/machinery/door/blast/regular/open
+	begins_closed = FALSE
 
 // SUBTYPE: Shutters
 // Nicer looking, and also weaker, shutters. Found in kitchen and similar areas.
@@ -188,3 +193,6 @@ obj/machinery/door/blast/regular/open
 	icon_state_closed = "shutter1"
 	icon_state_closing = "shutterc1"
 	icon_state = "shutter1"
+
+/obj/machinery/door/blast/shutters/open
+	begins_closed = FALSE

@@ -7,6 +7,7 @@
 	w_class = 5
 	canhear_range = 2
 	flags = CONDUCT | NOBLOODY
+	layer = ABOVE_WINDOW_LAYER
 	var/number = 0
 	var/last_tick //used to delay the powercheck
 
