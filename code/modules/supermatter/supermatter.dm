@@ -105,12 +105,13 @@
 	for(var/mob/living/mob in living_mob_list_)
 		var/turf/T = get_turf(mob)
 		if(T && (loc.z == T.z))
-			if(istype(mob, /mob/living/carbon/human) && !(mob.species.flags & (NO_POISON | IS_PLANT))
-				//Hilariously enough, running into a closet should make you get hit the hardest.
+			if(istype(mob, /mob/living/carbon/human)
 				var/mob/living/carbon/human/H = mob
-				H.hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
-			var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
-			mob.apply_effect(rads, IRRADIATE)
+				if(!(H.species.flags & (NO_POISON | IS_PLANT))
+					//Hilariously enough, running into a closet should make you get hit the hardest.
+					H.hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
+				var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
+				mob.apply_effect(rads, IRRADIATE)
 	spawn(pull_time)
 		explosion(get_turf(src), explosion_power, explosion_power * 1.25, explosion_power * 1.5, explosion_power * 1.75, 1)
 		qdel(src)
@@ -257,8 +258,7 @@
 		env.merge(removed)
 
 	for(var/mob/living/carbon/human/l in view(src, min(7, round(sqrt(power/6))))) // If they can see it without mesons on.  Bad on them.
-		var/mob/living/carbon/human/H = l
-		if(!istype(l.glasses, /obj/item/clothing/glasses/meson) && !(H.species.flags & (NO_POISON | IS_PLANT))
+		if(!istype(l.glasses, /obj/item/clothing/glasses/meson) && !(l.species.flags & (NO_POISON | IS_PLANT))
 			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
 
 	//adjusted range so that a power of 170 (pretty high) results in 9 tiles, roughly the distance from the core to the engine monitoring room.
