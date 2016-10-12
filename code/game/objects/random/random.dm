@@ -98,10 +98,10 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "red"
 	item_to_spawn()
-		return pick(prob(3);/obj/item/weapon/storage/toolbox/mechanical,\
-					prob(2);/obj/item/weapon/storage/toolbox/electrical,\
-					prob(1);/obj/item/weapon/storage/toolbox/syndicate,\
-					prob(2);/obj/item/weapon/storage/toolbox/emergency)
+		return pick(prob(30);/obj/item/weapon/storage/toolbox/mechanical,\
+					prob(20);/obj/item/weapon/storage/toolbox/electrical,\
+					prob(20);/obj/item/weapon/storage/toolbox/emergency,\
+					prob(1);/obj/item/weapon/storage/toolbox/syndicate)
 
 
 /obj/random/tech_supply
