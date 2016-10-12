@@ -100,6 +100,9 @@
 	var/sec_record = ""
 	var/gen_record = ""
 	var/exploit_record = ""
+	
+	var/char_branch = ""
+	var/char_rank = ""
 
 	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
 	var/cloaked // If set, mob will only render its inhands, no other icons will be shown.

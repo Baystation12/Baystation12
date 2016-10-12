@@ -197,8 +197,11 @@
 		G.fields["citizenship"]	= H.citizenship
 		G.fields["faction"]		= H.personal_faction
 		G.fields["religion"]	= H.religion
+		G.fields["mil_branch"]  = H.char_branch
+		G.fields["mil_rank"]    = H.char_rank
 		if(H.gen_record && !jobban_isbanned(H, "Records"))
 			G.fields["notes"] = H.gen_record
+
 
 		//Medical Record
 		var/datum/data/record/M = CreateMedicalRecord(H.real_name, id)
@@ -230,6 +233,8 @@
 		L.fields["faction"]		= H.personal_faction
 		L.fields["religion"]	= H.religion
 		L.fields["image"]		= getFlatIcon(H)	//This is god-awful
+		L.fields["mil_branch"]   = H.char_branch
+		L.fields["mil_rank"]    = H.char_rank
 		if(H.exploit_record && !jobban_isbanned(H, "Records"))
 			L.fields["exploit_record"] = H.exploit_record
 		else
@@ -436,6 +441,8 @@
 	G.fields["photo_front"]	= front
 	G.fields["photo_side"]	= side
 	G.fields["notes"] = "No notes found."
+	G.fields["mil_branch"] = "None"
+	G.fields["mil_rank"] = "None"
 	general += G
 
 	return G
