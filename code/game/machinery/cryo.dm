@@ -6,7 +6,6 @@
 	icon_state = "pod_preview"
 	density = 1
 	anchored = 1.0
-	plane = OBJ_PLANE
 	layer = BELOW_OBJ_LAYER
 	interact_offline = 1
 
