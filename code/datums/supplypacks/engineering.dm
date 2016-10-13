@@ -194,28 +194,12 @@
 	containername = "\improper Disposal Dispenser Crate"
 	access = access_atmospherics
 
-/decl/hierarchy/supply_pack/engineering/shield_gen
-	name = "Bubble shield generator circuitry"
-	contains = list(/obj/item/weapon/circuitboard/shield_gen)
+/decl/hierarchy/supply_pack/engineering/shield_generator
+	name = "Shield Generator Construction Kit"
+	contains = list(/obj/item/weapon/circuitboard/shield_generator, /obj/item/weapon/stock_parts/capacitor, /obj/item/weapon/stock_parts/micro_laser, /obj/item/weapon/smes_coil, /obj/item/weapon/stock_parts/console_screen)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper bubble shield generator circuitry crate"
-	access = access_ce
-
-/decl/hierarchy/supply_pack/engineering/shield_gen_ex
-	name = "Hull shield generator circuitry"
-	contains = list(/obj/item/weapon/circuitboard/shield_gen_ex)
-	cost = 50
-	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper hull shield generator circuitry crate"
-	access = access_ce
-
-/decl/hierarchy/supply_pack/engineering/shield_cap
-	name = "Bubble shield capacitor circuitry"
-	contains = list(/obj/item/weapon/circuitboard/shield_cap)
-	cost = 50
-	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper shield capacitor circuitry crate"
+	containername = "\improper shield generator construction kit crate"
 	access = access_ce
 
 /decl/hierarchy/supply_pack/engineering/smbig

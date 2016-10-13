@@ -1493,34 +1493,12 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/telecomms/receiver
 	sort_string = "PAAAG"
 
-/datum/design/circuit/shield
-	req_tech = list(TECH_BLUESPACE = 4, TECH_PHORON = 3)
-	materials = list("glass" = 2000, "gold" = 1000)
-
-/datum/design/circuit/shield/AssembleDesignName()
-	name = "Shield generator circuit design ([name])"
-/datum/design/circuit/shield/AssembleDesignDesc()
-	if(!desc)
-		desc = "Allows for the construction of \a [name] shield generator."
-
-/datum/design/circuit/shield/bubble
-	name = "bubble"
-	id = "shield_gen"
-	build_path = /obj/item/weapon/circuitboard/shield_gen
-	sort_string = "VAAAA"
-
-/datum/design/circuit/shield/hull
-	name = "hull"
-	id = "shield_gen_ex"
-	build_path = /obj/item/weapon/circuitboard/shield_gen_ex
-	sort_string = "VAAAB"
-
-/datum/design/circuit/shield/capacitor
-	name = "capacitor"
-	desc = "Allows for the construction of a shield capacitor circuit board."
-	id = "shield_cap"
+/datum/design/circuit/shield_generator
+	name = "Shield Generator"
+	desc = "Allows for the construction of a shield generator circuit board."
+	id = "shield_generator"
 	req_tech = list(TECH_MAGNET = 3, TECH_POWER = 4)
-	build_path = /obj/item/weapon/circuitboard/shield_cap
+	build_path = /obj/item/weapon/circuitboard/shield_generator
 	sort_string = "VAAAC"
 
 /datum/design/circuit/ntnet_relay
