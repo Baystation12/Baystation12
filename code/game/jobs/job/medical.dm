@@ -19,6 +19,7 @@
 
 	minimal_player_age = 14
 	ideal_character_age = 50
+	species_restricted = list("Tajara", "Vox", "Resomi", "Diona")
 	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
 
 /datum/job/doctor
