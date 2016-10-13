@@ -170,16 +170,17 @@
 	PT.master = V
 	OT.master = V
 
-	PT.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1
+	PT.valve_welded = 1
 	PT.air_contents.gas["phoron"] = phoron_amt
 	PT.air_contents.gas["carbon_dioxide"] = carbon_amt
+	PT.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1
 	PT.air_contents.update_values()
-	PT.valve_welded = 1
 
-	OT.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1
-	OT.air_contents.gas["oxygen"] = oxygen_amt
-	OT.air_contents.update_values()
 	OT.valve_welded = 1
+	OT.air_contents.gas["oxygen"] = oxygen_amt
+	OT.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1
+	OT.air_contents.update_values()
+
 
 	var/obj/item/device/assembly/S = new assembly_type(V)
 
@@ -208,19 +209,23 @@
 	var/assembly_type = /obj/item/device/assembly/signaler
 
 	//Note that the maximum amount of gas you can put in a 70L air tank at 1013.25 kPa and 519K is 16.44 mol.
-	var/phoron_amt = 10
-	var/oxygen_amt = 15
+	var/phoron_amt = 0
+	var/oxygen_amt = 0
 
-/obj/effect/spawner/onetankbomb/New(newloc)
+/obj/effect/spawner/onetankbomb/initialize() //just needs an assembly.
 	..(newloc)
+
+
+	phoron_amt = 4 + rand(4)
+	oxygen_amt = 6 + rand(8)
 
 	var/type = pick(/obj/item/weapon/tank/phoron, /obj/item/weapon/tank/oxygen)
 	var/obj/item/weapon/tank/K = new type(src.loc)
 
-	K.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1
 	K.air_contents.gas["phoron"] = phoron_amt
 	K.air_contents.gas["oxygen"] = oxygen_amt
 	K.valve_welded = 1
+	K.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE-1
 
 	K.wired = 1
 

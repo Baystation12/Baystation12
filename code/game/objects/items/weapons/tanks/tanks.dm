@@ -73,6 +73,7 @@ var/list/global/tank_gauge_cache = list()
 		qdel(air_contents)
 
 	processing_objects.Remove(src)
+	src.proxyassembly = null
 	qdel(src.proxyassembly)
 
 	if(istype(loc, /obj/item/device/transfer_valve))
@@ -105,10 +106,9 @@ var/list/global/tank_gauge_cache = list()
 		to_chat(user, "<span class='notice'>\The [src] feels [descriptive].</span>")
 
 	if(src.proxyassembly.assembly || wired)
-		user << "<span class='warning'>It seems to have [wired? "some wires ": ""][wired && src.proxyassembly.assembly? "and ":""][src.proxyassembly.assembly ? "some sort of assembly ":""]attached to it.</span>"
+		to_chat(user, "<span class='warning'>It seems to have [wired? "some wires ": ""][wired && src.proxyassembly.assembly? "and ":""][src.proxyassembly.assembly ? "some sort of assembly ":""]attached to it.</span>")
 	if(src.valve_welded)
-		user << "<span class='warning'>\The [src] emergency relief valve has been welded shut!</span>"
-
+		to_chat(user, "<span class='warning'>\The [src] emergency relief valve has been welded shut!</span>")
 
 
 /obj/item/weapon/tank/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -127,26 +127,26 @@ var/list/global/tank_gauge_cache = list()
 	if(istype(W, /obj/item/stack/cable_coil))
 		if(W:use(1))
 			wired = 1
-			user << "<span class='notice'>You attach the wires to the tank.</span>"
+			to_chat(user, "<span class='notice'>You attach the wires to the tank.</span>")
 			src.add_bomb_overlay()
 
 	if(istype(W, /obj/item/weapon/wirecutters))
 		if(wired && src.proxyassembly.assembly)
 
-			user << "<span class='notice'>You carefully begin clipping the wires that attach to the tank</span>"
+			to_chat(user, "<span class='notice'>You carefully begin clipping the wires that attach to the tank.</span>")
 			if(do_after(user, 100,src))
 				wired = 0
 				src.overlays -= "bomb_assembly"
-				user << "<span class='notice'>You cut the wire and remove the device.</span>"
+				to_chat(user, "<span class='notice'>You cut the wire and remove the device.</span>")
 
 				var/obj/item/device/assembly_holder/assy = src.proxyassembly.assembly
 				if(assy.a_left && assy.a_right)
-					assy.loc = user.loc
+					assy.loc.dropInto(usr.loc)
 					assy.master = null
 					src.proxyassembly.assembly = null
 				else
 					if(!src.proxyassembly.assembly.a_left)
-						assy.a_right.loc = usr.loc
+						assy.a_right.dropInto(usr.loc)
 						assy.a_right.holder = null
 						assy.a_right = null
 						src.proxyassembly.assembly = null
@@ -156,54 +156,56 @@ var/list/global/tank_gauge_cache = list()
 				update_gauge()
 
 			else
-				user << "<span class='warning'>You slip and bump the igniter!</span>"
+				to_chat(user, "<span class='danger'>You slip and bump the igniter!</span>")
 				if(prob(85))
 					src.proxyassembly.receive_signal()
 
 		else if(wired)
 			if(do_after(user, 10, src))
-				user << "<span class='notice'>You quickly clip the wire from the tank.</span>"
+				to_chat(user, "<span class='notice'>You quickly clip the wire from the tank.</span>")
 				wired = 0
 				src.overlays -= "bomb_assembly"
 
 		else
-			user << "<span class='notice'>There are no wires to cut!</span>"
+			to_chat(user, "<span class='notice'>There are no wires to cut!</span>")
 
 
 
 	if(istype(W, /obj/item/device/assembly_holder))
 		if(wired)
-			user << "<span class='notice'>You begin attaching the assembly to \the [src].</span>"
+			to_chat(user, "<span class='notice'>You begin attaching the assembly to \the [src].</span>")
 			if(do_after(user, 50, src))
-				user << "<span class='notice'>You finish attaching the assembly to \the [src].</span>"
+				to_chat(user, "<span class='notice'>You finish attaching the assembly to \the [src].</span>")
 				bombers += "[key_name(user)] attached an assembly to a wired [src]. Temp: [src.air_contents.temperature-T0C]"
 				message_admins("[key_name_admin(user)] attached an assembly to a wired [src]. Temp: [src.air_contents.temperature-T0C]")
 				assemble_bomb(W,user)
 			else
-				user << "<span class='notice'>You stop attaching the assembly.</span>"
+				to_chat(user, "<span class='notice'>You stop attaching the assembly.</span>")
 		else
-			user << "<span class='notice'>You need to wire the device up first.</span>"
+			to_chat(user, "<span class='notice'>You need to wire the device up first.</span>")
 
 
-	if((istype(W, /obj/item/weapon/weldingtool) && W:remove_fuel(1,user)))
-		if(!valve_welded)
-			user << "<span class='notice'>You begin welding the \the [src] emergency pressure relief valve.</span>"
-			if(do_after(user, 40,src))
-				user << "<span class='notice'>You carefully weld \the [src] emergency pressure relief valve shut.</span><span class='warning'> \The [src] may now rupture under pressure!</span>"
-				src.valve_welded = 1
-				src.leaking = 0
+	if(istype(W, /obj/item/weapon/weldingtool/))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(WT.remove_fuel(1,user))
+			if(!valve_welded)
+				to_chat(user, "<span class='notice'>You begin welding the \the [src] emergency pressure relief valve.</span>")
+				if(do_after(user, 40,src))
+					to_chat(user, "<span class='notice'>You carefully weld \the [src] emergency pressure relief valve shut.</span><span class='warning'> \The [src] may now rupture under pressure!</span>")
+					src.valve_welded = 1
+					src.leaking = 0
+				else
+					bombers += "[key_name(user)] attempted to weld a [src]. [src.air_contents.temperature-T0C]"
+					message_admins("[key_name_admin(user)] attempted to weld a [src]. [src.air_contents.temperature-T0C]")
+					if(WT.welding)
+						to_chat(user, "<span class='danger'>You accidentally rake \the [W] across \the [src]!</span>")
+						maxintegrity -= rand(2,6)
+						integrity = min(integrity,maxintegrity)
+						src.air_contents.add_thermal_energy(rand(2000,50000))
+				WT.eyecheck(user)
 			else
-				bombers += "[key_name(user)] attempted to weld a [src]. [src.air_contents.temperature-T0C]"
-				message_admins("[key_name_admin(user)] attempted to weld a [src]. [src.air_contents.temperature-T0C]")
-				if(W:welding)
-					user << "<span class='danger'>You accidentally rake \the [W] across \the [src]!</span>"
-					maxintegrity -= rand(2,6)
-					integrity = min(integrity,maxintegrity)
-					src.air_contents.add_thermal_energy(rand(2000,50000))
-			W:eyecheck(user)
-		else
-			user << "<span class='notice'>The emergency pressure relief valve has already been welded.</span>"
-	add_fingerprint(user)
+				to_chat(user, "<span class='notice'>The emergency pressure relief valve has already been welded.</span>")
+		add_fingerprint(user)
 
 
 
@@ -214,7 +216,7 @@ var/list/global/tank_gauge_cache = list()
 
 // There's GOT to be a better way to do this
 	if (src.proxyassembly.assembly)
-		src.proxyassembly.assembly:attack_self(user)
+		src.proxyassembly.assembly.attack_self(user)
 
 
 /obj/item/weapon/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
@@ -562,7 +564,7 @@ var/list/global/tank_gauge_cache = list()
 
 /obj/item/device/tankassemblyproxy
 	name = "Tank assembly proxy"
-	desc = "Uused as a stand in to trigger single tank assemblies... but you shouldn't see this."
+	desc = "Used as a stand in to trigger single tank assemblies... but you shouldn't see this."
 	var/obj/item/weapon/tank/tank = null
 	var/obj/item/device/assembly_holder/assembly = null
 
@@ -611,7 +613,7 @@ var/list/global/tank_gauge_cache = list()
 		ign = assy.a_left
 		other = assy.a_right
 
-	other.loc = get_turf(src)
+	other.dropInto(get_turf(src))
 	qdel(ign)
 	assy.master = null
 	src.proxyassembly.assembly = null
