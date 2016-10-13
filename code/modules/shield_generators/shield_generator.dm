@@ -401,14 +401,6 @@
 		"multiplier" = MODEUSAGE_PHOTONIC
 		)))
 	all_flags.Add(list(list(
-		"name" = "Unknown Lifeforms",
-		"desc" = "This mode blocks various non-human and non-silicon lifeforms. Typical uses include blocking carps.",
-		"flag" = MODEFLAG_NONHUMANS,
-		"status" = check_flag(MODEFLAG_NONHUMANS),
-		"hacked" = 0,
-		"multiplier" = MODEUSAGE_NONHUMANS
-		)))
-	all_flags.Add(list(list(
 		"name" = "Humanoid Lifeforms",
 		"desc" = "This mode blocks various humanoid lifeforms. Does not affect fully synthetic humanoids.",
 		"flag" = MODEFLAG_HUMANOIDS,
@@ -423,6 +415,14 @@
 		"status" = check_flag(MODEFLAG_ANORGANIC),
 		"hacked" = 0,
 		"multiplier" = MODEUSAGE_ANORGANIC
+		)))
+	all_flags.Add(list(list(
+		"name" = "Unknown Lifeforms",
+		"desc" = "This mode blocks various other non-humanoid and non-silicon lifeforms. Typical uses include blocking carps.",
+		"flag" = MODEFLAG_NONHUMANS,
+		"status" = check_flag(MODEFLAG_NONHUMANS),
+		"hacked" = 0,
+		"multiplier" = MODEUSAGE_NONHUMANS
 		)))
 	all_flags.Add(list(list(
 		"name" = "Atmospheric Containment",

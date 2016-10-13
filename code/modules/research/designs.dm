@@ -346,12 +346,6 @@ other types of metals and chemistry for reagents).
 	materials = list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 1000, "diamond" = 2000)
 	build_path = /obj/item/weapon/pickaxe/diamonddrill
 	sort_string = "KAAAE"
-///////////////////////////////////
-/////////Shield Generators/////////
-///////////////////////////////////
-/datum/design/circuit/shield
-	req_tech = list(TECH_BLUESPACE = 4, TECH_PHORON = 3)
-	materials = list("$glass" = 2000, "sacid" = 20, "$phoron" = 10000, "$diamond" = 5000, "$gold" = 10000)
 
 /datum/design/item/medical
 	materials = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 20)
@@ -1500,6 +1494,14 @@ CIRCUITS BELOW
 	req_tech = list(TECH_MAGNET = 3, TECH_POWER = 4)
 	build_path = /obj/item/weapon/circuitboard/shield_generator
 	sort_string = "VAAAC"
+
+/datum/design/circuit/shield_diffuser
+	name = "Shield Diffuser"
+	desc = "Allows for the construction of a shield generator circuit board."
+	id = "shield_diffuser"
+	req_tech = list(TECH_MAGNET = 3, TECH_POWER = 4)
+	build_path = /obj/item/weapon/circuitboard/shield_diffuser
+	sort_string = "VAAAB"
 
 /datum/design/circuit/ntnet_relay
 	name = "NTNet Quantum Relay"
