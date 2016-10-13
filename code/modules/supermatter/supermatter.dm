@@ -1,4 +1,3 @@
-
 #define NITROGEN_RETARDATION_FACTOR 0.15	//Higher == N2 slows reaction more
 #define THERMAL_RELEASE_MODIFIER 10000		//Higher == more heat released during reaction
 #define PHORON_RELEASE_MODIFIER 1500		//Higher == less phoron released by reaction
@@ -30,7 +29,7 @@
 #define DETONATION_HALLUCINATION_BASE 300
 #define DETONATION_HALLUCINATION_RANGE 300
 
-#define DETONATION_MOB_CONCUSSION 20		// Value that will be used for Weaken() for mobs.
+#define DETONATION_MOB_CONCUSSION 4			// Value that will be used for Weaken() for mobs.
 
 // Base amount of ticks for which a specific type of machine will be offline for. +- 20% added by RNG.
 // This does pretty much the same thing as an electrical storm, it just affects the whole Z level instantly.
@@ -109,6 +108,8 @@
 	. = ..()
 
 /obj/machinery/power/supermatter/proc/explode()
+	set waitfor = 0
+
 	if(exploded)
 		return
 
@@ -127,12 +128,12 @@
 			var/range_multiplier = between(0, get_dist(mob, src) / world.maxx, 1)
 			var/rads = DETONATION_RADS_BASE + (range_multiplier * DETONATION_RADS_RANGE)
 			var/hallucinations = DETONATION_HALLUCINATION_BASE + (range_multiplier * DETONATION_HALLUCINATION_RANGE)
-			mob.apply_effect(rads, IRRADIATE)
+			mob.apply_effect(rads, IRRADIATE, mob.getarmor(null, "rad"))
 			if(istype(mob, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = mob
 				H.hallucination += hallucinations
 			mob.Weaken(DETONATION_MOB_CONCUSSION)
-			mob << "<span class='danger'>An invisible force slams you against the ground!</span>"
+			to_chat(mob, "<span class='danger'>An invisible force slams you against the ground!</span>")
 
 	// Effect 2: Z-level wide electrical pulse
 	for(var/obj/machinery/power/apc/A in machines)
@@ -439,3 +440,27 @@
 
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return
+
+
+#undef NITROGEN_RETARDATION_FACTOR
+#undef THERMAL_RELEASE_MODIFIER
+#undef PHORON_RELEASE_MODIFIER
+#undef OXYGEN_RELEASE_MODIFIER
+#undef REACTION_POWER_MODIFIER
+#undef POWER_FACTOR
+#undef DECAY_FACTOR
+#undef CRITICAL_TEMPERATURE
+#undef CHARGING_FACTOR
+#undef DAMAGE_RATE_LIMIT
+#undef DETONATION_RADS_RANGE
+#undef DETONATION_RADS_BASE
+#undef DETONATION_HALLUCINATION_BASE
+#undef DETONATION_HALLUCINATION_RANGE
+#undef DETONATION_MOB_CONCUSSION
+#undef DETONATION_APC_OVERLOAD_PROB
+#undef DETONATION_SHUTDOWN_APC
+#undef DETONATION_SHUTDOWN_CRITAPC
+#undef DETONATION_SHUTDOWN_SMES
+#undef DETONATION_SHUTDOWN_RNG_FACTOR
+#undef DETONATION_SOLAR_BREAK_CHANCE
+#undef WARNING_DELAY
