@@ -99,6 +99,7 @@
 
 /obj/structure/sign/warning/compressed_gas
 	name = "\improper COMPRESSED GAS"
+	icon_state = "hikpa"
 
 /obj/structure/sign/warning/deathsposal
 	name = "\improper DISPOSAL LEADS TO SPACE"
