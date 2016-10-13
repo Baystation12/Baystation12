@@ -6,6 +6,7 @@
 	icon_state = "pod_preview"
 	density = 1
 	anchored = 1.0
+	plane = OBJ_PLANE
 	layer = BELOW_OBJ_LAYER
 	interact_offline = 1
 
@@ -197,7 +198,7 @@
 	var/image/I
 
 	I = image(icon, "pod[on]_top")
-	I.plane = ABOVE_HUMAN_PLANE // this needs to be fairly high so it displays over most things, but it needs to be under lighting 
+	I.plane = ABOVE_HUMAN_PLANE // this needs to be fairly high so it displays over most things, but it needs to be under lighting
 	I.pixel_z = 32
 	overlays += I
 
