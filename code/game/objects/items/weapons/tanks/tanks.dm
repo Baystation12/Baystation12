@@ -21,17 +21,44 @@ var/list/global/tank_gauge_cache = list()
 	throw_speed = 1
 	throw_range = 4
 
+
 	sprite_sheets = list(
 		"Resomi" = 'icons/mob/species/resomi/back.dmi'
 		)
 
 	var/datum/gas_mixture/air_contents = null
 	var/distribute_pressure = ONE_ATMOSPHERE
-	var/integrity = 3
+	var/integrity = 20
+	var/maxintegrity = 20
+	var/valve_welded = 0
+	var/obj/item/device/tankassemblyproxy/proxyassembly
+
 	var/volume = 70
 	var/manipulated_by = null		//Used by _onclick/hud/screen_objects.dm internals to determine if someone has messed with our tank or not.
 						//If they have and we haven't scanned it with the PDA or gas analyzer then we might just breath whatever they put in it.
+
+	var/failure_temp = 173 //173 deg C Borate seal (yes it should be 153 F, but that's annoying)
+	var/leaking = 0
+	var/wired = 0
+
+	description_info = "These tanks are utilised to store any of the various types of gaseous substances on the station. \
+	They can be attached to various portable atmospheric devices on station to be filled or emptied. <br>\
+	<br>\
+	Each tank is fitted with an emergency relief valve. This relief valve will open if the tank is pressurised to over ~3000kPa or heated to over 173ºC. \
+	The valve itself will close after expending most or all of the contents into the air.<br>\
+	<br>\
+	Filling a tank such that experiences ~4000kPa of pressure will cause the tank to rupture, spilling out its contents and destroying the tank. \
+	Tanks filled over ~5000kPa will rupture rather violently, exploding with significant force."
+
+	description_antag = "Each tank may be incited to burn by attaching wires and an igniter assembly, though the igniter can only be used once and the mixture only burn if the igniter pushes a flammable gas mixture above the minimum burn temperature (126ºC). \
+	Wired and assembled tanks may be disarmed with a set of wirecutters. Any exploding or rupturing tank will generate shrapnel, assuming their relief valves have been welded beforehand. Even if not, they can be incited to expel hot gas on ignition if pushed above 173ºC. \
+	Relatively easy to make, the single tank bomb requries no tank transfer valve, and is still a fairly formidable weapon that can be manufactured from any tank."
+
 /obj/item/weapon/tank/New()
+	var/obj/item/device/tankassemblyproxy/proxy = new /obj/item/device/tankassemblyproxy()
+	proxy.loc = src
+	src.proxyassembly = proxy
+	src.proxyassembly.tank = src
 	..()
 
 	src.air_contents = new /datum/gas_mixture()
@@ -46,10 +73,12 @@ var/list/global/tank_gauge_cache = list()
 		qdel(air_contents)
 
 	processing_objects.Remove(src)
+	qdel(src.proxyassembly)
 
 	if(istype(loc, /obj/item/device/transfer_valve))
 		var/obj/item/device/transfer_valve/TTV = loc
 		TTV.remove_tank(src)
+		qdel(TTV)
 
 	..()
 
@@ -69,9 +98,18 @@ var/list/global/tank_gauge_cache = list()
 				descriptive = "lukewarm"
 			if(20 to 40)
 				descriptive = "room temperature"
-			else
+			if(-20 to 20)
 				descriptive = "cold"
+			else
+				descriptive = "bitterly cold"
 		to_chat(user, "<span class='notice'>\The [src] feels [descriptive].</span>")
+
+	if(src.proxyassembly.assembly || wired)
+		user << "<span class='warning'>It seems to have [wired? "some wires ": ""][wired && src.proxyassembly.assembly? "and ":""][src.proxyassembly.assembly ? "some sort of assembly ":""]attached to it.</span>"
+	if(src.valve_welded)
+		user << "<span class='warning'>\The [src] emergency relief valve has been welded shut!</span>"
+
+
 
 /obj/item/weapon/tank/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -86,14 +124,98 @@ var/list/global/tank_gauge_cache = list()
 		LB.blow(src)
 		src.add_fingerprint(user)
 
+	if(istype(W, /obj/item/stack/cable_coil))
+		if(W:use(1))
+			wired = 1
+			user << "<span class='notice'>You attach the wires to the tank.</span>"
+			src.add_bomb_overlay()
+
+	if(istype(W, /obj/item/weapon/wirecutters))
+		if(wired && src.proxyassembly.assembly)
+
+			user << "<span class='notice'>You carefully begin clipping the wires that attach to the tank</span>"
+			if(do_after(user, 100,src))
+				wired = 0
+				src.overlays -= "bomb_assembly"
+				user << "<span class='notice'>You cut the wire and remove the device.</span>"
+
+				var/obj/item/device/assembly_holder/assy = src.proxyassembly.assembly
+				if(assy.a_left && assy.a_right)
+					assy.loc = user.loc
+					assy.master = null
+					src.proxyassembly.assembly = null
+				else
+					if(!src.proxyassembly.assembly.a_left)
+						assy.a_right.loc = usr.loc
+						assy.a_right.holder = null
+						assy.a_right = null
+						src.proxyassembly.assembly = null
+						qdel(assy)
+				src.overlays.Cut()
+				last_gauge_pressure = 0
+				update_gauge()
+
+			else
+				user << "<span class='warning'>You slip and bump the igniter!</span>"
+				if(prob(85))
+					src.proxyassembly.receive_signal()
+
+		else if(wired)
+			if(do_after(user, 10, src))
+				user << "<span class='notice'>You quickly clip the wire from the tank.</span>"
+				wired = 0
+				src.overlays -= "bomb_assembly"
+
+		else
+			user << "<span class='notice'>There are no wires to cut!</span>"
+
+
+
 	if(istype(W, /obj/item/device/assembly_holder))
-		bomb_assemble(W,user)
+		if(wired)
+			user << "<span class='notice'>You begin attaching the assembly to \the [src].</span>"
+			if(do_after(user, 50, src))
+				user << "<span class='notice'>You finish attaching the assembly to \the [src].</span>"
+				bombers += "[key_name(user)] attached an assembly to a wired [src]. Temp: [src.air_contents.temperature-T0C]"
+				message_admins("[key_name_admin(user)] attached an assembly to a wired [src]. Temp: [src.air_contents.temperature-T0C]")
+				assemble_bomb(W,user)
+			else
+				user << "<span class='notice'>You stop attaching the assembly.</span>"
+		else
+			user << "<span class='notice'>You need to wire the device up first.</span>"
+
+
+	if((istype(W, /obj/item/weapon/weldingtool) && W:remove_fuel(1,user)))
+		if(!valve_welded)
+			user << "<span class='notice'>You begin welding the \the [src] emergency pressure relief valve.</span>"
+			if(do_after(user, 40,src))
+				user << "<span class='notice'>You carefully weld \the [src] emergency pressure relief valve shut.</span><span class='warning'> \The [src] may now rupture under pressure!</span>"
+				src.valve_welded = 1
+				src.leaking = 0
+			else
+				bombers += "[key_name(user)] attempted to weld a [src]. [src.air_contents.temperature-T0C]"
+				message_admins("[key_name_admin(user)] attempted to weld a [src]. [src.air_contents.temperature-T0C]")
+				if(W:welding)
+					user << "<span class='danger'>You accidentally rake \the [W] across \the [src]!</span>"
+					maxintegrity -= rand(2,6)
+					integrity = min(integrity,maxintegrity)
+					src.air_contents.add_thermal_energy(rand(2000,50000))
+			W:eyecheck(user)
+		else
+			user << "<span class='notice'>The emergency pressure relief valve has already been welded.</span>"
+	add_fingerprint(user)
+
+
 
 /obj/item/weapon/tank/attack_self(mob/user as mob)
 	if (!(src.air_contents))
 		return
-
 	ui_interact(user)
+
+// There's GOT to be a better way to do this
+	if (src.proxyassembly.assembly)
+		src.proxyassembly.assembly:attack_self(user)
+
 
 /obj/item/weapon/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/mob/living/carbon/location = null
@@ -116,7 +238,6 @@ var/list/global/tank_gauge_cache = list()
 	data["defaultReleasePressure"] = round(TANK_DEFAULT_RELEASE_PRESSURE)
 	data["maxReleasePressure"] = round(TANK_MAX_RELEASE_PRESSURE)
 	data["valveOpen"] = using_internal ? 1 : 0
-
 	data["maskConnected"] = 0
 
 	if(istype(location))
@@ -200,6 +321,41 @@ var/list/global/tank_gauge_cache = list()
 			else
 				to_chat(user, "<span class='warning'>You need something to connect to \the [src].</span>")
 
+
+
+/obj/item/weapon/tank/proc/fragment(var/number_fragments, var/list/frag_type = list(/obj/item/projectile/bullet/pellet/fragment), var/radius = 7)
+
+	var/turf/simulated/T = get_turf(src)
+	var/list/target_turfs = getcircle(T, radius)
+	var/fragments_per_projectile = round(number_fragments/target_turfs.len)
+
+	for(var/turf/O in target_turfs)
+		sleep(0)
+		var/fragtype = pick(frag_type)
+		var/obj/item/projectile/bullet/pellet/fragment/P = new fragtype(T)
+
+		P.pellets = fragments_per_projectile
+		P.shot_from = src.name
+
+		P.launch(O)
+
+		//Make sure to hit any mobs in the source turf
+		for(var/mob/living/M in T)
+
+			//check if it's being held, if so, they're in a heap of trouble.
+			if(P in M.contents && !M.lying)
+				P.attack_mob(M, 0, 40)
+			//lying on a tank while the tank is on the ground causes you to absorb most of the shrapnel.
+			//you will most likely be dead, but others nearby will be spared the fragments that hit you instead.
+			else if(M.lying && (isturf(src.loc) || P in M.contents) )
+				P.attack_mob(M, 0, 0)
+			else
+				P.attack_mob(M, 0, 85) //otherwise, allow a decent amount of fragments to pass
+
+
+
+
+
 /obj/item/weapon/tank/remove_air(amount)
 	return air_contents.remove(amount)
 
@@ -231,6 +387,17 @@ var/list/global/tank_gauge_cache = list()
 		update_gauge()
 	check_status()
 
+
+/obj/item/weapon/tank/proc/add_bomb_overlay()
+	if(src.wired)
+		src.overlays += "bomb_assembly"
+		if(src.proxyassembly.assembly)
+			var/icon/test = getFlatIcon(src.proxyassembly.assembly)
+			test.Shift(SOUTH,1)
+			test.Shift(WEST,3)
+			overlays += test
+
+
 /obj/item/weapon/tank/proc/update_gauge()
 	var/gauge_pressure = 0
 	if(air_contents)
@@ -245,10 +412,16 @@ var/list/global/tank_gauge_cache = list()
 
 	last_gauge_pressure = gauge_pressure
 	overlays.Cut()
+	add_bomb_overlay()
 	var/indicator = "[gauge_icon][(gauge_pressure == -1) ? "overload" : gauge_pressure]"
 	if(!tank_gauge_cache[indicator])
 		tank_gauge_cache[indicator] = image(icon, indicator)
 	overlays += tank_gauge_cache[indicator]
+
+
+
+
+
 
 /obj/item/weapon/tank/proc/check_status()
 	//Handle exploding, leaking, and rupturing of the tank
@@ -257,29 +430,84 @@ var/list/global/tank_gauge_cache = list()
 		return 0
 
 	var/pressure = air_contents.return_pressure()
+
+
+	if(pressure > TANK_LEAK_PRESSURE || air_contents.temperature - T0C > failure_temp)
+
+		if((integrity <= 19 || src.leaking) && !valve_welded)
+			var/turf/simulated/T = get_turf(src)
+			if(!T)
+				return
+			var/datum/gas_mixture/environment = loc.return_air()
+			var/env_pressure = environment.return_pressure()
+			var/tank_pressure = src.air_contents.return_pressure()
+
+			var/release_ratio = Clamp(0.02, sqrt((tank_pressure-env_pressure)/tank_pressure),1)
+			var/datum/gas_mixture/leaked_gas = air_contents.remove_ratio(release_ratio)
+			//dynamic air release based on ambient pressure
+
+			T.assume_air(leaked_gas)
+			if(!leaking)
+				visible_message("\icon[src] <span class='warning'>\The [src] relief valve flips open with a hiss!</span>", "You hear hissing.")
+				playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
+				leaking = 1
+				#ifdef FIREDBG
+				log_debug("<span class='warning'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>")
+				#endif
+
+
+		else
+			integrity-= 2
+
+
 	if(pressure > TANK_FRAGMENT_PRESSURE)
-		if(!istype(src.loc,/obj/item/device/transfer_valve))
-			message_admins("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
-			log_game("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
+		if(integrity <= 7)
+			if(!istype(src.loc,/obj/item/device/transfer_valve))
+				message_admins("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
+				log_game("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
 
-		//Give the gas a chance to build up more pressure through reacting
-		air_contents.react()
-		air_contents.react()
-		air_contents.react()
+			//Give the gas a chance to build up more pressure through reacting
+			air_contents.react()
+			air_contents.react()
+			air_contents.react()
 
-		pressure = air_contents.return_pressure()
-		var/range = (pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE
+			pressure = air_contents.return_pressure()
+			var/strength = ((pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE)
+			var/mult = max(0.2,1 + log(2.6, (air_contents.total_moles/29)) ) //1 + log base 2 of standard sized full (room temperature) tanks
 
-		explosion(
-			get_turf(loc),
-			round(min(BOMBCAP_DVSTN_RADIUS, range*0.25)),
-			round(min(BOMBCAP_HEAVY_RADIUS, range*0.50)),
-			round(min(BOMBCAP_LIGHT_RADIUS, range*1.00)),
-			round(min(BOMBCAP_FLASH_RADIUS, range*1.50)),
-			)
-		qdel(src)
+			var/turf/simulated/T = get_turf(src)
+			T.hotspot_expose(src.air_contents.temperature, 70, 1)
+			if(!T)
+				return
+			T.assume_air(air_contents)
 
-	else if(pressure > TANK_RUPTURE_PRESSURE)
+			explosion(
+				get_turf(loc),
+				round(min(BOMBCAP_DVSTN_RADIUS, ((mult)*strength)*0.20)),
+				round(min(BOMBCAP_HEAVY_RADIUS, ((mult)*strength)*0.40)),
+				round(min(BOMBCAP_LIGHT_RADIUS, ((mult)*strength)*0.85)),
+				round(min(BOMBCAP_FLASH_RADIUS, ((mult)*strength)*1.20)),
+				)
+
+
+			var/num_fragments = round(rand(12,25)* sqrt(strength * mult)/8)
+			src.fragment(num_fragments, list(/obj/item/projectile/bullet/pellet/fragment,/obj/item/projectile/bullet/pellet/fragment,/obj/item/projectile/bullet/pellet/fragment/strong))
+
+
+			if(istype(loc, /obj/item/device/transfer_valve))
+				var/obj/item/device/transfer_valve/TTV = loc
+				TTV.remove_tank(src)
+				qdel(TTV)
+
+
+			if(src)
+				qdel(src)
+
+		else
+			integrity -=7
+
+
+	if(pressure > TANK_RUPTURE_PRESSURE)
 		#ifdef FIREDBG
 		log_debug("<span class='warning'>[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]</span>")
 		#endif
@@ -289,24 +517,127 @@ var/list/global/tank_gauge_cache = list()
 			if(!T)
 				return
 			T.assume_air(air_contents)
-			playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
+			playsound(get_turf(src), 'sound/weapons/gunshot/shotgun.ogg', 20, 1)
+			visible_message("\icon[src] <span class='danger'>\The [src] flies apart!</span>", "<span class='warning'>You hear a bang!</span>")
+			T.hotspot_expose(air_contents.temperature, 70, 1)
+
+
+			var/strength = log(2,(pressure-TANK_RUPTURE_PRESSURE)/TANK_FRAGMENT_SCALE)+1
+			var/mult = max(0.1,log(air_contents.total_moles/25)+1)
+
+			var/num_fragments = round(rand(2,8)* strength * mult/20)
+			src.fragment(num_fragments)
+
+
+			if(istype(loc, /obj/item/device/transfer_valve))
+				var/obj/item/device/transfer_valve/TTV = loc
+				TTV.remove_tank(src)
+
+
 			qdel(src)
+
 		else
-			integrity--
+			integrity-= 4
 
-	else if(pressure > TANK_LEAK_PRESSURE)
-		#ifdef FIREDBG
-		log_debug("<span class='warning'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>")
-		#endif
-
-		if(integrity <= 0)
-			var/turf/simulated/T = get_turf(src)
-			if(!T)
-				return
-			var/datum/gas_mixture/leaked_gas = air_contents.remove_ratio(0.25)
-			T.assume_air(leaked_gas)
-		else
-			integrity--
-
-	else if(integrity < 3)
+	if(integrity < maxintegrity)
 		integrity++
+		if(leaking)
+			integrity++
+		if(integrity == maxintegrity)
+			leaking = 0
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////
+///Pulled from rewritten bomb.dm
+/////////////////////////////////
+
+
+/obj/item/device/tankassemblyproxy
+	name = "Tank assembly proxy"
+	desc = "Uused as a stand in to trigger single tank assemblies... but you shouldn't see this."
+	var/obj/item/weapon/tank/tank = null
+	var/obj/item/device/assembly_holder/assembly = null
+
+/obj/item/device/tankassemblyproxy/New()
+	..()
+
+
+/obj/item/device/tankassemblyproxy/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
+	visible_message("\icon[src] *beep* *beep*", "*beep* *beep*")
+	sleep(15)
+	tank.ignite()	//boom (or not boom if you made shijwtty mix)
+
+
+/obj/item/weapon/tank/proc/assemble_bomb(W,user)	//Bomb assembly proc. This turns assembly+tank into a bomb
+	var/obj/item/device/assembly_holder/S = W
+	var/mob/M = user
+	if(!S.secured)										//Check if the assembly is secured
+		return
+	if(isigniter(S.a_left) == isigniter(S.a_right))		//Check if either part of the assembly has an igniter, but if both parts are igniters, then fuck it
+		return
+
+
+	M.drop_item()			//Remove the assembly from your hands
+	M.remove_from_mob(src)	//Remove the tank from your character,in case you were holding it
+	M.put_in_hands(src)		//Equips the bomb if possible, or puts it on the floor.
+
+	src.proxyassembly.assembly = S	//Tell the bomb about its assembly part
+	S.master = src.proxyassembly		//Tell the assembly about its new owner
+	S.loc = src			//Move the assembly
+
+	src.update_icon()
+
+
+	src.add_bomb_overlay()
+
+	return
+
+
+/obj/item/weapon/tank/proc/ignite()	//This happens when a bomb is told to explode
+
+	var/obj/item/device/assembly_holder/assy = src.proxyassembly.assembly
+	var/ign = assy.a_right
+	var/obj/item/other = assy.a_left
+
+	if (isigniter(assy.a_left))
+		ign = assy.a_left
+		other = assy.a_right
+
+	other.loc = get_turf(src)
+	qdel(ign)
+	assy.master = null
+	src.proxyassembly.assembly = null
+	qdel(assy)
+	src.update_icon()
+	src.update_gauge()
+
+	air_contents.add_thermal_energy(9000)
+
+
+/obj/item/device/tankassemblyproxy/update_icon()
+	if(assembly)
+		tank.update_icon()
+		tank.overlays += "bomb_assembly"
+	else
+		tank.update_icon()
+		tank.overlays -= "bomb_assembly"
+
+////////Not sure what do with this or not.
+/*
+/obj/item/device/tank/attack_self(mob/user as mob) //pressing the bomb accesses its assembly
+	bombassembly.attack_self(user, 1)
+	add_fingerprint(user)
+	return
+*/
+
+/obj/item/device/tankassemblyproxy/HasProximity(atom/movable/AM as mob|obj)
+	if(src.assembly)
+		src.assembly.HasProximity(AM)

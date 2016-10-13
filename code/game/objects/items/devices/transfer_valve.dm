@@ -19,6 +19,9 @@
 /obj/item/device/transfer_valve/attackby(obj/item/item, mob/user)
 	var/turf/location = get_turf(src) // For admin logs
 	if(istype(item, /obj/item/weapon/tank))
+
+		src.w_class = 4 //because you shouldn't be able to just shove tanks in and have them be tiny.
+
 		if(tank_one && tank_two)
 			to_chat(user, "<span class='warning'>There are already two tanks attached, remove one first.</span>")
 			return
@@ -151,6 +154,7 @@
 	else
 		return
 
+	if(!tank_one && !tank_two) src.w_class = 2 //returns it to just the transfer valve size
 	T.loc = get_turf(src)
 	update_icon()
 

@@ -111,15 +111,15 @@
 	set name = "Instant TTV"
 
 	if(!check_rights(R_SPAWN)) return
-	
+
 	var/obj/effect/spawner/newbomb/proto = /obj/effect/spawner/newbomb/radio/custom
-	
+
 	var/p = input("Enter phoron amount (mol):","Phoron", initial(proto.phoron_amt)) as num|null
 	if(p == null) return
-	
+
 	var/o = input("Enter oxygen amount (mol):","Oxygen", initial(proto.oxygen_amt)) as num|null
 	if(o == null) return
-	
+
 	var/c = input("Enter carbon dioxide amount (mol):","Carbon Dioxide", initial(proto.carbon_amt)) as num|null
 	if(c == null) return
 
@@ -129,9 +129,9 @@
 	name = "TTV bomb"
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
-	
+
 	var/assembly_type = /obj/item/device/assembly/signaler
-	
+
 	//Note that the maximum amount of gas you can put in a 70L air tank at 1013.25 kPa and 519K is 16.44 mol.
 	var/phoron_amt = 10.96
 	var/oxygen_amt = 16.44
@@ -170,14 +170,16 @@
 	PT.master = V
 	OT.master = V
 
-	PT.air_contents.temperature = PHORON_FLASHPOINT
+	PT.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1
 	PT.air_contents.gas["phoron"] = phoron_amt
 	PT.air_contents.gas["carbon_dioxide"] = carbon_amt
 	PT.air_contents.update_values()
+	PT.valve_welded = 1
 
-	OT.air_contents.temperature = PHORON_FLASHPOINT
+	OT.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1
 	OT.air_contents.gas["oxygen"] = oxygen_amt
 	OT.air_contents.update_values()
+	OT.valve_welded = 1
 
 	var/obj/item/device/assembly/S = new assembly_type(V)
 
@@ -188,5 +190,64 @@
 	S.toggle_secure()
 
 	V.update_icon()
+
+	qdel(src)
+
+
+
+///////////////////////
+//One Tank Bombs, WOOOOOOO! -Luke
+///////////////////////
+
+
+/obj/effect/spawner/onetankbomb
+	name = "Single-tank bomb"
+	icon = 'icons/mob/screen1.dmi'
+	icon_state = "x"
+
+	var/assembly_type = /obj/item/device/assembly/signaler
+
+	//Note that the maximum amount of gas you can put in a 70L air tank at 1013.25 kPa and 519K is 16.44 mol.
+	var/phoron_amt = 10
+	var/oxygen_amt = 15
+
+/obj/effect/spawner/onetankbomb/New(newloc)
+	..(newloc)
+
+	var/type = pick(/obj/item/weapon/tank/phoron, /obj/item/weapon/tank/oxygen)
+	var/obj/item/weapon/tank/K = new type(src.loc)
+
+	K.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1
+	K.air_contents.gas["phoron"] = phoron_amt
+	K.air_contents.gas["oxygen"] = oxygen_amt
+	K.valve_welded = 1
+
+	K.wired = 1
+
+
+	var/obj/item/device/assembly_holder/H = new(K)
+	K.proxyassembly.assembly = H
+	H.master = K.proxyassembly
+
+	var/obj/item/device/assembly/igniter/ign = new(H)
+	H.a_left = ign
+
+	var/obj/item/device/assembly/assm = new assembly_type(H)
+	H.a_right = assm
+
+	var/tog = assm.toggle_secure()
+	if(!tog)
+		assm.toggle_secure()
+
+
+	H.update_icon()
+
+
+	K.overlays += "bomb_assembly"
+	var/icon/test = getFlatIcon(K.proxyassembly.assembly)
+	test.Shift(SOUTH,1)
+	test.Shift(WEST,4)
+	K.overlays += test
+
 
 	qdel(src)
