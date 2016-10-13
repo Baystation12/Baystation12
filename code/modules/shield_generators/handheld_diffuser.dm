@@ -15,13 +15,14 @@
 
 /obj/item/weapon/shield_diffuser/New()
 	cell = new(src)
-	processing_objects.Add(src)
 	..()
 
 /obj/item/weapon/shield_diffuser/Destroy()
 	qdel(cell)
-	processing_objects.Remove(src)
-	..()
+	cell = null
+	if(enabled)
+		processing_objects.Remove(src)
+	. = ..()
 
 /obj/item/weapon/shield_diffuser/process()
 	if(!enabled)
@@ -37,9 +38,13 @@
 /obj/item/weapon/shield_diffuser/attack_self()
 	enabled = !enabled
 	update_icon()
-	usr << "You turn \the [src] [enabled ? "on" : "off"]"
+	if(enabled)
+		processing_objects.Add(src)
+	else
+		processing_objects.Remove(src)
+	to_chat(usr, "You turn \the [src] [enabled ? "on" : "off"].")
 
 /obj/item/weapon/shield_diffuser/examine()
 	..()
-	usr << "The charge meter reads [cell ? cell.percent() : 0]%"
-	usr << "It is [enabled ? "enabled" : "disabled"]."
+	to_chat(usr, "The charge meter reads [cell ? cell.percent() : 0]%")
+	to_chat(usr, "It is [enabled ? "enabled" : "disabled"].")

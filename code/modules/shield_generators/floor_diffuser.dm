@@ -47,14 +47,14 @@
 
 /obj/machinery/shield_diffuser/attack_hand()
 	if(alarm)
-		usr << "You press an override button on \the [src], re-enabling it."
+		to_chat(usr, "You press an override button on \the [src], re-enabling it.")
 		alarm = 0
 		update_icon()
 		return
 	enabled = !enabled
 	use_power = enabled + 1
 	update_icon()
-	usr << "You turn \the [src] [enabled ? "on" : "off"]"
+	to_chat(usr, "You turn \the [src] [enabled ? "on" : "off"].")
 
 /obj/machinery/shield_diffuser/proc/meteor_alarm(var/duration)
 	if(!duration)
@@ -64,6 +64,6 @@
 
 /obj/machinery/shield_diffuser/examine(var/mob/user)
 	..()
-	user << "It is [enabled ? "enabled" : "disabled"]"
+	to_chat(user, "It is [enabled ? "enabled" : "disabled"].")
 	if(alarm)
-		user << "A red LED labeled \"Proximity Alarm\" is blinking on the control panel."
+		to_chat(user, "A red LED labeled \"Proximity Alarm\" is blinking on the control panel.")

@@ -129,7 +129,7 @@
 
 /obj/effect/meteor/Bump(atom/A)
 	..()
-	if(A && !gcDestroyed)	// Prevents explosions and other effects when we were deleted by whatever we Bumped() - currently used by shields.
+	if(A && !deleted(src))	// Prevents explosions and other effects when we were deleted by whatever we Bumped() - currently used by shields.
 		ram_turf(get_turf(A))
 		get_hit()
 

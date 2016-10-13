@@ -52,7 +52,7 @@
 	field_segments = null
 	damaged_segments = null
 	qdel(wires)
-	..()
+	. = ..()
 
 
 /obj/machinery/power/shield_generator/RefreshParts()
@@ -192,10 +192,10 @@
 
 	// Prevents dismantle-rebuild tactics to reset the emergency shutdown timer.
 	if(running)
-		user << "Turn off \the [src] first!"
+		to_chat(user, "Turn off \the [src] first!")
 		return
 	if(offline_for)
-		user << "Wait until \the [src] cools down from emergency shutdown first!"
+		to_chat(user, "Wait until \the [src] cools down from emergency shutdown first!")
 		return
 
 	if(default_deconstruction_crowbar(user, O))
@@ -250,13 +250,14 @@
 		wires.Interact(user)
 
 
+/obj/machinery/power/shield_generator/CanUseTopic(var/mob/user)
+	if(issilicon(user) && !Adjacent(user) && ai_control_disabled)
+		return STATUS_UPDATE
+	return ..()
+
 /obj/machinery/power/shield_generator/Topic(href, href_list)
-	var/mob/user = usr
 	if(..())
 		return 1
-
-	if(issilicon(user) && !Adjacent(user) && ai_control_disabled)
-		return
 
 	if(href_list["begin_shutdown"])
 		if(running != SHIELD_RUNNING)
@@ -285,9 +286,7 @@
 		. = 1
 
 	if(mode_changes_locked)
-		if(.)
-			nanomanager.update_uis(src)
-		return
+		return 1
 
 	if(href_list["set_range"])
 		var/new_range = input(usr, "Enter new field range (1-[world.maxx]). Leave blank to cancel.", "Field Radius Control", field_radius) as num
@@ -313,8 +312,6 @@
 		toggle_flag(text2num(href_list["toggle_mode"]))
 		. = 1
 
-	if(.)
-		nanomanager.update_uis(src)
 
 /obj/machinery/power/shield_generator/proc/field_integrity()
 	if(max_energy)
@@ -500,22 +497,19 @@
 /obj/machinery/power/shield_generator/proc/fieldtype_hull()
 	set background = 1
 	var/list/out = list()
-	var/turf/T
 	var/turf/gen_turf = get_turf(src)
 
 	if (!gen_turf)
 		return
-	for (var/x_offset = -field_radius; x_offset <= field_radius; x_offset++)
-		for (var/y_offset = -field_radius; y_offset <= field_radius; y_offset++)
-			T = locate(gen_turf.x + x_offset, gen_turf.y + y_offset, gen_turf.z)
 
-			// Don't expand to space or on shuttle areas.
-			if(istype(T, /turf/space) || istype(get_area(T), /area/space) || istype(get_area(T), /area/shuttle/))
+	for(var/turf/T in trange(field_radius, gen_turf))
+		// Don't expand to space or on shuttle areas.
+		if(istype(T, /turf/space) || istype(get_area(T), /area/space) || istype(get_area(T), /area/shuttle/))
+			continue
+
+		// Find adjacent space/shuttle tiles and cover them. Shuttles won't be blocked if shield diffuser is mapped in and turned on.
+		for(var/turf/TN in orange(1, T))
+			if(istype(TN, /turf/space) || istype(get_area(TN), /area/shuttle/))
+				out |= TN
 				continue
-
-			// Find adjacent space/shuttle tiles and cover them. Shuttles won't be blocked if shield diffuser is mapped in and turned on.
-			for(var/turf/TN in orange(1, T))
-				if(istype(TN, /turf/space) || istype(get_area(TN), /area/shuttle/))
-					out |= TN
-					continue
 	return out

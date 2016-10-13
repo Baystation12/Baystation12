@@ -3,7 +3,8 @@
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shield_impact"
 	anchored = 1
-	layer = 4.2		// Above shields
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 	density = 0
 
 
@@ -18,7 +19,8 @@
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shield_normal"
 	anchored = 1
-	layer = 4.1		// Above mobs
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 	density = 1
 	invisibility = 0
 	var/obj/machinery/power/shield_generator/gen = null
@@ -53,7 +55,7 @@
 
 
 /obj/effect/shield/Destroy()
-	..()
+	. = ..()
 	if(gen && (src in gen.field_segments))
 		gen.field_segments -= src
 	if(gen && (src in gen.damaged_segments))
@@ -73,7 +75,7 @@
 	gen.damaged_segments |= src
 	disabled_for += duration
 	density = 0
-	invisibility = 101
+	invisibility = INVISIBILITY_MAXIMUM
 	update_nearby_tiles()
 	update_icon()
 
@@ -107,7 +109,7 @@
 	diffused_for = max(duration, 0)
 	gen.damaged_segments |= src
 	density = 0
-	invisibility = 101
+	invisibility = INVISIBILITY_MAXIMUM
 	update_nearby_tiles()
 	update_icon()
 
@@ -178,41 +180,7 @@
 	if(air_group)
 		return !gen.check_flag(MODEFLAG_ATMOSPHERIC)
 
-	// Humanoid mobs
-	if(istype(mover, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = mover
-		// IPCs, FBPs
-		if(H.isSynthetic())
-			return !gen.check_flag(MODEFLAG_ANORGANIC)
-		return !gen.check_flag(MODEFLAG_HUMANOIDS)
-
-	// Silicon mobs
-	if(istype(mover, /mob/living/silicon))
-		return !gen.check_flag(MODEFLAG_ANORGANIC)
-
-	// Other mobs
-	if(istype(mover, /mob/living))
-		return !gen.check_flag(MODEFLAG_NONHUMANS)
-
-	// Beams
-	if(istype(mover, /obj/item/projectile/beam))
-		return !gen.check_flag(MODEFLAG_PHOTONIC)
-
-	// Projectiles. Separated from /obj/ for clarity.
-	if(istype(mover, /obj/item/projectile))
-		return !gen.check_flag(MODEFLAG_HYPERKINETIC)
-
-	// Meteors. Once again separated from /obj/ for clarity
-	if(istype(mover, /obj/effect/meteor))
-		return !gen.check_flag(MODEFLAG_HYPERKINETIC)
-
-	// Other objects
-	if(istype(mover, /obj))
-		return !gen.check_flag(MODEFLAG_HYPERKINETIC)
-
-	// Let anything else through, but log it in the debug log. Pretty much every case should already be handled at this point.
-	log_debug("[mover] collided with shield. Not defined type in CanPass().")
-	return 1
+	return mover.can_pass_shield(gen)
 
 
 // EMP. It may seem weak but keep in mind that multiple shield segments are likely to be affected.
@@ -271,7 +239,7 @@
 			return ..()
 		var/obj/effect/meteor/M = mover
 		take_damage(M.get_shield_damage(), SHIELD_DAMTYPE_PHYSICAL, M)
-		visible_message("<span class='danger'>\The [M] breaks nto dust!</span>")
+		visible_message("<span class='danger'>\The [M] breaks into dust!</span>")
 		M.make_debris()
 		qdel(M)
 		return 0
@@ -286,7 +254,7 @@
 /obj/effect/shield/proc/overcharge_shock(var/mob/living/M)
 	M.adjustFireLoss(rand(20, 40))
 	M.Weaken(5)
-	M << "<span class='danger'>As you come into contact with \the [src] a surge of energy paralyses you!</span>"
+	to_chat(M, "<span class='danger'>As you come into contact with \the [src] a surge of energy paralyses you!</span>")
 	take_damage(10, SHIELD_DAMTYPE_EM)
 
 // Called when a flag is toggled. Can be used to add on-toggle behavior, such as visual changes.
@@ -298,3 +266,34 @@
 	// Update airflow
 	update_nearby_tiles()
 	update_icon()
+
+
+
+// Shield collision checks below
+
+/atom/movable/proc/can_pass_shield(var/obj/machinery/power/shield_generator/gen)
+	return 1
+
+
+// Other mobs
+/mob/living/can_pass_shield(var/obj/machinery/power/shield_generator/gen)
+	return !gen.check_flag(MODEFLAG_NONHUMANS)
+
+// Human mobs
+/mob/living/carbon/human/can_pass_shield(var/obj/machinery/power/shield_generator/gen)
+	if(isSynthetic())
+		return !gen.check_flag(MODEFLAG_ANORGANIC)
+	return !gen.check_flag(MODEFLAG_HUMANOIDS)
+
+// Silicon mobs
+/mob/living/silicon/can_pass_shield(var/obj/machinery/power/shield_generator/gen)
+	return !gen.check_flag(MODEFLAG_ANORGANIC)
+
+
+// Generic objects. Also applies to bullets and meteors.
+/obj/can_pass_shield(var/obj/machinery/power/shield_generator/gen)
+	return !gen.check_flag(MODEFLAG_HYPERKINETIC)
+
+// Beams
+/obj/item/projectile/beam/can_pass_shield(var/obj/machinery/power/shield_generator/gen)
+	return !gen.check_flag(MODEFLAG_PHOTONIC)
