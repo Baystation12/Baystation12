@@ -71,6 +71,7 @@ What is the naming convention for planes or layers?
 #define ABOVE_PLATING_PLANE          -20
 
 	#define HOLOMAP_LAYER        1 // NOTE: ENSURE this is equal to the one at ABOVE_TURF_PLANE!
+	#define DECAL_PLATING_LAYER  2
 	#define DISPOSALS_PIPE_LAYER 3
 	#define LATTICE_LAYER        4
 	#define PIPE_LAYER           5
@@ -84,7 +85,7 @@ What is the naming convention for planes or layers?
 
 #define ABOVE_TURF_PLANE              -18 // For items which should appear above turfs but below other objects and hiding mobs, eg: wires & pipes
 
-	#define HOLOMAP_LAYER               1
+	#define HOLOMAP_LAYER               1 // NOTE: ENSURE this is equal to the one at ABOVE_PLATING_PLANE!
 	#define RUNE_LAYER                  2
 	#define DECAL_LAYER                 3
 	#define ABOVE_TILE_LAYER            4
@@ -190,6 +191,10 @@ What is the naming convention for planes or layers?
 
 /image
 	plane = FLOAT_PLANE			// this is defunct, lummox fixed this on recent compilers, but it will bug out if I remove it for coders not on the most recent compile.
+
+/image/proc/plating_decal_layerise()
+	plane = ABOVE_PLATING_PLANE
+	layer = DECAL_PLATING_LAYER
 
 /image/proc/turf_decal_layerise()
 	plane = ABOVE_TURF_PLANE
