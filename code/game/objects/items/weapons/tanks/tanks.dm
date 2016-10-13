@@ -141,7 +141,7 @@ var/list/global/tank_gauge_cache = list()
 
 				var/obj/item/device/assembly_holder/assy = src.proxyassembly.assembly
 				if(assy.a_left && assy.a_right)
-					assy.loc.dropInto(usr.loc)
+					assy.dropInto(usr.loc)
 					assy.master = null
 					src.proxyassembly.assembly = null
 				else

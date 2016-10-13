@@ -200,7 +200,6 @@
 //One Tank Bombs, WOOOOOOO! -Luke
 ///////////////////////
 
-
 /obj/effect/spawner/onetankbomb
 	name = "Single-tank bomb"
 	icon = 'icons/mob/screen1.dmi'
@@ -212,7 +211,7 @@
 	var/phoron_amt = 0
 	var/oxygen_amt = 0
 
-/obj/effect/spawner/onetankbomb/initialize() //just needs an assembly.
+/obj/effect/spawner/onetankbomb/New(newloc) //just needs an assembly.
 	..(newloc)
 
 
@@ -255,4 +254,10 @@
 	K.overlays += test
 
 
+	qdel(src)
+
+
+/obj/item/device/onetankbomb/New()
+	..()
+	new /obj/effect/spawner/onetankbomb(src.loc)
 	qdel(src)
