@@ -48,15 +48,12 @@
 		var/real_rank = make_list_rank(t.fields["real_rank"])
 		mil_ranks[name] = ""
 		
-		if((using_map.flags & MAP_HAS_RANK) \
-		   && t.fields["mil_branch"] != "None" \
-		   && t.fields["mil_rank"] != "None")
-		   
+		if(using_map.flags & MAP_HAS_RANK)
+			var/datum/mil_branch/branch_obj = mil_branches.get_branch(t.fields["mil_branch"])
+			var/datum/mil_rank/rank_obj = mil_branches.get_rank(t.fields["mil_branch"], t.fields["mil_rank"])
 			
-			var/datum/mil_branch/branch_obj = mil_branches[t.fields["mil_branch"]]
-			var/datum/mil_rank/rank_obj = branch_obj.ranks[t.fields["mil_rank"]]
-			
-			mil_ranks[name] = "<abbr title=\"[rank_obj.name], [branch_obj.name]\">[rank_obj.name_short]</abbr> "
+			if(branch_obj && rank_obj)
+				mil_ranks[name] = "<abbr title=\"[rank_obj.name], [branch_obj.name]\">[rank_obj.name_short]</abbr> "
 		
 		if(OOC)
 			var/active = 0

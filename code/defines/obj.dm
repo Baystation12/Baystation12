@@ -77,18 +77,16 @@ var/global/list/PDA_Manifest = list()
 		var/department = 0
 		var/depthead = 0 			// Department Heads will be placed at the top of their lists.
 		
-		var/mil_branch = null
-		var/datum/mil_branch/branch_datum
-		
+		var/mil_branch = null		
 		var/mil_rank = null
 		
 		if(using_map.flags & MAP_HAS_BRANCH && t.fields["mil_branch"] && t.fields["mil_branch"] != "None")
-			branch_datum = mil_branches[t.fields["mil_branch"]]
+			var/datum/mil_branch/branch_datum = mil_branches.get_branch(t.fields["mil_branch"])
 			if(branch_datum)
 				mil_branch = list("full" = branch_datum.name, "short" = branch_datum.name_short)
 		
-		if(using_map.flags & MAP_HAS_RANK && branch_datum && t.fields["mil_rank"] && t.fields["mil_rank"] != "None")
-			var/datum/mil_rank/mil_rank_datum = branch_datum.ranks[t.fields["mil_rank"]]
+		if(using_map.flags & MAP_HAS_RANK && t.fields["mil_rank"] && t.fields["mil_rank"] != "None")
+			var/datum/mil_rank/mil_rank_datum = mil_branches.get_rank(t.fields["mil_branch"], t.fields["mil_rank"])
 			if(mil_rank_datum)
 				mil_rank = list("full" = mil_rank_datum.name, "short" = mil_rank_datum.name_short)
 			

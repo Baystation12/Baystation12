@@ -131,7 +131,7 @@
 	if(branch_name == "None")
 		return 0
 		
-	var/datum/mil_branch/branch = mil_branches[branch_name]
+	var/datum/mil_branch/branch = mil_branches.get_branch(branch_name)
 	
 	if(!branch)
 		crash_with("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
@@ -155,17 +155,11 @@
 		return 1
 	if(branch_name == "None" || rank_name == "None")
 		return 0
-	
-	var/datum/mil_branch/branch = mil_branches[branch_name]
-	
-	if(!branch)
-		crash_with("unknown branch \"[branch_name]\" passed to is_rank_allowed()")
-		return 0
-	
-	var/datum/mil_rank/rank = branch.ranks[rank_name]
+
+	var/datum/mil_rank/rank = mil_branches.get_rank(branch_name, rank_name)
 
 	if(!rank)
-		crash_with("unknown rank \"[rank_name]\" passed to is_rank_allowed()")
+		crash_with("unknown rank \"[rank_name]\" in branch \"[branch_name]\" passed to is_rank_allowed()")
 		return 0
 		
 	if(is_type_in_list(rank, allowed_ranks))

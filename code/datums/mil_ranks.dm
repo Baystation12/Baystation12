@@ -2,17 +2,64 @@
  *  Datums for military branches and ranks
  *
  *  Map datums can optionally specify a list of /datum/mil_branch paths. These paths
- *  are used to initialize the global branches list on server startup. Each branch 
- *  object has a list of /datum/mil_rank paths; these are instantiated when the branch
- *  object is created.
+ *  are used to initialize the global mil_branches object, which contains a list of
+ *  branch objects the map uses. Each branch definition specifies a list of 
+ *  /datum/mil_rank paths, which are ranks available to that branch.
  *
- *  To retrieve a rank object, retrieve the branch from the global branches list by
- *  name, then retrieve from it the rank object by name. 
+ *  Which branches and ranks can be selected for spawning is specifed in using_map
+ *  and each branch datum definition, respectively.
  */
  
+var/datum/mil_branches/mil_branches = new()
+ 
+/**
+ *  Global object for handling branches
+ */
+/datum/mil_branches
+	var/list/branches            // All branches that exist
+	var/list/spawn_branches  // Branches that a player can choose for spawning.
+ 
+/**
+ *  Retrieve branch object by branch name
+ */ 
+/datum/mil_branches/proc/get_branch(var/branch_name)
+	if(branch_name == "None" || !(branch_name in branches))
+		return null
+	else
+		return branches[branch_name]
 
-var/list/mil_branches        // All branches that exist
-var/list/spawn_mil_branches  // Branches that a player can choose for spawning.
+/**
+ *  Retrieve a rank object from given branch by name
+ */
+/datum/mil_branches/proc/get_rank(var/branch_name, var/rank_name)
+	if(rank_name == "None")
+		return null
+
+	var/datum/mil_branch/branch = get_branch(branch_name)
+	
+	if(!branch || !(rank_name in branch.ranks))
+		return null
+		
+	var/datum/mil_rank/rank = branch.ranks[rank_name]
+	return rank
+
+/**
+ *  Return a true value if branch_name is a valid spawn branch key
+ */ 
+/datum/mil_branches/proc/is_spawn_branch(var/branch_name)
+	return branch_name in spawn_branches
+	
+	
+/**
+ *  Return a true value if rank_name is a valid spawn rank in branch under branch_name
+ */
+/datum/mil_branches/proc/is_spawn_rank(var/branch_name, var/rank_name)
+	var/datum/mil_branch/branch = get_branch(branch_name)
+	
+	if(branch && (rank_name in branch.spawn_ranks))
+		return 1
+	else
+		return 0
  
 /**
  *  A single military branch, such as Fleet or Marines
@@ -50,22 +97,22 @@ var/list/spawn_mil_branches  // Branches that a player can choose for spawning.
  */
 /hook/startup/proc/populate_branches()
 	if(!(using_map.flags & MAP_HAS_BRANCH) && !(using_map.flags & MAP_HAS_RANK))
-		mil_branches = null
-		spawn_mil_branches = null
+		mil_branches.branches  = null
+		mil_branches.spawn_branches = null
 		return 1
 		
-	mil_branches = list()
-	spawn_mil_branches = list()
+	mil_branches.branches  = list()
+	mil_branches.spawn_branches = list()
 	for(var/branch_path in using_map.branch_types)
 		if(!ispath(branch_path, /datum/mil_branch))
 			crash_with("populate_branches() attempted to instantiate object with path [branch_path], which is not a subtype of /datum/mil_branch.")
 			continue
 	
 		var/datum/mil_branch/branch = new branch_path ()
-		mil_branches[branch.name] = branch
+		mil_branches.branches[branch.name] = branch
 		
 		if(branch_path in using_map.spawn_branch_types)
-			spawn_mil_branches[branch.name] = branch
+			mil_branches.spawn_branches[branch.name] = branch
 		
 	return 1
  
