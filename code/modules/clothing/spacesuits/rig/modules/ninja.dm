@@ -194,7 +194,7 @@
 	if(!..())
 		return 0
 
-/obj/item/rig_module/self_destruct/engage(var/skip_check = 0)
+/obj/item/rig_module/self_destruct/engage(var/skip_check = FALSE)
 	set waitfor = 0
 
 	if(self_destructing) //prevents repeat calls
@@ -238,7 +238,7 @@
 		return 0
 
 	//OH SHIT.
-	if(holder.wearer.stat == 2)
+	if(holder.wearer.stat == DEAD)
 		if(src.active)
 			engage(1)
 
