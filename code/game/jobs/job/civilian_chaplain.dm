@@ -10,7 +10,7 @@
 	selection_color = "#515151"
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
 	minimal_access = list(access_morgue, access_chapel_office, access_crematorium)
-	alt_titles = list("Counselor")
+	alt_titles = list("Counselor","Therapist","Priest","Cleric","Divine","Monk","Priestess","Imam","Rabbi","Preacher","Elder","Father","Mother","Sister","Brother")
 	outfit_type = /decl/hierarchy/outfit/job/chaplain
 
 	equip(var/mob/living/carbon/human/H, var/alt_title, var/ask_questions = TRUE)
