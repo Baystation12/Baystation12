@@ -10,7 +10,7 @@
 	selection_color = "#7f6e2c"
 	req_admin_notify = 1
 	economic_modifier = 10
-
+	species_restricted = list("Tajara", "Vox", "Drider", "Diona")
 	ideal_character_age = 50
 
 
@@ -38,7 +38,7 @@
 	minimal_player_age = 7
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
 	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
-	alt_titles = list("Maintenance Technician","Engine Technician","Electrician",
+	alt_titles = list(" Junior Technician","Maintenance Technician","Engine Technician","Electrician","Sapper",
 		"Atmospheric Technician" = /decl/hierarchy/outfit/job/engineering/atmos)
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
 

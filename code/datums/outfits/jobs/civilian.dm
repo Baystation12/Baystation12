@@ -1,6 +1,43 @@
 /decl/hierarchy/outfit/job/assistant
 	name = OUTFIT_JOB_NAME("Assistant")
 
+/decl/hierarchy/outfit/job/assistant/visitor
+	name = OUTFIT_JOB_NAME("Visitor")
+	uniform = /obj/item/clothing/under/assistantformal
+
+/decl/hierarchy/outfit/job/assistant/resident
+	name = OUTFIT_JOB_NAME("Resident")
+	uniform = /obj/item/clothing/under/color/white
+
+/decl/hierarchy/outfit/job/assistant/colonist
+	name = OUTFIT_JOB_NAME("Colonist")
+	uniform = /obj/item/clothing/under/colonist
+	shoes = /obj/item/clothing/shoes/brown
+
+/decl/hierarchy/outfit/job/assistant/sci
+	name = OUTFIT_JOB_NAME("Research Assistant")
+	uniform = /obj/item/clothing/under/sciassist
+	shoes = /obj/item/clothing/shoes/white
+	head = /obj/item/clothing/head/soft/mime
+
+/decl/hierarchy/outfit/job/assistant/med
+	name = OUTFIT_JOB_NAME("Medical Intern")
+	uniform = /obj/item/clothing/under/medintern
+	shoes = /obj/item/clothing/shoes/white
+	head = /obj/item/clothing/head/soft/mime
+
+/decl/hierarchy/outfit/job/assistant/sec
+	name = OUTFIT_JOB_NAME("Security Cadet")
+	uniform = /obj/item/clothing/under/seccadet
+	shoes = /obj/item/clothing/shoes/jackboots
+	head = /obj/item/clothing/head/soft/red
+
+/decl/hierarchy/outfit/job/assistant/eng
+	name = OUTFIT_JOB_NAME("Technical Assistant")
+	uniform = /obj/item/clothing/under/techassist
+	shoes = /obj/item/clothing/shoes/workboots
+	head = /obj/item/clothing/head/techassist
+
 /decl/hierarchy/outfit/job/service
 	l_ear = /obj/item/device/radio/headset/headset_service
 	hierarchy_type = /decl/hierarchy/outfit/job/service

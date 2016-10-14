@@ -1,4 +1,4 @@
-var/global/const/base_law_type = /datum/ai_laws/nanotrasen
+var/const/base_law_type = /datum/ai_laws/nanotrasen
 
 /datum/ai_law
 	var/law = ""

@@ -389,6 +389,8 @@
 		if(job && IsJobAvailable(job.title))
 			if(job.minimum_character_age && (client.prefs.age < job.minimum_character_age))
 				continue
+			if(job.species_restricted && (client.prefs.species in job.species_restricted))
+				continue
 			var/active = 0
 			// Only players with the job assigned and AFK for less than 10 minutes count as active
 			for(var/mob/M in player_list) if(M.mind && M.client && M.mind.assigned_role == job.title && M.client.inactivity <= 10 * 60 * 10)

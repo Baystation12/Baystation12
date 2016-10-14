@@ -84,33 +84,35 @@ What is the naming convention for planes or layers?
 
 #define ABOVE_TURF_PLANE              -18 // For items which should appear above turfs but below other objects and hiding mobs, eg: wires & pipes
 
-	#define HOLOMAP_LAYER      1
-	#define RUNE_LAYER         2
-	#define DECAL_LAYER        3
-	#define ABOVE_TILE_LAYER   4
-	#define EXPOSED_PIPE_LAYER 5
-	#define MOUSETRAP_LAYER    6
-	#define BLOOD_LAYER        7
-	#define PLANT_LAYER        8
-	#define TURF_FIRE_LAYER    9
+	#define HOLOMAP_LAYER               1
+	#define RUNE_LAYER                  2
+	#define DECAL_LAYER                 3
+	#define ABOVE_TILE_LAYER            4
+	#define EXPOSED_PIPE_LAYER          5
+	#define EXPOSED_WIRE_LAYER          6
+	#define EXPOSED_WIRE_TERMINAL_LAYER 7
+	#define MOUSETRAP_LAYER             8
+	#define BLOOD_LAYER                 9
+	#define PLANT_LAYER                 10
+	#define TURF_FIRE_LAYER             11
 
 #define HIDING_MOB_PLANE              -16 // for hiding mobs like MoMMIs or spiders or whatever, under most objects but over pipes & such.
 
 	#define HIDING_MOB_LAYER 0
 
 #define OBJ_PLANE                     -15 // For objects which appear below humans.
-	#define BELOW_TABLE_LAYER       0
-	#define TABLE_LAYER             0.5
-	#define OPEN_DOOR_LAYER         1
+	#define BELOW_DOOR_LAYER        0.25
+	#define OPEN_DOOR_LAYER         0.5
+	#define BELOW_TABLE_LAYER       0.75
+	#define TABLE_LAYER             1
 	#define BELOW_OBJ_LAYER         2
 	// OBJ_LAYER                    3
 	#define ABOVE_OBJ_LAYER         4
-	#define SIDE_WINDOW_LAYER       5
-	#define FULL_WINDOW_LAYER       6
-	#define ABOVE_WINDOW_LAYER      7
-	#define BELOW_CLOSED_DOOR_LAYER 10
-	#define CLOSED_DOOR_LAYER       11
-	#define ABOVE_DOOR_LAYER        12
+	#define CLOSED_DOOR_LAYER       5
+	#define ABOVE_DOOR_LAYER        6
+	#define SIDE_WINDOW_LAYER       7
+	#define FULL_WINDOW_LAYER       8
+	#define ABOVE_WINDOW_LAYER      9
 
 #define LYING_MOB_PLANE               -14 // other mobs that are lying down.
 
@@ -154,11 +156,10 @@ What is the naming convention for planes or layers?
 #define LIGHTING_PLANE 			       -2 // For Lighting. - The highest plane (ignoring all other even higher planes)
 
 	#define LIGHTBULB_LAYER        0
-	#define GHOST_LAYER            2
-	#define LIGHTING_LAYER         3
-	#define ABOVE_LIGHTING_LAYER   4
-	#define SUPER_PORTAL_LAYER     6
-	#define NARSIE_GLOW            7
+	#define LIGHTING_LAYER         1
+	#define ABOVE_LIGHTING_LAYER   2
+	#define SUPER_PORTAL_LAYER     3
+	#define NARSIE_GLOW            4
 
 #define EFFECTS_ABOVE_LIGHTING_PLANE   -1 // For glowy eyes, laser beams, etc. that shouldn't be affected by darkness
 	#define EYE_GLOW_LAYER         1
@@ -189,6 +190,10 @@ What is the naming convention for planes or layers?
 
 /image
 	plane = FLOAT_PLANE			// this is defunct, lummox fixed this on recent compilers, but it will bug out if I remove it for coders not on the most recent compile.
+
+/image/proc/turf_decal_layerise()
+	plane = ABOVE_TURF_PLANE
+	layer = DECAL_LAYER
 
 /atom/proc/hud_layerise()
 	plane = HUD_PLANE

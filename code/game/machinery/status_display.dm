@@ -19,6 +19,7 @@ var/list/status_icons_to_colour = list(
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "frame"
 	name = "status display"
+	layer = ABOVE_WINDOW_LAYER
 	anchored = 1
 	density = 0
 	use_power = 1

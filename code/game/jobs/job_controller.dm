@@ -80,6 +80,8 @@ var/global/datum/controller/occupations/job_master
 				return 0
 			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
 				return 0
+			if (job.species_restricted &&  (player.client.prefs.species in job.species_restricted))
+				return 0
 			if(jobban_isbanned(player, rank))
 				return 0
 			if(!job.player_old_enough(player.client))

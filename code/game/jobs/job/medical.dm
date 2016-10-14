@@ -19,6 +19,7 @@
 
 	minimal_player_age = 14
 	ideal_character_age = 50
+	species_restricted = list("Tajara", "Vox", "Resomi", "Diona")
 	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
 
 /datum/job/doctor
@@ -34,7 +35,7 @@
 	economic_modifier = 7
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_virology)
-	alt_titles = list(
+	alt_titles = list("Orderly",
 		"Surgeon" = /decl/hierarchy/outfit/job/medical/doctor/surgeon,
 		"Emergency Physician" = /decl/hierarchy/outfit/job/medical/doctor/emergency_physician,
 		"Nurse" = /decl/hierarchy/outfit/job/medical/doctor/nurse,

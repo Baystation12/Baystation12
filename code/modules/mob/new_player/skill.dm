@@ -1,4 +1,4 @@
-var/global/const
+var/const
 	SKILL_NONE = 0
 	SKILL_BASIC = 1
 	SKILL_ADEPT = 2

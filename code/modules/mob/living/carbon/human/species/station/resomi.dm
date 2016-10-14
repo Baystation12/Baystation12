@@ -38,7 +38,7 @@
 	blood_volume = 280
 	hunger_factor = 0.2
 
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_BIOMODS
 	bump_flag = MONKEY
 	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL

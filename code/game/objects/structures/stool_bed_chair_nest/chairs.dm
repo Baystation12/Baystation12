@@ -54,7 +54,8 @@
 			var/image/I =  image(icon, "[base_icon]_padding_over")
 			if(material_alteration & MATERIAL_ALTERATION_COLOR)
 				I.color = padding_material.icon_colour
-			I.layer = FLY_LAYER
+			I.plane = ABOVE_HUMAN_PLANE
+			I.layer = ABOVE_HUMAN_LAYER
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]
 

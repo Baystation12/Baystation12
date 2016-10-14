@@ -10,6 +10,7 @@
 	selection_color = "#515151"
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_bar)
+	alt_titles = list("Barista","Mixologist","Barkeep","Barmaid")
 	outfit_type = /decl/hierarchy/outfit/job/service/bartender
 
 /datum/job/chef
@@ -23,7 +24,7 @@
 	selection_color = "#515151"
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_kitchen)
-	alt_titles = list("Cook")
+	alt_titles = list("Cook","Sous Chef","Culinary Artist","Baker","Waiter","Waitress","Line Cook")
 	outfit_type = /decl/hierarchy/outfit/job/service/chef
 
 /datum/job/hydro
@@ -37,7 +38,7 @@
 	selection_color = "#515151"
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_hydroponics)
-	alt_titles = list("Hydroponicist")
+	alt_titles = list("Hydroponicist","Botanist","Farmer","Agriculturalist")
 	outfit_type = /decl/hierarchy/outfit/job/service/gardener
 
 //Cargo
@@ -53,6 +54,7 @@
 	economic_modifier = 5
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
+	alt_titles = list("Supply Chief")
 	minimal_player_age = 3
 	ideal_character_age = 40
 	outfit_type = /decl/hierarchy/outfit/job/cargo/qm
@@ -68,6 +70,7 @@
 	selection_color = "#515151"
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
+	alt_titles = list("Delivery Boy","Delivery Girl")
 	outfit_type = /decl/hierarchy/outfit/job/cargo/cargo_tech
 
 /datum/job/mining
@@ -82,7 +85,7 @@
 	economic_modifier = 5
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_mining, access_mining_station, access_mailsorting)
-	alt_titles = list("Drill Technician","Prospector")
+	alt_titles = list("Drill Technician","Prospector","Miner","Material Excivation Engineer")
 	outfit_type = /decl/hierarchy/outfit/job/cargo/mining
 
 /datum/job/janitor
@@ -96,7 +99,7 @@
 	selection_color = "#515151"
 	access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
 	minimal_access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
-	alt_titles = list("Custodian","Sanitation Technician")
+	alt_titles = list("Custodian","Maid","Servant","Sanitation Technician")
 	outfit_type = /decl/hierarchy/outfit/job/service/janitor
 
 //More or less assistants
@@ -111,7 +114,7 @@
 	selection_color = "#515151"
 	access = list(access_library, access_maint_tunnels)
 	minimal_access = list(access_library)
-	alt_titles = list("Journalist")
+	alt_titles = list("Journalist","Writer","Bookkeeper","Curator","Archivist","Author","Professor","Historian")
 	outfit_type = /decl/hierarchy/outfit/job/librarian
 
 /datum/job/lawyer
@@ -126,6 +129,7 @@
 	economic_modifier = 7
 	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
+	alt_titles = list("Corporate Liason","Workplace Inspector")
 	minimal_player_age = 10
 	outfit_type = /decl/hierarchy/outfit/job/internal_affairs_agent
 

@@ -13,7 +13,7 @@
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
 	min_age = 18
 	max_age = 100
-	icobase = 'icons/mob/human_races/subspecies/r_vatgrown.dmi'
+	icobase = 'icons/mob/human_races/r_human.dmi'
 	flesh_color = "#FFDCAA"
 
 	spawn_flags = CAN_JOIN
@@ -310,6 +310,7 @@
 	name_language = LANGUAGE_LAMIA
 	min_age = 18
 	max_age = 110
+	slowdown = - 0.5
 
 	gluttonous = GLUT_ANYTHING // They eat people! But don't qdel the corpses, and can only carry one at a time.
 	stomach_capacity = MOB_MEDIUM
@@ -349,7 +350,7 @@
 	name_language = LANGUAGE_DRIDER
 	min_age = 18
 	max_age = 110
-
+	slowdown = - 0.5
 	toxins_mod = 0.25
 
 	gluttonous = GLUT_SMALLER // They eat smaller creatures.
