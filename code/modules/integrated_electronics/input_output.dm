@@ -402,3 +402,19 @@
 		"radio"			= 'sound/voice/bradio.ogg',
 		"secure day"	= 'sound/voice/bsecureday.ogg',
 		)
+
+/obj/item/integrated_circuit/output/text_to_speech
+	name = "text-to-speech circuit"
+	desc = "A miniature speaker is attached to this component."
+	extended_desc = "This unit is more advanced than the plain speaker circuit, able to transpose any valid text to speech."
+	icon_state = "speaker"
+	complexity = 12
+	cooldown_per_use = 4 SECONDS
+	inputs = list("text")
+	outputs = list()
+	activators = list("to speech")
+
+/obj/item/integrated_circuit/output/text_to_speech/do_work()
+	var/datum/integrated_io/text = inputs[1]
+	if(istext(text.data))
+		audible_message("\The [istype(loc, /obj/item/device/electronic_assembly) ? loc : src] states, \"[text.data]\"")

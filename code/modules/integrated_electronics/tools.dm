@@ -110,14 +110,14 @@
 
 /obj/item/device/integrated_electronics/debugger/attack_self(mob/user)
 	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in list("string","number","ref", "null")
-	if(!CanInteract(user, physical_state))
+	if(!type_to_use || !CanInteract(user, physical_state))
 		return
 
 	var/new_data = null
 	switch(type_to_use)
 		if("string")
 			accepting_refs = 0
-			new_data = input("Now type in a string.","[src] string writing") as null|text
+			new_data = sanitize(input("Now type in a string.","[src] string writing") as null|text)
 			if(istext(new_data) && CanInteract(user, physical_state))
 				data_to_write = new_data
 				to_chat(user, "<span class='notice'>You set \the [src]'s memory to \"[new_data]\".</span>")
@@ -156,6 +156,43 @@
 		to_chat(user, "<span class='notice'>You pulse \the [io.holder]'s [io].</span>")
 
 	io.holder.interact(user) // This is to update the UI.
+
+/obj/item/device/integrated_electronics/analyzer
+	name = "circuit analuzer"
+	desc = "This tool allows one to analyze custom assemblies and their components from a distance."
+	icon = 'icons/obj/electronic_assemblies.dmi'
+	icon_state = "analyzer"
+	flags = CONDUCT
+	w_class = 2
+	var/last_scan = ""
+
+/obj/item/device/integrated_electronics/analyzer/examine(var/mob/user)
+	if(..(user, 1))
+		if(last_scan)
+			to_chat(user, last_scan)
+		else
+			to_chat(user, "\The [src] has not yet been used to analyze any assemblies.")
+
+/obj/item/device/integrated_electronics/analyzer/afterattack(var/obj/item/device/electronic_assembly/assembly, var/mob/user)
+	if(!istype(assembly))
+		return ..()
+
+	user.visible_message("<span class='notify'>\The [user] begins to scan \the [assembly].</span>", "<span class='notify'>You begin to scan \the [assembly].</span>")
+	if(!do_after(user, assembly.get_part_complexity(), assembly))
+		return
+
+	playsound(src.loc, 'sound/piano/A#6.ogg', 25, 0, -3)
+
+	last_scan = list()
+	last_scan += "Results from the scan of \the [assembly]:"
+	var/found_parts = FALSE
+	for(var/obj/item/integrated_circuit/part in assembly)
+		found_parts = TRUE
+		last_scan += "\t [initial(part.name)]"
+	if(!found_parts)
+		last_scan += "*No Components Found*"
+	last_scan = jointext(last_scan,"\n")
+	to_chat(user, last_scan)
 
 /obj/item/weapon/storage/bag/circuits
 	name = "circuit kit"

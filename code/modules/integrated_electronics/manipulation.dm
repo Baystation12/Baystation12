@@ -192,7 +192,7 @@
 /obj/item/integrated_circuit/manipulation/grenade/Destroy()
 	if(attached_grenade && !attached_grenade.active)
 		attached_grenade.dropInto(loc)
-	attached_grenade = null
+	detach_grenade()
 	. =..()
 
 /obj/item/integrated_circuit/manipulation/grenade/attackby(var/obj/item/weapon/grenade/G, var/mob/user)
@@ -200,10 +200,8 @@
 		if(attached_grenade)
 			to_chat(user, "<span class='warning'>There is already a grenade attached!</span>")
 		else if(user.unEquip(G, target = src))
-			attached_grenade = G
-			size += G.w_class
-			desc += " \An [attached_grenade] is attached to it!"
 			user.visible_message("<span class='warning'>\The [user] attaches \a [G] to \the [src]!</span>", "<span class='notice'>You attach \the [G] to \the [src].</span>")
+			attach_grenade(G)
 	else
 		..()
 
@@ -211,9 +209,7 @@
 	if(attached_grenade)
 		user.visible_message("<span class='warning'>\The [user] removes \an [attached_grenade] from \the [src]!</span>", "<span class='notice'>You remove \the [attached_grenade] from \the [src].</span>")
 		user.put_in_any_hand_if_possible(attached_grenade) || attached_grenade.dropInto(loc)
-		attached_grenade = null
-		size = initial(size)
-		desc = initial(desc)
+		detach_grenade()
 	else
 		..()
 
@@ -225,3 +221,18 @@
 		attached_grenade.activate()
 		var/atom/holder = loc
 		log_and_message_admins("activated a grenade assembly. Last touches: Assembly: [holder.fingerprintslast] Circuit: [fingerprintslast] Grenade: [attached_grenade.fingerprintslast]")
+
+// These procs do not relocate the grenade, that's the callers responsibility
+/obj/item/integrated_circuit/manipulation/grenade/proc/attach_grenade(var/obj/item/weapon/grenade/G)
+	attached_grenade = G
+	destroyed_event.register(attached_grenade, src, /obj/item/integrated_circuit/manipulation/grenade/proc/detach_grenade)
+	size += G.w_class
+	desc += " \An [attached_grenade] is attached to it!"
+
+/obj/item/integrated_circuit/manipulation/grenade/proc/detach_grenade()
+	if(!attached_grenade)
+		return
+	destroyed_event.unregister(attached_grenade, src, /obj/item/integrated_circuit/manipulation/grenade/proc/detach_grenade)
+	attached_grenade = null
+	size = initial(size)
+	desc = initial(desc)

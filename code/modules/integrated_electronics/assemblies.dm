@@ -29,15 +29,22 @@
 	max_components = 25
 	max_complexity = 100
 
+/obj/item/device/electronic_assembly/proc/get_part_complexity()
+	. = 0
+	for(var/obj/item/integrated_circuit/part in contents)
+		. += part.complexity
+
+/obj/item/device/electronic_assembly/proc/get_part_size()
+	. = 0
+	for(var/obj/item/integrated_circuit/part in contents)
+		. += part.size
+
 /obj/item/device/electronic_assembly/interact(mob/user)
 	if(!CanInteract(user, physical_state))
 		return
 
-	var/total_part_size = 0
-	var/total_complexity = 0
-	for(var/obj/item/integrated_circuit/part in contents)
-		total_part_size += part.size
-		total_complexity = total_complexity + part.complexity
+	var/total_part_size = get_part_size()
+	var/total_complexity = get_part_complexity()
 	var/HTML = list()
 
 	HTML += "<html><head><title>[src.name]</title></head><body>"
@@ -148,3 +155,8 @@
 	..()
 	for(var/atom/movable/AM in contents)
 		AM.emp_act(severity)
+
+/obj/item/device/electronic_assembly/ex_act(severity)
+	for(var/thing in src)
+		ex_act(thing)
+	..()
