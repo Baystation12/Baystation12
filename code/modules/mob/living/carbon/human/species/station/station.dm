@@ -13,7 +13,7 @@
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
 	min_age = 18
 	max_age = 100
-	icobase = 'icons/mob/human_races/subspecies/r_vatgrown.dmi'
+	icobase = 'icons/mob/human_races/r_human.dmi'
 	flesh_color = "#FFDCAA"
 
 	spawn_flags = CAN_JOIN
