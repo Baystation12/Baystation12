@@ -12,7 +12,9 @@
 					/obj/item/weapon/eros/sex/fleshlight = 4,
 					/obj/item/weapon/eros/sex/bulletvibe = 4,
 					/obj/item/weapon/storage/belt/eros/strap_c = 2,
-					/obj/item/weapon/storage/belt/eros/strap_h = 2,)
+					/obj/item/weapon/storage/belt/eros/strap_h = 2,
+					/obj/item/clothing/under/bunny_suit = 5,
+					/obj/item/clothing/head/collectable/rabbitears = 5,)
 
 	prices = list(/obj/item/weapon/eros/sex/dildos/bigblackdick = 150,
 					/obj/item/weapon/eros/sex/dildos/metal_dildo = 130,
@@ -23,6 +25,8 @@
 					/obj/item/weapon/eros/sex/fleshlight = 100,
 					/obj/item/weapon/eros/sex/bulletvibe = 40,
 					/obj/item/weapon/storage/belt/eros/strap_c = 300,
-					/obj/item/weapon/storage/belt/eros/strap_h = 300,)
+					/obj/item/weapon/storage/belt/eros/strap_h = 300,
+					/obj/item/clothing/under/bunny_suit = 350,
+					/obj/item/clothing/head/collectable/rabbitears = 200,)
 
 	contraband = list(/obj/item/weapon/eros/sex/dildos/uglyhorse = 2)
