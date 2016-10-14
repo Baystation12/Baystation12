@@ -444,7 +444,7 @@ var/list/global/tank_gauge_cache = list()
 			var/env_pressure = environment.return_pressure()
 			var/tank_pressure = src.air_contents.return_pressure()
 
-			var/release_ratio = Clamp(0.02, sqrt((tank_pressure-env_pressure)/tank_pressure),1)
+			var/release_ratio = Clamp(0.002, sqrt(max(tank_pressure-env_pressure,0)/tank_pressure),1)
 			var/datum/gas_mixture/leaked_gas = air_contents.remove_ratio(release_ratio)
 			//dynamic air release based on ambient pressure
 
@@ -621,7 +621,7 @@ var/list/global/tank_gauge_cache = list()
 	src.update_icon()
 	src.update_gauge()
 
-	air_contents.add_thermal_energy(9000)
+	air_contents.add_thermal_energy(15000)
 
 
 /obj/item/device/tankassemblyproxy/update_icon()
