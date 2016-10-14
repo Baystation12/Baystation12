@@ -205,7 +205,7 @@
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
 
-	var/assembly_type = /obj/item/device/assembly/signaler
+//	var/assembly_type = /obj/item/device/assembly/signaler
 
 	//Note that the maximum amount of gas you can put in a 70L air tank at 1013.25 kPa and 519K is 16.44 mol.
 	var/phoron_amt = 0
@@ -233,26 +233,9 @@
 	K.proxyassembly.assembly = H
 	H.master = K.proxyassembly
 
-	var/obj/item/device/assembly/igniter/ign = new(H)
-	H.a_left = ign
-
-	var/obj/item/device/assembly/assm = new assembly_type(H)
-	H.a_right = assm
-
-	var/tog = assm.toggle_secure()
-	if(!tog)
-		assm.toggle_secure()
-
-
 	H.update_icon()
 
-
 	K.overlays += "bomb_assembly"
-	var/icon/test = getFlatIcon(K.proxyassembly.assembly)
-	test.Shift(SOUTH,1)
-	test.Shift(WEST,4)
-	K.overlays += test
-
 
 	qdel(src)
 
