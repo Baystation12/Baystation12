@@ -33,8 +33,7 @@
 			to_chat(user, "<span class='warning'>Those two types of channels are incompatable.  The first is a [selected_io.io_type], \
 			while the second is a [io.io_type].</span>")
 			return
-		selected_io.linked |= io
-		io.linked |= selected_io
+		selected_io.link_io(io)
 
 		to_chat(user, "<span class='notice'>You connect \the [selected_io.holder]'s [selected_io.name] to \the [io.holder]'s [io.name].</span>")
 		mode = WIRE

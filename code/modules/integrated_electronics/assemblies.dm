@@ -195,7 +195,7 @@
 
 		to_chat(user, "<span class='notice'>You slide \the [IC] inside \the [src].</span>")
 		user.drop_item()
-		IC.forceMove(src)
+		add_circuit(IC)
 		playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
 		interact(user)
 	else if(istype(I, /obj/item/weapon/crowbar))
@@ -207,20 +207,14 @@
 		to_chat(user, "<span class='notice'>You [opened ? "opened" : "closed"] \the [src].</span>")
 		update_icon()
 	else if(istype(I, /obj/item/electronic_assembly_shell))
-		if(applied_shell)
-			to_chat(user, "<span class='warning'>There is already a shell attached.</span>")
-			return 0
 		if(opened)
 			to_chat(user, "<span class='warning'>You cannot attach a shell while the assembly is open.</span>")
 			return 0
-		if(!user.unEquip(I, target = src))
+		if(!user.unEquip(I))
 			return 0
 		var/obj/item/electronic_assembly_shell/S = I
-		if(!S.can_apply_shell(src, user))
-			return 0
-		applied_shell = S
-		playsound(src, 'sound/weapons/flipblade.ogg', 50, 0, -2)
-		update_icon()
+		if(apply_shell(S, user))
+			playsound(src, 'sound/weapons/flipblade.ogg', 50, 0, -2)
 	else if(istype(I, /obj/item/weapon/screwdriver)	&& applied_shell)
 		applied_shell.dropInto(loc)
 		user.put_in_any_hand_if_possible(applied_shell)
@@ -255,3 +249,17 @@
 	for(var/thing in src)
 		ex_act(thing)
 	..()
+
+/obj/item/device/electronic_assembly/proc/add_circuit(var/atom/movable/circuit)
+	circuit.forceMove(src)
+
+/obj/item/device/electronic_assembly/proc/apply_shell(var/obj/item/electronic_assembly_shell/a_shell, var/user)
+	if(applied_shell)
+		to_chat(user, "<span class='warning'>There is already a shell attached.</span>")
+		return 0
+	if(!a_shell.can_apply_shell(src, user))
+		return FALSE
+	a_shell.forceMove(src)
+	applied_shell = a_shell
+	update_icon()
+	return TRUE

@@ -293,6 +293,15 @@
 /datum/integrated_io/nano_host()
 	return holder
 
+/datum/integrated_io/proc/link_io(var/datum/integrated_io/io)
+	if(io_type != io.io_type)
+		CRASH("Attempted to connect incompatible IO types: '[log_info_line(src)]' and '[log_info_line(io)]'")
+	if(holder == io.holder)
+		CRASH("Attempted two pins with the same holder: '[log_info_line(src)]' and '[log_info_line(io)]', belonging to '[log_info_line(holder)]'")
+
+	linked |= io
+	io.linked |= src
+
 /datum/integrated_io/proc/data_as_type(var/as_type)
 	if(!isweakref(data))
 		return
