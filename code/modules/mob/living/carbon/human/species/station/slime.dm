@@ -3,7 +3,8 @@
 	name_plural = "slimes"
 	mob_size = MOB_SMALL
 
-	blurb = "Slimey slimes."
+	blurb = "< Slime lore here. > \
+	Slimes are not permitted to be Captain, HoP, or HoS."
 
 	icobase = 'icons/mob/human_races/r_slime.dmi'
 	deform = 'icons/mob/human_races/r_slime.dmi'
@@ -54,7 +55,7 @@
 	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 
-	gluttonous = GLUT_SMALLER
+	gluttonous = GLUT_TINY
 	stomach_capacity = MOB_SMALL
 
 	flags = NO_SCAN | NO_SLIP | NO_EMBED
@@ -74,7 +75,6 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/unbreakable/slime),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/unbreakable/slime)
 		)
-	genders = list(MALE,FEMALE, NEUTER)
 
 var/heal_rate = 5 // Temp. Regen per tick.
 

@@ -21,7 +21,7 @@
 #define HAS_UNDERWEAR     0x8    // Underwear is drawn onto the mob icon.
 #define HAS_EYE_COLOR     0x10   // Eye colour selectable in chargen. (RGB)
 #define HAS_HAIR_COLOR    0x20   // Hair colour selectable in chargen. (RGB)
-#defineHAS_BIOMODS        0x40   // Indicates if the mob draws wings, tails and ears.
+#define HAS_BIOMODS       0x40   // Indicates if the mob draws wings, tails and ears.
 #define RADIATION_GLOWS   0x60   // Radiation causes this character to glow.
 
 

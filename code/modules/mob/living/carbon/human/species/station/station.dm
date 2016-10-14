@@ -47,7 +47,8 @@
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
 	desert planet, they mostly hold ideals of honesty, virtue, martial combat and bravery above all \
 	else, frequently even their own lives. They prefer warmer temperatures than most species and \
-	their native tongue is a heavy hissing laungage called Sinta'Unathi."
+	their native tongue is a heavy hissing laungage called Sinta'Unathi. \
+	Unathi are not permitted to be Captain."
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
@@ -108,7 +109,8 @@
 	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
 	influenced heavily by their long history of Slavemaster rule. They have a structured, clan-influenced way \
 	of family and politics. They prefer colder environments, and speak a variety of languages, mostly Siik'Maas, \
-	using unique inflections their mouths form."
+	using unique inflections their mouths form. \
+	Tajara are not permitted to hold Head roles."
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
@@ -210,7 +212,8 @@
 	Minoris primary being ringed with a cloud of singing space-station-sized entities.<br/><br/>The Dionaea coexist peacefully with \
 	all known species, especially the Skrell. Their communal mind makes them slow to react, and they have difficulty understanding \
 	even the simplest concepts of other minds. Their alien physiology allows them survive happily off a diet of nothing but light, \
-	water and other radiation."
+	water and other radiation. \
+	Dionaea are not permitted to be Captain, HoP, CE, or CMO. "
 
 	has_organ = list(
 		BP_NUTRIENT = /obj/item/organ/internal/diona/nutrients,
@@ -304,7 +307,8 @@
 	icobase = 'icons/mob/human_races/r_lamia.dmi'
 	deform = 'icons/mob/human_races/r_def_lamia.dmi'
 	unarmed_types = list(/datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
-	blurb = "Lamia lore"
+	blurb = "Lamia lore. \
+	Lamia are not permitted to be Captain."
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_LAMIA)
 	name_language = LANGUAGE_LAMIA
@@ -344,7 +348,8 @@
 	icobase = 'icons/mob/human_races/r_drider.dmi'
 	deform = 'icons/mob/human_races/r_def_drider.dmi'
 	unarmed_types = list(/datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
-	blurb = "Drider lore"
+	blurb = "< Drider lore here > \
+	Driders are not permitted to be Captain, HoP, or CE."
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_DRIDER)
 	name_language = LANGUAGE_DRIDER
@@ -398,7 +403,8 @@
 	tampering. They enjoy full rights as an independant race. Akula politics are somewhat tumultuous, \
 	divided between appreciating their close relationship with humanity and rejecting it. As a whole, \
 	the race struggles with their innatetely often aggressive nature, similar to the sharks they were \
-	uplifted from. They are well-suited to colder climates."
+	uplifted from. They are well-suited to colder climates. \
+	Akula are not permitted to be Captain."
 
 	cold_level_1 = 200 //Default 260 - Lower is better
 	cold_level_2 = 140 //Default 200
