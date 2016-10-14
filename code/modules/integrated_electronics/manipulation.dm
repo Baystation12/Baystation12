@@ -236,3 +236,46 @@
 	attached_grenade = null
 	size = initial(size)
 	desc = initial(desc)
+
+/obj/item/integrated_circuit/manipulation/bluespace_rift
+	name = "bluespace rift generator"
+	desc = "This powerful circuit can open rifts to another realspace location through bluespace."
+	extended_desc = "If a valid teleporter console is supplied as input then the selected teleporter beacon will be used as destination point, \
+					if not an undefined destination point is selected.\
+					Rift direction is a cardinal value determening in which direction the rift will be opened, relative the assembly. \
+					A direction value of 0 will open the rift on top of the assembly, and any other non-cardinal values will open the rift in the assembly's current facing."
+	icon_state = "bluespace"
+	flags = OPENCONTAINER
+	complexity = 25
+	size = 3
+	cooldown_per_use = 10 SECONDS
+	inputs = list("teleporter control console", "rift direction")
+	outputs = list()
+	activators = list("open rift")
+
+	origin_tech = list(TECH_MAGNET = 1, TECH_BLUESPACE = 3)
+	matter = list(DEFAULT_WALL_MATERIAL = 10000)
+
+/obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()
+	var/datum/integrated_io/tdata = inputs[1]
+	var/datum/integrated_io/step_dir = inputs[2]
+
+	var/turf/rift_location = get_turf(src)
+	if(!rift_location || !isPlayerLevel(rift_location.z))
+		playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
+		return
+
+	if(isnum(step_dir.data) && (!step_dir.data || step_dir.data in cardinal))
+		rift_location = get_step(rift_location, step_dir.data) || rift_location
+	else
+		rift_location = get_step(rift_location, dir) || rift_location
+
+	var/obj/machinery/computer/teleporter/tporter = tdata.data_as_type(/obj/machinery/computer/teleporter)
+	if(tporter && tporter.locked && !tporter.one_time_use && tporter.operable())
+		new /obj/effect/portal(rift_location, get_turf(tporter.locked))
+	else
+		var/turf/destination = get_random_turf_in_range(src, 10)
+		if(destination)
+			new /obj/effect/portal(rift_location, destination)
+		else
+			playsound(src, 'sound/effects/sparks2.ogg', 50, 1)

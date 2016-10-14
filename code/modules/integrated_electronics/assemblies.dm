@@ -7,6 +7,7 @@
 	var/max_components = 10
 	var/max_complexity = 40
 	var/opened = 0
+	var/obj/item/electronic_assembly_shell/applied_shell
 
 /obj/item/device/electronic_assembly/medium
 	name = "electronic mechanism"
@@ -28,6 +29,11 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = 25
 	max_complexity = 100
+
+/obj/item/device/electronic_assembly/Destroy()
+	qdel(applied_shell)
+	applied_shell = null
+	. = ..()
 
 /obj/item/device/electronic_assembly/proc/get_part_complexity()
 	. = 0
@@ -87,10 +93,17 @@
 		name = input
 
 /obj/item/device/electronic_assembly/update_icon()
-	if(opened)
-		icon_state = initial(icon_state) + "-open"
+	if(applied_shell)
+		desc = applied_shell.applied_desc
+		icon = applied_shell.icon
+		icon_state = applied_shell.icon_state
 	else
-		icon_state = initial(icon_state)
+		desc = initial(desc)
+		icon = initial(icon)
+		if(opened)
+			icon_state = initial(icon_state) + "-open"
+		else
+			icon_state = initial(icon_state)
 
 /obj/item/device/electronic_assembly/examine(mob/user)
 	. = ..(user, 1)
@@ -126,9 +139,33 @@
 		playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
 		interact(user)
 	else if(istype(I, /obj/item/weapon/crowbar))
+		if(applied_shell)
+			to_chat(user, "<span class='warning'>You cannot open the assembly while it has a shell attached.</span>")
+			return 0
 		playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
 		opened = !opened
 		to_chat(user, "<span class='notice'>You [opened ? "opened" : "closed"] \the [src].</span>")
+		update_icon()
+	else if(istype(I, /obj/item/electronic_assembly_shell))
+		if(applied_shell)
+			to_chat(user, "<span class='warning'>There is already a shell attached.</span>")
+			return 0
+		if(opened)
+			to_chat(user, "<span class='warning'>You cannot attach a shell while the assembly is open.</span>")
+			return 0
+		if(!user.unEquip(I, target = src))
+			return 0
+		var/obj/item/electronic_assembly_shell/shell = I
+		if(!shell.can_apply(src, user))
+			return 0
+		applied_shell = shell
+		playsound(src, 'sound/weapons/flipblade.ogg', 50, 0, -2)
+		update_icon()
+	else if(istype(I, /obj/item/weapon/screwdriver)	&& applied_shell)
+		applied_shell.dropInto(loc)
+		user.put_in_any_hand_if_possible(applied_shell)
+		applied_shell = null
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, 0, -2)
 		update_icon()
 	else if(istype(I, /obj/item/device/integrated_electronics/wirer) || istype(I, /obj/item/device/integrated_electronics/debugger) || istype(I, /obj/item/weapon/screwdriver))
 		if(opened)
@@ -147,7 +184,8 @@
 	for(var/obj/item/integrated_circuit/input/input in contents)
 		if(input.can_be_asked_input)
 			available_inputs.Add(input)
-	var/obj/item/integrated_circuit/input/choice = input(user, "What do you want to interact with?", "Interaction") as null|anything in available_inputs
+
+	var/obj/item/integrated_circuit/input/choice = (!opened && available_inputs.len == 1) ? available_inputs[1] : input(user, "What do you want to interact with?", "Interaction") as null|anything in available_inputs
 	if(choice && CanInteract(user, physical_state))
 		choice.ask_for_input(user)
 

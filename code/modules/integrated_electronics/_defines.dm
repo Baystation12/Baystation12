@@ -303,7 +303,7 @@
 
 /datum/integrated_io/activate/push_data()
 	for(var/datum/integrated_io/io in linked)
-		io.holder.check_then_do_work()
+		io.holder.check_then_do_work(io)
 
 /datum/integrated_io/proc/pull_data()
 	for(var/datum/integrated_io/io in linked)
@@ -344,13 +344,13 @@
 	for(var/datum/integrated_io/input/I in inputs)
 		I.push_data()
 
-/obj/item/integrated_circuit/proc/check_then_do_work()
+/obj/item/integrated_circuit/proc/check_then_do_work(var/datum/integrated_io/io)
 	if(world.time < next_use) 	// All intergrated circuits have an internal cooldown, to protect from spam.
 		return
 	next_use = world.time + cooldown_per_use
-	do_work()
+	do_work(io)
 
-/obj/item/integrated_circuit/proc/do_work()
+/obj/item/integrated_circuit/proc/do_work(var/datum/integrated_io/io)
 	return
 
 /obj/item/integrated_circuit/proc/disconnect_all()

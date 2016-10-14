@@ -263,6 +263,35 @@
 	for(var/mob/O in hearers(1, get_turf(src)))
 		O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
 
+/obj/item/integrated_circuit/input/teleporter_locator
+	name = "teleporter locator"
+	desc = "This circuit can locate and allow for selection of teleporter computers."
+	icon_state = "gps"
+	complexity = 5
+	can_be_asked_input = 1
+	inputs = list()
+	outputs = list("teleporter selected")
+	activators = list("on selected")
+
+/obj/item/integrated_circuit/input/teleporter_locator/ask_for_input(mob/user)
+	var/list/L = list()
+	for(var/obj/machinery/teleport/hub/R in machines)
+		var/obj/machinery/computer/teleporter/com = R.com
+		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable())
+			if(R.icon_state == "tele1")
+				L["[com.id] (Active)"] = com
+			else
+				L["[com.id] (Inactive)"] = com
+	L += "None (Dangerous)"
+
+	var/selection = input(user, "Please select a teleporter to lock in on.", "Hand Teleporter") as null|anything in L
+	if(selection && CanInteract(user, physical_state))
+		var/datum/integrated_io/O = outputs[1]
+		O.data = weakref(L[selection])
+		O.push_data()
+		var/datum/integrated_io/A = activators[1]
+		A.push_data()
+
 /obj/item/integrated_circuit/output/screen
 	name = "screen"
 	desc = "This small screen can display a single piece of data, when the machine is examined closely."
