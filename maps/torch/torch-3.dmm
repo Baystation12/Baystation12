@@ -967,7 +967,7 @@
 "sE" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4; icon_state = "intact"; tag = "icon-intact (EAST)"},/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/plating,/area/engineering/engine_room)
 "sF" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 10},/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/plating,/area/engineering/engine_room)
 "sG" = (/obj/structure/table/standard,/obj/machinery/light/small{dir = 8},/obj/random/tech_supply,/turf/simulated/floor/plating,/area/teleporter/seconddeck)
-"sH" = (/obj/structure/table/standard,/obj/machinery/firealarm{dir = 1; pixel_x = 0; pixel_y = -24},/obj/item/weapon/hand_tele,/turf/simulated/floor/plating,/area/teleporter/seconddeck)
+"sH" = (/obj/structure/table/standard,/obj/machinery/firealarm{dir = 1; pixel_x = 0; pixel_y = -24},/obj/prefab/hand_teleporter,/turf/simulated/floor/plating,/area/teleporter/seconddeck)
 "sI" = (/obj/structure/table/standard,/obj/random/tank,/turf/simulated/floor/plating,/area/teleporter/seconddeck)
 "sJ" = (/obj/machinery/alarm{dir = 1; pixel_y = -22},/turf/simulated/floor/plating,/area/teleporter/seconddeck)
 "sK" = (/obj/effect/floor_decal/industrial/warning{dir = 8},/turf/simulated/floor/plating,/area/engineering/drone_fabrication)
