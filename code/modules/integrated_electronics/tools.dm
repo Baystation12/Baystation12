@@ -106,9 +106,13 @@
 	w_class = ITEM_SIZE_SMALL
 	var/weakref/data_to_write = null
 	var/accepting_refs = 0
+	var/available_types = list("string","number","null")
+
+/obj/item/device/integrated_electronics/debugger/admin
+	available_types = list("string","number","ref","null")
 
 /obj/item/device/integrated_electronics/debugger/attack_self(mob/user)
-	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in list("string","number","ref", "null")
+	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in available_types
 	if(!type_to_use || !CanInteract(user, physical_state))
 		return
 
@@ -134,13 +138,16 @@
 			data_to_write = null
 			to_chat(user, "<span class='notice'>You set \the [src]'s memory to absolutely nothing.</span>")
 
-/obj/item/device/integrated_electronics/debugger/afterattack(atom/target, mob/living/user, proximity)
-	if(accepting_refs && proximity)
-		data_to_write = weakref(target)
-		visible_message("<span class='notice'>[user] slides \a [src]'s over \the [target].</span>")
-		to_chat(user, "<span class='notice'>You set \the [src]'s memory to a reference to [target.name] \[Ref\].  The ref scanner is \
-		now off.</span>")
-		accepting_refs = 0
+/obj/item/device/integrated_electronics/debugger/admin/MouseDrop(var/atom/over_object)
+	if(!accepting_refs)
+		return ..()
+
+	if(!CanMouseDrop(over_object))
+		return
+	data_to_write = weakref(over_object)
+	visible_message("<span class='notice'>\The [usr] slides \a [src]'s over \the [over_object].</span>")
+	to_chat(usr, "<span class='notice'>You set \the [src]'s memory to a reference to \the [over_object.name]. The ref scanner is now off.</span>")
+	accepting_refs = 0
 
 /obj/item/device/integrated_electronics/debugger/proc/write_data(var/datum/integrated_io/io, mob/user)
 	if(io.io_type == DATA_CHANNEL)

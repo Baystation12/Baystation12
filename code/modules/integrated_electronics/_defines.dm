@@ -247,7 +247,7 @@
 		else
 			to_chat(usr, "<span class='warning'>You need a screwdriver to remove components.</span>")
 		interact_with_assembly(usr)
-		. = 1
+		. = IC_TOPIC_REFRESH
 
 	else
 		. = OnTopic(href_list, usr)
