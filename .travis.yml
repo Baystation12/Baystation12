@@ -55,7 +55,7 @@ script:
   - (num=`grep -E '"/turf' **/*.dm | wc -l`; echo "$num /turf text paths (expecting 8 or less)"; [ $num -le 8 ])
   - awk -f tools/indentation.awk **/*.dm
   - md5sum -c - <<< "4bab08611ef5a6f7478d8c4f8b1aa355 *.gitignore"
-  - md5sum -c - <<< "0af969f671fba6cf9696c78cd175a14a *baystation12.int"
+  - md5sum -c - <<< "0af969f671fba6cf9696c78cd175a14a *Eros.int"
   - md5sum -c - <<< "88490b460c26947f5ec1ab1bb9fa9f17 *html/changelogs/example.yml"
   - python tools/TagMatcher/tag-matcher.py .
   - python tools/PunctuationChecker/punctuation-checker.py .
@@ -63,11 +63,11 @@ script:
   - cd tgui && gulp
   - cd ..
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
-  - python tools/GenerateGlobalVarAccess/gen_globals.py baystation12.dme code/_helpers/global_access.dm
+  - python tools/GenerateGlobalVarAccess/gen_globals.py Eros.dme code/_helpers/global_access.dm
   - cp config/example/* config/
-  - scripts/dm.sh -DUNIT_TEST -M$MAP_PATH baystation12.dme
+  - scripts/dm.sh -DUNIT_TEST -M$MAP_PATH Eros.dme
   - grep ", 0 warnings" build_log.txt
-  - DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt
+  - DreamDaemon Eros.dmb -invisible -trusted -core 2>&1 | tee log.txt
   - grep "All Unit Tests Passed" log.txt
   - (! grep "runtime error:" log.txt)
   - (! grep 'Process scheduler caught exception processing' log.txt)

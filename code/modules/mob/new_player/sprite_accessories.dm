@@ -46,14 +46,14 @@
 /datum/sprite_accessory/hair
 
 	icon = 'icons/mob/Human_face.dmi'	  // default icon for all hairs
-	species_allowed = list("Human","Unathi","Akula","Lamia", "Drider", "Machine") //I rather if we had machine only hair instead, but will be good enough for release
+	species_allowed = list("Human","Unathi","Akula","Lamia", "Drider", "Machine","Slime") //I rather if we had machine only hair instead, but will be good enough for release  -- Slimes go here until I finish the Polaris port
 	var/veryshort						//doesn't need to be hidden by BLOCKHEADHAIR hats/helmets
 
 	bald
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human","Unathi","Akula","Lamia", "Drider", "Machine")
+		species_allowed = list("Human","Unathi","Akula","Lamia", "Drider", "Machine","Slime")
 		veryshort = 1
 
 	short
@@ -494,7 +494,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Lamia", "Drider")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Lamia", "Drider","Slime")
 
 	watson
 		name = "Watson Mustache"
