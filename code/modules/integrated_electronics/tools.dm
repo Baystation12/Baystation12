@@ -167,7 +167,8 @@
 	var/last_scan = ""
 
 /obj/item/device/integrated_electronics/analyzer/examine(var/mob/user)
-	if(..(user, 1))
+	. = ..(user, 1)
+	if(.)
 		if(last_scan)
 			to_chat(user, last_scan)
 		else

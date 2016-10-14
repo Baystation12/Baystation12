@@ -1,9 +1,6 @@
 /obj/item/integrated_circuit/input
 	var/can_be_asked_input = 0
 
-/obj/item/integrated_circuit/input/proc/ask_for_input(mob/user)
-	return
-
 /obj/item/integrated_circuit/input/button
 	name = "button"
 	desc = "This tiny button must do something, right?"
@@ -14,12 +11,17 @@
 	outputs = list()
 	activators = list("on pressed")
 
-/obj/item/integrated_circuit/input/button/ask_for_input(mob/user) //Bit misleading name for this specific use.
-	var/datum/integrated_io/A = activators[1]
-	if(A.linked.len)
-		for(var/datum/integrated_io/activate/target in A.linked)
-			target.holder.check_then_do_work()
-	to_chat(user, "<span class='notice'>You press the button labeled '[src.name]'.</span>")
+/obj/item/integrated_circuit/input/button/get_topic_data(mob/user)
+	return list("Press" = "press=1")
+
+/obj/item/integrated_circuit/input/button/OnTopic(href_list, user)
+	if(href_list["press"])
+		to_chat(user, "<span class='notice'>You press the button labeled '[src.name]'.</span>")
+		var/datum/integrated_io/A = activators[1]
+		if(A.linked.len)
+			for(var/datum/integrated_io/activate/target in A.linked)
+				target.holder.check_then_do_work()
+		return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/input/numberpad
 	name = "number pad"
@@ -31,14 +33,19 @@
 	outputs = list("number entered")
 	activators = list("on entered")
 
-/obj/item/integrated_circuit/input/numberpad/ask_for_input(mob/user)
-	var/new_input = input(user, "Enter a number, please.","Number pad") as null|num
-	if(isnum(new_input) && CanInteract(user, physical_state))
-		var/datum/integrated_io/O = outputs[1]
-		O.data = new_input
-		O.push_data()
-		var/datum/integrated_io/A = activators[1]
-		A.push_data()
+/obj/item/integrated_circuit/input/numberpad/get_topic_data(mob/user)
+	return list("Enter Number" = "enter_number=1")
+
+/obj/item/integrated_circuit/input/numberpad/OnTopic(href_list, user)
+	if(href_list["enter_number"])
+		var/new_input = input(user, "Enter a number, please.","Number pad") as null|num
+		if(isnum(new_input) && CanInteract(user, physical_state))
+			var/datum/integrated_io/O = outputs[1]
+			O.data = new_input
+			O.push_data()
+			var/datum/integrated_io/A = activators[1]
+			A.push_data()
+		return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/input/textpad
 	name = "text pad"
@@ -50,14 +57,19 @@
 	outputs = list("string entered")
 	activators = list("on entered")
 
-/obj/item/integrated_circuit/input/textpad/ask_for_input(mob/user)
-	var/new_input = input(user, "Enter some words, please.","Number pad") as null|text
-	if(istext(new_input) && CanInteract(user, physical_state))
-		var/datum/integrated_io/O = outputs[1]
-		O.data = new_input
-		O.push_data()
-		var/datum/integrated_io/A = activators[1]
-		A.push_data()
+/obj/item/integrated_circuit/input/textpad/get_topic_data(mob/user)
+	return list("Enter Words" = "enter_number=1")
+
+/obj/item/integrated_circuit/input/textpad/OnTopic(href_list, user)
+	if(href_list["enter_words"])
+		var/new_input = input(user, "Enter some words, please.","Number pad") as null|text
+		if(istext(new_input) && CanInteract(user, physical_state))
+			var/datum/integrated_io/O = outputs[1]
+			O.data = new_input
+			O.push_data()
+			var/datum/integrated_io/A = activators[1]
+			A.push_data()
+			return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/input/med_scanner
 	name = "integrated medical analyser"
@@ -270,27 +282,31 @@
 	complexity = 5
 	can_be_asked_input = 1
 	inputs = list()
-	outputs = list("teleporter selected")
+	outputs = list("teleporter")
 	activators = list("on selected")
 
-/obj/item/integrated_circuit/input/teleporter_locator/ask_for_input(mob/user)
-	var/list/L = list()
+/obj/item/integrated_circuit/input/teleporter_locator/get_topic_data(mob/user)
+	var/datum/integrated_io/O = outputs[1]
+	var/obj/machinery/computer/teleporter/current_console = O.data_as_type(/obj/machinery/computer/teleporter)
+
+	. = list()
+	. += "Current selection: [(current_console && current_console.id) || "None"]"
+	. += "Please select a teleporter to lock in on:"
 	for(var/obj/machinery/teleport/hub/R in machines)
 		var/obj/machinery/computer/teleporter/com = R.com
 		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable())
-			if(R.icon_state == "tele1")
-				L["[com.id] (Active)"] = com
-			else
-				L["[com.id] (Inactive)"] = com
-	L += "None (Dangerous)"
+			.["[com.id] ([R.icon_state == "tele1" ? "Active" : "Inactive"])"] = "tport=[any2ref(com)]"
+	.["None (Dangerous)"] = "tport=random"
 
-	var/selection = input(user, "Please select a teleporter to lock in on.", "Hand Teleporter") as null|anything in L
-	if(selection && CanInteract(user, physical_state))
+/obj/item/integrated_circuit/input/teleporter_locator/OnTopic(href_list, user)
+	if(href_list["tport"])
 		var/datum/integrated_io/O = outputs[1]
-		O.data = weakref(L[selection])
+		var/output = href_list["tport"] == "random" ? null : locate(href_list["tport"])
+		O.data = output && weakref(output)
 		O.push_data()
 		var/datum/integrated_io/A = activators[1]
 		A.push_data()
+		return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/output/screen
 	name = "screen"
@@ -300,6 +316,16 @@
 	outputs = list()
 	activators = list("load data")
 	var/stuff_to_display = null
+
+/obj/item/integrated_circuit/output/screen/examine(mob/user, var/assembly_examine = FALSE)
+	if(assembly_examine)
+		if(stuff_to_display)
+			to_chat(user, "There's a little screen labeled '[name]', which displays '[stuff_to_display]'.")
+	else
+		..()
+
+/obj/item/integrated_circuit/output/screen/get_topic_data()
+	return stuff_to_display ? list(stuff_to_display) : list()
 
 /obj/item/integrated_circuit/output/screen/do_work()
 	var/datum/integrated_io/I = inputs[1]

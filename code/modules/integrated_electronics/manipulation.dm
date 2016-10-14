@@ -240,16 +240,16 @@
 /obj/item/integrated_circuit/manipulation/bluespace_rift
 	name = "bluespace rift generator"
 	desc = "This powerful circuit can open rifts to another realspace location through bluespace."
-	extended_desc = "If a valid teleporter console is supplied as input then the selected teleporter beacon will be used as destination point, \
-					if not an undefined destination point is selected.\
-					Rift direction is a cardinal value determening in which direction the rift will be opened, relative the assembly. \
+	extended_desc = "If a valid teleporter console is supplied as input then its selected teleporter beacon will be used as destination point, \
+					and if not an undefined destination point is selected. \
+					Rift direction is a cardinal value determening in which direction the rift will be opened, relative the local north. \
 					A direction value of 0 will open the rift on top of the assembly, and any other non-cardinal values will open the rift in the assembly's current facing."
 	icon_state = "bluespace"
 	flags = OPENCONTAINER
 	complexity = 25
 	size = 3
 	cooldown_per_use = 10 SECONDS
-	inputs = list("teleporter control console", "rift direction")
+	inputs = list("teleporter", "rift direction" = 0)
 	outputs = list()
 	activators = list("open rift")
 

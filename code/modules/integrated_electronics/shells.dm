@@ -1,4 +1,9 @@
-/obj/item/electronic_assembly_shell/proc/can_apply(var/obj/item/device/electronic_assembly/assembly, var/mob/user)
+/obj/item/electronic_assembly_shell
+	name = "plastic shell"
+	w_class = 1
+	var/applied_description
+
+/obj/item/electronic_assembly_shell/proc/can_apply_shell(var/obj/item/device/electronic_assembly/assembly, var/mob/user)
 	if(!istype(assembly))
 		to_chat(user, "<span class='warning'>This is not an assembly.</span>")
 		return FALSE
@@ -9,11 +14,6 @@
 		to_chat(user, "<span class='warning'>This shell is too large for the assembly.</span>")
 		return FALSE
 	return TRUE
-
-/obj/item/electronic_assembly_shell
-	name = "plastic shell"
-	w_class = 1
-	var/applied_description
 
 /obj/item/electronic_assembly_shell/hand_teleporter
 	icon = 'icons/obj/device.dmi'
