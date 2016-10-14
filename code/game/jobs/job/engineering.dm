@@ -10,7 +10,7 @@
 	selection_color = "#7f6e2c"
 	req_admin_notify = 1
 	economic_modifier = 10
-
+	species_restricted = list("Tajara", "Vox", "Drider", "Diona")
 	ideal_character_age = 50
 
 

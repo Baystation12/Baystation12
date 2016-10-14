@@ -102,6 +102,9 @@
 		if(job.minimum_character_age && user.client && (user.client.prefs.age < job.minimum_character_age))
 			. += "<del>[rank]</del></td><td> \[MINIMUM CHARACTER AGE: [job.minimum_character_age]]</td></tr>"
 			continue
+		if(job.species_restricted && user.client && (user.client.prefs.species in job.species_restricted))
+			. += "<del>[rank]</del></td><td> \[RACE RESTRICTED FOR THIS ROLE]</td></tr>"
+			continue
 		if((job.allowed_branches && !(pref.char_branch in job.allowed_branches)) || (job.allowed_ranks && !(pref.char_rank in job.allowed_ranks)))
 			. += "<del>[rank]</del></td><td><b> \[NOT AVAILABLE]</b></td></tr>"
 			continue

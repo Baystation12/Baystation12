@@ -20,6 +20,7 @@
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks)
 	alt_titles = list("Commander","Chief Constable")
 	minimal_player_age = 14
+	species_restricted = list("Tajara", "Vox", "Resomi", "Slime")
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
 
 /datum/job/hos/equip(var/mob/living/carbon/human/H)

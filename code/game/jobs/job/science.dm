@@ -21,6 +21,7 @@
 	alt_titles = list("Research Supervisor")
 	minimal_player_age = 14
 	ideal_character_age = 50
+	species_restricted = list("Tajara", "Vox", "Unathi")
 	outfit_type = /decl/hierarchy/outfit/job/science/rd
 
 /datum/job/scientist

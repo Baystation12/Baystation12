@@ -15,6 +15,7 @@
 	radiation_mod = 0.5
 	brute_mod =     0.85
 	slowdown =      1
+	spawn_flags = IS_RESTRICTED
 
 /datum/species/human/spacer
 	name = "Space-Adapted Human"
@@ -29,6 +30,7 @@
 	flash_mod = 1.2
 	brute_mod = 1.1
 	burn_mod =  1.1
+	spawn_flags = IS_RESTRICTED
 
 /datum/species/human/vatgrown
 	name = "Vat-Grown Human"
@@ -48,6 +50,7 @@
 		BP_EYES =     /obj/item/organ/internal/eyes
 		)
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_BIOMODS
+	spawn_flags = IS_RESTRICTED
 
 /datum/species/human/vatgrown/sanitize_name(name)
 	return sanitizeName(name, allow_numbers=TRUE)
