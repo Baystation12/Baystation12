@@ -92,3 +92,86 @@
 		<option value='?_src_=vars;explode=\ref[src]'>Trigger explosion</option>
 		<option value='?_src_=vars;emp=\ref[src]'>Trigger EM pulse</option>
 		"}
+
+#define get_variables_from_(X) \
+/X/proc/get_variables() \
+	return vars
+
+#define get_variable_value_from_(X) \
+/X/proc/get_variable_value(varname) \
+	return vars[varname]
+
+#define set_variable_value_for_(X) \
+/X/proc/set_variable_value(varname, value) \
+	vars[varname] = value
+
+#define get_initial_variable_value_for_(X) \
+/X/proc/get_initial_variable_value(varname) \
+	return null // I don't see how this ever returned anything except null. Used to be: initial(D.vars[varname])
+
+#define make_view_variables_variable_entry_for_(X) \
+/X/proc/make_view_variables_variable_entry(varname, value) \
+	return {" \
+			(<a href='?_src_=vars;datumedit=\ref[src];varnameedit=[varname]'>E</a>) \
+			(<a href='?_src_=vars;datumchange=\ref[src];varnamechange=[varname]'>C</a>) \
+			(<a href='?_src_=vars;datummass=\ref[src];varnamemass=[varname]'>M</a>) \
+			"} \
+
+get_variables_from_(datum)
+get_variables_from_(client)
+
+get_variable_value_from_(datum)
+get_variable_value_from_(client)
+
+set_variable_value_for_(datum)
+set_variable_value_for_(client)
+
+get_initial_variable_value_for_(datum)
+get_initial_variable_value_for_(client)
+
+make_view_variables_variable_entry_for_(datum)
+make_view_variables_variable_entry_for_(client)
+
+#undef get_variables_from_
+#undef get_variable_value_from_
+#undef set_variable_value_for_
+#undef get_initial_variable_value_for_
+
+// These methods are all procs and don't use stored lists to avoid VV exploits
+
+/datum/proc/VVlocked()
+	return list("vars", "virus", "viruses", "cuffed")
+
+/atom/movable/VVlocked()
+	return ..() + list("bound_x", "bound_y", "step_x", "step_y")
+
+/mob/VVlocked()
+	return ..() + list("client")
+
+/datum/proc/VVicon_edit_lock()
+	return list()
+
+/atom/VVicon_edit_lock()
+	return ..() + list("icon", "icon_state", "overlays", "underlays")
+
+/datum/proc/VVckey_edit()
+	return list()
+
+/mob/VVckey_edit()
+	return list("key", "ckey")
+
+/client/proc/VVlocked()
+	return list("vars", "holder", "mob")
+
+/client/proc/VVicon_edit_lock()
+	return list()
+
+/client/proc/VVckey_edit()
+	return list("key", "ckey")
+
+/proc/forbidden_varedit_object_types()
+ 	return list(
+		/datum/admins,						//Admins editing their own admin-power object? Yup, sounds like a good idea.,
+		/obj/machinery/blackbox_recorder,	//Prevents people messing with feedback gathering,
+		/datum/feedback_variable			//Prevents people messing with feedback gathering
+	)
