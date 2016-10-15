@@ -243,6 +243,8 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "greenshatter"
 	anchored = 1
+	plane = ABOVE_TURF_PLANE
+	layer = BLOOD_LAYER
 
 /obj/effect/spider/cocoon
 	name = "cocoon"
