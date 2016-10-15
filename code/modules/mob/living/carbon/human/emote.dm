@@ -51,7 +51,7 @@
 
 		if ("confirm")
 			if (src.isSynthetic())
-				message = "<B>[src]</B> emits an affirmative blip."
+				message = "emits an affirmative blip."
 				playsound(src.loc, 'sound/machines/synth_yes.ogg', 50, 0)
 				m_type = VISIBLE_MESSAGE
 			else
@@ -59,7 +59,7 @@
 
 		if ("deny")
 			if (src.isSynthetic())
-				message = "<B>[src]</B> emits a negative blip."
+				message = "emits a negative blip."
 				playsound(src.loc, 'sound/machines/synth_no.ogg', 50, 0)
 				m_type = VISIBLE_MESSAGE
 			else
