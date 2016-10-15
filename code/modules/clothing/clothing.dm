@@ -420,7 +420,7 @@ BLIND     // can't see anything
 	permeability_coefficient = 0.50
 	force = 2
 	var/overshoes = 0
-	species_restricted = list("exclude","Unathi","Tajara","Vox")
+	species_restricted = list("exclude","Vox")
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/shoes.dmi',
 		"Resomi" = 'icons/mob/species/resomi/shoes.dmi',
