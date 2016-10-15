@@ -122,6 +122,7 @@
 	icon_state = "clock"
 	inputs = list()
 	outputs = list("time (string)", "hours (number)", "minutes (number)", "seconds (number)")
+	activators = list("update")
 
 /obj/item/integrated_circuit/time/clock/do_work()
 	var/datum/integrated_io/time = outputs[1]
@@ -134,5 +135,4 @@
 	min.data = text2num(time2text(station_time_in_ticks, "mm"))
 	sec.data = text2num(time2text(station_time_in_ticks, "ss"))
 
-	for(var/datum/integrated_io/output/O in outputs)
-		O.push_data()
+	push_data()
