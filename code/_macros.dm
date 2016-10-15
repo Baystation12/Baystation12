@@ -80,3 +80,5 @@
 #define any2ref(x) "\ref[x]"
 
 #define CanInteract(user, state) (CanUseTopic(user, state) == STATUS_INTERACTIVE)
+
+#define qdel_null(x) if(x) { qdel(x) ; x = null }
