@@ -64,16 +64,16 @@
 
 /obj/item/clothing/head/helmet/space/rig/military
 	light_overlay = "helmet_light_dual_green"
-	species_restricted = list("Human")
+	species_restricted = list("exclude","Diona", "Drider", "Xenomorph")
 
 /obj/item/clothing/suit/space/rig/military
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Xenomorph")
 
 /obj/item/clothing/shoes/magboots/rig/military
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Xenomorph")
 
 /obj/item/clothing/gloves/rig/military
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Xenomorph")
 
 /obj/item/weapon/rig/military/equipped
 	initial_modules = list(

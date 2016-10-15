@@ -4,23 +4,25 @@
 
 /obj/item/clothing/head/helmet/space/rig
 	name = "helmet"
+	species_restricted = list("exclude","Diona", "Drider", "Xenomorph")
 	item_flags = THICKMATERIAL
 	flags_inv = 		 HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 	heat_protection =    HEAD|FACE|EYES
 	cold_protection =    HEAD|FACE|EYES
 	brightness_on = 4
-	sprite_sheets = list(
+	/*sprite_sheets = list(
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
 		"Skrell" = 'icons/mob/species/skrell/helmet.dmi',
 		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
 		"Akula" = 'icons/mob/species/akula/helmet.dmi',
 		"Slime" = 'icons/mob/species/slime/helmet.dmi'
-		)
+		)*/ //eros
 	species_restricted = null
 
 /obj/item/clothing/gloves/rig
 	name = "gauntlets"
+	species_restricted = list("exclude","Diona", "Drider", "Xenomorph")
 	item_flags = THICKMATERIAL
 	body_parts_covered = HANDS
 	heat_protection =    HANDS
@@ -30,6 +32,7 @@
 
 /obj/item/clothing/shoes/magboots/rig
 	name = "boots"
+	species_restricted = list("exclude","Diona", "Drider", "Xenomorph")
 	body_parts_covered = FEET
 	cold_protection = FEET
 	heat_protection = FEET
@@ -39,23 +42,24 @@
 
 /obj/item/clothing/suit/space/rig
 	name = "chestpiece"
+	species_restricted = list("exclude","Diona", "Drider", "Xenomorph")
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	heat_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	cold_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	// HIDEJUMPSUIT no longer needed, see "hides_uniform" and "update_component_sealed()" in rig.dm
-	flags_inv =          HIDETAIL
+	//flags_inv =          HIDETAIL
 	item_flags =              STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	//will reach 10 breach damage after 25 laser carbine blasts, 3 revolver hits, or ~1 PTR hit. Completely immune to smg or sts hits.
 	breach_threshold = 38
 	resilience = 0.2
 	can_breach = 1
-	sprite_sheets = list(
+	/*sprite_sheets = list(
 		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',
 		"Unathi" = 'icons/mob/species/unathi/suit.dmi',
 		"Akula" = 'icons/mob/species/akula/suit.dmi',
 		"Slime" = 'icons/mob/species/slime/suit.dmi'
-		)
+		)*/ //eros
 	var/list/supporting_limbs = list() //If not-null, automatically splints breaks. Checked when removing the suit.
 
 /obj/item/clothing/suit/space/rig/equipped(mob/M)
