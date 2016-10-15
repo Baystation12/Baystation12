@@ -221,3 +221,9 @@
 	desc = "A purple and wite uniform, specially designed for assistants with an eye for science."
 	icon_state = "eros_assistsci"
 	item_state_slots = list(slot_r_hand_str = "eros_assistsci", slot_l_hand_str = "eros_assistsci")
+
+/obj/item/clothing/under/loose_dress
+	name = "Loose Dress"
+	desc = "A dress that leaves very little to the imagination."
+	icon_state = "eros_loosedress"
+	show_genitals = 1

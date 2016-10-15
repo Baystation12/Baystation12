@@ -204,5 +204,9 @@
 	display_name = "gear harness"
 	path = /obj/item/clothing/under/harness
 
+/datum/gear/uniform/eros/loose_dress
+	display_name = "Loose Dress"
+	path = /obj/item/clothing/under/loose_dress
+
 
 //EROS FINISH
