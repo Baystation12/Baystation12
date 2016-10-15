@@ -2,6 +2,8 @@
 	dir = SOUTH
 	initialize_directions = SOUTH
 
+	layer = ABOVE_TILE_LAYER
+
 	var/datum/gas_mixture/air_contents
 
 	var/obj/machinery/atmospherics/node

@@ -88,13 +88,13 @@
 
 	var/debug = 0
 
-/obj/machinery/power/supermatter/New()
-	. = ..()
+/obj/machinery/power/supermatter/initialize()
+	..()
 	radio = new /obj/item/device/radio{channels=list("Engineering")}(src)
-
 
 /obj/machinery/power/supermatter/Destroy()
 	qdel(radio)
+	radio = null
 	. = ..()
 
 /obj/machinery/power/supermatter/proc/explode()
