@@ -3,7 +3,7 @@
 	desc = "..."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = null
-	w_class = ITEMSIZE_SMALL
+	w_class = ITEM_SIZE_SMALL
 	var/amount_per_transfer_from_this = 5
 	var/possible_transfer_amounts = "5;10;15;25;30"
 	var/volume = 30

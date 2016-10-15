@@ -5,7 +5,7 @@
 	item_state = "cultblade"
 	edge = 1
 	sharp = 1
-	w_class = ITEMSIZE_LARGE
+	w_class = ITEM_SIZE_LARGE
 	force = 30
 	throwforce = 10
 	hitsound = 'sound/weapons/bladeslice.ogg'

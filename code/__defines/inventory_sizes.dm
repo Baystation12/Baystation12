@@ -1,32 +1,25 @@
 // The below should be used to define an item's w_class variable.
 // Example: w_class = ITENSIZE_LARGE
 // This allows the addition of future w_classes without needing to change every file.
-#define ITEMSIZE_TINY           1
-#define ITEMSIZE_SMALL          2
-#define ITEMSIZE_NORMAL         3
-#define ITEMSIZE_LARGE          4
-#define ITEMSIZE_HUGE           5
-#define ITEMSIZE_GARGANTUAN     6
-#define ITEMSIZE_NO_CONTAINER 100 // Use this to forbid item from being placed in a container.
+#define ITEM_SIZE_TINY           1
+#define ITEM_SIZE_SMALL          2
+#define ITEM_SIZE_NORMAL         3
+#define ITEM_SIZE_LARGE          4
+#define ITEM_SIZE_HUGE           5
+#define ITEM_SIZE_GARGANTUAN     6
+#define ITEM_SIZE_NO_CONTAINER INFINITY // Use this to forbid item from being placed in a container.
 
 
 /*
-	The values below are not yet i use.
+	The values below are not yet in use.
 */
 
-// Tweak these to determine how much space an item takes in a container.
-// Look in storage.dm for get_storage_cost(), which uses these.  Containers also use these as a reference for size.
-// ITEMSIZE_COST_NORMAL is equivalent to one slot using the old inventory system.  As such, it is a nice reference to use for
-// defining how much space there is in a container.
-#define ITEMSIZE_COST_TINY            1
-#define ITEMSIZE_COST_SMALL	          2
-#define ITEMSIZE_COST_NORMAL          4
-#define ITEMSIZE_COST_LARGE           8
-#define ITEMSIZE_COST_HUGE           16
-#define ITEMSIZE_GARGANTUAN          32
-#define ITEMSIZE_COST_NO_CONTAINER 1000
+#define base_storage_cost(w_class) (2**(w_class-1)) //1,2,4,8,16,...
 
-// Container sizes.  Note that different containers can hold a maximum ITEMSIZE.
-#define INVENTORY_STANDARD_SPACE	ITEMSIZE_COST_NORMAL * 7 // 28
-#define INVENTORY_DUFFLEBAG_SPACE	ITEMSIZE_COST_NORMAL * 9 // 36
-#define INVENTORY_BOX_SPACE			ITEMSIZE_COST_SMALL * 4 // 8
+//linear increase. Using many small storage containers is more space-efficient than using large ones,
+//in exchange for being limited in the w_class of items that will fit
+#define base_storage_capacity(w_class) (7*(w_class-1))
+
+#define DEFAULT_BACKPACK_STORAGE base_storage_capacity(5)
+#define DEFAULT_LARGEBOX_STORAGE base_storage_capacity(4)
+#define DEFAULT_BOX_STORAGE      base_storage_capacity(3)

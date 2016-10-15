@@ -8,7 +8,7 @@
 	item_state = "implantcase"
 	throw_speed = 1
 	throw_range = 5
-	w_class = ITEMSIZE_TINY
+	w_class = ITEM_SIZE_TINY
 	var/obj/item/weapon/implant/imp = null
 
 /obj/item/weapon/implantcase/proc/update()

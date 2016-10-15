@@ -4,8 +4,8 @@
 	icon_state = "lunchbox_rainbow"
 	item_state = "toolbox_pink"
 	desc = "A little lunchbox. This one is the colors of the rainbow!"
-	w_class = ITEMSIZE_NORMAL
-	max_w_class = ITEMSIZE_SMALL
+	w_class = ITEM_SIZE_NORMAL
+	max_w_class = ITEM_SIZE_SMALL
 	var/filled = FALSE
 	attack_verb = list("lunched")
 

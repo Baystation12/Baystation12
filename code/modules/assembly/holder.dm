@@ -5,7 +5,7 @@
 	item_state = "assembly"
 	flags = CONDUCT | PROXMOVE
 	throwforce = 5
-	w_class = ITEMSIZE_SMALL
+	w_class = ITEM_SIZE_SMALL
 	throw_speed = 3
 	throw_range = 10
 

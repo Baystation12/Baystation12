@@ -7,6 +7,6 @@
 	slot_flags = SLOT_BELT
 	force = 10
 	throwforce = 7
-	w_class = ITEMSIZE_NORMAL
+	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 4)
 	attack_verb = list("flogged", "whipped", "lashed", "disciplined")

@@ -2,7 +2,7 @@
 	name = "engine"
 	desc = "An engine used to power a small vehicle."
 	icon = 'icons/obj/objects.dmi'
-	w_class = ITEMSIZE_HUGE
+	w_class = ITEM_SIZE_HUGE
 	var/stat = 0
 	var/trail_type
 	var/cost_per_move = 5

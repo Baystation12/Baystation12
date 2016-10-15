@@ -80,4 +80,4 @@
 	name = "tracker electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"
-	w_class = ITEMSIZE_SMALL
+	w_class = ITEM_SIZE_SMALL

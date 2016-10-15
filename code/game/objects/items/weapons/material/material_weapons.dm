@@ -7,7 +7,7 @@
 	gender = NEUTER
 	throw_speed = 3
 	throw_range = 7
-	w_class = ITEMSIZE_NORMAL
+	w_class = ITEM_SIZE_NORMAL
 	sharp = 0
 	edge = 0
 

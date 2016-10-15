@@ -67,7 +67,7 @@ var/const/tk_maxrange = 15
 	icon_state = "2"
 	flags = NOBLUDGEON
 	//item_state = null
-	w_class = ITEMSIZE_NO_CONTAINER
+	w_class = ITEM_SIZE_NO_CONTAINER
 
 	var/last_throw = 0
 	var/atom/movable/focus = null

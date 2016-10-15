@@ -6,7 +6,7 @@ obj/item/device/cable_painter
 	item_state = "flight"
 	var/color_selection
 	var/list/modes
-	w_class = ITEMSIZE_SMALL
+	w_class = ITEM_SIZE_SMALL
 
 obj/item/device/cable_painter/New()
 	..()
