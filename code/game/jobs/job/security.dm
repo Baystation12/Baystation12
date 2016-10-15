@@ -21,6 +21,7 @@
 	alt_titles = list("Commander","Chief Constable")
 	minimal_player_age = 14
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
+	species_restricted = list("Tajara", "Vox", "Resomi")
 
 /datum/job/hos/equip(var/mob/living/carbon/human/H)
 	. = ..()
