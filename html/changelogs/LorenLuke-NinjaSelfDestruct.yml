@@ -1,0 +1,5 @@
+author: LorenLuke
+delete-after: True
+changes:
+  - rscadd: "Added a toggle to the ninja's self-destruct. Default starting is 'off'."
+  - tweak: "Adds a delay and visible messages (and now a blinking effect!) after the self destruct is activated."

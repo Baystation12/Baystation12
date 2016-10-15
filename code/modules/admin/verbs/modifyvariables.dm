@@ -1,12 +1,3 @@
-var/list/forbidden_varedit_object_types = list(
-										/datum/admins,						//Admins editing their own admin-power object? Yup, sounds like a good idea.,
-										/obj/machinery/blackbox_recorder,	//Prevents people messing with feedback gathering,
-										/datum/feedback_variable				//Prevents people messing with feedback gathering
-									)
-
-var/list/VVlocked = list("vars", "holder", "client", "virus", "viruses", "cuffed", "last_eaten", "unlock_content", "bound_x", "bound_y", "step_x", "step_y", "force_ending")
-var/list/VVicon_edit_lock = list("icon", "icon_state", "overlays", "underlays")
-var/list/VVckey_edit = list("key", "ckey")
 
 /client/proc/cmd_modify_ticker_variables()
 	set category = "Debug"
@@ -171,11 +162,11 @@ var/list/VVckey_edit = list("key", "ckey")
 
 	var/dir
 
-	if(variable in VVlocked)
+	if(variable in O.VVlocked())
 		if(!check_rights(R_DEBUG))	return
-	if(variable in VVckey_edit)
+	if(variable in O.VVckey_edit())
 		if(!check_rights(R_SPAWN|R_DEBUG)) return
-	if(variable in VVicon_edit_lock)
+	if(variable in O.VVicon_edit_lock())
 		if(!check_rights(R_FUN|R_DEBUG)) return
 
 	if(isnull(variable))
@@ -352,7 +343,7 @@ var/list/VVckey_edit = list("key", "ckey")
 /client/proc/modify_variables(var/atom/O, var/param_var_name = null, var/autodetect_class = 0)
 	if(!check_rights(R_VAREDIT))	return
 
-	for(var/p in forbidden_varedit_object_types)
+	for(var/p in forbidden_varedit_object_types())
 		if( istype(O,p) )
 			to_chat(usr, "<span class='danger'>It is forbidden to edit this object's variables.</span>")
 			return
@@ -362,20 +353,20 @@ var/list/VVckey_edit = list("key", "ckey")
 	var/var_value
 
 	if(param_var_name)
-		if(!(param_var_name in O.vars))
+		if(!(param_var_name in O.get_variables()))
 			to_chat(src, "A variable with this name ([param_var_name]) doesn't exist in this atom ([O])")
 			return
 
-		if(param_var_name in VVlocked)
+		if(param_var_name in O.VVlocked())
 			if(!check_rights(R_DEBUG))	return
-		if(param_var_name in VVckey_edit)
+		if(param_var_name in O.VVckey_edit())
 			if(!check_rights(R_SPAWN|R_DEBUG)) return
-		if(param_var_name in VVicon_edit_lock)
+		if(param_var_name in O.VVicon_edit_lock())
 			if(!check_rights(R_FUN|R_DEBUG)) return
 
 		variable = param_var_name
 
-		var_value = O.vars[variable]
+		var_value = O.get_variable_value(variable)
 
 		if(autodetect_class)
 			if(isnull(var_value))
@@ -426,13 +417,13 @@ var/list/VVckey_edit = list("key", "ckey")
 
 		variable = input("Which var?","Var") as null|anything in names
 		if(!variable)	return
-		var_value = O.vars[variable]
+		var_value = O.get_variable_value(variable)
 
-		if(variable in VVlocked)
+		if(variable in O.VVlocked())
 			if(!check_rights(R_DEBUG)) return
-		if(variable in VVckey_edit)
+		if(variable in O.VVckey_edit())
 			if(!check_rights(R_SPAWN|R_DEBUG)) return
-		if(variable in VVicon_edit_lock)
+		if(variable in O.VVicon_edit_lock())
 			if(!check_rights(R_FUN|R_DEBUG)) return
 
 	if(!autodetect_class)
@@ -524,62 +515,62 @@ var/list/VVckey_edit = list("key", "ckey")
 	switch(class)
 
 		if("list")
-			mod_list(O.vars[variable], O, original_name, variable)
+			mod_list(O.get_variable_value(variable), O, original_name, variable)
 			return
 
 		if("restore to default")
-			var_value = initial(O.vars[variable])
+			var_value = O.get_initial_variable_value(variable)
 
 		if("edit referenced object")
-			return .(O.vars[variable])
+			return .(O.get_variable_value(variable))
 
 		if("text")
-			var/var_new = input("Enter new text:","Text",O.vars[variable]) as null|text
+			var/var_new = input("Enter new text:","Text",O.get_variable_value(variable)) as null|text
 			if(var_new==null) return
 			var_value = var_new
 
 		if("num")
 			if(variable=="light_range")
-				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
+				var/var_new = input("Enter new number:","Num",O.get_variable_value(variable)) as null|num
 				if(var_new == null) return
 				O.set_light(var_new)
 			else if(variable=="stat")
-				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
+				var/var_new = input("Enter new number:","Num",O.get_variable_value(variable)) as null|num
 				if(var_new == null) return
-				if((O.vars[variable] == 2) && (var_new < 2))//Bringing the dead back to life
+				if((O.get_variable_value(variable) == 2) && (var_new < 2))//Bringing the dead back to life
 					var/mob/M = O
 					M.switch_from_dead_to_living_mob_list()
-				if((O.vars[variable] < 2) && (var_new == 2))//Kill he
+				if((O.get_variable_value(variable) < 2) && (var_new == 2))//Kill he
 					var/mob/M = O
 					M.switch_from_living_to_dead_mob_list()
 				var_value = var_new
 			else
-				var/var_new =  input("Enter new number:","Num",O.vars[variable]) as null|num
+				var/var_new =  input("Enter new number:","Num",O.get_variable_value(variable)) as null|num
 				if(var_new==null) return
 				var_value = var_new
 
 		if("type")
-			var/var_new = input("Enter type:","Type",O.vars[variable]) as null|anything in typesof(/obj,/mob,/area,/turf)
+			var/var_new = input("Enter type:","Type",O.get_variable_value(variable)) as null|anything in typesof(/obj,/mob,/area,/turf)
 			if(var_new==null) return
 			var_value = var_new
 
 		if("reference")
-			var/var_new = input("Select reference:","Reference",O.vars[variable]) as null|mob|obj|turf|area in world
+			var/var_new = input("Select reference:","Reference",O.get_variable_value(variable)) as null|mob|obj|turf|area in world
 			if(var_new==null) return
 			var_value = var_new
 
 		if("mob reference")
-			var/var_new = input("Select reference:","Reference",O.vars[variable]) as null|mob in world
+			var/var_new = input("Select reference:","Reference",O.get_variable_value(variable)) as null|mob in world
 			if(var_new==null) return
 			var_value = var_new
 
 		if("file")
-			var/var_new = input("Pick file:","File",O.vars[variable]) as null|file
+			var/var_new = input("Pick file:","File",O.get_variable_value(variable)) as null|file
 			if(var_new==null) return
 			var_value = var_new
 
 		if("icon")
-			var/var_new = input("Pick icon:","Icon",O.vars[variable]) as null|icon
+			var/var_new = input("Pick icon:","Icon",O.get_variable_value(variable)) as null|icon
 			if(var_new==null) return
 			var_value = var_new
 
@@ -587,7 +578,7 @@ var/list/VVckey_edit = list("key", "ckey")
 			var_value = input("Select new color:","Color") as null|color
 
 		if("json")
-			var/json_str = input("JSON string", "JSON", json_encode(O.vars[variable])) as null | message
+			var/json_str = input("JSON string", "JSON", json_encode(O.get_variable_value(variable))) as null | message
 			try
 				var_value = json_decode(json_str)
 			catch
@@ -596,11 +587,11 @@ var/list/VVckey_edit = list("key", "ckey")
 		if("marked datum")
 			var_value = holder.marked_datum()
 
-	var/old_value = O.vars[variable]
+	var/old_value = O.get_variable_value(variable)
 	if(!special_set_vv_var(O, variable, var_value, src))
-		O.vars[variable] = var_value
+		O.set_variable_value(variable, var_value)
 
-	var/new_value = O.vars[variable]
+	var/new_value = O.get_variable_value(variable)
 	if(old_value == new_value)
 		return
 

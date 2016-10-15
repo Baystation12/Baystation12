@@ -13,7 +13,7 @@ LINEN BINS
 	randpixel = 0
 	slot_flags = SLOT_BACK
 	plane = ABOVE_OBJ_PLANE
-	layer = ABOVE_OBJ_LAYER
+	layer = BASE_ABOVE_OBJ_LAYER
 	throwforce = 1
 	throw_speed = 1
 	throw_range = 2
