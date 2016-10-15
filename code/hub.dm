@@ -2,7 +2,7 @@
 	hub = "Exadv1.spacestation13"
 	name = "Space Station 13"
 #ifdef HUB_ENABLED
-	hub_password = "kMZy3U5jJHSiBQjr"
+	hub_password = "LOLNO" //"kMZy3U5jJHSiBQjr"
 #else
 	hub_password = "SORRYNOPASSWORD"
 #endif
