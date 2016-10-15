@@ -3,7 +3,7 @@
 	desc = "This goes in a chemical dispenser."
 	icon_state = "cartridge"
 
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 
 	volume = CARTRIDGE_VOLUME_LARGE
 	amount_per_transfer_from_this = 50

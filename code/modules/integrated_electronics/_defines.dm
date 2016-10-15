@@ -10,7 +10,7 @@
 	desc = "It's a tiny chip!  This one doesn't seem to do much, however."
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "template"
-	w_class = 1
+	w_class = ITEMSIZE_TINY
 	var/extended_desc = null
 	var/list/inputs = list()
 	var/list/outputs = list()

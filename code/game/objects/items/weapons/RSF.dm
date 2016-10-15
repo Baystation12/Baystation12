@@ -14,7 +14,7 @@ RSF
 	anchored = 0.0
 	var/stored_matter = 30
 	var/mode = 1
-	w_class = 3.0
+	w_class = ITEMSIZE_NORMAL
 
 /obj/item/weapon/rsf/examine(mob/user)
 	if(..(user, 0))

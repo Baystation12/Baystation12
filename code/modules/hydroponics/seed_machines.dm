@@ -3,7 +3,7 @@
 	desc = "A small disk used for carrying data on plant genetics."
 	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "disk"
-	w_class = 1.0
+	w_class = ITEMSIZE_TINY
 
 	var/list/genes = list()
 	var/genesource = "unknown"

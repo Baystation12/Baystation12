@@ -4,7 +4,7 @@
 	icon_state = "towel"
 	slot_flags = SLOT_HEAD | SLOT_BELT | SLOT_OCLOTHING
 	force = 3.0
-	w_class = 3.0
+	w_class = ITEMSIZE_NORMAL
 	attack_verb = list("whipped")
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "A soft cotton towel."

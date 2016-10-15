@@ -1,7 +1,7 @@
 /obj/item/weapon/sample
 	name = "forensic sample"
 	icon = 'icons/obj/forensics.dmi'
-	w_class = 1
+	w_class = ITEMSIZE_TINY
 	var/list/evidence = list()
 
 /obj/item/weapon/sample/New(var/newloc, var/atom/supplied)
@@ -125,7 +125,7 @@
 	name = "fiber collection kit"
 	desc = "A magnifying glass and tweezers. Used to lift suit fibers."
 	icon_state = "m_glass"
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 	var/evidence_type = "fiber"
 	var/evidence_path = /obj/item/weapon/sample/fibers
 

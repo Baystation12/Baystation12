@@ -5,7 +5,7 @@
 	desc = "A tank of compressed gas for use as propulsion in zero-gravity areas. Use with caution."
 	icon_state = "jetpack"
 	gauge_icon = null
-	w_class = 5
+	w_class = ITEMSIZE_HUGE
 	item_state = "jetpack"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	var/datum/effect/effect/system/trail/ion/ion_trail

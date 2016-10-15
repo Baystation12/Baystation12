@@ -4,7 +4,7 @@
 	opacity = 0
 	density = 0
 	layer = ABOVE_WINDOW_LAYER
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 
 /obj/structure/sign/ex_act(severity)
 	switch(severity)
@@ -35,7 +35,7 @@
 	name = "sign"
 	desc = ""
 	icon = 'icons/obj/decals.dmi'
-	w_class = 3		//big
+	w_class = ITEMSIZE_NORMAL		//big
 	var/sign_state = ""
 
 /obj/item/sign/attackby(obj/item/tool as obj, mob/user as mob)	//construction

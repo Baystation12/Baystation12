@@ -52,7 +52,7 @@
 	var/glass_addition
 	var/glass_desc
 	var/glass_color
-	w_class = 1
+	w_class = ITEMSIZE_TINY
 	icon = DRINK_ICON_FILE
 
 /obj/item/weapon/glass_extra/stick

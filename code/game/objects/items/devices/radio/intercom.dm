@@ -4,7 +4,7 @@
 	icon_state = "intercom"
 	randpixel = 0
 	anchored = 1
-	w_class = 5
+	w_class = ITEMSIZE_HUGE
 	canhear_range = 2
 	flags = CONDUCT | NOBLOODY
 	layer = ABOVE_WINDOW_LAYER

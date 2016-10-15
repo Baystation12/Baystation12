@@ -96,7 +96,7 @@ Class Procs:
 /obj/machinery
 	name = "machinery"
 	icon = 'icons/obj/stationobjs.dmi'
-	w_class = 10
+	w_class = ITEMSIZE_NO_CONTAINER
 
 	var/stat = 0
 	var/emagged = 0

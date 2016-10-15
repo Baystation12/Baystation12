@@ -5,7 +5,7 @@
 	var/obj/item/clothing/head/helmet/part1 = null
 	var/obj/item/device/radio/electropack/part2 = null
 	var/status = 0
-	w_class = 5.0
+	w_class = ITEMSIZE_HUGE
 	flags = CONDUCT
 
 /obj/item/assembly/shock_kit/Destroy()

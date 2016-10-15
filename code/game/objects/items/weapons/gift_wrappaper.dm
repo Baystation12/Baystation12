@@ -115,7 +115,7 @@
 	var/size = 3.0
 	var/obj/item/gift = null
 	item_state = "gift"
-	w_class = 5
+	w_class = ITEMSIZE_HUGE
 
 /obj/item/weapon/gift/New(newloc, obj/item/wrapped = null)
 	..(newloc)

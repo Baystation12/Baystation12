@@ -10,7 +10,7 @@
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 5
-	w_class = 3.0
+	w_class = ITEMSIZE_NORMAL
 	flags = CONDUCT
 	matter = list(DEFAULT_WALL_MATERIAL = 3000)
 	var/list/carrying = list() // List of things on the tray. - Doohl

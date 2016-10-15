@@ -9,7 +9,7 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 3
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	throw_speed = 5
 	throw_range = 10
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 1, TECH_ENGINEERING = 2)

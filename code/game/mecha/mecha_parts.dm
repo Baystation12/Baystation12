@@ -8,7 +8,7 @@
 	name = "mecha part"
 	icon = 'icons/mecha/mech_construct.dmi'
 	icon_state = "blank"
-	w_class = 6
+	w_class = ITEMSIZE_HUGE
 	flags = CONDUCT
 	origin_tech = list(TECH_DATA = 2, TECH_MATERIAL = 2)
 

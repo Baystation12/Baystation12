@@ -4,7 +4,7 @@
 	name = "antibody scanner"
 	desc = "Scans living beings for antibodies in their blood."
 	icon_state = "health"
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	item_state = "electronic"
 	flags = CONDUCT
 
@@ -99,7 +99,7 @@
 	name = "blank GNA disk"
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "datadisk0"
-	w_class = 1
+	w_class = ITEMSIZE_TINY
 	var/datum/disease2/effectholder/effect = null
 	var/list/species = null
 	var/stage = 1

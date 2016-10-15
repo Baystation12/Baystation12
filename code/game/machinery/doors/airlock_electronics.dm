@@ -4,7 +4,7 @@
 	name = "airlock electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"
-	w_class = 2.0 //It should be tiny! -Agouri
+	w_class = ITEMSIZE_SMALL //It should be tiny! -Agouri
 
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
 

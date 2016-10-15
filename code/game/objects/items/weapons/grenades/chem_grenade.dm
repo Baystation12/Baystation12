@@ -3,7 +3,7 @@
 	icon_state = "chemg"
 	item_state = "grenade"
 	desc = "A hand made chemical grenade."
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	force = 2.0
 	det_time = null
 	unacidable = 1

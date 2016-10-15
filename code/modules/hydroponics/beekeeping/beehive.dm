@@ -198,14 +198,14 @@
 	desc = "A device used to calm down bees before harvesting honey."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "battererburnt"
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 
 /obj/item/honey_frame
 	name = "beehive frame"
 	desc = "A frame for the beehive that the bees will fill with honeycombs."
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "honeyframe"
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 
 	var/honey = 0
 
