@@ -566,7 +566,7 @@ obj/random/material //Random materials for building stuff
 					prob(100);/obj/random/tank,\
 					prob(50);/obj/random/soap,\
 					prob(60);/obj/random/drinkbottle,\
-					prob(10);/obj/random/loot,\
+					prob(10);/obj/random/hardsuit,\
 					prob(500);/obj/random/maintenance/clean)
 
 
