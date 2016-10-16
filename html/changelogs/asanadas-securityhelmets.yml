@@ -1,6 +1,0 @@
-author: Asanadas
-
-delete-after: True
-changes: 
-  - maptweak: "The Head of Security and Warden lockers now spawn with a generic NT helmet."
-  - tweak: "The Head of Security's dermal implant now has the same armor values as a generic NT helmet."
