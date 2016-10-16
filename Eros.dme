@@ -1217,6 +1217,7 @@
 #include "code\modules\economy\TradeDestinations.dm"
 #include "code\modules\eros\clothing\clothing.dm"
 #include "code\modules\eros\clothing\head.dm"
+#include "code\modules\eros\clothing\miscellaneous.dm"
 #include "code\modules\eros\clothing\shoes.dm"
 #include "code\modules\eros\clothing\suits.dm"
 #include "code\modules\eros\clothing\under.dm"

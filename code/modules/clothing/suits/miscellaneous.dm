@@ -412,4 +412,3 @@
 	icon_state = "mbill"
 	item_state = "mbill"
 
-
