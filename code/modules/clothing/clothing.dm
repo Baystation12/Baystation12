@@ -111,7 +111,7 @@
 // Ears: headsets, earmuffs and tiny objects
 /obj/item/clothing/ears
 	name = "ears"
-	w_class = 1.0
+	w_class = ITEM_SIZE_TINY
 	throwforce = 2
 	slot_flags = SLOT_EARS
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ears.dmi')
@@ -168,7 +168,7 @@ BLIND     // can't see anything
 /obj/item/clothing/glasses
 	name = "glasses"
 	icon = 'icons/obj/clothing/glasses.dmi'
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	body_parts_covered = EYES
 	slot_flags = SLOT_EYES
 	var/vision_flags = 0
@@ -197,7 +197,7 @@ BLIND     // can't see anything
 /obj/item/clothing/gloves
 	name = "gloves"
 	gender = PLURAL //Carn: for grammarically correct text-parsing
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	icon = 'icons/obj/clothing/gloves.dmi'
 	siemens_coefficient = 0.75
 	var/wired = 0
@@ -259,7 +259,7 @@ BLIND     // can't see anything
 		)
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 
 	var/light_overlay = "helmet_light"
 	var/light_applied
@@ -496,7 +496,7 @@ BLIND     // can't see anything
 	slot_flags = SLOT_OCLOTHING
 	blood_overlay_type = "suit"
 	siemens_coefficient = 0.9
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/suit.dmi',
@@ -533,7 +533,7 @@ BLIND     // can't see anything
 	permeability_coefficient = 0.90
 	slot_flags = SLOT_ICLOTHING
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	var/has_sensor = SUIT_HAS_SENSORS //For the crew computer 2 = unable to change mode
 	var/sensor_mode = 0
 		/*

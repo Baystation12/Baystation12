@@ -4,7 +4,7 @@
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "mopbucket"
 	density = 1
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	flags = OPENCONTAINER
 	var/amount_per_transfer_from_this = 5	//shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
 

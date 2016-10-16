@@ -3,7 +3,7 @@
 	desc = "The pinnacle of artifical intelligence which can be achieved using classical computer science."
 	icon = 'icons/obj/module.dmi'
 	icon_state = "mainboard"
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 3, TECH_DATA = 4)
 
 /obj/item/device/mmi/digital/robot/PickName()

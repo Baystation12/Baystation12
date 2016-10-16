@@ -8,7 +8,7 @@
 	randpixel = 8
 	sharp = 1
 	edge = 1
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	force_divisor = 0.2 // 6 with hardness 30 (glass)
 	thrown_force_divisor = 0.4 // 4 with weight 15 (glass)
 	item_state = "shard-glass"

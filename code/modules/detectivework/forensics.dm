@@ -1,6 +1,6 @@
 /obj/item/weapon/forensics
 	icon = 'icons/obj/forensics.dmi'
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 //This is the output of the stringpercent(print) proc, and means about 80% of
 //the print must be there for it to be complete.  (Prints are 32 digits)

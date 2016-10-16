@@ -16,8 +16,8 @@
 	icon_state = "satchel"
 	slot_flags = SLOT_BELT
 	max_storage_space = 200
-	max_w_class = 3
-	w_class = 4
+	max_w_class = ITEM_SIZE_NORMAL
+	w_class = ITEM_SIZE_LARGE
 	can_hold = list(/obj/item/weapon/ore)
 	allow_quick_gather = 1
 	allow_quick_empty = 1
@@ -35,8 +35,8 @@
 	icon_state = "plantbag"
 	slot_flags = SLOT_BELT
 	max_storage_space = 100
-	max_w_class = 2
-	w_class = 3
+	max_w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_NORMAL
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/grown,/obj/item/seeds,/obj/item/weapon/grown)
 	allow_quick_gather = 1
 	allow_quick_empty = 1
@@ -57,7 +57,7 @@
 	desc = "A patented storage system designed for any kind of mineral sheet."
 
 	var/capacity = 300; //the number of sheets it can carry.
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	storage_slots = 7
 
 	allow_quick_empty = 1 // this function is superceded

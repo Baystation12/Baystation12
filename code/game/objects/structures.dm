@@ -1,6 +1,6 @@
 /obj/structure
 	icon = 'icons/obj/structures.dmi'
-	w_class = 10
+	w_class = ITEM_SIZE_NO_CONTAINER
 
 	var/climbable
 	var/breakable

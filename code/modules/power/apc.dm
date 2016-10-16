@@ -492,8 +492,8 @@
 		if (stat & MAINT)
 			user << "<span class='warning'>There is no connector for your power cell.</span>"
 			return
-		if(W.w_class != NORMAL_ITEM)
-			user << "\The [W] is too [W.w_class < NORMAL_ITEM? "small" : "large"] to fit here."
+		if(W.w_class != ITEM_SIZE_NORMAL)
+			user << "\The [W] is too [W.w_class < ITEM_SIZE_NORMAL? "small" : "large"] to fit here."
 			return
 
 		user.drop_item()

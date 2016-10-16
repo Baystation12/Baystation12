@@ -887,7 +887,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(DROPLIMB_BURN)
 			new /obj/effect/decal/cleanable/ash(get_turf(victim))
 			for(var/obj/item/I in src)
-				if(I.w_class > SMALL_ITEM && !istype(I,/obj/item/organ))
+				if(I.w_class > ITEM_SIZE_SMALL && !istype(I,/obj/item/organ))
 					I.loc = get_turf(src)
 			qdel(src)
 		if(DROPLIMB_BLUNT)
@@ -1159,7 +1159,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	for(var/atom/movable/implant in implants)
 		//large items and non-item objs fall to the floor, everything else stays
 		var/obj/item/I = implant
-		if(istype(I) && I.w_class < NORMAL_ITEM)
+		if(istype(I) && I.w_class < ITEM_SIZE_NORMAL)
 			implant.forceMove(src)
 
 			// let actual implants still inside know they're no longer implanted

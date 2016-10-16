@@ -5,7 +5,7 @@
 	as it allows them to go into low pressure environments for more than few seconds without overhating. It runs off energy provided by internal power cell. \
 	Remember to turn it on by clicking it when it's your in your hand before you put it on."
 
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	icon = 'icons/obj/suitcooler.dmi'
 	icon_state = "suitcooler0"
 	item_state = "coolingpack"			// beautiful codersprites until someone makes a prettier one.

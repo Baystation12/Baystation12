@@ -136,10 +136,10 @@
 	if(pulling)
 		if(istype(pulling, /obj))
 			var/obj/O = pulling
-			. += O.w_class / 5
+			. += between(0, O.w_class, ITEM_SIZE_GARGANTUAN) / 5
 		else if(istype(pulling, /mob))
 			var/mob/M = pulling
-			. += M.mob_size / MOB_MEDIUM
+			. += max(0, M.mob_size) / MOB_MEDIUM
 		else
 			. += 1
 

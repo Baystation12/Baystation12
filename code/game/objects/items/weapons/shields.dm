@@ -59,7 +59,7 @@
 	throwforce = 5.0
 	throw_speed = 1
 	throw_range = 4
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	origin_tech = list(TECH_MATERIAL = 2)
 	matter = list("glass" = 7500, DEFAULT_WALL_MATERIAL = 1000)
 	attack_verb = list("shoved", "bashed")
@@ -97,7 +97,7 @@
 	base_block_chance = 60
 	throw_speed = 10
 	throw_range = 20
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 1000, "Wood" = 1000)
 	attack_verb = list("shoved", "bashed")
@@ -125,7 +125,7 @@
 	throwforce = 5.0
 	throw_speed = 1
 	throw_range = 4
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 	attack_verb = list("shoved", "bashed")
 	var/active = 0
@@ -156,14 +156,14 @@
 	if (active)
 		force = 10
 		update_icon()
-		w_class = 5
+		w_class = ITEM_SIZE_HUGE
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 		user << "<span class='notice'>\The [src] is now active.</span>"
 
 	else
 		force = 3
 		update_icon()
-		w_class = 1
+		w_class = ITEM_SIZE_TINY
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		user << "<span class='notice'>\The [src] can now be concealed.</span>"
 

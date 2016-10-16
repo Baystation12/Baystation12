@@ -1452,7 +1452,7 @@
 	else if(istype(victim, /obj/item) && !istype(victim, /obj/item/weapon/holder)) //Don't eat holders. They are special.
 		var/obj/item/I = victim
 		var/cost = I.get_storage_cost()
-		if(cost != DO_NOT_STORE)
+		if(cost != ITEM_SIZE_NO_CONTAINER)
 			if((src.species.gluttonous & GLUT_ITEM_TINY) && cost < 4)
 				return DEVOUR_SLOW
 			else if((src.species.gluttonous & GLUT_ITEM_NORMAL) && cost <= 4)

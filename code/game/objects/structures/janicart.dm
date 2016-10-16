@@ -282,4 +282,4 @@
 	desc = "A keyring with a small steel key, and a pink fob reading \"Pussy Wagon\"."
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "keys"
-	w_class = 1
+	w_class = ITEM_SIZE_TINY

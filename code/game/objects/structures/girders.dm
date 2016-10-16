@@ -4,7 +4,7 @@
 	density = 1
 	plane = OBJ_PLANE
 	layer = BELOW_OBJ_LAYER
-	w_class = 8
+	w_class = ITEM_SIZE_NO_CONTAINER
 	var/state = 0
 	var/health = 200
 	var/cover = 50 //how much cover the girder provides against projectiles.

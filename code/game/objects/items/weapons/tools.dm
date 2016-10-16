@@ -23,7 +23,7 @@
 	slot_flags = SLOT_BELT
 	force = 5.0
 	throwforce = 7.0
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
 	center_of_mass = "x=17;y=16"
@@ -41,7 +41,7 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT | SLOT_EARS
 	force = 5.0
-	w_class = 1.0
+	w_class = ITEM_SIZE_TINY
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
@@ -100,7 +100,7 @@
 	force = 6.0
 	throw_speed = 2
 	throw_range = 9
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 80)
 	center_of_mass = "x=18;y=10"
@@ -143,7 +143,7 @@
 	throwforce = 5.0
 	throw_speed = 1
 	throw_range = 5
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 
 	//Cost to make in the autolathe
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 30)
@@ -284,7 +284,7 @@
 
 /obj/item/weapon/weldingtool/get_storage_cost()
 	if(isOn())
-		return DO_NOT_STORE
+		return ITEM_SIZE_NO_CONTAINER
 	return ..()
 
 /obj/item/weapon/weldingtool/update_icon()
@@ -378,14 +378,14 @@
 /obj/item/weapon/weldingtool/hugetank
 	name = "upgraded welding tool"
 	max_fuel = 80
-	w_class = 3.0
+	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 
 /obj/item/weapon/weldingtool/experimental
 	name = "experimental welding tool"
 	max_fuel = 40
-	w_class = 3.0
+	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 	var/last_gen = 0
@@ -412,7 +412,7 @@
 	force = 5.0
 	throwforce = 7.0
 	item_state = "crowbar"
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	center_of_mass = "x=16;y=20"
@@ -447,7 +447,7 @@
 	desc = "It even has one of those nubbins for doing the thingy."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "combitool"
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 
 	var/list/spawn_tools = list(
 		/obj/item/weapon/screwdriver,

@@ -9,7 +9,7 @@
 	sharp = 0
 	edge = 0
 	throwforce = 7
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 2)
 	attack_verb = list("beaten")
 	var/stunforce = 0

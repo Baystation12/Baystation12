@@ -9,7 +9,7 @@
 	slot_flags = SLOT_BELT | SLOT_EARS
 	throwforce = 3
 	force = 3
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	var/obj/item/weapon/reagent_containers/syringe/syringe
 
 /obj/item/weapon/syringe_cartridge/update_icon()
@@ -66,7 +66,7 @@
 	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance."
 	icon_state = "syringegun"
 	item_state = "syringegun"
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	force = 7
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	slot_flags = SLOT_BELT

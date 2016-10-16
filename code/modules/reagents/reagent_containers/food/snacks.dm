@@ -14,7 +14,7 @@
 	var/nutriment_amt = 0
 	var/list/nutriment_desc = list("food" = 1)
 	center_of_mass = "x=16;y=16"
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/reagent_containers/food/snacks/New()
 	..()
@@ -2196,7 +2196,7 @@
 // sliceable is just an organization type path, it doesn't have any additional code or variables tied to it.
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable
-	w_class = 3 //Whole pizzas and cakes shouldn't fit in a pocket, you can slice them if you want to do that.
+	w_class = ITEM_SIZE_NORMAL //Whole pizzas and cakes shouldn't fit in a pocket, you can slice them if you want to do that.
 
 /**
  *  A food item slice

@@ -5,7 +5,7 @@
 	icon_state = "latticefull"
 	density = 0
 	anchored = 1.0
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	plane = ABOVE_PLATING_PLANE
 	layer = LATTICE_LAYER
 	//	flags = CONDUCT

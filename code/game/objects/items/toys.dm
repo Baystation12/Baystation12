@@ -101,7 +101,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "syndballoon"
 	item_state = "syndballoon"
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 
 /obj/item/toy/balloon/New()
 	..()
@@ -146,7 +146,7 @@
 		icon_l_hand = 'icons/mob/items/lefthand_guns.dmi',
 		icon_r_hand = 'icons/mob/items/righthand_guns.dmi',
 		)
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5
 
@@ -239,7 +239,7 @@
 	desc = "It's nerf or nothing! Ages 8 and up."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "foamdart"
-	w_class = 1.0
+	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 
 /obj/effect/foam_dart_dummy
@@ -261,7 +261,7 @@
 	icon_state = "sword0"
 	item_state = "sword0"
 	var/active = 0.0
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "struck", "hit")
 
 	attack_self(mob/user as mob)
@@ -271,13 +271,13 @@
 			playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 			src.icon_state = "swordblue"
 			src.item_state = "swordblue"
-			src.w_class = 5
+			src.w_class = ITEM_SIZE_HUGE
 		else
 			user << "<span class='notice'>You push the plastic blade back down into the handle.</span>"
 			playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 			src.icon_state = "sword0"
 			src.item_state = "sword0"
-			src.w_class = 2
+			src.w_class = initial(w_class)
 
 		update_held_icon()
 
@@ -294,7 +294,7 @@
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 5
 	throwforce = 5
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
 
 /*
@@ -305,7 +305,7 @@
 	desc = "Wow!"
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "snappop"
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 	throw_impact(atom/hit_atom)
 		..()
@@ -409,7 +409,7 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "bosunwhistle"
 	var/cooldown = 0
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 
 /obj/item/toy/bosunwhistle/attack_self(mob/user as mob)
@@ -701,42 +701,42 @@
 	desc = "A toy for therapeutic and recreational purposes. This one is red."
 	icon_state = "therapyred"
 	item_state = "egg4" // It's the red egg in items_left/righthand
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/toy/therapy_purple
 	name = "purple therapy doll"
 	desc = "A toy for therapeutic and recreational purposes. This one is purple."
 	icon_state = "therapypurple"
 	item_state = "egg1" // It's the magenta egg in items_left/righthand
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/toy/therapy_blue
 	name = "blue therapy doll"
 	desc = "A toy for therapeutic and recreational purposes. This one is blue."
 	icon_state = "therapyblue"
 	item_state = "egg2" // It's the blue egg in items_left/righthand
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/toy/therapy_yellow
 	name = "yellow therapy doll"
 	desc = "A toy for therapeutic and recreational purposes. This one is yellow."
 	icon_state = "therapyyellow"
 	item_state = "egg5" // It's the yellow egg in items_left/righthand
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/toy/therapy_orange
 	name = "orange therapy doll"
 	desc = "A toy for therapeutic and recreational purposes. This one is orange."
 	icon_state = "therapyorange"
 	item_state = "egg4" // It's the red one again, lacking an orange item_state and making a new one is pointless
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/toy/therapy_green
 	name = "green therapy doll"
 	desc = "A toy for therapeutic and recreational purposes. This one is green."
 	icon_state = "therapygreen"
 	item_state = "egg3" // It's the green egg in items_left/righthand
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 /*
  * Plushies
@@ -841,7 +841,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "cultblade"
 	item_state = "cultblade"
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	attack_verb = list("attacked", "slashed", "stabbed", "poked")
 
 /* NYET.
@@ -850,7 +850,7 @@
 	name = "toddler"
 	desc = "This baby looks almost real. Wait, did it just burp?"
 	force = 5
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 */
 

@@ -17,7 +17,7 @@ REAGENT SCANNER
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 3
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	throw_speed = 5
 	throw_range = 10
 	matter = list(DEFAULT_WALL_MATERIAL = 200)
@@ -198,7 +198,7 @@ REAGENT SCANNER
 	desc = "A hand-held environmental scanner which reports current gas levels."
 	icon_state = "atmos"
 	item_state = "analyzer"
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -224,7 +224,7 @@ REAGENT SCANNER
 	desc = "A hand-held mass spectrometer which identifies trace chemicals in a blood sample."
 	icon_state = "spectrometer"
 	item_state = "analyzer"
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	flags = CONDUCT | OPENCONTAINER
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -285,7 +285,7 @@ REAGENT SCANNER
 	desc = "A hand-held reagent scanner which identifies chemical agents."
 	icon_state = "spectrometer"
 	item_state = "analyzer"
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -333,7 +333,7 @@ REAGENT SCANNER
 	icon_state = "adv_spectrometer"
 	item_state = "analyzer"
 	origin_tech = list(TECH_BIO = 1)
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	flags = CONDUCT
 	throwforce = 0
 	throw_speed = 3
@@ -376,7 +376,7 @@ REAGENT SCANNER
 	desc = "Using an up-to-date database of various costs and prices, this device estimates the market price of an item up to 0.001% accuracy."
 	icon_state = "price_scanner"
 	slot_flags = SLOT_BELT
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	throwforce = 0
 	throw_speed = 3
 	throw_range = 3

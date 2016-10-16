@@ -2,7 +2,7 @@
 /obj/item/stack/material
 	force = 5.0
 	throwforce = 5
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	throw_speed = 3
 	throw_range = 3
 	max_amount = 60

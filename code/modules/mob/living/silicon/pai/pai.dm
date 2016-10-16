@@ -7,7 +7,7 @@
 	pass_flags = 1
 	mob_size = MOB_SMALL
 
-	can_pull_size = SMALL_ITEM
+	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 
 	idcard_type = /obj/item/weapon/card/id

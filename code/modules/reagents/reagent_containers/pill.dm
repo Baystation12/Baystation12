@@ -9,7 +9,7 @@
 	item_state = "pill"
 	randpixel = 7
 	possible_transfer_amounts = null
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	volume = 60
 

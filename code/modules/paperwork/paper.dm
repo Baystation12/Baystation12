@@ -11,7 +11,7 @@
 	item_state = "paper"
 	randpixel = 8
 	throwforce = 0
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	throw_range = 1
 	throw_speed = 1
 	layer = ABOVE_OBJ_LAYER
