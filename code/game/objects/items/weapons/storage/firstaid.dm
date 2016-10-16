@@ -197,8 +197,21 @@
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/tramadol = 7)
 
+//Baycode specific Psychiatry pills.
 /obj/item/weapon/storage/pill_bottle/citalopram
 	name = "bottle of Citalopram pills"
-	desc = "Contains pills used to stabilize a patient's mood."
+	desc = "Mild antidepressant. For use in individuals suffering from depression or anxiety. 15u dose per pill."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/citalopram = 7)
+
+/obj/item/weapon/storage/pill_bottle/methylphenidate
+	name = "bottle of Methylphenidate pills"
+	desc = "Mental stimulant. For use in individuals suffering from ADHD, or general concentration issues. 15u dose per pill."
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/methylphenidate = 7)
+
+/obj/item/weapon/storage/pill_bottle/paroxetine
+	name = "bottle of Paroxetine pills"
+	desc = "High-strength antidepressant. Only for use in severe depression. 10u dose per pill. <span class='warning'>WARNING: side-effects may include hallucinations.</span>"
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/paroxetine = 7)
