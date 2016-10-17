@@ -197,9 +197,6 @@
 	sideponytail
 		name = "Side Ponytail"
 		icon_state = "hair_stail"
-	wisp
-		name = "Wisp"
-		icon_state = "hair_wisp"
 
 	parted
 		name = "Parted"
@@ -322,10 +319,6 @@
 	emo2
 		name = "Emo Alt"
 		icon_state = "hair_emo2"
-
-	longemo
-		name = "Long Emo"
-		icon_state = "hair_emolong"
 
 	shortovereye
 		name = "Overeye Short"

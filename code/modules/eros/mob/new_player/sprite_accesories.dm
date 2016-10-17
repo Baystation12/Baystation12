@@ -34,6 +34,14 @@
 		asymmetric_cut
 		name = "Asymmetric cut"
 		icon_state = "asymmetric_cut"
+
+	wisp
+		name = "Wisp"
+		icon_state = "hair_wisp"
+
+	longemo
+		name = "Long Emo"
+		icon_state = "hair_emolong"
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
