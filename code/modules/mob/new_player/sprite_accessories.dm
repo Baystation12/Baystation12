@@ -197,6 +197,9 @@
 	sideponytail
 		name = "Side Ponytail"
 		icon_state = "hair_stail"
+	wisp
+		name = "Wisp"
+		icon_state = "hair_wisp"
 
 	parted
 		name = "Parted"
@@ -225,6 +228,10 @@
 	bedhead3
 		name = "Bedhead 3"
 		icon_state = "hair_bedheadv3"
+
+	bedhead4
+		name = "Bedhead 4"
+		icon_state = "hair_bedheadv4"
 
 	beehive
 		name = "Beehive"
