@@ -500,12 +500,12 @@ obj/random/material //Random materials for building stuff
 	icon_state = "ship"
 	item_to_spawn()
 		return pick(/obj/item/toy/bosunwhistle,\
-					/obj/item/toy/therapy_red,\
-					/obj/item/toy/therapy_purple,\
-					/obj/item/toy/therapy_blue,\
-					/obj/item/toy/therapy_yellow,\
-					/obj/item/toy/therapy_orange,\
-					/obj/item/toy/therapy_green,\
+					/obj/item/toy/plushie/therapy_red,\
+					/obj/item/toy/plushie/therapy_purple,\
+					/obj/item/toy/plushie/therapy_blue,\
+					/obj/item/toy/plushie/therapy_yellow,\
+					/obj/item/toy/plushie/therapy_orange,\
+					/obj/item/toy/plushie/therapy_green,\
 					/obj/item/toy/cultsword,\
 					/obj/item/toy/katana,\
 					/obj/item/toy/snappop,\
