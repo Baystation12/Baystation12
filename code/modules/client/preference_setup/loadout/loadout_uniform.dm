@@ -215,4 +215,24 @@
 		cheongasms[initial(cheongasm_type.name)] = cheongasm_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cheongasms))
 
+/datum/gear/uniform/croptop
+	display_name = "croptop, NT"
+	path = /obj/item/clothing/under/croptop
+
+/datum/gear/uniform/croptop/grey
+	display_name = "croptop, grey"
+	path = /obj/item/clothing/under/croptop/grey
+
+/datum/gear/uniform/croptop/red
+	display_name = "croptop, red"
+	path = /obj/item/clothing/under/croptop/red
+
+/datum/gear/uniform/cuttop
+	display_name = "cut top, grey"
+	path = /obj/item/clothing/under/cuttop
+
+/datum/gear/uniform/cuttop/red
+	display_name = "cut top, red"
+	path = /obj/item/clothing/under/cuttop/red
+
 //EROS FINISH
