@@ -27,22 +27,29 @@
 	var/cooldown_per_use = 1 SECOND
 	var/category = /obj/item/integrated_circuit // Used by the toolsets to filter out category types
 
-/obj/item/integrated_circuit/examine(mob/user, var/assembly_examine = FALSE)
-	if(!assembly_examine)
-		return ..()
+/obj/item/integrated_circuit/examine(mob/user)
+	. = ..()
+	external_examine(user)
 
-	to_chat(user, "This board has [inputs.len] input pin\s and [outputs.len] output pin\s.")
+/obj/item/integrated_circuit/proc/external_examine(mob/user)
+	any_examine(user)
+
+/obj/item/integrated_circuit/proc/internal_examine(mob/user)
+	to_chat(user, "This board has [inputs.len] input pin\s, [outputs.len] output pin\s and [activators.len] activation pin\s.")
 	for(var/datum/integrated_io/input/I in inputs)
 		if(I.linked.len)
-			to_chat(user, "The [I] is connected to [I.get_linked_to_desc()].")
+			to_chat(user, "The '[I]' is connected to [I.get_linked_to_desc()].")
 	for(var/datum/integrated_io/output/O in outputs)
 		if(O.linked.len)
-			to_chat(user, "The [O] is connected to [O.get_linked_to_desc()].")
+			to_chat(user, "The '[O]' is connected to [O.get_linked_to_desc()].")
 	for(var/datum/integrated_io/activate/A in activators)
 		if(A.linked.len)
-			to_chat(user, "The [A] is connected to [A.get_linked_to_desc()].")
-
+			to_chat(user, "The '[A]' is connected to [A.get_linked_to_desc()].")
+	any_examine(user)
 	interact(user)
+
+/obj/item/integrated_circuit/proc/any_examine(mob/user)
+	return
 
 /obj/item/integrated_circuit/New()
 	setup_io(inputs, /datum/integrated_io/input)
@@ -91,6 +98,10 @@
 		to_chat(M, "<span class='notice'>The circuit '[src.name]' is now labeled '[input]'.</span>")
 		name = input
 		interact(M)
+
+/obj/item/integrated_circuit/proc/set_pin_data(var/pin_type, var/pin_number, var/new_data)
+	var/datum/integrated_io/pin = get_pin_ref(pin_type, pin_number)
+	return pin.write_data_to_pin(new_data)
 
 /obj/item/integrated_circuit/proc/get_pin_data(var/pin_type, var/pin_number)
 	var/datum/integrated_io/pin = get_pin_ref(pin_type, pin_number)
@@ -209,11 +220,9 @@
 
 	onclose(user, "circuit-\ref[src]")
 
-/obj/item/integrated_circuit/CanUseTopic()
+/obj/item/integrated_circuit/proc/is_in_open_assembly()
 	var/obj/item/device/electronic_assembly/assembly = get_assembly(loc)
-	if(!assembly || !assembly.opened)
-		return STATUS_CLOSE
-	return ..()
+	return assembly  && assembly.opened
 
 /obj/item/integrated_circuit/Topic(href, href_list, state = physical_state)
 	if(..())
@@ -221,7 +230,7 @@
 	var/pin = locate(href_list["pin"]) in inputs + outputs + activators
 
 	var/obj/held_item = usr.get_active_hand()
-	if(href_list["wire"])
+	if(href_list["wire"] && is_in_open_assembly())
 		if(istype(held_item, /obj/item/device/integrated_electronics/wirer))
 			var/obj/item/device/integrated_electronics/wirer/wirer = held_item
 			if(pin)
@@ -239,15 +248,15 @@
 		interact(usr)
 		. = 1
 
-	else if(href_list["examine"])
-		examine(usr, TRUE)
+	else if(href_list["examine"] && is_in_open_assembly())
+		internal_examine(usr)
 		. = 1
 
-	else if(href_list["rename"])
+	else if(href_list["rename"] && is_in_open_assembly())
 		rename_component(usr)
 		. = IC_TOPIC_REFRESH
 
-	else if(href_list["remove"])
+	else if(href_list["remove"] && is_in_open_assembly())
 		if(istype(held_item, /obj/item/weapon/screwdriver))
 			disconnect_all()
 			dropInto(loc)
@@ -371,6 +380,8 @@
 	if(isnull(new_data) || isnum(new_data) || istext(new_data) || isweakref(new_data)) // Anything else is a type we don't want.
 		data = new_data
 		holder.on_data_written()
+		return TRUE
+	return FALSE
 
 /datum/integrated_io/proc/push_data()
 	for(var/datum/integrated_io/io in linked)

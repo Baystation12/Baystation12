@@ -30,6 +30,7 @@
 			to_chat(user, "<span class='notice'>You connect \the [selected_io.holder]'s [selected_io.name] to \the [io.holder]'s [io.name].</span>")
 			mode = WIRE
 			update_icon()
+			io.holder.interact(user)
 			selected_io.holder.interact(user) // This is to update the UI.
 			selected_io = null
 

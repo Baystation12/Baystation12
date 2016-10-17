@@ -168,11 +168,11 @@
 			icon_state = initial(icon_state)
 
 /obj/item/device/electronic_assembly/examine(mob/user)
-	. = ..(user, w_class) // Larger assemblies are easier to see from a distance
+	. = ..(user, 2 * w_class) // Larger assemblies are easier to see from a distance
 	to_chat(user, "\The [src] is currently facing [dir2text(dir)].")
 	if(.)
 		for(var/obj/item/integrated_circuit/output/O in contents)
-			O.examine(user, TRUE)
+			O.external_examine(user, opened)
 
 /obj/item/device/electronic_assembly/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/integrated_circuit))
@@ -232,8 +232,8 @@
 		AM.emp_act(severity)
 
 /obj/item/device/electronic_assembly/ex_act(severity)
-	for(var/thing in src)
-		ex_act(thing)
+	for(var/obj/thing in src)
+		thing.ex_act(severity)
 	..()
 
 /obj/item/device/electronic_assembly/proc/add_circuit(var/obj/item/integrated_circuit/IC, var/mob/user)

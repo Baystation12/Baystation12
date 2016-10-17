@@ -9,10 +9,11 @@
 
 		var/available_size = initial(assembly.max_components)
 		var/available_complexity = initial(assembly.max_complexity)
-		for(var/ic_type in prefab.ic_types)
-			var/obj/item/integrated_circuit/ic = ic_type
-			available_size -= initial(ic.size)
-			available_complexity -= initial(ic.complexity)
+		for(var/ic in prefab.integrated_circuits)
+			var/datum/ic_assembly_integrated_circuits/iaic = ic
+			var/obj/item/integrated_circuit/circuit = iaic.circuit_type
+			available_size -= initial(circuit.size)
+			available_complexity -= initial(circuit.complexity)
 		if(available_size < 0)
 			log_bad("[prefab_type] has an excess component size of [abs(available_size)]")
 			failed_prefabs |= prefab_type

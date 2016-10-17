@@ -1,4 +1,11 @@
-/obj/item/integrated_circuit/input
+/obj/item/integrated_circuit/input/external_examine(var/mob/user)
+	var/initial_name = initial(name)
+	var/message
+	if(initial_name == name)
+		message = "There is \a [src]."
+	else
+		message = "There is \a ["\improper[initial_name]"] labeled '[name]'."
+	to_chat(user, message)
 
 /obj/item/integrated_circuit/input/button
 	name = "button"
@@ -313,10 +320,12 @@
 	activators = list("load data")
 	var/stuff_to_display = null
 
-/obj/item/integrated_circuit/output/screen/examine(mob/user, var/assembly_examine = FALSE)
-	. = ..()
-	if(assembly_examine)
-		to_chat(user, "There is a little screen labeled '[name]', which displays [stuff_to_display ? "'stuff_to_display'" : "nothing"].")
+/obj/item/integrated_circuit/output/screen/disconnect_all()
+	..()
+	stuff_to_display = null
+
+/obj/item/integrated_circuit/output/screen/any_examine(mob/user)
+	to_chat(user, "There is a little screen labeled '[name]', which displays [stuff_to_display ? "'[stuff_to_display]'" : "nothing"].")
 
 /obj/item/integrated_circuit/output/screen/get_topic_data()
 	return stuff_to_display ? list(stuff_to_display) : list()
@@ -482,12 +491,7 @@
 	var/led_color
 	category = /obj/item/integrated_circuit/output/led
 
-/obj/item/integrated_circuit/output/led/examine(mob/user, var/assembly_examine = FALSE)
-	. = ..()
-
-	if(!assembly_examine)
-		return
-
+/obj/item/integrated_circuit/output/led/external_examine(mob/user)
 	var/text_output = list()
 	var/initial_name = initial(name)
 
@@ -499,6 +503,9 @@
 		text_output += "\an ["\improper[initial_name]"] labeled '[name]'"
 	text_output += " which is currently [get_pin_data(IC_INPUT, 1) ? "lit <font color=[led_color]>¤</font>" : "unlit."]"
 	to_chat(user,jointext(text_output,null))
+
+/obj/item/integrated_circuit/output/led/get_topic_data()
+	return list("\An [initial(name)] that is currently [get_pin_data(IC_INPUT, 1) ? "lit" : "unlit."]")
 
 /obj/item/integrated_circuit/output/led/red
 	name = "red LED"
