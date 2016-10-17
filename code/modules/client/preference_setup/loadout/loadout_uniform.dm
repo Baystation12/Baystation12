@@ -5,10 +5,6 @@
 	slot = slot_w_uniform
 	sort_category = "Uniforms and Casual Dress"
 
-/datum/gear/uniform/cheongsam
-	display_name = "cheongsam, white"
-	path = /obj/item/clothing/under/cheongsam
-
 /datum/gear/uniform/kilt
 	display_name = "kilt"
 	path = /obj/item/clothing/under/kilt
@@ -208,5 +204,35 @@
 	display_name = "Loose Dress"
 	path = /obj/item/clothing/under/loose_dress
 
+/datum/gear/uniform/cheongsam
+	display_name = "cheongsam selection"
+
+/datum/gear/uniform/cheongsam/New()
+	..()
+	var/list/cheongasms = list()
+	for(var/cheongasm in typesof(/obj/item/clothing/under/cheongsam))
+		var/obj/item/clothing/under/cheongsam/cheongasm_type = cheongasm
+		cheongasms[initial(cheongasm_type.name)] = cheongasm_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cheongasms))
+
+/datum/gear/uniform/croptop
+	display_name = "croptop, NT"
+	path = /obj/item/clothing/under/croptop
+
+/datum/gear/uniform/croptop/grey
+	display_name = "croptop, grey"
+	path = /obj/item/clothing/under/croptop/grey
+
+/datum/gear/uniform/croptop/red
+	display_name = "croptop, red"
+	path = /obj/item/clothing/under/croptop/red
+
+/datum/gear/uniform/cuttop
+	display_name = "cut top, grey"
+	path = /obj/item/clothing/under/cuttop
+
+/datum/gear/uniform/cuttop/red
+	display_name = "cut top, red"
+	path = /obj/item/clothing/under/cuttop/red
 
 //EROS FINISH

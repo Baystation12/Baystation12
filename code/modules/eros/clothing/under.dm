@@ -227,3 +227,64 @@
 	desc = "A dress that leaves very little to the imagination."
 	icon_state = "eros_loosedress"
 	show_genitals = 1
+
+/obj/item/clothing/under/cheongsam/red
+	name = "red cheongsam"
+	desc = "It is a red cheongsam dress."
+	icon_state = "cheongsam-red"
+	item_state = "cheongsam-red"
+	worn_state = "cheongsam-red"
+
+/obj/item/clothing/under/cheongsam/blue
+	name = "blue cheongsam"
+	desc = "It is a blue cheongsam dress."
+	icon_state = "cheongsam-blue"
+	item_state = "cheongsam-blue"
+	worn_state = "cheongsam-blue"
+
+/obj/item/clothing/under/cheongsam/black
+	name = "black cheongsam"
+	desc = "It is a black cheongsam dress."
+	icon_state = "cheongsam-black"
+	item_state = "cheongsam-black"
+	worn_state = "cheongsam-black"
+
+/obj/item/clothing/under/croptop
+	name = "crop top"
+	desc = "A shirt that has had the top cropped. This one is NT sponsored."
+	icon_state = "croptop"
+	item_state = "croptop"
+	worn_state = "croptop"
+	item_state_slots = list(slot_r_hand_str = "grey", slot_l_hand_str = "grey")
+
+/obj/item/clothing/under/croptop/red
+	name = "red crop top"
+	desc = "A red shirt that has had the top cropped."
+	icon_state = "croptop_red"
+	item_state = "croptop_red"
+	worn_state = "croptop_red"
+	item_state_slots = list(slot_r_hand_str = "red", slot_l_hand_str = "red")
+
+/obj/item/clothing/under/croptop/grey
+	name = "grey crop top"
+	desc = "A grey shirt that has had the top cropped."
+	icon_state = "croptop_grey"
+	item_state = "croptop_grey"
+	worn_state = "croptop_grey"
+	item_state_slots = list(slot_r_hand_str = "grey", slot_l_hand_str = "grey")
+
+/obj/item/clothing/under/cuttop
+	name = "grey cut top"
+	desc = "A grey shirt that has had the top cut low."
+	icon_state = "cuttop"
+	item_state = "cuttop"
+	worn_state = "cuttop"
+	item_state_slots = list(slot_r_hand_str = "grey", slot_l_hand_str = "grey")
+
+/obj/item/clothing/under/cuttop/red
+	name = "red cut top"
+	desc = "A red shirt that has had the top cut low."
+	icon_state = "cuttop_red"
+	item_state = "cuttop_red"
+	worn_state = "cuttop_red"
+	item_state_slots = list(slot_r_hand_str = "red", slot_l_hand_str = "red")

@@ -226,6 +226,10 @@
 		name = "Bedhead 3"
 		icon_state = "hair_bedheadv3"
 
+	bedhead4
+		name = "Bedhead 4"
+		icon_state = "hair_bedheadv4"
+
 	beehive
 		name = "Beehive"
 		icon_state = "hair_beehive"
@@ -315,10 +319,6 @@
 	emo2
 		name = "Emo Alt"
 		icon_state = "hair_emo2"
-
-	longemo
-		name = "Long Emo"
-		icon_state = "hair_emolong"
 
 	shortovereye
 		name = "Overeye Short"
