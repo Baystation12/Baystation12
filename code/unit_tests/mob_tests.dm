@@ -290,7 +290,8 @@ datum/unit_test/mob_damage/tajaran
 datum/unit_test/mob_damage/tajaran/brute
 	name = "MOB: Tajaran Brute Damage Check"
 	damagetype = BRUTE
-	expected_vulnerability = EXTRA_VULNERABLE
+	//On our code taj take the same brute as humans, so I'll go and
+	//just remove this line here so Travis won't cry. -RobotAlice
 
 datum/unit_test/mob_damage/tajaran/fire
 	name = "MOB: Tajaran Fire Damage Check"
