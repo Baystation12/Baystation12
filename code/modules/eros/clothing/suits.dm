@@ -133,6 +133,8 @@
 /obj/item/clothing/suit/storage/hooded/wintercoat
 	name = "winter coat"
 	desc = "A heavy jacket made from 'synthetic' animal furs."
+	icon_state = "eros_coatwinter"
+	item_state_slots = list(slot_r_hand_str = "eros_coatwinter", slot_l_hand_str = "eros_coatwinter")
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
