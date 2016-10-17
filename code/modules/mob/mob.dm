@@ -457,11 +457,11 @@
 /mob/new_player/verb/observe()
 	set name = "Observe"
 	set category = "OOC"
-	
+
 	if(!(initialization_stage&INITIALIZATION_COMPLETE))
 		to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
 		return
-	
+
 	var/is_admin = 0
 
 	if(client.holder && (client.holder.rights & R_ADMIN))
@@ -781,8 +781,9 @@
 /mob/proc/reset_layer()
 	if(lying)
 		plane = LYING_MOB_PLANE
+		layer = LYING_MOB_LAYER
 	else
-		plane = MOB_PLANE
+		reset_plane_and_layer()
 
 /mob/proc/facedir(var/ndir)
 	if(!canface() || client.moving || world.time < client.move_delay)

@@ -758,3 +758,9 @@ default behaviour is:
 	src << "<span class='notice'>Remember to stay in character for a mob of this type!</span>"
 	return 1
 
+/mob/living/reset_layer()
+	if(hiding)
+		plane = HIDING_MOB_PLANE
+		layer = HIDING_MOB_LAYER
+	else
+		..()

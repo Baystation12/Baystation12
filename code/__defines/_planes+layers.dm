@@ -117,7 +117,11 @@ What is the naming convention for planes or layers?
 
 #define LYING_MOB_PLANE               -14 // other mobs that are lying down.
 
+	#define LYING_MOB_LAYER 0
+
 #define LYING_HUMAN_PLANE             -13 // humans that are lying down
+
+	#define LYING_HUMAN_LAYER 0
 
 #define ABOVE_OBJ_PLANE               -12 // for objects that are below humans when they are standing but above them when they are not. - eg, blankets.
 

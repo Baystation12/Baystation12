@@ -180,7 +180,11 @@
 		src << "<span class='notice'>You hear no movement but your own.</span>"
 
 /mob/living/carbon/human/reset_layer()
-	if(lying)
+	if(hiding)
+		plane = HIDING_MOB_PLANE
+		layer = HIDING_MOB_LAYER
+	else if(lying)
 		plane = LYING_HUMAN_PLANE
+		layer = LYING_HUMAN_LAYER
 	else
-		plane = HUMAN_PLANE
+		..()
