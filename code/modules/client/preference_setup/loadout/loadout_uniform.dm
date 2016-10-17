@@ -4,14 +4,6 @@
 	path = /obj/item/clothing/under/blazer
 	slot = slot_w_uniform
 	sort_category = "Uniforms and Casual Dress"
-	
-/datum/gear/uniform/cheongsam/New()
-	..()
-	var/list/cheongasms = list()
-	for(var/cheongasm in typesof(/obj/item/clothing/under/cheongsam))
-		var/obj/item/clothing/under/cheongsam/cheongasm_type = cheongasm
-		cheongasms[initial(cheongasm_type.name)] = cheongasm_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cheongasms))
 
 /datum/gear/uniform/kilt
 	display_name = "kilt"
@@ -212,5 +204,15 @@
 	display_name = "Loose Dress"
 	path = /obj/item/clothing/under/loose_dress
 
+/datum/gear/uniform/cheongsam
+	display_name = "cheongsam selection"
+
+/datum/gear/uniform/cheongsam/New()
+	..()
+	var/list/cheongasms = list()
+	for(var/cheongasm in typesof(/obj/item/clothing/under/cheongsam))
+		var/obj/item/clothing/under/cheongsam/cheongasm_type = cheongasm
+		cheongasms[initial(cheongasm_type.name)] = cheongasm_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cheongasms))
 
 //EROS FINISH
