@@ -10,8 +10,6 @@
 	var/movement_range = 10
 	var/energy = 10		//energy in eV
 	var/mega_energy = 0	//energy in MeV
-	var/frequency = 1
-	var/ionizing = 0
 	var/particle_type
 	var/additional_particles = 0
 	var/turf/target
@@ -43,6 +41,20 @@
 			toxmob(A)
 		if((istype(A,/obj/machinery/the_singularitygen))||(istype(A,/obj/singularity/)))
 			A:energy += energy
+		else if(istype(A,/obj/machinery/power/fusion_core))
+			var/obj/machinery/power/fusion_core/collided_core = A
+			if(particle_type && particle_type != "neutron")
+				if(collided_core.AddParticles(particle_type, 1 + additional_particles))
+					collided_core.owned_field.plasma_temperature += mega_energy
+					collided_core.owned_field.energy += energy
+					loc = null
+		else if(istype(A, /obj/effect/fusion_particle_catcher))
+			var/obj/effect/fusion_particle_catcher/PC = A
+			if(particle_type && particle_type != "neutron")
+				if(PC.parent.owned_core.AddParticles(particle_type, 1 + additional_particles))
+					PC.parent.plasma_temperature += mega_energy
+					PC.parent.energy += energy
+					loc = null
 	return
 
 
@@ -55,8 +67,6 @@
 /obj/effect/accelerated_particle/ex_act(severity)
 	qdel(src)
 	return
-
-
 
 /obj/effect/accelerated_particle/proc/toxmob(var/mob/living/M)
 	var/radiation = (energy*2)
