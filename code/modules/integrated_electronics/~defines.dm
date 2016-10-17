@@ -8,6 +8,4 @@
 #undef DATA_CHANNEL
 #undef PULSE_CHANNEL
 
-#define IC_INPUT "input"
-#define IC_OUTPUT "output"
-#define IC_ACTIVATOR "activator"
+#undef get_assembly

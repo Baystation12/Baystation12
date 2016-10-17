@@ -1,12 +1,10 @@
 /obj/item/integrated_circuit/input
-	var/can_be_asked_input = 0
 
 /obj/item/integrated_circuit/input/button
 	name = "button"
 	desc = "This tiny button must do something, right?"
 	icon_state = "button"
 	complexity = 1
-	can_be_asked_input = 1
 	inputs = list()
 	outputs = list()
 	activators = list("on pressed")
@@ -28,7 +26,6 @@
 	desc = "This small number pad allows someone to input a number into the system."
 	icon_state = "numberpad"
 	complexity = 2
-	can_be_asked_input = 1
 	inputs = list()
 	outputs = list("number entered")
 	activators = list("on entered")
@@ -52,7 +49,6 @@
 	desc = "This small text pad allows someone to input a string into the system."
 	icon_state = "textpad"
 	complexity = 2
-	can_be_asked_input = 1
 	inputs = list()
 	outputs = list("string entered")
 	activators = list("on entered")
@@ -155,8 +151,9 @@
 /obj/item/integrated_circuit/input/local_locator/do_work()
 	var/datum/integrated_io/O = outputs[1]
 	O.data = null
-	if(istype(src.loc, /obj/item/device/electronic_assembly)) // Check to make sure we're actually in a machine.
-		var/obj/item/device/electronic_assembly/assembly = src.loc
+
+	var/obj/item/device/electronic_assembly/assembly = get_assembly(loc)
+	if(assembly) // Check to make sure we're actually in a machine.
 		if(istype(assembly.loc, /mob/living)) // Now check if someone's holding us.
 			O.data = weakref(assembly.loc)
 
@@ -280,7 +277,6 @@
 	desc = "This circuit can locate and allow for selection of teleporter computers."
 	icon_state = "gps"
 	complexity = 5
-	can_be_asked_input = 1
 	inputs = list()
 	outputs = list("teleporter")
 	activators = list("on selected")
@@ -318,11 +314,9 @@
 	var/stuff_to_display = null
 
 /obj/item/integrated_circuit/output/screen/examine(mob/user, var/assembly_examine = FALSE)
+	. = ..()
 	if(assembly_examine)
-		if(stuff_to_display)
-			to_chat(user, "There's a little screen labeled '[name]', which displays '[stuff_to_display]'.")
-	else
-		..()
+		to_chat(user, "There is a little screen labeled '[name]', which displays [stuff_to_display ? "'stuff_to_display'" : "nothing"].")
 
 /obj/item/integrated_circuit/output/screen/get_topic_data()
 	return stuff_to_display ? list(stuff_to_display) : list()
@@ -419,7 +413,7 @@
 	var/datum/integrated_io/ID = inputs[1]
 	var/datum/integrated_io/vol = inputs[2]
 	var/datum/integrated_io/frequency = inputs[3]
-	if(istext(ID.data) && isnum(vol.data) && isnum(frequency.data))
+	if(istext(ID.data) && isnum(vol.data) && (!frequency.data || isnum(frequency.data)))
 		var/selected_sound = sounds[ID.data]
 		if(!selected_sound)
 			return
@@ -473,3 +467,71 @@
 	var/datum/integrated_io/text = inputs[1]
 	if(istext(text.data))
 		audible_message("\The [istype(loc, /obj/item/device/electronic_assembly) ? loc : src] states, \"[text.data]\"")
+
+/obj/item/integrated_circuit/output/led
+	name = "light-emitting diode"
+	desc = "This a LED that is lit whenever there is TRUE-equivalent data on its input."
+	extended_desc = "TRUE-equivalent values are: Non-empty strings, non-zero numbers, and valid refs."
+	complexity = 0.1
+	size = 0.1
+	icon_state = "led"
+	inputs = list("lit")
+	outputs = list()
+	activators = list()
+
+	var/led_color
+	category = /obj/item/integrated_circuit/output/led
+
+/obj/item/integrated_circuit/output/led/examine(mob/user, var/assembly_examine = FALSE)
+	. = ..()
+
+	if(!assembly_examine)
+		return
+
+	var/text_output = list()
+	var/initial_name = initial(name)
+
+	// Doing all this work just to have a color-blind friendly output.
+	text_output += "There is "
+	if(name == initial_name)
+		text_output += "\an [name]"
+	else
+		text_output += "\an ["\improper[initial_name]"] labeled '[name]'"
+	text_output += " which is currently [get_pin_data(IC_INPUT, 1) ? "lit <font color=[led_color]>¤</font>" : "unlit."]"
+	to_chat(user,jointext(text_output,null))
+
+/obj/item/integrated_circuit/output/led/red
+	name = "red LED"
+	led_color = COLOR_RED
+
+/obj/item/integrated_circuit/output/led/orange
+	name = "orange LED"
+	led_color = COLOR_ORANGE
+
+/obj/item/integrated_circuit/output/led/yellow
+	name = "yellow LED"
+	led_color = COLOR_YELLOW
+
+/obj/item/integrated_circuit/output/led/green
+	name = "green LED"
+	led_color = COLOR_GREEN
+
+/obj/item/integrated_circuit/output/led/blue
+	name = "blue LED"
+	led_color = COLOR_BLUE
+
+/obj/item/integrated_circuit/output/led/purple
+	name = "purple LED"
+	led_color = COLOR_PURPLE
+
+/obj/item/integrated_circuit/output/led/cyan
+	name = "cyan LED"
+	led_color = COLOR_CYAN
+
+/obj/item/integrated_circuit/output/led/white
+	name = "white LED"
+	led_color = COLOR_WHITE
+
+/obj/item/integrated_circuit/output/led/pink
+	name = "pink LED"
+	led_color = COLOR_PINK

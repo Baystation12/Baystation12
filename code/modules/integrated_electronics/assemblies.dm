@@ -168,7 +168,7 @@
 			icon_state = initial(icon_state)
 
 /obj/item/device/electronic_assembly/examine(mob/user)
-	. = ..(user, 1)
+	. = ..(user, w_class) // Larger assemblies are easier to see from a distance
 	to_chat(user, "\The [src] is currently facing [dir2text(dir)].")
 	if(.)
 		for(var/obj/item/integrated_circuit/output/O in contents)
@@ -176,28 +176,14 @@
 
 /obj/item/device/electronic_assembly/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/integrated_circuit))
-		if(!opened)
-			to_chat(user, "<span class='warning'>\The [src] isn't opened, so you can't put anything inside.  Try using a crowbar.</span>")
+		if(!user.unEquip(I))
 			return 0
-		var/obj/item/integrated_circuit/IC = I
-		var/total_part_size = 0
-		var/total_complexity = 0
-		for(var/obj/item/integrated_circuit/part in contents)
-			total_part_size += part.size
-			total_complexity += part.complexity
-
-		if( (total_part_size + IC.size) > max_components)
-			to_chat(user, "<span class='warning'>You can't seem to add this [IC.name], as there's insufficient space.</span>")
-			return 0
-		if( (total_complexity + IC.complexity) > max_complexity)
-			to_chat(user, "<span class='warning'>You can't seem to add this [IC.name], since this setup's too complicated for the case.</span>")
-			return 0
-
-		to_chat(user, "<span class='notice'>You slide \the [IC] inside \the [src].</span>")
-		user.drop_item()
-		add_circuit(IC)
-		playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
-		interact(user)
+		if(add_circuit(I, user))
+			to_chat(user, "<span class='notice'>You slide \the [I] inside \the [src].</span>")
+			playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
+			interact(user)
+		else
+			user.put_in_any_hand_if_possible(I)
 	else if(istype(I, /obj/item/weapon/crowbar))
 		if(applied_shell)
 			to_chat(user, "<span class='warning'>You cannot open the assembly while it has a shell attached.</span>")
@@ -250,8 +236,22 @@
 		ex_act(thing)
 	..()
 
-/obj/item/device/electronic_assembly/proc/add_circuit(var/atom/movable/circuit)
-	circuit.forceMove(src)
+/obj/item/device/electronic_assembly/proc/add_circuit(var/obj/item/integrated_circuit/IC, var/mob/user)
+	if(!opened)
+		to_chat(user, "<span class='warning'>\The [src] isn't opened, so you can't put anything inside.  Try using a crowbar.</span>")
+		return FALSE
+
+	var/total_part_size = get_part_size()
+	var/total_complexity = get_part_complexity()
+
+	if((total_part_size + IC.size) > max_components)
+		to_chat(user, "<span class='warning'>You can't seem to add the '[IC.name]', as there's insufficient space.</span>")
+		return FALSE
+	if((total_complexity + IC.complexity) > max_complexity)
+		to_chat(user, "<span class='warning'>You can't seem to add the '[IC.name]', since this setup's too complicated for the case.</span>")
+		return FALSE
+
+	return IC.forceMove(src)
 
 /obj/item/device/electronic_assembly/proc/apply_shell(var/obj/item/electronic_assembly_shell/a_shell, var/user)
 	if(applied_shell)

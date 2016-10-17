@@ -9,6 +9,8 @@
 #define DATA_CHANNEL "data channel"
 #define PULSE_CHANNEL "pulse channel"
 
+#define get_assembly(X) get_holder_of_type(X, /obj/item/device/electronic_assembly)
+
 /obj/item/integrated_circuit
 	name = "integrated circuit"
 	desc = "It's a tiny chip!  This one doesn't seem to do much, however."
@@ -26,10 +28,8 @@
 	var/category = /obj/item/integrated_circuit // Used by the toolsets to filter out category types
 
 /obj/item/integrated_circuit/examine(mob/user, var/assembly_examine = FALSE)
-	if(assembly_examine)
-		return
-
-	..()
+	if(!assembly_examine)
+		return ..()
 
 	to_chat(user, "This board has [inputs.len] input pin\s and [outputs.len] output pin\s.")
 	for(var/datum/integrated_io/input/I in inputs)
@@ -91,6 +91,10 @@
 		to_chat(M, "<span class='notice'>The circuit '[src.name]' is now labeled '[input]'.</span>")
 		name = input
 		interact(M)
+
+/obj/item/integrated_circuit/proc/get_pin_data(var/pin_type, var/pin_number)
+	var/datum/integrated_io/pin = get_pin_ref(pin_type, pin_number)
+	return pin.get_data()
 
 /obj/item/integrated_circuit/proc/get_pin_ref(var/pin_type, var/pin_number)
 	switch(pin_type)
@@ -205,6 +209,12 @@
 
 	onclose(user, "circuit-\ref[src]")
 
+/obj/item/integrated_circuit/CanUseTopic()
+	var/obj/item/device/electronic_assembly/assembly = get_assembly(loc)
+	if(!assembly || !assembly.opened)
+		return STATUS_CLOSE
+	return ..()
+
 /obj/item/integrated_circuit/Topic(href, href_list, state = physical_state)
 	if(..())
 		return 1
@@ -230,7 +240,7 @@
 		. = 1
 
 	else if(href_list["examine"])
-		examine(usr)
+		examine(usr, TRUE)
 		. = 1
 
 	else if(href_list["rename"])
@@ -240,9 +250,8 @@
 	else if(href_list["remove"])
 		if(istype(held_item, /obj/item/weapon/screwdriver))
 			disconnect_all()
-			var/turf/T = get_turf(src)
-			forceMove(T)
-			playsound(T, 'sound/items/Crowbar.ogg', 50, 1)
+			dropInto(loc)
+			playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
 			to_chat(usr, "<span class='notice'>You pop \the [src] out of the case, and slide it out.</span>")
 		else
 			to_chat(usr, "<span class='warning'>You need a screwdriver to remove components.</span>")
@@ -293,20 +302,45 @@
 /datum/integrated_io/nano_host()
 	return holder
 
-/datum/integrated_io/proc/link_io(var/datum/integrated_io/io)
+/datum/integrated_io/proc/link_io(var/datum/integrated_io/io, var/mob/user)
+	if(src == io)
+		to_chat(user, "<span class='warning'>Wiring \the [io.holder]'s [io.name] into itself is rather pointless.</span>")
+		return FALSE
+
 	if(io_type != io.io_type)
-		CRASH("Attempted to connect incompatible IO types: '[log_info_line(src)]' and '[log_info_line(io)]'")
-	if(holder == io.holder)
-		CRASH("Attempted two pins with the same holder: '[log_info_line(src)]' and '[log_info_line(io)]', belonging to '[log_info_line(holder)]'")
+		to_chat(user, "<span class='warning'>Those two types of channels are incompatable. The first is \a [io_type], while the second is \a [io.io_type].</span>")
+		return FALSE
+
+	var/io_assembly = get_assembly(io.holder.loc)
+	if(!io_assembly) // Separating null assembly and same assembly checks to be extra sure wiring cannot happen in weird situations
+		to_chat(user, "<span class='warning'>\The [io.holder] must be in an assembly for wiring to be possible.</span>")
+		return FALSE
+
+	if((holder != io.holder) && get_assembly(holder.loc) != get_assembly(io.holder.loc)) // This test is only necessary if we belong to different holders
+		to_chat(user, "<span class='warning'>The circuits must be in the same assembly for wiring to be possible.</span>")
+		return FALSE
+
+	if(io in linked) // NOTE: We don't return here on failure, make sure to add any additional checks above this line
+		to_chat(user, "<span class='warning'>These pins are already wired.</span>")
+		. = FALSE
+	else
+		. = TRUE
 
 	linked |= io
-	io.linked |= src
+	io.linked |= src // We still link them to each other just ensure we're in a consistent state
 
 /datum/integrated_io/proc/data_as_type(var/as_type)
 	if(!isweakref(data))
 		return
 	var/output = data.resolve()
 	return istype(output, as_type) ? output : null
+
+/datum/integrated_io/proc/get_data()
+	if(isnull(data))
+		return
+	if(isweakref(data))
+		return data.resolve()
+	return data
 
 /datum/integrated_io/proc/display_data()
 	if(isnull(data))
@@ -356,6 +390,7 @@
 	return "nothing"
 
 /datum/integrated_io/proc/disconnect()
+	data = null
 	//First we iterate over everything we are linked to.
 	for(var/datum/integrated_io/their_io in linked)
 		//While doing that, we iterate them as well, and disconnect ourselves from them.
