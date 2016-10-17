@@ -528,7 +528,7 @@
 	desc = "It is a blue cheongsam dress."
 	icon_state = "cheongsam-blue"
 	item_state = "cheongsam-blue"
-	worn_state = "cheongsam-black"
+	worn_state = "cheongsam-blue"
 
 /obj/item/clothing/under/cheongsam/black
 	name = "black cheongsam"
