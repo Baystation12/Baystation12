@@ -475,19 +475,23 @@ var/list/global/tank_gauge_cache = list()
 
 			pressure = air_contents.return_pressure()
 			var/strength = ((pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE)
-			var/mult = max(0.2,1 + log(2.6, (air_contents.total_moles/29)) ) //1 + log base 2 of standard sized full (room temperature) tanks
+
+			var/mult = (air_contents.total_moles**2/3)/((29*0.64) **2/3) //tanks appear to be experiencing a reduction on scale of about 0.64 total moles
+			//from pre to post burn. multiplier math is preburn(total_moles^(3/5))/(29^(3/5)) with 29 moles being ~1 full tank at 20C
+
+//			var/mult = max(0.2,(log(2, (air_contents.total_moles/29))) ) //1 + log base 2 of standard sized full (room temperature) tanks (old method)
 
 			var/turf/simulated/T = get_turf(src)
 			T.hotspot_expose(src.air_contents.temperature, 70, 1)
 			if(!T)
 				return
-			T.assume_air(air_contents)
 
+			T.assume_air(air_contents)
 			explosion(
 				get_turf(loc),
-				round(min(BOMBCAP_DVSTN_RADIUS, ((mult)*strength)*0.20)),
-				round(min(BOMBCAP_HEAVY_RADIUS, ((mult)*strength)*0.40)),
-				round(min(BOMBCAP_LIGHT_RADIUS, ((mult)*strength)*0.85)),
+				round(min(BOMBCAP_DVSTN_RADIUS, ((mult)*strength)*0.15)),
+				round(min(BOMBCAP_HEAVY_RADIUS, ((mult)*strength)*0.35)),
+				round(min(BOMBCAP_LIGHT_RADIUS, ((mult)*strength)*0.80)),
 				round(min(BOMBCAP_FLASH_RADIUS, ((mult)*strength)*1.20)),
 				)
 

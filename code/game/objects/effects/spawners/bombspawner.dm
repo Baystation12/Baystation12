@@ -133,9 +133,9 @@
 	var/assembly_type = /obj/item/device/assembly/signaler
 
 	//Note that the maximum amount of gas you can put in a 70L air tank at 1013.25 kPa and 519K is 16.44 mol.
-	var/phoron_amt = 10.96
-	var/oxygen_amt = 16.44
-	var/carbon_amt = 0.0
+	var/phoron_amt = 12
+	var/oxygen_amt = 18
+	var/carbon_amt = 0
 
 /obj/effect/spawner/newbomb/timer
 	name = "TTV bomb - timer"
@@ -144,8 +144,8 @@
 /obj/effect/spawner/newbomb/timer/syndicate
 	name = "TTV bomb - merc"
 	//High yield bombs. Yes, it is possible to make these with toxins
-	phoron_amt = 15.66
-	oxygen_amt = 24.66
+	phoron_amt = 18.5
+	oxygen_amt = 28.5
 
 /obj/effect/spawner/newbomb/proximity
 	name = "TTV bomb - proximity"
@@ -173,11 +173,13 @@
 	PT.valve_welded = 1
 	PT.air_contents.gas["phoron"] = phoron_amt
 	PT.air_contents.gas["carbon_dioxide"] = carbon_amt
+	PT.air_contents.total_moles = phoron_amt + carbon_amt
 	PT.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1
 	PT.air_contents.update_values()
 
 	OT.valve_welded = 1
 	OT.air_contents.gas["oxygen"] = oxygen_amt
+	OT.air_contents.total_moles = oxygen_amt
 	OT.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1
 	OT.air_contents.update_values()
 
@@ -223,6 +225,7 @@
 
 	K.air_contents.gas["phoron"] = phoron_amt
 	K.air_contents.gas["oxygen"] = oxygen_amt
+	K.air_contents.total_moles = phoron_amt + oxygen_amt
 	K.valve_welded = 1
 	K.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE-1
 
