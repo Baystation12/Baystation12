@@ -188,7 +188,7 @@
  * The original values are as follows, in case we ever need these.
  *
  * The current values are were based on multing the previous values by the ratio of tickrates,
- * followed by generous hand adjustment so that the cryo works again. :V
+ * followed by generous hand adjustment. Yell at me if there is any more weird behavior, please.
  *
  * TEMPERATURE_DAMAGE_COEFFICIENT  1.5
  * BODYTEMP_AUTORECOVERY_DIVISOR   12
