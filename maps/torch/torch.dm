@@ -29,7 +29,7 @@
 
 	#define USING_MAP_DATUM /datum/map/torch
 
-	#define ZLEVELS
+	#define MULTIZAS
 
 #elif !defined(MAP_OVERRIDE)
 
