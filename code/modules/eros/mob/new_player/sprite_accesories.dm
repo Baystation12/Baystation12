@@ -42,6 +42,11 @@
 	longemo
 		name = "Long Emo"
 		icon_state = "hair_emolong"
+
+	fringeemo
+		name = "Emo Fringe"
+		icon_state = "hair_emofringe"
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
